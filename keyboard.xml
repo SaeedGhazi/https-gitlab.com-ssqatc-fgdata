@@ -638,14 +638,6 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <condition>
      <property>/sim/allow-toggle-cockpit</property>
    </condition>
-   <command>property-swap</command>
-   <property>/sim/panel[0]/path</property>
-   <property>/sim/panel[1]/path</property>
-  </binding>
-  <binding>
-   <condition>
-     <property>/sim/allow-toggle-cockpit</property>
-   </condition>
    <command>property-assign</command>
    <property>/sim/current-view/heading-offset-deg</property>
    <value type="double">0</value>

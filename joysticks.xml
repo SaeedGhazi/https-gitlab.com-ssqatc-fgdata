@@ -24,100 +24,19 @@ axes for the hat switch, and several more buttons.
 
 <PropertyList>
 
- <js>
+ <!-- Default device -->
+ <js n="0" include="Input/Joysticks/Default/joystick.xml"/>
 
-  <axis n="0">
-   <desc>Aileron</desc>
-   <binding>
-    <command>property-scale</command>
-    <property>/controls/aileron</property>
-    <squared type="bool">true</squared>
-   </binding>
-  </axis>
+ <!-- FIXME: dummy placeholder to force a high starting index -->
+ <js-named n="999"/>
 
-  <axis n="1">
-   <desc>Elevator</desc>
-   <binding>
-    <command>property-scale</command>
-    <property>/controls/elevator</property>
-    <factor type="double">-1.0</factor>
-    <squared type="bool">true</squared>
-   </binding>
-  </axis>
+ <!-- CH devices -->
+ <js-named include="Input/Joysticks/CH/pro-pedals-usb.xml"/>
+ <js-named include="Input/Joysticks/CH/pro-yoke-usb.xml"/>
 
-  <axis n="2">
-   <desc>Throttle</desc>
-   <binding>
-    <command>property-scale</command>
-    <property>/controls/throttle[0]</property>
-    <offset type="double">-1.0</offset>
-    <factor type="double">-0.5</factor>
-   </binding>
-   <binding>
-    <command>property-scale</command>
-    <property>/controls/throttle[1]</property>
-    <offset type="double">-1.0</offset>
-    <factor type="double">-0.5</factor>
-   </binding>
-  </axis>
-
-  <button n="0">
-   <desc>Brakes</desc>
-   <binding>
-    <command>property-assign</command>
-    <property>/controls/brakes[0]</property>
-    <value type="double">1.0</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/controls/brakes[1]</property>
-    <value type="double">1.0</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/controls/brakes[2]</property>
-    <value type="double">1.0</value>
-   </binding>
-   <mod-up>
-    <binding>
-     <command>property-assign</command>
-     <property>/controls/brakes[0]</property>
-     <value type="double">0.0</value>
-    </binding>
-    <binding>
-     <command>property-assign</command>
-     <property>/controls/brakes[1]</property>
-     <value type="double">0.0</value>
-    </binding>
-    <binding>
-     <command>property-assign</command>
-     <property>/controls/brakes[2]</property>
-     <value type="double">0.0</value>
-    </binding>
-   </mod-up>
-  </button>
-
-  <button n="1">
-   <desc>Elevator trim up</desc>
-   <repeatable type="bool">true</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/elevator-trim</property>
-    <step type="double">0.001</step>
-   </binding>
-  </button>
-
-  <button n="2">
-   <desc>Elevator trim down</desc>
-   <repeatable type="bool">true</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/elevator-trim</property>
-    <step type="double">-0.001</step>
-   </binding>
-  </button>
-
- </js>
+ <!-- Logitech devices -->
+ <js-named include="Input/Joysticks/Logitech/wingman-extreme-digital-3d.xml"/>
+ <js-named include="Input/Joysticks/Logitech/wingman-rumblepad-usb.xml"/>
 
 </PropertyList>
 

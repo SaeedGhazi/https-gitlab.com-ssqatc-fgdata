@@ -33,7 +33,7 @@ $Id$
   <binding>
    <command>property-scale</command>
    <property>/controls/flight/aileron</property>
-   <squared type="bool">true</squared>
+   <power type="bool">3</power>
   </binding>
  </axis>
 
@@ -43,7 +43,7 @@ $Id$
    <command>property-scale</command>
    <property>/controls/flight/elevator</property>
    <factor type="double">-1.0</factor>
-   <squared type="bool">true</squared>
+   <power type="bool">3</power>
   </binding>
  </axis>
 
@@ -102,6 +102,7 @@ $Id$
  <axis n="3">
   <desc>Rudder</desc>
   <binding><command>null</command></binding>
+  <interval-sec type="double">0.02</interval-sec>
   <low>
    <repeatable type="bool">true</repeatable>
    <binding>
@@ -123,6 +124,7 @@ $Id$
  <axis n="4">
   <desc>Elevator trim</desc>
   <binding><command>null</command></binding>
+  <interval-sec type="double">0.02</interval-sec>
   <low>
    <repeatable type="bool">true</repeatable>
    <binding>

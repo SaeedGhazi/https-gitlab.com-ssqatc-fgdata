@@ -37,6 +37,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
   <!-- New Ufo support code follows below -->
   <virtual-cockpit archive="y">true</virtual-cockpit>
 
+  <chase-distance-m type="double" archive="y">-15.0</chase-distance-m>
   <view n="0">
    <internal archive="y">true</internal>
    <config>

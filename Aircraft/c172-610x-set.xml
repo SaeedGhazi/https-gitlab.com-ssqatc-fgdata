@@ -20,7 +20,7 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
   <panel>
    <path>Aircraft/c172/Panels/c172-610x-panel.xml</path>
    <visibility archive="y">true</visibility>
-   <flip-x>true</flip-x>
+   <flip-x>false</flip-x>
   </panel>
 
   <model>
@@ -29,4 +29,10 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
 
  </sim>
   
+ <engines>
+  <engine>
+   <rpm type="double">0</rpm>
+  </engine>
+ </engines>
+
 </PropertyList>

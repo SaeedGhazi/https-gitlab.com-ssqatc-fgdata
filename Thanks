@@ -129,6 +129,13 @@ Bruce Finney <bfinney@gte.net>
   MSVC5 compatibility.
 
 
+Melchior Franz <a8603365@unet.univie.ac.at>
+  Made that joystick high/low support for joystick hats.
+  Created the led.txf font.
+  Made some improvements of the telnet and the http interface.
+  Ruthlessly hunted down memory leaks in FlightGear, SimGear, and JSBSim.
+
+
 Jean-loup Gailly and Mark Adler <zlib@gzip.org>
   Authors of the zlib library.  Used for on-the-fly compression and
   decompression routines.
@@ -164,6 +171,8 @@ Mike Hill <mikehill@flightsim.com>
 
 
 Erik Hofman <erik@ehofman.com>
+  Major overhaul and parameterization of the sound module, to allow
+  aircraft-specific sound configuration at runtime.
   Irix port.
 
 
@@ -222,7 +231,9 @@ David Megginson <david@megginson.com>
   Working on getting fgfs and ssg to work without textures.
   Also added the new 2D panel and the save/load support.
   Property manager
-  Joystick support
+  Generalized input module
+  3D model animation module
+  initial take of sound-effects module
 
 
 Eric Mitchell <mitchell@mars.ark.com>
@@ -234,6 +245,7 @@ Cameron Moore <cameron@unbeatenpath.net>
   Reigning list admin.
   Provided man pages.
   Self-proclaimed code janitor.
+  FAQ maintainer.
 
 
 Anders Morken <amrken@online.no>
@@ -437,6 +449,13 @@ Ed Williams <Ed_Williams@compuserve.com>
   We've also borrowed from Ed's wonderful aviation formulary at various
   times as well.
   http://www.best.com/~williams/index.html
+
+
+Jim Wilson <jimw@kelcomaine.com>
+  Wrote a major overhaul of the viewer code to make it more flexible 
+  and modular.  Contributed many small fixes and bug reports.
+  Contributed the the pui property browser.
+  Contributed to the autopilot.
 
 
 Jean-Claude Wippler <jcw@equi4.com>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<PropertyList include="f104-jsbsim-set.xml">
+ <sim>
+  <description>Alias for f104-jsbsim.</description>
+ </sim>
+</PropertyList>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <sim>
+
+  <description>Lockheed F-104 Starfighter</description>
+ 
+  <flight-model>jsb</flight-model>
+  <aero>f104</aero>
+  
+  <systems>
+   <electrical>
+    <path>Aircraft/Generic/generic-electrical.xml</path>
+   </electrical>
+  </systems> 
+  
+  <sound>
+   <audible>true</audible>
+   <path>Aircraft/a4/a4-sound.xml</path>
+  </sound>
+
+ </sim>
+
+</PropertyList>

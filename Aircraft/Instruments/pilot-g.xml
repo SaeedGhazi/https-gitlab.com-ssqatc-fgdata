@@ -39,7 +39,7 @@ Hacked by Lee Elliott to create a pilot-g gauge instrument
   <layer>
    <name>gauge face</name>
    <texture>
-    <path>Aircraft/Instruments/Textures/accelL.rgb</path>
+    <path>Aircraft/Instruments/Textures/accel.rgb</path>
     <x1>0.0</x1>
     <x2>1.0</x2>
     <y1>0.0</y1>

@@ -39,7 +39,7 @@ Hacked by Lee Elliott to create a fuel (Total) gals gauge instrument
   <layer>
    <name>gauge face</name>
    <texture>
-    <path>Aircraft/Instruments/Textures/faces-LE2-hi.rgb</path>
+    <path>Aircraft/Instruments/Textures/faces-LE2.rgb</path>
     <x1>0.5</x1>
     <x2>1.0</x2>
     <y1>0.5</y1>

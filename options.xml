@@ -308,6 +308,13 @@
    </option>
 
    <option>
+    <name>runway</name>
+    <arg>rwy_no</arg>
+    <description>strings/runway-no-desc</description>
+    <brief/>
+   </option>
+
+   <option>
     <name>offset-distance</name>
     <arg>nm</arg>
     <description>strings/offset-distance-desc</description>

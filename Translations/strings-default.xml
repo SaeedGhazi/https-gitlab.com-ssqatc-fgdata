@@ -133,6 +133,7 @@
  <!-- Position and Orientation options -->
  <position-options>Initial Position and Orientation</position-options>
  <airport-id-desc>Specify starting position by airport ID</airport-id-desc>
+ <runway-no-desc>Specify starting runway (must also specify an aiport)</runway-no-desc>
  <offset-distance-desc>Specify distance to threshold</offset-distance-desc>
  <offset-azimuth-desc>Specify heading to threshold</offset-azimuth-desc>
  <lon-desc>Starting longitude (west = -)</lon-desc>

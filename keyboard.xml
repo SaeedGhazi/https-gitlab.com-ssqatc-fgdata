@@ -96,6 +96,11 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <property>/position/altitude-ft</property>
    <step type="double">1000.0</step>
   </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/startup/onground</property>
+   <value type="bool">false</value>
+  </binding>
  </key>
 
  <key n="27">

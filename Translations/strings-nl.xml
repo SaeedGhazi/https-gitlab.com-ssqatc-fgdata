@@ -158,8 +158,12 @@
   <fog-disable-desc>Laat geen mist sien</fog-disable-desc>
   <fog-fastest-desc>Selecteer de snelste mist generator</fog-fastest-desc>
   <fog-nicest-desc>Selecteer de beste mist generator</fog-nicest-desc>
-  <disable-distance-attenuation>Licht dimming voor voor verre lichtpunten niet gebruiken</disable-distance-attenuation>
-  <enable-distance-attenuation>Licht dimming voor voor verre lichtpunten wel gebruiken</enable-distance-attenuation>
+  <disable-horizon-effect>Laat hemellichamen niet groter zien als ze dicht bij de horizon staan</disable-horizon-effect>
+  <enable-horizon-effect>Laat hemellichamen wel groter zien als ze dicht bij de horizon staan</enable-horizon-effect>
+  <disable-enhanced-lighting>Standaard startbaan verlichting</disable-enhanced-lighting>
+  <enable-enhanced-lighting>Verbeterde startbaan verlichting</enable-enhanced-lighting>
+  <disable-distance-attenuation>Lichtpunt verkleining voor voor verre lichten niet gebruiken</disable-distance-attenuation>
+  <enable-distance-attenuation>Lichtpunt verkleining voor voor verre lichten wel gebruiken</enable-distance-attenuation>
   <enable-clouds-desc>2D (vlakke) bewolking tonen</enable-clouds-desc>
   <disable-clouds-desc>2D (vlakke) bewolking verbergen</disable-clouds-desc>
   <enable-clouds3d-desc>3D (natuurlijke) bewolking tonen</enable-clouds3d-desc>

@@ -167,6 +167,10 @@
  <fog-disable-desc>Disable fog/haze</fog-disable-desc>
  <fog-fastest-desc>Enable fastest fog/haze</fog-fastest-desc>
  <fog-nicest-desc>Enable nicest fog/haze</fog-nicest-desc>
+ <disable-horizon-effect>Disable celestial body growth illusion near the horizon</disable-horizon-effect>
+ <enable-horizon-effect>Enable celestial body growth illusion near the horizon</enable-horizon-effect>
+ <disable-enhanced-lighting>Disable enhanced runway lighting</disable-enhanced-lighting>
+ <enable-enhanced-lighting>Enable enhanced runway lighting</enable-enhanced-lighting>
  <disable-distance-attenuation>Disable runway light distance attenuation</disable-distance-attenuation>
  <enable-distance-attenuation>Enable runway light distance attenuation</enable-distance-attenuation>
  <enable-clouds-desc>Enable 2D (flat) cloud layers</enable-clouds-desc>

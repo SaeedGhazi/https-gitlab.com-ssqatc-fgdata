@@ -3,7 +3,7 @@
 <PropertyList>
 
  <name>radios</name>
- <width>500</width>
+ <width>600</width>
  <height>300</height>
  <modal>false</modal>
 
@@ -24,6 +24,10 @@
   <text>
    <x>300</x>
    <label>Standby</label>
+  </text>
+  <text>
+   <x>450</x>
+   <label>Radial</label>
   </text>
  </group>
 
@@ -196,6 +200,16 @@
    <property>/radios/nav[0]/frequencies/standby-mhz</property>
   </input>
 
+  <input>
+   <name>nav1-radial</name>
+   <x>450</x>
+   <y>0</y>
+   <width>75</width>
+   <height>25</height>
+   <label>deg</label>
+   <property>/radios/nav[0]/radials/selected-deg</property>
+  </input>
+
  </group>
 
  <group>
@@ -251,6 +265,16 @@
    <height>25</height>
    <label>MHz</label>
    <property>/radios/nav[1]/frequencies/standby-mhz</property>
+  </input>
+
+  <input>
+   <name>nav2-radial</name>
+   <x>450</x>
+   <y>0</y>
+   <width>75</width>
+   <height>25</height>
+   <label>deg</label>
+   <property>/radios/nav[1]/radials/selected-deg</property>
   </input>
 
  </group>
@@ -310,6 +334,16 @@
    <property>/radios/kr-87/outputs/standby-khz</property>
   </input>
 
+  <input>
+   <name>nav2-radial</name>
+   <x>450</x>
+   <y>0</y>
+   <width>75</width>
+   <height>25</height>
+   <label>deg</label>
+   <property>/instrumentation/adf/rotation-deg</property>
+  </input>
+
  </group>
 
  <group>
@@ -337,6 +371,19 @@
   <button>
    <x>105</x>
    <y>10</y>
+   <legend>OK</legend>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+   <binding>
+    <command>dialog-close</command>
+   </binding>
+   <default>true</default>
+  </button>
+
+  <button>
+   <x>205</x>
+   <y>10</y>
    <legend>Apply</legend>
    <binding>
     <command>dialog-apply</command>
@@ -344,7 +391,7 @@
   </button>
 
   <button>
-   <x>205</x>
+   <x>305</x>
    <y>10</y>
    <legend>Reset</legend>
    <binding>
@@ -353,7 +400,7 @@
   </button>
 
   <button>
-   <x>305</x>
+   <x>405</x>
    <y>10</y>
    <legend>Cancel</legend>
    <binding>

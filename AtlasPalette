@@ -3,7 +3,7 @@
 # Palette section: defines a number of colours
 # consisting of an index and red, green, blue, alpha values
 # Colour 0 will be used as background colour
-Colour 0	0.671 0.737 0.745 1.0 
+Colour 0	0.671 0.737 0.745 1.0
 Colour 1 	0.647 0.729 0.647 1.0 
 Colour 2	0.859 0.906 0.804 1.0 
 Colour 3	0.753 0.831 0.682 1.0
@@ -14,9 +14,14 @@ Colour 7	0.816 0.616 0.443 1.0
 Colour 8	0.776 0.529 0.341 1.0 
 Colour 9	0.824 0.863 0.824 1.0 
 Colour 10	0.682 0.573 0.369 1.0 
-Colour 11	0.275 0.275 0.275 1.0 
-Colour 12	0.761 0.839 0.847 1.0 
-Colour 13	0.761 0.839 0.847 1.0 
+Colour 11	0.275 0.275 0.275 1.0
+# Colours 12 and 13 have been changed to the clear
+# colour value, and water lighting disabled in Map.
+# Use the old values if you re-enable water-lighting. 
+#Colour 12	0.761 0.839 0.847 1.0 
+#Colour 13	0.761 0.839 0.847 1.0
+Colour 12	0.671 0.737 0.745 1.0
+Colour 13	0.671 0.737 0.745 1.0 
 Colour 14	0.439 0.271 0.420 1.0 
 Colour 15	0.975 0.982 0.484 1.0 
 Colour 16	1.000 0.000 0.000 1.0

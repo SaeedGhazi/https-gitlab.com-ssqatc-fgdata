@@ -393,6 +393,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <rudder type="double">0.0</rudder>
    <rudder-trim type="double">0.0</rudder-trim>
    <flaps type="double">0.0</flaps>
+   <flaps-serviceable type="bool">true</flaps-serviceable>
   </flight>
  
   <engines>

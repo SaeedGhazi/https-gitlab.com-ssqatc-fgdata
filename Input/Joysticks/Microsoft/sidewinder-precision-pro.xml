@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-
+<!-- Auhor: Oliver C. -->
 <!--
 ************************************************************************
 * Bindings for Microsoft SideWinder Force Feed joystick.
@@ -176,9 +176,8 @@ $Id$
    </number>
   <repeatable>false</repeatable>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/flaps</property>
-   <step type="double">-0.34</step>
+   <command>nasal</command>
+   <script>controls.stepFlaps(1)</script>
   </binding>
  </button>
 
@@ -190,9 +189,8 @@ $Id$
    </number>
   <repeatable>false</repeatable>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/flaps</property>
-   <step type="double">0.34</step>
+   <command>nasal</command>
+   <script>controls.stepFlaps(-1)</script>
   </binding>
  </button>
 

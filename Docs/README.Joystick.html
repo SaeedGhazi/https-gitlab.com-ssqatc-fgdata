@@ -51,7 +51,7 @@ smart.
 <p>
 Earlier versions of FGFS had assignments of joystick axis/buttons
 and key bindings hard coded. If you had a joystick that did not use
-the default channel assignments, or wanted different key bindings
+the default channel assignments, or wanted different key bindings,
 you had to edit the source code and recompile.
 </p>
 <p>
@@ -77,16 +77,16 @@ joystick buttons and keyboard events starts to blur.
 Storing alternate keyboard or joystick bindings can be done in a variety of ways. The order of precedence for options is thus:
 </p>
 
-<TABLE CELLPADDING="8"><TR><Th>
-Source</th><th>Location</TH><th>   Format</th><th> Scope</th></tr>
-<tr><td>command line</td><td>STDIN</td><td>see examples</td><td>session</td></tr><tr>
-<td>.fgfsrc</td><td>Users home directory.</td><td>command line options</td><td> single user</td></tr>
-<tr><td>system.fgfsrc</td><td>$FG_ROOT</td><td>command line options</td><td>system wide</td></tr>
-<tr><td>joystick.xml</td><td>$FG_ROOT</td><td>XML property list</td><td>system wide</td></tr>
-<tr><td>keyboard.xml</td><td>$FG_ROOT</td><td>XML property list</td><td>system wide</td><tr></table>
-
-</p><p>
-
+<pre>
+Source        Location  Format                Scope
+------        --------  ------                -----
+command line  STDIN     see examples          session
+.fgfsrc       ~/        command line options  single user
+system.fgfsrc $FG_ROOT  command line options  system wide
+joystick.xml  $FG_ROOT  XML property list     system wide
+keyboard.xml  $FG_ROOT  XML property list     system wide
+</pre>
+<br>
 
 
 <HR WIDTH="20%">
@@ -103,12 +103,11 @@ Your XML configuration files for FGFS must start and end with the following
 pair of tags.
 </p>
 
-<tt>
-  &lt;PropertyList&gt;<br>
-   &lt;!-- this is a comment, See I told you it was like HTML --&gt;<br>
-  &lt;/PropertyList&gt;<br>
-</tt>
-<br>
+<pre>
+&lt;PropertyList&gt;
+ &lt;!-- this is a comment, See I told you it was like HTML --&gt;
+&lt;/PropertyList&gt;
+</pre>
 <br>
 
 <HR WIDTH="20%">
@@ -126,70 +125,52 @@ The output shown is from an analog Gravis BlackHawk with four buttons and
 a throttle.
 </p>
 
-Typical output of js_demo:<br>
+<pre>
+Typical output of js_demo:
+
+Joystick test program.
+~~~~~~~~~~~~~~~~~~~~~~
+Joystick 1 not detected    &lt;!-- remember we start at 0 --&gt;
+Joystick 2 not detected
++--------------JS.0--------------+
+| Btns    Ax:0   Ax:1    Ax:2    |                    
++--------------------------------+
+| 0000    +0.0   +0.0    -1.0    |
+</pre>
 <br>
-<tt>
-<table><tr><td colspan="7">Joystick test program.<br>
-~~~~~~~~~~~~~~~~~~~~~~</td></tr>
-<tr><td colspan="2">Joystick 1</td>
-    <td colspan="1">not detected</td>
-    <td colspan="4">&lt;!-- remember we start at 0 --&gt;</td></tr>
-<tr><td colspan="2">Joystick 2</td>
-    <td colspan="5">not detected</td><tr><td>
-<tr><td colspan="7">
-+---------------------JS.0-------------------+</td></tr>
-<tr><td>|</td>
-    <td> Btns</td>
-    <td> Ax:0</td>
-    <td> Ax:1</td> 
-    <td> Ax:2</td>
-    <td></td>
-    <td align=right>|</td></tr>
-<tr><td colspan="7">
-+-------------------------------------------+</td></tr>
-<tr><td>|</td>
-    <td>0000</td>
-    <td>+0.0</td>
-    <td>+0.0</td>
-    <td>-1.0</td>
-    <td>.    .    .</td>
-    <td align=right>|</td>
-</tr>
-</table>
-</tt>
 <P>
 The buttons are handled internally as a binary number in which bit 0 (the
 least significant bit) represents button 0, bit 1 represents button 1, etc.,
 but this number is displayed on the screen in hexadecimal notation, so:
+</p>
+<pre>
+  0001 => button 0 pressed
+  0002 => button 1 pressed
+  0004 => button 2 pressed
+  0008 => button 3 pressed
+  0010 => button 4 pressed
+  0020 => button 5 pressed
+  0040 => button 6 pressed
+  ... etc. up to ...
+  8000 => button 15 pressed
+  ... and ...
+  0014 => buttons 2 and 4 pressed simultaneously
+  ... etc.
+</PRE>
 <br>
-<br>
-  0001 => button 0 pressed<br>
-  0002 => button 1 pressed<br>
-  0004 => button 2 pressed<br>
-  0008 => button 3 pressed<br>
-  0010 => button 4 pressed<br>
-  0020 => button 5 pressed<br>
-  0040 => button 6 pressed<br>
-  ... etc. up to ...<br>
-  8000 => button 15 pressed<br>
-  ... and ...<br>
-  0014 => buttons 2 and 4 pressed simultaneously<br>
-  ... etc.<br>
-</P>
-
 <HR WIDTH="20%">
 <H2><A NAME="default">Default Joystick Properties:</A></H2>
 <HR WIDTH="20%">
-
-<table width="350">
- <tr><td>Axis 0</td><td>=</td><td>Aileron</td></tr>
- <tr><td>Axis 1</td><td>=</td><td>Elevator</td></tr>
- <tr><td>Axis 2</td><td>=</td><td>Rudder</td></tr>
- <tr><td>Axis 3</td><td>=</td><td>Throttle</td></tr>
- <tr><td>Button 0</td><td>=</td><td>All brakes</td></tr>
- <tr><td>Button 1</td><td>=</td>Elevator trim (up)</td></tr>
- <tr><td>Button 2</td><td>=</td>Elevator trim (down)</td></tr>
-</table>
+<pre>
+ Axis 0    =  Aileron
+ Axis 1    =  Elevator
+ Axis 2    =  Rudder
+ Axis 3    =  Throttle 
+ Button 0  =  All brakes
+ Button 1  =  Elevator trim (up)
+ Button 2  =  Elevator trim (down)
+</pre>
+<br>
 
 <HR WIDTH="20%">
 <H2><A NAME="okay">Okay, Now what?</A></H2>
@@ -233,16 +214,18 @@ Put another way....<BR>
 	cooked_value = (( raw_value > dead-band ) + offset) * factor<BR>
 <BR>
 
+<pre>
+Axis properties:
 
-Axis properties:<br>
+    dead-band
+
+-1      0      1
+ ...............
+-1     | |     1
+        ^
+    dead-band
+</pre>
 <br>
-<table><tr><th colspan="3">dead-band</th></tr>
-<tr><td>-1</td><td>&nbsp;0</td><td>1</td></tr>
-<tr><td colspan="3"> ..............................</td></tr>
-<tr><td>-1</td><td>|&nbsp;&nbsp;|</td></td>1</td></tr>
-<tr><td></td><td>&nbsp;^</td><td></td></tr>
-<tr><td colspan="3" align="center">dead-band</td</tr>
-</table>
 
 <P>
 This is an area where signals are ignored. It is used to compensate
@@ -255,25 +238,30 @@ number results in a tighter feel. In some cases such as throttle you may
 wish to not set a deadband. Use a value of 0.0 in this case.
 </P>
 
-<table><tr><th colspan="3">offset</th></tr>
-<tr><td>-1&nbsp;0</td><td>&nbsp;</td><td>1</td><tr>
-<tr><td colspan="3"> .............................</td></tr> 
-<tr><td>-1&nbsp;^</td><td>&nbsp;</td><td>1</td></tr>
-<tr><td colspan="3" align="center">offset</td></tr>
-</table>
-
+<pre>
+     offset
+-1 0         1
+ .............
+-1 ^         1
+ offset
+</pre>
+<br>
 <P>
 Used to maximize a controls use of it's axis, as in the case of a
 throttle where zero would be a minimum and not a center point like in the case
 of a rudder. Typical value -1.0.
 </P>
-<table><tr><th>tolerance</th></tr></table>
+<br>
+<pre>tolerance</pre>
+<br>
 <P>
 Used to compensate for jittery potentiometer output, tolerance is in essence
 a gate. Amounts of movement below the threshold are ignored. Unlike dead-band,
 tolerance is relative to where ever the axis is at rest.
-
-<table><tr><th>factor</th></tr></table>
+</p>
+<br>
+<pre>factor</pre>
+<br>
 <P>
 Controls proportional movement of an axis. If the factor is too low it results in control not reaching its maximum possible limit. Negating the number will result in the control moving counter to the default. The default value is 1.0, think unity gain.
 </P>
@@ -292,45 +280,42 @@ are bound to commands. Commands *must* be specified for a binding to have
 an effect. The current list of commands is broken down here into two
 categories, mainly for my convenience.
 </P>
-<P>
+<pre>
 Visual And File Related:
-</P>
+command           options      used for
+-------           -------      --------
+null              none         clearing a previous binding
+exit              none         Exiting FGFS
+load              file name*   Load a saved flight
+save              file name*   Save current flight
+load-panel        path **      Change/reload panel
+load-preferences  path **      Load preferences ***
+screen-capture    none         Save a screenshot to ./fgfs-screen.ppm
+view-cycle        none         Change the direction of the pilots view
 
-<table><tr><th>command</th><th>options</th><th>used for</th></tr>
-<tr><th>-------</th><th>-------</th><th>--------</th></tr>
-<tr><td>null</td><td>none</td><td>useful for clearing a previous binding</td></tr>
-<tr><td>exit</td><td>none</td><td>Exiting FGFS</td></tr>
-<tr><td>load</td><td>file name*</td><td>Load a saved flight</td></tr>
-<tr><td>save</td><td>file name*</td><td>Save current flight</td></tr>
-<tr><td>load-panel</td><td>path **</td><td>Change/reload panel</td></tr>
-<tr><td>load-preferences</td><td>path **</td><td>Load preferences ***</td></tr>
-<tr><td>screen-capture</td><td>none</td><td>Save a screenshot to ./fgfs-screen.ppm</td></tr>
-<tr><td>view-cycle</td><td>none</td><td>Change the direction of the pilots view</td></tr>
-</table>
-<tt>
+
 *Saved/loaded relative to current working directory.<br>
 **The path includes the filename you wish to load and is relative to $FG_ROOT,
   which is the location of the installed base package. The default for load-panel
   is the value of /sim/panel/path (from preferences.xml) or if that is unset
   Panel/Default/default.xml. The default for load preferences is preferences.xml.
-<br>  
+  
 ***This might make a good first binding to experiment with, since it's not currently
    bound to anything. Reloading preferences will allow you to test settings
    without having to sit through a restart of FGFS for every edit. You can
    always (re)move it later.
-</TT>
-<P>
-Flight Control:
-</P>
-<table><tr><th>command</th><th>options</th><th>effect</th></tr>
-<tr><th>-------</th><th>-------</th><th>------</th></tr>
-<tr><td>property-toggle</td><td> property</td><td>toggle the property full on</td></tr>
-<tr><td>property-assign</td><td>"" "", value</td><td>targets a property for action</td></tr>
-<tr><td>property-adjust</td><td>"" "", step</td><td>Increment size for changes</td></tr>
-<tr><td>property-swap</td><td>"" ""[0], "" ""[1]</td><td>Set values in a switch</td></tr>
-<tr><td>property-scale</td><td>"" "", offset, factor</td><td>Processes the raw joystick value</td></tr>
-</table>
 
+Flight Control:
+
+command         options                effect
+-------         -------                ------
+property-toggle property               toggle the property full on
+property-assign "" "", value           targets a property for action
+property-adjust "" "", step            Increment size for changes
+property-swap   "" ""[0], "" ""[1]     Set values in a switch
+property-scale  "" "", offset, factor  Processes the raw joystick value
+</pre>
+<br>
 
 <HR WIDTH="20%">
 <H2><A NAME="bindings">Bindings:</A></H2>
@@ -351,17 +336,17 @@ in your command line formatted options.
 <p>
 Here's a sample Joystick axis declaration in XML:
 </p>
-<TT>
 
-&lt;axis n="0"&gt;&nbsp; &nbsp; &nbsp; &nbsp; &lt;!-- target an axis --&gt;<br>
-&nbsp;   &lt;desc&gt;Aileron&lt;/desc&gt; &nbsp; &nbsp;     &lt;!-- descriptive name (optional) --&gt;<br>
-&nbsp;   &lt;binding&gt; &nbsp; &nbsp; &nbsp; &nbsp;    &lt;!-- open a container for the binding --&gt;<br>
-&nbsp; &nbsp;    &lt;command&gt;property-scale&lt;/command&gt;    &lt;!-- pick a command --&gt;<br>
-&nbsp; &nbsp;    &lt;property&gt;/controls/aileron&lt;/property&gt;   &lt;!-- target a property --&gt;<br>
- &nbsp;   &lt;/binding&gt; &nbsp; &nbsp; &nbsp; &nbsp;  &lt;!-- closing tag for binding --&gt;<br>
-  &lt;/axis&gt;     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;       &lt;!-- closing tag for axis --&gt;<br>
-
-</TT>
+<PRE>
+&lt;axis n="0"&gt;                   &lt;!-- target an axis --&gt;
+ &lt;desc&gt;Aileron&lt;/desc&gt;          &lt;!-- descriptive name (optional) --&gt;
+ &lt;binding&gt;                     &lt;!-- open a container for the binding --&gt;
+  &lt;command&gt;property-scale&lt;/command&gt;    &lt;!-- pick a command --&gt;
+  &lt;property&gt;/controls/aileron&lt;/property&gt;   &lt;!-- target a property --&gt;
+ &lt;/binding&gt;                    &lt;!-- closing tag for binding --&gt;
+&lt;/axis&gt;                        &lt;!-- closing tag for axis --&gt;
+</PRE>
+<br>
 <P>
 Remember how I said the property tree was a hierarchy? Thoughtful readers
 will notice how the nested tags keep things organized.
@@ -369,10 +354,11 @@ This binding appears in the context /input/joysticks/js/, so the
 command-line option equivalent of this declaration (leaving out the
 'desc', which isn't strictly necessary), is
 </P>
-<TT>
+<PRE>
   --prop:/input/joysticks/js[0]/axis[0]/binding/command=property-scale
   --prop:/input/joysticks/js[0]/axis[0]/binding/property=/controls/aileron
-</TT>
+</PRE>
+<br>
 <P>
 Do you see how the command line versions uses a path to represent the hierarchy?
 Cool! You should read README.xmlpanel next, working with FGFS XML configuration
@@ -385,30 +371,27 @@ Ok, back to business. The 'property-scale' command also recognizes 'offset' and
 specifying a double precision floating point number. A double has more discrete
 steps and gives a smoother action than a plain float.
 </P>
-<tt>
+<PRE>
 
-&lt;axis n="2"&gt;<br>
-&nbsp; &lt;desc&gt;Throttle&lt;/desc&gt;<br>
-&nbsp;  &lt;!-- See important note about dead-band below --&gt;<br>
-&nbsp;  &lt;binding&gt;<br>
-&nbsp;&nbsp;   &lt;command&gt;property-scale&lt;/command&gt;<br>
-&nbsp;&nbsp;   &lt;property&gt;/controls/throttle&lt;/property&gt;<br>
-&nbsp;&nbsp;   &lt;offset type="double"&gt;-1.0&lt;/offset&gt;<br>
-&nbsp;&nbsp;   &lt;factor type="double"&gt;-0.5&lt;/factor&gt;<br>
-&nbsp;   &lt;/binding&gt;<br>
+&lt;axis n="2"&gt;
+ &lt;desc&gt;Throttle&lt;/desc&gt;
+ &lt;!-- See important note about dead-band below --&gt;
+ &lt;binding&gt;
+  &lt;command&gt;property-scale&lt;/command&gt;
+  &lt;property&gt;/controls/throttle&lt;/property&gt;
+  &lt;offset type="double"&gt;-1.0&lt;/offset&gt;
+  &lt;factor type="double"&gt;-0.5&lt;/factor&gt;
+ &lt;/binding&gt;
 &lt;/axis&gt;</tt>
-<br>
-<br>
-or
-<br>
-<br>
-<tt>
-  --prop:/input/joysticks/js[0]/axis[2]/binding/command=property-scale
-  --prop:/input/joysticks/js[0]/axis[2]/binding/property=/controls/throttle
-  --prop:/input/joysticks/js[0]/axis[2]/binding/offset=-1.0
-  --prop:/input/joysticks/js[0]/axis[2]/binding/factor=-0.5
-</tt>
 
+or
+
+ --prop:/input/joysticks/js[0]/axis[2]/binding/command=property-scale
+ --prop:/input/joysticks/js[0]/axis[2]/binding/property=/controls/throttle
+ --prop:/input/joysticks/js[0]/axis[2]/binding/offset=-1.0
+ --prop:/input/joysticks/js[0]/axis[2]/binding/factor=-0.5
+</PRE>
+<br>
 <p>
 *Important Note About dead-band*<br>
 --------------------------------
@@ -421,11 +404,11 @@ a dead-band, the tag *must* precede the binding tag. If you are using the comman
 line format you must omit the 'binding' part like so:
 </P>
 
-<TT>
+<PRE>
   --prop:/input/joysticks/js[0]/axis[2]/dead-band=0.005
-</tt>
+</PRE>
 
-<br><br>
+<br>
 <HR WIDTH="20%">
 <H2><A NAME="buttons">Joystick Button Properties:</A></H2>
 <HR WIDTH="20%">
@@ -434,67 +417,75 @@ line format you must omit the 'binding' part like so:
 Buttons, being boolean by nature, can use a little help. By this I mean that there are times when you need momentary action, times where you need a repeating action and sometimes you just want a plain old toggle. In order to facilitate this need we have some tags that modify the actions of buttons.
 </P>
 
-<TT>
+<PRE>
 
-&lt;repeatable&gt;<br> 
-&lt;!-- Will be either true or false. If it is true, holding down a button (or key) will cause repeated events, say, for moving the trim; if false (the default), pressing a key will cause only a single event. --&gt;<br>
-<br>
-&lt;step&gt;<br>
-&lt;!-- The property-adjust command takes a 'step' argument specifying the amount of the adjustment for each event. In the following example, the elevator trim moves 0.1% for each event (without automatic repetition, you'd have a pretty sore finger). --&gt;<br>
-<br>
-&lt;value&gt;<br>
-&lt;!-- Use value on non-repeatables to supply the value for each consecutive press--&gt;<br><br>
-&lt;mod-up&gt;<br>
-&lt;!-- This stands for "modifier up", my favorite I think. This is used to set up a binding for when you *release* a key. As you'll see, it comes in handy --&gt;<br><br>
-</TT>
+&lt;repeatable&gt; 
+&lt;!-- Will be either true or false. If it is true, holding down a button (or key) will cause 
+repeated events, say, for moving the trim; if false (the default), pressing a key will cause only a single event. --&gt;
 
+&lt;step&gt;
+&lt;!-- The property-adjust command takes a 'step' argument specifying the amount of the adjustment 
+for each event. In the following example, the elevator trim moves 0.1% for each event (without automatic 
+repetition, you'd have a pretty sore finger). --&gt;
+
+&lt;value&gt;
+&lt;!-- Use value on non-repeatables to supply the value for each consecutive press--&gt;
+&lt;mod-up&gt;
+&lt;!-- This stands for "modifier up", my favorite I think. This is used to set up a binding for 
+when you *release* a key. As you'll see, it comes in handy --&gt;
+</PRE>
+<br>
 <P>
 Here's a sample joystick button declaration in XML:
 </P>
 
-<TT>
-&lt;button n="1"&gt;  &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;               &lt;!-- target a button --&gt;<br>
-&nbsp;   &lt;desc&gt;Elevator trim up&lt;/desc&gt;  &lt;!-- optional description --&gt;<br>
- &nbsp;   &lt;repeatable&gt;true&lt;/repeatable&gt;    &lt;!-- Ok, repeatable is outside the command manager too --&gt;<br>
- &nbsp;   &lt;binding&gt;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;      &lt;!-- Open the "binding" node of the tree--&gt;<br>
- &nbsp; &nbsp;    &lt;command&gt;property-adjust&lt;/command&gt;          &lt;!-- pick a command type to bind --&gt;<br>
- &nbsp; &nbsp;    &lt;property&gt;/controls/elevator-trim&lt;/property&gt; &lt;!-- target a property --&gt;<br>
- &nbsp; &nbsp;    &lt;step type="double"&gt;0.001&lt;/step&gt;<br>
- &nbsp;   &lt;/binding&gt;<br>
-  &lt;/button&gt;<br>
-
-</tt>
+<PRE>
+&lt;button n="1"&gt;                        &lt;!-- target a button --&gt;
+ &lt;desc&gt;Elevator trim up&lt;/desc&gt;  &lt;!-- optional description --&gt;
+ &lt;repeatable&gt;true&lt;/repeatable&gt;  &lt;!-- Ok, repeatable is outside the command manager too --&gt;
+  &lt;binding&gt;                           &lt;!-- Open the "binding" node of the tree--&gt;
+   &lt;command&gt;property-adjust&lt;/command&gt;           &lt;!-- pick a command type to bind --&gt;
+   &lt;property&gt;/controls/elevator-trim&lt;/property&gt; &lt;!-- target a property --&gt;
+   &lt;step type="double"&gt;0.001&lt;/step&gt;
+  &lt;/binding&gt;
+&lt;/button&gt;
+</PRE>
+<br>
 <P>
 In command-line option syntax, this would appear as
 </P>
-<TT>
-  --prop:/input/joysticks/js[0]/button[1]/repeatable=true     &lt;-- See? no 'binding' --&gt;<br>
-  --prop:/input/joysticks/js[0]/button[1]/binding/command=property-adjust<br>
-  --prop:/input/joysticks/js[0]/button[1]/binding/property=/controls/elevator-trim<br>
-  --prop:/input/joysticks/js[0]/button[1]/binding//step=0.001<br>
-</TT>
+
+<PRE>
+  --prop:/input/joysticks/js[0]/button[1]/repeatable=true     &lt;-- See? no 'binding' --&gt;
+  --prop:/input/joysticks/js[0]/button[1]/binding/command=property-adjust
+  --prop:/input/joysticks/js[0]/button[1]/binding/property=/controls/elevator-trim
+  --prop:/input/joysticks/js[0]/button[1]/binding//step=0.001
+</PRE>
+<br>
 <P>
 Here's a slightly fancier declaration, that applies the left (differential) brakes
 when button 4 is pressed, and releases them automatically when the user releases the
 button:
 </P>
-<TT>
-&lt;button n="4"&gt;<br>
- &nbsp;   &lt;desc&gt;Left brake&lt;/desc&gt;<br>
- &nbsp;   &lt;binding&gt;<br>
-  &nbsp;&nbsp;    &lt;command&gt;property-assign&lt;/command&gt;<br>
-  &nbsp;&nbsp;    &lt;property&gt;/controls/brakes[0]&lt;/property&gt;<br>
-  &nbsp;&nbsp;    &lt;value type="double"&gt;1.0&lt;/value&gt;    &lt;!-- brakes are a toggle so 1.0 represents on --&gt;<br>
- &nbsp;   &lt;/binding&gt;<br>
- &nbsp;   &lt;mod-up&gt;                    &lt;!-- it's not a parking brake so we need to release it --&gt;<br>
-  &nbsp;&nbsp; &nbsp;    &lt;binding&gt;<br>
-  &nbsp; &nbsp;&nbsp;     &lt;command&gt;property-assign&lt;/command&gt;<br>
-  &nbsp; &nbsp;&nbsp;     &lt;property&gt;/controls/brakes[0]&lt;/property&gt;<br>
-  &nbsp; &nbsp;&nbsp;     &lt;value type="double"&gt;0.0&lt;/value&gt;       &lt;!-- 1.0 is on so 0.0 is off, right? --&gt;<br>
-  &nbsp;&nbsp;    &lt;/binding&gt;<br>
- &nbsp;   &lt;/mod-up&gt;<br>
-&lt;/button&gt;<br>
-</TT>
+
+<PRE>
+&lt;button n="4"&gt;
+ &lt;desc&gt;Left brake&lt;/desc&gt;
+ &lt;binding&gt;
+  &lt;command&gt;property-assign&lt;/command&gt;
+  &lt;property&gt;/controls/brakes[0]&lt;/property&gt;
+  &lt;value type="double"&gt;1.0&lt;/value&gt;    &lt;!-- brakes are a toggle so 1.0 represents on --&gt;
+  &lt;/binding&gt;
+   &lt;mod-up&gt;                    &lt;!-- it's not a parking brake so we need to release it --&gt;
+    &lt;binding&gt;
+    &lt;command&gt;property-assign&lt;/command&gt;
+    &lt;property&gt;/controls/brakes[0]&lt;/property&gt;
+    &lt;value type="double"&gt;0.0&lt;/value&gt;       &lt;!-- 1.0 is on so 0.0 is off, right? --&gt;
+   &lt;/binding&gt;
+  &lt;/mod-up&gt;
+&lt;/button&gt;
+</PRE>
+<br>
 <p>
 The first binding is straight-forward: when the button is pressed, the
 'property-assign' command assigns the value 1.0 (i.e. full) to the left brake
@@ -507,63 +498,65 @@ value will not be assigned over and over again.
 <P>
 Here's the command-line equivalent:
 </p>
-<TT>
+<PRE>
   --prop:/input/joysticks/js[0]/button[4]/binding/command=property-assign
   --prop:/input/joysticks/js[0]/button[4]/binding/property=/controls/brakes[0]
   --prop:/input/joysticks/js[0]/button[4]/binding/value=1.0
   --prop:/input/joysticks/js[0]/button[4]/mod-up/binding/command=property-assign
   --prop:/input/joysticks/js[0]/button[4]/mod-up/binding/property=/controls/brakes[0]
   --prop:/input/joysticks/js[0]/button[4]/mod-up/binding/value=0.0
-</TT>
+</PRE>
+<br>
 <P>
 Remember that more than one binding can be included in each context. Here's a
 very hairy example from the default bindings that fires all three brakes when
 button 0 is pressed, and releases all three when button 0 is released:
 </P>
 
-<TT>
-  &lt;button n="0"&gt;<br>
-  &nbsp;  &lt;desc&gt;Brakes&lt;/desc&gt;<br>
-  &nbsp;  &lt;binding&gt;<br>
-  &nbsp; &nbsp;   &lt;command&gt;property-assign&lt;/command&gt;<br>
-  &nbsp; &nbsp;   &lt;property&gt;/controls/brakes[0]&lt;/property&gt;<br>
-  &nbsp; &nbsp;   &lt;value type="double"&gt;1.0&lt;/value&gt;<br>
-  &nbsp;  &lt;/binding&gt;<br>
-  &nbsp;  &lt;binding&gt;<br>
-  &nbsp; &nbsp;   &lt;command&gt;property-assign&lt;/command&gt;<br>
-  &nbsp; &nbsp;   &lt;property&gt;/controls/brakes[1]&lt;/property&gt;<br>
-  &nbsp; &nbsp;   &lt;value type="double"&gt;1.0&lt;/value&gt;<br>
-  &nbsp;  &lt;/binding&gt;<br>
-  &nbsp;  &lt;binding&gt;<br>
-  &nbsp; &nbsp;   &lt;command&gt;property-assign&lt;/command&gt;<br>
-  &nbsp; &nbsp;   &lt;property&gt;/controls/brakes[2]&lt;/property&gt;<br>
-  &nbsp; &nbsp;   &lt;value type="double"&gt;1.0&lt;/value&gt;<br>
-  &nbsp;  &lt;/binding&gt;<br>
-  &nbsp;  &lt;mod-up&gt;<br>
-  &nbsp; &nbsp;   &lt;binding&gt;<br>
-  &nbsp; &nbsp; &nbsp;    &lt;command&gt;property-assign&lt;/command&gt;<br>
-  &nbsp; &nbsp; &nbsp;    &lt;property&gt;/controls/brakes[0]&lt;/property&gt;<br>
-  &nbsp; &nbsp; &nbsp;    &lt;value type="double"&gt;0.0&lt;/value&gt;<br>
-  &nbsp; &nbsp;   &lt;/binding&gt;<br>
-  &nbsp; &nbsp;   &lt;binding&gt;<br>
-  &nbsp; &nbsp; &nbsp;    &lt;command&gt;property-assign&lt;/command&gt;<br>
-  &nbsp; &nbsp; &nbsp;    &lt;property&gt;/controls/brakes[1]&lt;/property&gt;<br>
-  &nbsp; &nbsp; &nbsp;    &lt;value type="double"&gt;0.0&lt;/value&gt;<br>
-  &nbsp; &nbsp;   &lt;/binding&gt;<br>
-  &nbsp; &nbsp;   &lt;binding&gt;<br>
-  &nbsp; &nbsp; &nbsp;    &lt;command&gt;property-assign&lt;/command&gt;<br>
-  &nbsp; &nbsp; &nbsp;    &lt;property&gt;/controls/brakes[2]&lt;/property&gt;<br>
-  &nbsp; &nbsp; &nbsp;    &lt;value type="double"&gt;0.0&lt;/value&gt;<br>
-  &nbsp; &nbsp;   &lt;/binding&gt;<br>
-  &nbsp;  &lt;/mod-up&gt;<br>
-&lt;/button&gt;<br>
-</TT>
+<PRE>
+ &lt;button n="0"&gt;
+  &lt;desc&gt;Brakes&lt;/desc&gt;
+  &lt;binding&gt;
+   &lt;command&gt;property-assign&lt;/command&gt;
+   &lt;property&gt;/controls/brakes[0]&lt;/property&gt;
+   &lt;value type="double"&gt;1.0&lt;/value&gt;
+  &lt;/binding&gt;
+  &lt;binding&gt;
+   &lt;command&gt;property-assign&lt;/command&gt;
+   &lt;property&gt;/controls/brakes[1]&lt;/property&gt;
+   &lt;value type="double"&gt;1.0&lt;/value&gt;
+  &lt;/binding&gt;
+  &lt;binding&gt;
+   &lt;command&gt;property-assign&lt;/command&gt;
+   &lt;property&gt;/controls/brakes[2]&lt;/property&gt;
+   &lt;value type="double"&gt;1.0&lt;/value&gt;
+  &lt;/binding&gt;
+  &lt;mod-up&gt;
+   &lt;binding&gt;
+    &lt;command&gt;property-assign&lt;/command&gt;
+    &lt;property&gt;/controls/brakes[0]&lt;/property&gt;
+    &lt;value type="double"&gt;0.0&lt;/value&gt;
+   &lt;/binding&gt;
+   &lt;binding&gt;
+    &lt;command&gt;property-assign&lt;/command&gt;
+    &lt;property&gt;/controls/brakes[1]&lt;/property&gt;
+    &lt;value type="double"&gt;0.0&lt;/value&gt;
+   &lt;/binding&gt;
+   &lt;binding&gt;
+    &lt;command&gt;property-assign&lt;/command&gt;
+    &lt;property&gt;/controls/brakes[2]&lt;/property&gt;
+    &lt;value type="double"&gt;0.0&lt;/value&gt;
+   &lt;/binding&gt;
+  &lt;/mod-up&gt;
+&lt;/button&gt;
+</PRE>
+<br>
 <p>
 For people who take pleasure in avoiding XML, here's the command-line
 equivalent (note the subscripts to distinguish multiple bindings; the
 XML will handle this automatically):
 </P>
-<TT>
+<PRE>
   --prop:/input/joysticks/button[0]/binding[0]/command=property-assign
   --prop:/input/joysticks/button[0]/binding[0]/property=/controls/brakes[0]
   --prop:/input/joysticks/button[0]/binding[0]/value=1.0
@@ -582,8 +575,8 @@ XML will handle this automatically):
   --prop:/input/joysticks/button[0]/mod-up/binding[2]/command=property-assign
   --prop:/input/joysticks/button[0]/mod-up/binding[2]/property=brakes[2]
   --prop:/input/joysticks/button[0]/mod-up/binding[2]/value=0.0
-</TT>
-
+</PRE>
+<br>
 <P>
 This is a good time to remind you that command line formatted options are used
 in your .fgfsrc file. You can put them in $FG_ROOT/system.fgfsrc to make them
@@ -604,19 +597,20 @@ of the common button properties.
 For example, if you just want to control view direction, you can map two of the 
 axes to /sim/view/axes/long and /sim/view/axes/lat:
 </P>
-<TT>
+<PRE>
   --prop:/input/joysticks/js/axis[5]/binding/command=property-scale
   --prop:/input/joysticks/js/axis[5]/binding/property=/sim/view/axes/lat
 
   --prop:/input/joysticks/js/axis[6]/binding/command=property-scale
   --prop:/input/joysticks/js/axis[6]/binding/property=/sim/view/axes/long
-</tt>
+</PRE>
+<br>
 <p>
 If you want to use them as buttons (say, to scroll the panel
 vertically or horizontally), you can use the high/low bindings.
 Here's an example of how to use an axis to adjust the elevator trim:
 </P>
-<TT>
+<PRE>
   --prop:/input/joysticks/js/axis[1]/low/repeatable=true
   --prop:/input/joysticks/js/axis[1]/low/binding/command=property-adjust
   --prop:/input/joysticks/js/axis[1]/low/binding/property=/controls/elevator-trim
@@ -626,7 +620,8 @@ Here's an example of how to use an axis to adjust the elevator trim:
   --prop:/input/joysticks/js/axis[1]/high/binding/command=property-adjust
   --prop:/input/joysticks/js/axis[1]/high/binding/property=/controls/elevator-trim
   --prop:/input/joysticks/js/axis[1]/high/binding/step=-0.001
-</TT>
+</PRE>
+<br>
 <P>
 You could also bind some axes to brakes, so that you can use positions
 between between 0.0 (no brakes) and 1.0 (full brakes).
@@ -640,17 +635,17 @@ Keyboard bindings are almost exactly identical to joystick-button
 bindings, as in the following example (the context is
 /input/keyboard):
 </P>
-<TT>
- &lt;key n="1"&gt;<br&gt;<br>
- &nbsp;    &lt;name&gt;Ctrl-A&lt;/name&gt;<br>
- &nbsp;    &lt;desc&gt;Toggle autopilot altitude lock.&lt;/desc&gt;<br>
- &nbsp;    &lt;binding&gt;<br>
- &nbsp;  &nbsp;     &lt;command&gt;property-toggle&lt;/command&gt;<br>
- &nbsp;  &nbsp;     &lt;property&gt;/autopilot/locks/altitude&lt;/property&gt;<br>
- &nbsp;    &lt;/binding&gt;<br>
-  &lt;/key&gt;<br>
-</TT>
-
+<PRE>
+ &lt;key n="1"&gt;
+  &lt;name&gt;Ctrl-A&lt;/name&gt;
+  &lt;desc&gt;Toggle autopilot altitude lock.&lt;/desc&gt;
+  &lt;binding&gt;
+   &lt;command&gt;property-toggle&lt;/command&gt;
+   &lt;property&gt;/autopilot/locks/altitude&lt;/property&gt;
+  &lt;/binding&gt;
+ &lt;/key&gt;
+</PRE>
+<br>
 <P>
 There are a few gotcha's though.  First, the index of the key
 specifies the key code that you're binding; in the above example, '1'
@@ -660,10 +655,11 @@ function and arrow keys (you can get the value from include/GL/glut.h,
 but adding 256 to the special key code).  Here is the command-line
 equivalent of the above, leaving out the documentation properties:
 </P>
-<TT>
+<PRE>
   --prop:/input/keyboard/key[1]/binding/command=property-toggle
   --prop:/input/keyboard/key[1]/binding/property=/autopilot/locks/altitude
-</TT>
+</PRE>
+<br>
 <p>
 (The 'property-toggle' command switches a boolean value between true and
 false, so it needs no arguments except for the property name.)  DON'T
@@ -675,20 +671,20 @@ buttons.  In addition to mod-up (representing the key release), a key
 may use any combination of nested 'mod-alt', 'mod-ctrl', and
 'mod-shift' modifiers, as in the following example:
 </P>
-<TT>
-  &lt;key n="49"&gt;<br>
- &nbsp;    &lt;name&gt;1&lt;/name&gt;<br>
- &nbsp;  &nbsp;    &lt;mod-shift&gt;<br>
- &nbsp;  &nbsp;      &lt;desc&gt;Look back left&lt;/desc&gt;<br>
- &nbsp;  &nbsp;      &lt;binding&gt;<br>
- &nbsp;  &nbsp;  &nbsp;       &lt;command&gt;property-assign&lt;/command&gt;<br>
- &nbsp;  &nbsp;  &nbsp;       &lt;property&gt;/sim/view/goal-offset&lt;/property&gt;<br>
- &nbsp;  &nbsp;  &nbsp;       &lt;value type="double"&gt;135&lt;/value&gt;<br>
- &nbsp;  &nbsp;      &lt;/binding&gt;<br>
- &nbsp;    &lt;/mod-shift&gt;<br>
-  &lt;/key&gt;<br>
-</TT>
-</P>
+<PRE>
+ &lt;key n="49"&gt;
+  &lt;name&gt;1&lt;/name&gt;
+   &lt;mod-shift&gt;
+   &lt;desc&gt;Look back left&lt;/desc&gt;
+   &lt;binding&gt;
+    &lt;command&gt;property-assign&lt;/command&gt;
+    &lt;property&gt;/sim/view/goal-offset&lt;/property&gt;
+    &lt;value type="double"&gt;135&lt;/value&gt;
+   &lt;/binding&gt;
+  &lt;/mod-shift&gt;
+ &lt;/key&gt;
+</PRE>
+<br>
 <P>
 In this example, the '1' key combined with shift causes the view to
 switch to back left.  Note that this will work only with the keypad 1,
@@ -707,47 +703,48 @@ With the new input module, the key-up events can also be detected for
 the keyboard, so it's possible to have touch-sensitive brakes (etc.)
 just as with the joystick:
 </P>
-<TT>
-  &lt;key n="44"&gt;<br>
- &nbsp;    &lt;name&gt;,&lt;/name&gt;<br>
- &nbsp;    &lt;desc&gt;Left brake&lt;/desc&gt;<br>
- &nbsp;  &nbsp;    &lt;binding&gt;<br>
- &nbsp;  &nbsp;     &lt;command&gt;property-assign&lt;/command&gt;<br>
- &nbsp;  &nbsp;     &lt;property&gt;/controls/brakes[0]&lt;/property&gt;<br>
- &nbsp;  &nbsp;     &lt;value type="double"&gt;1.0&lt;/value&gt;<br>
- &nbsp;    &lt;/binding&gt;<br>
- &nbsp;    &lt;mod-up&gt;<br>
- &nbsp;  &nbsp;     &lt;binding&gt;<br>
- &nbsp;  &nbsp;      &lt;command&gt;property-assign&lt;/command&gt;<br>
- &nbsp;  &nbsp;      &lt;property&gt;/controls/brakes[0]&lt;/property&gt;<br>
- &nbsp;  &nbsp;      &lt;value type="double"&gt;0.0&lt;/value&gt;<br>
- &nbsp;  &nbsp;     &lt;/binding&gt;<br>
- &nbsp;    &lt;/mod-up&gt;<br>
-  &lt;/key&gt;<br>
-</TT>
+<PRE>
+ &lt;key n="44"&gt;
+  &lt;name&gt;,&lt;/name&gt;
+  &lt;desc&gt;Left brake&lt;/desc&gt;
+   &lt;binding&gt;
+   &lt;command&gt;property-assign&lt;/command&gt;
+   &lt;property&gt;/controls/brakes[0]&lt;/property&gt;
+   &lt;value type="double"&gt;1.0&lt;/value&gt;
+  &lt;/binding&gt;
+  &lt;mod-up&gt;
+   &lt;binding&gt;
+   &lt;command&gt;property-assign&lt;/command&gt;
+   &lt;property&gt;/controls/brakes[0]&lt;/property&gt;
+   &lt;value type="double"&gt;0.0&lt;/value&gt;
+   &lt;/binding&gt;
+  &lt;/mod-up&gt;
+ &lt;/key&gt;
+</PRE>
+<br>
 <P>
 Now here is a different way to bind a brake. In this example, there is
 no &lt;mod-up&gt; tag, so it *does* work like a parking brake.
 </P>
 
- <TT>
- &lt;key n="66"&gt; <br>
- &nbsp;  &lt;name&gt;B&lt;/name&gt;<br>
- &nbsp;  &lt;desc&gt;Toggle parking brake on or off&lt;/desc&gt;<br>
- &nbsp;  &lt;binding&gt;<br>
- &nbsp;  &nbsp;  &lt;command&gt;property-toggle&lt;/command&gt;<br>
- &nbsp;  &nbsp;  &lt;property&gt;/controls/brakes[0]&lt;/property&gt;<br>
- &nbsp;  &lt;/binding&gt;<br>
- &nbsp;  &lt;binding&gt;<br>
- &nbsp;  &nbsp;  &lt;command&gt;property-toggle&lt;/command&gt;<br>
- &nbsp;  &nbsp;  &lt;property&gt;/controls/brakes[1]&lt;/property&gt;<br>
- &nbsp;  &lt;/binding&gt;<br>
- &nbsp;  &lt;binding&gt;<br>
- &nbsp;  &nbsp;  &lt;command&gt;property-toggle&lt;/command&gt;<br>
- &nbsp;  &nbsp;  &lt;property&gt;/controls/brakes[2]&lt;/property&gt;<br>
- &nbsp;  &lt;/binding&gt;<br>
- &lt;/key&gt;<br>
- </TT>
+ <PRE>
+ &lt;key n="66"&gt; 
+  &lt;name&gt;B&lt;/name&gt;
+  &lt;desc&gt;Toggle parking brake on or off&lt;/desc&gt;
+  &lt;binding&gt;
+   &lt;command&gt;property-toggle&lt;/command&gt;
+   &lt;property&gt;/controls/brakes[0]&lt;/property&gt;
+  &lt;/binding&gt;
+  &lt;binding&gt;
+   &lt;command&gt;property-toggle&lt;/command&gt;
+   &lt;property&gt;/controls/brakes[1]&lt;/property&gt;
+  &lt;/binding&gt;
+  &lt;binding&gt;
+   &lt;command&gt;property-toggle&lt;/command&gt;
+   &lt;property&gt;/controls/brakes[2]&lt;/property&gt;
+  &lt;/binding&gt;
+ &lt;/key&gt;
+ </PRE>
 
  </BODY>
 </HTML>

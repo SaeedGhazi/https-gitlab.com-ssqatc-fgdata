@@ -579,9 +579,6 @@ Started September 2000 by David Megginson, david@megginson.com
  <instrumentation>
 
   <!-- Radio settings -->
-  <dme>
-   <switch-position type="int">0</switch-position>
-  </dme>
 
   <comm n="0">
    <frequencies>
@@ -685,7 +682,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <serviceable type="bool" archive="y">true</serviceable>
   </magnetic-compass>
 
-  <dme>
+  <dme n="0">
    <serviceable type="bool" archive="y">true</serviceable>
    <switch-position type="int" archive="y">0</switch-position>
   </dme>

@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+Cessna 172 simulation config. This files ties together all the components
+used by FGFS to represent the C172. Components include the flight data 
+model, instrument panel, and external 3D model.
+3D models can be downloaded from http://home.t-online.de/home/Wolfram.Kuss/
+
+October 23 2001 John Check, fgpanels@rockfish.net
+************************************************************************
+-->
+
+<PropertyList>
+
+ <sim>
+
+  <description>Cessna 172P</description>
+ 
+  <flight-model archive="y">jsb</flight-model>
+  <aero archive="y">c172p</aero>
+  
+  <systems>
+    <electrical>
+      <path>Aircraft/c172/c172-electrical.xml</path>
+    </electrical>
+  </systems>
+
+  <sound>
+   <audible archive="y">true</audible>
+   <path archive="y">Aircraft/c172/c172-sound.xml</path>
+  </sound>
+
+  <panel>
+   <visibility archive="y">false</visibility>
+  </panel>
+
+  <model>
+   <path archive="y">Aircraft/c172p/Models/c172p.xml</path>
+  </model>
+
+  <view>
+   <internal archive="y">true</internal>
+   <config>
+     <goal-heading-deg>3</goal-heading-deg>
+     <x-offset-m archive="y">-0.18</x-offset-m>
+     <y-offset-m archive="y">0.30</y-offset-m>
+     <z-offset-m archive="y">0.2</z-offset-m>
+     <default-field-of-view-deg>50.0</default-field-of-view-deg>
+     <default-pitch-deg>-9.5</default-pitch-deg>
+     <front-direction-deg>-1.5</front-direction-deg>
+     <front-left-direction-deg>45</front-left-direction-deg>
+     <left-direction-deg>90</left-direction-deg>
+     <back-left-direction-deg>135</back-left-direction-deg>
+     <back-direction-deg>180</back-direction-deg>
+     <back-right-direction-deg>225</back-right-direction-deg>
+     <right-direction-deg>270</right-direction-deg>
+     <front-right-direction-deg>315</front-right-direction-deg>
+   </config>
+  </view>
+
+  <current-view>
+   <field-of-view>50</field-of-view>
+   <heading-offset-deg>-1.5</heading-offset-deg>
+   <pitch-offset-deg>-9.5</pitch-offset-deg>
+  </current-view>
+
+ </sim>
+  
+ <autopilot>
+   <config>
+     <min-climb-speed-kt type="float">70.0</min-climb-speed-kt>
+     <best-climb-speed-kt type="float">75.0</best-climb-speed-kt>
+     <target-climb-rate-fpm type="float">500.0</target-climb-rate-fpm>
+     <target-descent-rate-fpm type="float">1000.0</target-descent-rate-fpm>
+     <elevator-adj-factor type="float">4000.0</elevator-adj-factor>
+     <integral-contribution type="float">0.01</integral-contribution> 
+     <zero-pitch-throttle type="float">0.45</zero-pitch-throttle>
+     <zero-pitch-trim-full-throttle type="float">0.14</zero-pitch-trim-full-throttle>
+   </config>
+ </autopilot>
+
+ <consumables>
+  <fuel>
+   <tank n="0">
+    <level-gal_us>20</level-gal_us>
+   </tank>
+   <tank n="1">
+    <level-gal_us>20</level-gal_us>
+   </tank>
+  </fuel>
+ </consumables>
+
+ <controls>
+  <aileron-trim>-0.125</aileron-trim>
+  <rudder-trim>0.0</rudder-trim>
+  <magnetos>3</magnetos>
+ </controls>
+
+ <engines>
+  <engine>
+   <rpm type="double">700</rpm>
+  </engine>
+ </engines>
+  
+</PropertyList>

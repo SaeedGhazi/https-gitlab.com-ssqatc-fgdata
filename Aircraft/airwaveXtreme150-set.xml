@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<PropertyList include="airwaveXtreme150-v1-nl-uiuc-set.xml">
+ <sim>
+  <description>Alias for airwaveXtreme150-v1-nl-uiuc.</description>
+ </sim>
+</PropertyList>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<PropertyList include="747-yasim-set.xml">
+ <sim>
+  <description>Alias for 747-yasim.</description>
+ </sim>
+</PropertyList>

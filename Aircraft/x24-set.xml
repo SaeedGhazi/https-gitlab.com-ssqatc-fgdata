@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<PropertyList include="x24b-set.xml">
+ <sim>
+  <description>Alias for x24b.</description>
+ </sim>
+</PropertyList>

@@ -1,43 +1,7 @@
 <?xml version="1.0"?>
-<!--
-************************************************************************
-Cessna 172 simulation config. This files ties together all the components
-used by FGFS to represent the C172. Components include the flight data 
-model, instrument panel, and external 3D model.
-3D models can be downloaded from http://home.t-online.de/home/Wolfram.Kuss/
 
-October 23 2001 John Check, fgpanels@rockfish.net
-************************************************************************
--->
-
-<PropertyList>
-
+<PropertyList include="f16-jsbsim-set.xml">
  <sim>
-
-  <description>General Dynamics F-16</description>
- 
-  <flight-model>jsb</flight-model>
-  <aero>f16</aero>
-  
-  <systems>
-   <electrical>
-    <path>Aircraft/Generic/generic-electrical.xml</path>
-   </electrical>
-  </systems> 
-  
-  <sound>
-   <audible>true</audible>
-   <path>Aircraft/a4/a4-sound.xml</path>
-  </sound>
-
-  <panel>
-   <visibility>false</visibility>
-  </panel>
-
-  <model>
-   <path>Aircraft/a4/Models/a4-blue.xml</path>
-  </model>
-
+  <description>Alias for f16-jsbsim.</description>
  </sim>
-
 </PropertyList>

@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+Piper J3 Cub simulation config. This files ties together all the components
+used by FGFS to represent the J3 Cub. Components include the flight data 
+model, instrument panel, and external 3D model.
+3D models can be downloaded from http://home.t-online.de/home/Wolfram.Kuss/
+************************************************************************
+-->
+
+<PropertyList>
+ <sim>
+
+  <description>Piper Cub J3 Trainer (YASim)</description>
+
+  <flight-model>yasim</flight-model>
+  <aero>j3cub</aero>
+  <fuel-fraction>0.8</fuel-fraction>
+  
+  <systems>
+   <electrical>
+    <path>Aircraft/Generic/generic-electrical.xml</path>
+   </electrical>
+  </systems> 
+
+  <sound>
+   <audible>true</audible>
+   <path>Aircraft/c172/c172-sound.xml</path>
+  </sound>
+
+  <panel>
+   <visibility archive="n">false</visibility>
+  </panel>
+
+  <model>
+   <path archive="y">Aircraft/j3cub/Models/j3cub.xml</path>
+  </model>
+
+  <current-view>
+   <pitch-offset-deg>-8</pitch-offset-deg>
+  </current-view>
+
+  <view>
+   <internal archive="y">true</internal>
+   <config>
+     <x-offset-m archive="y">0.0</x-offset-m>
+     <y-offset-m archive="y">-0.3</y-offset-m>
+     <z-offset-m archive="y">0.4</z-offset-m>
+   </config>
+  </view>
+
+ </sim>
+
+ <yasim>
+  <j3cub>
+   <pilot-lb>180</pilot-lb>
+  </j3cub>
+ </yasim>
+
+ <controls>
+  <aileron-trim>0.0076</aileron-trim>   <!-- fixed -->
+  <elevator-trim>0.0000</elevator-trim> <!-- controllable -->
+  <rudder-trim>0.0020</rudder-trim>     <!-- fixed -->
+  <magnetos>3</magnetos>
+ </controls>
+
+ <!-- An autopilot on a Cub??? -->  
+ <autopilot>
+   <config>
+     <min-climb-speed-kt type="float">48.0</min-climb-speed-kt>
+     <best-climb-speed-kt type="float">56.0</best-climb-speed-kt>
+     <target-climb-rate-fpm type="float">400.0</target-climb-rate-fpm>
+     <target-descent-rate-fpm type="float">1000.0</target-descent-rate-fpm>
+     <elevator-adj-factor type="float">6000.0</elevator-adj-factor>
+     <integral-contribution type="float">0.008</integral-contribution> 
+     <zero-pitch-throttle type="float">0.35</zero-pitch-throttle>
+     <zero-pitch-trim-full-throttle type="float">0.001</zero-pitch-trim-full-throttle>
+   </config>
+ </autopilot>
+
+</PropertyList>

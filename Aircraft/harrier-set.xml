@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<PropertyList include="harrier-yasim-set.xml">
+ <sim>
+  <description>Alias for harrier-yasim.</description>
+ </sim>
+</PropertyList>

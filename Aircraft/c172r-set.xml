@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<PropertyList include="c172r-jsbsim-set.xml">
+ <sim>
+  <description>Alias for c172r-jsbsim.</description>
+ </sim>
+</PropertyList>

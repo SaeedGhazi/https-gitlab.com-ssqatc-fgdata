@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+ 
+<PropertyList>
+
+ <scenario>
+
+  <entry>
+   <callsign>United 721</callsign>
+   <class>JET_TRANSPORT</class>
+   <model>Aircraft/737/Models/boeing733.xml</model>
+   <flightplan>KSFO_depart_east_01R.xml</flightplan>
+  </entry>
+
+  <entry>
+   <callsign>United 721</callsign>
+   <class>JET_TRANSPORT</class>
+   <model>Aircraft/737/Models/boeing733.xml</model>
+   <flightplan>KSFO_depart_south_01L.xml</flightplan>
+  </entry>
+
+ </scenario>
+
+</PropertyList>

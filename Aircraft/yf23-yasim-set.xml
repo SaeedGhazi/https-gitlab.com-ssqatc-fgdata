@@ -26,7 +26,7 @@ NR/MD YF23 simulation config.
   </panel_2>
 
   <hud>
-   <path>Huds/Default/default-LE.xml</path>
+   <path>Huds/Default/default.xml</path>
    <visibility>true</visibility>
   </hud>
 
@@ -43,7 +43,7 @@ NR/MD YF23 simulation config.
 
   <view n="1">
    <config>
-     <z-offset-m type="double" archive="y">-40.0</z-offset-m>
+     <z-offset-m type="double" archive="y">-35.0</z-offset-m>
    </config>
 
   </view>
@@ -70,15 +70,15 @@ NR/MD YF23 simulation config.
      <target-climb-rate-fpm type="float">20000.0</target-climb-rate-fpm>
      <target-descent-rate-fpm type="float">12000.0</target-descent-rate-fpm>
 
-     <elevator-adj-factor type="float">120.0</elevator-adj-factor>
+     <elevator-adj-factor type="float">130.0</elevator-adj-factor>
 
      <integral-contribution type="float">0.005</integral-contribution>
 
      <max-aileron type="float">0.5</max-aileron>
      <max-roll-deg type="float">60.0</max-roll-deg>
 
-     <roll-out-deg type="float">6.0</roll-out-deg>
-     <roll-out-smooth-deg type="float">30.0</roll-out-smooth-deg>
+     <roll-out-deg type="float">10.0</roll-out-deg>
+     <roll-out-smooth-deg type="float">20.0</roll-out-smooth-deg>
 
      <zero-pitch-throttle type="float">0.5</zero-pitch-throttle>
      <zero-pitch-trim-full-throttle type="float">0.001</zero-pitch-trim-full-throttle>

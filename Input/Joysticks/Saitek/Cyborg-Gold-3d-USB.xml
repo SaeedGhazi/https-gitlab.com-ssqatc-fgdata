@@ -34,6 +34,8 @@ F3 and F4 are used like "Shift", "Control", or "Alternate" on computer keyboards
 For example: press F3 and keep holding it down while pressing the fire
 button/trigger -> toggle parking brake
 
+When flying the Harrier, "F3/hat left" and "right" control the thrust vector.
+
 
 
 ___________________________________ Customization ____________________________________
@@ -449,7 +451,12 @@ ________________________________________________________________________________
 						view.panViewDir(-1);
 					}
 				} elsif (mod == 1) {
-					controls.adjMixture(-2);
+					controls.adjMixture(-1);
+					if (getprop("/sim/aero") == "harrier") {
+						thv = getprop("/controls/engines/engine[0]/mixture");
+						thv = int(thv * 120 - 20);
+						gui.popupTip("Thrust vector " ~ thv);
+					}
 				} elsif (mod == 2) {
 					controls.aileronTrim(-0.75);
 				} elsif (mod == 3) {
@@ -474,7 +481,12 @@ ________________________________________________________________________________
 						view.panViewDir(1);
 					}
 				} elsif (mod == 1) {
-					controls.adjMixture(2);
+					controls.adjMixture(1);
+					if (getprop("/sim/aero") == "harrier") {
+						thv = getprop("/controls/engines/engine[0]/mixture");
+						thv = int(thv * 120 - 20);
+						gui.popupTip("Thrust vector " ~ thv);
+					}
 				} elsif (mod == 2) {
 					controls.aileronTrim(0.75);
 				} elsif (mod == 3) {

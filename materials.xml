@@ -2684,6 +2684,11 @@ Shared parameters for various materials.
  <object-group>
   <range-m>5000</range-m>
   <object>
+   <path>Models/Buildings/cube-apartment.ac</path>
+   <coverage-m2>500000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
    <path>Models/Buildings/small-glass-office-building.ac</path>
    <coverage-m2>500000</coverage-m2>
    <heading-type>random</heading-type>
@@ -2742,6 +2747,11 @@ Shared parameters for various materials.
   </emissive>
  <object-group>
   <range-m>5000</range-m>
+  <object>
+   <path>Models/Buildings/cube-apartment.ac</path>
+   <coverage-m2>500000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
   <object>
    <path>Models/Buildings/small-glass-office-building.ac</path>
    <coverage-m2>500000</coverage-m2>
@@ -3150,6 +3160,11 @@ Shared parameters for various materials.
  <object-group>
   <range-m>5000</range-m>
   <object>
+   <path>Models/Buildings/silo.ac</path>
+   <coverage-m2>5000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
    <path>Models/Buildings/red-barn.ac</path>
    <coverage-m2>5000000</coverage-m2>
    <heading-type>random</heading-type>
@@ -3207,6 +3222,11 @@ Shared parameters for various materials.
  <object-group>
   <range-m>5000</range-m>
   <object>
+   <path>Models/Buildings/silo.ac</path>
+   <coverage-m2>5000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
    <path>Models/Buildings/red-barn.ac</path>
    <coverage-m2>5000000</coverage-m2>
    <heading-type>random</heading-type>
@@ -3263,6 +3283,11 @@ Shared parameters for various materials.
  </emissive>
  <object-group>
   <range-m>5000</range-m>
+  <object>
+   <path>Models/Buildings/silo.ac</path>
+   <coverage-m2>5000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
   <object>
    <path>Models/Buildings/red-barn.ac</path>
    <coverage-m2>5000000</coverage-m2>

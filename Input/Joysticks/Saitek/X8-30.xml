@@ -33,7 +33,7 @@ $Id$
   <binding>
    <command>property-scale</command>
    <property>/controls/flight/aileron</property>
-   <power type="bool">3</power>
+   <power type="double">3</power>
   </binding>
  </axis>
 
@@ -43,7 +43,7 @@ $Id$
    <command>property-scale</command>
    <property>/controls/flight/elevator</property>
    <factor type="double">-1.0</factor>
-   <power type="bool">3</power>
+   <power type="double">3</power>
   </binding>
  </axis>
 

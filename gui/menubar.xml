@@ -56,6 +56,14 @@
   </item>
 
   <item>
+   <label>Sound Configuration</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>sound-dialog</dialog-name>
+   </binding>
+  </item>
+
+  <item>
    <label>Browse Internal Properties</label>
    <binding>
     <command>old-properties-dialog</command>

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<!-- Sound control dialog -->
+
+<!--
+     /sim/sound/pause
+     /sim/sound/volume
+  -->
+
+<PropertyList>
+ <name>sound-dialog</name>
+ <layout>vbox</layout>
+
+ <text>
+  <label>Sound Configuration</label>
+ </text>
+
+ <group>
+  <layout>hbox</layout>
+  <checkbox>
+   <label>Pause Sound</label>
+   <property>/sim/sound/pause</property>
+  </checkbox>
+ </group>
+
+ <group>
+  <layout>hbox</layout>
+  <text><label>Volume:</label></text>
+  <slider>
+   <width>75</width>
+   <height>25</height>
+   <property>/sim/sound/volume</property>
+  </slider>
+ </group>
+
+  <group>
+    <layout>hbox</layout>
+    <default-padding>10</default-padding>
+
+    <button>
+      <legend>Dismiss</legend>
+      <equal>true</equal>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+      <default>true</default>
+    </button>
+  </group>
+
+</PropertyList>

@@ -9,7 +9,6 @@
   <flight-model>ufo</flight-model>
 
   <sound>
-   <audible>true</audible>
    <path>Aircraft/ufo/ufo-sound.xml</path>
   </sound>
 

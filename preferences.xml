@@ -46,7 +46,8 @@ Started September 2000 by David Megginson, david@megginson.com
   </rendering>
   <model-hz type="int">120</model-hz>
   <sound>
-   <audible type="bool">true</audible>
+   <pause type="bool">false</pause>
+   <volume type="double">1.0</volume>
    <voice type="bool">true</voice>
   </sound>
   <speed-up type="double">1.0</speed-up>

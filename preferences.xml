@@ -16,7 +16,7 @@ Started September 2000 by David Megginson, david@megginson.com
   <flight-model>1</flight-model>
   <aircraft>c172</aircraft>
   <panel>
-   <path>Panels/Default/default.xml</path>
+   <path>Aircraft/c172/Panels/default.xml</path>
    <visibility>true</visibility>
   </panel>
   <hud>

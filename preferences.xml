@@ -13,8 +13,21 @@ Started September 2000 by David Megginson, david@megginson.com
  <!-- General simulation preferences -->
 
  <sim>
-  <flight-model>1</flight-model>
+  <startup>
+   <xsize>800</xsize>
+   <ysize>600</ysize>
+   <splash-screen>true</splash-screen>
+   <intro-music>true</intro-music>
+   <game-mode>false</game-mode>
+   <airport-id>KSFO</airport-id>
+   <fullscreen>false</fullscreen>
+   <units>feet</units>
+  </startup>
+  <flight-model>larcsim</flight-model>
   <aircraft>c172</aircraft>
+  <model-hz>120</model-hz>
+  <sound>true</sound>
+  <speed-up>1.0</speed-up>
   <panel>
    <path>Aircraft/c172/Panels/c172-panel.xml</path>
    <visibility>true</visibility>
@@ -29,7 +42,6 @@ Started September 2000 by David Megginson, david@megginson.com
  <!-- Position -->
 
  <position>
-  <airport-id>KSFO</airport-id>
   <!-- <longitude>-110.6642444</longitude> -->
   <!-- <latitude>33.3528917</latitude> -->
   <altitude>-9999</altitude>
@@ -64,7 +76,7 @@ Started September 2000 by David Megginson, david@megginson.com
  <!-- Controls -->
 
  <controls>
-  <mixture>0.8</mixture>
+  <mixture>1.0</mixture>
  </controls>
 
 

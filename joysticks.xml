@@ -39,6 +39,7 @@ Joystick binding definitions.
  <js-named include="Input/Joysticks/Saitek/X45.xml"/>
  <js-named include="Input/Joysticks/Saitek/X8-30.xml"/>
  <js-named include="Input/Joysticks/Saitek/Cyborg-Gold-3d-USB.xml"/>
+ <js-named include="Input/Joysticks/Saitek/Cyborg-Evo.xml"/>
  <js-named include="Input/Joysticks/Saitek/Cyborg-3d-Rumble-Force.xml"/>
 
  <!-- ThrustMaster devices -->

@@ -31,12 +31,12 @@ Started September 2000 by David Megginson, david@megginson.com
   <speed-up>1.0</speed-up>
   <field-of-view>55.0</field-of-view>
   <panel>
-   <path>Aircraft/c172/Panels/c172-panel.xml</path>
+   <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
    <y-offset>-305</y-offset>
    <visibility>true</visibility>
   </panel>
   <panel_2>
-   <path>Aircraft/c172/Panels/c172-panel-trans-mini.xml</path>
+   <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
    <y-offset>-305</y-offset>
    <visibility>true</visibility>
   </panel_2>

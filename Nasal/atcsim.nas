@@ -73,20 +73,20 @@ dme_working = func {
 }
 
 navcom1_has_power = func {
-    if ( getprop("/systems/electrical/outputs/navcom[0]") < 1.0 ) {
+    if ( getprop("/systems/electrical/outputs/nav[0]") < 1.0 ) {
         return 0;
     }
-    if ( !getprop("/instrumentation/comm[0]/inputs/power-btn") ) {
+    if ( !getprop("/instrumentation/nav[0]/power-btn") ) {
         return 0;
     }
     return 1;
 }
 
 navcom2_has_power = func {
-    if ( getprop("/systems/electrical/outputs/navcom[1]") < 1.0 ) {
+    if ( getprop("/systems/electrical/outputs/nav[1]") < 1.0 ) {
         return 0;
     }
-    if ( !getprop("/instrumentation/comm[1]/inputs/power-btn") ) {
+    if ( !getprop("/instrumentation/nav[1]/power-btn") ) {
         return 0;
     }
     return 1;

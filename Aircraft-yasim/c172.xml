@@ -1,0 +1,78 @@
+<airplane mass="1950">
+
+<!-- Approach configuration -->
+<approach speed="40" aoa="16">
+  <control axis="/controls/throttle[0]" value="0.3"/>
+  <control axis="/controls/mixture[0]" value="1.0"/>
+  <control axis="/controls/flaps" value="1.0"/>
+</approach>
+
+<!-- Cruise configuration -->
+<cruise speed="115" alt="8000">
+  <control axis="/controls/throttle[0]" value="1.0"/>
+  <control axis="/controls/mixture[0]" value="1.0"/>
+  <control axis="/controls/flaps" value="0.0"/>
+</cruise>
+
+<cockpit x="-1.88" y=".33" z="0.6"/>
+
+<fuselage ax="-.17" ay="0" az="-.51" bx="-7.16" by="0" bz=".17" width="1"/>
+
+<!-- Extra fuselage to handle the "bulge" at the front -->
+<fuselage ax="-1.36" ay="0" az=".17" bx="-4.09" by="0" bz=".17" width="1"/>
+
+<wing x="-2.47" y=".51" z=".68" taper=".78"
+      length="5.37" chord="1.54" sweep="0" dihedral="0" camber="0.1">
+  <stall aoa="16" width="4" peak="1.5"/>
+  <flap0 start="0" end=".38" lift="1.6" drag="2.0"/>
+  <flap1 start=".78" end="1" lift="1.5" drag="1.6"/>
+  <control axis="/controls/flaps" output="FLAP0"/>
+  <control axis="/controls/aileron" output="FLAP1" split="true"/>
+</wing>
+
+<hstab x="-7.16" y="0.08" z=".17" taper=".63" effectiveness="2"
+       length="1.71" chord="1.36" sweep="0">
+  <stall aoa="16" width="4" peak="1.5"/>
+  <flap0 start="0" end="1" lift="1.6" drag="1.8"/>
+  <control axis="/controls/elevator" output="FLAP0"/>
+  <control axis="/controls/elevator-trim" output="FLAP0"/>
+</hstab>
+
+<vstab x="-7.16" y="0" z=".17" taper=".5" effectiveness="3"
+       length="1.71" chord="1.54" sweep="20">
+  <stall aoa="16" width="4" peak="1.5"/>
+  <flap0 start="0" end="1" lift="1.3" drag="1.5"/>
+  <control axis="/controls/rudder" output="FLAP0" invert="true" square="true"/>
+</vstab>
+
+<propeller radius="1.0"
+	   cruise-speed="86" cruise-rpm="2200"
+           cruise-alt="10000" cruise-power="99"
+           takeoff-power="180" takeoff-rpm="2500"
+           eng-power="180" eng-rpm="2500"
+           x="-.6" y="0" z="0" mass="400" moment="11">
+  <actionpt x="0" y="0" z="0"/>
+  <control axis="/controls/throttle[0]" output="THROTTLE"/>
+  <control axis="/controls/mixture[0]" output="MIXTURE"/>
+</propeller>
+
+<gear x="-1" y="0" z="-1.5" compression=".4"> <!-- nose -->
+  <control axis="/controls/rudder" output="STEER"/>
+</gear>
+
+<gear x="-2.73" y="1.15" z="-1.36" compression=".3"> <!-- left main -->
+  <control axis="/controls/brakes[0]" output="BRAKE"/>
+</gear>
+
+<gear x="-2.73" y="-1.15" z="-1.36" compression=".3"> <!-- left main -->
+  <control axis="/controls/brakes[1]" output="BRAKE"/>
+</gear>
+
+<tank x="-2.47" y="1.36" z=".68" capacity="75"/> 
+<tank x="-2.47" y="-1.36" z=".68" capacity="75"/> 
+
+<ballast x="-2.0" y=".33" z="0" mass="180"/> <!-- pilot -->
+<ballast x="-2.0" y="-.33" z="0" mass="180"/> <!-- passenger -->
+<ballast x="-1.0" y="-.33" z="0" mass="200"/> <!-- cockpit -->
+
+</airplane>

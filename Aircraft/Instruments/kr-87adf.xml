@@ -737,7 +737,7 @@ properties' values.
   </action>
   
  <action>
-   <name>timer set hours down</name>
+   <name>timer set minutes down</name>
    <button>1</button>
    <x>89</x>
    <y>-12</y>
@@ -760,7 +760,7 @@ properties' values.
   </action>
 
   <action>
-   <name>timer set hours up</name>
+   <name>timer set minutes up</name>
    <button>1</button>
    <x>100</x>
    <y>-12</y>

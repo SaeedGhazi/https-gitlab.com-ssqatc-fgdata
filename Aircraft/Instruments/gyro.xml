@@ -50,8 +50,6 @@ properties' values.
     <transformation>
      <type>rotation</type>
      <property>/instrumentation/heading-indicator/indicated-heading-deg</property>
-     <min>-720.0</min>
-     <max>720.0</max>
      <scale>-1.0</scale>
     </transformation>
    </transformations>
@@ -166,7 +164,7 @@ properties' values.
     </transformations>
   </layer>
 
- <layer>
+  <layer>
    <name>Heading Knob</name>
    <texture>
     <path>Aircraft/Instruments/Textures/blister.rgb</path>
@@ -188,10 +186,12 @@ properties' values.
     </transformation>
     <transformation>
      <type>rotation</type>
-     <offset>180</offset>
+     <property>/autopilot/settings/heading-bug-deg</property>
+     <scale>5.0</scale>
     </transformation>
    </transformations>
   </layer>
+
   <layer>
    <name>Heading label</name>
    <texture>
@@ -215,11 +215,12 @@ properties' values.
     <transformation>
      <type>rotation</type>
      <property>/autopilot/settings/heading-bug-deg</property>
+     <scale>5.0</scale>
     </transformation>
    </transformations>
   </layer>
 
- <layer>
+  <layer>
    <name>OBS Knob</name>
    <texture>
     <path>Aircraft/Instruments/Textures/blister.rgb</path>
@@ -241,7 +242,8 @@ properties' values.
     </transformation>
     <transformation>
      <type>rotation</type>
-     <offset>180</offset>
+     <property>/instrumentation/heading-indicator/indicated-heading-deg</property>
+     <scale>5.0</scale>
     </transformation>
    </transformations>
   </layer>
@@ -269,12 +271,11 @@ properties' values.
     <transformation>
      <type>rotation</type>
      <property>/instrumentation/heading-indicator/indicated-heading-deg</property>
-     <min>0</min>
-     <max>360</max>
+     <scale>5.0</scale>
     </transformation>
    </transformations>
   </layer>
-</layers>
+ </layers>
 
  <actions>
 

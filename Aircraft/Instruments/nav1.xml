@@ -117,14 +117,14 @@ properties' values.
    </transformations>
   </layer>
 
- <layer>
+  <layer>
    <name>pivoting vertical needle</name>
-  <condition>
-   <equals>
-   <property alias="../../../../../params/nav-needles-pivot"/>
-   <value>1</value>
-   </equals>
-  </condition>
+   <condition>
+    <equals>
+    <property alias="../../../../../params/nav-needles-pivot"/>
+    <value>1</value>
+    </equals>
+   </condition>
    <texture>
     <path>Aircraft/Instruments/Textures/misc-1.rgb</path>
     <x1>0.439</x1>
@@ -153,14 +153,14 @@ properties' values.
    </transformations>
   </layer>
 
- <layer>
+  <layer>
    <name>arcing vertical needle</name>
-  <condition>
-   <equals>
-   <property alias="../../../../../params/nav-needles-pivot"/>
-   <value>0</value>
-   </equals>
-  </condition>
+   <condition>
+    <equals>
+    <property alias="../../../../../params/nav-needles-pivot"/>
+    <value>0</value>
+    </equals>
+   </condition>
    <texture>
     <path>Aircraft/Instruments/Textures/misc-1.rgb</path>
     <x1>0.439</x1>
@@ -181,48 +181,48 @@ properties' values.
    </transformations>
   </layer>
 
- <layer>
-  <name>pivoting glidescope needle</name>
-  <condition>
-   <equals>
-   <property alias="../../../../../params/nav-has-gs-needle"/>
-   <value>1</value>
-   </equals>
-   <equals>
-   <property alias="../../../../../params/nav-needles-pivot"/>
-   <value>1</value>
-   </equals>
-  </condition>
-  <texture>
-   <path>Aircraft/Instruments/Textures/misc-1.rgb</path>
-   <x1>0.439</x1>
-   <y1>0.5</y1>
-   <x2>0.4575</x2>
-   <y2>1.0</y2>
-  </texture>
-  <w>6</w>
-  <h>64</h>
-  <transformations>
-   <transformation>
-    <type>x-shift</type>
-    <offset>-32</offset>
-   </transformation> 
-   <transformation>
-    <type>rotation</type>
-    <property alias="../../../../../params/nav-gs-needle-deflection"/>
-    <min>-3.5</min>
-    <max>3.5</max>
-    <scale>-7</scale>
-   </transformation>
-   <transformation>
-    <type>x-shift</type>
-    <offset>32</offset>
-   </transformation> 
-   <transformation>
-    <type>rotation</type>
-    <offset>90</offset>
-   </transformation>
-  </transformations>
+  <layer>
+   <name>pivoting glidescope needle</name>
+   <condition>
+    <equals>
+    <property alias="../../../../../params/nav-has-gs-needle"/>
+    <value>1</value>
+    </equals>
+    <equals>
+    <property alias="../../../../../params/nav-needles-pivot"/>
+    <value>1</value>
+    </equals>
+   </condition>
+   <texture>
+    <path>Aircraft/Instruments/Textures/misc-1.rgb</path>
+    <x1>0.439</x1>
+    <y1>0.5</y1>
+    <x2>0.4575</x2>
+    <y2>1.0</y2>
+   </texture>
+   <w>6</w>
+   <h>64</h>
+   <transformations>
+    <transformation>
+     <type>x-shift</type>
+     <offset>-32</offset>
+    </transformation> 
+    <transformation>
+     <type>rotation</type>
+     <property alias="../../../../../params/nav-gs-needle-deflection"/>
+     <min>-3.5</min>
+     <max>3.5</max>
+     <scale>-7</scale>
+    </transformation>
+    <transformation>
+     <type>x-shift</type>
+     <offset>32</offset>
+    </transformation> 
+    <transformation>
+     <type>rotation</type>
+     <offset>90</offset>
+    </transformation>
+   </transformations>
   </layer>
 
  <layer>
@@ -276,76 +276,77 @@ properties' values.
   </layer>
 
   <layer>
-  <name>bezel</name>
-  <condition>
-   <not-equals>
-    <property>/sim/aero</property>
-    <value>c310u3a</value>
-   </not-equals>
-  </condition>
-  <texture>
-   <path>Aircraft/Instruments/Textures/bezel.rgb</path>
-   <x1>0.0</x1>
-   <y1>0.0</y1>
-   <x2>1.0</x2>
-   <y2>1.0</y2>
-  </texture>
-  <transformations>
-   <transformation>
-   <type>x-shift</type>
-   <offset>-1</offset>
-   </transformation>
-  </transformations>
- </layer>
-
-  <layer>
-  <name>glare shield</name>
-  <texture>
-    <path>Aircraft/Instruments/Textures/bezel1.rgb</path>
-    <x1>0.5</x1>
+   <name>bezel</name>
+   <condition>
+    <not-equals>
+     <property>/sim/aero</property>
+     <value>c310u3a</value>
+    </not-equals>
+   </condition>
+   <texture>
+    <path>Aircraft/Instruments/Textures/bezel.rgb</path>
+    <x1>0.0</x1>
     <y1>0.0</y1>
     <x2>1.0</x2>
-    <y2>0.5</y2>
-  </texture>
-  <w>124</w>
-  <h>124</h>
-  <transformations>
-   <transformation>
+    <y2>1.0</y2>
+   </texture>
+   <transformations>
+    <transformation>
     <type>x-shift</type>
-    <offset>2</offset>
-   </transformation>
-   <transformation>
-    <type>y-shift</type>
-    <offset>-2</offset>
-   </transformation>
-  </transformations>
+    <offset>-1</offset>
+    </transformation>
+   </transformations>
   </layer>
 
   <layer>
-  <name>OBS Knob</name>
-  <texture>
-   <path>Aircraft/Instruments/Textures/blister.rgb</path>
-   <x1>0.25</x1>
-   <y1>0.75</y1>
-   <x2>0.5</x2>
-   <y2>1.0</y2>
-  </texture>
-  <h>24</h>
-  <w>24</w>
-  <transformations>
-   <transformation>
-    <type>x-shift</type>
-    <offset>-45</offset>
-   </transformation>
-   <transformation>
-    <type>y-shift</type>
-    <offset>-45</offset>
-   </transformation>
-   <transformation>
-    <type>rotation</type>
-    <offset>180</offset>
-   </transformation>
-  </transformations>
+   <name>glare shield</name>
+   <texture>
+     <path>Aircraft/Instruments/Textures/bezel1.rgb</path>
+     <x1>0.5</x1>
+     <y1>0.0</y1>
+     <x2>1.0</x2>
+     <y2>0.5</y2>
+   </texture>
+   <w>124</w>
+   <h>124</h>
+   <transformations>
+    <transformation>
+     <type>x-shift</type>
+     <offset>2</offset>
+    </transformation>
+    <transformation>
+     <type>y-shift</type>
+     <offset>-2</offset>
+    </transformation>
+   </transformations>
+  </layer>
+
+  <layer>
+   <name>OBS Knob</name>
+   <texture>
+    <path>Aircraft/Instruments/Textures/blister.rgb</path>
+    <x1>0.25</x1>
+    <y1>0.75</y1>
+    <x2>0.5</x2>
+    <y2>1.0</y2>
+   </texture>
+   <h>24</h>
+   <w>24</w>
+   <transformations>
+    <transformation>
+     <type>x-shift</type>
+     <offset>-45</offset>
+    </transformation>
+    <transformation>
+     <type>y-shift</type>
+     <offset>-45</offset>
+    </transformation>
+    <transformation>
+     <type>rotation</type>
+     <property alias="../../../../../params/nav-radial-selected"/>
+     <scale>5</scale>
+    </transformation>
+   </transformations>
   </layer>
 
   <layer>
@@ -371,8 +372,7 @@ properties' values.
     <transformation>
      <type>rotation</type>
      <property alias="../../../../../params/nav-radial-selected"/>
-     <min>0</min>
-     <max>360</max>
+     <scale>5</scale>
     </transformation>
    </transformations>
   </layer>

@@ -706,6 +706,7 @@ EvergreenBroadCover {
   texture = Terrain/forest1.rgb
   xsize = 1000
   ysize = 1000
+  light-coverage = 10000000.0
   ambient = 0.14 0.28 0.13 1.0
   diffuse = 0.14 0.28 0.13 1.0
   specular = 0.0 0.0 0.0 1.0
@@ -719,6 +720,7 @@ DeciduousBroadCover {
   texture = Terrain/deciduous.rgb
   xsize = 500
   ysize = 500
+  light-coverage = 10000000.0
   ambient = 0.14 0.28 0.13 1.0
   diffuse = 0.14 0.28 0.13 1.0
   specular = 0.0 0.0 0.0 1.0
@@ -729,6 +731,7 @@ MixedForestCover {
   texture = Terrain/mixedforest.rgb
   xsize = 1000
   ysize = 1000
+  light-coverage = 5000000.0
   ambient = 0.14 0.28 0.13 1.0
   diffuse = 0.14 0.28 0.13 1.0
   specular = 0.0 0.0 0.0 1.0
@@ -739,6 +742,7 @@ EvergreenNeedleCover {
   texture = Terrain/evergreen.rgb
   xsize = 1000
   ysize = 1000
+  light-coverage = 10000000.0
   ambient = 0.14 0.28 0.13 1.0
   diffuse = 0.14 0.28 0.13 1.0 
   specular = 0.0 0.0 0.0 1.0
@@ -750,16 +754,30 @@ DeciduousNeedleCover {
   texture = Terrain/dec_evergreen.rgb
   xsize = 1000
   ysize = 1000
+  light-coverage = 10000000.0
   ambient = 0.14 0.28 0.13 1.0
   diffuse = 0.14 0.28 0.13 1.0 
   specular = 0.0 0.0 0.0 1.0
   emissive = 0.0 0.0 0.0 1.0
 }
 
+ShrubCover {
+  texture = Terrain/desert1.rgb
+  xsize = 500
+  ysize = 500
+  light-coverage = 20000000.0
+  ambient = 0.60 0.54 0.60 1.0
+  diffuse = 0.60 0.54 0.60 1.0
+  specular = 0.0 0.0 0.0 1.0
+  emissive = 0.0 0.0 0.0 1.0
+}
+alias BareTundraCover IntermittentLake
+
 Urban {
   texture = Terrain/resgrid.rgb
   xsize = 1024
   ysize = 1024
+  light-coverage = 100000.0
   ambient = 0.14 0.28 0.13 1.0
   diffuse = 0.14 0.28 0.13 1.0
   specular = 0.0 0.0 0.0 1.0
@@ -827,8 +845,6 @@ IntermittentLake {
   specular = 0.0 0.0 0.0 1.0
   emissive = 0.0 0.0 0.0 1.0
 }
-alias ShrubCover IntermittentLake
-alias BareTundraCover IntermittentLake
 
 DryLake {
   texture = Terrain/desert.rgb
@@ -839,7 +855,16 @@ DryLake {
   specular = 0.0 0.0 0.0 1.0
   emissive = 0.0 0.0 0.0 1.0
 }
-alias BarrenCover DryLake
+
+BarrenCover {
+  texture = Terrain/rocks-desert.rgb
+  xsize = 500
+  ysize = 500
+  ambient = 0.60 0.54 0.40 1.0
+  diffuse = 0.60 0.54 0.40 1.0
+  specular = 0.0 0.0 0.0 1.0
+  emissive = 0.0 0.0 0.0 1.0
+}
 
 Reservoir {
   texture = Terrain/water.rgb
@@ -875,6 +900,7 @@ Marsh {
   texture = Terrain/marsh1.rgb
   xsize = 1000
   ysize = 1000
+  light-coverage = 40000000.0
   ambient = 0.23 0.35 0.12 1.0
   diffuse = 0.23 0.35 0.12 1.0
   specular = 0.0 0.0 0.0 1.0
@@ -888,6 +914,7 @@ Grass {
   texture = Terrain/grass.rgb
   xsize = 200
   ysize = 200
+  light-coverage = 4000000.0
   ambient = 0.45 0.46 0.31 1.0
   diffuse = 0.45 0.46 0.31 1.0
   specular = 0.0 0.0 0.0 1.0
@@ -903,6 +930,7 @@ MixedCropPastureCover {
   texture = Terrain/mixedcrop.rgb
   xsize = 2000
   ysize = 2000
+  light-coverage = 2000000.0
   ambient = 0.45 0.46 0.31 1.0
   diffuse = 0.45 0.46 0.31 1.0
   specular = 0.0 0.0 0.0 1.0
@@ -913,6 +941,7 @@ IrrCropPastureCover {
   texture = Terrain/irrcrop.rgb
   xsize = 2000
   ysize = 2000
+  light-coverage = 2000000.0
   ambient = 0.45 0.46 0.31 1.0
   diffuse = 0.45 0.46 0.31 1.0
   specular = 0.0 0.0 0.0 1.0
@@ -923,6 +952,7 @@ DryCropPastureCover {
   texture = Terrain/drycrop.rgb
   xsize = 2000
   ysize = 2000
+  light-coverage = 2000000.0
   ambient = 0.45 0.46 0.31 1.0
   diffuse = 0.45 0.46 0.31 1.0
   specular = 0.0 0.0 0.0 1.0
@@ -933,6 +963,7 @@ CropGrassCover {
   texture = Terrain/cropgrass.rgb
   xsize = 2000
   ysize = 2000
+  light-coverage = 2000000.0
   ambient = 0.45 0.46 0.31 1.0
   diffuse = 0.45 0.46 0.31 1.0
   specular = 0.0 0.0 0.0 1.0
@@ -943,6 +974,7 @@ CropWoodCover {
   texture = Terrain/cropwood.rgb
   xsize = 2000
   ysize = 2000
+  light-coverage = 2000000.0
   ambient = 0.14 0.28 0.13 1.0
   diffuse = 0.14 0.28 0.13 1.0
   specular = 0.0 0.0 0.0 1.0

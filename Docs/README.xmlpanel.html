@@ -580,7 +580,10 @@ This example is a switch that contains both static and dynamic text:
 </pre>
 <br>
 Note that the value to be displayed can be modified using &lt;scale&gt; for multiplication, 
-&lt;offset&gt; for addition, and &lt;truncate&gt;true&lt;/truncate&gt; for truncation.
+&lt;offset&gt; for addition, and &lt;truncate&gt;true&lt;/truncate&gt; for truncation.  The order of
+operation is always scale-offset-truncation, which may require you to adapt your formula.  For instance, the
+normal conversion from Fahrenheit to Celsius would be C = (F-32)*0.555555556.  Because of the order
+of operation above you must use the formula C = (F*0.55555556)-17.77777777.
 <br>
 
 <HR WIDTH="20%">

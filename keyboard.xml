@@ -320,6 +320,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <binding>
    <command>property-adjust</command>
    <property>/sim/speed-up</property>
+   <min>1</min>
    <step type="double">-1</step>
   </binding>
  </key>
@@ -425,6 +426,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <binding>
    <command>property-adjust</command>
    <property>/sim/speed-up</property>
+   <min>1</min>
    <step type="double">1</step>
   </binding>
  </key>

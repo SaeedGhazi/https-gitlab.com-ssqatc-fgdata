@@ -35,7 +35,7 @@
   <binding>
    <command>property-scale</command>
    <property>/controls/flight/aileron</property>
-   <squared>true</squared>
+   <power type="double">3</power>
   </binding>
  </axis>
 
@@ -45,7 +45,7 @@
    <command>property-scale</command>
    <property>/controls/flight/elevator</property>
    <factor type="double">-1.0</factor>
-   <squared>true</squared>
+   <power type="double">3</power>
   </binding>
  </axis>
 
@@ -63,82 +63,44 @@
    <offset type="double">-1.0</offset>
    <factor type="double">-0.5</factor>
   </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[2]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[3]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
  </axis>
 
  <axis n="3">
   <binding>
    <command>property-scale</command>
    <property>/controls/flight/rudder</property>
-   <factor>1.0</factor>
-   <offset>0.0</offset>
-   <squared>true</squared>
+   <power type="double">3</power>
   </binding>
  </axis>
 
  <axis n="4">
-  <binding>
-   <command>null</command>
-  </binding>
-  <low>
-   <repeatable>true</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/flight/elevator-trim</property>
-    <step>0.005</step>
-   </binding>
-  </low>
-  <high>
-   <repeatable>true</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/flight/elevator-trim</property>
-    <step>-0.005</step>
-   </binding>
-  </high>
+  <command>null</command>
  </axis>
 
  <axis n="5">
   <binding>
-   <command>null</command>
+   <command>property-scale</command>
+   <property>/sim/current-view/axes/lat</property>
   </binding>
-  <low>
-   <repeatable>true</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/sim/current-view/goal-heading-offset-deg</property>
-    <step>1</step>
-   </binding>
-  </low>
-  <high>
-   <repeatable>true</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/sim/current-view/goal-heading-offset-deg</property>
-    <step>-1</step>
-   </binding>
-  </high>
  </axis>
 
  <axis n="6">
   <binding>
-   <command>null</command>
+   <command>property-scale</command>
+   <property>/sim/current-view/axes/long</property>
   </binding>
-  <low>
-   <repeatable>true</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/sim/current-view/goal-pitch-offset-deg</property>
-    <step>1</step>
-   </binding>
-  </low>
-  <high>
-   <repeatable>true</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/sim/current-view/goal-pitch-offset-deg</property>
-    <step>-1</step>
-   </binding>
-  </high>
  </axis>
 
  <button n="0">
@@ -146,7 +108,7 @@
   <binding>
    <command>property-adjust</command>
    <property>/controls/flight/elevator-trim</property>
-   <step>-0.001</step>
+   <step type="double">-0.001</step>
   </binding>
   <binding>
    <command>null</command>

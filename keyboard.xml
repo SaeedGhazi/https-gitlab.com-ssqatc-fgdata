@@ -677,9 +677,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>Z</name>
   <desc>Decrease Visibility</desc>
   <binding>
-   <command>property-multiply</command>
-   <property>/environment/visibility-m</property>
-   <factor type="double">0.9090909090</factor>
+   <command>decrease-visibility</command>
   </binding>
  </key>
 
@@ -926,9 +924,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>z</name>
   <desc>Increase Visibility</desc>
   <binding>
-   <command>property-multiply</command>
-   <property>/environment/visibility-m</property>
-   <factor type="double">1.1</factor>
+   <command>increase-visibility</command>
   </binding>
  </key>
 

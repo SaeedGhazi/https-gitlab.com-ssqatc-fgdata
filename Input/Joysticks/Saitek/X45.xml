@@ -10,43 +10,43 @@ Only a few stick controls have been mapped here:
  + Stick button "A":    Gear toggle
  + Stick button "C":    Reset view (hackish)
 
-Axis Numbers:
-  0 Roll (positive == right)
-  1 Pitch (positive == down/back/nose-up)
-  2 top "rotary dial" on the throttle (positive == CCW)
-  3 Rocker switch ("rudder" control) on the throttle (positive == right)
-  4 Throttle (positive == back/down/idle)
-  5 Bottom "rotary dial" on the throttle (positive == CW)
-  6 Lower right hat horizontal axis (positive == right)
-  7 Lower right hat vertical axis (positive == down)
+Linux/Windows Axis Numbers:
+  0   Roll (positive == right)
+  1   Pitch (positive == down/back/nose-up)
+  2/5 top "rotary dial" on the throttle (positive == CCW)
+  3   Rocker switch ("rudder" control) on the throttle (positive == right)
+  4/2 Throttle (positive == back/down/idle)
+  5/4 Bottom "rotary dial" on the throttle (positive == CW)
+  6   Lower right hat horizontal axis (positive == right)
+  7   Lower right hat vertical axis (positive == down)
 
-Button Numbers:
- 0 Trigger
- 1 Stick top "A" switch
- 2 Stick top "B" switch
- 3 Stick top "launch/fire" switch
- 4 Throttle "D" switch
- 5 Throttle "mouse" switch (tiny black thumb button)
- 6 Stick "pinkie" switch
- 7 Stick front "C" switch
- 8 -+                                left position   ("M1")
- 9  +- Throttle "mode" 3-way switch: middle position ("M2")
-10 -+                                right position  ("M3")
-11 -+                                left position
-12  +- Throttle "Aux" 3-way switch:  middle position
-13 -+                                right position
-14 Upper left hat in "up" position
-15 Upper left hat in "right" position
-16 Upper left hat in "down" position
-17 Upper left hat in "left" position
-18 Throttle forefinger hat in "up/back" position
-19 Throttle forefinger hat in "right" position
-20 Throttle forefinger hat in "down/forward" position
-21 Throttle forefinger hat in "left" position
-22 Throttle thumb hat in "up" position
-23 Throttle thumb hat in "right" position
-24 Throttle thumb hat in "down" position
-25 Throttle thumb hat in "left" position
+Button Numbers (Identical b/w Linux/Windows):
+ 0  Trigger
+ 1  Stick top "A" switch
+ 2  Stick top "B" switch
+ 3  Stick top "launch/fire" switch
+ 4  Throttle "D" switch
+ 5  Throttle "mouse" switch (tiny black thumb button)
+ 6  Stick "pinkie" switch
+ 7  Stick front "C" switch
+ 8  -+                                left position   ("M1")
+ 9   +- Throttle "mode" 3-way switch: middle position ("M2")
+10  -+                                right position  ("M3")
+11  -+                                left position
+12   +- Throttle "Aux" 3-way switch:  middle position
+13  -+                                right position
+14  Upper left hat in "up" position
+15  Upper left hat in "right" position
+16  Upper left hat in "down" position
+17  Upper left hat in "left" position
+18  Throttle forefinger hat in "up/back" position
+19  Throttle forefinger hat in "right" position
+20  Throttle forefinger hat in "down/forward" position
+21  Throttle forefinger hat in "left" position
+22  Throttle thumb hat in "up" position
+23  Throttle thumb hat in "right" position
+24  Throttle thumb hat in "down" position
+25  Throttle thumb hat in "left" position
 
 $Id$
 -->
@@ -94,30 +94,6 @@ $Id$
   </binding>
  </axis>
 
- <axis n="4">
-  <desc>Throttle</desc>
-  <binding>
-   <command>nasal</command>
-   <script>controls.throttleAxis()</script>
-  </binding>
- </axis>
-
- <axis n="2">
-  <desc>Mixture</desc>
-  <binding>
-   <command>nasal</command>
-   <script>controls.mixtureAxis()</script>
-  </binding>
- </axis>
-
- <axis n="5">
-  <desc>Propeller Advance</desc>
-  <binding>
-   <command>nasal</command>
-   <script>controls.propellerAxis(-1)</script>
-  </binding>
- </axis>
-
  <!-- View Direction Hat -->
 
  <axis n="6">
@@ -154,6 +130,42 @@ $Id$
     <script>view.panViewPitch(-1)</script>
    </binding>
   </high>
+ </axis>
+
+ <axis>
+  <desc>Throttle</desc>
+  <number>
+   <unix>4</unix>
+   <windows>2</windows>
+  </number>
+  <binding>
+   <command>nasal</command>
+   <script>controls.throttleAxis()</script>
+  </binding>
+ </axis>
+
+ <axis>
+  <desc>Mixture</desc>
+  <number>
+   <unix>2</unix>
+   <windows>5</windows>
+  </number>
+  <binding>
+   <command>nasal</command>
+   <script>controls.mixtureAxis()</script>
+  </binding>
+ </axis>
+
+ <axis>
+  <desc>Propeller Advance</desc>
+  <number>
+   <unix>5</unix>
+   <windows>4</windows>
+  </number>
+  <binding>
+   <command>nasal</command>
+   <script>controls.propellerAxis(-1)</script>
+  </binding>
  </axis>
 
  <button n="7">

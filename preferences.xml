@@ -10,6 +10,13 @@ Started September 2000 by David Megginson, david@megginson.com
 
 <PropertyList>
 
+ <!-- this should not be touched, it defines the default
+      translations strings -->
+ <strings include="Translations/strings-default.xml"/>
+
+ <!-- replace with desired language -->
+ <strings include="Translations/strings-en.xml"/>
+
  <!-- General simulation preferences -->
  <sim>
   <font>Helvetica.txf</font>

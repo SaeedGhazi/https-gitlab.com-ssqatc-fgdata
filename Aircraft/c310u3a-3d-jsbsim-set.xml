@@ -49,13 +49,9 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
     <x-offset-m archive="y" type="double">-0.28</x-offset-m>
     <y-offset-m archive="y" type="double">0.65</y-offset-m>
     <z-offset-m archive="y" type="double">-0.10</z-offset-m>
-    <default-pitch-deg>-15</default-pitch-deg>
+    <pitch-offset-deg>-15</pitch-offset-deg>
    </config>
   </view>
-
-  <current-view>
-   <pitch-offset-deg>-15</pitch-offset-deg>
-  </current-view>
 
   <instrument-options>
    <dg>

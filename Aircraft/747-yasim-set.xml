@@ -42,6 +42,7 @@
      <x-offset-m archive="y">-0.38</x-offset-m>
      <y-offset-m archive="y">3.26</y-offset-m>
      <z-offset-m archive="y">-18.16</z-offset-m>
+     <pitch-offset-deg archive="y">-11.0</pitch-offset-deg>
    </config>
   </view>
   <view n="1">
@@ -50,10 +51,6 @@
      <z-offset-m type="double" archive="y">-90.0</z-offset-m>
    </config>
   </view>
-
-  <current-view>
-     <pitch-offset-deg archive="y">-11.0</pitch-offset-deg>
-  </current-view>
 
  </sim>
 

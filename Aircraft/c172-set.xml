@@ -36,6 +36,10 @@ October 23 2001 John Check, fgpanels@rockfish.net
    <path>Aircraft/c172/Models/c172-dpm.xml</path>
   </model>
 
+  <current-view>
+   <pitch-offset-deg>-8</pitch-offset-deg>
+  </current-view>
+
  </sim>
   
  <autopilot>

@@ -42,6 +42,10 @@ October 23 2001 John Check, fgpanels@rockfish.net
    </dg>
   </instrument-options> 
 
+  <current-view>
+   <pitch-offset-deg>-5</pitch-offset-deg>
+  </current-view>
+
  </sim>
 
  <autopilot>

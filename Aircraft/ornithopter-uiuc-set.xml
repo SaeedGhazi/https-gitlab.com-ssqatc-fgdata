@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+
+************************************************************************
+-->
+
+<PropertyList>
+
+ <sim>
+
+  <flight-model>larcsim</flight-model>
+  <aero>uiuc</aero>
+  <uiuc-type>uiuc-ornithopter</uiuc-type>
+  <aircraft-dir>Aircraft/UIUC/ornithopter</aircraft-dir>
+
+  <sound>
+   <audible>true</audible>
+   <path>Aircraft/ornithopter/Sounds/ornithopter-sound.xml</path>
+  </sound>
+
+  <panel>
+   <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
+   <visibility>true</visibility>
+  </panel>
+
+  <panel_2>
+   <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
+  </panel_2>
+
+  <model>
+   <path>Aircraft/ornithopter/Models/ornithopter-8-4-model.xml</path>
+  </model>
+
+ </sim>
+</PropertyList>

@@ -57,6 +57,16 @@
     <description>(i.e. for fullscreen Voodoo based cards)</description>
    </option>
    <option>
+    <name>disable-random-objects</name>
+    <description>Exclude random scenery objects</description>
+    <description>(buildings, etc.)</description>
+   </option>
+   <option>
+    <name>enable-random-objects</name>
+    <description>Include random scenery objects</description>
+    <description>(buildings, etc.)</description>
+   </option>
+   <option>
     <name>disable-freeze</name>
     <description>Start in a running state</description>
    </option>

@@ -26,6 +26,9 @@ Started September 2000 by David Megginson, david@megginson.com
    <trim type="bool">true</trim>
    <browser-app>netscape</browser-app><!--  help viewer -->
   </startup>
+  <rendering>
+   <random-objects>true</random-objects>
+  </rendering>
   <model-hz type="int">120</model-hz>
   <sound type="bool">true</sound>
   <speed-up type="double">1.0</speed-up>

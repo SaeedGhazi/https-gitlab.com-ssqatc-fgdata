@@ -86,7 +86,7 @@
            src0="0" src1="5" dst0="0" dst1="0.3"/>
 </thruster>
 <thruster x="-15" y="0" z="1" vx="0" vy="0" vz="1" thrust="200">
-  <control-input axis="/controls/f;ight/elevator" control="THROTTLE"
+  <control-input axis="/controls/flight/elevator" control="THROTTLE"
            src0="0" src1="1" dst0="0" dst1="1"/>
   <control-input axis="/orientation/pitch-rate-degps" control="THROTTLE"
            src0="0" src1="2" dst0="0" dst1="0.3"/>

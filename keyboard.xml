@@ -80,9 +80,11 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <value type="double">1.0</value>
   </binding>
   <mod-up>
+   <binding>
     <command>property-assign</command>
     <property>/controls/brakes[0]</property>
     <value type="double">0.0</value>
+   </binding>
   </mod-up>
  </key>
 
@@ -95,9 +97,11 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <value type="double">1.0</value>
   </binding>
   <mod-up>
+   <binding>
     <command>property-assign</command>
     <property>/controls/brakes[1]</property>
     <value type="double">0.0</value>
+   </binding>
   </mod-up>
  </key>
 

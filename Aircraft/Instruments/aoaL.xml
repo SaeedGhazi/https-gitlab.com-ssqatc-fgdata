@@ -7,7 +7,7 @@
   <layer>
    <name>gauge face</name>
    <texture>   
-    <path>Aircraft/Instruments/Textures/aoa.rgb</path>
+    <path>Aircraft/Instruments/Textures/aoaL.rgb</path>
     <x1>0</x1>
     <y1>0</y1>
     <x2>1</x2>

@@ -40,7 +40,7 @@
    </texture>
    <condition>
     <greater-than>
-     <property>/velocities/alpha-deg</property>
+     <property>/orientation/alpha-deg</property>
      <property>/sim/aoa-indexer/too-slow-deg</property>
     </greater-than>
    </condition>
@@ -59,11 +59,11 @@
    </texture>
    <condition>
     <less-than>
-     <property>/velocities/alpha-deg</property>
+     <property>/orientation/alpha-deg</property>
      <property>/sim/aoa-indexer/too-slow-deg</property>
     </less-than>
     <greater-than>
-     <property>/velocities/alpha-deg</property>
+     <property>/orientation/alpha-deg</property>
      <property>/sim/aoa-indexer/slow-deg</property>
     </greater-than>
    </condition>
@@ -82,11 +82,11 @@
    </texture>
    <condition>
     <less-than>
-     <property>/velocities/alpha-deg</property>
+     <property>/orientation/alpha-deg</property>
      <property>/sim/aoa-indexer/slow-deg</property>
     </less-than>
     <greater-than>
-     <property>/velocities/alpha-deg</property>
+     <property>/orientation/alpha-deg</property>
      <property>/sim/aoa-indexer/fast-deg</property>
     </greater-than>
    </condition>
@@ -105,11 +105,11 @@
    </texture>
    <condition>
     <less-than>
-     <property>/velocities/alpha-deg</property>
+     <property>/orientation/alpha-deg</property>
      <property>/sim/aoa-indexer/fast-deg</property>
     </less-than>
     <greater-than>
-     <property>/velocities/alpha-deg</property>
+     <property>/orientation/alpha-deg</property>
      <property>/sim/aoa-indexer/too-fast-deg</property>
     </greater-than>
    </condition>
@@ -128,7 +128,7 @@
    </texture>
    <condition>
     <less-than>
-     <property>/velocities/alpha-deg</property>
+     <property>/orientation/alpha-deg</property>
      <property>/sim/aoa-indexer/too-fast-deg</property>
     </less-than>
    </condition>

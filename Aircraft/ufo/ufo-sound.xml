@@ -23,6 +23,18 @@
   </engine>
 -->
 
+  <engine>
+   <name>engine</name>
+   <mode>looped</mode>
+   <path>Aircraft/ufo/engine.wav</path>
+   <property>/velocities/airspeed-kt</property>
+   <pitch>
+    <property>/velocities/airspeed-kt</property>
+    <factor>0.00005</factor>
+    <offset>3.0</offset>
+   </pitch>
+  </engine>
+
   <wind>
    <name>wind</name>
    <mode>looped</mode>

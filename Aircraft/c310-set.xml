@@ -31,6 +31,12 @@ October 23 2001 John Check, fgpanels@rockfish.net
    <path>Aircraft/c310/Models/cessna310r.ac</path>
   </model> 
 
+  <instrument-options>
+   <dg>
+    <style>1</style>
+   </dg>
+  </instrument-options> 
+
  </sim>
 
 </PropertyList>

@@ -206,7 +206,7 @@ adjEngControl = func {
 # arg[1] is the auto-throttle target speed increment
 incThrottle = func {
     auto = props.globals.getNode("/autopilot/locks/speed", 1);
-    if ( !auto.getValue() or auto.getValue() == "" ) {
+    if ( !auto.getValue() ) {
       engs = props.globals.getNode("/controls/engines").getChildren("engine");
       foreach(e; engs) {
         node = e.getNode("throttle", 1);
@@ -235,7 +235,7 @@ incThrottle = func {
 # arg[1] is the autopilot target heading increment
 incAileron = func {
     auto = props.globals.getNode("/autopilot/locks/heading", 1);
-    if ( !auto.getValue() or auto.getValue() == "" ) {
+    if ( !auto.getValue() ) {
       aileron = props.globals.getNode("/controls/flight/aileron");
       if ( aileron.getValue() == nil ) {
         aileron.setValue( 0.0 );

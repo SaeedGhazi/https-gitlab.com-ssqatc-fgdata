@@ -2,39 +2,36 @@
      couldn't find much 'hard' information so a lot of this fdm is
      guess work (GW).
 -->
-<!-- Max take off weight is 64000lb so I'm allocating 4xAIM-9,
-     4x AIM-120, pilot and fuel and adding them as ballast entries
-     until I sort out correct weight entries.
+<!-- Max take off wieght is 64000lb but I imagine that this
+     includes some weapons so I'm allocating 8000lb to his and
+     subtracting it from the max wieght.
 
-     GW figures for these are
-
-     Aim-9      200lb x 4 =  8000lb
-     AIM-120    400lb x 4 = 16000lb
-     Pilot      200lb x 1 =   200lb
-
-     Fuel     24000lb x 1 = 24000lb (from a web-site)
+     I got a figure of 24000lb for the fuel load from a web site.
+     this seems rather high to me but until I can get a better
+     figure it'll have to do.
 -->
-<airplane mass="40000">
+<airplane mass="32000">
 
 <!-- Approach configuration -->
 <!-- From GW & photos -->
- <approach speed="110" aoa="7">
+ <approach speed="130" aoa="5">
   <control-setting axis="/controls/engines/engine[0]/throttle" value="0.05"/>
   <control-setting axis="/controls/engines/engine[1]/throttle" value="0.05"/>
-  <control-setting axis="/controls/flight/flaps" value="0.7"/>
-<!--
-  <control-setting axis="/controls/flight/slats" value="0.3"/>
--->
+  <control-setting axis="/controls/engines/engine[0]/afterburner" value="0"/>
+  <control-setting axis="/controls/engines/engine[1]/afterburner" value="0"/>
+  <control-setting axis="/controls/flight/flaps" value="1"/>
+  <control-setting axis="/controls/flight/slats" value="0"/>
   <control-setting axis="/controls/gear/gear-down" value="1"/>
  </approach>
 
 <!-- Cruise configuration -->
- <cruise speed="900" alt="35000">
-  <control-setting axis="/controls/engines/engine[0]/throttle" value="1.0"/>
+ <cruise speed="900" alt="45000">
+  <control-setting axis="/controls/engines/engine[0]/throttle" value="1"/>
+  <control-setting axis="/controls/engines/engine[1]/throttle" value="1"/>
+  <control-setting axis="/controls/engines/engine[0]/afterburner" value="0"/>
+  <control-setting axis="/controls/engines/engine[1]/afterburner" value="0"/>
   <control-setting axis="/controls/flight/flaps" value="0.0"/>
-<!--
-  <control-setting axis="/controls/flight/slats" value="0.0"/>
--->
+  <control-setting axis="/controls/flight/slats" value="0"/>
   <control-setting axis="/controls/gear/gear-down" value="0"/>
  </cruise>
 
@@ -45,60 +42,64 @@
      these three fuselage/housings, and the elevator.  For
      this reason I've started the wings from the center-line.
 -->
-<!-- Fuselage proper -->
+<!-- Fuselage -->
  <fuselage ax="10.00" ay="0.00" az="0.00"
           bx="-2.00" by="0.00" bz="0.00"
-          width="1.6" taper="0.1" midpoint="0.3"/>
+          width="1.6" taper="0.5" midpoint="0.5"/>
 
-<!-- Left engine housing (Excl intakes) -->
+<!-- Left engine housing -->
+
  <fuselage ax="-2.00" ay="1.80" az="0.00"
           bx="-8.00" by="1.20" bz="0.60"
-          width="1.2" taper="0.1" midpoint="0.3"/>
+          width="1.2" taper="0" midpoint="0.3"/>
 
-<!-- Right engine housing (Excl intakes) -->
+<!-- Right engine housing -->
+
  <fuselage ax="-2.00" ay="-1.80" az="0.00"
           bx="-8.00" by="-1.20" bz="0.60"
-          width="1.2" taper="0.1" midpoint="0.3"/>
+          width="1.2" taper="0" midpoint="0.3"/>
 
 <!-- GW stall characteristics -->
- <wing x="-2.00" y="0.00" z="0.25" length="6.66" chord="12.00"
-      taper="0.08" sweep="0" dihedral="0" camber="0.0">
-  <stall aoa="25" width="15" peak="1.3"/>
-  <flap0 start="0.36" end="0.63" lift="1.2" drag="1.4"/>
-  <flap1 start="0.63" end="0.89" lift="1.1" drag="1.1"/>
 <!--
+ <wing x="-2.00" y="0.00" z="0.25" length="6.66" chord="12.00"
+      taper="0.08" sweep="0" dihedral="0" camber="0" incidence="-0.4">
+  <stall aoa="35" width="3" peak="1.3"/>
+  <flap0 start="0.36" end="0.63" lift="1.1" drag="1.8"/>
+  <flap1 start="0.63" end="0.89" lift="1.1" drag="1.3"/>
   <slat start="0.42" end="0.89" aoa="3" drag="1.1"/>
 -->
+ <wing x="-2.00" y="2.40" z="0.25" length="4.2" chord="8.1"
+      taper="0.19" sweep="0" dihedral="0" camber="0.0" incidence="0.0">
+  <stall aoa="41" width="3" peak="1.3"/>
+  <flap0 start="0.0" end="0.42" lift="1.5" drag="1.5"/>
+  <flap1 start="0.42" end="0.833" lift="1.1" drag="1.3"/>
+  <slat start="0.14" end="0.833" aoa="3" drag="1.1"/>
   <control-input axis="/controls/flight/flaps" control="FLAP0"/>
   <control-input axis="/controls/flight/aileron" control="FLAP1" split="true"/>
-<!--
-  <control-input axis="/controls/flight/slats" control="SLAT"/>
--->
   <control-input axis="/controls/flight/aileron-trim" control="FLAP1" split="true"/>
+  <control-input axis="/controls/flight/slats" control="SLAT"/>
 
   <control-output control="FLAP0" prop="/surface-positions/flap-pos-norm"/>
-  <control-output control="FLAP1" side="left"  prop="/surface-positions/left-aileron-pos-norm"/>
-  <control-output control="FLAP1" side="right" prop="/surface-positions/right-aileron-pos-norm"/>
-<!--
-  <control-output control="SLAT" side="left"   prop="/surface-positions/left-slat-pos-norm"/>
-  <control-output control="SLAT" side="right"  prop="/surface-positions/right-slat-pos-norm"/>
--->
-  <control-speed control="FLAP0" transition-time="10"/>
+  <control-output control="FLAP1" side="left"
+  		prop="/surface-positions/left-aileron-pos-norm"/>
+  <control-output control="FLAP1" side="right"
+  		prop="/surface-positions/right-aileron-pos-norm"/>
+
+  <control-speed control="FLAP0" transition-time="2"/>
   <control-speed control="FLAP1" transition-time="0.5"/>
+  <control-output control="SLAT" prop="/surface-positions/slat-pos-norm"/>
 
  </wing>
 
- <hstab x="-8.60" y="2.40" z="0.36" length="3.30" chord="5.10"
-       taper="0.11" sweep="0" dihedral="40" effectiveness="2.5">
-  <stall aoa="22" width="15" peak="1.3"/>
-  <flap0 start="0" end="1" lift="1.2" drag="1.2"/>
+ <hstab x="-8.70" y="2.40" z="0.36" length="3.30" chord="5.10"
+       taper="0.11" sweep="0" dihedral="40" camber="0.0" effectiveness="1">
+  <stall aoa="24" width="7" peak="1.3"/>
+  <flap0 start="0" end="1" lift="1.6" drag="1.4"/>
 
   <control-input axis="/controls/flight/elevator" control="FLAP0"/>
   <control-input axis="/controls/flight/elevator-trim" control="FLAP0"/>
 
-  <control-output control="FLAP0" side="left" prop="/surface-positions/left-elevator-pos-norm"/>
-  <control-output control="FLAP0" side="right" prop="/surface-positions/right-elevator-pos-norm"/>
-
+  <control-output control="FLAP0" prop="/surface-positions/elevator-pos-norm"/>
   <control-speed control="FLAP0" transition-time="0.5"/>
  </hstab>
 
@@ -122,32 +123,23 @@
 <!-- Front -->
  <gear x="5.25" y="0.00" z="-2.25" compression="0.65" spring="2.0">
   <control-input axis="/controls/flight/rudder" control="STEER" square="true"/>
-<!--
-  <control-input axis="/controls/gear/wheel[0]/brake" control="BRAKE"/>
--->
   <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
   <control-output control="EXTEND" prop="/gear/gear[0]/position-norm"/>
-  <control-speed control="EXTEND" transition-time="4"/>
   <control-output control="STEER" prop="/gear/gear[0]/steering-norm"/>
+  <control-speed control="EXTEND" transition-time="4"/>
  </gear>
 
 <!-- Left main -->
-<!--
  <gear x="-2.20" y="1.92" z="-2.7" compression="1.2" spring="1.5">
--->
- <gear x="-2.20" y="1.92" z="-2.25" compression="0.65" spring="1.5">
-  <control-input axis="/controls/brakes[0]" control="BRAKE"/>
+  <control-input axis="/controls/gear/wheel[0]/brake" control="BRAKE"/>
   <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
   <control-output control="EXTEND" prop="/gear/gear[1]/position-norm"/>
   <control-speed control="EXTEND" transition-time="4"/>
  </gear>
 
 <!-- Right main -->
-<!--
- <gear x="-2.20" y="1.92" z="-2.7" compression="1.2" spring="1.5">
--->
- <gear x="-2.20" y="-1.92" z="-2.25" compression="0.65" spring="1.5">
-  <control-input axis="/controls/gear/wheel[0]/brake" control="BRAKE"/>
+ <gear x="-2.20" y="-1.92" z="-2.7" compression="1.2" spring="1.5">
+  <control-input axis="/controls/gear/wheel[1]/brake" control="BRAKE"/>
   <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
   <control-output control="EXTEND" prop="/gear/gear[2]/position-norm"/>
   <control-speed control="EXTEND" transition-time="4"/>
@@ -176,22 +168,6 @@
 
 <!-- Pilot -->
  <ballast x="5.8" y="0" z="0.6" mass="200"/>
-
-<!-- AIM-9 x 2 Left -->
- <ballast x="-0.85" y="2.40" z="-0.23" mass="200"/>
- <ballast x="-0.85" y="2.24" z="-0.46" mass="200"/>
-
-<!-- AIM-9 x 2 Right -->
- <ballast x="-0.85" y="-2.40" z="-0.23" mass="200"/>
- <ballast x="-0.85" y="-2.24" z="-0.46" mass="200"/>
-
-<!-- AIM-120 x 2 Left -->
- <ballast x="-1.2" y="2.02" z="-0.52" mass="400"/>
- <ballast x="-1.2" y="1.74" z="-0.52" mass="400"/>
-
-<!-- AIM-120 x 2 Left -->
- <ballast x="-1.2" y="-2.02" z="-0.52" mass="400"/>
- <ballast x="-1.2" y="-1.74" z="-0.52" mass="400"/>
 
 <!-- Trim ballast -->
  <ballast x="6" y="0" z="0.0" mass="1000"/>

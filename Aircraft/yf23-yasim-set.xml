@@ -70,12 +70,12 @@ NR/MD YF23 simulation config.
      <target-climb-rate-fpm type="float">20000.0</target-climb-rate-fpm>
      <target-descent-rate-fpm type="float">12000.0</target-descent-rate-fpm>
 
-     <elevator-adj-factor type="float">115.0</elevator-adj-factor>
+     <elevator-adj-factor type="float">120.0</elevator-adj-factor>
 
      <integral-contribution type="float">0.005</integral-contribution>
 
      <max-aileron type="float">0.5</max-aileron>
-     <max-roll-deg type="float">70.0</max-roll-deg>
+     <max-roll-deg type="float">60.0</max-roll-deg>
 
      <roll-out-deg type="float">6.0</roll-out-deg>
      <roll-out-smooth-deg type="float">30.0</roll-out-smooth-deg>

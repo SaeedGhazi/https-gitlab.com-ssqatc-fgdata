@@ -75,8 +75,12 @@
    <factor type="double">-0.5</factor>
   </binding>
  </axis>
-<axis n="4">
+<axis>
   <desc>Mixture</desc>
+  <number>
+    <unix>3</unix>
+    <windows>4</windows>
+  </number>
   <binding>
    <command>property-scale</command>
    <property>/controls/engines/engine[0]/mixture</property>
@@ -90,8 +94,12 @@
    <factor type="double">-0.5</factor>
   </binding>
  </axis>
-<axis n="3">
+ <axis>
   <desc>Propeller</desc>
+  <number>
+    <unix>4</unix>
+    <windows>3</windows>
+  </number>
   <binding>
    <command>property-scale</command>
    <property>/controls/engines/engine[0]/propeller-pitch</property>
@@ -106,7 +114,7 @@
   </binding>
  </axis>
 
-  <axis>
+ <axis>
   <desc>View Direction</desc>
   <number>
     <unix>5</unix>
@@ -211,6 +219,23 @@
   </binding>
  </button>
 
+<button n="6">
+  <repeatable>false</repeatable>
+  <binding>
+   <command>nasal</command>
+   <script>controls.stepFlaps(-1)</script>
+  </binding>
+</button>
+ 
+<button n="7">
+  <repeatable>false</repeatable>
+  <binding>
+   <command>nasal</command>
+   <script>controls.stepFlaps(1)</script>
+  </binding>
+</button>
+
+<!--
  <button n="6">
   <repeatable>false</repeatable>
   <binding>
@@ -226,6 +251,7 @@
    <script>controls.stepFlaps(1)</script>
   </binding>
  </button>
+-->
 
  <button n="8">
   <repeatable>true</repeatable>

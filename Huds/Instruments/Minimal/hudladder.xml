@@ -12,7 +12,7 @@
   <loadfn>roll</loadfn>
   <loadfn1>pitch</loadfn1>
   <span_units>45.0</span_units>
-  <division_units>10.0</division_units>
+  <division_units>0.0</division_units>
   <minor_division>0.0</minor_division>
   <screen_hole>70</screen_hole>
   <lbl_pos>0</lbl_pos>

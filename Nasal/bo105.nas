@@ -1,6 +1,11 @@
 # $Id$
 #print("Loading bo105.nas");
-print("\tShift-C ... open/close rear door");
+if (streq(getprop("/sim/aero"), "bo105")) {
+       print(
+               "Additional key bindings for the bo105 helicopter:\n\n",
+               "\tShift-C ... open/close rear door"
+       );
+}
 
 rearpos = "/controls/doors/rear";
 rearstep = "/controls/doors/rear-state";

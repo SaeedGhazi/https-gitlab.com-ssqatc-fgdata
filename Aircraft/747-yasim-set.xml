@@ -19,11 +19,14 @@ October 23 2001 John Check, fgpanels@rockfish.net
 
   <panel>
    <path>Aircraft/747/747-panel.xml</path>
-   <visibility>true</visibility>
+   <visibility>false</visibility>
   </panel>
-  <panel_2>
+  <!--panel_2>
    <path>Aircraft/747/747-mini-panel.xml</path>
-  </panel_2>
+  </panel_2-->
+  <hud>
+  <visibility>true</visibility>
+  </hud>
   
   <model>
    <path>Aircraft/747/Model/boeing747.ac</path>

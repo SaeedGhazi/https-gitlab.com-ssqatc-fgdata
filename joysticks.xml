@@ -25,6 +25,7 @@ Joystick binding definitions.
 
  <!-- Saitek devices -->
  <js-named include="Input/Joysticks/Saitek/X45.xml"/>
+ <js-named include="Input/Joysticks/Saitek/X8-30.xml"/>
 
 </PropertyList>
 

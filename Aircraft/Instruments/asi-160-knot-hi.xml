@@ -121,7 +121,7 @@ properties' values.
    <transformations>
     <transformation>
      <type>rotation</type>
-     <property>/steam/airspeed-adjust</property>
+     <property>/instrumentation/airspeed-indicator/speed-offset-kt</property>
      <min>-360.0</min>
      <max>360.0</max>
      <scale>-1</scale>
@@ -138,7 +138,7 @@ properties' values.
    <y>-128</y>
    <w>128</w>
    <h>256</h>
-   <property>/steam/airspeed-adjust</property>
+   <property>/instrumentation/airspeed-indicator/speed-offset-kt</property>
    <increment>0.5</increment>
    <min>0</min>
    <max>360</max>
@@ -152,7 +152,7 @@ properties' values.
    <y>-128</y>
    <w>128</w>
    <h>256</h>
-   <property>/steam/airspeed-adjust</property>
+   <property>/instrumentation/airspeed-indicator/speed-offset-kt</property>
    <increment>10</increment>
    <min>0</min>
    <max>360</max>
@@ -167,7 +167,7 @@ properties' values.
    <y>-128</y>
    <w>128</w>
    <h>256</h>
-   <property>/steam/airspeed-adjust</property>
+   <property>/instrumentation/airspeed-indicator/speed-offset-kt</property>
    <increment>-0.5</increment>
    <min>0</min>
    <max>360</max>
@@ -181,7 +181,7 @@ properties' values.
    <y>-128</y>
    <w>128</w>
    <h>256</h>
-   <property>/steam/airspeed-adjust</property>
+   <property>/instrumentation/airspeed-indicator/speed-offset-kt</property>
    <increment>-10</increment>
    <min>0</min>
    <max>360</max>

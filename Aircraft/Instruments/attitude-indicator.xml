@@ -117,7 +117,7 @@ properties' values.
    <transformations>
     <transformation>
      <type>y-shift</type>
-     <property>/steam/horizon-adjust</property>
+     <property>/instrumentation/attitude-indicator/horizon-offset-deg</property>
      <offset>-17</offset>
     </transformation>
    </transformations>
@@ -144,7 +144,7 @@ properties' values.
    <h>22</h>
   <binding>
   <command>property-adjust</command>
-   <property>/steam/horizon-adjust</property>
+   <property>/instrumentation/attitude-indicator/horizon-offset-deg</property>
    <step>-0.5</step>
    <min>-5</min>
    <max>5</max>
@@ -161,7 +161,7 @@ properties' values.
    <h>22</h>
   <binding>
   <command>property-adjust</command>
-   <property>/steam/horizon-adjust</property>
+   <property>/instrumentation/attitude-indicator/horizon-offset-deg</property>
    <step>-5</step>
    <min>-5</min>
    <max>5</max>
@@ -178,7 +178,7 @@ properties' values.
    <h>22</h>
   <binding>
   <command>property-adjust</command>
-   <property>/steam/horizon-adjust</property>
+   <property>/instrumentation/attitude-indicator/horizon-offset-deg</property>
    <step>0.5</step>
    <min>-5</min>
    <max>5</max>
@@ -195,7 +195,7 @@ properties' values.
    <h>22</h>
   <binding>
   <command>property-adjust</command>
-   <property>/steam/horizon-adjust</property>
+   <property>/instrumentation/attitude-indicator/horizon-offset-deg</property>
    <step>5</step>
    <min>-5</min>
    <max>5</max>

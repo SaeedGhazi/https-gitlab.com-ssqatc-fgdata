@@ -49,7 +49,7 @@ properties' values.
    <transformations>
     <transformation>
      <type>rotation</type>
-     <property>/steam/gyro-compass-deg</property>
+     <property>/instrumentation/heading-indicator/indicated-heading-deg</property>
      <min>-720.0</min>
      <max>720.0</max>
      <scale>-1.0</scale>
@@ -190,7 +190,7 @@ properties' values.
     </transformation>
     <transformation>
      <type>rotation</type>
-     <property>/steam/gyro-compass-deg</property>
+     <property>/instrumentation/heading-indicator/indicated-heading-deg</property>
      <min>0</min>
      <max>360</max>
     </transformation>
@@ -252,7 +252,7 @@ properties' values.
    <h>24</h>
    <binding>
     <command>property-adjust</command>
-    <property>/steam/gyro-compass-error-deg</property>
+    <property>/instrumentation/heading-indicator/offset-deg</property>
     <step>-1</step>
     <min>0</min>
     <max>360</max>
@@ -269,7 +269,7 @@ properties' values.
    <h>24</h>
    <binding>
     <command>property-adjust</command>
-    <property>/steam/gyro-compass-error-deg</property>
+    <property>/instrumentation/heading-indicator/offset-deg</property>
     <step>-5</step>
     <min>0</min>
     <max>360</max>
@@ -286,7 +286,7 @@ properties' values.
    <h>24</h>
    <binding>
     <command>property-adjust</command>
-    <property>/steam/gyro-compass-error-deg</property>
+    <property>/instrumentation/heading-indicator/offset-deg</property>
     <step>1</step>
     <min>0</min>
     <max>360</max>
@@ -303,7 +303,7 @@ properties' values.
    <h>24</h>
    <binding>
     <command>property-adjust</command>
-    <property>/steam/gyro-compass-error-deg</property>
+    <property>/instrumentation/heading-indicator/offset-deg</property>
     <step>5</step>
     <min>0</min>
     <max>360</max>

@@ -193,6 +193,10 @@ Started September 2000 by David Megginson, david@megginson.com
     </config>
   </view>
 
+  <menubar>
+   <visibility type="bool">true</visibility>
+  </menubar>
+
  </sim>
 
 
@@ -387,7 +391,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
   <kr-87>
    <inputs>
-     <rotation-deg type="double">90</rotation-deg>
+     <rotation-deg type="double">0</rotation-deg>
    </inputs>
    <outputs>
     <selected-khz type="double">379.0</selected-khz>

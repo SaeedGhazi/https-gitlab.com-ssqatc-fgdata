@@ -135,6 +135,7 @@
  <in-air-desc>Start in air (implied when using --altitude)</in-air-desc>
  <wind-desc>Specify wind coming from DIR (degrees) at SPEED (knots)</wind-desc>
  <turbulence-desc>Specify turbulence from 0.0 (calm) to 1.0 (severe)</turbulence-desc>
+ <ceiling-desc>Create an overcast ceiling, optionally with a specific thickness (defaults to 2000 ft).</ceiling-desc>
  <aircraft-dir-desc>Aircraft directory relative to the path of the executable</aircraft-dir-desc>
 
  <aircraft-model-options>Aircraft model directory (UIUC FDM ONLY)</aircraft-model-options>

@@ -301,6 +301,13 @@
     <brief/>
    </option>
 
+   <option>
+    <name>ceiling</name>
+    <arg>FT_AGL[:THICKNESS_AGL]</arg>
+    <description>strings/ceiling-desc</description>
+    <brief/>
+   </option>
+
   </section>
 
   <section>

@@ -29,8 +29,8 @@ Node = {
     getNode        : func { wrap(_getNode(me._g, arg)) },
 
     getBoolValue : func {
-        val = getValue();
-        if(getType() == "STRING" and val == "false") { 0 }
+        val = me.getValue();
+        if(me.getType() == "STRING" and val == "false") { 0 }
         else { val }
     }
 };

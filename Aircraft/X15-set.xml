@@ -14,7 +14,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
 <!-- these are the three main components -->
  <sim>
   <flight-model>jsb</flight-model>
-  <aircraft>X15</aircraft>
+  <aero>X15</aero>
   <sound>false</sound>
   <panel>
    <path>Aircraft/X15/Panels/X15-panel.xml</path>

@@ -14,7 +14,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
 <!-- c172 is default so basically we just need to specify the fdm -->
  <sim>
   <flight-model>larcsim</flight-model>
-  <aircraft>c310</aircraft>
+  <aero>c310</aero>
   <sound>true</sound>
   <panel>
    <path>Aircraft/c310/c310-vfr-panel.xml</path>

@@ -14,7 +14,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
 <!-- these are the three main components -->
  <sim>
   <flight-model>jsb</flight-model>
-  <aircraft>c310</aircraft>
+  <aero>c310</aero>
   <sound>true</sound>
   <panel>
    <path>Aircraft/c310/c310-vfr-panel.xml</path>

@@ -71,7 +71,8 @@
     <type>double</type>
     <node>/controls/engines/engine[0]/throttle</node>
    </chunk>
-   <name>throttle</name>
+   <chunk>
+    <name>throttle</name>
     <type>double</type>
     <node>/controls/engines/engine[1]/throttle</node>
    </chunk>
@@ -81,7 +82,8 @@
     <type>double</type>
     <node>/controls/engines/engine[0]/starter</node>
    </chunk>
-   <name>starter</name>
+   <chunk>
+    <name>starter</name>
     <type>double</type>
     <node>/controls/engines/engine[1]/starter</node>
    </chunk>
@@ -91,7 +93,8 @@
     <type>double</type>
     <node>/controls/engines/engine[0]/fuel-pump</node>
    </chunk>
-   <name>fuel-pump</name>
+   <chunk>
+    <name>fuel-pump</name>
     <type>double</type>
     <node>/controls/engines/engine[1]/fuel-pump</node>
    </chunk>
@@ -102,6 +105,8 @@
     <node>/controls/engines/engine[0]/cutoff</node>
    </chunk>
    <name>cutoff</name>
+   <chunk>
+    <name>cutoff</name>
     <type>double</type>
     <node>/controls/engines/engine[1]/cutoff</node>
    </chunk>
@@ -111,7 +116,8 @@
     <type>double</type>
     <node>/controls/engines/engine[0]/mixture</node>
    </chunk>
-   <name>mixture</name>
+   <chunk>
+    <name>mixture</name>
     <type>double</type>
     <node>/controls/engines/engine[1]/mixture</node>
    </chunk>
@@ -121,7 +127,8 @@
     <type>double</type>
     <node>/controls/engines/engine[0]/propeller-pitch</node>
    </chunk>
-   <name>propeller-pitch</name>
+   <chunk>
+    <name>propeller-pitch</name>
     <type>double</type>
     <node>/controls/engines/engine[1]/propeller-pitch</node>
    </chunk>
@@ -131,7 +138,8 @@
     <type>double</type>
     <node>/controls/engines/engine[0]/magnetos</node>
    </chunk>
-   <name>magnetos</name>
+   <chunk>
+    <name>magnetos</name>
     <type>double</type>
     <node>/controls/engines/engine[1]/magnetos</node>
    </chunk>
@@ -141,7 +149,8 @@
     <type>double</type>
     <node>/controls/engines/engine[0]/ignition</node>
    </chunk>
-   <name>ignition</name>
+   <chunk>
+    <name>ignition</name>
     <type>double</type>
     <node>/controls/engines/engine[1]/ignition</node>
    </chunk>
@@ -220,7 +229,7 @@
     <node>/controls/electric/APU-generator</node>
    </chunk>
 
-   <-- Autoflight -->
+   <!-- Autoflight -->
    <chunk>
     <name>engage</name>
     <type>double</type>
@@ -370,7 +379,8 @@
     <type>double</type>
     <node>/controls/engines/engine[0]/throttle</node>
    </chunk>
-   <name>throttle</name>
+   <chunk>
+    <name>throttle</name>
     <type>double</type>
     <node>/controls/engines/engine[1]/throttle</node>
    </chunk>
@@ -380,7 +390,8 @@
     <type>double</type>
     <node>/controls/engines/engine[0]/starter</node>
    </chunk>
-   <name>starter</name>
+   <chunk>
+    <name>starter</name>
     <type>double</type>
     <node>/controls/engines/engine[1]/starter</node>
    </chunk>
@@ -390,7 +401,8 @@
     <type>double</type>
     <node>/controls/engines/engine[0]/fuel-pump</node>
    </chunk>
-   <name>fuel-pump</name>
+   <chunk>
+    <name>fuel-pump</name>
     <type>double</type>
     <node>/controls/engines/engine[1]/fuel-pump</node>
    </chunk>
@@ -400,7 +412,8 @@
     <type>double</type>
     <node>/controls/engines/engine[0]/cutoff</node>
    </chunk>
-   <name>cutoff</name>
+   <chunk>
+    <name>cutoff</name>
     <type>double</type>
     <node>/controls/engines/engine[1]/cutoff</node>
    </chunk>
@@ -410,7 +423,8 @@
     <type>double</type>
     <node>/controls/engines/engine[0]/mixture</node>
    </chunk>
-   <name>mixture</name>
+   <chunk>
+    <name>mixture</name>
     <type>double</type>
     <node>/controls/engines/engine[1]/mixture</node>
    </chunk>
@@ -420,7 +434,8 @@
     <type>double</type>
     <node>/controls/engines/engine[0]/propeller-pitch</node>
    </chunk>
-   <name>propeller-pitch</name>
+   <chunk>
+    <name>propeller-pitch</name>
     <type>double</type>
     <node>/controls/engines/engine[1]/propeller-pitch</node>
    </chunk>
@@ -430,7 +445,8 @@
     <type>double</type>
     <node>/controls/engines/engine[0]/magnetos</node>
    </chunk>
-   <name>magnetos</name>
+   <chunk>
+    <name>magnetos</name>
     <type>double</type>
     <node>/controls/engines/engine[1]/magnetos</node>
    </chunk>
@@ -440,7 +456,8 @@
     <type>double</type>
     <node>/controls/engines/engine[0]/ignition</node>
    </chunk>
-   <name>ignition</name>
+   <chunk>
+    <name>ignition</name>
     <type>double</type>
     <node>/controls/engines/engine[1]/ignition</node>
    </chunk>
@@ -519,7 +536,7 @@
     <node>/controls/electric/APU-generator</node>
    </chunk>
 
-   <-- Autoflight -->
+   <!-- Autoflight -->
    <chunk>
     <name>engage</name>
     <type>double</type>

@@ -907,7 +907,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
     <property>/sim/current-view/view-number</property>
     <step type="int">1</step>
     <min type="int">0</min>
-    <max type="int">5</max>
+    <max type="int">6</max>
     <wrap type="bool">true</wrap>
   </binding>
  </key>

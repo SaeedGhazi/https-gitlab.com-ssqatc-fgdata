@@ -53,6 +53,14 @@ Started September 2000 by David Megginson, david@megginson.com
     <style>0</style>
    </dg>
   </instrument-options>
+  <input>
+   <selected>
+    <engine n="0">true</engine>
+    <engine n="1">false</engine>
+    <engine n="2">false</engine>
+    <engine n="3">false</engine>
+   </selected>
+  </input>
   </sim>
 
 

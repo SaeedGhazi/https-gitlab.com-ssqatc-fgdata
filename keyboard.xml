@@ -111,6 +111,146 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+ <key n="32">
+  <name>SPACE</name>
+  <desc>Fire Starter on Selected Engine(s)</desc>
+
+  <binding>
+   <condition>
+    <property>/sim/input/selected/engine[0]</property>
+   </condition>
+   <command>property-assign</command>
+   <property>/controls/starter[0]</property>
+   <value type="bool">true</value>
+  </binding>
+
+  <binding>
+   <condition>
+    <property>/sim/input/selected/engine[1]</property>
+   </condition>
+   <command>property-assign</command>
+   <property>/controls/starter[1]</property>
+   <value type="bool">true</value>
+  </binding>
+
+  <binding>
+   <condition>
+    <property>/sim/input/selected/engine[2]</property>
+   </condition>
+   <command>property-assign</command>
+   <property>/controls/starter[2]</property>
+   <value type="bool">true</value>
+  </binding>
+
+  <binding>
+   <condition>
+    <property>/sim/input/selected/engine[3]</property>
+   </condition>
+   <command>property-assign</command>
+   <property>/controls/starter[3]</property>
+   <value type="bool">true</value>
+  </binding>
+
+  <mod-up>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/starter[0]</property>
+    <value type="bool">false</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/starter[1]</property>
+    <value type="bool">false</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/starter[2]</property>
+    <value type="bool">false</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/starter[3]</property>
+    <value type="bool">false</value>
+   </binding>
+  </mod-up>
+
+ </key>
+
+ <key n="33">
+  <name>!</name>
+  <desc>Select first engine</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/input/selected/engine[0]</property>
+   <value type="bool">true</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/input/selected/engine[1]</property>
+   <value type="bool">false</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/input/selected/engine[2]</property>
+   <value type="bool">false</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/input/selected/engine[3]</property>
+   <value type="bool">false</value>
+  </binding>
+ </key>
+
+ <key n="35">
+  <name>#</name>
+  <desc>Select third engine</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/input/selected/engine[0]</property>
+   <value type="bool">false</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/input/selected/engine[1]</property>
+   <value type="bool">false</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/input/selected/engine[2]</property>
+   <value type="bool">true</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/input/selected/engine[3]</property>
+   <value type="bool">false</value>
+  </binding>
+ </key>
+
+ <key n="36">
+  <name>$</name>
+  <desc>Select fourth engine</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/input/selected/engine[0]</property>
+   <value type="bool">false</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/input/selected/engine[1]</property>
+   <value type="bool">false</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/input/selected/engine[2]</property>
+   <value type="bool">false</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/input/selected/engine[3]</property>
+   <value type="bool">true</value>
+  </binding>
+ </key>
+
  <key n="44">
   <name>,</name>
   <desc>Left brake</desc>
@@ -317,6 +457,31 @@ calculated by adding 256 to the GLUT key value in glut.h.
     <value type="double">315</value>
    </binding>
   </mod-shift>
+ </key>
+
+ <key n="64">
+  <name>@</name>
+  <desc>Select second engine</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/input/selected/engine[0]</property>
+   <value type="bool">false</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/input/selected/engine[1]</property>
+   <value type="bool">true</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/input/selected/engine[2]</property>
+   <value type="bool">false</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/input/selected/engine[3]</property>
+   <value type="bool">false</value>
+  </binding>
  </key>
 
  <key n="65">
@@ -551,6 +716,95 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <command>property-multiply</command>
    <property>/environment/visibility-m</property>
    <factor>1.1</factor>
+  </binding>
+ </key>
+
+ <key n="123">
+  <name>{</name>
+  <desc>Decrease Magneto on Selected Engine</desc>
+  <binding>
+   <desc>first engine</desc>
+   <condition>
+    <property>/sim/input/selected/engine[0]</property>
+   </condition>
+   <command>property-adjust</command>
+   <property>/controls/magnetos[0]</property>
+   <step type="int">-1</step>
+  </binding>
+  <binding>
+   <desc>second engine</desc>
+   <condition>
+    <property>/sim/input/selected/engine[1]</property>
+   </condition>
+   <command>property-adjust</command>
+   <property>/controls/magnetos[1]</property>
+   <step type="int">-1</step>
+  </binding>
+  <binding>
+   <desc>third engine</desc>
+   <condition>
+    <property>/sim/input/selected/engine[2]</property>
+   </condition>
+   <command>property-adjust</command>
+   <property>/controls/magnetos[2]</property>
+   <step type="int">-1</step>
+  </binding>
+  <binding>
+   <desc>fourth engine</desc>
+   <condition>
+    <property>/sim/input/selected/engine[3]</property>
+   </condition>
+   <command>property-adjust</command>
+   <property>/controls/magnetos[3]</property>
+   <step type="int">-1</step>
+  </binding>
+ </key>
+
+ <key n="125">
+  <name>}</name>
+  <desc>Increase Magneto on Selected Engine</desc>
+  <binding>
+   <desc>first engine</desc>
+   <condition>
+    <property>/sim/input/selected/engine[0]</property>
+   </condition>
+   <command>property-adjust</command>
+   <property>/controls/magnetos[0]</property>
+   <step type="int">1</step>
+  </binding>
+  <binding>
+   <desc>second engine</desc>
+   <condition>
+    <property>/sim/input/selected/engine[1]</property>
+   </condition>
+   <command>property-adjust</command>
+   <property>/controls/magnetos[1]</property>
+   <step type="int">1</step>
+  </binding>
+ </key>
+
+ <key n="126">
+  <name>~</name>
+  <desc>Select all engines</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/input/selected/engine[0]</property>
+   <value type="bool">true</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/input/selected/engine[1]</property>
+   <value type="bool">true</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/input/selected/engine[2]</property>
+   <value type="bool">true</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/input/selected/engine[3]</property>
+   <value type="bool">true</value>
   </binding>
  </key>
 

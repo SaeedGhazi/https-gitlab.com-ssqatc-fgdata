@@ -1,3 +1,4 @@
+%? pdflatex map.tex
 % $Id$
 % Melchior FRANZ <mfranz@aon.at>
 %
@@ -16,7 +17,29 @@
 \definecolor{darkred}{rgb}{.5,0,0}
 \definecolor{darkblue}{rgb}{0,0,.5}
 
-\def\\ {%
+\renewcommand*\title[1]{%
+	\begin{center}%
+		\normalfont\huge #1
+	\end{center}%
+	\vspace{6ex}%
+}
+
+\newenvironment{keyboard}{%
+	\list{}{%
+		\setlength\labelwidth{9em}%
+		\setlength\itemsep{0pt}%
+		\setlength\parsep{0pt}%
+		\setlength\topsep{0pt}%
+		\leftmargin\labelwidth
+		\advance\leftmargin\labelsep
+		\def\makelabel##1{##1\hfil}%
+		\raggedright
+	}%
+}{%
+	\endlist
+}
+
+\def\k {%
 	\bgroup
 	\catcode`\^^M=13
 	\key
@@ -25,180 +48,197 @@
 \bgroup
 \catcode`\^^M=13%
 \gdef\key #1 #2 #3^^M{%
-	\leavevmode%
-	\hbox to6em{\hfil#2\hfil}%
-	\hbox to3em{\hfil(#1)}\quad%
-	\hbox{#3}%
-	\egroup
+	\item[\hbox to6em{\hfil#2\hfil}\hbox to3em{\hfil(#1)~}]%
+	\if$#3$~\else#3\fi%
+	\egroup%
 }%
 \egroup
 
+\newcommand\cvsid{{%
+	\par
+	\begin{small}%
+		\color{darkcyan}%
+		\texttt{\$${}$Id${}$\$}%
+		\hspace{0ptplus1fill}%
+		\count0\time
+		\divide\time60
+		\count1\time
+		\multiply\time60
+		\advance\count0-\time
+		generated~\the\year/\the\month/\the\day,~\the\count1:\ifnum\count0<10 0\fi\the\count0
+	\end{small}%
+}}
+
 \renewcommand\|{$\backslash$}
 \newcommand\tld{\char`\~}
-\newcommand\ac[1]{\textcolor{darkcyan}{\textbf{\textsf{#1:}}}}
+\newcommand\ac[1]{\textcolor{darkcyan}{\textbf{\textsf{#1:}}}\nobreak}
 \newcommand\hardcoded[1]{\textcolor{red}{hard-coded: #1}}
-\newcommand\shift[1]{\if$#1$\else\textcolor{darkblue}{SHIFT: #1}\fi}
+\newcommand\shift[1]{\if$#1$\else\hfill\break\textcolor{darkblue}{SHIFT: #1}\fi}
 \newcommand\local[1]{\textcolor{darkred}{local: #1}}
 
 
+
 \begin{document}
-\begin{center}
-	\huge FlightGear Keyboard Bindings
-\end{center}
-\vspace{6ex}
+\title{FlightGear Keyboard Bindings}
 
-\\ 1	Ctrl-A		Toggle autopilot altitude lock
-\\ 2	Ctrl-B		Toggle speedbrake; \ac{p51d} Toggle engine boost
-\\ 3	Ctrl-C		Toggle clickable panel hotspots
-\\ 4	Ctrl-D		{}
-\\ 5	Ctrl-E		{}
-\\ 6	Ctrl-F		{}
-\\ 7	Ctrl-G		Toggle autopilot glide slope lock
-\\ 8	Ctrl-H		Toggle autopilot heading lock
-\\ 9	Ctrl-I/Tab	{}
-\\ 10	Ctrl-J		{}
-\\ 11	Ctrl-K		{}
-\\ 12	Ctrl-L		{}
-\\ 13	Ctrl-M/Enter	Move rudder right
-\\ 14	Ctrl-N		Toggle autopilot nav1 lock
-\\ 15	Ctrl-O		{}
-\\ 16	Ctrl-P		Toggle pitch hold
-\\ 17	Ctrl-Q		{}
-\\ 18	Ctrl-R		{}
-\\ 19	Ctrl-S		Toggle auto-throttle lock
-\\ 20	Ctrl-T		Toggle autopilot terrain lock
-\\ 21	Ctrl-U		[Cheat] Add 1000\,ft of emergency altitude
-\\ 22	Ctrl-V		Select initial view (view 0)
-\\ 23	Ctrl-W		Toggle autopilot wing leveler
-\\ 24	Ctrl-X		Reset zoom to default
-\\ 25	Ctrl-Y		{}
-\\ 26	Ctrl-Z		{}
-\\ 27	Esc		Prompt and quit FlightGear;		\shift{Reset}
-\\ 28	Ctrl-4/Ctrl-\|	{}
-\\ 29	Ctrl-5/Ctrl-]	{}
-\\ 30	Ctrl-6		{}
-\\ 31	Ctrl-7/Ctrl-/	{}
-\\ 32	Space		Fire Starter on Selected Engine(s)
-\\ 33	!		Select first engine
-\\ 34	"		{}
-\\ 35	\#		Select third engine
-\\ 36	\$		Select fourth engine
-\\ 37	\%		{}
-\\ 38	\&		{}
-\\ 39	'~(Apostrophe)	Display a dialog relevant to the tuned in ATC service (if any)
-\\ 40	(		{}
-\\ 41	)		{}
-\\ 42	*		{}
-\\ 43	+		{}
-\\ 44	,~(Comma)	Left brake
-\\ 45	-~(Minus)	{}
-\\ 46	.~(Period)	Right brake
-\\ 47	/		{}
-\\ 48	0		Move rudder left
-\\ 49	1		Decrease elevator trim
-\\ 50	2		Increase elevator or autopilot altitude
-\\ 51	3		Decrease throttle or autopilot autothrottle
-\\ 52	4		Move aileron left (or adjust AP heading)
-\\ 53	5		Center aileron, elevator, and rudder
-\\ 54	6		Move aileron right (or adjust AP heading)
-\\ 55	7		Increase elevator trim
-\\ 56	8		Decrease elevator or autopilot altitude
-\\ 57	9		Increase throttle or autopilot autothrottle
-\\ 58	:~(Colon)	{}
-\\ 59	;~(Semicolon)	{}
-\\ 60	<		\ac{c182|c310|pa28-161} Rudder trim left
-\\ 61	=		{}
-\\ 62	>		\ac{c182|c310|pa28-161} Rudder trim right
-\\ 63	?		{}
-\\ 64	@		Select second engine
-\\ 65	A		Decrease speed-up
-\\ 66	B		Toggle parking brake on or off
-\\ 67	C		\ac{bo105} toggle rear door
-\\ 68	D		{}
-\\ 69	E		{}
-\\ 70	F		{}
-\\ 71	G		Gear down
-\\ 72	H		\hardcoded{Cycle HUD brightness}
-\\ 73	I		\hardcoded{Alternative HUD}
-\\ 74	J		{}
-\\ 75	K		{}
-\\ 76	L		{}
-\\ 77	M		Decrease warp
-\\ 78	N		{}
-\\ 79	O		{}
-\\ 80	P		Toggle panel; \ac{T38} Fuel Cutoff Switch or Lever
-\\ 81	Q		{}
-\\ 82	R		\ac{fokker100} Toggle thrust reverser
-\\ 83	S		{}
-\\ 84	T		Decrease warp delta
-\\ 85	U		{}
-\\ 86	V		Scroll in reverse through views
-\\ 87	W		(Temporary) Toggle fullscreen for 3DFX only
-\\ 88	X		Increase field of view
-\\ 89	Y		{}
-\\ 90	Z		Decrease Visibility
-\\ 91	[		Decrease flaps; \ac{737|A320} Decrease flaps; \ac{ComperSwift} Adjust view left; \ac{an225|b52} --
-\\ 92	\|		{}
-\\ 93	]		Increase flaps; \ac{737|A320} Increase flaps; \ac{ComperSwift} Adjust view right; \ac{an225|b52} --
-\\ 94	\^		{}
-\\ 95	\_~(Underscore)	{}
-\\ 96	`{}~(Backtick)	{}
-\\ 97	a		Increase speed-up
-\\ 98	b		Apply all brakes; \ac{b52} Apply all brakes
-\\ 99	c		Toggle 3D/2D cockpit
-\\ 100	d		\ac{an225|yf23} Retract slats
-\\ 101	e		{}
-\\ 102	f		\ac{an225|yf23} Extend slats
-\\ 103	g		Gear Up
-\\ 104	h		\hardcoded{Cycle HUD: green/red/off}
-\\ 105	i		\hardcoded{Normal HUD}
-\\ 106	j		Decrease spoilers
-\\ 107	k		Increase spoilers
-\\ 108	l		Toggle tail-wheel lock
-\\ 109	m		Increase warp
-\\ 110	n		{}
-\\ 111	o		{}
-\\ 112	p		Toggle the pause state of the sim
-\\ 113	q		{}
-\\ 114	r		Activate the instant replay system
-\\ 115	s		Swap panels
-\\ 116	t		Increase warp delta
-\\ 117	u		{}
-\\ 118	v		Cycle view
-\\ 119	w		{}
-\\ 120	x		Decrease field of view
-\\ 121	y		{}
-\\ 122	z		Increase Visibility
-\\ 123	\{		Decrease Magneto on Selected Engine
-\\ 124	|		{}
-\\ 125	\}		Increase Magneto on Selected Engine
-\\ 126	{\tld}		Select all engines
-\\ 127	{}		{}
-\\ 257	F1		Load flight;					\shift{}
-\\ 258	F2		Force tile cache reload;			\shift{Save flight}
-\\ 259	F3		Capture screen;					\shift{Load panel}
-\\ 260	F4		Force lighting update;				\shift{Reload global preferences}
-\\ 261	F5								\shift{Scroll panel down}
-\\ 262	F6		\hardcoded{toggles Autopilot target location};	\shift{Scroll panel up}
-\\ 263	F7 								\shift{Scroll panel left}
-\\ 264	F8 		Cycle fog type;					\shift{Scroll panel right}
-\\ 265	F9 		Toggle textures					\shift{}
-\\ 266	F10 		Toggle menubar;					\shift{Toggle FDM data logging}
-\\ 267	F11 		Pop up autopilot dialog
-\\ 268	F12		{}
-\\ 269	Enter		Move rudder right
-\\ 309	Keypad~5	Center aileron, elevator, and rudder
-\\ 356	Left		Move aileron left (or adjust AP heading)
-\\ 357	Up		Increase elevator or autopilot altitude
-\\ 358	Right		Move aileron right (or adjust AP heading)
-\\ 359	Down		Decrease elevator or autopilot altitude
-\\ 360	PageUp		Increase throttle or autopilot autothrottle
-\\ 361	PageDown	Decrease throttle or autopilot autothrottle
-\\ 362	Home		Increase elevator trim
-\\ 363	End		Decrease elevator trim
-\\ 364	Insert		Move rudder left
+\begin{keyboard}
+\k 1	Ctrl-A		Toggle autopilot altitude lock
+\k 2	Ctrl-B		Toggle speedbrake; \ac{hunter} Toggle speedbrake; \ac{p51d} Toggle engine boost
+\k 3	Ctrl-C		Toggle clickable panel hotspots
+\k 4	Ctrl-D		{}
+\k 5	Ctrl-E		{}
+\k 6	Ctrl-F		\ac{hunter} Emergency flap lowering
+\k 7	Ctrl-G		Toggle autopilot glide slope lock
+\k 8	Ctrl-H		Toggle autopilot heading lock
+\k 9	Ctrl-I/Tab	{}
+\k 10	Ctrl-J		{}
+\k 11	Ctrl-K		{}
+\k 12	Ctrl-L		{}
+\k 13	Ctrl-M/Enter	Move rudder right
+\k 14	Ctrl-N		Toggle autopilot nav1 lock
+\k 15	Ctrl-O		{}
+\k 16	Ctrl-P		Toggle pitch hold
+\k 17	Ctrl-Q		{}
+\k 18	Ctrl-R		{}
+\k 19	Ctrl-S		Toggle auto-throttle lock
+\k 20	Ctrl-T		Toggle autopilot terrain lock
+\k 21	Ctrl-U		[Cheat] Add 1000\,ft of emergency altitude
+\k 22	Ctrl-V		Select initial view (view 0)
+\k 23	Ctrl-W		Toggle autopilot wing leveler
+\k 24	Ctrl-X		Reset zoom to default
+\k 25	Ctrl-Y		{}
+\k 26	Ctrl-Z		{}
+\k 27	Esc		Prompt and quit FlightGear	\shift{Reset}
+\k 28	Ctrl-4/Ctrl-\|	{}
+\k 29	Ctrl-5/Ctrl-]	{}
+\k 30	Ctrl-6		{}
+\k 31	Ctrl-7/Ctrl-/	{}
+\k 32	Space		Fire Starter on Selected Engine(s)
+\k 33	!		Select first engine
+\k 34	"		{}
+\k 35	\#		Select third engine
+\k 36	\$		Select fourth engine
+\k 37	\%		{}
+\k 38	\&		{}
+\k 39	'~(Apostrophe)	Display a dialog relevant to the tuned in ATC service (if any)
+\k 40	(		{}
+\k 41	)		{}
+\k 42	*		{}
+\k 43	+		{}
+\k 44	,~(Comma)	Left brake
+\k 45	-~(Minus)	{}
+\k 46	.~(Period)	Right brake
+\k 47	/		{}
+\k 48	0		Move rudder left
+\k 49	1		Decrease elevator trim
+\k 50	2		Increase elevator or autopilot altitude
+\k 51	3		Decrease throttle or autopilot autothrottle
+\k 52	4		Move aileron left (or adjust AP heading)
+\k 53	5		Center aileron, elevator, and rudder
+\k 54	6		Move aileron right (or adjust AP heading)
+\k 55	7		Increase elevator trim
+\k 56	8		Decrease elevator or autopilot altitude
+\k 57	9		Increase throttle or autopilot autothrottle
+\k 58	:~(Colon)	{}
+\k 59	;~(Semicolon)	{}
+\k 60	<		\ac{c182|c310|pa28-161} Rudder trim left
+\k 61	=		{}
+\k 62	>		\ac{c182|c310|pa28-161} Rudder trim right
+\k 63	?		{}
+\k 64	@		Select second engine
+\k 65	A		Decrease speed-up
+\k 66	B		Toggle parking brake on or off
+\k 67	C		\ac{bo105} toggle rear door
+\k 68	D		{}
+\k 69	E		{}
+\k 70	F		\ac{hunter} Wing fold down
+\k 71	G		Gear down
+\k 72	H		\hardcoded{Cycle HUD brightness}; \ac{hunter} Hook down
+\k 73	I		\hardcoded{Alternative HUD}
+\k 74	J		{}
+\k 75	K		{}
+\k 76	L		{}
+\k 77	M		Decrease warp
+\k 78	N		{}
+\k 79	O		{}
+\k 80	P		Toggle panel; \ac{T38} Fuel Cutoff Switch or Lever
+\k 81	Q		{}
+\k 82	R		\ac{fokker100} Toggle thrust reverser
+\k 83	S		{}
+\k 84	T		Decrease warp delta
+\k 85	U		{}
+\k 86	V		Scroll in reverse through views
+\k 87	W		(Temporary) Toggle fullscreen for 3DFX only
+\k 88	X		Increase field of view
+\k 89	Y		{}
+\k 90	Z		Decrease Visibility
+\k 91	[		Decrease flaps; \ac{737|A320|hunter} Decrease flaps; \ac{ComperSwift} Adjust view left; \ac{an225|b52} --
+\k 92	\|		{}
+\k 93	]		Increase flaps; \ac{737|A320|hunter} Increase flaps; \ac{ComperSwift} Adjust view right; \ac{an225|b52} --
+\k 94	\^		{}
+\k 95	\_~(Underscore)	{}
+\k 96	`{}~(Backtick)	{}
+\k 97	a		Increase speed-up
+\k 98	b		Apply all brakes; \ac{b52} Apply all brakes
+\k 99	c		Toggle 3D/2D cockpit
+\k 100	d		\ac{an225|yf23} Retract slats
+\k 101	e		{}
+\k 102	f		\ac{an225|yf23} Extend slats; \ac{hunter} Wing fold up
+\k 103	g		Gear Up
+\k 104	h		\hardcoded{Cycle HUD: green/red/off}; \ac{hunter} Hook up
+\k 105	i		\hardcoded{Normal HUD}
+\k 106	j		Decrease spoilers
+\k 107	k		Increase spoilers
+\k 108	l		Toggle tail-wheel lock
+\k 109	m		Increase warp
+\k 110	n		{}
+\k 111	o		{}
+\k 112	p		Toggle the pause state of the sim
+\k 113	q		{}
+\k 114	r		Activate the instant replay system
+\k 115	s		Swap panels
+\k 116	t		Increase warp delta
+\k 117	u		{}
+\k 118	v		Cycle view
+\k 119	w		{}
+\k 120	x		Decrease field of view
+\k 121	y		{}
+\k 122	z		Increase Visibility
+\k 123	\{		Decrease Magneto on Selected Engine
+\k 124	|		{}
+\k 125	\}		Increase Magneto on Selected Engine
+\k 126	{\tld}		Select all engines
+\k 127	{}		{}
+\k 257	F1		Load flight					\shift{}
+\k 258	F2		Force tile cache reload				\shift{Save flight}
+\k 259	F3		Capture screen					\shift{Load panel}
+\k 260	F4		Force lighting update				\shift{Reload global preferences}
+\k 261	F5								\shift{Scroll panel down}
+\k 262	F6		\hardcoded{toggles Autopilot target location}	\shift{Scroll panel up}
+\k 263	F7 								\shift{Scroll panel left}
+\k 264	F8 		Cycle fog type					\shift{Scroll panel right}
+\k 265	F9 		Toggle textures					\shift{}
+\k 266	F10 		Toggle menubar					\shift{Toggle FDM data logging}
+\k 267	F11 		Pop up autopilot dialog
+\k 268	F12		{}
+\k 269	Enter		Move rudder right
+\k 309	Keypad~5	Center aileron, elevator, and rudder
+\k 356	Left		Move aileron left (or adjust AP heading)
+\k 357	Up		Increase elevator or autopilot altitude
+\k 358	Right		Move aileron right (or adjust AP heading)
+\k 359	Down		Decrease elevator or autopilot altitude
+\k 360	PageUp		Increase throttle or autopilot autothrottle
+\k 361	PageDown	Decrease throttle or autopilot autothrottle
+\k 362	Home		Increase elevator trim
+\k 363	End		Decrease elevator trim
+\k 364	Insert		Move rudder left
+\end{keyboard}
 
-\vfill
-\textcolor{darkcyan}{\texttt{\small ${}$Id${}$}}
+\rule{\textwidth}{.4pt}
+\begin{small}
+``Hard-coded'' key bindings are defined in \texttt{src/Input/input.cxx}.
+\end{small}
+\vspace{0ptplus1fill}
+\cvsid
 \end{document}
 

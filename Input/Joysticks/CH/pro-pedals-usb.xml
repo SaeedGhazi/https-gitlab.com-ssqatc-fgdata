@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+<!--
+************************************************************************
+* Setup for CH Pro Pedals USB.
+*
+* These are USB rudder pedals with toe brakes.  Bindings are as
+* follow:
+*
+* Axis 0 (left pedal): left brake
+* Axis 1 (right pedal): right brake
+* Axis 2 (sliding both pedals): rudder (and nosewheel)
+************************************************************************
+-->
+
+<PropertyList>
+
+ <name>CH PRODUCTS CH PRO PEDALS USB </name>
+
+ <axis n="0">
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/brakes[0]</property>
+   <offset>1.0</offset>
+   <factor>0.5</factor>
+   <squared>false</squared>
+  </binding>
+ </axis>
+
+ <axis n="1">
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/brakes[1]</property>
+   <offset>1.0</offset>
+   <factor>0.5</factor>
+   <squared>false</squared>
+  </binding>
+ </axis>
+
+ <axis n="2">
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/rudder</property>
+   <factor>1.0</factor>
+   <offset>0.0</offset>
+   <squared>true</squared>
+  </binding>
+ </axis>
+
+</PropertyList>

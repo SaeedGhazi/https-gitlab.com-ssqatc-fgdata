@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+
+<!--
+************************************************************************
+* Setup for CH Pro Yoke USB.
+*
+* This is a USB yoke with three throttle levers.  Bindings are as
+* follow:
+*
+* Axis 0: ailerons
+* Axis 1: elevator
+* Axis 2 (left lever): throttle
+* Axis 3 (right lever): mixture
+* Axis 4 (middle lever): propeller pitch/RPM
+* Axes 5 and 6 (hat): set view direction
+*
+* Button 0 (left trigger): [not yet bound]
+* Button 1 (right trigger): cycle view
+* Buttons 2 and 3 (right rocker): rudder trim
+* Buttons 4 and 5 (left toggle): gear up/down
+* Buttons 6 and 7 (right toggle): flaps up/down
+* Button 8 (top red button): [not yet bound]
+* Button 9 (bottom red button): [not yet bound]
+* Buttons 10 and 11 (left rocker): elevator trim
+************************************************************************
+-->
+
+<PropertyList>
+
+ <name>CH PRODUCTS CH FLIGHT SIM YOKE USB </name>
+
+ <axis n="0">
+  <desc>Aileron</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/aileron</property>
+   <squared>true</squared>
+  </binding>
+ </axis>
+
+ <axis n="1">
+  <desc>Elevator</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/elevator</property>
+   <factor type="double">-1.0</factor>
+   <squared>true</squared>
+  </binding>
+ </axis>
+
+ <axis n="2">
+  <desc>Throttle</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/throttle[0]</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+   <squared>false</squared>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/throttle[1]</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+   <squared>false</squared>
+  </binding>
+ </axis>
+
+ <axis n="3">
+  <desc>Mixture</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/mixture[0]</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+   <squared>false</squared>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/mixture[1]</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+   <squared>false</squared>
+  </binding>
+ </axis>
+
+ <axis n="4">
+  <desc>Propeller</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/propeller-pitch[0]</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+   <squared>false</squared>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/propeller-pitch[1]</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+   <squared>false</squared>
+  </binding>
+ </axis>
+
+ <axis n="5">
+  <binding>
+   <command>property-scale</command>
+   <property>/sim/current-view/axes/lat</property>
+   <squared>false</squared>
+  </binding>
+ </axis>
+
+ <axis n="6">
+  <binding>
+   <command>property-scale</command>
+   <property>/sim/current-view/axes/long</property>
+   <squared>false</squared>
+  </binding>
+ </axis>
+
+ <button n="1">
+  <repeatable>false</repeatable>
+  <binding>
+   <command>view-cycle</command>
+  </binding>
+ </button>
+
+ <button n="2">
+  <repeatable>true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/rudder-trim</property>
+   <step>0.001</step>
+  </binding>
+ </button>
+
+ <button n="3">
+  <repeatable>true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/rudder-trim</property>
+   <step>-0.001</step>
+  </binding>
+ </button>
+
+ <button n="4">
+  <repeatable>false</repeatable>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/gear-down</property>
+   <value>false</value>
+  </binding>
+ </button>
+
+ <button n="5">
+  <repeatable>false</repeatable>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/gear-down</property>
+   <value>true</value>
+  </binding>
+ </button>
+
+ <button n="6">
+  <repeatable>false</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/flaps</property>
+   <step type="double">-0.34</step>
+  </binding>
+ </button>
+
+ <button n="7">
+  <repeatable>false</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/flaps</property>
+   <step type="double">0.34</step>
+  </binding>
+ </button>
+
+ <button n="10">
+  <repeatable>true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/elevator-trim</property>
+   <step>0.001</step>
+  </binding>
+ </button>
+
+ <button n="11">
+  <repeatable>true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/elevator-trim</property>
+   <step>-0.001</step>
+  </binding>
+ </button>
+
+</PropertyList>
+

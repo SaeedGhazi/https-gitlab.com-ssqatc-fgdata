@@ -1,0 +1,235 @@
+<?xml version="1.0"?>
+
+<!--
+************************************************************************
+* Setup for Logitech WingMan Rumblepad gamepad.
+*
+* This is a USB gamepad with some feedback capability (not supported
+* by plib or by most OS's).  Bindings are as follow:
+*
+* Axis 0 (left joystick): ailerons
+* Axis 1 (left joystick): elevator
+* Axis 2 (slider): throttle
+* Axis 3 (right joystick): rudder
+* Axis 4 (right joystick): raise/lower 2D panel
+* Axes 5 and 6 (hat): set view direction
+*
+* Button 0 (A): elevator trim up
+* Button 1 (B): decrease propeller pitch
+* Button 2 (C): mixture leaner
+* Button 3 (X): elevator trim down
+* Button 4 (Y): increase propeller pitch
+* Button 5 (Z): mixture richer
+* Button 6 (left trigger): left wheel brake
+* Button 7 (right trigger): right wheel brake
+* Button 8 (S): cycle view
+************************************************************************
+-->
+
+<PropertyList>
+
+ <name>Logitech Inc. WingMan RumblePad</name>
+
+ <axis n="0">
+  <desc>Aileron</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/aileron</property>
+   <squared>true</squared>
+  </binding>
+ </axis>
+
+ <axis n="1">
+  <desc>Elevator</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/elevator</property>
+   <factor type="double">-1.0</factor>
+   <squared>true</squared>
+  </binding>
+ </axis>
+
+ <axis n="2">
+  <desc>Throttle</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/throttle[0]</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/throttle[1]</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+ </axis>
+
+ <axis n="3">
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/rudder</property>
+   <factor>1.0</factor>
+   <offset>0.0</offset>
+   <squared>true</squared>
+  </binding>
+ </axis>
+
+ <axis n="4">
+  <binding>
+   <command>null</command>
+  </binding>
+  <low>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/panel/y-offset</property>
+    <step>5</step>
+   </binding>
+  </low>
+  <high>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/panel/y-offset</property>
+    <step>-5</step>
+   </binding>
+  </high>
+ </axis>
+
+ <axis n="5">
+  <binding>
+   <command>property-scale</command>
+   <property>/sim/current-view/axes/lat</property>
+  </binding>
+ </axis>
+
+ <axis n="6">
+  <binding>
+   <command>property-scale</command>
+   <property>/sim/current-view/axes/long</property>
+  </binding>
+ </axis>
+
+ <button n="0">
+  <repeatable>true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/elevator-trim</property>
+   <step>-0.001</step>
+  </binding>
+  <binding>
+   <command>null</command>
+  </binding>
+  <binding>
+   <command>null</command>
+  </binding>
+ </button>
+
+ <button n="1">
+  <repeatable>true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/propeller-pitch[0]</property>
+   <step>-0.01</step>
+  </binding>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/propeller-pitch[1]</property>
+   <step>-0.01</step>
+  </binding>
+ </button>
+
+ <button n="2">
+  <repeatable>true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/mixture[0]</property>
+   <step>-0.01</step>
+  </binding>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/mixture[1]</property>
+   <step>-0.01</step>
+  </binding>
+ </button>
+
+ <button n="3">
+  <repeatable>true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/elevator-trim</property>
+   <step>0.001</step>
+  </binding>
+ </button>
+
+ <button n="4">
+  <repeatable>true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/propeller-pitch[0]</property>
+   <step>0.01</step>
+  </binding>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/propeller-pitch[1]</property>
+   <step>0.01</step>
+  </binding>
+ </button>
+
+ <button n="5">
+  <repeatable>true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/mixture[0]</property>
+   <step>0.01</step>
+  </binding>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/mixture[1]</property>
+   <step>0.01</step>
+  </binding>
+ </button>
+
+ <button n="6">
+  <repeatable>true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/brakes[0]</property>
+   <step>0.1</step>
+  </binding>
+  <mod-up>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/brakes[0]</property>
+    <value>0.0</value>
+   </binding>
+  </mod-up>
+ </button>
+
+ <button n="7">
+  <repeatable>true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/brakes[1]</property>
+   <step>0.1</step>
+  </binding>
+  <mod-up>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/brakes[1]</property>
+    <value>0.0</value>
+   </binding>
+  </mod-up>
+ </button>
+
+ <button n="8">
+  <repeatable>false</repeatable>
+  <binding>
+   <command>view-cycle</command>
+  </binding>
+ </button>
+
+</PropertyList>
+
+<!-- end of "rumblepad.fgd" -->

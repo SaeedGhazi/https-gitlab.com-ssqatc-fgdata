@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+
+<!-- 
+************************************************************************
+Default joystick bindings.
+
+Assume that we have a conventional, three-axis, three-button
+joystick, and that the first button is the trigger.
+************************************************************************
+-->
+
+<PropertyList>
+
+ <axis n="0">
+  <desc>Aileron</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/aileron</property>
+   <squared type="bool">true</squared>
+  </binding>
+ </axis>
+
+ <axis n="1">
+  <desc>Elevator</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/elevator</property>
+   <factor type="double">-1.0</factor>
+   <squared type="bool">true</squared>
+  </binding>
+ </axis>
+
+ <axis n="2">
+  <desc>Throttle</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/throttle[0]</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/throttle[1]</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+ </axis>
+
+ <button n="0">
+  <desc>Brakes</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/brakes[0]</property>
+   <value type="double">1.0</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/brakes[1]</property>
+   <value type="double">1.0</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/brakes[2]</property>
+   <value type="double">1.0</value>
+  </binding>
+  <mod-up>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/brakes[0]</property>
+    <value type="double">0.0</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/brakes[1]</property>
+    <value type="double">0.0</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/brakes[2]</property>
+    <value type="double">0.0</value>
+   </binding>
+  </mod-up>
+ </button>
+
+ <button n="1">
+  <desc>Elevator trim up</desc>
+  <repeatable type="bool">true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/elevator-trim</property>
+   <step type="double">0.001</step>
+  </binding>
+ </button>
+
+ <button n="2">
+  <desc>Elevator trim down</desc>
+  <repeatable type="bool">true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/elevator-trim</property>
+   <step type="double">-0.001</step>
+  </binding>
+ </button>
+
+</PropertyList>
+
+<!-- end of joystick.xml -->

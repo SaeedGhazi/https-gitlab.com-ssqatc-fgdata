@@ -31,7 +31,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
   </panel_2>
   
   <model>
-   <path>Aircraft/c172/Models/N757/n757.ac</path>
+   <path>Aircraft/c172/Models/c172-dpm.xml</path>
   </model>
 
  </sim>

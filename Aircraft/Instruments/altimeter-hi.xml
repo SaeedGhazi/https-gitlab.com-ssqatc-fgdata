@@ -48,10 +48,10 @@ properties' values.
    <transformations>
     <transformation>
      <type>rotation</type>
-     <property>/steam/altimeter-datum-mb</property>
-     <min>945</min>
-     <max>1090</max>
-     <scale>-2.9533373</scale>  <!-- degrees rotation per millibar -->
+     <property>/instrumentation/altimeter/setting-inhg</property>
+     <min>26.0</min>
+     <max>33.0</max>
+     <scale>-99.89</scale>  <!-- degrees rotation per millibar -->
      <offset>120</offset>
     </transformation>
    </transformations>
@@ -80,7 +80,7 @@ properties' values.
    <transformations>
     <transformation>
      <type>rotation</type>
-     <property>/steam/altitude-ft</property>
+     <property>/instrumentation/altimeter/indicated-altitude-ft</property>
       <max>100000.0</max>
       <scale>0.0036</scale>
     </transformation>
@@ -104,7 +104,7 @@ properties' values.
    <transformations>
     <transformation>
      <type>rotation</type>
-     <property>/steam/altitude-ft</property>
+     <property>/instrumentation/altimeter/indicated-altitude-ft</property>
       <max>100000.0</max>
       <scale>0.036</scale>
     </transformation>
@@ -128,7 +128,7 @@ properties' values.
    <transformations>
     <transformation>
      <type>rotation</type>
-     <property>/steam/altitude-ft</property>
+     <property>/instrumentation/altimeter/indicated-altitude-ft</property>
       <max>100000.0</max>
       <scale>0.36</scale>
     </transformation>
@@ -159,10 +159,10 @@ properties' values.
    <h>45</h>
    <binding>
     <command>property-adjust</command>
-    <property>/steam/altimeter-datum-mb</property>
-    <step>-0.3386</step>
-    <min>945</min>
-    <max>1090</max>
+    <property>/instrumentation/altimeter/setting-inhg</property>
+    <step>-0.01</step>
+    <min>26.0</min>
+    <max>33.0</max>
     <wrap>false</wrap>
    </binding>
   </action>
@@ -175,10 +175,10 @@ properties' values.
    <h>45</h>
    <binding>
     <command>property-adjust</command>
-    <property>/steam/altimeter-datum-mb</property>
-    <step>-3.386</step>
-    <min>945</min>
-    <max>1090</max>
+    <property>/instrumentation/altimeter/setting-inhg</property>
+    <step>-0.1</step>
+    <min>26.0</min>
+    <max>33.0</max>
     <wrap>false</wrap>
    </binding>
   </action>
@@ -191,10 +191,10 @@ properties' values.
    <h>45</h>
    <binding>
     <command>property-adjust</command>
-    <property>/steam/altimeter-datum-mb</property>
-    <step>0.3386</step>
-    <min>945</min>
-    <max>1090</max>
+    <property>/instrumentation/altimeter/setting-inhg</property>
+    <step>0.01</step>
+    <min>26.0</min>
+    <max>33.0</max>
     <wrap>false</wrap>
    </binding>
   </action>
@@ -207,10 +207,10 @@ properties' values.
    <h>45</h>
    <binding>
     <command>property-adjust</command>
-    <property>/steam/altimeter-datum-mb</property>
-    <step>3.386</step>
-    <min>945</min>
-    <max>1090</max>
+    <property>/instrumentation/altimeter/setting-inhg</property>
+    <step>0.1</step>
+    <min>26.0</min>
+    <max>33.0</max>
     <wrap>false</wrap>
    </binding>
   </action>

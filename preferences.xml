@@ -368,12 +368,20 @@ Started September 2000 by David Megginson, david@megginson.com
  </steam>
 
  <instrumentation>
+  <altimeter>
+   <serviceable type="bool">true</serviceable>
+   <setting-inhg type="double">29.92</setting-inhg>
+  </altimeter>
   <attitude-indicator>
    <serviceable type="bool">true</serviceable>
   </attitude-indicator>
  </instrumentation>
 
  <systems>
+  <static>
+   <serviceable type="bool">true</serviceable>
+   <pressure-inhg type="double">29.92</pressure-inhg>
+  </static>
   <vacuum>
    <serviceable type="bool">true</serviceable>
   </vacuum>

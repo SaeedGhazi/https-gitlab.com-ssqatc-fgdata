@@ -11,32 +11,30 @@ October 23 2001 John Check, fgpanels@rockfish.net
 -->
 
 <PropertyList>
-<!-- these are the three main components -->
- <sim>
-  <flight-model>jsb</flight-model>
-  <aero>X15</aero>
-  <sound>false</sound>
+ <!-- these are the three main components -->
 
-  <panel>
-   <path>Aircraft/X15/Panels/X15-panel.xml</path>
-   <visibility>true</visibility>
-  </panel>
-  <panel_2>
-   <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
-  </panel_2>
-  
-  <!-- switching models doesn't work -->
-  <!-- gear up -->
-  <model>
-   <path>Aircraft/X15/Models/X15_flight.ac</path>
-  </model> 
-  <!-- gear down -->
-  <model_2>
-   <path>Aircraft/X15/Models/X15_landing.ac</path>
-  </model_2> 
+ <flight-model>jsb</flight-model>
+ <aero>X15</aero>
+ <sound>false</sound>
 
- </sim>
+ <panel>
+  <path>Aircraft/X15/Panels/X15-panel.xml</path>
+  <visibility>true</visibility>
+ </panel>
+ <panel_2>
+  <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
+ </panel_2>
   
+ <!-- switching models doesn't work -->
+ <!-- gear up -->
+ <model>
+  <path>Aircraft/X15/Models/X15_flight.ac</path>
+ </model> 
+ <!-- gear down -->
+ <model_2>
+  <path>Aircraft/X15/Models/X15_landing.ac</path>
+ </model_2> 
+
 </PropertyList>
 
 

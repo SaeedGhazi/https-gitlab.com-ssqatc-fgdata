@@ -251,6 +251,16 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+ <key n="43">
+  <name>+</name>
+  <desc>zoom in (decrease field of view)</desc>
+  <binding>
+   <command>property-multiply</command>
+   <property>/sim/current-view/field-of-view</property>
+   <factor type="double">0.9523809523809523</factor> <!-- 1 / 1.05 -->
+  </binding>
+ </key>
+
  <key n="44">
   <name>,</name>
   <desc>Left brake</desc>
@@ -266,6 +276,16 @@ calculated by adding 256 to the GLUT key value in glut.h.
     <value type="double">0.0</value>
    </binding>
   </mod-up>
+ </key>
+
+ <key n="45">
+  <name>-</name>
+  <desc>zoom out (decrease field of view)</desc>
+  <binding>
+   <command>property-multiply</command>
+   <property>/sim/current-view/field-of-view</property>
+   <factor type="double">1.05</factor>
+  </binding>
  </key>
 
  <key n="46">
@@ -457,6 +477,16 @@ calculated by adding 256 to the GLUT key value in glut.h.
     <value alias="/sim/view/config/front-right-direction-deg"/>
    </binding>
   </mod-shift>
+ </key>
+
+ <key n="61">
+  <name>=</name>
+  <desc>Reset zoom to default</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/current-view/field-of-view</property>
+   <value type="double">55.0</value>
+  </binding>
  </key>
 
  <key n="64">

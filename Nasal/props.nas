@@ -29,10 +29,9 @@ Node = {
     getNode        : func { wrap(_getNode(me._g, arg)) },
 
     getPath : func {
-        name = getName();
-        if(getIndex() != 0) { name = name ~ "[" ~ getIndex() ~ "]"; }
-        if(getParent())     { name = getParent().getPath() ~ "/" ~ name; }
-        else                { name = "/" ~ name; }
+        name = me.getName();
+        if(me.getIndex() != 0)    { name = name ~ "[" ~ me.getIndex() ~ "]"; }
+        if(me.getParent() != nil) { name = me.getParent().getPath() ~ "/" ~ name; }
         return name;
     },
 

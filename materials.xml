@@ -675,7 +675,7 @@ Shared parameters for various materials.
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
    <path>Models/Trees/coniferous-tree.ac</path>
-   <path>Models/Trees/coniferous-tree2.ac</path>
+   <path>Models/Trees/coniferous-tree3.ac</path>
    <coverage-m2 alias="/params/forest/tree-coverage-m2"/>
    <heading-type>billboard</heading-type>
   </object>
@@ -715,6 +715,7 @@ Shared parameters for various materials.
    <path>Models/Trees/deciduous-tree3.ac</path>
    <path>Models/Trees/coniferous-tree.ac</path>
    <path>Models/Trees/coniferous-tree2.ac</path>
+   <path>Models/Trees/deciduous-tree3.ac</path>
    <coverage-m2 alias="/params/forest/tree-coverage-m2"/>
    <heading-type>billboard</heading-type>
   </object>
@@ -732,7 +733,7 @@ Shared parameters for various materials.
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
    <path>Models/Trees/coniferous-tree.ac</path>
-   <path>Models/Trees/coniferous-tree2.ac</path>
+   <path>Models/Trees/deciduous-tree3.ac</path>
    <coverage-m2 alias="/params/forest/tree-coverage-m2"/>
    <heading-type>billboard</heading-type>
   </object>
@@ -769,7 +770,6 @@ Shared parameters for various materials.
 <material>
  <name>ShrubCover</name>
  <name>ShrubGrassCover</name>
- <name>BareTundraCover</name>
  <texture>Terrain/shrub.rgb</texture>
  <xsize>500</xsize>
  <ysize>500</ysize>
@@ -911,8 +911,15 @@ Shared parameters for various materials.
 </material>
 
 <material>
- <name>Glacier</name>
  <name>PackIce</name>
+ <texture>Terrain/packice.rgb</texture>
+ <xsize>400</xsize>
+ <ysize>400</ysize>
+ <shininess>1.5</shininess>
+</material>
+
+<material>
+ <name>Glacier</name>
  <texture>Terrain/glacier.rgb</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
@@ -1027,10 +1034,25 @@ Shared parameters for various materials.
 
 <material>
  <name>GrassCover</name>
+ <texture>Terrain/grass.rgb</texture>
+ <xsize>1000</xsize>
+ <ysize>1000</ysize>
+ <light-coverage>4000000.0</light-coverage>
+</material>
+
+<material>
+ <name>BareTundraCover</name>
  <name>HerbTundraCover</name>
  <name>MixedTundraCover</name>
+ <texture>Terrain/tundra.rgb</texture>
+ <xsize>1000</xsize>
+ <ysize>1000</ysize>
+ <light-coverage>4000000.0</light-coverage>
+</material>
+
+<material>
  <name>SavannaCover</name>
- <texture>Terrain/grass.rgb</texture>
+ <texture>Terrain/savanna.rgb</texture>
  <xsize>1000</xsize>
  <ysize>1000</ysize>
  <light-coverage>4000000.0</light-coverage>
@@ -1081,6 +1103,7 @@ Shared parameters for various materials.
    <path>Models/Trees/deciduous-tree3.ac</path>
    <path>Models/Trees/coniferous-tree.ac</path>
    <path>Models/Trees/coniferous-tree2.ac</path>
+   <path>Models/Trees/deciduous-tree3.ac</path>
    <coverage-m2>500000</coverage-m2>
    <heading-type>billboard</heading-type>
   </object>
@@ -1122,6 +1145,7 @@ Shared parameters for various materials.
    <path>Models/Trees/deciduous-tree3.ac</path>
    <path>Models/Trees/coniferous-tree.ac</path>
    <path>Models/Trees/coniferous-tree2.ac</path>
+   <path>Models/Trees/deciduous-tree3.ac</path>
    <coverage-m2>500000</coverage-m2>
    <heading-type>billboard</heading-type>
   </object>
@@ -1163,6 +1187,7 @@ Shared parameters for various materials.
    <path>Models/Trees/deciduous-tree3.ac</path>
    <path>Models/Trees/coniferous-tree.ac</path>
    <path>Models/Trees/coniferous-tree2.ac</path>
+   <path>Models/Trees/deciduous-tree3.ac</path>
    <coverage-m2>500000</coverage-m2>
    <heading-type>billboard</heading-type>
   </object>
@@ -1203,6 +1228,7 @@ Shared parameters for various materials.
    <path>Models/Trees/deciduous-tree3.ac</path>
    <path>Models/Trees/coniferous-tree.ac</path>
    <path>Models/Trees/coniferous-tree2.ac</path>
+   <path>Models/Trees/deciduous-tree3.ac</path>
    <coverage-m2>200000</coverage-m2>
    <heading-type>billboard</heading-type>
   </object>

@@ -907,6 +907,16 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="262">
   <name>F6</name>
+  <binding>
+   <desc>Toggle Autopilot Heading Mode</desc>
+   <command>nasal</command>
+   <script>
+    prop = "/autopilot/locks/heading";
+    curr = getprop(prop);
+    if(curr == "true-heading-hold") { setprop(prop, ""); }
+    else { setprop(prop, "true-heading-hold"); }
+   </script>
+  </binding>
   <mod-shift>
    <binding>
     <desc>Scroll panel up</desc>

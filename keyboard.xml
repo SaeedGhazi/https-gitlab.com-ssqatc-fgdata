@@ -1,0 +1,358 @@
+<?xml version="1.0"?>
+<!--
+Key binding definitions.
+
+This file is included by preferences.xml, and uses the context of its
+inclusion point; that means that you need to prepend "/input/keyboard"
+to all property names.
+
+The list here is not yet comprehensive: many of the bindings are still
+handled in the C++ code.
+
+Regular keycodes go up to 255; special keys start at 256, and can be
+calculated by adding 256 to the GLUT key value in glut.h.
+-->
+
+<PropertyList>
+
+ <key n="1">
+  <name>Ctrl-A</name>
+  <desc>Toggle autopilot altitude lock.</desc>
+  <binding>
+   <control>/autopilot/locks/altitude</control>
+   <action>switch</action>
+  </binding>
+ </key>
+
+ <key n="8">
+  <name>Ctrl-H</name>
+  <desc>Toggle autopilot heading lock.</desc>
+  <binding>
+   <control>/autopilot/locks/heading</control>
+   <action>switch</action>
+  </binding>
+ </key>
+
+ <key n="13">
+  <name>Ctrl-M</name>
+  <desc>Move rudder right.</desc>
+  <binding>
+  <control>/controls/rudder</control>
+  <action>adjust</action>
+  <step>0.05</step>
+  </binding>
+ </key>
+
+ <key n="14">
+  <name>Ctrl-N</name>
+  <desc>Toggle autopilot nav1 lock.</desc>
+  <binding>
+   <control>/autopilot/locks/nav1</control>
+   <action>switch</action>
+  </binding>
+ </key>
+
+ <key n="21">
+  <name>Ctrl-U</name>
+  <desc>[Cheat] Add 1000ft of emergency altitude.</desc>
+  <binding>
+   <control>/position/altitude</control>
+   <action>adjust</action>
+   <step>1000</step>
+  </binding>
+ </key>
+
+ <!-- no longer controls heading in autopilot mode -->
+ <key n="48">
+  <name>0</name>
+  <desc>Move rudder left.</desc>
+  <binding>
+   <control>/controls/rudder</control>
+   <action>adjust</action>
+   <step>-0.05</step>
+  </binding>
+ </key>
+
+ <key n="49">
+  <name>1</name>
+  <desc>Decrease elevator trim.</desc>
+  <binding>
+   <control>/controls/elevator-trim</control>
+   <action>adjust</action>
+   <step>-0.001</step>
+  </binding>
+ </key>
+
+ <!-- no longer controls altitude in autopilot mode -->
+ <key n="50">
+  <name>2</name>
+  <desc>Increase elevator.</desc>
+  <binding>
+   <control>/controls/elevator</control>
+   <action>adjust</action>
+   <step>0.01</step>
+  </binding>
+ </key>
+
+ <!-- no longer controls autothrottle in autopilot mode -->
+ <key n="57">
+  <name>3</name>
+  <desc>Decrease throttle.</desc>
+  <binding>
+   <control>/controls/throttle</control>
+   <action>adjust</action>
+   <step>-0.01</step>
+  </binding>
+ </key>
+
+ <key n="52">
+  <name>4</name>
+  <desc>Move aileron left.</desc>
+  <binding>
+   <control>/controls/aileron</control>
+   <action>adjust</action>
+   <step>-0.05</step>
+  </binding>
+ </key>
+
+ <key n="53">
+  <name>5</name>
+  <desc>Center aileron, elevator, and rudder.</desc>
+  <binding>
+   <control>/controls/aileron</control>
+   <action>assign</action>
+   <value>0.0</value>
+  </binding>
+  <binding>
+   <control>/controls/elevator</control>
+   <action>assign</action>
+   <value>0.0</value>
+  </binding>
+  <binding>
+   <control>/controls/rudder</control>
+   <action>assign</action>
+   <value>0.0</value>
+  </binding>
+ </key>
+
+ <key n="54">
+  <name>6</name>
+  <desc>Move aileron right.</desc>
+  <binding>
+   <control>/controls/aileron</control>
+   <action>adjust</action>
+   <step>0.05</step>
+  </binding>
+ </key>
+
+ <key n="55">
+  <name>7</name>
+  <desc>Increase elevator trim.</desc>
+  <binding>
+   <control>/controls/elevator-trim</control>
+   <action>adjust</action>
+   <step>0.001</step>
+  </binding>
+ </key>
+
+ <!-- no longer controls altitude in autopilot mode -->
+ <key n="56">
+  <name>8</name>
+  <desc>Decrease elevator.</desc>
+  <binding>
+   <control>/controls/elevator</control>
+   <action>adjust</action>
+   <step>-0.01</step>
+  </binding>
+ </key>
+
+ <!-- no longer controls autothrottle in autopilot mode -->
+ <key n="57">
+  <name>9</name>
+  <desc>Increase throttle.</desc>
+  <binding>
+   <control>/controls/throttle</control>
+   <action>adjust</action>
+   <step>0.01</step>
+  </binding>
+ </key>
+
+ <key n="65">
+  <name>A</name>
+  <desc>Decrease speed-up.</desc>
+  <binding>
+   <control>/sim/speed-up</control>
+   <action>adjust</action>
+   <step>-1</step>
+  </binding>
+ </key>
+
+ <key n="80">
+  <name>P</name>
+  <desc>Toggle panel.</desc>
+  <mod-shift>true</mod-shift>
+  <binding>
+   <control>/sim/panel/visibility</control>
+   <action>switch</action>
+  </binding>
+ </key>
+
+ <key n="91">
+  <name>[</name>
+  <desc>Decrease flaps.</desc>
+  <binding>
+   <control>/controls/flaps</control>
+   <action>adjust</action>
+   <step>-0.34</step>
+  </binding>
+ </key>
+
+ <key n="93">
+  <name>]</name>
+  <desc>Increase flaps.</desc>
+  <binding>
+   <control>/controls/flaps</control>
+   <action>adjust</action>
+   <step>0.34</step>
+  </binding>
+ </key>
+
+ <key n="97">
+  <name>a</name>
+  <desc>Increase speed-up.</desc>
+  <binding>
+   <control>/sim/speed-up</control>
+   <action>adjust</action>
+   <step>1</step>
+  </binding>
+ </key>
+
+ <!-- no longer controls heading in autopilot mode -->
+ <key n="269">
+  <name>Enter</name>
+  <desc>Move rudder right.</desc>
+  <binding>
+   <control>/controls/rudder</control>
+   <action>adjust</action>
+   <step>0.05</step>
+  </binding>
+ </key>
+
+ <key n="309">
+  <name>Keypad 5</name>
+  <desc>Center aileron, elevator, and rudder.</desc>
+  <binding>
+   <control>/controls/aileron</control>
+   <action>assign</action>
+   <value>0.0</value>
+  </binding>
+  <binding>
+   <control>/controls/elevator</control>
+   <action>assign</action>
+   <value>0.0</value>
+  </binding>
+  <binding>
+   <control>/controls/rudder</control>
+   <action>assign</action>
+   <value>0.0</value>
+  </binding>
+ </key>
+
+ <key n="356">
+  <name>Left</name>
+  <desc>Move aileron left.</desc>
+  <binding>
+   <control>/controls/aileron</control>
+   <action>adjust</action>
+   <step>-0.05</step>
+  </binding>
+ </key>
+
+ <!-- no longer controls altitude in autopilot mode -->
+ <key n="357">
+  <name>Up</name>
+  <desc>Increase elevator.</desc>
+  <binding>
+   <control>/controls/elevator</control>
+   <action>adjust</action>
+   <step>0.05</step>
+  </binding>
+ </key>
+
+ <key n="358">
+  <name>Right</name>
+  <desc>Move aileron right.</desc>
+  <binding>
+   <control>/controls/aileron</control>
+   <action>adjust</action>
+   <step>0.05</step>
+  </binding>
+ </key>
+
+ <!-- no longer controls altitude in autopilot mode -->
+ <key n="359">
+  <name>Down</name>
+  <desc>Decrease elevator.</desc>
+  <binding>
+   <control>/controls/elevator</control>
+   <action>adjust</action>
+   <step>-0.05</step>
+  </binding>
+ </key>
+
+ <!-- no longer controls autothrottle in autopilot mode -->
+ <key n="360">
+  <name>PageUp</name>
+  <desc>Increase throttle.</desc>
+  <binding>
+   <control>/controls/throttle</control>
+   <action>adjust</action>
+   <step>0.01</step>
+  </binding>
+ </key>
+
+ <!-- no longer controls autothrottle in autopilot mode -->
+ <key n="361">
+  <name>PageDown</name>
+  <desc>Decrease throttle.</desc>
+  <binding>
+   <control>/controls/throttle</control>
+   <action>adjust</action>
+   <step>-0.01</step>
+  </binding>
+ </key>
+
+ <key n="362">
+  <name>Home</name>
+  <desc>Increase elevator trim.</desc>
+  <binding>
+   <control>/controls/elevator-trim</control>
+   <action>adjust</action>
+   <step>0.001</step>
+  </binding>
+ </key>
+
+ <key n="363">
+  <name>End</name>
+  <desc>Decrease elevator trim.</desc>
+  <binding>
+   <control>/controls/elevator-trim</control>
+   <action>adjust</action>
+   <step>-0.001</step>
+  </binding>
+ </key>
+
+ <!-- no longer controls heading in autopilot mode -->
+ <key n="364">
+  <name>Insert</name>
+  <desc>Move rudder left.</desc>
+  <binding>
+   <control>/controls/rudder</control>
+   <action>adjust</action>
+   <step>-0.05</step>
+  </binding>
+ </key>
+
+</PropertyList>
+
+<!-- end of keyboard.xml -->

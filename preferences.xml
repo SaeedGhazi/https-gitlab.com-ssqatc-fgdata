@@ -441,6 +441,9 @@ Started September 2000 by David Megginson, david@megginson.com
   <magnetic-compass>
    <serviceable type="bool" archive="y">true</serviceable>
   </magnetic-compass>
+  <dme>
+   <serviceable type="bool" archive="y">true</serviceable>
+  </dme>
  </instrumentation>
 
  <systems>

@@ -109,7 +109,7 @@
            eng-power="285" eng-rpm="2700"
            turbo-mul="2" wastegate-mp="40"
            cruise-power="157" cruise-speed="195"
-           cruise-rpm="2100" cruise-alt="10000"
+           cruise-rpm="2100" cruise-alt="20000"
            min-rpm="1600" max-rpm="2700">
   <actionpt x="-1.53" y="-1.83" z="0.07"/>
   <control-input axis="/controls/throttle[1]" control="THROTTLE"/>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+UIUC Beech 99 init file.
+************************************************************************
+-->
+
+<PropertyList>
+
+ <sim>
+ 
+  <flight-model>larcsim</flight-model>
+  <aero>uiuc</aero>
+  <aircraft-dir>Aircraft-uiuc/Beech99</aircraft-dir>
+  <sound>false</sound>
+
+  <panel>
+   <path>Aircraft/c310/c310-vfr-panel.xml</path>
+   <visibility>true</visibility>
+  </panel>
+
+  <panel_2>
+   <path>Aircraft/c310/c310-mini-panel.xml</path>
+  </panel_2>
+
+  <!-- You must download this separately -->
+  <model>
+   <path>Aircraft/Beech99/Models/beech_99.mdl</path>
+  </model> 
+
+ </sim>
+
+</PropertyList>
+
+

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+UIUC Boeing 747 init file.
+************************************************************************
+-->
+
+<PropertyList>
+ <sim>
+
+  <flight-model>larcsim</flight-model>
+  <aero>uiuc</aero>
+  <aircraft-dir>Aircraft-uiuc/Boeing747</aircraft-dir>
+
+  <panel>
+   <path>Aircraft/747/747-panel.xml</path>
+   <visibility>false</visibility>
+  </panel>
+
+  <hud>
+  <visibility>true</visibility>
+  </hud>
+  
+  <model>
+   <path>Aircraft/747/Model/boeing747.ac</path>
+  </model>
+ </sim>
+
+</PropertyList>
+
+

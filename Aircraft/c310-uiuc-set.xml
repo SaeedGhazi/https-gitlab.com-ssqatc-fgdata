@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+UIUC Cessna 310 init file.
+************************************************************************
+-->
+
+<PropertyList>
+
+ <sim>
+  <flight-model>larcsim</flight-model>
+  <aero>uiuc</aero>
+  <aircraft-dir>Aircraft-uiuc/Cessna310</aircraft-dir>
+  <sound>true</sound>
+
+  <panel>
+   <path>Aircraft/c310/c310-vfr-panel.xml</path>
+   <visibility>true</visibility>
+  </panel>
+
+  <panel_2>
+   <path>Aircraft/c310/c310-mini-panel.xml</path>
+  </panel_2>
+
+  <!-- you need to download this from the above website -->
+  <model>
+   <path>Aircraft/c310/Models/cessna310r.ac</path>
+  </model> 
+ </sim>
+</PropertyList>

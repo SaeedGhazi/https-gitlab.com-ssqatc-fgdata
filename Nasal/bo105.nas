@@ -1,5 +1,5 @@
 # $Id$
-print("Loading bo105.nas");
+#print("Loading bo105.nas");
 print("\tShift-C ... open/close rear door");
 
 rearpos = "/controls/doors/rear";
@@ -33,4 +33,4 @@ MoveDoor = func {
 	}
 }
 
-print("Finished loading bo105.nas");
+#print("Finished loading bo105.nas");

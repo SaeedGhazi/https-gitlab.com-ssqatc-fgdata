@@ -77,23 +77,23 @@ properties' values.
     <transformation>
      <type>rotation</type>
      <property>/steam/slip-skid</property>
-     <min>-0.1</min>
-     <max>0.1</max>
-     <scale>400.0</scale>
+     <min>-1.1</min>
+     <max>1.1</max>
+     <scale>50.0</scale>
     </transformation>
     <transformation>
      <type>y-shift</type>
      <property>/steam/slip-skid</property>
-      <min>-0.1</min>
+      <min>-1.1</min>
       <max>0.0</max> 
-      <scale>40.0</scale>
+      <scale>5.0</scale>
     </transformation>
     <transformation>
      <type>y-shift</type>
      <property>/steam/slip-skid</property>
       <min>0.0</min>
-      <max>0.1</max> 
-      <scale>-40.0</scale>
+      <max>1.1</max> 
+      <scale>-5.0</scale>
     </transformation>
     <transformation>
      <type>y-shift</type>

@@ -346,7 +346,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
     <binding>
      <command>property-assign</command>
      <property>/sim/current-view/goal-heading-offset-deg</property>
-     <property>/sim/view/config/back-left-direction-deg"</property>
+     <property>/sim/view/config/back-left-direction-deg</property>
     </binding>
   </mod-shift>
  </key>

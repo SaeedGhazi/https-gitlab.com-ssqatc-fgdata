@@ -30,6 +30,14 @@ Common configuration for all C172 aircraft.
   </attitude-indicator>
  </instrumentation>
   
+ <controls>
+  <engines>
+   <engine n="0">
+    <magnetos>3</magnetos>
+   </engine>
+  </engines>
+ </controls>
+
  <engines>
   <engine>
    <rpm type="double">700</rpm>

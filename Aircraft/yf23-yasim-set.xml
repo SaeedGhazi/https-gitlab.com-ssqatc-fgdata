@@ -51,8 +51,14 @@ NR/MD YF23 simulation config.
  </sim>
 
  <controls>
-  <magnetos n="0">3</magnetos>
-  <magnetos n="1">3</magnetos>
+  <engines>
+   <engine n="0">
+    <magnetos>3</magnetos>
+   </engine>
+   <engine n="1">
+    <magnetos>3</magnetos>
+   </engine>
+  </engines>
  </controls>
 
  <autopilot>

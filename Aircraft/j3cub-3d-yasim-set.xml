@@ -58,7 +58,11 @@ model, instrument panel, and external 3D model.
   <aileron-trim>0.0076</aileron-trim>   <!-- fixed -->
   <elevator-trim>0.0000</elevator-trim> <!-- controllable -->
   <rudder-trim>0.0020</rudder-trim>     <!-- fixed -->
-  <magnetos>2</magnetos>
+  <engines>
+   <engine n="0">
+    <magnetos>3</magnetos>
+   </engine>
+  </engines>
   <door>1.0</door>
  </controls>
 

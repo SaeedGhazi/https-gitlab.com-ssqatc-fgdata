@@ -14,10 +14,6 @@ Common configuration for YASim C172r aircraft.
   <fuel-fraction>1.0</fuel-fraction>
  </sim>
 
- <controls>
-  <magnetos>3</magnetos>
- </controls>
-
  <!-- TODO: trim for level cruise -->
 
 </PropertyList>

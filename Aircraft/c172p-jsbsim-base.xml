@@ -17,7 +17,6 @@ Common configuration for JSBSim C172P aircraft.
  <controls>
   <aileron-trim>-0.012</aileron-trim>
   <rudder-trim>-0.025</rudder-trim>
-  <magnetos>3</magnetos>
  </controls>
 
 </PropertyList>

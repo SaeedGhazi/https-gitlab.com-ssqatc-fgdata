@@ -95,8 +95,20 @@ October 23 2001 John Check, fgpanels@rockfish.net
  </autopilot>
 
  <controls>
-  <magnetos>3</magnetos>
+  <engines>
+   <engine n="0">
+    <magnetos>3</magnetos>
+   </engine>
+  </engines>
  </controls>
+
+ <instrumentation>
+  <attitude-indicator>
+   <config>
+    <tumble-flag>true</tumble-flag>
+   </config>
+  </attitude-indicator>
+ </instrumentation>
 
  <engines>
   <engine>

@@ -18,7 +18,6 @@ Common configuration for YASim PA28-161 aircraft.
   <aileron-trim>-0.012</aileron-trim>
   <elevator-trim>0</elevator-trim>
   <rudder-trim>0</rudder-trim>
-  <magnetos>3</magnetos>
  </controls>
 
  <yasim>

@@ -533,6 +533,22 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+ <key n="72">
+  <name>H</name>
+  <desc>Cycle HUD Brightness</desc>
+  <binding>
+   <command>hud-brightkey</command>
+  </binding>
+ </key>
+
+ <key n="73">
+  <name>I</name>
+  <desc>Minimal HUD</desc>
+  <binding>
+   <command>hud-init2</command>
+  </binding>
+ </key>
+
  <key n="77">
   <name>M</name>
   <desc>Decrease warp.</desc>
@@ -682,6 +698,22 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <command>property-assign</command>
    <property>/controls/gear/gear-down</property>
    <value type="double">0.0</value>
+  </binding>
+ </key>
+
+ <key n="104">
+  <name>h</name>
+  <desc>HUD Master Switch</desc>
+  <binding>
+   <command>hud-masterswitch</command>
+  </binding>
+ </key>
+
+ <key n="105">
+  <name>i</name>
+  <desc>Normal HUD</desc>
+  <binding>
+   <command>hud-init</command>
   </binding>
  </key>
 

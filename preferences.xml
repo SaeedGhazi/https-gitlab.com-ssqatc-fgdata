@@ -280,9 +280,13 @@ Started September 2000 by David Megginson, david@megginson.com
    <level type="int">1</level>
   </ai-traffic>
 
+  <traffic-manager>
+     <enabled type="bool">true</enabled>
+  </traffic-manager>
+
   <ai>
    <enabled type="bool">true</enabled>
-   <scenario>aircraft_demo</scenario>
+   <!-- <scenario>aircraft_demo</scenario> -->
   </ai>
 
  </sim>

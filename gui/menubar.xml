@@ -135,10 +135,18 @@
   <label>Location</label>
 
   <item>
-   <label>Aircraft Location</label>
+   <label>Position Aircraft (on ground)</label>
    <binding>
     <command>dialog-show</command>
-    <dialog-name>location</dialog-name>
+    <dialog-name>location-on-ground</dialog-name>
+   </binding>
+  </item>
+
+  <item>
+   <label>Position Aircraft (in air)</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>location-in-air</dialog-name>
    </binding>
   </item>
 

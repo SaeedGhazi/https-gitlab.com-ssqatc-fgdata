@@ -1,19 +1,19 @@
 <?xml version="1.0"?>
 
 <PropertyList>
- <name>presets</name>
+ <name>location-in-air</name>
  <width>400</width>
- <height>300</height>
+ <height>400</height>
 
  <text>
   <x>10</x>
-  <y>270</y>
-  <label>Set New Position</label>
+  <y>360</y>
+  <label>Set New Location</label>
  </text>
 
  <input>
   <x>10</x>
-  <y>210</y>
+  <y>300</y>
   <width>200</width>
   <height>25</height>
   <label>Airport</label>
@@ -22,11 +22,38 @@
 
  <input>
   <x>10</x>
-  <y>180</y>
+  <y>270</y>
   <width>200</width>
   <height>25</height>
   <label>Runway</label>
   <property>/sim/presets/runway</property>
+ </input>
+
+ <input>
+  <x>10</x>
+  <y>240</y>
+  <width>200</width>
+  <height>25</height>
+  <label>VOR</label>
+  <property>/sim/presets/vor-id</property>
+ </input>
+
+ <input>
+  <x>10</x>
+  <y>210</y>
+  <width>200</width>
+  <height>25</height>
+  <label>NDB</label>
+  <property>/sim/presets/ndb-id</property>
+ </input>
+
+ <input>
+  <x>10</x>
+  <y>180</y>
+  <width>200</width>
+  <height>25</height>
+  <label>Fix</label>
+  <property>/sim/presets/fix</property>
  </input>
 
  <input>

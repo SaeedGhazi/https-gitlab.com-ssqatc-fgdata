@@ -5,7 +5,8 @@
  <generic>
 
   <output>
-   <seperator>,</seperator>
+   <line_seperator>newline</line_seperator>
+   <var_seperator>newline</var_seperator>
 
    <chunk>
     <name>speed</name>
@@ -48,7 +49,7 @@
 
    <chunk>
     <name>engine</name>
-    <format>E=%02d;</format>
+    <format>E=%02d</format>
     <node>/engines/engine[0]/rpm</node>
    </chunk>
   </output>

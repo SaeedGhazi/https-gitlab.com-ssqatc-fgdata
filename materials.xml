@@ -912,6 +912,7 @@ Shared parameters for various materials.
 
 <material>
  <name>Glacier</name>
+ <name>PackIce</name>
  <texture>Terrain/glacier.rgb</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>

@@ -34,7 +34,7 @@
   <item>
    <label>Snapshot</label>
    <binding>
-    <command>old-snapshot-dialog</command>
+    <command>screen-capture</command>
    </binding>
   </item>
 
@@ -90,6 +90,14 @@
 
  <menu>
   <label>Presets</label>
+
+  <item>
+   <label>Preset Values</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>presets</dialog-name>
+   </binding>
+  </item>
   
   <item>
    <label>Preset Airport</label>

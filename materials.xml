@@ -1000,6 +1000,7 @@ Shared parameters for various materials.
 
 <material>
  <name>BarrenCover</name>
+ <name>Lava</name>
  <texture>Terrain/rock.rgb</texture>
  <xsize>500</xsize>
  <ysize>500</ysize>

@@ -185,6 +185,15 @@ Started September 2000 by David Megginson, david@megginson.com
 
  </radios>
 
-</PropertyList>
+ <!-- Instruments -->
+ 
+ <!-- this is here because the datum isn't retained on a reset -->
+
+ <steam>
+   <altimeter-datum-mb>1013.25</altimeter-datum-mb>
+ </steam>                                                                       
+
+ </PropertyList>
 
 <!-- end of preferences.xml -->
+

@@ -368,6 +368,9 @@ Started September 2000 by David Megginson, david@megginson.com
  </steam>
 
  <instrumentation>
+  <airspeed-indicator>
+   <serviceable type="bool">true</serviceable>
+  </airspeed-indicator>
   <altimeter>
    <serviceable type="bool">true</serviceable>
    <setting-inhg type="double">29.92</setting-inhg>
@@ -385,6 +388,9 @@ Started September 2000 by David Megginson, david@megginson.com
  </instrumentation>
 
  <systems>
+  <pitot>
+   <serviceable type="bool">true</serviceable>
+  </pitot>
   <static>
    <serviceable type="bool">true</serviceable>
    <pressure-inhg type="double">29.92</pressure-inhg>

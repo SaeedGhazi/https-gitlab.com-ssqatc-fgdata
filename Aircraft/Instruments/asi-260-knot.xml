@@ -62,7 +62,7 @@ properties' values.
    <transformations>
      <transformation>
       <type>rotation</type>
-      <property>/steam/airspeed-kt</property>
+      <property>/instrumentation/airspeed-indicator/indicated-speed-kt</property>
       <min>10.0</min>
       <max>260.0</max>
       <scale>1.0</scale>

@@ -64,7 +64,7 @@ fuelUpdate = func {
                 lbs = 0; 
                 # Kill the engines if we're told to, otherwise simply
                 # deselect the tank.
-                if(t.getBoolValue("kill-when-empty")) { outOfFuel = 1; }
+                if(t.getNode("kill-when-empty", 1).getBoolValue()) { outOfFuel = 1; }
                 else { t.setBoolValue("selected", 0); }
             }
             gals = lbs / ppg;

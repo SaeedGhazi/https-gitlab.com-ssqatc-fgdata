@@ -220,7 +220,7 @@ properties' values.
    <h>20</h>
    <binding>
     <command>property-adjust</command>
-    <property>/controls/rudder</property>
+    <property>/controls/rudder-trim</property>
     <step>-0.005</step>
     <min>-1.0</min>
     <max>1.0</max>
@@ -236,7 +236,7 @@ properties' values.
    <h>20</h>
    <binding>
     <command>property-adjust</command>
-    <property>/controls/rudder</property>
+    <property>/controls/rudder-trim</property>
     <step>0.005</step>
     <min>-1.0</min>
     <max>1.0</max>

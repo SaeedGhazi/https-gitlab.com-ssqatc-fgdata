@@ -361,7 +361,7 @@
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
-   <property>/instrumentation/dme/frequencies/selected-khz</property>
+   <property>/instrumentation/dme/frequencies/selected-mhz</property>
   </input>
 
  </group>

@@ -19,7 +19,7 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
 
   <sound>
    <audible>true</audible>
-   <path>Aircraft/c310u3a/c310u3a-sound.xml</path>
+   <path>Aircraft/c310/c310-sound.xml</path>
   </sound>
 
   <panel>
@@ -96,6 +96,9 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
  </engines>
   
 </PropertyList>
+
+
+
 
 
 

@@ -27,7 +27,7 @@ UIUC Cessna 310 init file.
   </panel_2>
 
   <model>
-   <path>Aircraft/c310/Models/c310-dpm.xml</path>
+   <path>Aircraft/c310u3a/Models/c310u3a.xml</path>
    <heading-offset-deg>0</heading-offset-deg>
    <z-offset-m>-0.555</z-offset-m>
   </model> 

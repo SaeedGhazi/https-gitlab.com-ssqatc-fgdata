@@ -277,6 +277,12 @@ properties' values.
 
   <layer>
   <name>bezel</name>
+  <condition>
+   <not-equals>
+    <property>/sim/aero</property>
+    <value>c310u3a</value>
+   </not-equals>
+  </condition>
   <texture>
    <path>Aircraft/Instruments/Textures/bezel.rgb</path>
    <x1>0.0</x1>
@@ -444,3 +450,4 @@ properties' values.
  </actions>
 
 </PropertyList>
+

@@ -291,18 +291,24 @@ Started September 2000 by David Megginson, david@megginson.com
      <elevation-ft>0</elevation-ft>
      <wind-from-heading-deg>270</wind-from-heading-deg>
      <wind-speed-kt>3</wind-speed-kt>
-     <turbulence-norm>0.0</turbulence-norm>
      <visibility-m>16000</visibility-m>
      <pressure-sea-level-inhg>29.92</pressure-sea-level-inhg>
      <temperature-degc>15.0</temperature-degc>
      <dewpoint-degc>5.0</dewpoint-degc>
+     <turbulence>
+      <magnitude-norm>0.0</magnitude-norm>
+      <rate-hz>1.0</rate-hz>
+     </turbulence>
     </entry>
 
     <entry>
      <elevation-ft>500</elevation-ft>
      <wind-from-heading-deg>280</wind-from-heading-deg>
      <wind-speed-kt>6</wind-speed-kt>
-     <turbulence-norm>0.1</turbulence-norm>
+     <turbulence>
+      <magnitude-norm>0.1</magnitude-norm>
+      <rate-hz>1.0</rate-hz>
+     </turbulence>
     </entry>
 
    </boundary>
@@ -313,18 +319,24 @@ Started September 2000 by David Megginson, david@megginson.com
      <elevation-ft>3000</elevation-ft>
      <wind-from-heading-deg>300</wind-from-heading-deg>
      <wind-speed-kt>10</wind-speed-kt>
-     <turbulence-norm>0.05</turbulence-norm>
      <visibility-m>16000</visibility-m>
      <pressure-sea-level-inhg>29.92</pressure-sea-level-inhg>
      <!-- <temperature-degc>15.0</temperature-degc> -->
      <!-- <dewpoint-degc>5.0</dewpoint-degc> -->
+     <turbulence>
+      <magnitude-norm>0.05</magnitude-norm>
+      <rate-hz>1.0</rate-hz>
+     </turbulence>
     </entry>
 
     <entry>
      <elevation-ft>6000</elevation-ft>
      <wind-from-heading-deg>310</wind-from-heading-deg>
      <wind-speed-kt>20</wind-speed-kt>
-     <turbulence-norm>0.00</turbulence-norm>
+     <turbulence>
+      <magnitude-norm>0.0</magnitude-norm>
+      <rate-hz>1.0</rate-hz>
+     </turbulence>
     </entry>
 
     <entry>

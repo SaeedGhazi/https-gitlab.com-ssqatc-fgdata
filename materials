@@ -702,7 +702,7 @@ pc_rest {
   emissive = 0.0 0.0 0.0 1.0
 }
 
-Forest {
+EvergreenBroadCover {
   texture = Terrain/forest1.rgb
   xsize = 1000
   ysize = 1000
@@ -711,17 +711,32 @@ Forest {
   specular = 0.0 0.0 0.0 1.0
   emissive = 0.0 0.0 0.0 1.0
 }
-alias Default Forest
-alias Island Forest
-alias SomeSort Forest
-alias CropWoodCover Forest
-alias DeciduousBroadCover Forest
-alias EvergreenBroadCover Forest
-alias MixedForestCover Forest
-alias WoodedTundraCover Forest
+alias Default EvergreenBroadCover
+alias Island EvergreenBroadCover
+alias SomeSort EvergreenBroadCover
 
-Evergreen {
-  texture = Terrain/forest2.rgb
+DeciduousBroadCover {
+  texture = Terrain/deciduous.rgb
+  xsize = 500
+  ysize = 500
+  ambient = 0.14 0.28 0.13 1.0
+  diffuse = 0.14 0.28 0.13 1.0
+  specular = 0.0 0.0 0.0 1.0
+  emissive = 0.0 0.0 0.0 1.0
+}
+
+MixedForestCover {
+  texture = Terrain/mixedforest.rgb
+  xsize = 1000
+  ysize = 1000
+  ambient = 0.14 0.28 0.13 1.0
+  diffuse = 0.14 0.28 0.13 1.0
+  specular = 0.0 0.0 0.0 1.0
+  emissive = 0.0 0.0 0.0 1.0
+}
+
+EvergreenNeedleCover {
+  texture = Terrain/evergreen.rgb
   xsize = 1000
   ysize = 1000
   ambient = 0.14 0.28 0.13 1.0
@@ -729,8 +744,17 @@ Evergreen {
   specular = 0.0 0.0 0.0 1.0
   emissive = 0.0 0.0 0.0 1.0
 }
-alias DeciduousNeedleCover Evergreen
-alias EvergreenNeedleCover Evergreen
+alias WoodedTundraCover EvergreenNeedleCover
+
+DeciduousNeedleCover {
+  texture = Terrain/dec_evergreen.rgb
+  xsize = 1000
+  ysize = 1000
+  ambient = 0.14 0.28 0.13 1.0
+  diffuse = 0.14 0.28 0.13 1.0 
+  specular = 0.0 0.0 0.0 1.0
+  emissive = 0.0 0.0 0.0 1.0
+}
 
 Urban {
   texture = Terrain/resgrid.rgb
@@ -856,7 +880,6 @@ Marsh {
   specular = 0.0 0.0 0.0 1.0
   emissive = 0.0 0.0 0.0 1.0
 }
-alias IrrCropPastureCover Marsh
 alias ShrubGrassCover Marsh
 alias HerbWetlandCover Marsh
 alias WoodedWetlandCover Marsh
@@ -867,14 +890,62 @@ Grass {
   ysize = 200
   ambient = 0.45 0.46 0.31 1.0
   diffuse = 0.45 0.46 0.31 1.0
-  specular = 0.0 0.0 0.0 1.0                                                    
-  emissive = 0.0 0.0 0.0 1.0                                                    
+  specular = 0.0 0.0 0.0 1.0
+  emissive = 0.0 0.0 0.0 1.0
 }
 alias AirportKeep Grass
-alias DryCropPastureCover Grass
-alias MixedCropPastureCover Grass
-alias CropGrassCover Grass
 alias GrassCover Grass
 alias HerbTundraCover Grass
 alias MixedTundraCover Grass
 alias SavannaCover Grass
+
+MixedCropPastureCover {
+  texture = Terrain/mixedcrop.rgb
+  xsize = 2000
+  ysize = 2000
+  ambient = 0.45 0.46 0.31 1.0
+  diffuse = 0.45 0.46 0.31 1.0
+  specular = 0.0 0.0 0.0 1.0
+  emissive = 0.0 0.0 0.0 1.0
+}
+
+IrrCropPastureCover {
+  texture = Terrain/irrcrop.rgb
+  xsize = 2000
+  ysize = 2000
+  ambient = 0.45 0.46 0.31 1.0
+  diffuse = 0.45 0.46 0.31 1.0
+  specular = 0.0 0.0 0.0 1.0
+  emissive = 0.0 0.0 0.0 1.0
+}
+
+DryCropPastureCover {
+  texture = Terrain/drycrop.rgb
+  xsize = 2000
+  ysize = 2000
+  ambient = 0.45 0.46 0.31 1.0
+  diffuse = 0.45 0.46 0.31 1.0
+  specular = 0.0 0.0 0.0 1.0
+  emissive = 0.0 0.0 0.0 1.0
+}
+
+CropGrassCover {
+  texture = Terrain/cropgrass.rgb
+  xsize = 2000
+  ysize = 2000
+  ambient = 0.45 0.46 0.31 1.0
+  diffuse = 0.45 0.46 0.31 1.0
+  specular = 0.0 0.0 0.0 1.0
+  emissive = 0.0 0.0 0.0 1.0
+}
+
+CropWoodCover {
+  texture = Terrain/cropwood.rgb
+  xsize = 2000
+  ysize = 2000
+  ambient = 0.14 0.28 0.13 1.0
+  diffuse = 0.14 0.28 0.13 1.0
+  specular = 0.0 0.0 0.0 1.0
+  emissive = 0.0 0.0 0.0 1.0
+}
+

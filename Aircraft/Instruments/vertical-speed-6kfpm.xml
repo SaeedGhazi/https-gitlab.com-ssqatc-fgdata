@@ -56,7 +56,7 @@ properties' values.
    <transformations>
     <transformation>
      <type>rotation</type>
-     <property>/steam/vertical-speed-fps</property>
+     <property>/instrumentation/vertical-speed-indicator/indicated-speed-fpm</property>
      <min>-6000.0</min>
      <max>6000.0</max>
      <scale>0.028</scale>

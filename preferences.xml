@@ -375,6 +375,13 @@ Started September 2000 by David Megginson, david@megginson.com
   <attitude-indicator>
    <serviceable type="bool">true</serviceable>
   </attitude-indicator>
+  <heading-indicator>
+   <serviceable type="bool">true</serviceable>
+   <offset-deg type="double">4.5</offset-deg> <!-- just for fun -->
+  </heading-indicator>
+  <vertical-speed-indicator>
+   <serviceable type="bool">true</serviceable>
+  </vertical-speed-indicator>
  </instrumentation>
 
  <systems>

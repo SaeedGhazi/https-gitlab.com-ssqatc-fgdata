@@ -50,6 +50,7 @@ properties' values.
    <layer>
     <name>display</name>
     <type>text</type>
+    <font>led</font>
     <point-size>12</point-size>
     <color>
      <red>1.0</red>
@@ -67,6 +68,7 @@ properties' values.
    <layer>
     <name>display</name>
     <type>text</type>
+    <font>led</font>
     <point-size>10</point-size>
     <color>
      <red>1.0</red>
@@ -98,6 +100,7 @@ properties' values.
    <property>/radios/dme/in-range</property>
    <layer>
     <type>text</type>
+    <font>led</font>
     <point-size>12</point-size>
     <color>
      <red>1.0</red>
@@ -115,6 +118,7 @@ properties' values.
    <layer>
     <name>display</name>
     <type>text</type>
+    <font>led</font>
     <point-size>10</point-size>
     <color>
      <red>1.0</red>
@@ -142,6 +146,7 @@ properties' values.
    <property>/radios/dme/in-range</property>
    <layer>
     <type>text</type>
+    <font>led</font>
     <point-size>12</point-size>
     <color>
      <red>1.0</red>
@@ -159,6 +164,7 @@ properties' values.
    <layer>
     <name>display</name>
     <type>text</type>
+    <font>led</font>
     <point-size>10</point-size>
     <color>
      <red>1.0</red>

@@ -1032,6 +1032,7 @@ Shared parameters for various materials.
  <light-coverage>40000000.0</light-coverage>
 </material>
 
+<!-- Moved to Tundra (see below)
 <material>
  <name>GrassCover</name>
  <texture>Terrain/grass.rgb</texture>
@@ -1039,8 +1040,10 @@ Shared parameters for various materials.
  <ysize>1000</ysize>
  <light-coverage>4000000.0</light-coverage>
 </material>
+-->
 
 <material>
+ <name>GrassCover</name>
  <name>BareTundraCover</name>
  <name>HerbTundraCover</name>
  <name>MixedTundraCover</name>

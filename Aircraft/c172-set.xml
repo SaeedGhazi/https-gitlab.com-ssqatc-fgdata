@@ -17,7 +17,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
   <description>Cessna 172</description>
  
   <flight-model>jsb</flight-model>
-  <aero>c172</aero>
+  <aero>c172r</aero>
 
   <sound>
    <audible>true</audible>

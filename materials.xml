@@ -47,11 +47,11 @@ Properties currently used:
 
   diffuse: the diffuse light colour for the material, specified as
     separate red, green, blue, and alpha components (default: all
-    components 1.0).
+    color components 0.8, alpha 1.0).
 
   specular: the specular light colour for the material, specified as
     separate red, green, blue, and alpha components (default: all
-    color components 0.5, alpha 1.0).
+    color components 0.0, alpha 1.0).
 
   emissive: the emissive light colour for the material, specified as
     separate red, green, blue, and alpha components (default: all
@@ -932,24 +932,24 @@ Shared parameters for various materials.
  <xsize>400</xsize>
  <ysize>400</ysize>
  <ambient>
-  <r>0.17</r>
-  <g>0.31</g>
-  <b>0.38</b>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.17</r>
-  <g>0.31</g>
-  <b>0.38</b>
+  <r>0.4</r>
+  <g>0.4</g>
+  <b>0.4</b>
   <a>1.0</a>
  </diffuse>
  <specular>
-  <r>0.30</r>
-  <g>0.30</g>
-  <b>0.40</b>
+  <r>0.2</r>
+  <g>0.2</g>
+  <b>0.2</b>
   <a>1.0</a>
  </specular>
- <shininess>2.5</shininess>
+ <shininess>1.2</shininess>
 </material>
 
 <material>
@@ -963,24 +963,24 @@ Shared parameters for various materials.
  <xsize>400</xsize>
  <ysize>400</ysize>
  <ambient>
-  <r>0.19</r>
-  <g>0.35</g>
-  <b>0.52</b>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.19</r>
-  <g>0.35</g>
-  <b>0.52</b>
+  <r>0.5</r>
+  <g>0.5</g>
+  <b>0.5</b>
   <a>1.0</a>
  </diffuse>
  <specular>
-  <r>0.30</r>
-  <g>0.30</g>
-  <b>0.40</b>
+  <r>0.3</r>
+  <g>0.3</g>
+  <b>0.3</b>
   <a>1.0</a>
  </specular>
- <shininess>1.5</shininess>
+ <shininess>1.2</shininess>
 </material>
 
 <material>

@@ -17,7 +17,7 @@ Three-view:
   http://www.fiddlersgreen.net/aircraft/private/j3cub/j3cub_info/j3_info.htm
 Useless but fun free paper model:
   http://www.fiddlersgreen.net/aircraft/private/j3cub/j3cub.htm
-Useless but fun 1945 Piper Cub add from FLYING:
+Useless but fun 1945 Piper Cub ad from FLYING:
   http://www.fiddlersgreen.net/aircraft/private/j3cub/j3cub_info/piperad.jpg
 
 The reference datum for measurements is the leading edge of the wing,
@@ -31,8 +31,8 @@ since it is what the weight-and-balance site above uses.
 <!-- FIXME: this includes the engine; is that correct? -->
 <airplane mass="680">
 
-<!-- Approach configuration (actually touchdown, I think) -->
-<approach speed="25" aoa="16">
+<!-- Approach configuration -->
+<approach speed="35" aoa="15">
   <control-setting axis="/controls/throttle[0]" value="0.3"/>
   <control-setting axis="/controls/mixture[0]" value="1.0"/>
 </approach>
@@ -94,12 +94,12 @@ since it is what the weight-and-balance site above uses.
 
 <!-- FIXME: engine mass (just a guess; it's a small engine) -->
 <!-- Assume 75% power at 8000ft -->
-<propeller radius="0.95"
-	   cruise-speed="60" cruise-rpm="2300"
-           cruise-alt="8000" cruise-power="48"
+<propeller radius="0.90"
+	   cruise-speed="70" cruise-rpm="2700"
+           cruise-alt="8000" cruise-power="49"
            takeoff-power="55" takeoff-rpm="2300"
-           eng-power="65" eng-rpm="2700"
-           x="0.71" y="0" z="-0.65" mass="150" moment="8">
+           eng-power="65" eng-rpm="2800"
+           x="0.71" y="0" z="-0.65" mass="150" moment="4">
   <actionpt x="1.31" y="0" z="-0.65"/>
   <control-input axis="/controls/throttle[0]" control="THROTTLE"/>
   <control-input axis="/controls/starter[0]" control="STARTER"/>

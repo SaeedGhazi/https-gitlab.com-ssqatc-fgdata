@@ -46,6 +46,21 @@
   </item>
 
   <item>
+   <label>Browse Internal Properties</label>
+   <binding>
+    <command>old-properties-dialog</command>
+   </binding>
+  </item>
+
+  <item>
+   <label>Logging</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>logging</dialog-name>
+   </binding>
+  </item>
+
+  <item>
    <label>Quit</label>
    <binding>
     <command>dialog-show</command>
@@ -83,49 +98,13 @@
  </menu>
 
  <menu>
-  <label>State</label>
+  <label>Location</label>
 
   <item>
-   <label>Preset Values</label>
+   <label>Aircraft Location</label>
    <binding>
     <command>dialog-show</command>
-    <dialog-name>presets</dialog-name>
-   </binding>
-  </item>
-
-  <item>
-   <label>Browse Internal Properties</label>
-   <binding>
-    <command>old-properties-dialog</command>
-   </binding>
-  </item>
-
-  <item>
-   <label>Logging</label>
-   <binding>
-    <command>dialog-show</command>
-    <dialog-name>logging</dialog-name>
-   </binding>
-  </item>
-
- </menu>
-
- <menu>
-  <label>Failures</label>
-
-  <item>
-   <label>System Failures</label>
-   <binding>
-    <command>dialog-show</command>
-    <dialog-name>system-failures</dialog-name>
-   </binding>
-  </item>
-
-  <item>
-   <label>Instrument Failures</label>
-   <binding>
-    <command>dialog-show</command>
-    <dialog-name>instrument-failures</dialog-name>
+    <dialog-name>location</dialog-name>
    </binding>
   </item>
 
@@ -203,6 +182,27 @@
    <binding>
     <command>dialog-show</command>
     <dialog-name>winds</dialog-name>
+   </binding>
+  </item>
+
+ </menu>
+
+ <menu>
+  <label>Failures</label>
+
+  <item>
+   <label>System Failures</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>system-failures</dialog-name>
+   </binding>
+  </item>
+
+  <item>
+   <label>Instrument Failures</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>instrument-failures</dialog-name>
    </binding>
   </item>
 

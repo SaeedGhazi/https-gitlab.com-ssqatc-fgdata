@@ -1,85 +1,168 @@
 <?xml version="1.0"?>
 
 <PropertyList>
-
- <!-- Control the aircraft location -->
-
  <name>location</name>
  <width>400</width>
- <height>180</height>
- <modal>false</modal>
+ <height>400</height>
 
  <text>
   <x>10</x>
-  <y>150</y>
-  <label>Aircraft Location</label>
+  <y>360</y>
+  <label>Set New Location</label>
  </text>
 
  <input>
   <x>10</x>
-  <y>110</y>
+  <y>300</y>
   <width>200</width>
   <height>25</height>
-  <label>degrees longitude</label>
-  <property>/position/longitude-deg</property>
+  <label>Airport</label>
+  <property>/sim/presets/airport-id</property>
  </input>
 
  <input>
   <x>10</x>
-  <y>80</y>
+  <y>270</y>
   <width>200</width>
   <height>25</height>
-  <label>degrees latitude</label>
-  <property>/position/latitude-deg</property>
+  <label>Runway</label>
+  <property>/sim/presets/runway</property>
  </input>
 
  <input>
   <x>10</x>
-  <y>50</y>
+  <y>240</y>
   <width>200</width>
   <height>25</height>
-  <label>feet altitude MSL</label>
-  <property>/position/altitude-ft</property>
+  <label>VOR</label>
+  <property>/sim/presets/vor-id</property>
  </input>
 
- <button>
-  <x>5</x>
-  <y>10</y>
-  <legend>OK</legend>
-  <binding>
-   <command>dialog-apply</command>
-  </binding>
-  <binding>
-   <command>dialog-close</command>
-  </binding>
-  <default>true</default>
- </button>
+ <input>
+  <x>10</x>
+  <y>210</y>
+  <width>200</width>
+  <height>25</height>
+  <label>NDB</label>
+  <property>/sim/presets/ndb-id</property>
+ </input>
 
- <button>
-  <x>105</x>
-  <y>10</y>
-  <legend>Apply</legend>
-  <binding>
-   <command>dialog-apply</command>
-  </binding>
- </button>
+ <input>
+  <x>10</x>
+  <y>180</y>
+  <width>200</width>
+  <height>25</height>
+  <label>Fix</label>
+  <property>/sim/presets/fix</property>
+ </input>
 
- <button>
-  <x>205</x>
-  <y>10</y>
-  <legend>Reset</legend>
-  <binding>
-   <command>dialog-update</command>
-  </binding>
- </button>
+ <input>
+  <x>10</x>
+  <y>150</y>
+  <width>200</width>
+  <height>25</height>
+  <label>Distance (mi)</label>
+  <property>/sim/presets/offset-distance</property>
+ </input>
 
- <button>
-  <x>305</x>
+ <input>
+  <x>10</x>
+  <y>120</y>
+  <width>200</width>
+  <height>25</height>
+  <label>Altitude (ft)</label>
+  <property>/sim/presets/altitude-ft</property>
+ </input>
+
+ <input>
+  <x>10</x>
+  <y>90</y>
+  <width>200</width>
+  <height>25</height>
+  <label>Glidepath (deg)</label>
+  <property>/sim/presets/glidescope-deg</property>
+ </input>
+
+ <input>
+  <x>10</x>
+  <y>60</y>
+  <width>200</width>
+  <height>25</height>
+  <label>Airspeed (kt)</label>
+  <property>/sim/presets/airspeed-kt</property>
+ </input>
+
+ <!-- Button Box -->
+ <group>
+  <x>10</x>
   <y>10</y>
-  <legend>Cancel</legend>
-  <binding>
-   <command>dialog-close</command>
-  </binding>
- </button>
+
+  <button>
+   <x>0</x>
+   <y>0</y>
+   <legend>OK</legend>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/presets/longitude-deg</property>
+    <value type="double">-9999</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/presets/latitude-deg</property>
+    <value type="double">-9999</value>
+   </binding>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+   <binding>
+    <command>presets-commit</command>
+   </binding>
+   <binding>
+    <command>dialog-close</command>
+   </binding>
+   <default>true</default>
+  </button>
+
+  <button>
+   <x>100</x>
+   <y>0</y>
+   <legend>Apply</legend>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/presets/longitude-deg</property>
+    <value type="double">-9999</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/presets/latitude-deg</property>
+    <value type="double">-9999</value>
+   </binding>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+   <binding>
+    <command>presets-commit</command>
+   </binding>
+  </button>
+
+  <button>
+   <x>200</x>
+   <y>0</y>
+   <legend>Reset</legend>
+   <binding>
+    <command>dialog-update</command>
+   </binding>
+  </button>
+
+  <button>
+   <x>300</x>
+   <y>0</y>
+   <legend>Cancel</legend>
+   <binding>
+    <command>dialog-close</command>
+   </binding>
+  </button>
+
+ </group>
 
 </PropertyList>

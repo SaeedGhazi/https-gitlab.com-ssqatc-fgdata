@@ -278,6 +278,14 @@
   <label>Equipment</label>
 
   <item>
+   <label>Fuel and Payload</label>
+   <binding>
+    <command>nasal</command>
+    <script>gui.showWeightDialog()</script>
+   </binding>
+  </item>
+
+  <item>
    <label>Radio Settings</label>
    <binding>
     <command>dialog-show</command>

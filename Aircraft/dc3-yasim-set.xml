@@ -48,11 +48,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
    </config>
   </view>
 
-  <view n="1">
-   <config>
-     <z-offset-m type="double" archive="y">-45.0</z-offset-m>
-   </config>
-  </view>
+  <chase-distance-m type="double" archive="y">-45.0</chase-distance-m>
  </sim>
 
  <controls>

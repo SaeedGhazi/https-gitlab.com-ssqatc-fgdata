@@ -40,14 +40,7 @@ NR/MD YF23 simulation config.
    </electrical>
   </systems>
 
-
-  <view n="1">
-   <config>
-     <z-offset-m type="double" archive="y">-35.0</z-offset-m>
-   </config>
-
-  </view>
-
+  <chase-distance-m type="double" archive="y">-35.0</chase-distance-m>
  </sim>
 
  <autopilot>

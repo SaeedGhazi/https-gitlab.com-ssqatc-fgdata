@@ -42,13 +42,7 @@ This 'set' file is for the WV908 version
    <path>Aircraft/seahawk/seahawk-WV908-model.xml</path>
   </model>
 
-  <view n="1">
-   <config>
-     <z-offset-m type="double" archive="y">-18.0</z-offset-m>
-   </config>
-
-  </view>
-
+  <chase-distance-m type="double" archive="y">-18.0</chase-distance-m>
  </sim>
 
  <autopilot>

@@ -48,13 +48,8 @@
      <pitch-offset-deg archive="y">-11.0</pitch-offset-deg>
    </config>
   </view>
-  <view n="1">
-   <config>
-     <!-- big plane, so extend chase view offset a bit -->
-     <z-offset-m type="double" archive="y">-90.0</z-offset-m>
-   </config>
-  </view>
 
+  <chase-distance-m type="double" archive="y">-90.0</chase-distance-m>
  </sim>
 
  <autopilot>

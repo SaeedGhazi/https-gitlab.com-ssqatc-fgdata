@@ -34,12 +34,7 @@ Hawker Sea Hawk pair simulation config.
    <path>Aircraft/seahawk/seahawkpair-model.xml</path>
   </model>
 
-  <view n="1">
-   <config>
-     <z-offset-m type="double" archive="y">-55.0</z-offset-m>
-   </config>
-  </view>
-
+  <chase-distance-m type="double" archive="y">-55.0</chase-distance-m>
  </sim>
 
  <autopilot>

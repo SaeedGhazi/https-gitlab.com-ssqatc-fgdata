@@ -49,14 +49,7 @@ B52-H set file.
    </electrical>
   </systems>
 
-  <view n="1">
-   <config>
-     <!-- big plane, so extend chase view offset a bit -->
-     <z-offset-m type="double" archive="y">-70.0</z-offset-m>
-   </config>
-
-  </view>
-
+  <chase-distance-m type="double" archive="y">-70.0</chase-distance-m>
  </sim>
 
  <controls>

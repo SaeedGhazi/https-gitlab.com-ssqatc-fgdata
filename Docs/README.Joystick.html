@@ -479,21 +479,21 @@ when button 4 is pressed, and releases them automatically when the user releases
 button:
 </P>
 <TT>
-  &lt;button n="4"&gt;<br>
-   &lt;desc&gt;Left brake&lt;/desc&gt;<br>
-   &lt;binding&gt;<br>
-    &lt;command&gt;property-assign&lt;/command&gt;<br>
-    &lt;property&gt;/controls/brakes[0]&lt;/property&gt;<br>
-    &lt;value type="double"&gt;1.0&lt;/value&gt;    &lt;!-- brakes are a toggle so 1.0 represents on --&gt;<br>
-   &lt;/binding&gt;<br>
-   &lt;mod-up&gt;                    &lt;!-- it's not a parking brake so we need to release it --&gt;<br>
-    &lt;binding&gt;<br>
-     &lt;command&gt;property-assign&lt;/command&gt;<br>
-     &lt;property&gt;/controls/brakes[0]&lt;/property&gt;<br>
-     &lt;value type="double"&gt;0.0&lt;/value&gt;       &lt;!-- 1.0 is on so 0.0 is off, right? --&gt;<br>
-    &lt;/binding&gt;<br>
-   &lt;/mod-up&gt;<br>
-  &lt;/button&gt;<br>
+&lt;button n="4"&gt;<br>
+ &nbsp;   &lt;desc&gt;Left brake&lt;/desc&gt;<br>
+ &nbsp;   &lt;binding&gt;<br>
+  &nbsp;&nbsp;    &lt;command&gt;property-assign&lt;/command&gt;<br>
+  &nbsp;&nbsp;    &lt;property&gt;/controls/brakes[0]&lt;/property&gt;<br>
+  &nbsp;&nbsp;    &lt;value type="double"&gt;1.0&lt;/value&gt;    &lt;!-- brakes are a toggle so 1.0 represents on --&gt;<br>
+ &nbsp;   &lt;/binding&gt;<br>
+ &nbsp;   &lt;mod-up&gt;                    &lt;!-- it's not a parking brake so we need to release it --&gt;<br>
+  &nbsp;&nbsp; &nbsp;    &lt;binding&gt;<br>
+  &nbsp; &nbsp;&nbsp;     &lt;command&gt;property-assign&lt;/command&gt;<br>
+  &nbsp; &nbsp;&nbsp;     &lt;property&gt;/controls/brakes[0]&lt;/property&gt;<br>
+  &nbsp; &nbsp;&nbsp;     &lt;value type="double"&gt;0.0&lt;/value&gt;       &lt;!-- 1.0 is on so 0.0 is off, right? --&gt;<br>
+  &nbsp;&nbsp;    &lt;/binding&gt;<br>
+ &nbsp;   &lt;/mod-up&gt;<br>
+&lt;/button&gt;<br>
 </TT>
 <p>
 The first binding is straight-forward: when the button is pressed, the
@@ -523,40 +523,40 @@ button 0 is pressed, and releases all three when button 0 is released:
 
 <TT>
   &lt;button n="0"&gt;<br>
-   &lt;desc&gt;Brakes&lt;/desc&gt;<br>
-   &lt;binding&gt;<br>
-    &lt;command&gt;property-assign&lt;/command&gt;<br>
-    &lt;property&gt;/controls/brakes[0]&lt;/property&gt;<br>
-    &lt;value type="double"&gt;1.0&lt;/value&gt;<br>
-   &lt;/binding&gt;<br>
-   &lt;binding&gt;<br>
-    &lt;command&gt;property-assign&lt;/command&gt;<br>
-    &lt;property&gt;/controls/brakes[1]&lt;/property&gt;<br>
-    &lt;value type="double"&gt;1.0&lt;/value&gt;<br>
-   &lt;/binding&gt;<br>
-   &lt;binding&gt;<br>
-    &lt;command&gt;property-assign&lt;/command&gt;<br>
-    &lt;property&gt;/controls/brakes[2]&lt;/property&gt;<br>
-    &lt;value type="double"&gt;1.0&lt;/value&gt;<br>
-   &lt;/binding&gt;<br>
-   &lt;mod-up&gt;<br>
-    &lt;binding&gt;<br>
-     &lt;command&gt;property-assign&lt;/command&gt;<br>
-     &lt;property&gt;/controls/brakes[0]&lt;/property&gt;<br>
-     &lt;value type="double"&gt;0.0&lt;/value&gt;<br>
-    &lt;/binding&gt;<br>
-    &lt;binding&gt;<br>
-     &lt;command&gt;property-assign&lt;/command&gt;<br>
-     &lt;property&gt;/controls/brakes[1]&lt;/property&gt;<br>
-     &lt;value type="double"&gt;0.0&lt;/value&gt;<br>
-    &lt;/binding&gt;<br>
-    &lt;binding&gt;<br>
-     &lt;command&gt;property-assign&lt;/command&gt;<br>
-     &lt;property&gt;/controls/brakes[2]&lt;/property&gt;<br>
-     &lt;value type="double"&gt;0.0&lt;/value&gt;<br>
-    &lt;/binding&gt;<br>
-   &lt;/mod-up&gt;<br>
-  &lt;/button&gt;<br>
+  &nbsp;  &lt;desc&gt;Brakes&lt;/desc&gt;<br>
+  &nbsp;  &lt;binding&gt;<br>
+  &nbsp; &nbsp;   &lt;command&gt;property-assign&lt;/command&gt;<br>
+  &nbsp; &nbsp;   &lt;property&gt;/controls/brakes[0]&lt;/property&gt;<br>
+  &nbsp; &nbsp;   &lt;value type="double"&gt;1.0&lt;/value&gt;<br>
+  &nbsp;  &lt;/binding&gt;<br>
+  &nbsp;  &lt;binding&gt;<br>
+  &nbsp; &nbsp;   &lt;command&gt;property-assign&lt;/command&gt;<br>
+  &nbsp; &nbsp;   &lt;property&gt;/controls/brakes[1]&lt;/property&gt;<br>
+  &nbsp; &nbsp;   &lt;value type="double"&gt;1.0&lt;/value&gt;<br>
+  &nbsp;  &lt;/binding&gt;<br>
+  &nbsp;  &lt;binding&gt;<br>
+  &nbsp; &nbsp;   &lt;command&gt;property-assign&lt;/command&gt;<br>
+  &nbsp; &nbsp;   &lt;property&gt;/controls/brakes[2]&lt;/property&gt;<br>
+  &nbsp; &nbsp;   &lt;value type="double"&gt;1.0&lt;/value&gt;<br>
+  &nbsp;  &lt;/binding&gt;<br>
+  &nbsp;  &lt;mod-up&gt;<br>
+  &nbsp; &nbsp;   &lt;binding&gt;<br>
+  &nbsp; &nbsp; &nbsp;    &lt;command&gt;property-assign&lt;/command&gt;<br>
+  &nbsp; &nbsp; &nbsp;    &lt;property&gt;/controls/brakes[0]&lt;/property&gt;<br>
+  &nbsp; &nbsp; &nbsp;    &lt;value type="double"&gt;0.0&lt;/value&gt;<br>
+  &nbsp; &nbsp;   &lt;/binding&gt;<br>
+  &nbsp; &nbsp;   &lt;binding&gt;<br>
+  &nbsp; &nbsp; &nbsp;    &lt;command&gt;property-assign&lt;/command&gt;<br>
+  &nbsp; &nbsp; &nbsp;    &lt;property&gt;/controls/brakes[1]&lt;/property&gt;<br>
+  &nbsp; &nbsp; &nbsp;    &lt;value type="double"&gt;0.0&lt;/value&gt;<br>
+  &nbsp; &nbsp;   &lt;/binding&gt;<br>
+  &nbsp; &nbsp;   &lt;binding&gt;<br>
+  &nbsp; &nbsp; &nbsp;    &lt;command&gt;property-assign&lt;/command&gt;<br>
+  &nbsp; &nbsp; &nbsp;    &lt;property&gt;/controls/brakes[2]&lt;/property&gt;<br>
+  &nbsp; &nbsp; &nbsp;    &lt;value type="double"&gt;0.0&lt;/value&gt;<br>
+  &nbsp; &nbsp;   &lt;/binding&gt;<br>
+  &nbsp;  &lt;/mod-up&gt;<br>
+&lt;/button&gt;<br>
 </TT>
 <p>
 For people who take pleasure in avoiding XML, here's the command-line
@@ -641,13 +641,13 @@ bindings, as in the following example (the context is
 /input/keyboard):
 </P>
 <TT>
-  &lt;key n="1"&gt;<br>
-   &lt;name&gt;Ctrl-A&lt;/name&gt;<br>
-   &lt;desc&gt;Toggle autopilot altitude lock.&lt;/desc&gt;<br>
-   &lt;binding&gt;<br>
-    &lt;command&gt;property-toggle&lt;/command&gt;<br>
-    &lt;property&gt;/autopilot/locks/altitude&lt;/property&gt;<br>
-   &lt;/binding&gt;<br>
+ &lt;key n="1"&gt;<br&gt;<br>
+ &nbsp;    &lt;name&gt;Ctrl-A&lt;/name&gt;<br>
+ &nbsp;    &lt;desc&gt;Toggle autopilot altitude lock.&lt;/desc&gt;<br>
+ &nbsp;    &lt;binding&gt;<br>
+ &nbsp;  &nbsp;     &lt;command&gt;property-toggle&lt;/command&gt;<br>
+ &nbsp;  &nbsp;     &lt;property&gt;/autopilot/locks/altitude&lt;/property&gt;<br>
+ &nbsp;    &lt;/binding&gt;<br>
   &lt;/key&gt;<br>
 </TT>
 
@@ -677,15 +677,15 @@ may use any combination of nested 'mod-alt', 'mod-ctrl', and
 </P>
 <TT>
   &lt;key n="49"&gt;<br>
-   &lt;name&gt;1&lt;/name&gt;<br>
-   &lt;mod-shift&gt;<br>
-     &lt;desc&gt;Look back left&lt;/desc&gt;<br>
-     &lt;binding&gt;<br>
-      &lt;command&gt;property-assign&lt;/command&gt;<br>
-      &lt;property&gt;/sim/view/goal-offset&lt;/property&gt;<br>
-      &lt;value type="double"&gt;135&lt;/value&gt;<br>
-     &lt;/binding&gt;<br>
-   &lt;/mod-shift&gt;<br>
+ &nbsp;    &lt;name&gt;1&lt;/name&gt;<br>
+ &nbsp;  &nbsp;    &lt;mod-shift&gt;<br>
+ &nbsp;  &nbsp;      &lt;desc&gt;Look back left&lt;/desc&gt;<br>
+ &nbsp;  &nbsp;      &lt;binding&gt;<br>
+ &nbsp;  &nbsp;  &nbsp;       &lt;command&gt;property-assign&lt;/command&gt;<br>
+ &nbsp;  &nbsp;  &nbsp;       &lt;property&gt;/sim/view/goal-offset&lt;/property&gt;<br>
+ &nbsp;  &nbsp;  &nbsp;       &lt;value type="double"&gt;135&lt;/value&gt;<br>
+ &nbsp;  &nbsp;      &lt;/binding&gt;<br>
+ &nbsp;    &lt;/mod-shift&gt;<br>
   &lt;/key&gt;<br>
 </TT>
 </P>
@@ -709,20 +709,20 @@ just as with the joystick:
 </P>
 <TT>
   &lt;key n="44"&gt;<br>
-   &lt;name&gt;,&lt;/name&gt;<br>
-   &lt;desc&gt;Left brake&lt;/desc&gt;<br>
-   &lt;binding&gt;<br>
-    &lt;command&gt;property-assign&lt;/command&gt;<br>
-    &lt;property&gt;/controls/brakes[0]&lt;/property&gt;<br>
-    &lt;value type="double"&gt;1.0&lt;/value&gt;<br>
-   &lt;/binding&gt;<br>
-   &lt;mod-up&gt;<br>
-    &lt;binding&gt;<br>
-     &lt;command&gt;property-assign&lt;/command&gt;<br>
-     &lt;property&gt;/controls/brakes[0]&lt;/property&gt;<br>
-     &lt;value type="double"&gt;0.0&lt;/value&gt;<br>
-    &lt;/binding&gt;<br>
-   &lt;/mod-up&gt;<br>
+ &nbsp;    &lt;name&gt;,&lt;/name&gt;<br>
+ &nbsp;    &lt;desc&gt;Left brake&lt;/desc&gt;<br>
+ &nbsp;  &nbsp;    &lt;binding&gt;<br>
+ &nbsp;  &nbsp;     &lt;command&gt;property-assign&lt;/command&gt;<br>
+ &nbsp;  &nbsp;     &lt;property&gt;/controls/brakes[0]&lt;/property&gt;<br>
+ &nbsp;  &nbsp;     &lt;value type="double"&gt;1.0&lt;/value&gt;<br>
+ &nbsp;    &lt;/binding&gt;<br>
+ &nbsp;    &lt;mod-up&gt;<br>
+ &nbsp;  &nbsp;     &lt;binding&gt;<br>
+ &nbsp;  &nbsp;      &lt;command&gt;property-assign&lt;/command&gt;<br>
+ &nbsp;  &nbsp;      &lt;property&gt;/controls/brakes[0]&lt;/property&gt;<br>
+ &nbsp;  &nbsp;      &lt;value type="double"&gt;0.0&lt;/value&gt;<br>
+ &nbsp;  &nbsp;     &lt;/binding&gt;<br>
+ &nbsp;    &lt;/mod-up&gt;<br>
   &lt;/key&gt;<br>
 </TT>
 <P>
@@ -732,20 +732,20 @@ no &lt;mod-up&gt; tag, so it *does* work like a parking brake.
 
  <TT>
  &lt;key n="66"&gt; <br>
- &lt;name&gt;B&lt;/name&gt;<br>
- &lt;desc&gt;Toggle parking brake on or off&lt;/desc&gt;<br>
- &lt;binding&gt;<br>
- &lt;command&gt;property-toggle&lt;/command&gt;<br>
- &lt;property&gt;/controls/brakes[0]&lt;/property&gt;<br>
- &lt;/binding&gt;<br>
- &lt;binding&gt;<br>
- &lt;command&gt;property-toggle&lt;/command&gt;<br>
- &lt;property&gt;/controls/brakes[1]&lt;/property&gt;<br>
- &lt;/binding&gt;<br>
- &lt;binding&gt;<br>
- &lt;command&gt;property-toggle&lt;/command&gt;<br>
- &lt;property&gt;/controls/brakes[2]&lt;/property&gt;<br>
- &lt;/binding&gt;<br>
+ &nbsp;  &lt;name&gt;B&lt;/name&gt;<br>
+ &nbsp;  &lt;desc&gt;Toggle parking brake on or off&lt;/desc&gt;<br>
+ &nbsp;  &lt;binding&gt;<br>
+ &nbsp;  &nbsp;  &lt;command&gt;property-toggle&lt;/command&gt;<br>
+ &nbsp;  &nbsp;  &lt;property&gt;/controls/brakes[0]&lt;/property&gt;<br>
+ &nbsp;  &lt;/binding&gt;<br>
+ &nbsp;  &lt;binding&gt;<br>
+ &nbsp;  &nbsp;  &lt;command&gt;property-toggle&lt;/command&gt;<br>
+ &nbsp;  &nbsp;  &lt;property&gt;/controls/brakes[1]&lt;/property&gt;<br>
+ &nbsp;  &lt;/binding&gt;<br>
+ &nbsp;  &lt;binding&gt;<br>
+ &nbsp;  &nbsp;  &lt;command&gt;property-toggle&lt;/command&gt;<br>
+ &nbsp;  &nbsp;  &lt;property&gt;/controls/brakes[2]&lt;/property&gt;<br>
+ &nbsp;  &lt;/binding&gt;<br>
  &lt;/key&gt;<br>
  </TT>
 

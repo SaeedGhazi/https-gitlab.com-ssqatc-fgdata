@@ -445,6 +445,9 @@ Started September 2000 by David Megginson, david@megginson.com
    <serviceable type="bool" archive="y">true</serviceable>
    <switch-position type="int" archive="y">0</switch-position>
   </dme>
+  <gps>
+   <serviceable type="bool" archive="y">true</serviceable>
+  </gps>
  </instrumentation>
 
  <systems>

@@ -22,58 +22,31 @@ click.  Actions always modify the values of properties, either by
 adjusting them, toggling them, or swaping them with other
 properties' values.
 
-Hacked by Lee Elliott to create a fuel (Total) gals gauge instrument
+Hacked by Lee Elliott to create an engine fuel-flow-gph gauge instrument
 <leee-fgfs@spatial.freeserve.co.uk>
 -->
 
 <PropertyList>
- <name>Fuel Total Gals Gauge</name>
+ <name>fuel-flow-gph Gauge</name>
  <w-base>128</w-base>
  <h-base>128</h-base>
 
  <params>
-  <pt-select>/consumables/fuel/total-fuel-gals</pt-select>
+  <pt-select>/engines/engine/fuel-flow-gph</pt-select>
  </params>
 
  <layers>
   <layer>
    <name>gauge face</name>
    <texture>
-    <path>Aircraft/Instruments/Textures/faces-LE2-hi.rgb</path>
-    <x1>0.5</x1>
-    <x2>1.0</x2>
-    <y1>0.5</y1>
-    <y2>1.0</y2>
+    <path>Aircraft/Instruments/Textures/faces-LE1.rgb</path>
+    <x1>0.0</x1>
+    <x2>0.5</x2>
+    <y1>0.0</y1>
+    <y2>0.5</y2>
    </texture>
-    <w>104</w>
-    <h>104</h>
-  </layer>
-
-  <layer>
-   <name>needle 2</name>
-   <texture>
-    <path>Aircraft/Instruments/Textures/faces-LE-misc1.rgb</path>
-    <x1>0.6796875</x1>
-    <x2>0.7265625</x2>
-    <y1>0.68359375</y1>
-    <y2>1.0</y2>
-   </texture>
-   <w>6</w>
-   <h>48</h>
-   <transformations>
-    <transformation>
-     <type>rotation</type>
-     <property alias="../../../../../params/pt-select"/>
-     <min>0</min>
-     <max>100000</max>
-     <scale>0.0036</scale>
-     <offset>0</offset>
-    </transformation>
-    <transformation>
-     <type>y-shift</type>
-     <offset>20</offset>
-    </transformation>
-   </transformations>
+    <w>114</w>
+    <h>114</h>
   </layer>
 
   <layer>
@@ -92,7 +65,7 @@ Hacked by Lee Elliott to create a fuel (Total) gals gauge instrument
      <type>rotation</type>
      <property alias="../../../../../params/pt-select"/>
      <min>0</min>
-     <max>100000</max>
+     <max>40000</max>
      <scale>0.036</scale>
      <offset>0</offset>
     </transformation>
@@ -119,7 +92,7 @@ Hacked by Lee Elliott to create a fuel (Total) gals gauge instrument
      <type>rotation</type>
      <property alias="../../../../../params/pt-select"/>
      <min>0</min>
-     <max>100000</max>
+     <max>40000</max>
      <scale>0.36</scale>
      <offset>0</offset>
     </transformation>

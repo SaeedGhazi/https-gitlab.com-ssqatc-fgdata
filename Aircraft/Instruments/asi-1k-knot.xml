@@ -34,7 +34,7 @@ instrument
  <h-base>128</h-base>
 
  <params>
-  <pt0-select>/instrumentation/airspeed-indicator/indicated-speed-kt</pt0-select>
+  <pt0-select>/steam/airspeed-kt</pt0-select>
  </params>
 
  <layers>

@@ -15,14 +15,14 @@ B52-H set file.
 
   <sound>
    <audible>true</audible>
-   <path>Aircraft/b52/b52-sound.xml</path>
+   <path>Aircraft/a4/a4-sound.xml</path>
   </sound>
 
   <panel>
-   <path>Aircraft/c310/c310-vfr-panel.xml</path>
+   <path>Aircraft/b52/b52-vfr-panel.xml</path>
   </panel>
   <panel_2>
-   <path>Aircraft/c310/c310-mini-panel.xml</path>
+   <path>Aircraft/b52/b52-mini-panel.xml</path>
   </panel_2>
 
   <hud>
@@ -53,23 +53,27 @@ B52-H set file.
 
  </sim>
 
+ <controls>
+  <elevator-trim type="float">-0.14</elevator-trim>
+ </controls>
+
  <autopilot>
    <config>
 
-     <min-climb-speed-kt type="float">150.0</min-climb-speed-kt>
+     <min-climb-speed-kt type="float">110.0</min-climb-speed-kt>
      <best-climb-speed-kt type="float">450.0</best-climb-speed-kt>
 
-     <target-climb-rate-fpm type="float">4000.0</target-climb-rate-fpm>
+     <target-climb-rate-fpm type="float">3000.0</target-climb-rate-fpm>
      <target-descent-rate-fpm type="float">4000.0</target-descent-rate-fpm>
 
-     <elevator-adj-factor type="float">400.0</elevator-adj-factor>
+     <elevator-adj-factor type="float">1600.0</elevator-adj-factor>
 
      <integral-contribution type="float">0.005</integral-contribution>
 
-     <max-aileron type="float">0.6</max-aileron>
-     <max-roll-deg type="float">50.0</max-roll-deg>
+     <max-aileron type="float">1.0</max-aileron>
+     <max-roll-deg type="float">40.0</max-roll-deg>
 
-     <roll-out-deg type="float">10.0</roll-out-deg>
+     <roll-out-deg type="float">18.0</roll-out-deg>
      <roll-out-smooth-deg type="float">20.0</roll-out-smooth-deg>
 
      <zero-pitch-throttle type="float">0.5</zero-pitch-throttle>

@@ -22,85 +22,34 @@ click.  Actions always modify the values of properties, either by
 adjusting them, toggling them, or swaping them with other
 properties' values.
 
-Hacked by Lee Elliott to create a fuel (Total) gals gauge instrument
+Hacked by Lee Elliott to create an engine reheat gauge and control
+instrument
+
 <leee-fgfs@spatial.freeserve.co.uk>
 -->
 
 <PropertyList>
- <name>Fuel Total Gals Gauge</name>
+ <name>Reheat Gauge</name>
  <w-base>128</w-base>
  <h-base>128</h-base>
 
  <params>
-  <pt-select>/consumables/fuel/total-fuel-gals</pt-select>
+  <pt-select>/controls/afterburner</pt-select>
+  <reheat-select>/controls/afterburner</reheat-select>
  </params>
 
  <layers>
   <layer>
    <name>gauge face</name>
    <texture>
-    <path>Aircraft/Instruments/Textures/faces-LE2-hi.rgb</path>
-    <x1>0.5</x1>
-    <x2>1.0</x2>
+    <path>Aircraft/Instruments/Textures/faces-LE2.rgb</path>
+    <x1>0.0</x1>
+    <x2>0.5</x2>
     <y1>0.5</y1>
     <y2>1.0</y2>
    </texture>
     <w>104</w>
     <h>104</h>
-  </layer>
-
-  <layer>
-   <name>needle 2</name>
-   <texture>
-    <path>Aircraft/Instruments/Textures/faces-LE-misc1.rgb</path>
-    <x1>0.6796875</x1>
-    <x2>0.7265625</x2>
-    <y1>0.68359375</y1>
-    <y2>1.0</y2>
-   </texture>
-   <w>6</w>
-   <h>48</h>
-   <transformations>
-    <transformation>
-     <type>rotation</type>
-     <property alias="../../../../../params/pt-select"/>
-     <min>0</min>
-     <max>100000</max>
-     <scale>0.0036</scale>
-     <offset>0</offset>
-    </transformation>
-    <transformation>
-     <type>y-shift</type>
-     <offset>20</offset>
-    </transformation>
-   </transformations>
-  </layer>
-
-  <layer>
-   <name>needle 1</name>
-   <texture>
-    <path>Aircraft/Instruments/Textures/misc-1.rgb</path>
-    <x1>0.6796875</x1>
-    <x2>0.7265625</x2>
-    <y1>0.68359375</y1>
-    <y2>1.0</y2>
-   </texture>
-   <w>6</w>
-   <h>48</h>
-   <transformations>
-    <transformation>
-     <type>rotation</type>
-     <property alias="../../../../../params/pt-select"/>
-     <min>0</min>
-     <max>100000</max>
-     <scale>0.036</scale>
-     <offset>0</offset>
-    </transformation>
-    <transformation>
-     <type>y-shift</type>
-     <offset>20</offset>
-    </transformation>
-   </transformations>
   </layer>
 
   <layer>
@@ -118,9 +67,9 @@ Hacked by Lee Elliott to create a fuel (Total) gals gauge instrument
     <transformation>
      <type>rotation</type>
      <property alias="../../../../../params/pt-select"/>
-     <min>0</min>
-     <max>100000</max>
-     <scale>0.36</scale>
+     <min>-0.05</min>
+     <max>1.05</max>
+     <scale>265</scale>
      <offset>0</offset>
     </transformation>
     <transformation>
@@ -130,17 +79,17 @@ Hacked by Lee Elliott to create a fuel (Total) gals gauge instrument
    </transformations>
   </layer>
 
- <layer>
-  <name>button</name>
-  <texture>
-  <path>Aircraft/Instruments/Textures/misc-1.rgb</path>
-  <x1>0.6171875</x1>
-  <y1>0.2421875</y1>
-  <x2>0.7890625</x2>
-  <y2>0.4140625</y2>
-  </texture>
-  <w>14</w>
-  <h>14</h>
+  <layer>
+   <name>buttons</name>
+   <texture>
+    <path>Aircraft/Instruments/Textures/plusminus.rgb</path>
+    <x1>0.0</x1>
+    <y1>0.0</y1>
+    <x2>1.0</x2>
+    <y2>1.0</y2>
+   </texture>
+   <w>104</w>
+   <h>104</h>
   </layer>
 
   <layer>
@@ -152,8 +101,8 @@ Hacked by Lee Elliott to create a fuel (Total) gals gauge instrument
     <x2>1.0</x2>
     <y2>0.5</y2>
    </texture>
-  <w>124</w>
-  <h>124</h>
+    <w>124</w>
+    <h>124</h>
    <transformations>
     <transformation>
      <type>x-shift</type>
@@ -166,4 +115,43 @@ Hacked by Lee Elliott to create a fuel (Total) gals gauge instrument
     </transformations>
   </layer>
   </layers>
+
+  <actions>
+<!-- Engine Reheat -->
+   <action>
+    <name>Minus</name>
+    <button>0</button>
+    <x>43</x>
+    <y>-55</y>
+    <w>15</w>
+    <h>15</h>
+    <binding>
+     <command>property-adjust</command>
+     <property alias="../../../../params/reheat-select"/>
+     <step>-0.1</step>
+     <min>0</min>
+     <max>1</max>
+     <wrap>0</wrap>
+    </binding>
+   </action>
+
+   <action>
+    <name>Plus</name>
+    <button>0</button>
+    <x>-50</x>
+    <y>-52</y>
+    <w>15</w>
+    <h>15</h>
+    <binding>
+     <command>property-adjust</command>
+     <property alias="../../../../params/reheat-select"/>
+     <step>0.1</step>
+     <min>0</min>
+     <max>3</max>
+     <wrap>0</wrap>
+    </binding>
+   </action>
+
+  </actions>
+
 </PropertyList>

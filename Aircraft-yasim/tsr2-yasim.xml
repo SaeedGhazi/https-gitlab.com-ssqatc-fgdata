@@ -22,10 +22,12 @@
  </approach>
 
 <!-- Cruise configuration -->
-<!-- <cruise speed="500" alt="35000"> -->
- <cruise speed="550" alt="35000"> -->
-  <control-setting axis="/controls/throttle[0]" value="0.5"/>
-  <control-setting axis="/controls/throttle[1]" value="0.5"/>
+<!-- <cruise speed="840" alt="1000"> -->
+ <cruise speed="1197" alt="35000">
+  <control-setting axis="/controls/throttle[0]" value="1.0"/>
+  <control-setting axis="/controls/throttle[1]" value="1.0"/>
+  <control-setting axis="/controls/afterburner[0]" value="1.0"/>
+  <control-setting axis="/controls/afterburner[1]" value="1.0"/>
   <control-setting axis="/controls/flaps" value="0.0"/>
   <control-setting axis="/controls/gear-down" value="0"/>
  </cruise>
@@ -58,6 +60,7 @@
 		  prop="/surface-positions/right-spoiler-pos-norm"/>
 
   <control-speed control="FLAP0" transition-time="5"/>
+  <control-speed control="FLAP1" transition-time="0.5"/>
   <control-speed control="SPOILER" transition-time="0.5"/>
 
  </wing>
@@ -65,10 +68,11 @@
  <hstab x="-10.0" y="1.0" z="0.5" taper=".2" effectiveness="2.0"
        length="3.0" chord="4.0" sweep="55" dihedral="0.0">
   <stall aoa="35.0" width="3" peak="1.5"/>
-  <flap0 start="0" end="1" lift="1.26" drag="1.3"/>
+  <flap0 start="0" end="1" lift="1.4" drag="1.3"/>
   <control-input axis="/controls/elevator" control="FLAP0"/>
   <control-input axis="/controls/elevator-trim" control="FLAP0"/>
   <control-output control="FLAP0" prop="/surface-positions/elevator-pos-norm"/>
+  <control-speed control="FLAP0" transition-time="0.5"/>
  </hstab>
 
  <vstab x="-10.0" y="0" z="1.38" taper=".176" effectiveness="1.0"

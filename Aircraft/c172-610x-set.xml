@@ -20,13 +20,16 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
   <panel>
    <path>Aircraft/c172/Panels/c172-610x-panel.xml</path>
    <visibility archive="y">true</visibility>
-   <flip-x>false</flip-x>
+   <flip-x>true</flip-x>
   </panel>
 
   <model>
    <path archive="y">Aircraft/c172/Models/c172-dpm.xml</path>
   </model>
 
+  <instrument-options>
+    <omit-knobs>true</omit-knobs>
+  </instrument-options>
  </sim>
   
  <engines>

@@ -2,7 +2,6 @@
 
 <PropertyList>
 
- <path>new_ufo.ac</path>
 <!--
  <path>ufo.ac</path>
 
@@ -14,6 +13,29 @@
   <min>0.2</min>
   <max>0.7</max>
  </animation>
+-->
+
+  <path>new_ufo.ac</path>
+
+<!--
+  <animation>
+   <type>rotate</type>
+   <object-name>rah</object-name>
+   <property>/instrumentation/clock/indicated-sec</property>
+   <offset>157.5</offset>
+   <factor>-30</factor>
+   <mod>67.5</mod>
+   <center>
+    <x-m>-5.72</x-m>
+    <y-m>0.0</y-m>
+    <z-m>1.34</z-m>
+   </center>
+   <axis>
+    <x>0.0</x>
+    <y>1.0</y>
+    <z>0.0</z>
+   </axis>
+  </animation>
 -->
 
 </PropertyList>

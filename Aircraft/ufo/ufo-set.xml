@@ -31,7 +31,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
   </panel>
 
   <model>
-   <path>Aircraft/ufo/Models/ufo.xml</path>
+   <path>Aircraft/ufo/Models/new_ufo.xml</path>
   </model>
 
   <!-- New Ufo support code follows below -->
@@ -44,50 +44,16 @@ October 23 2001 John Check, fgpanels@rockfish.net
     <y-offset-m archive="y">2.07</y-offset-m>
    </config>
   </view>
-
  </sim>
 
-<!--
- <input>
-  <keyboard>
-  <key n="360">
-   <name>PageUp</name>
-   <desc>Increase throttle or autopilot autothrottle.</desc>
-   <binding>
-    <command>property-adjust</command>
-    <property>/autopilot/control-overrides/throttle</property>
-    <step type="double">0.00225</step>
-    <max type="double">0.045</max>
-   </binding>
-   <mod-shift>
-    <desc>Look front right.</desc>
-    <binding>
-     <command>property-assign</command>
-     <property>/sim/current-view/goal-heading-offset-deg</property>
-    <value alias="/sim/view/config/front-right-direction-deg"/>
-    </binding>
-   </mod-shift>
-  </key>
+ <nasal>
+  <new_ufo>
+   <file>Aircraft/ufo/new-ufo.nas</file>
+  </new_ufo>
+ </nasal>
 
-  <key n="361">
-   <name>PageDown</name>
-   <desc>Decrease throttle or autopilot autothrottle.</desc>
-   <binding>
-   <command>property-adjust</command>
-    <property>/autopilot/control-overrides/throttle</property>
-    <step type="double">-0.00225</step>
-   </binding>
-    <mod-shift>
-    <desc>Look back right.</desc>
-    <binding>
-     <command>property-assign</command>
-     <property>/sim/current-view/goal-heading-offset-deg</property>
-     <value alias="/sim/view/config/back-right-direction-deg"/>
-    </binding>
-   </mod-shift>
-  </key>
- </keyboard>
-</input>
--->
+ <tmp>
+  <walk type="double">0</walk>
+ </tmp>
 
 </PropertyList>

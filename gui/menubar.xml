@@ -18,6 +18,13 @@
   </item>
 
   <item>
+   <label>Reset</label>
+   <binding>
+    <command>old-reinit-dialog</command>
+   </binding>
+  </item>
+
+  <item>
    <label>High-Res Snapshot</label>
    <bindings>
     <command>old-hires-snapshot</command>

@@ -25,7 +25,7 @@ properties' values.
 -->
 
 <PropertyList>
- <name>Manifold Pressure</name>
+ <name>Dual Manifold Pressure</name>
  <w-base>128</w-base>
  <h-base>128</h-base>
  <params>
@@ -125,27 +125,11 @@ properties' values.
    </transformations>
  </layer> 
  
- <layer>
-  <name>bezel</name>
-  <texture>
-  <path>Aircraft/c172/Instruments/Textures/bezel.rgb</path>
-  <x1>0.0</x1>
-  <y1>0.0</y1>
-  <x2>1.0</x2>
-  <y2>1.0</y2>
-  </texture>
-  <transformations>
-   <transformation>
-   <type>x-shift</type>
-   <offset>-1</offset>
-   </transformation>
-  </transformations>
-</layer> 
 
   <layer>
    <name>glare shield</name>
    <texture>
-    <path>Aircraft/c172/Instruments/Textures/bezel1.rgb</path>
+    <path>Aircraft/Instruments/Textures/bezel1.rgb</path>
     <x1>0.5</x1>
     <y1>0.0</y1>
     <x2>1.0</x2>

@@ -263,6 +263,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
   <menubar>
    <visibility type="bool">true</visibility>
+   <default include="gui/menubar.xml"/>
   </menubar>
 
   <mouse>

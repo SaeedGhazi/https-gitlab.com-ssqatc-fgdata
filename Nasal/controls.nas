@@ -133,7 +133,10 @@ stepProps = func {
 ##
 # "Slews" a property smoothly, without dependence on the simulator
 # frame rate.  The first argument is the property name.  The second is
-# a rate, in units per second.
+# a rate, in units per second.  NOTE: this modifies the property for
+# the current frame only; it is intended to be called by bindings
+# which repeat each frame.  If you want to cause motion over time, see
+# interpolate().
 #
 slewProp = func {
     prop = arg[0];

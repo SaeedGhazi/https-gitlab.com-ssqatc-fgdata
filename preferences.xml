@@ -271,6 +271,8 @@ Started September 2000 by David Megginson, david@megginson.com
   <ai>
    <enabled type="bool">true</enabled>
 
+   <scenario>demo_scenario</scenario>
+
    <entry>
     <type>ship</type>
     <path>Models/Geometry/sailboat.xml</path>

@@ -9,7 +9,7 @@
    <width>200</width>
    <height>28</height>
    <loadfn>view_direction</loadfn>
-   <options>4</options>
+   <options>4</options> 	<!-- HUDS_TOP -->
    <maxValue>360.0</maxValue>
    <minValue>0.0</minValue>
    <disp_scaling>1.0</disp_scaling>
@@ -29,6 +29,8 @@
    <marker_offset>0.0</marker_offset>
    <enable_pointer>true</enable_pointer>
    <pointer_type>fixed</pointer_type>
+   <tick_type>line</tick_type>
+   <tick_length>variable</tick_length>
    <working>true</working>
   </c1>
 
@@ -39,7 +41,7 @@
    <width>100</width>
    <height>20</height>
    <loadfn>aileronval</loadfn>
-   <options>88</options>
+   <options>136</options> <!-- HUDS_BOTTOM | HUDS_NOTEXT -->
    <maxValue>+1.0</maxValue>
    <minValue>-1.0</minValue>
    <disp_scaling>100.0</disp_scaling>
@@ -69,7 +71,7 @@
    <width>20</width>
    <height>100</height>
    <loadfn>elevatorval</loadfn>
-   <options>90</options>
+   <options>138</options>	<!-- HUDS_RIGHT | HUDS_VERT | HUDS_NOTEXT -->
    <disp_scaling>-100.0</disp_scaling>
    <maxValue>+1.0</maxValue>
    <minValue>-1.0</minValue>
@@ -99,7 +101,7 @@
    <width>100</width>
    <height>20</height>
    <loadfn>rudderval</loadfn>
-   <options>84</options>
+   <options>132</options> <!-- HUDS_TOP | HUDS_NOTEXT -->
    <disp_scaling>100.0</disp_scaling>
    <maxValue>+1.0</maxValue>
    <minValue>-1.0</minValue>
@@ -129,7 +131,7 @@
    <width>20</width>
    <height>160</height>
    <loadfn>throttleval</loadfn>
-   <options>86</options>
+   <options>134</options> <!-- HUDS_VERT | HUDS_LEFT | HUDS_NOTEXT -->
    <disp_scaling>100.0</disp_scaling>
    <maxValue>1.0</maxValue>
    <minValue>0.0</minValue>
@@ -137,6 +139,7 @@
    <minor_divs>0</minor_divs>
    <modulator>0</modulator>
    <value_span>1.0</value_span>
+   <marker_offset>0.0</marker_offset>
    <type>gauge</type>
    <tick_bottom>true</tick_bottom>
    <tick_top>true</tick_top>
@@ -146,7 +149,6 @@
    <cap_top>false</cap_top>
    <cap_right>true</cap_right>
    <cap_left>false</cap_left>
-   <marker_offset>0.0</marker_offset>
    <enable_pointer>true</enable_pointer>
    <pointer_type>fixed</pointer_type>
    <working>true</working>

@@ -33,7 +33,7 @@ properties' values.
   <adf-freq-selected-prop>/instrumentation/adf/frequencies/selected-khz</adf-freq-selected-prop>
   <adf-freq-standby-prop>/instrumentation/adf/frequencies/standby-khz</adf-freq-standby-prop>
   <adf-morse-id-volume-prop>/instrumentation/adf/volume-norm</adf-morse-id-volume-prop>
-  <adf-morse-ident-toggle-prop>/instrumentation/adf/ident</adf-morse-ident-toggle-prop>
+  <adf-morse-ident-toggle-prop>/instrumentation/adf/ident-audible</adf-morse-ident-toggle-prop>
 </params>
 
  <layers>
@@ -362,7 +362,7 @@ properties' values.
     <property alias="../../../../params/adf-morse-id-volume-prop"/>
     <step>0.5</step>
     <min>0</min>
-    <max>2</max>
+    <max>1</max>
    </binding>
   </action>
 
@@ -378,7 +378,7 @@ properties' values.
     <property alias="../../../../params/adf-morse-id-volume-prop"/>
     <step>-0.5</step>
     <min>0</min>
-    <max>2</max>
+    <max>1</max>
    </binding>
   </action>
  

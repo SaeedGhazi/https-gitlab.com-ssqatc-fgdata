@@ -64,6 +64,15 @@
   <strings>Translations/strings-nl.xml</strings>
  </locale>
 
+ <locale>
+  <lang type="string">pl</lang>
+  <lang type="string">pl_PL</lang>
+  <lang type="string">pl_PL.ISO8859-2</lang>
+  <lang type="string">pl_PL.Windows-1250</lang>
+
+  <strings>Translations/strings-pl.xml</strings>
+ </locale>
+
 <!--
  <locale>
   <lang type="string">cs</lang>
@@ -140,12 +149,6 @@
   <lang type="string">no_NO.ISO8859-15</lang>
 
   <strings>Translations/strings-no.xml</strings>
- </locale>
-
- <locale>
-  <lang type="string">pl</lang>
-
-  <strings>Translations/strings-pl.xml</strings>
  </locale>
 
  <locale>

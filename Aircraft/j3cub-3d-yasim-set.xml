@@ -19,7 +19,7 @@ model, instrument panel, and external 3D model.
   
   <systems>
    <electrical>
-    <path>Aircraft/Generic/generic-electrical.xml</path>
+    <path>Aircraft/j3cub/cub-electrical.xml</path>
    </electrical>
   </systems> 
 

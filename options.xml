@@ -808,6 +808,12 @@
    <name>strings/debugging-options</name>
 
    <option>
+    <name>log-level</name>
+    <arg>n</arg>
+    <description>strings/log-level-desc</description>
+   </option>
+
+   <option>
     <name>trace-read</name>
     <arg>property</arg>
     <description>strings/trace-read-desc</description>

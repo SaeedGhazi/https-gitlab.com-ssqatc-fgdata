@@ -856,6 +856,14 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+ <key n="114">
+  <name>r</name>
+  <desc>Activate the instant replay system.</desc>
+  <binding>
+   <command>replay</command>
+  </binding>
+ </key>
+
  <key n="115">
   <name>s</name>
   <desc>Swap panels.</desc>

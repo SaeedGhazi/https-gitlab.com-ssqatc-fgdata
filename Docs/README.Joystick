@@ -3,7 +3,7 @@ Or
 "The document formerly know as The Users Guide to Joystick Usage Under
 FlightGear Flight Simulator"
 
-version 0.7.7.2 07/02/2001
+version 0.7.7.3 07/02/2001
 Author John Check <j4strngs@rockfish.net>
 
 This document is written with versions of FlightGear 0.7.7 and greater
@@ -446,6 +446,41 @@ XML will handle this automatically):
 This is a good time to remind you that command line formatted options are used
 in your .fgfsrc file. You can put them in $FG_ROOT/system.fgfsrc to make them
 global.
+
+Digital Coolie Hats
+-------------------
+Many common joysticks come with digital coolie hats. These are detected as 
+axes rather than as buttons, although they are in fact just four (or eight) 
+simple switches. FGFS provides 2 virtual buttons to every axis which are 
+triggered whenever the axis reaches one of the end positions. These virtual 
+buttons can be addressed via two sub-properties »low« and »high« and accept any
+of the common button properties.  
+
+For example, if you just want to control view direction, you can map two of the 
+axes to /sim/view/axes/long and /sim/view/axes/lat:
+
+  --prop:/input/joysticks/js/axis[5]/binding/command=property-scale
+  --prop:/input/joysticks/js/axis[5]/binding/property=/sim/view/axes/lat
+
+  --prop:/input/joysticks/js/axis[6]/binding/command=property-scale
+  --prop:/input/joysticks/js/axis[6]/binding/property=/sim/view/axes/long
+
+If you want to use them as buttons (say, to scroll the panel
+vertically or horizontally), you can use the high/low bindings.
+Here's an example of how to use an axis to adjust the elevator trim:
+
+  --prop:/input/joysticks/js/axis[1]/low/repeatable=true
+  --prop:/input/joysticks/js/axis[1]/low/binding/command=property-adjust
+  --prop:/input/joysticks/js/axis[1]/low/binding/property=/controls/elevator-trim
+  --prop:/input/joysticks/js/axis[1]/low/binding/step=0.001
+
+  --prop:/input/joysticks/js/axis[1]/high/repeatable=true
+  --prop:/input/joysticks/js/axis[1]/high/binding/command=property-adjust
+  --prop:/input/joysticks/js/axis[1]/high/binding/property=/controls/elevator-trim
+  --prop:/input/joysticks/js/axis[1]/high/binding/step=-0.001
+
+You could also bind some axes to brakes, so that you can use positions
+between between 0.0 (no brakes) and 1.0 (full brakes).
 
 
 Keyboard Bindings

@@ -603,6 +603,7 @@ per axis
         32  =   8 pixels,               0.03125
         64  =   4 pixels,               0.015625
         128 =   2 pixels,               0.0078125
+        256 =   1 pixel,                0.00390625
 
 A common procedure for generating gauge faces is to use a
 vector graphics package such as xfig, exporting the result as a

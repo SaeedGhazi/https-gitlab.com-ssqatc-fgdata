@@ -2644,6 +2644,7 @@ Shared parameters for various materials.
 
 <material>
  <name>ShrubCover</name>
+ <name>ShrubGrassCover</name>
  <name>BareTundraCover</name>
  <texture>Terrain/shrub.rgb</texture>
  <xsize>500</xsize>
@@ -3128,7 +3129,6 @@ Shared parameters for various materials.
 
 <material>
  <name>Marsh</name>
- <name>ShrubGrassCover</name>
  <name>HerbWetlandCover</name>
  <name>WoodedWetlandCover</name>
  <texture>Terrain/marsh1.rgb</texture>

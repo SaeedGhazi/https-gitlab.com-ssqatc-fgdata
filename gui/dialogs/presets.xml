@@ -8,30 +8,8 @@
  <text>
   <x>10</x>
   <y>270</y>
-  <label>Default Situation</label>
+  <label>Set New Position</label>
  </text>
-
- <button>
-  <x>100</x>
-  <y>240</y>
-  <legend>REVERT TO DEFAULTS</legend>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/presets/longitude-deg</property>
-   <value type="double">-9999</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/presets/latitude-deg</property>
-   <value type="double">-9999</value>
-  </binding>
-  <binding>
-   <command>dialog-apply</command>
-  </binding>
-  <binding>
-   <command>presets-commit</command>
-  </binding>
- </button>
 
  <input>
   <x>10</x>
@@ -97,7 +75,20 @@
    <y>0</y>
    <legend>OK</legend>
    <binding>
+    <command>property-assign</command>
+    <property>/sim/presets/longitude-deg</property>
+    <value type="double">-9999</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/presets/latitude-deg</property>
+    <value type="double">-9999</value>
+   </binding>
+   <binding>
     <command>dialog-apply</command>
+   </binding>
+   <binding>
+    <command>presets-commit</command>
    </binding>
    <binding>
     <command>dialog-close</command>
@@ -110,7 +101,20 @@
    <y>0</y>
    <legend>Apply</legend>
    <binding>
+    <command>property-assign</command>
+    <property>/sim/presets/longitude-deg</property>
+    <value type="double">-9999</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/presets/latitude-deg</property>
+    <value type="double">-9999</value>
+   </binding>
+   <binding>
     <command>dialog-apply</command>
+   </binding>
+   <binding>
+    <command>presets-commit</command>
    </binding>
   </button>
 

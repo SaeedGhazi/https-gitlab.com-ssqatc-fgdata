@@ -20,27 +20,25 @@ model, instrument panel, and external 3D model.
   </sound>
 
   <panel>
-   <visibility archive="n">true</visibility>
+   <visibility archive="n">false</visibility>
   </panel>
 
   <model>
    <path archive="y">Aircraft/j3cub/Models/j3cub.xml</path>
   </model>
 
+  <current-view>
+   <pitch-offset-deg>-5</pitch-offset-deg>
+  </current-view>
+
   <view>
-   <internal archive="y">false</internal>
+   <internal archive="y">true</internal>
    <config>
-     <x-offset-m archive="y">-0.25</x-offset-m>
-     <y-offset-m archive="y">0.20</y-offset-m>
-     <z-offset-m archive="y">0.66</z-offset-m>
+     <x-offset-m archive="y">0.0</x-offset-m>
+     <y-offset-m archive="y">-0.20</y-offset-m>
+     <z-offset-m archive="y">0.5</z-offset-m>
    </config>
   </view>
-
-<!--
-  <current-view>
-   <pitch-offset-deg>-13</pitch-offset-deg>
-  </current-view>
--->
 
  </sim>
 

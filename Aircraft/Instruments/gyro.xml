@@ -284,7 +284,7 @@ properties' values.
    <button>0</button>
    <x>-56</x>
    <y>-56</y>
-   <w>12</w>
+   <w>10</w>
    <h>24</h>
    <binding>
     <command>property-adjust</command>
@@ -301,7 +301,7 @@ properties' values.
    <button>1</button>
    <x>-56</x>
    <y>-56</y>
-   <w>12</w>
+   <w>10</w>
    <h>24</h>
    <binding>
     <command>property-adjust</command>
@@ -318,7 +318,7 @@ properties' values.
    <button>0</button>
    <x>-46</x>
    <y>-56</y>
-   <w>12</w>
+   <w>10</w>
    <h>24</h>
    <binding>
     <command>property-adjust</command>
@@ -335,7 +335,7 @@ properties' values.
    <button>1</button>
    <x>-46</x>
    <y>-56</y>
-   <w>12</w>
+   <w>10</w>
    <h>24</h>
    <binding>
     <command>property-adjust</command>
@@ -352,7 +352,7 @@ properties' values.
    <button>0</button>
    <x>36</x>
    <y>-56</y>
-   <w>12</w>
+   <w>10</w>
    <h>24</h>
    <binding>
     <command>property-adjust</command>
@@ -369,7 +369,7 @@ properties' values.
    <button>1</button>
    <x>36</x>
    <y>-56</y>
-   <w>12</w>
+   <w>10</w>
    <h>24</h>
    <binding>
     <command>property-adjust</command>
@@ -386,7 +386,7 @@ properties' values.
    <button>0</button>
    <x>46</x>
    <y>-56</y>
-   <w>12</w>
+   <w>10</w>
    <h>24</h>
    <binding>
     <command>property-adjust</command>
@@ -403,7 +403,7 @@ properties' values.
    <button>1</button>
    <x>46</x>
    <y>-56</y>
-   <w>12</w>
+   <w>10</w>
    <h>24</h>
    <binding>
     <command>property-adjust</command>

@@ -170,9 +170,9 @@
   <action>
    <name>Rotate knob left</name>
    <button>0</button>
-   <x>-70</x>
-   <y>-35</y>
-   <w>36</w>
+   <x>-74</x>
+   <y>-36</y>
+   <w>34</w>
    <h>72</h>
    <binding>
     <command>property-adjust</command>
@@ -194,8 +194,8 @@
    <name>Rotate knob right</name>
    <button>0</button>
    <x>-40</x>
-   <y>-35</y>
-   <w>36</w>
+   <y>-36</y>
+   <w>34</w>
    <h>72</h>
    <binding>
     <command>property-adjust</command>
@@ -217,8 +217,8 @@
    <name>Engage starter</name>
    <button>0</button>
    <x>-40</x>
-   <y>-35</y>
-   <w>36</w>
+   <y>-36</y>
+   <w>34</w>
    <h>72</h>
    <repeatable type="bool">false</repeatable>
    <binding>

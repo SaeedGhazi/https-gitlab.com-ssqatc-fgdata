@@ -81,9 +81,9 @@ properties' values.
   <action>
    <name>extend</name>
    <button>0</button>
-   <x>-32</x>
-   <y>-61</y>
-   <w>32</w>
+   <x>-30</x>
+   <y>-48</y>
+   <w>30</w>
    <h>96</h>
    <binding>
     <command>property-adjust</command>
@@ -99,8 +99,8 @@ properties' values.
    <name>retract</name>
    <button>0</button>
    <x>0</x>
-   <y>-61</y>
-   <w>32</w>
+   <y>-48</y>
+   <w>30</w>
    <h>96</h>
    <binding>
     <command>property-adjust</command>

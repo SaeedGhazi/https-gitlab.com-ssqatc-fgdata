@@ -97,9 +97,9 @@ properties' values.
    <name>small decrease</name>
    <button>0</button>
    <x>-32</x>
-   <y>-36</y>
+   <y>-44</y>
    <w>32</w>
-   <h>72</h>
+   <h>74</h>
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/engine-mixture-select"/>
@@ -114,9 +114,9 @@ properties' values.
    <name>small increase</name>
    <button>0</button>
    <x>0</x>
-   <y>-36</y>
+   <y>-44</y>
    <w>32</w>
-   <h>72</h>
+   <h>74</h>
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/engine-mixture-select"/>
@@ -131,9 +131,9 @@ properties' values.
    <name>big decrease</name>
    <button>1</button>
    <x>-32</x>
-   <y>-36</y>
+   <y>-44</y>
    <w>32</w>
-   <h>72</h>
+   <h>74</h>
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/engine-mixture-select"/>
@@ -148,9 +148,9 @@ properties' values.
    <name>big increase</name>
    <button>1</button>
    <x>0</x>
-   <y>-36</y>
+   <y>-44</y>
    <w>32</w>
-   <h>72</h>
+   <h>74</h>
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/engine-mixture-select"/>

@@ -59,12 +59,39 @@
   </submenu>
  
   <submenu>
-   <name>strings/environment</name>
+   <name>strings/presets</name>
    <option>
-    <name>strings/goto-airport</name>
-    <call>NewAirport</call>
+    <name>strings/preset-airport</name>
+    <call>fgPresetAirport</call>
    </option>
-  </submenu>
+   <option>
+    <name>strings/preset-runway</name>
+    <call>fgPresetRunway</call>
+   </option>
+   <option>
+    <name>strings/preset-offset-distance</name>
+    <call>fgPresetOffsetDistance</call>
+   </option>
+   <option>
+    <name>strings/preset-altitude</name>
+    <call>fgPresetAltitude</call>
+   </option>
+   <option>
+    <name>strings/preset-glideslope</name>
+    <call>fgPresetGlideslope</call>
+   </option>
+   <option>
+    <name>strings/preset-airspeed</name>
+    <call>fgPresetAirspeed</call>
+   </option>
+   <option>
+    <seperator/>
+   </option>
+   <option>
+    <name>strings/preset-commit</name>
+    <call>fgPresetCommit</call>
+   </option>
+ </submenu>
 
 <!--
   <submenu>

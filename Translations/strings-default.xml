@@ -40,8 +40,14 @@
  <properties>Properties</properties>
 
  <!-- Environment menu -->
- <environment>Environment</environment>
- <goto-airport>Goto Airport</goto-airport>
+ <presets>Presets</presets>
+ <preset-airport>New Airport</preset-airport>
+ <preset-runway>New Runway</preset-runway>
+ <preset-offset-distance>Set Offset Distance</preset-offset-distance>
+ <preset-altitude>Set Altitude</preset-altitude>
+ <preset-glideslope>Set Glideslope (degrees)</preset-glideslope>
+ <preset-airspeed>Set Airspeed (kts)</preset-airspeed>
+ <preset-commit>Commit Changes</preset-commit>
 
  <!-- Autopilot menu -->
  <autopilot>Autopilot</autopilot>

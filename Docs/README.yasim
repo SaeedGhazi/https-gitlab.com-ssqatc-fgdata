@@ -208,6 +208,14 @@ propeller: A propeller.  This element requires an engine subtag.
            gear-ratio:    The factor by which the engine RPM is multiplied
                           to produce the propeller RPM.  Optional (defaults
                           to 1.0).
+           contra:        When set (contra="1"), this indicates that the
+                          propeller is a contra-rotating pair.  It
+                          will not contribute to the aircraft's net
+                          gyroscopic moment, nor will it produce
+                          asymmetric torque on the aircraft body.
+                          Asymmetric slipstream effects, when
+                          implemented, will also be zero when this is
+                          set.
 
 piston-engine: A piston engine definition.  This must be a subelement
                of an enclosing <propeller> tag.

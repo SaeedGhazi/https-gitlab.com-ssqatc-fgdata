@@ -24,7 +24,7 @@
 
 <wing x="-2" y="3.01" z="-1.45" length="33.72" chord="13.25" sweep="33"
       taper=".27" dihedral="7" camber="0.15" incidence="-0.7">
-  <stall aoa="15" width="2" peak="1.5"/>
+  <stall aoa="12" width="2" peak="2"/>
   <flap0 start="0" end=".56" lift="1.8" drag="1.2"/>
   <flap1 start=".64" end=".88" lift="1.3" drag="1.2"/>
   <slat start="0" end="1" aoa="2" drag="1.1"/>
@@ -43,7 +43,7 @@
 </wing>
 
 <hstab x="-38.13" y="1.81" z="1.81" chord="8.43" length="10.84" taper=".29"
-       sweep="28" dihedral="7" camber="-0.1" effectiveness="1.5">
+       sweep="28" dihedral="7" camber="-0.1" effectiveness="2.3">
   <stall aoa="15" width="2" peak="1.5"/>
   <flap0 start="0" end="1" lift="1.6" drag="1.2"/>
   <control-input axis="/controls/elevator" control="FLAP0"/>

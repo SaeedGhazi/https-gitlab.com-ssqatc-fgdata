@@ -35,9 +35,9 @@
   <control-speed control="FLAP0" transition-time="6"/>
 </wing>
 
-<hstab x="-7.16" y="0.08" z=".17" taper=".63"
+<hstab x="-7.16" y="0.08" z=".17" taper=".63" effectiveness="2"
        length="1.71" chord="1.36" sweep="0">
-  <stall aoa="16" width="4" peak="1.5"/>
+  <stall aoa="18" width="4" peak="1.5"/>
   <flap0 start="0" end="1" lift="1.7" drag="1.2"/>
   <control-input axis="/controls/elevator" control="FLAP0"/>
   <control-input axis="/controls/elevator-trim" control="FLAP0"/>

@@ -23,7 +23,7 @@
       length="4.04" chord="3.95" sweep="28" dihedral="0" camber="0.02">
   <stall aoa="27" width="10" peak="1.3"/>
   <flap0 start="0.0" end="0.5" lift="1.3" drag="1.2"/>
-  <flap1 start="0.5" end="1.0" lift="1.25" drag="1.3"/>
+  <flap1 start="0.5" end="1.0" lift="1.2" drag="1.2"/>
   <control-input axis="/controls/flaps" control="FLAP0"/>
   <control-input axis="/controls/aileron" control="FLAP1" split="true"/> 
   <control-input axis="/controls/aileron-trim" control="FLAP1" split="true"/> 
@@ -55,7 +55,8 @@
 </vstab>
 
 <!-- P&W J52-P-6A turbojet, 8500 lbs sea level thrust -->
-<jet x="0.61" y="0" z="0.11" mass="1800" thrust="8500" n1-max="106">
+<jet x="0.61" y="0" z="0.11" mass="1800" thrust="8500" n1-max="106"
+     exhaust-speed="2000">
   <control-input axis="/controls/throttle[0]" control="THROTTLE"/>
 </jet>
 
@@ -69,7 +70,8 @@
 </gear>
 
 <!-- left main -->
-<gear x="-1.39" y="1.19" z="-1.89" retract-time="7" compression=".78">
+<gear x="-1.39" y="1.19" z="-1.89" retract-time="7" compression=".78"
+      damp="2">
   <control-input axis="/controls/brakes[0]" control="BRAKE"/>
   <control-input axis="/controls/gear-down" control="EXTEND"/>
   <control-output control="EXTEND" prop="/gear/gear[1]/position-norm"/>
@@ -78,7 +80,8 @@
 </gear>
 
 <!-- right main -->
-<gear x="-1.39" y="-1.19" z="-1.89" retract-time="7" compression=".78">
+<gear x="-1.39" y="-1.19" z="-1.89" retract-time="7" compression=".78"
+      damp="2">
   <control-input axis="/controls/brakes[1]" control="BRAKE"/>
   <control-input axis="/controls/gear-down" control="EXTEND"/>
   <control-output control="EXTEND" prop="/gear/gear[2]/position-norm"/>

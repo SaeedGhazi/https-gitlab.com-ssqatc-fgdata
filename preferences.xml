@@ -35,11 +35,6 @@ Started September 2000 by David Megginson, david@megginson.com
 <!--   <y-offset>-305</y-offset> -->
    <visibility>true</visibility>
   </panel>
-  <panel_2>
-   <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
-<!--   <y-offset>-305</y-offset> -->
-   <visibility>true</visibility>
-  </panel_2>
   <hud>
    <path>Huds/Default/default.xml</path>
    <visibility>false</visibility>

@@ -116,7 +116,8 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>ESC</name>
   <desc>Prompt and quit FlightGear.</desc>
   <binding>
-    <command>exit</command>
+    <command>dialog-show</command>
+    <dialog-name>exit</dialog-name>
   </binding>
  </key>
 

@@ -48,7 +48,8 @@
   <item>
    <label>Quit</label>
    <binding>
-    <command>exit</command>
+    <command>dialog-show</command>
+    <dialog-name>exit</dialog-name>
    </binding>
   </item>
 
@@ -79,17 +80,10 @@
    </binding>
   </item>
 
-  <item>
-   <label>Browse Internal Properties</label>
-   <binding>
-    <command>old-properties-dialog</command>
-   </binding>
-  </item>
-
  </menu>
 
  <menu>
-  <label>Presets</label>
+  <label>State</label>
 
   <item>
    <label>Preset Values</label>
@@ -98,53 +92,11 @@
     <dialog-name>presets</dialog-name>
    </binding>
   </item>
-  
-  <item>
-   <label>Preset Airport</label>
-   <binding>
-    <command>old-preset-airport-dialog</command>
-   </binding>
-  </item>
 
   <item>
-   <label>Preset Runway</label>
+   <label>Browse Internal Properties</label>
    <binding>
-    <command>old-preset-runway-dialog</command>
-   </binding>
-  </item>
-
-  <item>
-   <label>Preset Offset Distance</label>
-   <binding>
-    <command>old-preset-offset-distance-dialog</command>
-   </binding>
-  </item>
-
-  <item>
-   <label>Preset Altitude</label>
-   <binding>
-    <command>old-preset-altitude-dialog</command>
-   </binding>
-  </item>
-
-  <item>
-   <label>Preset Glideslope</label>
-   <binding>
-    <command>old-preset-glideslope-dialog</command>
-   </binding>
-  </item>
-
-  <item>
-   <label>Preset Airspeed</label>
-   <binding>
-    <command>old-preset-airspeed-dialog</command>
-   </binding>
-  </item>
-
-  <item>
-   <label>Commit Presets</label>
-   <binding>
-    <command>old-preset-commit-dialog</command>
+    <command>old-properties-dialog</command>
    </binding>
   </item>
 

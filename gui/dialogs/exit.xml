@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <name>exit</name>
+ <width>180</width>
+ <height>100</height>
+ <modal>true</modal>
+
+ <text>
+  <x>10</x>
+  <y>70</y>
+  <label>Exit FlightGear?</label>
+ </text>
+
+ <button>
+  <x>10</x>
+  <y>10</y>
+  <legend>Exit</legend>
+  <default>true</default>
+  <binding>
+   <command>exit</command>
+  </binding>
+  <binding>
+   <command>dialog-close</command>
+  </binding>
+ </button>
+
+ <button>
+  <x>100</x>
+  <y>10</y>
+  <legend>Cancel</legend>
+  <binding>
+   <command>dialog-close</command>
+  </binding>
+ </button>
+
+</PropertyList>

@@ -2449,6 +2449,7 @@ Shared parameters for various materials.
 
 <material>
  <name>DeciduousBroadCover</name>
+ <name>Bog</name>
  <texture>Terrain/deciduous.rgb</texture>
  <xsize>500</xsize>
  <ysize>500</ysize>

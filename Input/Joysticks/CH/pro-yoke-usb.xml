@@ -167,9 +167,9 @@
  <button n="6">
   <repeatable>false</repeatable>
   <binding>
-   <command>property-adjust</command>
+   <command>property-assign</command>
    <property>/controls/flaps</property>
-   <step type="double">-0.34</step>
+   <value type="double">0.0</value>
   </binding>
  </button>
 

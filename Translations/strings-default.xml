@@ -132,16 +132,21 @@
  <on-ground-desc>Start at ground level (default)</on-ground-desc>
  <in-air-desc>Start in air (implied when using --altitude)</in-air-desc>
  <wind-desc>Specify wind coming from DIR (degrees) at SPEED (knots)</wind-desc>
+ <turbulence-desc>Specify turbulence from 0.0 (calm) to 1.0 (severe)</turbulence-desc>
  <aircraft-dir-desc>Aircraft directory relative to the path of the executable</aircraft-dir-desc>
 
  <aircraft-model-options>Aircraft model directory (UIUC FDM ONLY)</aircraft-model-options>
 
  <!-- Position and Orientation options -->
  <position-options>Initial Position and Orientation</position-options>
- <airport-id-desc>Specify starting position by airport ID</airport-id-desc>
+ <airport-desc>Specify starting position relative to an airport</airport-desc>
+ <vor-desc>Specify starting position relative to a VOR</vor-desc>
+ <ndb-desc>Specify starting position relative to an NDB</ndb-desc>
+ <fix-desc>Specify starting position relative to a fix</fix-desc>
  <runway-no-desc>Specify starting runway (must also specify an aiport)</runway-no-desc>
- <offset-distance-desc>Specify distance to threshold</offset-distance-desc>
- <offset-azimuth-desc>Specify heading to threshold</offset-azimuth-desc>
+ <airport-id-desc>(Obsolete; use --airport instead.)</airport-id-desc>
+ <offset-distance-desc>Specify distance to reference point (statute miles)</offset-distance-desc>
+ <offset-azimuth-desc>Specify heading to reference point</offset-azimuth-desc>
  <lon-desc>Starting longitude (west = -)</lon-desc>
  <lat-desc>Starting latitude (south = -)</lat-desc>
  <altitude-desc>Starting altitude</altitude-desc>

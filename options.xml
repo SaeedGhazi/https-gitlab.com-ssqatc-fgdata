@@ -284,6 +284,13 @@
     <brief/>
    </option>
 
+   <option>
+    <name>turbulence</name>
+    <arg>0.0 to 1.0</arg>
+    <description>strings/turbulence-desc</description>
+    <brief/>
+   </option>
+
   </section>
 
   <section>
@@ -301,9 +308,9 @@
    <name>strings/position-options</name>
 
    <option>
-    <name>airport-id</name>
+    <name>airport</name>
     <arg>ID</arg>
-    <description>strings/airport-id-desc</description>
+    <description>strings/airport-desc</description>
     <brief/>
    </option>
 
@@ -311,6 +318,34 @@
     <name>runway</name>
     <arg>rwy_no</arg>
     <description>strings/runway-no-desc</description>
+    <brief/>
+   </option>
+
+   <option>
+    <name>vor</name>
+    <arg>ID</arg>
+    <description>strings/vor-desc</description>
+    <brief/>
+   </option>
+
+   <option>
+    <name>ndb</name>
+    <arg>ID</arg>
+    <description>strings/ndb-desc</description>
+    <brief/>
+   </option>
+
+   <option>
+    <name>fix</name>
+    <arg>ID</arg>
+    <description>strings/fix-desc</description>
+    <brief/>
+   </option>
+
+   <option>
+    <name>airport-id</name>
+    <arg>ID</arg>
+    <description>strings/airport-id-desc</description>
     <brief/>
    </option>
 

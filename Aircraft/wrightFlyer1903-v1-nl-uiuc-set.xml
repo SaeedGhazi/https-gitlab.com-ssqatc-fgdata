@@ -39,9 +39,8 @@ May 25 2002 Michael Selig, m-selig@uiuc.edu
   </panel_2>
 
   <!-- To use the 3D Model, go to Wolfram Kuss' website.    -->
-  <!-- For now, use the default 3D model for UIUC aircraft. -->
   <model>
-   <path>Aircraft/UIUC/Models/opus/opus-model.xml</path>
+   <path>Aircraft/wrightFlyer1903/Models/WrightFlyer-pb-jw.xml</path>
   </model>
 
  </sim>

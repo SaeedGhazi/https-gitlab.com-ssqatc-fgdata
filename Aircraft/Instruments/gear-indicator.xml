@@ -14,8 +14,10 @@
  <layer>
    <name>Brake light</name>
    <type>switch</type>
-   <property>/controls[0]/gear-down</property> <!-- nose brake -->
     <layer>
+     <condition>
+      <property>/controls[0]/gear-down</property> <!-- nose brake -->
+     </condition>
      <name>on</name>
      <texture>
      <path>Aircraft/Instruments/Textures/warning-lamps.rgb</path>

@@ -44,10 +44,12 @@ properties' values.
  <layer>
    <name>lamp</name>
    <type>switch</type>
-   <property>/radios/marker-beacon/outer</property> 
    <layer>
    <name>on</name>
    <texture>
+    <condition>
+     <property>/radios/marker-beacon/outer</property> 
+    </condition>
     <path>Aircraft/Instruments/Textures/led.rgb</path>
     <x1>0.5</x1>
     <y1>0.75</y1>
@@ -123,8 +125,10 @@ properties' values.
  <layer>
    <name>lamp</name>
    <type>switch</type>
-   <property>/radios/marker-beacon/middle</property> 
    <layer>
+   <condition>
+    <property>/radios/marker-beacon/middle</property> 
+   </condition>
    <name>on</name>
    <texture>
     <path>Aircraft/Instruments/Textures/led.rgb</path>
@@ -204,8 +208,10 @@ properties' values.
  <layer>
    <name>lamp</name>
    <type>switch</type>
-   <property>/radios/marker-beacon/inner</property> 
    <layer>
+   <condition>
+    <property>/radios/marker-beacon/inner</property> 
+   </condition>
    <name>on</name>
    <texture>
     <path>Aircraft/Instruments/Textures/led.rgb</path>

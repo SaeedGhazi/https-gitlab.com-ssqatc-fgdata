@@ -43,8 +43,10 @@ Started 24-7-01 by Timothy Gale
   <layer>
    <name>TO/FROM/OFF flag</name>
    <type>switch</type>
-   <property>/radios/nav[0]/to-flag</property>
    <layer>
+    <condition>
+     <property>/radios/nav[0]/to-flag</property>
+    </condition>
     <name>TO flag</name>
     <texture>
      <path>Aircraft/Instruments/Textures/misc-1.rgb</path>
@@ -59,8 +61,10 @@ Started 24-7-01 by Timothy Gale
    <layer>
     <name>FROM/OFF flag</name>
     <type>switch</type>
-    <property>/radios/nav[0]/from-flag</property>
     <layer>
+     <condition>
+      <property>/radios/nav[0]/from-flag</property>
+     </condition>
      <name>FROM flag</name>
      <texture>
       <path>Aircraft/Instruments/Textures/misc-1.rgb</path>

@@ -44,10 +44,12 @@ properties' values.
   <layer>
    <name>distance to station</name>
    <type>switch</type>
-   <property>/radios/dme/in-range</property>
    <w>128</w>
    <h>64</h>
    <layer>
+    <condition>
+     <property>/radios/dme/in-range</property>
+    </condition>
     <name>display</name>
     <type>text</type>
     <font>led</font>
@@ -97,8 +99,10 @@ properties' values.
   <layer>
    <name>ground speed towards station</name>
    <type>switch</type>
-   <property>/radios/dme/in-range</property>
    <layer>
+    <condition>
+     <property>/radios/dme/in-range</property>
+    </condition>
     <type>text</type>
     <font>led</font>
     <point-size>6</point-size>
@@ -143,8 +147,10 @@ properties' values.
   <layer>
    <name>time to station</name>
    <type>switch</type>
-   <property>/radios/dme/in-range</property>
    <layer>
+    <condition>
+     <property>/radios/dme/in-range</property>
+    </condition>
     <type>text</type>
     <font>led</font>
     <point-size>6</point-size>

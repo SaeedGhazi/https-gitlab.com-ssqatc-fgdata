@@ -52,8 +52,10 @@ properties' values.
   <layer>
    <name>WL button</name>
    <type>switch</type>
-   <property>/autopilot/locks/wing-leveler</property>
    <layer>
+    <condition>
+     <property>/autopilot/locks/wing-leveler</property>
+    </condition>
     <name>WL on</name>
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path>
@@ -124,8 +126,10 @@ properties' values.
   <layer>
    <name>HDG button</name>
    <type>switch</type>
-   <property>/autopilot/locks/heading</property>
    <layer>
+    <condition>
+     <property>/autopilot/locks/heading</property>
+    </condition>
     <name>HDG on</name>
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path>
@@ -196,8 +200,10 @@ properties' values.
   <layer>
    <name>NAV button</name>
    <type>switch</type>
-   <property>/autopilot/locks/nav[0]</property>
    <layer>
+    <condition>
+     <property>/autopilot/locks/nav[0]</property>
+    </condition>
     <name>NAV on</name>
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path>
@@ -268,8 +274,10 @@ properties' values.
   <layer>
    <name>APR button</name>
    <type>switch</type>
-   <property>/autopilot/locks/glide-slope[0]</property>
    <layer>
+    <condition>
+     <property>/autopilot/locks/glide-slope[0]</property>
+    </condition>
     <name>APR on</name>
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path>
@@ -340,8 +348,10 @@ properties' values.
   <layer>
    <name>ALT button</name>
    <type>switch</type>
-   <property>/autopilot/locks/altitude</property>
    <layer>
+    <condition>
+     <property>/autopilot/locks/altitude</property>
+    </condition>
     <name>ALT on</name>
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path>

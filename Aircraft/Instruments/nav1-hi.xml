@@ -67,8 +67,10 @@ properties' values.
   <layer>
    <name>TO/FROM/OFF flag</name>
    <type>switch</type>
-   <property alias="../../../params/nav-to-flag"/>
    <layer>
+    <condition>
+     <property alias="../../../../../params/nav-to-flag"/>
+    </condition>
     <name>TO flag</name>
     <texture>
      <path>Aircraft/Instruments/Textures/misc-1.rgb</path>
@@ -83,8 +85,10 @@ properties' values.
    <layer>
     <name>FROM/OFF flag</name>
     <type>switch</type>
-    <property alias="../../../../params/nav-from-flag"/>
     <layer>
+     <condition>
+      <property alias="../../../../../../params/nav-from-flag"/>
+     </condition>
      <name>FROM flag</name>
      <texture>
       <path>Aircraft/Instruments/Textures/misc-1.rgb</path>

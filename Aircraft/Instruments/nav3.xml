@@ -56,10 +56,12 @@ properties' values.
   <layer>
    <name>distance to station</name>
    <type>switch</type>
-   <property>/radios/dme/in-range</property>
    <w>96</w>
    <h>64</h>
    <layer>
+    <condition>
+     <property>/radios/dme/in-range</property>
+    </condition>
     <name>display</name>
     <type>text</type>
     <point-size>10</point-size>
@@ -147,8 +149,10 @@ properties' values.
   <layer>
    <name>TO/FROM/OFF flag</name>
    <type>switch</type>
-   <property>/radios/nav[0]/to-flag</property>
    <layer>
+    <condition>
+     <property>/radios/nav[0]/to-flag</property>
+    </condition>
     <name>TO flag</name>
     <texture>
      <path>Aircraft/Instruments/Textures/misc-1.rgb</path>
@@ -163,8 +167,10 @@ properties' values.
    <layer>
     <name>FROM/OFF flag</name>
     <type>switch</type>
-    <property>/radios/nav[1]/from-flag</property>
     <layer>
+     <condition>
+      <property>/radios/nav[1]/from-flag</property>
+     </condition>
      <name>FROM flag</name>
      <texture>
       <path>Aircraft/Instruments/Textures/misc-1.rgb</path>

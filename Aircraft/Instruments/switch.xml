@@ -4,8 +4,10 @@
 
   <name>voice/ident toggle</name>
   <type>switch</type>
-  <property alias="../../../params/"/>
   <layer>
+   <condition>
+    <property alias="../../../params/"/>
+   </condition>
      <name>voice on</name>
      <texture>
      <path>Aircraft/Instruments/Textures/switches.rgb</path>

@@ -230,8 +230,10 @@ properties' values.
   <layer>
    <name>voice/ident toggle</name>
    <type>switch</type>
-   <property alias="../../../params/nav-morse-ident-toggle-prop"/>
    <layer>
+   <condition>
+    <property alias="../../../../../params/nav-morse-ident-toggle-prop"/>
+   </condition>
    <name>voice on</name>
    <texture>
     <path>Aircraft/Instruments/Textures/switches.rgb</path>

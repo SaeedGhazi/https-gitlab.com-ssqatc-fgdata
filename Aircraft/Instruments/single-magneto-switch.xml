@@ -55,8 +55,10 @@
  <layer>
   <name>magneto switch</name>
   <type>switch</type>
-  <property alias="../../../params/starter-select"/>
   <layer>
+  <condition>
+   <property alias="../../../../../params/starter-select"/>
+  </condition>
   <name>starter engage</name>
   <texture>
     <path>Aircraft/Instruments/Textures/navcom-radios.rgb</path>

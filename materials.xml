@@ -79,9 +79,7 @@ Shared parameters for various materials.
   <!-- Maximum distance from which a tree is visible -->
   <tree-range-m>2000</tree-range-m>
   <!-- Average number of square meters per tree with one type -->
-  <single-tree-coverage>10000</single-tree-coverage>
-  <!-- Average number of square meters per tree with two types -->
-  <double-tree-coverage>20000</double-tree-coverage>
+  <tree-coverage-m2>20000</tree-coverage-m2>
  </forest>
 </params>
 
@@ -2442,7 +2440,7 @@ Shared parameters for various materials.
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
    <path>Models/Trees/coniferous-tree.ac</path>
-   <coverage-m2 alias="/params/forest/single-tree-coverage"/>
+   <coverage-m2 alias="/params/forest/tree-coverage-m2"/>
    <heading-type>billboard</heading-type>
   </object>
  </object-group>
@@ -2482,7 +2480,7 @@ Shared parameters for various materials.
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
    <path>Models/Trees/deciduous-tree.ac</path>
-   <coverage-m2 alias="/params/forest/single-tree-coverage"/>
+   <coverage-m2 alias="/params/forest/tree-coverage-m2"/>
    <heading-type>billboard</heading-type>
   </object>
  </object-group>
@@ -2523,7 +2521,7 @@ Shared parameters for various materials.
   <object>
    <path>Models/Trees/deciduous-tree.ac</path>
    <path>Models/Trees/coniferous-tree.ac</path>
-   <coverage-m2 alias="/params/forest/tree-coverage"/>
+   <coverage-m2 alias="/params/forest/tree-coverage-m2"/>
    <heading-type>billboard</heading-type>
   </object>
  </object-group>
@@ -2564,7 +2562,7 @@ Shared parameters for various materials.
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
    <path>Models/Trees/coniferous-tree.ac</path>
-   <coverage-m2 alias="/params/forest/single-tree-coverage"/>
+   <coverage-m2 alias="/params/forest/tree-coverage-m2"/>
    <heading-type>billboard</heading-type>
   </object>
  </object-group>
@@ -2604,7 +2602,7 @@ Shared parameters for various materials.
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
    <path>Models/Trees/deciduous-tree.ac</path>
-   <coverage-m2 alias="/params/forest/single-tree-coverage"/>
+   <coverage-m2 alias="/params/forest/tree-coverage-m2"/>
    <heading-type>billboard</heading-type>
   </object>
  </object-group>

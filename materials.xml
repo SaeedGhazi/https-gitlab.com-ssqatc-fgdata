@@ -2609,6 +2609,7 @@ Shared parameters for various materials.
 </material>
 
 <material>
+ <name>Sand</name>
  <name>ShrubCover</name>
  <name>BareTundraCover</name>
  <texture>Terrain/desert1.rgb</texture>

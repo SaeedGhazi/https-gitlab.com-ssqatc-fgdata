@@ -270,7 +270,8 @@ ________________________________________________________________________________
 					twlock = !getprop("/controls/gear/tailwheel-lock");
 					setprop("/controls/gear/tailwheel-lock", twlock);
 					if (twlock) {
-					rection Hat -->} else {
+						gui.popupTip("Tail Wheel UNLOCKED");
+					} else {
 						gui.popupTip("Tail Wheel LOCKED");
 					}
 				} elsif (mod == 2) {
@@ -304,7 +305,7 @@ ________________________________________________________________________________
 			</script>
 		</binding>
 	</button>
-top 
+
 	<button n="4"><!-- throttle down/back -->
 		<desc>Brakes left</desc>
 		<repeatable type="bool">true</repeatable>

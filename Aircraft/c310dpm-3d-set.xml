@@ -14,7 +14,7 @@
 
   <systems>
     <electrical>
-      <path>Aircraft/c172/c172-electrical.xml</path>
+      <path>Aircraft/c310/c310-electrical.xml</path>
     </electrical>
   </systems>
  

@@ -34,7 +34,10 @@ Started September 2000 by David Megginson, david@megginson.com
    <random-objects>true</random-objects>
   </rendering>
   <model-hz type="int">120</model-hz>
-  <sound type="bool">true</sound>
+  <sound>
+   <audible type="bool">true</audible>
+   <voice type="bool">true</voice>
+  </sound>
   <speed-up type="double">1.0</speed-up>
   <current-view>
     <field-of-view type="double">50.0</field-of-view>

@@ -4,64 +4,64 @@
 
  <menu>
   <submenu>
-   <name>/strings/file</name>
+   <name>strings/file</name>
    <option>
-    <name>/strings/save-flight</name>
+    <name>strings/save-flight</name>
     <call>saveFlight</call>
    </option>
    <option>
-    <name>/strings/load-flight</name>
+    <name>strings/load-flight</name>
     <call>loadFlight</call>
    </option>
    <option>
-    <name>/strings/reset</name>
+    <name>strings/reset</name>
     <call>reInit</call>
     </option>
    <option>
     <seperator/>
    </option>
    <option>
-    <name>/strings/hi-res-snap-shot</name>
+    <name>strings/hi-res-snap-shot</name>
     <call>dumpHiResSnapShot</call>
    </option>
    <option>
-    <name>/strings/snap-shot</name>
+    <name>strings/snap-shot</name>
     <call>dumpSnapShot</call>
    </option>
    <option>
-    <name>/strings/print</name>
+    <name>strings/print</name>
     <call>printScreen</call>
    </option>
    <option>
-    <name>/strings/exit</name>
+    <name>strings/exit</name>
     <call>MayBeGoodBye</call>
    </option>
   </submenu>
  
   <submenu>
-   <name>/strings/view</name>
+   <name>strings/view</name>
    <option>
-    <name>/strings/toggle-panel</name>
+    <name>strings/toggle-panel</name>
     <call>guiTogglePanel</call>
    </option>
    <option>
-    <name>/strings/pilot-offset</name>
+    <name>strings/pilot-offset</name>
     <call>PilotOffsetAdjust</call>
    </option>
    <option>
-    <name>/strings/hud-alpha</name>
+    <name>strings/hud-alpha</name>
     <call>fgHUDalphaAdjust</call>
    </option>
    <option>
-    <name>/strings/properties</name>
+    <name>strings/properties</name>
     <call>prop_pickerView</call>
    </option>
   </submenu>
  
   <submenu>
-   <name>/strings/environment</name>
+   <name>strings/environment</name>
    <option>
-    <name>/strings/goto-airport</name>
+    <name>strings/goto-airport</name>
     <call>NewAirport</call>
    </option>
   </submenu>
@@ -93,47 +93,47 @@
 -->
  
   <submenu>
-   <name>/strings/autopilot</name>
+   <name>strings/autopilot</name>
    <option>
-    <name>/strings/set-heading</name>
+    <name>strings/set-heading</name>
     <call>NewHeading</call>
    </option>
    <option>
-    <name>/strings/set-altitude</name>
+    <name>strings/set-altitude</name>
     <call>NewAltitude</call>
    </option>
    <option>
     <seperator/>
    </option>
    <option>
-    <name>/strings/add-waypoint</name>
+    <name>strings/add-waypoint</name>
     <call>AddWayPoint</call>
    </option>
    <option>
-    <name>/strings/skip-current-waypoint</name>
+    <name>strings/skip-current-waypoint</name>
     <call>PopWayPoint</call>
    </option>
    <option>
-    <name>/strings/clear-route</name>
+    <name>strings/clear-route</name>
     <call>ClearRoute</call>
    </option>
    <option>
     <seperator/>
    </option>
    <option>
-    <name>/strings/adjust-ap-settings</name>
+    <name>strings/adjust-ap-settings</name>
     <call>fgAPAdjust</call>
    </option>
    <option>
-    <name>/strings/toggle-hud-format</name>
+    <name>strings/toggle-hud-format</name>
     <call>fgLatLonFormatToggle</call>
    </option>
   </submenu>
 
   <submenu>
-   <name>/strings/help</name>
+   <name>strings/help</name>
    <option>
-    <name>/strings/help</name>
+    <name>strings/help</name>
     <call>helpCb</call>
    </option>
   </submenu>

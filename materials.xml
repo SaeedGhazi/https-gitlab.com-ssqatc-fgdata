@@ -785,6 +785,7 @@ Shared parameters for various materials.
  <name>BuiltUpCover</name>
  <name>Urban</name>
  <texture>Terrain/builtup.rgb</texture>
+ <texture>Terrain/resgrid.rgb</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>100000.0</light-coverage>

@@ -27,7 +27,7 @@
   </panel>
 
   <model>
-   <path>Aircraft/f104/Models/f104.ac</path>
+   <path>Aircraft/f104/Models/f104.xml</path>
   </model>
 
   <view n="0">

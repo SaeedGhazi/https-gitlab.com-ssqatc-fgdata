@@ -37,7 +37,7 @@
 \newcommand\ac[1]{\textcolor{darkcyan}{\textbf{\textsf{#1:}}}}
 \newcommand\hardcoded[1]{\textcolor{red}{hard-coded: #1}}
 \newcommand\shift[1]{\if$#1$\else\textcolor{darkblue}{SHIFT: #1}\fi}
-\newcommand\local[1]{}%\textcolor{darkred}{local: #1}}
+\newcommand\local[1]{\textcolor{darkred}{local: #1}}
 
 
 \begin{document}
@@ -60,12 +60,12 @@
 \\ 12	Ctrl-L		{}
 \\ 13	Ctrl-M/Enter	Move rudder right
 \\ 14	Ctrl-N		Toggle autopilot nav1 lock
-\\ 15	Ctrl-O		\local{Dump property tree}
+\\ 15	Ctrl-O		{}
 \\ 16	Ctrl-P		Toggle pitch hold
-\\ 17	Ctrl-Q		\local{Do something}
-\\ 18	Ctrl-R		\local{Activate the instant replay system}
+\\ 17	Ctrl-Q		{}
+\\ 18	Ctrl-R		{}
 \\ 19	Ctrl-S		Toggle auto-throttle lock
-\\ 20	Ctrl-T		Toggle autopilot terrain lock; \local{Toggle thrust reverser}
+\\ 20	Ctrl-T		Toggle autopilot terrain lock
 \\ 21	Ctrl-U		[Cheat] Add 1000\,ft of emergency altitude
 \\ 22	Ctrl-V		Select initial view (view 0)
 \\ 23	Ctrl-W		Toggle autopilot wing leveler
@@ -84,14 +84,14 @@
 \\ 36	\$		Select fourth engine
 \\ 37	{}		{}
 \\ 38	\&		{}
-\\ 39	'		Display a dialog relevant to the tuned in ATC service (if any)
+\\ 39	'~(apostrophe)	Display a dialog relevant to the tuned in ATC service (if any)
 \\ 40	(		{}
 \\ 41	)		{}
 \\ 42	*		{}
 \\ 43	+		{}
-\\ 44	,		Left brake
-\\ 45	-		{}
-\\ 46	.		Right brake
+\\ 44	,~(comma)	Left brake
+\\ 45	-~(minus)	{}
+\\ 46	.~(period)	Right brake
 \\ 47	/		{}
 \\ 48	0		Move rudder left
 \\ 49	1		Decrease elevator trim
@@ -103,8 +103,8 @@
 \\ 55	7		Increase elevator trim
 \\ 56	8		Decrease elevator or autopilot altitude
 \\ 57	9		Increase throttle or autopilot autothrottle
-\\ 58	:		{}
-\\ 59	;		{}
+\\ 58	:~(colon)	{}
+\\ 59	;~(semicolon)	{}
 \\ 60	<		\ac{c182|c310|pa28-161} Rudder trim left
 \\ 61	=		{}
 \\ 62	>		\ac{c182|c310|pa28-161} Rudder trim right
@@ -136,12 +136,12 @@
 \\ 88	X		Increase field of view
 \\ 89	Y		{}
 \\ 90	Z		Decrease Visibility
-\\ 91	[		Decrease flaps; \ac{737|A320} Decrease flaps; \ac{ComperSwift} Adjust view left
+\\ 91	[		Decrease flaps; \ac{737|A320} Decrease flaps; \ac{ComperSwift} Adjust view left; \ac{an225|b52} --
 \\ 92	\|		{}
-\\ 93	]		Increase flaps; \ac{737|A320} Increase flaps; \ac{ComperSwift} Adjust view right
+\\ 93	]		Increase flaps; \ac{737|A320} Increase flaps; \ac{ComperSwift} Adjust view right; \ac{an225|b52} --
 \\ 94	\^		{}
-\\ 95	\_		{}
-\\ 96	`{}		{}
+\\ 95	\_~(underscore)	{}
+\\ 96	`{}~(backtick)	{}
 \\ 97	a		Increase speed-up
 \\ 98	b		Apply all brakes; \ac{b52} Apply all brakes
 \\ 99	c		Toggle 3D/2D cockpit
@@ -171,7 +171,7 @@
 \\ 123	\{		Decrease Magneto on Selected Engine
 \\ 124	|		{}
 \\ 125	\}		Increase Magneto on Selected Engine
-\\ 126	\~		Select all engines
+\\ 126	\~~(tilde)	Select all engines
 \\ 127	{}		{}
 \\ 257	F1		Load flight;					\shift{}
 \\ 258	F2		Force tile cache reload;			\shift{Save flight}
@@ -184,7 +184,7 @@
 \\ 265	F9 		Toggle textures					\shift{}
 \\ 266	F10 		Toggle menubar;					\shift{Toggle FDM data logging}
 \\ 267	F11 		Pop up autopilot dialog
-\\ 268	{}		{}
+\\ 268	F12		{}
 \\ 269	Enter		Move rudder right
 \\ 309	Keypad~5	Center aileron, elevator, and rudder
 \\ 356	Left		Move aileron left (or adjust AP heading)
@@ -201,5 +201,3 @@
 \textcolor{darkcyan}{\texttt{${}$Id${}$}}
 \end{document}
 
-
-% {an225|b52} empty settings for 91, 93

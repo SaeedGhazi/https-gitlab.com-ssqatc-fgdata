@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <!-- FlightGear rendering options -->
+
+ <name>static-lod</name>
+ <width>380</width>
+ <height>260</height>
+ <modal>false</modal>
+
+ <text>
+  <x>10</x>
+  <y>230</y>
+  <label>Building LOD Ranges</label>
+ </text>
+
+ <text>
+  <x>30</x>
+  <y>190</y>
+  <label>Detailed up to :</label>
+ </text>
+
+ <input>
+  <name>detailed</name>
+  <x>200</x>
+  <y>190</y>
+  <width>100</width>
+  <height>25</height>
+  <label>meters</label>
+  <property>/sim/rendering/static-lod/detailed</property>
+ </input>
+
+ <text>
+  <x>30</x>
+  <y>150</y>
+  <label>Rough up to (m) :</label>
+ </text>
+
+ <input>
+  <name>rough</name>
+  <x>200</x>
+  <y>150</y>
+  <width>100</width>
+  <height>25</height>
+  <label>meters</label>
+  <property>/sim/rendering/static-lod/rough</property>
+ </input>
+
+ <text>
+  <x>30</x>
+  <y>110</y>
+  <label>Bare up to (m) :</label>
+ </text>
+
+ <input>
+  <name>bare</name>
+  <x>200</x>
+  <y>110</y>
+  <width>100</width>
+  <height>25</height>
+  <label>meters</label>
+  <property>/sim/rendering/static-lod/bare</property>
+ </input>
+
+ <text>
+  <x>20</x>
+  <y>70</y>
+  <label>To make this changes permanent,</label>
+ </text>
+ <text>
+  <x>30</x>
+  <y>50</y>
+  <label>edit preferences.xml</label>
+ </text>
+
+ <group>
+  <y>10</y>
+
+  <button>
+   <x>10</x>
+   <y>0</y>
+   <legend>OK</legend>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+   <binding>
+    <command>dialog-close</command>
+   </binding>
+   <default>true</default>
+  </button>
+
+  <button>
+   <x>60</x>
+   <y>0</y>
+   <legend>Apply</legend>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+  </button>
+
+  <button>
+   <x>140</x>
+   <y>0</y>
+   <legend>Reset</legend>
+   <binding>
+    <command>dialog-update</command>
+   </binding>
+  </button>
+
+  <button>
+   <x>220</x>
+   <y>0</y>
+   <legend>Cancel</legend>
+   <binding>
+    <command>dialog-close</command>
+   </binding>
+  </button>
+
+ </group>
+
+</PropertyList>

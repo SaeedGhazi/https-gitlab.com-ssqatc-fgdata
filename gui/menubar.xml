@@ -121,6 +121,14 @@
    </binding>
   </item>
 
+  <item>
+   <label>Adjust LOD Ranges</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>static-lod</dialog-name>
+   </binding>
+  </item>
+
  </menu>
 
  <menu>

@@ -260,7 +260,7 @@
    <option>
     <name>roll</name>
     <arg>degrees</arg>
-    <description>Specify roll angle (Phi)></description>
+    <description>Specify roll angle (Phi)</description>
    </option>
    <option>
     <name>pitch</name>
@@ -505,7 +505,7 @@
   <section>
    <name>IO Options</name>
    <option>
-    <name>gamin</name>
+    <name>garmin</name>
     <arg>params</arg>
     <description>Open connection using the Garmin GPS protocol</description>
    </option>

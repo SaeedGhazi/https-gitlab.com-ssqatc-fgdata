@@ -52,7 +52,7 @@ B52-H set file.
   <view n="1">
    <config>
      <!-- big plane, so extend chase view offset a bit -->
-     <z-offset-m type="double" archive="y">-100.0</z-offset-m>
+     <z-offset-m type="double" archive="y">-70.0</z-offset-m>
    </config>
 
   </view>
@@ -61,7 +61,7 @@ B52-H set file.
 
  <controls>
   <flight>
-   <elevator-trim type="float">-0.14</elevator-trim>
+   <elevator-trim type="float">-0.07</elevator-trim>
   </flight>
  </controls>
 
@@ -81,8 +81,8 @@ B52-H set file.
      <max-aileron type="float">1.0</max-aileron>
      <max-roll-deg type="float">40.0</max-roll-deg>
 
-     <roll-out-deg type="float">18.0</roll-out-deg>
-     <roll-out-smooth-deg type="float">20.0</roll-out-smooth-deg>
+     <roll-out-deg type="float">15.0</roll-out-deg>
+     <roll-out-smooth-deg type="float">15.0</roll-out-smooth-deg>
 
      <zero-pitch-throttle type="float">0.5</zero-pitch-throttle>
      <zero-pitch-trim-full-throttle type="float">0.001</zero-pitch-trim-full-throttle>

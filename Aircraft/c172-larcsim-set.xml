@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 ************************************************************************
-Cessna 172 simulation config. This files ties together all the components
+LaRCsim Cessna 172 with 2D panel.
 used by FGFS to represent the C172. Components include the flight data 
 model, instrument panel, and external 3D model.
 3D models can be downloaded from http://home.t-online.de/home/Wolfram.Kuss/
@@ -10,19 +10,14 @@ October 23 2001 John Check, fgpanels@rockfish.net
 ************************************************************************
 -->
 
-<PropertyList>
+<PropertyList include="c172p-base.xml">
 
  <sim>
 
-  <description>Cessna 172 (LaRCsim)</description>
+  <description>Cessna 172 (LaRCsim, 2D panel).</description>
  
   <flight-model>larcsim</flight-model>
   <aero>c172</aero>
-
-  <sound>
-   <audible>true</audible>
-   <path>Aircraft/c172/c172-sound.xml</path>
-  </sound>
 
   <panel>
    <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
@@ -32,42 +27,8 @@ October 23 2001 John Check, fgpanels@rockfish.net
    <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
   </panel_2>
 
-<!--
-  <model>
-   <path>Aircraft/c172/Models/N757/n757.ac</path>
-  </model>
--->
-
-  <model>
-   <path>Aircraft/c172/Models/c172-dpm.xml</path>
-  </model>
-
  </sim>
 
- <consumables>
-  <fuel>
-   <tank n="0">
-    <level-gal_us>20</level-gal_us>
-   </tank>
-   <tank n="1">
-    <level-gal_us>20</level-gal_us>
-   </tank>
-  </fuel>
- </consumables>
-
- <autopilot>
-   <config>
-     <min-climb-speed-kt type="float">70.0</min-climb-speed-kt>
-     <best-climb-speed-kt type="float">75.0</best-climb-speed-kt>
-     <target-climb-rate-fpm type="float">500.0</target-climb-rate-fpm>
-     <target-descent-rate-fpm type="float">1000.0</target-descent-rate-fpm>
-     <elevator-adj-factor type="float">4000.0</elevator-adj-factor>
-     <integral-contribution type="float">0.01</integral-contribution> 
-     <zero-pitch-throttle type="float">0.45</zero-pitch-throttle>
-     <zero-pitch-trim-full-throttle type="float">0.14</zero-pitch-trim-full-throttle>
-   </config>
- </autopilot>
- 
 </PropertyList>
 
 

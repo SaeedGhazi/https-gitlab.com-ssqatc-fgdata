@@ -11,7 +11,7 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
 
  <sim>
 
-  <description>Cessna 172R (JSBSim, 2D VFR panel).</description>
+  <description>Cessna 172R (JSBSim, 2D panel).</description>
 
   <!-- Use a 2D instrument panel -->
  

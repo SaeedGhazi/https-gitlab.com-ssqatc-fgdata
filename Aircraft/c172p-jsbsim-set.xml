@@ -1,35 +1,20 @@
 <?xml version="1.0"?>
 <!--
 ************************************************************************
-Cessna 172 simulation config. This files ties together all the components
-used by FGFS to represent the C172. Components include the flight data 
-model, instrument panel, and external 3D model.
-3D models can be downloaded from http://home.t-online.de/home/Wolfram.Kuss/
+JSBSim Cessna 172P with 2D panel.
 
-October 23 2001 John Check, fgpanels@rockfish.net
+Started October 23 2001 by John Check, fgpanels@rockfish.net
 ************************************************************************
 -->
 
-<PropertyList>
+<PropertyList include="c172p-jsbsim-base.xml">
 
  <sim>
 
-  <description>Cessna 172P</description>
+  <description>Cessna 172P (JSBSim, 2D panel).</description>
+
+  <!-- Use a 2D instrument panel -->
  
-  <flight-model archive="y">jsb</flight-model>
-  <aero archive="y">c172p</aero>
-
-  <systems>
-    <electrical>
-      <path>Aircraft/c172/c172-electrical.xml</path>
-    </electrical>
-  </systems>
-
-  <sound>
-   <audible archive="y">true</audible>
-   <path archive="y">Aircraft/c172/c172-sound.xml</path>
-  </sound>
-
   <panel>
    <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
    <visibility archive="y">true</visibility>
@@ -38,12 +23,12 @@ October 23 2001 John Check, fgpanels@rockfish.net
    <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
   </panel_2>
 
-  <model>
-   <path archive="y">Aircraft/c172p/Models/c172p.xml</path>
-  </model>
+  <!-- Look down a bit over the top of the panel -->
 
   <view>
-   <internal archive="y">false</internal>
+   <config>
+    <default-pitch-deg>-8</default-pitch-deg>
+   </config>
   </view>
 
   <current-view>
@@ -51,41 +36,5 @@ October 23 2001 John Check, fgpanels@rockfish.net
   </current-view>
 
  </sim>
-
- <autopilot>
-   <config>
-     <min-climb-speed-kt type="float">70.0</min-climb-speed-kt>
-     <best-climb-speed-kt type="float">75.0</best-climb-speed-kt>
-     <target-climb-rate-fpm type="float">500.0</target-climb-rate-fpm>
-     <target-descent-rate-fpm type="float">1000.0</target-descent-rate-fpm>
-     <elevator-adj-factor type="float">4000.0</elevator-adj-factor>
-     <integral-contribution type="float">0.01</integral-contribution>
-     <zero-pitch-throttle type="float">0.45</zero-pitch-throttle>
-     <zero-pitch-trim-full-throttle type="float">0.14</zero-pitch-trim-full-throttle>
-   </config>
- </autopilot>
-
- <consumables>
-  <fuel>
-   <tank n="0">
-    <level-gal_us>20</level-gal_us>
-   </tank>
-   <tank n="1">
-    <level-gal_us>20</level-gal_us>
-   </tank>
-  </fuel>
- </consumables>
-
- <controls>
-  <aileron-trim>-0.125</aileron-trim>
-  <rudder-trim>0.0</rudder-trim>
-  <magnetos>3</magnetos>
- </controls>
-
- <engines>
-  <engine>
-   <rpm type="double">700</rpm>
-  </engine>
- </engines>
 
 </PropertyList>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+Common configuration for all C172 aircraft.
+************************************************************************
+-->
+
+<PropertyList>
+
+ <sim>
+
+  <systems>
+    <electrical>
+      <path>Aircraft/c172/c172-electrical.xml</path>
+    </electrical>
+  </systems>
+
+  <sound>
+   <audible archive="y">true</audible>
+   <path archive="y">Aircraft/c172/c172-sound.xml</path>
+  </sound>
+
+ </sim>
+  
+ <engines>
+  <engine>
+   <rpm type="double">700</rpm>
+  </engine>
+ </engines>
+  
+</PropertyList>

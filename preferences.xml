@@ -24,7 +24,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <units>feet</units>
 <!--   <browser-app>netscape</browser-app>  help viewer -->
   </startup>
-  <flight-model>larcsim</flight-model>
+  <flight-model>jsb</flight-model>
   <aircraft>c172</aircraft>
   <model-hz>120</model-hz>
   <sound>true</sound>

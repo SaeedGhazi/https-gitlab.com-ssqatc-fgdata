@@ -108,7 +108,7 @@ properties' values.
      <path>Aircraft/Instruments/Textures/blister.rgb</path> 
      <x1>0.421875</x1>
      <x2>0.546875</x2>
-     <y1>0.0625</y1>
+     <y1>0.0675</y1>
      <y2>0.125</y2>
     </texture>
     <w>20</w>
@@ -396,7 +396,7 @@ properties' values.
      <path>Aircraft/Instruments/Textures/blister.rgb</path> 
      <x1>0.21875</x1>
      <x2>0.421875</x2>
-     <y1>0.0625</y1>
+     <y1>0.0675</y1>
      <y2>0.125</y2>
     </texture>
     <w>20</w>

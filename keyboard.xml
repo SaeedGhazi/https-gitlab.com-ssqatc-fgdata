@@ -42,6 +42,15 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+<key n="20">
+  <name>Ctrl-T</name>
+  <desc>Toggle autopilot terrain lock.</desc>
+  <binding>
+   <command>property-toggle</command>
+   <property>/autopilot/locks/terrain</property>
+  </binding>
+ </key>
+
  <key n="13">
   <name>Enter</name>
   <desc>Move rudder right or increase autopilot heading.</desc>
@@ -57,7 +66,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Toggle autopilot nav1 lock.</desc>
   <binding>
    <command>property-toggle</command>
-   <property>/autopilot/locks/nav1</property>
+   <property>/autopilot/locks/nav[0]</property>
   </binding>
  </key>
 
@@ -75,8 +84,16 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>[Cheat] Add 1000ft of emergency altitude.</desc>
   <binding>
    <command>property-adjust</command>
-   <property>/position/altitude</property>
+   <property>/position/altitude-ft</property>
    <step type="double">1000.0</step>
+  </binding>
+ </key>
+
+ <key n="27">
+  <name>ESC</name>
+  <desc>Prompt and quit FlightGear.</desc>
+  <binding>
+    <command>exit</command>
   </binding>
  </key>
 
@@ -136,7 +153,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
     <desc>Look back left</desc>
     <binding>
      <command>property-assign</command>
-     <property>/sim/view/goal-offset</property>
+     <property>/sim/view/goal-offset-deg</property>
      <value type="double">135</value>
     </binding>
   </mod-shift>
@@ -154,7 +171,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look back.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/view/goal-offset</property>
+    <property>/sim/view/goal-offset-deg</property>
     <value type="double">180</value>
    </binding>
   </mod-shift>
@@ -172,7 +189,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look back right.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/view/goal-offset</property>
+    <property>/sim/view/goal-offset-deg</property>
     <value type="double">225</value>
    </binding>
   </mod-shift>
@@ -190,7 +207,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look left.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/view/goal-offset</property>
+    <property>/sim/view/goal-offset-deg</property>
     <value type="double">90</value>
    </binding>
   </mod-shift>
@@ -228,7 +245,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look right.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/view/goal-offset</property>
+    <property>/sim/view/goal-offset-deg</property>
     <value type="double">270</value>
    </binding>
   </mod-shift>
@@ -246,7 +263,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look front left.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/view/goal-offset</property>
+    <property>/sim/view/goal-offset-deg</property>
     <value type="double">45</value>
    </binding>
   </mod-shift>
@@ -264,7 +281,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look forward.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/view/goal-offset</property>
+    <property>/sim/view/goal-offset-deg</property>
     <value type="double">0</value>
    </binding>
   </mod-shift>
@@ -282,7 +299,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look front right.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/view/goal-offset</property>
+    <property>/sim/view/goal-offset-deg</property>
     <value type="double">315</value>
    </binding>
   </mod-shift>
@@ -298,12 +315,69 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+ <key n="66">
+  <name>B</name>
+  <desc>Toggle parking brake on or off</desc>
+  <binding>
+   <command>property-toggle</command>
+   <property>/controls/brakes[0]</property>
+  </binding>
+  <binding>
+   <command>property-toggle</command>
+   <property>/controls/brakes[1]</property>
+  </binding>
+  <binding>
+   <command>property-toggle</command>
+   <property>/controls/brakes[2]</property>
+  </binding>
+ </key>
+
+ <key n="77">
+  <name>M</name>
+  <desc>Decrease warp.</desc>
+  <binding>
+   <command>property-adjust</command>
+   <property>/sim/time/warp</property>
+   <step>-60</step>
+  </binding>
+ </key>
+
  <key n="80">
   <name>P</name>
   <desc>Toggle panel.</desc>
   <binding>
    <command>property-toggle</command>
    <property>/sim/panel/visibility</property>
+  </binding>
+ </key>
+
+ <key n="84">
+  <name>T</name>
+  <desc>Decrease warp delta.</desc>
+  <binding>
+   <command>property-adjust</command>
+   <property>/sim/time/warp-delta</property>
+   <step>-30</step>
+  </binding>
+ </key>
+
+ <key n="88">
+  <name>X</name>
+  <desc>Increase field of view.</desc>
+  <binding>
+   <command>property-multiply</command>
+   <property>/sim/field-of-view</property>
+   <factor>1.05</factor>
+  </binding>
+ </key>
+
+ <key n="90">
+  <name>Z</name>
+  <desc>Decrease Visibility</desc>
+  <binding>
+   <command>property-multiply</command>
+   <property>/environment/visibility-m</property>
+   <factor>0.9090909090</factor>
   </binding>
  </key>
 
@@ -375,18 +449,48 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </mod-up>
  </key>
 
+ <key n="109">
+  <name>m</name>
+  <desc>Increase warp.</desc>
+  <binding>
+   <command>property-adjust</command>
+   <property>/sim/time/warp</property>
+   <step>60</step>
+  </binding>
+ </key>
+
+ <key n="112">
+  <name>p</name>
+  <desc>Toggle the pause state of the sim.</desc>
+  <binding>
+   <command>property-toggle</command>
+   <property>/sim/freeze</property>
+  </binding>
+ </key>
+
+
  <key n="115">
   <name>s</name>
   <desc>Swap panels.</desc>
   <binding>
-   <command>property-swap</command>
-   <property>/sim/panel/path</property>
-   <property>/sim/panel2/path</property>
+  <command>property-swap</command>
+  <property>/sim/panel/path</property>
+  <property>/sim/panel_2/path</property>
   </binding>
-   <binding>
-    <desc>Load panel.</desc>
-    <command>panel-load</command>
-   </binding>
+  <binding>
+  <desc>Load panel.</desc>
+  <command>panel-load</command>
+  </binding>
+ </key>
+
+ <key n="116">
+  <name>t</name>
+  <desc>Increase warp delta.</desc>
+  <binding>
+   <command>property-adjust</command>
+   <property>/sim/time/warp-delta</property>
+   <step>30</step>
+  </binding>
  </key>
 
  <key n="118">
@@ -394,6 +498,26 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Cycle view</desc>
   <binding>
    <command>view-cycle</command>
+  </binding>
+ </key>
+
+ <key n="120">
+  <name>x</name>
+  <desc>Decrease field of view.</desc>
+  <binding>
+   <command>property-multiply</command>
+   <property>/sim/field-of-view</property>
+   <factor>0.952380952380</factor>
+  </binding>
+ </key>
+
+ <key n="122">
+  <name>z</name>
+  <desc>Increase Visibility</desc>
+  <binding>
+   <command>property-multiply</command>
+   <property>/environment/visibility-m</property>
+   <factor>1.1</factor>
   </binding>
  </key>
 
@@ -409,6 +533,10 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="258">
   <name>F2</name>
+  <binding>
+   <desc>Force tile cache reload.</desc>
+   <command>tile-cache-reload</command>
+  </binding>
   <mod-shift>
    <binding>
     <desc>Save flight.</desc>
@@ -433,6 +561,10 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="260">
   <name>F4</name>
+  <binding>
+   <desc>Force lighting update.</desc>
+   <command>lighting-update</command>
+  </binding>
   <mod-shift>
    <binding>
     <desc>Reload global preferences.</desc>
@@ -489,6 +621,15 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </mod-shift>
  </key>
 
+ <key n="265">
+  <name>F9</name>
+  <binding>
+   <desc>Toggle textures.</desc>
+   <command>property-toggle</command>
+   <property>/sim/rendering/textures</property>
+  </binding>
+ </key>
+
  <key n="269">
   <name>Enter</name>
   <desc>Move rudder right or increase autopilot heading.</desc>
@@ -531,7 +672,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look left.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/view/goal-offset</property>
+    <property>/sim/view/goal-offset-deg</property>
     <value type="double">90</value>
    </binding>
   </mod-shift>
@@ -549,7 +690,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look forward.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/view/goal-offset</property>
+    <property>/sim/view/goal-offset-deg</property>
     <value type="double">0</value>
    </binding>
   </mod-shift>
@@ -567,7 +708,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look right.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/view/goal-offset</property>
+    <property>/sim/view/goal-offset-deg</property>
     <value type="double">270</value>
    </binding>
   </mod-shift>
@@ -585,7 +726,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look backwards.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/view/goal-offset</property>
+    <property>/sim/view/goal-offset-deg</property>
     <value type="double">180</value>
    </binding>
   </mod-shift>
@@ -603,7 +744,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look front right.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/view/goal-offset</property>
+    <property>/sim/view/goal-offset-deg</property>
     <value type="double">315</value>
    </binding>
   </mod-shift>
@@ -621,7 +762,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look back right.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/view/goal-offset</property>
+    <property>/sim/view/goal-offset-deg</property>
     <value type="double">225</value>
    </binding>
   </mod-shift>
@@ -639,7 +780,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look front left.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/view/goal-offset</property>
+    <property>/sim/view/goal-offset-deg</property>
     <value type="double">45</value>
    </binding>
   </mod-shift>
@@ -657,7 +798,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look back left.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/view/goal-offset</property>
+    <property>/sim/view/goal-offset-deg</property>
     <value type="double">135</value>
    </binding>
   </mod-shift>
@@ -676,6 +817,3 @@ calculated by adding 256 to the GLUT key value in glut.h.
 </PropertyList>
 
 <!-- end of keyboard.xml -->
-
-
-

@@ -73,7 +73,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
 
  <engines>
   <engine>
-   <rpm>700</rpm>
+   <rpm type="double">700</rpm>
   </engine>
  </engines>
   

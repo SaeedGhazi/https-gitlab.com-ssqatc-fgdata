@@ -2440,6 +2440,7 @@ Shared parameters for various materials.
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
    <path>Models/Trees/coniferous-tree.ac</path>
+   <path>Models/Trees/coniferous-tree2.ac</path>
    <coverage-m2 alias="/params/forest/tree-coverage-m2"/>
    <heading-type>billboard</heading-type>
   </object>
@@ -2480,6 +2481,8 @@ Shared parameters for various materials.
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
    <path>Models/Trees/deciduous-tree.ac</path>
+   <path>Models/Trees/deciduous-tree2.ac</path>
+   <path>Models/Trees/deciduous-tree3.ac</path>
    <coverage-m2 alias="/params/forest/tree-coverage-m2"/>
    <heading-type>billboard</heading-type>
   </object>
@@ -2520,7 +2523,10 @@ Shared parameters for various materials.
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
    <path>Models/Trees/deciduous-tree.ac</path>
+   <path>Models/Trees/deciduous-tree2.ac</path>
+   <path>Models/Trees/deciduous-tree3.ac</path>
    <path>Models/Trees/coniferous-tree.ac</path>
+   <path>Models/Trees/coniferous-tree2.ac</path>
    <coverage-m2 alias="/params/forest/tree-coverage-m2"/>
    <heading-type>billboard</heading-type>
   </object>
@@ -2562,6 +2568,7 @@ Shared parameters for various materials.
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
    <path>Models/Trees/coniferous-tree.ac</path>
+   <path>Models/Trees/coniferous-tree2.ac</path>
    <coverage-m2 alias="/params/forest/tree-coverage-m2"/>
    <heading-type>billboard</heading-type>
   </object>
@@ -2602,6 +2609,8 @@ Shared parameters for various materials.
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
    <path>Models/Trees/deciduous-tree.ac</path>
+   <path>Models/Trees/deciduous-tree2.ac</path>
+   <path>Models/Trees/deciduous-tree3.ac</path>
    <coverage-m2 alias="/params/forest/tree-coverage-m2"/>
    <heading-type>billboard</heading-type>
   </object>
@@ -2748,7 +2757,10 @@ Shared parameters for various materials.
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
    <path>Models/Trees/deciduous-tree.ac</path>
+   <path>Models/Trees/deciduous-tree2.ac</path>
+   <path>Models/Trees/deciduous-tree3.ac</path>
    <path>Models/Trees/coniferous-tree.ac</path>
+   <path>Models/Trees/coniferous-tree2.ac</path>
    <coverage-m2>250000</coverage-m2>
    <heading-type>billboard</heading-type>
   </object>
@@ -2812,7 +2824,10 @@ Shared parameters for various materials.
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
    <path>Models/Trees/deciduous-tree.ac</path>
+   <path>Models/Trees/deciduous-tree2.ac</path>
+   <path>Models/Trees/deciduous-tree3.ac</path>
    <path>Models/Trees/coniferous-tree.ac</path>
+   <path>Models/Trees/coniferous-tree2.ac</path>
    <coverage-m2>500000</coverage-m2>
    <heading-type>billboard</heading-type>
   </object>
@@ -3173,7 +3188,10 @@ Shared parameters for various materials.
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
    <path>Models/Trees/deciduous-tree.ac</path>
+   <path>Models/Trees/deciduous-tree2.ac</path>
+   <path>Models/Trees/deciduous-tree3.ac</path>
    <path>Models/Trees/coniferous-tree.ac</path>
+   <path>Models/Trees/coniferous-tree2.ac</path>
    <coverage-m2>500000</coverage-m2>
    <heading-type>billboard</heading-type>
   </object>
@@ -3235,7 +3253,10 @@ Shared parameters for various materials.
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
    <path>Models/Trees/deciduous-tree.ac</path>
+   <path>Models/Trees/deciduous-tree2.ac</path>
+   <path>Models/Trees/deciduous-tree3.ac</path>
    <path>Models/Trees/coniferous-tree.ac</path>
+   <path>Models/Trees/coniferous-tree2.ac</path>
    <coverage-m2>500000</coverage-m2>
    <heading-type>billboard</heading-type>
   </object>
@@ -3297,7 +3318,10 @@ Shared parameters for various materials.
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
    <path>Models/Trees/deciduous-tree.ac</path>
+   <path>Models/Trees/deciduous-tree2.ac</path>
+   <path>Models/Trees/deciduous-tree3.ac</path>
    <path>Models/Trees/coniferous-tree.ac</path>
+   <path>Models/Trees/coniferous-tree2.ac</path>
    <coverage-m2>500000</coverage-m2>
    <heading-type>billboard</heading-type>
   </object>
@@ -3338,7 +3362,10 @@ Shared parameters for various materials.
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
    <path>Models/Trees/deciduous-tree.ac</path>
+   <path>Models/Trees/deciduous-tree2.ac</path>
+   <path>Models/Trees/deciduous-tree3.ac</path>
    <path>Models/Trees/coniferous-tree.ac</path>
+   <path>Models/Trees/coniferous-tree2.ac</path>
    <coverage-m2>500000</coverage-m2>
    <heading-type>billboard</heading-type>
   </object>
@@ -3379,7 +3406,10 @@ Shared parameters for various materials.
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
    <path>Models/Trees/deciduous-tree.ac</path>
+   <path>Models/Trees/deciduous-tree2.ac</path>
+   <path>Models/Trees/deciduous-tree3.ac</path>
    <path>Models/Trees/coniferous-tree.ac</path>
+   <path>Models/Trees/coniferous-tree2.ac</path>
    <coverage-m2>200000</coverage-m2>
    <heading-type>billboard</heading-type>
   </object>

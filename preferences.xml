@@ -407,14 +407,20 @@ Started September 2000 by David Megginson, david@megginson.com
   <airspeed-indicator>
    <serviceable type="bool" archive="y">true</serviceable>
   </airspeed-indicator>
-  <altimeter>
-   <serviceable type="bool" archive="y">true</serviceable>
-   <setting-inhg type="double" archive="y">29.92</setting-inhg>
-  </altimeter>
   <attitude-indicator>
    <serviceable type="bool" archive="y">true</serviceable>
    <spin type="double" archive="y">0.0</spin>
   </attitude-indicator>
+  <altimeter>
+   <serviceable type="bool" archive="y">true</serviceable>
+   <setting-inhg type="double" archive="y">29.92</setting-inhg>
+  </altimeter>
+  <turn-indicator>
+   <serviceable type="bool" archive="y">true</serviceable>
+  </turn-indicator>
+  <slip-skid-ball>
+   <serviceable type="bool" archive="y">true</serviceable>
+  </slip-skid-ball>  
   <heading-indicator>
    <serviceable type="bool" archive="y">true</serviceable>
    <spin type="double" archive="y">0.0</spin>
@@ -423,6 +429,9 @@ Started September 2000 by David Megginson, david@megginson.com
   <vertical-speed-indicator>
    <serviceable type="bool" archive="y">true</serviceable>
   </vertical-speed-indicator>
+  <magnetic-compass>
+   <serviceable type="bool" archive="y">true</serviceable>
+  </magnetic-compass>
  </instrumentation>
 
  <systems>

@@ -56,6 +56,9 @@ Started September 2000 by David Megginson, david@megginson.com
    <hsi n="0">
    <has-gs-needle>1</has-gs-needle>
    </hsi>
+   <dg>
+    <style>0</style>
+   </dg>
   </instrument-options>
   </sim>
 

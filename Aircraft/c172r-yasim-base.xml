@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+Common configuration for YASim C172r aircraft.
+************************************************************************
+-->
+
+<PropertyList include="c172r-base.xml">
+
+ <sim>
+  <flight-model archive="y">yasim</flight-model>
+  <aero archive="y">c172</aero>
+  <fuel-fraction>1.0</fuel-fraction>
+  <fuel-fraction>1.0</fuel-fraction>
+ </sim>
+
+ <controls>
+  <magnetos>3</magnetos>
+ </controls>
+
+ <!-- TODO: trim for level cruise -->
+
+</PropertyList>
+
+

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+Common configuration for JSBSim C172r aircraft.
+************************************************************************
+-->
+
+<PropertyList include="c172r-base.xml">
+
+ <sim>
+  <flight-model archive="y">jsb</flight-model>
+  <aero archive="y">c172r</aero>
+ </sim>
+
+ <!-- trim for level cruise -->  
+
+ <controls>
+  <aileron-trim>-0.012</aileron-trim>
+  <elevator-trim>0</elevator-trim>
+  <rudder-trim>-0.025</rudder-trim>
+  <magnetos>3</magnetos>
+ </controls>
+
+</PropertyList>

@@ -48,7 +48,7 @@ March 2003 Jim Wilson, jimw@kelcomaine.com
 
   <view n="1">
    <config>
-    <target-z-offset-m archive="y" type="double">4.495</target-z-offset-m>
+    <target-z-offset-m archive="y" type="double">4.080</target-z-offset-m>
    </config>
   </view>
 

@@ -14,8 +14,9 @@ October 23 2001 John Check, fgpanels@rockfish.net
 
  <sim>
  
-  <flight-model>jsb</flight-model>
-  <aero>c172</aero>
+  <!-- We want to be able to specify the flight model independently -->
+  <!-- <flight-model>jsb</flight-model> -->
+  <!-- <aero>c172</aero> -->
 
   <sound>
    <audible>true</audible>

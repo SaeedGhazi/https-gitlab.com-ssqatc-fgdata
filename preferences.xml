@@ -71,10 +71,14 @@ Started September 2000 by David Megginson, david@megginson.com
    <draw-fps>false</draw-fps>
   </hud>
   <systems>
+   <path>Aircraft/Generic/generic-systems.xml</path>
    <autopilot>
     <path>Aircraft/Generic/generic-autopilot.xml</path>
    </autopilot>
   </systems>
+  <instrumentation>
+   <path>Aircraft/Generic/generic-instrumentation.xml</path>
+  </instrumentation>
   <instrument-options>
    <nav n="0">
     <has-gs-needle type="bool">true</has-gs-needle>

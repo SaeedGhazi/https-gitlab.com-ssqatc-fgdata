@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+Cessna 310U3A simulation config. This files ties together all the components
+used by FGFS to represent the C310R. Components include the flight data 
+model, instrument panel, and external 3D model.
+3D models can be downloaded from http://home.t-online.de/home/Wolfram.Kuss/
+
+March 2002 Jim Wilson, jimw@kelcomaine.com
+************************************************************************
+-->
+
+<PropertyList>
+
+ <sim>
+  
+  <virtual-cockpit archive="y">true</virtual-cockpit>
+  <flight-model archive="y">jsb</flight-model>
+  <aero archive="y">c310u3a</aero>
+
+  <sound>
+   <audible>true</audible>
+   <path>Aircraft/c310/c310-sound.xml</path>
+  </sound>
+
+  <panel>
+    <path>Aircraft/c310u3a/c310u3a-3d-panel.xml</path>
+    <visibility>true</visibility>
+    </panel>
+  <panel n="1">
+    <desc>2D Panel</desc>
+    <path>Aircraft/c310u3a/c310u3a-panel.xml</path>
+  </panel>
+ 
+  <model>
+   <path>Aircraft/c310u3a/Models/c310u3a.xml</path>
+  </model> 
+
+  <view n="0">
+   <internal archive="y">true</internal>
+   <config>
+    <x-offset-m type="double">-0.17</x-offset-m>
+    <y-offset-m type="double">0.75</y-offset-m>
+    <z-offset-m type="double">-0.055</z-offset-m>
+   </config>
+  </view>
+
+  <instrument-options>
+   <dg>
+    <style>1</style>
+   </dg>
+  </instrument-options> 
+
+ </sim>
+
+ <autopilot>
+   <config>
+     <min-climb-speed-kt type="float">81.0</min-climb-speed-kt>
+     <best-climb-speed-kt type="float">107.0</best-climb-speed-kt>
+     <target-climb-rate-fpm type="float">1000.0</target-climb-rate-fpm>
+     <target-descent-rate-fpm type="float">1000.0</target-descent-rate-fpm>
+     <elevator-adj-factor type="float">12000.0</elevator-adj-factor>
+     <integral-contribution type="float">0.004</integral-contribution>
+     <zero-pitch-throttle type="float">0.45</zero-pitch-throttle>
+     <zero-pitch-trim-full-throttle type="float">0.11</zero-pitch-trim-full-throttle>
+   </config>
+ </autopilot>
+
+ <input>
+
+  <keyboard>
+    <key n="60">
+     <name>&lt;</name>
+     <desc>Rudder Trim Left</desc>
+     <binding>
+      <command>property-adjust</command>
+      <property>/controls/rudder-trim</property>
+      <min type="double">-1.0</min>
+      <step type="double">-0.001</step>
+     </binding>
+    </key>
+    <key n="62">
+     <name>&gt;</name>
+     <desc>Rudder Trim Right</desc>
+     <binding>
+      <command>property-adjust</command>
+      <property>/controls/rudder-trim</property>
+      <max type="double">1.0</max>
+      <step type="double">0.001</step>
+     </binding>
+    </key>
+  </keyboard>
+ </input>
+
+ <controls>
+  <magnetos n="0">3</magnetos>
+  <magnetos n="1">3</magnetos>
+ </controls>
+
+ <engines>
+  <engine n="0">
+   <rpm>1000</rpm>
+  </engine>
+  <engine n="1">
+   <rpm>1000</rpm>
+  </engine>
+ </engines>
+  
+</PropertyList>
+
+
+
+
+
+
+

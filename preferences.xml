@@ -247,12 +247,62 @@ Started September 2000 by David Megginson, david@megginson.com
  <!-- Environment -->
 
  <environment>
-  <visibility-m type="double">16000</visibility-m>
-  <temperature-sea-level-degc type="double">15</temperature-sea-level-degc>
-  <dewpoint-sea-level-degc type="double">5</dewpoint-sea-level-degc>
-  <pressure-sea-level-inhg type="double">29.92</pressure-sea-level-inhg>
-  <wind-from-heading-deg type="double">270</wind-from-heading-deg>
-  <turbulence-norm type="double">0.0</turbulence-norm>
+  <config>
+
+   <boundary-transition-ft>500</boundary-transition-ft>
+
+   <boundary>
+
+    <entry>
+     <elevation-ft>0</elevation-ft>
+     <wind-from-heading-deg>270</wind-from-heading-deg>
+     <wind-speed-kt>3</wind-speed-kt>
+     <turbulence-norm>0.0</turbulence-norm>
+     <visibility-m>16000</visibility-m>
+     <pressure-sea-level-inhg>29.92</pressure-sea-level-inhg>
+     <temperature-sea-level-degc>15.0</temperature-sea-level-degc>
+     <dewpoint-sea-level-degc>5.0</dewpoint-sea-level-degc>
+    </entry>
+
+    <entry>
+     <elevation-ft>500</elevation-ft>
+     <wind-from-heading-deg>280</wind-from-heading-deg>
+     <wind-speed-kt>6</wind-speed-kt>
+     <turbulence-norm>0.1</turbulence-norm>
+    </entry>
+
+   </boundary>
+
+   <aloft>
+
+    <entry>
+     <elevation-ft>3000</elevation-ft>
+     <wind-from-heading-deg>300</wind-from-heading-deg>
+     <wind-speed-kt>10</wind-speed-kt>
+     <turbulence-norm>0.05</turbulence-norm>
+     <visibility-m>16000</visibility-m>
+     <pressure-sea-level-inhg>29.92</pressure-sea-level-inhg>
+     <temperature-sea-level-degc>15.0</temperature-sea-level-degc>
+     <dewpoint-sea-level-degc>5.0</dewpoint-sea-level-degc>
+    </entry>
+
+    <entry>
+     <elevation-ft>6000</elevation-ft>
+     <wind-from-heading-deg>310</wind-from-heading-deg>
+     <wind-speed-kt>20</wind-speed-kt>
+     <turbulence-norm>0.00</turbulence-norm>
+    </entry>
+
+    <entry>
+     <elevation-ft>9000</elevation-ft>
+     <wind-from-heading-deg>320</wind-from-heading-deg>
+     <wind-speed-kt>30</wind-speed-kt>
+    </entry>
+
+   </aloft>
+
+  </config>
+
   <clouds>
    <status>true</status>
    <layer n="0">
@@ -282,11 +332,11 @@ Started September 2000 by David Megginson, david@megginson.com
     <span-m>40000</span-m>
    </layer>
   </clouds>
+
   <params>
    <control-fdm-atmosphere type="bool">false</control-fdm-atmosphere>
-   <base-wind-speed-kt type="double">0</base-wind-speed-kt>
-   <gust-wind-speed-kt type="double">0</gust-wind-speed-kt>
   </params>
+
  </environment>
 
  <controls>

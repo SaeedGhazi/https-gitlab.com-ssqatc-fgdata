@@ -31,6 +31,13 @@ October 23 2001 John Check, fgpanels@rockfish.net
   </model>
 
  </sim>
+
+ <consumables>
+  <fuel>
+   <tank n="0">28</tank>
+   <tank n="1">28</tank>
+  </fuel>
+ </consumables>
   
 </PropertyList>
 

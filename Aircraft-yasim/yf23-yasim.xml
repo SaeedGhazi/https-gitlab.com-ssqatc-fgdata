@@ -20,16 +20,18 @@
   <control-setting axis="/controls/engines/engine[0]/afterburner" value="0"/>
   <control-setting axis="/controls/engines/engine[1]/afterburner" value="0"/>
   <control-setting axis="/controls/flight/flaps" value="1"/>
+  <control-setting axis="/controls/flight/slats" value="0"/>
   <control-setting axis="/controls/gear/gear-down" value="1"/>
  </approach>
 
 <!-- Cruise configuration -->
  <cruise speed="600" alt="55000">
-  <control-setting axis="/controls/engines/engine[0]/throttle" value="1"/>
-  <control-setting axis="/controls/engines/engine[1]/throttle" value="1"/>
+  <control-setting axis="/controls/engines/engine[0]/throttle" value="0.9"/>
+  <control-setting axis="/controls/engines/engine[1]/throttle" value="0.9"/>
   <control-setting axis="/controls/engines/engine[0]/afterburner" value="0"/>
   <control-setting axis="/controls/engines/engine[1]/afterburner" value="0"/>
   <control-setting axis="/controls/flight/flaps" value="0.0"/>
+  <control-setting axis="/controls/flight/slats" value="0"/>
   <control-setting axis="/controls/gear/gear-down" value="0"/>
  </cruise>
 
@@ -55,10 +57,11 @@
 
 <!-- Lots of guesswork here -->
  <wing x="-2.00" y="0.00" z="0.25" length="6.66" chord="12.00" taper="0.08"
-       sweep="0" dihedral="0" camber="0.01" incidence="0.0" idrag="1.0">
-  <stall aoa="35" width="2" peak="1.3"/>
-  <flap0 start="0.36" end="0.63" lift="1.1" drag="1.6"/>
-  <flap1 start="0.63" end="0.89" lift="1.1" drag="1.6"/>
+       sweep="0" dihedral="0" camber="0.001" incidence="0.0" idrag="1.6">
+  <stall aoa="25" width="3" peak="1.3"/>
+  <flap0 start="0.36" end="0.63" lift="1.3" drag="1.8"/>
+  <flap1 start="0.63" end="0.89" lift="1.2" drag="1.8"/>
+  <slat start="0.36" end="0.89" aoa="6" drag="1.3"/>
 
 <!-- Shortened wing that starts outboard of the engine intakes.
  <wing x="-2.00" y="2.40" z="0.25" length="4.2" chord="8.1"
@@ -71,6 +74,8 @@
   <control-input axis="/controls/flight/aileron" control="FLAP1" split="true"/>
   <control-input axis="/controls/flight/aileron-trim" control="FLAP1" split="true"/>
 
+  <control-input axis="/controls/flight/slats" control="SLAT"/>
+
   <control-input axis="/controls/flight/rudder" control="FLAP1" split="true" invert="true"/>
 
   <control-input axis="/controls/flight/spoilers" control="FLAP0"/>
@@ -82,8 +87,12 @@
   <control-output control="FLAP1" side="left" prop="/surface-positions/left-aileron-pos-norm"/>
   <control-output control="FLAP1" side="right" prop="/surface-positions/right-aileron-pos-norm"/>
 
+  <control-output control="SLAT" side="left" prop="/surface-positions/left-slat-pos-norm"/>
+  <control-output control="SLAT" side="right" prop="/surface-positions/right-slat-pos-norm"/>
+
   <control-speed control="FLAP0" transition-time="2"/>
   <control-speed control="FLAP1" transition-time="0.5"/>
+  <control-speed control="SLAT" transition-time="0.5"/>
  </wing>
 
  <hstab x="-8.70" y="2.40" z="0.36" length="3.30" chord="5.10"
@@ -115,28 +124,27 @@
  </jet>
 
 <!-- Front -->
- <gear x="5.25" y="0.00" z="-2.25" compression="0.65" spring="2.0">
+ <gear x="5.25" y="0.00" z="-2.25" compression="0.65" spring="2.5">
   <control-input axis="/controls/flight/rudder" control="STEER" square="true"/>
   <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
+  <control-input axis="/controls/gear/gear[0]/wheel[0]/brake" control="BRAKE"/>
   <control-output control="EXTEND" prop="/gear/gear[0]/position-norm"/>
   <control-output control="STEER" prop="/gear/gear[0]/steering-norm"/>
   <control-speed control="EXTEND" transition-time="4"/>
  </gear>
 
 <!-- Left main -->
- <gear x="-2.20" y="1.92" z="-2.7" compression="1.2" spring="1.5">
-  <control-input axis="/controls/gear/wheel[0]/brake" control="BRAKE"/>
-  <control-input axis="/controls/gear/parking-brake" control="BRAKE"/>
+ <gear x="-2.20" y="1.92" z="-2.9" compression="2.0" spring="2.5">
   <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
+  <control-input axis="/controls/gear/gear[1]/wheel[0]/brake" control="BRAKE"/>
   <control-output control="EXTEND" prop="/gear/gear[1]/position-norm"/>
   <control-speed control="EXTEND" transition-time="4"/>
  </gear>
 
 <!-- Right main -->
- <gear x="-2.20" y="-1.92" z="-2.7" compression="1.2" spring="1.5">
-  <control-input axis="/controls/gear/wheel[1]/brake" control="BRAKE"/>
-  <control-input axis="/controls/gear/parking-brake" control="BRAKE"/>
+ <gear x="-2.20" y="-1.92" z="-2.9" compression="2.0" spring="2.5">
   <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
+  <control-input axis="/controls/gear/gear[2]/wheel[0]/brake" control="BRAKE"/>
   <control-output control="EXTEND" prop="/gear/gear[2]/position-norm"/>
   <control-speed control="EXTEND" transition-time="4"/>
  </gear>

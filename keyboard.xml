@@ -721,10 +721,8 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>j</name>
   <desc>Decrease spoilers.</desc>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/spoilers</property>
-   <min>0</min>
-   <step type="double">-0.25</step>
+   <command>nasal</command>
+   <script>controls.stepSpoilers(-1)</script>
   </binding>
  </key>
 
@@ -732,10 +730,8 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>k</name>
   <desc>Increase spoilers.</desc>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/spoilers</property>
-   <max>1</max>
-   <step type="double">0.25</step>
+   <command>nasal</command>
+   <script>controls.stepSpoilers(1)</script>
   </binding>
  </key>
 

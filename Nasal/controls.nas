@@ -92,6 +92,28 @@ stepFlaps = func {
     setprop("/controls/flight/flaps", val);
 }
 
+stepSpoilers = func {
+    if(props.globals.getNode("/sim/spoilers") != nil) {
+        stepProps("/controls/flight/spoilers", "/sim/spoilers", arg[0]);
+        return;
+    }
+    # Hard-coded spoilers movement in 4 equal steps:
+    val = 0.25 * arg[0] + getprop("/controls/flight/spoilers");
+    if(val > 1) { val = 1 } elsif(val < 0) { val = 0 }
+    setprop("/controls/flight/spoilers", val);
+}
+
+stepSlats = func {
+    if(props.globals.getNode("/sim/slats") != nil) {
+        stepProps("/controls/flight/slats", "/sim/slats", arg[0]);
+        return;
+    }
+    # Hard-coded slats movement in 4 equal steps:
+    val = 0.25 * arg[0] + getprop("/controls/flight/slats");
+    if(val > 1) { val = 1 } elsif(val < 0) { val = 0 }
+    setprop("/controls/flight/slats", val);
+}
+
 ##
 # Steps through an "array" of property settings.  The first argument
 # specifies a destination property.  The second is a string containing

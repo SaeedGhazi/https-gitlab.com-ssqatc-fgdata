@@ -13,7 +13,7 @@ External model details:
 Aircraft/asw20/Models/uiuc/hgldr-cs/README.TXT 
 (courtesy of Roland Stuck, rstuck@evc.net)
 
-Last update: Nov 9, 2002 Michael Selig, m-selig@uiuc.edu
+Last update: June 8, 2003 Michael Selig, m-selig@uiuc.edu
 ************************************************************************
 -->
 
@@ -45,6 +45,12 @@ Last update: Nov 9, 2002 Michael Selig, m-selig@uiuc.edu
   <model>
    <path>Aircraft/asw20/Models/uiuc/asw20-stuck/asw20-stuck-model.xml</path>
   </model>
+
+  <view n="1">
+   <config>
+    <eye-heading-deg-path>/orientation/gamma-horiz-deg</eye-heading-deg-path>
+   </config>
+  </view>
 
  </sim>
 </PropertyList>

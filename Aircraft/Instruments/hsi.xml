@@ -93,14 +93,14 @@ Started 24-7-01 by Timothy Gale
     <transformation>
     <type>rotation</type>
     <property>/orientation/heading-magnetic-deg</property>
-    <min>0.0</min>
-    <max>360</max>
+    <min>-360.0</min>
+    <max>360.0</max>
     <scale>-1.0</scale>
    </transformation>
    <transformation>
     <type>rotation</type>
     <property>/radios/nav[0]/radials/selected-deg</property>
-    <min>0.0</min>
+    <min>-360.0</min>
     <max>360.0</max>
     <scale>1.0</scale>
    </transformation>
@@ -158,14 +158,14 @@ Started 24-7-01 by Timothy Gale
      <transformation>
      <type>rotation</type>
      <property>/orientation/heading-magnetic-deg</property>
-     <min>0.0</min>
-     <max>360</max>
+     <min>-360.0</min>
+     <max>360.0</max>
      <scale>-1.0</scale>
     </transformation>
     <transformation>
      <type>rotation</type>
      <property>/radios/nav[0]/radials/selected-deg</property>
-     <min>0.0</min>
+     <min>-360.0</min>
      <max>360.0</max>
      <scale>1.0</scale>
     </transformation>
@@ -187,15 +187,15 @@ Started 24-7-01 by Timothy Gale
     <transformation>
     <type>rotation</type>
     <property>/orientation/heading-magnetic-deg</property>
-    <min>0.0</min>
-    <max>360</max>
+    <min>-360.0</min>
+    <max>360.0</max>
     <scale>-1.0</scale>
    </transformation>
     <transformation>
     <type>rotation</type>
     <property>/radios/nav[0]/radials/selected-deg</property>
-    <min>0.0</min>
-    <max>360</max>
+    <min>-360.0</min>
+    <max>360.0</max>
     <scale>1.0</scale>
    </transformation>
    <transformation>
@@ -223,10 +223,9 @@ Started 24-7-01 by Timothy Gale
    <transformations>
     <transformation>
      <type>rotation</type>
-     <!--set>45</offset-->
      <property>/radios/kr-87/outputs/needle-deg</property>
-     <min>-360</min>
-     <max>360</max>
+     <min>-360.0</min>
+     <max>360.0</max>
     </transformation>
     <transformation>
      <type>x-shift</type>

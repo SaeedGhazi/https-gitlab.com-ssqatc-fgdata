@@ -586,6 +586,7 @@ Started September 2000 by David Megginson, david@megginson.com
     <standby-mhz type="double">118.850</standby-mhz>
    </frequencies>
    <volume type="double">0.6</volume>
+   <serviceable>true</serviceable>
   </comm>
 
   <comm n="1">
@@ -594,6 +595,7 @@ Started September 2000 by David Megginson, david@megginson.com
     <standby-mhz type="double">133.775</standby-mhz>
    </frequencies>
    <volume type="double">0.6</volume>
+   <serviceable>true</serviceable>
   </comm>
 
   <nav n="0">

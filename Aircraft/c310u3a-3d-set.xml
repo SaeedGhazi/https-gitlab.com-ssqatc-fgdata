@@ -107,6 +107,7 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
  </input>
 
  <controls>
+  <aileron-trim>-0.026</aileron-trim>
   <magnetos n="0">3</magnetos>
   <magnetos n="1">3</magnetos>
  </controls>

@@ -104,7 +104,6 @@ $Id$
   <binding><command>null</command></binding>
   <low>
    <repeatable type="bool">true</repeatable>
-   <interval-sec type="double">0.05</interval-sec>
    <binding>
     <command>property-adjust</command>
     <property>/controls/flight/rudder</property>
@@ -113,7 +112,6 @@ $Id$
   </low>
   <high>
    <repeatable type="bool">true</repeatable>
-   <interval-sec type="double">0.05</interval-sec>
    <binding>
     <command>property-adjust</command>
     <property>/controls/flight/rudder</property>
@@ -127,7 +125,6 @@ $Id$
   <binding><command>null</command></binding>
   <low>
    <repeatable type="bool">true</repeatable>
-   <interval-sec type="double">0.05</interval-sec>
    <binding>
     <command>property-adjust</command>
     <property>/controls/flight/elevator-trim</property>
@@ -136,7 +133,6 @@ $Id$
   </low>
   <high>
    <repeatable type="bool">true</repeatable>
-   <interval-sec type="double">0.05</interval-sec>
    <binding>
     <command>property-adjust</command>
     <property>/controls/flight/elevator-trim</property>

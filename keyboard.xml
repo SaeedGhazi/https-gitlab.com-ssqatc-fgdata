@@ -40,15 +40,6 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
- <key n="4">
-  <name>Ctrl-D</name>
-  <desc>weather dialog</desc>
-  <binding>
-   <command>dialog-show</command>
-   <dialog-name>winds</dialog-name>
-  </binding>
- </key>
-
  <key n="7">
   <name>Ctrl-G</name>
   <desc>Toggle autopilot glide slope lock.</desc>
@@ -607,6 +598,22 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+ <key n="67">
+  <name>C</name>
+  <desc>scripting test</desc>
+  <binding>
+   <command>script</command>
+   <script>
+    int main ()
+    {
+      print("Longitude: ", get_property("/position/longitude-deg"), " deg\n");
+      print("Latitude: ", get_property("/position/latitude-deg"), " deg\n");
+      print("Altitude: ", get_property("/position/altitude-ft"), " ft\n");
+    }
+   </script>
+  </binding>
+ </key>
+
  <key n="77">
   <name>M</name>
   <desc>Decrease warp.</desc>
@@ -1052,6 +1059,14 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="264">
   <name>F8</name>
+  <binding>
+   <desc>Cycle fog type</desc>
+   <command>property-cycle</command>
+   <property>/sim/rendering/fog</property>
+   <value>fastest</value>
+   <value>nicest</value>
+   <value>disabled</value>
+  </binding>
   <mod-shift>
    <binding>
     <desc>Scroll panel right</desc>
@@ -1073,6 +1088,11 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="266">
   <name>F10</name>
+  <binding>
+   <desc>Toggle menubar</desc>
+   <command>property-toggle</command>
+   <property>/sim/menubar/visibility</property>
+  </binding>
   <mod-shift>
    <binding>
     <desc>Toggle FDM data logging.</desc>
@@ -1080,6 +1100,15 @@ calculated by adding 256 to the GLUT key value in glut.h.
     <property>/sim/temp/fdm-data-logging</property>
    </binding>
   </mod-shift>
+ </key>
+
+ <key n="267">
+  <name>F11</name>
+  <binding>
+   <desc>Pop up autopilot dialog</desc>
+   <command>dialog-show</command>
+   <dialog-name>autopilot</dialog-name>
+  </binding>
  </key>
 
  <key n="269">

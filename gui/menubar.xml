@@ -139,19 +139,13 @@
   <label>Autopilot</label>
 
   <item>
-   <label>AP Altitude</label>
+   <label>Autopilot Settings</label>
    <binding>
-    <command>old-ap-altitude-dialog</command>
+    <command>dialog-show</command>
+    <dialog-name>autopilot</dialog-name>
    </binding>
   </item>
-  
-  <item>
-   <label>AP Heading</label>
-   <binding>
-    <command>old-ap-heading-dialog</command>
-   </binding>
-  </item>
-  
+
   <item>
    <label>Add Waypoint</label>
    <binding>

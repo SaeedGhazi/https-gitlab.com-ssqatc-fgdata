@@ -169,10 +169,10 @@ adjPropeller = func {
 
 adjEngControl = func {
     engs = props.globals.getNode("/controls/engines").getChildren("engine");
-    delta = arg[1] * THROTTLE_RATE * getprop("/sim/time/delta-reltime-sec");
+    delta = arg[1] * THROTTLE_RATE * getprop("/sim/time/delta-realtime-sec");
     foreach(e; engs) {
         node = e.getNode(arg[0], 1);
-        node.setValue(node.getValue + delta);
+        node.setValue(node.getValue() + delta);
     }
 }
 

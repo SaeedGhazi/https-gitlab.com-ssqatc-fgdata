@@ -183,7 +183,12 @@ Started September 2000 by David Megginson, david@megginson.com
 
  <environment>
   <visibility-m type="double">16000</visibility-m>
+  <temperature-sea-level-degc type="double">15</temperature-sea-level-degc>
+  <pressure-sea-level-inhg type="double">28.5</pressure-sea-level-inhg>
+  <density-sea-level-slugft3 type="double">0.00237</density-sea-level-slugft3>
+  <wind-from-heading-deg type="double">270</wind-from-heading-deg>
   <params>
+   <control-fdm-atmosphere type="bool">false</control-fdm-atmosphere>
    <base-wind-speed-kt type="double">0</base-wind-speed-kt>
    <gust-wind-speed-kt type="double">0</gust-wind-speed-kt>
   </params>

@@ -3,38 +3,38 @@
 <!-- Sound control dialog -->
 
 <!--
-     /sim/sound/pause
-     /sim/sound/volume
+    /sim/sound/pause
+    /sim/sound/volume
   -->
 
 <PropertyList>
- <name>sound-dialog</name>
- <layout>vbox</layout>
+  <name>sound-dialog</name>
+  <layout>vbox</layout>
 
- <text>
-  <label>Sound Configuration</label>
- </text>
+  <text>
+    <label>Sound Configuration</label>
+    <padding>10</padding>
+  </text>
 
- <checkbox>
-   <label>Mute Sound</label>
-   <property>/sim/sound/pause</property>
-   <binding>
-     <command>dialog-apply</command>
-   </binding>
- </checkbox>
-
- <group>
-  <layout>hbox</layout>
-  <text><label>Volume:</label></text>
-  <slider>
-   <property>/sim/sound/volume</property>
-  </slider>
-  <!-- This doesn't work: need to find out why and fix it. -Andy -->
-  <binding>
-    <command>dialog-apply</command>
-  </binding>
- </group>
-
+  <checkbox>
+    <label>Mute Sound</label>
+    <property>/sim/sound/pause</property>
+    <binding>
+      <command>dialog-apply</command>
+    </binding>
+  </checkbox>
+  
+  <group>
+    <layout>hbox</layout>
+    <text><label>Volume:</label></text>
+    <slider>
+      <property>/sim/sound/volume</property>
+      <binding>
+	<command>dialog-apply</command>
+      </binding>
+    </slider>
+  </group>
+  
   <group>
     <layout>hbox</layout>
     <default-padding>10</default-padding>

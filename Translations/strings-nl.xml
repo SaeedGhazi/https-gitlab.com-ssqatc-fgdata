@@ -136,7 +136,6 @@
   <ndb-desc>Geef de start positie ten opzichte van een NDB</ndb-desc>
   <fix-desc>Geef de start positie ten opzichte van een fix</fix-desc>
   <runway-no-desc>Geef het vertrek startbaan nummer (er moet ook een vliegveld worden opgegeven)</runway-no-desc>
-  <airport-id-desc>(Verouderd: gebruik liever --airport)</airport-id-desc>
   <offset-distance-desc>Specificeer de afstand tot de baandrempel</offset-distance-desc>
   <offset-azimuth-desc>Specificeer de richting van de baandrempel</offset-azimuth-desc>
   <lon-desc>Geografische lengte aan de start (west = -)</lon-desc>

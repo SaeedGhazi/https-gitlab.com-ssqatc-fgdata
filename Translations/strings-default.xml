@@ -149,7 +149,6 @@
  <ndb-desc>Specify starting position relative to an NDB</ndb-desc>
  <fix-desc>Specify starting position relative to a fix</fix-desc>
  <runway-no-desc>Specify starting runway (must also specify an airport)</runway-no-desc>
- <airport-id-desc>(Obsolete; use --airport instead.)</airport-id-desc>
  <offset-distance-desc>Specify distance to reference point (statute miles)</offset-distance-desc>
  <offset-azimuth-desc>Specify heading to reference point</offset-azimuth-desc>
  <lon-desc>Starting longitude (west = -)</lon-desc>

@@ -370,13 +370,6 @@
    </option>
 
    <option>
-    <name>airport-id</name>
-    <arg>ID</arg>
-    <description>strings/airport-id-desc</description>
-    <brief/>
-   </option>
-
-   <option>
     <name>offset-distance</name>
     <arg>nm</arg>
     <description>strings/offset-distance-desc</description>

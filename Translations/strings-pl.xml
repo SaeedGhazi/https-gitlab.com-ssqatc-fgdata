@@ -141,7 +141,6 @@
 
  <!-- Position and Orientation options -->
  <position-options>Poczatkowa pozycja i orientacja</position-options>
- <airport-id-desc>Podaj ID lotniska startu</airport-id-desc>
  <runway-no-desc>Wybierz pas do startu (musisz podac rowniez lotnisko)</runway-no-desc>
  <offset-distance-desc>Dystans do progu drogi startowej</offset-distance-desc>
  <offset-azimuth-desc>Kierunek do progu drogi startowej</offset-azimuth-desc>

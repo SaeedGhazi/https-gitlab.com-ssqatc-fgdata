@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-
-<PropertyList include="j3cub-set.xml">
- <sim>
-  <description>Alias for j3cub.</description>
- </sim>
-</PropertyList>

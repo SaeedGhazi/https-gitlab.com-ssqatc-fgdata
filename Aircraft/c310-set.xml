@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-
-<PropertyList include="c310u3a-jsbsim-set.xml">
- <sim>
-  <description>Alias for c310u3a-jsbsim.</description>
- </sim>
-</PropertyList>

@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-
-<PropertyList include="j3cub-3d-yasim-set.xml">
- <sim>
-  <description>Alias for j3cub-3d-yasim.</description>
- </sim>
-</PropertyList>

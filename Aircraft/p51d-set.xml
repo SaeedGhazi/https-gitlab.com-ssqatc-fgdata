@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-
-<PropertyList include="p51d-yasim-set.xml">
- <sim>
-  <description>Alias default p51d currently p51d-yasim</description>
- </sim>
-</PropertyList>

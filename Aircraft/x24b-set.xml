@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-
-<PropertyList include="x24b-jsbsim-set.xml">
- <sim>
-  <description>Alias for x24b-jsbsim.</description>
- </sim>
-</PropertyList>

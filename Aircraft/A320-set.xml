@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-
-<PropertyList include="A320-jsbsim-set.xml">
- <sim>
-  <description>Alias for A320-jsbsim.</description>
- </sim>
-</PropertyList>

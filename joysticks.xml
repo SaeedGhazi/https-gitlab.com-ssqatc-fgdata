@@ -1,25 +1,7 @@
 <?xml version="1.0"?>
+
 <!--
 Joystick binding definitions.
-
-This file is included by preferences.xml, and uses the context of its
-inclusion point; that means that you need to prepend "/input/joysticks"
-to all property names.
-
-This file defines primary flight-control bindings for a simple
-three-axis, three-button joystick, as follow:
-
-  axis 0 (left-right): aileron
-  axis 1 (forward-backward): elevator
-  axis 2 (slider): throttle
-  button 0 (trigger): brakes
-  button 1: trim up
-  button 2: trim down
-
-If you have a more sophisticated joystick, there might be more axes
-available; on my joystick, axis 2 is actually a twist axis (usually
-for the rudder), while axis 3 is the throttle.  There are also two
-axes for the hat switch, and several more buttons.
 -->
 
 <PropertyList>

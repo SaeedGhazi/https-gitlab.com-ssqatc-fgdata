@@ -43,28 +43,19 @@ Properties currently used:
 
   ambient: the ambient light colour for the material, specified as
     separate red, green, blue, and alpha components (default: all
-    components 0.0).
+    color components 0.2, alpha 1.0).
 
   diffuse: the diffuse light colour for the material, specified as
     separate red, green, blue, and alpha components (default: all
-    components 0.0).
+    components 1.0).
 
   specular: the specular light colour for the material, specified as
     separate red, green, blue, and alpha components (default: all
-    components 0.0).
+    color components 0.5, alpha 1.0).
 
   emissive: the emissive light colour for the material, specified as
     separate red, green, blue, and alpha components (default: all
-    components 0.0).
-
-  r: the red component of a colour, from 0.0 to 1.0 (default: 0.0).
-
-  g: the green component of a colour, from 0.0 to 1.0 (default: 0.0).
-
-  b: the blue component of a colour, from 0.0 to 1.0 (default: 0.0).
-
-  a: the alpha, or transparency component of a colour, from 0.0 to 1.0
-    (default: 0.0).
+    color components 0.0, alpha 1.0).
 
 ************************************************************************
 -->
@@ -88,117 +79,21 @@ Shared parameters for various materials.
  <texture>Runway/grass_rwy.rgb</texture>
  <xsize>75</xsize>
  <ysize>75</ysize>
- <ambient>
-  <r>0.42</r>
-  <g>0.44</g>
-  <b>0.28</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.42</r>
-  <g>0.44</g>
-  <b>0.28</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
  <name>dirt_rwy</name>
  <texture>Runway/dirt_rwy.rgb</texture>
- <ambient>
-  <r>0.58</r>
-  <g>0.51</g>
-  <b>0.38</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.51</g>
-  <b>0.38</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
  <name>lakebed_taxiway</name>
  <texture>Runway/lakebed_taxiway.rgb</texture>
- <ambient>
-  <r>0.59</r>
-  <g>0.55</g>
-  <b>0.39</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.59</r>
-  <g>0.55</g>
-  <b>0.39</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
  <name>pa_taxiway</name>
  <texture>Runway/pa_taxiway.rgb</texture>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -206,30 +101,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_dspl_thresh.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -237,30 +108,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_dspl_arrows.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -268,30 +115,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_threshold.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -299,30 +122,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_L.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -330,30 +129,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_R.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -361,30 +136,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_C.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -392,30 +143,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_0r.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -423,30 +150,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_1c.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -454,30 +157,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_1l.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -485,30 +164,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_1r.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -516,30 +171,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_11.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -547,30 +178,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_2c.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -578,30 +185,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_2l.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -609,30 +192,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_2r.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -640,30 +199,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_3c.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -671,30 +206,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_3l.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -702,30 +213,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_3r.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -733,30 +220,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_4c.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -764,30 +227,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_4r.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -795,30 +234,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_5c.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -826,30 +241,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_5r.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -857,30 +248,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_6c.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -888,30 +255,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_6r.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -919,30 +262,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_7c.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -950,30 +269,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_7r.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -981,30 +276,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_8c.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1012,30 +283,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_8r.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1043,30 +290,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_9c.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1074,30 +297,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_9r.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1105,30 +304,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_tz_three.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1136,30 +311,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_aim.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1167,30 +318,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_tz_two_a.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1198,30 +325,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_tz_two_b.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1229,30 +332,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_tz_one_a.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1260,30 +339,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_tz_one_b.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1291,30 +346,6 @@ Shared parameters for various materials.
  <texture>Runway/pa_centerline.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1322,90 +353,18 @@ Shared parameters for various materials.
  <texture>Runway/pa_rest.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.25</r>
-  <g>0.24</g>
-  <b>0.25</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
  <name>pc_taxiway</name>
  <name>dirt_rwytaxiway</name>
  <texture>Runway/pc_taxiway.rgb</texture>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
  <name>pc_tiedown</name>
  <name>dirt_rwytiedown</name>
  <texture>Runway/pc_tiedown.rgb</texture>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1413,30 +372,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_dspl_thresh.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1444,30 +379,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_dspl_arrows.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1476,30 +387,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_threshold.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1508,30 +395,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_L.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1540,30 +403,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_R.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1572,30 +411,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_C.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1604,30 +419,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_0r.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1636,30 +427,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_1c.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1668,30 +435,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_1l.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1700,30 +443,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_1r.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1732,30 +451,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_11.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1764,30 +459,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_2c.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1796,30 +467,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_2l.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1828,30 +475,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_2r.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1860,30 +483,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_3c.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1892,30 +491,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_3l.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1924,30 +499,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_3r.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1956,30 +507,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_4c.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -1988,30 +515,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_4r.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -2020,30 +523,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_5c.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -2052,30 +531,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_5r.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -2084,30 +539,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_6c.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -2116,30 +547,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_6r.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -2148,30 +555,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_7c.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -2180,30 +563,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_7r.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -2212,30 +571,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_8c.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -2244,30 +579,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_8r.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -2276,30 +587,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_9c.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -2308,30 +595,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_9r.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -2340,30 +603,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_tz_three.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -2372,30 +611,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_aim.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -2404,30 +619,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_tz_two_a.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -2436,30 +627,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_tz_two_b.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -2468,30 +635,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_tz_one_a.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -2500,30 +643,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_tz_one_b.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -2531,30 +650,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_centerline.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -2563,97 +658,18 @@ Shared parameters for various materials.
  <texture>Runway/pc_rest.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <ambient>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.58</g>
-  <b>0.56</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <!-- Default -->
 <material>
  <name>Default</name>
- <texture>Terrain/sand.rgb</texture>
- <xsize>250</xsize>
- <ysize>250</ysize>
- <light-coverage>10000000.0</light-coverage>
- <ambient>
-  <r>0.15</r>
-  <g>0.29</g>
-  <b>0.13</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.15</r>
-  <g>0.29</g>
-  <b>0.13</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
-</material>
-
-<material>
+ <name>SomeSort</name>
  <name>EvergreenBroadCover</name>
  <name>Island</name>
- <name>SomeSort</name>
  <texture>Terrain/forest1.rgb</texture>
  <xsize>1000</xsize>
  <ysize>1000</ysize>
  <light-coverage>10000000.0</light-coverage>
- <ambient>
-  <r>0.15</r>
-  <g>0.29</g>
-  <b>0.13</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.15</r>
-  <g>0.29</g>
-  <b>0.13</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
  <object-group>
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
@@ -2672,30 +688,6 @@ Shared parameters for various materials.
  <xsize>500</xsize>
  <ysize>500</ysize>
  <light-coverage>10000000.0</light-coverage>
- <ambient>
-  <r>0.26</r>
-  <g>0.45</g>
-  <b>0.07</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.26</r>
-  <g>0.45</g>
-  <b>0.07</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
  <object-group>
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
@@ -2714,30 +706,6 @@ Shared parameters for various materials.
  <xsize>1000</xsize>
  <ysize>1000</ysize>
  <light-coverage>5000000.0</light-coverage>
- <ambient>
-  <r>0.19</r>
-  <g>0.35</g>
-  <b>0.06</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.19</r>
-  <g>0.35</g>
-  <b>0.06</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
  <object-group>
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
@@ -2759,30 +727,6 @@ Shared parameters for various materials.
  <xsize>1000</xsize>
  <ysize>1000</ysize>
  <light-coverage>10000000.0</light-coverage>
- <ambient>
-  <r>0.23</r>
-  <g>0.41</g>
-  <b>0.11</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.23</r>
-  <g>0.41</g>
-  <b>0.11</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
  <object-group>
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
@@ -2800,30 +744,6 @@ Shared parameters for various materials.
  <xsize>1000</xsize>
  <ysize>1000</ysize>
  <light-coverage>10000000.0</light-coverage>
- <ambient>
-  <r>0.16</r>
-  <g>0.23</g>
-  <b>0.04</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.16</r>
-  <g>0.23</g>
-  <b>0.04</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
  <object-group>
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
@@ -2838,36 +758,10 @@ Shared parameters for various materials.
 
 <material>
  <name>Sand</name>
- <texture>Terrain/tidal.rgb</texture>
- <xsize>500</xsize>
- <ysize>500</ysize>
- <light-coverage>20000000.0</light-coverage>
- <xsize>500</xsize>
- <ysize>500</ysize>
- <ambient>
-  <r>0.19</r>
-  <g>0.55</g>
-  <b>0.52</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.19</r>
-  <g>0.55</g>
-  <b>0.52</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.30</r>
-  <g>0.30</g>
-  <b>0.40</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
+ <texture>Terrain/sand.rgb</texture>
+ <xsize>250</xsize>
+ <ysize>250</ysize>
+ <light-coverage>10000000.0</light-coverage>
  <shininess>2.5</shininess>
 </material>
 
@@ -2879,61 +773,19 @@ Shared parameters for various materials.
  <xsize>500</xsize>
  <ysize>500</ysize>
  <light-coverage>20000000.0</light-coverage>
- <ambient>
-  <r>0.59</r>
-  <g>0.55</g>
-  <b>0.39</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.59</r>
-  <g>0.55</g>
-  <b>0.39</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
-  <name>BuiltUpCover</name>
-  <name>Urban</name>
-  <texture>Terrain/builtup.rgb</texture>
-  <xsize>2000</xsize>
-  <ysize>2000</ysize>
-  <light-coverage>100000.0</light-coverage>
-  <ambient>
-   <r>0.45</r>
-   <g>0.46</g>
-   <b>0.33</b>
-   <a>1.0</a>
-  </ambient>
-  <diffuse>
-   <r>0.45</r>
-   <g>0.46</g>
-   <b>0.33</b>
-   <a>1.0</a>
-  </diffuse>
-  <specular>
-   <r>0.0</r>
-   <g>0.0</g>
-   <b>0.0</b>
-   <a>1.0</a>
-  </specular>
-  <emissive>
+ <name>BuiltUpCover</name>
+ <name>Urban</name>
+ <texture>Terrain/builtup.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <light-coverage>100000.0</light-coverage>
+ <emissive>
   <r>0.05</r>
   <g>0.05</g>
-  <b>0.00</b>
+  <b>0.02</b>
   <a>1.0</a>
  </emissive>
  <object-group>
@@ -2992,28 +844,10 @@ Shared parameters for various materials.
  <xsize>1024</xsize>
  <ysize>1024</ysize>
  <light-coverage>100000.0</light-coverage>
- <ambient>
-  <r>0.46</r>
-  <g>0.44</g>
-  <b>0.36</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.46</r>
-  <g>0.44</g>
-  <b>0.36</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
  <emissive>
   <r>0.05</r>
   <g>0.05</g>
-  <b>0.00</b>
+  <b>0.02</b>
   <a>1.0</a>
  </emissive>
  <object-group>
@@ -3073,30 +907,6 @@ Shared parameters for various materials.
  <texture>Terrain/unknown.rgb</texture>
  <xsize>1000</xsize>
  <ysize>1000</ysize>
- <ambient>
-  <r>0.14</r>
-  <g>0.28</g>
-  <b>0.13</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.14</r>
-  <g>0.28</g>
-  <b>0.13</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -3104,30 +914,6 @@ Shared parameters for various materials.
  <texture>Terrain/glacier.rgb</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
- <ambient>
-  <r>0.78</r>
-  <g>0.86</g>
-  <b>0.90</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.78</r>
-  <g>0.86</g>
-  <b>0.90</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.3</r>
-  <g>0.3</g>
-  <b>0.5</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
  <shininess>1.5</shininess>
 </material>
 
@@ -3136,30 +922,6 @@ Shared parameters for various materials.
  <texture>Terrain/snow.rgb</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
- <ambient>
-  <r>0.78</r>
-  <g>0.86</g>
-  <b>0.90</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.78</r>
-  <g>0.86</g>
-  <b>0.90</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.3</r>
-  <g>0.3</g>
-  <b>0.3</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
  <shininess>1.2</shininess>
 </material>
 
@@ -3186,12 +948,6 @@ Shared parameters for various materials.
   <b>0.40</b>
   <a>1.0</a>
  </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
  <shininess>2.5</shininess>
 </material>
 
@@ -3223,12 +979,6 @@ Shared parameters for various materials.
   <b>0.40</b>
   <a>1.0</a>
  </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
  <shininess>1.5</shininess>
 </material>
 
@@ -3237,30 +987,6 @@ Shared parameters for various materials.
  <texture>Terrain/wash.rgb</texture>
  <xsize>200</xsize>
  <ysize>200</ysize>
- <ambient>
-  <r>0.19</r>
-  <g>0.35</g>
-  <b>0.52</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.19</r>
-  <g>0.35</g>
-  <b>0.52</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.30</r>
-  <g>0.30</g>
-  <b>0.40</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
  <shininess>1.5</shininess>
 </material>
 
@@ -3269,30 +995,6 @@ Shared parameters for various materials.
  <texture>Terrain/desert.rgb</texture>
  <xsize>500</xsize>
  <ysize>500</ysize>
- <ambient>
-  <r>0.59</r>
-  <g>0.51</g>
-  <b>0.39</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.59</r>
-  <g>0.51</g>
-  <b>0.39</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -3300,30 +1002,6 @@ Shared parameters for various materials.
  <texture>Terrain/rock.rgb</texture>
  <xsize>500</xsize>
  <ysize>500</ysize>
- <ambient>
-  <r>0.58</r>
-  <g>0.51</g>
-  <b>0.40</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.58</r>
-  <g>0.51</g>
-  <b>0.40</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -3334,30 +1012,6 @@ Shared parameters for various materials.
  <xsize>1000</xsize>
  <ysize>1000</ysize>
  <light-coverage>40000000.0</light-coverage>
- <ambient>
-  <r>0.22</r>
-  <g>0.34</g>
-  <b>0.11</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.22</r>
-  <g>0.34</g>
-  <b>0.11</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -3372,30 +1026,6 @@ Shared parameters for various materials.
  <xsize>1000</xsize>
  <ysize>1000</ysize>
  <light-coverage>4000000.0</light-coverage>
- <ambient>
-  <r>0.43</r>
-  <g>0.46</g>
-  <b>0.30</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.43</r>
-  <g>0.46</g>
-  <b>0.30</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -3404,30 +1034,6 @@ Shared parameters for various materials.
  <xsize>4000</xsize>
  <ysize>4000</ysize>
  <light-coverage>2000000.0</light-coverage>
- <ambient>
-  <r>0.38</r>
-  <g>0.40</g>
-  <b>0.11</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.38</r>
-  <g>0.40</g>
-  <b>0.11</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
  <object-group>
   <range-m>5000</range-m>
   <object>
@@ -3469,30 +1075,6 @@ Shared parameters for various materials.
  <xsize>4000</xsize>
  <ysize>4000</ysize>
  <light-coverage>2000000.0</light-coverage>
- <ambient>
-  <r>0.23</r>
-  <g>0.43</g>
-  <b>0.12</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.23</r>
-  <g>0.43</g>
-  <b>0.12</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
  <object-group>
   <range-m>5000</range-m>
   <object>
@@ -3534,30 +1116,6 @@ Shared parameters for various materials.
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
- <ambient>
-  <r>0.35</r>
-  <g>0.37</g>
-  <b>0.11</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.35</r>
-  <g>0.37</g>
-  <b>0.11</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
  <object-group>
   <range-m>5000</range-m>
   <object>
@@ -3599,30 +1157,6 @@ Shared parameters for various materials.
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
- <ambient>
-  <r>0.32</r>
-  <g>0.45</g>
-  <b>0.09</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.32</r>
-  <g>0.45</g>
-  <b>0.09</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
  <object-group>
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
@@ -3643,30 +1177,6 @@ Shared parameters for various materials.
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
- <ambient>
-  <r>0.28</r>
-  <g>0.33</g>
-  <b>0.12</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.28</r>
-  <g>0.33</g>
-  <b>0.12</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
  <object-group>
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
@@ -3688,30 +1198,6 @@ Shared parameters for various materials.
  <xsize>400</xsize>
  <ysize>400</ysize>
  <light-coverage>10000.0</light-coverage>
- <ambient>
-  <r>0.29</r>
-  <g>0.27</g>
-  <b>0.27</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.29</r>
-  <g>0.27</g>
-  <b>0.27</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 <material>
@@ -3720,30 +1206,6 @@ Shared parameters for various materials.
  <xsize>400</xsize>
  <ysize>400</ysize>
  <light-coverage>1000000.0</light-coverage>
- <ambient>
-  <r>0.60</r>
-  <g>0.59</g>
-  <b>0.52</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.60</r>
-  <g>0.59</g>
-  <b>0.52</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </specular>
- <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </emissive>
 </material>
 
 </PropertyList>

@@ -17,7 +17,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <xsize>800</xsize>
    <ysize>600</ysize>
    <splash-screen>true</splash-screen>
-   <intro-music>true</intro-music>
+   <intro-music>false</intro-music>
    <game-mode>false</game-mode>
    <airport-id>KSFO</airport-id>
    <fullscreen>false</fullscreen>

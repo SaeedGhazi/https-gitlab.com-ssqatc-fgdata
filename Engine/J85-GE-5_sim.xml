@@ -14,7 +14,7 @@
      MAXN1         N1 at 100% throttle
      MAXN2         N2 at 100% throttle
      AUGMENTED     = 1 if augmentation installed, else = 0
-     AUGMETHOD     = 0 if using property /propulsion/augmentation_cmd
+     AUGMETHOD     = 0 if using property /engine[n]/augmentation
                    = 1 if using last 1% of throttle movement
      INJECTED      = 1 if water injection installed
 
@@ -33,7 +33,7 @@
   MAXN1        100.0
   MAXN2        100.0
   AUGMENTED    1
-  AUGMETHOD    0
+  AUGMETHOD    1
   INJECTED     0
 
   <TABLE NAME="IdleThrust" TYPE="TABLE">

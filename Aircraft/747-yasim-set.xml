@@ -33,7 +33,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
   </hud>
   
   <model>
-   <path>Aircraft/747/Model/boeing747.ac</path>
+   <path>Aircraft/747/Models/boeing747-400-jw.ac</path>
   </model>
  </sim>
 
@@ -51,5 +51,6 @@ October 23 2001 John Check, fgpanels@rockfish.net
  </autopilot>
 
 </PropertyList>
+
 
 

@@ -30,6 +30,7 @@ Joystick binding definitions.
  <js-named include="Input/Joysticks/Microsoft/sidewinder-force-feed.xml"/>
  <js-named include="Input/Joysticks/Microsoft/sidewinder-force-feed-pro.xml"/>
  <js-named include="Input/Joysticks/Microsoft/sidewinder-precision-pro.xml"/>
+ <js-named include="Input/Joysticks/Microsoft/sidewinder-3d-pro.xml"/>
 
  <!-- Saitek devices -->
  <js-named include="Input/Joysticks/Saitek/X45.xml"/>

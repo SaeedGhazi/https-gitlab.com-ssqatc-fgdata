@@ -24,11 +24,9 @@ Mar 18 2003
   <to-flag>/radios/nav[0]/to-flag</to-flag>
   <from-flag>/radios/nav[0]/from-flag</from-flag>
   <vor-in-range>/radios/nav[0]/in-range</vor-in-range>
-  <!-- when posible change to nav-gs-in-range -->
-  <gs-in-range>/radios/nav[0]/in-range</gs-in-range>
+  <has-gs>/radios/nav[0]/has-gs</has-gs>
   <heading-deg>/orientation/heading-magnetic-deg</heading-deg>
   <autopilot-heading-deg>/autopilot/settings/heading-bug-deg</autopilot-heading-deg>
-  <autopilot-heading-lock>/autopilot/locks/heading</autopilot-heading-lock>
  </params>
  
  <layers>
@@ -405,7 +403,7 @@ Mar 18 2003
    <name>GS needle right</name>
    <condition>
     <equals>
-     <property alias="../../../../../params/gs-in-range"/>
+     <property alias="../../../../../params/has-gs"/>
      <value>true</value>
     </equals>
    </condition>
@@ -438,7 +436,7 @@ Mar 18 2003
    <name>GS needle left</name>
    <condition>
     <equals>
-     <property alias="../../../../../params/gs-in-range"/>
+     <property alias="../../../../../params/has-gs"/>
      <value>true</value>
     </equals>
    </condition>
@@ -505,7 +503,7 @@ Mar 18 2003
    <name>HDG OFF</name>
    <condition>
     <equals>
-     <property alias="../../../../../params/autopilot-heading-lock"/>
+     <property>/systems/electrical/outputs/hsi</property>
      <value>false</value>
     </equals>
    </condition>

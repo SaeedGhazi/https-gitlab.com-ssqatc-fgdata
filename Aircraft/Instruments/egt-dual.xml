@@ -44,10 +44,10 @@ properties' values.
     <y1>0.0</y1>
     <y2>0.5</y2>
    </texture>
-   <w>102</w>
-   <h>102</h>
+   <w>100</w>
+   <h>100</h>
   </layer>
-
+<!--
   <layer>
    <name>bezel</name>
    <texture>
@@ -70,9 +70,9 @@ properties' values.
   <w>120</w>
   <h>120</h>
  </layer>
- 
+ -->
  <layer>
-  <name>egt needle</name>
+  <name>egt 0  needle</name>
   <texture>
    <path>Aircraft/Instruments/Textures/misc-1.rgb</path>
     <x1>0.8</x1>
@@ -80,7 +80,7 @@ properties' values.
     <y1>0.78125</y1>
     <y2>1.0</y2>
    </texture>
-   <w>6</w>
+   <w>4</w>
    <h>36</h>
    <transformations>
     <transformation>
@@ -104,7 +104,7 @@ properties' values.
   </layer>
 
   <layer>
-   <name>fuel flow needle</name>
+   <name>egt 1 needle</name>
    <texture>
     <path>Aircraft/Instruments/Textures/misc-1.rgb</path>
     <x1>0.8</x1>
@@ -112,7 +112,7 @@ properties' values.
     <x2>0.8375</x2>
     <y2>1.0</y2>
    </texture>
-   <w>6</w>
+   <w>4</w>
    <h>36</h>
    <transformations>
     <transformation>
@@ -122,10 +122,10 @@ properties' values.
     <transformation>
      <type>rotation</type>
      <property alias="../../../../../params/engine-egt1-select"/>
-     <min>0.0</min>
-     <max>20.0</max>
-     <scale>4.25</scale>
-     <offset>-135</offset>
+     <min>425.0</min>
+     <max>775.0</max>
+     <scale>0.25</scale>
+     <offset>120</offset>
     </transformation>
     <transformation>
      <type>y-shift</type>

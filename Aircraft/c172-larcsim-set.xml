@@ -26,8 +26,16 @@ October 23 2001 John Check, fgpanels@rockfish.net
    <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
   </panel_2>
 
+<!--
   <model>
    <path>Aircraft/c172/Models/N757/n757.ac</path>
+  </model>
+-->
+
+  <model>
+   <path>Aircraft/c172/Models/c172-dpm.ac</path>
+   <heading-offset-deg>270</heading-offset-deg>
+   <z-offset-m>-1</z-offset-m>
   </model>
 
  </sim>

@@ -23,6 +23,10 @@
 * Button 6 (left trigger): left wheel brake
 * Button 7 (right trigger): right wheel brake
 * Button 8 (S): cycle view
+*
+* Note that the "mode" button swaps the hat/pad and the left stick.
+* When it is engaged, axis 0<->5 and 1<->6 are swapped.
+*
 ************************************************************************
 $Id$
 -->
@@ -30,6 +34,7 @@ $Id$
 <PropertyList>
 
  <name>Logitech Inc. WingMan RumblePad</name>
+ <name>WingMan RumblePad</name>
 
  <axis n="0">
   <desc>Aileron</desc>

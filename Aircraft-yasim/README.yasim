@@ -21,6 +21,7 @@ approach: The approach parameters for the aircraft.  The solver will
           approach.
           speed: The approach airspeed, in knots TAS.
           aoa:   The approach angle of attack, in degrees
+          fuel:  Fraction (0-1) of fuel in the tanks.  Default is 0.2.
 
 cruise:   The cruise speed and altitude for the solver to match.  As
           above, this should contain <control> elements indicating
@@ -28,6 +29,7 @@ cruise:   The cruise speed and altitude for the solver to match.  As
           are generating enough thrust at cruise!
           speed: The cruise speed, in knots TAS.
           alt:   The cruise altitude, in feet MSL.
+          fuel:  Fraction (0-1) of fuel in the tanks.  Default is 0.2.
 
 cockpit:  The location of the cockpit (pilot eyepoint).
           x,y,z: eyepoint location (see coordinates note)
@@ -281,6 +283,15 @@ weight:   This is an added weight, something not part of the empty
                       stuff, you're on your own.  The default is zero,
                       which results in no aerodynamic force (internal
                       cargo).
+
+solve-weight:
+          Subtag of approach and cruise parameters.  Used to specify a
+          non-zero setting for a <weight> tag during solution.  The
+          default is to assume all weights are zero at the given
+          performance numbers.
+          idx:    Index of the weight in the file (starting with zero).
+          weight: Weight setting in pounds.
+
 
 control:  This element, which can appear in two different contexts,
           manages a mapping from fgfs properties (user input) to

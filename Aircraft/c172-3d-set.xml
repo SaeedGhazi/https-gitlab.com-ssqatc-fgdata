@@ -14,7 +14,6 @@ October 23 2001 John Check, fgpanels@rockfish.net
 
  <sim>
 
-  <virtual-cockpit archive="y">true</virtual-cockpit>
   <allow-toggle-cockpit archive="y">true</allow-toggle-cockpit>
 
   <flight-model archive="y">jsb</flight-model>
@@ -26,13 +25,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
   </sound>
 
   <panel>
-   <path archive="y">Aircraft/c172/Panels/c172-trans-panel.xml</path>
-   <visibility archive="y">true</visibility>
-  </panel>
-  <panel n="1">
-   <desc>2D Panel</desc>
-   <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
-   <visibility>true</visibility>
+   <visibility archive="y">false</visibility>
   </panel>
 
   <model>

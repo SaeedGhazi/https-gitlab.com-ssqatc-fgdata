@@ -24,8 +24,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
   </sound>
 
   <panel>
-    <path>Aircraft/a4/a4-panel.xml</path>
-    <visibility>true</visibility>
+    <visibility>false</visibility>
   </panel>
 
   <model>

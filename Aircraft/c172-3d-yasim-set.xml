@@ -25,8 +25,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
   </sound>
 
   <panel>
-   <path archive="y">Aircraft/c172/Panels/c172-trans-panel.xml</path>
-   <visibility archive="y">true</visibility>
+   <visibility archive="n">false</visibility>
   </panel>
 
   <model>

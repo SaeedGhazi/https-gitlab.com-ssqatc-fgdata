@@ -36,7 +36,7 @@
   <text>
    <x>225</x>
    <y>0</y>
-   <label>Type</label>
+   <label>Coverage</label>
   </text>
 
   <text>
@@ -72,10 +72,11 @@
    <y>0</y>
    <width>200</width>
    <height>25</height>
-   <property>/environment/clouds/layer[4]/type</property>
+   <property>/environment/clouds/layer[4]/coverage</property>
    <value>clear</value>
-   <value>mostly-sunny</value>
-   <value>mostly-cloudy</value>
+   <value>few</value>
+   <value>scattered</value>
+   <value>broken</value>
    <value>overcast</value>
    <value>cirrus</value>
   </combo>
@@ -113,10 +114,11 @@
    <y>0</y>
    <width>200</width>
    <height>25</height>
-   <property>/environment/clouds/layer[3]/type</property>
+   <property>/environment/clouds/layer[3]/coverage</property>
    <value>clear</value>
-   <value>mostly-sunny</value>
-   <value>mostly-cloudy</value>
+   <value>few</value>
+   <value>scattered</value>
+   <value>broken</value>
    <value>overcast</value>
    <value>cirrus</value>
   </combo>
@@ -154,10 +156,11 @@
    <y>0</y>
    <width>200</width>
    <height>25</height>
-   <property>/environment/clouds/layer[2]/type</property>
+   <property>/environment/clouds/layer[2]/coverage</property>
    <value>clear</value>
-   <value>mostly-sunny</value>
-   <value>mostly-cloudy</value>
+   <value>few</value>
+   <value>scattered</value>
+   <value>broken</value>
    <value>overcast</value>
    <value>cirrus</value>
   </combo>
@@ -195,10 +198,11 @@
    <y>0</y>
    <width>200</width>
    <height>25</height>
-   <property>/environment/clouds/layer[1]/type</property>
+   <property>/environment/clouds/layer[1]/coverage</property>
    <value>clear</value>
-   <value>mostly-sunny</value>
-   <value>mostly-cloudy</value>
+   <value>few</value>
+   <value>scattered</value>
+   <value>broken</value>
    <value>overcast</value>
    <value>cirrus</value>
   </combo>
@@ -236,10 +240,11 @@
    <y>0</y>
    <width>200</width>
    <height>25</height>
-   <property>/environment/clouds/layer[0]/type</property>
+   <property>/environment/clouds/layer[0]/coverage</property>
    <value>clear</value>
-   <value>mostly-sunny</value>
-   <value>mostly-cloudy</value>
+   <value>few</value>
+   <value>scattered</value>
+   <value>broken</value>
    <value>overcast</value>
    <value>cirrus</value>
   </combo>

@@ -254,29 +254,29 @@ Started September 2000 by David Megginson, david@megginson.com
   <clouds>
    <status>true</status>
    <layer n="0">
-    <type>mostly-sunny</type>
+    <coverage>clear</coverage>
+    <span-m>40000</span-m>
+   </layer>
+   <layer n="1">
+    <coverage>scattered</coverage>
     <elevation-ft>5000</elevation-ft>
     <thickness-ft>600</thickness-ft>
     <transition-ft>150</transition-ft>
     <span-m>40000</span-m>
    </layer>
-   <layer n="1">
-    <type>cirrus</type>
-    <elevation-ft>19500</elevation-ft>
-    <thickness-ft>65</thickness-ft>
-    <transition-ft>25</transition-ft>
-    <span-m>40000</span-m>
-   </layer>
    <layer n="2">
-    <type>clear</type>
+    <coverage>clear</coverage>
     <span-m>40000</span-m>
    </layer>
    <layer n="3">
-    <type>clear</type>
+    <coverage>clear</coverage>
     <span-m>40000</span-m>
    </layer>
    <layer n="4">
-    <type>clear</type>
+    <coverage>cirrus</coverage>
+    <elevation-ft>19500</elevation-ft>
+    <thickness-ft>65</thickness-ft>
+    <transition-ft>25</transition-ft>
     <span-m>40000</span-m>
    </layer>
   </clouds>

@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+Soko J-22 Orao. This file ties together all the components used by FGFS
+to represent the J-22. Components include the flight data model, HUD
+and external 3D model.
+
+************************************************************************
+-->
+
+<PropertyList>
+ <sim>
+
+  <description>Soko J-22 Orao / IAR-93</description>
+
+  <virtual-cockpit archive="y">false</virtual-cockpit>
+
+  <flight-model>yasim</flight-model>
+  <aero>j22-yasim</aero>
+  <fuel-fraction>1.0</fuel-fraction>
+
+  <systems>
+   <electrical>
+    <path>Aircraft/Generic/generic-electrical.xml</path>
+   </electrical>
+  </systems> 
+ 
+  <hud>
+   <path>Aircraft/j22/Huds/j22-hud1.xml</path>
+   <visibility>true</visibility>
+  </hud>
+  
+  <sound>
+   <audible>true</audible>
+   <path>Aircraft/a4/a4-sound.xml</path>
+  </sound>
+
+  <panel>
+    <visibility>false</visibility>
+  </panel>
+
+  <model>
+   <path>Aircraft/j22/Models/j22.xml</path>
+  </model>
+
+  <view n="0">
+   <internal archive="y">true</internal>
+   <config>
+    <x-offset-m archive="y">0.0</x-offset-m>
+    <y-offset-m archive="y">0.795</y-offset-m>
+    <z-offset-m archive="y">-4.20</z-offset-m>
+    <pitch-offset-deg>-7</pitch-offset-deg>
+    <default-field-of-view-deg>60</default-field-of-view-deg>
+   </config>
+  </view>
+  <current-view>
+    <field-of-view>60.0</field-of-view>
+  </current-view>
+
+  <aoa-indexer>
+   <too-slow-deg>15.0</too-slow-deg>
+   <slow-deg>14.0</slow-deg>
+   <fast-deg>13.0</fast-deg>
+   <too-fast-deg>12.0</too-fast-deg>
+  </aoa-indexer>
+
+ </sim>
+
+ <autopilot>
+   <config>
+     <min-climb-speed-kt type="float">200.0</min-climb-speed-kt>
+     <best-climb-speed-kt type="float">300.0</best-climb-speed-kt>
+     <target-climb-rate-fpm type="float">3000.0</target-climb-rate-fpm>
+     <target-descent-rate-fpm type="float">1500.0</target-descent-rate-fpm>
+     <elevator-adj-factor type="float">5500.0</elevator-adj-factor>
+     <integral-contribution type="float">0.007</integral-contribution>
+     <zero-pitch-throttle type="float">0.60</zero-pitch-throttle>
+     <zero-pitch-trim-full-throttle type="float">0.14</zero-pitch-trim-full-throttle>
+     <max-roll-deg type="float">45</max-roll-deg>
+     <max-aileron type="float">0.1</max-aileron>
+   </config>
+ </autopilot>
+
+</PropertyList>
+
+
+

@@ -3,12 +3,16 @@
 <!-- Depart KSFO to the east over OAK and LIN                  
      The departure can be found at http://www.airnav.com/airport/KSFO 
      Format:                                                         
-       <name>    Waypoint name.                                       
-       <lat>     latitude, degrees                                    
-       <lon>     Longitude, degrees                                   
-       <alt>     altitude, feet                                       
-       <crossat> Crossing altitude, feet                              
-       <ktas>    Knots true airspeed
+       <name>       Waypoint name.  When a waypoint named END is reached
+                    the AI airplane will delete itself.                                       
+       <lat>        latitude, degrees (-90 to 90)                                    
+       <lon>        Longitude, degrees (-180 to 180)                                   
+       <alt>        altitude above sea level, feet                                       
+       <crossat>    Crossing altitude, feet                              
+       <ktas>       Knots true airspeed
+       <on-ground>  set true if on the ground
+       <gear-down>  set true for gear down, false for gear up
+       <flaps-down> set true for flaps down, false for flaps up
 -->
  
 <PropertyList>
@@ -21,6 +25,7 @@
    <lon>-122.380667</lon>
    <alt>11.0</alt>
    <ktas>20</ktas>
+   <on-ground>true</on-ground>
    <gear-down>true</gear-down>
   </wpt>
 
@@ -30,6 +35,7 @@
    <lon>-122.380391</lon>
    <alt>11.0</alt>
    <ktas>150</ktas>
+   <on-ground>true</on-ground>
   </wpt>
 
   <wpt>

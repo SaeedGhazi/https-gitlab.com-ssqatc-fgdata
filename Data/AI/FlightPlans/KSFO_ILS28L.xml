@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 
-<!-- BIG SUR ARRIVAL, BSR.BSR2 to KSFO, Runway 28L                  
-     The arrival can be found at http://www.airnav.com/airport/KSFO 
+<!-- ILS Runway 28L, KSFO                  
      Format:                                                         
        <name>       Waypoint name.  When a waypoint named END is reached
                     the AI airplane will delete itself.                                       
@@ -23,38 +22,6 @@
  <flightplan>
 
   <wpt>
-   <name>BSR</name>
-   <lat>36.181333</lat>
-   <lon>-121.642166</lon>
-   <alt>26000.0</alt>
-   <ktas>380</ktas>
-  </wpt>
-
-  <wpt>
-   <name>CARME</name>
-   <lat>36.455167</lat>
-   <lon>-121.879666</lon>
-   <crossat>20000.0</crossat>
-   <ktas>350</ktas>
-  </wpt>
-
-  <wpt>
-   <name>BOLDR</name>
-   <lat>37.17087</lat>
-   <lon>-122.0761666</lon>
-   <crossat>10000.0</crossat>
-   <ktas>275</ktas>
-  </wpt>
- 
-  <wpt>
-   <name>MENLO</name>
-   <lat>37.463666</lat>
-   <lon>-122.1536666</lon>
-   <crossat>10000.0</crossat>
-   <ktas>250</ktas>
-  </wpt>
-
-  <wpt>
    <name>HEMAN</name>
    <lat>37.53337</lat>
    <lon>-122.17219</lon>
@@ -71,19 +38,28 @@
   </wpt>
 
   <wpt>
-   <name>28L</name>
-   <lat>37.611707</lat>
-   <lon>-122.35834</lon>
+   <name>28L-touchdown</name>
+   <lat>37.612726</lat>
+   <lon>-122.360828</lon>
    <crossat>13.0</crossat>
    <ktas>20</ktas>
    <on-ground>true</on-ground>
   </wpt>
 
   <wpt>
+   <name>turnoff</name>
+   <lat>37.620115</lat>
+   <lon>-122.378371</lon>
+   <crossat>10.7</crossat>
+   <ktas>20</ktas>
+   <on-ground>true</on-ground>
+  </wpt>
+
+  <wpt>
    <name>END</name>
-   <lat>37.625288</lat>
-   <lon>-122.390717</lon>
-   <crossat>6.0</crossat>
+   <lat>37.61853</lat>
+   <lon>-122.38182</lon>
+   <crossat>21.8</crossat>
   </wpt>
 
   <wpt>

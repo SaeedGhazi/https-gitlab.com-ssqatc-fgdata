@@ -3,12 +3,16 @@
 <!-- Golden Gate Arrival to KSFO, left base to Runway 28L                  
      The arrival can be found at http://www.airnav.com/airport/KSFO 
      Format:                                                         
-       <name>    Waypoint name.                                       
-       <lat>     latitude, degrees                                    
-       <lon>     Longitude, degrees                                   
-       <alt>     altitude, feet                                       
-       <crossat> Crossing altitude, feet                              
-       <ktas>    Knots true airspeed
+       <name>       Waypoint name.  When a waypoint named END is reached
+                    the AI airplane will delete itself.                                       
+       <lat>        latitude, degrees (-90 to 90)                                    
+       <lon>        Longitude, degrees (-180 to 180)                                   
+       <alt>        altitude above sea level, feet                                       
+       <crossat>    Crossing altitude, feet                              
+       <ktas>       Knots true airspeed
+       <on-ground>  set true if on the ground
+       <gear-down>  set true for gear down, false for gear up
+       <flaps-down> set true for flaps down, false for flaps up
 -->
  
 <PropertyList>
@@ -85,6 +89,7 @@
    <lon>-122.35834</lon>
    <crossat>13.0</crossat>
    <ktas>20</ktas>
+   <on-ground>true</onground>
   </wpt>
 
   <wpt>

@@ -28,7 +28,7 @@ properties' values.
  
  <name>NavCom Radio</name>
  <w-base>256</w-base>
- <h-base>86</h-base>
+ <h-base>64</h-base>
 
  <params>
   <comm-freq-selected-prop>/radios/comm[0]/frequencies/selected-mhz</comm-freq-selected-prop>
@@ -44,18 +44,18 @@ properties' values.
  <layer>
    <name>background</name>
    <texture>
-    <path>Aircraft/Instruments/Textures/bendix-kx155.rgb</path>
-    <y1>0.0</y1>
-    <y2>0.30859375</y2>
+    <path>Aircraft/Instruments/Textures/navcom-radios.rgb</path>
     <x1>0.0</x1>
+    <y1>0.75</y1>
     <x2>1.0</x2>
+    <y2>1.0</y2>
    </texture>
   </layer>
 
   <layer>
    <name>nav frequencies</name>
    <type>text</type>
-   <point-size>13</point-size>
+   <point-size>14</point-size>
    <color>
     <red>1.0</red>
     <green>0.5</green>
@@ -76,11 +76,11 @@ properties' values.
    <transformations>
     <transformation>
      <type>x-shift</type>
-     <offset>9</offset>
+     <offset>3</offset>
     </transformation>
     <transformation>
      <type>y-shift</type>
-     <offset>18</offset>
+     <offset>5</offset>
     </transformation>
    </transformations>
   </layer>
@@ -88,7 +88,7 @@ properties' values.
   <layer>
    <name>com frequencies</name>
    <type>text</type>
-   <point-size>13</point-size>
+   <point-size>14</point-size>
    <color>
     <red>1.0</red>
     <green>0.5</green>
@@ -113,15 +113,83 @@ properties' values.
    <transformations>
     <transformation>
      <type>x-shift</type>
-     <offset>-118</offset>
+     <offset>-121</offset>
     </transformation>
     <transformation>
      <type>y-shift</type>
-     <offset>18</offset>
+     <offset>5</offset>
     </transformation>
    </transformations>
   </layer>
 
+  <layer>
+  <name>nav knob</name>
+  <texture>
+   <path>Aircraft/Instruments/Textures/blister.rgb</path>
+   <x1>0.0</x1>
+   <y1>0.75</y1>
+   <x2>0.25</x2>
+   <y2>1.0</y2>
+  </texture>
+  <h>20</h>
+  <w>20</w>
+  <transformations>
+   <transformation>
+    <type>x-shift</type>
+    <offset>110</offset>
+   </transformation>
+   <transformation>
+    <type>y-shift</type>
+    <offset>-14</offset>
+   </transformation>
+  </transformations>
+ </layer>
+
+ <layer>
+  <name>voice knob</name>
+  <texture>
+   <path>Aircraft/Instruments/Textures/blister.rgb</path>
+   <x1>0.0</x1>
+   <y1>0.75</y1>
+   <x2>0.25</x2>
+   <y2>1.0</y2>
+  </texture>
+  <h>20</h>
+  <w>20</w>
+  <transformations>
+   <transformation>
+    <type>x-shift</type>
+    <offset>-17</offset>
+   </transformation>
+   <transformation>
+    <type>y-shift</type>
+    <offset>-14</offset>
+   </transformation>
+   </transformations>
+  </layer>   
+
+  <layer>
+  <name>ident knob</name>
+  <texture>
+   <path>Aircraft/Instruments/Textures/blister.rgb</path>
+   <x1>0.0</x1>
+   <y1>0.75</y1>
+   <x2>0.25</x2>
+   <y2>1.0</y2>
+  </texture>
+  <w>15</w>
+  <h>15</h>
+  <transformations>
+   <transformation>
+    <type>x-shift</type>
+    <offset>40</offset>
+   </transformation>
+   <transformation>
+    <type>y-shift</type>
+    <offset>-16</offset>
+   </transformation>
+  </transformations>
+ </layer>
   <layer>
    <name>ident knob pointer</name>
    <texture>
@@ -157,6 +225,48 @@ properties' values.
    </transformations>
   </layer>
 
+  <layer>
+   <name>voice/ident toggle</name>
+   <type>switch</type>
+   <property alias="../../../params/nav-morse-ident-toggle-prop"/>
+   <layer>
+   <name>voice on</name>
+   <texture>
+    <path>Aircraft/Instruments/Textures/switches.rgb</path>
+    <x1>0.0</x1>
+    <y1>0.75</y1>
+    <x2>0.25</x2>
+    <y2>1.0</y2>
+   </texture>
+   <w>12</w>
+   <h>12</h>
+   <transformations>
+    <transformation>
+     <type>y-shift</type>
+     <offset>1</offset>
+    </transformation>
+   </transformations>
+   </layer>
+   <layer>
+   <name>ident on</name>
+   <texture>
+    <path>Aircraft/Instruments/Textures/switches.rgb</path>
+    <x1>0.0</x1>
+    <y1>0.0</y1>
+    <x2>0.25</x2>
+    <y2>0.30</y2>
+   </texture>
+   <w>12</w>
+   <h>15</h>
+   </layer>
+   <transformations>
+    <transformation>
+     <type>y-shift</type>
+     <offset>-20</offset>
+    </transformation>
+   </transformations>
+  </layer>
+
  </layers>
 
  <actions>
@@ -164,10 +274,10 @@ properties' values.
   <action>
    <name>small nav frequency decrease</name>
    <button>0</button>
-   <x>86</x>
-   <y>-24</y>
-   <w>12</w>
-   <h>18</h>
+   <x>96</x>
+   <y>-32</y>
+   <w>16</w>
+   <h>32</h>
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/nav-freq-standby-prop"/>
@@ -181,10 +291,10 @@ properties' values.
   <action>
    <name>large nav frequency decrease</name>
    <button>1</button>
-   <x>86</x>
-   <y>-24</y>
-   <w>12</w>
-   <h>18</h>
+   <x>96</x>
+   <y>-32</y>
+   <w>16</w>
+   <h>32</h>
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/nav-freq-standby-prop"/>
@@ -198,10 +308,10 @@ properties' values.
   <action>
    <name>small nav frequency increase</name>
    <button>0</button>
-   <x>99</x>
-   <y>-24</y>
-   <w>12</w>
-   <h>18</h>
+   <x>112</x>
+   <y>-32</y>
+   <w>16</w>
+   <h>32</h>
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/nav-freq-standby-prop"/>
@@ -215,10 +325,10 @@ properties' values.
   <action>
    <name>large nav frequency increase</name>
    <button>1</button>
-   <x>99</x>
-   <y>-24</y>
-   <w>12</w>
-   <h>18</h>
+   <x>112</x>
+   <y>-32</y>
+   <w>16</w>
+   <h>32</h>
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/nav-freq-standby-prop"/>
@@ -234,9 +344,9 @@ properties' values.
    <name>small com frequency decrease</name>
    <button>0</button>
    <x>-36</x>
-   <y>-24</y>
-   <w>12</w>
-   <h>18</h>
+   <y>-32</y>
+   <w>16</w>
+   <h>32</h>
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/comm-freq-standby-prop"/>
@@ -251,9 +361,9 @@ properties' values.
    <name>large com frequency decrease</name>
    <button>1</button>
    <x>-36</x>
-   <y>-24</y>
-   <w>12</w>
-   <h>18</h>
+   <y>-32</y>
+   <w>16</w>
+   <h>32</h>
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/comm-freq-standby-prop"/>
@@ -267,10 +377,10 @@ properties' values.
   <action>
    <name>small com frequency increase</name>
    <button>0</button>
-   <x>-45</x>
-   <y>-24</y>
-   <w>12</w>
-   <h>18</h>
+   <x>-20</x>
+   <y>-32</y>
+   <w>16</w>
+   <h>32</h>
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/comm-freq-standby-prop"/>
@@ -284,10 +394,10 @@ properties' values.
   <action>
    <name>large com frequency increase</name>
    <button>1</button>
-   <x>-45</x>
-   <y>-24</y>
-   <w>12</w>
-   <h>18</h>
+   <x>-20</x>
+   <y>-32</y>
+   <w>16</w>
+   <h>32</h>
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/comm-freq-standby-prop"/>
@@ -303,9 +413,9 @@ properties' values.
    <name>swap nav frequencies</name>
    <button>0</button>
    <x>48</x>
-   <y>-9</y>
-   <w>18</w>
-   <h>11</h>
+   <y>-32</y>
+   <w>32</w>
+   <h>32</h>
    <binding>
     <command>property-swap</command>
     <property alias="../../../../params/nav-freq-selected-prop"/>
@@ -316,10 +426,10 @@ properties' values.
   <action>
    <name>swap com frequencies</name>
    <button>0</button>
-   <x>-85</x>
-   <y>-9</y>
-   <w>18</w>
-   <h>11</h>
+   <x>-80</x>
+   <y>-32</y>
+   <w>32</w>
+   <h>32</h>
    <binding>
     <command>property-swap</command>
     <property alias="../../../../params/comm-freq-selected-prop"/>
@@ -331,8 +441,8 @@ properties' values.
   <action>
    <name>ident volume increase</name>
    <button>0</button>
-   <x>20</x>
-   <y>-32</y>
+   <x>40</x>
+   <y>-24</y>
    <w>8</w>
    <h>16</h>
    <binding>
@@ -348,7 +458,7 @@ properties' values.
    <name>ident volume decrease</name>
    <button>0</button>
    <x>32</x>
-   <y>-32</y>
+   <y>-24</y>
    <w>16</w>
    <h>8</h>
    <binding>

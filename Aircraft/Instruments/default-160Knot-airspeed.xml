@@ -31,7 +31,7 @@ properties' values.
   <layer>
    <name>face</name>
    <texture>
-    <path>Aircraft/c172/Instruments/Textures/faces-2.rgb</path>
+    <path>Aircraft/Instruments/Textures/faces-2.rgb</path>
     <x1>0</x1>
     <y1>0.51</y1>
     <x2>0.49</x2>
@@ -40,7 +40,7 @@ properties' values.
   </layer>
   <layer>
    <texture>
-    <path>Aircraft/c172/Instruments/Textures/misc-1.rgb</path>
+    <path>Aircraft/Instruments/Textures/misc-1.rgb</path>
     <x1>0.8</x1>
     <y1>0.78125</y1>
     <x2>0.8375</x2>
@@ -94,7 +94,7 @@ properties' values.
   <layer>
   <name>button</name>
   <texture>
-  <path>Aircraft/c172/Instruments/Textures/misc-1.rgb</path>
+  <path>Aircraft/Instruments/Textures/misc-1.rgb</path>
   <x1>0.6171875</x1>
   <y1>0.2421875</y1>
   <x2>0.7890625</x2>

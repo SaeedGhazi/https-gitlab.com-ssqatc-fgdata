@@ -19,6 +19,12 @@ October 23 2001 John Check, fgpanels@rockfish.net
   <flight-model>jsb</flight-model>
   <aero>c172r</aero>
 
+  <systems>
+    <electrical>
+      <path>Aircraft/c172/c172-electrical.xml</path>
+    </electrical>
+  </systems>
+
   <sound>
    <audible>true</audible>
    <path>Aircraft/c172/c172-sound.xml</path>
@@ -37,7 +43,11 @@ October 23 2001 John Check, fgpanels@rockfish.net
    <path>Aircraft/c172/Models/c172-dpm.xml</path>
   </model>
 
- </sim>
+   <current-view>
+    <pitch-offset-deg>-8</pitch-offset-deg>
+   </current-view>
+
+</sim>
   
  <autopilot>
    <config>

@@ -435,6 +435,16 @@
    </option>
 
    <option>
+    <name>disable-distance-attenuation</name>
+    <description>strings/disable-distance-attenuation</description>
+   </option>
+
+   <option>
+    <name>enable-distance-attenuation</name>
+    <description>strings/enable-distance-attenuation</description>
+   </option>
+
+   <option>
     <name>enable-clouds</name>
     <description>strings/enable-clouds-desc</description>
    </option>

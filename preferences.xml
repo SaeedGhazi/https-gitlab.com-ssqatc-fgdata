@@ -16,13 +16,14 @@ Started September 2000 by David Megginson, david@megginson.com
   <startup>
    <xsize>800</xsize>
    <ysize>600</ysize>
+   <trim>true</trim>
    <splash-screen>true</splash-screen>
    <intro-music>true</intro-music>
    <game-mode>false</game-mode>
    <airport-id>KSFO</airport-id>
    <fullscreen>false</fullscreen>
    <units>feet</units>
-  <browser-app>konqueror</browser-app><!--  help viewer -->
+   <browser-app>konqueror</browser-app><!--  help viewer -->
   </startup>
   <flight-model>jsb</flight-model>
   <aircraft>c172</aircraft>

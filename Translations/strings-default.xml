@@ -205,6 +205,7 @@
 
  <!-- Time options -->
  <time-options>Time Options</time-options>
+ <timeofday-desc>Specify a time of day</timeofday-desc>
  <time-offset-desc>Add this time offset</time-offset-desc>
  <time-match-real-desc>Synchronize time with real-world time</time-match-real-desc>
  <time-match-local-desc>Synchronize time with local real-world time</time-match-local-desc>

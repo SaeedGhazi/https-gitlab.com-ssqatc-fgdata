@@ -647,6 +647,12 @@
    <name>strings/time-options</name>
 
    <option>
+    <name>timeofday</name>
+    <arg>{dawn,noon,dusk,midnight}</arg>
+    <description>strings/timeofday-desc</description>
+   </option>
+
+   <option>
     <name>time-offset</name>
     <arg>[+-]hh:mm:ss</arg>
     <description>strings/time-offset-desc</description>

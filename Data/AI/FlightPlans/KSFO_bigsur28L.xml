@@ -6,7 +6,7 @@
        <name>    Waypoint name.                                       
        <lat>     latitude, degrees                                    
        <lon>     Longitude, degrees                                   
-       <ALT>     Altitude, feet                                       
+       <alt>     altitude, feet                                       
        <crossat> Crossing altitude, feet                              
        <ktas>    Knots true airspeed
 -->
@@ -19,7 +19,7 @@
    <name>BSR</name>
    <lat>36.181333</lat>
    <lon>-121.642166</lon>
-   <ALT>26000.0</ALT>
+   <alt>26000.0</alt>
    <ktas>380</ktas>
   </wpt>
 

@@ -35,7 +35,7 @@
   <binding>
    <command>property-scale</command>
    <property>/controls/aileron</property>
-   <squared>true</squared>
+   <power>2</power>
   </binding>
  </axis>
 
@@ -45,7 +45,7 @@
    <command>property-scale</command>
    <property>/controls/elevator</property>
    <factor type="double">-1.0</factor>
-   <squared>true</squared>
+   <power>2</power>
   </binding>
  </axis>
 
@@ -56,14 +56,12 @@
    <property>/controls/throttle[0]</property>
    <offset type="double">-1.0</offset>
    <factor type="double">-0.5</factor>
-   <squared>false</squared>
   </binding>
   <binding>
    <command>property-scale</command>
    <property>/controls/throttle[1]</property>
    <offset type="double">-1.0</offset>
    <factor type="double">-0.5</factor>
-   <squared>false</squared>
   </binding>
  </axis>
 
@@ -74,14 +72,12 @@
    <property>/controls/mixture[0]</property>
    <offset type="double">-1.0</offset>
    <factor type="double">-0.5</factor>
-   <squared>false</squared>
   </binding>
   <binding>
    <command>property-scale</command>
    <property>/controls/mixture[1]</property>
    <offset type="double">-1.0</offset>
    <factor type="double">-0.5</factor>
-   <squared>false</squared>
   </binding>
  </axis>
 
@@ -92,31 +88,57 @@
    <property>/controls/propeller-pitch[0]</property>
    <offset type="double">-1.0</offset>
    <factor type="double">-0.5</factor>
-   <squared>false</squared>
   </binding>
   <binding>
    <command>property-scale</command>
    <property>/controls/propeller-pitch[1]</property>
    <offset type="double">-1.0</offset>
    <factor type="double">-0.5</factor>
-   <squared>false</squared>
   </binding>
  </axis>
 
  <axis n="5">
   <binding>
-   <command>property-scale</command>
-   <property>/sim/current-view/axes/lat</property>
-   <squared>false</squared>
+   <command>null</command>
   </binding>
+  <low>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
+    <step>1</step>
+   </binding>
+  </low>
+  <high>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
+    <step>-1</step>
+   </binding>
+  </high>
  </axis>
 
  <axis n="6">
   <binding>
-   <command>property-scale</command>
-   <property>/sim/current-view/axes/long</property>
-   <squared>false</squared>
+   <command>null</command>
   </binding>
+  <low>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-pitch-offset-deg</property>
+    <step>1</step>
+   </binding>
+  </low>
+  <high>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-pitch-offset-deg</property>
+    <step>-1</step>
+   </binding>
+  </high>
  </axis>
 
  <button n="1">

@@ -287,6 +287,11 @@ Started September 2000 by David Megginson, david@megginson.com
 
   <gear-down type="double">1.0</gear-down>
 
+  <lights>
+   <navigation type="bool">false</navigation>
+   <beacon type="bool">true</beacon>
+  </lights>
+
  </controls>
 
 

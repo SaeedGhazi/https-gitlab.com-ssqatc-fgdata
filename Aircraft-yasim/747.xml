@@ -10,9 +10,9 @@
 </approach>
 
 <!-- Cruise configuration -->
-<cruise speed="530" alt="41000">
-  <control-setting axis="/controls/throttle[0]" value="1.0"/>
-  <control-setting axis="/controls/throttle[1]" value="1.0"/>
+<cruise speed="490" alt="36000">
+  <control-setting axis="/controls/throttle[0]" value="0.75"/>
+  <control-setting axis="/controls/throttle[1]" value="0.75"/>
   <control-setting axis="/controls/flaps" value="0.0"/>
   <control-setting axis="/controls/gear-down" value="0"/>
 </cruise>
@@ -23,7 +23,7 @@
           width="6" taper="0.3" midpoint="0.2"/>
 
 <wing x="-26.50" y="3.01" z="-1.45" length="33.72" chord="13.25" sweep="33"
-      taper=".27" dihedral="7" camber="0.1">
+      taper=".27" dihedral="7" camber="0.15" incidence="-0.7">
   <stall aoa="15" width="2" peak="1.5"/>
   <flap0 start="0" end=".56" lift="1.8" drag="3"/>
   <flap1 start=".64" end=".88" lift="1.3" drag="1.5"/>
@@ -43,9 +43,9 @@
 </wing>
 
 <hstab x="-62.63" y="1.81" z="1.81" chord="8.43" length="10.84" taper=".29"
-       sweep="28" dihedral="7" effectiveness="1.9">
+       sweep="28" dihedral="7" camber="-0.1" effectiveness="1.5">
   <stall aoa="15" width="2" peak="1.5"/>
-  <flap0 start="0" end="1" lift="1.4" drag="1.8"/>
+  <flap0 start="0" end="1" lift="1.6" drag="1.8"/>
   <control-input axis="/controls/elevator" control="FLAP0"/>
   <control-input axis="/controls/elevator-trim" control="FLAP0"/>
   <control-output control="FLAP0" prop="/surface-positions/elevator-pos-norm"/>
@@ -61,19 +61,22 @@
 		  min="1" max="-1"/>
 </vstab>
 
-<jet x="-34.93" y="16.26"  z="-1.20" mass="8000" thrust="60000">
+<!-- The CF6 engines are rated at 60000 lbs thrust, flat rated to 33 -->
+<!-- degrees C.  Corrected to YASim's standard atmosphere temperature -->
+<!-- of 288.2 kelvins, that gives 63737 lbs of nominal thrust. -->
+<jet x="-34.93" y="16.26"  z="-1.20" mass="8000" thrust="63737">
   <control-input axis="/controls/throttle[0]" control="THROTTLE"/>
 </jet>
 
-<jet x="-26.50" y="12.65"  z="-2.41" mass="8000" thrust="60000">
+<jet x="-26.50" y="12.65"  z="-2.41" mass="8000" thrust="63737">
   <control-input axis="/controls/throttle[0]" control="THROTTLE"/>
 </jet>
 
-<jet x="-26.50" y="-12.65" z="-2.41" mass="8000" thrust="60000">
+<jet x="-26.50" y="-12.65" z="-2.41" mass="8000" thrust="63737">
   <control-input axis="/controls/throttle[1]" control="THROTTLE"/>
 </jet>
 
-<jet x="-34.93" y="-16.26" z="-1.20" mass="8000" thrust="60000">
+<jet x="-34.93" y="-16.26" z="-1.20" mass="8000" thrust="63737">
   <control-input axis="/controls/throttle[1]" control="THROTTLE"/>
 </jet>
  

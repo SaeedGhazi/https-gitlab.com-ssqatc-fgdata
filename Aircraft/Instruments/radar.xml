@@ -355,7 +355,7 @@
     <chunks>
      <chunk>
       <type>number-value</type>
-      <property>ai/models/aircraft[1]/position/altitude-ft</property>
+      <property>ai/models/aircraft[0]/position/altitude-ft</property>
       <scale>0.001</scale>
       <format>%2.1f</format>
      </chunk>

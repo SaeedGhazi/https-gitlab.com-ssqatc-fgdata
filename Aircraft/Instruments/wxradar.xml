@@ -24,7 +24,7 @@
    <condition>
     <and>
      <less-than>
-      <property>ai/models/thunderstorm[1]/radar/range-nm</property>
+      <property>ai/models/thunderstorm[0]/radar/range-nm</property>
       <value>43</value>
      </less-than>
      <equals>
@@ -43,17 +43,17 @@
    <transformations>
     <transformation>
      <type>x-shift</type>
-     <property>ai/models/thunderstorm[1]/radar/x-shift</property>
+     <property>ai/models/thunderstorm[0]/radar/x-shift</property>
      <scale>2.55</scale>
     </transformation>
     <transformation>
      <type>y-shift</type>
-     <property>ai/models/thunderstorm[1]/radar/y-shift</property>
+     <property>ai/models/thunderstorm[0]/radar/y-shift</property>
      <scale>2.55</scale>
     </transformation>
     <transformation>
      <type>rotation</type>
-     <property>ai/models/thunderstorm[1]/radar/rotation</property>
+     <property>ai/models/thunderstorm[0]/radar/rotation</property>
      <offset>-90</offset>
     </transformation>
    </transformations>
@@ -66,7 +66,7 @@
    <condition>
     <and>
      <less-than>
-      <property>ai/models/thunderstorm[1]/radar/range-nm</property>
+      <property>ai/models/thunderstorm[0]/radar/range-nm</property>
       <value>22</value>
      </less-than>
      <equals>
@@ -85,17 +85,17 @@
    <transformations>
     <transformation>
      <type>x-shift</type>
-     <property>ai/models/thunderstorm[1]/radar/x-shift</property>
+     <property>ai/models/thunderstorm[0]/radar/x-shift</property>
      <scale>5.1</scale>
     </transformation>
     <transformation>
      <type>y-shift</type>
-     <property>ai/models/thunderstorm[1]/radar/y-shift</property>
+     <property>ai/models/thunderstorm[0]/radar/y-shift</property>
      <scale>5.1</scale>
     </transformation>
     <transformation>
      <type>rotation</type>
-     <property>ai/models/thunderstorm[1]/radar/rotation</property>
+     <property>ai/models/thunderstorm[0]/radar/rotation</property>
      <offset>-90</offset>
     </transformation>
    </transformations>
@@ -193,7 +193,7 @@
     <chunks>
      <chunk>
       <type>number-value</type>
-      <property>ai/models/thunderstorm[1]/position/altitude-ft</property>
+      <property>ai/models/thunderstorm[0]/position/altitude-ft</property>
       <scale>0.001</scale>
       <format>%2.1f</format>
      </chunk>

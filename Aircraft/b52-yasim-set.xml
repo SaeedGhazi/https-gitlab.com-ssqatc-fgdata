@@ -43,6 +43,12 @@ B52-H set file.
    </config>
   </view>
 
+  <systems>
+   <electrical>
+    <path>Aircraft/Generic/generic-electrical.xml</path>
+   </electrical>
+  </systems>
+
   <view n="1">
    <config>
      <!-- big plane, so extend chase view offset a bit -->

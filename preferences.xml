@@ -22,6 +22,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <airport-id>KSFO</airport-id>
    <fullscreen>false</fullscreen>
    <units>feet</units>
+   <trim>true</trim>
   <browser-app>konqueror</browser-app><!--  help viewer -->
   </startup>
   <flight-model>jsb</flight-model>

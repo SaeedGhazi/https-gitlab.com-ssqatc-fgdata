@@ -13,6 +13,7 @@ Started September 2000 by David Megginson, david@megginson.com
  <!-- General simulation preferences -->
  <sim>
   <aircraft>c172</aircraft>
+  <virtual-cockpit>false</virtual-cockpit>
   <startup>
    <xsize>800</xsize>
    <ysize>600</ysize>
@@ -32,6 +33,7 @@ Started September 2000 by David Megginson, david@megginson.com
   <panel>
    <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
    <visibility>false</visibility>
+   <jitter>false</jitter>
   </panel>
   <hud>
    <path>Huds/Default/default.xml</path>
@@ -70,12 +72,16 @@ Started September 2000 by David Megginson, david@megginson.com
     <longitude-deg>-122.362175</longitude-deg>
     <latitude-deg>37.616559</latitude-deg>
     <altitude-ft>54</altitude-ft>
+    <roll-deg>0</roll-deg>
+    <pitch-deg>0</pitch-deg>
+    <heading-deg>0</heading-deg>
   </tower>
 
 
   <view>
     <name>Cockpit View</name>
     <type>lookfrom</type>
+    <internal>false</internal>
     <config>
       <eye-lat-deg-path>/position/latitude-deg</eye-lat-deg-path>
       <eye-lon-deg-path>/position/longitude-deg</eye-lon-deg-path>
@@ -147,6 +153,7 @@ Started September 2000 by David Megginson, david@megginson.com
     </pilot-offset>
    </default>
   </view>
+
  </sim>
 
 
@@ -249,6 +256,10 @@ Started September 2000 by David Megginson, david@megginson.com
  <!-- Radio settings -->
 
  <radios>
+
+  <dme>
+   <switch-position>0</switch-position>
+  </dme>
 
   <comm n="0">
    <frequencies>

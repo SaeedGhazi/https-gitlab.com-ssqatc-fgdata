@@ -7,7 +7,7 @@
   <control-setting axis="/controls/engines/engine[1]/mixture" value="1.0"/>
   <control-setting axis="/controls/engines/engine[0]/propeller-pitch" value="0.5"/>
   <control-setting axis="/controls/engines/engine[1]/propeller-pitch" value="0.5"/>
-  <control-setting axis="/contorls/flight/flaps" value="1.0"/>
+  <control-setting axis="/controls/flight/flaps" value="1.0"/>
   <control-setting axis="/controls/gear/gear-down" value="1"/>
 </approach>
 <cruise speed="180" alt="23200">
@@ -19,7 +19,7 @@
   <control-setting axis="/controls/engines/engine[1]/propeller-pitch" value="1.0"/>
   <control-setting axis="/controls/engines/engine[0]/boost" value="1.0"/>
   <control-setting axis="/controls/engines/engine[1]/boost" value="1.0"/>
-  <control-setting axis="/contorls/flight/flaps" value="0.0"/>
+  <control-setting axis="/controls/flight/flaps" value="0.0"/>
   <control-setting axis="/controls/gear/gear-down" value="0"/>
 </cruise>
 
@@ -33,7 +33,7 @@
   <stall aoa="14" width="6" peak="1.5"/>
   <flap0 start="0.04" end="0.38" lift="1.5" drag="1.2"/>
   <flap1 start="0.38" end="0.97" lift="1.2" drag="1.2"/>
-  <control-input axis="/contorls/flight/flaps" control="FLAP0"/>
+  <control-input axis="/controls/flight/flaps" control="FLAP0"/>
   <control-input axis="/controls/flight/aileron" control="FLAP1" split="true"/>
   <control-input axis="/controls/flight/aileron-trim" control="FLAP1" split="true"/>
   <control-output control="FLAP0" prop="/surface-positions/flap-pos-norm"/>

@@ -148,7 +148,7 @@
    <y>0</y>
    <width>80</width>
    <height>25</height>
-   <property>/environment/config/aloft/entry[4]/dewpoint-degC</property>
+   <property>/environment/config/aloft/entry[4]/dewpoint-degc</property>
   </input>
 
   <input>
@@ -224,7 +224,7 @@
    <y>0</y>
    <width>80</width>
    <height>25</height>
-   <property>/environment/config/aloft/entry[3]/dewpoint-degC</property>
+   <property>/environment/config/aloft/entry[3]/dewpoint-degc</property>
   </input>
 
   <input>
@@ -300,7 +300,7 @@
    <y>0</y>
    <width>80</width>
    <height>25</height>
-   <property>/environment/config/aloft/entry[2]/dewpoint-degC</property>
+   <property>/environment/config/aloft/entry[2]/dewpoint-degc</property>
   </input>
 
   <input>
@@ -376,7 +376,7 @@
    <y>0</y>
    <width>80</width>
    <height>25</height>
-   <property>/environment/config/aloft/entry[1]/dewpoint-degC</property>
+   <property>/environment/config/aloft/entry[1]/dewpoint-degc</property>
   </input>
 
   <input>
@@ -452,7 +452,7 @@
    <y>0</y>
    <width>80</width>
    <height>25</height>
-   <property>/environment/config/aloft/entry[0]/dewpoint-degC</property>
+   <property>/environment/config/aloft/entry[0]/dewpoint-degc</property>
   </input>
 
   <input>
@@ -596,7 +596,7 @@
    <y>0</y>
    <width>80</width>
    <height>25</height>
-   <property>/environment/config/boundary/entry[2]/dewpoint-degC</property>
+   <property>/environment/config/boundary/entry[2]/dewpoint-degc</property>
   </input>
 
   <input>
@@ -672,7 +672,7 @@
    <y>0</y>
    <width>80</width>
    <height>25</height>
-   <property>/environment/config/boundary/entry[1]/dewpoint-degC</property>
+   <property>/environment/config/boundary/entry[1]/dewpoint-degc</property>
   </input>
 
   <input>
@@ -748,7 +748,7 @@
    <y>0</y>
    <width>80</width>
    <height>25</height>
-   <property>/environment/config/boundary/entry[0]/dewpoint-degC</property>
+   <property>/environment/config/boundary/entry[0]/dewpoint-degc</property>
   </input>
 
   <input>

@@ -18,7 +18,7 @@
     <call>reInit</call>
     </option>
    <option>
-    <seperator/>
+    <separator/>
    </option>
    <option>
     <name>strings/hi-res-snap-shot</name>
@@ -85,7 +85,7 @@
     <call>fgPresetAirspeed</call>
    </option>
    <option>
-    <seperator/>
+    <separator/>
    </option>
    <option>
     <name>strings/preset-commit</name>
@@ -130,7 +130,7 @@
     <call>NewAltitude</call>
    </option>
    <option>
-    <seperator/>
+    <separator/>
    </option>
    <option>
     <name>strings/add-waypoint</name>
@@ -145,7 +145,7 @@
     <call>ClearRoute</call>
    </option>
    <option>
-    <seperator/>
+    <separator/>
    </option>
    <option>
     <name>strings/adjust-ap-settings</name>

@@ -2,7 +2,7 @@ The generic communication protocol for FlightGear provides a powerfull way
 of adding a simple ASCII based output only protocol, just by defining an
 XML encoded configuration file.
 
-The definition of the protocol consists of variable seperators, line seperators,
+The definition of the protocol consists of variable separators, line separators,
 and chuncks of text.
 
 Each chunck defines:
@@ -23,14 +23,14 @@ Each chunck defines:
 		(for example, degrees Celsius to degrees Fahrenheit).
 
 
-The output section also could define the variable seperator and line seperator.
+The output section also could define the variable separator and line separator.
 
-The seperators can be either a control character such as a tab or newline, or a
+The separators can be either a control character such as a tab or newline, or a
 user specified string or other single charachter. The currently supported
 control charachters are:
 
-<var_seperator>:
-<line_seperator>:
+<var_separator>:
+<line_separator>:
 Name		Charachter
 
 newline		'\n'
@@ -41,7 +41,7 @@ verticaltab	'\v'
 
 any other charachters just need to be added to "Network/generic.cxx"
 
-The var_seperator is placed between each variable, while the line_seperator is
+The var_separator is placed between each variable, while the line_separator is
 placed at the end of each lot of variables.
 
 
@@ -55,8 +55,8 @@ following:
  <generic>
 
   <output>
-   <line_seperator>newline</line_seperator>
-   <var_seperator>newline</var_seperator>
+   <line_separator>newline</line_separator>
+   <var_separator>newline</var_separator>
 
    <chunk>
     <name>speed</name>

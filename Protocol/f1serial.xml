@@ -5,8 +5,8 @@
  <generic>
 
   <output>
-   <line_seperator>newline</line_seperator>
-   <var_seperator>newline</var_seperator>
+   <line_separator>newline</line_separator>
+   <var_separator>newline</var_separator>
 
    <chunk>
     <name>speed</name>

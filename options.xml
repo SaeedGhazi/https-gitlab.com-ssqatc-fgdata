@@ -633,7 +633,7 @@
     <name>start-date-lat</name>
     <arg>yyyy:mm:dd:hh:mm:ss</arg>
     <description>strings/start-date-desc</description>
-    <description>strings/locale-aricraft-time</description>
+    <description>strings/locale-aircraft-time</description>
    </option>
 
   </section>

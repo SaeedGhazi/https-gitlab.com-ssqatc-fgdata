@@ -29,9 +29,8 @@ October 23 2001 John Check, fgpanels@rockfish.net
    <path>Aircraft/c310/c310-mini-panel.xml</path>
   </panel_2>
 
-  <!-- you need to download this from the above website -->
   <model>
-   <path>Aircraft/c310/Models/cessna310r.ac</path>
+   <path>Aircraft/c310/Models/c310-dpm.xml</path>
    <heading-offset-deg>0</heading-offset-deg>
    <z-offset-m>-0.555</z-offset-m>
   </model> 

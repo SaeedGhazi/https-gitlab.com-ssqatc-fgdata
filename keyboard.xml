@@ -42,6 +42,15 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+<key n="18">
+  <name>Ctrl-R</name>
+  <desc>(Temporary) Toggle winding-ccw</desc>
+  <binding>
+    <command>property-toggle</command>
+    <property>/sim/temp/winding-ccw</property>
+  </binding>
+</key>
+
 <key n="20">
   <name>Ctrl-T</name>
   <desc>Toggle autopilot terrain lock.</desc>
@@ -361,6 +370,15 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+ <key n="87">
+  <name>W</name>
+  <desc>(Temporary) Toggle fullscreen for 3DFX only.</desc>
+  <binding>
+   <command>property-toggle</command>
+   <property>/sim/temp/full-screen</property>
+  </binding>
+ </key>
+
  <key n="88">
   <name>X</name>
   <desc>Increase field of view.</desc>
@@ -467,7 +485,6 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <property>/sim/freeze</property>
   </binding>
  </key>
-
 
  <key n="115">
   <name>s</name>
@@ -628,6 +645,17 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <command>property-toggle</command>
    <property>/sim/rendering/textures</property>
   </binding>
+ </key>
+
+ <key n="266">
+  <name>F10</name>
+  <mod-shift>
+   <binding>
+    <desc>Toggle FDM data logging.</desc>
+    <command>property-toggle</command>
+    <property>/sim/temp/fdm-data-logging</property>
+   </binding>
+  </mod-shift>
  </key>
 
  <key n="269">

@@ -441,6 +441,7 @@ Started September 2000 by David Megginson, david@megginson.com
   <params>
    <real-world-weather-fetch type="bool">false</real-world-weather-fetch>
    <control-fdm-atmosphere type="bool">false</control-fdm-atmosphere>
+   <contrail-altitude>30000</contrail-altitude>
   </params>
 
  </environment>

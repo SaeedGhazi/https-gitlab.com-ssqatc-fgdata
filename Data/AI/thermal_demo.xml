@@ -9,8 +9,9 @@
    <type>thermal</type>
    <latitude>37.61633</latitude>
    <longitude>-122.38334</longitude>
-   <strength-fps>8.33</strength-fps>
-   <diameter-ft>4000.0</diameter-ft>
+   <strength-fps>13.49</strength-fps>
+   <diameter-ft>4800.0</diameter-ft>
+   <height-msl>5000</height-msl>
   </entry>
 
  </scenario>

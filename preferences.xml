@@ -59,6 +59,7 @@ Started September 2000 by David Megginson, david@megginson.com
   <speed-up type="double">1.0</speed-up>
   <current-view>
     <field-of-view type="double">55.0</field-of-view>
+    <aspect-ratio-multiplier type="double">1.0</aspect-ratio-multiplier>
   </current-view>
   <panel>
    <path>Aircraft/Generic/Panels/generic-vfr-panel.xml</path>

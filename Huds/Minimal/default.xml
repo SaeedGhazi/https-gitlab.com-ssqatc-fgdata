@@ -38,6 +38,10 @@ in a separate file.
    <path>Huds/Instruments/Minimal/fgtbi.xml</path>
   </fgTBI>
 
+  <Gload>
+   <path>Huds/Instruments/Minimal/gload.xml</path>
+  </Gload>
+
  </instruments>
 
 </PropertyList>

@@ -82,8 +82,8 @@ Jan 28 2003
    <name>ON</name>
    <condition>
     <greater-than-equals>
-     <property>/instrumentation/turn-indicator/spin</property>
-     <value>0.7</value>
+     <property>/systems/electrical/outputs/turn-coordinator</property>
+     <value>1.0</value>
     </greater-than-equals>
    </condition>
    <w>56</w>

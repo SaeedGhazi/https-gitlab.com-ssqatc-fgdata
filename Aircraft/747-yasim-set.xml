@@ -1,20 +1,9 @@
 <?xml version="1.0"?>
-<!--
-************************************************************************
-Cessna 172 simulation config. This files ties together all the components
-used by FGFS to represent the C172. Components include the flight data 
-model, instrument panel, and external 3D model.
-3D models can be downloaded from http://home.t-online.de/home/Wolfram.Kuss/
-
-October 23 2001 John Check, fgpanels@rockfish.net
-************************************************************************
--->
-
 <PropertyList>
  <sim>
   <flight-model>yasim</flight-model>
   <aero>747</aero>
-  <fuel-fraction>1.0</fuel-fraction>
+  <fuel-fraction>0.5</fuel-fraction>
 
   <sound>
    <audible>true</audible>
@@ -22,19 +11,35 @@ October 23 2001 John Check, fgpanels@rockfish.net
   </sound>
 
   <panel>
-   <path>Aircraft/747/747-panel.xml</path>
+   <path>Aircraft/c310/c310-mini-panel.xml</path>
    <visibility>false</visibility>
   </panel>
-  <!--panel_2>
-   <path>Aircraft/747/747-mini-panel.xml</path>
-  </panel_2-->
+
   <hud>
-  <visibility>true</visibility>
+   <path>Huds/Custom/default.xml</path>
+   <visibility>true</visibility>
   </hud>
   
   <model>
-   <path>Aircraft/747/Models/boeing747-400-jw.ac</path>
+   <path>Aircraft/747/Models/boeing747-400-jw.xml</path>
   </model>
+
+  <view>
+   <internal archive="y">false</internal>
+   <config>
+     <!-- x/y/z == right/up/back -->
+     <x-offset-m archive="y">-1.0</x-offset-m>
+     <y-offset-m archive="y">3.5</y-offset-m>
+     <z-offset-m archive="y">-28</z-offset-m>
+   </config>
+  </view>
+  <view n="1">
+   <config>
+     <!-- big plane, so extend chase view offset a bit -->
+     <z-offset-m type="double" archive="y">-90.0</z-offset-m>
+   </config>
+   
+  </view>
  </sim>
 
  <autopilot>
@@ -51,6 +56,8 @@ October 23 2001 John Check, fgpanels@rockfish.net
  </autopilot>
 
 </PropertyList>
+
+
 
 
 

@@ -79,6 +79,7 @@ ap_button = func {
     setprop(Locks, "gs-hold", "off");
     setprop(Locks, "hdg-hold", "off");
     setprop(Locks, "nav-hold", "off");
+    setprop(Locks, "rev-hold", "off");
     setprop(Locks, "roll-axis", "trn");
     setprop(Locks, "roll-mode", "rol");
     setprop(Locks, "pitch-axis", "vs");
@@ -106,6 +107,7 @@ ap_button = func {
     setprop(Locks, "gs-hold", "off");
     setprop(Locks, "hdg-hold", "off");
     setprop(Locks, "nav-hold", "off");
+    setprop(Locks, "rev-hold", "off");
     setprop(Locks, "roll-axis", "off");
     setprop(Locks, "roll-mode", "off");
     setprop(Locks, "pitch-axis", "off");
@@ -120,16 +122,19 @@ ap_button = func {
     setprop(Annunciators, "hdg", "off");
     setprop(Annunciators, "nav", "off");
     setprop(Annunciators, "nav-arm", "off");
+    setprop(Annunciators, "apr", "off");
+    setprop(Annunciators, "apr-arm", "off");
+    setprop(Annunciators, "rev", "off");
+    setprop(Annunciators, "rev-arm", "off");
     setprop(Annunciators, "vs", "off");
     setprop(Annunciators, "vs-number", "off");
     setprop(Annunciators, "fpm", "off");
     setprop(Annunciators, "alt", "off");
     setprop(Annunciators, "apr", "off");
     setprop(Annunciators, "gs", "off");
+    setprop(Annunciators, "gs-arm", "off");
 
     flasher("ap", 1.0, 5, "off");
-
-    setprop(Internal, "ft", 0.1);
   }
 }
 
@@ -147,6 +152,7 @@ hdg_button = func {
   {
     setprop(Locks, "alt-hold", "off");
     setprop(Locks, "apr-hold", "off");
+    setprop(Locks, "rev-hold", "off");
     setprop(Locks, "gs-hold", "off");
     setprop(Locks, "hdg-hold", "hdg");
     setprop(Locks, "nav-hold", "off");
@@ -174,10 +180,12 @@ hdg_button = func {
   elsif (getprop(Locks, "roll-mode") == "rol" or
          getprop(Locks, "roll-mode") == "nav" or
 	 getprop(Locks, "roll-mode") == "nav-arm" or
-         getprop(Locks, "roll-mode") == "rev")
+         getprop(Locks, "roll-mode") == "rev" or
+         getprop(Locks, "roll-mode") == "rev-arm")
   {
     #setprop(Locks, "alt-hold", "off");
     setprop(Locks, "apr-hold", "off");
+    setprop(Locks, "rev-hold", "off");
     setprop(Locks, "gs-hold", "off");
     setprop(Locks, "hdg-hold", "hdg");
     setprop(Locks, "nav-hold", "off");
@@ -191,6 +199,7 @@ hdg_button = func {
     setprop(Annunciators, "hdg", "on");
     setprop(Annunciators, "nav", "off");
     setprop(Annunciators, "rol", "off");
+    setprop(Annunciators, "rev", "off");
 
     setprop(Settings, "target-intercept-angle", 0.0);
   }
@@ -204,6 +213,7 @@ hdg_button = func {
     setprop(Locks, "apr-hold", "off");
     setprop(Locks, "gs-hold", "off");
     setprop(Locks, "hdg-hold", "off");
+    setprop(Locks, "rev-hold", "off");
     setprop(Locks, "nav-hold", "off");
     setprop(Locks, "roll-axis", "trn");
     setprop(Locks, "roll-mode", "rol");
@@ -222,8 +232,10 @@ hdg_button = func {
   # If we are in APR mode we also have to change pitch mode.
   # TODO: Should we switch to VS or ALT mode? (currently VS)
   ##
-  elsif (getprop(Locks, "roll-mode") == "apr" and
-         getprop(Locks, "pitch-mode") == "gs")
+  elsif (getprop(Locks, "roll-mode") == "apr" or
+         getprop(Locks, "roll-mode") == "apr-arm" or
+         getprop(Locks, "pitch-mode") == "gs" or
+         getprop(Locks, "pitch-mode") == "gs-arm")
   {
     setprop(Locks, "alt-hold", "off");
     setprop(Locks, "apr-hold", "off");
@@ -236,10 +248,12 @@ hdg_button = func {
     setprop(Locks, "pitch-mode", "vs");
 
     setprop(Annunciators, "alt", "off");
-    setprop(Annunciators, "apr", "off");
-    setprop(Annunciators, "gs", "off");
     setprop(Annunciators, "hdg", "on");
     setprop(Annunciators, "nav", "off");
+    setprop(Annunciators, "apr", "off");
+    setprop(Annunciators, "apr-arm", "off");
+    setprop(Annunciators, "gs", "off");
+    setprop(Annunciators, "gs-arm", "off");
     setprop(Annunciators, "vs", "on");
     setprop(Annunciators, "vs-number", "on");
     setprop(Annunciators, "fpm", "on");
@@ -253,12 +267,17 @@ hdg_button = func {
 
 nav_button = func {
   #print("nav_button");
+
+  ##
+  # If we are in HDG mode we switch to the 45 degree angle intercept NAV mode
+  ##
   if (getprop(Locks, "roll-mode") == "hdg")
   {
     flasher("hdg", 0.5, 8, "off");
       
     setprop(Locks, "apr-hold", "off");
     setprop(Locks, "gs-hold", "off");
+    setprop(Locks, "rev-hold", "off");
     setprop(Locks, "hdg-hold", "hdg");
     setprop(Locks, "nav-hold", "off");
     setprop(Locks, "roll-axis", "trn");
@@ -266,12 +285,16 @@ nav_button = func {
 
     nav_arm_from_hdg();
   }
+  ##
+  # If we are in ROL mode we switch to the all angle intercept NAV mode.
+  ##
   elsif (getprop(Locks, "roll-mode") == "rol")
   {
     flasher("hdg", 0.5, 8, "off");
 
     setprop(Locks, "apr-hold", "off");
     setprop(Locks, "gs-hold", "off");
+    setprop(Locks, "rev-hold", "off");
     setprop(Locks, "hdg-hold", "off");
     setprop(Locks, "nav-hold", "off");
     setprop(Locks, "roll-axis", "trn");
@@ -279,26 +302,19 @@ nav_button = func {
 
     nav_arm_from_rol();
   }
-  elsif (getprop(Locks, "roll-mode") == "apr" and
-         getprop(Locks, "pitch-mode") == "gs")
-  {
-    setprop(Locks, "alt-hold", "off");
-    setprop(Locks, "apr-hold", "off");
-    setprop(Locks, "gs-hold", "off");
-    setprop(Locks, "hdg-hold", "hdg");
-    setprop(Locks, "nav-hold", "nav");
-    setprop(Locks, "roll-axis", "trn");
-    setprop(Locks, "roll-mode", "nav");
-    setprop(Locks, "pitch-axis", "vs");
-    setprop(Locks, "pitch-mode", "vs");
-
-    setprop(Settings, "target-pressure-rate", getprop(Internal,
-    "pressure-rate"));
-  }
+  ##
+  # TODO:
+  # NAV mode can only be armed if we are in HDG or ROL mode.
+  # Can anyone verify that this is correct?
+  ##
 }
 
 nav_arm_from_hdg = func
 {
+  ##
+  # Abort the NAV-ARM mode if something has changed the roll mode to something
+  # else than NAV-ARM.
+  ##
   if (getprop(Locks, "roll-mode") != "nav-arm")
   {
     setprop(Annunciators, "nav-arm", "off");
@@ -306,21 +322,33 @@ nav_arm_from_hdg = func
   }
 
   setprop(Annunciators, "nav-arm", "on");
+  ##
+  # Wait for the HDG annunciator flashing to finish.
+  ##
   if (flash_timer > -0.5)
   {
     print("flashing...");
     settimer(nav_arm_from_hdg, 2.5);
     return;
   }
-
+  ##
+  # Activate the nav-hold controller and check the needle deviation.
+  ##
   setprop(Locks, "nav-hold", "nav");
   deviation = getprop("/radios/nav/heading-needle-deflection");
+  ##
+  # If the deflection is more than 3 degrees wait 5 seconds and check again.
+  ##
   if (abs(deviation) > 3.0)
   {
     print("deviation");
     settimer(nav_arm_from_hdg, 5);
     return;
   }
+  ##
+  # If the deviation is less than 3 degrees turn of the NAV-ARM annunciator
+  # and show the NAV annunciator. End of NAV-ARM sequence.
+  ##
   elsif (abs(deviation) < 3.1)
   {
     print("capture");
@@ -331,12 +359,18 @@ nav_arm_from_hdg = func
 
 nav_arm_from_rol = func
 {
+  ##
+  # Abort the NAV-ARM mode if something has changed the roll mode to something
+  # else than NAV-ARM.
+  ##
   if (getprop(Locks, "roll-mode") != "nav-arm")
   {
     setprop(Annunciators, "nav-arm", "off");
     return;
   }
-
+  ##
+  # Wait for the HDG annunciator flashing to finish.
+  ##
   setprop(Annunciators, "nav-arm", "on");
   if (flash_timer > -0.5)
   {
@@ -345,17 +379,26 @@ nav_arm_from_rol = func
     settimer(nav_arm_from_rol, 2.5);
     return;
   }
-
+  ##
+  # Turn the ROL annunciator back on and activate the ROL mode.
+  ##
   setprop(Annunciators, "rol", "on");
   setprop(Locks, "roll-axis", "trn");
   setprop(Settings, "target-turn-rate", 0.0);
   deviation = getprop("/radios/nav/heading-needle-deflection");
+  ##
+  # If the deflection is more than 3 degrees wait 5 seconds and check again.
+  ##
   if (abs(deviation) > 3.0)
   {
     print("deviation");
     settimer(nav_arm_from_rol, 5);
     return;
   }
+  ##
+  # If the deviation is less than 3 degrees turn of the NAV-ARM annunciator
+  # and show the NAV annunciator. End of NAV-ARM sequence.
+  ##
   elsif (abs(deviation) < 3.1)
   {
     print("capture");
@@ -365,6 +408,7 @@ nav_arm_from_rol = func
 
     setprop(Locks, "apr-hold", "off");
     setprop(Locks, "gs-hold", "off");
+    setprop(Locks, "rev-hold", "off");
     setprop(Locks, "hdg-hold", "hdg");
     setprop(Locks, "nav-hold", "nav");
     setprop(Locks, "roll-axis", "trn");
@@ -374,37 +418,360 @@ nav_arm_from_rol = func
 
 apr_button = func {
   #print("apr_button");
-  if (getprop(Locks, "roll-mode") == "hdg" or
-      getprop(Locks, "roll-mode") == "rol" or
-      getprop(Locks, "roll-mode") == "rev" or
-      #getprop(Locks, "roll-mode") == "apr" or
-      getprop(Locks, "pitch-mode") == "nav")
+  ##
+  # If we are in HDG mode we switch to the 45 degree intercept angle APR mode
+  ##
+  if (getprop(Locks, "roll-mode") == "hdg")
   {
-    setprop(Locks, "alt-hold", "off");
+    flasher("hdg", 0.5, 8, "off");
+
+    #setprop(Locks, "alt-hold", "off");
     setprop(Locks, "apr-hold", "apr");
-    setprop(Locks, "gs-hold", "gs");
+    setprop(Locks, "gs-hold", "off");
+    setprop(Locks, "rev-hold", "off");
+    setprop(Locks, "hdg-hold", "hdg");
+    setprop(Locks, "nav-hold", "off");
+    setprop(Locks, "roll-axis", "trn");
+    setprop(Locks, "roll-mode", "apr-arm");
+    #setprop(Locks, "pitch-axis", "vs");
+    #setprop(Locks, "pitch-mode", "gs");
+
+    apr_arm_from_hdg();
+  }
+  elsif (getprop(Locks, "roll-mode") == "rol")
+  {
+    flasher("hdg", 0.5, 8, "off");
+
+    #setprop(Locks, "alt-hold", "off");
+    setprop(Locks, "apr-hold", "off");
+    setprop(Locks, "gs-hold", "off");
+    setprop(Locks, "rev-hold", "off");
     setprop(Locks, "hdg-hold", "off");
     setprop(Locks, "nav-hold", "off");
     setprop(Locks, "roll-axis", "trn");
-    setprop(Locks, "roll-mode", "apr");
-    setprop(Locks, "pitch-axis", "vs");
-    setprop(Locks, "pitch-mode", "gs");
+    setprop(Locks, "roll-mode", "apr-arm");
+    #setprop(Locks, "pitch-axis", "vs");
+    #setprop(Locks, "pitch-mode", "vs");
+
+    apr_arm_from_rol();
   }
-  elsif (getprop(Locks, "roll-mode") == "apr" and
-         getprop(Locks, "pitch-mode") == "gs")
+}
+
+apr_arm_from_hdg = func
+{
+  ##
+  # Abort the APR-ARM mode if something has changed the roll mode to something
+  # else than APR-ARM.
+  ##
+  if (getprop(Locks, "roll-mode") != "apr-arm")
   {
+    setprop(Annunciators, "apr-arm", "off");
+    return;
+  }
+
+  setprop(Annunciators, "apr-arm", "on");
+  ##
+  # Wait for the HDG annunciator flashing to finish.
+  ##
+  if (flash_timer > -0.5)
+  {
+    print("flashing...");
+    settimer(apr_arm_from_hdg, 2.5);
+    return;
+  }
+  ##
+  # Activate the apr-hold controller and check the needle deviation.
+  ##
+  setprop(Locks, "apr-hold", "apr");
+  deviation = getprop("/radios/nav/heading-needle-deflection");
+  ##
+  # If the deflection is more than 3 degrees wait 5 seconds and check again.
+  ##
+  if (abs(deviation) > 3.0)
+  {
+    print("deviation");
+    settimer(apr_arm_from_hdg, 5);
+    return;
+  }
+  ##
+  # If the deviation is less than 3 degrees turn of the APR-ARM annunciator
+  # and show the APR annunciator. End of APR-ARM sequence. Start the GS-ARM
+  # sequence.
+  ##
+  elsif (abs(deviation) < 3.1)
+  {
+    print("capture");
+    setprop(Annunciators, "apr-arm", "off");
+    setprop(Annunciators, "apr", "on");
+    setprop(Locks, "pitch-mode", "gs-arm");
+
+    gs_arm();
+  }
+}
+
+apr_arm_from_rol = func
+{
+  ##
+  # Abort the APR-ARM mode if something has changed the roll mode to something
+  # else than APR-ARM.
+  ##
+  if (getprop(Locks, "roll-mode") != "apr-arm")
+  {
+    setprop(Annunciators, "apr-arm", "off");
+    return;
+  }
+
+  setprop(Annunciators, "apr-arm", "on");
+  ##
+  # Wait for the HDG annunciator flashing to finish.
+  ##
+  if (flash_timer > -0.5)
+  {
+    print("flashing...");
+    setprop(Annunciators, "rol", "off");
+    settimer(apr_arm_from_rol, 2.5);
+    return;
+  }
+  ##
+  # Turn the ROL annunciator back on and activate the ROL mode.
+  ##
+  setprop(Annunciators, "rol", "on");
+  setprop(Locks, "roll-axis", "trn");
+  setprop(Settings, "target-turn-rate", 0.0);
+  deviation = getprop("/radios/nav/heading-needle-deflection");
+  ##
+  # If the deflection is more than 3 degrees wait 5 seconds and check again.
+  ##
+  if (abs(deviation) > 3.0)
+  {
+    print("deviation");
+    settimer(apr_arm_from_rol, 5);
+    return;
+  }
+  ##
+  # If the deviation is less than 3 degrees turn of the APR-ARM annunciator
+  # and show the APR annunciator. End of APR-ARM sequence. Start the GS-ARM
+  # sequence.
+  ##
+  elsif (abs(deviation) < 3.1)
+  {
+    print("capture");
+    setprop(Annunciators, "rol", "off");
+    setprop(Annunciators, "apr-arm", "off");
+    setprop(Annunciators, "apr", "on");
+
+    setprop(Locks, "apr-hold", "apr");
+    setprop(Locks, "gs-hold", "off");
+    setprop(Locks, "rev-hold", "off");
+    setprop(Locks, "hdg-hold", "hdg");
+    setprop(Locks, "nav-hold", "off");
+    setprop(Locks, "roll-axis", "trn");
+    setprop(Locks, "roll-mode", "apr");
+    setprop(Locks, "pitch-mode", "gs-arm");
+
+    gs_arm();
+  }
+}
+
+
+gs_arm = func {
+  ##
+  # Abort the GS-ARM mode if something has changed the pitch mode to something
+  # else than GS-ARM.
+  ##
+  if (getprop(Locks, "pitch-mode") != "gs-arm")
+  {
+    setprop(Annunciators, "gs-arm", "off");
+    return;
+  }
+
+  setprop(Annunciators, "gs-arm", "on");
+
+  deviation = getprop("/radios/nav/gs-needle-deflection");
+  ##
+  # If the deflection is more than 1 degrees wait 5 seconds and check again.
+  ##
+  if (abs(deviation) > 1.0)
+  {
+    print("deviation");
+    settimer(gs_arm, 5);
+    return;
+  }
+  ##
+  # If the deviation is less than 3 degrees turn off the GS-ARM annunciator
+  # and show the GS annunciator. Activate the GS pitch mode.
+  ##
+  elsif (abs(deviation) < 3.1)
+  {
+    print("capture");
+    setprop(Annunciators, "alt", "off");
+    setprop(Annunciators, "vs", "off");
+    setprop(Annunciators, "vs-number", "off");
+    setprop(Annunciators, "fpm", "off");
+    setprop(Annunciators, "gs-arm", "off");
+    setprop(Annunciators, "gs", "on");
+
     setprop(Locks, "alt-hold", "off");
+    setprop(Locks, "gs-hold", "gs");
+    setprop(Locks, "pitch-mode", "gs");
+    #setprop(Locks, "hdg-hold", "hdg");
+    #setprop(Locks, "nav-hold", "off");
+    #setprop(Locks, "roll-axis", "trn");
+    #setprop(Locks, "roll-mode", "apr");
+  }
+
+}
+
+
+rev_button = func {
+  #print("rev_button");
+  ##
+  # If we are in HDG mode we switch to the 45 degree intercept angle REV mode
+  ##
+  if (getprop(Locks, "roll-mode") == "hdg")
+  {
+    flasher("hdg", 0.5, 8, "off");
+
+    #setprop(Locks, "alt-hold", "off");
     setprop(Locks, "apr-hold", "off");
     setprop(Locks, "gs-hold", "off");
+    setprop(Locks, "rev-hold", "off");
     setprop(Locks, "hdg-hold", "hdg");
-    setprop(Locks, "nav-hold", "nav");
+    setprop(Locks, "nav-hold", "off");
     setprop(Locks, "roll-axis", "trn");
-    setprop(Locks, "roll-mode", "nav");
-    setprop(Locks, "pitch-axis", "vs");
-    setprop(Locks, "pitch-mode", "vs");
+    setprop(Locks, "roll-mode", "rev-arm");
+    #setprop(Locks, "pitch-axis", "vs");
+    #setprop(Locks, "pitch-mode", "gs");
 
-    setprop(Settings, "target-pressure-rate", getprop(Internal,
-    "pressure-rate"));
+    rev_arm_from_hdg();
+  }
+  elsif (getprop(Locks, "roll-mode") == "rol")
+  {
+    flasher("hdg", 0.5, 8, "off");
+
+    #setprop(Locks, "alt-hold", "off");
+    setprop(Locks, "apr-hold", "off");
+    setprop(Locks, "gs-hold", "off");
+    setprop(Locks, "rev-hold", "off");
+    setprop(Locks, "hdg-hold", "off");
+    setprop(Locks, "nav-hold", "off");
+    setprop(Locks, "roll-axis", "trn");
+    setprop(Locks, "roll-mode", "rev-arm");
+    #setprop(Locks, "pitch-axis", "vs");
+    #setprop(Locks, "pitch-mode", "vs");
+
+    rev_arm_from_rol();
+  }
+}
+
+
+rev_arm_from_hdg = func
+{
+  ##
+  # Abort the REV-ARM mode if something has changed the roll mode to something
+  # else than REV-ARM.
+  ##
+  if (getprop(Locks, "roll-mode") != "rev-arm")
+  {
+    setprop(Annunciators, "rev-arm", "off");
+    return;
+  }
+
+  setprop(Annunciators, "rev-arm", "on");
+  ##
+  # Wait for the HDG annunciator flashing to finish.
+  ##
+  if (flash_timer > -0.5)
+  {
+    print("flashing...");
+    settimer(rev_arm_from_hdg, 2.5);
+    return;
+  }
+  ##
+  # Activate the rev-hold controller and check the needle deviation.
+  ##
+  setprop(Locks, "rev-hold", "rev");
+  deviation = getprop("/radios/nav/heading-needle-deflection");
+  ##
+  # If the deflection is more than 3 degrees wait 5 seconds and check again.
+  ##
+  if (abs(deviation) > 3.0)
+  {
+    print("deviation");
+    settimer(rev_arm_from_hdg, 5);
+    return;
+  }
+  ##
+  # If the deviation is less than 3 degrees turn of the REV-ARM annunciator
+  # and show the REV annunciator. End of REV-ARM sequence.
+  ##
+  elsif (abs(deviation) < 3.1)
+  {
+    print("capture");
+    setprop(Annunciators, "rev-arm", "off");
+    setprop(Annunciators, "rev", "on");
+  }
+}
+
+
+rev_arm_from_rol = func
+{
+  ##
+  # Abort the REV-ARM mode if something has changed the roll mode to something
+  # else than REV-ARM.
+  ##
+  if (getprop(Locks, "roll-mode") != "rev-arm")
+  {
+    setprop(Annunciators, "rev-arm", "off");
+    return;
+  }
+
+  setprop(Annunciators, "rev-arm", "on");
+  ##
+  # Wait for the HDG annunciator flashing to finish.
+  ##
+  if (flash_timer > -0.5)
+  {
+    print("flashing...");
+    setprop(Annunciators, "rol", "off");
+    settimer(rev_arm_from_rol, 2.5);
+    return;
+  }
+  ##
+  # Turn the ROL annunciator back on and activate the ROL mode.
+  ##
+  setprop(Annunciators, "rol", "on");
+  setprop(Locks, "roll-axis", "trn");
+  setprop(Settings, "target-turn-rate", 0.0);
+  deviation = getprop("/radios/nav/heading-needle-deflection");
+  ##
+  # If the deflection is more than 3 degrees wait 5 seconds and check again.
+  ##
+  if (abs(deviation) > 3.0)
+  {
+    print("deviation");
+    settimer(rev_arm_from_rol, 5);
+    return;
+  }
+  ##
+  # If the deviation is less than 3 degrees turn of the REV-ARM annunciator
+  # and show the REV annunciator. End of REV-ARM sequence.
+  ##
+  elsif (abs(deviation) < 3.1)
+  {
+    print("capture");
+    setprop(Annunciators, "rol", "off");
+    setprop(Annunciators, "rev-arm", "off");
+    setprop(Annunciators, "rev", "on");
+
+    setprop(Locks, "apr-hold", "off");
+    setprop(Locks, "gs-hold", "off");
+    setprop(Locks, "rev-hold", "rev");
+    setprop(Locks, "hdg-hold", "hdg");
+    setprop(Locks, "nav-hold", "off");
+    setprop(Locks, "roll-axis", "trn");
+    setprop(Locks, "roll-mode", "rev");
+    #setprop(Locks, "pitch-mode", "gs-arm");
   }
 }
 

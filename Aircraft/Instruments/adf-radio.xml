@@ -32,8 +32,8 @@ properties' values.
 <params>
   <adf-freq-selected-prop>/radios/kr-87/outputs/selected-khz</adf-freq-selected-prop>
   <adf-freq-standby-prop>/radios/kr-87/outputs/standby-khz</adf-freq-standby-prop>
-  <adf-morse-id-volume-prop>/radios/kr-87/inputs/on-off-volume</adf-morse-id-volume-prop>
-  <adf-morse-ident-toggle-prop>/radios/kr-87/internal/ident</adf-morse-ident-toggle-prop>
+  <adf-morse-id-volume-prop>/radios/kr-87/inputs/volume</adf-morse-id-volume-prop>
+  <adf-morse-ident-toggle-prop>/radios/kr-87/inputs/ident-btn</adf-morse-ident-toggle-prop>
 </params>
 
  <layers>
@@ -200,7 +200,7 @@ properties' values.
     </transformation>
     <transformation>
      <type>rotation</type>
-     <property>/radios/kr-87/inputs/on-off-volume</property>
+     <property>/radios/kr-87/inputs/volume</property>
      <min>0</min>
      <max>2</max>
      <scale>140</scale>
@@ -377,7 +377,7 @@ properties' values.
   </action>
  
   <action>
-   <name>ident volume on/off</name>
+   <name>ident volume</name>
    <button>0</button>
    <x>37</x>
    <y>-30</y>

@@ -111,10 +111,10 @@ properties' values.
   <layer>
    <name>Selected FRQ display</name>
    <condition>
-    <greater-than>
-     <property>/radios/kr-87/inputs/on-off-volume</property>
-     <value>0.0</value>
-    </greater-than>
+    <equals>
+     <property>/radios/kr-87/inputs/power-btn</property>
+     <value>true</value>
+    </equals>
    </condition>
    <type>text</type>
    <font>led</font>
@@ -251,10 +251,10 @@ properties' values.
   <layer>
    <name>Flight Timer display</name>
    <condition>
-    <greater-than>
-     <property>/radios/kr-87/inputs/on-off-volume</property>
-     <value>0.0</value>
-    </greater-than>
+    <equals>
+     <property>/radios/kr-87/inputs/power-btn</property>
+     <value>true</value>
+    </equals>
     <equals>
     <property>/radios/kr-87/modes/stby</property>
     <value>1</value>
@@ -293,10 +293,10 @@ properties' values.
   <layer>
    <name>Elapsed Timer display</name>
    <condition>
-    <greater-than>
-     <property>/radios/kr-87/inputs/on-off-volume</property>
-     <value>0.0</value>
-    </greater-than>
+    <equals>
+     <property>/radios/kr-87/inputs/power-btn</property>
+     <value>true</value>
+    </equals>
     <equals>
     <property>/radios/kr-87/modes/stby</property>
     <value>1</value>
@@ -464,7 +464,7 @@ properties' values.
     </transformation>
     <transformation>
      <type>rotation</type>
-     <property>/radios/kr-87/inputs/on-off-volume</property>
+     <property>/radios/kr-87/inputs/volume</property>
      <min>0</min>
      <max>2</max>
      <scale>140</scale>
@@ -886,7 +886,7 @@ properties' values.
    <h>16</h>
    <binding>
     <command>property-adjust</command>
-    <property>/radios/kr-87/inputs/on-off-volume</property>
+    <property>/radios/kr-87/inputs/volume</property>
     <step>0.5</step>
     <min>0</min>
     <max>2</max>
@@ -901,7 +901,7 @@ properties' values.
    <h>8</h>
    <binding>
     <command>property-adjust</command>
-    <property>/radios/kr-87/inputs/on-off-volume</property>
+    <property>/radios/kr-87/inputs/volume</property>
     <step>-0.5</step>
     <min>0</min>
     <max>2</max>

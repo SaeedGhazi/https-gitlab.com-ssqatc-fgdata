@@ -92,6 +92,14 @@
   </item>
 
   <item>
+   <label>Rendering options</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>rendering</dialog-name>
+   </binding>
+  </item>
+
+  <item>
    <label>Adjust View Distance</label>
    <binding>
     <command>old-pilot-offset-dialog</command>

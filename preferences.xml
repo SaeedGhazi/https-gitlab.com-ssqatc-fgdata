@@ -187,6 +187,35 @@ Started September 2000 by David Megginson, david@megginson.com
   <pressure-sea-level-inhg type="double">28.5</pressure-sea-level-inhg>
   <density-sea-level-slugft3 type="double">0.00237</density-sea-level-slugft3>
   <wind-from-heading-deg type="double">270</wind-from-heading-deg>
+  <clouds>
+   <status>true</status>
+   <layer n="0">
+    <type>mostly-sunny</type>
+    <elevation-ft>5000</elevation-ft>
+    <thickness-ft>600</thickness-ft>
+    <transition-ft>150</transition-ft>
+    <span-m>40000</span-m>
+   </layer>
+   <layer n="1">
+    <type>cirrus</type>
+    <elevation-ft>19500</elevation-ft>
+    <thickness-ft>65</thickness-ft>
+    <transition-ft>25</transition-ft>
+    <span-m>40000</span-m>
+   </layer>
+   <layer n="2">
+    <type>clear</type>
+    <span-m>40000</span-m>
+   </layer>
+   <layer n="3">
+    <type>clear</type>
+    <span-m>40000</span-m>
+   </layer>
+   <layer n="4">
+    <type>clear</type>
+    <span-m>40000</span-m>
+   </layer>
+  </clouds>
   <params>
    <control-fdm-atmosphere type="bool">false</control-fdm-atmosphere>
    <base-wind-speed-kt type="double">0</base-wind-speed-kt>

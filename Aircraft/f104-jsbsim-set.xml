@@ -20,6 +20,10 @@
    <path>Aircraft/a4/a4-sound.xml</path>
   </sound>
 
+  <model>
+   <path>Aircraft/f104/Models/f104.ac</path>
+  </model>
+
  </sim>
 
 </PropertyList>

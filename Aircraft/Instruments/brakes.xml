@@ -16,7 +16,7 @@
    <type>switch</type>
     <layer>
      <condition>
-      <property>/controls[0]/parking-brake</property> <!-- nose brake -->
+      <property>/controls/gear/parking-brake</property> <!-- parking brake -->
      </condition>
      <name>on</name>
      <texture>
@@ -73,7 +73,7 @@
    <h>26</h>
    <binding>
     <command>property-toggle</command>
-    <property>/controls/parking-brake</property>
+    <property>/controls/gear/parking-brake</property>
    </binding>
   </action>
  </actions>

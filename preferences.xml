@@ -32,7 +32,6 @@ Started September 2000 by David Megginson, david@megginson.com
   </startup>
   <rendering>
    <random-objects>true</random-objects>
-   <draw-otw>true</draw-otw>
   </rendering>
   <model-hz type="int">120</model-hz>
   <sound>
@@ -279,62 +278,84 @@ Started September 2000 by David Megginson, david@megginson.com
   </params>
  </environment>
 
-
- <!-- Controls -->
-
  <controls>
+  <flight>
+   <aileron type="double">0.0</aileron>
+   <aileron-trim type="double">0.0</aileron-trim>
+   <elevator type="double">0.0</elevator>
+   <elevator-trim type="double">0.0</elevator-trim>
+   <rudder type="double">0.0</rudder>
+   <rudder-trim type="double">0.0</rudder-trim>
+   <flaps type="double">0.0</flaps>
+  </flight>
+ 
+  <engines>
+   <engine n="0">
+    <starter type="bool">false</starter>
+    <magnetos type="int">0</magnetos>
+    <throttle type="double">0.0</throttle>
+    <mixture type="double">1.0</mixture>
+    <propeller-pitch type="double">1.0</propeller-pitch>
+   </engine>
+   <engine n="1">
+    <starter type="bool">false</starter>
+    <magnetos type="int">0</magnetos>
+    <throttle type="double">0.0</throttle>
+    <mixture type="double">1.0</mixture>
+    <propeller-pitch type="double">1.0</propeller-pitch>
+   </engine>
+   <engine n="2">
+    <starter type="bool">false</starter>
+    <magnetos type="int">0</magnetos>
+    <throttle type="double">0.0</throttle>
+    <mixture type="double">1.0</mixture>
+    <propeller-pitch type="double">1.0</propeller-pitch>
+   </engine>
+   <engine n="3">
+    <starter type="bool">false</starter>
+    <magnetos type="int">0</magnetos>
+    <throttle type="double">0.0</throttle>
+    <mixture type="double">1.0</mixture>
+    <propeller-pitch type="double">1.0</propeller-pitch>
+   </engine>
+  </engines>
 
-  <aileron type="double">0.0</aileron>
-  <aileron-trim type="double">0.0</aileron-trim>
+  <gear>
+   <wheel n="0">
+    <brake type="double">0.0</brake>
+   </wheel>
+   <wheel n="1">
+    <brake type="double">0.0</brake>
+   </wheel>
+   <wheel n="2">
+    <brake type="double">0.0</brake>
+   </wheel>
+   <gear-down type="bool">true</gear-down>
+  </gear>
 
-  <elevator type="double">0.0</elevator>
-  <elevator-trim type="double">0.0</elevator-trim>
-
-  <rudder type="double">0.0</rudder>
-  <rudder-trim type="double">0.0</rudder-trim>
-
-  <flaps type="double">0.0</flaps>
-
-  <starter n="0" type="bool">false</starter>
-  <magnetos n="0" type="int">0</magnetos>
-  <throttle n="0" type="double">0.0</throttle>
-  <mixture n="0" type="double">1.0</mixture>
-  <propeller-pitch n="0" type="double">1.0</propeller-pitch>
-  <carb-heat n="0" type="double">0.0</carb-heat>
-
-  <starter n="1" type="bool">false</starter>
-  <magnetos n="1" type="int">0</magnetos>
-  <throttle n="1" type="double">0.0</throttle>
-  <mixture n="1" type="double">1.0</mixture>
-  <propeller-pitch n="1" type="double">1.0</propeller-pitch>
-
-  <starter n="2" type="bool">false</starter>
-  <magnetos n="2" type="int">0</magnetos>
-  <throttle n="2" type="double">0.0</throttle>
-  <mixture n="2" type="double">1.0</mixture>
-  <propeller-pitch n="2" type="double">1.0</propeller-pitch>
-
-  <starter n="3" type="bool">false</starter>
-  <magnetos n="3" type="int">0</magnetos>
-  <throttle n="3" type="double">0.0</throttle>
-  <mixture n="3" type="double">1.0</mixture>
-  <propeller-pitch n="3" type="double">1.0</propeller-pitch>
-
-  <brakes n="0" type="double">0.0</brakes>
-  <brakes n="1" type="double">0.0</brakes>
-  <brakes n="2" type="double">0.0</brakes>
-
-  <gear-down type="double">1.0</gear-down>
-
-  <lights>
-   <taxi type="bool">false</taxi>
-   <landing type="bool">false</landing>
-   <navigation type="bool">false</navigation>
+  <lighting>
+   <taxi-light type="bool">true</taxi-light>
+   <landing-lights type="bool">true</landing-lights>
+   <nav-lights type="bool">true</nav-lights>
    <beacon type="bool">true</beacon>
-   <strobes type="bool">false</strobes>
-  </lights>
-
-  <pitot-heat type="bool">false</pitot-heat>
+   <strobe type="bool">false</strobe>
+  </lighting>
+ 
+  <anti-ice>
+   <pitot-heat type="bool">false</pitot-heat>
+   <engine n="0">
+    <carb-heat type="bool">false</carb-heat>
+   </engine>
+   <engine n="1">
+    <carb-heat type="bool">false</carb-heat>
+   </engine>
+   <engine n="2">
+    <carb-heat type="bool">false</carb-heat>
+   </engine>
+   <engine n="3">
+    <carb-heat type="bool">false</carb-heat>
+   </engine>
+  </anti-ice>
 
  </controls>
 
@@ -434,7 +455,7 @@ Started September 2000 by David Megginson, david@megginson.com
   <heading-indicator>
    <serviceable type="bool" archive="y">true</serviceable>
    <spin type="double" archive="y">0.0</spin>
-   <offset-deg type="double" archive="y">4.5</offset-deg> <!-- just for fun -->
+   <offset-deg type="double" archive="y">4.5</offset-deg>  <!-- just for fun -->
   </heading-indicator>
   <vertical-speed-indicator>
    <serviceable type="bool" archive="y">true</serviceable>

@@ -38,11 +38,11 @@ Lee Elliott
  <h-base>70</h-base>
 
  <params>
-  <engine0-throttle-select>/controls/throttle[0]</engine0-throttle-select>
-  <engine1-throttle-select>/controls/throttle[1]</engine1-throttle-select>
-  <flaps-select>/controls/flaps</flaps-select>
-  <engine0-reheat-select>/controls/afterburner[0]</engine0-reheat-select>
-  <engine1-reheat-select>/controls/afterburner[1]</engine1-reheat-select>
+  <engine0-throttle-select>/controls/engines/engine[0]/throttle</engine0-throttle-select>
+  <engine1-throttle-select>/controls/engines/engine[1]/throttle</engine1-throttle-select>
+  <flaps-select>/controls/flight/flaps</flaps-select>
+  <engine0-reheat-select>/controls/engines/engine[0]/augmentation</engine0-reheat-select>
+  <engine1-reheat-select>/controls/engines/engine[1]/augmentation</engine1-reheat-select>
  </params>
 
  <layers>

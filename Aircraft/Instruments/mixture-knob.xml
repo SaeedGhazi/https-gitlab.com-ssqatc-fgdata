@@ -29,7 +29,7 @@ properties' values.
  <w-base>64</w-base>
  <h-base>72</h-base>
  <params> 
-  <engine-mixture-select>/controls/mixture[0]</engine-mixture-select>
+  <engine-mixture-select>/controls/engines/engine[0]/mixture</engine-mixture-select>
  </params>
  <layers>
   <layer>

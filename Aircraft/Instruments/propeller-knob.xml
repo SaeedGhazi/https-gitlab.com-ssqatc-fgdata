@@ -13,7 +13,7 @@ Started Winter 2002 by David Megginson, david@megginson.com.
  <h-base>72</h-base>
 
  <params>
-  <engine-propeller-select>/controls/propeller-pitch[0]</engine-propeller-select>
+  <engine-propeller-select>/controls/engines/engine[0]/propeller-pitch</engine-propeller-select>
  </params>
  
  <layers>

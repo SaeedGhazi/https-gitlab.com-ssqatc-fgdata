@@ -34,7 +34,7 @@ Hacked to create a single throttle quadrant.
  <h-base>70</h-base>
 
  <params>
-  <engine-throttle-select>/controls/throttle[0]</engine-throttle-select>
+  <engine-throttle-select>/controls/engines/engine[0]/throttle</engine-throttle-select>
  </params>
 
  <layers>

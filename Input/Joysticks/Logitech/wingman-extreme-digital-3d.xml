@@ -31,7 +31,7 @@
   <desc>Aileron</desc>
   <binding>
    <command>property-scale</command>
-   <property>/controls/aileron</property>
+   <property>/controls/flight/aileron</property>
    <squared>true</squared>
   </binding>
  </axis>
@@ -40,7 +40,7 @@
   <desc>Elevator</desc>
   <binding>
    <command>property-scale</command>
-   <property>/controls/elevator</property>
+   <property>/controls/flight/elevator</property>
    <factor type="double">-1.0</factor>
    <squared>true</squared>
   </binding>
@@ -49,7 +49,7 @@
  <axis n="2">
   <binding>
    <command>property-scale</command>
-   <property>/controls/rudder</property>
+   <property>/controls/flight/rudder</property>
    <squared>true</squared>
   </binding>
  </axis>
@@ -58,13 +58,13 @@
   <desc>Throttle</desc>
   <binding>
    <command>property-scale</command>
-   <property>/controls/throttle[0]</property>
+   <property>/controls/engines/engine[0]/throttle</property>
    <offset type="double">-1.0</offset>
    <factor type="double">-0.5</factor>
   </binding>
   <binding>
    <command>property-scale</command>
-   <property>/controls/throttle[1]</property>
+   <property>/controls/engines/engine[1]/throttle</property>
    <offset type="double">-1.0</offset>
    <factor type="double">-0.5</factor>
   </binding>
@@ -90,33 +90,33 @@
   <desc>Brakes</desc>
   <binding>
    <command>property-assign</command>
-   <property>/controls/brakes[0]</property>
+   <property>/controls/gear/wheel[0]/brake</property>
    <value type="double">1.0</value>
   </binding>
   <binding>
    <command>property-assign</command>
-   <property>/controls/brakes[1]</property>
+   <property>/controls/gear/wheel[1]/brake</property>
    <value type="double">1.0</value>
   </binding>
   <binding>
    <command>property-assign</command>
-   <property>/controls/brakes[2]</property>
+   <property>/controls/gear/wheel[2]/brake</property>
    <value type="double">1.0</value>
   </binding>
   <mod-up>
    <binding>
     <command>property-assign</command>
-    <property>/controls/brakes[0]</property>
+    <property>/controls/gear/wheel[0]/brake</property>
     <value type="double">0.0</value>
    </binding>
    <binding>
     <command>property-assign</command>
-    <property>/controls/brakes[1]</property>
+    <property>/controls/gear/wheel[1]/brake</property>
     <value type="double">0.0</value>
    </binding>
    <binding>
     <command>property-assign</command>
-    <property>/controls/brakes[2]</property>
+    <property>/controls/gear/wheel[2]/brake</property>
     <value type="double">0.0</value>
    </binding>
   </mod-up>
@@ -126,7 +126,7 @@
   <repeatable>true</repeatable>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/elevator-trim</property>
+   <property>/controls/flight/elevator-trim</property>
    <step>0.001</step>
   </binding>
  </button>
@@ -135,7 +135,7 @@
   <repeatable>true</repeatable>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/elevator-trim</property>
+   <property>/controls/flight/elevator-trim</property>
    <step>-0.001</step>
   </binding>
  </button>
@@ -144,8 +144,8 @@
   <repeatable>true</repeatable>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/mixture[0]</property>
-   <property>/controls/mixture[1]</property>
+   <property>/controls/engines/engine[0]/mixture</property>
+   <property>/controls/engines/engine[1]/mixture</property>
    <step>0.01</step>
   </binding>
  </button>
@@ -154,8 +154,8 @@
   <repeatable>true</repeatable>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/mixture[0]</property>
-   <property>/controls/mixture[1]</property>
+   <property>/controls/engines/engine[0]/mixture</property>
+   <property>/controls/engines/engine[1]/mixture</property>
    <step>-0.01</step>
   </binding>
  </button>
@@ -163,13 +163,13 @@
  <button n="5">
   <binding>
    <command>property-assign</command>
-   <property>/controls/brakes[0]</property>
+   <property>/controls/wheel[0]/brake</property>
    <value type="double">1.0</value>
   </binding>
   <mod-up>
    <binding>
     <command>property-assign</command>
-    <property>/controls/brakes[0]</property>
+    <property>/controls/wheel[0]/brake</property>
     <value type="double">0.0</value>
    </binding>
   </mod-up>
@@ -178,13 +178,13 @@
  <button n="6">
   <binding>
    <command>property-assign</command>
-   <property>/controls/brakes[1]</property>
+   <property>/controls/wheel[0]/brake</property>
    <value type="double">1.0</value>
   </binding>
   <mod-up>
    <binding>
     <command>property-assign</command>
-    <property>/controls/brakes[1]</property>
+    <property>/controls/wheel[0]/brake</property>
     <value type="double">0.0</value>
    </binding>
   </mod-up>

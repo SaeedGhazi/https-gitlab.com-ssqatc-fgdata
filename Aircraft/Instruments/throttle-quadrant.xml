@@ -29,12 +29,12 @@ properties' values.
  <h-base>70</h-base>
 
  <params>
-  <engine-throttle0-select>/controls/throttle[0]</engine-throttle0-select>
-  <engine-throttle1-select>/controls/throttle[1]</engine-throttle1-select>
-  <prop-advance0-select>/controls/propeller-pitch[0]</prop-advance0-select>
-  <prop-advance1-select>/controls/propeller-pitch[1]</prop-advance1-select>
-  <engine-mixture0-select>/controls/mixture[0]</engine-mixture0-select>
-  <engine-mixture1-select>/controls/mixture[1]</engine-mixture1-select>
+  <engine-throttle0-select>/controls/engines/engine[0]/throttle</engine-throttle0-select>
+  <engine-throttle1-select>/controls/engines/engine[1]/throttle</engine-throttle1-select>
+  <prop-advance0-select>/controls/engines/engine[0]/propeller-pitch</prop-advance0-select>
+  <prop-advance1-select>/controls/engines/engine[1]/propeller-pitch</prop-advance1-select>
+  <engine-mixture0-select>/controls/engines/engine[0]/mixture</engine-mixture0-select>
+  <engine-mixture1-select>/controls/engines/engine[1]/mixture</engine-mixture1-select>
  </params>
 
  <layers>

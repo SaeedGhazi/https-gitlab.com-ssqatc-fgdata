@@ -22,7 +22,7 @@
  <axis n="0">
   <binding>
    <command>property-scale</command>
-   <property>/controls/brakes[0]</property>
+   <property>/controls/gear/wheel[0]/brake</property>
    <offset>1.0</offset>
    <factor>0.5</factor>
   </binding>
@@ -31,7 +31,7 @@
  <axis n="1">
   <binding>
    <command>property-scale</command>
-   <property>/controls/brakes[1]</property>
+   <property>/controls/gear/wheel[1]/brake</property>
    <offset>1.0</offset>
    <factor>0.5</factor>
   </binding>
@@ -40,10 +40,9 @@
  <axis n="2">
   <binding>
    <command>property-scale</command>
-   <property>/controls/rudder</property>
+   <property>/controls/flight/rudder</property>
    <factor>1.0</factor>
    <offset>0.0</offset>
-   <power>2.0</power>
   </binding>
  </axis>
 

@@ -43,7 +43,7 @@ The current mode for each mouse is held in the
    <button n="3">
     <binding>
      <command>property-adjust</command>
-     <property>/controls/elevator-trim</property>
+     <property>/controls/flight/elevator-trim</property>
      <step type="double">0.002</step>
     </binding>
    </button>
@@ -51,7 +51,7 @@ The current mode for each mouse is held in the
    <button n="4">
     <binding>
      <command>property-adjust</command>
-     <property>/controls/elevator-trim</property>
+     <property>/controls/flight/elevator-trim</property>
      <step type="double">-0.002</step>
     </binding>
    </button>
@@ -76,7 +76,7 @@ The current mode for each mouse is held in the
    <button n="3">
     <binding>
      <command>property-adjust</command>
-     <property>/controls/elevator-trim</property>
+     <property>/controls/flight/elevator-trim</property>
      <step type="double">0.01</step>
     </binding>
    </button>
@@ -84,7 +84,7 @@ The current mode for each mouse is held in the
    <button n="4">
     <binding>
      <command>property-adjust</command>
-     <property>/controls/elevator-trim</property>
+     <property>/controls/flight/elevator-trim</property>
      <step type="double">-0.01</step>
     </binding>
    </button>
@@ -105,7 +105,7 @@ The current mode for each mouse is held in the
       </and>
      </condition>
      <command>property-adjust</command>
-     <property>/controls/aileron</property>
+     <property>/controls/flight/aileron</property>
      <factor type="double">4.0</factor>
      <min type="double">-1.0</min>
      <max type="double">1.0</max>
@@ -123,7 +123,7 @@ The current mode for each mouse is held in the
       </and>
      </condition>
      <command>property-adjust</command>
-     <property>/controls/rudder</property>
+     <property>/controls/flight/rudder</property>
      <factor type="double">4.0</factor>
      <min type="double">-1.0</min>
      <max type="double">1.0</max>
@@ -148,7 +148,7 @@ The current mode for each mouse is held in the
       </and>
      </condition>
      <command>property-adjust</command>
-     <property>/controls/elevator</property>
+     <property>/controls/flight/elevator</property>
      <factor type="double">-4.0</factor>
      <min type="double">-1.0</min>
      <max type="double">1.0</max>
@@ -166,7 +166,7 @@ The current mode for each mouse is held in the
       </and>
      </condition>
      <command>property-adjust</command>
-     <property>/controls/throttle</property>
+     <property>/controls/engines/engine/throttle</property>
      <factor type="double">-4.0</factor>
      <min type="double">0.0</min>
      <max type="double">1.0</max>
@@ -210,7 +210,7 @@ The current mode for each mouse is held in the
    <button n="3">
     <binding>
      <command>property-adjust</command>
-     <property>/controls/elevator-trim</property>
+     <property>/controls/flight/elevator-trim</property>
      <step type="double">0.01</step>
     </binding>
    </button>
@@ -218,7 +218,7 @@ The current mode for each mouse is held in the
    <button n="4">
     <binding>
      <command>property-adjust</command>
-     <property>/controls/elevator-trim</property>
+     <property>/controls/flight/elevator-trim</property>
      <step type="double">-0.01</step>
     </binding>
    </button>

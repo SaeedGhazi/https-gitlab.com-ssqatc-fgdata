@@ -10,10 +10,10 @@
  <h-base>72</h-base>
 
  <params>
-  <magneto0-select>/controls/magnetos[0]</magneto0-select>
-  <starter0-select>/controls/starter[0]</starter0-select>
-  <magneto1-select>/controls/magnetos[1]</magneto1-select>
-  <starter1-select>/controls/starter[1]</starter1-select>
+  <magneto0-select>/controls/engines/engine[0]/magnetos</magneto0-select>
+  <starter0-select>/controls/engines/engine[0]/starter</starter0-select>
+  <magneto1-select>/controls/engines/engine[1]/magnetos</magneto1-select>
+  <starter1-select>/controls/engines/engine[1]/starter</starter1-select>
  </params>
 
  <layers>

@@ -35,7 +35,7 @@ extended/retracted in a single step.
  <h-base>70</h-base>
 
  <params>
-  <flaps-select>/controls/flaps</flaps-select>
+  <flaps-select>/controls/flight/flaps</flaps-select>
  </params>
 
  <layers>

@@ -55,7 +55,7 @@ Button Numbers:
   <desc>Aileron</desc>
   <binding>
    <command>property-scale</command>
-   <property>/controls/aileron</property>
+   <property>/controls/flight/aileron</property>
    <squared type="bool">true</squared>
   </binding>
  </axis>
@@ -64,7 +64,7 @@ Button Numbers:
   <desc>Elevator</desc>
   <binding>
    <command>property-scale</command>
-   <property>/controls/elevator</property>
+   <property>/controls/flight/elevator</property>
    <factor type="double">-1.0</factor>
    <squared type="bool">true</squared>
   </binding>
@@ -74,14 +74,14 @@ Button Numbers:
   <desc>Rudder</desc>
   <binding>
    <command>property-scale</command>
-   <property>/controls/rudder</property>
+   <property>/controls/flight/rudder</property>
   </binding>
   <binding>
     <condition>
      <property>/input/joysticks/js[0]/locks/m3</property>
     </condition>
     <command>property-scale</command>
-    <property>/controls/brakes[0]</property>
+    <property>/controls/gear/wheel[0]/brake</property>
     <factor type="double">-1.0</factor>
     <min type="double">0.0</min>
     <max type="double">1.0</max>
@@ -91,7 +91,7 @@ Button Numbers:
      <property>/input/joysticks/js[0]/locks/m3</property>
     </condition>
     <command>property-scale</command>
-    <property>/controls/brakes[1]</property>
+    <property>/controls/gear/wheel[1]/brake</property>
     <min type="double">0.0</min>
     <max type="double">1.0</max>
   </binding>
@@ -101,13 +101,13 @@ Button Numbers:
   <desc>Throttle</desc>
   <binding>
    <command>property-scale</command>
-   <property>/controls/throttle[0]</property>
+   <property>/controls/engines/engine[0]/throttle</property>
    <offset type="double">-1.0</offset>
    <factor type="double">-0.5</factor>
   </binding>
   <binding>
    <command>property-scale</command>
-   <property>/controls/throttle[1]</property>
+   <property>/controls/engines/engine[1]/throttle</property>
    <offset type="double">-1.0</offset>
    <factor type="double">-0.5</factor>
   </binding>
@@ -117,13 +117,13 @@ Button Numbers:
   <desc>Mixture</desc>
   <binding>
    <command>property-scale</command>
-   <property>/controls/mixture[0]</property>
+   <property>/controls/engines/engine[0]/mixture</property>
    <offset type="double">-1.0</offset>
    <factor type="double">-0.5</factor>
   </binding>
   <binding>
    <command>property-scale</command>
-   <property>/controls/mixture[1]</property>
+   <property>/controls/engines/engine[1]/mixture</property>
    <offset type="double">-1.0</offset>
    <factor type="double">-0.5</factor>
   </binding>
@@ -133,11 +133,11 @@ Button Numbers:
   <desc>Propeller Advance</desc>
   <binding>
    <command>property-scale</command>
-   <property>/controls/propeller-pitch[0]</property>
+   <property>/controls/engines/engine[0]/propeller-pitch</property>
   </binding>
   <binding>
    <command>property-scale</command>
-   <property>/controls/propeller-pitch[1]</property>
+   <property>/controls/engines/engine[1]/propeller-pitch</property>
   </binding>
  </axis>
 
@@ -213,33 +213,33 @@ Button Numbers:
   <desc>Brakes</desc>
   <binding>
    <command>property-assign</command>
-   <property>/controls/brakes[0]</property>
+   <property>/controls/gear/wheel[0]/brake</property>
    <value type="double">1.0</value>
   </binding>
   <binding>
    <command>property-assign</command>
-   <property>/controls/brakes[1]</property>
+   <property>/controls/gear/wheel[1]/brake</property>
    <value type="double">1.0</value>
   </binding>
   <binding>
    <command>property-assign</command>
-   <property>/controls/brakes[2]</property>
+   <property>/controls/gear/wheel[2]/brake</property>
    <value type="double">1.0</value>
   </binding>
   <mod-up>
    <binding>
     <command>property-assign</command>
-    <property>/controls/brakes[0]</property>
+    <property>/controls/gear/wheel[0]/brake</property>
     <value type="double">0.0</value>
    </binding>
    <binding>
     <command>property-assign</command>
-    <property>/controls/brakes[1]</property>
+    <property>/controls/gear/wheel[1]/brake</property>
     <value type="double">0.0</value>
    </binding>
    <binding>
     <command>property-assign</command>
-    <property>/controls/brakes[2]</property>
+    <property>/controls/gear/wheel[2]/brake</property>
     <value type="double">0.0</value>
    </binding>
   </mod-up>
@@ -251,7 +251,7 @@ Button Numbers:
   <desc>Landing Gear Up/Down Toggle</desc>
   <binding>
    <command>property-toggle</command>
-   <property>/controls/gear-down</property>
+   <property>/controls/gear/gear-down</property>
   </binding>
  </button>
 
@@ -330,7 +330,7 @@ Mode 3 - Taxi Mode
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/elevator-trim</property>
+   <property>/controls/flight/elevator-trim</property>
    <step type="double">-0.001</step>
   </binding>
  </button>
@@ -339,7 +339,7 @@ Mode 3 - Taxi Mode
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/elevator-trim</property>
+   <property>/controls/flight/elevator-trim</property>
    <step type="double">0.001</step>
   </binding>
  </button>
@@ -351,7 +351,7 @@ Mode 3 - Taxi Mode
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/elevator-trim</property>
+   <property>/controls/flight/elevator-trim</property>
    <step type="double">0.0015</step>
   </binding>
  </button>
@@ -361,7 +361,7 @@ Mode 3 - Taxi Mode
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/aileron-trim</property>
+   <property>/controls/flight/aileron-trim</property>
    <step type="double">0.0015</step>
   </binding>
  </button>
@@ -371,7 +371,7 @@ Mode 3 - Taxi Mode
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/elevator-trim</property>
+   <property>/controls/flight/elevator-trim</property>
    <step type="double">-0.0015</step>
   </binding>
  </button>
@@ -381,7 +381,7 @@ Mode 3 - Taxi Mode
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/aileron-trim</property>
+   <property>/controls/flight/aileron-trim</property>
    <step type="double">-0.0015</step>
   </binding>
  </button>
@@ -392,7 +392,7 @@ Mode 3 - Taxi Mode
   <desc>Decrease flaps</desc>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/flaps</property>
+   <property>/controls/flight/flaps</property>
    <step type="double">-0.34</step>
   </binding>
  </button>
@@ -401,7 +401,7 @@ Mode 3 - Taxi Mode
   <desc>Increase flaps</desc>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/flaps</property>
+   <property>/controls/flight/flaps</property>
    <step type="double">0.34</step>
   </binding>
  </button>
@@ -413,7 +413,7 @@ Mode 3 - Taxi Mode
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/rudder-trim</property>
+   <property>/controls/flight/rudder-trim</property>
    <step type="double">0.0015</step>
   </binding>
  </button>
@@ -423,7 +423,7 @@ Mode 3 - Taxi Mode
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/rudder-trim</property>
+   <property>/controls/flight/rudder-trim</property>
    <step type="double">-0.0015</step>
   </binding>
  </button>

@@ -140,7 +140,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
     <property>/sim/input/selected/engine[0]</property>
    </condition>
    <command>property-assign</command>
-   <property>/controls/starter[0]</property>
+   <property>/controls/engines/engine[0]/starter</property>
    <value type="bool">true</value>
   </binding>
 
@@ -149,7 +149,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
     <property>/sim/input/selected/engine[1]</property>
    </condition>
    <command>property-assign</command>
-   <property>/controls/starter[1]</property>
+   <property>/controls/engines/engine[1]/starter</property>
    <value type="bool">true</value>
   </binding>
 
@@ -158,7 +158,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
     <property>/sim/input/selected/engine[2]</property>
    </condition>
    <command>property-assign</command>
-   <property>/controls/starter[2]</property>
+   <property>/controls/engines/engine[2]/starter</property>
    <value type="bool">true</value>
   </binding>
 
@@ -167,29 +167,29 @@ calculated by adding 256 to the GLUT key value in glut.h.
     <property>/sim/input/selected/engine[3]</property>
    </condition>
    <command>property-assign</command>
-   <property>/controls/starter[3]</property>
+   <property>/controls/engines/engine[3]/starter</property>
    <value type="bool">true</value>
   </binding>
 
   <mod-up>
    <binding>
     <command>property-assign</command>
-    <property>/controls/starter[0]</property>
+    <property>/controls/engines/engine[0]/starter</property>
     <value type="bool">false</value>
    </binding>
    <binding>
     <command>property-assign</command>
-    <property>/controls/starter[1]</property>
+    <property>/controls/engines/engine[1]/starter</property>
     <value type="bool">false</value>
    </binding>
    <binding>
     <command>property-assign</command>
-    <property>/controls/starter[2]</property>
+    <property>/controls/engines/engine[2]/starter</property>
     <value type="bool">false</value>
    </binding>
    <binding>
     <command>property-assign</command>
-    <property>/controls/starter[3]</property>
+    <property>/controls/engines/engine[3]/starter</property>
     <value type="bool">false</value>
    </binding>
   </mod-up>
@@ -294,13 +294,13 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Left brake</desc>
   <binding>
    <command>property-assign</command>
-   <property>/controls/brakes[0]</property>
+   <property>/controls/gear/wheel[0]/brake</property>
    <value type="double">1.0</value>
   </binding>
   <mod-up>
    <binding>
     <command>property-assign</command>
-    <property>/controls/brakes[0]</property>
+    <property>/controls/gear/wheel[0]/brake</property>
     <value type="double">0.0</value>
    </binding>
   </mod-up>
@@ -321,13 +321,13 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Right brake</desc>
   <binding>
    <command>property-assign</command>
-   <property>/controls/brakes[1]</property>
+   <property>/controls/gear/wheel[1]/brake</property>
    <value type="double">1.0</value>
   </binding>
   <mod-up>
    <binding>
     <command>property-assign</command>
-    <property>/controls/brakes[1]</property>
+    <property>/controls/gear/wheel[1]/brake</property>
     <value type="double">0.0</value>
    </binding>
   </mod-up>
@@ -348,7 +348,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Decrease elevator trim.</desc>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/elevator-trim</property>
+   <property>/controls/flight/elevator-trim</property>
    <step type="double">-0.001</step>
   </binding>
   <mod-shift>
@@ -417,7 +417,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Move aileron left.</desc>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/aileron</property>
+   <property>/controls/flight/aileron</property>
    <step type="double">-0.05</step>
   </binding>
   <mod-shift>
@@ -440,17 +440,17 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Center aileron, elevator, and rudder.</desc>
   <binding>
    <command>property-assign</command>
-   <property>/controls/aileron</property>
+   <property>/controls/flight/aileron</property>
    <value type="double">0.0</value>
   </binding>
   <binding>
    <command>property-assign</command>
-   <property>/controls/elevator</property>
+   <property>/controls/flight/elevator</property>
    <value type="double">0.0</value>
   </binding>
   <binding>
    <command>property-assign</command>
-   <property>/controls/rudder</property>
+   <property>/controls/flight/rudder</property>
    <value type="double">0.0</value>
   </binding>
  </key>
@@ -460,7 +460,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Move aileron right.</desc>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/aileron</property>
+   <property>/controls/flight/aileron</property>
    <step type="double">0.05</step>
   </binding>
   <mod-shift>
@@ -483,7 +483,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Increase elevator trim.</desc>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/elevator-trim</property>
+   <property>/controls/flight/elevator-trim</property>
    <step type="double">0.001</step>
   </binding>
   <mod-shift>
@@ -598,7 +598,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Toggle parking brake on or off</desc>
   <binding>
    <command>property-toggle</command>
-   <property>/controls/parking-brake</property>
+   <property>/controls/gear/parking-brake</property>
   </binding>
  </key>
 
@@ -694,7 +694,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Decrease flaps.</desc>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/flaps</property>
+   <property>/controls/flight/flaps</property>
    <step type="double">-0.34</step>
   </binding>
  </key>
@@ -704,7 +704,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Increase flaps.</desc>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/flaps</property>
+   <property>/controls/flight/flaps</property>
    <step type="double">0.34</step>
   </binding>
  </key>
@@ -725,34 +725,34 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Apply all brakes.</desc>
   <binding>
    <command>property-assign</command>
-   <property>/controls/brakes[0]</property>
+   <property>/controls/gear/wheel[0]/brake</property>
    <value type="double">1.0</value>
   </binding>
   <binding>
    <command>property-assign</command>
-   <property>/controls/brakes[1]</property>
+   <property>/controls/gear/wheel[1]/brake</property>
    <value type="double">1.0</value>
   </binding>
   <binding>
    <command>property-assign</command>
-   <property>/controls/brakes[2]</property>
+   <property>/controls/gear/wheel[2]/brake</property>
    <value type="double">1.0</value>
   </binding>
   <mod-up>
    <desc>Release all brakes.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/controls/brakes[0]</property>
+    <property>/controls/gear/wheel[0]/brake</property>
     <value type="double">0.0</value>
    </binding>
    <binding>
     <command>property-assign</command>
-    <property>/controls/brakes[1]</property>
+    <property>/controls/gear/wheel[1]/brake</property>
     <value type="double">0.0</value>
    </binding>
    <binding>
     <command>property-assign</command>
-    <property>/controls/brakes[2]</property>
+    <property>/controls/gear/wheel[2]/brake</property>
     <value type="double">0.0</value>
    </binding>
   </mod-up>
@@ -798,7 +798,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Toggle gear down.</desc>
   <binding>
    <command>property-toggle</command>
-   <property>/controls/gear-down</property>
+   <property>/controls/gear/gear-down</property>
   </binding>
  </key>
 
@@ -807,7 +807,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Toggle tail-wheel lock.</desc>
   <binding>
    <command>property-toggle</command>
-   <property>/controls/tailwheel-castering</property>
+   <property>/controls/gear/tailwheel-lock</property>
   </binding>
  </key>
 
@@ -911,7 +911,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
     <property>/sim/input/selected/engine[0]</property>
    </condition>
    <command>property-adjust</command>
-   <property>/controls/magnetos[0]</property>
+   <property>/controls/engines/engine[0]/magnetos</property>
    <step type="int">-1</step>
   </binding>
   <binding>
@@ -920,7 +920,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
     <property>/sim/input/selected/engine[1]</property>
    </condition>
    <command>property-adjust</command>
-   <property>/controls/magnetos[1]</property>
+   <property>/controls/engines/engine[1]/magnetos</property>
    <step type="int">-1</step>
   </binding>
   <binding>
@@ -929,7 +929,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
     <property>/sim/input/selected/engine[2]</property>
    </condition>
    <command>property-adjust</command>
-   <property>/controls/magnetos[2]</property>
+   <property>/controls/engines/engine[2]/magnetos</property>
    <step type="int">-1</step>
   </binding>
   <binding>
@@ -938,7 +938,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
     <property>/sim/input/selected/engine[3]</property>
    </condition>
    <command>property-adjust</command>
-   <property>/controls/magnetos[3]</property>
+   <property>/controls/engines/engine[3]/magnetos</property>
    <step type="int">-1</step>
   </binding>
  </key>
@@ -952,7 +952,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
     <property>/sim/input/selected/engine[0]</property>
    </condition>
    <command>property-adjust</command>
-   <property>/controls/magnetos[0]</property>
+   <property>/controls/engines/engine[0]/magnetos</property>
    <step type="int">1</step>
   </binding>
   <binding>
@@ -961,7 +961,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
     <property>/sim/input/selected/engine[1]</property>
    </condition>
    <command>property-adjust</command>
-   <property>/controls/magnetos[1]</property>
+   <property>/controls/engines/engine[1]/magnetos</property>
    <step type="int">1</step>
   </binding>
  </key>
@@ -1149,17 +1149,17 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Center aileron, elevator, and rudder.</desc>
   <binding>
    <command>property-assign</command>
-   <property>/controls/aileron</property>
+   <property>/controls/flight/aileron</property>
    <value type="double">0.0</value>
   </binding>
   <binding>
    <command>property-assign</command>
-   <property>/controls/elevator</property>
+   <property>/controls/flight/elevator</property>
    <value type="double">0.0</value>
   </binding>
   <binding>
    <command>property-assign</command>
-   <property>/controls/rudder</property>
+   <property>/controls/flight/rudder</property>
    <value type="double">0.0</value>
   </binding>
  </key>
@@ -1169,7 +1169,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Move aileron left.</desc>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/aileron</property>
+   <property>/controls/flight/aileron</property>
    <step type="double">-0.05</step>
   </binding>
   <mod-shift>
@@ -1215,7 +1215,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Move aileron right.</desc>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/aileron</property>
+   <property>/controls/flight/aileron</property>
    <step type="double">0.05</step>
   </binding>
   <mod-shift>
@@ -1307,7 +1307,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Increase elevator trim.</desc>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/elevator-trim</property>
+   <property>/controls/flight/elevator-trim</property>
    <step type="double">0.001</step>
   </binding>
   <mod-shift>
@@ -1330,7 +1330,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Decrease elevator trim.</desc>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/elevator-trim</property>
+   <property>/controls/flight/elevator-trim</property>
    <step type="double">-0.001</step>
   </binding>
   <mod-shift>

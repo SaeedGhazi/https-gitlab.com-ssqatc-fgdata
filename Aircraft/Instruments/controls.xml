@@ -53,7 +53,7 @@ properties' values.
    <transformations>
     <transformation>
      <type>x-shift</type>
-     <property>/controls/aileron</property>
+     <property>/controls/flight/aileron</property>
      <min>-1</min>
      <max>1</max>
      <scale>42</scale>
@@ -91,7 +91,7 @@ properties' values.
     </transformation>
     <transformation>
      <type>x-shift</type>
-     <property>/controls/rudder</property>
+     <property>/controls/flight/rudder</property>
      <min>-1</min>
      <max>1</max>
      <scale>42</scale>
@@ -127,7 +127,7 @@ properties' values.
     </transformation>
     <transformation>
      <type>x-shift</type>
-     <property>/controls/elevator-trim</property>
+     <property>/controls/flight/elevator-trim</property>
      <min>-1.0</min>
      <max>1.0</max>
      <scale>-42</scale>
@@ -161,7 +161,7 @@ properties' values.
     </transformation>
     <transformation>
      <type>x-shift</type>
-     <property>/controls/elevator</property>
+     <property>/controls/flight/elevator</property>
      <min>-1.0</min>
      <max>1.0</max>
      <scale>42</scale>
@@ -188,7 +188,7 @@ properties' values.
   <h>40</h>
   <binding>
    <command>property-adjust</command>
-   <property>/controls/elevator-trim</property>
+   <property>/controls/flight/elevator-trim</property>
    <step>0.01</step>
     <min>-1.0</min>
     <max>1.0</max>
@@ -204,7 +204,7 @@ properties' values.
   <h>40</h>
    <binding>
     <command>property-adjust</command>
-    <property>/controls/elevator-trim</property>
+    <property>/controls/flight/elevator-trim</property>
     <step>-0.01</step>
     <min>-1.0</min>
     <max>1.0</max>
@@ -221,7 +221,7 @@ properties' values.
    <h>20</h>
    <binding>
     <command>property-adjust</command>
-    <property>/controls/rudder-trim</property>
+    <property>/controls/flight/rudder-trim</property>
     <step>-0.005</step>
     <min>-1.0</min>
     <max>1.0</max>
@@ -237,7 +237,7 @@ properties' values.
    <h>20</h>
    <binding>
     <command>property-adjust</command>
-    <property>/controls/rudder-trim</property>
+    <property>/controls/flight/rudder-trim</property>
     <step>0.005</step>
     <min>-1.0</min>
     <max>1.0</max>

@@ -386,13 +386,13 @@ properties' values.
      <type>number-value</type>
      <property>/autopilot/KAP140/settings/target-pressure-rate</property>
      <scale>-58000</scale>
-     <format>%03.0f</format>
+     <format>%05.0f</format>
     </chunk>
    </chunks>
    <transformations>
     <transformation>
      <type>x-shift</type>
-     <offset>50</offset>
+     <offset>30</offset>
     </transformation>
     <transformation>
      <type>y-shift</type>
@@ -426,6 +426,35 @@ properties' values.
     <transformation>
      <type>y-shift</type>
      <offset>40</offset>
+    </transformation>
+   </transformations>
+  </layer>
+
+  <layer>
+   <name>ALT-ARM Anunciator</name>
+   <condition>
+    <equals>
+     <property>/autopilot/KAP140/annunciators/alt-arm</property>
+     <value>on</value>
+    </equals>
+   </condition>
+   <texture>
+    <path>Aircraft/Instruments/Textures/KAP140.rgb</path>
+    <x1>0.41015625</x1>
+    <x2>0.537109375</x2>
+    <y1>0.939453125</y1>
+    <y2>1.0</y2>
+   </texture>
+   <w>64</w>
+   <h>30</h>
+   <transformations>
+    <transformation>
+     <type>x-shift</type>
+     <offset>-53</offset>
+    </transformation>
+    <transformation>
+     <type>y-shift</type>
+     <offset>15</offset>
     </transformation>
    </transformations>
   </layer>

@@ -97,6 +97,11 @@ Shared parameters for various materials.
 </material>
 
 <material>
+ <name>pa_tiedown</name>
+ <texture>Runway/pa_tiedown.rgb</texture>
+</material>
+
+<material>
  <name>pa_dspl_thresh</name>
  <texture>Runway/pa_dspl_thresh.rgb</texture>
  <wrapu>false</wrapu>

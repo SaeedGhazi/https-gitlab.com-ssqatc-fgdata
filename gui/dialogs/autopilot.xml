@@ -2,8 +2,6 @@
 
 <PropertyList>
 
- <type>dialog</type>
-
  <name>autopilot</name>
  <width>500</width>
  <height>300</height>

@@ -2,8 +2,6 @@
 
 <PropertyList>
 
- <type>dialog</type>
-
  <!-- Control the weather -->
 
  <name>clouds</name>

@@ -1,12 +1,7 @@
 <!--
 Joystick binding definitions for Saitek Cyborg 3D Gold USB joystick.
 
-This file is included by preferences.xml, and uses the context of its
-inclusion point; that means that you need to prepend "/input/joysticks"
-to all property names.
-
-This file defines primary flight-control bindings for a simple
-three-axis, three-button joystick, as follow:
+This file defines primary flight-control bindings as follow:
 
   axis 0 (left-right): aileron
   axis 1 (forward-backward): elevator
@@ -24,18 +19,17 @@ three-axis, three-button joystick, as follow:
   button 7: (F4)          extend flaps
   button 8: (>>)          mixture rich
   button 9: (<<)          mixture lean
-  hat left                look left
-  hat right               look right
-  hat back                look behind
-  hat forward             look forward
-  hat diagonal            look diagonal
+  hat left                look left (rotate view left)
+  hat right               look right (rotate view right)
+  hat back                look look (decrease view elevation)
+  hat forward             look up (increase view elevation)
 
-$Id$
 -->
 
 <PropertyList>
 
 <name>SAITEK CYBORG 3D USB</name>
+<name>CYBORG 3D USB</name>
 
 <axis n="0">
 <desc>Aileron</desc>
@@ -119,22 +113,45 @@ $Id$
 </axis>
 
 <axis n="4">
-<desc>lateral view</desc>
+<desc>View Direction</desc>
+<low>
+<repeatable>true</repeatable>
 <binding>
-<command>property-scale</command>
-<property>/sim/current-view/axes/lat</property>
-<factor type="double">-1.0</factor>
+<command>property-adjust</command>
+<property>/sim/current-view/goal-heading-offset-deg</property>
+<step type="double">2.0</step>
 </binding>
+</low>
+<high>
+<repeatable>true</repeatable>
+<binding>
+<command>property-adjust</command>
+<property>/sim/current-view/goal-heading-offset-deg</property>
+<step type="double">-2.0</step>
+</binding>
+</high>
 </axis>
 
 <axis n="5">
-<desc>longitudinal view</desc>
+<desc>View elevation</desc>
+<low>
+<repeatable>true</repeatable>
 <binding>
-<command>property-scale</command>
-<property>/sim/current-view/axes/long</property>
-<factor type="double">-1.0</factor>
+<command>property-adjust</command>
+<property>/sim/current-view/goal-pitch-offset-deg</property>
+<step type="double">-2.0</step>
 </binding>
+</low>
+<high>
+<repeatable>true</repeatable>
+<binding>
+<command>property-adjust</command>
+<property>/sim/current-view/goal-pitch-offset-deg</property>
+<step type="double">2.0</step>
+</binding>
+</high>
 </axis>
+
 
 <button n="0">
 <desc>Brakes</desc>

@@ -45,8 +45,8 @@ October 23 2001 John Check, fgpanels@rockfish.net
      <best-climb-speed-kt type="float">107.0</best-climb-speed-kt>
      <target-climb-rate-fpm type="float">1000.0</target-climb-rate-fpm>
      <target-descent-rate-fpm type="float">1000.0</target-descent-rate-fpm>
-     <elevator-adj-factor type="float">6000.0</elevator-adj-factor>
-     <integral-contribution type="float">0.002</integral-contribution>
+     <elevator-adj-factor type="float">12000.0</elevator-adj-factor>
+     <integral-contribution type="float">0.004</integral-contribution>
      <zero-pitch-throttle type="float">0.45</zero-pitch-throttle>
      <zero-pitch-trim-full-throttle type="float">0.11</zero-pitch-trim-full-throttle>
    </config>
@@ -79,5 +79,3 @@ October 23 2001 John Check, fgpanels@rockfish.net
  </input>
 
 </PropertyList>
-
-

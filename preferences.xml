@@ -544,6 +544,10 @@ Started September 2000 by David Megginson, david@megginson.com
   <gps>
    <serviceable type="bool" archive="y">true</serviceable>
   </gps>
+  <clock>
+   <serviceable type="bool" archive="y">true</serviceable>
+   <offset-sec type="long" archive="y">0</offset-sec>
+  </clock>
  </instrumentation>
 
  <systems>

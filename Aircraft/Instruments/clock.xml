@@ -84,13 +84,13 @@ properties' values.
    <chunks>
     <chunk>
      <type>text-value</type>
-     <property>/sim/time/gmt-string</property>
+     <property>/instrumentation/clock/indicated-string</property>
     </chunk>
    </chunks>
    <transformations>
     <transformation>
      <type>x-shift</type>
-     <offset>-34</offset>
+     <offset>-31</offset>
     </transformation>
     <transformation>
      <type>y-shift</type>

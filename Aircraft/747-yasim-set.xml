@@ -19,6 +19,9 @@
   <sound>
    <audible>true</audible>
    <path>Aircraft/747/747-sound.xml</path>
+   <volume>
+      <gear type="double">0.4</gear>
+   </volume>
   </sound>
 
   <panel>

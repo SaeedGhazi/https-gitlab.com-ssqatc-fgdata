@@ -89,6 +89,8 @@
  <disable-random-objects-desc>Exclude random scenery objects</disable-random-objects-desc>
  <enable-random-objects-desc>Include random scenery objects</enable-random-objects-desc>
  <random-objects-desc>(buildings, etc.)</random-objects-desc>
+ <disable-ai-models-desc>Disable the artifical traffic subsystem.</disable-ai-models-desc>
+ <enable-ai-models-desc>Enable the artifical traffic.</enable-ai-models-desc>
  <disable-freeze-desc>Start in a running state</disable-freeze-desc>
  <enable-freeze-desc>Start in a frozen state</enable-freeze-desc>
  <disable-fuel-freeze-desc>Fuel is consumed normally</disable-fuel-freeze-desc>

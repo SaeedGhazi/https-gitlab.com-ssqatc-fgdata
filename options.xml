@@ -96,6 +96,16 @@
    </option>
 
    <option>
+    <name>disable-ai-models</name>
+    <description>strings/disable-ai-models-desc</description>
+   </option>
+
+   <option>
+    <name>enable-ai-models</name>
+    <description>strings/enable-ai-models-desc</description>
+   </option>
+
+   <option>
     <name>disable-freeze</name>
     <description>strings/disable-freeze-desc</description>
    </option>

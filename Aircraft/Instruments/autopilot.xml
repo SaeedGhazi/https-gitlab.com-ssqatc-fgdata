@@ -89,7 +89,7 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path> 
      <x1>0.0</x1>
-     <x2>0.21875</x2>
+     <x2>0.21484375</x2>
      <y1>0.0</y1>
      <y2>0.16796875</y2>
     </texture>
@@ -130,7 +130,7 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path>
      <x1>0.0</x1>
-     <x2>0.21875</x2>
+     <x2>0.21484375</x2>
      <y1>0.328125</y1>
      <y2>0.4921875</y2>
     </texture>
@@ -142,7 +142,7 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path> 
      <x1>0.0</x1>
-     <x2>0.21875</x2>
+     <x2>0.21484375</x2>
      <y1>0.1640625</y1>
      <y2>0.328125</y2>
     </texture>
@@ -161,7 +161,7 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path> 
      <x1>0.0</x1>
-     <x2>0.21875</x2>
+     <x2>0.21484375</x2>
      <y1>0.0</y1>
      <y2>0.16796875</y2>
     </texture>
@@ -202,7 +202,7 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path>
      <x1>0.0</x1>
-     <x2>0.21875</x2>
+     <x2>0.21484375</x2>
      <y1>0.328125</y1>
      <y2>0.4921875</y2>
     </texture>
@@ -214,7 +214,7 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path> 
      <x1>0.0</x1>
-     <x2>0.21875</x2>
+     <x2>0.21484375</x2>
      <y1>0.1640625</y1>
      <y2>0.328125</y2>
     </texture>
@@ -233,7 +233,7 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path> 
      <x1>0.0</x1>
-     <x2>0.21875</x2>
+     <x2>0.21484375</x2>
      <y1>0.0</y1>
      <y2>0.16796875</y2>
     </texture>
@@ -274,7 +274,7 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path>
      <x1>0.0</x1>
-     <x2>0.21875</x2>
+     <x2>0.21484375</x2>
      <y1>0.328125</y1>
      <y2>0.4921875</y2>
     </texture>
@@ -286,7 +286,7 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path>
      <x1>0.0</x1>
-     <x2>0.21875</x2>
+     <x2>0.21484375</x2>
      <y1>0.1640625</y1>
      <y2>0.328125</y2>
     </texture>
@@ -305,7 +305,7 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path> 
      <x1>0.0</x1>
-     <x2>0.21875</x2>
+     <x2>0.21484375</x2>
      <y1>0.0</y1>
      <y2>0.16796875</y2>
     </texture>
@@ -346,7 +346,7 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path>
      <x1>0.0</x1>
-     <x2>0.21875</x2>
+     <x2>0.21484375</x2>
      <y1>0.328125</y1>
      <y2>0.4921875</y2>
     </texture>
@@ -358,7 +358,7 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path> 
      <x1>0.0</x1>
-     <x2>0.21875</x2>
+     <x2>0.21484375</x2>
      <y1>0.1640625</y1>
      <y2>0.328125</y2>
     </texture>
@@ -377,7 +377,7 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path> 
      <x1>0.0</x1>
-     <x2>0.21875</x2>
+     <x2>0.21484375</x2>
      <y1>0.0</y1>
      <y2>0.16796875</y2>
     </texture>

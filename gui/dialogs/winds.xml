@@ -6,18 +6,18 @@
 
  <name>winds</name>
  <width>400</width>
- <height>180</height>
+ <height>210</height>
  <modal>false</modal>
 
  <text>
   <x>10</x>
-  <y>150</y>
+  <y>180</y>
   <label>Environment: Winds</label>
  </text>
 
  <input>
   <x>10</x>
-  <y>110</y>
+  <y>140</y>
   <width>200</width>
   <height>25</height>
   <label>wind direction (deg)</label>
@@ -26,7 +26,7 @@
 
  <input>
   <x>10</x>
-  <y>80</y>
+  <y>110</y>
   <width>200</width>
   <height>25</height>
   <label>base wind speed (kt)</label>
@@ -35,12 +35,21 @@
 
  <input>
   <x>10</x>
-  <y>50</y>
+  <y>80</y>
   <width>200</width>
   <height>25</height>
   <label>gust wind speed (kt)</label>
   <property>/environment/params/gust-wind-speed-kt</property>
  </input>
+
+ <slider>
+  <x>10</x>
+  <y>50</y>
+  <width>200</width>
+  <height>25</height>
+  <label>turbulence</label>
+  <property>/environment/turbulence-norm</property>
+ </slider>
 
  <button>
   <x>5</x>

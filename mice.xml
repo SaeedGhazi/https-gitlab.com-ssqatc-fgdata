@@ -24,51 +24,106 @@ The current mode for each mouse is held in the
   <mode-count type="int">3</mode-count>
   <mode archive="y" type="int">0</mode>
 
-  <mode-cursors>
-   <cursor n="0">inherit</cursor>
-   <cursor n="1">crosshair</cursor>
-   <cursor n="2">left-right</cursor>
-  </mode-cursors>
 
-  <!-- left button is the regular pointer -->
-  <button n="0">
-   <binding>
-    <condition>
-     <equals>
-      <property>/input/mice/mouse[0]/mode</property>
-      <value>0</value>
-     </equals>
-    </condition>
-    <command>pui-or-panel-mouse-click</command>
-    <button>0</button>
-    <is-down>true</is-down>
-   </binding>
-   <mod-up>
+  <mode n="0">
+   <cursor>inherit</cursor>
+
+   <button n="0">
     <binding>
-     <condition>
-      <equals>
-       <property>/input/mice/mouse[0]/mode</property>
-       <value>0</value>
-      </equals>
-     </condition>
      <command>pui-or-panel-mouse-click</command>
      <button>0</button>
-     <is-down>false</is-down>
+     <is-down>true</is-down>
     </binding>
-   </mod-up>
-  </button>
+    <mod-up>
+     <binding>
+      <command>pui-or-panel-mouse-click</command>
+      <button>0</button>
+      <is-down>false</is-down>
+     </binding>
+    </mod-up>
+   </button>
 
-  <!-- right button cycles modes -->
-  <button n="2">
-   <binding>
-    <command>property-adjust</command>
-    <property>/input/mice/mouse[0]/mode</property>
-    <step type="int">1</step>
-    <min>0</min>
-    <max>2</max>
-    <wrap>true</wrap>
-   </binding>
-  </button>
+   <button n="2">
+    <binding>
+     <command>property-assign</command>
+     <property>/input/mice/mouse[0]/mode</property>
+     <value>1</value>
+    </binding>
+   </button>
+
+  </mode>
+
+  <mode n="1">
+   <cursor>crosshair</cursor>
+   <constrained>true</constrained>
+
+   <button n="2">
+    <binding>
+     <command>property-assign</command>
+     <property>/input/mice/mouse[0]/mode</property>
+     <value>2</value>
+    </binding>
+   </button>
+
+  </mode>
+
+  <!-- Mode 2: view mode -->
+  <mode n="2">
+   <cursor>left-right</cursor>
+   <constrained>true</constrained>
+
+   <!-- left button centres the view heading offset -->
+   <button n="0">
+    <binding>
+     <command>property-assign</command>
+     <property>/sim/view/offset-deg</property>
+     <value>0</value>
+    </binding>
+   </button>
+
+   <!-- middle button centres the view pitch offset -->
+   <button n="1">
+    <binding>
+     <command>property-assign</command>
+     <property>/sim/view/tilt-deg</property>
+     <value>0</value>
+    </binding>
+   </button>
+
+   <!-- right button switches modes -->
+   <button n="2">
+    <binding>
+     <command>property-assign</command>
+     <property>/input/mice/mouse[0]/mode</property>
+     <value>0</value>
+    </binding>
+   </button>
+
+   <!-- x-axis moves the view heading offset -->
+   <x-axis>
+    <binding>
+     <command>property-adjust</command>
+     <property>/sim/view/offset-deg</property>
+     <factor type="double">-360</factor>
+     <min type="double">0</min>
+     <max type="double">360</max>
+     <wrap type="bool">true</wrap>
+    </binding>
+   </x-axis>
+
+   <!-- y-axis moves the view pitch offset -->
+   <y-axis>
+    <binding>
+     <command>property-adjust</command>
+     <property>/sim/view/tilt-deg</property>
+     <factor type="double">-180</factor>
+     <min type="double">-90</min>
+     <max type="double">90</max>
+     <wrap type="bool">false</wrap>
+    </binding>
+   </y-axis>
+
+  </mode>
 
  </mouse>
 

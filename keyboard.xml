@@ -477,6 +477,15 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+ <key n="103">
+  <name>g</name>
+  <desc>Toggle gear down.</desc>
+  <binding>
+   <command>property-toggle</command>
+   <property>/controls/gear-down</property>
+  </binding>
+ </key>
+
  <key n="112">
   <name>p</name>
   <desc>Toggle the pause state of the sim.</desc>

@@ -91,6 +91,7 @@
 
 <gear x="-4.65" y="5.42" z="-5.42" compression="1.1"> <!-- fwd left main -->
   <control-input axis="/controls/gear/wheel[0]/brake" control="BRAKE"/>
+  <control-input axis="/controls/gear/parking-brake" control="BRAKE"/>
   <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
   <control-output control="EXTEND" prop="/gear/gear[1]/position-norm"/>
   <control-speed control="EXTEND" transition-time="7"/>
@@ -98,6 +99,7 @@
 
 <gear x="-6.82" y="1.81" z="-5.42" compression="1.1"> <!-- rear left main -->
   <control-input axis="/controls/gear/wheel[0]/brake" control="BRAKE"/>
+  <control-input axis="/controls/gear/parking-brake" control="BRAKE"/>
   <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
   <control-output control="EXTEND" prop="/gear/gear[2]/position-norm"/>
   <control-speed control="EXTEND" transition-time="7"/>
@@ -105,6 +107,7 @@
 
 <gear x="-6.82" y="-1.81" z="-5.42" compression="1.1"> <!-- rear right main -->
   <control-input axis="/controls/gear/wheel[1]/brake" control="BRAKE"/>
+  <control-input axis="/controls/gear/parking-brake" control="BRAKE"/>
   <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
   <control-output control="EXTEND" prop="/gear/gear[3]/position-norm"/>
   <control-speed control="EXTEND" transition-time="7"/>
@@ -112,6 +115,7 @@
 
 <gear x="-4.65" y="-5.42" z="-5.42" compression="1.1"> <!-- fwd right main -->
   <control-input axis="/controls/gear/wheel[1]/brake" control="BRAKE"/>
+  <control-input axis="/controls/gear/parking-brake" control="BRAKE"/>
   <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
   <control-output control="EXTEND" prop="/gear/gear[4]/position-norm"/>
   <control-speed control="EXTEND" transition-time="7"/>

@@ -224,6 +224,7 @@ Lee Elliott. leee-fgfs@spatial.freeserve.co.uk
 <!-- Rear Left -->
  <gear x="-28.0" y="2.0" z="-2.9" retract-time="7" compression="1.0">
   <control-input axis="/controls/gear/wheel[0]/brake" control="BRAKE"/>
+  <control-input axis="/controls/gear/parking-brake" control="BRAKE"/>
   <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
   <control-speed control="EXTEND" transition-time="7"/>
   <control-output control="EXTEND" prop="/gear/gear/position-norm"/>
@@ -232,6 +233,7 @@ Lee Elliott. leee-fgfs@spatial.freeserve.co.uk
 <!-- Rear Right -->
  <gear x="-28.0" y="-2.0" z="-2.9" retract-time="7" compression="1.0">
   <control-input axis="/controls/gears/wheel[0]/brake" control="BRAKE"/>
+  <control-input axis="/controls/gear/parking-brake" control="BRAKE"/>
   <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
   <control-speed control="EXTEND" transition-time="7"/>
   <control-output control="EXTEND" prop="/gear/gear/position-norm"/>
@@ -240,6 +242,7 @@ Lee Elliott. leee-fgfs@spatial.freeserve.co.uk
 <!-- Left Wing -->
  <gear x="-31.0" y="23.0" z="-2.0" retract-time="7" compression="2.5">
   <control-input axis="/controls/gear/wheel[0]/brake" control="BRAKE"/>
+  <control-input axis="/controls/gear/parking-brake" control="BRAKE"/>
   <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
   <control-speed control="EXTEND" transition-time="7"/>
   <control-output control="EXTEND" prop="/gear/gear/position-norm"/>
@@ -248,6 +251,7 @@ Lee Elliott. leee-fgfs@spatial.freeserve.co.uk
 <!-- Right Wing -->
  <gear x="-31.0" y="-23.0" z="-2.0" retract-time="7" compression="2.5">
   <control-input axis="/controls/gear/wheel[1]/brake" control="BRAKE"/>
+  <control-input axis="/controls/gear/parking-brake" control="BRAKE"/>
   <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
   <control-speed control="EXTEND" transition-time="7"/>
   <control-output control="EXTEND" prop="/gear/gear/position-norm"/>

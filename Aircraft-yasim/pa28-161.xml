@@ -78,7 +78,7 @@
 </gear>
 
 <gear x="-2.8" y="-1.5" z="-1.3" compression=".05"> <!-- left main -->
-  <control-input axis="/controls/gear/whee[1]/brake" control="BRAKE" split="true"/>
+  <control-input axis="/controls/gear/wheel[1]/brake" control="BRAKE" split="true"/>
   <control-input axis="/controls/gear/parking-brake" control="BRAKE" split="true"/>
 </gear>
 

@@ -30,7 +30,7 @@ properties' values.
  <h-base>120</h-base>
 
  <params>
-  <engine-vac-select>/engines[0]/engine[0]/vac-psi</engine-vac-select>
+  <engine-vac-select>/systems/vacuum/suction-inhg</engine-vac-select>
   <engine-amp-select>/engines[0]/engine[0]/amp-v</engine-amp-select>
  </params>
  <layers>

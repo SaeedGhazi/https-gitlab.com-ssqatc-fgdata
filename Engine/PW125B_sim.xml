@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
   File:     PW125B.xml
-  Author:   Aero-Matic v 0.2
+  Author:   Aero-Matic v 0.3
 
   Inputs:
     name:           PW125B
@@ -12,7 +12,7 @@
 -->
 
 <FG_SIMTURBINE NAME="PW125B">
-  MAXMILTHRUST 4175
+  MAXMILTHRUST 4175.00
   BYPASSRATIO    0.0
   TSFC           0.55
   ATSFC          0.0

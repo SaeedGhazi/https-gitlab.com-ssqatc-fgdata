@@ -22,6 +22,16 @@ dirt_rwy {
   emissive = 0.0 0.0 0.0 1.0
 }
 
+lakebed_taxiway {
+  texture = Runway/lakebed_taxiway.rgb
+  wrapu = 1
+  wrapv = 1
+  ambient = 0.2 0.2 0.2 1.0
+  diffuse = 0.2 0.2 0.2 1.0
+  specular = 0.0 0.0 0.0 1.0
+  emissive = 0.0 0.0 0.0 1.0
+}
+
 pa_taxiway {
   texture = Runway/pa_taxiway.rgb
   wrapu = 1
@@ -374,6 +384,16 @@ pa_rest {
 
 pc_taxiway {
   texture = Runway/pc_taxiway.rgb
+  wrapu = 1
+  wrapv = 1
+  ambient = 0.2 0.2 0.2 1.0
+  diffuse = 0.2 0.2 0.2 1.0
+  specular = 0.0 0.0 0.0 1.0
+  emissive = 0.0 0.0 0.0 1.0
+}
+
+pc_tiedown {
+  texture = Runway/pc_tiedown.rgb
   wrapu = 1
   wrapv = 1
   ambient = 0.2 0.2 0.2 1.0

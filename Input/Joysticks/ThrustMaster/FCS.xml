@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+
+<!--
+************************************************************************
+Setup for a Thrustmaster FCS-compatible joystick with
+one stick, one digital hat, and four buttons.
+
+Layout:
+  Axis 0: ailerons
+  Axis 1: elevator
+
+  Hat:
+    Axis 2: rudder
+    Axis 3: elevator trim
+
+  Button 0: brakes
+  Button 1: center rudder
+  Button 2: flaps up
+  Button 3: flaps down
+************************************************************************
+-->
+
+<PropertyList>
+
+ <name>Analog 2-axis 4-button 1-hat FCS joystick</name>
+
+ <axis n="0">
+  <desc>Aileron</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/flight/aileron</property>
+   <power type="double">2</power>
+  </binding>
+ </axis>
+
+ <axis n="1">
+  <desc>Elevator</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/flight/elevator</property>
+   <factor type="double">-1.0</factor>
+   <power type="double">2</power>
+  </binding>
+ </axis>
+
+ <axis n="2">
+  <desc>Rudder</desc>
+  <low>
+   <repeatable type="bool">true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/controls/flight/rudder</property>
+    <step type="double">-0.05</step>
+   </binding>
+  </low>
+  <high>
+   <repeatable type="bool">true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/controls/flight/rudder</property>
+    <step type="double">0.05</step>
+   </binding>
+  </high>
+ </axis>
+
+ <axis n="3">
+  <desc>Elevator trim</desc>
+  <low>
+   <repeatable type="bool">true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/controls/flight/elevator-trim</property>
+    <step type="double">0.001</step>
+   </binding>
+  </low>
+  <high>
+   <repeatable type="bool">true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/controls/flight/elevator-trim</property>
+    <step type="double">-0.001</step>
+   </binding>
+  </high>
+ </axis>
+
+ <button n="0">
+  <desc>Brakes</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/gear/wheel[0]/brake</property>
+   <value type="double">1.0</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/gear/wheel[1]/brake</property>
+   <value type="double">1.0</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/gear/wheel[2]/brake</property>
+   <value type="double">1.0</value>
+  </binding>
+  <mod-up>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/gear/wheel[0]/brake</property>
+    <value type="double">0.0</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/gear/wheel[1]/brake</property>
+    <value type="double">0.0</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/gear/wheel[2]/brake</property>
+    <value type="double">0.0</value>
+   </binding>
+  </mod-up>
+ </button>
+
+ <button n="1">
+  <desc>Center rudder</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/flight/rudder</property>
+   <value type="double">0.0</value>
+  </binding>
+ </button>
+
+ <button n="2">
+  <desc>Flaps up</desc>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/flight/flaps</property>
+   <step type="double">-0.34</step>
+  </binding>
+ </button>
+
+ <button n="3">
+  <desc>Flaps down</desc>
+   <binding>
+   <command>property-adjust</command>
+   <property>/controls/flight/flaps</property>
+   <step type="double">0.34</step>
+  </binding>
+ </button>
+
+</PropertyList>
+
+<!-- end of FCS.xml -->

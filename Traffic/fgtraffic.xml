@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <trafficlist>
-   <traffic include="KLM/KLM.xml"/>
+<!--   <traffic include="KLM/KLM.xml"/> -->
    <traffic include="UAL/UAL.xml"/>
 <!--   <traffic include="test.xml"/> -->
 </trafficlist>

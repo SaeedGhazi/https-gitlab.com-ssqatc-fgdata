@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <scenario>
+
+  <entry>
+   <type>carrier</type>
+   <model>Models/Geometry/Nimitz/carrier.xml</model>
+   <latitude>37.688</latitude>
+   <longitude>-122.683</longitude>
+   <speed>30.0</speed>
+   <heading>180</heading>
+
+   <wire>wire-1</wire>
+   <wire>wire-2</wire>
+   <wire>wire-3</wire>
+   <wire>wire-4</wire>
+
+   <catapult>cat-1</catapult>
+   <catapult>cat-2</catapult>
+   <catapult>cat-3</catapult>
+   <catapult>cat-4</catapult>
+
+   <solid>deck</solid>
+   <solid>round-down</solid>
+  </entry>
+
+ </scenario>
+
+</PropertyList>

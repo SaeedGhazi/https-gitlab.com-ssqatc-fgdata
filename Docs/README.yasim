@@ -190,6 +190,10 @@ propeller: A propeller.  This element requires an engine subtag.
                           Use a negative moment value for
                           counter-rotating ("European" -- CCW as seen
                           from behind the prop) propellers.
+                          A good guess for this value is the radius of
+                          the prop (m) times the mass (kg) divided by
+                          two; that is the moment of a plain "stick"
+                          bolted to the prop shaft.
            radius:        The radius, in meters, or the propeller.
            cruise-speed:  The max efficiency cruise speed of the
                           propeller.  Generally not the same as the

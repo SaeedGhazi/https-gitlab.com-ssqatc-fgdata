@@ -88,6 +88,9 @@ wing:     This defines the main wing of the aircraft.  You can have
                      constrained well by the solution process, and may
                      require tuning to get throttle settings correct in
                      high AoA (approach) situations.
+          camber:    The lift produced by the wing at zero angle of
+                     attack, expressed as a fraction of the maximum
+                     lift produced at the stall AoA.
 
 hstab:    These defines the horizontal stabilizer of the aircraft.
           Internally, it is just awing objects and therefore work the

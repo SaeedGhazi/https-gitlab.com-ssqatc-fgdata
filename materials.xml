@@ -2610,9 +2610,42 @@ Shared parameters for various materials.
 
 <material>
  <name>Sand</name>
+ <texture>Terrain/tidal.rgb</texture>
+ <xsize>500</xsize>
+ <ysize>500</ysize>
+ <light-coverage>20000000.0</light-coverage>
+ <xsize>500</xsize>
+ <ysize>500</ysize>
+ <ambient>
+  <r>0.19</r>
+  <g>0.55</g>
+  <b>0.52</b>
+  <a>1.0</a>
+ </ambient>
+ <diffuse>
+  <r>0.19</r>
+  <g>0.55</g>
+  <b>0.52</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.31</r>
+  <g>0.34</g>
+  <b>0.39</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
+</material>
+
+<material>
  <name>ShrubCover</name>
  <name>BareTundraCover</name>
- <texture>Terrain/desert1.rgb</texture>
+ <texture>Terrain/shrub.rgb</texture>
  <xsize>500</xsize>
  <ysize>500</ysize>
  <light-coverage>20000000.0</light-coverage>
@@ -3064,7 +3097,7 @@ Shared parameters for various materials.
 
 <material>
  <name>BarrenCover</name>
- <texture>Terrain/rocks-desert.rgb</texture>
+ <texture>Terrain/rock.rgb</texture>
  <xsize>500</xsize>
  <ysize>500</ysize>
  <ambient>

@@ -31,7 +31,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
   </panel_2>
  
   <model>
-   <path>Aircraft/c310/Models/c310-dpm.xml</path>
+   <path>Aircraft/c310u3a/Models/c310u3a.xml</path>
   </model> 
 
   <instrument-options>

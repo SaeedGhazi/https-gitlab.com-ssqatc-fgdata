@@ -36,6 +36,12 @@
       <label>Specular reflections on objects</label>
       <property>/sim/rendering/specular-highlight</property>
     </checkbox>
+
+    <checkbox>
+      <halign>left</halign>
+      <label>Bump mapped clouds</label>
+      <property>/sim/rendering/bump-mapping</property>
+    </checkbox>
   </group>
 
   <group>

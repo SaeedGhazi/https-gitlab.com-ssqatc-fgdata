@@ -109,6 +109,12 @@ Jan 26 2003
 
   <layer>
    <name>Knob</name>
+   <condition>
+    <equals>
+     <property>/sim/instrument-options/omit-knobs</property>
+     <value></value>
+    </equals>
+   </condition>
    <w>96</w>
    <h>96</h>
    <texture>

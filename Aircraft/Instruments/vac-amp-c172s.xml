@@ -18,7 +18,7 @@ Feb 9 2003
  <h-base>512</h-base>
  <params>
   <engine-vac-select>/systems/vacuum/suction-inhg</engine-vac-select>
-  <engine-amp-select>/systems/electrical/suppliers/alternator</engine-amp-select>
+  <engine-amp-select>/systems/electrical/amps</engine-amp-select>
  </params>
  
  <layers>

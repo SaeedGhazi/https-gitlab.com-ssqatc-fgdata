@@ -424,8 +424,8 @@ Mar 18 2003
     <transformation>
      <type>y-shift</type>
      <property alias="../../../../../params/gs-needle"/>
-     <min>-11.0</min>
-     <max>11.0</max>
+     <min>-10.0</min>
+     <max>10.0</max>
      <scale>8.35</scale>
      <offset>-24</offset>
     </transformation>
@@ -457,8 +457,8 @@ Mar 18 2003
     <transformation>
      <type>y-shift</type>
      <property alias="../../../../../params/gs-needle"/>
-     <min>-11.0</min>
-     <max>11.0</max>
+     <min>-10.0</min>
+     <max>10.0</max>
      <scale>8.35</scale>
      <offset>-24</offset>
     </transformation>
@@ -547,6 +547,12 @@ Mar 18 2003
 
   <layer>
    <name>HDG Knob</name>
+   <condition>
+    <equals>
+     <property>/sim/instrument-options/omit-knobs</property>
+     <value></value>
+    </equals>
+   </condition>
    <w>88</w>
    <h>88</h>
    <texture>
@@ -575,6 +581,12 @@ Mar 18 2003
 
   <layer>
    <name>OBS Knob</name>
+   <condition>
+    <equals>
+     <property>/sim/instrument-options/omit-knobs</property>
+     <value></value>
+    </equals>
+   </condition>
    <w>88</w>
    <h>88</h>
    <texture>

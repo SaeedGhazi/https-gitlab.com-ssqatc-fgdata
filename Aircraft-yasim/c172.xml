@@ -1,7 +1,7 @@
 <airplane mass="1950">
 
 <!-- Approach configuration -->
-<approach speed="40" aoa="16">
+<approach speed="43" aoa="16">
   <control axis="/controls/throttle[0]" value="0.3"/>
   <control axis="/controls/mixture[0]" value="1.0"/>
   <control axis="/controls/flaps" value="1.0"/>
@@ -60,11 +60,11 @@
   <control axis="/controls/rudder" output="STEER"/>
 </gear>
 
-<gear x="-2.73" y="1.15" z="-1.36" compression=".3"> <!-- left main -->
+<gear x="-2.82" y="1.15" z="-1.36" compression=".3"> <!-- left main -->
   <control axis="/controls/brakes[0]" output="BRAKE"/>
 </gear>
 
-<gear x="-2.73" y="-1.15" z="-1.36" compression=".3"> <!-- left main -->
+<gear x="-2.82" y="-1.15" z="-1.36" compression=".3"> <!-- left main -->
   <control axis="/controls/brakes[1]" output="BRAKE"/>
 </gear>
 

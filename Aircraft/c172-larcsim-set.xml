@@ -11,23 +11,25 @@ October 23 2001 John Check, fgpanels@rockfish.net
 -->
 
 <PropertyList>
+ <sim>
+ 
+  <flight-model>larcsim</flight-model>
+  <aero>c172</aero>
+  <sound>true</sound>
 
- <flight-model>larcsim</flight-model>
- <aero>c172</aero>
- <sound>true</sound>
+  <panel>
+   <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
+   <visibility>true</visibility>
+  </panel>
+  <panel_2>
+   <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
+  </panel_2>
 
- <panel>
-  <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
-  <visibility>true</visibility>
- </panel>
- <panel_2>
-  <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
- </panel_2>
-
- <model>
-  <path><!-- you need to set this --></path>
- </model>
-  
+  <model>
+   <path><!-- you need to set this --></path>
+  </model>
+ 
+ </sim>
 </PropertyList>
 
 

@@ -41,6 +41,7 @@ B52-H set file.
   </systems>
 
   <chase-distance-m type="double" archive="y">-70.0</chase-distance-m>
+
  </sim>
 
  <controls>
@@ -185,6 +186,28 @@ B52-H set file.
    <engine-num type="int">7</engine-num>
   </engine>
  </engines>
+
+<!-- Fuel Tank indexes -->
+ <consumables>
+  <fuel>
+   <tank n="0">
+    <tank-num type="int">0</tank-num>
+   </tank>
+   <tank n="1">
+    <tank-num type="int">1</tank-num>
+   </tank>
+   <tank n="2">
+    <tank-num type="int">2</tank-num>
+   </tank>
+   <tank n="3">
+    <tank-num type="int">3</tank-num>
+   </tank>
+   <tank n="4">
+    <tank-num type="int">4</tank-num>
+   </tank>
+  </fuel>
+
+ </consumables>
 
 </PropertyList>
 

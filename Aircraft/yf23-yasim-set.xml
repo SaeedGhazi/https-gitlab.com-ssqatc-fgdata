@@ -3,7 +3,7 @@
 ************************************************************************
 NR/MD YF23 simulation config.
 
-2003-03-15 Lee Elliott  leee-fgfs@spatial.freeserve.co.uk
+2003-08-25 Lee Elliott  leee-fgfs@spatial.freeserve.co.uk
 ************************************************************************
 -->
 
@@ -40,8 +40,91 @@ NR/MD YF23 simulation config.
    </electrical>
   </systems>
 
-  <chase-distance-m type="double" archive="y">-35.0</chase-distance-m>
+  <chase-distance-m type="double" archive="y">-30.0</chase-distance-m>
  </sim>
+
+ <input>
+
+  <keyboard>
+
+   <key n="91">
+    <name>[</name>
+    <desc>Retract Flaps</desc>
+    <binding>
+     <step type="double">-0.25</step>
+    </binding>
+   </key>
+
+   <key n="93">
+    <name>]</name>
+    <desc>Extend Flaps</desc>
+    <binding>
+     <step type="double">0.25</step>
+    </binding>
+   </key>
+
+   <key n="98">
+    <desc>Apply all brakes</desc>
+    <name>b</name>
+    <binding n= "0">
+     <command>property-assign</command>
+     <property>/controls/gear/gear[0]/wheel[0]/brake</property>
+     <value type="double">1.0</value>
+    </binding>
+    <binding n= "1">
+     <command>property-assign</command>
+     <property>/controls/gear/gear[1]/wheel[0]/brake</property>
+     <value type="double">1.0</value>
+    </binding>
+    <binding n= "2">
+     <command>property-assign</command>
+     <property>/controls/gear/gear[2]/wheel[0]/brake</property>
+     <value type="double">1.0</value>
+    </binding>
+    <mod-up>
+     <desc>Release all brakes</desc>
+     <binding n= "0">
+      <command>property-assign</command>
+      <property>/controls/gear/gear[0]/wheel[0]/brake</property>
+      <value type="double">0.0</value>
+     </binding>
+     <binding n= "1">
+      <command>property-assign</command>
+      <property>/controls/gear/gear[1]/wheel[0]/brake</property>
+      <value type="double">0.0</value>
+     </binding>
+     <binding n= "2">
+      <command>property-assign</command>
+      <property>/controls/gear/gear[2]/wheel[0]/brake</property>
+      <value type="double">0.0</value>
+     </binding>
+    </mod-up>
+   </key>
+
+   <key n="100">
+    <name>d</name>
+    <desc>Retract Slats.</desc>
+    <binding>
+     <command>property-adjust</command>
+     <property>/controls/flight/slats</property>
+     <step type="double">-0.25</step>
+    </binding>
+   </key>
+
+   <key n="102">
+    <name>f</name>
+    <desc>Extend Slats.</desc>
+    <binding>
+     <command>property-adjust</command>
+     <property>/controls/flight/slats</property>
+     <step type="double">0.25</step>
+    </binding>
+   </key>
+
+  </keyboard>
+
+ </input>
+
 
  <autopilot>
    <config>
@@ -67,7 +150,37 @@ NR/MD YF23 simulation config.
      <zero-pitch-trim-full-throttle type="float">0.001</zero-pitch-trim-full-throttle>
 
    </config>
+
+   <settings>
+    <speed-kt type="double">350.0</speed-kt>
+   </settings>
+
  </autopilot>
+
+<!-- Engine indexes -->
+ <engines>
+  <engine n="0">
+   <engine-num type="int">0</engine-num>
+  </engine>
+  <engine n="1">
+   <engine-num type="int">1</engine-num>
+  </engine>
+ </engines>
+
+<!-- Fuel Tank indexes -->
+ <consumables>
+  <fuel>
+   <tank n="0">
+    <tank-num type="int">0</tank-num>
+   </tank>
+   <tank n="1">
+    <tank-num type="int">1</tank-num>
+   </tank>
+   <tank n="2">
+    <tank-num type="int">2</tank-num>
+   </tank>
+  </fuel>
+ </consumables>
 
 </PropertyList>
 

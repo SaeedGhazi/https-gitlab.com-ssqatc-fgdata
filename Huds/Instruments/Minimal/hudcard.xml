@@ -154,6 +154,36 @@
    <working>true</working>
   </g4>
 
+  <g5>
+   <name>Gauge5</name>
+   <x>10</x>
+   <y>190</y>
+   <width>10</width>
+   <height>100</height>
+   <loadfn>elevatortrimval</loadfn>
+   <options>134</options>	<!-- HUDS_LEFT | HUDS_VERT | HUDS_NOTEXT -->
+   <disp_scaling>-100.0</disp_scaling>
+   <maxValue>+1.0</maxValue>
+   <minValue>-1.0</minValue>
+   <major_divs>50</major_divs>
+   <minor_divs>0</minor_divs>
+   <modulator>0</modulator>
+   <value_span>2.0</value_span>	<!-- (maxValue - minValue) -->
+   <marker_offset>0.0</marker_offset>
+   <type>gauge</type>
+   <tick_bottom>true</tick_bottom>
+   <tick_top>true</tick_top>
+   <tick_right>false</tick_right>
+   <tick_left>false</tick_left>
+   <cap_bottom>false</cap_bottom>
+   <cap_top>false</cap_top>
+   <cap_right>false</cap_right>
+   <cap_left>false</cap_left>
+   <enable_pointer>true</enable_pointer>
+   <pointer_type>fixed</pointer_type>
+   <working>true</working>
+  </g5>
+
  </cards>
 
 </PropertyList>

@@ -860,17 +860,7 @@ Shared parameters for various materials.
   </object>
   <object>
    <path>Models/Buildings/big-church.ac</path>
-   <coverage-m2>75000</coverage-m2>
-   <heading-type>random</heading-type>
-  </object>
-  <object>
-   <path>Models/Buildings/brick-school.ac</path>
-   <coverage-m2>75000</coverage-m2>
-   <heading-type>random</heading-type>
-  </object>
-  <object>
-   <path>Models/Buildings/water-tower.ac</path>
-   <coverage-m2>100000</coverage-m2>
+   <coverage-m2>90000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
   <object>
@@ -886,6 +876,16 @@ Shared parameters for various materials.
   <object>
    <path>Models/Buildings/weapshop.ac</path>
    <coverage-m2>40000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/brick-school.ac</path>
+   <coverage-m2>285000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/water-tower.ac</path>
+   <coverage-m2>300000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
  </object-group>

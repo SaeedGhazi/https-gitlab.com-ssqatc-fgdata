@@ -724,7 +724,7 @@
 
    <option>
     <name>multiplay</name>
-    <arg>in|out,hz,address,port</arg>
+    <arg>{in|out},hz,address,port</arg>
     <description>strings/multiplay-desc</description>
     <description>strings/multiple-instance</description>
    </option>
@@ -880,7 +880,7 @@
 
    <option>
     <name>dme</name>
-    <arg>"nav1"|"nav2"|frequency&gt;</arg>
+    <arg>{nav1|nav2|frequency}</arg>
     <description>strings/dme-desc</description>
    </option>
 
@@ -891,7 +891,7 @@
 
    <option>
     <name>failure</name>
-    <arg>pitot|static|system|vacuum</arg>
+    <arg>{pitot|static|system|vacuum}</arg>
     <description>strings/failure-desc</description>
    </option>
   </section>

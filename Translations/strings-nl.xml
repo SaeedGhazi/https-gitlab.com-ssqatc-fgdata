@@ -124,6 +124,7 @@
   <in-air-desc>Start in de lucht (wordt ook gekozen als --altitude is opgegeven)</in-air-desc>
   <wind-desc>Specificeer wind uit de richting DIR (graden) met snelheid SPEED (knopen)</wind-desc>
   <turbulence-desc>Specificeer de turbulentie waarde. 0.0 is kalm. 1.0 is hevig</turbulence-desc>
+  <ceiling-desc>Start met een overtrokken wolkendek, eventuaal met een aangegeven dokte (standaard 2000 feet)</ceiling-desc>
   <aircraft-dir-desc>De locatie van het vliegtuig configuratiebestand relatief tot de locatie van het hoofdprogramma</aircraft-dir-desc>
 
   <aircraft-model-options>Vliegtuig model locatie (Alleen voor de UIUC FDM)</aircraft-model-options>
@@ -155,7 +156,7 @@
   <!-- Rendering options -->
   <rendering-options>Weergave Instellingen</rendering-options>
   <bpp-desc>Definiëer het aantal bits per schermpunt</bpp-desc>
-  <fog-disable-desc>Laat geen mist sien</fog-disable-desc>
+  <fog-disable-desc>Laat geen mist zien</fog-disable-desc>
   <fog-fastest-desc>Selecteer de snelste mist generator</fog-fastest-desc>
   <fog-nicest-desc>Selecteer de beste mist generator</fog-nicest-desc>
   <disable-horizon-effect>Laat hemellichamen niet groter zien als ze dicht bij de horizon staan</disable-horizon-effect>
@@ -164,6 +165,8 @@
   <enable-enhanced-lighting>Verbeterde startbaan verlichting</enable-enhanced-lighting>
   <disable-distance-attenuation>Lichtpunt verkleining voor voor verre lichten niet gebruiken</disable-distance-attenuation>
   <enable-distance-attenuation>Lichtpunt verkleining voor voor verre lichten wel gebruiken</enable-distance-attenuation>
+  <disable-specular-highlight>Laat geen zon reflecties zien op voorwerpen met textures</disable-specular-highlight>
+  <enable-specular-highlight>Laat de directe zonlicht reflecties op voorwerpen met een texture wel zien</enable-specular-highlight>
   <enable-clouds-desc>2D (vlakke) bewolking tonen</enable-clouds-desc>
   <disable-clouds-desc>2D (vlakke) bewolking verbergen</disable-clouds-desc>
   <enable-clouds3d-desc>3D (natuurlijke) bewolking tonen</enable-clouds3d-desc>
@@ -191,6 +194,7 @@
 
   <!-- Time options -->
   <time-options>Tijd Instellingen</time-options>
+  <timeofday-desc>Specificeer de tijd op de dag ('s-morgens, 's-middags, 's-avonds, 's-nachts</timeofday-desc>
   <time-offset-desc>Verhoog de tijd met deze waarde</time-offset-desc>
   <time-match-real-desc>Synchronizeer de tijd met de huidige tijd</time-match-real-desc>
   <time-match-local-desc>Synchronizeer de tijd met de lokale tijd</time-match-local-desc>
@@ -234,6 +238,16 @@
   <ray-desc>Verbinden met het Ray Woodworth bewegende stoel protocol</ray-desc>
   <rul-desc>Verbinden met het RUL protocol</rul-desc>
   <atc610x-desc>De atc610x interface activeren</atc610x-desc>
+
+  <!-- Avionics Options -->
+ <avionics-options>Avionica Opties</avionics-options>
+ <nav1-desc>Zet de NAV1 radio frequentie, eventueel voorafgegaand door een radial</nav1-desc>
+ <nav2-desc>Zet de NAV2 radio frequentie, eventueel voorafgegaand door een radial</nav2-desc>
+ <adf-desc>Zet de ADF radio frequentie, eventueel voorafgegaand door een kaart verdraaing</adf-desc>
+ <dme-desc>Maak de ADF afhankelijk van een van de radio's, of zet zijn interne frequentie</dme-desc>
+
+  <situation-options>Situatie opties</situation-options>
+ <failure-desc>Zorg dat de pitot, static, vacuum, of het elektrische systeem niet werkt (herhaal de optie voor meerdere systeem fouten)</failure-desc>
 
   <!-- Debugging Options -->
   <debugging-options>Foutopsporings Instellingen</debugging-options>

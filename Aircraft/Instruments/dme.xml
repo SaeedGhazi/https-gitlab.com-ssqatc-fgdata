@@ -371,7 +371,7 @@ properties' values.
     </condition>
     <command>property-assign</command>
     <property>/instrumentation/dme/frequencies/source</property>
-    <value>/radios/nav[0]/frequencies/selected-mhz</value>
+    <value>/instrumentation/nav[0]/frequencies/selected-mhz</value>
    </binding>
    <binding>
     <condition>
@@ -393,7 +393,7 @@ properties' values.
     </condition>
     <command>property-assign</command>
     <property>/instrumentation/dme/frequencies/selected-mhz</property>
-    <property>/radios/nav[1]/frequencies/selected-mhz</property>
+    <property>/instrumentation/nav[1]/frequencies/selected-mhz</property>
    </binding>
   </action>
 
@@ -421,7 +421,7 @@ properties' values.
     </condition>
     <command>property-assign</command>
     <property>/instrumentation/dme/frequencies/source</property>
-    <value>/radios/nav[0]/frequencies/selected-mhz</value>
+    <value>/instrumentation/nav[0]/frequencies/selected-mhz</value>
    </binding>
    <binding>
     <condition>
@@ -443,7 +443,7 @@ properties' values.
     </condition>
     <command>property-assign</command>
     <property>/instrumentation/dme/frequencies/selected-mhz</property>
-    <property>/radios/nav[0]/frequencies/selected-mhz</property>
+    <property>/instrumentation/nav[0]/frequencies/selected-mhz</property>
    </binding>
    <binding>
     <condition>
@@ -454,7 +454,7 @@ properties' values.
     </condition>
     <command>property-assign</command>
     <property>/instrumentation/dme/frequencies/source</property>
-    <value>/radios/nav[1]/frequencies/selected-mhz</value>
+    <value>/instrumentation/nav[1]/frequencies/selected-mhz</value>
    </binding>
   </action>
 

@@ -18,13 +18,13 @@ Mar 18 2003
  <h-base>512</h-base>
  
  <params>
-  <gs-needle>/radios/nav[0]/gs-needle-deflection</gs-needle>
-  <vor-needle>/radios/nav[0]/heading-needle-deflection</vor-needle>
-  <radial-selected-deg>/radios/nav[0]/radials/selected-deg</radial-selected-deg>
-  <to-flag>/radios/nav[0]/to-flag</to-flag>
-  <from-flag>/radios/nav[0]/from-flag</from-flag>
-  <vor-in-range>/radios/nav[0]/in-range</vor-in-range>
-  <has-gs>/radios/nav[0]/has-gs</has-gs>
+  <gs-needle>/instrumentation/nav[0]/gs-needle-deflection</gs-needle>
+  <vor-needle>/instrumentation/nav[0]/heading-needle-deflection</vor-needle>
+  <radial-selected-deg>/instrumentation/nav[0]/radials/selected-deg</radial-selected-deg>
+  <to-flag>/instrumentation/nav[0]/to-flag</to-flag>
+  <from-flag>/instrumentation/nav[0]/from-flag</from-flag>
+  <vor-in-range>/instrumentation/nav[0]/in-range</vor-in-range>
+  <has-gs>/instrumentation/nav[0]/has-gs</has-gs>
   <heading-deg>/orientation/heading-magnetic-deg</heading-deg>
   <autopilot-heading-deg>/autopilot/settings/heading-bug-deg</autopilot-heading-deg>
  </params>

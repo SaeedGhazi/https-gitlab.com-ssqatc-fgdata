@@ -18,14 +18,14 @@ Jan 26 2003
  <h-base>512</h-base>
 
  <params>
-  <nav-to-flag>/radios/nav[0]/to-flag</nav-to-flag> -->
-  <nav-from-flag>/radios/nav[0]/from-flag</nav-from-flag> -->
-  <nav-radial-selected>/radios/nav[0]/radials/selected-deg</nav-radial-selected>
-  <nav-gs-needle-deflection>/radios/nav[0]/gs-needle-deflection</nav-gs-needle-deflection>
-  <nav-heading-needle-deflection>/radios/nav[0]/heading-needle-deflection</nav-heading-needle-deflection>
+  <nav-to-flag>/instrumentation/nav[0]/to-flag</nav-to-flag> -->
+  <nav-from-flag>/instrumentation/nav[0]/from-flag</nav-from-flag> -->
+  <nav-radial-selected>/instrumentation/nav[0]/radials/selected-deg</nav-radial-selected>
+  <nav-gs-needle-deflection>/instrumentation/nav[0]/gs-needle-deflection</nav-gs-needle-deflection>
+  <nav-heading-needle-deflection>/instrumentation/nav[0]/heading-needle-deflection</nav-heading-needle-deflection>
   <!-- when posible change to nav-gs-in-range -->
-  <nav-gs-in-range>/radios/nav[0]/in-range</nav-gs-in-range>
-  <nav-in-range>/radios/nav[0]/in-range</nav-in-range>
+  <nav-gs-in-range>/instrumentation/nav[0]/in-range</nav-gs-in-range>
+  <nav-in-range>/instrumentation/nav[0]/in-range</nav-in-range>
  </params>
  
  <layers>

@@ -18,11 +18,11 @@ Jan 26 2003
  <h-base>512</h-base>
 
  <params>
-  <nav-to-flag>/radios/nav[1]/to-flag</nav-to-flag> -->
-  <nav-from-flag>/radios/nav[1]/from-flag</nav-from-flag> -->
-  <nav-radial-selected>/radios/nav[1]/radials/selected-deg</nav-radial-selected>
-  <nav-heading-needle-deflection>/radios/nav[1]/heading-needle-deflection</nav-heading-needle-deflection>
-  <nav-in-range>/radios/nav[1]/in-range</nav-in-range>
+  <nav-to-flag>/instrumentation/nav[1]/to-flag</nav-to-flag> -->
+  <nav-from-flag>/instrumentation/nav[1]/from-flag</nav-from-flag> -->
+  <nav-radial-selected>/instrumentation/nav[1]/radials/selected-deg</nav-radial-selected>
+  <nav-heading-needle-deflection>/instrumentation/nav[1]/heading-needle-deflection</nav-heading-needle-deflection>
+  <nav-in-range>/instrumentation/nav[1]/in-range</nav-in-range>
  </params>
  
  <layers>

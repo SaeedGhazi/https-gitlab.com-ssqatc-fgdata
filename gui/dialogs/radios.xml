@@ -46,7 +46,7 @@
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
-   <property>/radios/comm[0]/frequencies/selected-mhz</property>
+   <property>/instrumentation/comm[0]/frequencies/selected-mhz</property>
   </input>
 
   <button>
@@ -63,8 +63,8 @@
    </binding>
    <binding>
     <command>property-swap</command>
-    <property>/radios/comm[0]/frequencies/selected-mhz</property>
-    <property>/radios/comm[0]/frequencies/standby-mhz</property>
+    <property>/instrumentation/comm[0]/frequencies/selected-mhz</property>
+    <property>/instrumentation/comm[0]/frequencies/standby-mhz</property>
    </binding>
    <binding>
     <command>dialog-update</command>
@@ -83,7 +83,7 @@
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
-   <property>/radios/comm[0]/frequencies/standby-mhz</property>
+   <property>/instrumentation/comm[0]/frequencies/standby-mhz</property>
   </input>
 
  </group>
@@ -103,7 +103,7 @@
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
-   <property>/radios/comm[1]/frequencies/selected-mhz</property>
+   <property>/instrumentation/comm[1]/frequencies/selected-mhz</property>
   </input>
 
   <button>
@@ -120,8 +120,8 @@
    </binding>
    <binding>
     <command>property-swap</command>
-    <property>/radios/comm[1]/frequencies/selected-mhz</property>
-    <property>/radios/comm[1]/frequencies/standby-mhz</property>
+    <property>/instrumentation/comm[1]/frequencies/selected-mhz</property>
+    <property>/instrumentation/comm[1]/frequencies/standby-mhz</property>
    </binding>
    <binding>
     <command>dialog-update</command>
@@ -140,7 +140,7 @@
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
-   <property>/radios/comm[1]/frequencies/standby-mhz</property>
+   <property>/instrumentation/comm[1]/frequencies/standby-mhz</property>
   </input>
 
  </group>
@@ -160,7 +160,7 @@
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
-   <property>/radios/nav[0]/frequencies/selected-mhz</property>
+   <property>/instrumentation/nav[0]/frequencies/selected-mhz</property>
   </input>
 
   <button>
@@ -177,8 +177,8 @@
    </binding>
    <binding>
     <command>property-swap</command>
-    <property>/radios/nav[0]/frequencies/selected-mhz</property>
-    <property>/radios/nav[0]/frequencies/standby-mhz</property>
+    <property>/instrumentation/nav[0]/frequencies/selected-mhz</property>
+    <property>/instrumentation/nav[0]/frequencies/standby-mhz</property>
    </binding>
    <binding>
     <command>dialog-update</command>
@@ -197,7 +197,7 @@
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
-   <property>/radios/nav[0]/frequencies/standby-mhz</property>
+   <property>/instrumentation/nav[0]/frequencies/standby-mhz</property>
   </input>
 
   <input>
@@ -207,7 +207,7 @@
    <width>75</width>
    <height>25</height>
    <label>deg</label>
-   <property>/radios/nav[0]/radials/selected-deg</property>
+   <property>/instrumentation/nav[0]/radials/selected-deg</property>
   </input>
 
  </group>
@@ -227,7 +227,7 @@
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
-   <property>/radios/nav[1]/frequencies/selected-mhz</property>
+   <property>/instrumentation/nav[1]/frequencies/selected-mhz</property>
   </input>
 
   <button>
@@ -244,8 +244,8 @@
    </binding>
    <binding>
     <command>property-swap</command>
-    <property>/radios/nav[1]/frequencies/selected-mhz</property>
-    <property>/radios/nav[1]/frequencies/standby-mhz</property>
+    <property>/instrumentation/nav[1]/frequencies/selected-mhz</property>
+    <property>/instrumentation/nav[1]/frequencies/standby-mhz</property>
    </binding>
    <binding>
     <command>dialog-update</command>
@@ -264,7 +264,7 @@
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
-   <property>/radios/nav[1]/frequencies/standby-mhz</property>
+   <property>/instrumentation/nav[1]/frequencies/standby-mhz</property>
   </input>
 
   <input>
@@ -274,7 +274,7 @@
    <width>75</width>
    <height>25</height>
    <label>deg</label>
-   <property>/radios/nav[1]/radials/selected-deg</property>
+   <property>/instrumentation/nav[1]/radials/selected-deg</property>
   </input>
 
  </group>
@@ -361,7 +361,7 @@
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
-   <property>/radios/dme/frequencies/selected-khz</property>
+   <property>/instrumentation/dme/frequencies/selected-khz</property>
   </input>
 
  </group>

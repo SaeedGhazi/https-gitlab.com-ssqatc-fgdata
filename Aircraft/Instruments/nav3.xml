@@ -45,7 +45,7 @@ properties' values.
    <transformations>
     <transformation>
      <type>rotation</type>
-     <property>/radios/nav[0]/radials/selected-deg</property>
+     <property>/instrumentation/nav[0]/radials/selected-deg</property>
      <min>0</min>
      <max>360</max>
      <scale>-1.0</scale>
@@ -60,7 +60,7 @@ properties' values.
    <h>64</h>
    <layer>
     <condition>
-     <property>/radios/dme/in-range</property>
+     <property>/instrumentation/dme/in-range</property>
     </condition>
     <name>display</name>
     <type>text</type>
@@ -73,7 +73,7 @@ properties' values.
     <chunks>
      <chunk>
       <type>number-value</type>
-      <property>/radios/dme/distance-nm</property>
+      <property>/instrumentation/dme/distance-nm</property>
       <format>%3.1f</format>
      </chunk>
     </chunks>
@@ -118,7 +118,7 @@ properties' values.
    <chunks>
     <chunk>
      <type>number-value</type>
-     <property>/radios/nav[0]/frequencies/selected-mhz</property>
+     <property>/instrumentation/nav[0]/frequencies/selected-mhz</property>
      <format>%3.2f</format>
     </chunk>
    </chunks>
@@ -151,7 +151,7 @@ properties' values.
    <type>switch</type>
    <layer>
     <condition>
-     <property>/radios/nav[0]/to-flag</property>
+     <property>/instrumentation/nav[0]/to-flag</property>
     </condition>
     <name>TO flag</name>
     <texture>
@@ -169,7 +169,7 @@ properties' values.
     <type>switch</type>
     <layer>
      <condition>
-      <property>/radios/nav[1]/from-flag</property>
+      <property>/instrumentation/nav[1]/from-flag</property>
      </condition>
      <name>FROM flag</name>
      <texture>
@@ -216,7 +216,7 @@ properties' values.
    <transformations>
     <transformation>
      <type>x-shift</type>
-     <property>/radios/nav[0]/heading-needle-deflection</property>
+     <property>/instrumentation/nav[0]/heading-needle-deflection</property>
      <min>-10.0</min>
      <max>10.0</max>
      <scale>3.2</scale>
@@ -311,7 +311,7 @@ properties' values.
     </transformation>
     <transformation>
      <type>rotation</type>
-     <property>/radios/nav[0]/radials/selected-deg</property>
+     <property>/instrumentation/nav[0]/radials/selected-deg</property>
      <min>0</min>
      <max>360</max>
     </transformation>
@@ -384,7 +384,7 @@ properties' values.
    <h>24</h>
    <binding>
     <command>property-adjust</command>
-    <property>/radios/nav[0]/frequencies/selected-mhz</property>
+    <property>/instrumentation/nav[0]/frequencies/selected-mhz</property>
     <step>-0.05</step>
     <min>108.0</min>
     <max>118.0</max>
@@ -402,7 +402,7 @@ properties' values.
    <h>24</h>
    <binding>
    <command>property-adjust</command>
-    <property>/radios/nav[0]/frequencies/selected-mhz</property>
+    <property>/instrumentation/nav[0]/frequencies/selected-mhz</property>
     <step>-0.5</step>
     <min>108.0</min>
     <max>118.0</max>
@@ -420,7 +420,7 @@ properties' values.
    <h>24</h>
    <binding>
    <command>property-adjust</command>
-    <property>/radios/nav[0]/frequencies/selected-mhz</property>
+    <property>/instrumentation/nav[0]/frequencies/selected-mhz</property>
     <step>-0.05</step>
     <min>108.0</min>
     <max>118.0</max>
@@ -438,7 +438,7 @@ properties' values.
    <h>24</h>
    <binding>
     <command>property-adjust</command>
-    <property>/radios/nav[0]/frequencies/selected-mhz</property>
+    <property>/instrumentation/nav[0]/frequencies/selected-mhz</property>
     <step>-0.5</step>
     <min>108.0</min>
     <max>118.0</max>
@@ -456,7 +456,7 @@ properties' values.
    <h>24</h>
    <binding>
     <command>property-adjust</command>
-    <property>/radios/nav[0]/radials/selected-deg</property>
+    <property>/instrumentation/nav[0]/radials/selected-deg</property>
     <step>-1.0</step>
     <min>0</min>
     <max>360</max>
@@ -473,7 +473,7 @@ properties' values.
    <h>24</h>
    <binding>
     <command>property-adjust</command>
-    <property>/radios/nav[0]/radials/selected-deg</property>
+    <property>/instrumentation/nav[0]/radials/selected-deg</property>
     <step>-5.0</step>
     <min>0</min>
     <max>360</max>
@@ -490,7 +490,7 @@ properties' values.
    <h>24</h>
    <binding>
     <command>property-adjust</command>
-    <property>/radios/nav[0]/radials/selected-deg</property>
+    <property>/instrumentation/nav[0]/radials/selected-deg</property>
     <step>1.0</step>
     <min>0</min>
     <max>360</max>
@@ -507,7 +507,7 @@ properties' values.
    <h>24</h>
    <binding>
     <command>property-adjust</command>
-    <property>/radios/nav[0]/radials/selected-deg</property>
+    <property>/instrumentation/nav[0]/radials/selected-deg</property>
     <step>5.0</step>
     <min>0</min>
     <max>360</max>

@@ -5,6 +5,7 @@
  <sim>
 
   <description>UFO from the 'White Project' of the UNESCO</description>
+  <author>ET</author>
  
   <flight-model>ufo</flight-model>
 

@@ -109,9 +109,10 @@ showWeightDialog = func {
         gwg = dialog.addChild("group");
         gwg.set("layout", "hbox");
         gwg.addChild("empty").set("stretch", 1);
-        gwg.addChild("text").set("label", "Gross Weight (lb):");
+        gwg.addChild("text").set("label", "Gross Weight:");
         txt = gwg.addChild("text");
         txt.set("label", "0123456789");
+        txt.set("format", "%.0f lb");
         txt.set("property", "/yasim/gross-weight-lbs");
         txt.set("live", 1);
         gwg.addChild("empty").set("stretch", 1);
@@ -181,12 +182,14 @@ showWeightDialog = func {
 
         lbs = tcell(fuelTable, "text", i+1, 3);
         lbs.set("property", tankprop ~ "/level-lbs");
-        lbs.set("label", "0123456789");
+        lbs.set("label", "0123456");
+        lbs.set("format", "%.3f");
         lbs.set("live", 1);
         
         gals = tcell(fuelTable, "text", i+1, 4);
         gals.set("property", tankprop ~ "/level-gal_us");
-        gals.set("label", "0123456789");
+        gals.set("label", "0123456");
+        gals.set("format", "%.3f");
         gals.set("live", 1);
     }
 
@@ -221,7 +224,8 @@ showWeightDialog = func {
 
         lbs = tcell(weightTable, "text", i+1, 2);
         lbs.set("property", wprop);
-        lbs.set("label", "0123456789");
+        lbs.set("label", "0123456");
+        lbs.set("format", "%.0f");
         lbs.set("live", 1);
     }
 

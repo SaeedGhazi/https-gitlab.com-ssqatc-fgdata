@@ -28,6 +28,14 @@ Node = {
     removeChild    : func { wrap(_removeChild(me._g, arg)) },
     getNode        : func { wrap(_getNode(me._g, arg)) },
 
+    getPath : func {
+        name = getName();
+        if(getIndex() != 0) { name = name ~ "[" ~ getIndex() ~ "]"; }
+        if(getParent())     { name = getParent().getPath() ~ "/" ~ name; }
+        else                { name = "/" ~ name; }
+        return name;
+    },
+
     getBoolValue : func {
         val = me.getValue();
         if(me.getType() == "STRING" and val == "false") { 0 }

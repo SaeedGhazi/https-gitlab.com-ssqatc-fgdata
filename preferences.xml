@@ -13,7 +13,7 @@ Started September 2000 by David Megginson, david@megginson.com
  <!-- General simulation preferences -->
  <sim>
   <intl include="Translations/locale.xml"/>
-  <aircraft>c172-3d</aircraft>
+  <aircraft>c172p</aircraft>
   <virtual-cockpit type="bool">false</virtual-cockpit>
   <presets>
    <airport-id>KSFO</airport-id>
@@ -61,10 +61,13 @@ Started September 2000 by David Megginson, david@megginson.com
     <field-of-view type="double">55.0</field-of-view>
   </current-view>
   <panel>
-   <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
+   <path>Aircraft/Generic/Panels/generic-vfr-panel.xml</path>
    <visibility type="bool">false</visibility>
    <jitter type="bool">false</jitter>
   </panel>
+  <panel_2>
+   <path>Aircraft/Generic/Panels/generic-trans-mini-panel.xml</path>
+  </panel_2>
   <hud>
    <path>Huds/Default/default.xml</path>
    <visibility type="bool">false</visibility>

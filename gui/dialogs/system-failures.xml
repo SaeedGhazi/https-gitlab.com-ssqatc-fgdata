@@ -5,111 +5,63 @@
  <!-- Control the weather -->
 
  <name>system-failures</name>
- <width>320</width>
- <height>300</height>
+ <width>300</width>
+ <height>240</height>
  <modal>false</modal>
 
  <text>
   <x>10</x>
-  <y>270</y>
+  <y>210</y>
   <label>System Failures</label>
  </text>
 
- <group>
-  <y>210</y>
-  <text>
-   <x>10</x>
-   <label>System</label>
-  </text>
-  <text>
-   <x>150</x>
-   <label>Enabled</label>
-  </text>
- </group>
-
- <group>
+ <text>
+  <x>30</x>
   <y>180</y>
+  <label>(Uncheck a system to fail it.)</label>
+ </text>
 
-  <text>
-   <x>30</x>
-   <y>0</y>
-   <label>Static System</label>
-  </text>
-
-  <checkbox>
-   <x>200</x>
-   <y>10</y>
-   <width>12</width>
-   <height>12</height>
-   <property>/systems/static/serviceable</property>
-  </checkbox>
-
- </group>
-
-
- <group>
+ <checkbox>
+  <x>30</x>
   <y>150</y>
+  <width>20</width>
+  <height>20</height>
+  <label>Static System</label>
+  <property>/systems/static/serviceable</property>
+ </checkbox>
 
-  <text>
-   <x>30</x>
-   <y>0</y>
-   <label>Pitot System</label>
-  </text>
-
-  <checkbox>
-   <x>200</x>
-   <y>10</y>
-   <width>12</width>
-   <height>12</height>
-   <property>/systems/pitot/serviceable</property>
-  </checkbox>
-
- </group>
-
-
- <group>
+ <checkbox>
+  <x>30</x>
   <y>120</y>
+  <width>20</width>
+  <height>20</height>
+  <label>Pitot System</label>
+  <property>/systems/pitot/serviceable</property>
+ </checkbox>
 
-  <text>
-   <x>30</x>
-   <y>0</y>
-   <label>Electrical System</label>
-  </text>
-
-  <checkbox>
-   <x>200</x>
-   <y>10</y>
-   <width>12</width>
-   <height>12</height>
-   <property>/systems/electrical/serviceable</property>
-  </checkbox>
-
- </group>
-
- <group>
+ <checkbox>
+  <x>30</x>
   <y>90</y>
+  <width>20</width>
+  <height>20</height>
+  <label>Electrical System</label>
+  <property>/systems/electrical/serviceable</property>
+ </checkbox>
 
-  <text>
-   <x>30</x>
-   <y>0</y>
-   <label>Vacuum System</label>
-  </text>
-
-  <checkbox>
-   <x>200</x>
-   <y>10</y>
-   <width>12</width>
-   <height>12</height>
-   <property>/systems/vacuum/serviceable</property>
-  </checkbox>
-
- </group>
+ <checkbox>
+  <x>30</x>
+  <y>60</y>
+  <width>20</width>
+  <height>20</height>
+  <label>Vacuum System</label>
+  <property>/systems/vacuum/serviceable</property>
+ </checkbox>
 
  <group>
   <y>10</y>
 
   <button>
-   <x>5</x>
+   <x>10</x>
    <y>0</y>
    <legend>OK</legend>
    <binding>
@@ -122,7 +74,7 @@
   </button>
 
   <button>
-   <x>80</x>
+   <x>60</x>
    <y>0</y>
    <legend>Apply</legend>
    <binding>
@@ -131,7 +83,7 @@
   </button>
 
   <button>
-   <x>155</x>
+   <x>140</x>
    <y>0</y>
    <legend>Reset</legend>
    <binding>
@@ -140,7 +92,7 @@
   </button>
 
   <button>
-   <x>230</x>
+   <x>220</x>
    <y>0</y>
    <legend>Cancel</legend>
    <binding>

@@ -113,6 +113,14 @@
    </binding>
   </item>
 
+  <item>
+   <label>Instrument Failures</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>instrument-failures</dialog-name>
+   </binding>
+  </item>
+
  </menu>
 
  <menu>

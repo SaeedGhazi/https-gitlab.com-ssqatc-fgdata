@@ -342,7 +342,7 @@ Here's a sample Joystick axis declaration in XML:
  &lt;desc&gt;Aileron&lt;/desc&gt;          &lt;!-- descriptive name (optional) --&gt;
  &lt;binding&gt;                     &lt;!-- open a container for the binding --&gt;
   &lt;command&gt;property-scale&lt;/command&gt;    &lt;!-- pick a command --&gt;
-  &lt;property&gt;/controls/aileron&lt;/property&gt;   &lt;!-- target a property --&gt;
+  &lt;property&gt;/controls/flight/aileron&lt;/property&gt;   &lt;!-- target a property --&gt;
  &lt;/binding&gt;                    &lt;!-- closing tag for binding --&gt;
 &lt;/axis&gt;                        &lt;!-- closing tag for axis --&gt;
 </PRE>
@@ -356,7 +356,7 @@ command-line option equivalent of this declaration (leaving out the
 </P>
 <PRE>
   --prop:/input/joysticks/js[0]/axis[0]/binding/command=property-scale
-  --prop:/input/joysticks/js[0]/axis[0]/binding/property=/controls/aileron
+  --prop:/input/joysticks/js[0]/axis[0]/binding/property=/controls/flight/aileron
 </PRE>
 <br>
 <P>
@@ -378,7 +378,7 @@ steps and gives a smoother action than a plain float.
  &lt;!-- See important note about dead-band below --&gt;
  &lt;binding&gt;
   &lt;command&gt;property-scale&lt;/command&gt;
-  &lt;property&gt;/controls/throttle&lt;/property&gt;
+  &lt;property&gt;/controls/engines/engine[0]/throttle&lt;/property&gt;
   &lt;offset type="double"&gt;-1.0&lt;/offset&gt;
   &lt;factor type="double"&gt;-0.5&lt;/factor&gt;
  &lt;/binding&gt;
@@ -387,7 +387,7 @@ steps and gives a smoother action than a plain float.
 or
 
  --prop:/input/joysticks/js[0]/axis[2]/binding/command=property-scale
- --prop:/input/joysticks/js[0]/axis[2]/binding/property=/controls/throttle
+ --prop:/input/joysticks/js[0]/axis[2]/binding/property=/controls/engiens/engine[0]/throttle
  --prop:/input/joysticks/js[0]/axis[2]/binding/offset=-1.0
  --prop:/input/joysticks/js[0]/axis[2]/binding/factor=-0.5
 </PRE>
@@ -445,7 +445,7 @@ Here's a sample joystick button declaration in XML:
  &lt;repeatable&gt;true&lt;/repeatable&gt;  &lt;!-- Ok, repeatable is outside the command manager too --&gt;
   &lt;binding&gt;                           &lt;!-- Open the "binding" node of the tree--&gt;
    &lt;command&gt;property-adjust&lt;/command&gt;           &lt;!-- pick a command type to bind --&gt;
-   &lt;property&gt;/controls/elevator-trim&lt;/property&gt; &lt;!-- target a property --&gt;
+   &lt;property&gt;/controls/flight/elevator-trim&lt;/property&gt; &lt;!-- target a property --&gt;
    &lt;step type="double"&gt;0.001&lt;/step&gt;
   &lt;/binding&gt;
 &lt;/button&gt;
@@ -458,7 +458,7 @@ In command-line option syntax, this would appear as
 <PRE>
   --prop:/input/joysticks/js[0]/button[1]/repeatable=true     &lt;-- See? no 'binding' --&gt;
   --prop:/input/joysticks/js[0]/button[1]/binding/command=property-adjust
-  --prop:/input/joysticks/js[0]/button[1]/binding/property=/controls/elevator-trim
+  --prop:/input/joysticks/js[0]/button[1]/binding/property=/controls/flight/elevator-trim
   --prop:/input/joysticks/js[0]/button[1]/binding//step=0.001
 </PRE>
 <br>
@@ -473,13 +473,13 @@ button:
  &lt;desc&gt;Left brake&lt;/desc&gt;
  &lt;binding&gt;
   &lt;command&gt;property-assign&lt;/command&gt;
-  &lt;property&gt;/controls/brakes[0]&lt;/property&gt;
+  &lt;property&gt;/controls/gear/wheel[0]/brake&lt;/property&gt;
   &lt;value type="double"&gt;1.0&lt;/value&gt;    &lt;!-- brakes are a toggle so 1.0 represents on --&gt;
   &lt;/binding&gt;
    &lt;mod-up&gt;                    &lt;!-- it's not a parking brake so we need to release it --&gt;
     &lt;binding&gt;
     &lt;command&gt;property-assign&lt;/command&gt;
-    &lt;property&gt;/controls/brakes[0]&lt;/property&gt;
+    &lt;property&gt;/controls/gear/wheel[0]/brake&lt;/property&gt;
     &lt;value type="double"&gt;0.0&lt;/value&gt;       &lt;!-- 1.0 is on so 0.0 is off, right? --&gt;
    &lt;/binding&gt;
   &lt;/mod-up&gt;
@@ -500,10 +500,10 @@ Here's the command-line equivalent:
 </p>
 <PRE>
   --prop:/input/joysticks/js[0]/button[4]/binding/command=property-assign
-  --prop:/input/joysticks/js[0]/button[4]/binding/property=/controls/brakes[0]
+  --prop:/input/joysticks/js[0]/button[4]/binding/property=/controls/gear/wheel[0]/brake
   --prop:/input/joysticks/js[0]/button[4]/binding/value=1.0
   --prop:/input/joysticks/js[0]/button[4]/mod-up/binding/command=property-assign
-  --prop:/input/joysticks/js[0]/button[4]/mod-up/binding/property=/controls/brakes[0]
+  --prop:/input/joysticks/js[0]/button[4]/mod-up/binding/property=/controls/gear/wheel[0]/brake
   --prop:/input/joysticks/js[0]/button[4]/mod-up/binding/value=0.0
 </PRE>
 <br>
@@ -518,33 +518,33 @@ button 0 is pressed, and releases all three when button 0 is released:
   &lt;desc&gt;Brakes&lt;/desc&gt;
   &lt;binding&gt;
    &lt;command&gt;property-assign&lt;/command&gt;
-   &lt;property&gt;/controls/brakes[0]&lt;/property&gt;
+   &lt;property&gt;/controls/gear/wheel[0]/brake&lt;/property&gt;
    &lt;value type="double"&gt;1.0&lt;/value&gt;
   &lt;/binding&gt;
   &lt;binding&gt;
    &lt;command&gt;property-assign&lt;/command&gt;
-   &lt;property&gt;/controls/brakes[1]&lt;/property&gt;
+   &lt;property&gt;/controls/gear/wheel[1]/brake&lt;/property&gt;
    &lt;value type="double"&gt;1.0&lt;/value&gt;
   &lt;/binding&gt;
   &lt;binding&gt;
    &lt;command&gt;property-assign&lt;/command&gt;
-   &lt;property&gt;/controls/brakes[2]&lt;/property&gt;
+   &lt;property&gt;/controls/gear/wheel[2]/brake&lt;/property&gt;
    &lt;value type="double"&gt;1.0&lt;/value&gt;
   &lt;/binding&gt;
   &lt;mod-up&gt;
    &lt;binding&gt;
     &lt;command&gt;property-assign&lt;/command&gt;
-    &lt;property&gt;/controls/brakes[0]&lt;/property&gt;
+    &lt;property&gt;/controls/gear/wheel[0]/brake&lt;/property&gt;
     &lt;value type="double"&gt;0.0&lt;/value&gt;
    &lt;/binding&gt;
    &lt;binding&gt;
     &lt;command&gt;property-assign&lt;/command&gt;
-    &lt;property&gt;/controls/brakes[1]&lt;/property&gt;
+    &lt;property&gt;/controls/gear/wheel[1]/brake&lt;/property&gt;
     &lt;value type="double"&gt;0.0&lt;/value&gt;
    &lt;/binding&gt;
    &lt;binding&gt;
     &lt;command&gt;property-assign&lt;/command&gt;
-    &lt;property&gt;/controls/brakes[2]&lt;/property&gt;
+    &lt;property&gt;/controls/gear/wheel[2]/brake&lt;/property&gt;
     &lt;value type="double"&gt;0.0&lt;/value&gt;
    &lt;/binding&gt;
   &lt;/mod-up&gt;
@@ -558,13 +558,13 @@ XML will handle this automatically):
 </P>
 <PRE>
   --prop:/input/joysticks/button[0]/binding[0]/command=property-assign
-  --prop:/input/joysticks/button[0]/binding[0]/property=/controls/brakes[0]
+  --prop:/input/joysticks/button[0]/binding[0]/property=/controls/gear/wheel[0]/brake
   --prop:/input/joysticks/button[0]/binding[0]/value=1.0
   --prop:/input/joysticks/button[0]/binding[1]/command=property-assign
-  --prop:/input/joysticks/button[0]/binding[1]/property=/controls/brakes[1]
+  --prop:/input/joysticks/button[0]/binding[1]/property=/controls/gear/wheel[1]/brake
   --prop:/input/joysticks/button[0]/binding[1]/value=1.0
   --prop:/input/joysticks/button[0]/binding[2]/command=property-assign
-  --prop:/input/joysticks/button[0]/binding[2]/property=/controls/brakes[2]
+  --prop:/input/joysticks/button[0]/binding[2]/property=/controls/gear/wheel[2]/brake
   --prop:/input/joysticks/button[0]/binding[2]/value=1.0
   --prop:/input/joysticks/button[0]/mod-up/binding[0]/command=property-assign
   --prop:/input/joysticks/button[0]/mod-up/binding[0]/property=brakes[0]
@@ -613,12 +613,12 @@ Here's an example of how to use an axis to adjust the elevator trim:
 <PRE>
   --prop:/input/joysticks/js/axis[1]/low/repeatable=true
   --prop:/input/joysticks/js/axis[1]/low/binding/command=property-adjust
-  --prop:/input/joysticks/js/axis[1]/low/binding/property=/controls/elevator-trim
+  --prop:/input/joysticks/js/axis[1]/low/binding/property=/controls/flight/elevator-trim
   --prop:/input/joysticks/js/axis[1]/low/binding/step=0.001
 
   --prop:/input/joysticks/js/axis[1]/high/repeatable=true
   --prop:/input/joysticks/js/axis[1]/high/binding/command=property-adjust
-  --prop:/input/joysticks/js/axis[1]/high/binding/property=/controls/elevator-trim
+  --prop:/input/joysticks/js/axis[1]/high/binding/property=/controls/flight/elevator-trim
   --prop:/input/joysticks/js/axis[1]/high/binding/step=-0.001
 </PRE>
 <br>
@@ -709,13 +709,13 @@ just as with the joystick:
   &lt;desc&gt;Left brake&lt;/desc&gt;
    &lt;binding&gt;
    &lt;command&gt;property-assign&lt;/command&gt;
-   &lt;property&gt;/controls/brakes[0]&lt;/property&gt;
+   &lt;property&gt;/controls/gear/wheel[0]/brake&lt;/property&gt;
    &lt;value type="double"&gt;1.0&lt;/value&gt;
   &lt;/binding&gt;
   &lt;mod-up&gt;
    &lt;binding&gt;
    &lt;command&gt;property-assign&lt;/command&gt;
-   &lt;property&gt;/controls/brakes[0]&lt;/property&gt;
+   &lt;property&gt;/controls/gear/wheel[0]/brake&lt;/property&gt;
    &lt;value type="double"&gt;0.0&lt;/value&gt;
    &lt;/binding&gt;
   &lt;/mod-up&gt;
@@ -733,15 +733,15 @@ no &lt;mod-up&gt; tag, so it *does* work like a parking brake.
   &lt;desc&gt;Toggle parking brake on or off&lt;/desc&gt;
   &lt;binding&gt;
    &lt;command&gt;property-toggle&lt;/command&gt;
-   &lt;property&gt;/controls/brakes[0]&lt;/property&gt;
+   &lt;property&gt;/controls/gear/wheel[0]/brake&lt;/property&gt;
   &lt;/binding&gt;
   &lt;binding&gt;
    &lt;command&gt;property-toggle&lt;/command&gt;
-   &lt;property&gt;/controls/brakes[1]&lt;/property&gt;
+   &lt;property&gt;/controls/gear/wheel[1]/brake&lt;/property&gt;
   &lt;/binding&gt;
   &lt;binding&gt;
    &lt;command&gt;property-toggle&lt;/command&gt;
-   &lt;property&gt;/controls/brakes[2]&lt;/property&gt;
+   &lt;property&gt;/controls/gear/wheel[2]/brake&lt;/property&gt;
   &lt;/binding&gt;
  &lt;/key&gt;
  </PRE>

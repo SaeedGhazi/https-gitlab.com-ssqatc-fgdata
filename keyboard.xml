@@ -24,6 +24,15 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+ <key n="2">
+  <name>Ctrl-B</name>
+  <desc>Toggle speedbrake.</desc>
+  <binding>
+   <command>property-toggle</command>
+   <property>/controls/flight/speedbrake</property>
+  </binding>
+ </key>
+
  <key n="3">
   <name>Ctrl-C</name>
   <desc>Toggle clickable panel hotspots</desc>
@@ -122,6 +131,15 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+ <key n="23">
+  <name>Ctrl-W</name>
+  <desc>Toggle autopilot wing leveler.</desc>
+  <binding>
+   <command>property-toggle</command>
+   <property>/autopilot/locks/wing-leveler</property>
+  </binding>
+ </key>
+
  <key n="27">
   <name>ESC</name>
   <desc>Prompt and quit FlightGear.</desc>
@@ -129,6 +147,12 @@ calculated by adding 256 to the GLUT key value in glut.h.
     <command>dialog-show</command>
     <dialog-name>exit</dialog-name>
   </binding>
+  <mod-shift>
+   <desc>Reset FlightGear.</desc>
+   <binding>
+    <command>old-reinit-dialog</command>
+   </binding>
+  </mod-shift>
  </key>
 
  <key n="32">
@@ -578,6 +602,16 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+ <key n="71">
+  <name>G</name>
+  <desc>Gear down.</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/gear/gear-down</property>
+   <value type="double">1.0</value>
+  </binding>
+ </key>
+
  <key n="77">
   <name>M</name>
   <desc>Decrease warp.</desc>
@@ -755,10 +789,11 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="103">
   <name>g</name>
-  <desc>Toggle gear down.</desc>
+  <desc>Gear Up.</desc>
   <binding>
-   <command>property-toggle</command>
+   <command>property-assign</command>
    <property>/controls/gear/gear-down</property>
+   <value type="double">0.0</value>
   </binding>
  </key>
 

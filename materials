@@ -22,6 +22,16 @@ dirt_rwy {
   emissive = 0.0 0.0 0.0 1.0
 }
 
+pa_taxiway {
+  texture = Runway/pa_taxiway.rgb
+  wrapu = 1
+  wrapv = 1
+  ambient = 0.2 0.2 0.2 1.0
+  diffuse = 0.2 0.2 0.2 1.0
+  specular = 0.0 0.0 0.0 1.0
+  emissive = 0.0 0.0 0.0 1.0
+}
+
 pa_threshold {
   texture = Runway/pa_threshold.rgb
   wrapu = 0
@@ -356,6 +366,16 @@ pa_rest {
   texture = Runway/pa_rest.rgb
   wrapu = 0
   wrapv = 0
+  ambient = 0.2 0.2 0.2 1.0
+  diffuse = 0.2 0.2 0.2 1.0
+  specular = 0.0 0.0 0.0 1.0
+  emissive = 0.0 0.0 0.0 1.0
+}
+
+pc_taxiway {
+  texture = Runway/pc_taxiway.rgb
+  wrapu = 1
+  wrapv = 1
   ambient = 0.2 0.2 0.2 1.0
   diffuse = 0.2 0.2 0.2 1.0
   specular = 0.0 0.0 0.0 1.0

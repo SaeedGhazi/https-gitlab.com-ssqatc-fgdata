@@ -52,6 +52,7 @@ $Id$
 -->
 <PropertyList>
  <name>Saitek Saitek X45</name>
+ <name>Saitek X45 Flight Controller USB</name>
 
  <axis n="0">
   <desc>Aileron</desc>

@@ -2589,9 +2589,41 @@ Shared parameters for various materials.
  </emissive>
 </material>
 
+<!-- Default -->
+<material>
+ <name>Default</name>
+ <texture>Terrain/sand.rgb</texture>
+ <xsize>250</xsize>
+ <ysize>250</ysize>
+ <light-coverage>10000000.0</light-coverage>
+ <ambient>
+  <r>0.15</r>
+  <g>0.29</g>
+  <b>0.13</b>
+  <a>1.0</a>
+ </ambient>
+ <diffuse>
+  <r>0.15</r>
+  <g>0.29</g>
+  <b>0.13</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
+</material>
+
 <material>
  <name>EvergreenBroadCover</name>
- <name>Default</name>
  <name>Island</name>
  <name>SomeSort</name>
  <texture>Terrain/forest1.rgb</texture>

@@ -13,7 +13,7 @@ Started September 2000 by David Megginson, david@megginson.com
  <!-- General simulation preferences -->
  <sim>
   <intl include="Translations/locale.xml"/>
-  <aircraft>c172</aircraft>
+  <aircraft>c172-3d</aircraft>
   <virtual-cockpit type="bool">false</virtual-cockpit>
   <presets>
    <airport-id>KSFO</airport-id>

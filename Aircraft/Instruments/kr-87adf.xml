@@ -1082,9 +1082,9 @@ properties' values.
    <h>16</h>
    <condition>
     <and>
-     <property>radios/kr-87/inputs/power-btn</property>
+     <property>/instrumentation/kr-87/inputs/power-btn</property>
      <greater-than>
-      <property>radios/kr-87/inputs/volume</property>
+      <property>/instrumentation/kr-87/inputs/volume</property>
       <value>0.01</value>
      </greater-than>
     </and>

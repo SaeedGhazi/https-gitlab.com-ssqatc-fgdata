@@ -76,7 +76,7 @@ navcom1_has_power = func {
     if ( getprop("/systems/electrical/outputs/navcom[0]") < 1.0 ) {
         return 0;
     }
-    if ( !getprop("/radios/comm[0]/inputs/power-btn") ) {
+    if ( !getprop("/instrumentation/comm[0]/inputs/power-btn") ) {
         return 0;
     }
     return 1;
@@ -86,7 +86,7 @@ navcom2_has_power = func {
     if ( getprop("/systems/electrical/outputs/navcom[1]") < 1.0 ) {
         return 0;
     }
-    if ( !getprop("/radios/comm[1]/inputs/power-btn") ) {
+    if ( !getprop("/instrumentation/comm[1]/inputs/power-btn") ) {
         return 0;
     }
     return 1;
@@ -163,8 +163,8 @@ do_dme_inputs = func {
     } elsif ( dme_selector == 2 ) {
 	setprop( "/instrumentation/dme/switch-position", 1 );
         setprop( "/instrumentation/dme/frequencies/source",
-                 "/radios/nav[0]/frequencies/selected-mhz" );
-	freq = getprop( "/radios/nav[0]/frequencies/selected-mhz" );
+                 "/instrumentation/nav[0]/frequencies/selected-mhz" );
+	freq = getprop( "/instrumentation/nav[0]/frequencies/selected-mhz" );
         if ( freq == nil ) {
             freq = "117.30";
         }
@@ -172,8 +172,8 @@ do_dme_inputs = func {
     } elsif ( dme_selector == 1 ) {
         setprop( "/instrumentation/dme/switch-position", 3 );
         setprop( "/instrumentation/dme/frequencies/source",
-                 "/radios/nav[1]/frequencies/selected-mhz" );
-	freq = getprop( "/radios/nav[1]/frequencies/selected-mhz" );
+                 "/instrumentation/nav[1]/frequencies/selected-mhz" );
+	freq = getprop( "/instrumentation/nav[1]/frequencies/selected-mhz" );
         if ( freq == nil ) {
             freq = "117.30";
         }
@@ -186,17 +186,17 @@ do_dme_inputs = func {
 #
 #
 initialize_tuners = func {
-    last_com1_fine = getprop("/radios/comm[0]/inputs/fine-tuner");
-    last_com1_coarse = getprop("/radios/comm[0]/inputs/coarse-tuner");
+    last_com1_fine = getprop("/instrumentation/comm[0]/inputs/fine-tuner");
+    last_com1_coarse = getprop("/instrumentation/comm[0]/inputs/coarse-tuner");
 
-    last_com2_fine = getprop("/radios/comm[1]/inputs/fine-tuner");
-    last_com2_coarse = getprop("/radios/comm[1]/inputs/coarse-tuner");
+    last_com2_fine = getprop("/instrumentation/comm[1]/inputs/fine-tuner");
+    last_com2_coarse = getprop("/instrumentation/comm[1]/inputs/coarse-tuner");
 
-    last_nav1_fine = getprop("/radios/nav[0]/inputs/fine-tuner");
-    last_nav1_coarse = getprop("/radios/nav[0]/inputs/coarse-tuner");
+    last_nav1_fine = getprop("/instrumentation/nav[0]/inputs/fine-tuner");
+    last_nav1_coarse = getprop("/instrumentation/nav[0]/inputs/coarse-tuner");
 
-    last_nav2_fine = getprop("/radios/nav[1]/inputs/fine-tuner");
-    last_nav2_coarse = getprop("/radios/nav[1]/inputs/coarse-tuner");
+    last_nav2_fine = getprop("/instrumentation/nav[1]/inputs/fine-tuner");
+    last_nav2_coarse = getprop("/instrumentation/nav[1]/inputs/coarse-tuner");
 
     last_adf_fine = getprop( "/instrumentation/kr-87/inputs/fine-tuner" );
     last_adf_coarse = getprop("/instrumentation/kr-87/inputs/coarse-tuner");
@@ -215,18 +215,18 @@ initialize_tuners = func {
 #
 do_com1_inputs = func {
     if ( com1_working() ) {
-        com1_swap = getprop( "/radios/comm[0]/inputs/freq-swap" );
+        com1_swap = getprop( "/instrumentation/comm[0]/inputs/freq-swap" );
         if ( com1_swap and (last_com1_swap != com1_swap) ) {
-            selected = getprop( "/radios/comm[0]/frequencies/selected-mhz" );
-            standby = getprop( "/radios/comm[0]/frequencies/standby-mhz" );
-            setprop( "/radios/comm[0]/frequencies/selected-mhz", standby );
-            setprop( "/radios/comm[0]/frequencies/standby-mhz", selected );
+            selected = getprop( "/instrumentation/comm[0]/frequencies/selected-mhz" );
+            standby = getprop( "/instrumentation/comm[0]/frequencies/standby-mhz" );
+            setprop( "/instrumentation/comm[0]/frequencies/selected-mhz", standby );
+            setprop( "/instrumentation/comm[0]/frequencies/standby-mhz", selected );
         }
         last_com1_swap = com1_swap;
 
-        com1_fine = getprop("/radios/comm[0]/inputs/fine-tuner");
-        com1_coarse = getprop("/radios/comm[0]/inputs/coarse-tuner");
-        freq = getprop( "/radios/comm[0]/frequencies/standby-mhz" );
+        com1_fine = getprop("/instrumentation/comm[0]/inputs/fine-tuner");
+        com1_coarse = getprop("/instrumentation/comm[0]/inputs/coarse-tuner");
+        freq = getprop( "/instrumentation/comm[0]/frequencies/standby-mhz" );
         coarse_freq = int( freq );
         fine_freq = int( (freq - coarse_freq) * 40 + 0.5 );
         if ( com1_fine != last_com1_fine ) {
@@ -266,7 +266,7 @@ do_com1_inputs = func {
         last_com1_fine = com1_fine;
         last_com1_coarse = com1_coarse;
 
-        setprop( "/radios/comm[0]/frequencies/standby-mhz", 
+        setprop( "/instrumentation/comm[0]/frequencies/standby-mhz", 
                  coarse_freq + fine_freq / 40.0 );
     }
 }
@@ -277,18 +277,18 @@ do_com1_inputs = func {
 #
 do_com2_inputs = func {
     if ( com2_working() ) {
-        com2_swap = getprop( "/radios/comm[1]/inputs/freq-swap" );
+        com2_swap = getprop( "/instrumentation/comm[1]/inputs/freq-swap" );
         if ( com2_swap and (last_com2_swap != com2_swap) ) {
-            selected = getprop( "/radios/comm[1]/frequencies/selected-mhz" );
-            standby = getprop( "/radios/comm[1]/frequencies/standby-mhz" );
-            setprop( "/radios/comm[1]/frequencies/selected-mhz", standby );
-            setprop( "/radios/comm[1]/frequencies/standby-mhz", selected );
+            selected = getprop( "/instrumentation/comm[1]/frequencies/selected-mhz" );
+            standby = getprop( "/instrumentation/comm[1]/frequencies/standby-mhz" );
+            setprop( "/instrumentation/comm[1]/frequencies/selected-mhz", standby );
+            setprop( "/instrumentation/comm[1]/frequencies/standby-mhz", selected );
         }
         last_com2_swap = com2_swap;
 
-        com2_fine = getprop("/radios/comm[1]/inputs/fine-tuner");
-        com2_coarse = getprop("/radios/comm[1]/inputs/coarse-tuner");
-        freq = getprop( "/radios/comm[1]/frequencies/standby-mhz" );
+        com2_fine = getprop("/instrumentation/comm[1]/inputs/fine-tuner");
+        com2_coarse = getprop("/instrumentation/comm[1]/inputs/coarse-tuner");
+        freq = getprop( "/instrumentation/comm[1]/frequencies/standby-mhz" );
         coarse_freq = int( freq );
         fine_freq = int( (freq - coarse_freq) * 40 + 0.5 );
         if ( com2_fine != last_com2_fine ) {
@@ -328,7 +328,7 @@ do_com2_inputs = func {
         last_com2_fine = com2_fine;
         last_com2_coarse = com2_coarse;
 
-        setprop( "/radios/comm[1]/frequencies/standby-mhz", 
+        setprop( "/instrumentation/comm[1]/frequencies/standby-mhz", 
                  coarse_freq + fine_freq / 40.0 );
     }
 }
@@ -339,18 +339,18 @@ do_com2_inputs = func {
 #
 do_nav1_inputs = func {
     if ( nav1_working() ) {
-        nav1_swap = getprop( "/radios/nav[0]/inputs/freq-swap" );
+        nav1_swap = getprop( "/instrumentation/nav[0]/inputs/freq-swap" );
         if ( nav1_swap and (last_nav1_swap != nav1_swap) ) {
-            selected = getprop( "/radios/nav[0]/frequencies/selected-mhz" );
-            standby = getprop( "/radios/nav[0]/frequencies/standby-mhz" );
-            setprop( "/radios/nav[0]/frequencies/selected-mhz", standby );
-            setprop( "/radios/nav[0]/frequencies/standby-mhz", selected );
+            selected = getprop( "/instrumentation/nav[0]/frequencies/selected-mhz" );
+            standby = getprop( "/instrumentation/nav[0]/frequencies/standby-mhz" );
+            setprop( "/instrumentation/nav[0]/frequencies/selected-mhz", standby );
+            setprop( "/instrumentation/nav[0]/frequencies/standby-mhz", selected );
         }
         last_nav1_swap = nav1_swap;
 
-        nav1_fine = getprop("/radios/nav[0]/inputs/fine-tuner");
-        nav1_coarse = getprop("/radios/nav[0]/inputs/coarse-tuner");
-        freq = getprop( "/radios/nav[0]/frequencies/standby-mhz" );
+        nav1_fine = getprop("/instrumentation/nav[0]/inputs/fine-tuner");
+        nav1_coarse = getprop("/instrumentation/nav[0]/inputs/coarse-tuner");
+        freq = getprop( "/instrumentation/nav[0]/frequencies/standby-mhz" );
         coarse_freq = int( freq );
         fine_freq = int( (freq - coarse_freq) * 20 + 0.5 );
         if ( nav1_fine != last_nav1_fine ) {
@@ -390,7 +390,7 @@ do_nav1_inputs = func {
         last_nav1_fine = nav1_fine;
         last_nav1_coarse = nav1_coarse;
 
-        setprop( "/radios/nav[0]/frequencies/standby-mhz", 
+        setprop( "/instrumentation/nav[0]/frequencies/standby-mhz", 
                  coarse_freq + fine_freq / 20.0 );
     }
 }
@@ -401,18 +401,18 @@ do_nav1_inputs = func {
 #
 do_nav2_inputs = func {
     if ( nav2_working() ) {
-        nav2_swap = getprop( "/radios/nav[1]/inputs/freq-swap" );
+        nav2_swap = getprop( "/instrumentation/nav[1]/inputs/freq-swap" );
         if ( nav2_swap and (last_nav2_swap != nav2_swap) ) {
-            selected = getprop( "/radios/nav[1]/frequencies/selected-mhz" );
-            standby = getprop( "/radios/nav[1]/frequencies/standby-mhz" );
-            setprop( "/radios/nav[1]/frequencies/selected-mhz", standby );
-            setprop( "/radios/nav[1]/frequencies/standby-mhz", selected );
+            selected = getprop( "/instrumentation/nav[1]/frequencies/selected-mhz" );
+            standby = getprop( "/instrumentation/nav[1]/frequencies/standby-mhz" );
+            setprop( "/instrumentation/nav[1]/frequencies/selected-mhz", standby );
+            setprop( "/instrumentation/nav[1]/frequencies/standby-mhz", selected );
         }
         last_nav2_swap = nav2_swap;
 
-        nav2_fine = getprop("/radios/nav[1]/inputs/fine-tuner");
-        nav2_coarse = getprop("/radios/nav[1]/inputs/coarse-tuner");
-        freq = getprop( "/radios/nav[1]/frequencies/standby-mhz" );
+        nav2_fine = getprop("/instrumentation/nav[1]/inputs/fine-tuner");
+        nav2_coarse = getprop("/instrumentation/nav[1]/inputs/coarse-tuner");
+        freq = getprop( "/instrumentation/nav[1]/frequencies/standby-mhz" );
         coarse_freq = int( freq );
         fine_freq = int( (freq - coarse_freq) * 20 + 0.5 );
         if ( nav2_fine != last_nav2_fine ) {
@@ -452,7 +452,7 @@ do_nav2_inputs = func {
         last_nav2_fine = nav2_fine;
         last_nav2_coarse = nav2_coarse;
 
-        setprop( "/radios/nav[1]/frequencies/standby-mhz", 
+        setprop( "/instrumentation/nav[1]/frequencies/standby-mhz", 
                  coarse_freq + fine_freq / 20.0 );
     }
 }

@@ -18,6 +18,14 @@
   </item>
 
   <item>
+   <label>Load Aircraft</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>aircraft</dialog-name>
+   </binding>
+  </item>
+
+  <item>
    <label>Reset</label>
    <binding>
     <command>old-reinit-dialog</command>

@@ -59,7 +59,6 @@
     <name>latteral acceleration (G's)</name>
     <type>float</type>
     <factor>32.2</factor>
-    <offset>-32.2</offset>
     <node>/fdm/acms/accelerations/ned/east-accel-fps_sec</node>
    </chunk>
 
@@ -67,7 +66,6 @@
     <name>longitudinal acceleration (G's)</name>
     <type>float</type>
     <factor>32.2</factor>
-    <offset>-32.2</offset>
     <node>/fdm/acms/accelerations/ned/north-accel-fps_sec</node>
    </chunk>
 

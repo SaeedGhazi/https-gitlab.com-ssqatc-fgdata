@@ -87,17 +87,17 @@
 
 \begin{keyboard}
 \k 1	Ctrl-A		Toggle autopilot altitude lock
-\k 2	Ctrl-B		Toggle speedbrake; \ac{hunter} Toggle speedbrake; \ac{p51d} Toggle engine boost
+\k 2	Ctrl-B		Toggle speedbrake; \ac{hunter|seahawk} Toggle speedbrake; \ac{p51d} Toggle engine boost
 \k 3	Ctrl-C		Toggle clickable panel hotspots
 \k 4	Ctrl-D		{}
 \k 5	Ctrl-E		{}
-\k 6	Ctrl-F		\ac{hunter} Emergency flap lowering
+\k 6	Ctrl-F		\ac{hunter|seahawk} Emergency flap lowering
 \k 7	Ctrl-G		Toggle autopilot glide slope lock
 \k 8	Ctrl-H		Toggle autopilot heading lock
 \k 9	Ctrl-I/Tab	Show instrument setting dialog
 \k 10	Ctrl-J		\ac{hunter} Jettison inner and outer pylon stores
 \k 11	Ctrl-K		{}
-\k 12	Ctrl-L		\ac{hunter} Seat default
+\k 12	Ctrl-L		\ac{hunter|seahawk} Seat default
 \k 13	Ctrl-M/Enter	Move rudder right
 \k 14	Ctrl-N		Toggle autopilot nav1 lock
 \k 15	Ctrl-O		{}
@@ -152,23 +152,23 @@
 \k 64	@		Select second engine
 \k 65	A		Decrease speed-up
 \k 66	B		Toggle parking brake on or off
-\k 67	C		\ac{bo105} toggle rear door
+\k 67	C		\ac{bo105} toggle doors
 \k 68	D		{}
 \k 69	E		{}
-\k 70	F		\ac{hunter} Wing fold down
+\k 70	F		\ac{hunter|seahawk} Wing fold down
 \k 71	G		Gear down
-\k 72	H		\hardcoded{Cycle HUD brightness}; \ac{hunter} Hook down
-\k 73	I		\hardcoded{Alternative HUD}
+\k 72	H		Cycle HUD brightness; \ac{hunter|seahawk} Hook down
+\k 73	I		Alternative HUD
 \k 74	J		\ac{hunter} Jettison outer pylon stores
 \k 75	K		{}
-\k 76	L		\ac{hunter} Seat down
+\k 76	L		\ac{hunter|seahawk} Seat down
 \k 77	M		Decrease warp
 \k 78	N		{}
 \k 79	O		{}
 \k 80	P		Toggle panel; \ac{T38} Fuel cutoff switch or lever
 \k 81	Q		{}
-\k 82	R		\ac{fokker100} Toggle thrust reverser; \ac{A320} Toggle cutoff on selected engine(s)
-\k 83	S		\ac{A320} Fire starter on selected engine(s)
+\k 82	R		\ac{fokker100} Toggle thrust reverser; \ac{A320|MD11} Toggle cutoff on selected engine(s)
+\k 83	S		\ac{A320|MD11} Fire starter on selected engine(s)
 \k 84	T		Decrease warp delta
 \k 85	U		{}
 \k 86	V		Scroll in reverse through views
@@ -176,9 +176,9 @@
 \k 88	X		Increase field of view
 \k 89	Y		{}
 \k 90	Z		Decrease Visibility
-\k 91	[		Decrease flaps; \ac{737|A320|hunter} Decrease flaps; \ac{ComperSwift} Adjust view left; \ac{an225|b52} --
+\k 91	[		Decrease flaps; \ac{737|A320|hunter|seahawk} Decrease flaps; \ac{ComperSwift} Adjust view left; \ac{b52} --
 \k 92	\|		{}
-\k 93	]		Increase flaps; \ac{737|A320|hunter} Increase flaps; \ac{ComperSwift} Adjust view right; \ac{an225|b52} --
+\k 93	]		Increase flaps; \ac{737|A320|hunter|seahawk} Increase flaps; \ac{ComperSwift} Adjust view right; \ac{b52} --
 \k 94	\^		{}
 \k 95	\_~(Underscore)	{}
 \k 96	`{}~(Backtick)	{}
@@ -187,13 +187,13 @@
 \k 99	c		Toggle 3D/2D cockpit
 \k 100	d		\ac{an225|yf23} Retract slats
 \k 101	e		{}
-\k 102	f		\ac{an225|yf23} Extend slats; \ac{hunter} Wing fold up
+\k 102	f		\ac{an225|yf23} Extend slats; \ac{hunter|seahawk} Wing fold up
 \k 103	g		Gear Up
-\k 104	h		\hardcoded{Cycle HUD: green/red/off}; \ac{hunter} Hook up
-\k 105	i		\hardcoded{Normal HUD}
+\k 104	h		Cycle HUD: green/red/off; \ac{hunter|seahawk} Hook up
+\k 105	i		Normal HUD
 \k 106	j		Decrease spoilers; \ac{hunter} Jettison inner pylon stores
-\k 107	k		Increase spoilers; \ac{hunter} Null
-\k 108	l		Toggle tail-wheel lock; \ac{hunter} Seat up
+\k 107	k		Increase spoilers; \ac{hunter|seahawk} Null
+\k 108	l		Toggle tail-wheel lock; \ac{hunter|seahawk} Seat up
 \k 109	m		Increase warp
 \k 110	n		{}
 \k 111	o		{}
@@ -218,7 +218,7 @@
 \k 259	F3		Capture screen					\shift{Load panel}
 \k 260	F4		Force lighting update				\shift{Reload global preferences}
 \k 261	F5								\shift{Scroll panel down}
-\k 262	F6		\hardcoded{Toggles autopilot target location}	\shift{Scroll panel up}
+\k 262	F6		Toggles autopilot target location		\shift{Scroll panel up}
 \k 263	F7 								\shift{Scroll panel left}
 \k 264	F8 		Cycle fog type					\shift{Scroll panel right}
 \k 265	F9 		Toggle textures					\shift{}
@@ -238,10 +238,6 @@
 \k 364	Insert		Move rudder left
 \end{keyboard}
 
-\rule{\textwidth}{.4pt}
-\begin{small}
-``Hard-coded'' key bindings are defined in \texttt{src/Input/input.cxx}.
-\end{small}
 
 \footline
 \end{document}

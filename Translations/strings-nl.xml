@@ -6,6 +6,20 @@
   <!-- Fall back -->
   <null>Deze tekst is nog niet vertaald</null>
 
+  <!--         -->
+  <!-- General -->
+  <!--         -->
+
+  <system-time>de systeem tijd</system-time>
+  <gmt>Greenwich Mean Time</gmt>
+  <locale-aricraft-time>de lokale tijd van het vliegtuig</locale-aricraft-time>
+  <units-feet>(in voeten tenzij --units-meters is opgegeven)</units-feet>
+  <multiple-instance>deze kan meerdere keren worden opgegeven</multiple-instance>
+
+  <!--      -->
+  <!-- Menu -->
+  <!--      -->
+
   <!-- File menu -->
   <file>Bestand</file>
   <save-flight>Huidige situatie bewaren</save-flight>

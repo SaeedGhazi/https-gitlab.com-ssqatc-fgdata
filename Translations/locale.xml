@@ -3,6 +3,17 @@
 <PropertyList>
 
  <locale n="0">
+  <lang type="string">POSIX</lang>
+  <lang type="string">C</lang>
+  <lang type="string">en</lang>
+  <lang type="string">en_US</lang>
+  <lang type="string">en_AU</lang>
+  <lang type="string">en_CA</lang>
+  <lang type="string">en_CA.ISO8859-15</lang>
+  <lang type="string">en_AU.ISO8859-15</lang>
+  <lang type="string">en_GB.ISO8859-15</lang>
+  <lang type="string">en_US.ISO8859-15</lang>
+
   <font>Helvetica.txf</font>
   <strings>Translations/strings-default.xml</strings>
  </locale>
@@ -16,21 +27,6 @@
   <lang type="string">de_CH.ISO8859-15</lang>
 
   <strings>Translations/strings-de.xml</strings>
- </locale>
-
- <locale>
-  <lang type="string">POSIX</lang>
-  <lang type="string">C</lang>
-  <lang type="string">en</lang>
-  <lang type="string">en_US</lang>
-  <lang type="string">en_AU</lang>
-  <lang type="string">en_CA</lang>
-  <lang type="string">en_CA.ISO8859-15</lang>
-  <lang type="string">en_AU.ISO8859-15</lang>
-  <lang type="string">en_GB.ISO8859-15</lang>
-  <lang type="string">en_US.ISO8859-15</lang>
-
-  <strings>Translations/strings-en.xml</strings>
  </locale>
 
  <locale>

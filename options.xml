@@ -3,759 +3,742 @@
 <PropertyList>
 
  <options>
-  <usage>fgfs [ option ... ]</usage>
+  <usage>strings/usage</usage>
 
   <section>
-   <name>General Options</name>
+   <name>strings/general-options</name>
 
    <option>
     <name>help</name>
     <short>h</short>
-    <description>Show the most relevant command line options</description>
+    <description>strings/help-desc</description>
     <brief/>
    </option>
 
    <option>
     <name>verbose</name>
     <short>v</short>
-    <description>Show all command line options</description>
-    <description>when combined with --help or -h</description>
+    <description>strings/verbose-desc</description>
     <brief/>
    </option>
 
    <option>
     <name>fg-root</name>
     <arg>path</arg>
-    <description>Specify the root data path</description>
+    <description>strings/fg-root-desc</description>
     <brief/>
    </option>
 
    <option>
     <name>fg-scenery</name>
     <arg>path</arg>
-    <description>Specify the base scenery path;</description>
-    <description>Defaults to $FG_ROOT/Scenery</description>
+    <description>strings/fg-scenery-desc</description>
     <brief/>
    </option>
 
    <option>
     <name>language</name>
     <arg>code</arg>
-    <description>Select the language for this session</description>
+    <description>strings/language-desc</description>
     <brief/>
    </option>
 
    <option>
     <name>disable-game-mode</name>
-    <description>Disable full-screen game mode</description>
+    <description>strings/disable-game-mode-desc</description>
    </option>
 
    <option>
     <name>enable-game-mode</name>
-    <description>Enable full-screen game mode</description>
+    <description>strings/enable-game-mode-desc</description>
    </option>
 
    <option>
     <name>disable-splash-screen</name>
-    <description>Disable splash screen</description>
+    <description>strings/disable-splash-screen-desc</description>
    </option>
 
    <option>
     <name>enable-splash-screen</name>
-    <description>Enable splash screen</description>
+    <description>strings/enable-splash-screen-desc</description>
    </option>
 
    <option>
     <name>disable-intro-music</name>
-    <description>Disable introduction music</description>
+    <description>strings/disable-intro-music-desc</description>
    </option>
 
    <option>
     <name>enable-intro-music</name>
-    <description>Enable introduction music</description>
+    <description>strings/enable-intro-music-desc</description>
    </option>
 
    <option>
     <name>disable-mouse-pointer</name>
-    <description>Disable extra mouse pointer</description>
+    <description>strings/disable-mouse-pointer-desc</description>
    </option>
 
    <option>
     <name>enable-mouse-pointer</name>
-    <description>Enable extra mouse pointer</description>
-    <description>(i.e. for full screen Voodoo based cards)</description>
+    <description>strings/enable-mouse-pointer-desc</description>
    </option>
 
    <option>
     <name>disable-random-objects</name>
-    <description>Exclude random scenery objects</description>
-    <description>(buildings, etc.)</description>
+    <description>strings/disable-random-objects-desc</description>
+    <description>strings/random-objects-desc</description>
    </option>
 
    <option>
     <name>enable-random-objects</name>
-    <description>Include random scenery objects</description>
-    <description>(buildings, etc.)</description>
+    <description>strings/enable-random-objects-desc</description>
+    <description>strings/random-objects-desc</description>
    </option>
 
    <option>
     <name>disable-freeze</name>
-    <description>Start in a running state</description>
+    <description>strings/disable-freeze-desc</description>
    </option>
 
    <option>
     <name>enable-freeze</name>
-    <description>Start in a frozen state</description>
+    <description>strings/enable-freeze-desc</description>
    </option>
 
    <option>
     <name>disable-fuel-freeze</name>
-    <description>Fuel is consumed normally</description>
+    <description>strings/disable-fuel-freeze-desc</description>
    </option>
 
    <option>
     <name>enable-fuel-freeze</name>
-    <description>Fuel tank quantity forced to remain constant</description>
+    <description>strings/enable-fuel-freeze-desc</description>
    </option>
 
    <option>
     <name>disable-clock-freeze</name>
-    <description>Clock advances normally</description>
+    <description>strings/disable-clock-freeze-desc</description>
    </option>
 
    <option>
     <name>enable-clock-freeze</name>
-    <description>Do not advance clock</description>
+    <description>strings/enable-clock-freeze-desc</description>
    </option>
 
    <option>
     <name>control</name>
     <arg>mode</arg>
-    <description>Primary control mode (joystick, keyboard, mouse)</description>
+    <description>strings/control-desc</description>
     <brief/>
    </option>
 
    <option>
     <name>enable-auto-coordination</name>
-    <description>Enable auto coordination</description>
+    <description>strings/enable-auto-coordination-desc</description>
    </option>
 
    <option>
     <name>disable-auto-coordination</name>
-    <description>Disable auto coordination</description>
+    <description>strings/disable-auto-coordination-desc</description>
    </option>
 
    <option>
     <name>browser-app</name>
     <arg>path</arg>
-    <description>Specify path to your web browser</description>
+    <description>strings/browser-app-desc</description>
    </option>
 
    <option>
     <name>prop:name</name>
     <arg>value</arg>
-    <description>Set property &lt;name&gt; to &lt;value&gt;</description>
+    <description>strings/prop-desc</description>
    </option>
 
    <option>
     <name>config</name>
     <arg>path</arg>
-    <description>Load additional properties from path</description>
+    <description>strings/config-desc</description>
    </option>
 
    <option>
     <name>units-feet</name>
-    <description>Use feet for distances</description>
+    <description>strings/units-feet-desc</description>
    </option>
 
    <option>
     <name>units-meters</name>
-    <description>Use meters for distances</description>
+    <description>strings/units-meters-desc</description>
    </option>
 
   </section>
 
   <section>
-   <name>Features</name>
+   <name>strings/features-options</name>
 
    <option>
     <name>disable-hud</name>
-    <description>Disable Heads Up Display (HUD)</description>
+    <description>strings/disable-hud-desc</description>
    </option>
 
    <option>
     <name>enable-hud</name>
-    <description>Enable Heads Up Display (HUD)</description>
+    <description>strings/enable-hud-desc</description>
    </option>
 
    <option>
     <name>disable-panel</name>
-    <description>Disable instrument panel</description>
+    <description>strings/disable-panel-desc</description>
    </option>
 
    <option>
     <name>enable-panel</name>
-    <description>Enable instrument panel</description>
+    <description>strings/enable-panel-desc</description>
    </option>
 
    <option>
     <name>disable-sound</name>
-    <description>Disable sound effects</description>
+    <description>strings/disable-sound-desc</description>
    </option>
 
    <option>
     <name>enable-sound</name>
-    <description>Enable sound effects</description>
+    <description>strings/enable-sound-desc</description>
    </option>
 
    <option>
     <name>disable-anti-alias-hud</name>
-    <description>Disable anti-aliased HUD</description>
+    <description>strings/disable-anti-alias-hud-desc</description>
    </option>
 
    <option>
     <name>enable-anti-alias-hud</name>
-    <description>Enable anti-aliased HUD</description>
+    <description>strings/enable-anti-alias-hud-desc</description>
    </option>
 
   </section>
 
   <section>
-   <name>Aircraft</name>
+   <name>strings/aircraft-options</name>
 
    <option>
     <name>aircraft</name>
     <arg>name</arg>
-    <description>Select an aircraft profile as defined</description>
-    <description>by a top level &lt;name&gt;-set.xml</description>
+    <description>strings/aircraft-desc</description>
     <brief/>
    </option>
 
    <option>
     <name>show-aircraft</name>
-    <description>Print a list of the currently available</description>
-    <description>aircraft types</description>
+    <description>strings/show-aircraft-desc</description>
     <brief/>
    </option>
 
   </section>
 
   <section>
-   <name>Flight Model</name>
+   <name>strings/fdm-options</name>
 
    <option>
     <name>fdm</name>
     <arg>name</arg>
-    <description>Select the core flight dynamics model</description>
-    <description>Can be one of jsb, larcsim, yasim, magic,</description>
-    <description>balloon, ada, external, or null</description>
+    <description>strings/fdm-desc</description>
    </option>
 
    <option>
     <name>aero</name>
     <arg>name</arg>
-    <description>Select aircraft aerodynamics model to load</description>
+    <description>strings/aero-desc</description>
    </option>
 
    <option>
     <name>model-hz</name>
     <arg>n</arg>
-    <description>Run the FDM this rate (iterations per second)</description>
+    <description>strings/model-hz-desc</description>
    </option>
 
    <option>
     <name>speed</name>
     <arg>n</arg>
-    <description>Run the FDM 'n' times faster than real time</description>
+    <description>strings/speed-desc</description>
    </option>
 
    <option>
     <name>notrim</name>
-    <description>Do NOT attempt to trim the model</description>
-    <description>(only with fdm=jsbsim)</description>
+    <description>strings/notrim-desc</description>
    </option>
 
    <option>
     <name>on-ground</name>
-    <description>Start at ground level (default)</description>
+    <description>strings/on-ground-desc</description>
    </option>
 
    <option>
     <name>in-air</name>
-    <description>Start in air (implied when using --altitude)</description>
+    <description>strings/in-air-desc</description>
    </option>
 
    <option>
     <name>wind</name>
     <arg>DIR@SPEED</arg>
-    <description>Specify wind coming from DIR (degrees)</description>
-    <description>at SPEED (knots)</description>
+    <description>strings/wind-desc</description>
     <brief/>
    </option>
 
   </section>
 
   <section>
-   <name>Aircraft model directory (UIUC FDM ONLY)</name>
+   <name>strings/aircraft-model-options</name>
 
    <option>
     <name>aircraft-dir</name>
     <arg>path</arg>
-    <description>Aircraft directory relative to the path of</description>
-    <description>the executable</description>
+    <description>strings/aircraft-dir-desc</description>
    </option>
 
   </section>
 
   <section>
-   <name>Initial Position and Orientation</name>
+   <name>strings/position-options</name>
 
    <option>
     <name>airport-id</name>
     <arg>ID</arg>
-    <description>Specify starting position by airport ID</description>
+    <description>strings/airport-id-desc</description>
     <brief/>
    </option>
 
    <option>
     <name>offset-distance</name>
     <arg>nm</arg>
-    <description>Specify distance to threshold</description>
+    <description>strings/offset-distance-desc</description>
    </option>
 
    <option>
     <name>offset-azimuth</name>
     <arg>degrees</arg>
-    <description>Specify heading to threshold</description>
+    <description>strings/offset-azimuth-desc</description>
    </option>
 
    <option>
     <name>lon</name>
     <arg>degrees</arg>
-    <description>Starting longitude (west = -)</description>
+    <description>strings/lon-desc</description>
    </option>
 
    <option>
     <name>lat</name>
     <arg>degrees</arg>
-    <description>Starting latitude (south = -)</description>
+    <description>strings/lat-desc</description>
    </option>
 
    <option>
     <name>altitude</name>
     <arg>value</arg>
-    <description>Starting altitude in feet</description>
-    <description>(unless --units-meters specified)</description>
+    <description>strings/altitude-desc</description>
+    <description>strings/units-feet</description>
    </option>
 
    <option>
     <name>heading</name>
     <arg>degrees</arg>
-    <description>Specify heading (yaw) angle (Psi)</description>
+    <description>strings/heading-desc</description>
    </option>
 
    <option>
     <name>roll</name>
     <arg>degrees</arg>
-    <description>Specify roll angle (Phi)</description>
+    <description>strings/roll-desc</description>
    </option>
 
    <option>
     <name>pitch</name>
     <arg>degrees</arg>
-    <description>Specify pitch angle (Theta)</description>
+    <description>strings/pitch-desc</description>
    </option>
 
    <option>
     <name>uBody</name>
     <arg>units_per_sec</arg>
-    <description>Specify velocity along the body X axis</description>
-    <description>(in feet unless --units-meters specified)</description>
+    <description>strings/uBody-desc</description>
+    <description>strings/units-feet</description>
    </option>
 
    <option>
     <name>vBody</name>
     <arg>units_per_sec</arg>
-    <description>Specify velocity along the body Y axis</description>
-    <description>(in feet unless --units-meters specified)</description>
+    <description>strings/vBody-desc</description>
+    <description>strings/units-feet</description>
    </option>
 
    <option>
     <name>wBody</name>
     <arg>units_per_sec</arg>
-    <description>Specify velocity along the body Z axis</description>
-    <description>(in feet unless --units-meters specified)</description>
+    <description>strings/wBody-desc</description>
+    <description>strings/units-feet</description>
    </option>
 
    <option>
     <name>vc</name>
     <arg>knots</arg>
-    <description>Specify initial airspeed</description>
+    <description>strings/vc-desc</description>
    </option>
 
    <option>
     <name>mach</name>
     <arg>num</arg>
-    <description>Specify initial mach number</description>
+    <description>strings/mach-desc</description>
    </option>
 
    <option>
     <name>glideslope</name>
     <arg>degrees</arg>
-    <description>Specify flight path angle (can be positive)</description>
+    <description>strings/glideslope-desc</description>
    </option>
 
    <option>
     <name>roc</name>
     <arg>fpm</arg>
-    <description>Specify initial climb rate (can be negative)</description>
+    <description>strings/roc-desc</description>
    </option>
 
   </section>
 
   <section>
-   <name>Rendering Options</name>
+   <name>strings/rendering-options</name>
 
    <option>
     <name>bpp</name>
     <arg>depth</arg>
-    <description>Specify the bits per pixel</description>
+    <description>strings/bpp-desc</description>
    </option>
 
    <option>
     <name>fog-disable</name>
-    <description>Disable fog/haze</description>
+    <description>strings/fog-disable-desc</description>
    </option>
 
    <option>
     <name>fog-fastest</name>
-    <description>Enable fastest fog/haze</description>
+    <description>strings/fog-fastest-desc</description>
    </option>
 
    <option>
     <name>fog-nicest</name>
-    <description>Enable nicest fog/haze</description>
+    <description>strings/fog-nicest-desc</description>
    </option>
 
    <option>
     <name>enable-clouds</name>
-    <description>Enable 2D (flat) cloud layers</description>
+    <description>strings/enable-clouds-desc</description>
    </option>
 
    <option>
     <name>disable-clouds</name>
-    <description>Disable 2D (flat) cloud layers</description>
+    <description>strings/disable-clouds-desc</description>
    </option>
 
    <option>
     <name>enable-clouds3d</name>
-    <description>Enable 3D (volumetric) cloud layers</description>
+    <description>strings/enable-clouds3d-desc</description>
    </option>
 
    <option>
     <name>disable-clouds3d</name>
-    <description>Disable 3D (volumetric) cloud layers</description>
+    <description>strings/disable-clouds3d-desc</description>
    </option>
 
    <option>
     <name>fov</name>
     <arg>degrees</arg>
-    <description>Specify field of view angle</description>
+    <description>strings/fov-desc</description>
    </option>
 
    <option>
     <name>disable-fullscreen</name>
-    <description>Disable fullscreen mode</description>
+    <description>strings/disable-fullscreen-desc</description>
    </option>
 
    <option>
     <name>enable-fullscreen</name>
-    <description>Enable fullscreen mode</description>
+    <description>strings/enable-fullscreen-desc</description>
    </option>
 
    <option>
     <name>shading-flat</name>
-    <description>Enable flat shading</description>
+    <description>strings/shading-flat-desc</description>
    </option>
 
    <option>
     <name>shading-smooth</name>
-    <description>Enable smooth shading</description>
+    <description>strings/shading-smooth-desc</description>
    </option>
 
    <option>
     <name>disable-skyblend</name>
-    <description>Disable sky blending</description>
+    <description>strings/disable-skyblend-desc</description>
    </option>
 
    <option>
     <name>enable-skyblend</name>
-    <description>Enable sky blending</description>
+    <description>strings/enable-skyblend-desc</description>
    </option>
 
    <option>
     <name>disable-textures</name>
-    <description>Disable textures</description>
+    <description>strings/disable-textures-desc</description>
    </option>
 
    <option>
     <name>enable-textures</name>
-    <description>Enable textures</description>
+    <description>strings/enable-textures-desc</description>
    </option>
 
    <option>
     <name>disable-wireframe</name>
-    <description>Disable wireframe drawing mode</description>
+    <description>strings/disable-wireframe-desc</description>
    </option>
 
    <option>
     <name>enable-wireframe</name>
-    <description>Enable wireframe drawing mode</description>
+    <description>strings/enable-wireframe-desc</description>
    </option>
 
    <option>
     <name>geometry</name>
     <arg>WxH</arg>
-    <description>Specify window geometry (640x480, etc)</description>
+    <description>strings/geometry-desc</description>
    </option>
 
    <option>
     <name>view-offset</name>
     <arg>value</arg>
-    <description>Specify the default forward view direction</description>
-    <description>as an offset from straight ahead.  Allowable</description>
-    <description>values are LEFT, RIGHT, CENTER, or a specific</description>
-    <description>number in degrees</description>
+    <description>strings/view-offset-desc</description>
    </option>
 
    <option>
     <name>visibility</name>
     <arg>meters</arg>
-    <description>Specify initial visibility</description>
+    <description>strings/visibility-desc</description>
    </option>
 
    <option>
     <name>visibility-miles</name>
     <arg>miles</arg>
-    <description>Specify initial visibility in miles</description>
+    <description>strings/visibility-miles-desc</description>
    </option>
 
   </section>
 
   <section>
-   <name>Hud Options</name>
+   <name>strings/hud-options</name>
 
    <option>
     <name>hud-tris</name>
-    <description>Hud displays number of triangles rendered</description>
+    <description>strings/hud-tris-desc</description>
    </option>
 
    <option>
     <name>hud-culled</name>
-    <description>Hud displays percentage of triangles culled</description>
+    <description>strings/hud-culled-desc</description>
    </option>
 
   </section>
 
   <section>
-   <name>Time Options</name>
+   <name>strings/time-options</name>
 
    <option>
     <name>time-offset</name>
     <arg>[+-]hh:mm:ss</arg>
-    <description>Add this time offset</description>
+    <description>strings/time-offset-desc</description>
    </option>
 
    <option>
     <name>time-match-real</name>
-    <description>Synchronize time with real-world time</description>
+    <description>strings/time-match-real-desc</description>
    </option>
 
    <option>
     <name>time-match-local</name>
-    <description>Synchronize time with local real-world time</description>
+    <description>strings/time-match-local-desc</description>
    </option>
 
    <option>
     <name>start-date-sys</name>
     <arg>yyyy:mm:dd:hh:mm:ss</arg>
-    <description>Specify a starting date/time with respect to</description>
-    <description>system time</description>
+    <description>strings/start-date-desc</description>
+    <description>strings/system-time</description>
    </option>
 
    <option>
     <name>start-date-gmt</name>
     <arg>yyyy:mm:dd:hh:mm:ss</arg>
-    <description>Specify a starting date/time with respect to</description>
-    <description>Greenwich Mean Time</description>
+    <description>strings/start-date-desc</description>
+    <description>strings/gmt</description>
    </option>
 
    <option>
     <name>start-date-lat</name>
     <arg>yyyy:mm:dd:hh:mm:ss</arg>
-    <description>Specify a starting date/time with respect to</description>
-    <description>Local Aircraft Time</description>
+    <description>strings/start-date-desc</description>
+    <description>strings/locale-aricraft-time</description>
    </option>
 
   </section>
 
   <section>
-   <name>Network Options</name>
+   <name>strings/network-options</name>
 
    <option>
     <name>httpd</name>
     <arg>port</arg>
-    <description>Enable http server on the specified port</description>
+    <description>strings/httpd-desc</description>
    </option>
 
    <option>
     <name>telnet</name>
     <arg>port</arg>
-    <description>Enable telnet server on the specified port</description>
+    <description>strings/telnet-desc</description>
    </option>
 
    <option>
     <name>jpg-httpd</name>
     <arg>port</arg>
-    <description>Enable screen shot http server on the specified</description>
-    <description>port</description>
+    <description>strings/jpg-httpd-desc</description>
    </option>
 
    <option>
     <name>disable-network-olk</name>
-    <description>Disable Multipilot mode (default)</description>
+    <description>strings/disable-network-olk-desc</description>
    </option>
 
    <option>
     <name>enable-network-olk</name>
-    <description>Enable Multipilot mode</description>
+    <description>strings/enable-network-olk-desc</description>
    </option>
 
    <option>
     <name>net-hud</name>
-    <description>Hud displays network info</description>
+    <description>strings/net-hud-desc</description>
    </option>
 
    <option>
     <name>net-id</name>
     <arg>name</arg>
-    <description>Specify your own call sign</description>
+    <description>strings/net-id-desc</description>
    </option>
 
   </section>
 
   <section>
-   <name>Route/Way Point Options</name>
+   <name>strings/route-options</name>
 
    <option>
     <name>wp</name>
     <arg>ID[@alt]</arg>
-    <description>Specify a waypoint for the GC autopilot;</description>
-    <description>multiple instances can be used to create a route</description>
+    <description>strings/wp-desc</description>
+    <description>strings/multiple-instance</description>
    </option>
 
    <option>
     <name>flight-plan</name>
     <arg>file</arg>
-    <description>Read all waypoints from a file</description>
+    <description>strings/flight-plan-desc</description>
    </option>
 
   </section>
 
   <section>
-   <name>IO Options</name>
+   <name>strings/io-options</name>
 
    <option>
     <name>garmin</name>
     <arg>params</arg>
-    <description>Open connection using the Garmin GPS protocol</description>
+    <description>strings/garmin-desc</description>
    </option>
 
    <option>
     <name>joyclient</name>
     <arg>params</arg>
-    <description>Open connection to an Agwagon joystick</description>
+    <description>strings/joyclient-desc</description>
    </option>
 
    <option>
     <name>native-ctrls</name>
     <arg>params</arg>
-    <description>Open connection using the FG Native Controls</description>
-    <description>protocol</description>
+    <description>strings/native-ctrls-desc</description>
    </option>
 
    <option>
     <name>native-fdm</name>
     <arg>params</arg>
-    <description>Open connection using the FG Native FDM protocol</description>
+    <description>strings/native-fdm-desc</description>
    </option>
 
    <option>
     <name>native</name>
     <arg>params</arg>
-    <description>Open connection using the FG Native protocol</description>
+    <description>strings/native-desc</description>
    </option>
 
    <option>
     <name>nmea</name>
     <arg>params</arg>
-    <description>Open connection using the NMEA protocol</description>
+    <description>strings/nmea-desc</description>
    </option>
 
    <option>
     <name>opengc</name>
     <arg>params</arg>
-    <description>Open connection using the OpenGC protocol</description>
+    <description>strings/opengc-desc</description>
    </option>
 
    <option>
     <name>props</name>
     <arg>params</arg>
-    <description>Open connection using the interactive property</description>
-    <description>manager</description>
+    <description>strings/props-desc</description>
    </option>
 
    <option>
     <name>pve</name>
     <arg>params</arg>
-    <description>Open connection using the PVE protocol</description>
+    <description>strings/pve-desc</description>
    </option>
 
    <option>
     <name>ray</name>
     <arg>params</arg>
-    <description>Open connection using the Ray Woodworth motion</description>
-    <description>chair protocol</description>
+    <description>strings/ray-desc</description>
    </option>
 
    <option>
     <name>rul</name>
     <arg>params</arg>
-    <description>Open connection using the RUL protocol</description>
+    <description>strings/rul-desc</description>
    </option>
 
    <option>
     <name>atc610x</name>
-    <description>Enable atc610x interface</description>
+    <description>strings/atc610x-desc</description>
    </option>
 
   </section>
 
   <section>
-   <name>Debugging Options</name>
+   <name>strings/debugging-options</name>
 
    <option>
     <name>trace-read</name>
     <arg>property</arg>
-    <description>Trace the reads for a property;</description>
-    <description>multiple instances allowed</description>
+    <description>strings/trace-read-desc</description>
+    <description>strings/multiple-instance</description>
    </option>
 
    <option>
     <name>trace-write</name>
     <arg>property</arg>
-    <description>Trace the writes for a property;</description>
-    <description>multiple instances allowed</description>
+    <description>strings/trace-write-desc</description>
+    <description>strings/multiple-instance</description>
    </option>
   </section>
 

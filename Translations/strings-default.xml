@@ -3,41 +3,223 @@
 <!-- FlightGear menu and options tranlations for English -->
 
 <PropertyList>
-  <!-- Fall back -->
-  <null>No tranlation available for this text</null>
 
-  <!-- File menu -->
-  <file>File</file>
-  <save-flight>Save Flight</save-flight>
-  <load-flight>Load Flight</load-flight>
-  <reset>Reset</reset>
-  <hi-res-snap-shot>Hires Snap Shot</hi-res-snap-shot>
-  <snap-shot>Snap Shot</snap-shot>
-  <print>Print</print>
-  <exit>Exit</exit>
+ <!-- Fall back -->
+ <null>No tranlation available for this text</null>
 
-  <!-- View menu -->
-  <view>View</view>
-  <toggle-panel>Toggle Panel</toggle-panel>
-  <pilot-offset>Pilot Offset</pilot-offset>
-  <hud-alpha>HUD Alpha</hud-alpha>
-  <properties>Properties</properties>
 
-  <!-- Environment menu -->
-  <environment>Environment</environment>
-  <goto-airport>Goto Airport</goto-airport>
+ <!--         -->
+ <!-- General -->
+ <!--         -->
 
-  <!-- Autopilot menu -->
-  <autopilot>Autopilot</autopilot>
-  <set-heading>Set Heading</set-heading>
-  <set-altitude>Set Altitude</set-altitude>
-  <add-waypoint>Add Waypoint</add-waypoint>
-  <skip-current-waypoint>Skip Current Waypoint</skip-current-waypoint>
-  <clear-route>Clear Route</clear-route>
-  <adjust-ap-settings>Adjust AP Settings</adjust-ap-settings>
-  <toggle-hud-format>Toggle HUD Format</toggle-hud-format>
+ <system-time>system time</system-time>
+ <gmt>Greenwich Mean Time</gmt>
+ <locale-aricraft-time>Local Aircraft Time</locale-aricraft-time>
+ <units-feet>(in feet unless --units-meters specified)</units-feet>
+ <multiple-instance>multiple instances can be used</multiple-instance>
 
-  <!-- Help menu -->
-  <help>Help</help>
+ <!--      -->
+ <!-- Menu -->
+ <!--      -->
+
+ <!-- File menu -->
+ <file>File</file>
+ <save-flight>Save Flight</save-flight>
+ <load-flight>Load Flight</load-flight>
+ <reset>Reset</reset>
+ <hi-res-snap-shot>Hires Snap Shot</hi-res-snap-shot>
+ <snap-shot>Snap Shot</snap-shot>
+ <print>Print</print>
+ <exit>Exit</exit>
+
+ <!-- View menu -->
+ <view>View</view>
+ <toggle-panel>Toggle Panel</toggle-panel>
+ <pilot-offset>Pilot Offset</pilot-offset>
+ <hud-alpha>HUD Alpha</hud-alpha>
+ <properties>Properties</properties>
+
+ <!-- Environment menu -->
+ <environment>Environment</environment>
+ <goto-airport>Goto Airport</goto-airport>
+
+ <!-- Autopilot menu -->
+ <autopilot>Autopilot</autopilot>
+ <set-heading>Set Heading</set-heading>
+ <set-altitude>Set Altitude</set-altitude>
+ <add-waypoint>Add Waypoint</add-waypoint>
+ <skip-current-waypoint>Skip Current Waypoint</skip-current-waypoint>
+ <clear-route>Clear Route</clear-route>
+ <adjust-ap-settings>Adjust AP Settings</adjust-ap-settings>
+ <toggle-hud-format>Toggle HUD Format</toggle-hud-format>
+
+ <!-- Help menu -->
+ <help>Help</help>
+
+
+ <!--              -->
+ <!-- options file -->
+ <!--              -->
+ <usage>fgfs [ option ... ]</usage>
+ <verbose-help>For a complete list of options use --help --verbose</verbose-help>
+
+ <!-- General options -->
+ <general-options>General Options</general-options>
+ <help-desc>Show the most relevant command line options</help-desc>
+ <verbose-desc>Show all command line options when combined with --help or -h</verbose-desc>
+ <fg-root-desc>Specify the root data path</fg-root-desc>
+ <fg-scenery-desc n="0">Specify the base scenery path;</fg-scenery-desc>
+ <fg-scenery-desc n="1">Defaults to $FG_ROOT/Scenery</fg-scenery-desc>
+ <language-desc>Select the language for this session</language-desc>
+ <disable-game-mode-desc>Disable full-screen game mode</disable-game-mode-desc>
+ <enable-game-mode-desc>Enable full-screen game mode</enable-game-mode-desc>
+ <disable-splash-screen-desc>Disable splash screen</disable-splash-screen-desc>
+ <enable-splash-screen-desc>Enable splash screen</enable-splash-screen-desc>
+ <disable-intro-music-desc>Disable introduction music</disable-intro-music-desc>
+ <enable-intro-music-desc>Enable introduction music</enable-intro-music-desc>
+ <disable-mouse-pointer-desc>Disable extra mouse pointer</disable-mouse-pointer-desc>
+ <enable-mouse-pointer-desc n="0">Enable extra mouse pointer</enable-mouse-pointer-desc>
+ <enable-mouse-pointer-desc n="1">(i.e. for full screen Voodoo based cards)</enable-mouse-pointer-desc>
+ <disable-random-objects-desc>Exclude random scenery objects</disable-random-objects-desc>
+ <enable-random-objects-desc>Include random scenery objects</enable-random-objects-desc>
+ <random-objects-desc>(buildings, etc.)</random-objects-desc>
+ <disable-freeze-desc>Start in a running state</disable-freeze-desc>
+ <enable-freeze-desc>Start in a frozen state</enable-freeze-desc>
+ <disable-fuel-freeze-desc>Fuel is consumed normally</disable-fuel-freeze-desc>
+ <enable-fuel-freeze-desc>Fuel tank quantity forced to remain constant</enable-fuel-freeze-desc>
+ <disable-clock-freeze-desc>Clock advances normally</disable-clock-freeze-desc>
+ <enable-clock-freeze-desc>Do not advance clock</enable-clock-freeze-desc>
+ <control-desc>Primary control mode (joystick, keyboard, mouse)</control-desc>
+ <enable-auto-coordination-desc>Enable auto coordination</enable-auto-coordination-desc>
+ <disable-auto-coordination-desc>Disable auto coordination</disable-auto-coordination-desc>
+ <browser-app-desc>Specify path to your web browser</browser-app-desc>
+ <prop-desc>Set property &lt;name&gt; to &lt;value&gt;</prop-desc>
+ <config-desc>Load additional properties from path</config-desc>
+ <units-feet-desc>Use feet for distances</units-feet-desc>
+ <units-meters-desc>Use meters for distances</units-meters-desc>
+
+ <!-- Features options -->
+ <features-options>Features</features-options>
+ <disable-hud-desc>Disable Heads Up Display (HUD)</disable-hud-desc>
+ <enable-hud-desc>Enable Heads Up Display (HUD)</enable-hud-desc>
+ <disable-panel-desc>Disable instrument panel</disable-panel-desc>
+ <enable-panel-desc>Enable instrument panel</enable-panel-desc>
+ <disable-sound-desc>Disable sound effects</disable-sound-desc>
+ <enable-sound-desc>Enable sound effects</enable-sound-desc>
+ <disable-anti-alias-hud-desc>Disable anti-aliased HUD</disable-anti-alias-hud-desc>
+ <enable-anti-alias-hud-desc>Enable anti-aliased HUD</enable-anti-alias-hud-desc>
+
+ <!-- Aircraft options -->
+ <aircraft-options>Aircraft</aircraft-options>
+ <aircraft-desc>Select an aircraft profile as defined by a top level &lt;name&gt;-set.xml</aircraft-desc>
+ <show-aircraft-desc>Print a list of the currently available aircraft types</show-aircraft-desc>
+
+ <!-- Flight Dynamics Model options -->
+ <fdm-options>Flight Model</fdm-options>
+ <fdm-desc n="0">Select the core flight dynamics model</fdm-desc>
+ <fdm-desc n="1">Can be one of jsb, larcsim, yasim, magic, balloon, ada, external, or null</fdm-desc>
+ <aero-desc>Select aircraft aerodynamics model to load</aero-desc>
+ <model-hz-desc>Run the FDM this rate (iterations per second)</model-hz-desc>
+ <speed-desc>Run the FDM 'n' times faster than real time</speed-desc>
+ <notrim-desc n="0">Do NOT attempt to trim the model</notrim-desc>
+ <notrim-desc n="1">(only with fdm=jsbsim)</notrim-desc>
+ <on-ground-desc>Start at ground level (default)</on-ground-desc>
+ <in-air-desc>Start in air (implied when using --altitude)</in-air-desc>
+ <wind-desc>Specify wind coming from DIR (degrees) at SPEED (knots)</wind-desc>
+ <aircraft-dir-desc>Aircraft directory relative to the path of the executable</aircraft-dir-desc>
+
+ <aircraft-model-options>Aircraft model directory (UIUC FDM ONLY)</aircraft-model-options>
+
+ <!-- Position and Orientation options -->
+ <position-options>Initial Position and Orientation</position-options>
+ <airport-id-desc>Specify starting position by airport ID</airport-id-desc>
+ <offset-distance-desc>Specify distance to threshold</offset-distance-desc>
+ <offset-azimuth-desc>Specify heading to threshold</offset-azimuth-desc>
+ <lon-desc>Starting longitude (west = -)</lon-desc>
+ <lat-desc>Starting latitude (south = -)</lat-desc>
+ <altitude-desc>Starting altitude</altitude-desc>
+ <heading-desc>Specify heading (yaw) angle (Psi)</heading-desc>
+ <roll-desc>Specify roll angle (Phi)</roll-desc>
+ <pitch-desc>Specify pitch angle (Theta)</pitch-desc>
+ <uBody-desc>Specify velocity along the body X axis</uBody-desc>
+ <vBody-desc>Specify velocity along the body Y axis</vBody-desc>
+ <wBody-desc>Specify velocity along the body Z axis</wBody-desc>
+ <vc-desc>Specify initial airspeed</vc-desc>
+ <mach-desc>Specify initial mach number</mach-desc>
+ <glideslope-desc>Specify flight path angle (can be positive)</glideslope-desc>
+ <roc-desc>Specify initial climb rate (can be negative)</roc-desc>
+
+ <!-- Rendering options -->
+ <rendering-options>Rendering Options</rendering-options>
+ <bpp-desc>Specify the bits per pixel</bpp-desc>
+ <fog-disable-desc>Disable fog/haze</fog-disable-desc>
+ <fog-fastest-desc>Enable fastest fog/haze</fog-fastest-desc>
+ <fog-nicest-desc>Enable nicest fog/haze</fog-nicest-desc>
+ <enable-clouds-desc>Enable 2D (flat) cloud layers</enable-clouds-desc>
+ <disable-clouds-desc>Disable 2D (flat) cloud layers</disable-clouds-desc>
+ <enable-clouds3d-desc>Enable 3D (volumetric) cloud layers</enable-clouds3d-desc>
+ <disable-clouds3d-desc>Disable 3D (volumetric) cloud layers</disable-clouds3d-desc>
+ <fov-desc>Specify field of view angle</fov-desc>
+ <disable-fullscreen-desc>Disable fullscreen mode</disable-fullscreen-desc>
+ <enable-fullscreen-desc>Enable fullscreen mode</enable-fullscreen-desc>
+ <shading-flat-desc>Enable flat shading</shading-flat-desc>
+ <shading-smooth-desc>Enable smooth shading</shading-smooth-desc>
+ <disable-skyblend-desc>Disable sky blending</disable-skyblend-desc>
+ <enable-skyblend-desc>Enable sky blending</enable-skyblend-desc>
+ <disable-textures-desc>Disable textures</disable-textures-desc>
+ <enable-textures-desc>Enable textures</enable-textures-desc>
+ <disable-wireframe-desc>Disable wireframe drawing mode</disable-wireframe-desc>
+ <enable-wireframe-desc>Enable wireframe drawing mode</enable-wireframe-desc>
+ <geometry-desc>Specify window geometry (640x480, etc)</geometry-desc>
+ <view-offset-desc>Specify the default forward view direction as an offset from straight ahead. Allowable values are LEFT, RIGHT, CENTER, or a specific number in degrees</view-offset-desc>
+ <visibility-desc>Specify initial visibility</visibility-desc>
+ <visibility-miles-desc>Specify initial visibility in miles</visibility-miles-desc>
+
+ <!-- Hud options -->
+ <hud-options>Hud Options</hud-options>
+ <hud-tris-desc>Hud displays number of triangles rendered</hud-tris-desc>
+ <hud-culled-desc>Hud displays percentage of triangles culled</hud-culled-desc>
+
+ <!-- Time options -->
+ <time-options>Time Options</time-options>
+ <time-offset-desc>Add this time offset</time-offset-desc>
+ <time-match-real-desc>Synchronize time with real-world time</time-match-real-desc>
+ <time-match-local-desc>Synchronize time with local real-world time</time-match-local-desc>
+ <start-date-desc>Specify a starting date/time with respect to</start-date-desc>
+
+ <!-- Network options -->
+ <network-options>Network Options</network-options>
+ <httpd-desc>Enable http server on the specified port</httpd-desc>
+ <telnet-desc>Enable telnet server on the specified port</telnet-desc>
+ <jpg-httpd-desc>Enable screen shot http server on the specified port</jpg-httpd-desc>
+ <disable-network-olk-desc>Disable Multipilot mode (default)</disable-network-olk-desc>
+ <enable-network-olk-desc>Enable Multipilot mode</enable-network-olk-desc>
+ <net-hud-desc>Hud displays network info</net-hud-desc>
+ <net-id-desc>Specify your own call sign</net-id-desc>
+
+ <!-- Route/Way Point Options -->
+ <route-options>Route/Way Point Options</route-options>
+ <wp-desc>Specify a waypoint for the GC autopilot;</wp-desc>
+ <flight-plan-desc>Read all waypoints from a file</flight-plan-desc>
+
+ <!-- IO Options -->
+ <io-options>IO Options</io-options>
+ <garmin-desc>Open connection using the Garmin GPS protocol</garmin-desc>
+ <joyclient-desc>Open connection to an Agwagon joystick</joyclient-desc>
+ <native-ctrls-desc>Open connection using the FG Native Controls protocol</native-ctrls-desc>
+ <native-fdm-desc>Open connection using the FG Native FDM protocol</native-fdm-desc>
+ <native-desc>Open connection using the FG Native protocol</native-desc>
+ <nmea-desc>Open connection using the NMEA protocol</nmea-desc>
+ <opengc-desc>Open connection using the OpenGC protocol</opengc-desc>
+ <props-desc>Open connection using the interactive property manager</props-desc>
+ <pve-desc>Open connection using the PVE protocol</pve-desc>
+ <ray-desc>Open connection using the Ray Woodworth motion chair protocol</ray-desc>
+ <rul-desc>Open connection using the RUL protocol</rul-desc>
+ <atc610x-desc>Enable atc610x interface</atc610x-desc>
+
+ <!-- Debugging Options -->
+ <debugging-options>Debugging Options</debugging-options>
+ <trace-read-desc>Trace the reads for a property;</trace-read-desc>
+ <trace-write-desc>Trace the writes for a property;</trace-write-desc>
 
 </PropertyList>

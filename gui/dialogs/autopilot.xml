@@ -1,484 +1,316 @@
 <?xml version="1.0"?>
-
 <PropertyList>
+  <name>autopilot</name>
+  <layout>vbox</layout>
 
- <name>autopilot</name>
- <width>500</width>
- <height>580</height>
- <modal>false</modal>
+  <!--
+      /autopilot/locks/altitude
+      /autopilot/locks/heading
+      /autopilot/locks/speed
+      /autopilot/settings/heading-bug-deg
+      /autopilot/settings/target-agl-ft
+      /autopilot/settings/target-altitude-ft
+      /autopilot/settings/target-aoa-deg
+      /autopilot/settings/target-pitch-deg
+      /autopilot/settings/target-speed-kt
+      /autopilot/settings/true-heading-deg
+      /autopilot/settings/vertical-speed-fpm
+    -->
 
- <text>
-  <x>10</x>
-  <y>550</y>
-  <label>AutoPilot Settings</label>
- </text>
+  <text><label>Autopilot Settings</label></text>
 
- <!-- Heading Modes -->
+  <group>
+    <layout>hbox</layout>
+    
+    <group> <!-- Pitch/Altitude -->
+      <layout>vbox</layout>
+      <group>
+	<layout>hbox</layout>
+	<text><label>Heading Control:</label></text>
+	<empty><stretch>true</stretch></empty>
+	<checkbox>
+	  <label>Active</label>
+	  <property>/autopilot/gui/hdg-active</property>
+	  <binding>
+	    <command>nasal</command>
+	    <script>autopilot.update()</script>
+	  </binding>
+	</checkbox>
+      </group>
 
- <text>
-  <x>10</x>
-  <y>510</y>
-  <label>Heading Modes:</label>
- </text>
+      <group>
+	<layout>table</layout>
+	<text>
+	  <label>Wings Level</label>
+	  <halign>right</halign>
+	  <row>0</row><col>0</col>
+	</text>
+	<radio>
+	  <row>0</row><col>1</col>
+	  <property>/autopilot/gui/hdg-wing</property>
+	  <binding>
+	    <command>nasal</command>
+	    <script>autopilot.update("hdg-wing")</script>
+	  </binding>
+	</radio>
 
-<!--
- <input>
-  <name>heading-modes</name>
-  <x>150</x>
-  <y>510</y>
-  <width>150</width>
-  <height>25</height>
-  <property>/autopilot/locks/heading</property>
- </input>
--->
+	<text>
+	  <label>Heading Bug</label>
+	  <halign>right</halign>
+	  <row>1</row><col>0</col>
+	</text>
+	<radio>
+	  <row>1</row><col>1</col>
+	  <property>/autopilot/gui/hdg-bug</property>
+	  <binding>
+	    <command>nasal</command>
+	    <script>autopilot.update("hdg-bug")</script>
+	  </binding>
+	</radio>
+	<input>
+	  <row>1</row><col>2</col>
+	  <name>hdg-bug</name>
+	  <property>/autopilot/settings/heading-bug-deg</property>
+	</input>
 
- <button>
-  <x>310</x>
-  <y>510</y>
-  <legend>Deactivate</legend>
-  <binding>
-   <command>nasal</command>
-   <script>
-     node = props.globals.getNode("/autopilot/locks/heading", 1);
-     node.setValue( "" );
-   </script>
-  </binding>
- </button>
+	<text>
+	  <label>True Heading</label>
+	  <halign>right</halign>
+	  <row>2</row><col>0</col>
+	</text>
+	<radio>
+	  <row>2</row><col>1</col>
+	  <property>/autopilot/gui/hdg-true</property>
+	  <binding>
+	    <command>nasal</command>
+	    <script>autopilot.update("hdg-true")</script>
+	  </binding>
+	</radio>
+	<input>
+	  <row>2</row><col>2</col>
+	  <name>hdg-true</name>
+	  <property>/autopilot/settings/true-heading-deg</property>
+	</input>
 
- <text>
-  <x>10</x>
-  <y>480</y>
-  <label>Wing Leveler:</label>
- </text>
+	<text>
+	  <label>NAV1 CDI Course</label>
+	  <halign>right</halign>
+	  <row>3</row><col>0</col>
+	</text>
+	<radio>
+	  <row>3</row><col>1</col>
+	  <property>/autopilot/gui/hdg-nav</property>
+	  <binding>
+	    <command>nasal</command>
+	    <script>autopilot.update("hdg-nav")</script>
+	  </binding>
+	</radio>
+      </group>
 
- <button>
-  <x>310</x>
-  <y>480</y>
-  <legend>Activate</legend>
-  <binding>
-   <command>nasal</command>
-   <script>
-     node = props.globals.getNode("/autopilot/locks/heading", 1);
-     node.setValue( "wing-leveler" );
-   </script>
-  </binding>
- </button>
+      <empty>
+	<stretch>true</stretch>
+	<pref-height>28</pref-height>
+      </empty>
 
- <text>
-  <x>10</x>
-  <y>450</y>
-  <label>Heading Bug:</label>
- </text>
+      <group>
+	<layout>hbox</layout>
+	<text><label>Velocity Control:</label></text>
+	<empty><stretch>true</stretch></empty>
+	<checkbox>
+	  <label>Active</label>
+	  <property>/autopilot/gui/vel-active</property>
+	  <binding>
+	    <command>nasal</command>
+	    <script>autopilot.update()</script>
+	  </binding>
+	</checkbox>
+      </group>
 
- <input>
-  <name>heading-bug</name>
-  <x>150</x>
-  <y>450</y>
-  <width>150</width>
-  <height>25</height>
-  <property>/autopilot/settings/heading-bug-deg</property>
- </input>
+      <group>
+	<layout>table</layout>
+	<text>
+	  <label>Speed with Throttle</label>
+	  <halign>right</halign>
+	  <row>0</row><col>0</col>
+	</text>
+	<radio>
+	  <row>0</row><col>1</col>
+	  <property>/autopilot/gui/vel-throttle</property>
+	  <binding>
+	    <command>nasal</command>
+	    <script>autopilot.update("vel-throttle")</script>
+	  </binding>
+	</radio>
+	<input>
+	  <row>0</row><col>2</col>
+	  <name>vel-throttle</name>
+	  <property>/autopilot/settings/target-speed-kt</property>
+	</input>
 
- <button>
-  <x>310</x>
-  <y>450</y>
-  <legend>Activate</legend>
-  <binding>
-   <command>nasal</command>
-   <script>
-     node = props.globals.getNode("/autopilot/locks/heading", 1);
-     node.setValue( "dg-heading-hold" );
-   </script>
-  </binding>
-  <binding>
-   <command>dialog-apply</command>
-  </binding>
- </button>
+	<text>
+	  <label>Speed with Pitch</label>
+	  <halign>right</halign>
+	  <row>1</row><col>0</col>
+	</text>
+	<radio>
+	  <row>1</row><col>1</col>
+	  <property>/autopilot/gui/vel-pitch</property>
+	  <binding>
+	    <command>nasal</command>
+	    <script>autopilot.update("vel-pitch")</script>
+	  </binding>
+	</radio>
+	<input>
+	  <row>1</row><col>2</col>
+	  <name>vel-pitch</name>
+	  <property>/autopilot/settings/target-speed-kt</property>
+	</input>
+	
+      </group>
+    </group> <!-- End of Heading/Speed -->
+    
+    <group> <!-- Pitch/Altitude -->
+      <layout>vbox</layout>
+      <group>
+	<layout>hbox</layout>
+	<text><label>Pitch/Altitude Control:</label></text>
+	<empty><stretch>true</stretch></empty>
+	<checkbox>
+	  <label>Active</label>
+	  <property>/autopilot/gui/alt-active</property>
+	  <binding>
+	    <command>nasal</command>
+	    <script>autopilot.update()</script>
+	  </binding>
+	</checkbox>
+      </group>
 
- <text>
-  <x>10</x>
-  <y>420</y>
-  <label>True Heading:</label>
- </text>
+      <group>
+	<layout>table</layout>
+	<text>
+	  <label>Vertical Speed</label>
+	  <halign>right</halign>
+	  <row>0</row><col>0</col>
+	</text>
+	<radio>
+	  <row>0</row><col>1</col>
+	  <property>/autopilot/gui/alt-vert</property>
+	  <binding>
+	    <command>nasal</command>
+	    <script>autopilot.update("alt-vert")</script>
+	  </binding>
+	</radio>
+	<input>
+	  <row>0</row><col>2</col>
+	  <name>alt-vert</name>
+	  <property>/autopilot/settings/vertical-speed-fpm</property>
+	</input>
 
- <input>
-  <name>true-heading</name>
-  <x>150</x>
-  <y>420</y>
-  <width>150</width>
-  <height>25</height>
-  <property>/autopilot/settings/true-heading-deg</property>
- </input>
+	<text>
+	  <label>Pitch Hold</label>
+	  <halign>right</halign>
+	  <row>1</row><col>0</col>
+	</text>
+	<radio>
+	  <row>1</row><col>1</col>
+	  <property>/autopilot/gui/alt-pitch</property>
+	  <binding>
+	    <command>nasal</command>
+	    <script>autopilot.update("alt-pitch")</script>
+	  </binding>
+	</radio>
+	<input>
+	  <row>1</row><col>2</col>
+	  <name>alt-pitch</name>
+	  <property>/autopilot/settings/target-pitch-deg</property>
+	</input>
 
- <button>
-  <x>310</x>
-  <y>420</y>
-  <legend>Activate</legend>
-  <binding>
-   <command>nasal</command>
-   <script>
-     node = props.globals.getNode("/autopilot/locks/heading", 1);
-     node.setValue( "true-heading-hold" );
-   </script>
-  </binding>
-  <binding>
-   <command>dialog-apply</command>
-  </binding>
- </button>
+	<text>
+	  <label>AoA Hold</label>
+	  <halign>right</halign>
+	  <row>2</row><col>0</col>
+	</text>
+	<radio>
+	  <row>2</row><col>1</col>
+	  <property>/autopilot/gui/alt-aoa</property>
+	  <binding>
+	    <command>nasal</command>
+	    <script>autopilot.update("alt-aoa")</script>
+	  </binding>
+	</radio>
+	<input>
+	  <row>2</row><col>2</col>
+	  <name>alt-aoa</name>
+	  <property>/autopilot/settings/target-aoa-deg</property>
+	</input>
 
- <text>
-  <x>10</x>
-  <y>390</y>
-  <label>NAV1 CDI Hold:</label>
- </text>
+	<text>
+	  <label>Altitude Hold</label>
+	  <halign>right</halign>
+	  <row>3</row><col>0</col>
+	</text>
+	<radio>
+	  <row>3</row><col>1</col>
+	  <property>/autopilot/gui/alt-alt</property>
+	  <binding>
+	    <command>nasal</command>
+	    <script>autopilot.update("alt-alt")</script>
+	  </binding>
+	</radio>
+	<input>
+	  <row>3</row><col>2</col>
+	  <name>alt-alt</name>
+	  <property>/autopilot/settings/target-altitude-ft</property>
+	</input>
 
- <button>
-  <x>310</x>
-  <y>390</y>
-  <legend>Activate</legend>
-  <binding>
-   <command>nasal</command>
-   <script>
-     node = props.globals.getNode("/autopilot/locks/heading", 1);
-     node.setValue( "nav1-hold" );
-   </script>
-  </binding>
- </button>
+	<text>
+	  <label>AGL Hold</label>
+	  <halign>right</halign>
+	  <row>4</row><col>0</col>
+	</text>
+	<radio>
+	  <row>4</row><col>1</col>
+	  <property>/autopilot/gui/alt-agl</property>
+	  <binding>
+	    <command>nasal</command>
+	    <script>autopilot.update("alt-agl")</script>
+	  </binding>
+	</radio>
+	<input>
+	  <row>4</row><col>2</col>
+	  <name>alt-agl</name>
+	  <property>/autopilot/settings/target-agl-ft</property>
+	</input>
 
- <!-- Pitch/Alt Modes -->
+	<text>
+	  <label>NAV1 Glideslope</label>
+	  <halign>right</halign>
+	  <row>5</row><col>0</col>
+	</text>
+	<radio>
+	  <row>5</row><col>1</col>
+	  <property>/autopilot/gui/alt-gs</property>
+	  <binding>
+	    <command>nasal</command>
+	    <script>autopilot.update("alt-gs")</script>
+	  </binding>
+	</radio>
+      </group>
 
- <text>
-  <x>10</x>
-  <y>350</y>
-  <label>Pitch/Altitude Modes:</label>
- </text>
+      <empty><stretch>true</stretch></empty>
 
-<!--
- <input>
-  <name>pitch-modes</name>
-  <x>150</x>
-  <y>350</y>
-  <width>150</width>
-  <height>25</height>
-  <property>/autopilot/locks/heading</property>
- </input>
--->
+    </group> <!-- End of Pitch/Altitude VBox -->
+  </group>
 
- <button>
-  <x>310</x>
-  <y>350</y>
-  <legend>Deactivate</legend>
-  <binding>
-   <command>nasal</command>
-   <script>
-     node = props.globals.getNode("/autopilot/locks/altitude", 1);
-     node.setValue( "" );
-   </script>
-  </binding>
- </button>
-
- <text>
-  <x>10</x>
-  <y>320</y>
-  <label>Vertical Speed:</label>
- </text>
-
- <input>
-  <name>vertical-speed-fpm</name>
-  <x>150</x>
-  <y>320</y>
-  <width>150</width>
-  <height>25</height>
-  <property>/autopilot/settings/vertical-speed-fpm</property>
- </input>
-
- <button>
-  <x>310</x>
-  <y>320</y>
-  <legend>Activate</legend>
-  <binding>
-   <command>nasal</command>
-   <script>
-     node = props.globals.getNode("/autopilot/locks/altitude", 1);
-     node.setValue( "vertical-speed-hold" );
-   </script>
-  </binding>
-  <binding>
-   <command>dialog-apply</command>
-  </binding>
- </button>
-
- <text>
-  <x>10</x>
-  <y>290</y>
-  <label>Pitch Hold:</label>
- </text>
-
- <input>
-  <name>pitch-deg</name>
-  <x>150</x>
-  <y>290</y>
-  <width>150</width>
-  <height>25</height>
-  <property>/autopilot/settings/target-pitch-deg</property>
- </input>
-
- <button>
-  <x>310</x>
-  <y>290</y>
-  <legend>Activate</legend>
-  <binding>
-   <command>nasal</command>
-   <script>
-     node = props.globals.getNode("/autopilot/locks/altitude", 1);
-     node.setValue( "pitch-hold" );
-   </script>
-  </binding>
-  <binding>
-   <command>dialog-apply</command>
-  </binding>
- </button>
-
- <text>
-  <x>10</x>
-  <y>260</y>
-  <label>AOA Hold:</label>
- </text>
-
- <input>
-  <name>aoa-deg</name>
-  <x>150</x>
-  <y>260</y>
-  <width>150</width>
-  <height>25</height>
-  <property>/autopilot/settings/target-aoa-deg</property>
- </input>
-
- <button>
-  <x>310</x>
-  <y>260</y>
-  <legend>Activate</legend>
-  <binding>
-   <command>nasal</command>
-   <script>
-     node = props.globals.getNode("/autopilot/locks/altitude", 1);
-     node.setValue( "aoa-hold" );
-   </script>
-  </binding>
-  <binding>
-   <command>dialog-apply</command>
-  </binding>
- </button>
-
- <text>
-  <x>10</x>
-  <y>230</y>
-  <label>Altitude Hold:</label>
- </text>
-
- <input>
-  <name>altitude</name>
-  <x>150</x>
-  <y>230</y>
-  <width>150</width>
-  <height>25</height>
-  <property>/autopilot/settings/target-altitude-ft</property>
- </input>
-
- <button>
-  <x>310</x>
-  <y>230</y>
-  <legend>Activate</legend>
-  <binding>
-   <command>nasal</command>
-   <script>
-     node = props.globals.getNode("/autopilot/locks/altitude", 1);
-     node.setValue( "altitude-hold" );
-   </script>
-  </binding>
-  <binding>
-   <command>dialog-apply</command>
-  </binding>
- </button>
-
- <text>
-  <x>10</x>
-  <y>200</y>
-  <label>AGL Hold:</label>
- </text>
-
- <input>
-  <name>agl</name>
-  <x>150</x>
-  <y>200</y>
-  <width>150</width>
-  <height>25</height>
-  <property>/autopilot/settings/target-agl-ft</property>
- </input>
-
- <button>
-  <x>310</x>
-  <y>200</y>
-  <legend>Activate</legend>
-  <binding>
-   <command>nasal</command>
-   <script>
-     node = props.globals.getNode("/autopilot/locks/altitude", 1);
-     node.setValue( "agl-hold" );
-   </script>
-  </binding>
-  <binding>
-   <command>dialog-apply</command>
-  </binding>
- </button>
-
- <text>
-  <x>10</x>
-  <y>170</y>
-  <label>NAV1 GS Hold:</label>
- </text>
-
- <button>
-  <x>310</x>
-  <y>170</y>
-  <legend>Activate</legend>
-  <binding>
-   <command>nasal</command>
-   <script>
-     node = props.globals.getNode("/autopilot/locks/altitude", 1);
-     node.setValue( "gs1-hold" );
-   </script>
-  </binding>
-  <binding>
-   <command>dialog-apply</command>
-  </binding>
- </button>
-
- <!-- Velocity Modes -->
-
- <text>
-  <x>10</x>
-  <y>130</y>
-  <label>Velocity Hold:</label>
- </text>
-
-<!--
- <input>
-  <name>velocity-modes</name>
-  <x>150</x>
-  <y>130</y>
-  <width>150</width>
-  <height>25</height>
-  <property>/autopilot/locks/heading</property>
- </input>
--->
-
- <input>
-  <name>autospeed</name>
-  <x>150</x>
-  <y>130</y>
-  <width>150</width>
-  <height>25</height>
-  <property>/autopilot/settings/target-speed-kt</property>
- </input>
-
- <button>
-  <x>310</x>
-  <y>130</y>
-  <legend>Deactivate</legend>
-  <binding>
-   <command>nasal</command>
-   <script>
-     node = props.globals.getNode("/autopilot/locks/speed", 1);
-     node.setValue( "" );
-   </script>
-  </binding>
- </button>
-
- <text>
-  <x>10</x>
-  <y>100</y>
-  <label>Speed w/ Throttle:</label>
- </text>
-
- <button>
-  <x>310</x>
-  <y>100</y>
-  <legend>Activate</legend>
-  <binding>
-   <command>nasal</command>
-   <script>
-     node = props.globals.getNode("/autopilot/locks/speed", 1);
-     node.setValue( "speed-with-throttle" );
-   </script>
-  </binding>
-  <binding>
-   <command>dialog-apply</command>
-  </binding>
- </button>
-
- <text>
-  <x>10</x>
-  <y>70</y>
-  <label>Speed w/ Pitch:</label>
- </text>
-
- <button>
-  <x>310</x>
-  <y>70</y>
-  <legend>Activate</legend>
-  <binding>
-   <command>nasal</command>
-   <script>
-     node = props.globals.getNode("/autopilot/locks/speed", 1);
-     node.setValue( "speed-with-pitch-trim" );
-   </script>
-  </binding>
-  <binding>
-   <command>dialog-apply</command>
-  </binding>
- </button>
-
- <!-- Button Group -->
-
- <button>
-  <x>105</x>
-  <y>10</y>
-  <legend>OK</legend>
-  <binding>
-   <command>dialog-apply</command>
-  </binding>
-  <binding>
-   <command>dialog-close</command>
-  </binding>
-  <default>true</default>
- </button>
-
- <button>
-  <x>205</x>
-  <y>10</y>
-  <legend>Apply</legend>
-  <binding>
-   <command>dialog-apply</command>
-  </binding>
- </button>
-
- <button>
-  <x>305</x>
-  <y>10</y>
-  <legend>Reset</legend>
-  <binding>
-   <command>dialog-update</command>
-  </binding>
- </button>
-
- <button>
-  <x>405</x>
-  <y>10</y>
-  <legend>Cancel</legend>
-  <binding>
-   <command>dialog-close</command>
-  </binding>
- </button>
+  <button>
+    <legend>OK</legend>
+    <padding>10</padding>
+    <binding>
+      <command>dialog-apply</command>
+    </binding>
+    <binding>
+      <command>dialog-close</command>
+    </binding>
+  </button>
 
 </PropertyList>

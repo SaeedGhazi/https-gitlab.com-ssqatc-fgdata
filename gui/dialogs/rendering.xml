@@ -1,105 +1,89 @@
 <?xml version="1.0"?>
 
 <PropertyList>
+  <name>rendering</name>
+  <modal>false</modal>
+  <layout>vbox</layout>
 
- <!-- FlightGear rendering options -->
+  <text>
+    <label>Rendering Options</label>
+  </text>
 
- <name>rendering</name>
- <width>380</width>
- <height>230</height>
- <modal>false</modal>
+  <group>
+    <layout>vbox</layout>
+    <halign>center</halign>
 
- <text>
-  <x>10</x>
-  <y>200</y>
-  <label>Rendering Options</label>
- </text>
+    <checkbox>
+      <halign>left</halign>
+      <label>Sun/Moon horizon effect</label>
+      <property>/sim/rendering/horizon-effect</property>
+    </checkbox>
+    
+    <checkbox>
+      <halign>left</halign>
+      <label>Enhanced runway lighting</label>
+      <property>/sim/rendering/enhanced-lighting</property>
+    </checkbox>
+    
+    <checkbox>
+      <halign>left</halign>
+      <label>Runway light distance attenuation</label>
+      <property>/sim/rendering/distance-attenuation</property>
+    </checkbox>
+    
+    <checkbox>
+      <halign>left</halign>
+      <label>Specular reflections on objects</label>
+      <property>/sim/rendering/specular-highlight</property>
+    </checkbox>
+  </group>
 
- <text>
-  <x>30</x>
-  <y>180</y>
-  <label>(Check an option to enable it.)</label>
- </text>
+  <group>
+    <layout>hbox</layout>
+    <empty><stretch>true</stretch></empty>
 
- <checkbox>
-  <x>30</x>
-  <y>140</y>
-  <width>20</width>
-  <height>20</height>
-  <label>Sun/Moon horizon effect</label>
-  <property>/sim/rendering/horizon-effect</property>
- </checkbox>
+    <button>
+      <legend>OK</legend>
+      <equal>true</equal>
+      <binding>
+	<command>dialog-apply</command>
+      </binding>
+      <binding>
+	<command>dialog-close</command>
+      </binding>
+      <default>true</default>
+    </button>
 
- <checkbox>
-  <x>30</x>
-  <y>110</y>
-  <width>20</width>
-  <height>20</height>
-  <label>Enhanced runway lighting</label>
-  <property>/sim/rendering/enhanced-lighting</property>
- </checkbox>
+    <empty><stretch>true</stretch></empty>
 
- <checkbox>
-  <x>30</x>
-  <y>80</y>
-  <width>20</width>
-  <height>20</height>
-  <label>Runway light distance attenuation</label>
-  <property>/sim/rendering/distance-attenuation</property>
- </checkbox>
+    <button>
+      <legend>Apply</legend>
+      <equal>true</equal>
+      <binding>
+	<command>dialog-apply</command>
+      </binding>
+    </button>
 
- <checkbox>
-  <x>30</x>
-  <y>50</y>
-  <width>20</width>
-  <height>20</height>
-  <label>Specular reflections on objects</label>
-  <property>/sim/rendering/specular-highlight</property>
- </checkbox>
+    <empty><stretch>true</stretch></empty>
 
- <group>
-  <y>10</y>
+    <button>
+      <legend>Reset</legend>
+      <equal>true</equal>
+      <binding>
+	<command>dialog-update</command>
+      </binding>
+    </button>
 
-  <button>
-   <x>10</x>
-   <y>0</y>
-   <legend>OK</legend>
-   <binding>
-    <command>dialog-apply</command>
-   </binding>
-   <binding>
-    <command>dialog-close</command>
-   </binding>
-   <default>true</default>
-  </button>
+    <empty><stretch>true</stretch></empty>
 
-  <button>
-   <x>60</x>
-   <y>0</y>
-   <legend>Apply</legend>
-   <binding>
-    <command>dialog-apply</command>
-   </binding>
-  </button>
+    <button>
+      <legend>Cancel</legend>
+      <equal>true</equal>
+      <binding>
+	<command>dialog-close</command>
+      </binding>
+    </button>
 
-  <button>
-   <x>140</x>
-   <y>0</y>
-   <legend>Reset</legend>
-   <binding>
-    <command>dialog-update</command>
-   </binding>
-  </button>
-
-  <button>
-   <x>220</x>
-   <y>0</y>
-   <legend>Cancel</legend>
-   <binding>
-    <command>dialog-close</command>
-   </binding>
-  </button>
-
- </group>
-
+    <empty><stretch>true</stretch></empty>
+  </group>
 </PropertyList>

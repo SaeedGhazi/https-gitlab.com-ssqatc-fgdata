@@ -1,60 +1,62 @@
 <?xml version="1.0"?>
-
 <PropertyList>
+  <name>airports</name>
+  <layout>vbox</layout>
 
- <name>airports</name>
- <width>480</width>
- <height>480</height>
- <modal>true</modal>
+  <text>
+    <label>Select an Airport</label>
+  </text>
 
- <text>
-  <x>10</x>
-  <y>450</y>
-  <label>Select an Airport:</label>
- </text>
+  <!-- The airport list widget appears to have a bug with layout; it 
+       fails to draw within the x/y/width/height it is given. -->
+  <airport-list>
+    <pref-width>440</pref-width>
+    <pref-height>360</pref-height>
+    <property>/sim/presets/airport-id</property>
+  </airport-list>
 
- <airport-list>
-  <x>10</x>
-  <y>40</y>
-  <width>440</width>
-  <height>360</height>
-  <property>/sim/presets/airport-id</property>
- </airport-list>
+  <group>
+    <layout>hbox</layout>
+    <default-padding>10</default-padding>
+    <empty><stretch>true</stretch></empty>
 
- <button>
-  <x>100</x>
-  <y>10</y>
-  <legend>Select</legend>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/presets/longitude-deg</property>
-   <value type="double">-9999</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/presets/latitude-deg</property>
-   <value type="double">-9999</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/presets/altitude-ft</property>
-   <value type="double">-9999</value>
-  </binding>
-  <binding>
-   <command>dialog-apply</command>
-  </binding>
-  <binding>
-   <command>presets-commit</command>
-  </binding>
- </button>
+    <button>
+      <legend>OK</legend>
+      <equal>true</equal>
+      <default>true</default>
+      <binding>
+	<command>property-assign</command>
+	<property>/sim/presets/longitude-deg</property>
+	<value type="double">-9999</value>
+      </binding>
+      <binding>
+	<command>property-assign</command>
+	<property>/sim/presets/latitude-deg</property>
+	<value type="double">-9999</value>
+      </binding>
+      <binding>
+	<command>property-assign</command>
+	<property>/sim/presets/altitude-ft</property>
+	<value type="double">-9999</value>
+      </binding>
+      <binding>
+	<command>dialog-apply</command>
+      </binding>
+      <binding>
+	<command>presets-commit</command>
+      </binding>
+    </button>
 
- <button>
-  <x>300</x>
-  <y>10</y>
-  <legend>Cancel</legend>
-  <binding>
-   <command>dialog-close</command>
-  </binding>
- </button>
+    <empty><stretch>true</stretch></empty>
 
+    <button>
+      <legend>Cancel</legend>
+      <equal>true</equal>
+      <binding>
+	<command>dialog-close</command>
+      </binding>
+    </button>
+
+    <empty><stretch>true</stretch></empty>
+  </group>
 </PropertyList>

@@ -1,165 +1,76 @@
 <?xml version="1.0"?>
-
 <PropertyList>
- <name>location-on-ground</name>
- <width>400</width>
- <height>400</height>
+  <name>location-on-ground</name>
+  <layout>vbox</layout>
+  
+  <text>
+    <label>Set New Location</label>
+  </text>
+    
+  <group>
+    <layout>table</layout>
+    <halign>center</halign>
+    <text>
+      <row>0</row><col>0</col>
+      <label>Airport:</label>
+    </text>
+    <input>
+      <row>0</row><col>1</col>
+      <property>/sim/presets/airport-id</property>
+    </input>
+    <text>
+      <row>1</row><col>0</col>
+      <label>Runway:</label>
+    </text>
+    <input>
+      <row>1</row><col>1</col>
+      <property>/sim/presets/runway</property>
+    </input>
+  </group>
 
- <text>
-  <x>10</x>
-  <y>360</y>
-  <label>Set New Location</label>
- </text>
+  <group>
+    <layout>hbox</layout>
+    <default-padding>10</default-padding>
+    <empty><stretch>true</stretch></empty>
 
- <input>
-  <x>10</x>
-  <y>300</y>
-  <width>200</width>
-  <height>25</height>
-  <label>Airport</label>
-  <property>/sim/presets/airport-id</property>
- </input>
+    <button>
+      <legend>OK</legend>
+      <default>true</default>
+      <equal>true</equal>
+      <binding>
+	<command>nasal</command>
+	<script>
+	  setprop("/sim/presets/longitude-deg", -9999);
+	  setprop("/sim/presets/latitude-deg", -9999);
+	  setprop("/sim/presets/altitude-ft", -9999);
+	  setprop("/sim/presets/airspeed-kt", 0);
+	  setprop("/sim/presets/offset-distance", 0);
+	  setprop("/sim/presets/offset-azimuth", 0);
+	  setprop("/sim/presets/glideslope-deg", 0);
+	  setprop("/sim/presets/heading-deg", 0);
+	</script>
+      </binding>
+      <binding>
+	<command>dialog-apply</command>
+      </binding>
+      <binding>
+	<command>presets-commit</command>
+      </binding>
+      <binding>
+	<command>dialog-close</command>
+      </binding>
+    </button>
 
- <input>
-  <x>10</x>
-  <y>270</y>
-  <width>200</width>
-  <height>25</height>
-  <label>Runway</label>
-  <property>/sim/presets/runway</property>
- </input>
+    <empty><stretch>true</stretch></empty>
 
- <!-- Button Box -->
- <group>
-  <x>10</x>
-  <y>10</y>
+    <button>
+      <legend>Cancel</legend>
+      <equal>true</equal> 
+      <binding>
+	<command>dialog-close</command>
+      </binding>
+    </button>
 
-  <button>
-   <x>0</x>
-   <y>0</y>
-   <legend>OK</legend>
-   <binding>
-    <command>property-assign</command>
-    <property>/sim/presets/longitude-deg</property>
-    <value type="double">-9999</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/sim/presets/latitude-deg</property>
-    <value type="double">-9999</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/sim/presets/altitude-ft</property>
-    <value type="double">-9999</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/sim/presets/airspeed-kt</property>
-    <value type="double">0</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/sim/presets/offset-distance</property>
-    <value type="double">0</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/sim/presets/offset-azimuth</property>
-    <value type="double">0</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/sim/presets/glideslope-deg</property>
-    <value type="double">0</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/sim/presets/heading-deg</property>
-    <value type="double">0</value>
-   </binding>
-   <binding>
-    <command>dialog-apply</command>
-   </binding>
-   <binding>
-    <command>presets-commit</command>
-   </binding>
-   <binding>
-    <command>dialog-close</command>
-   </binding>
-   <default>true</default>
-  </button>
-
-  <button>
-   <x>100</x>
-   <y>0</y>
-   <legend>Apply</legend>
-   <binding>
-    <command>property-assign</command>
-    <property>/sim/presets/longitude-deg</property>
-    <value type="double">-9999</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/sim/presets/latitude-deg</property>
-    <value type="double">-9999</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/sim/presets/altitude-ft</property>
-    <value type="double">-9999</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/sim/presets/airspeed-kt</property>
-    <value type="double">0</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/sim/presets/offset-distance</property>
-    <value type="double">0</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/sim/presets/offset-azimuth</property>
-    <value type="double">0</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/sim/presets/glideslope-deg</property>
-    <value type="double">0</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/sim/presets/heading-deg</property>
-    <value type="double">0</value>
-   </binding>
-   <binding>
-    <command>dialog-apply</command>
-   </binding>
-   <binding>
-    <command>presets-commit</command>
-   </binding>
-  </button>
-
-  <button>
-   <x>200</x>
-   <y>0</y>
-   <legend>Reset</legend>
-   <binding>
-    <command>dialog-update</command>
-   </binding>
-  </button>
-
-  <button>
-   <x>300</x>
-   <y>0</y>
-   <legend>Cancel</legend>
-   <binding>
-    <command>dialog-close</command>
-   </binding>
-  </button>
-
- </group>
-
+    <empty><stretch>true</stretch></empty>
+  </group>
 </PropertyList>

@@ -1,120 +1,90 @@
 <?xml version="1.0"?>
-
 <PropertyList>
-
- <!-- Instant replay control -->
-
- <name>replay</name>
- <width>460</width>
- <height>380</height>
- <modal>false</modal>
-
- <text>
-  <x>10</x>
-  <y>350</y>
-  <label>Instant Replay</label>
- </text>
-
-   <input>
-   <x>20</x>
-   <y>300</y>
-   <width>125</width>
-   <height>25</height>
-   <property>/sim/replay/duration</property>
-  </input>
-  
-  <text>
-   <x>10</x>
-   <y>270</y>
-   <label>Replay duration in seconds.</label>
-  </text>
-  
-  <text>
-   <x>10</x>
-   <y>250</y>
-   <label>Enter 0 (zero) for replay of whole flight.</label>
-  </text>
-  
-  <combo>
-   <x>20</x>
-   <y>200</y>
-   <width>200</width>
-   <height>25</height>
-   <property>/sim/replay/view</property>
-   <value>0</value>
-   <value>1</value>
-   <value>4</value>
-  </combo>
-  
-  <text>
-   <x>10</x>
-   <y>170</y>
-   <label>Select replay view type:</label>
-  </text>
-  
-  <text>
-   <x>10</x>
-   <y>145</y>
-   <label>0 - Cockpit view</label>
-  </text>
-  
-  <text>
-   <x>10</x>
-   <y>125</y>
-   <label>1 - Chase view</label>
-  </text>
-  
-  <text>
-   <x>10</x>
-   <y>105</y>
-   <label>4 - Tower view</label>
-  </text>
-  
-  <text>
-   <x>10</x>
-   <y>80</y>
-   <label>Use v/shift-v to change views during replay,</label>
-  </text>
+  <name>replay</name>
+  <modal>false</modal>
+  <layout>vbox</layout>
 
   <text>
-   <x>10</x>
-   <y>60</y>
-   <label>and ctrl-v to return to cockpit view following replay.</label>
+    <label>Instant Replay</label>
   </text>
-  
- <!-- Header Row -->
 
- <!-- Button Box -->
+  <group>
+    <layout>table</layout>
+    
+    <text>
+      <row>0</row><col>0</col>
+      <halign>right</halign>
+      <label>Duration:</label>
+    </text>
+    
+    <input>
+      <row>0</row><col>1</col>
+      <halign>left</halign>
+      <property>/sim/replay/duration</property>
+    </input>
+    
+    <text>
+      <row>1</row><col>0</col>
+      <halign>right</halign>
+      <label>View:</label>
+    </text>
+    
+    <combo>
+      <row>1</row><col>1</col>
+      <halign>left</halign>
+      <property>/sim/replay/view</property>
+      <value>0</value>
+      <value>1</value>
+      <value>4</value>
+    </combo>
+  </group>
 
- <group>
-  <x>20</x>
-  <y>10</y>
+  <!-- Using GUI layout management for text formatting.  It ain't
+       pretty, but it works... Turn off default-padding to pack the
+       lines together correctly. -->
+  <group>
+    <layout>vbox</layout>
+    <default-padding>0</default-padding>
+    <padding>6</padding> <!-- padding for the box itself -->
+    <text><label></label></text> <!-- empty line -->
+    <text><label>A duration of zero replays the entire flight.</label></text>
+    <text><label>Replay view types:</label></text>
+    <group>
+      <layout>vbox</layout>
+      <halign>center</halign>
+      <text><label>0 - Cockpit view</label><halign>left</halign></text>
+      <text><label>1 - Chase view</label><halign>left</halign></text>
+      <text><label>4 - Tower view</label><halign>left</halign></text>
+    </group>
+    <text><label>Use v/shift-v to change views during replay, and</label></text>
+    <text><label>ctrl-v to return to cockpit view following replay.</label></text>
+    <text><label></label></text> <!-- empty line -->
+  </group>
 
-  <button>
-   <x>0</x>
-   <y>0</y>
-   <legend>Replay</legend>
-   <binding>
-    <command>dialog-apply</command>
-   </binding>
-   <binding>
-    <command>replay</command>
-   </binding>
-   <binding>
-    <command>dialog-close</command>
-   </binding>
-   <default>true</default>
-  </button>
-
-  <button>
-   <x>100</x>
-   <y>0</y>
-   <legend>Cancel</legend>
-   <binding>
-    <command>dialog-close</command>
-   </binding>
-  </button>
-
- </group>
+  <group>
+    <layout>hbox</layout>
+    <empty><stretch>true</stretch></empty>
+    <button>
+      <legend>Replay</legend>
+      <binding>
+	<command>dialog-apply</command>
+      </binding>
+      <binding>
+	<command>replay</command>
+      </binding>
+      <binding>
+	<command>dialog-close</command>
+      </binding>
+      <default>true</default>
+    </button>
+    <empty><stretch>true</stretch></empty>
+    <button>
+      <legend>Cancel</legend>
+      <binding>
+	<command>dialog-close</command>
+      </binding>
+    </button>
+    <empty><stretch>true</stretch></empty>
+  </group>
 
 </PropertyList>

@@ -41,7 +41,7 @@ Node = {
 #
 Node.new = func {
     result = wrapNode(_new());
-    if(size(arg) >= 0 and typeof(arg[0]) == "hash") {
+    if(size(arg) > 0 and typeof(arg[0]) == "hash") {
         result.setValues(arg[0]);
     }
     return result;

@@ -1,168 +1,142 @@
 <?xml version="1.0"?>
-
 <PropertyList>
- <name>location-in-air</name>
- <width>400</width>
- <height>400</height>
+  <name>location-in-air</name>
+  <layout>vbox</layout>
 
- <text>
-  <x>10</x>
-  <y>360</y>
-  <label>Set New Location</label>
- </text>
+  <text>
+    <label>Set New Location</label>
+  </text>
 
- <input>
-  <x>10</x>
-  <y>300</y>
-  <width>200</width>
-  <height>25</height>
-  <label>Airport</label>
-  <property>/sim/presets/airport-id</property>
- </input>
+  <group>
+    <layout>table</layout>
 
- <input>
-  <x>10</x>
-  <y>270</y>
-  <width>200</width>
-  <height>25</height>
-  <label>Runway</label>
-  <property>/sim/presets/runway</property>
- </input>
+    <text>
+      <row>0</row><col>0</col>
+      <halign>right</halign>
+      <label>Airport</label>
+    </text>
+    <input>
+      <row>0</row><col>1</col>
+      <property>/sim/presets/airport-id</property>
+    </input>
 
- <input>
-  <x>10</x>
-  <y>240</y>
-  <width>200</width>
-  <height>25</height>
-  <label>VOR</label>
-  <property>/sim/presets/vor-id</property>
- </input>
+    <text>
+      <row>1</row><col>0</col>
+      <halign>right</halign>
+      <label>Runway</label>
+    </text>
+    <input>
+      <row>1</row><col>1</col>
+      <property>/sim/presets/runway</property>
+    </input>
 
- <input>
-  <x>10</x>
-  <y>210</y>
-  <width>200</width>
-  <height>25</height>
-  <label>NDB</label>
-  <property>/sim/presets/ndb-id</property>
- </input>
+    <text>
+      <row>2</row><col>0</col>
+      <halign>right</halign>
+      <label>VOR</label>
+    </text>
+    <input>
+      <row>2</row><col>1</col>
+      <property>/sim/presets/vor-id</property>
+    </input>
 
- <input>
-  <x>10</x>
-  <y>180</y>
-  <width>200</width>
-  <height>25</height>
-  <label>Fix</label>
-  <property>/sim/presets/fix</property>
- </input>
+    <text>
+      <row>3</row><col>0</col>
+      <halign>right</halign>
+      <label>NDB</label>
+    </text>
+    <input>
+      <row>3</row><col>1</col>
+      <property>/sim/presets/ndb-id</property>
+    </input>
 
- <input>
-  <x>10</x>
-  <y>150</y>
-  <width>200</width>
-  <height>25</height>
-  <label>Distance (mi)</label>
-  <property>/sim/presets/offset-distance</property>
- </input>
+    <text>
+      <row>4</row><col>0</col>
+      <halign>right</halign>
+      <label>Fix</label>
+    </text>
+    <input>
+      <row>4</row><col>1</col>
+      <property>/sim/presets/fix</property>
+    </input>
 
- <input>
-  <x>10</x>
-  <y>120</y>
-  <width>200</width>
-  <height>25</height>
-  <label>Altitude (ft)</label>
-  <property>/sim/presets/altitude-ft</property>
- </input>
+    <text>
+      <row>0</row><col>2</col>
+      <halign>right</halign>
+      <label>Distance (mi)</label>
+    </text>
+    <input>
+      <row>0</row><col>3</col>
+      <property>/sim/presets/offset-distance</property>
+    </input>
 
- <input>
-  <x>10</x>
-  <y>90</y>
-  <width>200</width>
-  <height>25</height>
-  <label>Glidepath (deg)</label>
-  <property>/sim/presets/glidescope-deg</property>
- </input>
+    <text>
+      <row>1</row><col>2</col>
+      <halign>right</halign>
+      <label>Altitude (ft)</label>
+    </text>
+    <input>
+      <row>1</row><col>3</col>
+      <property>/sim/presets/altitude-ft</property>
+    </input>
 
- <input>
-  <x>10</x>
-  <y>60</y>
-  <width>200</width>
-  <height>25</height>
-  <label>Airspeed (kt)</label>
-  <property>/sim/presets/airspeed-kt</property>
- </input>
+    <text>
+      <row>2</row><col>2</col>
+      <halign>right</halign>
+      <label>Glidepath (deg)</label>
+    </text>
+    <input>
+      <row>2</row><col>3</col>
+      <property>/sim/presets/glidescope-deg</property>
+    </input>
 
- <!-- Button Box -->
- <group>
-  <x>10</x>
-  <y>10</y>
+    <text>
+      <row>3</row><col>2</col>
+      <halign>right</halign>
+      <label>Airspeed (kt)</label>
+    </text>
+    <input>
+      <row>3</row><col>3</col>
+      <property>/sim/presets/airspeed-kt</property>
+    </input>
 
-  <button>
-   <x>0</x>
-   <y>0</y>
-   <legend>OK</legend>
-   <binding>
-    <command>property-assign</command>
-    <property>/sim/presets/longitude-deg</property>
-    <value type="double">-9999</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/sim/presets/latitude-deg</property>
-    <value type="double">-9999</value>
-   </binding>
-   <binding>
-    <command>dialog-apply</command>
-   </binding>
-   <binding>
-    <command>presets-commit</command>
-   </binding>
-   <binding>
-    <command>dialog-close</command>
-   </binding>
-   <default>true</default>
-  </button>
+  </group>
 
-  <button>
-   <x>100</x>
-   <y>0</y>
-   <legend>Apply</legend>
-   <binding>
-    <command>property-assign</command>
-    <property>/sim/presets/longitude-deg</property>
-    <value type="double">-9999</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/sim/presets/latitude-deg</property>
-    <value type="double">-9999</value>
-   </binding>
-   <binding>
-    <command>dialog-apply</command>
-   </binding>
-   <binding>
-    <command>presets-commit</command>
-   </binding>
-  </button>
+  <group>
+    <layout>hbox</layout>
+    <default-padding>10</default-padding>
 
-  <button>
-   <x>200</x>
-   <y>0</y>
-   <legend>Reset</legend>
-   <binding>
-    <command>dialog-update</command>
-   </binding>
-  </button>
+    <button>
+      <legend>OK</legend>
+      <equal>true</equal>
+      <binding>
+	<command>property-assign</command>
+	<property>/sim/presets/longitude-deg</property>
+	<value type="double">-9999</value>
+      </binding>
+      <binding>
+	<command>property-assign</command>
+	<property>/sim/presets/latitude-deg</property>
+	<value type="double">-9999</value>
+      </binding>
+      <binding>
+	<command>dialog-apply</command>
+      </binding>
+      <binding>
+	<command>presets-commit</command>
+      </binding>
+      <binding>
+	<command>dialog-close</command>
+      </binding>
+      <default>true</default>
+    </button>
 
-  <button>
-   <x>300</x>
-   <y>0</y>
-   <legend>Cancel</legend>
-   <binding>
-    <command>dialog-close</command>
-   </binding>
-  </button>
-
- </group>
-
+    <button>
+      <legend>Cancel</legend>
+      <equal>true</equal>
+      <binding>
+	<command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
 </PropertyList>

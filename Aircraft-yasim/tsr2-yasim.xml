@@ -23,9 +23,9 @@
 
 <!-- Cruise configuration -->
 <!-- <cruise speed="500" alt="35000"> -->
- <cruise speed="850" alt="35000"> -->
-  <control-setting axis="/controls/throttle[0]" value="0.95"/>
-  <control-setting axis="/controls/throttle[1]" value="0.95"/>
+ <cruise speed="550" alt="35000"> -->
+  <control-setting axis="/controls/throttle[0]" value="0.5"/>
+  <control-setting axis="/controls/throttle[1]" value="0.5"/>
   <control-setting axis="/controls/flaps" value="0.0"/>
   <control-setting axis="/controls/gear-down" value="0"/>
  </cruise>
@@ -88,7 +88,7 @@
  </gear>
 
 <!-- left main -->
- <gear x="-4.0" y="1.19" z="-2.0" retract-time="7" compression="0.8">
+ <gear x="-4.0" y="2.5" z="-2.0" retract-time="7" compression="0.8">
   <control-input axis="/controls/brakes[0]" control="BRAKE"/>
   <control-input axis="/controls/gear-down" control="EXTEND"/>
   <control-speed control="EXTEND" transition-time="7"/>
@@ -96,7 +96,7 @@
  </gear>
 
 <!-- right main -->
- <gear x="-4.0" y="-1.19" z="-2.0" retract-time="7" compression="0.8">
+ <gear x="-4.0" y="-2.5" z="-2.0" retract-time="7" compression="0.8">
   <control-input axis="/controls/brakes[1]" control="BRAKE"/>
   <control-input axis="/controls/gear-down" control="EXTEND"/>
   <control-speed control="EXTEND" transition-time="7"/>
@@ -110,19 +110,19 @@
   <control-output control="EXTEND" prop="/canopy/position-norm"/>
  </gear>
 
- <jet x="-8.0" y="-1.0" z=".44" mass="4000" thrust="16600" afterburner="30600">
+ <jet x="-8.0" y="-1.0" z="0.4" mass="4000" thrust="16600" afterburner="30600">
 <!-- <jet x="-22.0" y="-1.0" z=".44" mass="4000" thrust="30600"> -->
   <control-input axis="/controls/throttle[0]" control="THROTTLE"/>
   <control-input axis="/controls/afterburner[0]" control="REHEAT"/>
  </jet>
 
- <jet x="-8.0" y="1.0" z=".44" mass="4000" thrust="16600" afterburner="30600">
+ <jet x="-8.0" y="1.0" z="0.4" mass="4000" thrust="16600" afterburner="30600">
 <!-- <jet x="-22.0" y="1.0" z=".44" mass="4000" thrust="30600"> -->
   <control-input axis="/controls/throttle[1]" control="THROTTLE"/>
   <control-input axis="/controls/afterburner[1]" control="REHEAT"/>
  </jet>
 
- <tank x="-2.0" y="0.0" z="1.0" jet="true" capacity="13000"/>
+ <tank x="-2.0" y="0.0" z="0.5" jet="true" capacity="13000"/>
  <tank x="-3.0" y="2.5" z="1.7" jet="true" capacity="11000"/>
  <tank x="-3.0" y="-2.5" z="1.7" jet="true" capacity="11000"/>
 

@@ -19,10 +19,10 @@ BAC TSR2 simulation config.
   </sound>
 
   <panel>
-   <path>Aircraft/c310/c310-vfr-panel.xml</path>
+   <path>Aircraft/tsr2/tsr2-vfr-panel.xml</path>
   </panel>
   <panel_2>
-   <path>Aircraft/c310/c310-mini-panel.xml</path>
+   <path>Aircraft/tsr2/tsr2-mini-panel.xml</path>
   </panel_2>
 
   <hud>
@@ -57,15 +57,15 @@ BAC TSR2 simulation config.
      <target-climb-rate-fpm type="float">12000.0</target-climb-rate-fpm>
      <target-descent-rate-fpm type="float">8000.0</target-descent-rate-fpm>
 
-     <elevator-adj-factor type="float">400.0</elevator-adj-factor>
+     <elevator-adj-factor type="float">800.0</elevator-adj-factor>
 
      <integral-contribution type="float">0.005</integral-contribution>
 
-     <max-aileron type="float">0.3</max-aileron>
+     <max-aileron type="float">0.5</max-aileron>
      <max-roll-deg type="float">60.0</max-roll-deg>
 
-     <roll-out-deg type="float">8.0</roll-out-deg>
-     <roll-out-smooth-deg type="float">8.0</roll-out-smooth-deg>
+     <roll-out-deg type="float">4.0</roll-out-deg>
+     <roll-out-smooth-deg type="float">20.0</roll-out-smooth-deg>
 
      <zero-pitch-throttle type="float">0.5</zero-pitch-throttle>
      <zero-pitch-trim-full-throttle type="float">0.001</zero-pitch-trim-full-throttle>

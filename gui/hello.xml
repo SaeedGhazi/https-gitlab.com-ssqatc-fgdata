@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<!--
+Early sample GUI configuration.
+
+This file will eventually hold (or point to) the configuration for all
+of the FlightGear GUI.  For now, however, the contents are strictly
+experimentation.  Here are some quick notes:
+
+1. Coordinates are from the bottom left corner of the parent container
+   (the bottom-left convention comes from OpenGL).
+
+2. Allowed types are "group", "dialog", "input", "text", and
+   "button".
+
+3. Any component may have an "x", "y", "width", and "height"
+   subproperty.
+
+4. For GUI purposes, the FlightGear window is always assumed to be
+   1024x768, no matter how large or small it is actually displayed.
+
+5. The top-level dialog container will always be centered on the
+   screen.
+
+6. Top-level objects without a name will be ignored.
+
+7. If changing a property value in an "input" component isn't working,
+   it's probably a problem with the property; try the FlightGear
+   property browser and see if it can be changed there.
+
+8. Use these notes with caution; they're probably already out of date.
+
+-->
+
+<PropertyList>
+
+ <type>dialog</type>
+
+ <!-- A sample dialog to say hello and control the orientation -->
+
+ <name>hello</name>
+ <width>400</width>
+ <height>180</height>
+ <modal>false</modal>
+
+ <text>
+  <x>10</x>
+  <y>150</y>
+  <label>Hello, virtual FlightGear world!</label>
+ </text>
+
+ <input>
+  <x>10</x>
+  <y>110</y>
+  <width>200</width>
+  <height>25</height>
+  <label>degrees roll</label>
+  <default-value-prop>/orientation/roll-deg</default-value-prop>
+ </input>
+
+ <input>
+  <x>10</x>
+  <y>80</y>
+  <width>200</width>
+  <height>25</height>
+  <label>degrees pitch</label>
+  <default-value-prop>/orientation/pitch-deg</default-value-prop>
+ </input>
+
+ <input>
+  <x>10</x>
+  <y>50</y>
+  <width>200</width>
+  <height>25</height>
+  <label>degrees heading</label>
+  <default-value-prop>/orientation/heading-deg</default-value-prop>
+ </input>
+
+ <button>
+  <x>5</x>
+  <y>10</y>
+  <legend>OK</legend>
+  <action>close-apply</action>
+  <default>true</default>
+ </button>
+
+ <button>
+  <x>105</x>
+  <y>10</y>
+  <legend>Apply</legend>
+  <action>apply</action>
+ </button>
+
+ <button>
+  <x>205</x>
+  <y>10</y>
+  <legend>Update</legend>
+  <action>update</action>
+ </button>
+
+ <button>
+  <x>305</x>
+  <y>10</y>
+  <legend>Cancel</legend>
+  <action>close</action>
+ </button>
+
+</PropertyList>

@@ -18,6 +18,12 @@ October 23 2001 John Check, fgpanels@rockfish.net
   <flight-model>yasim</flight-model>
   <aero>c310</aero>
   <fuel-fraction>1.0</fuel-fraction>
+  
+  <systems>
+    <electrical>
+      <path>Aircraft/c172/c172-electrical.xml</path>
+    </electrical>
+  </systems>
 
   <sound>
    <audible>true</audible>

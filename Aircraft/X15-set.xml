@@ -23,6 +23,13 @@ October 23 2001 John Check, fgpanels@rockfish.net
 
   <flight-model>jsb</flight-model>
   <aero>X15</aero>
+
+  <systems>
+   <electrical>
+    <path>Aircraft/Generic/generic-electrical.xml</path>
+   </electrical>
+  </systems> 
+
   <sound>
    <audible>false</audible>
   </sound>

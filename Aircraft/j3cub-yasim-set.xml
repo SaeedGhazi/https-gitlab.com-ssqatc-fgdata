@@ -16,6 +16,12 @@ model, instrument panel, and external 3D model.
   <flight-model>yasim</flight-model>
   <aero>j3cub</aero>
   <fuel-fraction>0.8</fuel-fraction>
+  
+  <systems>
+   <electrical>
+    <path>Aircraft/Generic/generic-electrical.xml</path>
+   </electrical>
+  </systems> 
 
   <sound>
    <audible>true</audible>

@@ -20,6 +20,12 @@ October 23 2001 John Check, fgpanels@rockfish.net
    <speed-set>knots</speed-set>
    <onground>false</onground>
   </startup>
+  
+  <systems>
+   <electrical>
+    <path>Aircraft/Generic/generic-electrical.xml</path>
+   </electrical>
+  </systems> 
 
   <flight-model>jsb</flight-model>
   <aero>x24b</aero>

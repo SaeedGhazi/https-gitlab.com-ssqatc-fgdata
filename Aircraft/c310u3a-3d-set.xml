@@ -12,38 +12,6 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
 
 <PropertyList>
 
- <engines>
-  <engine n="0">
-   <rpm type="double">1000</rpm>
-  </engine>
-  <engine n="1">
-   <rpm type="double">1000</rpm>
-  </engine>
- </engines>
-
- <consumables>
-  <fuel>
-   <tank n="0">
-    <level-gal_us archive="y">14</level-gal_us>
-   </tank>
-   <tank n="1">
-    <level-gal_us archive="y">14</level-gal_us>
-   </tank>
-   <tank n="2">
-    <level-gal_us archive="y">14</level-gal_us>
-   </tank>
-   <tank n="3">
-    <level-gal_us archive="y">14</level-gal_us>
-   </tank>
-  </fuel>
- </consumables>
-        
- <controls>
-  <aileron-trim>-0.026</aileron-trim>
-  <magnetos n="0">3</magnetos>
-  <magnetos n="1">3</magnetos>
- </controls>
-
  <sim>
 
   <description>Cessna 310U3A w. 3D cockpit</description>
@@ -54,6 +22,12 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
   <flight-model archive="y">jsb</flight-model>
   <aero archive="y">c310u3a</aero>
 
+  <systems>
+    <electrical>
+      <path>Aircraft/c172/c172-electrical.xml</path>
+    </electrical>
+  </systems>
+ 
   <sound>
    <audible>true</audible>
    <path>Aircraft/c310/c310-sound.xml</path>
@@ -89,6 +63,39 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
   </instrument-options> 
 
  </sim>
+ 
+ <consumables>
+  <fuel>
+   <tank n="0">
+    <level-gal_us archive="y">14</level-gal_us>
+   </tank>
+   <tank n="1">
+    <level-gal_us archive="y">14</level-gal_us>
+   </tank>
+   <tank n="2">
+    <level-gal_us archive="y">14</level-gal_us>
+   </tank>
+   <tank n="3">
+    <level-gal_us archive="y">14</level-gal_us>
+   </tank>
+  </fuel>
+ </consumables>
+        
+ <controls>
+  <aileron-trim>-0.026</aileron-trim>
+  <magnetos n="0">3</magnetos>
+  <magnetos n="1">3</magnetos>
+ </controls>
+
+ <engines>
+  <engine n="0">
+   <rpm type="double">1000</rpm>
+  </engine>
+  <engine n="1">
+   <rpm type="double">1000</rpm>
+  </engine>
+ </engines>
+
 
  <autopilot>
    <config>

@@ -19,6 +19,12 @@ October 23 2001 John Check, fgpanels@rockfish.net
   <aero>dc3</aero>
   <fuel-fraction>1.0</fuel-fraction>
 
+  <systems>
+   <electrical>
+    <path>Aircraft/Generic/generic-electrical.xml</path>
+   </electrical>
+  </systems> 
+
   <sound>
    <audible>true</audible>
    <path>Aircraft/c310/c310-sound.xml</path>

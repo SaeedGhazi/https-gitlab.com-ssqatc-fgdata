@@ -19,6 +19,12 @@ October 23 2001 John Check, fgpanels@rockfish.net
   <flight-model>jsb</flight-model>
   <aero>f16</aero>
   
+  <systems>
+   <electrical>
+    <path>Aircraft/Generic/generic-electrical.xml</path>
+   </electrical>
+  </systems> 
+  
   <sound>
    <audible>true</audible>
    <path>Aircraft/a4/a4-sound.xml</path>

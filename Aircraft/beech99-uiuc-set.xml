@@ -14,7 +14,13 @@ UIUC Beech 99 init file.
   <flight-model>larcsim</flight-model>
   <aero>uiuc</aero>
   <aircraft-dir>Aircraft-uiuc/Beech99</aircraft-dir>
-
+   
+  <systems>
+   <electrical>
+    <path>Aircraft/Generic/generic-electrical.xml</path>
+   </electrical>
+  </systems> 
+  
   <sound>
    <audible>false</audible>
   </sound>

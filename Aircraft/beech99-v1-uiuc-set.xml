@@ -24,6 +24,12 @@ May 25 2002 Michael Selig, m-selig@uiuc.edu
   <aero>uiuc</aero>
   <aircraft-dir>Aircraft/UIUC/beech99-v1</aircraft-dir>
 
+  <systems>
+   <electrical>
+    <path>Aircraft/Generic/generic-electrical.xml</path>
+   </electrical>
+  </systems> 
+
   <sound>
    <audible>true</audible>
    <path>Aircraft/beech99/Sounds/uiuc/beech99-sound.xml</path>

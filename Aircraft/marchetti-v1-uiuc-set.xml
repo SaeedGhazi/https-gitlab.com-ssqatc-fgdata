@@ -25,6 +25,12 @@ May 27 2002 Michael Selig, m-selig@uiuc.edu
   <aero>uiuc</aero>
   <aircraft-dir>Aircraft/UIUC/marchetti-v1</aircraft-dir>
 
+  <systems>
+   <electrical>
+    <path>Aircraft/Generic/generic-electrical.xml</path>
+   </electrical>
+  </systems> 
+  
   <sound>
    <audible>true</audible>
    <path>Aircraft/marchetti/Sounds/uiuc/marchetti-sound.xml</path>

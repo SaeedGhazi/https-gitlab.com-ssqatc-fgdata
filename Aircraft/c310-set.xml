@@ -50,6 +50,12 @@ October 23 2001 John Check, fgpanels@rockfish.net
   
   <flight-model>jsb</flight-model>
   <aero>c310</aero>
+  
+  <systems>
+    <electrical>
+      <path>Aircraft/c172/c172-electrical.xml</path>
+    </electrical>
+  </systems>
 
   <sound>
    <audible>true</audible>

@@ -23,10 +23,9 @@ Started September 2000 by David Megginson, david@megginson.com
    <fullscreen>false</fullscreen>
    <units>feet</units>
    <trim>true</trim>
-  <browser-app>netscape</browser-app><!--  help viewer -->
+   <browser-app>netscape</browser-app><!--  help viewer -->
   </startup>
-  <flight-model>jsb</flight-model>
-  <aero>c172</aero>
+  <aircraft>c172</aircraft>
   <model-hz>120</model-hz>
   <sound>true</sound>
   <speed-up>1.0</speed-up>

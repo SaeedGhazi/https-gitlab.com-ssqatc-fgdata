@@ -42,6 +42,12 @@ October 23 2001 John Check, fgpanels@rockfish.net
 
  </sim>
   
+ <systems>
+   <electrical>
+     <path>Aircraft/c172/c172-electrical.xml</path>
+   </electrical>
+ </systems>
+
  <autopilot>
    <config>
      <min-climb-speed-kt type="float">70.0</min-climb-speed-kt>

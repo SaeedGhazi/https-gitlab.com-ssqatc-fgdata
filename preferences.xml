@@ -13,75 +13,75 @@ Started September 2000 by David Megginson, david@megginson.com
  <!-- General simulation preferences -->
  <sim>
   <aircraft>c172</aircraft>
-  <virtual-cockpit>false</virtual-cockpit>
+  <virtual-cockpit type="bool">false</virtual-cockpit>
   <startup>
-   <xsize>800</xsize>
-   <ysize>600</ysize>
-   <splash-screen>true</splash-screen>
-   <intro-music>false</intro-music>
-   <game-mode>false</game-mode>
+   <xsize type="int">800</xsize>
+   <ysize type="int">600</ysize>
+   <splash-screen type="bool">true</splash-screen>
+   <intro-music type="bool">false</intro-music>
+   <game-mode type="bool">false</game-mode>
    <airport-id>KSFO</airport-id>
-   <fullscreen>false</fullscreen>
+   <fullscreen type="bool">false</fullscreen>
    <units>feet</units>
-   <trim>true</trim>
+   <trim type="bool">true</trim>
    <browser-app>netscape</browser-app><!--  help viewer -->
   </startup>
-  <model-hz>120</model-hz>
-  <sound>true</sound>
-  <speed-up>1.0</speed-up>
-  <field-of-view>55.0</field-of-view>
+  <model-hz type="int">120</model-hz>
+  <sound type="bool">true</sound>
+  <speed-up type="double">1.0</speed-up>
+  <field-of-view type="double">55.0</field-of-view>
   <panel>
    <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
-   <visibility>false</visibility>
-   <jitter>false</jitter>
+   <visibility type="bool">false</visibility>
+   <jitter type="bool">false</jitter>
   </panel>
   <hud>
    <path>Huds/Default/default.xml</path>
-   <visibility>false</visibility>
+   <visibility type="bool">false</visibility>
   </hud>
   <instrument-options>
    <nav n="0">
-   <has-gs-needle>1</has-gs-needle>
-   <needles-pivot>1</needles-pivot>
+    <has-gs-needle type="bool">true</has-gs-needle>
+    <needles-pivot type="bool">true</needles-pivot>
    </nav>
    <nav n="1">
-   <has-gs-needle>0</has-gs-needle>
-   <needles-pivot>1</needles-pivot>
+    <has-gs-needle type="bool">false</has-gs-needle>
+    <needles-pivot type="bool">true</needles-pivot>
    </nav>
    <hsi n="0">
-   <has-gs-needle>1</has-gs-needle>
+    <has-gs-needle type="bool">true</has-gs-needle>
    </hsi>
    <dg>
-    <style>0</style>
+    <style type="int">0</style>
    </dg>
   </instrument-options>
   <input>
    <selected>
-    <engine n="0">true</engine>
-    <engine n="1">false</engine>
-    <engine n="2">false</engine>
-    <engine n="3">false</engine>
+    <engine n="0" type="bool">true</engine>
+    <engine n="1" type="bool">false</engine>
+    <engine n="2" type="bool">false</engine>
+    <engine n="3" type="bool">false</engine>
    </selected>
   </input>
 
-  <current-view>0</current-view>
-  <number-views>3</number-views>
+  <current-view type="int">0</current-view>
+  <number-views type="int">3</number-views>
 
   <!-- "tower" positioned to right of runway at KSFO -->
   <tower>
-    <longitude-deg>-122.362175</longitude-deg>
-    <latitude-deg>37.616559</latitude-deg>
-    <altitude-ft>54</altitude-ft>
-    <roll-deg>0</roll-deg>
-    <pitch-deg>0</pitch-deg>
-    <heading-deg>0</heading-deg>
+    <longitude-deg type="double">-122.362175</longitude-deg>
+    <latitude-deg type="double">37.616559</latitude-deg>
+    <altitude-ft type="double">54</altitude-ft>
+    <roll-deg type="double">0</roll-deg>
+    <pitch-deg type="double">0</pitch-deg>
+    <heading-deg type="double">0</heading-deg>
   </tower>
 
 
   <view>
     <name>Cockpit View</name>
     <type>lookfrom</type>
-    <internal>false</internal>
+    <internal type="bool">false</internal>
     <config>
       <eye-lat-deg-path>/position/latitude-deg</eye-lat-deg-path>
       <eye-lon-deg-path>/position/longitude-deg</eye-lon-deg-path>
@@ -111,9 +111,9 @@ Started September 2000 by David Megginson, david@megginson.com
       <target-pitch-deg-path>/orientation/pitch-deg</target-pitch-deg-path>
       <target-roll-deg-path>/orientation/roll-deg</target-roll-deg-path>
 
-      <x-offset-m>0</x-offset-m>
-      <y-offset-m>0</y-offset-m>
-      <z-offset-m>-25</z-offset-m>
+      <x-offset-m type="double">0</x-offset-m>
+      <y-offset-m type="double">0</y-offset-m>
+      <z-offset-m type="double">-25</z-offset-m>
     </config>
   </view>
 
@@ -136,9 +136,9 @@ Started September 2000 by David Megginson, david@megginson.com
       <target-pitch-deg-path>/orientation/pitch-deg</target-pitch-deg-path>
       <target-heading-deg-path>/orientation/heading-deg</target-heading-deg-path>
 
-      <x-offset-m>0</x-offset-m>
-      <y-offset-m>0</y-offset-m>
-      <z-offset-m>0</z-offset-m>
+      <x-offset-m type="double">0</x-offset-m>
+      <y-offset-m type="double">0</y-offset-m>
+      <z-offset-m type="double">0</z-offset-m>
     </config>
   </view>
 
@@ -147,9 +147,9 @@ Started September 2000 by David Megginson, david@megginson.com
    <desc>chase view</desc>
    <default>
     <pilot-offset>
-     <heading-deg>180.0</heading-deg>
-     <pitch-deg>0</pitch-deg>
-     <radius-m>25</radius-m>
+     <heading-deg type="double">180.0</heading-deg>
+     <pitch-deg type="double">0</pitch-deg>
+     <radius-m type="double">25</radius-m>
     </pilot-offset>
    </default>
   </view>
@@ -160,32 +160,32 @@ Started September 2000 by David Megginson, david@megginson.com
  <!-- Position -->
 
  <position>
-  <altitude-ft>-9999</altitude-ft>
+  <altitude-ft type="double">-9999</altitude-ft>
  </position>
 
 
  <!-- Velocities -->
 
  <velocities>
-  <speed-north-fps>0.0</speed-north-fps>
-  <speed-east-fps>0.0</speed-east-fps>
-  <speed-down-fps>0.0</speed-down-fps>
+  <speed-north-fps type="double">0.0</speed-north-fps>
+  <speed-east-fps type="double">0.0</speed-east-fps>
+  <speed-down-fps type="double">0.0</speed-down-fps>
  </velocities>
 
 
  <!-- Orientation -->
 
  <orientation>
-  <heading-deg>270</heading-deg>
-  <roll-deg>0.0</roll-deg>
-  <pitch-deg>0.424</pitch-deg>
+  <heading-deg type="double">270</heading-deg>
+  <roll-deg type="double">0.0</roll-deg>
+  <pitch-deg type="double">0.424</pitch-deg>
  </orientation>
 
 
  <!-- Environment -->
 
  <environment>
-  <visibility-m>16000</visibility-m>
+  <visibility-m type="double">16000</visibility-m>
  </environment>
 
 
@@ -193,46 +193,46 @@ Started September 2000 by David Megginson, david@megginson.com
 
  <controls>
 
-  <aileron>0.0</aileron>
-  <aileron-trim>0.0</aileron-trim>
+  <aileron type="double">0.0</aileron>
+  <aileron-trim type="double">0.0</aileron-trim>
 
-  <elevator>0.0</elevator>
-  <elevator-trim>0.0</elevator-trim>
+  <elevator type="double">0.0</elevator>
+  <elevator-trim type="double">0.0</elevator-trim>
 
-  <rudder>0.0</rudder>
-  <rudder-trim>0.0</rudder-trim>
+  <rudder type="double">0.0</rudder>
+  <rudder-trim type="double">0.0</rudder-trim>
 
-  <flaps>0.0</flaps>
+  <flaps type="double">0.0</flaps>
 
-  <starter n="0">false</starter>
-  <magnetos n="0">0</magnetos>
-  <throttle n="0">0.0</throttle>
-  <mixture n="0">1.0</mixture>
-  <propeller-pitch n="0">1.0</propeller-pitch>
+  <starter n="0" type="bool">false</starter>
+  <magnetos n="0" type="int">0</magnetos>
+  <throttle n="0" type="double">0.0</throttle>
+  <mixture n="0" type="double">1.0</mixture>
+  <propeller-pitch n="0" type="double">1.0</propeller-pitch>
 
-  <starter n="1">false</starter>
-  <magnetos n="1">0</magnetos>
-  <throttle n="1">0.0</throttle>
-  <mixture n="1">1.0</mixture>
-  <propeller-pitch n="1">1.0</propeller-pitch>
+  <starter n="1" type="bool">false</starter>
+  <magnetos n="1" type="int">0</magnetos>
+  <throttle n="1" type="double">0.0</throttle>
+  <mixture n="1" type="double">1.0</mixture>
+  <propeller-pitch n="1" type="double">1.0</propeller-pitch>
 
-  <starter n="2">false</starter>
-  <magnetos n="2">0</magnetos>
-  <throttle n="2">0.0</throttle>
-  <mixture n="2">1.0</mixture>
-  <propeller-pitch n="2">1.0</propeller-pitch>
+  <starter n="2" type="bool">false</starter>
+  <magnetos n="2" type="int">0</magnetos>
+  <throttle n="2" type="double">0.0</throttle>
+  <mixture n="2" type="double">1.0</mixture>
+  <propeller-pitch n="2" type="double">1.0</propeller-pitch>
 
-  <starter n="3">false</starter>
-  <magnetos n="3">0</magnetos>
-  <throttle n="3">0.0</throttle>
-  <mixture n="3">1.0</mixture>
-  <propeller-pitch n="3">1.0</propeller-pitch>
+  <starter n="3" type="bool">false</starter>
+  <magnetos n="3" type="int">0</magnetos>
+  <throttle n="3" type="double">0.0</throttle>
+  <mixture n="3" type="double">1.0</mixture>
+  <propeller-pitch n="3" type="double">1.0</propeller-pitch>
 
-  <brakes n="0">0.0</brakes>
-  <brakes n="1">0.0</brakes>
-  <brakes n="2">0.0</brakes>
+  <brakes n="0" type="double">0.0</brakes>
+  <brakes n="1" type="double">0.0</brakes>
+  <brakes n="2" type="double">0.0</brakes>
 
-  <gear-down>1.0</gear-down>
+  <gear-down type="double">1.0</gear-down>
 
  </controls>
 
@@ -258,49 +258,49 @@ Started September 2000 by David Megginson, david@megginson.com
  <radios>
 
   <dme>
-   <switch-position>0</switch-position>
+   <switch-position type="int">0</switch-position>
   </dme>
 
   <comm n="0">
    <frequencies>
-    <selected-mhz>118.00</selected-mhz>
-    <standby-mhz>115.8</standby-mhz>
+    <selected-mhz type="double">118.00</selected-mhz>
+    <standby-mhz type="double">115.8</standby-mhz>
    </frequencies>
   </comm>
 
   <comm n="1">
    <frequencies>
-    <selected-mhz>111.80</selected-mhz>
-    <standby-mhz>115.70</standby-mhz>
+    <selected-mhz type="double">111.80</selected-mhz>
+    <standby-mhz type="double">115.70</standby-mhz>
    </frequencies>
   </comm>
 
   <nav n="0">
    <frequencies>
-    <selected-mhz>117.3</selected-mhz>
-    <standby-mhz>110.3</standby-mhz>
+    <selected-mhz type="double">117.3</selected-mhz>
+    <standby-mhz type="double">110.3</standby-mhz>
    </frequencies>
    <radials>
-    <selected-deg>119.0</selected-deg>
+    <selected-deg type="double">119.0</selected-deg>
    </radials>
   </nav>
 
   <nav n="1">
    <frequencies>
-    <selected-mhz>111.80</selected-mhz>
-    <standby-mhz>115.70</standby-mhz>
+    <selected-mhz type="double">111.80</selected-mhz>
+    <standby-mhz type="double">115.70</standby-mhz>
    </frequencies>
    <radials>
-    <selected-deg>029.0</selected-deg>
+    <selected-deg type="double">029.0</selected-deg>
    </radials>
   </nav>
 
   <adf>
    <frequencies>
-    <selected-khz>266.0</selected-khz>
-    <standby-khz>300.0</standby-khz>
+    <selected-khz type="double">266.0</selected-khz>
+    <standby-khz type="double">300.0</standby-khz>
    </frequencies>
-   <rotation-deg>90</rotation-deg>
+   <rotation-deg type="double">90</rotation-deg>
   </adf>
 
  </radios>
@@ -310,7 +310,7 @@ Started September 2000 by David Megginson, david@megginson.com
  <!-- this is here because the datum isn't retained on a reset -->
 
  <steam>
-   <altimeter-datum-mb>1013.25</altimeter-datum-mb>
+   <altimeter-datum-mb type="double">1013.25</altimeter-datum-mb>
  </steam>
 
  </PropertyList>

@@ -27,14 +27,14 @@ The current mode for each mouse is held in the
 
   <mode n="0">
    <cursor>inherit</cursor>
-   <constrained>false</constrained>
-   <pass-through>true</pass-through>
+   <constrained type="bool">false</constrained>
+   <pass-through type="bool">true</pass-through>
 
    <button n="2">
     <binding>
      <command>property-assign</command>
      <property>/devices/status/mice/mouse[0]/mode</property>
-     <value>1</value>
+     <value type="int">1</value>
     </binding>
    </button>
 
@@ -42,14 +42,14 @@ The current mode for each mouse is held in the
 
   <mode n="1">
    <cursor>crosshair</cursor>
-   <constrained>true</constrained>
-   <pass-through>false</pass-through>
+   <constrained type="bool">true</constrained>
+   <pass-through type="bool">false</pass-through>
 
    <button n="2">
     <binding>
      <command>property-assign</command>
      <property>/devices/status/mice/mouse[0]/mode</property>
-     <value>2</value>
+     <value type="int">2</value>
     </binding>
    </button>
 
@@ -70,7 +70,7 @@ The current mode for each mouse is held in the
      </condition>
      <command>property-adjust</command>
      <property>/controls/aileron</property>
-     <factor>4.0</factor>
+     <factor type="double">4.0</factor>
      <min type="double">-1.0</min>
      <max type="double">1.0</max>
      <wrap type="bool">false</wrap>
@@ -88,7 +88,7 @@ The current mode for each mouse is held in the
      </condition>
      <command>property-adjust</command>
      <property>/controls/rudder</property>
-     <factor>4.0</factor>
+     <factor type="double">4.0</factor>
      <min type="double">-1.0</min>
      <max type="double">1.0</max>
      <wrap type="bool">false</wrap>
@@ -113,7 +113,7 @@ The current mode for each mouse is held in the
      </condition>
      <command>property-adjust</command>
      <property>/controls/elevator</property>
-     <factor>-4.0</factor>
+     <factor type="double">-4.0</factor>
      <min type="double">-1.0</min>
      <max type="double">1.0</max>
      <wrap type="bool">false</wrap>
@@ -131,7 +131,7 @@ The current mode for each mouse is held in the
      </condition>
      <command>property-adjust</command>
      <property>/controls/throttle</property>
-     <factor>-4.0</factor>
+     <factor type="double">-4.0</factor>
      <min type="double">0.0</min>
      <max type="double">1.0</max>
      <wrap type="bool">false</wrap>
@@ -143,8 +143,8 @@ The current mode for each mouse is held in the
   <!-- Mode 2: view mode -->
   <mode n="2">
    <cursor>left-right</cursor>
-   <constrained>true</constrained>
-   <pass-through>false</pass-through>
+   <constrained type="bool">true</constrained>
+   <pass-through type="bool">false</pass-through>
 
    <!-- left button centres the offsets -->
    <button n="0">
@@ -152,7 +152,7 @@ The current mode for each mouse is held in the
      <command>property-assign</command>
      <property>/sim/view/offset-deg</property>
      <property>/sim/view/tilt-deg</property>
-     <value>0</value>
+     <value type="double">0</value>
     </binding>
    </button>
 
@@ -161,7 +161,7 @@ The current mode for each mouse is held in the
     <binding>
      <command>property-assign</command>
      <property>/devices/status/mice/mouse[0]/mode</property>
-     <value>0</value>
+     <value type="int">0</value>
     </binding>
    </button>
 

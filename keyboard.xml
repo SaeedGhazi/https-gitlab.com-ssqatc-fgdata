@@ -61,26 +61,6 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
- <key n="15">
-  <name>Ctrl-O</name>
-  <desc>(Temporary) Tilt view down</desc>
-  <binding>
-   <command>property-adjust</command>
-   <property>/sim/view/goal-tilt-deg</property>
-   <step>-1</step>
-  </binding>
- </key>
-
- <key n="16">
-  <name>Ctrl-P</name>
-  <desc>(Temporary) Tilt view up</desc>
-  <binding>
-   <command>property-adjust</command>
-   <property>/sim/view/goal-tilt-deg</property>
-   <step>1</step>
-  </binding>
- </key>
-
  <key n="18">
   <name>Ctrl-R</name>
   <desc>(Temporary) Toggle winding-ccw</desc>
@@ -538,7 +518,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <binding>
    <command>property-adjust</command>
    <property>/sim/time/warp</property>
-   <step>-60</step>
+   <step type="int">-60</step>
   </binding>
  </key>
 
@@ -557,7 +537,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <binding>
    <command>property-adjust</command>
    <property>/sim/time/warp-delta</property>
-   <step>-30</step>
+   <step type="int">-30</step>
   </binding>
  </key>
 
@@ -576,7 +556,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <binding>
    <command>property-multiply</command>
    <property>/sim/field-of-view</property>
-   <factor>1.05</factor>
+   <factor type="double">1.05</factor>
   </binding>
  </key>
 
@@ -586,7 +566,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <binding>
    <command>property-multiply</command>
    <property>/environment/visibility-m</property>
-   <factor>0.9090909090</factor>
+   <factor type="double">0.9090909090</factor>
   </binding>
  </key>
 
@@ -665,7 +645,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <binding>
    <command>property-adjust</command>
    <property>/sim/time/warp</property>
-   <step>60</step>
+   <step type="int">60</step>
   </binding>
  </key>
 
@@ -711,7 +691,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <binding>
    <command>property-adjust</command>
    <property>/sim/time/warp-delta</property>
-   <step>30</step>
+   <step type="int">30</step>
   </binding>
  </key>
 
@@ -729,7 +709,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <binding>
    <command>property-multiply</command>
    <property>/sim/field-of-view</property>
-   <factor>0.952380952380</factor>
+   <factor type="double">0.952380952380</factor>
   </binding>
  </key>
 
@@ -739,7 +719,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <binding>
    <command>property-multiply</command>
    <property>/environment/visibility-m</property>
-   <factor>1.1</factor>
+   <factor type="double">1.1</factor>
   </binding>
  </key>
 

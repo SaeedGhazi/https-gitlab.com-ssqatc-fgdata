@@ -23,17 +23,26 @@
    <width>200</width>
    <height>25</height>
    <property>/logging/log[0]/filename</property>
-   <label>File name</label>
+   <label>File</label>
   </input>
 
   <checkbox>
-   <x>350</x>
+   <x>260</x>
    <y>0</y>
    <width>25</width>
    <height>25</height>
    <property>/logging/log[0]/enabled</property>
    <label>Enabled</label>
   </checkbox>
+
+  <input>
+   <x>380</x>
+   <y>0</y>
+   <width>100</width>
+   <height>25</height>
+   <property>/logging/log[0]/interval-ms</property>
+   <label>Interval (ms)</label>
+  </input>
  </group>
 
  <group>

@@ -443,6 +443,7 @@ Started September 2000 by David Megginson, david@megginson.com
   </magnetic-compass>
   <dme>
    <serviceable type="bool" archive="y">true</serviceable>
+   <switch-position type="int" archive="y">0</switch-position>
   </dme>
  </instrumentation>
 

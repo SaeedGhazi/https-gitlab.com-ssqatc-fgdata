@@ -11,14 +11,19 @@ October 23 2001 John Check, fgpanels@rockfish.net
 -->
 
 <PropertyList>
-<!-- c172 is default so basically we just need to specify the panel-->
  <sim>
   <flight-model>jsb</flight-model>
   <aero>c172</aero>
   <sound>true</sound>
+
   <panel>
    <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
+   <visibility>true</visibility>
   </panel>
+  <panel_2>
+   <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
+  </panel_2>
+
   <model>
    <path><!-- you need to set this --></path>
   </model>

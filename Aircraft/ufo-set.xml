@@ -17,7 +17,8 @@ October 23 2001 John Check, fgpanels@rockfish.net
   <flight-model>ufo</flight-model>
 
   <sound>
-   <audible>false</audible>
+   <audible>true</audible>
+   <path>Aircraft/ufo/ufo-sound.xml</path>
   </sound>
 
   <panel>

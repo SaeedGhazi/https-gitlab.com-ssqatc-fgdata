@@ -39,10 +39,14 @@ May 27 2002 Michael Selig, m-selig@uiuc.edu
    <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
   </panel_2>
 
+  <!-- No 3D model exists for this aircraft.                -->
   <!-- For now, use the default 3D model for UIUC aircraft. -->
+  <!-- Or use a fgfs surrogate -->
+  <!-- Aircraft/a4/Models/a4-blue.xml -->
   <model>
    <path>Aircraft/UIUC/Models/opus/opus-model.xml</path>
   </model>
+
 
  </sim>
 </PropertyList>

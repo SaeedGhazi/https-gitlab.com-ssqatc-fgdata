@@ -273,9 +273,31 @@ Started September 2000 by David Megginson, david@megginson.com
     <heading type="double">20.0</heading>
    </entry>
 
+   <entry>
+    <type>ship</type>
+    <path>Models/Geometry/freighter.ac</path>
+    <speed-KTAS type="double">20.0</speed-KTAS>
+    <altitude-ft type="double">0.0</altitude-ft>
+    <longitude type="double">-122.33333</longitude>
+    <latitude type="double">37.61667</latitude>
+    <heading type="double">40.0</heading>
+   </entry>
+
   </ai>
 
  </sim>
+
+
+ <!-- mouse mode -->
+ <devices>
+  <status>
+   <mice>
+    <mouse n="0">
+     <mode>0</mode>
+    </mouse>
+   </mice>
+  </status>
+ </devices>
 
 
  <!-- Position -->

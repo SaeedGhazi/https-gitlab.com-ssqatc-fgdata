@@ -83,7 +83,7 @@ Jan 28 2003
    <condition>
     <greater-than-equals>
      <property>/systems/electrical/outputs/turn-coordinator</property>
-     <value>1.0</value>
+     <value>40</value>
     </greater-than-equals>
    </condition>
    <w>56</w>
@@ -112,7 +112,7 @@ Jan 28 2003
    <condition>
     <less-than>
      <property>/systems/electrical/outputs/turn-coordinator</property>
-     <value>1.0</value>
+     <value>40</value>
     </less-than>
    </condition>
    <w>56</w>

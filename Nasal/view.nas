@@ -25,21 +25,18 @@ popupNode = nil;
 labelNode = nil;
 fovDialog = nil;
 INIT = func {
-    print("view.INIT()");
-
     fovProp = props.globals.getNode("/sim/current-view/field-of-view");
     screenProp = props.globals.getNode("/sim/startup/xsize");
     
     # Set up the dialog property node:
-    tmpl = { name : "fov", modal : 0, width : "120", height : "40",
+    tmpl = { name : "fov", modal : 0, width : 120, height : 40,
              text : { x : 10, y : 6, label : "FOV:" } };
     popupNode = props.Node.new(tmpl);
     text = popupNode.getNode("text", 1);
     labelNode = popupNode.getNode("text/label");
-
     fgcommand("dialog-new", popupNode);
 
-    # Cache the FGCommand argument
+    # Cache the command argument for popup/popdown
     fovDialog = props.Node.new({ "dialog-name" : "fov" });
 }
 settimer(INIT, 0);
@@ -102,16 +99,11 @@ decrease = func {
 #
 popdown = func { fgcommand("dialog-close", fovDialog); }
 popup = func {
-    fov = arg[0];
-    fov = format(fov);
-
-    labelNode.setValue("FOV: " ~ fov);
-
-    # Create it, show it
+    # Make sure it isn't already showing, initialize it, show it,
+    # and kill it automatically after a second
     popdown();
+    labelNode.setValue("FOV: " ~ format(arg[0]));
     fgcommand("dialog-show", fovDialog);
-                  
-    # And kill it automatically after a second
     settimer(popdown, 1);
 }
 

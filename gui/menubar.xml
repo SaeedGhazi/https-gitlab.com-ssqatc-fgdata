@@ -270,10 +270,18 @@
   <label>Equipment</label>
 
   <item>
-   <label>Radios</label>
+   <label>Radio Settings</label>
    <binding>
     <command>dialog-show</command>
     <dialog-name>radios</dialog-name>
+   </binding>
+  </item>
+
+  <item>
+   <label>Instrument Settings</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>instruments</dialog-name>
    </binding>
   </item>
 

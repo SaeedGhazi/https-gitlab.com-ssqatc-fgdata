@@ -2679,6 +2679,11 @@ Shared parameters for various materials.
    <heading-type>random</heading-type>
   </object>
   <object>
+   <path>Models/Buildings/tower-hexa.ac</path>
+   <coverage-m2>50000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
    <path>Models/Buildings/oil-tanks.ac</path>
    <coverage-m2>20000000</coverage-m2>
    <heading-type>random</heading-type>

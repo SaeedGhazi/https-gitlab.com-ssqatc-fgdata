@@ -37,7 +37,7 @@
   <item>
    <label>High-Res Snapshot</label>
    <binding>
-    <command>old-hires-snapshot-dialog</command>
+    <command>hires-screen-capture</command>
    </binding>
   </item>
 

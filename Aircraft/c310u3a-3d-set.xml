@@ -36,14 +36,15 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
  
   <model>
    <path>Aircraft/c310u3a/Models/c310u3a.xml</path>
+   <light-blinks-minute>60</light-blinks-minute>
   </model> 
 
   <view n="0">
    <internal archive="y">true</internal>
    <config>
-    <x-offset-m archive="y">-0.17</x-offset-m>
-    <y-offset-m archive="y">0.80</y-offset-m>
-    <z-offset-m archive="y">-0.01</z-offset-m>
+    <x-offset-m archive="y">-0.28</x-offset-m>
+    <y-offset-m archive="y">0.75</y-offset-m>
+    <z-offset-m archive="y">-0.10</z-offset-m>
    </config>
   </view>
 
@@ -109,6 +110,8 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
  </engines>
   
 </PropertyList>
+
+
 
 
 

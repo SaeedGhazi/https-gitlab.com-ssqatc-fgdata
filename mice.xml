@@ -38,6 +38,24 @@ The current mode for each mouse is held in the
     </binding>
    </button>
 
+   <!-- extra buttons control elevator trim -->
+   <!-- these are often assigned to mouse-wheel motion in Linux -->
+   <button n="3">
+    <binding>
+     <command>property-adjust</command>
+     <property>/controls/elevator-trim</property>
+     <step type="double">0.01</step>
+    </binding>
+   </button>
+
+   <button n="4">
+    <binding>
+     <command>property-adjust</command>
+     <property>/controls/elevator-trim</property>
+     <step type="double">-0.01</step>
+    </binding>
+   </button>
+
   </mode>
 
   <mode n="1">
@@ -50,6 +68,24 @@ The current mode for each mouse is held in the
      <command>property-assign</command>
      <property>/devices/status/mice/mouse[0]/mode</property>
      <value type="int">2</value>
+    </binding>
+   </button>
+
+   <!-- extra buttons control elevator trim -->
+   <!-- these are often assigned to mouse-wheel motion in Linux -->
+   <button n="3">
+    <binding>
+     <command>property-adjust</command>
+     <property>/controls/elevator-trim</property>
+     <step type="double">0.01</step>
+    </binding>
+   </button>
+
+   <button n="4">
+    <binding>
+     <command>property-adjust</command>
+     <property>/controls/elevator-trim</property>
+     <step type="double">-0.01</step>
     </binding>
    </button>
 
@@ -166,6 +202,24 @@ The current mode for each mouse is held in the
      <command>property-assign</command>
      <property>/devices/status/mice/mouse[0]/mode</property>
      <value type="int">0</value>
+    </binding>
+   </button>
+
+   <!-- extra buttons control elevator trim -->
+   <!-- these are often assigned to mouse-wheel motion in Linux -->
+   <button n="3">
+    <binding>
+     <command>property-adjust</command>
+     <property>/controls/elevator-trim</property>
+     <step type="double">0.01</step>
+    </binding>
+   </button>
+
+   <button n="4">
+    <binding>
+     <command>property-adjust</command>
+     <property>/controls/elevator-trim</property>
+     <step type="double">-0.01</step>
     </binding>
    </button>
 

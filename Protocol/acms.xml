@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <generic>
+
+  <input>
+   <line_separator>newline</line_separator>
+   <var_separator>tab</var_separator>
+
+
+   <chunk>
+    <name>time GMT (hhmmss)</name>
+    <type>string</type>
+    <node>/tmp/time</node>
+   </chunk>
+
+   <chunk>
+    <name>pressure altitude (feet)</name>
+    <type>int</type>
+    <node>/position/altitude-ft</node>
+   </chunk>
+
+   <chunk>
+    <name>indicated speed (kt)</name>
+    <type>int</type>
+    <node>/velocities/airspeed-kt</node>
+   </chunk>
+ 
+   <chunk>
+    <name>climb rate (ft/mn)</name>
+    <type>int</type>
+    <node>/tmp/climb-rate</node>
+   </chunk>
+
+   <chunk>
+    <name>pitch att (deg)</name>
+    <type>float</type>
+    <node>/orientation/pitch-deg</node>
+   </chunk>
+
+   <chunk>
+    <name>roll att (deg)</name>
+    <type>float</type>
+    <node>/orientation/roll-deg</node>
+   </chunk>
+
+   <chunk>
+    <name>magnetic heading (deg)</name>
+    <type>float</type>
+    <node>/orientation/heading-deg</node>
+   </chunk>
+
+   <chunk>
+    <name>latteral acceleration (G's)</name>
+    <type>float</type>
+    <factor>32.2</factor>
+    <offset>-1.0</offset>
+    <node>/velocities/speed-east-fps</node>
+   </chunk>
+
+   <chunk>
+    <name>longitudinal acceleration (G's)</name>
+    <type>float</type>
+    <factor>32.2</factor>
+    <offset>-1.0</offset>
+    <node>/velocities/speed-north-fps</node>
+   </chunk>
+
+   <chunk>
+    <name>vertical acceleration (G's)</name>
+    <type>float</type>
+    <factor>-32.2</factor>
+    <offset>-1.0</offset>
+    <node>/velocities/speed-down-fps</node>
+   </chunk>
+
+   <chunk>
+    <name>outside air temperarure (degC)</name>
+    <type>int</type>
+    <node>/environment/temperature-degc</node>
+   </chunk>
+
+   <chunk>
+    <name>Weight on Wheels ("GND"/"AIR")</name>
+    <type>boolean</type>
+    <node>/tmp/wow</node>
+   </chunk>
+
+   <chunk>
+    <name>date (yy/mm/dd)</name>
+    <type>string</type>
+    <node>/tmp/date</node>
+   </chunk>
+
+  </input>
+
+ </generic>
+
+</PropertyList>

@@ -721,6 +721,12 @@ Default {
   specular = 0.0 0.0 0.0 1.0
   emissive = 0.0 0.0 0.0 1.0
 }
+alias SomeSort Default
+alias EvergreenNeedleCover Default
+alias DeciduousBroadCover Default
+alias MixedForestCover Default
+alias CropWoodCover Default
+alias WoodedTundraCover Default
 
 Urban {
   texture = Terrain/resgrid.rgb
@@ -731,6 +737,7 @@ Urban {
   specular = 0.0 0.0 0.0 1.0
   emissive = 0.0 0.0 0.0 1.0
 }
+alias BuiltUpCover Urban
 
 Unknown {
   texture = Terrain/unknown.rgb
@@ -791,6 +798,7 @@ IntermittentLake {
   specular = 0.0 0.0 0.0 1.0
   emissive = 0.0 0.0 0.0 1.0
 }
+alias ShrubCover IntermittentLake
 
 DryLake {
   texture = Terrain/desert.rgb
@@ -801,6 +809,7 @@ DryLake {
   specular = 0.0 0.0 0.0 1.0
   emissive = 0.0 0.0 0.0 1.0
 }
+alias BarrenCover DryLake
 
 Reservoir {
   texture = Terrain/water.rgb
@@ -841,6 +850,7 @@ Marsh {
   specular = 0.0 0.0 0.0 1.0
   emissive = 0.0 0.0 0.0 1.0
 }
+alias ShrubGrassCover Marsh
 
 Grass {
   texture = Terrain/grass.rgb
@@ -851,6 +861,12 @@ Grass {
   specular = 0.0 0.0 0.0 1.0                                                    
   emissive = 0.0 0.0 0.0 1.0                                                    
 }                                                                               
+alias GrassCover Grass
+alias MixedTundraCover Grass
+alias SavannaCover Grass
+alias IrrCropPastureCover Grass
+alias DryCropPastureCover Grass
+alias CropGrassCover Grass
 
 Cloud {
   texture = Sky/cloud.rgba

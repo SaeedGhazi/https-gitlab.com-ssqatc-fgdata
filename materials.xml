@@ -2735,7 +2735,7 @@ Shared parameters for various materials.
   </object>
   <object>
    <path>Models/Buildings/small-glass-office-building.ac</path>
-   <coverage-m2>500000</coverage-m2>
+   <coverage-m2>1000000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
   <object>
@@ -2745,12 +2745,27 @@ Shared parameters for various materials.
   </object>
   <object>
    <path>Models/Buildings/brick-school.ac</path>
-   <coverage-m2>2000000</coverage-m2>
+   <coverage-m2>4000000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
   <object>
    <path>Models/Buildings/water-tower.ac</path>
    <coverage-m2>50000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/shop.ac</path>
+   <coverage-m2>500000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/hosshop.ac</path>
+   <coverage-m2>750000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/weapshop.ac</path>
+   <coverage-m2>500000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
  </object-group>
@@ -2812,12 +2827,27 @@ Shared parameters for various materials.
   </object>
   <object>
    <path>Models/Buildings/brick-school.ac</path>
-   <coverage-m2>1000000</coverage-m2>
+   <coverage-m2>4000000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
   <object>
    <path>Models/Buildings/water-tower.ac</path>
    <coverage-m2>1000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/shop.ac</path>
+   <coverage-m2>500000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/hosshop.ac</path>
+   <coverage-m2>500000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/weapshop.ac</path>
+   <coverage-m2>500000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
  </object-group>

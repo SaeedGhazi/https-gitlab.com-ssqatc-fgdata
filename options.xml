@@ -659,6 +659,28 @@
     <description>strings/jpg-httpd-desc</description>
    </option>
 
+  </section>
+
+  <section>
+   <name>strings/multiplayer-options</name>
+
+   <option>
+    <name>callsign</name>
+    <description>strings/callsign-desc</description>
+   </option>
+
+   <option>
+    <name>multiplay</name>
+    <arg>in|out,hz,address,port</arg>
+    <description>strings/multiplay-desc</description>
+    <description>strings/multiple-instance</description>
+   </option>
+
+  </section>
+
+  <section>
+   <name>strings/network-olk-options</name>
+
    <option>
     <name>disable-network-olk</name>
     <description>strings/disable-network-olk-desc</description>

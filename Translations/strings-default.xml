@@ -206,6 +206,14 @@
  <httpd-desc>Enable http server on the specified port</httpd-desc>
  <telnet-desc>Enable telnet server on the specified port</telnet-desc>
  <jpg-httpd-desc>Enable screen shot http server on the specified port</jpg-httpd-desc>
+
+ <!-- MultiPlayer options -->
+ <multiplayer-options>MultiPlayer options</multiplayer-options>
+ <multiplay-desc>Specify multipilot communication settings</multiplay-desc>
+ <callsign-desc>assign a unique name to a player</callsign-desc>
+
+ <!-- NetworkOLK options -->
+ <network-olk-options>Mutlipilot options</network-olk-options>
  <disable-network-olk-desc>Disable Multipilot mode (default)</disable-network-olk-desc>
  <enable-network-olk-desc>Enable Multipilot mode</enable-network-olk-desc>
  <net-hud-desc>Hud displays network info</net-hud-desc>

@@ -605,11 +605,9 @@ do_xpdr_inputs = func {
 
 
 ##
-# This is the main function.  I don't know the best way to trigger it
-# each frame so I register it to run in the very near future, and at
-# the end of running, I register it again.  Setting the time to 0
-# seems to cause it to execute immediately which produces an infinite
-# loop. :-(
+# This is the main function.  This is called explicitely from the ATC interface
+# C++ code in the src/Networks/ directory.  This lets us run the code exactly
+# when we want, rather than depending on the nasal system to run it whenever.
 #
 do_hardware = func {
     # only execute if atcflightsim hardware is present and configured

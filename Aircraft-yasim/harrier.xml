@@ -1,0 +1,126 @@
+<!-- The Harrier has a zillion variants.  Where possible, the numbers
+     here are based on the Sea Harrier FRS.Mk.1, the initial version
+     for the Royal Navy of Falklands fame. -->
+
+<airplane mass="14052">
+
+<!-- Approach configuration -->
+<approach speed="130" aoa="11">
+  <control axis="/controls/throttle[0]" value="0.2"/>
+  <control axis="/controls/flaps" value="1.0"/>
+</approach>
+
+<!-- Cruise configuration -->
+<cruise speed="716" alt="39000">
+  <control axis="/controls/throttle[0]" value="1.0"/>
+  <control axis="/controls/flaps" value="0.0"/>
+</cruise>
+
+<cockpit x="-3.15" y="0.00" z="1.48"/>
+
+<fuselage ax="0.00" ay="0.00" az="0.00"
+          bx="-15.57" by="0.00" bz="1.11"
+          width="1.6" taper="0.1" midpoint="0.3"/>
+
+<wing x="-7.32" y="0.46" z="0.93" length="3.71" chord="3.15"
+      taper=".294" sweep="28" dihedral="-11" camber="0.05">
+  <stall aoa="21" width="8" peak="1.3"/>
+  <flap0 start="0.11" end="0.56" lift="1.5" drag="2.0"/>
+  <flap1 start="0.56" end="0.91" lift="1.2" drag="1.5"/>
+  <control axis="/controls/flaps" output="FLAP0"/>
+  <control axis="/controls/aileron" output="FLAP1" split="true"/>
+  <control axis="/controls/aileron-trim" output="FLAP1" split="true"/>
+</wing>
+
+<hstab x="-12.23" y="0.00" z="0.93" length="2.04" chord="1.48"
+       taper=".313" sweep="24.5" dihedral="-12">
+  <stall aoa="20" width="7" peak="1.5"/>
+  <flap0 start="0" end="1" lift="1.5" drag="2.0"/>
+  <control axis="/controls/elevator" output="FLAP0"/>
+  <control axis="/controls/elevator-trim" output="FLAP0"/>
+</hstab>
+
+<vstab x="-12.51" y="0.00" z="1.20" length="2.78" chord="2.41"
+       taper=".308" sweep="23.5">
+  <stall aoa="20" width="7" peak="1.5"/>
+  <flap0 start="0.12" end="0.88" lift="1.2" drag="1.5"/>
+  <control axis="/controls/rudder" output="FLAP0" invert="true"/>
+  <control axis="/controls/rudder-trim" output="FLAP0" invert="true"/>
+</vstab>
+
+<jet x="-6.12" y="0" z="0.56" mass="3000" thrust="21500" rotate="-90">
+  <actionpt x="-7.5" y="0" z="0.7"/>
+  <control axis="/controls/throttle[0]" output="THROTTLE"/>
+  <control axis="/controls/thrust-vector[0]" output="VECTOR"/>
+</jet>
+
+<!-- Harriers have little "reactor" jets to change the aircraft's
+     orientation during hover.  I've been unable to find a good
+     reference for where these are, exactly.  I've chosen to put the
+     pitch and yaw jets in the tail, and the roll jets point down from
+     the wingtips.  This makes logical sense, but I'd be pleased if
+     anyone can find better info. -->
+
+<!-- tail jets: left yaw, right yaw and pitch down -->
+<thruster x="-15" y="0" z="1" vx="0" vy="1" vz="0" thrust="300">
+  <control axis="/controls/rudder" output="THROTTLE"
+           src0="0" src1="1" dst0="0" dst1="1"/>
+</thruster>
+<thruster x="-15" y="0" z="1" vx="0" vy="-1" vz="0" thrust="300">
+  <control axis="/controls/rudder" output="THROTTLE"
+           src0="-1" src1="0" dst0="1" dst1="0"/>
+</thruster>
+<thruster x="-15" y="0" z="1" vx="0" vy="0" vz="1" thrust="300">
+  <control axis="/controls/elevator" output="THROTTLE"
+           src0="0" src1="1" dst0="0" dst1="1"/>
+</thruster>
+
+<!-- wingtip jets for roll  -->
+<thruster x="-9.2" y="3.34" z="0" vx="0" vy="0" vz="1" thrust="300">
+  <control axis="/controls/aileron" output="THROTTLE"
+           src0="0" src1="1" dst0="0" dst1="1"/>
+</thruster>
+<thruster x="-9.2" y="3.34" z="0" vx="0" vy="0" vz="-1" thrust="300">
+  <control axis="/controls/aileron" output="THROTTLE"
+           src0="-1" src1="0" dst0="1" dst1="0"/>
+</thruster>
+<thruster x="-9.2" y="-3.34" z="0" vx="0" vy="0" vz="1" thrust="300">
+  <control axis="/controls/aileron" output="THROTTLE"
+           src0="-1" src1="0" dst0="1" dst1="0"/>
+</thruster>
+<thruster x="-9.2" y="-3.34" z="0" vx="0" vy="0" vz="-1" thrust="300">
+  <control axis="/controls/aileron" output="THROTTLE"
+           src0="0" src1="1" dst0="0" dst1="1"/>
+</thruster>
+
+<!-- nose jet for pitch up -->
+<thruster x="0" y="0" z="0" vx="0" vy="0" vz="1" thrust="300">
+  <control axis="/controls/elevator" output="THROTTLE"
+           src0="-1" src1="0" dst0="1" dst1="0"/>
+</thruster>
+
+
+<!-- Forward main -->
+<gear x="-4.91" y="0.00" z="-2.0" compression="0.75">
+  <control axis="/controls/rudder" output="STEER" square="true"/>
+  <control axis="/controls/brakes[0]" output="BRAKE"/>
+</gear>
+
+<!-- Rear main -->
+<gear x="-8.25" y="0.00" z="-1.5" compression="0.25">
+  <control axis="/controls/brakes[0]" output="BRAKE"/>
+</gear>
+
+<!-- Wingtip gear -->
+<gear x="-8.90" y="3.24"  z="-1.5" compression="0.25"/>
+<gear x="-8.90" y="-3.24" z="-1.5" compression="0.25"/>
+
+<!-- This capacity is right, but I'm not sure what the tank
+     configuration of a FRS.Mk.1 is.  Just put it all at the wing
+     root. -->
+<tank x="-7.32" y="0" z="0.5" jet="true" capacity="5049"/>
+
+<ballast x="-2" y="0" z="0" mass="600"/>
+
+
+</airplane>

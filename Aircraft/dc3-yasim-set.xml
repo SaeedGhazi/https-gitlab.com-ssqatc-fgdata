@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!--
 ************************************************************************
-Cessna 172 simulation config. This files ties together all the components
-used by FGFS to represent the C172. Components include the flight data 
+Cessna 310R simulation config. This files ties together all the components
+used by FGFS to represent the C310R. Components include the flight data 
 model, instrument panel, and external 3D model.
 3D models can be downloaded from http://home.t-online.de/home/Wolfram.Kuss/
 
@@ -13,21 +13,22 @@ October 23 2001 John Check, fgpanels@rockfish.net
 <PropertyList>
  <sim>
   <flight-model>yasim</flight-model>
-  <aero>747</aero>
+  <aero>dc3</aero>
   <fuel-fraction>1.0</fuel-fraction>
   <sound>true</sound>
 
   <panel>
-   <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
+   <path>Aircraft/c310/c310-vfr-panel.xml</path>
    <visibility>true</visibility>
   </panel>
   <panel_2>
-   <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
+   <path>Aircraft/c310/c310-mini-panel.xml</path>
   </panel_2>
-  
+
+  <!-- you need to download this from the above website -->
   <model>
-   <path><!-- you need to set this --></path>
-  </model>
+   <path>Aircraft/c310/Models/cessna310r.ac</path>
+  </model> 
  </sim>
 </PropertyList>
 

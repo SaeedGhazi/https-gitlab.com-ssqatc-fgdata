@@ -11,9 +11,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
 -->
 
 <PropertyList>
-
  <sim>
- 
   <flight-model>yasim</flight-model>
   <aero>c172</aero>
   <fuel-fraction>1.0</fuel-fraction>
@@ -31,9 +29,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
   <model>
    <path>Aircraft/c172/Models/N757/n757.ac</path>
   </model>
-
  </sim>
-  
 </PropertyList>
 
 

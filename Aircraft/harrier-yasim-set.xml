@@ -13,13 +13,12 @@ October 23 2001 John Check, fgpanels@rockfish.net
 <PropertyList>
  <sim>
   <flight-model>yasim</flight-model>
-  <aero>747</aero>
+  <aero>harrier</aero>
   <fuel-fraction>1.0</fuel-fraction>
   <sound>true</sound>
 
   <panel>
    <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
-   <visibility>true</visibility>
   </panel>
   <panel_2>
    <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>

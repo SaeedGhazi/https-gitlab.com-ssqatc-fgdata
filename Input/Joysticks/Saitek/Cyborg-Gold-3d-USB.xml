@@ -1,294 +1,506 @@
+<?xml version="1.0"?>
 <!--
-Joystick binding definitions for Saitek Cyborg 3D Gold USB joystick.
+$Id$
 
-This file defines primary flight-control bindings as follow:
 
-  axis 0 (left-right): aileron
-  axis 1 (forward-backward): elevator
-  axis 2 (twist left-right): rudder
-  axis 3 (slider): throttle
-  axis 4 (hat left-right): look left or right
-  axis 5 (hat forward-back): look ahead or behind
-  button 0 (trigger): brakes
-  button 1: (left of hat) reduce RPM (constant speed prop)
-  button 2: (below hat)   external view cycle
-  button 3: (right of hat) increase RPM (constant speed prop)
-  button 4: (F1)          trim nose down
-  button 5: (F2)          retract flaps
-  button 6: (F3)          trim nose up
-  button 7: (F4)          extend flaps
-  button 8: (>>)          mixture rich
-  button 9: (<<)          mixture lean
-  hat left                look left (rotate view left)
-  hat right               look right (rotate view right)
-  hat back                look look (decrease view elevation)
-  hat forward             look up (increase view elevation)
+_______________________________________ Layout _______________________________________
 
+
+axis 0:			aileron
+axis 1:			elevator
+axis 2:			rudder
+axis 3:			throttle
+
+
+			no modifier	F3		F4		F3+F4
+			~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+button 0 (trigger):	brakes		parking brake	speed brake	thrust revers.
+button 1 (left):	flaps up	gear up		previous view	*
+button 2 (middle):	reset view dir	tail wheel lock	cockpit view	reset all trim
+button 3 (right):	flaps down	gear down	next view	*
+button 4 (F1):		brakes left	*		*		*
+button 5 (F2):		brakes right	*		*		*
+button 6 (F3):		//////////////////////// modifier 0 /////////////////////////
+button 7 (F4):		//////////////////////// modifier 1 /////////////////////////
+button 8 (>>):		*		*		*		*
+button 9 (<<):		*		*		*		*
+hat left:		look left	leaner mixture	aileron trim	rudder trim
+hat right:		look right	richer mixture	aileron trim	rudder trim
+hat back:		look down	dec prop pitch	elevator trim	*
+hat forward:		look up		inc prop pitch	elevator trim	*
+
+
+F3 and F4 are used like "Shift", "Control", or "Alternate" on computer keyboards.
+For example: press F3 and keep holding it down while pressing the fire
+button/trigger -> toggle parking brake
+
+
+
+___________________________________ Customization ____________________________________
+
+
+
+If you want to change some (or all) of the bindings, the recommended way is
+to copy this file to your home directory, make your changes there, and include
+it from your personal preferences.xml file. Use the tags <js-named n="100">
+and </js-named> around the definitions, but within the <PropertyList> scope.
+(You can use any number lower than 999.)
+
+<PropertyList>
+	<input>
+		<joysticks include="your-modified-copy.xml"/>
+	</input>
+</PropertyList>
+
+
+The property "/input/joysticks/js[0]/saitek-cyborg-3D-modifier" indicates
+the "shift" level. F3 sets bit 0, F4 sets bit 1. The property is 'nil' or
+zero if none of the shift buttons is pressed, 1 if F3 is pressed, 2 if F4
+is pressed, and 3 if both F3 and F4 are pressed.
+
+Note that you have to enclose nasal scripts in <script><![CDATA[...]]></script>
+if they contain characters that interfere with the xml markup. This is the case
+if you are, for exmaple, using < (lower than). Alternatively, you can 'escape'
+the character with "&lt;".
+
+
+
+
+____________________________________ References ______________________________________
+
+
+
+Joysticks:      $FG_ROOT/README.Joystick.html
+Properties:     see property browser (fgfs menu: File/Browse internal properties)
+
+Nasal:          http://www.plausible.org/nasal/
+Nasal examples: $FG_ROOT/Nasal/
+
+
+______________________________________________________________________________________
+
+                                                     ~~ Melchior FRANZ <mfranz@aon.at>
 -->
 
 <PropertyList>
+	<name>SAITEK CYBORG 3D USB</name>
+	<name>CYBORG 3D USB</name>
 
-<name>SAITEK CYBORG 3D USB</name>
-<name>CYBORG 3D USB</name>
+	<axis n="0">
+		<desc>Aileron</desc>
+		<binding>
+			<command>property-scale</command>
+			<property>/controls/flight/aileron</property>
+			<power type="double">2.0</power>
+		</binding>
+	</axis>
 
-<axis n="0">
-<desc>Aileron</desc>
-<binding>
-<command>property-scale</command>
-<property>/controls/flight/aileron</property>
-<squared type="bool">true</squared>
-</binding>
-</axis>
+	<axis n="1">
+		<desc>Elevator</desc>
+		<binding>
+			<command>property-scale</command>
+			<property>/controls/flight/elevator</property>
+			<factor type="double">-1.0</factor>
+			<power type="double">2.0</power>
+		</binding>
+	</axis>
 
-<axis n="1">
-<desc>Elevator</desc>
-<binding>
-<command>property-scale</command>
-<property>/controls/flight/elevator</property>
-<factor type="double">-1.0</factor>
-<squared type="bool">true</squared>
-</binding>
-</axis>
+	<axis n="2">
+		<desc>Rudder</desc>
+		<binding>
+			<command>property-scale</command>
+			<property>/controls/flight/rudder</property>
+			<offset type="double">0.0</offset>
+			<factor type="double">1.0</factor>
+		</binding>
+	</axis>
 
-<axis n="2">
-<desc>Rudder</desc>
-<binding>
-<command>property-scale</command>
-<property>/controls/flight/rudder</property>
-<offset type="double">0.0</offset>
-<factor type="double">1.0</factor>
-</binding>
-</axis>
+	<axis n="3">
+		<desc>Throttle</desc>
+		<binding>
+			<command>nasal</command>
+			<script>controls.throttleAxis()</script>
+		</binding>
+	</axis>
 
-<axis n="3">
-<desc>Throttle</desc>
-<binding>
-<command>property-scale</command>
-<property>/controls/engines/engine[0]/throttle</property>
-<offset type="double">-1.0</offset>
-<factor type="double">-0.5</factor>
-</binding>
-<binding>
-<command>property-scale</command>
-<property>/controls/engines/engine[1]/throttle</property>
-<offset type="double">-1.0</offset>
-<factor type="double">-0.5</factor>
-</binding>
-<binding>
-<command>property-scale</command>
-<property>/controls/engines/engine[2]/throttle</property>
-<offset type="double">-1.0</offset>
-<factor type="double">-0.5</factor>
-</binding>
-<binding>
-<command>property-scale</command>
-<property>/controls/engines/engine[3]/throttle</property>
-<offset type="double">-1.0</offset>
-<factor type="double">-0.5</factor>
-</binding>
-<binding>
-<command>property-scale</command>
-<property>/controls/engines/engine[4]/throttle</property>
-<offset type="double">-1.0</offset>
-<factor type="double">-0.5</factor>
-</binding>
-<binding>
-<command>property-scale</command>
-<property>/controls/engines/engine[5]/throttle</property>
-<offset type="double">-1.0</offset>
-<factor type="double">-0.5</factor>
-</binding>
-<binding>
-<command>property-scale</command>
-<property>/controls/engines/engine[6]/throttle</property>
-<offset type="double">-1.0</offset>
-<factor type="double">-0.5</factor>
-</binding>
-<binding>
-<command>property-scale</command>
-<property>/controls/engines/engine[7]/throttle</property>
-<offset type="double">-1.0</offset>
-<factor type="double">-0.5</factor>
-</binding>
-</axis>
+	<button n="0"><!-- trigger -->
+		<desc>Brakes</desc>
+		<repeatable type="bool">true</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>
+				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
+				if (mod == nil or mod == 0) {
+					interpolate("/controls/gear/brake-left", 1, 0.05);
+					interpolate("/controls/gear/brake-right", 1, 0.05);
+				} elsif (mod == 1) {
+					setprop("/controls/gear/brake-left", 1);
+					setprop("/controls/gear/brake-right", 1);
+				} elsif (mod == 2) {
+					#
+				} elsif (mod == 3) {
+					#
+				}
+			</script>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>
+					mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
+					if (mod == nil or mod == 0) {
+						interpolate("/controls/gear/brake-left", 0, 0.05);
+						interpolate("/controls/gear/brake-right", 0, 0.05);
+					} elsif (mod == 1) {
+						brake = !getprop("/controls/gear/brake-parking");
+						setprop("/controls/gear/brake-parking", brake);
+						if (brake) {
+							gui.popupTip("Parking Brake ON");
+						} else {
+							gui.popupTip("Parking Brake OFF");
+						}
+						setprop("/controls/gear/brake-left", 0);
+						setprop("/controls/gear/brake-right", 0);
+					} elsif (mod == 2) {
+						speedbrake = !getprop("/controls/flight/speedbrake");
+						setprop("/controls/flight/speedbrake", speedbrake);
+					} elsif (mod == 3) {
+						reverser = !getprop("/controls/engines/engine[0]/reverser");
+						props.setAll("/controls/engines/engine", "reverser", reverser);
+						if (reverser) {
+							gui.popupTip("Thrust Reverser ON");
+						} else {
+							gui.popupTip("Thrust Reverser OFF");
+						}
+					}
+				</script>
+			</binding>
+		</mod-up>
+	</button>
 
-<axis n="4">
-<desc>View Direction</desc>
-<low>
-<repeatable>true</repeatable>
-<binding>
-<command>property-adjust</command>
-<property>/sim/current-view/goal-heading-offset-deg</property>
-<step type="double">2.0</step>
-</binding>
-</low>
-<high>
-<repeatable>true</repeatable>
-<binding>
-<command>property-adjust</command>
-<property>/sim/current-view/goal-heading-offset-deg</property>
-<step type="double">-2.0</step>
-</binding>
-</high>
-</axis>
+	<button n="1"><!-- left -->
+		<desc>Flaps/gear up; previous view</desc>
+		<repeatable type="bool">false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>
+				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
+				if (mod == nil or mod == 0) {
+					controls.stepFlaps(-1);
+				} elsif (mod == 1) {
+					setprop("/controls/gear/gear-down", 0);
+				} elsif (mod == 2) {
+					view.stepView(-1);
+				} elsif (mod == 3) {
+					#
+				}
+			</script>
+		</binding>
+	</button>
 
-<axis n="5">
-<desc>View elevation</desc>
-<low>
-<repeatable>true</repeatable>
-<binding>
-<command>property-adjust</command>
-<property>/sim/current-view/goal-pitch-offset-deg</property>
-<step type="double">-2.0</step>
-</binding>
-</low>
-<high>
-<repeatable>true</repeatable>
-<binding>
-<command>property-adjust</command>
-<property>/sim/current-view/goal-pitch-offset-deg</property>
-<step type="double">2.0</step>
-</binding>
-</high>
-</axis>
+	<button n="2"><!-- middle -->
+		<desc>Reset view; toggle tail-wheel lock; reset trim</desc>
+		<repeatable type="bool">false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>
+				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
+				if (mod == nil or mod == 0) {
+					view.resetView();
+				} elsif (mod == 1) {
+					twlock = !getprop("/controls/gear/tailwheel-lock");
+					setprop("/controls/gear/tailwheel-lock", twlock);
+					if (twlock) {
+						gui.popupTip("Tail Wheel UNLOCKED");
+					} else {
+						gui.popupTip("Tail Wheel LOCKED");
+					}
+				} elsif (mod == 2) {
+					setprop("/sim/current-view/view-number", 0);
+					view.resetView();
+				} elsif (mod == 3) {
+					setprop("/controls/flight/elevator-trim", 0);
+					setprop("/controls/flight/aileron-trim", 0);
+					setprop("/controls/flight/rudder-trim", 0);
+				}
+			</script>
+		</binding>
+	</button>
 
+	<button n="3"><!-- right -->
+		<desc>Flaps/gear down; next view</desc>
+		<repeatable type="bool">false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>
+				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
+				if (mod == nil or mod == 0) {
+					controls.stepFlaps(1);
+				} elsif (mod == 1) {
+					setprop("/controls/gear/gear-down", 1);
+				} elsif (mod == 2) {
+					view.stepView(1);
+				} elsif (mod == 3) {
+					#
+				}
+			</script>
+		</binding>
+	</button>
 
-<button n="0">
-<desc>Brakes</desc>
-<binding>
-<command>property-assign</command>
-<property>/controls/gear/brake-left</property>
-<value type="double">1.0</value>
-</binding>
-<binding>
-<command>property-assign</command>
-<property>/controls/gear/brake-right</property>
-<value type="double">1.0</value>
-</binding>
-<mod-up>
-<binding>
-<command>property-assign</command>
-<property>/controls/gear/brake-left</property>
-<value type="double">0.0</value>
-</binding>
-<binding>
-<command>property-assign</command>
-<property>/controls/gear/brake-right</property>
-<value type="double">0.0</value>
-</binding>
-</mod-up>
-</button>
+	<button n="4"><!-- F1 -->
+		<desc>Brakes left</desc>
+		<repeatable type="bool">true</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>
+				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
+				if (mod == nil or mod == 0) {
+					interpolate("/controls/gear/brake-left", 1, 0.05);
+				} elsif (mod == 1) {
+					#
+				} elsif (mod == 2) {
+					#
+				} elsif (mod == 3) {
+					#
+				}
+			</script>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>
+					mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
+					if (mod == nil or mod == 0) {
+						interpolate("/controls/gear/brake-left", 0, 0.05);
+					} elsif (mod == 1) {
+						#
+					} elsif (mod == 2) {
+						#
+					} elsif (mod == 3) {
+						#
+					}
+				</script>
+			</binding>
+		</mod-up>
+	</button>
 
-<button n="1">
-<desc>Reduce RPM</desc>
-<repeatable type="bool">true</repeatable>
-<binding>
-<command>property-adjust</command>
-<property>/controls/engines/engine[0]/propeller-pitch</property>
-<step type="double">-0.01</step>
-</binding>
-<binding>
-<command>property-adjust</command>
-<property>/controls/engines/engine[1]/propeller-pitch</property>
-<step type="double">-0.01</step>
-</binding>
-</button>
+	<button n="5"><!-- F2 -->
+		<desc>Brakes right</desc>
+		<repeatable type="bool">true</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>
+				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
+				if (mod == nil or mod == 0) {
+					interpolate("/controls/gear/brake-right", 1, 0.05);
+				} elsif (mod == 1) {
+					#
+				} elsif (mod == 2) {
+					#
+				} elsif (mod == 3) {
+					#
+				}
+			</script>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>
+					mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
+					if (mod == nil or mod == 0) {
+						interpolate("/controls/gear/brake-right", 0, 0.05);
+					} elsif (mod == 1) {
+						#
+					} elsif (mod == 2) {
+						#
+					} elsif (mod == 3) {
+						#
+					}
+				</script>
+			</binding>
+		</mod-up>
+	</button>
 
-<button n="2">
-<desc>External Views</desc>
-<repeatable type="bool">false</repeatable>
-<binding>
-<command>view-cycle</command>
-<step type="double">1</step>
-</binding>
-</button>
+	<button n="6"><!-- F3 -->
+		<desc>Modifier Bit 0</desc>
+		<repeatable type="bool">false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>
+				name = "/input/joysticks/js[0]/saitek-cyborg-3D-modifier";
+				mod = getprop(name);
+				if (mod == nil) {
+					setprop(name, 1);
+				} elsif (mod == 0 or mod == 2) {
+					setprop(name, mod + 1);
+				}
+			</script>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>
+					name = "/input/joysticks/js[0]/saitek-cyborg-3D-modifier";
+					mod = getprop(name);
+					if (mod == nil) {
+						setprop(name, 0);
+					} elsif (mod == 1 or mod == 3) {
+						setprop(name, mod - 1);
+					}
+				</script>
+			</binding>
+		</mod-up>
+	</button>
 
+	<button n="7"><!-- F4 -->
+		<desc>Modifier Bit 1</desc>
+		<repeatable type="bool">false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>
+				name = "/input/joysticks/js[0]/saitek-cyborg-3D-modifier";
+				mod = getprop(name);
+				if (mod == nil) {
+					setprop(name, 2);
+				} elsif (mod == 0 or mod == 1) {
+					setprop(name, mod + 2);
+				}
+			</script>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>
+					name = "/input/joysticks/js[0]/saitek-cyborg-3D-modifier";
+					mod = getprop(name);
+					if (mod == nil) {
+						setprop(name, 0);
+					} elsif (mod == 2 or mod == 3) {
+						setprop(name, mod - 2);
+					}
+				</script>
+			</binding>
+		</mod-up>
+	</button>
 
-<button n="3">
-<desc>Increase RPM</desc>
-<repeatable type="bool">true</repeatable>
-<binding>
-<command>property-adjust</command>
-<property>/controls/engines/engine[0]/propeller-pitch</property>
-<step type="double">+0.01</step>
-</binding>
-<binding>
-<command>property-adjust</command>
-<property>/controls/engines/engine[1]/propeller-pitch</property>
-<step type="double">+0.01</step>
-</binding>
-</button>
+	<button n="8"><!-- >> -->
+		<desc>free</desc>
+		<repeatable type="bool">false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>
+				<![CDATA[
+				text = "read $FG_ROOT/Input/Joysticks/Saitek/Cyborg-Gold-3d-USB.xml";
+				print("Please " ~ text ~ " for the full joystick layout.");
+				gui.popupTip(text);
+				]]>
+			</script>
+		</binding>
+	</button>
 
-<button n="4">
-<desc>Elevator trim down</desc>
-<repeatable type="bool">true</repeatable>
-<binding>
-<command>property-adjust</command>
-<property>/controls/flight/elevator-trim</property>
-<step type="double">0.001</step>
-</binding>
-</button>
+	<button n="9"><!-- << -->
+		<desc>free</desc>
+		<repeatable type="bool">false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>
+				<![CDATA[
+				text = "read $FG_ROOT/Input/Joysticks/Saitek/Cyborg-Gold-3d-USB.xml";
+				print("Please " ~ text ~ " for the full joystick layout.");
+				gui.popupTip(text);
+				]]>
+			</script>
+		</binding>
+	</button>
 
-<button n="5">
-<desc>Step Flaps Up</desc>
-<repeatable type="bool">false</repeatable>
-<binding>
-<command>property-adjust</command>
-<property>/controls/flight/flaps</property>
-<step type="double">-0.34</step>
-</binding>
-</button>
+	<button n="10"><!-- hat up -->
+		<desc>View direction; prop pitch; elevator trim</desc>
+		<repeatable>true</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>
+				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
+				if (mod == nil or mod == 0) {
+					view.panViewPitch(1);
+				} elsif (mod == 1) {
+					controls.adjPropeller(1);
+				} elsif (mod == 2) {
+					controls.elevatorTrim(0.75);
+				} elsif (mod == 3) {
+					#
+				}
+			</script>
+		</binding>
+	</button>
 
-<button n="6">
-<desc>Elevator trim up</desc>
-<repeatable type="bool">true</repeatable>
-<binding>
-<command>property-adjust</command>
-<property>/controls/flight/elevator-trim</property>
-<step type="double">-0.001</step>
-</binding>
-</button>
+	<button n="11"><!-- hat left -->
+		<desc>View direction; mixture; aileron trim; rudder trim</desc>
+		<repeatable>true</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>
+				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
+				if (mod == nil or mod == 0) {
+					v = getprop("/sim/current-view/view-number");
+					if (v == 0 or v == 4) {
+						view.panViewDir(1);
+					} else {
+						view.panViewDir(-1);
+					}
+				} elsif (mod == 1) {
+					controls.adjMixture(-2);
+				} elsif (mod == 2) {
+					controls.aileronTrim(-0.75);
+				} elsif (mod == 3) {
+					controls.rudderTrim(-0.75);
+				}
+			</script>
+		</binding>
+	</button>
 
-<button n="7">
-<desc>Step Flaps Down</desc>
-<repeatable type="bool">false</repeatable>
-<binding>
-<command>property-adjust</command>
-<property>/controls/flight/flaps</property>
-<step type="double">+0.34</step>
-</binding>
-</button>
+	<button n="12"><!-- hat right -->
+		<desc>View elevation; mixture; aileron trim; rudder trim</desc>
+		<repeatable>true</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>
+				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
+				if (mod == nil or mod == 0) {
+					v = getprop("/sim/current-view/view-number");
+					if (v == 0 or v == 4) {
+						view.panViewDir(-1);
+					} else {
+						view.panViewDir(1);
+					}
+				} elsif (mod == 1) {
+					controls.adjMixture(2);
+				} elsif (mod == 2) {
+					controls.aileronTrim(0.75);
+				} elsif (mod == 3) {
+					controls.rudderTrim(-0.75);
+				}
+			</script>
+		</binding>
+	</button>
 
-<button n="8">
-<desc>Richer Mixture</desc>
-<repeatable type="bool">true</repeatable>
-<binding>
-<command>property-adjust</command>
-<property>/controls/engines/engine[0]/mixture</property>
-<step type="double">+0.01</step>
-</binding>
-<binding>
-<command>property-adjust</command>
-<property>/controls/engines/engine[1]/mixture</property>
-<step type="double">+0.01</step>
-</binding>
-</button>
-
-<button n="9">
-<desc>Leaner Mixture</desc>
-<repeatable type="bool">true</repeatable>
-<binding>
-<command>property-adjust</command>
-<property>/controls/engines/engine[0]/mixture</property>
-<step type="double">-0.01</step>
-</binding>
-<binding>
-<command>property-adjust</command>
-<property>/controls/engines/engine[1]/mixture</property>
-<step type="double">-0.01</step>
-</binding>
-</button>
-
+	<button n="13"><!-- hat down -->
+		<desc>View direction; prop pitch; elevator trim</desc>
+		<repeatable>true</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>
+				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
+				if (mod == nil or mod == 0) {
+					view.panViewPitch(-1);
+				} elsif (mod == 1) {
+					controls.adjPropeller(-1);
+				} elsif (mod == 2) {
+					controls.elevatorTrim(-0.75);
+				} elsif (mod == 3) {
+					#
+				}
+			</script>
+		</binding>
+	</button>
 </PropertyList>
-
 

@@ -44,7 +44,7 @@ The current mode for each mouse is held in the
     <binding>
      <command>property-adjust</command>
      <property>/controls/elevator-trim</property>
-     <step type="double">0.01</step>
+     <step type="double">0.002</step>
     </binding>
    </button>
 
@@ -52,7 +52,7 @@ The current mode for each mouse is held in the
     <binding>
      <command>property-adjust</command>
      <property>/controls/elevator-trim</property>
-     <step type="double">-0.01</step>
+     <step type="double">-0.002</step>
     </binding>
    </button>
 

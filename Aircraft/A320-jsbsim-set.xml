@@ -38,8 +38,8 @@
    <config>
      <!-- x/y/z == right/up/back -->
      <x-offset-m archive="y">-0.525</x-offset-m>
-     <y-offset-m archive="y">3.44</y-offset-m>
-     <z-offset-m archive="y">-16.28</z-offset-m>
+     <y-offset-m archive="y">2.34</y-offset-m>
+     <z-offset-m archive="y">-14.56</z-offset-m>
      <pitch-offset-deg archive="y">-11.0</pitch-offset-deg>
    </config>
   </view>

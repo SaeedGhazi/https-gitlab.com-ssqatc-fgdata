@@ -18,6 +18,96 @@
   </layer>
 
   <layer>
+   <name>target0 - range 40</name>
+   <w>8</w>
+   <h>17</h>
+   <condition>
+    <and>
+     <less-than>
+      <property>ai/models/aircraft[0]/radar/range-nm</property>
+      <value>43</value>
+     </less-than>
+     <equals>
+      <property>/instrumentation/radar/range</property>
+      <value>40</value>
+     </equals>
+     <not-equals>
+      <property>ai/models/aircraft[0]/radar/range-nm</property>
+      <value>0</value>
+     </not-equals>
+    </and>
+   </condition>
+   <texture>
+    <path>Aircraft/Instruments/Textures/radar_misc.rgb</path>
+    <x1>0.0429687</x1>
+    <y1>0.8320312</y1>
+    <x2>0.0703125</x2>
+    <y2>0.8945312</y2>
+   </texture>
+   <transformations>
+    <transformation>
+     <type>x-shift</type>
+     <property>ai/models/aircraft[0]/radar/x-shift</property>
+     <scale>2.55</scale>
+    </transformation>
+    <transformation>
+     <type>y-shift</type>
+     <property>ai/models/aircraft[0]/radar/y-shift</property>
+     <scale>2.55</scale>
+    </transformation>
+    <transformation>
+     <type>rotation</type>
+     <property>ai/models/aircraft[0]/radar/rotation</property>
+    </transformation>
+   </transformations>
+  </layer>
+
+  <layer>
+   <name>target0 - range 20</name>
+   <w>8</w>
+   <h>17</h>
+   <condition>
+    <and>
+     <less-than>
+      <property>ai/models/aircraft[0]/radar/range-nm</property>
+      <value>22</value>
+     </less-than>
+     <equals>
+      <property>/instrumentation/radar/range</property>
+      <value>20</value>
+     </equals>
+     <not-equals>
+      <property>ai/models/aircraft[0]/radar/range-nm</property>
+      <value>0</value>
+     </not-equals>
+    </and>
+   </condition>
+   <texture>
+    <path>Aircraft/Instruments/Textures/radar_misc.rgb</path>
+    <x1>0.0429687</x1>
+    <y1>0.8320312</y1>
+    <x2>0.0703125</x2>
+    <y2>0.8945312</y2>
+   </texture>
+   <transformations>
+    <transformation>
+     <type>x-shift</type>
+     <property>ai/models/aircraft[0]/radar/x-shift</property>
+     <scale>5.1</scale>
+    </transformation>
+    <transformation>
+     <type>y-shift</type>
+     <property>ai/models/aircraft[0]/radar/y-shift</property>
+     <scale>5.1</scale>
+    </transformation>
+    <transformation>
+     <type>rotation</type>
+     <property>ai/models/aircraft[0]/radar/rotation</property>
+    </transformation>
+   </transformations>
+  </layer>
+
+  <layer>
    <name>target1 - range 40</name>
    <w>8</w>
    <h>17</h>
@@ -31,6 +121,10 @@
       <property>/instrumentation/radar/range</property>
       <value>40</value>
      </equals>
+     <not-equals>
+      <property>ai/models/aircraft[1]/radar/range-nm</property>
+      <value>0</value>
+     </not-equals>
     </and>
    </condition>
    <texture>
@@ -72,6 +166,10 @@
       <property>/instrumentation/radar/range</property>
       <value>20</value>
      </equals>
+     <not-equals>
+      <property>ai/models/aircraft[1]/radar/range-nm</property>
+      <value>0</value>
+     </not-equals>
     </and>
    </condition>
    <texture>
@@ -99,6 +197,95 @@
    </transformations>
   </layer>
 
+  <layer>
+   <name>target2 - range 40</name>
+   <w>8</w>
+   <h>17</h>
+   <condition>
+    <and>
+     <less-than>
+      <property>ai/models/aircraft[2]/radar/range-nm</property>
+      <value>43</value>
+     </less-than>
+     <equals>
+      <property>/instrumentation/radar/range</property>
+      <value>40</value>
+     </equals>
+     <not-equals>
+      <property>ai/models/aircraft[2]/radar/range-nm</property>
+      <value>0</value>
+     </not-equals>
+    </and>
+   </condition>
+   <texture>
+    <path>Aircraft/Instruments/Textures/radar_misc.rgb</path>
+    <x1>0.0429687</x1>
+    <y1>0.8320312</y1>
+    <x2>0.0703125</x2>
+    <y2>0.8945312</y2>
+   </texture>
+   <transformations>
+    <transformation>
+     <type>x-shift</type>
+     <property>ai/models/aircraft[2]/radar/x-shift</property>
+     <scale>2.55</scale>
+    </transformation>
+    <transformation>
+     <type>y-shift</type>
+     <property>ai/models/aircraft[2]/radar/y-shift</property>
+     <scale>2.55</scale>
+    </transformation>
+    <transformation>
+     <type>rotation</type>
+     <property>ai/models/aircraft[2]/radar/rotation</property>
+    </transformation>
+   </transformations>
+  </layer>
+
+  <layer>
+   <name>target2 - range 20</name>
+   <w>8</w>
+   <h>17</h>
+   <condition>
+    <and>
+     <less-than>
+      <property>ai/models/aircraft[2]/radar/range-nm</property>
+      <value>22</value>
+     </less-than>
+     <equals>
+      <property>/instrumentation/radar/range</property>
+      <value>20</value>
+     </equals>
+     <not-equals>
+      <property>ai/models/aircraft[2]/radar/range-nm</property>
+      <value>0</value>
+     </not-equals>
+    </and>
+   </condition>
+   <texture>
+    <path>Aircraft/Instruments/Textures/radar_misc.rgb</path>
+    <x1>0.0429687</x1>
+    <y1>0.8320312</y1>
+    <x2>0.0703125</x2>
+    <y2>0.8945312</y2>
+   </texture>
+   <transformations>
+    <transformation>
+     <type>x-shift</type>
+     <property>ai/models/aircraft[2]/radar/x-shift</property>
+     <scale>5.1</scale>
+    </transformation>
+    <transformation>
+     <type>y-shift</type>
+     <property>ai/models/aircraft[2]/radar/y-shift</property>
+     <scale>5.1</scale>
+    </transformation>
+    <transformation>
+     <type>rotation</type>
+     <property>ai/models/aircraft[2]/radar/rotation</property>
+    </transformation>
+   </transformations>
+  </layer>
 
   <layer>
    <name>frame</name>

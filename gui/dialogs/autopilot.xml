@@ -143,6 +143,7 @@
 	</radio>
 	<input>
 	  <row>0</row><col>2</col>
+	  <rowspan>2</rowspan>
 	  <name>vel-throttle</name>
 	  <property>/autopilot/settings/target-speed-kt</property>
 	</input>
@@ -160,11 +161,6 @@
 	    <script>autopilot.update("vel-pitch")</script>
 	  </binding>
 	</radio>
-	<input>
-	  <row>1</row><col>2</col>
-	  <name>vel-pitch</name>
-	  <property>/autopilot/settings/target-speed-kt</property>
-	</input>
 	
       </group>
     </group> <!-- End of Heading/Speed -->

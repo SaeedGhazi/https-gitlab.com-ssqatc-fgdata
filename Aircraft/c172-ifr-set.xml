@@ -32,11 +32,6 @@ October 23 2001 John Check, fgpanels@rockfish.net
    <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
   </panel_2>
   
-<!--
-  <model>
-   <path>Aircraft/c172/Models/N757/n757.ac</path>
-  </model>
--->
 
   <model>
    <path>Aircraft/c172/Models/c172-dpm.xml</path>
@@ -56,9 +51,30 @@ October 23 2001 John Check, fgpanels@rockfish.net
      <zero-pitch-trim-full-throttle type="float">0.14</zero-pitch-trim-full-throttle>
    </config>
  </autopilot>
+ 
+ <consumables>
+  <fuel>
+   <tank n="0">
+    <level-gal_us>20</level-gal_us>
+   </tank>
+   <tank n="1">
+    <level-gal_us>20</level-gal_us>
+   </tank>
+  </fuel>
+ </consumables>
 
  <controls>
-  <aileron-trim>-0.055</aileron-trim>
+  <aileron-trim>-0.117</aileron-trim>
+  <elevator-trim>0</elevator-trim>
+  <rudder-trim>0</rudder-trim>
+  <magnetos>3</magnetos>
  </controls>
+
+ <engines>
+  <engine>
+   <rpm type="double">700</rpm>
+  </engine>
+ </engines>
+
 
 </PropertyList>

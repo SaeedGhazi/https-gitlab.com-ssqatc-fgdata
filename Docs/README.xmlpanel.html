@@ -17,11 +17,11 @@ Author: John Check <j4strngs@rockfish.net>
  <li><A HREF="#example_panel">Example Top Level Panel Config</A>
  <li><A HREF="#indexed_properties">Indexed Properties</A>
  <li><A HREF="#inclusion">Inclusion</A>
- <li><A HREF="#aliasing">Aliasing</A>
  <li><A HREF="#instrument_architecture">Instrument Architecture</A>
  <li><A HREF="#textures">Textures</A>
  <li><A HREF="#instrument_layers">Instrument Layers</A>
  <li><A HREF="#transformations">Transformations</a>
+ <li><A HREF="#conditions">Conditions</A>
  <li><A HREF="#needle_placement">About Transformations and Needle Placement</A>
  <li><A HREF="#interpolation">Interpolation Tables</A>
  <li><A HREF="#actions">Actions</A>
@@ -581,6 +581,145 @@ This example is a switch that contains both static and dynamic text:
 <br>
 
 <HR WIDTH="20%">
+<H2><A NAME="conditions">Conditions:</A></H2>
+<HR WIDTH="20%">
+
+<p>
+A condition may appear in a binding (for keyboard, joystick, or panel
+action) or in most parts of a panel configuration file (specifically,
+for an instrument, layer, transformation, text chunk, or action).  If
+a condition is present, it must succeed for the component to be used
+(i.e. if the condition fails, the binding will not be fired, the layer
+will not be drawn, etc.).  Conditions are compiled to an efficient
+internal form and load time.
+</p>
+<p>
+For example, to ensure that a layer is drawn only if the /foo/bar
+property has the value "active", you would do the following:
+</p>
+<pre>
+  &lt;layer&gt;
+   &lt;name&gt;FooBar Layer&lt;/name&gt;
+   &lt;condition&gt;
+    &lt;equals&gt;
+     &lt;property&gt;/foo/bar&lt;/property&gt;
+     &lt;value&gt;active&lt;/value&gt;
+    &lt;/equals&gt;
+   &lt;/condition&gt;
+   ...
+  &lt;/layer&gt;
+</pre>
+<p>
+To draw a different layer when the /foo/bar property does not have the
+value "active", you could follow with this:
+</p>
+<pre>
+  &lt;layer&gt;
+   &lt;name&gt;FooBar Layer&lt;/name&gt;
+   &lt;condition&gt;
+    &lt;not-equals&gt;
+     &lt;property&gt;/foo/bar&lt;/property&gt;
+     &lt;value&gt;active&lt;/value&gt;
+    &lt;/not-equals&gt;
+   &lt;/condition&gt;
+   ...
+  &lt;/layer&gt;
+</pre>
+<p>
+While conditions were originally created for panel designers, they
+have proven to  be very useful for binding input devices (such
+as the keyboard or joystick), since they effectively allow any key,
+axis, button, or panel action to act as a modifier for any other key,
+axis, button, or panel action, and in fact, allow mind-numbingly
+complicated combinations for people who like them (i.e. Emacs users).
+</p>
+<pre>
+  &lt;!-- make 'u' a modifier key --&gt;
+  &lt;!-- could also use property-toggle to make it a toggle modifier --&gt;
+  &lt;key n="117"&gt;
+   &lt;name&gt;u&lt;/name&gt;
+   &lt;desc&gt;Special 'u' modifier&lt;/desc&gt;
+
+   &lt;binding&gt;
+    &lt;command&gt;property-assign&lt;/command&gt;
+    &lt;property&gt;/modifiers/u&lt;/property&gt;
+    &lt;value&gt;1&lt;/value&gt;
+   &lt;/binding&gt;
+
+   &lt;mod-up&gt;
+    &lt;binding&gt;
+     &lt;command&gt;property-assign&lt;/command&gt;
+     &lt;property&gt;/modifiers/u&lt;/property&gt;
+     &lt;value&gt;0&lt;/value&gt;
+    &lt;/binding&gt;
+   &lt;/mod-up&gt;
+
+  &lt;/key&gt;
+
+  &lt;!-- take different actions based on the u modifier --&gt;
+  &lt;key n="118"&gt;
+   &lt;name&gt;v&lt;/name&gt;
+
+   &lt;binding&gt;
+    &lt;condition&gt;
+     &lt;property&gt;/modifiers/u&lt;/property&gt;
+    &lt;/condition&gt;
+    &lt;command&gt;property-toggle&lt;/command&gt;
+    &lt;property&gt;/foo/bar&lt;/property&gt;
+   &lt;/binding&gt;
+
+   &lt;binding&gt;
+    &lt;condition&gt;
+     &lt;not&gt;
+      &lt;property&gt;/modifiers/u&lt;/property&gt;
+     &lt;/not&gt;
+    &lt;/condition&gt;
+    &lt;command&gt;property-toggle&lt;/command&gt;
+    &lt;property&gt;/bar/foo&lt;/property&gt;
+   &lt;/binding&gt;
+
+  &lt;/key&gt;
+</pre>
+<p>
+The &lt;condition&gt; element acts as an implicit 'and' group for everything
+contained in it.  Here are the elements that can appear inside:
+</p>
+<pre>
+  &lt;property&gt;[name]&lt;/property&gt;
+
+  - true if the named property returns a true boolean value (i.e. a
+    non-0 numeric value)
+
+  &lt;and&gt;[condition...]&lt;/and&gt;
+
+  - true if all of the conditions contained in it are true
+
+  &lt;or&gt;[condition...]&lt;/or&gt;
+
+  - true if any of the conditions contained in it is true
+
+  &lt;not&gt;[condition]&lt;/not&gt;
+
+  - true if the condition contained in it is false
+
+  &lt;less-than&gt;...&lt;/less-than&gt;
+  &lt;less-than-equals&gt;...&lt;/less-than-equals&gt;
+  &lt;equals&gt;...&lt;/equals&gt;
+  &lt;not-equals&gt;...&lt;/not-equals&gt;
+  &lt;greater-than&gt;...&lt;/greater-than&gt;
+  &lt;greater-than-equals&gt;...&lt;/greater-than-equals&gt;
+</pre>
+<p>
+  - all of these take two child elements; the first, "property", is
+    the property to test; the second argument may be "property" or
+    "value".  If it is also "property" (i.e. property[1]), the named
+    property's value will be used; otherwise, the literal value
+    provided will be used
+  - be warned that any string comparison other than equals/not-equals
+    is guaranteed to be flaky
+</p>
+
+<HR WIDTH="20%">
 <H2><A NAME="transformations">Transformations:</A></H2>
 <HR WIDTH="20%">
 <p>
@@ -591,8 +730,8 @@ based on properties are useful for driving instrument needles. I.E. rotate the
 number of degrees equal to the airspeed. X and y shifts are relative to the
 center of the instrument. Each specified transformation type takes an &lt;offset&gt;.</p><p>
 Offsets are relative to the center of the instrument. A shift without an offset
-has no effect. For example, let's say we have a texure that is a circle. If we
-use this texture in two layers, one defined as having a size of 128x128 and 
+has no effect. For example, let's say we have a texture that is a circle. If we
+use this texture in two layers, one defined as having a size of 128x128 and
 the second layer is defined as 64x64 and neither is supplied  a shift and offset
 the net result appears as 2 concentric circles.
 </p>
@@ -705,12 +844,12 @@ always tied to properties: they can toggle a boolean property, adjust
 the value of a numeric property, or swap the values of two properties.
 The x/y placement for actions specifies the origin of the lower left corner.
 In the following example the first action sets up a hotspot 32 pixels wide
-and 16 pixels high. It lower left corner is placed 96 pixels (relative to the 
-defined base size of the instrument) to the right of the center of the 
+and 16 pixels high. It lower left corner is placed 96 pixels (relative to the
+defined base size of the instrument) to the right of the center of the
 instrument. It is also 32 pixels below the centerline of the instrument.
 The actual knob texture over which the action is superimposed is 32x32.
-Omitted here is a second action, bound to the same property, with a positive 
-increment value. This second action is placed to cover the other half of the 
+Omitted here is a second action, bound to the same property, with a positive
+increment value. This second action is placed to cover the other half of the
 knob. The result is that clicking on the left half of the knob texture decreases
 the value and clicking the right half increases the value. Also omitted here
 is a second pair of actions with the same coordinates but a larger increment
@@ -887,7 +1026,7 @@ Here is a list of property names including appropriate units:
 /engines/engine0/rpm =&gt; /engines/engine[0]/rpm
 /environment/clouds/altitude += "-ft"
 /environment/magnetic-dip += "-deg"
-/environment/magnetic-varation += "-deg"
+/environment/magnetic-variation += "-deg"
 /environment/visibility += "-m"
 /environment/wind-down += "-fps"
 /environment/wind-east += "-fps"

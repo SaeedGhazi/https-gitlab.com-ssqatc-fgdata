@@ -20,6 +20,12 @@ October 23 2001 John Check, fgpanels@rockfish.net
 
   <flight-model archive="y">jsb</flight-model>
   <aero archive="y">c172r</aero>
+  
+  <systems>
+    <electrical>
+      <path>Aircraft/c172/c172-electrical.xml</path>
+    </electrical>
+  </systems>
 
   <sound>
    <audible archive="y">true</audible>

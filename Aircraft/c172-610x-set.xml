@@ -17,22 +17,28 @@ October 23 2001 John Check, fgpanels@rockfish.net
   <description>Cessna 172 with a full screen, hi-res panel</description>
  
   <!-- We want to be able to specify the flight model independently -->
-  <!-- <flight-model>jsb</flight-model> -->
-  <!-- <aero>c172</aero> -->
+  <!-- <flight-model archive="y">jsb</flight-model> -->
+  <!-- <aero archive="y">c172</aero> -->
+
+  <systems>
+    <electrical>
+      <path>Aircraft/c172/c172-electrical.xml</path>
+    </electrical>
+  </systems>
 
   <sound>
-   <audible>true</audible>
-   <path>Aircraft/c172/c172-sound.xml</path>
+   <audible archive="y">true</audible>
+   <path archive="y">Aircraft/c172/c172-sound.xml</path>
   </sound>
 
   <panel>
    <path>Aircraft/c172/Panels/c172-610x-panel.xml</path>
-   <visibility>true</visibility>
+   <visibility archive="y">true</visibility>
    <flip-x>false</flip-x>
   </panel>
 
   <model>
-   <path>Aircraft/c172/Models/c172-dpm.xml</path>
+   <path archive="y">Aircraft/c172/Models/c172-dpm.xml</path>
   </model>
 
  </sim>

@@ -16,8 +16,8 @@ October 23 2001 John Check, fgpanels@rockfish.net
 
   <description>Cessna 172 in IFR configuration</description>
  
-  <flight-model>jsb</flight-model>
-  <aero>c172r</aero>
+  <flight-model archive="y">jsb</flight-model>
+  <aero archive="y">c172r</aero>
 
   <systems>
     <electrical>
@@ -26,13 +26,13 @@ October 23 2001 John Check, fgpanels@rockfish.net
   </systems>
 
   <sound>
-   <audible>true</audible>
-   <path>Aircraft/c172/c172-sound.xml</path>
+   <audible archive="y">true</audible>
+   <path archive="y">Aircraft/c172/c172-sound.xml</path>
   </sound>
 
   <panel>
    <path>Aircraft/c172/Panels/c172-ifr-panel.xml</path>
-   <visibility>true</visibility>
+   <visibility archive="y">true</visibility>
   </panel>
   <panel_2>
    <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
@@ -40,14 +40,14 @@ October 23 2001 John Check, fgpanels@rockfish.net
   
 
   <model>
-   <path>Aircraft/c172/Models/c172-dpm.xml</path>
+   <path archive="y">Aircraft/c172/Models/c172-dpm.xml</path>
   </model>
 
    <current-view>
     <pitch-offset-deg>-8</pitch-offset-deg>
    </current-view>
 
-</sim>
+ </sim>
   
  <autopilot>
    <config>
@@ -74,9 +74,11 @@ October 23 2001 John Check, fgpanels@rockfish.net
  </consumables>
 
  <controls>
+  <!--
   <aileron-trim>-0.117</aileron-trim>
   <elevator-trim>0</elevator-trim>
   <rudder-trim>0</rudder-trim>
+  -->
   <magnetos>3</magnetos>
  </controls>
 

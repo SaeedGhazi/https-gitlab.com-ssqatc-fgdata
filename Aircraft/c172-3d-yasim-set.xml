@@ -20,6 +20,12 @@ October 23 2001 John Check, fgpanels@rockfish.net
 
   <flight-model archive="y">yasim</flight-model>
   <aero archive="y">c172</aero>
+  
+  <systems>
+    <electrical>
+      <path>Aircraft/c172/c172-electrical.xml</path>
+    </electrical>
+  </systems>
 
   <sound>
    <audible archive="y">true</audible>
@@ -48,7 +54,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
   </current-view>
 
  </sim>
-  
+
  <autopilot>
    <config>
      <min-climb-speed-kt type="float">70.0</min-climb-speed-kt>
@@ -56,7 +62,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
      <target-climb-rate-fpm type="float">500.0</target-climb-rate-fpm>
      <target-descent-rate-fpm type="float">1000.0</target-descent-rate-fpm>
      <elevator-adj-factor type="float">4000.0</elevator-adj-factor>
-     <integral-contribution type="float">0.01</integral-contribution> 
+     <integral-contribution type="float">0.01</integral-contribution>
      <zero-pitch-throttle type="float">0.45</zero-pitch-throttle>
      <zero-pitch-trim-full-throttle type="float">0.14</zero-pitch-trim-full-throttle>
    </config>
@@ -73,9 +79,8 @@ October 23 2001 John Check, fgpanels@rockfish.net
   </fuel>
  </consumables>
 
-<!--
+
  <controls>
-  <aileron-trim>-0.055</aileron-trim>
   <magnetos>3</magnetos>
  </controls>
 
@@ -84,8 +89,8 @@ October 23 2001 John Check, fgpanels@rockfish.net
    <rpm>700</rpm>
   </engine>
  </engines>
--->
-  
+
+
 </PropertyList>
 
 

@@ -184,8 +184,8 @@ Started September 2000 by David Megginson, david@megginson.com
  <environment>
   <visibility-m type="double">16000</visibility-m>
   <temperature-sea-level-degc type="double">15</temperature-sea-level-degc>
+  <dewpoint-sea-level-degc type="double">5</dewpoint-sea-level-degc>
   <pressure-sea-level-inhg type="double">29.92</pressure-sea-level-inhg>
-  <density-sea-level-slugft3 type="double">0.00237</density-sea-level-slugft3>
   <wind-from-heading-deg type="double">270</wind-from-heading-deg>
   <clouds>
    <status>true</status>

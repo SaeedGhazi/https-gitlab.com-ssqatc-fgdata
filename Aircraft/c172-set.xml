@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+Cessna 172 simulation config. This files ties together all the components
+used by FGFS to represent the C172. Components include the flight data 
+model, instrument panel, and external 3D model.
+3D models can be downloaded from http://home.t-online.de/home/Wolfram.Kuss/
+
+October 23 2001 John Check, fgpanels@rockfish.net
+************************************************************************
+-->
+
+<PropertyList>
+<!-- I don't know why we even need this  -->
+ 
+</PropertyList>
+
+

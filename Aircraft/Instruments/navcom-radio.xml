@@ -274,7 +274,7 @@ properties' values.
  <actions>
 
   <action>
-   <name>small nav frequency decrease</name>
+   <name>nav frequency decrease (decimal part)</name>
    <button>0</button>
    <x>96</x>
    <y>-32</y>
@@ -283,15 +283,16 @@ properties' values.
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/nav-freq-standby-prop"/>
+    <mask>decimal</mask>
     <step>-0.05</step>
-    <min>108.0</min>
-    <max>117.95</max>
-    <wrap>1</wrap>
+    <min>0.00</min>
+    <max>0.95</max>
+    <wrap>true</wrap>
    </binding>
   </action>
 
   <action>
-   <name>large nav frequency decrease</name>
+   <name>nav frequency decrease (integer part)</name>
    <button>1</button>
    <x>96</x>
    <y>-32</y>
@@ -300,15 +301,16 @@ properties' values.
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/nav-freq-standby-prop"/>
-    <step>-0.5</step>
-    <min>108.0</min>
-    <max>117.95</max>
-    <wrap>1</wrap>
+    <mask>integer</mask>
+    <step>-1</step>
+    <min>108</min>
+    <max>117</max>
+    <wrap>true</wrap>
    </binding>
   </action>
 
   <action>
-   <name>small nav frequency increase</name>
+   <name>nav frequency increase (decimal part)</name>
    <button>0</button>
    <x>112</x>
    <y>-32</y>
@@ -317,15 +319,16 @@ properties' values.
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/nav-freq-standby-prop"/>
+    <mask>decimal</mask>
     <step>0.05</step>
-    <min>108.0</min>
-    <max>117.95</max>
-    <wrap>1</wrap>
+    <min>0.00</min>
+    <max>0.95</max>
+    <wrap>true</wrap>
    </binding>
   </action>
 
   <action>
-   <name>large nav frequency increase</name>
+   <name>nav frequency increase (integer part)</name>
    <button>1</button>
    <x>112</x>
    <y>-32</y>
@@ -334,16 +337,17 @@ properties' values.
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/nav-freq-standby-prop"/>
-    <step>0.5</step>
-    <min>108.0</min>
-    <max>117.95</max>
-    <wrap>1</wrap>
+    <mask>integer</mask>
+    <step>1</step>
+    <min>108</min>
+    <max>117</max>
+    <wrap>true</wrap>
    </binding>
   </action>
 
 
   <action>
-   <name>small com frequency decrease</name>
+   <name>com frequency decrease (decimal part)</name>
    <button>0</button>
    <x>-36</x>
    <y>-32</y>
@@ -352,15 +356,16 @@ properties' values.
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/comm-freq-standby-prop"/>
+    <mask>decimal</mask>
     <step>-0.025</step>
-    <min>0.0</min>
-    <max>140.0</max>
-    <wrap>1</wrap>
+    <min>0.000</min>
+    <max>0.975</max>
+    <wrap>true</wrap>
    </binding>
   </action>
 
   <action>
-   <name>large com frequency decrease</name>
+   <name>com frequency decrease (integer part)</name>
    <button>1</button>
    <x>-36</x>
    <y>-32</y>
@@ -369,15 +374,16 @@ properties' values.
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/comm-freq-standby-prop"/>
-    <step>-1.0</step>
-    <min>0.0</min>
-    <max>140.0</max>
-    <wrap>1</wrap>
+    <mask>integer</mask>
+    <step>-1</step>
+    <min>118</min>
+    <max>135</max>
+    <wrap>true</wrap>
    </binding>
   </action>
 
   <action>
-   <name>small com frequency increase</name>
+   <name>com frequency increase (decimal part)</name>
    <button>0</button>
    <x>-20</x>
    <y>-32</y>
@@ -386,15 +392,16 @@ properties' values.
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/comm-freq-standby-prop"/>
+    <mask>decimal</mask>
     <step>0.025</step>
-    <min>0.0</min>
-    <max>140.0</max>
-    <wrap>1</wrap>
+    <min>0.000</min>
+    <max>0.975</max>
+    <wrap>true</wrap>
    </binding>
   </action>
 
   <action>
-   <name>large com frequency increase</name>
+   <name>com frequency increase (integer part)</name>
    <button>1</button>
    <x>-20</x>
    <y>-32</y>
@@ -403,13 +410,13 @@ properties' values.
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/comm-freq-standby-prop"/>
-    <step>1.0</step>
-    <min>0.0</min>
-    <max>140.0</max>
-    <wrap>1</wrap>
+    <mask>integer</mask>
+    <step>1</step>
+    <min>118</min>
+    <max>135</max>
+    <wrap>true</wrap>
    </binding>
   </action>
-
 
   <action>
    <name>swap nav frequencies</name>

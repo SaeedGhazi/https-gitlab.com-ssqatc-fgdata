@@ -2,12 +2,8 @@
 <!--
 Key binding definitions.
 
-This file is included by preferences.xml, and uses the context of its
-inclusion point; that means that you need to prepend "/input/keyboard"
-to all property names.
-
-The list here is not yet comprehensive: many of the bindings are still
-handled in the C++ code.
+The list here is not yet comprehensive: a few of the bindings are
+still handled in the C++ code.
 
 Regular keycodes go up to 255; special keys start at 256, and can be
 calculated by adding 256 to the GLUT key value in glut.h.
@@ -224,7 +220,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <binding>
    <command>property-assign</command>
    <property>/sim/current-view/field-of-view</property>
-   <value alias="/sim/view/config/default-field-of-view-deg"/>
+   <property>/sim/view/config/default-field-of-view-deg</property>
   </binding>
  </key>
 
@@ -350,7 +346,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
     <binding>
      <command>property-assign</command>
      <property>/sim/current-view/goal-heading-offset-deg</property>
-     <value alias="/sim/view/config/back-left-direction-deg"/>
+     <property>/sim/view/config/back-left-direction-deg"</property>
     </binding>
   </mod-shift>
  </key>
@@ -369,7 +365,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
-    <value alias="/sim/view/config/back-direction-deg"/>
+    <property>/sim/view/config/back-direction-deg</property>
    </binding>
   </mod-shift>
  </key>
@@ -387,7 +383,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
-    <value alias="/sim/view/config/back-right-direction-deg"/>
+    <property>/sim/view/config/back-right-direction-deg</property>
    </binding>
   </mod-shift>
  </key>
@@ -406,7 +402,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
-    <value alias="/sim/view/config/left-direction-deg"/>
+    <property>/sim/view/config/left-direction-deg</property>
    </binding>
   </mod-shift>
  </key>
@@ -434,7 +430,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
-    <value alias="/sim/view/config/right-direction-deg"/>
+    <property>/sim/view/config/right-direction-deg</property>
    </binding>
   </mod-shift>
  </key>
@@ -452,7 +448,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
-    <value alias="/sim/view/config/front-left-direction-deg"/>
+    <property>/sim/view/config/front-left-direction-deg</property>
    </binding>
   </mod-shift>
  </key>
@@ -471,7 +467,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
-    <value alias="/sim/view/config/front-direction-deg"/>
+    <property>/sim/view/config/front-direction-deg</property>
    </binding>
   </mod-shift>
  </key>
@@ -489,7 +485,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
-    <value alias="/sim/view/config/front-right-direction-deg"/>
+    <property>/sim/view/config/front-right-direction-deg</property>
    </binding>
   </mod-shift>
  </key>
@@ -1054,7 +1050,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
-    <value alias="/sim/view/config/left-direction-deg"/>
+    <property>/sim/view/config/left-direction-deg</property>
    </binding>
   </mod-shift>
  </key>
@@ -1073,7 +1069,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
-    <value alias="/sim/view/config/front-direction-deg"/>
+    <property>/sim/view/config/front-direction-deg</property>
    </binding>
   </mod-shift>
  </key>
@@ -1093,7 +1089,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
-    <value alias="/sim/view/config/right-direction-deg"/>
+    <property>/sim/view/config/right-direction-deg</property>
    </binding>
   </mod-shift>
  </key>
@@ -1112,7 +1108,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
-    <value alias="/sim/view/config/back-direction-deg"/>
+    <property>/sim/view/config/back-direction-deg</property>
    </binding>
   </mod-shift>
  </key>
@@ -1131,7 +1127,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
-    <value alias="/sim/view/config/front-right-direction-deg"/>
+    <property>/sim/view/config/front-right-direction-deg</property>
    </binding>
   </mod-shift>
  </key>
@@ -1150,7 +1146,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
-    <value alias="/sim/view/config/back-right-direction-deg"/>
+    <property>/sim/view/config/back-right-direction-deg</property>
    </binding>
   </mod-shift>
  </key>
@@ -1168,7 +1164,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
-    <value alias="/sim/view/config/front-left-direction-deg"/>
+    <property>/sim/view/config/front-left-direction-deg</property>
    </binding>
   </mod-shift>
  </key>
@@ -1186,7 +1182,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
-    <value alias="/sim/view/config/back-left-direction-deg"/>
+    <property>/sim/view/config/back-left-direction-deg</property>
    </binding>
   </mod-shift>
  </key>

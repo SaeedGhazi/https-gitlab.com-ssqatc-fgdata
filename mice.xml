@@ -2,20 +2,14 @@
 <!--
 Mouse binding definitions.
 
-NOTE: CURRENTLY, THIS FILE IS USED ONLY IF YOU CONFIGURE FLIGHTGEAR
-'with-new-mouse' AT BUILD TIME.
-
-This file is included by preferences.xml, and uses the context of its
-inclusion point; that means that you need to prepend "/input/mice"
-to all property names.
+This is a independent configuration file: it is not part of the main
+FlightGear property tree.
 
 Currently, Glut supports only one mouse, but the configuration format
-is designed to support additional mice in the future if possible.
-
-The current mode for each mouse is held in the
+is designed to support additional mice in the future if possible.  The
+current mode for each mouse is held in the
 /devices/status/mice/mouse[n]/mode property.
 -->
-
 
 <PropertyList>
 
@@ -175,7 +169,7 @@ The current mode for each mouse is held in the
     <binding>
      <command>property-assign</command>
      <property>/sim/current-view/heading-offset-deg</property>
-     <value alias="/sim/view/config/front-direction-deg"/>
+     <property>/sim/view/config/front-direction-deg</property>
     </binding>
     <binding>
      <command>property-assign</command>

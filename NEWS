@@ -1,15 +1,97 @@
+New in 0.9.4
+* March 26, 2004
+
+* Impliment SimGear's (aka Andy's) Nasal scripting language in
+  FlightGear and integrate with the FG property system.
+* Many updates from David Culp and David Luff to the AI aircraft and
+  ATC modules.
+* Complete overhaul of the autopilot system.  The new system uses a
+  much more advanced PID algorithm, is much more flexible, and is
+  completely reconfigurable for each aircraft.
+* Added the ability to fetch current weather in real time during a
+  flight (via a thread) from the weather.noaa.gov web site and update
+  the current weather conditions in the sim.
+* Added properly working VASI/PAPI lights.
+* Make the ground intersection code smart so allow flying under
+  bridges, taxiing on the lower level of the bay bridge, taxiing into
+  hangers, etc.
+* Added a utility to automatically manage scenery installation and
+  removal.
+* Several updated ground textures, plus a variety of new random
+  scenery objects.
+
+* Much additional work on the San Francisco area buildings and bridges.
+
+* Added a Comper Swift (nice), a Hawker Hunter (nice), added a T37 Tweet, 
+
+* Updates to the 737 (nice panel, 3d model, and flight model), updates
+  to the 747 flight dynamics, updates to the OV10, T38, AN-225, bo105
+  (helicopter), better sounds for the DC-3, updates to f104 model,
+  many updates to the F16, updates to the J3 Cub, 3D cockpit added to
+  the pa28-161, updates to the sgs233, overhaul of the tsr2 and yf23
+  models.
+
+* The UFO became Santa Claus over the holidays, but it is back to
+  being extra terrestial.
+
+
+* First stab at a weather radar instrument.
+
+* Added a number of basic 3d instruments to the instrument library
+  that could be reused used for any general aviation cockpit.
+
+* Clean up much of the extraneous alias system entries for aircraft.
+  Generally this means that if there is only one version of an
+  aircraft, there is only one entry and no aliases.  If there are
+  multiple versions of an aircraft, we may still have an alias to
+  point to the prefered or default version.
+
+* Added RedHat packaging files.
+* Added some perl script utility functions which are useful when
+  writing remote perl scripts that interact with a running copy of
+  FlightGear.  Includes routines to facility remote control of data
+  logging and even some simple graph plotting.
+* Updates to OpenGC interface.
+* Various JSBSim updates.
+* Various YASim updates.
+* Various UIUCsim updates.
+* More work on the native multiplayer system.
+
+* Sorted out the confusion between left, right, and parking brakes
+  vs. the cockpit controls vs. the wheels they apply to.
+* Much infrastructure added to support future GPS instruments.
+* Fixed a meter/feet conversion problem in DME distance calculations
+  which would cause it to often read quite high.
+* Fixes to nmea output so it can better trick a moving map software
+  application into thinking it is talking to a real gps.
+
+* Fixed a subtle problem with our star database that has been lurking
+  for many years, but it took an astronomy expert to spot the subtle
+  misalignments.
+
+* Add support for Logitech Extreme 3D Pro, thrustmaster top gun
+  afterburner USB, Logitech WingMan Force 3D, Logitech Extreme 3D Pro
+  USB, and Microsoft SideWinder 3D Pro joysticks.
+
+* Removed the old WeatherCM module (it can be resurrected from CVS if
+  any one ever wants to do that.)
+* Removed the NetworkOLK module (it can be resurrected from CVS if
+  any one ever wants to do that.)
+* Removed support for the PSL scripting language.
+
+
 New in 0.9.3
-* October 15, 2003
+* October 24, 2003
 
 * Added a flight "replay" system.
 * Many updates to the ATC and AI aircraft subsystem. (David Luff)
 * Add support for moving cloud layers.
 * New "symbolic" time of day dialog box for easily setting dawn, dusk,
   noon, etc.
-* Aircaft are now each self contained in their own individual
+* Aircraft are now each self contained in their own individual
   subdirectories for easier end user addition and removal.
 * Many improvements to scene lighting throughout the day->night range
-  including more realistic sky and fog colors, more relistic scene
+  including more realistic sky and fog colors, more realistic scene
   illumination, better dusk/dawn sky coloring, better specular
   lighting support.
 * A nice new chase view has been added.
@@ -18,6 +100,12 @@ New in 0.9.3
 * Many buildings and bridges added in the San Francisco area.
 * Updated airport and navaid database, many new taxiways, many
   corrected runways, many new airports (especially outside the USA.)
+* Updates to the man page.
+* Better Win32 packaging (more standardized installer, plus a launcher
+  which allows selection of starting location and starting aircraft.)
+* Added an initial cut at modeling helicopters.
+* Support multiple inside the cockpit views.
+* Updated FlightGear Flight School tutorial.
 
 * Use the field elevation for GS when no specific altitude listed in
   FAA/DAFIF data
@@ -27,7 +115,7 @@ New in 0.9.3
   some circumstances.)
 * Many fixes and updates to the autopilot.  Autothrottle tracks speed
   much better with much less jumping around.  
-* Expose the tuned navid via the property system to support building
+* Expose the tuned navaid via the property system to support building
   more advanced avionics.
 * Improvements to the environment manager and gui's, more control over
   turbulence, ability to specify boundary condition layers as well as
@@ -35,7 +123,8 @@ New in 0.9.3
 * JSBSim updates including a new turbine engine model that supports
   things like starting and stopping procedures and thrust reversing.
 * UIUCsim updates (compiler warning and namespace conflict fixes.)
-* YASim updates (fix drag from shutdown engine.)
+* YASim updates (fix drag from shutdown engine, helicopter support,
+  better in air startup support.)
 * Support for "clock" instruments that operate independently of
   computer system time.
 * Annunciators shouldn't work if electrical system not serviceable.
@@ -50,13 +139,15 @@ New in 0.9.3
 * Updated aircraft: 747, A320, T-38, A-10, B-52, F-104, Fokker 50,
   Fokker 100, Piper Cub, P-51, UFO, YF-23, Ornithopter, A-4, C172,
   and F-16
-* New Aircraft: J-22, Paraglider, SGS-126 Sailplane, ASW 20, and AN-225.
+* New Aircraft: J-22, Paraglider, SGS-126 Sailplane, ASW 20, and
+  AN-225 aircraft; Bell 206 JetRanger, CH-47 Chinook, and Ecureuil
+  AS-350 helicoptors.
 * Updated cloud textures.
 
 * Removed dependency on Metakit.  The airport and runway databases are now
   stored in a simple flat file ascii database.
 
-* FreeBSD, Solaris, MSVC, Irix, cygwin, and mingwin fixes.
+* FreeBSD, Solaris, MSVC, Irix, Mac OSX, cygwin, and mingwin fixes.
 
 
 New in 0.9.2

@@ -17,6 +17,7 @@
    </binding>
   </item>
 
+<!--
   <item>
    <label>Load Aircraft</label>
    <binding>
@@ -24,6 +25,7 @@
     <dialog-name>aircraft</dialog-name>
    </binding>
   </item>
+-->
 
   <item>
    <label>Reset</label>

@@ -44,8 +44,8 @@ October 23 2001 John Check, fgpanels@rockfish.net
      <goal-heading-deg>3</goal-heading-deg>
      <x-offset-m archive="y">-0.18</x-offset-m>
      <y-offset-m archive="y">0.25</y-offset-m>
-     <z-offset-m archive="y">0.2</z-offset-m>
-     <default-field-of-view-deg>50.0</default-field-of-view-deg>
+     <z-offset-m archive="y">0.4</z-offset-m>
+     <default-field-of-view-deg>55.0</default-field-of-view-deg>
      <default-pitch-deg>-9.5</default-pitch-deg>
      <front-direction-deg>-1.5</front-direction-deg>
      <front-left-direction-deg>45</front-left-direction-deg>
@@ -59,7 +59,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
   </view>
 
   <current-view>
-   <field-of-view>70</field-of-view>
+   <field-of-view>55</field-of-view>
    <heading-offset-deg>-1.5</heading-offset-deg>
    <pitch-offset-deg>-9.5</pitch-offset-deg>
   </current-view>

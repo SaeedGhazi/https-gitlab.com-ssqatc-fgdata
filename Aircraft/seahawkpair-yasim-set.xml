@@ -36,9 +36,8 @@ Hawker Sea Hawk pair simulation config.
 
   <view n="1">
    <config>
-     <z-offset-m type="double" archive="y">-80.0</z-offset-m>
+     <z-offset-m type="double" archive="y">-55.0</z-offset-m>
    </config>
-
   </view>
 
  </sim>
@@ -52,7 +51,7 @@ Hawker Sea Hawk pair simulation config.
      <target-climb-rate-fpm type="float">6000.0</target-climb-rate-fpm>
      <target-descent-rate-fpm type="float">6000.0</target-descent-rate-fpm>
 
-     <elevator-adj-factor type="float">300.0</elevator-adj-factor>
+     <elevator-adj-factor type="float">400.0</elevator-adj-factor>
 
      <integral-contribution type="float">0.005</integral-contribution>
 

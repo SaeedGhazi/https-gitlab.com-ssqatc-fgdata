@@ -87,10 +87,11 @@
  <jet x="0.3" y="0.0" z="0.0" mass="1000" thrust="5200">
   <control-input axis="/controls/throttle[0]" control="THROTTLE"/>
  </jet>
-<!-- Fuel tanks in front of and behind the engine.
--->
- <tank x="1.4" y="0.0" z="0.0" jet="true" capacity="2600"/>
- <tank x="-1.3" y="0.0" z="0.0" jet="true" capacity="2600"/>
+<!-- Fuel tanks in front, behind and above (saddle tank - actually feeds into
+     tank two in real life) the engine. -->
+ <tank x="1.4" y="0.0" z="0.0" jet="true" capacity="2000"/>
+ <tank x="-1.3" y="0.0" z="0.0" jet="true" capacity="2000"/>
+ <tank x="0.5" y="0.0" z="0.5" jet="true" capacity="1200"/>
 
 <!-- Undercarriage -->
 <!-- nose -->

@@ -35,7 +35,7 @@ Joystick binding definitions.
  <js-named include="Input/Joysticks/Saitek/Cyborg-3d-Rumble-Force.xml"/>
 
  <!-- ThrustMaster devices -->
- <js-named include="Input/Joysticks/Thrustmaster/FCS.xml"/>
+ <js-named include="Input/Joysticks/ThrustMaster/FCS.xml"/>
  <js-named include="Input/Joysticks/ThrustMaster/Attack-Throttle.xml"/>
 
  <!-- Lew Engineering RCJOY device for various RC transmitters.  http://www.leweng.com -->

@@ -44,6 +44,13 @@ October 23 2001 John Check, fgpanels@rockfish.net
    <path>Aircraft/c172/Models/c172-dpm.xml</path>
   </model>
 
+  <view>
+   <pilot>
+    <y-offset-m>-0.03</y-offset-m>
+    <z-offset-m>0.1</z-offset-m>
+   </pilot>
+  </view>
+
  </sim>
   
  <autopilot>

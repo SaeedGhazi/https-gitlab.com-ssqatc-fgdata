@@ -18,7 +18,7 @@
  <text>
   <x>10</x>
   <y>480</y>
-  <label>Aloft</label>
+  <label>Aloft (All Elevations ASL)</label>
  </text>
 
  <!-- Header Row -->
@@ -468,7 +468,7 @@
  <text>
   <x>10</x>
   <y>240</y>
-  <label>Boundary Layer</label>
+  <label>Boundary Layer (All Elevations AGL)</label>
  </text>
 
  <!-- Header Row -->

@@ -32,7 +32,7 @@ Started 24-7-01 by Timothy Gale
       <transformation>
       <type>rotation</type>
       <property>/orientation/heading-magnetic-deg</property>
-      <min>0.0</min>
+      <min>-360.0</min>
       <max>360.0</max>
       <scale>-1.0</scale>
       </transformation>
@@ -588,4 +588,5 @@ Started 24-7-01 by Timothy Gale
   </actions>
 
 </PropertyList>
+
 

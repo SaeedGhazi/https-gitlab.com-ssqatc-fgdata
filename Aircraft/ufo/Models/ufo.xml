@@ -2,6 +2,8 @@
 
 <PropertyList>
 
+ <path>new_ufo.ac</path>
+<!--
  <path>ufo.ac</path>
 
  <animation>
@@ -12,5 +14,6 @@
   <min>0.2</min>
   <max>0.7</max>
  </animation>
+-->
 
 </PropertyList>

@@ -4,6 +4,7 @@
 
  <fx>
  
+<!--
   <engine>
    <name>rumble</name>
    <mode>looped</mode>
@@ -20,8 +21,8 @@
     <offset>1.5</offset>
    </pitch>
   </engine>
+-->
 
-<!--
   <wind>
    <name>wind</name>
    <mode>looped</mode>
@@ -46,7 +47,6 @@
     <offset>1.0</offset>
    </pitch>
   </wind>
--->
  
 </fx>
  

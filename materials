@@ -976,3 +976,26 @@ CropWoodCover {
   emissive = 0.0 0.0 0.0 1.0
 }
 
+Freeway {
+  texture = Terrain/New/asphault.rgb
+  xsize = 400
+  ysize = 400
+  light-coverage = 10000.0
+  ambient = 0.5 0.5 0.5 1.0
+  diffuse = 0.5 0.5 0.5 1.0
+  specular = 0.0 0.0 0.0 1.0
+  emissive = 0.0 0.0 0.0 1.0
+}
+
+alias Road Freeway
+
+Railroad {
+  texture = Terrain/New/gravel.rgb
+  xsize = 400
+  ysize = 400
+  light-coverage = 1000000.0
+  ambient = 0.75 0.75 0.75 1.0
+  diffuse = 0.75 0.75 0.75 1.0
+  specular = 0.0 0.0 0.0 1.0
+  emissive = 0.0 0.0 0.0 1.0
+}

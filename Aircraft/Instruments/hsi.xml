@@ -128,9 +128,9 @@ Started 24-7-01 by Timothy Gale
    <transformation>
     <type>y-shift</type>
     <property alias="../../../../../params/nav-gs-needle-deflection"/>
-    <min>-1</min>
-    <max>1</max>
-    <scale>25.6</scale>
+    <min>-3.5</min>
+    <max>3.5</max>
+    <scale>7.0</scale>
    </transformation>
    <transformation>
     <type>rotation</type>

@@ -210,9 +210,9 @@ properties' values.
    <transformation>
     <type>rotation</type>
     <property alias="../../../../../params/nav-gs-needle-deflection"/>
-    <min>-1</min>
-    <max>1</max>
-    <scale>-25.6</scale>
+    <min>-3.5</min>
+    <max>3.5</max>
+    <scale>-7</scale>
    </transformation>
    <transformation>
     <type>x-shift</type>

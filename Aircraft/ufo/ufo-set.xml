@@ -21,6 +21,10 @@ October 23 2001 John Check, fgpanels@rockfish.net
  
   <flight-model>ufo</flight-model>
 
+  <startup>
+   <splash-texture>Aircraft/ufo/new_ufo-splash.rgb</splash-texture>
+  </startup>
+
   <sound>
    <audible>true</audible>
    <path>Aircraft/ufo/ufo-sound.xml</path>
@@ -30,11 +34,11 @@ October 23 2001 John Check, fgpanels@rockfish.net
    <visibility>false</visibility>
   </panel>
 
+  <!-- New Ufo support code follows below -->
   <model>
    <path>Aircraft/ufo/Models/new_ufo.xml</path>
   </model>
 
-  <!-- New Ufo support code follows below -->
   <virtual-cockpit archive="y">true</virtual-cockpit>
 
   <chase-distance-m type="double" archive="y">-25.0</chase-distance-m>

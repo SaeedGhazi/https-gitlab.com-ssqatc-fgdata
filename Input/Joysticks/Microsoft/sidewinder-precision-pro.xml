@@ -5,26 +5,24 @@
 * Bindings for Microsoft SideWinder Force Feed joystick.
 *
 *
-* Axis 0: ailerons
-* Axis 1: elevator
-* Axis 2 (twist): rudder
-* Axis 3: throttle
-* Axes 6 and 7 (hat): view direction
+* Axis 0: 		ailerons
+* Axis 1: 		elevator
+* Axis 2 (twist):	rudder
+* Axis 3: 		throttle
+* Axes 6 and 7 (hat):	view direction
 *
-* Button 1: all brakes
-* Button 2: elevator trim up
-* Button 3: elevator trim down
-* Button 4: right brake only
-* Button 5: flap down
-* Button 6: left brake only
-* Button 7: flap up
+* Button 1:		all brakes
+* Button 2:		elevator trim up
+* Button 3:		elevator trim down
+* Button 4:		right brake only
+* Button 5:		flap down
+* Button 6:		left brake only
+* Button 7:		flap up
 ************************************************************************
 $Id$
 -->
 
 <PropertyList>
-
- <target-platform>UNIX</target-platform>
 
  <name>Microsoft SideWinder Precision Pro</name>
  <name>Microsoft SideWinder Precision 2 Joystick</name>
@@ -49,8 +47,12 @@ $Id$
   </binding>
  </axis>
 
- <axis n="2">
+ <axis>
   <desc>Rudder</desc>
+  <number>
+   <unix>2</unix>
+   <windows>3</windows>
+  </number>
   <binding>
    <command>property-scale</command>
    <property>/controls/flight/rudder</property>
@@ -58,60 +60,24 @@ $Id$
   </binding>
  </axis>
 
- <axis n="3">
+ <axis>
   <desc>Throttle</desc>
+  <number>
+   <unix>3</unix>
+   <windows>2</windows>
+  </number>
   <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[0]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[1]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[2]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[3]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[4]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[5]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[6]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[7]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
+   <command>nasal</command>
+   <script>controls.throttleAxis()</script>
   </binding>
  </axis>
 
-  <axis n="4">
+  <axis>
    <desc>View Direction</desc>
+   <number>
+    <unix>4</unix>
+    <windows>6</windows>
+   </number>
    <low>
     <repeatable>true</repeatable>
     <binding>
@@ -130,8 +96,12 @@ $Id$
    </high>
   </axis>
 
-  <axis n="5">
+  <axis>
    <desc>View Elevation</desc>
+   <number>
+    <unix>5</unix>
+    <windows>7</windows>
+   </number>
    <low>
     <repeatable>true</repeatable>
     <binding>
@@ -196,8 +166,12 @@ $Id$
   </binding>
  </button>
 
- <button n="5">
+ <button>
   <desc>Flaps down</desc>
+  <number>
+    <unix>5</unix>
+    <windows>6</windows>
+   </number>
   <repeatable>false</repeatable>
   <binding>
    <command>property-adjust</command>
@@ -206,8 +180,12 @@ $Id$
   </binding>
  </button>
 
- <button n="7">
+ <button>
   <desc>Flaps up</desc>
+  <number>
+    <unix>7</unix>
+    <windows>5</windows>
+   </number>
   <repeatable>false</repeatable>
   <binding>
    <command>property-adjust</command>
@@ -232,8 +210,12 @@ $Id$
   </mod-up>
  </button>
 
- <button n="6">
+ <button>
   <desc>Left brake</desc>
+  <number>
+    <unix>6</unix>
+    <windows>7</windows>
+   </number>
   <binding>
    <command>property-assign</command>
    <property>/controls/gear/brake-left</property>

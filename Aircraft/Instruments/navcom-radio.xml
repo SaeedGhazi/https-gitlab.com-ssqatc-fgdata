@@ -286,7 +286,8 @@ properties' values.
     <mask>decimal</mask>
     <step>-0.05</step>
     <min>0.00</min>
-    <max>0.95</max>
+    <max>1.00</max>
+    <resolution>0.05</resolution>
     <wrap>true</wrap>
    </binding>
   </action>
@@ -304,7 +305,8 @@ properties' values.
     <mask>integer</mask>
     <step>-1</step>
     <min>108</min>
-    <max>117</max>
+    <max>118</max>
+    <resolution>1</resolution>
     <wrap>true</wrap>
    </binding>
   </action>
@@ -322,7 +324,8 @@ properties' values.
     <mask>decimal</mask>
     <step>0.05</step>
     <min>0.00</min>
-    <max>0.95</max>
+    <max>1.00</max>
+    <resolution>0.05</resolution>
     <wrap>true</wrap>
    </binding>
   </action>
@@ -340,7 +343,8 @@ properties' values.
     <mask>integer</mask>
     <step>1</step>
     <min>108</min>
-    <max>117</max>
+    <max>118</max>
+    <resolution>1</resolution>
     <wrap>true</wrap>
    </binding>
   </action>
@@ -359,7 +363,8 @@ properties' values.
     <mask>decimal</mask>
     <step>-0.025</step>
     <min>0.000</min>
-    <max>0.975</max>
+    <max>1.000</max>
+    <resolution>0.025</resolution>
     <wrap>true</wrap>
    </binding>
   </action>
@@ -377,7 +382,8 @@ properties' values.
     <mask>integer</mask>
     <step>-1</step>
     <min>118</min>
-    <max>135</max>
+    <max>136</max>
+    <resolution>1</resolution>
     <wrap>true</wrap>
    </binding>
   </action>
@@ -395,7 +401,8 @@ properties' values.
     <mask>decimal</mask>
     <step>0.025</step>
     <min>0.000</min>
-    <max>0.975</max>
+    <max>1.000</max>
+    <resolution>0.025</resolution>
     <wrap>true</wrap>
    </binding>
   </action>
@@ -413,7 +420,8 @@ properties' values.
     <mask>integer</mask>
     <step>1</step>
     <min>118</min>
-    <max>135</max>
+    <max>136</max>
+    <resolution>1</resolution>
     <wrap>true</wrap>
    </binding>
   </action>

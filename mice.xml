@@ -1,22 +1,75 @@
 <?xml version="1.0"?>
+<!--
+Mouse binding definitions.
+
+NOTE: CURRENTLY, THIS FILE IS USED ONLY IF YOU CONFIGURE FLIGHTGEAR
+'with-new-mouse' AT BUILD TIME.
+
+This file is included by preferences.xml, and uses the context of its
+inclusion point; that means that you need to prepend "/input/mice"
+to all property names.
+
+Currently, Glut supports only one mouse, but the configuration format
+is designed to support additional mice in the future if possible.
+
+The current mode for each mouse is held in the
+/input/mice/mouse[n]/mode property.
+-->
+
 
 <PropertyList>
 
- <mouse>
+ <mouse n="0">
+
+  <mode-count type="int">3</mode-count>
+  <mode archive="y" type="int">0</mode>
+
+  <mode-cursors>
+   <cursor n="0">inherit</cursor>
+   <cursor n="1">crosshair</cursor>
+   <cursor n="2">left-right</cursor>
+  </mode-cursors>
+
+  <!-- left button is the regular pointer -->
   <button n="0">
    <binding>
+    <condition>
+     <equals>
+      <property>/input/mice/mouse[0]/mode</property>
+      <value>0</value>
+     </equals>
+    </condition>
     <command>pui-or-panel-mouse-click</command>
     <button>0</button>
     <is-down>true</is-down>
    </binding>
    <mod-up>
     <binding>
+     <condition>
+      <equals>
+       <property>/input/mice/mouse[0]/mode</property>
+       <value>0</value>
+      </equals>
+     </condition>
      <command>pui-or-panel-mouse-click</command>
      <button>0</button>
      <is-down>false</is-down>
     </binding>
    </mod-up>
   </button>
+
+  <!-- right button cycles modes -->
+  <button n="2">
+   <binding>
+    <command>property-adjust</command>
+    <property>/input/mice/mouse[0]/mode</property>
+    <step type="int">1</step>
+    <min>0</min>
+    <max>2</max>
+    <wrap>true</wrap>
+   </binding>
+  </button>
+
  </mouse>
 
 </PropertyList>

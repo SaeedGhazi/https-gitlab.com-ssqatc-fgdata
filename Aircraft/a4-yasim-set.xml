@@ -36,8 +36,8 @@ October 23 2001 John Check, fgpanels@rockfish.net
    <internal archive="y">true</internal>
    <config>
     <x-offset-m archive="y">0</x-offset-m>
-    <y-offset-m archive="y">0.76</y-offset-m>
-    <z-offset-m archive="y">-2.75</z-offset-m>
+    <y-offset-m archive="y">0.77</y-offset-m>
+    <z-offset-m archive="y">-2.82</z-offset-m>
    </config>
   </view>
 
@@ -63,4 +63,5 @@ October 23 2001 John Check, fgpanels@rockfish.net
  </autopilot>
 
 </PropertyList>
+
 

@@ -683,7 +683,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Toggle the pause state of the sim.</desc>
   <binding>
    <command>property-toggle</command>
-   <property>/sim/freeze</property>
+   <property>/sim/freeze/master</property>
   </binding>
  </key>
 

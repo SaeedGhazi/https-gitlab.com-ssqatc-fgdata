@@ -33,10 +33,10 @@ Node = {
 # Static constructor.  Accepts a hash as an argument and duplicates
 # its contents in the property node.  ex:
 #  Node.new({ value : 1.0, units : "ms" });
-Node.new : func {
+Node.new = func {
     result = wrapNode(_new());
     if(typeof(arg[0]) == "hash") {
-        foreach(k; keys(arg[0]) {
+        foreach(k; keys(arg[0])) {
             result.getNode(k, 1).setValue(arg[0][k]);
         }
     }

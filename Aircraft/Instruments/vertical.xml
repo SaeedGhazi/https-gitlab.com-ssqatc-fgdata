@@ -55,7 +55,7 @@ properties' values.
    <transformations>
     <transformation>
      <type>rotation</type>
-     <property>/steam/vertical-speed-fpm</property>
+     <property>/steam/vertical-speed-fps</property>
      <min>-2000.0</min>
      <max>2000.0</max>
      <scale>0.084</scale>

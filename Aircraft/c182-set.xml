@@ -19,7 +19,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
   <sound>true</sound>
 
   <panel>
-   <path>Aircraft/c172/Panels/c172-ifr-panel.xml</path>
+   <path>Aircraft/c182/Panels/c182s-panel.xml</path>
    <visibility>true</visibility>
   </panel>
   <panel_2>

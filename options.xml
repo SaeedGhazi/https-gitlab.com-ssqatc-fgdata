@@ -432,12 +432,22 @@
 
    <option>
     <name>enable-clouds</name>
-    <description>Enable cloud layers</description>
+    <description>Enable 2D (flat) cloud layers</description>
    </option>
 
    <option>
     <name>disable-clouds</name>
-    <description>Disable cloud layers</description>
+    <description>Disable 2D (flat) cloud layers</description>
+   </option>
+
+   <option>
+    <name>enable-clouds3d</name>
+    <description>Enable 3D (volumetric) cloud layers</description>
+   </option>
+
+   <option>
+    <name>disable-clouds3d</name>
+    <description>Disable 3D (volumetric) cloud layers</description>
    </option>
 
    <option>

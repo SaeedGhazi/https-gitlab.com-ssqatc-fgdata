@@ -42,6 +42,12 @@
       <label>Bump mapped clouds</label>
       <property>/sim/rendering/bump-mapping</property>
     </checkbox>
+
+    <checkbox>
+      <halign>left</halign>
+      <label>Show frame rate</label>
+      <property>/sim/hud/draw-fps</property>
+    </checkbox>
   </group>
 
   <group>

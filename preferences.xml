@@ -68,7 +68,7 @@ Started September 2000 by David Megginson, david@megginson.com
   <hud>
    <path>Huds/Default/default.xml</path>
    <visibility type="bool">false</visibility>
-   <draw-fps-when-off>false</draw-fps-when-off>
+   <draw-fps>false</draw-fps>
   </hud>
   <systems>
    <autopilot>

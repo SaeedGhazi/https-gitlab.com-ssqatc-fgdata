@@ -68,7 +68,9 @@
 </propeller>
 
 <gear x="-1" y="0" z="-1.5" compression=".4"> <!-- nose -->
-  <control-input axis="/controls/rudder" control="STEER"/>
+  <control-input axis="/controls/rudder" control="STEER"
+                 src0="-1.0" src1="1.0"
+                 dst0="-0.1" dst1="0.1"/>
 </gear>
 
 <gear x="-2.82" y="1.15" z="-1.36" compression=".3"> <!-- left main -->

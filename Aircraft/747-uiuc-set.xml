@@ -8,6 +8,8 @@ UIUC Boeing 747 init file.
 <PropertyList>
  <sim>
 
+  <description>Boeing 747 (UIUC)</description>
+
   <flight-model>larcsim</flight-model>
   <aero>uiuc</aero>
   <aircraft-dir>Aircraft-uiuc/Boeing747</aircraft-dir>

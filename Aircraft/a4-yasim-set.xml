@@ -12,6 +12,9 @@ October 23 2001 John Check, fgpanels@rockfish.net
 
 <PropertyList>
  <sim>
+
+  <description>British Aerospace A4 Hawk (YASim)</description>
+
   <virtual-cockpit archive="y">true</virtual-cockpit>
 
   <flight-model>yasim</flight-model>

@@ -13,6 +13,8 @@ October 23 2001 John Check, fgpanels@rockfish.net
 <PropertyList>
 
  <sim>
+
+  <description>Cessna 172p</description>
  
   <flight-model>jsb</flight-model>
   <aero>c172</aero>

@@ -12,6 +12,9 @@ October 23 2001 John Check, fgpanels@rockfish.net
 
 <PropertyList>
  <sim>
+
+  <description>Cessna 172 (YASim)</description>
+
   <flight-model>yasim</flight-model>
   <aero>c172</aero>
   <fuel-fraction>1.0</fuel-fraction>

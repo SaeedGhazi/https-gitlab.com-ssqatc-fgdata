@@ -9,6 +9,8 @@ UIUC Cessna 172 init file.
 
  <sim>
 
+  <description>Cessna 172 (UIUC)</description>
+
   <flight-model>larcsim</flight-model>
 
   <aero>uiuc</aero>

@@ -13,6 +13,8 @@ October 23 2001 John Check, fgpanels@rockfish.net
 <PropertyList>
 
  <sim>
+
+  <description>North American X-15</description>
  
   <startup>
    <speed-set>knots</speed-set>

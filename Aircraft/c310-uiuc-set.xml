@@ -8,6 +8,9 @@ UIUC Cessna 310 init file.
 <PropertyList>
 
  <sim>
+
+  <description>Cessna 310 (UIUC)</description>
+
   <flight-model>larcsim</flight-model>
   <aero>uiuc</aero>
   <aircraft-dir>Aircraft-uiuc/Cessna310</aircraft-dir>

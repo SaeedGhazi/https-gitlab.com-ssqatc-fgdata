@@ -13,6 +13,8 @@ October 23 2001 John Check, fgpanels@rockfish.net
 <PropertyList>
 
  <sim>
+
+  <description>UFO from the 'White Project' of the UNESCO</description>
  
   <flight-model>ufo</flight-model>
 

@@ -12,6 +12,9 @@ October 23 2001 John Check, fgpanels@rockfish.net
 
 <PropertyList>
  <sim>
+
+  <description>British Aerospace Harrier (YASim)</description>
+
   <flight-model>yasim</flight-model>
   <aero>harrier</aero>
   <fuel-fraction>1.0</fuel-fraction>

@@ -8,6 +8,8 @@ UIUC Marchetti S.211 init file.
 <PropertyList>
 
  <sim>
+
+  <description>Siai Marchetti S.211 (UIUC)</description>
  
   <flight-model>larcsim</flight-model>
   <aero>uiuc</aero>

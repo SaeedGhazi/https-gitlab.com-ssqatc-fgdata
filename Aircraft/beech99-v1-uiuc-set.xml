@@ -18,6 +18,8 @@ May 25 2002 Michael Selig, m-selig@uiuc.edu
 
  <sim>
 
+  <description>Beech 99 (UIUC)</description>
+
   <flight-model>larcsim</flight-model>
   <aero>uiuc</aero>
   <aircraft-dir>Aircraft/UIUC/beech99-v1</aircraft-dir>

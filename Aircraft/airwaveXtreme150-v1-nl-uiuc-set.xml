@@ -18,6 +18,8 @@ May 25 2002 Michael Selig, m-selig@uiuc.edu
 
  <sim>
 
+  <description>Airwave Xtreme 150 (UIUC)</description>
+
   <flight-model>larcsim</flight-model>
   <aero>uiuc</aero>
   <aircraft-dir>Aircraft/UIUC/airwaveXtreme150-v1-nl</aircraft-dir>

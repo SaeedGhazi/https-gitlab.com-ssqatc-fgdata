@@ -13,6 +13,8 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
 <PropertyList>
 
  <sim>
+
+  <description>Cessna 310U3A</description>
   
   <flight-model>jsb</flight-model>
   <aero>c310u3a</aero>

@@ -22,6 +22,8 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
  </engines>
 
  <sim>
+
+  <description>Cessna 310U3A w. 3D cockpit</description>
   
   <virtual-cockpit archive="y">true</virtual-cockpit>
   <allow-toggle-cockpit archive="y">true</allow-toggle-cockpit>

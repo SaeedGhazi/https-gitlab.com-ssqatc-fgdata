@@ -13,6 +13,8 @@ October 23 2001 John Check, fgpanels@rockfish.net
 <PropertyList>
 
  <sim>
+
+  <description>Cessna 172</description>
  
   <!-- We want to be able to specify the flight model independently -->
   <!-- <flight-model>jsb</flight-model> -->

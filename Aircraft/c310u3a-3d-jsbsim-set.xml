@@ -47,11 +47,15 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
    <internal archive="y">true</internal>
    <config>
     <x-offset-m archive="y" type="double">-0.28</x-offset-m>
-    <y-offset-m archive="y" type="double">0.62</y-offset-m>
+    <y-offset-m archive="y" type="double">0.60</y-offset-m>
     <z-offset-m archive="y" type="double">-0.10</z-offset-m>
-    <pitch-offset-deg archive="y" type="double">-7.0</pitch-offset-deg>
+    <default-pitch-deg>-13</default-pitch-deg>
    </config>
   </view>
+
+  <current-view>
+   <pitch-offset-deg>-13</pitch-offset-deg>
+  </current-view>
 
   <instrument-options>
    <dg>

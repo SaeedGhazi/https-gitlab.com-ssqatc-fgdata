@@ -275,6 +275,14 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <value type="bool">true</value>
   </binding>
  </key>
+ 
+  <key n="39">
+  <name>'</name>
+  <desc>Display a dialog relevant to the tuned in ATC service (if any)</desc>
+  <binding>
+    <command>ATC-dialog</command>
+  </binding>
+ </key>
 
  <key n="43">
   <name>+</name>

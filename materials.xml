@@ -79,7 +79,7 @@ Shared parameters for various materials.
   <!-- Maximum distance from which a tree is visible -->
   <tree-range-m>2000</tree-range-m>
   <!-- Average number of square meters per tree with one type -->
-  <tree-coverage-m2>20000</tree-coverage-m2>
+  <tree-coverage-m2>10000</tree-coverage-m2>
  </forest>
 </params>
 

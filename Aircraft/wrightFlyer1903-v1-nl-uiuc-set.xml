@@ -2,9 +2,8 @@
 <!--
 ************************************************************************
 
-1903 Wright Flyer simulation config.  This file ties together all the
-components used by FGFS to represent the 1903 Wright Flyer. Components
-include the flight data model, instrument panel, and visual model.
+1903 Wright Flyer simulation config used to tie together the flight
+data model, instrument panel, and visual model.
 
 Flight model details: 
 Aircraft/UIUC/wrightFlyer1903-v1-nl/README.wrightFlyer1903.html
@@ -13,7 +12,7 @@ Visual model details:
 Aircraft/wrightFlyer1903/Models/
 (courtesy of Jim Wilson, jimw@kelcomaine.com)
 
-Last update: Nov 9, 2002 Michael Selig, m-selig@uiuc.edu
+Last update: Dec 21, 2002 Michael Selig, m-selig@uiuc.edu
 ************************************************************************
 -->
 
@@ -25,6 +24,7 @@ Last update: Nov 9, 2002 Michael Selig, m-selig@uiuc.edu
 
   <flight-model>larcsim</flight-model>
   <aero>uiuc</aero>
+  <uiuc-type>uiuc-prop</uiuc-type>
   <aircraft-dir>Aircraft/UIUC/wrightFlyer1903-v1-nl</aircraft-dir>
 
   <auto-coordination>true</auto-coordination>

@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+
+<!--
+************************************************************************
+Global defaults for FlightGear property values.
+
+Started September 2000 by David Megginson, david@megginson.com
+************************************************************************
+-->
+
+<PropertyList>
+
+ <!-- General simulation preferences -->
+
+ <sim>
+  <flight-model>1</flight-model>
+  <aircraft>c172</aircraft>
+  <panel>
+   <path>Panels/Default/default.xml</path>
+   <visibility>true</visibility>
+  </panel>
+  <hud>
+   <visibility>false</visibility>
+  </hud>
+ </sim>
+
+
+ <!-- Position -->
+
+ <position>
+  <airport-id>KSFO</airport-id>
+  <!-- <longitude>-110.6642444</longitude> -->
+  <!-- <latitude>33.3528917</latitude> -->
+  <altitude>-9999</altitude>
+ </position>
+
+
+ <!-- Velocities -->
+
+ <velocities>
+  <speed-north>0.0</speed-north>
+  <speed-east>0.0</speed-east>
+  <speed-down>0.0</speed-down>
+ </velocities>
+
+
+ <!-- Orientation -->
+
+ <orientation>
+  <heading>270</heading>
+  <roll>0.0</roll>
+  <pitch>0.424</pitch>
+ </orientation>
+
+
+ <!-- Controls -->
+
+ <controls>
+  <mixture>1.0</mixture>
+ </controls>
+
+
+ <!-- User input devices -->
+
+ <input>
+
+  <js0>
+   <axis0>
+    <control>/controls/aileron</control>
+    <dead-band>0.1</dead-band>
+   </axis0>
+   <axis1>
+    <control>/controls/elevator</control>
+    <dead-band>0.1</dead-band>
+    <factor>-1.0</factor>
+   </axis1>
+   <axis2>
+    <control>/controls/rudder</control>
+    <dead-band>0.1</dead-band>
+   </axis2>
+   <axis3>
+    <control>/controls/throttle</control>
+    <dead-band>0.0</dead-band>
+    <factor>-0.5</factor>
+    <offset>-1.0</offset>
+   </axis3>
+   <button0>
+    <action>switch</action>
+    <control>/controls/brakes/all</control>
+    <repeatable>0.0</repeatable>
+    <step>1.0</step>
+   </button0>
+   <button1>
+    <action>switch</action>
+    <control>/controls/brakes/left</control>
+    <repeatable>0.0</repeatable>
+    <step>1.0</step>
+   </button1>
+   <button2>
+    <action>switch</action>
+    <control>/controls/brakes/right</control>
+    <repeatable>0.0</repeatable>
+    <step>1.0</step>
+   </button2>
+   <button3>
+    <action>adjust</action>
+    <control>/controls/elevator-trim</control>
+    <repeatable>true</repeatable>
+    <step>0.001</step>
+   </button3>
+   <button4>
+    <action>adjust</action>
+    <control>/controls/elevator-trim</control>
+    <repeatable>true</repeatable>
+    <step>-0.001</step>
+   </button4>
+   <button5>
+    <action>adjust</action>
+    <control>/controls/flaps</control>
+    <repeatable>false</repeatable>
+    <step>-0.34</step>
+   </button5>
+   <button6>
+    <action>adjust</action>
+    <control>/controls/flaps</control>
+    <repeatable>false</repeatable>
+    <step>0.34</step>
+   </button6>
+  </js0>
+
+ </input>
+
+
+ <!-- Radio settings -->
+
+ <radios>
+
+  <nav1>
+   <frequencies>
+    <selected>117.3</selected>
+    <standby>110.3</standby>
+   </frequencies>
+   <radials>
+    <selected>119.0</selected>
+   </radials>
+  </nav1>
+
+  <nav2>
+   <frequencies>
+    <selected>111.80</selected>
+    <standby>115.70</standby>
+   </frequencies>
+   <radials>
+    <selected>029.0</selected>
+   </radials>
+  </nav2>
+
+  <adf>
+   <frequencies>
+    <selected>266.0</selected>
+    <standby>300.0</standby>
+   </frequencies>
+   <rotation>90</rotation>
+  </adf>
+
+ </radios>
+
+</PropertyList>
+
+<!-- end of preferences.xml -->

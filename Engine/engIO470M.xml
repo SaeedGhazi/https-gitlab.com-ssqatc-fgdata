@@ -10,9 +10,9 @@
   MAXTHROTTLE:   maximum throttle setting (as before)
   MINTHROTTLE:   minimum throttle setting (as before)
 -->
-<!---
+<!--
 From: http://www.google.com/search?q=cache:FoqW4cX9V6UC:www.skywagonranch.com/TDS/TCDS/E-273.DOC+Continental+O-470-M+spec&hl=en
---->
+-->
 
 <FG_PISTON NAME="IO470D">
   MINMP             6.5

@@ -48,7 +48,6 @@ BAC TSR2 simulation config.
    <engine n="0">
     <magnetos>3</magnetos>
    </engine>
-  </engines>
    <engine n="1">
     <magnetos>3</magnetos>
    </engine>

@@ -61,7 +61,7 @@
            x="-1" y="0" z="0" mass="400" moment="8">
   <actionpt x="0" y="0" z="0"/>
   <control-input axis="/controls/engines/engine[0]/throttle" control="THROTTLE"/>
-  <control-input axis="/controls/engines/engine[0]/starter control="STARTER"/>
+  <control-input axis="/controls/engines/engine[0]/starter" control="STARTER"/>
   <control-input axis="/controls/engines/engine[0]/magnetos" control="MAGNETOS"/>
   <control-input axis="/controls/engines/engine[0]/mixture" control="MIXTURE"/>
 </propeller>

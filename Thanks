@@ -27,13 +27,24 @@ Michael Basler <pmb@knUUt.de>
   Author of the Getting Started guide.
 
 
-Jon S. Berndt <jsb@hal-pc.org>
-  Working on a complete C++ rewrite/reimplimentation of the core FDM.
-  Initially he is using X15 data to test his code, but once things are
-  all in place we should be able to simulator arbitrary aircraft.
-  Maintains a page dealing with Flight Dynamics at:
-  http://www.jsbsim.org
-  Special attention to X15 is paid in seperate pages.
+Paul Beardsley <Beardspa@hotmail.com>
+  The 1903 Wright Flyer was inspired by a model contributed by Paul
+  Beardsley.  Very little of the original model remains, but without
+  Paul's excellent work we might not have our own 1903 Flyer. Model
+  was reworked and retextured by Jim Wilson.
+
+
+Jon S. Berndt <jon@jsbsim.org>
+  Chief architect of JSBSim, the default flight dynamics model (FDM)
+  for FlightGear. Jon's professional work has involved simulation and
+  prototyping for vehicles ranging from the F-16 to his current work
+  on the space shuttle and future manned launch vehicles. Since 1998
+  Jon has been working on creating JSBSim together with co-author Tony
+  Peden. JSBSim is an object-oriented, multi-platform aerospace
+  vehicle simulator that can be integrated with broader flight
+  simulation programs (since it provides no visual model), or run in a
+  standalone mode for batch runs. For more information, see the JSBSim
+  home page at:  http://www.jsbsim.org
 
 
 Paul Bleisch <pbleisch@acm.org>
@@ -116,6 +127,7 @@ Francine Evans <evans@cs.sunysb.edu>
   Wrote the @#$@#$@% GPL'd tri-striper we use and "love". :-)
   http://www.cs.sunysb.edu/~evans/stripe.html
 
+
 Oscar Everitt <bigoc@premier.net>
   Created single engine piston engine sounds as part of an F4U package
   for FS98.  They are pretty cool and Oscar was happy to contribute
@@ -160,6 +172,11 @@ Michael I. Gold <gold@puck.asd.sgi.com>
 
 Habibie <habibie@MailandNews.com>
   RedHat package building changes for SimGear.
+
+
+Dave Haskell <dave@haskell.demon.co.uk>
+  Original exterior textures for the Cessna 310 U-3A model. Only a few
+  minor modifications were made.
 
 
 Mike Hill <mikehill@flightsim.com>
@@ -209,8 +226,20 @@ Bob Kuehne <rpk@who.net>
   Redid the Makefile system so it is simpler and more robust.
 
 
+Chris Lampard <c.lampard@ntlworld.com>
+  Original exterior geometry for the Cessna 310 U-3A model. Several
+  modifications made but most of the exterior is as is converted from
+  Chris's original.  The interior cockpit was added by Jim Wilson.
+
+
 David Luff <david.luff@nottingham.ac.uk>
   Contributed heavily to the IO360 piston engine model.
+
+
+Lewis Magruder <blackhawk96@hotmail.com>
+  Original A-4 Blue Angels exterior model and textures.  Lewis's work
+  is pretty much as converted from the original.  The interior cockpit
+  was added by Jim Wilson.
 
 
 Christian Mayer <flightgear@christianmayer.de>
@@ -234,7 +263,6 @@ David Megginson <david@megginson.com>
   initial take of sound-effects module
   Random ground cover objects
   Vacuum and pitot systems.
-  Reorganization of the GUI to make it XML configurable.
 
 
 Eric Mitchell <mitchell@mars.ark.com>
@@ -293,6 +321,8 @@ Tony Peden <apeden@earthlink.net>
   Contributions on the flight model front, including a LaRCsim based 
   Cessna 172.  JSBsim: the initial conditions code, a more complete 
   standard atmosphere model, and other bugfixes/additions. 
+  His Flight Dynamics page can be found at: 
+  http://www.nwlink.com/~apeden
 
 
 Robin Peel <robin@cpwd.com>
@@ -309,11 +339,6 @@ Friedemann Reinhard <mpt218@faupt212.physik.uni-erlangen.de>
   Contributed beginnings of a textured instrument panel.
 
 
-Frederic Bouvier <frbouvi@wanadoo.fr>
-  Added French language support
-  Keeps FlightGear MSVC compatible.
-
-
 Petter Reinholdtsen <pere@games.no>
   Incorporated the Gnu automake/autoconf system (with libtool).
   This should streamline and standardize the build process for all
@@ -324,15 +349,12 @@ Petter Reinholdtsen <pere@games.no>
 William Riley <riley@technologist.com>
   Contributed code to add "brakes". 
   Patch to support a first joystick with more than two axes.
-  His world scenery based on vmap0 data is located at:
-  http://www.randdtechnologies.com/fgfs/newScenery/
+  World scenery based on vmap0 data.
 
 
 Andy Ross <andy@plausible.org>
   Contributed a new configurable FDM, "YASim", based on geometry
   information rather than aerodynamic coefficients.
-  Added support for placing 2D panel objects in 3D space.
-  Modified the HUD code to make it more accurate and added 3D support.
 
 
 Paul Schlyter <pausch@saaf.se>  
@@ -372,11 +394,6 @@ Michael Smith <msmith99@flash.net>
 
 Martin Spott <Martin.Spott@uni-duisburg.de>
   Contributed to the installation / user guide.
-
-
-Martin Dressler <dr@musicabona.cz>
-  Created some outstanding panel instrumentation textures
-  for use in full-screen mode.
 
 
 U.S. Geological Survey
@@ -459,13 +476,6 @@ Darrell Walisser <dwaliss1@purdue.edu>
   Provides MacOS-specific info in the docs.
 
 
-Davud Culp <davidculp2@attbi.com>
-  Changed the layout of the conbtrolls section and added a great number
-  of extra controls which will prove to be usefull no and for the future.
-  Contributed a number of aircraft configuration files, including a T-38 and
-  Boeing 737.
-
-
 Ed Williams <Ed_Williams@compuserve.com>
   Contributed magnetic variation code (impliments Nima WMM 2000)
   We've also borrowed from Ed's wonderful aviation formulary at various
@@ -478,8 +488,6 @@ Jim Wilson <jimw@kelcomaine.com>
   and modular.  Contributed many small fixes and bug reports.
   Contributed the the pui property browser.
   Contributed to the autopilot.
-  Created several excellent 3D aircraft models, including the p-51 and 
-  Boeing 747.
 
 
 Jean-Claude Wippler <jcw@equi4.com>
@@ -493,20 +501,6 @@ Jean-Claude Wippler <jcw@equi4.com>
 John Wojnaroski <castle@mminternet.com>
   Open Glass Cockpit project
   3d clouds
-
-
-Space Imaging, Inc
-Space Imaging has allowed us to use the images in their archive for 
-commercial and non-commercial use, provided the original image can't be
-extracted  from the textures. 
-Some (if not all) of the best textures in use by FlightGear wouldn't be
-possible without the satellite images provided by them.
-
-
-Airservices Australia
-Duncan McCreanor and Diarmuid Tyson created a multiplayer engine for
-FlightGear when putting together a demonstration to show the possibilities
-of using Flightgear as the basis for an Air Traffic Control visual simulator.
 
 
 WoodSoup Project  http://www.woodsoup.org
@@ -538,4 +532,3 @@ Oliver Delise  <delise@mail.isis.de>
 
 
 Updated 2001-12-11 by David Megginson, david@megginson.com
-Updated 2003-04-17 by Erik Hofman, erik@ehofman.com

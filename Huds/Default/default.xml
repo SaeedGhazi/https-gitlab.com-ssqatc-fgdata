@@ -43,6 +43,10 @@ in a separate file.
    <path>Huds/Instruments/Default/gload.xml</path>
   </Gload>
 
+  <runwayhud>
+   <path>Huds/Instruments/Default/runwayinstr.xml</path>
+  </runwayhud>
+
  </instruments>
 
 </PropertyList>

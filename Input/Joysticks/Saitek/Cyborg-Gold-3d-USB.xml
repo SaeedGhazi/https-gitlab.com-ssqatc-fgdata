@@ -18,8 +18,8 @@ button 0 (trigger):	brakes		parking brake	speed brake	thrust revers.
 button 1 (left):	flaps up	gear up		previous view	*
 button 2 (middle):	reset view dir	tail wheel lock	cockpit view	reset all trim
 button 3 (right):	flaps down	gear down	next view	*
-button 4 (F1):		brakes left	*		*		*
-button 5 (F2):		brakes right	*		*		*
+button 4 (F1):		brakes left	*		zoom out	*
+button 5 (F2):		brakes right	*		zoom in		*
 button 6 (F3):		//////////////////////// modifier 0 /////////////////////////
 button 7 (F4):		//////////////////////// modifier 1 /////////////////////////
 button 8 (>>):		*		*		*		*
@@ -70,8 +70,8 @@ ____________________________________ References ________________________________
 
 
 
-Joysticks:      $FG_ROOT/README.Joystick.html
-Properties:     see property browser (fgfs menu: File/Browse internal properties)
+Joysticks:      $FG_ROOT/Docs/README.Joystick.html
+Properties:     see property browser (fgfs menu: "File"->"Browse internal properties")
 
 Nasal:          http://www.plausible.org/nasal/
 Nasal examples: $FG_ROOT/Nasal/
@@ -131,8 +131,8 @@ ________________________________________________________________________________
 			<script>
 				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
 				if (mod == nil or mod == 0) {
-					interpolate("/controls/gear/brake-left", 1, 0.05);
-					interpolate("/controls/gear/brake-right", 1, 0.05);
+					interpolate("/controls/gear/brake-left", 1, 0.075);
+					interpolate("/controls/gear/brake-right", 1, 0.075);
 				} elsif (mod == 1) {
 					setprop("/controls/gear/brake-left", 1);
 					setprop("/controls/gear/brake-right", 1);
@@ -149,8 +149,8 @@ ________________________________________________________________________________
 				<script>
 					mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
 					if (mod == nil or mod == 0) {
-						interpolate("/controls/gear/brake-left", 0, 0.05);
-						interpolate("/controls/gear/brake-right", 0, 0.05);
+						interpolate("/controls/gear/brake-left", 0, 0.075);
+						interpolate("/controls/gear/brake-right", 0, 0.075);
 					} elsif (mod == 1) {
 						brake = !getprop("/controls/gear/brake-parking");
 						setprop("/controls/gear/brake-parking", brake);
@@ -255,11 +255,11 @@ ________________________________________________________________________________
 			<script>
 				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
 				if (mod == nil or mod == 0) {
-					interpolate("/controls/gear/brake-left", 1, 0.05);
+					interpolate("/controls/gear/brake-left", 1, 0.075);
 				} elsif (mod == 1) {
 					#
 				} elsif (mod == 2) {
-					#
+					view.increase();
 				} elsif (mod == 3) {
 					#
 				}
@@ -271,7 +271,7 @@ ________________________________________________________________________________
 				<script>
 					mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
 					if (mod == nil or mod == 0) {
-						interpolate("/controls/gear/brake-left", 0, 0.05);
+						interpolate("/controls/gear/brake-left", 0, 0.075);
 					} elsif (mod == 1) {
 						#
 					} elsif (mod == 2) {
@@ -292,11 +292,11 @@ ________________________________________________________________________________
 			<script>
 				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
 				if (mod == nil or mod == 0) {
-					interpolate("/controls/gear/brake-right", 1, 0.05);
+					interpolate("/controls/gear/brake-right", 1, 0.075);
 				} elsif (mod == 1) {
 					#
 				} elsif (mod == 2) {
-					#
+					view.decrease();
 				} elsif (mod == 3) {
 					#
 				}
@@ -308,7 +308,7 @@ ________________________________________________________________________________
 				<script>
 					mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
 					if (mod == nil or mod == 0) {
-						interpolate("/controls/gear/brake-right", 0, 0.05);
+						interpolate("/controls/gear/brake-right", 0, 0.075);
 					} elsif (mod == 1) {
 						#
 					} elsif (mod == 2) {

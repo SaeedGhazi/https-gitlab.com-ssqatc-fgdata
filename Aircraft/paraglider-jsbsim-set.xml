@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+paraglider JSBSim config file
+David Culp,  davidculp2@comcast.net
+************************************************************************
+-->
+
+<PropertyList>
+
+ <sim>
+
+  <description>paraglider</description>
+ 
+  <flight-model>jsb</flight-model>
+  <aero>paraglider</aero>
+
+  <presets>
+   <uBody-fps>10</uBody-fps>
+   <wBody-fps>8</wBody-fps>
+   <trim type="bool">false</trim>
+   <onground type="bool">false</onground>
+  </presets>
+
+  <position>
+    <altitude-agl-ft>5000</altitude-agl-ft>
+  </position>
+  
+  <sound>
+   <audible>true</audible>
+   <path>Aircraft/sgs126/glider-sound.xml</path>
+  </sound>
+
+  <panel>
+   <path>Aircraft/sgs126/Panels/glider-panel.xml</path>
+   <visibility archive="y">false</visibility>
+   <x-offset>256</x-offset>
+  </panel>
+
+  <systems>
+   <electrical>
+    <path>Aircraft/sgs126/null-electrical.xml</path>
+    <servicable archive="y">false</servicable>
+   </electrical>
+  </systems>
+
+  <hud>
+   <visibility type="bool">false</visibility>
+  </hud>
+
+  <model>
+   <path>Aircraft/paraglider/Models/paraglider_model.xml</path>
+  </model>
+
+ </sim>
+
+
+</PropertyList>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<PropertyList include="paraglider-jsbsim-set.xml">
+ <sim>
+  <description>Alias for paraglider-jsbsim.</description>
+ </sim>
+</PropertyList>

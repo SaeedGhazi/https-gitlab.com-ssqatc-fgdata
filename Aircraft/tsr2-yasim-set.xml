@@ -36,7 +36,7 @@ BAC TSR2 simulation config.
 
   <view n="1">
    <config>
-     <z-offset-m type="double" archive="y">-70.0</z-offset-m>
+     <z-offset-m type="double" archive="y">-50.0</z-offset-m>
    </config>
 
   </view>
@@ -52,20 +52,20 @@ BAC TSR2 simulation config.
    <config>
 
      <min-climb-speed-kt type="float">150.0</min-climb-speed-kt>
-     <best-climb-speed-kt type="float">500.0</best-climb-speed-kt>
+     <best-climb-speed-kt type="float">650.0</best-climb-speed-kt>
 
-     <target-climb-rate-fpm type="float">20000.0</target-climb-rate-fpm>
-     <target-descent-rate-fpm type="float">12000.0</target-descent-rate-fpm>
+     <target-climb-rate-fpm type="float">12000.0</target-climb-rate-fpm>
+     <target-descent-rate-fpm type="float">8000.0</target-descent-rate-fpm>
 
-     <elevator-adj-factor type="float">40.0</elevator-adj-factor>
+     <elevator-adj-factor type="float">400.0</elevator-adj-factor>
 
      <integral-contribution type="float">0.005</integral-contribution>
 
-     <max-aileron type="float">5.0</max-aileron>
+     <max-aileron type="float">0.3</max-aileron>
      <max-roll-deg type="float">60.0</max-roll-deg>
 
      <roll-out-deg type="float">8.0</roll-out-deg>
-     <roll-out-smooth-deg type="float">25.0</roll-out-smooth-deg>
+     <roll-out-smooth-deg type="float">8.0</roll-out-smooth-deg>
 
      <zero-pitch-throttle type="float">0.5</zero-pitch-throttle>
      <zero-pitch-trim-full-throttle type="float">0.001</zero-pitch-trim-full-throttle>

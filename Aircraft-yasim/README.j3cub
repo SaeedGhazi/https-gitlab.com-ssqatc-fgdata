@@ -1,0 +1,40 @@
+PIPER J3 CUB PERFORMANCE DATA
+=============================
+
+These are the only numbers I could find.  They are for a J3 Cub with
+an 85HP engine rather than 65 hp, so some adjustments may be
+necessary.  The source is
+
+  http://www.evergreenfs.com/planedata.htm
+
+
+Speeds
+------
+  Best rate of climb (Vy):   65 mph (57 kt)
+  Best angle of climb (Vx):  55 mph (48 kt)
+  Cruise:                    70 mph (61 kt)
+  Never-exceed (Vne):       122 mph (106 kt)
+  Best Glide (Vglide):       60 mph (52 kt)
+  Stall (Vs):                38 mph (33 kt)
+  Maneuvering (Va):          70 mph (61 kt)
+  Approach:               50-60 mph (44-52 kt)
+
+Power
+-----
+  Take off:                  full
+  Climb:                     50 rpm below full
+  Cruise:                    2300 rpm
+  Approach:                  1200 rpm
+  Practice stalls:           1200 rpm
+
+Distances
+---------
+  Take-off:                  450-800 ft
+  Landing:                   200-800 ft
+
+Fuel
+----
+  Total fuel:                12 gal US
+  Usable fuel:               12 gal US
+  Grade:                     80/87
+  GPH:                       5 gal US/hr

@@ -36,13 +36,13 @@ October 23 2001 John Check, fgpanels@rockfish.net
    <internal archive="y">true</internal>
    <config>
      <x-offset-m archive="y">-0.25</x-offset-m>
-     <y-offset-m archive="y">0.25</y-offset-m>
+     <y-offset-m archive="y">0.20</y-offset-m>
      <z-offset-m archive="y">0.66</z-offset-m>
    </config>
   </view>
 
   <current-view>
-   <pitch-offset-deg>-20</pitch-offset-deg>
+   <pitch-offset-deg>-13</pitch-offset-deg>
   </current-view>
 
  </sim>

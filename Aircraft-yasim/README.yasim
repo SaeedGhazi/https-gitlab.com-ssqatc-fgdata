@@ -170,6 +170,18 @@ gear:     Defines a landing gear.  Accepts <control> subtags to map
           retract-time: The time, in seconds, that the gear takes to
                         fully retract or extend.  Defaults to zero,
                         which indicates a non-retractable gear.
+          spring:       A dimensionless multiplier for the automatically
+                        generated spring constant.  Increase to make
+                        the gear stiffer, decrease to make it
+                        squishier.
+          damp:         A dimensionless multipler for the automatically
+                        generated damping coefficient.  Decrease to
+                        make the gear "bouncier", increase to make it
+                        "slower".  Beware of increasing this too far:
+                        very high damping forces can result and make
+                        the numerics unstable.  If you can't make the
+                        gear stop bouncing with this number, try
+                        increasing the compression length instead.
 
 tank:     A fuel tank.  Tanks in the aircraft are identified
           numerically (starting from zero), in the order they are

@@ -80,7 +80,9 @@
   <control-input axis="/controls/throttle[1]" control="THROTTLE"/>
 </jet>
  
-<gear x="-5.42"  y="0.00" z="-5.42" compression="2"> <!-- nose -->
+<!-- nose -->
+<gear x="-5.42"  y="0.00" z="-5.42"
+      compression="0.75" spring="0.7" damp="4">
   <control-input axis="/controls/rudder" control="STEER" square="true"/>
   <control-input axis="/controls/gear-down" control="EXTEND"/>
   <control-output control="EXTEND" prop="/gear/gear[0]/position-norm"/>

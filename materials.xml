@@ -88,6 +88,8 @@ Shared parameters for various materials.
 <material>
  <name>grass_rwy</name>
  <texture>Runway/grass_rwy.rgb</texture>
+ <xsize>75</xsize>
+ <ysize>75</ysize>
  <ambient>
   <r>0.42</r>
   <g>0.44</g>
@@ -2638,10 +2640,9 @@ Shared parameters for various materials.
 
 <material>
  <name>Urban</name>
- <name>BuiltUpCover</name>
  <texture>Terrain/resgrid.rgb</texture>
- <xsize>1024</xsize>
- <ysize>1024</ysize>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
  <light-coverage>100000.0</light-coverage>
  <ambient>
   <r>0.45</r>
@@ -2673,6 +2674,38 @@ Shared parameters for various materials.
   <range-m>10000</range-m>
   <billboard>false</billboard>
  </object>
+</material>
+
+<material>
+  <name>BuiltUpCover</name>
+  <texture>Terrain/builtup.rgb</texture>
+  <xsize>2000</xsize>
+  <ysize>2000</ysize>
+  <light-coverage>100000.0</light-coverage>
+  <ambient>
+   <r>0.45</r>
+   <g>0.46</g>
+   <b>0.33</b>
+   <a>1.0</a>
+  </ambient>
+  <diffuse>
+   <r>0.45</r>
+   <g>0.46</g>
+   <b>0.33</b>
+   <a>1.0</a>
+  </diffuse>
+  <specular>
+   <r>0.0</r>
+   <g>0.0</g>
+   <b>0.0</b>
+   <a>1.0</a>
+  </specular>
+  <emissive>
+   <r>0.0</r>
+   <g>0.0</g>
+   <b>0.0</b>
+   <a>1.0</a>
+  </emissive>
 </material>
 
 <material>
@@ -2740,8 +2773,38 @@ Shared parameters for various materials.
 
 <material>
  <name>Glacier</name>
- <name>SnowCover</name>
  <texture>Terrain/glacier.rgb</texture>
+ <xsize>800</xsize>
+ <ysize>800</ysize>
+ <ambient>
+  <r>0.78</r>
+  <g>0.86</g>
+  <b>0.90</b>
+  <a>1.0</a>
+ </ambient>
+ <diffuse>
+  <r>0.78</r>
+  <g>0.86</g>
+  <b>0.90</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
+</material>
+
+<material>
+ <name>SnowCover</name>
+ <texture>Terrain/snow.rgb</texture>
  <xsize>800</xsize>
  <ysize>800</ysize>
  <ambient>
@@ -2942,8 +3005,8 @@ Shared parameters for various materials.
  <name>MixedTundraCover</name>
  <name>SavannaCover</name>
  <texture>Terrain/grass.rgb</texture>
- <xsize>200</xsize>
- <ysize>200</ysize>
+ <xsize>1000</xsize>
+ <ysize>1000</ysize>
  <light-coverage>4000000.0</light-coverage>
  <ambient>
   <r>0.43</r>

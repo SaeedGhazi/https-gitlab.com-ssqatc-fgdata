@@ -20,9 +20,24 @@
    <path>Aircraft/a4/a4-sound.xml</path>
   </sound>
 
+  <virtual-cockpit archive="y">true</virtual-cockpit>
+
+  <panel>
+    <visibility>false</visibility>
+  </panel>
+
   <model>
    <path>Aircraft/f104/Models/f104.ac</path>
   </model>
+
+  <view n="0">
+   <internal archive="y">true</internal>
+   <config>
+    <x-offset-m archive="y">0</x-offset-m>
+    <y-offset-m archive="y">1.175</y-offset-m>
+    <z-offset-m archive="y">-5.5</z-offset-m>
+   </config>
+  </view>
 
  </sim>
 

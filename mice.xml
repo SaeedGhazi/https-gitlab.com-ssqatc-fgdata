@@ -65,6 +65,30 @@ The current mode for each mouse is held in the
     </binding>
    </button>
 
+   <!-- x-axis moves the ailerons -->
+   <x-axis>
+    <binding>
+     <command>property-adjust</command>
+     <property>/controls/aileron</property>
+     <factor>2.0</factor>
+     <min type="double">-1.0</min>
+     <max type="double">1.0</max>
+     <wrap type="bool">false</wrap>
+    </binding>
+   </x-axis>
+
+   <!-- y-axis moves the elevator -->
+   <y-axis>
+    <binding>
+     <command>property-adjust</command>
+     <property>/controls/elevator</property>
+     <factor>-2.0</factor>
+     <min type="double">-1.0</min>
+     <max type="double">1.0</max>
+     <wrap type="bool">false</wrap>
+    </binding>
+   </y-axis>
+
   </mode>
 
   <!-- Mode 2: view mode -->

@@ -961,6 +961,24 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <property>/controls/engines/engine[1]/magnetos</property>
    <step type="int">1</step>
   </binding>
+  <binding>
+   <desc>third engine</desc>
+   <condition>
+    <property>/sim/input/selected/engine[2]</property>
+   </condition>
+   <command>property-adjust</command>
+   <property>/controls/engines/engine[2]/magnetos</property>
+   <step type="int">1</step>
+  </binding>
+  <binding>
+   <desc>fourth engine</desc>
+   <condition>
+    <property>/sim/input/selected/engine[3]</property>
+   </condition>
+   <command>property-adjust</command>
+   <property>/controls/engines/engine[3]/magnetos</property>
+   <step type="int">1</step>
+  </binding>
  </key>
 
  <key n="126">
@@ -1318,10 +1336,3 @@ calculated by adding 256 to the GLUT key value in glut.h.
 </PropertyList>
 
 <!-- end of keyboard.xml -->
-
-
-
-
-
-
-

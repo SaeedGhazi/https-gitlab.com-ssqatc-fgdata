@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+T-6A Texan-II JSBSim config file
+David Culp,  davidculp2@attbi.com
+************************************************************************
+-->
+
+<PropertyList>
+
+ <sim>
+
+  <description>T-6A Texan II</description>
+ 
+  <flight-model>jsb</flight-model>
+  <aero>t6texan2</aero>
+  
+  <systems>
+   <electrical>
+    <path>Aircraft/c172/c172-electrical.xml</path>
+   </electrical>
+  </systems> 
+  
+  <sound>
+   <audible>true</audible>
+   <path>Aircraft/t6texan2/Sounds/t6texan2-sound.xml</path>
+  </sound>
+
+  <panel>
+   <path>Aircraft/T38/Panels/T38-panel.xml</path>
+   <visibility archive="y">true</visibility>
+  </panel>
+
+  <model>
+   <path>Aircraft/t6texan2/Models/T6Texan2.mdl</path>
+  </model>
+
+
+ </sim>
+
+</PropertyList>

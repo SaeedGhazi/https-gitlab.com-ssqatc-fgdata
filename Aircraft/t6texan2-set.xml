@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<PropertyList include="t6texan2-jsbsim-set.xml">
+ <sim>
+  <description>Alias for t6texan2-jsbsim.</description>
+ </sim>
+</PropertyList>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<PropertyList include="OV10-jsbsim-set.xml">
+ <sim>
+  <description>Alias for OV10-jsbsim.</description>
+ </sim>
+</PropertyList>

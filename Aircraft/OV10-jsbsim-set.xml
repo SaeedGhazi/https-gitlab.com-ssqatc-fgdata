@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+OV-10 JSBSim config file
+David Culp,  davidculp2@attbi.com
+************************************************************************
+-->
+
+<PropertyList>
+
+ <sim>
+
+  <description>North American OV-10A Bronco</description>
+ 
+  <flight-model>jsb</flight-model>
+  <aero>OV10</aero>
+ 
+  <systems>
+   <electrical>
+    <path>Aircraft/T38/T38-electrical.xml</path>
+   </electrical>
+  </systems> 
+ 
+  <sound>
+   <audible>true</audible>
+   <path>Aircraft/OV10/Sounds/OV10-sound.xml</path>
+  </sound>
+
+  <panel>
+   <path>Aircraft/T38/Panels/T38-panel.xml</path>
+   <visibility archive="y">true</visibility>
+  </panel>
+
+  <model>
+   <path>Aircraft/OV10/Models/OV10.mdl</path>
+  </model>
+-->
+
+ </sim>
+
+</PropertyList>

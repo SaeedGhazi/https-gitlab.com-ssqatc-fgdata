@@ -32,6 +32,20 @@ October 23 2001 John Check, fgpanels@rockfish.net
    <path>Aircraft/747/Model/boeing747.ac</path>
   </model>
  </sim>
+
+ <autopilot>
+   <config>
+     <min-climb-speed-kt type="float">200.0</min-climb-speed-kt>
+     <best-climb-speed-kt type="float">240.0</best-climb-speed-kt>
+     <target-climb-rate-fpm type="float">2000.0</target-climb-rate-fpm>
+     <target-descent-rate-fpm type="float">1000.0</target-descent-rate-fpm>
+     <elevator-adj-factor type="float">12000.0</elevator-adj-factor>
+     <integral-contribution type="float">0.005</integral-contribution>
+     <zero-pitch-throttle type="float">0.65</zero-pitch-throttle>
+     <zero-pitch-trim-full-throttle type="float">0.025</zero-pitch-trim-full-throttle>
+   </config>
+ </autopilot>
+
 </PropertyList>
 
 

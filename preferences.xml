@@ -263,7 +263,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
   <ai-traffic>
    <enabled type="bool">true</enabled>
-   <level type="int">2</level>
+   <level type="int">1</level>
   </ai-traffic>
 
   <ai>

@@ -2678,6 +2678,11 @@ Shared parameters for various materials.
    <coverage-m2>10000000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
+  <object>
+   <path>Models/Buildings/oil-tanks.ac</path>
+   <coverage-m2>20000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
  </object-group>
  <object-group>
   <range-m>5000</range-m>
@@ -2744,6 +2749,14 @@ Shared parameters for various materials.
    <a>1.0</a>
   </emissive>
  <object-group>
+  <range-m>10000</range-m>
+  <object>
+   <path>Models/Buildings/oil-tanks.ac</path>
+   <coverage-m2>20000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+ </object-group>
+ <object-group>
   <range-m>5000</range-m>
   <object>
    <path>Models/Buildings/cube-apartment.ac</path>
@@ -2809,6 +2822,11 @@ Shared parameters for various materials.
  </emissive>
  <object-group>
   <range-m>10000</range-m>
+  <object>
+   <path>Models/Buildings/oil-tanks.ac</path>
+   <coverage-m2>20000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
   <object>
    <path>Models/Buildings/big-church.ac</path>
    <coverage-m2>250000</coverage-m2>

@@ -674,8 +674,8 @@ Started September 2000 by David Megginson, david@megginson.com
 
   <adf>
    <frequencies>
-    <selected-khz type="int">100</selected-khz>
-    <standby-khz type="int">999</standby-khz>
+    <selected-khz type="int">379</selected-khz>
+    <standby-khz type="int">341</standby-khz>
    </frequencies>
    <serviceable type="bool" archive="y">true</serviceable>
    <indicated-bearing-deg type="double">90</indicated-bearing-deg>

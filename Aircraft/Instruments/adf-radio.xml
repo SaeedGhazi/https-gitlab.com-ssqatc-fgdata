@@ -30,10 +30,10 @@ properties' values.
  <h-base>64</h-base>
 
 <params>
-  <adf-freq-selected-prop>/radios/kr-87/outputs/selected-khz</adf-freq-selected-prop>
-  <adf-freq-standby-prop>/radios/kr-87/outputs/standby-khz</adf-freq-standby-prop>
-  <adf-morse-id-volume-prop>/radios/kr-87/inputs/volume</adf-morse-id-volume-prop>
-  <adf-morse-ident-toggle-prop>/radios/kr-87/inputs/ident-btn</adf-morse-ident-toggle-prop>
+  <adf-freq-selected-prop>/instrumentation/adf/frequencies/selected-khz</adf-freq-selected-prop>
+  <adf-freq-standby-prop>/instrumentation/adf/frequencies/standby-khz</adf-freq-standby-prop>
+  <adf-morse-id-volume-prop>/instrumentation/adf/volume-norm</adf-morse-id-volume-prop>
+  <adf-morse-ident-toggle-prop>/instrumentation/adf/ident</adf-morse-ident-toggle-prop>
 </params>
 
  <layers>
@@ -200,7 +200,7 @@ properties' values.
     </transformation>
     <transformation>
      <type>rotation</type>
-     <property>/radios/kr-87/inputs/volume</property>
+     <property>/instrumentation/adf/volume-norm</property>
      <min>0</min>
      <max>2</max>
      <scale>140</scale>

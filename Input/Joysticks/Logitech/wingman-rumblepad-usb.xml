@@ -83,32 +83,62 @@
    <repeatable>true</repeatable>
    <binding>
     <command>property-adjust</command>
-    <property>/sim/panel/y-offset</property>
-    <step>5</step>
+    <property>/controls/elevator-trim</property>
+    <step>0.005</step>
    </binding>
   </low>
   <high>
    <repeatable>true</repeatable>
    <binding>
     <command>property-adjust</command>
-    <property>/sim/panel/y-offset</property>
-    <step>-5</step>
+    <property>/controls/elevator-trim</property>
+    <step>-0.005</step>
    </binding>
   </high>
  </axis>
 
  <axis n="5">
   <binding>
-   <command>property-scale</command>
-   <property>/sim/current-view/axes/lat</property>
+   <command>null</command>
   </binding>
+  <low>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
+    <step>1</step>
+   </binding>
+  </low>
+  <high>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
+    <step>-1</step>
+   </binding>
+  </high>
  </axis>
 
  <axis n="6">
   <binding>
-   <command>property-scale</command>
-   <property>/sim/current-view/axes/long</property>
+   <command>null</command>
   </binding>
+  <low>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-pitch-offset-deg</property>
+    <step>1</step>
+   </binding>
+  </low>
+  <high>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-pitch-offset-deg</property>
+    <step>-1</step>
+   </binding>
+  </high>
  </axis>
 
  <button n="0">

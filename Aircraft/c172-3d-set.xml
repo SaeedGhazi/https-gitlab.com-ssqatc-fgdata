@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
-<PropertyList include="c172r-3d-set.xml">
+<PropertyList include="c172p-3d-set.xml">
  <sim>
-  <description>Alias for c172r-3d.</description>
+  <description>Alias for c172p-3d.</description>
  </sim>
 </PropertyList>

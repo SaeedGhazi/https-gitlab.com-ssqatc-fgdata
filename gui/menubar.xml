@@ -112,6 +112,14 @@
     <command>old-hud-alpha-dialog</command>
    </binding>
   </item>
+  
+  <item>
+   <label>Instant Replay</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>replay</dialog-name>
+   </binding>
+  </item>
 
  </menu>
 

@@ -647,6 +647,7 @@ Shared parameters for various materials.
 
 <material>
  <name>pc_centerline</name>
+ <name>dirt_rwycenterline</name>
  <texture>Runway/pc_centerline.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>

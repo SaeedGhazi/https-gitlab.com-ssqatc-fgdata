@@ -17,7 +17,7 @@ Started September 2000 by David Megginson, david@megginson.com
   <virtual-cockpit type="bool">false</virtual-cockpit>
   <presets>
    <airport-id>KSFO</airport-id>
-   <runway>28L</runway>
+   <runway>28R</runway>
    <trim type="bool">true</trim>
   </presets>
   <startup>
@@ -241,6 +241,11 @@ Started September 2000 by David Megginson, david@megginson.com
   <menubar>
    <visibility type="bool">true</visibility>
   </menubar>
+  
+  <replay>
+   <duration type="double">90</duration>
+   <view type="int">1</view>
+  </replay>
   
   <ATC>
    <enabled type="bool">true</enabled>
@@ -688,6 +693,6 @@ Started September 2000 by David Megginson, david@megginson.com
   <scene_lighting type="bool">true</scene_lighting>
  </test>
 
- </PropertyList>
+</PropertyList>
 
 <!-- end of preferences.xml -->

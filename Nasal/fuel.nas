@@ -60,7 +60,13 @@ fuelUpdate = func {
             ppg = t.getNode("density-ppg").getValue();
             lbs = t.getNode("level-gal_us").getValue() * ppg;
             lbs = lbs - fuelPerTank;
-            if(lbs < 0) { lbs = 0; outOfFuel = 1; }
+            if(lbs < 0) {
+                lbs = 0; 
+                # Kill the engines if we're told to, otherwise simply
+                # deselect the tank.
+                if(t.getBoolValue("kill-when-empty")) { outOfFuel = 1; }
+                else { t.setBoolValue("selected", 0); }
+            }
             gals = lbs / ppg;
             t.getNode("level-gal_us").setDoubleValue(gals);
             t.getNode("level-lbs").setDoubleValue(lbs);

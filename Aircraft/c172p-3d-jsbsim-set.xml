@@ -27,13 +27,10 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
      <x-offset-m archive="y">-0.18</x-offset-m>
      <y-offset-m archive="y">0.30</y-offset-m>
      <z-offset-m archive="y">0.4</z-offset-m>
-     <default-pitch-deg>-12</default-pitch-deg>
+     <pitch-offset-deg>-12</pitch-offset-deg>
    </config>
   </view>
 
-  <current-view>
-   <pitch-offset-deg>-12</pitch-offset-deg>
-  </current-view>
 
  </sim>
   

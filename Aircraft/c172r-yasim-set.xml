@@ -28,13 +28,9 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
 
   <view>
    <config>
-    <default-pitch-deg>-8</default-pitch-deg>
+     <pitch-offset-deg>-8</pitch-offset-deg>
    </config>
   </view>
-
-  <current-view>
-   <pitch-offset-deg>-8</pitch-offset-deg>
-  </current-view>
 
  </sim>
 

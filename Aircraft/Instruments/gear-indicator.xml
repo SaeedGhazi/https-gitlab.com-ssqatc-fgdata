@@ -54,5 +54,20 @@
    <h>26</h>
   </layer>
  </layers>
+ 
+ <actions>
+  <action>
+   <desc>gear</desc>
+   <button>0</button>
+   <x>-32</x>
+   <y>-13</y>
+   <w>64</w>
+   <h>26</h>
+   <binding>
+    <command>property-toggle</command>
+    <property>/controls/gear-down</property>
+   </binding>
+  </action>
+ </actions>
 
 </PropertyList>

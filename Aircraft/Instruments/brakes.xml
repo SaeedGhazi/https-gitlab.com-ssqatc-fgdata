@@ -61,50 +61,26 @@
   </layer>
  </layers>
 
-<actions>
-<!--
-<action>
-   <name>left on</name>
-   <type>adjust</type>
-   <x>-32</x>
-   <y>-13</y>
-   <w>64</w>
-   <h>26</h>
-   <property>/controls[0]/brakes[0]</property>
-   <increment>1.0</increment>
-   <min>0</min>
-   <max>1</max>
-   <wrap>true</wrap>
-   <button>0</button>
-  </action>
+ <actions>
   <action>
-   <name>right on</name>
-   <type>adjust</type>
+   <desc>brake</desc>
+   <button>0</button>
    <x>-32</x>
    <y>-13</y>
    <w>64</w>
    <h>26</h>
-   <property>/controls[0]/brakes[1]</property>
-   <increment>1.0</increment>
-   <min>0</min>
-   <max>1</max>
-   <wrap>true</wrap>
-   <button>0</button>
-  </action>
--->
-<action>
-   <name>nose brake</name>
-   <type>adjust</type>
-   <x>-32</x>
-   <y>-13</y>
-   <w>64</w>
-   <h>26</h>
-   <property>/controls[0]/brakes[2]</property> <!-- nose brake -->
-   <increment>1.0</increment>
-   <min>0</min>
-   <max>1</max>
-   <wrap>true</wrap>
-   <button>0</button>
+   <binding>
+    <command>property-toggle</command>
+    <property>/controls/brakes[0]</property>
+   </binding>
+   <binding>
+    <command>property-toggle</command>
+    <property>/controls/brakes[1]</property>
+   </binding>
+   <binding>
+    <command>property-toggle</command>
+    <property>/controls/brakes[2]</property>
+   </binding>
   </action>
  </actions>
 </PropertyList>

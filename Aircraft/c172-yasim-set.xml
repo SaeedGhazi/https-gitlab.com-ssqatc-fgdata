@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+Cessna 172 simulation config. This files ties together all the components
+used by FGFS to represent the C172. Components include the flight data 
+model, instrument panel, and external 3D model.
+3D models can be downloaded from http://home.t-online.de/home/Wolfram.Kuss/
+
+October 23 2001 John Check, fgpanels@rockfish.net
+************************************************************************
+-->
+
+<PropertyList>
+<!-- c172 is default so basically we just need to specify the panel-->
+ <sim>
+  <flight-model>yasim</flight-model>
+  <aero>c172</aero>
+  <sound>true</sound>
+  <panel>
+   <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
+  </panel>
+  <model>
+   <path><!-- you need to set this --></path>
+  </model>
+    
+</sim>
+  
+</PropertyList>
+
+

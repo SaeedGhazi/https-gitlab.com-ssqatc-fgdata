@@ -108,7 +108,11 @@ Started September 2000 by David Megginson, david@megginson.com
  <!-- Controls -->
 
  <controls>
-  <mixture>1.0</mixture>
+  <gear-down>1.0</gear-down>
+  <mixture n="0">1.0</mixture>
+  <mixture n="1">1.0</mixture>
+  <mixture n="2">1.0</mixture>
+  <mixture n="3">1.0</mixture>
  </controls>
 
 

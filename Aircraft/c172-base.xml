@@ -21,6 +21,14 @@ Common configuration for all C172 aircraft.
   </sound>
 
  </sim>
+
+ <instrumentation>
+  <attitude-indicator>
+   <config>
+    <tumble-flag archive="y" type="bool">true</tumble-flag>
+   </config>
+  </attitude-indicator>
+ </instrumentation>
   
  <engines>
   <engine>

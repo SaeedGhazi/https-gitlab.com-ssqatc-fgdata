@@ -336,11 +336,13 @@ Started September 2000 by David Megginson, david@megginson.com
   </nav>
 
   <kr-87>
-   <frequencies>
+   <inputs>
+     <rotation-deg type="double">90</rotation-deg>
+   </inputs>
+   <outputs>
     <selected-khz type="double">266.0</selected-khz>
     <standby-khz type="double">300.0</standby-khz>
-   </frequencies>
-   <rotation-deg type="double">90</rotation-deg>
+   </outputs>
   </kr-87>
 
  </radios>

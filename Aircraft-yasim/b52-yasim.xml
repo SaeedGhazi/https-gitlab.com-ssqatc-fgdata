@@ -12,17 +12,6 @@ many of the numbers were obtained either by measuring a h/c
 of the 3-view I used as a template for modelling or by reading
 them out of my 3d modeller.
 
-I found a reference to the wing incidence, sweep (see the wing
-entry in the config) and the layout of the flaps and ailerons
-(ailerons are positioned between the two sets of flaps on each
-wing) but all the other numbers are guesswork.  The X/YB52 had
-only two positions for the flaps - up or down, with the down
-position being at 35 deg. I found no references to this being
-changed in later models.  In view of that, although they're
-pretty big, I've set the lift to only 1.3 and set extend time
-to 35 seconds on the basis that the attitude change as a result
-of going from full flaps to zero flaps shouldn't be too great.
-
 The B52s had all moving tailplanes (9 deg up & 4 deg down) and
 these cannot be represented correctly using yasim at the moment,
 so in that respect this config is definitely a hack.
@@ -33,9 +22,7 @@ Lee Elliott. leee-fgfs@spatial.freeserve.co.uk
 <airplane mass="173599">
 
 <!-- Approach configuration -->
-<!-- Although the approach speed is set to 100 I reccommend that it is
-		 kept above 120, especially if a lot of fuel remains -->
- <approach speed="100" aoa="0.5">
+ <approach speed="100" aoa="1.0">
   <control-setting axis="/controls/engines/engine[0]/throttle" value="0.4"/>
   <control-setting axis="/controls/engines/engine[1]/throttle" value="0.4"/>
   <control-setting axis="/controls/engines/engine[2]/throttle" value="0.4"/>
@@ -44,35 +31,50 @@ Lee Elliott. leee-fgfs@spatial.freeserve.co.uk
   <control-setting axis="/controls/engines/engine[5]/throttle" value="0.4"/>
   <control-setting axis="/controls/engines/engine[6]/throttle" value="0.4"/>
   <control-setting axis="/controls/engines/engine[7]/throttle" value="0.4"/>
+  <control-setting axis="/controls/engines/engine[0]/afterburner" value="0.0"/>
+  <control-setting axis="/controls/engines/engine[1]/afterburner" value="0.0"/>
+  <control-setting axis="/controls/engines/engine[2]/afterburner" value="0.0"/>
+  <control-setting axis="/controls/engines/engine[3]/afterburner" value="0.0"/>
+  <control-setting axis="/controls/engines/engine[4]/afterburner" value="0.0"/>
+  <control-setting axis="/controls/engines/engine[5]/afterburner" value="0.0"/>
+  <control-setting axis="/controls/engines/engine[6]/afterburner" value="0.0"/>
+  <control-setting axis="/controls/engines/engine[7]/afterburner" value="0.0"/>
   <control-setting axis="/controls/flight/flaps" value="1.0"/>
   <control-setting axis="/controls/flight/spoilers" value="0.0"/>
   <control-setting axis="/controls/gear/gear-down" value="1"/>
  </approach>
 
 <!-- Cruise configuration -->
-<!-- I found figures of 554 kt @ 21000 ft (max),
-     495 kt @ 46500 ft (max) and 454 kt cruise (no alt).
+<!-- I found the following performance figures
+     638 mph (554 kt) @ 21000 ft
+     570 mph (495 kt) @ 46500 ft
+     523 mph (454 kt) cruising speed (no alt specified)
 
-     I found some references that implied that the max speeds were
-     limited by buffet and flutter and not by engine power i.e. an
-     E model was fitted with an electronically controlled system
-     designed to reduce stress on the airframe during low-level
-     operations and was able to fly 10 knots faster than the speed
-     at which a normal b52 would have disintegrated due to flutter.
+     The service ceiling at combat weight (291570 lbs) is 46700 ft and I
+     assume that's at the cruise speed (454 kt)
 
-     With these settings I was able sustain flight at 37,000 ft @ about
-     520 KTAS.  I've been able to achieve greater altitudes but the
-     speed gradually bleeds off.
+     I've not been able to get a solution that solves using 495 kt @ 46500 ft
+     and using the figure of 554 kt @ 21000 ft results in the a/c not being
+     able to climb nearly high enough so the numbers specified are currently
+     the best compromise I've found so far.
 -->
  <cruise speed="554" alt="21000">
-  <control-setting axis="/controls/engines/engine[0]/throttle" value="0.5"/>
-  <control-setting axis="/controls/engines/engine[1]/throttle" value="0.5"/>
-  <control-setting axis="/controls/engines/engine[2]/throttle" value="0.5"/>
-  <control-setting axis="/controls/engines/engine[3]/throttle" value="0.5"/>
-  <control-setting axis="/controls/engines/engine[4]/throttle" value="0.5"/>
-  <control-setting axis="/controls/engines/engine[5]/throttle" value="0.5"/>
-  <control-setting axis="/controls/engines/engine[6]/throttle" value="0.5"/>
-  <control-setting axis="/controls/engines/engine[7]/throttle" value="0.5"/>
+  <control-setting axis="/controls/engines/engine[0]/throttle" value="0.6"/>
+  <control-setting axis="/controls/engines/engine[1]/throttle" value="0.6"/>
+  <control-setting axis="/controls/engines/engine[2]/throttle" value="0.6"/>
+  <control-setting axis="/controls/engines/engine[3]/throttle" value="0.6"/>
+  <control-setting axis="/controls/engines/engine[4]/throttle" value="0.6"/>
+  <control-setting axis="/controls/engines/engine[5]/throttle" value="0.6"/>
+  <control-setting axis="/controls/engines/engine[6]/throttle" value="0.6"/>
+  <control-setting axis="/controls/engines/engine[7]/throttle" value="0.6"/>
+  <control-setting axis="/controls/engines/engine[0]/afterburner" value="0.0"/>
+  <control-setting axis="/controls/engines/engine[1]/afterburner" value="0.0"/>
+  <control-setting axis="/controls/engines/engine[2]/afterburner" value="0.0"/>
+  <control-setting axis="/controls/engines/engine[3]/afterburner" value="0.0"/>
+  <control-setting axis="/controls/engines/engine[4]/afterburner" value="0.0"/>
+  <control-setting axis="/controls/engines/engine[5]/afterburner" value="0.0"/>
+  <control-setting axis="/controls/engines/engine[6]/afterburner" value="0.0"/>
+  <control-setting axis="/controls/engines/engine[7]/afterburner" value="0.0"/>
   <control-setting axis="/controls/flight/flaps" value="0.0"/>
   <control-setting axis="/controls/flight/spoilers" value="0.0"/>
   <control-setting axis="/controls/gear/gear-down" value="0"/>
@@ -95,24 +97,25 @@ Lee Elliott. leee-fgfs@spatial.freeserve.co.uk
      aileron, which I've located outboard of the flaps.
 -->
  <wing x="-16.0" y="1.6" z="1.2" taper="0.4" incidence="6"
-      length="31.1" chord="10.0" sweep="34.5" dihedral="-3.0" camber="0.16">
-  <stall aoa="18.0" width="2" peak="1.3"/>
-  <flap0 start="0.0" end="0.62" lift="1.45" drag="1.8"/>
-  <flap1 start="0.62" end="0.7" lift="1.3" drag="1.2"/>
-  <spoiler start="0.5" end="0.75" lift="0.0" drag="8.0"/>
+      length="31.1" chord="10.0" sweep="34.5" dihedral="-1.0" camber="0.16">
+  <stall aoa="18.0" width="3" peak="1.3"/>
+  <flap0 start="0.0" end="0.62" lift="1.45" drag="2.2"/>
+  <flap1 start="0.62" end="0.7" lift="1.3" drag="1.3"/>
+  <spoiler start="0.5" end="0.75" lift="0.0" drag="1.8"/>
 
   <control-input axis="/controls/flight/flaps" control="FLAP0"/>
   <control-input axis="/controls/flight/aileron" control="FLAP1" split="true"/>
-  <control-input axis="/controls/flight/spoilers" control="SPOILER" split="false"/>
+  <control-input axis="/controls/flight/spoilers" control="SPOILER"/>
 
-  <control-output control="FLAP0" prop="/surface-positions/flap-pos-norm"/>
+  <control-output control="FLAP0" side="left" prop="/surface-positions/left-flap-pos-norm"/>
+  <control-output control="FLAP0" side="right" prop="/surface-positions/right-flap-pos-norm"/>
   <control-output control="FLAP1" side="left" prop="/surface-positions/left-aileron-pos-norm"/>
   <control-output control="FLAP1" side="right" prop="/surface-positions/right-aileron-pos-norm"/>
   <control-output control="SPOILER" side="left" prop="/surface-positions/left-spoiler-pos-norm"/>
   <control-output control="SPOILER" side="right" prop="/surface-positions/right-spoiler-pos-norm"/>
 
-  <control-speed control="FLAP0" transition-time="35"/>
-  <control-speed control="FLAP1" transition-time="0.3"/>
+  <control-speed control="FLAP0" transition-time="45"/>
+  <control-speed control="FLAP1" transition-time="0.5"/>
   <control-speed control="SPOILER" transition-time="0.5"/>
  </wing>
 
@@ -120,9 +123,9 @@ Lee Elliott. leee-fgfs@spatial.freeserve.co.uk
      stall AoA figure.
 -->
  <hstab x="-41.5" y="1.0" z="0.8" taper="0.25" effectiveness="1.0"
-       length="7.5" chord="7.5" sweep="40.0" dihedral="0.0">
+       length="7.5" chord="7.5" sweep="40.0" dihedral="0.0" camber="0.01">
   <stall aoa="25.0" width="3" peak="1.5"/>
-  <flap0 start="0" end="1" lift="1.5" drag="1.2"/>
+  <flap0 start="0" end="1" lift="1.3" drag="1.4"/>
   <control-input axis="/controls/flight/elevator" control="FLAP0"/>
   <control-input axis="/controls/flight/elevator-trim" control="FLAP0"/>
   <control-output control="FLAP0" prop="/surface-positions/elevator-pos-norm"/>
@@ -146,115 +149,114 @@ Lee Elliott. leee-fgfs@spatial.freeserve.co.uk
      I couldn't find a weight for the engines and have guessed at 4000lb
 -->
 <!-- Left wing engines -->
-
 <!-- Left Outer Left -->
- <jet x="-23.0" y="20.0" z="-1.0"
-     mass="4000"
-     thrust="11200">
+ <jet x="-23.0" y="20.0" z="-1.0" mass="4000" tsfc="0.7" thrust="11200" afterburner="13500">
   <control-input axis="/controls/engines/engine[0]/throttle" control="THROTTLE"/>
+  <control-input axis="/controls/engines/engine[0]/afterburner" control="REHEAT"/>
  </jet>
 
 <!-- Left Outer Right -->
- <jet x="-23.0" y="18.0" z="-1.0"
-     mass="4000"
-     thrust="11200">
+ <jet x="-23.0" y="18.0" z="-1.0" mass="4000" tsfc="0.7" thrust="11200" afterburner="13500">
   <control-input axis="/controls/engines/engine[1]/throttle" control="THROTTLE"/>
+  <control-input axis="/controls/engines/engine[0]/afterburner" control="REHEAT"/>
  </jet>
 
 <!-- Left Inner Left -->
- <jet x="-15.0" y="12.0" z="-1.0"
-     mass="4000"
-     thrust="11200">
+ <jet x="-15.0" y="12.0" z="-1.0" mass="4000" tsfc="0.7" thrust="11200" afterburner="13500">
   <control-input axis="/controls/engines/engine[2]/throttle" control="THROTTLE"/>
+  <control-input axis="/controls/engines/engine[0]/afterburner" control="REHEAT"/>
  </jet>
 
 <!-- Left Inner Right -->
- <jet x="-15.0" y="10.0" z="-1.0"
-     mass="4000"
-     thrust="11200">
+ <jet x="-15.0" y="10.0" z="-1.0" mass="4000" tsfc="0.7" thrust="11200" afterburner="13500">
   <control-input axis="/controls/engines/engine[3]/throttle" control="THROTTLE"/>
+  <control-input axis="/controls/engines/engine[0]/afterburner" control="REHEAT"/>
  </jet>
 
 <!-- Right wing engines -->
-
 <!-- Right Inner Left -->
- <jet x="-15.0" y="-10.0" z="-1.0"
-     mass="4000"
-     thrust="11200">
+ <jet x="-15.0" y="-10.0" z="-1.0" mass="4000" tsfc="0.7" thrust="11200" afterburner="13500">
   <control-input axis="/controls/engines/engine[4]/throttle" control="THROTTLE"/>
+  <control-input axis="/controls/engines/engine[0]/afterburner" control="REHEAT"/>
  </jet>
 
 <!-- Right Inner Right -->
- <jet x="-15.0" y="-12.0" z="-1.0"
-     mass="4000"
-     thrust="11200">
+ <jet x="-15.0" y="-12.0" z="-1.0" mass="4000" tsfc="0.7" thrust="11200" afterburner="13500">
   <control-input axis="/controls/engines/engine[5]/throttle" control="THROTTLE"/>
+  <control-input axis="/controls/engines/engine[0]/afterburner" control="REHEAT"/>
  </jet>
 
 <!-- Right Outer Left -->
- <jet x="-23.0" y="-18.0" z="-1.0"
-     mass="4000"
-     thrust="11200">
+ <jet x="-23.0" y="-18.0" z="-1.0" mass="4000" tsfc="0.7" thrust="11200" afterburner="13500">
   <control-input axis="/controls/engines/engine[6]/throttle" control="THROTTLE"/>
+  <control-input axis="/controls/engines/engine[0]/afterburner" control="REHEAT"/>
  </jet>
 
 <!-- Right Outer Right -->
- <jet x="-23.0" y="-20.0" z="-1.0"
-     mass="4000"
-     thrust="11200">
+ <jet x="-23.0" y="-20.0" z="-1.0" mass="4000" tsfc="0.7" thrust="11200" afterburner="13500">
   <control-input axis="/controls/engines/engine[7]/throttle" control="THROTTLE"/>
+  <control-input axis="/controls/engines/engine[0]/afterburner" control="REHEAT"/>
  </jet>
 
+<!-- Landing Gear -->
 <!-- Front Left -->
  <gear x="-13.2" y="2.0" z="-2.9" retract-time="7" compression="1.0">
   <control-input axis="/controls/flight/rudder" control="STEER" square="true"/>
   <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
+  <control-input axis="/controls/gear/gear[0]/wheel[0]/brake" control="BRAKE"/>
+  <control-input axis="/controls/gear/gear[0]/wheel[1]/brake" control="BRAKE"/>
+  <control-input axis="/controls/gear/parking-brake" control="BRAKE"/>
   <control-speed control="EXTEND" transition-time="7"/>
-  <control-output control="EXTEND" prop="/gear/gear/position-norm"/>
+  <control-speed control="BRAKE" transition-time="0.7"/>
+  <control-output control="EXTEND" prop="/gear/gear[0]/position-norm"/>
  </gear>
 
 <!-- Front Right -->
  <gear x="-13.2" y="-2.0" z="-2.9" retract-time="7" compression="1.0">
   <control-input axis="/controls/flight/rudder" control="STEER" square="true"/>
   <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
+  <control-input axis="/controls/gear/gear[1]/wheel[0]/brake" control="BRAKE"/>
+  <control-input axis="/controls/gear/gear[1]/wheel[1]/brake" control="BRAKE"/>
+  <control-input axis="/controls/gear/parking-brake" control="BRAKE"/>
   <control-speed control="EXTEND" transition-time="7"/>
-  <control-output control="EXTEND" prop="/gear/gear/position-norm"/>
+  <control-speed control="BRAKE" transition-time="0.7"/>
+  <control-output control="EXTEND" prop="/gear/gear[1]/position-norm"/>
  </gear>
 
 <!-- Rear Left -->
  <gear x="-28.0" y="2.0" z="-2.9" retract-time="7" compression="1.0">
-  <control-input axis="/controls/gear/wheel[0]/brake" control="BRAKE"/>
-  <control-input axis="/controls/gear/parking-brake" control="BRAKE"/>
   <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
+  <control-input axis="/controls/gear/gear[2]/wheel[0]/brake" control="BRAKE"/>
+  <control-input axis="/controls/gear/gear[2]/wheel[1]/brake" control="BRAKE"/>
+  <control-input axis="/controls/gear/parking-brake" control="BRAKE"/>
   <control-speed control="EXTEND" transition-time="7"/>
-  <control-output control="EXTEND" prop="/gear/gear/position-norm"/>
+  <control-speed control="BRAKE" transition-time="0.7"/>
+  <control-output control="EXTEND" prop="/gear/gear[2]/position-norm"/>
  </gear>
 
 <!-- Rear Right -->
  <gear x="-28.0" y="-2.0" z="-2.9" retract-time="7" compression="1.0">
-  <control-input axis="/controls/gears/wheel[0]/brake" control="BRAKE"/>
-  <control-input axis="/controls/gear/parking-brake" control="BRAKE"/>
   <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
+  <control-input axis="/controls/gear/gear[3]/wheel[0]/brake" control="BRAKE"/>
+  <control-input axis="/controls/gear/gear[3]/wheel[1]/brake" control="BRAKE"/>
+  <control-input axis="/controls/gear/parking-brake" control="BRAKE"/>
   <control-speed control="EXTEND" transition-time="7"/>
-  <control-output control="EXTEND" prop="/gear/gear/position-norm"/>
+  <control-speed control="BRAKE" transition-time="0.7"/>
+  <control-output control="EXTEND" prop="/gear/gear[3]/position-norm"/>
  </gear>
 
 <!-- Left Wing -->
- <gear x="-31.0" y="23.0" z="-2.0" retract-time="7" compression="2.5">
-  <control-input axis="/controls/gear/wheel[0]/brake" control="BRAKE"/>
-  <control-input axis="/controls/gear/parking-brake" control="BRAKE"/>
+ <gear x="-31.0" y="23.0" z="-2.0" retract-time="5" compression="2.5">
   <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
-  <control-speed control="EXTEND" transition-time="7"/>
-  <control-output control="EXTEND" prop="/gear/gear/position-norm"/>
+  <control-speed control="EXTEND" transition-time="5"/>
+  <control-output control="EXTEND" prop="/gear/gear[4]/position-norm"/>
  </gear>
 
 <!-- Right Wing -->
- <gear x="-31.0" y="-23.0" z="-2.0" retract-time="7" compression="2.5">
-  <control-input axis="/controls/gear/wheel[1]/brake" control="BRAKE"/>
-  <control-input axis="/controls/gear/parking-brake" control="BRAKE"/>
+ <gear x="-31.0" y="-23.0" z="-2.0" retract-time="5" compression="2.5">
   <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
-  <control-speed control="EXTEND" transition-time="7"/>
-  <control-output control="EXTEND" prop="/gear/gear/position-norm"/>
+  <control-speed control="EXTEND" transition-time="5"/>
+  <control-output control="EXTEND" prop="/gear/gear[5]/position-norm"/>
  </gear>
 
 <!-- Fuel tanks -->
@@ -282,6 +284,6 @@ Lee Elliott. leee-fgfs@spatial.freeserve.co.uk
 <!-- This is to level the aircraft on the ground
 -->
 
-<ballast x="-12.0" y="0" z="0" mass="40000"/>
+<ballast x="-4.0" y="0" z="0" mass="20000"/>
 
 </airplane>

@@ -84,14 +84,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -101,14 +113,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -118,14 +142,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -135,14 +171,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -154,14 +202,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -179,8 +239,20 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -198,8 +270,20 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -211,14 +295,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -230,14 +326,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -249,14 +357,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -268,14 +388,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -287,14 +419,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -306,14 +450,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -325,14 +481,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -344,14 +512,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -363,14 +543,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -382,14 +574,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -401,14 +605,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -420,14 +636,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -439,14 +667,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -458,14 +698,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -477,14 +729,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -496,14 +760,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -515,14 +791,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -534,14 +822,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -553,14 +853,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -572,14 +884,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -591,14 +915,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -610,14 +946,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -629,14 +977,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -648,14 +1008,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -667,14 +1039,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -686,14 +1070,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -705,14 +1101,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -724,14 +1132,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -743,14 +1163,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -762,14 +1194,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -781,14 +1225,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -798,14 +1254,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -815,14 +1283,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -834,14 +1314,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -859,8 +1351,20 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -878,8 +1382,20 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -891,14 +1407,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -910,14 +1438,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -929,14 +1469,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -948,14 +1500,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -967,14 +1531,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -986,14 +1562,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1005,14 +1593,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1024,14 +1624,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1043,14 +1655,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1062,14 +1686,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1081,14 +1717,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1100,14 +1748,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1119,14 +1779,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1138,14 +1810,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1157,14 +1841,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1176,14 +1872,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1195,14 +1903,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1214,14 +1934,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1233,14 +1965,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1252,14 +1996,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1271,14 +2027,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1290,14 +2058,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1309,14 +2089,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1328,14 +2120,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1347,14 +2151,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1366,14 +2182,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1385,14 +2213,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1404,14 +2244,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1423,14 +2275,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1442,14 +2306,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1461,14 +2337,26 @@ Properties currently used:
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.2</r>
   <g>0.2</g>
   <b>0.2</b>
-  <a>0.2</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1482,16 +2370,28 @@ Properties currently used:
  <light-coverage>10000000.0</light-coverage>
  <ambient>
   <r>0.14</r>
-  <g>0.14</g>
-  <b>0.14</b>
-  <a>0.14</a>
+  <g>0.28</g>
+  <b>0.13</b>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.14</r>
-  <g>0.14</g>
-  <b>0.14</b>
-  <a>0.14</a>
+  <g>0.28</g>
+  <b>0.13</b>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1502,16 +2402,28 @@ Properties currently used:
  <light-coverage>10000000.0</light-coverage>
  <ambient>
   <r>0.14</r>
-  <g>0.14</g>
-  <b>0.14</b>
-  <a>0.14</a>
+  <g>0.28</g>
+  <b>0.13</b>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.14</r>
-  <g>0.14</g>
-  <b>0.14</b>
-  <a>0.14</a>
+  <g>0.28</g>
+  <b>0.13</b>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1522,16 +2434,28 @@ Properties currently used:
  <light-coverage>5000000.0</light-coverage>
  <ambient>
   <r>0.14</r>
-  <g>0.14</g>
-  <b>0.14</b>
-  <a>0.14</a>
+  <g>0.28</g>
+  <b>0.13</b>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.14</r>
-  <g>0.14</g>
-  <b>0.14</b>
-  <a>0.14</a>
+  <g>0.28</g>
+  <b>0.13</b>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1543,9 +2467,9 @@ Properties currently used:
  <light-coverage>10000000.0</light-coverage>
  <ambient>
   <r>0.14</r>
-  <g>0.14</g>
-  <b>0.14</b>
-  <a>0.14</a>
+  <g>0.28</g>
+  <b>0.13</b>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.14</r>
@@ -1553,6 +2477,18 @@ Properties currently used:
   <b>0.13</b>
   <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1563,9 +2499,9 @@ Properties currently used:
  <light-coverage>10000000.0</light-coverage>
  <ambient>
   <r>0.14</r>
-  <g>0.14</g>
-  <b>0.14</b>
-  <a>0.14</a>
+  <g>0.28</g>
+  <b>0.13</b>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.14</r>
@@ -1573,6 +2509,18 @@ Properties currently used:
   <b>0.13</b>
   <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1584,16 +2532,28 @@ Properties currently used:
  <light-coverage>20000000.0</light-coverage>
  <ambient>
   <r>0.60</r>
-  <g>0.60</g>
+  <g>0.54</g>
   <b>0.60</b>
-  <a>0.60</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.60</r>
-  <g>0.60</g>
+  <g>0.54</g>
   <b>0.60</b>
-  <a>0.60</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1605,16 +2565,28 @@ Properties currently used:
  <light-coverage>100000.0</light-coverage>
  <ambient>
   <r>0.14</r>
-  <g>0.14</g>
-  <b>0.14</b>
-  <a>0.14</a>
+  <g>0.28</g>
+  <b>0.13</b>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.14</r>
-  <g>0.14</g>
-  <b>0.14</b>
-  <a>0.14</a>
+  <g>0.28</g>
+  <b>0.13</b>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1624,16 +2596,28 @@ Properties currently used:
  <ysize>1000</ysize>
  <ambient>
   <r>0.14</r>
-  <g>0.14</g>
-  <b>0.14</b>
-  <a>0.14</a>
+  <g>0.28</g>
+  <b>0.13</b>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.14</r>
-  <g>0.14</g>
-  <b>0.14</b>
-  <a>0.14</a>
+  <g>0.28</g>
+  <b>0.13</b>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1644,16 +2628,28 @@ Properties currently used:
  <ysize>800</ysize>
  <ambient>
   <r>0.70</r>
-  <g>0.70</g>
-  <b>0.70</b>
-  <a>0.70</a>
+  <g>0.75</g>
+  <b>0.83</b>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.70</r>
-  <g>0.70</g>
-  <b>0.70</b>
-  <a>0.70</a>
+  <g>0.75</g>
+  <b>0.83</b>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1663,16 +2659,28 @@ Properties currently used:
  <ysize>500</ysize>
  <ambient>
   <r>0.17</r>
-  <g>0.17</g>
-  <b>0.17</b>
-  <a>0.17</a>
+  <g>0.31</g>
+  <b>0.49</b>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.17</r>
-  <g>0.17</g>
-  <b>0.17</b>
-  <a>0.17</a>
+  <g>0.31</g>
+  <b>0.49</b>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1687,16 +2695,28 @@ Properties currently used:
  <ysize>500</ysize>
  <ambient>
   <r>0.17</r>
-  <g>0.17</g>
-  <b>0.17</b>
-  <a>0.17</a>
+  <g>0.31</g>
+  <b>0.49</b>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.17</r>
-  <g>0.17</g>
-  <b>0.17</b>
-  <a>0.17</a>
+  <g>0.31</g>
+  <b>0.49</b>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1706,16 +2726,28 @@ Properties currently used:
  <ysize>500</ysize>
  <ambient>
   <r>0.60</r>
-  <g>0.60</g>
-  <b>0.60</b>
-  <a>0.60</a>
+  <g>0.54</g>
+  <b>0.40</b>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.60</r>
-  <g>0.60</g>
-  <b>0.60</b>
-  <a>0.60</a>
+  <g>0.54</g>
+  <b>0.40</b>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1725,16 +2757,28 @@ Properties currently used:
  <ysize>500</ysize>
  <ambient>
   <r>0.60</r>
-  <g>0.60</g>
-  <b>0.60</b>
-  <a>0.60</a>
+  <g>0.54</g>
+  <b>0.40</b>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.60</r>
-  <g>0.60</g>
-  <b>0.60</b>
-  <a>0.60</a>
+  <g>0.54</g>
+  <b>0.40</b>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1748,16 +2792,28 @@ Properties currently used:
  <light-coverage>40000000.0</light-coverage>
  <ambient>
   <r>0.23</r>
-  <g>0.23</g>
-  <b>0.23</b>
-  <a>0.23</a>
+  <g>0.35</g>
+  <b>0.12</b>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.23</r>
-  <g>0.23</g>
-  <b>0.23</b>
-  <a>0.23</a>
+  <g>0.35</g>
+  <b>0.12</b>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1773,16 +2829,28 @@ Properties currently used:
  <light-coverage>4000000.0</light-coverage>
  <ambient>
   <r>0.45</r>
-  <g>0.45</g>
-  <b>0.45</b>
-  <a>0.45</a>
+  <g>0.46</g>
+  <b>0.31</b>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.45</r>
-  <g>0.45</g>
-  <b>0.45</b>
-  <a>0.45</a>
+  <g>0.46</g>
+  <b>0.31</b>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1793,16 +2861,28 @@ Properties currently used:
  <light-coverage>2000000.0</light-coverage>
  <ambient>
   <r>0.45</r>
-  <g>0.45</g>
-  <b>0.45</b>
-  <a>0.45</a>
+  <g>0.46</g>
+  <b>0.31</b>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.45</r>
-  <g>0.45</g>
-  <b>0.45</b>
-  <a>0.45</a>
+  <g>0.46</g>
+  <b>0.31</b>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1813,16 +2893,28 @@ Properties currently used:
  <light-coverage>2000000.0</light-coverage>
  <ambient>
   <r>0.45</r>
-  <g>0.45</g>
-  <b>0.45</b>
-  <a>0.45</a>
+  <g>0.46</g>
+  <b>0.31</b>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.45</r>
-  <g>0.45</g>
-  <b>0.45</b>
-  <a>0.45</a>
+  <g>0.46</g>
+  <b>0.31</b>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1833,16 +2925,28 @@ Properties currently used:
  <light-coverage>2000000.0</light-coverage>
  <ambient>
   <r>0.45</r>
-  <g>0.45</g>
-  <b>0.45</b>
-  <a>0.45</a>
+  <g>0.46</g>
+  <b>0.31</b>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.45</r>
-  <g>0.45</g>
-  <b>0.45</b>
-  <a>0.45</a>
+  <g>0.46</g>
+  <b>0.31</b>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1853,16 +2957,28 @@ Properties currently used:
  <light-coverage>2000000.0</light-coverage>
  <ambient>
   <r>0.45</r>
-  <g>0.45</g>
-  <b>0.45</b>
-  <a>0.45</a>
+  <g>0.46</g>
+  <b>0.31</b>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.45</r>
-  <g>0.45</g>
-  <b>0.45</b>
-  <a>0.45</a>
+  <g>0.46</g>
+  <b>0.31</b>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1873,16 +2989,28 @@ Properties currently used:
  <light-coverage>2000000.0</light-coverage>
  <ambient>
   <r>0.14</r>
-  <g>0.14</g>
-  <b>0.14</b>
-  <a>0.14</a>
+  <g>0.28</g>
+  <b>0.13</b>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.14</r>
-  <g>0.14</g>
-  <b>0.14</b>
-  <a>0.14</a>
+  <g>0.28</g>
+  <b>0.13</b>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1896,14 +3024,26 @@ Properties currently used:
   <r>0.5</r>
   <g>0.5</g>
   <b>0.5</b>
-  <a>0.5</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.5</r>
   <g>0.5</g>
   <b>0.5</b>
-  <a>0.5</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
 </material>
 
 <material>
@@ -1916,19 +3056,26 @@ Properties currently used:
   <r>0.75</r>
   <g>0.75</g>
   <b>0.75</b>
-  <a>0.75</a>
+  <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.75</r>
   <g>0.75</g>
   <b>0.75</b>
-  <a>0.75</a>
+  <a>1.0</a>
  </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
  <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
   <a>1.0</a>
  </emissive>
 </material>
 
 </PropertyList>
-
-<!-- end of materials.xml -->

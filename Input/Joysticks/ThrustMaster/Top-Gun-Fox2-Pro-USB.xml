@@ -81,6 +81,7 @@
   <desc>Throttle</desc>
   <number>
    <unix>3</unix>
+   <mac>3</mac>
    <windows>2</windows>
   </number>
   <binding>

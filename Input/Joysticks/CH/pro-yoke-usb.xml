@@ -79,6 +79,7 @@
   <desc>Mixture</desc>
   <number>
     <unix>3</unix>
+    <mac>3</mac>
     <windows>4</windows>
   </number>
   <binding>
@@ -98,6 +99,7 @@
   <desc>Propeller</desc>
   <number>
     <unix>4</unix>
+    <mac>3</mac>
     <windows>3</windows>
   </number>
   <binding>
@@ -118,6 +120,7 @@
   <desc>View Direction</desc>
   <number>
     <unix>5</unix>
+    <mac>5</mac>
     <windows>6</windows>
   </number>
   <low>
@@ -141,6 +144,7 @@
  <axis>
   <number>
     <unix>6</unix>
+    <mac>6</mac>
     <windows>7</windows>
   </number>
   <desc>View Elevation</desc>

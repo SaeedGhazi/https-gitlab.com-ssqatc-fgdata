@@ -30,6 +30,7 @@ $Id$
   <desc>Aileron</desc>
   <number>
    <unix>0</unix>
+   <mac>0</mac>
    <windows>0</windows>
   </number>
   <binding>
@@ -43,6 +44,7 @@ $Id$
   <desc>Elevator</desc>
   <number>
    <unix>1</unix>
+   <mac>1</mac>
    <windows>1</windows>
   </number>
   <binding>
@@ -57,6 +59,7 @@ $Id$
   <desc>Throttle</desc>
   <number>
    <unix>3</unix>
+   <mac>3</mac>
    <windows>2</windows>
   </number>
   <binding>
@@ -113,6 +116,7 @@ $Id$
   <desc>Rudder</desc>
   <number>
    <unix>2</unix>
+   <mac>2</mac>
    <windows>3</windows>
   </number>
   <binding>
@@ -126,6 +130,7 @@ $Id$
   <desc>View Direction</desc>
   <number>
    <unix>4</unix>
+   <mac>4</mac>
    <windows>6</windows>
   </number>
   <low>
@@ -150,6 +155,7 @@ $Id$
   <desc>View Elevation</desc>
   <number>
    <unix>5</unix>
+   <mac>5</mac>
    <windows>7</windows>
   </number>
   <low>
@@ -174,6 +180,7 @@ $Id$
   <desc>Brakes</desc>
   <number>
    <unix>0</unix>
+   <mac>0</mac>
    <windows>0</windows>
   </number>
   <binding>
@@ -204,6 +211,7 @@ $Id$
   <desc>Elevator trim up</desc>
   <number>
    <unix>3</unix>
+   <mac>3</mac>
    <windows>3</windows>
   </number>
   <repeatable type="bool">true</repeatable>
@@ -218,6 +226,7 @@ $Id$
   <desc>Elevator trim down</desc>
   <number>
    <unix>4</unix>
+   <mac>4</mac>
    <windows>4</windows>
   </number>
   <repeatable type="bool">true</repeatable>
@@ -232,6 +241,7 @@ $Id$
   <desc>Flaps down</desc>
   <number>
    <unix>1</unix>
+   <mac>1</mac>
    <windows>1</windows>
   </number>
   <repeatable>false</repeatable>
@@ -245,6 +255,7 @@ $Id$
   <desc>Flaps up</desc>
   <number>
    <unix>2</unix>
+   <mac>2</mac>
    <windows>2</windows>
   </number>
   <repeatable>false</repeatable>
@@ -258,6 +269,7 @@ $Id$
   <desc>Right brake</desc>
   <number>
    <unix>6</unix>
+   <mac>6</mac>
    <windows>6</windows>
   </number>
   <binding>
@@ -278,6 +290,7 @@ $Id$
   <desc>Left brake</desc>
   <number>
    <unix>5</unix>
+   <mac>5</mac>
    <windows>5</windows>
   </number>
   <binding>

@@ -55,6 +55,7 @@ $Id$
   <desc>Rudder</desc>
   <number>
    <unix>2</unix>
+   <mac>2</mac>
    <windows>3</windows>
   </number>
   <binding>
@@ -68,6 +69,7 @@ $Id$
   <desc>Throttle</desc>
   <number>
    <unix>3</unix>
+   <mac>3</mac>
    <windows>2</windows>
   </number>
   <binding>
@@ -80,6 +82,7 @@ $Id$
    <desc>View Direction</desc>
    <number>
     <unix>4</unix>
+    <mac>4</mac>
     <windows>6</windows>
    </number>
    <low>
@@ -104,6 +107,7 @@ $Id$
    <desc>View Elevation (Default)</desc>
    <number>
     <unix>5</unix>
+    <mac>5</mac>
    </number>
    <low>
     <repeatable>true</repeatable>
@@ -256,6 +260,7 @@ $Id$
   <desc>Gear Up.</desc>
   <number>
     <unix>8</unix>
+    <mac>8</mac>
     <windows>9</windows>
    </number>  
   <repeatable>false</repeatable>

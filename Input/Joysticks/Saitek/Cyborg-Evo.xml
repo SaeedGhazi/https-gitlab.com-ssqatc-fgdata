@@ -86,6 +86,7 @@ axis 5: 	(hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 	<desc>View Direction; Aileron Trim;</desc>
 	<number>
 		<unix>4</unix>
+		<mac>4</mac>
 		<windows>6</windows>
 	</number>
 	<low>
@@ -140,6 +141,7 @@ axis 5: 	(hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 	<desc>View Elevation; Elevator Trim;</desc>
 	<number>
 		<unix>5</unix>
+		<mac>5</mac>
 		<windows>7</windows>
 	</number>
 	<low>
@@ -245,6 +247,7 @@ axis 5: 	(hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 	<desc>Reset view; toggle tail-wheel lock; reset trim</desc>
 	<number>
 		<unix>1</unix>
+		<mac>1</mac>
 		<windows>1</windows>
 	</number>
 	<repeatable type="bool">false</repeatable>

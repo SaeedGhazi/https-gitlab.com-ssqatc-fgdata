@@ -111,6 +111,7 @@ ________________________________________________________________________________
 		<desc>Rudder</desc>
 		<number>
 			<unix>2</unix>
+			<mac>2</mac>
 			<windows>3</windows>
 		</number>
 		<binding>
@@ -126,6 +127,7 @@ ________________________________________________________________________________
 		<desc>Throttle</desc>
 		<number>
 			<unix>3</unix>
+			<mac>2</mac>
 			<windows>2</windows>
 		</number>
 		<binding>

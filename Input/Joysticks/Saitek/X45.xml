@@ -102,6 +102,7 @@ $Id$
  <axis n="6">
   <number>
    <unix>6</unix>
+   <mac>6</mac>
    <windows>6</windows>
    <mac>5</mac>
   </number>
@@ -126,6 +127,7 @@ $Id$
   <desc>View Elevation</desc>
   <number>
    <unix>7</unix>
+   <mac>7</mac>
    <windows>7</windows>
    <mac>6</mac>
   </number>
@@ -149,6 +151,7 @@ $Id$
   <desc>Throttle</desc>
   <number>
    <unix>4</unix>
+   <mac>4</mac>
    <windows>2</windows>
    <mac>2</mac>
   </number>
@@ -162,6 +165,7 @@ $Id$
   <desc>Mixture</desc>
   <number>
    <unix>2</unix>
+   <mac>2</mac>
    <windows>5</windows>
   </number>
   <binding>
@@ -174,6 +178,7 @@ $Id$
   <desc>Propeller Advance</desc>
   <number>
    <unix>5</unix>
+   <mac>5</mac>
    <windows>4</windows>
 <!-- <mac>???</mac> -->
   </number>

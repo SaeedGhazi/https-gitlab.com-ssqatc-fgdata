@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<PropertyList>
+ <sim>
+
+  <description>Airbus A320-200</description>
+
+  <flight-model>jsb</flight-model>
+  <aero>A320</aero>
+  <fuel-fraction>0.5</fuel-fraction>
+
+  <systems>
+   <electrical>
+    <path>Aircraft/Generic/generic-electrical.xml</path>
+   </electrical>
+  </systems> 
+  
+  <sound>
+   <audible>true</audible>
+   <path>Aircraft/A320/A320-sound.xml</path>
+  </sound>
+<!--
+  <panel>
+   <path>Aircraft/737/Panels/737-trans-mini-panel.xml</path>
+   <visibility>true</visibility>
+  </panel>
+-->
+  <hud>
+   <path>Huds/Custom/default.xml</path>
+   <visibility>true</visibility>
+  </hud>
+  
+  <model>
+   <path>Aircraft/A320/Models/a320-fb.xml</path>
+  </model>
+
+  <view>
+   <internal archive="y">true</internal>
+   <config>
+     <!-- x/y/z == right/up/back -->
+     <x-offset-m archive="y">-0.6</x-offset-m>
+     <y-offset-m archive="y">3.26</y-offset-m>
+     <z-offset-m archive="y">-16.16</z-offset-m>
+     <pitch-offset-deg archive="y">-11.0</pitch-offset-deg>
+   </config>
+  </view>
+  <view n="1">
+   <config>
+     <!-- big plane, so extend chase view offset a bit -->
+     <z-offset-m type="double" archive="y">-45.0</z-offset-m>
+   </config>
+  </view>
+  <view n="4">
+   <config>
+     <!-- big plane, so extend chase view offset a bit -->
+     <z-offset-m type="double" archive="y">-45.0</z-offset-m>
+   </config>
+  </view>
+<!--
+  <current-view>
+     <pitch-offset-deg archive="y">-11.0</pitch-offset-deg>
+  </current-view>
+-->
+ </sim>
+ 
+ <consumables>
+  <fuel>
+   <tank n="0">
+    <level-gal_us archive="y">1500</level-gal_us>
+   </tank>
+   <tank n="1">
+    <level-gal_us archive="y">1500</level-gal_us>
+   </tank>
+  </fuel>
+ </consumables>
+
+ <autopilot>
+   <config>
+     <min-climb-speed-kt type="float">150.0</min-climb-speed-kt>
+     <best-climb-speed-kt type="float">300.0</best-climb-speed-kt>
+     <target-climb-rate-fpm type="float">2000.0</target-climb-rate-fpm>
+     <target-descent-rate-fpm type="float">1500.0</target-descent-rate-fpm>
+     <elevator-adj-factor type="float">3500.0</elevator-adj-factor>
+     <integral-contribution type="float">0.01</integral-contribution>
+     <zero-pitch-throttle type="float">0.0001</zero-pitch-throttle>
+     <zero-pitch-trim-full-throttle type="float">0.0001</zero-pitch-trim-full-throttle>
+     <max-roll-deg type="float">30</max-roll-deg>
+     <max-aileron type="float">1.0</max-aileron>
+   </config>
+ </autopilot>
+
+</PropertyList>
+
+

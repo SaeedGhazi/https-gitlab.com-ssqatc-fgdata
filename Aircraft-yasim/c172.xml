@@ -57,7 +57,7 @@
 <propeller radius="1.0"
 	   cruise-speed="86" cruise-rpm="2200"
            cruise-alt="10000" cruise-power="99"
-           takeoff-power="160" takeoff-rpm="2500"
+           takeoff-power="134.5" takeoff-rpm="2100"
            eng-power="160" eng-rpm="2500"
            x="-.6" y="0" z="0" mass="400" moment="8">
   <actionpt x="0" y="0" z="0"/>

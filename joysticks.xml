@@ -31,6 +31,8 @@ Joystick binding definitions.
  <js-named include="Input/Joysticks/Saitek/X8-30.xml"/>
  <js-named include="Input/Joysticks/Saitek/Cyborg-Gold-3d-USB.xml"/>
 
+ <!-- Lew Engineering RCJOY device for various RC transmitters.  http://www.leweng.com -->
+ <js-named include="Input/Joysticks/LewEngineering/RC-transmitter-hitecLaser4.xml"/>
 
 </PropertyList>
 

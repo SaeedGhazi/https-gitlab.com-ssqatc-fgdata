@@ -48,6 +48,14 @@ Common configuration for all PA28 (Piper Cherokee) aircraft.
   </keyboard>
  </input>
 
+ <instrumentation>
+  <attitude-indicator>
+   <config>
+    <tumble-flag>true</tumble-flag>
+   </config>
+  </attitude-indicator>
+ </instrumentation>
+
  <engines>
   <engine>
    <rpm type="double">700</rpm>

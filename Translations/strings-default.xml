@@ -222,13 +222,6 @@
  <multiplay-desc>Specify multipilot communication settings</multiplay-desc>
  <callsign-desc>assign a unique name to a player</callsign-desc>
 
- <!-- NetworkOLK options -->
- <network-olk-options>Multipilot Options</network-olk-options>
- <disable-network-olk-desc>Disable Multipilot mode (default)</disable-network-olk-desc>
- <enable-network-olk-desc>Enable Multipilot mode</enable-network-olk-desc>
- <net-hud-desc>Hud displays network info</net-hud-desc>
- <net-id-desc>Specify your own call sign</net-id-desc>
-
  <!-- Route/Way Point Options -->
  <route-options>Route/Way Point Options</route-options>
  <wp-desc>Specify a waypoint for the GC autopilot;</wp-desc>
@@ -238,6 +231,7 @@
  <io-options>IO Options</io-options>
  <garmin-desc>Open connection using the Garmin GPS protocol</garmin-desc>
  <joyclient-desc>Open connection to an Agwagon joystick</joyclient-desc>
+ <jsclient-desc>Open connection to a remote joystick</jsclient-desc>
  <native-ctrls-desc>Open connection using the FG Native Controls protocol</native-ctrls-desc>
  <native-fdm-desc>Open connection using the FG Native FDM protocol</native-fdm-desc>
  <native-desc>Open connection using the FG Native protocol</native-desc>

@@ -732,32 +732,6 @@
   </section>
 
   <section>
-   <name>strings/network-olk-options</name>
-
-   <option>
-    <name>disable-network-olk</name>
-    <description>strings/disable-network-olk-desc</description>
-   </option>
-
-   <option>
-    <name>enable-network-olk</name>
-    <description>strings/enable-network-olk-desc</description>
-   </option>
-
-   <option>
-    <name>net-hud</name>
-    <description>strings/net-hud-desc</description>
-   </option>
-
-   <option>
-    <name>net-id</name>
-    <arg>name</arg>
-    <description>strings/net-id-desc</description>
-   </option>
-
-  </section>
-
-  <section>
    <name>strings/route-options</name>
 
    <option>
@@ -794,6 +768,12 @@
     <name>joyclient</name>
     <arg>params</arg>
     <description>strings/joyclient-desc</description>
+   </option>
+
+   <option>
+    <name>jsclient</name>
+    <arg>params</arg>
+    <description>strings/jsclient-desc</description>
    </option>
 
    <option>

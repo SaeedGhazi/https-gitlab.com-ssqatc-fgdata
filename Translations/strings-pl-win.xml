@@ -199,11 +199,6 @@
  <!-- Network options -->
  <network-options>Opcje sieciowe</network-options>
  <httpd-desc>Otwórz serwer HTTP na porcie...</httpd-desc>
- <telnet-desc>Otwórz serwer telnet na porcie...</telnet-desc>
- <jpg-httpd-desc>Zezwól na zrzuty ekranu serwerowi HTTP na porcie...</jpg-httpd-desc>
- <disable-network-olk-desc>Wy³¹cz tryb wielopilotowy(domyœlny)</disable-network-olk-desc>
- <enable-network-olk-desc>Zezwól na tryb wielopilotowy</enable-network-olk-desc>
- <net-hud-desc>Informacje sieciowe na wyœwietlaczu przeziernym</net-hud-desc>
  <net-id-desc>Podaj twój sygna³ wywo³awczy</net-id-desc>
 
  <!-- Route/Way Point Options -->

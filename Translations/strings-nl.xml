@@ -211,13 +211,6 @@
  <multiplay-desc>Definiëer de multipilot communicatie instellingen</multiplay-desc>
  <callsign-desc>Geef een speler een unieke naam</callsign-desc>
 
-  <!-- NetworkOLK options -->
-  <network-olk-options>Mutlipilot Instellingen</network-olk-options>
-  <disable-network-olk-desc>De mode voor meerdere spelers niet gebruiken (standaard)</disable-network-olk-desc>
-  <enable-network-olk-desc>De mode voor meerdere spelers inschakelen</enable-network-olk-desc>
-  <net-hud-desc>Geef netwerk informatie weer in de Hud</net-hud-desc>
-  <net-id-desc>Specificeer de eigen oproep code</net-id-desc>
-
   <!-- Route/Way Point Options -->
   <route-options>Route/Tussen station Instellingen</route-options>
   <wp-desc>Definiëer een tussenstation voor de automatische piloot;</wp-desc>

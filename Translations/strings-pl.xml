@@ -202,10 +202,6 @@
  <httpd-desc>Utworz serwer HTTP na podanym porcie</httpd-desc>
  <telnet-desc>Utworz serwer telnet na podanym porcie</telnet-desc>
  <jpg-httpd-desc>Utworz serwer HTTP zrzutow ekranu na podanym porcie</jpg-httpd-desc>
- <disable-network-olk-desc>Wylacz tryb wielopilotowy(domyslny)</disable-network-olk-desc>
- <enable-network-olk-desc>Zezwol na tryb wielopilotowy</enable-network-olk-desc>
- <net-hud-desc>Informacje sieciowe na wyswietlaczu przeziernym</net-hud-desc>
- <net-id-desc>Podaj twoj sygnal wywolawczy</net-id-desc>
 
  <!-- Route/Way Point Options -->
  <route-options>Opcje trasy/punktow przelotowych</route-options>

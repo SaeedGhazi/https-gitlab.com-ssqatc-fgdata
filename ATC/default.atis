@@ -1,3 +1,4 @@
+# Flightgear ATIS data.  Compiled 2001 by David Luff from the DAFIF data.  Comments to david.luff@nottingham.ac.uk
 I  12.5014  -70.0152  60  132.1  50  TNCA  "Reina Beatrix International"
 I  25.3286  55.5172  111  112.3  50  OMSJ  "Sharjah International"
 I  24.433  54.6511  88  113  50  OMAA  "Abu Dhabi International"
@@ -1284,3 +1285,4 @@ I  17.7019  -64.7986  65  135.65  50  TISX  "Henry E Rohlsen"
 I  18.3373  -64.9734  23  124  50  TIST  "Cyril E King"
 I  44.8184  20.3091  335  122.925  50  LYBE  "Beograd"
 I  -17.9318  31.0928  4901  113.1  50  FVHA  "Harare International"
+[End]

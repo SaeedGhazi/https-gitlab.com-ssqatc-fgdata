@@ -50,8 +50,8 @@ Started September 2000 by David Megginson, david@megginson.com
  <!-- Position -->
 
  <position>
-  <!-- <longitude>-110.6642444</longitude> -->
-  <!-- <latitude>33.3528917</latitude> -->
+  <!-- <longitude-deg>-110.6642444</longitude-deg> -->
+  <!-- <latitude-deg>33.3528917</latitude-deg> -->
   <altitude-ft>-9999</altitude-ft>
  </position>
 

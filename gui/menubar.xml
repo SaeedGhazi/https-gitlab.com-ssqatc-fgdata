@@ -243,6 +243,19 @@
   </item>
 
  </menu>
+ 
+ <menu>
+  <label>ATC/AI</label>
+ 
+  <item>
+   <label>Options</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>atc-ai</dialog-name>
+   </binding>
+  </item>
+  
+ </menu>
 
  <menu>
   <label>Help</label>

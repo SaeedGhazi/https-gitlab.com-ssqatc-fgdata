@@ -660,10 +660,16 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <command>nasal</command>
    <script>
     if(getprop("/sim/allow-toggle-cockpit")) {
-        setprop("/sim/current-view/heading-offset-deg", 0);
-        setprop("/sim/current-view/pitch-offset-deg", 0);
-        setprop("/sim/view/internal", !getprop("/sim/view/internal"));
+        setprop("/sim/current-view/internal", !getprop("/sim/current-view/internal"));
+        setprop("/sim/view/internal", getprop("/sim/current-view/internal"));
         setprop("/sim/virtual-cockpit", !getprop("/sim/virtual-cockpit"));
+        if(getprop("/sim/current-view/internal")) {
+          setprop("/sim/current-view/heading-offset-deg", getprop("/sim/current-view/config/heading-offset-deg"));
+          setprop("/sim/current-view/pitch-offset-deg", getprop("/sim/current-view/config/pitch-offset-deg"));
+        } else {
+          setprop("/sim/current-view/heading-offset-deg", 0);
+          setprop("/sim/current-view/pitch-offset-deg", 0);
+        }
     }
    </script>
   </binding>

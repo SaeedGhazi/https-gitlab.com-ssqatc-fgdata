@@ -94,6 +94,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
   <number-views type="int">6</number-views>
   <chase-distance-m type="double">-25.0</chase-distance-m>
+  <allow-toggle-cockpit type="bool">false</allow-toggle-cockpit>
 
   <!-- "tower" positioned to right of runway at KSFO -->
   <tower>

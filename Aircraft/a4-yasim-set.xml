@@ -27,10 +27,6 @@ October 23 2001 John Check, fgpanels@rockfish.net
     <path>Aircraft/a4/a4-panel.xml</path>
     <visibility>true</visibility>
   </panel>
-  <panel n="1">
-    <desc>2D Panel</desc>
-    <path>Aircraft/c310u3a/c310u3a-panel.xml</path>
-  </panel>
 
   <model>
    <path>Aircraft/a4/Models/a4-blue.xml</path>
@@ -46,15 +42,8 @@ October 23 2001 John Check, fgpanels@rockfish.net
   </view>
 
   <current-view>
-    <pitch-offset-deg>-12</pitch-offset-deg>
+    <pitch-offset-deg>-17</pitch-offset-deg>
   </current-view>
 
  </sim>
 </PropertyList>
-
-
-
-
-
-
-

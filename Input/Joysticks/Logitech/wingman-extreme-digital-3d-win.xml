@@ -1,0 +1,220 @@
+<?xml version="1.0" ?>
+
+<!--
+************************************************************************
+* Bindings for Logitech WingMan Extreme Digital 3D (USB) joystick.
+*
+*
+* Axis 0: ailerons
+* Axis 1: elevator
+* Axis 2 (slider): throttle
+* Axis 3 (twist): rudder
+* Axes 6 and 7 (hat): view direction
+*
+* Button 0: all brakes
+* Button 1: flap down
+* Button 2: flap up
+* Button 3: elevator trim up
+* Button 4: elevator trim down
+* Button 5: left brake only
+* Button 6: right brake only
+************************************************************************
+-->
+
+<PropertyList>
+
+ <name>Logitech WingMan Extreme Digital 3D (USB)</name>
+
+ <axis n="0">
+  <desc>Aileron</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/aileron</property>
+   <squared type="bool">true</squared>
+  </binding>
+ </axis>
+
+ <axis n="1">
+  <desc>Elevator</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/elevator</property>
+   <factor type="double">-1.0</factor>
+   <squared type="bool">true</squared>
+  </binding>
+ </axis>
+
+ <axis n="2">
+  <desc>Throttle</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/throttle[0]</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/throttle[1]</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+ </axis>
+
+ <axis n="3">
+  <desc>Rudder</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/rudder</property>
+   <factor type="double">1.0</factor>
+  </binding>
+ </axis>
+
+ <axis n="6">
+  <desc>View Direction</desc>
+  <low>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
+    <step type="double">1.0</step>
+   </binding>
+  </low>
+  <high>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
+    <step type="double">-1.0</step>
+   </binding>
+  </high>
+ </axis>
+
+ <axis n="7">
+  <desc>View Elevation</desc>
+  <low>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-pitch-offset-deg</property>
+    <step type="double">1.0</step>
+   </binding>
+  </low>
+  <high>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-pitch-offset-deg</property>
+    <step type="double">-1.0</step>
+   </binding>
+  </high>
+ </axis>
+
+ <button n="0">
+  <desc>Brakes</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/brakes[0]</property>
+   <value type="double">1.0</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/brakes[1]</property>
+   <value type="double">1.0</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/brakes[2]</property>
+   <value type="double">1.0</value>
+  </binding>
+  <mod-up>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/brakes[0]</property>
+    <value type="double">0.0</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/brakes[1]</property>
+    <value type="double">0.0</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/brakes[2]</property>
+    <value type="double">0.0</value>
+   </binding>
+  </mod-up>
+ </button>
+
+ <button n="3">
+  <desc>Elevator trim up</desc>
+  <repeatable type="bool">true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/elevator-trim</property>
+   <step type="double">0.001</step>
+  </binding>
+ </button>
+
+ <button n="4">
+  <desc>Elevator trim down</desc>
+  <repeatable type="bool">true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/elevator-trim</property>
+   <step type="double">-0.001</step>
+  </binding>
+ </button>
+
+ <button n="1">
+  <desc>Flaps down</desc>
+  <repeatable>false</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/flaps</property>
+   <step type="double">-0.34</step>
+  </binding>
+ </button>
+
+ <button n="2">
+  <desc>Flaps up</desc>
+  <repeatable>false</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/flaps</property>
+   <step type="double">0.34</step>
+  </binding>
+ </button>
+
+ <button n="6">
+  <desc>Right brake</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/brakes[1]</property>
+   <value type="double">1.0</value>
+  </binding>
+  <mod-up>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/brakes[1]</property>
+    <value type="double">0.0</value>
+   </binding>
+  </mod-up>
+ </button>
+
+ <button n="5">
+  <desc>Left brake</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/brakes[0]</property>
+   <value type="double">1.0</value>
+  </binding>
+  <mod-up>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/brakes[0]</property>
+    <value type="double">0.0</value>
+   </binding>
+  </mod-up>
+ </button>
+
+</PropertyList>

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+UIUC Marchetti S.211 init file.
+************************************************************************
+-->
+
+<PropertyList>
+
+ <sim>
+ 
+  <flight-model>larcsim</flight-model>
+  <aero>uiuc</aero>
+  <aircraft-dir>Aircraft-uiuc/Marchetti</aircraft-dir>
+  <fuel-fraction>1.0</fuel-fraction>
+
+  <sound>
+   <audible>true</audible>
+   <path>Aircraft/a4/a4-sound.xml</path>
+  </sound>
+
+  <panel>
+   <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
+   <visibility>true</visibility>
+  </panel>
+
+  <panel_2>
+   <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
+  </panel_2>
+
+  <!-- You must download this separately -->
+  <model>
+   <path>Aircraft/Marchetti/Models/marchetti.mdl</path>
+  </model> 
+
+ </sim>
+
+ <position>
+  <altitude-ft>1500</altitude-ft>
+ </position>
+
+ <velocities>
+  <airspeed-kt>100</airspeed-kt>
+ </velocities>
+
+</PropertyList>
+
+

@@ -502,10 +502,10 @@ Mar 18 2003
   <layer>
    <name>HDG OFF</name>
    <condition>
-    <equals>
+    <less-than>
      <property>/systems/electrical/outputs/hsi</property>
-     <value>false</value>
-    </equals>
+     <value>1.0</value>
+    </less-than>
    </condition>
    <w>104</w>
    <h>60</h>

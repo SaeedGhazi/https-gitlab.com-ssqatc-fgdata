@@ -46,7 +46,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
      <target-climb-rate-fpm type="float">1000.0</target-climb-rate-fpm>
      <target-descent-rate-fpm type="float">1000.0</target-descent-rate-fpm>
      <elevator-adj-factor type="float">10000.0</elevator-adj-factor>
-     <integral-contribution type="float">0.00001</integral-contribution>
+     <integral-contribution type="float">0.001</integral-contribution>
    </config>
  </autopilot>
 

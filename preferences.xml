@@ -585,6 +585,7 @@ Started September 2000 by David Megginson, david@megginson.com
  <!-- Instruments -->
 
  <instrumentation>
+
   <airspeed-indicator>
    <serviceable type="bool" archive="y">true</serviceable>
   </airspeed-indicator>
@@ -606,34 +607,56 @@ Started September 2000 by David Megginson, david@megginson.com
    <serviceable type="bool" archive="y">true</serviceable>
    <setting-inhg type="double" archive="y">29.92</setting-inhg>
   </altimeter>
+
   <turn-indicator>
    <serviceable type="bool" archive="y">true</serviceable>
   </turn-indicator>
+
   <slip-skid-ball>
    <serviceable type="bool" archive="y">true</serviceable>
-  </slip-skid-ball>  
+  </slip-skid-ball>
+  
   <heading-indicator>
    <serviceable type="bool" archive="y">true</serviceable>
    <spin type="double" archive="y">0.0</spin>
    <offset-deg type="double" archive="y">4.5</offset-deg>  <!-- just for fun -->
   </heading-indicator>
+
   <vertical-speed-indicator>
    <serviceable type="bool" archive="y">true</serviceable>
   </vertical-speed-indicator>
+
   <magnetic-compass>
    <serviceable type="bool" archive="y">true</serviceable>
   </magnetic-compass>
+
   <dme>
    <serviceable type="bool" archive="y">true</serviceable>
    <switch-position type="int" archive="y">0</switch-position>
   </dme>
+
   <gps>
    <serviceable type="bool" archive="y">true</serviceable>
   </gps>
+
   <clock>
    <serviceable type="bool" archive="y">true</serviceable>
    <offset-sec type="long" archive="y">0</offset-sec>
   </clock>
+
+  <adf>
+   <frequencies>
+    <selected-khz type="int">100</selected-khz>
+    <standby-khz type="int">999</standby-khz>
+   </frequencies>
+   <serviceable type="bool" archive="y">true</serviceable>
+   <indicated-bearing-deg type="double">90</indicated-bearing-deg>
+   <error-deg type="double">2</error-deg>
+   <mode>adf</mode>
+   <rotation-deg type="double">0</rotation-deg>
+   <volume-norm type="double">0.5</volume-norm>
+  </adf>
+
  </instrumentation>
 
  <systems>

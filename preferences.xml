@@ -205,6 +205,14 @@ Started September 2000 by David Megginson, david@megginson.com
   <menubar>
    <visibility type="bool">true</visibility>
   </menubar>
+  
+  <ATC>
+   <enabled type="bool">true</enabled>
+  </ATC>
+
+  <ai-traffic>
+   <enabled type="bool">true</enabled>
+  </ai-traffic>
 
  </sim>
 

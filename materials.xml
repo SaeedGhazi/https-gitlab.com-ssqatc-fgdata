@@ -1888,7 +1888,7 @@ Properties currently used:
 <material>
  <name>Freeway</name>
  <name>Road</name>
- <texture>Terrain/New/asphault.rgb</texture>
+ <texture>Terrain/asphault.rgb</texture>
  <xsize>400</xsize>
  <ysize>400</ysize>
  <light-coverage>10000.0</light-coverage>
@@ -1908,7 +1908,7 @@ Properties currently used:
 
 <material>
  <name>Railroad</name>
- <texture>Terrain/New/gravel.rgb</texture>
+ <texture>Terrain/gravel.rgb</texture>
  <xsize>400</xsize>
  <ysize>400</ysize>
  <light-coverage>1000000.0</light-coverage>

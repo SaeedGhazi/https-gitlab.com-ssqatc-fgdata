@@ -18,15 +18,15 @@ October 23 2001 John Check, fgpanels@rockfish.net
   <sound>true</sound>
 
   <panel>
-   <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
+   <path>Aircraft/747/747-panel.xml</path>
    <visibility>true</visibility>
   </panel>
   <panel_2>
-   <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
+   <path>Aircraft/747/747-mini-panel.xml</path>
   </panel_2>
   
   <model>
-   <path><!-- you need to set this --></path>
+   <path>Aircraft/747/Model/boeing747.ac</path>
   </model>
  </sim>
 </PropertyList>

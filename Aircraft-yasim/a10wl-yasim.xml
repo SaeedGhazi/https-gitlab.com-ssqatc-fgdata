@@ -1,0 +1,221 @@
+<!--  A10 yasim config.  This is a hack and not an authentic
+      representation of the aircraft.  Having said that, the
+      numbers, where I could find them, roughly match those of
+      the original aircraft.
+      Lee Elliott. leee-fgfs@spatial.freeserve.co.uk
+-->
+
+<airplane mass="45860">
+
+<!-- Approach configuration -->
+<approach speed="110" aoa="14">
+  <control-setting axis="/controls/throttle[0]" value="0.5"/>
+  <control-setting axis="/controls/flaps" value="1.0"/>
+  <control-setting axis="/controls/spoilers" value="1.0"/>
+  <control-setting axis="/controls/gear-down" value="1"/>
+</approach>
+
+<!-- Cruise configuration -->
+<cruise speed="380" alt="35000">
+  <control-setting axis="/controls/throttle[0]" value="0.8"/>
+  <control-setting axis="/controls/flaps" value="0.0"/>
+  <control-setting axis="/controls/gear-down" value="0"/>
+</cruise>
+
+<cockpit x="-3.5" y="0.0" z="1.2"/>
+
+<fuselage ax="0" ay="0" az="0" bx="-16.26" by="0" bz="0"
+          width="1.4"/>
+
+<!-- Left Engine -->
+<fuselage ax="-10" ay="1.50" az="1" bx="-13.5" by="1.50" bz="0.8"
+          width="1.5"/>
+
+<!-- Right Engine -->
+<fuselage ax="-10" ay="-1.50" az="1" bx="-13.5" by="-1.50" bz="0.8"
+          width="1.5"/>
+
+<wing x="-8.8" y="0.5" z="-0.5" taper="0.6" incidence="-1.0"
+      length="8.3" chord="3.1" sweep="0.0" dihedral="3.0" camber="0.006">
+  <stall aoa="14" width="3" peak="1.3"/>
+  <flap0 start="0.04" end="0.51" lift="1.5" drag="1.2"/>
+  <flap1 start="0.54" end="0.86" lift="1.3" drag="1.2"/>
+  <spoiler start="0.54" end="0.86" lift="0.1" drag="20.0"/>
+
+  <control-input axis="/controls/flaps" control="FLAP0"/>
+  <control-input axis="/controls/aileron" control="FLAP1" split="true"/>
+  <control-input axis="/controls/aileron-trim" control="FLAP1" split="true"/>
+  <control-input axis="/controls/spoilers" control="SPOILER"/>
+
+  <control-output control="FLAP0" prop="/surface-positions/flap-pos-norm"/>
+  <control-output control="FLAP1" side="left"
+      prop="/surface-positions/left-aileron-pos-norm"/>
+  <control-output control="FLAP1" side="right"
+      prop="/surface-positions/right-aileron-pos-norm"/>
+  <control-output control="SPOILER" side="left"
+		  prop="/surface-positions/left-spoiler-pos-norm"/>
+  <control-output control="SPOILER" side="right"
+		  prop="/surface-positions/right-spoiler-pos-norm"/>
+
+  <control-speed control="FLAP0" transition-time="5"/>
+  <control-speed control="SPOILER" transition-time="0.5"/>
+
+</wing>
+
+<hstab x="-15.5" y="0.4" z="0.4" taper="0.0" effectiveness="1.2"
+       length="2.5" chord="2" sweep="0.0" dihedral="0.0" camber="0.0">
+  <stall aoa="20" width="5" peak="1.5"/>
+  <flap0 start="0" end="1" lift="1.6" drag="1.2"/>
+  <control-input axis="/controls/elevator" control="FLAP0"/>
+  <control-input axis="/controls/elevator-trim" control="FLAP0"/>
+  <control-output control="FLAP0" prop="/surface-positions/elevator-pos-norm"/>
+</hstab>
+
+<vstab x="-15.0" y="2.5" z="-0.9" taper="0.7"
+       length="2.8" chord="2.0" sweep="0.0">
+  <stall aoa="16" width="5" peak="1.5"/>
+  <flap0 start="0" end="1" lift="1.15" drag="1.3"/>
+  <control-input axis="/controls/rudder" control="FLAP0" invert="true"/>
+  <control-output control="FLAP0" prop="/surface-positions/rudder-pos-norm"/>
+</vstab>
+
+<vstab x="-15.0" y="-2.5" z="-0.9" taper="0.7"
+       length="2.8" chord="2.0" sweep="0.0">
+  <stall aoa="16" width="5" peak="1.5"/>
+  <flap0 start="0" end="1" lift="1.15" drag="1.3"/>
+  <control-input axis="/controls/rudder" control="FLAP0" invert="true"/>
+  <control-output control="FLAP0" prop="/surface-positions/rudder-pos-norm"/>
+</vstab>
+
+<!-- Engines and tanks -->
+<jet x="-11.8" y="-1.5" z="1.0" mass="1000" thrust="9065">
+  <control-input axis="/controls/throttle[0]" control="THROTTLE"/>
+</jet>
+
+<jet x="-11.8" y="1.5" z="1.0" mass="1000" thrust="9065">
+  <control-input axis="/controls/throttle[1]" control="THROTTLE"/>
+</jet>
+
+<tank x="-8.5" y="-1.5" z="0.0" jet="true" capacity="2000"/>
+<tank x="-8.5" y="1.5" z="0.0" jet="true" capacity="2000"/>
+<tank x="-8.5" y="0" z="0.0" jet="true" capacity="6700"/>
+
+<!-- Undercarriage -->
+<!-- nose -->
+<gear x="-2.9" y="0.4" z="-2.8" retract-time="7" compression="0.7">
+  <control-input axis="/controls/rudder" control="STEER" square="true"/>
+  <control-input axis="/controls/gear-down" control="EXTEND"/>
+  <control-speed control="EXTEND" transition-time="7"/>
+  <control-output control="EXTEND" prop="/gear/gear/position-norm"/>
+</gear>
+
+<!-- left main -->
+<gear x="-9.0" y="2.5" z="-2.8" retract-time="7" compression="0.6">
+  <control-input axis="/controls/brakes[0]" control="BRAKE"/>
+  <control-input axis="/controls/gear-down" control="EXTEND"/>
+  <control-speed control="EXTEND" transition-time="7"/>
+  <control-output control="EXTEND" prop="/gear/gear[0]/position-norm"/>
+</gear>
+
+<!-- right main -->
+<gear x="-9.0" y="-2.5" z="-2.8" retract-time="7" compression="0.6">
+  <control-input axis="/controls/brakes[1]" control="BRAKE"/>
+  <control-input axis="/controls/gear-down" control="EXTEND"/>
+  <control-speed control="EXTEND" transition-time="7"/>
+  <control-output control="EXTEND" prop="/gear/gear[1]/position-norm"/>
+</gear>
+
+<!-- Canopy -->
+<gear x="-2.6" y="0.0" z="1.4" retract-time="7" compression="0.6">
+  <control-input axis="/controls/parking-brake" control="EXTEND"/>
+  <control-speed control="EXTEND" transition-time="5"/>
+  <control-output control="EXTEND" prop="/canopy/position-norm"/>
+</gear>
+
+<!-- Ballast -->
+<ballast x="-3.5" y="0" z="1.0" mass="800"/> <!-- C/pit + Pilot -->
+<ballast x="-4.0" y="0" z="-1.0" mass="4000"/> <!-- Gun -->
+<ballast x="-5.0" y="0" z="0.0" mass="1000"/> <!-- avionics -->
+<ballast x="-7.0" y="0" z="-0.8" mass="2500"/> <!-- trim ballast -->
+
+<!-- Weapons load -->
+
+<!-- AGM65 x 16 objects and ballast (Left to Right) -->
+<!-- Positioned in line with the aircraft CG (x) - y and z locs approximate -->
+
+<!-- Left Wing Outer AGM65 -->
+<fuselage ax="-7.65" ay="4.71" az="-0.47" bx="-10.15" by="4.71" bz="-0.35" width="0.35"/>
+<ballast x="-8.6" y="4.71" z="-0.41" mass="485"/>
+
+<!-- Left Wing Mid Cluster Outer AGM65 -->
+<fuselage ax="-7.65" ay="3.89" az="-0.53" bx="-10.15" by="3.89" bz="-0.41" width="0.35"/>
+<ballast x="-8.6" y="3.89" z="-0.47" mass="485"/>
+
+<!-- Left Wing Mid Cluster Mid AGM65 -->
+<fuselage ax="-7.65" ay="3.59" az="-0.96" bx="-10.15" by="3.59" bz="-0.84" width="0.35"/>
+<ballast x="-8.6" y="3.89" z="-0.90" mass="485"/>
+
+<!-- Left Wing Mid Cluster Inner AGM65 -->
+<fuselage ax="-7.65" ay="3.21" az="-0.59" bx="-10.15" by="3.21" bz="-0.47" width="0.35"/>
+<ballast x="-8.6" y="3.21" z="-0.53" mass="485"/>
+
+<!-- Left Wing Inner Cluster Outer AGM65 -->
+<fuselage ax="-7.65" ay="1.97" az="-0.65" bx="-10.15" by="1.97" bz="-0.53" width="0.35"/>
+<ballast x="-8.6" y="1.97" z="-0.59" mass="485"/>
+
+<!-- Left Wing Inner Cluster Mid AGM65 -->
+<fuselage ax="-7.65" ay="1.63" az="-1.05" bx="-10.15" by="1.63" bz="-0.93" width="0.35"/>
+<ballast x="-8.6" y="1.63" z="-0.99" mass="485"/>
+
+<!-- Left Wing Inner Cluster Inner AGM65 -->
+<fuselage ax="-7.65" ay="1.29" az="-0.65" bx="-10.15" by="1.29" bz="-0.53" width="0.35"/>
+<ballast x="-8.6" y="1.29" z="-0.59" mass="485"/>
+
+<!-- Left Fuselage AGM65 -->
+<fuselage ax="-7.65" ay="0.53" az="-0.70" bx="-10.15" by="0.53" bz="-0.58" width="0.35"/>
+<ballast x="-8.6" y="0.53" z="-0.64" mass="485"/>
+
+<!-- Right Wing Outer AGM65 -->
+<fuselage ax="-7.65" ay="-4.71" az="-0.47" bx="-10.15" by="-4.71" bz="-0.35" width="0.35"/>
+<ballast x="-8.6" y="-4.71" z="-0.41" mass="485"/>
+
+<!-- Right Wing Mid Cluster Outer AGM65 -->
+<fuselage ax="-7.65" ay="-3.89" az="-0.53" bx="-10.15" by="-3.89" bz="-0.41" width="0.35"/>
+<ballast x="-8.6" y="-3.89" z="-0.47" mass="485"/>
+
+<!-- Right Wing Mid Cluster Mid AGM65 -->
+<fuselage ax="-7.65" ay="-3.59" az="-0.96" bx="-10.15" by="-3.59" bz="-0.84" width="0.35"/>
+<ballast x="-8.6" y="-3.89" z="-0.90" mass="485"/>
+
+<!-- Right Wing Mid Cluster Inner AGM65 -->
+<fuselage ax="-7.65" ay="-3.21" az="-0.59" bx="-10.15" by="-3.21" bz="-0.47" width="0.35"/>
+<ballast x="-8.6" y="-3.21" z="-0.53" mass="485"/>
+
+<!-- Right Wing Inner Cluster Outer AGM65 -->
+<fuselage ax="-7.65" ay="-1.97" az="-0.65" bx="-10.15" by="-1.97" bz="-0.53" width="0.35"/>
+<ballast x="-8.6" y="-1.97" z="-0.59" mass="485"/>
+
+<!-- Right Wing Inner Cluster Mid AGM65 -->
+<fuselage ax="-7.65" ay="-1.63" az="-1.05" bx="-10.15" by="-1.63" bz="-0.93" width="0.35"/>
+<ballast x="-8.6" y="-1.63" z="-0.99" mass="485"/>
+
+<!-- Right Wing Inner Cluster Inner AGM65 -->
+<fuselage ax="-7.65" ay="-1.29" az="-0.65" bx="-10.15" by="-1.29" bz="-0.53" width="0.35"/>
+<ballast x="-8.6" y="-1.29" z="-0.59" mass="485"/>
+
+<!-- Right Fuselage AGM65 -->
+<fuselage ax="-7.65" ay="-0.53" az="-0.70" bx="-10.15" by="-0.53" bz="-0.58" width="0.35"/>
+<ballast x="-8.6" y="-0.53" z="-0.64" mass="485"/>
+
+<!-- AIM9 x 2 objects and ballast (guessed) - (Left to Right) -->
+<!-- Positioned ahead of the aircraft CG (x) - y and z locs approximate -->
+
+<!-- Left Wing AIM9 -->
+<fuselage ax="-6.9" ay="5.76" az="-0.27" bx="-9.9" by="5.76" bz="-0.15" width="0.13"/>
+<ballast x="-7.9" y="5.76" z="-0.21" mass="200"/>
+
+<!-- Right Wing AIM9 -->
+<fuselage ax="-6.9" ay="-5.76" az="-0.27" bx="-9.9" by="-5.76" bz="-0.15" width="0.13"/>
+<ballast x="-7.9" y="-5.76" z="-0.21" mass="200"/>
+
+</airplane>

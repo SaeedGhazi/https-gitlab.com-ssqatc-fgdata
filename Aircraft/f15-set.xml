@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-
-<PropertyList include="f15-jsbsim-set.xml">
- <sim>
-  <description>Alias for f15-jsbsim.</description>
- </sim>
-</PropertyList>

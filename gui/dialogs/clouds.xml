@@ -17,243 +17,291 @@
   <label>Weather: Clouds</label>
  </text>
 
- <text>
-  <x>10</x>
+ <!-- Header Row -->
+
+ <group>
+  <x>0</x>
   <y>210</y>
-  <label>Layer</label>
- </text>
 
- <text>
-  <x>75</x>
-  <y>210</y>
-  <label>Elevation (ft)</label>
- </text>
+  <text>
+   <x>10</x>
+   <y>0</y>
+   <label>Layer</label>
+  </text>
 
- <text>
-  <x>225</x>
-  <y>210</y>
-  <label>Type</label>
- </text>
+  <text>
+   <x>75</x>
+   <y>0</y>
+   <label>Elevation (ft)</label>
+  </text>
 
- <text>
-  <x>450</x>
-  <y>210</y>
-  <label>Thickness (ft)</label>
- </text>
+  <text>
+   <x>225</x>
+   <y>0</y>
+   <label>Type</label>
+  </text>
 
- <text>
-  <x>10</x>
+  <text>
+   <x>450</x>
+   <y>0</y>
+   <label>Thickness (ft)</label>
+  </text>
+
+ </group>
+
+ <!-- Data Rows -->
+
+ <group>
+  <x>0</x>
   <y>180</y>
-  <label>4</label>
- </text>
 
- <input>
-  <x>75</x>
-  <y>180</y>
-  <width>125</width>
-  <height>25</height>
-  <property>/environment/clouds/layer[4]/elevation-ft</property>
- </input>
+  <text>
+   <x>10</x>
+   <y>0</y>
+   <label>4</label>
+  </text>
 
- <combo>
-  <x>225</x>
-  <y>180</y>
-  <width>200</width>
-  <height>25</height>
-  <property>/environment/clouds/layer[4]/type</property>
-  <value>clear</value>
-  <value>mostly-sunny</value>
-  <value>mostly-cloudy</value>
-  <value>overcast</value>
-  <value>cirrus</value>
- </combo>
+  <input>
+   <x>75</x>
+   <y>0</y>
+   <width>125</width>
+   <height>25</height>
+   <property>/environment/clouds/layer[4]/elevation-ft</property>
+  </input>
 
- <input>
-  <x>450</x>
-  <y>180</y>
-  <width>125</width>
-  <height>25</height>
-  <property>/environment/clouds/layer[4]/thickness-ft</property>
- </input>
+  <combo>
+   <x>225</x>
+   <y>0</y>
+   <width>200</width>
+   <height>25</height>
+   <property>/environment/clouds/layer[4]/type</property>
+   <value>clear</value>
+   <value>mostly-sunny</value>
+   <value>mostly-cloudy</value>
+   <value>overcast</value>
+   <value>cirrus</value>
+  </combo>
 
- <text>
-  <x>10</x>
+  <input>
+   <x>450</x>
+   <y>0</y>
+   <width>125</width>
+   <height>25</height>
+   <property>/environment/clouds/layer[4]/thickness-ft</property>
+  </input>
+
+ </group>
+
+ <group>
+  <x>0</x>
   <y>150</y>
-  <label>3</label>
- </text>
 
- <input>
-  <x>75</x>
-  <y>150</y>
-  <width>125</width>
-  <height>25</height>
-  <property>/environment/clouds/layer[3]/elevation-ft</property>
- </input>
+  <text>
+   <x>10</x>
+   <y>0</y>
+   <label>3</label>
+  </text>
 
- <combo>
-  <x>225</x>
-  <y>150</y>
-  <width>200</width>
-  <height>25</height>
-  <property>/environment/clouds/layer[3]/type</property>
-  <value>clear</value>
-  <value>mostly-sunny</value>
-  <value>mostly-cloudy</value>
-  <value>overcast</value>
-  <value>cirrus</value>
- </combo>
+  <input>
+   <x>75</x>
+   <y>0</y>
+   <width>125</width>
+   <height>25</height>
+   <property>/environment/clouds/layer[3]/elevation-ft</property>
+  </input>
 
- <input>
-  <x>450</x>
-  <y>150</y>
-  <width>125</width>
-  <height>25</height>
-  <property>/environment/clouds/layer[3]/thickness-ft</property>
- </input>
+  <combo>
+   <x>225</x>
+   <y>0</y>
+   <width>200</width>
+   <height>25</height>
+   <property>/environment/clouds/layer[3]/type</property>
+   <value>clear</value>
+   <value>mostly-sunny</value>
+   <value>mostly-cloudy</value>
+   <value>overcast</value>
+   <value>cirrus</value>
+  </combo>
 
- <text>
-  <x>10</x>
+  <input>
+   <x>450</x>
+   <y>0</y>
+   <width>125</width>
+   <height>25</height>
+   <property>/environment/clouds/layer[3]/thickness-ft</property>
+  </input>
+
+ </group>
+
+ <group>
+  <x>0</x>
   <y>120</y>
-  <label>1</label>
- </text>
 
- <input>
-  <x>75</x>
-  <y>120</y>
-  <width>125</width>
-  <height>25</height>
-  <property>/environment/clouds/layer[2]/elevation-ft</property>
- </input>
+  <text>
+   <x>10</x>
+   <y>0</y>
+   <label>2</label>
+  </text>
 
- <combo>
-  <x>225</x>
-  <y>120</y>
-  <width>200</width>
-  <height>25</height>
-  <property>/environment/clouds/layer[2]/type</property>
-  <value>clear</value>
-  <value>mostly-sunny</value>
-  <value>mostly-cloudy</value>
-  <value>overcast</value>
-  <value>cirrus</value>
- </combo>
+  <input>
+   <x>75</x>
+   <y>0</y>
+   <width>125</width>
+   <height>25</height>
+   <property>/environment/clouds/layer[2]/elevation-ft</property>
+  </input>
 
- <input>
-  <x>450</x>
-  <y>120</y>
-  <width>125</width>
-  <height>25</height>
-  <property>/environment/clouds/layer[2]/thickness-ft</property>
- </input>
+  <combo>
+   <x>225</x>
+   <y>0</y>
+   <width>200</width>
+   <height>25</height>
+   <property>/environment/clouds/layer[2]/type</property>
+   <value>clear</value>
+   <value>mostly-sunny</value>
+   <value>mostly-cloudy</value>
+   <value>overcast</value>
+   <value>cirrus</value>
+  </combo>
 
- <text>
-  <x>10</x>
+  <input>
+   <x>450</x>
+   <y>0</y>
+   <width>125</width>
+   <height>25</height>
+   <property>/environment/clouds/layer[2]/thickness-ft</property>
+  </input>
+
+ </group>
+
+ <group>
+  <x>0</x>
   <y>90</y>
-  <label>1</label>
- </text>
 
- <input>
-  <x>75</x>
-  <y>90</y>
-  <width>125</width>
-  <height>25</height>
-  <property>/environment/clouds/layer[1]/elevation-ft</property>
- </input>
+  <text>
+   <x>10</x>
+   <y>0</y>
+   <label>1</label>
+  </text>
 
- <combo>
-  <x>225</x>
-  <y>90</y>
-  <width>200</width>
-  <height>25</height>
-  <property>/environment/clouds/layer[1]/type</property>
-  <value>clear</value>
-  <value>mostly-sunny</value>
-  <value>mostly-cloudy</value>
-  <value>overcast</value>
-  <value>cirrus</value>
- </combo>
+  <input>
+   <x>75</x>
+   <y>0</y>
+   <width>125</width>
+   <height>25</height>
+   <property>/environment/clouds/layer[1]/elevation-ft</property>
+  </input>
 
- <input>
-  <x>450</x>
-  <y>90</y>
-  <width>125</width>
-  <height>25</height>
-  <property>/environment/clouds/layer[1]/thickness-ft</property>
- </input>
+  <combo>
+   <x>225</x>
+   <y>0</y>
+   <width>200</width>
+   <height>25</height>
+   <property>/environment/clouds/layer[1]/type</property>
+   <value>clear</value>
+   <value>mostly-sunny</value>
+   <value>mostly-cloudy</value>
+   <value>overcast</value>
+   <value>cirrus</value>
+  </combo>
 
- <text>
-  <x>10</x>
+  <input>
+   <x>450</x>
+   <y>0</y>
+   <width>125</width>
+   <height>25</height>
+   <property>/environment/clouds/layer[1]/thickness-ft</property>
+  </input>
+
+ </group>
+
+ <group>
+  <x>0</x>
   <y>60</y>
-  <label>0</label>
- </text>
 
- <input>
-  <x>75</x>
-  <y>60</y>
-  <width>125</width>
-  <height>25</height>
-  <property>/environment/clouds/layer[0]/elevation-ft</property>
- </input>
+  <text>
+   <x>10</x>
+   <y>0</y>
+   <label>0</label>
+  </text>
 
- <combo>
-  <x>225</x>
-  <y>60</y>
-  <width>200</width>
-  <height>25</height>
-  <property>/environment/clouds/layer[0]/type</property>
-  <value>clear</value>
-  <value>mostly-sunny</value>
-  <value>mostly-cloudy</value>
-  <value>overcast</value>
-  <value>cirrus</value>
- </combo>
+  <input>
+   <x>75</x>
+   <y>0</y>
+   <width>125</width>
+   <height>25</height>
+   <property>/environment/clouds/layer[0]/elevation-ft</property>
+  </input>
 
- <input>
-  <x>450</x>
-  <y>60</y>
-  <width>125</width>
-  <height>25</height>
-  <property>/environment/clouds/layer[0]/thickness-ft</property>
- </input>
+  <combo>
+   <x>225</x>
+   <y>0</y>
+   <width>200</width>
+   <height>25</height>
+   <property>/environment/clouds/layer[0]/type</property>
+   <value>clear</value>
+   <value>mostly-sunny</value>
+   <value>mostly-cloudy</value>
+   <value>overcast</value>
+   <value>cirrus</value>
+  </combo>
 
- <button>
+  <input>
+   <x>450</x>
+   <y>0</y>
+   <width>125</width>
+   <height>25</height>
+   <property>/environment/clouds/layer[0]/thickness-ft</property>
+  </input>
+
+ </group>
+
+ <!-- Button Box -->
+
+ <group>
   <x>105</x>
   <y>10</y>
-  <legend>OK</legend>
-  <binding>
-   <command>dialog-apply</command>
-  </binding>
-  <binding>
-   <command>dialog-close</command>
-  </binding>
-  <default>true</default>
- </button>
 
- <button>
-  <x>205</x>
-  <y>10</y>
-  <legend>Apply</legend>
-  <binding>
-   <command>dialog-apply</command>
-  </binding>
- </button>
+  <button>
+   <x>0</x>
+   <y>0</y>
+   <legend>OK</legend>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+   <binding>
+    <command>dialog-close</command>
+   </binding>
+   <default>true</default>
+  </button>
 
- <button>
-  <x>305</x>
-  <y>10</y>
-  <legend>Reset</legend>
-  <binding>
-   <command>dialog-update</command>
-  </binding>
- </button>
+  <button>
+   <x>100</x>
+   <y>0</y>
+   <legend>Apply</legend>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+  </button>
 
- <button>
-  <x>405</x>
-  <y>10</y>
-  <legend>Cancel</legend>
-  <binding>
-   <command>dialog-close</command>
-  </binding>
- </button>
+  <button>
+   <x>200</x>
+   <y>0</y>
+   <legend>Reset</legend>
+   <binding>
+    <command>dialog-update</command>
+   </binding>
+  </button>
+
+  <button>
+   <x>300</x>
+   <y>0</y>
+   <legend>Cancel</legend>
+   <binding>
+    <command>dialog-close</command>
+   </binding>
+  </button>
+
+ </group>
 
 </PropertyList>

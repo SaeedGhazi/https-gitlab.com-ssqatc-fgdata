@@ -34,6 +34,11 @@ Started September 2000 by David Megginson, david@megginson.com
    <y-offset>-305</y-offset>
    <visibility>true</visibility>
   </panel>
+  <panel2>
+   <path>Aircraft/c172/Panels/c172-panel-trans-mini.xml</path>
+   <y-offset>-305</y-offset>
+   <visibility>true</visibility>
+  </panel2>
   <hud>
    <path>Huds/Default/default.xml</path>
    <visibility>false</visibility>
@@ -46,32 +51,32 @@ Started September 2000 by David Megginson, david@megginson.com
  <position>
   <!-- <longitude>-110.6642444</longitude> -->
   <!-- <latitude>33.3528917</latitude> -->
-  <altitude-ft>-9999</altitude-ft>
+  <altitude>-9999</altitude>
  </position>
 
 
  <!-- Velocities -->
 
  <velocities>
-  <speed-north-fps>0.0</speed-north-fps>
-  <speed-east-fps>0.0</speed-east-fps>
-  <speed-down-fps>0.0</speed-down-fps>
+  <speed-north>0.0</speed-north>
+  <speed-east>0.0</speed-east>
+  <speed-down>0.0</speed-down>
  </velocities>
 
 
  <!-- Orientation -->
 
  <orientation>
-  <heading-deg>270</heading-deg>
-  <roll-deg>0.0</roll-deg>
-  <pitch-deg>0.424</pitch-deg>
+  <heading>270</heading>
+  <roll>0.0</roll>
+  <pitch>0.424</pitch>
  </orientation>
 
 
  <!-- Environment -->
 
  <environment>
-  <visibility-m>16000</visibility-m>
+  <visibility>16000</visibility>
  </environment>
 
 
@@ -99,32 +104,32 @@ Started September 2000 by David Megginson, david@megginson.com
 
  <radios>
 
-  <nav n="0">
+  <nav1>
    <frequencies>
-    <selected-mhz>117.3</selected-mhz>
-    <standby-mhz>110.3</standby-mhz>
+    <selected>117.3</selected>
+    <standby>110.3</standby>
    </frequencies>
    <radials>
-    <selected-deg>119.0</selected-deg>
+    <selected>119.0</selected>
    </radials>
-  </nav>
+  </nav1>
 
-  <nav n="1">
+  <nav2>
    <frequencies>
-    <selected-mhz>111.80</selected-mhz>
-    <standby-mhz>115.70</standby-mhz>
+    <selected>111.80</selected>
+    <standby>115.70</standby>
    </frequencies>
    <radials>
-    <selected-deg>029.0</selected-deg>
+    <selected>029.0</selected>
    </radials>
-  </nav>
+  </nav2>
 
   <adf>
    <frequencies>
-    <selected-khz>266.0</selected-khz>
-    <standby-khz>300.0</standby-khz>
+    <selected>266.0</selected>
+    <standby>300.0</standby>
    </frequencies>
-   <rotation-deg>90</rotation-deg>
+   <rotation>90</rotation>
   </adf>
 
  </radios>
@@ -140,4 +145,5 @@ Started September 2000 by David Megginson, david@megginson.com
  </PropertyList>
 
 <!-- end of preferences.xml -->
+
 

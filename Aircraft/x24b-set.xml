@@ -20,7 +20,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
   </startup>
 
   <flight-model>jsb</flight-model>
-  <aero>X24B</aero>
+  <aero>x24b</aero>
   <sound>false</sound>
 
   <panel>

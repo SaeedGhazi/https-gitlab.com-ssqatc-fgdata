@@ -40,8 +40,8 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
    <internal archive="y">true</internal>
    <config>
     <x-offset-m type="double">-0.17</x-offset-m>
-    <y-offset-m type="double">0.75</y-offset-m>
-    <z-offset-m type="double">-0.055</z-offset-m>
+    <y-offset-m type="double">0.80</y-offset-m>
+    <z-offset-m type="double">-0.0</z-offset-m>
    </config>
   </view>
 
@@ -107,6 +107,7 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
  </engines>
   
 </PropertyList>
+
 
 
 

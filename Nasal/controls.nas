@@ -3,11 +3,24 @@ startEngine = func {
     engs = props.globals.getNode("/controls/engines").getChildren("engine");
     for(i=0; i<size(engs); i=i+1) {
         select = sel.getChild("engine", i);
-        if(select != nil and select.getValue()) {
+        if(select != nil and select.getValue() != 0) {
             engs[i].getNode("starter").setBoolValue(1);
         }
     }
 }
+
+# Initialization hack (called after initialization via a timeout), to
+# make sure that the number of engine properties in the selection tree
+# match the actual number of engines.  This should probably be fixed in a
+# more elegant way...
+initSelectProps = func {
+    engs = props.globals.getNode("/controls/engines").getChildren("engine");
+    sel = props.globals.getNode("/sim/input/selected");
+    for(i=0; i<size(engs); i=i+1) {
+        if(sel.getChild("engine", i) == nil) {
+            sel.getNode("engine[" ~ i ~ "]", 1); }}
+}
+settimer(initSelectProps, 0);
 
 selectEngine = func {
     sel = props.globals.getNode("/sim/input/selected").getChildren("engine");
@@ -25,7 +38,7 @@ stepMagnetos = func {
     sel = props.globals.getNode("/sim/input/selected");
     for(i=0; i<size(engs); i=i+1) {
         select = sel.getChild("engine", i);
-        if(select != nil and select.getValue()) {
+        if(select != nil and select.getValue() != 0) {
             mag = engs[i].getNode("magnetos", 1);
             mag.setIntValue(mag.getValue() + change);
         }

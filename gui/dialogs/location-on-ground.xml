@@ -54,6 +54,31 @@
     <value type="double">-9999</value>
    </binding>
    <binding>
+    <command>property-assign</command>
+    <property>/sim/presets/airspeed-kt</property>
+    <value type="double">0</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/presets/offset-distance</property>
+    <value type="double">0</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/presets/offset-azimuth</property>
+    <value type="double">0</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/presets/glideslope-deg</property>
+    <value type="double">0</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/presets/heading-deg</property>
+    <value type="double">0</value>
+   </binding>
+   <binding>
     <command>dialog-apply</command>
    </binding>
    <binding>
@@ -83,6 +108,31 @@
     <command>property-assign</command>
     <property>/sim/presets/altitude-ft</property>
     <value type="double">-9999</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/presets/airspeed-kt</property>
+    <value type="double">0</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/presets/offset-distance</property>
+    <value type="double">0</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/presets/offset-azimuth</property>
+    <value type="double">0</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/presets/glideslope-deg</property>
+    <value type="double">0</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/presets/heading-deg</property>
+    <value type="double">0</value>
    </binding>
    <binding>
     <command>dialog-apply</command>

@@ -97,25 +97,26 @@ flap drag not available
            radius="1.75" 
            mass="1690" moment="110"
            eng-power="1490" eng-rpm="2300"
-           turbo-mul="2.0" wastegate-mp="30"
+           turbo-mul="2.5" wastegate-mp="30"
            cruise-alt="25000" cruise-power="1350"
            cruise-speed="380" cruise-rpm="2900"
-           min-rpm="800" max-rpm="3000" >
+           manual-pitch="true" >
   <actionpt x="-1.25" y="0" z="0"/>
   <control-input axis="/controls/engines/engine[0]/throttle" control="THROTTLE"/>
   <control-input axis="/controls/engines/engine[0]/starter" control="STARTER"/>
   <control-input axis="/controls/engines/engine[0]/magnetos" control="MAGNETOS"/>
   <control-input axis="/controls/engines/engine[0]/mixture" control="MIXTURE"/>
-  <control-input axis="/controls/engines/engine[0]/propeller-pitch" control="ADVANCE"/>
+  <control-input axis="/controls/engines/engine[0]/propeller-pitch" control="PROPPITCH"
+                 src0="0" src1="1" dst0="0.40" dst1="0.80"/>
   <control-input axis="/controls/engines/engine[0]/boost" control="BOOST"/>
 </propeller>
 
 <!-- Tail wheel -->
-<gear x="-7.90" y="0" z="-0.96" compression="0.2">
+<gear x="-7.90" y="0" z="-0.96" compression="0.2" castering="true">
 </gear>
 
  <!-- left main -->
-<gear x="-2.79" y="1.81" z="-2.20" compression="0.3" spring="1.0" damp="2.0">
+<gear x="-2.79" y="1.81" z="-2.20" compression="0.4" spring="0.7" damp="3.0">
   <control-input axis="/controls/gear/wheel[0]/brake" control="BRAKE"/>
   <control-input axis="/controls/gear/parking-brake" control="BRAKE" split="true"/>
   <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
@@ -124,7 +125,7 @@ flap drag not available
 </gear>
 
  <!-- right main -->
-<gear x="-2.79" y="-1.81" z="-2.20" compression="0.3" spring="1.0" damp="2.0">
+<gear x="-2.79" y="-1.81" z="-2.20" compression="0.4" spring="0.7" damp="3.0">
   <control-input axis="/controls/gear/wheel[1]/brake" control="BRAKE"/>
   <control-input axis="/controls/gear/parking-brake" control="BRAKE" split="true"/>
   <control-input axis="/controls/gear/gear-down" control="EXTEND"/>

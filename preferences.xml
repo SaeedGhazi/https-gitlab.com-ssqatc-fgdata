@@ -361,42 +361,38 @@ Started September 2000 by David Megginson, david@megginson.com
 
  <!-- Instruments -->
 
- <!-- this is here because the datum isn't retained on a reset -->
-
- <steam>
-   <altimeter-datum-mb type="double">1013.25</altimeter-datum-mb>
- </steam>
-
  <instrumentation>
   <airspeed-indicator>
-   <serviceable type="bool">true</serviceable>
+   <serviceable type="bool" archive="y">true</serviceable>
   </airspeed-indicator>
   <altimeter>
-   <serviceable type="bool">true</serviceable>
-   <setting-inhg type="double">29.92</setting-inhg>
+   <serviceable type="bool" archive="y">true</serviceable>
+   <setting-inhg type="double" archive="y">29.92</setting-inhg>
   </altimeter>
   <attitude-indicator>
-   <serviceable type="bool">true</serviceable>
+   <serviceable type="bool" archive="y">true</serviceable>
+   <spin type="double" archive="y">0.0</spin>
   </attitude-indicator>
   <heading-indicator>
-   <serviceable type="bool">true</serviceable>
-   <offset-deg type="double">4.5</offset-deg> <!-- just for fun -->
+   <serviceable type="bool" archive="y">true</serviceable>
+   <spin type="double" archive="y">0.0</spin>
+   <offset-deg type="double" archive="y">4.5</offset-deg> <!-- just for fun -->
   </heading-indicator>
   <vertical-speed-indicator>
-   <serviceable type="bool">true</serviceable>
+   <serviceable type="bool" archive="y">true</serviceable>
   </vertical-speed-indicator>
  </instrumentation>
 
  <systems>
   <pitot>
-   <serviceable type="bool">true</serviceable>
+   <serviceable type="bool" archive="y">true</serviceable>
   </pitot>
   <static>
-   <serviceable type="bool">true</serviceable>
-   <pressure-inhg type="double">29.92</pressure-inhg>
+   <serviceable type="bool" archive="y">true</serviceable>
+   <pressure-inhg type="double" archive="y">29.92</pressure-inhg>
   </static>
   <vacuum>
-   <serviceable type="bool">true</serviceable>
+   <serviceable type="bool" archive="y">true</serviceable>
   </vacuum>
  </systems>
 

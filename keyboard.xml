@@ -298,6 +298,23 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+ <key n="66">
+  <name>B</name>
+  <desc>Toggle parking brake on or off</desc>
+  <binding>
+   <command>property-toggle</command>
+   <property>/controls/brakes[0]</property>
+  </binding>
+  <binding>
+   <command>property-toggle</command>
+   <property>/controls/brakes[1]</property>
+  </binding>
+  <binding>
+   <command>property-toggle</command>
+   <property>/controls/brakes[2]</property>
+  </binding>
+ </key>
+
  <key n="80">
   <name>P</name>
   <desc>Toggle panel.</desc>

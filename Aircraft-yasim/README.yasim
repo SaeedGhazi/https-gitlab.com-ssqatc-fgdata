@@ -101,7 +101,11 @@ vstab:    A "vertical" stabilizer.  Like hstab, this is just another
           with the solver computation, so you can have none, or as
           many as you like.
 
-stall:    A subelement of a wing (or hstab/vstab) that specifies the
+mstab:    A mirrored horizontal stabilizer. Exactly the same as wing, but
+          not involved with the solver computation, so you can have none,
+          or as many as you like.
+
+stall:    A subelement of a wing (or hstab/vstab/mstab) that specifies the
           stall behavior.
           aoa:   The stall angle (maximum lift) in degrees.  Note that
                  this is relative to the wing, not the fuselage (since
@@ -303,6 +307,10 @@ control:  This element, which can appear in two different contexts,
                   FLAP1 - The flap1 deflection of a wing.
                   SLAT - The slat extension of a wing.
                   SPOILER - The spoiler extension for a wing.
+                  CYCLICAIL - The "aileron" cyclic input of a rotor
+                  CYCLICELE - The "elevator" cyclic input of a rotor
+                  COLLECTIVE - The collective input of a rotor
+                  ROTORENGINEON - If not equal zero the rotor is rotating
           invert: Negate the value of the property before setting on
                   the object.
           split:  Applicable to wing control surfaces.  Sets the
@@ -324,3 +332,102 @@ control:  This element, which can appear in two different contexts,
           axis:  As above, the name of the input property.
           value: A floating point number that the property is expected
                  to hold.
+
+
+rotor:    A rotor. Used for simulating helicopters. You can have one, two
+          or even more.
+          If you specify a rotor, you do not need to specify a wing or hstab,
+          the settings for approach and cruise will be ignored then. Instead
+          stored results from the c182 will be used.
+
+          name:    The name of the rotor.
+                   (some data is stored at /rotors/name/)
+                   The rpm, cone angle, yaw angle and roll angle are stored
+                   for the complete rotor. For every blade the position
+                   angle, the flap angle and the incidence angle are stored.
+                   All angles are in degree, positive values always mean "up".
+                   This is not completely tested, but seem to work at least
+                   for rotors rotating counterclockwise.
+          x,y,z:   The position of the rotor center
+          nx,ny,nz: The normal of the rotor (pointing upwards, will be
+                   normalized by the computer)
+          fx,fy,fz: A Vector pointing forward, if not perpendicular to the
+                   normal it will be corrected by the computer
+          diameter: The diameter in meter
+          numblades: The number of blades
+          weightperblade: The weight per blade in pounds
+          relbladecenter: The relative center of gravity of the blade. Maybe
+                   not 100% correct interpreted; use 0.5 for the start and
+                   change in small steps
+          rpm:     rounds per minute.
+          ccw:     determines if the rotor rotates clockwise (="false") or
+                   counterclockwise (="true"), (if you look on the top of the
+                   normal, so the bo105 has counterclockwise rotor)
+          maxcollective: The maximum of the collective incidence in degree
+          mincollective: The minimum of the collective incidence in degree
+          maxcyclicele: The maximum of the cyclic incidence in degree for
+                   the elevator like function
+          mincyclicele: The minimum of the cyclic incidence in degree for
+                   the elevator like function
+          maxcyclicail: The maximum of the cyclic incidence in degree for
+                   the aileron like function
+          mincyclicail: The minimum of the cyclic incidence in degree for
+                   the aileron like function
+          pitch_a: A collective incidence angle, used for the next token
+          forceatpitch_a: The force, the rotor is producing when the incident
+                   angle is equal pitch_a. I.e. hover-pitch and a force
+                   equivalent to the weight. (in pounds of force)
+          pitch_b: A collective incidence angle, used for the next token
+          poweratpitch_b: the power the rotor needs at pitch_b. (i.e. at the
+                   bo105 the main rotor consumes bout 90% of the engine power,
+                   and 9% the tail rotor. In kW. Used for calculation of the
+                   torque.
+          poweratpitch_0: the power the rotor needs at zero pitch.
+                   In kW. Used for calculation of the torque.
+          notorque: If set to "true" the calculated torque is always zero.
+                   Very helpful while adjusting rotor parameters.
+          flapmin: Minimum flapping angle. (Should normally never reached)
+          flapmax: Maximum flapping angle. (Should normally never reached)
+          flap0:   Flapping angle at no rotation, i.e. -5
+          dynamic: this changes the reactions peed of the rotor to an input.
+                   normally 1 (Maybe there are rotors with a little faster
+                   reaction, than use a value a little greater than one.
+                   A value greater than one will result in a more inert,
+                   system. Maybe it's useful for simulating the rotor of the
+                   Bell UH1
+          rellenflaphinge: The relative length from the center of the rotor
+                   to the flapping hinge. Can be taken from pictures of the
+                   helicopter (i.e. 0 for Bell206, about 0.05 for most
+                   rotors) For rotors without flapping hinge (where the blade
+                   are twisted instead, i.e. Bo 105, Lynx) use a mean value,
+                   maybe 0.2. This value has a extreme result in the behavior
+                   of the rotor
+          delta3: Some rotors have a delta3 effect, which results in a
+                   decreasing of the incidence when the rotor is flapping.
+                   A value of 0 (as most helicopters have) means no change in
+                   incidence, a value of 1 result in a decreases of one degree
+                   per one degree flapping.
+                   So delta3 is the proportional factor between flapping and
+                   decrease of incidence. I.e. the tail rotor of a Bo105 has
+                   a delta3 of 1.
+          delta:   A factor for the damping constant for the flapping. 1 means
+                   a analytical result, which is only a approximation. Has a
+                   very strong result in the reaction of the rotor system on
+                   control inputs.
+                   If you know the flapping angle for a given cyclic input you
+                   can adjust this by changing this value. Or if you now the
+                   maximum roll rate or ...
+          translift: Helicopters have "translational lift", which is due to
+                   turbulence and hard to calculate, so this simulation uses
+                   a phenomenological ansatz. Use .1 for the start value
+          dragfactor: The drag of the rotating rotor perpendicular to the
+                   rotor plane is larger than the drag of the not rotating
+                   rotor. Hard to calculate, so it is added phenomenological
+
+          Any rotor needs a <control> subelement for the engine
+          (ROTORENGINEON) and can have <control> subelements for the cyclic
+          (CYCLICELE, CYCLICAIL) and collective (COLLECTIVE) input.
+
+          The rotor simulation is very "beta" and not finished yet. So don't
+          spend too much time to adjust a flight behavior to the smallest
+          details now.

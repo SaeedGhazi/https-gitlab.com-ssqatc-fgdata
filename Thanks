@@ -32,7 +32,7 @@ Jon S. Berndt <jsb@hal-pc.org>
   Initially he is using X15 data to test his code, but once things are
   all in place we should be able to simulator arbitrary aircraft.
   Maintains a page dealing with Flight Dynamics at:
-  http://www.hal-pc.org/~jsb/flightsim.html
+  http://www.jsbsim.org
   Special attention to X15 is paid in seperate pages.
 
 
@@ -115,7 +115,6 @@ Jean-Francois Doue
 Francine Evans <evans@cs.sunysb.edu>
   Wrote the @#$@#$@% GPL'd tri-striper we use and "love". :-)
   http://www.cs.sunysb.edu/~evans/stripe.html
-
 
 Oscar Everitt <bigoc@premier.net>
   Created single engine piston engine sounds as part of an F4U package
@@ -235,6 +234,7 @@ David Megginson <david@megginson.com>
   initial take of sound-effects module
   Random ground cover objects
   Vacuum and pitot systems.
+  Reorganization of the GUI to make it XML configurable.
 
 
 Eric Mitchell <mitchell@mars.ark.com>
@@ -293,8 +293,6 @@ Tony Peden <apeden@earthlink.net>
   Contributions on the flight model front, including a LaRCsim based 
   Cessna 172.  JSBsim: the initial conditions code, a more complete 
   standard atmosphere model, and other bugfixes/additions. 
-  His Flight Dynamics page can be found at: 
-  http://www.nwlink.com/~apeden
 
 
 Robin Peel <robin@cpwd.com>
@@ -311,6 +309,11 @@ Friedemann Reinhard <mpt218@faupt212.physik.uni-erlangen.de>
   Contributed beginnings of a textured instrument panel.
 
 
+Frederic Bouvier <frbouvi@wanadoo.fr>
+  Added French language support
+  Keeps FlightGear MSVC compatible.
+
+
 Petter Reinholdtsen <pere@games.no>
   Incorporated the Gnu automake/autoconf system (with libtool).
   This should streamline and standardize the build process for all
@@ -321,12 +324,15 @@ Petter Reinholdtsen <pere@games.no>
 William Riley <riley@technologist.com>
   Contributed code to add "brakes". 
   Patch to support a first joystick with more than two axes.
-  World scenery based on vmap0 data.
+  His world scenery based on vmap0 data is located at:
+  http://www.randdtechnologies.com/fgfs/newScenery/
 
 
 Andy Ross <andy@plausible.org>
   Contributed a new configurable FDM, "YASim", based on geometry
   information rather than aerodynamic coefficients.
+  Added support for placing 2D panel objects in 3D space.
+  Modified the HUD code to make it more accurate and added 3D support.
 
 
 Paul Schlyter <pausch@saaf.se>  
@@ -366,6 +372,11 @@ Michael Smith <msmith99@flash.net>
 
 Martin Spott <Martin.Spott@uni-duisburg.de>
   Contributed to the installation / user guide.
+
+
+Martin Dressler <dr@musicabona.cz>
+  Created some outstanding panel instrumentation textures
+  for use in full-screen mode.
 
 
 U.S. Geological Survey
@@ -448,6 +459,13 @@ Darrell Walisser <dwaliss1@purdue.edu>
   Provides MacOS-specific info in the docs.
 
 
+Davud Culp <davidculp2@attbi.com>
+  Changed the layout of the conbtrolls section and added a great number
+  of extra controls which will prove to be usefull no and for the future.
+  Contributed a number of aircraft configuration files, including a T-38 and
+  Boeing 737.
+
+
 Ed Williams <Ed_Williams@compuserve.com>
   Contributed magnetic variation code (impliments Nima WMM 2000)
   We've also borrowed from Ed's wonderful aviation formulary at various
@@ -460,6 +478,8 @@ Jim Wilson <jimw@kelcomaine.com>
   and modular.  Contributed many small fixes and bug reports.
   Contributed the the pui property browser.
   Contributed to the autopilot.
+  Created several excellent 3D aircraft models, including the p-51 and 
+  Boeing 747.
 
 
 Jean-Claude Wippler <jcw@equi4.com>

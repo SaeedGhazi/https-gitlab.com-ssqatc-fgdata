@@ -4,64 +4,64 @@
 
  <menu>
   <submenu>
-   <name>File</name>
+   <name>/strings/file</name>
    <option>
-    <name>Save flight</name>
+    <name>/strings/save-flight</name>
     <call>saveFlight</call>
    </option>
    <option>
-    <name>Load flight</name>
+    <name>/strings/load-flight</name>
     <call>loadFlight</call>
    </option>
    <option>
-    <name>Reset</name>
+    <name>/strings/reset</name>
     <call>reInit</call>
     </option>
    <option>
     <seperator/>
    </option>
    <option>
-    <name>Hires Snap Shot</name>
+    <name>/strings/hi-res-snap-shot</name>
     <call>dumpHiResSnapShot</call>
    </option>
    <option>
-    <name>Snap Shot</name>
+    <name>/strings/snap-shot</name>
     <call>dumpSnapShot</call>
    </option>
    <option>
-    <name>Print</name>
+    <name>/strings/print</name>
     <call>printScreen</call>
    </option>
    <option>
-    <name>Exit</name>
+    <name>/strings/exit</name>
     <call>MayBeGoodBye</call>
    </option>
   </submenu>
  
   <submenu>
-   <name>View</name>
+   <name>/strings/view</name>
    <option>
-    <name>Toggle Panel</name>
+    <name>/strings/toggle-panel</name>
     <call>guiTogglePanel</call>
    </option>
    <option>
-    <name>Pilot Offset</name>
+    <name>/strings/pilot-offset</name>
     <call>PilotOffsetAdjust</call>
    </option>
    <option>
-    <name>HUD Alpha</name>
+    <name>/strings/hud-alpha</name>
     <call>fgHUDalphaAdjust</call>
    </option>
    <option>
-    <name>Properties</name>
+    <name>/strings/properties</name>
     <call>prop_pickerView</call>
    </option>
   </submenu>
  
   <submenu>
-   <name>Environment</name>
+   <name>/strings/environment</name>
    <option>
-    <name>Goto Airport</name>
+    <name>/strings/goto-airport</name>
     <call>NewAirport</call>
    </option>
   </submenu>
@@ -93,47 +93,47 @@
 -->
  
   <submenu>
-   <name>Autopilot</name>
+   <name>/strings/autopilot</name>
    <option>
-    <name>Set Heading</name>
+    <name>/strings/set-heading</name>
     <call>NewHeading</call>
    </option>
    <option>
-    <name>Set Altitude</name>
+    <name>/strings/set-altitude</name>
     <call>NewAltitude</call>
    </option>
    <option>
     <seperator/>
    </option>
    <option>
-    <name>Add Waypoint</name>
+    <name>/strings/add-waypoint</name>
     <call>AddWayPoint</call>
    </option>
    <option>
-    <name>Skip Current Waypoint</name>
+    <name>/strings/skip-current-waypoint</name>
     <call>PopWayPoint</call>
    </option>
    <option>
-    <name>Clear Route</name>
+    <name>/strings/clear-route</name>
     <call>ClearRoute</call>
    </option>
    <option>
     <seperator/>
    </option>
    <option>
-    <name>Adjust AP Settings</name>
+    <name>/strings/adjust-ap-settings</name>
     <call>fgAPAdjust</call>
    </option>
    <option>
-    <name>Toggle HUD Format</name>
+    <name>/strings/toggle-hud-format</name>
     <call>fgLatLonFormatToggle</call>
    </option>
   </submenu>
 
   <submenu>
-   <name>Help</name>
+   <name>/strings/help</name>
    <option>
-    <name>Help</name>
+    <name>/strings/help</name>
     <call>helpCb</call>
    </option>
   </submenu>

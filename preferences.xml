@@ -46,32 +46,32 @@ Started September 2000 by David Megginson, david@megginson.com
  <position>
   <!-- <longitude>-110.6642444</longitude> -->
   <!-- <latitude>33.3528917</latitude> -->
-  <altitude>-9999</altitude>
+  <altitude-ft>-9999</altitude-ft>
  </position>
 
 
  <!-- Velocities -->
 
  <velocities>
-  <speed-north>0.0</speed-north>
-  <speed-east>0.0</speed-east>
-  <speed-down>0.0</speed-down>
+  <speed-north-fps>0.0</speed-north-fps>
+  <speed-east-fps>0.0</speed-east-fps>
+  <speed-down-fps>0.0</speed-down-fps>
  </velocities>
 
 
  <!-- Orientation -->
 
  <orientation>
-  <heading>270</heading>
-  <roll>0.0</roll>
-  <pitch>0.424</pitch>
+  <heading-deg>270</heading-deg>
+  <roll-deg>0.0</roll-deg>
+  <pitch-deg>0.424</pitch-deg>
  </orientation>
 
 
  <!-- Environment -->
 
  <environment>
-  <visibility>16000</visibility>
+  <visibility-m>16000</visibility-m>
  </environment>
 
 
@@ -99,32 +99,32 @@ Started September 2000 by David Megginson, david@megginson.com
 
  <radios>
 
-  <nav1>
+  <nav n="0">
    <frequencies>
-    <selected>117.3</selected>
-    <standby>110.3</standby>
+    <selected-mhz>117.3</selected-mhz>
+    <standby-mhz>110.3</standby-mhz>
    </frequencies>
    <radials>
-    <selected>119.0</selected>
+    <selected-deg>119.0</selected-deg>
    </radials>
-  </nav1>
+  </nav>
 
-  <nav2>
+  <nav n="1">
    <frequencies>
-    <selected>111.80</selected>
-    <standby>115.70</standby>
+    <selected-mhz>111.80</selected-mhz>
+    <standby-mhz>115.70</standby-mhz>
    </frequencies>
    <radials>
-    <selected>029.0</selected>
+    <selected-deg>029.0</selected-deg>
    </radials>
-  </nav2>
+  </nav>
 
   <adf>
    <frequencies>
-    <selected>266.0</selected>
-    <standby>300.0</standby>
+    <selected-khz>266.0</selected-khz>
+    <standby-khz>300.0</standby-khz>
    </frequencies>
-   <rotation>90</rotation>
+   <rotation-deg>90</rotation-deg>
   </adf>
 
  </radios>

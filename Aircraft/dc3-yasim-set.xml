@@ -25,9 +25,11 @@ October 23 2001 John Check, fgpanels@rockfish.net
    <path>Aircraft/c310/c310-mini-panel.xml</path>
   </panel_2>
 
-  <!-- you need to download this from the above website -->
   <model>
-   <path>Aircraft/c310/Models/cessna310r.ac</path>
+   <path>Models/dc3-dpm.wrl</path>
+   <pitch-offset-deg>90</pitch-offset-deg>
+   <roll-offset-deg>270</roll-offset-deg>
+   <z-offset-m>-1.75</z-offset-m>
   </model> 
  </sim>
 </PropertyList>

@@ -374,12 +374,96 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+ <key n="257">
+  <name>F1</name>
+  <mod-shift>
+   <binding>
+    <desc>Load flight.</desc>
+    <command>load</command>
+   </binding>
+  </mod-shift>
+ </key>
+
+ <key n="258">
+  <name>F2</name>
+  <mod-shift>
+   <binding>
+    <desc>Save flight.</desc>
+    <command>save</command>
+   </binding>
+  </mod-shift>
+ </key>
+
  <key n="259">
   <name>F3</name>
   <desc>Capture screen.</desc>
   <binding>
    <command>screen-capture</command>
   </binding>
+  <mod-shift>
+   <binding>
+    <desc>Load panel.</desc>
+    <command>panel-load</command>
+   </binding>
+  </mod-shift>
+ </key>
+
+ <key n="260">
+  <name>F4</name>
+  <mod-shift>
+   <binding>
+    <desc>Reload global preferences.</desc>
+    <command>preferences-load</command>
+   </binding>
+  </mod-shift>
+ </key>
+
+ <key n="261">
+  <name>F5</name>
+  <mod-shift>
+   <binding>
+    <desc>Scroll panel down</desc>
+    <command>property-adjust</command>
+    <property>/sim/panel/y-offset</property>
+    <step type="int">-5</step>
+   </binding>
+  </mod-shift>
+ </key>
+
+ <key n="262">
+  <name>F6</name>
+  <mod-shift>
+   <binding>
+    <desc>Scroll panel up</desc>
+    <command>property-adjust</command>
+    <property>/sim/panel/y-offset</property>
+    <step type="int">5</step>
+   </binding>
+  </mod-shift>
+ </key>
+
+ <key n="263">
+  <name>F7</name>
+  <mod-shift>
+   <binding>
+    <desc>Scroll panel left</desc>
+    <command>property-adjust</command>
+    <property>/sim/panel/x-offset</property>
+    <step type="int">-5</step>
+   </binding>
+  </mod-shift>
+ </key>
+
+ <key n="264">
+  <name>F8</name>
+  <mod-shift>
+   <binding>
+    <desc>Scroll panel right</desc>
+    <command>property-adjust</command>
+    <property>/sim/panel/x-offset</property>
+    <step type="int">5</step>
+   </binding>
+  </mod-shift>
  </key>
 
  <key n="269">

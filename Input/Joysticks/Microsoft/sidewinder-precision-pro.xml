@@ -259,25 +259,11 @@ $Id$
     <windows>9</windows>
    </number>  
   <repeatable>false</repeatable>
-  <!--
-    <binding>
+  <binding>
       <command>property-assign</command>
       <property>/controls/gear/gear-down</property>
       <value type="double">0.0</value>
-    </binding>
-  -->  
-  <unix>
-    <binding>
-      <command>property-assign</command>
-      <property>/controls/gear/gear-down</property>
-      <value type="double">0.0</value>   
-    </binding>    
-  </unix>
-  <windows>  
-    <binding>
-       <command>view-cycle</command>
-    </binding>
-  </windows>
+  </binding>
   
  </button>
 

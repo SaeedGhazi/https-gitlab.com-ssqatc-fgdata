@@ -15,6 +15,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
  <sim>
 
   <virtual-cockpit archive="y">true</virtual-cockpit>
+  <allow-toggle-cockpit archive="y">true</allow-toggle-cockpit>
 
   <flight-model archive="y">jsb</flight-model>
   <aero archive="y">c172</aero>
@@ -87,4 +88,5 @@ October 23 2001 John Check, fgpanels@rockfish.net
  </engines>
   
 </PropertyList>
+
 

@@ -15,6 +15,8 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
  <sim>
   
   <virtual-cockpit archive="y">true</virtual-cockpit>
+  <allow-toggle-cockpit archive="y">true</allow-toggle-cockpit>
+
   <flight-model archive="y">jsb</flight-model>
   <aero archive="y">c310u3a</aero>
 
@@ -107,6 +109,7 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
  </engines>
   
 </PropertyList>
+
 
 
 

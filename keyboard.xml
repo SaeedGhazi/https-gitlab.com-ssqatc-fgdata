@@ -635,29 +635,47 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>c</name>
   <desc>Toggle 3D/2D cockpit</desc>
   <binding>
+   <condition>
+     <property>/sim/allow-toggle-cockpit</property>
+   </condition>
    <command>property-swap</command>
    <property>/sim/panel[0]/path</property>
    <property>/sim/panel[1]/path</property>
   </binding>
   <binding>
+   <condition>
+     <property>/sim/allow-toggle-cockpit</property>
+   </condition>
    <command>property-assign</command>
    <property>/sim/current-view/heading-offset-deg</property>
    <value type="double">0</value>
   </binding>
   <binding>
+   <condition>
+     <property>/sim/allow-toggle-cockpit</property>
+   </condition>
    <command>property-assign</command>
    <property>/sim/current-view/pitch-offset-deg</property>
    <value type="double">0</value>
   </binding>
   <binding>
+   <condition>
+     <property>/sim/allow-toggle-cockpit</property>
+   </condition>
    <desc>Load panel.</desc>
    <command>panel-load</command>
   </binding>
   <binding>
+   <condition>
+     <property>/sim/allow-toggle-cockpit</property>
+   </condition>
    <command>property-toggle</command>
    <property>/sim/view/internal</property>
   </binding>
   <binding>
+   <condition>
+     <property>/sim/allow-toggle-cockpit</property>
+   </condition>
    <command>property-toggle</command>
    <property>/sim/virtual-cockpit</property>
   </binding>
@@ -699,13 +717,23 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>s</name>
   <desc>Swap panels.</desc>
   <binding>
-  <command>property-swap</command>
-  <property>/sim/panel/path</property>
-  <property>/sim/panel_2/path</property>
+   <condition>
+     <not>
+     <property>/sim/allow-toggle-cockpit</property>
+     </not>
+   </condition>
+   <command>property-swap</command>
+   <property>/sim/panel/path</property>
+   <property>/sim/panel_2/path</property>
   </binding>
   <binding>
-  <desc>Load panel.</desc>
-  <command>panel-load</command>
+   <condition>
+     <not>
+     <property>/sim/allow-toggle-cockpit</property>
+     </not>
+   </condition>
+   <desc>Load panel.</desc>
+   <command>panel-load</command>
   </binding>
  </key>
 
@@ -1144,6 +1172,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
 </PropertyList>
 
 <!-- end of keyboard.xml -->
+
 
 
 

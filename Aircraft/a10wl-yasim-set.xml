@@ -19,10 +19,10 @@ Fairchild A10 (Weapon load) simulation config.
   </sound>
 
   <panel>
-   <path>Aircraft/c310/c310-vfr-panel.xml</path>
+   <path>Aircraft/a10/a10-vfr-panel.xml</path>
   </panel>
   <panel_2>
-   <path>Aircraft/c310/c310-mini-panel.xml</path>
+   <path>Aircraft/a10/a10-mini-panel.xml</path>
   </panel_2>
 
   <hud>
@@ -36,7 +36,7 @@ Fairchild A10 (Weapon load) simulation config.
 
   <view n="1">
    <config>
-     <z-offset-m type="double" archive="y">-70.0</z-offset-m>
+     <z-offset-m type="double" archive="y">-50.0</z-offset-m>
    </config>
 
   </view>

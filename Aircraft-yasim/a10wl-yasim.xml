@@ -8,16 +8,17 @@
 <airplane mass="45860">
 
 <!-- Approach configuration -->
-<approach speed="110" aoa="14">
+<approach speed="110" aoa="8">
   <control-setting axis="/controls/throttle[0]" value="0.5"/>
+  <control-setting axis="/controls/throttle[1]" value="0.5"/>
   <control-setting axis="/controls/flaps" value="1.0"/>
-  <control-setting axis="/controls/spoilers" value="1.0"/>
   <control-setting axis="/controls/gear-down" value="1"/>
 </approach>
 
 <!-- Cruise configuration -->
-<cruise speed="380" alt="35000">
-  <control-setting axis="/controls/throttle[0]" value="0.8"/>
+<cruise speed="398" alt="1200">
+  <control-setting axis="/controls/throttle[0]" value="1.0"/>
+  <control-setting axis="/controls/throttle[1]" value="1.0"/>
   <control-setting axis="/controls/flaps" value="0.0"/>
   <control-setting axis="/controls/gear-down" value="0"/>
 </cruise>
@@ -37,7 +38,7 @@
 
 <wing x="-8.8" y="0.5" z="-0.5" taper="0.6" incidence="-1.0"
       length="8.3" chord="3.1" sweep="0.0" dihedral="3.0" camber="0.006">
-  <stall aoa="17" width="3" peak="1.3"/>
+  <stall aoa="17" width="6" peak="1.3"/>
   <flap0 start="0.04" end="0.51" lift="1.5" drag="1.2"/>
   <flap1 start="0.54" end="0.86" lift="1.3" drag="1.2"/>
   <spoiler start="0.54" end="0.86" lift="0.1" drag="20.0"/>
@@ -62,27 +63,27 @@
 
 </wing>
 
-<hstab x="-15.5" y="0.4" z="0.4" taper="0.0" effectiveness="1.2"
-       length="2.5" chord="2" sweep="0.0" dihedral="0.0" camber="0.0">
+<hstab x="-15.5" y="0.4" z="0.4" taper="0.0" effectiveness="3"
+       length="2.5" chord="2" sweep="0.0" dihedral="0.0" camber="0">
   <stall aoa="18" width="5" peak="1.5"/>
-  <flap0 start="0" end="1" lift="1.6" drag="1.2"/>
+  <flap0 start="0" end="1" lift="1.5" drag="1.2"/>
   <control-input axis="/controls/elevator" control="FLAP0"/>
   <control-input axis="/controls/elevator-trim" control="FLAP0"/>
   <control-output control="FLAP0" prop="/surface-positions/elevator-pos-norm"/>
 </hstab>
 
-<vstab x="-15.0" y="2.5" z="-0.9" taper="0.7"
+<vstab x="-15.0" y="2.5" z="-0.9" taper="0.7" effectiveness="2"
        length="2.8" chord="2.0" sweep="0.0">
   <stall aoa="16" width="5" peak="1.5"/>
-  <flap0 start="0" end="1" lift="1.15" drag="1.3"/>
+  <flap0 start="0" end="1" lift="1.3" drag="1.3"/>
   <control-input axis="/controls/rudder" control="FLAP0" invert="true"/>
   <control-output control="FLAP0" prop="/surface-positions/rudder-pos-norm"/>
 </vstab>
 
-<vstab x="-15.0" y="-2.5" z="-0.9" taper="0.7"
+<vstab x="-15.0" y="-2.5" z="-0.9" taper="0.7" effectiveness="2"
        length="2.8" chord="2.0" sweep="0.0">
   <stall aoa="16" width="5" peak="1.5"/>
-  <flap0 start="0" end="1" lift="1.15" drag="1.3"/>
+  <flap0 start="0" end="1" lift="1.3" drag="1.3"/>
   <control-input axis="/controls/rudder" control="FLAP0" invert="true"/>
   <control-output control="FLAP0" prop="/surface-positions/rudder-pos-norm"/>
 </vstab>
@@ -133,10 +134,9 @@
 </gear>
 
 <!-- Ballast -->
-<ballast x="-3.5" y="0" z="1.0" mass="1200"/> <!-- C/pit + Pilot -->
+<ballast x="-3.5" y="0" z="1.0" mass="2000"/> <!-- C/pit + Pilot -->
 <ballast x="-4.0" y="0" z="-1.0" mass="4000"/> <!-- Gun -->
 <ballast x="-5.0" y="0" z="0.0" mass="1000"/> <!-- avionics -->
-<ballast x="-7.0" y="0" z="-0.8" mass="2500"/> <!-- trim ballast -->
 
 <!-- Weapons load -->
 

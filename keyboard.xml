@@ -631,6 +631,38 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </mod-up>
  </key>
 
+ <key n="99">
+  <name>c</name>
+  <desc>Toggle 3D/2D cockpit</desc>
+  <binding>
+   <command>property-swap</command>
+   <property>/sim/panel[0]/path</property>
+   <property>/sim/panel[1]/path</property>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/current-view/heading-offset-deg</property>
+   <value type="double">0</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/current-view/pitch-offset-deg</property>
+   <value type="double">0</value>
+  </binding>
+  <binding>
+   <desc>Load panel.</desc>
+   <command>panel-load</command>
+  </binding>
+  <binding>
+   <command>property-toggle</command>
+   <property>/sim/view/internal</property>
+  </binding>
+  <binding>
+   <command>property-toggle</command>
+   <property>/sim/virtual-cockpit</property>
+  </binding>
+ </key>
+
  <key n="109">
   <name>m</name>
   <desc>Increase warp.</desc>
@@ -1112,6 +1144,8 @@ calculated by adding 256 to the GLUT key value in glut.h.
 </PropertyList>
 
 <!-- end of keyboard.xml -->
+
+
 
 
 

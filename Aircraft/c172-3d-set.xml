@@ -28,6 +28,11 @@ October 23 2001 John Check, fgpanels@rockfish.net
    <path archive="y">Aircraft/c172/Panels/c172-trans-panel.xml</path>
    <visibility archive="y">true</visibility>
   </panel>
+  <panel n="1">
+   <desc>2D Panel</desc>
+   <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
+   <visibility>true</visibility>
+  </panel>
 
   <model>
    <path archive="y">Aircraft/c172/Models/c172-dpm.xml</path>
@@ -82,3 +87,4 @@ October 23 2001 John Check, fgpanels@rockfish.net
  </engines>
   
 </PropertyList>
+

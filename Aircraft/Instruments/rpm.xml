@@ -45,8 +45,8 @@ Jan 30 2003
     <path>Aircraft/Instruments/Textures/misc2.rgb</path>
     <x1>0.0</x1>
     <x2>0.515625</x2>
-    <y1>0.890625</y1>
-    <y2>1.0</y2>
+    <y1>0.4375</y1>
+    <y2>0.546875</y2>
    </texture>
    <transformations>
     <transformation>

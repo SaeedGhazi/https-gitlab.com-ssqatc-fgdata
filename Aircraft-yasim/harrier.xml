@@ -5,7 +5,7 @@
 <airplane mass="14052">
 
 <!-- Approach configuration -->
-<approach speed="160" aoa="11">
+<approach speed="160" aoa="8">
   <control-setting axis="/controls/throttle[0]" value="0.2"/>
   <control-setting axis="/controls/flaps" value="1.0"/>
   <control-setting axis="/controls/gear-down" value="1"/>
@@ -58,8 +58,8 @@
 		  min="1" max="-1"/>
 </vstab>
 
-<jet x="-6.12" y="0" z="0.56" mass="3000" thrust="21500" rotate="-90">
-  <actionpt x="-7.5" y="0" z="0.7"/>
+<jet x="-6.12" y="0" z="0.56" mass="3000" thrust="21500" rotate="-99">
+  <actionpt x="-7.452" y="0" z="0.671"/>
   <control-input axis="/controls/throttle[0]" control="THROTTLE"/>
   <control-input axis="/controls/mixture[0]" control="VECTOR"
                  src0="0" src1="1" dst0="1" dst1="0"/>
@@ -73,41 +73,57 @@
      anyone can find better info. -->
 
 <!-- tail jets: left yaw, right yaw and pitch down -->
-<thruster x="-15" y="0" z="1" vx="0" vy="1" vz="0" thrust="300">
+<thruster x="-15" y="0" z="1" vx="0" vy="1" vz="0" thrust="200">
   <control-input axis="/controls/rudder" control="THROTTLE"
            src0="0" src1="1" dst0="0" dst1="1"/>
+  <control-input axis="/orientation/yaw-rate-degps" control="THROTTLE"
+           src0="-5" src1="0" dst0="0.3" dst1="0"/>
 </thruster>
-<thruster x="-15" y="0" z="1" vx="0" vy="-1" vz="0" thrust="300">
+<thruster x="-15" y="0" z="1" vx="0" vy="-1" vz="0" thrust="200">
   <control-input axis="/controls/rudder" control="THROTTLE"
            src0="-1" src1="0" dst0="1" dst1="0"/>
+  <control-input axis="/orientation/yaw-rate-degps" control="THROTTLE"
+           src0="0" src1="5" dst0="0" dst1="0.3"/>
 </thruster>
-<thruster x="-15" y="0" z="1" vx="0" vy="0" vz="1" thrust="300">
+<thruster x="-15" y="0" z="1" vx="0" vy="0" vz="1" thrust="200">
   <control-input axis="/controls/elevator" control="THROTTLE"
            src0="0" src1="1" dst0="0" dst1="1"/>
+  <control-input axis="/orientation/pitch-rate-degps" control="THROTTLE"
+           src0="0" src1="2" dst0="0" dst1="0.3"/>
 </thruster>
 
 <!-- wingtip jets for roll  -->
-<thruster x="-9.2" y="3.34" z="0" vx="0" vy="0" vz="1" thrust="300">
+<thruster x="-9.2" y="3.34" z="0" vx="0" vy="0" vz="1" thrust="200">
   <control-input axis="/controls/aileron" control="THROTTLE"
            src0="0" src1="1" dst0="0" dst1="1"/>
+  <control-input axis="/orientation/roll-rate-degps" control="THROTTLE"
+           src0="-2" src1="0" dst0="0.3" dst1="0"/>
 </thruster>
-<thruster x="-9.2" y="3.34" z="0" vx="0" vy="0" vz="-1" thrust="300">
+<thruster x="-9.2" y="3.34" z="0" vx="0" vy="0" vz="-1" thrust="200">
   <control-input axis="/controls/aileron" control="THROTTLE"
            src0="-1" src1="0" dst0="1" dst1="0"/>
+  <control-input axis="/orientation/roll-rate-degps" control="THROTTLE"
+           src0="0" src1="2" dst0="0" dst1="0.3"/>
 </thruster>
-<thruster x="-9.2" y="-3.34" z="0" vx="0" vy="0" vz="1" thrust="300">
+<thruster x="-9.2" y="-3.34" z="0" vx="0" vy="0" vz="1" thrust="200">
   <control-input axis="/controls/aileron" control="THROTTLE"
            src0="-1" src1="0" dst0="1" dst1="0"/>
+  <control-input axis="/orientation/roll-rate-degps" control="THROTTLE"
+           src0="0" src1="2" dst0="0" dst1="0.3"/>
 </thruster>
-<thruster x="-9.2" y="-3.34" z="0" vx="0" vy="0" vz="-1" thrust="300">
+<thruster x="-9.2" y="-3.34" z="0" vx="0" vy="0" vz="-1" thrust="200">
   <control-input axis="/controls/aileron" control="THROTTLE"
            src0="0" src1="1" dst0="0" dst1="1"/>
+  <control-input axis="/orientation/roll-rate-degps" control="THROTTLE"
+           src0="-2" src1="0" dst0="0.3" dst1="0"/>
 </thruster>
 
 <!-- nose jet for pitch up -->
-<thruster x="0" y="0" z="0" vx="0" vy="0" vz="1" thrust="300">
+<thruster x="0" y="0" z="0" vx="0" vy="0" vz="1" thrust="200">
   <control-input axis="/controls/elevator" control="THROTTLE"
            src0="-1" src1="0" dst0="1" dst1="0"/>
+  <control-input axis="/orientation/pitch-rate-degps" control="THROTTLE"
+           src0="-2" src1="0" dst0="0.3" dst1="0"/>
 </thruster>
 
 
@@ -129,13 +145,13 @@
 </gear>
 
 <!-- Wingtip gear -->
-<gear x="-8.90" y="3.24"  z="-1.5" compression="0.25">
+<gear x="-8.90" y="3.24"  z="-1.41" compression="0.25" castering="1">
   <control-input axis="/controls/gear-down" control="EXTEND"/>
   <control-output control="EXTEND" prop="/gear/gear[2]/position-norm"/>
   <control-speed control="EXTEND" transition-time="7"/>
 </gear>
 
-<gear x="-8.90" y="-3.24" z="-1.5" compression="0.25">
+<gear x="-8.90" y="-3.24" z="-1.41" compression="0.25" castering="1">
   <control-input axis="/controls/gear-down" control="EXTEND"/>
   <control-output control="EXTEND" prop="/gear/gear[3]/position-norm"/>
   <control-speed control="EXTEND" transition-time="7"/>

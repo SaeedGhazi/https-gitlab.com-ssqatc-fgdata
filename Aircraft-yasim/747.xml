@@ -17,12 +17,12 @@
   <control-setting axis="/controls/gear-down" value="0"/>
 </cruise>
 
-<cockpit x="-5.42" y="1.81" z="15.06"/>
+<cockpit x="19.08" y="1.81" z="15.06"/>
 
-<fuselage ax="0" ay="0" az="0" bx="-69.86" by="0.00" bz="2.41"
+<fuselage ax="24.5" ay="0" az="0" bx="-45.36" by="0.00" bz="2.41"
           width="6" taper="0.3" midpoint="0.2"/>
 
-<wing x="-26.50" y="3.01" z="-1.45" length="33.72" chord="13.25" sweep="33"
+<wing x="-2" y="3.01" z="-1.45" length="33.72" chord="13.25" sweep="33"
       taper=".27" dihedral="7" camber="0.15" incidence="-0.7">
   <stall aoa="15" width="2" peak="1.5"/>
   <flap0 start="0" end=".56" lift="1.8" drag="1.2"/>
@@ -42,7 +42,7 @@
   <control-speed control="FLAP0" transition-time="10"/>
 </wing>
 
-<hstab x="-62.63" y="1.81" z="1.81" chord="8.43" length="10.84" taper=".29"
+<hstab x="-38.13" y="1.81" z="1.81" chord="8.43" length="10.84" taper=".29"
        sweep="28" dihedral="7" camber="-0.1" effectiveness="1.5">
   <stall aoa="15" width="2" peak="1.5"/>
   <flap0 start="0" end="1" lift="1.6" drag="1.2"/>
@@ -51,7 +51,7 @@
   <control-output control="FLAP0" prop="/surface-positions/elevator-pos-norm"/>
 </hstab>
 
-<vstab x="-62.63" y="0.00" z="3.61" chord="12.04" length="12.04" taper="0.3"
+<vstab x="-38.13" y="0.00" z="3.61" chord="12.04" length="12.04" taper="0.3"
        sweep="33">
   <stall aoa="15" width="2" peak="1.5"/>
   <flap0 start="0" end="1" lift="1.2" drag="1.3"/>
@@ -64,24 +64,24 @@
 <!-- The CF6 engines are rated at 60000 lbs thrust, flat rated to 33 -->
 <!-- degrees C.  Corrected to YASim's standard atmosphere temperature -->
 <!-- of 288.2 kelvins, that gives 63737 lbs of nominal thrust. -->
-<jet x="-34.93" y="16.26"  z="-1.20" mass="8000" thrust="63737">
+<jet x="-10.43" y="16.26"  z="-1.20" mass="8000" thrust="63737">
   <control-input axis="/controls/throttle[0]" control="THROTTLE"/>
 </jet>
 
-<jet x="-26.50" y="12.65"  z="-2.41" mass="8000" thrust="63737">
+<jet x="-2" y="12.65"  z="-2.41" mass="8000" thrust="63737">
   <control-input axis="/controls/throttle[0]" control="THROTTLE"/>
 </jet>
 
-<jet x="-26.50" y="-12.65" z="-2.41" mass="8000" thrust="63737">
+<jet x="-2" y="-12.65" z="-2.41" mass="8000" thrust="63737">
   <control-input axis="/controls/throttle[1]" control="THROTTLE"/>
 </jet>
 
-<jet x="-34.93" y="-16.26" z="-1.20" mass="8000" thrust="63737">
+<jet x="-10.43" y="-16.26" z="-1.20" mass="8000" thrust="63737">
   <control-input axis="/controls/throttle[1]" control="THROTTLE"/>
 </jet>
  
 <!-- nose -->
-<gear x="-5.42"  y="0.00" z="-5.42"
+<gear x="19.08"  y="0.00" z="-5.42"
       compression="0.75" spring="0.7" damp="4">
   <control-input axis="/controls/rudder" control="STEER" square="true"/>
   <control-input axis="/controls/gear-down" control="EXTEND"/>
@@ -89,41 +89,41 @@
   <control-speed control="EXTEND" transition-time="7"/>
 </gear>
 
-<gear x="-29.15" y="5.42" z="-5.42" compression="2"> <!-- fwd left main -->
+<gear x="-4.65" y="5.42" z="-5.42" compression="2"> <!-- fwd left main -->
   <control-input axis="/controls/brakes[0]" control="BRAKE"/>
   <control-input axis="/controls/gear-down" control="EXTEND"/>
   <control-output control="EXTEND" prop="/gear/gear[1]/position-norm"/>
   <control-speed control="EXTEND" transition-time="7"/>
 </gear>
 
-<gear x="-31.32" y="1.81" z="-5.42" compression="2"> <!-- rear left main -->
+<gear x="-6.82" y="1.81" z="-5.42" compression="2"> <!-- rear left main -->
   <control-input axis="/controls/brakes[0]" control="BRAKE"/>
   <control-input axis="/controls/gear-down" control="EXTEND"/>
   <control-output control="EXTEND" prop="/gear/gear[2]/position-norm"/>
   <control-speed control="EXTEND" transition-time="7"/>
 </gear>
 
-<gear x="-31.32" y="-1.81" z="-5.42" compression="2"> <!-- rear right main -->
+<gear x="-6.82" y="-1.81" z="-5.42" compression="2"> <!-- rear right main -->
   <control-input axis="/controls/brakes[1]" control="BRAKE"/>
   <control-input axis="/controls/gear-down" control="EXTEND"/>
   <control-output control="EXTEND" prop="/gear/gear[3]/position-norm"/>
   <control-speed control="EXTEND" transition-time="7"/>
 </gear>
 
-<gear x="-29.15" y="-5.42" z="-5.42" compression="2"> <!-- fwd right main -->
+<gear x="-4.65" y="-5.42" z="-5.42" compression="2"> <!-- fwd right main -->
   <control-input axis="/controls/brakes[1]" control="BRAKE"/>
   <control-input axis="/controls/gear-down" control="EXTEND"/>
   <control-output control="EXTEND" prop="/gear/gear[4]/position-norm"/>
   <control-speed control="EXTEND" transition-time="7"/>
 </gear>
 
-<tank x="-26.50" y="0" z="-1.45" jet="true" capacity="128000"/>
-<tank x="-30.10" y="8" z="-1.45" jet="true" capacity="128000"/>
-<tank x="-30.10" y="-8" z="-1.45" jet="true" capacity="128000"/>
+<tank x="-2" y="0" z="-1.45" jet="true" capacity="128000"/>
+<tank x="-5.6" y="8" z="-1.45" jet="true" capacity="128000"/>
+<tank x="-5.6" y="-8" z="-1.45" jet="true" capacity="128000"/>
 
-<ballast x="-6"  y="0" z="2.4" mass="30000"/> <!-- hump -->
-<ballast x="-12" y="0" z="2.4" mass="40000"/> <!-- hump -->
-<ballast x="-18" y="0" z="2.4" mass="40000"/> <!-- hump -->
-<ballast x="-24" y="0" z="2.4" mass="30000"/> <!-- hump -->
+<ballast x="18.5"  y="0" z="2.4" mass="30000"/> <!-- hump -->
+<ballast x="12.5" y="0" z="2.4" mass="40000"/> <!-- hump -->
+<ballast x="6.5" y="0" z="2.4" mass="40000"/> <!-- hump -->
+<ballast x="0.5" y="0" z="2.4" mass="30000"/> <!-- hump -->
 
 </airplane>

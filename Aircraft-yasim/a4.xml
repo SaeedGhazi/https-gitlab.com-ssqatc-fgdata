@@ -14,18 +14,19 @@
   <control-setting axis="/controls/gear-down" value="0"/>
 </cruise>
 
-<cockpit x="-2.9" y="0.0" z="1.0"/>
+<cockpit x="2.71" y="0.0" z="0.67"/>
 
-<fuselage ax="0" ay="0" az="0" bx="-12.2" by="0" bz=".64"
+<fuselage ax="5.61" ay="0" az="-0.66" bx="-6.59" by="0" bz=".64"
           width="2.0" taper="0.5" midpoint="0.3"/>
 
-<wing x="-6.4" y=".55" z="0" taper=".186"
+<wing x="-0.79" y=".55" z="-0.33" taper=".186"
       length="4.04" chord="3.95" sweep="28" dihedral="0" camber="0.02">
   <stall aoa="27" width="10" peak="1.3"/>
-  <flap0 start="0.0" end="0.5" lift="1.4" drag="1.2"/>
+  <flap0 start="0.0" end="0.5" lift="1.3" drag="1.2"/>
   <flap1 start="0.5" end="1.0" lift="1.25" drag="1.3"/>
   <control-input axis="/controls/flaps" control="FLAP0"/>
   <control-input axis="/controls/aileron" control="FLAP1" split="true"/> 
+  <control-input axis="/controls/aileron-trim" control="FLAP1" split="true"/> 
   <control-output control="FLAP0" prop="/surface-positions/flap-pos-norm"/>
   <control-output control="FLAP1" side="left"
 		  prop="/surface-positions/left-aileron-pos-norm"/>
@@ -34,31 +35,32 @@
   <control-speed control="FLAP0" transition-time="5"/>
 </wing>
 
-<hstab x="-11.01" y="0" z="1.38" taper=".3" effectiveness="1.99"
+<hstab x="-5.4" y="0" z="1.05" taper=".3" effectiveness="1.99"
        length="2.02" chord="2.02" sweep="26">
   <stall aoa="27" width="10" peak="1.5"/>
-  <flap0 start="0" end="1" lift="1.7" drag="1.2"/>
+  <flap0 start="0" end="1" lift="1.6" drag="1.2"/>
   <control-input axis="/controls/elevator" control="FLAP0"/>
   <control-input axis="/controls/elevator-trim" control="FLAP0"/>
   <control-output control="FLAP0" prop="/surface-positions/elevator-pos-norm"/>
 </hstab>
 
-<vstab x="-11.01" y="0" z="1.38" taper=".176"
+<vstab x="-5.4" y="0" z="1.05" taper=".176"
        length="2.57" chord="3.11" sweep="28" effectiveness="1.5">
   <stall aoa="27" width="10" peak="1.5"/>
   <flap0 start="0" end="1" lift="1.15" drag="1.2"/>
   <control-input axis="/controls/rudder" control="FLAP0" invert="true"/>
+  <control-input axis="/controls/rudder-trim" control="FLAP0" invert="true"/>
   <control-output control="FLAP0" prop="/surface-positions/rudder-pos-norm"
 		  min="1" max="-1"/>
 </vstab>
 
 <!-- P&W J52-P-6A turbojet, 8500 lbs sea level thrust -->
-<jet x="-5.0" y="0" z=".44" mass="1800" thrust="8500">
+<jet x="0.61" y="0" z="0.11" mass="1800" thrust="8500" n1-max="106">
   <control-input axis="/controls/throttle[0]" control="THROTTLE"/>
 </jet>
 
 <!-- nose -->
-<gear x="-2.29" y="0" z="-1.93" retract-time="7" compression=".96">
+<gear x="3.32" y="0" z="-2.26" retract-time="7" compression=".96">
   <control-input axis="/controls/rudder" control="STEER" square="true"
                  src0="-1" src1="1" dst0="-0.9" dst1="0.9"/>
   <control-input axis="/controls/gear-down" control="EXTEND"/>
@@ -67,19 +69,21 @@
 </gear>
 
 <!-- left main -->
-<gear x="-7" y="1.19" z="-1.56" retract-time="7" compression=".78">
+<gear x="-1.39" y="1.19" z="-1.89" retract-time="7" compression=".78">
   <control-input axis="/controls/brakes[0]" control="BRAKE"/>
   <control-input axis="/controls/gear-down" control="EXTEND"/>
   <control-output control="EXTEND" prop="/gear/gear[1]/position-norm"/>
   <control-speed control="EXTEND" transition-time="7"/>
+  <control-speed control="BRAKE" transition-time="2"/>
 </gear>
 
 <!-- right main -->
-<gear x="-7" y="-1.19" z="-1.56" retract-time="7" compression=".78">
+<gear x="-1.39" y="-1.19" z="-1.89" retract-time="7" compression=".78">
   <control-input axis="/controls/brakes[1]" control="BRAKE"/>
   <control-input axis="/controls/gear-down" control="EXTEND"/>
   <control-output control="EXTEND" prop="/gear/gear[2]/position-norm"/>
   <control-speed control="EXTEND" transition-time="7"/>
+  <control-speed control="BRAKE" transition-time="2"/>
 </gear>
 
 <!-- A4-M had 800 gallons of in-fuselage fuel capacity in three tanks,
@@ -87,13 +91,27 @@
      gallons in the fuselage due to the second seat, so the wings must
      have 0-350 gallons each.  Call the tanks 260/280/260 gallons, and
      use 6.72 lbs/gal for Jet-A fuel. BUT: this is an A-4E, which had
-     770 gallons.  Figure that the extra 30 all went into the expanded
-     center tank. -->
-<tank x="-5.50" y="0" z="0.5" jet="true" capacity="1678"/>
-<tank x="-6.0" y="1" z="0" jet="true" capacity="1750"/>
-<tank x="-6.0" y="-1" z="0" jet="true" capacity="1750"/>
+     770 gallons.  Figure that the extra 30 all went into an expanded
+     center tank underneath the new "hump" in the fuselage. -->
+<tank x="0.11" y="0" z="0.17" jet="true" capacity="1678"/>
+<tank x="-0.39" y="1" z="-0.33" jet="true" capacity="1750"/>
+<tank x="-0.39" y="-1" z="-0.33" jet="true" capacity="1750"/>
 
-<ballast x="-1.5" y="0" z="1" mass="450"/> <!-- cockpit -->
-<ballast x="-3.0" y="0" z="1" mass="450"/> <!-- cockpit -->
+<ballast x="4.11" y="0" z="0.67" mass="450"/> <!-- cockpit -->
+<ballast x="2.61" y="0" z="0.67" mass="450"/> <!-- cockpit -->
+
+<!-- The early A-4's had five pylons.  One 3500lbs center for a tank,
+     two inboard pylons holding 2250lbs, and two 1000lbs outboard
+     pylons. -->
+<weight x="-0.39" y="0" z="-1.33" size="1.5" 
+        mass-prop="/yasim/a4/weights/center-lbs"/>
+<weight x="-0.79" y="2" z="-1.33" size="1" 
+        mass-prop="/yasim/a4/weights/left-inboard-lbs"/>
+<weight x="-0.79" y="-2" z="-1.33" size="1" 
+        mass-prop="/yasim/a4/weights/right-inboard-lbs"/>
+<weight x="-1.39" y="3" z="-1.33" size="1" 
+        mass-prop="/yasim/a4/weights/left-outboard-lbs"/>
+<weight x="-1.39" y="-3" z="-1.33" size="1" 
+        mass-prop="/yasim/a4/weights/right-outboard-lbs"/>
 
 </airplane>

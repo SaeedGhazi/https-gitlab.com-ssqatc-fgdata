@@ -260,6 +260,11 @@ Started September 2000 by David Megginson, david@megginson.com
   <menubar>
    <visibility type="bool">true</visibility>
   </menubar>
+
+  <mouse>
+    <hide-cursor>false</hide-cursor>
+    <cursor-timeout-sec>10.0</cursor-timeout-sec>
+  </mouse>
   
   <replay>
    <duration type="double">90</duration>

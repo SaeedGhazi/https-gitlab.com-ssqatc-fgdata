@@ -11,16 +11,16 @@ David Culp,  davidculp2@attbi.com
  <sim>
 
   <description>T-6A Texan II</description>
- 
+
   <flight-model>jsb</flight-model>
   <aero>t6texan2</aero>
-  
+
   <systems>
    <electrical>
     <path>Aircraft/c172/c172-electrical.xml</path>
    </electrical>
   </systems> 
-  
+
   <sound>
    <audible>true</audible>
    <path>Aircraft/t6texan2/Sounds/t6texan2-sound.xml</path>
@@ -35,7 +35,17 @@ David Culp,  davidculp2@attbi.com
    <path>Aircraft/t6texan2/Models/T6Texan2.mdl</path>
   </model>
 
-
  </sim>
+
+ <consumables>
+  <fuel>
+   <tank n="0">
+    <level-gal_us archive="y">73</level-gal_us>
+   </tank>
+   <tank n="1">
+    <level-gal_us archive="y">73</level-gal_us>
+   </tank>
+  </fuel>
+ </consumables>
 
 </PropertyList>

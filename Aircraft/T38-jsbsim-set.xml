@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 ************************************************************************
-OV-10 JSBSim config file
+T38 JSBSim config file
 David Culp,  davidculp2@attbi.com
 ************************************************************************
 -->
@@ -10,20 +10,20 @@ David Culp,  davidculp2@attbi.com
 
  <sim>
 
-  <description>North American OV-10A Bronco</description>
+  <description>Northrop T-38</description>
  
   <flight-model>jsb</flight-model>
-  <aero>OV10</aero>
- 
+  <aero>T38</aero>
+  
   <systems>
    <electrical>
-    <path>Aircraft/T38/T38-electrical.xml</path>
+    <path>Aircraft/c172/c172-electrical.xml</path>
    </electrical>
   </systems> 
- 
+  
   <sound>
    <audible>true</audible>
-   <path>Aircraft/OV10/Sounds/OV10-sound.xml</path>
+   <path>Aircraft/T38/Sounds/T38-sound.xml</path>
   </sound>
 
   <panel>
@@ -31,8 +31,9 @@ David Culp,  davidculp2@attbi.com
    <visibility archive="y">true</visibility>
   </panel>
 
+
   <model>
-   <path>Aircraft/OV10/Models/ov10.xml</path>
+   <path>Aircraft/T38/Models/T38-model.xml</path>
   </model>
 
  </sim>
@@ -40,13 +41,10 @@ David Culp,  davidculp2@attbi.com
  <consumables>
   <fuel>
    <tank n="0">
-     <level-gal_us archive="y">117</level-gal_us>
+    <level-gal_us archive="y">280</level-gal_us>
    </tank>
    <tank n="1">
-    <level-gal_us archive="y">117</level-gal_us>
-   </tank>
-   <tank n="2">
-    <level-gal_us archive="y">220</level-gal_us>
+    <level-gal_us archive="y">280</level-gal_us>
    </tank>
   </fuel>
  </consumables>

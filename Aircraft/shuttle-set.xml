@@ -11,6 +11,8 @@ October 23 2001 John Check, fgpanels@rockfish.net
 -->
 
 <PropertyList>
+
+ <sim>
   
   <flight-model>jsb</flight-model>
   <aero>shuttle</aero>
@@ -27,6 +29,8 @@ October 23 2001 John Check, fgpanels@rockfish.net
   <model>
    <path><!-- you need to set this --></path>
   </model>
+
+ </sim>
  
 </PropertyList>
 

@@ -12,6 +12,8 @@ October 23 2001 John Check, fgpanels@rockfish.net
 
 <PropertyList>
 
+ <sim>
+
   <flight-model>yasim</flight-model>
   <aero>747</aero>
   <fuel-fraction>1.0</fuel-fraction>
@@ -28,6 +30,8 @@ October 23 2001 John Check, fgpanels@rockfish.net
   <model>
    <path><!-- you need to set this --></path>
   </model>
+
+ </sim>
 
 </PropertyList>
 

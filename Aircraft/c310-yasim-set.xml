@@ -11,6 +11,8 @@ October 23 2001 John Check, fgpanels@rockfish.net
 -->
 
 <PropertyList>
+
+ <sim>
  
   <flight-model>yasim</flight-model>
   <aero>c310</aero>
@@ -29,6 +31,8 @@ October 23 2001 John Check, fgpanels@rockfish.net
   <model>
    <path>Aircraft/c310/Models/cessna310r.ac</path>
   </model> 
+
+ </sim>
 
 </PropertyList>
 

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+ 
+<PropertyList>
+
+ <scenario>
+
+  <entry>
+   <callsign>Esso 1</callsign>
+   <type>aircraft</type>
+   <class>tanker</class>
+   <model>Aircraft/737/Models/boeing733.xml</model>
+   <latitude>37.61633</latitude>
+   <longitude>-122.38334</longitude>
+   <altitude>3000</altitude>
+   <heading>020</heading>
+   <speed>280</speed>
+   <roll>-15</roll>
+  </entry>
+
+ </scenario>
+
+</PropertyList>

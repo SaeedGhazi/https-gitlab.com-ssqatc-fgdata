@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+ 
+<PropertyList>
+
+ <scenario>
+
+  <entry>
+   <!-- puts a thermal over the control tower at KSFO -->
+   <type>thermal</type>
+   <latitude>37.61633</latitude>
+   <longitude>-122.38334</longitude>
+   <strength-fps>8.33</strength-fps>
+   <diameter-ft>4000.0</diameter-ft>
+  </entry>
+
+ </scenario>
+
+</PropertyList>

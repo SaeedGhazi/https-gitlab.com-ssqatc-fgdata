@@ -31,7 +31,7 @@ May 25 2002 Michael Selig, m-selig@uiuc.edu
 
   <panel>
    <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
-   <visibility>true</visibility>
+   <visibility archive="n">false</visibility>
   </panel>
 
   <panel_2>
@@ -42,6 +42,15 @@ May 25 2002 Michael Selig, m-selig@uiuc.edu
   <model>
    <path>Aircraft/wrightFlyer1903/Models/WrightFlyer-pb-jw.xml</path>
   </model>
+
+  <view>
+   <internal archive="y">true</internal>
+   <config>
+     <x-offset-m archive="y">-0.31</x-offset-m>
+     <y-offset-m archive="y">-0.22</y-offset-m>
+     <z-offset-m archive="y">-0.98</z-offset-m>
+   </config>
+  </view>
 
  </sim>
 </PropertyList>

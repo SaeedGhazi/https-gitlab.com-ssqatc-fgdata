@@ -56,13 +56,13 @@ October 23 2001 John Check, fgpanels@rockfish.net
  <autopilot>
    <config>
      <min-climb-speed-kt type="float">200.0</min-climb-speed-kt>
-     <best-climb-speed-kt type="float">250.0</best-climb-speed-kt>
+     <best-climb-speed-kt type="float">300.0</best-climb-speed-kt>
      <target-climb-rate-fpm type="float">3000.0</target-climb-rate-fpm>
      <target-descent-rate-fpm type="float">1500.0</target-descent-rate-fpm>
-     <elevator-adj-factor type="float">3500.0</elevator-adj-factor>
-     <integral-contribution type="float">0.01</integral-contribution>
+     <elevator-adj-factor type="float">5500.0</elevator-adj-factor>
+     <integral-contribution type="float">0.007</integral-contribution>
      <zero-pitch-throttle type="float">0.60</zero-pitch-throttle>
-     <zero-pitch-trim-full-throttle type="float">0.13</zero-pitch-trim-full-throttle>
+     <zero-pitch-trim-full-throttle type="float">0.14</zero-pitch-trim-full-throttle>
      <max-roll-deg type="float">45</max-roll-deg>
      <max-aileron type="float">0.1</max-aileron>
    </config>

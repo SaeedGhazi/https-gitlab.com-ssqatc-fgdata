@@ -60,7 +60,7 @@ Properties currently used:
   rolling-friction: the gear rolling rolling-friction coefficient for this
     particular material. (default: 0.02 for Dry concrete/Asphalt).
 
-  bumpyness: normalized bumpyness factor for this particular terrain.
+  bumpiness: normalized bumpiness factor for this particular terrain.
     (default: 0.0 for a smooth surface).
 
 ************************************************************************
@@ -86,21 +86,21 @@ Shared parameters for various materials.
  <xsize>75</xsize>
  <ysize>75</ysize>
  <rolling-friction>0.05</rolling-friction>
- <bumpyness>0.05</bumpyness>
+ <bumpiness>0.05</bumpiness>
 </material>
 
 <material>
  <name>dirt_rwy</name>
  <texture>Runway/dirt_rwy.rgb</texture>
  <rolling-friction>0.04</rolling-friction>
- <bumpyness>0.1</bumpyness>
+ <bumpiness>0.1</bumpiness>
 </material>
 
 <material>
  <name>lakebed_taxiway</name>
  <texture>Runway/lakebed_taxiway.rgb</texture>
  <rolling-friction>0.04</rolling-friction>
- <bumpyness>0.05</bumpyness>
+ <bumpiness>0.05</bumpiness>
 </material>
 
 <material>
@@ -689,7 +689,7 @@ Shared parameters for various materials.
  <ysize>1000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <rolling-friction>1</rolling-friction>
- <bumpyness>1</bumpyness>
+ <bumpiness>1</bumpiness>
  <object-group>
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
@@ -709,7 +709,7 @@ Shared parameters for various materials.
  <ysize>500</ysize>
  <light-coverage>10000000.0</light-coverage>
  <rolling-friction>1</rolling-friction>
- <bumpyness>0.85</bumpyness>
+ <bumpiness>0.85</bumpiness>
  <object-group>
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
@@ -729,7 +729,7 @@ Shared parameters for various materials.
  <ysize>1000</ysize>
  <light-coverage>5000000.0</light-coverage>
  <rolling-friction>1</rolling-friction>
- <bumpyness>0.95</bumpyness>
+ <bumpiness>0.95</bumpiness>
  <object-group>
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
@@ -753,7 +753,7 @@ Shared parameters for various materials.
  <ysize>1000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <rolling-friction>1</rolling-friction>
- <bumpyness>1</bumpyness>
+ <bumpiness>1</bumpiness>
  <object-group>
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
@@ -772,7 +772,7 @@ Shared parameters for various materials.
  <ysize>1000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <rolling-friction>1</rolling-friction>
- <bumpyness>1</bumpyness>
+ <bumpiness>1</bumpiness>
  <object-group>
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
@@ -793,7 +793,7 @@ Shared parameters for various materials.
  <light-coverage>10000000.0</light-coverage>
  <shininess>2.5</shininess>
  <rolling-friction>0.1</rolling-friction>
- <bumpyness>0.1</bumpyness>
+ <bumpiness>0.1</bumpiness>
 </material>
 
 <material>
@@ -804,7 +804,7 @@ Shared parameters for various materials.
  <ysize>500</ysize>
  <light-coverage>20000000.0</light-coverage>
  <rolling-friction>0.6</rolling-friction>
- <bumpyness>0.4</bumpyness>
+ <bumpiness>0.4</bumpiness>
 </material>
 
 <material>
@@ -957,7 +957,7 @@ Shared parameters for various materials.
  <xsize>1000</xsize>
  <ysize>1000</ysize>
  <rolling-friction>0.1</rolling-friction>
- <bumpyness>0.1</bumpyness>
+ <bumpiness>0.1</bumpiness>
 </material>
 
 <material>
@@ -967,7 +967,7 @@ Shared parameters for various materials.
  <ysize>400</ysize>
  <shininess>1.5</shininess>
  <rolling-friction>0.005</rolling-friction>
- <bumpyness>0.3</bumpyness>
+ <bumpiness>0.3</bumpiness>
 </material>
 
 <material>
@@ -977,7 +977,7 @@ Shared parameters for various materials.
  <ysize>2000</ysize>
  <shininess>1.5</shininess>
  <rolling-friction>0.1</rolling-friction>
- <bumpyness>0.5</bumpyness>
+ <bumpiness>0.5</bumpiness>
 </material>
 
 <material>
@@ -987,7 +987,7 @@ Shared parameters for various materials.
  <ysize>2000</ysize>
  <shininess>1.2</shininess>
  <rolling-friction>0.15</rolling-friction>
- <bumpyness>0.1</bumpyness>
+ <bumpiness>0.1</bumpiness>
 </material>
 
 <material>
@@ -1023,7 +1023,7 @@ Shared parameters for various materials.
  </specular>
  <shininess>1.2</shininess>
  <rolling-friction>1</rolling-friction>
- <bumpyness>0.3</bumpyness>
+ <bumpiness>0.3</bumpiness>
 </material>
 
 <material>
@@ -1056,7 +1056,7 @@ Shared parameters for various materials.
  </specular>
  <shininess>1.2</shininess>
  <rolling-friction>1</rolling-friction>
- <bumpyness>0.2</bumpyness>
+ <bumpiness>0.2</bumpiness>
 </material>
 
 <material>
@@ -1066,7 +1066,7 @@ Shared parameters for various materials.
  <ysize>200</ysize>
  <shininess>1.5</shininess>
  <rolling-friction>1</rolling-friction>
- <bumpyness>0.6</bumpyness>
+ <bumpiness>0.6</bumpiness>
 </material>
 
 <material>
@@ -1075,7 +1075,7 @@ Shared parameters for various materials.
  <xsize>500</xsize>
  <ysize>500</ysize>
  <rolling-friction>0.04</rolling-friction>
- <bumpyness>0.1</bumpyness>
+ <bumpiness>0.1</bumpiness>
 </material>
 
 <material>
@@ -1085,7 +1085,7 @@ Shared parameters for various materials.
  <xsize>500</xsize>
  <ysize>500</ysize>
  <rolling-friction>0.1</rolling-friction>
- <bumpyness>0.3</bumpyness>
+ <bumpiness>0.3</bumpiness>
 </material>
 
 <material>
@@ -1097,7 +1097,7 @@ Shared parameters for various materials.
  <ysize>1000</ysize>
  <light-coverage>40000000.0</light-coverage>
  <rolling-friction>0.3</rolling-friction>
- <bumpyness>0.2</bumpyness>
+ <bumpiness>0.2</bumpiness>
 </material>
 
 <!-- Moved to Tundra (see below)
@@ -1108,7 +1108,7 @@ Shared parameters for various materials.
  <ysize>1000</ysize>
  <light-coverage>4000000.0</light-coverage>
  <rolling-friction>0.1</rolling-friction>
- <bumpyness>0.1</bumpyness>
+ <bumpiness>0.1</bumpiness>
 </material>
 -->
 
@@ -1122,7 +1122,7 @@ Shared parameters for various materials.
  <ysize>1000</ysize>
  <light-coverage>4000000.0</light-coverage>
  <rolling-friction>0.1</rolling-friction>
- <bumpyness>0.15</bumpyness>
+ <bumpiness>0.15</bumpiness>
 </material>
 
 <material>
@@ -1132,7 +1132,7 @@ Shared parameters for various materials.
  <ysize>1000</ysize>
  <light-coverage>4000000.0</light-coverage>
  <rolling-friction>0.1</rolling-friction>
- <bumpyness>0.2</bumpyness>
+ <bumpiness>0.2</bumpiness>
 </material>
 
 <material>
@@ -1144,7 +1144,7 @@ Shared parameters for various materials.
  <ysize>125</ysize>
  <light-coverage>4000000.0</light-coverage>
  <rolling-friction>0.1</rolling-friction>
- <bumpyness>0.1</bumpyness>
+ <bumpiness>0.1</bumpiness>
 </material>
 
 <material>
@@ -1154,7 +1154,7 @@ Shared parameters for various materials.
  <ysize>4000</ysize>
  <light-coverage>2000000.0</light-coverage>
  <rolling-friction>0.1</rolling-friction>
- <bumpyness>0.7</bumpyness>
+ <bumpiness>0.7</bumpiness>
  <object-group>
   <range-m>5000</range-m>
   <object>
@@ -1203,7 +1203,7 @@ Shared parameters for various materials.
  <ysize>4000</ysize>
  <light-coverage>2000000.0</light-coverage>
  <rolling-friction>0.3</rolling-friction>
- <bumpyness>0.6</bumpyness>
+ <bumpiness>0.6</bumpiness>
  <object-group>
   <range-m>5000</range-m>
   <object>
@@ -1251,7 +1251,7 @@ Shared parameters for various materials.
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <rolling-friction>0.1</rolling-friction>
- <bumpyness>0.6</bumpyness>
+ <bumpiness>0.6</bumpiness>
  <light-coverage>2000000.0</light-coverage>
  <object-group>
   <range-m>5000</range-m>
@@ -1301,7 +1301,7 @@ Shared parameters for various materials.
  <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
  <rolling-friction>0.1</rolling-friction>
- <bumpyness>0.3</bumpyness>
+ <bumpiness>0.3</bumpiness>
  <object-group>
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
@@ -1323,7 +1323,7 @@ Shared parameters for various materials.
  <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
  <rolling-friction>0.6</rolling-friction>
- <bumpyness>0.7</bumpyness>
+ <bumpiness>0.7</bumpiness>
  <object-group>
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
@@ -1355,7 +1355,7 @@ Shared parameters for various materials.
  <ysize>400</ysize>
  <light-coverage>1000000.0</light-coverage>
  <rolling-friction>0.04</rolling-friction>
- <bumpyness>0.5</bumpyness>
+ <bumpiness>0.5</bumpiness>
 </material>
 
 </PropertyList>

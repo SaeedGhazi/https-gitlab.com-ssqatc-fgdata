@@ -5,18 +5,49 @@
  <scenario>
 
   <entry>
+   <callsign>United 720</callsign>
+   <type>aircraft</type>
+   <class>jet_transport</class>
+   <model>Aircraft/737/Models/boeing733.xml</model>
+   <flightplan>KSFO_ILS28L.xml</flightplan>
+  </entry>
+
+  <entry>
    <callsign>United 721</callsign>
-   <class>JET_TRANSPORT</class>
+   <type>aircraft</type>
+   <class>jet_transport</class>
    <model>Aircraft/737/Models/boeing733.xml</model>
    <flightplan>KSFO_depart_east_01R.xml</flightplan>
   </entry>
 
   <entry>
-   <callsign>United 721</callsign>
-   <class>JET_TRANSPORT</class>
+   <callsign>United 722</callsign>
+   <type>aircraft</type>
+   <class>jet_transport</class>
    <model>Aircraft/737/Models/boeing733.xml</model>
    <flightplan>KSFO_depart_south_01L.xml</flightplan>
   </entry>
+
+  <entry>
+   <type>ship</type>
+   <model>Models/Geometry/sailboat.xml</model>
+   <latitude>37.63</latitude>
+   <longitude>-122.34</longitude>
+   <speed>6.0</speed>
+   <rudder>3.0</rudder>
+  </entry>
+
+  <entry>
+   <type>storm</type>
+   <model>Models/Geometry/thunderstorm.xml</model>
+   <latitude>37.3917</latitude>
+   <longitude>-122.2817</longitude>
+   <speed>25.0</speed>
+   <altitude>4000.0</altitude>
+   <heading>70.0</heading>
+  </entry>
+
+
 
  </scenario>
 

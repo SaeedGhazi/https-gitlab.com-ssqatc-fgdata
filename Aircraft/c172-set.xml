@@ -31,6 +31,17 @@ October 23 2001 John Check, fgpanels@rockfish.net
   </model>
 
  </sim>
+  
+ <autopilot>
+   <config>
+     <min-climb-speed-kt type="float">70.0</min-climb-speed-kt>
+     <best-climb-speed-kt type="float">75.0</best-climb-speed-kt>
+     <target-climb-rate-fpm type="float">500.0</target-climb-rate-fpm>
+     <target-descent-rate-fpm type="float">1000.0</target-descent-rate-fpm>
+     <elevator-adj-factor type="float">2000.0</elevator-adj-factor>
+     <integral-contribution type="float">0.001</integral-contribution> 
+   </config>
+ </autopilot>
 
  <consumables>
   <fuel>

@@ -3136,7 +3136,7 @@ Shared parameters for various materials.
 
 <material>
  <name>MixedCropPastureCover</name>
- <texture>Terrain/irrcrop.rgb</texture>
+ <texture>Terrain/mixedcrop.rgb</texture>
  <xsize>4000</xsize>
  <ysize>4000</ysize>
  <light-coverage>2000000.0</light-coverage>
@@ -3267,8 +3267,8 @@ Shared parameters for various materials.
 <material>
  <name>DryCropPastureCover</name>
  <texture>Terrain/drycrop.rgb</texture>
- <xsize>4000</xsize>
- <ysize>4000</ysize>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
  <ambient>
   <r>0.35</r>
@@ -3332,8 +3332,8 @@ Shared parameters for various materials.
 <material>
  <name>CropGrassCover</name>
  <texture>Terrain/cropgrass.rgb</texture>
- <xsize>4000</xsize>
- <ysize>4000</ysize>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
  <ambient>
   <r>0.32</r>
@@ -3375,9 +3375,9 @@ Shared parameters for various materials.
 
 <material>
  <name>CropWoodCover</name>
- <texture>Terrain/irrcrop.rgb</texture>
- <xsize>4000</xsize>
- <ysize>4000</ysize>
+ <texture>Terrain/cropwood.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
  <ambient>
   <r>0.28</r>

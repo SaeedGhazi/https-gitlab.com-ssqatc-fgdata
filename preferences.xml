@@ -271,7 +271,7 @@ Started September 2000 by David Megginson, david@megginson.com
      <elevation-ft>500</elevation-ft>
      <wind-from-heading-deg>280</wind-from-heading-deg>
      <wind-speed-kt>6</wind-speed-kt>
-     <turbulence-norm>0.1</turbulence-norm>
+     <turbulence-norm>0.0</turbulence-norm>
     </entry>
 
    </boundary>
@@ -282,7 +282,7 @@ Started September 2000 by David Megginson, david@megginson.com
      <elevation-ft>3000</elevation-ft>
      <wind-from-heading-deg>300</wind-from-heading-deg>
      <wind-speed-kt>10</wind-speed-kt>
-     <turbulence-norm>0.05</turbulence-norm>
+     <turbulence-norm>0.00</turbulence-norm>
      <visibility-m>16000</visibility-m>
      <pressure-sea-level-inhg>29.92</pressure-sea-level-inhg>
      <!-- <temperature-degc>15.0</temperature-degc> -->

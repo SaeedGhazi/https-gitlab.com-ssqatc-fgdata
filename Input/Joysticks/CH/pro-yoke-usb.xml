@@ -23,6 +23,7 @@
 * Button 9 (bottom red button): decrease boost
 * Buttons 10 and 11 (left rocker): elevator trim
 ************************************************************************
+$Id$
 -->
 
 <PropertyList>
@@ -60,6 +61,42 @@
   <binding>
    <command>property-scale</command>
    <property>/controls/engines/engine[1]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[2]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[3]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[4]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[5]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[6]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[7]/throttle</property>
    <offset type="double">-1.0</offset>
    <factor type="double">-0.5</factor>
   </binding>
@@ -209,7 +246,7 @@
     <property>/controls/engines/engine[1]/boost</property>
     <step type="double">+0.01</step>
    </binding>
- </button> 
+ </button>
 
  <button n="9">
   <repeatable>true</repeatable>

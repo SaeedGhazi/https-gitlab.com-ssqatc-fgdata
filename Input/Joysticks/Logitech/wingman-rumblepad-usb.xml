@@ -24,6 +24,7 @@
 * Button 7 (right trigger): right wheel brake
 * Button 8 (S): cycle view
 ************************************************************************
+$Id$
 -->
 
 <PropertyList>
@@ -72,6 +73,30 @@
   <binding>
    <command>property-scale</command>
    <property>/controls/engines/engine[3]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[4]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[5]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[6]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[7]/throttle</property>
    <offset type="double">-1.0</offset>
    <factor type="double">-0.5</factor>
   </binding>

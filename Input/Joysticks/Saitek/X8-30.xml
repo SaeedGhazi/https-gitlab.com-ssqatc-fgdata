@@ -18,7 +18,9 @@ Layout:
   Button 1: center rudder
   Button 2: flaps up
   Button 3: flaps down
+
 ************************************************************************
+$Id$
 -->
 
 <PropertyList>
@@ -59,6 +61,42 @@ Layout:
    <offset type="double">-1.0</offset>
    <factor type="double">-0.5</factor>
   </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[2]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[3]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[4]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[5]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[6]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[7]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
  </axis>
 
  <axis n="3">
@@ -69,7 +107,7 @@ Layout:
    <binding>
     <command>property-adjust</command>
     <property>/controls/flight/rudder</property>
-    <step type="double">-0.05</step>
+    <step type="double">-0.02</step>
    </binding>
   </low>
   <high>
@@ -77,7 +115,7 @@ Layout:
    <binding>
     <command>property-adjust</command>
     <property>/controls/flight/rudder</property>
-    <step type="double">0.05</step>
+    <step type="double">0.02</step>
    </binding>
   </high>
  </axis>
@@ -171,4 +209,4 @@ Layout:
 
 </PropertyList>
 
-<!-- end of chf.xml -->
+<!-- end of X8-30.xml -->

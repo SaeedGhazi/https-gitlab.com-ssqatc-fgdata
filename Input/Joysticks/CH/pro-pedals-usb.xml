@@ -11,6 +11,7 @@
 * Axis 1 (right pedal): right brake
 * Axis 2 (sliding both pedals): rudder (and nosewheel)
 ************************************************************************
+$Id$
 -->
 
 <PropertyList>

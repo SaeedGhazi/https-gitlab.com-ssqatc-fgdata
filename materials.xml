@@ -3183,8 +3183,8 @@ Shared parameters for various materials.
 <material>
  <name>IrrCropPastureCover</name>
  <texture>Terrain/irrcrop.rgb</texture>
- <xsize>2000</xsize>
- <ysize>2000</ysize>
+ <xsize>4000</xsize>
+ <ysize>4000</ysize>
  <light-coverage>2000000.0</light-coverage>
  <ambient>
   <r>0.23</r>

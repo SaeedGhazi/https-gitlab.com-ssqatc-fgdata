@@ -21,7 +21,7 @@
     <empty><stretch>true</stretch></empty>
 
     <button>
-      <legend>OK</legend>
+      <legend>Apply</legend>
       <equal>true</equal>
       <default>true</default>
       <binding>
@@ -50,7 +50,7 @@
     <empty><stretch>true</stretch></empty>
 
     <button>
-      <legend>Cancel</legend>
+      <legend>Close</legend>
       <equal>true</equal>
       <binding>
 	<command>dialog-close</command>

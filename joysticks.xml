@@ -23,6 +23,7 @@ Joystick binding definitions.
  <js-named include="Input/Joysticks/Logitech/wingman-extreme-digital-3d.xml"/>
  <js-named include="Input/Joysticks/Logitech/wingman-extreme-digital-3d-win.xml"/>
  <js-named include="Input/Joysticks/Logitech/wingman-force.xml"/>
+ <js-named include="Input/Joysticks/Logitech/wingman-force-3d.xml"/>
  <js-named include="Input/Joysticks/Logitech/wingman-rumblepad-usb.xml"/>
  <js-named include="Input/Joysticks/Logitech/extreme-3d-win.xml"/>
  

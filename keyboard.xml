@@ -133,7 +133,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  
  <key n="24">
   <name>Ctrl-X</name>
-  <desc>Select initial field of view.</desc>
+  <desc>Reset zoom to default.</desc>
   <binding>
    <command>property-assign</command>
    <property>/sim/current-view/field-of-view</property>
@@ -510,16 +510,6 @@ calculated by adding 256 to the GLUT key value in glut.h.
     <value alias="/sim/view/config/front-right-direction-deg"/>
    </binding>
   </mod-shift>
- </key>
-
- <key n="61">
-  <name>=</name>
-  <desc>Reset zoom to default</desc>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/current-view/field-of-view</property>
-   <value alias="/sim/view/config/default-field-of-view-deg"/>
-  </binding>
  </key>
 
  <key n="64">

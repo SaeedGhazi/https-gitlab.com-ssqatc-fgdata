@@ -29,7 +29,7 @@
           width="2" taper="0.5" midpoint="0.25"/>
 
 <wing x="-7.02" y="1.09" z="-0.95" length="11.58" camber="0.1"
-      chord="4.77" taper=".286" sweep="19" dihedral="4">
+      chord="4.77" taper=".286" sweep="19" dihedral="4" twist="-3">
   <stall aoa="14" width="6" peak="1.5"/>
   <flap0 start="0.04" end="0.38" lift="1.5" drag="1.2"/>
   <flap1 start="0.38" end="0.97" lift="1.2" drag="1.2"/>
@@ -44,11 +44,11 @@
   <control-speed control="FLAP0" transition-time="5"/>
 </wing>
 
-<hstab x="-18.12" y="0.41" z="0.27" length="3.5" effectiveness="3.0"
+<hstab x="-18.12" y="0.41" z="0.27" length="3.5" effectiveness="1.2"
        chord="3" taper=".545" sweep="15">
   <stall aoa="18" width="3" peak="1.5"/>
   <flap0 start="0" end="1" lift="1.5" drag="1.2"/>
-  <control-input axis="/controls/flight/elevator" control="FLAP0" effectiveness="1.25"/>
+  <control-input axis="/controls/flight/elevator" control="FLAP0" effectiveness="0.3"/>
   <control-input axis="/controls/flight/elevator-trim" control="FLAP0"/>
   <control-output control="FLAP0" prop="/surface-positions/elevator-pos-norm"/>
 </hstab>
@@ -57,7 +57,7 @@
        chord="3.95" taper=".462" sweep="2">
   <stall aoa="14" width="3" peak="1.5"/>
   <flap0 start="0" end="1" lift="1.5" drag="1.2"/>
-  <control-input axis="/controls/flight/rudder" control="FLAP0" effectiveness="1.25" invert="true"/>
+  <control-input axis="/controls/flight/rudder" control="FLAP0" effectiveness="2.0" invert="true"/>
   <control-input axis="/controls/flight/rudder-trim" control="FLAP0" invert="true"/>
   <control-output control="FLAP0" prop="/surface-positions/rudder-pos-norm"/>
 </vstab>

@@ -2,25 +2,6 @@
 
  <labels>
 
-  <i1>
-   <name>machno</name>
-   <x>25</x>
-   <y>130</y> 
-   <width>40</width>
-   <height>30</height>
-   <data_source>mach</data_source>
-   <label_format>%4.2f</label_format>
-   <pre_label_string>blank</pre_label_string>
-   <post_label_string>NULL</post_label_string>
-   <scale_data>1.0</scale_data>
-   <options>4</options>
-   <justification>2</justification>
-   <blinking>0</blinking>
-   <working>true</working>
-   <latitude>false</latitude>
-   <longitude>false</longitude>
-  </i1>
-
   <lat>
    <name>lattitude</name>
    <x>110</x>

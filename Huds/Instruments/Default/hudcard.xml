@@ -141,11 +141,11 @@
    <maxValue>+1.0</maxValue>
    <minValue>-1.0</minValue>
    <disp_scaling>100.0</disp_scaling>
-   <major_divs>50</major_divs>
+   <major_divs>0</major_divs>
    <minor_divs>0</minor_divs>
    <modulator>0</modulator>
    <value_span>2.0</value_span>	<!-- (maxValue - minValue) -->
-   <type>tape</type>
+   <type>gauge</type>
    <tick_bottom>false</tick_bottom>
    <tick_top>false</tick_top>
    <tick_right>true</tick_right>
@@ -171,11 +171,11 @@
    <maxValue>+1.0</maxValue>
    <minValue>-1.0</minValue>
    <disp_scaling>-100.0</disp_scaling>
-   <major_divs>50</major_divs>
+   <major_divs>0</major_divs>
    <minor_divs>0</minor_divs>
    <modulator>0</modulator>
    <value_span>2.0</value_span>	<!-- (maxValue - minValue) -->
-   <type>tape</type>
+   <type>gauge</type>
    <tick_bottom>true</tick_bottom>
    <tick_top>true</tick_top>
    <tick_right>false</tick_right>
@@ -201,11 +201,11 @@
    <maxValue>+1.0</maxValue>
    <minValue>-1.0</minValue>
    <disp_scaling>100.0</disp_scaling>
-   <major_divs>50</major_divs>
+   <major_divs>0</major_divs>
    <minor_divs>0</minor_divs>
    <modulator>0</modulator>
    <value_span>2.0</value_span>	<!-- (maxValue - minValue) -->
-   <type>tape</type>
+   <type>gauge</type>
    <tick_bottom>false</tick_bottom>
    <tick_top>false</tick_top>
    <tick_right>true</tick_right>
@@ -231,11 +231,11 @@
    <maxValue>1.0</maxValue>
    <minValue>0.0</minValue>
    <disp_scaling>100.0</disp_scaling>
-   <major_divs>50</major_divs>
+   <major_divs>0</major_divs>
    <minor_divs>0</minor_divs>
    <modulator>0</modulator>
    <value_span>1.0</value_span>	<!-- (maxValue - minValue) -->
-   <type>tape</type>
+   <type>gauge</type>
    <tick_bottom>true</tick_bottom>
    <tick_top>true</tick_top>
    <tick_right>false</tick_right>

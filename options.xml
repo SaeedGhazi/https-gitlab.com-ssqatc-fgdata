@@ -7,175 +7,228 @@
 
   <section>
    <name>General Options</name>
+
    <option>
     <name>help</name>
     <short>h</short>
-    <description>Print usage</description>
+    <description>Show the most relevant commandline options</description>
+    <brief/>
    </option>
+
+   <option>
+    <name>verbose</name>
+    <short>v</short>
+    <description>Show all commandline options</description>
+    <description>when combined with --help or -h</description>
+    <brief/>
+   </option>
+
    <option>
     <name>fg-root</name>
     <arg>path</arg>
     <description>Specify the root data path</description>
+    <brief/>
    </option>
+
    <option>
     <name>fg-scenery</name>
     <arg>path</arg>
     <description>Specify the base scenery path;</description>
     <description>Defaults to $FG_ROOT/Scenery</description>
+    <brief/>
    </option>
+
    <option>
     <name>disable-game-mode</name>
     <description>Disable full-screen game mode</description>
    </option>
+
    <option>
     <name>enable-game-mode</name>
     <description>Enable full-screen game mode</description>
    </option>
+
    <option>
     <name>disable-splash-screen</name>
     <description>Disable splash screen</description>
    </option>
+
    <option>
     <name>enable-splash-screen</name>
     <description>Enable splash screen</description>
    </option>
+
    <option>
     <name>disable-intro-music</name>
     <description>Disable introduction music</description>
    </option>
+
    <option>
     <name>enable-intro-music</name>
     <description>Enable introduction music</description>
    </option>
+
    <option>
     <name>disable-mouse-pointer</name>
     <description>Disable extra mouse pointer</description>
    </option>
+
    <option>
     <name>enable-mouse-pointer</name>
     <description>Enable extra mouse pointer</description>
     <description>(i.e. for fullscreen Voodoo based cards)</description>
    </option>
+
    <option>
     <name>disable-random-objects</name>
     <description>Exclude random scenery objects</description>
     <description>(buildings, etc.)</description>
    </option>
+
    <option>
     <name>enable-random-objects</name>
     <description>Include random scenery objects</description>
     <description>(buildings, etc.)</description>
    </option>
+
    <option>
     <name>disable-freeze</name>
     <description>Start in a running state</description>
    </option>
+
    <option>
     <name>enable-freeze</name>
     <description>Start in a frozen state</description>
    </option>
+
    <option>
     <name>disable-fuel-freeze</name>
     <description>Fuel is consumed normally</description>
    </option>
+
    <option>
     <name>enable-fuel-freeze</name>
     <description>Fuel tank quantity forced to remain constant</description>
    </option>
+
    <option>
     <name>disable-clock-freeze</name>
     <description>Clock advances normally</description>
    </option>
+
    <option>
     <name>enable-clock-freeze</name>
     <description>Do not advance clock</description>
    </option>
+
    <option>
     <name>control</name>
     <arg>mode</arg>
     <description>Primary control mode (joystick, keyboard, mouse)</description>
+    <brief/>
    </option>
+
    <option>
     <name>enable-auto-coordination</name>
     <description>Enable auto coordination</description>
    </option>
+
    <option>
     <name>disable-auto-coordination</name>
     <description>Disable auto coordination</description>
    </option>
+
    <option>
     <name>browser-app</name>
     <arg>path</arg>
     <description>Specify path to your web browser</description>
    </option>
+
    <option>
     <name>prop:name</name>
     <arg>value</arg>
     <description>Set property &lt;name&gt; to &lt;value&gt;</description>
    </option>
+
    <option>
     <name>config</name>
     <arg>path</arg>
     <description>Load additional properties from path</description>
    </option>
+
    <option>
     <name>units-feet</name>
     <description>Use feet for distances</description>
    </option>
+
    <option>
     <name>units-meters</name>
     <description>Use meters for distances</description>
    </option>
+
   </section>
 
   <section>
    <name>Features</name>
+
    <option>
     <name>disable-hud</name>
     <description>Disable Heads Up Display (HUD)</description>
    </option>
+
    <option>
     <name>enable-hud</name>
     <description>Enable Heads Up Display (HUD)</description>
    </option>
+
    <option>
     <name>disable-panel</name>
     <description>Disable instrument panel</description>
    </option>
+
    <option>
     <name>enable-panel</name>
     <description>Enable instrument panel</description>
    </option>
+
    <option>
     <name>disable-sound</name>
     <description>Disable sound effects</description>
    </option>
+
    <option>
     <name>enable-sound</name>
     <description>Enable sound effects</description>
    </option>
+
    <option>
     <name>disable-anti-alias-hud</name>
     <description>Disable anti-aliased HUD</description>
    </option>
+
    <option>
     <name>enable-anti-alias-hud</name>
     <description>Enable anti-aliased HUD</description>
    </option>
+
   </section>
 
   <section>
    <name>Aircraft</name>
+
    <option>
     <name>aircraft</name>
     <arg>name</arg>
     <description>Select an aircraft profile as defined</description>
     <description>by a top level &lt;name&gt;-set.xml</description>
+    <brief/>
    </option>
+
   </section>
 
   <section>
    <name>Flight Model</name>
+
    <option>
     <name>fdm</name>
     <arg>name</arg>
@@ -183,217 +236,265 @@
     <description>Can be one of jsb, larcsim, yasim, magic,</description>
     <description>balloon, ada, external, or null</description>
    </option>
+
    <option>
     <name>aero</name>
     <arg>name</arg>
     <description>Select aircraft aerodynamics model to load</description>
    </option>
+
    <option>
     <name>model-hz</name>
     <arg>n</arg>
     <description>Run the FDM this rate (iterations per second)</description>
    </option>
+
    <option>
     <name>speed</name>
     <arg>n</arg>
     <description>Run the FDM 'n' times faster than real time</description>
    </option>
+
    <option>
     <name>notrim</name>
     <description>Do NOT attempt to trim the model</description>
     <description>(only with fdm=jsbsim)</description>
    </option>
+
    <option>
     <name>on-ground</name>
     <description>Start at ground level (default)</description>
    </option>
+
    <option>
     <name>in-air</name>
     <description>Start in air (implied when using --altitude)</description>
    </option>
+
    <option>
     <name>wind</name>
     <arg>DIR@SPEED</arg>
     <description>Specify wind coming from DIR (degrees)</description>
     <description>at SPEED (knots)</description>
+    <brief/>
    </option>
+
   </section>
 
   <section>
    <name>Aircraft model directory (UIUC FDM ONLY)</name>
+
    <option>
     <name>aircraft-dir</name>
     <arg>path</arg>
     <description>Aircraft directory relative to the path of</description>
     <description>the executable</description>
    </option>
+
   </section>
 
   <section>
    <name>Initial Position and Orientation</name>
+
    <option>
     <name>airport-id</name>
     <arg>ID</arg>
     <description>Specify starting position by airport ID</description>
+    <brief/>
    </option>
+
    <option>
     <name>offset-distance</name>
     <arg>nm</arg>
     <description>Specify distance to threshold</description>
    </option>
+
    <option>
     <name>offset-azimuth</name>
     <arg>degrees</arg>
     <description>Specify heading to threshold</description>
    </option>
+
    <option>
     <name>lon</name>
     <arg>degrees</arg>
     <description>Starting longitude (west = -)</description>
    </option>
+
    <option>
     <name>lat</name>
     <arg>degrees</arg>
     <description>Starting latitude (south = -)</description>
    </option>
+
    <option>
     <name>altitude</name>
     <arg>value</arg>
     <description>Starting altitude in feet</description>
     <description>(unless --units-meters specified)</description>
    </option>
+
    <option>
     <name>heading</name>
     <arg>degrees</arg>
     <description>Specify heading (yaw) angle (Psi)</description>
    </option>
+
    <option>
     <name>roll</name>
     <arg>degrees</arg>
     <description>Specify roll angle (Phi)</description>
    </option>
+
    <option>
     <name>pitch</name>
     <arg>degrees</arg>
     <description>Specify pitch angle (Theta)</description>
    </option>
+
    <option>
     <name>uBody</name>
     <arg>units_per_sec</arg>
     <description>Specify velocity along the body X axis</description>
     <description>(in feet unless --units-meters specified)</description>
    </option>
+
    <option>
     <name>vBody</name>
     <arg>units_per_sec</arg>
     <description>Specify velocity along the body Y axis</description>
     <description>(in feet unless --units-meters specified)</description>
    </option>
+
    <option>
     <name>wBody</name>
     <arg>units_per_sec</arg>
     <description>Specify velocity along the body Z axis</description>
     <description>(in feet unless --units-meters specified)</description>
    </option>
+
    <option>
     <name>vc</name>
     <arg>knots</arg>
     <description>Specify initial airspeed</description>
    </option>
+
    <option>
     <name>mach</name>
     <arg>num</arg>
     <description>Specify initial mach number</description>
    </option>
+
    <option>
     <name>glideslope</name>
     <arg>degrees</arg>
     <description>Specify flight path angle (can be positive)</description>
    </option>
+
    <option>
     <name>roc</name>
     <arg>fpm</arg>
     <description>Specify initial climb rate (can be negative)</description>
    </option>
+
   </section>
 
   <section>
    <name>Rendering Options</name>
+
    <option>
     <name>bpp</name>
     <arg>depth</arg>
     <description>Specify the bits per pixel</description>
    </option>
+
    <option>
     <name>fog-disable</name>
     <description>Disable fog/haze</description>
    </option>
+
    <option>
     <name>fog-fastest</name>
     <description>Enable fastest fog/haze</description>
    </option>
+
    <option>
     <name>fog-nicest</name>
     <description>Enable nicest fog/haze</description>
    </option>
+
    <option>
     <name>enable-clouds</name>
     <description>Enable cloud layers</description>
    </option>
+
    <option>
     <name>disable-clouds</name>
     <description>Disable cloud layers</description>
    </option>
+
    <option>
     <name>fov</name>
     <arg>degrees</arg>
     <description>Specify field of view angle</description>
    </option>
+
    <option>
     <name>disable-fullscreen</name>
     <description>Disable fullscreen mode</description>
    </option>
+
    <option>
     <name>enable-fullscreen</name>
     <description>Enable fullscreen mode</description>
    </option>
+
    <option>
     <name>shading-flat</name>
     <description>Enable flat shading</description>
    </option>
+
    <option>
     <name>shading-smooth</name>
     <description>Enable smooth shading</description>
    </option>
+
    <option>
     <name>disable-skyblend</name>
     <description>Disable sky blending</description>
    </option>
+
    <option>
     <name>enable-skyblend</name>
     <description>Enable sky blending</description>
    </option>
+
    <option>
     <name>disable-textures</name>
     <description>Disable textures</description>
    </option>
+
    <option>
     <name>enable-textures</name>
     <description>Enable textures</description>
    </option>
+
    <option>
     <name>disable-wireframe</name>
     <description>Disable wireframe drawing mode</description>
    </option>
+
    <option>
     <name>enable-wireframe</name>
     <description>Enable wireframe drawing mode</description>
    </option>
+
    <option>
     <name>geometry</name>
     <arg>WxH</arg>
     <description>Specify window geometry (640x480, etc)</description>
    </option>
+
    <option>
     <name>view-offset</name>
     <arg>value</arg>
@@ -402,190 +503,230 @@
     <description>values are LEFT, RIGHT, CENTER, or a specific</description>
     <description>number in degrees</description>
    </option>
+
    <option>
     <name>visibility</name>
     <arg>meters</arg>
     <description>Specify initial visibility</description>
    </option>
+
    <option>
     <name>visibility-miles</name>
     <arg>miles</arg>
     <description>Specify initial visibility in miles</description>
    </option>
+
   </section>
 
   <section>
    <name>Hud Options</name>
+
    <option>
     <name>hud-tris</name>
     <description>Hud displays number of triangles rendered</description>
    </option>
+
    <option>
     <name>hud-culled</name>
     <description>Hud displays percentage of triangles culled</description>
    </option>
+
   </section>
 
   <section>
    <name>Time Options</name>
+
    <option>
     <name>time-offset</name>
     <arg>[+-]hh:mm:ss</arg>
     <description>Add this time offset</description>
    </option>
+
    <option>
     <name>time-match-real</name>
     <description>Synchronize time with real-world time</description>
    </option>
+
    <option>
     <name>time-match-local</name>
     <description>Synchronize time with local real-world time</description>
    </option>
+
    <option>
     <name>start-date-sys</name>
     <arg>yyyy:mm:dd:hh:mm:ss</arg>
     <description>Specify a starting date/time with respect to</description>
     <description>system time</description>
    </option>
+
    <option>
     <name>start-date-gmt</name>
     <arg>yyyy:mm:dd:hh:mm:ss</arg>
     <description>Specify a starting date/time with respect to</description>
     <description>Greenwich Mean Time</description>
    </option>
+
    <option>
     <name>start-date-lat</name>
     <arg>yyyy:mm:dd:hh:mm:ss</arg>
     <description>Specify a starting date/time with respect to</description>
     <description>Local Aircraft Time</description>
    </option>
+
   </section>
 
   <section>
    <name>Network Options</name>
+
    <option>
     <name>httpd</name>
     <arg>port</arg>
     <description>Enable http server on the specified port</description>
    </option>
+
    <option>
     <name>telnet</name>
     <arg>port</arg>
     <description>Enable telnet server on the specified port</description>
    </option>
+
    <option>
     <name>jpg-httpd</name>
+    <arg>port</arg>
     <description>Enable screenshot http server on the specified</description>
     <description>port</description>
    </option>
+
    <option>
     <name>disable-network-olk</name>
     <description>Disable Multipilot mode (default)</description>
    </option>
+
    <option>
     <name>enable-network-olk</name>
     <description>Enable Multipilot mode</description>
    </option>
+
    <option>
     <name>net-hud</name>
     <description>Hud displays network info</description>
    </option>
+
    <option>
     <name>net-id</name>
     <arg>name</arg>
     <description>Specify your own callsign</description>
    </option>
+
   </section>
 
   <section>
    <name>Route/Way Point Options</name>
+
    <option>
     <name>wp</name>
     <arg>ID[@alt]</arg>
     <description>Specify a waypoint for the GC autopilot;</description>
     <description>multiple instances can be used to create a route</description>
    </option>
+
    <option>
     <name>flight-plan</name>
     <arg>file</arg>
     <description>Read all waypoints from a file</description>
    </option>
+
   </section>
 
   <section>
    <name>IO Options</name>
+
    <option>
     <name>garmin</name>
     <arg>params</arg>
     <description>Open connection using the Garmin GPS protocol</description>
    </option>
+
    <option>
     <name>joyclient</name>
     <arg>params</arg>
     <description>Open connection to an Agwagon joystick</description>
    </option>
+
    <option>
     <name>native-ctrls</name>
     <arg>params</arg>
     <description>Open connection using the FG Native Controls</description>
     <description>protocol</description>
    </option>
+
    <option>
     <name>native-fdm</name>
     <arg>params</arg>
     <description>Open connection using the FG Native FDM protocol</description>
    </option>
+
    <option>
     <name>native</name>
     <arg>params</arg>
     <description>Open connection using the FG Native protocol</description>
    </option>
+
    <option>
     <name>nmea</name>
     <arg>params</arg>
     <description>Open connection using the NMEA protocol</description>
    </option>
+
    <option>
     <name>opengc</name>
     <arg>params</arg>
     <description>Open connection using the OpenGC protocol</description>
    </option>
+
    <option>
     <name>props</name>
     <arg>params</arg>
     <description>Open connection using the interactive property</description>
     <description>manager</description>
    </option>
+
    <option>
     <name>pve</name>
     <arg>params</arg>
     <description>Open connection using the PVE protocol</description>
    </option>
+
    <option>
     <name>ray</name>
     <arg>params</arg>
     <description>Open connection using the RayWoodworth motion</description>
     <description>chair protocol</description>
    </option>
+
    <option>
     <name>rul</name>
     <arg>params</arg>
     <description>Open connection using the RUL protocol</description>
    </option>
+
    <option>
     <name>atc610x</name>
     <description>Enable atc610x interface</description>
    </option>
+
   </section>
 
   <section>
    <name>Debugging Options</name>
+
    <option>
     <name>trace-read</name>
     <arg>property</arg>
     <description>Trace the reads for a property;</description>
     <description>multiple instances allowed</description>
    </option>
+
    <option>
     <name>trace-write</name>
     <arg>property</arg>
@@ -593,6 +734,7 @@
     <description>multiple instances allowed</description>
    </option>
   </section>
+
  </options>
 
 </PropertyList>

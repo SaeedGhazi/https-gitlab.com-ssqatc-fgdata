@@ -607,6 +607,16 @@ Started September 2000 by David Megginson, david@megginson.com
    <radials>
     <selected-deg type="double">280.0</selected-deg>
    </radials>
+   <serviceable>true</serviceable>
+   <cdi>
+    <serviceable>true</serviceable>
+   </cdi>
+   <gs>
+    <serviceable>true</serviceable>
+   </gs>
+   <to-from>
+    <serviceable>true</serviceable>
+   </to-from>
   </nav>
 
   <nav n="1">
@@ -617,6 +627,16 @@ Started September 2000 by David Megginson, david@megginson.com
    <radials>
     <selected-deg type="double">029.0</selected-deg>
    </radials>
+   <serviceable>true</serviceable>
+   <cdi>
+    <serviceable>true</serviceable>
+   </cdi>
+   <gs>
+    <serviceable>true</serviceable>
+   </gs>
+   <to-from>
+    <serviceable>true</serviceable>
+   </to-from>
   </nav>
 
   <!-- Instruments -->

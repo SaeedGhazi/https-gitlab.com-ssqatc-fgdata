@@ -34,6 +34,7 @@
 \egroup
 
 \renewcommand\|{$\backslash$}
+\newcommand\tld{\char`\~}
 \newcommand\ac[1]{\textcolor{darkcyan}{\textbf{\textsf{#1:}}}}
 \newcommand\hardcoded[1]{\textcolor{red}{hard-coded: #1}}
 \newcommand\shift[1]{\if$#1$\else\textcolor{darkblue}{SHIFT: #1}\fi}
@@ -82,16 +83,16 @@
 \\ 34	"		{}
 \\ 35	\#		Select third engine
 \\ 36	\$		Select fourth engine
-\\ 37	{}		{}
+\\ 37	\%		{}
 \\ 38	\&		{}
-\\ 39	'~(apostrophe)	Display a dialog relevant to the tuned in ATC service (if any)
+\\ 39	'~(Apostrophe)	Display a dialog relevant to the tuned in ATC service (if any)
 \\ 40	(		{}
 \\ 41	)		{}
 \\ 42	*		{}
 \\ 43	+		{}
-\\ 44	,~(comma)	Left brake
-\\ 45	-~(minus)	{}
-\\ 46	.~(period)	Right brake
+\\ 44	,~(Comma)	Left brake
+\\ 45	-~(Minus)	{}
+\\ 46	.~(Period)	Right brake
 \\ 47	/		{}
 \\ 48	0		Move rudder left
 \\ 49	1		Decrease elevator trim
@@ -103,8 +104,8 @@
 \\ 55	7		Increase elevator trim
 \\ 56	8		Decrease elevator or autopilot altitude
 \\ 57	9		Increase throttle or autopilot autothrottle
-\\ 58	:~(colon)	{}
-\\ 59	;~(semicolon)	{}
+\\ 58	:~(Colon)	{}
+\\ 59	;~(Semicolon)	{}
 \\ 60	<		\ac{c182|c310|pa28-161} Rudder trim left
 \\ 61	=		{}
 \\ 62	>		\ac{c182|c310|pa28-161} Rudder trim right
@@ -131,7 +132,7 @@
 \\ 83	S		{}
 \\ 84	T		Decrease warp delta
 \\ 85	U		{}
-\\ 86	V		Scroll in reverse through views; \ac{tsr2} Scroll in reverse through views
+\\ 86	V		Scroll in reverse through views
 \\ 87	W		(Temporary) Toggle fullscreen for 3DFX only
 \\ 88	X		Increase field of view
 \\ 89	Y		{}
@@ -140,8 +141,8 @@
 \\ 92	\|		{}
 \\ 93	]		Increase flaps; \ac{737|A320} Increase flaps; \ac{ComperSwift} Adjust view right; \ac{an225|b52} --
 \\ 94	\^		{}
-\\ 95	\_~(underscore)	{}
-\\ 96	`{}~(backtick)	{}
+\\ 95	\_~(Underscore)	{}
+\\ 96	`{}~(Backtick)	{}
 \\ 97	a		Increase speed-up
 \\ 98	b		Apply all brakes; \ac{b52} Apply all brakes
 \\ 99	c		Toggle 3D/2D cockpit
@@ -163,7 +164,7 @@
 \\ 115	s		Swap panels
 \\ 116	t		Increase warp delta
 \\ 117	u		{}
-\\ 118	v		Cycle view; \ac{tsr2} Cycle view
+\\ 118	v		Cycle view
 \\ 119	w		{}
 \\ 120	x		Decrease field of view
 \\ 121	y		{}
@@ -171,7 +172,7 @@
 \\ 123	\{		Decrease Magneto on Selected Engine
 \\ 124	|		{}
 \\ 125	\}		Increase Magneto on Selected Engine
-\\ 126	\~~(tilde)	Select all engines
+\\ 126	{\tld}		Select all engines
 \\ 127	{}		{}
 \\ 257	F1		Load flight;					\shift{}
 \\ 258	F2		Force tile cache reload;			\shift{Save flight}
@@ -198,6 +199,6 @@
 \\ 364	Insert		Move rudder left
 
 \vfill
-\textcolor{darkcyan}{\texttt{${}$Id${}$}}
+\textcolor{darkcyan}{\texttt{\small ${}$Id${}$}}
 \end{document}
 

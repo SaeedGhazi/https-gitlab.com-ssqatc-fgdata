@@ -40,10 +40,8 @@
                      Default is 0.
       <wind>         Set to true if you want the submodel to react to the wind.
                      Default is "false". 
-	  <cd>           The Coeffient of Drag. Varies with submodel shape and Mach number.
-	                 The curves used are based on those for a non-boat tailed bullet or 
-					 shell. Enter an appropriate value for the subsonic Cd: 0.193 for a 
-					 bullet, 0.045 for an airfoil. Defaults to 0.193.
+	  <cd>           The Coeffient of Drag. Varies with submodel shape - 0.295 for a bullet, 
+	                 0.045 for an airfoil. Enter an appropriate value. Defaults to 0.295.
 	  <eda>          Effective drag area (sq ft). Usually the cross-sectional area of the
 	                 submodel normal to the airflow.
       <weight>       The weight of the submodel (lbs). NOT set to 0 on submodel release.You 
@@ -60,7 +58,7 @@
   <submodel>
     <name>left gun</name>
     <model>Models/Geometry/tracer.ac</model>
-    <trigger>systems/submodels/submodel[0]/trigger</trigger>
+    <trigger>ai/submodels/submodel[0]/trigger</trigger>
     <speed>2750.0</speed>
     <repeat>true</repeat>
     <delay>0.25</delay>
@@ -76,7 +74,7 @@
   <submodel>
     <name>right gun</name>
     <model>Models/Geometry/tracer.ac</model>
-    <trigger>systems/submodels/submodel[0]/trigger</trigger>
+    <trigger>ai/submodels/submodel[0]/trigger</trigger>
     <speed>2750.0</speed>
     <repeat>true</repeat>
     <delay>0.25</delay>

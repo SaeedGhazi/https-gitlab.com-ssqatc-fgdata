@@ -6,7 +6,7 @@
 
  <animation>
   <type>blend</type>
-  <object-name>Circle</object-name>
+  <object-name>body</object-name>
   <property>/velocities/airspeed-kt</property>
   <factor>0.00025</factor>
   <min>0.2</min>

@@ -25,25 +25,27 @@
       <equal>true</equal>
       <default>true</default>
       <binding>
-	<command>property-assign</command>
-	<property>/sim/presets/longitude-deg</property>
-	<value type="double">-9999</value>
+        <command>nasal</command>
+        <script>
+          setprop("/sim/presets/longitude-deg", -9999);
+          setprop("/sim/presets/latitude-deg", -9999);
+          setprop("/sim/presets/altitude-ft", -9999);
+          setprop("/sim/presets/airspeed-kt", 0);
+          setprop("/sim/presets/offset-distance", 0);
+          setprop("/sim/presets/offset-azimuth", 0);
+          setprop("/sim/presets/glideslope-deg", 0);
+          setprop("/sim/presets/heading-deg", 0);
+          setprop("/sim/presets/runway", "");
+      </script>
       </binding>
       <binding>
-	<command>property-assign</command>
-	<property>/sim/presets/latitude-deg</property>
-	<value type="double">-9999</value>
+        <command>dialog-apply</command>
       </binding>
       <binding>
-	<command>property-assign</command>
-	<property>/sim/presets/altitude-ft</property>
-	<value type="double">-9999</value>
+        <command>presets-commit</command>
       </binding>
       <binding>
-	<command>dialog-apply</command>
-      </binding>
-      <binding>
-	<command>presets-commit</command>
+        <command>dialog-close</command>
       </binding>
     </button>
 

@@ -202,6 +202,68 @@ Shared parameters for various materials.
 </material>
 
 <material>
+ <name>pa_dspl_thresh</name>
+ <texture>Runway/pa_dspl_thresh.rgb</texture>
+ <wrapu>false</wrapu>
+ <wrapv>false</wrapv>
+ <ambient>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
+  <a>1.0</a>
+ </ambient>
+ <diffuse>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
+</material>
+
+<material>
+ <name>pa_dspl_arrows</name>
+ <texture>Runway/pa_dspl_arrows.rgb</texture>
+ <wrapu>false</wrapu>
+ <wrapv>false</wrapv>
+ <ambient>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
+  <a>1.0</a>
+ </ambient>
+ <diffuse>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
+</material>
+
+<material>
  <name>pa_threshold</name>
  <texture>Runway/pa_threshold.rgb</texture>
  <wrapu>false</wrapu>
@@ -1289,6 +1351,68 @@ Shared parameters for various materials.
  <name>pc_tiedown</name>
  <name>dirt_rwytiedown</name>
  <texture>Runway/pc_tiedown.rgb</texture>
+ <ambient>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
+  <a>1.0</a>
+ </ambient>
+ <diffuse>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
+</material>
+
+<material>
+ <name>pc_dspl_thresh</name>
+ <texture>Runway/pc_dspl_thresh.rgb</texture>
+ <wrapu>false</wrapu>
+ <wrapv>false</wrapv>
+ <ambient>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
+  <a>1.0</a>
+ </ambient>
+ <diffuse>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
+</material>
+
+<material>
+ <name>pc_dspl_arrows</name>
+ <texture>Runway/pc_dspl_arrows.rgb</texture>
+ <wrapu>false</wrapu>
+ <wrapv>false</wrapv>
  <ambient>
   <r>0.58</r>
   <g>0.58</g>

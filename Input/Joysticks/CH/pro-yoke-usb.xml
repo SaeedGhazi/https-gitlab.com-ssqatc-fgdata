@@ -1,31 +1,4 @@
-<?xml version="1.0"?>
-
-<!--
-************************************************************************
-* Setup for CH Pro Yoke USB.
-*
-* This is a USB yoke with three throttle levers.  Bindings are as
-* follow:
-*
-* Axis 0: ailerons
-* Axis 1: elevator
-* Axis 2 (left lever): throttle
-* Axis 3 (right lever): mixture
-* Axis 4 (middle lever): propeller pitch/RPM
-* Axes 5 and 6 (hat): set view direction
-*
-* Button 0 (left trigger): [not yet bound]
-* Button 1 (right trigger): cycle view
-* Buttons 2 and 3 (right rocker): rudder trim
-* Buttons 4 and 5 (left toggle): gear up/down
-* Buttons 6 and 7 (right toggle): flaps up/down
-* Button 8 (top red button): increase boost
-* Button 9 (bottom red button): decrease boost
-* Buttons 10 and 11 (left rocker): elevator trim
-************************************************************************
-$Id$
--->
-
+<?xml version="1.0" encoding="UTF-8"?>
 <PropertyList>
 
  <name>CH PRODUCTS CH FLIGHT SIM YOKE USB </name>
@@ -101,8 +74,7 @@ $Id$
    <factor type="double">-0.5</factor>
   </binding>
  </axis>
-
- <axis n="3">
+<axis n="3">
   <desc>Mixture</desc>
   <binding>
    <command>property-scale</command>
@@ -117,8 +89,7 @@ $Id$
    <factor type="double">-0.5</factor>
   </binding>
  </axis>
-
- <axis n="4">
+<axis n="4">
   <desc>Propeller</desc>
   <binding>
    <command>property-scale</command>
@@ -134,7 +105,7 @@ $Id$
   </binding>
  </axis>
 
- <axis n="5">
+  <axis n="6">
   <desc>View Direction</desc>
   <low>
    <repeatable>true</repeatable>
@@ -154,7 +125,7 @@ $Id$
   </high>
  </axis>
 
- <axis n="6">
+ <axis n="7">
   <desc>View Elevation</desc>
   <low>
    <repeatable>true</repeatable>
@@ -173,7 +144,22 @@ $Id$
    </binding>
   </high>
  </axis>
- <button n="1">
+
+ <button n="0">
+<desc>Fire Starter on Selected Engine(s)</desc>
+  <binding>
+   <command>nasal</command>
+   <script>controls.startEngine()</script>
+  </binding>
+  <mod-up>
+   <binding>
+    <command>nasal</command>
+    <script>props.setAll("/controls/engines/engine", "starter", 0)</script>
+   </binding>
+  </mod-up> 
+ </button>
+
+<button n="1">
   <repeatable>false</repeatable>
   <binding>
    <command>view-cycle</command>
@@ -216,33 +202,15 @@ $Id$
   </binding>
  </button>
 
-<!--
  <button n="6">
   <repeatable>false</repeatable>
   <binding>
-   <command>property-adjust</command>
+   <command>property-assign</command>
    <property>/controls/flight/flaps</property>
-   <step type="double">-0.34</step>
+   <value type="double">0.0</value>
   </binding>
  </button>
--->
-<button n="6">
-  <repeatable>false</repeatable>
-  <binding>
-   <command>nasal</command>
-   <script>controls.stepFlaps(-1)</script>
-  </binding>
-</button>
 
-<button n="7">
-  <repeatable>false</repeatable>
-  <binding>
-   <command>nasal</command>
-   <script>controls.stepFlaps(1)</script>
-  </binding>
-</button>
-
-<!--
  <button n="7">
   <repeatable>false</repeatable>
   <binding>
@@ -251,8 +219,6 @@ $Id$
    <step type="double">0.34</step>
   </binding>
  </button>
--->
-
 
  <button n="8">
   <repeatable>true</repeatable>
@@ -301,4 +267,3 @@ $Id$
  </button>
 
 </PropertyList>
-

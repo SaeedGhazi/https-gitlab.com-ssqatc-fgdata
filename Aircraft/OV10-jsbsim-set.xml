@@ -32,7 +32,7 @@ David Culp,  davidculp2@attbi.com
   </panel>
 
   <model>
-   <path>Aircraft/OV10/Models/OV10.mdl</path>
+   <path>Aircraft/OV10/Models/ov10.xml</path>
   </model>
 
  </sim>

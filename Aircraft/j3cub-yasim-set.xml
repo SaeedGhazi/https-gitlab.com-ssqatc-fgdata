@@ -20,15 +20,15 @@ model, instrument panel, and external 3D model.
   </sound>
 
   <panel>
-   <visibility archive="n">false</visibility>
+   <visibility archive="n">true</visibility>
   </panel>
 
   <model>
-   <path archive="y">Aircraft/c172/Models/c172-dpm.xml</path>
+   <path archive="y">Aircraft/j3cub/Models/j3cub.xml</path>
   </model>
 
   <view>
-   <internal archive="y">true</internal>
+   <internal archive="y">false</internal>
    <config>
      <x-offset-m archive="y">-0.25</x-offset-m>
      <y-offset-m archive="y">0.20</y-offset-m>
@@ -36,11 +36,19 @@ model, instrument panel, and external 3D model.
    </config>
   </view>
 
+<!--
   <current-view>
    <pitch-offset-deg>-13</pitch-offset-deg>
   </current-view>
+-->
 
  </sim>
+
+ <yasim>
+  <j3cub>
+   <pilot-lb>180</pilot-lb>
+  </j3cub>
+ </yasim>
 
  <controls>
   <magnetos>3</magnetos>

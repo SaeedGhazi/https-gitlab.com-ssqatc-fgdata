@@ -32,6 +32,7 @@ Started September 2000 by David Megginson, david@megginson.com
   </startup>
   <rendering>
    <random-objects>true</random-objects>
+   <draw-otw>true</draw-otw>
   </rendering>
   <model-hz type="int">120</model-hz>
   <sound>

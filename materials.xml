@@ -78,8 +78,6 @@ Shared parameters for various materials.
  <forest>
   <!-- Maximum distance from which a tree is visible -->
   <tree-range-m>2000</tree-range-m>
-  <!-- Maximum range from the centre of a tri or fan for dynamic objects -->
-  <tree-group-range-m>15000</tree-group-range-m>
   <!-- Average number of square meters per tree with one type -->
   <single-tree-coverage>10000</single-tree-coverage>
   <!-- Average number of square meters per tree with two types -->
@@ -2442,7 +2440,6 @@ Shared parameters for various materials.
   <path>Models/Trees/coniferous-tree.ac</path>
   <coverage alias="/params/forest/single-tree-coverage"/>
   <range-m alias="/params/forest/tree-range-m"/>
-  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
 </material>
@@ -2481,7 +2478,6 @@ Shared parameters for various materials.
   <path>Models/Trees/deciduous-tree.ac</path>
   <coverage alias="/params/forest/single-tree-coverage"/>
   <range-m alias="/params/forest/tree-range-m"/>
-  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
 </material>
@@ -2520,14 +2516,12 @@ Shared parameters for various materials.
   <path>Models/Trees/deciduous-tree.ac</path>
   <coverage alias="/params/forest/double-tree-coverage"/>
   <range-m alias="/params/forest/tree-range-m"/>
-  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
   <coverage alias="/params/forest/double-tree-coverage"/>
   <range-m alias="/params/forest/tree-range-m"/>
-  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
 </material>
@@ -2567,7 +2561,6 @@ Shared parameters for various materials.
   <path>Models/Trees/coniferous-tree.ac</path>
   <coverage alias="/params/forest/single-tree-coverage"/>
   <range-m alias="/params/forest/tree-range-m"/>
-  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
 </material>
@@ -2606,7 +2599,6 @@ Shared parameters for various materials.
   <path>Models/Trees/deciduous-tree.ac</path>
   <coverage alias="/params/forest/single-tree-coverage"/>
   <range-m alias="/params/forest/tree-range-m"/>
-  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
 </material>
@@ -2679,7 +2671,6 @@ Shared parameters for various materials.
   <path>Models/Buildings/big-apartment.ac</path>
   <coverage>1000000</coverage>
   <range-m>10000</range-m>
-  <group-range-m>20000</group-range-m>
   <billboard>false</billboard>
  </object>
 </material>
@@ -3014,21 +3005,18 @@ Shared parameters for various materials.
   <path>Models/Fauna/cow.ac</path>
   <coverage>10000</coverage>
   <range-m>1000</range-m>
-  <group-range-m>10000</group-range-m>
   <billboard>false</billboard>
  </object>
  <object>
   <path>Models/Trees/deciduous-tree.ac</path>
   <coverage>500000</coverage>
   <range-m alias="/params/forest/tree-range-m"/>
-  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
   <coverage>1000000</coverage>
   <range-m alias="/params/forest/tree-range-m"/>
-  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
 </material>
@@ -3067,21 +3055,18 @@ Shared parameters for various materials.
   <path>Models/Fauna/cow.ac</path>
   <coverage>10000</coverage>
   <range-m>1000</range-m>
-  <group-range-m>10000</group-range-m>
   <billboard>false</billboard>
  </object>
  <object>
   <path>Models/Trees/deciduous-tree.ac</path>
   <coverage>500000</coverage>
   <range-m alias="/params/forest/tree-range-m"/>
-  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
   <coverage>1000000</coverage>
   <range-m alias="/params/forest/tree-range-m"/>
-  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
 </material>
@@ -3120,21 +3105,18 @@ Shared parameters for various materials.
   <path>Models/Fauna/cow.ac</path>
   <coverage>10000</coverage>
   <range-m>1000</range-m>
-  <group-range-m>10000</group-range-m>
   <billboard>false</billboard>
  </object>
  <object>
   <path>Models/Trees/deciduous-tree.ac</path>
   <coverage>500000</coverage>
   <range-m alias="/params/forest/tree-range-m"/>
-  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
   <coverage>1000000</coverage>
   <range-m alias="/params/forest/tree-range-m"/>
-  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
 </material>
@@ -3173,14 +3155,12 @@ Shared parameters for various materials.
   <path>Models/Trees/deciduous-tree.ac</path>
   <coverage>500000</coverage>
   <range-m alias="/params/forest/tree-range-m"/>
-  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
   <coverage>1000000</coverage>
   <range-m alias="/params/forest/tree-range-m"/>
-  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
 </material>
@@ -3219,14 +3199,12 @@ Shared parameters for various materials.
   <path>Models/Trees/deciduous-tree.ac</path>
   <coverage>200000</coverage>
   <range-m alias="/params/forest/tree-range-m"/>
-  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
   <coverage>200000</coverage>
   <range-m alias="/params/forest/tree-range-m"/>
-  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
 </material>

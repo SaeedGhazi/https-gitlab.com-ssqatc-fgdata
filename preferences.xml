@@ -61,10 +61,81 @@ Started September 2000 by David Megginson, david@megginson.com
     <engine n="3">false</engine>
    </selected>
   </input>
-  <!-- pilot view -->
-  <view n="0">
-   <desc>pilot view</desc>
+
+  <current-view>0</current-view>
+  <number-views>3</number-views>
+
+  <!-- "tower" positioned to right of runway at KSFO -->
+  <tower>
+    <longitude-deg>-122.362175</longitude-deg>
+    <latitude-deg>37.616559</latitude-deg>
+    <altitude-ft>54</altitude-ft>
+  </tower>
+
+
+  <view>
+    <name>Cockpit View</name>
+    <type>lookfrom</type>
+    <config>
+      <eye-lat-deg-path>/position/latitude-deg</eye-lat-deg-path>
+      <eye-lon-deg-path>/position/longitude-deg</eye-lon-deg-path>
+      <eye-alt-ft-path>/position/altitude-ft</eye-alt-ft-path>
+      <eye-heading-deg-path>/orientation/heading-deg</eye-heading-deg-path>
+      <eye-pitch-deg-path>/orientation/pitch-deg</eye-pitch-deg-path>
+      <eye-roll-deg-path>/orientation/roll-deg</eye-roll-deg-path>
+    </config>
   </view>
+
+
+  <view>
+    <name>Chase View</name>
+    <type>lookat</type>
+    <config>
+      <eye-lat-deg-path>/position/latitude-deg</eye-lat-deg-path>
+      <eye-lon-deg-path>/position/longitude-deg</eye-lon-deg-path>
+      <eye-alt-ft-path>/position/altitude-ft</eye-alt-ft-path>
+      <eye-heading-deg-path>/orientation/heading-deg</eye-heading-deg-path>
+      <eye-pitch-deg-path>/orientation/pitch-deg</eye-pitch-deg-path>
+      <eye-roll-deg-path>/orientation/roll-deg</eye-roll-deg-path>
+
+      <target-lat-deg-path>/position/latitude-deg</target-lat-deg-path>
+      <target-lon-deg-path>/position/longitude-deg</target-lon-deg-path>
+      <target-alt-ft-path>/position/altitude-ft</target-alt-ft-path>
+      <target-heading-deg-path>/orientation/heading-deg</target-heading-deg-path>
+      <target-pitch-deg-path>/orientation/pitch-deg</target-pitch-deg-path>
+      <target-roll-deg-path>/orientation/roll-deg</target-roll-deg-path>
+
+      <x-offset-m>0</x-offset-m>
+      <y-offset-m>0</y-offset-m>
+      <z-offset-m>-25</z-offset-m>
+    </config>
+  </view>
+
+
+  <view>
+    <name>Tower View</name>
+    <type>lookat</type>
+    <config>
+      <eye-lat-deg-path>/sim/tower/latitude-deg</eye-lat-deg-path>
+      <eye-lon-deg-path>/sim/tower/longitude-deg</eye-lon-deg-path>
+      <eye-alt-ft-path>/sim/tower/altitude-ft</eye-alt-ft-path>
+      <eye-roll-deg-path>/sim/tower/roll-deg</eye-roll-deg-path>
+      <eye-pitch-deg-path>/sim/tower/pitch-deg</eye-pitch-deg-path>
+      <eye-heading-deg-path>/sim/tower/heading-deg</eye-heading-deg-path>
+
+      <target-lat-deg-path>/position/latitude-deg</target-lat-deg-path>
+      <target-lon-deg-path>/position/longitude-deg</target-lon-deg-path>
+      <target-alt-ft-path>/position/altitude-ft</target-alt-ft-path>
+      <target-roll-deg-path>/orientation/roll-deg</target-roll-deg-path>
+      <target-pitch-deg-path>/orientation/pitch-deg</target-pitch-deg-path>
+      <target-heading-deg-path>/orientation/heading-deg</target-heading-deg-path>
+
+      <x-offset-m>0</x-offset-m>
+      <y-offset-m>0</y-offset-m>
+      <z-offset-m>0</z-offset-m>
+    </config>
+  </view>
+
   <!-- chase view -->
   <view n="1">
    <desc>chase view</desc>
@@ -234,3 +305,4 @@ Started September 2000 by David Megginson, david@megginson.com
  </PropertyList>
 
 <!-- end of preferences.xml -->
+

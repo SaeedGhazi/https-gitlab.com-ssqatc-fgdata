@@ -422,7 +422,7 @@ Started September 2000 by David Megginson, david@megginson.com
   </clouds>
 
   <params>
-   <use-real-wether-fetch type="bool">false</use-real-wether-fetch>
+   <real-world-weather-fetch type="bool">false</real-world-weather-fetch>
    <control-fdm-atmosphere type="bool">false</control-fdm-atmosphere>
   </params>
 

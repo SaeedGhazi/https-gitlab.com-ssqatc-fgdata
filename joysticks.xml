@@ -10,7 +10,7 @@ Joystick binding definitions.
  <js n="0" include="Input/Joysticks/Default/joystick.xml"/>
 
  <!-- Analog 4-axis 4-button joystick -->
- <js-named include="Input/Joysticks/Default/fout-axis-joystick.xml"/>
+ <js-named include="Input/Joysticks/Default/four-axis-joystick.xml"/>
 
  <!-- FIXME: dummy placeholder to force a high starting index -->
  <js-named n="999"/>

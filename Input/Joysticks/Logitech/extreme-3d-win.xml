@@ -143,40 +143,30 @@ $Id$
 		</high>
 	</axis>
 	<button n="0">
-		<desc>Brakes</desc>
-		<binding>
-			<command>property-assign</command>
-			<property>/controls/gear/wheel[0]/brake</property>
-			<value type="double">1.0</value>
-		</binding>
-		<binding>
-			<command>property-assign</command>
-			<property>/controls/gear/wheel[1]/brake</property>
-			<value type="double">1.0</value>
-		</binding>
-		<binding>
-			<command>property-assign</command>
-			<property>/controls/gear/wheel[2]/brake</property>
-			<value type="double">1.0</value>
-		</binding>
-		<mod-up>
-			<binding>
-				<command>property-assign</command>
-				<property>/controls/gear/wheel[0]/brake</property>
-				<value type="double">0.0</value>
-			</binding>
-			<binding>
-				<command>property-assign</command>
-				<property>/controls/gear/wheel[1]/brake</property>
-				<value type="double">0.0</value>
-			</binding>
-			<binding>
-				<command>property-assign</command>
-				<property>/controls/gear/wheel[2]/brake</property>
-				<value type="double">0.0</value>
-			</binding>
-		</mod-up>
-	</button>
+         <desc>Brakes</desc>
+         <binding>
+          <command>property-assign</command>
+          <property>/controls/gear/brake-left</property>
+          <value type="double">1.0</value>
+         </binding>
+         <binding>
+          <command>property-assign</command>
+          <property>/controls/gear/brake-right</property>
+          <value type="double">1.0</value>
+         </binding>
+         <mod-up>
+          <binding>
+           <command>property-assign</command>
+           <property>/controls/gear/brake-left</property>
+           <value type="double">0.0</value>
+          </binding>
+          <binding>
+           <command>property-assign</command>
+           <property>/controls/gear/brake-right</property>
+           <value type="double">0.0</value>
+          </binding>
+         </mod-up>
+        </button>
 	<button n="4">
 		<desc>Elevator trim up</desc>
 		<repeatable type="bool">true</repeatable>
@@ -217,13 +207,13 @@ $Id$
 		<desc>Right brake</desc>
 		<binding>
 			<command>property-assign</command>
-			<property>/controls/gear/wheel[1]/brake</property>
+			<property>/controls/gear/brake-right</property>
 			<value type="double">1.0</value>
 		</binding>
 		<mod-up>
 			<binding>
 				<command>property-assign</command>
-				<property>/controls/gear/wheel[1]/brake</property>
+				<property>/controls/gear/brake-right</property>
 				<value type="double">0.0</value>
 			</binding>
 		</mod-up>
@@ -232,13 +222,13 @@ $Id$
 		<desc>Left brake</desc>
 		<binding>
 			<command>property-assign</command>
-			<property>/controls/gear/wheel[0]/brake</property>
+			<property>/controls/gear/brake-left</property>
 			<value type="double">1.0</value>
 		</binding>
 		<mod-up>
 			<binding>
 				<command>property-assign</command>
-				<property>/controls/gear/wheel[0]/brake</property>
+				<property>/controls/gear/brake-right</property>
 				<value type="double">0.0</value>
 			</binding>
 		</mod-up>

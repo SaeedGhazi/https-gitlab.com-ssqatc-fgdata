@@ -23,7 +23,7 @@ $Id$
  <axis n="0">
   <binding>
    <command>property-scale</command>
-   <property>/controls/gear/wheel[0]/brake</property>
+   <property>/controls/gear/brake-left</property>
    <offset>1.0</offset>
    <factor>0.5</factor>
   </binding>
@@ -32,7 +32,7 @@ $Id$
  <axis n="1">
   <binding>
    <command>property-scale</command>
-   <property>/controls/gear/wheel[1]/brake</property>
+   <property>/controls/gear/brake-right</property>
    <offset>1.0</offset>
    <factor>0.5</factor>
   </binding>

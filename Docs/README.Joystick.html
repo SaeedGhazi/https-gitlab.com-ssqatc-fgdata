@@ -473,13 +473,13 @@ button:
  &lt;desc&gt;Left brake&lt;/desc&gt;
  &lt;binding&gt;
   &lt;command&gt;property-assign&lt;/command&gt;
-  &lt;property&gt;/controls/gear/wheel[0]/brake&lt;/property&gt;
+  &lt;property&gt;/controls/gear/brake-left&lt;/property&gt;
   &lt;value type="double"&gt;1.0&lt;/value&gt;    &lt;!-- brakes are a toggle so 1.0 represents on --&gt;
   &lt;/binding&gt;
    &lt;mod-up&gt;                    &lt;!-- it's not a parking brake so we need to release it --&gt;
     &lt;binding&gt;
     &lt;command&gt;property-assign&lt;/command&gt;
-    &lt;property&gt;/controls/gear/wheel[0]/brake&lt;/property&gt;
+    &lt;property&gt;/controls/gear/brake-left&lt;/property&gt;
     &lt;value type="double"&gt;0.0&lt;/value&gt;       &lt;!-- 1.0 is on so 0.0 is off, right? --&gt;
    &lt;/binding&gt;
   &lt;/mod-up&gt;
@@ -500,10 +500,10 @@ Here's the command-line equivalent:
 </p>
 <PRE>
   --prop:/input/joysticks/js[0]/button[4]/binding/command=property-assign
-  --prop:/input/joysticks/js[0]/button[4]/binding/property=/controls/gear/wheel[0]/brake
+  --prop:/input/joysticks/js[0]/button[4]/binding/property=/controls/gear/brake-left
   --prop:/input/joysticks/js[0]/button[4]/binding/value=1.0
   --prop:/input/joysticks/js[0]/button[4]/mod-up/binding/command=property-assign
-  --prop:/input/joysticks/js[0]/button[4]/mod-up/binding/property=/controls/gear/wheel[0]/brake
+  --prop:/input/joysticks/js[0]/button[4]/mod-up/binding/property=/controls/gear/brake-left
   --prop:/input/joysticks/js[0]/button[4]/mod-up/binding/value=0.0
 </PRE>
 <br>
@@ -518,33 +518,23 @@ button 0 is pressed, and releases all three when button 0 is released:
   &lt;desc&gt;Brakes&lt;/desc&gt;
   &lt;binding&gt;
    &lt;command&gt;property-assign&lt;/command&gt;
-   &lt;property&gt;/controls/gear/wheel[0]/brake&lt;/property&gt;
+   &lt;property&gt;/controls/gear/brake-left&lt;/property&gt;
    &lt;value type="double"&gt;1.0&lt;/value&gt;
   &lt;/binding&gt;
   &lt;binding&gt;
    &lt;command&gt;property-assign&lt;/command&gt;
-   &lt;property&gt;/controls/gear/wheel[1]/brake&lt;/property&gt;
-   &lt;value type="double"&gt;1.0&lt;/value&gt;
-  &lt;/binding&gt;
-  &lt;binding&gt;
-   &lt;command&gt;property-assign&lt;/command&gt;
-   &lt;property&gt;/controls/gear/wheel[2]/brake&lt;/property&gt;
+   &lt;property&gt;/controls/gear/brake-right&lt;/property&gt;
    &lt;value type="double"&gt;1.0&lt;/value&gt;
   &lt;/binding&gt;
   &lt;mod-up&gt;
    &lt;binding&gt;
     &lt;command&gt;property-assign&lt;/command&gt;
-    &lt;property&gt;/controls/gear/wheel[0]/brake&lt;/property&gt;
+    &lt;property&gt;/controls/gear/brake-left&lt;/property&gt;
     &lt;value type="double"&gt;0.0&lt;/value&gt;
    &lt;/binding&gt;
    &lt;binding&gt;
     &lt;command&gt;property-assign&lt;/command&gt;
-    &lt;property&gt;/controls/gear/wheel[1]/brake&lt;/property&gt;
-    &lt;value type="double"&gt;0.0&lt;/value&gt;
-   &lt;/binding&gt;
-   &lt;binding&gt;
-    &lt;command&gt;property-assign&lt;/command&gt;
-    &lt;property&gt;/controls/gear/wheel[2]/brake&lt;/property&gt;
+    &lt;property&gt;/controls/gear/brake-right&lt;/property&gt;
     &lt;value type="double"&gt;0.0&lt;/value&gt;
    &lt;/binding&gt;
   &lt;/mod-up&gt;
@@ -558,13 +548,10 @@ XML will handle this automatically):
 </P>
 <PRE>
   --prop:/input/joysticks/button[0]/binding[0]/command=property-assign
-  --prop:/input/joysticks/button[0]/binding[0]/property=/controls/gear/wheel[0]/brake
+  --prop:/input/joysticks/button[0]/binding[0]/property=/controls/gear/brake-left
   --prop:/input/joysticks/button[0]/binding[0]/value=1.0
   --prop:/input/joysticks/button[0]/binding[1]/command=property-assign
-  --prop:/input/joysticks/button[0]/binding[1]/property=/controls/gear/wheel[1]/brake
-  --prop:/input/joysticks/button[0]/binding[1]/value=1.0
-  --prop:/input/joysticks/button[0]/binding[2]/command=property-assign
-  --prop:/input/joysticks/button[0]/binding[2]/property=/controls/gear/wheel[2]/brake
+  --prop:/input/joysticks/button[0]/binding[1]/property=/controls/gear/brake-right
   --prop:/input/joysticks/button[0]/binding[2]/value=1.0
   --prop:/input/joysticks/button[0]/mod-up/binding[0]/command=property-assign
   --prop:/input/joysticks/button[0]/mod-up/binding[0]/property=brakes[0]
@@ -572,9 +559,6 @@ XML will handle this automatically):
   --prop:/input/joysticks/button[0]/mod-up/binding[1]/command=property-assign
   --prop:/input/joysticks/button[0]/mod-up/binding[1]/property=brakes[1]
   --prop:/input/joysticks/button[0]/mod-up/binding[1]/value=0.0
-  --prop:/input/joysticks/button[0]/mod-up/binding[2]/command=property-assign
-  --prop:/input/joysticks/button[0]/mod-up/binding[2]/property=brakes[2]
-  --prop:/input/joysticks/button[0]/mod-up/binding[2]/value=0.0
 </PRE>
 <br>
 <P>
@@ -717,13 +701,13 @@ just as with the joystick:
   &lt;desc&gt;Left brake&lt;/desc&gt;
    &lt;binding&gt;
    &lt;command&gt;property-assign&lt;/command&gt;
-   &lt;property&gt;/controls/gear/wheel[0]/brake&lt;/property&gt;
+   &lt;property&gt;/controls/gear/brake-left&lt;/property&gt;
    &lt;value type="double"&gt;1.0&lt;/value&gt;
   &lt;/binding&gt;
   &lt;mod-up&gt;
    &lt;binding&gt;
    &lt;command&gt;property-assign&lt;/command&gt;
-   &lt;property&gt;/controls/gear/wheel[0]/brake&lt;/property&gt;
+   &lt;property&gt;/controls/gear/brake-left&lt;/property&gt;
    &lt;value type="double"&gt;0.0&lt;/value&gt;
    &lt;/binding&gt;
   &lt;/mod-up&gt;
@@ -741,15 +725,7 @@ no &lt;mod-up&gt; tag, so it *does* work like a parking brake.
   &lt;desc&gt;Toggle parking brake on or off&lt;/desc&gt;
   &lt;binding&gt;
    &lt;command&gt;property-toggle&lt;/command&gt;
-   &lt;property&gt;/controls/gear/wheel[0]/brake&lt;/property&gt;
-  &lt;/binding&gt;
-  &lt;binding&gt;
-   &lt;command&gt;property-toggle&lt;/command&gt;
-   &lt;property&gt;/controls/gear/wheel[1]/brake&lt;/property&gt;
-  &lt;/binding&gt;
-  &lt;binding&gt;
-   &lt;command&gt;property-toggle&lt;/command&gt;
-   &lt;property&gt;/controls/gear/wheel[2]/brake&lt;/property&gt;
+   &lt;property&gt;/controls/gear/brake-parking&lt;/property&gt;
   &lt;/binding&gt;
  &lt;/key&gt;
  </PRE>

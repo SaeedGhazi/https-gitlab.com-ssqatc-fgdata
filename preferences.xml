@@ -498,15 +498,9 @@ Started September 2000 by David Megginson, david@megginson.com
   </engines>
 
   <gear>
-   <wheel n="0">
-    <brake type="double">0.0</brake>
-   </wheel>
-   <wheel n="1">
-    <brake type="double">0.0</brake>
-   </wheel>
-   <wheel n="2">
-    <brake type="double">0.0</brake>
-   </wheel>
+   <brake-left type="double">0.0</brake-left>
+   <brake-right type="double">0.0</brake-right>
+   <brake-parking type="double">0.0</brake-parking>
    <gear-down type="bool">true</gear-down>
   </gear>
 

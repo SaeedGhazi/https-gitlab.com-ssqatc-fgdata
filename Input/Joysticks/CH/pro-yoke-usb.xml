@@ -19,8 +19,8 @@
 * Buttons 2 and 3 (right rocker): rudder trim
 * Buttons 4 and 5 (left toggle): gear up/down
 * Buttons 6 and 7 (right toggle): flaps up/down
-* Button 8 (top red button): [not yet bound]
-* Button 9 (bottom red button): [not yet bound]
+* Button 8 (top red button): increase boost
+* Button 9 (bottom red button): decrease boost
 * Buttons 10 and 11 (left rocker): elevator trim
 ************************************************************************
 -->
@@ -98,21 +98,44 @@
  </axis>
 
  <axis n="5">
-  <binding>
-   <command>property-scale</command>
-   <property>/sim/current-view/axes/lat</property>
-   <squared>false</squared>
-  </binding>
+  <desc>View Direction</desc>
+  <low>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
+    <step type="double">2.0</step>
+   </binding>
+  </low>
+  <high>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
+    <step type="double">-2.0</step>
+   </binding>
+  </high>
  </axis>
 
  <axis n="6">
-  <binding>
-   <command>property-scale</command>
-   <property>/sim/current-view/axes/long</property>
-   <squared>false</squared>
-  </binding>
+  <desc>View Elevation</desc>
+  <low>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-pitch-offset-deg</property>
+    <step type="double">2.0</step>
+   </binding>
+  </low>
+  <high>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-pitch-offset-deg</property>
+    <step type="double">-2.0</step>
+   </binding>
+  </high>
  </axis>
-
  <button n="1">
   <repeatable>false</repeatable>
   <binding>
@@ -174,7 +197,35 @@
   </binding>
  </button>
 
- <button n="10">
+ <button n="8">
+  <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/controls/engines/engine[0]/boost</property>
+    <step type="double">+0.01</step>
+   </binding>
+   <binding>
+    <command>property-adjust</command>
+    <property>/controls/engines/engine[1]/boost</property>
+    <step type="double">+0.01</step>
+   </binding>
+ </button> 
+
+ <button n="9">
+  <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/controls/engines/engine[0]/boost</property>
+    <step type="double">-0.01</step>
+   </binding>
+   <binding>
+    <command>property-adjust</command>
+    <property>/controls/engines/engine[1]/boost</property>
+    <step type="double">-0.01</step>
+   </binding>
+ </button>
+
+  <button n="10">
   <repeatable>true</repeatable>
   <binding>
    <command>property-adjust</command>

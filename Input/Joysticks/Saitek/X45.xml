@@ -76,6 +76,25 @@ Button Numbers:
    <command>property-scale</command>
    <property>/controls/rudder</property>
   </binding>
+  <binding>
+    <condition>
+     <property>/input/joysticks/js[0]/locks/m3</property>
+    </condition>
+    <command>property-scale</command>
+    <property>/controls/brakes[0]</property>
+    <factor type="double">-1.0</factor>
+    <min type="double">0.0</min>
+    <max type="double">1.0</max>
+  </binding>
+  <binding>
+    <condition>
+     <property>/input/joysticks/js[0]/locks/m3</property>
+    </condition>
+    <command>property-scale</command>
+    <property>/controls/brakes[1]</property>
+    <min type="double">0.0</min>
+    <max type="double">1.0</max>
+  </binding>
  </axis>
 
  <axis n="4">
@@ -174,17 +193,17 @@ Button Numbers:
   <binding>
    <command>property-assign</command>
    <property>/sim/current-view/goal-heading-offset-deg</property>
-   <value type="double">0</value>
+   <property>/sim/current-view/config/heading-offset-deg</property>
   </binding>
   <binding>
    <command>property-assign</command>
    <property>/sim/current-view/goal-pitch-offset-deg</property>
-   <value type="double">-17</value>
+   <property>/sim/current-view/config/pitch-offset-deg</property>
   </binding>
   <binding>
    <command>property-assign</command>
    <property>/sim/current-view/field-of-view</property>
-   <value type="double">65.0</value>
+   <property>/sim/current-view/config/default-field-of-view-deg</property>
   </binding>
  </button>
 
@@ -235,6 +254,74 @@ Button Numbers:
    <property>/controls/gear-down</property>
   </binding>
  </button>
+
+<!-- mode switch (buttons 8-10) -->
+<!--
+Note Mode 1 should be considered the default mode, for anything that accesses the 
+values set here.  Reason being is the values will not be preset.
+
+Mode 1 - Normal
+Mode 2 - 
+Mode 3 - Taxi Mode
+-->
+
+ <button n="8">
+  <desc>Mode 1</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/input/joysticks/js[0]/locks/m1</property>
+   <value type="bool">true</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/input/joysticks/js[0]/locks/m2</property>
+   <value type="bool">false</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/input/joysticks/js[0]/locks/m3</property>
+   <value type="bool">false</value>
+  </binding>
+ </button>
+
+ <button n="9">
+  <desc>Mode 2</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/input/joysticks/js[0]/locks/m1</property>
+   <value type="bool">false</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/input/joysticks/js[0]/locks/m2</property>
+   <value type="bool">true</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/input/joysticks/js[0]/locks/m3</property>
+   <value type="bool">false</value>
+  </binding>
+ </button>
+
+ <button n="10">
+  <desc>Mode 3</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/input/joysticks/js[0]/locks/m1</property>
+   <value type="bool">false</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/input/joysticks/js[0]/locks/m2</property>
+   <value type="bool">false</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/input/joysticks/js[0]/locks/m3</property>
+   <value type="bool">true</value>
+  </binding>
+ </button>
+
 
  <!-- Trim on the throttle too (Andy finds this more comfortable) -->
 

@@ -335,13 +335,13 @@ Started September 2000 by David Megginson, david@megginson.com
    </radials>
   </nav>
 
-  <adf>
+  <kr-87>
    <frequencies>
     <selected-khz type="double">266.0</selected-khz>
     <standby-khz type="double">300.0</standby-khz>
    </frequencies>
    <rotation-deg type="double">90</rotation-deg>
-  </adf>
+  </kr-87>
 
  </radios>
 

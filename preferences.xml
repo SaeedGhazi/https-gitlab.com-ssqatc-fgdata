@@ -272,7 +272,7 @@ Started September 2000 by David Megginson, david@megginson.com
   </replay>
   
   <ATC>
-   <enabled type="bool">false</enabled>
+   <enabled type="bool">true</enabled>
   </ATC>
 
   <ai-traffic>

@@ -55,5 +55,15 @@ October 23 2001 John Check, fgpanels@rockfish.net
    </tank>
   </fuel>
  </consumables>
+
+ <controls>
+  <magnetos>3</magnetos>
+ </controls>
+
+ <engines>
+  <engine>
+   <rpm>700</rpm>
+  </engine>
+ </engines>
   
 </PropertyList>

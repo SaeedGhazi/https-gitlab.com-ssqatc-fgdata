@@ -82,6 +82,16 @@ October 23 2001 John Check, fgpanels@rockfish.net
    </config>
  </autopilot>
 
+ <controls>
+  <magnetos>3</magnetos>
+ </controls>
+
+ <engines>
+  <engine>
+   <rpm>900</rpm>
+  </engine>
+ </engines>
+  
 </PropertyList>
 
 

@@ -22,6 +22,7 @@ Joystick binding definitions.
 
  <!-- Microsoft devices -->
  <js-named include="Input/Joysticks/Microsoft/sidewinder-force-feed.xml"/>
+ <js-named include="Input/Joysticks/Microsoft/sidewinder-precision-pro.xml"/>
 
  <!-- Saitek devices -->
  <js-named include="Input/Joysticks/Saitek/X45.xml"/>

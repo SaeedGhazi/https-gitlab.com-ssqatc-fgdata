@@ -34,6 +34,19 @@
  </locale>
 
  <locale>
+  <lang type="string">fr</lang>
+  <lang type="string">fr_BE</lang>
+  <lang type="string">fr_CA</lang>
+  <lang type="string">fr_CH</lang>
+  <lang type="string">fr_FR.ISO8859-15</lang>
+  <lang type="string">fr_BE.ISO8859-15</lang>
+  <lang type="string">fr_CA.ISO8859-15</lang>
+  <lang type="string">fr_CH.ISO8859-15</lang>
+
+  <strings>Translations/strings-fr.xml</strings>
+ </locale>
+
+ <locale>
   <lang type="string">nl</lang>
   <lang type="string">nl_BE</lang>
   <lang type="string">nl_NL.ISO8859-15</lang>
@@ -89,19 +102,6 @@
   <lang type="string">fi_FI.ISO8859-15</lang>
 
   <strings>Translations/strings-fi.xml</strings>
- </locale>
-
- <locale>
-  <lang type="string">fr</lang>
-  <lang type="string">fr_BE</lang>
-  <lang type="string">fr_CA</lang>
-  <lang type="string">fr_CH</lang>
-  <lang type="string">fr_FR.ISO8859-15</lang>
-  <lang type="string">fr_BE.ISO8859-15</lang>
-  <lang type="string">fr_CA.ISO8859-15</lang>
-  <lang type="string">fr_CH.ISO8859-15</lang>
-
-  <strings>Translations/strings-fr.xml</strings>
  </locale>
 
  <locale>

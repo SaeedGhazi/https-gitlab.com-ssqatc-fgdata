@@ -20,6 +20,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <visibility>true</visibility>
   </panel>
   <hud>
+   <path>Huds/Default/default.xml</path>
    <visibility>false</visibility>
   </hud>
  </sim>
@@ -51,6 +52,13 @@ Started September 2000 by David Megginson, david@megginson.com
   <roll>0.0</roll>
   <pitch>0.424</pitch>
  </orientation>
+
+
+ <!-- Environment -->
+
+ <environment>
+  <visibility>16000</visibility>
+ </environment>
 
 
  <!-- Controls -->

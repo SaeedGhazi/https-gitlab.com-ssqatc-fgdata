@@ -89,7 +89,7 @@ decrease = func {
     calcMul();
     val = fovProp.getValue() / mul;
     if(val == min) { return; }
-    if(val < min) { val = min }
+    #if(val < min) { val = min } # Comment out for now.
     fovProp.setDoubleValue(val);
     popup(val);
 }

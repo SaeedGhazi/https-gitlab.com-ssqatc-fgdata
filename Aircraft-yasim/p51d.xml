@@ -29,7 +29,7 @@ The reference datum for measurements is the nose.
 -->
 
 <!-- Weight of everything but fuel  (7010 empty) -->
-<airplane mass="7390">
+<airplane mass="7190">
 
 <!-- Approach configuration -->
 <approach speed="87" aoa="13">
@@ -42,10 +42,10 @@ The reference datum for measurements is the nose.
 
 <!-- Cruise configuration -->
 <!-- 350 mph, 304 knots -->
-<cruise speed="304" alt="25000">
+<cruise speed="380" alt="25000">
   <control-setting axis="/controls/engines/engine[0]/throttle" value="1.00"/>
   <control-setting axis="/controls/engines/engine[0]/mixture" value="1.00"/>
-  <control-setting axis="/controls/engines/engine[0]/propeller-pitch" value="1.0"/>
+  <control-setting axis="/controls/engines/engine[0]/propeller-pitch" value="0.8"/>
   <control-setting axis="/controls/engines/engine[0]/boost" value="1.0"/>
   <control-setting axis="/controls/flight/flaps" value="0.0"/>
   <control-setting axis="/controls/gear/gear-down" value="0"/>
@@ -62,7 +62,7 @@ stall aoa not available
 flap drag not available
 -->
 <wing x="-3.96" y="0.49" z="-0.67" taper="0.466" incidence="-1" 
-      length="5.16" chord="2.845" sweep="3.5" dihedral="5" camber=".1">
+      length="5.16" chord="2.845" sweep="3.5" dihedral="5" camber="0.01">
   <stall aoa="14" width="4" peak="1.5"/>
   <flap0 start="0.024" end="0.543" lift="1.2" drag="1.4"/>
   <flap1 start="0.543" end="0.97" lift="1.2" drag="1.4"/>
@@ -73,7 +73,7 @@ flap drag not available
   <control-input axis="/controls/flight/aileron-trim" control="FLAP1" split="true"/>
 </wing>
 
-<hstab x="-8.62" y="0.18" z="0.35" taper="0.639" effectiveness="4.0"
+<hstab x="-8.62" y="0.18" z="0.35" taper="0.639" effectiveness="3.5"
        length="1.834" chord="1.256" sweep="0" incidence="2">
   <stall aoa="15" width="4" peak="1.5"/>
   <flap0 start="0.0" end="1.8" lift="1.65" drag="1.2"/>
@@ -83,7 +83,7 @@ flap drag not available
 </hstab>
 
 <!-- rudder has to be able to counteract aileron drag -->
-<vstab x="-9.30" y="0" z="-0.37" taper="0.432" effectiveness="4.0"
+<vstab x="-9.30" y="0" z="-0.37" taper="0.432" effectiveness="3.5"
        length="1.971" chord="2.65" sweep="25">
   <stall aoa="15" width="4" peak="1.5"/>
   <flap0 start="0" end="1" lift="1.3" drag="1.2"/>
@@ -97,7 +97,7 @@ flap drag not available
            radius="1.75" 
            mass="1690" moment="110"
            eng-power="1490" eng-rpm="2300"
-           turbo-mul="2.0" wastegate-mp="47"
+           turbo-mul="2.5" wastegate-mp="30"
            cruise-alt="25000" cruise-power="1350"
            cruise-speed="304" cruise-rpm="2700"
            min-rpm="800" max-rpm="3000" >

@@ -35,7 +35,6 @@
   <binding>
    <command>property-scale</command>
    <property>/controls/aileron</property>
-   <power>2</power>
   </binding>
  </axis>
 
@@ -45,7 +44,6 @@
    <command>property-scale</command>
    <property>/controls/elevator</property>
    <factor type="double">-1.0</factor>
-   <power>2</power>
   </binding>
  </axis>
 
@@ -99,46 +97,18 @@
 
  <axis n="5">
   <binding>
-   <command>null</command>
+   <command>property-scale</command>
+   <property>/sim/current-view/axes/lat</property>
+   <squared>false</squared>
   </binding>
-  <low>
-   <repeatable>true</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/sim/current-view/goal-heading-offset-deg</property>
-    <step>1</step>
-   </binding>
-  </low>
-  <high>
-   <repeatable>true</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/sim/current-view/goal-heading-offset-deg</property>
-    <step>-1</step>
-   </binding>
-  </high>
  </axis>
 
  <axis n="6">
   <binding>
-   <command>null</command>
+   <command>property-scale</command>
+   <property>/sim/current-view/axes/long</property>
+   <squared>false</squared>
   </binding>
-  <low>
-   <repeatable>true</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/sim/current-view/goal-pitch-offset-deg</property>
-    <step>1</step>
-   </binding>
-  </low>
-  <high>
-   <repeatable>true</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/sim/current-view/goal-pitch-offset-deg</property>
-    <step>-1</step>
-   </binding>
-  </high>
  </axis>
 
  <button n="1">

@@ -359,6 +359,14 @@
   </item>
 
   <item>
+   <label>Reload Input</label>
+   <binding>
+    <command>reinit</command>
+    <subsystem>input</subsystem>
+   </binding>
+  </item>
+
+  <item>
    <label>Reload Panel</label>
    <binding>
     <command>panel-load</command>

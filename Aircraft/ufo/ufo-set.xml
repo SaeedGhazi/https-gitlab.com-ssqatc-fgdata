@@ -1,29 +1,12 @@
 <?xml version="1.0"?>
-<!--
-************************************************************************
-Cessna 172 simulation config. This files ties together all the components
-used by FGFS to represent the C172. Components include the flight data 
-model, instrument panel, and external 3D model.
-3D models can be downloaded from http://home.t-online.de/home/Wolfram.Kuss/
-
-October 23 2001 John Check, fgpanels@rockfish.net
-************************************************************************
--->
 
 <PropertyList>
 
  <sim>
 
-  <!--
   <description>UFO from the 'White Project' of the UNESCO</description>
-  -->
-  <description>Expirimental UFO model</description>
  
   <flight-model>ufo</flight-model>
-
-  <startup>
-   <splash-texture>Aircraft/ufo/new_ufo-splash.rgb</splash-texture>
-  </startup>
 
   <sound>
    <audible>true</audible>
@@ -34,30 +17,10 @@ October 23 2001 John Check, fgpanels@rockfish.net
    <visibility>false</visibility>
   </panel>
 
-  <!-- New Ufo support code follows below -->
   <model>
-   <path>Aircraft/ufo/Models/new_ufo.xml</path>
+   <path>Aircraft/ufo/Models/ufo.xml</path>
   </model>
 
-  <virtual-cockpit archive="y">true</virtual-cockpit>
-
-  <chase-distance-m type="double" archive="y">-25.0</chase-distance-m>
-  <view n="0">
-   <internal archive="y">true</internal>
-   <config>
-    <y-offset-m archive="y">2.07</y-offset-m>
-   </config>
-  </view>
  </sim>
-
- <nasal>
-  <new_ufo>
-   <file>Aircraft/ufo/new-ufo.nas</file>
-  </new_ufo>
- </nasal>
-
- <tmp>
-  <walk type="double">0</walk>
- </tmp>
 
 </PropertyList>

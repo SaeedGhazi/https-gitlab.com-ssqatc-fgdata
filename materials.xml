@@ -798,7 +798,17 @@ Shared parameters for various materials.
   <range-m>10000</range-m>
   <object>
    <path>Models/Buildings/oil-tanks.ac</path>
-   <coverage-m2>20000000</coverage-m2>
+   <coverage-m2>10000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/big-apartment.ac</path>
+   <coverage-m2>10000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/factory.ac</path>
+   <coverage-m2>4000000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
  </object-group>
@@ -806,17 +816,17 @@ Shared parameters for various materials.
   <range-m>5000</range-m>
   <object>
    <path>Models/Buildings/cube-apartment.ac</path>
-   <coverage-m2>500000</coverage-m2>
-   <heading-type>random</heading-type>
-  </object>
-  <object>
-   <path>Models/Buildings/small-glass-office-building.ac</path>
    <coverage-m2>1000000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
   <object>
+   <path>Models/Buildings/small-glass-office-building.ac</path>
+   <coverage-m2>500000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
    <path>Models/Buildings/big-church.ac</path>
-   <coverage-m2>10000000</coverage-m2>
+   <coverage-m2>5000000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
   <object>
@@ -826,7 +836,7 @@ Shared parameters for various materials.
   </object>
   <object>
    <path>Models/Buildings/water-tower.ac</path>
-   <coverage-m2>50000000</coverage-m2>
+   <coverage-m2>100000000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
  </object-group>

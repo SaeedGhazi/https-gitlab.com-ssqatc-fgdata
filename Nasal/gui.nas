@@ -6,20 +6,13 @@
 # is finished, you lose. :)
 #
 popupTip = func {
-    msg = arg[0];
     delay = if(size(arg) > 1) {arg[1]} else {DELAY};
-    labelNode.setValue(msg);
-    
-    # The "width" value here is a hardcoded hack that assumes 9 pixels
-    # as a "typical" character width and adds some extra for the
-    # widgets to play with.  Bah.  Pui needs a layout engine...
-    width = 9 * size(msg) + 40;
-    popupNode.getNode("width").setIntValue(width);
-    popupNode.getNode("x").setIntValue((screenWProp.getValue() - width)/2);
-    popupNode.getNode("y").setIntValue(screenHProp.getValue() - 140);
+    tmpl = { name : "PopTip", modal : 0, layout : "hbox",
+             y: screenHProp.getValue() - 140,
+             text : { label : arg[0], padding : 6 } };
 
     popdown();
-    fgcommand("dialog-new", popupNode);
+    fgcommand("dialog-new", props.Node.new(tmpl));
     fgcommand("dialog-show", tipArg);
 
     currTimer = currTimer + 1;
@@ -33,22 +26,13 @@ popupTip = func {
 
 ##
 # Initialize property nodes via a timer, to insure the props module is
-# loaded.  See notes in view.nas
+# loaded.  See notes in view.nas.  Simply cache the screen height
+# property and the argument for the "dialog-show" command.  This
+# probably isn't really needed...
 #
-screenWProp = screenHProp = popupNode = labelNode = tipArg = nil;
+screenHProp = tipArg = nil;
 INIT = func {
-    screenWProp = props.globals.getNode("/sim/startup/xsize");
     screenHProp = props.globals.getNode("/sim/startup/ysize");
-    
-    # Set up the dialog property node:
-    tmpl = { name : "PopTip", modal : 0,
-             x : 100, y : 100, width : 120, height : 40,
-             text : { x : 10, y : 6, label : "NOTE" } };
-    popupNode = props.Node.new(tmpl);
-    labelNode = popupNode.getNode("text/label");
-    fgcommand("dialog-new", popupNode);
-
-    # Cache the command argument for popup/popdown
     tipArg = props.Node.new({ "dialog-name" : "PopTip" });
 }
 settimer(INIT, 0);

@@ -82,6 +82,7 @@ Started September 2000 by David Megginson, david@megginson.com
   </input>
 
   <number-views type="int">6</number-views>
+  <chase-distance-m type="double">-25.0</chase-distance-m>
 
   <!-- "tower" positioned to right of runway at KSFO -->
   <tower>
@@ -138,7 +139,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
       <x-offset-m type="double">0</x-offset-m>
       <y-offset-m type="double">0</y-offset-m>
-      <z-offset-m type="double">-25</z-offset-m>
+      <z-offset-m alias="/sim/chase-distance-m"/>
     </config>
   </view>
 
@@ -165,7 +166,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
       <x-offset-m type="double">5</x-offset-m>
       <y-offset-m type="double">0</y-offset-m>
-      <z-offset-m type="double">-25</z-offset-m>
+      <z-offset-m alias="/sim/chase-distance-m"/>
     </config>
   </view>
 
@@ -230,7 +231,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
       <x-offset-m type="double">2</x-offset-m>
       <y-offset-m type="double">25</y-offset-m>
-      <z-offset-m type="double">-13</z-offset-m>
+      <z-offset-m alias="/sim/chase-distance-m"/>
     </config>
   </view>
 

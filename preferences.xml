@@ -32,6 +32,7 @@ Started September 2000 by David Megginson, david@megginson.com
   </startup>
   <rendering>
    <debug type="bool">false</debug>
+   <realism>5</realism>
    <random-objects type="bool">true</random-objects>
    <horizon-effect type="bool">false</horizon-effect>
    <enhanced-lighting type="bool">false</enhanced-lighting>

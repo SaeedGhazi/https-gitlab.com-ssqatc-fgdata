@@ -81,7 +81,7 @@ Started September 2000 by David Megginson, david@megginson.com
    </selected>
   </input>
 
-  <number-views type="int">5</number-views>
+  <number-views type="int">6</number-views>
 
   <!-- "tower" positioned to right of runway at KSFO -->
   <tower>
@@ -118,7 +118,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
 
   <view>
-    <name>Chase View</name>
+    <name>Helicopter View</name>
     <type>lookat</type>
     <config>
       <from-model type="bool">false</from-model>
@@ -130,6 +130,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
       <at-model type="bool">true</at-model>
       <at-model-idx type="int">0</at-model-idx>
+      <at-model-damping type="double">-2</at-model-damping>
       <target-z-offset-m type="double">0</target-z-offset-m>
 
       <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
@@ -141,6 +142,32 @@ Started September 2000 by David Megginson, david@megginson.com
     </config>
   </view>
 
+  <view>
+    <name>Chase View</name>
+    <type>lookat</type>
+    <config>
+      <from-model type="bool">false</from-model>
+      <from-model-idx type="int">0</from-model-idx>
+      <eye-lat-deg-path>/position/latitude-deg</eye-lat-deg-path>
+      <eye-lon-deg-path>/position/longitude-deg</eye-lon-deg-path>
+      <eye-alt-ft-path>/position/altitude-ft</eye-alt-ft-path>
+      <eye-pitch-deg-path>/orientation/pitch-deg</eye-pitch-deg-path>
+      <eye-roll-deg-path>/orientation/roll-deg</eye-roll-deg-path>
+      <eye-heading-deg-path>/orientation/heading-deg</eye-heading-deg-path>
+
+      <at-model type="bool">true</at-model>
+      <at-model-idx type="int">0</at-model-idx>
+      <at-model-damping type="double">2</at-model-damping>
+      <target-z-offset-m type="double">0</target-z-offset-m>
+
+      <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
+      <default-field-of-view-deg type="double">55.0</default-field-of-view-deg>
+
+      <x-offset-m type="double">5</x-offset-m>
+      <y-offset-m type="double">0</y-offset-m>
+      <z-offset-m type="double">-25</z-offset-m>
+    </config>
+  </view>
 
   <view>
     <name>Tower View</name>

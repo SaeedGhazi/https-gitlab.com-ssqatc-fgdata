@@ -15,8 +15,9 @@ March 2003 Jim Wilson, jimw@kelcomaine.com
 
   <description>P-51D</description>
   
-  <flight-model>jsb</flight-model>
+  <flight-model>yasim</flight-model>
   <aero>p51d</aero>
+  <fuel-fraction>0.75</fuel-fraction>
 
   <virtual-cockpit archive="y">true</virtual-cockpit>
   <allow-toggle-cockpit archive="y">true</allow-toggle-cockpit>
@@ -30,7 +31,7 @@ March 2003 Jim Wilson, jimw@kelcomaine.com
   <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
   <visibility>false</visibility>
   </panel>
- 
+
   <model>
    <path>Aircraft/p51d/Models/p51d-jw.xml</path>
   </model> 
@@ -39,9 +40,15 @@ March 2003 Jim Wilson, jimw@kelcomaine.com
    <internal archive="y">true</internal>
    <config>
     <x-offset-m archive="y" type="double">0.0</x-offset-m>
-    <y-offset-m archive="y" type="double">0.85</y-offset-m>
-    <z-offset-m archive="y" type="double">-0.50</z-offset-m>
+    <y-offset-m archive="y" type="double">0.689</y-offset-m>
+    <z-offset-m archive="y" type="double">4.495</z-offset-m>
     <pitch-offset-deg>-17</pitch-offset-deg>
+   </config>
+  </view>
+
+  <view n="1">
+   <config>
+    <target-z-offset-m archive="y" type="double">4.495</target-z-offset-m>
    </config>
   </view>
 
@@ -63,6 +70,9 @@ March 2003 Jim Wilson, jimw@kelcomaine.com
  <engines>
   <engine>
    <rpm type="double">700</rpm>
+   <!-- fake unimplemented settings -->
+   <fuel-pump-psi type="double">18</fuel-pump-psi>
+   <oil-pressure-psi type="double">75</oil-pressure-psi>
   </engine>
  </engines>
 
@@ -76,6 +86,13 @@ March 2003 Jim Wilson, jimw@kelcomaine.com
    </tank>
   </fuel>
  </consumables>
+
+ <!-- set prop for the manual "bookmark" arrow on the remote compas -->
+ <instrumentation>
+    <magnetic-compass>
+       <bookmark-heading-deg type="double">43.0</bookmark-heading-deg>
+    </magnetic-compass>
+ </instrumentation>
 
 </PropertyList>
 

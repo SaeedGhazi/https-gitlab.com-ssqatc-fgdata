@@ -28,6 +28,14 @@ Common configuration for all PA28-161 (Piper Warrior II) aircraft.
    </config>
  </autopilot>
 
+ <instrumentation>
+  <attitude-indicator>
+   <config>
+    <tumble-flag>true</tumble-flag>
+   </config>
+  </attitude-indicator>
+ </instrumentation>
+
  <consumables>
   <fuel>
    <tank n="0">

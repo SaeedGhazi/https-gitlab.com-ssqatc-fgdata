@@ -95,7 +95,7 @@
    <height>10</height>
    <data_source>agl</data_source>
    <label_format>%5.0f</label_format>
-   <pre_label_string>Elvation </pre_label_string>
+   <pre_label_string>Elevation </pre_label_string>
    <post_label_string>units</post_label_string>
    <scale_data>1.0</scale_data>
    <options>4</options>

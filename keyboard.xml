@@ -852,6 +852,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <binding>
     <desc>Save flight.</desc>
     <command>save</command>
+    <write-all>false</write-all>
    </binding>
   </mod-shift>
  </key>

@@ -55,13 +55,18 @@
   <property>/environment/clouds/layer[4]/elevation-ft</property>
  </input>
 
- <input>
+ <combo>
   <x>225</x>
   <y>180</y>
   <width>200</width>
   <height>25</height>
   <property>/environment/clouds/layer[4]/type</property>
- </input>
+  <value>clear</value>
+  <value>mostly-sunny</value>
+  <value>mostly-cloudy</value>
+  <value>overcast</value>
+  <value>cirrus</value>
+ </combo>
 
  <input>
   <x>450</x>
@@ -85,13 +90,18 @@
   <property>/environment/clouds/layer[3]/elevation-ft</property>
  </input>
 
- <input>
+ <combo>
   <x>225</x>
   <y>150</y>
   <width>200</width>
   <height>25</height>
   <property>/environment/clouds/layer[3]/type</property>
- </input>
+  <value>clear</value>
+  <value>mostly-sunny</value>
+  <value>mostly-cloudy</value>
+  <value>overcast</value>
+  <value>cirrus</value>
+ </combo>
 
  <input>
   <x>450</x>
@@ -115,13 +125,18 @@
   <property>/environment/clouds/layer[2]/elevation-ft</property>
  </input>
 
- <input>
+ <combo>
   <x>225</x>
   <y>120</y>
   <width>200</width>
   <height>25</height>
   <property>/environment/clouds/layer[2]/type</property>
- </input>
+  <value>clear</value>
+  <value>mostly-sunny</value>
+  <value>mostly-cloudy</value>
+  <value>overcast</value>
+  <value>cirrus</value>
+ </combo>
 
  <input>
   <x>450</x>
@@ -145,13 +160,18 @@
   <property>/environment/clouds/layer[1]/elevation-ft</property>
  </input>
 
- <input>
+ <combo>
   <x>225</x>
   <y>90</y>
   <width>200</width>
   <height>25</height>
   <property>/environment/clouds/layer[1]/type</property>
- </input>
+  <value>clear</value>
+  <value>mostly-sunny</value>
+  <value>mostly-cloudy</value>
+  <value>overcast</value>
+  <value>cirrus</value>
+ </combo>
 
  <input>
   <x>450</x>
@@ -175,13 +195,18 @@
   <property>/environment/clouds/layer[0]/elevation-ft</property>
  </input>
 
- <input>
+ <combo>
   <x>225</x>
   <y>60</y>
   <width>200</width>
   <height>25</height>
   <property>/environment/clouds/layer[0]/type</property>
- </input>
+  <value>clear</value>
+  <value>mostly-sunny</value>
+  <value>mostly-cloudy</value>
+  <value>overcast</value>
+  <value>cirrus</value>
+ </combo>
 
  <input>
   <x>450</x>

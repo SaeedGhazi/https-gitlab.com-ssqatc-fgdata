@@ -113,6 +113,10 @@ Started September 2000 by David Megginson, david@megginson.com
   <mixture n="1">1.0</mixture>
   <mixture n="2">1.0</mixture>
   <mixture n="3">1.0</mixture>
+  <propeller-pitch n="0">1.0</propeller-pitch>
+  <propeller-pitch n="1">1.0</propeller-pitch>
+  <propeller-pitch n="2">1.0</propeller-pitch>
+  <propeller-pitch n="3">1.0</propeller-pitch>
  </controls>
 
 

@@ -23,7 +23,7 @@ March 2003 Jim Wilson, jimw@kelcomaine.com
 
   <sound>
    <audible>true</audible>
-   <path>Aircraft/c172/c172-sound.xml</path>
+   <path>Aircraft/p51d/p51d-sound.xml</path>
   </sound>
 
   <panel>

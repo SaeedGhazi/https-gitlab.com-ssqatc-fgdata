@@ -312,6 +312,21 @@
    </binding>
   </action>
 
+  <action>
+   <name>minimize</name>
+   <button>0</button>
+   <x>112</x>
+   <y>112</y>
+   <w>16</w>
+   <h>16</h>
+   <binding>
+    <command>property-assign</command>
+    <property>/instrumentation/radar/minimized</property>
+    <value>true</value>
+   </binding>
+  </action>
+
+
  </actions>
 
 </PropertyList>

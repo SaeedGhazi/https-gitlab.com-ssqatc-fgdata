@@ -351,15 +351,15 @@ Started September 2000 by David Megginson, david@megginson.com
 
   <comm n="0">
    <frequencies>
-    <selected-mhz type="double">118.00</selected-mhz>
-    <standby-mhz type="double">115.8</standby-mhz>
+    <selected-mhz type="double">120.500</selected-mhz>
+    <standby-mhz type="double">118.850</standby-mhz>
    </frequencies>
   </comm>
 
   <comm n="1">
    <frequencies>
-    <selected-mhz type="double">111.80</selected-mhz>
-    <standby-mhz type="double">115.70</standby-mhz>
+    <selected-mhz type="double">118.300</selected-mhz>
+    <standby-mhz type="double">133.775</standby-mhz>
    </frequencies>
   </comm>
 

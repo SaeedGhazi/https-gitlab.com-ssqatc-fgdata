@@ -18,14 +18,20 @@
   </layer>
 
   <layer>
-   <name>target1</name>
+   <name>target1 - range 40</name>
    <w>8</w>
    <h>17</h>
    <condition>
-    <less-than>
-     <property>ai/models/aircraft[1]/radar/range-nm</property>
-     <value>43</value>
-    </less-than>
+    <and>
+     <less-than>
+      <property>ai/models/aircraft[1]/radar/range-nm</property>
+      <value>43</value>
+     </less-than>
+     <equals>
+      <property>/instrumentation/radar/range</property>
+      <value>40</value>
+     </equals>
+    </and>
    </condition>
    <texture>
     <path>Aircraft/Instruments/Textures/radar_misc.rgb</path>
@@ -51,6 +57,48 @@
     </transformation>
    </transformations>
   </layer>
+
+  <layer>
+   <name>target1 - range 20</name>
+   <w>8</w>
+   <h>17</h>
+   <condition>
+    <and>
+     <less-than>
+      <property>ai/models/aircraft[1]/radar/range-nm</property>
+      <value>22</value>
+     </less-than>
+     <equals>
+      <property>/instrumentation/radar/range</property>
+      <value>20</value>
+     </equals>
+    </and>
+   </condition>
+   <texture>
+    <path>Aircraft/Instruments/Textures/radar_misc.rgb</path>
+    <x1>0.0429687</x1>
+    <y1>0.8320312</y1>
+    <x2>0.0703125</x2>
+    <y2>0.8945312</y2>
+   </texture>
+   <transformations>
+    <transformation>
+     <type>x-shift</type>
+     <property>ai/models/aircraft[1]/radar/x-shift</property>
+     <scale>5.1</scale>
+    </transformation>
+    <transformation>
+     <type>y-shift</type>
+     <property>ai/models/aircraft[1]/radar/y-shift</property>
+     <scale>5.1</scale>
+    </transformation>
+    <transformation>
+     <type>rotation</type>
+     <property>ai/models/aircraft[1]/radar/rotation</property>
+    </transformation>
+   </transformations>
+  </layer>
+
 
   <layer>
    <name>frame</name>
@@ -220,6 +268,50 @@
     </transformations>
   </layer>
 
-
  </layers>
+
+ <actions>
+
+  <action>
+   <name>set range 40</name>
+   <button>0</button>
+   <x>-120</x>
+   <y>-120</y>
+   <w>35</w>
+   <h>35</h>
+   <condition>
+    <equals>
+     <property>/instrumentation/radar/range</property>
+     <value>20</value>
+    </equals>
+   </condition>
+   <binding>
+    <command>property-assign</command>
+    <property>/instrumentation/radar/range</property>
+    <value>40</value>
+   </binding>
+  </action>
+
+  <action>
+   <name>set range 20</name>
+   <button>0</button>
+   <x>-120</x>
+   <y>-120</y>
+   <w>35</w>
+   <h>35</h>
+   <condition>
+    <equals>
+     <property>/instrumentation/radar/range</property>
+     <value>40</value>
+    </equals>
+   </condition>
+   <binding>
+    <command>property-assign</command>
+    <property>/instrumentation/radar/range</property>
+    <value>20</value>
+   </binding>
+  </action>
+
+ </actions>
+
 </PropertyList>

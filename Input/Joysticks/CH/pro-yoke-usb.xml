@@ -216,15 +216,33 @@ $Id$
   </binding>
  </button>
 
+<!--
  <button n="6">
   <repeatable>false</repeatable>
   <binding>
-   <command>property-assign</command>
+   <command>property-adjust</command>
    <property>/controls/flight/flaps</property>
-   <value type="double">0.0</value>
+   <step type="double">-0.34</step>
   </binding>
  </button>
+-->
+<button n="6">
+  <repeatable>false</repeatable>
+  <binding>
+   <command>nasal</command>
+   <script>controls.stepFlaps(-1)</script>
+  </binding>
+</button>
 
+<button n="7">
+  <repeatable>false</repeatable>
+  <binding>
+   <command>nasal</command>
+   <script>controls.stepFlaps(1)</script>
+  </binding>
+</button>
+
+<!--
  <button n="7">
   <repeatable>false</repeatable>
   <binding>
@@ -233,6 +251,8 @@ $Id$
    <step type="double">0.34</step>
   </binding>
  </button>
+-->
+
 
  <button n="8">
   <repeatable>true</repeatable>

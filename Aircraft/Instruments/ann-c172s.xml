@@ -25,8 +25,8 @@ properties' values.
 
 <PropertyList>
  <name>C172S Annunciator</name>
- <w-base>115</w-base>
- <h-base>35</h-base>
+ <w-base>119</w-base>
+ <h-base>39</h-base>
 
  <layers>
   <layer>
@@ -38,8 +38,8 @@ properties' values.
     <x2>0.9</x2>
     <y2>0.3</y2>
    </texture>
-  <w>115</w>
-  <h>35</h>
+  <w>119</w>
+  <h>39</h>
   </layer>
 
   <layer>

@@ -307,7 +307,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
     <desc>Look back left</desc>
     <binding>
      <command>property-assign</command>
-     <property>/sim/current-view/goal-offset-deg</property>
+     <property>/sim/current-view/goal-heading-offset-deg</property>
      <value type="double">135</value>
     </binding>
   </mod-shift>
@@ -325,7 +325,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look back.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/current-view/goal-offset-deg</property>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
     <value type="double">180</value>
    </binding>
   </mod-shift>
@@ -343,7 +343,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look back right.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/current-view/goal-offset-deg</property>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
     <value type="double">225</value>
    </binding>
   </mod-shift>
@@ -361,7 +361,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look left.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/current-view/goal-offset-deg</property>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
     <value type="double">90</value>
    </binding>
   </mod-shift>
@@ -399,7 +399,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look right.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/current-view/goal-offset-deg</property>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
     <value type="double">270</value>
    </binding>
   </mod-shift>
@@ -417,7 +417,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look front left.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/current-view/goal-offset-deg</property>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
     <value type="double">45</value>
    </binding>
   </mod-shift>
@@ -435,7 +435,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look forward.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/current-view/goal-offset-deg</property>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
     <value type="double">0</value>
    </binding>
   </mod-shift>
@@ -453,7 +453,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look front right.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/current-view/goal-offset-deg</property>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
     <value type="double">315</value>
    </binding>
   </mod-shift>
@@ -967,7 +967,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look left.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/current-view/goal-offset-deg</property>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
     <value type="double">90</value>
    </binding>
   </mod-shift>
@@ -985,7 +985,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look forward.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/current-view/goal-offset-deg</property>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
     <value type="double">0</value>
    </binding>
   </mod-shift>
@@ -1003,7 +1003,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look right.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/current-view/goal-offset-deg</property>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
     <value type="double">270</value>
    </binding>
   </mod-shift>
@@ -1021,7 +1021,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look backwards.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/current-view/goal-offset-deg</property>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
     <value type="double">180</value>
    </binding>
   </mod-shift>
@@ -1039,7 +1039,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look front right.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/current-view/goal-offset-deg</property>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
     <value type="double">315</value>
    </binding>
   </mod-shift>
@@ -1057,7 +1057,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look back right.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/current-view/goal-offset-deg</property>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
     <value type="double">225</value>
    </binding>
   </mod-shift>
@@ -1075,7 +1075,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look front left.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/current-view/goal-offset-deg</property>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
     <value type="double">45</value>
    </binding>
   </mod-shift>
@@ -1093,7 +1093,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <desc>Look back left.</desc>
    <binding>
     <command>property-assign</command>
-    <property>/sim/current-view/goal-offset-deg</property>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
     <value type="double">135</value>
    </binding>
   </mod-shift>
@@ -1112,3 +1112,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
 </PropertyList>
 
 <!-- end of keyboard.xml -->
+
+
+
+

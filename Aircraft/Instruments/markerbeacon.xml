@@ -46,7 +46,7 @@ properties' values.
    <type>switch</type>
    <layer>
    <condition>
-    <property>/radios/marker-beacon/outer</property>
+    <property>/instrumentation/marker-beacon/outer</property>
    </condition>
    <name>on</name>
    <texture>
@@ -127,7 +127,7 @@ properties' values.
    <type>switch</type>
    <layer>
    <condition>
-    <property>/radios/marker-beacon/middle</property> 
+    <property>/instrumentation/marker-beacon/middle</property> 
    </condition>
    <name>on</name>
    <texture>
@@ -210,7 +210,7 @@ properties' values.
    <type>switch</type>
    <layer>
    <condition>
-    <property>/radios/marker-beacon/inner</property> 
+    <property>/instrumentation/marker-beacon/inner</property> 
    </condition>
    <name>on</name>
    <texture>

@@ -44,7 +44,18 @@ Started September 2000 by David Megginson, david@megginson.com
    <path>Huds/Default/default.xml</path>
    <visibility>false</visibility>
   </hud>
- </sim>
+  <instrument-options>
+   <nav n="0">
+   <has-gs-needle>1</has-gs-needle>
+   </nav>
+   <nav n="1">
+   <has-gs-needle>0</has-gs-needle>
+   </nav>
+   <hsi n="0">
+   <has-gs-needle>1</has-gs-needle>
+   </hsi>
+  </instrument-options>
+  </sim>
 
 
  <!-- Position -->
@@ -87,6 +98,7 @@ Started September 2000 by David Megginson, david@megginson.com
   </engine>
  </engines>
 
+
  <!-- Controls -->
 
  <controls>
@@ -102,7 +114,7 @@ Started September 2000 by David Megginson, david@megginson.com
   <keyboard include="keyboard.xml"/>
 
   <!-- included externally -->
-  <joysticks include="joysticks.xml"/>	
+  <joysticks include="joysticks.xml"/>
 
  </input>
 
@@ -142,12 +154,12 @@ Started September 2000 by David Megginson, david@megginson.com
  </radios>
 
  <!-- Instruments -->
- 
+
  <!-- this is here because the datum isn't retained on a reset -->
 
  <steam>
    <altimeter-datum-mb>1013.25</altimeter-datum-mb>
- </steam>                                                                       
+ </steam>
 
  </PropertyList>
 

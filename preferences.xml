@@ -262,7 +262,7 @@ Started September 2000 by David Megginson, david@megginson.com
   </menubar>
 
   <mouse>
-    <hide-cursor>false</hide-cursor>
+    <hide-cursor>true</hide-cursor>
     <cursor-timeout-sec>10.0</cursor-timeout-sec>
   </mouse>
   
@@ -272,20 +272,20 @@ Started September 2000 by David Megginson, david@megginson.com
   </replay>
   
   <ATC>
-   <enabled type="bool">true</enabled>
+   <enabled type="bool">false</enabled>
   </ATC>
 
   <ai-traffic>
-   <enabled type="bool">true</enabled>
+   <enabled type="bool">false</enabled>
    <level type="int">1</level>
   </ai-traffic>
 
   <traffic-manager>
-     <enabled type="bool">true</enabled>
+     <enabled type="bool">false</enabled>
   </traffic-manager>
 
   <ai>
-   <enabled type="bool">true</enabled>
+   <enabled type="bool">false</enabled>
    <!-- <scenario>aircraft_demo</scenario> -->
   </ai>
 
@@ -455,6 +455,7 @@ Started September 2000 by David Megginson, david@megginson.com
     <magnetos type="int">0</magnetos>
     <throttle type="double">0.0</throttle>
     <mixture type="double">1.0</mixture>
+    <condition type="double">1.0</condition>
     <propeller-pitch type="double">1.0</propeller-pitch>
     <faults>
      <serviceable>true</serviceable>
@@ -470,6 +471,7 @@ Started September 2000 by David Megginson, david@megginson.com
     <magnetos type="int">0</magnetos>
     <throttle type="double">0.0</throttle>
     <mixture type="double">1.0</mixture>
+    <condition type="double">1.0</condition>
     <propeller-pitch type="double">1.0</propeller-pitch>
     <faults>
      <serviceable>true</serviceable>
@@ -485,6 +487,7 @@ Started September 2000 by David Megginson, david@megginson.com
     <magnetos type="int">0</magnetos>
     <throttle type="double">0.0</throttle>
     <mixture type="double">1.0</mixture>
+    <condition type="double">1.0</condition>
     <propeller-pitch type="double">1.0</propeller-pitch>
     <faults>
      <serviceable>true</serviceable>
@@ -500,6 +503,7 @@ Started September 2000 by David Megginson, david@megginson.com
     <magnetos type="int">0</magnetos>
     <throttle type="double">0.0</throttle>
     <mixture type="double">1.0</mixture>
+    <condition type="double">1.0</condition>
     <propeller-pitch type="double">1.0</propeller-pitch>
     <faults>
      <serviceable>true</serviceable>

@@ -16,7 +16,7 @@
    <type>switch</type>
     <layer>
      <condition>
-      <property>/controls[0]/gear-down</property> <!-- nose brake -->
+      <property>/controls/gear/gear-down</property> <!-- nose brake -->
      </condition>
      <name>on</name>
      <texture>
@@ -67,7 +67,7 @@
    <h>26</h>
    <binding>
     <command>property-toggle</command>
-    <property>/controls/gear-down</property>
+    <property>/controls/gear/gear-down</property>
    </binding>
   </action>
  </actions>

@@ -34,8 +34,8 @@ instrument
  <h-base>128</h-base>
 
  <params>
-  <pt1-select>/controls/afterburner[1]</pt1-select>
-  <reheat1-select>/controls/afterburner[1]</reheat1-select>
+  <pt1-select>/controls/engines/engine[1]/afterburner</pt1-select>
+  <reheat1-select>/controls/engines/engine[1]/afterburner</reheat1-select>
  </params>
 
  <layers>

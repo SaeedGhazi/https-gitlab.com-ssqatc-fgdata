@@ -41,7 +41,7 @@
  <transformations>
     <transformation>
      <type>x-shift</type>
-     <property>/controls/gear-down</property>
+     <property>/controls/gear/gear-down</property>
      <min>0.0</min>
      <max>1.0</max>
      <scale>0.0</scale>
@@ -49,7 +49,7 @@
     </transformation>
     <transformation>
      <type>y-shift</type>
-     <property>/controls/gear-down</property>
+     <property>/controls/gear/gear-down</property>
      <min>0.0</min>
      <max>1.0</max>
      <scale>-50.0</scale>
@@ -74,7 +74,7 @@
    <h>96</h>
    <binding>
     <command>property-toggle</command>
-    <property>/controls/gear-down</property>
+    <property>/controls/gear/gear-down</property>
    
     <min>1.0</min>
     <max>0.0</max>

@@ -4,13 +4,13 @@
 Hang glider simulation config.  This file ties together all the
 components used by FGFS to represent a generic hang glider.
 Components include the flight data model, instrument panel, and
-external 3D model.
+external model.
 
 Flight model details: 
 Aircraft/UIUC/airwaveXtreme150-v1-nl/README.airwaveXtreme150.html
 
-3D model details:  
-Aircraft/airwaveXtreme150/Models/uiuc/hgldr-cs/readme.txt 
+External model details:  
+Aircraft/airwaveXtreme150/Models/uiuc/hgldr-cs/README.TXT 
 (courtesy of Captain Slug, captainslg@aol.com)
 
 Last update: Nov 8, 2002 Michael Selig, m-selig@uiuc.edu
@@ -21,10 +21,11 @@ Last update: Nov 8, 2002 Michael Selig, m-selig@uiuc.edu
 
  <sim>
 
-  <description>Airwave Xtreme 150 (UIUC)</description>
+  <description>Airwave Xtreme 150 hang glider (UIUC)</description>
 
   <flight-model>larcsim</flight-model>
   <aero>uiuc</aero>
+  <uiuc-type>uiuc-hangglider</uiuc-type>
   <aircraft-dir>Aircraft/UIUC/airwaveXtreme150-v1-nl</aircraft-dir>
 
   <sound>

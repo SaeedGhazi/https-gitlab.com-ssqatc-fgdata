@@ -2702,8 +2702,8 @@ Shared parameters for various materials.
    <a>1.0</a>
   </specular>
   <emissive>
-  <r>0.13</r>
-  <g>0.11</g>
+  <r>0.0</r>
+  <g>0.0</g>
   <b>0.0</b>
   <a>1.0</a>
  </emissive>

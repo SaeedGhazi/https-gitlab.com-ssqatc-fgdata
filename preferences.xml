@@ -12,6 +12,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
  <!-- General simulation preferences -->
  <sim>
+  <font>Helvetica.txf</font>
   <aircraft>c172</aircraft>
   <virtual-cockpit type="bool">false</virtual-cockpit>
   <startup>

@@ -45,7 +45,7 @@
      <x-offset-m archive="y">-0.38</x-offset-m>
      <y-offset-m archive="y">3.26</y-offset-m>
      <z-offset-m archive="y">-18.16</z-offset-m>
-     <pitch-offset-deg archive="y">-11.0</pitch-offset-deg>
+     <pitch-offset-deg archive="y">-13.0</pitch-offset-deg>
    </config>
   </view>
 
@@ -55,18 +55,23 @@
  <autopilot>
    <config>
      <min-climb-speed-kt type="float">150.0</min-climb-speed-kt>
-     <best-climb-speed-kt type="float">250.0</best-climb-speed-kt>
+     <best-climb-speed-kt type="float">200.0</best-climb-speed-kt>
      <target-climb-rate-fpm type="float">2000.0</target-climb-rate-fpm>
      <target-descent-rate-fpm type="float">1500.0</target-descent-rate-fpm>
-     <elevator-adj-factor type="float">3500.0</elevator-adj-factor>
-     <integral-contribution type="float">0.01</integral-contribution>
+     <elevator-adj-factor type="float">1500.0</elevator-adj-factor>
+     <integral-contribution type="float">0.005</integral-contribution>
      <zero-pitch-throttle type="float">0.0001</zero-pitch-throttle>
      <zero-pitch-trim-full-throttle type="float">0.0001</zero-pitch-trim-full-throttle>
      <max-roll-deg type="float">30</max-roll-deg>
      <max-aileron type="float">1.0</max-aileron>
+     <indicated-heading-magnetic type="bool">true</indicated-heading-magnetic>
    </config>
  </autopilot>
 
+ <radios>
+   <dme n="0">
+      <switch-position type="int">1</switch-position>
+   </dme>
+ </radios>
+
 </PropertyList>
-
-

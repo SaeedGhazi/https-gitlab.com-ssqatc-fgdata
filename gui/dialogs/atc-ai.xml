@@ -6,18 +6,18 @@
 
  <name>atc-ai</name>
  <width>300</width>
- <height>220</height>
+ <height>240</height>
  <modal>false</modal>
 
  <text>
   <x>80</x>
-  <y>180</y>
+  <y>200</y>
   <label>ATC/AI Options</label>
  </text>
 
  <checkbox>
   <x>30</x>
-  <y>140</y>
+  <y>160</y>
   <width>20</width>
   <height>20</height>
   <label>Enable ATC</label>
@@ -26,23 +26,29 @@
 
  <checkbox>
   <x>30</x>
-  <y>110</y>
+  <y>130</y>
   <width>20</width>
   <height>20</height>
   <label>Enable AI traffic</label>
   <property>/sim/ai-traffic/enabled</property>
  </checkbox>
  
- <text>
-  <x>30</x>
-  <y>75</y>
-  <label>(AI traffic currently limited</label>
- </text>
- <text>
-  <x>30</x>
-  <y>55</y>
-  <label>to KEMT only.)</label>
- </text>
+  <text>
+   <x>30</x>
+   <y>100</y>
+   <label>AI traffic density:</label>
+  </text>
+
+  <combo>
+   <x>30</x>
+   <y>80</y>
+   <width>200</width>
+   <height>25</height>
+   <property>/sim/ai-traffic/level</property>
+   <value>1</value>
+   <value>2</value>
+   <value>3</value>
+  </combo>
  
  <group>
   <y>10</y>

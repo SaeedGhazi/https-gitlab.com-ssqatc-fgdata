@@ -34,16 +34,16 @@ Lee Elliott. leee-fgfs@spatial.freeserve.co.uk
 
 <!-- Approach configuration -->
  <approach speed="100" aoa="0.5">
-  <control-setting axis="/controls/throttle[0]" value="0.1"/>
-  <control-setting axis="/controls/throttle[1]" value="0.1"/>
-  <control-setting axis="/controls/throttle[2]" value="0.1"/>
-  <control-setting axis="/controls/throttle[3]" value="0.1"/>
-  <control-setting axis="/controls/throttle[4]" value="0.1"/>
-  <control-setting axis="/controls/throttle[5]" value="0.1"/>
-  <control-setting axis="/controls/throttle[6]" value="0.1"/>
-  <control-setting axis="/controls/throttle[7]" value="0.1"/>
-  <control-setting axis="/controls/flaps" value="1.0"/>
-  <control-setting axis="/controls/gear-down" value="1"/>
+  <control-setting axis="/controls/engines/engine[0]/throttle" value="0.1"/>
+  <control-setting axis="/controls/engines/engine[1]/throttle" value="0.1"/>
+  <control-setting axis="/controls/engines/engine[2]/throttle" value="0.1"/>
+  <control-setting axis="/controls/engines/engine[3]/throttle" value="0.1"/>
+  <control-setting axis="/controls/engines/engine[4]/throttle" value="0.1"/>
+  <control-setting axis="/controls/engines/engine[5]/throttle" value="0.1"/>
+  <control-setting axis="/controls/engines/engine[6]/throttle" value="0.1"/>
+  <control-setting axis="/controls/engines/engine[7]/throttle" value="0.1"/>
+  <control-setting axis="/controls/flight/flaps" value="1.0"/>
+  <control-setting axis="/controls/gear/gear-down" value="1"/>
  </approach>
 
 <!-- Cruise configuration -->
@@ -58,16 +58,16 @@ Lee Elliott. leee-fgfs@spatial.freeserve.co.uk
      at which a normal b52 would have disintegrated due to flutter.
 -->
  <cruise speed="554" alt="21000">
-  <control-setting axis="/controls/throttle[0]" value="0.6"/>
-  <control-setting axis="/controls/throttle[1]" value="0.6"/>
-  <control-setting axis="/controls/throttle[2]" value="0.6"/>
-  <control-setting axis="/controls/throttle[3]" value="0.6"/>
-  <control-setting axis="/controls/throttle[4]" value="0.6"/>
-  <control-setting axis="/controls/throttle[5]" value="0.6"/>
-  <control-setting axis="/controls/throttle[6]" value="0.6"/>
-  <control-setting axis="/controls/throttle[7]" value="0.6"/>
-  <control-setting axis="/controls/flaps" value="0.0"/>
-  <control-setting axis="/controls/gear-down" value="0"/>
+  <control-setting axis="/controls/engines/engine[0]/throttle" value="0.6"/>
+  <control-setting axis="/controls/engines/engine[1]/throttle" value="0.6"/>
+  <control-setting axis="/controls/engines/engine[2]/throttle" value="0.6"/>
+  <control-setting axis="/controls/engines/engine[3]/throttle" value="0.6"/>
+  <control-setting axis="/controls/engines/engine[4]/throttle" value="0.6"/>
+  <control-setting axis="/controls/engines/engine[5]/throttle" value="0.6"/>
+  <control-setting axis="/controls/engines/engine[6]/throttle" value="0.6"/>
+  <control-setting axis="/controls/engines/engine[7]/throttle" value="0.6"/>
+  <control-setting axis="/controls/flight/flaps" value="0.0"/>
+  <control-setting axis="/controls/gear/gear-down" value="0"/>
  </cruise>
 
  <cockpit x="-2.2" y="0.0" z="2.0"/>
@@ -94,9 +94,9 @@ Lee Elliott. leee-fgfs@spatial.freeserve.co.uk
   <flap1 start="0.7" end="0.78" lift="1.3" drag="1.2"/>
   <spoiler start="0.5" end="0.75" lift="0.0" drag="20.0"/>
 
-  <control-input axis="/controls/flaps" control="FLAP0"/>
-  <control-input axis="/controls/aileron" control="FLAP1" split="true"/>
-  <control-input axis="/controls/spoilers" control="SPOILER"/>
+  <control-input axis="/controls/flight/flaps" control="FLAP0"/>
+  <control-input axis="/controls/flight/aileron" control="FLAP1" split="true"/>
+  <control-input axis="/controls/flight/spoilers" control="SPOILER"/>
 
   <control-output control="FLAP0" prop="/surface-positions/flap-pos-norm"/>
   <control-output control="FLAP1" side="left" prop="/surface-positions/left-aileron-pos-norm"/>
@@ -116,8 +116,8 @@ Lee Elliott. leee-fgfs@spatial.freeserve.co.uk
        length="7.5" chord="7.5" sweep="40.0" dihedral="0.0">
   <stall aoa="25.0" width="3" peak="1.5"/>
   <flap0 start="0" end="1" lift="1.5" drag="1.2"/>
-  <control-input axis="/controls/elevator" control="FLAP0"/>
-  <control-input axis="/controls/elevator-trim" control="FLAP0"/>
+  <control-input axis="/controls/flight/elevator" control="FLAP0"/>
+  <control-input axis="/controls/flight/elevator-trim" control="FLAP0"/>
   <control-output control="FLAP0" prop="/surface-positions/elevator-pos-norm"/>
   <control-speed control="FLAP0" transition-time="0.5"/>
  </hstab>
@@ -126,7 +126,7 @@ Lee Elliott. leee-fgfs@spatial.freeserve.co.uk
        length="8.5" chord="7.5" sweep="35.0">
   <stall aoa="20.0" width="3" peak="1.5"/>
   <flap0 start="0" end="1" lift="1.15" drag="1.3"/>
-  <control-input axis="/controls/rudder" control="FLAP0" invert="true"/>
+  <control-input axis="/controls/flight/rudder" control="FLAP0" invert="true"/>
   <control-output control="FLAP0" prop="/surface-positions/rudder-pos-norm"/>
  </vstab>
 
@@ -144,28 +144,28 @@ Lee Elliott. leee-fgfs@spatial.freeserve.co.uk
  <jet x="-23.0" y="20.0" z="-1.0"
      mass="4000"
      thrust="11200">
-  <control-input axis="/controls/throttle[0]" control="THROTTLE"/>
+  <control-input axis="/controls/engines/engine[0]/throttle" control="THROTTLE"/>
  </jet>
 
 <!-- Left Outer Right -->
  <jet x="-23.0" y="18.0" z="-1.0"
      mass="4000"
      thrust="11200">
-  <control-input axis="/controls/throttle[1]" control="THROTTLE"/>
+  <control-input axis="/controls/engines/engine[1]/throttle" control="THROTTLE"/>
  </jet>
 
 <!-- Left Inner Left -->
  <jet x="-15.0" y="12.0" z="-1.0"
      mass="4000"
      thrust="11200">
-  <control-input axis="/controls/throttle[2]" control="THROTTLE"/>
+  <control-input axis="/controls/engines/engine[2]/throttle" control="THROTTLE"/>
  </jet>
 
 <!-- Left Inner Right -->
  <jet x="-15.0" y="10.0" z="-1.0"
      mass="4000"
      thrust="11200">
-  <control-input axis="/controls/throttle[3]" control="THROTTLE"/>
+  <control-input axis="/controls/engines/engine[3]/throttle" control="THROTTLE"/>
  </jet>
 
 <!-- Right wing engines -->
@@ -174,74 +174,74 @@ Lee Elliott. leee-fgfs@spatial.freeserve.co.uk
  <jet x="-15.0" y="-10.0" z="-1.0"
      mass="4000"
      thrust="11200">
-  <control-input axis="/controls/throttle[4]" control="THROTTLE"/>
+  <control-input axis="/controls/engines/engine[4]/throttle" control="THROTTLE"/>
  </jet>
 
 <!-- Right Inner Right -->
  <jet x="-15.0" y="-12.0" z="-1.0"
      mass="4000"
      thrust="11200">
-  <control-input axis="/controls/throttle[5]" control="THROTTLE"/>
+  <control-input axis="/controls/engines/engine[5]/throttle" control="THROTTLE"/>
  </jet>
 
 <!-- Right Outer Left -->
  <jet x="-23.0" y="-18.0" z="-1.0"
      mass="4000"
      thrust="11200">
-  <control-input axis="/controls/throttle[6]" control="THROTTLE"/>
+  <control-input axis="/controls/engines/engine[6]/throttle" control="THROTTLE"/>
  </jet>
 
 <!-- Right Outer Right -->
  <jet x="-23.0" y="-20.0" z="-1.0"
      mass="4000"
      thrust="11200">
-  <control-input axis="/controls/throttle[7]" control="THROTTLE"/>
+  <control-input axis="/controls/engines/engine[7]/throttle" control="THROTTLE"/>
  </jet>
 
 <!-- Front Left -->
  <gear x="-13.2" y="2.0" z="-2.9" retract-time="7" compression="1.0">
-  <control-input axis="/controls/rudder" control="STEER" square="true"/>
-  <control-input axis="/controls/gear-down" control="EXTEND"/>
+  <control-input axis="/controls/flight/rudder" control="STEER" square="true"/>
+  <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
   <control-speed control="EXTEND" transition-time="7"/>
   <control-output control="EXTEND" prop="/gear/gear/position-norm"/>
  </gear>
 
 <!-- Front Right -->
  <gear x="-13.2" y="-2.0" z="-2.9" retract-time="7" compression="1.0">
-  <control-input axis="/controls/rudder" control="STEER" square="true"/>
-  <control-input axis="/controls/gear-down" control="EXTEND"/>
+  <control-input axis="/controls/flight/rudder" control="STEER" square="true"/>
+  <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
   <control-speed control="EXTEND" transition-time="7"/>
   <control-output control="EXTEND" prop="/gear/gear/position-norm"/>
  </gear>
 
 <!-- Rear Left -->
  <gear x="-28.0" y="2.0" z="-2.9" retract-time="7" compression="1.0">
-  <control-input axis="/controls/brakes" control="BRAKE"/>
-  <control-input axis="/controls/gear-down" control="EXTEND"/>
+  <control-input axis="/controls/gear/wheel[0]/brake" control="BRAKE"/>
+  <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
   <control-speed control="EXTEND" transition-time="7"/>
   <control-output control="EXTEND" prop="/gear/gear/position-norm"/>
  </gear>
 
 <!-- Rear Right -->
  <gear x="-28.0" y="-2.0" z="-2.9" retract-time="7" compression="1.0">
-  <control-input axis="/controls/brakes" control="BRAKE"/>
-  <control-input axis="/controls/gear-down" control="EXTEND"/>
+  <control-input axis="/controls/gears/wheel[0]/brake" control="BRAKE"/>
+  <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
   <control-speed control="EXTEND" transition-time="7"/>
   <control-output control="EXTEND" prop="/gear/gear/position-norm"/>
  </gear>
 
 <!-- Left Wing -->
  <gear x="-31.0" y="23.0" z="-2.0" retract-time="7" compression="2.5">
-  <control-input axis="/controls/brakes[0]" control="BRAKE"/>
-  <control-input axis="/controls/gear-down" control="EXTEND"/>
+  <control-input axis="/controls/gear/wheel[0]/brake" control="BRAKE"/>
+  <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
   <control-speed control="EXTEND" transition-time="7"/>
   <control-output control="EXTEND" prop="/gear/gear/position-norm"/>
  </gear>
 
 <!-- Right Wing -->
  <gear x="-31.0" y="-23.0" z="-2.0" retract-time="7" compression="2.5">
-  <control-input axis="/controls/brakes[1]" control="BRAKE"/>
-  <control-input axis="/controls/gear-down" control="EXTEND"/>
+  <control-input axis="/controls/gear/wheel[1]/brake" control="BRAKE"/>
+  <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
   <control-speed control="EXTEND" transition-time="7"/>
   <control-output control="EXTEND" prop="/gear/gear/position-norm"/>
  </gear>

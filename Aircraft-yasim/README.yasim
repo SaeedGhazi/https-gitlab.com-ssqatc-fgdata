@@ -289,7 +289,7 @@ control:  This element, which can appear in two different contexts,
           translate and truncate the values.  On its way, I promise.
 
           axis:  The name of the double-valued fgfs property "axis" to
-                 use as input, such as "/controls/aileron".
+                 use as input, such as "/controls/flight/aileron".
           output: Which property to set on the objects.  It can have
                   the following values:
                   THROTTLE - The throttle on a jet or propeller.

@@ -52,10 +52,14 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
    <internal archive="y">true</internal>
    <config>
     <x-offset-m archive="y">-0.28</x-offset-m>
-    <y-offset-m archive="y">0.75</y-offset-m>
+    <y-offset-m archive="y">0.84</y-offset-m>
     <z-offset-m archive="y">-0.10</z-offset-m>
    </config>
   </view>
+
+  <current-view>
+    <pitch-offset-deg>-7</pitch-offset-deg>
+  </current-view>
 
   <instrument-options>
    <dg>
@@ -110,6 +114,9 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
  </controls>
   
 </PropertyList>
+
+
+
 
 
 

@@ -15,8 +15,10 @@ Common configuration for JSBSim C172P aircraft.
  <!-- trim for level cruise -->
 
  <controls>
-  <aileron-trim>-0.012</aileron-trim>
-  <rudder-trim>-0.025</rudder-trim>
+  <flight>
+   <aileron-trim>-0.012</aileron-trim>
+   <rudder-trim>-0.025</rudder-trim>
+  </flight>
  </controls>
 
 </PropertyList>

@@ -15,9 +15,11 @@ Common configuration for YASim PA28-161 aircraft.
  <!-- trim for level cruise -->
 
  <controls>
-  <aileron-trim>-0.012</aileron-trim>
-  <elevator-trim>0</elevator-trim>
-  <rudder-trim>0</rudder-trim>
+  <flight>
+   <aileron-trim>-0.012</aileron-trim>
+   <elevator-trim>0</elevator-trim>
+   <rudder-trim>0</rudder-trim>
+  </flight>
  </controls>
 
  <yasim>

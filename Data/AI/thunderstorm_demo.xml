@@ -6,7 +6,7 @@
 
   <!-- Puts a thunderstorm southwest of KSFO -->
   <entry>
-   <type>storm</type>
+   <type>thunderstorm</type>
    <model>Models/Geometry/thunderstorm.xml</model>
    <latitude>37.44</latitude>
    <longitude>-122.25</longitude>

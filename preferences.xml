@@ -53,7 +53,7 @@ Started September 2000 by David Megginson, david@megginson.com
   </navdb>
   <sound>
    <pause type="bool">false</pause>
-   <volume type="double">1.0</volume>
+   <volume type="double">0.0</volume>
    <voice type="bool">true</voice>
   </sound>
   <speed-up type="double">1.0</speed-up>
@@ -285,7 +285,7 @@ Started September 2000 by David Megginson, david@megginson.com
   </traffic-manager>
 
   <ai>
-   <enabled type="bool">false</enabled>
+   <enabled type="bool">true</enabled>
    <!-- <scenario>aircraft_demo</scenario> -->
   </ai>
 

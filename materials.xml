@@ -69,13 +69,23 @@ Properties currently used:
 ************************************************************************
 -->
 
-<!-- Uncomment the following line to use the DTD -->
+<PropertyList>
 
 <!--
-<!DOCTYPE PropertyList SYSTEM "materials.dtd">
+Shared parameters for various materials.
 -->
-
-<PropertyList>
+<params>
+ <forest>
+  <!-- Maximum distance from which a tree is visible -->
+  <tree-range-m>2000</tree-range-m>
+  <!-- Maximum range from the centre of a tri or fan for dynamic objects -->
+  <tree-group-range-m>15000</tree-group-range-m>
+  <!-- Average number of square meters per tree with one type -->
+  <single-tree-coverage>10000</single-tree-coverage>
+  <!-- Average number of square meters per tree with two types -->
+  <double-tree-coverage>20000</double-tree-coverage>
+ </forest>
+</params>
 
 <material>
  <name>grass_rwy</name>
@@ -2430,9 +2440,9 @@ Properties currently used:
  </emissive>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
-  <coverage>20000</coverage>
-  <range-m>2000</range-m>
-  <group-range-m>10000</group-range-m>
+  <coverage alias="/params/forest/single-tree-coverage"/>
+  <range-m alias="/params/forest/tree-range-m"/>
+  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
 </material>
@@ -2469,9 +2479,9 @@ Properties currently used:
  </emissive>
  <object>
   <path>Models/Trees/deciduous-tree.ac</path>
-  <coverage>20000</coverage>
-  <range-m>2000</range-m>
-  <group-range-m>10000</group-range-m>
+  <coverage alias="/params/forest/single-tree-coverage"/>
+  <range-m alias="/params/forest/tree-range-m"/>
+  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
 </material>
@@ -2508,16 +2518,16 @@ Properties currently used:
  </emissive>
  <object>
   <path>Models/Trees/deciduous-tree.ac</path>
-  <coverage>40000</coverage>
-  <range-m>2000</range-m>
-  <group-range-m>10000</group-range-m>
+  <coverage alias="/params/forest/double-tree-coverage"/>
+  <range-m alias="/params/forest/tree-range-m"/>
+  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
-  <coverage>40000</coverage>
-  <range-m>2000</range-m>
-  <group-range-m>10000</group-range-m>
+  <coverage alias="/params/forest/double-tree-coverage"/>
+  <range-m alias="/params/forest/tree-range-m"/>
+  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
 </material>
@@ -2555,9 +2565,9 @@ Properties currently used:
  </emissive>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
-  <coverage>20000</coverage>
-  <range-m>2000</range-m>
-  <group-range-m>10000</group-range-m>
+  <coverage alias="/params/forest/single-tree-coverage"/>
+  <range-m alias="/params/forest/tree-range-m"/>
+  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
 </material>
@@ -2594,9 +2604,9 @@ Properties currently used:
  </emissive>
  <object>
   <path>Models/Trees/deciduous-tree.ac</path>
-  <coverage>20000</coverage>
-  <range-m>2000</range-m>
-  <group-range-m>10000</group-range-m>
+  <coverage alias="/params/forest/single-tree-coverage"/>
+  <range-m alias="/params/forest/tree-range-m"/>
+  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
 </material>
@@ -3010,15 +3020,15 @@ Properties currently used:
  <object>
   <path>Models/Trees/deciduous-tree.ac</path>
   <coverage>500000</coverage>
-  <range-m>2000</range-m>
-  <group-range-m>10000</group-range-m>
+  <range-m alias="/params/forest/tree-range-m"/>
+  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
   <coverage>1000000</coverage>
-  <range-m>2000</range-m>
-  <group-range-m>10000</group-range-m>
+  <range-m alias="/params/forest/tree-range-m"/>
+  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
 </material>
@@ -3063,15 +3073,15 @@ Properties currently used:
  <object>
   <path>Models/Trees/deciduous-tree.ac</path>
   <coverage>500000</coverage>
-  <range-m>2000</range-m>
-  <group-range-m>10000</group-range-m>
+  <range-m alias="/params/forest/tree-range-m"/>
+  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
   <coverage>1000000</coverage>
-  <range-m>2000</range-m>
-  <group-range-m>10000</group-range-m>
+  <range-m alias="/params/forest/tree-range-m"/>
+  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
 </material>
@@ -3116,15 +3126,15 @@ Properties currently used:
  <object>
   <path>Models/Trees/deciduous-tree.ac</path>
   <coverage>500000</coverage>
-  <range-m>2000</range-m>
-  <group-range-m>10000</group-range-m>
+  <range-m alias="/params/forest/tree-range-m"/>
+  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
   <coverage>1000000</coverage>
-  <range-m>2000</range-m>
-  <group-range-m>10000</group-range-m>
+  <range-m alias="/params/forest/tree-range-m"/>
+  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
 </material>
@@ -3162,15 +3172,15 @@ Properties currently used:
  <object>
   <path>Models/Trees/deciduous-tree.ac</path>
   <coverage>500000</coverage>
-  <range-m>2000</range-m>
-  <group-range-m>10000</group-range-m>
+  <range-m alias="/params/forest/tree-range-m"/>
+  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
   <coverage>1000000</coverage>
-  <range-m>2000</range-m>
-  <group-range-m>10000</group-range-m>
+  <range-m alias="/params/forest/tree-range-m"/>
+  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
 </material>
@@ -3208,15 +3218,15 @@ Properties currently used:
  <object>
   <path>Models/Trees/deciduous-tree.ac</path>
   <coverage>200000</coverage>
-  <range-m>2000</range-m>
-  <group-range-m>10000</group-range-m>
+  <range-m alias="/params/forest/tree-range-m"/>
+  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
   <coverage>200000</coverage>
-  <range-m>2000</range-m>
-  <group-range-m>10000</group-range-m>
+  <range-m alias="/params/forest/tree-range-m"/>
+  <group-range-m alias="/params/forest/tree-group-range-m"/>
   <billboard>true</billboard>
  </object>
 </material>

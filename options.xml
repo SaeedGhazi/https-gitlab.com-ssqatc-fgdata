@@ -2,6 +2,42 @@
 
 <PropertyList>
 
+ <copyright>
+  Copyright (C) 2002 Cameron Moore
+   
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+   
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+   
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+  Or try here: http://www.fsf.org/copyleft/gpl.html
+ </copyright>
+
+ <description>
+  The FlightGear flight simulator project is an open-source, multi-platform,
+  cooperative flight simulator development project. Source code for the entire
+  project is available and licensed under the GNU General Public License.
+
+  The goal of the FlightGear project is to create a sophisticated flight
+  simulator framework for use in research or academic environments, for the
+  development and pursuit of other interesting flight simulation ideas, and as
+  an end-user application. We are developing a sophisticated, open simulation
+  framework that can be expanded and improved upon by anyone interested in
+  contributing. 
+
+  There are many exciting possibilities for an open, free flight sim. We hope
+  that this project will be interesting and useful to many people in many areas.
+ </description>
+
+
  <options>
   <usage>strings/usage</usage>
 
@@ -44,26 +80,6 @@
    </option>
 
    <option>
-    <name>disable-game-mode</name>
-    <description>strings/disable-game-mode-desc</description>
-   </option>
-
-   <option>
-    <name>enable-game-mode</name>
-    <description>strings/enable-game-mode-desc</description>
-   </option>
-
-   <option>
-    <name>disable-splash-screen</name>
-    <description>strings/disable-splash-screen-desc</description>
-   </option>
-
-   <option>
-    <name>enable-splash-screen</name>
-    <description>strings/enable-splash-screen-desc</description>
-   </option>
-
-   <option>
     <name>disable-intro-music</name>
     <description>strings/disable-intro-music-desc</description>
    </option>
@@ -74,13 +90,103 @@
    </option>
 
    <option>
-    <name>disable-mouse-pointer</name>
-    <description>strings/disable-mouse-pointer-desc</description>
+    <name>control</name>
+    <arg>mode</arg>
+    <description>strings/control-desc</description>
+    <brief/>
    </option>
 
    <option>
-    <name>enable-mouse-pointer</name>
-    <description>strings/enable-mouse-pointer-desc</description>
+    <name>browser-app</name>
+    <arg>path</arg>
+    <description>strings/browser-app-desc</description>
+   </option>
+
+   <option>
+    <name>prop:name</name>
+    <arg>value</arg>
+    <description>strings/prop-desc</description>
+   </option>
+
+   <option>
+    <name>config</name>
+    <arg>path</arg>
+    <description>strings/config-desc</description>
+   </option>
+
+   <option>
+    <name>units-feet</name>
+    <description>strings/units-feet-desc</description>
+   </option>
+
+   <option>
+    <name>units-meters</name>
+    <description>strings/units-meters-desc</description>
+   </option>
+
+  </section>
+
+  <section>
+   <name>strings/features-options</name>
+
+   <option>
+    <name>disable-sound</name>
+    <description>strings/disable-sound-desc</description>
+   </option>
+
+   <option>
+    <name>enable-sound</name>
+    <description>strings/enable-sound-desc</description>
+   </option>
+
+   <option>
+    <name>disable-panel</name>
+    <description>strings/disable-panel-desc</description>
+   </option>
+
+   <option>
+    <name>enable-panel</name>
+    <description>strings/enable-panel-desc</description>
+   </option>
+
+   <option>
+    <name>disable-hud</name>
+    <description>strings/disable-hud-desc</description>
+   </option>
+
+   <option>
+    <name>enable-hud</name>
+    <description>strings/enable-hud-desc</description>
+   </option>
+
+   <option>
+    <name>disable-anti-alias-hud</name>
+    <description>strings/disable-anti-alias-hud-desc</description>
+   </option>
+
+   <option>
+    <name>enable-anti-alias-hud</name>
+    <description>strings/enable-anti-alias-hud-desc</description>
+   </option>
+
+   <option>
+    <name>disable-hud-3d</name>
+    <description>strings/disable-hud-3d-desc</description>
+   </option>
+
+   <option>
+    <name>enable-hud-3d</name>
+    <description>strings/enable-hud-3d-desc</description>
+   </option>
+
+   <option>
+    <name>hud-tris</name>
+    <description>strings/hud-tris-desc</description>
+   </option>
+
+   <option>
+    <name>hud-culled</name>
+    <description>strings/hud-culled-desc</description>
    </option>
 
    <option>
@@ -93,16 +199,6 @@
     <name>enable-random-objects</name>
     <description>strings/enable-random-objects-desc</description>
     <description>strings/random-objects-desc</description>
-   </option>
-
-   <option>
-    <name>disable-real-weather-fetch</name>
-    <description>strings/disable-real-weather-fetch-desc</description>
-   </option>
-
-   <option>
-    <name>enable-real-weather-fetch</name>
-    <description>strings/enable-real-weather-fetch-desc</description>
    </option>
 
    <option>
@@ -146,103 +242,163 @@
    </option>
 
    <option>
-    <name>control</name>
-    <arg>mode</arg>
-    <description>strings/control-desc</description>
-    <brief/>
-   </option>
-
-   <option>
-    <name>enable-auto-coordination</name>
-    <description>strings/enable-auto-coordination-desc</description>
-   </option>
-
-   <option>
-    <name>disable-auto-coordination</name>
-    <description>strings/disable-auto-coordination-desc</description>
-   </option>
-
-   <option>
-    <name>browser-app</name>
-    <arg>path</arg>
-    <description>strings/browser-app-desc</description>
-   </option>
-
-   <option>
-    <name>prop:name</name>
-    <arg>value</arg>
-    <description>strings/prop-desc</description>
-   </option>
-
-   <option>
-    <name>config</name>
-    <arg>path</arg>
-    <description>strings/config-desc</description>
-   </option>
-
-   <option>
-    <name>units-feet</name>
-    <description>strings/units-feet-desc</description>
-   </option>
-
-   <option>
-    <name>units-meters</name>
-    <description>strings/units-meters-desc</description>
+    <name>failure</name>
+    <arg>{pitot|static|system|vacuum}</arg>
+    <description>strings/failure-desc</description>
    </option>
 
   </section>
 
   <section>
-   <name>strings/features-options</name>
+   <name>strings/rendering-options</name>
 
    <option>
-    <name>disable-panel</name>
-    <description>strings/disable-panel-desc</description>
+    <name>disable-splash-screen</name>
+    <description>strings/disable-splash-screen-desc</description>
    </option>
 
    <option>
-    <name>enable-panel</name>
-    <description>strings/enable-panel-desc</description>
+    <name>enable-splash-screen</name>
+    <description>strings/enable-splash-screen-desc</description>
    </option>
 
    <option>
-    <name>disable-sound</name>
-    <description>strings/disable-sound-desc</description>
+    <name>disable-mouse-pointer</name>
+    <description>strings/disable-mouse-pointer-desc</description>
    </option>
 
    <option>
-    <name>enable-sound</name>
-    <description>strings/enable-sound-desc</description>
+    <name>enable-mouse-pointer</name>
+    <description>strings/enable-mouse-pointer-desc</description>
    </option>
 
    <option>
-    <name>disable-hud</name>
-    <description>strings/disable-hud-desc</description>
+    <name>bpp</name>
+    <arg>depth</arg>
+    <description>strings/bpp-desc</description>
    </option>
 
    <option>
-    <name>enable-hud</name>
-    <description>strings/enable-hud-desc</description>
+    <name>fog-disable</name>
+    <description>strings/fog-disable-desc</description>
    </option>
 
    <option>
-    <name>disable-anti-alias-hud</name>
-    <description>strings/disable-anti-alias-hud-desc</description>
+    <name>fog-fastest</name>
+    <description>strings/fog-fastest-desc</description>
    </option>
 
    <option>
-    <name>enable-anti-alias-hud</name>
-    <description>strings/enable-anti-alias-hud-desc</description>
+    <name>fog-nicest</name>
+    <description>strings/fog-nicest-desc</description>
    </option>
 
    <option>
-    <name>disable-hud-3d</name>
-    <description>strings/disable-hud-3d-desc</description>
+    <name>disable-enhanced-lighting</name>
+    <description>strings/disable-enhanced-lighting</description>
    </option>
 
    <option>
-    <name>enable-hud-3d</name>
-    <description>strings/enable-hud-3d-desc</description>
+    <name>enable-enhanced-lighting</name>
+    <description>strings/enable-enhanced-lighting</description>
+   </option>
+
+   <option>
+    <name>disable-distance-attenuation</name>
+    <description>strings/disable-distance-attenuation</description>
+   </option>
+
+   <option>
+    <name>enable-distance-attenuation</name>
+    <description>strings/enable-distance-attenuation</description>
+   </option>
+
+   <option>
+    <name>disable-specular-highlight</name>
+    <description>strings/disable-specular-highlight</description>
+   </option>
+
+   <option>
+    <name>enable-specular-highlight</name>
+    <description>strings/enable-specular-highlight</description>
+   </option>
+
+   <option>
+    <name>fov</name>
+    <arg>degrees</arg>
+    <description>strings/fov-desc</description>
+   </option>
+
+   <option>
+    <name>disable-fullscreen</name>
+    <description>strings/disable-fullscreen-desc</description>
+   </option>
+
+   <option>
+    <name>enable-fullscreen</name>
+    <description>strings/enable-fullscreen-desc</description>
+   </option>
+
+   <option>
+    <name>disable-game-mode</name>
+    <description>strings/disable-game-mode-desc</description>
+   </option>
+
+   <option>
+    <name>enable-game-mode</name>
+    <description>strings/enable-game-mode-desc</description>
+   </option>
+
+   <option>
+    <name>shading-flat</name>
+    <description>strings/shading-flat-desc</description>
+   </option>
+
+   <option>
+    <name>shading-smooth</name>
+    <description>strings/shading-smooth-desc</description>
+   </option>
+
+   <option>
+    <name>disable-skyblend</name>
+    <description>strings/disable-skyblend-desc</description>
+   </option>
+
+   <option>
+    <name>enable-skyblend</name>
+    <description>strings/enable-skyblend-desc</description>
+   </option>
+
+   <option>
+    <name>disable-textures</name>
+    <description>strings/disable-textures-desc</description>
+   </option>
+
+   <option>
+    <name>enable-textures</name>
+    <description>strings/enable-textures-desc</description>
+   </option>
+
+   <option>
+    <name>disable-wireframe</name>
+    <description>strings/disable-wireframe-desc</description>
+   </option>
+
+   <option>
+    <name>enable-wireframe</name>
+    <description>strings/enable-wireframe-desc</description>
+   </option>
+
+   <option>
+    <name>geometry</name>
+    <arg>WxH</arg>
+    <description>strings/geometry-desc</description>
+   </option>
+
+   <option>
+    <name>view-offset</name>
+    <arg>value</arg>
+    <description>strings/view-offset-desc</description>
    </option>
 
   </section>
@@ -262,11 +418,6 @@
     <description>strings/show-aircraft-desc</description>
     <brief/>
    </option>
-
-  </section>
-
-  <section>
-   <name>strings/fdm-options</name>
 
    <option>
     <name>fdm</name>
@@ -308,35 +459,66 @@
    </option>
 
    <option>
-    <name>wind</name>
-    <arg>DIR@SPEED</arg>
-    <description>strings/wind-desc</description>
-    <brief/>
+    <name>enable-auto-coordination</name>
+    <description>strings/enable-auto-coordination-desc</description>
    </option>
 
    <option>
-    <name>turbulence</name>
-    <arg>0.0 to 1.0</arg>
-    <description>strings/turbulence-desc</description>
-    <brief/>
+    <name>disable-auto-coordination</name>
+    <description>strings/disable-auto-coordination-desc</description>
    </option>
-
-   <option>
-    <name>ceiling</name>
-    <arg>FT_ASL[:THICKNESS_FT]</arg>
-    <description>strings/ceiling-desc</description>
-    <brief/>
-   </option>
-
-  </section>
-
-  <section>
-   <name>strings/aircraft-model-options</name>
 
    <option>
     <name>aircraft-dir</name>
     <arg>path</arg>
     <description>strings/aircraft-dir-desc</description>
+   </option>
+  </section>
+
+  <section>
+   <name>strings/time-options</name>
+
+   <option>
+    <name>timeofday</name>
+    <arg>{dawn,noon,dusk,midnight}</arg>
+    <description>strings/timeofday-desc</description>
+   </option>
+
+   <option>
+    <name>time-offset</name>
+    <arg>[+-]hh:mm:ss</arg>
+    <description>strings/time-offset-desc</description>
+   </option>
+
+   <option>
+    <name>time-match-real</name>
+    <description>strings/time-match-real-desc</description>
+   </option>
+
+   <option>
+    <name>time-match-local</name>
+    <description>strings/time-match-local-desc</description>
+   </option>
+
+   <option>
+    <name>start-date-sys</name>
+    <arg>yyyy:mm:dd:hh:mm:ss</arg>
+    <description>strings/start-date-desc</description>
+    <description>strings/system-time</description>
+   </option>
+
+   <option>
+    <name>start-date-gmt</name>
+    <arg>yyyy:mm:dd:hh:mm:ss</arg>
+    <description>strings/start-date-desc</description>
+    <description>strings/gmt</description>
+   </option>
+
+   <option>
+    <name>start-date-lat</name>
+    <arg>yyyy:mm:dd:hh:mm:ss</arg>
+    <description>strings/start-date-desc</description>
+    <description>strings/locale-aircraft-time</description>
    </option>
 
   </section>
@@ -476,27 +658,63 @@
   </section>
 
   <section>
-   <name>strings/rendering-options</name>
+   <name>strings/route-options</name>
 
    <option>
-    <name>bpp</name>
-    <arg>depth</arg>
-    <description>strings/bpp-desc</description>
+    <name>wp</name>
+    <arg>ID[@alt]</arg>
+    <description>strings/wp-desc</description>
+    <description>strings/multiple-instance</description>
    </option>
 
    <option>
-    <name>fog-disable</name>
-    <description>strings/fog-disable-desc</description>
+    <name>flight-plan</name>
+    <arg>file</arg>
+    <description>strings/flight-plan-desc</description>
+   </option>
+
+  </section>
+
+  <section>
+   <name>strings/avionics-options</name>
+
+   <option>
+    <name>nav1</name>
+    <arg>[radial:]frequency</arg>
+    <description>strings/nav1-desc</description>
    </option>
 
    <option>
-    <name>fog-fastest</name>
-    <description>strings/fog-fastest-desc</description>
+    <name>nav2</name>
+    <arg>[radial:]frequency</arg>
+    <description>strings/nav2-desc</description>
    </option>
 
    <option>
-    <name>fog-nicest</name>
-    <description>strings/fog-nicest-desc</description>
+    <name>adf</name>
+    <arg>[rotation:]frequency</arg>
+    <description>strings/adf-desc</description>
+   </option>
+
+   <option>
+    <name>dme</name>
+    <arg>{nav1|nav2|frequency}</arg>
+    <description>strings/dme-desc</description>
+   </option>
+
+  </section>
+
+  <section>
+   <name>strings/environment-options</name>
+
+   <option>
+    <name>disable-real-weather-fetch</name>
+    <description>strings/disable-real-weather-fetch-desc</description>
+   </option>
+
+   <option>
+    <name>enable-real-weather-fetch</name>
+    <description>strings/enable-real-weather-fetch-desc</description>
    </option>
 
    <option>
@@ -507,36 +725,6 @@
    <option>
     <name>enable-horizon-effect</name>
     <description>strings/enable-horizon-effect</description>
-   </option>
-
-   <option>
-    <name>disable-enhanced-lighting</name>
-    <description>strings/disable-enhanced-lighting</description>
-   </option>
-
-   <option>
-    <name>enable-enhanced-lighting</name>
-    <description>strings/enable-enhanced-lighting</description>
-   </option>
-
-   <option>
-    <name>disable-distance-attenuation</name>
-    <description>strings/disable-distance-attenuation</description>
-   </option>
-
-   <option>
-    <name>enable-distance-attenuation</name>
-    <description>strings/enable-distance-attenuation</description>
-   </option>
-
-   <option>
-    <name>disable-specular-highlight</name>
-    <description>strings/disable-specular-highlight</description>
-   </option>
-
-   <option>
-    <name>enable-specular-highlight</name>
-    <description>strings/enable-specular-highlight</description>
    </option>
 
    <option>
@@ -560,74 +748,6 @@
    </option>
 
    <option>
-    <name>fov</name>
-    <arg>degrees</arg>
-    <description>strings/fov-desc</description>
-   </option>
-
-   <option>
-    <name>disable-fullscreen</name>
-    <description>strings/disable-fullscreen-desc</description>
-   </option>
-
-   <option>
-    <name>enable-fullscreen</name>
-    <description>strings/enable-fullscreen-desc</description>
-   </option>
-
-   <option>
-    <name>shading-flat</name>
-    <description>strings/shading-flat-desc</description>
-   </option>
-
-   <option>
-    <name>shading-smooth</name>
-    <description>strings/shading-smooth-desc</description>
-   </option>
-
-   <option>
-    <name>disable-skyblend</name>
-    <description>strings/disable-skyblend-desc</description>
-   </option>
-
-   <option>
-    <name>enable-skyblend</name>
-    <description>strings/enable-skyblend-desc</description>
-   </option>
-
-   <option>
-    <name>disable-textures</name>
-    <description>strings/disable-textures-desc</description>
-   </option>
-
-   <option>
-    <name>enable-textures</name>
-    <description>strings/enable-textures-desc</description>
-   </option>
-
-   <option>
-    <name>disable-wireframe</name>
-    <description>strings/disable-wireframe-desc</description>
-   </option>
-
-   <option>
-    <name>enable-wireframe</name>
-    <description>strings/enable-wireframe-desc</description>
-   </option>
-
-   <option>
-    <name>geometry</name>
-    <arg>WxH</arg>
-    <description>strings/geometry-desc</description>
-   </option>
-
-   <option>
-    <name>view-offset</name>
-    <arg>value</arg>
-    <description>strings/view-offset-desc</description>
-   </option>
-
-   <option>
     <name>visibility</name>
     <arg>meters</arg>
     <description>strings/visibility-desc</description>
@@ -639,102 +759,31 @@
     <description>strings/visibility-miles-desc</description>
    </option>
 
-  </section>
-
-  <section>
-   <name>strings/hud-options</name>
-
    <option>
-    <name>hud-tris</name>
-    <description>strings/hud-tris-desc</description>
+    <name>wind</name>
+    <arg>DIR@SPEED</arg>
+    <description>strings/wind-desc</description>
+    <brief/>
    </option>
 
    <option>
-    <name>hud-culled</name>
-    <description>strings/hud-culled-desc</description>
-   </option>
-
-  </section>
-
-  <section>
-   <name>strings/time-options</name>
-
-   <option>
-    <name>timeofday</name>
-    <arg>{dawn,noon,dusk,midnight}</arg>
-    <description>strings/timeofday-desc</description>
+    <name>turbulence</name>
+    <arg>0.0 to 1.0</arg>
+    <description>strings/turbulence-desc</description>
+    <brief/>
    </option>
 
    <option>
-    <name>time-offset</name>
-    <arg>[+-]hh:mm:ss</arg>
-    <description>strings/time-offset-desc</description>
-   </option>
-
-   <option>
-    <name>time-match-real</name>
-    <description>strings/time-match-real-desc</description>
-   </option>
-
-   <option>
-    <name>time-match-local</name>
-    <description>strings/time-match-local-desc</description>
-   </option>
-
-   <option>
-    <name>start-date-sys</name>
-    <arg>yyyy:mm:dd:hh:mm:ss</arg>
-    <description>strings/start-date-desc</description>
-    <description>strings/system-time</description>
-   </option>
-
-   <option>
-    <name>start-date-gmt</name>
-    <arg>yyyy:mm:dd:hh:mm:ss</arg>
-    <description>strings/start-date-desc</description>
-    <description>strings/gmt</description>
-   </option>
-
-   <option>
-    <name>start-date-lat</name>
-    <arg>yyyy:mm:dd:hh:mm:ss</arg>
-    <description>strings/start-date-desc</description>
-    <description>strings/locale-aircraft-time</description>
+    <name>ceiling</name>
+    <arg>FT_ASL[:THICKNESS_FT]</arg>
+    <description>strings/ceiling-desc</description>
+    <brief/>
    </option>
 
   </section>
 
   <section>
    <name>strings/network-options</name>
-
-   <option>
-    <name>httpd</name>
-    <arg>port</arg>
-    <description>strings/httpd-desc</description>
-   </option>
-
-   <option>
-    <name>proxy</name>
-    <arg>[user:pwd@]host:port</arg>
-    <description>strings/proxy-desc</description>
-   </option>
-
-   <option>
-    <name>telnet</name>
-    <arg>port</arg>
-    <description>strings/telnet-desc</description>
-   </option>
-
-   <option>
-    <name>jpg-httpd</name>
-    <arg>port</arg>
-    <description>strings/jpg-httpd-desc</description>
-   </option>
-
-  </section>
-
-  <section>
-   <name>strings/multiplayer-options</name>
 
    <option>
     <name>callsign</name>
@@ -748,22 +797,28 @@
     <description>strings/multiple-instance</description>
    </option>
 
-  </section>
-
-  <section>
-   <name>strings/route-options</name>
-
    <option>
-    <name>wp</name>
-    <arg>ID[@alt]</arg>
-    <description>strings/wp-desc</description>
-    <description>strings/multiple-instance</description>
+    <name>proxy</name>
+    <arg>[user:pwd@]host:port</arg>
+    <description>strings/proxy-desc</description>
    </option>
 
    <option>
-    <name>flight-plan</name>
-    <arg>file</arg>
-    <description>strings/flight-plan-desc</description>
+    <name>httpd</name>
+    <arg>port</arg>
+    <description>strings/httpd-desc</description>
+   </option>
+
+   <option>
+    <name>telnet</name>
+    <arg>port</arg>
+    <description>strings/telnet-desc</description>
+   </option>
+
+   <option>
+    <name>jpg-httpd</name>
+    <arg>port</arg>
+    <description>strings/jpg-httpd-desc</description>
    </option>
 
   </section>
@@ -854,45 +909,6 @@
     <description>strings/atc610x-desc</description>
    </option>
 
-  </section>
-
-  <section>
-   <name>strings/avionics-options</name>
-
-   <option>
-    <name>nav1</name>
-    <arg>[radial:]frequency</arg>
-    <description>strings/nav1-desc</description>
-   </option>
-
-   <option>
-    <name>nav2</name>
-    <arg>[radial:]frequency</arg>
-    <description>strings/nav2-desc</description>
-   </option>
-
-   <option>
-    <name>adf</name>
-    <arg>[rotation:]frequency</arg>
-    <description>strings/adf-desc</description>
-   </option>
-
-   <option>
-    <name>dme</name>
-    <arg>{nav1|nav2|frequency}</arg>
-    <description>strings/dme-desc</description>
-   </option>
-
-  </section>
-
-  <section>
-   <name>strings/situation-options</name>
-
-   <option>
-    <name>failure</name>
-    <arg>{pitot|static|system|vacuum}</arg>
-    <description>strings/failure-desc</description>
-   </option>
   </section>
 
   <section>

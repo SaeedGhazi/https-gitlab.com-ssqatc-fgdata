@@ -109,6 +109,7 @@
  <units-meters-desc>Use meters for distances</units-meters-desc>
 
  <!-- Features options -->
+ <environment-options>Environment Options</environment-options>
  <features-options>Features</features-options>
  <disable-hud-desc>Disable Heads Up Display (HUD)</disable-hud-desc>
  <enable-hud-desc>Enable Heads Up Display (HUD)</enable-hud-desc>
@@ -253,8 +254,7 @@
  <nav1-desc>Set the NAV1 radio frequency, optionally preceded by a radial.</nav1-desc>
  <nav2-desc>Set the NAV2 radio frequency, optionally preceded by a radial.</nav2-desc>
  <adf-desc>Set the ADF radio frequency, optionally preceded by a card rotation.</adf-desc>
- <dme-desc>Slave the ADF to one of the NAV radios, or set its internal
-frequency.</dme-desc>
+ <dme-desc>Slave the ADF to one of the NAV radios, or set its internal frequency.</dme-desc>
 
  <situation-options>Situation Options</situation-options>
  <failure-desc>Fail the pitot, static, vacuum, or electrical system (repeat the option for multiple system failures).</failure-desc>

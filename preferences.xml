@@ -153,29 +153,6 @@ Started September 2000 by David Megginson, david@megginson.com
   </view>
 
   <view>
-    <name>Tower View</name>
-    <type>lookat</type>
-    <config>
-      <eye-lat-deg-path>/sim/tower/latitude-deg</eye-lat-deg-path>
-      <eye-lon-deg-path>/sim/tower/longitude-deg</eye-lon-deg-path>
-      <eye-alt-ft-path>/sim/tower/altitude-ft</eye-alt-ft-path>
-      <eye-roll-deg-path>/sim/tower/roll-deg</eye-roll-deg-path>
-      <eye-pitch-deg-path>/sim/tower/pitch-deg</eye-pitch-deg-path>
-      <eye-heading-deg-path>/sim/tower/heading-deg</eye-heading-deg-path>
-
-      <at-model type="bool">true</at-model>
-      <at-model-idx type="int">0</at-model-idx>
-
-      <ground-level-nearplane-m type="double">10.0f</ground-level-nearplane-m>
-
-      <x-offset-m type="double">70</x-offset-m>
-      <y-offset-m type="double">1200</y-offset-m>
-      <z-offset-m type="double">-600</z-offset-m>
-    </config>
-  </view>
-
-  <!-- Commenting out fixed view from tower
-  <view>
     <name>Tower View Look From</name>
     <type>lookfrom</type>
     <config>
@@ -192,7 +169,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <y-offset-m type="double">0</y-offset-m>
       <z-offset-m type="double">0</z-offset-m>
     </config>
-  </view>   -->
+  </view>
 
   <view>
     <name>Chase View wo yaw</name>

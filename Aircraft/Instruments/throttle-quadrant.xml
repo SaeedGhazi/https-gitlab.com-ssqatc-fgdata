@@ -57,7 +57,7 @@ properties' values.
   <layer>
    <name>throttle 0 handle </name>
    <texture>
-    <path>Aircraft/c172/Instruments/Textures/handles.rgb</path>
+    <path>Aircraft/Instruments/Textures/handles.rgb</path>
     <x1>0.0</x1>
     <x2>0.37890625</x2>
     <y1>0.875</y1>
@@ -83,7 +83,7 @@ properties' values.
   <layer>
    <name>throttle 1 handle</name>
    <texture>
-    <path>Aircraft/c172/Instruments/Textures/handles.rgb</path>
+    <path>Aircraft/Instruments/Textures/handles.rgb</path>
     <x1>0.0</x1>
     <x2>0.37890625</x2>
     <y1>0.875</y1>
@@ -112,7 +112,7 @@ properties' values.
   <layer>
    <name>prop advance0 handle</name>
    <texture>
-    <path>Aircraft/c172/Instruments/Textures/handles.rgb</path>
+    <path>Aircraft/Instruments/Textures/handles.rgb</path>
     <x1>0.0</x1>
     <x2>0.37890625</x2>
     <y1>0.6015625</y1>
@@ -139,7 +139,7 @@ properties' values.
   <layer>
    <name>prop advance1 handle</name>
    <texture>
-    <path>Aircraft/c172/Instruments/Textures/handles.rgb</path>
+    <path>Aircraft/Instruments/Textures/handles.rgb</path>
     <x1>0.0</x1>
     <x2>0.37890625</x2>
     <y1>0.6015625</y1>
@@ -168,7 +168,7 @@ properties' values.
   <layer>
    <name>mixture 0 handle</name>
    <texture>
-    <path>Aircraft/c172/Instruments/Textures/handles.rgb</path>
+    <path>Aircraft/Instruments/Textures/handles.rgb</path>
     <x1>0.0</x1>
     <x2>0.37890625</x2>
     <y1>0.73828125</y1>
@@ -194,7 +194,7 @@ properties' values.
   <layer>
    <name>mixture 1 handle</name>
    <texture>
-    <path>Aircraft/c172/Instruments/Textures/handles.rgb</path>
+    <path>Aircraft/Instruments/Textures/handles.rgb</path>
     <x1>0.0</x1>
     <x2>0.37890625</x2>
     <y1>0.73828125</y1>

@@ -26,7 +26,7 @@
 -->
   <hud>
    <path>Huds/Custom/default.xml</path>
-   <visibility>true</visibility>
+   <visibility>false</visibility>
   </hud>
   
   <model>

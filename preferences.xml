@@ -131,7 +131,6 @@ Started September 2000 by David Megginson, david@megginson.com
 
       <at-model type="bool">true</at-model>
       <at-model-idx type="int">0</at-model-idx>
-      <at-model-damping type="double">-2</at-model-damping>
       <target-z-offset-m type="double">0</target-z-offset-m>
 
       <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>

@@ -263,8 +263,8 @@ Started September 2000 by David Megginson, david@megginson.com
      <turbulence-norm>0.0</turbulence-norm>
      <visibility-m>16000</visibility-m>
      <pressure-sea-level-inhg>29.92</pressure-sea-level-inhg>
-     <temperature-sea-level-degc>15.0</temperature-sea-level-degc>
-     <dewpoint-sea-level-degc>5.0</dewpoint-sea-level-degc>
+     <temperature-degc>15.0</temperature-degc>
+     <dewpoint-degc>5.0</dewpoint-degc>
     </entry>
 
     <entry>
@@ -285,8 +285,8 @@ Started September 2000 by David Megginson, david@megginson.com
      <turbulence-norm>0.05</turbulence-norm>
      <visibility-m>16000</visibility-m>
      <pressure-sea-level-inhg>29.92</pressure-sea-level-inhg>
-     <temperature-sea-level-degc>15.0</temperature-sea-level-degc>
-     <dewpoint-sea-level-degc>5.0</dewpoint-sea-level-degc>
+     <!-- <temperature-degc>15.0</temperature-degc> -->
+     <!-- <dewpoint-degc>5.0</dewpoint-degc> -->
     </entry>
 
     <entry>

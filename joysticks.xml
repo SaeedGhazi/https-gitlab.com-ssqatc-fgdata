@@ -31,6 +31,7 @@ axes for the hat switch, and several more buttons.
    <binding>
     <command>property-scale</command>
     <property>/controls/aileron</property>
+    <squared>true</squared>
    </binding>
   </axis>
 
@@ -40,6 +41,7 @@ axes for the hat switch, and several more buttons.
     <command>property-scale</command>
     <property>/controls/elevator</property>
     <factor type="double">-1.0</factor>
+    <squared>true</squared>
    </binding>
   </axis>
 

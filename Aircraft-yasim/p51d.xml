@@ -44,7 +44,7 @@ The reference datum for measurements is the nose.
 <cruise speed="380" alt="25000">
   <control-setting axis="/controls/engines/engine[0]/throttle" value="1.00"/>
   <control-setting axis="/controls/engines/engine[0]/mixture" value="1.00"/>
-  <control-setting axis="/controls/engines/engine[0]/propeller-pitch" value="0.8"/>
+  <control-setting axis="/controls/engines/engine[0]/propeller-pitch" value="1.0"/>
   <control-setting axis="/controls/engines/engine[0]/boost" value="1.0"/>
   <control-setting axis="/controls/flight/flaps" value="0.0"/>
   <control-setting axis="/controls/gear/gear-down" value="0"/>

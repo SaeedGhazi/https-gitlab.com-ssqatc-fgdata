@@ -224,6 +224,13 @@
     <brief/>
    </option>
 
+   <option>
+    <name>show-aircraft</name>
+    <description>Print a list of the currently available</description>
+    <description>aircraft types</description>
+    <brief/>
+   </option>
+
   </section>
 
   <section>

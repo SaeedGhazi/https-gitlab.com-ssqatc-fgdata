@@ -42,6 +42,15 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+<key n="20">
+  <name>Ctrl-T</name>
+  <desc>Toggle autopilot terrain lock.</desc>
+  <binding>
+   <command>property-toggle</command>
+   <property>/autopilot/locks/terrain</property>
+  </binding>
+ </key>
+
  <key n="13">
   <name>Enter</name>
   <desc>Move rudder right or increase autopilot heading.</desc>
@@ -77,6 +86,14 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <command>property-adjust</command>
    <property>/position/altitude</property>
    <step type="double">1000.0</step>
+  </binding>
+ </key>
+
+ <key n="27">
+  <name>ESC</name>
+  <desc>Prompt and quit FlightGear.</desc>
+  <binding>
+    <command>exit</command>
   </binding>
  </key>
 
@@ -315,12 +332,52 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+ <key n="77">
+  <name>M</name>
+  <desc>Decrease warp.</desc>
+  <binding>
+   <command>property-adjust</command>
+   <property>/sim/time/warp</property>
+   <step>-60</step>
+  </binding>
+ </key>
+
  <key n="80">
   <name>P</name>
   <desc>Toggle panel.</desc>
   <binding>
    <command>property-toggle</command>
    <property>/sim/panel/visibility</property>
+  </binding>
+ </key>
+
+ <key n="84">
+  <name>T</name>
+  <desc>Decrease warp delta.</desc>
+  <binding>
+   <command>property-adjust</command>
+   <property>/sim/time/warp-delta</property>
+   <step>-30</step>
+  </binding>
+ </key>
+
+ <key n="88">
+  <name>X</name>
+  <desc>Increase field of view.</desc>
+  <binding>
+   <command>property-multiply</command>
+   <property>/sim/field-of-view</property>
+   <factor>1.05</factor>
+  </binding>
+ </key>
+
+ <key n="90">
+  <name>Z</name>
+  <desc>Decrease Visibility</desc>
+  <binding>
+   <command>property-multiply</command>
+   <property>/environment/visibility</property>
+   <factor>0.9090909090</factor>
   </binding>
  </key>
 
@@ -392,11 +449,60 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </mod-up>
  </key>
 
+ <key n="109">
+  <name>m</name>
+  <desc>Increase warp.</desc>
+  <binding>
+   <command>property-adjust</command>
+   <property>/sim/time/warp</property>
+   <step>60</step>
+  </binding>
+ </key>
+
+ <key n="112">
+  <name>p</name>
+  <desc>Toggle the pause state of the sim.</desc>
+  <binding>
+   <command>property-toggle</command>
+   <property>/sim/freeze</property>
+  </binding>
+ </key>
+
+ <key n="116">
+  <name>t</name>
+  <desc>Increase warp delta.</desc>
+  <binding>
+   <command>property-adjust</command>
+   <property>/sim/time/warp-delta</property>
+   <step>30</step>
+  </binding>
+ </key>
+
  <key n="118">
   <name>v</name>
   <desc>Cycle view</desc>
   <binding>
    <command>view-cycle</command>
+  </binding>
+ </key>
+
+ <key n="120">
+  <name>x</name>
+  <desc>Decrease field of view.</desc>
+  <binding>
+   <command>property-multiply</command>
+   <property>/sim/field-of-view</property>
+   <factor>0.952380952380</factor>
+  </binding>
+ </key>
+
+ <key n="122">
+  <name>z</name>
+  <desc>Increase Visibility</desc>
+  <binding>
+   <command>property-multiply</command>
+   <property>/environment/visibility</property>
+   <factor>1.1</factor>
   </binding>
  </key>
 
@@ -412,6 +518,10 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="258">
   <name>F2</name>
+  <binding>
+   <desc>Force tile cache reload.</desc>
+   <command>tile-cache-reload</command>
+  </binding>
   <mod-shift>
    <binding>
     <desc>Save flight.</desc>
@@ -436,6 +546,10 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="260">
   <name>F4</name>
+  <binding>
+   <desc>Force lighting update.</desc>
+   <command>lighting-update</command>
+  </binding>
   <mod-shift>
    <binding>
     <desc>Reload global preferences.</desc>
@@ -490,6 +604,15 @@ calculated by adding 256 to the GLUT key value in glut.h.
     <step type="int">5</step>
    </binding>
   </mod-shift>
+ </key>
+
+ <key n="265">
+  <name>F9</name>
+  <binding>
+   <desc>Toggle textures.</desc>
+   <command>property-toggle</command>
+   <property>/sim/rendering/textures</property>
+  </binding>
  </key>
 
  <key n="269">

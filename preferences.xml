@@ -178,7 +178,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
   <comm n="0">
    <frequencies>
-    <selected-mhz>117.4</selected-mhz>
+    <selected-mhz>118.85</selected-mhz>
     <standby-mhz>115.8</standby-mhz>
    </frequencies>
   </comm>

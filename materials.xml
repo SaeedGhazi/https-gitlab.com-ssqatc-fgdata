@@ -2440,9 +2440,9 @@ Shared parameters for various materials.
  </emissive>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
-  <coverage alias="/params/forest/single-tree-coverage"/>
+  <coverage-m2 alias="/params/forest/single-tree-coverage"/>
   <range-m alias="/params/forest/tree-range-m"/>
-  <billboard>true</billboard>
+  <heading-type>billboard</heading-type>
  </object>
 </material>
 
@@ -2478,9 +2478,9 @@ Shared parameters for various materials.
  </emissive>
  <object>
   <path>Models/Trees/deciduous-tree.ac</path>
-  <coverage alias="/params/forest/single-tree-coverage"/>
+  <coverage-m2 alias="/params/forest/single-tree-coverage"/>
   <range-m alias="/params/forest/tree-range-m"/>
-  <billboard>true</billboard>
+  <heading-type>billboard</heading-type>
  </object>
 </material>
 
@@ -2516,15 +2516,15 @@ Shared parameters for various materials.
  </emissive>
  <object>
   <path>Models/Trees/deciduous-tree.ac</path>
-  <coverage alias="/params/forest/double-tree-coverage"/>
+  <coverage-m2 alias="/params/forest/double-tree-coverage"/>
   <range-m alias="/params/forest/tree-range-m"/>
-  <billboard>true</billboard>
+  <heading-type>billboard</heading-type>
  </object>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
-  <coverage alias="/params/forest/double-tree-coverage"/>
+  <coverage-m2 alias="/params/forest/double-tree-coverage"/>
   <range-m alias="/params/forest/tree-range-m"/>
-  <billboard>true</billboard>
+  <heading-type>billboard</heading-type>
  </object>
 </material>
 
@@ -2561,9 +2561,9 @@ Shared parameters for various materials.
  </emissive>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
-  <coverage alias="/params/forest/single-tree-coverage"/>
+  <coverage-m2 alias="/params/forest/single-tree-coverage"/>
   <range-m alias="/params/forest/tree-range-m"/>
-  <billboard>true</billboard>
+  <heading-type>billboard</heading-type>
  </object>
 </material>
 
@@ -2599,9 +2599,9 @@ Shared parameters for various materials.
  </emissive>
  <object>
   <path>Models/Trees/deciduous-tree.ac</path>
-  <coverage alias="/params/forest/single-tree-coverage"/>
+  <coverage-m2 alias="/params/forest/single-tree-coverage"/>
   <range-m alias="/params/forest/tree-range-m"/>
-  <billboard>true</billboard>
+  <heading-type>billboard</heading-type>
  </object>
 </material>
 
@@ -2670,39 +2670,39 @@ Shared parameters for various materials.
  </emissive>
  <object>
   <path>Models/Buildings/big-apartment.ac</path>
-  <coverage>10000000</coverage>
+  <coverage-m2>10000000</coverage-m2>
   <range-m>10000</range-m>
-  <billboard>false</billboard>
+  <heading-type>fixed</heading-type>
  </object>
  <object>
   <path>Models/Buildings/small-glass-office-building.ac</path>
-  <coverage>1000000</coverage>
+  <coverage-m2>500000</coverage-m2>
   <range-m>5000</range-m>
-  <billboard>false</billboard>
+  <heading-type>fixed</heading-type>
  </object>
  <object>
   <path>Models/Buildings/big-church.ac</path>
-  <coverage>10000000</coverage>
+  <coverage-m2>10000000</coverage-m2>
   <range-m>5000</range-m>
-  <billboard>false</billboard>
+  <heading-type>fixed</heading-type>
  </object>
  <object>
   <path>Models/Buildings/water-tower.ac</path>
-  <coverage>50000000</coverage>
+  <coverage-m2>50000000</coverage-m2>
   <range-m>5000</range-m>
-  <billboard>false</billboard>
+  <heading-type>fixed</heading-type>
  </object>
  <object>
   <path>Models/Trees/deciduous-tree.ac</path>
-  <coverage>500000</coverage>
+  <coverage-m2>500000</coverage-m2>
   <range-m alias="/params/forest/tree-range-m"/>
-  <billboard>true</billboard>
+  <heading-type>billboard</heading-type>
  </object>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
-  <coverage>1000000</coverage>
+  <coverage-m2>1000000</coverage-m2>
   <range-m alias="/params/forest/tree-range-m"/>
-  <billboard>true</billboard>
+  <heading-type>billboard</heading-type>
  </object>
 </material>
 
@@ -2738,33 +2738,33 @@ Shared parameters for various materials.
   </emissive>
  <object>
   <path>Models/Buildings/small-glass-office-building.ac</path>
-  <coverage>1000000</coverage>
+  <coverage-m2>500000</coverage-m2>
   <range-m>5000</range-m>
-  <billboard>false</billboard>
+  <heading-type>fixed</heading-type>
  </object>
  <object>
   <path>Models/Buildings/big-church.ac</path>
-  <coverage>10000000</coverage>
+  <coverage-m2>10000000</coverage-m2>
   <range-m>5000</range-m>
-  <billboard>false</billboard>
+  <heading-type>fixed</heading-type>
  </object>
  <object>
   <path>Models/Buildings/water-tower.ac</path>
-  <coverage>50000000</coverage>
+  <coverage-m2>50000000</coverage-m2>
   <range-m>5000</range-m>
-  <billboard>false</billboard>
+  <heading-type>fixed</heading-type>
  </object>
  <object>
   <path>Models/Trees/deciduous-tree.ac</path>
-  <coverage>250000</coverage>
+  <coverage-m2>250000</coverage-m2>
   <range-m alias="/params/forest/tree-range-m"/>
-  <billboard>true</billboard>
+  <heading-type>billboard</heading-type>
  </object>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
-  <coverage>500000</coverage>
+  <coverage-m2>500000</coverage-m2>
   <range-m alias="/params/forest/tree-range-m"/>
-  <billboard>true</billboard>
+  <heading-type>billboard</heading-type>
  </object>
 </material>
 
@@ -2800,27 +2800,27 @@ Shared parameters for various materials.
  </emissive>
  <object>
   <path>Models/Buildings/big-church.ac</path>
-  <coverage>250000</coverage>
+  <coverage-m2>250000</coverage-m2>
   <range-m>10000</range-m>
-  <billboard>false</billboard>
+  <heading-type>fixed</heading-type>
  </object>
  <object>
   <path>Models/Buildings/water-tower.ac</path>
-  <coverage>1000000</coverage>
+  <coverage-m2>1000000</coverage-m2>
   <range-m>10000</range-m>
-  <billboard>false</billboard>
+  <heading-type>fixed</heading-type>
  </object>
  <object>
   <path>Models/Trees/deciduous-tree.ac</path>
-  <coverage>500000</coverage>
+  <coverage-m2>500000</coverage-m2>
   <range-m alias="/params/forest/tree-range-m"/>
-  <billboard>true</billboard>
+  <heading-type>billboard</heading-type>
  </object>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
-  <coverage>1000000</coverage>
+  <coverage-m2>1000000</coverage-m2>
   <range-m alias="/params/forest/tree-range-m"/>
-  <billboard>true</billboard>
+  <heading-type>billboard</heading-type>
  </object>
 </material>
 
@@ -3150,27 +3150,27 @@ Shared parameters for various materials.
  </emissive>
  <object>
   <path>Models/Buildings/red-barn.ac</path>
-  <coverage>5000000</coverage>
+  <coverage-m2>5000000</coverage-m2>
   <range-m>5000</range-m>
-  <billboard>false</billboard>
+  <heading-type>fixed</heading-type>
  </object>
  <object>
   <path>Models/Fauna/cow.ac</path>
-  <coverage>10000</coverage>
+  <coverage-m2>10000</coverage-m2>
   <range-m>1000</range-m>
-  <billboard>false</billboard>
+  <heading-type>fixed</heading-type>
  </object>
  <object>
   <path>Models/Trees/deciduous-tree.ac</path>
-  <coverage>500000</coverage>
+  <coverage-m2>500000</coverage-m2>
   <range-m alias="/params/forest/tree-range-m"/>
-  <billboard>true</billboard>
+  <heading-type>billboard</heading-type>
  </object>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
-  <coverage>1000000</coverage>
+  <coverage-m2>1000000</coverage-m2>
   <range-m alias="/params/forest/tree-range-m"/>
-  <billboard>true</billboard>
+  <heading-type>billboard</heading-type>
  </object>
 </material>
 
@@ -3206,27 +3206,27 @@ Shared parameters for various materials.
  </emissive>
  <object>
   <path>Models/Buildings/red-barn.ac</path>
-  <coverage>5000000</coverage>
+  <coverage-m2>5000000</coverage-m2>
   <range-m>5000</range-m>
-  <billboard>false</billboard>
+  <heading-type>fixed</heading-type>
  </object>
  <object>
   <path>Models/Fauna/cow.ac</path>
-  <coverage>10000</coverage>
+  <coverage-m2>10000</coverage-m2>
   <range-m>1000</range-m>
-  <billboard>false</billboard>
+  <heading-type>fixed</heading-type>
  </object>
  <object>
   <path>Models/Trees/deciduous-tree.ac</path>
-  <coverage>500000</coverage>
+  <coverage-m2>500000</coverage-m2>
   <range-m alias="/params/forest/tree-range-m"/>
-  <billboard>true</billboard>
+  <heading-type>billboard</heading-type>
  </object>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
-  <coverage>1000000</coverage>
+  <coverage-m2>1000000</coverage-m2>
   <range-m alias="/params/forest/tree-range-m"/>
-  <billboard>true</billboard>
+  <heading-type>billboard</heading-type>
  </object>
 </material>
 
@@ -3262,27 +3262,27 @@ Shared parameters for various materials.
  </emissive>
  <object>
   <path>Models/Buildings/red-barn.ac</path>
-  <coverage>5000000</coverage>
+  <coverage-m2>5000000</coverage-m2>
   <range-m>5000</range-m>
-  <billboard>false</billboard>
+  <heading-type>fixed</heading-type>
  </object>
  <object>
   <path>Models/Fauna/cow.ac</path>
-  <coverage>10000</coverage>
+  <coverage-m2>10000</coverage-m2>
   <range-m>1000</range-m>
-  <billboard>false</billboard>
+  <heading-type>fixed</heading-type>
  </object>
  <object>
   <path>Models/Trees/deciduous-tree.ac</path>
-  <coverage>500000</coverage>
+  <coverage-m2>500000</coverage-m2>
   <range-m alias="/params/forest/tree-range-m"/>
-  <billboard>true</billboard>
+  <heading-type>billboard</heading-type>
  </object>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
-  <coverage>1000000</coverage>
+  <coverage-m2>1000000</coverage-m2>
   <range-m alias="/params/forest/tree-range-m"/>
-  <billboard>true</billboard>
+  <heading-type>billboard</heading-type>
  </object>
 </material>
 
@@ -3318,15 +3318,15 @@ Shared parameters for various materials.
  </emissive>
  <object>
   <path>Models/Trees/deciduous-tree.ac</path>
-  <coverage>500000</coverage>
+  <coverage-m2>500000</coverage-m2>
   <range-m alias="/params/forest/tree-range-m"/>
-  <billboard>true</billboard>
+  <heading-type>billboard</heading-type>
  </object>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
-  <coverage>1000000</coverage>
+  <coverage-m2>1000000</coverage-m2>
   <range-m alias="/params/forest/tree-range-m"/>
-  <billboard>true</billboard>
+  <heading-type>billboard</heading-type>
  </object>
 </material>
 
@@ -3362,15 +3362,15 @@ Shared parameters for various materials.
  </emissive>
  <object>
   <path>Models/Trees/deciduous-tree.ac</path>
-  <coverage>200000</coverage>
+  <coverage-m2>200000</coverage-m2>
   <range-m alias="/params/forest/tree-range-m"/>
-  <billboard>true</billboard>
+  <heading-type>billboard</heading-type>
  </object>
  <object>
   <path>Models/Trees/coniferous-tree.ac</path>
-  <coverage>200000</coverage>
+  <coverage-m2>200000</coverage-m2>
   <range-m alias="/params/forest/tree-range-m"/>
-  <billboard>true</billboard>
+  <heading-type>billboard</heading-type>
  </object>
 </material>
 

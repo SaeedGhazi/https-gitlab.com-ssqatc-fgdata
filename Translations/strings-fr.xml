@@ -11,7 +11,7 @@
   <save-flight>Enregistrer le vol</save-flight>
   <load-flight>Charger un vol</load-flight>
   <reset>Réinitialiser</reset>
-  <hi-res-snap-shot>Capture Haute Resolution</hi-res-snap-shot>
+  <hi-res-snap-shot>Capture Haute Résolution</hi-res-snap-shot>
   <snap-shot>Capture</snap-shot>
   <print>Imprimer</print>
   <exit>Quitter</exit>
@@ -19,7 +19,7 @@
   <!-- View menu -->
   <view>Vue</view>
   <toggle-panel>Basculer le tableau de bord</toggle-panel>
-  <pilot-offset>Excentrage par rapport au pilote</pilot-offset>
+  <pilot-offset>Excentrage du pilote</pilot-offset>
   <hud-alpha>Alpha du HUD</hud-alpha>
   <properties>Propriétés</properties>
 

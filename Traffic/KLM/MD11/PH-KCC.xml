@@ -1,8 +1,14 @@
 <?xml version="1.0"?>
 <trafficlist>
     <aircraft>
-        <model>Aircraft/MD11/Models/MD11.xml</model>
+        <model>Aircraft/MD11/Models/KLMmd11-ai.xml</model>
         <livery>KLM</livery>
+        <airline>KLM</airline>
+        <actype>MD11</actype>
+        <offset>19</offset>
+        <radius>39</radius>
+         <flighttype>gate</flighttype>
+        <performance-class>jet_transport</performance-class>
         <registration>PH-KCC</registration>
         <heavy>true</heavy>
 

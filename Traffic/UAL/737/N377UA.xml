@@ -2,7 +2,13 @@
 <trafficlist>
     <aircraft>
         <model>Aircraft/737/Models/boeing733.xml</model>
-        <livery>UAL</livery>
+        <livery>UAL</livery> 
+        <airline>UAL</airline>
+        <actype>737-300</actype>
+        <offset>0</offset>
+        <radius>23</radius>
+        <flighttype>gate</flighttype>
+        <performance-class>jet_transport</performance-class>
         <registration>N390UA</registration>
         <heavy>false</heavy>
 

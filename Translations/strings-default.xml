@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 
-<!-- FlightGear menu and options tranlations for English -->
+<!-- FlightGear menu and options translations for English -->
 
 <PropertyList>
 
  <!-- Fall back -->
- <null>No tranlation available for this text</null>
+ <null>No translation available for this text</null>
 
 
  <!--         -->
@@ -14,7 +14,7 @@
 
  <system-time>system time</system-time>
  <gmt>Greenwich Mean Time</gmt>
- <locale-aricraft-time>Local Aircraft Time</locale-aricraft-time>
+ <locale-aircraft-time>Local Aircraft Time</locale-aircraft-time>
  <units-feet>(in feet unless --units-meters specified)</units-feet>
  <multiple-instance>multiple instances can be used</multiple-instance>
 
@@ -143,7 +143,7 @@
  <vor-desc>Specify starting position relative to a VOR</vor-desc>
  <ndb-desc>Specify starting position relative to an NDB</ndb-desc>
  <fix-desc>Specify starting position relative to a fix</fix-desc>
- <runway-no-desc>Specify starting runway (must also specify an aiport)</runway-no-desc>
+ <runway-no-desc>Specify starting runway (must also specify an airport)</runway-no-desc>
  <airport-id-desc>(Obsolete; use --airport instead.)</airport-id-desc>
  <offset-distance-desc>Specify distance to reference point (statute miles)</offset-distance-desc>
  <offset-azimuth-desc>Specify heading to reference point</offset-azimuth-desc>
@@ -213,7 +213,7 @@
  <callsign-desc>assign a unique name to a player</callsign-desc>
 
  <!-- NetworkOLK options -->
- <network-olk-options>Mutlipilot Options</network-olk-options>
+ <network-olk-options>Multipilot Options</network-olk-options>
  <disable-network-olk-desc>Disable Multipilot mode (default)</disable-network-olk-desc>
  <enable-network-olk-desc>Enable Multipilot mode</enable-network-olk-desc>
  <net-hud-desc>Hud displays network info</net-hud-desc>

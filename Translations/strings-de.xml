@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 
 
-<!-- FlightGear menu and options tranlations for German -->
+<!-- FlightGear menu and options translations for German -->
 
 <PropertyList>
   <!-- Fall back -->
-  <null>No tranlation available for this text</null>
+  <null>No translation available for this text</null>
 
   <!-- File menu -->
   <file>Datei</file>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="Windows-1250" ?>
 
-<!-- Peter Michael Jaworski                2003 v.1.0PL -->
-<!-- <pjawor@et.put.poznan.pl>                          -->
-<!-- Tłumaczenia opcji i menu dla FlightGeara na polski -->
-<!-- FlightGear menu and options tranlations for Polish -->
+<!-- Peter Michael Jaworski                2003 v.1.0PL  -->
+<!-- <pjawor@et.put.poznan.pl>                           -->
+<!-- Tłumaczenia opcji i menu dla FlightGeara na polski  -->
+<!-- FlightGear menu and options translations for Polish -->
 
 <!-- When there will be some new texts, simply add them 
      at the end of file, I will translate them later -->
@@ -18,7 +18,7 @@
 
  <system-time>Czas systemowy</system-time>
  <gmt>Czas uniwersalny GMT</gmt>
- <locale-aricraft-time>Czas na lotnisku</locale-aricraft-time>
+ <locale-aircraft-time>Czas na lotnisku</locale-aircraft-time>
  <units-feet>(w stopach gdy brak parametru: --units-meters)</units-feet>
  <multiple-instance>Kilka uruchomień jednocześnie (instancje)</multiple-instance>
 

@@ -32,7 +32,7 @@
      <type>rotation</type>
      <property>/velocities/alpha-deg</property>
      <scale>-10</scale>
-     <offset>270</offset>
+     <offset>225</offset>
     </transformation>
     <transformation>
      <type>y-shift</type>

@@ -3195,7 +3195,7 @@ Shared parameters for various materials.
   <range-m>1000</range-m>
   <object>
    <path>Models/Fauna/cow.ac</path>
-   <coverage-m2>10000</coverage-m2>
+   <coverage-m2>50000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
  </object-group>
@@ -3257,7 +3257,7 @@ Shared parameters for various materials.
   <range-m>1000</range-m>
   <object>
    <path>Models/Fauna/cow.ac</path>
-   <coverage-m2>10000</coverage-m2>
+   <coverage-m2>50000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
  </object-group>
@@ -3319,7 +3319,7 @@ Shared parameters for various materials.
   <range-m>1000</range-m>
   <object>
    <path>Models/Fauna/cow.ac</path>
-   <coverage-m2>10000</coverage-m2>
+   <coverage-m2>50000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
  </object-group>

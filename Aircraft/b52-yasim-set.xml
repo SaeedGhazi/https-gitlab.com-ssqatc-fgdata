@@ -60,7 +60,9 @@ B52-H set file.
  </sim>
 
  <controls>
-  <elevator-trim type="float">-0.14</elevator-trim>
+  <flight>
+   <elevator-trim type="float">-0.14</elevator-trim>
+  </flight>
  </controls>
 
  <autopilot>

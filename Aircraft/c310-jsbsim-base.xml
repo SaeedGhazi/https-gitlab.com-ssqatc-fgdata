@@ -15,7 +15,9 @@ Common configuration for all JSBSim C310 models.
  </sim>
 
  <controls>
-  <aileron-trim>-0.026</aileron-trim>
+  <flight>
+   <aileron-trim>-0.026</aileron-trim>
+  </flight>
  </controls>
 
 </PropertyList>

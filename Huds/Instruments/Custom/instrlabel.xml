@@ -1,0 +1,332 @@
+<PropertyList>
+
+ <labels>
+
+  <i1>
+   <name>digitalkias</name>
+   <x>130</x>
+   <y>265</y>
+   <width>40</width>
+   <height>30</height>
+   <data_source>speed</data_source>
+   <label_format>%5.0f</label_format>
+   <pre_label_string>NULL</pre_label_string>
+   <post_label_string>blank</post_label_string>
+   <scale_data>1.0</scale_data>
+   <options>4</options>		<!-- Read ReadMe.xmlhud  -->
+   <justification>2</justification>
+   <blinking>0</blinking>
+   <working>true</working>
+  </i1>
+
+  <i2>
+   <name>machno</name>
+   <x>140</x>
+   <y>245</y> 
+   <width>40</width>
+   <height>30</height>
+   <data_source>mach</data_source>
+   <label_format>%5.2f</label_format>
+   <pre_label_string>NULL</pre_label_string>
+   <post_label_string>blank</post_label_string>
+   <scale_data>1.0</scale_data>
+   <options>4</options>
+   <justification>2</justification>
+   <blinking>0</blinking>
+   <working>true</working>
+  </i2>
+
+  <i3>
+   <name>pressurealtitude</name>
+   <x>430</x>
+   <y>265</y> 
+   <width>40</width>
+   <height>30</height>
+   <data_source>altitude</data_source>
+   <label_format>%5.0f</label_format>
+   <pre_label_string>NULL</pre_label_string>
+   <post_label_string>blank</post_label_string>
+   <scale_data>1.0</scale_data>
+   <options>4</options>
+   <justification>0</justification>
+   <blinking>0</blinking>
+   <working>true</working>
+  </i3>
+
+  <i4>
+   <name>radioaltitude</name>
+   <x>430</x>
+   <y>245</y> 
+   <width>40</width>
+   <height>30</height>
+   <data_source>agl</data_source>
+   <label_format>%5.0f</label_format>
+   <pre_label_string>NULL</pre_label_string>
+   <post_label_string> R</post_label_string>
+   <scale_data>1.0</scale_data>
+   <options>4</options>
+   <justification>0</justification>
+   <blinking>0</blinking>
+   <working>true</working>
+  </i4>
+
+  <i5>
+   <name>pstick</name>
+   <x>490</x>
+   <y>440</y> 
+   <width>40</width>
+   <height>30</height>
+   <data_source>aux16</data_source>
+   <label_format>%5.1f</label_format>
+   <pre_label_string>NULL</pre_label_string>
+   <post_label_string> pstick</post_label_string>
+   <scale_data>1.0</scale_data>
+   <options>4</options>
+   <justification>0</justification>
+   <blinking>0</blinking>
+   <working>true</working>
+  </i5>
+
+  <i6>
+   <name>rstick</name>
+   <x>490</x>
+   <y>430</y> 
+   <width>40</width>
+   <height>30</height>
+   <data_source>aux17</data_source>
+   <label_format>%5.1f</label_format>
+   <pre_label_string>NULL</pre_label_string>
+   <post_label_string> rstick</post_label_string>
+   <scale_data>1.0</scale_data>
+   <options>4</options>
+   <justification>0</justification>
+   <blinking>0</blinking>
+   <working>true</working>
+  </i6>
+
+  <i7>
+   <name>xposn</name>
+   <x>560</x>
+   <y>440</y> 
+   <width>40</width>
+   <height>30</height>
+   <data_source>aux1</data_source>
+   <label_format>%5.0f</label_format>
+   <pre_label_string>NULL</pre_label_string>
+   <post_label_string> m</post_label_string>
+   <scale_data>1.0</scale_data>
+   <options>4</options>
+   <justification>0</justification>
+   <blinking>0</blinking>
+   <working>true</working>
+  </i7>
+
+  <i8>
+   <name>pla</name>
+   <x>560</x>
+   <y>430</y> 
+   <width>40</width>
+   <height>30</height>
+   <data_source>aux9</data_source>
+   <label_format>%5.0f</label_format>
+   <pre_label_string>NULL</pre_label_string>
+   <post_label_string> pla</post_label_string>
+   <scale_data>1.0</scale_data>
+   <options>4</options>
+   <justification>0</justification>
+   <blinking>0</blinking>
+   <working>true</working>
+  </i8>
+ 
+  <i9>
+   <name>xtd</name>
+   <x>560</x>
+   <y>410</y> 
+   <width>40</width>
+   <height>30</height>
+   <data_source>aux11</data_source>
+   <label_format>%5.1f</label_format>
+   <pre_label_string>NULL</pre_label_string>
+   <post_label_string> xtd</post_label_string>
+   <scale_data>1.0</scale_data>
+   <options>4</options>
+   <justification>0</justification>
+   <blinking>0</blinking>
+   <working>true</working>
+  </i9>
+
+  <i10>
+   <name>ytd</name>
+   <x>560</x>
+   <y>400</y> 
+   <width>40</width>
+   <height>30</height>
+   <data_source>aux12</data_source>
+   <label_format>%5.1f</label_format>
+   <pre_label_string>NULL</pre_label_string>
+   <post_label_string> ytd</post_label_string>
+   <scale_data>1.0</scale_data>
+   <options>4</options>
+   <justification>0</justification>
+   <blinking>0</blinking>
+   <working>true</working>
+  </i10>
+
+  <i11>
+   <name>nztd</name>
+   <x>560</x>
+   <y>390</y> 
+   <width>40</width>
+   <height>30</height>
+   <data_source>aux10</data_source>
+   <label_format>%5.1f</label_format>
+   <pre_label_string>NULL</pre_label_string>
+   <post_label_string> nztd</post_label_string>
+   <scale_data>1.0</scale_data>
+   <options>4</options>
+   <justification>0</justification>
+   <blinking>0</blinking>
+   <working>true</working>
+  </i11>
+
+  <i12>
+   <name>vvtd</name>
+   <x>560</x>
+   <y>380</y> 
+   <width>40</width>
+   <height>30</height>
+   <data_source>aux13</data_source>
+   <label_format>%5.1f</label_format>
+   <pre_label_string>NULL</pre_label_string>
+   <post_label_string> vvtd</post_label_string>
+   <scale_data>1.0</scale_data>
+   <options>4</options>
+   <justification>0</justification>
+   <blinking>0</blinking>
+   <working>true</working>
+  </i12>
+
+  <i13>
+   <name>vtd</name>
+   <x>560</x>
+   <y>370</y> 
+   <width>40</width>
+   <height>30</height>
+   <data_source>aux14</data_source>
+   <label_format>%5.1f</label_format>
+   <pre_label_string>NULL</pre_label_string>
+   <post_label_string> vtd</post_label_string>
+   <scale_data>1.0</scale_data>
+   <options>4</options>
+   <justification>0</justification>
+   <blinking>0</blinking>
+   <working>true</working>
+  </i13>
+
+  <i14>
+   <name>alftd</name>
+   <x>560</x>
+   <y>360</y> 
+   <width>40</width>
+   <height>30</height>
+   <data_source>aux15</data_source>
+   <label_format>%5.1f</label_format>
+   <pre_label_string>NULL</pre_label_string>
+   <post_label_string> alftd</post_label_string>
+   <scale_data>1.0</scale_data>
+   <options>4</options>
+   <justification>0</justification>
+   <blinking>0</blinking>
+   <working>true</working>
+  </i14>
+
+  <i15>
+   <name>fnr</name>
+   <x>560</x>
+   <y>340</y> 
+   <width>40</width>
+   <height>30</height>
+   <data_source>aux8</data_source>
+   <label_format>%5.1f</label_format>
+   <pre_label_string>NULL</pre_label_string>
+   <post_label_string> fnose</post_label_string>
+   <scale_data>1.0</scale_data>
+   <options>4</options>
+   <justification>0</justification>
+   <blinking>0</blinking>
+   <working>true</working>
+  </i15>
+
+  <i16>
+   <name>Ax</name>
+   <x>560</x>
+   <y>330</y> 
+   <width>40</width>
+   <height>30</height>
+   <data_source>ax</data_source>
+   <label_format>%5.2f</label_format>
+   <pre_label_string>NULL</pre_label_string>
+   <post_label_string> Ax</post_label_string>
+   <scale_data>1.0</scale_data>
+   <options>4</options>
+   <justification>0</justification>
+   <blinking>0</blinking>
+   <working>true</working>
+  </i16>
+
+  <i17>
+   <name>FrameRate</name>
+   <x>10</x>
+   <y>25</y> 
+   <width>60</width>
+   <height>10</height>
+   <data_source>framerate</data_source>
+   <label_format>%5.1f</label_format>
+   <pre_label_string>NULL</pre_label_string>
+   <post_label_string>blank</post_label_string>
+   <scale_data>1.0</scale_data>
+   <options>4</options>
+   <justification>2</justification>
+   <blinking>0</blinking>
+   <working>true</working>
+  </i17>
+
+  <lat>
+   <name>lattitude</name>
+   <x>70</x>
+   <y>40</y>
+   <width>1</width>
+   <height>10</height>
+   <data_source>latitude</data_source>
+   <label_format>%s%</label_format>
+   <pre_label_string>blank</pre_label_string>
+   <post_label_string>blank</post_label_string>
+   <scale_data>1.0</scale_data>
+   <options>4</options>
+   <justification>1</justification>
+   <blinking>0</blinking>
+   <working>true</working>
+   <latitude>true</latitude>
+  </lat>
+
+  <lon>
+   <name>longitude</name>
+   <x>550</x>
+   <y>40</y>
+   <width>1</width>
+   <height>10</height>
+   <data_source>longitude</data_source>
+   <label_format>%s%</label_format>
+   <pre_label_string>blank</pre_label_string>
+   <post_label_string>blank</post_label_string>
+   <scale_data>1.0</scale_data>
+   <options>4</options>
+   <justification>1</justification>
+   <blinking>0</blinking>
+   <working>true</working>
+   <longitude>true</longitude>	
+  </lon>
+
+</labels>
+
+</PropertyList>

@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+
+<!--
+HudCards for ADA.
+
+Started November 2000 by Neetha Girish, neetha@ada.ernet.in
+
+Based on Panel Instruments by David Megginson, david@megginson.com.
+
+This is an instrument configuration file for the open-source flight
+simulator FlightGear (www.flightgear.org).  The file is an XML-encoded
+FlightGear property list defining the instrument's properties.
+
+-->
+
+<PropertyList>
+
+ <cards>
+
+  <c1>
+   <name>Gyrocompass</name>
+   <x>260</x>
+   <y>248</y>
+   <width>120</width>
+   <height>28</height>
+   <loadfn>heading</loadfn>
+   <options>4</options>		<!-- Read ReadMe.xmlhud -->
+   <maxValue>360.0</maxValue>
+   <minValue>0.0</minValue>
+   <disp_scaling>1.0</disp_scaling>
+   <major_divs>10</major_divs>
+   <minor_divs>1</minor_divs>
+   <modulator>360</modulator>
+   <value_span>25.0</value_span>
+   <type>tape</type>
+   <tick_bottom>false</tick_bottom>
+   <tick_top>false</tick_top>
+   <tick_right>false</tick_right>
+   <tick_left>false</tick_left>
+   <cap_bottom>false</cap_bottom>
+   <cap_top>false</cap_top>
+   <cap_right>false</cap_right>
+   <cap_left>false</cap_left>
+   <marker_offset>10.0</marker_offset>
+   <enable_pointer>false</enable_pointer>
+   <pointer_type>fixed</pointer_type>
+   <working>true</working>
+  </c1>
+
+  <c2>
+   <name>AOA</name>
+   <x>175</x>
+   <y>50</y> 
+   <width>28</width>
+   <height>120</height>
+   <loadfn>aoa</loadfn>
+   <options>6</options>
+   <maxValue>30.0</maxValue>
+   <minValue>-15.0</minValue>
+   <disp_scaling>1.0</disp_scaling>
+   <major_divs>10</major_divs>
+   <minor_divs>2</minor_divs>
+   <modulator>0</modulator>
+   <value_span>60.0</value_span>
+   <type>tape</type>
+   <tick_bottom>false</tick_bottom>
+   <tick_top>false</tick_top>
+   <tick_right>false</tick_right>
+   <tick_left>false</tick_left>
+   <cap_bottom>false</cap_bottom>
+   <cap_top>false</cap_top>
+   <cap_right>false</cap_right>
+   <cap_left>false</cap_left>
+   <marker_offset>10.0</marker_offset>
+   <enable_pointer>true</enable_pointer>
+   <pointer_type>fixed</pointer_type>
+   <working>true</working>
+  </c2>
+
+  <c3>
+   <name>NormalAcceleration</name>
+   <x>135</x>
+   <y>20</y>
+   <width>18</width>
+   <height>130</height>
+   <loadfn>anzg</loadfn>
+   <options>6</options>
+   <maxValue>10.0</maxValue>
+   <minValue>-5.0</minValue>
+   <disp_scaling>1.0</disp_scaling>
+   <major_divs>2</major_divs>
+   <minor_divs>1</minor_divs>
+   <modulator>0</modulator>
+   <value_span>20.0</value_span>
+   <type>tape</type>
+   <tick_bottom>false</tick_bottom>
+   <tick_top>false</tick_top>
+   <tick_right>false</tick_right>
+   <tick_left>false</tick_left>
+   <cap_bottom>false</cap_bottom>
+   <cap_top>false</cap_top>
+   <cap_right>false</cap_right>
+   <cap_left>false</cap_left>
+   <marker_offset>10.0</marker_offset>
+   <enable_pointer>true</enable_pointer>
+   <pointer_type>fixed</pointer_type>
+   <working>true</working>
+  </c3>
+
+  <c4>
+   <name>VSI</name>
+   <x>445</x>
+   <y>50</y>
+   <width>28</width>
+   <height>120</height>
+   <loadfn>climb</loadfn>
+   <options>10</options>
+   <maxValue>500.0</maxValue>
+   <minValue>-500.0</minValue>
+   <disp_scaling>1.0</disp_scaling>
+   <major_divs>5</major_divs>
+   <minor_divs>1</minor_divs>
+   <modulator>0</modulator>
+   <value_span>15.0</value_span>
+   <type>tape</type>
+   <tick_bottom>false</tick_bottom>
+   <tick_top>false</tick_top>
+   <tick_right>false</tick_right>
+   <tick_left>false</tick_left>
+   <cap_bottom>false</cap_bottom>
+   <cap_top>false</cap_top>
+   <cap_right>false</cap_right>
+   <cap_left>false</cap_left>
+   <marker_offset>10.0</marker_offset>
+   <enable_pointer>true</enable_pointer>
+   <pointer_type>fixed</pointer_type>
+   <working>true</working>
+  </c4>
+
+ </cards>
+
+</PropertyList>

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+
+<!--
+HudLadder for ADA.
+
+Started November 2000 by Neetha Girish, neetha@ada.ernet.in
+
+Based on Panel Instruments by David Megginson, david@megginson.com.
+
+This is an instrument configuration file for the open-source flight
+simulator FlightGear (www.flightgear.org).  The file is an XML-encoded
+FlightGear property list defining the instrument's properties.
+
+-->
+
+<PropertyList>
+
+ <ladders>
+
+  <l1>
+  <name>Climb/Dive Ladder</name>
+  <x>260</x>
+  <y>150</y>
+  <width>120</width>
+  <height>180</height>
+  <compression_factor>14.22</compression_factor>
+  <loadfn>roll</loadfn>
+  <loadfn1>pitch</loadfn1>
+  <span_units>45</span_units>
+  <division_units>5.0</division_units>
+  <screen_hole>70</screen_hole>
+  <lbl_pos>0</lbl_pos>
+  <enable_frl>true</enable_frl>
+  <enable_target_spot>false</enable_target_spot>
+  <enable_velocity_vector>true</enable_velocity_vector>
+  <enable_drift_marker>true</enable_drift_marker>
+  <enable_alpha_bracket>true</enable_alpha_bracket>
+  <enable_energy_marker>true</enable_energy_marker>
+  <enable_climb_dive_marker>true</enable_climb_dive_marker>
+  <enable_glide_slope_marker>true</enable_glide_slope_marker>
+  <glide_slope>-4.0</glide_slope>
+  <enable_energy_worm>true</enable_energy_worm>
+  <enable_waypoint_marker>true</enable_waypoint_marker>
+  <working>true</working>
+  </l1>
+
+ </ladders>
+
+</PropertyList>

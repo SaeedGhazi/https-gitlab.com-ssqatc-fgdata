@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <menu>
+  <submenu>
+   <name>File</name>
+   <option>
+    <name>Save flight</name>
+    <call>saveFlight</call>
+   </option>
+   <option>
+    <name>Load flight</name>
+    <call>loadFlight</call>
+   </option>
+   <option>
+    <name>Reset</name>
+    <call>reInit</call>
+    </option>
+   <option>
+    <seperator/>
+   </option>
+   <option>
+    <seperator/>
+   </option>
+   <option>
+    <name>Hires Snap Shot</name>
+    <call>dumpHiResSnapShot</call>
+   </option>
+   <option>
+    <name>Snap Shot</name>
+    <call>dumpSnapShot</call>
+   </option>
+   <option>
+    <name>Print</name>
+    <call>printScreen</call>
+   </option>
+   <option>
+    <name>Exit</name>
+    <call>MayBeGoodBye</call>
+   </option>
+  </submenu>
+ 
+  <submenu>
+   <name>View</name>
+   <option>
+    <name>Toggle Panel</name>
+    <call>guiTogglePanel</call>
+   </option>
+   <option>
+    <name>Pilot Offset</name>
+    <call>PilotOffsetAdjust</call>
+   </option>
+   <option>
+    <name>HUD Alpha</name>
+    <call>fgHUDalphaAdjust</call>
+   </option>
+   <option>
+    <name>Properties</name>
+    <call>prop_pickerView</call>
+   </option>
+  </submenu>
+ 
+  <submenu>
+   <name>Environment</name>
+   <option>
+    <name>Goto Airport</name>
+    <call>NewAirport</call>
+   </option>
+  </submenu>
+
+<!--
+  <submenu>
+   <name>Network</name>
+   <option>
+    <name>Toggle Display</name>
+    <call>net_display_toggle</call>
+   </option>
+   <option>
+    <name>Enter Callsign</name>
+    <call>NewCallSign</call>
+   </option>
+   <option>
+    <name>Scan for Deamons</name>
+    <call>net_fgd_scan</call>
+   </option>
+   <option>
+    <name>Register to FGD</name>
+    <call>net_register</call>
+   </option>
+   <option>
+    <name>Unregister from FGD</name>
+    <call>net_unregister</call>
+   </option>
+  </submenu>
+-->
+ 
+  <submenu>
+   <name>Autopilot</name>
+   <option>
+    <name>Set Heading</name>
+    <call>NewHeading</call>
+   </option>
+   <option>
+    <name>Set Altitude</name>
+    <call>NewAltitude</call>
+   </option>
+   <option>
+    <seperator/>
+   </option>
+   <option>
+    <name>Add Waypoint</name>
+    <call>AddWayPoint</call>
+   </option>
+   <option>
+    <name>Skip Current Waypoint</name>
+    <call>PopWayPoint</call>
+   </option>
+   <option>
+    <name>Clear Route</name>
+    <call>ClearRoute</call>
+   </option>
+   <option>
+    <seperator/>
+   </option>
+   <option>
+    <name>Adjust AP Settings</name>
+    <call>fgAPAdjust</call>
+   </option>
+   <option>
+    <name>Toggle HUD Format</name>
+    <call>fgLatLonFormatToggle</call>
+   </option>
+  </submenu>
+
+  <submenu>
+   <name>Help</name>
+   <option>
+    <name>Help</name>
+    <call>helpCb</call>
+   </option>
+  </submenu>
+ </menu>
+
+</PropertyList>

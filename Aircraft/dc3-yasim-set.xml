@@ -32,6 +32,13 @@ October 23 2001 John Check, fgpanels@rockfish.net
   <model>
    <path>Aircraft/dc3/Models/dc3-dpm.xml</path>
   </model> 
+
+  <view n="1">
+   <config>
+     <z-offset-m type="double" archive="y">-45.0</z-offset-m>
+   </config>
+  </view>
+
  </sim>
 
  <controls>

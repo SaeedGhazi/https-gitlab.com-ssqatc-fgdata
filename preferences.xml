@@ -91,15 +91,48 @@ Started September 2000 by David Megginson, david@megginson.com
  <!-- Controls -->
 
  <controls>
-  <gear-down>1.0</gear-down>
+
+  <aileron>0.0</aileron>
+  <aileron-trim>0.0</aileron-trim>
+
+  <elevator>0.0</elevator>
+  <elevator-trim>0.0</elevator-trim>
+
+  <rudder>0.0</rudder>
+  <rudder-trim>0.0</rudder-trim>
+
+  <flaps>0.0</flaps>
+
+  <starter n="0">false</starter>
+  <magnetos n="0">0</magnetos>
+  <throttle n="0">0.0</throttle>
   <mixture n="0">1.0</mixture>
-  <mixture n="1">1.0</mixture>
-  <mixture n="2">1.0</mixture>
-  <mixture n="3">1.0</mixture>
   <propeller-pitch n="0">1.0</propeller-pitch>
+
+  <starter n="1">false</starter>
+  <magnetos n="1">0</magnetos>
+  <throttle n="1">0.0</throttle>
+  <mixture n="1">1.0</mixture>
   <propeller-pitch n="1">1.0</propeller-pitch>
+
+  <starter n="2">false</starter>
+  <magnetos n="2">0</magnetos>
+  <throttle n="2">0.0</throttle>
+  <mixture n="2">1.0</mixture>
   <propeller-pitch n="2">1.0</propeller-pitch>
+
+  <starter n="3">false</starter>
+  <magnetos n="3">0</magnetos>
+  <throttle n="3">0.0</throttle>
+  <mixture n="3">1.0</mixture>
   <propeller-pitch n="3">1.0</propeller-pitch>
+
+  <brakes n="0">0.0</brakes>
+  <brakes n="1">0.0</brakes>
+  <brakes n="2">0.0</brakes>
+
+  <gear-down>1.0</gear-down>
+
  </controls>
 
 

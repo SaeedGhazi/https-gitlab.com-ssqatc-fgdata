@@ -14,7 +14,7 @@
  <layer>
    <name>Brake light</name>
    <type>switch</type>
-   <property>/controls[0]/brakes[2]</property> <!-- nose brake -->
+   <property>/controls[0]/parking-brake</property> <!-- nose brake -->
     <layer>
      <name>on</name>
      <texture>
@@ -71,15 +71,7 @@
    <h>26</h>
    <binding>
     <command>property-toggle</command>
-    <property>/controls/brakes[0]</property>
-   </binding>
-   <binding>
-    <command>property-toggle</command>
-    <property>/controls/brakes[1]</property>
-   </binding>
-   <binding>
-    <command>property-toggle</command>
-    <property>/controls/brakes[2]</property>
+    <property>/controls/parking-brake</property>
    </binding>
   </action>
  </actions>

@@ -103,6 +103,19 @@
  </menu>
 
  <menu>
+  <label>Failures</label>
+
+  <item>
+   <label>System Failures</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>system-failures</dialog-name>
+   </binding>
+  </item>
+
+ </menu>
+
+ <menu>
   <label>Autopilot</label>
 
   <item>

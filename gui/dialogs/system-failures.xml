@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <!-- Control the weather -->
+
+ <name>system-failures</name>
+ <width>320</width>
+ <height>300</height>
+ <modal>false</modal>
+
+ <text>
+  <x>10</x>
+  <y>270</y>
+  <label>System Failures</label>
+ </text>
+
+ <group>
+  <y>210</y>
+  <text>
+   <x>10</x>
+   <label>System</label>
+  </text>
+  <text>
+   <x>150</x>
+   <label>Enabled</label>
+  </text>
+ </group>
+
+ <group>
+  <y>180</y>
+
+  <text>
+   <x>30</x>
+   <y>0</y>
+   <label>Static System</label>
+  </text>
+
+  <checkbox>
+   <x>200</x>
+   <y>10</y>
+   <width>12</width>
+   <height>12</height>
+   <property>/systems/static/serviceable</property>
+  </checkbox>
+
+ </group>
+
+
+ <group>
+  <y>150</y>
+
+  <text>
+   <x>30</x>
+   <y>0</y>
+   <label>Pitot System</label>
+  </text>
+
+  <checkbox>
+   <x>200</x>
+   <y>10</y>
+   <width>12</width>
+   <height>12</height>
+   <property>/systems/pitot/serviceable</property>
+  </checkbox>
+
+ </group>
+
+
+ <group>
+  <y>120</y>
+
+  <text>
+   <x>30</x>
+   <y>0</y>
+   <label>Electrical System</label>
+  </text>
+
+  <checkbox>
+   <x>200</x>
+   <y>10</y>
+   <width>12</width>
+   <height>12</height>
+   <property>/systems/electrical/serviceable</property>
+  </checkbox>
+
+ </group>
+
+ <group>
+  <y>90</y>
+
+  <text>
+   <x>30</x>
+   <y>0</y>
+   <label>Vacuum System</label>
+  </text>
+
+  <checkbox>
+   <x>200</x>
+   <y>10</y>
+   <width>12</width>
+   <height>12</height>
+   <property>/systems/vacuum/serviceable</property>
+  </checkbox>
+
+ </group>
+
+ <group>
+  <y>10</y>
+
+  <button>
+   <x>5</x>
+   <y>0</y>
+   <legend>OK</legend>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+   <binding>
+    <command>dialog-close</command>
+   </binding>
+   <default>true</default>
+  </button>
+
+  <button>
+   <x>80</x>
+   <y>0</y>
+   <legend>Apply</legend>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+  </button>
+
+  <button>
+   <x>155</x>
+   <y>0</y>
+   <legend>Reset</legend>
+   <binding>
+    <command>dialog-update</command>
+   </binding>
+  </button>
+
+  <button>
+   <x>230</x>
+   <y>0</y>
+   <legend>Cancel</legend>
+   <binding>
+    <command>dialog-close</command>
+   </binding>
+  </button>
+
+ </group>
+
+</PropertyList>

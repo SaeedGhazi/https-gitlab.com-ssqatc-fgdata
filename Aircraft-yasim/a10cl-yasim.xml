@@ -16,7 +16,7 @@
 </approach>
 
 <!-- Cruise configuration -->
-<cruise speed="398" alt="1200">
+<cruise speed="380" alt="0">
   <control-setting axis="/controls/throttle[0]" value="1.0"/>
   <control-setting axis="/controls/throttle[1]" value="1.0"/>
   <control-setting axis="/controls/flaps" value="0.0"/>

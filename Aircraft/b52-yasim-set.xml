@@ -15,37 +15,28 @@ B52-H set file.
 
   <sound>
    <audible>true</audible>
-   <path>Aircraft/a4/a4-sound.xml</path>
+   <path>Aircraft/b52/Sounds/b52-sound.xml</path>
   </sound>
 
   <panel>
-   <path>Aircraft/b52/b52-vfr-panel.xml</path>
+   <path>Aircraft/b52/Panels/b52-vfr-panel.xml</path>
   </panel>
   <panel_2>
-   <path>Aircraft/b52/b52-mini-panel.xml</path>
+   <path>Aircraft/b52/Panels/b52-mini-panel.xml</path>
   </panel_2>
 
   <hud>
-   <path>Huds/Default/default.xml</path>
+   <path>Aircraft/b52/Huds/b52-hud1.xml</path>
    <visibility>true</visibility>
   </hud>
 
   <model>
-   <path>Aircraft/b52/b52-model.xml</path>
+   <path>Aircraft/b52/Models/b52-model.xml</path>
   </model>
-  <view>
-   <internal archive="y">false</internal>
-   <config> -->
-     <!-- x/y/z == right/up/back -->
-     <x-offset-m archive="y">-1.0</x-offset-m>
-     <y-offset-m archive="y">1.5</y-offset-m>
-     <z-offset-m archive="y">-28</z-offset-m>
-   </config>
-  </view>
 
   <systems>
    <electrical>
-    <path>Aircraft/Generic/generic-electrical.xml</path>
+    <path>Aircraft/b52/Systems/b52-electrical.xml</path>
    </electrical>
   </systems>
 

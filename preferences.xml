@@ -31,6 +31,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <browser-app>netscape</browser-app><!--  help viewer -->
   </startup>
   <rendering>
+   <debug type="bool">false</debug>
    <random-objects>true</random-objects>
    <draw-otw>true</draw-otw>
   </rendering>

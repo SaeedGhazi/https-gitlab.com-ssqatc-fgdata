@@ -65,5 +65,11 @@ Last update: Dec 21, 2002 Michael Selig, m-selig@uiuc.edu
    </config>
   </view>
 
+  <view n="1">
+   <config>
+    <eye-heading-deg-path>/orientation/gamma-horiz-deg</eye-heading-deg-path>
+   </config>
+  </view>
+
  </sim>
 </PropertyList>

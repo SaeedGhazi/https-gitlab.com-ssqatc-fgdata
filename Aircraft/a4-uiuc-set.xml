@@ -62,5 +62,11 @@ May 18, 2003 Michael Selig, http://www.uiuc.edu/~m-selig
    <path>Aircraft/a4/Models/a4-blue-uiuc.xml</path>
   </model>
 
+  <view n="1">
+   <config>
+    <eye-heading-deg-path>/orientation/gamma-horiz-deg</eye-heading-deg-path>
+   </config>
+  </view>
+
  </sim>
 </PropertyList>

@@ -53,6 +53,11 @@ May 27 2002 Michael Selig, m-selig@uiuc.edu
    <path>Aircraft/UIUC/Models/opus/opus-model.xml</path>
   </model>
 
+  <view n="1">
+   <config>
+    <eye-heading-deg-path>/orientation/gamma-horiz-deg</eye-heading-deg-path>
+   </config>
+  </view>
 
  </sim>
 </PropertyList>

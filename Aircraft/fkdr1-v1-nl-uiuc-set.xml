@@ -52,6 +52,11 @@ Last update: Nov 10, 2002 Michael Selig, m-selig@uiuc.edu
    <path>Aircraft/fkdr1/Models/fokdr1m2-model.xml</path>
   </model>
 
+  <view n="1">
+   <config>
+    <eye-heading-deg-path>/orientation/gamma-horiz-deg</eye-heading-deg-path>
+   </config>
+  </view>
 
  </sim>
 </PropertyList>

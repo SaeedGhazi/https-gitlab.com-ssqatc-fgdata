@@ -38,5 +38,11 @@ Dec 28, 2002 Michael Selig, m-selig@uiuc.edu
    <path>Aircraft/beech99/Models/beech99-model.xml</path>
   </model>
 
+  <view n="1">
+   <config>
+    <eye-heading-deg-path>/orientation/gamma-horiz-deg</eye-heading-deg-path>
+   </config>
+  </view>
+
  </sim>
 </PropertyList>

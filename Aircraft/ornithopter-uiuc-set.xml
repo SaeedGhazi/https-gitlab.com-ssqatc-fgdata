@@ -32,5 +32,13 @@
    <path>Aircraft/ornithopter/Models/ornithopter-8-4-model.xml</path>
   </model>
 
+  <view n="1">
+   <config>
+    <eye-heading-deg-path>/orientation/gamma-horiz-deg</eye-heading-deg-path>
+   </config>
+  </view>
+
  </sim>
+
 </PropertyList>
+

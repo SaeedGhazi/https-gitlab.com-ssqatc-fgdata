@@ -38,10 +38,15 @@ Last update: Nov 9, 2002 Michael Selig, m-selig@uiuc.edu
    <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
   </panel_2>
 
-
   <model>
    <path>Aircraft/sopwithCamel/Models/uiuc/sopwithCamel/sopwithCamel-model.xml</path>
   </model>
+
+  <view n="1">
+   <config>
+    <eye-heading-deg-path>/orientation/gamma-horiz-deg</eye-heading-deg-path>
+   </config>
+  </view>
 
  </sim>
 </PropertyList>

@@ -220,11 +220,25 @@
  </menu>
 
  <menu>
+  <label>Debug</label>
+
+  <item>
+   <label>Reload GUI</label>
+   <binding>
+    <command>reinit</command>
+    <subsystem>gui</subsystem>
+   </binding>
+  </item>
+ </menu>
+
+ <menu>
   <label>Help</label>
 
   <item>
    <label>Help</label>
-   <command>old-help-dialog</command>
+   <binding>
+    <command>old-help-dialog</command>
+   </binding>
   </item>
 
  </menu>

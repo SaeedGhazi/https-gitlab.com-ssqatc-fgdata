@@ -638,6 +638,11 @@ Started September 2000 by David Megginson, david@megginson.com
    </to-from>
   </nav>
 
+  <transponder>
+    <inputs>
+      <serviceable>true</serviceable>
+    </inputs>
+  </transponder>
   <!-- Instruments -->
 
   <airspeed-indicator>

@@ -1,0 +1,320 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <name>gps</name>
+ <width>620</width>
+ <height>430</height>
+ <modal>false</modal>
+
+ <text>
+  <x>280</x>
+  <y>400</y>
+  <label>GPS</label>
+ </text>
+
+ <group>
+  <x>10</x>
+  <y>40</y>
+
+  <text>
+   <x>40</x>
+   <y>340</y>
+   <label>WP 0</label>
+  </text>
+
+  <combo>
+   <name>wp0Type</name>
+   <x>0</x>
+   <y>320</y>
+   <width>100</width>
+   <height>25</height>
+   <label>Type</label>
+   <property>/instrumentation/gps/wp/wp[0]/waypoint-type</property>
+   <value>airport</value>
+   <value>nav</value>
+   <value>fix</value>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>wp0Type</object-name>
+   </binding>
+  </combo>
+
+  <input>
+   <name>wp0ID</name>
+   <x>0</x>
+   <y>290</y>
+   <width>100</width>
+   <height>25</height>
+   <label>ID</label>
+   <property>/instrumentation/gps/wp/wp[0]/ID</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>wp0ID</object-name>
+   </binding>
+   <binding>
+    <command>dialog-update</command>
+   </binding>
+  </input>
+
+  <input>
+   <name>wp0Name</name>
+   <x>0</x>
+   <y>260</y>
+   <width>200</width>
+   <height>25</height>
+   <label>Name</label>
+   <property>/instrumentation/gps/wp/wp[0]/name</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>wp0Name</object-name>
+   </binding>
+   <binding>
+    <command>dialog-update</command>
+   </binding>
+  </input>
+
+  <input>
+   <name>wp0-lat</name>
+   <x>0</x>
+   <y>230</y>
+   <width>150</width>
+   <height>25</height>
+   <label>Latitude</label>
+   <property>/instrumentation/gps/wp/wp[0]/latitude-deg</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>wp0-lat</object-name>
+   </binding>
+   <binding>
+    <command>dialog-update</command>
+   </binding>
+  </input>
+
+  <input>
+   <name>wp0-lon</name>
+   <x>0</x>
+   <y>200</y>
+   <width>150</width>
+   <height>25</height>
+   <label>Longitude</label>
+   <property>/instrumentation/gps/wp/wp[0]/longitude-deg</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>wp0-lon</object-name>
+   </binding>
+   <binding>
+    <command>dialog-update</command>
+   </binding>
+  </input>
+
+  <input>
+   <name>wp0-alt</name>
+   <x>0</x>
+   <y>170</y>
+   <width>150</width>
+   <height>25</height>
+   <label>Altitude</label>
+   <property>/instrumentation/gps/wp/wp[0]/altitude-ft</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>wp0-alt</object-name>
+   </binding>
+   <binding>
+    <command>dialog-update</command>
+   </binding>
+  </input>
+
+  <input>
+   <name>wp0-course</name>
+   <x>0</x>
+   <y>140</y>
+   <width>150</width>
+   <height>25</height>
+   <label>Desired course</label>
+   <property>/instrumentation/gps/wp/wp[0]/desired-course-deg</property>
+   <min>0</min>
+   <max>360</max>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>wp0-course</object-name>
+   </binding>
+  </input>
+
+ </group>
+
+
+ <group>
+  <x>320</x>
+  <y>40</y>
+
+  <text>
+   <x>40</x>
+   <y>340</y>
+   <label>WP 1</label>
+  </text>
+
+  <combo>
+   <name>wp1Type</name>
+   <x>0</x>
+   <y>320</y>
+   <width>100</width>
+   <height>25</height>
+   <label>Type</label>
+   <property>/instrumentation/gps/wp/wp[1]/waypoint-type</property>
+   <value>airport</value>
+   <value>nav</value>
+   <value>fix</value>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>wp1Type</object-name>
+   </binding>
+  </combo>
+
+  <input>
+   <name>wp1ID</name>
+   <x>0</x>
+   <y>290</y>
+   <width>100</width>
+   <height>25</height>
+   <label>ID</label>
+   <property>/instrumentation/gps/wp/wp[1]/ID</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>wp1ID</object-name>
+   </binding>
+   <binding>
+    <command>dialog-update</command>
+   </binding>
+  </input>
+
+  <input>
+   <name>wp1Name</name>
+   <x>0</x>
+   <y>260</y>
+   <width>200</width>
+   <height>25</height>
+   <label>Name</label>
+   <property>/instrumentation/gps/wp/wp[1]/name</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>wp1Name</object-name>
+   </binding>
+   <binding>
+    <command>dialog-update</command>
+   </binding>
+  </input>
+
+  <input>
+   <name>wp1-lat</name>
+   <x>0</x>
+   <y>230</y>
+   <width>150</width>
+   <height>25</height>
+   <label>Latitude</label>
+   <property>/instrumentation/gps/wp/wp[1]/latitude-deg</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>wp1-lat</object-name>
+   </binding>
+   <binding>
+    <command>dialog-update</command>
+   </binding>
+  </input>
+
+  <input>
+   <name>wp1-lon</name>
+   <x>0</x>
+   <y>200</y>
+   <width>150</width>
+   <height>25</height>
+   <label>Longitude</label>
+   <property>/instrumentation/gps/wp/wp[1]/longitude-deg</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>wp1-lon</object-name>
+   </binding>
+   <binding>
+    <command>dialog-update</command>
+   </binding>
+  </input>
+
+  <input>
+   <name>wp1-alt</name>
+   <x>0</x>
+   <y>170</y>
+   <width>150</width>
+   <height>25</height>
+   <label>Altitude</label>
+   <property>/instrumentation/gps/wp/wp[1]/altitude-ft</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>wp1-alt</object-name>
+   </binding>
+   <binding>
+    <command>dialog-update</command>
+   </binding>
+  </input>
+
+  <input>
+   <name>wp1-course</name>
+   <x>0</x>
+   <y>140</y>
+   <width>150</width>
+   <height>25</height>
+   <label>Desired course</label>
+   <property>/instrumentation/gps/wp/wp[1]/desired-course-deg</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>wp1-course</object-name>
+   </binding>
+  </input>
+
+  <button>
+   <x>0</x>
+   <y>110</y>
+   <legend>Get nearest airport</legend>
+   <binding>
+    <command>nasal</command>
+    <script>
+     node = props.globals.getNode("/instrumentation/gps/wp/wp[1]/get-nearest-airport", 1);
+     node.setValue(1);
+    </script>
+   </binding>
+   <binding>
+    <command>dialog-update</command>
+   </binding>
+  </button>
+
+ </group>
+
+ <input>
+   <name>leg-course</name>
+   <x>10</x>
+   <y>50</y>
+   <width>150</width>
+   <height>25</height>
+   <label>Leg course</label>
+   <property>/instrumentation/gps/wp/leg-true-course-deg</property>
+  </input>
+
+  <input>
+   <name>leg-distance</name>
+   <x>10</x>
+   <y>80</y>
+   <width>150</width>
+   <height>25</height>
+   <label>Leg distance [nm]</label>
+   <property>/instrumentation/gps/wp/leg-distance-nm</property>
+  </input>
+
+ <button>
+  <x>120</x>
+  <y>10</y>
+  <legend>Close</legend>
+  <binding>
+   <command>dialog-close</command>
+  </binding>
+ </button>
+
+</PropertyList>

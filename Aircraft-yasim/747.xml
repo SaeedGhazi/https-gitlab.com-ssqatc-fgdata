@@ -89,28 +89,28 @@
   <control-speed control="EXTEND" transition-time="7"/>
 </gear>
 
-<gear x="-4.65" y="5.42" z="-5.42" compression="2"> <!-- fwd left main -->
+<gear x="-4.65" y="5.42" z="-5.42" compression="1.1"> <!-- fwd left main -->
   <control-input axis="/controls/brakes[0]" control="BRAKE"/>
   <control-input axis="/controls/gear-down" control="EXTEND"/>
   <control-output control="EXTEND" prop="/gear/gear[1]/position-norm"/>
   <control-speed control="EXTEND" transition-time="7"/>
 </gear>
 
-<gear x="-6.82" y="1.81" z="-5.42" compression="2"> <!-- rear left main -->
+<gear x="-6.82" y="1.81" z="-5.42" compression="1.1"> <!-- rear left main -->
   <control-input axis="/controls/brakes[0]" control="BRAKE"/>
   <control-input axis="/controls/gear-down" control="EXTEND"/>
   <control-output control="EXTEND" prop="/gear/gear[2]/position-norm"/>
   <control-speed control="EXTEND" transition-time="7"/>
 </gear>
 
-<gear x="-6.82" y="-1.81" z="-5.42" compression="2"> <!-- rear right main -->
+<gear x="-6.82" y="-1.81" z="-5.42" compression="1.1"> <!-- rear right main -->
   <control-input axis="/controls/brakes[1]" control="BRAKE"/>
   <control-input axis="/controls/gear-down" control="EXTEND"/>
   <control-output control="EXTEND" prop="/gear/gear[3]/position-norm"/>
   <control-speed control="EXTEND" transition-time="7"/>
 </gear>
 
-<gear x="-4.65" y="-5.42" z="-5.42" compression="2"> <!-- fwd right main -->
+<gear x="-4.65" y="-5.42" z="-5.42" compression="1.1"> <!-- fwd right main -->
   <control-input axis="/controls/brakes[1]" control="BRAKE"/>
   <control-input axis="/controls/gear-down" control="EXTEND"/>
   <control-output control="EXTEND" prop="/gear/gear[4]/position-norm"/>

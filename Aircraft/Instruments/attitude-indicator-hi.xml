@@ -4,7 +4,7 @@
 Improved artificial horizon instrument.
 Mar 20 2000
 Martin Dressler dr@musicabona.cz
-Artificial horizont from C172RG small versionn
+Artificial horizon from C172RG (large version)
 GPL
 _______________________________________________________________________________
 
@@ -30,20 +30,20 @@ properties' values.
 
 <PropertyList>
 
- <name>C172RG-mini Artifical horizon</name>
+ <name>C172RG Artifical horizon</name>
 
- <w-base>128</w-base>
- <h-base>128</h-base>
+ <w-base>256</w-base>
+ <h-base>256</h-base>
 
  <layers>
   <layer>
    <name>background</name>
    <texture>
-    <path>Aircraft/Instruments/Textures/attitude-indicator.rgb</path>
+    <path>Aircraft/Instruments/Textures/attitude2.rgb</path>
     <x1>0.0</x1>
     <y1>0.0</y1>
-    <x2>0.5</x2>
-    <y2>0.5</y2>
+    <x2>1.0</x2>
+    <y2>1.0</y2>
    </texture>
    <transformations>
     <transformation>
@@ -58,14 +58,12 @@ properties' values.
   <layer>
    <name>pitch</name>
    <texture>
-    <path>Aircraft/Instruments/Textures/attitude-indicator.rgb</path>
-    <x1>0.5</x1>
+    <path>Aircraft/Instruments/Textures/attitude3.rgb</path>
+    <x1>0.0</x1>
     <y1>0.0</y1>
-    <x2>0.875</x2>
-    <y2>0.25</y2>
+    <x2>1.0</x2>
+    <y2>1.0</y2>
    </texture>
-   <w>92</w>
-   <h>62</h>
    <transformations>
     <transformation>
      <type>rotation</type>
@@ -79,7 +77,7 @@ properties' values.
      <property>/orientation/pitch-deg</property>
      <min>-20.0</min>
      <max>20.0</max>
-     <scale>-1.075</scale>
+     <scale>-2.15</scale>
      <offset>0</offset>
     </transformation>
    </transformations>
@@ -87,9 +85,9 @@ properties' values.
   <layer>
    <name>roll</name>
    <texture>
-    <path>Aircraft/Instruments/Textures/attitude-indicator.rgb</path>
-    <x1>0.5</x1>
-    <y1>0.5</y1>
+    <path>Aircraft/Instruments/Textures/attitude5.rgb</path>
+    <x1>0.0</x1>
+    <y1>0.0</y1>
     <x2>1.0</x2>
     <y2>1.0</y2>
    </texture>
@@ -106,42 +104,41 @@ properties' values.
   <layer>
    <name>plane</name>
    <texture>
-    <path>Aircraft/Instruments/Textures/attitude-indicator.rgb</path>
-    <x1>0.5</x1>
-    <y1>0.25</y1>
-    <x2>0.75</x2>
-    <y2>0.40625</y2>
+    <path>Aircraft/Instruments/Textures/madr-misc1.rgb</path>
+    <x1>0.0</x1>
+    <y1>0.0</y1>
+    <x2>0.5</x2>
+    <y2>0.3125</y2>
    </texture>
-   <h>42</h>
-   <w>66</w>
+   <h>83</h>
+   <w>133</w>
    <transformations>
     <transformation>
      <type>y-shift</type>
      <property>/steam/horizon-adjust</property>
-     <offset>-17</offset>
+     <offset>-32</offset>
     </transformation>
    </transformations>
   </layer>
   <layer>
    <name>foreground</name>
    <texture>
-    <path>Aircraft/Instruments/Textures/attitude-indicator.rgb</path>
+    <path>Aircraft/Instruments/Textures/attitude1.rgb</path>
     <x1>0.0</x1>
-    <y1>0.5</y1>
-    <x2>0.5</x2>
+    <y1>0.0</y1>
+    <x2>1.0</x2>
     <y2>1.0</y2>
    </texture>
   </layer> 
  </layers>
-
  <actions>
   <action>
    <name>fine lower</name>
    <button>0</button>
-   <x>-11</x>
-   <y>-62</y>
-   <w>11</w>
-   <h>22</h>
+   <x>-22</x>
+   <y>-124</y>
+   <w>22</w>
+   <h>44</h>
   <binding>
   <command>property-adjust</command>
    <property>/steam/horizon-adjust</property>
@@ -173,9 +170,9 @@ properties' values.
    <name>fine raise</name>
    <button>0</button>
    <x>0</x>
-   <y>-62</y>
-   <w>11</w>
-   <h>22</h>
+   <y>-124</y>
+   <w>22</w>
+   <h>44</h>
   <binding>
   <command>property-adjust</command>
    <property>/steam/horizon-adjust</property>
@@ -190,9 +187,9 @@ properties' values.
    <name>coarse raise</name>
    <button>1</button>
    <x>0</x>
-   <y>-62</y>
-   <w>11</w>
-   <h>22</h>
+   <y>-124</y>
+   <w>22</w>
+   <h>44</h>
   <binding>
   <command>property-adjust</command>
    <property>/steam/horizon-adjust</property>

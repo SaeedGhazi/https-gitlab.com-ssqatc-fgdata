@@ -1,26 +1,14 @@
 <?xml version="1.0"?>
 
 <!--
-Improved altimeter instrument.
-Adds enhancements allowing for calibration.
+Improved airspeed indicator instrument.
+Apr 27 2001
+Martin Dressler dr@musicabona.cz
+Altimeter indicator instrument from C172RG
+GPL
+_______________________________________________________________________________
 
-Jan, 2001 by Julian Foad <julianfoad@netscapeonline.co.uk>
-
-Julian sez: 
- "provides a modified instrument definition with a knob
- driving a subscale showing through a cut-out in the face....
- 
- I've put two lines in 'altimeter.xml', one to display millibars and
- another, presently commented out, for inHg; USA pilots might want to
- uncomment the inHg line instead.  At present, my subscale texture map
- only has marks on it, not numbers, so it can stay the same.  Really
- there should be two different versions of the altimeter, and a
- USA-registered C172 would be fitted with an altimeter with inHg while
- and a UK-registered C172 would be fitted with an altimeter with mb on
- its subscale."
-   _________________________________________________________________
-
-Based on default by David Megginson, david@megginson.com.
+Based on Default by David Megginson, david@megginson.com.
 
 This is an instrument configuration file for the open-source flight
 simulator FlightGear (www.flightgear.org).  The file is an XML-encoded
@@ -42,276 +30,189 @@ properties' values.
 
 <PropertyList>
 
- <name>Altimeter</name>
- <w-base>128</w-base>
- <h-base>128</h-base>
+ <name>C172RG Altimeter Indicator</name>
+
+ <w-base>256</w-base>
+ <h-base>256</h-base>
 
  <layers>
-
   <layer>
-   <name>subscale</name>
-   <texture>
-    <path>Aircraft/Instruments/Textures/faces-6.rgb</path>
-    <x1>0.51</x1>
-    <y1>0.51</y1>
+   <name>Pressure</name>
+   <texture> 
+    <path>Aircraft/Instruments/Textures/alt3.rgb</path>
+    <x1>0.0</x1>
+    <y1>0.0</y1>
     <x2>1.0</x2>
     <y2>1.0</y2>
    </texture>
-   <w>104</w>
-   <h>104</h>
    <transformations>
     <transformation>
      <type>rotation</type>
      <property>/steam/altimeter-datum-mb</property>
-     <scale>-4.5</scale>  <!-- degrees rotation per millibar -->
+     <min>945</min>
+     <max>1090</max>
+     <scale>-2.9533373</scale>  <!-- degrees rotation per millibar -->
+     <offset>120</offset>
     </transformation>
    </transformations>
   </layer>
   <layer>
-   <name>guage face</name>
-   <texture>
-    <path>Aircraft/Instruments/Textures/faces-1-hi.rgb</path>
-    <x1>0.51</x1>
-    <y1>0.51</y1>
+   <name>background</name>
+   <texture> 
+    <path>Aircraft/Instruments/Textures/alt2.rgb</path>
+    <x1>0.0</x1>
+    <y1>0.0</y1>
     <x2>1.0</x2>
     <y2>1.0</y2>
    </texture>
-   <w>110</w>
-   <h>110</h>
   </layer>
   <layer>
-   <name>numeric datum</name>
-   <type>text</type>
-   <point-size>10</point-size>
-   <color>
-    <red>1.0</red>
-    <green>1.0</green>
-    <blue>1.0</blue>
-   </color>
-   <chunks>
-    <chunk>
-     <type>number-value</type>
-     <property>/steam/altimeter-datum-mb</property>
-<!-- <format>%5.2f</format> <scale>0.029530</scale> -->  <!-- Display inHg -->
-     <format>%4.0f</format>                              <!-- Display mb -->
-    </chunk>
-   </chunks>
-   <transformations>
-    <transformation>
-     <type>x-shift</type>
-     <offset>10</offset>
-    </transformation>
-    <transformation>
-     <type>y-shift</type>
-     <offset>-5</offset>
-    </transformation>
-   </transformations>
-  </layer>
-  <layer>
-   <name>short needle (thousands)</name>
-   <texture>
-    <path>Aircraft/Instruments/Textures/misc-1.rgb</path>
-    <x1>0.8</x1>
-    <y1>0.859375</y1>
-    <x2>0.8375</x2>
-    <y2>1.0</y2>
-   </texture>
-   <w>6</w>
-   <h>24</h>
-   <transformations>
-    <transformation>
-     <type>rotation</type>
-     <property>/steam/altitude-ft</property>
-     <max>100000.0</max>
-     <scale>0.036</scale>
-    </transformation>
-    <transformation>
-     <type>y-shift</type>
-     <offset>14.0</offset>
-    </transformation>
-   </transformations>
-  </layer>
-  <layer>
-   <name>long needle (hundreds)</name>
-   <texture>
-    <path>Aircraft/Instruments/Textures/misc-1.rgb</path>
-    <x1>0.8</x1>
-    <y1>0.78125</y1>
-    <x2>0.8375</x2>
-    <y2>1.0</y2>
-   </texture>
-   <w>6</w>
-   <h>48</h>
-   <transformations>
-    <transformation>
-     <type>rotation</type>
-     <property>/steam/altitude-ft</property>
-     <max>100000.0</max>
-     <scale>0.36</scale>
-    </transformation>
-    <transformation>
-     <type>y-shift</type>
-     <offset>20.0</offset>
-    </transformation>
-   </transformations>
-  </layer>
-  <layer>
-   <name>bug (ten thousands)</name>
-   <texture>
-    <path>Aircraft/Instruments/Textures/misc-1.rgb</path>
-    <x1>0.85</x1>
-    <y1>0.8125</y1>
-    <x2>0.8755</x2>
-    <y2>0.84375</y2>
-   </texture>
-   <w>12</w>
-   <h>12</h>
-   <transformations>
-    <transformation>
-     <type>rotation</type>
-     <property>/steam/altitude-ft</property>
-     <max>100000.0</max>
-     <scale>0.0036</scale>
-    </transformation>
-    <transformation>
-     <type>y-shift</type>
-     <offset>50.0</offset>
-    </transformation>
-   </transformations>
-  </layer>
-  <layer>
-   <name>button</name>
-   <texture>
-    <path>Aircraft/Instruments/Textures/misc-1.rgb</path>
-    <x1>0.6171875</x1>
-    <y1>0.2421875</y1>
-    <x2>0.7890625</x2>
-    <y2>0.4140625</y2>
-   </texture>
-   <w>15</w>
-   <h>15</h>
-  </layer>
-  <layer>
-   <name>glare shield</name>
-   <texture>
-    <path>Aircraft/Instruments/Textures/bezel1.rgb</path>
+   <name>thousand needle</name>
+   <texture> 
+    <path>Aircraft/Instruments/Textures/madr-misc1.rgb</path>
     <x1>0.5</x1>
     <y1>0.0</y1>
     <x2>1.0</x2>
     <y2>0.5</y2>
    </texture>
-  <w>128</w>
-  <h>128</h>
- <transformations>
-    <transformation>
-     <type>x-shift</type>
-     <offset>2</offset>
-    </transformation>
-    <transformation>
-     <type>y-shift</type>
-     <offset>-2</offset>
-    </transformation>
-    </transformations>
-  </layer>
-   <layer>
-   <name>Knob</name>
-   <texture>
-    <path>Aircraft/Instruments/Textures/blister.rgb</path>
-    <x1>0.25</x1>
-    <y1>0.75</y1>
-    <x2>0.5</x2>
-    <y2>1.0</y2>
-   </texture>
-   <h>24</h>
-   <w>24</w>
+   <w>128</w>
+   <h>128</h>
    <transformations>
     <transformation>
-     <type>x-shift</type>
-     <offset>-45</offset>
+     <type>rotation</type>
+     <property>/steam/altitude-ft</property>
+      <max>100000.0</max>
+      <scale>0.0036</scale>
     </transformation>
     <transformation>
      <type>y-shift</type>
-     <offset>-45</offset>
-    </transformation>
-    <transformation>
-     <type>rotation</type>
-     <offset>180</offset>
+     <offset>8</offset>
     </transformation>
    </transformations>
   </layer>
-
+  <layer>
+   <name>short needle</name>
+   <texture> 
+    <path>Aircraft/Instruments/Textures/madr-misc1.rgb</path>
+    <x1>0.734375</x1>
+    <y1>0.59375</y1>
+    <x2>0.875</x2>
+    <y2>1.0</y2>
+   </texture>
+   <w>36</w>
+   <h>104</h>
+   <transformations>
+    <transformation>
+     <type>rotation</type>
+     <property>/steam/altitude-ft</property>
+      <max>100000.0</max>
+      <scale>0.036</scale>
+    </transformation>
+    <transformation>
+     <type>y-shift</type>
+     <offset>14</offset>
+    </transformation>
+   </transformations>
+  </layer>
+  <layer>
+   <name>long needle</name>
+   <texture> 
+    <path>Aircraft/Instruments/Textures/madr-misc1.rgb</path>
+    <x1>0.875</x1>
+    <y1>0.5</y1>
+    <x2>1.0</x2>
+    <y2>1.0</y2>
+   </texture>
+   <w>32</w>
+   <h>128</h>
+   <transformations>
+    <transformation>
+     <type>rotation</type>
+     <property>/steam/altitude-ft</property>
+      <max>100000.0</max>
+      <scale>0.36</scale>
+    </transformation>
+    <transformation>
+     <type>y-shift</type>
+     <offset>18</offset>
+    </transformation>
+   </transformations>
+  </layer>
+  <layer>
+   <name>foreground</name>
+   <texture> 
+    <path>Aircraft/Instruments/Textures/alt1.rgb</path>
+    <x1>0.0</x1>
+    <y1>0.0</y1>
+    <x2>1.0</x2>
+    <y2>1.0</y2>
+   </texture>
+  </layer>
  </layers>
-
  <actions>
-
   <action>
    <name>calibrate fine</name>
    <button>0</button>
-   <x>-56</x>
-   <y>-56</y>
-   <w>12</w>
-   <h>24</h>
+   <x>-103</x>
+   <y>-122</y>
+   <w>22</w>
+   <h>45</h>
    <binding>
     <command>property-adjust</command>
     <property>/steam/altimeter-datum-mb</property>
-    <step>-0.333333</step>
-    <min>500</min>
-    <max>1100</max>
+    <step>-0.3386</step>
+    <min>945</min>
+    <max>1090</max>
     <wrap>false</wrap>
    </binding>
   </action>
-
   <action>
    <name>calibrate coarse</name>
    <button>1</button>
-   <x>-56</x>
-   <y>-56</y>
-   <w>12</w>
-   <h>24</h>
+   <x>-103</x>
+   <y>-122</y>
+   <w>22</w>
+   <h>45</h>
    <binding>
     <command>property-adjust</command>
     <property>/steam/altimeter-datum-mb</property>
-    <step>-5</step>
-    <min>500</min>
-    <max>1100</max>
+    <step>-3.386</step>
+    <min>945</min>
+    <max>1090</max>
     <wrap>false</wrap>
    </binding>
   </action>
-
   <action>
    <name>calibrate fine</name>
    <button>0</button>
-   <x>-46</x>
-   <y>-56</y>
-   <w>12</w>
-   <h>24</h>
+   <x>-81</x>
+   <y>-122</y>
+   <w>22</w>
+   <h>45</h>
    <binding>
     <command>property-adjust</command>
     <property>/steam/altimeter-datum-mb</property>
-    <step>0.333333</step>
-    <min>500</min>
-    <max>1100</max>
+    <step>0.3386</step>
+    <min>945</min>
+    <max>1090</max>
     <wrap>false</wrap>
    </binding>
   </action>
-
   <action>
    <name>calibrate coarse</name>
    <button>1</button>
-   <x>-46</x>
-   <y>-56</y>
-   <w>12</w>
-   <h>24</h>
+   <x>-81</x>
+   <y>-122</y>
+   <w>22</w>
+   <h>45</h>
    <binding>
     <command>property-adjust</command>
     <property>/steam/altimeter-datum-mb</property>
-    <step>5</step>
-    <min>500</min>
-    <max>1100</max>
+    <step>3.386</step>
+    <min>945</min>
+    <max>1090</max>
     <wrap>false</wrap>
    </binding>
   </action>
-
  </actions>
-
 </PropertyList>

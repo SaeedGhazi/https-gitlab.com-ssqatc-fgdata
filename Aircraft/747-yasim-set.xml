@@ -44,14 +44,16 @@
 
  <autopilot>
    <config>
-     <min-climb-speed-kt type="float">260.0</min-climb-speed-kt>
+     <min-climb-speed-kt type="float">190.0</min-climb-speed-kt>
      <best-climb-speed-kt type="float">310.0</best-climb-speed-kt>
      <target-climb-rate-fpm type="float">2000.0</target-climb-rate-fpm>
      <target-descent-rate-fpm type="float">1500.0</target-descent-rate-fpm>
-     <elevator-adj-factor type="float">16000.0</elevator-adj-factor>
-     <integral-contribution type="float">0.005</integral-contribution>
+     <elevator-adj-factor type="float">1500.0</elevator-adj-factor>
+     <integral-contribution type="float">0.01</integral-contribution>
      <zero-pitch-throttle type="float">0.0001</zero-pitch-throttle>
      <zero-pitch-trim-full-throttle type="float">0.0001</zero-pitch-trim-full-throttle>
+     <max-roll-deg type="float">30</max-roll-deg>
+     <max-aileron type="float">1.0</max-aileron>
    </config>
  </autopilot>
 

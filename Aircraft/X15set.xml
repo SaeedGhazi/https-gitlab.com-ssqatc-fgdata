@@ -16,6 +16,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
  <sim>
   <flight-model>jsb</flight-model>
   <aircraft>X15</aircraft>
+  <sound>false</sound>
   <panel>
    <path>Aircraft/X15/Panels/X15-panel.xml</path>
   </panel>
@@ -28,6 +29,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
    <path>Aircraft/X15/Models/X15_landing.ac</path>
   </model_2> 
  </sim>
+  
 </PropertyList>
 
 

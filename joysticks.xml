@@ -47,7 +47,13 @@ axes for the hat switch, and several more buttons.
    <desc>Throttle</desc>
    <binding>
     <command>property-scale</command>
-    <property>/controls/throttle</property>
+    <property>/controls/throttle[0]</property>
+    <offset type="double">-1.0</offset>
+    <factor type="double">-0.5</factor>
+   </binding>
+   <binding>
+    <command>property-scale</command>
+    <property>/controls/throttle[1]</property>
     <offset type="double">-1.0</offset>
     <factor type="double">-0.5</factor>
    </binding>

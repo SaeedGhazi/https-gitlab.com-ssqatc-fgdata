@@ -45,7 +45,7 @@ model, instrument panel, and external 3D model.
    <config>
      <x-offset-m archive="y">0.0</x-offset-m>
      <y-offset-m archive="y">-0.3</y-offset-m>
-     <z-offset-m archive="y">0.4</z-offset-m>
+     <z-offset-m archive="y">0.9</z-offset-m>
    </config>
   </view>
 
@@ -61,7 +61,8 @@ model, instrument panel, and external 3D model.
   <aileron-trim>0.0076</aileron-trim>   <!-- fixed -->
   <elevator-trim>0.0000</elevator-trim> <!-- controllable -->
   <rudder-trim>0.0020</rudder-trim>     <!-- fixed -->
-  <magnetos>3</magnetos>
+  <magnetos>2</magnetos>
+  <door>1.0</door>
  </controls>
 
  <!-- An autopilot on a Cub??? -->  

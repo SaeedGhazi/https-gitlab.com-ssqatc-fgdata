@@ -1,0 +1,37 @@
+<PropertyList>
+
+ <menu>
+  <label>File</label>
+
+  <item>
+   <label>Quit</label>
+   <binding>
+    <command>exit</command>
+   </binding>
+  </item>
+
+ </menu>
+
+ <menu>
+  <label>Weather</label>
+
+  <item>
+   <label>Winds</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>winds</dialog-name>
+   </binding>
+  </item>
+
+  <item>
+   <label>Air</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>air</dialog-name>
+   </binding>
+  </item>
+
+ </menu>
+
+
+</PropertyList>

@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+
+<!-- Sample Flight plan from DNMM (LAGOS, Nigeria) to EHAM (Amsterdam, the Netherlands) -->
+<!-- This file consists mostly of made-up data, although the runway 1R take-off -->
+<!-- may be useful -->
+<PropertyList>
+
+ <flightplan>
+
+  <wpt>
+   <name>RWY1R</name>
+   <lat>6.572279</lat>
+   <lon>3.329055</lon>
+   <alt>164.0</alt>
+   <ktas>20</ktas>
+   <gear-down>true</gear-down>
+  </wpt>
+
+  <wpt>
+   <name>accel</name>
+   <lat>6.574965</lat>
+   <lon>3.329027</lon>
+   <alt>164.0</alt>
+   <ktas>180</ktas>
+  </wpt>
+
+  <wpt>
+   <name>rotate</name>
+   <lat>6.587738</lat>
+   <lon>3.328826</lon>
+   <alt>2000</alt>
+   <ktas>240</ktas>
+   <gear-down>false</gear-down>
+  </wpt>
+
+  <wpt>
+   <name>climb</name>
+   <lat>6.671337</lat>
+   <lon>3.332655</lon>
+   <alt>6000</alt>
+   <ktas>240</ktas>
+  </wpt>
+
+  <wpt>
+   <name>climb</name>
+   <lat>6.831288</lat>
+   <lon>3.347546</lon>
+   <alt>30000.0</alt>
+   <ktas>500</ktas>
+  </wpt>
+
+
+  <!-- Here is a big gap in the route: There are no waypoints enroute -->
+  <!-- for an arrival from west africa, there's probably a better approach, but lets -->
+  <!-- do a river 1B approach to shiphol -->
+
+  <wpt>
+    <name>RIVER</name>
+    <lat>51.912778</lat>
+    <lon>4.132500</lon>
+    <ktas>300</ktas>
+    <crossat>7000</crossat>
+   </wpt>
+
+  <wpt>   
+   <name>EH606</name>
+    <lat>52.422500</lat>
+    <lon>4.387778</lon>
+    <ktas>220</ktas>
+    <alt>4000</alt>
+   </wpt> 
+
+   <wpt>
+    <name>NIRSI</name>
+    <lat>52.583889</lat>
+    <lon>4.513333</lon>
+    <ktas>220</ktas>
+    <crossat>4000</crossat>
+   </wpt>
+
+   <wpt>
+    <name>EH607</name>
+    <lat>52.583889</lat>
+    <lon>4.646944</lon>
+    <ktas>220</ktas>
+    <crossat>4000</crossat>
+  </wpt>
+  <wpt>
+    <name>EH608</name>
+    <lat>52.539444</lat>
+    <lon>4.728056</lon>
+    <ktas>210</ktas>
+    <crossat>3400</crossat>
+   </wpt>
+
+  <wpt>
+    <name>EH621</name>
+    <lat>52.462778</lat>
+    <lon>4.721111</lon>
+    <ktas>190</ktas>
+    <crossat>2000</crossat>
+   </wpt>
+
+  <wpt>
+    <name>EH622</name>
+    <lat>52.426667</lat>
+    <lon>4.717778</lon>
+    <ktas>190</ktas>
+    <crossat>1310</crossat>
+    <gear-down>true</gear-down>
+   </wpt>
+
+   <wpt>
+    <name>TOUCHDOWN-RWY18R</name>
+    <lat>52.355444</lat>
+    <lon>4.711257</lon>
+    <ktas>20</ktas>
+    <crossat>19</crossat>
+    <on-ground>true</on-ground>
+   </wpt>
+ 
+   <wpt>
+    <name>TURN</name>
+    <lat>52.341509</lat>
+    <lon>4.709948</lon>
+    <ktas>20</ktas>
+    <crossat>19</crossat>
+ 
+   </wpt>   
+
+   <wpt>
+    <name>END</name>
+    <lat>52.338113</lat>
+    <lon>4.712411</lon>
+    <ktas>20</ktas>
+    <crossat>19</crossat>
+   </wpt>
+
+  <wpt>
+   <name>EOF</name>
+  </wpt>
+
+ </flightplan>
+
+</PropertyList>

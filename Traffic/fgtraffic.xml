@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<trafficlist>
+   <traffic include="PH-KCA.xml"/>
+   <traffic include="PH-KCB.xml"/>
+   <traffic include="PH-KCC.xml"/>
+   <traffic include="PH-KCD.xml"/>
+   <traffic include="PH-KCE.xml"/>
+   <traffic include="PH-KCF.xml"/>
+   <traffic include="PH-KCG.xml"/>
+<!--   <traffic include="test.xml"/> -->
+</trafficlist>

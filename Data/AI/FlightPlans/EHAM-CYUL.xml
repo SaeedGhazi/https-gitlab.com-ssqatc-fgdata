@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+
+<!-- this is a very simple prototype FlightPlan -->
+ 
+<PropertyList>
+
+ <flightplan>
+
+  <wpt>
+   <name>EHAM-Rwy-24</name>
+   <lat>52.304539</lat>
+   <lon>4.777361</lon>
+   <alt>19.0</alt>
+   <ktas>20</ktas>
+   <gear-down>true</gear-down>
+  </wpt>
+
+  <wpt>
+   <name>accel</name>
+   <lat>52.303886</lat>
+   <lon>4.775642</lon>
+   <alt>19.0</alt>
+   <ktas>180</ktas>
+  </wpt>
+
+  <wpt>
+   <name>rotate</name>
+   <lat>52.296355</lat>
+   <lon>4.755777</lon>
+   <alt>250</alt>
+   <ktas>220</ktas>
+   <gear-down>false</gear-down>
+  </wpt>
+ 
+  <wpt>
+   <name>runway-end</name>
+   <lat>52.296355</lat>
+   <lon>4.738186</lon>
+   <alt>500</alt>
+   <ktas>220</ktas>
+  </wpt>
+
+   <wpt>
+   <name>EH001</name>
+   <lat>52.275278</lat>
+   <lon>4.701111</lon>
+   <alt>2000</alt>
+   <ktas>240</ktas>
+  </wpt>
+  <!-- up to this point, all runway 24 departures are the same -->
+   <wpt>
+   <name>EH051</name>
+   <lat>52.243889</lat>
+   <lon>4.651111</lon>
+   <alt>3000</alt>
+   <ktas>240</ktas>
+  </wpt>
+
+ <wpt>
+   <name>EH009</name>
+   <lat>52.223611</lat>
+   <lon>4.554444</lon>
+   <alt>4000</alt>
+   <ktas>240</ktas>
+  </wpt>
+
+ <wpt>
+   <name>EH028</name>
+   <lat>52.357778</lat>
+   <lon>4.211111</lon>
+   <alt>6000</alt>
+   <ktas>240</ktas>
+  </wpt>
+
+   <wpt>
+   <name>BERGI</name>
+   <lat>52.748889</lat>
+   <lon>4.358889</lon>
+   <alt>33000</alt>
+   <ktas>450</ktas>
+  </wpt>
+
+  <wpt>
+   <name>AMGOD</name>
+   <lat>52.975277</lat>
+   <lon>3.685277</lon>
+   <alt>33000</alt>
+   <ktas>450</ktas>
+  </wpt>
+  <!-- Up to this point is a BERGI 1S departure -->
+  <!-- Next, just add one more waypoint to keep the AI system busy -->
+  <wpt>
+    <name>END</name>
+    <lat>45.467269</lat>
+    <lon>-73.035903</lon>
+    <alt>33000</alt>
+    <ktas>500</ktas>
+  </wpt>
+
+ <wpt>
+   <name>EOF</name>
+  </wpt>
+
+ </flightplan>
+
+</PropertyList>

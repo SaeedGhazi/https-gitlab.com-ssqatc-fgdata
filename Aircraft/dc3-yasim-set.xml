@@ -43,7 +43,9 @@ October 23 2001 John Check, fgpanels@rockfish.net
   </model> 
 
   <view n="0">
-   <pitch-offset-deg>-5</pitch-offset-deg>
+   <config>
+    <pitch-offset-deg>-6</pitch-offset-deg>
+   </config>
   </view>
 
   <view n="1">

@@ -104,6 +104,7 @@ $Id$
   <binding><command>null</command></binding>
   <low>
    <repeatable type="bool">true</repeatable>
+   <interval-sec type="double">0.05</interval-sec>
    <binding>
     <command>property-adjust</command>
     <property>/controls/flight/rudder</property>
@@ -112,6 +113,7 @@ $Id$
   </low>
   <high>
    <repeatable type="bool">true</repeatable>
+   <interval-sec type="double">0.05</interval-sec>
    <binding>
     <command>property-adjust</command>
     <property>/controls/flight/rudder</property>
@@ -125,6 +127,7 @@ $Id$
   <binding><command>null</command></binding>
   <low>
    <repeatable type="bool">true</repeatable>
+   <interval-sec type="double">0.05</interval-sec>
    <binding>
     <command>property-adjust</command>
     <property>/controls/flight/elevator-trim</property>
@@ -133,6 +136,7 @@ $Id$
   </low>
   <high>
    <repeatable type="bool">true</repeatable>
+   <interval-sec type="double">0.05</interval-sec>
    <binding>
     <command>property-adjust</command>
     <property>/controls/flight/elevator-trim</property>
@@ -178,7 +182,6 @@ $Id$
  </button>
 
  <button n="1">
-  <repeatable type="bool">false</repeatable>
   <binding>
    <desc>Center rudder</desc>
    <command>property-assign</command>
@@ -188,7 +191,6 @@ $Id$
  </button>
 
  <button n="2">
-  <repeatable type="bool">false</repeatable>
   <binding>
    <desc>Flaps up</desc>
    <command>property-adjust</command>
@@ -198,7 +200,6 @@ $Id$
  </button>
 
  <button n="3">
-  <repeatable type="bool">false</repeatable>
   <binding>
    <desc>Flaps down</desc>
    <command>property-adjust</command>

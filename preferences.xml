@@ -22,7 +22,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <airport-id>KSFO</airport-id>
    <fullscreen>false</fullscreen>
    <units>feet</units>
-<!--   <browser-app>netscape</browser-app>  help viewer -->
+  <browser-app>konqueror</browser-app><!--  help viewer -->
   </startup>
   <flight-model>jsb</flight-model>
   <aircraft>c172</aircraft>
@@ -32,12 +32,12 @@ Started September 2000 by David Megginson, david@megginson.com
   <field-of-view>55.0</field-of-view>
   <panel>
    <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
-   <y-offset>-305</y-offset>
+<!--   <y-offset>-305</y-offset> -->
    <visibility>true</visibility>
   </panel>
   <panel_2>
    <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
-   <y-offset>-305</y-offset>
+<!--   <y-offset>-305</y-offset> -->
    <visibility>true</visibility>
   </panel_2>
   <hud>
@@ -80,6 +80,12 @@ Started September 2000 by David Megginson, david@megginson.com
   <visibility-m>16000</visibility-m>
  </environment>
 
+ <!-- Engine -->
+ <engines>
+  <engine>
+   <magneto>0.0</magneto>
+  </engine>
+ </engines>
 
  <!-- Controls -->
 

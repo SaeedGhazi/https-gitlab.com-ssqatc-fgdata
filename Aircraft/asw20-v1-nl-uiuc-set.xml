@@ -21,8 +21,11 @@ Last update: Nov 9, 2002 Michael Selig, m-selig@uiuc.edu
 
  <sim>
 
+  <description>ASW-20 sailplane (UIUC)</description>
+
   <flight-model>larcsim</flight-model>
   <aero>uiuc</aero>
+  <uiuc-type>uiuc-sailplane</uiuc-type>
   <aircraft-dir>Aircraft/UIUC/asw20-v1-nl</aircraft-dir>
 
   <sound>

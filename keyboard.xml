@@ -61,14 +61,34 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
-<key n="18">
+ <key n="15">
+  <name>Ctrl-O</name>
+  <desc>(Temporary) Tilt view down</desc>
+  <binding>
+   <command>property-adjust</command>
+   <property>/sim/view/goal-tilt-deg</property>
+   <step>-1</step>
+  </binding>
+ </key>
+
+ <key n="16">
+  <name>Ctrl-P</name>
+  <desc>(Temporary) Tilt view up</desc>
+  <binding>
+   <command>property-adjust</command>
+   <property>/sim/view/goal-tilt-deg</property>
+   <step>1</step>
+  </binding>
+ </key>
+
+ <key n="18">
   <name>Ctrl-R</name>
   <desc>(Temporary) Toggle winding-ccw</desc>
   <binding>
     <command>property-toggle</command>
     <property>/sim/temp/winding-ccw</property>
   </binding>
-</key>
+ </key>
 
  <key n="19">
   <name>Ctrl-S</name>

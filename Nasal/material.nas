@@ -4,18 +4,22 @@
 # Usage:  material.showDialog(<path>, [<title>], [<x>], [<y>]);
 #
 # the path should point to a property "directory" (usually set in
-# the aircraft's *-set.xml file) that contains any of:
+# the aircraft's *-set.xml file) that contains any of
+# (shininess|transparency|texture) and (diffuse|ambient|specular|emission),
+# whereby the latter four are directories containing any of
+# (red|green|blue|factor|offset).
 #
-#   {diffuse,ambient,specular,emission}-{red,green,blue,factor,offset}
-#   shininess, transparency, texture
-#
-# If <title> is omitted, then the last path component is used as title.
+# If <title> is omitted or nil, then the last path component is used as title.
 # If <x> and <y> are undefined, then the dialog is centered.
 #
 #
 # Example:
 #   <foo>
-#       <diffuse-red>1.0</diffuse-red>
+#       <diffuse>
+#           <red>1.0</red>
+#           <green>0.5</green>
+#           <blue>0.5</blue>
+#       </diffuse>
 #       <transparency>0.5</transparency>
 #       <texture>bar.rgb</texture>
 #   </foo>
@@ -33,31 +37,36 @@
 #  <animation>
 #      <type>material</type>
 #      <object-name>foo</object-name>
-#      <diffuse-red-prop>/foo/diffuse-red</diffuse-red-prop>
-#      <transparency-prop>/foo/transparency</transparency-prop>
-#      <texture-prop>/foo/texture</texture-prop>
+#      <property-base>/sim/model/foo</property-base>
+#      <diffuse>
+#          <red-prop>diffuse/red</red-prop>
+#          <green-prop>diffuse/green</green-prop>
+#          <blue-prop>diffuse/blue</blue-prop>
+#      </diffuse>
+#      <transparency-prop>transparency</transparency-prop>
+#      <texture-prop>texture</texture-prop>
 #  </animation>
 #
 
 dialog = nil;
 
 colorgroup = func {
-	parent = arg[0];
-	name = arg[1];
+	parent = arg[0];  # pui parent
+	name = arg[1];    # "diffuse"
 	base = arg[2];
-	undef = func { props.globals.getNode(base ~ name ~ "-" ~ arg[0]) == nil };
+	undef = func { props.globals.getNode(base ~ name ~ "/" ~ arg[0]) == nil };
 
 	if (undef("red") and undef("green") and undef("blue")) {
 		return;
 	}
 	grp = parent.addChild("group");
 	grp.set("layout", "hbox");
-	grp.addChild("text").set("label", "-- " ~ name ~ " --");
+	grp.addChild("text").set("label", "_______" ~ name ~ "_______");
 
 	foreach (color; ["red", "green", "blue", "factor"]) {
-		mat(parent, color, base ~ name ~ "-" ~ color);
+		mat(parent, color, base ~ name ~ "/" ~ color, "%.3f");
 	}
-	mat(parent, "offset", base ~ name ~ "-" ~ "offset", -1.0, 1.0);
+	mat(parent, "offset", base ~ name ~ "/" ~ "offset", "%.3f", -1.0, 1.0);
 }
 
 
@@ -65,6 +74,7 @@ mat = func {
 	parent = arg[0];
 	name = arg[1];
 	path = arg[2];
+	format = arg[3];
 	if (props.globals.getNode(path) != nil) {
 		grp = parent.addChild("group");
 		grp.set("layout", "hbox");
@@ -75,14 +85,15 @@ mat = func {
 		slider = grp.addChild("slider");
 		slider.set("property", path);
 		slider.set("live", 1);
-		if (size(arg) == 5) {
-			slider.set("min", arg[3]);
-			slider.set("max", arg[4]);
+		if (size(arg) == 6) {
+			slider.set("min", arg[4]);
+			slider.set("max", arg[5]);
 		}
 		slider.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
 
 		number = grp.addChild("text");
-		number.set("label", "-0.1234567");
+		number.set("label", "-0.123");
+		number.set("format", format);
 		number.set("property", path);
 		number.set("live", 1);
 	}
@@ -115,7 +126,7 @@ showDialog = func {
 
 	titlebar = dialog.addChild("group");
 	titlebar.set("layout", "hbox");
-	titlebar.addChild("text").set("label", title);
+	titlebar.addChild("text").set("label", "[" ~ title ~ "]");
 	titlebar.addChild("empty").set("stretch", 1);
 
 	w = titlebar.addChild("button");
@@ -123,34 +134,33 @@ showDialog = func {
 	w.set("pref-height", 16);
 	w.set("legend", "");
 	w.set("default", 1);
-	w.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
 	w.prop().getNode("binding[1]/command", 1).setValue("dialog-close");
 
 	colorgroup(dialog, "diffuse", base);
 	colorgroup(dialog, "ambient", base);
-	colorgroup(dialog, "specular", base);
 	colorgroup(dialog, "emission", base);
+	colorgroup(dialog, "specular", base);
 
 	undef = func { props.globals.getNode(base ~ arg[0]) == nil };
 	if (!(undef("shininess") and undef("transparency") and undef("threshold"))) {
 		w = dialog.addChild("group");
 		w.set("layout", "hbox");
-		w.addChild("text").set("label", "-- misc --");
+		w.addChild("text").set("label", "_________misc_________");
 
-		mat(dialog, "shi", base ~ "shininess", 0.0, 128.0);
-		mat(dialog, "trans", base ~ "transparency");
-		mat(dialog, "thresh", base ~ "threshold");
+		mat(dialog, "shi", base ~ "shininess", "%.0f", 0.0, 128.0);
+		mat(dialog, "trans", base ~ "transparency", "%.3f");
+		mat(dialog, "thresh", base ~ "threshold", "%.3f");
 	}
 
-	path = base ~ "texture";
-	if (props.globals.getNode(path) != nil) {
+	if (!undef("texture")) {
 		w = dialog.addChild("group");
 		w.set("layout", "hbox");
-		w.addChild("text").set("label", "-- texture --");
+		w.addChild("text").set("label", "_______texture_______");
 
 		w = dialog.addChild("input");
-		w.set("pref-width", 250);
-		w.set("property", path);
+		w.set("live", 1);
+		w.set("pref-width", 200);
+		w.set("property", base ~ "texture");
 		w.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
 	}
 	dialog.addChild("empty").set("pref-height", "3");

@@ -905,38 +905,89 @@ display explains the format clearly:</p>
 
 <h3><a name="material">"material" animation type</a></h3>
 <p>This "animation" can set any of the material properties on a model branch, including
-the texture file path. A simple case for such an animation can look like this:</p>
+the texture file path. The following minimalistic example animation allows to change the
+"panel" object's emissive color from (0,0,0) to (1,.2,0) by setting the factor property
+to values between 0.0 and 1.0.</p>
+
+ <blockquote>
+  <pre>&lt;animation&gt;
+  &lt;type&gt;material&lt;/type&gt;
+  &lt;object-name&gt;panel&lt;/object-name&gt;
+  &lt;emission&gt;
+    &lt;red&gt;1.0&lt;/red&gt;
+    &lt;green&gt;0.2&lt;/green&gt;
+    &lt;blue&gt;0.0&lt;/blue&gt;
+    &lt;factor-prop&gt;/controls/lighting/instruments-norm&lt;/factor-prop&gt;
+  &lt;/emission&gt;
+&lt;/animation&gt;
+  </pre>
+ </blockquote>
+
+
+<p>Changes made with this animation type are by default only effective for the objects listed in
+&lt;object-name&gt; tags, whereby you can use more than one of those. The next example, however,
+sets the optional &lt;global&gt; property, so that changes affect all objects that share
+the same material. This is the preferred method and should be used whereever possible. It isn't
+only faster, but also doesn't break other animations by forcing objects into the same branch.
+Note that all material properties can be set to fixed values, for instance &lt;red&gt; or, by appending
+"-prop", to the contents of another property node: &lt;red-prop&gt;. Because a "material" animation
+can contain a lot of such property paths, which is a nuisance to write, hard to read, and a potential
+source for typos, there's a &lt;property-base&gt; component. Its string value is prepended to
+all material property names (but not to property paths in a &lt;condition&gt; statement!).
+The following example shows all available elements:</p>
 
  <blockquote>
   <pre>&lt;animation&gt;
   &lt;type&gt;material&lt;/type&gt;
   &lt;object-name&gt;fuselage&lt;/object-name&gt;
+  &lt;condition&gt;
+    &lt;property&gt;/sim/model/foo/animate-fuselage-material&lt;/property&gt;
+  &lt;/condition&gt;
   &lt;global type="bool"&gt;true&lt;/global&gt;
-  &lt;emission-red&gt;1.0&lt;/emission-red&gt;
-  &lt;emission-green&gt;0.8&lt;/emission-green&gt;
-  &lt;emission-blue&gt;0.3&lt;/emission-blue&gt;
-  &lt;emission-factor-prop&gt;/controls/lighting/instruments-norm&lt;/emission-factor-prop&gt;
-  &lt;emission-offset&gt;0.3&lt;/emission-offset&gt;
+  &lt;property-base&gt;/sim/model/foo/material/fuselage&lt;/property-base&gt;
+  &lt;diffuse&gt;
+    &lt;red-prop&gt;diffuse/red&lt;/red-prop&gt;
+    &lt;green-prop&gt;diffuse/green&lt;/green-prop&gt;
+    &lt;blue-prop&gt;diffuse/blue&lt;/blue-prop&gt;
+    &lt;factor-prop&gt;diffuse/factor&lt;/factor-prop&gt;
+    &lt;offset-prop&gt;diffuse/offset&lt;/offset-prop&gt;
+  &lt;/diffuse&gt;
+  &lt;ambient&gt;
+    &lt;red-prop&gt;ambient/red&lt;/red-prop&gt;
+    &lt;green-prop&gt;ambient/green&lt;/green-prop&gt;
+    &lt;blue-prop&gt;ambient/blue&lt;/blue-prop&gt;
+    &lt;factor-prop&gt;ambient/factor&lt;/factor-prop&gt;
+    &lt;offset-prop&gt;ambient/offset&lt;/offset-prop&gt;
+  &lt;/ambient&gt;
+  &lt;emission&gt;
+    &lt;red-prop&gt;emission/red&lt;/red-prop&gt;
+    &lt;green-prop&gt;emission/green&lt;/green-prop&gt;
+    &lt;blue-prop&gt;emission/blue&lt;/blue-prop&gt;
+    &lt;factor-prop&gt;emission/factor&lt;/factor-prop&gt;
+    &lt;offset-prop&gt;emission/offset&lt;/offset-prop&gt;
+  &lt;/emission&gt;
+  &lt;specular&gt;
+    &lt;red-prop&gt;specular/red&lt;/red-prop&gt;
+    &lt;green-prop&gt;specular/green&lt;/green-prop&gt;
+    &lt;blue-prop&gt;specular/blue&lt;/blue-prop&gt;
+    &lt;factor-prop&gt;specular/factor&lt;/factor-prop&gt;
+    &lt;offset-prop&gt;specular/offset&lt;/offset-prop&gt;
+  &lt;/specular&gt;
+  &lt;shininess&gt;shininess&lt;/shininess&gt;
+  &lt;transparency&gt;transparency&lt;/transparency&gt;
+  &lt;texture&gt;texture&lt;/texture&gt;
+  &lt;threshold&gt;threshold&lt;/threshold&gt;
 &lt;/animation&gt;
   </pre>
  </blockquote>
 
-<p>The change is only effective for the objects listed in "object-name" tags,
-whereby you can use more than one of those. The above example, however,
-sets the optional "global" property, so that the changes affect all objects that share
-the same material. Note that all material properties can be set to fixed
-values or, by appending "-prop", to the contents of another property node.</p>
-
-<p>The "emission" group is only one of four available groups: "diffuse,
-"ambient", "specular, and "emission". A change to one of the components
-in each group does always update all three color components. Unset values
-default to zero. In addition to the color groups there are three properties
-"shininess", "transparency", "threshold", and "texture". The "texture" path
-is relative to the "texture-path" target or, if unset, the model directory.
-All numerical values are clamped to 0.0-1.0, except "shininess", which is
-clamped to 0.0-128.0. The "transparency" property makes an object fully
-transparent (and thus invisible) with 0.0, and fully opaque with 1.0. The
-"threshold" property sets the opaqueness threshold. It is only relevant for
+<p>A change to one of the components in each color group does always update
+all three color components. Unset values default to zero. The &lt;texture&gt; path
+is relative to the model's &lt;texture-path&gt; directory, or, if unset, to the model
+directory. All numerical values are clamped to 0.0-1.0, except &lt;shininess&gt;, which is
+clamped to 0.0-128.0. The &lt;transparency&gt; property makes an object fully
+transparent (and thus invisible) with 1.0, and fully opaque with 0.0. The
+&lt;threshold&gt; property sets the opaqueness threshold. It is only relevant for
 semitransparent textures. Only parts of the texture that are more opaque
 than this are diplayed at all. If it is set to 0.0, all parts of the texture
 will be shown. If it is 0.5, only parts with opaqueness greater than 0.5
@@ -944,7 +995,7 @@ will be shown. If it is 0.5, only parts with opaqueness greater than 0.5
 
 <p>Note that defining two or more of these animations for the same object,
 or a mixture of "material" and "blend" animations, will probably not yield
-the result that you expect. Try to do all state manipulations for one
+the result that you expect. Try to put all state manipulations for one
 object or material in one "material" animation, and use its "transparency"
 property instead of an extra "blend" animation.</p>
 
@@ -971,6 +1022,17 @@ like this:</p>
   &lt;/model&gt;
 &lt;/sim&gt;
   </pre>
+ </blockquote>
+
+
+<p>You can explore the influence of material changes at runtime, if you use
+a material animation like the above complete example, and call the material
+dialog on it, like in the following Nasal example. Note, that the path is
+the same that you would set in &lt;property-base&gt;.
+</p>
+
+ <blockquote>
+  <pre>material.showDialog("/sim/model/foo/material/fuselage");</pre>
  </blockquote>
 
 <hr>

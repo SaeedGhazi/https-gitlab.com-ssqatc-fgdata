@@ -497,7 +497,7 @@ properties' values.
    <transformations>
     <transformation>
      <type>x-shift</type>
-     <offset>-94</offset>
+     <offset>-96</offset>
     </transformation>
     <transformation>
      <type>y-shift</type>
@@ -524,7 +524,7 @@ properties' values.
    <transformations>
     <transformation>
      <type>x-shift</type>
-     <offset>-69</offset>
+     <offset>-72</offset>
     </transformation>
     <transformation>
      <type>y-shift</type>
@@ -551,7 +551,7 @@ properties' values.
    <transformations>
     <transformation>
      <type>x-shift</type>
-     <offset>-44</offset>
+     <offset>-45</offset>
     </transformation>
     <transformation>
      <type>y-shift</type>
@@ -639,7 +639,7 @@ properties' values.
   <action>
    <name>BFO button</name>
    <button>0</button>
-   <x>-77</x>
+   <x>-73</x>
    <y>-24</y>
    <w>18</w>
    <h>14</h>
@@ -657,9 +657,18 @@ properties' values.
    <w>18</w>
    <h>14</h>
    <binding>
-    <command>property-toggle</command>
+    <command>property-assign</command>
     <property>/radios/kr-87/inputs/frq-btn</property>
+    <value type="bool">true</value>
+    <repeatable type="bool">false</repeatable>
    </binding>
+   <mod-up>
+    <binding>
+     <command>property-assign</command>
+     <property>/radios/kr-87/inputs/frq-btn</property>
+     <value type="bool">false</value>
+    </binding>
+   </mod-up>
   </action>
  
   <action>
@@ -670,9 +679,18 @@ properties' values.
    <w>18</w>
    <h>14</h>
    <binding>
-    <command>property-toggle</command>
+    <command>property-assign</command>
     <property>/radios/kr-87/inputs/flt-et-btn</property>
+    <value type="bool">true</value>
+    <repeatable type="bool">false</repeatable>
    </binding>
+   <mod-up>
+    <binding>
+     <command>property-assign</command>
+     <property>/radios/kr-87/inputs/flt-et-btn</property>
+     <value type="bool">false</value>
+    </binding>
+   </mod-up>
   </action>
  
   <action>
@@ -683,9 +701,18 @@ properties' values.
    <w>18</w>
    <h>14</h>
    <binding>
-    <command>property-toggle</command>
+    <command>property-assign</command>
     <property>/radios/kr-87/inputs/set-rst-btn</property>
+    <value type="bool">true</value>
+    <repeatable type="bool">false</repeatable>
    </binding>
+   <mod-up>
+    <binding>
+     <command>property-assign</command>
+     <property>/radios/kr-87/inputs/set-rst-btn</property>
+     <value type="bool">false</value>
+    </binding>
+   </mod-up>
   </action>
  
 <!-- end buttons -->
@@ -783,17 +810,23 @@ properties' values.
   </action>
 
   <action>
-   <name>small frequency decrease</name>
+   <name>small frequency decrease selected</name>
    <button>0</button>
    <x>89</x>
    <y>-12</y>
    <w>12</w>
    <h>24</h>
    <condition>
-    <not-equals>
-    <property>/radios/kr-87/modes/count</property>
-    <value>2</value>
-    </not-equals>
+    <and>
+     <not-equals>
+     <property>/radios/kr-87/modes/count</property>
+     <value>2</value>
+     </not-equals>
+     <equals>
+      <property>/radios/kr-87/modes/stby</property>
+      <value>1</value>
+     </equals>
+    </and>
    </condition> 
    <binding>
     <command>property-adjust</command>
@@ -807,17 +840,23 @@ properties' values.
   </action>
   
   <action>
-   <name>small increase</name>
+   <name>small increase selected</name>
    <button>0</button>
    <x>100</x>
    <y>-12</y>
    <w>12</w>
    <h>24</h>
    <condition>
-    <not-equals>
-    <property>/radios/kr-87/modes/count</property>
-    <value>2</value>
-    </not-equals>
+    <and>
+     <not-equals>
+     <property>/radios/kr-87/modes/count</property>
+     <value>2</value>
+     </not-equals>
+     <equals>
+      <property>/radios/kr-87/modes/stby</property>
+      <value>1</value>
+     </equals>
+    </and>
    </condition> 
    <binding>
     <command>property-adjust</command>
@@ -832,17 +871,23 @@ properties' values.
   
 
   <action>
-   <name>large decrease</name>
+   <name>large decrease selected</name>
    <button>1</button>
    <x>89</x>
    <y>-12</y>
    <w>12</w>
    <h>24</h>
    <condition>
-    <not-equals>
-    <property>/radios/kr-87/modes/count</property>
-    <value>2</value>
-    </not-equals>
+    <and>
+     <not-equals>
+     <property>/radios/kr-87/modes/count</property>
+     <value>2</value>
+     </not-equals>
+     <equals>
+      <property>/radios/kr-87/modes/stby</property>
+      <value>1</value>
+     </equals>
+    </and>
    </condition> 
    <binding>
     <command>property-adjust</command>
@@ -857,17 +902,23 @@ properties' values.
 
 
   <action>
-   <name>large increase</name>
+   <name>large increase selected</name>
    <button>1</button>
    <x>100</x>
    <y>-12</y>
    <w>12</w>
    <h>24</h>
    <condition>
-    <not-equals>
-    <property>/radios/kr-87/modes/count</property>
-    <value>2</value>
-    </not-equals>
+    <and>
+     <not-equals>
+     <property>/radios/kr-87/modes/count</property>
+     <value>2</value>
+     </not-equals>
+     <equals>
+      <property>/radios/kr-87/modes/stby</property>
+      <value>1</value>
+     </equals>
+    </and>
    </condition> 
    <binding>
     <command>property-adjust</command>
@@ -879,39 +930,222 @@ properties' values.
     <wrap>1</wrap>
    </binding>
   </action>
- 
+  
+  <action>
+   <name>small frequency decrease standby</name>
+   <button>0</button>
+   <x>89</x>
+   <y>-12</y>
+   <w>12</w>
+   <h>24</h>
+   <condition>
+    <and>
+     <not-equals>
+     <property>/radios/kr-87/modes/count</property>
+     <value>2</value>
+     </not-equals>
+     <equals>
+      <property>/radios/kr-87/modes/stby</property>
+      <value>0</value>
+     </equals>
+    </and>
+   </condition> 
+   <binding>
+    <command>property-adjust</command>
+    <property>/radios/kr-87/outputs/standby-khz</property>
+    <step>-1</step>
+    <min>100</min>
+    <max>1300</max>
+    <resolution>1</resolution>
+    <wrap>1</wrap>
+   </binding>
+  </action>
+  
+  <action>
+   <name>small increase standby</name>
+   <button>0</button>
+   <x>100</x>
+   <y>-12</y>
+   <w>12</w>
+   <h>24</h>
+   <condition>
+    <and>
+     <not-equals>
+     <property>/radios/kr-87/modes/count</property>
+     <value>2</value>
+     </not-equals>
+     <equals>
+      <property>/radios/kr-87/modes/stby</property>
+      <value>0</value>
+     </equals>
+    </and>
+   </condition> 
+   <binding>
+    <command>property-adjust</command>
+    <property>/radios/kr-87/outputs/standby-khz</property>
+    <step>1</step>
+    <min>100</min>
+    <max>1300</max>
+    <resolution>1</resolution>
+    <wrap>1</wrap>
+   </binding>
+  </action>
+  
 
   <action>
-   <name>ident on|volume increase</name>
+   <name>large decrease standby</name>
+   <button>1</button>
+   <x>89</x>
+   <y>-12</y>
+   <w>12</w>
+   <h>24</h>
+   <condition>
+    <and>
+     <not-equals>
+     <property>/radios/kr-87/modes/count</property>
+     <value>2</value>
+     </not-equals>
+     <equals>
+      <property>/radios/kr-87/modes/stby</property>
+      <value>0</value>
+     </equals>
+    </and>
+   </condition> 
+   <binding>
+    <command>property-adjust</command>
+    <property>/radios/kr-87/outputs/standby-khz</property>
+    <step>-25</step>
+    <min>100</min>
+    <max>1300</max>
+    <resolution>1</resolution>
+    <wrap>1</wrap>
+   </binding>
+  </action>
+
+
+  <action>
+   <name>large increase standby</name>
+   <button>1</button>
+   <x>100</x>
+   <y>-12</y>
+   <w>12</w>
+   <h>24</h>
+   <condition>
+    <and>
+     <not-equals>
+     <property>/radios/kr-87/modes/count</property>
+     <value>2</value>
+     </not-equals>
+     <equals>
+      <property>/radios/kr-87/modes/stby</property>
+      <value>0</value>
+     </equals>
+    </and>
+   </condition> 
+   <binding>
+    <command>property-adjust</command>
+    <property>/radios/kr-87/outputs/standby-khz</property>
+    <step>25</step>
+    <min>100</min>
+    <max>1300</max>
+    <resolution>1</resolution>
+    <wrap>1</wrap>
+   </binding>
+  </action>
+  
+  <action>
+   <name>ident volume increase</name>
    <button>0</button>
    <x>70</x>
    <y>-24</y>
    <w>8</w>
    <h>16</h>
+   <condition>
+    <property>/radios/kr-87/inputs/power-btn</property>
+   </condition>
    <binding>
     <command>property-adjust</command>
     <property>/radios/kr-87/inputs/volume</property>
-    <step>0.5</step>
+    <step>0.1</step>
     <min>0</min>
-    <max>2</max>
+    <max>1</max>
    </binding>
   </action>
+  
   <action>
-   <name>ident volume decrease|off</name>
+   
+   <name>ident volume decrease</name>
    <button>0</button>
    <x>62</x>
    <y>-24</y>
-   <w>16</w>
-   <h>8</h>
+   <w>8</w>
+   <h>16</h>
+   <condition>
+    <and>
+     <property>radios/kr-87/inputs/power-btn</property>
+     <greater-than>
+      <property>radios/kr-87/inputs/volume</property>
+      <value>0.01</value>
+     </greater-than>
+    </and>
+   </condition>
    <binding>
     <command>property-adjust</command>
     <property>/radios/kr-87/inputs/volume</property>
-    <step>-0.5</step>
+    <step>-0.1</step>
     <min>0</min>
-    <max>2</max>
+    <max>1</max>
    </binding>
   </action>
- 
+  
+  <action>
+   <name>power on</name>
+   <button>0</button>
+   <x>70</x>
+   <y>-24</y>
+   <w>8</w>
+   <h>16</h>
+   <condition>
+    <and>
+     <less-than>
+      <property>/radios/kr-87/inputs/volume</property>
+      <value>0.01</value>
+     </less-than>
+     <not>
+      <property>/radios/kr-87/inputs/power-btn</property>
+     </not>
+    </and>
+   </condition>
+   <binding>
+     <command>property-assign</command>
+     <property>/radios/kr-87/inputs/power-btn</property>
+     <value type="bool">true</value>
+   </binding>
+  </action>
+  
+  <action>
+   <name>power off</name>
+   <button>0</button>
+   <x>62</x>
+   <y>-24</y>
+   <w>8</w>
+   <h>16</h>
+   <condition>
+    <and>
+     <less-than>
+      <property>/radios/kr-87/inputs/volume</property>
+      <value>0.01</value>
+     </less-than>
+      <property>/radios/kr-87/inputs/power-btn</property>
+     </and>
+   </condition>
+   <binding>
+     <command>property-assign</command>
+     <property>/radios/kr-87/inputs/power-btn</property>
+     <value type="bool">false</value>
+   </binding>
+  </action>
+  
  </actions>
 
 </PropertyList>

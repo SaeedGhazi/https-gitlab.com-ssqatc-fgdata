@@ -681,6 +681,24 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+ <key n="103">
+  <name>g</name>
+  <desc>Toggle gear down.</desc>
+  <binding>
+   <command>property-toggle</command>
+   <property>/controls/gear-down</property>
+  </binding>
+ </key>
+
+ <key n="108">
+  <name>l</name>
+  <desc>Toggle tail-wheel lock.</desc>
+  <binding>
+   <command>property-toggle</command>
+   <property>/controls/tailwheel-castering</property>
+  </binding>
+ </key>
+
  <key n="109">
   <name>m</name>
   <desc>Increase warp.</desc>
@@ -688,15 +706,6 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <command>property-adjust</command>
    <property>/sim/time/warp</property>
    <step type="int">60</step>
-  </binding>
- </key>
-
- <key n="103">
-  <name>g</name>
-  <desc>Toggle gear down.</desc>
-  <binding>
-   <command>property-toggle</command>
-   <property>/controls/gear-down</property>
   </binding>
  </key>
 

@@ -33,6 +33,11 @@ Started September 2000 by David Megginson, david@megginson.com
   <rendering>
    <debug type="bool">false</debug>
    <realism>5</realism>
+   <static-lod>
+    <detailed>1500</detailed>
+    <rough>9000</rough>
+    <bare>30000</bare>
+   </static-lod>
    <random-objects type="bool">true</random-objects>
    <horizon-effect type="bool">false</horizon-effect>
    <enhanced-lighting type="bool">false</enhanced-lighting>

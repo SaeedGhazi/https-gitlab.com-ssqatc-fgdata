@@ -5,6 +5,7 @@ Modularized lighted buttons added March 5 2001
 by John Check, <j4strngs@rockfish.net>
 Wing leveler and climb/descent added Feb 2001
 by Curtis Olson, <curt@infoplane.com>
+APR by Jim Wilson <jimw@kelcomaine.com> Feb 2002
 _______________________________________________________________________________
 Default autopilot instrument.
 
@@ -40,8 +41,8 @@ properties' values.
    <texture>
     <path>Aircraft/Instruments/Textures/navcom-radios.rgb</path>
     <x1>0.0</x1>
-    <y1>0.375</y1>
     <x2>1.0</x2>
+    <y1>0.375</y1>
     <y2>0.5</y2>
    </texture>
    <w>256</w>
@@ -57,8 +58,8 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path>
      <x1>0.0</x1>
-     <y1>0.328125</y1>
      <x2>0.21875</x2>
+     <y1>0.328125</y1>
      <y2>0.4921875</y2>
     </texture>
     <w>32</w>
@@ -69,8 +70,8 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path> 
      <x1>0.0</x1>
-     <y1>0.1640625</y1>
      <x2>0.21875</x2>
+     <y1>0.1640625</y1>
      <y2>0.328125</y2>
     </texture>
     <w>32</w>
@@ -88,9 +89,9 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path> 
      <x1>0.0</x1>
-     <y1>0.0</y1>
      <x2>0.21875</x2>
-     <y2>0.1326125</y2>
+     <y1>0.0</y1>
+     <y2>0.16796875</y2>
     </texture>
     <w>32</w>
     <h>16</h>
@@ -106,8 +107,8 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path> 
      <x1>0.421875</x1>
-     <y1>0.0625</y1>
      <x2>0.546875</x2>
+     <y1>0.0625</y1>
      <y2>0.125</y2>
     </texture>
     <w>20</w>
@@ -129,8 +130,8 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path>
      <x1>0.0</x1>
-     <y1>0.328125</y1>
      <x2>0.21875</x2>
+     <y1>0.328125</y1>
      <y2>0.4921875</y2>
     </texture>
     <w>32</w>
@@ -141,8 +142,8 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path> 
      <x1>0.0</x1>
-     <y1>0.1640625</y1>
      <x2>0.21875</x2>
+     <y1>0.1640625</y1>
      <y2>0.328125</y2>
     </texture>
     <w>32</w>
@@ -160,9 +161,9 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path> 
      <x1>0.0</x1>
-     <y1>0.0</y1>
      <x2>0.21875</x2>
-     <y2>0.1326125</y2>
+     <y1>0.0</y1>
+     <y2>0.16796875</y2>
     </texture>
     <w>32</w>
     <h>16</h>
@@ -178,8 +179,8 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path> 
      <x1>0.4140625</x1>
-     <y1>0.0078125</y1>
      <x2>0.609375</x2>
+     <y1>0.0078125</y1>
      <y2>0.0703125</y2>
     </texture>
     <w>20</w>
@@ -201,8 +202,8 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path>
      <x1>0.0</x1>
-     <y1>0.328125</y1>
      <x2>0.21875</x2>
+     <y1>0.328125</y1>
      <y2>0.4921875</y2>
     </texture>
     <w>32</w>
@@ -213,8 +214,8 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path> 
      <x1>0.0</x1>
-     <y1>0.1640625</y1>
      <x2>0.21875</x2>
+     <y1>0.1640625</y1>
      <y2>0.328125</y2>
     </texture>
     <w>32</w>
@@ -232,9 +233,9 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path> 
      <x1>0.0</x1>
-     <y1>0.0</y1>
      <x2>0.21875</x2>
-     <y2>0.1326125</y2>
+     <y1>0.0</y1>
+     <y2>0.16796875</y2>
     </texture>
     <w>32</w>
     <h>16</h>
@@ -250,8 +251,8 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path> 
      <x1>0.21875</x1>
-     <y1>0.0078125</y1>
      <x2>0.421875</x2>
+     <y1>0.0078125</y1>
      <y2>0.0703125</y2>
     </texture>
     <w>20</w>
@@ -273,8 +274,8 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path>
      <x1>0.0</x1>
-     <y1>0.328125</y1>
      <x2>0.21875</x2>
+     <y1>0.328125</y1>
      <y2>0.4921875</y2>
     </texture>
     <w>32</w>
@@ -285,8 +286,8 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path>
      <x1>0.0</x1>
-     <y1>0.1640625</y1>
      <x2>0.21875</x2>
+     <y1>0.1640625</y1>
      <y2>0.328125</y2>
     </texture>
     <w>32</w>
@@ -304,9 +305,9 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path> 
      <x1>0.0</x1>
-     <y1>0.0</y1>
      <x2>0.21875</x2>
-     <y2>0.1326125</y2>
+     <y1>0.0</y1>
+     <y2>0.16796875</y2>
     </texture>
     <w>32</w>
     <h>16</h>
@@ -322,8 +323,8 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path> 
      <x1>0.6171875</x1>
-     <y1>0.0078125</y1>
      <x2>0.796875</x2>
+     <y1>0.0078125</y1>
      <y2>0.0703125</y2>
     </texture>
     <w>20</w>
@@ -345,8 +346,8 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path>
      <x1>0.0</x1>
-     <y1>0.328125</y1>
      <x2>0.21875</x2>
+     <y1>0.328125</y1>
      <y2>0.4921875</y2>
     </texture>
     <w>32</w>
@@ -357,8 +358,8 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path> 
      <x1>0.0</x1>
-     <y1>0.1640625</y1>
      <x2>0.21875</x2>
+     <y1>0.1640625</y1>
      <y2>0.328125</y2>
     </texture>
     <w>32</w>
@@ -376,9 +377,9 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path> 
      <x1>0.0</x1>
-     <y1>0.0</y1>
      <x2>0.21875</x2>
-     <y2>0.1326125</y2>
+     <y1>0.0</y1>
+     <y2>0.16796875</y2>
     </texture>
     <w>32</w>
     <h>16</h>
@@ -394,8 +395,8 @@ properties' values.
     <texture>
      <path>Aircraft/Instruments/Textures/blister.rgb</path> 
      <x1>0.21875</x1>
-     <y1>0.0625</y1>
      <x2>0.421875</x2>
+     <y1>0.0625</y1>
      <y2>0.125</y2>
     </texture>
     <w>20</w>
@@ -413,8 +414,8 @@ properties' values.
    <texture>
     <path>Aircraft/Instruments/Textures/blister.rgb</path>
     <x1>0.0</x1>
-    <y1>0.75</y1>
     <x2>0.25</x2>
+    <y1>0.75</y1>
     <y2>1.0</y2>
    </texture>
    <w>15</w>
@@ -461,7 +462,7 @@ properties' values.
   <action>
    <name>toggle wing leveler lock</name>
    <button>0</button>
-   <x>-80</x>
+   <x>-92</x>
    <y>-8</y>
    <w>32</w>
    <h>16</h>
@@ -594,4 +595,5 @@ properties' values.
  </actions>
 
 </PropertyList>
+
 

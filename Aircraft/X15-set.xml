@@ -33,16 +33,15 @@ October 23 2001 John Check, fgpanels@rockfish.net
    <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
   </panel_2>
   
-<!-- gear up
+<!-- gear up -->
   <model>
    <path>Aircraft/X15/Models/X15_flight.ac</path>
   </model> 
--->
-<!-- gear down --> 
+<!-- gear down 
   <model>
-   <path>Aircraft/X15/Models/X15-animation.xml</path>
-  </model> 
-
+   <path>Aircraft/X15/Models/X15_landing.ac</path>
+  </model_2> 
+-->
 
  </sim>
 

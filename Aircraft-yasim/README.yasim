@@ -175,47 +175,76 @@ jet:      A turbojet/fan engine.  It accepts a <control> subelement to map a
           epr:            Engine pressure ratio at takeoff [3.0].
           exhaust-speed:  The maximum exhaust speed in knots [~1555].
 
-propeller: A propeller connected to a non-turbocharged piston engine
-          The engine model is evolving, this element is likely to change
-          radically in the future.
-          x,y,z:         The position of the mass (!) of the
-                         engine/propeller combination.  If the point
-                         of force application is different (and it
-                         will be) it should be set with an <actionpt>
-                         subelement.
-          mass:          The mass of the engine/propeller, in pounds.
-          moment:        The moment, in kg-meters.  This has to be
-                         hand calculated and guessed at for now.  A
-                         more automated system will be forthcoming.
-                         Use a negative moment value for
-                         counter-rotating ("European" -- CCW as seen
-                         from behind the prop) propellers.
-          radius:        The radius, in meters, or the propeller.
-          cruise-speed:  The max efficiency cruise speed of the
-                         propeller.  Generally not the same as the
-                         aircraft's cruise speed.
-          cruise-rpm:    The RPM of the propeller at max-eff. cruise.
-          cruise-power:  The power sunk by the prop at cruise, in horsepower.
-          cruise-alt:    The reference cruise altitude in feet.
-          eng-power:     Maximum BHP of the engine at sea level.
-          eng-rpm:       The engine RPM at which eng-power is developed
-          takeoff-power: The takeoff power required by the propeller...
-          takeoff-rpm:   ...at the given takeoff RPM.
-          displacement:  The engine displacement in cubic inches.
-          compression:   The engine compression [??]
-          turbo-mul:     The turbocharger multiplier.
-          wastegate-mp:  The manifold pressure to activate the wastegate
-                         (inHG).
-          min-rpm:       The minimum operational RPM for a constant speed
-                         propeller.  This is the speed to which the
-                         prop governor will seek when the blue lever
-                         is at minimum..
-          max-rpm:       The maximum operational RPM for a constant speed
-                         propeller.  See above.
-          gear-ratio:    The factor by which the engine RPM is multiplied
-                         to produce the propeller RPM.  Optional (defaults
-                         to 1.0).
+propeller: A propeller.  This element requires an engine subtag.
+           Currently <piston-engine> and <turbine-engine> are
+           supported.
+           x,y,z:         The position of the mass (!) of the
+                          engine/propeller combination.  If the point
+                          of force application is different (and it
+                          will be) it should be set with an <actionpt>
+                          subelement.
+           mass:          The mass of the engine/propeller, in pounds.
+           moment:        The moment, in kg-meters.  This has to be
+                          hand calculated and guessed at for now.  A
+                          more automated system will be forthcoming.
+                          Use a negative moment value for
+                          counter-rotating ("European" -- CCW as seen
+                          from behind the prop) propellers.
+           radius:        The radius, in meters, or the propeller.
+           cruise-speed:  The max efficiency cruise speed of the
+                          propeller.  Generally not the same as the
+                          aircraft's cruise speed.
+           cruise-rpm:    The RPM of the propeller at max-eff. cruise.
+           cruise-power:  The power sunk by the prop at cruise, in horsepower.
+           cruise-alt:    The reference cruise altitude in feet.
+           takeoff-power: The takeoff power required by the propeller...
+           takeoff-rpm:   ...at the given takeoff RPM.
+           min-rpm:       The minimum operational RPM for a constant speed
+                          propeller.  This is the speed to which the
+                          prop governor will seek when the blue lever
+                          is at minimum..
+           max-rpm:       The maximum operational RPM for a constant speed
+                           propeller.  See above.
+           gear-ratio:    The factor by which the engine RPM is multiplied
+                          to produce the propeller RPM.  Optional (defaults
+                          to 1.0).
 
+piston-engine: A piston engine definition.  This must be a subelement
+               of an enclosing <propeller> tag.
+               eng-power:    Maximum BHP of the engine at sea level.
+               eng-rpm:      The engine RPM at which eng-power is developed
+               displacement: The engine displacement in cubic inches.
+               compression:  The engine compression ratio.
+               turbo-mul:    The turbo/super-charger pressure multiplier.
+                             Static pressure will be multiplied by this
+                             value to get the manifold pressure.
+               wastegate-mp: The maximum manifold pressure.  Beyond
+                             this, the gate will release to keep the
+                             MP below this number. (inHG).
+
+
+turbine-engine: A turbine engine definition.  This must be a subelement
+                of an enclosing <propeller> tag.
+                eng-power:   Maximum BHP of the engine at a suitable
+                             cruise altitude.
+                eng-rpm:     The engine RPM at which eng-power is
+                             developed.  Note that this is "shaft" RPM
+                             as seen by the propeller.  Don't use a
+                             gear-ratio on the enclosing propeller, or
+                             else you'll get confused. :)
+                alt:         The altitude at which eng-power is developed.
+                             This should be high enough to be lower (!)
+                             than the flat-rating power.
+                flat-rating: The maximum allowed power developed by
+                             the engine.  Most turboprops are flat
+                             rated below a certain altitude and
+                             temperature range to prevent engine
+                             damage.
+                min-n2:      N2 (percent) turbine speed at zero throttle.
+                max-n2:      N2 (percent) turbine speed at max throttle.
+                bsfc:        Specific fuel consumption, in lbs/hr per
+                             horsepower.
+                
 
 actionpt: Defines an "action point" for an enclosing jet or propeller
           element.  This is the location where the force from the thruster

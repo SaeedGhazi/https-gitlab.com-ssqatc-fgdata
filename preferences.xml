@@ -37,7 +37,7 @@ Started September 2000 by David Megginson, david@megginson.com
   <sound type="bool">true</sound>
   <speed-up type="double">1.0</speed-up>
   <current-view>
-    <field-of-view type="double">55.0</field-of-view>
+    <field-of-view type="double">50.0</field-of-view>
   </current-view>
   <panel>
    <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
@@ -96,6 +96,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
       <default-field-of-view-deg type="double">55.0</default-field-of-view-deg>
       <default-pitch-deg type="double">0</default-pitch-deg>
+      <default-heading-deg type="double">0</default-heading-deg>
       <front-direction-deg type="double">0</front-direction-deg>
       <front-left-direction-deg type="double">45</front-left-direction-deg>
       <left-direction-deg type="double">90</left-direction-deg>
@@ -121,8 +122,10 @@ Started September 2000 by David Megginson, david@megginson.com
 
       <at-model type="bool">true</at-model>
       <at-model-idx type="int">0</at-model-idx>
+      <target-z-offset-m type="double">0</target-z-offset-m>
 
       <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
+      <default-field-of-view-deg type="double">55.0</default-field-of-view-deg>
 
       <x-offset-m type="double">0</x-offset-m>
       <y-offset-m type="double">0</y-offset-m>
@@ -146,6 +149,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <at-model-idx type="int">0</at-model-idx>
 
       <ground-level-nearplane-m type="double">10.0f</ground-level-nearplane-m>
+      <default-field-of-view-deg type="double">55.0</default-field-of-view-deg>
 
       <x-offset-m type="double">0</x-offset-m>
       <y-offset-m type="double">0</y-offset-m>
@@ -165,6 +169,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <eye-heading-deg-path>/sim/tower/heading-deg</eye-heading-deg-path>
 
       <ground-level-nearplane-m type="double">10.0f</ground-level-nearplane-m>
+      <default-field-of-view-deg type="double">55.0</default-field-of-view-deg>
 
       <x-offset-m type="double">0</x-offset-m>
       <y-offset-m type="double">0</y-offset-m>
@@ -186,6 +191,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <at-model-idx type="int">0</at-model-idx>
 
       <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
+      <default-field-of-view-deg type="double">55.0</default-field-of-view-deg>
 
       <x-offset-m type="double">2</x-offset-m>
       <y-offset-m type="double">25</y-offset-m>

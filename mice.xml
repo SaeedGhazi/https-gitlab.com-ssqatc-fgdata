@@ -191,8 +191,8 @@ The current mode for each mouse is held in the
     </binding>
     <binding>
      <command>property-assign</command>
-     <property>/sim/current-view/pitch-offset-deg</property>
-     <value alias="/sim/view/config/default-pitch-deg"/>
+     <property>/sim/current-view/goal-pitch-offset-deg</property>
+     <property>/sim/current-view/config/pitch-offset-deg</property>
     </binding>
    </button>
 

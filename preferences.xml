@@ -32,8 +32,11 @@ Started September 2000 by David Megginson, david@megginson.com
   </startup>
   <rendering>
    <debug type="bool">false</debug>
-   <random-objects>true</random-objects>
-   <draw-otw>true</draw-otw>
+   <random-objects type="bool">true</random-objects>
+   <horizon-effect type="bool">false</horizon-effect>
+   <enhanced-lighting type="bool">false</enhanced-lighting>
+   <distance-attenuation type="bool">false</distance-attenuation>
+   <draw-otw type="bool">true</draw-otw>
   </rendering>
   <model-hz type="int">120</model-hz>
   <sound>

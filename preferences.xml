@@ -61,6 +61,21 @@ Started September 2000 by David Megginson, david@megginson.com
     <engine n="3">false</engine>
    </selected>
   </input>
+    <!-- pilot view -->
+    <view n="0">
+     <desc>pilot view</desc>
+    </view>
+    <!-- chase view -->
+    <view n="1">
+      <desc>chase view</desc>
+      <default>
+        <pilot-offset>
+          <heading-deg>180.0</heading-deg>
+          <pitch-deg>0</pitch-deg>
+          <radius-m>25</radius-m>
+        </pilot-offset>
+      </default>
+    </view>
   </sim>
 
 
@@ -216,4 +231,3 @@ Started September 2000 by David Megginson, david@megginson.com
  </PropertyList>
 
 <!-- end of preferences.xml -->
-

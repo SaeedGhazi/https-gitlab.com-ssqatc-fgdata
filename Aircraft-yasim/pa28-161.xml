@@ -1,0 +1,93 @@
+<airplane mass="1480">
+
+<!-- Approach configuration -->
+<approach speed="43" aoa="17">
+  <control-setting axis="/controls/throttle[0]" value="0.3"/>
+  <control-setting axis="/controls/mixture[0]" value="1.0"/>
+  <control-setting axis="/controls/flaps" value="1.0"/>
+</approach>
+
+<!-- Cruise configuration -->
+<cruise speed="122" alt="0">
+  <control-setting axis="/controls/throttle[0]" value="1.0"/>
+  <control-setting axis="/controls/mixture[0]" value="1.0"/>
+  <control-setting axis="/controls/flaps" value="0.0"/>
+</cruise>
+
+<cockpit x="-2.5" y=".33" z="0.6"/>
+
+<fuselage ax="0.5" ay="0" az="0" bx="-7.75" by="0" bz="0"
+          width="1.5" taper="0.2" midpoint="0.3"/>
+
+<wing x="-2.75" y="0.6" z="-0.75" taper="0.65"
+      length="4.5" chord="1.65" sweep="0" dihedral="5" camber="0.1">
+  <stall aoa="16" width="6" peak="1.5"/>
+  <flap0 start="0" end="0.5" lift="1.3" drag="1.5"/>
+  <flap1 start="0.5" end="1.0" lift="1.2" drag="1.2"/>
+  <control-input axis="/controls/flaps" control="FLAP0"/>
+  <control-input axis="/controls/aileron" control="FLAP1" split="true"/>
+  <control-input axis="/controls/aileron-trim" control="FLAP1" split="true"/>
+  <control-output control="FLAP0" prop="/surface-positions/flap-pos-norm"/>
+  <control-output control="FLAP1" side="left"
+		  prop="/surface-positions/left-aileron-pos-norm"/>
+  <control-output control="FLAP1" side="right"
+		  prop="/surface-positions/right-aileron-pos-norm"/>
+</wing>
+
+<hstab x="-6.5" y="0.00" z=".15" taper="1.0" effectiveness="2"
+       length="1.9" chord="0.9" sweep="0">
+  <stall aoa="18" width="4" peak="1.5"/>
+  <flap0 start="0" end="1" lift="2.0" drag="1.2"/>
+  <control-input axis="/controls/elevator" control="FLAP0"/>
+  <control-input axis="/controls/elevator-trim" control="FLAP0"/>
+  <control-output control="FLAP0" prop="/surface-positions/elevator-pos-norm"/>
+</hstab>
+
+<vstab x="-6.25" y="0" z=".3" taper=".5"
+       length="1.2" chord="1.2" sweep="10">
+  <stall aoa="16" width="4" peak="1.5"/>
+  <flap0 start="0" end="1" lift="1.3" drag="1.1"/>
+  <control-input axis="/controls/rudder" control="FLAP0" invert="true"/>
+  <control-input axis="/controls/rudder-trim" control="FLAP0" invert="true"/>
+  <control-output control="FLAP0" prop="/surface-positions/rudder-pos-norm"
+		  min="1" max="-1"/>
+</vstab>
+
+<propeller radius="1.0"
+	   cruise-speed="125" cruise-rpm="2665"
+           cruise-alt="8000" cruise-power="120"
+           takeoff-power="140.8" takeoff-rpm="2200"
+           eng-power="160" eng-rpm="2800"
+           x="-1" y="0" z="0" mass="400" moment="8">
+  <actionpt x="0" y="0" z="0"/>
+  <control-input axis="/controls/throttle[0]" control="THROTTLE"/>
+  <control-input axis="/controls/starter[0]" control="STARTER"/>
+  <control-input axis="/controls/magnetos[0]" control="MAGNETOS"/>
+  <control-input axis="/controls/mixture[0]" control="MIXTURE"/>
+</propeller>
+
+<gear x="-1" y="0" z="-1.2" compression=".4"> <!-- nose -->
+  <control-input axis="/controls/rudder" control="STEER"
+                 src0="-1.0" src1="1.0"
+                 dst0="-0.1" dst1="0.1"/>
+</gear>
+
+<gear x="-2.8" y="1.5" z="-1.0" compression=".3"> <!-- left main -->
+  <control-input axis="/controls/brakes[0]" control="BRAKE" split="true"/>
+  <control-input axis="/controls/parking-brake" control="BRAKE" split="true"/>
+</gear>
+
+<gear x="-2.8" y="-1.5" z="-1.0" compression=".3"> <!-- left main -->
+  <control-input axis="/controls/brakes[1]" control="BRAKE" split="true"/>
+  <control-input axis="/controls/parking-brake" control="BRAKE" split="true"/>
+</gear>
+
+<tank x="-2.5" y="1.5" z="-0.25" capacity="144"/> 
+<tank x="-2.5" y="-1.5" z="-0.25" capacity="144"/> 
+
+<ballast x="-2.0" y="0" z="0" mass="200"/> <!-- cockpit -->
+
+<weight x="-2.5" y=".33" z="0" mass-prop="/yasim/pa28/pilot-lb"/>
+<weight x="-2.5" y="-.33" z="0" mass-prop="/yasim/pa28/copilot-lb"/>
+
+</airplane>

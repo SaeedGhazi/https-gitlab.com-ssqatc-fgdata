@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+YASim Piper Warrior II with 2D panel.
+************************************************************************
+-->
+
+<PropertyList include="pa28-161-yasim-base.xml">
+
+ <sim>
+
+  <description>Piper Warrior II, 160HP (YASim, 2D panel)</description>
+
+  <!-- set up 2D panel -->
+
+  <panel>
+   <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
+   <visibility archive="y">true</visibility>
+  </panel>
+
+  <panel_2>
+   <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
+  </panel_2>
+
+  <!-- Look down a bit over the top of the panel -->
+
+  <view>
+   <config>
+    <default-pitch-deg>-8</default-pitch-deg>
+   </config>
+  </view>
+
+  <current-view>
+   <pitch-offset-deg>-8</pitch-offset-deg>
+  </current-view>
+
+ </sim>
+
+</PropertyList>

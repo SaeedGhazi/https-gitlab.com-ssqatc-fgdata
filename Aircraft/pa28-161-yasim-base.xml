@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+Common configuration for YASim PA28-161 aircraft.
+************************************************************************
+-->
+
+<PropertyList include="pa28-161-base.xml">
+
+ <sim>
+  <flight-model archive="y">yasim</flight-model>
+  <aero archive="y">pa28-161</aero>
+ </sim>
+
+ <!-- trim for level cruise -->
+
+ <controls>
+  <aileron-trim>-0.012</aileron-trim>
+  <elevator-trim>0</elevator-trim>
+  <rudder-trim>0</rudder-trim>
+  <magnetos>3</magnetos>
+ </controls>
+
+ <yasim>
+  <pa28>
+   <pilot-lb>200</pilot-lb>
+   <copilot-lb>150</copilot-lb>
+  </pa28>
+ </yasim>
+
+</PropertyList>

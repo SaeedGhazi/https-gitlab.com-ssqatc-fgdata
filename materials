@@ -771,7 +771,7 @@ ShrubCover {
   specular = 0.0 0.0 0.0 1.0
   emissive = 0.0 0.0 0.0 1.0
 }
-alias BareTundraCover IntermittentLake
+alias BareTundraCover ShrubCover
 
 Urban {
   texture = Terrain/resgrid.rgb

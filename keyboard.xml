@@ -148,7 +148,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <binding>
    <command>property-adjust</command>
    <property>/autopilot/control-overrides/elevator</property>
-   <step type="double">0.01</step>
+   <step type="double">-0.01</step>
   </binding>
   <mod-shift>
    <desc>Look back.</desc>
@@ -258,7 +258,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <binding>
    <command>property-adjust</command>
    <property>/autopilot/control-overrides/elevator</property>
-   <step type="double">-0.01</step>
+   <step type="double">0.01</step>
   </binding>
   <mod-shift>
    <desc>Look forward.</desc>

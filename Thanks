@@ -48,6 +48,7 @@ Bernie Bright <bbright@c031.aone.net.au>
   STL portability, tons o' stuff. :-)
   Currently trying to get a BeOS port together but life keeps getting 
   in the way!
+  Threading support and threaded tile pager.
 
 
 Bernhard H. Buckel <buckel@mail.uni-wuerzburg.de>
@@ -130,6 +131,10 @@ Jean-loup Gailly and Mark Adler <zlib@gzip.org>
 
 Thomas Gellekum <tg@ihf.rwth-aachen.de>
   Changes and updates for compiling on FreeBSD
+
+
+Neetha Girish <neethagirish@usa.net>
+  Contributed the xml configurable HUD changes.
 
 
 Jeff Goeke-Smith <jgoeke@voyager.net>

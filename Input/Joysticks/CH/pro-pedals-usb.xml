@@ -25,7 +25,6 @@
    <property>/controls/brakes[0]</property>
    <offset>1.0</offset>
    <factor>0.5</factor>
-   <squared>false</squared>
   </binding>
  </axis>
 
@@ -35,7 +34,6 @@
    <property>/controls/brakes[1]</property>
    <offset>1.0</offset>
    <factor>0.5</factor>
-   <squared>false</squared>
   </binding>
  </axis>
 
@@ -45,7 +43,6 @@
    <property>/controls/rudder</property>
    <factor>1.0</factor>
    <offset>0.0</offset>
-   <squared>true</squared>
   </binding>
  </axis>
 

@@ -130,9 +130,9 @@ since it is what the weight-and-balance site above uses.
 -->
 
 <!-- pilot -->
-<weight x="-0.23" y="0" z="-0.70" mass-prop="/yasim/j3cub/pilot-lb"/>
+<weight x="-0.91" y="0" z="-0.70" mass-prop="/yasim/j3cub/pilot-lb"/>
 
 <!-- passenger -->
-<weight x="-0.91" y="0" z="-0.70" mass-prop="/yasim/j3cub/passenger-lb"/>
+<weight x="-0.23" y="0" z="-0.70" mass-prop="/yasim/j3cub/passenger-lb"/>
 
 </airplane>

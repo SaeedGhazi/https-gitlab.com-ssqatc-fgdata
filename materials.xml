@@ -2932,8 +2932,8 @@ Shared parameters for various materials.
 <material>
  <name>Ocean</name>
  <texture>Terrain/water.rgb</texture>
- <xsize>500</xsize>
- <ysize>500</ysize>
+ <xsize>400</xsize>
+ <ysize>400</ysize>
  <ambient>
   <r>0.17</r>
   <g>0.31</g>
@@ -2970,8 +2970,8 @@ Shared parameters for various materials.
  <name>IntermittentReservoir</name>
  <name>Stream</name>
  <texture>Terrain/water-lake.rgb</texture>
- <xsize>500</xsize>
- <ysize>500</ysize>
+ <xsize>400</xsize>
+ <ysize>400</ysize>
  <ambient>
   <r>0.19</r>
   <g>0.35</g>
@@ -3135,9 +3135,9 @@ Shared parameters for various materials.
 
 <material>
  <name>MixedCropPastureCover</name>
- <texture>Terrain/mixedcrop.rgb</texture>
- <xsize>2000</xsize>
- <ysize>2000</ysize>
+ <texture>Terrain/irrcrop.rgb</texture>
+ <xsize>4000</xsize>
+ <ysize>4000</ysize>
  <light-coverage>2000000.0</light-coverage>
  <ambient>
   <r>0.38</r>
@@ -3266,8 +3266,8 @@ Shared parameters for various materials.
 <material>
  <name>DryCropPastureCover</name>
  <texture>Terrain/drycrop.rgb</texture>
- <xsize>2000</xsize>
- <ysize>2000</ysize>
+ <xsize>4000</xsize>
+ <ysize>4000</ysize>
  <light-coverage>2000000.0</light-coverage>
  <ambient>
   <r>0.35</r>
@@ -3331,8 +3331,8 @@ Shared parameters for various materials.
 <material>
  <name>CropGrassCover</name>
  <texture>Terrain/cropgrass.rgb</texture>
- <xsize>2000</xsize>
- <ysize>2000</ysize>
+ <xsize>4000</xsize>
+ <ysize>4000</ysize>
  <light-coverage>2000000.0</light-coverage>
  <ambient>
   <r>0.32</r>
@@ -3374,9 +3374,9 @@ Shared parameters for various materials.
 
 <material>
  <name>CropWoodCover</name>
- <texture>Terrain/cropwood.rgb</texture>
- <xsize>2000</xsize>
- <ysize>2000</ysize>
+ <texture>Terrain/irrcrop.rgb</texture>
+ <xsize>4000</xsize>
+ <ysize>4000</ysize>
  <light-coverage>2000000.0</light-coverage>
  <ambient>
   <r>0.28</r>

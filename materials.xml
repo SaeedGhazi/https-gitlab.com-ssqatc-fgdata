@@ -2753,21 +2753,6 @@ Shared parameters for various materials.
    <coverage-m2>50000000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
-  <object>
-   <path>Models/Buildings/shop.ac</path>
-   <coverage-m2>700000</coverage-m2>
-   <heading-type>random</heading-type>
-  </object>
-  <object>
-   <path>Models/Buildings/hosshop.ac</path>
-   <coverage-m2>1500000</coverage-m2>
-   <heading-type>random</heading-type>
-  </object>
-  <object>
-   <path>Models/Buildings/weapshop.ac</path>
-   <coverage-m2>700000</coverage-m2>
-   <heading-type>random</heading-type>
-  </object>
  </object-group>
  <object-group>
   <range-m alias="/params/forest/tree-range-m"/>

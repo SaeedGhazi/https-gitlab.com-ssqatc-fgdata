@@ -22,7 +22,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <airport-id>KSFO</airport-id>
    <fullscreen>false</fullscreen>
    <units>feet</units>
-   <browser-app>netscape</browser-app> <!-- help viewer -->
+<!--   <browser-app>netscape</browser-app>  help viewer -->
   </startup>
   <flight-model>larcsim</flight-model>
   <aircraft>c172</aircraft>

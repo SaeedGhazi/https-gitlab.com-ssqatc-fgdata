@@ -115,7 +115,7 @@ Started 24-7-01 by Timothy Gale
    <type>switch</type>
    <layer>
     <condition>
-     <property alias="../../../../../../params/nav-from-flag"/>
+     <property alias="../../../../../params/nav-from-flag"/>
     </condition>
     <name>FROM flag</name>
     <texture>

@@ -14,7 +14,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
 
  <sim>
 
-  <description>Cessna 172</description>
+  <description>Cessna 172 with a full screen, hi-res panel</description>
  
   <!-- We want to be able to specify the flight model independently -->
   <!-- <flight-model>jsb</flight-model> -->

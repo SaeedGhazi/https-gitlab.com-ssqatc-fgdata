@@ -26,9 +26,9 @@
 
   <item>
    <label>High-Res Snapshot</label>
-   <bindings>
-    <command>old-hires-snapshot</command>
-   </bindings>
+   <binding>
+    <command>old-hires-snapshot-dialog</command>
+   </binding>
   </item>
 
   <item>
@@ -176,16 +176,16 @@
 
   <item>
    <label>Adjust Autopilot</label>
-   <bindings>
+   <binding>
     <command>old-ap-adjust-dialog</command>
-   </bindings>
+   </binding>
   </item>
 
   <item>
    <label>Set Lat/Lon Format</label>
-   <bindings>
+   <binding>
     <command>old-lat-lon-format-dialog</command>
-   </bindings>
+   </binding>
   </item>
   
  </menu>

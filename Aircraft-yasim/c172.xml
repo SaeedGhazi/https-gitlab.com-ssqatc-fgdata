@@ -72,11 +72,13 @@
 </gear>
 
 <gear x="-2.82" y="1.15" z="-1.36" compression=".3"> <!-- left main -->
-  <control-input axis="/controls/brakes[0]" control="BRAKE"/>
+  <control-input axis="/controls/brakes[0]" control="BRAKE" split="true"/>
+  <control-input axis="/controls/parking-brake" control="BRAKE" split="true"/>
 </gear>
 
 <gear x="-2.82" y="-1.15" z="-1.36" compression=".3"> <!-- left main -->
-  <control-input axis="/controls/brakes[1]" control="BRAKE"/>
+  <control-input axis="/controls/brakes[1]" control="BRAKE" split="true"/>
+  <control-input axis="/controls/parking-brake" control="BRAKE" split="true"/>
 </gear>
 
 <tank x="-2.47" y="1.36" z=".68" capacity="75"/> 

@@ -7,6 +7,11 @@ possible only by the help and hard work of others.  I want to properly
 credit everyone who has contributed to this project.
 
 
+A1 Free Sounds <techie@mail.ev1.net> http://www.a1freesoundeffects.com
+  Granted permission for the flightgear project to use some of the
+  sound effects from their site.
+
+
 Raul Alonzo <amil@las.es>
   Mr. Alonzo is the author of Ssystem and provided his kind permission 
   for using the moon texture. I also used parts of his code as a template
@@ -78,7 +83,7 @@ Didier Chauveau <chauveau@math.univ-mlv.fr>
 
 
 John Check <j4strngs@rockfish.net>
-  Cloud textures
+  Maintains the base package repository
   Joystick howto
   Panel howto
   New instrument panel configurations
@@ -86,6 +91,7 @@ John Check <j4strngs@rockfish.net>
 
 Dave Cornish <dmc@halcyon.com>
   Created our new, super cool, runway textures.
+  Created some of our cloud textures.
 
 
 Oliver Delise <delise@mail.isis.de>
@@ -152,6 +158,15 @@ Habibie <habibie@MailandNews.com>
   RedHat package building changes for SimGear.
 
 
+Mike Hill <mikehill@flightsim.com>
+  Contributed 3d aircraft models to our project.
+  http://www.flightsimnetwork.com/mikehill/home.htm
+
+
+Erik Hofman <erik@ehofman.com>
+  Irix port.
+
+
 Charlie Hotchkiss <clhotch@pacbell.net> 
   Worked on improving and enhancing the HUD code.
   Lots of code style tips and code tweaks ...
@@ -215,6 +230,12 @@ Eric Mitchell <mitchell@mars.ark.com>
   all original creations.
 
 
+Cameron Moore <cameron@unbeatenpath.net>
+  Reigning list admin.
+  Provided man pages.
+  Self-proclaimed code janitor.
+
+
 Anders Morken <amrken@online.no>
   Maintained the European mirror of the FG web pages.
   Unfortunately this mirror has been taken down due to reglementation
@@ -248,6 +269,11 @@ Curt Olson <curt@flightgear.org>
   the sim.
 
 
+Brian Paul
+  His TR Library: http://www.mesa3d.org/brianp/TR.html
+  And also Mesa of course: http://www.mesa3d.org
+
+
 Tony Peden <apeden@earthlink.net>
   Contributions on the flight model front, including a LaRCsim based 
   Cessna 172.  JSBsim: the initial conditions code, a more complete 
@@ -261,7 +287,7 @@ Robin Peel <robin@cpwd.com>
   aid database for the Flight Gear project as well as for X-Plane.
 
 
-Alex Perry <arp11@pacbell.net>
+Alex Perry <alex.perry@ieee.org>
   Contributed code to more accurately model VSI, DG, Altitude.
   Contributed to the Install and Getting Started manual.
 
@@ -280,6 +306,11 @@ Petter Reinholdtsen <pere@games.no>
 William Riley <riley@technologist.com>
   Contributed code to add "brakes". 
   Patch to support a first joystick with more than two axes.
+
+
+Andy Ross <andy@plausible.org>
+  Contributed a new configurable FDM, "YASim", based on geometry
+  information rather than aerodynamic coefficients.
 
 
 Paul Schlyter <pausch@saaf.se>  
@@ -315,6 +346,10 @@ Gordan Sikic <gsikic@public.srce.hr>
 Michael Smith <msmith99@flash.net>
   Contributed cockpit graphics, 3d models, logos, and other images.
   Project Bonanza - http://members.xoom.com/ConceptSim/index.html
+
+
+Martin Spott <Martin.Spott@uni-duisburg.de>
+  Contributed to the installation / user guide.
 
 
 U.S. Geological Survey
@@ -374,6 +409,9 @@ Norman Vine <nhv@yahoo.com>
   Contributed a great circle route autopilot mode based on wgs84 routines.
   Many other GUI, HUD, and autopilot contributions.
   Contributed a patch to allow mouse input to control view direction.
+  Ultra hires tiled screen dumps.
+  Contributed the initial 'goto airport' and 'reset' functions
+  Contributed the initial http image server code
 
 
 Roland Voegtli <voegtli@sanw.unibe.ch>
@@ -410,6 +448,8 @@ Jean-Claude Wippler <jcw@equi4.com>
 
 
 WoodSoup Project  http://www.woodsoup.org
+  [ FlightGear no longer uses woodsoup services, but we appreciate
+  the support provided to our project during the time they hosted us. ]
   Provided computing resources and services so that the Flight Gear 
   project could have real home.  This includes, web services, 
   ftp services, shell accounts, email lists, dns services, etc.
@@ -433,3 +473,6 @@ Curt L. Olson  <curt@flightgear.org>
 THE CONTENTS WERE LASTLY RESEARCHED AND UPDATED MARCH, 8 2000
 
 Oliver Delise  <delise@mail.isis.de>
+
+
+Updated 2001-12-11 by David Megginson, david@megginson.com

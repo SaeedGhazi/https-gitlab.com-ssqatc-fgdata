@@ -9,6 +9,7 @@
 \usepackage[margin=2cm]{geometry}
 \usepackage{color}
 
+\newcommand\cvsid{${}$Id${}$}
 \pagestyle{empty}
 \setlength\parskip{0pt}
 \setlength\parindent{0pt}
@@ -54,18 +55,21 @@
 }%
 \egroup
 
-\newcommand\cvsid{{%
+\newcommand\footline{{%
 	\par
+	\vfill
 	\begin{small}%
 		\color{darkcyan}%
-		\texttt{\$${}$Id${}$\$}%
-		\hspace{0ptplus1fill}%
+		\texttt{\$\cvsid\$}%
+		\hfill
 		\count0\time
 		\divide\time60
 		\count1\time
 		\multiply\time60
 		\advance\count0-\time
-		generated~\the\year/\the\month/\the\day,~\the\count1:\ifnum\count0<10 0\fi\the\count0
+		generated~on~%
+		\the\year/\the\month/\the\day,~%
+		\the\count1:\ifnum\count0<10 0\fi\the\count0
 	\end{small}%
 }}
 
@@ -90,16 +94,16 @@
 \k 6	Ctrl-F		\ac{hunter} Emergency flap lowering
 \k 7	Ctrl-G		Toggle autopilot glide slope lock
 \k 8	Ctrl-H		Toggle autopilot heading lock
-\k 9	Ctrl-I/Tab	{}
-\k 10	Ctrl-J		{}
+\k 9	Ctrl-I/Tab	Show instrument setting dialog
+\k 10	Ctrl-J		\ac{hunter} Jettison inner and outer pylon stores
 \k 11	Ctrl-K		{}
-\k 12	Ctrl-L		{}
+\k 12	Ctrl-L		\ac{hunter} Seat default
 \k 13	Ctrl-M/Enter	Move rudder right
 \k 14	Ctrl-N		Toggle autopilot nav1 lock
 \k 15	Ctrl-O		{}
 \k 16	Ctrl-P		Toggle pitch hold
 \k 17	Ctrl-Q		{}
-\k 18	Ctrl-R		{}
+\k 18	Ctrl-R		Show radio dialog
 \k 19	Ctrl-S		Toggle auto-throttle lock
 \k 20	Ctrl-T		Toggle autopilot terrain lock
 \k 21	Ctrl-U		[Cheat] Add 1000\,ft of emergency altitude
@@ -113,7 +117,7 @@
 \k 29	Ctrl-5/Ctrl-]	{}
 \k 30	Ctrl-6		{}
 \k 31	Ctrl-7/Ctrl-/	{}
-\k 32	Space		Fire Starter on Selected Engine(s)
+\k 32	Space		Fire starter on selected engine(s)
 \k 33	!		Select first engine
 \k 34	"		{}
 \k 35	\#		Select third engine
@@ -155,16 +159,16 @@
 \k 71	G		Gear down
 \k 72	H		\hardcoded{Cycle HUD brightness}; \ac{hunter} Hook down
 \k 73	I		\hardcoded{Alternative HUD}
-\k 74	J		{}
+\k 74	J		\ac{hunter} Jettison outer pylon stores
 \k 75	K		{}
-\k 76	L		{}
+\k 76	L		\ac{hunter} Seat down
 \k 77	M		Decrease warp
 \k 78	N		{}
 \k 79	O		{}
-\k 80	P		Toggle panel; \ac{T38} Fuel Cutoff Switch or Lever
+\k 80	P		Toggle panel; \ac{T38} Fuel cutoff switch or lever
 \k 81	Q		{}
-\k 82	R		\ac{fokker100} Toggle thrust reverser
-\k 83	S		{}
+\k 82	R		\ac{fokker100} Toggle thrust reverser; \ac{A320} Toggle cutoff on selected engine(s)
+\k 83	S		\ac{A320} Fire starter on selected engine(s)
 \k 84	T		Decrease warp delta
 \k 85	U		{}
 \k 86	V		Scroll in reverse through views
@@ -187,9 +191,9 @@
 \k 103	g		Gear Up
 \k 104	h		\hardcoded{Cycle HUD: green/red/off}; \ac{hunter} Hook up
 \k 105	i		\hardcoded{Normal HUD}
-\k 106	j		Decrease spoilers
-\k 107	k		Increase spoilers
-\k 108	l		Toggle tail-wheel lock
+\k 106	j		Decrease spoilers; \ac{hunter} Jettison inner pylon stores
+\k 107	k		Increase spoilers; \ac{hunter} Null
+\k 108	l		Toggle tail-wheel lock; \ac{hunter} Seat up
 \k 109	m		Increase warp
 \k 110	n		{}
 \k 111	o		{}
@@ -204,17 +208,17 @@
 \k 120	x		Decrease field of view
 \k 121	y		{}
 \k 122	z		Increase Visibility
-\k 123	\{		Decrease Magneto on Selected Engine
+\k 123	\{		Decrease magneto on selected engine
 \k 124	|		{}
-\k 125	\}		Increase Magneto on Selected Engine
+\k 125	\}		Increase magneto on selected engine
 \k 126	{\tld}		Select all engines
-\k 127	{}		{}
+\k 127	Ctrl-8		{}
 \k 257	F1		Load flight					\shift{}
 \k 258	F2		Force tile cache reload				\shift{Save flight}
 \k 259	F3		Capture screen					\shift{Load panel}
 \k 260	F4		Force lighting update				\shift{Reload global preferences}
 \k 261	F5								\shift{Scroll panel down}
-\k 262	F6		\hardcoded{toggles Autopilot target location}	\shift{Scroll panel up}
+\k 262	F6		\hardcoded{Toggles autopilot target location}	\shift{Scroll panel up}
 \k 263	F7 								\shift{Scroll panel left}
 \k 264	F8 		Cycle fog type					\shift{Scroll panel right}
 \k 265	F9 		Toggle textures					\shift{}
@@ -238,7 +242,7 @@
 \begin{small}
 ``Hard-coded'' key bindings are defined in \texttt{src/Input/input.cxx}.
 \end{small}
-\vspace{0ptplus1fill}
-\cvsid
+
+\footline
 \end{document}
 

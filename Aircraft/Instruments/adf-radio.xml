@@ -274,7 +274,8 @@ properties' values.
     <property alias="../../../../params/adf-freq-standby-prop"/>
     <step>-1</step>
     <min>100</min>
-    <max>1299</max>
+    <max>1300</max>
+    <resolution>1</resolution>
     <wrap>1</wrap>
    </binding>
   </action>
@@ -291,7 +292,8 @@ properties' values.
     <property alias="../../../../params/adf-freq-standby-prop"/>
     <step>-100</step>
     <min>100</min>
-    <max>1299</max>
+    <max>1300</max>
+    <resolution>1</resolution>
     <wrap>1</wrap>
    </binding>
   </action>
@@ -308,7 +310,8 @@ properties' values.
     <property alias="../../../../params/adf-freq-standby-prop"/>
     <step>1</step>
     <min>100</min>
-    <max>1299</max>
+    <max>1300</max>
+    <resolution>1</resolution>
     <wrap>1</wrap>
    </binding>
   </action>
@@ -325,7 +328,8 @@ properties' values.
     <property alias="../../../../params/adf-freq-standby-prop"/>
     <step>100</step>
     <min>100</min>
-    <max>1299</max>
+    <max>1300</max>
+    <resolution>1</resolution>
     <wrap>1</wrap>
    </binding>
   </action>
@@ -384,12 +388,8 @@ properties' values.
    <w>14</w>
    <h>16</h>
    <binding>
-    <command>property-adjust</command>
+    <command>property-toggle</command>
     <property alias="../../../../params/adf-morse-ident-toggle-prop"/>
-    <step>1.0</step>
-    <min>0</min>
-    <max>1</max>
-    <wrap>1</wrap>
    </binding>
   </action>
 

@@ -291,7 +291,7 @@ properties' values.
     <property>/instrumentation/heading-indicator/offset-deg</property>
     <step>-1</step>
     <min>0</min>
-    <max>359</max>
+    <max>360</max>
     <wrap>true</wrap>
    </binding>
   </action>
@@ -308,7 +308,7 @@ properties' values.
     <property>/instrumentation/heading-indicator/offset-deg</property>
     <step>-5</step>
     <min>0</min>
-    <max>359</max>
+    <max>360</max>
     <wrap>1</wrap>
    </binding>
   </action>
@@ -325,7 +325,7 @@ properties' values.
     <property>/instrumentation/heading-indicator/offset-deg</property>
     <step>1</step>
     <min>0</min>
-    <max>359</max>
+    <max>360</max>
     <wrap>1</wrap>
    </binding>
   </action>
@@ -342,7 +342,7 @@ properties' values.
     <property>/instrumentation/heading-indicator/offset-deg</property>
     <step>5</step>
     <min>0</min>
-    <max>359</max>
+    <max>360</max>
     <wrap>1</wrap>
    </binding>
   </action>
@@ -359,7 +359,7 @@ properties' values.
     <property>/autopilot/settings/heading-bug-deg</property>
     <step>-1</step>
     <min>0</min>
-    <max>359</max>
+    <max>360</max>
     <wrap>1</wrap>
    </binding>
   </action>
@@ -376,7 +376,7 @@ properties' values.
     <property>/autopilot/settings/heading-bug-deg</property>
     <step>-5</step>
     <min>0</min>
-    <max>359</max>
+    <max>360</max>
     <wrap>1</wrap>
    </binding>
   </action>
@@ -393,7 +393,7 @@ properties' values.
     <property>/autopilot/settings/heading-bug-deg</property>
     <step>1</step>
     <min>0</min>
-    <max>359</max>
+    <max>360</max>
     <wrap>1</wrap>
    </binding>
   </action>
@@ -410,7 +410,7 @@ properties' values.
     <property>/autopilot/settings/heading-bug-deg</property>
     <step>5</step>
     <min>0</min>
-    <max>359</max>
+    <max>360</max>
     <wrap>1</wrap>
    </binding>
   </action>

@@ -353,7 +353,7 @@ properties' values.
   <action>
    <name>com frequency decrease (decimal part)</name>
    <button>0</button>
-   <x>-36</x>
+   <x>-32</x>
    <y>-32</y>
    <w>16</w>
    <h>32</h>
@@ -372,7 +372,7 @@ properties' values.
   <action>
    <name>com frequency decrease (integer part)</name>
    <button>1</button>
-   <x>-36</x>
+   <x>-32</x>
    <y>-32</y>
    <w>16</w>
    <h>32</h>
@@ -391,7 +391,7 @@ properties' values.
   <action>
    <name>com frequency increase (decimal part)</name>
    <button>0</button>
-   <x>-20</x>
+   <x>-16</x>
    <y>-32</y>
    <w>16</w>
    <h>32</h>
@@ -410,7 +410,7 @@ properties' values.
   <action>
    <name>com frequency increase (integer part)</name>
    <button>1</button>
-   <x>-20</x>
+   <x>-16</x>
    <y>-32</y>
    <w>16</w>
    <h>32</h>
@@ -495,12 +495,8 @@ properties' values.
    <w>14</w>
    <h>16</h>
    <binding>
-    <command>property-adjust</command>
+    <command>property-toggle</command>
     <property alias="../../../../params/nav-morse-ident-toggle-prop"/>
-    <step>1.0</step>
-    <min>0</min>
-    <max>1</max>
-    <wrap>1</wrap>
    </binding>
   </action>
 

@@ -109,22 +109,22 @@ properties' values.
     </transformation> 
    </transformations>
   </layer>
- <layer>
-  <name>bezel</name>
-  <texture>
-  <path>Aircraft/Instruments/Textures/bezel.rgb</path>
-  <x1>0.0</x1>
-  <y1>0.0</y1>
-  <x2>1.0</x2>
-  <y2>1.0</y2>
-  </texture>
-  <transformations>
-   <transformation>
-   <type>x-shift</type>
-   <offset>-1</offset>
-   </transformation>
-  </transformations>
-</layer> 
+  <layer>
+   <name>bezel</name>
+   <texture>
+    <path>Aircraft/Instruments/Textures/bezel.rgb</path>
+    <x1>0.0</x1>
+    <y1>0.0</y1>
+    <x2>1.0</x2>
+    <y2>1.0</y2>
+   </texture>
+   <transformations>
+    <transformation>
+     <type>x-shift</type>
+     <offset>-1</offset>
+    </transformation>
+   </transformations>
+  </layer> 
 
   <layer>
    <name>glare shield</name>
@@ -135,9 +135,9 @@ properties' values.
     <x2>1.0</x2>
     <y2>0.5</y2>
    </texture>
-  <w>124</w>
-  <h>124</h>
-  <transformations>
+   <w>124</w>
+   <h>124</h>
+   <transformations>
     <transformation>
      <type>rotation</type>
      <property>/orientation/roll-deg</property>
@@ -146,28 +146,28 @@ properties' values.
      <scale>1.0</scale>
      <wrap>1</wrap>
     </transformation>
-   <transformation>
-    <type>x-shift</type>
-    <offset>2</offset>
-   </transformation>
-   <transformation>
-    <type>y-shift</type>
-    <offset>-2</offset>
-   </transformation>
-  </transformations>
-</layer>
+    <transformation>
+     <type>x-shift</type>
+     <offset>2</offset>
+    </transformation>
+    <transformation>
+     <type>y-shift</type>
+     <offset>-2</offset>
+    </transformation>
+   </transformations>
+  </layer>
 
   <layer>
    <name>Knob</name>
    <texture>
-  <path>Aircraft/Instruments/Textures/blister.rgb</path>
-  <x1>0.25</x1>
-  <y1>0.75</y1>
-  <x2>0.5</x2>
-  <y2>1.0</y2>
-  </texture>
-  <h>24</h>
-  <w>24</w>
+    <path>Aircraft/Instruments/Textures/blister.rgb</path>
+    <x1>0.25</x1>
+    <y1>0.75</y1>
+    <x2>0.5</x2>
+    <y2>1.0</y2>
+   </texture>
+   <h>24</h>
+   <w>24</w>
    <transformations>
     <transformation>
      <type>x-shift</type>
@@ -197,13 +197,13 @@ properties' values.
    <w>12</w>
    <h>24</h>
    <binding>
-   <command>property-adjust</command>
-   <property>/radios/kr-87/inputs/rotation-deg</property>
-   <step>-1.0</step>
-   <min>0</min>
-   <max>360</max>
-   <wrap>1</wrap>
-  </binding>
+    <command>property-adjust</command>
+    <property>/radios/kr-87/inputs/rotation-deg</property>
+    <step>-1.0</step>
+    <min>0</min>
+    <max>360</max>
+    <wrap>1</wrap>
+   </binding>
   </action>
   <action>
    <name>large clockwise rotation</name>
@@ -213,30 +213,30 @@ properties' values.
    <w>12</w>
    <h>24</h>
    <binding>
-   <command>property-adjust</command>
-   <property>/radios/kr-87/inputs/rotation-deg</property>
-   <step>-5.0</step>
-   <min>0</min>
-   <max>360</max>
-   <wrap>1</wrap>
-  </binding>
+    <command>property-adjust</command>
+    <property>/radios/kr-87/inputs/rotation-deg</property>
+    <step>-5.0</step>
+    <min>0</min>
+    <max>360</max>
+    <wrap>1</wrap>
+   </binding>
   </action>
   <action>
    <name>small counter-clockwise rotation</name>
    <button>0</button>
    <x>-46</x>
-   <y>-65</y>
+   <y>-56</y>
    <w>12</w>
    <h>24</h>
    <binding>
-   <command>property-adjust</command>
-   <property>/radios/kr-87/inputs/rotation-deg</property>
-   <step>1.0</step>
-   <min>0</min>
-   <max>360</max>
-   <wrap>1</wrap>
-  </binding>
- </action>
+    <command>property-adjust</command>
+    <property>/radios/kr-87/inputs/rotation-deg</property>
+    <step>1.0</step>
+    <min>0</min>
+    <max>360</max>
+    <wrap>1</wrap>
+   </binding>
+  </action>
   <action>
    <name>large counter-clockwise rotation</name>
    <button>1</button>
@@ -245,13 +245,13 @@ properties' values.
    <w>12</w>
    <h>24</h>
    <binding>
-   <command>property-adjust</command>
-   <property>/radios/kr-87/inputs/rotation-deg</property>
-   <step>5.0</step>
-   <min>0</min>
-   <max>360</max>
-   <wrap>1</wrap>
-  </binding>
+    <command>property-adjust</command>
+    <property>/radios/kr-87/inputs/rotation-deg</property>
+    <step>5.0</step>
+    <min>0</min>
+    <max>360</max>
+    <wrap>1</wrap>
+   </binding>
   </action>
  </actions>
 

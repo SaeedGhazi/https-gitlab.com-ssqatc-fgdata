@@ -800,7 +800,8 @@ properties' values.
     <property>/radios/kr-87/outputs/selected-khz</property>
     <step>-1</step>
     <min>100</min>
-    <max>1299</max>
+    <max>1300</max>
+    <resolution>1</resolution>
     <wrap>1</wrap>
    </binding>
   </action>
@@ -823,7 +824,8 @@ properties' values.
     <property>/radios/kr-87/outputs/selected-khz</property>
     <step>1</step>
     <min>100</min>
-    <max>1299</max>
+    <max>1300</max>
+    <resolution>1</resolution>
     <wrap>1</wrap>
    </binding>
   </action>
@@ -847,7 +849,8 @@ properties' values.
     <property>/radios/kr-87/outputs/selected-khz</property>
     <step>-25</step>
     <min>100</min>
-    <max>1299</max>
+    <max>1300</max>
+    <resolution>1</resolution>
     <wrap>1</wrap>
    </binding>
   </action>
@@ -871,7 +874,8 @@ properties' values.
     <property>/radios/kr-87/outputs/selected-khz</property>
     <step>25</step>
     <min>100</min>
-    <max>1299</max>
+    <max>1300</max>
+    <resolution>1</resolution>
     <wrap>1</wrap>
    </binding>
   </action>

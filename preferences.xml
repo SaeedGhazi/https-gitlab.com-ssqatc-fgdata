@@ -15,16 +15,18 @@ Started September 2000 by David Megginson, david@megginson.com
   <intl include="Translations/locale.xml"/>
   <aircraft>c172</aircraft>
   <virtual-cockpit type="bool">false</virtual-cockpit>
+  <presets>
+   <airport-id>KSFO</airport-id>
+   <trim type="bool">true</trim>
+  </presets>
   <startup>
    <xsize type="int">800</xsize>
    <ysize type="int">600</ysize>
    <splash-screen type="bool">true</splash-screen>
    <intro-music type="bool">false</intro-music>
    <game-mode type="bool">false</game-mode>
-   <airport-id>KSFO</airport-id>
    <fullscreen type="bool">false</fullscreen>
    <units>feet</units>
-   <trim type="bool">true</trim>
    <browser-app>netscape</browser-app><!--  help viewer -->
   </startup>
   <rendering>

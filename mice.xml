@@ -27,21 +27,8 @@ The current mode for each mouse is held in the
 
   <mode n="0">
    <cursor>inherit</cursor>
-
-   <button n="0">
-    <binding>
-     <command>pui-or-panel-mouse-click</command>
-     <button>0</button>
-     <is-down>true</is-down>
-    </binding>
-    <mod-up>
-     <binding>
-      <command>pui-or-panel-mouse-click</command>
-      <button>0</button>
-      <is-down>false</is-down>
-     </binding>
-    </mod-up>
-   </button>
+   <constrained>false</constrained>
+   <pass-through>true</pass-through>
 
    <button n="2">
     <binding>
@@ -56,6 +43,7 @@ The current mode for each mouse is held in the
   <mode n="1">
    <cursor>crosshair</cursor>
    <constrained>true</constrained>
+   <pass-through>false</pass-through>
 
    <button n="2">
     <binding>
@@ -95,6 +83,7 @@ The current mode for each mouse is held in the
   <mode n="2">
    <cursor>left-right</cursor>
    <constrained>true</constrained>
+   <pass-through>false</pass-through>
 
    <!-- left button centres the view heading offset -->
    <button n="0">

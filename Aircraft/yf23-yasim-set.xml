@@ -50,7 +50,7 @@ NR/MD YF23 simulation config.
 
  </sim>
 
- <controls>
+<!-- <controls>
   <engines>
    <engine n="0">
     <magnetos>3</magnetos>
@@ -60,7 +60,7 @@ NR/MD YF23 simulation config.
    </engine>
   </engines>
  </controls>
-
+-->
  <autopilot>
    <config>
 
@@ -70,15 +70,15 @@ NR/MD YF23 simulation config.
      <target-climb-rate-fpm type="float">20000.0</target-climb-rate-fpm>
      <target-descent-rate-fpm type="float">12000.0</target-descent-rate-fpm>
 
-     <elevator-adj-factor type="float">130.0</elevator-adj-factor>
+     <elevator-adj-factor type="float">500.0</elevator-adj-factor>
 
      <integral-contribution type="float">0.005</integral-contribution>
 
-     <max-aileron type="float">0.5</max-aileron>
+     <max-aileron type="float">0.6</max-aileron>
      <max-roll-deg type="float">60.0</max-roll-deg>
 
-     <roll-out-deg type="float">10.0</roll-out-deg>
-     <roll-out-smooth-deg type="float">20.0</roll-out-smooth-deg>
+     <roll-out-deg type="float">7.0</roll-out-deg>
+     <roll-out-smooth-deg type="float">15.0</roll-out-smooth-deg>
 
      <zero-pitch-throttle type="float">0.5</zero-pitch-throttle>
      <zero-pitch-trim-full-throttle type="float">0.001</zero-pitch-trim-full-throttle>

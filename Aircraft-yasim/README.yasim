@@ -200,6 +200,10 @@ propeller: A propeller connected to a non-turbocharged piston engine
           min-rpm:       The minimum operational RPM.
           max-rpm:       The maximum operational RPM.
 
+          gear-ratio:    The factor by which the engine RPM is multiplied
+                         to produce the propeller RPM.  Optional (defaults
+                         to 1.0).
+
 
 actionpt: Defines an "action point" for an enclosing jet or propeller
           element.  This is the location where the force from the thruster

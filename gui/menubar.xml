@@ -219,12 +219,14 @@
    </binding>
   </item>
 
+<!--
   <item>
    <label>Adjust Autopilot</label>
    <binding>
     <command>old-ap-adjust-dialog</command>
    </binding>
   </item>
+-->
 
   <item>
    <label>Set Lat/Lon Format</label>
@@ -233,14 +235,6 @@
    </binding>
   </item>
   
-  <item>
-   <label>Reconfig Autopilot</label>
-   <binding>
-    <command>reinit</command>
-    <subsystem>xml-autopilot</subsystem>
-   </binding>
-  </item>
-
  </menu>
 
  <menu>
@@ -336,6 +330,14 @@
    <label>Reload Panel</label>
    <binding>
     <command>panel-load</command>
+   </binding>
+  </item>
+
+  <item>
+   <label>Reload Autopilot</label>
+   <binding>
+    <command>reinit</command>
+    <subsystem>xml-autopilot</subsystem>
    </binding>
   </item>
 

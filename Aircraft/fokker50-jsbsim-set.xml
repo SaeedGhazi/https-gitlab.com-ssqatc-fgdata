@@ -22,7 +22,7 @@
   </sound>
 
   <model>
-   <path>Aircraft/fokker50/Models/fokker50.ac</path>
+   <path>Aircraft/fokker50/Models/fokker50.xml</path>
   </model>
 
    <chase-distance-m type="double" archive="y">-50.0</chase-distance-m>

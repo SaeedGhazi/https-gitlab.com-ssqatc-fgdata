@@ -23,8 +23,9 @@ Joystick binding definitions.
  <js-named include="Input/Joysticks/Logitech/wingman-rumblepad-usb.xml"/>
 
  <!-- Microsoft devices -->
- <js-named include="Input/Joysticks/Microsoft/sidewinder.xml"/
+ <js-named include="Input/Joysticks/Microsoft/sidewinder.xml"/>
  <js-named include="Input/Joysticks/Microsoft/sidewinder-force-feed.xml"/>
+ <js-named include="Input/Joysticks/Microsoft/sidewinder-force-feed-pro.xml"/>
  <js-named include="Input/Joysticks/Microsoft/sidewinder-precision-pro.xml"/>
 
  <!-- Saitek devices -->

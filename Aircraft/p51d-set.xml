@@ -94,6 +94,29 @@ March 2003 Jim Wilson, jimw@kelcomaine.com
     </magnetic-compass>
  </instrumentation>
 
+ <!-- set up control properties for YASim -->
+ <controls>
+   <engines>
+      <engine n="0">
+        <boost type="double">0.0</boost>
+      </engine>
+   </engines>
+ </controls>
+
+ <!-- map key for booster (supercharger) -->
+ <input>
+    <keyboard>
+      <key n="2">
+        <name>Ctrl-B</name>
+        <desc>Toggle engine boost.</desc>
+        <binding>
+          <command>property-toggle</command>
+          <property>/controls/engines/engine[0]/boost</property>
+        </binding>
+      </key>
+     </keyboard>
+ </input>
+
 </PropertyList>
 
 

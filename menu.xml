@@ -21,9 +21,6 @@
     <seperator/>
    </option>
    <option>
-    <seperator/>
-   </option>
-   <option>
     <name>Hires Snap Shot</name>
     <call>dumpHiResSnapShot</call>
    </option>

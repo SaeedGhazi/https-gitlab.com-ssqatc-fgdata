@@ -54,14 +54,25 @@ March 2003 Jim Wilson, jimw@kelcomaine.com
 
   <view n="1">
    <config>
-    <target-z-offset-m archive="y" type="double">4.080</target-z-offset-m>
+    <target-z-offset-m archive="y" type="double">3.949</target-z-offset-m>
+   </config>
+  </view>
+
+  <view n="2">
+   <config>
+    <target-z-offset-m archive="y" type="double">3.949</target-z-offset-m>
+   </config>
+  </view>
+
+  <view n="3">
+   <config>
+    <target-z-offset-m archive="y" type="double">3.949</target-z-offset-m>
    </config>
   </view>
 
   <view n="4">
-   <internal archive="y">true</internal>
    <config>
-    <target-z-offset-m archive="y" type="double">4.080</target-z-offset-m>
+    <target-z-offset-m archive="y" type="double">3.949</target-z-offset-m>
    </config>
   </view>
 

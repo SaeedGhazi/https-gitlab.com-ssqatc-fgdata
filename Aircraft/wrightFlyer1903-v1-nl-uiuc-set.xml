@@ -1,16 +1,19 @@
 <?xml version="1.0"?>
 <!--
 ************************************************************************
+
 1903 Wright Flyer simulation config.  This file ties together all the
-components used by FGFS to represent the 1903 Wright
-Flyerr. Components include the flight data model, instrument panel,
-and external 3D model.
+components used by FGFS to represent the 1903 Wright Flyer. Components
+include the flight data model, instrument panel, and visual model.
 
-3D models can be downloaded from http://home.t-online.de/home/Wolfram.Kuss/
+Flight model details: 
+Aircraft/UIUC/wrightFlyer1903-v1-nl/README.wrightFlyer1903.html
 
-For more details see UIUC/wrightFlyer1903-v1-nl/README.wrightFlyer1903.html
+Visual model details:  
+Aircraft/wrightFlyer1903/Models/
+(courtesy of Jim Wilson, jimw@kelcomaine.com)
 
-May 25 2002 Michael Selig, m-selig@uiuc.edu
+Last update: Nov 9, 2002 Michael Selig, m-selig@uiuc.edu
 ************************************************************************
 -->
 
@@ -23,6 +26,8 @@ May 25 2002 Michael Selig, m-selig@uiuc.edu
   <flight-model>larcsim</flight-model>
   <aero>uiuc</aero>
   <aircraft-dir>Aircraft/UIUC/wrightFlyer1903-v1-nl</aircraft-dir>
+
+  <auto-coordination>true</auto-coordination>
 
   <sound>
    <audible>true</audible>
@@ -38,7 +43,6 @@ May 25 2002 Michael Selig, m-selig@uiuc.edu
    <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
   </panel_2>
 
-  <!-- To use the 3D Model, go to Wolfram Kuss' website.    -->
   <model>
    <path>Aircraft/wrightFlyer1903/Models/WrightFlyer-pb-jw.xml</path>
   </model>

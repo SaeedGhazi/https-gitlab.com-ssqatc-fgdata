@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <name>timeofday</name>
+ <width>300</width>
+ <height>330</height>
+ <modal>false</modal>
+
+ <text>
+  <x>40</x>
+  <y>280</y>
+  <label>Set Time of Day</label>
+ </text>
+
+ <group>
+  <button>
+   <x>40</x>
+   <y>250</y>
+   <legend>Clock Time</legend>
+   <binding>
+    <command>timeofday</command>
+    <timeofday>real</timeofday>
+   </binding>
+  </button>
+
+  <button>
+   <x>40</x>
+   <y>220</y>
+   <legend>Dawn</legend>
+   <binding>
+    <command>timeofday</command>
+    <timeofday>dawn</timeofday>
+   </binding>
+  </button>
+
+  <button>
+   <x>40</x>
+   <y>190</y>
+   <legend>Morning</legend>
+   <binding>
+    <command>timeofday</command>
+    <timeofday>morning</timeofday>
+   </binding>
+  </button>
+
+  <button>
+   <x>40</x>
+   <y>160</y>
+   <legend>Noon</legend>
+   <binding>
+    <command>timeofday</command>
+    <timeofday>noon</timeofday>
+   </binding>
+  </button>
+
+  <button>
+   <x>40</x>
+   <y>130</y>
+   <legend>Afternoon</legend>
+   <binding>
+    <command>timeofday</command>
+    <timeofday>afternoon</timeofday>
+   </binding>
+  </button>
+
+  <button>
+   <x>40</x>
+   <y>100</y>
+   <legend>Dusk</legend>
+   <binding>
+    <command>timeofday</command>
+    <timeofday>dusk</timeofday>
+   </binding>
+  </button>
+
+  <button>
+   <x>40</x>
+   <y>70</y>
+   <legend>Evening</legend>
+   <binding>
+    <command>timeofday</command>
+    <timeofday>evening</timeofday>
+   </binding>
+  </button>
+
+  <button>
+   <x>40</x>
+   <y>40</y>
+   <legend>Night</legend>
+   <binding>
+    <command>timeofday</command>
+    <timeofday>midnight</timeofday>
+   </binding>
+  </button>
+ </group>
+
+ <group>
+  <button>
+   <x>120</x>
+   <y>10</y>
+   <legend>Dismiss</legend>
+   <binding>
+    <command>dialog-close</command>
+   </binding>
+  </button>
+
+ </group>
+
+</PropertyList>

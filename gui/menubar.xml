@@ -230,6 +230,14 @@
    </binding>
   </item>
 
+  <item>
+   <label>Time of Day</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>timeofday</dialog-name>
+   </binding>
+  </item>
+
  </menu>
 
  <menu>
@@ -262,6 +270,19 @@
  </menu>
 
  <menu>
+  <label>ATC/AI</label>
+ 
+  <item>
+   <label>Options</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>atc-ai</dialog-name>
+   </binding>
+  </item>
+  
+ </menu>
+
+ <menu>
   <label>Debug</label>
 
   <item>
@@ -281,19 +302,6 @@
 
  </menu>
  
- <menu>
-  <label>ATC/AI</label>
- 
-  <item>
-   <label>Options</label>
-   <binding>
-    <command>dialog-show</command>
-    <dialog-name>atc-ai</dialog-name>
-   </binding>
-  </item>
-  
- </menu>
-
  <menu>
   <label>Help</label>
 

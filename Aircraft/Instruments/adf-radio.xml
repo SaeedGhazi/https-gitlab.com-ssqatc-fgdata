@@ -32,7 +32,7 @@ properties' values.
 <params>
   <adf-freq-selected-prop>/radios/adf/frequencies/selected-khz</adf-freq-selected-prop>
   <adf-freq-standby-prop>/radios/adf/frequencies/standby-khz</adf-freq-standby-prop>
-  <adf-morse-id-volume-prop>/radios/adf/volume</adf-morse-id-volume-prop>
+  <adf-morse-id-volume-prop>/radios/adf/on-off-volume</adf-morse-id-volume-prop>
   <adf-morse-ident-toggle-prop>/radios/adf/ident</adf-morse-ident-toggle-prop>
 </params>
 
@@ -200,7 +200,7 @@ properties' values.
     </transformation>
     <transformation>
      <type>rotation</type>
-     <property>/radios/adf/volume</property>
+     <property>/radios/adf/on-off-volume</property>
      <min>0</min>
      <max>2</max>
      <scale>140</scale>

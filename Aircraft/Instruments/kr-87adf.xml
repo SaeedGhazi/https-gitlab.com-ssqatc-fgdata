@@ -46,7 +46,7 @@ properties' values.
    <name>ADF annunciator</name>
    <condition>
     <equals>
-     <property>/radios/kr-87/annunciators/adf</property>
+     <property>/instrumentation/kr-87/annunciators/adf</property>
      <value>true</value>
     </equals>
    </condition>
@@ -79,7 +79,7 @@ properties' values.
    <name>ANT annunciator</name>  
    <condition>
     <equals>
-     <property>/radios/kr-87/annunciators/ant</property>
+     <property>/instrumentation/kr-87/annunciators/ant</property>
      <value>true</value>
     </equals>
    </condition>
@@ -112,7 +112,7 @@ properties' values.
    <name>Selected FRQ display</name>
    <condition>
     <equals>
-     <property>/radios/kr-87/inputs/power-btn</property>
+     <property>/instrumentation/kr-87/inputs/power-btn</property>
      <value>true</value>
     </equals>
    </condition>
@@ -127,7 +127,7 @@ properties' values.
    <chunks>
     <chunk>
      <type>number-value</type>
-     <property>/radios/kr-87/outputs/selected-khz</property>
+     <property>/instrumentation/kr-87/outputs/selected-khz</property>
      <format>%4.0f</format>
     </chunk>
    </chunks>
@@ -147,7 +147,7 @@ properties' values.
    <name>BFO annunciator</name> 
    <condition>
     <equals>
-     <property>/radios/kr-87/annunciators/bfo</property>
+     <property>/instrumentation/kr-87/annunciators/bfo</property>
      <value>true</value>
     </equals>
    </condition> 
@@ -180,7 +180,7 @@ properties' values.
    <name>Standby FRQ annunciator</name> 
    <condition>
     <equals>
-     <property>/radios/kr-87/annunciators/frq</property>
+     <property>/instrumentation/kr-87/annunciators/frq</property>
      <value>true</value>
     </equals>
    </condition> 
@@ -213,11 +213,11 @@ properties' values.
    <name>Standby FRQ display</name>
    <condition>
     <equals>
-    <property>/radios/kr-87/annunciators/frq</property>
+    <property>/instrumentation/kr-87/annunciators/frq</property>
     <value>true</value>
     </equals>
     <equals>
-    <property>/radios/kr-87/modes/stby</property>
+    <property>/instrumentation/kr-87/modes/stby</property>
     <value>0</value>
     </equals>
    </condition>
@@ -232,7 +232,7 @@ properties' values.
    <chunks>
     <chunk>
      <type>number-value</type>
-     <property>/radios/kr-87/outputs/standby-khz</property>
+     <property>/instrumentation/kr-87/outputs/standby-khz</property>
      <format>%4.0f</format>
     </chunk>
    </chunks>
@@ -252,15 +252,15 @@ properties' values.
    <name>Flight Timer display</name>
    <condition>
     <equals>
-     <property>/radios/kr-87/inputs/power-btn</property>
+     <property>/instrumentation/kr-87/inputs/power-btn</property>
      <value>true</value>
     </equals>
     <equals>
-    <property>/radios/kr-87/modes/stby</property>
+    <property>/instrumentation/kr-87/modes/stby</property>
     <value>1</value>
     </equals>
     <equals>
-    <property>/radios/kr-87/annunciators/flt</property>
+    <property>/instrumentation/kr-87/annunciators/flt</property>
     <value>1</value>
     </equals>
    </condition>
@@ -275,7 +275,7 @@ properties' values.
    <chunks>
     <chunk>
      <type>text-value</type>
-     <property>/radios/kr-87/outputs/timer-string</property>
+     <property>/instrumentation/kr-87/outputs/timer-string</property>
     </chunk>
    </chunks>
    <transformations>
@@ -294,15 +294,15 @@ properties' values.
    <name>Elapsed Timer display</name>
    <condition>
     <equals>
-     <property>/radios/kr-87/inputs/power-btn</property>
+     <property>/instrumentation/kr-87/inputs/power-btn</property>
      <value>true</value>
     </equals>
     <equals>
-    <property>/radios/kr-87/modes/stby</property>
+    <property>/instrumentation/kr-87/modes/stby</property>
     <value>1</value>
     </equals>
     <equals>
-    <property>/radios/kr-87/annunciators/et</property>
+    <property>/instrumentation/kr-87/annunciators/et</property>
     <value>1</value>
     </equals>
    </condition>
@@ -317,7 +317,7 @@ properties' values.
    <chunks>
     <chunk>
      <type>text-value</type>
-     <property>/radios/kr-87/outputs/timer-string</property>
+     <property>/instrumentation/kr-87/outputs/timer-string</property>
     </chunk>
    </chunks>
    <transformations>
@@ -337,7 +337,7 @@ properties' values.
    <name>Flight Time annunciator</name> 
    <condition>
     <equals>
-     <property>/radios/kr-87/annunciators/flt</property>
+     <property>/instrumentation/kr-87/annunciators/flt</property>
      <value>true</value>
     </equals>
    </condition> 
@@ -370,7 +370,7 @@ properties' values.
    <name>Elapsed Time annunciator</name> 
    <condition>
     <equals>
-     <property>/radios/kr-87/annunciators/et</property>
+     <property>/instrumentation/kr-87/annunciators/et</property>
      <value>true</value>
     </equals>
    </condition> 
@@ -464,7 +464,7 @@ properties' values.
     </transformation>
     <transformation>
      <type>rotation</type>
-     <property>/radios/kr-87/inputs/volume</property>
+     <property>/instrumentation/kr-87/inputs/volume</property>
      <min>0</min>
      <max>2</max>
      <scale>140</scale>
@@ -632,7 +632,7 @@ properties' values.
    <h>14</h>
    <binding>
     <command>property-toggle</command>
-    <property>/radios/kr-87/inputs/adf-btn</property>
+    <property>/instrumentation/kr-87/inputs/adf-btn</property>
    </binding>
   </action>
   
@@ -645,7 +645,7 @@ properties' values.
    <h>14</h>
    <binding>
     <command>property-toggle</command>
-    <property>/radios/kr-87/inputs/bfo-btn</property>
+    <property>/instrumentation/kr-87/inputs/bfo-btn</property>
    </binding>
   </action>
   
@@ -658,14 +658,14 @@ properties' values.
    <h>14</h>
    <binding>
     <command>property-assign</command>
-    <property>/radios/kr-87/inputs/frq-btn</property>
+    <property>/instrumentation/kr-87/inputs/frq-btn</property>
     <value type="bool">true</value>
     <repeatable type="bool">false</repeatable>
    </binding>
    <mod-up>
     <binding>
      <command>property-assign</command>
-     <property>/radios/kr-87/inputs/frq-btn</property>
+     <property>/instrumentation/kr-87/inputs/frq-btn</property>
      <value type="bool">false</value>
     </binding>
    </mod-up>
@@ -680,14 +680,14 @@ properties' values.
    <h>14</h>
    <binding>
     <command>property-assign</command>
-    <property>/radios/kr-87/inputs/flt-et-btn</property>
+    <property>/instrumentation/kr-87/inputs/flt-et-btn</property>
     <value type="bool">true</value>
     <repeatable type="bool">false</repeatable>
    </binding>
    <mod-up>
     <binding>
      <command>property-assign</command>
-     <property>/radios/kr-87/inputs/flt-et-btn</property>
+     <property>/instrumentation/kr-87/inputs/flt-et-btn</property>
      <value type="bool">false</value>
     </binding>
    </mod-up>
@@ -702,14 +702,14 @@ properties' values.
    <h>14</h>
    <binding>
     <command>property-assign</command>
-    <property>/radios/kr-87/inputs/set-rst-btn</property>
+    <property>/instrumentation/kr-87/inputs/set-rst-btn</property>
     <value type="bool">true</value>
     <repeatable type="bool">false</repeatable>
    </binding>
    <mod-up>
     <binding>
      <command>property-assign</command>
-     <property>/radios/kr-87/inputs/set-rst-btn</property>
+     <property>/instrumentation/kr-87/inputs/set-rst-btn</property>
      <value type="bool">false</value>
     </binding>
    </mod-up>
@@ -726,13 +726,13 @@ properties' values.
    <h>24</h>
    <condition>
     <equals>
-    <property>/radios/kr-87/modes/count</property>
+    <property>/instrumentation/kr-87/modes/count</property>
     <value>2</value>
     </equals>
    </condition> 
    <binding>
     <command>property-adjust</command>
-    <property>/radios/kr-87/outputs/elapsed-timer</property>
+    <property>/instrumentation/kr-87/outputs/elapsed-timer</property>
     <step>-1</step>
     <min>1.0</min>
     <max>216000.0</max>
@@ -749,13 +749,13 @@ properties' values.
    <h>24</h>
    <condition>
     <equals>
-    <property>/radios/kr-87/modes/count</property>
+    <property>/instrumentation/kr-87/modes/count</property>
     <value>2</value>
     </equals>
    </condition> 
    <binding>
     <command>property-adjust</command>
-    <property>/radios/kr-87/outputs/elapsed-timer</property>
+    <property>/instrumentation/kr-87/outputs/elapsed-timer</property>
     <step>1</step>
     <min>1.0</min>
     <max>216000.0</max>
@@ -772,13 +772,13 @@ properties' values.
    <h>24</h>
    <condition>
     <equals>
-    <property>/radios/kr-87/modes/count</property>
+    <property>/instrumentation/kr-87/modes/count</property>
     <value>2</value>
     </equals>
    </condition> 
    <binding>
     <command>property-adjust</command>
-    <property>/radios/kr-87/outputs/elapsed-timer</property>
+    <property>/instrumentation/kr-87/outputs/elapsed-timer</property>
     <step>-60</step>
     <min>1.0</min>
     <max>3599.0</max>
@@ -795,13 +795,13 @@ properties' values.
    <h>24</h>
    <condition>
     <equals>
-    <property>/radios/kr-87/modes/count</property>
+    <property>/instrumentation/kr-87/modes/count</property>
     <value>2</value>
     </equals>
    </condition> 
    <binding>
     <command>property-adjust</command>
-    <property>/radios/kr-87/outputs/elapsed-timer</property>
+    <property>/instrumentation/kr-87/outputs/elapsed-timer</property>
     <step>60</step>
     <min>1.0</min>
     <max>3599.0</max>
@@ -819,18 +819,18 @@ properties' values.
    <condition>
     <and>
      <not-equals>
-     <property>/radios/kr-87/modes/count</property>
+     <property>/instrumentation/kr-87/modes/count</property>
      <value>2</value>
      </not-equals>
      <equals>
-      <property>/radios/kr-87/modes/stby</property>
+      <property>/instrumentation/kr-87/modes/stby</property>
       <value>1</value>
      </equals>
     </and>
    </condition> 
    <binding>
     <command>property-adjust</command>
-    <property>/radios/kr-87/outputs/selected-khz</property>
+    <property>/instrumentation/kr-87/outputs/selected-khz</property>
     <step>-1</step>
     <min>100</min>
     <max>1300</max>
@@ -849,18 +849,18 @@ properties' values.
    <condition>
     <and>
      <not-equals>
-     <property>/radios/kr-87/modes/count</property>
+     <property>/instrumentation/kr-87/modes/count</property>
      <value>2</value>
      </not-equals>
      <equals>
-      <property>/radios/kr-87/modes/stby</property>
+      <property>/instrumentation/kr-87/modes/stby</property>
       <value>1</value>
      </equals>
     </and>
    </condition> 
    <binding>
     <command>property-adjust</command>
-    <property>/radios/kr-87/outputs/selected-khz</property>
+    <property>/instrumentation/kr-87/outputs/selected-khz</property>
     <step>1</step>
     <min>100</min>
     <max>1300</max>
@@ -880,18 +880,18 @@ properties' values.
    <condition>
     <and>
      <not-equals>
-     <property>/radios/kr-87/modes/count</property>
+     <property>/instrumentation/kr-87/modes/count</property>
      <value>2</value>
      </not-equals>
      <equals>
-      <property>/radios/kr-87/modes/stby</property>
+      <property>/instrumentation/kr-87/modes/stby</property>
       <value>1</value>
      </equals>
     </and>
    </condition> 
    <binding>
     <command>property-adjust</command>
-    <property>/radios/kr-87/outputs/selected-khz</property>
+    <property>/instrumentation/kr-87/outputs/selected-khz</property>
     <step>-25</step>
     <min>100</min>
     <max>1300</max>
@@ -911,18 +911,18 @@ properties' values.
    <condition>
     <and>
      <not-equals>
-     <property>/radios/kr-87/modes/count</property>
+     <property>/instrumentation/kr-87/modes/count</property>
      <value>2</value>
      </not-equals>
      <equals>
-      <property>/radios/kr-87/modes/stby</property>
+      <property>/instrumentation/kr-87/modes/stby</property>
       <value>1</value>
      </equals>
     </and>
    </condition> 
    <binding>
     <command>property-adjust</command>
-    <property>/radios/kr-87/outputs/selected-khz</property>
+    <property>/instrumentation/kr-87/outputs/selected-khz</property>
     <step>25</step>
     <min>100</min>
     <max>1300</max>
@@ -941,18 +941,18 @@ properties' values.
    <condition>
     <and>
      <not-equals>
-     <property>/radios/kr-87/modes/count</property>
+     <property>/instrumentation/kr-87/modes/count</property>
      <value>2</value>
      </not-equals>
      <equals>
-      <property>/radios/kr-87/modes/stby</property>
+      <property>/instrumentation/kr-87/modes/stby</property>
       <value>0</value>
      </equals>
     </and>
    </condition> 
    <binding>
     <command>property-adjust</command>
-    <property>/radios/kr-87/outputs/standby-khz</property>
+    <property>/instrumentation/kr-87/outputs/standby-khz</property>
     <step>-1</step>
     <min>100</min>
     <max>1300</max>
@@ -971,18 +971,18 @@ properties' values.
    <condition>
     <and>
      <not-equals>
-     <property>/radios/kr-87/modes/count</property>
+     <property>/instrumentation/kr-87/modes/count</property>
      <value>2</value>
      </not-equals>
      <equals>
-      <property>/radios/kr-87/modes/stby</property>
+      <property>/instrumentation/kr-87/modes/stby</property>
       <value>0</value>
      </equals>
     </and>
    </condition> 
    <binding>
     <command>property-adjust</command>
-    <property>/radios/kr-87/outputs/standby-khz</property>
+    <property>/instrumentation/kr-87/outputs/standby-khz</property>
     <step>1</step>
     <min>100</min>
     <max>1300</max>
@@ -1002,18 +1002,18 @@ properties' values.
    <condition>
     <and>
      <not-equals>
-     <property>/radios/kr-87/modes/count</property>
+     <property>/instrumentation/kr-87/modes/count</property>
      <value>2</value>
      </not-equals>
      <equals>
-      <property>/radios/kr-87/modes/stby</property>
+      <property>/instrumentation/kr-87/modes/stby</property>
       <value>0</value>
      </equals>
     </and>
    </condition> 
    <binding>
     <command>property-adjust</command>
-    <property>/radios/kr-87/outputs/standby-khz</property>
+    <property>/instrumentation/kr-87/outputs/standby-khz</property>
     <step>-25</step>
     <min>100</min>
     <max>1300</max>
@@ -1033,18 +1033,18 @@ properties' values.
    <condition>
     <and>
      <not-equals>
-     <property>/radios/kr-87/modes/count</property>
+     <property>/instrumentation/kr-87/modes/count</property>
      <value>2</value>
      </not-equals>
      <equals>
-      <property>/radios/kr-87/modes/stby</property>
+      <property>/instrumentation/kr-87/modes/stby</property>
       <value>0</value>
      </equals>
     </and>
    </condition> 
    <binding>
     <command>property-adjust</command>
-    <property>/radios/kr-87/outputs/standby-khz</property>
+    <property>/instrumentation/kr-87/outputs/standby-khz</property>
     <step>25</step>
     <min>100</min>
     <max>1300</max>
@@ -1061,11 +1061,11 @@ properties' values.
    <w>8</w>
    <h>16</h>
    <condition>
-    <property>/radios/kr-87/inputs/power-btn</property>
+    <property>/instrumentation/kr-87/inputs/power-btn</property>
    </condition>
    <binding>
     <command>property-adjust</command>
-    <property>/radios/kr-87/inputs/volume</property>
+    <property>/instrumentation/kr-87/inputs/volume</property>
     <step>0.1</step>
     <min>0</min>
     <max>1</max>
@@ -1091,7 +1091,7 @@ properties' values.
    </condition>
    <binding>
     <command>property-adjust</command>
-    <property>/radios/kr-87/inputs/volume</property>
+    <property>/instrumentation/kr-87/inputs/volume</property>
     <step>-0.1</step>
     <min>0</min>
     <max>1</max>
@@ -1108,17 +1108,17 @@ properties' values.
    <condition>
     <and>
      <less-than>
-      <property>/radios/kr-87/inputs/volume</property>
+      <property>/instrumentation/kr-87/inputs/volume</property>
       <value>0.01</value>
      </less-than>
      <not>
-      <property>/radios/kr-87/inputs/power-btn</property>
+      <property>/instrumentation/kr-87/inputs/power-btn</property>
      </not>
     </and>
    </condition>
    <binding>
      <command>property-assign</command>
-     <property>/radios/kr-87/inputs/power-btn</property>
+     <property>/instrumentation/kr-87/inputs/power-btn</property>
      <value type="bool">true</value>
    </binding>
   </action>
@@ -1133,15 +1133,15 @@ properties' values.
    <condition>
     <and>
      <less-than>
-      <property>/radios/kr-87/inputs/volume</property>
+      <property>/instrumentation/kr-87/inputs/volume</property>
       <value>0.01</value>
      </less-than>
-      <property>/radios/kr-87/inputs/power-btn</property>
+      <property>/instrumentation/kr-87/inputs/power-btn</property>
      </and>
    </condition>
    <binding>
      <command>property-assign</command>
-     <property>/radios/kr-87/inputs/power-btn</property>
+     <property>/instrumentation/kr-87/inputs/power-btn</property>
      <value type="bool">false</value>
    </binding>
   </action>

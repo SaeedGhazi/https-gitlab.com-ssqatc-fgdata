@@ -619,16 +619,6 @@ Started September 2000 by David Megginson, david@megginson.com
    </radials>
   </nav>
 
-  <kr-87>
-   <inputs>
-     <rotation-deg type="double">0</rotation-deg>
-   </inputs>
-   <outputs>
-    <selected-khz type="double">379.0</selected-khz>
-    <standby-khz type="double">341.0</standby-khz>
-   </outputs>
-  </kr-87>
-
  </radios>
 
  <!-- Instruments -->
@@ -705,6 +695,16 @@ Started September 2000 by David Megginson, david@megginson.com
    <rotation-deg type="double">0</rotation-deg>
    <volume-norm type="double">0.5</volume-norm>
   </adf>
+
+  <kr-87>
+   <inputs>
+     <rotation-deg type="double">0</rotation-deg>
+   </inputs>
+   <outputs>
+    <selected-khz type="double">379.0</selected-khz>
+    <standby-khz type="double">341.0</standby-khz>
+   </outputs>
+  </kr-87>
 
  </instrumentation>
 

@@ -18,8 +18,8 @@ Mar 6 2003
  <h-base>512</h-base>
 
  <params>
-  <adf-course-rotation-deg>/radios/kr-87/inputs/rotation-deg</adf-course-rotation-deg>
-  <adf-needle-deg>/radios/kr-87/outputs/needle-deg</adf-needle-deg>
+  <adf-course-rotation-deg>/instrumentation/kr-87/inputs/rotation-deg</adf-course-rotation-deg>
+  <adf-needle-deg>/instrumentation/kr-87/outputs/needle-deg</adf-needle-deg>
  </params>
 
  <layers>

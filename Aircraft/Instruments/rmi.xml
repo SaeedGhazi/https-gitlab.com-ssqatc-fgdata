@@ -211,7 +211,7 @@ properties' values.
     <transformation>
      <type>rotation</type>
      <!--set>45</offset-->
-     <property>/radios/kr-87/outputs/needle-deg</property>
+     <property>/instrumentation/kr-87/outputs/needle-deg</property>
      <min>-360</min>
      <max>360</max>
     </transformation>

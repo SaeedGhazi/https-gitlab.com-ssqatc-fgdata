@@ -50,7 +50,7 @@ adf_working = func {
     if ( has_power < 1.0 ) {
         return 0;
     }
-    if ( !getprop("/radios/kr-87/inputs/power-btn") ) {
+    if ( !getprop("/instrumentation/kr-87/inputs/power-btn") ) {
         return 0;
     }
     if ( !getprop("/instrumentation/adf/serviceable") ) {
@@ -141,10 +141,10 @@ xpdr_working = func {
     if ( has_power < 1.0 ) {
         return 0;
     }
-    if ( !getprop("/radios/kt-70/inputs/func-knob") ) {
+    if ( !getprop("/instrumentation/kt-70/inputs/func-knob") ) {
         return 0;
     }
-    if ( !getprop("/radios/kt-70/inputs/serviceable") ) {
+    if ( !getprop("/instrumentation/kt-70/inputs/serviceable") ) {
         return 0;
     }
     return 1;
@@ -198,13 +198,13 @@ initialize_tuners = func {
     last_nav2_fine = getprop("/radios/nav[1]/inputs/fine-tuner");
     last_nav2_coarse = getprop("/radios/nav[1]/inputs/coarse-tuner");
 
-    last_adf_fine = getprop( "/radios/adf/inputs/fine-tuner" );
-    last_adf_coarse = getprop("/radios/adf/inputs/coarse-tuner");
+    last_adf_fine = getprop( "/instrumentation/kr-87/inputs/fine-tuner" );
+    last_adf_coarse = getprop("/instrumentation/kr-87/inputs/coarse-tuner");
 
-    last_xpdr[0] = getprop( "/radios/kt-70/inputs/tuner1" );
-    last_xpdr[1] = getprop( "/radios/kt-70/inputs/tuner2" );
-    last_xpdr[2] = getprop( "/radios/kt-70/inputs/tuner3" );
-    last_xpdr[3] = getprop( "/radios/kt-70/inputs/tuner4" );
+    last_xpdr[0] = getprop( "/instrumentation/kt-70/inputs/tuner1" );
+    last_xpdr[1] = getprop( "/instrumentation/kt-70/inputs/tuner2" );
+    last_xpdr[2] = getprop( "/instrumentation/kt-70/inputs/tuner3" );
+    last_xpdr[3] = getprop( "/instrumentation/kt-70/inputs/tuner4" );
 
     tuners_inited = 1;
 }
@@ -463,19 +463,19 @@ do_nav2_inputs = func {
 #
 do_adf_inputs = func {
     if ( adf_working() ) {
-        adf_fine = getprop( "/radios/adf/inputs/fine-tuner" );
-        adf_coarse = getprop( "/radios/adf/inputs/coarse-tuner" );
-        adf_count_mode = getprop( "/radios/kr-87/modes/count" );
-        adf_stby_mode = getprop( "/radios/kr-87/modes/stby" );
+        adf_fine = getprop( "/instrumentation/kr-87/inputs/fine-tuner" );
+        adf_coarse = getprop( "/instrumentation/kr-87/inputs/coarse-tuner" );
+        adf_count_mode = getprop( "/instrumentation/kr-87/modes/count" );
+        adf_stby_mode = getprop( "/instrumentation/kr-87/modes/stby" );
         if ( adf_count_mode == 2 ) {
             # tune count down timer
-            value = getprop( "/radios/kr-87/outputs/elapsed-timer" );
+            value = getprop( "/instrumentation/kr-87/outputs/elapsed-timer" );
         } else {
             # tune frequency
             if ( adf_stby_mode == 1 ) {
-                value = getprop( "/radios/kr-87/outputs/selected-khz" );
+                value = getprop( "/instrumentation/kr-87/outputs/selected-khz");
             } else {
-                value = getprop( "/radios/kr-87/outputs/standby-khz" );
+                value = getprop( "/instrumentation/kr-87/outputs/standby-khz" );
             }
         }
 
@@ -524,12 +524,12 @@ do_adf_inputs = func {
         last_adf_coarse = adf_coarse;
 
         if ( adf_count_mode == 2 ) {
-            setprop( "/radios/kr-87/outputs/elapsed-timer", value );
+            setprop( "/instrumentation/kr-87/outputs/elapsed-timer", value );
         } else {
             if ( adf_stby_mode == 1 ) {
-                setprop( "/radios/kr-87/outputs/selected-khz", value );
+                setprop( "/instrumentation/kr-87/outputs/selected-khz", value );
             } else {
-                setprop( "/radios/kr-87/outputs/standby-khz", value );
+                setprop( "/instrumentation/kr-87/outputs/standby-khz", value );
             }
         }
     }
@@ -541,29 +541,29 @@ do_adf_inputs = func {
 #
 do_xpdr_inputs = func {
     # map the function knob
-    raw_knob = getprop( "/radios/kt-70/inputs/raw-func-knob" );
+    raw_knob = getprop( "/instrumentation/kt-70/inputs/raw-func-knob" );
     if ( raw_knob == 0 ) {
-        setprop( "/radios/kt-70/inputs/func-knob", 0 );
+        setprop( "/instrumentation/kt-70/inputs/func-knob", 0 );
     } elsif ( raw_knob == 1 ) {
-        setprop( "/radios/kt-70/inputs/func-knob", 1 );
+        setprop( "/instrumentation/kt-70/inputs/func-knob", 1 );
     } elsif ( raw_knob == 2 ) {
-        setprop( "/radios/kt-70/inputs/func-knob", 2 );
+        setprop( "/instrumentation/kt-70/inputs/func-knob", 2 );
     } elsif ( raw_knob == 4 ) {
-        setprop( "/radios/kt-70/inputs/func-knob", 3 );
+        setprop( "/instrumentation/kt-70/inputs/func-knob", 3 );
     } elsif ( raw_knob == 8 ) {
-        setprop( "/radios/kt-70/inputs/func-knob", 4 );
+        setprop( "/instrumentation/kt-70/inputs/func-knob", 4 );
     } elsif ( raw_knob == 16 ) {
-        setprop( "/radios/kt-70/inputs/func-knob", 5 );
+        setprop( "/instrumentation/kt-70/inputs/func-knob", 5 );
     }
 
     if ( xpdr_working() ) {
 
-        xpdr[0] = getprop( "/radios/kt-70/inputs/tuner1" );
-        xpdr[1] = getprop( "/radios/kt-70/inputs/tuner2" );
-        xpdr[2] = getprop( "/radios/kt-70/inputs/tuner3" );
-        xpdr[3] = getprop( "/radios/kt-70/inputs/tuner4" );
+        xpdr[0] = getprop( "/instrumentation/kt-70/inputs/tuner1" );
+        xpdr[1] = getprop( "/instrumentation/kt-70/inputs/tuner2" );
+        xpdr[2] = getprop( "/instrumentation/kt-70/inputs/tuner3" );
+        xpdr[3] = getprop( "/instrumentation/kt-70/inputs/tuner4" );
 
-        id_code = getprop( "/radios/kt-70/outputs/id-code" );
+        id_code = getprop( "/instrumentation/kt-70/outputs/id-code" );
 
         place = 1000;
         digit = [ 0, 0, 0, 0 ];
@@ -592,10 +592,10 @@ do_xpdr_inputs = func {
             while ( digit[i] < 0 )  { digit[i] = digit[i] + 8; }
         }
 
-        setprop( "/radios/kt-70/inputs/digit1", digit[0] );
-        setprop( "/radios/kt-70/inputs/digit2", digit[1] );
-        setprop( "/radios/kt-70/inputs/digit3", digit[2] );
-        setprop( "/radios/kt-70/inputs/digit4", digit[3] );
+        setprop( "/instrumentation/kt-70/inputs/digit1", digit[0] );
+        setprop( "/instrumentation/kt-70/inputs/digit2", digit[1] );
+        setprop( "/instrumentation/kt-70/inputs/digit3", digit[2] );
+        setprop( "/instrumentation/kt-70/inputs/digit4", digit[3] );
 
         for ( i = 0; i < 4; i = i + 1 ) {
             last_xpdr[i] = xpdr[i];

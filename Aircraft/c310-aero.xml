@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!--
 ************************************************************************
-X15 simulation config. This files ties together all the components
-used by FGFS to represent the X15. Components include the flight data 
+Cessna 310R simulation config. This files ties together all the components
+used by FGFS to represent the C310R. Components include the flight data 
 model, instrument panel, and external 3D model.
 3D models can be downloaded from http://home.t-online.de/home/Wolfram.Kuss/
 
@@ -14,19 +14,14 @@ October 23 2001 John Check, fgpanels@rockfish.net
 <!-- these are the three main components -->
  <sim>
   <flight-model>jsb</flight-model>
-  <aircraft>X15</aircraft>
-  <sound>false</sound>
+  <aircraft>c310</aircraft>
+  <sound>true</sound>
   <panel>
-   <path>Aircraft/X15/Panels/X15-panel.xml</path>
+   <path>Aircraft/c310/c310-vfr-panel.xml</path>
   </panel>
-  <!-- gear up -->
   <model>
-   <path>Aircraft/X15/Models/X15_flight.ac</path>
+   <path>Aircraft/c310/Models/cessna310r.ac</path>
   </model> 
-  <!-- gear down -->
-  <model_2>
-   <path>Aircraft/X15/Models/X15_landing.ac</path>
-  </model_2> 
  </sim>
   
 </PropertyList>

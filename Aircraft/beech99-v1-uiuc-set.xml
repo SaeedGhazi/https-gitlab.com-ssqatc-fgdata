@@ -1,16 +1,12 @@
 <?xml version="1.0"?>
 <!--
 ************************************************************************
-Beech 99 simulation config.  This file ties together all the
-components used by FGFS to represent the Beech 99. Components
-include the flight data model, instrument panel, and external 3D
-model.
+Beech 99 simulation config.  This file ties together all
+the components used by FGFS to represent the aircraft.
 
-3D models can be downloaded from http://home.t-online.de/home/Wolfram.Kuss/
+For more details see UIUC/beech99-v1/README.beech99.html
 
-For more details see UIUC/beech99/README.beech99.html
-
-May 25 2002 Michael Selig, m-selig@uiuc.edu
+Dec 28, 2002 Michael Selig, m-selig@uiuc.edu
 ************************************************************************
 -->
 
@@ -23,12 +19,6 @@ May 25 2002 Michael Selig, m-selig@uiuc.edu
   <flight-model>larcsim</flight-model>
   <aero>uiuc</aero>
   <aircraft-dir>Aircraft/UIUC/beech99-v1</aircraft-dir>
-
-  <systems>
-   <electrical>
-    <path>Aircraft/Generic/generic-electrical.xml</path>
-   </electrical>
-  </systems> 
 
   <sound>
    <audible>true</audible>
@@ -44,10 +34,8 @@ May 25 2002 Michael Selig, m-selig@uiuc.edu
    <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
   </panel_2>
 
-  <!-- To use the 3D Model, go to Wolfram Kuss' website.    -->
-  <!-- For now, use the default 3D model for UIUC aircraft. -->
   <model>
-   <path>Aircraft/UIUC/Models/opus/opus-model.xml</path>
+   <path>Aircraft/beech99/Models/beech99-model.xml</path>
   </model>
 
  </sim>

@@ -176,6 +176,8 @@
  <enable-enhanced-lighting>Enable enhanced runway lighting</enable-enhanced-lighting>
  <disable-distance-attenuation>Disable runway light distance attenuation</disable-distance-attenuation>
  <enable-distance-attenuation>Enable runway light distance attenuation</enable-distance-attenuation>
+ <disable-specular-highlight>Disable specular reflections on textured objects</disable-specular-highlight>
+ <enable-specular-highlight>Enable specular reflections on textured objects</enable-specular-highlight>
  <enable-clouds-desc>Enable 2D (flat) cloud layers</enable-clouds-desc>
  <disable-clouds-desc>Disable 2D (flat) cloud layers</disable-clouds-desc>
  <enable-clouds3d-desc>Enable 3D (volumetric) cloud layers</enable-clouds3d-desc>

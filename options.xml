@@ -517,6 +517,16 @@
    </option>
 
    <option>
+    <name>disable-specular-highlight</name>
+    <description>strings/disable-specular-highlight</description>
+   </option>
+
+   <option>
+    <name>enable-specular-highlight</name>
+    <description>strings/enable-specular-highlight</description>
+   </option>
+
+   <option>
     <name>enable-clouds</name>
     <description>strings/enable-clouds-desc</description>
    </option>

@@ -13,6 +13,12 @@ Hawker Sea Hawk simulation config.
   <aero>seahawk-yasim</aero>
   <fuel-fraction>1.0</fuel-fraction>
 
+  <systems>
+    <electrical>
+      <path>Aircraft/c172/c172-electrical.xml</path>
+    </electrical>
+  </systems>
+
   <sound>
    <audible>true</audible>
    <path>Aircraft/a4/a4-sound.xml</path>

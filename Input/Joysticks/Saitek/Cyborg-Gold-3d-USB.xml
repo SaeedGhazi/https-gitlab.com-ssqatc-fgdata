@@ -1,0 +1,250 @@
+<!--
+Joystick binding definitions for Saitek Cyborg 3D Gold USB joystick.
+
+This file is included by preferences.xml, and uses the context of its
+inclusion point; that means that you need to prepend "/input/joysticks"
+to all property names.
+
+This file defines primary flight-control bindings for a simple
+three-axis, three-button joystick, as follow:
+
+  axis 0 (left-right): aileron
+  axis 1 (forward-backward): elevator
+  axis 2 (twist left-right): rudder
+  axis 3 (slider): throttle
+  axis 4 (hat left-right): look left or right
+  axis 5 (hat forward-back): look ahead or behind
+  button 0 (trigger): brakes
+  button 1: (left of hat) reduce RPM (constant speed prop)
+  button 2: (below hat)   external view cycle
+  button 3: (right of hat) increase RPM (constant speed prop)
+  button 4: (F1)          trim nose down
+  button 5: (F2)          retract flaps
+  button 6: (F3)          trim nose up
+  button 7: (F4)          extend flaps
+  button 8: (>>)          mixture rich
+  button 9: (<<)          mixture lean
+  hat left                look left
+  hat right               look right
+  hat back                look behind
+  hat forward             look forward
+  hat diagonal            look diagonal
+
+-->
+
+<PropertyList>
+
+<name>SAITEK CYBORG 3D USB</name>
+
+<axis n="0">
+<desc>Aileron</desc>
+<binding>
+<command>property-scale</command>
+<property>/controls/aileron</property>
+<squared type="bool">true</squared>
+</binding>
+</axis>
+
+<axis n="1">
+<desc>Elevator</desc>
+<binding>
+<command>property-scale</command>
+<property>/controls/elevator</property>
+<factor type="double">-1.0</factor>
+<squared type="bool">true</squared>
+</binding>
+</axis>
+
+<axis n="2">
+<desc>Rudder</desc>
+<binding>
+<command>property-scale</command>
+<property>/controls/rudder</property>
+<offset type="double">0.0</offset>
+<factor type="double">1.0</factor>
+</binding>
+</axis>
+
+<axis n="3">
+<desc>Throttle</desc>
+<binding>
+<command>property-scale</command>
+<property>/controls/throttle[0]</property>
+<offset type="double">-1.0</offset>
+<factor type="double">-0.5</factor>
+</binding>
+<binding>
+<command>property-scale</command>
+<property>/controls/throttle[1]</property>
+<offset type="double">-1.0</offset>
+<factor type="double">-0.5</factor>
+</binding>
+</axis>
+
+<axis n="4">
+<desc>lateral view</desc>
+<binding>
+<command>property-scale</command>
+<property>/sim/current-view/axes/lat</property>
+<factor type="double">-1.0</factor>
+</binding>
+</axis>
+
+<axis n="5">
+<desc>longitudinal view</desc>
+<binding>
+<command>property-scale</command>
+<property>/sim/current-view/axes/long</property>
+<factor type="double">-1.0</factor>
+</binding>
+</axis>
+
+<button n="0">
+<desc>Brakes</desc>
+<binding>
+<command>property-assign</command>
+<property>/controls/brakes[0]</property>
+<value type="double">1.0</value>
+</binding>
+<binding>
+<command>property-assign</command>
+<property>/controls/brakes[1]</property>
+<value type="double">1.0</value>
+</binding>
+<binding>
+<command>property-assign</command>
+<property>/controls/brakes[2]</property>
+<value type="double">1.0</value>
+</binding>
+<mod-up>
+<binding>
+<command>property-assign</command>
+<property>/controls/brakes[0]</property>
+<value type="double">0.0</value>
+</binding>
+<binding>
+<command>property-assign</command>
+<property>/controls/brakes[1]</property>
+<value type="double">0.0</value>
+</binding>
+<binding>
+<command>property-assign</command>
+<property>/controls/brakes[2]</property>
+<value type="double">0.0</value>
+</binding>
+</mod-up>
+</button>
+
+<button n="1">
+<desc>Reduce RPM</desc>
+<repeatable type="bool">true</repeatable>
+<binding>
+<command>property-adjust</command>
+<property>/controls/propeller-pitch[0]</property>
+<step type="double">-0.01</step>
+</binding>
+<binding>
+<command>property-adjust</command>
+<property>/controls/propeller-pitch[1]</property>
+<step type="double">-0.01</step>
+</binding>
+</button>
+
+<button n="2">
+<desc>External Views</desc>
+<repeatable type="bool">false</repeatable>
+<binding>
+<command>view-cycle</command>
+<step type="double">1</step>
+</binding>
+</button>
+
+
+<button n="3">
+<desc>Increase RPM</desc>
+<repeatable type="bool">true</repeatable>
+<binding>
+<command>property-adjust</command>
+<property>/controls/propeller-pitch[0]</property>
+<step type="double">+0.01</step>
+</binding>
+<binding>
+<command>property-adjust</command>
+<property>/controls/propeller-pitch[1]</property>
+<step type="double">+0.01</step>
+</binding>
+</button>
+
+<button n="4">
+<desc>Elevator trim down</desc>
+<repeatable type="bool">true</repeatable>
+<binding>
+<command>property-adjust</command>
+<property>/controls/elevator-trim</property>
+<step type="double">0.001</step>
+</binding>
+</button>
+
+<button n="5">
+<desc>Step Flaps Up</desc>
+<repeatable type="bool">false</repeatable>
+<binding>
+<command>property-adjust</command>
+<property>/controls/flaps</property>
+<step type="double">-0.34</step>
+</binding>
+</button>
+
+<button n="6">
+<desc>Elevator trim up</desc>
+<repeatable type="bool">true</repeatable>
+<binding>
+<command>property-adjust</command>
+<property>/controls/elevator-trim</property>
+<step type="double">-0.001</step>
+</binding>
+</button>
+
+<button n="7">
+<desc>Step Flaps Down</desc>
+<repeatable type="bool">false</repeatable>
+<binding>
+<command>property-adjust</command>
+<property>/controls/flaps</property>
+<step type="double">+0.34</step>
+</binding>
+</button>
+
+<button n="8">
+<desc>Richer Mixture</desc>
+<repeatable type="bool">true</repeatable>
+<binding>
+<command>property-adjust</command>
+<property>/controls/mixture[0]</property>
+<step type="double">+0.01</step>
+</binding>
+<binding>
+<command>property-adjust</command>
+<property>/controls/mixture[1]</property>
+<step type="double">+0.01</step>
+</binding>
+</button>
+
+<button n="9">
+<desc>Leaner Mixture</desc>
+<repeatable type="bool">true</repeatable>
+<binding>
+<command>property-adjust</command>
+<property>/controls/mixture[0]</property>
+<step type="double">-0.01</step>
+</binding>
+<binding>
+<command>property-adjust</command>
+<property>/controls/mixture[1]</property>
+<step type="double">-0.01</step>
+</binding>
+</button>
+
+</PropertyList>
+
+

@@ -2981,13 +2981,44 @@ Shared parameters for various materials.
  <name>Lake</name>
  <name>Pond</name>
  <name>IntermittentLake</name>
- <name>IntermittentStream</name>
  <name>Reservoir</name>
  <name>IntermittentReservoir</name>
  <name>Stream</name>
  <texture>Terrain/water-lake.rgb</texture>
  <xsize>400</xsize>
  <ysize>400</ysize>
+ <ambient>
+  <r>0.19</r>
+  <g>0.35</g>
+  <b>0.52</b>
+  <a>1.0</a>
+ </ambient>
+ <diffuse>
+  <r>0.19</r>
+  <g>0.35</g>
+  <b>0.52</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.30</r>
+  <g>0.30</g>
+  <b>0.40</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
+ <shininess>1.5</shininess>
+</material>
+
+<material>
+ <name>IntermittentStream</name>
+ <texture>Terrain/wash.rgb</texture>
+ <xsize>200</xsize>
+ <ysize>200</ysize>
  <ambient>
   <r>0.19</r>
   <g>0.35</g>

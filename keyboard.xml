@@ -13,14 +13,9 @@ Regular keycodes go up to 255; special keys start at 256, and can be
 calculated by adding 256 to the GLUT key value in glut.h.
 -->
 
-<!--
-<!DOCTYPE PropertyList SYSTEM "keyboard.dtd">
--->
-
 <PropertyList>
 
- <key>
-  <code>1</code>
+ <key n="1">
   <name>Ctrl-A</name>
   <desc>Toggle autopilot altitude lock.</desc>
   <binding>
@@ -29,8 +24,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
- <key>
-  <code>8</code>
+ <key n="8">
   <name>Ctrl-H</name>
   <desc>Toggle autopilot heading lock.</desc>
   <binding>
@@ -39,19 +33,17 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
- <key>
-  <code>13</code>
+ <key n="13">
   <name>Enter</name>
   <desc>Move rudder right or increase autopilot heading.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/autopilot/control-overrides/rudder</property>
-   <step>0.05</step>
+   <step type="double">0.05</step>
   </binding>
  </key>
 
- <key>
-  <code>14</code>
+ <key n="14">
   <name>Ctrl-N</name>
   <desc>Toggle autopilot nav1 lock.</desc>
   <binding>
@@ -60,8 +52,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
- <key>
-  <code>19</code>
+ <key n="19">
   <name>Ctrl-S</name>
   <desc>Toggle auto-throttle lock.</desc>
   <binding>
@@ -70,246 +61,231 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
- <key>
-  <code>21</code>
+ <key n="21">
   <name>Ctrl-U</name>
   <desc>[Cheat] Add 1000ft of emergency altitude.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/position/altitude</property>
-   <step>1000</step>
+   <step type="double">1000.0</step>
   </binding>
  </key>
 
- <key>
-  <code>48</code>
+ <key n="44">
+  <name>,</name>
+  <desc>Left brake</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/brakes[0]</property>
+   <value type="double">1.0</value>
+  </binding>
+  <mod-up>
+    <command>property-assign</command>
+    <property>/controls/brakes[0]</property>
+    <value type="double">0.0</value>
+  </mod-up>
+ </key>
+
+ <key n="46">
+  <name>.</name>
+  <desc>Right brake</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/brakes[1]</property>
+   <value type="double">1.0</value>
+  </binding>
+  <mod-up>
+    <command>property-assign</command>
+    <property>/controls/brakes[1]</property>
+    <value type="double">0.0</value>
+  </mod-up>
+ </key>
+
+ <key n="48">
   <name>0</name>
   <desc>Move rudder left or increase autopilot heading.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/autopilot/control-overrides/rudder</property>
-   <step>-0.05</step>
+   <step type="double">-0.05</step>
   </binding>
  </key>
 
- <key>
-  <code>49</code>
+ <key n="49">
   <name>1</name>
   <desc>Decrease elevator trim.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/controls/elevator-trim</property>
-   <step>-0.001</step>
+   <step type="double">-0.001</step>
   </binding>
+  <mod-shift>
+    <desc>Look back left</desc>
+    <binding>
+     <command>property-assign</command>
+     <property>/sim/view/goal-offset</property>
+     <value type="double">135</value>
+    </binding>
+  </mod-shift>
  </key>
 
- <key>
-  <code>49</code>
-  <name>Keypad-1</name>
-  <desc>Look back left.</desc>
-  <mod-shift>true</mod-shift>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/view/goal-offset</property>
-   <value>135</value>
-  </binding>
- </key>
-
- <key>
-  <code>50</code>
+ <key n="50">
   <name>2</name>
   <desc>Increase elevator or autopilot altitude.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/autopilot/control-overrides/elevator</property>
-   <step>0.01</step>
+   <step type="double">0.01</step>
   </binding>
+  <mod-shift>
+   <desc>Look back.</desc>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/view/goal-offset</property>
+    <value type="double">180</value>
+   </binding>
+  </mod-shift>
  </key>
 
- <key>
-  <code>50</code>
-  <name>Keypad-2</name>
-  <desc>Look back.</desc>
-  <mod-shift>true</mod-shift>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/view/goal-offset</property>
-   <value>180</value>
-  </binding>
- </key>
-
- <key>
-  <code>51</code>
+ <key n="51">
   <name>3</name>
   <desc>Decrease throttle or autopilot autothrottle.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/autopilot/control-overrides/throttle</property>
-   <step>-0.01</step>
+   <step type="double">-0.01</step>
   </binding>
+  <mod-shift>
+   <desc>Look back right.</desc>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/view/goal-offset</property>
+    <value type="double">225</value>
+   </binding>
+  </mod-shift>
  </key>
 
- <key>
-  <code>51</code>
-  <name>Keypad-3</name>
-  <desc>Look back right.</desc>
-  <mod-shift>true</mod-shift>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/view/goal-offset</property>
-   <value>225</value>
-  </binding>
- </key>
-
- <key>
-  <code>52</code>
+ <key n="52">
   <name>4</name>
   <desc>Move aileron left.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/controls/aileron</property>
-   <step>-0.05</step>
+   <step type="double">-0.05</step>
   </binding>
+  <mod-shift>
+   <desc>Look left.</desc>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/view/goal-offset</property>
+    <value type="double">90</value>
+   </binding>
+  </mod-shift>
  </key>
 
- <key>
-  <code>52</code>
-  <name>Keypad-4</name>
-  <desc>Look left.</desc>
-  <mod-shift>true</mod-shift>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/view/goal-offset</property>
-   <value>90</value>
-  </binding>
- </key>
-
- <key>
-  <code>53</code>
+ <key n="53">
   <name>5</name>
   <desc>Center aileron, elevator, and rudder.</desc>
   <binding>
    <command>property-assign</command>
    <property>/controls/aileron</property>
-   <value>0.0</value>
+   <value type="double">0.0</value>
   </binding>
   <binding>
    <command>property-assign</command>
    <property>/controls/elevator</property>
-   <value>0.0</value>
+   <value type="double">0.0</value>
   </binding>
   <binding>
    <command>property-assign</command>
    <property>/controls/rudder</property>
-   <value>0.0</value>
+   <value type="double">0.0</value>
   </binding>
  </key>
 
- <key>
-  <code>54</code>
+ <key n="54">
   <name>6</name>
   <desc>Move aileron right.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/controls/aileron</property>
-   <step>0.05</step>
+   <step type="double">0.05</step>
   </binding>
+  <mod-shift>
+   <desc>Look right.</desc>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/view/goal-offset</property>
+    <value type="double">270</value>
+   </binding>
+  </mod-shift>
  </key>
 
- <key>
-  <code>54</code>
-  <name>Keypad-6</name>
-  <desc>Look right.</desc>
-  <mod-shift>true</mod-shift>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/view/goal-offset</property>
-   <value>270</value>
-  </binding>
- </key>
-
- <key>
-  <code>55</code>
+ <key n="55">
   <name>7</name>
   <desc>Increase elevator trim.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/controls/elevator-trim</property>
-   <step>0.001</step>
+   <step type="double">0.001</step>
   </binding>
+  <mod-shift>
+   <desc>Look front left.</desc>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/view/goal-offset</property>
+    <value type="double">45</value>
+   </binding>
+  </mod-shift>
  </key>
 
- <key>
-  <code>55</code>
-  <name>Keypad-7</name>
-  <desc>Look front left.</desc>
-  <mod-shift>true</mod-shift>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/view/goal-offset</property>
-   <value>45</value>
-  </binding>
- </key>
-
- <key>
-  <code>56</code>
+ <key n="56">
   <name>8</name>
   <desc>Decrease elevator or autopilot altitude.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/autopilot/control-overrides/elevator</property>
-   <step>-0.01</step>
+   <step type="double">-0.01</step>
   </binding>
+  <mod-shift>
+   <desc>Look forward.</desc>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/view/goal-offset</property>
+    <value type="double">0</value>
+   </binding>
+  </mod-shift>
  </key>
 
- <key>
-  <code>56</code>
-  <name>Keypad-8</name>
-  <desc>Look forward.</desc>
-  <mod-shift>true</mod-shift>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/view/goal-offset</property>
-   <value>0</value>
-  </binding>
- </key>
-
- <key>
-  <code>57</code>
+ <key n="57">
   <name>9</name>
   <desc>Increase throttle or autopilot autothrottle.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/autopilot/control-overrides/throttle</property>
-   <step>0.01</step>
+   <step type="double">0.01</step>
   </binding>
+  <mod-shift>
+   <desc>Look front right.</desc>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/view/goal-offset</property>
+    <value type="double">315</value>
+   </binding>
+  </mod-shift>
  </key>
 
- <key>
-  <code>57</code>
-  <name>Keypad-9</name>
-  <desc>Look front right.</desc>
-  <mod-shift>true</mod-shift>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/view/goal-offset</property>
-   <value>315</value>
-  </binding>
- </key>
-
- <key>
-  <code>65</code>
+ <key n="65">
   <name>A</name>
   <desc>Decrease speed-up.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/sim/speed-up</property>
-   <step>-1</step>
+   <step type="double">-1</step>
   </binding>
  </key>
 
- <key>
-  <code>80</code>
+ <key n="80">
   <name>P</name>
   <desc>Toggle panel.</desc>
   <binding>
@@ -318,41 +294,75 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
- <key>
-  <code>91</code>
+ <key n="91">
   <name>[</name>
   <desc>Decrease flaps.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/controls/flaps</property>
-   <step>-0.34</step>
+   <step type="double">-0.34</step>
   </binding>
  </key>
 
- <key>
-  <code>93</code>
+ <key n="93">
   <name>]</name>
   <desc>Increase flaps.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/controls/flaps</property>
-   <step>0.34</step>
+   <step type="double">0.34</step>
   </binding>
  </key>
 
- <key>
-  <code>97</code>
+ <key n="97">
   <name>a</name>
   <desc>Increase speed-up.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/sim/speed-up</property>
-   <step>1</step>
+   <step type="double">1</step>
   </binding>
  </key>
 
- <key>
-  <code>118</code>
+ <key n="98">
+  <name>b</name>
+  <desc>Apply all brakes.</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/brakes[0]</property>
+   <value type="double">1.0</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/brakes[1]</property>
+   <value type="double">1.0</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/brakes[2]</property>
+   <value type="double">1.0</value>
+  </binding>
+  <mod-up>
+   <desc>Release all brakes.</desc>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/brakes[0]</property>
+    <value type="double">0.0</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/brakes[1]</property>
+    <value type="double">0.0</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/brakes[2]</property>
+    <value type="double">0.0</value>
+   </binding>
+  </mod-up>
+ </key>
+
+ <key n="118">
   <name>v</name>
   <desc>Cycle view</desc>
   <binding>
@@ -360,8 +370,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
- <key>
-  <code>259</code>
+ <key n="259">
   <name>F3</name>
   <desc>Capture screen.</desc>
   <binding>
@@ -369,230 +378,187 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
- <key>
-  <code>269</code>
+ <key n="269">
   <name>Enter</name>
   <desc>Move rudder right or increase autopilot heading.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/autopilot/control-overrides/rudder</property>
-   <step>0.05</step>
+   <step type="double">0.05</step>
   </binding>
  </key>
 
- <key>
-  <code>309</code>
+ <key n="309">
   <name>Keypad 5</name>
   <desc>Center aileron, elevator, and rudder.</desc>
   <binding>
    <command>property-assign</command>
    <property>/controls/aileron</property>
-   <value>0.0</value>
+   <value type="double">0.0</value>
   </binding>
   <binding>
    <command>property-assign</command>
    <property>/controls/elevator</property>
-   <value>0.0</value>
+   <value type="double">0.0</value>
   </binding>
   <binding>
    <command>property-assign</command>
    <property>/controls/rudder</property>
-   <value>0.0</value>
+   <value type="double">0.0</value>
   </binding>
  </key>
 
- <key>
-  <code>356</code>
+ <key n="356">
   <name>Left</name>
   <desc>Move aileron left.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/controls/aileron</property>
-   <step>-0.05</step>
+   <step type="double">-0.05</step>
   </binding>
+  <mod-shift>
+   <desc>Look left.</desc>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/view/goal-offset</property>
+    <value type="double">90</value>
+   </binding>
+  </mod-shift>
  </key>
 
- <key>
-  <code>356</code>
-  <name>Keypad-4</name>
-  <desc>Look left.</desc>
-  <mod-shift>true</mod-shift>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/view/goal-offset</property>
-   <value>90</value>
-  </binding>
- </key>
-
- <key>
-  <code>357</code>
+ <key n="357">
   <name>Up</name>
   <desc>Increase elevator or autopilot altitude.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/autopilot/control-overrides/elevator</property>
-   <step>0.05</step>
+   <step type="double">0.05</step>
   </binding>
+  <mod-shift>
+   <desc>Look forward.</desc>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/view/goal-offset</property>
+    <value type="double">0</value>
+   </binding>
+  </mod-shift>
  </key>
 
- <key>
-  <code>357</code>
-  <name>Keypad-8</name>
-  <desc>Look forward.</desc>
-  <mod-shift>true</mod-shift>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/view/goal-offset</property>
-   <value>0</value>
-  </binding>
- </key>
-
- <key>
-  <code>358</code>
+ <key n="358">
   <name>Right</name>
   <desc>Move aileron right.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/controls/aileron</property>
-   <step>0.05</step>
+   <step type="double">0.05</step>
   </binding>
+  <mod-shift>
+   <desc>Look right.</desc>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/view/goal-offset</property>
+    <value type="double">270</value>
+   </binding>
+  </mod-shift>
  </key>
 
- <key>
-  <code>358</code>
-  <name>Keypad-6</name>
-  <desc>Look right.</desc>
-  <mod-shift>true</mod-shift>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/view/goal-offset</property>
-   <value>270</value>
-  </binding>
- </key>
-
- <key>
-  <code>359</code>
+ <key n="359">
   <name>Down</name>
   <desc>Decrease elevator or autopilot altitude.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/autopilot/control-overrides/elevator</property>
-   <step>-0.05</step>
+   <step type="double">-0.05</step>
   </binding>
+  <mod-shift>
+   <desc>Look backwards.</desc>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/view/goal-offset</property>
+    <value type="double">180</value>
+   </binding>
+  </mod-shift>
  </key>
 
- <key>
-  <code>359</code>
-  <name>Keypad-2</name>
-  <desc>Look backwards.</desc>
-  <mod-shift>true</mod-shift>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/view/goal-offset</property>
-   <value>180</value>
-  </binding>
- </key>
-
- <key>
-  <code>360</code>
+ <key n="360">
   <name>PageUp</name>
   <desc>Increase throttle or autopilot autothrottle.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/autopilot/control-overrides/throttle</property>
-   <step>0.01</step>
+   <step type="double">0.01</step>
   </binding>
+  <mod-shift>
+   <desc>Look front right.</desc>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/view/goal-offset</property>
+    <value type="double">315</value>
+   </binding>
+  </mod-shift>
  </key>
 
- <key>
-  <code>360</code>
-  <name>Keypad-9</name>
-  <desc>Look front right.</desc>
-  <mod-shift>true</mod-shift>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/view/goal-offset</property>
-   <value>315</value>
-  </binding>
- </key>
-
- <key>
-  <code>361</code>
+ <key n="361">
   <name>PageDown</name>
   <desc>Decrease throttle or autopilot autothrottle.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/autopilot/control-overrides/throttle</property>
-   <step>-0.01</step>
+   <step type="double">-0.01</step>
   </binding>
+  <mod-shift>
+   <desc>Look back right.</desc>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/view/goal-offset</property>
+    <value type="double">225</value>
+   </binding>
+  </mod-shift>
  </key>
 
- <key>
-  <code>361</code>
-  <name>Keypad-3</name>
-  <desc>Look back right.</desc>
-  <mod-shift>true</mod-shift>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/view/goal-offset</property>
-   <value>225</value>
-  </binding>
- </key>
-
- <key>
-  <code>362</code>
+ <key n="362">
   <name>Home</name>
   <desc>Increase elevator trim.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/controls/elevator-trim</property>
-   <step>0.001</step>
+   <step type="double">0.001</step>
   </binding>
+  <mod-shift>
+   <desc>Look front left.</desc>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/view/goal-offset</property>
+    <value type="double">45</value>
+   </binding>
+  </mod-shift>
  </key>
 
- <key>
-  <code>362</code>
-  <name>Keypad-7</name>
-  <desc>Look front left.</desc>
-  <mod-shift>true</mod-shift>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/view/goal-offset</property>
-   <value>45</value>
-  </binding>
- </key>
-
- <key>
-  <code>363</code>
+ <key n="363">
   <name>End</name>
   <desc>Decrease elevator trim.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/controls/elevator-trim</property>
-   <step>-0.001</step>
+   <step type="double">-0.001</step>
   </binding>
+  <mod-shift>
+   <desc>Look back left.</desc>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/view/goal-offset</property>
+    <value type="double">135</value>
+   </binding>
+  </mod-shift>
  </key>
 
- <key>
-  <code>363</code>
-  <name>Keypad-1</name>
-  <desc>Look back left.</desc>
-  <mod-shift>true</mod-shift>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/view/goal-offset</property>
-   <value>135</value>
-  </binding>
- </key>
-
- <key>
-  <code>364</code>
+ <key n="364">
   <name>Insert</name>
   <desc>Move rudder left or decrease autopilot heading.</desc>
   <binding>
    <command>property-adjust</command>
    <property>/autopilot/control-overrides/rudder</property>
-   <step>-0.05</step>
+   <step type="double">-0.05</step>
   </binding>
  </key>
 

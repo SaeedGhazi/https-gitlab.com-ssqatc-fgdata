@@ -78,7 +78,7 @@ Started September 2000 by David Megginson, david@megginson.com
  <!-- Controls -->
 
  <controls>
-  <mixture>0.8</mixture>
+  <mixture>1.0</mixture>
  </controls>
 
 
@@ -89,69 +89,8 @@ Started September 2000 by David Megginson, david@megginson.com
   <!-- included externally -->
   <keyboard include="keyboard.xml"/>
 
-  <js0>
-   <axis0>
-    <control>/controls/aileron</control>
-    <dead-band>0.1</dead-band>
-   </axis0>
-   <axis1>
-    <control>/controls/elevator</control>
-    <dead-band>0.1</dead-band>
-    <factor>-1.0</factor>
-   </axis1>
-   <axis2>
-    <control>/controls/rudder</control>
-    <dead-band>0.1</dead-band>
-   </axis2>
-   <axis3>
-    <control>/controls/throttle</control>
-    <dead-band>0.0</dead-band>
-    <factor>-0.5</factor>
-    <offset>-1.0</offset>
-   </axis3>
-   <button0>
-    <action>switch</action>
-    <control>/controls/brakes/all</control>
-    <repeatable>0.0</repeatable>
-    <step>1.0</step>
-   </button0>
-   <button1>
-    <action>switch</action>
-    <control>/controls/brakes[0]</control>
-    <repeatable>0.0</repeatable>
-    <step>1.0</step>
-   </button1>
-   <button2>
-    <action>switch</action>
-    <control>/controls/brakes[1]</control>
-    <repeatable>0.0</repeatable>
-    <step>1.0</step>
-   </button2>
-   <button3>
-    <action>adjust</action>
-    <control>/controls/elevator-trim</control>
-    <repeatable>true</repeatable>
-    <step>0.001</step>
-   </button3>
-   <button4>
-    <action>adjust</action>
-    <control>/controls/elevator-trim</control>
-    <repeatable>true</repeatable>
-    <step>-0.001</step>
-   </button4>
-   <button5>
-    <action>adjust</action>
-    <control>/controls/flaps</control>
-    <repeatable>false</repeatable>
-    <step>-0.34</step>
-   </button5>
-   <button6>
-    <action>adjust</action>
-    <control>/controls/flaps</control>
-    <repeatable>false</repeatable>
-    <step>0.34</step>
-   </button6>
-  </js0>
+  <!-- included externally -->
+  <joysticks include="joysticks.xml"/>	
 
  </input>
 

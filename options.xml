@@ -176,16 +176,6 @@
    <name>strings/features-options</name>
 
    <option>
-    <name>disable-hud</name>
-    <description>strings/disable-hud-desc</description>
-   </option>
-
-   <option>
-    <name>enable-hud</name>
-    <description>strings/enable-hud-desc</description>
-   </option>
-
-   <option>
     <name>disable-panel</name>
     <description>strings/disable-panel-desc</description>
    </option>
@@ -206,6 +196,16 @@
    </option>
 
    <option>
+    <name>disable-hud</name>
+    <description>strings/disable-hud-desc</description>
+   </option>
+
+   <option>
+    <name>enable-hud</name>
+    <description>strings/enable-hud-desc</description>
+   </option>
+
+   <option>
     <name>disable-anti-alias-hud</name>
     <description>strings/disable-anti-alias-hud-desc</description>
    </option>
@@ -213,6 +213,16 @@
    <option>
     <name>enable-anti-alias-hud</name>
     <description>strings/enable-anti-alias-hud-desc</description>
+   </option>
+
+   <option>
+    <name>disable-hud-3d</name>
+    <description>strings/disable-hud-3d-desc</description>
+   </option>
+
+   <option>
+    <name>enable-hud-3d</name>
+    <description>strings/enable-hud-3d-desc</description>
    </option>
 
   </section>

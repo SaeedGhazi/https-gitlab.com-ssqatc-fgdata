@@ -114,6 +114,8 @@
  <enable-sound-desc>Enable sound effects</enable-sound-desc>
  <disable-anti-alias-hud-desc>Disable anti-aliased HUD</disable-anti-alias-hud-desc>
  <enable-anti-alias-hud-desc>Enable anti-aliased HUD</enable-anti-alias-hud-desc>
+ <disable-hud-3d-desc>Disable 3D HUD</disable-hud-3d-desc>
+ <enable-hud-3d-desc>Enable 3D HUD</enable-hud-3d-desc>
 
  <!-- Aircraft options -->
  <aircraft-options>Aircraft</aircraft-options>

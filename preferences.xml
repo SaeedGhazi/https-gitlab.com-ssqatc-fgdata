@@ -301,28 +301,28 @@ Started September 2000 by David Megginson, david@megginson.com
   <engines>
    <engine n="0">
     <starter type="bool">false</starter>
-    <magnetos type="int">2</magnetos>
+    <magnetos type="int">0</magnetos>
     <throttle type="double">0.0</throttle>
     <mixture type="double">1.0</mixture>
     <propeller-pitch type="double">1.0</propeller-pitch>
    </engine>
    <engine n="1">
     <starter type="bool">false</starter>
-    <magnetos type="int">2</magnetos>
+    <magnetos type="int">0</magnetos>
     <throttle type="double">0.0</throttle>
     <mixture type="double">1.0</mixture>
     <propeller-pitch type="double">1.0</propeller-pitch>
    </engine>
    <engine n="2">
     <starter type="bool">false</starter>
-    <magnetos type="int">2</magnetos>
+    <magnetos type="int">0</magnetos>
     <throttle type="double">0.0</throttle>
     <mixture type="double">1.0</mixture>
     <propeller-pitch type="double">1.0</propeller-pitch>
    </engine>
    <engine n="3">
     <starter type="bool">false</starter>
-    <magnetos type="int">2</magnetos>
+    <magnetos type="int">0</magnetos>
     <throttle type="double">0.0</throttle>
     <mixture type="double">1.0</mixture>
     <propeller-pitch type="double">1.0</propeller-pitch>
@@ -447,10 +447,20 @@ Started September 2000 by David Megginson, david@megginson.com
   <airspeed-indicator>
    <serviceable type="bool" archive="y">true</serviceable>
   </airspeed-indicator>
+
   <attitude-indicator>
+   <config>
+    <!-- true if this AI can tumble -->
+    <tumble-flag type="bool" archive="y">false</tumble-flag>
+   </config>
+   <caged type="bool" archive="y">false</caged>
    <serviceable type="bool" archive="y">true</serviceable>
    <spin type="double" archive="y">0.0</spin>
+   <tumble-norm type="double" archive="y">0.0</tumble-norm>
+   <indicated-pitch-deg type="double">0.0</indicated-pitch-deg>
+   <indicated-roll-deg type="double">0.0</indicated-roll-deg>
   </attitude-indicator>
+
   <altimeter>
    <serviceable type="bool" archive="y">true</serviceable>
    <setting-inhg type="double" archive="y">29.92</setting-inhg>

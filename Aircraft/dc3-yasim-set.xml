@@ -42,16 +42,15 @@ October 23 2001 John Check, fgpanels@rockfish.net
    <path>Aircraft/dc3/Models/dc3-dpm.xml</path>
   </model> 
 
+  <view n="0">
+   <pitch-offset-deg>-5</pitch-offset-deg>
+  </view>
+
   <view n="1">
    <config>
      <z-offset-m type="double" archive="y">-45.0</z-offset-m>
    </config>
   </view>
-
-  <current-view>
-   <pitch-offset-deg>-5</pitch-offset-deg>
-  </current-view>
-
  </sim>
 
  <controls>

@@ -23,21 +23,9 @@ YASim Piper Warrior II with 2D panel.
      <x-offset-m archive="y">-0.18</x-offset-m>
      <y-offset-m archive="y">0.50</y-offset-m>
      <z-offset-m archive="y">2.5</z-offset-m>
-     <default-pitch-deg>-12</default-pitch-deg>
+     <pitch-offset-deg>-8</pitch-offset-deg>
    </config>
   </view>
-
-  <!-- Look down a bit over the top of the panel -->
-
-  <view>
-   <config>
-    <default-pitch-deg>-8</default-pitch-deg>
-   </config>
-  </view>
-
-  <current-view>
-   <pitch-offset-deg>-8</pitch-offset-deg>
-  </current-view>
 
  </sim>
 

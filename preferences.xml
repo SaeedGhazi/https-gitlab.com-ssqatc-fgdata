@@ -96,13 +96,6 @@ Started September 2000 by David Megginson, david@megginson.com
   <visibility-m>16000</visibility-m>
  </environment>
 
- <!-- Engine -->
- <engines>
-  <engine>
-   <magneto>0.0</magneto>
-  </engine>
- </engines>
-
 
  <!-- Controls -->
 

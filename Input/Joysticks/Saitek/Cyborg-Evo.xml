@@ -1,6 +1,6 @@
 <!--
 Joystick binding definitions for "Saitek Cyborg Evo" Joystick.
-
+aitek Cyborg USB Stick
 This file borrows heavily from "Cyborg-Gold-3d-USB.xml"
 
 The Saitek Cyborg Evo is designed to be easily switchable between a 
@@ -34,14 +34,14 @@ button 3:	(right)			Flaps Down		Gear Down			Zoom Out		#
 button 4:	(left of hat)	Previous View	Trim Rudder			#				#
 button 5:	(right of hat)	Next View		Trim Rudder			#				#
 
-axis 6: (hat left-right)	look l/r		Trim Aileron		Adj Mixture		#
-axis 7: (hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
+axis 4: 	(hat left-right)	look l/r		Trim Aileron		Adj Mixture		#
+axis 5: 	(hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 
 -->
 
 <PropertyList>
 
-<name>Saitek Cyborg Evo</name>
+<name>Saitek Cyborg USB Stick</name>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~ Axis Bindings ~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
@@ -68,7 +68,7 @@ axis 7: (hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 	<desc>Throttle</desc>
 	<binding>
 		<command>nasal</command>
-		<DEFANGED_script>controls.throttleAxis()</DEFANGED_script>
+		<script>controls.throttleAxis()</script>
 	</binding>
 </axis>
 
@@ -82,13 +82,17 @@ axis 7: (hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 </axis>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~ Hat Switch ~~~~~~~~~~~~~~~~~~~~~~~~ -->
-<axis n="6">
+<axis>
 	<desc>View Direction; Aileron Trim;</desc>
+	<number>
+		<unix>4</unix>
+		<windows>6</windows>
+	</number>
 	<low>
 		<repeatable>true</repeatable>
 		<binding>
 			<command>nasal</command>
-			<DEFANGED_script>
+			<script>
 				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-evo-modifier");
 				if (mod == nil or mod == 0) {
 					v = getprop("/sim/current-view/view-number");
@@ -104,14 +108,14 @@ axis 7: (hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 				} elsif (mod == 3) {
 					#
 				}
-			</DEFANGED_script>
+			</script>
 		</binding>
 	</low>
 	<high>
 		<repeatable>true</repeatable>
 		<binding>
 			<command>nasal</command>
-			<DEFANGED_script>
+			<script>
 				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-evo-modifier");
 				if (mod == nil or mod == 0) {
 					v = getprop("/sim/current-view/view-number");
@@ -127,39 +131,25 @@ axis 7: (hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 				} elsif (mod == 3) {
 					#
 				}
-			</DEFANGED_script>
+			</script>
 		</binding>
 	</high>
 </axis>
 
-<axis n="7">
+<axis>
 	<desc>View Elevation; Elevator Trim;</desc>
+	<number>
+		<unix>5</unix>
+		<windows>7</windows>
+	</number>
 	<low>
 		<repeatable>true</repeatable>
 		<binding>
 			<command>nasal</command>
-			<DEFANGED_script>
+			<script>
 				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-evo-modifier");
 				if (mod == nil or mod == 0) {
 					view.panViewPitch(2);
-				} elsif (mod == 1) {
-					controls.elevatorTrim(-0.75);
-				} elsif (mod == 2) {
-					controls.adjPropeller(-1);
-				} elsif (mod == 3) {
-					#
-				}
-			</DEFANGED_script>
-		</binding>
-	</low>
-	<high>
-		<repeatable>true</repeatable>
-		<binding>
-			<command>nasal</command>
-			<DEFANGED_script>
-				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-evo-modifier");
-				if (mod == nil or mod == 0) {
-					view.panViewPitch(-2);
 				} elsif (mod == 1) {
 					controls.elevatorTrim(0.75);
 				} elsif (mod == 2) {
@@ -167,7 +157,25 @@ axis 7: (hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 				} elsif (mod == 3) {
 					#
 				}
-			</DEFANGED_script>
+			</script>
+		</binding>
+	</low>
+	<high>
+		<repeatable>true</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>
+				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-evo-modifier");
+				if (mod == nil or mod == 0) {
+					view.panViewPitch(-2);
+				} elsif (mod == 1) {
+					controls.elevatorTrim(-0.75);
+				} elsif (mod == 2) {
+					controls.adjPropeller(-1);
+				} elsif (mod == 3) {
+					#
+				}
+			</script>
 		</binding>
 	</high>
 </axis>
@@ -176,12 +184,12 @@ axis 7: (hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~ Button Bindings ~~~~~~~~~~~~~~~~~~~~~~~~ -->
  
 <!-- Trigger Button - Brakes, Parking Brake, Thrust Reverser -->
-<DEFANGED_button n="0">
+<button n="0">
 	<desc>Brakes</desc>
 	<repeatable type="bool">true</repeatable>
 	<binding>
 		<command>nasal</command>
-		<DEFANGED_script>
+		<script>
 			mod = getprop("/input/joysticks/js[0]/saitek-cyborg-evo-modifier");
 			if (mod == nil or mod == 0) {
 				interpolate("/controls/gear/brake-left", 1, 0.075);
@@ -194,13 +202,13 @@ axis 7: (hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 			} elsif (mod == 3) {
 				#
 			}
-		</DEFANGED_script>
+		</script>
 	</binding>
 	<mod-up>
 	<repeatable type="bool">true</repeatable>
 	<binding>
 		<command>nasal</command>
-		<DEFANGED_script>
+		<script>
 			mod = getprop("/input/joysticks/js[0]/saitek-cyborg-evo-modifier");
 			if (mod == nil or mod == 0) {
 				interpolate("/controls/gear/brake-left", 0, 0.075);
@@ -227,18 +235,22 @@ axis 7: (hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 					gui.popupTip("Thrust Reverser OFF");
 				}
 			}
-		</DEFANGED_script>
+		</script>
 	</binding>
 	</mod-up>
-</DEFANGED_button>
+</button>
 
 <!-- Middle Button below Hat-switch, labeled "2" -->
-<DEFANGED_button n="1">
+<button>
 	<desc>Reset view; toggle tail-wheel lock; reset trim</desc>
+	<number>
+		<unix>1</unix>
+		<windows>1</windows>
+	</number>
 	<repeatable type="bool">false</repeatable>
 	<binding>
 		<command>nasal</command>
-		<DEFANGED_script>
+		<script>
 			mod = getprop("/input/joysticks/js[0]/saitek-cyborg-evo-modifier");
 			if (mod == nil or mod == 0) {
 				view.resetView();
@@ -258,17 +270,17 @@ axis 7: (hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 					gui.popupTip("Tail Wheel LOCKED");
 				}
 			}
-		</DEFANGED_script>
+		</script>
 	</binding>
-</DEFANGED_button>
+</button>
 
 <!-- Left Button below Hat-switch, labeled "3" -->
-<DEFANGED_button n="2">
+<button n="2">
 	<desc>Flaps Up; Gear up</desc>
 	<repeatable type="bool">false</repeatable>
 	<binding>
 		<command>nasal</command>
-		<DEFANGED_script>
+		<script>
 			mod = getprop("/input/joysticks/js[0]/saitek-cyborg-evo-modifier");
 			if (mod == nil or mod == 0) {
 				controls.stepFlaps(-1);
@@ -279,17 +291,17 @@ axis 7: (hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 			} elsif (mod == 3) {
 				#
 			}
-		</DEFANGED_script>
+		</script>
 	</binding>
-</DEFANGED_button>
+</button>
 
 <!-- Right Button below Hat-switch, labeled "4" -->
-<DEFANGED_button n="3"><!-- right -->
+<button n="3"><!-- right -->
 	<desc>Flaps Down; Gear down</desc>
 	<repeatable type="bool">false</repeatable>
 	<binding>
 		<command>nasal</command>
-		<DEFANGED_script>
+		<script>
 			mod = getprop("/input/joysticks/js[0]/saitek-cyborg-evo-modifier");
 			if (mod == nil or mod == 0) {
 				controls.stepFlaps(1);
@@ -300,17 +312,17 @@ axis 7: (hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 			} elsif (mod == 3) {
 				#
 			}
-		</DEFANGED_script>
+		</script>
 	</binding>
-</DEFANGED_button>
+</button>
 
 <!-- Button left of Hat switch, Labeled '5' -->
-<DEFANGED_button n="4">
+<button n="4">
 	<desc>Previous View</desc>
 	<repeatable type="bool">false</repeatable>
 	<binding>
 		<command>nasal</command>
-		<DEFANGED_script>
+		<script>
 			mod = getprop("/input/joysticks/js[0]/saitek-cyborg-evo-modifier");
 			if (mod == nil or mod == 0) {
 				view.stepView(-1);
@@ -321,17 +333,17 @@ axis 7: (hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 			} elsif (mod == 3) {
 				#
 			}
-		</DEFANGED_script>
+		</script>
 	</binding>
-</DEFANGED_button>
+</button>
 
 <!-- Button right of Hat switch, Labeled '6' -->
-<DEFANGED_button n="5">
+<button n="5">
 	<desc>Next View</desc>
 	<repeatable type="bool">false</repeatable>
 	<binding>
 		<command>nasal</command>
-		<DEFANGED_script>
+		<script>
 			mod = getprop("/input/joysticks/js[0]/saitek-cyborg-evo-modifier");
 			if (mod == nil or mod == 0) {
 				view.stepView(1);
@@ -342,142 +354,142 @@ axis 7: (hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 			} elsif (mod == 3) {
 				#
 			}
-		</DEFANGED_script>
+		</script>
 	</binding>
-</DEFANGED_button>
+</button>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~ Modifier Buttons ~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <!-- Left Side Button labeled ^ -->
-<DEFANGED_button n="10">
+<button n="10">
 	<desc>Modifier 1</desc>
 	<repeatable type="bool">false</repeatable>
 	<binding>
 		<command>nasal</command>
-			<DEFANGED_script>
+			<script>
 				name = "/input/joysticks/js[0]/saitek-cyborg-evo-modifier";
 				setprop(name, 1);
-			</DEFANGED_script>
+			</script>
 	</binding>
 	<mod-up>
 		<binding>
 			<command>nasal</command>
-			<DEFANGED_script>
+			<script>
 				name = "/input/joysticks/js[0]/saitek-cyborg-evo-modifier";
 				setprop(name, 0);
-			</DEFANGED_script>
+			</script>
 		</binding>
 	</mod-up>
-</DEFANGED_button>
+</button>
 
 <!-- Left Side Button labeled F1 -->
-<DEFANGED_button n="6">
+<button n="6">
 	<desc>Modifier 2</desc>
 	<repeatable type="bool">false</repeatable>
 	<binding>
 		<command>nasal</command>
-		<DEFANGED_script>
+		<script>
 			name = "/input/joysticks/js[0]/saitek-cyborg-evo-modifier";
 			setprop(name, 2);
-		</DEFANGED_script>
+		</script>
 	</binding>
 	<mod-up>
 		<binding>
 			<command>nasal</command>
-			<DEFANGED_script>
+			<script>
 				name = "/input/joysticks/js[0]/saitek-cyborg-evo-modifier";
 				setprop(name, 0);
-			</DEFANGED_script>
+			</script>
 		</binding>
 	</mod-up>
-</DEFANGED_button>
+</button>
 
 <!-- Left Side Button labeled F2 -->
-<DEFANGED_button n="7">
+<button n="7">
 	<desc>Modifier 3</desc>
 	<repeatable type="bool">false</repeatable>
 	<binding>
 		<command>nasal</command>
-		<DEFANGED_script>
+		<script>
 			name = "/input/joysticks/js[0]/saitek-cyborg-evo-modifier";
 			setprop(name, 3);
-		</DEFANGED_script>
+		</script>
 	</binding>
 	<mod-up>
 		<binding>
 			<command>nasal</command>
-			<DEFANGED_script>
+			<script>
 				name = "/input/joysticks/js[0]/saitek-cyborg-evo-modifier";
 				setprop(name, 0);
-			</DEFANGED_script>
+			</script>
 		</binding>
 	</mod-up>
-</DEFANGED_button>
+</button>
 
 <!-- Right Side Button labeled ^ -->
-<DEFANGED_button n="11">
+<button n="11">
 	<desc>Modifier 1</desc>
 	<repeatable type="bool">false</repeatable>
 	<binding>
 		<command>nasal</command>
-			<DEFANGED_script>
+			<script>
 				name = "/input/joysticks/js[0]/saitek-cyborg-evo-modifier";
 				setprop(name, 1);
-			</DEFANGED_script>
+			</script>
 	</binding>
 	<mod-up>
 		<binding>
 			<command>nasal</command>
-			<DEFANGED_script>
+			<script>
 				name = "/input/joysticks/js[0]/saitek-cyborg-evo-modifier";
 				setprop(name, 0);
-			</DEFANGED_script>
+			</script>
 		</binding>
 	</mod-up>
-</DEFANGED_button>
+</button>
 
 <!-- Right Side Button labeled F3 -->
-<DEFANGED_button n="8">
+<button n="8">
 	<desc>Modifier 2</desc>
 	<repeatable type="bool">false</repeatable>
 	<binding>
 		<command>nasal</command>
-		<DEFANGED_script>
+		<script>
 			name = "/input/joysticks/js[0]/saitek-cyborg-evo-modifier";
 			setprop(name, 2);
-		</DEFANGED_script>
+		</script>
 	</binding>
 	<mod-up>
 		<binding>
 			<command>nasal</command>
-			<DEFANGED_script>
+			<script>
 				name = "/input/joysticks/js[0]/saitek-cyborg-evo-modifier";
 				setprop(name, 0);
-			</DEFANGED_script>
+			</script>
 		</binding>
 	</mod-up>
-</DEFANGED_button>
+</button>
 
 <!-- Right Side Button labeled F4 -->
-<DEFANGED_button n="9">
+<button n="9">
 	<desc>Modifier 3</desc>
 	<repeatable type="bool">false</repeatable>
 	<binding>
 		<command>nasal</command>
-		<DEFANGED_script>
+		<script>
 			name = "/input/joysticks/js[0]/saitek-cyborg-evo-modifier";
 			setprop(name, 3);
-		</DEFANGED_script>
+		</script>
 	</binding>
 	<mod-up>
 		<binding>
 			<command>nasal</command>
-			<DEFANGED_script>
+			<script>
 				name = "/input/joysticks/js[0]/saitek-cyborg-evo-modifier";
 				setprop(name, 0);
-			</DEFANGED_script>
+			</script>
 		</binding>
 	</mod-up>
-</DEFANGED_button>
+</button>
 
 </PropertyList>

@@ -46,7 +46,7 @@ $Id:
   </binding>
  </axis>
 
- <axis n="2">
+ <axis n="3">
   <desc>Rudder</desc>
   <binding>
    <command>property-scale</command>
@@ -55,7 +55,7 @@ $Id:
   </binding>
  </axis>
 
- <axis n="3">
+ <axis n="2">
   <desc>Throttle</desc>
   <binding>
    <command>property-scale</command>
@@ -127,7 +127,7 @@ $Id:
   </high>
  </axis>
 
- <axis n="5">
+ <axis n="7">
   <desc>View Elevation</desc>
   <low>
    <repeatable>true</repeatable>

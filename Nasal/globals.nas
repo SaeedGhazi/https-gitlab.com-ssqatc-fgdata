@@ -31,3 +31,33 @@ fgcommand = func {
 # props.Node object.
 #
 cmdarg = func { props.wrapNode(_cmdarg()) }
+
+##
+# Utility.  Does what it you think it does.
+#
+abs = func { if(arg[0] < 0) { -arg[0] } else { arg[0] } }
+
+##
+# Convenience wrapper for the _interpolate function.  Takes a
+# single string or props.Node object in arg[0] indicating a target
+# property, and a variable-length list of time/value pairs.  Example:
+#
+#  interpolate("/animations/radar/angle",
+#              180, 1, 360, 1, 0, 0,
+#              180, 1, 360, 1, 0, 0,
+#              180, 1, 360, 1, 0, 0,
+#              180, 1, 360, 1, 0, 0,
+#              180, 1, 360, 1, 0, 0,
+#              180, 1, 360, 1, 0, 0,
+#              180, 1, 360, 1, 0, 0,
+#              180, 1, 360, 1, 0, 0);
+#
+# This will swing the "radar dish" smoothly through 8 revolutions over
+# 16 seconds.  Note the use of zero-time interpolation between 360 and
+# 0 to wrap the interpolated value properly.
+#
+interpolate = func {
+    if(isa(arg[0], props.Node)) { arg[0] = arg[0]._g; }
+    elsif(typeof(arg[0]) != "scalar") { return; }
+    _interpolate(arg[0], subvec(arg, 1));
+}

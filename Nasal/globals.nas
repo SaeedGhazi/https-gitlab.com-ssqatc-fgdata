@@ -20,8 +20,8 @@ isa = func {
 # tree.
 #
 fgcommand = func {
-    if(isa(arg[1], props.Node)) { _fgcommand(arg[0], arg[1]._g) }
-    _fgcommand(arg[0], propTree);
+    if(isa(arg[1], props.Node)) { arg[1] = arg[1]._g }
+    _fgcommand(arg[0], arg[1]);
 }
 
 ##

@@ -557,22 +557,6 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
- <key n="67">
-  <name>C</name>
-  <desc>scripting test</desc>
-  <binding>
-   <command>script</command>
-   <script>
-    int main ()
-    {
-      print("Longitude: ", get_property("/position/longitude-deg"), " deg\n");
-      print("Latitude: ", get_property("/position/latitude-deg"), " deg\n");
-      print("Altitude: ", get_property("/position/altitude-ft"), " ft\n");
-    }
-   </script>
-  </binding>
- </key>
-
  <key n="71">
   <name>G</name>
   <desc>Gear down.</desc>
@@ -638,9 +622,8 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>X</name>
   <desc>Increase field of view.</desc>
   <binding>
-   <command>property-multiply</command>
-   <property>/sim/current-view/field-of-view</property>
-   <factor type="double">1.05</factor>
+   <command>nasal</command>
+   <script>view.increase()</script>
   </binding>
  </key>
 
@@ -885,9 +868,8 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>x</name>
   <desc>Decrease field of view.</desc>
   <binding>
-   <command>property-multiply</command>
-   <property>/sim/current-view/field-of-view</property>
-   <factor type="double">0.952380952380</factor>
+   <command>nasal</command>
+   <script>view.decrease()</script>
   </binding>
  </key>
 

@@ -30,14 +30,47 @@ Node = {
 
 };
 
-# Static constructor.  Accepts a hash as an argument and duplicates
-# its contents in the property node.  ex:
-#  Node.new({ value : 1.0, units : "ms" });
+##
+# Static constructor for a Node object.  Accepts a Nasal hash
+# expression to initialize the object a-la setValues().
+#
 Node.new = func {
     result = wrapNode(_new());
-    if(typeof(arg[0]) == "hash") {
-        foreach(k; keys(arg[0])) {
-            result.getNode(k, 1).setValue(arg[0][k]);
+    if(size(arg) >= 0 and typeof(arg[0]) == "hash") {
+        result.setValues(arg[0]);
+    }
+    return result;
+}
+
+##
+# Useful utility.  Sets a whole property tree from a Nasal hash
+# object, such that scalars become leafs in the property tree, hashes
+# become named subnodes, and vectors become indexed subnodes.  This
+# works recursively, so you can define whole property trees with
+# syntax like:
+#
+# dialog = {
+#   name : "exit", width : 180, height : 100, modal : 0,
+#   text : { x : 10, y : 70, label : "Hello World!" } };
+#
+Node.setValues = func {
+    foreach(k; keys(arg[0])) { me._setChildren(k, arg[0][k]); }
+}
+
+##
+# Private function to do the work of setValues().
+# The first argument is a child name, the second a nasal scalar,
+# vector, or hash.
+#
+Node._setChildren = func {
+    name = arg[0]; val = arg[1];
+    subnode = me.getNode(name, 1);
+    if(typeof(val) == "scalar") { subnode.setValue(val); }
+    elsif(typeof(val) == "hash") { subnode.setValues(val); }
+    elsif(typeof(val) == "vector") {
+        for(i=0; i<size(val); i=i+1) {
+            iname = name ~ "[" ~ i ~ "]";
+            me._setChildren(iname, val[i]);
         }
     }
 }

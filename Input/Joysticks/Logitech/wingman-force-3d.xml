@@ -27,6 +27,7 @@ $Id$
 <PropertyList>
 
 	<name>Logitech Inc. WingMan Force 3D</name>
+        <name>Logitech Inc. WingMan Force 3d</name>
 	
 	<axis n="0">
 		<desc>Aileron</desc>

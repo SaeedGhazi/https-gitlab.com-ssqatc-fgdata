@@ -2590,6 +2590,38 @@ Properties currently used:
 </material>
 
 <material>
+ <name>Town</name>
+ <texture>Terrain/Town.rgb</texture>
+ <xsize>1024</xsize>
+ <ysize>1024</ysize>
+ <light-coverage>100000.0</light-coverage>
+ <ambient>
+  <r>0.14</r>
+  <g>0.28</g>
+  <b>0.13</b>
+  <a>1.0</a>
+ </ambient>
+ <diffuse>
+  <r>0.14</r>
+  <g>0.28</g>
+  <b>0.13</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </specular>
+ <emissive>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </emissive>
+</material>
+
+<material>
  <name>Unknown</name>
  <texture>Terrain/unknown.rgb</texture>
  <xsize>1000</xsize>

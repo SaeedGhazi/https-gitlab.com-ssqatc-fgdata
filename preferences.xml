@@ -291,7 +291,7 @@ Started September 2000 by David Megginson, david@megginson.com
      <elevation-ft>0</elevation-ft>
      <wind-from-heading-deg>270</wind-from-heading-deg>
      <wind-speed-kt>3</wind-speed-kt>
-     <visibility-m>16000</visibility-m>
+     <visibility-m>16093.44</visibility-m>
      <pressure-sea-level-inhg>29.92</pressure-sea-level-inhg>
      <temperature-degc>15.0</temperature-degc>
      <dewpoint-degc>5.0</dewpoint-degc>
@@ -319,7 +319,7 @@ Started September 2000 by David Megginson, david@megginson.com
      <elevation-ft>3000</elevation-ft>
      <wind-from-heading-deg>300</wind-from-heading-deg>
      <wind-speed-kt>10</wind-speed-kt>
-     <visibility-m>16000</visibility-m>
+     <visibility-m>16093.44</visibility-m>
      <pressure-sea-level-inhg>29.92</pressure-sea-level-inhg>
      <!-- <temperature-degc>15.0</temperature-degc> -->
      <!-- <dewpoint-degc>5.0</dewpoint-degc> -->

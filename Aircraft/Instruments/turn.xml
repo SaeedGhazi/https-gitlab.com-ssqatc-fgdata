@@ -76,21 +76,21 @@ properties' values.
    <transformations>
     <transformation>
      <type>rotation</type>
-     <property>/steam/slip-skid</property>
+     <property>/instrumentation/slip-skid-ball/indicated-slip-skid</property>
      <min>-1.1</min>
      <max>1.1</max>
      <scale>50.0</scale>
     </transformation>
     <transformation>
      <type>y-shift</type>
-     <property>/steam/slip-skid</property>
+     <property>/instrumentation/slip-skid-ball/indicated-slip-skid</property>
       <min>-1.1</min>
       <max>0.0</max> 
       <scale>5.0</scale>
     </transformation>
     <transformation>
      <type>y-shift</type>
-     <property>/steam/slip-skid</property>
+     <property>/instrumentation/slip-skid-ball/indicated-slip-skid</property>
       <min>0.0</min>
       <max>1.1</max> 
       <scale>-5.0</scale>
@@ -133,7 +133,7 @@ properties' values.
    <transformations>
     <transformation>
      <type>rotation</type>
-     <property>/steam/turn-rate</property>
+     <property>/instrumentation/turn-indicator/indicated-turn-rate</property>
      <min>-2.5</min>
      <max>2.5</max>
      <scale>20.0</scale>

@@ -32,7 +32,7 @@
   <label>Enable AI traffic</label>
   <property>/sim/ai-traffic/enabled</property>
  </checkbox>
- 
+
   <text>
    <x>30</x>
    <y>100</y>

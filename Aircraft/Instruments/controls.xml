@@ -211,7 +211,8 @@ properties' values.
     <wrap>false</wrap>
    </binding>
   </action>
-  <action>
+<!--
+<action>
   <desc>rudder trim left</desc>
   <button>0</button>
    <x>-45</x>
@@ -243,5 +244,6 @@ properties' values.
     <wrap>false</wrap>
    </binding>
   </action>
- </actions>
+-->
+</actions>
 </PropertyList>

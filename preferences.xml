@@ -402,6 +402,14 @@ Started September 2000 by David Megginson, david@megginson.com
     <throttle type="double">0.0</throttle>
     <mixture type="double">1.0</mixture>
     <propeller-pitch type="double">1.0</propeller-pitch>
+    <faults>
+     <serviceable>true</serviceable>
+     <left-magneto-serviceable>true</left-magneto-serviceable>
+     <right-magneto-serviceable>true</right-magneto-serviceable>
+     <spark-plugs-serviceable>true</spark-plugs-serviceable>
+     <oil-pressure-status>0</oil-pressure-status>
+     <fuel-pump-serviceable>true</fuel-pump-serviceable>
+    </faults>
    </engine>
    <engine n="1">
     <starter type="bool">false</starter>
@@ -409,6 +417,14 @@ Started September 2000 by David Megginson, david@megginson.com
     <throttle type="double">0.0</throttle>
     <mixture type="double">1.0</mixture>
     <propeller-pitch type="double">1.0</propeller-pitch>
+    <faults>
+     <serviceable>true</serviceable>
+     <left-magneto-serviceable>true</left-magneto-serviceable>
+     <right-magneto-serviceable>true</right-magneto-serviceable>
+     <spark-plugs-serviceable>true</spark-plugs-serviceable>
+     <oil-pressure-status>0</oil-pressure-status>
+     <fuel-pump-serviceable>true</fuel-pump-serviceable>
+    </faults>
    </engine>
    <engine n="2">
     <starter type="bool">false</starter>
@@ -416,6 +432,14 @@ Started September 2000 by David Megginson, david@megginson.com
     <throttle type="double">0.0</throttle>
     <mixture type="double">1.0</mixture>
     <propeller-pitch type="double">1.0</propeller-pitch>
+    <faults>
+     <serviceable>true</serviceable>
+     <left-magneto-serviceable>true</left-magneto-serviceable>
+     <right-magneto-serviceable>true</right-magneto-serviceable>
+     <spark-plugs-serviceable>true</spark-plugs-serviceable>
+     <oil-pressure-status>0</oil-pressure-status>
+     <fuel-pump-serviceable>true</fuel-pump-serviceable>
+    </faults>
    </engine>
    <engine n="3">
     <starter type="bool">false</starter>
@@ -423,6 +447,14 @@ Started September 2000 by David Megginson, david@megginson.com
     <throttle type="double">0.0</throttle>
     <mixture type="double">1.0</mixture>
     <propeller-pitch type="double">1.0</propeller-pitch>
+    <faults>
+     <serviceable>true</serviceable>
+     <left-magneto-serviceable>true</left-magneto-serviceable>
+     <right-magneto-serviceable>true</right-magneto-serviceable>
+     <spark-plugs-serviceable>true</spark-plugs-serviceable>
+     <oil-pressure-status>0</oil-pressure-status>
+     <fuel-pump-serviceable>true</fuel-pump-serviceable>
+    </faults>
    </engine>
   </engines>
 

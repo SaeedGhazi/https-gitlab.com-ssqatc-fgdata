@@ -367,6 +367,12 @@ Started September 2000 by David Megginson, david@megginson.com
    <altimeter-datum-mb type="double">1013.25</altimeter-datum-mb>
  </steam>
 
+ <instrumentation>
+  <attitude-indicator>
+   <serviceable type="bool">true</serviceable>
+  </attitude-indicator>
+ </instrumentation>
+
  <systems>
   <vacuum>
    <serviceable type="bool">true</serviceable>

@@ -36,7 +36,7 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
 
   <panel>
     <path>Aircraft/c310u3a/c310u3a-3d-panel.xml</path>
-    <visibility>true</visibility>
+    <visibility>false</visibility>
   </panel>
   <panel n="1">
     <desc>2D Panel</desc>

@@ -1,0 +1,344 @@
+<?xml version="1.0"?>
+<!--
+Only a few stick controls have been mapped here:
+ + "Rocker" switch:     Rudder
+ + Top rotary dial:     Mixture
+ + Bottom rotary dial:  Prop Advance
+ + Top stick hat:       Elevator & Aileron trim
+ + Bottom stick hat:    View direction
+ + Top throttle hat:    Flaps & Rudder trim
+ + Stick button "A":    Gear toggle
+ + Stick button "C":    Reset view (hackish)
+
+Axis Numbers:
+  0 Roll (positive == right)
+  1 Pitch (positive == down/back/nose-up)
+  2 top "rotary dial" on the throttle (positive == CCW)
+  3 Rocker switch ("rudder" control) on the throttle (positive == right)
+  4 Throttle (positive == back/down/idle)
+  5 Bottom "rotary dial" on the throttle (positive == CW)
+  6 Lower right hat horizontal axis (positive == right)
+  7 Lower right hat vertical axis (positive == down)
+
+Button Numbers:
+ 0 Trigger
+ 1 Stick top "A" switch
+ 2 Stick top "B" switch
+ 3 Stick top "launch/fire" switch
+ 4 Throttle "D" switch
+ 5 Throttle "mouse" switch (tiny black thumb button)
+ 6 Stick "pinkie" switch
+ 7 Stick front "C" switch
+ 8 -+                                left position   ("M1")
+ 9  +- Throttle "mode" 3-way switch: middle position ("M2")
+10 -+                                right position  ("M3")
+11 -+                                left position
+12  +- Throttle "Aux" 3-way switch:  middle position
+13 -+                                right position
+14 Upper left hat in "up" position
+15 Upper left hat in "right" position
+16 Upper left hat in "down" position
+17 Upper left hat in "left" position
+18 Throttle forefinger hat in "up/back" position
+19 Throttle forefinger hat in "right" position
+20 Throttle forefinger hat in "down/forward" position
+21 Throttle forefinger hat in "left" position
+22 Throttle thumb hat in "up" position
+23 Throttle thumb hat in "right" position
+24 Throttle thumb hat in "down" position
+25 Throttle thumb hat in "left" position
+-->
+<PropertyList>
+ <name>Saitek Saitek X45</name>
+
+ <axis n="0">
+  <desc>Aileron</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/aileron</property>
+   <squared type="bool">true</squared>
+  </binding>
+ </axis>
+
+ <axis n="1">
+  <desc>Elevator</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/elevator</property>
+   <factor type="double">-1.0</factor>
+   <squared type="bool">true</squared>
+  </binding>
+ </axis>
+
+ <axis n="3">
+  <desc>Rudder</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/rudder</property>
+  </binding>
+ </axis>
+
+ <axis n="4">
+  <desc>Throttle</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/throttle[0]</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/throttle[1]</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+ </axis>
+
+ <axis n="2">
+  <desc>Mixture</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/mixture[0]</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/mixture[1]</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+ </axis>
+
+ <axis n="5">
+  <desc>Propeller Advance</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/propeller-pitch[0]</property>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/propeller-pitch[1]</property>
+  </binding>
+ </axis>
+
+ <!-- View Direction Hat -->
+
+ <axis n="6">
+  <desc>View Direction</desc>
+  <low>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
+    <step type="double">1.0</step>
+   </binding>
+  </low>
+  <high>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
+    <step type="double">-1.0</step>
+   </binding>
+  </high>
+ </axis>
+
+ <axis n="7">
+  <desc>View Elevation</desc>
+  <low>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-pitch-offset-deg</property>
+    <step type="double">1.0</step>
+   </binding>
+  </low>
+  <high>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-pitch-offset-deg</property>
+    <step type="double">-1.0</step>
+   </binding>
+  </high>
+ </axis>
+
+ <!-- Reset the view parameters with button C on the front of the  -->
+ <!-- stick.  This is a hack that matches the A-4 cockpit settings -->
+ <!-- that I like.  There needs to be a place to put default view  -->
+ <!-- settings somewhere. -->
+
+ <button n="7">
+  <desc>Reset View</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/current-view/goal-heading-offset-deg</property>
+   <value type="double">0</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/current-view/goal-pitch-offset-deg</property>
+   <value type="double">-17</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/current-view/field-of-view</property>
+   <value type="double">65.0</value>
+  </binding>
+ </button>
+
+ <!-- The trigger operates the brakes -->
+
+ <button n="0">
+  <desc>Brakes</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/brakes[0]</property>
+   <value type="double">1.0</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/brakes[1]</property>
+   <value type="double">1.0</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/brakes[2]</property>
+   <value type="double">1.0</value>
+  </binding>
+  <mod-up>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/brakes[0]</property>
+    <value type="double">0.0</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/brakes[1]</property>
+    <value type="double">0.0</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/brakes[2]</property>
+    <value type="double">0.0</value>
+   </binding>
+  </mod-up>
+ </button>
+
+ <!-- Gear toggle on button A -->
+
+ <button n="1">
+  <desc>Landing Gear Up/Down Toggle</desc>
+  <binding>
+   <command>property-toggle</command>
+   <property>/controls/gear-down</property>
+  </binding>
+ </button>
+
+ <!-- Trim on the throttle too (Andy finds this more comfortable) -->
+
+ <button n="25">
+  <desc>Elevator trim up</desc>
+  <repeatable type="bool">true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/elevator-trim</property>
+   <step type="double">-0.001</step>
+  </binding>
+ </button>
+ <button n="23">
+  <desc>Elevator trim down</desc>
+  <repeatable type="bool">true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/elevator-trim</property>
+   <step type="double">0.001</step>
+  </binding>
+ </button>
+
+ <!-- Trim (upper) hat on the stick -->
+
+ <button n="14">
+  <desc>Elevator trim down</desc>
+  <repeatable type="bool">true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/elevator-trim</property>
+   <step type="double">0.0015</step>
+  </binding>
+ </button>
+
+ <button n="15">
+  <desc>Aileron trim right</desc>
+  <repeatable type="bool">true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/aileron-trim</property>
+   <step type="double">0.0015</step>
+  </binding>
+ </button>
+
+ <button n="16">
+  <desc>Elevator trim up</desc>
+  <repeatable type="bool">true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/elevator-trim</property>
+   <step type="double">-0.0015</step>
+  </binding>
+ </button>
+
+ <button n="17">
+  <desc>Aileron trim left</desc>
+  <repeatable type="bool">true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/aileron-trim</property>
+   <step type="double">-0.0015</step>
+  </binding>
+ </button>
+
+ <!-- Flap control on the throttle upper hat -->
+
+ <button n="18">
+  <desc>Decrease flaps</desc>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/flaps</property>
+   <step type="double">-0.34</step>
+  </binding>
+ </button>
+
+ <button n="20">
+  <desc>Increase flaps</desc>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/flaps</property>
+   <step type="double">0.34</step>
+  </binding>
+ </button>
+
+ <!-- Rudder trim on the flap hat -->
+
+ <button n="19">
+  <desc>Rudder trim right</desc>
+  <repeatable type="bool">true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/rudder-trim</property>
+   <step type="double">0.0015</step>
+  </binding>
+ </button>
+
+ <button n="21">
+  <desc>Rudder trim left</desc>
+  <repeatable type="bool">true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/rudder-trim</property>
+   <step type="double">-0.0015</step>
+  </binding>
+ </button>
+
+</PropertyList>

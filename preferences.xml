@@ -286,6 +286,7 @@ Started September 2000 by David Megginson, david@megginson.com
   <throttle n="0" type="double">0.0</throttle>
   <mixture n="0" type="double">1.0</mixture>
   <propeller-pitch n="0" type="double">1.0</propeller-pitch>
+  <carb-heat n="0" type="double">0.0</carb-heat>
 
   <starter n="1" type="bool">false</starter>
   <magnetos n="1" type="int">0</magnetos>
@@ -312,9 +313,14 @@ Started September 2000 by David Megginson, david@megginson.com
   <gear-down type="double">1.0</gear-down>
 
   <lights>
+   <taxi type="bool">false</taxi>
+   <landing type="bool">false</landing>
    <navigation type="bool">false</navigation>
    <beacon type="bool">true</beacon>
+   <strobes type="bool">false</strobes>
   </lights>
+
+  <pitot-heat type="bool">false</pitot-heat>
 
  </controls>
 

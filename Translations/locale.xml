@@ -8,6 +8,17 @@
  </locale>
 
  <locale>
+  <lang type="string">de</lang>
+  <lang type="string">de_AT</lang>
+  <lang type="string">de_CH</lang>
+  <lang type="string">de_AT.ISO8859-15</lang>
+  <lang type="string">de_DE.ISO8859-15</lang>
+  <lang type="string">de_CH.ISO8859-15</lang>
+
+  <strings>Translations/strings-de.xml</strings>
+ </locale>
+
+ <locale>
   <lang type="string">POSIX</lang>
   <lang type="string">C</lang>
   <lang type="string">en</lang>

@@ -11,14 +11,14 @@
    <option>
     <name>help</name>
     <short>h</short>
-    <description>Show the most relevant commandline options</description>
+    <description>Show the most relevant command line options</description>
     <brief/>
    </option>
 
    <option>
     <name>verbose</name>
     <short>v</short>
-    <description>Show all commandline options</description>
+    <description>Show all command line options</description>
     <description>when combined with --help or -h</description>
     <brief/>
    </option>
@@ -35,6 +35,13 @@
     <arg>path</arg>
     <description>Specify the base scenery path;</description>
     <description>Defaults to $FG_ROOT/Scenery</description>
+    <brief/>
+   </option>
+
+   <option>
+    <name>language</name>
+    <arg>code</arg>
+    <description>Select the language for this session</description>
     <brief/>
    </option>
 
@@ -76,7 +83,7 @@
    <option>
     <name>enable-mouse-pointer</name>
     <description>Enable extra mouse pointer</description>
-    <description>(i.e. for fullscreen Voodoo based cards)</description>
+    <description>(i.e. for full screen Voodoo based cards)</description>
    </option>
 
    <option>
@@ -610,7 +617,7 @@
    <option>
     <name>jpg-httpd</name>
     <arg>port</arg>
-    <description>Enable screenshot http server on the specified</description>
+    <description>Enable screen shot http server on the specified</description>
     <description>port</description>
    </option>
 
@@ -632,7 +639,7 @@
    <option>
     <name>net-id</name>
     <arg>name</arg>
-    <description>Specify your own callsign</description>
+    <description>Specify your own call sign</description>
    </option>
 
   </section>
@@ -717,7 +724,7 @@
    <option>
     <name>ray</name>
     <arg>params</arg>
-    <description>Open connection using the RayWoodworth motion</description>
+    <description>Open connection using the Ray Woodworth motion</description>
     <description>chair protocol</description>
    </option>
 

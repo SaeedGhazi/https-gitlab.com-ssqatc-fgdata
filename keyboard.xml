@@ -112,6 +112,16 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+ <key n="22">
+  <name>Ctrl-V</name>
+  <desc>Select initial view (view 0).</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/current-view/view-number</property>
+   <value>0</value>
+  </binding>
+ </key>
+
  <key n="27">
   <name>ESC</name>
   <desc>Prompt and quit FlightGear.</desc>
@@ -639,11 +649,14 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="86">
   <name>V</name>
-  <desc>Select initial view (view 0).</desc>
+  <desc>Scroll in reverse through views.</desc>
   <binding>
-   <command>property-assign</command>
-   <property>/sim/current-view/view-number</property>
-   <value>0</value>
+    <command>property-adjust</command>
+    <property>/sim/current-view/view-number</property>
+    <step type="int">-1</step>
+    <min type="int">0</min>
+    <max type="int">5</max>
+    <wrap type="bool">true</wrap>
   </binding>
  </key>
 
@@ -858,8 +871,14 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="118">
   <name>v</name>
   <desc>Cycle view</desc>
+  <desc>Scroll in reverse through views.</desc>
   <binding>
-   <command>view-cycle</command>
+    <command>property-adjust</command>
+    <property>/sim/current-view/view-number</property>
+    <step type="int">1</step>
+    <min type="int">0</min>
+    <max type="int">5</max>
+    <wrap type="bool">true</wrap>
   </binding>
  </key>
 

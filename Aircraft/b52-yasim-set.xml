@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+B52-H set file.
+
+2002-12-17 Lee Elliott  leee-fgfs@spatial.freeserve.co.uk
+************************************************************************
+-->
+
+<PropertyList>
+ <sim>
+  <flight-model>yasim</flight-model>
+  <aero>b52-yasim</aero>
+  <fuel-fraction>1.0</fuel-fraction>
+
+  <sound>
+   <audible>true</audible>
+   <path>Aircraft/b52/b52-sound.xml</path>
+  </sound>
+
+  <panel>
+   <path>Aircraft/c310/c310-vfr-panel.xml</path>
+  </panel>
+  <panel_2>
+   <path>Aircraft/c310/c310-mini-panel.xml</path>
+  </panel_2>
+
+  <hud>
+   <path>Huds/Default/default.xml</path>
+   <visibility>true</visibility>
+  </hud>
+
+  <model>
+   <path>Aircraft/b52/b52-model.xml</path>
+  </model>
+  <view>
+   <internal archive="y">false</internal>
+   <config> -->
+     <!-- x/y/z == right/up/back -->
+     <x-offset-m archive="y">-1.0</x-offset-m>
+     <y-offset-m archive="y">1.5</y-offset-m>
+     <z-offset-m archive="y">-28</z-offset-m>
+   </config>
+  </view>
+
+  <view n="1">
+   <config>
+     <!-- big plane, so extend chase view offset a bit -->
+     <z-offset-m type="double" archive="y">-100.0</z-offset-m>
+   </config>
+
+  </view>
+
+ </sim>
+
+ <autopilot>
+   <config>
+
+     <min-climb-speed-kt type="float">150.0</min-climb-speed-kt>
+     <best-climb-speed-kt type="float">450.0</best-climb-speed-kt>
+
+     <target-climb-rate-fpm type="float">4000.0</target-climb-rate-fpm>
+     <target-descent-rate-fpm type="float">4000.0</target-descent-rate-fpm>
+
+     <elevator-adj-factor type="float">400.0</elevator-adj-factor>
+
+     <integral-contribution type="float">0.005</integral-contribution>
+
+     <max-aileron type="float">0.6</max-aileron>
+     <max-roll-deg type="float">50.0</max-roll-deg>
+
+     <roll-out-deg type="float">10.0</roll-out-deg>
+     <roll-out-smooth-deg type="float">20.0</roll-out-smooth-deg>
+
+     <zero-pitch-throttle type="float">0.5</zero-pitch-throttle>
+     <zero-pitch-trim-full-throttle type="float">0.001</zero-pitch-trim-full-throttle>
+
+   </config>
+ </autopilot>
+
+</PropertyList>
+
+

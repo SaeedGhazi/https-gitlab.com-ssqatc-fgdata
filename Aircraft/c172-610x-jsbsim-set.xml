@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+FDM-independent Cessna 172 with full-screen, high-res panel.
+
+Started October 23 2001 by John Check, fgpanels@rockfish.net
+************************************************************************
+-->
+
+<PropertyList include="c172r-jsbsim-base.xml">
+
+ <sim>
+
+  <description>Cessna 172 with a full screen, hi-res panel</description>
+ 
+  <panel>
+   <path>Aircraft/c172/Panels/c172-610x-panel.xml</path>
+   <visibility archive="y">true</visibility>
+   <flip-x>false</flip-x>
+  </panel>
+
+  <model>
+   <path archive="y">Aircraft/c172/Models/c172-dpm.xml</path>
+  </model>
+
+ </sim>
+  
+</PropertyList>

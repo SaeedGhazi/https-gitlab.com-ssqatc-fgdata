@@ -135,6 +135,14 @@
   </item>
 
   <item>
+   <label>Select Airport from List</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>airports</dialog-name>
+   </binding>
+  </item>
+
+  <item>
    <label>Random Attitude</label>
    <binding>
     <command>property-assign</command>

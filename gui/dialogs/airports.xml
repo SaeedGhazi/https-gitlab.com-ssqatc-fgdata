@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <name>airports</name>
+ <width>480</width>
+ <height>480</height>
+ <modal>true</modal>
+
+ <text>
+  <x>10</x>
+  <y>450</y>
+  <label>Select an Airport:</label>
+ </text>
+
+ <airport-list>
+  <x>10</x>
+  <y>40</y>
+  <width>440</width>
+  <height>360</height>
+  <property>/sim/presets/airport-id</property>
+ </airport-list>
+
+ <button>
+  <x>100</x>
+  <y>10</y>
+  <legend>Select</legend>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/presets/longitude-deg</property>
+   <value type="double">-9999</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/presets/latitude-deg</property>
+   <value type="double">-9999</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/sim/presets/altitude-ft</property>
+   <value type="double">-9999</value>
+  </binding>
+  <binding>
+   <command>dialog-apply</command>
+  </binding>
+  <binding>
+   <command>presets-commit</command>
+  </binding>
+ </button>
+
+ <button>
+  <x>300</x>
+  <y>10</y>
+  <legend>Cancel</legend>
+  <binding>
+   <command>dialog-close</command>
+  </binding>
+ </button>
+
+</PropertyList>

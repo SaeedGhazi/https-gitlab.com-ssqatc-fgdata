@@ -303,7 +303,7 @@
 
    <option>
     <name>ceiling</name>
-    <arg>FT_AGL[:THICKNESS_AGL]</arg>
+    <arg>FT_ASL[:THICKNESS_FT]</arg>
     <description>strings/ceiling-desc</description>
     <brief/>
    </option>

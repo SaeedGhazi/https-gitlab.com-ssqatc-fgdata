@@ -107,8 +107,12 @@ ________________________________________________________________________________
 		</binding>
 	</axis>
 
-	<axis n="2">
+	<axis>
 		<desc>Rudder</desc>
+		<number>
+			<unix>2</unix>
+			<windows>3</windows>
+		</number>
 		<binding>
 			<command>property-scale</command>
 			<property>/controls/flight/rudder</property>
@@ -118,8 +122,12 @@ ________________________________________________________________________________
 		</binding>
 	</axis>
 
-	<axis n="3">
+	<axis>
 		<desc>Throttle</desc>
+		<number>
+			<unix>3</unix>
+			<windows>2</windows>
+		</number>
 		<binding>
 			<command>nasal</command>
 			<script>controls.throttleAxis()</script>

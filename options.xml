@@ -330,6 +330,12 @@
    </option>
 
    <option>
+    <name>aspect-ratio-multiplier</name>
+    <arg>dimentionless</arg>
+    <description>strings/arm-desc</description>
+   </option>
+
+   <option>
     <name>disable-fullscreen</name>
     <description>strings/disable-fullscreen-desc</description>
    </option>

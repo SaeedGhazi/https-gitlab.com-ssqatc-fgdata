@@ -188,6 +188,7 @@
  <enable-clouds3d-desc>Enable 3D (volumetric) cloud layers</enable-clouds3d-desc>
  <disable-clouds3d-desc>Disable 3D (volumetric) cloud layers</disable-clouds3d-desc>
  <fov-desc>Specify field of view angle</fov-desc>
+ <arm-desc>Specify a multiplier for the aspect ratio.</arm-desc>
  <disable-fullscreen-desc>Disable fullscreen mode</disable-fullscreen-desc>
  <enable-fullscreen-desc>Enable fullscreen mode</enable-fullscreen-desc>
  <shading-flat-desc>Enable flat shading</shading-flat-desc>

@@ -726,6 +726,12 @@
    <name>strings/io-options</name>
 
    <option>
+    <name>generic</name>
+    <arg>params</arg>
+    <description>strings/serial-desc</description>
+   </option>
+
+   <option>
     <name>garmin</name>
     <arg>params</arg>
     <description>strings/garmin-desc</description>

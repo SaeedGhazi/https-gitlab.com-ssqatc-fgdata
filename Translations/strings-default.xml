@@ -208,12 +208,12 @@
  <jpg-httpd-desc>Enable screen shot http server on the specified port</jpg-httpd-desc>
 
  <!-- MultiPlayer options -->
- <multiplayer-options>MultiPlayer options</multiplayer-options>
+ <multiplayer-options>MultiPlayer Options</multiplayer-options>
  <multiplay-desc>Specify multipilot communication settings</multiplay-desc>
  <callsign-desc>assign a unique name to a player</callsign-desc>
 
  <!-- NetworkOLK options -->
- <network-olk-options>Mutlipilot options</network-olk-options>
+ <network-olk-options>Mutlipilot Options</network-olk-options>
  <disable-network-olk-desc>Disable Multipilot mode (default)</disable-network-olk-desc>
  <enable-network-olk-desc>Enable Multipilot mode</enable-network-olk-desc>
  <net-hud-desc>Hud displays network info</net-hud-desc>
@@ -232,6 +232,7 @@
  <native-fdm-desc>Open connection using the FG Native FDM protocol</native-fdm-desc>
  <native-desc>Open connection using the FG Native protocol</native-desc>
  <nmea-desc>Open connection using the NMEA protocol</nmea-desc>
+ <serial-desc>Open connection using the serial port protocol</serial-desc>
  <opengc-desc>Open connection using the OpenGC protocol</opengc-desc>
  <props-desc>Open connection using the interactive property manager</props-desc>
  <pve-desc>Open connection using the PVE protocol</pve-desc>

@@ -2674,6 +2674,18 @@ Shared parameters for various materials.
   <range-m>10000</range-m>
   <billboard>false</billboard>
  </object>
+ <object>
+  <path>Models/Buildings/big-church.ac</path>
+  <coverage>5000000</coverage>
+  <range-m>5000</range-m>
+  <billboard>false</billboard>
+ </object>
+ <object>
+  <path>Models/Buildings/water-tower.ac</path>
+  <coverage>50000000</coverage>
+  <range-m>5000</range-m>
+  <billboard>false</billboard>
+ </object>
 </material>
 
 <material>
@@ -2738,6 +2750,18 @@ Shared parameters for various materials.
   <b>0.0</b>
   <a>1.0</a>
  </emissive>
+ <object>
+  <path>Models/Buildings/big-church.ac</path>
+  <coverage>250000</coverage>
+  <range-m>10000</range-m>
+  <billboard>false</billboard>
+ </object>
+ <object>
+  <path>Models/Buildings/water-tower.ac</path>
+  <coverage>1000000</coverage>
+  <range-m>10000</range-m>
+  <billboard>false</billboard>
+ </object>
 </material>
 
 <material>
@@ -3067,7 +3091,7 @@ Shared parameters for various materials.
  <object>
   <path>Models/Buildings/red-barn.ac</path>
   <coverage>5000000</coverage>
-  <range-m>3000</range-m>
+  <range-m>5000</range-m>
   <billboard>false</billboard>
  </object>
  <object>
@@ -3123,7 +3147,7 @@ Shared parameters for various materials.
  <object>
   <path>Models/Buildings/red-barn.ac</path>
   <coverage>5000000</coverage>
-  <range-m>3000</range-m>
+  <range-m>5000</range-m>
   <billboard>false</billboard>
  </object>
  <object>
@@ -3179,7 +3203,7 @@ Shared parameters for various materials.
  <object>
   <path>Models/Buildings/red-barn.ac</path>
   <coverage>5000000</coverage>
-  <range-m>3000</range-m>
+  <range-m>5000</range-m>
   <billboard>false</billboard>
  </object>
  <object>

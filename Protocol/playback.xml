@@ -1,0 +1,607 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <generic>
+
+  <output>
+   <line_separator>newline</line_separator>
+   <var_separator>,</var_separator>
+
+
+   <!-- Flight Controls -->
+   <chunk>
+    <name>aileron</name>
+    <type>double</type>
+    <node>/controls/flight/aileron</node>
+   </chunk>
+
+   <chunk>
+    <name>aileron-trim</name>
+    <type>double</type>
+    <node>/controls/flight/aileron-trim</node>
+   </chunk>
+ 
+   <chunk>
+    <name>elevator</name>
+    <type>double</type>
+    <node>/controls/flight/elevator</node>
+   </chunk>
+ 
+   <chunk>
+    <name>elevator-trim</name>
+    <type>double</type>
+    <node>/controls/flight/elevator-trim</node>
+   </chunk>
+ 
+   <chunk>
+    <name>rudder</name>
+    <type>double</type>
+    <node>/controls/flight/rudder</node>
+   </chunk>
+ 
+   <chunk>
+    <name>rudder-trim</name>
+    <type>double</type>
+    <node>/controls/flight/rudder-trim</node>
+   </chunk>
+ 
+   <chunk>
+    <name>flaps</name>
+    <type>double</type>
+    <node>/controls/flight/flaps</node>
+   </chunk>
+ 
+   <chunk>
+    <name>slats</name>
+    <type>double</type>
+    <node>/controls/flight/slats</node>
+   </chunk>
+ 
+   <chunk>
+    <name>speedbrake</name>
+    <type>double</type>
+    <node>/controls/flight/speedbrake</node>
+   </chunk>
+ 
+
+   <!-- Engines -->
+   <chunk>
+    <name>throttle</name>
+    <type>double</type>
+    <node>/controls/engines/engine[0]/throttle</node>
+   </chunk>
+   <name>throttle</name>
+    <type>double</type>
+    <node>/controls/engines/engine[1]/throttle</node>
+   </chunk>
+
+   <chunk>
+    <name>starter</name>
+    <type>double</type>
+    <node>/controls/engines/engine[0]/starter</node>
+   </chunk>
+   <name>starter</name>
+    <type>double</type>
+    <node>/controls/engines/engine[1]/starter</node>
+   </chunk>
+
+   <chunk>
+    <name>fuel-pump</name>
+    <type>double</type>
+    <node>/controls/engines/engine[0]/fuel-pump</node>
+   </chunk>
+   <name>fuel-pump</name>
+    <type>double</type>
+    <node>/controls/engines/engine[1]/fuel-pump</node>
+   </chunk>
+
+   <chunk>
+    <name>cutoff</name>
+    <type>double</type>
+    <node>/controls/engines/engine[0]/cutoff</node>
+   </chunk>
+   <name>cutoff</name>
+    <type>double</type>
+    <node>/controls/engines/engine[1]/cutoff</node>
+   </chunk>
+
+   <chunk>
+    <name>mixture</name>
+    <type>double</type>
+    <node>/controls/engines/engine[0]/mixture</node>
+   </chunk>
+   <name>mixture</name>
+    <type>double</type>
+    <node>/controls/engines/engine[1]/mixture</node>
+   </chunk>
+
+   <chunk>
+    <name>propeller-pitch</name>
+    <type>double</type>
+    <node>/controls/engines/engine[0]/propeller-pitch</node>
+   </chunk>
+   <name>propeller-pitch</name>
+    <type>double</type>
+    <node>/controls/engines/engine[1]/propeller-pitch</node>
+   </chunk>
+
+   <chunk>
+    <name>magnetos</name>
+    <type>double</type>
+    <node>/controls/engines/engine[0]/magnetos</node>
+   </chunk>
+   <name>magnetos</name>
+    <type>double</type>
+    <node>/controls/engines/engine[1]/magnetos</node>
+   </chunk>
+
+   <chunk>
+    <name>ignition</name>
+    <type>double</type>
+    <node>/controls/engines/engine[0]/ignition</node>
+   </chunk>
+   <name>ignition</name>
+    <type>double</type>
+    <node>/controls/engines/engine[1]/ignition</node>
+   </chunk>
+
+ 
+   <!-- Gear -->
+   <chunk>
+    <name>brake-left</name>
+    <type>double</type>
+    <node>/controls/gear/brake-left</node>
+   </chunk>
+
+   <chunk>
+    <name>brake-right</name>
+    <type>double</type>
+    <node>/controls/gear/brake-right</node>
+   </chunk>
+
+   <chunk>
+    <name>brake-parking</name>
+    <type>double</type>
+    <node>/controls/gear/brake-parking</node>
+   </chunk>
+
+   <chunk>
+    <name>steering</name>
+    <type>double</type>
+    <node>/controls/gear/steering</node>
+   </chunk>
+
+   <chunk>
+    <name>gear-down</name>
+    <type>double</type>
+    <node>/controls/gear/gear-down</node>
+   </chunk>
+
+   <!-- Hydraulics -->
+   <chunk>
+    <name>engine-pump</name>
+    <type>double</type>
+    <node>/controls/hydraulic/system[0]/engine-pump</node>
+   </chunk>
+   <chunk>
+    <name>engine-pump</name>
+    <type>double</type>
+    <node>/controls/hydraulic/system[1]/engine-pump</node>
+   </chunk>
+
+   <chunk>
+    <name>electric-pump</name>
+    <type>double</type>
+    <node>/controls/hydraulic/system[0]/electric-pump</node>
+   </chunk>
+   <chunk>
+    <name>electric-pump</name>
+    <type>double</type>
+    <node>/controls/hydraulic/system[1]/electric-pump</node>
+   </chunk>
+
+   <!-- Electric -->
+   <chunk>
+    <name>battery-switch</name>
+    <type>double</type>
+    <node>/controls/electric/battery-switch</node>
+   </chunk>
+
+   <chunk>
+    <name>external-power</name>
+    <type>double</type>
+    <node>/controls/electric/external-power</node>
+   </chunk>
+
+   <chunk>
+    <name>APU-generator</name>
+    <type>double</type>
+    <node>/controls/electric/APU-generator</node>
+   </chunk>
+
+   <-- Autoflight -->
+   <chunk>
+    <name>engage</name>
+    <type>double</type>
+    <node>/controls/autoflight/autopilot[0]/engage</node>
+   </chunk>
+
+   <chunk>
+    <name>heading-select</name>
+    <type>double</type>
+    <node>/controls/autoflight/heading-select</node>
+   </chunk>
+
+   <chunk>
+    <name>altitude-select</name>
+    <type>double</type>
+    <node>/controls/autoflight/altitude-select</node>
+   </chunk>
+
+   <chunk>
+    <name>bank-angle-select</name>
+    <type>double</type>
+    <node>/controls/autoflight/bank-angle-select</node>
+   </chunk>
+
+   <chunk>
+    <name>vertical-speed-select</name>
+    <type>double</type>
+    <node>/controls/autoflight/vertical-speed-select</node>
+   </chunk>
+
+   <chunk>
+    <name>speed-select</name>
+    <type>double</type>
+    <node>/controls/autoflight/speed-select</node>
+   </chunk>
+
+   <!-- Position -->
+   <chunk>
+    <name>latitude-deg</name>
+    <type>double</type>
+    <node>/position/latitude-deg</node>
+   </chunk>
+
+   <chunk>
+    <name>longitude-deg</name>
+    <type>double</type>
+    <node>/position/longitude-deg</node>
+   </chunk>
+
+   <chunk>
+    <name>altitude-ft</name>
+    <type>double</type>
+    <node>/position/altitude-ft</node>
+   </chunk>
+
+   <!-- Orientation -->
+   <chunk>
+    <name>roll-deg</name>
+    <type>double</type>
+    <node>/orientation/roll-deg</node>
+   </chunk>
+
+   <chunk>
+    <name>pitch-deg</name>
+    <type>double</type>
+    <node>/orientation/pitch-deg</node>
+   </chunk>
+
+   <chunk>
+    <name>heading-deg</name>
+    <type>double</type>
+    <node>/orientation/heading-deg</node>
+   </chunk>
+
+   <chunk>
+    <name>side-slip-deg</name>
+    <type>double</type>
+    <node>/orientation/side-slip-deg</node>
+   </chunk>
+
+  </output>
+
+  <input>
+   <line_separator>newline</line_separator>
+   <var_separator>,</var_separator>
+
+
+   <!-- Flight Controls -->
+   <chunk>
+    <name>aileron</name>
+    <type>double</type>
+    <node>/controls/flight/aileron</node>
+   </chunk>
+
+   <chunk>
+    <name>aileron-trim</name>
+    <type>double</type>
+    <node>/controls/flight/aileron-trim</node>
+   </chunk>
+ 
+   <chunk>
+    <name>elevator</name>
+    <type>double</type>
+    <node>/controls/flight/elevator</node>
+   </chunk>
+ 
+   <chunk>
+    <name>elevator-trim</name>
+    <type>double</type>
+    <node>/controls/flight/elevator-trim</node>
+   </chunk>
+ 
+   <chunk>
+    <name>rudder</name>
+    <type>double</type>
+    <node>/controls/flight/rudder</node>
+   </chunk>
+ 
+   <chunk>
+    <name>rudder-trim</name>
+    <type>double</type>
+    <node>/controls/flight/rudder-trim</node>
+   </chunk>
+ 
+   <chunk>
+    <name>flaps</name>
+    <type>double</type>
+    <node>/controls/flight/flaps</node>
+   </chunk>
+ 
+   <chunk>
+    <name>slats</name>
+    <type>double</type>
+    <node>/controls/flight/slats</node>
+   </chunk>
+ 
+   <chunk>
+    <name>speedbrake</name>
+    <type>double</type>
+    <node>/controls/flight/speedbrake</node>
+   </chunk>
+ 
+
+   <!-- Engines -->
+   <chunk>
+    <name>throttle</name>
+    <type>double</type>
+    <node>/controls/engines/engine[0]/throttle</node>
+   </chunk>
+   <name>throttle</name>
+    <type>double</type>
+    <node>/controls/engines/engine[1]/throttle</node>
+   </chunk>
+
+   <chunk>
+    <name>starter</name>
+    <type>double</type>
+    <node>/controls/engines/engine[0]/starter</node>
+   </chunk>
+   <name>starter</name>
+    <type>double</type>
+    <node>/controls/engines/engine[1]/starter</node>
+   </chunk>
+
+   <chunk>
+    <name>fuel-pump</name>
+    <type>double</type>
+    <node>/controls/engines/engine[0]/fuel-pump</node>
+   </chunk>
+   <name>fuel-pump</name>
+    <type>double</type>
+    <node>/controls/engines/engine[1]/fuel-pump</node>
+   </chunk>
+
+   <chunk>
+    <name>cutoff</name>
+    <type>double</type>
+    <node>/controls/engines/engine[0]/cutoff</node>
+   </chunk>
+   <name>cutoff</name>
+    <type>double</type>
+    <node>/controls/engines/engine[1]/cutoff</node>
+   </chunk>
+
+   <chunk>
+    <name>mixture</name>
+    <type>double</type>
+    <node>/controls/engines/engine[0]/mixture</node>
+   </chunk>
+   <name>mixture</name>
+    <type>double</type>
+    <node>/controls/engines/engine[1]/mixture</node>
+   </chunk>
+
+   <chunk>
+    <name>propeller-pitch</name>
+    <type>double</type>
+    <node>/controls/engines/engine[0]/propeller-pitch</node>
+   </chunk>
+   <name>propeller-pitch</name>
+    <type>double</type>
+    <node>/controls/engines/engine[1]/propeller-pitch</node>
+   </chunk>
+
+   <chunk>
+    <name>magnetos</name>
+    <type>double</type>
+    <node>/controls/engines/engine[0]/magnetos</node>
+   </chunk>
+   <name>magnetos</name>
+    <type>double</type>
+    <node>/controls/engines/engine[1]/magnetos</node>
+   </chunk>
+
+   <chunk>
+    <name>ignition</name>
+    <type>double</type>
+    <node>/controls/engines/engine[0]/ignition</node>
+   </chunk>
+   <name>ignition</name>
+    <type>double</type>
+    <node>/controls/engines/engine[1]/ignition</node>
+   </chunk>
+
+ 
+   <!-- Gear -->
+   <chunk>
+    <name>brake-left</name>
+    <type>double</type>
+    <node>/controls/gear/brake-left</node>
+   </chunk>
+
+   <chunk>
+    <name>brake-right</name>
+    <type>double</type>
+    <node>/controls/gear/brake-right</node>
+   </chunk>
+
+   <chunk>
+    <name>brake-parking</name>
+    <type>double</type>
+    <node>/controls/gear/brake-parking</node>
+   </chunk>
+
+   <chunk>
+    <name>steering</name>
+    <type>double</type>
+    <node>/controls/gear/steering</node>
+   </chunk>
+
+   <chunk>
+    <name>gear-down</name>
+    <type>double</type>
+    <node>/controls/gear/gear-down</node>
+   </chunk>
+
+   <!-- Hydraulics -->
+   <chunk>
+    <name>engine-pump</name>
+    <type>double</type>
+    <node>/controls/hydraulic/system[0]/engine-pump</node>
+   </chunk>
+   <chunk>
+    <name>engine-pump</name>
+    <type>double</type>
+    <node>/controls/hydraulic/system[1]/engine-pump</node>
+   </chunk>
+
+   <chunk>
+    <name>electric-pump</name>
+    <type>double</type>
+    <node>/controls/hydraulic/system[0]/electric-pump</node>
+   </chunk>
+   <chunk>
+    <name>electric-pump</name>
+    <type>double</type>
+    <node>/controls/hydraulic/system[1]/electric-pump</node>
+   </chunk>
+
+   <!-- Electric -->
+   <chunk>
+    <name>battery-switch</name>
+    <type>double</type>
+    <node>/controls/electric/battery-switch</node>
+   </chunk>
+
+   <chunk>
+    <name>external-power</name>
+    <type>double</type>
+    <node>/controls/electric/external-power</node>
+   </chunk>
+
+   <chunk>
+    <name>APU-generator</name>
+    <type>double</type>
+    <node>/controls/electric/APU-generator</node>
+   </chunk>
+
+   <-- Autoflight -->
+   <chunk>
+    <name>engage</name>
+    <type>double</type>
+    <node>/controls/autoflight/autopilot[0]/engage</node>
+   </chunk>
+
+   <chunk>
+    <name>heading-select</name>
+    <type>double</type>
+    <node>/controls/autoflight/heading-select</node>
+   </chunk>
+
+   <chunk>
+    <name>altitude-select</name>
+    <type>double</type>
+    <node>/controls/autoflight/altitude-select</node>
+   </chunk>
+
+   <chunk>
+    <name>bank-angle-select</name>
+    <type>double</type>
+    <node>/controls/autoflight/bank-angle-select</node>
+   </chunk>
+
+   <chunk>
+    <name>vertical-speed-select</name>
+    <type>double</type>
+    <node>/controls/autoflight/vertical-speed-select</node>
+   </chunk>
+
+   <chunk>
+    <name>speed-select</name>
+    <type>double</type>
+    <node>/controls/autoflight/speed-select</node>
+   </chunk>
+
+   <!-- Position -->
+   <chunk>
+    <name>latitude-deg</name>
+    <type>double</type>
+    <node>/position/latitude-deg</node>
+   </chunk>
+
+   <chunk>
+    <name>longitude-deg</name>
+    <type>double</type>
+    <node>/position/longitude-deg</node>
+   </chunk>
+
+   <chunk>
+    <name>altitude-ft</name>
+    <type>double</type>
+    <node>/position/altitude-ft</node>
+   </chunk>
+
+   <!-- Orientation -->
+   <chunk>
+    <name>roll-deg</name>
+    <type>double</type>
+    <node>/orientation/roll-deg</node>
+   </chunk>
+
+   <chunk>
+    <name>pitch-deg</name>
+    <type>double</type>
+    <node>/orientation/pitch-deg</node>
+   </chunk>
+
+   <chunk>
+    <name>heading-deg</name>
+    <type>double</type>
+    <node>/orientation/heading-deg</node>
+   </chunk>
+
+   <chunk>
+    <name>side-slip-deg</name>
+    <type>double</type>
+    <node>/orientation/side-slip-deg</node>
+   </chunk>
+
+  </input>
+
+ </generic>
+
+</PropertyList>

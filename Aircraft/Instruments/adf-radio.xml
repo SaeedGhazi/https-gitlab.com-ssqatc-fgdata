@@ -271,7 +271,7 @@ properties' values.
    <h>24</h>
    <binding>
     <command>property-adjust</command>
-    <property alias="../../../../params/adf-freq-selected-prop"/>
+    <property alias="../../../../params/adf-freq-standby-prop"/>
     <step>-1</step>
     <min>100</min>
     <max>1299</max>
@@ -288,8 +288,8 @@ properties' values.
    <h>24</h>
    <binding>
     <command>property-adjust</command>
-    <property alias="../../../../params/adf-freq-selected-prop"/>
-    <step>-25</step>
+    <property alias="../../../../params/adf-freq-standby-prop"/>
+    <step>-100</step>
     <min>100</min>
     <max>1299</max>
     <wrap>1</wrap>
@@ -305,7 +305,7 @@ properties' values.
    <h>24</h>
    <binding>
     <command>property-adjust</command>
-    <property alias="../../../../params/adf-freq-selected-prop"/>
+    <property alias="../../../../params/adf-freq-standby-prop"/>
     <step>1</step>
     <min>100</min>
     <max>1299</max>
@@ -322,8 +322,8 @@ properties' values.
    <h>24</h>
    <binding>
     <command>property-adjust</command>
-    <property alias="../../../../params/adf-freq-selected-prop"/>
-    <step>25</step>
+    <property alias="../../../../params/adf-freq-standby-prop"/>
+    <step>100</step>
     <min>100</min>
     <max>1299</max>
     <wrap>1</wrap>

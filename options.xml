@@ -901,7 +901,7 @@
 
    <option>
     <name>log-level</name>
-    <arg>n</arg>
+    <arg>{bulk,debug,info,warn,alert}</arg>
     <description>strings/log-level-desc</description>
    </option>
 

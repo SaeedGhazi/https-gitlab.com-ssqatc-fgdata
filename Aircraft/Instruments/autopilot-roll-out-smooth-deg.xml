@@ -42,7 +42,7 @@ and control instrument
   <layer>
    <name>gauge face</name>
    <texture>
-    <path>Aircraft/Instruments/Textures/faces-LE4-hi.rgb</path>
+    <path>Aircraft/Instruments/Textures/faces-LE4.rgb</path>
     <x1>0.5</x1>
     <x2>1.0</x2>
     <y1>0.0</y1>

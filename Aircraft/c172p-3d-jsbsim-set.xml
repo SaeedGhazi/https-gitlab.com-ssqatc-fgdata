@@ -26,7 +26,7 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
    <config>
      <x-offset-m archive="y">-0.18</x-offset-m>
      <y-offset-m archive="y">0.30</y-offset-m>
-     <z-offset-m archive="y">0.4</z-offset-m>
+     <z-offset-m archive="y">0.45</z-offset-m>
      <pitch-offset-deg>-12</pitch-offset-deg>
    </config>
   </view>

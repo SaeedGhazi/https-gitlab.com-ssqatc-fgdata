@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+A-4D simulation config.  This file ties together all
+the components used by FGFS to represent the aircraft.
+
+For more details see UIUC/a4-v1-nl/README.a4.html
+
+May 18, 2003 Michael Selig, http://www.uiuc.edu/~m-selig
+************************************************************************
+-->
+
+<PropertyList>
+
+ <sim>
+
+  <description>A4D (A-4C) Skyhawk attack aircraft (UIUC aero model)</description>
+
+  <flight-model>larcsim</flight-model>
+  <aero>uiuc</aero>
+  <uiuc-type>uiuc-jet</uiuc-type>
+  <aircraft-dir>Aircraft/UIUC/a4-v1-nl</aircraft-dir>
+
+  <systems>
+   <electrical>
+    <path>Aircraft/Generic/generic-electrical.xml</path>
+   </electrical>
+  </systems> 
+  
+  <sound>
+   <audible>true</audible>
+   <path>Aircraft/a4/Sounds/uiuc/a4-sound-uiuc.xml</path>
+  </sound>
+
+  <panel>
+   <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
+   <visibility>true</visibility>
+  </panel>
+
+  <panel_2>
+   <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
+  </panel_2>
+
+  <model>
+   <path>Aircraft/a4/Models/a4-blue-uiuc.xml</path>
+  </model>
+
+
+ </sim>
+</PropertyList>

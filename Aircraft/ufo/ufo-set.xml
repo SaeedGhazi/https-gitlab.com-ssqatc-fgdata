@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+Cessna 172 simulation config. This files ties together all the components
+used by FGFS to represent the C172. Components include the flight data 
+model, instrument panel, and external 3D model.
+3D models can be downloaded from http://home.t-online.de/home/Wolfram.Kuss/
+
+October 23 2001 John Check, fgpanels@rockfish.net
+************************************************************************
+-->
+
+<PropertyList>
+
+ <sim>
+
+  <description>UFO from the 'White Project' of the UNESCO</description>
+ 
+  <flight-model>ufo</flight-model>
+
+  <sound>
+   <audible>true</audible>
+   <path>Aircraft/ufo/ufo-sound.xml</path>
+  </sound>
+
+  <panel>
+   <visibility>false</visibility>
+  </panel>
+
+  <model>
+   <path>Aircraft/ufo/Models/ufo.xml</path>
+  </model>
+
+ </sim>
+
+</PropertyList>

@@ -34,17 +34,29 @@ May 18, 2003 Michael Selig, http://www.uiuc.edu/~m-selig
 
   <panel>
    <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
-   <visibility>true</visibility>
+   <visibility>false</visibility>
   </panel>
 
   <panel_2>
    <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
   </panel_2>
 
+<!-- uncomment for 3D cockpit
+   <view n="0">
+    <internal archive="y">true</internal>
+    <config>
+     <x-offset-m archive="y">0</x-offset-m>
+     <y-offset-m archive="y">0.82</y-offset-m>
+     <z-offset-m archive="y">-2.82</z-offset-m>
+     <pitch-offset-deg>-17</pitch-offset-deg>
+     <default-field-of-view-deg>60</default-field-of-view-deg>
+    </config>
+   </view>
+-->
+
   <model>
    <path>Aircraft/a4/Models/a4-blue-uiuc.xml</path>
   </model>
-
 
  </sim>
 </PropertyList>

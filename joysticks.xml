@@ -26,6 +26,7 @@ Joystick binding definitions.
  <js-named include="Input/Joysticks/Logitech/wingman-force-3d.xml"/>
  <js-named include="Input/Joysticks/Logitech/wingman-rumblepad-usb.xml"/>
  <js-named include="Input/Joysticks/Logitech/extreme-3d-win.xml"/>
+ <js-named include="Input/Joysticks/Logitech/extreme-3d-pro.xml"/>
  
  <!-- Microsoft devices -->
  <js-named include="Input/Joysticks/Microsoft/sidewinder.xml"/>
@@ -43,6 +44,7 @@ Joystick binding definitions.
  <!-- ThrustMaster devices -->
  <js-named include="Input/Joysticks/ThrustMaster/FCS.xml"/>
  <js-named include="Input/Joysticks/ThrustMaster/Attack-Throttle.xml"/>
+ <js-named include="Input/Joysticks/ThrustMaster/Top-Gun-Afterburner.xml"/>
 
  <!-- Lew Engineering RCJOY device for various RC transmitters.  http://www.leweng.com -->
  <js-named include="Input/Joysticks/LewEngineering/RC-transmitter-hitecLaser4.xml"/>

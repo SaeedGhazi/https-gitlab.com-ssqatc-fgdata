@@ -1,0 +1,260 @@
+<?xml version="1.0" ?>
+
+<!--
+************************************************************************
+* Bindings for Logitech Extreme Digital 3D Pro joystick.
+*
+*
+* Axis 0: ailerons
+* Axis 1: elevator
+* Axis 2 (twist): rudder
+* Axis 3 (slider): throttle
+* Axes 4 and 5 (hat): view direction
+*
+* Buttons according to the numbers printed on the joystick:
+* Button 1: all brakes
+* Button 4: flap down
+* Button 6: flap up
+* Button 5: elevator trim up
+* Button 3: elevator trim down
+* Button 11: left brake only
+* Button 12: right brake only
+************************************************************************
+$Id$
+-->
+
+<PropertyList>
+
+ <name>Logitech Extreme Digital 3D Pro</name>
+
+ <axis n="0">
+  <desc>Aileron</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/flight/aileron</property>
+   <squared type="bool">true</squared>
+  </binding>
+ </axis>
+
+ <axis n="1">
+  <desc>Elevator</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/flight/elevator</property>
+   <factor type="double">-1.0</factor>
+   <squared type="bool">true</squared>
+  </binding>
+ </axis>
+
+ <axis n="2">
+  <desc>Rudder</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/flight/rudder</property>
+   <factor type="double">1.0</factor>
+  </binding>
+ </axis>
+
+ <axis n="3">
+  <desc>Throttle</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[0]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[1]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[2]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[3]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[4]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[5]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[6]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/engines/engine[7]/throttle</property>
+   <offset type="double">-1.0</offset>
+   <factor type="double">-0.5</factor>
+  </binding>
+ </axis>
+
+ <axis n="4">
+  <desc>View Direction</desc>
+  <low>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
+    <step type="double">5.0</step>
+   </binding>
+  </low>
+  <high>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
+    <step type="double">-5.0</step>
+   </binding>
+  </high>
+ </axis>
+
+ <axis n="5">
+  <desc>View Elevation</desc>
+  <low>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-pitch-offset-deg</property>
+    <step type="double">5.0</step>
+   </binding>
+  </low>
+  <high>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-pitch-offset-deg</property>
+    <step type="double">-5.0</step>
+   </binding>
+  </high>
+ </axis>
+
+ <button n="0">
+  <desc>Brakes</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/gear/wheel[0]/brake</property>
+   <value type="double">1.0</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/gear/wheel[1]/brake</property>
+   <value type="double">1.0</value>
+  </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/gear/wheel[2]/brake</property>
+   <value type="double">1.0</value>
+  </binding>
+  <mod-up>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/gear/wheel[0]/brake</property>
+    <value type="double">0.0</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/gear/wheel[1]/brake</property>
+    <value type="double">0.0</value>
+   </binding>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/gear/wheel[2]/brake</property>
+    <value type="double">0.0</value>
+   </binding>
+  </mod-up>
+ </button>
+
+ <button n="4">
+  <desc>Elevator trim up</desc>
+  <repeatable type="bool">true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/flight/elevator-trim</property>
+   <step type="double">0.001</step>
+  </binding>
+ </button>
+
+ <button n="2">
+  <desc>Elevator trim down</desc>
+  <repeatable type="bool">true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/flight/elevator-trim</property>
+   <step type="double">-0.001</step>
+  </binding>
+ </button>
+
+ <button n="3">
+  <desc>Flaps down</desc>
+  <repeatable>false</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/flight/flaps</property>
+   <step type="double">-0.34</step>
+  </binding>
+ </button>
+
+ <button n="5">
+  <desc>Flaps up</desc>
+  <repeatable>false</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/flight/flaps</property>
+   <step type="double">0.34</step>
+  </binding>
+ </button>
+
+ <button n="11">
+  <desc>Right brake</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/gear/wheel[1]/brake</property>
+   <value type="double">1.0</value>
+  </binding>
+  <mod-up>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/gear/wheel[1]/brake</property>
+    <value type="double">0.0</value>
+   </binding>
+  </mod-up>
+ </button>
+
+ <button n="10">
+  <desc>Left brake</desc>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/gear/wheel[0]/brake</property>
+   <value type="double">1.0</value>
+  </binding>
+  <mod-up>
+   <binding>
+    <command>property-assign</command>
+    <property>/controls/gear/wheel[0]/brake</property>
+    <value type="double">0.0</value>
+   </binding>
+  </mod-up>
+ </button>
+
+</PropertyList>
+
+

@@ -10,17 +10,18 @@ Only a few stick controls have been mapped here:
  + Stick button "A":    Gear toggle
  + Stick button "C":    Reset view (hackish)
 
-Linux/Windows Axis Numbers:
-  0   Roll (positive == right)
-  1   Pitch (positive == down/back/nose-up)
-  2/5 top "rotary dial" on the throttle (positive == CCW)
-  3   Rocker switch ("rudder" control) on the throttle (positive == right)
-  4/2 Throttle (positive == back/down/idle)
-  5/4 Bottom "rotary dial" on the throttle (positive == CW)
-  6   Lower right hat horizontal axis (positive == right)
-  7   Lower right hat vertical axis (positive == down)
+Linux/Windows/Mac Axis Numbers:
+  0   	Roll (positive == right) 
+  1  	Pitch (positive == down/back/nose-up)
+  2/5/4 top "rotary dial" on the throttle (positive == CCW)
+  3   	Rocker switch ("rudder" control) on the throttle (positive == right)
+  4/2/2 Throttle (positive == back/down/idle)
+  5/4/? Bottom "rotary dial" on the throttle (positive == CW)
+  	Strange this axis doesn't seem to exist on Mac OS X!
+  6/6/5 Lower right hat horizontal axis (positive == right)
+  7/7/6 Lower right hat vertical axis (positive == down (Mac positive is UP))
 
-Button Numbers (Identical b/w Linux/Windows):
+Button Numbers (Identical b/w Linux/Windows/Mac):
  0  Trigger
  1  Stick top "A" switch
  2  Stick top "B" switch
@@ -51,6 +52,7 @@ Button Numbers (Identical b/w Linux/Windows):
 $Id$
 -->
 <PropertyList>
+ <name>Saitek X45</name>
  <name>Saitek Saitek X45</name>
  <name>Saitek X45 Flight Controller USB</name>
 
@@ -98,6 +100,11 @@ $Id$
  <!-- View Direction Hat -->
 
  <axis n="6">
+  <number>
+   <unix>6</unix>
+   <windows>6</windows>
+   <mac>5</mac>
+  </number>
   <desc>View Direction</desc>
   <low>
    <repeatable>true</repeatable>
@@ -115,8 +122,13 @@ $Id$
   </high>
  </axis>
 
- <axis n="7">
+ <axis>
   <desc>View Elevation</desc>
+  <number>
+   <unix>7</unix>
+   <windows>7</windows>
+   <mac>6</mac>
+  </number>
   <low>
    <repeatable>true</repeatable>
    <binding>
@@ -138,6 +150,7 @@ $Id$
   <number>
    <unix>4</unix>
    <windows>2</windows>
+   <mac>2</mac>
   </number>
   <binding>
    <command>nasal</command>
@@ -162,6 +175,7 @@ $Id$
   <number>
    <unix>5</unix>
    <windows>4</windows>
+<!-- <mac>???</mac> -->
   </number>
   <binding>
    <command>nasal</command>

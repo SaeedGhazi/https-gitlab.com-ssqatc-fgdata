@@ -45,6 +45,7 @@ Joystick binding definitions.
  <js-named include="Input/Joysticks/ThrustMaster/FCS.xml"/>
  <js-named include="Input/Joysticks/ThrustMaster/Attack-Throttle.xml"/>
  <js-named include="Input/Joysticks/ThrustMaster/Top-Gun-Afterburner.xml"/>
+ <js-named include="Input/Joysticks/ThrustMaster/Top-Gun-Fox2-Pro-USB.xml"/>
 
  <!-- Lew Engineering RCJOY device for various RC transmitters.  http://www.leweng.com -->
  <js-named include="Input/Joysticks/LewEngineering/RC-transmitter-hitecLaser4.xml"/>

@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+
+<!-- BIG SUR ARRIVAL, BSR.BSR2 to KSFO, Runway 28L                  
+     The arrival can be found at http://www.airnav.com/airport/KSFO 
+     Format:                                                         
+       <NAME>    Waypoint name.                                       
+       <LAT>     Latitude, degrees                                    
+       <LON>     Longitude, degrees                                   
+       <ALT>     Altitude, feet                                       
+       <CROSSAT> Crossing altitude, feet                              
+       <KTAS>    Knots true airspeed
+-->
+ 
+<PropertyList>
+
+ <FLIGHTPLAN>
+
+  <WPT>
+   <NAME>BSR</NAME>
+   <LAT>36.181333</LAT>
+   <LON>-121.642166</LON>
+   <ALT>26000.0</ALT>
+   <KTAS>380</KTAS>
+  </WPT>
+
+  <WPT>
+   <NAME>CARME</NAME>
+   <LAT>36.455167</LAT>
+   <LON>-121.879666</LON>
+   <CROSSAT>20000.0</CROSSAT>
+   <KTAS>350</KTAS>
+  </WPT>
+
+  <WPT>
+   <NAME>BOLDR</NAME>
+   <LAT>37.17087</LAT>
+   <LON>-122.0761666</LON>
+   <CROSSAT>10000.0</CROSSAT>
+   <KTAS>275</KTAS>
+  </WPT>
+ 
+  <WPT>
+   <NAME>MENLO</NAME>
+   <LAT>37.463666</LAT>
+   <LON>-122.1536666</LON>
+   <CROSSAT>10000.0</CROSSAT>
+   <KTAS>250</KTAS>
+  </WPT>
+
+  <WPT>
+   <NAME>HEMAN</NAME>
+   <LAT>37.53337</LAT>
+   <LON>-122.17219</LON>
+   <CROSSAT>3200.0</CROSSAT>
+   <KTAS>200</KTAS>
+  </WPT>
+
+  <WPT>
+   <NAME>OKDUE</NAME>
+   <LAT>37.56996</LAT>
+   <LON>-122.259008</LON>
+   <CROSSAT>1800.0</CROSSAT>
+   <KTAS>150</KTAS>
+  </WPT>
+
+  <WPT>
+   <NAME>28L</NAME>
+   <LAT>37.611707</LAT>
+   <LON>-122.35834</LON>
+   <CROSSAT>13.0</CROSSAT>
+   <KTAS>20</KTAS>
+  </WPT>
+
+  <WPT>
+   <NAME>END</NAME>
+   <LAT>37.625288</LAT>
+   <LON>-122.390717</LON>
+   <CROSSAT>6.0</CROSSAT>
+  </WPT>
+
+  <WPT>
+   <NAME>EOF</NAME>
+  </WPT>
+
+ </FLIGHTPLAN>
+
+</PropertyList>

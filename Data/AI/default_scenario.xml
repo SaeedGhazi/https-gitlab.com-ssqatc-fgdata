@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+ 
+<PropertyList>
+
+ <SCENARIO>
+
+  <ENTRY>
+   <CALLSIGN>United 720</CALLSIGN>
+   <CLASS>JET_TRANSPORT</CLASS>
+   <MODEL>Aircraft/737/Models/boeing733.xml</MODEL>
+   <FLIGHTPLAN>KSFO_bigsur28L.xml</FLIGHTPLAN>
+  </ENTRY>
+
+ </SCENARIO>
+
+</PropertyList>

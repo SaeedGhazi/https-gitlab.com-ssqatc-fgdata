@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+
+<!-- MODESTO ARRIVAL, to KSFO, Runway 28R                  
+     The arrival can be found at http://www.airnav.com/airport/KSFO 
+     Format:                                                         
+       <NAME>    Waypoint name.                                       
+       <LAT>     Latitude, degrees                                    
+       <LON>     Longitude, degrees                                   
+       <ALT>     Altitude, feet                                       
+       <CROSSAT> Crossing altitude, feet                              
+       <KTAS>    Knots true airspeed
+-->
+ 
+<PropertyList>
+
+ <FLIGHTPLAN>
+
+  <WPT>
+   <NAME>MOD</NAME>
+   <LAT>37.627333</LAT>
+   <LON>-120.957833</LON>
+   <ALT>20000.0</ALT>
+   <KTAS>350</KTAS>
+  </WPT>
+
+  <WPT>
+   <NAME>GROAN</NAME>
+   <LAT>37.590333</LAT>
+   <LON>-121.285167</LON>
+   <CROSSAT>15000.0</CROSSAT>
+   <KTAS>310</KTAS>
+  </WPT>
+
+  <WPT>
+   <NAME>CEDES</NAME>
+   <LAT>37.550833</LAT>
+   <LON>-121.624667</LON>
+   <CROSSAT>11000.0</CROSSAT>
+   <KTAS>260</KTAS>
+  </WPT>
+ 
+  <WPT>
+   <NAME>FAITH</NAME>
+   <LAT>37.401167</LAT>
+   <LON>-121.861833</LON>
+   <CROSSAT>5500.0</CROSSAT>
+   <KTAS>190</KTAS>
+  </WPT>
+
+  <WPT>
+   <NAME>DUMBA</NAME>
+   <LAT>37.503517</LAT>
+   <LON>-122.096147</LON>
+   <CROSSAT>4100.0</CROSSAT>
+   <KTAS>170</KTAS>
+  </WPT>
+
+  <WPT>
+   <NAME>AXMUL</NAME>
+   <LAT>37.571725</LAT>
+   <LON>-122.257717</LON>
+   <CROSSAT>1800.0</CROSSAT>
+   <KTAS>140</KTAS>
+  </WPT>
+
+  <WPT>
+   <NAME>28R</NAME>
+   <LAT>37.61353</LAT>
+   <LON>-122.357138</LON>
+   <CROSSAT>13.0</CROSSAT>
+   <KTAS>20</KTAS>
+  </WPT>
+
+  <WPT>
+   <NAME>END</NAME>
+   <LAT>37.628735</LAT>
+   <LON>-122.393389</LON>
+   <CROSSAT>6.0</CROSSAT>
+  </WPT>
+
+  <WPT>
+   <NAME>EOF</NAME>
+  </WPT>
+
+ </FLIGHTPLAN>
+
+</PropertyList>

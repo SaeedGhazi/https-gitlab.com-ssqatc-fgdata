@@ -728,7 +728,7 @@
    <option>
     <name>generic</name>
     <arg>params</arg>
-    <description>strings/serial-desc</description>
+    <description>strings/generic-desc</description>
    </option>
 
    <option>

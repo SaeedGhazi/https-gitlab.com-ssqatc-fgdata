@@ -232,7 +232,7 @@
  <native-fdm-desc>Open connection using the FG Native FDM protocol</native-fdm-desc>
  <native-desc>Open connection using the FG Native protocol</native-desc>
  <nmea-desc>Open connection using the NMEA protocol</nmea-desc>
- <serial-desc>Open connection using the serial port protocol</serial-desc>
+ <generic-desc>Open connection using a predefined communication interface and a preselected communication protocol</generic-desc>
  <opengc-desc>Open connection using the OpenGC protocol</opengc-desc>
  <props-desc>Open connection using the interactive property manager</props-desc>
  <pve-desc>Open connection using the PVE protocol</pve-desc>

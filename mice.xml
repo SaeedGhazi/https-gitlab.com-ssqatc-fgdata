@@ -151,6 +151,10 @@ The current mode for each mouse is held in the
     <binding>
      <command>property-assign</command>
      <property>/sim/current-view/heading-offset-deg</property>
+     <value type="double">0</value>
+    </binding>
+    <binding>
+     <command>property-assign</command>
      <property>/sim/current-view/pitch-offset-deg</property>
      <value type="double">0</value>
     </binding>
@@ -219,3 +223,4 @@ The current mode for each mouse is held in the
  </mouse>
 
 </PropertyList>
+

@@ -1,7 +1,9 @@
-Users Guide to FGInput - Joystick And Keyboard Bindings For FlightGear
-Or
-"The document formerly know as The Users Guide to Joystick Usage Under
-FlightGear Flight Simulator"
+<HTML>
+<HEAD></HEAD>
+<body>
+<H1>Users Guide to FGInput - Joystick And Keyboard Bindings For FlightGear</H1>
+Or The document formerly know as 
+<H2>The Users Guide to Joystick Usage Under FlightGear Flight Simulator"</H2>
 
 version 0.7.7.3 07/02/2001
 Author John Check <j4strngs@rockfish.net>
@@ -582,4 +584,5 @@ no <mod-up> tag, so it *does* work like a parking brake.
    <property>/controls/brakes[2]</property>
   </binding>
  </key>
-
+</BODY>
+</HTML>

@@ -20,6 +20,7 @@
    <path>Aircraft/a4/a4-sound.xml</path>
   </sound>
 
+  <!-- virtual-cockpit archive="y">true</virtual-cockpit -->
   <panel>
    <path>Aircraft/f16/Panels/f16-2d-panel.xml</path>
    <visibility archive="y">true</visibility>
@@ -34,12 +35,13 @@
   </hud>
 
   <model>
-   <path>Aircraft/a4/Models/a4-blue.xml</path>
+   <path>Aircraft/f16/Models/f16-block32.xml</path>
   </model>
 
   <view>
    <config>
-     <pitch-offset-deg>-10.0</pitch-offset-deg>
+     <pitch-offset-deg>-11.8</pitch-offset-deg>
+     <default-field-of-view-deg>60</default-field-of-view-deg>
    </config>
   </view>
 

@@ -287,7 +287,7 @@ properties' values.
    <binding>
     <command>property-adjust</command>
     <property>/instrumentation/altimeter/setting-inhg</property>
-    <step>0.1</step>
+    <step>0.01</step>
     <min>26.0</min>
     <max>33.0</max>
     <wrap>false</wrap>

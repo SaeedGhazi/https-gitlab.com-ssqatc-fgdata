@@ -683,6 +683,10 @@ Started September 2000 by David Megginson, david@megginson.com
   </log>
  </logging>
 
+ <test>
+  <scene_lighting type="bool">true</scene_lighting>
+ </test>
+
  </PropertyList>
 
 <!-- end of preferences.xml -->

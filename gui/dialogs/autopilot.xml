@@ -43,13 +43,13 @@
   <label>Heading</label>
  </text>
 
- <input>
+ <checkbox>
   <x>150</x>
   <y>200</y>
-  <width>75</width>
-  <height>25</height>
+  <width>12</width>
+  <height>12</height>
   <property>/autopilot/locks/heading</property>
- </input>
+ </checkbox>
 
  <input>
   <x>250</x>
@@ -65,13 +65,13 @@
   <label>Altitude</label>
  </text>
 
- <input>
+ <checkbox>
   <x>150</x>
   <y>170</y>
-  <width>75</width>
-  <height>25</height>
+  <width>12</width>
+  <height>12</height>
   <property>/autopilot/locks/altitude</property>
- </input>
+ </checkbox>
 
  <input>
   <x>250</x>
@@ -87,13 +87,13 @@
   <label>VOR 1</label>
  </text>
 
- <input>
+ <checkbox>
   <x>150</x>
   <y>140</y>
-  <width>75</width>
-  <height>25</height>
+  <width>12</width>
+  <height>12</height>
   <property>/autopilot/locks/nav</property>
- </input>
+ </checkbox>
 
  <text>
   <x>10</x>
@@ -101,13 +101,13 @@
   <label>Glideslope</label>
  </text>
 
- <input>
+ <checkbox>
   <x>150</x>
   <y>110</y>
-  <width>75</width>
-  <height>25</height>
+  <width>12</width>
+  <height>12</height>
   <property>/autopilot/locks/glide-slope</property>
- </input>
+ </checkbox>
 
  <text>
   <x>10</x>
@@ -115,13 +115,13 @@
   <label>Autothrottle</label>
  </text>
 
- <input>
+ <checkbox>
   <x>150</x>
   <y>80</y>
-  <width>75</width>
-  <height>25</height>
+  <width>12</width>
+  <height>12</height>
   <property>/autopilot/locks/auto-throttle</property>
- </input>
+ </checkbox>
 
  <text>
   <x>10</x>
@@ -129,13 +129,13 @@
   <label>Terrain Follow</label>
  </text>
 
- <input>
+ <checkbox>
   <x>150</x>
   <y>50</y>
-  <width>75</width>
-  <height>25</height>
+  <width>12</width>
+  <height>12</height>
   <property>/autopilot/locks/terrain</property>
- </input>
+ </checkbox>
 
 
  <!-- Button Group -->

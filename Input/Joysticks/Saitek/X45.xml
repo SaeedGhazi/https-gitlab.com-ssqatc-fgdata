@@ -78,104 +78,43 @@ $Id$
    <command>property-scale</command>
    <property>/controls/flight/rudder</property>
   </binding>
+
   <binding>
-    <condition>
-     <property>/input/joysticks/js[0]/locks/m3</property>
-    </condition>
-    <command>property-scale</command>
-    <property>/controls/gear/wheel[0]/brake</property>
-    <factor type="double">-1.0</factor>
-    <min type="double">0.0</min>
-    <max type="double">1.0</max>
-  </binding>
-  <binding>
-    <condition>
-     <property>/input/joysticks/js[0]/locks/m3</property>
-    </condition>
-    <command>property-scale</command>
-    <property>/controls/gear/wheel[1]/brake</property>
-    <min type="double">0.0</min>
-    <max type="double">1.0</max>
+   <command>nasal</command>
+   <script><![CDATA[
+    # In mode 3 (taxiing), map the wheelbrakes
+    if(getprop("/input/joysticks/js[0]/saitek-x45-mode") == 3) {
+        val = cmdarg().getNode("setting").getValue();
+        setprop("/controls/gear/wheel[0]/brake", 0);
+        setprop("/controls/gear/wheel[1]/brake", 0);
+        if(val > 0) { setprop("/controls/gear/wheel[1]/brake", val); }
+        else        { setprop("/controls/gear/wheel[0]/brake", -val); }
+    }
+   ]]></script>
   </binding>
  </axis>
 
  <axis n="4">
   <desc>Throttle</desc>
   <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[0]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[1]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[2]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[3]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[4]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[5]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[6]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[7]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
+   <command>nasal</command>
+   <script>controls.throttleAxis()</script>
   </binding>
  </axis>
 
  <axis n="2">
   <desc>Mixture</desc>
   <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[0]/mixture</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[1]/mixture</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
+   <command>nasal</command>
+   <script>controls.mixtureAxis()</script>
   </binding>
  </axis>
 
  <axis n="5">
   <desc>Propeller Advance</desc>
   <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[0]/propeller-pitch</property>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[1]/propeller-pitch</property>
+   <command>nasal</command>
+   <script>controls.propellerAxis(-1)</script>
   </binding>
  </axis>
 
@@ -186,17 +125,15 @@ $Id$
   <low>
    <repeatable>true</repeatable>
    <binding>
-    <command>property-adjust</command>
-    <property>/sim/current-view/goal-heading-offset-deg</property>
-    <step type="double">1.0</step>
+    <command>nasal</command>
+    <script>view.panViewDir(1)</script>
    </binding>
   </low>
   <high>
    <repeatable>true</repeatable>
    <binding>
-    <command>property-adjust</command>
-    <property>/sim/current-view/goal-heading-offset-deg</property>
-    <step type="double">-1.0</step>
+    <command>nasal</command>
+    <script>view.panViewDir(-1)</script>
    </binding>
   </high>
  </axis>
@@ -206,79 +143,41 @@ $Id$
   <low>
    <repeatable>true</repeatable>
    <binding>
-    <command>property-adjust</command>
-    <property>/sim/current-view/goal-pitch-offset-deg</property>
-    <step type="double">1.0</step>
+    <command>nasal</command>
+    <script>view.panViewPitch(1)</script>
    </binding>
   </low>
   <high>
    <repeatable>true</repeatable>
    <binding>
-    <command>property-adjust</command>
-    <property>/sim/current-view/goal-pitch-offset-deg</property>
-    <step type="double">-1.0</step>
+    <command>nasal</command>
+    <script>view.panViewPitch(-1)</script>
    </binding>
   </high>
  </axis>
 
- <!-- Reset the view parameters with button C on the front of the  -->
- <!-- stick.  This is a hack that matches the A-4 cockpit settings -->
- <!-- that I like.  There needs to be a place to put default view  -->
- <!-- settings somewhere. -->
-
  <button n="7">
   <desc>Reset View</desc>
   <binding>
-   <command>property-assign</command>
-   <property>/sim/current-view/goal-heading-offset-deg</property>
-   <property>/sim/current-view/config/heading-offset-deg</property>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/current-view/goal-pitch-offset-deg</property>
-   <property>/sim/current-view/config/pitch-offset-deg</property>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/current-view/field-of-view</property>
-   <property>/sim/current-view/config/default-field-of-view-deg</property>
+   <command>nasal</command>
+   <script>view.resetView()</script>
   </binding>
  </button>
-
- <!-- The trigger operates the brakes -->
 
  <button n="0">
   <desc>Brakes</desc>
   <binding>
-   <command>property-assign</command>
-   <property>/controls/gear/wheel[0]/brake</property>
-   <value type="double">1.0</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/controls/gear/wheel[1]/brake</property>
-   <value type="double">1.0</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/controls/gear/wheel[2]/brake</property>
-   <value type="double">1.0</value>
+   <command>nasal</command>
+   <script>
+    props.setAll("/controls/gear/wheel", "brake", 1);
+   </script>
   </binding>
   <mod-up>
-   <binding>
-    <command>property-assign</command>
-    <property>/controls/gear/wheel[0]/brake</property>
-    <value type="double">0.0</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/controls/gear/wheel[1]/brake</property>
-    <value type="double">0.0</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/controls/gear/wheel[2]/brake</property>
-    <value type="double">0.0</value>
+  <binding>
+    <command>nasal</command>
+    <script>
+     props.setAll("/controls/gear/wheel", "brake", 0);
+    </script>
    </binding>
   </mod-up>
  </button>
@@ -294,91 +193,28 @@ $Id$
  </button>
 
 <!-- mode switch (buttons 8-10) -->
-<!--
-Note Mode 1 should be considered the default mode, for anything that accesses the 
-values set here.  Reason being is the values will not be preset.
-
-Mode 1 - Normal
-Mode 2 - 
-Mode 3 - Taxi Mode
--->
 
  <button n="8">
   <desc>Mode 1</desc>
   <binding>
-   <command>property-assign</command>
-   <property>/input/joysticks/js[0]/locks/m1</property>
-   <value type="bool">true</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/input/joysticks/js[0]/locks/m2</property>
-   <value type="bool">false</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/input/joysticks/js[0]/locks/m3</property>
-   <value type="bool">false</value>
+   <command>nasal</command>
+   <script>setprop("/input/joysticks/js[0]/saitek-x45-mode", 1)</script>
   </binding>
  </button>
 
  <button n="9">
   <desc>Mode 2</desc>
   <binding>
-   <command>property-assign</command>
-   <property>/input/joysticks/js[0]/locks/m1</property>
-   <value type="bool">false</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/input/joysticks/js[0]/locks/m2</property>
-   <value type="bool">true</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/input/joysticks/js[0]/locks/m3</property>
-   <value type="bool">false</value>
+   <command>nasal</command>
+   <script>setprop("/input/joysticks/js[0]/saitek-x45-mode", 2)</script>
   </binding>
  </button>
 
  <button n="10">
   <desc>Mode 3</desc>
   <binding>
-   <command>property-assign</command>
-   <property>/input/joysticks/js[0]/locks/m1</property>
-   <value type="bool">false</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/input/joysticks/js[0]/locks/m2</property>
-   <value type="bool">false</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/input/joysticks/js[0]/locks/m3</property>
-   <value type="bool">true</value>
-  </binding>
- </button>
-
-
- <!-- Trim on the throttle too (Andy finds this more comfortable) -->
-
- <button n="25">
-  <desc>Elevator trim up</desc>
-  <repeatable type="bool">true</repeatable>
-  <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/elevator-trim</property>
-   <step type="double">-0.001</step>
-  </binding>
- </button>
- <button n="23">
-  <desc>Elevator trim down</desc>
-  <repeatable type="bool">true</repeatable>
-  <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/elevator-trim</property>
-   <step type="double">0.001</step>
+   <command>nasal</command>
+   <script>setprop("/input/joysticks/js[0]/saitek-x45-mode", 3)</script>
   </binding>
  </button>
 
@@ -388,9 +224,8 @@ Mode 3 - Taxi Mode
   <desc>Elevator trim down</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/elevator-trim</property>
-   <step type="double">0.0015</step>
+   <command>nasal</command>
+   <script>controls.elevatorTrim(1)</script>
   </binding>
  </button>
 
@@ -398,9 +233,8 @@ Mode 3 - Taxi Mode
   <desc>Aileron trim right</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/aileron-trim</property>
-   <step type="double">0.0015</step>
+   <command>nasal</command>
+   <script>controls.aileronTrim(1)</script>
   </binding>
  </button>
 
@@ -408,9 +242,8 @@ Mode 3 - Taxi Mode
   <desc>Elevator trim up</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/elevator-trim</property>
-   <step type="double">-0.0015</step>
+   <command>nasal</command>
+   <script>controls.elevatorTrim(-1)</script>
   </binding>
  </button>
 
@@ -418,9 +251,8 @@ Mode 3 - Taxi Mode
   <desc>Aileron trim left</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/aileron-trim</property>
-   <step type="double">-0.0015</step>
+   <command>nasal</command>
+   <script>controls.aileronTrim(-1)</script>
   </binding>
  </button>
 
@@ -429,18 +261,16 @@ Mode 3 - Taxi Mode
  <button n="18">
   <desc>Decrease flaps</desc>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/flaps</property>
-   <step type="double">-0.34</step>
+   <command>nasal</command>
+   <script>controls.stepFlaps(-1)</script>
   </binding>
  </button>
 
  <button n="20">
   <desc>Increase flaps</desc>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/flaps</property>
-   <step type="double">0.34</step>
+   <command>nasal</command>
+   <script>controls.stepFlaps(1)</script>
   </binding>
  </button>
 
@@ -450,9 +280,8 @@ Mode 3 - Taxi Mode
   <desc>Rudder trim right</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/rudder-trim</property>
-   <step type="double">0.0015</step>
+   <command>nasal</command>
+   <script>controls.rudderTrim(1)</script>
   </binding>
  </button>
 
@@ -460,9 +289,8 @@ Mode 3 - Taxi Mode
   <desc>Rudder trim left</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/rudder-trim</property>
-   <step type="double">-0.0015</step>
+   <command>nasal</command>
+   <script>controls.rudderTrim(-1)</script>
   </binding>
  </button>
 

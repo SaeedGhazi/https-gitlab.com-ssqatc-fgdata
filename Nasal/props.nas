@@ -146,6 +146,6 @@ setAll = func {
     if(node == nil) { return; }
     children = node.getChildren();
     foreach(c; children) {
-        c.getNode(arg[1], 1).setValue(arg[2]);
-    }
+        if(c.getName() == name) {
+            c.getNode(arg[1], 1).setValue(arg[2]); }}
 }

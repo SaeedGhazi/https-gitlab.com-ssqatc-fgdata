@@ -47,11 +47,11 @@ Started September 2000 by David Megginson, david@megginson.com
   <instrument-options>
    <nav n="0">
    <has-gs-needle>1</has-gs-needle>
-   <vor-pivots>1</vor-pivots>
+   <needles-pivot>1</needles-pivot>
    </nav>
    <nav n="1">
    <has-gs-needle>0</has-gs-needle>
-   <vor-pivots>1</vor-pivots>
+   <needles-pivot>1</needles-pivot>
    </nav>
    <hsi n="0">
    <has-gs-needle>1</has-gs-needle>

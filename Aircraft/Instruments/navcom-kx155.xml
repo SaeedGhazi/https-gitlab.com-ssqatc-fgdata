@@ -123,36 +123,69 @@ properties' values.
   </layer>
 
   <layer>
-   <name>ident knob pointer</name>
-   <texture>
-    <path>Aircraft/Instruments/Textures/blister.rgb</path>
-    <x1>0.0</x1>
-    <y1>0.1640625</y1>
-    <x2>0.1</x2>
-    <y2>0.328125</y2>
-   </texture>
-   <w>2</w>
-   <h>6</h>
+   <name>morse ident status</name>
+   <condition>
+    <equals>
+    <property alias="../../../../../params/nav-morse-ident-toggle-prop"/>
+    <value>true</value>
+    </equals>
+   </condition>
+   <type>text</type>
+   <point-size>6</point-size>
+   <color>
+    <red>1.0</red>
+    <green>0.5</green>
+    <blue>0.0</blue>
+   </color>
+   <chunks>
+    <chunk>
+     <type>literal</type>
+     <text>ID</text>
+    </chunk>
+   </chunks> 
    <transformations>
     <transformation>
      <type>x-shift</type>
-     <offset>40</offset>
+     <offset>10</offset>
     </transformation>
     <transformation>
      <type>y-shift</type>
-     <offset>-16</offset>
+     <offset>8</offset>
+    </transformation>
+   </transformations>
+  </layer>
+  
+  <layer>
+   <name>ident knob pointer</name>
+   <texture>
+    <path>Aircraft/Instruments/Textures/bendix-kx155.rgb</path>
+    <x1>0.1</x1>
+    <x2>0.2</x2>
+    <y1>0.29298675</y1>
+    <y2>0.3078125</y2>
+   </texture>
+   <w>7</w>
+   <h>4</h>
+   <transformations>
+    <transformation>
+     <type>x-shift</type>
+     <offset>29.5</offset>
+    </transformation>
+    <transformation>
+     <type>y-shift</type>
+     <offset>-27</offset>
     </transformation>
     <transformation>
      <type>rotation</type>
      <property alias="../../../../../params/nav-morse-id-volume-prop"/>
      <min>0</min>
      <max>1</max>
-     <scale>140</scale>
-     <offset>-140</offset>
+     <scale>180</scale>
+     <offset>-60</offset>
     </transformation>
     <transformation>
-    <type>y-shift</type>
-    <offset>3</offset>
+    <type>x-shift</type>
+    <offset>-2</offset>
     </transformation>
    </transformations>
   </layer>
@@ -331,10 +364,10 @@ properties' values.
   <action>
    <name>ident volume increase</name>
    <button>0</button>
-   <x>20</x>
-   <y>-32</y>
-   <w>8</w>
-   <h>16</h>
+   <x>33</x>
+   <y>-36</y>
+   <w>7</w>
+   <h>14</h>
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/nav-morse-id-volume-prop"/>
@@ -347,10 +380,10 @@ properties' values.
   <action>
    <name>ident volume decrease</name>
    <button>0</button>
-   <x>32</x>
-   <y>-32</y>
-   <w>16</w>
-   <h>8</h>
+   <x>24</x>
+   <y>-36</y>
+   <w>7</w>
+   <h>14</h>
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/nav-morse-id-volume-prop"/>
@@ -362,11 +395,11 @@ properties' values.
  
   <action>
    <name>ident volume on/off</name>
-   <button>0</button>
-   <x>-6</x>
-   <y>-30</y>
+   <button>1</button>
+   <x>24</x>
+   <y>-36</y>
    <w>14</w>
-   <h>16</h>
+   <h>14</h>
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/nav-morse-ident-toggle-prop"/>

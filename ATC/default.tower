@@ -1,4 +1,6 @@
 # Flightgear Tower Data
-T  52.8311  -1.32806  306  124.0  50  EGNX  "East Midlands"
-T  34.086114  -118.034719  296  121.2  50  KEMT  "El Monte"
+T  52.8311  -1.32806  306  124.0  50  EGNX  "East-Midlands"
+T  34.086114  -118.034719  296  121.2  50  KEMT  "El-Monte"
+T  37.619  -122.375  11  120.5  50  KSFO  "San-Francisco"  
+T  37.619  -122.375  11  269.1  50  KSFO  "San-Francisco"
 [End]

@@ -2,15 +2,15 @@
  
 <PropertyList>
 
- <SCENARIO>
+ <scenario>
 
-  <ENTRY>
-   <CALLSIGN>United 720</CALLSIGN>
-   <CLASS>JET_TRANSPORT</CLASS>
-   <MODEL>Aircraft/737/Models/boeing733.xml</MODEL>
-   <FLIGHTPLAN>KSFO_bigsur28L.xml</FLIGHTPLAN>
-  </ENTRY>
+  <entry>
+   <callsign>United 721</callsign>
+   <class>JET_TRANSPORT</class>
+   <model>Aircraft/737/Models/boeing733.xml</model>
+   <flightplan>KSFO_modesto28R.xml</flightplan>
+  </entry>
 
- </SCENARIO>
+ </scenario>
 
 </PropertyList>

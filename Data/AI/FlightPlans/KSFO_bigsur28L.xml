@@ -3,85 +3,85 @@
 <!-- BIG SUR ARRIVAL, BSR.BSR2 to KSFO, Runway 28L                  
      The arrival can be found at http://www.airnav.com/airport/KSFO 
      Format:                                                         
-       <NAME>    Waypoint name.                                       
-       <LAT>     Latitude, degrees                                    
-       <LON>     Longitude, degrees                                   
+       <name>    Waypoint name.                                       
+       <lat>     latitude, degrees                                    
+       <lon>     Longitude, degrees                                   
        <ALT>     Altitude, feet                                       
-       <CROSSAT> Crossing altitude, feet                              
-       <KTAS>    Knots true airspeed
+       <crossat> Crossing altitude, feet                              
+       <ktas>    Knots true airspeed
 -->
  
 <PropertyList>
 
- <FLIGHTPLAN>
+ <flightplan>
 
-  <WPT>
-   <NAME>BSR</NAME>
-   <LAT>36.181333</LAT>
-   <LON>-121.642166</LON>
+  <wpt>
+   <name>BSR</name>
+   <lat>36.181333</lat>
+   <lon>-121.642166</lon>
    <ALT>26000.0</ALT>
-   <KTAS>380</KTAS>
-  </WPT>
+   <ktas>380</ktas>
+  </wpt>
 
-  <WPT>
-   <NAME>CARME</NAME>
-   <LAT>36.455167</LAT>
-   <LON>-121.879666</LON>
-   <CROSSAT>20000.0</CROSSAT>
-   <KTAS>350</KTAS>
-  </WPT>
+  <wpt>
+   <name>CARME</name>
+   <lat>36.455167</lat>
+   <lon>-121.879666</lon>
+   <crossat>20000.0</crossat>
+   <ktas>350</ktas>
+  </wpt>
 
-  <WPT>
-   <NAME>BOLDR</NAME>
-   <LAT>37.17087</LAT>
-   <LON>-122.0761666</LON>
-   <CROSSAT>10000.0</CROSSAT>
-   <KTAS>275</KTAS>
-  </WPT>
+  <wpt>
+   <name>BOLDR</name>
+   <lat>37.17087</lat>
+   <lon>-122.0761666</lon>
+   <crossat>10000.0</crossat>
+   <ktas>275</ktas>
+  </wpt>
  
-  <WPT>
-   <NAME>MENLO</NAME>
-   <LAT>37.463666</LAT>
-   <LON>-122.1536666</LON>
-   <CROSSAT>10000.0</CROSSAT>
-   <KTAS>250</KTAS>
-  </WPT>
+  <wpt>
+   <name>MENLO</name>
+   <lat>37.463666</lat>
+   <lon>-122.1536666</lon>
+   <crossat>10000.0</crossat>
+   <ktas>250</ktas>
+  </wpt>
 
-  <WPT>
-   <NAME>HEMAN</NAME>
-   <LAT>37.53337</LAT>
-   <LON>-122.17219</LON>
-   <CROSSAT>3200.0</CROSSAT>
-   <KTAS>200</KTAS>
-  </WPT>
+  <wpt>
+   <name>HEMAN</name>
+   <lat>37.53337</lat>
+   <lon>-122.17219</lon>
+   <crossat>3200.0</crossat>
+   <ktas>200</ktas>
+  </wpt>
 
-  <WPT>
-   <NAME>OKDUE</NAME>
-   <LAT>37.56996</LAT>
-   <LON>-122.259008</LON>
-   <CROSSAT>1800.0</CROSSAT>
-   <KTAS>150</KTAS>
-  </WPT>
+  <wpt>
+   <name>OKDUE</name>
+   <lat>37.56996</lat>
+   <lon>-122.259008</lon>
+   <crossat>1800.0</crossat>
+   <ktas>150</ktas>
+  </wpt>
 
-  <WPT>
-   <NAME>28L</NAME>
-   <LAT>37.611707</LAT>
-   <LON>-122.35834</LON>
-   <CROSSAT>13.0</CROSSAT>
-   <KTAS>20</KTAS>
-  </WPT>
+  <wpt>
+   <name>28L</name>
+   <lat>37.611707</lat>
+   <lon>-122.35834</lon>
+   <crossat>13.0</crossat>
+   <ktas>20</ktas>
+  </wpt>
 
-  <WPT>
-   <NAME>END</NAME>
-   <LAT>37.625288</LAT>
-   <LON>-122.390717</LON>
-   <CROSSAT>6.0</CROSSAT>
-  </WPT>
+  <wpt>
+   <name>END</name>
+   <lat>37.625288</lat>
+   <lon>-122.390717</lon>
+   <crossat>6.0</crossat>
+  </wpt>
 
-  <WPT>
-   <NAME>EOF</NAME>
-  </WPT>
+  <wpt>
+   <name>EOF</name>
+  </wpt>
 
- </FLIGHTPLAN>
+ </flightplan>
 
 </PropertyList>

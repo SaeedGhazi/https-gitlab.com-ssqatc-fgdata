@@ -500,15 +500,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Toggle parking brake on or off</desc>
   <binding>
    <command>property-toggle</command>
-   <property>/controls/brakes[0]</property>
-  </binding>
-  <binding>
-   <command>property-toggle</command>
-   <property>/controls/brakes[1]</property>
-  </binding>
-  <binding>
-   <command>property-toggle</command>
-   <property>/controls/brakes[2]</property>
+   <property>/controls/parking-brake</property>
   </binding>
  </key>
 

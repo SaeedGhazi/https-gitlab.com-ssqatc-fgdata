@@ -24,6 +24,22 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+ <key n="2">
+  <binding>
+   <command>property-assign</command>
+   <property>/foo</property>
+  </binding>
+ </key>
+
+ <key n="3">
+  <name>Ctrl-C</name>
+  <desc>Toggle clickable panel hotspots</desc>
+  <binding>
+   <command>property-toggle</command>
+   <property>/sim/panel-hotspots</property>
+  </binding>
+ </key>
+
  <key n="4">
   <name>Ctrl-D</name>
   <desc>Dummy dialog</desc>

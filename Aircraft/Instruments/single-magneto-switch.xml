@@ -185,6 +185,12 @@
   </action>
 
   <action>
+   <condition>
+    <less-than>
+     <property alias="../../../../../params/magneto-select"/>
+     <value>3</value>
+    </less-than>
+   </condition>
    <name>Rotate knob right</name>
    <button>0</button>
    <x>-40</x>
@@ -202,23 +208,32 @@
   </action>
 
   <action>
-   <name>Start</name>
-   <button>1</button>
-   <x>-70</x>
+   <condition>
+    <equals>
+     <property alias="../../../../../params/magneto-select"/>
+     <value>3</value>
+    </equals>
+   </condition>
+   <name>Engage starter</name>
+   <button>0</button>
+   <x>-40</x>
    <y>-35</y>
-   <w>72</w>
+   <w>36</w>
    <h>72</h>
-   <binding>
-    <command>property-toggle</command>
-    <property alias="../../../../params/starter-select"/>
-   </binding>
-   <!--mod-up>
+   <repeatable type="bool">false</repeatable>
    <binding>
     <command>property-assign</command>
-    <property>/controls/starter[0]</property>
-    <value type="bool">0</value>
+    <property alias="../../../../params/starter-select"/>
+    <value type="bool">true</value>
+    <repeatable type="bool">false</repeatable>
    </binding>
-   </mod-up-->
+   <mod-up>
+    <binding>
+     <command>property-assign</command>
+     <property alias="../../../../../params/starter-select"/>
+     <value type="bool">false</value>
+    </binding>
+   </mod-up>
   </action>
 
  </actions>

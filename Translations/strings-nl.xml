@@ -244,7 +244,6 @@
 
   <!-- Debugging Options -->
   <debugging-options>Foutopsporings Instellingen</debugging-options>
-  <log-level-desc>Geef het foutmeldings niveau aan. 0=uitgebreid, 5=alleen waarschuwingen</log-level-desc>
   <trace-read-desc>Bewaak de uitlezingen van een instelling;</trace-read-desc>
   <trace-write-desc>Bewaak de veranderingen van een instelling;</trace-write-desc>
 

@@ -294,7 +294,7 @@
    <width>75</width>
    <height>25</height>
    <label>kHz</label>
-   <property>/radios/kr-87/outputs/selected-khz</property>
+   <property>/instrumentation/adf/frequencies/selected-khz</property>
   </input>
 
   <button>
@@ -311,8 +311,8 @@
    </binding>
    <binding>
     <command>property-swap</command>
-    <property>/radios/kr-87/outputs/selected-khz</property>
-    <property>/radios/kr-87/outputs/standby-khz</property>
+    <property>/instrumentation/adf/frequencies/selected-khz</property>
+    <property>/instrumentation/adf/frequencies/standby-khz</property>
    </binding>
    <binding>
     <command>dialog-update</command>
@@ -331,7 +331,7 @@
    <width>75</width>
    <height>25</height>
    <label>kHz</label>
-   <property>/radios/kr-87/outputs/standby-khz</property>
+   <property>/instrumentation/adf/frequencies/standby-khz</property>
   </input>
 
   <input>

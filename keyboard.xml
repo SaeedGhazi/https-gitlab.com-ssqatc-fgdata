@@ -851,7 +851,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
   <binding>
    <command>property-assign</command>
-   <property>/sim/replay/master</property>
+   <property>/sim/freeze/replay</property>
    <value type="bool">false</value>
   </binding>
  </key>

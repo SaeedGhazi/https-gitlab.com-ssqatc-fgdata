@@ -35,11 +35,17 @@ fuelUpdate = func {
 
     AllTanks = props.globals.getNode("consumables/fuel").getChildren("tank");
 
-    # Build a list of selected tanks
+    # Build a list of selected tanks.  Note the filtering for
+    # "zero-capacity" tanks.  The FlightGear code likes to define
+    # zombie tanks that have no meaning to the FDM, so we have to take
+    # measures to ignore them here.
     selectedTanks = [];
     foreach(t; AllTanks) {
-        if(t.getNode("selected", 1).getBoolValue()) {
-            append(selectedTanks, t);
+        cap = t.getNode("capacity-gal_us", 1).getValue();
+        if(cap != nil and cap > 0.01) {
+            if(t.getNode("selected", 1).getBoolValue()) {
+                append(selectedTanks, t);
+            }
         }
     }
 
@@ -94,7 +100,7 @@ initialize = func {
     foreach(t; AllTanks) {
         initDoubleProp(t, "level-gal_us", 0);
         initDoubleProp(t, "level-lbs", 0);
-        initDoubleProp(t, "capacity-gal_us", 1); # Not zero (div/zero issue)
+        initDoubleProp(t, "capacity-gal_us", 0.01); # Not zero (div/zero issue)
         initDoubleProp(t, "density-ppg", 6.0); # gasoline
 
         if(t.getNode("selected") == nil) {

@@ -31,8 +31,7 @@ Started September 2000 by David Megginson, david@megginson.com
   <field-of-view>55.0</field-of-view>
   <panel>
    <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
-<!--   <y-offset>-305</y-offset> -->
-   <visibility>true</visibility>
+   <visibility>false</visibility>
   </panel>
   <hud>
    <path>Huds/Default/default.xml</path>
@@ -60,8 +59,6 @@ Started September 2000 by David Megginson, david@megginson.com
  <!-- Position -->
 
  <position>
-  <!-- <longitude-deg>-110.6642444</longitude-deg> -->
-  <!-- <latitude-deg>33.3528917</latitude-deg> -->
   <altitude-ft>-9999</altitude-ft>
  </position>
 

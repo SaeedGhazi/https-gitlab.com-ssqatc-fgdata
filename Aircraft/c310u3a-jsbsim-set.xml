@@ -88,7 +88,7 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
      <best-climb-speed-kt type="float">107.0</best-climb-speed-kt>
      <target-climb-rate-fpm type="float">1000.0</target-climb-rate-fpm>
      <target-descent-rate-fpm type="float">1000.0</target-descent-rate-fpm>
-     <elevator-adj-factor type="float">6000.0</elevator-adj-factor>
+     <elevator-adj-factor type="float">3000.0</elevator-adj-factor>
      <integral-contribution type="float">0.004</integral-contribution>
      <zero-pitch-throttle type="float">0.45</zero-pitch-throttle>
      <zero-pitch-trim-full-throttle type="float">0.11</zero-pitch-trim-full-throttle>

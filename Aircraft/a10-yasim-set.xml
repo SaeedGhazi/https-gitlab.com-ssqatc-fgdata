@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 ************************************************************************
-Fairchild A10 (Weapon load) simulation config.
+Fairchild A10 (Clean) )simulation config.
 
 2002-10-26 Lee Elliott  leee-fgfs@spatial.freeserve.co.uk
 ************************************************************************
@@ -10,7 +10,7 @@ Fairchild A10 (Weapon load) simulation config.
 <PropertyList>
  <sim>
   <flight-model>yasim</flight-model>
-  <aero>a10wl-yasim</aero>
+  <aero>a10-yasim</aero>
   <fuel-fraction>1.0</fuel-fraction>
 
   <sound>
@@ -31,16 +31,16 @@ Fairchild A10 (Weapon load) simulation config.
   </hud>
 
   <model>
-   <path>Aircraft/a10/Models/a10wl-model.xml</path>
+   <path>Aircraft/a10/Models/a10cl-model.xml</path>
   </model>
 
-   <systems>
+  <systems>
    <electrical>
     <path>Aircraft/a10/Systems/a10-electrical.xml</path>
    </electrical>
   </systems>
 
- <chase-distance-m type="double" archive="y">-35.0</chase-distance-m>
+  <chase-distance-m type="double" archive="y">-35.0</chase-distance-m>
  </sim>
 
  <autopilot>

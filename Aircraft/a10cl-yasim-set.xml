@@ -15,26 +15,32 @@ Fairchild A10 (Clean) )simulation config.
 
   <sound>
    <audible>true</audible>
-   <path>Aircraft/a4/a4-sound.xml</path>
+   <path>Aircraft/a10/Sounds/a10-sound.xml</path>
   </sound>
 
   <panel>
-   <path>Aircraft/a10/a10-vfr-panel.xml</path>
+   <path>Aircraft/a10/Panels/a10-vfr-panel.xml</path>
   </panel>
   <panel_2>
-   <path>Aircraft/a10/a10-mini-panel.xml</path>
+   <path>Aircraft/a10/Panels/a10-mini-panel.xml</path>
   </panel_2>
 
   <hud>
-   <path>Huds/Default/default.xml</path>
+   <path>Aircraft/a10/Huds/a10-hud1.xml</path>
    <visibility>true</visibility>
   </hud>
 
   <model>
-   <path>Aircraft/a10/a10cl-model.xml</path>
+   <path>Aircraft/a10/Models/a10cl-model.xml</path>
   </model>
 
-  <chase-distance-m type="double" archive="y">-50.0</chase-distance-m>
+  <systems>
+   <electrical>
+    <path>Aircraft/a10/Systems/a10-electrical.xml</path>
+   </electrical>
+  </systems>
+
+  <chase-distance-m type="double" archive="y">-35.0</chase-distance-m>
  </sim>
 
  <autopilot>

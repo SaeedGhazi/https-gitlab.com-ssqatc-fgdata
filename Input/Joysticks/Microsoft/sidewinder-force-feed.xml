@@ -24,8 +24,6 @@
 <PropertyList>
 
  <name>Microsoft SideWinder Force Feed</name>
- <name>Microsoft-PC-Joysticktreiber </name>
- <name>Pilote de joystick PC Microsoft </name>
 
  <axis n="0">
   <desc>Aileron</desc>

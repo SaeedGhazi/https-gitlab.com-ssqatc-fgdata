@@ -37,11 +37,11 @@ October 23 2001 John Check, fgpanels@rockfish.net
    <internal archive="y">true</internal>
    <goal-offset-deg>0</goal-offset-deg>
    <goal-tilt-deg>-9</goal-tilt-deg>
-   <pilot>
-    <x-offset-m archive="y">-0.15</x-offset-m>
-    <y-offset-m archive="y">0.20</y-offset-m>
-    <z-offset-m archive="y">-0.55</z-offset-m>
-   </pilot>
+   <config>
+     <x-offset-m archive="y">-0.15</x-offset-m>
+     <y-offset-m archive="y">0.20</y-offset-m>
+     <z-offset-m archive="y">0.55</z-offset-m>
+   </config>
   </view>
 
  </sim>
@@ -82,6 +82,3 @@ October 23 2001 John Check, fgpanels@rockfish.net
  </engines>
   
 </PropertyList>
-
-
-

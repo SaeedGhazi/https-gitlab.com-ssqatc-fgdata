@@ -150,8 +150,8 @@ The current mode for each mouse is held in the
    <button n="0">
     <binding>
      <command>property-assign</command>
-     <property>/sim/view/offset-deg</property>
-     <property>/sim/view/tilt-deg</property>
+     <property>/sim/current-view/heading-offset-deg</property>
+     <property>/sim/current-view/pitch-offset-deg</property>
      <value type="double">0</value>
     </binding>
    </button>
@@ -181,7 +181,7 @@ The current mode for each mouse is held in the
       </and>
      </condition>
      <command>property-adjust</command>
-     <property>/sim/view/offset-deg</property>
+     <property>/sim/current-view/heading-offset-deg</property>
      <factor type="double">-360</factor>
      <min type="double">0</min>
      <max type="double">360</max>
@@ -206,7 +206,7 @@ The current mode for each mouse is held in the
       </and>
      </condition>
      <command>property-adjust</command>
-     <property>/sim/view/tilt-deg</property>
+     <property>/sim/current-view/pitch-offset-deg</property>
      <factor type="double">-180</factor>
      <min type="double">-90</min>
      <max type="double">90</max>

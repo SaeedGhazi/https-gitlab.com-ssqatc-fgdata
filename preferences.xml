@@ -29,7 +29,9 @@ Started September 2000 by David Megginson, david@megginson.com
   <model-hz type="int">120</model-hz>
   <sound type="bool">true</sound>
   <speed-up type="double">1.0</speed-up>
-  <field-of-view type="double">55.0</field-of-view>
+  <current-view>
+    <field-of-view type="double">55.0</field-of-view>
+  </current-view>
   <panel>
    <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
    <visibility type="bool">false</visibility>
@@ -64,7 +66,6 @@ Started September 2000 by David Megginson, david@megginson.com
    </selected>
   </input>
 
-  <current-view type="int">0</current-view>
   <number-views type="int">4</number-views>
 
   <!-- "tower" positioned to right of runway at KSFO -->
@@ -85,6 +86,8 @@ Started September 2000 by David Megginson, david@megginson.com
     <config>
       <from-model type="bool">true</from-model>
       <from-model-idx type="int">0</from-model-idx>
+
+      <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
     </config>
   </view>
 
@@ -97,6 +100,8 @@ Started September 2000 by David Megginson, david@megginson.com
       <from-model-idx type="int">0</from-model-idx>
       <at-model type="bool">true</at-model>
       <at-model-idx type="int">0</at-model-idx>
+
+      <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
 
       <x-offset-m type="double">0</x-offset-m>
       <y-offset-m type="double">0</y-offset-m>
@@ -119,6 +124,8 @@ Started September 2000 by David Megginson, david@megginson.com
       <at-model type="bool">true</at-model>
       <at-model-idx type="int">0</at-model-idx>
 
+      <ground-level-nearplane-m type="double">10.0f</ground-level-nearplane-m>
+
       <x-offset-m type="double">0</x-offset-m>
       <y-offset-m type="double">0</y-offset-m>
       <z-offset-m type="double">0</z-offset-m>
@@ -136,22 +143,12 @@ Started September 2000 by David Megginson, david@megginson.com
       <eye-pitch-deg-path>/sim/tower/pitch-deg</eye-pitch-deg-path>
       <eye-heading-deg-path>/sim/tower/heading-deg</eye-heading-deg-path>
 
+      <ground-level-nearplane-m type="double">10.0f</ground-level-nearplane-m>
+
       <x-offset-m type="double">0</x-offset-m>
       <y-offset-m type="double">0</y-offset-m>
       <z-offset-m type="double">0</z-offset-m>
     </config>
-  </view>
-
-  <!-- chase view -->
-  <view n="1">
-   <desc>chase view</desc>
-   <default>
-    <pilot-offset>
-     <heading-deg type="double">180.0</heading-deg>
-     <pitch-deg type="double">0</pitch-deg>
-     <radius-m type="double">25</radius-m>
-    </pilot-offset>
-   </default>
   </view>
 
  </sim>
@@ -316,6 +313,3 @@ Started September 2000 by David Megginson, david@megginson.com
  </PropertyList>
 
 <!-- end of preferences.xml -->
-
-
-

@@ -53,6 +53,8 @@
            x="-.6" y="0" z="0" mass="400" moment="8">
   <actionpt x="0" y="0" z="0"/>
   <control axis="/controls/throttle[0]" output="THROTTLE"/>
+  <control axis="/controls/starter[0]" output="STARTER"/>
+  <control axis="/controls/magnetos[0]" output="MAGNETOS"/>
   <control axis="/controls/mixture[0]" output="MIXTURE"/>
 </propeller>
 

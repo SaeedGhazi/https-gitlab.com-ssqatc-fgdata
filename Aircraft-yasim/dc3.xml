@@ -61,6 +61,8 @@
            min-rpm="1600" max-rpm="2700">
   <actionpt x="-2.45" y="2.52" z="-0.95"/>
   <control axis="/controls/throttle[0]" output="THROTTLE"/>
+  <control axis="/controls/starter[0]" output="STARTER"/>
+  <control axis="/controls/magnetos[0]" output="MAGNETOS"/>
   <control axis="/controls/mixture[0]" output="MIXTURE"/>
   <control axis="/controls/propeller-pitch[0]" output="ADVANCE"/>
   <control axis="/controls/boost[0]" output="BOOST"/>
@@ -75,6 +77,8 @@
            min-rpm="1600" max-rpm="2700">
   <actionpt x="-2.45" y="-2.52" z="-0.95"/>
   <control axis="/controls/throttle[1]" output="THROTTLE"/>
+  <control axis="/controls/starter[1]" output="STARTER"/>
+  <control axis="/controls/magnetos[1]" output="MAGNETOS"/>
   <control axis="/controls/mixture[1]" output="MIXTURE"/>
   <control axis="/controls/propeller-pitch[1]" output="ADVANCE"/>
   <control axis="/controls/boost[1]" output="BOOST"/>
@@ -87,14 +91,18 @@
      braking -->
 <gear x="-6.08" y="2.52" z="-3.49" compression="1" retract-time="7">
   <control axis="/controls/brakes[0]" output="BRAKE"/>
+<!--
   <control axis="/controls/rudder" output="BRAKE"
 	   src0="-1" src1="-0.5" dst0="1" dst1="0"/>
+-->
 </gear>
 
 <gear x="-6.08" y="-2.52" z="-3.49" compression="1" retract-time="7">
   <control axis="/controls/brakes[1]" output="BRAKE"/>
+<!--
   <control axis="/controls/rudder" output="BRAKE"
 	   src0="0.5" src1="1.0" dst0="0" dst1="1"/>
+-->
 </gear>
 
 <!-- From the type certificate: "Fuel capacity: 822 gals. (4 tanks in

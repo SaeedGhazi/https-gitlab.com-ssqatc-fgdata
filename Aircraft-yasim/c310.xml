@@ -77,6 +77,8 @@
            min-rpm="1600" max-rpm="2700">
   <actionpt x="-1.53" y="1.83" z="0.07"/>
   <control axis="/controls/throttle[0]" output="THROTTLE"/>
+  <control axis="/controls/starter[0]" output="STARTER"/>
+  <control axis="/controls/magnetos[0]" output="MAGNETOS"/>
   <control axis="/controls/mixture[0]" output="MIXTURE"/>
   <control axis="/controls/propeller-pitch[0]" output="ADVANCE"/>
 </propeller>
@@ -90,6 +92,8 @@
            min-rpm="1600" max-rpm="2700">
   <actionpt x="-1.53" y="-1.83" z="0.07"/>
   <control axis="/controls/throttle[1]" output="THROTTLE"/>
+  <control axis="/controls/starter[1]" output="STARTER"/>
+  <control axis="/controls/magnetos[1]" output="MAGNETOS"/>
   <control axis="/controls/mixture[1]" output="MIXTURE"/>
   <control axis="/controls/propeller-pitch[1]" output="ADVANCE"/>
 </propeller>

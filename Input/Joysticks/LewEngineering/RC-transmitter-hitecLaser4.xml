@@ -39,7 +39,7 @@
   <desc>Aileron</desc>
   <binding>
    <command>property-scale</command>
-   <property>/controls/aileron</property>
+   <property>/controls/flight/aileron</property>
    <squared type="bool">false</squared>
    <factor type="double">1.1</factor>
   </binding>
@@ -49,7 +49,7 @@
    <desc>Rudder</desc>
    <binding>
     <command>property-scale</command>
-    <property>/controls/rudder</property>
+    <property>/controls/flight/rudder</property>
     <squared type="bool">false</squared>
     <factor type="double">1.0</factor>
    </binding>
@@ -59,7 +59,7 @@
   <desc>Elevator</desc>
   <binding>
    <command>property-scale</command>
-   <property>/controls/elevator</property>
+   <property>/controls/flight/elevator</property>
    <squared type="bool">false</squared>
    <factor type="double">1.0</factor>
   </binding>
@@ -70,13 +70,13 @@
   <desc>Throttle</desc>
   <binding>
    <command>property-scale</command>
-   <property>/controls/throttle[0]</property>
+   <property>/controls/engines/engine[0]/throttle</property>
    <offset type="double">1.0</offset>
    <factor type="double">0.6</factor>
   </binding>
   <binding>
    <command>property-scale</command>
-   <property>/controls/throttle[1]</property>
+   <property>/controls/engines/engine[1]/throttle</property>
    <offset type="double">1.0</offset>
    <factor type="double">0.6</factor>
   </binding>

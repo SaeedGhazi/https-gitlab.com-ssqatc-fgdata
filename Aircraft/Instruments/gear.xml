@@ -5,7 +5,7 @@
  <h-base>100</h-base>
 
 <!-- <params>
-  <engine-throttle0-select>/controls/throttle[0]</engine-throttle0-select>
+  <engine-throttle0-select>/controls/engines/engine[0]/throttle</engine-throttle0-select>
 
 </params> -->
 

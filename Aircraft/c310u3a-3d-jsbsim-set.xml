@@ -115,7 +115,7 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
      <desc>Rudder Trim Left</desc>
      <binding>
       <command>property-adjust</command>
-      <property>/controls/rudder-trim</property>
+      <property>/controls/flight/rudder-trim</property>
       <min type="double">-1.0</min>
       <step type="double">-0.001</step>
      </binding>
@@ -125,7 +125,7 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
      <desc>Rudder Trim Right</desc>
      <binding>
       <command>property-adjust</command>
-      <property>/controls/rudder-trim</property>
+      <property>/controls/flight/rudder-trim</property>
       <max type="double">1.0</max>
       <step type="double">0.001</step>
      </binding>

@@ -54,7 +54,7 @@ properties' values.
   <transformations>
     <transformation>
      <type>x-shift</type>
-     <property>/controls/flaps</property>
+     <property>/controls/flight/flaps</property>
      <min>0.0</min>
      <max>1.0</max>
      <scale>17.0</scale>
@@ -62,7 +62,7 @@ properties' values.
     </transformation>
     <transformation>
      <type>y-shift</type>
-     <property>/controls/flaps</property>
+     <property>/controls/flight/flaps</property>
      <min>0.0</min>
      <max>1.0</max>
      <scale>-45.0</scale>
@@ -87,7 +87,7 @@ properties' values.
    <h>96</h>
    <binding>
     <command>property-adjust</command>
-    <property>/controls/flaps</property>
+    <property>/controls/flight/flaps</property>
     <step>-0.34</step>
     <min>0.0</min>
     <max>1.0</max>
@@ -104,7 +104,7 @@ properties' values.
    <h>96</h>
    <binding>
     <command>property-adjust</command>
-    <property>/controls/flaps</property>
+    <property>/controls/flight/flaps</property>
     <step>0.34</step>
     <min>0.0</min>
     <max>1.0</max>

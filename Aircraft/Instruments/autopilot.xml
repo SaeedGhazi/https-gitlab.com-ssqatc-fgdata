@@ -430,6 +430,7 @@ properties' values.
   <layer>
    <name>target climb rate</name>
    <type>text</type>
+   <font>led</font>
    <point-size>10</point-size>
    <color>
     <red>1.0</red>

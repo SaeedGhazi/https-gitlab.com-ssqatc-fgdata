@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <mouse>
+  <button n="0">
+   <binding>
+    <command>pui-or-panel-mouse-click</command>
+    <button>0</button>
+    <is-down>true</is-down>
+   </binding>
+   <mod-up>
+    <binding>
+     <command>pui-or-panel-mouse-click</command>
+     <button>0</button>
+     <is-down>false</is-down>
+    </binding>
+   </mod-up>
+  </button>
+ </mouse>
+
+</PropertyList>

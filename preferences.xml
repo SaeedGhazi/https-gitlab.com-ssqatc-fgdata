@@ -169,6 +169,9 @@ Started September 2000 by David Megginson, david@megginson.com
   <!-- included externally -->
   <joysticks include="joysticks.xml"/>
 
+  <!-- included externally -->
+  <mice include="mice.xml"/>
+
  </input>
 
 

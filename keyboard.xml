@@ -24,6 +24,15 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+ <key n="7">
+  <name>Ctrl-G</name>
+  <desc>Toggle autopilot glide slope lock.</desc>
+  <binding>
+   <command>property-toggle</command>
+   <property>/autopilot/locks/glide-slope</property>
+  </binding>
+ </key>
+
  <key n="8">
   <name>Ctrl-H</name>
   <desc>Toggle autopilot heading lock.</desc>

@@ -23,14 +23,18 @@
    <h>17</h>
    <condition>
     <and>
-     <equals>
-      <property>ai/models/aircraft[0]/radar/in-range</property>
-      <value>true</value>
-     </equals>
+     <less-than>
+      <property>ai/models/aircraft[0]/radar/range-nm</property>
+      <value>43</value>
+     </less-than>
      <equals>
       <property>/instrumentation/radar/range</property>
       <value>40</value>
      </equals>
+     <not-equals>
+      <property>ai/models/aircraft[0]/radar/range-nm</property>
+      <value>0</value>
+     </not-equals>
     </and>
    </condition>
    <texture>
@@ -64,14 +68,18 @@
    <h>17</h>
    <condition>
     <and>
-     <equals>
-      <property>ai/models/aircraft[0]/radar/in-range</property>
-      <value>true</value>
-     </equals>
+     <less-than>
+      <property>ai/models/aircraft[0]/radar/range-nm</property>
+      <value>22</value>
+     </less-than>
      <equals>
       <property>/instrumentation/radar/range</property>
       <value>20</value>
      </equals>
+     <not-equals>
+      <property>ai/models/aircraft[0]/radar/range-nm</property>
+      <value>0</value>
+     </not-equals>
     </and>
    </condition>
    <texture>
@@ -105,14 +113,18 @@
    <h>17</h>
    <condition>
     <and>
-     <equals>
-      <property>ai/models/aircraft[0]/radar/in-range</property>
-      <value>true</value>
-     </equals>
+     <less-than>
+      <property>ai/models/aircraft[1]/radar/range-nm</property>
+      <value>43</value>
+     </less-than>
      <equals>
       <property>/instrumentation/radar/range</property>
       <value>40</value>
      </equals>
+     <not-equals>
+      <property>ai/models/aircraft[1]/radar/range-nm</property>
+      <value>0</value>
+     </not-equals>
     </and>
    </condition>
    <texture>
@@ -146,14 +158,18 @@
    <h>17</h>
    <condition>
     <and>
-     <equals>
-      <property>ai/models/aircraft[0]/radar/in-range</property>
-      <value>true</value>
-     </equals>
+     <less-than>
+      <property>ai/models/aircraft[1]/radar/range-nm</property>
+      <value>22</value>
+     </less-than>
      <equals>
       <property>/instrumentation/radar/range</property>
       <value>20</value>
      </equals>
+     <not-equals>
+      <property>ai/models/aircraft[1]/radar/range-nm</property>
+      <value>0</value>
+     </not-equals>
     </and>
    </condition>
    <texture>
@@ -187,14 +203,18 @@
    <h>17</h>
    <condition>
     <and>
-     <equals>
-      <property>ai/models/aircraft[0]/radar/in-range</property>
-      <value>true</value>
-     </equals>
+     <less-than>
+      <property>ai/models/aircraft[2]/radar/range-nm</property>
+      <value>43</value>
+     </less-than>
      <equals>
       <property>/instrumentation/radar/range</property>
       <value>40</value>
      </equals>
+     <not-equals>
+      <property>ai/models/aircraft[2]/radar/range-nm</property>
+      <value>0</value>
+     </not-equals>
     </and>
    </condition>
    <texture>
@@ -228,14 +248,18 @@
    <h>17</h>
    <condition>
     <and>
-     <equals>
-      <property>ai/models/aircraft[0]/radar/in-range</property>
-      <value>true</value>
-     </equals>
+     <less-than>
+      <property>ai/models/aircraft[2]/radar/range-nm</property>
+      <value>22</value>
+     </less-than>
      <equals>
       <property>/instrumentation/radar/range</property>
       <value>20</value>
      </equals>
+     <not-equals>
+      <property>ai/models/aircraft[2]/radar/range-nm</property>
+      <value>0</value>
+     </not-equals>
     </and>
    </condition>
    <texture>

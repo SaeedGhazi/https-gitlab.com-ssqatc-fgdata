@@ -220,7 +220,7 @@ Started 24-7-01 by Timothy Gale
     <transformation>
      <type>rotation</type>
      <!--set>45</offset-->
-     <property>/radios/kr-87/needle-deg</property>
+     <property>/radios/kr-87/outputs/needle-deg</property>
      <min>-360</min>
      <max>360</max>
     </transformation>

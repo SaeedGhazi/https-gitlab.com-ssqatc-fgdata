@@ -272,10 +272,10 @@ properties' values.
   <action>
    <name>small com frequency decrease</name>
    <button>0</button>
-   <x>-36</x>
-   <y>-24</y>
+   <x>-48</x>
+   <y>-29</y>
    <w>12</w>
-   <h>18</h>
+   <h>23</h>
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/comm-freq-standby-prop"/>
@@ -290,10 +290,10 @@ properties' values.
   <action>
    <name>large com frequency decrease</name>
    <button>1</button>
-   <x>-36</x>
-   <y>-24</y>
+   <x>-48</x>
+   <y>-29</y>
    <w>12</w>
-   <h>18</h>
+   <h>23</h>
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/comm-freq-standby-prop"/>
@@ -308,10 +308,10 @@ properties' values.
   <action>
    <name>small com frequency increase</name>
    <button>0</button>
-   <x>-45</x>
-   <y>-24</y>
+   <x>-35</x>
+   <y>-29</y>
    <w>12</w>
-   <h>18</h>
+   <h>23</h>
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/comm-freq-standby-prop"/>
@@ -326,10 +326,10 @@ properties' values.
   <action>
    <name>large com frequency increase</name>
    <button>1</button>
-   <x>-45</x>
-   <y>-24</y>
+   <x>-35</x>
+   <y>-29</y>
    <w>12</w>
-   <h>18</h>
+   <h>23</h>
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/comm-freq-standby-prop"/>

@@ -191,10 +191,12 @@ propeller: A propeller connected to a non-turbocharged piston engine
                          propeller.  Generally not the same as the
                          aircraft's cruise speed.
           cruise-rpm:    The RPM of the propeller at max-eff. cruise.
-          cruise-power:  The power produced at cruise, in horsepower.
+          cruise-power:  The power sunk by the prop at cruise, in horsepower.
           cruise-alt:    The reference cruise altitude in feet.
-          eng-power:     The brake horsepower at cruise.
-          eng-rpm:       The engine RPM at cruise (for geared engines?).
+          eng-power:     Maximum BHP of the engine at sea level.  Note:
+                         this should be without the turbo/supercharger
+                         in use.
+          eng-rpm:       The engine RPM at which eng-power is developed
           takeoff-power: The takeoff power required by the propeller...
           takeoff-rpm:   ...at the given takeoff RPM.
           displacement:  The engine displacement in cubic inches.

@@ -33,7 +33,7 @@
   </c1>
 
   <g1>
-   <name>gauge1</name>
+   <name>Gauge1</name>
    <x>270</x>
    <y>390</y>
    <width>100</width>
@@ -63,7 +63,7 @@
   </g1>
 
   <g2>
-   <name>gauge2</name>
+   <name>Gauge2</name>
    <x>20</x>
    <y>190</y>
    <width>20</width>
@@ -93,7 +93,7 @@
   </g2>
 
   <g3>
-   <name>gauge3</name>
+   <name>Gauge3</name>
    <x>270</x>
    <y>25</y>
    <width>100</width>
@@ -123,7 +123,7 @@
   </g3>
 
   <g4>
-   <name>gauge4</name>
+   <name>Gauge4</name>
    <x>600</x>
    <y>160</y>
    <width>20</width>

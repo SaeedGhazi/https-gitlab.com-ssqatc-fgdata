@@ -18,124 +18,165 @@ FlightGear property list defining the instrument's properties.
  <cards>
 
   <c1>
+<!-- changes made by suma this angle is to rotate thru the envt.-->
+<!-- suma
+     To display the hud-card as a type of gauge, radius and number of divisions are included.
+     radius-> of the circle and divisions-> number of divisions in a circle. so it should be multiple of 4.
+     all the moved values are used when the type="tape". and when the type="gauge" radius and divisions are used.
+-->
+
+
+<!-- for a vertical scale the option value should be 6,10 or 14. 
+       6  -> left side arrow
+	 10 -> right side arrow
+       14 -> both sides arrow -->
+<!-- for a horizontal scale the option value should be 6,10 or 14. 
+       4  -> top facing arrow 
+	 8 ->  bottom facing arrow
+       12 -> both sides arrow -->
+
+
    <name>Gyrocompass</name>
-   <x>260</x>
-   <y>248</y>
-   <width>120</width>
+   <x>260</x> <!--  260 -->
+   <y>248</y> <!-- 248 -->
+   <width>120</width> 
    <height>28</height>
    <loadfn>heading</loadfn>
    <options>4</options>		<!-- Read ReadMe.xmlhud -->
    <maxValue>360.0</maxValue>
    <minValue>0.0</minValue>
-   <disp_scaling>1.0</disp_scaling>
+   <disp_scaling>0.1</disp_scaling> <!-- 0.1 -->
    <major_divs>10</major_divs>
-   <minor_divs>1</minor_divs>
+   <minor_divs>5</minor_divs>
    <modulator>360</modulator>
-   <value_span>25.0</value_span>
-   <type>tape</type>
-   <tick_bottom>false</tick_bottom>
-   <tick_top>false</tick_top>
-   <tick_right>false</tick_right>
-   <tick_left>false</tick_left>
-   <cap_bottom>false</cap_bottom>
-   <cap_top>false</cap_top>
-   <cap_right>false</cap_right>
-   <cap_left>false</cap_left>
-   <marker_offset>10.0</marker_offset>
-   <enable_pointer>false</enable_pointer>
-   <pointer_type>fixed</pointer_type>
+   <value_span>60.0</value_span>
+   <type>tape</type>  <!-- when the type is "gauge",only radius is needed. -->
+   	<tick_bottom>false</tick_bottom>
+	<tick_top>false</tick_top>
+	<tick_right>false</tick_right>
+   	<tick_left>false</tick_left>
+      <cap_bottom>false</cap_bottom>
+      <cap_top>false</cap_top>
+   	<cap_right>false</cap_right>
+      <cap_left>false</cap_left>
+   	<marker_offset>10.0</marker_offset>
+   	<enable_pointer>false</enable_pointer>
+   	<pointer_type>fixed</pointer_type>  <!-- this should be always fixed type for compass -->
+      <tick_type>line</tick_type>
+      <tick_length>variable</tick_length>
    <working>true</working>
-  </c1>
+   	<radius>40.0</radius> <!-- for type=gauge -->
+ 	<divisions>12</divisions> <!-- it should be multiple of 4 -->
+      <zoom>0</zoom> <!-- for VSI -->
+   </c1>
 
   <c2>
    <name>AOA</name>
-   <x>175</x>
-   <y>50</y> 
+   <x>180</x> <!-- 175 -->
+   <y>100</y> 
    <width>28</width>
-   <height>120</height>
+   <height>100</height>
    <loadfn>aoa</loadfn>
-   <options>6</options>
-   <maxValue>30.0</maxValue>
-   <minValue>-15.0</minValue>
+   <options>6</options> 
+   <maxValue>20.0</maxValue>
+   <minValue>0.0</minValue>
    <disp_scaling>1.0</disp_scaling>
-   <major_divs>10</major_divs>
+   <major_divs>4</major_divs>
    <minor_divs>2</minor_divs>
    <modulator>0</modulator>
-   <value_span>60.0</value_span>
+   <value_span>20.0</value_span>
    <type>tape</type>
-   <tick_bottom>false</tick_bottom>
-   <tick_top>false</tick_top>
-   <tick_right>false</tick_right>
-   <tick_left>false</tick_left>
-   <cap_bottom>false</cap_bottom>
-   <cap_top>false</cap_top>
-   <cap_right>false</cap_right>
-   <cap_left>false</cap_left>
-   <marker_offset>10.0</marker_offset>
-   <enable_pointer>true</enable_pointer>
-   <pointer_type>fixed</pointer_type>
+   	<tick_bottom>false</tick_bottom>
+   	<tick_top>false</tick_top>
+   	<tick_right>false</tick_right>
+   	<tick_left>false</tick_left>
+   	<cap_bottom>false</cap_bottom>
+   	<cap_top>false</cap_top>
+   	<cap_right>false</cap_right>
+   	<cap_left>false</cap_left>
+   	<marker_offset>10.0</marker_offset>
+   	<enable_pointer>true</enable_pointer>
+   	<pointer_type>moving</pointer_type>
+   	<tick_type>circle</tick_type>
+   	<tick_length>constant</tick_length>
    <working>true</working>
+   	<radius>30.0</radius>  <!-- for type=gauge -->
+	<divisions>12</divisions> <!-- it should be multiple of 4 -->
+  <zoom>0</zoom> <!-- for VSI -->
+
   </c2>
 
   <c3>
    <name>NormalAcceleration</name>
-   <x>135</x>
-   <y>20</y>
+   <x>140</x>
+   <y>110</y>
    <width>18</width>
-   <height>130</height>
+   <height>100</height>
    <loadfn>anzg</loadfn>
    <options>6</options>
-   <maxValue>10.0</maxValue>
-   <minValue>-5.0</minValue>
-   <disp_scaling>1.0</disp_scaling>
+   <maxValue>9.0</maxValue>
+   <minValue>-3.0</minValue>
+   <disp_scaling>1</disp_scaling>
    <major_divs>2</major_divs>
    <minor_divs>1</minor_divs>
    <modulator>0</modulator>
-   <value_span>20.0</value_span>
+   <value_span>12.0</value_span>
    <type>tape</type>
-   <tick_bottom>false</tick_bottom>
-   <tick_top>false</tick_top>
-   <tick_right>false</tick_right>
-   <tick_left>false</tick_left>
-   <cap_bottom>false</cap_bottom>
-   <cap_top>false</cap_top>
-   <cap_right>false</cap_right>
-   <cap_left>false</cap_left>
-   <marker_offset>10.0</marker_offset>
-   <enable_pointer>true</enable_pointer>
-   <pointer_type>fixed</pointer_type>
-   <working>true</working>
-  </c3>
+   	<tick_bottom>false</tick_bottom>
+   	<tick_top>false</tick_top>
+   	<tick_right>false</tick_right>
+   	<tick_left>false</tick_left>
+   	<cap_bottom>false</cap_bottom>
+   	<cap_top>false</cap_top>
+   	<cap_right>false</cap_right>
+   	<cap_left>false</cap_left>
+   	<marker_offset>10.0</marker_offset>
+   	<enable_pointer>true</enable_pointer>
+   	<pointer_type>moving</pointer_type>
+   	<tick_type>line</tick_type>
+   	<tick_length>variable</tick_length>
+   <working>false</working>
+   	<radius>40.0</radius> <!-- for type=gauge -->
+	<divisions>12</divisions> <!-- it should be multiple of 4 -->
+   <zoom>0</zoom> <!-- for VSI -->
 
+ </c3>
+<!-- for moving type pointer adjust the values of value_span, major_divs, minor_divs, disp_scaling -->
   <c4>
    <name>VSI</name>
-   <x>445</x>
+   <x>430</x> <!-- 445 -->
    <y>50</y>
    <width>28</width>
-   <height>120</height>
+   <height>150</height>
    <loadfn>climb</loadfn>
    <options>10</options>
-   <maxValue>500.0</maxValue>
-   <minValue>-500.0</minValue>
+   <maxValue>1000.0</maxValue>
+   <minValue>-1000.0</minValue>
    <disp_scaling>1.0</disp_scaling>
-   <major_divs>5</major_divs>
-   <minor_divs>1</minor_divs>
+   <major_divs>200</major_divs>
+   <minor_divs>100</minor_divs>
    <modulator>0</modulator>
-   <value_span>15.0</value_span>
+   <value_span>2000.0</value_span> <!-- set value_span = maxValue + minValue for moving type pointer -->
    <type>tape</type>
-   <tick_bottom>false</tick_bottom>
-   <tick_top>false</tick_top>
-   <tick_right>false</tick_right>
-   <tick_left>false</tick_left>
-   <cap_bottom>false</cap_bottom>
-   <cap_top>false</cap_top>
-   <cap_right>false</cap_right>
-   <cap_left>false</cap_left>
-   <marker_offset>10.0</marker_offset>
-   <enable_pointer>true</enable_pointer>
-   <pointer_type>fixed</pointer_type>
+   	<tick_bottom>false</tick_bottom>
+   	<tick_top>false</tick_top>
+   	<tick_right>false</tick_right>
+   	<tick_left>false</tick_left>
+   	<cap_bottom>false</cap_bottom>
+   	<cap_top>false</cap_top>
+   	<cap_right>false</cap_right>
+   	<cap_left>false</cap_left>
+   	<marker_offset>10.0</marker_offset>
+   	<enable_pointer>true</enable_pointer>
+   	<pointer_type>moving</pointer_type>
+   	<tick_type>line</tick_type>
+   	<tick_length>variable</tick_length>
    <working>true</working>
-  </c4>
+   <radius>40.0</radius> <!-- for type=gauge -->
+   <divisions>12</divisions> <!-- it should be multiple of 4 -->
+   <zoom>1</zoom> <!-- for VSI -->
+
+ </c4>
 
  </cards>
 

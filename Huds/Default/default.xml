@@ -27,10 +27,11 @@ in a separate file.
   </hudladder>
 
   <hudcard>
-   <path>Huds/Instruments/Default/hudcard.xml</path>
+  <path>Huds/Instruments/Default/hudcard.xml</path>
   </hudcard>
 
-  <instrlabel>
+
+<instrlabel>
    <path>Huds/Instruments/Default/instrlabel.xml</path>
   </instrlabel>
 

@@ -20,10 +20,10 @@ FlightGear property list defining the instrument's properties.
   <l1>
   <name>Climb/Dive Ladder</name>
   <x>260</x>
-  <y>150</y>
+  <y>150</y>  <!-- 150 -->
   <width>120</width>
-  <height>180</height>
-  <compression_factor>14.22</compression_factor>
+  <height>180</height> <!-- 180 -->
+  <compression_factor>12.6316</compression_factor>
   <loadfn>roll</loadfn>
   <loadfn1>pitch</loadfn1>
   <span_units>45</span_units>
@@ -42,6 +42,10 @@ FlightGear property list defining the instrument's properties.
   <enable_energy_worm>true</enable_energy_worm>
   <enable_waypoint_marker>true</enable_waypoint_marker>
   <working>true</working>
+  <zenith>1</zenith>
+  <nadir>1</nadir>
+  <hat>1</hat>
+
   </l1>
 
  </ladders>

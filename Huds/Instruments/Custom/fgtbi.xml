@@ -5,15 +5,16 @@
   <f1>
   <name>fgTBI_Instrument</name>
   <x>290</x>
-  <y>45</y>
+  <y>200</y>
   <width>60</width>
   <height>10</height>
-  <loadfn>roll</loadfn>
-  <loadfn1>sideslip</loadfn1>
   <maxBankAngle>45.0</maxBankAngle>
   <maxSlipAngle>5.0</maxSlipAngle>
   <gap_width>5</gap_width>
   <working>true</working>
+  <tsi>true</tsi> <!-- suma -->
+     <rad>150.0</rad>  <!-- suma -->
+
   </f1>
 
  </tbis>

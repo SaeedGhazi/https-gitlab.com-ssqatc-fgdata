@@ -32,6 +32,11 @@ October 23 2001 John Check, fgpanels@rockfish.net
   </model> 
  </sim>
 
+ <controls>
+  <magnetos n="0">3</magnetos>
+  <magnetos n="1">3</magnetos>
+ </controls>
+
  <autopilot>
    <config>
      <min-climb-speed-kt type="float">100.0</min-climb-speed-kt>

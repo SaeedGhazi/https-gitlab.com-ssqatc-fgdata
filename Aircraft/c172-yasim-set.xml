@@ -30,6 +30,10 @@ October 23 2001 John Check, fgpanels@rockfish.net
    <path>Aircraft/c172/Models/N757/n757.ac</path>
   </model>
  </sim>
+
+ <controls>
+  <magnetos>true</magnetos>
+ </controls>
   
  <autopilot>
    <config>

@@ -21,6 +21,12 @@ Jan 26 2003
  
   <layer>
    <name>TAS alt</name>
+   <condition>
+    <equals>
+     <property>/sim/instrument-options/omit-knobs</property>
+     <value></value>
+    </equals>
+   </condition>
    <w>288</w>
    <h>176</h>
    <texture>
@@ -65,6 +71,12 @@ Jan 26 2003
 
   <layer>
    <name>TAS speed</name>
+   <condition>
+    <equals>
+     <property>/sim/instrument-options/omit-knobs</property>
+     <value></value>
+    </equals>
+   </condition>
    <w>304</w>
    <h>108</h>
    <texture>

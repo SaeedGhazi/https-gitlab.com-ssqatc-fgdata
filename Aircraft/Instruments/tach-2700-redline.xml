@@ -47,6 +47,34 @@ properties' values.
     <h>104</h>
   </layer>
 
+  
+  <layer>
+   <name>needle 1</name>
+   <texture>
+    <path>Aircraft/c172/Instruments/Textures/misc-1.rgb</path>
+    <x1>0.6796875</x1>
+    <x2>0.7265625</x2>
+    <y1>0.68359375</y1>
+    <y2>1.0</y2>
+   </texture>
+   <w>6</w>
+   <h>48</h>
+   <transformations>
+    <transformation>
+     <type>rotation</type>
+     <property alias="../../../../../params/rpm1-select"/>
+     <min>0</min>
+     <max>4000</max>
+     <scale>0.08</scale>
+     <offset>-120</offset>
+    </transformation>
+    <transformation>
+     <type>y-shift</type>
+     <offset>20</offset>
+    </transformation>
+   </transformations>
+  </layer>
+  
   <layer>
    <name>needle 0</name>
    <texture>
@@ -62,33 +90,6 @@ properties' values.
     <transformation>
      <type>rotation</type>
      <property alias="../../../../../params/rpm0-select"/>
-     <min>0</min>
-     <max>4000</max>
-     <scale>0.08</scale>
-     <offset>-120</offset>
-    </transformation>
-    <transformation>
-     <type>y-shift</type>
-     <offset>20</offset>
-    </transformation>
-   </transformations>
-  </layer>
-  
-  <layer>
-   <name>needle 1</name>
-   <texture>
-    <path>Aircraft/c172/Instruments/Textures/misc-1.rgb</path>
-    <x1>0.8</x1>
-    <y1>0.78125</y1>
-    <x2>0.8375</x2>
-    <y2>1.0</y2>
-   </texture>
-   <w>6</w>
-   <h>48</h>
-   <transformations>
-    <transformation>
-     <type>rotation</type>
-     <property alias="../../../../../params/rpm1-select"/>
      <min>0</min>
      <max>4000</max>
      <scale>0.08</scale>

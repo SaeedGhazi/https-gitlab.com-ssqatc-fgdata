@@ -835,6 +835,35 @@
   </section>
 
   <section>
+   <name>strings/avionics-options</name>
+
+   <option>
+    <name>nav1</name>
+    <arg>[radial:]frequency</arg>
+    <description>strings/nav1-desc</description>
+   </option>
+
+   <option>
+    <name>nav2</name>
+    <arg>[radial:]frequency</arg>
+    <description>strings/nav2-desc</description>
+   </option>
+
+   <option>
+    <name>adf</name>
+    <arg>[rotation:]frequency</arg>
+    <description>strings/adf-desc</description>
+   </option>
+
+   <option>
+    <name>dme</name>
+    <arg>"nav1"|"nav2"|frequency&gt;</arg>
+    <description>strings/dme-desc</description>
+   </option>
+
+  </section>
+
+  <section>
    <name>strings/debugging-options</name>
 
    <option>

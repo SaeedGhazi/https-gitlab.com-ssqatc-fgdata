@@ -38,7 +38,7 @@
    <config>
      <!-- x/y/z == right/up/back -->
      <x-offset-m archive="y">-0.525</x-offset-m>
-     <y-offset-m archive="y">3.46</y-offset-m>
+     <y-offset-m archive="y">3.44</y-offset-m>
      <z-offset-m archive="y">-16.28</z-offset-m>
      <pitch-offset-deg archive="y">-11.0</pitch-offset-deg>
    </config>
@@ -76,7 +76,42 @@
      <max-aileron type="float">1.0</max-aileron>
    </config>
  </autopilot>
+ 
+ <input>  <!-- set 25% flap adjustment with each detent --> 
+   <keyboard>
+     <key n="91">
+       <name>[</name>
+       <desc>Decrease flaps.</desc>
+       <binding>
+         <command>property-adjust</command>
+         <property>/controls/flight/flaps</property>
+         <step type="double">-0.25</step>
+       </binding>
+     </key>
+     <key n="93">
+       <name>]</name>
+       <desc>Increase flaps.</desc>
+       <binding>
+         <command>property-adjust</command>
+         <property>/controls/flight/flaps</property>
+         <step type="double">0.25</step>
+       </binding>
+     </key>
+   </keyboard>
+   <joysticks>
+     <js-named n="1003">
+       <button n="1">
+         <binding>
+           <step>-0.25</step>
+         </binding>
+       </button>
+       <button n="2">
+         <binding>
+           <step>0.25</step>
+         </binding>
+       </button>
+     </js-named>
+   </joysticks>
+ </input>
 
 </PropertyList>
-
-

@@ -26,8 +26,12 @@ $Id$
 
  <name>Logitech WingMan Extreme Digital 3D (USB)</name>
 
- <axis n="0">
+ <axis>
   <desc>Aileron</desc>
+  <number>
+   <unix>0</unix>
+   <windows>0</windows>
+  </number>
   <binding>
    <command>property-scale</command>
    <property>/controls/flight/aileron</property>
@@ -35,8 +39,12 @@ $Id$
   </binding>
  </axis>
 
- <axis n="1">
+ <axis>
   <desc>Elevator</desc>
+  <number>
+   <unix>1</unix>
+   <windows>1</windows>
+  </number>
   <binding>
    <command>property-scale</command>
    <property>/controls/flight/elevator</property>
@@ -45,8 +53,12 @@ $Id$
   </binding>
  </axis>
 
- <axis n="2">
+ <axis>
   <desc>Throttle</desc>
+  <number>
+   <unix>3</unix>
+   <windows>2</windows>
+  </number>
   <binding>
    <command>property-scale</command>
    <property>/controls/engines/engine[0]/throttle</property>
@@ -97,8 +109,12 @@ $Id$
   </binding>
  </axis>
 
- <axis n="3">
+ <axis>
   <desc>Rudder</desc>
+  <number>
+   <unix>2</unix>
+   <windows>3</windows>
+  </number>
   <binding>
    <command>property-scale</command>
    <property>/controls/flight/rudder</property>
@@ -108,6 +124,10 @@ $Id$
 
  <axis n="6">
   <desc>View Direction</desc>
+  <number>
+   <unix>4</unix>
+   <windows>6</windows>
+  </number>
   <low>
    <repeatable>true</repeatable>
    <binding>
@@ -126,8 +146,12 @@ $Id$
   </high>
  </axis>
 
- <axis n="7">
+ <axis>
   <desc>View Elevation</desc>
+  <number>
+   <unix>5</unix>
+   <windows>7</windows>
+  </number>
   <low>
    <repeatable>true</repeatable>
    <binding>
@@ -146,8 +170,12 @@ $Id$
   </high>
  </axis>
 
- <button n="0">
+ <button>
   <desc>Brakes</desc>
+  <number>
+   <unix>0</unix>
+   <windows>0</windows>
+  </number>
   <binding>
    <command>property-assign</command>
    <property>/controls/gear/brake-left</property>
@@ -172,8 +200,12 @@ $Id$
   </mod-up>
  </button>
 
- <button n="3">
+ <button>
   <desc>Elevator trim up</desc>
+  <number>
+   <unix>3</unix>
+   <windows>3</windows>
+  </number>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
@@ -182,8 +214,12 @@ $Id$
   </binding>
  </button>
 
- <button n="4">
+ <button>
   <desc>Elevator trim down</desc>
+  <number>
+   <unix>4</unix>
+   <windows>4</windows>
+  </number>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
@@ -192,8 +228,12 @@ $Id$
   </binding>
  </button>
 
- <button n="1">
+ <button>
   <desc>Flaps down</desc>
+  <number>
+   <unix>1</unix>
+   <windows>1</windows>
+  </number>
   <repeatable>false</repeatable>
   <binding>
    <command>nasal</command>
@@ -201,8 +241,12 @@ $Id$
   </binding>
  </button>
 
- <button n="2">
+ <button>
   <desc>Flaps up</desc>
+  <number>
+   <unix>2</unix>
+   <windows>2</windows>
+  </number>
   <repeatable>false</repeatable>
   <binding>
    <command>nasal</command>
@@ -210,8 +254,12 @@ $Id$
   </binding>
  </button>
 
- <button n="6">
+ <button>
   <desc>Right brake</desc>
+  <number>
+   <unix>6</unix>
+   <windows>6</windows>
+  </number>
   <binding>
    <command>property-assign</command>
    <property>/controls/gear/brake-right</property>
@@ -226,8 +274,12 @@ $Id$
   </mod-up>
  </button>
 
- <button n="5">
+ <button>
   <desc>Left brake</desc>
+  <number>
+   <unix>5</unix>
+   <windows>5</windows>
+  </number>
   <binding>
    <command>property-assign</command>
    <property>/controls/gear/brake-left</property>

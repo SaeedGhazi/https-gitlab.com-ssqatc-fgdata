@@ -89,12 +89,11 @@ properties' values.
     </transformation>
     <transformation>
      <type>rotation</type>
-     <!-- recalibrated gauge as per D Luff's suggestion -->
      <property alias="../../../../../params/engine-egt0-select"/>
-     <min>425.0</min><!-- 50 -->
-     <max>775.0</max><!-- 750 -->
-     <scale>-0.25</scale><!-- -0.18 -->
-     <offset>-120</offset><!-- 135 -->
+     <min>50.0</min>
+     <max>600.0</max>
+     <scale>-0.13</scale>
+     <offset>-230</offset>
     </transformation>
     <transformation>
      <type>y-shift</type>
@@ -122,10 +121,10 @@ properties' values.
     <transformation>
      <type>rotation</type>
      <property alias="../../../../../params/engine-egt1-select"/>
-     <min>425.0</min>
-     <max>775.0</max>
-     <scale>0.25</scale>
-     <offset>120</offset>
+     <min>50.0</min>
+     <max>600.0</max>
+     <scale>0.13</scale>
+     <offset>230</offset>
     </transformation>
     <transformation>
      <type>y-shift</type>

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Maintainer: Dave Perry -->
 <PropertyList>
 
  <name>CH PRODUCTS CH FLIGHT SIM YOKE USB </name>
@@ -74,7 +75,7 @@
    <factor type="double">-0.5</factor>
   </binding>
  </axis>
-<axis n="3">
+<axis n="4">
   <desc>Mixture</desc>
   <binding>
    <command>property-scale</command>
@@ -89,7 +90,7 @@
    <factor type="double">-0.5</factor>
   </binding>
  </axis>
-<axis n="4">
+<axis n="3">
   <desc>Propeller</desc>
   <binding>
    <command>property-scale</command>
@@ -105,8 +106,12 @@
   </binding>
  </axis>
 
-  <axis n="6">
+  <axis>
   <desc>View Direction</desc>
+  <number>
+    <unix>5</unix>
+    <windows>6</windows>
+  </number>
   <low>
    <repeatable>true</repeatable>
    <binding>
@@ -125,7 +130,11 @@
   </high>
  </axis>
 
- <axis n="7">
+ <axis>
+  <number>
+    <unix>6</unix>
+    <windows>7</windows>
+  </number>
   <desc>View Elevation</desc>
   <low>
    <repeatable>true</repeatable>
@@ -205,18 +214,16 @@
  <button n="6">
   <repeatable>false</repeatable>
   <binding>
-   <command>property-assign</command>
-   <property>/controls/flight/flaps</property>
-   <value type="double">0.0</value>
+   <command>nasal</command>
+   <script>controls.stepFlaps(-1)</script>
   </binding>
  </button>
 
  <button n="7">
   <repeatable>false</repeatable>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/flaps</property>
-   <step type="double">0.34</step>
+   <command>nasal</command>
+   <script>controls.stepFlaps(1)</script>
   </binding>
  </button>
 
@@ -253,7 +260,7 @@
   <binding>
    <command>property-adjust</command>
    <property>/controls/flight/elevator-trim</property>
-   <step>0.001</step>
+   <step>0.0025</step>
   </binding>
  </button>
 
@@ -262,7 +269,7 @@
   <binding>
    <command>property-adjust</command>
    <property>/controls/flight/elevator-trim</property>
-   <step>-0.001</step>
+   <step>-0.0025</step>
   </binding>
  </button>
 

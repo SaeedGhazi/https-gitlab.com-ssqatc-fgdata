@@ -16,7 +16,7 @@
   
   <sound>
    <audible>true</audible>
-   <path>Aircraft/A320/A320-sound.xml</path>
+   <path>Aircraft/747/747-sound.xml</path>
   </sound>
 <!--
   <panel>
@@ -37,9 +37,9 @@
    <internal archive="y">true</internal>
    <config>
      <!-- x/y/z == right/up/back -->
-     <x-offset-m archive="y">-0.6</x-offset-m>
-     <y-offset-m archive="y">3.26</y-offset-m>
-     <z-offset-m archive="y">-16.16</z-offset-m>
+     <x-offset-m archive="y">-0.525</x-offset-m>
+     <y-offset-m archive="y">3.46</y-offset-m>
+     <z-offset-m archive="y">-16.28</z-offset-m>
      <pitch-offset-deg archive="y">-11.0</pitch-offset-deg>
    </config>
   </view>
@@ -69,7 +69,7 @@
      <target-climb-rate-fpm type="float">2000.0</target-climb-rate-fpm>
      <target-descent-rate-fpm type="float">1500.0</target-descent-rate-fpm>
      <elevator-adj-factor type="float">3500.0</elevator-adj-factor>
-     <integral-contribution type="float">0.01</integral-contribution>
+     <integral-contribution type="float">0.005</integral-contribution>
      <zero-pitch-throttle type="float">0.0001</zero-pitch-throttle>
      <zero-pitch-trim-full-throttle type="float">0.0001</zero-pitch-trim-full-throttle>
      <max-roll-deg type="float">30</max-roll-deg>

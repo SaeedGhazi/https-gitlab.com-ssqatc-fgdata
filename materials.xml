@@ -3128,6 +3128,7 @@ Shared parameters for various materials.
 
 <material>
  <name>Grass</name>
+ <name>Airport</name>
  <name>AirportKeep</name>
  <name>GrassCover</name>
  <name>HerbTundraCover</name>

@@ -75,7 +75,7 @@ properties' values.
    <name>display</name>
    <type>text</type>
    <font>led</font>
-   <point-size>13</point-size>
+   <point-size>6.5</point-size>
    <color>
     <red>0.0</red>
     <green>0.0</green>
@@ -90,11 +90,11 @@ properties' values.
    <transformations>
     <transformation>
      <type>x-shift</type>
-     <offset>-37</offset>
+     <offset>-34</offset>
     </transformation>
     <transformation>
      <type>y-shift</type>
-     <offset>-7</offset>
+     <offset>-9</offset>
     </transformation>
    </transformations>
   </layer>

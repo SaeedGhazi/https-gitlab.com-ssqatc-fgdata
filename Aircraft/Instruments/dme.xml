@@ -51,7 +51,7 @@ properties' values.
     <name>display</name>
     <type>text</type>
     <font>led</font>
-    <point-size>12</point-size>
+    <point-size>6</point-size>
     <color>
      <red>1.0</red>
      <green>0.5</green>
@@ -69,7 +69,7 @@ properties' values.
     <name>display</name>
     <type>text</type>
     <font>led</font>
-    <point-size>10</point-size>
+    <point-size>6</point-size>
     <color>
      <red>1.0</red>
      <green>0.5</green>
@@ -85,11 +85,11 @@ properties' values.
    <transformations>
     <transformation>
      <type>x-shift</type>
-     <offset>-52</offset>
+     <offset>-50</offset>
     </transformation>
     <transformation>
      <type>y-shift</type>
-     <offset>10</offset>
+     <offset>11</offset>
     </transformation>
    </transformations>
   </layer>
@@ -101,7 +101,7 @@ properties' values.
    <layer>
     <type>text</type>
     <font>led</font>
-    <point-size>12</point-size>
+    <point-size>6</point-size>
     <color>
      <red>1.0</red>
      <green>0.5</green>
@@ -119,7 +119,7 @@ properties' values.
     <name>display</name>
     <type>text</type>
     <font>led</font>
-    <point-size>10</point-size>
+    <point-size>6</point-size>
     <color>
      <red>1.0</red>
      <green>0.5</green>
@@ -135,7 +135,7 @@ properties' values.
    <transformations>
     <transformation>
      <type>y-shift</type>
-     <offset>10</offset>
+     <offset>11</offset>
     </transformation>
    </transformations>
   </layer>
@@ -147,7 +147,7 @@ properties' values.
    <layer>
     <type>text</type>
     <font>led</font>
-    <point-size>12</point-size>
+    <point-size>6</point-size>
     <color>
      <red>1.0</red>
      <green>0.5</green>
@@ -165,7 +165,7 @@ properties' values.
     <name>display</name>
     <type>text</type>
     <font>led</font>
-    <point-size>10</point-size>
+    <point-size>6</point-size>
     <color>
      <red>1.0</red>
      <green>0.5</green>
@@ -181,11 +181,11 @@ properties' values.
    <transformations>
     <transformation>
      <type>y-shift</type>
-     <offset>10</offset>
+     <offset>11</offset>
     </transformation>
     <transformation>
      <type>x-shift</type>
-     <offset>36</offset>
+     <offset>33</offset>
     </transformation>
    </transformations>
   </layer>

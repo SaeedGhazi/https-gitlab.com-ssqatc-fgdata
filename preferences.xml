@@ -576,10 +576,9 @@ Started September 2000 by David Megginson, david@megginson.com
  </input>
 
 
- <!-- Radio settings -->
+ <instrumentation>
 
- <radios>
-
+  <!-- Radio settings -->
   <dme>
    <switch-position type="int">0</switch-position>
   </dme>
@@ -620,11 +619,7 @@ Started September 2000 by David Megginson, david@megginson.com
    </radials>
   </nav>
 
- </radios>
-
- <!-- Instruments -->
-
- <instrumentation>
+  <!-- Instruments -->
 
   <airspeed-indicator>
    <serviceable type="bool" archive="y">true</serviceable>

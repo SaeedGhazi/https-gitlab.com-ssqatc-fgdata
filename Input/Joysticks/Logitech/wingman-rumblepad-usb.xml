@@ -41,6 +41,7 @@ $Id$
   <binding>
    <command>property-scale</command>
    <property>/controls/flight/aileron</property>
+   <power type="double">3</power>
   </binding>
  </axis>
 
@@ -50,6 +51,7 @@ $Id$
    <command>property-scale</command>
    <property>/controls/flight/elevator</property>
    <factor type="double">-1.0</factor>
+   <power type="double">3</power>
   </binding>
  </axis>
 
@@ -109,6 +111,7 @@ $Id$
   <binding>
    <command>property-scale</command>
    <property>/controls/flight/rudder</property>
+   <power type="double">3</power>
   </binding>
  </axis>
 

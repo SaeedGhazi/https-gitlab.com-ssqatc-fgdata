@@ -14,13 +14,18 @@ YASim Piper Warrior II with 2D panel.
   <!-- set up 2D panel -->
 
   <panel>
-   <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
-   <visibility archive="y">true</visibility>
+   <visibility archive="y">false</visibility>
   </panel>
 
-  <panel_2>
-   <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
-  </panel_2>
+  <view>
+   <internal archive="y">true</internal>
+   <config>
+     <x-offset-m archive="y">-0.18</x-offset-m>
+     <y-offset-m archive="y">0.50</y-offset-m>
+     <z-offset-m archive="y">2.5</z-offset-m>
+     <default-pitch-deg>-12</default-pitch-deg>
+   </config>
+  </view>
 
   <!-- Look down a bit over the top of the panel -->
 

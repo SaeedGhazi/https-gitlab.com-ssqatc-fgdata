@@ -141,16 +141,29 @@ flap0, flap1, slat, spoiler:
                   angle by which the stall AoA is translated by the
                   slat extension.
 
-jet:      A turbojet/fan engine.  Really cheezy right now, so there's
-          not much to set.  It accepts a <control> subelement to map a
+jet:      A turbojet/fan engine.  It accepts a <control> subelement to map a
           property to its throttle setting, and an <actionpt> subelement
           to place the action point of the thrust at a different
           position than the mass of the engine.
-          x,y,z:  The location of the engine, as a point mass.  If no
-                  actionpt is specified, this will also be the point of
-                  application of thrust.
-          mass:   The mass of the engine, in pounds.
-          thrust: The maximum sea-level thrust, in pounds.
+          x,y,z:          The location of the engine, as a point mass.
+                          If no actionpt is specified, this will also
+                          be the point of application of thrust.
+          mass:           The mass of the engine, in pounds.
+          thrust:         The maximum sea-level thrust, in pounds.
+          afterburner:    Maximum additional thrust from the afterburner,
+                          in pounds [0].
+          rotate:         Vector angle of the thrust in degrees about the 
+                          Y axis [0].
+          n1-idle:        Idling rotor speed [55].
+          n1-max:         Maximum rotor speed [102].
+          n2-idle:        Idling compressor speed [73].
+          n2-max:         Maximum compressor speed [103].
+          tsfc:           Thrust-specific fuel consumption [0.8].
+                          This should be considerably lower for modern
+                          turbofans.
+          egt:            Exhaust gas temperature at takeoff [1050].
+          epr:            Engine pressure ratio at takeoff [3.0].
+          exhaust-speed:  The maximum exhaust speed in knots [~1555].
 
 propeller: A propeller connected to a non-turbocharged piston engine
           The engine model is evolving, this element is likely to change
@@ -169,9 +182,20 @@ propeller: A propeller connected to a non-turbocharged piston engine
                          propeller.  Generally not the same as the
                          aircraft's cruise speed.
           cruise-rpm:    The RPM of the propeller at max-eff. cruise.
-          alt:           The cruise altitude.
+          cruise-power:  The power produced at cruise, in horsepower.
+          cruise-alt:    The reference cruise altitude in feet.
+          eng-power:     The brake horsepower at cruise.
+          eng-rpm:       The engine RPM at cruise (for geared engines?).
           takeoff-power: The takeoff power required by the propeller...
           takeoff-rpm:   ...at the given takeoff RPM.
+          displacement:  The engine displacement in cubic inches.
+          compression:   The engine compression [??]
+          turbo-mul:     The turbocharger multiplier.
+          wastegate-mp:  The manifold pressure to activate the wastegate
+                         (inHG).
+          min-rpm:       The minimum operational RPM.
+          max-rpm:       The maximum operational RPM.
+
 
 actionpt: Defines an "action point" for an enclosing jet or propeller
           element.  This is the location where the force from the thruster

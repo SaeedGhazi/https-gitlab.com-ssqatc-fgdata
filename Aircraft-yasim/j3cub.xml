@@ -26,10 +26,10 @@ since it is what the weight-and-balance site above uses.
 -->
 
 <!-- 
-  680lb empty weight less 200lb for engine (wild guess)
-  + 340 for pilot and passenger
+  680lb empty weight.
  -->
-<airplane mass="820">
+<!-- FIXME: this includes the engine; is that correct? -->
+<airplane mass="680">
 
 <!-- Approach configuration (actually touchdown, I think) -->
 <approach speed="25" aoa="16">
@@ -38,7 +38,7 @@ since it is what the weight-and-balance site above uses.
 </approach>
 
 <!-- Cruise configuration -->
-<cruise speed="67" alt="8000">
+<cruise speed="67" alt="0">
   <control-setting axis="/controls/throttle[0]" value="1.0"/>
   <control-setting axis="/controls/mixture[0]" value="1.0"/>
 </cruise>
@@ -46,10 +46,8 @@ since it is what the weight-and-balance site above uses.
 <!-- pilot's eyepoint -->
 <cockpit x="-0.23" y="0" z="-0.30"/>
 
-<!-- FIXME: midpoint (I don't understand it) -->
-<!-- FIXME: taper (I just left in the C172 value) -->
 <fuselage ax="1.37" ay="0" az="-0.71" bx="-4.81" by="0" bz="-0.65"
-          width="0.71" taper="0.16" midpoint="0.83"/>
+          width="0.71" taper="0.16" midpoint="0.17"/>
 
 <!--
   I treat it as a perfectly rectangular wing for now.  Note that
@@ -60,8 +58,7 @@ since it is what the weight-and-balance site above uses.
   Note that the J3 Cub has no flaps.  With a stall speed of 25kt, who
   needs them?  From what I've read, the ailerons add lots of drag.
 -->
-<!-- FIXME: camber (used the C172 value) -->
-<wing x="-0.80" y="0.42" z="0.0" taper="0.0"
+<wing x="-0.80" y="0.42" z="0.0" taper="1.0"
       length="4.87" chord="1.60" sweep="0" dihedral="5" camber="0.1">
   <stall aoa="16" width="6" peak="1.5"/>
   <flap0 start=".31" end="0.85" lift="1.5" drag="1.4"/>
@@ -100,9 +97,9 @@ since it is what the weight-and-balance site above uses.
 <propeller radius="0.95"
 	   cruise-speed="60" cruise-rpm="2300"
            cruise-alt="8000" cruise-power="48"
-           takeoff-power="60" takeoff-rpm="2300"
+           takeoff-power="55" takeoff-rpm="2300"
            eng-power="65" eng-rpm="2700"
-           x="0.71" y="0" z="-0.65" mass="200" moment="8">
+           x="0.71" y="0" z="-0.65" mass="150" moment="8">
   <actionpt x="1.31" y="0" z="-0.65"/>
   <control-input axis="/controls/throttle[0]" control="THROTTLE"/>
   <control-input axis="/controls/starter[0]" control="STARTER"/>
@@ -115,12 +112,12 @@ since it is what the weight-and-balance site above uses.
   <control-input axis="/controls/tailwheel-castering" control="CASTERING"/>
 </gear>
 
-<gear x="0" y="0.89" z="-1.96" compression=".3"> <!-- left main -->
+<gear x="0" y="0.95" z="-1.96" compression=".1"> <!-- left main -->
   <control-input axis="/controls/brakes[0]" control="BRAKE" split="true"/>
   <control-input axis="/controls/parking-brake" control="BRAKE" split="true"/>
 </gear>
 
-<gear x="0" y="-0.89" z="-1.96" compression=".3"> <!-- right main -->
+<gear x="0" y="-0.95" z="-1.96" compression=".1"> <!-- right main -->
   <control-input axis="/controls/brakes[1]" control="BRAKE" split="true"/>
   <control-input axis="/controls/parking-brake" control="BRAKE" split="true"/>
 </gear>
@@ -132,7 +129,11 @@ since it is what the weight-and-balance site above uses.
   Note the tandem seating; the x values (arms) come from the
   weight-and-balance page cited at the start.
 -->
-<ballast x="-0.23" y="0" z="-0.70" mass="170"/> <!-- pilot -->
-<ballast x="-0.91" y="0" z="-0.70" mass="170"/> <!-- passenger -->
+
+<!-- pilot -->
+<weight x="-0.23" y="0" z="-0.70" mass-prop="/yasim/j3cub/pilot-lb"/>
+
+<!-- passenger -->
+<weight x="-0.91" y="0" z="-0.70" mass-prop="/yasim/j3cub/passenger-lb"/>
 
 </airplane>

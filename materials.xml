@@ -2707,6 +2707,11 @@ Shared parameters for various materials.
    <heading-type>random</heading-type>
   </object>
   <object>
+   <path>Models/Buildings/brick-school.ac</path>
+   <coverage-m2>10000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
    <path>Models/Buildings/water-tower.ac</path>
    <coverage-m2>50000000</coverage-m2>
    <heading-type>random</heading-type>
@@ -2779,6 +2784,11 @@ Shared parameters for various materials.
    <heading-type>random</heading-type>
   </object>
   <object>
+   <path>Models/Buildings/brick-school.ac</path>
+   <coverage-m2>2000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
    <path>Models/Buildings/water-tower.ac</path>
    <coverage-m2>50000000</coverage-m2>
    <heading-type>random</heading-type>
@@ -2835,6 +2845,11 @@ Shared parameters for various materials.
   <object>
    <path>Models/Buildings/big-church.ac</path>
    <coverage-m2>250000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/brick-school.ac</path>
+   <coverage-m2>1000000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
   <object>
@@ -3195,7 +3210,7 @@ Shared parameters for various materials.
   <range-m>1000</range-m>
   <object>
    <path>Models/Fauna/cow.ac</path>
-   <coverage-m2>50000</coverage-m2>
+   <coverage-m2>100000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
  </object-group>
@@ -3257,7 +3272,7 @@ Shared parameters for various materials.
   <range-m>1000</range-m>
   <object>
    <path>Models/Fauna/cow.ac</path>
-   <coverage-m2>50000</coverage-m2>
+   <coverage-m2>100000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
  </object-group>
@@ -3319,7 +3334,7 @@ Shared parameters for various materials.
   <range-m>1000</range-m>
   <object>
    <path>Models/Fauna/cow.ac</path>
-   <coverage-m2>50000</coverage-m2>
+   <coverage-m2>100000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
  </object-group>

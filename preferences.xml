@@ -41,7 +41,7 @@ Started September 2000 by David Megginson, david@megginson.com
   </sound>
   <speed-up type="double">1.0</speed-up>
   <current-view>
-    <field-of-view type="double">50.0</field-of-view>
+    <field-of-view type="double">55.0</field-of-view>
   </current-view>
   <panel>
    <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>

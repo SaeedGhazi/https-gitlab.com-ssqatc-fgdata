@@ -707,6 +707,12 @@ Started September 2000 by David Megginson, david@megginson.com
   </vacuum>
  </systems>
 
+ <autopilot>
+  <internal>
+   <ft type="double">0.1</ft>
+  </internal>
+ </autopilot>
+
  <logging>
   <log n="0">
    <enabled>false</enabled>

@@ -15,7 +15,7 @@ NR/MD YF23 simulation config.
 
   <sound>
    <audible>true</audible>
-   <path>Aircraft/a4/a4-sound.xml</path>
+   <path>Aircraft/yf23/yf23-sound.xml</path>
   </sound>
 
   <panel>
@@ -50,27 +50,16 @@ NR/MD YF23 simulation config.
 
  </sim>
 
-<!-- <controls>
-  <engines>
-   <engine n="0">
-    <magnetos>3</magnetos>
-   </engine>
-   <engine n="1">
-    <magnetos>3</magnetos>
-   </engine>
-  </engines>
- </controls>
--->
  <autopilot>
    <config>
 
-     <min-climb-speed-kt type="float">50.0</min-climb-speed-kt>
-     <best-climb-speed-kt type="float">450.0</best-climb-speed-kt>
+     <min-climb-speed-kt type="float">90.0</min-climb-speed-kt>
+     <best-climb-speed-kt type="float">900.0</best-climb-speed-kt>
 
      <target-climb-rate-fpm type="float">20000.0</target-climb-rate-fpm>
      <target-descent-rate-fpm type="float">12000.0</target-descent-rate-fpm>
 
-     <elevator-adj-factor type="float">500.0</elevator-adj-factor>
+     <elevator-adj-factor type="float">400.0</elevator-adj-factor>
 
      <integral-contribution type="float">0.005</integral-contribution>
 
@@ -87,5 +76,3 @@ NR/MD YF23 simulation config.
  </autopilot>
 
 </PropertyList>
-
-

@@ -35,6 +35,7 @@
   <binding>
    <command>property-scale</command>
    <property>/controls/aileron</property>
+   <power>2.0</power>
   </binding>
  </axis>
 
@@ -44,6 +45,7 @@
    <command>property-scale</command>
    <property>/controls/elevator</property>
    <factor type="double">-1.0</factor>
+   <power>2.0</power>
   </binding>
  </axis>
 

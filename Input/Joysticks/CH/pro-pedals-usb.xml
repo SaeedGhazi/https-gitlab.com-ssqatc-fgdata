@@ -43,6 +43,7 @@
    <property>/controls/rudder</property>
    <factor>1.0</factor>
    <offset>0.0</offset>
+   <power>2.0</power>
   </binding>
  </axis>
 

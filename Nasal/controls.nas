@@ -268,8 +268,7 @@ incElevator = func {
       if ( elevator.getValue() > 1.0 ) {
         elevator.setValue( 1.0 );
       }
-    }
-    if ( auto.getValue() == "altitude-hold" ) {
+    } elsif ( auto.getValue() == "altitude-hold" ) {
       node = props.globals.getNode("/autopilot/settings/target-altitude-ft", 1);
       if ( node.getValue() == nil ) {
         node.setValue( 0.0 );

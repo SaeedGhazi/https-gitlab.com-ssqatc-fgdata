@@ -100,6 +100,14 @@
    </binding>
   </item>
 
+  <item>
+   <label>Logging</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>logging</dialog-name>
+   </binding>
+  </item>
+
  </menu>
 
  <menu>

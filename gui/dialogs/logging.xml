@@ -1,0 +1,419 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <name>logging</name>
+ <width>600</width>
+ <height>420</height>
+ <modal>false</modal>
+
+ <text>
+  <x>10</x>
+  <y>390</y>
+  <label>Logging</label>
+ </text>
+
+ <group>
+  <x>0</x>
+  <y>360</y>
+
+  <input>
+   <x>10</x>
+   <y>0</y>
+   <width>200</width>
+   <height>25</height>
+   <property>/logging/log[0]/filename</property>
+   <label>File name</label>
+  </input>
+
+  <checkbox>
+   <x>350</x>
+   <y>0</y>
+   <width>25</width>
+   <height>25</height>
+   <property>/logging/log[0]/enabled</property>
+   <label>Enabled</label>
+  </checkbox>
+ </group>
+
+ <group>
+  <x>0</x>
+  <y>330</y>
+  
+  <text>
+   <x>10</x>
+   <y>0</y>
+   <label>Column</label>
+  </text>
+
+  <text>
+   <x>80</x>
+   <y>0</y>
+   <label>Enabled</label>
+  </text>
+
+  <text>
+   <x>160</x>
+   <y>0</y>
+   <label>Title</label>
+  </text>
+
+  <text>
+   <x>300</x>
+   <y>0</y>
+   <label>Property</label>
+  </text>
+
+ </group>
+
+
+ <group>
+  <x>0</x>
+  <y>300</y>
+  
+  <text>
+   <x>10</x>
+   <y>0</y>
+   <label>1</label>
+  </text>
+
+  <checkbox>
+   <x>80</x>
+   <y>0</y>
+   <width>25</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[0]/enabled</property>
+  </checkbox>
+
+  <input>
+   <x>160</x>
+   <y>0</y>
+   <width>120</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[0]/title</property>
+  </input>
+
+  <input>
+   <x>300</x>
+   <y>0</y>
+   <width>200</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[0]/property</property>
+  </input>
+
+ </group>
+
+ <group>
+  <x>0</x>
+  <y>270</y>
+  
+  <text>
+   <x>10</x>
+   <y>0</y>
+   <label>2</label>
+  </text>
+
+  <checkbox>
+   <x>80</x>
+   <y>0</y>
+   <width>25</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[1]/enabled</property>
+  </checkbox>
+
+  <input>
+   <x>160</x>
+   <y>0</y>
+   <width>120</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[1]/title</property>
+  </input>
+
+  <input>
+   <x>300</x>
+   <y>0</y>
+   <width>200</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[1]/property</property>
+  </input>
+
+ </group>
+
+ <group>
+  <x>0</x>
+  <y>240</y>
+  
+  <text>
+   <x>10</x>
+   <y>0</y>
+   <label>3</label>
+  </text>
+
+  <checkbox>
+   <x>80</x>
+   <y>0</y>
+   <width>25</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[2]/enabled</property>
+  </checkbox>
+
+  <input>
+   <x>160</x>
+   <y>0</y>
+   <width>120</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[2]/title</property>
+  </input>
+
+  <input>
+   <x>300</x>
+   <y>0</y>
+   <width>200</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[2]/property</property>
+  </input>
+
+ </group>
+
+ <group>
+  <x>0</x>
+  <y>210</y>
+  
+  <text>
+   <x>10</x>
+   <y>0</y>
+   <label>4</label>
+  </text>
+
+  <checkbox>
+   <x>80</x>
+   <y>0</y>
+   <width>25</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[3]/enabled</property>
+  </checkbox>
+
+  <input>
+   <x>160</x>
+   <y>0</y>
+   <width>120</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[3]/title</property>
+  </input>
+
+  <input>
+   <x>300</x>
+   <y>0</y>
+   <width>200</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[3]/property</property>
+  </input>
+
+ </group>
+
+ <group>
+  <x>0</x>
+  <y>180</y>
+  
+  <text>
+   <x>10</x>
+   <y>0</y>
+   <label>5</label>
+  </text>
+
+  <checkbox>
+   <x>80</x>
+   <y>0</y>
+   <width>25</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[4]/enabled</property>
+  </checkbox>
+
+  <input>
+   <x>160</x>
+   <y>0</y>
+   <width>120</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[4]/title</property>
+  </input>
+
+  <input>
+   <x>300</x>
+   <y>0</y>
+   <width>200</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[4]/property</property>
+  </input>
+
+ </group>
+
+ <group>
+  <x>0</x>
+  <y>150</y>
+  
+  <text>
+   <x>10</x>
+   <y>0</y>
+   <label>6</label>
+  </text>
+
+  <checkbox>
+   <x>80</x>
+   <y>0</y>
+   <width>25</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[5]/enabled</property>
+  </checkbox>
+
+  <input>
+   <x>160</x>
+   <y>0</y>
+   <width>120</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[5]/title</property>
+  </input>
+
+  <input>
+   <x>300</x>
+   <y>0</y>
+   <width>200</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[5]/property</property>
+  </input>
+
+ </group> 
+
+ <group>
+  <x>0</x>
+  <y>120</y>
+  
+  <text>
+   <x>10</x>
+   <y>0</y>
+   <label>7</label>
+  </text>
+
+  <checkbox>
+   <x>80</x>
+   <y>0</y>
+   <width>25</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[6]/enabled</property>
+  </checkbox>
+
+  <input>
+   <x>160</x>
+   <y>0</y>
+   <width>120</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[6]/title</property>
+  </input>
+
+  <input>
+   <x>300</x>
+   <y>0</y>
+   <width>200</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[6]/property</property>
+  </input>
+
+ </group>
+
+ <group>
+  <x>0</x>
+  <y>90</y>
+  
+  <text>
+   <x>10</x>
+   <y>0</y>
+   <label>8</label>
+  </text>
+
+  <checkbox>
+   <x>80</x>
+   <y>0</y>
+   <width>25</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[7]/enabled</property>
+  </checkbox>
+
+  <input>
+   <x>160</x>
+   <y>0</y>
+   <width>120</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[7]/title</property>
+  </input>
+
+  <input>
+   <x>300</x>
+   <y>0</y>
+   <width>200</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[7]/property</property>
+  </input>
+
+ </group>
+
+ <group>
+  <x>0</x>
+  <y>60</y>
+  
+  <text>
+   <x>10</x>
+   <y>0</y>
+   <label>9</label>
+  </text>
+
+  <checkbox>
+   <x>80</x>
+   <y>0</y>
+   <width>25</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[8]/enabled</property>
+  </checkbox>
+
+  <input>
+   <x>160</x>
+   <y>0</y>
+   <width>120</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[8]/title</property>
+  </input>
+
+  <input>
+   <x>300</x>
+   <y>0</y>
+   <width>200</width>
+   <height>25</height>
+   <property>/logging/log[0]/entry[8]/property</property>
+  </input>
+
+ </group>
+
+ <button>
+  <x>200</x>
+  <y>10</y>
+  <legend>OK</legend>
+  <binding>
+   <command>dialog-apply</command>
+  </binding>
+  <binding>
+   <command>reinit</command>
+   <subsystem>logger</subsystem>
+  </binding>
+  <binding>
+   <command>dialog-close</command>
+  </binding>
+ </button>
+
+ <button>
+  <x>405</x>
+  <y>10</y>
+  <legend>Cancel</legend>
+  <binding>
+   <command>dialog-close</command>
+  </binding>
+ </button>
+
+</PropertyList>

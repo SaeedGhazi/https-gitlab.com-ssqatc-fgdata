@@ -2428,6 +2428,13 @@ Properties currently used:
   <b>0.0</b>
   <a>1.0</a>
  </emissive>
+ <object>
+  <path>Models/Trees/coniferous-tree.ac</path>
+  <coverage>20000</coverage>
+  <range-m>2000</range-m>
+  <group-range-m>10000</group-range-m>
+  <billboard>true</billboard>
+ </object>
 </material>
 
 <material>
@@ -2460,6 +2467,13 @@ Properties currently used:
   <b>0.0</b>
   <a>1.0</a>
  </emissive>
+ <object>
+  <path>Models/Trees/deciduous-tree.ac</path>
+  <coverage>20000</coverage>
+  <range-m>2000</range-m>
+  <group-range-m>10000</group-range-m>
+  <billboard>true</billboard>
+ </object>
 </material>
 
 <material>
@@ -2492,6 +2506,20 @@ Properties currently used:
   <b>0.0</b>
   <a>1.0</a>
  </emissive>
+ <object>
+  <path>Models/Trees/deciduous-tree.ac</path>
+  <coverage>40000</coverage>
+  <range-m>2000</range-m>
+  <group-range-m>10000</group-range-m>
+  <billboard>true</billboard>
+ </object>
+ <object>
+  <path>Models/Trees/coniferous-tree.ac</path>
+  <coverage>40000</coverage>
+  <range-m>2000</range-m>
+  <group-range-m>10000</group-range-m>
+  <billboard>true</billboard>
+ </object>
 </material>
 
 <material>
@@ -2525,6 +2553,13 @@ Properties currently used:
   <b>0.0</b>
   <a>1.0</a>
  </emissive>
+ <object>
+  <path>Models/Trees/coniferous-tree.ac</path>
+  <coverage>20000</coverage>
+  <range-m>2000</range-m>
+  <group-range-m>10000</group-range-m>
+  <billboard>true</billboard>
+ </object>
 </material>
 
 <material>
@@ -2557,6 +2592,13 @@ Properties currently used:
   <b>0.0</b>
   <a>1.0</a>
  </emissive>
+ <object>
+  <path>Models/Trees/deciduous-tree.ac</path>
+  <coverage>20000</coverage>
+  <range-m>2000</range-m>
+  <group-range-m>10000</group-range-m>
+  <billboard>true</billboard>
+ </object>
 </material>
 
 <material>
@@ -2623,6 +2665,13 @@ Properties currently used:
   <b>0.0</b>
   <a>1.0</a>
  </emissive>
+ <object>
+  <path>Models/Buildings/big-apartment.ac</path>
+  <coverage>1000000</coverage>
+  <range-m>10000</range-m>
+  <group-range-m>20000</group-range-m>
+  <billboard>false</billboard>
+ </object>
 </material>
 
 <material>
@@ -2951,6 +3000,27 @@ Properties currently used:
   <b>0.0</b>
   <a>1.0</a>
  </emissive>
+ <object>
+  <path>Models/Fauna/cow.ac</path>
+  <coverage>10000</coverage>
+  <range-m>1000</range-m>
+  <group-range-m>10000</group-range-m>
+  <billboard>false</billboard>
+ </object>
+ <object>
+  <path>Models/Trees/deciduous-tree.ac</path>
+  <coverage>500000</coverage>
+  <range-m>2000</range-m>
+  <group-range-m>10000</group-range-m>
+  <billboard>true</billboard>
+ </object>
+ <object>
+  <path>Models/Trees/coniferous-tree.ac</path>
+  <coverage>1000000</coverage>
+  <range-m>2000</range-m>
+  <group-range-m>10000</group-range-m>
+  <billboard>true</billboard>
+ </object>
 </material>
 
 <material>
@@ -2983,6 +3053,27 @@ Properties currently used:
   <b>0.0</b>
   <a>1.0</a>
  </emissive>
+ <object>
+  <path>Models/Fauna/cow.ac</path>
+  <coverage>10000</coverage>
+  <range-m>1000</range-m>
+  <group-range-m>10000</group-range-m>
+  <billboard>false</billboard>
+ </object>
+ <object>
+  <path>Models/Trees/deciduous-tree.ac</path>
+  <coverage>500000</coverage>
+  <range-m>2000</range-m>
+  <group-range-m>10000</group-range-m>
+  <billboard>true</billboard>
+ </object>
+ <object>
+  <path>Models/Trees/coniferous-tree.ac</path>
+  <coverage>1000000</coverage>
+  <range-m>2000</range-m>
+  <group-range-m>10000</group-range-m>
+  <billboard>true</billboard>
+ </object>
 </material>
 
 <material>
@@ -3015,6 +3106,27 @@ Properties currently used:
   <b>0.0</b>
   <a>1.0</a>
  </emissive>
+ <object>
+  <path>Models/Fauna/cow.ac</path>
+  <coverage>10000</coverage>
+  <range-m>1000</range-m>
+  <group-range-m>10000</group-range-m>
+  <billboard>false</billboard>
+ </object>
+ <object>
+  <path>Models/Trees/deciduous-tree.ac</path>
+  <coverage>500000</coverage>
+  <range-m>2000</range-m>
+  <group-range-m>10000</group-range-m>
+  <billboard>true</billboard>
+ </object>
+ <object>
+  <path>Models/Trees/coniferous-tree.ac</path>
+  <coverage>1000000</coverage>
+  <range-m>2000</range-m>
+  <group-range-m>10000</group-range-m>
+  <billboard>true</billboard>
+ </object>
 </material>
 
 <material>
@@ -3047,6 +3159,20 @@ Properties currently used:
   <b>0.0</b>
   <a>1.0</a>
  </emissive>
+ <object>
+  <path>Models/Trees/deciduous-tree.ac</path>
+  <coverage>500000</coverage>
+  <range-m>2000</range-m>
+  <group-range-m>10000</group-range-m>
+  <billboard>true</billboard>
+ </object>
+ <object>
+  <path>Models/Trees/coniferous-tree.ac</path>
+  <coverage>1000000</coverage>
+  <range-m>2000</range-m>
+  <group-range-m>10000</group-range-m>
+  <billboard>true</billboard>
+ </object>
 </material>
 
 <material>
@@ -3079,6 +3205,20 @@ Properties currently used:
   <b>0.0</b>
   <a>1.0</a>
  </emissive>
+ <object>
+  <path>Models/Trees/deciduous-tree.ac</path>
+  <coverage>200000</coverage>
+  <range-m>2000</range-m>
+  <group-range-m>10000</group-range-m>
+  <billboard>true</billboard>
+ </object>
+ <object>
+  <path>Models/Trees/coniferous-tree.ac</path>
+  <coverage>200000</coverage>
+  <range-m>2000</range-m>
+  <group-range-m>10000</group-range-m>
+  <billboard>true</billboard>
+ </object>
 </material>
 
 <material>

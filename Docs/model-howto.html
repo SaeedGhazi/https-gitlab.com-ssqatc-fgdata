@@ -236,6 +236,7 @@ information.</p>
 <li><a href="#texrotate">texrotate</a></li>
 <li><a href="#textranslate">textranslate</a></li>
 <li><a href="#textmultiple">textmultiple</a></li>
+<li><a href="#material">material</a></li>
 <li><a href="#range">range</a></li>
 <li><a href="#alphatest">alpha-test</a></li>
 </ol>
@@ -881,7 +882,7 @@ display explains the format clearly:</p>
  <blockquote>
   <pre>&lt;animation&gt;
   &lt;type&gt;range&lt;/type&gt;
-  &lt;object-name&gt;Detailed&lt;/objectName&gt;
+  &lt;object-name&gt;Detailed&lt;/object-name&gt;
   &lt;min-m&gt;0&lt;/min-m&gt;
   &lt;max-property&gt;/sim/rendering/static-lod/detailed&lt;/max-property&gt;
 &lt;/animation&gt;
@@ -896,13 +897,83 @@ display explains the format clearly:</p>
  <blockquote>
   <pre>&lt;animation&gt;
   &lt;type&gt;alpha-test&lt;/type&gt;
-  &lt;object-name&gt;Detailed&lt;/objectName&gt;
+  &lt;object-name&gt;Detailed&lt;/object-name&gt;
   &lt;alpha-factor&gt;0.01&lt;/alpha-factor&gt;
 &lt;/animation&gt;
   </pre>
  </blockquote>
-<hr>
 
+<h3><a name="material">"material" animation type</a></h3>
+<p>This "animation" can set any of the material properties on a model branch, including
+the texture file path. A simple case for such an animation can look like this:</p>
+
+ <blockquote>
+  <pre>&lt;animation&gt;
+  &lt;type&gt;material&lt;/type&gt;
+  &lt;object-name&gt;fuselage&lt;/object-name&gt;
+  &lt;global type="bool"&gt;true&lt;/global&gt;
+  &lt;emission-red&gt;1.0&lt;/emission-red&gt;
+  &lt;emission-green&gt;0.8&lt;/emission-green&gt;
+  &lt;emission-blue&gt;0.3&lt;/emission-blue&gt;
+  &lt;emission-factor-prop&gt;/controls/lighting/instruments-norm&lt;/emission-factor-prop&gt;
+  &lt;emission-offset&gt;0.3&lt;/emission-offset&gt;
+&lt;/animation&gt;
+  </pre>
+ </blockquote>
+
+<p>The change is only effective for the objects listed in "object-name" tags,
+whereby you can use more than one of those. The above example, however,
+sets the optional "global" property, so that the changes affect all objects that share
+the same material. Note that all material properties can be set to fixed
+values or, by appending "-prop", to the contents of another property node.</p>
+
+<p>The "emission" group is only one of four available groups: "diffuse,
+"ambient", "specular, and "emission". A change to one of the components
+in each group does always update all three color components. Unset values
+default to zero. In addition to the color groups there are three properties
+"shininess", "transparency", "threshold", and "texture". The "texture" path
+is relative to the "texture-path" target or, if unset, the model directory.
+All numerical values are clamped to 0.0-1.0, except "shininess", which is
+clamped to 0.0-128.0. The "transparency" property makes an object fully
+transparent (and thus invisible) with 0.0, and fully opaque with 1.0. The
+"threshold" property sets the opaqueness threshold. It is only relevant for
+semitransparent textures. Only parts of the texture that are more opaque
+than this are diplayed at all. If it is set to 0.0, all parts of the texture
+will be shown. If it is 0.5, only parts with opaqueness greater than 0.5
+(or transparency less than 0.5) are shown.</p>
+
+<p>Note that defining two or more of these animations for the same object,
+or a mixture of "material" and "blend" animations, will probably not yield
+the result that you expect. Try to do all state manipulations for one
+object or material in one "material" animation, and use its "transparency"
+property instead of an extra "blend" animation.</p>
+
+<p>To make a texture replaceable at runtime, use a "material" animation
+like this:</p>
+
+ <blockquote>
+  <pre>&lt;animation&gt;
+  &lt;type&gt;material&lt;/type&gt;
+  &lt;object-name&gt;tail-vert&lt;/object-name&gt;
+  &lt;texture-prop&gt;/sim/model/foo/texture&lt;/texture-prop&gt;
+&lt;/animation&gt;
+  </pre>
+ </blockquote>
+
+<p>and put something like this into your aircraft's *-set.xml file:</p>
+
+ <blockquote>
+  <pre>&lt;sim&gt;
+  &lt;model&gt;
+    &lt;foo&gt;
+      &lt;texture&gt;logos/tail-logo.rgb&lt;/texture&gt;
+    &lt;/foo&gt;
+  &lt;/model&gt;
+&lt;/sim&gt;
+  </pre>
+ </blockquote>
+
+<hr>
 <address>David Megginson, 11 March 2002</address>
 
 <!-- Standard Footer Begin -->

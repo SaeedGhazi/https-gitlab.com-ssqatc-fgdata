@@ -26,6 +26,7 @@ $Id$
 <PropertyList>
 
  <name>Logitech Extreme Digital 3D Pro</name>
+ <name>Logitech Logitech Extreme 3D Pro</name>
 
  <axis n="0">
   <desc>Aileron</desc>

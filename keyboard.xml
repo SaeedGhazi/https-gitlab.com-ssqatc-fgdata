@@ -42,24 +42,6 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
-<key n="18">
-  <name>Ctrl-R</name>
-  <desc>(Temporary) Toggle winding-ccw</desc>
-  <binding>
-    <command>property-toggle</command>
-    <property>/sim/temp/winding-ccw</property>
-  </binding>
-</key>
-
-<key n="20">
-  <name>Ctrl-T</name>
-  <desc>Toggle autopilot terrain lock.</desc>
-  <binding>
-   <command>property-toggle</command>
-   <property>/autopilot/locks/terrain</property>
-  </binding>
- </key>
-
  <key n="13">
   <name>Enter</name>
   <desc>Move rudder right or increase autopilot heading.</desc>
@@ -79,12 +61,30 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+<key n="18">
+  <name>Ctrl-R</name>
+  <desc>(Temporary) Toggle winding-ccw</desc>
+  <binding>
+    <command>property-toggle</command>
+    <property>/sim/temp/winding-ccw</property>
+  </binding>
+</key>
+
  <key n="19">
   <name>Ctrl-S</name>
   <desc>Toggle auto-throttle lock.</desc>
   <binding>
    <command>property-toggle</command>
    <property>/autopilot/locks/auto-throttle</property>
+  </binding>
+ </key>
+
+<key n="20">
+  <name>Ctrl-T</name>
+  <desc>Toggle autopilot terrain lock.</desc>
+  <binding>
+   <command>property-toggle</command>
+   <property>/autopilot/locks/terrain</property>
   </binding>
  </key>
 

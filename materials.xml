@@ -1107,7 +1107,12 @@ Shared parameters for various materials.
   </object>
   <object>
    <path>Models/Buildings/red-barn.ac</path>
-   <coverage-m2>5000000</coverage-m2>
+   <path>Models/Buildings/horse-stable.ac</path>
+   <path>Models/Buildings/cow-stable.ac</path>
+   <path>Models/Buildings/farmhouse1.ac</path>
+   <path>Models/Buildings/farmhouse2.ac</path>
+   <path>Models/Buildings/farmhouse3.ac</path>
+   <coverage-m2>750000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
  </object-group>
@@ -1149,7 +1154,12 @@ Shared parameters for various materials.
   </object>
   <object>
    <path>Models/Buildings/red-barn.ac</path>
-   <coverage-m2>5000000</coverage-m2>
+   <path>Models/Buildings/horse-stable.ac</path>
+   <path>Models/Buildings/cow-stable.ac</path>
+   <path>Models/Buildings/farmhouse1.ac</path>
+   <path>Models/Buildings/farmhouse2.ac</path>
+   <path>Models/Buildings/farmhouse3.ac</path>
+   <coverage-m2>750000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
  </object-group>
@@ -1191,7 +1201,12 @@ Shared parameters for various materials.
   </object>
   <object>
    <path>Models/Buildings/red-barn.ac</path>
-   <coverage-m2>5000000</coverage-m2>
+   <path>Models/Buildings/horse-stable.ac</path>
+   <path>Models/Buildings/cow-stable.ac</path>
+   <path>Models/Buildings/farmhouse1.ac</path>
+   <path>Models/Buildings/farmhouse2.ac</path>
+   <path>Models/Buildings/farmhouse3.ac</path>
+   <coverage-m2>750000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
  </object-group>

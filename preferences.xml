@@ -183,6 +183,10 @@ Started September 2000 by David Megginson, david@megginson.com
 
  <environment>
   <visibility-m type="double">16000</visibility-m>
+  <params>
+   <base-wind-speed-kt type="double">0</base-wind-speed-kt>
+   <gust-wind-speed-kt type="double">0</gust-wind-speed-kt>
+  </params>
  </environment>
 
 

@@ -9,15 +9,17 @@
 * Axis 1: 		elevator
 * Axis 2 (twist):	rudder
 * Axis 3: 		throttle
-* Axes 6 and 7 (hat):	view direction
+* Axis 4 (hat):		view direction
+* Axes 5 (hat):		view elevation
 *
+* Button 0 (trigger):	not assigned
 * Button 1:		all brakes
 * Button 2:		elevator trim up
 * Button 3:		elevator trim down
 * Button 4:		right brake only
-* Button 5:		flap down
-* Button 6:		left brake only
-* Button 7:		flap up
+* Button 5:		flap up
+* Button 6:		flap down
+* Button 7:		left brake only
 ************************************************************************
 $Id$
 -->

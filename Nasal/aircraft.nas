@@ -1,8 +1,37 @@
-# These classes provide basic functions to use in aircraft specific
+# These classes provide basic functions for use in aircraft specific
 # Nasal context. Note that even if a class is called "door" or "light"
-# this doesn't mean that it can't be used for other purposes. The classes
-# implement only commonly used features, but are easily to extend,
-# as all class members are accessible from outside. For example:
+# this doesn't mean that it can't be used for other purposes.
+#
+# Class instances don't have to be assigned to variables. They do also
+# work if they remain anonymous. It's even a good idea to keep them
+# anonymous if you don't need further access to their members. On the
+# other hand, you can assign the class and apply setters at the same time:
+#
+#   aircraft.light.new("sim/model/foo/beacon");    # anonymous
+#   strobe = aircraft.light.new("sim/model/foo/strobe").cont().switch(1);
+#
+#
+# Classes do create properties, but they don't usually overwrite the contents
+# of an existing property. This makes it possible to preset them in
+# a *-set.xml file or on the command line. For example:
+#
+#   $ fgfs --aircraft=bo105 --prop:/controls/doors/door[0]/position-norm=1
+#
+#
+# Wherever a property argument can be given, this can either be a path,
+# or a node (i.e. property node hash). In return, the property node can
+# always be accessed directly as member "node", and turned into a path
+# string with node.getPath():
+#
+#   beacon = aircraft.light.new("sim/model/foo/beacon");
+#   print(beacon.node.getPath());
+#
+#   strobe_node = props.globals.getNode("sim/model/foo/strobe", 1);
+#   strobe = aircraft.light.new(strobe_node, 0.05, 1.0);
+#
+#
+# The classes implement only commonly used features, but are easy to
+# extend, as all class members are accessible from outside. For example:
 #
 #   # add custom property to door node:
 #   frontdoor.node.getNode("name", 1).setValue("front door");
@@ -10,24 +39,12 @@
 #   # add method to class instance (or base class -> aircraft.door.print)
 #   frontdoor.print = func { print(me.position.getValue()) };
 #
-# Wherever a property argument can be given, this can either be a path,
-# or a node (i.e. property node hash). For example:
 #
-#   beacon = aircraft.light.new("sim/model/foo/beacon");
-#
-#   strobe_node = props.globals.getNode("sim/model/foo/strobe", 1);
-#   strobe = aircraft.light.new(strobe_node, 0.05, 1.0);
-#
-# Classes do create properties, but they don't usually overwrite the contents
-# of an existing property. This makes it possible to preset them in
-# a *-set.xml file or on the command line. For example:
-#
-#   $ fgfs --aircraft=bo105 --prop:/controls/doors/door[0]/position-norm=1
-
 
 
 # helper functions
 # ==============================================================================
+
 # creates (if necessary) and returns a property node from arg[0],
 # which can be a property node already, or a property path
 #
@@ -36,6 +53,17 @@ makeNode = func {
 		return arg[0];
 	} else {
 		return props.globals.getNode(arg[0], 1);
+	}
+}
+
+
+# returns arg[1]-th optional argument of vector arg[0] or default value arg[2]
+#
+optarg = func {
+	if (size(arg[0]) > arg[1] and arg[0][arg[1]] != nil) {
+		arg[0][arg[1]];
+	} else {
+		arg[2];
 	}
 }
 
@@ -49,13 +77,13 @@ makeNode = func {
 # SYNOPSIS:
 #	door.new(<property>, <swingtime> [, <startpos>]);
 #
-#	property      ... door node: property path or node
-#	swingtime     ... time in seconds for full movement (0 -> 1)
-#	startpos      ... initial position      (default: 0)
+#	property   ... door node: property path or node
+#	swingtime  ... time in seconds for full movement (0 -> 1)
+#	startpos   ... initial position      (default: 0)
 #
 # PROPERTIES:
-#	<property>/position-norm   (double)
-#	<property>/enabled         (bool)
+#	./position-norm   (double)     (default: <startpos>)
+#	./enabled         (bool)       (default: 1)
 #
 # EXAMPLE:
 #	canopy = aircraft.door.new("sim/model/foo/canopy", 5);
@@ -63,29 +91,29 @@ makeNode = func {
 #
 door = {
 	new : func {
-		d = { parents : [door] };
-		d.node = makeNode(arg[0]);
-		d.swingtime = arg[1];
-		d.position = d.node.getNode("position-norm", 1);
-		d.enabled = d.node.getNode("enabled", 1);
-		if (d.enabled.getValue() == nil) {
-			d.enabled.setBoolValue(1);
+		m = { parents : [door] };
+		m.node = makeNode(arg[0]);
+		m.swingtime = arg[1];
+		m.positionN = m.node.getNode("position-norm", 1);
+		m.enabledN = m.node.getNode("enabled", 1);
+		if (m.enabledN.getValue() == nil) {
+			m.enabledN.setBoolValue(1);
 		}
-		pos = if (size(arg) > 2 and arg[2] != nil) { arg[2] } else { 0 };
-		if (d.position.getValue() == nil) {
-			d.position.setDoubleValue(pos);
+		pos = optarg(arg, 2, 0);
+		if (m.positionN.getValue() == nil) {
+			m.positionN.setDoubleValue(pos);
 		}
-		d.target = pos < 0.5;
-		return d;
+		m.target = pos < 0.5;
+		return m;
 	},
-	# door.enable(bool)    ->  set <property>/enabled
-	enable  : func { me.enabled.setBoolValue(!!arg[0]) },
+	# door.enable(bool)    ->  set ./enabled
+	enable  : func { me.enabledN.setBoolValue(arg[0]); me },
 
-	# door.setpos(double)  ->  set <property>/position-norm without movement
-	setpos  : func { me.position.setValue(arg[0]); me.target = arg[0] < 0.5 },
+	# door.setpos(double)  ->  set ./position-norm without movement
+	setpos  : func { me.positionN.setValue(arg[0]); me.target = arg[0] < 0.5; me },
 
 	# double door.getpos() ->  return current position as double
-	getpos  : func { me.position.getValue() },
+	getpos  : func { me.positionN.getValue() },
 
 	# door.close()         ->  move to closed state
 	close   : func { me.move(me.target = 0) },
@@ -96,10 +124,13 @@ door = {
 	# door.toggle()        ->  move to opposite end position
 	toggle  : func { me.move(me.target) },
 
+	# door.stop()          ->  stop movement
+	stop    : func { me.move(me.getpos()) },
+
 	# door.move(double)    ->  move to arbitrary position
 	move    : func {
 		time = abs(me.getpos() - arg[0]) * me.swingtime;
-		interpolate(me.position, arg[0], time);
+		interpolate(me.positionN, arg[0], time);
 		me.target = !me.target;
 	},
 };
@@ -114,68 +145,71 @@ door = {
 # SYNOPSIS:
 #	light.new(<property> [, <ontime> [, <offtime> [, <switch>]]]);
 #
-#	property      ... light node: property path or node
-#	ontime        ... time in seconds that the light is on when blinking  (default: 0.5)
-#	offtime       ... time in seconds that the light is off when blinking (default: ontime)
-#	switch        ... property path or node to use as switch              (default: <property>/enabled)
-#	                  If the switch node isn't given or nil, it gets
-#	                  created and the light turned on.
+#	property   ... light node: property path or node
+#	ontime     ... time that the light is on when blinking  (default: 0.5 [s])
+#	offtime    ... time that the light is off when blinking (default: <ontime>)
+#	switch     ... property path or node to use as switch   (default: ./enabled)
+#                      instead of ./enabled
 #
 # PROPERTIES:
-#	<property>/state           (bool)
-#	<property>/enabled         (bool)   (except if <switch> given)
+#	./state           (bool)   (default: 0)
+#	./enabled         (bool)   (default: 0) except if <switch> given)
 #
 # EXAMPLES:
-#	beacon = aircraft.light.new("sim/model/foo/beacon", 0.4);
-#	strobe = aircraft.light.new("sim/model/foo/strobe", 0.05, 1.0, "controls/lighting/strobe");
-#	strobe.set(1);
+#	aircraft.light.new("sim/model/foo/beacon", 0.4);    # anonymous light
+#	strobe = aircraft.light.new("sim/model/foo/strobe", 0.05, 1.0,
+#	                "controls/lighting/strobe");
+#	strobe.switch(1);
 #
 light = {
 	new : func {
-		d = { parents : [light] };
-		d.node = makeNode(arg[0]);
-		d.ontime = if (size(arg) > 1 and arg[1] != nil) { arg[1] } else { 0.5 };
-		d.offtime = if (size(arg) > 2 and arg[2] != nil) { arg[2] } else { d.ontime };
+		m = { parents : [light] };
+		m.node = makeNode(arg[0]);
+		m.ontime = optarg(arg, 1, 0.5);
+		m.offtime = optarg(arg, 2, m.ontime);
 		if (size(arg) > 3 and arg[3] != nil) {
-			d.switch = makeNode(arg[3]);
+			m.switchN = makeNode(arg[3]);
 		} else {
-			d.switch = d.node.getNode("enabled", 1);
+			m.switchN = m.node.getNode("enabled", 1);
 		}
-		if (d.switch.getValue() == nil) {
-			d.switch.setBoolValue(1);
+		if (m.switchN.getValue() == nil) {
+			m.switchN.setBoolValue(0);
 		}
-		d.state = d.node.getNode("state", 1);
-		if (d.state.getValue() == nil) {
-			d.state.setBoolValue(0);
+		m.stateN = m.node.getNode("state", 1);
+		if (m.stateN.getValue() == nil) {
+			m.stateN.setBoolValue(0);
 		}
-		d.continuous = 0;
-		d._loop_();
-		return d;
+		m.interval = 0.5;  # check interval for non blinking (off/on) lights;
+		                   # 0.5 is performance friendly, but makes lights
+		                   # react a bit slow to switch events
+		m.continuous = 0;
+		m._loop_();
+		return m;
 	},
-	# light.set(bool)      ->  set light switch (also affects other lights
+	# light.switch(bool)   ->  set light switch (also affects other lights
 	#                          that use the same switch)
-	set     : func { me.switch.setBoolValue(!!arg[0]) },
+	switch  : func { me.switchN.setBoolValue(arg[0]); me },
 
 	# light.toggle()       ->  toggle light switch
-	toggle  : func { me.switch.setBoolValue(!me.switch.getValue()) },
+	toggle  : func { me.switchN.setBoolValue(!me.switchN.getValue()); me },
 
 	# light.cont()         ->  continuous light
-	cont    : func { me.continuous = 1 },
+	cont    : func { me.continuous = 1; me },
 
-	# light.blink()        ->  blinking light
-	blink   : func { me.continuous = 0 },
+	# light.blink()        ->  blinking light  (default)
+	blink   : func { me.continuous = 0; me },
 
 	_loop_  : func {
-		if (!me.switch.getValue()) {
-			value = 0; delay = 0.5;
+		if (!me.switchN.getValue()) {
+			state = 0; delay = me.interval;
 		} elsif (me.continuous) {
-			value = 1; delay = 0.5;
-		} elsif (me.state.getValue()) {
-			value = 0; delay = me.offtime;
+			state = 1; delay = me.interval;
+		} elsif (me.stateN.getValue()) {
+			state = 0; delay = me.offtime;
 		} else {
-			value = 1; delay = me.ontime;
+			state = 1; delay = me.ontime;
 		}
-		me.state.setValue(value);
+		me.stateN.setValue(state);
 		settimer(func { me._loop_() }, delay);
 	},
 };

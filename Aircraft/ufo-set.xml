@@ -28,7 +28,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
   </panel>
 
   <model>
-   <path>Aircraft/ufo/Models/ufo.ac</path>
+   <path>Aircraft/ufo/Models/ufo.xml</path>
   </model>
 
  </sim>

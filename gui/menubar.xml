@@ -271,6 +271,13 @@
 
  <menu>
   <label>ATC/AI</label>
+
+  <item>
+   <label>Frequencies</label>
+   <binding>
+    <command>ATC-freq-search</command>
+   </binding>
+  </item>
  
   <item>
    <label>Options</label>

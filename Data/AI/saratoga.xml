@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <scenario>
+
+  <!-- Puts the Saratoga in the bay just east of KSFO -->
+  <entry>
+   <type>carrier</type>
+   <model>Models/Geometry/saratoga.ac</model>
+   <latitude>37.63</latitude>
+   <longitude>-122.34</longitude>
+   <heading>330</heading>
+   <speed>20.0</speed>
+   <rudder>0.0</rudder>
+  </entry>
+
+ </scenario>
+
+</PropertyList>

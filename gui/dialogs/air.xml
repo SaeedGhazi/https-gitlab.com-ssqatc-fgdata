@@ -2,84 +2,104 @@
 
 <PropertyList>
 
- <type>dialog</type>
-
  <name>air</name>
- <width>400</width>
- <height>180</height>
+ <width>500</width>
+ <height>210</height>
  <modal>false</modal>
 
  <text>
   <x>10</x>
-  <y>150</y>
+  <y>180</y>
   <label>Environment: Air</label>
  </text>
 
- <input>
-  <x>10</x>
-  <y>110</y>
-  <width>200</width>
-  <height>25</height>
-  <label>sea-level temperature (degC)</label>
-  <property>/environment/temperature-sea-level-degc</property>
- </input>
-
- <input>
-  <x>10</x>
-  <y>80</y>
-  <width>200</width>
-  <height>25</height>
-  <label>sea-level dewpoint (degC)</label>
-  <property>/environment/dewpoint-sea-level-degc</property>
- </input>
-
- <input>
-  <x>10</x>
+ <group>
+  <x>0</x>
   <y>50</y>
-  <width>200</width>
-  <height>25</height>
-  <label>sea-level pressure (inHG)</label>
-  <property>/environment/pressure-sea-level-inhg</property>
- </input>
 
- <button>
-  <x>5</x>
-  <y>10</y>
-  <legend>OK</legend>
-  <binding>
-   <command>dialog-apply</command>
-  </binding>
-  <binding>
-   <command>dialog-close</command>
-  </binding>
-  <default>true</default>
- </button>
+  <input>
+   <x>10</x>
+   <y>90</y>
+   <width>200</width>
+   <height>25</height>
+   <label>visibility (m)</label>
+   <property>/environment/visibility-m</property>
+  </input>
 
- <button>
-  <x>105</x>
-  <y>10</y>
-  <legend>Apply</legend>
-  <binding>
-   <command>dialog-apply</command>
-  </binding>
- </button>
+  <input>
+   <x>10</x>
+   <y>60</y>
+   <width>200</width>
+   <height>25</height>
+   <label>sea-level temperature (degC)</label>
+   <property>/environment/temperature-sea-level-degc</property>
+  </input>
 
- <button>
-  <x>205</x>
-  <y>10</y>
-  <legend>Reset</legend>
-  <binding>
-   <command>dialog-update</command>
-  </binding>
- </button>
+  <input>
+   <x>10</x>
+   <y>30</y>
+   <width>200</width>
+   <height>25</height>
+   <label>sea-level dewpoint (degC)</label>
+   <property>/environment/dewpoint-sea-level-degc</property>
+  </input>
 
- <button>
-  <x>305</x>
+  <input>
+   <x>10</x>
+   <y>0</y>
+   <width>200</width>
+   <height>25</height>
+   <label>sea-level pressure (inHG)</label>
+   <property>/environment/pressure-sea-level-inhg</property>
+  </input>
+
+ </group>
+
+ <!-- Button Box -->
+ <group>
+  <x>50</x>
   <y>10</y>
-  <legend>Cancel</legend>
-  <binding>
-   <command>dialog-close</command>
-  </binding>
- </button>
+
+  <button>
+   <x>0</x>
+   <y>0</y>
+   <legend>OK</legend>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+   <binding>
+    <command>dialog-close</command>
+   </binding>
+   <default>true</default>
+  </button>
+
+  <button>
+   <x>100</x>
+   <y>0</y>
+   <legend>Apply</legend>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+  </button>
+
+  <button>
+   <x>200</x>
+   <y>0</y>
+   <legend>Reset</legend>
+   <binding>
+    <command>dialog-update</command>
+   </binding>
+  </button>
+
+  <button>
+   <x>300</x>
+   <y>0</y>
+   <legend>Cancel</legend>
+   <binding>
+    <command>dialog-close</command>
+   </binding>
+  </button>
+
+ </group>
 
 </PropertyList>

@@ -331,7 +331,7 @@
 
    <option>
     <name>aspect-ratio-multiplier</name>
-    <arg>dimentionless</arg>
+    <arg>factor</arg>
     <description>strings/arm-desc</description>
    </option>
 

@@ -1,0 +1,34 @@
+
+<!--
+# Gload.xml file
+# Defines a control that displays gload on the HUD
+# Created by Keerti Bhamidpati (bhamidip@uiuc.edu)
+
+-->
+
+<PropertyList>
+
+ <labels>
+
+  <i1>
+   <name>G Load</name>
+   <x>41</x>
+   <y>345</y> 
+   <width>40</width>
+   <height>30</height>
+   <data_source>anzg</data_source>	<!-- Name of the function to be called, here get_anzg() is called -->
+   <label_format>%4.2f</label_format>	<!-- The Label Format -->
+   <pre_label_string>NULL</pre_label_string> <!-- String to be written Pre Label -->
+   <post_label_string> g</post_label_string> <!-- String to be written Post Label -->
+   <scale_data>1.0</scale_data>
+   <options>4</options>					<!-- Read Tape options or Hud.hxx -->
+   <justification>0</justification>	<!-- Justify the label, 0=LEFT_JUSTIFY, 1=CENTER_JUSTIFY, 2=RIGHT_JUSTIFY -->
+   <blinking>0</blinking>		<!-- Yet to be implemented  -->
+   <working>true</working>
+   <latitude>false</latitude>		<!-- True if the label is to display Lattitude (special label, displays deg.min.sec)-->
+   <longitude>false</longitude>     <!-- True if the label is to display Longitude (special label, displays deg.min.sec)-->
+  </i1>
+               
+ </labels>
+
+</PropertyList>

@@ -30,6 +30,9 @@ INIT = func {
     foreach(tag; keys(tagSettings)) {
         guinode.getNode(tag, 1).setBoolValue(0);
     }
+    foreach(tag; ["hdg", "alt", "vel"]) {
+        guinode.getNode(tag ~ "-active", 1).setBoolValue(0);
+    }
 }
 settimer(INIT, 0);
 

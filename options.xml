@@ -871,6 +871,16 @@
   </section>
 
   <section>
+   <name>strings/situation-options</name>
+
+   <option>
+    <name>failure</name>
+    <arg>pitot|static|system|vacuum</arg>
+    <description>strings/failure-desc</description>
+   </option>
+  </section>
+
+  <section>
    <name>strings/debugging-options</name>
 
    <option>

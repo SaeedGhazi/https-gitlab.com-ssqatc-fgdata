@@ -125,6 +125,15 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+ <key n="18">
+  <name>Ctrl-R</name>
+  <desc>Show radio dialog.</desc>
+  <binding>
+   <command>dialog-show</command>
+   <dialog-name>radios</dialog-name>
+  </binding>
+ </key>
+
  <key n="19">
   <name>Ctrl-S</name>
   <desc>Toggle auto-throttle lock.</desc>

@@ -183,6 +183,9 @@ propeller: A propeller connected to a non-turbocharged piston engine
           moment:        The moment, in kg-meters.  This has to be
                          hand calculated and guessed at for now.  A
                          more automated system will be forthcoming.
+                         Use a negative moment value for
+                         counter-rotating ("European" -- CCW as seen
+                         from behind the prop) propellers.
           radius:        The radius, in meters, or the propeller.
           cruise-speed:  The max efficiency cruise speed of the
                          propeller.  Generally not the same as the
@@ -199,9 +202,12 @@ propeller: A propeller connected to a non-turbocharged piston engine
           turbo-mul:     The turbocharger multiplier.
           wastegate-mp:  The manifold pressure to activate the wastegate
                          (inHG).
-          min-rpm:       The minimum operational RPM.
-          max-rpm:       The maximum operational RPM.
-
+          min-rpm:       The minimum operational RPM for a constant speed
+                         propeller.  This is the speed to which the
+                         prop governor will seek when the blue lever
+                         is at minimum..
+          max-rpm:       The maximum operational RPM for a constant speed
+                         propeller.  See above.
           gear-ratio:    The factor by which the engine RPM is multiplied
                          to produce the propeller RPM.  Optional (defaults
                          to 1.0).

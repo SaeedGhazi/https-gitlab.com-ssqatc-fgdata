@@ -25,6 +25,8 @@ UIUC Cessna 310 init file.
   <!-- you need to download this from the above website -->
   <model>
    <path>Aircraft/c310/Models/cessna310r.ac</path>
+   <heading-offset-deg>0</heading-offset-deg>
+   <z-offset-m>-0.555</z-offset-m>
   </model> 
  </sim>
 </PropertyList>

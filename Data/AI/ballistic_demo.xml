@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+ 
+<PropertyList>
+
+ <scenario>
+
+  <entry>
+   <type>ballistic</type>
+   <path>Models/Geometry/rocket.xml</path>
+   <speed type="double">500.0</speed>
+   <altitude type="double">50.0</altitude>
+   <longitude type="double">-122.39</longitude>
+   <latitude type="double">37.62</latitude>
+   <heading type="double">200.0</heading>
+   <azimuth type="double">70.0</azimuth>
+   <elevation type="double">45.0</elevation>
+  </entry>
+
+ </scenario>
+
+</PropertyList>

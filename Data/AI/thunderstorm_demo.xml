@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <scenario>
+
+  <!-- Puts a thunderstorm southwest of KSFO -->
+  <entry>
+   <type>storm</type>
+   <model>Models/Geometry/thunderstorm.xml</model>
+   <latitude>37.44</latitude>
+   <longitude>-122.25</longitude>
+   <speed>25.0</speed>
+   <altitude>4000.0</altitude>
+   <heading>70.0</heading>
+  </entry>
+
+ </scenario>
+
+</PropertyList>

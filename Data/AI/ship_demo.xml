@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <scenario>
+
+  <!-- Puts a sailboat in the bay just east of KSFO -->
+  <entry>
+   <type>ship</type>
+   <model>Models/Geometry/sailboat.xml</model>
+   <latitude>37.63</latitude>
+   <longitude>-122.34</longitude>
+   <speed>6.0</speed>
+   <rudder>3.0</rudder>
+  </entry>
+
+ </scenario>
+
+</PropertyList>

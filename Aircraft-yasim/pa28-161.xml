@@ -66,18 +66,18 @@
   <control-input axis="/controls/mixture[0]" control="MIXTURE"/>
 </propeller>
 
-<gear x="-1" y="0" z="-1.2" compression=".4"> <!-- nose -->
+<gear x="-1" y="0" z="-1.3" compression=".05"> <!-- nose -->
   <control-input axis="/controls/rudder" control="STEER"
                  src0="-1.0" src1="1.0"
                  dst0="-0.1" dst1="0.1"/>
 </gear>
 
-<gear x="-2.8" y="1.5" z="-1.0" compression=".3"> <!-- left main -->
+<gear x="-2.8" y="1.5" z="-1.3" compression=".05"> <!-- left main -->
   <control-input axis="/controls/brakes[0]" control="BRAKE" split="true"/>
   <control-input axis="/controls/parking-brake" control="BRAKE" split="true"/>
 </gear>
 
-<gear x="-2.8" y="-1.5" z="-1.0" compression=".3"> <!-- left main -->
+<gear x="-2.8" y="-1.5" z="-1.3" compression=".05"> <!-- left main -->
   <control-input axis="/controls/brakes[1]" control="BRAKE" split="true"/>
   <control-input axis="/controls/parking-brake" control="BRAKE" split="true"/>
 </gear>
@@ -85,7 +85,7 @@
 <tank x="-2.5" y="1.5" z="-0.25" capacity="144"/> 
 <tank x="-2.5" y="-1.5" z="-0.25" capacity="144"/> 
 
-<ballast x="-2.0" y="0" z="0" mass="200"/> <!-- cockpit -->
+<ballast x="-2.0" y="0" z="0" mass="400"/> <!-- cockpit -->
 
 <weight x="-2.5" y=".33" z="0" mass-prop="/yasim/pa28/pilot-lb"/>
 <weight x="-2.5" y="-.33" z="0" mass-prop="/yasim/pa28/copilot-lb"/>

@@ -218,6 +218,14 @@
     <subsystem>gui</subsystem>
    </binding>
   </item>
+
+  <item>
+   <label>Reload Panel</label>
+   <binding>
+    <command>panel-load</command>
+   </binding>
+  </item>
+
  </menu>
 
  <menu>

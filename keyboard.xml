@@ -81,6 +81,15 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+ <key n="9">
+  <name>Ctrl-I</name>
+  <desc>Show instrument setting dialog.</desc>
+  <binding>
+   <command>dialog-show</command>
+   <dialog-name>instruments</dialog-name>
+  </binding>
+ </key>
+
  <key n="13">
   <name>Enter</name>
   <desc>Move rudder right.</desc>
@@ -127,7 +136,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="18">
   <name>Ctrl-R</name>
-  <desc>Show radio dialog.</desc>
+  <desc>Show radio setting dialog.</desc>
   <binding>
    <command>dialog-show</command>
    <dialog-name>radios</dialog-name>

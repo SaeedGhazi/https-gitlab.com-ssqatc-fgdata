@@ -1,0 +1,268 @@
+Coordinate system notes: All positions specified are in meters (which
+is weird, since all other units in the file are English).  The X axis
+points forward, Y is left, and Z is up.  Take your right hand, and
+hold it like a gun.  Your first and second fingers are the X and Y
+axes, and your upwards-pointing thumb is the Z.  This is slightly
+different from the coordinate system used by JSBSim.  Sorry.  The
+origin can be placed anywhere, so long as you are consistent.  I use
+the nose of the aircraft.
+
+XML Tags
+--------
+
+airplane: The top-level tag for the file.  It contains only one
+          attribute:
+          mass: The empty (no fuel) weight, in pounds.
+
+approach: The approach parameters for the aircraft.  The solver will
+          generate an aircraft that matches these settings.  The tag
+          can (and should) contain <control> tags indicating pilot
+          input settings, such as flaps and throttle, for the
+          approach.
+          speed: The approach airspeed, in knots TAS.
+          aoa:   The approach angle of attack, in degrees
+
+cruise:   The cruise speed and altitude for the solver to match.  As
+          above, this should contain <control> tags indicating
+          aircraft configuration.  Especially, make sure the engines
+          are generating enough thrust at cruise!
+          speed: The cruise speed, in knots TAS.
+          alt:   The cruise altitude, in feet MSL.
+
+cockpit:  The location of the cockpit (pilot eyepoint).
+          x,y,z: eyepoint location (see coordinates note)
+
+fuselage: This defines a tubelike structure.  It will be given an even
+          mass and aerodynamic force distribution by the solver.  You
+          can have as many as you like, in any orientation you please.
+          ax,ay,az: One end of the tube (typically the front)
+          bx,by,bz: The other ("back") end.
+          width:    The width of the tube, in meters.
+
+wing:     This defines the main wing of the aircraft.  You can have
+          only one (but see below about using vstab objects for extra
+          lifting surfaces).  The wing should have a <stall> subtag to
+          indicate stall behavior, control surface subtags (flap0,
+          flap1, spoiler, slat) to indicate what and where the control
+          surfaces are, and <control> subtags to map user input
+          properties to the control surfaces.
+          x,y,z:    The "base" of the wing, specified as the location of
+                    the mid-chord (not leading edge, trailing edge, or
+                    aerodynamic center) point at the root of the LEFT
+                    (!)  wing.
+          length:   The length from the base of the wing to the midchord
+                    point at the tip.  Note that this is not the same
+                    thing as span.
+          chord:    The chord of the wing at its base, along the X axis
+                    (not normal to the leading edge, as it is
+                    sometimes defined).
+          taper:    The taper fraction, expressed as the tip chord
+                    divided by the root chord.  A taper of one is a
+                    hershey bar wing, and zero would be a wing ending
+                    at a point.  Defaults to one.
+          sweep:    The sweep angle of the wing, in degrees.  Zero is
+                    no sweep, positive angles are swept back.
+                    Defaults to zero.
+          dihedral: The dihedral angle of the wing.  Positive angles
+                    are upward dihedral.  Defaults to zero.
+
+hstab:    These defines the horizontal stabilizer of the aircraft.
+          Internally, it is just awing objects and therefore work the
+          same in XML.  You are allowed only one hstab object; the
+          solver needs to know which wing's incidence to play with to
+          get the aircraft trimmed correctly.
+
+vstab:    A "vertical" stabilizer.  Like hstab, this is just another
+          wing, with a few special properties.  The surface is not
+          "mirrored" as are wing and hstab objects.  If you define a
+          left wing only, you'll only get a left wing.  The default
+          dihedral, if unspecified, is 90 degrees instead of zero.
+          But all parameters are equally settable, so there's no
+          requirement that this object be "vertical" at all.  You can
+          use it for anything you like, such as extra wings for
+          biplanes.  Most importantly, these surfaces are not involved
+          with the solver computation, so you can have none, or as
+          many as you like.
+
+stall:    A subtag of a wing (or hstab/vstab) that specifies the stall
+          behavior.
+          aoa:  The stall angle (maximum lift) in degrees.
+          width: The "width" of the stall, in degrees.  A high value
+                 indicates a gentle stall.  Low values are viscious.
+          peak:  The height of the lift peak, relative to the
+                 post-stall secondary lift peak at 45 degrees.
+                 Defaults to 1.5.  This one is deep voodoo, and
+                 probably doesn't need to change much.  Bug me for an
+                 explanation if you're curious.
+
+flap0, flap1, slat, spoiler:
+          These are subtags of wing/hstab/vstab objects, and specify
+          the location and effectiveness of the control surfaces.
+          start:  The positition along the wing where the control
+                  surface begins.  Zero is the root, one is the tip.
+          end:    The position where the surface ends, as above.
+          lift:   The lift multiplier for a flap or slat at full
+                  extension.  One is a no-op, a typical aileron might
+                  be 1.2 or so, a giant jetliner flap 2.0, and a
+                  spoiler 0.0.  For spoilers, the interpretation is a
+                  little different -- they spoil only "prestall" lift.
+                  Lift due purely to "flat plate" effects isn't
+                  affected.  For typical wings that stall at low AoA's
+                  essentially all lift is pre-stall and you don't have
+                  to care.  Jet fighters tend not to have wing
+                  spoilers, for exactly this reason.  This value is
+                  not applicable to slats, which affect stall AoA
+                  only.
+          drag:   The drag multiplier, as above.  Typically should be
+                  higher than the lift multiplier for flaps.
+          aoa:    Applicable only to slats.  This indicates the
+                  angle by which the stall AoA is translated by the
+                  slat extension.
+
+jet:      A turbojet/fan engine.  Really cheezy right now, so there's
+          not much to set.  It accepts a <control> subtag to map a
+          property to its throttle setting, and an <actionpt> subtag
+          to place the action point of the thrust at a different
+          position than the mass of the engine.
+          x,y,z:  The location of the engine, as a point mass.  If no
+                  actionpt is specified, this will also be the point of
+                  application of thrust.
+          mass:   The mass of the engine, in pounds.
+          thrust: The maximum sea-level thrust, in pounds.
+
+propeller: A propeller connected to a non-turbocharged piston engine
+          The engine model is evolving, this tag is likely to change
+          radically in the future.
+          x,y,z:         The position of the mass (!) of the
+                         engine/propeller combination.  If the point
+                         of force application is different (and it
+                         will be) it should be set with an <actionpt>
+                         subtag.
+          mass:          The mass of the engine/propeller, in pounds.
+          moment:        The moment, in kg-meters.  This has to be
+                         hand calculated and guessed at for now.  A
+                         more automated system will be forthcoming.
+          radius:        The radius, in meters, or the propeller.
+          cruise-speed:  The max efficiency cruise speed of the
+                         propeller.  Generally not the same as the
+                         aircraft's cruise speed.
+          cruise-rpm:    The RPM of the propeller at max-eff. cruise.
+          alt:           The cruise altitude.
+          takeoff-power: The takeoff power required by the propeller...
+          takeoff-rpm:   ...at the given takeoff RPM.
+
+actionpt: Defines an "action point" for an enclosing jet or propeller
+          tag.  This is the location where the force from the thruster
+          will be applied.
+          x,y,z:  The location of force application.
+
+gear:     Defines a landing gear.  Accepts <control> subtags to map
+          properties to steering and braking.
+          x,y,z:  The location of the fully-extended gear tip.
+          compression:  The distance along the Z axis that the gear
+                        will compress.  Compression along other
+                        vectors is supported internally, but not in
+                        the XML parser.  Bug me if you wantthis
+                        added.
+          sfric:        Static (non-skidding) coefficient of
+                        friction.  Defaults to 0.8.
+          dfric:        Dynamic friction.  Defaults to 0.7.
+          retract-time: The time, in seconds, that the gear takes to
+                        fully retract or extend.  Defaults to zero,
+                        which indicates a non-retractable gear.
+
+tank:     A fuel tank.  Tanks in the aircraft are identified
+          numerically (starting from zero), in the order they are
+          defined in the file.  If the left tank is first, "tank[0]"
+          will be the left tank.
+          x,y,z:    The location of the tank.
+          capacity: The maximum contents of the tank, in pounds.  Not
+                    gallons -- YASim supports fuels of varying
+                    densities.
+          jet:      A boolean.  If present, this causes the fuel
+                    density to be treated as Jet-A.  Otherwise,
+                    gasoline density is used.  A more elaborate
+                    density setting (in pounds per gallon, for
+                    example) would be easy to implement.  Bug me.
+
+ballast:  This is a mechanism for modifying the mass distribution of
+          the aircraft.  A ballast setting specifies that a particular
+          amount of the empty weight of the aircraft must be placed at
+          a given location.  The remaining non-ballast weight will be
+          distributed "intelligently" across the fuselage and wing
+          objects.  Note again: this does NOT change the empty weight
+          of the aircraft.
+          x,y,z: The location of the ballast.
+          mass:  How much mass, in pounds, to put there.  Note that
+                 this value can be negative.  I find that I often need
+                 to "lighten" the tail of the aircraft.
+
+weight:   This is an added weight, something not part of the empty
+          weight of the aircraft, like passengers, cargo, or external
+          stores.  The actual value of the mass is not specified here,
+          instead, a mapping to a propery is used.  This allows
+          external code, such as the panel, to control the weight
+          (loading a given cargo configuration from preference files,
+          dropping bombs at runtime, etc...)
+          x,y,z:      The location of the weight.
+          mass-prop:  The name of the fgfs property containing the
+                      mass, in pounds, of this weight.
+          size:       The aerodynamic "size", in meters, of the
+                      object.  This is important for external stores,
+                      which will cause drag.  For reasonably
+                      aerodynamic stuff like bombs, the size should be
+                      roughly the width of the object.  For other
+                      stuff, you're on your own.  The default is zero,
+                      which results in no aerodynamic force (internal
+                      cargo).
+
+control:  This tag, which can appear in two different contexts,
+          manages a mapping from fgfs properties (user input) to
+          settable values on the aircraft's objects.  Note that the
+          value to be set MUST (!) be valid on the given object type.
+          This is not checked for by the parser, and will cause a
+          runtime crash if you try it.  Wing's don't have throttle
+          controls, etc...  Note that multiple axes may be set on the
+          same value.  They are summed before setting.
+
+          One serious shortcoming of the current implementation is
+          that there is no provision for modifying the values read
+          from properties.  There needs to be a way to scale,
+          translate and truncate the values.  On its way, I promise.
+
+          axis:  The name of the double-valued fgfs property "axis" to
+                 use as input, such as "/controls/aileron".
+          output: Which property to set on the objects.  It can have
+                  the following values:
+                  THROTTLE - The throttle on a jet or propeller.
+                  MIXTURE - The mixture on a propeller.
+                  REHEAT - The afterburner on a jet (unimpl.).
+                  PROP - The propeller advance (unimpl.)
+                  BRAKE - The brake on a gear.
+                  STEER - The steering angle on a gear.
+                  INCIDENCE - The incidence angle of a wing.
+                  FLAP0 - The flap0 deflection of a wing.
+                  FLAP1 - The flap1 deflection of a wing.
+                  SLAT - The slat extension of a wing.
+                  SPOILER - The spoiler extension for a wing.
+          invert: Negate the value of the property before setting on
+                  the object.
+          split:  Applicable to wing control surfaces.  Sets the
+                  normal value on the left wing, and a negated value
+                  on the right wing.
+          square: Squares the value before setting.  Useful for
+                  controls like steering that need a wide range, yet
+                  lots of sensitiviy in the center.  Obviously only
+                  applicable to values that have a range of [-1:1] or
+                  [0:1].
+
+          A control tag can also appear inside of an <approach> or
+          <cruise> tag.  Here, it specifies a particular value of an
+          axis mapping that should be true under the given
+          conditions.  At cruise, the throttle is generally at a high
+          setting, the flaps and slats are up During approach
+          the flaps and slats are down, etc...
+
+          axis:  As above, the name of the input property.
+          value: A floating point number that the property is expected
+                 to hold.

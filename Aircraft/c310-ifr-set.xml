@@ -14,6 +14,13 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
 
  <sim>
 
+<!-- This is temporary fix to electric system till adf and dme are added to c310 -->
+  <systems>
+    <electrical>
+      <path>Aircraft/c172/c172-electrical.xml</path>
+    </electrical>
+  </systems> 
+
   <description>Cessna 310 with IFR panel</description>
 
   <panel>

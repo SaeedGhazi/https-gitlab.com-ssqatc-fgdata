@@ -208,7 +208,7 @@ current mode for each mouse is held in the
    <!-- Mouse left/right motion -->
    <x-axis>
 
-    <!-- No buttons pressed: move the view position left or right -->
+    <!-- No buttons pressed: rotate the view left or right -->
     <binding>
      <condition>
       <and>
@@ -226,6 +226,23 @@ current mode for each mouse is held in the
      <min type="double">0</min>
      <max type="double">360</max>
      <wrap type="bool">true</wrap>
+    </binding>
+
+
+    <!-- Middle button pressed: move the view position left or right -->
+    <binding>
+     <condition>
+      <and>
+       <not>
+        <property>/devices/status/mice/mouse[0]/button[0]</property>
+       </not>
+       <property>/devices/status/mice/mouse[0]/button[1]</property>
+      </and>
+     </condition>
+     <command>property-adjust</command>
+     <property>/sim/current-view/x-offset-m</property>
+     <factor type="double">1</factor>
+     <wrap type="bool">false</wrap>
     </binding>
 
    </x-axis>
@@ -252,6 +269,23 @@ current mode for each mouse is held in the
      <max type="double">90</max>
      <wrap type="bool">false</wrap>
     </binding>
+
+    <!-- Middle button pressed: move the view up and down -->
+    <binding>
+     <condition>
+      <and>
+       <not>
+        <property>/devices/status/mice/mouse[0]/button[0]</property>
+       </not>
+        <property>/devices/status/mice/mouse[0]/button[1]</property>
+      </and>
+     </condition>
+     <command>property-adjust</command>
+     <property>/sim/current-view/y-offset-m</property>
+     <factor type="double">-1</factor>
+     <wrap type="bool">false</wrap>
+    </binding>
+
    </y-axis>
 
   </mode>

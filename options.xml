@@ -96,6 +96,16 @@
    </option>
 
    <option>
+    <name>disable-real-weather-fetch</name>
+    <description>strings/disable-real-weather-fetch-desc</description>
+   </option>
+
+   <option>
+    <name>enable-real-weather-fetch</name>
+    <description>strings/enable-real-weather-fetch-desc</description>
+   </option>
+
+   <option>
     <name>disable-ai-models</name>
     <description>strings/disable-ai-models-desc</description>
    </option>
@@ -704,6 +714,12 @@
    </option>
 
    <option>
+    <name>proxy</name>
+    <arg>[user:pwd@]host:port</arg>
+    <description>strings/proxy-desc</description>
+   </option>
+
+   <option>
     <name>telnet</name>
     <arg>port</arg>
     <description>strings/telnet-desc</description>
@@ -885,6 +901,7 @@
    <option>
     <name>log-level</name>
     <arg>{bulk,debug,info,warn,alert}</arg>
+    <description>strings/log-level-desc</description>
    </option>
 
    <option>

@@ -14,6 +14,11 @@ October 23 2001 John Check, fgpanels@rockfish.net
 
  <sim>
  
+  <startup>
+   <speed-set>knots</speed-set>
+   <onground>false</onground>
+  </startup>
+
   <flight-model>jsb</flight-model>
   <aero>X15</aero>
   <sound>false</sound>
@@ -37,6 +42,14 @@ October 23 2001 John Check, fgpanels@rockfish.net
 -->
 
  </sim>
+
+ <position>
+  <altitude-ft>35000</altitude-ft>
+ </position>
+
+ <velocities>
+  <airspeed-kt>250</airspeed-kt>
+ </velocities>
 
 </PropertyList>
 

@@ -46,7 +46,10 @@ Started September 2000 by David Megginson, david@megginson.com
   </rendering>
   <model-hz type="int">120</model-hz>
   <navdb>
-   <auto-align-localizers>true</auto-align-localizers>
+   <localizers>
+     <auto-align>true</auto-align>
+     <auto-align-threshold-deg>5.0</auto-align-threshold-deg>
+   </localizers>
   </navdb>
   <sound>
    <pause type="bool">false</pause>

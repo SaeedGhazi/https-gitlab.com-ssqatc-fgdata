@@ -2666,8 +2666,8 @@ Shared parameters for various materials.
   <a>1.0</a>
  </specular>
  <emissive>
-  <r>0.07</r>
-  <g>0.05</g>
+  <r>0.13</r>
+  <g>0.11</g>
   <b>0.0</b>
   <a>1.0</a>
  </emissive>
@@ -2830,8 +2830,8 @@ Shared parameters for various materials.
   <a>1.0</a>
  </specular>
  <emissive>
-  <r>0.0</r>
-  <g>0.0</g>
+  <r>0.13</r>
+  <g>0.11</g>
   <b>0.0</b>
   <a>1.0</a>
  </emissive>
@@ -2980,9 +2980,9 @@ Shared parameters for various materials.
   <a>1.0</a>
  </diffuse>
  <specular>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.4</b>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
   <a>1.0</a>
  </specular>
  <emissive>
@@ -3016,9 +3016,9 @@ Shared parameters for various materials.
   <a>1.0</a>
  </diffuse>
  <specular>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.4</b>
+  <r>0.31</r>
+  <g>0.34</g>
+  <b>0.39</b>
   <a>1.0</a>
  </specular>
  <emissive>

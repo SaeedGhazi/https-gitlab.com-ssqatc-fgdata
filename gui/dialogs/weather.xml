@@ -124,7 +124,7 @@
    <y>0</y>
    <width>75</width>
    <height>25</height>
-   <property>/environment/config/aloft/entry[4]/turbulence-norm</property>
+   <property>/environment/config/aloft/entry[4]/turbulence/magnitude-norm</property>
   </slider>
 
   <input>
@@ -200,7 +200,7 @@
    <y>0</y>
    <width>75</width>
    <height>25</height>
-   <property>/environment/config/aloft/entry[3]/turbulence-norm</property>
+   <property>/environment/config/aloft/entry[3]/turbulence/magnitude-norm</property>
   </slider>
 
   <input>
@@ -276,7 +276,7 @@
    <y>0</y>
    <width>75</width>
    <height>25</height>
-   <property>/environment/config/aloft/entry[2]/turbulence-norm</property>
+   <property>/environment/config/aloft/entry[2]/turbulence/magnitude-norm</property>
   </slider>
 
   <input>
@@ -352,7 +352,7 @@
    <y>0</y>
    <width>75</width>
    <height>25</height>
-   <property>/environment/config/aloft/entry[1]/turbulence-norm</property>
+   <property>/environment/config/aloft/entry[1]/turbulence/magnitude-norm</property>
   </slider>
 
   <input>
@@ -428,7 +428,7 @@
    <y>0</y>
    <width>75</width>
    <height>25</height>
-   <property>/environment/config/aloft/entry[0]/turbulence-norm</property>
+   <property>/environment/config/aloft/entry[0]/turbulence/magnitude-norm</property>
   </slider>
 
   <input>
@@ -572,7 +572,7 @@
    <y>0</y>
    <width>75</width>
    <height>25</height>
-   <property>/environment/config/boundary/entry[2]/turbulence-norm</property>
+   <property>/environment/config/boundary/entry[2]/turbulence/magnitude-norm</property>
   </slider>
 
   <input>
@@ -648,7 +648,7 @@
    <y>0</y>
    <width>75</width>
    <height>25</height>
-   <property>/environment/config/boundary/entry[1]/turbulence-norm</property>
+   <property>/environment/config/boundary/entry[1]/turbulence/magnitude-norm</property>
   </slider>
 
   <input>
@@ -724,7 +724,7 @@
    <y>0</y>
    <width>75</width>
    <height>25</height>
-   <property>/environment/config/boundary/entry[0]/turbulence-norm</property>
+   <property>/environment/config/boundary/entry[0]/turbulence/magnitude-norm</property>
   </slider>
 
   <input>

@@ -48,7 +48,7 @@
   <width>200</width>
   <height>25</height>
   <label>turbulence</label>
-  <property>/environment/turbulence-norm</property>
+  <property>/environment/turbulence/magnitude-norm</property>
  </slider>
 
  <button>

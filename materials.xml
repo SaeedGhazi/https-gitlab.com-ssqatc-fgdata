@@ -3002,6 +3002,12 @@ Shared parameters for various materials.
   <a>1.0</a>
  </emissive>
  <object>
+  <path>Models/Buildings/red-barn.ac</path>
+  <coverage>5000000</coverage>
+  <range-m>3000</range-m>
+  <billboard>false</billboard>
+ </object>
+ <object>
   <path>Models/Fauna/cow.ac</path>
   <coverage>10000</coverage>
   <range-m>1000</range-m>
@@ -3052,6 +3058,12 @@ Shared parameters for various materials.
   <a>1.0</a>
  </emissive>
  <object>
+  <path>Models/Buildings/red-barn.ac</path>
+  <coverage>5000000</coverage>
+  <range-m>3000</range-m>
+  <billboard>false</billboard>
+ </object>
+ <object>
   <path>Models/Fauna/cow.ac</path>
   <coverage>10000</coverage>
   <range-m>1000</range-m>
@@ -3101,6 +3113,12 @@ Shared parameters for various materials.
   <b>0.0</b>
   <a>1.0</a>
  </emissive>
+ <object>
+  <path>Models/Buildings/red-barn.ac</path>
+  <coverage>5000000</coverage>
+  <range-m>3000</range-m>
+  <billboard>false</billboard>
+ </object>
  <object>
   <path>Models/Fauna/cow.ac</path>
   <coverage>10000</coverage>

@@ -1016,9 +1016,6 @@ Shared parameters for various materials.
 </material>
 
 <material>
- <name>Grass</name>
- <name>Airport</name>
- <name>AirportKeep</name>
  <name>GrassCover</name>
  <name>HerbTundraCover</name>
  <name>MixedTundraCover</name>
@@ -1026,6 +1023,16 @@ Shared parameters for various materials.
  <texture>Terrain/grass.rgb</texture>
  <xsize>1000</xsize>
  <ysize>1000</ysize>
+ <light-coverage>4000000.0</light-coverage>
+</material>
+
+<material>
+ <name>Grass</name>
+ <name>Airport</name>
+ <name>AirportKeep</name>
+ <texture>Terrain/airport.rgb</texture>
+ <xsize>125</xsize>
+ <ysize>125</ysize>
  <light-coverage>4000000.0</light-coverage>
 </material>
 

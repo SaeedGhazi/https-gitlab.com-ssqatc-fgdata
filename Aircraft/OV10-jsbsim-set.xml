@@ -34,8 +34,21 @@ David Culp,  davidculp2@attbi.com
   <model>
    <path>Aircraft/OV10/Models/OV10.mdl</path>
   </model>
--->
 
  </sim>
+
+<consumables>
+  <fuel>
+   <tank n="0">
+     <level-gal_us archive="y">117</level-gal_us>
+   </tank>
+   <tank n="1">
+    <level-gal_us archive="y">117</level-gal_us>
+   </tank>
+   <tank n="2">
+    <level-gal_us archive="y">220</level-gal_us>
+   </tank>
+  </fuel>
+</consumables>
 
 </PropertyList>

@@ -28,6 +28,11 @@ Node = {
     removeChild    : func { wrap(_removeChild(me._g, arg)) },
     getNode        : func { wrap(_getNode(me._g, arg)) },
 
+    getBoolValue : func {
+        val = getValue();
+        if(getType() == "STRING" and val == "false") { 0 }
+        else { val }
+    }
 };
 
 ##

@@ -31,8 +31,6 @@ October 23 2001 John Check, fgpanels@rockfish.net
 
   <model>
    <path>Aircraft/c310/Models/c310-dpm.xml</path>
-   <heading-offset-deg>0</heading-offset-deg>
-   <z-offset-m>-0.555</z-offset-m>
   </model> 
  </sim>
 

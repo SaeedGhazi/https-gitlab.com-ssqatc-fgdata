@@ -1,5 +1,5 @@
 Users Guide to FlightGear panel configuration
-Version 0.7.7.1, June 23 2001
+Version 0.7.7.2, July 24 2001
 Author: John Check <j4strngs@rockfish.net>
 
 This document describes the configuration of
@@ -607,6 +607,39 @@ per axis
         128 =   2 pixels,               0.0078125
         256 =   1 pixel,                0.00390625
 
+
+The displayed size of a texture in pixels is set in the instrument
+configuration file. The size of the cropped area in pixels is not
+directly related to the final display size.
+
+What that table represents is:
+
+1 / (256 / # of pixels)
+
+Take as an example, a section 64 pixels wide on the texture file.
+256/64 = 4
+1/4 = 0.25
+
+Or lets consider 1 pixel wide
+256/1 = 256
+1/256 = 0.00390625
+
+If the section starts at the extreme left of the texture, the
+starting number is 0.0 and the end is 0.25
+If the section *doesn't* start at the edge you need to take the starting
+pixel and calculate an offset. Lets say you start 2 pixels from the
+edge and you are cropping a section 64 pixels wide...
+
+256/2 = 128
+1/128 = 0.0078125 <- this is the value for a 2 pixel wide offset
+
+0.0078125 <- start at
+0.25      <- add value for 64 px wide
+0.2571825 <- end at
+
+
+Generating Textures
+-------------------
 A common procedure for generating gauge faces is to use a
 vector graphics package such as xfig, exporting the result as a
 postscript file. 3D modeling tools may also be used and I prefer them

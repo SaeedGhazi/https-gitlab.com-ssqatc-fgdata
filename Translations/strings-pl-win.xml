@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="Windows-1250" ?>
 
-<!-- Peter Michael Jaworski                2003 v.1.0PL  -->
-<!-- <pjawor@et.put.poznan.pl>                           -->
-<!-- Tłumaczenia opcji i menu dla FlightGeara na polski  -->
-<!-- FlightGear menu and options translations for Polish -->
-
-<!-- When there will be some new texts, simply add them 
-     at the end of file, I will translate them later -->
+<!-- (c)2003 Peter Michael Jaworski                   		     v.1.4PL  -->
+<!-- <pjawor@et.put.poznan.pl>                       		    Poznań, POLAND  -->
+<!-- Tłumaczenia opcji i menu dla FlightGeara na język polski 			  -->
+<!-- FlightGear menu and options tranlations for Polish       			  -->
+<!-- GNU GPL Licence                                        			  -->
+<!-- Special thanks to Wojciech Jóźwiak, Maciej Obarski and Krzysztof Nowak	  -->	
+<!-- When there will be some new texts, simply add them at the end of file, 
+     I will translate them later.     			         			  -->
 
 <PropertyList>
   <!-- Fall back -->
@@ -18,9 +19,9 @@
 
  <system-time>Czas systemowy</system-time>
  <gmt>Czas uniwersalny GMT</gmt>
- <locale-aircraft-time>Czas na lotnisku</locale-aircraft-time>
+ <locale-aircraft-time>Lokalny czas samolotu</locale-aircraft-time>
  <units-feet>(w stopach gdy brak parametru: --units-meters)</units-feet>
- <multiple-instance>Kilka uruchomień jednocześnie (instancje)</multiple-instance>
+ <multiple-instance>Zezwól na kilka instancji programu</multiple-instance>
 
   <!-- File menu -->
   <file>Plik</file>
@@ -34,9 +35,9 @@
 
   <!-- View menu -->
   <view>Widok</view>
-  <toggle-panel>Przełącz panel (2d/3D)</toggle-panel>
-  <pilot-offset>Pozycja pilota</pilot-offset>
-  <hud-alpha>Antyaliasing HUDa wł./wy.</hud-alpha>
+  <toggle-panel>Przełącz panel (2D/3D)</toggle-panel>
+  <pilot-offset>Położenie pilota</pilot-offset>
+  <hud-alpha>Antyaliasing wyświetlacza przeziernego wł./wy.</hud-alpha>
   <properties>Właściwości</properties>
 
   <!-- Environment menu -->
@@ -45,21 +46,21 @@
  <presets>Ustawienia</presets>
  <preset-airport>Nowe lotnisko</preset-airport>
  <preset-runway>Nowy pas startowy</preset-runway>
- <preset-offset-distance>Set Offset Distance</preset-offset-distance>
+ <preset-offset-distance>Ustaw odległość przesunięcia</preset-offset-distance>
  <preset-altitude>Ustaw wysokość</preset-altitude>
- <preset-glideslope>Ustaw Glideslope [stopnie]</preset-glideslope>
- <preset-airspeed>Szybkość wiatru [kts]</preset-airspeed>
+ <preset-glideslope>Ustaw opadanie [stopnie]</preset-glideslope>
+ <preset-airspeed>Ustaw prędkość [kts]</preset-airspeed>
  <preset-commit>Zatwierdź zmiany</preset-commit>
 
   <!-- Autopilot menu -->
   <autopilot>Autopilot</autopilot>
   <set-heading>Ustaw kierunek </set-heading>
   <set-altitude>Ustaw wysokość</set-altitude>
-  <add-waypoint>Dodaj punkt przelotu</add-waypoint>
+  <add-waypoint>Dodaj punkt przelotowy</add-waypoint>
   <skip-current-waypoint>Przeskocz obecny punkt</skip-current-waypoint>
   <clear-route>Wyczyść trasę</clear-route>
-  <adjust-ap-settings>Ustawienia AP</adjust-ap-settings>
-  <toggle-hud-format>Przełącz format HUDa</toggle-hud-format>
+  <adjust-ap-settings>Dostosuj ustawienia AP</adjust-ap-settings>
+  <toggle-hud-format>Przełącz format wyświetlacza przeziernego</toggle-hud-format>
 
   <!-- Help menu -->
   <help>Pomoc</help>
@@ -80,25 +81,25 @@
  <language-desc>Wybierz język dla tej sesji</language-desc>
  <disable-game-mode-desc>Wyłączony tryb pełnoekranowy</disable-game-mode-desc>
  <enable-game-mode-desc>Zezwól na tryb pełnoekranowy</enable-game-mode-desc>
- <disable-splash-screen-desc>Niedostępny splash screen</disable-splash-screen-desc>
- <enable-splash-screen-desc>Dostępny splash screen</enable-splash-screen-desc>
- <disable-intro-music-desc>Niedostępna muzyka wstępna</disable-intro-music-desc>
- <enable-intro-music-desc>Dostępna muzyka wstępna</enable-intro-music-desc>
+ <disable-splash-screen-desc>Brak ekranu powitalnego</disable-splash-screen-desc>
+ <enable-splash-screen-desc>Włącz ekran powitalny</enable-splash-screen-desc>
+ <disable-intro-music-desc>Brak intro muzycznego</disable-intro-music-desc>
+ <enable-intro-music-desc>Włącz intro muzyczne</enable-intro-music-desc>
  <disable-mouse-pointer-desc>Niedostępny dodatkowy wskaźnik myszy</disable-mouse-pointer-desc>
  <enable-mouse-pointer-desc n="0">Dostępny dodatkowy wskaźnik myszy</enable-mouse-pointer-desc>
- <enable-mouse-pointer-desc n="1">(np. dla trybu pełnoekranowego dla kard bazujących na Voodoo)</enable-mouse-pointer-desc>
- <disable-random-objects-desc>Wyłączone losowe obiekty terenu</disable-random-objects-desc>
- <enable-random-objects-desc>Włączone losowe obiekty terenu</enable-random-objects-desc>
- <random-objects-desc>(budynki, itd.)</random-objects-desc>
+ <enable-mouse-pointer-desc n="1">(np. dla trybu pełnoekranowego dla kart bazujących na Voodoo)</enable-mouse-pointer-desc>
+ <disable-random-objects-desc>Wyłączone losowe obiekty terenowe</disable-random-objects-desc>
+ <enable-random-objects-desc>Włączone losowe obiekty terenowe</enable-random-objects-desc>
+ <random-objects-desc>(budynki, itp.)</random-objects-desc>
  <disable-freeze-desc>Start w stanie uruchomionym</disable-freeze-desc>
  <enable-freeze-desc>Uruchom w trybie wstrzynanym</enable-freeze-desc>
  <disable-fuel-freeze-desc>Paliwo jest normalnie wykorzystywane</disable-fuel-freeze-desc>
  <enable-fuel-freeze-desc>Nie ubywa paliwa w zbiorniku</enable-fuel-freeze-desc>
  <disable-clock-freeze-desc>Zegar zlicza normalnie</disable-clock-freeze-desc>
- <enable-clock-freeze-desc>Nie zliczaj zegara</enable-clock-freeze-desc>
+ <enable-clock-freeze-desc>Unieruchom zegar</enable-clock-freeze-desc>
  <control-desc>Główny tryb sterowania (dżojstik, klawiatura, mysz)</control-desc>
- <enable-auto-coordination-desc>Dostępne samowyrównywanie</enable-auto-coordination-desc>
- <disable-auto-coordination-desc>Niedostępne samowyrównywanie</disable-auto-coordination-desc>
+ <enable-auto-coordination-desc>Dostępna autokoordynacja</enable-auto-coordination-desc>
+ <disable-auto-coordination-desc>Niedostępna autokoordynacja</disable-auto-coordination-desc>
  <browser-app-desc>Ścieżka do twojej przeglądarki internetowej</browser-app-desc>
  <prop-desc>Ustaw właściwość &lt;name&gt; na &lt;value&gt;</prop-desc>
  <config-desc>Załaduj dodatkowe właściwości z ...</config-desc>
@@ -107,24 +108,24 @@
 
  <!-- Features options -->
  <features-options>Dodatki</features-options>
- <disable-hud-desc>Niedostępny wyświetlacz Heads Up Display</disable-hud-desc>
- <enable-hud-desc>Dostępny wyświetlacz HUD</enable-hud-desc>
+ <disable-hud-desc>Niedostępny wyświetlacz przezierny </disable-hud-desc>
+ <enable-hud-desc>Dostępny wyświetlacz przezierny (HUD)</enable-hud-desc>
  <disable-panel-desc>Niedostępny kokpit</disable-panel-desc>
  <enable-panel-desc>Dostępny kokpit</enable-panel-desc>
  <disable-sound-desc>Niedostępne efekty dźwiękowe</disable-sound-desc>
  <enable-sound-desc>Dostępne efekty dźwiękowe</enable-sound-desc>
  <disable-anti-alias-hud-desc>Niedostępny antyaliasing HUDa</disable-anti-alias-hud-desc>
- <enable-anti-alias-hud-desc>Dostępny antyaliasing HUD</enable-anti-alias-hud-desc>
+ <enable-anti-alias-hud-desc>Dostępny antyaliasing HUDa</enable-anti-alias-hud-desc>
 
  <!-- Aircraft options -->
- <aircraft-options>Samoloty</aircraft-options>
+ <aircraft-options>Samolot</aircraft-options>
  <aircraft-desc>Wybierz profil samolotu podany przez: górny poziom &lt;name&gt;-set.xml</aircraft-desc>
  <show-aircraft-desc>Drukuj listę dostępnych samolotów</show-aircraft-desc>
 
  <!-- Flight Dynamics Model options -->
- <fdm-options>Model lotu (FDM)</fdm-options>
- <fdm-desc n="0">Wybierz główny model lotu (FlightDynamicsModel)</fdm-desc>
- <fdm-desc n="1">Dostępne: jsb, larcsim, yasim, magic, balloon, ada, external, or null</fdm-desc>
+ <fdm-options>Model dynamiki lotu (FDM)</fdm-options>
+ <fdm-desc n="0">Wybierz główny model dynamiki lotu</fdm-desc>
+ <fdm-desc n="1">Dostępne: jsb, larcsim, yasim, magic, balloon, ada, external, lub null</fdm-desc>
  <aero-desc>Wybierz model areodynamiki do wczytania:</aero-desc>
  <model-hz-desc>Uruchom FDM z współczynnikiem..(krok na sekundę)</model-hz-desc>
  <speed-desc>Uruchamiaj FDM 'n' razy szybciej niż w rzeczywistości</speed-desc>
@@ -139,19 +140,19 @@
 
  <!-- Position and Orientation options -->
  <position-options>Początkowa pozycja i orientacja</position-options>
- <airport-id-desc>Podaj ID lotniska startowego</airport-id-desc>
+ <airport-id-desc>Podaj ID lotniska startu</airport-id-desc>
  <runway-no-desc>Wybierz pas do startu (musisz podać również lotnisko)</runway-no-desc>
- <offset-distance-desc>Dystans do progu</offset-distance-desc>
- <offset-azimuth-desc>Kierunek do progu</offset-azimuth-desc>
+ <offset-distance-desc>Dystans do progu drogi startowej</offset-distance-desc>
+ <offset-azimuth-desc>Kierunek do progu drogi startowej</offset-azimuth-desc>
  <lon-desc>Długość geograficzna pozycji startu (zachód = -)</lon-desc>
  <lat-desc>Szerokość geograficzna pozycji startu (południe = -)</lat-desc>
  <altitude-desc>Wysokość początkowa</altitude-desc>
- <heading-desc>Podaj kierunek (yaw) kąt (Psi)</heading-desc>
- <roll-desc>Specify roll kąt (Phi)</roll-desc>
- <pitch-desc>Specify pitch kąt (Theta)</pitch-desc>
- <uBody-desc>Specify velocity wzdłuż osi X</uBody-desc>
- <vBody-desc>Specify velocity wzdłuż osi Y</vBody-desc>
- <wBody-desc>Specify velocity wzdłuż osi Z</wBody-desc>
+ <heading-desc>Podaj kierunek odchylenia: kąt Psi</heading-desc>
+ <roll-desc>Podaj kąt  przechyłu (Phi)</roll-desc>
+ <pitch-desc>Podaj kąt pochylenia (Theta)</pitch-desc>
+ <uBody-desc>Podaj prędkość wzdłuż osi X</uBody-desc>
+ <vBody-desc>Podaj prędkość wzdłuż osi Y</vBody-desc>
+ <wBody-desc>Podaj prędkość wzdłuż osi Z</wBody-desc>
  <vc-desc>Podaj początkową prędkość</vc-desc>
  <mach-desc>Podaj początkową liczbę Mach</mach-desc>
  <glideslope-desc>Specify flight path angle (może być dodatni)</glideslope-desc>
@@ -172,8 +173,8 @@
  <enable-fullscreen-desc>Dostępny tryb pełnoekranowy</enable-fullscreen-desc>
  <shading-flat-desc>Zezwól na płaskie cieniowanie</shading-flat-desc>
  <shading-smooth-desc>Zezwól na gładkie cieniowanie</shading-smooth-desc>
- <disable-skyblend-desc>Niedostępne 'mieszanie' nieba</disable-skyblend-desc>
- <enable-skyblend-desc>Dostępne sky blending</enable-skyblend-desc>
+ <disable-skyblend-desc>Niedostępna przeźroczystość nieba</disable-skyblend-desc>
+ <enable-skyblend-desc>Dostępna przezroczystość nieba</enable-skyblend-desc>
  <disable-textures-desc>Tekstury niedostępne</disable-textures-desc>
  <enable-textures-desc>Tekstury dostępne</enable-textures-desc>
  <disable-wireframe-desc>Niedostępny tryb rysowania konturowego</disable-wireframe-desc>
@@ -184,25 +185,25 @@
  <visibility-miles-desc>Podaj początkową widzialność w milach</visibility-miles-desc>
 
  <!-- Hud options -->
- <hud-options>Opcje wyświetlacza HUD</hud-options>
- <hud-tris-desc>Liczba renderowanych trójkątów wyświetlacza HUD</hud-tris-desc>
- <hud-culled-desc>Procent culled trójkątów wyświetlacza HUD</hud-culled-desc>
+ <hud-options>Wyświetlacza przezierny</hud-options>
+ <hud-tris-desc>HUD pokazuje liczbę renderowanych trójkątów</hud-tris-desc>
+ <hud-culled-desc>HUD pokazuje procent 'culled' trójkątów</hud-culled-desc>
 
  <!-- Time options -->
  <time-options>Opcje czasu</time-options>
- <time-offset-desc>Dodaj tę poprawkę czasu</time-offset-desc>
- <time-match-real-desc>Synchronizuj czas z rzeczywistym</time-match-real-desc>
+ <time-offset-desc>Dodaj to przesunięcie czasu</time-offset-desc>
+ <time-match-real-desc>Synchronizuj czas z rzeczywistym (GMT)</time-match-real-desc>
  <time-match-local-desc>Synchronizuj czas z lokalnym czasem rzeczywistym</time-match-local-desc>
  <start-date-desc>Podaj datę/czas startu ze wzg. na </start-date-desc>
 
  <!-- Network options -->
  <network-options>Opcje sieciowe</network-options>
- <httpd-desc>Zezwól na server HTTP na porcie...</httpd-desc>
- <telnet-desc>Zezwól na server telnet na porcie...</telnet-desc>
- <jpg-httpd-desc>Zezwól na zrzuty ekranu serverowi HTTP na porcie...</jpg-httpd-desc>
+ <httpd-desc>Otwórz serwer HTTP na porcie...</httpd-desc>
+ <telnet-desc>Otwórz serwer telnet na porcie...</telnet-desc>
+ <jpg-httpd-desc>Zezwól na zrzuty ekranu serwerowi HTTP na porcie...</jpg-httpd-desc>
  <disable-network-olk-desc>Wyłącz tryb wielopilotowy(domyślny)</disable-network-olk-desc>
  <enable-network-olk-desc>Zezwól na tryb wielopilotowy</enable-network-olk-desc>
- <net-hud-desc>Informacje sieciowe na wyświetlaczu HUD</net-hud-desc>
+ <net-hud-desc>Informacje sieciowe na wyświetlaczu przeziernym</net-hud-desc>
  <net-id-desc>Podaj twój sygnał wywoławczy</net-id-desc>
 
  <!-- Route/Way Point Options -->

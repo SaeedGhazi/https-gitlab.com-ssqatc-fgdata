@@ -20,24 +20,9 @@
 # dependencies between modules.
 #
 fovProp = nil;
-screenProp = nil;
-popupNode = nil;
-labelNode = nil;
-fovDialog = nil;
 INIT = func {
     fovProp = props.globals.getNode("/sim/current-view/field-of-view");
-    screenProp = props.globals.getNode("/sim/startup/xsize");
-    
-    # Set up the dialog property node:
-    tmpl = { name : "fov", modal : 0, width : 120, height : 40,
-             text : { x : 10, y : 6, label : "FOV:" } };
-    popupNode = props.Node.new(tmpl);
-    text = popupNode.getNode("text", 1);
-    labelNode = popupNode.getNode("text/label");
-    fgcommand("dialog-new", popupNode);
 
-    # Cache the command argument for popup/popdown
-    fovDialog = props.Node.new({ "dialog-name" : "fov" });
 }
 settimer(INIT, 0);
 
@@ -53,10 +38,9 @@ settimer(INIT, 0);
 STEPS = 40;
 ACUITY = 1/60; # Maximum angle subtended by one pixel (== 1 arc minute)
 max = min = mul = 0;
-
 calcMul = func {
     max = 120; # Fixed at 120 degrees
-    min = screenProp.getValue() * ACUITY;
+    min = getprop("/sim/startup/xsize") * ACUITY;
     mul = math.exp(math.ln(max/min) / STEPS);
 }
 
@@ -79,7 +63,7 @@ increase = func {
     if(val == max) { return; }
     if(val > max) { val = max }
     fovProp.setDoubleValue(val);
-    popup(val);
+    gui.popupTip("FOV: " ~ format(val));
 }
 
 ##
@@ -88,22 +72,58 @@ increase = func {
 decrease = func {
     calcMul();
     val = fovProp.getValue() / mul;
-    if(val == min) { return; }
-    #if(val < min) { val = min } # Comment out for now.
+    msg = "FOV: " ~ format(val);
+    if(val < min) { msg = msg ~ " (overzoom)"; }
     fovProp.setDoubleValue(val);
-    popup(val);
+    gui.popupTip(msg);
 }
 
 ##
-# Pop up the "fov" dialog for a moment.
+# Handler.  Reset view to default.
 #
-popdown = func { fgcommand("dialog-close", fovDialog); }
-popup = func {
-    # Make sure it isn't already showing, initialize it, show it,
-    # and kill it automatically after a second
-    popdown();
-    labelNode.setValue("FOV: " ~ format(arg[0]));
-    fgcommand("dialog-show", fovDialog);
-    settimer(popdown, 1);
+resetView = func {
+    setprop("/sim/current-view/goal-heading-offset-deg",
+            getprop("/sim/current-view/config/heading-offset-deg"));
+    setprop("/sim/current-view/goal-pitch-offset-deg",
+            getprop("/sim/current-view/config/pitch-offset-deg"));
+    setprop("/sim/current-view/field-of-view",
+            getprop("/sim/current-view/config/field-of-view-deg"))
 }
 
+##
+# Handler.  Step to the next view.
+#
+stepView = func {
+    curr = getprop("/sim/current-view/view-number");
+    views = props.globals.getNode("/sim").getChildren("view");
+    curr = curr + arg[0];
+    if   (curr < 0)            { curr = size(views) - 1; }
+    elsif(curr >= size(views)) { curr = 0; }
+    setprop("/sim/current-view/view-number", curr);
+
+    # And pop up a nice reminder
+    gui.popupTip(views[curr].getNode("name").getValue());
+}
+
+##
+# Standard view "slew" rate, in degrees/sec.
+# 
+VIEW_PAN_RATE = 60;
+
+##
+# Pans the view horizontally.  The argument specifies a relative rate
+# (or number of "steps" -- same thing) to the standard rate.
+#
+panViewDir = func {
+    controls.slewProp("/sim/current-view/goal-heading-offset-deg",
+                      arg[0] * VIEW_PAN_RATE);
+}
+
+##
+# Pans the view vertically.  The argument specifies a relative rate
+# (or number of "steps" -- same thing) to the standard rate.
+#
+panViewPitch = func {
+    controls.slewProp("/sim/current-view/goal-pitch-offset-deg",
+                      arg[0] * VIEW_PAN_RATE);
+}

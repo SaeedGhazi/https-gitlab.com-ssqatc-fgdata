@@ -132,3 +132,20 @@ wrapNode = func { { parents : [Node], _g : arg[0] } }
 #
 props.globals = wrapNode(_globals());
 
+##
+# Sets all indexed property children to a single value.  arg[0]
+# specifies a property name (e.g. /controls/engines/engine), arg[1] a
+# path under each node of that name to set (e.g. "throttle"), arg[2]
+# is the value.
+#
+setAll = func {
+    node = props.globals.getNode(arg[0]);
+    if(node == nil) { return; }
+    name = node.getName();
+    node = node.getParent();
+    if(node == nil) { return; }
+    children = node.getChildren();
+    foreach(c; children) {
+        c.getNode(arg[1], 1).setValue(arg[2]);
+    }
+}

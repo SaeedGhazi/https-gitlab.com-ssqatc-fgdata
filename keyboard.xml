@@ -159,90 +159,24 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="32">
   <name>SPACE</name>
   <desc>Fire Starter on Selected Engine(s)</desc>
-
   <binding>
-   <condition>
-    <property>/sim/input/selected/engine[0]</property>
-   </condition>
-   <command>property-assign</command>
-   <property>/controls/engines/engine[0]/starter</property>
-   <value type="bool">true</value>
+   <command>nasal</command>
+   <script>controls.startEngine()</script>
   </binding>
-
-  <binding>
-   <condition>
-    <property>/sim/input/selected/engine[1]</property>
-   </condition>
-   <command>property-assign</command>
-   <property>/controls/engines/engine[1]/starter</property>
-   <value type="bool">true</value>
-  </binding>
-
-  <binding>
-   <condition>
-    <property>/sim/input/selected/engine[2]</property>
-   </condition>
-   <command>property-assign</command>
-   <property>/controls/engines/engine[2]/starter</property>
-   <value type="bool">true</value>
-  </binding>
-
-  <binding>
-   <condition>
-    <property>/sim/input/selected/engine[3]</property>
-   </condition>
-   <command>property-assign</command>
-   <property>/controls/engines/engine[3]/starter</property>
-   <value type="bool">true</value>
-  </binding>
-
   <mod-up>
    <binding>
-    <command>property-assign</command>
-    <property>/controls/engines/engine[0]/starter</property>
-    <value type="bool">false</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/controls/engines/engine[1]/starter</property>
-    <value type="bool">false</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/controls/engines/engine[2]/starter</property>
-    <value type="bool">false</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/controls/engines/engine[3]/starter</property>
-    <value type="bool">false</value>
+    <command>nasal</command>
+    <script>props.setAll("/controls/engines/engine", "starter", 0)</script>
    </binding>
   </mod-up>
-
  </key>
 
  <key n="33">
   <name>!</name>
   <desc>Select first engine</desc>
   <binding>
-   <command>property-assign</command>
-   <property>/sim/input/selected/engine[0]</property>
-   <value type="bool">true</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/input/selected/engine[1]</property>
-   <value type="bool">false</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/input/selected/engine[2]</property>
-   <value type="bool">false</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/input/selected/engine[3]</property>
-   <value type="bool">false</value>
+   <command>nasal</command>
+   <script>controls.selectEngine(0)</script>
   </binding>
  </key>
 
@@ -250,24 +184,8 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>#</name>
   <desc>Select third engine</desc>
   <binding>
-   <command>property-assign</command>
-   <property>/sim/input/selected/engine[0]</property>
-   <value type="bool">false</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/input/selected/engine[1]</property>
-   <value type="bool">false</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/input/selected/engine[2]</property>
-   <value type="bool">true</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/input/selected/engine[3]</property>
-   <value type="bool">false</value>
+   <command>nasal</command>
+   <script>controls.selectEngine(2)</script>
   </binding>
  </key>
 
@@ -275,24 +193,8 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>$</name>
   <desc>Select fourth engine</desc>
   <binding>
-   <command>property-assign</command>
-   <property>/sim/input/selected/engine[0]</property>
-   <value type="bool">false</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/input/selected/engine[1]</property>
-   <value type="bool">false</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/input/selected/engine[2]</property>
-   <value type="bool">false</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/input/selected/engine[3]</property>
-   <value type="bool">true</value>
+   <command>nasal</command>
+   <script>controls.selectEngine(3)</script>
   </binding>
  </key>
  
@@ -424,19 +326,8 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>5</name>
   <desc>Center aileron, elevator, and rudder.</desc>
   <binding>
-   <command>property-assign</command>
-   <property>/controls/flight/aileron</property>
-   <value type="double">0.0</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/controls/flight/elevator</property>
-   <value type="double">0.0</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/controls/flight/rudder</property>
-   <value type="double">0.0</value>
+   <command>nasal</command>
+   <script>controls.centerFlightControls()</script>
   </binding>
  </key>
 
@@ -516,24 +407,8 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>@</name>
   <desc>Select second engine</desc>
   <binding>
-   <command>property-assign</command>
-   <property>/sim/input/selected/engine[0]</property>
-   <value type="bool">false</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/input/selected/engine[1]</property>
-   <value type="bool">true</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/input/selected/engine[2]</property>
-   <value type="bool">false</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/input/selected/engine[3]</property>
-   <value type="bool">false</value>
+   <command>nasal</command>
+   <script>controls.selectEngine(1)</script>
   </binding>
  </key>
 
@@ -600,12 +475,8 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>V</name>
   <desc>Scroll in reverse through views.</desc>
   <binding>
-    <command>property-adjust</command>
-    <property>/sim/current-view/view-number</property>
-    <step type="int">-1</step>
-    <min type="int">0</min>
-    <max type="int">5</max>
-    <wrap type="bool">true</wrap>
+   <command>nasal</command>
+   <script>view.stepView(-1)</script>
   </binding>
  </key>
 
@@ -639,9 +510,8 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>[</name>
   <desc>Decrease flaps.</desc>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/flaps</property>
-   <step type="double">-0.34</step>
+   <command>nasal</command>
+   <script>controls.stepFlaps(-1)</script>
   </binding>
  </key>
 
@@ -649,9 +519,8 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>]</name>
   <desc>Increase flaps.</desc>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/flaps</property>
-   <step type="double">0.34</step>
+   <command>nasal</command>
+   <script>controls.stepFlaps(1)</script>
   </binding>
  </key>
 
@@ -670,36 +539,13 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>b</name>
   <desc>Apply all brakes.</desc>
   <binding>
-   <command>property-assign</command>
-   <property>/controls/gear/wheel[0]/brake</property>
-   <value type="double">1.0</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/controls/gear/wheel[1]/brake</property>
-   <value type="double">1.0</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/controls/gear/wheel[2]/brake</property>
-   <value type="double">1.0</value>
+   <command>nasal</command>
+   <script>props.setAll("/controls/gear/wheel", "brake", 1)</script>
   </binding>
   <mod-up>
-   <desc>Release all brakes.</desc>
    <binding>
-    <command>property-assign</command>
-    <property>/controls/gear/wheel[0]/brake</property>
-    <value type="double">0.0</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/controls/gear/wheel[1]/brake</property>
-    <value type="double">0.0</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/controls/gear/wheel[2]/brake</property>
-    <value type="double">0.0</value>
+    <command>nasal</command>
+    <script>props.setAll("/controls/gear/wheel", "brake", 0)</script>
    </binding>
   </mod-up>
  </key>
@@ -708,34 +554,15 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>c</name>
   <desc>Toggle 3D/2D cockpit</desc>
   <binding>
-   <condition>
-     <property>/sim/allow-toggle-cockpit</property>
-   </condition>
-   <command>property-assign</command>
-   <property>/sim/current-view/heading-offset-deg</property>
-   <value type="double">0</value>
-  </binding>
-  <binding>
-   <condition>
-     <property>/sim/allow-toggle-cockpit</property>
-   </condition>
-   <command>property-assign</command>
-   <property>/sim/current-view/pitch-offset-deg</property>
-   <value type="double">0</value>
-  </binding>
-  <binding>
-   <condition>
-     <property>/sim/allow-toggle-cockpit</property>
-   </condition>
-   <command>property-toggle</command>
-   <property>/sim/view/internal</property>
-  </binding>
-  <binding>
-   <condition>
-     <property>/sim/allow-toggle-cockpit</property>
-   </condition>
-   <command>property-toggle</command>
-   <property>/sim/virtual-cockpit</property>
+   <command>nasal</command>
+   <script>
+    if(getprop("/sim/allow-toggle-cockpit")) {
+        setprop("/sim/current-view/heading-offset-deg", 0);
+        setprop("/sim/current-view/pitch-offset-deg", 0);
+        setprop("/sim/view/internal", !getprop("/sim/view/internal"));
+        setprop("/sim/virtual-cockpit", !getprop("/sim/virtual-cockpit"));
+    }
+   </script>
   </binding>
  </key>
 
@@ -853,14 +680,10 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="118">
   <name>v</name>
   <desc>Cycle view</desc>
-  <desc>Scroll in reverse through views.</desc>
+  <desc>Scroll through views.</desc>
   <binding>
-    <command>property-adjust</command>
-    <property>/sim/current-view/view-number</property>
-    <step type="int">1</step>
-    <min type="int">0</min>
-    <max type="int">6</max>
-    <wrap type="bool">true</wrap>
+   <command>nasal</command>
+   <script>view.stepView(1)</script>
   </binding>
  </key>
 
@@ -885,40 +708,8 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>{</name>
   <desc>Decrease Magneto on Selected Engine</desc>
   <binding>
-   <desc>first engine</desc>
-   <condition>
-    <property>/sim/input/selected/engine[0]</property>
-   </condition>
-   <command>property-adjust</command>
-   <property>/controls/engines/engine[0]/magnetos</property>
-   <step type="int">-1</step>
-  </binding>
-  <binding>
-   <desc>second engine</desc>
-   <condition>
-    <property>/sim/input/selected/engine[1]</property>
-   </condition>
-   <command>property-adjust</command>
-   <property>/controls/engines/engine[1]/magnetos</property>
-   <step type="int">-1</step>
-  </binding>
-  <binding>
-   <desc>third engine</desc>
-   <condition>
-    <property>/sim/input/selected/engine[2]</property>
-   </condition>
-   <command>property-adjust</command>
-   <property>/controls/engines/engine[2]/magnetos</property>
-   <step type="int">-1</step>
-  </binding>
-  <binding>
-   <desc>fourth engine</desc>
-   <condition>
-    <property>/sim/input/selected/engine[3]</property>
-   </condition>
-   <command>property-adjust</command>
-   <property>/controls/engines/engine[3]/magnetos</property>
-   <step type="int">-1</step>
+   <command>nasal</command>
+   <script>controls.stepMagnetos(-1)</script>
   </binding>
  </key>
 
@@ -926,40 +717,8 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>}</name>
   <desc>Increase Magneto on Selected Engine</desc>
   <binding>
-   <desc>first engine</desc>
-   <condition>
-    <property>/sim/input/selected/engine[0]</property>
-   </condition>
-   <command>property-adjust</command>
-   <property>/controls/engines/engine[0]/magnetos</property>
-   <step type="int">1</step>
-  </binding>
-  <binding>
-   <desc>second engine</desc>
-   <condition>
-    <property>/sim/input/selected/engine[1]</property>
-   </condition>
-   <command>property-adjust</command>
-   <property>/controls/engines/engine[1]/magnetos</property>
-   <step type="int">1</step>
-  </binding>
-  <binding>
-   <desc>third engine</desc>
-   <condition>
-    <property>/sim/input/selected/engine[2]</property>
-   </condition>
-   <command>property-adjust</command>
-   <property>/controls/engines/engine[2]/magnetos</property>
-   <step type="int">1</step>
-  </binding>
-  <binding>
-   <desc>fourth engine</desc>
-   <condition>
-    <property>/sim/input/selected/engine[3]</property>
-   </condition>
-   <command>property-adjust</command>
-   <property>/controls/engines/engine[3]/magnetos</property>
-   <step type="int">1</step>
+   <command>nasal</command>
+   <script>controls.stepMagnetos(1)</script>
   </binding>
  </key>
 
@@ -967,24 +726,8 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>~</name>
   <desc>Select all engines</desc>
   <binding>
-   <command>property-assign</command>
-   <property>/sim/input/selected/engine[0]</property>
-   <value type="bool">true</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/input/selected/engine[1]</property>
-   <value type="bool">true</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/input/selected/engine[2]</property>
-   <value type="bool">true</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/sim/input/selected/engine[3]</property>
-   <value type="bool">true</value>
+   <command>nasal</command>
+   <script>controls.selectAllEngines()</script>
   </binding>
  </key>
 
@@ -1145,19 +888,8 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>Keypad 5</name>
   <desc>Center aileron, elevator, and rudder.</desc>
   <binding>
-   <command>property-assign</command>
-   <property>/controls/flight/aileron</property>
-   <value type="double">0.0</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/controls/flight/elevator</property>
-   <value type="double">0.0</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/controls/flight/rudder</property>
-   <value type="double">0.0</value>
+   <command>nasal</command>
+   <script>controls.centerFlightControls()</script>
   </binding>
  </key>
 

@@ -11,7 +11,7 @@ Started September 2000 by David Megginson, david@megginson.com
 <PropertyList>
 
  <!-- General simulation preferences -->
- <sim include="Aircraft/c172-yasim-set.xml">
+ <sim include="Aircraft/c172-set.xml">
   <startup>
    <xsize>800</xsize>
    <ysize>600</ysize>
@@ -24,7 +24,6 @@ Started September 2000 by David Megginson, david@megginson.com
    <trim>true</trim>
    <browser-app>netscape</browser-app><!--  help viewer -->
   </startup>
-  <aircraft>c172</aircraft>
   <model-hz>120</model-hz>
   <sound>true</sound>
   <speed-up>1.0</speed-up>

@@ -15,7 +15,11 @@ October 23 2001 John Check, fgpanels@rockfish.net
   <flight-model>yasim</flight-model>
   <aero>c310</aero>
   <fuel-fraction>1.0</fuel-fraction>
-  <sound>true</sound>
+
+  <sound>
+   <audible>true</audible>
+   <path>Aircraft/c310/c310-sound.xml</path>
+  </sound>
 
   <panel>
    <path>Aircraft/c310/c310-vfr-panel.xml</path>

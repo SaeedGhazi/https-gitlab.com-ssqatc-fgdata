@@ -21,7 +21,9 @@ October 23 2001 John Check, fgpanels@rockfish.net
 
   <flight-model>jsb</flight-model>
   <aero>X15</aero>
-  <sound>false</sound>
+  <sound>
+   <audible>false</audible>
+  </sound>
 
   <panel>
    <path>Aircraft/X15/Panels/X15-panel.xml</path>

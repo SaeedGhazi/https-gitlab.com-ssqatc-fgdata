@@ -15,7 +15,10 @@ October 23 2001 John Check, fgpanels@rockfish.net
   <flight-model>yasim</flight-model>
   <aero>harrier</aero>
   <fuel-fraction>1.0</fuel-fraction>
-  <sound>true</sound>
+
+  <sound>
+   <audible>true</audible>
+  </sound>
 
   <panel>
    <path>Aircraft/c172/Panels/c172-ifr-panel.xml</path>

@@ -15,7 +15,9 @@ October 23 2001 John Check, fgpanels@rockfish.net
   <flight-model>yasim</flight-model>
   <aero>747</aero>
   <fuel-fraction>1.0</fuel-fraction>
-  <sound>true</sound>
+  <sound>
+   <audible>true</audible>
+  </sound>
 
   <panel>
    <path>Aircraft/747/747-panel.xml</path>

@@ -11,7 +11,11 @@ UIUC Cessna 310 init file.
   <flight-model>larcsim</flight-model>
   <aero>uiuc</aero>
   <aircraft-dir>Aircraft-uiuc/Cessna310</aircraft-dir>
-  <sound>true</sound>
+
+  <sound>
+   <audible>true</audible>
+   <path>Aircraft/c310/c310-sound.xml</path>
+  </sound>
 
   <panel>
    <path>Aircraft/c310/c310-vfr-panel.xml</path>

@@ -12,7 +12,10 @@ UIUC Beech 99 init file.
   <flight-model>larcsim</flight-model>
   <aero>uiuc</aero>
   <aircraft-dir>Aircraft-uiuc/Beech99</aircraft-dir>
-  <sound>false</sound>
+
+  <sound>
+   <audible>false</audible>
+  </sound>
 
   <panel>
    <path>Aircraft/c310/c310-vfr-panel.xml</path>

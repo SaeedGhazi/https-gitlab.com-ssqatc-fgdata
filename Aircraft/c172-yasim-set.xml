@@ -16,8 +16,12 @@ October 23 2001 John Check, fgpanels@rockfish.net
   <aero>c172</aero>
   <fuel-fraction>1.0</fuel-fraction>
   <fuel-fraction>1.0</fuel-fraction>
-  <sound>true</sound>
-  
+
+  <sound>
+   <audible>true</audible>
+   <path>Aircraft/c172/c172-sound.xml</path>
+  </sound>
+
   <panel>
    <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
    <visibility>true</visibility>

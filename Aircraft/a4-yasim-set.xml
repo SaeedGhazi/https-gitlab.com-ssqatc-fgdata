@@ -12,6 +12,8 @@ October 23 2001 John Check, fgpanels@rockfish.net
 
 <PropertyList>
  <sim>
+  <virtual-cockpit archive="y">true</virtual-cockpit>
+
   <flight-model>yasim</flight-model>
   <aero>a4</aero>
   <fuel-fraction>1.0</fuel-fraction>
@@ -22,16 +24,37 @@ October 23 2001 John Check, fgpanels@rockfish.net
   </sound>
 
   <panel>
-   <path>Aircraft/c172/Panels/c172-vfr-panel.xml</path>
+    <path>Aircraft/a4/a4-panel.xml</path>
+    <visibility>true</visibility>
   </panel>
-  <panel_2>
-   <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
-  </panel_2>
-  
+  <panel n="1">
+    <desc>2D Panel</desc>
+    <path>Aircraft/c310u3a/c310u3a-panel.xml</path>
+  </panel>
+
   <model>
-   <path><!-- you need to set this --></path>
+   <path>Aircraft/a4/Models/a4-blue.xml</path>
   </model>
+
+  <view n="0">
+   <internal archive="y">true</internal>
+   <config>
+    <x-offset-m archive="y">0</x-offset-m>
+    <y-offset-m archive="y">0.76</y-offset-m>
+    <z-offset-m archive="y">-2.75</z-offset-m>
+   </config>
+  </view>
+
+  <current-view>
+    <pitch-offset-deg>-12</pitch-offset-deg>
+  </current-view>
+
  </sim>
 </PropertyList>
+
+
+
+
+
 
 

@@ -42,6 +42,19 @@
   <strings>Translations/strings-fr.xml</strings>
  </locale>
 
+<locale>
+  <lang type="string">it</lang>
+  <lang type="string">italian</lang>
+  <lang type="string">it_CH</lang>
+  <lang type="string">it_CH.ISO-8859-1</lang>
+  <lang type="string">it_CH.UTF-8</lang>
+  <lang type="string">it_IT</lang>
+  <lang type="string">it_IT.ISO-8859-1</lang>
+  <lang type="string">it_IT.ISO-8859-15</lang>
+  <lang type="string">it_IT.UTF-8</lang>
+  <strings>Translations/strings-it.xml</strings>
+ </locale>
+
  <locale>
   <lang type="string">nl</lang>
   <lang type="string">nl_BE</lang>

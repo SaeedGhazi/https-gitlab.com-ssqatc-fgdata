@@ -4,6 +4,41 @@
   <label>File</label>
 
   <item>
+   <label>Save</label>
+   <binding>
+    <command>old-save-dialog</command>
+   </binding>
+  </item>
+
+  <item>
+   <label>Load</label>
+   <binding>
+    <command>old-load-dialog</command>
+   </binding>
+  </item>
+
+  <item>
+   <label>High-Res Snapshot</label>
+   <bindings>
+    <command>old-hires-snapshot</command>
+   </bindings>
+  </item>
+
+  <item>
+   <label>Snapshot</label>
+   <binding>
+    <command>old-snapshot-dialog</command>
+   </binding>
+  </item>
+
+  <item>
+   <label>Print Screen</label>
+   <binding>
+    <command>old-print-dialog</command>
+   </binding>
+  </item>
+
+  <item>
    <label>Quit</label>
    <binding>
     <command>exit</command>
@@ -13,7 +48,165 @@
  </menu>
 
  <menu>
+  <label>View</label>
+
+  <item>
+   <label>Toggle 2D Panel</label>
+   <binding>
+    <command>property-toggle</command>
+    <property>/sim/panel/visibility</property>
+   </binding>
+  </item>
+
+  <item>
+   <label>Adjust View Distance</label>
+   <binding>
+    <command>old-pilot-offset-dialog</command>
+   </binding>
+  </item>
+
+  <item>
+   <label>Adjust HUD Transparency</label>
+   <binding>
+    <command>old-hud-alpha-dialog</command>
+   </binding>
+  </item>
+
+  <item>
+   <label>Browse Internal Properties</label>
+   <binding>
+    <command>old-properties-dialog</command>
+   </binding>
+  </item>
+
+ </menu>
+
+ <menu>
+  <label>Presets</label>
+  
+  <item>
+   <label>Preset Airport</label>
+   <binding>
+    <command>old-preset-airport-dialog</command>
+   </binding>
+  </item>
+
+  <item>
+   <label>Preset Runway</label>
+   <binding>
+    <command>old-preset-runway-dialog</command>
+   </binding>
+  </item>
+
+  <item>
+   <label>Preset Offset Distance</label>
+   <binding>
+    <command>old-preset-offset-distance-dialog</command>
+   </binding>
+  </item>
+
+  <item>
+   <label>Preset Altitude</label>
+   <binding>
+    <command>old-preset-altitude-dialog</command>
+   </binding>
+  </item>
+
+  <item>
+   <label>Preset Glideslope</label>
+   <binding>
+    <command>old-preset-glideslope-dialog</command>
+   </binding>
+  </item>
+
+  <item>
+   <label>Preset Airspeed</label>
+   <binding>
+    <command>old-preset-airspeed-dialog</command>
+   </binding>
+  </item>
+
+  <item>
+   <label>Commit Presets</label>
+   <binding>
+    <command>old-preset-commit-dialog</command>
+   </binding>
+  </item>
+
+ </menu>
+
+ <menu>
+  <label>Autopilot</label>
+
+  <item>
+   <label>AP Altitude</label>
+   <binding>
+    <command>old-ap-altitude-dialog</command>
+   </binding>
+  </item>
+  
+  <item>
+   <label>AP Heading</label>
+   <binding>
+    <command>old-ap-heading-dialog</command>
+   </binding>
+  </item>
+  
+  <item>
+   <label>Add Waypoint</label>
+   <binding>
+    <command>old-ap-add-waypoint-dialog</command>
+   </binding>
+  </item>
+  
+  <item>
+   <label>Pop Waypoint</label>
+   <binding>
+    <command>old-ap-pop-waypoint-dialog</command>
+   </binding>
+  </item>
+
+  <item>
+   <label>Clear Route</label>
+   <binding>
+    <command>old-ap-clear-route-dialog</command>
+   </binding>
+  </item>
+
+  <item>
+   <label>Adjust Autopilot</label>
+   <bindings>
+    <command>old-ap-adjust-dialog</command>
+   </bindings>
+  </item>
+
+  <item>
+   <label>Set Lat/Lon Format</label>
+   <bindings>
+    <command>old-lat-lon-format-dialog</command>
+   </bindings>
+  </item>
+  
+ </menu>
+
+ <menu>
   <label>Weather</label>
+
+  <item>
+   <label>Air</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>air</dialog-name>
+   </binding>
+  </item>
+
+  <item>
+   <label>Clouds</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>clouds</dialog-name>
+   </binding>
+  </item>
 
   <item>
    <label>Winds</label>
@@ -23,12 +216,14 @@
    </binding>
   </item>
 
+ </menu>
+
+ <menu>
+  <label>Help</label>
+
   <item>
-   <label>Air</label>
-   <binding>
-    <command>dialog-show</command>
-    <dialog-name>air</dialog-name>
-   </binding>
+   <label>Help</label>
+   <command>old-help-dialog</command>
   </item>
 
  </menu>

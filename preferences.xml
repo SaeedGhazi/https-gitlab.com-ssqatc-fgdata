@@ -16,14 +16,13 @@ Started September 2000 by David Megginson, david@megginson.com
   <startup>
    <xsize>800</xsize>
    <ysize>600</ysize>
-   <trim>true</trim>
    <splash-screen>true</splash-screen>
    <intro-music>true</intro-music>
    <game-mode>false</game-mode>
    <airport-id>KSFO</airport-id>
    <fullscreen>false</fullscreen>
    <units>feet</units>
-   <browser-app>konqueror</browser-app><!--  help viewer -->
+  <browser-app>konqueror</browser-app><!--  help viewer -->
   </startup>
   <flight-model>jsb</flight-model>
   <aircraft>c172</aircraft>
@@ -128,6 +127,20 @@ Started September 2000 by David Megginson, david@megginson.com
  <!-- Radio settings -->
 
  <radios>
+
+  <comm n="0">
+   <frequencies>
+    <selected-mhz>117.4</selected-mhz>
+    <standby-mhz>115.8</standby-mhz>
+   </frequencies>
+  </comm>
+
+  <comm n="1">
+   <frequencies>
+    <selected-mhz>111.80</selected-mhz>
+    <standby-mhz>115.70</standby-mhz>
+   </frequencies>
+  </comm>
 
   <nav n="0">
    <frequencies>

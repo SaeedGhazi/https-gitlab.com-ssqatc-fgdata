@@ -108,6 +108,8 @@ almost always found in pairs, with the closing tag having a slash prefixing
 the tag name, i.e </PropertyList>. The exception is the tag representing an aliased
 property. In this case a slash is prepended to the closing angle bracket.
 (see section Aliasing)
+Properties must have units specified where appropriate. See section "Units"
+at the end of this doc.
 
 The top level panel configuration file is composed of a <name>, a <background>
 texture and zero or more <instruments>.
@@ -263,8 +265,8 @@ like this:
 
  <PropertyList>
  <params>
- <comm-freq-prop>/radios/comm1/frequencies/selected</comm-freq-prop>
- <nav-freq-prop>/radios/nav1/frequencies/selected</nav-freq-prop>
+ <comm-freq-prop>/radios/comm1/frequencies/selected-mhz</comm-freq-prop>
+ <nav-freq-prop>/radios/nav1/frequencies/selected-mhz</nav-freq-prop>
  </params>
 
  ...
@@ -283,8 +285,8 @@ overriding the parameters at inclusion in the top level panel property list.
  <instrument include="../Instruments/navcomm.xml">
  <name>NAVCOM 1 radio</name>
  <params>
- <comm-freq-prop>/radios/comm1/frequencies/selected</comm-freq-prop>
- <nav-freq-prop>/radios/nav1/frequencies/selected</nav-freq-prop>
+ <comm-freq-prop>/radios/comm1/frequencies/selected-mhz</comm-freq-prop>
+ <nav-freq-prop>/radios/nav1/frequencies/selected-mhz</nav-freq-prop>
  </params>
  .....
  </instrument>
@@ -292,8 +294,8 @@ overriding the parameters at inclusion in the top level panel property list.
  <instrument include="../Instruments/navcomm.xml">
  <name>NAVCOM 2 radio</name>
  <params>
- <comm-freq-prop>/radios/comm2/frequencies/selected</comm-freq-prop>
- <nav-freq-prop>/radios/nav2/frequencies/selected</nav-freq-prop>
+ <comm-freq-prop>/radios/comm2/frequencies/selected-mhz</comm-freq-prop>
+ <nav-freq-prop>/radios/nav2/frequencies/selected-mhz</nav-freq-prop>
  </params>
  .....
  </instrument>
@@ -402,7 +404,7 @@ This example is a switch that contains both static and dynamic text:
     <chunks>                              <!-- sections of text are referred to as chunks -->
      <chunk>                              <!-- first chunk of text -->
       <type>number-value</type>           <!-- value defines it as dynamic -->
-      <property>/radios/nav1/dme/distance</property>      <!-- ties it to a property -->
+      <property>/radios/nav1/dme/distance-nm</property>      <!-- ties it to a property -->
       <scale>0.00053995680</scale>        <!-- convert between  statute and nautical miles? -->
       <format>%5.1f</format>              <!-- define format -->
      </chunk>
@@ -464,7 +466,7 @@ This example comes from the altimeter.xml
    <transformations>                          <!-- begin defining transformations -->
     <transformation>                          <!-- start definition of transformation that drives the needle -->
      <type>rotation</type>
-     <property>/steam/altitude</property>     <!-- bind it to a property -->
+     <property>/steam/altitude-ft</property>     <!-- bind it to a property -->
      <max>100000.0</max>                      <!-- upper limit of instrument -->
      <scale>0.36</scale>                      <!-- once around == 1000 ft -->
     </transformation>                         <!-- close this transformation -->
@@ -549,7 +551,7 @@ These examples come from the radio stack:
    <y>-32</y>
    <w>16</w>                           <!-- size of hotspot -->
    <h>32</h>
-   <property>/radios/nav1/frequencies/standby</property>    <!-- bind to a property -->
+   <property>/radios/nav1/frequencies/standby-mhz</property>    <!-- bind to a property -->
    <increment>-0.05</increment>        <!-- amount of adjustment per mouse click -->
    <min>108.0</min>                    <!-- lower range -->
    <max>117.95</max>                   <!-- upper range -->
@@ -563,8 +565,8 @@ These examples come from the radio stack:
    <y>-32</y>
    <w>32</w>
    <h>32</h>
-   <property1>/radios/nav1/frequencies/selected</property1>   <!-- properties to toggle between -->
-   <property2>/radios/nav1/frequencies/standby</property2>
+   <property1>/radios/nav1/frequencies/selected-mhz</property1>   <!-- properties to toggle between -->
+   <property2>/radios/nav1/frequencies/standby-mhz</property2>
   </action>
   <action>
    <name>ident volume on/off</name>
@@ -622,6 +624,71 @@ of distribution. All Artwork must have a license compatible with the GPL.
 Artwork of unverifiable origin is not acceptable.
 Secondly, texture sizes must meet the lowest common denominator of 256e2 pixels.
 Artwork from third parties may be acceptable if it meets these criteria.
+
+UNITS
+-----
+Here is a list of property names including appropriate units:
+
+/autopilot/locks/nav1 => /autopilot/locks/nav[0]
+/autopilot/settings/altitude += "-ft"
+/autopilot/settings/climb-rate += "-fpm"
+/autopilot/settings/heading-bug += "-deg"
+/consumables/fuel/tank1/level => /consumables/fuel/tank[0]/level-gal_us
+/consumables/fuel/tank2/level => /consumables/fuel/tank[1]/level-gal_us
+/engines/engine0/cht => /engines/engine[0]/cht-degf
+/engines/engine0/egt => /engines/engine[0]/egt-degf
+/engines/engine0/fuel-flow => /engines/engine[0]/fuel-flow-gph
+/engines/engine0/mp => /engines/engine[0]/mp-osi
+/engines/engine0/rpm => /engines/engine[0]/rpm
+/environment/clouds/altitude += "-ft"
+/environment/magnetic-dip += "-deg"
+/environment/magnetic-varation += "-deg"
+/environment/visibility += "-m"
+/environment/wind-down += "-fps"
+/environment/wind-east += "-fps"
+/environment/wind-north += "-fps"
+/orientation/heading += "-deg"
+/orientation/heading-magnetic += "-deg"
+/orientation/pitch += "-deg"
+/orientation/roll += "-deg"
+/position/altitude += "-ft"
+/position/altitude-agl += "-ft"
+/position/latitude += "-deg"
+/position/longitude += "-deg"
+/radios/adf/frequencies/selected += "-khz"
+/radios/adf/frequencies/standby += "-khz"
+/radios/adf/rotation += "-deg"
+/radios/nav1/* => /radios/nav[0]/*
+/radios/nav2/* => /radios/nav[1]/*
+/radios/nav[*]/dme/distance += "-nm"
+/radios/nav[*]/frequencies/selected += "-mhz"
+/radios/nav[*]/frequencies/standby += "-mhz"
+/radios/nav[*]/radials/actual += "-deg"
+/radios/nav[*]/radials/selected += "-deg"
+/sim/model/h-rotation => /sim/model/heading-offset-deg
+/sim/model/p-rotation => /sim/model/roll-offset-deg
+/sim/model/r-rotation => /sim/model/pitch-offset-deg
+/sim/model/x-offset += "-m"
+/sim/model/y-offset += "-m"
+/sim/model/z-offset += "-m"
+/sim/view/goal-offset += "-deg"
+/sim/view/offset += "-deg"
+/steam/adf += "-deg"
+/steam/airspeed += "-kt"
+/steam/altitude += "-ft"
+/steam/gyro-compass += "-deg"
+/steam/gyro-compass-error += "-deg"
+/steam/mag-compass += "-deg"
+/steam/vertical-speed += "-fpm"
+/velocities/airspeed += "-kt"
+/velocities/side-slip += "-rad"
+/velocities/speed-down += "-fps"
+/velocities/speed-east += "-fps"
+/velocities/speed-north += "-fps"
+/velocities/uBody += "-fps"
+/velocities/vBody += "-fps"
+/velocities/wBody += "-fps"
+/velocities/vertical-speed += "-fps"
 
 *  If there are *any* XML parsing errors, the panel will fail to load,
    so it's worth downloading a parser like Expat (http://www.jclark.com/xml/)

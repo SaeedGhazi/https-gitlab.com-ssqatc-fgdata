@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- 
+  <!-- 
     x, y, z-offset-m   The distance in meters of the Fresnel Lens Optical Landing System
                         (FLOLS) from the carrier model origin. 
 -->
@@ -16,16 +16,18 @@
         <catapult>cat-2</catapult>
         <catapult>cat-3</catapult>
         <catapult>cat-4</catapult>
-        <solid>deck</solid>
-        <solid>round-down</solid>
+        <solid>Deck</solid>
+        <solid>Round-down</solid>
+        <solid>Elevator-3-Deck</solid>
+        <solid>Elevator-4-Deck</solid>
         <latitude>37.63</latitude>
         <longitude>-122.34</longitude>
-        <speed>15</speed>
+        <speed>10</speed>
         <heading>285</heading>
         <rudder>0</rudder>
         <turn-radius-ft>3000</turn-radius-ft>
-        <x-offset-m>74.10</x-offset-m>
-        <y-offset-m>-41.84</y-offset-m>
+        <x-offset-m>69.84</x-offset-m>
+        <y-offset-m>-39.67</y-offset-m>
         <z-offset-m>21.47</z-offset-m>
       </entry>
     </scenario>

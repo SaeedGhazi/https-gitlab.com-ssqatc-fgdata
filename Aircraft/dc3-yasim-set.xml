@@ -26,9 +26,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
   </panel_2>
 
   <model>
-   <path>Aircraft/dc3/Models/dc3-dpm.ac</path>
-   <heading-offset-deg>270</heading-offset-deg>
-   <z-offset-m>-1.75</z-offset-m>
+   <path>Aircraft/dc3/Models/dc3-dpm.xml</path>
   </model> 
  </sim>
 

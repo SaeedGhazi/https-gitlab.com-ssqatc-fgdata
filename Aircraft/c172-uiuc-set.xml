@@ -33,9 +33,7 @@ UIUC Cessna 172 init file.
 -->
 
   <model>
-   <path>Aircraft/c172/Models/c172-dpm.ac</path>
-   <heading-offset-deg>270</heading-offset-deg>
-   <z-offset-m>-1</z-offset-m>
+   <path>Aircraft/c172/Models/c172-dpm.xml</path>
   </model>
 
 

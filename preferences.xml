@@ -11,8 +11,7 @@ Started September 2000 by David Megginson, david@megginson.com
 <PropertyList>
 
  <!-- General simulation preferences -->
-
- <sim>
+ <sim include="Aircraft/c172-yasim-set.xml">
   <startup>
    <xsize>800</xsize>
    <ysize>600</ysize>

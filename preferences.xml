@@ -293,6 +293,9 @@ Started September 2000 by David Megginson, david@megginson.com
    <enabled type="bool">true</enabled>
    <!-- <scenario>aircraft_demo</scenario> -->
   </ai>
+  
+  <!--to provide a default value that shows ALL aircraft regardless of development status-->
+  <aircraft-min-status>all</aircraft-min-status>
 
  </sim>
 

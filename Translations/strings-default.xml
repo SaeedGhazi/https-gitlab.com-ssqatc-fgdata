@@ -126,6 +126,7 @@
  <aircraft-options>Aircraft</aircraft-options>
  <aircraft-desc>Select an aircraft profile as defined by a top level &lt;name&gt;-set.xml</aircraft-desc>
  <show-aircraft-desc>Print a list of the currently available aircraft types</show-aircraft-desc>
+ <min-aircraft-status>Allows you to define a minimum status level (=development status) for all listed aircraft</min-aircraft-status>
 
  <!-- Flight Dynamics Model options -->
  <fdm-options>Flight Model</fdm-options>

@@ -420,6 +420,13 @@
    </option>
 
    <option>
+    <name>min-status</name>
+    <arg>{alpha,beta,early-production,production}</arg>
+    <description>strings/min-aircraft-status</description>
+    <brief/>
+   </option>
+
+   <option>
     <name>fdm</name>
     <arg>name</arg>
     <description>strings/fdm-desc</description>

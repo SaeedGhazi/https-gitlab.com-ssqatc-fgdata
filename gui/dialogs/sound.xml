@@ -15,22 +15,24 @@
   <label>Sound Configuration</label>
  </text>
 
- <group>
-  <layout>hbox</layout>
-  <checkbox>
-   <label>Pause Sound</label>
+ <checkbox>
+   <label>Mute Sound</label>
    <property>/sim/sound/pause</property>
-  </checkbox>
- </group>
+   <binding>
+     <command>dialog-apply</command>
+   </binding>
+ </checkbox>
 
  <group>
   <layout>hbox</layout>
   <text><label>Volume:</label></text>
   <slider>
-   <width>75</width>
-   <height>25</height>
    <property>/sim/sound/volume</property>
   </slider>
+  <!-- This doesn't work: need to find out why and fix it. -Andy -->
+  <binding>
+    <command>dialog-apply</command>
+  </binding>
  </group>
 
   <group>
@@ -38,7 +40,7 @@
     <default-padding>10</default-padding>
 
     <button>
-      <legend>Dismiss</legend>
+      <legend>OK</legend>
       <equal>true</equal>
       <binding>
         <command>dialog-apply</command>

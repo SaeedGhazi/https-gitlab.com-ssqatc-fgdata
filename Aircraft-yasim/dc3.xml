@@ -94,12 +94,15 @@
   <control-input axis="/controls/boost[1]" control="BOOST"/>
 </propeller>
 
-<!-- Tail wheel; freely castering and uncontrollable -->
-<gear x="-17.3" y="0" z="-1.5" compression="0.2" castering="true"/>
+<!-- Tail wheel; has castering selectable by a wheel lock -->
+<gear x="-17.3" y="0" z="-1.5" compression="0.2">
+  <control-input axis="/controls/tailwheel-castering" control="CASTERING"/>
+</gear>
 
 <!-- Main wheels; note mapping of rudder input to effect differential
      braking -->
 <gear x="-6.08" y="2.52" z="-3.49" compression="1" retract-time="7">
+  <control-input axis="/controls/parking-brake" control="BRAKE"/>
   <control-input axis="/controls/brakes[0]" control="BRAKE"/>
   <control-input axis="/controls/gear-down" control="EXTEND"/>
   <control-speed control="EXTEND" transition-time="7"/>
@@ -107,6 +110,7 @@
 </gear>
 
 <gear x="-6.08" y="-2.52" z="-3.49" compression="1" retract-time="7">
+  <control-input axis="/controls/parking-brake" control="BRAKE"/>
   <control-input axis="/controls/brakes[1]" control="BRAKE"/>
   <control-input axis="/controls/gear-down" control="EXTEND"/>
   <control-speed control="EXTEND" transition-time="7"/>

@@ -91,15 +91,16 @@ Started September 2000 by David Megginson, david@megginson.com
       <from-model type="bool">true</from-model>
       <from-model-idx type="int">0</from-model-idx>
       <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
-      <default-pitch-deg>0</default-pitch-deg>
-      <front-direction-deg>0</front-direction-deg>
-      <front-left-direction-deg>45</front-left-direction-deg>
-      <left-direction-deg>90</left-direction-deg>
-      <back-left-direction-deg>135</back-left-direction-deg>
-      <back-direction-deg>180</back-direction-deg>
-      <back-right-direction-deg>225</back-right-direction-deg>
-      <right-direction-deg>270</right-direction-deg>
-      <front-right-direction-deg>315</front-right-direction-deg>
+      <default-field-of-view-deg type="double">55.0</default-field-of-view-deg>
+      <default-pitch-deg type="double">0</default-pitch-deg>
+      <front-direction-deg type="double">0</front-direction-deg>
+      <front-left-direction-deg type="double">45</front-left-direction-deg>
+      <left-direction-deg type="double">90</left-direction-deg>
+      <back-left-direction-deg type="double">135</back-left-direction-deg>
+      <back-direction-deg type="double">180</back-direction-deg>
+      <back-right-direction-deg type="double">225</back-right-direction-deg>
+      <right-direction-deg type="double">270</right-direction-deg>
+      <front-right-direction-deg type="double">315</front-right-direction-deg>
     </config>
   </view>
 

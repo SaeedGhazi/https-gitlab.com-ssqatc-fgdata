@@ -41,14 +41,27 @@ October 23 2001 John Check, fgpanels@rockfish.net
   <view>
    <internal archive="y">true</internal>
    <config>
-     <x-offset-m archive="y">-0.4</x-offset-m>
-     <y-offset-m archive="y">0.3</y-offset-m>
+     <goal-heading-deg>3</goal-heading-deg>
+     <x-offset-m archive="y">-0.15</x-offset-m>
+     <y-offset-m archive="y">0.25</y-offset-m>
      <z-offset-m archive="y">0.1</z-offset-m>
+     <default-field-of-view-deg>50.0</default-field-of-view-deg>
+     <default-pitch-deg>-9.5</default-pitch-deg>
+     <front-direction-deg>-1.5</front-direction-deg>
+     <front-left-direction-deg>45</front-left-direction-deg>
+     <left-direction-deg>90</left-direction-deg>
+     <back-left-direction-deg>135</back-left-direction-deg>
+     <back-direction-deg>180</back-direction-deg>
+     <back-right-direction-deg>225</back-right-direction-deg>
+     <right-direction-deg>270</right-direction-deg>
+     <front-right-direction-deg>315</front-right-direction-deg>
    </config>
   </view>
 
   <current-view>
-   <pitch-offset-deg>-13</pitch-offset-deg>
+   <field-of-view>50</field-of-view>
+   <heading-offset-deg>-1.5</heading-offset-deg>
+   <pitch-offset-deg>-9.5</pitch-offset-deg>
   </current-view>
 
  </sim>

@@ -24,6 +24,15 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+ <key n="4">
+  <name>Ctrl-D</name>
+  <desc>Dummy dialog</desc>
+  <binding>
+   <command>gui</command>
+   <name>hello</name>
+  </binding>
+ </key>
+
  <key n="7">
   <name>Ctrl-G</name>
   <desc>Toggle autopilot glide slope lock.</desc>

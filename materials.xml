@@ -2997,6 +2997,7 @@ Shared parameters for various materials.
  <name>Lake</name>
  <name>Pond</name>
  <name>IntermittentLake</name>
+ <name>IntermittentStream</name>
  <name>Reservoir</name>
  <name>IntermittentReservoir</name>
  <name>Stream</name>

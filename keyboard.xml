@@ -42,10 +42,10 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="4">
   <name>Ctrl-D</name>
-  <desc>Dummy dialog</desc>
+  <desc>weather dialog</desc>
   <binding>
-   <command>gui</command>
-   <name>hello</name>
+   <command>dialog-show</command>
+   <dialog-name>winds</dialog-name>
   </binding>
  </key>
 

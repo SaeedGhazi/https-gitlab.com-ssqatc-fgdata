@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <type>dialog</type>
+
+ <!-- Control the weather -->
+
+ <name>winds</name>
+ <width>400</width>
+ <height>180</height>
+ <modal>false</modal>
+
+ <text>
+  <x>10</x>
+  <y>150</y>
+  <label>Environment: Winds</label>
+ </text>
+
+ <input>
+  <x>10</x>
+  <y>110</y>
+  <width>200</width>
+  <height>25</height>
+  <label>wind direction (deg)</label>
+  <property>/environment/wind-from-heading-deg</property>
+ </input>
+
+ <input>
+  <x>10</x>
+  <y>80</y>
+  <width>200</width>
+  <height>25</height>
+  <label>base wind speed (kt)</label>
+  <property>/environment/params/base-wind-speed-kt</property>
+ </input>
+
+ <input>
+  <x>10</x>
+  <y>50</y>
+  <width>200</width>
+  <height>25</height>
+  <label>gust wind speed (kt)</label>
+  <property>/environment/params/gust-wind-speed-kt</property>
+ </input>
+
+ <button>
+  <x>5</x>
+  <y>10</y>
+  <legend>OK</legend>
+  <binding>
+   <command>dialog-apply</command>
+  </binding>
+  <binding>
+   <command>dialog-close</command>
+  </binding>
+  <default>true</default>
+ </button>
+
+ <button>
+  <x>105</x>
+  <y>10</y>
+  <legend>Apply</legend>
+  <binding>
+   <command>dialog-apply</command>
+  </binding>
+ </button>
+
+ <button>
+  <x>205</x>
+  <y>10</y>
+  <legend>Reset</legend>
+  <binding>
+   <command>dialog-update</command>
+  </binding>
+ </button>
+
+ <button>
+  <x>305</x>
+  <y>10</y>
+  <legend>Cancel</legend>
+  <binding>
+   <command>dialog-close</command>
+  </binding>
+ </button>
+
+</PropertyList>

@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <type>dialog</type>
+
+ <!-- Control the aircraft location -->
+
+ <name>location</name>
+ <width>400</width>
+ <height>180</height>
+ <modal>false</modal>
+
+ <text>
+  <x>10</x>
+  <y>150</y>
+  <label>Aircraft Location</label>
+ </text>
+
+ <input>
+  <x>10</x>
+  <y>110</y>
+  <width>200</width>
+  <height>25</height>
+  <label>degrees longitude</label>
+  <property>/position/longitude-deg</property>
+ </input>
+
+ <input>
+  <x>10</x>
+  <y>80</y>
+  <width>200</width>
+  <height>25</height>
+  <label>degrees latitude</label>
+  <property>/position/latitude-deg</property>
+ </input>
+
+ <input>
+  <x>10</x>
+  <y>50</y>
+  <width>200</width>
+  <height>25</height>
+  <label>feet altitude MSL</label>
+  <property>/position/altitude-ft</property>
+ </input>
+
+ <button>
+  <x>5</x>
+  <y>10</y>
+  <legend>OK</legend>
+  <binding>
+   <command>dialog-apply</command>
+  </binding>
+  <binding>
+   <command>dialog-close</command>
+  </binding>
+  <default>true</default>
+ </button>
+
+ <button>
+  <x>105</x>
+  <y>10</y>
+  <legend>Apply</legend>
+  <binding>
+   <command>dialog-apply</command>
+  </binding>
+ </button>
+
+ <button>
+  <x>205</x>
+  <y>10</y>
+  <legend>Reset</legend>
+  <binding>
+   <command>dialog-update</command>
+  </binding>
+ </button>
+
+ <button>
+  <x>305</x>
+  <y>10</y>
+  <legend>Cancel</legend>
+  <binding>
+   <command>dialog-close</command>
+  </binding>
+ </button>
+
+</PropertyList>

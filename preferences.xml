@@ -31,6 +31,7 @@ Started September 2000 by David Megginson, david@megginson.com
   <field-of-view>55.0</field-of-view>
   <panel>
    <path>Aircraft/c172/Panels/c172-panel.xml</path>
+   <y-offset>-305</y-offset>
    <visibility>true</visibility>
   </panel>
   <hud>

@@ -86,11 +86,12 @@ FlightGear like this (under Unix-like systems):</p>
 <blockquote><pre>fgfs --prop:/sim/model/path=Models/my-cessna.wrl
 </pre></blockquote>
 
-<p>(<strong>Note:</strong> any textures used by the model must appear
+<p>(<strong>Note:</strong> Normaly any textures used by the model must appear
 in the same directory.  If <code>my-cessna.wrl</code> uses the
 textures <code>cessna01.rgb</code> and <code>cessna02.rgb</code>, you
-must also install those textures in
-<code>$FG_ROOT/Models/</code>.)</p>
+should install those textures in <code>$FG_ROOT/Models/</code>. 
+It is howerever possible to specify a path (relative to the model path)
+to specify where the textures could be found.)</p>
 
 <p>When you want to set a 3D model permanently as the default for an
 aircraft rather than specifying it on the command line, you need to
@@ -118,6 +119,7 @@ it, then changing the value inside the <var>path</var> element inside
  &lt;sim&gt;
   &lt;model&gt;
    &lt;path&gt;Models/my-cessna.wrl&lt;/path&gt;
+   &lt;texture-path&gt;./Textures&lt;/texture-path&gt;
   &lt;/model&gt;
  &lt;/sim&gt;
 &lt;/PropertyList&gt;
@@ -134,6 +136,7 @@ information:</p>
 
 <blockquote><pre>&lt;PropertyList&gt;
  &lt;path&gt;my-cessna.wrl&lt;/path&gt;
+ &lt;texture-path&gt;./Textures&lt;/texture-path&gt;
 &lt;/PropertyList&gt;
 </pre></blockquote>
 

@@ -31,13 +31,17 @@ in a separate file.
   </hudcard>
 
 
-<instrlabel>
+  <instrlabel>
    <path>Huds/Instruments/Default/instrlabel.xml</path>
   </instrlabel>
 
   <fgTBI>
    <path>Huds/Instruments/Default/fgtbi.xml</path>
   </fgTBI>
+
+  <Gload>
+   <path>Huds/Instruments/Default/gload.xml</path>
+  </Gload>
 
  </instruments>
 

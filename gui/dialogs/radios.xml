@@ -1,0 +1,366 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <name>radios</name>
+ <width>500</width>
+ <height>300</height>
+ <modal>false</modal>
+
+ <text>
+  <x>10</x>
+  <y>270</y>
+  <label>Radio Frequencies</label>
+ </text>
+
+ <!-- headers -->
+ <group>
+  <x>0</x>
+  <y>240</y>
+  <text>
+   <x>75</x>
+   <label>Selected</label>
+  </text>
+  <text>
+   <x>300</x>
+   <label>Standby</label>
+  </text>
+ </group>
+
+ <group>
+  <x>0</x>
+  <y>210</y>
+
+  <text>
+   <label>COM1</label>
+  </text>
+
+  <input>
+   <name>com1-selected</name>
+   <x>75</x>
+   <y>0</y>
+   <width>75</width>
+   <height>25</height>
+   <label>MHz</label>
+   <property>/radios/comm[0]/frequencies/selected-mhz</property>
+  </input>
+
+  <button>
+   <x>220</x>
+   <y>0</y>
+   <legend>&lt;-&gt;</legend>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>com1-selected</object-name>
+   </binding>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>com1-standby</object-name>
+   </binding>
+   <binding>
+    <command>property-swap</command>
+    <property>/radios/comm[0]/frequencies/selected-mhz</property>
+    <property>/radios/comm[0]/frequencies/standby-mhz</property>
+   </binding>
+   <binding>
+    <command>dialog-update</command>
+    <object-name>com1-selected</object-name>
+   </binding>
+   <binding>
+    <command>dialog-update</command>
+    <object-name>com1-standby</object-name>
+   </binding>
+  </button>
+
+  <input>
+   <name>com1-standby</name>
+   <x>300</x>
+   <y>0</y>
+   <width>75</width>
+   <height>25</height>
+   <label>MHz</label>
+   <property>/radios/comm[0]/frequencies/standby-mhz</property>
+  </input>
+
+ </group>
+
+ <group>
+  <x>0</x>
+  <y>180</y>
+
+  <text>
+   <label>COM2</label>
+  </text>
+
+  <input>
+   <name>com2-selected</name>
+   <x>75</x>
+   <y>0</y>
+   <width>75</width>
+   <height>25</height>
+   <label>MHz</label>
+   <property>/radios/comm[1]/frequencies/selected-mhz</property>
+  </input>
+
+  <button>
+   <x>220</x>
+   <y>0</y>
+   <legend>&lt;-&gt;</legend>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>com2-selected</object-name>
+   </binding>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>com2-standby</object-name>
+   </binding>
+   <binding>
+    <command>property-swap</command>
+    <property>/radios/comm[1]/frequencies/selected-mhz</property>
+    <property>/radios/comm[1]/frequencies/standby-mhz</property>
+   </binding>
+   <binding>
+    <command>dialog-update</command>
+    <object-name>com2-selected</object-name>
+   </binding>
+   <binding>
+    <command>dialog-update</command>
+    <object-name>com2-standby</object-name>
+   </binding>
+  </button>
+
+  <input>
+   <name>com2-standby</name>
+   <x>300</x>
+   <y>0</y>
+   <width>75</width>
+   <height>25</height>
+   <label>MHz</label>
+   <property>/radios/comm[1]/frequencies/standby-mhz</property>
+  </input>
+
+ </group>
+
+ <group>
+  <x>0</x>
+  <y>150</y>
+
+  <text>
+   <label>NAV1</label>
+  </text>
+
+  <input>
+   <name>nav1-selected</name>
+   <x>75</x>
+   <y>0</y>
+   <width>75</width>
+   <height>25</height>
+   <label>MHz</label>
+   <property>/radios/nav[0]/frequencies/selected-mhz</property>
+  </input>
+
+  <button>
+   <x>220</x>
+   <y>0</y>
+   <legend>&lt;-&gt;</legend>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>nav1-selected</object-name>
+   </binding>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>nav1-standby</object-name>
+   </binding>
+   <binding>
+    <command>property-swap</command>
+    <property>/radios/nav[0]/frequencies/selected-mhz</property>
+    <property>/radios/nav[0]/frequencies/standby-mhz</property>
+   </binding>
+   <binding>
+    <command>dialog-update</command>
+    <object-name>nav1-selected</object-name>
+   </binding>
+   <binding>
+    <command>dialog-update</command>
+    <object-name>nav1-standby</object-name>
+   </binding>
+  </button>
+
+  <input>
+   <name>nav1-standby</name>
+   <x>300</x>
+   <y>0</y>
+   <width>75</width>
+   <height>25</height>
+   <label>MHz</label>
+   <property>/radios/nav[0]/frequencies/standby-mhz</property>
+  </input>
+
+ </group>
+
+ <group>
+  <x>0</x>
+  <y>120</y>
+
+  <text>
+   <label>NAV2</label>
+  </text>
+
+  <input>
+   <name>nav2-selected</name>
+   <x>75</x>
+   <y>0</y>
+   <width>75</width>
+   <height>25</height>
+   <label>MHz</label>
+   <property>/radios/nav[1]/frequencies/selected-mhz</property>
+  </input>
+
+  <button>
+   <x>220</x>
+   <y>0</y>
+   <legend>&lt;-&gt;</legend>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>nav2-selected</object-name>
+   </binding>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>nav2-standby</object-name>
+   </binding>
+   <binding>
+    <command>property-swap</command>
+    <property>/radios/nav[1]/frequencies/selected-mhz</property>
+    <property>/radios/nav[1]/frequencies/standby-mhz</property>
+   </binding>
+   <binding>
+    <command>dialog-update</command>
+    <object-name>nav2-selected</object-name>
+   </binding>
+   <binding>
+    <command>dialog-update</command>
+    <object-name>nav2-standby</object-name>
+   </binding>
+  </button>
+
+  <input>
+   <name>nav2-standby</name>
+   <x>300</x>
+   <y>0</y>
+   <width>75</width>
+   <height>25</height>
+   <label>MHz</label>
+   <property>/radios/nav[1]/frequencies/standby-mhz</property>
+  </input>
+
+ </group>
+
+ <group>
+  <x>0</x>
+  <y>90</y>
+
+  <text>
+   <label>ADF</label>
+  </text>
+
+  <input>
+   <name>adf-selected</name>
+   <x>75</x>
+   <y>0</y>
+   <width>75</width>
+   <height>25</height>
+   <label>kHz</label>
+   <property>/radios/kr-87/outputs/selected-khz</property>
+  </input>
+
+  <button>
+   <x>220</x>
+   <y>0</y>
+   <legend>&lt;-&gt;</legend>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>adf-selected</object-name>
+   </binding>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>adf-standby</object-name>
+   </binding>
+   <binding>
+    <command>property-swap</command>
+    <property>/radios/kr-87/outputs/selected-khz</property>
+    <property>/radios/kr-87/outputs/standby-khz</property>
+   </binding>
+   <binding>
+    <command>dialog-update</command>
+    <object-name>adf-selected</object-name>
+   </binding>
+   <binding>
+    <command>dialog-update</command>
+    <object-name>adf-standby</object-name>
+   </binding>
+  </button>
+
+  <input>
+   <name>adf-standby</name>
+   <x>300</x>
+   <y>0</y>
+   <width>75</width>
+   <height>25</height>
+   <label>kHz</label>
+   <property>/radios/kr-87/outputs/standby-khz</property>
+  </input>
+
+ </group>
+
+ <group>
+  <x>0</x>
+  <y>60</y>
+
+  <text>
+   <label>DME</label>
+  </text>
+
+  <input>
+   <name>dme-selected</name>
+   <x>75</x>
+   <y>0</y>
+   <width>75</width>
+   <height>25</height>
+   <label>MHz</label>
+   <property>/radios/dme/frequencies/selected-khz</property>
+  </input>
+
+ </group>
+
+ <group>
+
+  <button>
+   <x>105</x>
+   <y>10</y>
+   <legend>Apply</legend>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+  </button>
+
+  <button>
+   <x>205</x>
+   <y>10</y>
+   <legend>Reset</legend>
+   <binding>
+    <command>dialog-update</command>
+   </binding>
+  </button>
+
+  <button>
+   <x>305</x>
+   <y>10</y>
+   <legend>Cancel</legend>
+   <binding>
+    <command>dialog-close</command>
+   </binding>
+  </button>
+
+ </group>
+
+</PropertyList>

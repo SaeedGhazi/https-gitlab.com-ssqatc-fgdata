@@ -188,7 +188,15 @@
  </menu>
 
  <menu>
-  <label>Failures</label>
+  <label>Equipment</label>
+
+  <item>
+   <label>Radios</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>radios</dialog-name>
+   </binding>
+  </item>
 
   <item>
    <label>System Failures</label>

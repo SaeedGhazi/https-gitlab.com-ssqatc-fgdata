@@ -25,7 +25,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
   </panel_2>
 
   <model>
-   <path><!-- you need to set this --></path>
+   <path>Aircraft/c172/Models/N757/n757.ac</path>
   </model>
  
 </PropertyList>

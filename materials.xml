@@ -81,15 +81,15 @@ Properties currently used:
  <name>grass_rwy</name>
  <texture>Runway/grass_rwy.rgb</texture>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.42</r>
+  <g>0.44</g>
+  <b>0.28</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.42</r>
+  <g>0.44</g>
+  <b>0.28</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -110,15 +110,15 @@ Properties currently used:
  <name>dirt_rwy</name>
  <texture>Runway/dirt_rwy.rgb</texture>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.51</g>
+  <b>0.38</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.51</g>
+  <b>0.38</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -139,15 +139,15 @@ Properties currently used:
  <name>lakebed_taxiway</name>
  <texture>Runway/lakebed_taxiway.rgb</texture>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.59</r>
+  <g>0.55</g>
+  <b>0.39</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.59</r>
+  <g>0.55</g>
+  <b>0.39</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -168,15 +168,15 @@ Properties currently used:
  <name>pa_taxiway</name>
  <texture>Runway/pa_taxiway.rgb</texture>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -199,15 +199,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -230,15 +230,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -261,15 +261,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -292,15 +292,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -323,15 +323,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -354,15 +354,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -385,15 +385,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -416,15 +416,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -447,15 +447,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -478,15 +478,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -509,15 +509,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -540,15 +540,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -571,15 +571,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -602,15 +602,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -633,15 +633,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -664,15 +664,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -695,15 +695,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -726,15 +726,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -757,15 +757,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -788,15 +788,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -819,15 +819,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -850,15 +850,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -881,15 +881,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -912,15 +912,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -943,15 +943,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -974,15 +974,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1005,15 +1005,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1036,15 +1036,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1067,15 +1067,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1098,15 +1098,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1129,15 +1129,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1160,15 +1160,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1191,15 +1191,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1222,15 +1222,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.25</r>
+  <g>0.24</g>
+  <b>0.25</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1252,15 +1252,15 @@ Properties currently used:
  <name>dirt_rwytaxiway</name>
  <texture>Runway/pc_taxiway.rgb</texture>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1282,15 +1282,15 @@ Properties currently used:
  <name>dirt_rwytiedown</name>
  <texture>Runway/pc_tiedown.rgb</texture>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1314,15 +1314,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1346,15 +1346,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1378,15 +1378,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1410,15 +1410,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1442,15 +1442,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1474,15 +1474,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1506,15 +1506,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1538,15 +1538,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1570,15 +1570,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1602,15 +1602,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1634,15 +1634,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1666,15 +1666,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1698,15 +1698,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1730,15 +1730,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1762,15 +1762,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1794,15 +1794,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1826,15 +1826,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1858,15 +1858,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1890,15 +1890,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1922,15 +1922,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1954,15 +1954,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -1986,15 +1986,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2018,15 +2018,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2050,15 +2050,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2082,15 +2082,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2114,15 +2114,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2146,15 +2146,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2178,15 +2178,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2210,15 +2210,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2242,15 +2242,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2274,15 +2274,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2306,15 +2306,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2338,15 +2338,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2370,15 +2370,15 @@ Properties currently used:
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
  <ambient>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.2</r>
-  <g>0.2</g>
-  <b>0.2</b>
+  <r>0.58</r>
+  <g>0.58</g>
+  <b>0.56</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2405,14 +2405,14 @@ Properties currently used:
  <ysize>1000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <ambient>
-  <r>0.14</r>
-  <g>0.28</g>
+  <r>0.15</r>
+  <g>0.29</g>
   <b>0.13</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.14</r>
-  <g>0.28</g>
+  <r>0.15</r>
+  <g>0.29</g>
   <b>0.13</b>
   <a>1.0</a>
  </diffuse>
@@ -2437,15 +2437,15 @@ Properties currently used:
  <ysize>500</ysize>
  <light-coverage>10000000.0</light-coverage>
  <ambient>
-  <r>0.14</r>
-  <g>0.28</g>
-  <b>0.13</b>
+  <r>0.26</r>
+  <g>0.45</g>
+  <b>0.07</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.14</r>
-  <g>0.28</g>
-  <b>0.13</b>
+  <r>0.26</r>
+  <g>0.45</g>
+  <b>0.07</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2469,15 +2469,15 @@ Properties currently used:
  <ysize>1000</ysize>
  <light-coverage>5000000.0</light-coverage>
  <ambient>
-  <r>0.14</r>
-  <g>0.28</g>
-  <b>0.13</b>
+  <r>0.19</r>
+  <g>0.35</g>
+  <b>0.06</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.14</r>
-  <g>0.28</g>
-  <b>0.13</b>
+  <r>0.19</r>
+  <g>0.35</g>
+  <b>0.06</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2502,15 +2502,15 @@ Properties currently used:
  <ysize>1000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <ambient>
-  <r>0.14</r>
-  <g>0.28</g>
-  <b>0.13</b>
+  <r>0.23</r>
+  <g>0.41</g>
+  <b>0.11</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.14</r>
-  <g>0.28</g>
-  <b>0.13</b>
+  <r>0.23</r>
+  <g>0.41</g>
+  <b>0.11</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2534,15 +2534,15 @@ Properties currently used:
  <ysize>1000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <ambient>
-  <r>0.14</r>
-  <g>0.28</g>
-  <b>0.13</b>
+  <r>0.16</r>
+  <g>0.23</g>
+  <b>0.04</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.14</r>
-  <g>0.28</g>
-  <b>0.13</b>
+  <r>0.16</r>
+  <g>0.23</g>
+  <b>0.04</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2567,15 +2567,15 @@ Properties currently used:
  <ysize>500</ysize>
  <light-coverage>20000000.0</light-coverage>
  <ambient>
-  <r>0.60</r>
-  <g>0.54</g>
-  <b>0.60</b>
+  <r>0.59</r>
+  <g>0.55</g>
+  <b>0.39</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.60</r>
-  <g>0.54</g>
-  <b>0.60</b>
+  <r>0.59</r>
+  <g>0.55</g>
+  <b>0.39</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2600,15 +2600,15 @@ Properties currently used:
  <ysize>1024</ysize>
  <light-coverage>100000.0</light-coverage>
  <ambient>
-  <r>0.14</r>
-  <g>0.28</g>
-  <b>0.13</b>
+  <r>0.45</r>
+  <g>0.46</g>
+  <b>0.33</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.14</r>
-  <g>0.28</g>
-  <b>0.13</b>
+  <r>0.45</r>
+  <g>0.46</g>
+  <b>0.33</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2632,15 +2632,15 @@ Properties currently used:
  <ysize>1024</ysize>
  <light-coverage>100000.0</light-coverage>
  <ambient>
-  <r>0.14</r>
-  <g>0.28</g>
-  <b>0.13</b>
+  <r>0.46</r>
+  <g>0.44</g>
+  <b>0.36</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.14</r>
-  <g>0.28</g>
-  <b>0.13</b>
+  <r>0.46</r>
+  <g>0.44</g>
+  <b>0.36</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2695,15 +2695,15 @@ Properties currently used:
  <xsize>800</xsize>
  <ysize>800</ysize>
  <ambient>
-  <r>0.70</r>
-  <g>0.75</g>
-  <b>0.83</b>
+  <r>0.78</r>
+  <g>0.86</g>
+  <b>0.90</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.70</r>
-  <g>0.75</g>
-  <b>0.83</b>
+  <r>0.78</r>
+  <g>0.86</g>
+  <b>0.90</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2728,13 +2728,13 @@ Properties currently used:
  <ambient>
   <r>0.17</r>
   <g>0.31</g>
-  <b>0.49</b>
+  <b>0.38</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
   <r>0.17</r>
   <g>0.31</g>
-  <b>0.49</b>
+  <b>0.38</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2762,15 +2762,15 @@ Properties currently used:
  <xsize>500</xsize>
  <ysize>500</ysize>
  <ambient>
-  <r>0.17</r>
-  <g>0.31</g>
-  <b>0.49</b>
+  <r>0.19</r>
+  <g>0.35</g>
+  <b>0.52</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.17</r>
-  <g>0.31</g>
-  <b>0.49</b>
+  <r>0.19</r>
+  <g>0.35</g>
+  <b>0.52</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2793,15 +2793,15 @@ Properties currently used:
  <xsize>500</xsize>
  <ysize>500</ysize>
  <ambient>
-  <r>0.60</r>
-  <g>0.54</g>
-  <b>0.40</b>
+  <r>0.59</r>
+  <g>0.51</g>
+  <b>0.39</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.60</r>
-  <g>0.54</g>
-  <b>0.40</b>
+  <r>0.59</r>
+  <g>0.51</g>
+  <b>0.39</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2824,14 +2824,14 @@ Properties currently used:
  <xsize>500</xsize>
  <ysize>500</ysize>
  <ambient>
-  <r>0.60</r>
-  <g>0.54</g>
+  <r>0.58</r>
+  <g>0.51</g>
   <b>0.40</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.60</r>
-  <g>0.54</g>
+  <r>0.58</r>
+  <g>0.51</g>
   <b>0.40</b>
   <a>1.0</a>
  </diffuse>
@@ -2859,15 +2859,15 @@ Properties currently used:
  <ysize>1000</ysize>
  <light-coverage>40000000.0</light-coverage>
  <ambient>
-  <r>0.23</r>
-  <g>0.35</g>
-  <b>0.12</b>
+  <r>0.22</r>
+  <g>0.34</g>
+  <b>0.11</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.23</r>
-  <g>0.35</g>
-  <b>0.12</b>
+  <r>0.22</r>
+  <g>0.34</g>
+  <b>0.11</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2896,15 +2896,15 @@ Properties currently used:
  <ysize>200</ysize>
  <light-coverage>4000000.0</light-coverage>
  <ambient>
-  <r>0.45</r>
+  <r>0.43</r>
   <g>0.46</g>
-  <b>0.31</b>
+  <b>0.30</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.45</r>
+  <r>0.43</r>
   <g>0.46</g>
-  <b>0.31</b>
+  <b>0.30</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2928,15 +2928,15 @@ Properties currently used:
  <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
  <ambient>
-  <r>0.45</r>
-  <g>0.46</g>
-  <b>0.31</b>
+  <r>0.38</r>
+  <g>0.40</g>
+  <b>0.11</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.45</r>
-  <g>0.46</g>
-  <b>0.31</b>
+  <r>0.38</r>
+  <g>0.40</g>
+  <b>0.11</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2960,15 +2960,15 @@ Properties currently used:
  <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
  <ambient>
-  <r>0.45</r>
-  <g>0.46</g>
-  <b>0.31</b>
+  <r>0.23</r>
+  <g>0.43</g>
+  <b>0.12</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.45</r>
-  <g>0.46</g>
-  <b>0.31</b>
+  <r>0.23</r>
+  <g>0.43</g>
+  <b>0.12</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -2992,15 +2992,15 @@ Properties currently used:
  <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
  <ambient>
-  <r>0.45</r>
-  <g>0.46</g>
-  <b>0.31</b>
+  <r>0.35</r>
+  <g>0.37</g>
+  <b>0.11</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.45</r>
-  <g>0.46</g>
-  <b>0.31</b>
+  <r>0.35</r>
+  <g>0.37</g>
+  <b>0.11</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -3024,15 +3024,15 @@ Properties currently used:
  <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
  <ambient>
-  <r>0.45</r>
-  <g>0.46</g>
-  <b>0.31</b>
+  <r>0.32</r>
+  <g>0.45</g>
+  <b>0.09</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.45</r>
-  <g>0.46</g>
-  <b>0.31</b>
+  <r>0.32</r>
+  <g>0.45</g>
+  <b>0.09</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -3056,15 +3056,15 @@ Properties currently used:
  <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
  <ambient>
-  <r>0.14</r>
-  <g>0.28</g>
-  <b>0.13</b>
+  <r>0.28</r>
+  <g>0.33</g>
+  <b>0.12</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.14</r>
-  <g>0.28</g>
-  <b>0.13</b>
+  <r>0.28</r>
+  <g>0.33</g>
+  <b>0.12</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -3089,15 +3089,15 @@ Properties currently used:
  <ysize>400</ysize>
  <light-coverage>10000.0</light-coverage>
  <ambient>
-  <r>0.5</r>
-  <g>0.5</g>
-  <b>0.5</b>
+  <r>0.29</r>
+  <g>0.27</g>
+  <b>0.27</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.5</r>
-  <g>0.5</g>
-  <b>0.5</b>
+  <r>0.29</r>
+  <g>0.27</g>
+  <b>0.27</b>
   <a>1.0</a>
  </diffuse>
  <specular>
@@ -3121,15 +3121,15 @@ Properties currently used:
  <ysize>400</ysize>
  <light-coverage>1000000.0</light-coverage>
  <ambient>
-  <r>0.75</r>
-  <g>0.75</g>
-  <b>0.75</b>
+  <r>0.60</r>
+  <g>0.59</g>
+  <b>0.52</b>
   <a>1.0</a>
  </ambient>
  <diffuse>
-  <r>0.75</r>
-  <g>0.75</g>
-  <b>0.75</b>
+  <r>0.60</r>
+  <g>0.59</g>
+  <b>0.52</b>
   <a>1.0</a>
  </diffuse>
  <specular>

@@ -12,42 +12,32 @@ October 23 2001 John Check, fgpanels@rockfish.net
 
 <PropertyList>
 
- <cockpit>true</cockpit>
-
  <sim>
 
-  <virtual-cockpit>true</virtual-cockpit>
+  <virtual-cockpit archive="y">true</virtual-cockpit>
 
-  <flight-model>jsb</flight-model>
-  <aero>c172</aero>
+  <flight-model archive="y">jsb</flight-model>
+  <aero archive="y">c172</aero>
 
   <sound>
-   <audible>true</audible>
-   <path>Aircraft/c172/c172-sound.xml</path>
+   <audible archive="y">true</audible>
+   <path archive="y">Aircraft/c172/c172-sound.xml</path>
   </sound>
 
   <panel>
-   <path>Aircraft/c172/Panels/c172-trans-panel.xml</path>
-   <visibility>true</visibility>
+   <path archive="y">Aircraft/c172/Panels/c172-trans-panel.xml</path>
+   <visibility archive="y">true</visibility>
   </panel>
-  <panel_2>
-   <path>Aircraft/c172/Panels/c172-trans-mini-panel.xml</path>
-  </panel_2>
-
-<!--
-  <model>
-   <path>Aircraft/c172/Models/N757/n757.ac</path>
-  </model>
--->
 
   <model>
-   <path>Aircraft/c172/Models/c172-dpm.xml</path>
+   <path archive="y">Aircraft/c172/Models/c172-dpm.xml</path>
   </model>
 
   <view>
+   <internal archive="y">true</internal>
    <pilot>
-    <y-offset-m>-0.03</y-offset-m>
-    <z-offset-m>0.1</z-offset-m>
+    <y-offset-m archive="y">-0.03</y-offset-m>
+    <z-offset-m archive="y">0.1</z-offset-m>
    </pilot>
   </view>
 
@@ -69,10 +59,10 @@ October 23 2001 John Check, fgpanels@rockfish.net
  <consumables>
   <fuel>
    <tank n="0">
-    <level-gal_us>20</level-gal_us>
+    <level-gal_us archive="y">20</level-gal_us>
    </tank>
    <tank n="1">
-    <level-gal_us>20</level-gal_us>
+    <level-gal_us archive="y">20</level-gal_us>
    </tank>
   </fuel>
  </consumables>

@@ -117,13 +117,13 @@ Started September 2000 by David Megginson, david@megginson.com
    </button0>
    <button1>
     <action>switch</action>
-    <control>/controls/brakes/left</control>
+    <control>/controls/brakes[0]</control>
     <repeatable>0.0</repeatable>
     <step>1.0</step>
    </button1>
    <button2>
     <action>switch</action>
-    <control>/controls/brakes/right</control>
+    <control>/controls/brakes[1]</control>
     <repeatable>0.0</repeatable>
     <step>1.0</step>
    </button2>

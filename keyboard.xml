@@ -16,9 +16,9 @@ calculated by adding 256 to the GLUT key value in glut.h.
 <PropertyList>
 
  <key n="1">
+  <code>1</code>
   <name>Ctrl-A</name>
   <desc>Toggle autopilot altitude lock.</desc>
-  <mod-ctrl>true</mod-ctrl>
   <binding>
    <control>/autopilot/locks/altitude</control>
    <action>switch</action>
@@ -26,9 +26,9 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="8">
+  <code>8</code>
   <name>Ctrl-H</name>
   <desc>Toggle autopilot heading lock.</desc>
-  <mod-ctrl>true</mod-ctrl>
   <binding>
    <control>/autopilot/locks/heading</control>
    <action>switch</action>
@@ -36,6 +36,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="13">
+  <code>13</code>
   <name>Enter</name>
   <desc>Move rudder right or increase autopilot heading.</desc>
   <binding>
@@ -46,9 +47,9 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="14">
+  <code>14</code>
   <name>Ctrl-N</name>
   <desc>Toggle autopilot nav1 lock.</desc>
-  <mod-ctrl>true</mod-ctrl>
   <binding>
    <control>/autopilot/locks/nav1</control>
    <action>switch</action>
@@ -56,9 +57,9 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="21">
+  <code>21</code>
   <name>Ctrl-U</name>
   <desc>[Cheat] Add 1000ft of emergency altitude.</desc>
-  <mod-ctrl>true</mod-ctrl>
   <binding>
    <control>/position/altitude</control>
    <action>adjust</action>
@@ -67,6 +68,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="48">
+  <code>48</code>
   <name>0</name>
   <desc>Move rudder left or increase autopilot heading.</desc>
   <binding>
@@ -77,6 +79,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="49">
+  <code>49</code>
   <name>1</name>
   <desc>Decrease elevator trim.</desc>
   <binding>
@@ -87,6 +90,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="50">
+  <code>50</code>
   <name>2</name>
   <desc>Increase elevator or autopilot altitude.</desc>
   <binding>
@@ -97,6 +101,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="57">
+  <code>57</code>
   <name>3</name>
   <desc>Decrease throttle or autopilot autothrottle.</desc>
   <binding>
@@ -107,6 +112,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="52">
+  <code>52</code>
   <name>4</name>
   <desc>Move aileron left.</desc>
   <binding>
@@ -117,6 +123,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="53">
+  <code>53</code>
   <name>5</name>
   <desc>Center aileron, elevator, and rudder.</desc>
   <binding>
@@ -137,6 +144,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="54">
+  <code>54</code>
   <name>6</name>
   <desc>Move aileron right.</desc>
   <binding>
@@ -147,6 +155,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="55">
+  <code>55</code>
   <name>7</name>
   <desc>Increase elevator trim.</desc>
   <binding>
@@ -157,6 +166,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="56">
+  <code>56</code>
   <name>8</name>
   <desc>Decrease elevator or autopilot altitude.</desc>
   <binding>
@@ -167,6 +177,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="57">
+  <code>57</code>
   <name>9</name>
   <desc>Increase throttle or autopilot autothrottle.</desc>
   <binding>
@@ -177,6 +188,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="65">
+  <code>65</code>
   <name>A</name>
   <desc>Decrease speed-up.</desc>
   <binding>
@@ -187,9 +199,9 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="80">
+  <code>80</code>
   <name>P</name>
   <desc>Toggle panel.</desc>
-  <mod-shift>true</mod-shift>
   <binding>
    <control>/sim/panel/visibility</control>
    <action>switch</action>
@@ -197,6 +209,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="91">
+  <code>91</code>
   <name>[</name>
   <desc>Decrease flaps.</desc>
   <binding>
@@ -207,6 +220,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="93">
+  <code>93</code>
   <name>]</name>
   <desc>Increase flaps.</desc>
   <binding>
@@ -217,6 +231,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="97">
+  <code>97</code>
   <name>a</name>
   <desc>Increase speed-up.</desc>
   <binding>
@@ -227,6 +242,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="269">
+  <code>269</code>
   <name>Enter</name>
   <desc>Move rudder right or increase autopilot heading.</desc>
   <binding>
@@ -237,6 +253,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="309">
+  <code>309</code>
   <name>Keypad 5</name>
   <desc>Center aileron, elevator, and rudder.</desc>
   <binding>
@@ -257,6 +274,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="356">
+  <code>356</code>
   <name>Left</name>
   <desc>Move aileron left.</desc>
   <binding>
@@ -267,6 +285,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="357">
+  <code>357</code>
   <name>Up</name>
   <desc>Increase elevator or autopilot altitude.</desc>
   <binding>
@@ -277,6 +296,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="358">
+  <code>358</code>
   <name>Right</name>
   <desc>Move aileron right.</desc>
   <binding>
@@ -287,6 +307,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="359">
+  <code>359</code>
   <name>Down</name>
   <desc>Decrease elevator or autopilot altitude.</desc>
   <binding>
@@ -297,6 +318,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="360">
+  <code>360</code>
   <name>PageUp</name>
   <desc>Increase throttle or autopilot autothrottle.</desc>
   <binding>
@@ -307,6 +329,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="361">
+  <code>361</code>
   <name>PageDown</name>
   <desc>Decrease throttle or autopilot autothrottle.</desc>
   <binding>
@@ -317,6 +340,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="362">
+  <code>362</code>
   <name>Home</name>
   <desc>Increase elevator trim.</desc>
   <binding>
@@ -327,6 +351,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="363">
+  <code>363</code>
   <name>End</name>
   <desc>Decrease elevator trim.</desc>
   <binding>
@@ -337,6 +362,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  </key>
 
  <key n="364">
+  <code>364</code>
   <name>Insert</name>
   <desc>Move rudder left or decrease autopilot heading.</desc>
   <binding>

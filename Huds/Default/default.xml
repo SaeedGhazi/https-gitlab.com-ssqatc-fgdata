@@ -43,9 +43,12 @@ in a separate file.
    <path>Huds/Instruments/Default/gload.xml</path>
   </Gload>
 
+<!-- disabled by default because the runway projection and selection has some
+     issues ...
   <runwayhud>
    <path>Huds/Instruments/Default/runwayinstr.xml</path>
   </runwayhud>
+-->
 
  </instruments>
 

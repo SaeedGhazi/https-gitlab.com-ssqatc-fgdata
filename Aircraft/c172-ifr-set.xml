@@ -55,4 +55,8 @@ October 23 2001 John Check, fgpanels@rockfish.net
    </config>
  </autopilot>
 
+ <controls>
+  <aileron-trim>-0.055</aileron-trim>
+ </controls>
+
 </PropertyList>

@@ -71,6 +71,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
  </consumables>
 
  <controls>
+  <aileron-trim>-0.055</aileron-trim>
   <magnetos>3</magnetos>
  </controls>
 

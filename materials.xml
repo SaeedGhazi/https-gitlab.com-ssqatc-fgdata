@@ -2755,17 +2755,17 @@ Shared parameters for various materials.
   </object>
   <object>
    <path>Models/Buildings/shop.ac</path>
-   <coverage-m2>500000</coverage-m2>
+   <coverage-m2>1000000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
   <object>
    <path>Models/Buildings/hosshop.ac</path>
-   <coverage-m2>750000</coverage-m2>
+   <coverage-m2>1000000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
   <object>
    <path>Models/Buildings/weapshop.ac</path>
-   <coverage-m2>500000</coverage-m2>
+   <coverage-m2>1000000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
  </object-group>
@@ -2837,17 +2837,17 @@ Shared parameters for various materials.
   </object>
   <object>
    <path>Models/Buildings/shop.ac</path>
-   <coverage-m2>500000</coverage-m2>
+   <coverage-m2>50000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
   <object>
    <path>Models/Buildings/hosshop.ac</path>
-   <coverage-m2>500000</coverage-m2>
+   <coverage-m2>50000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
   <object>
    <path>Models/Buildings/weapshop.ac</path>
-   <coverage-m2>500000</coverage-m2>
+   <coverage-m2>50000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
  </object-group>

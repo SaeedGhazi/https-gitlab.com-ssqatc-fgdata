@@ -233,6 +233,14 @@
    </binding>
   </item>
   
+  <item>
+   <label>Reconfig Autopilot</label>
+   <binding>
+    <command>reinit</command>
+    <subsystem>xml-autopilot</subsystem>
+   </binding>
+  </item>
+
  </menu>
 
  <menu>

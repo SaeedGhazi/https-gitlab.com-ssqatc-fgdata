@@ -19,8 +19,15 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>Ctrl-A</name>
   <desc>Toggle autopilot altitude lock.</desc>
   <binding>
-   <command>property-toggle</command>
-   <property>/autopilot/locks/altitude</property>
+   <command>nasal</command>
+   <script>
+     node = props.globals.getNode("/autopilot/locks/altitude", 1);
+     if ( node.getValue() == "altitude-hold" ) {
+       node.setValue( "" );
+     } else {
+       node.setValue( "altitude-hold" );
+     }
+   </script>
   </binding>
  </key>
 
@@ -46,8 +53,15 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>Ctrl-G</name>
   <desc>Toggle autopilot glide slope lock.</desc>
   <binding>
-   <command>property-toggle</command>
-   <property>/autopilot/locks/glide-slope</property>
+   <command>nasal</command>
+   <script>
+     node = props.globals.getNode("/autopilot/locks/altitude", 1);
+     if ( node.getValue() == "gs1-hold" ) {
+       node.setValue( "" );
+     } else {
+       node.setValue( "gs1-hold" );
+     }
+   </script>
   </binding>
  </key>
 
@@ -55,17 +69,24 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>Ctrl-H</name>
   <desc>Toggle autopilot heading lock.</desc>
   <binding>
-   <command>property-toggle</command>
-   <property>/autopilot/locks/heading</property>
+   <command>nasal</command>
+   <script>
+     node = props.globals.getNode("/autopilot/locks/heading", 1);
+     if ( node.getValue() == "dg-heading-hold" ) {
+       node.setValue( "" );
+     } else {
+       node.setValue( "dg-heading-hold" );
+     }
+   </script>
   </binding>
  </key>
 
  <key n="13">
   <name>Enter</name>
-  <desc>Move rudder right or increase autopilot heading.</desc>
+  <desc>Move rudder right.</desc>
   <binding>
    <command>property-adjust</command>
-   <property>/autopilot/control-overrides/rudder</property>
+   <property>/controls/flight/rudder</property>
    <step type="double">0.05</step>
   </binding>
  </key>
@@ -74,8 +95,33 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>Ctrl-N</name>
   <desc>Toggle autopilot nav1 lock.</desc>
   <binding>
-   <command>property-toggle</command>
-   <property>/autopilot/locks/nav[0]</property>
+   <command>nasal</command>
+   <script>
+     node = props.globals.getNode("/autopilot/locks/heading", 1);
+     if ( node.getValue() == "nav1-hold" ) {
+       node.setValue( "" );
+     } else {
+       node.setValue( "nav1-hold" );
+     }
+   </script>
+  </binding>
+ </key>
+
+ <key n="16">
+  <name>Ctrl-P</name>
+  <desc>Toggle pitch hold.</desc>
+  <binding>
+   <command>nasal</command>
+   <script>
+     node = props.globals.getNode("/autopilot/locks/altitude", 1);
+     if ( node.getValue() == "pitch-hold" ) {
+       node.setValue( "" );
+     } else {
+       node.setValue( "pitch-hold" );
+       pitch = props.globals.getNode("/autopilot/settings/target-pitch-deg", 1);
+       pitch.setValue( getprop("/orientation/pitch-deg") );
+     }
+   </script>
   </binding>
  </key>
 
@@ -83,8 +129,15 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>Ctrl-S</name>
   <desc>Toggle auto-throttle lock.</desc>
   <binding>
-   <command>property-toggle</command>
-   <property>/autopilot/locks/auto-throttle</property>
+   <command>nasal</command>
+   <script>
+     node = props.globals.getNode("/autopilot/locks/speed", 1);
+     if ( node.getValue() == "speed-with-throttle" ) {
+       node.setValue( "" );
+     } else {
+       node.setValue( "speed-with-throttle" );
+     }
+   </script>
   </binding>
  </key>
 
@@ -92,8 +145,17 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>Ctrl-T</name>
   <desc>Toggle autopilot terrain lock.</desc>
   <binding>
-   <command>property-toggle</command>
-   <property>/autopilot/locks/terrain</property>
+   <command>nasal</command>
+   <script>
+     node = props.globals.getNode("/autopilot/locks/altitude", 1);
+     if ( node.getValue() == "terrain-follow" ) {
+       node.setValue( "" );
+     } else {
+       node.setValue( "terrain-follow" );
+       agl = props.globals.getNode("/autopilot/settings/target-agl-ft", 1);
+       agl.setValue( getprop("/position/altitude-agl-ft") );
+     }
+   </script>
   </binding>
  </key>
 
@@ -126,8 +188,15 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>Ctrl-W</name>
   <desc>Toggle autopilot wing leveler.</desc>
   <binding>
-   <command>property-toggle</command>
-   <property>/autopilot/locks/wing-leveler</property>
+   <command>nasal</command>
+   <script>
+     node = props.globals.getNode("/autopilot/locks/heading", 1);
+     if ( node.getValue() == "wing-leveler" ) {
+       node.setValue( "" );
+     } else {
+       node.setValue( "wing-leveler" );
+     }
+   </script>
   </binding>
  </key>
  
@@ -242,10 +311,10 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="48">
   <name>0</name>
-  <desc>Move rudder left or increase autopilot heading.</desc>
+  <desc>Move rudder left.</desc>
   <binding>
    <command>property-adjust</command>
-   <property>/autopilot/control-overrides/rudder</property>
+   <property>/controls/flight/rudder</property>
    <step type="double">-0.05</step>
   </binding>
  </key>
@@ -272,9 +341,10 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>2</name>
   <desc>Increase elevator or autopilot altitude.</desc>
   <binding>
-   <command>property-adjust</command>
-   <property>/autopilot/control-overrides/elevator</property>
-   <step type="double">-0.01</step>
+   <command>nasal</command>
+   <script>
+     controls.incElevator(-0.05, 100)
+   </script>
   </binding>
   <mod-shift>
    <desc>Look back.</desc>
@@ -306,11 +376,12 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="52">
   <name>4</name>
-  <desc>Move aileron left.</desc>
+  <desc>Move aileron left (or adjust AP heading.)</desc>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/aileron</property>
-   <step type="double">-0.05</step>
+   <command>nasal</command>
+   <script>
+     controls.incAileron(-0.05, -1.0)
+   </script>
   </binding>
   <mod-shift>
    <desc>Look left.</desc>
@@ -333,11 +404,12 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="54">
   <name>6</name>
-  <desc>Move aileron right.</desc>
+  <desc>Move aileron right (or adjust AP heading.)</desc>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/aileron</property>
-   <step type="double">0.05</step>
+   <command>nasal</command>
+   <script>
+     controls.incAileron(0.05, 1.0)
+   </script>
   </binding>
   <mod-shift>
    <desc>Look right.</desc>
@@ -371,9 +443,10 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>8</name>
   <desc>Decrease elevator or autopilot altitude.</desc>
   <binding>
-   <command>property-adjust</command>
-   <property>/autopilot/control-overrides/elevator</property>
-   <step type="double">0.01</step>
+   <command>nasal</command>
+   <script>
+     controls.incElevator(0.05, -100)
+   </script>
   </binding>
   <mod-shift>
    <desc>Look forward.</desc>
@@ -888,10 +961,10 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="269">
   <name>Enter</name>
-  <desc>Move rudder right or increase autopilot heading.</desc>
+  <desc>Move rudder right.</desc>
   <binding>
    <command>property-adjust</command>
-   <property>/autopilot/control-overrides/rudder</property>
+   <property>/controls/flight/rudder</property>
    <step type="double">0.05</step>
   </binding>
  </key>
@@ -907,11 +980,12 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="356">
   <name>Left</name>
-  <desc>Move aileron left.</desc>
+  <desc>Move aileron left (or adjust AP heading.)</desc>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/aileron</property>
-   <step type="double">-0.05</step>
+   <command>nasal</command>
+   <script>
+     controls.incAileron(-0.05, -1.0)
+   </script>
   </binding>
   <mod-shift>
    <desc>Look left.</desc>
@@ -927,9 +1001,10 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>Up</name>
   <desc>Increase elevator or autopilot altitude.</desc>
   <binding>
-   <command>property-adjust</command>
-   <property>/autopilot/control-overrides/elevator</property>
-   <step type="double">0.05</step>
+   <command>nasal</command>
+   <script>
+     controls.incElevator(0.05, -100)
+   </script>
   </binding>
   <mod-shift>
    <desc>Look forward.</desc>
@@ -943,10 +1018,12 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="358">
   <name>Right</name>
-  <desc>Move aileron right.</desc>
+  <desc>Move aileron right (or adjust AP heading.)</desc>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/aileron</property>
+   <command>nasal</command>
+   <script>
+     controls.incAileron(0.05, 1.0)
+   </script>
    <step type="double">0.05</step>
   </binding>
   <mod-shift>
@@ -963,9 +1040,10 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>Down</name>
   <desc>Decrease elevator or autopilot altitude.</desc>
   <binding>
-   <command>property-adjust</command>
-   <property>/autopilot/control-overrides/elevator</property>
-   <step type="double">-0.05</step>
+   <command>nasal</command>
+   <script>
+     controls.incElevator(-0.05, 100)
+   </script>
   </binding>
   <mod-shift>
    <desc>Look backwards.</desc>
@@ -981,9 +1059,10 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>PageUp</name>
   <desc>Increase throttle or autopilot autothrottle.</desc>
   <binding>
-   <command>property-adjust</command>
-   <property>/autopilot/control-overrides/throttle</property>
-   <step type="double">0.01</step>
+   <command>nasal</command>
+   <script>
+     controls.incThrottle(0.01, 1.0)
+   </script>
   </binding>
   <mod-shift>
    <desc>Look front right.</desc>
@@ -999,9 +1078,10 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>PageDown</name>
   <desc>Decrease throttle or autopilot autothrottle.</desc>
   <binding>
-   <command>property-adjust</command>
-   <property>/autopilot/control-overrides/throttle</property>
-   <step type="double">-0.01</step>
+   <command>nasal</command>
+   <script>
+     controls.incThrottle(-0.01, -1.0)
+   </script>
   </binding>
   <mod-shift>
    <desc>Look back right.</desc>
@@ -1051,10 +1131,10 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="364">
   <name>Insert</name>
-  <desc>Move rudder left or decrease autopilot heading.</desc>
+  <desc>Move rudder left.</desc>
   <binding>
    <command>property-adjust</command>
-   <property>/autopilot/control-overrides/rudder</property>
+   <property>/controls/flight/rudder</property>
    <step type="double">-0.05</step>
   </binding>
  </key>

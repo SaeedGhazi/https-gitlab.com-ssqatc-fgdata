@@ -62,6 +62,11 @@ Started September 2000 by David Megginson, david@megginson.com
    <path>Huds/Default/default.xml</path>
    <visibility type="bool">false</visibility>
   </hud>
+  <systems>
+   <autopilot>
+    <path>Aircraft/Generic/generic-autopilot.xml</path>
+   </autopilot>
+  </systems>
   <instrument-options>
    <nav n="0">
     <has-gs-needle type="bool">true</has-gs-needle>

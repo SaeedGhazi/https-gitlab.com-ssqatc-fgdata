@@ -177,6 +177,111 @@ adjEngControl = func {
 }
 
 ##
+# arg[0] is the throttle increment
+# arg[1] is the auto-throttle target speed increment
+incThrottle = func {
+    auto = props.globals.getNode("/autopilot/locks/speed", 1);
+    if ( !auto.getValue() or auto.getValue() == 0 ) {
+      engs = props.globals.getNode("/controls/engines").getChildren("engine");
+      foreach(e; engs) {
+        node = e.getNode("throttle", 1);
+        node.setValue(node.getValue() + arg[0]);
+        if ( node.getValue() < -1.0 ) {
+          node.setValue( -1.0 );
+        }
+        if ( node.getValue() > 1.0 ) {
+          node.setValue( 1.0 );
+        }
+      }
+    } else {
+      node = props.globals.getNode("/autopilot/settings/target-speed-kt", 1);
+      if ( node.getValue() == nil ) {
+        node.setValue( 0.0 );
+      }
+      node.setValue(node.getValue() + arg[1]);
+      if ( node.getValue() < 0.0 ) {
+        node.setValue( 0.0 );
+      }
+    }
+}
+
+##
+# arg[0] is the aileron increment
+# arg[1] is the autopilot target heading increment
+incAileron = func {
+    auto = props.globals.getNode("/autopilot/locks/heading", 1);
+    if ( !auto.getValue() or auto.getValue() == 0 ) {
+      aileron = props.globals.getNode("/controls/flight/aileron");
+      if ( aileron.getValue() == nil ) {
+        aileron.setValue( 0.0 );
+      }
+      aileron.setValue(aileron.getValue() + arg[0]);
+      if ( aileron.getValue() < -1.0 ) {
+        aileron.setValue( -1.0 );
+      }
+      if ( aileron.getValue() > 1.0 ) {
+        aileron.setValue( 1.0 );
+      }
+    }
+    if ( auto.getValue() == "dg-heading-hold" ) {
+      node = props.globals.getNode("/autopilot/settings/heading-bug-deg", 1);
+      if ( node.getValue() == nil ) {
+        node.setValue( 0.0 );
+      }
+      node.setValue(node.getValue() + arg[1]);
+      if ( node.getValue() < 0.0 ) {
+        node.setValue( node.getValue() + 360.0 );
+      }
+      if ( node.getValue() > 360.0 ) {
+        node.setValue( node.getValue() - 360.0 );
+      }
+    }
+    if ( auto.getValue() == "true-heading-hold" ) {
+      node = props.globals.getNode("/autopilot/settings/true-heading-deg", 1);
+      if ( node.getValue() == nil ) {
+        node.setValue( 0.0 );
+      }
+      node.setValue(node.getValue() + arg[1]);
+      if ( node.getValue() < 0.0 ) {
+        node.setValue( node.getValue() + 360.0 );
+      }
+      if ( node.getValue() > 360.0 ) {
+        node.setValue( node.getValue() - 360.0 );
+      }
+    }
+}
+
+##
+# arg[0] is the elevator increment
+# arg[1] is the autopilot target alitude increment
+incElevator = func {
+    auto = props.globals.getNode("/autopilot/locks/altitude", 1);
+    if ( !auto.getValue() or auto.getValue() == 0 ) {
+      elevator = props.globals.getNode("/controls/flight/elevator");
+      if ( elevator.getValue() == nil ) {
+        elevator.setValue( 0.0 );
+      }
+      elevator.setValue(elevator.getValue() + arg[0]);
+      if ( elevator.getValue() < -1.0 ) {
+        elevator.setValue( -1.0 );
+      }
+      if ( elevator.getValue() > 1.0 ) {
+        elevator.setValue( 1.0 );
+      }
+    }
+    if ( auto.getValue() == "altitude-hold" ) {
+      node = props.globals.getNode("/autopilot/settings/target-altitude-ft", 1);
+      if ( node.getValue() == nil ) {
+        node.setValue( 0.0 );
+      }
+      node.setValue(node.getValue() + arg[1]);
+      if ( node.getValue() < 0.0 ) {
+        node.setValue( 0.0 );
+      }
+    }
+}
+
+##
 # Joystick axis handlers.  Don't call from other contexts.
 #
 elevatorTrimAxis = func { elevatorTrim(cmdarg().getNode("value").getValue()); }

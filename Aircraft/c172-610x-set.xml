@@ -26,6 +26,7 @@ October 23 2001 John Check, fgpanels@rockfish.net
   <panel>
    <path>Aircraft/c172/Panels/c172-610x-panel.xml</path>
    <visibility>true</visibility>
+   <flip-x>false</flip-x>
   </panel>
 
   <model>

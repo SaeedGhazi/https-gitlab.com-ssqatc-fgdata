@@ -1,0 +1,51 @@
+<PropertyList>
+
+ <dialog>
+  <name>hello</name>
+  <width>400</width>
+  <height>180</height>
+  <modal>false</modal>
+
+  <text>
+   <x>10</x>
+   <y>150</y>
+   <label>Hello, virtual FlightGear world!</label>
+  </text>
+
+  <input>
+   <x>10</x>
+   <y>110</y>
+   <width>200</width>
+   <height>25</height>
+   <label>degrees latitude</label>
+   <default-value-prop>/position/latitude-deg</default-value-prop>
+  </input>
+
+  <input>
+   <x>10</x>
+   <y>80</y>
+   <width>200</width>
+   <height>25</height>
+   <label>degrees longitude</label>
+   <default-value-prop>/position/longitude-deg</default-value-prop>
+  </input>
+
+  <input>
+   <x>10</x>
+   <y>50</y>
+   <width>200</width>
+   <height>25</height>
+   <label>feet altitude (ASL)</label>
+   <default-value-prop>/position/altitude-ft</default-value-prop>
+  </input>
+
+  <button>
+   <y>10</y>
+   <width>100</width>
+   <legend>Enough, already!</legend>
+   <default>true</default>
+  </button>
+
+ </dialog>
+
+</PropertyList>

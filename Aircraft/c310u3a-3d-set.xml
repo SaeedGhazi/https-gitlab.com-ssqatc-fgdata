@@ -21,6 +21,29 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
   </engine>
  </engines>
 
+ <consumables>
+  <fuel>
+   <tank n="0">
+    <level-gal_us archive="y">14</level-gal_us>
+   </tank>
+   <tank n="1">
+    <level-gal_us archive="y">14</level-gal_us>
+   </tank>
+   <tank n="2">
+    <level-gal_us archive="y">14</level-gal_us>
+   </tank>
+   <tank n="3">
+    <level-gal_us archive="y">14</level-gal_us>
+   </tank>
+  </fuel>
+ </consumables>
+        
+ <controls>
+  <aileron-trim>-0.026</aileron-trim>
+  <magnetos n="0">3</magnetos>
+  <magnetos n="1">3</magnetos>
+ </controls>
+
  <sim>
 
   <description>Cessna 310U3A w. 3D cockpit</description>
@@ -106,10 +129,5 @@ March 2002 Jim Wilson, jimw@kelcomaine.com
   </keyboard>
  </input>
 
- <controls>
-  <aileron-trim>-0.026</aileron-trim>
-  <magnetos n="0">3</magnetos>
-  <magnetos n="1">3</magnetos>
- </controls>
   
 </PropertyList>

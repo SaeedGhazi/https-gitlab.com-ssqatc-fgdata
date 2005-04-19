@@ -381,6 +381,14 @@
    </binding>
   </item>
 
+  <item>
+   <label>Development Keys</label>
+   <binding>
+    <command>nasal</command>
+    <script>gui.showHelpDialog("/sim/help/debug")</script>
+   </binding>
+  </item>
+
  </menu>
  
  <menu>
@@ -390,6 +398,30 @@
    <label>Help</label>
    <binding>
     <command>old-help-dialog</command>
+   </binding>
+  </item>
+
+  <item>
+   <label>Basic Keys</label>
+   <binding>
+    <command>nasal</command>
+    <script>gui.showHelpDialog("/sim/help/basic")</script>
+   </binding>
+  </item>
+
+  <item>
+   <label>Common Aircraft Keys</label>
+   <binding>
+    <command>nasal</command>
+    <script>gui.showHelpDialog("/sim/help/common")</script>
+   </binding>
+  </item>
+
+  <item>
+   <label>Aircraft Help</label>
+   <binding>
+    <command>nasal</command>
+    <script>gui.showHelpDialog("/sim/help")</script>
    </binding>
   </item>
 

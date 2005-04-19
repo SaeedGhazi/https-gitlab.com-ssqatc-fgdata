@@ -39,6 +39,10 @@ screenHProp = tipArg = nil;
 INIT = func {
     screenHProp = props.globals.getNode("/sim/startup/ysize");
     tipArg = props.Node.new({ "dialog-name" : "PopTip" });
+
+    props.globals.getNode("/sim/help/debug", 1).setValues(debug_keys);
+    props.globals.getNode("/sim/help/basic", 1).setValues(basic_keys);
+    props.globals.getNode("/sim/help/common", 1).setValues(common_aircraft_keys);
 }
 settimer(INIT, 0);
 
@@ -61,7 +65,7 @@ currTimer = 0;
 # Widgets & Layout Management
 ########################################################################
 
-## 
+##
 # A "widget" class that wraps a property node.  It provides useful
 # helper methods that are difficult or tedious with the raw property
 # API.  Note especially the slightly tricky addChild() method.
@@ -83,6 +87,9 @@ Widget = {
 # Dialog Boxes
 ########################################################################
 
+dialog = {};
+
+
 ##
 # Dynamically generates a weight & fuel configuration dialog specific to
 # the aircraft.
@@ -94,19 +101,19 @@ showWeightDialog = func {
     #
     # General Dialog Structure
     #
-    dialog = Widget.new();
-    dialog.set("name", name);
-    dialog.set("layout", "vbox");
+    dialog[name] = Widget.new();
+    dialog[name].set("name", name);
+    dialog[name].set("layout", "vbox");
 
-    header = dialog.addChild("text");
+    header = dialog[name].addChild("text");
     header.set("label", title);
 
-    contentArea = dialog.addChild("group");
+    contentArea = dialog[name].addChild("group");
     contentArea.set("layout", "hbox");
 
     grossWgt = props.globals.getNode("/yasim/gross-weight-lbs");
     if(grossWgt != nil) {
-        gwg = dialog.addChild("group");
+        gwg = dialog[name].addChild("group");
         gwg.set("layout", "hbox");
         gwg.addChild("empty").set("stretch", 1);
         gwg.addChild("text").set("label", "Gross Weight:");
@@ -118,10 +125,10 @@ showWeightDialog = func {
         gwg.addChild("empty").set("stretch", 1);
     }
 
-    buttonBar = dialog.addChild("group");
+    buttonBar = dialog[name].addChild("group");
     buttonBar.set("layout", "hbox");
     buttonBar.set("default-padding", 10);
-    
+
     ok = buttonBar.addChild("button");
     ok.set("legend", "OK");
     ok.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
@@ -185,7 +192,7 @@ showWeightDialog = func {
         lbs.set("label", "0123456");
         lbs.set("format", "%.3f");
         lbs.set("live", 1);
-        
+
         gals = tcell(fuelTable, "text", i+1, 4);
         gals.set("property", tankprop ~ "/level-gal_us");
         gals.set("label", "0123456");
@@ -230,6 +237,243 @@ showWeightDialog = func {
     }
 
     # All done: pop it up
-    fgcommand("dialog-new", dialog.prop());
+    fgcommand("dialog-new", dialog[name].prop());
     showDialog(name);
 }
+
+
+
+
+##
+# Dynamically generates a dialog from a help node.
+#
+# gui.showHelpDialog([<path> [, toggle]])
+#
+# path   ... path to help node
+# toggle ... decides if an already open dialog should be closed
+#            (useful when calling the dialog from a key binding; default: 0)
+#
+# help node
+# =========
+# each of <title>, <key>, <line>, <text> is optional; uses
+# "/sim/description" or "/sim/aircraft" if <title> is omitted;
+# only the first <text> is displayed
+#
+#
+# <help>
+#     <title>dialog title<title>
+#     <key>
+#         <name>g/G</name>
+#         <desc>gear up/down</desc>
+#     </key>
+#
+#     <line>one line</line>
+#     <line>another line</line>
+#
+#     <text>text in
+#           scrollable widget
+#     </text>
+# </help>
+#
+showHelpDialog = func {
+    node = props.globals.getNode(arg[0]);
+    if (arg[0] == "/sim/help" and size(node.getChildren()) < 4) {
+        node = node.getChild("common");
+    }
+
+    name = node.getNode("title", 1).getValue();
+    if (name == nil) {
+        name = getprop("/sim/description");
+        if (name == nil) {
+            name = getprop("/sim/aircraft");
+        }
+    }
+    toggle = size(arg) > 1 and arg[1] != nil and arg[1] > 0;
+    if (toggle and contains(dialog, name)) {
+        fgcommand("dialog-close", props.Node.new({ "dialog-name" : name }));
+        delete(dialog, name);
+        return;
+    }
+
+    dialog[name] = gui.Widget.new();
+    dialog[name].set("layout", "vbox");
+    dialog[name].set("default-padding", 0);
+    dialog[name].set("name", name);
+
+    # title bar
+    titlebar = dialog[name].addChild("group");
+    titlebar.set("layout", "hbox");
+    titlebar.addChild("empty").set("stretch", 1);
+    titlebar.addChild("text").set("label", "____________" ~ name ~ "____________");
+    titlebar.addChild("empty").set("stretch", 1);
+
+    w = titlebar.addChild("button");
+    w.set("pref-width", 16);
+    w.set("pref-height", 16);
+    w.set("legend", "");
+    w.set("default", 1);
+    w.prop().getNode("binding[0]/command", 1).setValue("nasal");
+    w.prop().getNode("binding[0]/script", 1).setValue("delete(gui.dialog, \"" ~ name ~ "\")");
+    w.prop().getNode("binding[1]/command", 1).setValue("dialog-close");
+
+    # key list
+    keylist = dialog[name].addChild("group");
+    keylist.set("layout", "table");
+    keylist.set("default-padding", 2);
+    keydefs = node.getChildren("key");
+    n = size(keydefs);
+    row = col = 0;
+    foreach (key; keydefs) {
+        if (n >= 60 and row >= n / 3 or n >= 16 and row >= n / 2) {
+            col = col + 1;
+            row = 0;
+        }
+
+        w = keylist.addChild("text");
+        w.set("row", row);
+        w.set("col", 2 * col);
+        w.set("halign", "right");
+        w.set("label", " " ~ key.getNode("name").getValue());
+
+        w = keylist.addChild("text");
+        w.set("row", row);
+        w.set("col", 2 * col + 1);
+        w.set("halign", "left");
+        w.set("label", "... " ~ key.getNode("desc").getValue() ~ "  ");
+        row = row + 1;
+    }
+
+    # separate lines
+    lines = node.getChildren("line");
+    if (size(lines)) {
+        if (size(keydefs)) {
+            dialog[name].addChild("text").set("label", "_________________________");
+        }
+
+        g = dialog[name].addChild("group");
+        g.set("layout", "vbox");
+        g.set("default-padding", 1);
+        foreach (l; lines) {
+            w = g.addChild("text");
+            w.set("halign", "left");
+            w.set("label", " " ~ l.getValue() ~ " ");
+        }
+    }
+
+    # scrollable text area
+    if (node.getNode("text") != nil) {
+        dialog[name].addChild("empty").set("pref-height", 10);
+
+        width = [640, 800, 1152][col];
+        height = screenHProp.getValue() - (100 + (size(keydefs) / (col + 1) + size(lines)) * 28);
+        if (height < 200) {
+            height = 200;
+        }
+
+        w = dialog[name].addChild("textbox");
+        w.set("halign", "center");
+        w.set("slider", 20);
+        w.set("pref-width", width);
+        w.set("pref-height", height);
+        w.set("editable", 0);
+        w.set("property", node.getPath() ~ "/text");
+    } else {
+        dialog[name].addChild("empty").set("pref-height", 8);
+    }
+    fgcommand("dialog-new", dialog[name].prop());
+    showDialog(name);
+}
+
+
+debug_keys = {
+    title : "Development Keys",
+    key : [
+       #{ name : "Ctrl-U",    desc : "add 1000 ft of emergency altitude" },
+       #{ name : "W",         desc : "toggle fullscreen (3DFX only)" },
+        { name : "F2",        desc : "force tile cache reload" },
+        { name : "F4",        desc : "force lighting update" },
+        { name : "F8",        desc : "cycle fog type" },
+        { name : "F9",        desc : "toggle textures" },
+        { name : "Shift-F3",  desc : "load panel" },
+        { name : "Shift-F4",  desc : "reload global preferences" },
+        { name : "Shift-F10", desc : "toggle FDM data logging" },
+    ],
+};
+
+basic_keys = {
+    title : "Basic Keys",
+    key : [
+        { name : "?",         desc : "show/hide aircraft help dialog" },
+       #{ name : "Tab",       desc : "show/hide aircraft config dialog" },
+        { name : "Esc",       desc : "quit FlightGear" },
+        { name : "Shift-Esc", desc : "reset FlightGear" },
+        { name : "a/A",       desc : "increase/decrease speed-up" },
+        { name : "c",         desc : "toggle 3D/2D cockpit" },
+        { name : "Ctrl-C",    desc : "toggle clickable panel hotspots" },
+        { name : "m/M",       desc : "increase/decrease warp" },
+        { name : "p",         desc : "pause/continue sim" },
+        { name : "r",         desc : "activate instant replay system" },
+        { name : "Ctrl-R",    desc : "show radio setting dialog" },
+        { name : "t/T",       desc : "increase/decrease warp delta" },
+        { name : "v/V",       desc : "cycle views (forward/backward)" },
+        { name : "Ctrl-V",    desc : "select cockpit view" },
+        { name : "x/X",       desc : "zoom in/out" },
+        { name : "Ctrl-X",    desc : "reset zoom to default" },
+        { name : "z/Z",       desc : "increase/decrease visibility" },
+        { name : "'",         desc : "display ATC setting dialog" },
+        { name : "F1",        desc : "load flight" },
+        { name : "F3",        desc : "capture screen" },
+        { name : "F10",       desc : "toggle menubar" },
+        { name : "Shift-F2",  desc : "save flight" },
+    ],
+};
+
+common_aircraft_keys = {
+    title : "Common Aircraft Keys",
+    key : [
+        { name : "Enter",     desc : "move rudder right" },
+        { name : "0/Insert",  desc : "move rudder left" },
+        { name : "1/End",     desc : "decrease elevator trim" },
+        { name : "2/Up",      desc : "increase elevator or AP altitude" },
+        { name : "3/PgDn",    desc : "decr. throttle or AP autothrottle" },
+        { name : "4/Left",    desc : "move aileron left or adj. AP hdg." },
+        { name : "5/KP5",     desc : "center aileron, elev., and rudder" },
+        { name : "6/Right",   desc : "move aileron right or adj. AP hdg." },
+        { name : "7/Home",    desc : "increase elevator trim" },
+        { name : "8/Down",    desc : "decrease elevator or AP altitude" },
+        { name : "9/PgUp",    desc : "incr. throttle or AP autothrottle" },
+        { name : "Space",     desc : "fire starter on selected eng." },
+        { name : "!/@/#/$",   desc : "select engine 1/2/3/4" },
+        { name : "b",         desc : "apply all brakes" },
+        { name : "B",         desc : "toggle parking brake" },
+       #{ name : "Ctrl-B",    desc : "toggle speed brake" },
+        { name : "g/G",       desc : "gear up/down" },
+        { name : "h",         desc : "cycle HUD (head up display)" },
+        { name : "H",         desc : "cycle HUD brightness" },
+        { name : "i/Shift-i", desc : "normal/minimal HUD" },
+       #{ name : "j",         desc : "decrease spoilers" },
+       #{ name : "k",         desc : "increase spoilers" },
+        { name : "l",         desc : "toggle tail-wheel lock" },
+        { name : "P",         desc : "toggle 2D panel" },
+        { name : "s",         desc : "swap panels" },
+        { name : ", .",       desc : "left/right brake (comma, period)" },
+        { name : "~",         desc : "select all engines (tilde)" },
+        { name : "[ ]",       desc : "flaps up/down" },
+        { name : "{ }",       desc : "decr/incr magneto on sel. eng." },
+        { name : "Ctrl-A",    desc : "AP: toggle altitude lock" },
+        { name : "Ctrl-G",    desc : "AP: toggle glide slope lock" },
+        { name : "Ctrl-H",    desc : "AP: toggle heading lock" },
+        { name : "Ctrl-N",    desc : "AP: toggle NAV1 lock" },
+        { name : "Ctrl-P",    desc : "AP: toggle pitch hold" },
+        { name : "Ctrl-S",    desc : "AP: toggle auto-throttle" },
+        { name : "Ctrl-T",    desc : "AP: toggle terrain lock" },
+        { name : "Ctrl-W",    desc : "AP: toggle wing leveler" },
+        { name : "F6",        desc : "AP: toggle heading mode" },
+        { name : "F11",       desc : "pop up autopilot (AP) dialog" },
+        { name : "Shift-F5",  desc : "scroll 2D panel down" },
+        { name : "Shift-F6",  desc : "scroll 2D panel up" },
+        { name : "Shift-F7",  desc : "scroll 2D panel left" },
+        { name : "Shift-F8",  desc : "scroll 2D panel right" },
+    ],
+};
+

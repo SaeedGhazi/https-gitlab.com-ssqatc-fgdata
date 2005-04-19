@@ -129,12 +129,18 @@ showDialog = func {
 	titlebar.addChild("text").set("label", "[" ~ title ~ "]");
 	titlebar.addChild("empty").set("stretch", 1);
 
+	color = dialog.prop().getNode("color", 1);
+	color.getNode("red", 1).setValue(1.0);
+	color.getNode("green", 1).setValue(0.95);
+	color.getNode("blue", 1).setValue(0.7);
+	color.getNode("alpha", 1).setValue(0.5);
+
 	w = titlebar.addChild("button");
 	w.set("pref-width", 16);
 	w.set("pref-height", 16);
 	w.set("legend", "");
 	w.set("default", 1);
-	w.prop().getNode("binding[1]/command", 1).setValue("dialog-close");
+	w.prop().getNode("binding[0]/command", 1).setValue("dialog-close");
 
 	colorgroup(dialog, "diffuse", base);
 	colorgroup(dialog, "ambient", base);

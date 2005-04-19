@@ -21,6 +21,14 @@
    <path>Aircraft/ufo/Models/ufo.xml</path>
   </model>
 
+  <help>
+   <title>UFO</title>
+   <key>
+    <name>joystick fire button</name>
+    <desc>fly backwards</desc>
+   </key>
+  </help>
+
  </sim>
 
 </PropertyList>

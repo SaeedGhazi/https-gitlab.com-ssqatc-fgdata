@@ -68,57 +68,18 @@ $Id:
    <windows>2</windows>
   </number>
   <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[0]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[1]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[2]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[3]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[4]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[5]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[6]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[7]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
+   <command>nasal</command>
+   <script>controls.throttleAxis()</script>
   </binding>
  </axis>
 
- <axis n="4">
+ <axis>
   <desc>View Direction</desc>
+  <number>
+   <unix>4</unix>
+   <mac>4</mac>
+   <windows>6</windows>
+  </number>
   <low>
    <repeatable>true</repeatable>
    <binding>
@@ -137,8 +98,13 @@ $Id:
   </high>
  </axis>
 
- <axis n="7">
+ <axis>
   <desc>View Elevation</desc>
+  <number>
+   <unix>7</unix>
+   <mac>7</mac>
+   <windows>7</windows>
+  </number>
   <low>
    <repeatable>true</repeatable>
    <binding>

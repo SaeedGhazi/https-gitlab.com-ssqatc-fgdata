@@ -490,6 +490,15 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </mod-shift>
  </key>
 
+ <key n="63">
+  <name>?</name>
+  <desc>Show help dialog</desc>
+  <binding>
+   <command>nasal</command>
+   <script>gui.showHelpDialog("/sim/help", 1)</script>
+  </binding>
+ </key>
+
  <key n="64">
   <name>@</name>
   <desc>Select second engine</desc>

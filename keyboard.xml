@@ -556,11 +556,10 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="77">
   <name>M</name>
-  <desc>Decrease warp.</desc>
+  <desc>Mixture leaner.</desc>
   <binding>
-   <command>property-adjust</command>
-   <property>/sim/time/warp</property>
-   <step type="int">-60</step>
+   <command>nasal</command>
+   <script>controls.adjMixture(-1)</script>
   </binding>
  </key>
 
@@ -594,10 +593,11 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="87">
   <name>W</name>
-  <desc>(Temporary) Toggle fullscreen for 3DFX only.</desc>
+  <desc>Decrease warp.</desc>
   <binding>
-   <command>property-toggle</command>
-   <property>/sim/temp/full-screen</property>
+   <command>property-adjust</command>
+   <property>/sim/time/warp</property>
+   <step type="int">-60</step>
   </binding>
  </key>
 
@@ -751,11 +751,10 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="109">
   <name>m</name>
-  <desc>Increase warp.</desc>
+  <desc>Mixture richer.</desc>
   <binding>
-   <command>property-adjust</command>
-   <property>/sim/time/warp</property>
-   <step type="int">60</step>
+   <command>nasal</command>
+   <script>controls.adjMixture(1)</script>
   </binding>
  </key>
 
@@ -826,6 +825,16 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <binding>
    <command>nasal</command>
    <script>view.stepView(1)</script>
+  </binding>
+ </key>
+
+ <key n="119">
+  <name>w</name>
+  <desc>Increase warp.</desc>
+  <binding>
+   <command>property-adjust</command>
+   <property>/sim/time/warp</property>
+   <step type="int">60</step>
   </binding>
  </key>
 

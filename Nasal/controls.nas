@@ -189,6 +189,8 @@ adjThrottle = func {
     adjEngControl("throttle", arg[0]); }
 adjMixture = func {
     adjEngControl("mixture", arg[0]); }
+adjCondition = func {
+    adjEngControl("condition", arg[0]); }
 adjPropeller = func {
     adjEngControl("propeller-pitch", arg[0]); }
 

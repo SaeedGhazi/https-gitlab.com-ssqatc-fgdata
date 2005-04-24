@@ -48,7 +48,53 @@
       <label>Show frame rate</label>
       <property>/sim/hud/draw-fps</property>
     </checkbox>
+
+    <checkbox>
+      <halign>left</halign>
+      <label>Enable 3d clouds</label>
+      <property>/sim/rendering/clouds3d-enable</property>
+    </checkbox>
   </group>
+
+
+  <group>
+    <layout>hbox</layout>
+    <halign>right</halign>
+    <text><label>Visibility range (1km...50km)</label></text>
+    <slider>
+      <min>1000</min>
+      <max>50000</max>
+
+      <property>/sim/rendering/clouds3d-vis-range</property>
+      <binding>
+	<command>dialog-apply</command>
+      </binding>
+    </slider>
+  </group>
+
+  <group>
+    <layout>hbox</layout>
+    <halign>right</halign>
+    <text><label>Cloud density</label></text>
+    <slider>
+      <min>0</min>
+      <max>100</max>
+
+      <property>/sim/rendering/clouds3d-density</property>
+      <binding>
+	<command>dialog-apply</command>
+      </binding>
+    </slider>
+  </group>
+
+  <group>
+    <layout>hbox</layout>
+    <text><label>3D Clouds cache size in Kbytes</label></text>
+  <input>
+    <property>/sim/rendering/clouds3d-cache-size</property>
+  </input>  
+  </group>
+
 
   <group>
     <layout>hbox</layout>

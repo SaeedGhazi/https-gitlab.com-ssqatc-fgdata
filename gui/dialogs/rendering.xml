@@ -15,6 +15,15 @@
 
     <checkbox>
       <halign>left</halign>
+      <label>Show frame rate</label>
+      <property>/sim/hud/draw-fps</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
+
+    <checkbox>
+      <halign>left</halign>
       <label>Sun/Moon horizon effect</label>
       <property>/sim/rendering/horizon-effect</property>
       <binding>
@@ -53,15 +62,6 @@
       <halign>left</halign>
       <label>Bump mapped clouds</label>
       <property>/sim/rendering/bump-mapping</property>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-    </checkbox>
-
-    <checkbox>
-      <halign>left</halign>
-      <label>Show frame rate</label>
-      <property>/sim/hud/draw-fps</property>
       <binding>
         <command>dialog-apply</command>
       </binding>

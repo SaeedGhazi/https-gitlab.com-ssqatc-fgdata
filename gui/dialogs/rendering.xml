@@ -6,7 +6,7 @@
   <layout>vbox</layout>
 
   <text>
-    <label>Rendering Options</label>
+    <label>___________Rendering Options___________</label>
   </text>
 
   <group>
@@ -17,42 +17,63 @@
       <halign>left</halign>
       <label>Sun/Moon horizon effect</label>
       <property>/sim/rendering/horizon-effect</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
     </checkbox>
-    
+
     <checkbox>
       <halign>left</halign>
       <label>Enhanced runway lighting</label>
       <property>/sim/rendering/enhanced-lighting</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
     </checkbox>
-    
+
     <checkbox>
       <halign>left</halign>
       <label>Runway light distance attenuation</label>
       <property>/sim/rendering/distance-attenuation</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
     </checkbox>
-    
+
     <checkbox>
       <halign>left</halign>
       <label>Specular reflections on objects</label>
       <property>/sim/rendering/specular-highlight</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
     </checkbox>
 
     <checkbox>
       <halign>left</halign>
       <label>Bump mapped clouds</label>
       <property>/sim/rendering/bump-mapping</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
     </checkbox>
 
     <checkbox>
       <halign>left</halign>
       <label>Show frame rate</label>
       <property>/sim/hud/draw-fps</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
     </checkbox>
 
     <checkbox>
       <halign>left</halign>
       <label>Enable 3d clouds</label>
       <property>/sim/rendering/clouds3d-enable</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
     </checkbox>
   </group>
 
@@ -60,16 +81,22 @@
   <group>
     <layout>hbox</layout>
     <halign>right</halign>
-    <text><label>Visibility range (1km...50km)</label></text>
+    <text><label>Visibility range</label></text>
     <slider>
       <min>1000</min>
       <max>50000</max>
 
       <property>/sim/rendering/clouds3d-vis-range</property>
       <binding>
-	<command>dialog-apply</command>
+        <command>dialog-apply</command>
       </binding>
     </slider>
+    <text>
+      <label>12345678</label>
+      <format>%.0f m</format>
+      <live>true</live>
+      <property>/sim/rendering/clouds3d-vis-range</property>
+    </text>
   </group>
 
   <group>
@@ -82,17 +109,26 @@
 
       <property>/sim/rendering/clouds3d-density</property>
       <binding>
-	<command>dialog-apply</command>
+        <command>dialog-apply</command>
       </binding>
     </slider>
+    <text>
+      <label>12345678</label>
+      <format>%.0f%%</format>
+      <live>true</live>
+      <property>/sim/rendering/clouds3d-density</property>
+    </text>
   </group>
 
   <group>
     <layout>hbox</layout>
     <text><label>3D Clouds cache size in Kbytes</label></text>
-  <input>
-    <property>/sim/rendering/clouds3d-cache-size</property>
-  </input>  
+    <input>
+      <property>/sim/rendering/clouds3d-cache-size</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </input>
   </group>
 
 
@@ -101,45 +137,14 @@
     <empty><stretch>true</stretch></empty>
 
     <button>
-      <legend>OK</legend>
-      <equal>true</equal>
+      <legend>Close</legend>
       <binding>
-	<command>dialog-apply</command>
+        <command>dialog-apply</command>
       </binding>
       <binding>
-	<command>dialog-close</command>
+        <command>dialog-close</command>
       </binding>
       <default>true</default>
-    </button>
-
-    <empty><stretch>true</stretch></empty>
-
-    <button>
-      <legend>Apply</legend>
-      <equal>true</equal>
-      <binding>
-	<command>dialog-apply</command>
-      </binding>
-    </button>
-
-    <empty><stretch>true</stretch></empty>
-
-    <button>
-      <legend>Reset</legend>
-      <equal>true</equal>
-      <binding>
-	<command>dialog-update</command>
-      </binding>
-    </button>
-
-    <empty><stretch>true</stretch></empty>
-
-    <button>
-      <legend>Cancel</legend>
-      <equal>true</equal>
-      <binding>
-	<command>dialog-close</command>
-      </binding>
     </button>
 
     <empty><stretch>true</stretch></empty>

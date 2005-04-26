@@ -131,6 +131,20 @@
     </input>
   </group>
 
+  <group>
+    <layout>hbox</layout>
+    <halign>right</halign>
+    <text><label>3D Clouds texture resolution</label></text>
+    <combo>
+      <property>/sim/rendering/clouds3d-cache-resolution</property>
+      <value>64</value>
+      <value>128</value>
+      <value>256</value>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </combo>
+  </group>
 
   <group>
     <layout>hbox</layout>

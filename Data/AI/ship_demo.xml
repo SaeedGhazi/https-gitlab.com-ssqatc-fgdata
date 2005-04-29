@@ -1,10 +1,20 @@
 <?xml version="1.0"?>
 
+<!-- Notes:
+
+     This scenario puts a sailboat in the bay just east
+     of KSFO.  The <rudder> tag works similarly to the
+     <bank> tag for AI aircraft, except that the ship will
+     turn but not bank (i.e. will not heel).  Use small
+     values for <rudder> for best effect.
+
+     Dave Culp, davidculp2@comcast.net
+-->
+
 <PropertyList>
 
  <scenario>
 
-  <!-- Puts a sailboat in the bay just east of KSFO -->
   <entry>
    <type>ship</type>
    <model>Models/Geometry/sailboat.xml</model>

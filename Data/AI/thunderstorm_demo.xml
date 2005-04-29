@@ -1,18 +1,30 @@
 <?xml version="1.0"?>
 
+<!-- Notes:
+
+     This scenario puts a thunderstorm over San Francisco 
+     at 4000 feet MSL.  The "waist" of the thunderstorm is at
+     4000 feet, with parts extending above and below it.  The
+     storm is moving on a true heading of 100 degrees, at a
+     ground speed of 25 knots.  AI thunderstorms do not (yet)
+     interact with the "user" airplane.  It also does not
+     interact with terrain. 
+
+     Dave Culp, davidculp2@comcast.net 
+-->
+
 <PropertyList>
 
  <scenario>
 
-  <!-- Puts a thunderstorm southwest of KSFO -->
   <entry>
    <type>thunderstorm</type>
    <model>Models/Geometry/thunderstorm.xml</model>
-   <latitude>37.44</latitude>
-   <longitude>-122.25</longitude>
+   <latitude>37.7</latitude>
+   <longitude>-122.5</longitude>
    <speed>25.0</speed>
    <altitude>4000.0</altitude>
-   <heading>70.0</heading>
+   <heading>100.0</heading>
   </entry>
 
  </scenario>

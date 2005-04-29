@@ -1,11 +1,23 @@
 <?xml version="1.0"?>
+
+<!-- Notes:
+
+     This scenario puts a thermal over the tower at KSFO.
+     The <height> tag defines the upper limit of the thermal.
+     AI thermals have some limitations, i.e. they don't lean
+     downwind, they are only cylindrical in shape, they don't
+     interact with the terrain or weather, and AFAIK they only
+     work with the JSBSim FDM.  Try using the sgs233 model for
+     a good demonstration.
+
+     Dave Culp, davidculp2@comcast.net
+-->
  
 <PropertyList>
 
  <scenario>
 
   <entry>
-   <!-- puts a thermal over the control tower at KSFO -->
    <type>thermal</type>
    <latitude>37.61633</latitude>
    <longitude>-122.38334</longitude>

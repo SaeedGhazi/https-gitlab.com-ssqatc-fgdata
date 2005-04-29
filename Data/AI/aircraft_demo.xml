@@ -1,5 +1,20 @@
 <?xml version="1.0"?>
 
+<!-- Notes:
+
+     This scenario has a 737 takeoff from runway 28L at KSFO
+     and fly the Porte Departure to the south.  You can change
+     the aircraft type by substituting another model in the
+     <model> tag, and you can also change the "flight plan" by
+     changing the <flightplan> tag. Look in the subdirectory 
+     FlightPlans to find some that I've already defined, including
+     some arrivals.  When an AI aircraft gets to the end of its
+     flight plan it deletes itself. 
+
+     Dave Culp, davidculp2@comcast.net
+
+-->
+
 <PropertyList>
 
  <scenario>

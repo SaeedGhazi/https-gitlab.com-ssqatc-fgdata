@@ -19,7 +19,7 @@
 
   <entry>
    <type>thunderstorm</type>
-   <model>Models/Geometry/thunderstorm.xml</model>
+   <model>Models/Weather/thunderstorm.xml</model>
    <latitude>37.7</latitude>
    <longitude>-122.5</longitude>
    <speed>25.0</speed>

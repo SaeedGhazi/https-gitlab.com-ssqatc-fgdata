@@ -80,8 +80,12 @@ Widget = {
         name = type ~ "[" ~ idx ~ "]";
         newnode = me.node.getNode(name, 1);
         return { parents : [Widget], node : newnode };
-    }
+    },
+    setColor : func(R, G, B, A = 1) {
+        me.node.setValues( { color : { red : R, green : G, blue : B, alpha : A } } );
+    },
 };
+
 
 ########################################################################
 # Dialog Boxes
@@ -340,7 +344,7 @@ showHelpDialog = func {
         w.set("col", 2 * col + 1);
         w.set("halign", "left");
         w.set("label", "... " ~ key.getNode("desc").getValue() ~ "  ");
-        row = row + 1;
+        row += 1;
     }
 
     # separate lines
@@ -389,7 +393,6 @@ debug_keys = {
     title : "Development Keys",
     key : [
        #{ name : "Ctrl-U",    desc : "add 1000 ft of emergency altitude" },
-       #{ name : "W",         desc : "toggle fullscreen (3DFX only)" },
         { name : "F2",        desc : "force tile cache reload" },
         { name : "F4",        desc : "force lighting update" },
         { name : "F8",        desc : "cycle fog type" },

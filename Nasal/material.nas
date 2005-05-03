@@ -127,9 +127,10 @@ showDialog = func {
 
 	titlebar = dialog.addChild("group");
 	titlebar.set("layout", "hbox");
-	titlebar.addChild("text").set("label", "[" ~ title ~ "]");
+	w = titlebar.addChild("text");
+	w.set("label", "[" ~ title ~ "]");
+	w.setFont("Helvetica", 17);
 	titlebar.addChild("empty").set("stretch", 1);
-
 
 	w = titlebar.addChild("button");
 	w.set("pref-width", 16);

@@ -81,8 +81,11 @@ Widget = {
         newnode = me.node.getNode(name, 1);
         return { parents : [Widget], node : newnode };
     },
-    setColor : func(R, G, B, A = 1) {
-        me.node.setValues( { color : { red : R, green : G, blue : B, alpha : A } } );
+    setColor : func(r, g, b, a = 1) {
+        me.node.setValues({ color : { red:r, green:g, blue:b, alpha:a } });
+    },
+    setFont : func(n, s = 13, t = 0) {
+        me.node.setValues({ font : { name:n, "size":s, slant:t } });
     },
 };
 
@@ -163,7 +166,7 @@ showWeightDialog = func {
     tcell(fuelTable, "text", 0, 4).set("label", "Gallons");
 
     tanks = props.globals.getNode("/consumables/fuel").getChildren("tank");
-    for(i=0; i<size(tanks); i=i+1) {
+    for(i=0; i<size(tanks); i+=1) {
         t = tanks[i];
 
         tname = i ~ "";
@@ -217,7 +220,7 @@ showWeightDialog = func {
     tcell(weightTable, "text", 0, 2).set("label", "Pounds");
 
     wgts = props.globals.getNode("/sim").getChildren("weight");
-    for(i=0; i<size(wgts); i=i+1) {
+    for(i=0; i<size(wgts); i+=1) {
         w = wgts[i];
         wname = w.getNode("name", 1).getValue();
         max = w.getNode("max-lb", 1).getValue();
@@ -329,7 +332,7 @@ showHelpDialog = func {
     row = col = 0;
     foreach (key; keydefs) {
         if (n >= 60 and row >= n / 3 or n >= 16 and row >= n / 2) {
-            col = col + 1;
+            col += 1;
             row = 0;
         }
 

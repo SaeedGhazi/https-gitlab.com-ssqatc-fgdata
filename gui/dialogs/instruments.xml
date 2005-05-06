@@ -22,8 +22,11 @@
   </text>
 
   <button>
-   <x>125</x>
-   <y>0</y>
+   <x>115</x>
+   <y>2</y>
+   <width>35</width>
+   <height>26</height>
+   <border>1</border>
    <legend>&lt;</legend>
    <binding>
     <command>property-adjust</command>
@@ -37,7 +40,10 @@
 
   <button>
    <x>150</x>
-   <y>0</y>
+   <y>2</y>
+   <width>35</width>
+   <height>26</height>
+   <border>1</border>
    <legend>&lt;&lt;</legend>
    <binding>
     <command>property-adjust</command>
@@ -63,7 +69,10 @@
 
   <button>
    <x>315</x>
-   <y>0</y>
+   <y>2</y>
+   <width>35</width>
+   <height>26</height>
+   <border>1</border>
    <legend>&gt;&gt;</legend>
    <binding>
     <command>property-adjust</command>
@@ -77,7 +86,10 @@
 
   <button>
    <x>350</x>
-   <y>0</y>
+   <y>2</y>
+   <width>35</width>
+   <height>26</height>
+   <border>1</border>
    <legend>&gt;</legend>
    <binding>
     <command>property-adjust</command>
@@ -100,8 +112,11 @@
   </text>
 
   <button>
-   <x>125</x>
-   <y>0</y>
+   <x>115</x>
+   <y>2</y>
+   <width>35</width>
+   <height>26</height>
+   <border>1</border>
    <legend>&lt;</legend>
    <binding>
     <command>property-adjust</command>
@@ -115,7 +130,10 @@
 
   <button>
    <x>150</x>
-   <y>0</y>
+   <y>2</y>
+   <width>35</width>
+   <height>26</height>
+   <border>1</border>
    <legend>&lt;&lt;</legend>
    <binding>
     <command>property-adjust</command>
@@ -141,7 +159,10 @@
 
   <button>
    <x>315</x>
-   <y>0</y>
+   <y>2</y>
+   <width>35</width>
+   <height>26</height>
+   <border>1</border>
    <legend>&gt;&gt;</legend>
    <binding>
     <command>property-adjust</command>
@@ -155,7 +176,10 @@
 
   <button>
    <x>350</x>
-   <y>0</y>
+   <y>2</y>
+   <width>35</width>
+   <height>26</height>
+   <border>1</border>
    <legend>&gt;</legend>
    <binding>
     <command>property-adjust</command>

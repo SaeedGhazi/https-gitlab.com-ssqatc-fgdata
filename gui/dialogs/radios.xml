@@ -51,7 +51,10 @@
 
   <button>
    <x>220</x>
-   <y>0</y>
+   <y>2</y>
+   <width>35</width>
+   <height>26</height>
+   <border>1</border>
    <legend>&lt;-&gt;</legend>
    <binding>
     <command>dialog-apply</command>
@@ -108,7 +111,10 @@
 
   <button>
    <x>220</x>
-   <y>0</y>
+   <y>2</y>
+   <width>35</width>
+   <height>26</height>
+   <border>1</border>
    <legend>&lt;-&gt;</legend>
    <binding>
     <command>dialog-apply</command>
@@ -165,7 +171,10 @@
 
   <button>
    <x>220</x>
-   <y>0</y>
+   <y>2</y>
+   <width>35</width>
+   <height>26</height>
+   <border>1</border>
    <legend>&lt;-&gt;</legend>
    <binding>
     <command>dialog-apply</command>
@@ -232,7 +241,10 @@
 
   <button>
    <x>220</x>
-   <y>0</y>
+   <y>2</y>
+   <width>35</width>
+   <height>26</height>
+   <border>1</border>
    <legend>&lt;-&gt;</legend>
    <binding>
     <command>dialog-apply</command>
@@ -299,7 +311,10 @@
 
   <button>
    <x>220</x>
-   <y>0</y>
+   <y>2</y>
+   <width>35</width>
+   <height>26</height>
+   <border>1</border>
    <legend>&lt;-&gt;</legend>
    <binding>
     <command>dialog-apply</command>

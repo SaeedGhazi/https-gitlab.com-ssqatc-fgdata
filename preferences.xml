@@ -24,6 +24,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <xsize type="int">800</xsize>
    <ysize type="int">600</ysize>
    <splash-screen type="bool">true</splash-screen>
+   <splash-progress type="bool">true</splash-progress>
    <intro-music type="bool">false</intro-music>
    <game-mode type="bool">false</game-mode>
    <fullscreen type="bool">false</fullscreen>

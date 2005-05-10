@@ -21,7 +21,7 @@
   <width>20</width>
   <height>20</height>
   <label>Enable ATC</label>
-  <property>/sim/ATC/enabled</property>
+  <property>/sim/atc/enabled</property>
  </checkbox>
 
  <checkbox>

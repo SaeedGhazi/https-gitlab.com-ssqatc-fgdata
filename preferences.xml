@@ -281,9 +281,9 @@ Started September 2000 by David Megginson, david@megginson.com
    <view type="int">1</view>
   </replay>
   
-  <ATC>
+  <atc>
    <enabled type="bool">true</enabled>
-  </ATC>
+  </atc>
 
   <ai-traffic>
    <enabled type="bool">false</enabled>

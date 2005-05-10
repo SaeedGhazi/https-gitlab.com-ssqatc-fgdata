@@ -294,9 +294,9 @@ ________________________________________________________________________________
 					twlock = !getprop("/controls/gear/tailwheel-lock");
 					setprop("/controls/gear/tailwheel-lock", twlock);
 					if (twlock) {
-						gui.popupTip("Tail Wheel UNLOCKED");
-					} else {
 						gui.popupTip("Tail Wheel LOCKED");
+					} else {
+						gui.popupTip("Tail Wheel UNLOCKED");
 					}
 				} elsif (mod == 2) {
 					setprop("/sim/current-view/view-number", 0);

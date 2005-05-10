@@ -62,7 +62,7 @@ is pressed, and 3 if both F3 and F4 are pressed.
 
 Note that you have to enclose nasal scripts in <script><![CDATA[...]]></script>
 if they contain characters that interfere with the xml markup. This is the case
-if you are, for exmaple, using < (lower than). Alternatively, you can 'escape'
+if you are, for example, using < (lower than). Alternatively, you can 'escape'
 the character with "&lt;".
 
 
@@ -224,9 +224,9 @@ ________________________________________________________________________________
 					twlock = !getprop("/controls/gear/tailwheel-lock");
 					setprop("/controls/gear/tailwheel-lock", twlock);
 					if (twlock) {
-						gui.popupTip("Tail Wheel UNLOCKED");
-					} else {
 						gui.popupTip("Tail Wheel LOCKED");
+					} else {
+						gui.popupTip("Tail Wheel UNLOCKED");
 					}
 				} elsif (mod == 2) {
 					setprop("/sim/current-view/view-number", 0);

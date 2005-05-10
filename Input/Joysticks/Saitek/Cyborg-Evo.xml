@@ -268,9 +268,9 @@ axis 5: 	(hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 				twlock = !getprop("/controls/gear/tailwheel-lock");
 				setprop("/controls/gear/tailwheel-lock", twlock);
 				if (twlock) {
-					gui.popupTip("Tail Wheel UNLOCKED");
-				} else {
 					gui.popupTip("Tail Wheel LOCKED");
+				} else {
+					gui.popupTip("Tail Wheel UNLOCKED");
 				}
 			}
 		</script>

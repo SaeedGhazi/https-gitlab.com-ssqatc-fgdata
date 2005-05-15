@@ -348,6 +348,8 @@ Started September 2000 by David Megginson, david@megginson.com
  <environment>
   <config>
 
+   <cloudlayers include="cloudlayers.xml"/>
+
    <boundary-transition-ft>500</boundary-transition-ft>
 
    <boundary>

@@ -60,6 +60,24 @@
 
     <checkbox>
       <halign>left</halign>
+      <label>Precipitations</label>
+      <property>/sim/rendering/precipitation-enable</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
+
+    <checkbox>
+      <halign>left</halign>
+      <label>Lightnings</label>
+      <property>/sim/rendering/lightning-enable</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
+
+    <checkbox>
+      <halign>left</halign>
       <label>Bump mapped clouds</label>
       <property>/sim/rendering/bump-mapping</property>
       <binding>
@@ -76,7 +94,6 @@
       </binding>
     </checkbox>
   </group>
-
 
   <group>
     <layout>hbox</layout>

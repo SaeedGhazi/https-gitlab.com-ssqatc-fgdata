@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+  <name>weather_scenario</name>
+  <modal>false</modal>
+  <layout>vbox</layout>
+
+  <text>
+    <label>___________Weather Scenario___________</label>
+  </text>
+
+  <text>
+    <label></label>
+  </text>
+  <group>
+    <layout>hbox</layout>
+    <text>
+      <label>Weather source</label>
+      <halign>left</halign>
+    </text>
+    <combo>
+      <pref-width>200</pref-width>
+      <property>/environment/weather-scenario</property>
+      <value>Fair weather</value>
+      <value>Thunderstorm</value>
+      <value>METAR</value>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>
+          setprop("/environment/rebuild_layers", getprop("/environment/rebuild_layers")+1);
+        </script>
+      </binding>
+    </combo>
+  </group>
+
+  <text><label>Last metar used</label></text>
+  <input>
+    <pref-width>400</pref-width>
+    <live>true</live>
+    <property>/environment/metar/last-metar</property>
+  </input>
+
+  <text>
+    <label></label>
+  </text>
+
+  <group>
+    <layout>hbox</layout>
+    <empty><stretch>true</stretch></empty>
+
+    <button>
+      <legend>Close</legend>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+      <default>true</default>
+    </button>
+
+    <empty><stretch>true</stretch></empty>
+  </group>
+</PropertyList>

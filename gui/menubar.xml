@@ -249,6 +249,14 @@
   <label>Weather</label>
 
   <item>
+   <label>Weather Scenario</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>weather_scenario</dialog-name>
+   </binding>
+  </item>
+
+  <item>
    <label>Weather Conditions</label>
    <binding>
     <command>dialog-show</command>

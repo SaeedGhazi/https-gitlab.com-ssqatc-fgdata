@@ -60,7 +60,7 @@
 
     <checkbox>
       <halign>left</halign>
-      <label>Precipitations</label>
+      <label>Precipitation</label>
       <property>/sim/rendering/precipitation-enable</property>
       <binding>
         <command>dialog-apply</command>
@@ -69,7 +69,7 @@
 
     <checkbox>
       <halign>left</halign>
-      <label>Lightnings</label>
+      <label>Lightning</label>
       <property>/sim/rendering/lightning-enable</property>
       <binding>
         <command>dialog-apply</command>

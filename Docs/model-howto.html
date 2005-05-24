@@ -973,8 +973,14 @@ The following example shows all available elements:</p>
     &lt;factor-prop&gt;specular/factor&lt;/factor-prop&gt;
     &lt;offset-prop&gt;specular/offset&lt;/offset-prop&gt;
   &lt;/specular&gt;
-  &lt;shininess&gt;shininess&lt;/shininess&gt;
-  &lt;transparency&gt;transparency&lt;/transparency&gt;
+  &lt;shininess&gt;
+  &lt;transparency&gt;
+    &lt;alpha-prop&gt;transparency/alpha&lt;/alpha-prop&gt;
+    &lt;factor-prop&gt;transparency/factor&lt;/factor-prop&gt;
+    &lt;offset-prop&gt;transparency/offset&lt;/offset-prop&gt;
+    &lt;min&gt;0.0&lt;min&gt;  &lt;!-- no min-prop! --&gt;
+    &lt;max&gt;1.0&lt;max&gt;  &lt;!-- no max-prop! --&gt;
+  &lt;/transparency&gt;
   &lt;texture&gt;texture&lt;/texture&gt;
   &lt;threshold&gt;threshold&lt;/threshold&gt;
 &lt;/animation&gt;
@@ -985,13 +991,13 @@ The following example shows all available elements:</p>
 all three color components. Unset values default to zero. The &lt;texture&gt; path
 is relative to the model's &lt;texture-path&gt; directory, or, if unset, to the model
 directory. All numerical values are clamped to 0.0-1.0, except &lt;shininess&gt;, which is
-clamped to 0.0-128.0. The &lt;transparency&gt; property makes an object fully
-transparent (and thus invisible) with 1.0, and fully opaque with 0.0. The
-&lt;threshold&gt; property sets the opaqueness threshold. It is only relevant for
-semitransparent textures. Only parts of the texture that are more opaque
-than this are diplayed at all. If it is set to 0.0, all parts of the texture
-will be shown. If it is 0.5, only parts with opaqueness greater than 0.5
-(or transparency less than 0.5) are shown.</p>
+clamped to 0.0-128.0. The &lt;alpha&gt; property (&lt;transparency&gt; group) makes an
+object fully transparent (and thus invisible) with 0.0, and fully opaque with 1.0.
+("alpha" could also be called "opaqueness".) The &lt;threshold&gt; property sets the
+alpha/opaqueness threshold. It is only relevant for semitransparent textures. Only parts
+of the texture that are more opaque than this are diplayed at all. If it is set
+to 0.0, all parts of the texture will be shown. If it is 0.5, only parts with
+opaqueness greater than 0.5 (or transparency less than 0.5) are shown.</p>
 
 <p>Note that defining two or more of these animations for the same object,
 or a mixture of "material" and "blend" animations, will probably not yield

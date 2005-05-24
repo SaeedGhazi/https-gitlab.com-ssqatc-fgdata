@@ -137,6 +137,7 @@ showDialog = func {
 	w.set("pref-height", 16);
 	w.set("legend", "");
 	w.set("default", 1);
+	w.set("border", 1);
 	w.prop().getNode("binding[0]/command", 1).setValue("dialog-close");
 
 	dialog.setColor(1.0, 0.95, 0.7, 0.5);
@@ -147,13 +148,13 @@ showDialog = func {
 	colorgroup(dialog, "specular", base);
 
 	undef = func { props.globals.getNode(base ~ arg[0]) == nil };
-	if (!(undef("shininess") and undef("transparency") and undef("threshold"))) {
+	if (!(undef("shininess") and undef("transparency/alpha") and undef("threshold"))) {
 		w = dialog.addChild("group");
 		w.set("layout", "hbox");
 		w.addChild("text").set("label", "_________misc_________");
 
 		mat(dialog, "shi", base ~ "shininess", "%.0f", 0.0, 128.0);
-		mat(dialog, "trans", base ~ "transparency", "%.3f");
+		mat(dialog, "alpha", base ~ "transparency/alpha", "%.3f");
 		mat(dialog, "thresh", base ~ "threshold", "%.3f");
 	}
 

@@ -12,6 +12,8 @@ $Id$
 
 <PropertyList>
 
+ <name>default</name>
+
  <axis n="0">
   <desc>Aileron</desc>
   <binding>

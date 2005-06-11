@@ -12,6 +12,12 @@ Started September 2000 by David Megginson, david@megginson.com
 
  <!-- General simulation preferences -->
  <sim>
+  <!-- show-aircraft option: show ALL aircraft regardless by default -->
+  <aircraft-min-status>all</aircraft-min-status>
+
+  <!-- don't reset the simulator when the aircraft hits the ground -->
+  <reset-on-crash type="bool">false</reset-on-crash>
+
   <intl include="Translations/locale.xml"/>
   <aircraft>c172p</aircraft>
   <virtual-cockpit type="bool">false</virtual-cockpit>
@@ -300,9 +306,6 @@ Started September 2000 by David Megginson, david@megginson.com
    <!-- <scenario>aircraft_demo</scenario> -->
   </ai>
   
-  <!--to provide a default value that shows ALL aircraft regardless of development status-->
-  <aircraft-min-status>all</aircraft-min-status>
-
  </sim>
 
 

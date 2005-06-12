@@ -61,3 +61,18 @@ interpolate = func {
     elsif(typeof(arg[0]) != "scalar") { return; }
     _interpolate(arg[0], subvec(arg, 1));
 }
+
+##
+# Returns true if the symbol name is defined in the caller, or the
+# caller's lexical namespace.  (i.e. defined("varname") tells you if
+# you can use varname in an expression without a undefined symbol
+# error.
+#
+defined = func(sym) {
+    var fn = 1;
+    while((var frame = caller(fn)) != nil) {
+        if(contains(frame[0], sym)) { return 1; }
+        fn += 1;
+    }
+    return 0;
+}

@@ -44,18 +44,22 @@ ___________________________________ Customization ______________________________
 
 If you want to change some (or all) of the bindings, the recommended way is
 to copy this file to your home directory, make your changes there, and include
-it from your personal preferences.xml file. Use the tags <js-named n="100">
-and </js-named> around the definitions, but within the <PropertyList> scope.
-(You can use any number lower than 999.)
+it from your personal preferences.xml file. You can use any number lower than
+1000 for n in <js-named n="0">. The lowest takes precedence in case of identical
+names. You can include such a preferences.xml file with the ~~config option,
+e.g. ~~config=$HOME/.fgfs/preferences.xml.
 
+<?xml version="1.0"?>
 <PropertyList>
 	<input>
-		<joysticks include="your-modified-copy.xml"/>
+		<js-named n="100">
+			<joysticks include="your-modified-copy.xml"/>
+		</js-named>
 	</input>
 </PropertyList>
 
 
-The property "/input/joysticks/js[0]/saitek-cyborg-3D-modifier" indicates
+The property "/input/joysticks/js[0]/data/modifier" indicates
 the "shift" level. F3 sets bit 0, F4 sets bit 1. The property is 'nil' or
 zero if none of the shift buttons is pressed, 1 if F3 is pressed, 2 if F4
 is pressed, and 3 if both F3 and F4 are pressed.
@@ -81,12 +85,51 @@ Nasal examples: $FG_ROOT/Nasal/
 
 ______________________________________________________________________________________
 
-                                                     ~~ Melchior FRANZ <mfranz@aon.at>
+                                                 ~~ Melchior FRANZ <mfranz # aon : at>
 -->
 
 <PropertyList>
 	<name>SAITEK CYBORG 3D USB</name>
 	<name>CYBORG 3D USB</name>
+
+	<data>
+		<mode type="int">0</mode>
+		<modifier type="int">0</modifier>
+	</data>
+
+	<nasal>
+		<script><![CDATA[
+			if (!contains(globals, "saitek_cyborg")) {
+				globals.saitek_cyborg = {};
+				saitek_cyborg.js = {};
+			}
+
+			saitek_cyborg.which_node = props.globals.getNode("/input/joysticks/which");
+			saitek_cyborg.which = func { saitek_cyborg.which_node.getValue() }
+
+			i = saitek_cyborg.which();
+			data = props.globals.getNode("/input/joysticks/js[" ~ i ~ "]").getChild("data");
+			saitek_cyborg.js[i] = {
+				mode     : data.getNode("mode"),
+				modifier : data.getNode("modifier"),
+			};
+
+			saitek_cyborg.get_data = func { saitek_cyborg.js[saitek_cyborg.which()] }
+
+			saitek_cyborg.get_mode = func {
+				var js = saitek_cyborg.get_data();
+				js.modifier.getValue() + js.mode.getValue() * 4;
+			}
+
+			saitek_cyborg.harrier = func {
+				if (getprop("/sim/aero") == "harrier") {
+					thv = getprop("/controls/engines/engine[0]/mixture");
+					gui.popupTip("Thrust vector " ~ int(thv * 120 - 20));
+				}
+			}
+			]]>
+		</script>
+	</nasal>
 
 	<axis n="0">
 		<desc>Aileron</desc>
@@ -142,8 +185,8 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
-				if (mod == nil or mod == 0) {
+				mod = saitek_cyborg.get_mode();
+				if (mod == 0) {
 					interpolate("/controls/gear/brake-left", 1, 0.075);
 					interpolate("/controls/gear/brake-right", 1, 0.075);
 				} elsif (mod == 1) {
@@ -160,31 +203,24 @@ ________________________________________________________________________________
 			<binding>
 				<command>nasal</command>
 				<script>
-					mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
-					if (mod == nil or mod == 0) {
+					mod = saitek_cyborg.get_mode();
+					if (mod == 0) {
 						interpolate("/controls/gear/brake-left", 0, 0.075);
 						interpolate("/controls/gear/brake-right", 0, 0.075);
 					} elsif (mod == 1) {
-						brake = !getprop("/controls/gear/brake-parking");
-						setprop("/controls/gear/brake-parking", brake);
-						if (brake) {
-							gui.popupTip("Parking Brake ON");
-						} else {
-							gui.popupTip("Parking Brake OFF");
-						}
+						i = !getprop("/controls/gear/brake-parking");
+						setprop("/controls/gear/brake-parking", i);
+						gui.popupTip("Parking Brake " ~ ["OFF", "ON"][i]);
 						setprop("/controls/gear/brake-left", 0);
 						setprop("/controls/gear/brake-right", 0);
 					} elsif (mod == 2) {
-						speedbrake = !getprop("/controls/flight/speedbrake");
-						setprop("/controls/flight/speedbrake", speedbrake);
+						i = !getprop("/controls/flight/speedbrake");
+						setprop("/controls/flight/speedbrake", i);
+						gui.popupTip("Speed Brake " ~ ["OFF", "ON"][i]);
 					} elsif (mod == 3) {
-						reverser = !getprop("/controls/engines/engine[0]/reverser");
-						props.setAll("/controls/engines/engine", "reverser", reverser);
-						if (reverser) {
-							gui.popupTip("Thrust Reverser ON");
-						} else {
-							gui.popupTip("Thrust Reverser OFF");
-						}
+						i = !getprop("/controls/engines/engine[0]/reverser");
+						props.setAll("/controls/engines/engine", "reverser", i);
+						gui.popupTip("Thrust Reverser " ~ ["OFF", "ON"][i]);
 					}
 				</script>
 			</binding>
@@ -197,8 +233,8 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
-				if (mod == nil or mod == 0) {
+				mod = saitek_cyborg.get_mode();
+				if (mod == 0) {
 					controls.stepFlaps(-1);
 				} elsif (mod == 1) {
 					setprop("/controls/gear/gear-down", 0);
@@ -217,17 +253,13 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
-				if (mod == nil or mod == 0) {
+				mod = saitek_cyborg.get_mode();
+				if (mod == 0) {
 					view.resetView();
 				} elsif (mod == 1) {
-					twlock = !getprop("/controls/gear/tailwheel-lock");
-					setprop("/controls/gear/tailwheel-lock", twlock);
-					if (twlock) {
-						gui.popupTip("Tail Wheel LOCKED");
-					} else {
-						gui.popupTip("Tail Wheel UNLOCKED");
-					}
+					i = !getprop("/controls/gear/tailwheel-lock");
+					setprop("/controls/gear/tailwheel-lock", i);
+					gui.popupTip("Tail Wheel " ~ ["UNLOCKED", "LOCKED"][i]);
 				} elsif (mod == 2) {
 					setprop("/sim/current-view/view-number", 0);
 					view.resetView();
@@ -246,8 +278,8 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
-				if (mod == nil or mod == 0) {
+				mod = saitek_cyborg.get_mode();
+				if (mod == 0) {
 					controls.stepFlaps(1);
 				} elsif (mod == 1) {
 					setprop("/controls/gear/gear-down", 1);
@@ -266,8 +298,8 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
-				if (mod == nil or mod == 0) {
+				mod = saitek_cyborg.get_mode();
+				if (mod == 0) {
 					interpolate("/controls/gear/brake-left", 1, 0.075);
 				} elsif (mod == 1) {
 					#
@@ -282,8 +314,8 @@ ________________________________________________________________________________
 			<binding>
 				<command>nasal</command>
 				<script>
-					mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
-					if (mod == nil or mod == 0) {
+					mod = saitek_cyborg.get_mode();
+					if (mod == 0) {
 						interpolate("/controls/gear/brake-left", 0, 0.075);
 					} elsif (mod == 1) {
 						#
@@ -303,8 +335,8 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
-				if (mod == nil or mod == 0) {
+				mod = saitek_cyborg.get_mode();
+				if (mod == 0) {
 					interpolate("/controls/gear/brake-right", 1, 0.075);
 				} elsif (mod == 1) {
 					#
@@ -319,8 +351,8 @@ ________________________________________________________________________________
 			<binding>
 				<command>nasal</command>
 				<script>
-					mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
-					if (mod == nil or mod == 0) {
+					mod = saitek_cyborg.get_mode();
+					if (mod == 0) {
 						interpolate("/controls/gear/brake-right", 0, 0.075);
 					} elsif (mod == 1) {
 						#
@@ -340,12 +372,10 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				name = "/input/joysticks/js[0]/saitek-cyborg-3D-modifier";
-				mod = getprop(name);
-				if (mod == nil) {
-					setprop(name, 1);
-				} elsif (mod == 0 or mod == 2) {
-					setprop(name, mod + 1);
+				js = saitek_cyborg.get_data();
+				m = js.modifier.getValue();
+				if (m == 0 or m == 2) {
+					js.modifier.setIntValue(m + 1);
 				}
 			</script>
 		</binding>
@@ -353,12 +383,10 @@ ________________________________________________________________________________
 			<binding>
 				<command>nasal</command>
 				<script>
-					name = "/input/joysticks/js[0]/saitek-cyborg-3D-modifier";
-					mod = getprop(name);
-					if (mod == nil) {
-						setprop(name, 0);
-					} elsif (mod == 1 or mod == 3) {
-						setprop(name, mod - 1);
+					js = saitek_cyborg.get_data();
+					m = js.modifier.getValue();
+					if (m == 1 or m == 3) {
+						js.modifier.setIntValue(m - 1);
 					}
 				</script>
 			</binding>
@@ -371,12 +399,10 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				name = "/input/joysticks/js[0]/saitek-cyborg-3D-modifier";
-				mod = getprop(name);
-				if (mod == nil) {
-					setprop(name, 2);
-				} elsif (mod == 0 or mod == 1) {
-					setprop(name, mod + 2);
+				js = saitek_cyborg.get_data();
+				m = js.modifier.getValue();
+				if (m == 0 or m == 1) {
+					js.modifier.setIntValue(m + 2);
 				}
 			</script>
 		</binding>
@@ -384,19 +410,17 @@ ________________________________________________________________________________
 			<binding>
 				<command>nasal</command>
 				<script>
-					name = "/input/joysticks/js[0]/saitek-cyborg-3D-modifier";
-					mod = getprop(name);
-					if (mod == nil) {
-						setprop(name, 0);
-					} elsif (mod == 2 or mod == 3) {
-						setprop(name, mod - 2);
+					js = saitek_cyborg.get_data();
+					m = js.modifier.getValue();
+					if (m == 2 or m == 3) {
+						js.modifier.setIntValue(m - 2);
 					}
 				</script>
 			</binding>
 		</mod-up>
 	</button>
 
-	<button n="8"><!-- >> -->
+	<button n="8"><!-- >> -->	<!-- reserved for switching main-modes -->
 		<desc>free</desc>
 		<repeatable type="bool">false</repeatable>
 		<binding>
@@ -411,7 +435,7 @@ ________________________________________________________________________________
 		</binding>
 	</button>
 
-	<button n="9"><!-- << -->
+	<button n="9"><!-- << -->	<!-- reserved for switching main-modes -->
 		<desc>free</desc>
 		<repeatable type="bool">false</repeatable>
 		<binding>
@@ -432,8 +456,8 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
-				if (mod == nil or mod == 0) {
+				mod = saitek_cyborg.get_mode();
+				if (mod == 0) {
 					view.panViewPitch(1);
 				} elsif (mod == 1) {
 					controls.adjPropeller(1);
@@ -452,21 +476,13 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
-				if (mod == nil or mod == 0) {
+				mod = saitek_cyborg.get_mode();
+				if (mod == 0) {
 					v = getprop("/sim/current-view/view-number");
-					if (v == 0 or v == 4) {
-						view.panViewDir(1);
-					} else {
-						view.panViewDir(-1);
-					}
+					view.panViewDir(v == 0 or v == 4 ? 1 : -1);
 				} elsif (mod == 1) {
 					controls.adjMixture(-1);
-					if (getprop("/sim/aero") == "harrier") {
-						thv = getprop("/controls/engines/engine[0]/mixture");
-						thv = int(thv * 120 - 20);
-						gui.popupTip("Thrust vector " ~ thv);
-					}
+					saitek_cyborg.harrier();
 				} elsif (mod == 2) {
 					controls.aileronTrim(-0.75);
 				} elsif (mod == 3) {
@@ -482,21 +498,13 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
-				if (mod == nil or mod == 0) {
+				mod = saitek_cyborg.get_mode();
+				if (mod == 0) {
 					v = getprop("/sim/current-view/view-number");
-					if (v == 0 or v == 4) {
-						view.panViewDir(-1);
-					} else {
-						view.panViewDir(1);
-					}
+					view.panViewDir(v == 0 or v == 4 ? -1 : 1);
 				} elsif (mod == 1) {
 					controls.adjMixture(1);
-					if (getprop("/sim/aero") == "harrier") {
-						thv = getprop("/controls/engines/engine[0]/mixture");
-						thv = int(thv * 120 - 20);
-						gui.popupTip("Thrust vector " ~ thv);
-					}
+					saitek_cyborg.harrier();
 				} elsif (mod == 2) {
 					controls.aileronTrim(0.75);
 				} elsif (mod == 3) {
@@ -512,8 +520,8 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-3D-modifier");
-				if (mod == nil or mod == 0) {
+				mod = saitek_cyborg.get_mode();
+				if (mod == 0) {
 					view.panViewPitch(-1);
 				} elsif (mod == 1) {
 					controls.adjPropeller(-1);

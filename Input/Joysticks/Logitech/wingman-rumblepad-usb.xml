@@ -11,7 +11,7 @@
 * Axis 1 (left joystick): elevator
 * Axis 2 (slider): throttle
 * Axis 3 (right joystick): rudder
-* Axis 4 (right joystick): raise/lower 2D panel
+* Axis 4 (right joystick): (not used)
 * Axes 5 and 6 (hat): set view direction
 *
 * Button 0 (A): elevator trim up
@@ -34,6 +34,7 @@ $Id$
 <PropertyList>
 
  <name>Logitech Inc. WingMan RumblePad</name>
+ <name>Logitech WingMan RumblePad USB</name>
  <name>WingMan RumblePad</name>
 
  <axis n="0">
@@ -58,52 +59,8 @@ $Id$
  <axis n="2">
   <desc>Throttle</desc>
   <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[0]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[1]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[2]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[3]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[4]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[5]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[6]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[7]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
+   <command>nasal</command>
+   <script>controls.throttleAxis()</script>
   </binding>
  </axis>
 
@@ -139,12 +96,6 @@ $Id$
    <command>property-adjust</command>
    <property>/controls/flight/elevator-trim</property>
    <step type="double">-0.001</step>
-  </binding>
-  <binding>
-   <command>null</command>
-  </binding>
-  <binding>
-   <command>null</command>
   </binding>
  </button>
 

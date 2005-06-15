@@ -950,8 +950,8 @@ Shared parameters for various materials.
   <a>1.0</a>
  </specular>
  <shininess>1.2</shininess>
- <rolling-friction>1</rolling-friction>
- <bumpiness>0.3</bumpiness>
+ <rolling-friction>2</rolling-friction>
+ <bumpiness>0.8</bumpiness>
 </material>
 
 <material>
@@ -983,8 +983,8 @@ Shared parameters for various materials.
   <a>1.0</a>
  </specular>
  <shininess>1.2</shininess>
- <rolling-friction>1</rolling-friction>
- <bumpiness>0.2</bumpiness>
+ <rolling-friction>1.5</rolling-friction>
+ <bumpiness>0.6</bumpiness>
 </material>
 
 <material>
@@ -993,7 +993,7 @@ Shared parameters for various materials.
  <xsize>200</xsize>
  <ysize>200</ysize>
  <shininess>1.5</shininess>
- <rolling-friction>1</rolling-friction>
+ <rolling-friction>2.5</rolling-friction>
  <bumpiness>0.6</bumpiness>
 </material>
 

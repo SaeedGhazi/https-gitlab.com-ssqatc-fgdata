@@ -195,9 +195,8 @@
   <desc>Flaps down</desc>
   <repeatable>false</repeatable>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/flaps</property>
-   <step type="double">-0.34</step>
+   <command>nasal</command>
+   <script>controls.stepFlaps(1)</script>
   </binding>
  </button>
 
@@ -205,9 +204,8 @@
   <desc>Flaps up</desc>
   <repeatable>false</repeatable>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/flaps</property>
-   <step type="double">0.34</step>
+   <command>nasal</command>
+   <script>controls.stepFlaps(-1)</script>
   </binding>
  </button>
 

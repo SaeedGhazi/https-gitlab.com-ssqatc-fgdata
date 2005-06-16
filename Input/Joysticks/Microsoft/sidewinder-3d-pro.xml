@@ -57,52 +57,8 @@
  <axis n="3">
   <desc>Throttle</desc>
   <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[0]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[1]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[2]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[3]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[4]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[5]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[6]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[7]/throttle</property>
-   <offset type="double">-1.0</offset>
-   <factor type="double">-0.5</factor>
+   <command>nasal</command>
+   <script>controls.throttleAxis()</script>
   </binding>
  </axis>
 
@@ -211,9 +167,8 @@
   <desc>Flaps down</desc>
   <repeatable>false</repeatable>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/flaps</property>
-   <step type="double">-0.34</step>
+   <command>nasal</command>
+   <script>controls.stepFlaps(1)</script>
   </binding>
  </button>
 
@@ -221,9 +176,8 @@
   <desc>Flaps up</desc>
   <repeatable>false</repeatable>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/flaps</property>
-   <step type="double">0.34</step>
+   <command>nasal</command>
+   <script>controls.stepFlaps(-1)</script>
   </binding>
  </button>
 

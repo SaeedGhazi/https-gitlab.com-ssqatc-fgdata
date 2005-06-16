@@ -314,3 +314,4 @@ elevatorTrimAxis = func { elevatorTrim(cmdarg().getNode("value").getValue()); }
 aileronTrimAxis = func { aileronTrim(cmdarg().getNode("value").getValue()); }
 rudderTrimAxis = func { rudderTrim(cmdarg().getNode("value").getValue()); }
 
+gearDown = func { setprop("/controls/gear/gear-down", arg[0]); }

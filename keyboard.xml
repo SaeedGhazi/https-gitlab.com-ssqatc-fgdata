@@ -532,9 +532,8 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>G</name>
   <desc>Gear down.</desc>
   <binding>
-   <command>property-assign</command>
-   <property>/controls/gear/gear-down</property>
-   <value type="double">1.0</value>
+   <command>nasal</command>
+   <script>controls.gearDown(1.0)</script>
   </binding>
  </key>
 
@@ -700,9 +699,8 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>g</name>
   <desc>Gear Up.</desc>
   <binding>
-   <command>property-assign</command>
-   <property>/controls/gear/gear-down</property>
-   <value type="double">0.0</value>
+   <command>nasal</command>
+   <script>controls.gearDown(0.0)</script>
   </binding>
  </key>
 

@@ -128,9 +128,8 @@
  <button n="2">
   <repeatable>false</repeatable>
   <binding>
-   <command>property-assign</command>
-   <property>/controls/gear/gear-down</property>
-   <value>true</value>
+   <command>nasal</command>
+   <script>controls.gearToggle()</script>
   </binding>
  </button>
 

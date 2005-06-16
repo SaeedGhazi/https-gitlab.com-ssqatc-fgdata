@@ -21,7 +21,7 @@
 * Button 5:                       flap down           Button A                    0010
 * Button 6:                       left brake only     Button C                    0040
 * Button 7:                       right brake only    Button D                    0080
-* Button 8(Unix)/9(Win):          gear up             Shift Button                0100(unix), 0200(Win)
+* Button 8(Unix)/9(Win):          gear toggle         Shift Button                0100(unix), 0200(Win)
 ************************************************************************
 $Id$
 -->
@@ -257,7 +257,7 @@ $Id$
  </button>
 
  <button>
-  <desc>Gear Up.</desc>
+  <desc>Gear Toggle.</desc>
   <number>
     <unix>8</unix>
     <mac>8</mac>
@@ -265,11 +265,9 @@ $Id$
    </number>  
   <repeatable>false</repeatable>
   <binding>
-      <command>property-assign</command>
-      <property>/controls/gear/gear-down</property>
-      <value type="double">0.0</value>
+   <command>nasal</command>
+   <script>controls.gearToggle()</script>
   </binding>
-  
  </button>
 
 </PropertyList>

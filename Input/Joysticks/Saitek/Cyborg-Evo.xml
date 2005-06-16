@@ -288,7 +288,7 @@ axis 5: 	(hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 			if (mod == nil or mod == 0) {
 				controls.stepFlaps(-1);
 			} elsif (mod == 1) {
-				setprop("/controls/gear/gear-down", 0);
+				controls.gearDown(0);
 			} elsif (mod == 2) {
 				view.increase();
 			} elsif (mod == 3) {
@@ -309,7 +309,7 @@ axis 5: 	(hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 			if (mod == nil or mod == 0) {
 				controls.stepFlaps(1);
 			} elsif (mod == 1) {
-				setprop("/controls/gear/gear-down", 1);
+				controls.gearDown(1);
 			} elsif (mod == 2) {
 				view.decrease();
 			} elsif (mod == 3) {

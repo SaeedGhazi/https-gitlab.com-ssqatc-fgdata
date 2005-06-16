@@ -208,18 +208,16 @@
  <button n="4">
   <repeatable>false</repeatable>
   <binding>
-   <command>property-assign</command>
-   <property>/controls/gear/gear-down</property>
-   <value>false</value>
+   <command>nasal</command>
+   <script>controls.gearDown(0)</script>
   </binding>
  </button>
 
  <button n="5">
   <repeatable>false</repeatable>
   <binding>
-   <command>property-assign</command>
-   <property>/controls/gear/gear-down</property>
-   <value>true</value>
+   <command>nasal</command>
+   <script>controls.gearDown(1)</script>
   </binding>
  </button>
 

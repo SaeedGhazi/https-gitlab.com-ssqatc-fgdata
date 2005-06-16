@@ -227,8 +227,8 @@ $Id$
  <button n="1">
   <desc>Landing Gear Up/Down Toggle</desc>
   <binding>
-   <command>property-toggle</command>
-   <property>/controls/gear/gear-down</property>
+   <command>nasal</command>
+   <script>controls.gearToggle()</script>
   </binding>
  </button>
 

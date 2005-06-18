@@ -26,6 +26,7 @@
 -->
   <PropertyList>
     <name>Logitech Freedom 2.4</name>
+    <name>Logitech Logitech Freedom 2.4</name>
 
     <axis>
       <desc>Aileron</desc>

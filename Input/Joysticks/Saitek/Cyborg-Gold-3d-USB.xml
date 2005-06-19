@@ -69,6 +69,8 @@ if they contain characters that interfere with the xml markup. This is the case
 if you are, for example, using < (lower than). Alternatively, you can 'escape'
 the character with "&lt;".
 
+Note that all nasal code shares a common namespace, so it's possible to set
+a variable in one nasal binding, and to read it in another.
 
 
 
@@ -99,36 +101,19 @@ ________________________________________________________________________________
 
 	<nasal>
 		<script><![CDATA[
-			if (!contains(globals, "saitek_cyborg")) {
-				globals.saitek_cyborg = {};
-				saitek_cyborg.js = {};
-			}
+			data = props.globals.getNode(this).getNode("data");
+			mode = data.getNode("mode");
+			modifier = data.getNode("modifier");
 
-			saitek_cyborg.which_node = props.globals.getNode("/input/joysticks/which");
-			saitek_cyborg.which = func { saitek_cyborg.which_node.getValue() }
+			get_mode = func { modifier.getValue() + mode.getValue() * 4 }
 
-			i = saitek_cyborg.which();
-			data = props.globals.getNode("/input/joysticks/js[" ~ i ~ "]").getChild("data");
-			saitek_cyborg.js[i] = {
-				mode     : data.getNode("mode"),
-				modifier : data.getNode("modifier"),
-			};
-
-			saitek_cyborg.get_data = func { saitek_cyborg.js[saitek_cyborg.which()] }
-
-			saitek_cyborg.get_mode = func {
-				var js = saitek_cyborg.get_data();
-				js.modifier.getValue() + js.mode.getValue() * 4;
-			}
-
-			saitek_cyborg.harrier = func {
+			harrier = func {
 				if (getprop("/sim/aero") == "harrier") {
 					thv = getprop("/controls/engines/engine[0]/mixture");
 					gui.popupTip("Thrust vector " ~ int(thv * 120 - 20));
 				}
 			}
-			]]>
-		</script>
+		]]></script>
 	</nasal>
 
 	<axis n="0">
@@ -185,7 +170,7 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				mod = saitek_cyborg.get_mode();
+				mod = get_mode();
 				if (mod == 0) {
 					interpolate("/controls/gear/brake-left", 1, 0.075);
 					interpolate("/controls/gear/brake-right", 1, 0.075);
@@ -203,7 +188,7 @@ ________________________________________________________________________________
 			<binding>
 				<command>nasal</command>
 				<script>
-					mod = saitek_cyborg.get_mode();
+					mod = get_mode();
 					if (mod == 0) {
 						interpolate("/controls/gear/brake-left", 0, 0.075);
 						interpolate("/controls/gear/brake-right", 0, 0.075);
@@ -233,7 +218,7 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				mod = saitek_cyborg.get_mode();
+				mod = get_mode();
 				if (mod == 0) {
 					controls.stepFlaps(-1);
 				} elsif (mod == 1) {
@@ -253,7 +238,7 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				mod = saitek_cyborg.get_mode();
+				mod = get_mode();
 				if (mod == 0) {
 					view.resetView();
 				} elsif (mod == 1) {
@@ -278,7 +263,7 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				mod = saitek_cyborg.get_mode();
+				mod = get_mode();
 				if (mod == 0) {
 					controls.stepFlaps(1);
 				} elsif (mod == 1) {
@@ -298,7 +283,7 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				mod = saitek_cyborg.get_mode();
+				mod = get_mode();
 				if (mod == 0) {
 					interpolate("/controls/gear/brake-left", 1, 0.075);
 				} elsif (mod == 1) {
@@ -314,7 +299,7 @@ ________________________________________________________________________________
 			<binding>
 				<command>nasal</command>
 				<script>
-					mod = saitek_cyborg.get_mode();
+					mod = get_mode();
 					if (mod == 0) {
 						interpolate("/controls/gear/brake-left", 0, 0.075);
 					} elsif (mod == 1) {
@@ -335,7 +320,7 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				mod = saitek_cyborg.get_mode();
+				mod = get_mode();
 				if (mod == 0) {
 					interpolate("/controls/gear/brake-right", 1, 0.075);
 				} elsif (mod == 1) {
@@ -351,7 +336,7 @@ ________________________________________________________________________________
 			<binding>
 				<command>nasal</command>
 				<script>
-					mod = saitek_cyborg.get_mode();
+					mod = get_mode();
 					if (mod == 0) {
 						interpolate("/controls/gear/brake-right", 0, 0.075);
 					} elsif (mod == 1) {
@@ -372,10 +357,9 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				js = saitek_cyborg.get_data();
-				m = js.modifier.getValue();
+				m = modifier.getValue();
 				if (m == 0 or m == 2) {
-					js.modifier.setIntValue(m + 1);
+					modifier.setIntValue(m + 1);
 				}
 			</script>
 		</binding>
@@ -383,10 +367,9 @@ ________________________________________________________________________________
 			<binding>
 				<command>nasal</command>
 				<script>
-					js = saitek_cyborg.get_data();
-					m = js.modifier.getValue();
+					m = modifier.getValue();
 					if (m == 1 or m == 3) {
-						js.modifier.setIntValue(m - 1);
+						modifier.setIntValue(m - 1);
 					}
 				</script>
 			</binding>
@@ -399,10 +382,9 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				js = saitek_cyborg.get_data();
-				m = js.modifier.getValue();
+				m = modifier.getValue();
 				if (m == 0 or m == 1) {
-					js.modifier.setIntValue(m + 2);
+					modifier.setIntValue(m + 2);
 				}
 			</script>
 		</binding>
@@ -410,10 +392,9 @@ ________________________________________________________________________________
 			<binding>
 				<command>nasal</command>
 				<script>
-					js = saitek_cyborg.get_data();
-					m = js.modifier.getValue();
+					m = modifier.getValue();
 					if (m == 2 or m == 3) {
-						js.modifier.setIntValue(m - 2);
+						modifier.setIntValue(m - 2);
 					}
 				</script>
 			</binding>
@@ -456,7 +437,7 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				mod = saitek_cyborg.get_mode();
+				mod = get_mode();
 				if (mod == 0) {
 					view.panViewPitch(1);
 				} elsif (mod == 1) {
@@ -476,13 +457,13 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				mod = saitek_cyborg.get_mode();
+				mod = get_mode();
 				if (mod == 0) {
 					v = getprop("/sim/current-view/view-number");
 					view.panViewDir(v == 0 or v == 4 ? 1 : -1);
 				} elsif (mod == 1) {
 					controls.adjMixture(-1);
-					saitek_cyborg.harrier();
+					harrier();
 				} elsif (mod == 2) {
 					controls.aileronTrim(-0.75);
 				} elsif (mod == 3) {
@@ -498,17 +479,17 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				mod = saitek_cyborg.get_mode();
+				mod = get_mode();
 				if (mod == 0) {
 					v = getprop("/sim/current-view/view-number");
 					view.panViewDir(v == 0 or v == 4 ? -1 : 1);
 				} elsif (mod == 1) {
 					controls.adjMixture(1);
-					saitek_cyborg.harrier();
+					harrier();
 				} elsif (mod == 2) {
 					controls.aileronTrim(0.75);
 				} elsif (mod == 3) {
-					controls.rudderTrim(-0.75);
+					controls.rudderTrim(0.75);
 				}
 			</script>
 		</binding>
@@ -520,7 +501,7 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				mod = saitek_cyborg.get_mode();
+				mod = get_mode();
 				if (mod == 0) {
 					view.panViewPitch(-1);
 				} elsif (mod == 1) {

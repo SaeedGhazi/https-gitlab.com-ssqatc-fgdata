@@ -76,6 +76,12 @@ propellerAxis = func {
     if(size(arg) > 0) { val = -val; }
     props.setAll("/controls/engines/engine", "propeller-pitch", (1 - val)/2);
 }
+carbHeatAxis = func {
+    val = cmdarg().getNode("setting").getValue();
+    if(size(arg) > 0) { val = -val; }
+    props.setAll("/controls/anti-ice/engine", "carb-heat", (1 - val)/2);
+}
+
 
 ##
 # Wrapper around stepProps() which emulates the "old" flap behavior for

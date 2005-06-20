@@ -390,6 +390,7 @@ Example:
    <max>360</max>
   </dial>
 
+
 textbox
 -------
 
@@ -412,5 +413,21 @@ property tree, like:
 
     <editable>true</editable> <!-- whether the puLargeInput is supposed to be editable -->
 </textbox>  
+
+
+hrule
+-----
+
+Draws a horizontal line. Accepts color and thickness (<pref-height>):
+
+  <hrule>
+    <color>
+     <red>1.0</red>
+     <green>0.0</green>
+     <blue>0.0</blue>
+    </color>
+    <pref-height>2</pref-height>
+   </hrule>
+
 
 __end__

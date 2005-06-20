@@ -13,13 +13,13 @@ Only a few stick controls have been mapped here:
 Linux/Windows/Mac Axis Numbers:
   0   	Roll (positive == right) 
   1  	Pitch (positive == down/back/nose-up)
-  2/5/4 top "rotary dial" on the throttle (positive == CCW)
+  2/5/5 top "rotary dial" on the throttle (positive == CCW)
   3   	Rocker switch ("rudder" control) on the throttle (positive == right)
   4/2/2 Throttle (positive == back/down/idle)
-  5/4/? Bottom "rotary dial" on the throttle (positive == CW)
+  5/4/4 Bottom "rotary dial" on the throttle (positive == CW)
   	Strange this axis doesn't seem to exist on Mac OS X!
-  6/6/5 Lower right hat horizontal axis (positive == right)
-  7/7/6 Lower right hat vertical axis (positive == down (Mac positive is UP))
+  6/6/6 Lower right hat horizontal axis (positive == right)
+  7/7/7 Lower right hat vertical axis (positive == down (Mac positive is UP))
 
 Button Numbers (Identical b/w Linux/Windows/Mac):
  0  Trigger
@@ -55,6 +55,7 @@ $Id$
  <name>Saitek X45</name>
  <name>Saitek Saitek X45</name>
  <name>Saitek X45 Flight Controller USB</name>
+ <name>Saitek X45 Flight Control Stick </name>
 
  <axis n="0">
   <desc>Aileron</desc>
@@ -104,7 +105,6 @@ $Id$
    <unix>6</unix>
    <mac>6</mac>
    <windows>6</windows>
-   <mac>5</mac>
   </number>
   <desc>View Direction</desc>
   <low>
@@ -129,7 +129,6 @@ $Id$
    <unix>7</unix>
    <mac>7</mac>
    <windows>7</windows>
-   <mac>6</mac>
   </number>
   <low>
    <repeatable>true</repeatable>
@@ -151,9 +150,8 @@ $Id$
   <desc>Throttle</desc>
   <number>
    <unix>4</unix>
-   <mac>4</mac>
-   <windows>2</windows>
    <mac>2</mac>
+   <windows>2</windows>
   </number>
   <binding>
    <command>nasal</command>
@@ -165,7 +163,7 @@ $Id$
   <desc>Mixture</desc>
   <number>
    <unix>2</unix>
-   <mac>2</mac>
+   <mac>5</mac>
    <windows>5</windows>
   </number>
   <binding>
@@ -178,9 +176,8 @@ $Id$
   <desc>Propeller Advance</desc>
   <number>
    <unix>5</unix>
-   <mac>5</mac>
+   <mac>4</mac>
    <windows>4</windows>
-<!-- <mac>???</mac> -->
   </number>
   <binding>
    <command>nasal</command>

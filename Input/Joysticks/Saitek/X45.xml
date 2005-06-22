@@ -299,16 +299,28 @@ $Id$
   <desc>Decrease flaps</desc>
   <binding>
    <command>nasal</command>
-   <script>controls.stepFlaps(-1)</script>
+   <script>controls.flapsDown(-1)</script>
   </binding>
+  <mod-up>
+   <binding>
+    <command>nasal</command>
+    <script>controls.flapsDown(0)</script>
+   </binding>
+  </mod-up>
  </button>
 
  <button n="20">
   <desc>Increase flaps</desc>
   <binding>
    <command>nasal</command>
-   <script>controls.stepFlaps(1)</script>
+   <script>controls.flapsDown(1)</script>
   </binding>
+  <mod-up>
+   <binding>
+    <command>nasal</command>
+    <script>controls.flapsDown(0)</script>
+   </binding>
+  </mod-up>
  </button>
 
  <!-- Rudder trim on the flap hat -->

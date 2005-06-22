@@ -269,9 +269,9 @@ ________________________________________________________________________________
 			<script>
 				mod = getprop("/input/joysticks/js[0]/thrustmaster-top-gun-afterburner-modifier");
 				if (mod == nil or mod == 0) {
-					controls.stepFlaps(-1);
+					controls.flapsDown(-1);
 				} elsif (mod == 1) {
-					controls.gearDown(0);
+					controls.gearDown(-1);
 				} elsif (mod == 2) {
 					view.stepView(-1);
 				} elsif (mod == 3) {
@@ -279,6 +279,23 @@ ________________________________________________________________________________
 				}
 			</script>
 		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>
+					mod = getprop("/input/joysticks/js[0]/thrustmaster-top-gun-afterburner-modifier");
+					if (mod == nil or mod == 0) {
+						controls.flapsDown(0);
+					} elsif (mod == 1) {
+						controls.gearDown(0);
+					} elsif (mod == 2) {
+						#
+					} elsif (mod == 3) {
+						#
+					}
+				</script>
+			</binding>
+		</mod-up>
 	</button>
 
 	<button n="2"><!-- front right -->
@@ -318,7 +335,7 @@ ________________________________________________________________________________
 			<script>
 				mod = getprop("/input/joysticks/js[0]/thrustmaster-top-gun-afterburner-modifier");
 				if (mod == nil or mod == 0) {
-					controls.stepFlaps(1);
+					controls.flapsDown(1);
 				} elsif (mod == 1) {
 					controls.gearDown(1);
 				} elsif (mod == 2) {
@@ -328,6 +345,23 @@ ________________________________________________________________________________
 				}
 			</script>
 		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>
+					mod = getprop("/input/joysticks/js[0]/thrustmaster-top-gun-afterburner-modifier");
+					if (mod == nil or mod == 0) {
+						controls.flapsDown(0);
+					} elsif (mod == 1) {
+						controls.gearDown(0);
+					} elsif (mod == 2) {
+						#
+					} elsif (mod == 3) {
+						#
+					}
+				</script>
+			</binding>
+		</mod-up>
 	</button>
 
 	<button n="4"><!-- throttle down/back -->

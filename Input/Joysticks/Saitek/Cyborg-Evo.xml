@@ -286,9 +286,9 @@ axis 5: 	(hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 		<script>
 			mod = getprop("/input/joysticks/js[0]/saitek-cyborg-evo-modifier");
 			if (mod == nil or mod == 0) {
-				controls.stepFlaps(-1);
+				controls.flapsDown(-1);
 			} elsif (mod == 1) {
-				controls.gearDown(0);
+				controls.gearDown(-1);
 			} elsif (mod == 2) {
 				view.increase();
 			} elsif (mod == 3) {
@@ -296,6 +296,23 @@ axis 5: 	(hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 			}
 		</script>
 	</binding>
+	<mod-up>
+		<binding>
+			<command>nasal</command>
+			<script>
+				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-evo-modifier");
+				if (mod == nil or mod == 0) {
+					controls.flapsDown(0);
+				} elsif (mod == 1) {
+					controls.gearDown(0);
+				} elsif (mod == 2) {
+					#
+				} elsif (mod == 3) {
+					#
+				}
+			</script>
+		</binding>
+	</mod-up>
 </button>
 
 <!-- Right Button below Hat-switch, labeled "4" -->
@@ -307,7 +324,7 @@ axis 5: 	(hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 		<script>
 			mod = getprop("/input/joysticks/js[0]/saitek-cyborg-evo-modifier");
 			if (mod == nil or mod == 0) {
-				controls.stepFlaps(1);
+				controls.flapsDown(1);
 			} elsif (mod == 1) {
 				controls.gearDown(1);
 			} elsif (mod == 2) {
@@ -317,6 +334,23 @@ axis 5: 	(hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 			}
 		</script>
 	</binding>
+	<mod-up>
+		<binding>
+			<command>nasal</command>
+			<script>
+				mod = getprop("/input/joysticks/js[0]/saitek-cyborg-evo-modifier");
+				if (mod == nil or mod == 0) {
+					controls.flapsDown(0);
+				} elsif (mod == 1) {
+					controls.gearDown(0);
+				} elsif (mod == 2) {
+					#
+				} elsif (mod == 3) {
+					#
+				}
+			</script>
+		</binding>
+	</mod-up>
 </button>
 
 <!-- Button left of Hat switch, Labeled '5' -->

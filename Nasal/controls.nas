@@ -87,7 +87,8 @@ carbHeatAxis = func {
 # Wrapper around stepProps() which emulates the "old" flap behavior for
 # configurations that aren't using the new mechanism.
 #
-stepFlaps = func {
+flapsDown = func {
+    if(arg[0] == 0) { return; }
     if(props.globals.getNode("/sim/flaps") != nil) {
         stepProps("/controls/flight/flaps", "/sim/flaps", arg[0]);
         return;
@@ -320,5 +321,12 @@ elevatorTrimAxis = func { elevatorTrim(cmdarg().getNode("value").getValue()); }
 aileronTrimAxis = func { aileronTrim(cmdarg().getNode("value").getValue()); }
 rudderTrimAxis = func { rudderTrim(cmdarg().getNode("value").getValue()); }
 
-gearDown = func { setprop("/controls/gear/gear-down", arg[0]); }
-gearToggle = func { gearDown(!getprop("/controls/gear/gear-down")); }
+gearDown = func {
+    if (arg[0] < 0) {
+      setprop("/controls/gear/gear-down", 0);
+    } elsif (arg[0] > 0) {
+      setprop("/controls/gear/gear-down", 1);
+    }
+}
+gearToggle = func { gearDown(getprop("/controls/gear/gear-down") > 0 ? 0 : 1); }
+

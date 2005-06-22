@@ -174,8 +174,14 @@ $Id:
   <repeatable>false</repeatable>
   <binding>
    <command>nasal</command>
-   <script>controls.stepFlaps(1)</script>
+   <script>controls.flapsDown(1)</script>
   </binding>
+  <mod-up>
+   <binding>
+    <command>nasal</command>
+    <script>controls.flapsDown(0)</script>
+   </binding>
+  </mod-up>
  </button>
 
  <button n="7">
@@ -183,8 +189,14 @@ $Id:
   <repeatable>false</repeatable>
   <binding>
    <command>nasal</command>
-   <script>controls.stepFlaps(-1)</script>
+   <script>controls.flapsDown(-1)</script>
   </binding>
+  <mod-up>
+   <binding>
+    <command>nasal</command>
+    <script>controls.flapsDown(0)</script>
+   </binding>
+  </mod-up>
  </button>
 
  <button n="4">

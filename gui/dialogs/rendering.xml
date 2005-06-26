@@ -95,6 +95,20 @@
     </checkbox>
   </group>
 
+<group>
+  <padding>8</padding>
+  <layout>vbox</layout>
+  <hrule></hrule>
+  <text>
+    <padding>-6</padding>
+    <halign>left</halign>
+    <label>3D Clouds</label>
+    <color>
+        <red>0.5</red>
+        <green>0.5</green>
+        <blue>0.5</blue>
+    </color>
+  </text>
   <group>
     <layout>hbox</layout>
     <halign>right</halign>
@@ -139,7 +153,8 @@
 
   <group>
     <layout>hbox</layout>
-    <text><label>3D Clouds cache size in Kbytes</label></text>
+    <halign>right</halign>
+    <text><label>Cache size in Kbytes</label></text>
     <input>
       <property>/sim/rendering/clouds3d-cache-size</property>
       <binding>
@@ -151,7 +166,7 @@
   <group>
     <layout>hbox</layout>
     <halign>right</halign>
-    <text><label>3D Clouds texture resolution</label></text>
+    <text><label>Texture resolution</label></text>
     <combo>
       <property>/sim/rendering/clouds3d-cache-resolution</property>
       <value>64</value>
@@ -161,6 +176,62 @@
         <command>dialog-apply</command>
       </binding>
     </combo>
+  </group>
+</group>
+
+  <group>
+    <padding>8</padding>
+    <layout>hbox</layout>
+    <hrule></hrule>
+    <group>
+      <layout>vbox</layout>
+      <valign>top</valign>
+      <halign>left</halign>
+      <text>
+        <padding>-6</padding>
+        <label>Shadows</label>
+        <color>
+          <red>0.5</red>
+          <green>0.5</green>
+          <blue>0.5</blue>
+        </color>
+      </text>
+    </group>
+    <group>
+    <layout>vbox</layout>
+     <checkbox>
+      <halign>left</halign>
+      <label>Aircraft</label>
+      <property>/sim/rendering/shadows-ac</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+     </checkbox>
+     <checkbox>
+      <halign>left</halign>
+      <label>Scenery objects</label>
+      <property>/sim/rendering/shadows-to</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+     </checkbox>
+     <checkbox>
+      <halign>left</halign>
+      <label>AI objects</label>
+      <property>/sim/rendering/shadows-ai</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+     </checkbox>
+     <checkbox>
+      <halign>left</halign>
+      <label>Silouhette (debug)</label>
+      <property>/sim/rendering/shadows-debug</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+     </checkbox>
+    </group>
   </group>
 
   <group>

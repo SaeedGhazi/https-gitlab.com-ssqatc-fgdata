@@ -50,6 +50,10 @@ Started September 2000 by David Megginson, david@megginson.com
    <enhanced-lighting type="bool">false</enhanced-lighting>
    <distance-attenuation type="bool">false</distance-attenuation>
    <draw-otw type="bool">true</draw-otw>
+   <shadows-ac type="bool">false</shadows-ac>
+   <shadows-ai type="bool">false</shadows-ai>
+   <shadows-to type="bool">false</shadows-to>
+   <shadows-debug type="bool">false</shadows-debug>
   </rendering>
   <model-hz type="int">120</model-hz>
   <navdb>
@@ -351,8 +355,6 @@ Started September 2000 by David Megginson, david@megginson.com
  <environment>
   <config>
 
-   <cloudlayers include="cloudlayers.xml"/>
-
    <boundary-transition-ft>500</boundary-transition-ft>
 
    <boundary>
@@ -448,6 +450,8 @@ Started September 2000 by David Megginson, david@megginson.com
     <span-m>40000</span-m>
    </layer>
   </clouds>
+
+  <cloudlayers include="cloudlayers.xml"/>
 
   <params>
    <real-world-weather-fetch type="bool">false</real-world-weather-fetch>

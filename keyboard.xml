@@ -89,6 +89,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="13">
   <name>Enter</name>
   <desc>Move rudder right.</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
    <property>/controls/flight/rudder</property>
@@ -326,6 +327,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="48">
   <name>0</name>
   <desc>Move rudder left.</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
    <property>/controls/flight/rudder</property>
@@ -336,6 +338,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="49">
   <name>1</name>
   <desc>Decrease elevator trim.</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
    <property>/controls/flight/elevator-trim</property>
@@ -354,6 +357,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="50">
   <name>2</name>
   <desc>Increase elevator or autopilot altitude.</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
    <script>
@@ -372,7 +376,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="51">
   <name>3</name>
-  <desc>Decrease throttle or autopilot autothrottle.</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
    <property>/autopilot/control-overrides/throttle</property>
@@ -391,6 +395,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="52">
   <name>4</name>
   <desc>Move aileron left (or adjust AP heading.)</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
    <script>
@@ -419,6 +424,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="54">
   <name>6</name>
   <desc>Move aileron right (or adjust AP heading.)</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
    <script>
@@ -438,6 +444,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="55">
   <name>7</name>
   <desc>Increase elevator trim.</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
    <property>/controls/flight/elevator-trim</property>
@@ -456,6 +463,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="56">
   <name>8</name>
   <desc>Decrease elevator or autopilot altitude.</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
    <script>
@@ -475,6 +483,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="57">
   <name>9</name>
   <desc>Increase throttle or autopilot autothrottle.</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
    <property>/autopilot/control-overrides/throttle</property>
@@ -562,6 +571,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="77">
   <name>M</name>
   <desc>Mixture leaner.</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
    <script>controls.adjMixture(-1)</script>
@@ -609,6 +619,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="88">
   <name>X</name>
   <desc>Increase field of view.</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
    <script>view.increase()</script>
@@ -618,6 +629,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="90">
   <name>Z</name>
   <desc>Decrease Visibility</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>decrease-visibility</command>
   </binding>
@@ -774,6 +786,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="109">
   <name>m</name>
   <desc>Mixture richer.</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
    <script>controls.adjMixture(1)</script>
@@ -861,6 +874,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="120">
   <name>x</name>
   <desc>Decrease field of view.</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
    <script>view.decrease()</script>
@@ -870,6 +884,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="122">
   <name>z</name>
   <desc>Increase Visibility</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>increase-visibility</command>
   </binding>
@@ -957,6 +972,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="261">
   <name>F5</name>
+  <repeatable type="bool">true</repeatable>
   <mod-shift>
    <desc>Scroll panel down</desc>
    <binding>
@@ -970,6 +986,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="262">
   <name>F6</name>
   <desc>Toggle Autopilot Heading Mode</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
    <script>
@@ -991,6 +1008,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="263">
   <name>F7</name>
+  <repeatable type="bool">true</repeatable>
   <mod-shift>
    <desc>Scroll panel left</desc>
    <binding>
@@ -1004,6 +1022,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="264">
   <name>F8</name>
   <desc>Cycle fog type</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-cycle</command>
    <property>/sim/rendering/fog</property>
@@ -1058,6 +1077,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="269">
   <name>Enter</name>
   <desc>Move rudder right.</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
    <property>/controls/flight/rudder</property>
@@ -1077,6 +1097,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="356">
   <name>Left</name>
   <desc>Move aileron left (or adjust AP heading.)</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
    <script>
@@ -1096,6 +1117,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="357">
   <name>Up</name>
   <desc>Increase elevator or autopilot altitude.</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
    <script>
@@ -1115,6 +1137,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="358">
   <name>Right</name>
   <desc>Move aileron right (or adjust AP heading.)</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
    <script>
@@ -1135,6 +1158,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="359">
   <name>Down</name>
   <desc>Decrease elevator or autopilot altitude.</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
    <script>
@@ -1154,6 +1178,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="360">
   <name>PageUp</name>
   <desc>Increase throttle or autopilot autothrottle.</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
    <script>
@@ -1173,6 +1198,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="361">
   <name>PageDown</name>
   <desc>Decrease throttle or autopilot autothrottle.</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
    <script>
@@ -1192,6 +1218,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="362">
   <name>Home</name>
   <desc>Increase elevator trim.</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
    <property>/controls/flight/elevator-trim</property>
@@ -1210,6 +1237,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="363">
   <name>End</name>
   <desc>Decrease elevator trim.</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
    <property>/controls/flight/elevator-trim</property>
@@ -1228,6 +1256,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
  <key n="364">
   <name>Insert</name>
   <desc>Move rudder left.</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
    <property>/controls/flight/rudder</property>

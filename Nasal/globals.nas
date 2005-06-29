@@ -59,7 +59,7 @@ abs = func { if(arg[0] < 0) { -arg[0] } else { arg[0] } }
 interpolate = func {
     if(isa(arg[0], props.Node)) { arg[0] = arg[0]._g; }
     elsif(typeof(arg[0]) != "scalar") { return; }
-    _interpolate(arg[0], subvec(arg, 1));
+    _interpolate(arg[0], size(arg) == 1 ? [] : subvec(arg, 1));
 }
 
 ##

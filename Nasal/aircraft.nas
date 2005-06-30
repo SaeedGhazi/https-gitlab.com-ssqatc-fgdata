@@ -125,7 +125,7 @@ door = {
 	toggle  : func { me.move(me.target) },
 
 	# door.stop()          ->  stop movement
-	stop    : func { me.move(me.getpos()) },
+	stop    : func { interpolate(me.positionN) },
 
 	# door.move(double)    ->  move to arbitrary position
 	move    : func {

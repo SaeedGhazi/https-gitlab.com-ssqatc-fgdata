@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-  <!-- 
+  <!--
     x, y, z-offset-m   The distance in meters of the Fresnel Lens Optical Landing System
-                        (FLOLS) from the carrier model origin. 
+                        (FLOLS) from the carrier model origin.
 -->
-  <PropertyList> 
-    <scenario> 
-      <entry> 
+  <PropertyList>
+    <scenario>
+      <entry>
         <type>carrier</type>
         <name>Nimitz</name>
         <pennant-number>CVN-68</pennant-number>

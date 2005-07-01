@@ -47,7 +47,8 @@ to copy this file to your home directory, make your changes there, and include
 it from your personal preferences.xml file. You can use any number lower than
 1000 for n in <js-named n="0">. The lowest takes precedence in case of identical
 names. You can include such a preferences.xml file with the ~~config option,
-e.g. ~~config=$HOME/.fgfs/preferences.xml.
+e.g. ~~config=$HOME/.fgfs/preferences.xml, and you can put that ~~config line
+into your personal $HOME/.fgfsrc file.
 
 <?xml version="1.0"?>
 <PropertyList>
@@ -69,7 +70,7 @@ if they contain characters that interfere with the xml markup. This is the case
 if you are, for example, using < (lower than). Alternatively, you can 'escape'
 the character with "&lt;".
 
-Note that all nasal code shares a common namespace, so it's possible to set
+Also note that all nasal code shares a common namespace, so it's possible to set
 a variable in one nasal binding, and to read it in another.
 
 
@@ -220,7 +221,7 @@ ________________________________________________________________________________
 			<script>
 				m = get_mode();
 				if (m == 0) {
-					controls.stepFlaps(-1);
+					controls.flapsDown(-1);
 				} elsif (m == 1) {
 					controls.gearDown(-1);
 				} elsif (m == 2) {
@@ -236,7 +237,7 @@ ________________________________________________________________________________
 				<script>
 					m = get_mode();
 					if (m == 0) {
-						controls.stepFlaps(0);
+						controls.flapsDown(0);
 					} elsif (m == 1) {
 						controls.gearDown(0);
 					} elsif (m == 2) {
@@ -282,7 +283,7 @@ ________________________________________________________________________________
 			<script>
 				m = get_mode();
 				if (m == 0) {
-					controls.stepFlaps(1);
+					controls.flapsDown(1);
 				} elsif (m == 1) {
 					controls.gearDown(1);
 				} elsif (m == 2) {
@@ -298,7 +299,7 @@ ________________________________________________________________________________
 				<script>
 					m = get_mode();
 					if (m == 0) {
-						controls.stepFlaps(0);
+						controls.flapsDown(0);
 					} elsif (m == 1) {
 						controls.gearDown(0);
 					} elsif (m == 2) {

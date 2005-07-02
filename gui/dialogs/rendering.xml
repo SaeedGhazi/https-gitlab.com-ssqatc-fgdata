@@ -95,94 +95,96 @@
     </checkbox>
   </group>
 
-<group>
-  <padding>8</padding>
-  <layout>vbox</layout>
-  <hrule></hrule>
-  <text>
-    <padding>-6</padding>
-    <halign>left</halign>
-    <label>3D Clouds</label>
-    <color>
-        <red>0.5</red>
-        <green>0.5</green>
-        <blue>0.5</blue>
-    </color>
-  </text>
-  <group>
-    <layout>hbox</layout>
-    <halign>right</halign>
-    <text><label>Visibility range</label></text>
-    <slider>
-      <min>1000</min>
-      <max>50000</max>
+  <hrule><dummy/></hrule>
 
-      <property>/sim/rendering/clouds3d-vis-range</property>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-    </slider>
+  <group>
+    <padding>8</padding>
+    <layout>vbox</layout>
     <text>
-      <label>12345678</label>
-      <format>%.0f m</format>
-      <live>true</live>
-      <property>/sim/rendering/clouds3d-vis-range</property>
+      <padding>-6</padding>
+      <halign>left</halign>
+      <label>3D Clouds</label>
+      <color>
+          <red>0.5</red>
+          <green>0.5</green>
+          <blue>0.5</blue>
+      </color>
     </text>
+    <group>
+      <layout>hbox</layout>
+      <halign>right</halign>
+      <text><label>Visibility range</label></text>
+      <slider>
+        <min>1000</min>
+        <max>50000</max>
+
+        <property>/sim/rendering/clouds3d-vis-range</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </slider>
+      <text>
+        <label>12345678</label>
+        <format>%.0f m</format>
+        <live>true</live>
+        <property>/sim/rendering/clouds3d-vis-range</property>
+      </text>
+    </group>
+
+    <group>
+      <layout>hbox</layout>
+      <halign>right</halign>
+      <text><label>Cloud density</label></text>
+      <slider>
+        <min>0</min>
+        <max>100</max>
+
+        <property>/sim/rendering/clouds3d-density</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </slider>
+      <text>
+        <label>12345678</label>
+        <format>%.0f%%</format>
+        <live>true</live>
+        <property>/sim/rendering/clouds3d-density</property>
+      </text>
+    </group>
+
+    <group>
+      <layout>hbox</layout>
+      <halign>right</halign>
+      <text><label>Cache size in Kbytes</label></text>
+      <input>
+        <property>/sim/rendering/clouds3d-cache-size</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </input>
+    </group>
+
+    <group>
+      <layout>hbox</layout>
+      <halign>right</halign>
+      <text><label>Texture resolution</label></text>
+      <combo>
+        <property>/sim/rendering/clouds3d-cache-resolution</property>
+        <value>64</value>
+        <value>128</value>
+        <value>256</value>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </combo>
+    </group>
   </group>
 
-  <group>
-    <layout>hbox</layout>
-    <halign>right</halign>
-    <text><label>Cloud density</label></text>
-    <slider>
-      <min>0</min>
-      <max>100</max>
-
-      <property>/sim/rendering/clouds3d-density</property>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-    </slider>
-    <text>
-      <label>12345678</label>
-      <format>%.0f%%</format>
-      <live>true</live>
-      <property>/sim/rendering/clouds3d-density</property>
-    </text>
-  </group>
-
-  <group>
-    <layout>hbox</layout>
-    <halign>right</halign>
-    <text><label>Cache size in Kbytes</label></text>
-    <input>
-      <property>/sim/rendering/clouds3d-cache-size</property>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-    </input>
-  </group>
-
-  <group>
-    <layout>hbox</layout>
-    <halign>right</halign>
-    <text><label>Texture resolution</label></text>
-    <combo>
-      <property>/sim/rendering/clouds3d-cache-resolution</property>
-      <value>64</value>
-      <value>128</value>
-      <value>256</value>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-    </combo>
-  </group>
-</group>
+  <hrule><dummy/></hrule>
 
   <group>
     <padding>8</padding>
     <layout>hbox</layout>
-    <hrule></hrule>
     <group>
       <layout>vbox</layout>
       <valign>top</valign>

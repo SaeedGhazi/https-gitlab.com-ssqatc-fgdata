@@ -22,10 +22,10 @@
         <solid>Round-down</solid>
         <solid>Elevator-3-Deck</solid>
         <solid>Elevator-4-Deck</solid>
-        <latitude>37.63</latitude>
-        <longitude>-122.34</longitude>
+        <latitude>37.689</latitude>
+        <longitude>-122.683</longitude>
         <speed>10</speed>
-        <heading>285</heading>
+        <heading>180</heading>
         <rudder>0</rudder>
         <turn-radius-ft>3000</turn-radius-ft>
         <flols-pos>
@@ -34,9 +34,25 @@
           <z-offset-m>21.47</z-offset-m>
         </flols-pos>
         <parking-pos>
-          <x-offset-m>74.10</x-offset-m>
-          <y-offset-m>-31.84</y-offset-m>
-          <z-offset-m>21.47</z-offset-m>
+          <name>cat-2</name>
+          <heading-offset-deg>-1</heading-offset-deg>
+          <x-offset-m>5</x-offset-m>
+          <y-offset-m>26</y-offset-m>
+          <z-offset-m>-3.26</z-offset-m>
+        </parking-pos>
+        <parking-pos>
+          <name>cat-1</name>
+          <heading-offset-deg>-9</heading-offset-deg>
+          <x-offset-m>0.0401001</x-offset-m>
+          <y-offset-m>26</y-offset-m>
+          <z-offset-m>17</z-offset-m>
+        </parking-pos>
+        <parking-pos>
+          <name>park-1</name>
+          <heading-offset-deg>-90</heading-offset-deg>
+          <x-offset-m>54.33</x-offset-m>
+          <y-offset-m>26</y-offset-m>
+          <z-offset-m>20</z-offset-m>
         </parking-pos>
       </entry>
     </scenario>

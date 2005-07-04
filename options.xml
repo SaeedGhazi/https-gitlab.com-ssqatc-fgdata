@@ -493,7 +493,7 @@
 
    <option>
     <name>timeofday</name>
-    <arg>{dawn,noon,dusk,midnight}</arg>
+    <arg>{real,dawn,morning,noon,afternoon,dusk,evening,midnight}</arg>
     <description>strings/timeofday-desc</description>
    </option>
 

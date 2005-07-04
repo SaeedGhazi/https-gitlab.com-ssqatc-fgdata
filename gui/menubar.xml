@@ -6,14 +6,16 @@
   <item>
    <label>Save</label>
    <binding>
-    <command>old-save-dialog</command>
+    <command>dialog-show</command>
+    <dialog-name>save_flight</dialog-name>
    </binding>
   </item>
 
   <item>
    <label>Load</label>
    <binding>
-    <command>old-load-dialog</command>
+    <command>dialog-show</command>
+    <dialog-name>load_flight</dialog-name>
    </binding>
   </item>
 

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+ <name>save_flight</name>
+ <layout>vbox</layout>
+
+ <group>
+   <layout>hbox</layout>
+
+   <text><label>File Name:</label></text>
+   <input>
+     <halign>fill</halign>
+     <stretch>true</stretch>
+     <property>/tmp/flight/file</property>
+   </input>
+ </group>
+
+ <group>
+   <layout>hbox</layout>
+   <empty><stretch>true</stretch></empty>
+   <button>
+     <legend>OK</legend>
+     <equal>true</equal>
+     <binding><command>dialog-apply</command></binding>
+     <binding>
+      <command>nasal</command>
+      <script>
+       fgcommand("save", props.globals.getNode("/tmp/flight") );
+      </script>
+     </binding>
+     <binding><command>dialog-close</command></binding>
+   </button>
+   <empty><stretch>true</stretch></empty>
+   <button>
+     <legend>Cancel</legend>
+     <equal>true</equal>
+     <binding><command>dialog-close</command></binding>
+   </button>
+   <empty><stretch>true</stretch></empty>
+ </group>
+</PropertyList>

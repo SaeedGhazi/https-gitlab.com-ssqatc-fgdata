@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+ <name>pilot_offset</name>
+ <layout>vbox</layout>
+
+ <group>
+  <layout>hbox</layout>
+
+  <group>
+   <layout>vbox</layout>
+
+   <text><label>Left/Right</label></text>
+   <dial>
+    <wrap>false</wrap>
+    <min>-100</min>
+    <max>100</max>
+    <stretch>true</stretch>
+    <property>/sim/current-view/x-offset-m</property>
+    <binding><command>dialog-apply</command></binding>
+   </dial>
+ 
+   <text>
+    <label>-100.00</label>
+    <format>%-0.2f m</format>
+    <property>/sim/current-view/x-offset-m</property>
+   </text>
+  </group>
+ 
+  <group>
+   <layout>vbox</layout>
+
+   <text><label>Down/Up</label></text>
+   <dial>
+    <wrap>false</wrap>
+    <min>-100</min>
+    <max>100</max>
+    <stretch>true</stretch>
+    <property>/sim/current-view/y-offset-m</property>
+    <binding><command>dialog-apply</command></binding>
+   </dial>
+
+   <text>
+    <label>-100.00</label>
+    <format>%-0.2f m</format>
+    <property>/sim/current-view/y-offset-m</property>
+   </text>
+  </group>
+
+  <group>
+   <layout>vbox</layout>
+
+   <text><label>Fwd/Back</label></text>
+   <dial>
+    <wrap>false</wrap>
+    <min>-100</min>
+    <max>100</max>
+    <stretch>true</stretch>
+    <property>/sim/current-view/z-offset-m</property>
+    <binding><command>dialog-apply</command></binding>
+   </dial>
+
+   <text>
+    <label>-100.00</label>
+    <format>%-0.2f m</format>
+    <property>/sim/current-view/z-offset-m</property>
+   </text>
+  </group>
+ </group>
+
+ <group>
+   <layout>hbox</layout>
+   <empty><stretch>true</stretch></empty>
+   <button>
+     <legend>OK</legend>
+     <equal>true</equal>
+     <binding><command>dialog-apply</command></binding>
+     <binding><command>dialog-close</command></binding>
+   </button>
+   <empty><stretch>true</stretch></empty>
+ </group>
+</PropertyList>

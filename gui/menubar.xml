@@ -112,7 +112,8 @@
   <item>
    <label>Adjust View Distance</label>
    <binding>
-    <command>old-pilot-offset-dialog</command>
+    <command>dialog-show</command>
+    <dialog-name>pilot_offset</dialog-name>
    </binding>
   </item>
 

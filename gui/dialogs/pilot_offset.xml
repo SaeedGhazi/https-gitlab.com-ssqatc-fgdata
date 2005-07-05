@@ -23,6 +23,7 @@
    <text>
     <label>-100.00</label>
     <format>%-0.2f m</format>
+    <live>true</live>
     <property>/sim/current-view/x-offset-m</property>
    </text>
   </group>
@@ -43,6 +44,7 @@
    <text>
     <label>-100.00</label>
     <format>%-0.2f m</format>
+    <live>true</live>
     <property>/sim/current-view/y-offset-m</property>
    </text>
   </group>
@@ -63,6 +65,7 @@
    <text>
     <label>-100.00</label>
     <format>%-0.2f m</format>
+    <live>true</live>
     <property>/sim/current-view/z-offset-m</property>
    </text>
   </group>

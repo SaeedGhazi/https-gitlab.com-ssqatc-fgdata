@@ -239,6 +239,7 @@ information.</p>
 <li><a href="#material">material</a></li>
 <li><a href="#range">range</a></li>
 <li><a href="#alphatest">alpha-test</a></li>
+<li><a href="#noshadow">noshadow</a></li>
 </ol>
 
 <p>Typically you will use combinations of rotate, spin, and translate
@@ -902,6 +903,19 @@ display explains the format clearly:</p>
 &lt;/animation&gt;
   </pre>
  </blockquote>
+
+ <h3><a name="noshadow">"noshadow" animation type</a></h3>
+ <p>This "animation" prevents the shadow casting code to include this object,
+  which might be handy when it doesn't cast a shadow (exhaust flame) or when
+  it looks ugly.</p>
+  <blockquote>
+   <pre>&lt;animation&gt;
+ &lt;type&gt;noshadow&lt;/type&gt;
+ &lt;object-name&gt;Wires.1&lt;/object-name&gt;
+ &lt;object-name&gt;Wires.2&lt;/object-name&gt;
+&lt;/animation&gt;
+   </pre>
+  </blockquote>
 
 <h3><a name="material">"material" animation type</a></h3>
 <p>This "animation" can set any of the material properties on a model branch, including

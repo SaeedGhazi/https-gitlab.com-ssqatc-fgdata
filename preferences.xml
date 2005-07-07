@@ -281,6 +281,8 @@ Started September 2000 by David Megginson, david@megginson.com
    <default include="gui/menubar.xml"/>
   </menubar>
 
+  <gui include="gui/style.xml"/>
+
   <mouse>
     <hide-cursor>true</hide-cursor>
     <cursor-timeout-sec>10.0</cursor-timeout-sec>

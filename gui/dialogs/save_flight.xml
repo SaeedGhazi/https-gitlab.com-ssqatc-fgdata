@@ -21,6 +21,7 @@
    <button>
      <legend>OK</legend>
      <equal>true</equal>
+     <default>true</default>
      <binding><command>dialog-apply</command></binding>
      <binding>
       <command>nasal</command>

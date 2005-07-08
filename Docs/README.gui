@@ -437,8 +437,8 @@ GLOBAL SETTINGS ("THEMES")
 --------------------------
 
 FlightGear reads GUI (Graphical User Interface) style information
-from /sim/gui/, which is by default defined in file $FG_ROOT/gui/style.xml.
-This file contains <font> and <colors>:
+from /sim/gui/, which is by default loaded from file $FG_ROOT/gui/style.xml.
+This file contains one <font> and one <colors> group:
 
 
 global font settings
@@ -516,9 +516,10 @@ if, for example, a button is to be drawn:
   a. read the hard-coded default "background" color from (0) as base
   b. merge the global "background" color from (2) in (if defined)
   c. merge a global color "button-background" from (3) in (if defined)
-  d. merge a specific <color> from the dialog XML file in (if defined)
+  d. merge a specific <color> from the dialog's XML file in (if defined)
 
-  Repeat the four steps for the button's "foreground", "highlight", etc.
+  Repeat the four steps for the button's "foreground", "highlight",
+  etc. color.
 
 
 
@@ -535,10 +536,12 @@ from (2):
          <blue type="float">0.0</blue>
          <alpha type="float">1.0</alpha>
        </background>
+
+       <foreground>
        ...
 
 This makes all dialogs dark red. But you don't, for example, want buttons
-to be red, but yellow. So you define a color for buttons:
+to be red, but yellow. So you define another color for buttons:
 
        <button>
          <red type="float">1.0</red>
@@ -552,17 +555,18 @@ This sets all of a button's six colors (2) to some shades of red. plib
 does this automatically. The lower and right border ("foreground") will
 be darker, the upper and left border will be lighter ("highlight").
 If you aren't happy with plib's choice, you can set each of the colors
-explicitly. Let's say, we want the text on the button pink (3):
+explicitly. Let's say, we want the text on the button blue (3):
 
        <button-legend>
-         <red type="float">1.0</red>
-         <green type="float">0.9</green>
-         <blue type="float">0.0</blue>
+         <red type="float">0.3</red>
+         <green type="float">0.3</green>
+         <blue type="float">1.0</blue>
          <alpha type="float">1.0</alpha>
        </button-legend>
        ...
 
-To set the cursor color from input fields, you'd set "input-misc".
+To set the cursor color from input fields, you'd define "input-misc",
+etc.
 
 
 You can change colors and font at runtime. Just open the property

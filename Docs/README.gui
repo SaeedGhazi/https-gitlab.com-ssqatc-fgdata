@@ -403,7 +403,7 @@ property tree, like:
     <y>100</y>
 
     <!-- dimensions -->
-    <width>200</width> 
+    <width>200</width>
     <height>400</height>
 
     <property>/gui/path-to-text-node/contents</property>
@@ -412,22 +412,175 @@ property tree, like:
     <wrap>false</wrap> <!-- don't wrap text; default: true -->
 
     <editable>true</editable> <!-- whether the puLargeInput is supposed to be editable -->
-</textbox>  
+</textbox>
 
 
-hrule
------
+hrule/vrule
+-----------
 
-Draws a horizontal line. Accepts color and thickness (<pref-height>):
+Draws a horizontal/vertical line that, by default, expands to full width/height.
+Its thickness can be set with <pref-height>/<pref-width>.
 
   <hrule>
     <color>
-     <red>1.0</red>
-     <green>0.0</green>
-     <blue>0.0</blue>
+      <red>1.0</red>
+      <green>0.0</green>
+      <blue>0.0</blue>
     </color>
     <pref-height>2</pref-height>
-   </hrule>
+  </hrule>
+
+
+
+
+GLOBAL SETTINGS ("THEMES")
+--------------------------
+
+FlightGear reads GUI (Graphical User Interface) style information
+from /sim/gui/, which is by default defined in file $FG_ROOT/gui/style.xml.
+This file contains <font> and <colors>:
+
+
+global font settings
+--------------------
+
+  <sim>
+    <gui>
+      <font>
+        <name type="string">Helvetica.txf</name>
+        <size type="float">15</size>
+        <slant type="float">0</slant>
+      </font>
+    </gui>
+  <sim>
+
+<name> can either be a built-in bitmap font name (one of: "FIXED_8x13",
+"FIXED_9x15", "TIMES_10", "TIMES_24", "HELVETICA_10", "HELVETICA_12",
+"HELVETICA_14", "HELVETICA_18", "SANS_12B"), or the name of a texture
+font in $FG_FONT, which is by default set to $FG_ROOT/Fonts/. <size>
+and <slant> are only applied to texture fonts, and otherwise ignored.
+
+
+global color settings
+---------------------
+
+These define the color of the splash screen font, and the color of the
+GUI elements. All colors are in /sim/gui/colors and follow the same
+pattern:
+
+  <sim>
+    <gui>
+      <colors>
+        <!-- splash screen font color; ignores <alpha> value -->
+        <splash>
+          <red type="float">1.0</red>
+          <green type="float">0.9</green>
+          <blue type="float">0.0</blue>
+        </splash>
+      </colors>
+    </gui>
+  </sim>
+
+
+
+As listed above, FlightGear implements several GUI elements:
+
+(1)    "dialog"      "group"         "frame"       "hrule"      "vrule"
+       "list"        "airport-list"  "input"       "text"       "checkbox"
+       "radio"       "button"        "combo"       "slider"     "dial"
+       "textbox"     "select"
+
+
+The underlying plib library uses six colors for each GUI element.
+These are:
+
+(2)    "background"  "foreground"    "highlight"
+       "label"       "legend"        "misc"
+
+
+"button", for example, uses the first four colors from (2), while it
+ignores "legend" and "misc" color. "text" only uses "label", and ignores
+the rest. In some cases the use of colors isn't obvious and you have to
+try or look up the plib sources to be sure. GUI colors can be defined
+for each of the categories from (1) and (2), and for combinations of
+them:
+
+(3)    "button-legend"   "input-misc"    etc.
+
+
+FlightGear has default colors for (2) built-in. Let's call them (0).
+And this is how colors for individual GUI elements are determined,
+if, for example, a button is to be drawn:
+
+  For the button's background:
+  a. read the hard-coded default "background" color from (0) as base
+  b. merge the global "background" color from (2) in (if defined)
+  c. merge a global color "button-background" from (3) in (if defined)
+  d. merge a specific <color> from the dialog XML file in (if defined)
+
+  Repeat the four steps for the button's "foreground", "highlight", etc.
+
+
+
+
+If you write a style file, you'll most likely start with the colors
+from (2):
+
+ <sim>
+   <gui>
+     <colors>
+       <background>
+         <red type="float">0.6</red>
+         <green type="float">0.0</green>
+         <blue type="float">0.0</blue>
+         <alpha type="float">1.0</alpha>
+       </background>
+       ...
+
+This makes all dialogs dark red. But you don't, for example, want buttons
+to be red, but yellow. So you define a color for buttons:
+
+       <button>
+         <red type="float">1.0</red>
+         <green type="float">0.9</green>
+         <blue type="float">0.0</blue>
+         <alpha type="float">1.0</alpha>
+       </button>
+       ...
+
+This sets all of a button's six colors (2) to some shades of red. plib
+does this automatically. The lower and right border ("foreground") will
+be darker, the upper and left border will be lighter ("highlight").
+If you aren't happy with plib's choice, you can set each of the colors
+explicitly. Let's say, we want the text on the button pink (3):
+
+       <button-legend>
+         <red type="float">1.0</red>
+         <green type="float">0.9</green>
+         <blue type="float">0.0</blue>
+         <alpha type="float">1.0</alpha>
+       </button-legend>
+       ...
+
+To set the cursor color from input fields, you'd set "input-misc".
+
+
+You can change colors and font at runtime. Just open the property
+browser, go to /sim/gui/colors and change whatever you like. The
+new color will only take effect, though, if you re-init the GUI.
+There's a menu entry for that, and you can define a key binding
+for it:
+
+  <key n="99">
+    <name>c</name>
+    <desc>Re-init GUI</desc>
+    <binding>
+      <command>reinit</command>
+      <subsystem>gui</subsystem>
+    </binding>
+  </key>
+
+Note that this will currently close all open dialogs!
 
 
 __end__

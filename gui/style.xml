@@ -60,10 +60,6 @@
 		</misc>
 
 		<!-- GUI object specific colors -->
-		<dialog-background>
-			<alpha type="float">0.4</alpha>
-		</dialog-background>
-
 		<hrule>
 			<red type="float">0.0</red>
 			<green type="float">0.0</green>
@@ -78,77 +74,61 @@
 			<alpha type="float">1.0</alpha>
 		</vrule>
 
-		<checkbox-foreground>		<!-- box area -->
+		<checkbox-foreground>
 			<red type="float">0.8</red>
 			<green type="float">0.7</green>
 			<blue type="float">0.7</blue>
+			<alpha type="float">1.0</alpha>
 		</checkbox-foreground>
 
 		<checkbox-highlight>		<!-- box frame -->
 			<red type="float">1</red>
 			<green type="float">0.9</green>
 			<blue type="float">0.9</blue>
+			<alpha type="float">1.0</alpha>
 		</checkbox-highlight>
 
-		<radio-foreground>		<!-- box area -->
+		<radio-foreground>
 			<red type="float">0.8</red>
 			<green type="float">0.7</green>
 			<blue type="float">0.7</blue>
+			<alpha type="float">1.0</alpha>
 		</radio-foreground>
 
-		<radio-highlight>		<!-- box frame -->
+		<radio-highlight>
 			<red type="float">1</red>
 			<green type="float">0.9</green>
 			<blue type="float">0.9</blue>
+			<alpha type="float">1.0</alpha>
 		</radio-highlight>
 
-		<input-background>		<!-- dark frame -->
+		<input-background>
 			<red type="float">0.4</red>
 			<green type="float">0.3</green>
 			<blue type="float">0.3</blue>
+			<alpha type="float">1.0</alpha>
 		</input-background>
 
-		<input-foreground>		<!-- area -->
+		<input-foreground>
 			<red type="float">0.8</red>
 			<green type="float">0.7</green>
 			<blue type="float">0.7</blue>
+			<alpha type="float">1.0</alpha>
 		</input-foreground>
 
-		<input-highlight>		<!-- light frame -->
+		<input-highlight>
 			<red type="float">1.0</red>
 			<green type="float">0.9</green>
 			<blue type="float">0.9</blue>
+			<alpha type="float">1.0</alpha>
 		</input-highlight>
 
 		<input-misc>			<!-- cursor -->
 			<red type="float">0.1</red>
 			<green type="float">0.1</green>
 			<blue type="float">1.0</blue>
+			<alpha type="float">1.0</alpha>
 		</input-misc>
-
-		<combo-background>		<!-- dark frame -->
-			<red type="float">0.4</red>
-			<green type="float">0.3</green>
-			<blue type="float">0.3</blue>
-		</combo-background>
-
-		<combo-foreground>		<!-- area -->
-			<red type="float">0.8</red>
-			<green type="float">0.7</green>
-			<blue type="float">0.7</blue>
-		</combo-foreground>
-
-		<combo-highlight>		<!-- light frame -->
-			<red type="float">1.0</red>
-			<green type="float">0.9</green>
-			<blue type="float">0.9</blue>
-		</combo-highlight>
-
-		<combo-misc>			<!-- cursor -->
-			<red type="float">0.1</red>
-			<green type="float">0.1</green>
-			<blue type="float">1.0</blue>
-		</combo-misc>
 
 		<!-- splash screen font color -->
 		<splash>

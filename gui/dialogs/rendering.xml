@@ -6,8 +6,10 @@
   <layout>vbox</layout>
 
   <text>
-    <label>___________Rendering Options___________</label>
+    <label>Rendering Options</label>
   </text>
+
+  <hrule><dummy/></hrule>
 
   <group>
     <layout>vbox</layout>
@@ -227,7 +229,7 @@
      </checkbox>
      <checkbox>
       <halign>left</halign>
-      <label>Silouhette (debug)</label>
+      <label>Silhouette (debug)</label>
       <property>/sim/rendering/shadows-debug</property>
       <binding>
         <command>dialog-apply</command>
@@ -242,13 +244,13 @@
 
     <button>
       <legend>Close</legend>
+      <default>true</default>
       <binding>
         <command>dialog-apply</command>
       </binding>
       <binding>
         <command>dialog-close</command>
       </binding>
-      <default>true</default>
     </button>
 
     <empty><stretch>true</stretch></empty>

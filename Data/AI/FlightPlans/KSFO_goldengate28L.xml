@@ -89,7 +89,7 @@
    <lon>-122.35834</lon>
    <crossat>13.0</crossat>
    <ktas>20</ktas>
-   <on-ground>true</onground>
+   <on-ground>true</on-ground>
   </wpt>
 
   <wpt>

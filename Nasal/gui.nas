@@ -90,6 +90,23 @@ Widget = {
 };
 
 
+
+########################################################################
+# GUI theming
+########################################################################
+
+nextStyle = func {
+	numStyles = size(props.globals.getNode("/sim").getChildren("gui"));
+	curr = getprop("/sim/current-gui") + 1;
+	if (curr >= numStyles) {
+		curr = 0;
+	}
+	setprop("/sim/current-gui", curr);
+	fgcommand("reinit", props.Node.new({ "subsystem" : "gui"}))
+}
+
+
+
 ########################################################################
 # Dialog Boxes
 ########################################################################

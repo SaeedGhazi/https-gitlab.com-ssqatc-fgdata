@@ -328,7 +328,7 @@ showHelpDialog = func {
     titlebar = dialog[name].addChild("group");
     titlebar.set("layout", "hbox");
     titlebar.addChild("empty").set("stretch", 1);
-    titlebar.addChild("text").set("label", "____________" ~ name ~ "____________");
+    titlebar.addChild("text").set("label", name);
     titlebar.addChild("empty").set("stretch", 1);
 
     w = titlebar.addChild("button");
@@ -339,6 +339,9 @@ showHelpDialog = func {
     w.prop().getNode("binding[0]/command", 1).setValue("nasal");
     w.prop().getNode("binding[0]/script", 1).setValue("delete(gui.dialog, \"" ~ name ~ "\")");
     w.prop().getNode("binding[1]/command", 1).setValue("dialog-close");
+
+    w = dialog[name].addChild("hrule");
+    w.addChild("empty");
 
     # key list
     keylist = dialog[name].addChild("group");
@@ -419,7 +422,7 @@ debug_keys = {
         { name : "F9",        desc : "toggle textures" },
         { name : "Shift-F3",  desc : "load panel" },
         { name : "Shift-F4",  desc : "reload global preferences" },
-        { name : "Shift-F10", desc : "toggle FDM data logging" },
+        { name : "Shift-F9",  desc : "toggle FDM data logging" },
     ],
 };
 
@@ -448,6 +451,7 @@ basic_keys = {
         { name : "F3",        desc : "capture screen" },
         { name : "F10",       desc : "toggle menubar" },
         { name : "Shift-F2",  desc : "save flight" },
+        { name : "Shift-F10", desc : "cycle through GUI styles" },
     ],
 };
 

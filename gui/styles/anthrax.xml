@@ -22,9 +22,9 @@
 		</background>
 
 		<label>
-			<red type="float">0.8</red>
-			<green type="float">0.8</green>
-			<blue type="float">0.8</blue>
+			<red type="float">0.9</red>
+			<green type="float">0.9</green>
+			<blue type="float">0.9</blue>
 			<alpha type="float">1.0</alpha>
 		</label>
 

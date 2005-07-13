@@ -1047,6 +1047,13 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <command>property-toggle</command>
    <property>/sim/rendering/textures</property>
   </binding>
+  <mod-shift>
+   <desc>Toggle FDM data logging.</desc>
+   <binding>
+    <command>property-toggle</command>
+    <property>/sim/temp/fdm-data-logging</property>
+   </binding>
+  </mod-shift>
  </key>
 
  <key n="266">
@@ -1057,10 +1064,10 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <property>/sim/menubar/visibility</property>
   </binding>
   <mod-shift>
-   <desc>Toggle FDM data logging.</desc>
+   <desc>Switch to next GUI style.</desc>
    <binding>
-    <command>property-toggle</command>
-    <property>/sim/temp/fdm-data-logging</property>
+    <command>nasal</command>
+    <script>gui.nextStyle()</script>
    </binding>
   </mod-shift>
  </key>

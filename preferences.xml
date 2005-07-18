@@ -51,6 +51,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <distance-attenuation type="bool">false</distance-attenuation>
    <draw-otw type="bool">true</draw-otw>
    <shadows-ac type="bool">false</shadows-ac>
+   <shadows-ac-transp type="bool">false</shadows-ac-transp>
    <shadows-ai type="bool">false</shadows-ai>
    <shadows-to type="bool">false</shadows-to>
    <shadows-debug type="bool">false</shadows-debug>

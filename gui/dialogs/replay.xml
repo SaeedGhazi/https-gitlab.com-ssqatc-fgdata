@@ -7,6 +7,7 @@
   <text>
     <label>Instant Replay</label>
   </text>
+  <hrule><dummy/></hrule>
 
   <group>
     <layout>table</layout>
@@ -56,8 +57,15 @@
       <text><label>1 - Chase view</label><halign>left</halign></text>
       <text><label>4 - Tower view</label><halign>left</halign></text>
     </group>
-    <text><label>Use v/shift-v to change views during replay, and</label></text>
+    <text><label>Use v/shift-v to change views during replay, and  </label></text>
     <text><label>ctrl-v to return to cockpit view following replay.</label></text>
+    <checkbox>
+      <label>Disable replay</label>
+      <property>/sim/replay/disable</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
     <text><label></label></text> <!-- empty line -->
   </group>
 

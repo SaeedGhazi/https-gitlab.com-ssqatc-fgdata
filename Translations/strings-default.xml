@@ -149,6 +149,8 @@
  <!-- Position and Orientation options -->
  <position-options>Initial Position and Orientation</position-options>
  <airport-desc>Specify starting position relative to an airport</airport-desc>
+ <carrier-desc>Specify starting position on an AI carrier</carrier-desc>
+ <parkpos-desc>Specify which starting position on an AI carrier (must also specify a carrier)</parkpos-desc>
  <vor-desc>Specify starting position relative to a VOR</vor-desc>
  <ndb-desc>Specify starting position relative to an NDB</ndb-desc>
  <fix-desc>Specify starting position relative to a fix</fix-desc>

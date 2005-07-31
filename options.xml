@@ -554,6 +554,20 @@
    </option>
 
    <option>
+    <name>carrier</name>
+    <arg>[name|ID]</arg>
+    <description>strings/carrier-desc</description>
+    <brief/>
+   </option>
+
+   <option>
+    <name>parkpos</name>
+    <arg>name</arg>
+    <description>strings/parkpos-desc</description>
+    <brief/>
+   </option>
+
+   <option>
     <name>vor</name>
     <arg>ID</arg>
     <description>strings/vor-desc</description>

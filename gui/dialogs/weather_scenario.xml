@@ -24,6 +24,7 @@
       <value>Fair weather</value>
       <value>Thunderstorm</value>
       <value>METAR</value>
+      <value>none</value>
       <binding>
         <command>dialog-apply</command>
       </binding>

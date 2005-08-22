@@ -42,6 +42,7 @@ axis 5: 	(hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 <PropertyList>
 
 <name>Saitek Cyborg USB Stick</name>
+<name>Saitek Cyborg Evo</name>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~ Axis Bindings ~~~~~~~~~~~~~~~~~~~~~~~~ -->
 

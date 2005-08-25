@@ -358,6 +358,7 @@ Started September 2000 by David Megginson, david@megginson.com
  <!-- Environment -->
 
  <environment>
+  <weather-scenario>Fair weather</weather-scenario>
   <config>
 
    <boundary-transition-ft>500</boundary-transition-ft>

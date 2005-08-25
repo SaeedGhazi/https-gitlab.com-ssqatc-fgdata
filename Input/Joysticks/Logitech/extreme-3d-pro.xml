@@ -27,6 +27,8 @@ $Id$
 
  <name>Logitech Extreme Digital 3D Pro</name>
  <name>Logitech Logitech Extreme 3D Pro</name>
+ <name>Logitech Extreme 3D Pro</name>
+ <name>Logitech Extreme 3D Pro USB</name>
 
  <axis n="0">
   <desc>Aileron</desc>
@@ -47,8 +49,12 @@ $Id$
   </binding>
  </axis>
 
- <axis n="2">
+ <axis>
   <desc>Rudder</desc>
+  <number>
+   <unix>2</unix>
+   <windows>3</windows>
+  </number>
   <binding>
    <command>property-scale</command>
    <property>/controls/flight/rudder</property>
@@ -56,16 +62,24 @@ $Id$
   </binding>
  </axis>
 
- <axis n="3">
+ <axis>
   <desc>Throttle</desc>
+  <number>
+   <unix>3</unix>
+   <windows>2</windows>
+  </number>
   <binding>
    <command>nasal</command>
    <script>controls.throttleAxis()</script>
   </binding>
  </axis>
 
- <axis n="4">
+ <axis>
   <desc>View Direction</desc>
+  <number>
+   <unix>4</unix>
+   <windows>6</windows>
+  </number>
   <low>
    <repeatable>true</repeatable>
    <binding>
@@ -84,8 +98,12 @@ $Id$
   </high>
  </axis>
 
- <axis n="5">
+ <axis>
   <desc>View Elevation</desc>
+  <number>
+   <unix>5</unix>
+   <windows>7</windows>
+  </number>
   <low>
    <repeatable>true</repeatable>
    <binding>

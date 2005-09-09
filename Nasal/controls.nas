@@ -328,5 +328,5 @@ gearDown = func {
       setprop("/controls/gear/gear-down", 1);
     }
 }
-gearToggle = func { gearDown(getprop("/controls/gear/gear-down") > 0 ? 0 : 1); }
+gearToggle = func { gearDown(getprop("/controls/gear/gear-down") > 0 ? -1 : 1); }
 

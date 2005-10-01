@@ -4,19 +4,19 @@
 
  <name>radios</name>
  <width>600</width>
- <height>300</height>
+ <height>330</height>
  <modal>false</modal>
 
  <text>
   <x>10</x>
-  <y>270</y>
+  <y>300</y>
   <label>Radio Frequencies</label>
  </text>
 
  <!-- headers -->
  <group>
   <x>0</x>
-  <y>240</y>
+  <y>280</y>
   <text>
    <x>75</x>
    <label>Selected</label>
@@ -33,7 +33,7 @@
 
  <group>
   <x>0</x>
-  <y>210</y>
+  <y>240</y>
 
   <text>
    <label>COM1</label>
@@ -93,7 +93,7 @@
 
  <group>
   <x>0</x>
-  <y>180</y>
+  <y>210</y>
 
   <text>
    <label>COM2</label>
@@ -153,7 +153,7 @@
 
  <group>
   <x>0</x>
-  <y>150</y>
+  <y>180</y>
 
   <text>
    <label>NAV1</label>
@@ -223,7 +223,7 @@
 
  <group>
   <x>0</x>
-  <y>120</y>
+  <y>150</y>
 
   <text>
    <label>NAV2</label>
@@ -293,7 +293,7 @@
 
  <group>
   <x>0</x>
-  <y>90</y>
+  <y>120</y>
 
   <text>
    <label>ADF</label>
@@ -363,7 +363,7 @@
 
  <group>
   <x>0</x>
-  <y>60</y>
+  <y>90</y>
 
   <text>
    <label>DME</label>
@@ -380,6 +380,82 @@
   </input>
 
  </group>
+
+ <group>
+  <x>0</x>
+  <y>60</y>
+
+  <text>
+   <label>TACAN</label>
+  </text>
+
+  <combo>
+   <x>75</x>
+   <y>0</y>
+   <width>45</width>
+   <height>25</height>
+   <property>/instrumentation/tacan/frequencies/selected-channel[1]</property>
+   <value>0</value>
+   <value>1</value>
+   <value>2</value>
+   <value>3</value>
+   <value>4</value>
+   <value>5</value>
+   <value>6</value>
+   <value>7</value>
+   <value>8</value>
+   <value>9</value>
+  </combo>
+<!---->
+  <combo>
+   <x>120</x>
+   <y>0</y>
+   <width>45</width>
+   <height>25</height>
+   <property>/instrumentation/tacan/frequencies/selected-channel[2]</property>
+   <value>0</value>
+   <value>1</value>
+   <value>2</value>
+   <value>3</value>
+   <value>4</value>
+   <value>5</value>
+   <value>6</value>
+   <value>7</value>
+   <value>8</value>
+   <value>9</value>
+  </combo>
+
+  <combo>
+   <x>165</x>
+   <y>0</y>
+   <width>45</width>
+   <height>25</height>
+   <property>/instrumentation/tacan/frequencies/selected-channel[3]</property>
+   <value>0</value>
+   <value>1</value>
+   <value>2</value>
+   <value>3</value>
+   <value>4</value>
+   <value>5</value>
+   <value>6</value>
+   <value>7</value>
+   <value>8</value>
+   <value>9</value>
+  </combo>
+
+  <combo>
+   <x>210</x>
+   <y>0</y>
+   <width>47</width>
+   <height>25</height>
+   <property>/instrumentation/tacan/frequencies/selected-channel[4]</property>
+   <value>X</value>
+   <value>Y</value>
+  </combo>
+
+  
+ </group>
+ 
 
  <group>
 

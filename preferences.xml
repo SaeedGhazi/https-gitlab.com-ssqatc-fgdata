@@ -744,6 +744,10 @@ Started September 2000 by David Megginson, david@megginson.com
    </outputs>
   </kr-87>
 
+  <tacan n="0">
+    <serviceable type="bool" archive="y">true</serviceable>
+    <switch-position type="int" archive="y">1</switch-position>
+  </tacan>
  </instrumentation>
 
  <systems>

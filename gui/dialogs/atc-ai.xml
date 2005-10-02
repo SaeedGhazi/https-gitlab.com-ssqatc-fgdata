@@ -6,18 +6,18 @@
 
  <name>atc-ai</name>
  <width>300</width>
- <height>240</height>
+ <height>300</height>
  <modal>false</modal>
 
  <text>
   <x>80</x>
-  <y>200</y>
+  <y>240</y>
   <label>ATC/AI Options</label>
  </text>
 
  <checkbox>
   <x>30</x>
-  <y>160</y>
+  <y>210</y>
   <width>20</width>
   <height>20</height>
   <label>Enable ATC</label>
@@ -26,30 +26,45 @@
 
  <checkbox>
   <x>30</x>
-  <y>130</y>
+  <y>180</y>
   <width>20</width>
   <height>20</height>
   <label>Enable AI traffic</label>
   <property>/sim/ai-traffic/enabled</property>
  </checkbox>
 
-  <text>
-   <x>30</x>
-   <y>100</y>
-   <label>AI traffic density:</label>
-  </text>
+ <text>
+  <x>30</x>
+  <y>150</y>
+  <label>AI traffic density:</label>
+ </text>
 
-  <combo>
-   <x>30</x>
-   <y>80</y>
-   <width>200</width>
-   <height>25</height>
-   <property>/sim/ai-traffic/level</property>
-   <value>1</value>
-   <value>2</value>
-   <value>3</value>
-  </combo>
- 
+ <combo>
+  <x>30</x>
+  <y>120</y>
+  <width>200</width>
+  <height>25</height>
+  <property>/sim/ai-traffic/level</property>
+  <value>1</value>
+  <value>2</value>
+  <value>3</value>
+ </combo>
+
+ <text>
+  <x>30</x>
+  <y>90</y>
+  <label>AI Carrier:</label>
+ </text>
+
+ <checkbox>
+  <x>30</x>
+  <y>60</y>
+  <width>20</width>
+  <height>20</height>
+  <label>Carrier Launch Heading</label>
+  <property>/ai/models/carrier/controls/turn-to-launch-hdg[0]</property>
+ </checkbox>
+
  <group>
   <y>10</y>
 
@@ -57,19 +72,21 @@
    <x>10</x>
    <y>0</y>
    <legend>OK</legend>
+   <default>true</default>
+   <equal>true</equal>
    <binding>
     <command>dialog-apply</command>
    </binding>
    <binding>
     <command>dialog-close</command>
    </binding>
-   <default>true</default>
   </button>
 
   <button>
    <x>60</x>
    <y>0</y>
    <legend>Apply</legend>
+   <equal>true</equal>
    <binding>
     <command>dialog-apply</command>
    </binding>
@@ -79,6 +96,7 @@
    <x>140</x>
    <y>0</y>
    <legend>Reset</legend>
+   <equal>true</equal>
    <binding>
     <command>dialog-update</command>
    </binding>
@@ -88,11 +106,12 @@
    <x>220</x>
    <y>0</y>
    <legend>Cancel</legend>
+   <equal>true</equal>
    <binding>
     <command>dialog-close</command>
    </binding>
   </button>
 
  </group>
- 
+
 </PropertyList>

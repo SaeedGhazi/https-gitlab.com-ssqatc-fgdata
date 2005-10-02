@@ -1,76 +1,100 @@
 <?xml version="1.0"?>
 
+<!-- General ATC/AI options -->
+
 <PropertyList>
-
- <!-- General ATC/AI options -->
-
  <name>atc-ai</name>
- <width>300</width>
- <height>300</height>
  <modal>false</modal>
+ <layout>vbox</layout>
 
  <text>
-  <x>80</x>
-  <y>240</y>
   <label>ATC/AI Options</label>
  </text>
 
- <checkbox>
-  <x>30</x>
-  <y>210</y>
-  <width>20</width>
-  <height>20</height>
-  <label>Enable ATC</label>
-  <property>/sim/atc/enabled</property>
- </checkbox>
-
- <checkbox>
-  <x>30</x>
-  <y>180</y>
-  <width>20</width>
-  <height>20</height>
-  <label>Enable AI traffic</label>
-  <property>/sim/ai-traffic/enabled</property>
- </checkbox>
-
- <text>
-  <x>30</x>
-  <y>150</y>
-  <label>AI traffic density:</label>
- </text>
-
- <combo>
-  <x>30</x>
-  <y>120</y>
-  <width>200</width>
-  <height>25</height>
-  <property>/sim/ai-traffic/level</property>
-  <value>1</value>
-  <value>2</value>
-  <value>3</value>
- </combo>
-
- <text>
-  <x>30</x>
-  <y>90</y>
-  <label>AI Carrier:</label>
- </text>
-
- <checkbox>
-  <x>30</x>
-  <y>60</y>
-  <width>20</width>
-  <height>20</height>
-  <label>Carrier Launch Heading</label>
-  <property>/ai/models/carrier/controls/turn-to-launch-hdg[0]</property>
- </checkbox>
+ <hrule><dummy/></hrule>
 
  <group>
-  <y>10</y>
+  <layout>hbox</layout>
+  <empty>
+    <pref-width>10</pref-width>
+  </empty>
+
+  <group>
+   <layout>vbox</layout>
+
+   <checkbox>
+    <halign>left</halign>
+    <label>Enable ATC</label>
+    <property>/sim/atc/enabled</property>
+   </checkbox>
+
+   <checkbox>
+    <halign>left</halign>
+    <label>Enable AI traffic</label>
+    <property>/sim/ai-traffic/enabled</property>
+   </checkbox>
+
+   <group>
+    <layout>hbox</layout>
+
+    <text>
+     <halign>left</halign>
+     <label>AI traffic density:</label>
+    </text>
+
+    <combo>
+     <halign>left</halign>
+     <property>/sim/ai-traffic/level</property>
+     <value>1</value>
+     <value>2</value>
+     <value>3</value>
+    </combo>
+   </group>
+
+  </group>
+
+  <empty><stretch>true</stretch></empty>
+ </group>
+
+ <hrule><dummy/></hrule>
+
+ <text>
+  <halign>left</halign>
+  <label>AI Carrier:</label>
+  <color>
+   <red>0.5</red>
+   <green>0.5</green>
+   <blue>0.5</blue>
+   <alpha>1</alpha>
+  </color>
+ </text>
+
+ <group>
+  <layout>hbox</layout>
+  <empty>
+    <pref-width>10</pref-width>
+  </empty>
+
+  <group>
+   <layout>vbox</layout>
+
+   <checkbox>
+    <halign>left</halign>
+    <label>Turn into wind</label>
+    <property>/ai/models/carrier/controls/turn-to-launch-hdg[0]</property>
+   </checkbox>
+
+  </group>
+
+  <empty><stretch>true</stretch></empty>
+ </group>
+
+ <group>
+  <layout>hbox</layout>
+  <default-padding>6</default-padding>
+  <empty><stretch>true</stretch></empty>
 
   <button>
-   <x>10</x>
-   <y>0</y>
    <legend>OK</legend>
    <default>true</default>
    <equal>true</equal>
@@ -83,8 +107,6 @@
   </button>
 
   <button>
-   <x>60</x>
-   <y>0</y>
    <legend>Apply</legend>
    <equal>true</equal>
    <binding>
@@ -93,8 +115,6 @@
   </button>
 
   <button>
-   <x>140</x>
-   <y>0</y>
    <legend>Reset</legend>
    <equal>true</equal>
    <binding>
@@ -103,8 +123,6 @@
   </button>
 
   <button>
-   <x>220</x>
-   <y>0</y>
    <legend>Cancel</legend>
    <equal>true</equal>
    <binding>
@@ -112,6 +130,6 @@
    </binding>
   </button>
 
+  <empty><stretch>true</stretch></empty>
  </group>
-
 </PropertyList>

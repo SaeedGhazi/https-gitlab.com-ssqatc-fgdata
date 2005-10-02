@@ -634,6 +634,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <to-from>
     <serviceable>true</serviceable>
    </to-from>
+   <slaved-to-gps type="bool">false</slaved-to-gps>
   </nav>
 
   <nav n="1">
@@ -654,6 +655,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <to-from>
     <serviceable>true</serviceable>
    </to-from>
+   <slaved-to-gps type="bool">false</slaved-to-gps>
   </nav>
 
   <transponder>
@@ -714,6 +716,13 @@ Started September 2000 by David Megginson, david@megginson.com
 
   <gps>
    <serviceable type="bool" archive="y">true</serviceable>
+   <message-alert type="bool">false</message-alert>
+   <waypoint-alert type="bool">false</waypoint-alert>
+   <leg-mode type="bool">true</leg-mode>
+   <obs-mode type="bool">false</obs-mode>
+   <approach-arm type="bool">false</approach-arm>
+   <approach-active type="bool">false</approach-active>
+   <cdi-deflection type="double">0</cdi-deflection>
   </gps>
 
   <clock>
@@ -743,6 +752,10 @@ Started September 2000 by David Megginson, david@megginson.com
     <standby-khz type="double">341.0</standby-khz>
    </outputs>
   </kr-87>
+  
+  <gps-annunciator>
+   <lamp-test type="bool">false</lamp-test>
+  </gps-annunciator>
 
   <tacan n="0">
     <serviceable type="bool" archive="y">true</serviceable>

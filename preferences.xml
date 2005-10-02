@@ -758,8 +758,14 @@ Started September 2000 by David Megginson, david@megginson.com
   </gps-annunciator>
 
   <tacan n="0">
-    <serviceable type="bool" archive="y">true</serviceable>
-    <switch-position type="int" archive="y">1</switch-position>
+   <serviceable type="bool" archive="y">true</serviceable>
+   <switch-position type="int" archive="y">1</switch-position>
+   <frequencies>
+    <selected-channel n="1">0</selected-channel>
+    <selected-channel n="2">2</selected-channel>
+    <selected-channel n="3">9</selected-channel>
+    <selected-channel n="4">Y</selected-channel>
+   </frequencies>
   </tacan>
  </instrumentation>
 

@@ -1,25 +1,23 @@
-<?xml version="1.0"?>
-
+<?xml version="1.0" ?>
+<!-- Maintainer: Frederic Bouvier -->
 <!--
 ************************************************************************
-* Bindings for Logitech WingMan Digital Extreme 3D joystick.
+* Bindings for Logitech WingMan Extreme Digital 3D (USB) joystick.
 *
-* This joystick is dual-mode: it can connect either through the
-* gameport or through a USB port.  Bindings are as follow:
 *
 * Axis 0: ailerons
 * Axis 1: elevator
-* Axis 2 (twist): rudder
-* Axis 3 (slider): throttle
-* Axes 5 and 6 (hat): view direction
+* Axis 2(windows),3(unix,mac) (slider): throttle
+* Axis 3(windows),2(unix,mac) (twist): rudder
+* Axes 6&7(windows), 4&5(unix,mac) (hat): view direction
 *
-* Button 0 (trigger): all brakes
-* Button 1 (02): elevator trim up
-* Button 2 (03): elevator trim down
-* Button 3 (04): mixture richer
-* Button 4 (05): mixture leaner
-* Button 5 (06): left brake only
-* Button 6 (07): right brake only
+* Button 0: all brakes
+* Button 1: elevator trim up
+* Button 2: elevator trim down
+* Button 3: mixture richer
+* Button 4: mixture leaner
+* Button 5: left brake only
+* Button 6: right brake only
 ************************************************************************
 $Id$
 -->
@@ -30,59 +28,119 @@ $Id$
  <name>Logitech Logitech Extreme 3D</name>
  <name>Logitech WingMan Extreme Digital 3D (USB)</name>
 
- <axis n="0">
+ <axis>
   <desc>Aileron</desc>
+  <number>
+   <unix>0</unix>
+   <mac>0</mac>
+   <windows>0</windows>
+  </number>
   <binding>
    <command>property-scale</command>
    <property>/controls/flight/aileron</property>
-   <squared>true</squared>
+   <squared type="bool">true</squared>
   </binding>
  </axis>
 
- <axis n="1">
+ <axis>
   <desc>Elevator</desc>
+  <number>
+   <unix>1</unix>
+   <mac>1</mac>
+   <windows>1</windows>
+  </number>
   <binding>
    <command>property-scale</command>
    <property>/controls/flight/elevator</property>
    <factor type="double">-1.0</factor>
-   <squared>true</squared>
+   <squared type="bool">true</squared>
   </binding>
  </axis>
 
- <axis n="2">
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/flight/rudder</property>
-   <squared>true</squared>
-  </binding>
- </axis>
-
- <axis n="3">
+ <axis>
   <desc>Throttle</desc>
+  <number>
+   <unix>3</unix>
+   <mac>3</mac>
+   <windows>2</windows>
+  </number>
   <binding>
    <command>nasal</command>
    <script>controls.throttleAxis()</script>
   </binding>
  </axis>
 
- <!-- The next two axes are the view hat -->
-
- <axis n="4">
+ <axis>
+  <desc>Rudder</desc>
+  <number>
+   <unix>2</unix>
+   <mac>2</mac>
+   <windows>3</windows>
+  </number>
   <binding>
    <command>property-scale</command>
-   <property>/sim/current-view/axes/lat</property>
+   <property>/controls/flight/rudder</property>
+   <factor type="double">1.0</factor>
   </binding>
  </axis>
 
- <axis n="5">
-  <binding>
-   <command>property-scale</command>
-   <property>/sim/current-view/axes/long</property>
-  </binding>
+ <axis n="6">
+  <desc>View Direction</desc>
+  <number>
+   <unix>4</unix>
+   <mac>4</mac>
+   <windows>6</windows>
+  </number>
+  <low>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
+    <step type="double">1.0</step>
+   </binding>
+  </low>
+  <high>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
+    <step type="double">-1.0</step>
+   </binding>
+  </high>
  </axis>
 
- <button n="0">
+ <axis>
+  <desc>View Elevation</desc>
+  <number>
+   <unix>5</unix>
+   <mac>5</mac>
+   <windows>7</windows>
+  </number>
+  <low>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-pitch-offset-deg</property>
+    <step type="double">1.0</step>
+   </binding>
+  </low>
+  <high>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-pitch-offset-deg</property>
+    <step type="double">-1.0</step>
+   </binding>
+  </high>
+ </axis>
+
+ <button>
   <desc>Brakes</desc>
+  <number>
+   <unix>0</unix>
+   <mac>0</mac>
+   <windows>0</windows>
+  </number>
   <binding>
    <command>property-assign</command>
    <property>/controls/gear/brake-left</property>
@@ -107,25 +165,41 @@ $Id$
   </mod-up>
  </button>
 
- <button n="1">
-  <repeatable>true</repeatable>
+ <button>
+  <desc>Elevator trim up</desc>
+  <number>
+   <unix>1</unix>
+   <mac>1</mac>
+   <windows>1</windows>
+  </number>
+  <repeatable type="bool">true</repeatable>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/elevator-trim</property>
-   <step>0.001</step>
+   <command>nasal</command>
+   <script>controls.elevatorTrim(1)</script>
   </binding>
  </button>
 
- <button n="2">
-  <repeatable>true</repeatable>
+ <button>
+  <desc>Elevator trim down</desc>
+  <number>
+   <unix>2</unix>
+   <mac>2</mac>
+   <windows>2</windows>
+  </number>
+  <repeatable type="bool">true</repeatable>
   <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/elevator-trim</property>
-   <step>-0.001</step>
+   <command>nasal</command>
+   <script>controls.elevatorTrim(-1)</script>
   </binding>
  </button>
 
- <button n="3">
+ <button>
+  <desc>Flaps down</desc>
+  <number>
+   <unix>3</unix>
+   <mac>3</mac>
+   <windows>3</windows>
+  </number>
   <repeatable>true</repeatable>
   <binding>
    <command>property-adjust</command>
@@ -139,7 +213,13 @@ $Id$
   </binding>
  </button>
 
- <button n="4">
+ <button>
+  <desc>Flaps up</desc>
+  <number>
+   <unix>4</unix>
+   <mac>4</mac>
+   <windows>4</windows>
+  </number>
   <repeatable>true</repeatable>
   <binding>
    <command>property-adjust</command>
@@ -153,31 +233,43 @@ $Id$
   </binding>
  </button>
 
- <button n="5">
+ <button>
+  <desc>Left brake</desc>
+  <number>
+   <unix>5</unix>
+   <mac>5</mac>
+   <windows>5</windows>
+  </number>
   <binding>
    <command>property-assign</command>
-   <property>/controls/brake-left</property>
+   <property>/controls/gear/brake-left</property>
    <value type="double">1.0</value>
   </binding>
   <mod-up>
    <binding>
     <command>property-assign</command>
-    <property>/controls/brake-left</property>
+    <property>/controls/gear/brake-left</property>
     <value type="double">0.0</value>
    </binding>
   </mod-up>
  </button>
 
- <button n="6">
+ <button>
+  <desc>Right brake</desc>
+  <number>
+   <unix>6</unix>
+   <mac>6</mac>
+   <windows>6</windows>
+  </number>
   <binding>
    <command>property-assign</command>
-   <property>/controls/brake-right</property>
+   <property>/controls/gear/brake-right</property>
    <value type="double">1.0</value>
   </binding>
   <mod-up>
    <binding>
     <command>property-assign</command>
-    <property>/controls/brake-right</property>
+    <property>/controls/gear/brake-right</property>
     <value type="double">0.0</value>
    </binding>
   </mod-up>

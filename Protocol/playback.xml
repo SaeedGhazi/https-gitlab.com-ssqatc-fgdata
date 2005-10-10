@@ -1,13 +1,14 @@
 <?xml version="1.0"?>
 
-<!--
-  Usage:
-  
-  Recording: fgfs --generic=file,out,20,flight.out,playback
-  Playback:  fgfs --generic=file,in,20,flight.out,playback --fdm=null
- -->
-
 <PropertyList>
+ <comment>
+  <![CDATA[
+    Usage:
+  
+    Recording: fgfs --generic=file,out,20,flight.out,playback
+    Playback:  fgfs --generic=file,in,20,flight.out,playback --fdm=null
+  ]]>
+ </comment>
 
  <generic>
 

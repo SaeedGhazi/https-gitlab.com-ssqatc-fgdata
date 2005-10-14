@@ -274,6 +274,11 @@ gear:     Defines a landing gear.  Accepts <control> subelements to map
                         vectors is supported internally, but not in
                         the XML parser.  Bug me if you wantthis
                         added.
+          upx/upy/upz:  The direction of compression, defaults to
+                        vertical (0,0,1) if unspecified.  These are
+                        used only for a direction -- the vector need
+                        not be normalized, as the length is specified
+                        by "compression".
           sfric:        Static (non-skidding) coefficient of
                         friction.  Defaults to 0.8.
           dfric:        Dynamic friction.  Defaults to 0.7.

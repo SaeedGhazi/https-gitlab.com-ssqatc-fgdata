@@ -132,6 +132,20 @@ showWeightDialog = func {
     header = dialog[name].addChild("text");
     header.set("label", title);
 
+    dialog[name].addChild("hrule").set("pref-height", 2);
+
+    if (props.globals.getNode("/yasim") == nil) {
+        msg = dialog[name].addChild("text");
+        msg.set("label", "Not supported for this aircraft");
+        cancel = dialog[name].addChild("button");
+        cancel.set("legend", "Cancel");
+        cancel.prop().getNode("binding[0]/command", 1).setValue("dialog-close");
+        fgcommand("dialog-new", dialog[name].prop());
+        showDialog(name);
+        return;
+    }
+
+
     contentArea = dialog[name].addChild("group");
     contentArea.set("layout", "hbox");
 

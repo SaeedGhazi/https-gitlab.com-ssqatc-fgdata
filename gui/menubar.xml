@@ -196,6 +196,14 @@
    </binding>
   </item>
 
+  <item>
+   <label>Tower position</label>
+   <binding>
+    <command>dialog-show</command>
+	<dialog-name>location-of-tower</dialog-name>
+   </binding>
+  </item>
+
  </menu>
 
  <menu>

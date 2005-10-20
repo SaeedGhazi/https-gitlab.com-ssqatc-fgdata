@@ -7,9 +7,7 @@
     <label>Select tower for the Tower View</label>
   </text>
 
-  <hrule>
-    <pref-height>2</pref-height>
-  </hrule>
+  <hrule><dummy/></hrule>
 
   <group>
     <layout>table</layout>

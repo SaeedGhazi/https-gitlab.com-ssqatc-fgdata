@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+generic one-button-message; MESSAGE and BUTTONTEXT are
+to be filled in before displaying. Used for the screenshot
+message and others.
+-->
+<PropertyList>
+	<name>message</name>
+	<modal>true</modal>
+	<layout>vbox</layout>
+	<default-padding>15</default-padding>
+
+	<text>
+		<label>MESSAGE</label>
+	</text>
+
+	<button>
+		<legend>BUTTONTEXT</legend>
+		<default>true</default>
+		<binding>
+			<command>dialog-close</command>
+		</binding>
+	</button>
+</PropertyList>

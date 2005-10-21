@@ -132,7 +132,7 @@ showWeightDialog = func {
     header = dialog[name].addChild("text");
     header.set("label", title);
 
-    dialog[name].addChild("hrule").set("pref-height", 2);
+    dialog[name].addChild("hrule").set("pref-height", 1);
 
     if (props.globals.getNode("/yasim") == nil) {
         msg = dialog[name].addChild("text");

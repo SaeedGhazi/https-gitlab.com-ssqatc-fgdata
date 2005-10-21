@@ -148,6 +148,11 @@ properties, though they will ignore any that are not relevant:
  default - true if this is the default object for when the user
    presses the [RETURN] key.
 
+ hide - if set to true, hides the whole widget that it is used
+   in, along with its children. There's no empty space reserved
+   for such widgets. The "hide" property can also be used to hide
+   other XML groups from the layouter.
+
 Objects may appear nested within the top-level dialog or a "group"
 or a "frame" object.  Here are all the object types allowed, with their
 special properties:
@@ -436,9 +441,9 @@ Its thickness can be set with <pref-height>/<pref-width>.
 GLOBAL SETTINGS ("THEMES")
 --------------------------
 
-FlightGear reads GUI (Graphical User Interface) style information
-from /sim/gui/, which is by default loaded from file $FG_ROOT/gui/style.xml.
-This file contains one <font> and one <colors> group:
+FlightGear reads GUI style information from /sim/gui/, which is by default
+loaded from file $FG_ROOT/gui/style.xml.  This file contains one <font> and
+one <colors> group:
 
 
 global font settings
@@ -454,18 +459,19 @@ global font settings
     </gui>
   <sim>
 
-<name> can either be a built-in bitmap font name (one of: "FIXED_8x13",
-"FIXED_9x15", "TIMES_10", "TIMES_24", "HELVETICA_10", "HELVETICA_12",
-"HELVETICA_14", "HELVETICA_18", "SANS_12B"), or the name of a texture
-font in $FG_FONT, which is by default set to $FG_ROOT/Fonts/. <size>
-and <slant> are only applied to texture fonts, and otherwise ignored.
+<name> can either be the name of a built-in bitmap font (one of:
+"FIXED_8x13", "FIXED_9x15", "TIMES_10", "TIMES_24", "HELVETICA_10",
+"HELVETICA_12", "HELVETICA_14", "HELVETICA_18", "SANS_12B"), or the
+name of a texture font in the $FG_FONT directory. $FG_FONT is by
+default set to $FG_ROOT/Fonts/. Properties <size> and <slant> are
+only applied to texture fonts, and otherwise ignored.
 
 
 global color settings
 ---------------------
 
 These define the color of the splash screen font, and the color of the
-GUI elements. All colors are in /sim/gui/colors and follow the same
+GUI elements. All colors are in /sim/gui/colors/ and follow the same
 pattern:
 
   <sim>

@@ -8,7 +8,7 @@ message and others.
 	<name>message</name>
 	<modal>true</modal>
 	<layout>vbox</layout>
-	<default-padding>15</default-padding>
+	<default-padding>10</default-padding>
 
 	<text>
 		<label>MESSAGE</label>

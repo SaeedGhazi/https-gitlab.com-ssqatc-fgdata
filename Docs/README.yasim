@@ -177,6 +177,8 @@ jet:      A turbojet/fan engine.  It accepts a <control> subelement to map a
           egt:            Exhaust gas temperature at takeoff [1050].
           epr:            Engine pressure ratio at takeoff [3.0].
           exhaust-speed:  The maximum exhaust speed in knots [~1555].
+          spool-time:     Time, in seconds, for the engine to respond to
+                          90% of a commanded power setting.
 
 propeller: A propeller.  This element requires an engine subtag.
            Currently <piston-engine> and <turbine-engine> are

@@ -164,7 +164,7 @@ current mode for each mouse is held in the
    <constrained type="bool">true</constrained>
    <pass-through type="bool">false</pass-through>
 
-   <!-- left button centres the offsets -->
+   <!-- left button centres view direction; middle + left also resets view point -->
    <button n="0">
     <binding>
      <command>property-assign</command>
@@ -174,7 +174,31 @@ current mode for each mouse is held in the
     <binding>
      <command>property-assign</command>
      <property>/sim/current-view/goal-pitch-offset-deg</property>
-     <property>/sim/current-view/config/pitch-offset-deg</property>
+     <property>/sim/view/config/pitch-offset-deg</property>
+    </binding>
+    <binding>
+     <condition>
+      <property>/devices/status/mice/mouse[0]/button[1]</property>
+     </condition>
+     <command>property-assign</command>
+     <property>/sim/current-view/x-offset-m</property>
+     <property>/sim/view/config/x-offset-m</property>
+    </binding>
+    <binding>
+     <condition>
+      <property>/devices/status/mice/mouse[0]/button[1]</property>
+     </condition>
+     <command>property-assign</command>
+     <property>/sim/current-view/y-offset-m</property>
+     <property>/sim/view/config/y-offset-m</property>
+    </binding>
+    <binding>
+     <condition>
+      <property>/devices/status/mice/mouse[0]/button[1]</property>
+     </condition>
+     <command>property-assign</command>
+     <property>/sim/current-view/z-offset-m</property>
+     <property>/sim/view/config/z-offset-m</property>
     </binding>
    </button>
 

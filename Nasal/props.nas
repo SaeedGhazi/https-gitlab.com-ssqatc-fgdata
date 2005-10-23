@@ -26,6 +26,7 @@ Node = {
     getChild       : func { wrap(_getChild(me._g, arg)) },
     getChildren    : func { wrap(_getChildren(me._g, arg)) },
     removeChild    : func { wrap(_removeChild(me._g, arg)) },
+    removeChildren : func { wrap(_removeChildren(me._g, arg)) },
     getNode        : func { wrap(_getNode(me._g, arg)) },
 
     getPath : func {

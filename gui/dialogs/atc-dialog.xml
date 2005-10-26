@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PropertyList>
+	<name>atc-dialog</name>
+	<y>70</y>
+	<layout>vbox</layout>
+
+	<text>
+		<label>ATC Communication</label>
+	</text>
+
+	<hrule><dummy/></hrule>
+
+	<group>
+		<name>transmission-choice</name>
+		<layout>vbox</layout>
+		<!-- using one copy of button-template per ATC message -->
+		<button-template>
+			<hide>true</hide>
+			<legend>LEGEND</legend>
+			<equal>true</equal>
+			<property>PROPERTY</property>
+			<binding>
+				<command>property-assign</command>
+				<property>/sim/atc/transmission-num</property>
+				<value type="int">TRANSMISSION NUMBER</value>
+			</binding>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button-template>
+	</group>
+
+	<button>
+		<legend>Cancel</legend>
+		<binding>
+			<command>dialog-close</command>
+		</binding>
+	</button>
+</PropertyList>

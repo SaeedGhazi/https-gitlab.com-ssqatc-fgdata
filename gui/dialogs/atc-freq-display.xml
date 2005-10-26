@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PropertyList>
+	<name>atc-freq-display</name>
+	<x>70</x>
+	<layout>vbox</layout>
+
+	<text>
+		<label>TITLE ("ICAO Frequencies")</label>
+	</text>
+
+	<hrule><dummy/></hrule>
+
+	<group>
+		<name>frequency-list</name>
+		<layout>vbox</layout>
+		<!-- using one copy of group-template per frequency line -->
+		<group-template>
+			<hide>true</hide>
+			<layout>hbox</layout>
+			<text>
+				<halign>left</halign>
+				<label>LABEL</label>
+			</text>
+			<empty>
+				<stretch>true</stretch>
+			</empty>
+			<text>
+				<halign>right</halign>
+				<label>FREQUENCY</label>
+			</text>
+		</group-template>
+	</group>
+
+	<button>
+		<legend>Close</legend>
+		<default>true</default>
+		<binding>
+			<command>dialog-close</command>
+		</binding>
+	</button>
+</PropertyList>

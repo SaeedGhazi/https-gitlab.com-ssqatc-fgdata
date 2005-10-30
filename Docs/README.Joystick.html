@@ -28,8 +28,6 @@ Author John Check
  <li><A HREF="#buttons">Button Properties</A>
  <li><A HREF="#coolie_hat">Digital Coolie Hats</A>
  <li><A HREF="#keyboard">Keyboard Bindings</A>
-<!-- <li><A HREF="#"></A>
- <li><A HREF="#"></A>-->
 </ol>
 
 <p>
@@ -116,7 +114,7 @@ pair of tags.
 
 <p>
 FlightGear ships with a utility called js_demo. It will report
-the number of joysticks attached to a system and their capabilites.
+the number of joysticks attached to a system and their capabilities.
 By observing the output of js_demo while working your joystick you can
 determine what controls are where.
 It should be noted that, at least on UNIX, numbering generally starts with
@@ -387,7 +385,7 @@ steps and gives a smoother action than a plain float.
 or
 
  --prop:/input/joysticks/js[0]/axis[2]/binding/command=property-scale
- --prop:/input/joysticks/js[0]/axis[2]/binding/property=/controls/engiens/engine[0]/throttle
+ --prop:/input/joysticks/js[0]/axis[2]/binding/property=/controls/engines/engine[0]/throttle
  --prop:/input/joysticks/js[0]/axis[2]/binding/offset=-1.0
  --prop:/input/joysticks/js[0]/axis[2]/binding/factor=-0.5
 </PRE>
@@ -459,7 +457,7 @@ In command-line option syntax, this would appear as
   --prop:/input/joysticks/js[0]/button[1]/repeatable=true     &lt;-- See? no 'binding' --&gt;
   --prop:/input/joysticks/js[0]/button[1]/binding/command=property-adjust
   --prop:/input/joysticks/js[0]/button[1]/binding/property=/controls/flight/elevator-trim
-  --prop:/input/joysticks/js[0]/button[1]/binding//step=0.001
+  --prop:/input/joysticks/js[0]/button[1]/binding/step=0.001
 </PRE>
 <br>
 <P>
@@ -547,18 +545,18 @@ equivalent (note the subscripts to distinguish multiple bindings; the
 XML will handle this automatically):
 </P>
 <PRE>
-  --prop:/input/joysticks/button[0]/binding[0]/command=property-assign
-  --prop:/input/joysticks/button[0]/binding[0]/property=/controls/gear/brake-left
-  --prop:/input/joysticks/button[0]/binding[0]/value=1.0
-  --prop:/input/joysticks/button[0]/binding[1]/command=property-assign
-  --prop:/input/joysticks/button[0]/binding[1]/property=/controls/gear/brake-right
-  --prop:/input/joysticks/button[0]/binding[2]/value=1.0
-  --prop:/input/joysticks/button[0]/mod-up/binding[0]/command=property-assign
-  --prop:/input/joysticks/button[0]/mod-up/binding[0]/property=brakes[0]
-  --prop:/input/joysticks/button[0]/mod-up/binding[0]/value=0.0
-  --prop:/input/joysticks/button[0]/mod-up/binding[1]/command=property-assign
-  --prop:/input/joysticks/button[0]/mod-up/binding[1]/property=brakes[1]
-  --prop:/input/joysticks/button[0]/mod-up/binding[1]/value=0.0
+  --prop:/input/joysticks/js[0]/button[0]/binding[0]/command=property-assign
+  --prop:/input/joysticks/js[0]/button[0]/binding[0]/property=/controls/gear/brake-left
+  --prop:/input/joysticks/js[0]/button[0]/binding[0]/value=1.0
+  --prop:/input/joysticks/js[0]/button[0]/binding[1]/command=property-assign
+  --prop:/input/joysticks/js[0]/button[0]/binding[1]/property=/controls/gear/brake-right
+  --prop:/input/joysticks/js[0]/button[0]/binding[2]/value=1.0
+  --prop:/input/joysticks/js[0]/button[0]/mod-up/binding[0]/command=property-assign
+  --prop:/input/joysticks/js[0]/button[0]/mod-up/binding[0]/property=brakes[0]
+  --prop:/input/joysticks/js[0]/button[0]/mod-up/binding[0]/value=0.0
+  --prop:/input/joysticks/js[0]/button[0]/mod-up/binding[1]/command=property-assign
+  --prop:/input/joysticks/js[0]/button[0]/mod-up/binding[1]/property=brakes[1]
+  --prop:/input/joysticks/js[0]/button[0]/mod-up/binding[1]/value=0.0
 </PRE>
 <br>
 <P>
@@ -574,7 +572,7 @@ Many common joysticks come with digital coolie hats. These are detected as
 axes rather than as buttons, although they are in fact just four (or eight) 
 simple switches. FGFS provides 2 virtual buttons to every axis which are 
 triggered whenever the axis reaches one of the end positions. These virtual 
-buttons can be addressed via two sub-properties »low« and »high« and accept any
+buttons can be addressed via two sub-properties "low" and "high" and accept any
 of the common button properties.  
 </P>
 <P>

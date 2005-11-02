@@ -145,6 +145,10 @@ properties, though they will ignore any that are not relevant:
  binding - a FlightGear command binding that will be fired when the
    user activates this object (more than one allowed).
 
+ keynum - the key code of a key that can be used to trigger the
+   widget bindings via keyboard (e.g. <keynum>97</keynum> for
+   the "a" key.
+
  default - true if this is the default object for when the user
    presses the [RETURN] key.
 
@@ -591,6 +595,29 @@ for it:
   </key>
 
 Note that this will currently close all open dialogs!
+
+
+
+
+              background   foreground   highlight    label     legend     misc
+---------------------------------------------------------------------------------
+dialog
+group
+frame
+hrule
+vrule
+list
+airport-list
+input         dark frame      area     light frame   label    contents   cursor
+text
+checkbox          ?           area      box frame    label?      ?        cross
+radio
+button
+combo
+slider
+dial
+textbox
+select
 
 
 __end__

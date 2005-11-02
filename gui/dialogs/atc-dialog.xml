@@ -19,6 +19,7 @@
 			<legend>LEGEND</legend>
 			<equal>true</equal>
 			<property>PROPERTY</property>
+			<keynum>-1</keynum>
 			<binding>
 				<command>property-assign</command>
 				<property>/sim/atc/transmission-num</property>

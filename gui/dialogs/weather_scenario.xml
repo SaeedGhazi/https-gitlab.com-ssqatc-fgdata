@@ -6,12 +6,15 @@
   <layout>vbox</layout>
 
   <text>
-    <label>___________Weather Scenario___________</label>
+    <label>Weather Scenario</label>
   </text>
+
+  <hrule><dummy/></hrule>
 
   <text>
     <label></label>
   </text>
+
   <group>
     <layout>hbox</layout>
     <text>
@@ -38,11 +41,15 @@
   </group>
 
   <text><label>Last metar used</label></text>
-  <input>
+  <textbox>
     <pref-width>400</pref-width>
+    <pref-height>120</pref-height>
+    <slider>12</slider>
     <live>true</live>
+    <wrap>true</wrap>
+    <editable>false</editable>
     <property>/environment/metar/last-metar</property>
-  </input>
+  </textbox>
 
   <text>
     <label></label>
@@ -54,13 +61,13 @@
 
     <button>
       <legend>Close</legend>
+      <default>true</default>
       <binding>
         <command>dialog-apply</command>
       </binding>
       <binding>
         <command>dialog-close</command>
       </binding>
-      <default>true</default>
     </button>
 
     <empty><stretch>true</stretch></empty>

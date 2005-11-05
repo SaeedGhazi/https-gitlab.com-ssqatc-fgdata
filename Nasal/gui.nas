@@ -169,6 +169,7 @@ showWeightDialog = func {
 
     ok = buttonBar.addChild("button");
     ok.set("legend", "OK");
+    ok.set("keynum", 27);
     ok.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
     ok.prop().getNode("binding[1]/command", 1).setValue("dialog-close");
 
@@ -350,6 +351,7 @@ showHelpDialog = func {
     w.set("pref-height", 16);
     w.set("legend", "");
     w.set("default", 1);
+    w.set("keynum", 27);
     w.prop().getNode("binding[0]/command", 1).setValue("nasal");
     w.prop().getNode("binding[0]/script", 1).setValue("delete(gui.dialog, \"" ~ name ~ "\")");
     w.prop().getNode("binding[1]/command", 1).setValue("dialog-close");

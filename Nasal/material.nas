@@ -57,16 +57,22 @@ colorgroup = func {
 	undef = func { props.globals.getNode(base ~ name ~ "/" ~ arg[0]) == nil };
 
 	if (undef("red") and undef("green") and undef("blue")) {
-		return;
+		return 0;
 	}
+
+	if (arg[3] != nil) {
+		parent.addChild("hrule").setColor(1, 1, 1, 0.5);
+	}
+
 	grp = parent.addChild("group");
-	grp.set("layout", "hbox");
-	grp.addChild("text").set("label", "_______" ~ name ~ "_______");
+	grp.set("layout", "vbox");
+	grp.addChild("text").set("label", name);
 
 	foreach (color; ["red", "green", "blue", "factor"]) {
 		mat(parent, color, base ~ name ~ "/" ~ color, "%.3f");
 	}
 	mat(parent, "offset", base ~ name ~ "/" ~ "offset", "%.3f", -1.0, 1.0);
+	return 1;
 }
 
 
@@ -128,8 +134,7 @@ showDialog = func {
 	titlebar = dialog.addChild("group");
 	titlebar.set("layout", "hbox");
 	w = titlebar.addChild("text");
-	w.set("label", "[" ~ title ~ "]");
-	w.setFont("Helvetica", 17);
+	w.set("label", "object \"" ~ title ~ "\"");
 	titlebar.addChild("empty").set("stretch", 1);
 
 	w = titlebar.addChild("button");
@@ -137,31 +142,40 @@ showDialog = func {
 	w.set("pref-height", 16);
 	w.set("legend", "");
 	w.set("default", 1);
+	w.set("keynum", 27);
 	w.set("border", 1);
 	w.prop().getNode("binding[0]/command", 1).setValue("dialog-close");
 
-	dialog.setColor(1.0, 0.95, 0.7, 0.5);
-
-	colorgroup(dialog, "diffuse", base);
-	colorgroup(dialog, "ambient", base);
-	colorgroup(dialog, "emission", base);
-	colorgroup(dialog, "specular", base);
+	h = 0;
+	h += colorgroup(dialog, "diffuse", base, h);
+	h += colorgroup(dialog, "ambient", base, h);
+	h += colorgroup(dialog, "emission", base, h);
+	h += colorgroup(dialog, "specular", base, h);
 
 	undef = func { props.globals.getNode(base ~ arg[0]) == nil };
 	if (!(undef("shininess") and undef("transparency/alpha") and undef("threshold"))) {
+		if (h) {
+			dialog.addChild("hrule").setColor(1, 1, 1, 0.5);
+		}
+
 		w = dialog.addChild("group");
 		w.set("layout", "hbox");
-		w.addChild("text").set("label", "_________misc_________");
+		w.addChild("text").set("label", "misc");
 
 		mat(dialog, "shi", base ~ "shininess", "%.0f", 0.0, 128.0);
 		mat(dialog, "alpha", base ~ "transparency/alpha", "%.3f");
 		mat(dialog, "thresh", base ~ "threshold", "%.3f");
+		h += 1;
 	}
 
 	if (!undef("texture")) {
+		if (h) {
+			dialog.addChild("hrule").setColor(1, 1, 1, 0.5);
+		}
+
 		w = dialog.addChild("group");
 		w.set("layout", "hbox");
-		w.addChild("text").set("label", "_______texture_______");
+		w.addChild("text").set("label", "texture");
 
 		w = dialog.addChild("input");
 		w.set("live", 1);
@@ -170,6 +184,8 @@ showDialog = func {
 		w.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
 	}
 	dialog.addChild("empty").set("pref-height", "3");
+
+	dialog.setColor(0.6, 0.6, 0.6, 0.6);
 
 	fgcommand("dialog-new", dialog.prop());
 	gui.showDialog(name);

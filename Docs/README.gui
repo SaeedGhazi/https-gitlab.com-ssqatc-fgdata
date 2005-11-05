@@ -604,27 +604,4 @@ for it:
 Note that this will currently close all open dialogs!
 
 
-
-
-              background   foreground   highlight    label     legend     misc
----------------------------------------------------------------------------------
-dialog
-group
-frame
-hrule
-vrule
-list
-airport-list
-input         dark frame      area     light frame   label    contents   cursor
-text
-checkbox          ?           area      box frame    label?      ?        cross
-radio
-button
-combo
-slider
-dial
-textbox
-select
-
-
 __end__

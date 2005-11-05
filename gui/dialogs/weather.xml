@@ -791,6 +791,8 @@
    <x>0</x>
    <y>0</y>
    <legend>OK</legend>
+   <default>true</default>
+   <equal>true</equal>
    <binding>
     <command>dialog-apply</command>
    </binding>
@@ -801,13 +803,13 @@
    <binding>
     <command>dialog-close</command>
    </binding>
-   <default>true</default>
   </button>
 
   <button>
    <x>100</x>
    <y>0</y>
    <legend>Apply</legend>
+   <equal>true</equal>
    <binding>
     <command>dialog-apply</command>
    </binding>
@@ -821,6 +823,7 @@
    <x>200</x>
    <y>0</y>
    <legend>Reset</legend>
+   <equal>true</equal>
    <binding>
     <command>dialog-update</command>
    </binding>
@@ -830,6 +833,8 @@
    <x>300</x>
    <y>0</y>
    <legend>Cancel</legend>
+   <equal>true</equal>
+   <keynum>27</keynum>
    <binding>
     <command>dialog-close</command>
    </binding>

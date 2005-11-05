@@ -19,11 +19,11 @@
 			<legend>LEGEND</legend>
 			<equal>true</equal>
 			<property>PROPERTY</property>
-			<keynum>-1</keynum>
+			<keynum type="int">-1</keynum>
 			<binding>
 				<command>property-assign</command>
 				<property>/sim/atc/transmission-num</property>
-				<value type="int">TRANSMISSION NUMBER</value>
+				<value type="int">-1</value>
 			</binding>
 			<binding>
 				<command>dialog-apply</command>
@@ -36,6 +36,7 @@
 
 	<button>
 		<legend>Cancel</legend>
+		<keynum>27</keynum>
 		<binding>
 			<command>dialog-close</command>
 		</binding>

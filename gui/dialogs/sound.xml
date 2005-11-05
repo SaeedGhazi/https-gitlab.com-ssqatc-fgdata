@@ -41,14 +41,15 @@
 
     <button>
       <legend>OK</legend>
+      <default>true</default>
       <equal>true</equal>
+      <keynum>27</keynum>
       <binding>
         <command>dialog-apply</command>
       </binding>
       <binding>
         <command>dialog-close</command>
       </binding>
-      <default>true</default>
     </button>
   </group>
 

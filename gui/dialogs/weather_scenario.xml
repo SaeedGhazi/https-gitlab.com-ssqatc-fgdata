@@ -62,6 +62,7 @@
     <button>
       <legend>Close</legend>
       <default>true</default>
+      <keynum>27</keynum>
       <binding>
         <command>dialog-apply</command>
       </binding>

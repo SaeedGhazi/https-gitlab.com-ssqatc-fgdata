@@ -55,19 +55,21 @@
   <x>5</x>
   <y>10</y>
   <legend>OK</legend>
+  <default>true</default>
+  <equal>true</equal>
   <binding>
    <command>dialog-apply</command>
   </binding>
   <binding>
    <command>dialog-close</command>
   </binding>
-  <default>true</default>
  </button>
 
  <button>
   <x>105</x>
   <y>10</y>
   <legend>Apply</legend>
+  <equal>true</equal>
   <binding>
    <command>dialog-apply</command>
   </binding>
@@ -77,6 +79,7 @@
   <x>205</x>
   <y>10</y>
   <legend>Reset</legend>
+  <equal>true</equal>
   <binding>
    <command>dialog-update</command>
   </binding>
@@ -86,6 +89,8 @@
   <x>305</x>
   <y>10</y>
   <legend>Cancel</legend>
+  <equal>true</equal>
+  <keynum>27</keynum>
   <binding>
    <command>dialog-close</command>
   </binding>

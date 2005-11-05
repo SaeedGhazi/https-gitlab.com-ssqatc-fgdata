@@ -26,6 +26,8 @@
    <x>65</x>
    <y>10</y>
    <legend>OK</legend>
+   <default>true</default>
+   <equal>true</equal>
    <binding>
     <command>dialog-apply</command>
    </binding>
@@ -35,13 +37,14 @@
    <binding>
     <command>dialog-close</command>
    </binding>
-   <default>true</default>
   </button>
 
  <button>
   <x>125</x>
   <y>10</y>
   <legend>Cancel</legend>
+  <equal>true</equal>
+  <keynum>27</keynum>
   <binding>
    <command>dialog-close</command>
   </binding>

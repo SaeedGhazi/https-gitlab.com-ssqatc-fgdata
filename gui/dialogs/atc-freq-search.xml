@@ -68,6 +68,7 @@
 		<button>
 			<legend>Cancel</legend>
 			<equal>true</equal>
+			<keynum>27</keynum>
 			<binding>
 				<command>dialog-close</command>
 			</binding>

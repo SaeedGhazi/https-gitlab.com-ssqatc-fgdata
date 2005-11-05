@@ -218,6 +218,7 @@
    <empty><stretch>true</stretch></empty>
    <button>
      <legend>OK</legend>
+     <default>true</default>
      <equal>true</equal>
      <binding><command>dialog-apply</command></binding>
      <binding><command>reinit</command><subsystem>logger</subsystem></binding>
@@ -227,6 +228,7 @@
    <button>
      <legend>Cancel</legend>
      <equal>true</equal>
+     <keynum>27</keynum>
      <binding><command>dialog-close</command></binding>
    </button>
    <empty><stretch>true</stretch></empty>

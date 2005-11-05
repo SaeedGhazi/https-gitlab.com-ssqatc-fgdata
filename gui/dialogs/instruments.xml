@@ -199,6 +199,8 @@
    <x>150</x>
    <y>10</y>
    <legend>Close</legend>
+   <default>true</default>
+   <keynum>27</keynum>
    <binding>
     <command>dialog-close</command>
    </binding>

@@ -74,6 +74,8 @@
     <empty><stretch>true</stretch></empty>
     <button>
       <legend>Replay</legend>
+      <default>true</default>
+      <equal>true</equal>
       <binding>
 	<command>dialog-apply</command>
       </binding>
@@ -83,11 +85,12 @@
       <binding>
 	<command>dialog-close</command>
       </binding>
-      <default>true</default>
     </button>
     <empty><stretch>true</stretch></empty>
     <button>
       <legend>Cancel</legend>
+      <equal>true</equal>
+      <keynum>27</keynum>
       <binding>
 	<command>dialog-close</command>
       </binding>

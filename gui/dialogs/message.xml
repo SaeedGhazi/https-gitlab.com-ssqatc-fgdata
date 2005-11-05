@@ -17,6 +17,7 @@ message and others.
 	<button>
 		<legend>BUTTONTEXT</legend>
 		<default>true</default>
+		<keynum>27</keynum>
 		<binding>
 			<command>dialog-close</command>
 		</binding>

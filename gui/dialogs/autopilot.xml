@@ -301,7 +301,7 @@
   <button>
     <legend>OK</legend>
     <default>true</default>
-    <keynum>27</keynum>
+    <key>Esc</key>
     <padding>10</padding>
     <binding>
       <command>dialog-apply</command>

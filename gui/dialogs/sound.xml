@@ -43,7 +43,7 @@
       <legend>OK</legend>
       <default>true</default>
       <equal>true</equal>
-      <keynum>27</keynum>
+      <key>Esc</key>
       <binding>
         <command>dialog-apply</command>
       </binding>

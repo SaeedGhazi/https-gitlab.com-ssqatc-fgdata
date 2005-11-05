@@ -90,7 +90,7 @@
   <y>10</y>
   <legend>Cancel</legend>
   <equal>true</equal>
-  <keynum>27</keynum>
+  <key>Esc</key>
   <binding>
    <command>dialog-close</command>
   </binding>

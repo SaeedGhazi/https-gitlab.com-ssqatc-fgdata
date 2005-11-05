@@ -101,7 +101,7 @@
    <y>10</y>
    <legend>Dismiss</legend>
    <default>true</default>
-   <keynum>27</keynum>
+   <key>Esc</key>
    <binding>
     <command>dialog-close</command>
    </binding>

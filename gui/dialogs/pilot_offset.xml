@@ -78,7 +78,7 @@
      <legend>OK</legend>
      <equal>true</equal>
      <default>true</default>
-     <keynum>27</keynum>
+     <key>Esc</key>
      <binding><command>dialog-apply</command></binding>
      <binding><command>dialog-close</command></binding>
    </button>

@@ -36,7 +36,7 @@
 
 	<button>
 		<legend>Cancel</legend>
-		<keynum>27</keynum>
+		<key>Esc</key>
 		<binding>
 			<command>dialog-close</command>
 		</binding>

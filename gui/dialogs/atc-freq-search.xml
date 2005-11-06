@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <PropertyList>
 	<name>atc-freq-search</name>
-	<y>70</y>
 	<layout>vbox</layout>
 
 	<text>
@@ -21,6 +20,9 @@
 				<command>property-assign</command>
 				<property>/sim/atc/freq-airport</property>
 				<value type="string">ICAO</value>
+			</binding>
+			<binding>
+				<command>dialog-close</command>
 			</binding>
 		</button-template>
 	</group>

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <PropertyList>
 	<name>atc-dialog</name>
-	<y>70</y>
+	<y>40</y>
 	<layout>vbox</layout>
 
 	<text>

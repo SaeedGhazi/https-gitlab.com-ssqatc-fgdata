@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <PropertyList>
 	<name>atc-freq-display</name>
-	<x>70</x>
 	<layout>vbox</layout>
 
 	<text>

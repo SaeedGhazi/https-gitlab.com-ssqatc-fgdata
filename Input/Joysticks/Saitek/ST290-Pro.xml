@@ -1,14 +1,5 @@
 <?xml version="1.0"?>
 <!--
-Only a few stick controls have been mapped here:
- + "Rocker" switch:     Rudder
- + Top rotary dial:     Mixture
- + Bottom rotary dial:  Prop Advance
- + Top stick hat:       Elevator & Aileron trim
- + Bottom stick hat:    View direction
- + Top throttle hat:    Flaps & Rudder trim
- + Stick button "A":    Gear toggle
- + Stick button "C":    Reset view (hackish)
 
 Linux/Windows/Mac Axis Numbers:
   0   	Aileron (positive == right) 
@@ -19,12 +10,12 @@ Linux/Windows/Mac Axis Numbers:
   5     Hat up/down (elevator trim)
 
 Button Numbers (Identical b/w Linux/Windows/Mac):
- 0  Trigger (brake)
- 1  Gear toggle          (labeled 2)
- 2  unassigned           (labeled 3)
- 3  Flap down            (labeled 4)
- 4  unassigned           (labeled 5)
- 5  Flap up              (labeled 6)
+  0  Brakes               (trigger)
+  1  Gear toggle          (labeled 2)
+  2  unassigned           (labeled 3)
+  3  Flap down            (labeled 4)
+  4  unassigned           (labeled 5)
+  5  Flap up              (labeled 6)
 
 $Id$
 -->

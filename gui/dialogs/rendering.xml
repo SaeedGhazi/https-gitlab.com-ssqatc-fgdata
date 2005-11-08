@@ -157,7 +157,7 @@
     <group>
       <layout>hbox</layout>
       <halign>right</halign>
-      <text><label>Cache size in Kbytes</label></text>
+      <text><label>Cache size in kBytes</label></text>
       <input>
         <property>/sim/rendering/clouds3d-cache-size</property>
         <binding>

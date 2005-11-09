@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<x>-50</x>
+	<y>50</y>
+	<name>hud</name>
+	<layout>vbox</layout>
+
+	<text>
+		<label>HUD Configuration</label>
+	</text>
+
+	<hrule><dummy/></hrule>
+
+	<checkbox>
+		<label>Antialias</label>
+		<property>/sim/hud/antialiased</property>
+		<binding>
+			<command>dialog-apply</command>
+		</binding>
+	</checkbox>
+
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<label>Alpha:</label>
+		</text>
+		<slider>
+			<property>/sim/hud/alpha</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</slider>
+	</group>
+
+	<group>
+		<layout>hbox</layout>
+		<default-padding>10</default-padding>
+
+		<button>
+			<legend>Close</legend>
+			<default>true</default>
+			<key>Esc</key>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+	</group>
+</PropertyList>

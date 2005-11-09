@@ -120,7 +120,8 @@
   <item>
    <label>Adjust HUD Transparency</label>
    <binding>
-    <command>old-hud-alpha-dialog</command>
+    <command>dialog-show</command>
+    <dialog-name>hud</dialog-name>
    </binding>
   </item>
   

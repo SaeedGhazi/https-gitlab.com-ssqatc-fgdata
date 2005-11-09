@@ -17,7 +17,9 @@ popupTip = func {
 
     currTimer = currTimer + 1;
     thisTimer = currTimer;
-    settimer(func { if(currTimer == thisTimer) { popdown() } }, DELAY);
+
+    # Final argument is a flag to use "real" time, not simulated time
+    settimer(func { if(currTimer == thisTimer) { popdown() } }, DELAY, 1);
 }
 
 showDialog = func {

@@ -102,7 +102,7 @@ nextStyle = func {
 		curr = 0;
 	}
 	setprop("/sim/current-gui", curr);
-	fgcommand("reinit", props.Node.new({ "subsystem" : "gui"}))
+	fgcommand("gui-redraw", props.Node.new());
 }
 
 

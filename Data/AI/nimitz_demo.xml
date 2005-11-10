@@ -2,6 +2,10 @@
   <!--
     x, y, z-offset-m   The distance in meters of the Fresnel Lens Optical Landing System
                         (FLOLS) from the carrier model origin.
+	max-lat, min-lat   Define an operating box in term of the max and min lat excursions 
+	                   from the start position
+	max-lon, min-lon   Define an operating box in term of the max and min lon excursions 
+	                   from the start position
 -->
   <PropertyList>
     <scenario>
@@ -18,16 +22,23 @@
         <catapult>cat-2</catapult>
         <catapult>cat-3</catapult>
         <catapult>cat-4</catapult>
-        <solid>Deck</solid>
+        <solid>Deck-1</solid>
+		<solid>Deck-2</solid>
+		<solid>Deck-3</solid>
+		<solid>Deck-4</solid>
+		<solid>Deck-5</solid>
+		<solid>Deck-6</solid>
+		<solid>Deck-7</solid>
+		<solid>Deck-8</solid>
         <solid>Round-down</solid>
         <solid>Elevator-3-Deck</solid>
         <solid>Elevator-4-Deck</solid>
         <latitude>37.689</latitude>
         <longitude>-122.683</longitude>
         <speed>10</speed>
-        <heading>180</heading>
+        <heading>200</heading>
         <rudder>0</rudder>
-        <turn-radius-ft>3000</turn-radius-ft>
+        <turn-radius-ft>4000</turn-radius-ft>
         <flols-pos>
           <x-offset-m>69.84</x-offset-m>
           <y-offset-m>-39.67</y-offset-m>
@@ -36,9 +47,9 @@
         <parking-pos>
           <name>cat-2</name>
           <heading-offset-deg>-1</heading-offset-deg>
-          <x-offset-m>5</x-offset-m>
+          <x-offset-m>1.60851</x-offset-m>
           <y-offset-m>26</y-offset-m>
-          <z-offset-m>-3.26</z-offset-m>
+          <z-offset-m>-4.9159</z-offset-m>
         </parking-pos>
         <parking-pos>
           <name>cat-1</name>
@@ -54,6 +65,11 @@
           <y-offset-m>26</y-offset-m>
           <z-offset-m>20</z-offset-m>
         </parking-pos>
+		<max-lat>0.01</max-lat>
+		<min-lat>0.05</min-lat>
+		<max-long>0.05</max-long>
+		<min-long>0.01</min-long>
       </entry>
+	   
     </scenario>
   </PropertyList>

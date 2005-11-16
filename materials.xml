@@ -730,6 +730,19 @@ Shared parameters for various materials.
  <texture>Terrain/shrub.rgb</texture>
  <xsize>500</xsize>
  <ysize>500</ysize>
+ <diffuse>
+  <r>0.86</r>
+  <g>0.86</g>
+  <b>0.86</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.1</r>
+  <g>0.1</g>
+  <b>0.1</b>
+  <a>1.0</a>
+ </specular>
+ <shininess>1.2</shininess>
  <light-coverage>20000000.0</light-coverage>
  <rolling-friction>0.6</rolling-friction>
  <bumpiness>0.4</bumpiness>
@@ -1049,6 +1062,19 @@ Shared parameters for various materials.
  <xsize>1000</xsize>
  <ysize>1000</ysize>
  <light-coverage>4000000.0</light-coverage>
+ <diffuse>
+  <r>0.93</r>
+  <g>0.95</g>
+  <b>0.93</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.1</r>
+  <g>0.12</g>
+  <b>0.1</b>
+  <a>1.0</a>
+ </specular>
+ <shininess>1.2</shininess>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.15</bumpiness>
 </material>
@@ -1071,6 +1097,19 @@ Shared parameters for various materials.
  <xsize>125</xsize>
  <ysize>125</ysize>
  <light-coverage>4000000.0</light-coverage>
+ <diffuse>
+  <r>0.93</r>
+  <g>0.95</g>
+  <b>0.93</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.1</r>
+  <g>0.12</g>
+  <b>0.1</b>
+  <a>1.0</a>
+ </specular>
+ <shininess>1.2</shininess>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.1</bumpiness>
 </material>
@@ -1228,6 +1267,19 @@ Shared parameters for various materials.
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
+ <diffuse>
+  <r>0.93</r>
+  <g>0.95</g>
+  <b>0.93</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.1</r>
+  <g>0.12</g>
+  <b>0.1</b>
+  <a>1.0</a>
+ </specular>
+ <shininess>1.2</shininess>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.3</bumpiness>
  <object-group>

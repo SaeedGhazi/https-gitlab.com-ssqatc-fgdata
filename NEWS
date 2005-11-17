@@ -1,5 +1,5 @@
-New in 0.9.9-pre1
-* November 8, 2005
+New in 0.9.9-pre2
+* November 9, 2005
 
 * New well integrated volumetric clouds by Harald Johnsen
 * Removed 'old' 3D clouds code.
@@ -24,6 +24,7 @@ New in 0.9.9-pre1
   border thickness, change fonts, dialog boxes are draggable across
   the screen, you can enable automatic line wrapping, select
   colors, and allow key presses to be bound to widgets.
+* Replaced many hardcoded dialog boxes with xml configurable dialog boxes.
 * Support for xml configurable gui themes.
 * Help dialog boxes supported for each aircraft listing special keys,
   global keys, procedures and performance data.
@@ -59,7 +60,8 @@ New in 0.9.9-pre1
 * Include an external utility that can feed saved nmea tracks back
   into FlightGear.  If you take a gps on a real flight with you and
   capture the output, you can replay your flight in FlightGear.
-
+* Added a function that can intersect any arbitrary vector with the
+  loaded scenery and return the hit point.
 * Many updates and fixes to the joystick configuration files, many new
   joysticks directly supported.
 
@@ -81,7 +83,7 @@ New in 0.9.9-pre1
 
 * Aircraft that have had updates since the last release: 737, A-10,
   AN-225, B-52F, BAC-TSR2, Citation-II (550), Comper Swift, Concorde,
-  Hunter, OV10, Spitfire, T37, B1900d, bo105, C172 et. al., DHC2F
+  Hunter, OV10, Spitfire, T37, B1900d, bo105, C172 et. al., C182, DHC2F
   (Beaver), F16, Fokker DR1 Triplane, Fokker 50 (turboprop), Fokker
   100 (jet), J3 Cub, P51, Santa, Seahawk, and 1903 Wright Flyer.
   

@@ -592,6 +592,9 @@ Started September 2000 by David Megginson, david@megginson.com
   <keyboard include="keyboard.xml"/>
 
   <!-- included externally -->
+  <joysticks include="joysticks.xml"/>
+
+  <!-- included externally -->
   <mice include="mice.xml"/>
 
  </input>

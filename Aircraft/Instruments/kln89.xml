@@ -36,7 +36,7 @@ properties' values.
   <layer>
    <name>background</name>
    <texture>
-    <path>Aircraft/Instruments/Textures/KLN89-dcl2.rgb</path>
+    <path>Aircraft/Instruments/Textures/kln89.rgb</path>
     <x1>0.0</x1>
     <x2>0.8867</x2>
     <y1>0.4668</y1>

@@ -299,6 +299,7 @@
 
   <item>
    <label>Fuel and Payload</label>
+   <enabled>false</enabled>
    <binding>
     <command>nasal</command>
     <script>gui.showWeightDialog()</script>

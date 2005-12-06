@@ -30,7 +30,7 @@ Here's a simplified grammar:
 
   menu : label, item*
 
-  item : label, binding*
+  item : label, enabled, binding*
 
 The bindings are standard FlightGear bindings, the same as the ones
 used for the keyboard, mouse, joysticks, and the instrument panel.

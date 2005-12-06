@@ -45,6 +45,11 @@ INIT = func {
     props.globals.getNode("/sim/help/debug", 1).setValues(debug_keys);
     props.globals.getNode("/sim/help/basic", 1).setValues(basic_keys);
     props.globals.getNode("/sim/help/common", 1).setValues(common_aircraft_keys);
+
+    # enable "Fuel & Payload" dialog
+    if (getprop("/sim/flight-model") == "yasim") {
+        setprop("/sim/menubar/default/menu[5]/item[0]/enabled", 1);
+    }
 }
 settimer(INIT, 0);
 
@@ -98,13 +103,13 @@ Widget = {
 ########################################################################
 
 nextStyle = func {
-	numStyles = size(props.globals.getNode("/sim").getChildren("gui"));
-	curr = getprop("/sim/current-gui") + 1;
-	if (curr >= numStyles) {
-		curr = 0;
-	}
-	setprop("/sim/current-gui", curr);
-	fgcommand("gui-redraw", props.Node.new());
+    numStyles = size(props.globals.getNode("/sim").getChildren("gui"));
+    curr = getprop("/sim/current-gui") + 1;
+    if (curr >= numStyles) {
+        curr = 0;
+    }
+    setprop("/sim/current-gui", curr);
+    fgcommand("gui-redraw", props.Node.new());
 }
 
 

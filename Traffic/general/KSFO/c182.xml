@@ -35,4 +35,5 @@
             </arrival>
         <repeat>2Hr</repeat>
        </flight>
-
+    </aircraft>
+</trafficlist>

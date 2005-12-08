@@ -46,9 +46,13 @@ INIT = func {
     props.globals.getNode("/sim/help/basic", 1).setValues(basic_keys);
     props.globals.getNode("/sim/help/common", 1).setValues(common_aircraft_keys);
 
-    # enable "Fuel & Payload" dialog
+    # enable "Fuel & Payload" menu entry
     if (getprop("/sim/flight-model") == "yasim") {
         setprop("/sim/menubar/default/menu[5]/item[0]/enabled", 1);
+    }
+    # disable "Autopilot" menu entry when KAP140 is used
+    if (props.globals.getNode("/autopilot/KAP140/locks") != nil) {
+        setprop("/sim/menubar/default/menu[3]/enabled", 0);
     }
 }
 settimer(INIT, 0);

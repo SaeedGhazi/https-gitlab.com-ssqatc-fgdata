@@ -27,6 +27,26 @@ showDialog = func {
               props.Node.new({ "dialog-name" : arg[0]}));
 }
 
+##
+# Enable/disable named menu entry
+#
+menuEnable = func(name, state) {
+    foreach (menu; props.globals.getNode("/sim/menubar/default").getChildren("menu")) {
+        if ((n = menu.getNode("name")) != nil and n.getValue() == name) {
+            menu.getNode("enabled").setBoolValue(state);
+            return;
+        }
+        foreach (item; menu.getChildren("item")) {
+            if ((n = item.getNode("name")) != nil and n.getValue() == name) {
+                item.getNode("enabled").setBoolValue(state);
+                return;
+            }
+        }
+    }
+}
+
+
+
 ########################################################################
 # Private Stuff:
 ########################################################################
@@ -47,15 +67,13 @@ INIT = func {
     props.globals.getNode("/sim/help/common", 1).setValues(common_aircraft_keys);
 
     # enable "Fuel & Payload" menu entry
-    if (getprop("/sim/flight-model") == "yasim") {
-        setprop("/sim/menubar/default/menu[5]/item[0]/enabled", 1);
-    }
+    menuEnable("fuel-and-payload", getprop("/sim/flight-model") == "yasim");
     # disable "Autopilot" menu entry when KAP140 is used
-    if (props.globals.getNode("/autopilot/KAP140/locks") != nil) {
-        setprop("/sim/menubar/default/menu[3]/enabled", 0);
-    }
+    menuEnable("autopilot", props.globals.getNode("/autopilot/KAP140/locks") == nil);
 }
 settimer(INIT, 0);
+
+
 
 ##
 # How many seconds do we show the tip?

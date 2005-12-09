@@ -201,7 +201,7 @@
    <label>Tower position</label>
    <binding>
     <command>dialog-show</command>
-	<dialog-name>location-of-tower</dialog-name>
+    <dialog-name>location-of-tower</dialog-name>
    </binding>
   </item>
 
@@ -209,6 +209,7 @@
 
  <menu>
   <label>Autopilot</label>
+  <name>autopilot</name>
 
   <item>
    <label>Autopilot Settings</label>
@@ -299,7 +300,7 @@
 
   <item>
    <label>Fuel and Payload</label>
-   <enabled>false</enabled>
+   <name>fuel-and-payload</name>
    <binding>
     <command>nasal</command>
     <script>gui.showWeightDialog()</script>

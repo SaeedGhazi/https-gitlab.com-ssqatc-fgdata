@@ -66,9 +66,8 @@ INIT = func {
     props.globals.getNode("/sim/help/basic", 1).setValues(basic_keys);
     props.globals.getNode("/sim/help/common", 1).setValues(common_aircraft_keys);
 
-    # enable "Fuel & Payload" menu entry
+    # enable/disable menu entries
     menuEnable("fuel-and-payload", getprop("/sim/flight-model") == "yasim");
-    # disable "Autopilot" menu entry when KAP140 is used
     menuEnable("autopilot", props.globals.getNode("/autopilot/KAP140/locks") == nil);
 }
 settimer(INIT, 0);
@@ -385,8 +384,7 @@ showHelpDialog = func {
     w.prop().getNode("binding[0]/script", 1).setValue("delete(gui.dialog, \"" ~ name ~ "\")");
     w.prop().getNode("binding[1]/command", 1).setValue("dialog-close");
 
-    w = dialog[name].addChild("hrule");
-    w.addChild("empty");
+    dialog[name].addChild("hrule").addChild("empty");
 
     # key list
     keylist = dialog[name].addChild("group");
@@ -419,7 +417,9 @@ showHelpDialog = func {
     lines = node.getChildren("line");
     if (size(lines)) {
         if (size(keydefs)) {
-            dialog[name].addChild("text").set("label", "_________________________");
+            dialog[name].addChild("empty").set("pref-height", 4);
+            dialog[name].addChild("hrule").addChild("empty");
+            dialog[name].addChild("empty").set("pref-height", 4);
         }
 
         g = dialog[name].addChild("group");

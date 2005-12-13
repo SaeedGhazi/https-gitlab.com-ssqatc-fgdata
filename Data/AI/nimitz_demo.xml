@@ -1,11 +1,13 @@
 <?xml version="1.0"?>
-  <!--
+<!--
     x, y, z-offset-m   The distance in meters of the Fresnel Lens Optical Landing System
-                        (FLOLS) from the carrier model origin.
-	max-lat, min-lat   Define an operating box in term of the max and min lat excursions 
-	                   from the start position
-	max-lon, min-lon   Define an operating box in term of the max and min lon excursions 
-	                   from the start position
+                       (FLOLS) from the carrier model origin.
+    max-lat, min-lat   Defines an operating box in terms of the max and min lat
+                       excursions from the start position
+    max-lon, min-lon   Defines an operating box in terms of the max and min lon
+                       excursions from the start position
+    tacan-channel-ID>  Defines a TACAN channel for display purposes only
+
 -->
   <PropertyList>
     <scenario>
@@ -13,7 +15,8 @@
         <type>carrier</type>
         <name>Nimitz</name>
         <pennant-number>CVN-68</pennant-number>
-        <model>Models/Geometry/Nimitz/carrier.xml</model>
+        <TACAN-channel-ID>029Y</TACAN-channel-ID>
+        <model>Models/Geometry/Nimitz/nimitz.xml</model>
         <wire>wire-1</wire>
         <wire>wire-2</wire>
         <wire>wire-3</wire>
@@ -22,23 +25,26 @@
         <catapult>cat-2</catapult>
         <catapult>cat-3</catapult>
         <catapult>cat-4</catapult>
+        <!---->
         <solid>Deck-1</solid>
-		<solid>Deck-2</solid>
-		<solid>Deck-3</solid>
-		<solid>Deck-4</solid>
-		<solid>Deck-5</solid>
-		<solid>Deck-6</solid>
-		<solid>Deck-7</solid>
-		<solid>Deck-8</solid>
+        <solid>Deck-2</solid>
+        <solid>Deck-3</solid>
+        <solid>Deck-4</solid>
+        <solid>Deck-5</solid>
+        <solid>Deck-6</solid>
+        <solid>Deck-7</solid>
+        <solid>Deck-8</solid>
         <solid>Round-down</solid>
+        <solid>Elevator-1-Deck</solid>
+        <solid>Elevator-2-Deck</solid>
         <solid>Elevator-3-Deck</solid>
         <solid>Elevator-4-Deck</solid>
-        <latitude>37.689</latitude>
-        <longitude>-122.683</longitude>
+        <latitude>37.8</latitude>
+        <longitude>-122.6</longitude>
         <speed>10</speed>
         <heading>200</heading>
         <rudder>0</rudder>
-        <turn-radius-ft>4000</turn-radius-ft>
+        <turn-radius-ft>6000</turn-radius-ft>
         <flols-pos>
           <x-offset-m>69.84</x-offset-m>
           <y-offset-m>-39.67</y-offset-m>
@@ -65,11 +71,77 @@
           <y-offset-m>26</y-offset-m>
           <z-offset-m>20</z-offset-m>
         </parking-pos>
-		<max-lat>0.01</max-lat>
-		<min-lat>0.05</min-lat>
-		<max-long>0.05</max-long>
-		<min-long>0.01</min-long>
+        <max-lat>0.01</max-lat>
+        <min-lat>0.05</min-lat>
+        <max-long>0.05</max-long>
+        <min-long>0.01</min-long>
       </entry>
-	   
+      <entry>
+        <type>carrier</type>
+        <name>Eisenhower</name>
+        <pennant-number>CVN-69</pennant-number>
+        <TACAN-channel-ID>030Y</TACAN-channel-ID>
+        <model>Models/Geometry/Nimitz/eisenhower.xml</model>
+        <wire>wire-1</wire>
+        <wire>wire-2</wire>
+        <wire>wire-3</wire>
+        <wire>wire-4</wire>
+        <catapult>cat-1</catapult>
+        <catapult>cat-2</catapult>
+        <catapult>cat-3</catapult>
+        <catapult>cat-4</catapult>
+        <solid>Deck-1</solid>
+        <solid>Deck-2</solid>
+        <solid>Deck-3</solid>
+        <solid>Deck-4</solid>
+        <solid>Deck-5</solid>
+        <solid>Deck-6</solid>
+        <solid>Deck-7</solid>
+        <solid>Deck-8</solid>
+        <solid>Round-down</solid>
+        <solid>Elevator-1-Deck</solid>
+        <solid>Elevator-2-Deck</solid>
+        <solid>Elevator-3-Deck</solid>
+        <solid>Elevator-4-Deck</solid>
+        <solid>Door-Fairing-2</solid>
+        <solid>Door-Fairing-3</solid>
+        <solid>Hangar</solid>
+        <latitude>43.0140</latitude>
+        <longitude>3.3587</longitude>
+        <speed>10</speed>
+        <heading>200</heading>
+        <rudder>0</rudder>
+        <turn-radius-ft>6000</turn-radius-ft>
+        <flols-pos>
+          <x-offset-m>69.84</x-offset-m>
+          <y-offset-m>-39.67</y-offset-m>
+          <z-offset-m>21.47</z-offset-m>
+        </flols-pos>
+        <parking-pos>
+          <name>cat-2</name>
+          <heading-offset-deg>-1</heading-offset-deg>
+          <x-offset-m>1.60851</x-offset-m>
+          <y-offset-m>26</y-offset-m>
+          <z-offset-m>-4.9159</z-offset-m>
+        </parking-pos>
+        <parking-pos>
+          <name>cat-1</name>
+          <heading-offset-deg>-9</heading-offset-deg>
+          <x-offset-m>0.0401001</x-offset-m>
+          <y-offset-m>26</y-offset-m>
+          <z-offset-m>17</z-offset-m>
+        </parking-pos>
+        <parking-pos>
+          <name>park-1</name>
+          <heading-offset-deg>-90</heading-offset-deg>
+          <x-offset-m>54.33</x-offset-m>
+          <y-offset-m>26</y-offset-m>
+          <z-offset-m>20</z-offset-m>
+        </parking-pos>
+        <max-lat>0.01</max-lat>
+        <min-lat>0.05</min-lat>
+        <max-long>0.05</max-long>
+        <min-long>0.01</min-long>
+      </entry>
     </scenario>
   </PropertyList>

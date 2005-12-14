@@ -1,112 +1,114 @@
 <?xml version="1.0"?>
 
 <PropertyList>
+	<name>timeofday</name>
+	<layout>vbox</layout>
+	<default-padding>4</default-padding>
+	<modal>false</modal>
 
- <name>timeofday</name>
- <width>300</width>
- <height>330</height>
- <modal>false</modal>
+	<text>
+		<label>Set Time of Day</label>
+	</text>
 
- <text>
-  <x>40</x>
-  <y>280</y>
-  <label>Set Time of Day</label>
- </text>
+	<hrule><dummy/></hrule>
 
- <group>
-  <button>
-   <x>40</x>
-   <y>250</y>
-   <legend>Clock Time</legend>
-   <binding>
-    <command>timeofday</command>
-    <timeofday>real</timeofday>
-   </binding>
-  </button>
+	<group>
+		<layout>hbox</layout>
 
-  <button>
-   <x>40</x>
-   <y>220</y>
-   <legend>Dawn</legend>
-   <binding>
-    <command>timeofday</command>
-    <timeofday>dawn</timeofday>
-   </binding>
-  </button>
+		<group>
+			<layout>vbox</layout>
+			<button>
+				<legend>Clock Time</legend>
+				<equal>true</equal>
+				<key>0</key>
+				<binding>
+					<command>timeofday</command>
+					<timeofday>real</timeofday>
+				</binding>
+			</button>
+		</group>
 
-  <button>
-   <x>40</x>
-   <y>190</y>
-   <legend>Morning</legend>
-   <binding>
-    <command>timeofday</command>
-    <timeofday>morning</timeofday>
-   </binding>
-  </button>
+		<group>
+			<layout>vbox</layout>
+			<default-padding>0</default-padding>
+			<button>
+				<legend>Dawn</legend>
+				<equal>true</equal>
+				<key>1</key>
+				<binding>
+					<command>timeofday</command>
+					<timeofday>dawn</timeofday>
+				</binding>
+			</button>
 
-  <button>
-   <x>40</x>
-   <y>160</y>
-   <legend>Noon</legend>
-   <binding>
-    <command>timeofday</command>
-    <timeofday>noon</timeofday>
-   </binding>
-  </button>
+			<button>
+				<legend>Morning</legend>
+				<equal>true</equal>
+				<key>2</key>
+				<binding>
+					<command>timeofday</command>
+					<timeofday>morning</timeofday>
+				</binding>
+			</button>
 
-  <button>
-   <x>40</x>
-   <y>130</y>
-   <legend>Afternoon</legend>
-   <binding>
-    <command>timeofday</command>
-    <timeofday>afternoon</timeofday>
-   </binding>
-  </button>
+			<button>
+				<legend>Noon</legend>
+				<equal>true</equal>
+				<key>3</key>
+				<binding>
+					<command>timeofday</command>
+					<timeofday>noon</timeofday>
+				</binding>
+			</button>
 
-  <button>
-   <x>40</x>
-   <y>100</y>
-   <legend>Dusk</legend>
-   <binding>
-    <command>timeofday</command>
-    <timeofday>dusk</timeofday>
-   </binding>
-  </button>
+			<button>
+				<legend>Afternoon</legend>
+				<equal>true</equal>
+				<key>4</key>
+				<binding>
+					<command>timeofday</command>
+					<timeofday>afternoon</timeofday>
+				</binding>
+			</button>
 
-  <button>
-   <x>40</x>
-   <y>70</y>
-   <legend>Evening</legend>
-   <binding>
-    <command>timeofday</command>
-    <timeofday>evening</timeofday>
-   </binding>
-  </button>
+			<button>
+				<legend>Dusk</legend>
+				<equal>true</equal>
+				<key>5</key>
+				<binding>
+					<command>timeofday</command>
+					<timeofday>dusk</timeofday>
+				</binding>
+			</button>
 
-  <button>
-   <x>40</x>
-   <y>40</y>
-   <legend>Night</legend>
-   <binding>
-    <command>timeofday</command>
-    <timeofday>midnight</timeofday>
-   </binding>
-  </button>
- </group>
+			<button>
+				<legend>Evening</legend>
+				<equal>true</equal>
+				<key>6</key>
+				<binding>
+					<command>timeofday</command>
+					<timeofday>evening</timeofday>
+				</binding>
+			</button>
 
- <group>
-  <button>
-   <x>120</x>
-   <y>10</y>
-   <legend>Dismiss</legend>
-   <default>true</default>
-   <key>Esc</key>
-   <binding>
-    <command>dialog-close</command>
-   </binding>
-  </button>
+			<button>
+				<legend>Night</legend>
+				<equal>true</equal>
+				<key>7</key>
+				<binding>
+					<command>timeofday</command>
+					<timeofday>midnight</timeofday>
+				</binding>
+			</button>
+		</group>
+	</group>
 
- </group>
-
+	<button>
+		<legend>Close</legend>
+		<default>true</default>
+		<key>Esc</key>
+		<binding>
+			<command>dialog-close</command>
+		</binding>
+	</button>
 </PropertyList>

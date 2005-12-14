@@ -17,6 +17,37 @@
 
 		<group>
 			<layout>vbox</layout>
+			<default-padding>0</default-padding>
+			<text>
+				<label>UTC</label>
+			</text>
+			<text>
+				<label>000:00:00</label>
+				<live>true</live>
+				<property>/sim/time/gmt-string</property>
+			</text>
+
+			<empty><pref-height>6</pref-height></empty>
+			<hrule><dummy/></hrule>
+			<empty><pref-height>6</pref-height></empty>
+
+			<text>
+				<label>local</label>
+			</text>
+			<text>
+				<label>00:00</label>
+				<live>true</live>
+				<property>/instrumentation/clock/local-short-string</property>
+			</text>
+
+			<empty><pref-height>6</pref-height></empty>
+			<hrule><dummy/></hrule>
+			<empty><pref-height>6</pref-height></empty>
+
+			<empty>
+				<stretch>true</stretch>
+			</empty>
+
 			<button>
 				<legend>Clock Time</legend>
 				<equal>true</equal>
@@ -27,6 +58,8 @@
 				</binding>
 			</button>
 		</group>
+
+		<empty><pref-width>2</pref-width></empty>
 
 		<group>
 			<layout>vbox</layout>

@@ -2,19 +2,15 @@
 
 <!-- Sound control dialog -->
 
-<!--
-    /sim/sound/pause
-    /sim/sound/volume
-  -->
-
 <PropertyList>
   <name>sound-dialog</name>
   <layout>vbox</layout>
 
   <text>
     <label>Sound Configuration</label>
-    <padding>10</padding>
   </text>
+
+  <hrule><dummy/></hrule>
 
   <checkbox>
     <label>Mute Sound</label>
@@ -23,30 +19,26 @@
       <command>dialog-apply</command>
     </binding>
   </checkbox>
-  
+
   <group>
     <layout>hbox</layout>
     <text><label>Volume:</label></text>
     <slider>
       <property>/sim/sound/volume</property>
       <binding>
-	<command>dialog-apply</command>
+        <command>dialog-apply</command>
       </binding>
     </slider>
   </group>
-  
+
   <group>
     <layout>hbox</layout>
     <default-padding>10</default-padding>
 
     <button>
-      <legend>OK</legend>
+      <legend>Close</legend>
       <default>true</default>
-      <equal>true</equal>
       <key>Esc</key>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
       <binding>
         <command>dialog-close</command>
       </binding>

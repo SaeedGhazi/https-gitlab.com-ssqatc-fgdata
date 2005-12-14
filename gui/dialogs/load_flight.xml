@@ -19,7 +19,7 @@
    <layout>hbox</layout>
    <empty><stretch>true</stretch></empty>
    <button>
-     <legend>OK</legend>
+     <legend>Load</legend>
      <equal>true</equal>
      <default>true</default>
      <binding><command>dialog-apply</command></binding>

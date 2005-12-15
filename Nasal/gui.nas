@@ -69,9 +69,25 @@ INIT = func {
     # enable/disable menu entries
     menuEnable("fuel-and-payload", getprop("/sim/flight-model") == "yasim");
     menuEnable("autopilot", props.globals.getNode("/autopilot/KAP140/locks") == nil);
+
+    fps_loop();
 }
 settimer(INIT, 0);
 
+
+##
+# Show/hide the fps display dialog.
+#
+var show_fps = -1;
+fps_loop = func {
+	var i = getprop("/sim/rendering/fps-display");
+	if (i != show_fps) {
+		fgcommand(i ? "dialog-show" : "dialog-close",
+				props.Node.new({"dialog-name": "fps"}));
+		show_fps = i;
+	}
+	settimer(fps_loop, 1);
+}
 
 
 ##

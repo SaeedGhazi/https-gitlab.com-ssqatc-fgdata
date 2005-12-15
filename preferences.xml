@@ -56,6 +56,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <shadows-ai type="bool">false</shadows-ai>
    <shadows-to type="bool">false</shadows-to>
    <shadows-debug type="bool">false</shadows-debug>
+   <fps-display type="bool">false</fps-display>
   </rendering>
   <model-hz type="int">120</model-hz>
   <navdb>

@@ -18,7 +18,7 @@
     <checkbox>
       <halign>left</halign>
       <label>Show frame rate</label>
-      <property>/sim/hud/draw-fps</property>
+      <property>/sim/rendering/fps-display</property>
       <binding>
         <command>dialog-apply</command>
       </binding>

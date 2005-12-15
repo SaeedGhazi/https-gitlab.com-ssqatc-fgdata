@@ -88,7 +88,6 @@ Started September 2000 by David Megginson, david@megginson.com
    <visibility type="bool">false</visibility>
    <antialiased type="bool">false</antialiased>
    <alpha type="float">0.67</alpha>
-   <draw-fps>false</draw-fps>
   </hud>
   <systems>
    <path>Aircraft/Generic/generic-systems.xml</path>

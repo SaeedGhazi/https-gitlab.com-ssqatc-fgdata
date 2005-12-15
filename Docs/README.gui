@@ -339,6 +339,14 @@ Example:
 
 
 
+list
+----
+
+like "combo", but displays all values in a scrollable list box with
+slider on the right side. Doesn't take bindings.
+
+
+
 select
 ------
 

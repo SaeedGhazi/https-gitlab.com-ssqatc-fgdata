@@ -62,6 +62,17 @@ interpolate = func {
     _interpolate(arg[0], size(arg) == 1 ? [] : subvec(arg, 1));
 }
 
+
+##
+# Convenience wrapper for the _setlistener function. Takes a
+# single string or props.Node object in arg[0] indicating the
+# listened to property, and a function in arg[1].
+#
+setlistener = func {
+    _setlistener(isa(arg[0], props.Node) ? arg[0]._g : arg[0], arg[1]);
+}
+
+
 ##
 # Returns true if the symbol name is defined in the caller, or the
 # caller's lexical namespace.  (i.e. defined("varname") tells you if

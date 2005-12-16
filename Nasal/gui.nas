@@ -57,11 +57,10 @@ menuEnable = func(name, state) {
 # property and the argument for the "dialog-show" command.  This
 # probably isn't really needed...
 #
-screenHProp = tipArg = fps = nil;
+screenHProp = tipArg = nil;
 INIT = func {
     screenHProp = props.globals.getNode("/sim/startup/ysize");
     tipArg = props.Node.new({ "dialog-name" : "PopTip" });
-    fps = props.globals.getNode("/sim/rendering/fps-display");
 
     props.globals.getNode("/sim/help/debug", 1).setValues(debug_keys);
     props.globals.getNode("/sim/help/basic", 1).setValues(basic_keys);
@@ -71,7 +70,7 @@ INIT = func {
     menuEnable("fuel-and-payload", getprop("/sim/flight-model") == "yasim");
     menuEnable("autopilot", props.globals.getNode("/autopilot/KAP140/locks") == nil);
 
-    fps_loop();
+    setlistener("/sim/rendering/fps-display", fpsDisplay);
 }
 settimer(INIT, 0);
 
@@ -80,14 +79,13 @@ settimer(INIT, 0);
 # Show/hide the fps display dialog.
 #
 var show_fps = 0;
-fps_loop = func {
-    var i = fps.getValue();
+fpsDisplay = func {
+    var i = cmdarg().getBoolValue();
     if (i != show_fps) {
         fgcommand(i ? "dialog-show" : "dialog-close",
                 props.Node.new({"dialog-name": "fps"}));
         show_fps = i;
     }
-    settimer(fps_loop, 1);
 }
 
 

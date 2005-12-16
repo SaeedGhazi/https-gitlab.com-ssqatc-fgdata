@@ -115,6 +115,24 @@ dump = func {
 }
 
 ##
+# Recursively copy property branch from source Node to
+# destination Node. Doesn't copy aliases.
+#
+copy = func(src, dest) {
+    foreach(c; src.getChildren()) {
+        name = c.getName() ~ "[" ~ c.getIndex() ~ "]";
+        copy(src.getNode(name), dest.getNode(name, 1));
+    }
+    var type = src.getType();
+    var val = src.getValue();
+    if(type == "ALIAS" or type == "NONE") { return; }
+    elsif(type == "BOOL") { dest.setBoolValue(val); }
+    elsif(type == "INT") { dest.setIntValue(val); }
+    elsif(type == "DOUBLE") { dest.setDoubleValue(val); }
+    else { dest.setValue(val); }
+}
+
+##
 # Utility.  Turns any ghosts it finds (either solo, or in an
 # array) into Node objects.
 #

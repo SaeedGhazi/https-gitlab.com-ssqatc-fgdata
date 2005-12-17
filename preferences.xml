@@ -42,20 +42,27 @@ Started September 2000 by David Megginson, david@megginson.com
    <debug type="bool">false</debug>
    <realism>5</realism>
    <static-lod>
-    <detailed>1500</detailed>
-    <rough>9000</rough>
-    <bare>30000</bare>
+    <detailed userarchive="y">1500</detailed>
+    <rough userarchive="y">9000</rough>
+    <bare userarchive="y">30000</bare>
    </static-lod>
-   <random-objects type="bool">true</random-objects>
-   <horizon-effect type="bool">false</horizon-effect>
-   <enhanced-lighting type="bool">false</enhanced-lighting>
-   <distance-attenuation type="bool">false</distance-attenuation>
+   <random-objects type="bool" userarchive="y">true</random-objects>
+   <horizon-effect type="bool" userarchive="y">false</horizon-effect>
+   <enhanced-lighting type="bool" userarchive="y">false</enhanced-lighting>
+   <distance-attenuation type="bool" userarchive="y">false</distance-attenuation>
+   <precipitation-enable type="bool" userarchive="y">false</precipitation-enable>
+   <lightning-enable type="bool" userarchive="y">false</lightning-enable>
+   <bump-mapping type="bool" userarchive="y">false</bump-mapping>
+   <clouds3d-enable type="bool" userarchive="y">false</clouds3d-enable>
+   <clouds3d-vis-range type="float" userarchive="y">25000</clouds3d-vis-range>+    <clouds3d-density type="float" userarchive="y">100</clouds3d-density>
+   <clouds3d-cache-size type="int" userarchive="y">1024</clouds3d-cache-size>
+   <clouds3d-cache-resolution type="int" userarchive="y">64</clouds3d-cache-resolution>
    <draw-otw type="bool">true</draw-otw>
-   <shadows-ac type="bool">false</shadows-ac>
-   <shadows-ac-transp type="bool">false</shadows-ac-transp>
-   <shadows-ai type="bool">false</shadows-ai>
-   <shadows-to type="bool">false</shadows-to>
-   <shadows-debug type="bool">false</shadows-debug>
+   <shadows-ac type="bool" userarchive="y">false</shadows-ac>
+   <shadows-ac-transp type="bool" userarchive="y">false</shadows-ac-transp>
+   <shadows-ai type="bool" userarchive="y">false</shadows-ai>
+   <shadows-to type="bool" userarchive="y">false</shadows-to>
+   <shadows-debug type="bool" userarchive="y">false</shadows-debug>
    <fps-display type="bool">false</fps-display>
   </rendering>
   <model-hz type="int">120</model-hz>
@@ -66,7 +73,7 @@ Started September 2000 by David Megginson, david@megginson.com
    </localizers>
   </navdb>
   <sound>
-   <volume>0.8</volume>
+   <volume userarchive="y">0.8</volume>
    <pause type="bool">false</pause>
    <voice type="bool">true</voice>
   </sound>

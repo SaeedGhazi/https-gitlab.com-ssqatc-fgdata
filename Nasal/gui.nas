@@ -71,6 +71,9 @@ INIT = func {
     menuEnable("autopilot", props.globals.getNode("/autopilot/KAP140/locks") == nil);
 
     setlistener("/sim/rendering/fps-display", fpsDisplay);
+    if (getprop("/sim/rendering/fps-display")) {
+        fgcommand("dialog-show", props.Node.new({"dialog-name": "fps"}));
+    }
 }
 settimer(INIT, 0);
 
@@ -78,14 +81,9 @@ settimer(INIT, 0);
 ##
 # Show/hide the fps display dialog.
 #
-var show_fps = 0;
 fpsDisplay = func {
-    var i = cmdarg().getBoolValue();
-    if (i != show_fps) {
-        fgcommand(i ? "dialog-show" : "dialog-close",
-                props.Node.new({"dialog-name": "fps"}));
-        show_fps = i;
-    }
+    var cmd = cmdarg().getBoolValue() ? "dialog-show" : "dialog-close";
+    fgcommand(cmd, props.Node.new({"dialog-name": "fps"}));
 }
 
 

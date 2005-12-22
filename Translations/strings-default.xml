@@ -81,6 +81,8 @@
  <enable-game-mode-desc>Enable full-screen game mode</enable-game-mode-desc>
  <disable-splash-screen-desc>Disable splash screen</disable-splash-screen-desc>
  <enable-splash-screen-desc>Enable splash screen</enable-splash-screen-desc>
+ <disable-save-on-exit>Don't save preferences upon program exit</disable-save-on-exit>
+ <enable-save-on-exit>Allow saving preferences at program exit</enable-save-on-exit>
  <disable-intro-music-desc>Disable introduction music</disable-intro-music-desc>
  <enable-intro-music-desc>Enable introduction music</enable-intro-music-desc>
  <disable-mouse-pointer-desc>Disable extra mouse pointer</disable-mouse-pointer-desc>
@@ -214,6 +216,7 @@
  <!-- Time options -->
  <time-options>Time Options</time-options>
  <timeofday-desc>Specify a time of day</timeofday-desc>
+ <season-desc>Specify the startup season</season-desc>
  <time-offset-desc>Add this time offset</time-offset-desc>
  <time-match-real-desc>Synchronize time with real-world time</time-match-real-desc>
  <time-match-local-desc>Synchronize time with local real-world time</time-match-local-desc>

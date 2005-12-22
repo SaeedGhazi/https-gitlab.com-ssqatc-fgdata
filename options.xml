@@ -80,6 +80,18 @@
    </option>
 
    <option>
+    <name>disable-save-on-exit</name>
+    <description>strings/disable-save-on-exit</description>
+    <brief/>
+   </option>
+ 
+   <option>
+    <name>enable-save-on-exit</name>
+    <description>strings/enable-save-on-exit</description>
+    <brief/>
+   </option>
+
+   <option>
     <name>disable-intro-music</name>
     <description>strings/disable-intro-music-desc</description>
    </option>
@@ -495,6 +507,12 @@
     <name>timeofday</name>
     <arg>{real,dawn,morning,noon,afternoon,dusk,evening,midnight}</arg>
     <description>strings/timeofday-desc</description>
+   </option>
+
+   <option>
+    <name>season</name>
+    <arg>{summer,winter}</arg>
+    <description>strings/season-desc</description>
    </option>
 
    <option>

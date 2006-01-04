@@ -82,7 +82,7 @@ $Id$
   <number>
    <unix>4</unix>
    <mac>4</mac>
-   <windows>5</windows>
+   <windows>6</windows>
   </number>
   <desc>View Direction</desc>
   <low>
@@ -105,7 +105,7 @@ $Id$
   <number>
    <unix>5</unix>
    <mac>5</mac>
-   <windows>4</windows>
+   <windows>7</windows>
   </number>
   <desc>Elevator trim</desc>
   <binding><command>null</command></binding>

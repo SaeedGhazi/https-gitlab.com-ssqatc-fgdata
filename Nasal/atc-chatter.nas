@@ -15,7 +15,7 @@ fg_root = "";
 chatter = "UK";
 chatter_dir = "";
 
-chatter_index = 2;
+chatter_index = 0;
 chatter_size = 0;
 chatter_list = 0;
 
@@ -31,6 +31,9 @@ CHATTER_INIT = func {
     chatter_dir = sprintf("%s/ATC/Chatter/%s", fg_root, chatter);
     chatter_list = directory( chatter_dir );
     chatter_size = size(chatter_list);
+    # seed the random number generator (with time) so we don't start in
+    # same place in the sequence each run.
+    srand();
     chatter_index = int( chatter_size * rand() );
 }
 settimer(CHATTER_INIT, 0);
@@ -42,19 +45,23 @@ settimer(CHATTER_INIT, 0);
 
 chatter_update = func {
     if ( chatter_index >= chatter_size ) {
-        chatter_index = 2;
+        chatter_index = 0;
     }
 
-    print("update atc chatter ", chatter_list[chatter_index] );
+    if ( chatter_list[chatter_index] != "."
+         and chatter_list[chatter_index] != ".." )
+    {
+        print("update atc chatter ", chatter_list[chatter_index] );
 
-    tmpl = { path : chatter_dir, file : chatter_list[chatter_index] };
-    if ( getprop("/sim/sound/atc-chatter") ) {
-        # go through the motions, but only schedule the message to play
-        # if atc-chatter is enabled.
-        fgcommand("play-audio-message", props.Node.new(tmpl) );
+        tmpl = { path : chatter_dir, file : chatter_list[chatter_index] };
+        if ( getprop("/sim/sound/atc-chatter") ) {
+            # go through the motions, but only schedule the message to play
+            # if atc-chatter is enabled.
+            fgcommand("play-audio-message", props.Node.new(tmpl) );
+        }
     }
+
     chatter_index = chatter_index + 1;
-
     nextChatter();
 }
 

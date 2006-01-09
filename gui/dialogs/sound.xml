@@ -31,6 +31,14 @@
     </slider>
   </group>
 
+  <checkbox>
+    <label>ATC Chatter</label>
+    <property>/sim/sound/atc-chatter</property>
+    <binding>
+      <command>dialog-apply</command>
+    </binding>
+  </checkbox>
+
   <group>
     <layout>hbox</layout>
     <default-padding>10</default-padding>

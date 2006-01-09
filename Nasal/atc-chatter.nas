@@ -15,6 +15,9 @@ fg_root = "";
 chatter = "UK";
 chatter_dir = "";
 
+chatter_min_interval = 20.0;
+chatter_max_interval = 40.0;
+
 chatter_index = 0;
 chatter_size = 0;
 chatter_list = 0;
@@ -71,8 +74,11 @@ chatter_update = func {
 #############################################################################
 
 nextChatter = func {
-    # schedule next message in next 10-30 seconds so we have a bit
+    # schedule next message in next min-max interval seconds so we have a bit
     # of a random pacing
-    settimer(chatter_update, 10 + int(rand() * 20) );
+    next_interval = chatter_min_interval
+       + int(rand() * (chatter_max_interval - chatter_min_interval));
+    print( "next chatter in ", next_interval, " seconds");
+    settimer(chatter_update, next_interval );
 }
 nextChatter();

@@ -51,8 +51,8 @@ chatter_update = func {
         chatter_index = 0;
     }
 
-    if ( chatter_list[chatter_index] != "."
-         and chatter_list[chatter_index] != ".." )
+    if ( substr(chatter_list[chatter_index],
+                size(chatter_list[chatter_index]) - 4) == ".wav" )
     {
         print("update atc chatter ", chatter_list[chatter_index] );
 
@@ -62,6 +62,8 @@ chatter_update = func {
             # if atc-chatter is enabled.
             fgcommand("play-audio-message", props.Node.new(tmpl) );
         }
+    } else {
+        print("not playing non wav ", chatter_list[chatter_index] );
     }
 
     chatter_index = chatter_index + 1;

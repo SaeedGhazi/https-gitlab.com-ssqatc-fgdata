@@ -163,8 +163,9 @@ jet:      A turbojet/fan engine.  It accepts a <control> subelement to map a
                           be the point of application of thrust.
           mass:           The mass of the engine, in pounds.
           thrust:         The maximum sea-level thrust, in pounds.
-          afterburner:    Maximum additional thrust from the afterburner,
-                          in pounds [0].
+          afterburner:    Maximum total thrust with afterburner/reheat,
+                          in pounds [defaults to "no additional
+                          thrust"].
           rotate:         Vector angle of the thrust in degrees about the 
                           Y axis [0].
           n1-idle:        Idling rotor speed [55].

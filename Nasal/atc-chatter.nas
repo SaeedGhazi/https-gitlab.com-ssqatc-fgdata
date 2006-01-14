@@ -54,16 +54,15 @@ chatter_update = func {
     if ( substr(chatter_list[chatter_index],
                 size(chatter_list[chatter_index]) - 4) == ".wav" )
     {
-        print("update atc chatter ", chatter_list[chatter_index] );
-
         tmpl = { path : chatter_dir, file : chatter_list[chatter_index] };
         if ( getprop("/sim/sound/atc-chatter") ) {
             # go through the motions, but only schedule the message to play
             # if atc-chatter is enabled.
+            print("update atc chatter ", chatter_list[chatter_index] );
             fgcommand("play-audio-message", props.Node.new(tmpl) );
         }
     } else {
-        print("not playing non wav ", chatter_list[chatter_index] );
+        # skip non-wav file found in directory
     }
 
     chatter_index = chatter_index + 1;
@@ -80,7 +79,7 @@ nextChatter = func {
     # of a random pacing
     next_interval = chatter_min_interval
        + int(rand() * (chatter_max_interval - chatter_min_interval));
-    print( "next chatter in ", next_interval, " seconds");
+    # print( "next chatter in ", next_interval, " seconds");
     settimer(chatter_update, next_interval );
 }
 nextChatter();

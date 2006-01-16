@@ -4,10 +4,9 @@
     ************************************************************************
     Logitech Attack 3 joystick bindings.
 
-    Justin Smithies 2005
+    Justin Smithies 2006
     
-    Assume that we have a conventional, three-axis, three-button
-    joystick, and that the first button is the trigger.
+    2 Axis joystick with throttle and 11 buttons.
     ************************************************************************
     -->
 

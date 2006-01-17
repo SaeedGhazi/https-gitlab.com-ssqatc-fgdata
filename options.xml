@@ -255,7 +255,7 @@
 
    <option>
     <name>failure</name>
-    <arg>{pitot|static|system|vacuum}</arg>
+    <arg>{pitot|static|vacuum|electrical}</arg>
     <description>strings/failure-desc</description>
    </option>
 

@@ -2,24 +2,23 @@
 
 <PropertyList>
 	<name>fps</name>
-	<x>-1</x>
-	<y>0</y>
-	<width>30</width>
-	<height>20</height>
+	<x>-2</x>
+	<y>2</y>
+	<layout>hbox</layout>
+	<default-padding>2</default-padding>
+	<font>
+		<name>HELVETICA_12</name>
+	</font>
 	<color>
-		<red>1</red>
-		<green>1</green>
-		<blue>1</blue>
+		<red>0</red>
+		<green>0</green>
+		<blue>0</blue>
 		<alpha>0</alpha>
 	</color>
 	<text>
 		<label>000</label>
 		<property>/sim/frame-rate</property>
 		<live>true</live>
-		<!--font>
-			<name>typewriter</name>
-			<size>16</size>
-		</font-->
 		<color>
 			<red>0.9</red>
 			<green>0.4</green>

@@ -70,10 +70,10 @@ INIT = func {
     menuEnable("fuel-and-payload", getprop("/sim/flight-model") == "yasim");
     menuEnable("autopilot", props.globals.getNode("/autopilot/KAP140/locks") == nil);
 
-    setlistener("/sim/rendering/fps-display", fpsDisplay);
-    if (getprop("/sim/rendering/fps-display")) {
-        fgcommand("dialog-show", props.Node.new({"dialog-name": "fps"}));
-    }
+    var fps = props.globals.getNode("/sim/rendering/fps-display", 1);
+    if (fps.getValue()) { fpsDisplay(1) }
+    setlistener(fps, fpsDisplay);
+    setlistener("/sim/startup/xsize", func { if (fps.getValue()) { fpsDisplay(0); fpsDisplay(1) } });
 }
 settimer(INIT, 0);
 
@@ -82,8 +82,8 @@ settimer(INIT, 0);
 # Show/hide the fps display dialog.
 #
 fpsDisplay = func {
-    var cmd = cmdarg().getBoolValue() ? "dialog-show" : "dialog-close";
-    fgcommand(cmd, props.Node.new({"dialog-name": "fps"}));
+    var w = size(arg) ? arg[0] : cmdarg().getBoolValue();
+    fgcommand(w ? "dialog-show" : "dialog-close", props.Node.new({"dialog-name": "fps"}));
 }
 
 

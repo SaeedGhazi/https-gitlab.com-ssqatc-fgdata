@@ -66,10 +66,13 @@ interpolate = func {
 ##
 # Convenience wrapper for the _setlistener function. Takes a
 # single string or props.Node object in arg[0] indicating the
-# listened to property, and a function in arg[1].
+# listened to property, a function in arg[1], and an optional
+# bool in arg[2], which triggers the function initially if true.
 #
 setlistener = func {
-    _setlistener(isa(arg[0], props.Node) ? arg[0]._g : arg[0], arg[1]);
+    if(isa(arg[0], props.Node)) { arg[0] = arg[0]._g; }
+    elsif(typeof(arg[0]) != "scalar") { return; }
+    _setlistener(arg[0], arg[1], size(arg) > 2 ? arg[2] : 0);
 }
 
 

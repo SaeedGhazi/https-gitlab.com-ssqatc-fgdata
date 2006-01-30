@@ -18,6 +18,9 @@ Started September 2000 by David Megginson, david@megginson.com
   <!-- don't reset the simulator when the aircraft hits the ground -->
   <reset-on-crash type="bool">false</reset-on-crash>
 
+  <!-- Limit the time we need to spend in simulation loops to 1 second -->
+  <max-simtime-per-frame>1.0</max-simtime-per-frame>
+
   <intl include="Translations/locale.xml"/>
   <aircraft>c172p</aircraft>
   <virtual-cockpit type="bool">false</virtual-cockpit>

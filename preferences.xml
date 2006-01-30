@@ -58,7 +58,8 @@ Started September 2000 by David Megginson, david@megginson.com
    <lightning-enable type="bool" userarchive="y">false</lightning-enable>
    <bump-mapping type="bool" userarchive="y">false</bump-mapping>
    <clouds3d-enable type="bool" userarchive="y">false</clouds3d-enable>
-   <clouds3d-vis-range type="float" userarchive="y">25000</clouds3d-vis-range>+    <clouds3d-density type="float" userarchive="y">100</clouds3d-density>
+   <clouds3d-vis-range type="float" userarchive="y">25000</clouds3d-vis-range>
+   <clouds3d-density type="float" userarchive="y">100</clouds3d-density>
    <clouds3d-cache-size type="int" userarchive="y">1024</clouds3d-cache-size>
    <clouds3d-cache-resolution type="int" userarchive="y">64</clouds3d-cache-resolution>
    <draw-otw type="bool">true</draw-otw>
@@ -67,7 +68,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <shadows-ai type="bool" userarchive="y">false</shadows-ai>
    <shadows-to type="bool" userarchive="y">false</shadows-to>
    <shadows-debug type="bool" userarchive="y">false</shadows-debug>
-   <fps-display type="bool">false</fps-display>
+   <fps-display type="bool" userarchive="y">false</fps-display>
   </rendering>
   <model-hz type="int">120</model-hz>
   <navdb>

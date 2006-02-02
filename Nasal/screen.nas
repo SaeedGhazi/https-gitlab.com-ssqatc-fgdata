@@ -1,0 +1,149 @@
+# $Id$
+#
+# screen log window
+# =================
+#
+#
+# simple use:
+#
+#     foo = screen.window.new()
+#     foo.write("message in the middle of the screen");
+#
+#
+# advanced use:
+#
+#     bar = screen.window.new(nil, -100, 3, 10);
+#     bar.fg = [1, 1, 1, 1];    # choose white color
+#     bar.align = "left";
+#
+#     bar.write("first line");
+#     bar.write("second line (red)", 1, 0, 0);
+#     bar.write("third line");
+#
+#
+#
+# arguments:
+#            x ... x coordinate
+#            y ... y coordinate
+#                  positive coords position relative to the left/lower corner,
+#                  negative coords from the right/upper corner, nil centers
+#     maxlines ... max number of displayed lines; if more are pushed into the
+#                  screen, then the ones on top fall off
+#   autoscroll ... seconds that each line should be shown; can be less if
+#                  a message falls off; if 0 then don't scroll at all
+#
+
+dialog_id = 0;
+
+window = {
+	new : func(x = nil, y = nil, maxlines = 10, autoscroll = 10) {
+		m = { parents : [window] };
+		#
+		# "public"
+		m.x = x;
+		m.y = y;
+		m.maxlines = maxlines;
+		m.autoscroll = autoscroll;	# display time in seconds
+		m.font = "SANS_12B";
+		m.bg = [0, 0, 0, 0];		# background color
+		m.fg = [1, 0.5, 0, 1];		# default foreground color
+		m.align = nil;			# "left", "right", "center" (default)
+		#
+		# "private"
+		m.name = "__screen_window_" ~ (dialog_id += 1) ~ "__";
+		m.lines = [];
+		m.skiptimer = 0;
+		m.dialog = nil;
+		m.namenode = props.Node.new({ "dialog-name" : m.name });
+		setlistener("/sim/startup/xsize", func { m._redraw_() });
+		setlistener("/sim/startup/ysize", func { m._redraw_() });
+		return m;
+	},
+
+	write : func(msg, r = nil, g = nil, b = nil, a = nil) {
+		if (me.namenode == nil) { return }
+		if (r == nil) { r = me.fg[0] }
+		if (g == nil) { g = me.fg[1] }
+		if (b == nil) { b = me.fg[2] }
+		if (a == nil) { a = me.fg[3] }
+		append(me.lines, [msg, r, g, b, a]);
+		if (size(me.lines) > me.maxlines) {
+			me.lines = subvec(me.lines, 1);
+			if (me.autoscroll) {
+				me.skiptimer += 1;
+			}
+		}
+		me._show_();
+		if (me.autoscroll) {
+			settimer(func { me._timeout_() }, me.autoscroll, 1);
+		}
+	},
+
+	_show_ : func {
+		fgcommand("dialog-close", me.namenode);
+		if (me.dialog != nil) {
+			me.x = me.dialog.prop().getNode("lastx").getValue();
+			me.y = me.dialog.prop().getNode("lasty").getValue();
+		}
+
+		me.dialog = gui.Widget.new();
+		me.dialog.set("name", me.name);
+		if (me.x != nil) { me.dialog.set("x", me.x) }
+		if (me.y != nil) { me.dialog.set("y", me.y) }
+		me.dialog.set("layout", "vbox");
+		me.dialog.set("default-padding", 2);
+		me.dialog.setFont(me.font);
+		me.dialog.setColor(me.bg[0], me.bg[1], me.bg[2], me.bg[3]);
+
+		for (i = 0; i < me.maxlines; i += 1) {
+			var w = me.dialog.addChild("text");
+			if (i < size(me.lines)) {
+				w.set("label", me.lines[i][0]);
+				w.setColor(me.lines[i][1], me.lines[i][2],
+						me.lines[i][3], me.lines[i][4]);
+				if (me.align != nil) { w.set("halign", me.align) }
+			} else {
+				w.set("label", "");
+			}
+		}
+
+		fgcommand("dialog-new", me.dialog.prop());
+		fgcommand("dialog-show", me.namenode);
+	},
+
+	_timeout_ : func {
+		if (me.skiptimer > 0) {
+			me.skiptimer -= 1;
+			return;
+		}
+		if (size(me.lines) > 1) {
+			me.lines = subvec(me.lines, 1);
+			me._show_();
+		} else {
+			fgcommand("dialog-close", me.namenode);
+			dialog = nil;
+			me.lines = [];
+		}
+	},
+
+	_redraw_ : func {
+		if (me.dialog != nil) {
+			fgcommand("dialog-close", me.namenode);
+			me.x = me.dialog.prop().getNode("lastx").getValue();
+			me.y = me.dialog.prop().getNode("lasty").getValue();
+			me._show_();
+		}
+	},
+};
+
+
+
+# open one window for general use:   screen.log.write("message");
+#
+log = nil;
+
+INIT = func {
+	log = window.new(nil, -40, 10, 10);
+}
+
+settimer(INIT, 0);

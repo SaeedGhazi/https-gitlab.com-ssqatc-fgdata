@@ -71,9 +71,9 @@ INIT = func {
     menuEnable("autopilot", props.globals.getNode("/autopilot/KAP140/locks") == nil);
 
     var fps = props.globals.getNode("/sim/rendering/fps-display", 1);
-    if (fps.getValue()) { fpsDisplay(1) }
-    setlistener(fps, fpsDisplay);
-    setlistener("/sim/startup/xsize", func { if (fps.getValue()) { fpsDisplay(0); fpsDisplay(1) } });
+    setlistener(fps, fpsDisplay, 1);
+    setlistener("/sim/startup/xsize",
+        func { if (fps.getValue()) { fpsDisplay(0); fpsDisplay(1) } });
 }
 settimer(INIT, 0);
 

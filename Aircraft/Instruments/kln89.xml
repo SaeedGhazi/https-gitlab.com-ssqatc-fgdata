@@ -45,6 +45,32 @@ properties' values.
    <w>908</w>
    <h>273</h>
   </layer>
+  
+ <layer>
+   <name>scan-pull</name>
+   <condition>
+    <property>/instrumentation/kln89/scan-pull</property>
+   </condition>
+   <texture>
+    <path>Aircraft/Instruments/Textures/kln89.rgb</path>
+    <x1>0.005</x1>
+    <x2>0.1230</x2>
+    <y1>0.1953</y1>
+    <y2>0.4219</y2>
+   </texture>
+   <transformations>
+    <transformation>
+     <type>x-shift</type>
+     <offset>375</offset>
+    </transformation>
+    <transformation>
+     <type>y-shift</type>
+     <offset>-60</offset>
+    </transformation>
+   </transformations>
+   <w>117</w>
+   <h>112</h>
+  </layer>
 
  </layers>
 
@@ -193,6 +219,19 @@ properties' values.
    <h>60</h>
    <binding>
     <command>kln89_knob2left1</command>
+   </binding>
+  </action>
+  
+  <action>
+   <name>Inner Knob Toggle Scan</name>
+   <button>1</button>
+   <x>340</x>
+   <y>-110</y>
+   <w>90</w>
+   <h>90</h>
+   <binding>
+    <command>property-toggle</command>
+    <property>/instrumentation/kln89/scan-pull</property>
    </binding>
   </action>
 

@@ -742,6 +742,10 @@ Started September 2000 by David Megginson, david@megginson.com
    <approach-active type="bool">false</approach-active>
    <cdi-deflection type="double">0</cdi-deflection>
   </gps>
+  
+  <kln89>
+   <scan-pull type="bool" archive="y">false</scan-pull>
+  </kln89>
 
   <clock>
    <serviceable type="bool" archive="y">true</serviceable>

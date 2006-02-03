@@ -47,7 +47,7 @@ window = {
 		m.font = "SANS_12B";
 		m.bg = [0, 0, 0, 0];		# background color
 		m.fg = [1, 0.5, 0, 1];		# default foreground color
-		m.align = nil;			# "left", "right", "center" (default)
+		m.align = "center";		# "left", "right", "center"
 		#
 		# "private"
 		m.name = "__screen_window_" ~ (dialog_id += 1) ~ "__";
@@ -82,8 +82,8 @@ window = {
 	_show_ : func {
 		fgcommand("dialog-close", me.namenode);
 		if (me.dialog != nil) {
-			me.x = me.dialog.prop().getNode("lastx").getValue();
-			me.y = me.dialog.prop().getNode("lasty").getValue();
+			#me.x = me.dialog.prop().getNode("lastx").getValue();
+			#me.y = me.dialog.prop().getNode("lasty").getValue();
 		}
 
 		me.dialog = gui.Widget.new();
@@ -98,10 +98,10 @@ window = {
 		for (i = 0; i < me.maxlines; i += 1) {
 			var w = me.dialog.addChild("text");
 			if (i < size(me.lines)) {
+				w.set("halign", me.align);
 				w.set("label", me.lines[i][0]);
 				w.setColor(me.lines[i][1], me.lines[i][2],
 						me.lines[i][3], me.lines[i][4]);
-				if (me.align != nil) { w.set("halign", me.align) }
 			} else {
 				w.set("label", "");
 			}
@@ -129,8 +129,8 @@ window = {
 	_redraw_ : func {
 		if (me.dialog != nil) {
 			fgcommand("dialog-close", me.namenode);
-			me.x = me.dialog.prop().getNode("lastx").getValue();
-			me.y = me.dialog.prop().getNode("lasty").getValue();
+			#me.x = me.dialog.prop().getNode("lastx").getValue();
+			#me.y = me.dialog.prop().getNode("lasty").getValue();
 			me._show_();
 		}
 	},
@@ -144,6 +144,16 @@ log = nil;
 
 INIT = func {
 	log = window.new(nil, -40, 10, 10);
+
+	var b = "/sim/screen/";
+	setlistener(b ~ "black",   func { log.write(cmdarg().getValue(), 0,   0,   0) });
+	setlistener(b ~ "white",   func { log.write(cmdarg().getValue(), 1,   1,   1) });
+	setlistener(b ~ "red",     func { log.write(cmdarg().getValue(), 0.8, 0,   0) });
+	setlistener(b ~ "green",   func { log.write(cmdarg().getValue(), 0,   0.6, 0) });
+	setlistener(b ~ "blue",    func { log.write(cmdarg().getValue(), 0,   0,   0.8) });
+	setlistener(b ~ "yellow",  func { log.write(cmdarg().getValue(), 0.8, 0.8, 0) });
+	setlistener(b ~ "magenta", func { log.write(cmdarg().getValue(), 0.7, 0,   0.7) });
+	setlistener(b ~ "cyan",    func { log.write(cmdarg().getValue(), 0,   0.6, 0.6) });
 }
 
 settimer(INIT, 0);

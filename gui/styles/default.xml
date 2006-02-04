@@ -9,11 +9,17 @@
 		texture fonts.
 	-->
 
-	<font>
-		<name type="string">Helvetica.txf</name>
-		<size type="float">15</size>
-		<slant type="float">0</slant>
-	</font>
+	<fonts>
+		<gui>
+			<name type="string">Helvetica.txf</name>
+			<size type="float">15</size>
+			<slant type="float">0</slant>
+		</gui>
+
+		<message-display>
+			<name type="string">Helvetica.txf</name>
+		</message-display>
+	</fonts>
 
 	<colors>
 		<!-- default colors for all GUI objects -->

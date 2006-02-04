@@ -34,6 +34,7 @@
 #
 
 dialog_id = 0;
+theme_font = nil;
 
 window = {
 	new : func(x = nil, y = nil, maxlines = 10, autoscroll = 10) {
@@ -44,9 +45,9 @@ window = {
 		m.y = y;
 		m.maxlines = maxlines;
 		m.autoscroll = autoscroll;	# display time in seconds
-		m.font = "SANS_12B";
+		m.font = nil;
 		m.bg = [0, 0, 0, 0];		# background color
-		m.fg = [1, 0.5, 0, 1];		# default foreground color
+		m.fg = [0.9, 0.4, 0.2, 1];	# default foreground color
 		m.align = "center";		# "left", "right", "center"
 		#
 		# "private"
@@ -80,11 +81,7 @@ window = {
 	},
 
 	_show_ : func {
-		fgcommand("dialog-close", me.namenode);
-		if (me.dialog != nil) {
-			#me.x = me.dialog.prop().getNode("lastx").getValue();
-			#me.y = me.dialog.prop().getNode("lasty").getValue();
-		}
+		me.close();
 
 		me.dialog = gui.Widget.new();
 		me.dialog.set("name", me.name);
@@ -92,7 +89,11 @@ window = {
 		if (me.y != nil) { me.dialog.set("y", me.y) }
 		me.dialog.set("layout", "vbox");
 		me.dialog.set("default-padding", 2);
-		me.dialog.setFont(me.font);
+		if (me.font != nil) {
+			me.dialog.setFont(me.font);
+		} elsif (theme_font != nil) {
+			me.dialog.setFont(theme_font);
+		}
 		me.dialog.setColor(me.bg[0], me.bg[1], me.bg[2], me.bg[3]);
 
 		for (i = 0; i < me.maxlines; i += 1) {
@@ -111,6 +112,14 @@ window = {
 		fgcommand("dialog-show", me.namenode);
 	},
 
+	close : func {
+		fgcommand("dialog-close", me.namenode);
+		if (me.dialog != nil) {
+			#me.x = me.dialog.prop().getNode("lastx").getValue();
+			#me.y = me.dialog.prop().getNode("lasty").getValue();
+		}
+	},
+
 	_timeout_ : func {
 		if (me.skiptimer > 0) {
 			me.skiptimer -= 1;
@@ -120,7 +129,7 @@ window = {
 			me.lines = subvec(me.lines, 1);
 			me._show_();
 		} else {
-			fgcommand("dialog-close", me.namenode);
+			me.close();
 			dialog = nil;
 			me.lines = [];
 		}
@@ -128,9 +137,7 @@ window = {
 
 	_redraw_ : func {
 		if (me.dialog != nil) {
-			fgcommand("dialog-close", me.namenode);
-			#me.x = me.dialog.prop().getNode("lastx").getValue();
-			#me.y = me.dialog.prop().getNode("lasty").getValue();
+			me.close();
 			me._show_();
 		}
 	},
@@ -138,11 +145,15 @@ window = {
 
 
 
-# open one window for general use:   screen.log.write("message");
-#
 log = nil;
 
 INIT = func {
+	setlistener("/sim/current-gui", func {
+		var theme = getprop("/sim/current-gui");
+		theme_font = getprop("/sim/gui[" ~ theme ~ "]/fonts/message-display/name");
+	}, 1);
+
+
 	log = window.new(nil, -40, 10, 10);
 
 	var b = "/sim/screen/";
@@ -157,3 +168,4 @@ INIT = func {
 }
 
 settimer(INIT, 0);
+

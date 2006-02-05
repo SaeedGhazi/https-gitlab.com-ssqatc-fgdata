@@ -18,7 +18,6 @@
 #
 #     bar.write("first line");
 #     bar.write("second line (red)", 1, 0, 0);
-#     bar.write("third line");
 #
 #
 #
@@ -74,14 +73,16 @@ window = {
 				me.skiptimer += 1;
 			}
 		}
-		me._show_();
+		me.show();
 		if (me.autoscroll) {
 			settimer(func { me._timeout_() }, me.autoscroll, 1);
 		}
 	},
 
-	_show_ : func {
-		me.close();
+	show : func {
+		if (me.dialog != nil) {
+			me.close();
+		}
 
 		me.dialog = gui.Widget.new();
 		me.dialog.set("name", me.name);
@@ -96,16 +97,11 @@ window = {
 		}
 		me.dialog.setColor(me.bg[0], me.bg[1], me.bg[2], me.bg[3]);
 
-		for (i = 0; i < me.maxlines; i += 1) {
+		foreach (line; me.lines) {
 			var w = me.dialog.addChild("text");
-			if (i < size(me.lines)) {
-				w.set("halign", me.align);
-				w.set("label", me.lines[i][0]);
-				w.setColor(me.lines[i][1], me.lines[i][2],
-						me.lines[i][3], me.lines[i][4]);
-			} else {
-				w.set("label", "");
-			}
+			w.set("halign", me.align);
+			w.set("label", line[0]);
+			w.setColor(line[1], line[2], line[3], line[4]);
 		}
 
 		fgcommand("dialog-new", me.dialog.prop());
@@ -127,7 +123,7 @@ window = {
 		}
 		if (size(me.lines) > 1) {
 			me.lines = subvec(me.lines, 1);
-			me._show_();
+			me.show();
 		} else {
 			me.close();
 			dialog = nil;
@@ -138,7 +134,7 @@ window = {
 	_redraw_ : func {
 		if (me.dialog != nil) {
 			me.close();
-			me._show_();
+			me.show();
 		}
 	},
 };

@@ -81,6 +81,53 @@ Started September 2000 by David Megginson, david@megginson.com
    <volume userarchive="y">0.8</volume>
    <pause type="bool">false</pause>
    <voice type="bool">true</voice>
+   <voices>
+    <host type="string">localhost</host>
+    <port type="string">1314</port>
+    <enabled type="bool">true</enabled>
+    <atc alias="/sim/sound/voices/voice[0]/text"/>
+    <approach alias="/sim/sound/voices/voice[0]/text"/>
+    <ground alias="/sim/sound/voices/voice[0]/text"/>
+    <pilot alias="/sim/sound/voices/voice[1]/text"/>
+    <copilot alias="/sim/sound/voices/voice[2]/text"/>
+    <ai-plane alias="/sim/sound/voices/voice[3]/text"/>
+    <voice>
+     <desc>ATC/Approach/Ground</desc>
+     <text type="string"></text>
+     <volume type="double">1.0</volume>
+     <pitch type="double">100.0</pitch>
+     <speed type="double">1.0</speed>
+     <preamble type="string"></preamble>
+     <festival type="bool">true</festival>
+    </voice>
+    <voice>
+     <desc>Pilot</desc>
+     <text type="string"></text>
+     <volume type="double">1.0</volume>
+     <pitch type="double">100.0</pitch>
+     <speed type="double">1.0</speed>
+     <preamble type="string">(voice_us3_mbrola)</preamble>
+     <festival type="bool">true</festival>
+    </voice>
+    <voice>
+     <desc>Copilot/Instructor</desc>
+     <text type="string"></text>
+     <volume type="double">1.0</volume>
+     <pitch type="double">100.0</pitch>
+     <speed type="double">1.0</speed>
+     <preamble type="string">(voice_us2_mbrola)</preamble>
+     <festival type="bool">true</festival>
+    </voice>
+    <voice>
+     <desc>AI-Plane</desc>
+     <text type="string"></text>
+     <volume type="double">1.0</volume>
+     <pitch type="double">100.0</pitch>
+     <speed type="double">1.0</speed>
+     <preamble type="string">(voice_don_diphone)</preamble>
+     <festival type="bool">true</festival>
+    </voice>
+   </voices>
   </sound>
   <speed-up type="double">1.0</speed-up>
   <current-view>
@@ -329,7 +376,10 @@ Started September 2000 by David Megginson, david@megginson.com
    <!-- scenario>nimitz_demo</scenario -->
    <!-- <scenario>aircraft_demo</scenario> -->
   </ai>
-  
+
+  <user>
+   <callsign type="string">Golf Foxtrot Sierra</callsign>
+  </user>
  </sim>
 
 

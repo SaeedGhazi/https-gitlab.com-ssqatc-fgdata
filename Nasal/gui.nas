@@ -505,6 +505,7 @@ basic_keys = {
         { name : "Ctrl-X",    desc : "reset zoom to default" },
         { name : "z/Z",       desc : "increase/decrease visibility" },
         { name : "'",         desc : "display ATC setting dialog" },
+        { name : "+",         desc : "let ATC repeat last message" },
         { name : "F1",        desc : "load flight" },
         { name : "F3",        desc : "capture screen" },
         { name : "F10",       desc : "toggle menubar" },

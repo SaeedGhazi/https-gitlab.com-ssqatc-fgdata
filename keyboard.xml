@@ -295,7 +295,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Let ATC repeat the last message.</desc>
   <binding>
     <command>nasal</command>
-    <script>var p = "/sim/messages/atc"; setprop(p, getprop(p))</script>
+    <script>screen.atc_repeat()</script>
   </binding>
  </key>
 

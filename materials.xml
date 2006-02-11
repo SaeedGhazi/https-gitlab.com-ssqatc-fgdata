@@ -151,6 +151,12 @@ Shared parameters for various materials.
 </material>
 
 <material>
+ <name>pa_0l</name>
+ <texture>Runway/pa_0l.rgb</texture>
+ <wrapu>false</wrapu>
+</material>
+
+<material>
  <name>pa_0r</name>
  <texture>Runway/pa_0r.rgb</texture>
  <wrapu>false</wrapu>
@@ -386,6 +392,13 @@ Shared parameters for various materials.
  <name>pc_C</name>
  <name>dirt_rwyC</name>
  <texture>Runway/pc_C.rgb</texture>
+ <wrapu>false</wrapu>
+</material>
+
+<material>
+ <name>pc_0l</name>
+ <name>dirt_rwy0l</name>
+ <texture>Runway/pc_0l.rgb</texture>
  <wrapu>false</wrapu>
 </material>
 

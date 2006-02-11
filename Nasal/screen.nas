@@ -165,3 +165,56 @@ INIT = func {
 
 settimer(INIT, 0);
 
+
+
+
+
+
+
+##############################################################################
+# functions that make use of the window class (and don't belong anywhere else)
+##############################################################################
+
+
+atc_repeat = func {
+	var callsign = getprop("/sim/user/callsign");
+	var atc = props.globals.getNode("/sim/messages/atc", 1);
+	var last = atc.getValue();
+	if (last == nil) {
+		return;
+	}
+	setprop("/sim/messages/pilot", "This is " ~ callsign ~ ". Say again, over.");
+	settimer(func {
+		atc.setValue("I say again:");
+		atc.setValue(last)
+	}, 6);
+}
+
+
+MSGINIT = func {
+	# map ATC messages to the screen log and to the voice subsystem
+	map = func(type, msg, r, g, b) {
+		setprop("/sim/sound/voices/" ~ type, msg);
+		screen.log.write(msg, r, g, b);
+		#print(type ~ ": " ~ msg);
+	}
+
+	setlistener("/sim/messages/atc",
+			func { map("atc", cmdarg().getValue(), 0.7, 1.0, 0.7) });
+	setlistener("/sim/messages/approach",
+			func { map("approach", cmdarg().getValue(), 0.7, 1.0, 0.7) });
+	setlistener("/sim/messages/ground",
+			func { map("ground", cmdarg().getValue(), 0.7, 1.0, 0.7) });
+
+	setlistener("/sim/messages/pilot",
+			func { map("pilot", cmdarg().getValue(), 1.0, 0.8, 0.0) });
+	setlistener("/sim/messages/copilot",
+			func { map("copilot", cmdarg().getValue(), 1.0, 1.0, 1.0) });
+	setlistener("/sim/messages/ai-plane",
+			func { map("ai-plane", cmdarg().getValue(), 0.9, 0.4, 0.2) });
+}
+
+settimer(MSGINIT, 1);
+
+
+

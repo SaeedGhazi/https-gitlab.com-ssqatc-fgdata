@@ -17,7 +17,7 @@
 		</gui>
 
 		<message-display>
-			<name type="string">Helvetica.txf</name>
+			<name type="string">SANS_12B</name>
 		</message-display>
 	</fonts>
 

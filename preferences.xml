@@ -84,7 +84,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <voices>
     <host type="string">localhost</host>
     <port type="string">1314</port>
-    <enabled type="bool">true</enabled>
+    <enabled type="bool">false</enabled>
     <atc alias="/sim/sound/voices/voice[0]/text"/>
     <approach alias="/sim/sound/voices/voice[0]/text"/>
     <ground alias="/sim/sound/voices/voice[0]/text"/>

@@ -136,11 +136,18 @@
 			<alpha type="float">1.0</alpha>
 		</input-misc>
 
-		<!-- splash screen font color -->
-		<splash>
+		<!-- splash screen colors -->
+
+		<splash-font>
 			<red type="float">1.0</red>
 			<green type="float">0.9</green>
 			<blue type="float">0.0</blue>
-		</splash>
+		</splash-font>
+
+		<splash-screen>
+			<red type="float">0.0</red>
+			<green type="float">0.0</green>
+			<blue type="float">0.0</blue>
+		</splash-screen>
 	</colors>
 </PropertyList>

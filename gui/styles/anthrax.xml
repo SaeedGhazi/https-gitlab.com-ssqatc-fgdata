@@ -145,12 +145,5 @@
 			<blue type="float">0.0</blue>
 			<alpha type="float">1.0</alpha>
 		</textbox-editable>
-
-		<!-- splash screen font color -->
-		<splash>
-			<red type="float">1.0</red>
-			<green type="float">0.9</green>
-			<blue type="float">0.0</blue>
-		</splash>
 	</colors>
 </PropertyList>

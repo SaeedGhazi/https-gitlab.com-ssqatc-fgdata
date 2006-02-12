@@ -24,6 +24,19 @@ adjusting them, toggling them, or swaping them with other
 properties' values.
 -->
 
+<!--
+2/10/06
+Dave Perry added a check for Nav/Com power, so the frequencies won't 
+light if
+/systems/electrical/outputs/nav is less than 8.0 volts. See the con-
+dition added for these text layers below. This allows a more realistic 
+master switch and avionics master switch implementation in the electrical 
+system model.  I also checked to make sure this does not negatively 
+impact the c172p. Had to add a property alias to the params after the 
+nav1.xml include in c172p-2d-panel.xml. Since the electrical system 
+for the c172p has this voltage at 28 volts, these changes have no 
+impact on the c172p.
+-->
 <PropertyList>
  
  <name>NavCom Radio</name>
@@ -37,6 +50,7 @@ properties' values.
   <nav-freq-standby-prop>/instrumentation/nav[0]/frequencies/standby-mhz</nav-freq-standby-prop>
   <nav-morse-id-volume-prop>/instrumentation/nav[0]/volume</nav-morse-id-volume-prop>
   <nav-morse-ident-toggle-prop>/instrumentation/nav[0]/ident</nav-morse-ident-toggle-prop>
+  <nav-com-pwr-volts-prop>/systems/electrical/outputs/nav[0]</nav-com-pwr-volts-prop>
  </params>
 
  <layers>
@@ -54,6 +68,12 @@ properties' values.
 
   <layer>
    <name>nav frequencies</name>
+   <condition>
+    <greater-than>
+     <property alias="../../../../../params/nav-com-pwr-volts-prop"/>
+     <value>8.0</value>
+    </greater-than>
+   </condition>
    <type>text</type>
    <font>led</font>
    <point-size>6.5</point-size>
@@ -88,6 +108,12 @@ properties' values.
 
   <layer>
    <name>com frequencies</name>
+   <condition>
+    <greater-than>
+     <property alias="../../../../../params/nav-com-pwr-volts-prop"/>
+     <value>8.0</value>
+    </greater-than>
+   </condition>
    <type>text</type>
    <font>led</font>
    <point-size>6.5</point-size>

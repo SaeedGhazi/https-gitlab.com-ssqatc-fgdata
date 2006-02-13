@@ -364,8 +364,8 @@ Started September 2000 by David Megginson, david@megginson.com
   </atc>
 
   <ai-traffic>
-   <enabled type="bool">false</enabled>
-   <level type="int">1</level>
+   <enabled type="bool" userarchive="y">false</enabled>
+   <level type="int" userarchive="y">1</level>
   </ai-traffic>
 
   <traffic-manager>

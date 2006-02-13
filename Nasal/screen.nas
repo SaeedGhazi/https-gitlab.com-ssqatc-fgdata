@@ -143,7 +143,7 @@ window = {
 
 log = nil;
 
-INIT = func {
+settimer(func {
 	setlistener("/sim/current-gui", func {
 		var theme = getprop("/sim/current-gui");
 		theme_font = getprop("/sim/gui[" ~ theme ~ "]/fonts/message-display/name");
@@ -161,11 +161,7 @@ INIT = func {
 	setlistener(b ~ "yellow",  func { log.write(cmdarg().getValue(), 0.8, 0.8, 0) });
 	setlistener(b ~ "magenta", func { log.write(cmdarg().getValue(), 0.7, 0,   0.7) });
 	setlistener(b ~ "cyan",    func { log.write(cmdarg().getValue(), 0,   0.6, 0.6) });
-}
-
-settimer(INIT, 0);
-
-
+}, 0);
 
 
 
@@ -191,30 +187,26 @@ atc_repeat = func {
 }
 
 
-MSGINIT = func {
+settimer(func {
+	# set /sim/screen/nomap=true to prevent default message mapping
+	var nomap = getprop("/sim/screen/nomap");
+	if (nomap != nil and nomap) {
+		return;
+	}
 	# map ATC messages to the screen log and to the voice subsystem
-	map = func(type, msg, r, g, b) {
+	var map = func(type, msg, r, g, b) {
 		setprop("/sim/sound/voices/" ~ type, msg);
 		screen.log.write(msg, r, g, b);
-		#print(type ~ ": " ~ msg);
 	}
 
-	setlistener("/sim/messages/atc",
-			func { map("atc", cmdarg().getValue(), 0.7, 1.0, 0.7) });
-	setlistener("/sim/messages/approach",
-			func { map("approach", cmdarg().getValue(), 0.7, 1.0, 0.7) });
-	setlistener("/sim/messages/ground",
-			func { map("ground", cmdarg().getValue(), 0.7, 1.0, 0.7) });
+	var m = "/sim/messages/";
+	setlistener(m ~ "atc",      func { map("atc",      cmdarg().getValue(), 0.7, 1.0, 0.7) });
+	setlistener(m ~ "approach", func { map("approach", cmdarg().getValue(), 0.7, 1.0, 0.7) });
+	setlistener(m ~ "ground",   func { map("ground",   cmdarg().getValue(), 0.7, 1.0, 0.7) });
 
-	setlistener("/sim/messages/pilot",
-			func { map("pilot", cmdarg().getValue(), 1.0, 0.8, 0.0) });
-	setlistener("/sim/messages/copilot",
-			func { map("copilot", cmdarg().getValue(), 1.0, 1.0, 1.0) });
-	setlistener("/sim/messages/ai-plane",
-			func { map("ai-plane", cmdarg().getValue(), 0.9, 0.4, 0.2) });
-}
-
-settimer(MSGINIT, 1);
-
+	setlistener(m ~ "pilot",    func { map("pilot",    cmdarg().getValue(), 1.0, 0.8, 0.0) });
+	setlistener(m ~ "copilot",  func { map("copilot",  cmdarg().getValue(), 1.0, 1.0, 1.0) });
+	setlistener(m ~ "ai-plane", func { map("ai-plane", cmdarg().getValue(), 0.9, 0.4, 0.2) });
+}, 1);
 
 

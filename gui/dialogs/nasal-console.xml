@@ -15,7 +15,7 @@
 	<textbox>
 		<halign>fill</halign>
 		<pref-height>120</pref-height>
-		<pref-width>400</pref-width>
+		<pref-width>450</pref-width>
 		<slider>20</slider>
 		<editable>true</editable>
 		<property>/sim/gui/dialogs/nasal-console/code</property>
@@ -48,6 +48,23 @@
 				</binding>
 				<binding>
 					<command>dialog-close</command>
+				</binding>
+			</button>
+
+			<button>
+				<legend>Print</legend>
+				<equal>true</equal>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+				<binding>
+					<command>nasal</command>
+					<script>
+						line = "--------------------------------------------------";
+						print(line);
+						print(getprop("/sim/gui/dialogs/nasal-console/code"));
+						print(line);
+					</script>
 				</binding>
 			</button>
 

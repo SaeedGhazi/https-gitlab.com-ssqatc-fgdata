@@ -44,6 +44,9 @@
 				<key>Esc</key>
 				<equal>true</equal>
 				<binding>
+					<command>dialog-apply</command>
+				</binding>
+				<binding>
 					<command>dialog-close</command>
 				</binding>
 			</button>

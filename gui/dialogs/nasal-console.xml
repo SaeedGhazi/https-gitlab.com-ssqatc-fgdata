@@ -53,6 +53,7 @@
 
 			<button>
 				<legend>Print</legend>
+				<key>Ctrl-p</key>
 				<equal>true</equal>
 				<binding>
 					<command>dialog-apply</command>
@@ -60,10 +61,10 @@
 				<binding>
 					<command>nasal</command>
 					<script>
-						line = "--------------------------------------------------";
-						print(line);
+						rule = "--------------------------------------------------";
+						print(rule ~ "\n");
 						print(getprop("/sim/gui/dialogs/nasal-console/code"));
-						print(line);
+						print(rule);
 					</script>
 				</binding>
 			</button>

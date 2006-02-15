@@ -404,6 +404,14 @@
   </item>
 
   <item>
+   <label>Nasal Console</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>nasal-console</dialog-name>
+   </binding>
+  </item>
+
+  <item>
    <label>Development Keys</label>
    <binding>
     <command>nasal</command>

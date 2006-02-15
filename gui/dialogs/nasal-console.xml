@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<x>-20</x>
+	<y>-20</y>
+	<name>nasal-console</name>
+	<layout>vbox</layout>
+
+	<text>
+		<label>Nasal Console</label>
+	</text>
+
+	<hrule><dummy/></hrule>
+
+	<textbox>
+		<halign>fill</halign>
+		<pref-height>120</pref-height>
+		<pref-width>400</pref-width>
+		<slider>20</slider>
+		<editable>true</editable>
+		<property>/sim/gui/dialogs/nasal-console/code</property>
+	</textbox>
+
+	<group>
+		<layout>hbox</layout>
+		<default-padding>8</default-padding>
+
+		<text>
+			<label>TAB to leave edit field</label>
+			<halign>fill</halign>
+			<color>
+				<red>0.5</red>
+				<green>0.5</green>
+				<blue>0.5</blue>
+			</color>
+		</text>
+
+		<group>
+			<layout>hbox</layout>
+			<default-padding>0</default-padding>
+
+			<button>
+				<legend>Close</legend>
+				<key>Esc</key>
+				<equal>true</equal>
+				<binding>
+					<command>dialog-close</command>
+				</binding>
+			</button>
+
+			<button>
+				<legend>Execute</legend>
+				<default>true</default>
+				<equal>true</equal>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+				<binding>
+					<command>nasal</command>
+					<script>compile(getprop("/sim/gui/dialogs/nasal-console/code"))()</script>
+				</binding>
+			</button>
+		</group>
+	</group>
+</PropertyList>

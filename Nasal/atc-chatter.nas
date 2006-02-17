@@ -58,7 +58,7 @@ chatter_update = func {
         if ( getprop("/sim/sound/atc-chatter") ) {
             # go through the motions, but only schedule the message to play
             # if atc-chatter is enabled.
-            print("update atc chatter ", chatter_list[chatter_index] );
+            printlog("info", "update atc chatter ", chatter_list[chatter_index] );
             fgcommand("play-audio-message", props.Node.new(tmpl) );
         }
     } else {
@@ -79,7 +79,7 @@ nextChatter = func {
     # of a random pacing
     next_interval = chatter_min_interval
        + int(rand() * (chatter_max_interval - chatter_min_interval));
-    # print( "next chatter in ", next_interval, " seconds");
+    # printlog("info", "next chatter in ", next_interval, " seconds");
     settimer(chatter_update, next_interval );
 }
 nextChatter();

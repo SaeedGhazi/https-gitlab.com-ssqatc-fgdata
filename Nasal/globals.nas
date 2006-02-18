@@ -95,13 +95,14 @@ defined = func(sym) {
 ##
 # Print log messages in appropriate --log-level.
 # Usage: printlog("warn", "...");
-# The underscore hash is used for private variables.
+# The underscore hash prevents helper functions/variables from
+# needlessly polluting the global namespace.
 #
-_ = {};
-_.dbg_types = { none:0, bulk:1, debug:2, info:3, warn:4, alert:5 };
-_.log_level = _.dbg_types[getprop("/sim/logging/priority")];
-printlog = func(level, text...) {
-    if(_.dbg_types[level] >= _.log_level) { call(print, text) }
+__ = {};
+__.dbg_types = { none:0, bulk:1, debug:2, info:3, warn:4, alert:5 };
+__.log_level = __.dbg_types[getprop("/sim/logging/priority")];
+printlog = func(level, args...) {
+    if(__.dbg_types[level] >= __.log_level) { call(print, args); }
 }
 
 

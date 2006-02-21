@@ -66,17 +66,20 @@ window = {
 		if (g == nil) { g = me.fg[1] }
 		if (b == nil) { b = me.fg[2] }
 		if (a == nil) { a = me.fg[3] }
-		append(me.lines, [msg, r, g, b, a]);
-		if (size(me.lines) > me.maxlines) {
-			me.lines = subvec(me.lines, 1);
+		var line = split("\n", msg);
+		foreach (l; line) {
+			append(me.lines, [l, r, g, b, a]);
+			if (size(me.lines) > me.maxlines) {
+				me.lines = subvec(me.lines, 1);
+				if (me.autoscroll) {
+					me.skiptimer += 1;
+				}
+			}
 			if (me.autoscroll) {
-				me.skiptimer += 1;
+				settimer(func { me._timeout_() }, me.autoscroll, 1);
 			}
 		}
 		me.show();
-		if (me.autoscroll) {
-			settimer(func { me._timeout_() }, me.autoscroll, 1);
-		}
 	},
 
 	show : func {
@@ -150,7 +153,7 @@ settimer(func {
 	}, 1);
 
 
-	log = window.new(nil, -40, 10, 10);
+	log = window.new(nil, -30, 10, 10);
 
 	var b = "/sim/screen/";
 	setlistener(b ~ "black",   func { log.write(cmdarg().getValue(), 0,   0,   0) });

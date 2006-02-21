@@ -66,9 +66,8 @@ window = {
 		if (g == nil) { g = me.fg[1] }
 		if (b == nil) { b = me.fg[2] }
 		if (a == nil) { a = me.fg[3] }
-		var line = split("\n", msg);
-		foreach (l; line) {
-			append(me.lines, [l, r, g, b, a]);
+		foreach (line; split("\n", msg)) {
+			append(me.lines, [line, r, g, b, a]);
 			if (size(me.lines) > me.maxlines) {
 				me.lines = subvec(me.lines, 1);
 				if (me.autoscroll) {

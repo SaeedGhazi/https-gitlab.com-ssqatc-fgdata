@@ -455,7 +455,21 @@
    </binding>
   </item>
 
- </menu>
+  <item>
+   <label>Start Tutorial</label>
+   <binding>
+    <command>nasal</command>
+    <script>gui.showSelTutDialog()</script>
+   </binding>
+  </item>
 
+  <item>
+   <label>End Tutorial</label>
+   <binding>
+    <command>nasal</command>
+    <script>tutorial.stopTutorial()</script>
+   </binding>
+  </item>
+ </menu>
 
 </PropertyList>

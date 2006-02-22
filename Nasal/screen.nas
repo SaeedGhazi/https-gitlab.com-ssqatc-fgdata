@@ -44,6 +44,7 @@ window = {
 		m.y = y;
 		m.maxlines = maxlines;
 		m.autoscroll = autoscroll;	# display time in seconds
+		m.sticky = 0;			# reopens on old place
 		m.font = nil;
 		m.bg = [0, 0, 0, 0];		# background color
 		m.fg = [0.9, 0.4, 0.2, 1];	# default foreground color
@@ -112,9 +113,9 @@ window = {
 
 	close : func {
 		fgcommand("dialog-close", me.namenode);
-		if (me.dialog != nil) {
-			#me.x = me.dialog.prop().getNode("lastx").getValue();
-			#me.y = me.dialog.prop().getNode("lasty").getValue();
+		if (me.dialog != nil and me.sticky) {
+			me.x = me.dialog.prop().getNode("lastx").getValue();
+			me.y = me.dialog.prop().getNode("lasty").getValue();
 		}
 	},
 
@@ -150,7 +151,6 @@ settimer(func {
 		var theme = getprop("/sim/current-gui");
 		theme_font = getprop("/sim/gui[" ~ theme ~ "]/fonts/message-display/name");
 	}, 1);
-
 
 	log = window.new(nil, -30, 10, 10);
 

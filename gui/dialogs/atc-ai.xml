@@ -81,7 +81,37 @@
    <checkbox>
     <halign>left</halign>
     <label>Turn into wind</label>
-    <property>/ai/models/carrier/controls/turn-to-launch-hdg[0]</property>
+    <property>/ai/models/carrier/controls/turn-to-launch-hdg</property>
+    <binding>
+      <command>dialog-apply</command>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>
+        var v = getprop("/ai/models/carrier/controls/turn-to-launch-hdg");
+        foreach (carrier; props.globals.getNode("/ai/models").getChildren("carrier")) {
+          carrier.getNode("controls/turn-to-launch-hdg").setBoolValue(v);
+        }
+      </script>
+    </binding>
+   </checkbox>
+
+   <checkbox>
+    <halign>left</halign>
+    <label>Operate Deck Elevators</label>
+    <property>/ai/models/carrier/controls/elevators</property>
+    <binding>
+      <command>dialog-apply</command>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>
+        var v = getprop("/ai/models/carrier/controls/elevators");
+        foreach (carrier; props.globals.getNode("/ai/models").getChildren("carrier")) {
+          carrier.getNode("controls/elevators").setBoolValue(v);
+        }
+      </script>
+    </binding>
    </checkbox>
 
   </group>

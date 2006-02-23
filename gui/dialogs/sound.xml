@@ -12,32 +12,45 @@
 
   <hrule><dummy/></hrule>
 
-  <checkbox>
-    <label>Mute Sound</label>
-    <property>/sim/sound/pause</property>
-    <binding>
-      <command>dialog-apply</command>
-    </binding>
-  </checkbox>
-
   <group>
     <layout>hbox</layout>
-    <text><label>Volume:</label></text>
-    <slider>
-      <property>/sim/sound/volume</property>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-    </slider>
-  </group>
+    <empty><dummy/></empty>
 
-  <checkbox>
-    <label>ATC Chatter</label>
-    <property>/sim/sound/atc-chatter</property>
-    <binding>
-      <command>dialog-apply</command>
-    </binding>
-  </checkbox>
+    <group>
+      <layout>vbox</layout>
+
+      <checkbox>
+        <label>Mute Sound</label>
+        <halign>left</halign>
+        <property>/sim/sound/pause</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+
+      <group>
+        <layout>hbox</layout>
+        <text><label>Volume:</label></text>
+        <slider>
+          <property>/sim/sound/volume</property>
+          <binding>
+            <command>dialog-apply</command>
+          </binding>
+        </slider>
+      </group>
+
+      <checkbox>
+        <label>ATC Chatter</label>
+        <halign>left</halign>
+        <property>/sim/sound/atc-chatter</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+    </group>
+
+    <empty><dummy/></empty>
+  </group>
 
   <group>
     <layout>hbox</layout>

@@ -34,12 +34,10 @@ menuEnable = func(name, state) {
     foreach (menu; props.globals.getNode("/sim/menubar/default").getChildren("menu")) {
         if ((n = menu.getNode("name")) != nil and n.getValue() == name) {
             menu.getNode("enabled").setBoolValue(state);
-            return;
         }
         foreach (item; menu.getChildren("item")) {
             if ((n = item.getNode("name")) != nil and n.getValue() == name) {
                 item.getNode("enabled").setBoolValue(state);
-                return;
             }
         }
     }
@@ -69,6 +67,7 @@ INIT = func {
     # enable/disable menu entries
     menuEnable("fuel-and-payload", getprop("/sim/flight-model") == "yasim");
     menuEnable("autopilot", props.globals.getNode("/autopilot/KAP140/locks") == nil);
+    menuEnable("tutorial", size(props.globals.getNode("/sim").getChildren("tutorial")));
 
     var fps = props.globals.getNode("/sim/rendering/fps-display", 1);
     setlistener(fps, fpsDisplay, 1);

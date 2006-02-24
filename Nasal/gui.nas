@@ -30,14 +30,18 @@ showDialog = func {
 ##
 # Enable/disable named menu entry
 #
-menuEnable = func(name, state) {
+menuEnable = func(searchname, state) {
     foreach (menu; props.globals.getNode("/sim/menubar/default").getChildren("menu")) {
-        if ((n = menu.getNode("name")) != nil and n.getValue() == name) {
-            menu.getNode("enabled").setBoolValue(state);
+        foreach (name; menu.getChildren("name")) {
+            if (name.getValue() == searchname) {
+                menu.getNode("enabled").setBoolValue(state);
+            }
         }
         foreach (item; menu.getChildren("item")) {
-            if ((n = item.getNode("name")) != nil and n.getValue() == name) {
-                item.getNode("enabled").setBoolValue(state);
+            foreach (name; item.getChildren("name")) {
+                if (name.getValue() == searchname) {
+                    item.getNode("enabled").setBoolValue(state);
+                }
             }
         }
     }
@@ -67,7 +71,8 @@ INIT = func {
     # enable/disable menu entries
     menuEnable("fuel-and-payload", getprop("/sim/flight-model") == "yasim");
     menuEnable("autopilot", props.globals.getNode("/autopilot/KAP140/locks") == nil);
-    menuEnable("tutorial", size(props.globals.getNode("/sim").getChildren("tutorial")));
+    menuEnable("tutorial-start", size(props.globals.getNode("/sim").getChildren("tutorial")));
+    menuEnable("tutorial-stop", 0);
 
     var fps = props.globals.getNode("/sim/rendering/fps-display", 1);
     setlistener(fps, fpsDisplay, 1);
@@ -158,7 +163,7 @@ dialog = {};
 #
 showSelTutDialog = func {
     name = "selectTutorial";
-    title = "Tutorial Wizard - Step 1/2";
+    title = "Select Tutorial";
 
     #
     # Immediately stop any tutorials that are running.
@@ -187,10 +192,6 @@ showSelTutDialog = func {
         return;
     }
 
-    ltextarea = dialog[name].addChild("text");
-    ltextarea.set("label", "Please choose a tutorial from the list below");
-    ltextarea.set("halign", "center");
-
     contentArea = dialog[name].addChild("group");
     contentArea.set("layout", "hbox");
 
@@ -204,15 +205,16 @@ showSelTutDialog = func {
 
     # Get a list of all tutorials
     ltutorials = props.globals.getNode("/sim/tutorial").getChildren("tutorial");
-    for(i=0; i<size(ltutorials); i+=1)
-    {
-      c = ltutorials[i];
-      if (c.getChild("name") != nil)
-      {
-        lname = c.getChild("name").getValue();
-        lentry = combo.addChild("value");
-        lentry.prop().setValue(lname);
-      }
+    for(i=0; i<size(ltutorials); i+=1) {
+        c = ltutorials[i];
+        if (c.getChild("name") != nil) {
+            lname = c.getChild("name").getValue();
+            lentry = combo.addChild("value");
+            lentry.prop().setValue(lname);
+            if (i == 0) {
+                setprop("/sim/tutorial/current-tutorial", lname);
+            }
+        }
     }
 
     buttonBar = dialog[name].addChild("group");
@@ -221,11 +223,14 @@ showSelTutDialog = func {
 
     lcancel = buttonBar.addChild("button");
     lcancel.set("legend", "Cancel");
+    lcancel.set("keynum", 27);
+    lcancel.set("equal", 1);
     lcancel.prop().getNode("binding[0]/command", 1).setValue("dialog-close");
 
     lnext = buttonBar.addChild("button");
     lnext.set("legend", "Next");
-    lnext.set("keynum", 27);
+    lnext.set("default", 1);
+    lnext.set("equal", 1);
     lnext.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
     lnext.prop().getNode("binding[1]/command", 1).setValue("nasal");
     lnext.prop().getNode("binding[1]/script", 1).setValue("gui.showTutorialDialog()");
@@ -239,7 +244,25 @@ showSelTutDialog = func {
 
 showTutorialDialog = func {
     name = "displayTutorial";
-    title = "Tutorial Wizard - Step 2/2";
+
+    # Get tutorial title and description
+    ltutorial = getprop("/sim/tutorial/current-tutorial");
+
+    if (ltutorial == nil) { ltutorial = "<undefined>"; }
+
+    lfound = 0;
+    ldescription = "No description available for this tutorial.";
+
+    foreach(c; props.globals.getNode("/sim/tutorial").getChildren("tutorial")) {
+        if (c.getChild("name").getValue() == ltutorial) {
+            lfound = 1;
+            if (c.getChild("description") != nil) {
+                ldescription = c.getChild("description") .getValue();
+                setprop("/sim/tutorial/description", ldescription);
+            }
+        }
+    }
+    title = "Tutorial \"" ~ ltutorial ~ "\"";
 
     #
     # General Dialog Structure
@@ -252,27 +275,6 @@ showTutorialDialog = func {
     header.set("label", title);
 
     dialog[name].addChild("hrule").set("pref-height", 1);
-
-    # Get the tutorial description
-    ltutorial = getprop("/sim/tutorial/current-tutorial");
-
-    if (ltutorial == nil) { ltutorial = "<undefined>"; }
-
-    lfound = 0;
-    ldescription = "No description available for this tutorial.";
-
-    foreach(c; props.globals.getNode("/sim/tutorial").getChildren("tutorial"))
-    {
-      if (c.getChild("name").getValue() == ltutorial)
-      {
-        lfound = 1;
-        if (c.getChild("description") != nil)
-        {
-          ldescription = c.getChild("description") .getValue();
-          setprop("/sim/tutorial/description", ldescription);
-        }
-      }
-    }
 
     if (lfound == 0) {
         msg = dialog[name].addChild("text");
@@ -288,36 +290,36 @@ showTutorialDialog = func {
     contentArea = dialog[name].addChild("group");
     contentArea.set("layout", "hbox");
 
-    label = contentArea.addChild("text");
-    label.set("label", "Tutorial: " ~ ltutorial);
-    label.set("halign", "left");
-
     textarea = dialog[name].addChild("textbox");
     textarea.set("pref-width", "600");
     textarea.set("pref-height", "400");
-    textarea.set("slider", "12");
-    textarea.set("live", "true");
+    textarea.set("slider", "20");
     textarea.set("wrap", "true");
     textarea.set("editable", "false");
     textarea.set("valign", "top");
-    textarea.set("halign", "left");
+    textarea.set("halign", "fill");
     textarea.set("property", "/sim/tutorial/description");
 
     buttonBar = dialog[name].addChild("group");
     buttonBar.set("layout", "hbox");
     buttonBar.set("default-padding", 10);
 
-    lcancel = buttonBar.addChild("button");
-    lcancel.set("legend", "Cancel");
-    lcancel.prop().getNode("binding[0]/command", 1).setValue("dialog-close");
+    lback = buttonBar.addChild("button");
+    lback.set("legend", "Back");
+    lback.set("equal", 1);
+    lback.set("keynum", 27);
+    lback.prop().getNode("binding[0]/command", 1).setValue("nasal");
+    lback.prop().getNode("binding[0]/script", 1).setValue("gui.showSelTutDialog()");
+    lback.prop().getNode("binding[1]/command", 1).setValue("dialog-close");
 
     lnext = buttonBar.addChild("button");
-    lnext.set("legend", "Start Tutorial");
-    lnext.set("keynum", 27);
-    lnext.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
-    lnext.prop().getNode("binding[1]/command", 1).setValue("nasal");
-    lnext.prop().getNode("binding[1]/script", 1).setValue("tutorial.startTutorial()");
-    lnext.prop().getNode("binding[2]/command", 1).setValue("dialog-close");
+    lnext.set("legend", "Start");
+    lnext.set("default", 1);
+    lnext.set("pref-width", 100);
+    lnext.set("equal", 1);
+    lnext.prop().getNode("binding[0]/command", 1).setValue("nasal");
+    lnext.prop().getNode("binding[0]/script", 1).setValue("tutorial.startTutorial()");
+    lnext.prop().getNode("binding[1]/command", 1).setValue("dialog-close");
 
     # All done: pop it up
     fgcommand("dialog-new", dialog[name].prop());
@@ -626,7 +628,7 @@ showHelpDialog = func {
         }
 
         w = dialog[name].addChild("textbox");
-        w.set("halign", "center");
+        w.set("halign", "fill");
         w.set("slider", 20);
         w.set("pref-width", width);
         w.set("pref-height", height);

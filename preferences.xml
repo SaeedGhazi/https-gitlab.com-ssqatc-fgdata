@@ -345,7 +345,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <default include="gui/menubar.xml"/>
   </menubar>
 
-  <current-gui type="int">0</current-gui>
+  <current-gui type="int" userarchive="y">0</current-gui>
   <gui n="0" include="gui/styles/default.xml"/>
   <gui n="1" include="gui/styles/anthrax.xml"/>
 

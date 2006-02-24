@@ -42,9 +42,10 @@
 
   <text><label>Last metar used</label></text>
   <textbox>
+    <halign>fill</halign>
     <pref-width>400</pref-width>
     <pref-height>120</pref-height>
-    <slider>12</slider>
+    <slider>20</slider>
     <live>true</live>
     <wrap>true</wrap>
     <editable>false</editable>

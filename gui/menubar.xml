@@ -467,6 +467,7 @@
   <item>
    <label>End Tutorial</label>
    <name>tutorial-stop</name>
+   <enabled>false</enabled>
    <binding>
     <command>nasal</command>
     <script>tutorial.stopTutorial()</script>

@@ -72,7 +72,6 @@ INIT = func {
     menuEnable("fuel-and-payload", getprop("/sim/flight-model") == "yasim");
     menuEnable("autopilot", props.globals.getNode("/autopilot/KAP140/locks") == nil);
     menuEnable("tutorial-start", size(props.globals.getNode("/sim").getChildren("tutorial")));
-    menuEnable("tutorial-stop", 0);
 
     var fps = props.globals.getNode("/sim/rendering/fps-display", 1);
     setlistener(fps, fpsDisplay, 1);
@@ -223,7 +222,7 @@ showSelTutDialog = func {
 
     lcancel = buttonBar.addChild("button");
     lcancel.set("legend", "Cancel");
-    lcancel.set("keynum", 27);
+    lcancel.set("key", "esc");
     lcancel.set("equal", 1);
     lcancel.prop().getNode("binding[0]/command", 1).setValue("dialog-close");
 
@@ -307,7 +306,7 @@ showTutorialDialog = func {
     lback = buttonBar.addChild("button");
     lback.set("legend", "Back");
     lback.set("equal", 1);
-    lback.set("keynum", 27);
+    lback.set("key", "esc");
     lback.prop().getNode("binding[0]/command", 1).setValue("nasal");
     lback.prop().getNode("binding[0]/script", 1).setValue("gui.showSelTutDialog()");
     lback.prop().getNode("binding[1]/command", 1).setValue("dialog-close");
@@ -382,7 +381,7 @@ showWeightDialog = func {
 
     ok = buttonBar.addChild("button");
     ok.set("legend", "OK");
-    ok.set("keynum", 27);
+    ok.set("key", "esc");
     ok.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
     ok.prop().getNode("binding[1]/command", 1).setValue("dialog-close");
 
@@ -564,7 +563,7 @@ showHelpDialog = func {
     w.set("pref-height", 16);
     w.set("legend", "");
     w.set("default", 1);
-    w.set("keynum", 27);
+    w.set("key", "esc");
     w.prop().getNode("binding[0]/command", 1).setValue("nasal");
     w.prop().getNode("binding[0]/script", 1).setValue("delete(gui.dialog, \"" ~ name ~ "\")");
     w.prop().getNode("binding[1]/command", 1).setValue("dialog-close");
@@ -677,7 +676,7 @@ basic_keys = {
         { name : "Ctrl-X",    desc : "reset zoom to default" },
         { name : "z/Z",       desc : "increase/decrease visibility" },
         { name : "'",         desc : "display ATC setting dialog" },
-        { name : "+",         desc : "let ATC repeat last message" },
+        { name : "+",         desc : "let ATC/instructor repeat last message" },
         { name : "F1",        desc : "load flight" },
         { name : "F3",        desc : "capture screen" },
         { name : "F10",       desc : "toggle menubar" },

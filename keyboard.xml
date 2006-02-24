@@ -292,10 +292,10 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="43">
   <name>+</name>
-  <desc>Let ATC repeat the last message.</desc>
+  <desc>Let ATC/instructor repeat last message.</desc>
   <binding>
     <command>nasal</command>
-    <script>screen.atc_repeat()</script>
+    <script>screen.msg_repeat()</script>
   </binding>
  </key>
 

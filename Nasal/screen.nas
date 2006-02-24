@@ -174,18 +174,28 @@ settimer(func {
 ##############################################################################
 
 
-atc_repeat = func {
-	var callsign = getprop("/sim/user/callsign");
-	var atc = props.globals.getNode("/sim/messages/atc", 1);
-	var last = atc.getValue();
-	if (last == nil) {
-		return;
+msg_repeat = func {
+	if (getprop("/sim/tutorial/running")) {
+		var last = getprop("/sim/tutorial/last-message");
+		if (last == nil) {
+			return;
+		}
+		setprop("/sim/messages/pilot", "Say again ...");
+		settimer(func { setprop("/sim/messages/copilot", last) }, 1.5);
+
+	} else {
+		var callsign = getprop("/sim/user/callsign");
+		var atc = props.globals.getNode("/sim/messages/atc", 1);
+		var last = atc.getValue();
+		if (last == nil) {
+			return;
+		}
+		setprop("/sim/messages/pilot", "This is " ~ callsign ~ ". Say again, over.");
+		settimer(func {
+			atc.setValue("I say again:");
+			atc.setValue(last)
+		}, 6);
 	}
-	setprop("/sim/messages/pilot", "This is " ~ callsign ~ ". Say again, over.");
-	settimer(func {
-		atc.setValue("I say again:");
-		atc.setValue(last)
-	}, 6);
 }
 
 

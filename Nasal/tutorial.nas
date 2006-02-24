@@ -69,9 +69,7 @@ m_currentStep = 0;
 m_errors = 0;
 m_tutorial = 0;
 m_firstEntry = 1;
-m_stop = 0;
 m_audioDir = "";
-m_lastmsg = "";
 m_lastmsgcount = 0;
 
 #
@@ -109,7 +107,9 @@ startTutorial = func {
     return;
   }
 
+  # Indicate that the tutorial is running
   screen.log.write("Loading tutorial: " ~ ltutorial ~ " ...");
+  isRunning(1);
 
   # If defined, get the audio directory
   if (m_tutorial.getChild("audio-dir") != nil)
@@ -175,12 +175,11 @@ startTutorial = func {
 #
 # stopTutorial
 #
-# Stops the current tutorial by setting m_stop.
+# Stops the current tutorial .
 #
-
 stopTutorial = func
 {
-  m_stop = 1;
+  isRunning(0);
   settimer(resetStop, STEP_TIME);
 }
 
@@ -192,7 +191,6 @@ stopTutorial = func
 # they have been changed.
 resetStop = func
 {
-  m_stop = 0;
   m_currentStep = 0;
   m_firstEntry = 1;
   m_errors = 0;
@@ -215,12 +213,12 @@ resetStop = func
 #
 stepTutorial = func {
 
-  lerror = 0;
-  ltts = nil;
-  lsnd = nil;
-  lmessage = nil;
+  var lerror = 0;
+  var ltts = nil;
+  var lsnd = nil;
+  var lmessage = nil;
 
-  if (m_stop == 1)
+  if (!isRunning())
   {
     # If we've been told to stop, just do so.
     return;
@@ -243,8 +241,9 @@ stepTutorial = func {
       lsnd = m_tutorial.getChild("endtext-voice").getValue();
     }
 
-    say(lfinished ~ "\nDeviations: " ~ m_errors, lsnd);
-
+    say(lfinished, lsnd);
+    say("Deviations : " ~ m_errors);
+    isRunning(0);
     return;
   }
 
@@ -299,7 +298,7 @@ stepTutorial = func {
       {
         # and error condition was fulfilled - set the error message
         lerror = 1;
-        m_errors = m_errors + 1;
+        m_errors += 1;
 
         if (c.getChild("msg") != nil)
         {
@@ -321,7 +320,7 @@ stepTutorial = func {
     if ((lstep.getChild("exit") == nil) or
         (lstep.getChild("exit").getChildren("check") == nil))
     {
-      m_currentStep = m_currentStep + 1;
+      m_currentStep += 1;
       m_firstEntry = 1;
       settimer(stepTutorial, STEP_EXIT);
       return;
@@ -340,7 +339,7 @@ stepTutorial = func {
       if (lexit == 1)
       {
         # Passed all exit steps
-        m_currentStep = m_currentStep + 1;
+        m_currentStep += 1;
         m_firstEntry = 1;
         settimer(stepTutorial, STEP_EXIT);
         return;
@@ -350,7 +349,7 @@ stepTutorial = func {
 
 
   # Display the resulting message and wait to go around again.
-  say(lmessage, lsnd);
+  say(lmessage, lsnd, lerror);
 
   settimer(stepTutorial, STEP_TIME);
 }
@@ -361,8 +360,7 @@ stepTutorial = func {
 #   <val>woof</val>
 # </set>
 #
-setVal = func {
-  node = arg[0];
+setVal = func(node) {
 
   if (node.getName("set"))
   {
@@ -384,8 +382,7 @@ setVal = func {
 #
 # where _operator_ may be one of "eq", "lt", "gt"
 #
-checkVal = func {
-  node = arg[0];
+checkVal = func(node) {
 
   if (node.getName("check"))
   {
@@ -421,16 +418,30 @@ checkVal = func {
 }
 
 #
+# Set and return running state. Disable/enable stop menu.
+#
+isRunning = func(which=nil)
+{
+  var prop = "/sim/tutorial/running";
+  if (which != nil)
+  {
+    setprop(prop, which);
+    gui.menuEnable("tutorial-stop", which);
+  }
+  return getprop(prop);
+}
+
+#
 # Output the message and optional sound recording.
 #
-say = func(msg, snd=nil)
+say = func(msg, snd=nil, lerror=0)
 {
-  # We only display the same message after 20 seconds. This stops
-  # any voice instructions or festival TTS repeating too quickly.
-  if ((msg != m_lastmsg) or (m_lastmsgcount == 3))
+  var lastmsg = getprop("/sim/tutorial/last-message");
+
+  if ((msg != lastmsg) or (lerror == 1 and m_lastmsgcount == 1))
   {
-    # We're either re-displaying after 20 seconds, or
-    # displaying a new message.
+    # Error messages are only displayed every 10 seconds (2 iterations)
+    # Other messages are only displayed if they change
     if (snd == nil)
     {
       # Simply set to the co-pilot channel. TTS is picked up automatically.
@@ -445,11 +456,11 @@ say = func(msg, snd=nil)
       screen.log.write(msg, 1, 1, 1);
     }
 
-    m_lastmsg = msg;
+    setprop("/sim/tutorial/last-message", msg);
     m_lastmsgcount = 0;
   }
   else
   {
-    m_lastmsgcount = m_lastmsgcount + 1;
+    m_lastmsgcount += 1;
   }
 }

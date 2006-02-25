@@ -34,6 +34,7 @@ properties' values.
   <adf-freq-standby-prop>/instrumentation/adf/frequencies/standby-khz</adf-freq-standby-prop>
   <adf-morse-id-volume-prop>/instrumentation/adf/volume-norm</adf-morse-id-volume-prop>
   <adf-morse-ident-toggle-prop>/instrumentation/adf/ident-audible</adf-morse-ident-toggle-prop>
+  <adf-pwr-volts-prop>/systems/electrical/outputs/adf[0]</adf-pwr-volts-prop>
 </params>
 
  <layers>
@@ -51,6 +52,12 @@ properties' values.
   
   <layer>
    <name>display</name>
+   <condition>
+    <greater-than>
+     <property alias="../../../../../params/adf-pwr-volts-prop"/>
+     <value>8.0</value>
+    </greater-than>
+   </condition>
    <type>text</type>
    <font>led</font>
    <point-size>7</point-size>

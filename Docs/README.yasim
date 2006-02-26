@@ -212,9 +212,22 @@ propeller: A propeller.  This element requires an engine subtag.
            min-rpm:       The minimum operational RPM for a constant speed
                           propeller.  This is the speed to which the
                           prop governor will seek when the blue lever
-                          is at minimum..
+                          is at minimum.  The coarse-stop attribute 
+                          limits how far the governor can go into trying
+                          to reach this RPM.
            max-rpm:       The maximum operational RPM for a constant speed
-                           propeller.  See above.
+                          propeller.  See above.  The fine-stop attribute
+                          limits how far the governor can go in trying
+                          to reach this RPM.  
+           fine-stop:     The minimum pitch of the propeller (high RPM) as a
+                          ratio of ideal cruise pitch.  This is set to 0.25
+                          by default -- a higher value will result in a
+                          lower RPM at low power settings (e.g. idle, taxi,
+                          and approach).
+           coarse-stop:   The maximum pitch of the propeller (low RPM) as
+                          a ratio of ideal cruise pitch.  This is set to
+                          4.0 by default -- a lower value may result in a
+                          higher RPM at high power settings.
            gear-ratio:    The factor by which the engine RPM is multiplied
                           to produce the propeller RPM.  Optional (defaults
                           to 1.0).

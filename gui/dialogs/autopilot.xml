@@ -19,17 +19,19 @@
 
   <text><label>Autopilot Settings</label></text>
 
+  <hrule><dummy/></hrule>
+
   <group>
     <layout>hbox</layout>
+    <default-padding>8</default-padding>
     
     <group> <!-- Pitch/Altitude -->
       <layout>vbox</layout>
       <group>
 	<layout>hbox</layout>
-	<text><label>Heading Control:</label></text>
-	<empty><stretch>true</stretch></empty>
 	<checkbox>
-	  <label>Active</label>
+	  <label>Heading Control</label>
+	  <halign>fill</halign>
 	  <property>/autopilot/gui/hdg-active</property>
 	  <binding>
 	    <command>dialog-apply</command>
@@ -74,6 +76,9 @@
 	  <row>1</row><col>2</col>
 	  <name>hdg-bug</name>
 	  <property>/autopilot/settings/heading-bug-deg</property>
+	  <binding>
+	    <command>dialog-apply</command>
+	  </binding>
 	</input>
 
 	<text>
@@ -93,6 +98,9 @@
 	  <row>2</row><col>2</col>
 	  <name>hdg-true</name>
 	  <property>/autopilot/settings/true-heading-deg</property>
+	  <binding>
+	    <command>dialog-apply</command>
+	  </binding>
 	</input>
 
 	<text>
@@ -110,17 +118,13 @@
 	</radio>
       </group>
 
-      <empty>
-	<stretch>true</stretch>
-	<pref-height>28</pref-height>
-      </empty>
+      <hrule><dummy/></hrule>
 
       <group>
 	<layout>hbox</layout>
-	<text><label>Velocity Control:</label></text>
-	<empty><stretch>true</stretch></empty>
 	<checkbox>
-	  <label>Active</label>
+	  <label>Velocity Control</label>
+	  <halign>fill</halign>
 	  <property>/autopilot/gui/vel-active</property>
 	  <binding>
 	    <command>dialog-apply</command>
@@ -152,6 +156,9 @@
 	  <rowspan>2</rowspan>
 	  <name>vel-throttle</name>
 	  <property>/autopilot/settings/target-speed-kt</property>
+	  <binding>
+	    <command>dialog-apply</command>
+	  </binding>
 	</input>
 
 	<text>
@@ -170,15 +177,18 @@
 	
       </group>
     </group> <!-- End of Heading/Speed -->
-    
+
+
+    <vrule><dummy/></vrule>
+
+
     <group> <!-- Pitch/Altitude -->
       <layout>vbox</layout>
       <group>
 	<layout>hbox</layout>
-	<text><label>Pitch/Altitude Control:</label></text>
-	<empty><stretch>true</stretch></empty>
 	<checkbox>
-	  <label>Active</label>
+	  <label>Pitch/Altitude Control</label>
+	  <halign>fill</halign>
 	  <property>/autopilot/gui/alt-active</property>
 	  <binding>
 	    <command>dialog-apply</command>
@@ -209,6 +219,9 @@
 	  <row>0</row><col>2</col>
 	  <name>alt-vert</name>
 	  <property>/autopilot/settings/vertical-speed-fpm</property>
+	  <binding>
+	    <command>dialog-apply</command>
+	  </binding>
 	</input>
 
 	<text>
@@ -228,6 +241,9 @@
 	  <row>1</row><col>2</col>
 	  <name>alt-pitch</name>
 	  <property>/autopilot/settings/target-pitch-deg</property>
+	  <binding>
+	    <command>dialog-apply</command>
+	  </binding>
 	</input>
 
 	<text>
@@ -247,6 +263,9 @@
 	  <row>2</row><col>2</col>
 	  <name>alt-aoa</name>
 	  <property>/autopilot/settings/target-aoa-deg</property>
+	  <binding>
+	    <command>dialog-apply</command>
+	  </binding>
 	</input>
 
 	<text>
@@ -266,6 +285,9 @@
 	  <row>3</row><col>2</col>
 	  <name>alt-alt</name>
 	  <property>/autopilot/settings/target-altitude-ft</property>
+	  <binding>
+	    <command>dialog-apply</command>
+	  </binding>
 	</input>
 
 	<text>
@@ -285,6 +307,9 @@
 	  <row>4</row><col>2</col>
 	  <name>alt-agl</name>
 	  <property>/autopilot/settings/target-agl-ft</property>
+	  <binding>
+	    <command>dialog-apply</command>
+	  </binding>
 	</input>
 
 	<text>
@@ -308,7 +333,7 @@
   </group>
 
   <button>
-    <legend>OK</legend>
+    <legend>Close</legend>
     <default>true</default>
     <key>Esc</key>
     <padding>10</padding>

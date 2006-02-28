@@ -198,6 +198,7 @@ msg_repeat = func {
 	}
 }
 
+listener = {};
 
 settimer(func {
 	# set /sim/screen/nomap=true to prevent default message mapping
@@ -212,13 +213,19 @@ settimer(func {
 	}
 
 	var m = "/sim/messages/";
-	setlistener(m ~ "atc",      func { map("atc",      cmdarg().getValue(), 0.7, 1.0, 0.7) });
-	setlistener(m ~ "approach", func { map("approach", cmdarg().getValue(), 0.7, 1.0, 0.7) });
-	setlistener(m ~ "ground",   func { map("ground",   cmdarg().getValue(), 0.7, 1.0, 0.7) });
+	listener["atc"] = setlistener(m ~ "atc",
+			func { map("atc",      cmdarg().getValue(), 0.7, 1.0, 0.7) });
+	listener["approach"] = setlistener(m ~ "approach",
+			func { map("approach", cmdarg().getValue(), 0.7, 1.0, 0.7) });
+	listener["ground"] = setlistener(m ~ "ground",
+			func { map("ground",   cmdarg().getValue(), 0.7, 1.0, 0.7) });
 
-	setlistener(m ~ "pilot",    func { map("pilot",    cmdarg().getValue(), 1.0, 0.8, 0.0) });
-	setlistener(m ~ "copilot",  func { map("copilot",  cmdarg().getValue(), 1.0, 1.0, 1.0) });
-	setlistener(m ~ "ai-plane", func { map("ai-plane", cmdarg().getValue(), 0.9, 0.4, 0.2) });
+	listener["pilot"] = setlistener(m ~ "pilot",
+			func { map("pilot",    cmdarg().getValue(), 1.0, 0.8, 0.0) });
+	listener["copilot"] = setlistener(m ~ "copilot",
+			func { map("copilot",  cmdarg().getValue(), 1.0, 1.0, 1.0) });
+	listener["ai-plane"] = setlistener(m ~ "ai-plane",
+			func { map("ai-plane", cmdarg().getValue(), 0.9, 0.4, 0.2) });
 }, 1);
 
 

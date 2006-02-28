@@ -93,7 +93,7 @@ wing:     This defines the main wing of the aircraft.  You can have
                      lift produced at the stall AoA.
 
 hstab:    These defines the horizontal stabilizer of the aircraft.
-          Internally, it is just awing objects and therefore work the
+          Internally, it is just a wing object and therefore works the
           same in XML.  You are allowed only one hstab object; the
           solver needs to know which wing's incidence to play with to
           get the aircraft trimmed correctly.
@@ -298,9 +298,6 @@ gear:     Defines a landing gear.  Accepts <control> subelements to map
           sfric:        Static (non-skidding) coefficient of
                         friction.  Defaults to 0.8.
           dfric:        Dynamic friction.  Defaults to 0.7.
-          retract-time: The time, in seconds, that the gear takes to
-                        fully retract or extend.  Defaults to zero,
-                        which indicates a non-retractable gear.
           spring:       A dimensionless multiplier for the automatically
                         generated spring constant.  Increase to make
                         the gear stiffer, decrease to make it

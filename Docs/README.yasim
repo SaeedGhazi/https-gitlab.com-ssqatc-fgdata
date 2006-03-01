@@ -251,8 +251,13 @@ piston-engine: A piston engine definition.  This must be a subelement
                              value to get the manifold pressure.
                wastegate-mp: The maximum manifold pressure.  Beyond
                              this, the gate will release to keep the
-                             MP below this number. (inHG).
-
+                             MP below this number. (inHG).  This value
+                             can be changed at runtime using the
+                             WASTEGATE control axis, which is a
+                             multiplier in the range [0:1].
+               turbo-lag:    Time lag, in seconds, for 90% of a power change
+                             to be reflected in the turbocharger boost
+                             pressure.
 
 turbine-engine: A turbine engine definition.  This must be a subelement
                 of an enclosing <propeller> tag.

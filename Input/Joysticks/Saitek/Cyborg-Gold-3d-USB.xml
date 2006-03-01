@@ -173,7 +173,7 @@ ________________________________________________________________________________
 
 	<button n="0"><!-- trigger -->
 		<desc>Brakes</desc>
-		<repeatable type="bool">true</repeatable>
+		<repeatable type="bool">false</repeatable>
 		<binding>
 			<command>nasal</command>
 			<script>
@@ -315,7 +315,7 @@ ________________________________________________________________________________
 
 	<button n="4"><!-- F1 -->
 		<desc>Brakes left</desc>
-		<repeatable type="bool">true</repeatable>
+		<repeatable type="bool">false</repeatable>
 		<binding>
 			<command>nasal</command>
 			<script>
@@ -354,7 +354,7 @@ ________________________________________________________________________________
 
 	<button n="5"><!-- F2 -->
 		<desc>Brakes right</desc>
-		<repeatable type="bool">true</repeatable>
+		<repeatable type="bool">false</repeatable>
 		<binding>
 			<command>nasal</command>
 			<script>

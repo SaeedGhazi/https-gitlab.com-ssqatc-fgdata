@@ -303,15 +303,13 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>,</name>
   <desc>Left brake</desc>
   <binding>
-   <command>property-assign</command>
-   <property>/controls/gear/brake-left</property>
-   <value type="double">1.0</value>
+   <command>nasal</command>
+   <script>controls.applyBrakes(1, -1)</script>
   </binding>
   <mod-up>
    <binding>
-    <command>property-assign</command>
-    <property>/controls/gear/brake-left</property>
-    <value type="double">0.0</value>
+    <command>nasal</command>
+    <script>controls.applyBrakes(0, -1)</script>
    </binding>
   </mod-up>
  </key>
@@ -320,15 +318,13 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>.</name>
   <desc>Right brake</desc>
   <binding>
-   <command>property-assign</command>
-   <property>/controls/gear/brake-right</property>
-   <value type="double">1.0</value>
+   <command>nasal</command>
+   <script>controls.applyBrakes(1, 1)</script>
   </binding>
   <mod-up>
    <binding>
-    <command>property-assign</command>
-    <property>/controls/gear/brake-right</property>
-    <value type="double">0.0</value>
+    <command>nasal</command>
+    <script>controls.applyBrakes(0, 1)</script>
    </binding>
   </mod-up>
  </key>
@@ -541,9 +537,15 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>B</name>
   <desc>Toggle parking brake on or off</desc>
   <binding>
-   <command>property-toggle</command>
-   <property>/controls/gear/brake-parking</property>
+   <command>nasal</command>
+   <script>controls.applyParkingBrake(1)</script>
   </binding>
+  <mod-up>
+   <binding>
+    <command>nasal</command>
+    <script>controls.applyParkingBrake(0)</script>
+   </binding>
+  </mod-up>
  </key>
 
  <key n="71">
@@ -689,25 +691,13 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>b</name>
   <desc>Apply all brakes.</desc>
   <binding>
-   <command>property-assign</command>
-   <property>/controls/gear/brake-left</property>
-   <value type="double">1.0</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/controls/gear/brake-right</property>
-   <value type="double">1.0</value>
+   <command>nasal</command>
+   <script>controls.applyBrakes(1)</script>
   </binding>
   <mod-up>
    <binding>
-    <command>property-assign</command>
-    <property>/controls/gear/brake-left</property>
-    <value type="double">0.0</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/controls/gear/brake-right</property>
-    <value type="double">0.0</value>
+    <command>nasal</command>
+    <script>controls.applyBrakes(0)</script>
    </binding>
   </mod-up>
  </key>

@@ -330,3 +330,14 @@ gearDown = func {
 }
 gearToggle = func { gearDown(getprop("/controls/gear/gear-down") > 0 ? -1 : 1); }
 
+applyBrakes = func(v, which = 0) {
+    if (which <= 0) { setprop("/controls/gear/brake-left", v); }
+    if (which >= 0) { setprop("/controls/gear/brake-right", v); }
+}
+
+applyParkingBrake = func(v) {
+    if (!v) { return; }
+    var p = "/controls/gear/brake-parking";
+    setprop(p, !getprop(p));
+}
+

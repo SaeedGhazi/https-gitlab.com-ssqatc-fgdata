@@ -105,8 +105,14 @@ ________________________________________________________________________________
 			data = props.globals.getNode(this).getNode("data");
 			mode = data.getNode("mode");
 			modifier = data.getNode("modifier");
+			f1 = f2 = 0;
 
 			get_mode = func { modifier.getValue() + mode.getValue() * 4 }
+
+			resetFOV = func {
+				setprop("/sim/current-view/field-of-view",
+						getprop("/sim/current-view/config/default-field-of-view-deg"));
+			}
 
 			harrier = func {
 				if (getprop("/sim/aero") == "harrier") {
@@ -173,11 +179,9 @@ ________________________________________________________________________________
 			<script>
 				m = get_mode();
 				if (m == 0) {
-					interpolate("/controls/gear/brake-left", 1, 0.075);
-					interpolate("/controls/gear/brake-right", 1, 0.075);
+					controls.applyBrakes(1);
 				} elsif (m == 1) {
-					setprop("/controls/gear/brake-left", 1);
-					setprop("/controls/gear/brake-right", 1);
+					controls.applyBrakes(1);
 				} elsif (m == 2) {
 					#
 				} elsif (m == 3) {
@@ -191,14 +195,11 @@ ________________________________________________________________________________
 				<script>
 					m = get_mode();
 					if (m == 0) {
-						interpolate("/controls/gear/brake-left", 0, 0.075);
-						interpolate("/controls/gear/brake-right", 0, 0.075);
+						controls.applyBrakes(0);
 					} elsif (m == 1) {
-						i = !getprop("/controls/gear/brake-parking");
-						setprop("/controls/gear/brake-parking", i);
+						i = controls.applyParkingBrake(1);
 						gui.popupTip("Parking Brake " ~ ["OFF", "ON"][i]);
-						setprop("/controls/gear/brake-left", 0);
-						setprop("/controls/gear/brake-right", 0);
+						controls.applyBrakes(0);
 					} elsif (m == 2) {
 						i = !getprop("/controls/flight/speedbrake");
 						setprop("/controls/flight/speedbrake", i);
@@ -318,13 +319,14 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
+				f1 = 1;
 				m = get_mode();
 				if (m == 0) {
-					interpolate("/controls/gear/brake-left", 1, 0.075);
+					controls.applyBrakes(1, -1);
 				} elsif (m == 1) {
 					#
 				} elsif (m == 2) {
-					view.increase();
+					f2 ? resetFOV() : view.increase();
 				} elsif (m == 3) {
 					#
 				}
@@ -334,9 +336,10 @@ ________________________________________________________________________________
 			<binding>
 				<command>nasal</command>
 				<script>
+					f1 = 0;
 					m = get_mode();
 					if (m == 0) {
-						interpolate("/controls/gear/brake-left", 0, 0.075);
+						controls.applyBrakes(0, -1);
 					} elsif (m == 1) {
 						#
 					} elsif (m == 2) {
@@ -355,13 +358,14 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
+				f2 = 1;
 				m = get_mode();
 				if (m == 0) {
-					interpolate("/controls/gear/brake-right", 1, 0.075);
+					controls.applyBrakes(1, 1);
 				} elsif (m == 1) {
 					#
 				} elsif (m == 2) {
-					view.decrease();
+					f1 ? resetFOV() : view.decrease();
 				} elsif (m == 3) {
 					#
 				}
@@ -371,9 +375,10 @@ ________________________________________________________________________________
 			<binding>
 				<command>nasal</command>
 				<script>
+					f2 = 0;
 					m = get_mode();
 					if (m == 0) {
-						interpolate("/controls/gear/brake-right", 0, 0.075);
+						controls.applyBrakes(0, 1);
 					} elsif (m == 1) {
 						#
 					} elsif (m == 2) {

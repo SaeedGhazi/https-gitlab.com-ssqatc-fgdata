@@ -93,18 +93,12 @@ Eric Hathaway <hathaway@uplink.net> : "Nasal-ized" the joystick configuration,
   <desc>Brakes</desc>
   <binding>
    <command>nasal</command>
-   <script>
-           interpolate("/controls/gear/brake-left", 1, 0.075);
-           interpolate("/controls/gear/brake-right", 1, 0.075)
-   </script>
+   <script>controls.applyBrakes(1)</script>
   </binding>
   <mod-up>
    <binding>
     <command>nasal</command>
-    <script>
-            interpolate("/controls/gear/brake-left", 0, 0.075);
-            interpolate("/controls/gear/brake-right", 0, 0.075)
-    </script>
+    <script>controls.applyBrakes(0)</script>
    </binding>
   </mod-up>
  </button>

@@ -47,52 +47,8 @@
  <axis n="2">
   <desc>Throttle</desc>
   <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[0]/throttle</property>
-   <offset type="double">1.0</offset>
-   <factor type="double">0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[1]/throttle</property>
-   <offset type="double">1.0</offset>
-   <factor type="double">0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[2]/throttle</property>
-   <offset type="double">1.0</offset>
-   <factor type="double">0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[3]/throttle</property>
-   <offset type="double">1.0</offset>
-   <factor type="double">0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[4]/throttle</property>
-   <offset type="double">1.0</offset>
-   <factor type="double">0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[5]/throttle</property>
-   <offset type="double">1.0</offset>
-   <factor type="double">0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[6]/throttle</property>
-   <offset type="double">1.0</offset>
-   <factor type="double">0.5</factor>
-  </binding>
-  <binding>
-   <command>property-scale</command>
-   <property>/controls/engines/engine[7]/throttle</property>
-   <offset type="double">1.0</offset>
-   <factor type="double">0.5</factor>
+   <command>nasal</command>
+   <script>controls.throttleAxis()</script>
   </binding>
  </axis>
 
@@ -148,25 +104,13 @@
  <button n="0">
   <desc>Brakes</desc>
   <binding>
-   <command>property-assign</command>
-   <property>/controls/gear/brake-left</property>
-   <value type="double">1.0</value>
-  </binding>
-  <binding>
-   <command>property-assign</command>
-   <property>/controls/gear/brake-right</property>
-   <value type="double">1.0</value>
+   <command>nasal</command>
+   <script>controls.applyBrakes(1)</script>
   </binding>
   <mod-up>
    <binding>
-    <command>property-assign</command>
-    <property>/controls/gear/brake-left</property>
-    <value type="double">0.0</value>
-   </binding>
-   <binding>
-    <command>property-assign</command>
-    <property>/controls/gear/brake-right</property>
-    <value type="double">0.0</value>
+    <command>nasal</command>
+    <script>controls.applyBrakes(0)</script>
    </binding>
   </mod-up>
  </button>
@@ -224,15 +168,13 @@
  <button n="4">
   <desc>Right brake</desc>
   <binding>
-   <command>property-assign</command>
-   <property>/controls/gear/brake-right</property>
-   <value type="double">1.0</value>
+   <command>nasal</command>
+   <script>controls.applyBrakes(1, 1)</script>
   </binding>
   <mod-up>
    <binding>
-    <command>property-assign</command>
-    <property>/controls/gear/brake-right</property>
-    <value type="double">0.0</value>
+    <command>nasal</command>
+    <script>controls.applyBrakes(0, 1)</script>
    </binding>
   </mod-up>
  </button>
@@ -240,15 +182,13 @@
  <button n="5">
   <desc>Left brake</desc>
   <binding>
-   <command>property-assign</command>
-   <property>/controls/gear/brake-left</property>
-   <value type="double">1.0</value>
+   <command>nasal</command>
+   <script>controls.applyBrakes(1, -1)</script>
   </binding>
   <mod-up>
    <binding>
-    <command>property-assign</command>
-    <property>/controls/gear/brake-left</property>
-    <value type="double">0.0</value>
+    <command>nasal</command>
+    <script>controls.applyBrakes(0, -1)</script>
    </binding>
   </mod-up>
  </button>

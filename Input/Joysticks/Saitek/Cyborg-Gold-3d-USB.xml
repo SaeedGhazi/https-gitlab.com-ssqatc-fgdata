@@ -106,13 +106,9 @@ ________________________________________________________________________________
 			mode = data.getNode("mode");
 			modifier = data.getNode("modifier");
 			f1 = f2 = 0;
+			left_brake = right_brake = 0;
 
 			get_mode = func { modifier.getValue() + mode.getValue() * 4 }
-
-			resetFOV = func {
-				setprop("/sim/current-view/field-of-view",
-						getprop("/sim/current-view/config/default-field-of-view-deg"));
-			}
 
 			harrier = func {
 				if (getprop("/sim/aero") == "harrier") {
@@ -315,18 +311,20 @@ ________________________________________________________________________________
 
 	<button n="4"><!-- F1 -->
 		<desc>Brakes left</desc>
-		<repeatable type="bool">false</repeatable>
+		<repeatable type="bool">true</repeatable>
 		<binding>
 			<command>nasal</command>
 			<script>
 				f1 = 1;
 				m = get_mode();
 				if (m == 0) {
-					controls.applyBrakes(1, -1);
+					if (!left_brake) {
+						controls.applyBrakes(left_brake = 1, -1);
+					}
 				} elsif (m == 1) {
 					#
 				} elsif (m == 2) {
-					f2 ? resetFOV() : view.increase();
+					f2 ? view.resetFOV() : view.increase();
 				} elsif (m == 3) {
 					#
 				}
@@ -339,11 +337,11 @@ ________________________________________________________________________________
 					f1 = 0;
 					m = get_mode();
 					if (m == 0) {
-						controls.applyBrakes(0, -1);
+						controls.applyBrakes(left_brake = 0, -1);
 					} elsif (m == 1) {
 						#
 					} elsif (m == 2) {
-						#
+						vlp = nil;
 					} elsif (m == 3) {
 						#
 					}
@@ -354,18 +352,20 @@ ________________________________________________________________________________
 
 	<button n="5"><!-- F2 -->
 		<desc>Brakes right</desc>
-		<repeatable type="bool">false</repeatable>
+		<repeatable type="bool">true</repeatable>
 		<binding>
 			<command>nasal</command>
 			<script>
 				f2 = 1;
 				m = get_mode();
 				if (m == 0) {
-					controls.applyBrakes(1, 1);
+					if (!right_brake) {
+						controls.applyBrakes(right_brake = 1, 1);
+					}
 				} elsif (m == 1) {
 					#
 				} elsif (m == 2) {
-					f1 ? resetFOV() : view.decrease();
+					f1 ? view.resetFOV() : view.decrease();
 				} elsif (m == 3) {
 					#
 				}
@@ -378,11 +378,11 @@ ________________________________________________________________________________
 					f2 = 0;
 					m = get_mode();
 					if (m == 0) {
-						controls.applyBrakes(0, 1);
+						controls.applyBrakes(right_brake = 0, 1);
 					} elsif (m == 1) {
 						#
 					} elsif (m == 2) {
-						#
+						vlp = nil;
 					} elsif (m == 3) {
 						#
 					}

@@ -79,6 +79,14 @@ decrease = func {
 }
 
 ##
+# Handler.  Reset FOV to default.
+#
+resetFOV = func {
+    setprop("/sim/current-view/field-of-view",
+            getprop("/sim/current-view/config/default-field-of-view-deg"));
+}
+
+##
 # Handler.  Reset view to default.
 #
 resetView = func {
@@ -88,8 +96,7 @@ resetView = func {
             getprop("/sim/current-view/config/pitch-offset-deg"));
     setprop("/sim/current-view/goal-roll-offset-deg",
             getprop("/sim/current-view/config/roll-offset-deg"));
-    setprop("/sim/current-view/field-of-view",
-            getprop("/sim/current-view/config/default-field-of-view-deg"))
+    resetFOV();
 }
 
 ##

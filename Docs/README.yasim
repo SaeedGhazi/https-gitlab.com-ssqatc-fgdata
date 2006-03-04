@@ -290,11 +290,8 @@ actionpt: Defines an "action point" for an enclosing jet or propeller
 gear:     Defines a landing gear.  Accepts <control> subelements to map
           properties to steering and braking.
           x,y,z:  The location of the fully-extended gear tip.
-          compression:  The distance along the Z axis that the gear
-                        will compress.  Compression along other
-                        vectors is supported internally, but not in
-                        the XML parser.  Bug me if you wantthis
-                        added.
+          compression:  The distance in meters along the "up" axis that
+                        the gear will compress.
           upx/upy/upz:  The direction of compression, defaults to
                         vertical (0,0,1) if unspecified.  These are
                         used only for a direction -- the vector need
@@ -311,10 +308,26 @@ gear:     Defines a landing gear.  Accepts <control> subelements to map
                         generated damping coefficient.  Decrease to
                         make the gear "bouncier", increase to make it
                         "slower".  Beware of increasing this too far:
-                        very high damping forces can result and make
-                        the numerics unstable.  If you can't make the
-                        gear stop bouncing with this number, try
-                        increasing the compression length instead.
+                        very high damping forces can make the numerics
+                        unstable.  If you can't make the gear stop
+                        bouncing with this number, try increasing the
+                        compression length instead.
+
+launchbar: Defines a catapult launchbar or strop.
+           x,y,z:      The location of the mount point of the launch bar or
+                       strop on the aircraft.
+           length:     The length of the launch bar from mount point to tip 
+           down-angle: The max angle below the horizontal the
+                       launchbar can achieve.
+           up-angle:   The max angle above the horizontal the launchbar
+                       can achieve.
+           holdback-{x,y,z}: The location of the holdback mount point
+                             on the aircraft.
+           holdback-length: The length of the holdback from mount
+                            point to tip.  Note: holdback up-angle and
+                            down-angle are the same as those defined
+                            for the launchbar and are not specified in
+                            the configuration.
 
 tank:     A fuel tank.  Tanks in the aircraft are identified
           numerically (starting from zero), in the order they are

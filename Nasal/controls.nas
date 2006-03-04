@@ -203,10 +203,13 @@ adjPropeller = func {
 
 adjEngControl = func {
     engs = props.globals.getNode("/controls/engines").getChildren("engine");
+    selected = props.globals.getNode("/sim/input/selected");
     delta = arg[1] * THROTTLE_RATE * getprop("/sim/time/delta-realtime-sec");
     foreach(e; engs) {
-        node = e.getNode(arg[0], 1);
-        node.setValue(node.getValue() + delta);
+        if(selected.getChild("engine", e.getIndex(), 1).getBoolValue()) {
+            node = e.getNode(arg[0], 1);
+            node.setValue(node.getValue() + delta);
+        }
     }
 }
 
@@ -321,6 +324,9 @@ elevatorTrimAxis = func { elevatorTrim(cmdarg().getNode("value").getValue()); }
 aileronTrimAxis = func { aileronTrim(cmdarg().getNode("value").getValue()); }
 rudderTrimAxis = func { rudderTrim(cmdarg().getNode("value").getValue()); }
 
+##
+# Gear handling.
+#
 gearDown = func {
     if (arg[0] < 0) {
       setprop("/controls/gear/gear-down", 0);
@@ -330,6 +336,9 @@ gearDown = func {
 }
 gearToggle = func { gearDown(getprop("/controls/gear/gear-down") > 0 ? -1 : 1); }
 
+##
+# Brake handling.
+#
 fullBrakeTime = 0.5;
 applyBrakes = func(v, which = 0) {
     if (which <= 0) { interpolate("/controls/gear/brake-left", v, fullBrakeTime); }

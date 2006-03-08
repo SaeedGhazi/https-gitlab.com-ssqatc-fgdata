@@ -183,6 +183,16 @@ file, since the root element is named PropertyList.
 
   draggable - false if the dialog is not draggable. The default is true.
 
+  nasal - Nasal definition block
+    open - Nasal script to be executed on dialog open
+    close - Nasal script to be executed on dialog close
+
+All Nasal code runs in a dialog namespace. Nasal bindings can
+directly access variables and functions defined in an <open> block.
+settimer() and setlistener() functions have to be removed manually
+in the <close> block if they shouldn't remain active.
+
+
 Example:
 
 <PropertyList>

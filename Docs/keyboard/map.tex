@@ -13,6 +13,7 @@
 \setlength\parskip{0pt}
 \setlength\parindent{0pt}
 \linepenalty100
+\exhyphenpenalty1000
 
 \definecolor{darkcyan}{rgb}{0,.5,.5}
 \definecolor{darkred}{rgb}{.5,0,0}
@@ -85,28 +86,28 @@
 \title{FlightGear Keyboard Bindings}
 
 \begin{keyboard}
-\k   1 Ctrl-A          Toggle autopilot altitude lock; \ac{Concorde} Toggle autopilot altitude lock
-\k   2 Ctrl-B          Toggle speedbrake; \ac{hurricaneIIb|p51d} Toggle engine boost; \ac{seafireIIIc|spitfireIIa} Toggle engine boost control cutout; \ac{hunter|hunter-2tanks|seahawk} Toggle speedbrake
+\k   1 Ctrl-A          Toggle autopilot altitude lock; \ac{Boeing314A|Concorde|Lockheed1049} Toggle autopilot altitude lock
+\k   2 Ctrl-B          Toggle speedbrake; \ac{lightning} Airbrakes; \ac{hurricaneIIb|p51d} Toggle engine boost; \ac{seafireIIIc|spitfireIIa} Toggle engine boost control cutout; \ac{a4f|hunter|hunter-2tanks|seahawk} Toggle speedbrake
 \k   3 Ctrl-C          Toggle clickable panel hotspots
 \k   4 Ctrl-D          \ac{Concorde} Disconnect autopilot; \ac{hurricaneIIb|seafireIIIc|spitfireIIa} Door Fold Toggle; \ac{b29|b29-jsbsim|b29-magic|b29-yasim} Open/close bomb bay doors; \ac{bo105|c150} Open/close selected door
-\k   5 Ctrl-E          \ac{Concorde} Toggle engineer/captain view
+\k   5 Ctrl-E          \ac{Boeing314A|Concorde} Toggle engineer/captain view
 \k   6 Ctrl-F          \ac{hunter|hunter-2tanks|seahawk} Emergency Flap Lowering; \ac{b29|b29-jsbsim|b29-magic|b29-yasim} Open/close cabin doors and windows; \ac{Concorde} Reheat; \ac{hurricaneIIb|seafireIIIc} Toggle Wingfold; \ac{f16|f16-3d|f16-mlu|f16at} Trigger flare release
 \k   7 Ctrl-G          Toggle autopilot glide slope lock; \ac{Concorde} Toggle autopilot glide slope lock
-\k   8 Ctrl-H          Toggle autopilot heading lock; \ac{Concorde} Toggle autopilot heading lock
-\k   9 Ctrl-I/Tab      Show instrument setting dialog; \ac{bo105|c150} Show configuration dialog
-\k  10 Ctrl-J          \ac{hunter-2tanks} Jettison Inner and Outer Pylon Stores
-\k  11 Ctrl-K          {}
-\k  12 Ctrl-L          \ac{hunter-2tanks} Seat Default; \ac{hurricaneIIb|seafireIIIc} Toggle Tailwheel Lock
+\k   8 Ctrl-H          Toggle autopilot heading lock; \ac{f16|f16-3d|f16-mlu|f16at} Toggle arrester hook; \ac{Boeing314A|Concorde|Lockheed1049} Toggle autopilot heading lock
+\k   9 Ctrl-I/Tab      Show instrument setting dialog; \ac{bo105|c150|lightning} Show configuration dialog
+\k  10 Ctrl-J          \ac{hunter-2tanks} Jettison Inner and Outer Pylon Stores; \ac{Boeing314A|Concorde} Toggle copilot view
+\k  11 Ctrl-K          \ac{a4f} Toggle spoiler; \ac{Concorde} Toggle steward view
+\k  12 Ctrl-L          \ac{hunter-2tanks} Seat Default; \ac{hurricaneIIb|seafireIIIc} Toggle Tailwheel Lock; \ac{Concorde} Virtual copilot
 \k  13 Ctrl-M/Enter    Move rudder right
 \k  14 Ctrl-N          Toggle autopilot nav1 lock; \ac{Concorde} Toggle autopilot nav1 lock
-\k  15 Ctrl-O          \ac{Concorde} Toggle overhead view
-\k  16 Ctrl-P          Toggle pitch hold; \ac{Concorde} Toggle pitch hold
+\k  15 Ctrl-O          \ac{Concorde} Toggle overhead view; \ac{Boeing314A} Toggle radio view
+\k  16 Ctrl-P          Toggle pitch hold; \ac{pa24-250} Toggle Prime Pump; \ac{Boeing314A|Concorde|Lockheed1049} Toggle pitch hold
 \k  17 Ctrl-Q          {}
 \k  18 Ctrl-R          Show radio setting dialog
-\k  19 Ctrl-S          Toggle auto-throttle lock; \ac{Concorde} Toggle auto-throttle lock
+\k  19 Ctrl-S          Toggle auto-throttle lock; \ac{Boeing314A|Concorde|Lockheed1049} Toggle auto-throttle lock
 \k  20 Ctrl-T          Toggle autopilot terrain lock
 \k  21 Ctrl-U          [Cheat] Add 1000ft of emergency altitude; \ac{hunter|hurricaneIIb|seafireIIIc|seahawk|spitfireIIa} Seat Default
-\k  22 Ctrl-V          Select initial view (view 0); \ac{Concorde} Select initial view (view 0)
+\k  22 Ctrl-V          Select initial view (view 0); \ac{Boeing314A|Concorde} Select initial view (view 0)
 \k  23 Ctrl-W          Toggle autopilot wing leveler
 \k  24 Ctrl-X          Reset zoom to default
 \k  25 Ctrl-Y          \ac{bo105} Show material dialogs
@@ -116,18 +117,18 @@
 \k  29 Ctrl-5/Ctrl-]   {}
 \k  30 Ctrl-6          {}
 \k  31 Ctrl-7/Ctrl-/   {}
-\k  32 Space           Fire Starter on Selected Engine(s); \ac{hurricaneIIb|seafireIIIc|spitfireIIa} Coffman Starter
-\k  33 !               Select first engine; \ac{dhc2F} Toggle Battery Switch
+\k  32 Space           Fire Starter on Selected Engine(s); \ac{hurricaneIIb|seafireIIIc|spitfireIIa} Coffman Starter; \ac{pa24-250} Toggle Starter Switch
+\k  33 !               Select first engine; \ac{dhc2F} Toggle Battery Switch; \ac{pa24-250} Toggle Master Switch
 \k  34 "               {}
-\k  35 \#              Select third engine; \ac{dhc2F} Toggle Fuel Pump
-\k  36 \$              Select fourth engine; \ac{dhc2F} Toggle Pitot Heat
-\k  37 \%              \ac{dhc2F} Toggle Landing Light
+\k  35 \#              Select third engine; \ac{dhc2F} Toggle Fuel Pump; \ac{pa24-250} Toggle Nav Lights
+\k  36 \$              Select fourth engine; \ac{pa24-250} Toggle Landing Light; \ac{dhc2F} Toggle Pitot Heat
+\k  37 \%              \ac{dhc2F} Toggle Landing Light; \ac{pa24-250} Toggle Turn+Bank
 \k  38 \&              {}
 \k  39 '~(Apostrophe)  Display a dialog relevant to the tuned in ATC service (if any)
-\k  40 (               \ac{hurricaneIIb} Fuel Cock Close; \ac{seafireIIIc|spitfireIIa} Fuel Cock Left Toggle
-\k  41 )               \ac{hurricaneIIb} Fuel Cock Open; \ac{seafireIIIc|spitfireIIa} Fuel Cock Right Toggle
-\k  42 *               {}
-\k  43 +               {}
+\k  40 (               \ac{hurricaneIIb} Fuel Cock Close; \ac{seafireIIIc|spitfireIIa} Fuel Cock Left Toggle; \ac{pa24-250} Toggle Strobe Lights
+\k  41 )               \ac{hurricaneIIb} Fuel Cock Open; \ac{seafireIIIc|spitfireIIa} Fuel Cock Right Toggle; \ac{pa24-250} Toggle Avionics Master
+\k  42 *               \ac{pa24-250} Toggle Pitot Heat
+\k  43 +               Let ATC/instructor repeat last message
 \k  44 ,~(Comma)       Left brake
 \k  45 -~(Minus)       {}
 \k  46 .~(Period)      Right brake
@@ -148,61 +149,61 @@
 \k  61 =               {}
 \k  62 >               \ac{hurricaneIIb|seafireIIIc|spitfireIIa} Rudder Trim Right
 \k  63 ?               Show help dialog
-\k  64 @               Select second engine; \ac{dhc2F} Toggle Alternator Switch
+\k  64 @               Select second engine; \ac{dhc2F} Toggle Alternator Switch; \ac{pa24-250} Toggle Fuel Pump
 \k  65 A               Decrease speed-up
-\k  66 B               Toggle parking brake on or off; \ac{fokker70} Toggle parking brake on or off
-\k  67 C               \ac{a4|hunter|hurricaneIIb|seafireIIIc|seahawk} Catapult Launch Command; \ac{spitfireIIa} Coffman Starter Cartridge Indexer; \ac{MiG-15bis} Toggle Canopy
+\k  66 B               Toggle parking brake on or off; \ac{Boeing314A} Toggle parking brake (rope) on or off
+\k  67 C               \ac{a4|a4f|carrier|hunter|hurricaneIIb|seafireIIIc|seahawk} Catapult Launch Command; \ac{spitfireIIa} Coffman Starter Cartridge Indexer; \ac{MiG-15bis} Toggle Canopy
 \k  68 D               \ac{hurricaneIIb|seafireIIIc|spitfireIIa} Door Fold Down; \ac{bo105|c150} Select previous door
-\k  69 E               \ac{A380} steer NLG right
-\k  70 F               \ac{hurricaneIIb|seafireIIIc} Close Canopy; \ac{spitfireIIa} Open Canopy; \ac{a4|seahawk} Wing Fold Down; \ac{hunter|hunter-2tanks} Wing Fold Down/Canopy Close
-\k  71 G               Gear down
+\k  69 E               \ac{Boeing314A|Lockheed1049} Decrease propeller pitch; \ac{A380} steer NLG right
+\k  70 F               \ac{hurricaneIIb|seafireIIIc} Close Canopy; \ac{spitfireIIa} Open Canopy; \ac{a4|a4f|carrier|seahawk} Wing Fold Down; \ac{hunter|hunter-2tanks} Wing Fold Down/Canopy Close
+\k  71 G               Gear down; \ac{Concorde} Gear down
 \k  72 H               Cycle HUD Brightness; \ac{seahawk} Null; \ac{hurricaneIIb|seafireIIIc|spitfireIIa} Radiator Flap down
 \k  73 I               Minimal HUD; \ac{hurricaneIIb|seafireIIIc|spitfireIIa} Operate Priming Pump
 \k  74 J               \ac{hunter-2tanks} Jettison Outer Pylon Stores
-\k  75 K               \ac{hurricaneIIb|seafireIIIc|spitfireIIa} Gear Warn Toggle; \ac{A-10cl|A-10fl|AN-225|B-52F|BAC-TSR2|ComperSwift|MiG-15bis|TU-114} Toggle trajectory markers
-\k  76 L               \ac{a4|hunter|hurricaneIIb|seafireIIIc|seahawk} Launch-bar engage; \ac{hunter-2tanks} Seat Up; \ac{TU-114} Update Tower View position
+\k  75 K               \ac{hurricaneIIb|seafireIIIc|spitfireIIa} Gear Warn Toggle; \ac{A-10|AN-225|B-52F|BAC-TSR2|ComperSwift|MiG-15bis|TU-114} Toggle trajectory markers
+\k  76 L               \ac{a4|a4f|carrier|hunter|hurricaneIIb|seafireIIIc|seahawk} Launch-bar engage; \ac{hunter-2tanks} Seat Up; \ac{TU-114} Update Tower View position
 \k  77 M               Mixture leaner; \ac{seafireIIIc|spitfireIIa} Mixture Weak
-\k  78 N               \ac{c182|c182-2dpanel|seafireIIIc|spitfireIIa} Propeller Coarse; \ac{hurricaneIIb} Propeller Course
-\k  79 O               \ac{a4|hunter|hunter-2tanks|hurricaneIIb|seafireIIIc|seahawk} Hook down; \ac{c150} Operate Priming Pump
+\k  78 N               Propeller Coarser; \ac{c182|c182-2dpanel|c310dpm-3d|hurricaneIIb|seafireIIIc|spitfireIIa} Propeller Coarse
+\k  79 O               \ac{a4|a4f|carrier|hunter|hunter-2tanks|hurricaneIIb|seafireIIIc|seahawk} Hook down; \ac{c150} Operate Priming Pump
 \k  80 P               Toggle panel
-\k  81 Q               \ac{T38} Fuel Cutoff Switch or Lever; \ac{A380} steer NLG left
-\k  82 R               \ac{A320|MD11|MD11-FINNAIR|MD11-KLM} Toggle cutoff on Selected Engine(s); \ac{fokker100|fokker70} Toggle thrust reverser
+\k  81 Q               \ac{F80C|T38} Fuel Cutoff Switch or Lever; \ac{A380} steer NLG left
+\k  82 R               \ac{lightning} Radar View; \ac{A320|MD11|MD11-FINNAIR|MD11-KLM} Toggle cutoff on Selected Engine(s); \ac{fokker100|fokker70} Toggle thrust reverser
 \k  83 S               \ac{A320|MD11|MD11-FINNAIR|MD11-KLM} Fire Starter on Selected Engine(s); \ac{fokker100|fokker70} Toggle spoilers
 \k  84 T               Decrease warp delta
-\k  85 U               \ac{hunter|hurricaneIIb|seafireIIIc|seahawk|spitfireIIa} Seat Down; \ac{A-10cl|A-10fl|AN-225|B-52F|BAC-TSR2|ComperSwift|MiG-15bis|TU-114} Update Drop View position
-\k  86 V               Scroll in reverse through views; \ac{Concorde} Scroll in reverse through views
+\k  85 U               \ac{hunter|hurricaneIIb|seafireIIIc|seahawk|spitfireIIa} Seat Down; \ac{A-10|AN-225|B-52F|BAC-TSR2|ComperSwift|MiG-15bis|TU-114} Update Drop View position
+\k  86 V               Scroll in reverse through views; \ac{Boeing314A|Concorde} Scroll in reverse through views
 \k  87 W               Decrease warp
 \k  88 X               Increase field of view
 \k  89 Y               \ac{bo105} Select previous variant
 \k  90 Z               Decrease Visibility
-\k  91 [               Decrease flaps; \ac{ComperSwift} Adjust view left; \ac{A380|fokker100|fokker50|fokker70|hunter|hunter-2tanks|seahawk} Decrease flaps; \ac{seafireIIIc|spitfireIIa} Flap Lever up; \ac{B-52F} Reduce Flaps
+\k  91 [               Decrease flaps; \ac{ComperSwift} Adjust view left; \ac{seahawk} Decrease flap lever; \ac{A380|Concorde|fokker100|fokker50|fokker70|hunter|hunter-2tanks} Decrease flaps; \ac{seafireIIIc|spitfireIIa} Flap Lever up; \ac{B-52F} Reduce Flaps
 \k  92 \|              {}
-\k  93 ]               Increase flaps; \ac{ComperSwift} Adjust view right; \ac{seafireIIIc|spitfireIIa} Flap Lever down; \ac{B-52F} Increase Flaps; \ac{A380|fokker100|fokker50|fokker70|hunter|hunter-2tanks|seahawk} Increase flaps
-\k  94 \^              \ac{dhc2F} Toggle Nav Lights
+\k  93 ]               Increase flaps; \ac{ComperSwift} Adjust view right; \ac{seafireIIIc|spitfireIIa} Flap Lever down; \ac{B-52F} Increase Flaps; \ac{seahawk} Increase flap lever; \ac{A380|Concorde|fokker100|fokker50|fokker70|hunter|hunter-2tanks} Increase flaps
+\k  94 \^              \ac{dhc2F} Toggle Nav Lights; \ac{pa24-250} Toggle Rotating Beacon
 \k  95 \_~(Underscore) {}
 \k  96 `{}~(Backtick)  {}
 \k  97 a               Increase speed-up
-\k  98 b               Apply all brakes
+\k  98 b               Apply all brakes; \ac{Boeing314A} Apply all brakes (rope)
 \k  99 c               Toggle 3D/2D cockpit
-\k 100 d               \ac{hurricaneIIb|seafireIIIc|spitfireIIa} Door Fold Up; \ac{A-10cl|A-10fl|AN-225|YF-23|YF-23-yasim} Retract Slats; \ac{bo105|c150} Select next door
-\k 101 e               \ac{A380} steer NLG right
-\k 102 f               \ac{hurricaneIIb|seafireIIIc|spitfireIIa} Close Canopy; \ac{A-10cl|A-10fl|AN-225|YF-23|YF-23-yasim} Extend Slats; \ac{a4|seahawk} Wing Fold Up; \ac{hunter|hunter-2tanks} Wing Fold Up/Canopy Open; \ac{dhc2F} fuel tank select
-\k 103 g               Gear Up
-\k 104 h               HUD Master Switch; \ac{seahawk} Null; \ac{hurricaneIIb|seafireIIIc|spitfireIIa} Radiator Flap Up
+\k 100 d               \ac{hurricaneIIb|seafireIIIc|spitfireIIa} Door Fold Up; \ac{A-10|AN-225|YF-23} Retract Slats; \ac{bo105|c150} Select next door
+\k 101 e               \ac{A-10} Fire GAU-8/A cannon; \ac{Boeing314A|Lockheed1049} Increase propeller pitch; \ac{A380} steer NLG right
+\k 102 f               \ac{hurricaneIIb|seafireIIIc|spitfireIIa} Close Canopy; \ac{A-10|AN-225|YF-23} Extend Slats; \ac{a4|a4f|carrier|seahawk} Wing Fold Up; \ac{hunter|hunter-2tanks} Wing Fold Up/Canopy Open; \ac{dhc2F|pa24-250} fuel tank select
+\k 103 g               Gear Up; \ac{Concorde} Gear Up
+\k 104 h               HUD Master Switch; \ac{seahawk} Null; \ac{hurricaneIIb|seafireIIIc|spitfireIIa} Radiator Flap Up; \ac{pa24-250} Toggle Carb Heat
 \k 105 i               Normal HUD
 \k 106 j               Decrease spoilers; \ac{hunter-2tanks} Jettison Inner Pylon Stores; \ac{b29|b29-jsbsim|b29-magic|b29-yasim} Jump to next seat
 \k 107 k               Increase spoilers; \ac{hurricaneIIb|seafireIIIc|spitfireIIa} Gear Warn Toggle; \ac{hunter|hunter-2tanks|seahawk} Null
 \k 108 l               Toggle tail-wheel lock; \ac{seahawk} Null; \ac{hunter-2tanks} Seat Down
 \k 109 m               Mixture richer; \ac{seafireIIIc|spitfireIIa} Mixture Rich
-\k 110 n               \ac{c182|c182-2dpanel|hurricaneIIb|seafireIIIc|spitfireIIa} Propeller Fine
-\k 111 o               \ac{a4|hunter|hunter-2tanks|seahawk} Hook Up
+\k 110 n               Propeller Finer; \ac{c182|c182-2dpanel|c310dpm-3d|hurricaneIIb|seafireIIIc|spitfireIIa} Propeller Fine
+\k 111 o               \ac{a4|a4f|carrier|hunter|hunter-2tanks|seahawk} Hook Up
 \k 112 p               Toggle the pause state of the sim
-\k 113 q               \ac{Boeing314A} reset speed-up; \ac{A380} steer NLG left
-\k 114 r               Activate the instant replay system
+\k 113 q               \ac{Boeing314A|Concorde|Lockheed1049} reset speed-up; \ac{A380} steer NLG left
+\k 114 r               Activate the instant replay system; \ac{lightning} Activate the instant replay system
 \k 115 s               Swap panels
 \k 116 t               Increase warp delta
 \k 117 u               \ac{hunter|hurricaneIIb|seafireIIIc|seahawk|spitfireIIa} Seat Up
-\k 118 v               Scroll through views; \ac{Concorde} Scroll through views
+\k 118 v               Scroll through views; \ac{Boeing314A|Concorde} Scroll through views
 \k 119 w               Increase warp
 \k 120 x               Decrease field of view
 \k 121 y               \ac{bo105} Select next variant
@@ -227,17 +228,19 @@
 \k 269 Enter           Move rudder right
 \k 309 Keypad~5        Center aileron, elevator, and rudder
 \k 356 Left            Move aileron left (or adjust AP heading.); \shift{Look left}
-\k 357 Up              Increase elevator or autopilot altitude; \shift{Look forward}; \ac{Concorde} Increase elevator or autopilot altitude
+\k 357 Up              Increase elevator or autopilot altitude; \shift{Look forward}; \ac{Concorde} Increase elevator or autopilot altitude; \ac{Boeing314A|Lockheed1049} Increase elevator or autopilot pitch
 \k 358 Right           Move aileron right (or adjust AP heading.); \shift{Look right}
-\k 359 Down            Decrease elevator or autopilot altitude; \shift{Look backwards}; \ac{Concorde} Decrease elevator or autopilot altitude
+\k 359 Down            Decrease elevator or autopilot altitude; \shift{Look backwards}; \ac{Concorde} Decrease elevator or autopilot altitude; \ac{Boeing314A|Lockheed1049} Decrease elevator or autopilot pitch
 \k 360 PageUp          Increase throttle or autopilot autothrottle; \shift{Look front right}; \ac{Concorde} Increase throttle or autopilot autothrottle
 \k 361 PageDown        Decrease throttle or autopilot autothrottle; \shift{Look back right}; \ac{Concorde} Decrease throttle or autopilot autothrottle
-\k 362 Home            Increase elevator trim; \shift{Look front left}; \ac{Concorde} Increase elevator trim
-\k 363 End             Decrease elevator trim; \shift{Look back left}; \ac{Concorde} Decrease elevator trim
+\k 362 Home            Increase elevator trim; \shift{Look front left}; \ac{Concorde} Increase elevator trim; \ac{Boeing314A|Lockheed1049} Increase elevator trim or autopilot pitch (slow)
+\k 363 End             Decrease elevator trim; \shift{Look back left}; \ac{Concorde} Decrease elevator trim; \ac{Boeing314A|Lockheed1049} Decrease elevator trim or autopilot pitch (slow)
 \k 364 Insert          Move rudder left
 \end{keyboard}
 
-%% APPENDIX %%
+\vfill
+\subsection*{Referenced but missing files:}
+\noindent\textcolor{darkred}{\$FG\_ROOT/Aircraft/c172r/c172r-base.xml}\hfil\break
 \footline
 \end{document}
 

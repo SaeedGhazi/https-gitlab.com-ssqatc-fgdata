@@ -349,9 +349,11 @@ Started September 2000 by David Megginson, david@megginson.com
    <default include="gui/menubar.xml"/>
   </menubar>
 
-  <current-gui type="int" userarchive="y">0</current-gui>
-  <gui n="0" include="gui/styles/default.xml"/>
-  <gui n="1" include="gui/styles/anthrax.xml"/>
+  <gui>
+   <current-style type="int" userarchive="y">0</current-style>
+   <style n="0" include="gui/styles/default.xml"/>
+   <style n="1" include="gui/styles/anthrax.xml"/>
+  </gui>
 
   <mouse>
     <hide-cursor>true</hide-cursor>

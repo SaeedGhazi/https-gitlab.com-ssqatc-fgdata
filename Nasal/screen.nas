@@ -147,9 +147,9 @@ window = {
 log = nil;
 
 settimer(func {
-	setlistener("/sim/current-gui", func {
-		var theme = getprop("/sim/current-gui");
-		theme_font = getprop("/sim/gui[" ~ theme ~ "]/fonts/message-display/name");
+	setlistener("/sim/gui/current-style", func {
+		var theme = getprop("/sim/gui/current-style");
+		theme_font = getprop("/sim/gui/style[" ~ theme ~ "]/fonts/message-display/name");
 	}, 1);
 
 	log = window.new(nil, -30, 10, 10);

@@ -140,12 +140,12 @@ Widget = {
 ########################################################################
 
 nextStyle = func {
-    numStyles = size(props.globals.getNode("/sim").getChildren("gui"));
-    curr = getprop("/sim/current-gui") + 1;
+    numStyles = size(props.globals.getNode("/sim/gui").getChildren("style"));
+    curr = getprop("/sim/gui/current-style") + 1;
     if (curr >= numStyles) {
         curr = 0;
     }
-    setprop("/sim/current-gui", curr);
+    setprop("/sim/gui/current-style", curr);
     fgcommand("gui-redraw", props.Node.new());
 }
 

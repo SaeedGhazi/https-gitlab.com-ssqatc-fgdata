@@ -413,6 +413,8 @@ all the time in that electrical system.
  </layers>
 
  <actions>
+
+<!-- DISABLED: interferes with startup options
   <action>
    <name>Setup</name>
    <binding>
@@ -441,17 +443,6 @@ all the time in that electrical system.
     <condition>
      <equals>
       <property>/instrumentation/dme/switch-position</property>
-      <value type="int">2</value>
-     </equals>
-    </condition>
-    <command>property-assign</command>
-    <property>/instrumentation/dme/frequencies/selected-mhz</property>
-    <property>/instrumentation/nav[0]/frequencies/selected-mhz</property>
-   </binding>
-   <binding>
-    <condition>
-     <equals>
-      <property>/instrumentation/dme/switch-position</property>
       <value type="int">3</value>
      </equals>
     </condition>
@@ -460,6 +451,7 @@ all the time in that electrical system.
     <value>/instrumentation/nav[1]/frequencies/selected-mhz</value>
    </binding>
   </action>
+-->
 
   <action>
    <name>Rotate knob left</name>

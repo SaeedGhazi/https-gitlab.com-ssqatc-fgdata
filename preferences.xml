@@ -769,7 +769,7 @@ Started September 2000 by David Megginson, david@megginson.com
   <slip-skid-ball>
    <serviceable type="bool" archive="y">true</serviceable>
   </slip-skid-ball>
-  
+
   <heading-indicator>
    <serviceable type="bool" archive="y">true</serviceable>
    <spin type="double" archive="y">0.0</spin>
@@ -787,6 +787,9 @@ Started September 2000 by David Megginson, david@megginson.com
   <dme n="0">
    <serviceable type="bool" archive="y">true</serviceable>
    <switch-position type="int" archive="y">1</switch-position>
+   <frequencies>
+    <source>/instrumentation/nav[0]/frequencies/selected-mhz</source>
+   </frequencies>
   </dme>
 
   <gps>
@@ -799,7 +802,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <approach-active type="bool">false</approach-active>
    <cdi-deflection type="double">0</cdi-deflection>
   </gps>
-  
+
   <kln89>
    <scan-pull type="bool" archive="y">false</scan-pull>
   </kln89>

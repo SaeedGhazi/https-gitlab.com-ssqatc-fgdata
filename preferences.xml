@@ -786,7 +786,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
   <dme n="0">
    <serviceable type="bool" archive="y">true</serviceable>
-   <switch-position type="int" archive="y">1</switch-position>
+   <!--switch-position type="int" archive="y">1</switch-position-->
   </dme>
 
   <gps>

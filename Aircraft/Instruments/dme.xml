@@ -414,7 +414,6 @@ all the time in that electrical system.
 
  <actions>
 
-<!-- DISABLED: interferes with startup options
   <action>
    <name>Setup</name>
    <binding>
@@ -451,7 +450,6 @@ all the time in that electrical system.
     <value>/instrumentation/nav[1]/frequencies/selected-mhz</value>
    </binding>
   </action>
--->
 
   <action>
    <name>Rotate knob left</name>

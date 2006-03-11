@@ -51,7 +51,7 @@
            }
            var s = speed[current];
            maxspeed.setDoubleValue(s);
-           gui.popupTip(sprintf("MaxSpeed " ~ s ~ " m/s"));
+           gui.popupTip("MaxSpeed " ~ s ~ " m/s");
        }
    </script>
   </ufo>

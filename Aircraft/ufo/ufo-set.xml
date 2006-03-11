@@ -29,7 +29,7 @@
    </key>
    <key>
     <name>[ ]</name>
-    <desc>increase/decrease maximum speed</desc>
+    <desc>decrease/increase maximum speed</desc>
    </key>
   </help>
 
@@ -43,10 +43,11 @@
        var current = 8;
 
        controls.flapsDown = func(x) {
-           if (!x) { return }
-           if (x > 0 and current > 0) {
+           if (!x) {
+               return;
+           } elsif (x &lt; 0 and current > 0) {
                current -= 1;
-           } elsif (x &lt; 0 and current &lt; size(speed) - 1) {
+           } elsif (x > 0 and current &lt; size(speed) - 1) {
                current += 1;
            }
            var s = speed[current];

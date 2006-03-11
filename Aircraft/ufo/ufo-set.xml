@@ -6,7 +6,7 @@
 
   <description>UFO from the 'White Project' of the UNESCO</description>
   <author>ET</author>
- 
+
   <flight-model>ufo</flight-model>
 
   <sound>
@@ -27,8 +27,30 @@
     <name>joystick fire button</name>
     <desc>fly backwards</desc>
    </key>
+   <key>
+    <name>[ ]</name>
+    <desc>increase/decrease maximum speed</desc>
+   </key>
   </help>
 
  </sim>
 
+ <nasal>
+  <ufo>
+   <script>
+       var maxspeed = props.globals.getNode("engines/engine/speed-max-mps");
+       controls.flapsDown = func(x) {
+           if (!x) { return }
+           var speed = maxspeed.getValue();
+           if (x > 0 and speed > 5) {
+               speed /= 1.5;
+           } elsif (x &lt; 0 and speed &lt; 20000) {
+               speed *= 1.5;
+           }
+           maxspeed.setDoubleValue(speed);
+           gui.popupTip(sprintf("MaxSpeed " ~ int(speed) ~ " m/s"));
+       }
+   </script>
+  </ufo>
+ </nasal>
 </PropertyList>

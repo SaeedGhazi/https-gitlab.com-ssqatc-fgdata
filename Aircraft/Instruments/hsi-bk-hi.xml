@@ -424,9 +424,9 @@ Mar 18 2003
     <transformation>
      <type>y-shift</type>
      <property alias="../../../../../params/gs-needle"/>
-     <min>-10.0</min>
-     <max>10.0</max>
-     <scale>8.35</scale>
+     <min>-3.5</min>
+     <max>3.5</max>
+     <scale>24</scale>
      <offset>-24</offset>
     </transformation>
    </transformations>
@@ -457,9 +457,9 @@ Mar 18 2003
     <transformation>
      <type>y-shift</type>
      <property alias="../../../../../params/gs-needle"/>
-     <min>-10.0</min>
-     <max>10.0</max>
-     <scale>8.35</scale>
+     <min>-3.5</min>
+     <max>3.5</max>
+     <scale>24</scale>
      <offset>-24</offset>
     </transformation>
    </transformations>

@@ -287,20 +287,6 @@ showDialog = func {
 
 
 dumpCoords = func {
-	print("\n\n--------------------------- Cursor ---------------------------");
-
-	var alt = cursor.values["alt"].get();
-	print(sprintf("Longitude:    %.6f deg", var clon = cursor.values["lon"].get()));
-	print(sprintf("Latitude:     %.6f deg", var clat = cursor.values["lat"].get()));
-	print(sprintf("Altitude:     %.4f m (%.4f ft)", var celev = ft2m(alt), alt));
-	print(sprintf("Heading:      %.1f deg", var chdg = normdeg(cursor.values["hdg"].get())));
-	print(sprintf("Pitch:        %.1f deg", normdeg(cursor.values["pitch"].get())));
-	print(sprintf("Roll:         %.1f deg", normdeg(cursor.values["roll"].get())));
-	print("");
-	print(tile_path(clon, clat));
-	print(sprintf("OBJECT_STATIC %.6f %.6f %.4f %.1f", clon, clat, celev, normdeg(360 - chdg)));
-
-
 	print("\n---------------------------- UFO -----------------------------");
 
 	var lon = getprop("/position/longitude-deg");
@@ -319,7 +305,22 @@ dumpCoords = func {
 	print("");
 	print(tile_path(lon, lat));
 	print(sprintf("OBJECT_STATIC %.6f %.6f %.4f %.1f", lon, lat, elev_m, normdeg(360 - heading)));
+
+
+	print("\n\n--------------------------- Cursor ---------------------------");
+
+	var alt = cursor.values["alt"].get();
+	print(sprintf("Longitude:    %.6f deg", var clon = cursor.values["lon"].get()));
+	print(sprintf("Latitude:     %.6f deg", var clat = cursor.values["lat"].get()));
+	print(sprintf("Altitude:     %.4f m (%.4f ft)", var celev = ft2m(alt), alt));
+	print(sprintf("Heading:      %.1f deg", var chdg = normdeg(cursor.values["hdg"].get())));
+	print(sprintf("Pitch:        %.1f deg", normdeg(cursor.values["pitch"].get())));
+	print(sprintf("Roll:         %.1f deg", normdeg(cursor.values["roll"].get())));
+	print("");
+	print(tile_path(clon, clat));
+	print(sprintf("OBJECT_STATIC %.6f %.6f %.4f %.1f", clon, clat, celev, normdeg(360 - chdg)));
 	print("--------------------------------------------------------------");
+
 }
 
 

@@ -64,10 +64,12 @@
   </keyboard>
  </input>
 
+ <cursor>Aircraft/ufo/Models/cursor.ac</cursor>
+
  <models>
   <model>
    <name>cursor</name>
-   <path>Aircraft/ufo/Models/cursor.ac</path>
+   <path alias="/cursor"/>
    <longitude-deg-prop>/cursor/longitude-deg</longitude-deg-prop>
    <latitude-deg-prop>/cursor/latitude-deg</latitude-deg-prop>
    <elevation-ft-prop>/cursor/elevation-ft</elevation-ft-prop>

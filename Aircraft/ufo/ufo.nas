@@ -184,6 +184,10 @@ Object = {
 	update : func {
 		foreach (v; keys(me.values)) { me.valuse[v].update() }
 	},
+	upright : func {
+		me.values["pitch"].set(0);
+		me.values["roll"].set(0);
+	},
 };
 
 
@@ -274,12 +278,32 @@ showDialog = func {
 	slider(cursor.values["pitch"].inOffsN, "pitch", [1.0, 0.6, 1.0], 36, 6);
 	slider(cursor.values["roll"].inOffsN, "roll", [0.6, 1.0, 1.0], 36, 6);
 
-	w = dialog.addChild("button");
-	w.set("legend", "center");
+	g = dialog.addChild("group");
+	g.set("layout", "hbox");
+
+	w = g.addChild("button");
+	w.set("halign", "left");
+	w.set("legend", "Upright");
+	w.set("pref-height", 22);
+	w.set("pref-width", 50);
+	w.prop().getNode("binding[0]/command", 1).setValue("nasal");
+	w.prop().getNode("binding[0]/script", 1).setValue("ufo.cursor.upright()");
+
+	w = g.addChild("button");
+	w.set("halign", "center");
+	w.set("legend", "Center");
 	w.set("pref-height", 22);
 	w.set("pref-width", 50);
 	w.prop().getNode("binding[0]/command", 1).setValue("nasal");
 	w.prop().getNode("binding[0]/script", 1).setValue("ufo.cursor.center()");
+
+	w = g.addChild("button");
+	w.set("halign", "right");
+	w.set("legend", "Dump");
+	w.set("pref-height", 22);
+	w.set("pref-width", 50);
+	w.prop().getNode("binding[0]/command", 1).setValue("nasal");
+	w.prop().getNode("binding[0]/script", 1).setValue("ufo.dumpCoords()");
 
 	fgcommand("dialog-new", dialog.prop());
 	gui.showDialog(name);

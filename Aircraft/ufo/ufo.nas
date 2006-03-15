@@ -333,18 +333,42 @@ dumpCoords = func {
 
 	print("\n\n--------------------------- Cursor ---------------------------");
 
+	# try to guess object type and
+	var type = "OBJECT_STATIC";
+	var model = getprop("cursor");
+	if (model == "Aircraft/ufo/Models/cursor.ac") {
+		model = "";
+	} else {
+		var path = split("/", model);
+		if (size(path) > 1) {
+			var dir = getprop("/sim/fg-root");
+			for (i = 0; i < size(path) - 1; i += 1) {
+				dir ~= "/" ~ path[i];
+			}
+			var files = directory(dir);
+			var file = path[size(path) - 1];
+			foreach (f; files) {
+				if (f == file) {
+					type = "OBJECT_SHARED";
+					break;
+				}
+			}
+		}
+	}
+
 	var alt = cursor.values["alt"].get();
 	print(sprintf("Longitude:    %.6f deg", var clon = cursor.values["lon"].get()));
 	print(sprintf("Latitude:     %.6f deg", var clat = cursor.values["lat"].get()));
-	print(sprintf("Altitude:     %.4f m (%.4f ft)", var celev = ft2m(alt), alt));
+	print(sprintf("Altitude ASL: %.4f m (%.4f ft)", var celev = ft2m(alt), alt));
 	print(sprintf("Heading:      %.1f deg", var chdg = normdeg(cursor.values["hdg"].get())));
 	print(sprintf("Pitch:        %.1f deg", normdeg(cursor.values["pitch"].get())));
 	print(sprintf("Roll:         %.1f deg", normdeg(cursor.values["roll"].get())));
 	print("");
 	print(tile_path(clon, clat));
-	print(sprintf("OBJECT_STATIC %.6f %.6f %.4f %.1f", clon, clat, celev, normdeg(360 - chdg)));
+	print(sprintf("%s %s %.6f %.6f %.4f %.1f", type, model, clon, clat, celev, normdeg(360 - chdg)));
 	print("--------------------------------------------------------------");
 
 }
+
 
 

@@ -1,4 +1,4 @@
-# MAXIMUM SPEED ###################################################################################
+# maximum speed -----------------------------------------------------------------------------------
 
 var maxspeed = props.globals.getNode("engines/engine/speed-max-mps");
 var speed = [10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000];
@@ -20,7 +20,9 @@ controls.flapsDown = func(x) {
 
 
 
-# CURSOR ##########################################################################################
+
+# cursor ------------------------------------------------------------------------------------------
+
 
 ft2m = func { arg[0] * 0.3048 }
 m2ft = func { arg[0] / 0.3048 }
@@ -121,7 +123,7 @@ Value = {
 		m.lastOffs = 0;
 		m.init = init;
 
-		m.inOffsN = baseN.getNode("offset-" ~ name, 1);
+		m.inOffsN = baseN.getNode("offsets/" ~ name, 1);
 		m.inOffsN.setValue(m.lastOffs);
 
 		m.outN = baseN.getNode(name, 1);
@@ -163,7 +165,7 @@ Value = {
 Object = {
 	new : func {
 		m = { parents : [Object] };
-		baseN = props.globals.getNode("/cursor", 1);
+		baseN = props.globals.getNode("/cursor-data", 1);
 		m.values = {
 			lon:   Value.new(baseN, "longitude-deg", 0),
 			lat:   Value.new(baseN, "latitude-deg", 0),
@@ -197,9 +199,10 @@ setlistener("/sim/input/click/latitude-deg", func { cursor.values["lat"].set(cmd
 setlistener("/sim/input/click/elevation-ft", func { cursor.values["alt"].set(cmdarg().getValue())});
 
 
+var DATA = {};
 
 
-dialog = nil;
+var dialog = nil;
 
 showDialog = func {
 	name = "ufo-cursor-dialog";
@@ -209,6 +212,12 @@ showDialog = func {
 		return;
 	}
 
+	var name = pop(split("/", getprop("cursor")));
+	var ext = find(".", name);
+	if (ext >= 0) {
+		name = substr(name, 0, ext);
+	}
+	var title = 'Position "' ~ name ~ '"';
 	cursor.center();
 
 	dialog = gui.Widget.new();
@@ -221,7 +230,7 @@ showDialog = func {
 	titlebar = dialog.addChild("group");
 	titlebar.set("layout", "hbox");
 	titlebar.addChild("empty").set("stretch", 1);
-	titlebar.addChild("text").set("label", "Position Cursor");
+	titlebar.addChild("text").set("label", title);
 	titlebar.addChild("empty").set("stretch", 1);
 
 	dialog.addChild("hrule").addChild("dummy");
@@ -329,32 +338,15 @@ dumpCoords = func {
 	print("");
 	print(tile_path(lon, lat));
 	print(sprintf("OBJECT_STATIC %.6f %.6f %.4f %.1f", lon, lat, elev_m, normdeg(360 - heading)));
+	print("");
+
+	var hdg = normdeg(heading + getprop("/sim/current-view/goal-pitch-offset-deg"));
+	var fgfs = sprintf("$ fgfs --aircraft=ufo --lon=%.6f --lat=%.6f --altitude=%.2f --heading=%.1f",
+			lon, lat, agl_ft, hdg);
+	print(fgfs);
 
 
 	print("\n\n--------------------------- Cursor ---------------------------");
-
-	# try to guess object type and
-	var type = "OBJECT_STATIC";
-	var model = getprop("cursor");
-	if (model == "Aircraft/ufo/Models/cursor.ac") {
-		model = "";
-	} else {
-		var path = split("/", model);
-		if (size(path) > 1) {
-			var dir = getprop("/sim/fg-root");
-			for (i = 0; i < size(path) - 1; i += 1) {
-				dir ~= "/" ~ path[i];
-			}
-			var files = directory(dir);
-			var file = path[size(path) - 1];
-			foreach (f; files) {
-				if (f == file) {
-					type = "OBJECT_SHARED";
-					break;
-				}
-			}
-		}
-	}
 
 	var alt = cursor.values["alt"].get();
 	print(sprintf("Longitude:    %.6f deg", var clon = cursor.values["lon"].get()));
@@ -364,11 +356,50 @@ dumpCoords = func {
 	print(sprintf("Pitch:        %.1f deg", normdeg(cursor.values["pitch"].get())));
 	print(sprintf("Roll:         %.1f deg", normdeg(cursor.values["roll"].get())));
 	print("");
-	print(tile_path(clon, clat));
-	print(sprintf("%s %s %.6f %.6f %.4f %.1f", type, model, clon, clat, celev, normdeg(360 - chdg)));
+	print(DATA["stg"] = tile_path(clon, clat));
+	print(DATA["object"] = sprintf("%s %s %.6f %.6f %.4f %.1f", DATA["type"], DATA["model"], clon, clat, celev, normdeg(360 - chdg)));
 	print("--------------------------------------------------------------");
+	saveData();
 
 }
 
 
+saveData = func {
+	savexml = func(name, node) {
+		fgcommand("savexml", props.Node.new({"filename": name, "sourcenode": node}));
+	}
+	var tmp = "save-ufo-data";
+	save = props.globals.getNode(tmp, 1);
+	model = props.globals.getNode("/cursor-data");
+	props.copy(model, save);
+	foreach (var p; keys(DATA)) {
+		save.getNode(p, 1).setValue(DATA[p]);
+	}
+	save.removeChildren("offsets");
+	savexml(getprop("/sim/fg-home") ~ "/ufo-cursor.xml", save.getPath());
+	props.globals.removeChild(tmp);
+}
+
+
+getCursorData = func {
+	var model = getprop("cursor");
+	if (model == "") {
+		die("No such model: ", model);
+	}
+
+	if (model == "Aircraft/ufo/Models/cursor.ac") {
+		DATA["type"] = "OBJECT_STATIC";
+		DATA["path"] = "";
+		DATA["model"] = "";
+	} else {
+		DATA["type"] = split("/", model)[0] == "Models" ? "OBJECT_SHARED" : "OBJECT_STATIC";
+		DATA["path"] = getprop("/sim/fg-root") ~ "/" ~ model;
+		DATA["model"] = model;
+	}
+}
+
+
+# INIT
+
+settimer(func { getCursorData() }, 0);
 

@@ -1,9 +1,7 @@
 <?xml version="1.0"?>
 
 <PropertyList>
-
  <sim>
-
   <description>UFO from the 'White Project' of the UNESCO</description>
   <author>ET</author>
 
@@ -28,16 +26,24 @@
     <desc>fly backwards</desc>
    </key>
    <key>
-    <name>mouse click</name>
-    <desc>set cursor</desc>
-   </key>
-   <key>
-    <name>d</name>
-    <desc>dump coordinates</desc>
+    <name>b</name>
+    <desc>fly backwards</desc>
    </key>
    <key>
     <name>[ ]</name>
     <desc>decrease/increase maximum speed</desc>
+   </key>
+   <key>
+    <name>mouse click</name>
+    <desc>set cursor</desc>
+   </key>
+   <key>
+    <name>tab</name>
+    <desc>open/close cursor dialog</desc>
+   </key>
+   <key>
+    <name>d</name>
+    <desc>dump coordinates</desc>
    </key>
   </help>
  </sim>
@@ -70,23 +76,14 @@
   <model>
    <name>cursor</name>
    <path alias="/cursor"/>
-   <longitude-deg-prop>/cursor/longitude-deg</longitude-deg-prop>
-   <latitude-deg-prop>/cursor/latitude-deg</latitude-deg-prop>
-   <elevation-ft-prop>/cursor/elevation-ft</elevation-ft-prop>
-   <heading-deg-prop>/cursor/heading-deg</heading-deg-prop>
-   <pitch-deg-prop>/cursor/pitch-deg</pitch-deg-prop>
-   <roll-deg-prop>/cursor/roll-deg</roll-deg-prop>
+   <longitude-deg-prop>/cursor-data/longitude-deg</longitude-deg-prop>
+   <latitude-deg-prop>/cursor-data/latitude-deg</latitude-deg-prop>
+   <elevation-ft-prop>/cursor-data/elevation-ft</elevation-ft-prop>
+   <heading-deg-prop>/cursor-data/heading-deg</heading-deg-prop>
+   <pitch-deg-prop>/cursor-data/pitch-deg</pitch-deg-prop>
+   <roll-deg-prop>/cursor-data/roll-deg</roll-deg-prop>
   </model>
  </models>
-
- <cursor>
-  <longitude-deg type="double">0.0</longitude-deg>
-  <latitude-deg type="double">0.0</latitude-deg>
-  <elevation-ft type="double">-1000.0</elevation-ft>
-  <heading-deg type="double">0.0</heading-deg>
-  <pitch-deg type="double">0.0</pitch-deg>
-  <roll-deg type="double">0.0</roll-deg>
- </cursor>
 
  <nasal>
   <ufo>

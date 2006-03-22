@@ -6,13 +6,13 @@
 
   <nasal>
     <open>
-      tmp = "/sim/gui/dialogs/location-in-air/";
+      p = props.globals.getNode("/sim/gui/dialogs/location-in-air/", 1);
       mode = {
-        airport: props.globals.getNode(tmp ~ "airport", 1),
-        lonlat:  props.globals.getNode(tmp ~ "lonlat", 1),
-        vor:     props.globals.getNode(tmp ~ "vor", 1),
-        ndb:     props.globals.getNode(tmp ~ "ndb", 1),
-        fix:     props.globals.getNode(tmp ~ "fix", 1),
+        airport: p.getNode("airport", 1),
+        lonlat:  p.getNode("lonlat", 1),
+        vor:     p.getNode("vor", 1),
+        ndb:     p.getNode("ndb", 1),
+        fix:     p.getNode("fix", 1),
       };
 
       set_radio = func(m) {

@@ -35,7 +35,15 @@
    </key>
    <key>
     <name>mouse click</name>
-    <desc>set cursor</desc>
+    <desc>add model to scenery</desc>
+   </key>
+   <key>
+    <name>space bar + mouse click</name>
+    <desc>select nearest model (blinks twice)</desc>
+   </key>
+   <key>
+    <name>backspace</name>
+    <desc>remove selected model</desc>
    </key>
    <key>
     <name>tab</name>
@@ -43,47 +51,83 @@
    </key>
    <key>
     <name>d</name>
-    <desc>dump coordinates</desc>
+    <desc>dump model data to terminal</desc>
    </key>
+   <key>
+    <name>e</name>
+    <desc>export model data</desc>
+   </key>
+   <key>
+    <name>m</name>
+    <desc>open/close model select dialog</desc>
+   </key>
+
+   <line>pre-select model (path relative to $FG_ROOT):</line>
+   <line>&#32;&#32;&#45;&#45;prop:model=Model/path.xml</line>
+   <line></line>
+   <line>set directories that are scanned for models (comma separated and</line>
+   <line>relative to $FG_ROOT; default: Models):</line>
+   <line>&#32;&#32;&#45;&#45;prop:source=Models,Scenery/Objects/w130n30/w123n37</line>
+   <line></line>
+   <line>exported data are written to $FG_HOME/ufo-model-export.xml</line>
   </help>
  </sim>
 
  <input>
   <keyboard>
-   <key n="100">
-    <name>d</name>
-    <desc>Dump cursor/UFO coordinates</desc>
+   <key n="8">
+    <name>Backspace</name>
+    <desc>Remove selected model</desc>
     <binding>
      <command>nasal</command>
-     <script>ufo.dumpCoords()</script>
+     <script>ufo.removeSelectedModel()</script>
     </binding>
    </key>
 
    <key n="9">
     <name>Ctrl-I</name>
-    <desc>Show cursor dialog</desc>
+    <desc>Show adjustment dialog</desc>
     <binding>
      <command>nasal</command>
-     <script>ufo.showDialog()</script>
+     <script>ufo.showAdjustDialog()</script>
+    </binding>
+   </key>
+
+   <key n="100">
+    <name>d</name>
+    <desc>Dump coordinates</desc>
+    <binding>
+     <command>nasal</command>
+     <script>ufo.printData()</script>
+    </binding>
+   </key>
+
+   <key n="101">
+    <name>e</name>
+    <desc>Export model data XML file</desc>
+    <binding>
+     <command>nasal</command>
+     <script>ufo.exportData()</script>
+    </binding>
+   </key>
+
+   <key n="109">
+    <name>m</name>
+    <desc>Show model select dialog</desc>
+    <binding>
+     <command>nasal</command>
+     <script>ufo.showModelSelectDialog()</script>
     </binding>
    </key>
   </keyboard>
  </input>
 
+ <!-- default model -->
  <cursor>Aircraft/ufo/Models/cursor.ac</cursor>
 
- <models>
-  <model>
-   <name>cursor</name>
-   <path alias="/cursor"/>
-   <longitude-deg-prop>/cursor-data/longitude-deg</longitude-deg-prop>
-   <latitude-deg-prop>/cursor-data/latitude-deg</latitude-deg-prop>
-   <elevation-ft-prop>/cursor-data/elevation-ft</elevation-ft-prop>
-   <heading-deg-prop>/cursor-data/heading-deg</heading-deg-prop>
-   <pitch-deg-prop>/cursor-data/pitch-deg</pitch-deg-prop>
-   <roll-deg-prop>/cursor-data/roll-deg</roll-deg-prop>
-  </model>
- </models>
+ <!-- subdirs of $FG_ROOT to search models in.
+      Comma separated, e.g. "Models,Scenery/Objects/w130n30" -->
+ <source>Models</source>
 
  <nasal>
   <ufo>

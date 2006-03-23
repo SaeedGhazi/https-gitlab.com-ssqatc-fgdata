@@ -55,6 +55,32 @@ Started September 2000 by David Megginson, david@megginson.com
    <enhanced-lighting type="bool" userarchive="y">false</enhanced-lighting>
    <distance-attenuation type="bool" userarchive="y">false</distance-attenuation>
    <precipitation-enable type="bool" userarchive="y">false</precipitation-enable>
+   <precipitation>
+	<!-- streaks coloring and transparency -->
+   	<min-light type="float">0.35</min-light>
+	<streak-brightness-nearmost-layer type="float">0.9</streak-brightness-nearmost-layer>
+	<streak-brightness-farmost-layer type="float">0.5</streak-brightness-farmost-layer>
+
+	<!-- streak period as a function of the speed, decreases with speed -->
+	<streak-period-max type="float">2.5</streak-period-max>
+	<streak-period-change-per-kt type="float">0.005</streak-period-change-per-kt>
+	<streak-period-min type="float">1.0</streak-period-min>
+
+	<!-- streak length as a function of the speed, increases with speed -->
+	<streak-length-min type="float">0.03</streak-length-min>
+	<streak-length-change-per-kt type="float">0.0005</streak-length-change-per-kt>
+	<streak-length-max type="float">0.1</streak-length-max>
+
+	<!-- # of rain streaks at the 100.0% precipitation density -->
+	<streak-count-min type="int">40</streak-count-min><!-- lightest rain -->
+	<streak-count-max type="int">190</streak-count-max><!-- heaviest rain -->
+	<!-- numbers over MAX_RAIN_SLICE in simgear/environment/visual_enviro.cxx
+	  will be ignored in the current implementation.  -->
+
+	<!-- the precipitation cone geometry -->
+	<cone-base-radius type="float">15.0</cone-base-radius>
+	<cone-height type="float">30.0</cone-height>
+   </precipitation>
    <lightning-enable type="bool" userarchive="y">false</lightning-enable>
    <bump-mapping type="bool" userarchive="y">false</bump-mapping>
    <clouds3d-enable type="bool" userarchive="y">false</clouds3d-enable>

@@ -719,14 +719,13 @@ showModelSelectDialog = func {
 	w = dialog[name].addChild("list");
 	w.set("halign", "fill");
 	w.set("pref-height", 300);
-	#w.set("live", 1);								# FIXME
 	w.set("property", "/model");
 	forindex (var i; modellist) {
 		w.prop().getChild("value", i, 1).setValue(modellist[i]);
 	}
-	w.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");		# FIXME
-	#w.prop().getNode("binding[1]/command", 1).setValue("nasal");
-	#w.prop().getNode("binding[1]/script", 1).setValue("print('foo');ufo.modelmgr.setmodelpath(getprop('/model'))");
+	w.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
+	w.prop().getNode("binding[1]/command", 1).setValue("nasal");
+	w.prop().getNode("binding[1]/script", 1).setValue("ufo.modelmgr.setmodelpath(getprop('/model'))");
 
 	#w = dialog[name].addChild("button");						# FIXME
 	#w.set("legend", "OK");

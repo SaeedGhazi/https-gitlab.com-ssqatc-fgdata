@@ -142,11 +142,6 @@ normdeg = func(angle) {
 }
 
 
-format = func(lon, lat) {
-	sprintf("%s%03d%s%02d", lon < 0 ? "w" : "e", abs(lon), lat < 0 ? "s" : "n", abs(lat));
-}
-
-
 bucket_span = func(lat) {
 	if (lat >= 89.0 ) {
 		360.0;
@@ -183,13 +178,13 @@ bucket_span = func(lat) {
 
 
 tile_index = func(lon, lat) {
-	lon_floor = floor(lon);
-	lat_floor = floor(lat);
-	span = bucket_span(lat);
+	var lon_floor = floor(lon);
+	var lat_floor = floor(lat);
+	var span = bucket_span(lat);
+	var x = 0;
 
 	if (span < 0.0000001) {
 		lon = 0;
-		x = 0;
 	} elsif (span <= 1.0) {
 		x = int((lon - lon_floor) / span);
 	} else {
@@ -201,23 +196,23 @@ tile_index = func(lon, lat) {
 				lon = -180;
 			}
 		}
-		x = 0;
 	}
 
-	y = int((lat - lat_floor) * 8);
+	var y = int((lat - lat_floor) * 8);
 	(lon_floor + 180) * 16384 + (lat_floor + 90) * 64 + y * 8 + x;
 }
 
 
-tile_path = func(lon, lat) {
-	var lon_floor = floor(lon);
-	var lat_floor = floor(lat);
-	var lon_chunk = floor(lon / 10.0) * 10;
-	var lat_chunk = floor(lat / 10.0) * 10;
-	format(lon_chunk, lat_chunk) ~ "/" ~ format(lon_floor, lat_floor)
-			~ "/" ~ tile_index(lon, lat) ~ ".stg";
+format = func(lon, lat) {
+	sprintf("%s%03d%s%02d", lon < 0 ? "w" : "e", abs(lon), lat < 0 ? "s" : "n", abs(lat));
 }
 
+
+tile_path = func(lon, lat) {
+	var p = format(floor(lon / 10.0) * 10, floor(lat / 10.0) * 10);
+	p ~= "/" ~ format(floor(lon), floor(lat));
+	p ~= "/" ~ tile_index(lon, lat) ~ ".stg";
+}
 
 
 
@@ -226,12 +221,6 @@ tile_path = func(lon, lat) {
 
 
 # cursor ------------------------------------------------------------------------------------------
-
-
-var DATA = {};					# FIXME
-var modellist = nil;
-var modelmgr = nil;
-var adjust = nil;
 
 
 
@@ -253,7 +242,7 @@ Value = {
 		return m;
 	},
 	del : func {
-		removelistener(m.listener);
+		removelistener(me.listener);
 	},
 	reset : func {
 		me.center();
@@ -408,7 +397,7 @@ Static = {
 		}
 	},
 	distance_from : func(xyz) {
-		return math.sqrt(coord_dist_sq(xyz, lonlat2xyz([me.lon, me.lat]))) * ERAD;
+		return coord_dist_sq(xyz, lonlat2xyz([me.lon, me.lat]));
 	},
 	get_data : func {
 		var n = props.Node.new();
@@ -452,7 +441,7 @@ Dynamic = {
 	distance_from : func(xyz) {
 		var lon = adjust.get("lon");
 		var lat = adjust.get("lat");
-		return math.sqrt(coord_dist_sq(xyz, lonlat2xyz([lon, lat]))) * ERAD;
+		return coord_dist_sq(xyz, lonlat2xyz([lon, lat]));
 	},
 	get_data : func {
 		var n = props.Node.new();
@@ -524,6 +513,8 @@ ModelMgr = {
 				var st = me.dynamic.make_static();
 				me.dynamic = me.static[nearest].make_dynamic();
 				me.static[nearest] = st;
+				# actively selected: use this model type
+				me.modelpath = me.dynamic.path;
 			} else {
 				me.dynamic = me.static[nearest].make_dynamic();
 
@@ -539,14 +530,18 @@ ModelMgr = {
 		if (me.dynamic == nil) {	# last one removed
 			return;
 		}
-
-		# blink
+		me.flash();
+	},
+	flash : func {
 		me.block = 1;
-		settimer(func { adjust.set("elev", adjust.get("elev") - 10000) }, 0.33);
-		settimer(func { adjust.set("elev", adjust.get("elev") + 10000) }, 0.66);
-		settimer(func { adjust.set("elev", adjust.get("elev") - 10000) }, 1.00);
-		settimer(func { adjust.set("elev", adjust.get("elev") + 10000) }, 1.33);
-		settimer(func { me.block = 0 }, 1.34);
+		var t = 0.33;
+		display.write(me.dynamic.path, 1.0, 0.6, 0);
+		settimer(func { adjust.set("elev", adjust.get("elev") - 10000) }, t * 1);
+		settimer(func { adjust.set("elev", adjust.get("elev") + 10000) }, t * 2);
+		settimer(func { adjust.set("elev", adjust.get("elev") - 10000) }, t * 3);
+		settimer(func { adjust.set("elev", adjust.get("elev") + 10000) }, t * 4);
+		settimer(func { me.block = 0 }, t * 4.5);
+		settimer(func { display.write(me.modelpath) }, 4);
 	},
 	remove_selected : func {
 		if (me.block) {
@@ -560,6 +555,7 @@ ModelMgr = {
 	},
 	setmodelpath : func(path) {
 		me.modelpath = path;
+		display.write(path);
 	},
 	get_data : func {
 		var n = props.Node.new();
@@ -596,8 +592,6 @@ ModelMgr = {
 
 
 
-
-
 scanDirs = func(csv) {
 	var list = [];
 	foreach(var dir; split(",", csv)) {
@@ -608,6 +602,10 @@ scanDirs = func(csv) {
 	return sort(list);
 }
 
+
+
+
+# interface functions -----------------------------------------------------------------------------
 
 printData = func {
 	var rule = "------------------------------------------------------------------";
@@ -650,17 +648,28 @@ exportData = func {
 removeSelectedModel = func { modelmgr.remove_selected() }
 
 
+
+
+
+# init --------------------------------------------------------------------------------------------
+
+var display = nil;
+var modellist = nil;
+var adjust = nil;
+var modelmgr = nil;
+
+
 settimer(func {
+	display = screen.window.new(8, 8, 1, 120);
+	display.halign = "left";
+	display.font = "HELVETICA_12";
+	display.fg = [0.6, 1, 0.6, 1];
+
 	modellist = scanDirs(getprop("/source"));
-	modelmgr = ModelMgr.new(getprop("/model"));
 	adjust = Adjust.new("/data");
+	modelmgr = ModelMgr.new(getprop("/model"));
 	setlistener("/sim/signals/click", func { modelmgr.click() });
-}, 0);
-
-
-
-
-
+}, 1);
 
 
 
@@ -734,7 +743,6 @@ closeModelSelectDialog = func {
 	fgcommand("dialog-apply", dlg);
 	fgcommand("dialog-close", dlg);
 	delete(dialog, name);
-	print(getprop("/model"));
 	modelmgr.setmodelpath(getprop("/model"));
 }
 
@@ -853,9 +861,7 @@ showAdjustDialog = func {
 
 
 
-#####
-
-
+# attic -------------------------------------------------------------------------------------------
 
 
 dumpCoords = func {
@@ -895,10 +901,9 @@ dumpCoords = func {
 	printf("Pitch:        %.1f deg", normdeg(cursor.val["pitch"].get()));
 	printf("Roll:         %.1f deg", normdeg(cursor.val["roll"].get()));
 	print("");
-	print(DATA["stg"] = tile_path(clon, clat));
-	print(DATA["object"] = sprintf("%s %s %.6f %.6f %.4f %.1f", DATA["type"], DATA["model"], clon, clat, celev, normdeg(360 - chdg)));
 	print("--------------------------------------------------------------");
 	saveData();
 
 }
+
 

@@ -493,6 +493,8 @@ ModelMgr = {
 		}
 		me.dynamic = Dynamic.new(me.modelpath, me.lonN.getValue(), me.latN.getValue(),
 				me.elevN.getValue(), 0, 0, 0);
+		# refresh status line to reset display timer
+		display.write(me.modelpath);
 	},
 	select : func {
 		var click_xyz = lonlat2xyz([me.lonN.getValue(), me.latN.getValue()]);
@@ -541,7 +543,7 @@ ModelMgr = {
 		settimer(func { adjust.set("elev", adjust.get("elev") - 10000) }, t * 3);
 		settimer(func { adjust.set("elev", adjust.get("elev") + 10000) }, t * 4);
 		settimer(func { me.block = 0 }, t * 4.5);
-		settimer(func { display.write(me.modelpath) }, 4);
+		settimer(func { display.write(me.modelpath) }, 5);
 	},
 	remove_selected : func {
 		if (me.block) {
@@ -660,7 +662,7 @@ var modelmgr = nil;
 
 
 settimer(func {
-	display = screen.window.new(8, 8, 1, 120);
+	display = screen.window.new(8, 8, 1, 180);
 	display.halign = "left";
 	display.font = "HELVETICA_12";
 	display.fg = [0.6, 1, 0.6, 1];

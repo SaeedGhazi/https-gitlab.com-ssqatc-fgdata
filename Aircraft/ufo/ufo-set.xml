@@ -42,6 +42,10 @@
     <desc>select nearest model (blinks twice)</desc>
    </key>
    <key>
+    <name>space bar + cursor up/down</name>
+    <desc>cycle through model list</desc>
+   </key>
+   <key>
     <name>backspace</name>
     <desc>remove selected model</desc>
    </key>

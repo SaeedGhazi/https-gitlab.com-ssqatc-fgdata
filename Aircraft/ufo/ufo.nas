@@ -95,6 +95,28 @@ sort = func(list) {
 }
 
 
+# binary search of string in sorted vector; returns index or -1 if not found
+#
+search = func(list, which) {
+	var left = 0;
+	var right = size(list);
+	var middle = nil;
+	while (1) {
+		middle = int((left + right) / 2);
+		var c = cmp(list[middle], which);
+		if (!c) {
+			return middle;
+		} elsif (left == middle) {
+			return -1;
+		} elsif (c > 0) {
+			right = middle;
+		} elsif (c < 0) {
+			left = middle;
+		}
+	}
+}
+
+
 # scan all objects in subdir of $FG_ROOT. (Prefer *.xml files to *.ac files.)
 #
 scan_models = func(base) {
@@ -380,7 +402,6 @@ Static = {
 		var m = Model.new(path);
 		m.parents = [Static, Model];
 
-		m.node.getNode("type", 1).setValue("static");
 		m.node.getNode("longitude-deg", 1).setDoubleValue(m.lon = lon);
 		m.node.getNode("latitude-deg", 1).setDoubleValue(m.lat = lat);
 		m.node.getNode("elevation-ft", 1).setDoubleValue(m.elev = elev);
@@ -403,7 +424,6 @@ Static = {
 		var n = props.Node.new();
 		props.copy(me.node, n);
 		me.add_derived_props(n);
-		n.removeChildren("type");
 		return n;
 	},
 };
@@ -415,7 +435,6 @@ Dynamic = {
 		m.parents = [Dynamic, Model];
 
 		adjust.setall(lon, lat, elev, hdg, pitch, roll);
-		m.node.getNode("type", 1).setValue("dynamic");
 		m.node.getNode("longitude-deg-prop", 1).setValue(adjust.outNode("lon").getPath());
 		m.node.getNode("latitude-deg-prop", 1).setValue(adjust.outNode("lat").getPath());
 		m.node.getNode("elevation-ft-prop", 1).setValue(adjust.outNode("elev").getPath());
@@ -448,7 +467,6 @@ Dynamic = {
 		n.getNode("path", 1).setValue(me.path);
 		props.copy(props.globals.getNode("/data/adjust"), n);
 		me.add_derived_props(n);
-		n.removeChildren("type");
 		return n;
 	},
 };
@@ -569,7 +587,33 @@ ModelMgr = {
 		}
 		return n;
 	},
+	cycle : func(up) {
+		var i = search(modellist, me.modelpath) + up;
+		if (i < 0) {
+			i = size(modellist) - 1;
+		} elsif (i >= size(modellist)) {
+			i = 0;
+		}
+		me.setmodelpath(modellist[i]);
+		if (me.dynamic != nil) {
+			var st = me.dynamic.make_static();
+			st.path = me.modelpath;
+			me.dynamic.del();
+			me.dynamic = st.make_dynamic();
+		}
+	},
 };
+
+
+
+incElevator = controls.incElevator;
+controls.incElevator = func(step, apstep) {
+	if (getprop("/controls/engines/engine/starter")) {
+		modelmgr.cycle(step > 0 ? 1 : -1);
+	} else {
+		incElevator(step, apstep);
+	}
+}
 
 
 

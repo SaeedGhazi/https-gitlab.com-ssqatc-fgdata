@@ -306,6 +306,10 @@ Adjust = {
 			pitch: Value.new(m.node, "pitch-deg", 0),
 			roll:  Value.new(m.node, "roll-deg", 0),
 		};
+		m.stk_hdgN = m.node.getNode("sticky-heading", 1);
+		m.stk_orientN = m.node.getNode("sticky-orientation", 1);
+		m.stk_hdgN.setBoolValue(0);
+		m.stk_orientN.setBoolValue(0);
 		return m;
 	},
 	del : func {
@@ -325,13 +329,25 @@ Adjust = {
 	set : func(which, value) {
 		me.val[which].set(value);
 	},
-	setall : func(lon, lat, elev, hdg, pitch, roll) {
+	setall : func(lon, lat, elev, hdg = nil, pitch = nil, roll = nil) {
 		me.val["lon"].set(lon);
 		me.val["lat"].set(lat);
 		me.val["elev"].set(elev);
-		me.val["hdg"].set(hdg);
-		me.val["pitch"].set(pitch);
-		me.val["roll"].set(roll);
+		if (hdg != nil) {
+			me.val["hdg"].set(hdg);
+		} elsif (!me.stk_hdgN.getBoolValue()) {
+			me.val["hdg"].reset();
+		}
+		if (pitch != nil) {
+			me.val["pitch"].set(pitch);
+		} elsif (!me.stk_orientN.getBoolValue()) {
+			me.val["pitch"].reset();
+		}
+		if (roll != nil) {
+			me.val["roll"].set(roll);
+		} elsif (!me.stk_orientN.getBoolValue()) {
+			me.val["roll"].reset();
+		}
 	},
 	reset : func {
 		foreach (var v; keys(me.val)) {
@@ -345,7 +361,10 @@ Adjust = {
 		me.val["pitch"].set(0);
 		me.val["roll"].set(0);
 	},
-	center : func {
+	orient : func {
+		me.val["hdg"].set(0);
+	},
+	center_sliders : func {
 		foreach (var v; keys(me.val)) {
 			me.val[v].center();
 		}
@@ -430,7 +449,7 @@ Static = {
 
 
 Dynamic = {
-	new : func(path, lon, lat, elev, hdg, pitch, roll) {
+	new : func(path, lon, lat, elev, hdg = nil, pitch = nil, roll = nil) {
 		var m = Model.new(path);
 		m.parents = [Dynamic, Model];
 
@@ -510,7 +529,7 @@ ModelMgr = {
 			append(me.static, me.dynamic.make_static());
 		}
 		me.dynamic = Dynamic.new(me.modelpath, me.lonN.getValue(), me.latN.getValue(),
-				me.elevN.getValue(), 0, 0, 0);
+				me.elevN.getValue());
 		# refresh status line to reset display timer
 		display.write(me.modelpath);
 	},
@@ -707,8 +726,8 @@ var modelmgr = nil;
 
 settimer(func {
 	display = screen.window.new(8, 8, 1, 180);
-	display.halign = "left";
 	display.font = "HELVETICA_12";
+	display.halign = "left";
 	display.fg = [0.6, 1, 0.6, 1];
 
 	modellist = scanDirs(getprop("/source"));
@@ -739,6 +758,7 @@ showModelSelectDialog = func {
 	dialog[name] = gui.Widget.new();
 	dialog[name].set("layout", "vbox");
 	dialog[name].set("name", name);
+	dialog[name].set("x", -20);
 	dialog[name].set("pref-width", 600);
 
 	# "window" titlebar
@@ -771,12 +791,6 @@ showModelSelectDialog = func {
 	w.prop().getNode("binding[1]/command", 1).setValue("nasal");
 	w.prop().getNode("binding[1]/script", 1).setValue("ufo.modelmgr.setmodelpath(getprop('/model'))");
 
-	#w = dialog[name].addChild("button");						# FIXME
-	#w.set("legend", "OK");
-	#w.set("default", 1);
-	#w.prop().getNode("binding[0]/command", 1).setValue("nasal");
-	#w.prop().getNode("binding[0]/script", 1).setValue("ufo.closeModelSelectDialog()");
-
 	fgcommand("dialog-new", dialog[name].prop());
 	gui.showDialog(name);
 }
@@ -788,11 +802,10 @@ closeModelSelectDialog = func {
 	fgcommand("dialog-apply", dlg);
 	fgcommand("dialog-close", dlg);
 	delete(dialog, name);
-	modelmgr.setmodelpath(getprop("/model"));
 }
 
 
-showAdjustDialog = func {
+showModelAdjustDialog = func {
 	name = "ufo-cursor-dialog";
 
 	if (contains(dialog, name)) {
@@ -801,20 +814,19 @@ showAdjustDialog = func {
 		return;
 	}
 
-	var title = 'Adjust model';
-	adjust.center();
+	adjust.center_sliders();
 
 	dialog[name] = gui.Widget.new();
 	dialog[name].set("layout", "vbox");
 	dialog[name].set("name", name);
-	dialog[name].set("x", -40);
-	dialog[name].set("y", -40);
+	dialog[name].set("x", -20);
+	dialog[name].set("y", -20);
 
 	# "window" titlebar
 	titlebar = dialog[name].addChild("group");
 	titlebar.set("layout", "hbox");
 	titlebar.addChild("empty").set("stretch", 1);
-	titlebar.addChild("text").set("label", title);
+	titlebar.addChild("text").set("label", "Adjust Model");
 	titlebar.addChild("empty").set("stretch", 1);
 
 	dialog[name].addChild("hrule").addChild("dummy");
@@ -871,32 +883,74 @@ showAdjustDialog = func {
 	slider("pitch", [1.0, 0.6, 1.0], 36, 6);
 	slider("roll", [0.6, 1.0, 1.0], 36, 6);
 
+
 	g = dialog[name].addChild("group");
 	g.set("layout", "hbox");
 
-	w = g.addChild("button");
+	w = g.addChild("text");
 	w.set("halign", "left");
-	w.set("legend", "Upright");
+	w.set("label", "Heading    ");
+
+	w = g.addChild("text");
+	w.set("halign", "center");
+	w.set("label", "Sliders");
+
+	w = g.addChild("text");
+	w.set("halign", "right");
+	w.set("label", "Orientation");
+
+
+	g = dialog[name].addChild("group");
+	g.set("layout", "hbox");
+	g.set("default-padding", 2);
+	var wide = 60;
+	var narrow = 55;
+
+	w = g.addChild("button");
+	w.set("halign", "right");
+	w.set("legend", "Reset");
 	w.set("pref-height", 22);
-	w.set("pref-width", 50);
+	w.set("pref-width", wide);
 	w.prop().getNode("binding[0]/command", 1).setValue("nasal");
-	w.prop().getNode("binding[0]/script", 1).setValue("ufo.adjust.upright()");
+	w.prop().getNode("binding[0]/script", 1).setValue("ufo.adjust.orient()");
+
+	w = g.addChild("button");
+	w.set("legend", "Sticky");
+	w.set("one-shot", 0);
+	w.set("pref-height", 22);
+	w.set("pref-width", narrow);
+	w.set("live", 1);
+	w.set("property", adjust.stk_hdgN.getPath());
+	w.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
+
+	g.addChild("empty").set("stretch", 1);
 
 	w = g.addChild("button");
 	w.set("halign", "center");
 	w.set("legend", "Center");
 	w.set("pref-height", 22);
-	w.set("pref-width", 50);
+	w.set("pref-width", wide);
 	w.prop().getNode("binding[0]/command", 1).setValue("nasal");
-	w.prop().getNode("binding[0]/script", 1).setValue("ufo.adjust.center()");
+	w.prop().getNode("binding[0]/script", 1).setValue("ufo.adjust.center_sliders()");
+
+	g.addChild("empty").set("stretch", 1);
 
 	w = g.addChild("button");
-	w.set("halign", "right");
-	w.set("legend", "Dump");
+	w.set("legend", "Sticky");
+	w.set("one-shot", 0);
 	w.set("pref-height", 22);
-	w.set("pref-width", 50);
+	w.set("pref-width", narrow);
+	w.set("live", 1);
+	w.set("property", adjust.stk_orientN.getPath());
+	w.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
+
+	w = g.addChild("button");
+	w.set("halign", "left");
+	w.set("legend", "Reset");
+	w.set("pref-height", 22);
+	w.set("pref-width", wide);
 	w.prop().getNode("binding[0]/command", 1).setValue("nasal");
-	w.prop().getNode("binding[0]/script", 1).setValue("ufo.printData()");
+	w.prop().getNode("binding[0]/script", 1).setValue("ufo.adjust.upright()");
 
 	fgcommand("dialog-new", dialog[name].prop());
 	gui.showDialog(name);

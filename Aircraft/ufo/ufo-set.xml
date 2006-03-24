@@ -90,10 +90,10 @@
 
    <key n="9">
     <name>Ctrl-I</name>
-    <desc>Show adjustment dialog</desc>
+    <desc>Show model adjustment dialog</desc>
     <binding>
      <command>nasal</command>
-     <script>ufo.showAdjustDialog()</script>
+     <script>ufo.showModelAdjustDialog()</script>
     </binding>
    </key>
 

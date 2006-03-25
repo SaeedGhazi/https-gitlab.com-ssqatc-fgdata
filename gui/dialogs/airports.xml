@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+
 <PropertyList>
   <name>airports</name>
   <layout>vbox</layout>
@@ -7,8 +8,8 @@
     <label>Select an Airport</label>
   </text>
 
-  <!-- The airport list widget appears to have a bug with layout; it 
-       fails to draw within the x/y/width/height it is given. -->
+  <hrule><empty/></hrule>
+
   <airport-list>
     <pref-width>440</pref-width>
     <pref-height>360</pref-height>
@@ -56,7 +57,7 @@
       <equal>true</equal>
       <key>Esc</key>
       <binding>
-	<command>dialog-close</command>
+        <command>dialog-close</command>
       </binding>
     </button>
 

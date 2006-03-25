@@ -506,12 +506,16 @@ ModelMgr = {
 		m.latN = click.getNode("latitude-deg", 1);
 		m.elevN = click.getNode("elevation-ft", 1);
 
+		m.lonN.setValue(0);
+		m.latN.setValue(0);
+
 		m.spacebarN = props.globals.getNode("/controls/engines/engine/starter", 1);
 		m.modelpath = path;
 
 		m.dynamic = nil;
 		m.static = [];
 		m.block = 0;
+		m.count = 0;
 		return m;
 	},
 	click : func {
@@ -531,7 +535,8 @@ ModelMgr = {
 		me.dynamic = Dynamic.new(me.modelpath, me.lonN.getValue(), me.latN.getValue(),
 				me.elevN.getValue());
 		# refresh status line to reset display timer
-		display.write(me.modelpath);
+		me.count += 1;
+		me.display_status(me.modelpath);
 	},
 	select : func {
 		var click_xyz = lonlat2xyz([me.lonN.getValue(), me.latN.getValue()]);
@@ -574,13 +579,13 @@ ModelMgr = {
 	flash : func {
 		me.block = 1;
 		var t = 0.33;
-		display.write(me.dynamic.path, 1.0, 0.6, 0);
+		me.display_status(me.dynamic.path, 1);
 		settimer(func { adjust.set("elev", adjust.get("elev") - 10000) }, t * 1);
 		settimer(func { adjust.set("elev", adjust.get("elev") + 10000) }, t * 2);
 		settimer(func { adjust.set("elev", adjust.get("elev") - 10000) }, t * 3);
 		settimer(func { adjust.set("elev", adjust.get("elev") + 10000) }, t * 4);
 		settimer(func { me.block = 0 }, t * 4.5);
-		settimer(func { display.write(me.modelpath) }, 5);
+		settimer(func { me.display_status(me.modelpath) }, 5);
 	},
 	remove_selected : func {
 		if (me.block) {
@@ -589,12 +594,20 @@ ModelMgr = {
 		if (me.dynamic != nil) {
 			me.dynamic.del();
 			me.dynamic = nil;
+			me.count -= 1;
 		}
 		me.select();
 	},
 	setmodelpath : func(path) {
 		me.modelpath = path;
-		display.write(path);
+		me.display_status(path);
+	},
+	display_status : func(p, m = 0) {
+		var c = [
+			[0.6, 1, 0.6, 1],
+			[1.0, 0.6, 0.0, 1.0],
+		];
+		display.write("(" ~ me.count ~ ")  " ~ p, c[m][0], c[m][1], c[m][2], c[m][3]);
 	},
 	get_data : func {
 		var n = props.Node.new();
@@ -728,7 +741,6 @@ settimer(func {
 	display = screen.window.new(8, 8, 1, 180);
 	display.font = "HELVETICA_12";
 	display.halign = "left";
-	display.fg = [0.6, 1, 0.6, 1];
 
 	modellist = scanDirs(getprop("/source"));
 	adjust = Adjust.new("/data");

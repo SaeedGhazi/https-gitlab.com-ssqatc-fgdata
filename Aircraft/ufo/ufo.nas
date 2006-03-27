@@ -34,6 +34,8 @@ var R2D = 180 / math.pi;
 ft2m = func { arg[0] * 0.3048 }
 m2ft = func { arg[0] / 0.3048 }
 floor = func(v) { v < 0.0 ? -int(-v) - 1 : int(v) }
+ceil = func(v) { -floor(-v) }
+pow = func(v, w) { math.exp(math.ln(v) * w) }
 printf = func(_...) { print(call(sprintf, _)) }
 
 
@@ -515,7 +517,6 @@ ModelMgr = {
 		m.dynamic = nil;
 		m.static = [];
 		m.block = 0;
-		m.count = 0;
 		return m;
 	},
 	click : func {
@@ -535,7 +536,6 @@ ModelMgr = {
 		me.dynamic = Dynamic.new(me.modelpath, me.lonN.getValue(), me.latN.getValue(),
 				me.elevN.getValue());
 		# refresh status line to reset display timer
-		me.count += 1;
 		me.display_status(me.modelpath);
 	},
 	select : func {
@@ -580,7 +580,7 @@ ModelMgr = {
 		me.block = 1;
 		var t = 0.33;
 		me.display_status(me.dynamic.path, 1);
-		settimer(func { adjust.set("elev", adjust.get("elev") - 10000) }, t * 1);
+		settimer(func { adjust.set("elev", adjust.get("elev") - 10000) }, t);
 		settimer(func { adjust.set("elev", adjust.get("elev") + 10000) }, t * 2);
 		settimer(func { adjust.set("elev", adjust.get("elev") - 10000) }, t * 3);
 		settimer(func { adjust.set("elev", adjust.get("elev") + 10000) }, t * 4);
@@ -594,7 +594,6 @@ ModelMgr = {
 		if (me.dynamic != nil) {
 			me.dynamic.del();
 			me.dynamic = nil;
-			me.count -= 1;
 		}
 		me.select();
 	},
@@ -607,7 +606,9 @@ ModelMgr = {
 			[0.6, 1, 0.6, 1],
 			[1.0, 0.6, 0.0, 1.0],
 		];
-		display.write("(" ~ me.count ~ ")  " ~ p, c[m][0], c[m][1], c[m][2], c[m][3]);
+		var count = me.dynamic != nil;
+		count += size(me.static);
+		display.write("(" ~ count ~ ")  " ~ p, c[m][0], c[m][1], c[m][2], c[m][3]);
 	},
 	get_data : func {
 		var n = props.Node.new();
@@ -649,24 +650,25 @@ controls.incElevator = func(step, apstep) {
 
 
 
+var lastXYZ = lonlat2xyz([getprop("/position/longitude-deg"), getprop("/position/latitude-deg")]);
+var lastElev = 0;
 
+printDistance = func {
+	# print distance to last cursor coordinates (horizontal distance
+	# doesn't consider elevation and is rather imprecise)
+	var lon = getprop("/sim/input/click/longitude-deg");
+	var lat = getprop("/sim/input/click/latitude-deg");
+	var elev = getprop("/sim/input/click/elevation-ft");
+	var newXYZ = lonlat2xyz([lon, lat]);
+	var hdist = math.sqrt(coord_dist_sq(lastXYZ, newXYZ) * ERAD);
+	var vdist = ft2m(elev - lastElev);
+	var s = hdist < 4 ? sprintf("%.1f m HOR, %.1f m VERT", hdist * 1000, vdist)
+			: sprintf("%.1f km HOR, %.1f m VERT", hdist, vdist);
+	screen.log.write(s);
 
-# what to do on terrain clicks
-
-#var lastXYZ = lonlat2xyz([getprop("/position/longitude-deg"), getprop("/position/latitude-deg")]);
-#var lastElev = 0;
-
-#	# print distance to last cursor coordinates (horizontal distance
-#	# doesn't consider elevation and is rather imprecise)
-#	newXYZ = lonlat2xyz([lon, lat]);
-#	var hdist = math.sqrt(coord_dist_sq(lastXYZ, newXYZ) * ERAD);
-#	var vdist = ft2m(elev - lastElev);
-#	var s = hdist < 4 ? sprintf("%.1f m HOR, %.1f m VERT", hdist * 1000, vdist)
-#			: sprintf("%.1f km HOR, %.1f m VERT", hdist, vdist);
-#	screen.log.write(s);
-
-#	lastXYZ = newXYZ;
-#	lastElev = elev;
+	lastXYZ = newXYZ;
+	lastElev = elev;
+}
 
 
 
@@ -682,14 +684,70 @@ scanDirs = func(csv) {
 
 
 
+printUFOData = func {
+	print("\n\n------------------------------ UFO -------------------------------\n");
+
+	var lon = getprop("/position/longitude-deg");
+	var lat = getprop("/position/latitude-deg");
+	var alt_ft = getprop("/position/altitude-ft");
+	var elev_m = getprop("/position/ground-elev-m");
+	var heading = getprop("/orientation/heading-deg");
+	var agl_ft = alt_ft - m2ft(elev_m);
+
+	printf("Longitude:    %.6f deg", lon);
+	printf("Latitude:     %.6f deg", lat);
+	printf("Altitude ASL: %.4f m (%.4f ft)", ft2m(alt_ft), alt_ft);
+	printf("Altitude AGL: %.4f m (%.4f ft)", ft2m(agl_ft), agl_ft);
+	printf("Heading:      %.1f deg", normdeg(heading));
+	printf("Ground Elev:  %.4f m (%.4f ft)", elev_m, m2ft(elev_m));
+	print();
+	print("# " ~ tile_path(lon, lat));
+	printf("OBJECT_STATIC %.6f %.6f %.4f %.1f", lon, lat, elev_m, normdeg(360 - heading));
+	print();
+
+	var hdg = normdeg(heading + getprop("/sim/current-view/goal-pitch-offset-deg"));
+	var fgfs = sprintf("$ fgfs --aircraft=ufo --lon=%.6f --lat=%.6f --altitude=%.2f --heading=%.1f",
+			lon, lat, agl_ft, hdg);
+	print(fgfs);
+}
+
+
+printModelData = func(prop) {
+	print("\n\n------------------------ Selected Object -------------------------\n");
+	var elev = prop.getNode("elevation-ft").getValue();
+	printf("Path:         %s", prop.getNode("path").getValue());
+	printf("Longitude:    %.6f deg", prop.getNode("longitude-deg").getValue());
+	printf("Latitude:     %.6f deg", prop.getNode("latitude-deg").getValue());
+	printf("Altitude ASL: %.4f m (%.4f ft)", ft2m(elev), elev);
+	printf("Heading:      %.1f deg", prop.getNode("heading-deg").getValue());
+	printf("Pitch:        %.1f deg", prop.getNode("pitch-deg").getValue());
+	printf("Roll:         %.1f deg", prop.getNode("roll-deg").getValue());
+}
+
+
+
+
 
 # interface functions -----------------------------------------------------------------------------
 
 printData = func {
-	var rule = "------------------------------------------------------------------";
+	var rule = "\n------------------------------------------------------------------\n";
+	print("\n\n");
+	printUFOData();
+
 	var data = modelmgr.get_data();
-	var bucket = {};
+
+	var selected = data.getChild("model", 0);
+	if (selected == nil) {
+		print(rule);
+		return;
+	}
+
+	printModelData(selected);
+	print(rule);
+
 	# group all objects of a bucket
+	var bucket = {};
 	foreach (var m; data.getChildren("model")) {
 		var stg = m.getNode("stg-path").getValue();
 		var obj = m.getNode("object-line").getValue();
@@ -699,14 +757,12 @@ printData = func {
 			bucket[stg] = [obj];
 		}
 	}
-	print(rule);
 	foreach (var key; keys(bucket)) {
 		print("\n# ", key);
 		foreach (var obj; bucket[key]) {
 			print(obj);
 		}
 	}
-	print();
 	print(rule);
 }
 
@@ -746,6 +802,7 @@ settimer(func {
 	adjust = Adjust.new("/data");
 	modelmgr = ModelMgr.new(getprop("/model"));
 	setlistener("/sim/signals/click", func { modelmgr.click() });
+	setlistener("/sim/signals/click", printDistance);
 }, 1);
 
 
@@ -966,55 +1023,6 @@ showModelAdjustDialog = func {
 
 	fgcommand("dialog-new", dialog[name].prop());
 	gui.showDialog(name);
-}
-
-
-
-
-
-# attic -------------------------------------------------------------------------------------------
-
-
-dumpCoords = func {
-	print("\n---------------------------- UFO -----------------------------");
-
-	var lon = getprop("/position/longitude-deg");
-	var lat = getprop("/position/latitude-deg");
-	var alt_ft = getprop("/position/altitude-ft");
-	var elev_m = getprop("/position/ground-elev-m");
-	var heading = getprop("/orientation/heading-deg");
-	var agl_ft = alt_ft - m2ft(elev_m);
-
-	printf("Longitude:    %.6f deg", lon);
-	printf("Latitude:     %.6f deg", lat);
-	printf("Altitude ASL: %.4f m (%.4f ft)", ft2m(alt_ft), alt_ft);
-	printf("Altitude AGL: %.4f m (%.4f ft)", ft2m(agl_ft), agl_ft);
-	printf("Heading:      %.1f deg", normdeg(heading));
-	printf("Ground Elev:  %.4f m (%.4f ft)", elev_m, m2ft(elev_m));
-	print("");
-	print(tile_path(lon, lat));
-	printf("OBJECT_STATIC %.6f %.6f %.4f %.1f", lon, lat, elev_m, normdeg(360 - heading));
-	print("");
-
-	var hdg = normdeg(heading + getprop("/sim/current-view/goal-pitch-offset-deg"));
-	var fgfs = sprintf("$ fgfs --aircraft=ufo --lon=%.6f --lat=%.6f --altitude=%.2f --heading=%.1f",
-			lon, lat, agl_ft, hdg);
-	print(fgfs);
-
-
-	print("\n\n--------------------------- Cursor ---------------------------");
-
-	var alt = cursor.val["alt"].get();
-	printf("Longitude:    %.6f deg", var clon = cursor.val["lon"].get());
-	printf("Latitude:     %.6f deg", var clat = cursor.val["lat"].get());
-	printf("Altitude ASL: %.4f m (%.4f ft)", var celev = ft2m(alt), alt);
-	printf("Heading:      %.1f deg", var chdg = normdeg(cursor.val["hdg"].get()));
-	printf("Pitch:        %.1f deg", normdeg(cursor.val["pitch"].get()));
-	printf("Roll:         %.1f deg", normdeg(cursor.val["roll"].get()));
-	print("");
-	print("--------------------------------------------------------------");
-	saveData();
-
 }
 
 

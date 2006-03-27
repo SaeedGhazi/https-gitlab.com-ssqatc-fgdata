@@ -802,7 +802,7 @@ settimer(func {
 	adjust = Adjust.new("/data");
 	modelmgr = ModelMgr.new(getprop("/model"));
 	setlistener("/sim/signals/click", func { modelmgr.click() });
-	setlistener("/sim/signals/click", printDistance);
+	#setlistener("/sim/signals/click", printDistance);
 }, 1);
 
 

@@ -153,10 +153,16 @@ impact on the c172p.
   <layer>
    <name>morse ident status</name>
    <condition>
-    <equals>
-    <property alias="../../../../../params/nav-morse-ident-toggle-prop"/>
-    <value>true</value>
-    </equals>
+<!--    <and> -->
+     <greater-than>
+      <property alias="../../../../../params/nav-com-pwr-volts-prop"/>
+      <value>8.0</value>
+     </greater-than>
+     <equals>
+      <property alias="../../../../../params/nav-morse-ident-toggle-prop"/>
+      <value>true</value>
+     </equals>
+<!--    </and> -->
    </condition>
    <type>text</type>
    <point-size>6</point-size>

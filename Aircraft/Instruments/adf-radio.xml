@@ -92,6 +92,12 @@ properties' values.
  
   <layer>
    <name>annunciator display</name>
+   <condition>
+    <greater-than>
+     <property alias="../../../../../params/adf-pwr-volts-prop"/>
+     <value>8.0</value>
+    </greater-than>
+   </condition>
    <type>text</type>
    <point-size>6</point-size>
    <color>

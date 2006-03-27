@@ -625,9 +625,11 @@ Shared parameters for various materials.
  <name>SomeSort</name>
  <name>EvergreenBroadCover</name>
  <name>Island</name>
- <texture>Terrain/forest1.rgb</texture>
- <xsize>1000</xsize>
- <ysize>1000</ysize>
+ <texture>Terrain/forest1a.rgb</texture>
+ <texture>Terrain/forest1b.rgb</texture>
+ <texture>Terrain/forest1c.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <rolling-friction>1</rolling-friction>
  <bumpiness>1</bumpiness>
@@ -645,9 +647,11 @@ Shared parameters for various materials.
 <material>
  <name>DeciduousBroadCover</name>
  <name>Bog</name>
- <texture>Terrain/deciduous.rgb</texture>
- <xsize>500</xsize>
- <ysize>500</ysize>
+ <texture>Terrain/deciduous1.rgb</texture>
+ <texture>Terrain/deciduous2.rgb</texture>
+ <texture>Terrain/deciduous4.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <rolling-friction>1</rolling-friction>
  <bumpiness>0.85</bumpiness>
@@ -666,8 +670,10 @@ Shared parameters for various materials.
 <material>
  <name>MixedForestCover</name>
  <texture>Terrain/mixedforest.rgb</texture>
- <xsize>1000</xsize>
- <ysize>1000</ysize>
+ <texture>Terrain/mixedforest2.rgb</texture>
+ <texture>Terrain/mixedforest3.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
  <light-coverage>5000000.0</light-coverage>
  <rolling-friction>1</rolling-friction>
  <bumpiness>0.95</bumpiness>
@@ -728,9 +734,11 @@ Shared parameters for various materials.
 
 <material>
  <name>Sand</name>
- <texture>Terrain/sand.rgb</texture>
- <xsize>250</xsize>
- <ysize>250</ysize>
+ <texture>Terrain/sand1.rgb</texture>
+ <texture>Terrain/sand2.rgb</texture>
+ <texture>Terrain/sand3.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <shininess>2.5</shininess>
  <rolling-friction>0.1</rolling-friction>
@@ -741,8 +749,10 @@ Shared parameters for various materials.
  <name>ShrubCover</name>
  <name>ShrubGrassCover</name>
  <texture>Terrain/shrub.rgb</texture>
- <xsize>500</xsize>
- <ysize>500</ysize>
+ <texture>Terrain/shrub2.rgb</texture>
+ <texture>Terrain/shrub3.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
  <diffuse>
   <r>0.86</r>
   <g>0.86</g>
@@ -764,8 +774,9 @@ Shared parameters for various materials.
 <material>
  <name>BuiltUpCover</name>
  <name>Urban</name>
- <texture>Terrain/builtup.rgb</texture>
- <texture>Terrain/resgrid.rgb</texture>
+ <texture>Terrain/city1.rgb</texture>
+ <texture>Terrain/city2.rgb</texture>
+ <texture>Terrain/city3.rgb</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>100000.0</light-coverage>
@@ -843,7 +854,9 @@ Shared parameters for various materials.
 
 <material>
  <name>Town</name>
- <texture>Terrain/Town.rgb</texture>
+ <texture>Terrain/Town1.rgb</texture>
+ <texture>Terrain/Town2.rgb</texture>
+ <texture>Terrain/Town3.rgb</texture>
  <xsize>1024</xsize>
  <ysize>1024</ysize>
  <light-coverage>100000.0</light-coverage>
@@ -1046,9 +1059,11 @@ Shared parameters for various materials.
  <name>Marsh</name>
  <name>HerbWetlandCover</name>
  <name>WoodedWetlandCover</name>
- <texture>Terrain/marsh1.rgb</texture>
- <xsize>1000</xsize>
- <ysize>1000</ysize>
+ <texture>Terrain/marsh2.rgb</texture>
+ <texture>Terrain/marsh3.rgb</texture>
+ <texture>Terrain/marsh4.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
  <light-coverage>40000000.0</light-coverage>
  <rolling-friction>0.3</rolling-friction>
  <bumpiness>0.2</bumpiness>
@@ -1072,8 +1087,10 @@ Shared parameters for various materials.
  <name>HerbTundraCover</name>
  <name>MixedTundraCover</name>
  <texture>Terrain/tundra.rgb</texture>
- <xsize>1000</xsize>
- <ysize>1000</ysize>
+ <texture>Terrain/tundra2.rgb</texture>
+ <texture>Terrain/tundra3.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
  <light-coverage>4000000.0</light-coverage>
  <diffuse>
   <r>0.93</r>
@@ -1129,9 +1146,11 @@ Shared parameters for various materials.
 
 <material>
  <name>MixedCropPastureCover</name>
- <texture>Terrain/mixedcrop.rgb</texture>
- <xsize>4000</xsize>
- <ysize>4000</ysize>
+ <texture>Terrain/mixedcrop1.rgb</texture>
+ <texture>Terrain/mixedcrop4.rgb</texture>
+ <texture>Terrain/mixedcrop3.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.7</bumpiness>
@@ -1178,9 +1197,11 @@ Shared parameters for various materials.
 
 <material>
  <name>IrrCropPastureCover</name>
- <texture>Terrain/irrcrop.rgb</texture>
- <xsize>4000</xsize>
- <ysize>4000</ysize>
+ <texture>Terrain/irrcrop1.rgb</texture>
+ <texture>Terrain/irrcrop2.rgb</texture>
+ <texture>Terrain/irrcrop3.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
  <rolling-friction>0.3</rolling-friction>
  <bumpiness>0.6</bumpiness>
@@ -1227,7 +1248,9 @@ Shared parameters for various materials.
 
 <material>
  <name>DryCropPastureCover</name>
- <texture>Terrain/drycrop.rgb</texture>
+ <texture>Terrain/drycrop1.rgb</texture>
+ <texture>Terrain/drycrop2.rgb</texture>
+ <texture>Terrain/drycrop3.rgb</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <rolling-friction>0.1</rolling-friction>
@@ -1276,7 +1299,9 @@ Shared parameters for various materials.
 
 <material>
  <name>CropGrassCover</name>
- <texture>Terrain/cropgrass.rgb</texture>
+ <texture>Terrain/cropgrass1.rgb</texture>
+ <texture>Terrain/cropgrass2.rgb</texture>
+ <texture>Terrain/cropgrass3.rgb</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>

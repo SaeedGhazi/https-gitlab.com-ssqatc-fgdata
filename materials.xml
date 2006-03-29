@@ -777,8 +777,8 @@ Shared parameters for various materials.
  <texture>Terrain/city1.rgb</texture>
  <texture>Terrain/city2.rgb</texture>
  <texture>Terrain/city3.rgb</texture>
- <xsize>2000</xsize>
- <ysize>2000</ysize>
+ <xsize>1024</xsize>
+ <ysize>1024</ysize>
  <light-coverage>100000.0</light-coverage>
  <emissive>
   <r>0.05</r>
@@ -857,8 +857,8 @@ Shared parameters for various materials.
  <texture>Terrain/Town1.rgb</texture>
  <texture>Terrain/Town2.rgb</texture>
  <texture>Terrain/Town3.rgb</texture>
- <xsize>1024</xsize>
- <ysize>1024</ysize>
+ <xsize>512</xsize>
+ <ysize>512</ysize>
  <light-coverage>100000.0</light-coverage>
  <emissive>
   <r>0.05</r>

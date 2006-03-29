@@ -401,13 +401,13 @@ Started September 2000 by David Megginson, david@megginson.com
   </ai-traffic>
 
   <traffic-manager>
-     <enabled type="bool">false</enabled>
+     <enabled type="bool">true</enabled>
   </traffic-manager>
 
   <ai>
    <enabled type="bool">true</enabled>
    <!-- scenario>nimitz_demo</scenario -->
-   <!-- <scenario>aircraft_demo</scenario> -->
+   <scenario>aircraft_demo</scenario>
   </ai>
 
   <user>

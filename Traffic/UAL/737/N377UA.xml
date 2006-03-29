@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <trafficlist>
     <aircraft>
-        <model>Aircraft/737/Models/boeing733.xml</model>
+        <model>Aircraft/737-300/Models/737-300.xml</model>
         <livery>UAL</livery> 
         <airline>UAL</airline>
         <actype>737-300</actype>
-        <offset>0</offset>
+        <offset>10</offset>
         <radius>23</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>

@@ -737,8 +737,10 @@ Shared parameters for various materials.
  <texture>Terrain/sand1.rgb</texture>
  <texture>Terrain/sand2.rgb</texture>
  <texture>Terrain/sand3.rgb</texture>
- <xsize>2000</xsize>
- <ysize>2000</ysize>
+ <texture>Terrain/sand4.rgb</texture>
+ <texture>Terrain/sand5.rgb</texture>
+ <xsize>1024</xsize>
+ <ysize>1024</ysize>
  <light-coverage>10000000.0</light-coverage>
  <shininess>2.5</shininess>
  <rolling-friction>0.1</rolling-friction>
@@ -855,10 +857,8 @@ Shared parameters for various materials.
 <material>
  <name>Town</name>
  <texture>Terrain/Town1.rgb</texture>
- <texture>Terrain/Town2.rgb</texture>
- <texture>Terrain/Town3.rgb</texture>
- <xsize>512</xsize>
- <ysize>512</ysize>
+ <xsize>1024</xsize>
+ <ysize>1024</ysize>
  <light-coverage>100000.0</light-coverage>
  <emissive>
   <r>0.05</r>
@@ -1251,6 +1251,7 @@ Shared parameters for various materials.
  <texture>Terrain/drycrop1.rgb</texture>
  <texture>Terrain/drycrop2.rgb</texture>
  <texture>Terrain/drycrop3.rgb</texture>
+ <texture>Terrain/drycrop4.rgb</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <rolling-friction>0.1</rolling-friction>

@@ -71,9 +71,11 @@
    <line></line>
    <line>set directories that are scanned for models (comma separated and</line>
    <line>relative to $FG_ROOT; default: Models):</line>
-   <line>&#32;&#32;&#45;&#45;prop:source=Models,Scenery/Objects/w130n30/w123n37</line>
+   <line>&#32;&#32;&#45;&#45;prop:source=Models,Scenery/Objects</line>
    <line></line>
-   <line>exported data are written to $FG_HOME/ufo-model-export.xml</line>
+   <line>exported data are written to:</line>
+   <line>&#32;&#32;~/.fgfs/ufo-model-export.xml (Unix) or</line>
+   <line>&#32;&#32;%APPDATA%\fligthgear.org\ufo-model-export.xml (Not-Unix)</line>
   </help>
  </sim>
 

@@ -38,6 +38,7 @@
 
   <item>
    <label>High-Res Snapshot</label>
+   <enabled>false</enabled>
    <binding>
     <command>hires-screen-capture</command>
    </binding>

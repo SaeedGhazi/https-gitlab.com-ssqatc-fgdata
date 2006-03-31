@@ -66,8 +66,8 @@
     <desc>open/close model select dialog</desc>
    </key>
 
-   <line>pre-select model (path relative to $FG_ROOT):</line>
-   <line>&#32;&#32;&#45;&#45;prop:model=Model/path.xml</line>
+   <line>pre-select initial model (path relative to $FG_ROOT):</line>
+   <line>&#32;&#32;&#45;&#45;prop:cursor=Model/path.xml</line>
    <line></line>
    <line>set directories that are scanned for models (comma separated and</line>
    <line>relative to $FG_ROOT; default: Models):</line>

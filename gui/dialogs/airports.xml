@@ -10,11 +10,85 @@
 
   <hrule><empty/></hrule>
 
+  <nasal>
+    <open>
+      var id = "";
+      var node = props.globals.getNode("/sim/gui/dialogs/airports", 1);
+      if (node.getNode("list") == nil) {
+          node.getNode("list", 1).setValue("");
+      }
+      node = node.getNode("list");
+
+      listbox = func {
+          id = pop(split(" ", node.getValue()));
+          id = substr(id, 1, size(id) - 2);  # strip parentheses
+      }
+
+      apply = func {
+          setprop("/sim/presets/airport-id", id);
+          setprop("/sim/presets/longitude-deg", -9999);
+          setprop("/sim/presets/latitude-deg", -9999);
+          setprop("/sim/presets/altitude-ft", -9999);
+          setprop("/sim/presets/airspeed-kt", 0);
+          setprop("/sim/presets/offset-distance", 0);
+          setprop("/sim/presets/offset-azimuth", 0);
+          setprop("/sim/presets/glideslope-deg", 0);
+          setprop("/sim/presets/heading-deg", 0);
+          setprop("/sim/presets/runway", "");
+      }
+    </open>
+  </nasal>
+
   <airport-list>
+    <name>airport-list</name>
     <pref-width>440</pref-width>
     <pref-height>360</pref-height>
-    <property>/sim/presets/airport-id</property>
+    <property>/sim/gui/dialogs/airports/list</property>
+    <binding>
+      <command>dialog-apply</command>
+      <object-name>airport-list</object-name>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>listbox()</script>
+    </binding>
   </airport-list>
+
+  <group>
+    <layout>hbox</layout>
+    <default-padding>4</default-padding>
+
+    <text>
+      <label>Airport:</label>
+      <pref-width>60</pref-width>
+    </text>
+
+    <input>
+      <name>input</name>
+      <pref-width>280</pref-width>
+      <property>/sim/gui/dialogs/airports/list</property>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>input</object-name>
+      </binding>
+      <binding>
+        <command>dialog-update</command>
+        <object-name>airport-list</object-name>
+      </binding>
+    </input>
+
+    <button>
+      <legend>Search</legend>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>input</object-name>
+      </binding>
+      <binding>
+        <command>dialog-update</command>
+        <object-name>airport-list</object-name>
+      </binding>
+    </button>
+  </group>
 
   <group>
     <layout>hbox</layout>
@@ -26,27 +100,15 @@
       <equal>true</equal>
       <default>true</default>
       <binding>
-        <command>nasal</command>
-        <script>
-          setprop("/sim/presets/longitude-deg", -9999);
-          setprop("/sim/presets/latitude-deg", -9999);
-          setprop("/sim/presets/altitude-ft", -9999);
-          setprop("/sim/presets/airspeed-kt", 0);
-          setprop("/sim/presets/offset-distance", 0);
-          setprop("/sim/presets/offset-azimuth", 0);
-          setprop("/sim/presets/glideslope-deg", 0);
-          setprop("/sim/presets/heading-deg", 0);
-          setprop("/sim/presets/runway", "");
-      </script>
+        <command>dialog-apply</command>
+        <object-name>airport-list</object-name>
       </binding>
       <binding>
-        <command>dialog-apply</command>
+        <command>nasal</command>
+        <script>apply()</script>
       </binding>
       <binding>
         <command>presets-commit</command>
-      </binding>
-      <binding>
-        <command>dialog-close</command>
       </binding>
     </button>
 
@@ -56,6 +118,10 @@
       <legend>Close</legend>
       <equal>true</equal>
       <key>Esc</key>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>input</object-name>
+      </binding>
       <binding>
         <command>dialog-close</command>
       </binding>

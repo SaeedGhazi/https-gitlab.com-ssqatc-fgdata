@@ -739,8 +739,8 @@ Shared parameters for various materials.
  <texture>Terrain/sand3.rgb</texture>
  <texture>Terrain/sand4.rgb</texture>
  <texture>Terrain/sand5.rgb</texture>
- <xsize>1024</xsize>
- <ysize>1024</ysize>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <shininess>2.5</shininess>
  <rolling-friction>0.1</rolling-friction>
@@ -996,9 +996,7 @@ Shared parameters for various materials.
 <material>
  <name>Lake</name>
  <name>Pond</name>
- <name>IntermittentLake</name>
  <name>Reservoir</name>
- <name>IntermittentReservoir</name>
  <name>Stream</name>
  <texture>Terrain/water-lake.rgb</texture>
  <xsize>400</xsize>
@@ -1038,9 +1036,13 @@ Shared parameters for various materials.
 
 <material>
  <name>DryLake</name>
- <texture>Terrain/desert.rgb</texture>
- <xsize>500</xsize>
- <ysize>500</ysize>
+ <name>IntermittentReservoir</name>
+ <name>IntermittentLake</name>
+ <texture>Terrain/sand1.rgb</texture>
+ <texture>Terrain/sand2.rgb</texture>
+ <texture>Terrain/sand3.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
  <rolling-friction>0.04</rolling-friction>
  <bumpiness>0.1</bumpiness>
 </material>

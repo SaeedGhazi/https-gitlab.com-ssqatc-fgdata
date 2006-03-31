@@ -8,6 +8,8 @@
     <label>Static Scenery Level Of Detail</label>
   </text>
 
+  <hrule><empty/></hrule>
+
   <group>
     <layout>table</layout>
     <halign>center</halign>
@@ -53,14 +55,6 @@
       <property>/sim/rendering/static-lod/bare</property>
     </input>
 
-  </group>
-
-  <group>
-    <layout>vbox</layout>
-    <default-padding>0</default-padding>
-    <padding>6</padding>
-    <text><label>These changes are temporary.</label></text>
-    <text><label>Permanent settings are in preferences.xml.</label></text>
   </group>
 
   <group>

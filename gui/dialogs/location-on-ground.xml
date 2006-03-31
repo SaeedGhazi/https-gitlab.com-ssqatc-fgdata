@@ -1,12 +1,25 @@
 <?xml version="1.0"?>
+
 <PropertyList>
   <name>location-on-ground</name>
   <layout>vbox</layout>
-  
+
   <text>
     <label>Set New Location</label>
   </text>
-    
+
+  <hrule><empty/></hrule>
+
+  <nasal>
+    <open>
+      dlg = props.globals.getNode("/sim/gui/dialogs/location-on-ground", 1);
+      apt = dlg.getNode("airport", 1);
+      apt.setValue("");
+      rwy = dlg.getNode("runway", 1);
+      rwy.setValue("");
+    </open>
+  </nasal>
+
   <group>
     <layout>table</layout>
     <halign>center</halign>
@@ -16,7 +29,7 @@
     </text>
     <input>
       <row>0</row><col>1</col>
-      <property>/sim/presets/airport-id</property>
+      <property>/sim/gui/dialogs/location-on-ground/airport</property>
     </input>
     <text>
       <row>1</row><col>0</col>
@@ -24,7 +37,7 @@
     </text>
     <input>
       <row>1</row><col>1</col>
-      <property>/sim/presets/runway</property>
+      <property>/sim/gui/dialogs/location-on-ground/runway</property>
     </input>
   </group>
 
@@ -38,26 +51,28 @@
       <default>true</default>
       <equal>true</equal>
       <binding>
-	<command>nasal</command>
-	<script>
-	  setprop("/sim/presets/longitude-deg", -9999);
-	  setprop("/sim/presets/latitude-deg", -9999);
-	  setprop("/sim/presets/altitude-ft", -9999);
-	  setprop("/sim/presets/airspeed-kt", 0);
-	  setprop("/sim/presets/offset-distance", 0);
-	  setprop("/sim/presets/offset-azimuth", 0);
-	  setprop("/sim/presets/glideslope-deg", 0);
-	  setprop("/sim/presets/heading-deg", 0);
-	</script>
+        <command>dialog-apply</command>
       </binding>
       <binding>
-	<command>dialog-apply</command>
+        <command>nasal</command>
+        <script>
+          setprop("/sim/presets/airport-id", apt.getValue());
+          setprop("/sim/presets/runway", rwy.getValue());
+          setprop("/sim/presets/longitude-deg", -9999);
+          setprop("/sim/presets/latitude-deg", -9999);
+          setprop("/sim/presets/altitude-ft", -9999);
+          setprop("/sim/presets/airspeed-kt", 0);
+          setprop("/sim/presets/offset-distance", 0);
+          setprop("/sim/presets/offset-azimuth", 0);
+          setprop("/sim/presets/glideslope-deg", 0);
+          setprop("/sim/presets/heading-deg", 0);
+        </script>
       </binding>
       <binding>
-	<command>presets-commit</command>
+        <command>presets-commit</command>
       </binding>
       <binding>
-	<command>dialog-close</command>
+        <command>dialog-close</command>
       </binding>
     </button>
 
@@ -65,10 +80,10 @@
 
     <button>
       <legend>Cancel</legend>
-      <equal>true</equal> 
+      <equal>true</equal>
       <key>Esc</key>
       <binding>
-	<command>dialog-close</command>
+        <command>dialog-close</command>
       </binding>
     </button>
 

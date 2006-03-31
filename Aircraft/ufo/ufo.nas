@@ -859,7 +859,7 @@ showModelSelectDialog = func {
 	}
 	w.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
 	w.prop().getNode("binding[1]/command", 1).setValue("nasal");
-	w.prop().getNode("binding[1]/script", 1).setValue("ufo.modelmgr.setmodelpath(getprop('/model'))");
+	w.prop().getNode("binding[1]/script", 1).setValue("ufo.modelmgr.setmodelpath(getprop('/cursor'))");
 
 	fgcommand("dialog-new", dialog[name].prop());
 	gui.showDialog(name);

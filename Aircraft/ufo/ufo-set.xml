@@ -127,7 +127,7 @@
  </input>
 
  <!-- default model -->
- <model>Aircraft/ufo/Models/cursor.ac</model>
+ <cursor>Aircraft/ufo/Models/cursor.ac</cursor>
 
  <!-- subdirs of $FG_ROOT to search models in.
       Comma separated, e.g. "Models,Scenery/Objects/w130n30" -->

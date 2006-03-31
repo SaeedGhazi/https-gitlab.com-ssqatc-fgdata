@@ -119,7 +119,8 @@ search = func(list, which) {
 }
 
 
-# scan all objects in subdir of $FG_ROOT. (Prefer *.xml files to *.ac files.)
+# scan all objects in subdir of $FG_ROOT. (Prefer *.xml files to *.ac files
+# if both exist)
 #
 scan_models = func(base) {
 	var result = [];
@@ -800,7 +801,7 @@ settimer(func {
 
 	modellist = scanDirs(getprop("/source"));
 	adjust = Adjust.new("/data");
-	modelmgr = ModelMgr.new(getprop("/model"));
+	modelmgr = ModelMgr.new(getprop("/cursor"));
 	setlistener("/sim/signals/click", func { modelmgr.click() });
 	#setlistener("/sim/signals/click", printDistance);
 }, 1);
@@ -852,7 +853,7 @@ showModelSelectDialog = func {
 	w = dialog[name].addChild("list");
 	w.set("halign", "fill");
 	w.set("pref-height", 300);
-	w.set("property", "/model");
+	w.set("property", "/cursor");
 	forindex (var i; modellist) {
 		w.prop().getChild("value", i, 1).setValue(modellist[i]);
 	}

@@ -66,16 +66,16 @@
     <desc>open/close model select dialog</desc>
    </key>
 
-   <line>pre-select initial model (path relative to $FG_ROOT):</line>
+   <line>Pre-select initial model (path relative to $FG_ROOT):</line>
    <line>&#32;&#32;&#45;&#45;prop:cursor=Model/path.xml</line>
    <line></line>
-   <line>set directories that are scanned for models (comma separated and</line>
+   <line>Set directories that are scanned for models (comma separated and</line>
    <line>relative to $FG_ROOT; default: Models):</line>
    <line>&#32;&#32;&#45;&#45;prop:source=Models,Scenery/Objects</line>
    <line></line>
-   <line>exported data are written to:</line>
-   <line>&#32;&#32;~/.fgfs/ufo-model-export.xml (Unix) or</line>
-   <line>&#32;&#32;%APPDATA%\flightgear.org\ufo-model-export.xml (Not-Unix)</line>
+   <line>Exported data are written to:</line>
+   <line>&#32;&#32;~/.fgfs/ufo-model-export.xml   (Unix)</line>
+   <line>&#32;&#32;My Documents\ufo-model-export.xml   (Microsoft Windows)</line>
   </help>
  </sim>
 

@@ -78,8 +78,7 @@ coord_dist_sq = func(xyz0, xyz1) {
 
 # sort vector of strings (bubblesort)
 #
-sort = func(list) {
-	var l = list;
+sort = func(l) {
 	while (1) {
 		var n = 0;
 		for (var i = 0; i < size(l) - 1; i += 1) {
@@ -775,7 +774,9 @@ exportData = func {
 	var tmp = "save-ufo-data";
 	save = props.globals.getNode(tmp, 1);
 	props.copy(modelmgr.get_data(), save);
-	savexml(getprop("/sim/fg-home") ~ "/ufo-model-export.xml", save.getPath());
+	var path = getprop("/sim/fg-home") ~ "/ufo-model-export.xml";
+	savexml(path, save.getPath());
+	print("model data exported to ", path);
 	props.globals.removeChild(tmp);
 }
 

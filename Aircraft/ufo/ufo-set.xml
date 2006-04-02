@@ -75,7 +75,7 @@
    <line></line>
    <line>Exported data are written to:</line>
    <line>&#32;&#32;~/.fgfs/ufo-model-export.xml   (Unix)</line>
-   <line>&#32;&#32;My Documents\ufo-model-export.xml   (Microsoft Windows)</line>
+   <line>&#32;&#32;%APPDATA%\flightgear.org\ufo-model-export.xml   (Microsoft Windows)</line>
   </help>
  </sim>
 

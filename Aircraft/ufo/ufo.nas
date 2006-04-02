@@ -407,7 +407,7 @@ Model = {
 		var stg_hdg = normdeg(360 - hdg);
 		var stg_path = tile_path(lon, lat);
 		var abs_path = getprop("/sim/fg-root") ~ "/" ~ path;
-		var obj_line = sprintf("%s %s %.6f %.6f %.4f %.1f", type, path, lon, lat,
+		var obj_line = sprintf("%s %s %.8f %.8f %.4f %.1f", type, path, lon, lat,
 				ft2m(elev), stg_hdg);
 
 		node.getNode("absolute-path", 1).setValue(abs_path);
@@ -694,15 +694,15 @@ printUFOData = func {
 	var heading = getprop("/orientation/heading-deg");
 	var agl_ft = alt_ft - m2ft(elev_m);
 
-	printf("Longitude:    %.6f deg", lon);
-	printf("Latitude:     %.6f deg", lat);
+	printf("Longitude:    %.8f deg", lon);
+	printf("Latitude:     %.8f deg", lat);
 	printf("Altitude ASL: %.4f m (%.4f ft)", ft2m(alt_ft), alt_ft);
 	printf("Altitude AGL: %.4f m (%.4f ft)", ft2m(agl_ft), agl_ft);
 	printf("Heading:      %.1f deg", normdeg(heading));
 	printf("Ground Elev:  %.4f m (%.4f ft)", elev_m, m2ft(elev_m));
 	print();
 	print("# " ~ tile_path(lon, lat));
-	printf("OBJECT_STATIC %.6f %.6f %.4f %.1f", lon, lat, elev_m, normdeg(360 - heading));
+	printf("OBJECT_STATIC %.8f %.8f %.4f %.1f", lon, lat, elev_m, normdeg(360 - heading));
 	print();
 
 	var hdg = normdeg(heading + getprop("/sim/current-view/goal-pitch-offset-deg"));
@@ -716,8 +716,8 @@ printModelData = func(prop) {
 	print("\n\n------------------------ Selected Object -------------------------\n");
 	var elev = prop.getNode("elevation-ft").getValue();
 	printf("Path:         %s", prop.getNode("path").getValue());
-	printf("Longitude:    %.6f deg", prop.getNode("longitude-deg").getValue());
-	printf("Latitude:     %.6f deg", prop.getNode("latitude-deg").getValue());
+	printf("Longitude:    %.8f deg", prop.getNode("longitude-deg").getValue());
+	printf("Latitude:     %.8f deg", prop.getNode("latitude-deg").getValue());
 	printf("Altitude ASL: %.4f m (%.4f ft)", ft2m(elev), elev);
 	printf("Heading:      %.1f deg", prop.getNode("heading-deg").getValue());
 	printf("Pitch:        %.1f deg", prop.getNode("pitch-deg").getValue());

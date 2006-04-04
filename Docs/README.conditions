@@ -76,7 +76,7 @@ be nested to arbitrary depths.  Here is an example:
       <property>/engines/engine[0]/rpm</property>
       <value>2500</value>
      </greater-than>
-    <or>
+    </or>
     <property>/engines/engine[0]/running</property>
    </and>
   </condition>
@@ -104,6 +104,7 @@ in FlightGear conditions is
     <equals>
      <property>/y</property>
      <value>5</value>
+    </equals>
    </not>
   </condition>
 
@@ -118,6 +119,7 @@ and then
     <equals>
      <property>/x</property>
      <value>3</value>
+    </equals>
    </not>
   </condition>
 
@@ -134,6 +136,7 @@ and then
     <equals>
      <property>/y</property>
      <value>5</value>
+    </equals>
    </not>
   </condition>
 

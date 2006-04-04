@@ -734,11 +734,9 @@ Shared parameters for various materials.
 
 <material>
  <name>Sand</name>
- <texture>Terrain/sand1.rgb</texture>
- <texture>Terrain/sand2.rgb</texture>
- <texture>Terrain/sand3.rgb</texture>
  <texture>Terrain/sand4.rgb</texture>
  <texture>Terrain/sand5.rgb</texture>
+ <texture>Terrain/sand6.rgb</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>10000000.0</light-coverage>
@@ -929,9 +927,10 @@ Shared parameters for various materials.
 
 <material>
  <name>PackIce</name>
- <texture>Terrain/packice.rgb</texture>
- <xsize>400</xsize>
- <ysize>400</ysize>
+ <texture>Terrain/packice1.rgb</texture>
+ <texture>Terrain/packice2.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
  <shininess>1.5</shininess>
  <rolling-friction>0.005</rolling-friction>
  <bumpiness>0.3</bumpiness>
@@ -939,7 +938,9 @@ Shared parameters for various materials.
 
 <material>
  <name>Glacier</name>
- <texture>Terrain/glacier.rgb</texture>
+ <texture>Terrain/glacier1.rgb</texture>
+ <texture>Terrain/glacier2.rgb</texture>
+ <texture>Terrain/glacier3.rgb</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <shininess>1.5</shininess>
@@ -949,7 +950,10 @@ Shared parameters for various materials.
 
 <material>
  <name>SnowCover</name>
- <texture>Terrain/snow.rgb</texture>
+ <texture>Terrain/snow1.rgb</texture>
+ <texture>Terrain/snow2.rgb</texture>
+ <texture>Terrain/snow3.rgb</texture>
+ <texture>Terrain/snow4.rgb</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <shininess>1.2</shininess>
@@ -1086,11 +1090,35 @@ Shared parameters for various materials.
 <material>
  <name>GrassCover</name>
  <name>BareTundraCover</name>
- <name>HerbTundraCover</name>
  <name>MixedTundraCover</name>
  <texture>Terrain/tundra.rgb</texture>
  <texture>Terrain/tundra2.rgb</texture>
  <texture>Terrain/tundra3.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <light-coverage>4000000.0</light-coverage>
+ <diffuse>
+  <r>0.93</r>
+  <g>0.95</g>
+  <b>0.93</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.1</r>
+  <g>0.12</g>
+  <b>0.1</b>
+  <a>1.0</a>
+ </specular>
+ <shininess>1.2</shininess>
+ <rolling-friction>0.1</rolling-friction>
+ <bumpiness>0.15</bumpiness>
+</material>
+
+<material>
+ <name>HerbTundraCover</name>
+ <texture>Terrain/herbtundra.rgb</texture>
+ <texture>Terrain/herbtundra2.rgb</texture>
+ <texture>Terrain/herbtundra3.rgb</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>4000000.0</light-coverage>

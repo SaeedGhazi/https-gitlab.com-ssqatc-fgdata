@@ -44,27 +44,34 @@
               m.enabled = 0;
               m.mode = options[0];
               m.options = [];
-              var node = props.globals.getNode("/autopilot/locks");
-              if (node.getNode(name) == nil or node.getNode(name, 1).getValue() == nil) {
-                  node.getNode(name, 1).setValue("");
+
+              var locks = props.globals.getNode("/autopilot/locks", 1);
+              if (locks.getNode(name) == nil or locks.getNode(name, 1).getValue() == nil) {
+                  locks.getNode(name, 1).setValue("");
               }
+              m.lock = locks.getNode(name);
               m.active = dlg.getNode(name ~ "-active", 1);
+
               foreach (var o; options) {
-                  node = dlg.getNode(o);
+                  var node = dlg.getNode(o);
                   if (node == nil) {
                       node = dlg.getNode(o, 1);
                       node.setBoolValue(0);
                   }
                   append(m.options, node);
               }
+              m.listener = setlistener(m.lock,  func { m.update(cmdarg().getValue()) }, 1);
               return m;
+          },
+          del : func {
+              removelistener(me.listener);
           },
 
           ## handle checkbox
           #
           enable : func {
               me.enabled = me.active.getBoolValue();
-              setprop("/autopilot/locks/" ~ me.name, me.enabled ? me.mode : "");
+              me.lock.setValue(me.enabled ? me.mode : "");
           },
 
           ## handle radiobuttons
@@ -75,7 +82,7 @@
                   o.setBoolValue(o.getName() == mode);
               }
               if (me.enabled) {
-                  setprop("/autopilot/locks/" ~ me.name, mode);
+                  me.lock.setValue(mode);
               }
           },
 
@@ -104,18 +111,12 @@
       var vel = Group.new("speed",    ["speed-with-throttle", "speed-with-pitch-trim"]);
       var alt = Group.new("altitude", ["altitude-hold", "vertical-speed-hold", "pitch-hold",
                                        "aoa-hold", "agl-hold", "gs1-hold"]);
-
-      var lst = [
-          setlistener("/autopilot/locks/heading",  func { hdg.update(cmdarg().getValue()) }, 1),
-          setlistener("/autopilot/locks/speed",    func { vel.update(cmdarg().getValue()) }, 1),
-          setlistener("/autopilot/locks/altitude", func { alt.update(cmdarg().getValue()) }, 1),
-      ];
     </open>
 
     <close>
-      foreach (var l; lst) {
-          removelistener(l);
-      }
+      hdg.del();
+      vel.del();
+      alt.del();
     </close>
   </nasal>
 

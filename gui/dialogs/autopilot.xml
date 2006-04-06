@@ -23,7 +23,19 @@
 
   <nasal>
     <open>
-      # manage one AP property group with checkbox and radio buttons
+      ## create and initialize input field properties if necessary
+      #
+      var apset = props.globals.getNode("/autopilot/settings", 1);
+      foreach (var p; ["heading-bug-deg", "true-heading-deg", "vertical-speed-fpm",
+                       "target-pitch-deg", "target-aoa-deg", "target-altitude-ft",
+                       "target-agl-ft", "target-speed-kt"]) {
+
+          if ((var n = apset.getNode(p)) == nil or n.getType() == "NONE") {
+              apset.getNode(p, 1).setDoubleValue(0);
+          }
+      }
+
+      ## manage one AP property group with checkbox and radio buttons
       #
       Group = {
           new : func(name, options) {
@@ -48,14 +60,14 @@
               return m;
           },
 
-          # handle checkbox
+          ## handle checkbox
           #
           enable : func {
               me.enabled = me.active.getBoolValue();
               setprop("/autopilot/locks/" ~ me.name, me.enabled ? me.mode : "");
           },
 
-          # handle radiobuttons
+          ## handle radiobuttons
           #
           set : func(mode) {
               me.mode = mode;
@@ -67,7 +79,7 @@
               }
           },
 
-          # update checkboxes/radiobuttons state from the AP (listener callback)
+          ## update checkboxes/radiobuttons state from the AP (listener callback)
           #
           update : func(mode) {
               me.enabled = (mode != "");

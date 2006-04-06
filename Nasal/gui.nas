@@ -78,7 +78,7 @@ INIT = func {
     setlistener("/sim/startup/xsize",
         func { if (fps.getValue()) { fpsDisplay(0); fpsDisplay(1) } });
 }
-settimer(INIT, 0);
+settimer(INIT, 1);
 
 
 ##

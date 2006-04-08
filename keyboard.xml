@@ -163,10 +163,10 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <command>nasal</command>
    <script>
      node = props.globals.getNode("/autopilot/locks/altitude", 1);
-     if ( node.getValue() == "terrain-follow" ) {
+     if ( node.getValue() == "agl-hold" ) {
        node.setValue( "" );
      } else {
-       node.setValue( "terrain-follow" );
+       node.setValue( "agl-hold" );
        agl = props.globals.getNode("/autopilot/settings/target-agl-ft", 1);
        agl.setValue( getprop("/position/altitude-agl-ft") );
      }

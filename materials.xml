@@ -63,9 +63,6 @@ Properties currently used:
   bumpiness: normalized bumpiness factor for this particular terrain.
     (default: 0.0 for a smooth surface).
 
-  xscale: horizontal scaling factor; used for taxi-/runway-signs only
-    (default: 1.0)
-
   glyph: group that defines one letter/digit/symbol in a font texture
     subentries: name, left (default: 0.0), right (default: 1.0)
     (left and right describe the horizontal position in the texture.)
@@ -1420,16 +1417,16 @@ Shared parameters for various materials.
 
 <material>
  <name>YellowSign</name>
- <texture>Signs/Yellow.rgb</texture>
+ <texture>Signs/yellow.rgb</texture>
  <emissive>
-  <r>1.0</r>
-  <g>1.0</g>
-  <b>1.0</b>
+  <r>0.9</r>
+  <g>0.9</g>
+  <b>0.9</b>
   <a>1.0</a>
  </emissive>
- <!-- xscale: 4096/128; xoffset & width: pixel/4096 -->
- <xscale>32</xscale>
- <glyph> <name>|</name>          <left>0.00000</left> <right>0.00293</right> </glyph>
+ <xsize>4096</xsize>
+ <ysize>128</ysize>
+ <glyph> <name>|</name>          <left>0.00000</left> <right>0.00244</right> </glyph>
  <glyph> <name>.</name>          <left>0.00366</left> <right>0.01758</right> </glyph>
  <glyph> <name>_</name>          <left>0.01392</left> <right>0.02148</right> </glyph>
  <glyph> <name>-</name>          <left>0.01758</left> <right>0.03418</right> </glyph>
@@ -1487,19 +1484,22 @@ Shared parameters for various materials.
  <glyph> <name>up-right</name>   <left>0.87573</left> <right>0.89527</right> </glyph>
  <glyph> <name>down-left</name>  <left>0.89527</left> <right>0.91529</right> </glyph>
  <glyph> <name>down-right</name> <left>0.91529</left> <right>0.93457</right> </glyph>
+ <glyph> <name>[</name>          <left>0.94141</left> <right>0.94727</right> </glyph>
+ <glyph> <name>]</name>          <left>0.94922</left> <right>0.95508</right> </glyph>
 </material>
 
 <material>
  <name>RedSign</name>
- <texture>Signs/Red.rgb</texture>
+ <texture>Signs/red.rgb</texture>
  <emissive>
   <r>1.0</r>
   <g>1.0</g>
   <b>1.0</b>
   <a>1.0</a>
  </emissive>
- <xscale>32</xscale>
- <glyph> <name>|</name>          <left>0.00000</left> <right>0.00293</right> </glyph>
+ <xsize>4096</xsize>
+ <ysize>128</ysize>
+ <glyph> <name>|</name>          <left>0.00000</left> <right>0.00244</right> </glyph>
  <glyph> <name>.</name>          <left>0.00366</left> <right>0.01758</right> </glyph>
  <glyph> <name>_</name>          <left>0.01392</left> <right>0.02148</right> </glyph>
  <glyph> <name>-</name>          <left>0.01758</left> <right>0.03418</right> </glyph>
@@ -1562,15 +1562,16 @@ Shared parameters for various materials.
 
 <material>
  <name>BlackSign</name>
- <texture>Signs/Black.rgb</texture>
+ <texture>Signs/black.rgb</texture>
  <emissive>
   <r>1.0</r>
   <g>1.0</g>
   <b>1.0</b>
   <a>1.0</a>
  </emissive>
- <xscale>32</xscale>
- <glyph> <name>|</name>          <left>0.00000</left> <right>0.00293</right> </glyph>
+ <xsize>4096</xsize>
+ <ysize>128</ysize>
+ <glyph> <name>|</name>          <left>0.00000</left> <right>0.00244</right> </glyph>
  <glyph> <name>.</name>          <left>0.00366</left> <right>0.01758</right> </glyph>
  <glyph> <name>_</name>          <left>0.01392</left> <right>0.02148</right> </glyph>
  <glyph> <name>-</name>          <left>0.01758</left> <right>0.03418</right> </glyph>
@@ -1632,15 +1633,16 @@ Shared parameters for various materials.
 
 <material>
  <name>FramedSign</name>
- <texture>Signs/Framed.rgb</texture>
+ <texture>Signs/framed.rgb</texture>
  <emissive>
-  <r>1.0</r>
-  <g>1.0</g>
-  <b>1.0</b>
+  <r>0.9</r>
+  <g>0.9</g>
+  <b>0.9</b>
   <a>1.0</a>
  </emissive>
- <xscale>32</xscale>
- <glyph> <name>|</name>          <left>0.00000</left> <right>0.00293</right> </glyph>
+ <xsize>4096</xsize>
+ <ysize>128</ysize>
+ <glyph> <name>|</name>          <left>0.00000</left> <right>0.00244</right> </glyph>
  <glyph> <name>.</name>          <left>0.00366</left> <right>0.01758</right> </glyph>
  <glyph> <name>_</name>          <left>0.01392</left> <right>0.02148</right> </glyph>
  <glyph> <name>-</name>          <left>0.01758</left> <right>0.03418</right> </glyph>
@@ -1698,8 +1700,8 @@ Shared parameters for various materials.
  <glyph> <name>up-right</name>   <left>0.87573</left> <right>0.89527</right> </glyph>
  <glyph> <name>down-left</name>  <left>0.89527</left> <right>0.91529</right> </glyph>
  <glyph> <name>down-right</name> <left>0.91529</left> <right>0.93457</right> </glyph>
- <glyph> <name>[</name>          <left>0.93994</left> <right>0.95142</right> </glyph>
- <glyph> <name>]</name>          <left>0.94507</left> <right>0.95654</right> </glyph>
+ <glyph> <name>[</name>          <left>0.93994</left> <right>0.94727</right> </glyph>
+ <glyph> <name>]</name>          <left>0.94922</left> <right>0.95654</right> </glyph>
 </material>
 
 </PropertyList>

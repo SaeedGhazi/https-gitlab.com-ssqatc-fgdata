@@ -1426,7 +1426,6 @@ Shared parameters for various materials.
  </emissive>
  <xsize>4096</xsize>
  <ysize>128</ysize>
- <glyph> <name>|</name>          <left>0.00000</left> <right>0.00244</right> </glyph>
  <glyph> <name>.</name>          <left>0.00366</left> <right>0.01758</right> </glyph>
  <glyph> <name>_</name>          <left>0.01392</left> <right>0.02148</right> </glyph>
  <glyph> <name>-</name>          <left>0.01758</left> <right>0.03418</right> </glyph>
@@ -1466,26 +1465,27 @@ Shared parameters for various materials.
  <glyph> <name>7</name>          <left>0.58570</left> <right>0.60254</right> </glyph>
  <glyph> <name>8</name>          <left>0.60254</left> <right>0.61914</right> </glyph>
  <glyph> <name>9</name>          <left>0.61914</left> <right>0.63672</right> </glyph>
- <glyph> <name>a</name>          <left>0.63672</left> <right>0.65137</right> </glyph>
- <glyph> <name>b</name>          <left>0.65137</left> <right>0.65918</right> </glyph>
- <glyph> <name>c</name>          <left>0.65918</left> <right>0.67334</right> </glyph>
- <glyph> <name>d</name>          <left>0.67334</left> <right>0.68726</right> </glyph>
- <glyph> <name>e</name>          <left>0.68726</left> <right>0.70288</right> </glyph>
- <glyph> <name>f</name>          <left>0.70288</left> <right>0.71680</right> </glyph>
- <glyph> <name>g</name>          <left>0.71680</left> <right>0.73120</right> </glyph>
- <glyph> <name>h</name>          <left>0.73120</left> <right>0.74634</right> </glyph>
- <glyph> <name>i</name>          <left>0.74634</left> <right>0.76001</right> </glyph>
- <glyph> <name>j</name>          <left>0.76001</left> <right>0.77441</right> </glyph>
+ <glyph> <name>t0</name>         <left>0.63672</left> <right>0.65137</right> </glyph>
+ <glyph> <name>t1</name>         <left>0.65137</left> <right>0.65918</right> </glyph>
+ <glyph> <name>t2</name>         <left>0.65918</left> <right>0.67334</right> </glyph>
+ <glyph> <name>t3</name>         <left>0.67334</left> <right>0.68726</right> </glyph>
+ <glyph> <name>t4</name>         <left>0.68726</left> <right>0.70288</right> </glyph>
+ <glyph> <name>t5</name>         <left>0.70288</left> <right>0.71680</right> </glyph>
+ <glyph> <name>t6</name>         <left>0.71680</left> <right>0.73120</right> </glyph>
+ <glyph> <name>t7</name>         <left>0.73120</left> <right>0.74634</right> </glyph>
+ <glyph> <name>t8</name>         <left>0.74634</left> <right>0.76001</right> </glyph>
+ <glyph> <name>t9</name>         <left>0.76001</left> <right>0.77441</right> </glyph>
  <glyph> <name>up</name>         <left>0.77441</left> <right>0.79200</right> </glyph>
  <glyph> <name>down</name>       <left>0.79200</left> <right>0.81006</right> </glyph>
  <glyph> <name>left</name>       <left>0.81006</left> <right>0.83276</right> </glyph>
  <glyph> <name>right</name>      <left>0.83276</left> <right>0.85571</right> </glyph>
- <glyph> <name>up-left</name>    <left>0.85571</left> <right>0.87573</right> </glyph>
- <glyph> <name>up-right</name>   <left>0.87573</left> <right>0.89527</right> </glyph>
- <glyph> <name>down-left</name>  <left>0.89527</left> <right>0.91529</right> </glyph>
- <glyph> <name>down-right</name> <left>0.91529</left> <right>0.93457</right> </glyph>
- <glyph> <name>[</name>          <left>0.94141</left> <right>0.94727</right> </glyph>
- <glyph> <name>]</name>          <left>0.94922</left> <right>0.95508</right> </glyph>
+ <glyph> <name>left-up</name>    <left>0.85571</left> <right>0.87573</right> </glyph>
+ <glyph> <name>right-up</name>   <left>0.87573</left> <right>0.89527</right> </glyph>
+ <glyph> <name>left-down</name>  <left>0.89527</left> <right>0.91529</right> </glyph>
+ <glyph> <name>right-down</name> <left>0.91529</left> <right>0.93457</right> </glyph>
+ <glyph> <name>|</name>          <left>0.97974</left> <right>0.98926</right> </glyph>
+ <glyph> <name>start-frame</name><left>0.98462</left> <right>0.98926</right> </glyph>
+ <glyph> <name>stop-frame</name> <left>0.99390</left> <right>0.99854</right> </glyph>
 </material>
 
 <material>
@@ -1539,25 +1539,27 @@ Shared parameters for various materials.
  <glyph> <name>7</name>          <left>0.58570</left> <right>0.60254</right> </glyph>
  <glyph> <name>8</name>          <left>0.60254</left> <right>0.61914</right> </glyph>
  <glyph> <name>9</name>          <left>0.61914</left> <right>0.63672</right> </glyph>
- <glyph> <name>a</name>          <left>0.63672</left> <right>0.65137</right> </glyph>
- <glyph> <name>b</name>          <left>0.65137</left> <right>0.65918</right> </glyph>
- <glyph> <name>c</name>          <left>0.65918</left> <right>0.67334</right> </glyph>
- <glyph> <name>d</name>          <left>0.67334</left> <right>0.68726</right> </glyph>
- <glyph> <name>e</name>          <left>0.68726</left> <right>0.70288</right> </glyph>
- <glyph> <name>f</name>          <left>0.70288</left> <right>0.71680</right> </glyph>
- <glyph> <name>g</name>          <left>0.71680</left> <right>0.73120</right> </glyph>
- <glyph> <name>h</name>          <left>0.73120</left> <right>0.74634</right> </glyph>
- <glyph> <name>i</name>          <left>0.74634</left> <right>0.76001</right> </glyph>
- <glyph> <name>j</name>          <left>0.76001</left> <right>0.77441</right> </glyph>
+ <glyph> <name>t0</name>         <left>0.63672</left> <right>0.65137</right> </glyph>
+ <glyph> <name>t1</name>         <left>0.65137</left> <right>0.65918</right> </glyph>
+ <glyph> <name>t2</name>         <left>0.65918</left> <right>0.67334</right> </glyph>
+ <glyph> <name>t3</name>         <left>0.67334</left> <right>0.68726</right> </glyph>
+ <glyph> <name>t4</name>         <left>0.68726</left> <right>0.70288</right> </glyph>
+ <glyph> <name>t5</name>         <left>0.70288</left> <right>0.71680</right> </glyph>
+ <glyph> <name>t6</name>         <left>0.71680</left> <right>0.73120</right> </glyph>
+ <glyph> <name>t7</name>         <left>0.73120</left> <right>0.74634</right> </glyph>
+ <glyph> <name>t8</name>         <left>0.74634</left> <right>0.76001</right> </glyph>
+ <glyph> <name>t9</name>         <left>0.76001</left> <right>0.77441</right> </glyph>
  <glyph> <name>up</name>         <left>0.77441</left> <right>0.79200</right> </glyph>
  <glyph> <name>down</name>       <left>0.79200</left> <right>0.81006</right> </glyph>
  <glyph> <name>left</name>       <left>0.81006</left> <right>0.83276</right> </glyph>
  <glyph> <name>right</name>      <left>0.83276</left> <right>0.85571</right> </glyph>
- <glyph> <name>up-left</name>    <left>0.85571</left> <right>0.87573</right> </glyph>
- <glyph> <name>up-right</name>   <left>0.87573</left> <right>0.89527</right> </glyph>
- <glyph> <name>down-left</name>  <left>0.89527</left> <right>0.91529</right> </glyph>
- <glyph> <name>down-right</name> <left>0.91529</left> <right>0.93457</right> </glyph>
- <glyph> <name>no-exit</name>    <left>0.93921</left> <right>0.96924</right> </glyph>
+ <glyph> <name>left-up</name>    <left>0.85571</left> <right>0.87573</right> </glyph>
+ <glyph> <name>right-up</name>   <left>0.87573</left> <right>0.89527</right> </glyph>
+ <glyph> <name>left-down</name>  <left>0.89527</left> <right>0.91529</right> </glyph>
+ <glyph> <name>right-down</name> <left>0.91529</left> <right>0.93457</right> </glyph>
+ <glyph> <name>no-exit</name>    <left>0.93872</left> <right>0.96997</right> </glyph>
+ <glyph> <name>start-frame</name><left>0.98462</left> <right>0.98926</right> </glyph>
+ <glyph> <name>stop-frame</name> <left>0.99390</left> <right>0.99854</right> </glyph>
 </material>
 
 <material>
@@ -1601,34 +1603,36 @@ Shared parameters for various materials.
  <glyph> <name>X</name>          <left>0.41968</left> <right>0.43628</right> </glyph>
  <glyph> <name>Y</name>          <left>0.43628</left> <right>0.45752</right> </glyph>
  <glyph> <name>Z</name>          <left>0.45752</left> <right>0.47412</right> </glyph>
- <glyph> <name>0</name>          <left>0.47412</left> <right>0.49097</right> </glyph>
- <glyph> <name>1</name>          <left>0.49097</left> <right>0.50024</right> </glyph>
- <glyph> <name>2</name>          <left>0.50024</left> <right>0.51709</right> </glyph>
- <glyph> <name>3</name>          <left>0.51709</left> <right>0.53370</right> </glyph>
- <glyph> <name>4</name>          <left>0.53370</left> <right>0.55176</right> </glyph>
- <glyph> <name>5</name>          <left>0.55176</left> <right>0.56860</right> </glyph>
- <glyph> <name>6</name>          <left>0.56860</left> <right>0.58570</right> </glyph>
- <glyph> <name>7</name>          <left>0.58570</left> <right>0.60254</right> </glyph>
- <glyph> <name>8</name>          <left>0.60254</left> <right>0.61914</right> </glyph>
- <glyph> <name>9</name>          <left>0.61914</left> <right>0.63672</right> </glyph>
- <glyph> <name>a</name>          <left>0.63672</left> <right>0.65137</right> </glyph>
- <glyph> <name>b</name>          <left>0.65137</left> <right>0.65918</right> </glyph>
- <glyph> <name>c</name>          <left>0.65918</left> <right>0.67334</right> </glyph>
- <glyph> <name>d</name>          <left>0.67334</left> <right>0.68726</right> </glyph>
- <glyph> <name>e</name>          <left>0.68726</left> <right>0.70288</right> </glyph>
- <glyph> <name>f</name>          <left>0.70288</left> <right>0.71680</right> </glyph>
- <glyph> <name>g</name>          <left>0.71680</left> <right>0.73120</right> </glyph>
- <glyph> <name>h</name>          <left>0.73120</left> <right>0.74634</right> </glyph>
- <glyph> <name>i</name>          <left>0.74634</left> <right>0.76001</right> </glyph>
- <glyph> <name>j</name>          <left>0.76001</left> <right>0.77441</right> </glyph>
+ <glyph> <name>n0</name>         <left>0.47412</left> <right>0.49097</right> </glyph>
+ <glyph> <name>n1</name>         <left>0.49097</left> <right>0.50024</right> </glyph>
+ <glyph> <name>n2</name>         <left>0.50024</left> <right>0.51709</right> </glyph>
+ <glyph> <name>n3</name>         <left>0.51709</left> <right>0.53370</right> </glyph>
+ <glyph> <name>n4</name>         <left>0.53370</left> <right>0.55176</right> </glyph>
+ <glyph> <name>n5</name>         <left>0.55176</left> <right>0.56860</right> </glyph>
+ <glyph> <name>n6</name>         <left>0.56860</left> <right>0.58570</right> </glyph>
+ <glyph> <name>n7</name>         <left>0.58570</left> <right>0.60254</right> </glyph>
+ <glyph> <name>n8</name>         <left>0.60254</left> <right>0.61914</right> </glyph>
+ <glyph> <name>n9</name>         <left>0.61914</left> <right>0.63672</right> </glyph>
+ <glyph> <name>0</name>          <left>0.63672</left> <right>0.65137</right> </glyph>
+ <glyph> <name>1</name>          <left>0.65137</left> <right>0.65918</right> </glyph>
+ <glyph> <name>2</name>          <left>0.65918</left> <right>0.67334</right> </glyph>
+ <glyph> <name>3</name>          <left>0.67334</left> <right>0.68726</right> </glyph>
+ <glyph> <name>4</name>          <left>0.68726</left> <right>0.70288</right> </glyph>
+ <glyph> <name>5</name>          <left>0.70288</left> <right>0.71680</right> </glyph>
+ <glyph> <name>6</name>          <left>0.71680</left> <right>0.73120</right> </glyph>
+ <glyph> <name>7</name>          <left>0.73120</left> <right>0.74634</right> </glyph>
+ <glyph> <name>8</name>          <left>0.74634</left> <right>0.76001</right> </glyph>
+ <glyph> <name>9</name>          <left>0.76001</left> <right>0.77441</right> </glyph>
  <glyph> <name>up</name>         <left>0.77441</left> <right>0.79200</right> </glyph>
  <glyph> <name>down</name>       <left>0.79200</left> <right>0.81006</right> </glyph>
  <glyph> <name>left</name>       <left>0.81006</left> <right>0.83276</right> </glyph>
  <glyph> <name>right</name>      <left>0.83276</left> <right>0.85571</right> </glyph>
- <glyph> <name>up-left</name>    <left>0.85571</left> <right>0.87573</right> </glyph>
- <glyph> <name>up-right</name>   <left>0.87573</left> <right>0.89527</right> </glyph>
- <glyph> <name>down-left</name>  <left>0.89527</left> <right>0.91529</right> </glyph>
- <glyph> <name>down-right</name> <left>0.91529</left> <right>0.93457</right> </glyph>
+ <glyph> <name>left-up</name>    <left>0.85571</left> <right>0.87573</right> </glyph>
+ <glyph> <name>right-up</name>   <left>0.87573</left> <right>0.89527</right> </glyph>
+ <glyph> <name>left-down</name>  <left>0.89527</left> <right>0.91529</right> </glyph>
+ <glyph> <name>right-down</name> <left>0.91529</left> <right>0.93457</right> </glyph>
+ <glyph> <name>start-frame</name><left>0.98462</left> <right>0.98926</right> </glyph>
+ <glyph> <name>stop-frame</name> <left>0.99390</left> <right>0.99854</right> </glyph>
 </material>
 
 <material>
@@ -1682,26 +1686,26 @@ Shared parameters for various materials.
  <glyph> <name>7</name>          <left>0.58570</left> <right>0.60254</right> </glyph>
  <glyph> <name>8</name>          <left>0.60254</left> <right>0.61914</right> </glyph>
  <glyph> <name>9</name>          <left>0.61914</left> <right>0.63672</right> </glyph>
- <glyph> <name>a</name>          <left>0.63672</left> <right>0.65137</right> </glyph>
- <glyph> <name>b</name>          <left>0.65137</left> <right>0.65918</right> </glyph>
- <glyph> <name>c</name>          <left>0.65918</left> <right>0.67334</right> </glyph>
- <glyph> <name>d</name>          <left>0.67334</left> <right>0.68726</right> </glyph>
- <glyph> <name>e</name>          <left>0.68726</left> <right>0.70288</right> </glyph>
- <glyph> <name>f</name>          <left>0.70288</left> <right>0.71680</right> </glyph>
- <glyph> <name>g</name>          <left>0.71680</left> <right>0.73120</right> </glyph>
- <glyph> <name>h</name>          <left>0.73120</left> <right>0.74634</right> </glyph>
- <glyph> <name>i</name>          <left>0.74634</left> <right>0.76001</right> </glyph>
- <glyph> <name>j</name>          <left>0.76001</left> <right>0.77441</right> </glyph>
+ <glyph> <name>t0</name>         <left>0.63672</left> <right>0.65137</right> </glyph>
+ <glyph> <name>t1</name>         <left>0.65137</left> <right>0.65918</right> </glyph>
+ <glyph> <name>t2</name>         <left>0.65918</left> <right>0.67334</right> </glyph>
+ <glyph> <name>t3</name>         <left>0.67334</left> <right>0.68726</right> </glyph>
+ <glyph> <name>t4</name>         <left>0.68726</left> <right>0.70288</right> </glyph>
+ <glyph> <name>t5</name>         <left>0.70288</left> <right>0.71680</right> </glyph>
+ <glyph> <name>t6</name>         <left>0.71680</left> <right>0.73120</right> </glyph>
+ <glyph> <name>t7</name>         <left>0.73120</left> <right>0.74634</right> </glyph>
+ <glyph> <name>t8</name>         <left>0.74634</left> <right>0.76001</right> </glyph>
+ <glyph> <name>t9</name>         <left>0.76001</left> <right>0.77441</right> </glyph>
  <glyph> <name>up</name>         <left>0.77441</left> <right>0.79200</right> </glyph>
  <glyph> <name>down</name>       <left>0.79200</left> <right>0.81006</right> </glyph>
  <glyph> <name>left</name>       <left>0.81006</left> <right>0.83276</right> </glyph>
  <glyph> <name>right</name>      <left>0.83276</left> <right>0.85571</right> </glyph>
- <glyph> <name>up-left</name>    <left>0.85571</left> <right>0.87573</right> </glyph>
- <glyph> <name>up-right</name>   <left>0.87573</left> <right>0.89527</right> </glyph>
- <glyph> <name>down-left</name>  <left>0.89527</left> <right>0.91529</right> </glyph>
- <glyph> <name>down-right</name> <left>0.91529</left> <right>0.93457</right> </glyph>
- <glyph> <name>[</name>          <left>0.93994</left> <right>0.94727</right> </glyph>
- <glyph> <name>]</name>          <left>0.94922</left> <right>0.95654</right> </glyph>
+ <glyph> <name>left-up</name>    <left>0.85571</left> <right>0.87573</right> </glyph>
+ <glyph> <name>right-up</name>   <left>0.87573</left> <right>0.89527</right> </glyph>
+ <glyph> <name>left-down</name>  <left>0.89527</left> <right>0.91529</right> </glyph>
+ <glyph> <name>right-down</name> <left>0.91529</left> <right>0.93457</right> </glyph>
+ <glyph> <name>start-frame</name><left>0.98462</left> <right>0.98926</right> </glyph>
+ <glyph> <name>stop-frame</name> <left>0.99390</left> <right>0.99854</right> </glyph>
 </material>
 
 </PropertyList>

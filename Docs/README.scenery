@@ -1,5 +1,7 @@
 This file describes how FlightGear searches and loads scenery, and how to
 add static objects to the scenery as well as the syntax of *.stg files.
+It does *not* describe how to generate terrain. For that see
+http://www.terragear.org/.
 
 
 
@@ -24,7 +26,7 @@ Contents ----------------------------------------------------------------------
 
 5  tools for object placing
    5.1  calc-tile.pl
-   5.2  ufo model editor
+   5.2  ufo scenery object editor
 
 
 
@@ -210,7 +212,7 @@ The <object-path> is relative to the data directory (FG_ROOT).
 that this differs from about every other place in FlightGear, most notably
 the /position/heading-deg entry in the property system, which is clockwise.
 OBJECT_SHARED models are cached and reused. They are only once in memory
-and never freed. (See also the next section 3.4.)
+and never freed. (See also the next section.)
 
 
 
@@ -242,7 +244,7 @@ Example:
 3.5 OBJECT_TAXI_SIGN
 --------------------
 
-define taxiway or runway signs. The syntax is like that of OBJECT_STATIC
+defines taxiway or runway sign. The syntax is like that of OBJECT_SHARED
 entries, except that the path is replaced with a sign contents specification.
 
 Example:
@@ -308,7 +310,7 @@ The following abbreviations are available -- all expand to arrow symbols:
 
 
 
-The following commands are available, for (A) sign properties:
+The following commands are available -- for sign properties:
 
   @size=2.3        set sign height to 2.3m (width is derived from that
                                             and not separately settable)
@@ -322,7 +324,7 @@ The following commands are available, for (A) sign properties:
 
 
 
-and commands for (B) pre-defined sign types according to the FAA
+and commands for pre-defined sign types according to the FAA
 specification (5345-44; see http://www.google.com/search?q=5345-44g).
 
   @Y @Y1 @Y2 @Y3   "Direction, Destination, Boundary" sign (black on yellow)
@@ -332,17 +334,16 @@ specification (5345-44; see http://www.google.com/search?q=5345-44g).
 
 The number versions define the panel heights according to the spec. If
 the number is omitted, then a default size is used (@Y3, @R3, @L3, @B4). If
-such a pre-defined sign type is used, then fgfs takes (more or less)
-care of opening and closing frames, and of inserting the proper spaces.
-(You can avoid this automatism by setting the sign properties yourself,
-using @size and @material.
+such a pre-defined sign type is used, then fgfs takes care of opening and
+closing frames, and of inserting the proper spaces. (You can avoid this
+automatism by setting the sign properties yourself, using @size and @material.
 
 Examples:
 
   {@R}10L-28R{@L}C
   {@Y,@l}P|{@ul}N{@L}F{@Y}F{@ur}
   {@Y}{@dl}C   ...  same as any of {@Y,@dl}C  {@Y,@dl,C}  {@Y,left-down,C}
-  {@B}70
+  {@B}17
   {@material=RedSign,@size=1.6,no-exit}
 
 
@@ -428,6 +429,7 @@ Any of the model properties can be made changeable at runtime by appending
           <latitude-deg-prop>/local/pony/latitude-deg</latitude-deg-prop>
           <elevation-ft-prop>/local/pony/elevation-ft</elevation-ft-prop>
           <heading-deg-prop>/local/pony/heading-deg</heading-deg-prop>
+          <pitch-deg>1.234</pitch-deg>  <!-- static, just for fun -->
       </model>
   </models>
 
@@ -474,13 +476,13 @@ You feed longitude and latitude to it and it returns the path to the
 
 
 
-5.2 ufo model editor
---------------------
+5.2 ufo scenery object editor
+-----------------------------
 
-The ufo can be used to place objects in the scenery. It uses the model manager
-described in section 4. To use it, start fgfs, optionally with specifying
-an initial model type (cursor) and a list of subdirectories of $FG_ROOT where
-the ufo should search for available 3D models (source):
+The ufo has a scenery object editor built-in. It uses the model manager
+described in section 4. To place objects with it, start fgfs, optionally
+with specifying an initial model type (cursor) and a list of subdirectories
+of $FG_ROOT where the ufo should search for available 3D models (source):
 
   $ fgfs --aircraft=ufo --prop:cursor=Models/Airport/radar.xml  \
                         --prop:source=Models,Scenery/Objects
@@ -491,7 +493,8 @@ position and orientation. Click as often as you like, choose further
 models from the m-key dialog. You can select an already placed object
 by clicking at its base (not the object itself, but the surface point
 where it's located!) while holding the space-bar down. You can remove the
-selected object with the Backspace-key.
+selected object with the Backspace-key. (See the ?-key dialog for futher
+available keys.)
 
 And finally, you dump the object data to the terminal (d-key) or export
 them to a file $HOME/.fgfs/ufo-model-export.xml (Unix) or
@@ -503,7 +506,7 @@ under the /models node in your XML config:
 
   <models include="ufo-model-export.xml"/>
 
-Path relative to the path where your XML config resides. Unfortunately,
+The path is relative to the path where your XML config resides. Unfortunately,
 this does currently not add shadows, and the models stay in memory, no
 matter where you are actually flying, so the *.stg method is preferred.
 

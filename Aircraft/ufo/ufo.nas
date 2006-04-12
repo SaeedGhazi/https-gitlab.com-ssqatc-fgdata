@@ -111,7 +111,7 @@ search = func(list, which) {
 			return -1;
 		} elsif (c > 0) {
 			right = middle;
-		} elsif (c < 0) {
+		} else {
 			left = middle;
 		}
 	}
@@ -679,6 +679,7 @@ scanDirs = func(csv) {
 			append(list, m);
 		}
 	}
+	append(list, "Aircraft/ufo/Models/sign.ac");
 	return sort(list);
 }
 

@@ -402,12 +402,10 @@ Model = {
 		var elev = node.getNode("elevation-ft").getValue();
 		var hdg = node.getNode("heading-deg").getValue();
 
-		var type = "OBJECT_" ~ ((path != nil and split("/", path)[0] == "Models")
-				? "SHARED" : "STATIC");
 		var stg_hdg = normdeg(360 - hdg);
 		var stg_path = tile_path(lon, lat);
 		var abs_path = getprop("/sim/fg-root") ~ "/" ~ path;
-		var obj_line = sprintf("%s %s %.8f %.8f %.4f %.1f", type, path, lon, lat,
+		var obj_line = sprintf("OBJECT_SHARED %s %.8f %.8f %.4f %.1f", path, lon, lat,
 				ft2m(elev), stg_hdg);
 
 		node.getNode("absolute-path", 1).setValue(abs_path);

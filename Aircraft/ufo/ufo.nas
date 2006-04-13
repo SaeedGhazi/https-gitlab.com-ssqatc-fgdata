@@ -515,6 +515,7 @@ ModelMgr = {
 		m.dynamic = nil;
 		m.static = [];
 		m.block = 0;
+		m.import();
 		return m;
 	},
 	click : func {
@@ -632,6 +633,22 @@ ModelMgr = {
 			me.dynamic.del();
 			me.dynamic = st.make_dynamic();
 		}
+	},
+	import : func {
+		var models = props.globals.getNode("models", 1);
+		var tmp = props.Node.new();
+		props.copy(models, tmp);
+		models.removeChildren("model");
+		foreach (var m; tmp.getChildren("model")) {
+			append(me.static, Static.new(m.getNode("path").getValue(),
+					m.getNode("longitude-deg", 1).getValue(),
+					m.getNode("latitude-deg", 1).getValue(),
+					m.getNode("elevation-ft", 1).getValue(),
+					m.getNode("heading-deg", 1).getValue(),
+					m.getNode("pitch-deg", 1).getValue(),
+					m.getNode("roll-deg", 1).getValue()));
+		}
+		me.select();
 	},
 };
 
@@ -772,7 +789,7 @@ exportData = func {
 	}
 	var tmp = "save-ufo-data";
 	save = props.globals.getNode(tmp, 1);
-	props.copy(modelmgr.get_data(), save);
+	props.copy(modelmgr.get_data(), save.getNode("models", 1));
 	var path = getprop("/sim/fg-home") ~ "/ufo-model-export.xml";
 	savexml(path, save.getPath());
 	print("model data exported to ", path);

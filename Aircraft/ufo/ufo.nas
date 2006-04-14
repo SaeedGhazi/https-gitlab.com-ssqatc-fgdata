@@ -312,6 +312,7 @@ Adjust = {
 		m.stk_orientN = m.node.getNode("sticky-orientation", 1);
 		m.stk_hdgN.setBoolValue(0);
 		m.stk_orientN.setBoolValue(0);
+		m.legendN = m.node.getNode("legend", 1);
 		return m;
 	},
 	del : func {
@@ -331,7 +332,8 @@ Adjust = {
 	set : func(which, value) {
 		me.val[which].set(value);
 	},
-	setall : func(lon, lat, elev, hdg = nil, pitch = nil, roll = nil) {
+	setall : func(legend, lon, lat, elev, hdg = nil, pitch = nil, roll = nil) {
+		me.legendN.setValue(legend);
 		me.val["lon"].set(lon);
 		me.val["lat"].set(lat);
 		me.val["elev"].set(elev);
@@ -388,6 +390,7 @@ Model = {
 		}
 		m.path = path;
 		m.node.getNode("path", 1).setValue(m.path);
+		m.legend = nil;
 		return m;
 	},
 	# signal modelmgr.cxx to load model
@@ -401,14 +404,29 @@ Model = {
 		var lat = node.getNode("latitude-deg").getValue();
 		var elev = node.getNode("elevation-ft").getValue();
 		var hdg = node.getNode("heading-deg").getValue();
+		var type = nil;
+		var spec = "";
+
+		if (path == "Aircraft/ufo/Models/sign.ac") {
+			type = "OBJECT_SIGN";
+			var legend = me.legend != "" ? me.legend :
+					"{@size=10,@material=RedSign}NO_CONTENTS_" ~ int(10000 * rand());
+			foreach (var c; split('', legend)) {
+				spec ~= c == ' ' ? '_' : c;
+			}
+		} else {
+			type = "OBJECT_SHARED";
+			spec = path;
+		}
 
 		var stg_hdg = normdeg(360 - hdg);
 		var stg_path = tile_path(lon, lat);
 		var abs_path = getprop("/sim/fg-root") ~ "/" ~ path;
-		var obj_line = sprintf("OBJECT_SHARED %s %.8f %.8f %.4f %.1f", path, lon, lat,
+		var obj_line = sprintf("%s %s %.8f %.8f %.4f %.1f", type, spec, lon, lat,
 				ft2m(elev), stg_hdg);
 
 		node.getNode("absolute-path", 1).setValue(abs_path);
+		node.getNode("legend", 1).setValue(me.legend);
 		node.getNode("stg-path", 1).setValue(stg_path);
 		node.getNode("stg-heading-deg", 1).setDoubleValue(stg_hdg);
 		node.getNode("object-line", 1).setValue(obj_line)
@@ -417,7 +435,7 @@ Model = {
 
 
 Static = {
-	new : func(path, lon, lat, elev, hdg, pitch, roll) {
+	new : func(path, legend, lon, lat, elev, hdg, pitch, roll) {
 		var m = Model.new(path);
 		m.parents = [Static, Model];
 
@@ -427,6 +445,7 @@ Static = {
 		m.node.getNode("heading-deg", 1).setDoubleValue(m.hdg = hdg);
 		m.node.getNode("pitch-deg", 1).setDoubleValue(m.pitch = pitch);
 		m.node.getNode("roll-deg", 1).setDoubleValue(m.roll = roll);
+		m.legend = legend;
 		m.load();
 		return m;
 	},
@@ -449,11 +468,11 @@ Static = {
 
 
 Dynamic = {
-	new : func(path, lon, lat, elev, hdg = nil, pitch = nil, roll = nil) {
+	new : func(path, legend, lon, lat, elev, hdg = nil, pitch = nil, roll = nil) {
 		var m = Model.new(path);
 		m.parents = [Dynamic, Model];
 
-		adjust.setall(lon, lat, elev, hdg, pitch, roll);
+		adjust.setall(legend, lon, lat, elev, hdg, pitch, roll);
 		m.node.getNode("longitude-deg-prop", 1).setValue(adjust.outNode("lon").getPath());
 		m.node.getNode("latitude-deg-prop", 1).setValue(adjust.outNode("lat").getPath());
 		m.node.getNode("elevation-ft-prop", 1).setValue(adjust.outNode("elev").getPath());
@@ -470,7 +489,7 @@ Dynamic = {
 		}
 	},
 	make_static : func {
-		var static = Static.new(me.path,
+		var static = Static.new(me.path, adjust.legendN.getValue(),
 				adjust.get("lon"), adjust.get("lat"), adjust.get("elev"),
 				adjust.get("hdg"), adjust.get("pitch"), adjust.get("roll"));
 		me.del();
@@ -485,6 +504,7 @@ Dynamic = {
 		var n = props.Node.new();
 		n.getNode("path", 1).setValue(me.path);
 		props.copy(props.globals.getNode("/data/adjust"), n);
+		me.legend = adjust.legendN.getValue();
 		me.add_derived_props(n);
 		return n;
 	},
@@ -493,7 +513,7 @@ Dynamic = {
 
 Static.make_dynamic = func {
 	me.del();
-	return Dynamic.new(me.path, me.lon, me.lat, me.elev, me.hdg, me.pitch, me.roll);
+	return Dynamic.new(me.path, me.legend, me.lon, me.lat, me.elev, me.hdg, me.pitch, me.roll);
 };
 
 
@@ -532,7 +552,7 @@ ModelMgr = {
 		if (me.dynamic != nil) {
 			append(me.static, me.dynamic.make_static());
 		}
-		me.dynamic = Dynamic.new(me.modelpath, me.lonN.getValue(), me.latN.getValue(),
+		me.dynamic = Dynamic.new(me.modelpath, "", me.lonN.getValue(), me.latN.getValue(),
 				me.elevN.getValue());
 		# refresh status line to reset display timer
 		me.display_status(me.modelpath);
@@ -601,13 +621,9 @@ ModelMgr = {
 		me.display_status(path);
 	},
 	display_status : func(p, m = 0) {
-		var c = [
-			[0.6, 1, 0.6, 1],
-			[1.0, 0.6, 0.0, 1.0],
-		];
 		var count = me.dynamic != nil;
 		count += size(me.static);
-		display.write("(" ~ count ~ ")  " ~ p, c[m][0], c[m][1], c[m][2], c[m][3]);
+		setprop("/sim/model/ufo/status", "(" ~ count ~ ")  " ~ p);
 	},
 	get_data : func {
 		var n = props.Node.new();
@@ -641,6 +657,7 @@ ModelMgr = {
 		models.removeChildren("model");
 		foreach (var m; tmp.getChildren("model")) {
 			append(me.static, Static.new(m.getNode("path").getValue(),
+					m.getNode("legend", 1).getValue(),
 					m.getNode("longitude-deg", 1).getValue(),
 					m.getNode("latitude-deg", 1).getValue(),
 					m.getNode("elevation-ft", 1).getValue(),
@@ -805,22 +822,18 @@ removeSelectedModel = func { modelmgr.remove_selected() }
 
 # init --------------------------------------------------------------------------------------------
 
-var display = nil;
 var modellist = nil;
 var adjust = nil;
 var modelmgr = nil;
 
 
 settimer(func {
-	display = screen.window.new(8, 8, 1, 180);
-	display.font = "HELVETICA_12";
-	display.halign = "left";
-
 	modellist = scanDirs(getprop("/source"));
 	adjust = Adjust.new("/data");
 	modelmgr = ModelMgr.new(getprop("/cursor"));
 	setlistener("/sim/signals/click", func { modelmgr.click() });
 	#setlistener("/sim/signals/click", printDistance);
+	showStatusDialog();
 }, 1);
 
 
@@ -1038,6 +1051,50 @@ showModelAdjustDialog = func {
 	w.set("pref-width", wide);
 	w.prop().getNode("binding[0]/command", 1).setValue("nasal");
 	w.prop().getNode("binding[0]/script", 1).setValue("ufo.adjust.upright()");
+
+	fgcommand("dialog-new", dialog[name].prop());
+	gui.showDialog(name);
+}
+
+
+showStatusDialog = func {
+	name = "ufo-status-dialog";
+
+	if (contains(dialog, name)) {
+		closeModelSelectDialog();
+		return;
+	}
+
+	dialog[name] = gui.Widget.new();
+	dialog[name].set("layout", "vbox");
+	dialog[name].set("name", name);
+	dialog[name].set("x", 8);
+	dialog[name].set("y", 8);
+	dialog[name].set("pref-width", 300);
+	dialog[name].set("default-padding", 0);
+	dialog[name].setColor(0, 0, 0, 0);
+	dialog[name].setFont("HELVETICA_12");
+
+	# legend input field
+	w = dialog[name].addChild("input");
+	w.set("halign", "left");
+	w.set("pref-width", 300);
+	w.set("live", 1);
+	w.set("property", adjust.legendN.getPath());
+	w.setColor(0, 0, 0, 0);
+	w.prop().setValues({"color-legend": {red:1, green:1, blue:1, alpha:1}});
+	w.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
+
+	# current object
+	g = dialog[name].addChild("group");
+	g.set("layout", "vbox");
+	g.set("default-padding", 2);
+	w = g.addChild("text");
+	w.set("pref-width", 0);
+	w.set("halign", "left");
+	w.set("property", "/sim/model/ufo/status");
+	w.set("live", 1);
+	w.setColor(0.6, 1, 0.6, 1);
 
 	fgcommand("dialog-new", dialog[name].prop());
 	gui.showDialog(name);

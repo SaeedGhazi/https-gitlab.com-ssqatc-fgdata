@@ -480,6 +480,9 @@ Dynamic = {
 		m.node.getNode("pitch-deg-prop", 1).setValue(adjust.outNode("pitch").getPath());
 		m.node.getNode("roll-deg-prop", 1).setValue(adjust.outNode("roll").getPath());
 		m.load();
+		m.flash_count = 0;
+		m.visible = 1;
+		m.on_flash_exit_func = func {};
 		return m;
 	},
 	del : func {
@@ -489,11 +492,11 @@ Dynamic = {
 		}
 	},
 	make_static : func {
-		var static = Static.new(me.path, adjust.legendN.getValue(),
+		me.del();
+		me.flash(0);
+		return Static.new(me.path, adjust.legendN.getValue(),
 				adjust.get("lon"), adjust.get("lat"), adjust.get("elev"),
 				adjust.get("hdg"), adjust.get("pitch"), adjust.get("roll"));
-		me.del();
-		return static;
 	},
 	distance_from : func(xyz) {
 		var lon = adjust.get("lon");
@@ -501,12 +504,35 @@ Dynamic = {
 		return coord_dist_sq(xyz, lonlat2xyz([lon, lat]));
 	},
 	get_data : func {
+		me.flash(0);
 		var n = props.Node.new();
 		n.getNode("path", 1).setValue(me.path);
 		props.copy(props.globals.getNode("/data/adjust"), n);
 		me.legend = adjust.legendN.getValue();
 		me.add_derived_props(n);
 		return n;
+	},
+	flash : func(v, fun = nil) {
+		me.flash_count = v;
+		if (fun != nil) {
+			me.on_flash_exit_func = fun;
+		}
+		me._flash_();
+	},
+	_flash_ : func {
+		if (!me.visible) {
+			adjust.set("elev", adjust.get("elev") + 10000);
+			me.visible = 1;
+		} elsif (me.flash_count) {
+			adjust.set("elev", adjust.get("elev") - 10000);
+			me.visible = 0;
+		}
+		if (me.flash_count) {
+			me.flash_count -= 1;
+			settimer(func { me._flash_() }, 0.3);
+		} else {
+			me.on_flash_exit_func();
+		}
 	},
 };
 
@@ -590,21 +616,10 @@ ModelMgr = {
 				me.static = left;
 			}
 		}
-		if (me.dynamic == nil) {	# last one removed
-			return;
+		if (me.dynamic != nil) {	# last one removed
+			me.dynamic.flash(4);
 		}
-		me.flash();
-	},
-	flash : func {
-		me.block = 1;
-		var t = 0.33;
-		me.display_status(me.dynamic.path, 1);
-		settimer(func { adjust.set("elev", adjust.get("elev") - 10000) }, t);
-		settimer(func { adjust.set("elev", adjust.get("elev") + 10000) }, t * 2);
-		settimer(func { adjust.set("elev", adjust.get("elev") - 10000) }, t * 3);
-		settimer(func { adjust.set("elev", adjust.get("elev") + 10000) }, t * 4);
-		settimer(func { me.block = 0 }, t * 4.5);
-		settimer(func { me.display_status(me.modelpath) }, 5);
+		me.display_status(me.modelpath);
 	},
 	remove_selected : func {
 		if (me.block) {
@@ -620,9 +635,8 @@ ModelMgr = {
 		me.modelpath = path;
 		me.display_status(path);
 	},
-	display_status : func(p, m = 0) {
-		var count = me.dynamic != nil;
-		count += size(me.static);
+	display_status : func(p) {
+		var count = (me.dynamic == nil ? 0 : 1) + size(me.static);
 		setprop("/sim/model/ufo/status", "(" ~ count ~ ")  " ~ p);
 	},
 	get_data : func {

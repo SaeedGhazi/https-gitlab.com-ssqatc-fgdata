@@ -482,7 +482,6 @@ Dynamic = {
 		m.load();
 		m.flash_count = 0;
 		m.visible = 1;
-		m.on_flash_exit_func = func {};
 		return m;
 	},
 	del : func {
@@ -512,11 +511,8 @@ Dynamic = {
 		me.add_derived_props(n);
 		return n;
 	},
-	flash : func(v, fun = nil) {
+	flash : func(v) {
 		me.flash_count = v;
-		if (fun != nil) {
-			me.on_flash_exit_func = fun;
-		}
 		me._flash_();
 	},
 	_flash_ : func {
@@ -530,8 +526,6 @@ Dynamic = {
 		if (me.flash_count) {
 			me.flash_count -= 1;
 			settimer(func { me._flash_() }, 0.3);
-		} else {
-			me.on_flash_exit_func();
 		}
 	},
 };
@@ -616,7 +610,7 @@ ModelMgr = {
 				me.static = left;
 			}
 		}
-		if (me.dynamic != nil) {	# last one removed
+		if (me.dynamic != nil) {
 			me.dynamic.flash(4);
 		}
 		me.display_status(me.modelpath);

@@ -1708,4 +1708,19 @@ Shared parameters for various materials.
  <glyph> <name>stop-frame</name> <left>0.99390</left> <right>0.99854</right> </glyph>
 </material>
 
+<material>
+ <name>RunwaySign</name>
+ <texture>Signs/yellow_rwy.rgb</texture>
+ <emissive>
+  <r>0.9</r>
+  <g>0.9</g>
+  <b>0.9</b>
+  <a>1.0</a>
+ </emissive>
+ <xsize>1024</xsize>
+ <ysize>128</ysize>
+ <glyph> <name>ILS</name>        <left>0.00000</left> <right>0.23633</right> </glyph>
+ <glyph> <name>RWY</name>        <left>0.24512</left> <right>0.73340</right> </glyph>
+</material>
+
 </PropertyList>

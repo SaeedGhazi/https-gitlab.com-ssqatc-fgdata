@@ -248,6 +248,9 @@ tile_path = func(lon, lat) {
 
 
 
+## manages one adjustable value for the Adjust class
+#  (applies slider offsets etc.)
+#
 Value = {
 	new : func(baseN, name, init) {
 		var m = { parents: [Value] };
@@ -295,6 +298,9 @@ Value = {
 };
 
 
+## manages a set of adjustable values and is the entry point for data into
+#  the dynamic model
+#
 Adjust = {
 	new : func(prop) {
 		var m = { parents: [Adjust] };
@@ -376,6 +382,8 @@ Adjust = {
 };
 
 
+## base class for the dynamic and static models
+#
 Model = {
 	# searches first free slot and sets path
 	new : func(path) {
@@ -434,6 +442,8 @@ Model = {
 };
 
 
+## class for static models (see $FG_ROOT/Docs/README.scenery)
+#
 Static = {
 	new : func(path, legend, lon, lat, elev, hdg, pitch, roll) {
 		var m = Model.new(path);
@@ -467,6 +477,8 @@ Static = {
 };
 
 
+## class for dynamic models. Only one object is dynamic at a time -- the selected object.
+#
 Dynamic = {
 	new : func(path, legend, lon, lat, elev, hdg = nil, pitch = nil, roll = nil) {
 		var m = Model.new(path);
@@ -485,6 +497,7 @@ Dynamic = {
 		return m;
 	},
 	del : func {
+		me.flash(0);
 		var parent = me.node.getParent();
 		if (parent != nil) {
 			parent.removeChild(me.node.getName(), me.node.getIndex());
@@ -492,7 +505,6 @@ Dynamic = {
 	},
 	make_static : func {
 		me.del();
-		me.flash(0);
 		return Static.new(me.path, adjust.legendN.getValue(),
 				adjust.get("lon"), adjust.get("lat"), adjust.get("elev"),
 				adjust.get("hdg"), adjust.get("pitch"), adjust.get("roll"));
@@ -537,6 +549,8 @@ Static.make_dynamic = func {
 };
 
 
+## manages one dynamic and several static objects
+#
 ModelMgr = {
 	new : func(path) {
 		var m = { parents: [ModelMgr] };
@@ -574,7 +588,6 @@ ModelMgr = {
 		}
 		me.dynamic = Dynamic.new(me.modelpath, "", me.lonN.getValue(), me.latN.getValue(),
 				me.elevN.getValue());
-		# refresh status line to reset display timer
 		me.display_status(me.modelpath);
 	},
 	select : func {

@@ -419,7 +419,9 @@ Model = {
 			var legend = me.legend != "" ? me.legend :
 					"{@size=10,@material=RedSign}NO_CONTENTS_" ~ int(10000 * rand());
 			foreach (var c; split('', legend)) {
-				spec ~= c == ' ' ? '_' : c;
+				if (c != ' ') {
+					spec ~= c;
+				}
 			}
 		} else {
 			type = "OBJECT_SHARED";

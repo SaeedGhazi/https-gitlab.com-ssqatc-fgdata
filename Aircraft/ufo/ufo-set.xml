@@ -39,7 +39,7 @@
    </key>
    <key>
     <name>space bar + mouse click</name>
-    <desc>select nearest model (blinks twice)</desc>
+    <desc>select nearest model (flashes)</desc>
    </key>
    <key>
     <name>space bar + cursor up/down</name>

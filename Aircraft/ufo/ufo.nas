@@ -59,8 +59,7 @@ xyz2lonlat = func(xyz) {
 	var x = xyz[0];
 	var y = xyz[1];
 	var z = xyz[2];
-	var aux = x * x + y * y;
-	var lat = math.atan2(z, math.sqrt(aux)) * R2D;
+	var lat = math.atan2(z, math.sqrt(x * x + y * y)) * R2D;
 	var lon = math.atan2(y, x) * R2D;
 	return [lon, lat];
 }
@@ -623,8 +622,11 @@ ModelMgr = {
 				me.static = left;
 			}
 		}
-		if (me.dynamic != nil) {
-			me.dynamic.flash(4);
+		# last object removed?
+		if (me.dynamic == nil) {
+			adjust.legendN.setValue("");
+		} else {
+			me.dynamic.flash(6);
 		}
 		me.display_status(me.modelpath);
 	},
@@ -643,7 +645,7 @@ ModelMgr = {
 		me.display_status(path);
 	},
 	display_status : func(p) {
-		var count = (me.dynamic == nil ? 0 : 1) + size(me.static);
+		var count = (me.dynamic != nil) + size(me.static);
 		setprop("/sim/model/ufo/status", "(" ~ count ~ ")  " ~ p);
 	},
 	get_data : func {

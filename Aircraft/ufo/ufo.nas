@@ -1106,6 +1106,8 @@ showStatusDialog = func {
 	w.set("property", adjust.legendN.getPath());
 	w.setColor(0, 0, 0, 0);
 	w.prop().setValues({"color-legend": {red:1, green:1, blue:1, alpha:1}});
+	w.prop().setValues({"color-background": {red:0, green:0, blue:0, alpha:0}});
+	w.prop().setValues({"color-highlight": {red:0, green:0, blue:0, alpha:0}});
 	w.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
 
 	# current object

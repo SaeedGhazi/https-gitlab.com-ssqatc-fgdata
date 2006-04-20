@@ -1416,13 +1416,22 @@ Shared parameters for various materials.
 
 
 <material>
+ <name>YellowSign.unlighted</name>
+ <emissive>
+  <r>0.4</r>
+  <g>0.4</g>
+  <b>0.4</b>
+ </emissive>
+</material>
+
+<material>
  <name>YellowSign</name>
+ <name>YellowSign.lighted</name>
  <texture>Signs/yellow.rgb</texture>
  <emissive>
   <r>0.9</r>
   <g>0.9</g>
   <b>0.9</b>
-  <a>1.0</a>
  </emissive>
  <xsize>4096</xsize>
  <ysize>128</ysize>
@@ -1489,13 +1498,22 @@ Shared parameters for various materials.
 </material>
 
 <material>
+ <name>RedSign.unlighted</name>
+ <emissive>
+  <r>0.4</r>
+  <g>0.4</g>
+  <b>0.4</b>
+ </emissive>
+</material>
+
+<material>
  <name>RedSign</name>
+ <name>RedSign.lighted</name>
  <texture>Signs/red.rgb</texture>
  <emissive>
-  <r>1.0</r>
-  <g>1.0</g>
-  <b>1.0</b>
-  <a>1.0</a>
+  <r>0.9</r>
+  <g>0.9</g>
+  <b>0.9</b>
  </emissive>
  <xsize>4096</xsize>
  <ysize>128</ysize>
@@ -1563,13 +1581,22 @@ Shared parameters for various materials.
 </material>
 
 <material>
+ <name>BlackSign.unlighted</name>
+ <emissive>
+  <r>0.4</r>
+  <g>0.4</g>
+  <b>0.4</b>
+ </emissive>
+</material>
+
+<material>
  <name>BlackSign</name>
+ <name>BlackSign.lighted</name>
  <texture>Signs/black.rgb</texture>
  <emissive>
-  <r>1.0</r>
-  <g>1.0</g>
-  <b>1.0</b>
-  <a>1.0</a>
+  <r>0.9</r>
+  <g>0.9</g>
+  <b>0.9</b>
  </emissive>
  <xsize>4096</xsize>
  <ysize>128</ysize>
@@ -1636,13 +1663,22 @@ Shared parameters for various materials.
 </material>
 
 <material>
+ <name>FramedSign.unlighted</name>
+ <emissive>
+  <r>0.4</r>
+  <g>0.4</g>
+  <b>0.4</b>
+ </emissive>
+</material>
+
+<material>
  <name>FramedSign</name>
+ <name>FramedSign.lighted</name>
  <texture>Signs/framed.rgb</texture>
  <emissive>
   <r>0.9</r>
   <g>0.9</g>
   <b>0.9</b>
-  <a>1.0</a>
  </emissive>
  <xsize>4096</xsize>
  <ysize>128</ysize>
@@ -1709,13 +1745,22 @@ Shared parameters for various materials.
 </material>
 
 <material>
+ <name>RunwaySign.unlighted</name>
+ <emissive>
+  <r>0.4</r>
+  <g>0.4</g>
+  <b>0.4</b>
+ </emissive>
+</material>
+
+<material>
  <name>RunwaySign</name>
+ <name>RunwaySign.lighted</name>
  <texture>Signs/yellow_rwy.rgb</texture>
  <emissive>
   <r>0.9</r>
   <g>0.9</g>
   <b>0.9</b>
-  <a>1.0</a>
  </emissive>
  <xsize>1024</xsize>
  <ysize>128</ysize>

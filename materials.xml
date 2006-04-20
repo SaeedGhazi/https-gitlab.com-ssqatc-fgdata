@@ -1417,6 +1417,7 @@ Shared parameters for various materials.
 
 <material>
  <name>YellowSign.unlighted</name>
+ <texture>Signs/empty.rgb</texture>
  <emissive>
   <r>0.4</r>
   <g>0.4</g>
@@ -1499,6 +1500,7 @@ Shared parameters for various materials.
 
 <material>
  <name>RedSign.unlighted</name>
+ <texture>Signs/empty.rgb</texture>
  <emissive>
   <r>0.4</r>
   <g>0.4</g>
@@ -1582,6 +1584,7 @@ Shared parameters for various materials.
 
 <material>
  <name>BlackSign.unlighted</name>
+ <texture>Signs/empty.rgb</texture>
  <emissive>
   <r>0.4</r>
   <g>0.4</g>
@@ -1664,6 +1667,7 @@ Shared parameters for various materials.
 
 <material>
  <name>FramedSign.unlighted</name>
+ <texture>Signs/empty.rgb</texture>
  <emissive>
   <r>0.4</r>
   <g>0.4</g>
@@ -1746,6 +1750,7 @@ Shared parameters for various materials.
 
 <material>
  <name>RunwaySign.unlighted</name>
+ <texture>Signs/empty.rgb</texture>
  <emissive>
   <r>0.4</r>
   <g>0.4</g>

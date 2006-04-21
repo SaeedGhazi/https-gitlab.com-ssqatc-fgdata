@@ -676,19 +676,28 @@ ModelMgr = {
 		}
 	},
 	import : func {
-		var models = props.globals.getNode("models", 1);
-		var tmp = props.Node.new();
-		props.copy(models, tmp);
-		models.removeChildren("model");
-		foreach (var m; tmp.getChildren("model")) {
-			append(me.static, Static.new(m.getNode("path").getValue(),
-					m.getNode("legend", 1).getValue(),
-					m.getNode("longitude-deg", 1).getValue(),
-					m.getNode("latitude-deg", 1).getValue(),
-					m.getNode("elevation-ft", 1).getValue(),
-					m.getNode("heading-deg", 1).getValue(),
-					m.getNode("pitch-deg", 1).getValue(),
-					m.getNode("roll-deg", 1).getValue()));
+		var mandatory = ["path", "longitude-deg", "latitude-deg", "elevation-ft"];
+		foreach (var m; props.globals.getNode("models", 1).getChildren("model")) {
+			var ok = 1;
+			foreach (var a; mandatory) {
+				if (m.getNode(a) == nil or m.getNode(a).getType() == "NONE") {
+					ok = 0;
+				}
+			}
+			if (ok) {
+				var tmp = props.Node.new({"heading-deg":0, "pitch-deg":0, "roll-deg":0});
+				prop.copy(m, tmp);
+				m.getParent().removeChild(m.getName(), m.getIndex());
+				append(me.static, Static.new(
+						m.getNode("path").getValue(),
+						m.getNode("legend").getValue(),
+						m.getNode("longitude-deg").getValue(),
+						m.getNode("latitude-deg").getValue(),
+						m.getNode("elevation-ft").getValue(),
+						m.getNode("heading-deg").getValue(),
+						m.getNode("pitch-deg").getValue(),
+						m.getNode("roll-deg").getValue()));
+			}
 		}
 		me.select();
 	},

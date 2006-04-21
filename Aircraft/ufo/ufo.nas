@@ -686,7 +686,7 @@ ModelMgr = {
 			}
 			if (ok) {
 				var tmp = props.Node.new({"heading-deg":0, "pitch-deg":0, "roll-deg":0});
-				prop.copy(m, tmp);
+				props.copy(m, tmp);
 				m.getParent().removeChild(m.getName(), m.getIndex());
 				append(me.static, Static.new(
 						m.getNode("path").getValue(),

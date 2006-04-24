@@ -1001,8 +1001,8 @@ showModelAdjustDialog = func {
 		s.set("legend", legend);
 		s.set("pref-width", 250);
 		s.set("live", 1);
-		s.set("min", -2 * fine);
-		s.set("max", 2 * fine);
+		s.set("min", -1 * fine);
+		s.set("max", 1 * fine);
 		s.setColor(col[0], col[1], col[2]);
 		s.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
 

@@ -26,7 +26,7 @@ controls.flapsDown = func(x) {
 
 # library stuff -----------------------------------------------------------------------------------
 
-var ERAD = 6378138.12;		# Earth radius
+var ERAD = 6378138.12;		# Earth radius (m)
 var D2R = math.pi / 180;
 var R2D = 180 / math.pi;
 
@@ -65,7 +65,8 @@ xyz2lonlat = func(xyz) {
 }
 
 
-# return squared distance between two [x, y, z]
+# return squared unit distance between two [x, y, z]
+# (to get meter take sqrt and multiply with Earth radius ERAD)
 #
 coord_dist_sq = func(xyz0, xyz1) {
 	var x = xyz0[0] - xyz1[0];
@@ -143,7 +144,7 @@ scan_models = func(base) {
 	}
 	foreach (var m; keys(xml)) {
 		append(result, m);
-		delete(ac, var x = substr(m, 0, size(m) - 3) ~ "ac");
+		delete(ac, substr(m, 0, size(m) - 3) ~ "ac");
 	}
 	foreach (var m; keys(ac)) {
 		append(result, m);
@@ -428,16 +429,17 @@ Model = {
 			spec = path;
 		}
 
+		var elev_m = ft2m(elev);
 		var stg_hdg = normdeg(360 - hdg);
 		var stg_path = tile_path(lon, lat);
 		var abs_path = getprop("/sim/fg-root") ~ "/" ~ path;
-		var obj_line = sprintf("%s %s %.8f %.8f %.4f %.1f", type, spec, lon, lat,
-				ft2m(elev), stg_hdg);
+		var obj_line = sprintf("%s %s %.8f %.8f %.4f %.1f", type, spec, lon, lat, elev_m, stg_hdg);
 
 		node.getNode("absolute-path", 1).setValue(abs_path);
 		node.getNode("legend", 1).setValue(me.legend);
 		node.getNode("stg-path", 1).setValue(stg_path);
 		node.getNode("stg-heading-deg", 1).setDoubleValue(stg_hdg);
+		node.getNode("elevation-m", 1).setDoubleValue(elev_m);
 		node.getNode("object-line", 1).setValue(obj_line)
 	}
 };
@@ -685,7 +687,7 @@ ModelMgr = {
 				}
 			}
 			if (ok) {
-				var tmp = props.Node.new({"heading-deg":0, "pitch-deg":0, "roll-deg":0});
+				var tmp = props.Node.new({legend:"", "heading-deg":0, "pitch-deg":0, "roll-deg":0});
 				props.copy(m, tmp);
 				m.getParent().removeChild(m.getName(), m.getIndex());
 				append(me.static, Static.new(
@@ -739,13 +741,12 @@ printDistance = func {
 
 
 scanDirs = func(csv) {
-	var list = [];
+	var list = ["Aircraft/ufo/Models/sign.ac"];
 	foreach(var dir; split(",", csv)) {
 		foreach(var m; scan_models(dir)) {
 			append(list, m);
 		}
 	}
-	append(list, "Aircraft/ufo/Models/sign.ac");
 	return sort(list);
 }
 
@@ -1009,7 +1010,7 @@ showModelAdjustDialog = func {
 		cr = button(">>", coarse);
 	}
 
-	slider("lon", [1.0, 0.6, 0.6], 0.0002, 0.00002);
+	slider("lon", [1.0, 0.6, 0.6], 0.0004, 0.00004);
 	slider("lat", [0.6, 1.0, 0.6], 0.0002, 0.00002);
 	slider("elev", [0.6, 0.6, 1.0], 10, 2);
 

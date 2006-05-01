@@ -275,6 +275,15 @@ The rule is that the group is inserted between the first object and its parent,
 and then subsequent objects are removed from their original parent and added
 to the new group.</p>
 
+<p><var>none</var> animations are also handy to reorganise objects in a model. 
+When objects are translucents, they should be drawn back to front in order to 
+see the world that lies behind through the object. But the drawing order is often 
+the order of appearance in the model file, and it is hard to control inside the 
+modeler. This way, one can ignore the order in the modeller, and force the 
+reordering at load time. The order is of course the order of appearance of
+the <var>object-name</var> clause inside the animation. Be aware that this 
+can be ruined by another subsequent animation (last have precedence over first).</p>
+
 <p>The object name must match exactly the object name used in the 3D
 file (including case).  You may include more than one object name to
 apply the same transformation to more than one object, assuming that

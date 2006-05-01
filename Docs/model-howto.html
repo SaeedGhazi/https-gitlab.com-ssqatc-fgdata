@@ -234,7 +234,7 @@ information.</p>
 <li>rotate 
 <li><a href="#scale">scale</a>
 <li><a href="#blend">blend</a>
-<li>select 
+<li><a href="#select">select</a>
 <li>spin 
 <li>timed 
 <li>translate 
@@ -279,7 +279,7 @@ to the new group.</p>
 When objects are translucents, they should be drawn back to front in order to 
 see the world that lies behind through the object. But the drawing order is often 
 the order of appearance in the model file, and it is hard to control inside the 
-modeler. This way, one can ignore the order in the modeller, and force the 
+modeler. This way, one can ignore the order in the modeler, and force the 
 reordering at load time. The order is of course the order of appearance of
 the <var>object-name</var> clause inside the animation. Be aware that this 
 can be ruined by another subsequent animation (last have precedence over first).</p>
@@ -680,6 +680,67 @@ object, and the rotation acting on the translated object.<br>
 So, as a rule of thumb, remember that animations are executed from the 
 bottom of the animation file to its top.</p>
 
+<p>Most animations can be conditioned by a boolean expression on 
+properties. A condition is introduced by the <var>condition</var> element, 
+like in this example&nbsp;:</p>
+<blockquote><pre> &lt;condition&gt;
+   &lt;greater-than&gt;
+    &lt;property&gt;/sim/time/sun-angle-rad&lt;/property&gt;
+    &lt;value&gt;1.57&lt;/value&gt;
+   &lt;/greater-than&gt;
+  &lt;/condition&gt;</pre></blockquote>
+<p>Valid condition elements are&nbsp;:</p>
+<blockquote><dl>
+ <dt><var>property</var></dt>
+  <dd>A valid property full path</dd>
+ <dt><var>not</var></dt>
+ <dt><var>and</var></dt>
+ <dt><var>or</var></dt>
+  <dd>Boolean operators</dd>
+ <dt><var>less-than</var></dt>
+ <dt><var>less-than-equals</var></dt>
+ <dt><var>greater-than</var></dt>
+ <dt><var>greater-than-equals</var></dt>
+ <dt><var>equals</var></dt>
+ <dt><var>not-equals</var></dt>
+  <dd>Comparison operators</dd>
+ <dt><var>value</var></dt>
+  <dd>A literal value</dd>
+</dl></blockquote>
+<p>These elements can be combined to build an arbitrary expression.</p>
+<p>Animations without conditions are always executed. Animation with a condition
+are only executed when the condition evaluated to <var>true</var>.</p>
+
+<p>FlightGear sceneries use shared models. These models are loaded once and
+displayed multiple times. If we apply a transformation on an object of the model,
+every occurence of the model will show the same transformation, creating a 
+very unnatural unisson. To solve this kind of problem, several animations 
+support the notion of personality. It means that a set of parameters are able
+to randomly vary in a specified range if the <var>use-personality</var> boolean
+property is set to <var>true</var>. For the moment, <var>spin</var> and <var>timed</var>
+animations support personality.</p>
+
+<h3><a name="select">"select" animation type</a></h3>
+<p>The select animation is there to remove objects ( specified in the <var>object-name</var> 
+elements ) from the scene when the associated condition evaluated to <var>false</var>.</p>
+<p>In the example below&nbsp;:</p>
+<blockquote><pre> &lt;animation&gt;
+  &lt;type&gt;select&lt;/type&gt;
+  &lt;object-name&gt;StrobesOn&lt;/object-name&gt;
+  &lt;object-name&gt;StrobesOff&lt;/object-name&gt;
+  &lt;object-name&gt;Fixed&lt;/object-name&gt;
+  &lt;condition&gt;
+   &lt;greater-than&gt;
+    &lt;property&gt;/sim/time/sun-angle-rad&lt;/property&gt;
+    &lt;value&gt;1.57&lt;/value&gt;
+   &lt;/greater-than&gt;
+  &lt;/condition&gt;
+ &lt;/animation&gt;</pre></blockquote>
+ <p>Objects <var>StrobesOn</var>, <var>StrobesOff</var> and <var>Fixed</var> are only present
+ in the scene ( displayed ) when the sun is below the horizon ( the meaning of the condition).
+ In other words, these objects, that are already in the scene because they were added by the
+ designer of the model, are removed when the sun is above the horizon.</p>
+
 <h3><a name="scale">"scale" animation type</a></h3>
 
 <p>Here is a contrived example of one way to use the "scale" animation
@@ -849,7 +910,6 @@ on the primary flight display:</p>
 
 <ol>
 <li>step 
-        
 <li>scroll</li>
 </ol>
 
@@ -1198,8 +1258,8 @@ the same that you would set in &lt;property-base&gt;.
     </tbody>
   </table>
   <br>
-
-<!-- Standard Footer End -->
 </body>
 
 </html>
+
+<!-- Standard Footer End -->

@@ -714,13 +714,14 @@ are only executed when the condition evaluated to <var>true</var>.</p>
 <p>FlightGear sceneries use shared models. These models are loaded once and
 displayed multiple times. If we apply a transformation on an object of the model,
 every occurence of the model will show the same transformation, creating a 
-very unnatural unisson. To solve this kind of problem, several animations 
+very unnatural unison. To solve this kind of problem, several animations 
 support the notion of personality. It means that a set of parameters are able
 to randomly vary in a specified range if the <var>use-personality</var> boolean
 property is set to <var>true</var>. For the moment, <var>spin</var> and <var>timed</var>
 animations support personality.</p>
 
 <h3><a name="select">"select" animation type</a></h3>
+
 <p>The select animation is there to remove objects ( specified in the <var>object-name</var> 
 elements ) from the scene when the associated condition evaluated to <var>false</var>.</p>
 <p>In the example below&nbsp;:</p>
@@ -740,6 +741,48 @@ elements ) from the scene when the associated condition evaluated to <var>false<
  in the scene ( displayed ) when the sun is below the horizon ( the meaning of the condition).
  In other words, these objects, that are already in the scene because they were added by the
  designer of the model, are removed when the sun is above the horizon.</p>
+
+<h3><a name="timed">"timed" animation type</a></h3>
+
+<p>The timed animation selects only one object among those specified by <var>object-name</var>
+for a specified duration. When the displayed time ends, the next object is selected for the 
+matching duration.</p>
+<p>The simpler form is&nbsp;:</p>
+<blockquote><pre> &lt;animation&gt;
+  &lt;name&gt;BeaconFlasher&lt;/name&gt;
+  &lt;type&gt;timed&lt;/type&gt;
+  &lt;object-name&gt;BeaconOff&lt;/object-name&gt;
+  &lt;object-name&gt;BeaconOn&lt;/object-name&gt;
+  &lt;duration-sec&gt;1.0&lt;/duration-sec&gt;
+ &lt;/animation&gt;</pre></blockquote>
+<p>In this example, each object is displayed during an equal time, specified in seconds.</p>
+<p>This second example use personality&nbsp;:</p>
+<blockquote><pre> &lt;animation&gt;
+  &lt;type&gt;timed&lt;/type&gt;
+  &lt;object-name&gt;StrobesOn&lt;/object-name&gt;
+  &lt;object-name&gt;StrobesOff&lt;/object-name&gt;
+  &lt;use-personality type="bool"&gt;true&lt;/use-personality&gt;
+  &lt;branch-duration-sec&gt;
+   &lt;random&gt;
+    &lt;min&gt;0.9&lt;/min&gt;
+    &lt;max&gt;1.1&lt;/max&gt;
+   &lt;/random&gt;
+  &lt;/branch-duration-sec&gt;
+  &lt;branch-duration-sec&gt;
+   &lt;random&gt;
+    &lt;min&gt;0.9&lt;/min&gt;
+    &lt;max&gt;1.1&lt;/max&gt;
+   &lt;/random&gt;
+  &lt;/branch-duration-sec&gt;
+ &lt;/animation&gt;</pre></blockquote>
+<p>In this case, there is a <var>branch-duration-sec</var> element for each 
+<var>object-name</var> that specify a duration for that object. The value of
+<var>branch-duration-sec</var> could be a literal double value in seconds.<br>
+Here, literals have been replaced by the <var>random</var> element. It means
+that the duration is choosen randomly between <var>min</var> and <var>max</var>.
+Because of the <var>use-personality</var> element set to true, durations are 
+allowed to be different for each occurence of this model, breaking the announced 
+unison.</p>
 
 <h3><a name="scale">"scale" animation type</a></h3>
 

@@ -125,7 +125,7 @@
     <dialog-name>hud</dialog-name>
    </binding>
   </item>
-  
+
   <item>
    <label>Instant Replay</label>
    <binding>
@@ -223,32 +223,26 @@
   <item>
    <label>Add Waypoint</label>
    <binding>
-    <command>old-ap-add-waypoint-dialog</command>
+    <command>dialog-show</command>
+    <dialog-name>waypoints</dialog-name>
    </binding>
   </item>
-  
+
   <item>
    <label>Pop Waypoint</label>
    <binding>
-    <command>old-ap-pop-waypoint-dialog</command>
+    <command>nasal</command>
+    <script>setprop("/autopilot/route-manager/input", "@pop")</script>
    </binding>
   </item>
 
   <item>
    <label>Clear Route</label>
    <binding>
-    <command>old-ap-clear-route-dialog</command>
+    <command>nasal</command>
+    <script>setprop("/autopilot/route-manager/input", "@clear")</script>
    </binding>
   </item>
-
-<!--
-  <item>
-   <label>Adjust Autopilot</label>
-   <binding>
-    <command>old-ap-adjust-dialog</command>
-   </binding>
-  </item>
--->
 
   <item>
    <label>Set Lat/Lon Format</label>
@@ -256,7 +250,7 @@
     <command>old-lat-lon-format-dialog</command>
    </binding>
   </item>
-  
+
  </menu>
 
  <menu>
@@ -474,6 +468,7 @@
     <script>tutorial.stopTutorial()</script>
    </binding>
   </item>
+
  </menu>
 
 </PropertyList>

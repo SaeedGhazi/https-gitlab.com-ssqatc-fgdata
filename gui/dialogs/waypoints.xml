@@ -63,9 +63,11 @@ command interface /autopilot/route-manager/input:
 					var lon = wp[i].getNode("longitude-deg").getValue();
 					var lat = wp[i].getNode("latitude-deg").getValue();
 					var alt = wp[i].getNode("altitude-ft").getValue();
-					var entry = sprintf("%d:  %-5s   %3.2f lon   %3.2f lat   %.0f ft",
-							i + 1, id, lon, lat, alt);
-					
+					var entry = sprintf("%d:  %-5s   %3.2f lon   %3.2f lat",
+							i + 1, id, lon, lat);
+					if (alt > -9990) {
+						entry ~= sprintf("   %.0f ft", alt);
+					}
 					list.getChild("value", i, 1).setValue(entry);
 				}
 

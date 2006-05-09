@@ -1096,7 +1096,8 @@ showStatusDialog = func {
 	name = "ufo-status-dialog";
 
 	if (contains(dialog, name)) {
-		closeModelSelectDialog();
+		fgcommand("dialog-close", props.Node.new({ "dialog-name" : name }));
+		delete(dialog, name);
 		return;
 	}
 
@@ -1137,4 +1138,6 @@ showStatusDialog = func {
 	gui.showDialog(name);
 }
 
+
+setlistener("/sim/signals/screenshot", showStatusDialog);
 

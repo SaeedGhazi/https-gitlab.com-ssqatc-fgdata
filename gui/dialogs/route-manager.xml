@@ -12,19 +12,19 @@ command interface /autopilot/route-manager/input:
 -->
 
 <PropertyList>
-	<name>waypoints</name>
+	<name>route-manager</name>
 	<layout>vbox</layout>
 	<default-padding>4</default-padding>
 
 	<text>
-		<label>Waypoint Manager</label>
+		<label>Route Manager</label>
 	</text>
 
 	<hrule><empty/></hrule>
 
 	<nasal>
 		<open>
-			var dlg = props.globals.getNode("/sim/gui/dialogs/waypoints", 1);
+			var dlg = props.globals.getNode("/sim/gui/dialogs/route-manager", 1);
 			var selection = dlg.getNode("selection", 1);
 			var input = dlg.getNode("input", 1);
 
@@ -63,7 +63,7 @@ command interface /autopilot/route-manager/input:
 					var lon = wp[i].getNode("longitude-deg").getValue();
 					var lat = wp[i].getNode("latitude-deg").getValue();
 					var alt = wp[i].getNode("altitude-ft").getValue();
-					var entry = sprintf("%d:  %-5s   %3.2f lon   %3.2f lat",
+					var entry = sprintf("%d:  %-5s   %3.4f lon   %3.4f lat",
 							i + 1, id, lon, lat);
 					if (alt > -9990) {
 						entry ~= sprintf("   %.0f ft", alt);
@@ -72,7 +72,7 @@ command interface /autopilot/route-manager/input:
 				}
 
 				fgcommand("dialog-update", props.Node.new({"object-name": "list",
-						"dialog-name": "waypoints"}));
+						"dialog-name": "route-manager"}));
 			}
 
 			var lst = setlistener("/autopilot/route-manager/route/num", listchanged, 1);
@@ -113,7 +113,7 @@ command interface /autopilot/route-manager/input:
 		<name>list</name>
 		<halign>fill</halign>
 		<pref-height>150</pref-height>
-		<property>/sim/gui/dialogs/waypoints/selection</property>
+		<property>/sim/gui/dialogs/route-manager/selection</property>
 		<binding>
 			<command>dialog-apply</command>
 			<object-name>list</object-name>
@@ -132,7 +132,7 @@ command interface /autopilot/route-manager/input:
 		<input>
 			<name>input</name>
 			<pref-width>220</pref-width>
-			<property>/sim/gui/dialogs/waypoints/input</property>
+			<property>/sim/gui/dialogs/route-manager/input</property>
 		</input>
 
 		<button>
@@ -154,7 +154,7 @@ command interface /autopilot/route-manager/input:
 
 	<text>
 		<padding>1</padding>
-		<label>Format: (airport|fix|lon,lat)[@alt] -- e.g. "KSFO@900"</label>
+		<label>Format: (airport|fix|nav|lon,lat)[@alt] -- e.g. "KSFO@900"</label>
 		<color>
 			<red>0.5</red>
 			<green>0.5</green>

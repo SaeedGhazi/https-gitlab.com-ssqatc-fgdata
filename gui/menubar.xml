@@ -221,10 +221,10 @@
   </item>
 
   <item>
-   <label>Add Waypoint</label>
+   <label>Route Manager</label>
    <binding>
     <command>dialog-show</command>
-    <dialog-name>waypoints</dialog-name>
+    <dialog-name>route-manager</dialog-name>
    </binding>
   </item>
 

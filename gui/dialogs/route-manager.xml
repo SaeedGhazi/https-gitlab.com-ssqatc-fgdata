@@ -54,12 +54,11 @@ command interface /autopilot/route-manager/input:
 				cmd.setValue("@delete" ~ sel_index())
 			}
 
-			listchanged = func {
+			route_changed = func {
 				list.removeChildren("value");
 				var wp = routemgr.getChildren("wp");
 				forindex (var i; wp) {
 					var id = wp[i].getNode("id").getValue();
-					var name = wp[i].getNode("name").getValue();
 					var lon = wp[i].getNode("longitude-deg").getValue();
 					var lat = wp[i].getNode("latitude-deg").getValue();
 					var alt = wp[i].getNode("altitude-ft").getValue();
@@ -75,7 +74,7 @@ command interface /autopilot/route-manager/input:
 						"dialog-name": "route-manager"}));
 			}
 
-			var lst = setlistener("/autopilot/route-manager/route/num", listchanged, 1);
+			var lst = setlistener("/autopilot/route-manager/route/num", route_changed, 1);
 		</open>
 
 		<close>

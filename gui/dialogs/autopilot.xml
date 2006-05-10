@@ -23,18 +23,6 @@
 
   <nasal>
     <open>
-      ## create and initialize input field properties if necessary
-      #
-      var apset = props.globals.getNode("/autopilot/settings", 1);
-      foreach (var p; ["heading-bug-deg", "true-heading-deg", "vertical-speed-fpm",
-                       "target-pitch-deg", "target-aoa-deg", "target-altitude-ft",
-                       "target-agl-ft", "target-speed-kt"]) {
-
-          if ((var n = apset.getNode(p)) == nil or n.getType() == "NONE") {
-              apset.getNode(p, 1).setDoubleValue(0);
-          }
-      }
-
       ## manage one AP property group with checkbox and radio buttons
       #
       Group = {
@@ -59,6 +47,9 @@
                       node.setBoolValue(0);
                   }
                   append(m.options, node);
+                  if (m.lock.getValue() == o) {
+                      m.mode = o;
+                  }
               }
               m.listener = setlistener(m.lock,  func { m.update(cmdarg().getValue()) }, 1);
               return m;
@@ -99,6 +90,19 @@
               }
           },
       };
+
+
+      ## create and initialize input field properties if necessary
+      #
+      var apset = props.globals.getNode("/autopilot/settings", 1);
+      foreach (var p; ["heading-bug-deg", "true-heading-deg", "vertical-speed-fpm",
+                       "target-pitch-deg", "target-aoa-deg", "target-altitude-ft",
+                       "target-agl-ft", "target-speed-kt"]) {
+
+          if ((var n = apset.getNode(p)) == nil or n.getType() == "NONE") {
+              apset.getNode(p, 1).setDoubleValue(0);
+          }
+      }
 
       var dlg = props.globals.getNode("/sim/gui/dialogs/autopilot", 1);
 

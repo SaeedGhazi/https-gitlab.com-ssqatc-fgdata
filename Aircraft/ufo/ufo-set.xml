@@ -79,6 +79,13 @@
   </help>
  </sim>
 
+ <gear>
+  <gear>
+   <!-- hint for the route manager -->
+   <wow type="bool">false</wow>
+  </gear>
+ </gear>
+
  <input>
   <keyboard>
    <key n="8">

@@ -24,6 +24,7 @@ command interface /autopilot/route-manager/input:
 
 	<nasal>
 		<open>
+			var ft = getprop("/sim/startup/units") == "feet";
 			var dlg = props.globals.getNode("/sim/gui/dialogs/route-manager", 1);
 			var selection = dlg.getNode("selection", 1);
 			var input = dlg.getNode("input", 1);
@@ -51,7 +52,8 @@ command interface /autopilot/route-manager/input:
 			}
 
 			remove = func {
-				cmd.setValue("@delete" ~ sel_index())
+				var pos = sel_index();
+				cmd.setValue("@delete" ~ (pos > 0 ? pos : 0));
 			}
 
 			route_changed = func {
@@ -61,11 +63,15 @@ command interface /autopilot/route-manager/input:
 					var id = wp[i].getNode("id").getValue();
 					var lon = wp[i].getNode("longitude-deg").getValue();
 					var lat = wp[i].getNode("latitude-deg").getValue();
-					var alt = wp[i].getNode("altitude-ft").getValue();
-					var entry = sprintf("%d:  %-5s   %3.4f lon   %3.4f lat",
+					var alt = wp[i].getNode("altitude-m").getValue();
+					var entry = sprintf("%d:  %-5s   %3.4f lon   %3.4f lat   ",
 							i + 1, id, lon, lat);
 					if (alt > -9990) {
-						entry ~= sprintf("   %.0f ft", alt);
+						if (ft) {
+							entry ~= sprintf("%.0f ft", alt / 0.3048);
+						} else {
+							entry ~= sprintf("%.0f m", alt);
+						}
 					}
 					list.getChild("value", i, 1).setValue(entry);
 				}

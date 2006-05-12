@@ -86,6 +86,12 @@
   </gear>
  </gear>
 
+ <autopilot>
+  <route-manager>
+   <min-lock-altitude-agl-ft type="double">-10000</min-lock-altitude-agl-ft>
+  </route-manager>
+ </autopilot>
+
  <input>
   <keyboard>
    <key n="8">

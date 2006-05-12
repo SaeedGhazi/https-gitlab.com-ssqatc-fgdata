@@ -900,6 +900,9 @@ Started September 2000 by David Megginson, david@megginson.com
   <internal>
    <ft type="double">0.1</ft>
   </internal>
+  <route-manager>
+   <min-lock-altitude-agl-ft type="double">300</min-lock-altitude-agl-ft>
+  </route-manager>
  </autopilot>
 
  <logging>

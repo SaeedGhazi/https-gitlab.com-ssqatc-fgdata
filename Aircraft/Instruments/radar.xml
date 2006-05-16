@@ -262,6 +262,171 @@
     </transformation>
    </transformations>
   </layer>
+	
+	<layer>
+   <name>target3 - range 40</name>
+   <w>8</w>
+   <h>17</h>
+   <condition>
+    <and>
+     <equals>
+      <property>ai/models/multiplayer/radar/in-range</property>
+      <value>true</value>
+     </equals>
+     <equals>
+      <property>/instrumentation/radar/range</property>
+      <value>40</value>
+     </equals>
+    </and>
+   </condition>
+   <texture>
+    <path>Aircraft/Instruments/Textures/radar_misc.rgb</path>
+    <x1>0.0429687</x1>
+    <y1>0.8320312</y1>
+    <x2>0.0703125</x2>
+    <y2>0.8945312</y2>
+   </texture>
+   <transformations>
+    <transformation>
+     <type>x-shift</type>
+     <property>ai/models/multiplayer/radar/x-shift</property>
+     <scale>2.55</scale>
+    </transformation>
+    <transformation>
+     <type>y-shift</type>
+     <property>ai/models/multiplayer/radar/y-shift</property>
+     <scale>2.55</scale>
+    </transformation>
+    <transformation>
+     <type>rotation</type>
+     <property>ai/models/multiplayer/radar/rotation</property>
+    </transformation>
+   </transformations>
+  </layer>
+
+  <layer>
+   <name>target3 - range 20</name>
+   <w>8</w>
+   <h>17</h>
+   <condition>
+    <and>
+     <equals>
+      <property>ai/models/multiplayer/radar/in-range</property>
+      <value>true</value>
+     </equals>
+     <equals>
+      <property>/instrumentation/radar/range</property>
+      <value>20</value>
+     </equals>
+    </and>
+   </condition>
+   <texture>
+    <path>Aircraft/Instruments/Textures/radar_misc.rgb</path>
+    <x1>0.0429687</x1>
+    <y1>0.8320312</y1>
+    <x2>0.0703125</x2>
+    <y2>0.8945312</y2>
+   </texture>
+   <transformations>
+    <transformation>
+     <type>x-shift</type>
+     <property>ai/models/multiplayer/radar/x-shift</property>
+     <scale>5.1</scale>
+    </transformation>
+    <transformation>
+     <type>y-shift</type>
+     <property>ai/models/multiplayer/radar/y-shift</property>
+     <scale>5.1</scale>
+    </transformation>
+    <transformation>
+     <type>rotation</type>
+     <property>ai/models/multiplayer/radar/rotation</property>
+    </transformation>
+   </transformations>
+  </layer>
+
+
+	<layer>
+   <name>target4 - range 40</name>
+   <w>8</w>
+   <h>17</h>
+   <condition>
+    <and>
+     <equals>
+      <property>ai/models/multiplayer[1]/radar/in-range</property>
+      <value>true</value>
+     </equals>
+     <equals>
+      <property>/instrumentation/radar/range</property>
+      <value>40</value>
+     </equals>
+    </and>
+   </condition>
+   <texture>
+    <path>Aircraft/Instruments/Textures/radar_misc.rgb</path>
+    <x1>0.0429687</x1>
+    <y1>0.8320312</y1>
+    <x2>0.0703125</x2>
+    <y2>0.8945312</y2>
+   </texture>
+   <transformations>
+    <transformation>
+     <type>x-shift</type>
+     <property>ai/models/multiplayer[1]/radar/x-shift</property>
+     <scale>2.55</scale>
+    </transformation>
+    <transformation>
+     <type>y-shift</type>
+     <property>ai/models/multiplayer[1]/radar/y-shift</property>
+     <scale>2.55</scale>
+    </transformation>
+    <transformation>
+     <type>rotation</type>
+     <property>ai/models/multiplayer[1]/radar/rotation</property>
+    </transformation>
+   </transformations>
+  </layer>
+
+  <layer>
+   <name>target4 - range 20</name>
+   <w>8</w>
+   <h>17</h>
+   <condition>
+    <and>
+     <equals>
+      <property>ai/models/multiplayer[1]/radar/in-range</property>
+      <value>true</value>
+     </equals>
+     <equals>
+      <property>/instrumentation/radar/range</property>
+      <value>20</value>
+     </equals>
+    </and>
+   </condition>
+   <texture>
+    <path>Aircraft/Instruments/Textures/radar_misc.rgb</path>
+    <x1>0.0429687</x1>
+    <y1>0.8320312</y1>
+    <x2>0.0703125</x2>
+    <y2>0.8945312</y2>
+   </texture>
+   <transformations>
+    <transformation>
+     <type>x-shift</type>
+     <property>ai/models/multiplayer[1]/radar/x-shift</property>
+     <scale>5.1</scale>
+    </transformation>
+    <transformation>
+     <type>y-shift</type>
+     <property>ai/models/multiplayer[1]/radar/y-shift</property>
+     <scale>5.1</scale>
+    </transformation>
+    <transformation>
+     <type>rotation</type>
+     <property>ai/models/multiplayer[1]/radar/rotation</property>
+    </transformation>
+   </transformations>
+  </layer>
 
   <layer>
    <name>frame</name>
@@ -275,6 +440,7 @@
     <y2>1</y2>
    </texture>
   </layer>
+
 
   <layer>
    <name>range knob</name>
@@ -342,6 +508,19 @@
    </transformations>
   </layer>
 
+  <layer>
+   <name>frame</name>
+   <w>256</w>
+   <h>256</h>
+   <texture>
+    <path>Aircraft/Instruments/Textures/radar_frame.rgb</path>
+    <x1>0</x1>
+    <y1>0</y1>
+    <x2>1</x2>
+    <y2>1</y2>
+   </texture>
+  </layer>
+	
   <layer>
     <name>altitude</name>
     <type>text</type>

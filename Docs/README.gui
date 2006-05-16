@@ -353,16 +353,16 @@ list
 ----
 
 like "combo", but displays all values in a scrollable list box with
-slider on the right side. Doesn't take bindings.
+slider on the right side. Updates the <property> to the selected
+entry. On <dialog-update> re-scans the <value> nodes and updates
+the list.
 
 
 
 select
 ------
 
-A scrollable list of selections.
-
-  selection - a path in the property tree which holds the selectable items.
+A box with arrow buttons that cycle through a list of values.
 
 Example:
 
@@ -372,7 +372,8 @@ Example:
    <width>200</width>
    <height>25</height>
    <property>/sim/aircraft</property>
-   <selection>/sim/aircraft-types</selection>
+   <value>bo105</value>
+   <value>ufo</value>
   </select>
 
 

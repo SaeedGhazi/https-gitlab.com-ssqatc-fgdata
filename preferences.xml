@@ -379,6 +379,11 @@ Started September 2000 by David Megginson, david@megginson.com
    <current-style type="int" userarchive="y">0</current-style>
    <style n="0" include="gui/styles/default.xml"/>
    <style n="1" include="gui/styles/anthrax.xml"/>
+   <dialogs>
+    <property-browser>
+     <show-flags type="bool">false</show-flags>
+    </property-browser>
+   </dialogs>
   </gui>
 
   <mouse>

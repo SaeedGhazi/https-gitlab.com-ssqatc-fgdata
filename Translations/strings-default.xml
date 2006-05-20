@@ -95,6 +95,7 @@
  <random-objects-desc>(buildings, etc.)</random-objects-desc>
  <disable-ai-models-desc>Disable the artifical traffic subsystem.</disable-ai-models-desc>
  <enable-ai-models-desc>Enable the artifical traffic.</enable-ai-models-desc>
+ <ai-scenario>Add and enable a new scenario. Multiple options are allowed.</ai-scenario>
  <disable-freeze-desc>Start in a running state</disable-freeze-desc>
  <enable-freeze-desc>Start in a frozen state</enable-freeze-desc>
  <disable-fuel-freeze-desc>Fuel is consumed normally</disable-fuel-freeze-desc>

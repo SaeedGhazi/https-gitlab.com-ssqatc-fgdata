@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<name>property-browser</name>
+	<layout>vbox</layout>
+	<default-padding>3</default-padding>
+
+	<group>
+		<empty><pref-width>true</pref-width></empty>
+
+		<layout>hbox</layout>
+		<default-padding>2</default-padding>
+		<text>
+			<label>/</label>
+			<property>/sim/gui/dialogs/property-browser/title</property>
+			<live>true</live>
+		</text>
+
+		<empty><stretch>true</stretch></empty>
+	</group>
+
+	<hrule><empty/></hrule>
+
+	<property-list>
+		<name>property-list</name>
+		<pref-width>450</pref-width>
+		<pref-height>230</pref-height>
+		<property>/sim/gui/dialogs/property-browser/list</property>
+		<binding>
+			<command>dialog-apply</command>
+			<object-name>property-list</object-name>
+		</binding>
+		<binding>
+			<command>nasal</command>
+			<script>selected()</script>
+		</binding>
+	</property-list>
+
+	<group>
+		<layout>hbox</layout>
+		<default-padding>2</default-padding>
+
+		<button>
+			<legend>Close</legend>
+			<equal>true</equal>
+			<key>Esc</key>
+			<pref-width>55</pref-width>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+
+		<text>
+			<label>--</label>
+			<live>true</live>
+			<property>/sim/gui/dialogs/property-browser/label</property>
+			<pref-width>170</pref-width>
+		</text>
+
+		<input>
+			<name>input</name>
+			<pref-width>170</pref-width>
+			<property>/sim/gui/dialogs/property-browser/input</property>
+		</input>
+
+		<button>
+			<legend>Set</legend>
+			<pref-width>40</pref-width>
+			<default>true</default>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>input</object-name>
+			</binding>
+			<binding>
+				<command>nasal</command>
+				<script>set()</script>
+			</binding>
+		</button>
+	</group>
+
+	<nasal>
+		<open>
+			var dlg = props.globals.getNode("/sim/gui/dialogs/property-browser", 1);
+			var title = dlg.getNode("title", 1);
+			var label = dlg.getNode("label", 1);
+			var input = dlg.getNode("input", 1);
+			var list = dlg.getNode("list", 1);
+			var node = nil;
+			var dir = "/";
+
+			update = func(w) {
+				fgcommand("dialog-update", props.Node.new({"object-name": w,
+						"dialog-name": "property-browser"}));
+			}
+
+			squeeze = func(s, n) {
+				if (size(s) &lt;= n or n &lt; 7) {
+					return s;
+				}
+				var l = substr(s, 0, (n - 3) / 2);
+				var r = substr(s, size(s) + size(l) + 3 - n);
+				return l ~ "..." ~ r;
+			}
+
+			selected = func {
+				var lst = list.getValue();
+				node = props.globals.getNode(lst);
+				if (node == nil) {
+					return;
+				}
+				if (size(node.getChildren())) {
+					dir = node.getPath();
+					if (node.getPath() == "") {
+						title.setValue("Internal Properties");
+					} else {
+						title.setValue(lst);
+					}
+					node = nil;
+					label.setValue("         --");
+					input.setValue("");
+					update("input");
+				} else {
+					var name = node.getName();
+					var i = node.getIndex();
+					var type = node.getType();
+					if (i) {
+						name ~= "[" ~ i ~ "]";
+					}
+					label.setValue(squeeze(name, 30));
+					var value = nil;
+					if (type == "BOOL") {
+						value = node.getBoolValue() ? "true" : "false";
+					} elsif (type == "STRING") {
+						value = node.getValue();
+					} elsif (type == "NONE") {
+						value = "";
+					} elsif (type != "ALIAS") {
+						value = node.getValue() ~ "";
+					}
+					input.setValue(value);
+					update("input");
+				}
+			}
+			set = func {
+				if (node != nil) {
+					node.setValue(input.getValue());
+					input.setValue("");
+				}
+			}
+
+			if (dlg.getNode("last") != nil) {
+				dir = dlg.getNode("last").getValue();
+				list.setValue(dir);
+				node = props.globals.getNode(dir);
+				selected();
+				update("list");
+			} else {
+				label.setValue("         --");
+				input.setValue("");
+				list.setValue("/");
+			}
+		</open>
+
+		<close>
+			dlg.getNode("last", 1).setValue(dir);
+		</close>
+	</nasal>
+
+</PropertyList>

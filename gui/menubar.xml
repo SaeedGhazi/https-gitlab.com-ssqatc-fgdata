@@ -407,6 +407,14 @@
   </item>
 
   <item>
+   <label>Property Browser</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>property-browser</dialog-name>
+   </binding>
+  </item>
+
+  <item>
    <label>Development Keys</label>
    <binding>
     <command>nasal</command>
@@ -415,7 +423,7 @@
   </item>
 
  </menu>
- 
+
  <menu>
   <label>Help</label>
 

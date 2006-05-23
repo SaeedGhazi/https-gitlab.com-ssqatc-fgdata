@@ -6,10 +6,11 @@
 	<default-padding>3</default-padding>
 
 	<group>
-		<empty><pref-width>true</pref-width></empty>
-
 		<layout>hbox</layout>
-		<default-padding>2</default-padding>
+		<default-padding>1</default-padding>
+
+		<empty><whatever/></empty>
+
 		<text>
 			<label>/</label>
 			<property>/sim/gui/dialogs/property-browser/title</property>
@@ -17,6 +18,17 @@
 		</text>
 
 		<empty><stretch>true</stretch></empty>
+
+		<button>
+			<legend></legend>
+			<key>Esc</key>
+			<pref-width>16</pref-width>
+			<pref-height>16</pref-height>
+			<border>2</border>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
 	</group>
 
 	<hrule><empty/></hrule>
@@ -24,7 +36,7 @@
 	<property-list>
 		<name>property-list</name>
 		<pref-width>450</pref-width>
-		<pref-height>230</pref-height>
+		<pref-height>290</pref-height>
 		<property>/sim/gui/dialogs/property-browser/list</property>
 		<binding>
 			<command>dialog-apply</command>
@@ -40,32 +52,22 @@
 		<layout>hbox</layout>
 		<default-padding>2</default-padding>
 
-		<button>
-			<legend>Close</legend>
-			<equal>true</equal>
-			<key>Esc</key>
-			<pref-width>55</pref-width>
-			<binding>
-				<command>dialog-close</command>
-			</binding>
-		</button>
-
 		<text>
 			<label>--</label>
 			<live>true</live>
 			<property>/sim/gui/dialogs/property-browser/label</property>
-			<pref-width>170</pref-width>
+			<pref-width>190</pref-width>
 		</text>
 
 		<input>
 			<name>input</name>
-			<pref-width>170</pref-width>
+			<pref-width>190</pref-width>
 			<property>/sim/gui/dialogs/property-browser/input</property>
 		</input>
 
 		<button>
 			<legend>Set</legend>
-			<pref-width>40</pref-width>
+			<pref-width>50</pref-width>
 			<default>true</default>
 			<binding>
 				<command>dialog-apply</command>
@@ -106,7 +108,7 @@
 				var lst = list.getValue();
 				node = props.globals.getNode(lst);
 				if (node == nil) {
-					return;
+					node = props.globals;
 				}
 				if (size(node.getChildren())) {
 					dir = node.getPath();
@@ -130,6 +132,8 @@
 					var value = nil;
 					if (type == "BOOL") {
 						value = node.getBoolValue() ? "true" : "false";
+						title.setValue("Hint: Ctrl-click toggles bool values");
+						settimer(func {title.setValue(dir) }, 5);
 					} elsif (type == "STRING") {
 						value = node.getValue();
 					} elsif (type == "NONE") {
@@ -152,18 +156,13 @@
 				dir = dlg.getNode("last").getValue();
 				list.setValue(dir);
 				node = props.globals.getNode(dir);
-				selected();
-				update("list");
-			} else {
-				label.setValue("         --");
-				input.setValue("");
-				list.setValue("/");
 			}
+			selected();
+			update("list");
 		</open>
 
 		<close>
 			dlg.getNode("last", 1).setValue(dir);
 		</close>
 	</nasal>
-
 </PropertyList>

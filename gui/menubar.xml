@@ -69,7 +69,8 @@
   <item>
    <label>Browse Internal Properties</label>
    <binding>
-    <command>old-properties-dialog</command>
+    <command>dialog-show</command>
+    <dialog-name>property-browser</dialog-name>
    </binding>
   </item>
 
@@ -407,10 +408,9 @@
   </item>
 
   <item>
-   <label>Property Browser</label>
+   <label>Old Property Browser</label>
    <binding>
-    <command>dialog-show</command>
-    <dialog-name>property-browser</dialog-name>
+    <command>old-properties-dialog</command>
    </binding>
   </item>
 

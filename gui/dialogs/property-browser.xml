@@ -87,8 +87,8 @@
 			var label = dlg.getNode("label", 1);
 			var input = dlg.getNode("input", 1);
 			var list = dlg.getNode("list", 1);
-			var node = nil;
-			var dir = nil;
+			var node = nil;		# selected node entry (props.Node)
+			var dir = nil;		# current directory (string)
 			var update_interval = 2;
 
 			update = func(w) {
@@ -113,15 +113,10 @@
 				}
 				if (size(node.getChildren())) {
 					dir = node.getPath();
-					if (node.getPath() == "") {
-						title.setValue("Internal Properties");
-					} else {
-						title.setValue(lst);
-					}
+					title.setValue(node.getPath() == "" ? "Internal Properties" : lst);
 					node = nil;
 					label.setValue("         --");
 					input.setValue("");
-					update("input");
 				} else {
 					var name = node.getName();
 					var index = node.getIndex();
@@ -129,7 +124,6 @@
 					if (index) {
 						name ~= "[" ~ index ~ "]";
 					}
-					label.setValue(squeeze(name, 30));
 					var value = nil;
 					if (type == "BOOL") {
 						value = node.getBoolValue() ? "true" : "false";
@@ -142,39 +136,34 @@
 					} elsif (type != "ALIAS") {
 						value = node.getValue() ~ "";
 					}
+					label.setValue(squeeze(name, 30));
 					input.setValue(value);
-					update("input");
 				}
+				update("input");
 			}
+
 			set = func {
 				if (node != nil) {
 					node.setValue(input.getValue());
-					input.setValue("");
 				}
 			}
 
-			var active = 1;
 			auto_update = func {
-				if (active and update_interval) {
-					list.setValue(dir);
-					update("property-list");
+				list.setValue(dir);
+				update("property-list");
+				if (update_interval) {
 					settimer(auto_update, update_interval);
 				}
 			}
 
-			if (dlg.getNode("last") != nil) {
-				dir = dlg.getNode("last").getValue();
-			} else {
-				dir = "/";
-			}
+			dir = dlg.getNode("last") != nil ? dlg.getNode("last").getValue() : "/";
 			list.setValue(dir);
 			selected();
-			update("property-list");
 			auto_update();
 		</open>
 
 		<close>
-			active = 0;
+			update_interval = 0;
 			dlg.getNode("last", 1).setValue(dir);
 		</close>
 	</nasal>

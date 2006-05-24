@@ -359,6 +359,44 @@ the list.
 
 
 
+airport-list
+------------
+
+like "list", but fills the list automatically with all airports known
+to FlightGear. Calls bindings on airport selection and returns the
+selected entry in <property> on dialog-apply. Interprets <property>
+as search term on dialog-update.
+
+
+
+property-list
+-------------
+
+like "list", but shows a list of properties from the global property
+tree. The widget handles navigation in the property tree. It calls its
+bindings on property selection and returns the path of the selected
+property in <property> on dialog-apply. It's up to the caller to check
+if the path belongs to a dir node or a value node. The widget shows
+the contents of the dir property given in <property> on dialog-apply.
+It does *not* handle setting of property values! Clicking on some
+entries with the "control" key pressed has a special meaning:
+
+  "."     ->  toggle display of property flags (see below)
+  ".."    ->  go to root node
+  (bool)  ->  toggle bool value
+
+The flags printed after the node type have the following meaning:
+
+  r       ->  read protected
+  w       ->  write protected
+  R       ->  trace read operations       (in the terminal window
+  W       ->  trace write operations       with --log-level=info)
+  A       ->  archive bit set
+  U       ->  user archive bit set
+  T       ->  property is "tied"
+
+
+
 select
 ------
 

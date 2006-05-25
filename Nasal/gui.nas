@@ -422,7 +422,7 @@ showWeightDialog = func {
         cap = t.getNode("capacity-gal_us", 1).getValue();
 
         # Hack, to ignore the "ghost" tanks created by the C++ code.
-        if(cap == nil or cap < 1) { continue; }
+        if(cap == nil or cap < 1) { i+=1; continue; }
 
         title = tcell(fuelTable, "text", i+1, 0);
         title.set("label", tname);

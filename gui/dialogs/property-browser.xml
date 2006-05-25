@@ -44,13 +44,15 @@
 		</binding>
 		<binding>
 			<command>nasal</command>
-			<script>selected()</script>
+			<script>select()</script>
 		</binding>
 	</property-list>
 
 	<group>
 		<layout>hbox</layout>
 		<default-padding>2</default-padding>
+
+		<empty><whatever/></empty>
 
 		<text>
 			<label>--</label>
@@ -90,6 +92,8 @@
 			var node = nil;		# selected node entry (props.Node)
 			var dir = nil;		# current directory (string)
 			var update_interval = 2;
+			var root_title = "Internal Properties";
+			var no_selection = "[none]";
 
 			update = func(w) {
 				fgcommand("dialog-update", props.Node.new({"object-name": w,
@@ -105,7 +109,7 @@
 				return l ~ "..." ~ r;
 			}
 
-			selected = func {
+			select = func {
 				var lst = list.getValue();
 				node = props.globals.getNode(lst);
 				if (node == nil) {
@@ -113,9 +117,9 @@
 				}
 				if (size(node.getChildren())) {
 					dir = node.getPath();
-					title.setValue(node.getPath() == "" ? "Internal Properties" : lst);
+					title.setValue(node.getPath() == "" ? root_title : lst);
 					node = nil;
-					label.setValue("         --");
+					label.setValue(no_selection);
 					input.setValue("");
 				} else {
 					var name = node.getName();
@@ -158,7 +162,7 @@
 
 			dir = dlg.getNode("last") != nil ? dlg.getNode("last").getValue() : "/";
 			list.setValue(dir);
-			selected();
+			select();
 			auto_update();
 		</open>
 

@@ -2,7 +2,6 @@
 
 <PropertyList>
 	<name>property-browser</name>
-	<dialog-name>property-browser</dialog-name>
 	<layout>vbox</layout>
 	<default-padding>3</default-padding>
 
@@ -199,7 +198,7 @@
 		<close>
 			update_interval = 0;
 			if (find("--", dlgname) >= 0) {
-				props.globals.getNode("/sim/gui/dialogs", 1).removeChildren(dlgname);
+				dlg.getParent().removeChildren(dlgname);
 			} else {
 				dlg.getNode("last", 1).setValue(dir);
 			}

@@ -110,8 +110,8 @@
 			var no_selection = "[none]";
 
 			update = func(w) {
-				fgcommand("dialog-update", props.Node.new({"object-name": w,
-						"dialog-name": dlgname}));
+				self.setValues({"dialog-name": dlgname, "object-name": w});
+				fgcommand("dialog-update", self);
 			}
 
 			squeeze = func(s, n) {

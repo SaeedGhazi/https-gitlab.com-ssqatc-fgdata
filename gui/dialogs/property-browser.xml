@@ -2,12 +2,24 @@
 
 <PropertyList>
 	<name>property-browser</name>
+	<dialog-name>property-browser</dialog-name>
 	<layout>vbox</layout>
 	<default-padding>3</default-padding>
 
 	<group>
 		<layout>hbox</layout>
 		<default-padding>1</default-padding>
+
+		<button>
+			<legend></legend>
+			<pref-width>16</pref-width>
+			<pref-height>16</pref-height>
+			<border>2</border>
+			<binding>
+				<command>nasal</command>
+				<script>clone()</script>
+			</binding>
+		</button>
 
 		<empty><whatever/></empty>
 
@@ -84,7 +96,9 @@
 
 	<nasal>
 		<open>
-			var dlg = props.globals.getNode("/sim/gui/dialogs/property-browser", 1);
+			var self = cmdarg();
+			var dlgname = self.getNode("name").getValue();
+			var dlg = props.globals.getNode("/sim/gui/dialogs/" ~ dlgname, 1);
 			var title = dlg.getNode("title", 1);
 			var label = dlg.getNode("label", 1);
 			var input = dlg.getNode("input", 1);
@@ -97,7 +111,7 @@
 
 			update = func(w) {
 				fgcommand("dialog-update", props.Node.new({"object-name": w,
-						"dialog-name": "property-browser"}));
+						"dialog-name": dlgname}));
 			}
 
 			squeeze = func(s, n) {
@@ -152,6 +166,22 @@
 				}
 			}
 
+			clone = func {
+				var name = "property-browser--" ~ int(rand() * 10000000);
+				var base = "/sim/gui/dialogs/" ~ name ~ "/";
+				setprop(base ~ "/last", dir);
+				self.setValues({
+						"name": name,
+						"dialog-name": name,
+						"group[0]/text/property": base ~ "title",
+						"property-list/property": base ~ "list",
+						"group[1]/text/property": base ~ "label",
+						"group[1]/input/property": base ~ "input",
+				});
+				fgcommand("dialog-new", self);
+				fgcommand("dialog-show", self);
+			}
+
 			auto_update = func {
 				list.setValue(dir);
 				update("property-list");
@@ -168,7 +198,11 @@
 
 		<close>
 			update_interval = 0;
-			dlg.getNode("last", 1).setValue(dir);
+			if (find("--", dlgname) >= 0) {
+				props.globals.getNode("/sim/gui/dialogs", 1).removeChildren(dlgname);
+			} else {
+				dlg.getNode("last", 1).setValue(dir);
+			}
 		</close>
 	</nasal>
 </PropertyList>

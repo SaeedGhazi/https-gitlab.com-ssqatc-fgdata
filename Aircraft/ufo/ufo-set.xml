@@ -38,11 +38,11 @@
     <desc>add model to scenery</desc>
    </key>
    <key>
-    <name>space bar + mouse click</name>
+    <name>Ctrl + mouse click</name>
     <desc>select nearest model (flashes)</desc>
    </key>
    <key>
-    <name>space bar + cursor up/down</name>
+    <name>Ctrl + cursor up/down</name>
     <desc>cycle through model list</desc>
    </key>
    <key>
@@ -142,11 +142,11 @@
  </input>
 
  <!-- default model -->
- <cursor>Aircraft/ufo/Models/cursor.ac</cursor>
+ <cursor type="string">Aircraft/ufo/Models/cursor.ac</cursor>
 
  <!-- subdirs of $FG_ROOT to search models in.
       Comma separated, e.g. "Models,Scenery/Objects/w130n30" -->
- <source>Models</source>
+ <source type="string">Models</source>
 
  <nasal>
   <ufo>

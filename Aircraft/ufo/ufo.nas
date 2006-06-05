@@ -36,6 +36,7 @@ m2ft = func { arg[0] / 0.3048 }
 floor = func(v) { v < 0.0 ? -int(-v) - 1 : int(v) }
 ceil = func(v) { -floor(-v) }
 pow = func(v, w) { math.exp(math.ln(v) * w) }
+pow2 = func(e) { e ? 2 * pow2(e - 1) : 1 }
 printf = func(_...) { print(call(sprintf, _)) }
 
 
@@ -566,7 +567,6 @@ ModelMgr = {
 		m.lonN.setValue(0);
 		m.latN.setValue(0);
 
-		m.spacebarN = props.globals.getNode("/controls/engines/engine/starter", 1);
 		m.modelpath = path;
 
 		m.dynamic = nil;
@@ -579,7 +579,7 @@ ModelMgr = {
 		if (me.block) {
 			return;
 		}
-		if (me.spacebarN.getBoolValue()) {
+		if (KbdCtrl.getBoolValue()) {
 			me.select();
 		} else {
 			me.add_instance();
@@ -709,7 +709,7 @@ ModelMgr = {
 
 incElevator = controls.incElevator;
 controls.incElevator = func(step, apstep) {
-	if (getprop("/controls/engines/engine/starter")) {
+	if (KbdCtrl.getBoolValue()) {
 		modelmgr.cycle(step > 0 ? 1 : -1);
 	} else {
 		incElevator(step, apstep);
@@ -861,8 +861,16 @@ var modellist = nil;
 var adjust = nil;
 var modelmgr = nil;
 
+var KbdShift = nil;
+var KbdCtrl = nil;
+var KbdAlt = nil;
+
 
 settimer(func {
+	KbdShift = props.globals.getNode("/devices/status/keyboard/shift");
+	KbdCtrl = props.globals.getNode("/devices/status/keyboard/ctrl");
+	KbdAlt = props.globals.getNode("/devices/status/keyboard/alt");
+
 	modellist = scanDirs(getprop("/source"));
 	adjust = Adjust.new("/data");
 	modelmgr = ModelMgr.new(getprop("/cursor"));

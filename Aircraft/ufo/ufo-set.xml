@@ -42,6 +42,10 @@
     <desc>select nearest model (flashes)</desc>
    </key>
    <key>
+    <name>Shift + mouse click</name>
+    <desc>move selected model to new place</desc>
+   </key>
+   <key>
     <name>Ctrl + cursor up/down</name>
     <desc>cycle through model list</desc>
    </key>

@@ -14,6 +14,12 @@
 			<name type="string">HELVETICA_12</name>
 		</gui>
 
+		<splash>
+			<name type="string">default.txf</name>
+			<size type="float">19</size>
+			<slant type="float">0</slant>
+		</splash>
+
 		<message-display>
 			<name type="string">SANS_12B</name>
 		</message-display>
@@ -145,5 +151,19 @@
 			<blue type="float">0.0</blue>
 			<alpha type="float">1.0</alpha>
 		</textbox-editable>
+
+		<!-- splash screen colors -->
+
+		<splash-font>
+			<red type="float">1.0</red>
+			<green type="float">0.9</green>
+			<blue type="float">0.0</blue>
+		</splash-font>
+
+		<splash-screen>
+			<red type="float">0.0</red>
+			<green type="float">0.0</green>
+			<blue type="float">0.0</blue>
+		</splash-screen>
 	</colors>
 </PropertyList>

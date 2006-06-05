@@ -16,6 +16,12 @@
 			<slant type="float">0</slant>
 		</gui>
 
+		<splash>
+			<name type="string">default.txf</name>
+			<size type="float">19</size>
+			<slant type="float">0</slant>
+		</splash>
+
 		<message-display>
 			<name type="string">SANS_12B</name>
 		</message-display>

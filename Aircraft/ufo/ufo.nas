@@ -571,16 +571,24 @@ ModelMgr = {
 
 		m.dynamic = nil;
 		m.static = [];
-		m.block = 0;
 		m.import();
 		return m;
 	},
 	click : func {
-		if (me.block) {
-			return;
-		}
 		if (KbdCtrl.getBoolValue()) {
 			me.select();
+		} elsif (KbdShift.getBoolValue()) {
+			me.remove_selected();
+
+			var hdg = adjust.stk_hdgN.getBoolValue();
+			var orient = adjust.stk_orientN.getBoolValue();
+			adjust.stk_hdgN.setBoolValue(1);
+			adjust.stk_orientN.setBoolValue(1);
+
+			me.add_instance();
+
+			adjust.stk_hdgN.setBoolValue(hdg);
+			adjust.stk_orientN.setBoolValue(orient);
 		} else {
 			me.add_instance();
 		}
@@ -635,14 +643,10 @@ ModelMgr = {
 		me.display_status(me.modelpath);
 	},
 	remove_selected : func {
-		if (me.block) {
-			return;
-		}
 		if (me.dynamic != nil) {
 			me.dynamic.del();
 			me.dynamic = nil;
 		}
-		me.select();
 	},
 	setmodelpath : func(path) {
 		me.modelpath = path;
@@ -849,7 +853,7 @@ exportData = func {
 }
 
 
-removeSelectedModel = func { modelmgr.remove_selected() }
+removeSelectedModel = func { modelmgr.remove_selected(); modelmgr.select(); }
 
 
 

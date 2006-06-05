@@ -321,7 +321,11 @@ The following commands are available -- for sign properties:
 
   @light=0         make sign non-emissive (default: 1, which uses the
                    emission defined for the material in materials.xml)
-                   (Turning emission "off" currently sets it to 0.3,0.3,0.3)
+                   The GL material for lighted signs is defined in the
+                   sign's <material> entry (e.g. for "RedSign"), while
+                   the state for the respective unlighted sign is defined
+                   in an entry for the same name with ".unlighted" appended
+                   ("RegSign.unlighted").
 
 
 
@@ -493,12 +497,12 @@ Then click anywhere on the terrain to add a model (left mouse button).
 You can open the adjustment dialog (Tab-key) to make adjustments to
 position and orientation. Click as often as you like, choose further
 models from the m-key dialog. You can select an already placed object
-by clicking at its base (not the object itself, but the surface point
-where it's located!) while holding the space-bar down. You can remove the
-selected object with the Backspace-key. (See the ?-key dialog for futher
-available keys.) After clicking on the input field right over the status
-line (invisible if there's no text in it) you can enter a comment/legend
-for the selected object.
+by Ctrl-clicking at its base (not at the object itself, but the surface
+point where it's located!). You can remove the selected object with the
+Backspace-key. (See the ?-key dialog for futher available keys.)
+After clicking on the input field right over the status line (invisible
+if there's no text in it) you can enter a comment/legend for the selected
+object.
 
 And finally, you dump the object data to the terminal (d-key) or export
 them to a file $HOME/.fgfs/ufo-model-export.xml (Unix) or

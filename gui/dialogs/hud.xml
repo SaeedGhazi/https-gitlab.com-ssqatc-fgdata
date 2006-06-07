@@ -25,8 +25,30 @@
 		<text>
 			<label>Alpha:</label>
 		</text>
+
+		<empty><stretch>true</stretch></empty>
+
 		<slider>
 			<property>/sim/hud/alpha</property>
+			<live>true</live>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</slider>
+	</group>
+
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<label>Brightness:</label>
+		</text>
+
+		<empty><stretch>true</stretch></empty>
+
+		<slider>
+			<property>/sim/hud/brightness</property>
+			<live>true</live>
+			<max>1.5</max>
 			<binding>
 				<command>dialog-apply</command>
 			</binding>

@@ -567,7 +567,13 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>H</name>
   <desc>Cycle HUD Brightness</desc>
   <binding>
-   <command>hud-brightkey</command>
+   <command>nasal</command>
+   <script>
+     if (getprop("/sim/hud/visibility")) {
+         var br = getprop("/sim/hud/brightness") - 0.2;
+         setprop("/sim/hud/brightness", br > 0.01 ? br : 1);
+     }
+   </script>
   </binding>
  </key>
 
@@ -743,7 +749,20 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>h</name>
   <desc>HUD Master Switch</desc>
   <binding>
-   <command>hud-masterswitch</command>
+   <command>nasal</command>
+   <script>
+    if (!getprop("/sim/hud/visibility")) {
+        return setprop("/sim/hud/visibility", 1);
+    }
+    var i = getprop("/sim/hud/current-color") + 1;
+    if (i >= size(props.globals.getNode("/sim/hud/colors", 1).getChildren("color"))) {
+       setprop("/sim/hud/visibility", 0);
+       setprop("/sim/hud/current-color", 0);
+    } else {
+       setprop("/sim/hud/visibility", 1);
+       setprop("/sim/hud/current-color", i);
+    }
+   </script>
   </binding>
  </key>
 

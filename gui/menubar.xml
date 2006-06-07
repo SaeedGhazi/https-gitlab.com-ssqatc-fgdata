@@ -120,7 +120,7 @@
   </item>
 
   <item>
-   <label>Adjust HUD Transparency</label>
+   <label>Adjust HUD Properties</label>
    <binding>
     <command>dialog-show</command>
     <dialog-name>hud</dialog-name>

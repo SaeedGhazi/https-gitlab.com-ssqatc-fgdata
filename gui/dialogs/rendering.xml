@@ -107,9 +107,9 @@
       <halign>left</halign>
       <label>3D Clouds</label>
       <color>
-          <red>0.5</red>
-          <green>0.5</green>
-          <blue>0.5</blue>
+        <red>0.5</red>
+        <green>0.5</green>
+        <blue>0.5</blue>
       </color>
     </text>
     <group>
@@ -202,50 +202,50 @@
       </text>
     </group>
     <group>
-    <layout>vbox</layout>
-     <group>
-     <layout>hbox</layout>
-     <checkbox>
-      <halign>left</halign>
-      <label>Aircraft</label>
-      <property>/sim/rendering/shadows-ac</property>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-     </checkbox>
-     <checkbox>
-      <halign>left</halign>
-      <label>Transparency</label>
-      <property>/sim/rendering/shadows-ac-transp</property>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-     </checkbox>
-     </group>
-     <checkbox>
-      <halign>left</halign>
-      <label>Scenery objects</label>
-      <property>/sim/rendering/shadows-to</property>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-     </checkbox>
-     <checkbox>
-      <halign>left</halign>
-      <label>AI objects</label>
-      <property>/sim/rendering/shadows-ai</property>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-     </checkbox>
-     <checkbox>
-      <halign>left</halign>
-      <label>Silhouette (debug)</label>
-      <property>/sim/rendering/shadows-debug</property>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-     </checkbox>
+      <layout>vbox</layout>
+      <group>
+        <layout>hbox</layout>
+        <checkbox>
+          <halign>left</halign>
+          <label>Aircraft</label>
+          <property>/sim/rendering/shadows-ac</property>
+          <binding>
+             <command>dialog-apply</command>
+          </binding>
+        </checkbox>
+        <checkbox>
+          <halign>left</halign>
+          <label>Transparency</label>
+          <property>/sim/rendering/shadows-ac-transp</property>
+          <binding>
+            <command>dialog-apply</command>
+          </binding>
+        </checkbox>
+      </group>
+      <checkbox>
+        <halign>left</halign>
+        <label>Scenery objects</label>
+        <property>/sim/rendering/shadows-to</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+      <checkbox>
+        <halign>left</halign>
+        <label>AI objects</label>
+        <property>/sim/rendering/shadows-ai</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+      <checkbox>
+        <halign>left</halign>
+        <label>Silhouette (debug)</label>
+        <property>/sim/rendering/shadows-debug</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
     </group>
   </group>
 
@@ -267,4 +267,12 @@
 
     <empty><stretch>true</stretch></empty>
   </group>
+
+  <nasal>
+    <open>
+      if (!getprop("/sim/devel")) {
+        cmdarg().getNode("group[2]/group[1]").removeChild("checkbox", 2);
+      }
+    </open>
+  </nasal>
 </PropertyList>

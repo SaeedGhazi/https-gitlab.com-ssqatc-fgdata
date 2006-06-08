@@ -12,6 +12,9 @@ Started September 2000 by David Megginson, david@megginson.com
 
  <!-- General simulation preferences -->
  <sim>
+  <!-- hide some development tools, such as parts of the HUD adjustment dialog -->
+  <devel type="bool">false</devel>
+
   <!-- show-aircraft option: show ALL aircraft regardless by default -->
   <aircraft-min-status>all</aircraft-min-status>
 

@@ -172,15 +172,18 @@ Started September 2000 by David Megginson, david@megginson.com
   <hud>
    <path>Huds/Default/default.xml</path>
    <visibility type="bool">false</visibility>
-   <antialiased type="bool">false</antialiased>
    <font>
     <name type="string">Helvetica.txf</name>
     <size type="float">10</size>
    </font>
-   <alpha type="float">0.67</alpha>
-   <brightness type="float">0.75</brightness>
+   <color>
+    <antialiased type="bool">false</antialiased>
+    <alpha type="float">0.67</alpha>
+    <brightness type="float">0.75</brightness>
+    <alpha-clamp type="float">0.01</alpha-clamp>
+   </color>
    <current-color type="int">0</current-color>
-   <colors>
+   <palette>
     <color n="0"><!-- day -->
      <red type="float">0.1</red>
      <green type="float">0.9</green>
@@ -191,7 +194,7 @@ Started September 2000 by David Megginson, david@megginson.com
      <green type="float">0.1</green>
      <blue type="float">0.1</blue>
     </color>
-   </colors>
+   </palette>
   </hud>
   <systems>
    <path>Aircraft/Generic/generic-systems.xml</path>

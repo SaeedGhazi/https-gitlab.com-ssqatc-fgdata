@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 
 <PropertyList>
-	<x>-50</x>
-	<y>50</y>
+	<x>-20</x>
+	<y>20</y>
 	<name>hud</name>
 	<layout>vbox</layout>
 
@@ -14,7 +14,7 @@
 
 	<checkbox>
 		<label>Antialias</label>
-		<property>/sim/hud/antialiased</property>
+		<property>/sim/hud/color/antialiased</property>
 		<binding>
 			<command>dialog-apply</command>
 		</binding>
@@ -29,7 +29,7 @@
 		<empty><stretch>true</stretch></empty>
 
 		<slider>
-			<property>/sim/hud/alpha</property>
+			<property>/sim/hud/color/alpha</property>
 			<live>true</live>
 			<binding>
 				<command>dialog-apply</command>
@@ -40,18 +40,103 @@
 	<group>
 		<layout>hbox</layout>
 		<text>
+			<label>Clamp:</label>
+		</text>
+
+		<empty><stretch>true</stretch></empty>
+
+		<slider>
+			<property>/sim/hud/color/alpha-clamp</property>
+			<live>true</live>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</slider>
+	</group>
+
+	<hrule><whatever/></hrule>
+
+	<group>
+		<layout>hbox</layout>
+		<text>
 			<label>Brightness:</label>
 		</text>
 
 		<empty><stretch>true</stretch></empty>
 
 		<slider>
-			<property>/sim/hud/brightness</property>
+			<property>/sim/hud/color/brightness</property>
 			<live>true</live>
 			<max>1.5</max>
 			<binding>
 				<command>dialog-apply</command>
 			</binding>
+		</slider>
+	</group>
+
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<label>Red:</label>
+		</text>
+
+		<empty><stretch>true</stretch></empty>
+
+		<slider>
+			<property>/sim/hud/color/red</property>
+			<live>true</live>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+			<color>
+				<red>1.0</red>
+				<green>0.5</green>
+				<blue>0.5</blue>
+			</color>
+		</slider>
+	</group>
+
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<label>Green:</label>
+		</text>
+
+		<empty><stretch>true</stretch></empty>
+
+		<slider>
+			<property>/sim/hud/color/green</property>
+			<live>true</live>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+			<color>
+				<red>0.5</red>
+				<green>1.0</green>
+				<blue>0.5</blue>
+			</color>
+		</slider>
+	</group>
+
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<label>Blue:</label>
+		</text>
+
+		<empty><stretch>true</stretch></empty>
+
+		<slider>
+			<property>/sim/hud/color/blue</property>
+			<live>true</live>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+			<color>
+				<red>0.5</red>
+				<green>0.5</green>
+				<blue>1.0</blue>
+			</color>
 		</slider>
 	</group>
 
@@ -68,4 +153,16 @@
 			</binding>
 		</button>
 	</group>
+
+	<nasal>
+		<open>
+			var self = cmdarg();
+			if (!getprop("/sim/devel")) {
+				foreach(var w; [1, 3, 4, 5]) {
+					self.removeChild("group", w);
+				}
+				self.removeChild("hrule", 1);
+			}
+		</open>
+	</nasal>
 </PropertyList>

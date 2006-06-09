@@ -352,3 +352,8 @@ applyParkingBrake = func(v) {
     return i;
 }
 
+##
+# Weapon handling.
+#
+trigger = func(b) { setprop("/controls/armament/trigger", b); }
+

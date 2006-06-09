@@ -13,7 +13,17 @@
 	<hrule><dummy/></hrule>
 
 	<checkbox>
-		<label>Antialias</label>
+		<label>Transparent</label>
+		<halign>left</halign>
+		<property>/sim/hud/color/transparent</property>
+		<binding>
+			<command>dialog-apply</command>
+		</binding>
+	</checkbox>
+
+	<checkbox>
+		<label>Antialiased</label>
+		<halign>left</halign>
 		<property>/sim/hud/color/antialiased</property>
 		<binding>
 			<command>dialog-apply</command>

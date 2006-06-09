@@ -181,6 +181,7 @@ Started September 2000 by David Megginson, david@megginson.com
    </font>
    <color>
     <antialiased type="bool">false</antialiased>
+    <transparent type="bool">false</transparent>
     <alpha type="float">0.67</alpha>
     <brightness type="float">0.75</brightness>
     <alpha-clamp type="float">0.01</alpha-clamp>

@@ -155,11 +155,11 @@ ________________________________________________________________________________
 		We have a throttle with two raster positions.
 
 		The areas are:
-		1 - 0.87: idle
-		0.87 - 0.79: idle deadband
-		0.79 - -0.55: normal thrust
-		-0.55 - -0.73:  afterburner deadband
-		-0.73 - -1: afterburner
+		1 - 0.99: idle
+		0.99 - 0.9: idle deadband
+		0.9 - -0.55: normal thrust
+		-0.55 - -0.9:  afterburner deadband
+		-0.9 - -1: afterburner
 		-->
 		<desc>Throttle</desc>
 		<number>
@@ -175,28 +175,38 @@ ________________________________________________________________________________
 				if (1==1) {
 					val = cmdarg().getNode("setting").getValue();
 					abend = -1;
-					abstart = -0.73;
+					abstart = -0.9;
 					milend = -0.55;
-					milstart = 0.79;
+					milstart = 0.9;
 					if (val < abstart) {
 						# afterburner
 						a = 0.03/(abend-abstart);
 						b = 1-a*abend;
-						props.setAll("/controls/engines/engine", "augumentation", "true");
+						props.setAll("/controls/engines/engine", "augmentation", "true");
 						props.setAll("/controls/engines/engine", "throttle", a*val+b);
 					} else {
 						# no afterburner
-						props.setAll("/controls/engines/engine", "augumentation", "false");
-						if (val < -0.55) {
+						props.setAll("/controls/engines/engine", "augmentation", "false");
+						if (val < milend) {
 							# afterburner deadband
 							props.setAll("/controls/engines/engine", "throttle", 0.9699999999);
 						} else {
-							if (val < 0.79) {
+							if (val < milstart) {
 								a = 0.96999999999/(milend-milstart);
 								b = -a*milstart;
 								props.setAll("/controls/engines/engine", "throttle", a*val+b);
+								#props.setAll("/controls/engines/engine", "cutoff", 0);
+								#props.setAll("/controls/engines/engine", "starter", 0);
 							} else {
-								props.setAll("/controls/engines/engine", "throttle", 0);
+								if (val < 0.99) {
+									props.setAll("/controls/engines/engine", "throttle", 0.4);
+									#props.setAll("/controls/engines/engine", "cutoff", 0);
+									#props.setAll("/controls/engines/engine", "starter", 1);
+								} else {
+									props.setAll("/controls/engines/engine", "throttle", 0);
+									#props.setAll("/controls/engines/engine", "cutoff", 1);
+									#props.setAll("/controls/engines/engine", "starter", 0);
+								}
 							}
 						}
 					}
@@ -503,7 +513,7 @@ ________________________________________________________________________________
 	<axis n="5"><!-- View Direction Hat -->
 		<desc>View direction; mixture; aileron trim; rudder trim</desc>
 		<number>
-			<unix>5</unix>
+			<unix>4</unix>
 			<mac>5</mac>
 			<windows>6</windows>
 		</number>
@@ -571,7 +581,7 @@ ________________________________________________________________________________
 	<axis>
 		<desc>View direction; prop pitch; elevator trim</desc>
 		<number>
-			<unix>6</unix>
+			<unix>5</unix>
 			<mac>6</mac>
 			<windows>7</windows>
 		</number>

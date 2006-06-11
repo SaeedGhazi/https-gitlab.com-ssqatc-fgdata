@@ -57,11 +57,24 @@ Properties currently used:
     separate red, green, blue, and alpha components (default: all
     color components 0.0, alpha 1.0).
 
+  solid: bool value, if true the surface is solid for an FDM. If it is not
+    solid, it is assumed that the material models a fluid (water) surface
+    (default: true).
+
+  friction-factor: the friction factor for that material. The normalized
+    factor can be used by a FDM to postmultiply all contact friction forces
+    with that factor. That is the more slipery a material is the smaller this
+    value should be. (default: 1.0 for Dry concrete/Asphalt).
+
   rolling-friction: the gear rolling rolling-friction coefficient for this
     particular material. (default: 0.02 for Dry concrete/Asphalt).
 
   bumpiness: normalized bumpiness factor for this particular terrain.
     (default: 0.0 for a smooth surface).
+
+  load-resistence: a pressure value how much force per surface area this
+    surface can carry without deformation. The value should be in N/m^2
+    (default: FLT_MAX).
 
   glyph: group that defines one letter/digit/symbol in a font texture
     subentries: name, left (default: 0.0), right (default: 1.0)
@@ -88,8 +101,11 @@ Shared parameters for various materials.
  <texture>Runway/grass_rwy.rgb</texture>
  <xsize>75</xsize>
  <ysize>75</ysize>
+ <solid>1</solid>
+ <friction-factor>0.9</friction-factor>
  <rolling-friction>0.05</rolling-friction>
  <bumpiness>0.05</bumpiness>
+ <load-resistence>1e5</load-resistence>
 </material>
 
 <material>
@@ -996,6 +1012,7 @@ Shared parameters for various materials.
   <a>1.0</a>
  </specular>
  <shininess>1.2</shininess>
+ <solid>0</solid>
  <rolling-friction>2</rolling-friction>
  <bumpiness>0.8</bumpiness>
 </material>
@@ -1027,6 +1044,7 @@ Shared parameters for various materials.
   <a>1.0</a>
  </specular>
  <shininess>1.2</shininess>
+ <solid>0</solid>
  <rolling-friction>1.5</rolling-friction>
  <bumpiness>0.6</bumpiness>
 </material>
@@ -1037,6 +1055,7 @@ Shared parameters for various materials.
  <xsize>200</xsize>
  <ysize>200</ysize>
  <shininess>1.5</shininess>
+ <solid>0</solid>
  <rolling-friction>2.5</rolling-friction>
  <bumpiness>0.6</bumpiness>
 </material>
@@ -1050,6 +1069,8 @@ Shared parameters for various materials.
  <texture>Terrain/sand3.rgb</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
+ <solid>1</solid>
+ <friction-factor>0.9</friction-factor>
  <rolling-friction>0.04</rolling-friction>
  <bumpiness>0.1</bumpiness>
 </material>
@@ -1060,6 +1081,8 @@ Shared parameters for various materials.
  <texture>Terrain/rock.rgb</texture>
  <xsize>500</xsize>
  <ysize>500</ysize>
+ <solid>1</solid>
+ <friction-factor>0.9</friction-factor>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.3</bumpiness>
 </material>
@@ -1073,9 +1096,12 @@ Shared parameters for various materials.
  <texture>Terrain/marsh4.rgb</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
+ <solid>1</solid>
  <light-coverage>40000000.0</light-coverage>
+ <friction-factor>0.8</friction-factor>
  <rolling-friction>0.3</rolling-friction>
  <bumpiness>0.2</bumpiness>
+ <load-resistence>1e30</load-resistence>
 </material>
 
 <!-- Moved to Tundra (see below)
@@ -1113,8 +1139,11 @@ Shared parameters for various materials.
   <a>1.0</a>
  </specular>
  <shininess>1.2</shininess>
+ <solid>1</solid>
+ <friction-factor>0.9</friction-factor>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.15</bumpiness>
+ <load-resistence>1e30</load-resistence>
 </material>
 
 <material>
@@ -1138,8 +1167,11 @@ Shared parameters for various materials.
   <a>1.0</a>
  </specular>
  <shininess>1.2</shininess>
+ <solid>1</solid>
+ <friction-factor>0.9</friction-factor>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.15</bumpiness>
+ <load-resistence>1e30</load-resistence>
 </material>
 
 <material>
@@ -1148,8 +1180,11 @@ Shared parameters for various materials.
  <xsize>1000</xsize>
  <ysize>1000</ysize>
  <light-coverage>4000000.0</light-coverage>
+ <solid>1</solid>
+ <friction-factor>0.9</friction-factor>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.2</bumpiness>
+ <load-resistence>1e30</load-resistence>
 </material>
 
 <material>
@@ -1173,8 +1208,11 @@ Shared parameters for various materials.
   <a>1.0</a>
  </specular>
  <shininess>1.2</shininess>
+ <solid>1</solid>
+ <friction-factor>0.9</friction-factor>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.1</bumpiness>
+ <load-resistence>1e30</load-resistence>
 </material>
 
 <material>
@@ -1185,8 +1223,11 @@ Shared parameters for various materials.
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
+ <solid>1</solid>
+ <friction-factor>0.9</friction-factor>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.7</bumpiness>
+ <load-resistence>1e30</load-resistence>
  <object-group>
   <range-m>5000</range-m>
   <object>
@@ -1236,8 +1277,11 @@ Shared parameters for various materials.
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
+ <solid>1</solid>
+ <friction-factor>0.9</friction-factor>
  <rolling-friction>0.3</rolling-friction>
  <bumpiness>0.6</bumpiness>
+ <load-resistence>1e30</load-resistence>
  <object-group>
   <range-m>5000</range-m>
   <object>
@@ -1287,8 +1331,11 @@ Shared parameters for various materials.
  <texture>Terrain/drycrop4.rgb</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
+ <solid>1</solid>
+ <friction-factor>0.9</friction-factor>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.6</bumpiness>
+ <load-resistence>1e30</load-resistence>
  <light-coverage>2000000.0</light-coverage>
  <object-group>
   <range-m>5000</range-m>
@@ -1352,8 +1399,11 @@ Shared parameters for various materials.
   <a>1.0</a>
  </specular>
  <shininess>1.2</shininess>
+ <solid>1</solid>
+ <friction-factor>0.9</friction-factor>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.3</bumpiness>
+ <load-resistence>1e30</load-resistence>
  <object-group>
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
@@ -1374,8 +1424,11 @@ Shared parameters for various materials.
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
+ <solid>1</solid>
+ <friction-factor>0.4</friction-factor>
  <rolling-friction>0.6</rolling-friction>
  <bumpiness>0.7</bumpiness>
+ <load-resistence>10</load-resistence>
  <object-group>
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
@@ -1398,6 +1451,11 @@ Shared parameters for various materials.
  <xsize>400</xsize>
  <ysize>400</ysize>
  <light-coverage>10000.0</light-coverage>
+ <solid>1</solid>
+ <friction-factor>1.0</friction-factor>
+ <rolling-friction>0.02</rolling-friction>
+ <bumpiness>0.01</bumpiness>
+ <load-resistence>1e10</load-resistence>
 </material>
 
 <material>
@@ -1406,8 +1464,11 @@ Shared parameters for various materials.
  <xsize>400</xsize>
  <ysize>400</ysize>
  <light-coverage>1000000.0</light-coverage>
+ <solid>1</solid>
+ <friction-factor>0.5</friction-factor>
  <rolling-friction>0.04</rolling-friction>
  <bumpiness>0.5</bumpiness>
+ <load-resistence>1e10</load-resistence>
 </material>
 
 

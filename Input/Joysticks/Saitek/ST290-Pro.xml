@@ -21,6 +21,7 @@ $Id$
 -->
 <PropertyList>
  <name>Saitek ST290 Pro</name>
+ <name>SAITEK Saitek ST290 Pro</name>
 
  <axis n="0">
   <desc>Aileron</desc>

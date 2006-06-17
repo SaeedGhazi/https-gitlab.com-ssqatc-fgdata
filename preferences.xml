@@ -200,6 +200,7 @@ Started September 2000 by David Megginson, david@megginson.com
     </color>
    </palette>
   </hud>
+  <lon-lat-format type="int">2</lon-lat-format>
   <systems>
    <path>Aircraft/Generic/generic-systems.xml</path>
    <autopilot>

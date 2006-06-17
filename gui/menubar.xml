@@ -248,7 +248,11 @@
   <item>
    <label>Set Lat/Lon Format</label>
    <binding>
-    <command>old-lat-lon-format-dialog</command>
+    <command>nasal</command>
+    <script>
+     var f = getprop(var d = "/sim/lon-lat-format") + 1;
+     setprop(d, f &lt; 0 ? 0 : f > 2 ? 0 : f);
+    </script>
    </binding>
   </item>
 

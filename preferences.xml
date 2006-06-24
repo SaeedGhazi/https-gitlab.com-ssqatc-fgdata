@@ -790,6 +790,10 @@ Started September 2000 by David Megginson, david@megginson.com
       <serviceable>true</serviceable>
     </inputs>
   </transponder>
+
+  <marker-beacon>
+    <volume type="double">0.3</volume>
+  </marker-beacon>
   <!-- Instruments -->
 
   <airspeed-indicator>

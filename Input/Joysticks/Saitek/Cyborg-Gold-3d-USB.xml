@@ -38,6 +38,16 @@ When flying the Harrier, "F3/hat left" and "right" control the thrust vector.
 
 
 
+With the keyboard's Control key pressed, the following keys have a different meaning:
+
+Control +            no modifier
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+button 0 (trigger):  trigger selected weapon
+button 1 (left):     switch to previous weapon system
+button 3 (right):    switch to next weapobn system
+
+
+
 ___________________________________ Customization ____________________________________
 
 
@@ -102,11 +112,16 @@ ________________________________________________________________________________
 
 	<nasal>
 		<script><![CDATA[
-			data = props.globals.getNode(this).getNode("data");
+			data = cmdarg().getParent().getNode("data");
 			mode = data.getNode("mode");
 			modifier = data.getNode("modifier");
 			f1 = f2 = 0;
 			left_brake = right_brake = 0;
+			trigger = 0;
+
+			kbdshift = props.globals.getNode("/devices/status/keyboard/shift", 1);
+			kbdctrl = props.globals.getNode("/devices/status/keyboard/ctrl", 1);
+			kbdalt = props.globals.getNode("/devices/status/keyboard/alt", 1);
 
 			get_mode = func { modifier.getValue() + mode.getValue() * 4 }
 
@@ -175,7 +190,11 @@ ________________________________________________________________________________
 			<script>
 				m = get_mode();
 				if (m == 0) {
-					controls.applyBrakes(1);
+					if (kbdctrl.getBoolValue()) {
+						controls.trigger(trigger = 1);
+					} else {
+						controls.applyBrakes(1);
+					}
 				} elsif (m == 1) {
 					controls.applyBrakes(1);
 				} elsif (m == 2) {
@@ -191,6 +210,11 @@ ________________________________________________________________________________
 				<script>
 					m = get_mode();
 					if (m == 0) {
+						if (trigger) {
+							controls.trigger(trigger = 0);
+						} else {
+							controls.applyBrakes(0);
+						}
 						controls.applyBrakes(0);
 					} elsif (m == 1) {
 						i = controls.applyParkingBrake(1);
@@ -218,7 +242,11 @@ ________________________________________________________________________________
 			<script>
 				m = get_mode();
 				if (m == 0) {
-					controls.flapsDown(-1);
+					if (kbdctrl.getBoolValue()) {
+						controls.weaponSelect(-1);
+					} else {
+						controls.flapsDown(-1);
+					}
 				} elsif (m == 1) {
 					controls.gearDown(-1);
 				} elsif (m == 2) {
@@ -280,7 +308,11 @@ ________________________________________________________________________________
 			<script>
 				m = get_mode();
 				if (m == 0) {
-					controls.flapsDown(1);
+					if (kbdctrl.getBoolValue()) {
+						controls.weaponSelect(1);
+					} else {
+						controls.flapsDown(1);
+					}
 				} elsif (m == 1) {
 					controls.gearDown(1);
 				} elsif (m == 2) {

@@ -356,4 +356,10 @@ applyParkingBrake = func(v) {
 # Weapon handling.
 #
 trigger = func(b) { setprop("/controls/armament/trigger", b); }
+weaponSelect = func(d) {
+    var ws = props.globals.getNode("/controls/armament/selected", 1);
+    var n = ws.getValue();
+    if (n == nil) { n = 0; }
+    ws.setIntValue(n + d);
+}
 

@@ -575,6 +575,7 @@ ModelMgr = {
 		return m;
 	},
 	click : func {
+		showStatusDialog(1);
 		if (KbdCtrl.getBoolValue()) {
 			me.select();
 		} elsif (KbdShift.getBoolValue()) {
@@ -880,7 +881,9 @@ settimer(func {
 	modelmgr = ModelMgr.new(getprop("/cursor"));
 	setlistener("/sim/signals/click", func { modelmgr.click() });
 	#setlistener("/sim/signals/click", printDistance);
-	showStatusDialog();
+	if (modelmgr.modelpath != "Aircraft/ufo/Models/cursor.ac") {
+		showStatusDialog(1);
+	}
 }, 1);
 
 
@@ -1104,13 +1107,20 @@ showModelAdjustDialog = func {
 }
 
 
-showStatusDialog = func {
+
+
+showStatusDialog = func(v = nil) {
 	name = "ufo-status-dialog";
 
-	if (contains(dialog, name)) {
-		fgcommand("dialog-close", props.Node.new({ "dialog-name" : name }));
-		delete(dialog, name);
-		return;
+	var is_open = contains(dialog, name);
+	if (v == nil) {
+		return is_open;
+	} elsif (!v) {
+		if (is_open) {
+			fgcommand("dialog-close", props.Node.new({ "dialog-name" : name }));
+			delete(dialog, name);
+		}
+		return 0;
 	}
 
 	dialog[name] = gui.Widget.new();
@@ -1148,8 +1158,16 @@ showStatusDialog = func {
 
 	fgcommand("dialog-new", dialog[name].prop());
 	gui.showDialog(name);
+	return 1;
 }
 
-
-setlistener("/sim/signals/screenshot", showStatusDialog);
+var stat_dlg = nil;
+setlistener("/sim/signals/screenshot", func {
+	if (cmdarg().getBoolValue()) {
+		stat_dlg = showStatusDialog();
+		showStatusDialog(0);
+	} else {
+		showStatusDialog(stat_dlg);
+	}
+});
 

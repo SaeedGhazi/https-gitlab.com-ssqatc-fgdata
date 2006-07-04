@@ -1,0 +1,279 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+	<!-- heading -->
+
+	<label>
+		<width>2</width>
+		<height>2</height>
+		<format>hdg = %.1f</format>
+		<halign>left</halign>
+		<input>
+			<property>/autopilot/settings/heading-bug-deg</property>
+		</input>
+		<condition>
+			<equals>
+				<property>/autopilot/locks/heading</property>
+				<value>dg-heading-hold</value>
+			</equals>
+		</condition>
+	</label>
+
+	<label>
+		<width>2</width>
+		<height>2</height>
+		<format>hdg = %.1f</format>
+		<halign>left</halign>
+		<input>
+			<property>/autopilot/settings/true-heading-deg</property>
+		</input>
+		<condition>
+			<equals>
+				<property>/autopilot/locks/heading</property>
+				<value>true-heading-hold</value>
+			</equals>
+		</condition>
+	</label>
+
+	<!-- wp[0] -->
+
+	<label>
+		<x>0</x>
+		<y>-15</y>
+		<width>2</width>
+		<height>2</height>
+		<format>%5s</format>
+		<halign>left</halign>
+		<input>
+			<property>/autopilot/route-manager/wp[0]/id</property>
+		</input>
+		<condition>
+			<equals>
+				<property>/autopilot/locks/heading</property>
+				<value>true-heading-hold</value>
+			</equals>
+		</condition>
+	</label>
+
+	<label>
+		<x>35</x>
+		<y>-15</y>
+		<width>2</width>
+		<height>2</height>
+		<format>%6.1fnm</format>
+		<halign>left</halign>
+		<input>
+			<property>/autopilot/route-manager/wp[0]/dist</property>
+		</input>
+		<condition>
+			<equals>
+				<property>/autopilot/locks/heading</property>
+				<value>true-heading-hold</value>
+			</equals>
+			<not>
+				<equals>
+					<property>/autopilot/route-manager/wp[0]/id</property>
+					<value></value>
+				</equals>
+			</not>
+		</condition>
+	</label>
+
+	<label>
+		<x>82</x>
+		<y>-15</y>
+		<width>2</width>
+		<height>2</height>
+		<format>%s</format>
+		<halign>left</halign>
+		<input>
+			<property>/autopilot/route-manager/wp[0]/eta</property>
+		</input>
+		<condition>
+			<equals>
+				<property>/autopilot/locks/heading</property>
+				<value>true-heading-hold</value>
+			</equals>
+			<not>
+				<equals>
+					<property>/autopilot/route-manager/wp[0]/id</property>
+					<value></value>
+				</equals>
+			</not>
+		</condition>
+	</label>
+
+	<!-- wp[1] -->
+
+	<label>
+		<x>0</x>
+		<y>-30</y>
+		<width>2</width>
+		<height>2</height>
+		<format>%5s</format>
+		<halign>left</halign>
+		<input>
+			<property>/autopilot/route-manager/wp[1]/id</property>
+		</input>
+		<condition>
+			<equals>
+				<property>/autopilot/locks/heading</property>
+				<value>true-heading-hold</value>
+			</equals>
+		</condition>
+	</label>
+
+	<label>
+		<x>35</x>
+		<y>-30</y>
+		<width>2</width>
+		<height>2</height>
+		<format>%6.1fnm</format>
+		<halign>left</halign>
+		<input>
+			<property>/autopilot/route-manager/wp[1]/dist</property>
+		</input>
+		<condition>
+			<equals>
+				<property>/autopilot/locks/heading</property>
+				<value>true-heading-hold</value>
+			</equals>
+			<not>
+				<equals>
+					<property>/autopilot/route-manager/wp[1]/id</property>
+					<value></value>
+				</equals>
+			</not>
+		</condition>
+	</label>
+
+	<label>
+		<x>82</x>
+		<y>-30</y>
+		<width>2</width>
+		<height>2</height>
+		<format>%s</format>
+		<halign>left</halign>
+		<input>
+			<property>/autopilot/route-manager/wp[1]/eta</property>
+		</input>
+		<condition>
+			<equals>
+				<property>/autopilot/locks/heading</property>
+				<value>true-heading-hold</value>
+			</equals>
+			<not>
+				<equals>
+					<property>/autopilot/route-manager/wp[1]/id</property>
+					<value></value>
+				</equals>
+			</not>
+		</condition>
+	</label>
+
+	<!-- wp[2] -->
+
+	<label>
+		<x>0</x>
+		<y>-45</y>
+		<width>2</width>
+		<height>2</height>
+		<format>%5s</format>
+		<halign>left</halign>
+		<input>
+			<property>/autopilot/route-manager/wp[2]/id</property>
+		</input>
+		<condition>
+			<equals>
+				<property>/autopilot/locks/heading</property>
+				<value>true-heading-hold</value>
+			</equals>
+		</condition>
+	</label>
+
+	<label>
+		<x>35</x>
+		<y>-45</y>
+		<width>2</width>
+		<height>2</height>
+		<format>%6.1fnm</format>
+		<halign>left</halign>
+		<input>
+			<property>/autopilot/route-manager/wp[2]/dist</property>
+		</input>
+		<condition>
+			<equals>
+				<property>/autopilot/locks/heading</property>
+				<value>true-heading-hold</value>
+			</equals>
+			<not>
+				<equals>
+					<property>/autopilot/route-manager/wp[2]/id</property>
+					<value></value>
+				</equals>
+			</not>
+		</condition>
+	</label>
+
+	<label>
+		<x>82</x>
+		<y>-45</y>
+		<width>2</width>
+		<height>2</height>
+		<format>%s</format>
+		<halign>left</halign>
+		<input>
+			<property>/autopilot/route-manager/wp[2]/eta</property>
+		</input>
+		<condition>
+			<equals>
+				<property>/autopilot/locks/heading</property>
+				<value>true-heading-hold</value>
+			</equals>
+			<not>
+				<equals>
+					<property>/autopilot/route-manager/wp[2]/id</property>
+					<value></value>
+				</equals>
+			</not>
+		</condition>
+	</label>
+
+	<!-- altitude -->
+
+	<label>
+		<y>-60</y>
+		<width>2</width>
+		<height>2</height>
+		<format>alt = %.0f</format>
+		<halign>left</halign>
+		<input>
+			<property>/autopilot/settings/target-altitude-ft</property>
+		</input>
+		<condition>
+			<equals>
+				<property>/autopilot/locks/altitude</property>
+				<value>altitude-hold</value>
+			</equals>
+		</condition>
+	</label>
+
+	<label>
+		<y>-60</y>
+		<width>2</width>
+		<height>2</height>
+		<format>agl = %.0f</format>
+		<halign>left</halign>
+		<input>
+			<property>/autopilot/settings/target-agl-ft</property>
+		</input>
+		<condition>
+			<equals>
+				<property>/autopilot/locks/altitude</property>
+				<value>agl-hold</value>
+			</equals>
+		</condition>
+	</label>
+
+</PropertyList>

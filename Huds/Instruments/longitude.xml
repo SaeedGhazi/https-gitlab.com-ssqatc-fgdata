@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<label>
+		<name>Longitude</name>
+		<width>1</width>
+		<height>10</height>
+
+		<halign>left</halign>
+		<input>
+			<property>/position/longitude-string</property>
+		</input>
+	</label>
+</PropertyList>

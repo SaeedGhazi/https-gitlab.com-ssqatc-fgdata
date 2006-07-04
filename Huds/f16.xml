@@ -1,0 +1,184 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<enable3d>true</enable3d>
+
+	<ladder>
+		<name>Pitch Ladder</name>
+		<type>pitch</type>
+		<x>-16</x>
+		<y>-45</y>
+		<width>32</width>
+		<height>100</height>
+		<roll-input>
+			<property>/orientation/roll-deg</property>
+		</roll-input>
+		<pitch-input>
+			<property>/orientation/pitch-deg</property>
+		</pitch-input>
+		<compression-factor>11.63</compression-factor>
+		<display-span>13.0</display-span>
+		<divisions>5.0</divisions>
+		<screen-hole>22</screen-hole>
+		<lbl-pos>0</lbl-pos>
+		<enable-fuselage-ref-line>false</enable-fuselage-ref-line>
+		<enable-target-spot>false</enable-target-spot>
+		<enable-velocity-vector>false</enable-velocity-vector>
+		<enable-drift-marker>false</enable-drift-marker>
+		<enable-alpha-bracket>false</enable-alpha-bracket>
+		<enable-energy-marker>false</enable-energy-marker>
+		<enable-climb-dive-marker>false</enable-climb-dive-marker>
+		<enable-glide-slope-marker>false</enable-glide-slope-marker>
+		<glide-slope>0.0</glide-slope>
+		<enable-energy-worm>false</enable-energy-worm>
+		<enable-waypoint-marker>false</enable-waypoint-marker>
+	</ladder>
+
+	<tape>
+		<name>Altitude-MSL</name>
+		<x>54</x>
+		<y>-34</y>
+		<width>10</width>
+		<height>60</height>
+		<input>
+			<property>/position/altitude-ft</property>
+			<factor>0.001</factor>
+			<max>100</max>
+			<min>-100</min>
+		</input>
+		<major-divisions>1</major-divisions>
+		<minor-divisions>0.1</minor-divisions>
+		<display-span>2.4</display-span>
+		<option>right</option>
+		<option>vertical</option>
+		<tick-bottom>false</tick-bottom>
+		<tick-top>false</tick-top>
+		<tick-right>false</tick-right>
+		<tick-left>false</tick-left>
+		<cap-bottom>false</cap-bottom>
+		<cap-top>false</cap-top>
+		<cap-right>false</cap-right>
+		<cap-left>false</cap-left>
+		<marker-offset>5</marker-offset>
+		<enable-pointer>true</enable-pointer>
+		<pointer-type>fixed</pointer-type>
+	</tape>
+
+	<tape>
+		<name>KIAS</name>
+		<x>-65</x>
+		<y>-36</y>
+		<width>10</width>
+		<height>60</height>
+		<input>
+			<property>/velocities/airspeed-kt</property>
+			<factor>0.1</factor>
+			<max>85</max>
+			<min>0</min>
+		</input>
+		<major-divisions>1</major-divisions>
+		<minor-divisions>0.1</minor-divisions>
+		<display-span>2.4</display-span>
+		<option>left</option>
+		<option>vertical</option>
+		<tick-bottom>false</tick-bottom>
+		<tick-top>false</tick-top>
+		<tick-right>false</tick-right>
+		<tick-left>false</tick-left>
+		<cap-bottom>false</cap-bottom>
+		<cap-top>false</cap-top>
+		<cap-right>false</cap-right>
+		<cap-left>false</cap-left>
+		<marker-offset>5</marker-offset>
+		<enable-pointer>true</enable-pointer>
+		<pointer-type>fixed</pointer-type>
+	</tape>
+
+	<label>
+		<name>KIAS</name>
+		<x>-86</x>
+		<y>-9</y>
+		<width>50</width>
+		<height>40</height>
+		<input>
+			<property>/velocities/airspeed-kt</property>
+		</input>
+		<format>%4.0f</format>
+		<halign>left</halign>
+	</label>
+
+	<label>
+		<name>KIAS Marker</name>
+		<x>-55</x>
+		<y>-4</y>
+		<width>50</width>
+		<height>40</height>
+		<format>C</format>
+		<halign>left</halign>
+	</label>
+
+	<label>
+		<name>Altitude</name>
+		<x>62</x>
+		<y>-4</y>
+		<width>50</width>
+		<height>40</height>
+		<input>
+			<property>/position/altitude-ft</property>
+		</input>
+		<format>%4.0f</format>
+		<halign>left</halign>
+	</label>
+
+	<label>
+		<name>SIM</name>
+		<x>-54</x>
+		<y>-42</y>
+		<width>2</width>
+		<height>2</height>
+		<format>SIM</format>
+		<halign>left</halign>
+	</label>
+
+	<label>
+		<name>G Load</name>
+		<x>-41</x>
+		<y>23</y>
+		<width>2</width>
+		<height>2</height>
+		<input>
+			<property>/accelerations/pilot/z-accel-fps_sec</property>
+			<factor>-0.03108095</factor>
+			<damp>0.95</damp>
+		</input>
+		<format>%2.1f</format>
+		<halign>right</halign>
+	</label>
+
+	<label>
+		<name>MACH Number</name>
+		<x>-54</x>
+		<y>-50</y>
+		<width>2</width>
+		<height>2</height>
+		<input>
+			<property>/velocities/mach</property>
+		</input>
+		<format>%4.2f</format>
+		<halign>left</halign>
+	</label>
+
+	<label>
+		<name>Heading</name>
+		<x>38</x>
+		<y>-50</y>
+		<width>2</width>
+		<height>2</height>
+		<input>
+			<property>/orientation/heading-deg</property>
+		</input>
+		<format>%04.0f</format>
+		<halign>left</halign>
+	</label>
+</PropertyList>
+

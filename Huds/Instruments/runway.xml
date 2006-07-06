@@ -5,8 +5,8 @@
 		<name>Runway</name>
 		<x>-240</x>
 		<y>-180</y>
-		<width>480</width>
-		<height>360</height>
+		<width>640</width>
+		<height>480</height>
 
 		<scale-dist-nm>5</scale-dist-nm>
 		<line-scale>5.0</line-scale>

@@ -36,7 +36,7 @@
 
 	<tape>
 		<name>Altitude-MSL</name>
-		<x>54</x>
+		<x>53</x>
 		<y>-34</y>
 		<width>10</width>
 		<height>60</height>
@@ -66,7 +66,7 @@
 
 	<tape>
 		<name>KIAS</name>
-		<x>-65</x>
+		<x>-64</x>
 		<y>-34</y>
 		<width>10</width>
 		<height>60</height>

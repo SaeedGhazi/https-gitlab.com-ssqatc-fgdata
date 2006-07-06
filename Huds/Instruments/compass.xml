@@ -9,8 +9,6 @@
 
 		<input>
 			<property>/orientation/heading-deg</property>
-			<max>360.0</max>
-			<min>0.0</min>
 		</input>
 		<display-span>25.0</display-span>
 		<modulo>360</modulo>

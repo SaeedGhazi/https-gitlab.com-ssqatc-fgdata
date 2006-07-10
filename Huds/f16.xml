@@ -20,7 +20,6 @@
 		<display-span>13.0</display-span>
 		<divisions>5.0</divisions>
 		<screen-hole>22</screen-hole>
-		<lbl-pos>0</lbl-pos>
 		<enable-fuselage-ref-line>false</enable-fuselage-ref-line>
 		<enable-target-spot>false</enable-target-spot>
 		<enable-velocity-vector>false</enable-velocity-vector>
@@ -149,7 +148,7 @@
 		<input>
 			<property>/accelerations/pilot/z-accel-fps_sec</property>
 			<factor>-0.03108095</factor>
-			<damp>0.95</damp>
+			<damp>1.3</damp>
 		</input>
 		<format>%2.1f</format>
 		<halign>right</halign>

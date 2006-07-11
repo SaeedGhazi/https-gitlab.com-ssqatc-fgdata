@@ -67,6 +67,13 @@
 			<property>/position/altitude-agl-ft</property>
 			<min>0.0</min>
 		</input>
+
+		<condition>
+			<less-than>
+				<property>/position/altitude-agl-ft</property>
+				<value>1000000</value>
+			</less-than>
+		</condition>
 	</tape>
 
 	<tape>

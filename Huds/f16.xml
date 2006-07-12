@@ -101,8 +101,9 @@
 		<height>40</height>
 		<input>
 			<property>/velocities/airspeed-kt</property>
+			<offset>0.5</offset>
 		</input>
-		<format>%4.0f</format>
+		<format>%4ld</format>
 		<halign>left</halign>
 	</label>
 
@@ -124,8 +125,9 @@
 		<height>40</height>
 		<input>
 			<property>/position/altitude-ft</property>
+			<offset>0.5</offset>
 		</input>
-		<format>%4.0f</format>
+		<format>%4ld</format>
 		<halign>left</halign>
 	</label>
 
@@ -175,9 +177,12 @@
 		<height>2</height>
 		<input>
 			<property>/orientation/heading-deg</property>
+			<offset>0.5</offset>
+			<max>359.999</max>
 		</input>
-		<format>%04.0f</format>
+		<format>%04ld</format>
 		<halign>left</halign>
+		<modulo>360</modulo>
 	</label>
 </PropertyList>
 

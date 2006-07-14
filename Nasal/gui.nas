@@ -134,6 +134,36 @@ Widget = {
 };
 
 
+##
+# load XML dialog
+#     node ... target node (name must be "dialog")
+#     path ... file path relative to $FG_ROOT
+#
+# return value:
+#     target node on success, nil otherwise
+#
+# Example:
+#
+#     var dlg = props.globals.getNode("/sim/gui/dialogs/foo-config/dialog", 1);
+#     loadXMLDialog(dlg, "Aircraft/foo/foo_config.xml");
+#     fgcommand("dialog-show", dlg);
+#
+loadXMLDialog = func(node, path) {
+	if (node.getName() != "dialog") {
+		print("loadXMLDialog: node name must be 'dialog'");
+		return nil;
+	}
+	fgcommand("loadxml", props.Node.new({"filename": path, "targetnode": node.getPath()}));
+	var name = node.getNode("name");
+	if (name == nil) {
+		print("loadXMLDialog: XML dialog must have <name>");
+		return nil;
+	}
+	node.getNode("dialog-name", 1).setValue(name.getValue());
+	fgcommand("dialog-new", node);
+	node;
+}
+
 
 ########################################################################
 # GUI theming

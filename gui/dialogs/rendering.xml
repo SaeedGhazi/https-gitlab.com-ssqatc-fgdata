@@ -35,6 +35,15 @@
 
     <checkbox>
       <halign>left</halign>
+      <label>Use Point Sprites for Runway Lights</label>
+      <property>/sim/rendering/point-sprites</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
+
+    <checkbox>
+      <halign>left</halign>
       <label>Enhanced runway lighting</label>
       <property>/sim/rendering/enhanced-lighting</property>
       <binding>

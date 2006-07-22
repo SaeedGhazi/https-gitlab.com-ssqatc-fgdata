@@ -250,6 +250,23 @@ Example:
 
 
 
+
+(2.2.8) <aiming-reticle> ......................................................
+
+Draws MIL-STD-1787B aiming reticle. Size of bullet and inner circle are
+determined from <width>. The outer circle radius is changeable at runtime.
+
+  <active-condition> ... true:  stadiametric (4.2.4.4)  (default)
+                         false: standby (4.2.4.5)
+  <diameter>         ... float; diameter of outer circle relative to inner circle
+                         default: 2.0 (= twice as big)
+
+
+
+
+
+
+
 (3) <import> ==================================================================
 
 Imports another HUD config into the current one. This can be a file defining

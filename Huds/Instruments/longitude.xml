@@ -4,9 +4,9 @@
 	<label>
 		<name>Longitude</name>
 		<width>1</width>
-		<height>10</height>
+		<height>1</height>
 
-		<halign>left</halign>
+		<halign>center</halign>
 		<input>
 			<property>/position/longitude-string</property>
 		</input>

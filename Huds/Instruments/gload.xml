@@ -3,8 +3,8 @@
 <PropertyList>
 	<label>
 		<name>G Load</name>
-		<width>1</width>
-		<height>1</height>
+		<width>28</width>
+		<height>12</height>
 
 		<format>%4.2f g</format>
 		<halign>right</halign>

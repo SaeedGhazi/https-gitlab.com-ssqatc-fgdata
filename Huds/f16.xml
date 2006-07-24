@@ -179,7 +179,6 @@
 		</input>
 		<format>%04.0f</format>
 		<halign>left</halign>
-		<modulo>360</modulo>
 	</label>
 </PropertyList>
 

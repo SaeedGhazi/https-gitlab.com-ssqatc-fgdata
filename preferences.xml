@@ -60,30 +60,30 @@ Started September 2000 by David Megginson, david@megginson.com
    <distance-attenuation type="bool" userarchive="y">false</distance-attenuation>
    <precipitation-enable type="bool" userarchive="y">false</precipitation-enable>
    <precipitation>
-	<!-- streaks coloring and transparency -->
-   	<min-light type="float">0.35</min-light>
-	<streak-brightness-nearmost-layer type="float">0.9</streak-brightness-nearmost-layer>
-	<streak-brightness-farmost-layer type="float">0.5</streak-brightness-farmost-layer>
+    <!-- streaks coloring and transparency -->
+    <min-light type="float">0.35</min-light>
+    <streak-brightness-nearmost-layer type="float">0.9</streak-brightness-nearmost-layer>
+    <streak-brightness-farmost-layer type="float">0.5</streak-brightness-farmost-layer>
 
-	<!-- streak period as a function of the speed, decreases with speed -->
-	<streak-period-max type="float">2.5</streak-period-max>
-	<streak-period-change-per-kt type="float">0.005</streak-period-change-per-kt>
-	<streak-period-min type="float">1.0</streak-period-min>
+    <!-- streak period as a function of the speed, decreases with speed -->
+    <streak-period-max type="float">2.5</streak-period-max>
+    <streak-period-change-per-kt type="float">0.005</streak-period-change-per-kt>
+    <streak-period-min type="float">1.0</streak-period-min>
 
-	<!-- streak length as a function of the speed, increases with speed -->
-	<streak-length-min type="float">0.03</streak-length-min>
-	<streak-length-change-per-kt type="float">0.0005</streak-length-change-per-kt>
-	<streak-length-max type="float">0.1</streak-length-max>
+    <!-- streak length as a function of the speed, increases with speed -->
+    <streak-length-min type="float">0.03</streak-length-min>
+    <streak-length-change-per-kt type="float">0.0005</streak-length-change-per-kt>
+    <streak-length-max type="float">0.1</streak-length-max>
 
-	<!-- # of rain streaks at the 100.0% precipitation density -->
-	<streak-count-min type="int">40</streak-count-min><!-- lightest rain -->
-	<streak-count-max type="int">190</streak-count-max><!-- heaviest rain -->
-	<!-- numbers over MAX_RAIN_SLICE in simgear/environment/visual_enviro.cxx
-	  will be ignored in the current implementation.  -->
+    <!-- # of rain streaks at the 100.0% precipitation density -->
+    <streak-count-min type="int">40</streak-count-min><!-- lightest rain -->
+    <streak-count-max type="int">190</streak-count-max><!-- heaviest rain -->
+    <!-- numbers over MAX_RAIN_SLICE in simgear/environment/visual_enviro.cxx
+         will be ignored in the current implementation.  -->
 
-	<!-- the precipitation cone geometry -->
-	<cone-base-radius type="float">15.0</cone-base-radius>
-	<cone-height type="float">30.0</cone-height>
+    <!-- the precipitation cone geometry -->
+    <cone-base-radius type="float">15.0</cone-base-radius>
+    <cone-height type="float">30.0</cone-height>
    </precipitation>
    <lightning-enable type="bool" userarchive="y">false</lightning-enable>
    <bump-mapping type="bool" userarchive="y">false</bump-mapping>
@@ -179,7 +179,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <visibility type="bool">false</visibility> <!-- new HUD -->
    <font>
     <name type="string">Helvetica.txf</name>
-    <size type="float">10</size>
+    <size type="float">8</size>
    </font>
    <color>
     <antialiased type="bool">false</antialiased>
@@ -255,7 +255,6 @@ Started September 2000 by David Megginson, david@megginson.com
     <heading-deg type="double">0</heading-deg>
   </tower>
 
-
   <view>
     <name>Cockpit View</name>
     <type>lookfrom</type>
@@ -277,7 +276,6 @@ Started September 2000 by David Megginson, david@megginson.com
       <front-right-direction-deg type="double">315</front-right-direction-deg>
     </config>
   </view>
-
 
   <view>
     <name>Helicopter View</name>
@@ -385,7 +383,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <eye-lat-deg-path>/position/latitude-deg</eye-lat-deg-path>
       <eye-lon-deg-path>/position/longitude-deg</eye-lon-deg-path>
       <eye-alt-ft-path>/position/altitude-ft</eye-alt-ft-path>
-      
+
       <at-model type="bool">true</at-model>
       <at-model-idx type="int">0</at-model-idx>
 
@@ -413,12 +411,12 @@ Started September 2000 by David Megginson, david@megginson.com
     <hide-cursor>true</hide-cursor>
     <cursor-timeout-sec>10.0</cursor-timeout-sec>
   </mouse>
-  
+
   <replay>
    <duration type="double">90</duration>
    <view type="int">1</view>
   </replay>
-  
+
   <atc>
    <enabled type="bool">true</enabled>
   </atc>
@@ -606,7 +604,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <flaps type="double">0.0</flaps>
    <flaps-serviceable type="bool">true</flaps-serviceable>
   </flight>
- 
+
   <engines>
    <engine n="0">
     <starter type="bool">false</starter>
@@ -688,7 +686,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <beacon type="bool">true</beacon>
    <strobe type="bool">false</strobe>
   </lighting>
- 
+
   <anti-ice>
    <pitot-heat type="bool">false</pitot-heat>
    <engine n="0">
@@ -893,7 +891,7 @@ Started September 2000 by David Megginson, david@megginson.com
     <standby-khz type="double">341.0</standby-khz>
    </outputs>
   </kr-87>
-  
+
   <gps-annunciator>
    <lamp-test type="bool">false</lamp-test>
   </gps-annunciator>

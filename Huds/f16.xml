@@ -96,9 +96,9 @@
 	<label>
 		<name>KIAS</name>
 		<x>-86</x>
-		<y>-9</y>
-		<width>50</width>
-		<height>40</height>
+		<y>-6</y>
+		<width>1</width>
+		<height>1</height>
 		<input>
 			<property>/velocities/airspeed-kt</property>
 		</input>
@@ -109,9 +109,9 @@
 	<label>
 		<name>KIAS Marker</name>
 		<x>-55</x>
-		<y>-4</y>
-		<width>50</width>
-		<height>40</height>
+		<y>-1</y>
+		<width>1</width>
+		<height>1</height>
 		<format>C</format>
 		<halign>left</halign>
 	</label>
@@ -119,9 +119,9 @@
 	<label>
 		<name>Altitude</name>
 		<x>62</x>
-		<y>-4</y>
-		<width>50</width>
-		<height>40</height>
+		<y>-1</y>
+		<width>1</width>
+		<height>1</height>
 		<input>
 			<property>/position/altitude-ft</property>
 		</input>
@@ -132,9 +132,9 @@
 	<label>
 		<name>SIM</name>
 		<x>-54</x>
-		<y>-42</y>
-		<width>2</width>
-		<height>2</height>
+		<y>-39</y>
+		<width>1</width>
+		<height>1</height>
 		<format>SIM</format>
 		<halign>left</halign>
 	</label>
@@ -142,9 +142,9 @@
 	<label>
 		<name>G Load</name>
 		<x>-41</x>
-		<y>23</y>
-		<width>2</width>
-		<height>2</height>
+		<y>26</y>
+		<width>1</width>
+		<height>1</height>
 		<input>
 			<property>/accelerations/pilot/z-accel-fps_sec</property>
 			<factor>-0.03108095</factor>
@@ -157,9 +157,9 @@
 	<label>
 		<name>MACH Number</name>
 		<x>-54</x>
-		<y>-50</y>
-		<width>2</width>
-		<height>2</height>
+		<y>-47</y>
+		<width>1</width>
+		<height>1</height>
 		<input>
 			<property>/velocities/mach</property>
 		</input>
@@ -170,9 +170,9 @@
 	<label>
 		<name>Heading</name>
 		<x>38</x>
-		<y>-50</y>
-		<width>2</width>
-		<height>2</height>
+		<y>-47</y>
+		<width>1</width>
+		<height>1</height>
 		<input>
 			<property>/orientation/heading-deg</property>
 			<max>359.999</max>

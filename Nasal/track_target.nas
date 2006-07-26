@@ -128,6 +128,9 @@ TrackUpdate = func {
         my_hdg_prop = sprintf("/orientation/heading-magnetic-deg" );
         my_hdg = getprop(my_hdg_prop);
 
+        my_hdg_true_prop = sprintf("/orientation/heading-deg" );
+        my_hdg_true = getprop(my_hdg_true_prop);
+
         alt_prop = sprintf("%s/position/altitude-ft", target_root );
         alt = getprop(alt_prop);
         if ( alt == nil ) {
@@ -170,6 +173,8 @@ TrackUpdate = func {
 
         setprop( "/autopilot/settings/target-altitude-ft", alt );
         setprop( "/autopilot/settings/heading-bug-deg", my_hdg + h_offset );
+        setprop( "/autopilot/settings/true-heading-deg",
+                 my_hdg_true + h_offset );
         setprop( "/autopilot/settings/target-speed-kt", target_speed );
     }
 

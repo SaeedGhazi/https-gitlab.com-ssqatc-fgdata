@@ -34,7 +34,7 @@
       <binding>
         <command>nasal</command>
         <script>
-          setprop("/environment/rebuild_layers", getprop("/environment/rebuild_layers")+1);
+          setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers")+1);
         </script>
       </binding>
     </combo>

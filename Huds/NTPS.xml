@@ -10,6 +10,8 @@
  <ladder>
   <name>Pitch Ladder</name>
   <type>pitch</type>
+  <!-- <type>climb-dive</type> -->
+  <enable-climb-dive-ladder>true</enable-climb-dive-ladder>
   <x>-60</x>
   <y>-90</y>
   <width>120</width>
@@ -21,13 +23,15 @@
    <property>/orientation/pitch-deg</property>
   </pitch-input>
 
-  <compression-factor>11.63</compression-factor>
-  <display-span>45.0</display-span>
-  <divisions>10.0</divisions>
+  <compression-factor>11</compression-factor>
+  <display-span>30.0</display-span>
+  <divisions>5.0</divisions>
   <screen-hole>70</screen-hole>
   <lbl-pos>0</lbl-pos>
+  <enable-climb-dive-ladder>true</enable-climb-dive-ladder>
   <enable-fuselage-ref-line>false</enable-fuselage-ref-line>
   <enable-target-spot>false</enable-target-spot>
+  <enable-target-markers>true</enable-target-markers>
   <enable-velocity-vector>true</enable-velocity-vector> <!-- this one! -->
   <enable-drift-marker>false</enable-drift-marker>
   <enable-alpha-bracket>false</enable-alpha-bracket>
@@ -37,14 +41,13 @@
   <glide-slope>0.0</glide-slope>
   <enable-energy-worm>false</enable-energy-worm>
   <enable-waypoint-marker>false</enable-waypoint-marker>
-  <enable-target-markers>true</enable-target-markers>
  </ladder>
 
  <tape>
   <name>Gyrocompass</name>
-  <x>-125</x>
-  <y>180</y>
-  <width>250</width>
+  <x>-100</x>
+  <y>-160</y>
+  <width>200</width>
   <height>28</height>
 
   <input>
@@ -81,8 +84,8 @@
   <pointer-width>7</pointer-width>
   <halign>center</halign>
   <x>-9</x>
-  <y>165</y>
-  <format>%3.0f</format>
+  <y>-170</y>
+  <format>%03.0f</format>
   <box>true</box>
   <input>
    <property>/orientation/heading-deg</property>

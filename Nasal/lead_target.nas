@@ -336,7 +336,7 @@ LeadTargetUpdate = func {
 
 select_task_dialog = func {
     var dlg = props.globals.getNode("/sim/gui/dialogs/NTPS/config/dialog", 1);
-    gui.loadXMLDialog(dlg, "Aircraft/YF-23/NTPS_target_task.xml");
+    gui.loadXMLDialog(dlg, "gui/dialogs/NTPS_target_task.xml");
     fgcommand("dialog-show", dlg);
 }
 

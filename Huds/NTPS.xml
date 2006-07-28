@@ -189,10 +189,10 @@
 
  <turn-bank-indicator>
   <name>Turn Bank Indicator</name>
-  <x>-210</x>
-  <y>-210</y>
-  <width>420</width>
-  <height>420</height>
+  <x>-125</x>
+  <y>-50</y>
+  <width>250</width>
+  <height>250</height>
   <bank-input>
    <property>/orientation/roll-deg</property>
   </bank-input>
@@ -200,6 +200,7 @@
    <property>/orientation/side-slip-deg</property>
   </sideslip-input>
   <bank-scale>true</bank-scale>
+  <option>top</option>
  </turn-bank-indicator>
 
  <aiming-reticle>

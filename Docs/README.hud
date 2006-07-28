@@ -121,7 +121,7 @@ used by that instrument. Possible values are:
   <option> horizontal </option> /
   <option> top </option>          \
   <option> left </option>         |___place of numbers in <tape>, <gauge>
-  <option> bottom </option>       |
+  <option> bottom </option>       |   top/bottom for turn-bank-indicator, etc.
   <option> right </option>        /
   <option> both </option>           _left/right for vert. and top/bottom for hor.
   <option> noticks </option>
@@ -180,11 +180,18 @@ whole instrument.
 
 Draws a formatted string or number.
 
+Text:
   <format>   ... printf-style format with only one % item.  Example:  "%2.3lf ft"
   <prefix>   ... prefix text  \___ in addition to the <format>
   <postfix>  ... postfix text /
   <halign>   ... one of "left", "center" (default), "right".
+
+Box:
   <box>      ... draw box around label (default: false)
+  <option>   ... one of (left|right|top|bottom)  ... draw arrow on this side
+  <pointer-width>  ... size of pointer base
+  <pointer-lenfth> ... distance of base--peak
+
   <blinking>
       <interval>                  ... on/off-time in seconds (default: -1 == off)
       <condition>...</condition>  ... see secion 2.1.1       (default: true)
@@ -212,7 +219,8 @@ Example:
 
       <format>%2.1f</format>
       <halign>right</halign>
-      <box>false</box>
+      <box>true</box>
+      <option>bottom</option>    <!-- pointer on the lower edge -->
 
       <blinking>
           <interval>0.25</interval>
@@ -238,14 +246,130 @@ Example:
 
 
 
+
+
 (2.2.2) <tape> ................................................................
+SCALE:
+    input
+    major-divisions
+    minor-divisions
+    modulo
+    display-span
+
+TAPE:
+    tick-bottom
+    tick-top
+    tick-right
+    tick-left
+    cap-bottom
+    cap-top
+    cap-right
+    cap-left
+    marker-offset
+    enable-pointer
+    zoom
+
+    pointer-type   (moving|fixed)
+    tick-type      (circle|line)
+    tick-length    (constant|variable)
+
+
+
+
+
+
+
+
+
 (2.2.3) <dial> ................................................................
+SCALE:
+    input
+    major-divisions
+    minor-divisions
+    modulo
+    display-span
+
+TAPE:
+    radius
+    divisions
+
+
+
+
+
+
+
+
 (2.2.4) <gauge> ...............................................................
+SCALE:
+    input
+    major-divisions
+    minor-divisions
+    modulo
+    display-span
+
+
+
+
+
+
 (2.2.5) <turn-bank-indicator> .................................................
+    bank-input
+    sideslip-input
+    gap-width
+    bank-scale
+
+
+
+
+
+
+
+
 (2.2.6) <ladder> ..............................................................
+    pitch-input
+    roll-input
+    display-span
+    divisions
+    screen-hole
+    compression-factor
+    enable-fuselage-ref-line
+    enable-target-spot
+    enable-velocity-vector
+    enable-drift-marker
+    enable-alpha-bracket
+    enable-energy-marker
+    enable-climb-dive-marker
+    enable-glide-slope-marker
+    glide-slope
+    enable-energy-marker
+    enable-waypoint-marker
+    enable-zenith
+    enable-nadir
+    enable-hat
+    type       (pitch|climb-dive)
+
+
+
+
+
+
+
+
+
 (2.2.7) <runway> ..............................................................
+    arrow-scale
+    arrow-radius
+    line-scale
+    scale-dist-nm
+    outer_stipple
+    center-stipple
+    arrow-always
 
-
+reads directly:
+    /position/altitude-agl-ft,
+    /sim/view[0]/config/pitch-pitch-deg
+    /sim/view[0]/config/pitch-heading-deg
 
 
 

@@ -11,7 +11,6 @@
   <name>Pitch Ladder</name>
   <type>pitch</type>
   <!-- <type>climb-dive</type> -->
-  <enable-climb-dive-ladder>true</enable-climb-dive-ladder>
   <x>-60</x>
   <y>-90</y>
   <width>120</width>

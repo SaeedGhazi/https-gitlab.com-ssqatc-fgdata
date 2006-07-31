@@ -34,7 +34,9 @@
   <enable-fuselage-ref-line>false</enable-fuselage-ref-line>
   <enable-target-spot>false</enable-target-spot>
   <enable-target-markers>true</enable-target-markers>
-  <enable-velocity-vector>true</enable-velocity-vector> <!-- this one! -->
+  <enable-velocity-vector>true</enable-velocity-vector>
+  <enable-zenith>true</enable-zenith>
+  <enable-nadir>true</enable-nadir>
   <enable-drift-marker>false</enable-drift-marker>
   <enable-alpha-bracket>false</enable-alpha-bracket>
   <enable-energy-marker>false</enable-energy-marker>
@@ -190,10 +192,10 @@
 
  <turn-bank-indicator>
   <name>Turn Bank Indicator</name>
-  <x>-100</x>
-  <y>-180</y>
-  <width>200</width>
-  <height>200</height>
+  <x>-125</x>
+  <y>-190</y>
+  <width>250</width>
+  <height>250</height>
   <bank-input>
    <property>/orientation/roll-deg</property>
   </bank-input>

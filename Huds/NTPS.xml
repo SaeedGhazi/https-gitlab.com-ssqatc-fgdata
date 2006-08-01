@@ -46,23 +46,24 @@
 
  <tape>
   <name>Gyrocompass</name>
+  <input>
+   <property>/orientation/heading-deg</property>
+   <factor>0.1</factor>
+  </input>
+
   <x>-100</x>
   <y>170</y>
   <width>200</width>
   <height>28</height>
 
-  <input>
-   <property>/orientation/heading-deg</property>
-  </input>
-
-  <display-span>40.0</display-span>
-  <modulo>360</modulo>
+  <display-span>4.0</display-span>
+  <modulo>36</modulo>
 
   <option>top</option>
-  <label-gap-width>25</label-gap-width>
+  <label-gap-width>22</label-gap-width>
 
-  <major-divisions>10</major-divisions>
-  <minor-divisions>5</minor-divisions>
+  <major-divisions>1</major-divisions>
+  <minor-divisions>0.5</minor-divisions>
   <tick-bottom>false</tick-bottom>
   <tick-top>false</tick-top>
   <tick-right>false</tick-right>
@@ -96,12 +97,22 @@
 
  <tape>
   <name>Altitude MSL</name>
+
+  <input>
+   <property>/position/altitude-ft</property>
+   <min>-0.5</min>
+   <factor>0.001</factor>
+  </input>
+
   <x>180</x>
   <y>-100</y>
   <width>35</width>
-  <height>200</height>
+  <height>202</height>
+
   <option>right</option>
   <option>vertical</option>
+  <label-gap-width>11</label-gap-width>
+
   <major-divisions>1.0</major-divisions>
   <minor-divisions>0.1</minor-divisions>
   <display-span>2.5</display-span>
@@ -114,28 +125,24 @@
   <cap-right>false</cap-right>
   <cap-left>false</cap-left>
   <marker-offset>0.0</marker-offset>
-  <enable-pointer>true</enable-pointer>
+  <enable-pointer>false</enable-pointer>
   <pointer-type>fixed</pointer-type>
   <tick-type>line</tick-type>
   <tick-length>variable</tick-length>
-  <input>
-   <property>/position/altitude-ft</property>
-   <factor>0.001</factor>
-  </input>
  </tape>
 
  <label>
   <name>Altitude</name>
   <width>28</width>
   <height>10</height>
-  <x>212</x>
+  <x>197</x>
   <y>-5</y>
   <halign>left</halign>
   <format>%.0f0</format>
   <box>true</box>
   <option>left</option>
   <pointer-width>10</pointer-width>
-  <pointer-length>9</pointer-length>
+  <pointer-length>5</pointer-length>
   <input>
    <property>/position/altitude-ft</property>
    <factor>0.1</factor>
@@ -144,15 +151,25 @@
 
  <tape>
   <name>KIAS</name>
+
+  <input>
+   <property>/velocities/airspeed-kt</property>
+   <min>0.0</min>
+   <factor>0.1</factor>
+  </input>
+
   <x>-180</x>
   <y>-100</y>
   <width>28</width>
   <height>200</height>
+
   <option>left</option>
   <option>vertical</option>
-  <major-divisions>10</major-divisions>
-  <minor-divisions>5</minor-divisions>
-  <display-span>50.0</display-span>
+  <label-gap-width>11</label-gap-width>
+
+  <major-divisions>5</major-divisions>
+  <minor-divisions>1</minor-divisions>
+  <display-span>20.0</display-span>
   <tick-bottom>false</tick-bottom>
   <tick-top>false</tick-top>
   <tick-right>false</tick-right>
@@ -162,28 +179,24 @@
   <cap-right>false</cap-right>
   <cap-left>false</cap-left>
   <marker-offset>0.0</marker-offset>
-  <enable-pointer>true</enable-pointer>
+  <enable-pointer>false</enable-pointer>
   <pointer-type>fixed</pointer-type>
   <tick-type>line</tick-type>
   <tick-length>variable</tick-length>
-  <input>
-   <property>/velocities/airspeed-kt</property>
-   <min>0.0</min>
-  </input>
  </tape>
 
  <label>
   <name>Speed</name>
   <width>23</width>
   <height>10</height>
-  <x>-210</x>
+  <x>-189</x>
   <y>-5</y>
   <halign>right</halign>
   <format>%.0f</format>
   <box>true</box>
   <option>right</option>
   <pointer-width>10</pointer-width>
-  <pointer-length>9</pointer-length>
+  <pointer-length>5</pointer-length>
   <input>
    <property>/velocities/airspeed-kt</property>
   </input>

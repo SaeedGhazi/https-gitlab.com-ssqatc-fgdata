@@ -59,6 +59,7 @@
   <modulo>360</modulo>
 
   <option>top</option>
+  <label-gap-width>25</label-gap-width>
 
   <major-divisions>10</major-divisions>
   <minor-divisions>5</minor-divisions>
@@ -79,15 +80,15 @@
 
  <label>
   <name>Heading</name>
+  <x>-9</x>
+  <y>189</y>
   <width>18</width>
   <height>10</height>
-  <option>top</option>
-  <pointer-width>7</pointer-width>
   <halign>center</halign>
-  <x>-9</x>
-  <y>160</y>
   <format>%03.0f</format>
   <box>true</box>
+  <!--option>bottom</option>
+  <pointer-width>7</pointer-width-->
   <input>
    <property>/orientation/heading-deg</property>
   </input>
@@ -125,16 +126,16 @@
 
  <label>
   <name>Altitude</name>
-  <width>24</width>
+  <width>28</width>
   <height>10</height>
   <x>212</x>
   <y>-5</y>
-  <option>left</option>
-  <pointer-width>10</pointer-width>
-  <pointer-length>9</pointer-length>
   <halign>left</halign>
   <format>%.0f0</format>
   <box>true</box>
+  <option>left</option>
+  <pointer-width>10</pointer-width>
+  <pointer-length>9</pointer-length>
   <input>
    <property>/position/altitude-ft</property>
    <factor>0.1</factor>
@@ -173,16 +174,16 @@
 
  <label>
   <name>Speed</name>
-  <width>20</width>
+  <width>23</width>
   <height>10</height>
   <x>-210</x>
   <y>-5</y>
-  <option>right</option>
-  <pointer-width>10</pointer-width>
-  <pointer-length>9</pointer-length>
   <halign>right</halign>
   <format>%.0f</format>
   <box>true</box>
+  <option>right</option>
+  <pointer-width>10</pointer-width>
+  <pointer-length>9</pointer-length>
   <input>
    <property>/velocities/airspeed-kt</property>
   </input>

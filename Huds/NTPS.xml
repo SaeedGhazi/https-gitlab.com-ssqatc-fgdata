@@ -155,7 +155,6 @@
    <property>/position/altitude-ft</property>
    <min>-0.5</min>
    <factor>0.001</factor>
-   <format>%0.1f</format>
   </input>
 
   <x>180</x>

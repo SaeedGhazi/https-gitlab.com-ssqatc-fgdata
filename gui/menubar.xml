@@ -419,6 +419,14 @@
   </item>
 
   <item>
+   <label>Stopwatch</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>stopwatch-dialog</dialog-name>
+   </binding>
+  </item>
+
+  <item>
    <label>Development Keys</label>
    <binding>
     <command>nasal</command>

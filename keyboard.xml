@@ -595,6 +595,16 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+ <key n="78">
+  <name>N</name>
+  <desc>Propeller Coarser.</desc>
+  <repeatable type="bool">true</repeatable>
+  <binding>
+   <command>nasal</command>
+   <script>controls.adjPropeller(-1)</script>
+  </binding>
+ </key>
+
  <key n="80">
   <name>P</name>
   <desc>Toggle panel.</desc>
@@ -808,6 +818,16 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <binding>
    <command>nasal</command>
    <script>controls.adjMixture(1)</script>
+  </binding>
+ </key>
+
+ <key n="110">
+  <name>n</name>
+  <desc>Propeller Finer.</desc>
+  <repeatable type="bool">true</repeatable>
+  <binding>
+   <command>nasal</command>
+   <script>controls.adjPropeller(1)</script>
   </binding>
  </key>
 

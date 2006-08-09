@@ -742,6 +742,7 @@ common_aircraft_keys = {
        #{ name : "k",         desc : "increase spoilers" },
         { name : "l",         desc : "toggle tail-wheel lock" },
         { name : "m/M",       desc : "mixture richer/leaner" },
+        { name : "n/N",       desc : "propeller finer/coarser" },
         { name : "P",         desc : "toggle 2D panel" },
         { name : "s",         desc : "swap panels" },
         { name : ", .",       desc : "left/right brake (comma, period)" },

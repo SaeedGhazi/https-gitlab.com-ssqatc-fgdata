@@ -21,6 +21,7 @@ $Id$
 		<desc>right brake</desc>
 			<number>
 				<unix>0</unix>
+				<windows>0</windows>
 			</number>
                         <binding>
                                 <command>property-scale</command>
@@ -34,6 +35,7 @@ $Id$
                 <desc>left brake</desc>
                         <number>
                                 <unix>1</unix>
+				<windows>1</windows>
                         </number>
                         <binding>
                                 <command>property-scale</command>
@@ -47,6 +49,7 @@ $Id$
 		<desc>rudder</desc>
 			<number>
 				<unix>2</unix>
+				<windows>3</windows>
 			</number>
 			<binding>
 				<command>property-scale</command>

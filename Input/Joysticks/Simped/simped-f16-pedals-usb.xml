@@ -16,6 +16,7 @@ $Id$
 
 <PropertyList>
 	<name>dhs-electronic Simped vario (USB) </name>
+	<name>Simp</name>
 
 	<axis>
 		<desc>right brake</desc>

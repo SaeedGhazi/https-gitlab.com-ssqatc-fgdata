@@ -441,10 +441,13 @@ control:  This element, which can appear in two different contexts,
 
 rotor:    A rotor. Used for simulating helicopters. You can have one, two
           or even more.
+          There is a drawing of a rotor in the Doc-directory
+          (README.yasim.rotor.gif) Please find the measures from this drawing
+          for several parameters in square brackets [].
           If you specify a rotor, you do not need to specify a wing or hstab,
-          the settings for approach and cruise will be ignored then. Instead
-          stored results from the c182 will be used.
-
+          the settings for approach and cruise will be ignored then. You have
+          to specify the solver results manually. See below.
+         
           name:    The name of the rotor.
                    (some data is stored at /rotors/name/)
                    The rpm, cone angle, yaw angle and roll angle are stored
@@ -453,21 +456,44 @@ rotor:    A rotor. Used for simulating helicopters. You can have one, two
                    All angles are in degree, positive values always mean "up".
                    This is not completely tested, but seem to work at least
                    for rotors rotating counterclockwise.
+                   A value stall gives the fraction of the rotor in stall
+                   (weighted by the fraction the have on lift and drag
+                   without stall). Use this for modifying the rotor-sound.
+                   The torque property has a bug.
           x,y,z:   The position of the rotor center
           nx,ny,nz: The normal of the rotor (pointing upwards, will be
                    normalized by the computer)
           fx,fy,fz: A Vector pointing forward, if not perpendicular to the
                    normal it will be corrected by the computer
-          diameter: The diameter in meter
+          diameter: The diameter in meter [D]
           numblades: The number of blades
           weightperblade: The weight per blade in pounds
           relbladecenter: The relative center of gravity of the blade. Maybe
                    not 100% correct interpreted; use 0.5 for the start and
-                   change in small steps
+                   change in small steps [b/R]
+          chord:     The chord of the blade its base, along the X axis
+                     (not normal to the leading edge, as it is
+                     sometimes defined). [c]
+          twist:     The difference between the incidence angle at the
+                     blade root and the incidence angle at the wing
+                     tip.  Typically, this is a negative number so
+                     that the rotor tips have a lower angle of attack.
+          taper:     The taper fraction, expressed as the tip chord
+                     divided by the root chord.  A taper of one is a
+                     bar blade, and zero would be a blade ending
+                     at a point.  Defaults to one. [d/c]
+          rel_len_where_incidence_is_measured: If the blade is twisted,
+                     you need a point where to measure the incidence angle.
+                     Zero means at the base, 1 means at the tip. Typically
+                     it should be something near 0.7
+          rel_len_blade_start: Typically the blade is not mounted in the 
+                   center of the rotor [a/R]
           rpm:     rounds per minute.
-          ccw:     determines if the rotor rotates clockwise (="false") or
-                   counterclockwise (="true"), (if you look on the top of the
-                   normal, so the bo105 has counterclockwise rotor)
+          ccw:     determines if the rotor rotates clockwise (="0") or
+                   counterclockwise (="1"), (if you look on the top of the
+                   normal, so the bo105 has counterclockwise rotor).
+                   "true" and "false" are not any longer supported to 
+                   increase my lifespan. ;-)
           maxcollective: The maximum of the collective incidence in degree
           mincollective: The minimum of the collective incidence in degree
           maxcyclicele: The maximum of the cyclic incidence in degree for
@@ -478,19 +504,76 @@ rotor:    A rotor. Used for simulating helicopters. You can have one, two
                    the aileron like function
           mincyclicail: The minimum of the cyclic incidence in degree for
                    the aileron like function
+          airfoil_incidence_no_lift: non symmetric airfoils produces lift
+                   with no incidence. This is is the incidence, where the
+                   airfoil is producing no lift. Zero for symmetrical airfoils
+                   (default)
+          incidence_stall_zero_speed:
+          incidence_stall_half_sonic_speed: the stall incidence is a function
+                   of the speed. I found some measured data, where this is
+                   linear over a wide range of speed. Of course the linear
+                   region ends at higher speeds than zero, but just
+                   extrapolate the linear behavior to zero.
+          lift_factor_stall: In stall airfoils produce less lift. Without
+                   stall the c_lift of the profile is assumed to be
+                   sin(incidence-airfoil_incidence_no_lift)*liftcoef;
+                   And in stall:
+                   sin(2*(incidence-airfoil_incidence_no_lift))*liftcoef*...
+                   ...lift_factor_stall;
+                   Therefore this factor is not the quotient between lift
+                   with and without stall. Use 0.28 if you have no idea.
+          drag_factor_stall: The drag of an airfoil in stall is larger than
+                   without stall.
+                   Without stall c_drag is assumed to be
+                   abs(sin(incidence-airfoil_incidence_no_lift))*dragcoef1...
+                   ..+dragcoef0);
+                   With stall this is multiplied by drag_factor
+          stall_change_over: For incidence<incidence_stall there is no stall.
+                   For incidence>(incidence_stall+stall_change_over) there is
+                   stall. In the range between this incidences it is
+                   interpolated linear.
+         
+          The airfoil of the rotor can be described in two ways. First you
+          can define the needed power for different pitch values and the
+          total lift force at a user-defined pitch value. Don't use pitch
+          values greater than the stall incidence. You could get strange
+          results.
+         
           pitch_a: A collective incidence angle, used for the next token
           forceatpitch_a: The force, the rotor is producing when the incident
-                   angle is equal pitch_a. I.e. hover-pitch and a force
+                   angle is equal pitch_a. Without ground effect and with
+                   maximum translational lift. I.e. hover-pitch and a force
                    equivalent to the weight. (in pounds of force)
           pitch_b: A collective incidence angle, used for the next token
           poweratpitch_b: the power the rotor needs at pitch_b. (i.e. at the
                    bo105 the main rotor consumes bout 90% of the engine power,
-                   and 9% the tail rotor. In kW. Used for calculation of the
-                   torque.
+                   and 9% the tail rotor. In kW.
           poweratpitch_0: the power the rotor needs at zero pitch.
-                   In kW. Used for calculation of the torque.
-          notorque: If set to "true" the calculated torque is always zero.
-                   Very helpful while adjusting rotor parameters.
+                   In kW. Used for calculation of the airfoil coefficients.
+                   In near future you can define them directly.
+                
+          The second way is to define the lift and drag coefficients directly.
+          Without stall the c_lift of the profile is assumed to be
+                   sin(incidence-airfoil_incidence_no_lift)*liftcoef;
+          And in stall:
+                   sin(2*(incidence-airfoil_incidence_no_lift))*liftcoef*...
+                   ...lift_factor_stall;
+          Without stall c_drag is assumed to be
+                   abs(sin(incidence-airfoil_incidence_no_lift))*dragcoef1...
+                   ..+dragcoef0);
+          See above, how the coefficients are defined with stall.
+          The parameters:
+          airfoil_lift_coefficient: liftcoef
+          airfoil_drag_coefficient0: dragcoef0
+          airfoil_drag_coefficient1: dragcoef1
+          I read in a forum, that, if you calculate the lift of an heli rotor,
+          you will get a value larger than the measured one. This seems to be
+          valid for this simulation. If you use values for the lift
+          coefficient from real airfoils you will get unrealistic high lift as
+          result (approx. a factor of 2). As starting parameters you can use 
+          airfoil_lift_coefficient="1.9"
+          airfoil_drag_coefficient0="0.0075"
+          airfoil_drag_coefficient1="0.2"
           flapmin: Minimum flapping angle. (Should normally never reached)
           flapmax: Maximum flapping angle. (Should normally never reached)
           flap0:   Flapping angle at no rotation, i.e. -5
@@ -506,7 +589,7 @@ rotor:    A rotor. Used for simulating helicopters. You can have one, two
                    rotors) For rotors without flapping hinge (where the blade
                    are twisted instead, i.e. Bo 105, Lynx) use a mean value,
                    maybe 0.2. This value has a extreme result in the behavior
-                   of the rotor
+                   of the rotor [F/r]
           delta3: Some rotors have a delta3 effect, which results in a
                    decreasing of the incidence when the rotor is flapping.
                    A value of 0 (as most helicopters have) means no change in
@@ -522,17 +605,56 @@ rotor:    A rotor. Used for simulating helicopters. You can have one, two
                    If you know the flapping angle for a given cyclic input you
                    can adjust this by changing this value. Or if you now the
                    maximum roll rate or ...
-          translift: Helicopters have "translational lift", which is due to
-                   turbulence and hard to calculate, so this simulation uses
-                   a phenomenological ansatz. Use .1 for the start value
-          dragfactor: The drag of the rotating rotor perpendicular to the
-                   rotor plane is larger than the drag of the not rotating
-                   rotor. Hard to calculate, so it is added phenomenological
+          translift_maxfactor: Helicopters have "translational lift", which
+                   is due to turbulence. In forward flying the rotor gets less
+                   turbulence air and produces more lift. The factor is the
+                   quotient between lift at high airspeeds to the lift at 
+                   hover (with same pitch).
+          translift_ve: the speed, where the translational lift reaches 1/e of
+                   the maximum value. In m/s.
+          ground_effect_constant: Near to the ground the rotor produces more
+                   torque than in higher altitudes. The ground effect is
+                   calculated as
+                   factor = 1+diameter/altitude*_ground_effect_constant
+          number_of_segments: The rotor is simulated in four different
+                   directions (probably this will be extended in future).
+                   In every direction the rotor is simulated at
+                   number_of_segments points. If the value is to small, the
+                   rotor will react unrealistic. If it is to high, cpu-power
+                   will be wasted. I now use a value of 10, but probably a
+                   smaller value for the tail-rotor would be sufficient.
 
-          Any rotor needs a <control> subelement for the engine
-          (ROTORENGINEON) and can have <control> subelements for the cyclic
+          All rotor can have <control> subelements for the cyclic
           (CYCLICELE, CYCLICAIL) and collective (COLLECTIVE) input.
+
+rotorgear: If you are using one ore more rotors you have to define a
+          rotorgear. It connects all the rotors and adds a simple engine.
+          In future it will be possible, to add a YASim-engine.
+          max_power_engine: the maximum power of the engine, in kW.
+          engine_prop_factor: the engine is working as a pd-regulator. This
+                   is the width of the regulation-band, or, in other words,
+                   the inverse of the proportional-factor of the regulator.
+                   If you set it to 0.02, than up to 98% of the rotor-rpm
+                   the engine will produce maximum torque. At 100% of
+                   the engine will produce no torque.  It is planned to use
+                   YASim-engines instead of this simple engine.
+          engine_accell_limit: The d-factor of the engine is defined as the
+                   maximum acceleration rate of the engine in %/s,
+                   default is 5%/s.
+          max_power_rotor_brake: the maximum power of the rotor brake, in kW
+                   at normal rpm (most? real rotor breaks would be overheated
+                   if used at normal rpm, but this is not simulated now)
+          yasimdragfactor:
+          yasimliftfactor: the solver is not working with rotor-aircrafts.
+                   Therefore you have to specify the results yourself.
+                   10 for drag and 140 for lift seem to be good starting
+                   values.
+
+          The rotorgear needs a <control> subelement for the engine
+          (ROTORGEARENGINEON) and can have a <control> subelement for the
+          rotor brake (ROTORBRAKE).
 
           The rotor simulation is very "beta" and not finished yet. So don't
           spend too much time to adjust a flight behavior to the smallest
           details now.
+

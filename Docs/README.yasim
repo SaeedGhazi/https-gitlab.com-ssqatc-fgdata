@@ -166,7 +166,7 @@ jet:      A turbojet/fan engine.  It accepts a <control> subelement to map a
           afterburner:    Maximum total thrust with afterburner/reheat,
                           in pounds [defaults to "no additional
                           thrust"].
-          rotate:         Vector angle of the thrust in degrees about the 
+          rotate:         Vector angle of the thrust in degrees about the
                           Y axis [0].
           n1-idle:        Idling rotor speed [55].
           n1-max:         Maximum rotor speed [102].
@@ -212,13 +212,13 @@ propeller: A propeller.  This element requires an engine subtag.
            min-rpm:       The minimum operational RPM for a constant speed
                           propeller.  This is the speed to which the
                           prop governor will seek when the blue lever
-                          is at minimum.  The coarse-stop attribute 
+                          is at minimum.  The coarse-stop attribute
                           limits how far the governor can go into trying
                           to reach this RPM.
            max-rpm:       The maximum operational RPM for a constant speed
                           propeller.  See above.  The fine-stop attribute
                           limits how far the governor can go in trying
-                          to reach this RPM.  
+                          to reach this RPM.
            fine-stop:     The minimum pitch of the propeller (high RPM) as a
                           ratio of ideal cruise pitch.  This is set to 0.25
                           by default -- a higher value will result in a
@@ -280,7 +280,7 @@ turbine-engine: A turbine engine definition.  This must be a subelement
                 max-n2:      N2 (percent) turbine speed at max throttle.
                 bsfc:        Specific fuel consumption, in lbs/hr per
                              horsepower.
-                
+
 
 actionpt: Defines an "action point" for an enclosing jet or propeller
           element.  This is the location where the force from the thruster
@@ -316,7 +316,7 @@ gear:     Defines a landing gear.  Accepts <control> subelements to map
 launchbar: Defines a catapult launchbar or strop.
            x,y,z:      The location of the mount point of the launch bar or
                        strop on the aircraft.
-           length:     The length of the launch bar from mount point to tip 
+           length:     The length of the launch bar from mount point to tip
            down-angle: The max angle below the horizontal the
                        launchbar can achieve.
            up-angle:   The max angle above the horizontal the launchbar
@@ -442,12 +442,12 @@ control:  This element, which can appear in two different contexts,
 rotor:    A rotor. Used for simulating helicopters. You can have one, two
           or even more.
           There is a drawing of a rotor in the Doc-directory
-          (README.yasim.rotor.gif) Please find the measures from this drawing
+          (README.yasim.rotor.png) Please find the measures from this drawing
           for several parameters in square brackets [].
           If you specify a rotor, you do not need to specify a wing or hstab,
           the settings for approach and cruise will be ignored then. You have
           to specify the solver results manually. See below.
-         
+
           name:    The name of the rotor.
                    (some data is stored at /rotors/name/)
                    The rpm, cone angle, yaw angle and roll angle are stored
@@ -486,13 +486,13 @@ rotor:    A rotor. Used for simulating helicopters. You can have one, two
                      you need a point where to measure the incidence angle.
                      Zero means at the base, 1 means at the tip. Typically
                      it should be something near 0.7
-          rel_len_blade_start: Typically the blade is not mounted in the 
+          rel_len_blade_start: Typically the blade is not mounted in the
                    center of the rotor [a/R]
           rpm:     rounds per minute.
           ccw:     determines if the rotor rotates clockwise (="0") or
                    counterclockwise (="1"), (if you look on the top of the
                    normal, so the bo105 has counterclockwise rotor).
-                   "true" and "false" are not any longer supported to 
+                   "true" and "false" are not any longer supported to
                    increase my lifespan. ;-)
           maxcollective: The maximum of the collective incidence in degree
           mincollective: The minimum of the collective incidence in degree
@@ -532,13 +532,13 @@ rotor:    A rotor. Used for simulating helicopters. You can have one, two
                    For incidence>(incidence_stall+stall_change_over) there is
                    stall. In the range between this incidences it is
                    interpolated linear.
-         
+
           The airfoil of the rotor can be described in two ways. First you
           can define the needed power for different pitch values and the
           total lift force at a user-defined pitch value. Don't use pitch
           values greater than the stall incidence. You could get strange
           results.
-         
+
           pitch_a: A collective incidence angle, used for the next token
           forceatpitch_a: The force, the rotor is producing when the incident
                    angle is equal pitch_a. Without ground effect and with
@@ -551,7 +551,7 @@ rotor:    A rotor. Used for simulating helicopters. You can have one, two
           poweratpitch_0: the power the rotor needs at zero pitch.
                    In kW. Used for calculation of the airfoil coefficients.
                    In near future you can define them directly.
-                
+
           The second way is to define the lift and drag coefficients directly.
           Without stall the c_lift of the profile is assumed to be
                    sin(incidence-airfoil_incidence_no_lift)*liftcoef;
@@ -570,7 +570,7 @@ rotor:    A rotor. Used for simulating helicopters. You can have one, two
           you will get a value larger than the measured one. This seems to be
           valid for this simulation. If you use values for the lift
           coefficient from real airfoils you will get unrealistic high lift as
-          result (approx. a factor of 2). As starting parameters you can use 
+          result (approx. a factor of 2). As starting parameters you can use
           airfoil_lift_coefficient="1.9"
           airfoil_drag_coefficient0="0.0075"
           airfoil_drag_coefficient1="0.2"
@@ -608,7 +608,7 @@ rotor:    A rotor. Used for simulating helicopters. You can have one, two
           translift_maxfactor: Helicopters have "translational lift", which
                    is due to turbulence. In forward flying the rotor gets less
                    turbulence air and produces more lift. The factor is the
-                   quotient between lift at high airspeeds to the lift at 
+                   quotient between lift at high airspeeds to the lift at
                    hover (with same pitch).
           translift_ve: the speed, where the translational lift reaches 1/e of
                    the maximum value. In m/s.

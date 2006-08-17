@@ -8,31 +8,6 @@ npow = func(v, w) { math.exp(math.ln(abs(v)) * w) * (v < 0 ? -1 : 1) }
 clamp = func(v, min, max) { v < min ? min : v > max ? max : v }
 
 
-var L = [];
-
-# Let listeners keep some variables up-to-date, so that they don't have
-# to be queried in the main loop.
-#
-var cockpit_view = nil;
-append(L, setlistener("/sim/current-view/view-number",func {
-	cockpit_view = (cmdarg().getValue() == 0);
-}, 1));
-
-append(L, setlistener("/sim/signals/reinit", func {
-	cockpit_view = getprop("/sim/current-view/view-number") == 0;
-}, 0));
-
-var panel_visible = nil;
-append(L, setlistener("/sim/panel/visibility", func {
-	panel_visible = cmdarg().getBoolValue();
-}, 1));
-
-var mouse_button = nil;
-append(L, setlistener("/devices/status/mice/mouse/button", func {
-	mouse_button = cmdarg().getBoolValue();
-}, 1));
-
-
 # Class that reads a property value, applies factor & offset, clamps to min & max,
 # and optionally lowpass filters. lowpass = 0 means no filtering, lowpass = 1
 # generates a coefficient 0.1, lowpass = 2 a coefficient 0.01 etc.
@@ -199,6 +174,17 @@ main_loop = func(id) {
 
 
 
+# Register new, aircraft specific manager. (Needs to offer the
+# same methods, of course.)
+#
+register = func(mgr) {
+	view_manager = mgr;
+	var p = "/sim/view/dynamic/enabled";
+	setprop(p, getprop(p));		# fire listener
+}
+
+
+
 var dynamic_view = nil;
 var original_resetView = nil;
 var view_manager = nil;
@@ -206,6 +192,11 @@ var panel_visibilityN = nil;
 
 var loop_id = 0;
 
+var L = [];
+
+var cockpit_view = nil;
+var panel_visible = nil;
+var mouse_button = nil;
 
 
 # Initialization.
@@ -216,6 +207,24 @@ settimer(func {
 	} else {
 		#aglN = props.globals.getNode("position/altitude-agl-ft", 1);
 	}
+
+	# let listeners keep some variables up-to-date, so that they don't have
+	# to be queried in the loop
+	append(L, setlistener("/sim/current-view/view-number", func {
+		cockpit_view = (cmdarg().getValue() == 0);
+	}, 1));
+
+	append(L, setlistener("/sim/signals/reinit", func {
+		cockpit_view = getprop("/sim/current-view/view-number") == 0;
+	}, 0));
+
+	append(L, setlistener("/sim/panel/visibility", func {
+		panel_visible = cmdarg().getBoolValue();
+	}, 1));
+
+	append(L, setlistener("/devices/status/mice/mouse/button", func {
+		mouse_button = cmdarg().getBoolValue();
+	}, 1));
 
 	original_resetView = view.resetView;
 	view_manager = ViewManager.new();
@@ -235,6 +244,10 @@ settimer(func {
 			main_loop(loop_id);
 		}
 	}, 1));
-}, 5);
+
+	append(L, setlistener("/sim/signals/reinit", func {
+		view_manger.reset();
+	}, 0));
+}, 3);
 
 

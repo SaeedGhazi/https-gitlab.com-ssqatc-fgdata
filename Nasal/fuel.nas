@@ -1,6 +1,6 @@
 # Properties under /consumables/fuel/tank[n]:
-# + level-gal_us    - Current fuel load.  Can be set by user code.
-# + level-lbs       - OUTPUT ONLY property, do not try to set
+# + level-gal_us    - OUTPUT ONLY property, do not try to set
+# + level-lbs       - Current fuel load.  Can be set by user code.
 # + selected        - boolean indicating tank selection.
 # + density-ppg     - Fuel density, in lbs/gallon.
 # + capacity-gal_us - Tank capacity 

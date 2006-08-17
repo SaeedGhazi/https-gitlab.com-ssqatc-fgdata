@@ -104,6 +104,14 @@
   </item>
 
   <item>
+   <label>Toggle Dynamic Cockpit View</label>
+   <binding>
+    <command>property-toggle</command>
+    <property>/sim/view/dynamic/enabled</property>
+   </binding>
+  </item>
+
+  <item>
    <label>Rendering options</label>
    <binding>
     <command>dialog-show</command>

@@ -275,6 +275,9 @@ Started September 2000 by David Megginson, david@megginson.com
       <right-direction-deg type="double">270</right-direction-deg>
       <front-right-direction-deg type="double">315</front-right-direction-deg>
     </config>
+    <dynamic>
+     <enabled type="bool" userarchive="y">false</enabled>
+    </dynamic>
   </view>
 
   <view>

@@ -8,6 +8,7 @@ npow = func(v, w) { math.exp(math.ln(abs(v)) * w) * (v < 0 ? -1 : 1) }
 clamp = func(v, min, max) { v < min ? min : v > max ? max : v }
 
 
+
 # Class that reads a property value, applies factor & offset, clamps to min & max,
 # and optionally lowpass filters. lowpass = 0 means no filtering, lowpass = 1
 # generates a coefficient 0.1, lowpass = 2 a coefficient 0.01 etc.
@@ -62,12 +63,9 @@ ViewAxis = {
 	reset : func {
 		me.applied_offset = 0;
 	},
-	input : func {
-		die("ViewAxis.input() is pure virtual");
-	},
-	apply : func {
+	apply : func(w) {
 		var v = me.prop.getValue() - me.applied_offset;
-		me.applied_offset = me.input();
+		me.applied_offset = w;
 		me.prop.setDoubleValue(v + me.applied_offset);
 	},
 	add_offset : func {
@@ -91,7 +89,7 @@ ViewManager = {
 		m.pitch_axis = ViewAxis.new("sim/current-view/goal-pitch-offset-deg");
 		m.roll_axis = ViewAxis.new("sim/current-view/goal-roll-offset-deg");
 
-		# accerations are converted to G
+		# accerations are converted to G (but one G is subtraced from z-accel)
 		m.ax = Input.new("accelerations/pilot/x-accel-fps_sec", 0.03108095, 0, 1.1, 0);
 		m.ay = Input.new("accelerations/pilot/y-accel-fps_sec", 0.03108095, 0, 1.1);
 		m.az = Input.new("accelerations/pilot/z-accel-fps_sec", -0.03108095, -1, 1.0073);
@@ -101,22 +99,7 @@ ViewManager = {
 		#m.vy = Input.new("velocities/vBody-fps", 0.5924838, 0);
 		#m.vz = Input.new("velocities/wBody-fps", 0.5924838, 0);
 
-		m.wow = Input.new("gear/gear/wow", 2, -1, 1);
-		m.adir = 0;
-
-		m.heading_axis.input = func {				# heading ...
-			-10 * sin(me.roll) * cos(me.pitch)		#     due to roll
-			+ me.steering					#     due to ground steering
-		}
-		m.pitch_axis.input = func {				# pitch ...
-			10 * sin(me.roll) * sin(me.roll)		#     due to roll
-			+ 30 * (1 / (1 + math.exp(2 - me.pilot_az))	#     due to G load
-				- 0.119202922)				#         [move to origin; 1/(1+exp(2)) ]
-		}
-		m.roll_axis.input = func {				# roll ...
-			0.0 * sin(me.roll) * cos(me.pitch)		#     due to roll  (none)
-		}
-
+		m.wow = Input.new("gear/gear/wow", 2, -1, 1.2);
 		m.reset();
 		return m;
 	},
@@ -139,16 +122,24 @@ ViewManager = {
 		var aval = math.sqrt(ax * ax + ay * ay);
 		#var vval = math.sqrt(vx * vx + vy * vy);
 
-		ViewAxis.pilot_az = az;
-		ViewAxis.pitch = me.pitchN.getValue();
-		ViewAxis.roll = me.rollN.getValue();
-		ViewAxis.steering = 80 * wow
-				* nsigmoid(adir * 5.5 / 180)
-				* nsigmoid(aval);
+		var pilot_az = az;
+		var pitch = me.pitchN.getValue();
+		var roll = me.rollN.getValue();
+		var steering = 80 * wow * nsigmoid(adir * 5.5 / 180) * nsigmoid(aval);
 
-		me.heading_axis.apply();
-		me.pitch_axis.apply();
-		me.roll_axis.apply();
+		me.heading_axis.apply(					# heading ...
+			-8 * sin(roll) * cos(pitch)			#     due to roll
+			+ steering					#     due to ground steering
+		);
+		me.pitch_axis.apply(					# pitch ...
+			10 * sin(roll) * sin(roll)			#     due to roll
+			+ 30 * (1 / (1 + math.exp(2 - pilot_az))	#     due to G load
+				- 0.119202922)				#         [move to origin; 1/(1+exp(2)) ]
+		);
+		me.roll_axis.apply(0					# roll ...
+			#0.0 * sin(roll) * cos(pitch)			#     due to roll  (none)
+		);
+
 	},
 	add_offsets : func {
 		me.heading_axis.add_offset();
@@ -159,7 +150,7 @@ ViewManager = {
 
 
 
-# Update loop for the whole dynamice view manager. It only runs if
+# Update loop for the whole dynamic view manager. It only runs if
 # /sim/view[0]/dynamic/enabled is true.
 #
 main_loop = func(id) {

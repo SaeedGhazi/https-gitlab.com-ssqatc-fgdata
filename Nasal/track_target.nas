@@ -52,7 +52,7 @@
 #     Enjoy the ride!
 
 
-printlog("info", "Target Tracking script loading ...");
+#print("Target Tracking script loading ...");
 
 # script defaults (configurable if you like)
 default_update_period = 0.05;

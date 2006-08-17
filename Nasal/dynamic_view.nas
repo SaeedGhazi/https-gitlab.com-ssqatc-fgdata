@@ -10,13 +10,14 @@ clamp = func(v, min, max) { v < min ? min : v > max ? max : v }
 
 var L = [];
 
-# Keep cockpit_view and panel_visible states up-to-date without having to
-# query them in the main loop.
+# Let listeners keep some variables up-to-date, so that they don't have
+# to be queried in the main loop.
 #
 var cockpit_view = nil;
 append(L, setlistener("/sim/current-view/view-number",func {
 	cockpit_view = (cmdarg().getValue() == 0);
 }, 1));
+
 append(L, setlistener("/sim/signals/reinit", func {
 	cockpit_view = getprop("/sim/current-view/view-number") == 0;
 }, 0));
@@ -26,6 +27,10 @@ append(L, setlistener("/sim/panel/visibility", func {
 	panel_visible = cmdarg().getBoolValue();
 }, 1));
 
+var mouse_button = nil;
+append(L, setlistener("/devices/status/mice/mouse/button", func {
+	mouse_button = cmdarg().getBoolValue();
+}, 1));
 
 
 # Class that reads a property value, applies factor & offset, clamps to min & max,
@@ -125,7 +130,7 @@ ViewManager = {
 		m.adir = 0;
 
 		m.heading_axis.input = func {				# heading ...
-			-12 * sin(me.roll) * cos(me.pitch)		#     due to roll
+			-10 * sin(me.roll) * cos(me.pitch)		#     due to roll
 			+ me.steering					#     due to ground steering
 		}
 		m.pitch_axis.input = func {				# pitch ...
@@ -186,7 +191,7 @@ main_loop = func(id) {
 	if (id != loop_id) {
 		return;
 	}
-	if (cockpit_view and !panel_visible) {
+	if (cockpit_view and !panel_visible and !mouse_button) {
 		view_manager.apply();
 	}
 	settimer(func { main_loop(id) }, 0);

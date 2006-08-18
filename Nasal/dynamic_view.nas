@@ -50,8 +50,6 @@ Input = {
 
 
 # Class that maintains one sim/current-view/goal-*-offset-deg property.
-# Applies the value that the input() method returns. This function needs
-# to get overridden.
 #
 ViewAxis = {
 	new : func(prop) {
@@ -63,13 +61,13 @@ ViewAxis = {
 	reset : func {
 		me.applied_offset = 0;
 	},
-	apply : func(w) {
-		var v = me.prop.getValue() - me.applied_offset;
-		me.applied_offset = w;
-		me.prop.setDoubleValue(v + me.applied_offset);
-	},
 	add_offset : func {
 		me.prop.setValue(me.prop.getValue() + me.applied_offset);
+	},
+	apply : func(v) {
+		var raw = me.prop.getValue() - me.applied_offset;
+		me.applied_offset = v;
+		me.prop.setDoubleValue(raw + me.applied_offset);
 	},
 };
 
@@ -81,25 +79,26 @@ ViewAxis = {
 ViewManager = {
 	new : func {
 		var m = { parents : [ViewManager] };
-		m.headingN = props.globals.getNode("orientation/heading-deg", 1);
-		m.pitchN = props.globals.getNode("orientation/pitch-deg", 1);
-		m.rollN = props.globals.getNode("orientation/roll-deg", 1);
+		m.headingN = props.globals.getNode("/orientation/heading-deg", 1);
+		m.pitchN = props.globals.getNode("/orientation/pitch-deg", 1);
+		m.rollN = props.globals.getNode("/orientation/roll-deg", 1);
 
-		m.heading_axis = ViewAxis.new("sim/current-view/goal-heading-offset-deg");
-		m.pitch_axis = ViewAxis.new("sim/current-view/goal-pitch-offset-deg");
-		m.roll_axis = ViewAxis.new("sim/current-view/goal-roll-offset-deg");
+		m.heading_axis = ViewAxis.new("/sim/current-view/goal-heading-offset-deg");
+		m.pitch_axis = ViewAxis.new("/sim/current-view/goal-pitch-offset-deg");
+		m.roll_axis = ViewAxis.new("/sim/current-view/goal-roll-offset-deg");
 
-		# accerations are converted to G (but one G is subtraced from z-accel)
-		m.ax = Input.new("accelerations/pilot/x-accel-fps_sec", 0.03108095, 0, 1.1, 0);
-		m.ay = Input.new("accelerations/pilot/y-accel-fps_sec", 0.03108095, 0, 1.1);
-		m.az = Input.new("accelerations/pilot/z-accel-fps_sec", -0.03108095, -1, 1.0073);
+		# accerations are converted to G (one G is subtraced from z-accel)
+		m.ax = Input.new("/accelerations/pilot/x-accel-fps_sec", 0.03108095, 0, 1.1, 0);
+		m.ay = Input.new("/accelerations/pilot/y-accel-fps_sec", 0.03108095, 0, 1.1);
+		m.az = Input.new("/accelerations/pilot/z-accel-fps_sec", -0.03108095, -1, 1.0073);
 
 		# velocities are converted to knots
-		#m.vx = Input.new("velocities/uBody-fps", 0.5924838, 0);
-		#m.vy = Input.new("velocities/vBody-fps", 0.5924838, 0);
-		#m.vz = Input.new("velocities/wBody-fps", 0.5924838, 0);
+		m.vx = Input.new("/velocities/uBody-fps", 0.5924838, 0);
+		m.vy = Input.new("/velocities/vBody-fps", 0.5924838, 0);
+		m.vz = Input.new("/velocities/wBody-fps", 0.5924838, 0);
 
-		m.wow = Input.new("gear/gear/wow", 2, -1, 1.2);
+		# turn WoW bool into smooth values ranging from -1 to 1
+		m.wow = Input.new("/gear/gear/wow", 2, -1, 1.2);
 		m.reset();
 		return m;
 	},
@@ -108,43 +107,42 @@ ViewManager = {
 		me.pitch_axis.reset();
 		me.roll_axis.reset();
 	},
-	apply : func {
-		var wow = me.wow.get();
-		var ax = me.ax.get();
-		var ay = me.ay.get();
-		var az = me.az.get();
-		#var vx = me.vx.get();
-		#var vy = me.vy.get();
-
-		var adir = math.atan2(-ay, ax) * 180 / math.pi;
-		#var vdir = math.atan2(vy, vx) * 180 / math.pi;
-
-		var aval = math.sqrt(ax * ax + ay * ay);
-		#var vval = math.sqrt(vx * vx + vy * vy);
-
-		var pilot_az = az;
-		var pitch = me.pitchN.getValue();
-		var roll = me.rollN.getValue();
-		var steering = 80 * wow * nsigmoid(adir * 5.5 / 180) * nsigmoid(aval);
-
-		me.heading_axis.apply(					# heading ...
-			-8 * sin(roll) * cos(pitch)			#     due to roll
-			+ steering					#     due to ground steering
-		);
-		me.pitch_axis.apply(					# pitch ...
-			10 * sin(roll) * sin(roll)			#     due to roll
-			+ 30 * (1 / (1 + math.exp(2 - pilot_az))	#     due to G load
-				- 0.119202922)				#         [move to origin; 1/(1+exp(2)) ]
-		);
-		me.roll_axis.apply(0					# roll ...
-			#0.0 * sin(roll) * cos(pitch)			#     due to roll  (none)
-		);
-
-	},
-	add_offsets : func {
+	add_offset : func {
 		me.heading_axis.add_offset();
 		me.pitch_axis.add_offset();
 		me.roll_axis.add_offset();
+	},
+	apply : func {
+		var pitch = me.pitchN.getValue();
+		var roll = me.rollN.getValue();
+		var wow = me.wow.get();
+
+		var ax = me.ax.get();
+		var ay = me.ay.get();
+		var az = me.az.get();
+		var adir = math.atan2(-ay, ax) * 180 / math.pi;
+		var aval = math.sqrt(ax * ax + ay * ay);
+
+		#var vx = me.vx.get();
+		#var vy = me.vy.get();
+		#var vdir = math.atan2(vy, vx) * 180 / math.pi;
+		#var vval = math.sqrt(vx * vx + vy * vy);
+
+		var steering = 80 * wow * nsigmoid(adir * 5.5 / 180) * nsigmoid(aval);
+
+		me.heading_axis.apply(				# heading ...
+			-20 * sin(roll) * cos(pitch)		#     due to roll
+			+ steering				#     due to accleration (also ground steering)
+		);
+		me.pitch_axis.apply(				# pitch ...
+			10 * sin(roll) * sin(roll)		#     due to roll
+			+ 30 * (1 / (1 + math.exp(2 - az))	#     due to G load
+				- 0.119202922)			#         [move to origin; 1/(1+exp(2)) ]
+		);
+		me.roll_axis.apply(0				# roll ...
+			#0.0 * sin(roll) * cos(pitch)		#     due to roll  (none)
+		);
+
 	},
 };
 
@@ -181,23 +179,23 @@ var original_resetView = nil;
 var view_manager = nil;
 var panel_visibilityN = nil;
 
-var loop_id = 0;
-
-var L = [];
-
 var cockpit_view = nil;
 var panel_visible = nil;
 var mouse_button = nil;
+
+var loop_id = 0;
+var L = [];	# vector of listener ids; allows to remove all listeners (= useless feature :-)
+
 
 
 # Initialization.
 #
 settimer(func {
-	if (getprop("/sim/flight-model") == "yasim") {
-		#aglN = props.globals.getNode("position/gear-agl-ft", 1);
-	} else {
-		#aglN = props.globals.getNode("position/altitude-agl-ft", 1);
-	}
+	# some properties may still be unavailable or nil
+	props.globals.getNode("/accelerations/pilot/x-accel-fps_sec", 1).setDoubleValue(0);
+	props.globals.getNode("/accelerations/pilot/y-accel-fps_sec", 1).setDoubleValue(0);
+	props.globals.getNode("/accelerations/pilot/z-accel-fps_sec", 1).setDoubleValue(-32);
+	props.globals.getNode("/gear/gear/wow", 1).setBoolValue(1);
 
 	# let listeners keep some variables up-to-date, so that they don't have
 	# to be queried in the loop
@@ -217,13 +215,13 @@ settimer(func {
 		mouse_button = cmdarg().getBoolValue();
 	}, 1));
 
-	original_resetView = view.resetView;
 	view_manager = ViewManager.new();
 
+	original_resetView = view.resetView;
 	view.resetView = func {
 		original_resetView();
 		if (cockpit_view and dynamic_view) {
-			view_manager.add_offsets();
+			view_manager.add_offset();
 		}
 	}
 
@@ -239,6 +237,6 @@ settimer(func {
 	append(L, setlistener("/sim/signals/reinit", func {
 		view_manger.reset();
 	}, 0));
-}, 3);
+}, 0);
 
 

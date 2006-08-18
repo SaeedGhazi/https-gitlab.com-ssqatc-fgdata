@@ -70,7 +70,7 @@
     <axis>
       <desc>Rudder</desc>
       <number>
-        <unix>3</unix>
+        <unix>2</unix>
         <windows>3</windows>
       </number>
       <binding>

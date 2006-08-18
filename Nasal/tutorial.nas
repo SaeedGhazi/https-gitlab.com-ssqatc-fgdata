@@ -166,7 +166,7 @@ startTutorial = func {
   }
 
   # Pick up any weather conditions/scenarios set
-  setprop("/environment/rebuild_layers", getprop("/environment/rebuild_layers")+1);
+  setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers")+1);
 
   # Set the timer to start the first tutorial step
   settimer(stepTutorial, STEP_TIME);

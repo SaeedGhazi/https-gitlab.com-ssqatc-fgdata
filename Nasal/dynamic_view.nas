@@ -6,6 +6,32 @@ nsigmoid = func(x) { 2 / (1 + math.exp(-x)) - 1 }
 pow = func(v, w) { math.exp(math.ln(v) * w) }
 npow = func(v, w) { math.exp(math.ln(abs(v)) * w) * (v < 0 ? -1 : 1) }
 clamp = func(v, min, max) { v < min ? min : v > max ? max : v }
+normatan = func(x) { math.atan2(x, 1) * 2 / math.pi }
+f1 = func(x) { 3.782 * math.sin(x) * math.sin(x) * math.exp(-x) }
+f2 = func(x) { 2 * sin(x) / (x * x * x + 1) }
+f3 = func(x) { 1 / (x * x + 1) }
+
+
+
+# Class that implements EWMA (Exponentially Weighted Moving Average)
+# lowpass filter. Initialize with coefficient, set new value when
+# you fetch one.
+#
+LowPass = {
+	new : func(coeff) {
+		var m = { parents : [LowPass] };
+		m.value = nil;
+		m.coeff = 1.0 - 1.0 / pow(10, abs(coeff));
+		return m;
+	},
+	get : func(v) {
+		me.get = me._get_;
+		me.value = v;
+	},
+	_get_ : func(v) {
+		me.value = v * (1 - me.coeff) + me.value * me.coeff;
+	},
+};
 
 
 
@@ -82,6 +108,10 @@ ViewManager = {
 		m.headingN = props.globals.getNode("/orientation/heading-deg", 1);
 		m.pitchN = props.globals.getNode("/orientation/pitch-deg", 1);
 		m.rollN = props.globals.getNode("/orientation/roll-deg", 1);
+		m.slipN = props.globals.getNode("/orientation/side-slip-deg", 1);
+
+		m.wind_dirN = props.globals.getNode("/environment/wind-from-heading-deg", 1);
+		m.wind_speedN = props.globals.getNode("/environment/wind-speed-kt", 1);
 
 		m.heading_axis = ViewAxis.new("/sim/current-view/goal-heading-offset-deg");
 		m.pitch_axis = ViewAxis.new("/sim/current-view/goal-pitch-offset-deg");
@@ -89,16 +119,19 @@ ViewManager = {
 
 		# accerations are converted to G (one G is subtraced from z-accel)
 		m.ax = Input.new("/accelerations/pilot/x-accel-fps_sec", 0.03108095, 0, 1.1, 0);
-		m.ay = Input.new("/accelerations/pilot/y-accel-fps_sec", 0.03108095, 0, 1.1);
+		m.ay = Input.new("/accelerations/pilot/y-accel-fps_sec", 0.03108095, 0, 1.3);
 		m.az = Input.new("/accelerations/pilot/z-accel-fps_sec", -0.03108095, -1, 1.0073);
 
 		# velocities are converted to knots
-		m.vx = Input.new("/velocities/uBody-fps", 0.5924838, 0);
+		m.vx = Input.new("/velocities/uBody-fps", 0.5924838, 0, 1);
 		m.vy = Input.new("/velocities/vBody-fps", 0.5924838, 0);
 		m.vz = Input.new("/velocities/wBody-fps", 0.5924838, 0);
 
 		# turn WoW bool into smooth values ranging from -1 to 1
-		m.wow = Input.new("/gear/gear/wow", 2, -1, 1.2);
+		m.wow = Input.new("/gear/gear/wow", 1, 0, 1.2);
+		m.hdg_chg_rate = LowPass.new(1.3);
+		m.last_heading = m.headingN.getValue();
+		m.size_factor = -getprop("/sim/chase-distance-m") / 25;
 		m.reset();
 		return m;
 	},
@@ -117,22 +150,36 @@ ViewManager = {
 		var roll = me.rollN.getValue();
 		var wow = me.wow.get();
 
-		var ax = me.ax.get();
-		var ay = me.ay.get();
+#		var ax = me.ax.get();
+#		var ay = me.ay.get();
 		var az = me.az.get();
-		var adir = math.atan2(-ay, ax) * 180 / math.pi;
-		var aval = math.sqrt(ax * ax + ay * ay);
+#		var adir = math.atan2(ay, ax) * 180 / math.pi;
+#		var aval = math.sqrt(ax * ax + ay * ay);
 
-		#var vx = me.vx.get();
-		#var vy = me.vy.get();
-		#var vdir = math.atan2(vy, vx) * 180 / math.pi;
-		#var vval = math.sqrt(vx * vx + vy * vy);
+#		var vx = me.vx.get();
+#		var vy = me.vy.get();
+#		var vdir = math.atan2(vy, vx) * 180 / math.pi;
+#		var vval = math.sqrt(vx * vx + vy * vy);
 
-		var steering = 80 * wow * nsigmoid(adir * 5.5 / 180) * nsigmoid(aval);
+#		var wspd = me.wind_speedN.getValue();
+#		var wdir = me.headingN.getValue() - me.wind_dirN.getValue();
+#		var u = vx - wspd * cos(wdir);
+
+		var hdg = me.headingN.getValue();
+		var hdiff = me.last_heading - hdg;
+		me.last_heading = hdg;
+		while (hdiff >= 180) {
+			hdiff -= 360;
+		}
+		while (hdiff < -180) {
+			hdiff += 360;
+		}
+		var steering = 40 * normatan(me.hdg_chg_rate.get(hdiff)) * me.size_factor;
 
 		me.heading_axis.apply(				# heading ...
-			-20 * sin(roll) * cos(pitch)		#     due to roll
-			+ steering				#     due to accleration (also ground steering)
+			-15 * sin(roll) * cos(pitch)		#     due to roll
+			+ steering * wow			#     due to ground steering
+			+ 0.5 * me.slipN.getValue() * (1 - wow) #     due to sideslip
 		);
 		me.pitch_axis.apply(				# pitch ...
 			10 * sin(roll) * sin(roll)		#     due to roll
@@ -142,7 +189,6 @@ ViewManager = {
 		me.roll_axis.apply(0				# roll ...
 			#0.0 * sin(roll) * cos(pitch)		#     due to roll  (none)
 		);
-
 	},
 };
 
@@ -195,6 +241,7 @@ settimer(func {
 	props.globals.getNode("/accelerations/pilot/x-accel-fps_sec", 1).setDoubleValue(0);
 	props.globals.getNode("/accelerations/pilot/y-accel-fps_sec", 1).setDoubleValue(0);
 	props.globals.getNode("/accelerations/pilot/z-accel-fps_sec", 1).setDoubleValue(-32);
+	props.globals.getNode("/orientation/side-slip-deg", 1).setDoubleValue(0);
 	props.globals.getNode("/gear/gear/wow", 1).setBoolValue(1);
 
 	# let listeners keep some variables up-to-date, so that they don't have

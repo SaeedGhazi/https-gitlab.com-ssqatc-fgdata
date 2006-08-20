@@ -71,7 +71,7 @@
       </binding>
      </radio>
      <text>
-      <label>Randomized Heading Changes</label>
+      <label>Level Turns</label>
       <halign>left</halign>
       <row>1</row><col>1</col>
      </text>
@@ -86,7 +86,7 @@
       </binding>
      </radio>
      <text>
-      <label>Randomized Pitch Changes</label>
+      <label>Straight Pitch Changes</label>
       <halign>left</halign>
       <row>2</row><col>1</col>
      </text>
@@ -97,11 +97,11 @@
       <live>true</live>
       <binding>
        <command>nasal</command>
-       <script>set_radio("both"); setprop("/autopilot/lead-target/task", "both");</script>
+       <script>set_radio("both"); setprop("/autopilot/lead-target/task", "lazy-eights");</script>
       </binding>
      </radio>
      <text>
-      <label>Both Heading and Pitch Changes</label>
+      <label>Lazy Eights</label>
       <halign>left</halign>
       <row>3</row><col>1</col>
      </text>

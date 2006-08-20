@@ -148,7 +148,24 @@ do_target_task = func {
         tgt_roll = 0;
         tgt_alt = base_alt;
     } else {
-        if ( target_task == "turns" or target_task == "both" ) {
+        if ( target_task == "turns" ) {
+            next_turn -= dt;
+            if ( next_turn < 0 ) {
+                if ( tgt_roll > 0 ) {
+                    # new roll 
+                    tgt_roll = -30.0;
+                } else {
+                    # new roll 
+                    tgt_roll = 30.0;
+                }
+                # next turn in 15 seconds
+                next_turn = 15.0;
+
+                # roll to zero if tgt_speed < 50 so we don't spin in mid air
+                if ( tgt_speed < 50 ) { tgt_roll = 0; }
+            }
+            tgt_lat_mode = "roll";
+        } elsif ( target_task == "turns-rand" or target_task == "both-rand" ) {
             next_turn -= dt;
             if ( next_turn < 0 ) {
                 if ( tgt_roll > 0 ) {
@@ -170,6 +187,25 @@ do_target_task = func {
             next_pitch -= dt;
             if ( next_pitch < 0 ) {
                 if ( tgt_alt > base_alt ) {
+                    # new alt base - 1000
+                    tgt_alt = base_alt - 1000.0;
+                } else {
+                    # new alt base + 1000
+                    tgt_alt = base_alt + 1000.0;
+                }
+                # next pitch in 15 seconds
+                next_pitch = 15.0;
+
+                # ??? (fixme?)
+                # pitch to zero if tgt_speed < 50 so we don't porpoise in
+                # mid air
+                # if ( tgt_speed < 50 ) { tgt_pitch = 0; }
+            }
+            tgt_lon_mode = "alt";
+        } elsif ( target_task == "pitch-rand" or target_task == "both-rand" ) {
+            next_pitch -= dt;
+            if ( next_pitch < 0 ) {
+                if ( tgt_alt > base_alt ) {
                     # new alt between [2000 - 2500]
                     tgt_alt = base_alt - 1000.0 + rand() * 500.0;
                 } else {
@@ -186,14 +222,45 @@ do_target_task = func {
                 # if ( tgt_speed < 50 ) { tgt_pitch = 0; }
             }
             tgt_lon_mode = "alt";
-        }
+        } elsif ( target_task == "lazy-eights" ) {
+            tgt_lat_mode = "roll";
+            tgt_lon_mode = "alt";
+            next_turn -= dt;
+
+            if ( next_turn < 0 ) {
+		next_turn = 32.0;
+	    }
+	    if ( next_turn > 16.0 ) {
+		# rolling right
+		tgt_roll = 30.0;
+	    } else {
+		# rolling left
+		tgt_roll = -30.0;
+	    }
+	    # roll to zero if tgt_speed < 50 so we don't spin in mid air
+	    if ( tgt_speed < 50 ) { tgt_roll = 0; }
+
+	    if ( next_turn > 24.0 ) {
+		# climbing
+		tgt_alt = base_alt + 1000.0;
+	    } elsif ( next_turn > 16.0 ) {
+		# decending to original altitude
+		tgt_alt = base_alt;
+	    } elsif ( next_turn > 8.0 ) {
+		# climbing
+		tgt_alt = base_alt + 1000.0;
+	    } else {
+		# decending to original altitude
+		tgt_alt = base_alt;
+	    }
+	}
         # fixed altitude if in turns mode
-        if ( target_task == "turns" ) {
+        if ( target_task == "turns" or target_task == "turns-rand" ) {
             tgt_lon_mode = "alt";
             tgt_alt = base_alt;
         }
         # zero roll if in pitch mode
-        if ( target_task == "pitch" ) {
+        if ( target_task == "pitch" or target_task == "pitch-rand" ) {
             tgt_lat_mode = "roll";
             tgt_roll = 0;
         }

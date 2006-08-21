@@ -179,7 +179,7 @@ ViewManager = {
 		me.heading_axis.apply(				# heading ...
 			-15 * sin(roll) * cos(pitch)		#     due to roll
 			+ steering * wow			#     due to ground steering
-			+ 0.5 * me.slipN.getValue() * (1 - wow) #     due to sideslip
+			+ 0.4 * me.slipN.getValue() * (1 - wow) #     due to sideslip
 		);
 		me.pitch_axis.apply(				# pitch ...
 			10 * sin(roll) * sin(roll)		#     due to roll
@@ -237,6 +237,13 @@ var L = [];	# vector of listener ids; allows to remove all listeners (= useless 
 # Initialization.
 #
 settimer(func {
+	var fdms = { acms:0, ada:0, balloon:0, external:0, jsb:1, larcsim:1, magic:0,
+			network:0, null:0, pipe:0, ufo:0, yasim:1 };
+	var fdm = getprop("/sim/flight-model");
+	if (!contains(fdms, fdm) or !fdms[fdm]) {
+		return gui.menuEnable("dynamic-view", 0);
+	}
+
 	# some properties may still be unavailable or nil
 	props.globals.getNode("/accelerations/pilot/x-accel-fps_sec", 1).setDoubleValue(0);
 	props.globals.getNode("/accelerations/pilot/y-accel-fps_sec", 1).setDoubleValue(0);

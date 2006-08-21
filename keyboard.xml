@@ -568,12 +568,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Cycle HUD Brightness</desc>
   <binding>
    <command>nasal</command>
-   <script>
-     if (getprop("/sim/hud/visibility")) {
-         var br = getprop("/sim/hud/color/brightness") - 0.2;
-         setprop("/sim/hud/color/brightness", br > 0.01 ? br : 1);
-     }
-   </script>
+   <script>aircraft.HUD.cycle_brightness()</script>
   </binding>
  </key>
 
@@ -581,7 +576,8 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>I</name>
   <desc>Minimal HUD</desc>
   <binding>
-   <command>hud-init2</command>
+   <command>nasal</command>
+   <script>aircraft.HUD.cycle_type()</script>
   </binding>
  </key>
 
@@ -760,19 +756,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>HUD Master Switch</desc>
   <binding>
    <command>nasal</command>
-   <script>
-    if (!getprop("/sim/hud/visibility")) {
-        return setprop("/sim/hud/visibility", 1);
-    }
-    var i = getprop("/sim/hud/current-color") + 1;
-    if (i &lt; 0 or i >= size(props.globals.getNode("/sim/hud/palette", 1).getChildren("color"))) {
-       setprop("/sim/hud/visibility", 0);
-       setprop("/sim/hud/current-color", 0);
-    } else {
-       setprop("/sim/hud/visibility", 1);
-       setprop("/sim/hud/current-color", i);
-    }
-   </script>
+   <script>aircraft.HUD.cycle_color()</script>
   </binding>
  </key>
 
@@ -780,7 +764,8 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>i</name>
   <desc>Normal HUD</desc>
   <binding>
-   <command>hud-init</command>
+   <command>nasal</command>
+   <script>aircraft.HUD.normal_type()</script>
   </binding>
  </key>
 

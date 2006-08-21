@@ -215,3 +215,60 @@ light = {
 };
 
 
+
+# HUD control class to handle both HUD implementations.
+#
+HUDControl = {
+	new : func {
+		var m = { parents : [HUDControl] };
+		m.vis0N = props.globals.getNode("/sim/hud/visibility[0]", 1);
+		m.vis1N = props.globals.getNode("/sim/hud/visibility[1]", 1);
+		m.currcolN = props.globals.getNode("/sim/hud/current-color", 1);
+		m.paletteN = props.globals.getNode("/sim/hud/palette", 1);
+		m.brightnessN = props.globals.getNode("/sim/hud/color/brightness", 1);
+		m.currentN = m.vis0N;
+		return m;
+	},
+	cycle_color : func {		# h-key
+		if (!me.currentN.getBoolValue()) {		# if off, turn on
+			return me.currentN.setBoolValue(1);
+		}
+		var i = me.currcolN.getValue() + 1;		# if through, turn off
+		if (i < 0 or i >= size(me.paletteN.getChildren("color"))) {
+			me.currentN.setBoolValue(0);
+			me.currcolN.setIntValue(0);
+		} else {					# otherwise change color
+			me.currentN.setBoolValue(1);
+			me.currcolN.setIntValue(i);
+		}
+	},
+	cycle_brightness : func {	# H-key
+		var br = me.brightnessN.getValue() - 0.2;
+		me.brightnessN.setValue(br > 0.01 ? br : 1);
+	},
+	normal_type : func {		# i-key
+		me.oldinit1();
+		me.vis0N.setBoolValue(1);
+		me.vis1N.setBoolValue(0);
+		me.currentN = me.vis0N;
+	},
+	cycle_type : func {		# I-key
+		if (me.currentN == me.vis0N) {
+			me.vis0N.setBoolValue(0);
+			me.vis1N.setBoolValue(1);
+			me.currentN = me.vis1N;
+		} elsif (me.currentN == me.vis1N) {
+			me.vis0N.setBoolValue(1);
+			me.vis1N.setBoolValue(0);
+			me.oldinit2();
+			me.currentN = me.vis0N;
+		}
+	},
+	oldinit1 : func { fgcommand("hud-init", props.Node.new()) },
+	oldinit2 : func { fgcommand("hud-init2", props.Node.new()) },
+};
+
+var HUD = nil;
+settimer(func { HUD = HUDControl.new() }, 0);
+
+

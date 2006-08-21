@@ -574,7 +574,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="73">
   <name>I</name>
-  <desc>Minimal HUD</desc>
+  <desc>Switch to and toggle alternative HUD types</desc>
   <binding>
    <command>nasal</command>
    <script>aircraft.HUD.cycle_type()</script>

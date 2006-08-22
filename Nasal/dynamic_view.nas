@@ -1,3 +1,6 @@
+# Dynamic Cockpit View manager. Tries to simulate the pilot's most likely
+# deliberate view direction. Doesn't consider forced view changes due to
+# acceleration.
 
 sin = func(a) { math.sin(a * math.pi / 180.0) }
 cos = func(a) { math.cos(a * math.pi / 180.0) }
@@ -7,54 +10,49 @@ pow = func(v, w) { math.exp(math.ln(v) * w) }
 npow = func(v, w) { math.exp(math.ln(abs(v)) * w) * (v < 0 ? -1 : 1) }
 clamp = func(v, min, max) { v < min ? min : v > max ? max : v }
 normatan = func(x) { math.atan2(x, 1) * 2 / math.pi }
-f1 = func(x) { 3.782 * math.sin(x) * math.sin(x) * math.exp(-x) }
-f2 = func(x) { 2 * sin(x) / (x * x * x + 1) }
-f3 = func(x) { 1 / (x * x + 1) }
 
 
 
 # Class that implements EWMA (Exponentially Weighted Moving Average)
 # lowpass filter. Initialize with coefficient, set new value when
-# you fetch one.
+# you fetch one. filter() pushes new value and returns filtered value,
+# get() only returns filtered value. A filter coefficient of 0 means
+# no filtering, coeff = 1 generates a factor 0.1, coeff = 2 a facdtor
+# 0.01, coeff = 3 a factor 0.001, etc.
 #
 LowPass = {
 	new : func(coeff) {
 		var m = { parents : [LowPass] };
 		m.value = nil;
-		m.coeff = 1.0 - 1.0 / pow(10, abs(coeff));
+		m.coeff = 1.0 / pow(10, abs(coeff));
 		return m;
 	},
-	get : func(v) {
-		me.get = me._get_;
+	filter : func(v) {
+		me.filter = me._filter_;
 		me.value = v;
 	},
-	_get_ : func(v) {
-		me.value = v * (1 - me.coeff) + me.value * me.coeff;
+	_filter_ : func(v) {
+		me.value = v * me.coeff + me.value * (1 - me.coeff);
+	},
+	get : func {
+		me.value;
 	},
 };
 
 
 
 # Class that reads a property value, applies factor & offset, clamps to min & max,
-# and optionally lowpass filters. lowpass = 0 means no filtering, lowpass = 1
-# generates a coefficient 0.1, lowpass = 2 a coefficient 0.01 etc.
+# and optionally lowpass filters.
 #
 Input = {
-	new : func(prop = nil, factor = 1, offset = 0, lowpass = 0, min = nil, max = nil) {
+	new : func(prop = "/null", factor = 1, offset = 0, filter = 0, min = nil, max = nil) {
 		var m = { parents : [Input] };
-		if (prop == nil) {
-			m.get = func { 0 }
-			m.set = func {}
-			return m;
-		}
 		m.prop = isa(props.Node, prop) ? prop : props.globals.getNode(prop, 1);
 		m.factor = factor;
 		m.offset = offset;
 		m.min = min;
 		m.max = max;
-		m.coeff = 0;
-		m.damped = m.get();	# wants coeff = 0!
-		m.coeff = lowpass ? 1.0 - 1.0 / pow(10, abs(lowpass)) : 0;
+		m.lowpass = filter ? LowPass.new(filter) : nil;
 		return m;
 	},
 	get : func {
@@ -65,7 +63,7 @@ Input = {
 		if (me.max != nil and v > me.max) {
 			v = me.max;
 		}
-		return !me.coeff ? v : (me.damped = v * (1 - me.coeff) + me.damped * me.coeff);
+		return me.lowpass == nil ? v : me.lowpass.filter(v);
 
 	},
 	set : func(v) {
@@ -103,8 +101,11 @@ ViewAxis = {
 # sim/current-view/goal-*-offset-deg properties.
 #
 ViewManager = {
-	new : func {
+	new : func(c) {
 		var m = { parents : [ViewManager] };
+		m.elapsedN = props.globals.getNode("/sim/time/elapsed-sec", 1);
+		m.deltaN = props.globals.getNode("/sim/time/delta-realtime-sec", 1);
+
 		m.headingN = props.globals.getNode("/orientation/heading-deg", 1);
 		m.pitchN = props.globals.getNode("/orientation/pitch-deg", 1);
 		m.rollN = props.globals.getNode("/orientation/roll-deg", 1);
@@ -174,20 +175,20 @@ ViewManager = {
 		while (hdiff < -180) {
 			hdiff += 360;
 		}
-		var steering = 40 * normatan(me.hdg_chg_rate.get(hdiff)) * me.size_factor;
+		var steering = normatan(me.hdg_chg_rate.filter(hdiff)) * me.size_factor;
 
 		me.heading_axis.apply(				# heading ...
 			-15 * sin(roll) * cos(pitch)		#     due to roll
-			+ steering * wow			#     due to ground steering
-			+ 0.4 * me.slipN.getValue() * (1 - wow) #     due to sideslip
+			+ 40 * steering * wow			#     due to ground steering
+			+ 0.4 * me.slipN.getValue() * (1 - wow) #     due to sideslip (in air)
 		);
 		me.pitch_axis.apply(				# pitch ...
 			10 * sin(roll) * sin(roll)		#     due to roll
 			+ 30 * (1 / (1 + math.exp(2 - az))	#     due to G load
 				- 0.119202922)			#         [move to origin; 1/(1+exp(2)) ]
 		);
-		me.roll_axis.apply(0				# roll ...
-			#0.0 * sin(roll) * cos(pitch)		#     due to roll  (none)
+		me.roll_axis.apply(				# roll ...
+			0.0 * sin(roll) * cos(pitch)		#     due to roll  (none)
 		);
 	},
 };
@@ -220,10 +221,10 @@ register = func(mgr) {
 
 
 
-var dynamic_view = nil;
 var original_resetView = nil;
-var view_manager = nil;
 var panel_visibilityN = nil;
+var dynamic_view = nil;
+var view_manager = nil;
 
 var cockpit_view = nil;
 var panel_visible = nil;
@@ -237,8 +238,12 @@ var L = [];	# vector of listener ids; allows to remove all listeners (= useless 
 # Initialization.
 #
 settimer(func {
-	var fdms = { acms:0, ada:0, balloon:0, external:0, jsb:1, larcsim:1, magic:0,
-			network:0, null:0, pipe:0, ufo:0, yasim:1 };
+	# disable menu entry and return for inappropriate FDMs  (see Main/fg_init.cxx)
+	var fdms = {
+		acms:0, ada:0, balloon:0, external:0,
+		jsb:1, larcsim:1, magic:0, network:0,
+		null:0, pipe:0, ufo:0, yasim:1,
+	};
 	var fdm = getprop("/sim/flight-model");
 	if (!contains(fdms, fdm) or !fdms[fdm]) {
 		return gui.menuEnable("dynamic-view", 0);
@@ -269,7 +274,22 @@ settimer(func {
 		mouse_button = cmdarg().getBoolValue();
 	}, 1));
 
-	view_manager = ViewManager.new();
+	var config = props.Node.new({
+		"heading-due-to" : {
+			"roll" : -15,
+			"ground-steering" : 40,
+			"side-slip" : 0.4,
+		},
+		"pitch-due-to" : {
+			"roll" : 10,
+			"g-load" : 30,
+		},
+		"roll-due-to" : {
+			"roll" : 0,
+		},
+	});
+	props.copy(props.globals.getNode("/sim/view/dynamic", 1), config);
+	view_manager = ViewManager.new(config);
 
 	original_resetView = view.resetView;
 	view.resetView = func {

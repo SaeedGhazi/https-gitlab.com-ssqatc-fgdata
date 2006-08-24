@@ -131,6 +131,16 @@ Widget = {
     setFont : func(n, s = 13, t = 0) {
         me.node.setValues({ font : { name:n, "size":s, slant:t } });
     },
+    setBinding : func(cmd, carg = nil) {
+        var idx = size(me.node.getChildren("binding"));
+        var node = me.node.getChild("binding", idx, 1);
+        node.getNode("command", 1).setValue(cmd);
+        if (cmd == "nasal") {
+            node.getNode("script", 1).setValue(carg);
+        } elsif (carg != nil and (cmd == "dialog-apply" or cmd == "dialog-update")) {
+            node.getNode("object-name", 1).setValue(carg);
+        }
+    },
 };
 
 
@@ -163,6 +173,38 @@ loadXMLDialog = func(node, path) {
     fgcommand("dialog-new", node);
     node;
 }
+
+
+##
+# Open property browser with given target path.
+#
+property_browser = func(dir = "/") {
+	var dlgname = "property-browser";
+	foreach (var module; keys(globals)) {
+		if (find("__dlg:" ~ dlgname, module) >= 0) {
+			globals[module].clone(dir);
+			return;
+		}
+	}
+	setprop("/sim/gui/dialogs/" ~ dlgname ~ "/last", dir);
+	fgcommand("dialog-show", props.Node.new({"dialog-name": dlgname}));
+}
+
+
+##
+# Open one property browser per /browser[] property, where each contains
+# the target path. On the command line use  --prop:browser=orientation
+#
+settimer(func {
+	foreach (var b; props.globals.getChildren("browser")) {
+		var path = b.getValue();
+		if (path != nil and size(path)) {
+			property_browser(path);
+		}
+	}
+	props.globals.removeChildren("browser");
+}, 0);
+
 
 
 ########################################################################
@@ -215,7 +257,7 @@ showSelTutDialog = func {
         msg.set("label", "No tutorials available for this aircraft");
         cancel = dialog[name].addChild("button");
         cancel.set("legend", "Cancel");
-        cancel.prop().getNode("binding[0]/command", 1).setValue("dialog-close");
+        cancel.setBinding("dialog-close");
         fgcommand("dialog-new", dialog[name].prop());
         showDialog(name);
         return;
@@ -254,16 +296,15 @@ showSelTutDialog = func {
     lcancel.set("legend", "Cancel");
     lcancel.set("key", "esc");
     lcancel.set("equal", 1);
-    lcancel.prop().getNode("binding[0]/command", 1).setValue("dialog-close");
+    lcancel.setBinding("dialog-close");
 
     lnext = buttonBar.addChild("button");
     lnext.set("legend", "Next");
     lnext.set("default", 1);
     lnext.set("equal", 1);
-    lnext.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
-    lnext.prop().getNode("binding[1]/command", 1).setValue("nasal");
-    lnext.prop().getNode("binding[1]/script", 1).setValue("gui.showTutorialDialog()");
-    lnext.prop().getNode("binding[2]/command", 1).setValue("dialog-close");
+    lnext.setBinding("dialog-apply");
+    lnext.setBinding("nasal", "gui.showTutorialDialog()");
+    lnext.setBinding("dialog-close");
 
     # All done: pop it up
     fgcommand("dialog-new", dialog[name].prop());
@@ -310,7 +351,7 @@ showTutorialDialog = func {
         msg.set("label", "Unable to find tutorial " ~ ltutorial);
         cancel = dialog[name].addChild("button");
         cancel.set("legend", "Cancel");
-        cancel.prop().getNode("binding[0]/command", 1).setValue("dialog-close");
+        cancel.setBinding("dialog-close");
         fgcommand("dialog-new", dialog[name].prop());
         showDialog(name);
         return;
@@ -337,18 +378,16 @@ showTutorialDialog = func {
     lback.set("legend", "Back");
     lback.set("equal", 1);
     lback.set("key", "esc");
-    lback.prop().getNode("binding[0]/command", 1).setValue("nasal");
-    lback.prop().getNode("binding[0]/script", 1).setValue("gui.showSelTutDialog()");
-    lback.prop().getNode("binding[1]/command", 1).setValue("dialog-close");
+    lback.setBinding("nasal", "gui.showSelTutDialog()");
+    lback.setBinding("dialog-close");
 
     lnext = buttonBar.addChild("button");
     lnext.set("legend", "Start");
     lnext.set("default", 1);
     lnext.set("pref-width", 100);
     lnext.set("equal", 1);
-    lnext.prop().getNode("binding[0]/command", 1).setValue("nasal");
-    lnext.prop().getNode("binding[0]/script", 1).setValue("tutorial.startTutorial()");
-    lnext.prop().getNode("binding[1]/command", 1).setValue("dialog-close");
+    lnext.setBinding("nasal", "tutorial.startTutorial()");
+    lnext.setBinding("dialog-close");
 
     # All done: pop it up
     fgcommand("dialog-new", dialog[name].prop());
@@ -381,7 +420,7 @@ showWeightDialog = func {
         msg.set("label", "Not supported for this aircraft");
         cancel = dialog[name].addChild("button");
         cancel.set("legend", "Cancel");
-        cancel.prop().getNode("binding[0]/command", 1).setValue("dialog-close");
+        cancel.setBinding("dialog-close");
         fgcommand("dialog-new", dialog[name].prop());
         showDialog(name);
         return;
@@ -412,8 +451,8 @@ showWeightDialog = func {
     ok = buttonBar.addChild("button");
     ok.set("legend", "OK");
     ok.set("key", "esc");
-    ok.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
-    ok.prop().getNode("binding[1]/command", 1).setValue("dialog-close");
+    ok.setBinding("dialog-apply");
+    ok.setBinding("dialog-close");
 
     # Temporary helper function
     tcell = func {
@@ -460,13 +499,13 @@ showWeightDialog = func {
 
         sel = tcell(fuelTable, "checkbox", i+1, 1);
         sel.set("property", tankprop ~ "/selected");
-        sel.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
+        sel.setBinding("dialog-apply");
 
         slider = tcell(fuelTable, "slider", i+1, 2);
         slider.set("property", tankprop ~ "/level-gal_us");
         slider.set("min", 0);
         slider.set("max", cap);
-        slider.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
+        slider.setBinding("dialog-apply");
 
         lbs = tcell(fuelTable, "text", i+1, 3);
         lbs.set("property", tankprop ~ "/level-lbs");
@@ -508,7 +547,7 @@ showWeightDialog = func {
         slider.set("property", wprop);
         slider.set("min", 0);
         slider.set("max", max);
-        slider.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
+        slider.setBinding("dialog-apply");
 
         lbs = tcell(weightTable, "text", i+1, 2);
         lbs.set("property", wprop);
@@ -594,9 +633,8 @@ showHelpDialog = func {
     w.set("legend", "");
     w.set("default", 1);
     w.set("key", "esc");
-    w.prop().getNode("binding[0]/command", 1).setValue("nasal");
-    w.prop().getNode("binding[0]/script", 1).setValue("delete(gui.dialog, \"" ~ name ~ "\")");
-    w.prop().getNode("binding[1]/command", 1).setValue("dialog-close");
+    w.setBinding("nasal", "delete(gui.dialog, \"" ~ name ~ "\")");
+    w.setBinding("dialog-close");
 
     dialog[name].addChild("hrule").addChild("empty");
 

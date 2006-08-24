@@ -421,6 +421,22 @@ showTutorialDialog = func {
     showDialog(name);
 }
 
+# Checks the /sim/weight[n]/{selected|opt} values and sets the
+# appropriate weights therefrom.  Called from the F&W dialog.
+var setWeightOpts = func {
+    foreach(w; props.globals.getNode("sim").getChildren("weight")) {
+	var selected = w.getNode("selected");
+	if(selected != nil) {
+	    foreach(opt; w.getChildren("opt")) {
+		if(opt.getNode("name", 1).getValue() == selected.getValue()) {
+		    var lbs = opt.getNode("lbs", 1).getValue();
+		    w.getNode("weight-lb", 1).setValue(lbs);
+		    break;
+		}
+	    }
+	}
+    }
+}
 
 ##
 # Dynamically generates a weight & fuel configuration dialog specific to
@@ -482,10 +498,10 @@ showWeightDialog = func {
     ok.setBinding("dialog-close");
 
     # Temporary helper function
-    tcell = func {
-        cell = arg[0].addChild(arg[1]);
-        cell.set("row", arg[2]);
-        cell.set("col", arg[3]);
+    tcell = func(parent, type, row, col) {
+        cell = parent.addChild(type);
+        cell.set("row", row);
+        cell.set("col", col);
         return cell;
     }
 
@@ -561,23 +577,58 @@ showWeightDialog = func {
 
     wgts = props.globals.getNode("/sim").getChildren("weight");
     for(i=0; i<size(wgts); i+=1) {
-        w = wgts[i];
-        wname = w.getNode("name", 1).getValue();
-        max = w.getNode("max-lb", 1).getValue();
-        wprop = "/sim/weight[" ~ i ~ "]/weight-lb";
+        var w = wgts[i];
+        var wname = w.getNode("name", 1).getValue();
+	var wprop = "/sim/weight[" ~ i ~ "]";
 
         title = tcell(weightTable, "text", i+1, 0);
         title.set("label", wname);
         title.set("halign", "right");
 
-        slider = tcell(weightTable, "slider", i+1, 1);
-        slider.set("property", wprop);
-        slider.set("min", 0);
-        slider.set("max", max);
-        slider.setBinding("dialog-apply");
+	if(w.getNode("opt") != nil) {
+	    var combo = tcell(weightTable, "combo", i+1, 1);
+	    combo.set("property", wprop ~ "/selected");
+	    combo.set("pref-width", 300);
+
+	    # Simple code we'd like to use:
+	    #foreach(opt; w.getChildren("opt")) {
+	    #	var ent = combo.addChild("value");
+	    #	ent.prop().setValue(opt.getNode("name", 1).getValue());
+	    #}
+
+	    # More complicated workaround to move the "current" item
+	    # into the first slow, because dialog.cxx doesn't set the
+	    # selected item in the combo box.
+	    var opts = [];
+	    var curr = w.getNode("selected");
+	    curr = curr == nil ? "" : curr.getValue();
+	    foreach(opt; w.getChildren("opt")) {
+		append(opts, opt.getNode("name", 1).getValue());
+	    }
+	    forindex(oi; opts) {
+		if(opts[oi] == curr) {
+		    var tmp = opts[0];
+		    opts[0] = opts[oi];
+		    opts[oi] = tmp;
+		    break;
+		}
+	    }
+	    foreach(opt; opts) {
+		combo.addChild("value").prop().setValue(opt);
+	    }
+
+	    combo.setBinding("dialog-apply");
+	    combo.setBinding("nasal", "gui.setWeightOpts()");
+	} else {
+	    var slider = tcell(weightTable, "slider", i+1, 1);
+	    slider.set("property", wprop ~ "/weight-lb");
+	    slider.set("min", w.getNode("min-lb", 1).getValue());
+	    slider.set("max", w.getNode("max-lb", 1).getValue());
+	    slider.setBinding("dialog-apply");
+	}
 
         lbs = tcell(weightTable, "text", i+1, 2);
-        lbs.set("property", wprop);
+        lbs.set("property", wprop ~ "/weight-lb");
         lbs.set("label", "0123456");
         lbs.set("format", "%.0f");
         lbs.set("live", 1);
@@ -830,4 +881,3 @@ common_aircraft_keys = {
         { name : "Shift-F8",  desc : "scroll 2D panel right" },
     ],
 };
-

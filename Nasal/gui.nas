@@ -144,51 +144,78 @@ Widget = {
 };
 
 
+
 ##
-# load XML dialog
-#     node ... target node (name must be "dialog")
+# Dialog class. Maintains one XML dialog.
+#     prop ... target node (name must be "dialog")
 #     path ... file path relative to $FG_ROOT
-#
-# return value:
-#     target node on success, nil otherwise
 #
 # Example:
 #
-#     var dlg = props.globals.getNode("/sim/gui/dialogs/foo-config/dialog", 1);
-#     loadXMLDialog(dlg, "Aircraft/foo/foo_config.xml");
-#     fgcommand("dialog-show", dlg);
+#     var dlg = gui.Dialog.new("/sim/gui/dialogs/foo-config/dialog",
+#                              "Aircraft/foo/foo_config.xml");
+#     dlg.open();
+#     dlg.close();
 #
-loadXMLDialog = func(node, path) {
-    if (node.getName() != "dialog") {
-        print("loadXMLDialog: node name must be 'dialog'");
-        return nil;
-    }
-    fgcommand("loadxml", props.Node.new({"filename": path, "targetnode": node.getPath()}));
-    var name = node.getNode("name");
-    if (name == nil) {
-        print("loadXMLDialog: XML dialog must have <name>");
-        return nil;
-    }
-    node.getNode("dialog-name", 1).setValue(name.getValue());
-    fgcommand("dialog-new", node);
-    node;
-}
+Dialog = {
+    new : func(prop, path) {
+        var m = { parents : [Dialog] };
+        m.path = path;
+        m.prop = isa(props.Node, prop) ? prop : props.globals.getNode(prop, 1);
+        m.state = 0;
+        m.loaded = 0;
+        return m;
+    },
+    # doesn't need to be called explicitly, but can be used to force a reload
+    load : func {
+        if (me.prop.getName() != "dialog") {
+            die("Dialog class: node name must be 'dialog'");
+        }
+        fgcommand("loadxml", props.Node.new({"filename": me.path,
+                "targetnode": me.prop.getPath()}));
+        var name = me.prop.getNode("name");
+        if (name == nil) {
+            die("Dialog class: XML dialog must have <name>");
+        }
+        me.prop.getNode("dialog-name", 1).setValue(name.getValue());
+        fgcommand("dialog-new", me.prop);
+        me.loaded = 1;
+    },
+    open : func {
+        if (!me.loaded) {
+            me.load(me.prop, me.path);
+        }
+        fgcommand("dialog-show", me.prop);
+        me.state = 1;
+    },
+    close : func {
+        fgcommand("dialog-close", me.prop);
+        me.state = 0;
+    },
+    toggle : func {
+        me.state ? me.close() : me.open();
+    },
+    is_open : func {
+        me.state;
+    },
+};
+
 
 
 ##
 # Open property browser with given target path.
 #
 property_browser = func(dir = "/") {
-	var dlgname = "property-browser";
-	foreach (var module; keys(globals)) {
-		if (find("__dlg:" ~ dlgname, module) >= 0) {
-			globals[module].clone(dir);
-			return;
-		}
-	}
-	setprop("/sim/gui/dialogs/" ~ dlgname ~ "/last", dir);
-	fgcommand("dialog-show", props.Node.new({"dialog-name": dlgname}));
+    var dlgname = "property-browser";
+    foreach (var module; keys(globals)) {
+        if (find("__dlg:" ~ dlgname, module) >= 0) {
+            return globals[module].clone(dir);
+        }
+    }
+    setprop("/sim/gui/dialogs/" ~ dlgname ~ "/last", dir);
+    fgcommand("dialog-show", props.Node.new({"dialog-name": dlgname}));
 }
+
 
 
 ##
@@ -196,13 +223,13 @@ property_browser = func(dir = "/") {
 # the target path. On the command line use  --prop:browser=orientation
 #
 settimer(func {
-	foreach (var b; props.globals.getChildren("browser")) {
-		var path = b.getValue();
-		if (path != nil and size(path)) {
-			property_browser(path);
-		}
-	}
-	props.globals.removeChildren("browser");
+    foreach (var b; props.globals.getChildren("browser")) {
+        var path = b.getValue();
+        if (path != nil and size(path)) {
+            property_browser(path);
+        }
+    }
+    props.globals.removeChildren("browser");
 }, 0);
 
 

@@ -2,6 +2,8 @@
 # deliberate view direction. Doesn't consider forced view changes due to
 # acceleration.
 
+
+
 sin = func(a) { math.sin(a * math.pi / 180.0) }
 cos = func(a) { math.cos(a * math.pi / 180.0) }
 sigmoid = func(x) { 1 / (1 + math.exp(-x)) }
@@ -128,9 +130,10 @@ ViewManager = {
 		m.vy = Input.new("/velocities/vBody-fps", 0.5924838, 0);
 		m.vz = Input.new("/velocities/wBody-fps", 0.5924838, 0);
 
-		# turn WoW bool into smooth values ranging from -1 to 1
+		# turn WoW bool into smooth values ranging from 0 to 1
 		m.wow = Input.new("/gear/gear/wow", 1, 0, 1.2);
-		m.hdg_chg_rate = LowPass.new(1.3);
+		m.hdg_change = LowPass.new(1.3);
+		m.ubody = LowPass.new(1.3);
 		m.last_heading = m.headingN.getValue();
 		m.size_factor = -getprop("/sim/chase-distance-m") / 25;
 		m.reset();
@@ -157,14 +160,15 @@ ViewManager = {
 #		var adir = math.atan2(ay, ax) * 180 / math.pi;
 #		var aval = math.sqrt(ax * ax + ay * ay);
 
-#		var vx = me.vx.get();
+		var vx = me.vx.get();
 #		var vy = me.vy.get();
 #		var vdir = math.atan2(vy, vx) * 180 / math.pi;
 #		var vval = math.sqrt(vx * vx + vy * vy);
 
-#		var wspd = me.wind_speedN.getValue();
-#		var wdir = me.headingN.getValue() - me.wind_dirN.getValue();
-#		var u = vx - wspd * cos(wdir);
+		var wspd = me.wind_speedN.getValue();
+		var wdir = me.headingN.getValue() - me.wind_dirN.getValue();
+		var u = vx - wspd * cos(wdir);
+		var slip = sin(me.slipN.getValue()) * me.ubody.filter(normatan(u / 15));
 
 		var hdg = me.headingN.getValue();
 		var hdiff = me.last_heading - hdg;
@@ -175,12 +179,12 @@ ViewManager = {
 		while (hdiff < -180) {
 			hdiff += 360;
 		}
-		var steering = normatan(me.hdg_chg_rate.filter(hdiff)) * me.size_factor;
+		var steering = normatan(me.hdg_change.filter(hdiff)) * me.size_factor;
 
 		me.heading_axis.apply(				# heading ...
 			-15 * sin(roll) * cos(pitch)		#     due to roll
 			+ 40 * steering * wow			#     due to ground steering
-			+ 0.4 * me.slipN.getValue() * (1 - wow) #     due to sideslip (in air)
+			+ 10 * slip * (1 - wow)			#     due to sideslip (in air)
 		);
 		me.pitch_axis.apply(				# pitch ...
 			10 * sin(roll) * sin(roll)		#     due to roll

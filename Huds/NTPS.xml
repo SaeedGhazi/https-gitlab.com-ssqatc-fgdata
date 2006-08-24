@@ -214,7 +214,7 @@
    <factor>0.1</factor>
   </input>
 
-  <x>-180</x>
+  <x>-208</x>
   <y>-100</y>
   <width>28</width>
   <height>200</height>
@@ -245,7 +245,7 @@
   <name>Speed</name>
   <width>23</width>
   <height>10</height>
-  <x>-189</x>
+  <x>-217</x>
   <y>-5</y>
   <halign>right</halign>
   <format>%.0f</format>

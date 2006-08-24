@@ -402,10 +402,15 @@ LeadTargetUpdate = func {
 
 
 select_task_dialog = func {
-    var dlg = props.globals.getNode("/sim/gui/dialogs/NTPS/config/dialog", 1);
-    gui.loadXMLDialog(dlg, "gui/dialogs/NTPS_target_task.xml");
-    fgcommand("dialog-show", dlg);
+    dialog.load();  # load every time?
+    dialog.open();
 }
+
+
+var dialog = nil;
+settimer(func {
+    dialog = gui.Dialog.new("/sim/gui/dialogs/NTPS/config/dialog", "gui/dialogs/NTPS_target_task.xml");
+}, 0);
 
 
 # timer handling to cause our update function to be called periodially

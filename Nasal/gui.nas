@@ -421,20 +421,61 @@ showTutorialDialog = func {
     showDialog(name);
 }
 
+var setWeight = func(wgt, opt) {
+    var lbs = opt.getNode("lbs", 1).getValue();
+    wgt.getNode("weight-lb", 1).setValue(lbs);
+
+    # Weights can have "tank" indices which set the capacity of the
+    # corresponding tank.  This code should probably be moved to
+    # something like fuel.setTankCap(tank, gals)...
+    if(wgt.getNode("tank") == nil) { return 0; }
+    var ti = wgt.getNode("tank").getValue();
+    var gn = opt.getNode("gals");
+    var gals = gn == nil ? 0 : gn.getValue();
+    var tn = props.globals.getNode("consumables/fuel/tank["~ti~"]", 1);
+    var ppg = tn.getNode("density-ppg", 1).getValue();
+    var lbs = gals * ppg;
+    var curr = tn.getNode("level-gal_us", 1).getValue();
+    curr = curr > gals ? gals : curr;
+    tn.getNode("capacity-gal_us", 1).setValue(gals);
+    tn.getNode("level-gal_us", 1).setValue(curr);
+    tn.getNode("level-lbs", 1).setValue(curr * ppg);
+    return 1;
+}
+
 # Checks the /sim/weight[n]/{selected|opt} values and sets the
-# appropriate weights therefrom.  Called from the F&W dialog.
+# appropriate weights therefrom.
 var setWeightOpts = func {
+    var tankchange = 0;
     foreach(w; props.globals.getNode("sim").getChildren("weight")) {
 	var selected = w.getNode("selected");
 	if(selected != nil) {
 	    foreach(opt; w.getChildren("opt")) {
 		if(opt.getNode("name", 1).getValue() == selected.getValue()) {
-		    var lbs = opt.getNode("lbs", 1).getValue();
-		    w.getNode("weight-lb", 1).setValue(lbs);
+		    if(setWeight(w, opt)) { tankchange = 1; }
 		    break;
 		}
 	    }
 	}
+    }
+    return tankchange;
+}
+# Run it at startup to make sure the tank settings are correct
+settimer(setWeightOpts, 0);
+
+
+# Called from the F&W dialog when the user selects a weight option
+var weightChangeHandler = func {
+    var tankchanged = setWeightOpts();
+
+    # This is unfortunate.  Changing tanks means that the list of
+    # tanks selected and their slider bounds must change, but our GUI
+    # isn't dynamic in that way.  The only way to get the changes on
+    # screen is to pop it down and recreate it.
+    if(tankchanged) {
+	var p = props.Node.new({"dialog-name" : "WeightAndFuel"});
+	fgcommand("dialog-close", p);
+	showWeightDialog();
     }
 }
 
@@ -597,7 +638,7 @@ showWeightDialog = func {
 	    #}
 
 	    # More complicated workaround to move the "current" item
-	    # into the first slow, because dialog.cxx doesn't set the
+	    # into the first slot, because dialog.cxx doesn't set the
 	    # selected item in the combo box.
 	    var opts = [];
 	    var curr = w.getNode("selected");
@@ -618,7 +659,7 @@ showWeightDialog = func {
 	    }
 
 	    combo.setBinding("dialog-apply");
-	    combo.setBinding("nasal", "gui.setWeightOpts()");
+	    combo.setBinding("nasal", "gui.weightChangeHandler()");
 	} else {
 	    var slider = tcell(weightTable, "slider", i+1, 1);
 	    slider.set("property", wprop ~ "/weight-lb");

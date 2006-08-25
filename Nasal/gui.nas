@@ -163,14 +163,14 @@ Dialog = {
         m.path = path;
         m.prop = isa(props.Node, prop) ? prop : props.globals.getNode(prop, 1);
         m.state = 0;
-        m.loaded = 0;
+        if (m.prop.getName() != "dialog") {
+            die("Dialog class: node name must end with '/dialog'");
+        }
+        m.load();
         return m;
     },
     # doesn't need to be called explicitly, but can be used to force a reload
     load : func {
-        if (me.prop.getName() != "dialog") {
-            die("Dialog class: node name must be 'dialog'");
-        }
         fgcommand("loadxml", props.Node.new({"filename": me.path,
                 "targetnode": me.prop.getPath()}));
         var name = me.prop.getNode("name");
@@ -179,12 +179,8 @@ Dialog = {
         }
         me.prop.getNode("dialog-name", 1).setValue(name.getValue());
         fgcommand("dialog-new", me.prop);
-        me.loaded = 1;
     },
     open : func {
-        if (!me.loaded) {
-            me.load(me.prop, me.path);
-        }
         fgcommand("dialog-show", me.prop);
         me.state = 1;
     },

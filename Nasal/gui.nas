@@ -204,7 +204,7 @@ Dialog = {
 property_browser = func(dir = "/") {
     var dlgname = "property-browser";
     foreach (var module; keys(globals)) {
-        if (find("__dlg:" ~ dlgname, module) >= 0) {
+        if (find("__dlg:" ~ dlgname, module) == 0) {
             return globals[module].clone(dir);
         }
     }

@@ -927,8 +927,7 @@ showModelSelectDialog = func {
 	w.set("default", 1);
 	w.set("keynum", 27);
 	w.set("border", 1);
-	w.prop().getNode("binding[0]/command", 1).setValue("nasal");
-	w.prop().getNode("binding[0]/script", 1).setValue("ufo.closeModelSelectDialog()");
+	w.setBinding("nasal", "ufo.closeModelSelectDialog()");
 
 	w = dialog[name].addChild("list");
 	w.set("halign", "fill");
@@ -937,9 +936,8 @@ showModelSelectDialog = func {
 	forindex (var i; modellist) {
 		w.prop().getChild("value", i, 1).setValue(modellist[i]);
 	}
-	w.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
-	w.prop().getNode("binding[1]/command", 1).setValue("nasal");
-	w.prop().getNode("binding[1]/script", 1).setValue("ufo.modelmgr.setmodelpath(getprop('/cursor'))");
+	w.setBinding("dialog-apply");
+	w.setBinding("nasal", "ufo.modelmgr.setmodelpath(getprop('/cursor'))");
 
 	fgcommand("dialog-new", dialog[name].prop());
 	gui.showDialog(name);
@@ -988,9 +986,8 @@ showModelAdjustDialog = func {
 	w.set("default", 1);
 	w.set("keynum", 27);
 	w.set("border", 1);
-	w.prop().getNode("binding[0]/command", 1).setValue("nasal");
-	w.prop().getNode("binding[0]/script", 1).setValue("delete(ufo.dialog, \"" ~ name ~ "\")");
-	w.prop().getNode("binding[1]/command", 1).setValue("dialog-close");
+	w.setBinding("nasal", "delete(ufo.dialog, \"" ~ name ~ "\")");
+	w.setBinding("dialog-close");
 
 	slider = func(legend, col, coarse, fine) {
 		group = dialog[name].addChild("group");
@@ -1003,8 +1000,7 @@ showModelAdjustDialog = func {
 			b.set("pref-width", 22);
 			b.set("pref-height", 22);
 			b.set("live", 1);
-			b.prop().getNode("binding[0]/command", 1).setValue("nasal");
-			b.prop().getNode("binding[0]/script", 1).setValue('ufo.adjust.step("'~legend~'", '~step~')');
+			b.setBinding("nasal", 'ufo.adjust.step("'~legend~'", '~step~')');
 			return b;
 		}
 
@@ -1019,7 +1015,7 @@ showModelAdjustDialog = func {
 		s.set("min", -1 * fine);
 		s.set("max", 1 * fine);
 		s.setColor(col[0], col[1], col[2]);
-		s.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
+		s.setBinding("dialog-apply");
 
 		fr = button(">", fine);
 		cr = button(">>", coarse);
@@ -1061,8 +1057,7 @@ showModelAdjustDialog = func {
 	w.set("legend", "Reset");
 	w.set("pref-height", 22);
 	w.set("pref-width", wide);
-	w.prop().getNode("binding[0]/command", 1).setValue("nasal");
-	w.prop().getNode("binding[0]/script", 1).setValue("ufo.adjust.orient()");
+	w.setBinding("nasal", "ufo.adjust.orient()");
 
 	w = g.addChild("button");
 	w.set("legend", "Sticky");
@@ -1071,7 +1066,7 @@ showModelAdjustDialog = func {
 	w.set("pref-width", narrow);
 	w.set("live", 1);
 	w.set("property", adjust.stk_hdgN.getPath());
-	w.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
+	w.setBinding("dialog-apply");
 
 	g.addChild("empty").set("stretch", 1);
 
@@ -1080,8 +1075,7 @@ showModelAdjustDialog = func {
 	w.set("legend", "Center");
 	w.set("pref-height", 22);
 	w.set("pref-width", wide);
-	w.prop().getNode("binding[0]/command", 1).setValue("nasal");
-	w.prop().getNode("binding[0]/script", 1).setValue("ufo.adjust.center_sliders()");
+	w.setBinding("nasal", "ufo.adjust.center_sliders()");
 
 	g.addChild("empty").set("stretch", 1);
 
@@ -1092,15 +1086,14 @@ showModelAdjustDialog = func {
 	w.set("pref-width", narrow);
 	w.set("live", 1);
 	w.set("property", adjust.stk_orientN.getPath());
-	w.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
+	w.setBinding("dialog-apply");
 
 	w = g.addChild("button");
 	w.set("halign", "left");
 	w.set("legend", "Reset");
 	w.set("pref-height", 22);
 	w.set("pref-width", wide);
-	w.prop().getNode("binding[0]/command", 1).setValue("nasal");
-	w.prop().getNode("binding[0]/script", 1).setValue("ufo.adjust.upright()");
+	w.setBinding("nasal", "ufo.adjust.upright()");
 
 	fgcommand("dialog-new", dialog[name].prop());
 	gui.showDialog(name);
@@ -1143,7 +1136,7 @@ showStatusDialog = func(v = nil) {
 	w.prop().setValues({"color-legend": {red:1, green:1, blue:1, alpha:1}});
 	w.prop().setValues({"color-background": {red:0, green:0, blue:0, alpha:0}});
 	w.prop().setValues({"color-highlight": {red:0, green:0, blue:0, alpha:0}});
-	w.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
+	w.setBinding("dialog-apply");
 
 	# current object
 	g = dialog[name].addChild("group");

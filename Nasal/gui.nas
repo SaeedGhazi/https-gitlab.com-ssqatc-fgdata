@@ -196,20 +196,22 @@ Dialog = {
     },
 };
 
-
-
 ##
 # Open property browser with given target path.
 #
 property_browser = func(dir = "/") {
     var dlgname = "property-browser";
+    var need_create = 0;
     foreach (var module; keys(globals)) {
         if (find("__dlg:" ~ dlgname, module) == 0) {
-            return globals[module].clone(dir);
+            globals[module].clone(dir);
+	    need_create = 1;
         }
     }
-    setprop("/sim/gui/dialogs/" ~ dlgname ~ "/last", dir);
-    fgcommand("dialog-show", props.Node.new({"dialog-name": dlgname}));
+    if(need_create) {
+	setprop("/sim/gui/dialogs/" ~ dlgname ~ "/last", dir);
+	fgcommand("dialog-show", props.Node.new({"dialog-name": dlgname}));
+    }
 }
 
 

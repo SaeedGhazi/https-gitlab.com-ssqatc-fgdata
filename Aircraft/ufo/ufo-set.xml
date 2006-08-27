@@ -156,5 +156,15 @@
   <ufo>
    <file>Aircraft/ufo/ufo.nas</file>
   </ufo>
+
+  <aar>
+   <file>Aircraft/Generic/aar.nas</file>
+  </aar>
  </nasal>
+
+ <instrumentation>
+  <radar>
+   <debug-mode type="bool">true</debug-mode>
+  </radar>
+ </instrumentation>
 </PropertyList>

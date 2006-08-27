@@ -201,11 +201,11 @@ Dialog = {
 #
 property_browser = func(dir = "/") {
     var dlgname = "property-browser";
-    var need_create = 0;
+    var need_create = 1;
     foreach (var module; keys(globals)) {
         if (find("__dlg:" ~ dlgname, module) == 0) {
             globals[module].clone(dir);
-	    need_create = 1;
+	    need_create = 0;
         }
     }
     if(need_create) {

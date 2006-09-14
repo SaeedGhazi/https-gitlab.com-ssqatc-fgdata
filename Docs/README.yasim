@@ -539,20 +539,19 @@ rotor:    A rotor. Used for simulating helicopters. You can have one, two
           values greater than the stall incidence. You could get strange
           results.
 
-          pitch_a: A collective incidence angle, used for the next token
-          forceatpitch_a: The force, the rotor is producing when the incident
-                   angle is equal pitch_a. Without ground effect and with
-                   maximum translational lift. I.e. hover-pitch and a force
-                   equivalent to the weight. (in pounds of force)
-          pitch_b: A collective incidence angle, used for the next token
-          poweratpitch_b: the power the rotor needs at pitch_b. (i.e. at the
-                   bo105 the main rotor consumes bout 90% of the engine power,
-                   and 9% the tail rotor. In kW.
-          poweratpitch_0: the power the rotor needs at zero pitch.
-                   In kW. Used for calculation of the airfoil coefficients.
-                   In near future you can define them directly.
+          pitch_a: 
+          pitch_b: collective incidence angles, If you start flightgear 
+                   with --log-level=info, flightgear reports lift and needed
+                   power for theses incidence angles
+          forceatpitch_a: 
+          poweratpitch_b: 
+          poweratpitch_0: old tokens, not supported any longer, the result are
+                   not exactly the expected lift and power values. Will be
+                   removed in one of the next updates.directly.Use "real"
+                   coefficients instead (see below) and adjust the lift with
+                   rotor_correction_factor.
 
-          The second way is to define the lift and drag coefficients directly.
+          The way is to define the lift and drag coefficients directly.
           Without stall the c_lift of the profile is assumed to be
                    sin(incidence-airfoil_incidence_no_lift)*liftcoef;
           And in stall:
@@ -566,14 +565,21 @@ rotor:    A rotor. Used for simulating helicopters. You can have one, two
           airfoil_lift_coefficient: liftcoef
           airfoil_drag_coefficient0: dragcoef0
           airfoil_drag_coefficient1: dragcoef1
-          I read in a forum, that, if you calculate the lift of an heli rotor,
-          you will get a value larger than the measured one. This seems to be
-          valid for this simulation. If you use values for the lift
-          coefficient from real airfoils you will get unrealistic high lift as
-          result (approx. a factor of 2). As starting parameters you can use
-          airfoil_lift_coefficient="1.9"
-          airfoil_drag_coefficient0="0.0075"
-          airfoil_drag_coefficient1="0.2"
+                   To find the right values: see README.yasim.rotor.ods
+                   (Open Office file) or README.yasim.rotor.xls (Excel
+                   file). With theses files you can generate graphs of the
+                   airfoil coefficients and adjust the parameters to match
+                   real airfoils. For many airfoils you find data published
+                   in the internet. Parameters for the airfoils NACA 23012
+                   (main rotor of bo105) and NACA 0012 (tail rotor of bo105?)
+                   are included.
+          rotor_correction_factor:
+                   If you calculate the lift of a heli rotor or even of a
+                   propeller, you get a value larger than the real measured
+                   one. (Due to vortex effects.) This is considered in the
+                   simulation, but with a old theory by Prantl, which is known
+                   to give still too large. This is corrected by this token,
+                   default: 1
           flapmin: Minimum flapping angle. (Should normally never reached)
           flapmax: Maximum flapping angle. (Should normally never reached)
           flap0:   Flapping angle at no rotation, i.e. -5
@@ -616,13 +622,22 @@ rotor:    A rotor. Used for simulating helicopters. You can have one, two
                    torque than in higher altitudes. The ground effect is
                    calculated as
                    factor = 1+diameter/altitude*_ground_effect_constant
-          number_of_segments: The rotor is simulated in four different
-                   directions (probably this will be extended in future).
+          number_of_parts:
+          number_of_segments: The rotor is simulated in number_of_parts
+                   different directions.
                    In every direction the rotor is simulated at
                    number_of_segments points. If the value is to small, the
                    rotor will react unrealistic. If it is to high, cpu-power
-                   will be wasted. I now use a value of 10, but probably a
-                   smaller value for the tail-rotor would be sufficient.
+                   will be wasted. I now use a value of 8 for number_of_parts
+                   and 8 for number_of_segments for the main rotor and 4 for
+                   number_of_parts and 5 for number_of_segments for the tail
+                   rotor. Number of parts must be a multiple of 4 (if not, it
+                   is corrected)
+          cyclic_factor: The response of a rotor to cyclic input is hard to
+                   calculate (its a damped oscillator in resonance, some
+                   parameters have very large impact to the cyclic response)
+                   With this parameter (default 1) you can adjust the
+                   simulator to the real helo.
 
           All rotor can have <control> subelements for the cyclic
           (CYCLICELE, CYCLICAIL) and collective (COLLECTIVE) input.
@@ -644,6 +659,8 @@ rotorgear: If you are using one ore more rotors you have to define a
           max_power_rotor_brake: the maximum power of the rotor brake, in kW
                    at normal rpm (most? real rotor breaks would be overheated
                    if used at normal rpm, but this is not simulated now)
+          rotorgear_friction: the power loss due to fritcion in kW at normal
+                   RPM
           yasimdragfactor:
           yasimliftfactor: the solver is not working with rotor-aircrafts.
                    Therefore you have to specify the results yourself.
@@ -654,7 +671,5 @@ rotorgear: If you are using one ore more rotors you have to define a
           (ROTORGEARENGINEON) and can have a <control> subelement for the
           rotor brake (ROTORBRAKE).
 
-          The rotor simulation is very "beta" and not finished yet. So don't
-          spend too much time to adjust a flight behavior to the smallest
-          details now.
+          The rotor simulation is still "beta".
 

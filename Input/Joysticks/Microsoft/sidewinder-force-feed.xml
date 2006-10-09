@@ -45,16 +45,26 @@ $Id$
   </binding>
  </axis>
 
- <axis n="2">
+ <axis>
   <desc>Throttle</desc>
+  <number>
+   <unix>3</unix>
+   <mac>3</mac>
+   <windows>2</windows>
+  </number>
   <binding>
    <command>nasal</command>
    <script>controls.throttleAxis()</script>
   </binding>
  </axis>
 
- <axis n="3">
+ <axis>
   <desc>Rudder</desc>
+  <number>
+   <unix>2</unix>
+   <mac>2</mac>
+   <windows>3</windows>
+  </number>
   <binding>
    <command>property-scale</command>
    <property>/controls/flight/rudder</property>
@@ -62,45 +72,55 @@ $Id$
   </binding>
  </axis>
 
-  <axis n="6">
-   <desc>View Direction</desc>
-   <low>
-    <repeatable>true</repeatable>
-    <binding>
-     <command>property-adjust</command>
-     <property>/sim/current-view/goal-heading-offset-deg</property>
-     <step type="double">1.0</step>
-    </binding>
-   </low>
-   <high>
-    <repeatable>true</repeatable>
-    <binding>
-     <command>property-adjust</command>
-     <property>/sim/current-view/goal-heading-offset-deg</property>
-     <step type="double">-1.0</step>
-    </binding>
-   </high>
-  </axis>
+ <axis>
+  <desc>View Direction</desc>
+  <number>
+   <unix>4</unix>
+   <mac>4</mac>
+   <windows>6</windows>
+  </number>
+  <low>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
+    <step type="double">1.0</step>
+   </binding>
+  </low>
+  <high>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
+    <step type="double">-1.0</step>
+   </binding>
+  </high>
+ </axis>
 
-  <axis n="7">
-   <desc>View Elevation</desc>
-   <low>
-    <repeatable>true</repeatable>
-    <binding>
-     <command>property-adjust</command>
-     <property>/sim/current-view/goal-pitch-offset-deg</property>
-     <step type="double">1.0</step>
-    </binding>
-   </low>
-   <high>
-    <repeatable>true</repeatable>
-    <binding>
-     <command>property-adjust</command>
-     <property>/sim/current-view/goal-pitch-offset-deg</property>
-     <step type="double">-1.0</step>
-    </binding>
-   </high>
-  </axis>
+ <axis>
+  <desc>View Elevation</desc>
+  <number>
+   <unix>5</unix>
+   <mac>5</mac>
+   <windows>7</windows>
+  </number>
+  <low>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-pitch-offset-deg</property>
+    <step type="double">1.0</step>
+   </binding>
+  </low>
+  <high>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-pitch-offset-deg</property>
+    <step type="double">-1.0</step>
+   </binding>
+  </high>
+ </axis>
 
  <button n="1">
   <desc>Brakes</desc>

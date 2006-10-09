@@ -101,8 +101,8 @@ $Id:
  <axis>
   <desc>View Elevation</desc>
   <number>
-   <unix>7</unix>
-   <mac>7</mac>
+   <unix>5</unix>
+   <mac>5</mac>
    <windows>7</windows>
   </number>
   <low>

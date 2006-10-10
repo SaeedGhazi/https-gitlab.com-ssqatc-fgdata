@@ -12,6 +12,11 @@ Started September 2000 by David Megginson, david@megginson.com
 
  <!-- General simulation preferences -->
  <sim>
+  <!-- Multiplayer chat requires that these properties be defined -->
+  <multiplay>
+    <chat type="string">Hello</chat>
+    <transmission-freq-hz type="string">118500000</transmission-freq-hz>
+  </multiplay>
   <!-- hide some development tools, such as parts of the HUD adjustment dialog -->
   <devel type="bool">false</devel>
 

@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+  <name>chat_full</name>
+  <modal>false</modal>
+  <layout>vbox</layout>
+
+  <text>
+    <label>Multiplayer Chat</label>
+  </text>
+
+  <hrule><dummy/></hrule>
+
+  <textbox>
+    <halign>fill</halign>
+    <pref-width>550</pref-width>
+    <pref-height>120</pref-height>
+    <slider>20</slider>
+    <live>true</live>
+    <wrap>true</wrap>
+    <editable>false</editable>
+    <property>/sim/multiplay/chat_history</property>
+  </textbox>
+
+  <text>
+    <label></label>
+  </text>
+
+  <group>
+    <layout>hbox</layout>
+   
+    <input>
+     <name>compose</name>   
+     <stretch>true</stretch>
+     <halign>fill</halign>
+     <length>50</length>
+     <pref-width>500</pref-width>  
+     <property>/sim/multiplay/chat_compose</property>
+    </input>   
+
+    <button>
+      <legend>Send</legend>
+      <default>true</default>
+      <key>Enter</key>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>
+          var lchat = getprop("/sim/multiplay/chat_compose");
+          if (lchat != "")
+          {
+            setprop("/sim/multiplay/chat", lchat);
+            setprop("/sim/multiplay/chat_compose", "");
+            fgcommand("dialog-update", props.Node.new({"object-name": "compose",
+                                                       "dialog-name": "chat_full"}));
+          }          
+        </script>
+      </binding>
+    </button>
+  </group>
+
+
+  <text>
+    <label></label>
+  </text>
+
+  <group>
+    <layout>hbox</layout>
+    <empty><stretch>true</stretch></empty>
+
+    <button>
+      <legend>Close</legend>
+      <default>true</default>
+      <key>Esc</key>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+    
+    <button>
+      <legend>Less ^</legend>
+      <default>false</default>
+      <binding>
+       <command>dialog-show</command>
+       <dialog-name>chat</dialog-name>
+      </binding>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+    
+    
+
+    <empty><stretch>true</stretch></empty>
+  </group>
+</PropertyList>

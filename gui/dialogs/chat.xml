@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+  <name>chat</name>
+  <modal>false</modal>
+  <layout>vbox</layout>
+
+  <group>
+    <layout>hbox</layout>
+   
+    <input>
+     <name>compose</name>
+     <pref-width>500</pref-width>  
+     <stretch>true</stretch>
+     <halign>fill</halign>
+     <length>50</length>
+     <property>/sim/multiplay/chat_compose</property>
+    </input>   
+
+    <button>
+      <legend>Send</legend>
+      <default>true</default>
+      <key>Enter</key>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>
+          var lchat = getprop("/sim/multiplay/chat_compose");
+          if (lchat != "")
+          {
+            setprop("/sim/multiplay/chat", lchat);
+            setprop("/sim/multiplay/chat_compose", "");
+            fgcommand("dialog-update", props.Node.new({"object-name": "compose",
+                                                       "dialog-name": "chat"}));
+           }
+        </script>
+      </binding>
+    </button>
+  </group>
+
+
+  <group>
+    <layout>hbox</layout>
+    <empty><stretch>true</stretch></empty>
+
+    <button>
+      <legend>Close</legend>
+      <default>true</default>
+      <key>Esc</key>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+
+    <button>
+      <legend>More v</legend>
+      <default>false</default>
+      <binding>
+       <command>dialog-show</command>
+       <dialog-name>chat_full</dialog-name>
+      </binding>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+    
+    <empty><stretch>true</stretch></empty>
+  </group>
+</PropertyList>

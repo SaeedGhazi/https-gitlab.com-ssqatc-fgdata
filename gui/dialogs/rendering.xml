@@ -26,6 +26,15 @@
 
     <checkbox>
       <halign>left</halign>
+      <label>Show chat messages</label>
+      <property>/sim/multiplay/chat_display</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
+
+    <checkbox>
+      <halign>left</halign>
       <label>Sun/Moon horizon effect</label>
       <property>/sim/rendering/horizon-effect</property>
       <binding>

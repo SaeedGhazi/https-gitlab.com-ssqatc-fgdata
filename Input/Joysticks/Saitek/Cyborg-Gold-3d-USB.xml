@@ -112,12 +112,18 @@ ________________________________________________________________________________
 
 	<nasal>
 		<script><![CDATA[
-			data = cmdarg().getParent().getNode("data");
+			self = cmdarg().getParent();
+			data = self.getNode("data");
 			mode = data.getNode("mode");
 			modifier = data.getNode("modifier");
 			f1 = f2 = 0;
 			left_brake = right_brake = 0;
 			trigger = 0;
+
+			if (props.globals.getNode("/rotors", 0) != nil) {
+				self.getNode("axis[0]/binding/power").setDoubleValue(1);
+				self.getNode("axis[1]/binding/power").setDoubleValue(1);
+			}
 
 			kbdshift = props.globals.getNode("/devices/status/keyboard/shift", 1);
 			kbdctrl = props.globals.getNode("/devices/status/keyboard/ctrl", 1);

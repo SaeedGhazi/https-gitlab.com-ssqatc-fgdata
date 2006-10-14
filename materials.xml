@@ -957,6 +957,7 @@ Shared parameters for various materials.
 
 <material>
  <name>Glacier</name>
+ <name>PolarIce</name>
  <texture>Terrain/glacier1.rgb</texture>
  <texture>Terrain/glacier2.rgb</texture>
  <texture>Terrain/glacier3.rgb</texture>
@@ -1022,6 +1023,7 @@ Shared parameters for various materials.
  <name>Pond</name>
  <name>Reservoir</name>
  <name>Stream</name>
+ <name>Canal</name>
  <texture>Terrain/water-lake.rgb</texture>
  <xsize>400</xsize>
  <ysize>400</ysize>
@@ -1089,6 +1091,7 @@ Shared parameters for various materials.
 
 <material>
  <name>Marsh</name>
+ <name>WetSand</name>
  <name>HerbWetlandCover</name>
  <name>WoodedWetlandCover</name>
  <texture>Terrain/marsh2.rgb</texture>

@@ -1091,7 +1091,7 @@ Shared parameters for various materials.
 
 <material>
  <name>Marsh</name>
- <name>WetSand</name>
+ <name>Littoral</name>
  <name>HerbWetlandCover</name>
  <name>WoodedWetlandCover</name>
  <texture>Terrain/marsh2.rgb</texture>

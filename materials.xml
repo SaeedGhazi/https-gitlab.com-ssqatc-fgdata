@@ -641,6 +641,7 @@ Shared parameters for various materials.
 <!-- Default -->
 <material>
  <name>Default</name>
+ <name>Landmass</name>
  <name>SomeSort</name>
  <name>EvergreenBroadCover</name>
  <name>Island</name>
@@ -767,6 +768,7 @@ Shared parameters for various materials.
 <material>
  <name>ShrubCover</name>
  <name>ShrubGrassCover</name>
+ <name>ScrubCover</name>
  <texture>Terrain/shrub.rgb</texture>
  <texture>Terrain/shrub2.rgb</texture>
  <texture>Terrain/shrub3.rgb</texture>

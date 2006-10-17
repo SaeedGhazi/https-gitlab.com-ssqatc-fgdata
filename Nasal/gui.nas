@@ -443,15 +443,15 @@ var setWeight = func(wgt, opt) {
 var setWeightOpts = func {
     var tankchange = 0;
     foreach(w; props.globals.getNode("sim").getChildren("weight")) {
-	var selected = w.getNode("selected");
-	if(selected != nil) {
-	    foreach(opt; w.getChildren("opt")) {
-		if(opt.getNode("name", 1).getValue() == selected.getValue()) {
-		    if(setWeight(w, opt)) { tankchange = 1; }
-		    break;
-		}
-	    }
-	}
+        var selected = w.getNode("selected");
+        if(selected != nil) {
+            foreach(opt; w.getChildren("opt")) {
+                if(opt.getNode("name", 1).getValue() == selected.getValue()) {
+                    if(setWeight(w, opt)) { tankchange = 1; }
+                    break;
+                }
+            }
+        }
     }
     return tankchange;
 }
@@ -468,9 +468,9 @@ var weightChangeHandler = func {
     # isn't dynamic in that way.  The only way to get the changes on
     # screen is to pop it down and recreate it.
     if(tankchanged) {
-	var p = props.Node.new({"dialog-name" : "WeightAndFuel"});
-	fgcommand("dialog-close", p);
-	showWeightDialog();
+        var p = props.Node.new({"dialog-name" : "WeightAndFuel"});
+        fgcommand("dialog-close", p);
+        showWeightDialog();
     }
 }
 
@@ -615,53 +615,55 @@ showWeightDialog = func {
     for(i=0; i<size(wgts); i+=1) {
         var w = wgts[i];
         var wname = w.getNode("name", 1).getValue();
-	var wprop = "/sim/weight[" ~ i ~ "]";
+        var wprop = "/sim/weight[" ~ i ~ "]";
 
         title = tcell(weightTable, "text", i+1, 0);
         title.set("label", wname);
         title.set("halign", "right");
 
-	if(w.getNode("opt") != nil) {
-	    var combo = tcell(weightTable, "combo", i+1, 1);
-	    combo.set("property", wprop ~ "/selected");
-	    combo.set("pref-width", 300);
+        if(w.getNode("opt") != nil) {
+            var combo = tcell(weightTable, "combo", i+1, 1);
+            combo.set("property", wprop ~ "/selected");
+            combo.set("pref-width", 300);
 
-	    # Simple code we'd like to use:
-	    #foreach(opt; w.getChildren("opt")) {
-	    #	var ent = combo.addChild("value");
-	    #	ent.prop().setValue(opt.getNode("name", 1).getValue());
-	    #}
+            # Simple code we'd like to use:
+            #foreach(opt; w.getChildren("opt")) {
+            #	var ent = combo.addChild("value");
+            #	ent.prop().setValue(opt.getNode("name", 1).getValue());
+            #}
 
-	    # More complicated workaround to move the "current" item
-	    # into the first slot, because dialog.cxx doesn't set the
-	    # selected item in the combo box.
-	    var opts = [];
-	    var curr = w.getNode("selected");
-	    curr = curr == nil ? "" : curr.getValue();
-	    foreach(opt; w.getChildren("opt")) {
-		append(opts, opt.getNode("name", 1).getValue());
-	    }
-	    forindex(oi; opts) {
-		if(opts[oi] == curr) {
-		    var tmp = opts[0];
-		    opts[0] = opts[oi];
-		    opts[oi] = tmp;
-		    break;
-		}
-	    }
-	    foreach(opt; opts) {
-		combo.addChild("value").prop().setValue(opt);
-	    }
+            # More complicated workaround to move the "current" item
+            # into the first slot, because dialog.cxx doesn't set the
+            # selected item in the combo box.
+            var opts = [];
+            var curr = w.getNode("selected");
+            curr = curr == nil ? "" : curr.getValue();
+            foreach(opt; w.getChildren("opt")) {
+                append(opts, opt.getNode("name", 1).getValue());
+            }
+            forindex(oi; opts) {
+                if(opts[oi] == curr) {
+                    var tmp = opts[0];
+                    opts[0] = opts[oi];
+                    opts[oi] = tmp;
+                    break;
+                }
+            }
+            foreach(opt; opts) {
+                combo.addChild("value").prop().setValue(opt);
+            }
 
-	    combo.setBinding("dialog-apply");
-	    combo.setBinding("nasal", "gui.weightChangeHandler()");
-	} else {
-	    var slider = tcell(weightTable, "slider", i+1, 1);
-	    slider.set("property", wprop ~ "/weight-lb");
-	    slider.set("min", w.getNode("min-lb", 1).getValue());
-	    slider.set("max", w.getNode("max-lb", 1).getValue());
-	    slider.setBinding("dialog-apply");
-	}
+            combo.setBinding("dialog-apply");
+            combo.setBinding("nasal", "gui.weightChangeHandler()");
+        } else {
+            var slider = tcell(weightTable, "slider", i+1, 1);
+            slider.set("property", wprop ~ "/weight-lb");
+            var min = w.getNode("min-lb", 1).getValue();
+            var max = w.getNode("max-lb", 1).getValue();
+            slider.set("min", min != nil ? min : 0);
+            slider.set("max", max != nil ? max : 100);
+            slider.setBinding("dialog-apply");
+        }
 
         lbs = tcell(weightTable, "text", i+1, 2);
         lbs.set("property", wprop ~ "/weight-lb");

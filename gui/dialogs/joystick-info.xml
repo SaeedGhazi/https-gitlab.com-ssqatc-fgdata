@@ -9,7 +9,7 @@
 		<layout>hbox</layout>
 		<default-padding>1</default-padding>
 
-		<empty><whatever/></empty>
+		<empty><stretch>true</stretch></empty>
 
 		<text>
 			<label>Joystick Information</label>
@@ -54,9 +54,12 @@
 			var numjs = size(joysticks);
 			forindex (var i; joysticks) {
 				var js = joysticks[i];
-				t ~= "Joystick #" ~ js.getIndex() ~ ": \"" ~ value(js.getNode("id"), "[unnamed]") ~ "\"\n\n";
-				t ~= "    Configuration: " ~ value(js.getNode("source"), "[user defined]") ~ "\n";
+				var id = value(js.getNode("id"), "[unnamed]");
+				var source = value(js.getNode("source"), "[user defined]");
 				var names = js.getChildren("name");
+
+				t ~= "Joystick #" ~ js.getIndex() ~ ": \"" ~ id ~ "\"\n\n";
+				t ~= "    Driver: " ~ source ~ "\n";
 				if (size(names)) {
 					t ~= "    Used for: ";
 					var last = pop(names);

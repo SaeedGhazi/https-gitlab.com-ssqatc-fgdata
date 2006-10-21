@@ -141,7 +141,7 @@ ________________________________________________________________________________
 	</nasal>
 
 	<axis n="0">
-		<desc>Aileron</desc>
+		<desc>aileron</desc>
 		<binding>
 			<command>property-scale</command>
 			<property>/controls/flight/aileron</property>
@@ -150,7 +150,7 @@ ________________________________________________________________________________
 	</axis>
 
 	<axis n="1">
-		<desc>Elevator</desc>
+		<desc>elevator</desc>
 		<binding>
 			<command>property-scale</command>
 			<property>/controls/flight/elevator</property>
@@ -160,7 +160,7 @@ ________________________________________________________________________________
 	</axis>
 
 	<axis>
-		<desc>Rudder</desc>
+		<desc>rudder</desc>
 		<number>
 			<unix>2</unix>
 			<mac>2</mac>
@@ -176,7 +176,7 @@ ________________________________________________________________________________
 	</axis>
 
 	<axis>
-		<desc>Throttle</desc>
+		<desc>throttle</desc>
 		<number>
 			<unix>3</unix>
 			<mac>2</mac>
@@ -190,7 +190,7 @@ ________________________________________________________________________________
 
 	<button n="0">
 		<name>Trigger</name>
-		<desc>brakes (Ctrl: Fire),  +F3: parking brake,  +F4: speedbrake,  +F3+F4: thrust reverser</desc>
+		<desc>brakes,  +Ctrl: fire,  +F3: parking brake,  +F4: speedbrake,  +F3+F4: thrust reverser</desc>
 		<repeatable type="bool">false</repeatable>
 		<binding>
 			<command>nasal</command>
@@ -311,7 +311,7 @@ ________________________________________________________________________________
 
 	<button n="3">
 		<name>Right Button</name>
-		<desc>flaps down (Ctrl: weapon select),  F3: gear down,  F4: next view</desc>
+		<desc>flaps down,  +Ctrl: weapon select,  +F3: gear down,  +F4: next view</desc>
 		<repeatable type="bool">false</repeatable>
 		<binding>
 			<command>nasal</command>
@@ -435,9 +435,9 @@ ________________________________________________________________________________
 		</mod-up>
 	</button>
 
-	<button n="6">
+	<button n="6"><!-- bit 0 -->
 		<name>F3</name>
-		<desc>Modifier for other buttons (Bit 0)</desc>
+		<desc>modifier for other buttons</desc>
 		<repeatable type="bool">false</repeatable>
 		<binding>
 			<command>nasal</command>
@@ -461,9 +461,9 @@ ________________________________________________________________________________
 		</mod-up>
 	</button>
 
-	<button n="7">
+	<button n="7"><!-- bit 1 -->
 		<name>F4</name>
-		<desc>Modifier for other buttons (Bit 1)</desc>
+		<desc>modifier for other buttons</desc>
 		<repeatable type="bool">false</repeatable>
 		<binding>
 			<command>nasal</command>

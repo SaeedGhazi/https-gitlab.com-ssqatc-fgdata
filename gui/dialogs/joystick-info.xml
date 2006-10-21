@@ -61,9 +61,11 @@
 				var names = js.getChildren("name");
 				if (size(names)) {
 					t ~= "    Used for: ";
+					var last = pop(names);
 					foreach (var n; names) {
 						t ~= '"' ~ value(n) ~ '", ';
 					}
+					t ~= '"' ~ value(last) ~ '"';
 				}
 				t ~= "\n\n";
 				t ~= items(js.getChildren("axis"), "Axis");

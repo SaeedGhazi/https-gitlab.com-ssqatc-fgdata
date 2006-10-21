@@ -114,6 +114,7 @@
  </button>
 
  <button n="2">
+  <desc>Toggle gear</desc>
   <repeatable>false</repeatable>
   <binding>
    <command>nasal</command>

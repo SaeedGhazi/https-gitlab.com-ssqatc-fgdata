@@ -40,9 +40,8 @@
 			items = func(it, name) {
 				var t = "";
 				foreach (var x; it) {
-					var n = value(x.getNode("name"), nil);
 					t ~= "    [";
-					t ~= n != nil ? n : name ~ " #" ~ x.getIndex();
+					t ~= value(x.getNode("name"), name ~ " #" ~ x.getIndex());
 					t ~= "]   ";
 					t ~= value(x.getNode("desc"), "???");
 					t ~= "\n";
@@ -55,8 +54,7 @@
 			var numjoysticks = size(joysticks);
 			forindex (var i; joysticks) {
 				var js = joysticks[i];
-				t ~= "Joystick #" ~ js.getIndex() ~ ": \"" ~ value(js.getNode("id"), "[unnamed]")
-						~ "\"\n\n";
+				t ~= "Joystick #" ~ js.getIndex() ~ ": \"" ~ value(js.getNode("id"), "[unnamed]") ~ "\"\n\n";
 				t ~= "    Configuration: " ~ value(js.getNode("source"), "[user defined]") ~ "\n";
 				var names = js.getChildren("name");
 				if (size(names)) {
@@ -69,7 +67,8 @@
 				}
 				t ~= "\n\n";
 				t ~= items(js.getChildren("axis"), "Axis");
-				t ~= items(js.getChildren("button"), "Btn");
+				t ~= "\n";
+				t ~= items(js.getChildren("button"), "Button");
 
 				if (numjoysticks > 1 and i &lt; numjoysticks - 1) {
 					t ~= "\n\n\n----------------------------------------\n\n\n";

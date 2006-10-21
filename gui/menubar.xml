@@ -430,13 +430,6 @@
   </item>
 
   <item>
-   <label>Old Property Browser</label>
-   <binding>
-    <command>old-properties-dialog</command>
-   </binding>
-  </item>
-
-  <item>
    <label>Stopwatch</label>
    <binding>
     <command>dialog-show</command>

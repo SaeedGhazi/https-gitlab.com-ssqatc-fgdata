@@ -188,8 +188,9 @@ ________________________________________________________________________________
 		</binding>
 	</axis>
 
-	<button n="0"><!-- trigger -->
-		<desc>Brakes</desc>
+	<button n="0">
+		<name>Trigger</name>
+		<desc>brakes (Ctrl: Fire),  +F3: parking brake,  +F4: speedbrake,  +F3+F4: thrust reverser</desc>
 		<repeatable type="bool">false</repeatable>
 		<binding>
 			<command>nasal</command>
@@ -240,8 +241,9 @@ ________________________________________________________________________________
 		</mod-up>
 	</button>
 
-	<button n="1"><!-- left -->
-		<desc>Flaps/gear up; previous view</desc>
+	<button n="1">
+		<name>Left Button</name>
+		<desc>flaps up,  +F3: gear up,  +F4: previous view</desc>
 		<repeatable type="bool">false</repeatable>
 		<binding>
 			<command>nasal</command>
@@ -281,8 +283,9 @@ ________________________________________________________________________________
 		</mod-up>
 	</button>
 
-	<button n="2"><!-- middle -->
-		<desc>Reset view; toggle tail-wheel lock; reset trim</desc>
+	<button n="2">
+		<name>Middle Button</name>
+		<desc>center view,  +F3: toggle tail-wheel lock,  +F4: reset view,  +F3+F4: reset trim</desc>
 		<repeatable type="bool">false</repeatable>
 		<binding>
 			<command>nasal</command>
@@ -306,8 +309,9 @@ ________________________________________________________________________________
 		</binding>
 	</button>
 
-	<button n="3"><!-- right -->
-		<desc>Flaps/gear down; next view</desc>
+	<button n="3">
+		<name>Right Button</name>
+		<desc>flaps down (Ctrl: weapon select),  F3: gear down,  F4: next view</desc>
 		<repeatable type="bool">false</repeatable>
 		<binding>
 			<command>nasal</command>
@@ -347,8 +351,9 @@ ________________________________________________________________________________
 		</mod-up>
 	</button>
 
-	<button n="4"><!-- F1 -->
-		<desc>Brakes left</desc>
+	<button n="4">
+		<name>F1</name>
+		<desc>brakes left,  +F4: zoom out</desc>
 		<repeatable type="bool">true</repeatable>
 		<binding>
 			<command>nasal</command>
@@ -388,8 +393,9 @@ ________________________________________________________________________________
 		</mod-up>
 	</button>
 
-	<button n="5"><!-- F2 -->
-		<desc>Brakes right</desc>
+	<button n="5">
+		<name>F2</name>
+		<desc>brakes right,  +F4: zoom in</desc>
 		<repeatable type="bool">true</repeatable>
 		<binding>
 			<command>nasal</command>
@@ -429,8 +435,9 @@ ________________________________________________________________________________
 		</mod-up>
 	</button>
 
-	<button n="6"><!-- F3 -->
-		<desc>Modifier Bit 0</desc>
+	<button n="6">
+		<name>F3</name>
+		<desc>Modifier for other buttons (Bit 0)</desc>
 		<repeatable type="bool">false</repeatable>
 		<binding>
 			<command>nasal</command>
@@ -454,8 +461,9 @@ ________________________________________________________________________________
 		</mod-up>
 	</button>
 
-	<button n="7"><!-- F4 -->
-		<desc>Modifier Bit 1</desc>
+	<button n="7">
+		<name>F4</name>
+		<desc>Modifier for other buttons (Bit 1)</desc>
 		<repeatable type="bool">false</repeatable>
 		<binding>
 			<command>nasal</command>
@@ -479,8 +487,9 @@ ________________________________________________________________________________
 		</mod-up>
 	</button>
 
-	<button n="8"><!-- >> -->	<!-- reserved for switching main-modes -->
-		<desc>free</desc>
+	<button n="8">
+		<name>>></name>
+		<desc>unused</desc>
 		<repeatable type="bool">false</repeatable>
 		<binding>
 			<command>nasal</command>
@@ -494,8 +503,9 @@ ________________________________________________________________________________
 		</binding>
 	</button>
 
-	<button n="9"><!-- << -->	<!-- reserved for switching main-modes -->
-		<desc>free</desc>
+	<button n="9">
+		<name>&lt;&lt;</name>
+		<desc>unused</desc>
 		<repeatable type="bool">false</repeatable>
 		<binding>
 			<command>nasal</command>
@@ -509,8 +519,9 @@ ________________________________________________________________________________
 		</binding>
 	</button>
 
-	<button n="10"><!-- hat up -->
-		<desc>View direction; prop pitch; elevator trim</desc>
+	<button n="10">
+		<name>Hat Up</name>
+		<desc>view up,  +F3: increase prop pitch,  +F4: elevator trim down</desc>
 		<repeatable>true</repeatable>
 		<binding>
 			<command>nasal</command>
@@ -529,8 +540,9 @@ ________________________________________________________________________________
 		</binding>
 	</button>
 
-	<button n="11"><!-- hat left -->
-		<desc>View direction; mixture; aileron trim; rudder trim</desc>
+	<button n="11">
+		<name>Hat Left</name>
+		<desc>view left,  +F3: mixture leaner,  +F4: aileron trim left,  +F3+F4: rudder trim left</desc>
 		<repeatable>true</repeatable>
 		<binding>
 			<command>nasal</command>
@@ -551,8 +563,9 @@ ________________________________________________________________________________
 		</binding>
 	</button>
 
-	<button n="12"><!-- hat right -->
-		<desc>View elevation; mixture; aileron trim; rudder trim</desc>
+	<button n="12">
+		<name>Hat Right</name>
+		<desc>view right,  +F3: mixture richer,  +F4: aileron trim right,  +F3+F4: rudder trim right</desc>
 		<repeatable>true</repeatable>
 		<binding>
 			<command>nasal</command>
@@ -573,8 +586,9 @@ ________________________________________________________________________________
 		</binding>
 	</button>
 
-	<button n="13"><!-- hat down -->
-		<desc>View direction; prop pitch; elevator trim</desc>
+	<button n="13">
+		<name>Hat Down</name>
+		<desc>view down,  +F3: decrease prop pitch,  +F4: elevator trim up</desc>
 		<repeatable>true</repeatable>
 		<binding>
 			<command>nasal</command>

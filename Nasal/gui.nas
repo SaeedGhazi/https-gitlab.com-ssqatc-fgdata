@@ -72,6 +72,7 @@ INIT = func {
     menuEnable("fuel-and-payload", getprop("/sim/flight-model") == "yasim");
     menuEnable("autopilot", props.globals.getNode("/autopilot/KAP140/locks") == nil);
     menuEnable("tutorial-start", size(props.globals.getNode("/sim").getChildren("tutorial")));
+    menuEnable("joystick-info", size(props.globals.getNode("/input/joysticks").getChildren("js")));
 
     var fps = props.globals.getNode("/sim/rendering/fps-display", 1);
     setlistener(fps, fpsDisplay, 1);

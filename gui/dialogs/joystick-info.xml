@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<name>joystick-info</name>
+	<layout>vbox</layout>
+	<default-padding>3</default-padding>
+
+	<group>
+		<layout>hbox</layout>
+		<default-padding>1</default-padding>
+
+		<empty><whatever/></empty>
+
+		<text>
+			<label>Joystick Information</label>
+		</text>
+
+		<empty><stretch>true</stretch></empty>
+
+		<button>
+			<legend></legend>
+			<key>Esc</key>
+			<pref-width>16</pref-width>
+			<pref-height>16</pref-height>
+			<border>2</border>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+	</group>
+
+	<hrule><empty/></hrule>
+
+	<nasal>
+		<open>
+			value = func(p, default = "") {
+				return p != nil and (var v = p.getValue()) != nil ? v : default;
+			}
+
+			items = func(it, name) {
+				var t = "";
+				foreach (var x; it) {
+					var n = value(x.getNode("name"), nil);
+					t ~= "    [";
+					t ~= n != nil ? n : name ~ " #" ~ x.getIndex();
+					t ~= "]   ";
+					t ~= value(x.getNode("desc"), "???");
+					t ~= "\n";
+				}
+				return t;
+			}
+
+			var t = "";
+			var joysticks = props.globals.getNode("/input/joysticks").getChildren("js");
+			var numjoysticks = size(joysticks);
+			forindex (var i; joysticks) {
+				var js = joysticks[i];
+				t ~= "Joystick #" ~ js.getIndex() ~ ": \"" ~ value(js.getNode("id"), "[unnamed]")
+						~ "\"\n\n";
+				t ~= "    Configuration: " ~ value(js.getNode("source"), "[user defined]") ~ "\n";
+				var names = js.getChildren("name");
+				if (size(names)) {
+					t ~= "    Used for: ";
+					foreach (var n; names) {
+						t ~= '"' ~ value(n) ~ '", ';
+					}
+				}
+				t ~= "\n\n";
+				t ~= items(js.getChildren("axis"), "Axis");
+				t ~= items(js.getChildren("button"), "Btn");
+
+				if (numjoysticks > 1 and i &lt; numjoysticks - 1) {
+					t ~= "\n\n\n----------------------------------------\n\n\n";
+				}
+			}
+
+			var text = props.globals.getNode("/sim/gui/dialogs/joystick-info/text", 1);
+			text.setValue(t);
+		</open>
+
+		<close>
+			text.setValue("");
+		</close>
+	</nasal>
+
+	<textbox>
+		<halign>fill</halign>
+		<pref-width>640</pref-width>
+		<pref-height>480</pref-height>
+		<slider>20</slider>
+		<wrap>true</wrap>
+		<editable>false</editable>
+		<property>/sim/gui/dialogs/joystick-info/text</property>
+	</textbox>
+</PropertyList>

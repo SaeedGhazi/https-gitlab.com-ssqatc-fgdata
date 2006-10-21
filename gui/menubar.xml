@@ -458,6 +458,15 @@
   </item>
 
   <item>
+   <label>Joystick Information</label>
+   <name>joystick-info</name>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>joystick-info</dialog-name>
+   </binding>
+  </item>
+
+  <item>
    <label>Basic Keys</label>
    <binding>
     <command>nasal</command>

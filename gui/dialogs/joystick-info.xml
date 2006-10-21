@@ -42,7 +42,7 @@
 				foreach (var x; it) {
 					t ~= "    [";
 					t ~= value(x.getNode("name"), name ~ " #" ~ x.getIndex());
-					t ~= "]   ";
+					t ~= "] ... ";
 					t ~= value(x.getNode("desc"), "???");
 					t ~= "\n";
 				}
@@ -51,7 +51,7 @@
 
 			var t = "";
 			var joysticks = props.globals.getNode("/input/joysticks").getChildren("js");
-			var numjoysticks = size(joysticks);
+			var numjs = size(joysticks);
 			forindex (var i; joysticks) {
 				var js = joysticks[i];
 				t ~= "Joystick #" ~ js.getIndex() ~ ": \"" ~ value(js.getNode("id"), "[unnamed]") ~ "\"\n\n";
@@ -70,7 +70,12 @@
 				t ~= "\n";
 				t ~= items(js.getChildren("button"), "Button");
 
-				if (numjoysticks > 1 and i &lt; numjoysticks - 1) {
+				var help = value(js.getNode("help"), nil);
+				if (help != nil) {
+					t ~= "\n\n" ~ help;
+				}
+
+				if (numjs > 1 and i &lt; numjs - 1) {
 					t ~= "\n\n\n----------------------------------------\n\n\n";
 				}
 			}

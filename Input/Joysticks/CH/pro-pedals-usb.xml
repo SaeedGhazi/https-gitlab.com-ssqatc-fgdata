@@ -21,6 +21,7 @@ $Id$
  <name>CH PRO PEDALS USB </name>
 
  <axis n="0">
+  <desc>Brake left</desc>
   <binding>
    <command>property-scale</command>
    <property>/controls/gear/brake-left</property>
@@ -30,6 +31,7 @@ $Id$
  </axis>
 
  <axis n="1">
+  <desc>Brake right</desc>
   <binding>
    <command>property-scale</command>
    <property>/controls/gear/brake-right</property>
@@ -39,6 +41,7 @@ $Id$
  </axis>
 
  <axis n="2">
+  <desc>Rudder</desc>
   <binding>
    <command>property-scale</command>
    <property>/controls/flight/rudder</property>

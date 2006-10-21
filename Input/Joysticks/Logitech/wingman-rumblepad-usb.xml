@@ -65,6 +65,7 @@ $Id$
  </axis>
 
  <axis n="3">
+  <desc>Rudder</desc>
   <binding>
    <command>property-scale</command>
    <property>/controls/flight/rudder</property>
@@ -73,10 +74,14 @@ $Id$
  </axis>
 
  <axis n="4">
-  <command>null</command>
+  <desc>unused</desc>
+  <binding>
+   <command>null</command>
+  </binding>
  </axis>
 
  <axis n="5">
+  <desc>View left/right</desc>
   <binding>
    <command>property-scale</command>
    <property>/sim/current-view/axes/lat</property>
@@ -84,6 +89,7 @@ $Id$
  </axis>
 
  <axis n="6">
+  <desc>View up/down</desc>
   <binding>
    <command>property-scale</command>
    <property>/sim/current-view/axes/long</property>
@@ -91,6 +97,7 @@ $Id$
  </axis>
 
  <button n="0">
+  <desc>Elevator trim up</desc>
   <repeatable>true</repeatable>
   <binding>
    <command>property-adjust</command>
@@ -100,6 +107,7 @@ $Id$
  </button>
 
  <button n="1">
+  <desc>Decrease propeller pitch</desc>
   <repeatable>true</repeatable>
   <binding>
    <command>property-adjust</command>
@@ -114,6 +122,7 @@ $Id$
  </button>
 
  <button n="2">
+  <desc>Mixture leaner</desc>
   <repeatable>true</repeatable>
   <binding>
    <command>property-adjust</command>
@@ -128,6 +137,7 @@ $Id$
  </button>
 
  <button n="3">
+  <desc>Elevator trim down</desc>
   <repeatable>true</repeatable>
   <binding>
    <command>property-adjust</command>
@@ -137,6 +147,7 @@ $Id$
  </button>
 
  <button n="4">
+  <desc>Increase propeller pitch</desc>
   <repeatable>true</repeatable>
   <binding>
    <command>property-adjust</command>
@@ -151,6 +162,7 @@ $Id$
  </button>
 
  <button n="5">
+  <desc>Mixture richer</desc>
   <repeatable>true</repeatable>
   <binding>
    <command>property-adjust</command>
@@ -193,6 +205,7 @@ $Id$
  </button>
 
  <button n="8">
+  <desc>Cycle View</desc>
   <repeatable>false</repeatable>
   <binding>
    <command>view-cycle</command>

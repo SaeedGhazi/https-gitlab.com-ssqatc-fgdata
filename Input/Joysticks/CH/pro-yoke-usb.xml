@@ -52,6 +52,7 @@
    <factor type="double">-0.5</factor>
   </binding>
  </axis>
+
  <axis>
   <desc>Propeller</desc>
   <number>
@@ -99,12 +100,12 @@
  </axis>
 
  <axis>
+  <desc>View Elevation</desc>
   <number>
     <unix>6</unix>
     <mac>6</mac>
     <windows>7</windows>
   </number>
-  <desc>View Elevation</desc>
   <low>
    <repeatable>true</repeatable>
    <binding>
@@ -124,7 +125,7 @@
  </axis>
 
  <button n="0">
-<desc>Fire Starter on Selected Engine(s)</desc>
+  <desc>Fire Starter on Selected Engine(s)</desc>
   <binding>
    <command>nasal</command>
    <script>controls.startEngine()</script>
@@ -137,7 +138,8 @@
   </mod-up> 
  </button>
 
-<button n="1">
+ <button n="1">
+  <desc>Cycle View</desc>
   <repeatable>false</repeatable>
   <binding>
    <command>view-cycle</command>
@@ -145,6 +147,7 @@
  </button>
 
  <button n="2">
+  <desc>Rudder Trim Right</desc>
   <repeatable>true</repeatable>
   <binding>
    <command>property-adjust</command>
@@ -154,6 +157,7 @@
  </button>
 
  <button n="3">
+  <desc>Rudder Trim Left</desc>
   <repeatable>true</repeatable>
   <binding>
    <command>property-adjust</command>
@@ -193,6 +197,7 @@
  </button>
 
  <button n="6">
+  <desc>Flaps up</desc>
   <repeatable>false</repeatable>
   <binding>
    <command>nasal</command>
@@ -207,6 +212,7 @@
  </button>
 
  <button n="7">
+  <desc>Flaps down</desc>
   <repeatable>false</repeatable>
   <binding>
    <command>nasal</command>
@@ -221,6 +227,7 @@
  </button>
 
  <button n="8">
+  <desc>Increase Engine Boost</desc>
   <repeatable>true</repeatable>
    <binding>
     <command>property-adjust</command>
@@ -235,6 +242,7 @@
  </button>
 
  <button n="9">
+  <desc>Decrease Engine Boost</desc>
   <repeatable>true</repeatable>
    <binding>
     <command>property-adjust</command>
@@ -248,7 +256,8 @@
    </binding>
  </button>
 
-  <button n="10">
+ <button n="10">
+  <desc>Elevator Trim down</desc>
   <repeatable>true</repeatable>
   <binding>
    <command>property-adjust</command>
@@ -258,6 +267,7 @@
  </button>
 
  <button n="11">
+  <desc>Elevator Trim up</desc>
   <repeatable>true</repeatable>
   <binding>
    <command>property-adjust</command>

@@ -41,6 +41,7 @@ joystick, and that the first button is the trigger.
  </axis>
 
  <axis n="3">
+  <desc>Rudder</desc>
   <binding>
    <command>property-scale</command>
    <property>/controls/flight/rudder</property>

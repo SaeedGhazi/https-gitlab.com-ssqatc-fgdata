@@ -140,7 +140,7 @@ properties' values.
     </transformation>
     <transformation>
      <type>y-shift</type>
-     <offset>8</offset>
+     <offset>6</offset>
     </transformation>
    </transformations>
   </layer>

@@ -217,6 +217,7 @@ settimer(func {
 	var map = func(type, msg, r, g, b) {
 		setprop("/sim/sound/voices/" ~ type, msg);
 		screen.log.write(msg, r, g, b);
+		printlog("info", "{", type, "} ", msg);
 
 		# save last ATC message for user callsign, unless this was already
 		# a repetition; insert "I say again" appropriately
@@ -227,14 +228,15 @@ settimer(func {
 				var m = substr(msg, 0, pos + size(cs));
 				msg = substr(msg, pos + size(cs));
 
-				if ((var p = find("Tower, ", msg)) >= 0) {
-					m ~= substr(msg, 0, pos = p + 7);
+				if ((pos = find("Tower, ", msg)) >= 0) {
+					m ~= substr(msg, 0, pos + 7);
+					msg = substr(msg, pos + 7);
 				} else {
 					m ~= ", ";
 				}
-				m ~= "I say again: ";
-				m ~= substr(msg, pos);
+				m ~= "I say again: " ~ msg;
 				atclast.setValue(m);
+				printlog("debug", "ATC_LAST_MESSAGE: ", m);
 			}
 		}
 	}

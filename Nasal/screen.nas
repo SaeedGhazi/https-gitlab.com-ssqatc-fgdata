@@ -184,20 +184,21 @@ msg_repeat = func {
 		settimer(func { setprop("/sim/messages/copilot", last) }, 1.5);
 
 	} else {
-		var callsign = getprop("/sim/user/callsign");
-		var atc = props.globals.getNode("/sim/messages/atc", 1);
 		var last = atc.getValue();
 		if (last == nil) {
 			return;
 		}
-		setprop("/sim/messages/pilot", "This is " ~ callsign ~ ". Say again, over.");
+		setprop("/sim/messages/pilot", "This is " ~ callsign.getValue() ~ ". Say again, over.");
 		settimer(func {
-			atc.setValue("I say again:");
-			atc.setValue(last)
+			atc.setValue(atclast.getValue());
 		}, 6);
 	}
 }
 
+
+var atc = nil;
+var callsign = nil;
+var atclast = nil;
 listener = {};
 
 settimer(func {
@@ -206,10 +207,36 @@ settimer(func {
 	if (nomap != nil and nomap) {
 		return;
 	}
+
+	callsign = props.globals.getNode("/sim/user/callsign", 1);
+	atc = props.globals.getNode("/sim/messages/atc", 1);
+	atclast = props.globals.getNode("/sim/messages/atc-last", 1);
+	atclast.setValue("");
+
 	# map ATC messages to the screen log and to the voice subsystem
 	var map = func(type, msg, r, g, b) {
 		setprop("/sim/sound/voices/" ~ type, msg);
 		screen.log.write(msg, r, g, b);
+
+		# save last ATC message for user callsign, unless this was already
+		# a repetition; insert "I say again" appropriately
+		if (type == "atc") {
+			var cs = callsign.getValue();
+			if (find(", I say again: ", atc.getValue()) < 0
+					and (var pos = find(cs, msg)) >= 0) {
+				var m = substr(msg, 0, pos + size(cs));
+				msg = substr(msg, pos + size(cs));
+
+				if ((var p = find("Tower, ", msg)) >= 0) {
+					m ~= substr(msg, 0, pos = p + 7);
+				} else {
+					m ~= ", ";
+				}
+				m ~= "I say again: ";
+				m ~= substr(msg, pos);
+				atclast.setValue(m);
+			}
+		}
 	}
 
 	var m = "/sim/messages/";

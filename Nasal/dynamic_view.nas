@@ -13,6 +13,16 @@ npow = func(v, w) { math.exp(math.ln(abs(v)) * w) * (v < 0 ? -1 : 1) }
 clamp = func(v, min, max) { v < min ? min : v > max ? max : v }
 normatan = func(x) { math.atan2(x, 1) * 2 / math.pi }
 
+normdeg = func(a) {
+	while (a >= 180) {
+		a -= 360;
+	}
+	while (a < -180) {
+		a += 360;
+	}
+	return a;
+}
+
 
 
 # Class that implements EWMA (Exponentially Weighted Moving Average)
@@ -153,32 +163,19 @@ ViewManager = {
 		var pitch = me.pitchN.getValue();
 		var roll = me.rollN.getValue();
 		var wow = me.wow.get();
-
-#		var ax = me.ax.get();
-#		var ay = me.ay.get();
 		var az = me.az.get();
-#		var adir = math.atan2(ay, ax) * 180 / math.pi;
-#		var aval = math.sqrt(ax * ax + ay * ay);
-
 		var vx = me.vx.get();
-#		var vy = me.vy.get();
-#		var vdir = math.atan2(vy, vx) * 180 / math.pi;
-#		var vval = math.sqrt(vx * vx + vy * vy);
 
+		# calculate sideslip factor (zeroed when no forward ground speed)
 		var wspd = me.wind_speedN.getValue();
 		var wdir = me.headingN.getValue() - me.wind_dirN.getValue();
 		var u = vx - wspd * cos(wdir);
-		var slip = sin(me.slipN.getValue()) * me.ubody.filter(normatan(u / 15));
+		var slip = sin(me.slipN.getValue()) * me.ubody.filter(normatan(u / 10));
 
+		# calculate steering factor
 		var hdg = me.headingN.getValue();
-		var hdiff = me.last_heading - hdg;
+		var hdiff = normdeg(me.last_heading - hdg);
 		me.last_heading = hdg;
-		while (hdiff >= 180) {
-			hdiff -= 360;
-		}
-		while (hdiff < -180) {
-			hdiff += 360;
-		}
 		var steering = normatan(me.hdg_change.filter(hdiff)) * me.size_factor;
 
 		me.heading_axis.apply(				# heading ...

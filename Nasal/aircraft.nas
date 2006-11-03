@@ -226,7 +226,7 @@ light = {
 #	lowpass.new(<coefficient>);
 #
 # EXAMPLE:
-#	var lp = lowpass(0.5);
+#	var lp = aircraft.lowpass.new(0.5);
 #	print(lp.filter(10));
 #	print(lp.filter(0));
 #

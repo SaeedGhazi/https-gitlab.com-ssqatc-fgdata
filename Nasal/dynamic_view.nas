@@ -3,7 +3,6 @@
 # acceleration.
 
 
-
 sin = func(a) { math.sin(a * math.pi / 180.0) }
 cos = func(a) { math.cos(a * math.pi / 180.0) }
 sigmoid = func(x) { 1 / (1 + math.exp(-x)) }
@@ -25,34 +24,6 @@ normdeg = func(a) {
 
 
 
-# Class that implements EWMA (Exponentially Weighted Moving Average)
-# lowpass filter. Initialize with coefficient, set new value when
-# you fetch one. filter() pushes new value and returns filtered value,
-# get() only returns filtered value. A filter coefficient of 0 means
-# no filtering, coeff = 1 generates a factor 0.1, coeff = 2 a facdtor
-# 0.01, coeff = 3 a factor 0.001, etc.
-#
-LowPass = {
-	new : func(coeff) {
-		var m = { parents : [LowPass] };
-		m.value = nil;
-		m.coeff = 1.0 / pow(10, abs(coeff));
-		return m;
-	},
-	filter : func(v) {
-		me.filter = me._filter_;
-		me.value = v;
-	},
-	_filter_ : func(v) {
-		me.value = v * me.coeff + me.value * (1 - me.coeff);
-	},
-	get : func {
-		me.value;
-	},
-};
-
-
-
 # Class that reads a property value, applies factor & offset, clamps to min & max,
 # and optionally lowpass filters.
 #
@@ -64,7 +35,7 @@ Input = {
 		m.offset = offset;
 		m.min = min;
 		m.max = max;
-		m.lowpass = filter ? LowPass.new(filter) : nil;
+		m.lowpass = filter ? aircraft.lowpass.new(filter) : nil;
 		return m;
 	},
 	get : func {
@@ -131,19 +102,19 @@ ViewManager = {
 		m.roll_axis = ViewAxis.new("/sim/current-view/goal-roll-offset-deg");
 
 		# accerations are converted to G (one G is subtraced from z-accel)
-		m.ax = Input.new("/accelerations/pilot/x-accel-fps_sec", 0.03108095, 0, 1.1, 0);
-		m.ay = Input.new("/accelerations/pilot/y-accel-fps_sec", 0.03108095, 0, 1.3);
-		m.az = Input.new("/accelerations/pilot/z-accel-fps_sec", -0.03108095, -1, 1.0073);
+		m.ax = Input.new("/accelerations/pilot/x-accel-fps_sec", 0.03108095, 0, 0.58, 0);
+		m.ay = Input.new("/accelerations/pilot/y-accel-fps_sec", 0.03108095, 0, 0.95);
+		m.az = Input.new("/accelerations/pilot/z-accel-fps_sec", -0.03108095, -1, 0.46);
 
 		# velocities are converted to knots
-		m.vx = Input.new("/velocities/uBody-fps", 0.5924838, 0, 1);
+		m.vx = Input.new("/velocities/uBody-fps", 0.5924838, 0, 0.45);
 		m.vy = Input.new("/velocities/vBody-fps", 0.5924838, 0);
 		m.vz = Input.new("/velocities/wBody-fps", 0.5924838, 0);
 
 		# turn WoW bool into smooth values ranging from 0 to 1
-		m.wow = Input.new("/gear/gear/wow", 1, 0, 1.2);
-		m.hdg_change = LowPass.new(1.3);
-		m.ubody = LowPass.new(1.3);
+		m.wow = Input.new("/gear/gear/wow", 1, 0, 0.74);
+		m.hdg_change = aircraft.lowpass.new(0.95);
+		m.ubody = aircraft.lowpass.new(0.95);
 		m.last_heading = m.headingN.getValue();
 		m.size_factor = -getprop("/sim/chase-distance-m") / 25;
 		m.reset();

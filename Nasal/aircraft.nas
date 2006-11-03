@@ -216,6 +216,46 @@ light = {
 
 
 
+# lowpass
+# ==============================================================================
+# class that implements a variable-interval EWMA (Exponentially Weighted
+# Moving Average) lowpass filter with characteristics independent of the
+# frame rate.
+#
+# SYNOPSIS:
+#	lowpass.new(<coefficient>);
+#
+# EXAMPLE:
+#	var lp = lowpass(0.5);
+#	print(lp.filter(10));
+#	print(lp.filter(0));
+#
+lowpass = {
+	new : func(coeff) {
+		var m = { parents : [lowpass] };
+		m.dtN = props.globals.getNode("/sim/time/delta-realtime-sec", 1);
+		m.value = nil;
+		m.coeff = abs(coeff);
+		return m;
+	},
+	# filter(raw_value)    -> push new value, returns filtered value
+	filter : func(v) {
+		me.filter = me._filter_;
+		me.value = v;
+	},
+	# get()                -> returns filtered value
+	get : func {
+		me.value;
+	},
+	_filter_ : func(v) {
+		var dt = me.dtN.getValue();
+		var c = dt / (me.coeff + dt);
+		me.value = v * c + me.value * (1 - c);
+	},
+};
+
+
+
 # HUD control class to handle both HUD implementations.
 #
 HUDControl = {

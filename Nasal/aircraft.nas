@@ -227,15 +227,15 @@ light = {
 #
 # EXAMPLE:
 #	var lp = aircraft.lowpass.new(0.5);
-#	print(lp.filter(10));
+#	print(lp.filter(10));  # prints 10
 #	print(lp.filter(0));
 #
 lowpass = {
 	new : func(coeff) {
 		var m = { parents : [lowpass] };
 		m.dtN = props.globals.getNode("/sim/time/delta-realtime-sec", 1);
+		m.coeff = coeff >= 0 ? coeff : die("aircraft.lowpass(): coefficient must be >= 0");
 		m.value = nil;
-		m.coeff = abs(coeff);
 		return m;
 	},
 	# filter(raw_value)    -> push new value, returns filtered value

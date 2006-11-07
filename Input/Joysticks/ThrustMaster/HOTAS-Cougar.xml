@@ -1,0 +1,229 @@
+<?xml version="1.0"?>
+
+<!--
+Bindings for THRUSTMASTER HOTAS Cougar stick/throttle combination.
+
+	Matthias Boerner <matthias-boerner@t-online.de>
+-->
+
+<PropertyList>
+	<name type="string">Thrustmaster Thrustmaster HOTAS Cougar</name>
+
+        <axis>
+                <desc>Aileron</desc>
+                <number>
+                        <unix>0</unix>
+                        <windows>0</windows>
+                </number>
+                <binding>
+                        <command>property-scale</command>
+                        <property>/controls/flight/aileron</property>
+                </binding>
+        </axis>
+
+        <axis>
+                <desc>Elevator</desc>
+                <number>
+                        <unix>1</unix>
+                        <windows>1</windows>
+                </number>
+                <binding>
+                        <command>property-scale</command>
+                        <property>/controls/flight/elevator</property>
+                        <factor type="double">-1.0</factor>
+                </binding>
+        </axis>
+
+        <axis>
+                <desc>Throttle</desc>
+                <number>
+                        <unix>2</unix>
+                        <windows>3</windows>
+                </number>
+                <binding>
+			<command>nasal</command>
+			<script>controls.throttleAxis()</script>
+                </binding>
+        </axis>
+
+<!-- begin trim configuration -->
+	<!-- button on HOTAS: NWS, A/R DISC, MSL STEP, A-G TOGGLE -->
+	<button n="4">
+		<desc>reset trim</desc>
+		<binding>
+                        <command>nasal</command>
+                        <script>
+				setprop("/controls/flight/elevator-trim", 0);
+				setprop("/controls/flight/aileron-trim", 0);
+				setprop("/controls/flight/rudder-trim", 0);
+			</script>
+		</binding>
+	</button>
+
+	<!-- button on HOTAS: Trim -->
+	<axis n="5">
+	<desc>aileron left and right trim</desc>
+	<low>
+		<repeatable>true</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>controls.aileronTrim(-1)</script>
+		</binding>
+	</low>
+	<high>
+		<repeatable>true</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>controls.aileronTrim(1)</script>
+		</binding>
+	</high>
+	</axis>
+
+        <axis n="6">
+        <desc>elevation up and down trim</desc>
+        <low>
+                <repeatable>true</repeatable>
+                <binding>
+                        <command>nasal</command>
+                        <script>controls.elevatorTrim(-1)</script>
+                </binding>
+        </low>
+        <high>
+                <repeatable>true</repeatable>
+                <binding>
+                        <command>nasal</command>
+                        <script>controls.elevatorTrim(1)</script>
+                </binding>
+        </high>
+        </axis>
+<!-- end trim configuration -->
+
+<!-- begin view configuration -->
+	<!-- button on HOTAS: RDR CURSOR/ENABLE -->
+	<button n="18">
+		<desc>reset view</desc>
+		<binding>
+			<command>nasal</command>
+			<script>view.resetView()</script>
+		</binding>
+	</button>
+
+	<!-- button on HOTAS: Display Management -->
+	<button n="10">
+		<desc>view up</desc>
+		<repeatable>true</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>view.panViewPitch(1)</script>
+		</binding>
+	</button>
+
+        <button n="11">
+                <desc>view right</desc>
+                <repeatable>true</repeatable>
+                <binding>
+                        <command>nasal</command>
+                        <script>view.panViewDir(-1)</script>
+                </binding>
+        </button>
+
+	<button n="12">
+                <desc>view down</desc>
+                <repeatable>true</repeatable>
+                <binding>
+                        <command>nasal</command>
+                        <script>view.panViewPitch(-1)</script>
+                </binding>
+        </button>
+
+        <button n="13">
+                <desc>view left</desc>
+                <repeatable>true</repeatable>
+                <binding>
+                        <command>nasal</command>
+                        <script>view.panViewDir(1)</script>
+                </binding>
+        </button>
+<!-- end view configuration -->
+
+<!-- begin switch view configuration -->
+	<!-- button on HOTAS: Pinky Switch -->
+	<button n="3">
+		<desc>switch view</desc>
+		<binding>
+			<command>nasal</command>
+			<script>view.stepView(1)</script>
+		</binding>
+	</button>
+<!-- end switch view configuration -->
+
+<!-- begin zoom configuration (FOV)-->
+	<!-- button on HOTAS: Communications Switch -->
+	<button n="21">
+		<desc>zoom in</desc>
+		<repeatable>true</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>view.decrease(1)</script>
+		</binding>
+	</button>
+
+	<button n="22">
+		<desc>zoom out</desc>
+		<repeatable>true</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>view.increase(1)</script>
+		</binding>
+	</button>
+
+	<button n="19">
+		<desc>reset zoom</desc>
+		<binding>
+			<command>nasal</command>
+			<script>view.resetFOV()</script>
+		</binding>
+	</button>
+<!-- end zoom configuration (FOV)-->
+
+<!-- begin gear configuration -->
+	<!-- button on HOTAS: Manual Range/Uncage Switch -->
+	<button n="23">
+		<desc>gear up or down</desc>
+		<binding>
+			<command>nasal</command>
+			<script>
+				gearToggle = getprop("/controls/gear/gear-down");
+				if (gearToggle == 1) {
+					setprop("/controls/gear/gear-down", 0);
+					gui.popupTip("Gear up!");
+				} else {
+					setprop("/controls/gear/gear-down", 1);
+					gui.popupTip("Gear down!");
+				}
+			</script>
+		</binding>
+	</button> 
+<!-- end gear configuration -->
+
+<!-- begin flaps configuration -->
+	<!-- botton on HOTAS: Target Management -->
+	<button n="6">
+		<desc>flaps up</desc>
+		<binding>
+			<command>nasal</command>
+			<script>controls.flapsDown(-1)</script>
+		</binding>
+	</button>
+
+	<button n="8">
+		<desc>flaps down</desc>
+		<binding>
+			<command>nasal</command>
+			<script>controls.flapsDown(1)</script>
+		</binding>
+	</button>
+<!-- end flaps configuration -->
+		
+</PropertyList>
+

@@ -383,28 +383,23 @@ solve-weight:
           weight: Weight setting in pounds.
 
 
-control:  This element, which can appear in two different contexts,
-          manages a mapping from fgfs properties (user input) to
-          settable values on the aircraft's objects.  Note that the
-          value to be set MUST (!) be valid on the given object type.
-          This is not checked for by the parser, and will cause a
-          runtime crash if you try it.  Wing's don't have throttle
-          controls, etc...  Note that multiple axes may be set on the
-          same value.  They are summed before setting.
-
-          One serious shortcoming of the current implementation is
-          that there is no provision for modifying the values read
-          from properties.  There needs to be a way to scale,
-          translate and truncate the values.  On its way, I promise.
+control-input:
+          This element manages a mapping from fgfs properties (user
+          input) to settable values on the aircraft's objects.  Note
+          that the value to be set MUST (!) be valid on the given
+          object type.  This is not checked for by the parser, and
+          will cause a runtime crash if you try it.  Wing's don't have
+          throttle controls, etc...  Note that multiple axes may be
+          set on the same value.  They are summed before setting.
 
           axis:  The name of the double-valued fgfs property "axis" to
                  use as input, such as "/controls/flight/aileron".
-          output: Which property to set on the objects.  It can have
-                  the following values:
+          control: Which control axis to set on the objects.  It can have
+                   the following values:
                   THROTTLE - The throttle on a jet or propeller.
                   MIXTURE - The mixture on a propeller.
-                  REHEAT - The afterburner on a jet (unimpl.).
-                  PROP - The propeller advance (unimpl.)
+                  REHEAT - The afterburner on a jet
+                  PROP - The propeller advance
                   BRAKE - The brake on a gear.
                   STEER - The steering angle on a gear.
                   INCIDENCE - The incidence angle of a wing.
@@ -416,6 +411,7 @@ control:  This element, which can appear in two different contexts,
                   CYCLICELE - The "elevator" cyclic input of a rotor
                   COLLECTIVE - The collective input of a rotor
                   ROTORENGINEON - If not equal zero the rotor is rotating
+                  {... and many more, see FGFDM.cpp ...}
           invert: Negate the value of the property before setting on
                   the object.
           split:  Applicable to wing control surfaces.  Sets the
@@ -426,18 +422,44 @@ control:  This element, which can appear in two different contexts,
                   lots of sensitiviy in the center.  Obviously only
                   applicable to values that have a range of [-1:1] or
                   [0:1].
+          src0/src1/dst0/dst1:
+                  If present, these defined a linear mapping from the
+                  source to the output value.  Input values in the
+                  range src0-src1 are mapped linearly to dst0-dst1,
+                  with clamping for input values that lie outside the
+                  range.
 
-          A control element can also appear inside of an <approach> or
-          <cruise> element.  Here, it specifies a particular value of an
-          axis mapping that should be true under the given
-          conditions.  At cruise, the throttle is generally at a high
-          setting, the flaps and slats are up During approach
-          the flaps and slats are down, etc...
+control-output:
+          This can be used to pass the value of a YASim control axis
+          (after all mapping and summing is applied) back to the
+          property tree.
 
-          axis:  As above, the name of the input property.
-          value: A floating point number that the property is expected
-                 to hold.
+          control: Name of the control axis.  See above.
+          prop:    Property node to receive the value.
+          side:    Optional, for split controls.  Either "right" or "left"
+          min/max: Clamping applied to output value.
 
+control-speed:
+          Some controls (most notably flaps and hydraulics) have
+          maximum slew rates and cannot respond instantly to pilot
+          input.  This can be implemented with a control-speed tag,
+          which defines a "transition time" required to slew through
+          the full input range.  Note that this tag is
+          semi-deprecated, complicated control input filtering can be
+          done much more robustly from a Nasal script.
+
+          control: Name of the control axis. See above.
+          transition-time: Time in seconds to slew through input range.
+
+control-setting:
+          This tag is used to define a particular setting for a
+          control axis inside the <cruise> or <approach> tags, where
+          obviously property input is not available.  It can be used,
+          for example, to inform the solver that the approach
+          performance values assume full flaps, etc...
+
+          axis:  Name of the control input (i.e. a property name)
+          value: Value of the control axis.
 
 rotor:    A rotor. Used for simulating helicopters. You can have one, two
           or even more.

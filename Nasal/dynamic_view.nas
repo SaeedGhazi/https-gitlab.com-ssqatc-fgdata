@@ -124,6 +124,7 @@ ViewManager = {
 		me.heading_axis.reset();
 		me.pitch_axis.reset();
 		me.roll_axis.reset();
+		me.add_offset();
 	},
 	add_offset : func {
 		me.heading_axis.add_offset();
@@ -281,7 +282,7 @@ settimer(func {
 	}, 1));
 
 	append(L, setlistener("/sim/signals/reinit", func {
-		view_manger.reset();
+		view_manager.reset();
 	}, 0));
 }, 0);
 

@@ -179,38 +179,51 @@ light = {
 		if (m.stateN.getValue() == nil) {
 			m.stateN.setBoolValue(0);
 		}
-		m.interval = 0.5;  # check interval for non blinking (off/on) lights;
-		                   # 0.5 is performance friendly, but makes lights
-		                   # react a bit slow to switch events
 		m.continuous = 0;
-		m._loop_();
+		m.loopid = 0;
+		m.switchL = setlistener(m.switchN, func { m._switch_() }, 1);
 		return m;
+	},
+	# class destructor
+	del : func {
+		removelistener(me.switchL);
 	},
 	# light.switch(bool)   ->  set light switch (also affects other lights
 	#                          that use the same switch)
-	switch  : func { me.switchN.setBoolValue(arg[0]); me },
+	switch : func { me.switchN.setBoolValue(arg[0]); me },
 
 	# light.toggle()       ->  toggle light switch
-	toggle  : func { me.switchN.setBoolValue(!me.switchN.getValue()); me },
+	toggle : func { me.switchN.setBoolValue(!me.switchN.getValue()); me },
 
 	# light.cont()         ->  continuous light
-	cont    : func { me.continuous = 1; me },
+	cont : func { if (!me.continuous) { me.continuous = 1; me._switch_(); } me },
 
 	# light.blink()        ->  blinking light  (default)
-	blink   : func { me.continuous = 0; me },
+	blink : func { if (me.continuous) { me.continuous = 0; me._switch_(); } me },
 
-	_loop_  : func {
-		if (!me.switchN.getValue()) {
-			state = 0; delay = me.interval;
-		} elsif (me.continuous) {
-			state = 1; delay = me.interval;
-		} elsif (me.stateN.getValue()) {
-			state = 0; delay = me.offtime;
+	_switch_ : func {
+		var state = me.switchN.getBoolValue();
+		me.loopid += 1;
+		if (me.continuous) {
+			me.stateN.setBoolValue(state);
+		} elsif (state) {
+			me._loop_(me.loopid);
 		} else {
-			state = 1; delay = me.ontime;
+			me.stateN.setBoolValue(0);
 		}
-		me.stateN.setValue(state);
-		settimer(func { me._loop_() }, delay);
+	},
+
+	_loop_ : func(id) {
+		if (id != me.loopid) {
+			return;
+		}
+		if (me.stateN.getBoolValue()) {
+			me.stateN.setBoolValue(0);
+			settimer(func { me._loop_(id) }, me.offtime);
+		} else {
+			me.stateN.setBoolValue(1);
+			settimer(func { me._loop_(id) }, me.ontime);
+		}
 	},
 };
 

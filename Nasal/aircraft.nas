@@ -181,6 +181,7 @@ light = {
 		}
 		m.continuous = 0;
 		m.loopid = 0;
+		m.switch = -1;
 		m.switchL = setlistener(m.switchN, func { m._switch_() }, 1);
 		return m;
 	},
@@ -202,11 +203,15 @@ light = {
 	blink : func { if (me.continuous) { me.continuous = 0; me._switch_(); } me },
 
 	_switch_ : func {
-		var state = me.switchN.getBoolValue();
+		var switch = me.switchN.getBoolValue();
+		if (me.switch == switch) {
+			return;
+		}
+		me.switch = switch;
 		me.loopid += 1;
 		if (me.continuous) {
-			me.stateN.setBoolValue(state);
-		} elsif (state) {
+			me.stateN.setBoolValue(switch);
+		} elsif (switch) {
 			me._loop_(me.loopid);
 		} else {
 			me.stateN.setBoolValue(0);
@@ -217,13 +222,8 @@ light = {
 		if (id != me.loopid) {
 			return;
 		}
-		if (me.stateN.getBoolValue()) {
-			me.stateN.setBoolValue(0);
-			settimer(func { me._loop_(id) }, me.offtime);
-		} else {
-			me.stateN.setBoolValue(1);
-			settimer(func { me._loop_(id) }, me.ontime);
-		}
+		me.stateN.setBoolValue(var state = !me.stateN.getBoolValue());
+		settimer(func { me._loop_(id) }, state ? me.ontime : me.offtime);
 	},
 };
 
@@ -259,6 +259,10 @@ lowpass = {
 	# get()                -> returns filtered value
 	get : func {
 		me.value;
+	},
+	# set()                -> sets new average
+	set : func(v) {
+		me.value = v;
 	},
 	_filter_ : func(v) {
 		var dt = me.dtN.getValue();

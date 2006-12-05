@@ -181,7 +181,7 @@ light = {
 		}
 		m.continuous = 0;
 		m.loopid = 0;
-		m.switch = -1;
+		m.lastswitch = 0;
 		m.switchL = setlistener(m.switchN, func { m._switch_() }, 1);
 		return m;
 	},
@@ -191,38 +191,45 @@ light = {
 	},
 	# light.switch(bool)   ->  set light switch (also affects other lights
 	#                          that use the same switch)
-	switch : func { me.switchN.setBoolValue(arg[0]); me },
+	switch : func(v) { me.switchN.setBoolValue(v); me },
 
 	# light.toggle()       ->  toggle light switch
 	toggle : func { me.switchN.setBoolValue(!me.switchN.getValue()); me },
 
 	# light.cont()         ->  continuous light
-	cont : func { if (!me.continuous) { me.continuous = 1; me._switch_(); } me },
+	cont : func {
+		me.continuous and return;
+		me.continuous = 1;
+		me.loopid += 1;
+		me.stateN.setBoolValue(me.lastswitch);
+		me;
+	},
 
 	# light.blink()        ->  blinking light  (default)
-	blink : func { if (me.continuous) { me.continuous = 0; me._switch_(); } me },
+	blink : func {
+		me.continuous or return;
+		me.continuous = 0;
+		me.lastswitch and me._loop_(me.loopid += 1);
+		me;
+	},
 
 	_switch_ : func {
 		var switch = me.switchN.getBoolValue();
-		if (me.switch == switch) {
-			return;
-		}
-		me.switch = switch;
+		switch != me.lastswitch or return;
+		me.lastswitch = switch;
 		me.loopid += 1;
-		if (me.continuous) {
+		if (me.continuous or !switch) {
 			me.stateN.setBoolValue(switch);
 		} elsif (switch) {
-			me._loop_(me.loopid);
-		} else {
 			me.stateN.setBoolValue(0);
+			me._loop_(me.loopid);
 		}
 	},
 
 	_loop_ : func(id) {
-		if (id != me.loopid) {
-			return;
-		}
-		me.stateN.setBoolValue(var state = !me.stateN.getBoolValue());
+		id == me.loopid or return;
+		var state = !me.stateN.getBoolValue();
+		me.stateN.setBoolValue(state);
 		settimer(func { me._loop_(id) }, state ? me.ontime : me.offtime);
 	},
 };

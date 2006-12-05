@@ -198,18 +198,20 @@ light = {
 
 	# light.cont()         ->  continuous light
 	cont : func {
-		me.continuous and return;
-		me.continuous = 1;
-		me.loopid += 1;
-		me.stateN.setBoolValue(me.lastswitch);
+		if (!me.continuous) {
+			me.continuous = 1;
+			me.loopid += 1;
+			me.stateN.setBoolValue(me.lastswitch);
+		}
 		me;
 	},
 
 	# light.blink()        ->  blinking light  (default)
 	blink : func {
-		me.continuous or return;
-		me.continuous = 0;
-		me.lastswitch and me._loop_(me.loopid += 1);
+		if (me.continuous) {
+			me.continuous = 0;
+			me.lastswitch and me._loop_(me.loopid += 1);
+		}
 		me;
 	},
 

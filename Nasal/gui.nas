@@ -794,10 +794,12 @@ showHelpDialog = func {
         g = dialog[name].addChild("group");
         g.set("layout", "vbox");
         g.set("default-padding", 1);
-        foreach (l; lines) {
-            w = g.addChild("text");
-            w.set("halign", "left");
-            w.set("label", " " ~ l.getValue() ~ " ");
+        foreach (var lin; lines) {
+            foreach (var l; split("\n", lin.getValue())) {
+                w = g.addChild("text");
+                w.set("halign", "left");
+                w.set("label", " " ~ l ~ " ");
+            }
         }
     }
 

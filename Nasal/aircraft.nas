@@ -7,8 +7,8 @@
 # anonymous if you don't need further access to their members. On the
 # other hand, you can assign the class and apply setters at the same time:
 #
-#   aircraft.light.new("sim/model/foo/beacon");    # anonymous
-#   strobe = aircraft.light.new("sim/model/foo/strobe").cont().switch(1);
+#   aircraft.light.new("sim/model/foo/beacon", [1, 1]);    # anonymous
+#   var strobe = aircraft.light.new("sim/model/foo/strobe", [1, 1]).cont().switch(1);
 #
 #
 # Classes do create properties, but they don't usually overwrite the contents
@@ -23,11 +23,11 @@
 # always be accessed directly as member "node", and turned into a path
 # string with node.getPath():
 #
-#   beacon = aircraft.light.new("sim/model/foo/beacon");
+#   var beacon = aircraft.light.new("sim/model/foo/beacon", [1, 1]);
 #   print(beacon.node.getPath());
 #
-#   strobe_node = props.globals.getNode("sim/model/foo/strobe", 1);
-#   strobe = aircraft.light.new(strobe_node, 0.05, 1.0);
+#   var strobe_node = props.globals.getNode("sim/model/foo/strobe", 1);
+#   var strobe = aircraft.light.new(strobe_node, [0.05, 1.0]);
 #
 #
 # The classes implement only commonly used features, but are easy to
@@ -86,7 +86,7 @@ optarg = func {
 #	./enabled         (bool)       (default: 1)
 #
 # EXAMPLE:
-#	canopy = aircraft.door.new("sim/model/foo/canopy", 5);
+#	var canopy = aircraft.door.new("sim/model/foo/canopy", 5);
 #	canopy.open();
 #
 door = {
@@ -143,11 +143,12 @@ door = {
 # beacons, strobes, etc.
 #
 # SYNOPSIS:
-#	light.new(<property> [, <ontime> [, <offtime> [, <switch>]]]);
+#	light.new(<property>, <pattern> [, <switch>]);
+#	light.new(<property>, <stretch>, <pattern> [, <switch>]);
 #
 #	property   ... light node: property path or node
-#	ontime     ... time that the light is on when blinking  (default: 0.5 [s])
-#	offtime    ... time that the light is off when blinking (default: <ontime>)
+#	stretch    ... multiplicator for all pattern values
+#	pattern    ... array of on/off time intervals (in seconds)
 #	switch     ... property path or node to use as switch   (default: ./enabled)
 #                      instead of ./enabled
 #
@@ -156,19 +157,35 @@ door = {
 #	./enabled         (bool)   (default: 0) except if <switch> given)
 #
 # EXAMPLES:
-#	aircraft.light.new("sim/model/foo/beacon", 0.4);    # anonymous light
-#	strobe = aircraft.light.new("sim/model/foo/strobe", 0.05, 1.0,
+#	aircraft.light.new("sim/model/foo/beacon", [0.4, 0.4]);    # anonymous light
+#
+#	var strobe = aircraft.light.new("sim/model/foo/strobe", [0.05, 0.05, 0.05, 1],
 #	                "controls/lighting/strobe");
 #	strobe.switch(1);
+#
+#	var pattern = [0.05, 0.05, 0.05, 1];
+#	aircraft.light.new("sim/model/foo/strobe-top", 1.001, pattern, "controls/lighting/strobe");
+#	aircraft.light.new("sim/model/foo/strobe-bot", 1.005, pattern, "controls/lighting/strobe");
 #
 light = {
 	new : func {
 		m = { parents : [light] };
 		m.node = makeNode(arg[0]);
-		m.ontime = optarg(arg, 1, 0.5);
-		m.offtime = optarg(arg, 2, m.ontime);
-		if (size(arg) > 3 and arg[3] != nil) {
-			m.switchN = makeNode(arg[3]);
+		var stretch = 1.0;
+		var c = 1;
+		if (typeof(arg[c]) == "scalar") {
+			stretch = arg[c];
+			c += 1;
+		}
+		if (typeof(arg[c]) != "vector") {
+			die("aircraft.nas: the arguments of aircraft.light.new() have changed!\n" ~
+					"  *** BEFORE: aircraft.light.new(property, 0.1, 0.9, switch)\n" ~
+					"  ***    NOW: aircraft.light.new(property, [0.1, 0.9], switch)");
+		}
+		m.pattern = arg[c];
+		c += 1;
+		if (size(arg) > c and arg[c] != nil) {
+			m.switchN = makeNode(arg[c]);
 		} else {
 			m.switchN = m.node.getNode("enabled", 1);
 		}
@@ -179,8 +196,12 @@ light = {
 		if (m.stateN.getValue() == nil) {
 			m.stateN.setBoolValue(0);
 		}
-		m.continuous = 0;
+		forindex (var i; m.pattern) {
+			m.pattern[i] *= stretch;
+		}
+		m.index = 0;
 		m.loopid = 0;
+		m.continuous = 0;
 		m.lastswitch = 0;
 		m.switchL = setlistener(m.switchN, func { m._switch_() }, 1);
 		return m;
@@ -210,6 +231,8 @@ light = {
 	blink : func {
 		if (me.continuous) {
 			me.continuous = 0;
+			me.index = 0;
+			me.stateN.setBoolValue(0);
 			me.lastswitch and me._loop_(me.loopid += 1);
 		}
 		me;
@@ -224,15 +247,18 @@ light = {
 			me.stateN.setBoolValue(switch);
 		} elsif (switch) {
 			me.stateN.setBoolValue(0);
+			me.index = 0;
 			me._loop_(me.loopid);
 		}
 	},
 
 	_loop_ : func(id) {
 		id == me.loopid or return;
-		var state = !me.stateN.getBoolValue();
-		me.stateN.setBoolValue(state);
-		settimer(func { me._loop_(id) }, state ? me.ontime : me.offtime);
+		me.stateN.setBoolValue(!me.stateN.getBoolValue());
+		settimer(func { me._loop_(id) }, me.pattern[me.index]);
+		if ((me.index += 1) >= size(me.pattern)) {
+			me.index = 0;
+		}
 	},
 };
 

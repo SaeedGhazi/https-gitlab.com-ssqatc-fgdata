@@ -93,6 +93,7 @@ ViewManager = {
 		m.pitchN = props.globals.getNode("/orientation/pitch-deg", 1);
 		m.rollN = props.globals.getNode("/orientation/roll-deg", 1);
 		m.slipN = props.globals.getNode("/orientation/side-slip-deg", 1);
+		m.speedN = props.globals.getNode("velocities/airspeed-kt", 1);
 
 		m.wind_dirN = props.globals.getNode("/environment/wind-from-heading-deg", 1);
 		m.wind_speedN = props.globals.getNode("/environment/wind-speed-kt", 1);
@@ -117,6 +118,7 @@ ViewManager = {
 		m.ubody = aircraft.lowpass.new(0.95);
 		m.last_heading = m.headingN.getValue();
 		m.size_factor = -getprop("/sim/chase-distance-m") / 25;
+		m.is_helicopter = props.globals.getNode("rotors", 0) != nil;
 		m.reset();
 		return m;
 	},
@@ -150,19 +152,35 @@ ViewManager = {
 		me.last_heading = hdg;
 		var steering = normatan(me.hdg_change.filter(hdiff)) * me.size_factor;
 
-		me.heading_axis.apply(				# heading ...
-			-15 * sin(roll) * cos(pitch)		#     due to roll
-			+ 40 * steering * wow			#     due to ground steering
-			+ 10 * slip * (1 - wow)			#     due to sideslip (in air)
-		);
-		me.pitch_axis.apply(				# pitch ...
-			10 * sin(roll) * sin(roll)		#     due to roll
-			+ 30 * (1 / (1 + math.exp(2 - az))	#     due to G load
-				- 0.119202922)			#         [move to origin; 1/(1+exp(2)) ]
-		);
-		me.roll_axis.apply(				# roll ...
-			0.0 * sin(roll) * cos(pitch)		#     due to roll  (none)
-		);
+		if (me.is_helicopter) {
+			var speed = 1 - normatan(me.speedN.getValue() / 20);
+
+			me.heading_axis.apply(							# view heading due to ...
+				(roll < 0 ? -50 : -25) * npow(sin(roll) * cos(pitch), 2)	#    roll
+			);
+			me.pitch_axis.apply(							# view pitch due to ...
+				(pitch < 0 ? -35 : -40) * sin(pitch) * speed			#    pitch
+				+ 15 * sin(roll) * sin(roll)					#    roll
+			);
+			me.roll_axis.apply(							# view roll due to ...
+				-15 * sin(roll) * cos(pitch) * speed				#    roll
+			);
+
+		} else {
+			me.heading_axis.apply(				# heading ...
+				-15 * sin(roll) * cos(pitch)		#     due to roll
+				+ 40 * steering * wow			#     due to ground steering
+				+ 10 * slip * (1 - wow)			#     due to sideslip (in air)
+			);
+			me.pitch_axis.apply(				# pitch ...
+				10 * sin(roll) * sin(roll)		#     due to roll
+				+ 30 * (1 / (1 + math.exp(2 - az))	#     due to G load
+					- 0.119202922)			#         [move to origin; 1/(1+exp(2)) ]
+			);
+			me.roll_axis.apply(				# roll ...
+				0.0 * sin(roll) * cos(pitch)		#     due to roll  (none)
+			);
+		}
 	},
 };
 
@@ -210,7 +228,7 @@ var L = [];	# vector of listener ids; allows to remove all listeners (= useless 
 
 # Initialization.
 #
-settimer(func {
+setlistener("/sim/signals/fdm-initialized", func {
 	# disable menu entry and return for inappropriate FDMs  (see Main/fg_init.cxx)
 	var fdms = {
 		acms:0, ada:0, balloon:0, external:0,
@@ -284,6 +302,6 @@ settimer(func {
 	append(L, setlistener("/sim/signals/reinit", func {
 		view_manager.reset();
 	}, 0));
-}, 0);
+});
 
 

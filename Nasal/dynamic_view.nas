@@ -84,7 +84,7 @@ ViewAxis = {
 # sim/current-view/goal-*-offset-deg properties.
 #
 ViewManager = {
-	new : func(c) {
+	new : func {
 		var m = { parents : [ViewManager] };
 		m.elapsedN = props.globals.getNode("/sim/time/elapsed-sec", 1);
 		m.deltaN = props.globals.getNode("/sim/time/delta-realtime-sec", 1);
@@ -102,27 +102,33 @@ ViewManager = {
 		m.pitch_axis = ViewAxis.new("/sim/current-view/goal-pitch-offset-deg");
 		m.roll_axis = ViewAxis.new("/sim/current-view/goal-roll-offset-deg");
 
-		# accerations are converted to G (one G is subtraced from z-accel)
-		m.ax = Input.new("/accelerations/pilot/x-accel-fps_sec", 0.03108095, 0, 0.58, 0);
-		m.ay = Input.new("/accelerations/pilot/y-accel-fps_sec", 0.03108095, 0, 0.95);
-		m.az = Input.new("/accelerations/pilot/z-accel-fps_sec", -0.03108095, -1, 0.46);
+		# accelerations are converted to G (one G is subtraced from z-accel)
+		m.axI = Input.new("/accelerations/pilot/x-accel-fps_sec", 0.03108095, 0, 0.58, 0);
+		m.ayI = Input.new("/accelerations/pilot/y-accel-fps_sec", 0.03108095, 0, 0.95);
+		m.azI = Input.new("/accelerations/pilot/z-accel-fps_sec", -0.03108095, -1, 0.46);
 
 		# velocities are converted to knots
-		m.vx = Input.new("/velocities/uBody-fps", 0.5924838, 0, 0.45);
-		m.vy = Input.new("/velocities/vBody-fps", 0.5924838, 0);
-		m.vz = Input.new("/velocities/wBody-fps", 0.5924838, 0);
+		m.vxI = Input.new("/velocities/uBody-fps", 0.5924838, 0, 0.45);
+		m.vyI = Input.new("/velocities/vBody-fps", 0.5924838, 0);
+		m.vzI = Input.new("/velocities/wBody-fps", 0.5924838, 0);
 
 		# turn WoW bool into smooth values ranging from 0 to 1
-		m.wow = Input.new("/gear/gear/wow", 1, 0, 0.74);
+		m.wowI = Input.new("/gear/gear/wow", 1, 0, 0.74);
 		m.hdg_change = aircraft.lowpass.new(0.95);
 		m.ubody = aircraft.lowpass.new(0.95);
 		m.last_heading = m.headingN.getValue();
 		m.size_factor = -getprop("/sim/chase-distance-m") / 25;
-		m.is_helicopter = props.globals.getNode("rotors", 0) != nil;
+
+		if (props.globals.getNode("rotors", 0) != nil) {
+			m.default_helicopter();
+		} else {
+			m.default_plane();
+		}
 		m.reset();
 		return m;
 	},
 	reset : func {
+		me.lookat_active = 0;
 		me.heading_axis.reset();
 		me.pitch_axis.reset();
 		me.roll_axis.reset();
@@ -134,55 +140,88 @@ ViewManager = {
 		me.roll_axis.add_offset();
 	},
 	apply : func {
-		var pitch = me.pitchN.getValue();
-		var roll = me.rollN.getValue();
-		var wow = me.wow.get();
-		var az = me.az.get();
-		var vx = me.vx.get();
+		if (me.lookat_active) {
+			me.heading_axis.prop.setValue(me.lookat_heading);
+			me.pitch_axis.prop.setValue(me.lookat_pitch);
+			return;
+		}
 
-		# calculate sideslip factor (zeroed when no forward ground speed)
-		var wspd = me.wind_speedN.getValue();
-		var wdir = me.headingN.getValue() - me.wind_dirN.getValue();
-		var u = vx - wspd * cos(wdir);
-		var slip = sin(me.slipN.getValue()) * me.ubody.filter(normatan(u / 10));
+		me.pitch = me.pitchN.getValue();
+		me.roll = me.rollN.getValue();
+		me.wow = me.wowI.get();
 
+		me.calc != nil and me.calc();
+		me.calc_heading != nil and me.heading_axis.apply(me.calc_heading());
+		me.calc_pitch != nil and me.pitch_axis.apply(me.calc_pitch());
+		me.calc_roll != nil and me.roll_axis.apply(me.calc_roll());
+	},
+	lookat : func(h = nil, p = nil) {
+		if (h == nil) {
+			view.resetView();
+			me.lookat_active = 0;
+			return;
+		}
+		me.lookat_heading = h;
+		me.lookat_pitch = p;
+		me.lookat_active = 1;
+	},
+};
+
+
+
+ViewManager.default_plane = func {
+	me.calc = func {
 		# calculate steering factor
 		var hdg = me.headingN.getValue();
 		var hdiff = normdeg(me.last_heading - hdg);
 		me.last_heading = hdg;
-		var steering = normatan(me.hdg_change.filter(hdiff)) * me.size_factor;
+		me.steering = normatan(me.hdg_change.filter(hdiff)) * me.size_factor;
 
-		if (me.is_helicopter) {
-			var speed = 1 - normatan(me.speedN.getValue() / 20);
+		me.az = me.azI.get();
+		me.vx = me.vxI.get();
 
-			me.heading_axis.apply(							# view heading due to ...
-				(roll < 0 ? -50 : -25) * npow(sin(roll) * cos(pitch), 2)	#    roll
-			);
-			me.pitch_axis.apply(							# view pitch due to ...
-				(pitch < 0 ? -35 : -40) * sin(pitch) * speed			#    pitch
-				+ 15 * sin(roll) * sin(roll)					#    roll
-			);
-			me.roll_axis.apply(							# view roll due to ...
-				-15 * sin(roll) * cos(pitch) * speed				#    roll
-			);
+		# calculate sideslip factor (zeroed when no forward ground speed)
+		var wspd = me.wind_speedN.getValue();
+		var wdir = me.headingN.getValue() - me.wind_dirN.getValue();
+		var u = me.vx - wspd * cos(wdir);
+		me.slip = sin(me.slipN.getValue()) * me.ubody.filter(normatan(u / 10));
+	}
 
-		} else {
-			me.heading_axis.apply(				# heading ...
-				-15 * sin(roll) * cos(pitch)		#     due to roll
-				+ 40 * steering * wow			#     due to ground steering
-				+ 10 * slip * (1 - wow)			#     due to sideslip (in air)
-			);
-			me.pitch_axis.apply(				# pitch ...
-				10 * sin(roll) * sin(roll)		#     due to roll
-				+ 30 * (1 / (1 + math.exp(2 - az))	#     due to G load
-					- 0.119202922)			#         [move to origin; 1/(1+exp(2)) ]
-			);
-			me.roll_axis.apply(				# roll ...
-				0.0 * sin(roll) * cos(pitch)		#     due to roll  (none)
-			);
-		}
-	},
-};
+	me.calc_heading = func {						# heading
+		-15 * sin(me.roll) * cos(me.pitch)				#     due to roll
+		+ 40 * me.steering * me.wow					#     due to ground steering
+		+ 10 * me.slip * (1 - me.wow)					#     due to sideslip (in air)
+	}
+
+	me.calc_pitch = func {							# pitch
+		10 * sin(me.roll) * sin(me.roll)				#     due to roll
+		+ 30 * (1 / (1 + math.exp(2 - me.az))				#     due to G load
+			- 0.119202922)						#         [move to origin; 1/(1+exp(2)) ]
+	}
+
+	me.calc_roll = nil;
+}
+
+
+
+ViewManager.default_helicopter = func {
+	me.calc = func {
+		me.lowspeed = 1 - normatan(me.speedN.getValue() / 20);
+	}
+
+	me.calc_heading = func {						# view heading due to
+		-50 * npow(sin(me.roll) * cos(me.pitch), 2)			#    roll
+	}
+
+	me.calc_pitch = func {							# view pitch due to
+		(me.pitch < 0 ? -35 : -40) * sin(me.pitch) * me.lowspeed	#    pitch
+		+ 15 * sin(me.roll) * sin(me.roll)				#    roll
+	}
+
+	me.calc_roll = func {							# view roll due to
+		-15 * sin(me.roll) * cos(me.pitch) * me.lowspeed		#    roll
+	}
+}
 
 
 
@@ -197,17 +236,6 @@ main_loop = func(id) {
 		view_manager.apply();
 	}
 	settimer(func { main_loop(id) }, 0);
-}
-
-
-
-# Register new, aircraft specific manager. (Needs to offer the
-# same methods, of course.)
-#
-register = func(mgr) {
-	view_manager = mgr;
-	var p = "/sim/view/dynamic/enabled";
-	setprop(p, getprop(p));		# fire listener
 }
 
 
@@ -265,22 +293,7 @@ setlistener("/sim/signals/fdm-initialized", func {
 		mouse_button = cmdarg().getBoolValue();
 	}, 1));
 
-	var config = props.Node.new({
-		"heading-due-to" : {
-			"roll" : -15,
-			"ground-steering" : 40,
-			"side-slip" : 0.4,
-		},
-		"pitch-due-to" : {
-			"roll" : 10,
-			"g-load" : 30,
-		},
-		"roll-due-to" : {
-			"roll" : 0,
-		},
-	});
-	props.copy(props.globals.getNode("/sim/view/dynamic", 1), config);
-	view_manager = ViewManager.new(config);
+	view_manager = ViewManager.new();
 
 	original_resetView = view.resetView;
 	view.resetView = func {

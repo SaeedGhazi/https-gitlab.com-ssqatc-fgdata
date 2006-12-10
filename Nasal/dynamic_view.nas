@@ -71,6 +71,11 @@ ViewAxis = {
 	add_offset : func {
 		me.prop.setValue(me.prop.getValue() + me.applied_offset);
 	},
+	sub_offset : func {
+		var raw = me.prop.getValue() - me.applied_offset;
+		me.prop.setValue(raw);
+		return raw;
+	},
 	apply : func(v) {
 		var raw = me.prop.getValue() - me.applied_offset;
 		me.applied_offset = v;
@@ -152,11 +157,22 @@ ViewManager = {
 	},
 	lookat : func(heading = nil, pitch = nil) {
 		if (heading != nil and pitch != nil) {
+			if (!me.lookat_active) {
+				me.save_heading = me.heading_axis.sub_offset();
+				me.save_pitch = me.pitch_axis.sub_offset();
+				me.save_roll = me.roll_axis.sub_offset();
+			}
 			me.lookat_active = 1;
-			me.heading_axis.apply(heading);
-			me.pitch_axis.apply(pitch);
-			me.roll_axis.apply(0);
+			me.heading_axis.prop.setDoubleValue(heading);
+			me.pitch_axis.prop.setDoubleValue(pitch);
+			me.roll_axis.prop.setDoubleValue(0);
 		} else {
+			if (me.lookat_active) {
+				me.heading_axis.prop.setDoubleValue(me.save_heading);
+				me.pitch_axis.prop.setDoubleValue(me.save_pitch);
+				me.roll_axis.prop.setDoubleValue(me.save_roll);
+				me.add_offset();
+			}
 			me.lookat_active = 0;
 			me.heading_axis.apply(me.heading_offset);
 			me.pitch_axis.apply(me.pitch_offset);

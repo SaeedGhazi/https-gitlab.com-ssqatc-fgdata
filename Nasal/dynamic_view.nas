@@ -107,7 +107,7 @@ ViewManager = {
 		m.pitch_axis = ViewAxis.new("/sim/current-view/goal-pitch-offset-deg");
 		m.roll_axis = ViewAxis.new("/sim/current-view/goal-roll-offset-deg");
 
-		# accelerations are converted to G (one G is subtraced from z-accel)
+		# accelerations are converted to G (one G is subtracted from z-accel)
 		m.ax = Input.new("/accelerations/pilot/x-accel-fps_sec", 0.03108095, 0, 0.58, 0);
 		m.ay = Input.new("/accelerations/pilot/y-accel-fps_sec", 0.03108095, 0, 0.95);
 		m.az = Input.new("/accelerations/pilot/z-accel-fps_sec", -0.03108095, -1, 0.46);
@@ -122,7 +122,7 @@ ViewManager = {
 		m.hdg_change = aircraft.lowpass.new(0.95);
 		m.ubody = aircraft.lowpass.new(0.95);
 		m.last_heading = m.headingN.getValue();
-		m.size_factor = -getprop("/sim/chase-distance-m") / 25;
+		m.size_factor = getprop("/sim/chase-distance-m") / -25;
 
 		if (props.globals.getNode("rotors", 0) != nil) {
 			m.calculate = m.default_helicopter;
@@ -203,12 +203,12 @@ ViewManager.default_plane = func {
 	var u = vx - wspd * cos(wdir);
 	var slip = sin(me.slipN.getValue()) * me.ubody.filter(normatan(u / 10));
 
-	me.heading_offset =							# heading
+	me.heading_offset =							# view heading
 		-15 * sin(me.roll) * cos(me.pitch)				#     due to roll
 		+ 40 * steering * wow						#     due to ground steering
 		+ 10 * slip * (1 - wow);					#     due to sideslip (in air)
 
-	me.pitch_offset =							# pitch
+	me.pitch_offset =							# view pitch
 		10 * sin(me.roll) * sin(me.roll)				#     due to roll
 		+ 30 * (1 / (1 + math.exp(2 - az))				#     due to G load
 			- 0.119202922);						#         [move to origin; 1/(1+exp(2)) ]
@@ -252,7 +252,11 @@ main_loop = func(id) {
 
 var calc = nil;
 register = func(f) {
-	calc = f;
+	if (view_manager != nil) {
+		view_manager.calculate = f;
+	} else {
+		calc = f;
+	}
 }
 
 reset = func {
@@ -306,6 +310,7 @@ settimer(func {
 
 	append(L, setlistener("/sim/signals/reinit", func {
 		cockpit_view = getprop("/sim/current-view/view-number") == 0;
+		view_manager.reset();
 	}, 0));
 
 	append(L, setlistener("/sim/panel/visibility", func {
@@ -337,10 +342,6 @@ settimer(func {
 			main_loop(loop_id);
 		}
 	}, 1));
-
-	append(L, setlistener("/sim/signals/reinit", func {
-		view_manager.reset();
-	}, 0));
 }, 0);
 
 

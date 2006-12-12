@@ -8,6 +8,7 @@ Bindings for THRUSTMASTER HOTAS Cougar stick/throttle combination.
 
 <PropertyList>
 	<name type="string">Thrustmaster Thrustmaster HOTAS Cougar</name>
+	<name type="string">Thrustmaster HOTAS Cougar</name>
 
         <axis>
                 <desc>Aileron</desc>

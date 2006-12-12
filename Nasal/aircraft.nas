@@ -158,14 +158,15 @@ door = {
 #
 # EXAMPLES:
 #	aircraft.light.new("sim/model/foo/beacon", [0.4, 0.4]);    # anonymous light
-#
+#-------
 #	var strobe = aircraft.light.new("sim/model/foo/strobe", [0.05, 0.05, 0.05, 1],
 #	                "controls/lighting/strobe");
 #	strobe.switch(1);
-#
-#	var pattern = [0.05, 0.05, 0.05, 1];
-#	aircraft.light.new("sim/model/foo/strobe-top", 1.001, pattern, "controls/lighting/strobe");
-#	aircraft.light.new("sim/model/foo/strobe-bot", 1.005, pattern, "controls/lighting/strobe");
+#-------
+#	var switch = props.globals.getNode("controls/lighting/strobe", 1);
+#	var pattern = [0.02, 0.03, 0.02, 1];
+#	aircraft.light.new("sim/model/foo/strobe-top", 1.001, pattern, switch);
+#	aircraft.light.new("sim/model/foo/strobe-bot", 1.005, pattern, switch);
 #
 light = {
 	new : func {
@@ -204,11 +205,13 @@ light = {
 		m.continuous = 0;
 		m.lastswitch = 0;
 		m.switchL = setlistener(m.switchN, func { m._switch_() }, 1);
+		m.reinitL = setlistener("/sim/signals/reinit", func { m.cont(); m.blink() });
 		return m;
 	},
 	# class destructor
 	del : func {
 		removelistener(me.switchL);
+		removelistener(me.reinitL);
 	},
 	# light.switch(bool)   ->  set light switch (also affects other lights
 	#                          that use the same switch)
@@ -295,7 +298,7 @@ lowpass = {
 	get : func {
 		me.value;
 	},
-	# set()                -> sets new average
+	# set()                -> sets new average and returns it
 	set : func(v) {
 		me.value = v;
 	},

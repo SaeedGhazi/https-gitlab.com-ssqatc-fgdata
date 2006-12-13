@@ -5,6 +5,16 @@
  <path>ufo.ac</path>
 
  <animation>
+  <type>select</type>
+  <condition>
+   <equals>
+    <property>/sim/flight-model</property>
+    <value>ufo</value>
+   </equals>
+  </condition>
+ </animation>
+
+ <animation>
   <type>blend</type>
   <object-name>body</object-name>
   <property>/velocities/airspeed-kt</property>

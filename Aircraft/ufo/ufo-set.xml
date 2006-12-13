@@ -17,6 +17,7 @@
 
   <model>
    <path>Aircraft/ufo/Models/ufo.xml</path>
+   <always-show-in-MP type="bool">false</always-show-in-MP>
   </model>
 
   <help>

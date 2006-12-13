@@ -7,10 +7,13 @@
  <animation>
   <type>select</type>
   <condition>
-   <equals>
-    <property>/sim/flight-model</property>
-    <value>ufo</value>
-   </equals>
+   <or>
+    <equals>
+     <property>/sim/flight-model</property>
+     <value>ufo</value>
+    </equals>
+    <property>/sim/model/always-show-in-MP</property>
+   </or>
   </condition>
  </animation>
 

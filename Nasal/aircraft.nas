@@ -205,13 +205,11 @@ light = {
 		m.continuous = 0;
 		m.lastswitch = 0;
 		m.switchL = setlistener(m.switchN, func { m._switch_() }, 1);
-		m.reinitL = setlistener("/sim/signals/reinit", func { m.cont(); m.blink() });
 		return m;
 	},
 	# class destructor
 	del : func {
 		removelistener(me.switchL);
-		removelistener(me.reinitL);
 	},
 	# light.switch(bool)   ->  set light switch (also affects other lights
 	#                          that use the same switch)
@@ -257,7 +255,7 @@ light = {
 
 	_loop_ : func(id) {
 		id == me.loopid or return;
-		me.stateN.setBoolValue(!me.stateN.getBoolValue());
+		me.stateN.setBoolValue(me.index == 2 * int(me.index / 2));
 		settimer(func { me._loop_(id) }, me.pattern[me.index]);
 		if ((me.index += 1) >= size(me.pattern)) {
 			me.index = 0;

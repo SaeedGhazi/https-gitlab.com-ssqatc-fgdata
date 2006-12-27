@@ -86,14 +86,14 @@ Bindings for THRUSTMASTER HOTAS Cougar stick/throttle combination.
                 <repeatable>true</repeatable>
                 <binding>
                         <command>nasal</command>
-                        <script>controls.elevatorTrim(-1)</script>
+                        <script>controls.elevatorTrim(1)</script>
                 </binding>
         </low>
         <high>
                 <repeatable>true</repeatable>
                 <binding>
                         <command>nasal</command>
-                        <script>controls.elevatorTrim(1)</script>
+                        <script>controls.elevatorTrim(-1)</script>
                 </binding>
         </high>
         </axis>
@@ -186,6 +186,20 @@ Bindings for THRUSTMASTER HOTAS Cougar stick/throttle combination.
 		</binding>
 	</button>
 <!-- end zoom configuration (FOV)-->
+
+	<button n="27">
+		<desc>speedbrake</desc>
+		<binding>
+			<command>nasal</command>
+			<script>setprop("/controls/flight/speedbrake", 1)</script>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>setprop("/controls/flight/speedbrake", 0)</script>
+			</binding>
+		</mod-up>
+	</button>
 
 <!-- begin gear configuration -->
 	<!-- button on HOTAS: Manual Range/Uncage Switch -->

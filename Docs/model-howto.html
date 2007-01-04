@@ -803,6 +803,11 @@ landing light.</p>
   &lt;y-offset&gt;1.0&lt;/y-offset&gt;
   &lt;z-factor&gt;0.0&lt;/z-factor&gt;
   &lt;z-offset&gt;1.0&lt;/z-offset&gt;
+  &lt;center&gt;
+   &lt;x-m&gt;0.05&lt;/x-m&gt;
+   &lt;y-m&gt;0.05&lt;/y-m&gt;
+   &lt;z-m&gt;0.0&lt;/z-m&gt;
+  &lt;/center&gt;
  &lt;/animation&gt;
 </pre></blockquote>
 
@@ -817,6 +822,10 @@ For each dimension you can provide factors (x-factor, y-factor, and
 z-factor) and also offsets (x-offset, y-offset, and z-offset.)  You
 can also specify minimum values (x-min, y-min, z-min) and maximum
 values (x-max, y-max, and z-max) for scaling results.</p>
+
+<p>You can set the center of scaling with the center tag. The center is
+that point that does not ever change its position under any scaling.
+If unset this defaults to the (0, 0, 0).</p>
 
 <p>The amount of scaling for each dimension is computed by the
 following formula (and then clamped if a min or max value is
@@ -1293,8 +1302,35 @@ the same that you would set in &lt;property-base&gt;.
   <pre>material.showDialog("/sim/model/foo/material/fuselage");</pre>
  </blockquote>
 
+ <h3><a name="pick">"pick" animation type</h3>
+ <p>This animation type is used to execute a command binding when the mouse
+ is pressed on this particular object. The Commands are the usual bindings
+ like used elsewhere in flightgear.
+  <blockquote>
+   <pre>&lt;animation&gt;
+  &lt;type&gt;pick&lt;/type&gt;
+  &lt;object-name&gt;Button&lt;/object-name&gt;
+  &lt;repeatable&gt;true&lt;/repeatable&gt;
+  &lt;interval-sec&gt;0.1&lt;/interval-sec&gt;
+  &lt;binding&gt;
+    &lt;command&gt;property-assign&lt;/command&gt;
+    &lt;property&gt;instrumentation/button-pressed&lt;/property&gt;
+    &lt;value&gt;1&lt;/value&gt;
+  &lt;/binding&gt;
+  &lt;mod-up&gt;
+    &lt;binding&gt;
+      &lt;command&gt;property-assign&lt;/command&gt;
+      &lt;property&gt;instrumentation/button-pressed&lt;/property&gt;
+      &lt;value&gt;0&lt;/value&gt;
+    &lt;/binding&gt;
+  &lt;/mod-up&gt;
+&lt;/animation&gt;</pre>
+  </blockquote>
+ </p>
+
 <hr>
 <address>David Megginson, 11 March 2002</address>
+<address>Mathias Fr&ouml;hlich, 3 Jan 2007</address>
 
 <!-- Standard Footer Begin --></div>
       </td></tr>

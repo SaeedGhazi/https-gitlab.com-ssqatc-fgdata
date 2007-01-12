@@ -15,6 +15,8 @@
 #
 Node = {
     getType        : func { wrap(_getType(me._g, arg)) },
+    getAttribute   : func { wrap(_getAttribute(me._g, arg)) },
+    setAttribute   : func { wrap(_setAttribute(me._g, arg)) },
     getName        : func { wrap(_getName(me._g, arg)) },
     getIndex       : func { wrap(_getIndex(me._g, arg)) },
     getValue       : func { wrap(_getValue(me._g, arg)) },

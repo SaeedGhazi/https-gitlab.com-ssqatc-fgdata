@@ -345,7 +345,7 @@ position from -18 degrees to 18 degrees:</p>
 <p>If you wanted to reverse the direction of rudder movement, you
 would use a factor of -18.</p>
 
-<p>There is also an <var>offset</var> property that can be useful for
+<p>There is also an <var>offset-deg</var> property that can be useful for
 starting the rotation from a point other than center.  For example,
 let's say that you want the rudder to start 1% to the left rather than
 dead center; you could specify that like this:</p>
@@ -354,7 +354,7 @@ dead center; you could specify that like this:</p>
  &lt;type&gt;rotate&lt;/type&gt;
  &lt;object-name&gt;Rudder&lt;/object-name&gt;
  &lt;property&gt;/controls/rudder&lt;/property&gt;
- &lt;offset&gt;-0.01&lt;/offset&gt;
+ &lt;offset-deg&gt;-0.01&lt;/offset-deg&gt;
  &lt;factor&gt;18&lt;/factor&gt;
 &lt;/animation&gt;
 </pre></blockquote>
@@ -370,7 +370,7 @@ complicated) example for the Cessna 310 landing gear:</p>
  &lt;object-name&gt;NoseWheel&lt;/object-name&gt;
  &lt;property&gt;/gear/gear[0]/position-norm&lt;/property&gt;
  &lt;factor&gt;120&lt;/factor&gt;
- &lt;offset&gt;-1&lt;/offset&gt;
+ &lt;offset-deg&gt;-1&lt;/offset-deg&gt;
  &lt;min&gt;-90&lt;/min&gt;
  &lt;max&gt;0&lt;/max&gt;
  &lt;center&gt;

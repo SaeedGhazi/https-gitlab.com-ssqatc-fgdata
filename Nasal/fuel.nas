@@ -116,8 +116,7 @@ initialize = func {
     initialized = 1;
 }
 
-initDoubleProp = func {
-    node = arg[0]; prop = arg[1]; val = arg[2];
+initDoubleProp = func(node, prop, val) {
     if(node.getNode(prop) != nil and node.getType() != "NONE") {
         val = num(node.getNode(prop).getValue());
     }

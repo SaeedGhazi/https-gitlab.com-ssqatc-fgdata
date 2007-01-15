@@ -1306,10 +1306,14 @@ the same that you would set in &lt;property-base&gt;.
  <p>This animation type is used to execute a command binding when the mouse
  is pressed on this particular object. The Commands are the usual bindings
  like used elsewhere in flightgear.
+ <p>The visible property tells if the object should be visible as is. Setting
+ that to false make sense if you have small buttons on the instrument model
+ but you want to have huge active areas for interaction. It defaults to true.
   <blockquote>
    <pre>&lt;animation&gt;
   &lt;type&gt;pick&lt;/type&gt;
   &lt;object-name&gt;Button&lt;/object-name&gt;
+  &lt;visible&gt;true&lt;/visible&gt;
   &lt;action&gt;
     &lt;button&gt;0&lt;/button&gt;
     &lt;repeatable&gt;true&lt;/repeatable&gt;

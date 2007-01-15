@@ -207,16 +207,7 @@ Bindings for THRUSTMASTER HOTAS Cougar stick/throttle combination.
 		<desc>gear up or down</desc>
 		<binding>
 			<command>nasal</command>
-			<script>
-				gearToggle = getprop("/controls/gear/gear-down");
-				if (gearToggle == 1) {
-					controls.gearDown(-1);
-					gui.popupTip("Gear up!");
-				} else {
-					controls.gearDown(1);
-					gui.popupTip("Gear down!");
-				}
-			</script>
+			<script>controls.gearToggle()</script>
 		</binding>
 	</button> 
 <!-- end gear configuration -->

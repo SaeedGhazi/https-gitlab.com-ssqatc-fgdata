@@ -210,10 +210,10 @@ Bindings for THRUSTMASTER HOTAS Cougar stick/throttle combination.
 			<script>
 				gearToggle = getprop("/controls/gear/gear-down");
 				if (gearToggle == 1) {
-					setprop("/controls/gear/gear-down", 0);
+					controls.gearDown(-1);
 					gui.popupTip("Gear up!");
 				} else {
-					setprop("/controls/gear/gear-down", 1);
+					controls.gearDown(1);
 					gui.popupTip("Gear down!");
 				}
 			</script>
@@ -229,6 +229,12 @@ Bindings for THRUSTMASTER HOTAS Cougar stick/throttle combination.
 			<command>nasal</command>
 			<script>controls.flapsDown(-1)</script>
 		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>controls.flapsDown(0)</script>
+			</binding>
+		</mod-up>
 	</button>
 
 	<button n="8">
@@ -237,6 +243,12 @@ Bindings for THRUSTMASTER HOTAS Cougar stick/throttle combination.
 			<command>nasal</command>
 			<script>controls.flapsDown(1)</script>
 		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>controls.flapsDown(0)</script>
+			</binding>
+		</mod-up>
 	</button>
 <!-- end flaps configuration -->
 		

@@ -337,11 +337,6 @@ gear:     Defines a landing gear.  Accepts <control> subelements to map
                         on water. Defaults to "0"
           on-solid:     if this set to "0" the gear will be ignored if
                         not on water. Defaults to "1"
-          inverse-speed-spring-is-doubled: At this speed (the inverse of
-                        the speed must be given) the spring constant
-                        is doubled. The idea is, to use this on water to
-                        simulate the speed dependend lift of a float.
-                        Defaults to "0"
           speed-planing:
           spring-factor-not-planing:
                         At zero speed the spring factor is multiplied by
@@ -461,6 +456,7 @@ control-input:
                   CYCLICELE - The "elevator" cyclic input of a rotor
                   COLLECTIVE - The collective input of a rotor
                   ROTORENGINEON - If not equal zero the rotor is rotating
+                  WINCHRELSPEED - The relative winch speed
                   {... and many more, see FGFDM.cpp ...}
           invert: Negate the value of the property before setting on
                   the object.
@@ -510,6 +506,49 @@ control-setting:
 
           axis:  Name of the control input (i.e. a property name)
           value: Value of the control axis.
+
+hitch:    A hitch, can be used for winch-start (in gliders) or aerotow (in
+          gliders and motor aircrafts) or for external cargo with helicopter.
+          You can do aerotow over the net via multiplayer (see j3 and bocian
+          as an example).
+          
+          name:  the name of the hitch. must be aerotow if you want to do
+                 aerotow via multiplayer. You will find many properties
+                 at /sim/hitches/name. Most of them are directly tied to
+                 the internal variables, you can modify them as you like.
+                 You can add a listener to the property "broken", e. g. for
+                 playing a sound.
+          x,y,z: The position of the hitch
+          force-is-calculated-by-other: if you want to simulate aerotowing
+                 over the internet, set this value to "1" in the motor
+                 aircraft. Don't specify or set this to zero in gliders.
+                 In a LAN the time lag might be small enough to set it on
+                 both aircrafts to "0". It's intended, that this is done
+                 automatically in the future.
+
+tow: The tow used for aerotow or winch. This must be a subelement
+               of an enclosing <hitch> tag.
+          length: unstreched length in m
+          weight-per-meter: in kg/m
+          elastic-constant: lower values give higher elasticity
+          break-force: in N
+          mp-auto-connect-period: the every x seconds a towed multiplayer
+                 aircraft is searched. If found, this tow is connected
+                 automatically, parameters are copied from the other
+                 aircraft. Shoud be set only in the motor aircraft, not
+                 in the glider
+
+winch: The tow used for aerotow or winch. This must be a subelement
+               of an enclosing <hitch> tag.
+          max-tow-length:
+          min-tow-length:
+          initial-tow-length: all are in m. The initial tow length also 
+                 defines the length/search radius used for the mp-autoconnect
+                 feature
+          max-winch-speed: in m/s
+          power: in kW
+          max-force: in N
+
 
 rotor:    A rotor. Used for simulating helicopters. You can have one, two
           or even more.

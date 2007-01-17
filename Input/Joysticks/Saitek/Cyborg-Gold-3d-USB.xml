@@ -145,7 +145,7 @@ ________________________________________________________________________________
 		<binding>
 			<command>property-scale</command>
 			<property>/controls/flight/aileron</property>
-			<power type="double">2.0</power>
+			<power type="int">2</power>
 		</binding>
 	</axis>
 
@@ -155,7 +155,7 @@ ________________________________________________________________________________
 			<command>property-scale</command>
 			<property>/controls/flight/elevator</property>
 			<factor type="double">-1.0</factor>
-			<power type="double">2.0</power>
+			<power type="int">2</power>
 		</binding>
 	</axis>
 
@@ -171,7 +171,7 @@ ________________________________________________________________________________
 			<property>/controls/flight/rudder</property>
 			<offset type="double">0.0</offset>
 			<factor type="double">1.0</factor>
-			<power type="double">2.0</power>
+			<power type="int">2</power>
 		</binding>
 	</axis>
 

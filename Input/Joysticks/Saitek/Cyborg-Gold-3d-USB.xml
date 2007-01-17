@@ -121,8 +121,8 @@ ________________________________________________________________________________
 			trigger = 0;
 
 			if (props.globals.getNode("/rotors", 0) != nil) {
-				self.getNode("axis[0]/binding/power").setDoubleValue(1);
-				self.getNode("axis[1]/binding/power").setDoubleValue(1);
+				self.getNode("axis[0]/binding/power").setIntValue(1);
+				self.getNode("axis[1]/binding/power").setIntValue(1);
 			}
 
 			kbdshift = props.globals.getNode("/devices/status/keyboard/shift", 1);

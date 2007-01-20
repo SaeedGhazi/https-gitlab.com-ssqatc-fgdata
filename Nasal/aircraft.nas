@@ -474,10 +474,6 @@ var data = nil;
 settimer(func {
 	data = Data.new();
 	Data.new = func { die("illegal attempt to call Data.new()") }
-
-	var p = props.globals.getNode("/sim/model/name", 1);
-	p.setValue(getprop("/sim/aircraft"));
-	data.add(p);
 }, 0);
 
 

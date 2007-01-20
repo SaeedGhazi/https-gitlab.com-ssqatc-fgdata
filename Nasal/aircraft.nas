@@ -68,6 +68,9 @@ optarg = func {
 }
 
 
+isletter = func(c) { c >= `a` and c <= `z` or c >= `A` and c <= `Z`}
+
+
 
 # door
 # ==============================================================================
@@ -363,5 +366,118 @@ HUDControl = {
 
 var HUD = nil;
 settimer(func { HUD = HUDControl.new() }, 0);
+
+
+
+# Data
+# ==============================================================================
+# class that loads and saves properties to aircraft-specific data files in
+# ~/.fgfs/aircraft-data/ (Unix) or %APPDATA%\flightgear.org\aircraft-data\.
+# There's no public constructor, as the only needed instance gets created
+# by the system.
+#
+# SYNOPSIS:
+#	data.add(<properties>);
+#	data.save([<interval>])
+#
+#	interval    ... save all <interval> minutes, or only now if 0 or empty
+#	properties  ... about any combination of property nodes (props.Node)
+#	                or path name strings, or lists or hashes of them,
+#	                lists of lists of them, etc.
+#
+# EXAMPLE:
+#	var p = props.globals.getNode("/sim/model", 1);
+#	var vec = [p, p];
+#	var hash = {"foo": p, "bar": p};
+#
+#	# add properties
+#	aircraft.data.add("/sim/fg-root", p, "/sim/fg-home");
+#	aircraft.data.add(p, vec, hash, "/sim/fg-root");
+#
+#	# now save only once (and at exit/reinit, which is automatically done)
+#	aircraft.data.save();     # or aircraft.data.save(0)
+#
+#	# or save now and all 30 sec (and at exit/reinit)
+#	aircraft.data.save(0.5);
+#
+Data = {
+	new : func {
+		var m = { parents : [Data] };
+
+		var ac = getprop("/sim/aircraft");
+		if (!isletter(ac[0])) {
+			ac = "_" ~ ac;
+		}
+		m.path = getprop("/sim/fg-home") ~ "/aircraft-data/" ~ ac ~ ".xml";
+		m.signal = props.globals.getNode("/sim/signals/save", 1);
+		m.catalog = [];
+		m.loop_id = 0;
+		m.interval = 0;
+
+		settimer(func { m.load() }, 0);
+		setlistener("/sim/signals/exit", func { m._save_() });
+		setlistener("/sim/signals/reinit", func { m._save_() });
+		return m;
+	},
+	load : func {
+		printlog("warn", "trying to load aircraft data from ", me.path, " (OK if not found)");
+		fgcommand("load", props.Node.new({ "file": me.path }));
+	},
+	save : func(v = 0) {
+		me.loop_id += 1;
+		me.interval = 60 * v;
+		v == 0 ? me._save_() : me._loop_(me.loop_id);
+	},
+	_loop_ : func(id) {
+		id == me.loop_id or return;
+		me._save_();
+		settimer(func { me._loop_(id) }, me.interval);
+	},
+	_save_ : func {
+		size(me.catalog) or return;
+		me.signal.setBoolValue(1);
+		var tmp = "_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_";
+		printlog("info", "saving aircraft data to ", me.path);
+		props.globals.removeChildren(tmp);
+		var root = props.globals.getNode(tmp, 1);
+		foreach (var c; me.catalog) {
+			if (c[0] == `/`) {
+				c = substr(c, 1);
+			}
+			props.copy(props.globals.getNode(c, 1), root.getNode(c, 1));
+		}
+		fgcommand("savexml", props.Node.new({ "filename": me.path, "sourcenode": tmp }));
+		props.globals.removeChildren(tmp);
+	},
+	add : func {
+		foreach (var a; arg) {
+			if (isa(a, props.Node)) {
+				append(me.catalog, a.getPath());
+			} elsif (typeof(a, "scalar")) {
+				append(me.catalog, a);
+			} elsif (typeof(a, "vector")) {
+				foreach (var i; a) {
+					me.add(i);
+				}
+			} elsif (typeof(a, "hash")) {
+				foreach (var i; keys(a)) {
+					me.add(a[i]);
+				}
+			} else {
+				die("aircraft.Data.add(): invalid item of type " ~ typeof(a));
+			}
+		}
+	},
+};
+
+var data = nil;
+settimer(func {
+	data = Data.new();
+	Data.new = func { die("illegal attempt to call Data.new()") }
+
+	var p = props.globals.getNode("/sim/model/name", 1);
+	p.setValue(getprop("/sim/aircraft"));
+	data.add(p);
+}, 0);
 
 

@@ -475,7 +475,7 @@ Data = {
 };
 
 var data = nil;
-setlistener("/sim/signals/nasal-dir-initialized", func {
+_setlistener("/sim/signals/nasal-dir-initialized", func {
 	data = Data.new();
 	Data.new = func { die("illegal attempt to call Data.new()") }
 });

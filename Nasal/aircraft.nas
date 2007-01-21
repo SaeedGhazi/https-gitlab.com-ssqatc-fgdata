@@ -385,6 +385,10 @@ settimer(func { HUD = HUDControl.new() }, 0);
 #	                or path name strings, or lists or hashes of them,
 #	                lists of lists of them, etc.
 #
+# SIGNALS:
+#	/sim/signals/save   ... set to 'true' right before saving. Can be used
+#	                        to update values that are to be saved
+#
 # EXAMPLE:
 #	var p = props.globals.getNode("/sim/model", 1);
 #	var vec = [p, p];
@@ -436,7 +440,7 @@ Data = {
 	_save_ : func {
 		size(me.catalog) or return;
 		me.signal.setBoolValue(1);
-		var tmp = "_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_";
+		var tmp = "_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_";
 		printlog("info", "saving aircraft data to ", me.path);
 		props.globals.removeChildren(tmp);
 		var root = props.globals.getNode(tmp, 1);
@@ -471,9 +475,94 @@ Data = {
 };
 
 var data = nil;
-settimer(func {
+setlistener("/sim/signals/nasal-dir-initialized", func {
 	data = Data.new();
 	Data.new = func { die("illegal attempt to call Data.new()") }
-}, 0);
+});
+
+
+
+# timer
+# ==============================================================================
+# class that implements timer that can be started, stopped, reset, and can
+# have its value saved to the aircraft specific data file. Saving the value
+# is done automatically by the aircraft.Data class.
+#
+# SYNOPSIS:
+#	timer.new(<property>, <resolution:double> [, <save:bool>])
+#
+#	<property>   ... property path or props.Node hash that holds the timer value
+#	<resolution> ... timer resolution (interval in seconds in which the timer
+#	                 is updated (default: 1 s)
+#	<save>       ... bool that defines whether the timer value should be saved
+#	                 and restored next time, as needed for Hobbs meters
+#	                 (default: 1)
+#	
+# EXAMPLE:
+#	var hobbs_turbine = aircraft.timer.new("/sim/time/hobbs/turbine[0]", 60);
+#	hobbs_turbine.start();
+#	
+#	aircraft.timer.new("/sim/time/hobbs/battery", 60).start();  # anonymous
+#
+timer = {
+	new : func(prop, res = 1, save = 1) {
+		var m = { parents : [timer] };
+		m.timeN = makeNode(prop);
+		if (m.timeN.getType() == "NONE") {
+			m.timeN.setDoubleValue(0);
+		}
+		m.systimeN = props.globals.getNode("/sim/time/elapsed-sec", 1);
+		m.last_systime = nil;
+		m.loop_id = 0;
+		m.interval = res;
+		m.running = 0;
+		if (save) {
+			data.add(m.timeN);
+			m.listener = setlistener("/sim/signals/save", func { m._save_() });
+		} else {
+			m.listener = nil;
+		}
+		return m;
+	},
+	del : func {
+		if (me.listener != nil) {
+			removelistener(me.listener);
+		}
+	},
+	start : func {
+		me.running and return;
+		me.last_systime = me.systimeN.getValue();
+		me._loop_(me.loop_id += 1);
+		me.running = 1;
+		me;
+	},
+	stop : func {
+		me.running or return;
+		me.running = 0;
+		me.loop_id += 1;
+		me._apply_();
+		me;
+	},
+	reset : func {
+		me.timeN.setDoubleValue(0);
+		me.last_systime = me.systimeN.getValue();
+		me;
+	},
+	_apply_ : func {
+		var sys = me.systimeN.getValue();
+		me.timeN.setDoubleValue(me.timeN.getValue() + sys - me.last_systime);
+		me.last_systime = sys;
+	},
+	_save_ : func {
+		if (me.running) {
+			me._apply_();
+		}
+	},
+	_loop_ : func(id) {
+		id != me.loop_id and return;
+		me._apply_();
+		settimer(func { me._loop_(id) }, me.interval);
+	},
+};
 
 

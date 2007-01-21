@@ -416,7 +416,7 @@ Data = {
 
 		settimer(func { m.load() }, 0);
 		setlistener("/sim/signals/exit", func { m._save_() });
-		setlistener("/sim/signals/reinit", func { m._save_() });
+		setlistener("/sim/signals/reinit", func { cmdarg().getBoolValue() and m._save_() });
 		return m;
 	},
 	load : func {

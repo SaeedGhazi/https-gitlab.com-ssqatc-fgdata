@@ -146,7 +146,7 @@ window = {
 
 log = nil;
 
-settimer(func {
+_setlistener("/sim/signals/nasal-dir-initialized", func {
 	setlistener("/sim/gui/current-style", func {
 		var theme = getprop("/sim/gui/current-style");
 		theme_font = getprop("/sim/gui/style[" ~ theme ~ "]/fonts/message-display/name");
@@ -163,7 +163,7 @@ settimer(func {
 	setlistener(b ~ "yellow",  func { log.write(cmdarg().getValue(), 0.8, 0.8, 0) });
 	setlistener(b ~ "magenta", func { log.write(cmdarg().getValue(), 0.7, 0,   0.7) });
 	setlistener(b ~ "cyan",    func { log.write(cmdarg().getValue(), 0,   0.6, 0.6) });
-}, 0);
+});
 
 
 
@@ -201,7 +201,7 @@ var callsign = nil;
 var atclast = nil;
 listener = {};
 
-settimer(func {
+_setlistener("/sim/signals/nasal-dir-initialized", func {
 	# set /sim/screen/nomap=true to prevent default message mapping
 	var nomap = getprop("/sim/screen/nomap");
 	if (nomap != nil and nomap) {
@@ -255,6 +255,6 @@ settimer(func {
 			func { map("copilot",  cmdarg().getValue(), 1.0, 1.0, 1.0) });
 	listener["ai-plane"] = setlistener(m ~ "ai-plane",
 			func { map("ai-plane", cmdarg().getValue(), 0.9, 0.4, 0.2) });
-}, 1);
+});
 
 

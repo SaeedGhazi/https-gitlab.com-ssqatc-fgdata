@@ -380,10 +380,11 @@ settimer(func { HUD = HUDControl.new() }, 0);
 #	data.add(<properties>);
 #	data.save([<interval>])
 #
-#	interval    ... save all <interval> minutes, or only now if 0 or empty
 #	properties  ... about any combination of property nodes (props.Node)
 #	                or path name strings, or lists or hashes of them,
 #	                lists of lists of them, etc.
+#	interval    ... save in <interval> minutes intervals, or only once
+#	                if 'nil' or empty (and again at reinit/exit)
 #
 # SIGNALS:
 #	/sim/signals/save   ... set to 'true' right before saving. Can be used
@@ -418,19 +419,18 @@ Data = {
 		m.loop_id = 0;
 		m.interval = 0;
 
-		settimer(func { m.load() }, 0);
-		setlistener("/sim/signals/exit", func { m._save_() });
 		setlistener("/sim/signals/reinit", func { cmdarg().getBoolValue() and m._save_() });
+		setlistener("/sim/signals/exit", func { m._save_() });
 		return m;
 	},
 	load : func {
 		printlog("warn", "trying to load aircraft data from ", me.path, " (OK if not found)");
 		fgcommand("load", props.Node.new({ "file": me.path }));
 	},
-	save : func(v = 0) {
+	save : func(v = nil) {
 		me.loop_id += 1;
 		me.interval = 60 * v;
-		v == 0 ? me._save_() : me._loop_(me.loop_id);
+		v == nil ? me._save_() : me._loop_(me.loop_id);
 	},
 	_loop_ : func(id) {
 		id == me.loop_id or return;
@@ -440,7 +440,7 @@ Data = {
 	_save_ : func {
 		size(me.catalog) or return;
 		me.signal.setBoolValue(1);
-		var tmp = "_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_";
+		var tmp = "_-_-_-_-_-_aircraft.Data_-_-_-_-_-_";
 		printlog("info", "saving aircraft data to ", me.path);
 		props.globals.removeChildren(tmp);
 		var root = props.globals.getNode(tmp, 1);
@@ -455,29 +455,32 @@ Data = {
 	},
 	add : func {
 		foreach (var a; arg) {
+			var t = typeof(a);
 			if (isa(a, props.Node)) {
 				append(me.catalog, a.getPath());
-			} elsif (typeof(a, "scalar")) {
+			} elsif (t == "scalar") {
 				append(me.catalog, a);
-			} elsif (typeof(a, "vector")) {
+			} elsif (t == "vector") {
 				foreach (var i; a) {
 					me.add(i);
 				}
-			} elsif (typeof(a, "hash")) {
+			} elsif (t == "hash") {
 				foreach (var i; keys(a)) {
 					me.add(a[i]);
 				}
 			} else {
-				die("aircraft.Data.add(): invalid item of type " ~ typeof(a));
+				die("aircraft.data.add(): invalid item of type " ~ t);
 			}
 		}
 	},
 };
 
+
 var data = nil;
 _setlistener("/sim/signals/nasal-dir-initialized", func {
 	data = Data.new();
-	Data.new = func { die("illegal attempt to call Data.new()") }
+	Data.new = nil;
+	data.load();
 });
 
 
@@ -489,20 +492,20 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 # is done automatically by the aircraft.Data class.
 #
 # SYNOPSIS:
-#	timer.new(<property>, <resolution:double> [, <save:bool>])
+#	timer.new(<property> [, <resolution:double> [, <save:bool>]])
 #
 #	<property>   ... property path or props.Node hash that holds the timer value
-#	<resolution> ... timer resolution (interval in seconds in which the timer
-#	                 is updated (default: 1 s)
+#	<resolution> ... timer update resolution -- interval in seconds in which the
+#	                 timer property is updated while running (default: 1 s)
 #	<save>       ... bool that defines whether the timer value should be saved
 #	                 and restored next time, as needed for Hobbs meters
 #	                 (default: 1)
-#	
-# EXAMPLE:
+#
+# EXAMPLES:
 #	var hobbs_turbine = aircraft.timer.new("/sim/time/hobbs/turbine[0]", 60);
 #	hobbs_turbine.start();
 #	
-#	aircraft.timer.new("/sim/time/hobbs/battery", 60).start();  # anonymous
+#	aircraft.timer.new("/sim/time/hobbs/battery", 60).start();  # anonymous timer
 #
 timer = {
 	new : func(prop, res = 1, save = 1) {
@@ -518,21 +521,21 @@ timer = {
 		m.running = 0;
 		if (save) {
 			data.add(m.timeN);
-			m.listener = setlistener("/sim/signals/save", func { m._save_() });
+			m.saveL = setlistener("/sim/signals/save", func { m._save_() });
 		} else {
-			m.listener = nil;
+			m.saveL = nil;
 		}
 		return m;
 	},
 	del : func {
-		if (me.listener != nil) {
-			removelistener(me.listener);
+		if (me.saveL != nil) {
+			removelistener(me.saveL);
 		}
 	},
 	start : func {
 		me.running and return;
 		me.last_systime = me.systimeN.getValue();
-		me._loop_(me.loop_id += 1);
+		me.interval != nil and me._loop_(me.loop_id);
 		me.running = 1;
 		me;
 	},
@@ -541,12 +544,10 @@ timer = {
 		me.running = 0;
 		me.loop_id += 1;
 		me._apply_();
-		me;
 	},
 	reset : func {
 		me.timeN.setDoubleValue(0);
 		me.last_systime = me.systimeN.getValue();
-		me;
 	},
 	_apply_ : func {
 		var sys = me.systimeN.getValue();

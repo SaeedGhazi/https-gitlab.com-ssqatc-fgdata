@@ -480,7 +480,11 @@ var data = nil;
 _setlistener("/sim/signals/nasal-dir-initialized", func {
 	data = Data.new();
 	Data.new = nil;
-	data.load();
+	if (getprop("/sim/startup/save-on-exit")) {
+		data.load();
+	} else {
+		Data._save_ = func {};
+	}
 });
 
 

@@ -250,13 +250,8 @@ main_loop = func(id) {
 }
 
 
-var calc = nil;
 register = func(f) {
-	if (view_manager != nil) {
-		view_manager.calculate = f;
-	} else {
-		calc = f;
-	}
+	view_manager.calculate = f;
 }
 
 reset = func {
@@ -283,7 +278,7 @@ var L = [];	# vector of listener ids; allows to remove all listeners (= useless 
 
 # Initialization.
 #
-settimer(func {
+_setlistener("/sim/signals/nasal-dir-initialized", func {
 	# disable menu entry and return for inappropriate FDMs  (see Main/fg_init.cxx)
 	var fdms = {
 		acms:0, ada:0, balloon:0, external:0,
@@ -322,9 +317,6 @@ settimer(func {
 	}, 1));
 
 	view_manager = ViewManager.new();
-	if (calc != nil) {
-		view_manager.calculate = calc;
-	}
 
 	original_resetView = view.resetView;
 	view.resetView = func {
@@ -342,6 +334,6 @@ settimer(func {
 			main_loop(loop_id);
 		}
 	}, 1));
-}, 0);
+});
 
 

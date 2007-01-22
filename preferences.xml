@@ -47,7 +47,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <game-mode type="bool">false</game-mode>
    <fullscreen type="bool">false</fullscreen>
    <units>feet</units>
-   <save-on-exit userarchive="y">true</save-on-exit>
+   <save-on-exit type="bool" userarchive="y">true</save-on-exit>
    <browser-app>netscape</browser-app><!--  help viewer -->
   </startup>
   <rendering>

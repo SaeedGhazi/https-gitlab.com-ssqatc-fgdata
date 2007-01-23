@@ -68,8 +68,6 @@ optarg = func {
 }
 
 
-isletter = func(c) { c >= `a` and c <= `z` or c >= `A` and c <= `Z`}
-
 
 
 # door
@@ -312,6 +310,208 @@ lowpass = {
 
 
 
+# Data
+# ==============================================================================
+# class that loads and saves properties to aircraft-specific data files in
+# ~/.fgfs/aircraft-data/ (Unix) or %APPDATA%\flightgear.org\aircraft-data\.
+# There's no public constructor, as the only needed instance gets created
+# by the system.
+#
+# SYNOPSIS:
+#	data.add(<properties>);
+#	data.save([<interval>])
+#
+#	properties  ... about any combination of property nodes (props.Node)
+#	                or path name strings, or lists or hashes of them,
+#	                lists of lists of them, etc.
+#	interval    ... save in <interval> minutes intervals, or only once
+#	                if 'nil' or empty (and again at reinit/exit)
+#
+# SIGNALS:
+#	/sim/signals/save   ... set to 'true' right before saving. Can be used
+#	                        to update values that are to be saved
+#
+# EXAMPLE:
+#	var p = props.globals.getNode("/sim/model", 1);
+#	var vec = [p, p];
+#	var hash = {"foo": p, "bar": p};
+#
+#	# add properties
+#	aircraft.data.add("/sim/fg-root", p, "/sim/fg-home");
+#	aircraft.data.add(p, vec, hash, "/sim/fg-root");
+#
+#	# now save only once (and at exit/reinit, which is automatically done)
+#	aircraft.data.save();     # or aircraft.data.save(0)
+#
+#	# or save now and all 30 sec (and at exit/reinit)
+#	aircraft.data.save(0.5);
+#
+Data = {
+	new : func {
+		var m = { parents : [Data] };
+		m.path = getprop("/sim/fg-home") ~ "/aircraft-data/" ~ getprop("/sim/aircraft") ~ ".xml";
+		m.signalN = props.globals.getNode("/sim/signals/save", 1);
+		m.catalog = [];
+		m.loop_id = 0;
+		m.interval = 0;
+
+		setlistener("/sim/signals/reinit", func { cmdarg().getBoolValue() and m._save_() });
+		setlistener("/sim/signals/exit", func { m._save_() });
+		return m;
+	},
+	load : func {
+		printlog("warn", "trying to load aircraft data from ", me.path, " (OK if not found)");
+		fgcommand("load", props.Node.new({ "file": me.path }));
+	},
+	save : func(v = nil) {
+		me.loop_id += 1;
+		me.interval = 60 * v;
+		v == nil ? me._save_() : me._loop_(me.loop_id);
+	},
+	_loop_ : func(id) {
+		id == me.loop_id or return;
+		me._save_();
+		settimer(func { me._loop_(id) }, me.interval);
+	},
+	_save_ : func {
+		size(me.catalog) or return;
+		me.signalN.setBoolValue(1);
+		var tmp = "_-_-_-_-_-_aircraft.Data_-_-_-_-_-_";
+		printlog("info", "saving aircraft data to ", me.path);
+		props.globals.removeChildren(tmp);
+		var root = props.globals.getNode(tmp, 1);
+		foreach (var c; me.catalog) {
+			if (c[0] == `/`) {
+				c = substr(c, 1);
+			}
+			props.copy(props.globals.getNode(c, 1), root.getNode(c, 1));
+		}
+		fgcommand("savexml", props.Node.new({ "filename": me.path, "sourcenode": tmp }));
+		props.globals.removeChildren(tmp);
+	},
+	add : func {
+		foreach (var a; arg) {
+			var t = typeof(a);
+			if (isa(a, props.Node)) {
+				append(me.catalog, a.getPath());
+			} elsif (t == "scalar") {
+				append(me.catalog, a);
+			} elsif (t == "vector") {
+				foreach (var i; a) {
+					me.add(i);
+				}
+			} elsif (t == "hash") {
+				foreach (var i; keys(a)) {
+					me.add(a[i]);
+				}
+			} else {
+				die("aircraft.data.add(): invalid item of type " ~ t);
+			}
+		}
+	},
+};
+
+
+var data = nil;
+_setlistener("/sim/signals/nasal-dir-initialized", func {
+	data = Data.new();
+	Data.new = nil;
+	if (getprop("/sim/startup/save-on-exit")) {
+		data.load();
+	} else {
+		Data._save_ = func {}
+		Data._loop_ = func {}
+	}
+});
+
+
+
+# timer
+# ==============================================================================
+# class that implements timer that can be started, stopped, reset, and can
+# have its value saved to the aircraft specific data file. Saving the value
+# is done automatically by the aircraft.Data class.
+#
+# SYNOPSIS:
+#	timer.new(<property> [, <resolution:double> [, <save:bool>]])
+#
+#	<property>   ... property path or props.Node hash that holds the timer value
+#	<resolution> ... timer update resolution -- interval in seconds in which the
+#	                 timer property is updated while running (default: 1 s)
+#	<save>       ... bool that defines whether the timer value should be saved
+#	                 and restored next time, as needed for Hobbs meters
+#	                 (default: 1)
+#
+# EXAMPLES:
+#	var hobbs_turbine = aircraft.timer.new("/sim/time/hobbs/turbine[0]", 60);
+#	hobbs_turbine.start();
+#	
+#	aircraft.timer.new("/sim/time/hobbs/battery", 60).start();  # anonymous timer
+#
+timer = {
+	new : func(prop, res = 1, save = 1) {
+		var m = { parents : [timer] };
+		m.timeN = makeNode(prop);
+		if (m.timeN.getType() == "NONE") {
+			m.timeN.setDoubleValue(0);
+		}
+		m.systimeN = props.globals.getNode("/sim/time/elapsed-sec", 1);
+		m.last_systime = nil;
+		m.interval = res;
+		m.loop_id = 0;
+		m.running = 0;
+		if (save) {
+			data.add(m.timeN);
+			m.saveL = setlistener("/sim/signals/save", func { m._save_() });
+		} else {
+			m.saveL = nil;
+		}
+		return m;
+	},
+	del : func {
+		if (me.saveL != nil) {
+			removelistener(me.saveL);
+		}
+	},
+	start : func {
+		me.running and return;
+		me.last_systime = me.systimeN.getValue();
+		me.interval != nil and me._loop_(me.loop_id);
+		me.running = 1;
+		me;
+	},
+	stop : func {
+		me.running or return;
+		me.running = 0;
+		me.loop_id += 1;
+		me._apply_();
+	},
+	reset : func {
+		me.timeN.setDoubleValue(0);
+		me.last_systime = me.systimeN.getValue();
+	},
+	_apply_ : func {
+		var sys = me.systimeN.getValue();
+		me.timeN.setDoubleValue(me.timeN.getValue() + sys - me.last_systime);
+		me.last_systime = sys;
+	},
+	_save_ : func {
+		if (me.running) {
+			me._apply_();
+		}
+	},
+	_loop_ : func(id) {
+		id != me.loop_id and return;
+		me._apply_();
+		settimer(func { me._loop_(id) }, me.interval);
+	},
+};
+
+
+
+
+
+
 # HUD control class to handle both HUD implementations.
 #
 HUDControl = {
@@ -367,207 +567,5 @@ HUDControl = {
 var HUD = nil;
 settimer(func { HUD = HUDControl.new() }, 0);
 
-
-
-# Data
-# ==============================================================================
-# class that loads and saves properties to aircraft-specific data files in
-# ~/.fgfs/aircraft-data/ (Unix) or %APPDATA%\flightgear.org\aircraft-data\.
-# There's no public constructor, as the only needed instance gets created
-# by the system.
-#
-# SYNOPSIS:
-#	data.add(<properties>);
-#	data.save([<interval>])
-#
-#	properties  ... about any combination of property nodes (props.Node)
-#	                or path name strings, or lists or hashes of them,
-#	                lists of lists of them, etc.
-#	interval    ... save in <interval> minutes intervals, or only once
-#	                if 'nil' or empty (and again at reinit/exit)
-#
-# SIGNALS:
-#	/sim/signals/save   ... set to 'true' right before saving. Can be used
-#	                        to update values that are to be saved
-#
-# EXAMPLE:
-#	var p = props.globals.getNode("/sim/model", 1);
-#	var vec = [p, p];
-#	var hash = {"foo": p, "bar": p};
-#
-#	# add properties
-#	aircraft.data.add("/sim/fg-root", p, "/sim/fg-home");
-#	aircraft.data.add(p, vec, hash, "/sim/fg-root");
-#
-#	# now save only once (and at exit/reinit, which is automatically done)
-#	aircraft.data.save();     # or aircraft.data.save(0)
-#
-#	# or save now and all 30 sec (and at exit/reinit)
-#	aircraft.data.save(0.5);
-#
-Data = {
-	new : func {
-		var m = { parents : [Data] };
-
-		var ac = getprop("/sim/aircraft");
-		if (!isletter(ac[0])) {
-			ac = "_" ~ ac;
-		}
-		m.path = getprop("/sim/fg-home") ~ "/aircraft-data/" ~ ac ~ ".xml";
-		m.signal = props.globals.getNode("/sim/signals/save", 1);
-		m.catalog = [];
-		m.loop_id = 0;
-		m.interval = 0;
-
-		setlistener("/sim/signals/reinit", func { cmdarg().getBoolValue() and m._save_() });
-		setlistener("/sim/signals/exit", func { m._save_() });
-		return m;
-	},
-	load : func {
-		printlog("warn", "trying to load aircraft data from ", me.path, " (OK if not found)");
-		fgcommand("load", props.Node.new({ "file": me.path }));
-	},
-	save : func(v = nil) {
-		me.loop_id += 1;
-		me.interval = 60 * v;
-		v == nil ? me._save_() : me._loop_(me.loop_id);
-	},
-	_loop_ : func(id) {
-		id == me.loop_id or return;
-		me._save_();
-		settimer(func { me._loop_(id) }, me.interval);
-	},
-	_save_ : func {
-		size(me.catalog) or return;
-		me.signal.setBoolValue(1);
-		var tmp = "_-_-_-_-_-_aircraft.Data_-_-_-_-_-_";
-		printlog("info", "saving aircraft data to ", me.path);
-		props.globals.removeChildren(tmp);
-		var root = props.globals.getNode(tmp, 1);
-		foreach (var c; me.catalog) {
-			if (c[0] == `/`) {
-				c = substr(c, 1);
-			}
-			props.copy(props.globals.getNode(c, 1), root.getNode(c, 1));
-		}
-		fgcommand("savexml", props.Node.new({ "filename": me.path, "sourcenode": tmp }));
-		props.globals.removeChildren(tmp);
-	},
-	add : func {
-		foreach (var a; arg) {
-			var t = typeof(a);
-			if (isa(a, props.Node)) {
-				append(me.catalog, a.getPath());
-			} elsif (t == "scalar") {
-				append(me.catalog, a);
-			} elsif (t == "vector") {
-				foreach (var i; a) {
-					me.add(i);
-				}
-			} elsif (t == "hash") {
-				foreach (var i; keys(a)) {
-					me.add(a[i]);
-				}
-			} else {
-				die("aircraft.data.add(): invalid item of type " ~ t);
-			}
-		}
-	},
-};
-
-
-var data = nil;
-_setlistener("/sim/signals/nasal-dir-initialized", func {
-	data = Data.new();
-	Data.new = nil;
-	if (getprop("/sim/startup/save-on-exit")) {
-		data.load();
-	} else {
-		Data._save_ = func {};
-	}
-});
-
-
-
-# timer
-# ==============================================================================
-# class that implements timer that can be started, stopped, reset, and can
-# have its value saved to the aircraft specific data file. Saving the value
-# is done automatically by the aircraft.Data class.
-#
-# SYNOPSIS:
-#	timer.new(<property> [, <resolution:double> [, <save:bool>]])
-#
-#	<property>   ... property path or props.Node hash that holds the timer value
-#	<resolution> ... timer update resolution -- interval in seconds in which the
-#	                 timer property is updated while running (default: 1 s)
-#	<save>       ... bool that defines whether the timer value should be saved
-#	                 and restored next time, as needed for Hobbs meters
-#	                 (default: 1)
-#
-# EXAMPLES:
-#	var hobbs_turbine = aircraft.timer.new("/sim/time/hobbs/turbine[0]", 60);
-#	hobbs_turbine.start();
-#	
-#	aircraft.timer.new("/sim/time/hobbs/battery", 60).start();  # anonymous timer
-#
-timer = {
-	new : func(prop, res = 1, save = 1) {
-		var m = { parents : [timer] };
-		m.timeN = makeNode(prop);
-		if (m.timeN.getType() == "NONE") {
-			m.timeN.setDoubleValue(0);
-		}
-		m.systimeN = props.globals.getNode("/sim/time/elapsed-sec", 1);
-		m.last_systime = nil;
-		m.loop_id = 0;
-		m.interval = res;
-		m.running = 0;
-		if (save) {
-			data.add(m.timeN);
-			m.saveL = setlistener("/sim/signals/save", func { m._save_() });
-		} else {
-			m.saveL = nil;
-		}
-		return m;
-	},
-	del : func {
-		if (me.saveL != nil) {
-			removelistener(me.saveL);
-		}
-	},
-	start : func {
-		me.running and return;
-		me.last_systime = me.systimeN.getValue();
-		me.interval != nil and me._loop_(me.loop_id);
-		me.running = 1;
-		me;
-	},
-	stop : func {
-		me.running or return;
-		me.running = 0;
-		me.loop_id += 1;
-		me._apply_();
-	},
-	reset : func {
-		me.timeN.setDoubleValue(0);
-		me.last_systime = me.systimeN.getValue();
-	},
-	_apply_ : func {
-		var sys = me.systimeN.getValue();
-		me.timeN.setDoubleValue(me.timeN.getValue() + sys - me.last_systime);
-		me.last_systime = sys;
-	},
-	_save_ : func {
-		if (me.running) {
-			me._apply_();
-		}
-	},
-	_loop_ : func(id) {
-		id != me.loop_id and return;
-		me._apply_();
-		settimer(func { me._loop_(id) }, me.interval);
-	},
-};
 
 

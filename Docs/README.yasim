@@ -142,7 +142,7 @@ stall:    A subelement of a wing (or hstab/vstab/mstab) that specifies the
 flap0, flap1, slat, spoiler:
           These are subelements of wing/hstab/vstab objects, and specify
           the location and effectiveness of the control surfaces.
-          start:  The positition along the wing where the control
+          start:  The position along the wing where the control
                   surface begins.  Zero is the root, one is the tip.
           end:    The position where the surface ends, as above.
           lift:   The lift multiplier for a flap or slat at full
@@ -300,7 +300,7 @@ gear:     Defines a landing gear.  Accepts <control> subelements to map
           properties to steering and braking. Can also be used to simulate
           floats. Although the coefficients are still called ..fric, it
           is calculated in fluids as a drag (proportional to the square
-          of the speed). In fluids gears are not considured to detect
+          of the speed). In fluids gears are not considered to detect
           crashes (as on ground).
           x,y,z:  The location of the fully-extended gear tip.
           compression:  The distance in meters along the "up" axis that
@@ -308,9 +308,9 @@ gear:     Defines a landing gear.  Accepts <control> subelements to map
           initial-load: The initial load of the spring in multiples of
                         compression. Defaults to 0. (With this parameter
                         a lower spring-constants will be used for the
-                        gear-> can reuce numerical problems (jitter))
+                        gear-> can reduce numerical problems (jitter))
                         Note: the spring-constant is varied from 0%
-                        compression to 20% compression to get continous
+                        compression to 20% compression to get continuous
                         behavior around 0 compression. (could be physically
                         explained by wheel deformation)
           upx/upy/upz:  The direction of compression, defaults to
@@ -325,7 +325,7 @@ gear:     Defines a landing gear.  Accepts <control> subelements to map
                         generated spring constant.  Increase to make
                         the gear stiffer, decrease to make it
                         squishier.
-          damp:         A dimensionless multipler for the automatically
+          damp:         A dimensionless multiplier for the automatically
                         generated damping coefficient.  Decrease to
                         make the gear "bouncier", increase to make it
                         "slower".  Beware of increasing this too far:
@@ -340,10 +340,10 @@ gear:     Defines a landing gear.  Accepts <control> subelements to map
           speed-planing:
           spring-factor-not-planing:
                         At zero speed the spring factor is multiplied by
-                        spring-factor-not-planing. Above speed_planing this
-                        factor is equalt to 1. THe diea is, to use this for
+                        spring-factor-not-planing. Above speed-planing this
+                        factor is equal to 1. The idea is, to use this for
                         floats simulating the transition from swimming to
-                        planing. speed_planing defaults to 0,
+                        planing. speed-planing defaults to 0,
                         spring-factor-not-planing defaults to 1.
           reduce-friction-by-extension: at full extension the friction is
                         reduced by this relative value. 0.7 means 30% friction
@@ -403,7 +403,7 @@ ballast:  This is a mechanism for modifying the mass distribution of
 weight:   This is an added weight, something not part of the empty
           weight of the aircraft, like passengers, cargo, or external
           stores.  The actual value of the mass is not specified here,
-          instead, a mapping to a propery is used.  This allows
+          instead, a mapping to a property is used.  This allows
           external code, such as the panel, to control the weight
           (loading a given cargo configuration from preference files,
           dropping bombs at runtime, etc...)
@@ -465,7 +465,7 @@ control-input:
                   on the right wing.
           square: Squares the value before setting.  Useful for
                   controls like steering that need a wide range, yet
-                  lots of sensitiviy in the center.  Obviously only
+                  lots of sensitivity in the center.  Obviously only
                   applicable to values that have a range of [-1:1] or
                   [0:1].
           src0/src1/dst0/dst1:
@@ -528,14 +528,14 @@ hitch:    A hitch, can be used for winch-start (in gliders) or aerotow (in
 
 tow: The tow used for aerotow or winch. This must be a subelement
                of an enclosing <hitch> tag.
-          length: unstreched length in m
+          length: upstretched length in m
           weight-per-meter: in kg/m
           elastic-constant: lower values give higher elasticity
           break-force: in N
           mp-auto-connect-period: the every x seconds a towed multiplayer
                  aircraft is searched. If found, this tow is connected
                  automatically, parameters are copied from the other
-                 aircraft. Shoud be set only in the motor aircraft, not
+                 aircraft. Should be set only in the motor aircraft, not
                  in the glider
 
 winch: The tow used for aerotow or winch. This must be a subelement
@@ -692,7 +692,7 @@ rotor:    A rotor. Used for simulating helicopters. You can have one, two
           flapmin: Minimum flapping angle. (Should normally never reached)
           flapmax: Maximum flapping angle. (Should normally never reached)
           flap0:   Flapping angle at no rotation, i.e. -5
-          dynamic: this changes the reactions peed of the rotor to an input.
+          dynamic: this changes the reactions speed of the rotor to an input.
                    normally 1 (Maybe there are rotors with a little faster
                    reaction, than use a value a little greater than one.
                    A value greater than one will result in a more inert,
@@ -765,21 +765,21 @@ rotorgear: If you are using one ore more rotors you have to define a
                    the engine will produce maximum torque. At 100% of
                    the engine will produce no torque.  It is planned to use
                    YASim-engines instead of this simple engine.
-          engine-accell-limit: The d-factor of the engine is defined as the
+          engine-accel-limit: The d-factor of the engine is defined as the
                    maximum acceleration rate of the engine in %/s,
                    default is 5%/s.
           max-power-rotor-brake: the maximum power of the rotor brake, in kW
                    at normal rpm (most? real rotor breaks would be overheated
                    if used at normal rpm, but this is not simulated now)
-          rotorgear-friction: the power loss due to fritcion in kW at normal
+          rotorgear-friction: the power loss due to friction in kW at normal
                    RPM
           yasimdragfactor:
           yasimliftfactor: the solver is not working with rotor-aircrafts.
                    Therefore you have to specify the results yourself.
                    10 for drag and 140 for lift seem to be good starting
                    values. Although the solve is not invoked for aircrafts
-                   with at least one rotor, you need to specifiy the cruise
-                   and the approach seetings. The approach speed is needed to
+                   with at least one rotor, you need to specify the cruise
+                   and the approach settings. The approach speed is needed to
                    calculate the gear springs. Use a speed of approx. 50knots.
                    They do not need to match any real value.
 

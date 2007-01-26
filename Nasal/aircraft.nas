@@ -413,11 +413,20 @@ Data = {
 
 
 var data = nil;
-_setlistener("/sim/signals/nasal-dir-initialized", func {
+var L = _setlistener("/sim/signals/nasal-dir-initialized", func {
+	removelistener(L);
 	data = Data.new();
 	Data.new = nil;
 	if (getprop("/sim/startup/save-on-exit")) {
 		data.load();
+		var n = props.globals.getNode("/sim/aircraft-data");
+		if (n != nil) {
+			foreach (var c; n.getChildren("path")) {
+				if (c.getType() != "NONE") {
+					data.add(c.getValue());
+				}
+			}
+		}
 	} else {
 		Data._save_ = func {}
 		Data._loop_ = func {}
@@ -451,9 +460,9 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 timer = {
 	new : func(prop, res = 1, save = 1) {
 		var m = { parents : [timer] };
-		m.timeN = makeNode(prop);
-		if (m.timeN.getType() == "NONE") {
-			m.timeN.setDoubleValue(0);
+		m.node = makeNode(prop);
+		if (m.node.getType() == "NONE") {
+			m.node.setDoubleValue(0);
 		}
 		m.systimeN = props.globals.getNode("/sim/time/elapsed-sec", 1);
 		m.last_systime = nil;
@@ -461,7 +470,7 @@ timer = {
 		m.loop_id = 0;
 		m.running = 0;
 		if (save) {
-			data.add(m.timeN);
+			data.add(m.node);
 			m.saveL = setlistener("/sim/signals/save", func { m._save_() });
 		} else {
 			m.saveL = nil;
@@ -469,6 +478,7 @@ timer = {
 		return m;
 	},
 	del : func {
+		me.stop();
 		if (me.saveL != nil) {
 			removelistener(me.saveL);
 		}
@@ -487,12 +497,12 @@ timer = {
 		me._apply_();
 	},
 	reset : func {
-		me.timeN.setDoubleValue(0);
+		me.node.setDoubleValue(0);
 		me.last_systime = me.systimeN.getValue();
 	},
 	_apply_ : func {
 		var sys = me.systimeN.getValue();
-		me.timeN.setDoubleValue(me.timeN.getValue() + sys - me.last_systime);
+		me.node.setDoubleValue(me.node.getValue() + sys - me.last_systime);
 		me.last_systime = sys;
 	},
 	_save_ : func {

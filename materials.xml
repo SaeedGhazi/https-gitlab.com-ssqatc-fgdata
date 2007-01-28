@@ -102,7 +102,7 @@ Shared parameters for various materials.
  <xsize>75</xsize>
  <ysize>75</ysize>
  <solid>1</solid>
- <friction-factor>0.9</friction-factor>
+ <friction-factor>0.8</friction-factor>
  <rolling-friction>0.05</rolling-friction>
  <bumpiness>0.05</bumpiness>
  <load-resistence>1e5</load-resistence>
@@ -111,6 +111,7 @@ Shared parameters for various materials.
 <material>
  <name>dirt_rwy</name>
  <texture>Runway/dirt_rwy.rgb</texture>
+ <friction-factor>0.7</friction-factor>
  <rolling-friction>0.04</rolling-friction>
  <bumpiness>0.1</bumpiness>
 </material>
@@ -762,6 +763,7 @@ Shared parameters for various materials.
  <light-coverage>10000000.0</light-coverage>
  <shininess>2.5</shininess>
  <rolling-friction>0.1</rolling-friction>
+ <friction-factor>0.7</friction-factor>
  <bumpiness>0.1</bumpiness>
 </material>
 
@@ -954,6 +956,7 @@ Shared parameters for various materials.
  <ysize>2000</ysize>
  <shininess>1.5</shininess>
  <rolling-friction>0.005</rolling-friction>
+ <friction-factor>0.2</friction-factor>
  <bumpiness>0.3</bumpiness>
 </material>
 
@@ -967,6 +970,7 @@ Shared parameters for various materials.
  <ysize>2000</ysize>
  <shininess>1.5</shininess>
  <rolling-friction>0.1</rolling-friction>
+ <friction-factor>0.2</friction-factor>
  <bumpiness>0.5</bumpiness>
 </material>
 
@@ -980,6 +984,7 @@ Shared parameters for various materials.
  <ysize>2000</ysize>
  <shininess>1.2</shininess>
  <rolling-friction>0.15</rolling-friction>
+ <friction-factor>0.3</friction-factor>
  <bumpiness>0.1</bumpiness>
 </material>
 
@@ -1009,12 +1014,12 @@ Shared parameters for various materials.
   <a>1.0</a>
  </diffuse>
  <specular>
-  <r>0.2</r>
-  <g>0.2</g>
+  <r>0.0</r>
+  <g>0.0</g>
   <b>0.2</b>
   <a>1.0</a>
  </specular>
- <shininess>1.2</shininess>
+ <shininess>0</shininess>
  <solid>0</solid>
  <rolling-friction>2</rolling-friction>
  <bumpiness>0.8</bumpiness>
@@ -1145,7 +1150,7 @@ Shared parameters for various materials.
  </specular>
  <shininess>1.2</shininess>
  <solid>1</solid>
- <friction-factor>0.9</friction-factor>
+ <friction-factor>0.7</friction-factor>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.15</bumpiness>
  <load-resistence>1e30</load-resistence>
@@ -1173,7 +1178,7 @@ Shared parameters for various materials.
  </specular>
  <shininess>1.2</shininess>
  <solid>1</solid>
- <friction-factor>0.9</friction-factor>
+ <friction-factor>0.8</friction-factor>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.15</bumpiness>
  <load-resistence>1e30</load-resistence>
@@ -1186,7 +1191,7 @@ Shared parameters for various materials.
  <ysize>1000</ysize>
  <light-coverage>4000000.0</light-coverage>
  <solid>1</solid>
- <friction-factor>0.9</friction-factor>
+ <friction-factor>0.8</friction-factor>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.2</bumpiness>
  <load-resistence>1e30</load-resistence>
@@ -1214,7 +1219,7 @@ Shared parameters for various materials.
  </specular>
  <shininess>1.2</shininess>
  <solid>1</solid>
- <friction-factor>0.9</friction-factor>
+ <friction-factor>0.7</friction-factor>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.1</bumpiness>
  <load-resistence>1e30</load-resistence>
@@ -1405,7 +1410,7 @@ Shared parameters for various materials.
  </specular>
  <shininess>1.2</shininess>
  <solid>1</solid>
- <friction-factor>0.9</friction-factor>
+ <friction-factor>0.7</friction-factor>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.3</bumpiness>
  <load-resistence>1e30</load-resistence>
@@ -1643,7 +1648,7 @@ Shared parameters for various materials.
  <glyph> <name>right-up</name>   <left>0.87573</left> <right>0.89527</right> </glyph>
  <glyph> <name>left-down</name>  <left>0.89527</left> <right>0.91529</right> </glyph>
  <glyph> <name>right-down</name> <left>0.91529</left> <right>0.93457</right> </glyph>
- <glyph> <name>no-exit</name>    <left>0.93872</left> <right>0.96997</right> </glyph>
+ <glyph> <name>no-entry</name>    <left>0.93872</left> <right>0.96997</right> </glyph>
  <glyph> <name>start-frame</name><left>0.98462</left> <right>0.98926</right> </glyph>
  <glyph> <name>stop-frame</name> <left>0.99390</left> <right>0.99854</right> </glyph>
 </material>

@@ -26,7 +26,6 @@
    <property>/controls/flight/aileron</property>
    <offset type="double">0.0</offset>
    <factor type="double">1.0</factor>
-   <power type="int">1</power>
   </binding>
  </axis>
 
@@ -37,7 +36,6 @@
    <command>property-scale</command>
    <property>/controls/flight/elevator</property>
    <factor type="double">1.0</factor>
-   <power type="int">1</power>
   </binding>
  </axis>
 
@@ -48,7 +46,6 @@
    <command>property-scale</command>
    <property>/controls/flight/rudder</property>
    <factor type="double">-1.0</factor>
-   <power type="int">1</power>
   </binding>
  </axis>
 
@@ -57,7 +54,7 @@
   <direction>forward</direction>
   <binding>
    <command>property-scale</command>
-   <property>/controls/engines/engine[0]/throttle</property>
+   <property>/controls/engines/engine/throttle</property>
    <offset type="double">1.0</offset>
    <factor type="double">0.6</factor>
   </binding>

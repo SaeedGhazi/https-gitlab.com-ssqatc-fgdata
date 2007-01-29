@@ -9,14 +9,17 @@
 
 
 
-if (caller(0)[2][1] != ":") {    # poor man's Unix test
+# enable colors on Unix (checks second character in module path for colon)
+#
+if (caller(0)[2][1] != ":") {
 	_c = func(color, s) { "\x1b[" ~ color ~ "m" ~ s ~ "\x1b[m"  }
 } else {
-	_c = func(dummy, s) { s }  # no Unix => no colors  :-P
+	_c = func(dummy, s) { s }
 }
 
 
-
+# for color codes see  $ man console_codes
+#
 _title       = func(s) { _c("33;42;1", s) }	# backtrace header
 _section     = func(s) { _c("37;41;1", s) }	# backtrace frame
 
@@ -24,33 +27,33 @@ _nil         = func(s) { _c("32", s) }		# nil
 _string      = func(s) { _c("31", s) }		# "foo"
 _num         = func(s) { _c("31", s) }		# 0.0
 _bracket     = func(s) { _c("", s) }		# [ ]
-_angle       = func(s) { _c("", s) }		# < >
-_type        = func(s) { _c("33", s) }		# func ghost
-_proptype    = func(s) { _c("34", s) }		# BOOL INT LONG DOUBLE ...
 _brace       = func(s) { _c("", s) }		# { }
+_angle       = func(s) { _c("", s) }		# < >
+_vartype     = func(s) { _c("33", s) }		# func ghost
+_proptype    = func(s) { _c("34", s) }		# BOOL INT LONG DOUBLE ...
 _path        = func(s) { _c("36", s) }		# /some/property/path
-_keyword     = func(s) { _c("35", s) }		# me parents
+_internal    = func(s) { _c("35", s) }		# me parents
 _varname     = func(s) { _c("1", s) }		# variable_name
 
 
-_dump_prop = func(o) {
+_dump_prop = func(p) {
 	var attrib =
-		(!o.getAttribute("read") ? "r" : "") ~
-		(!o.getAttribute("write") ? "w" : "") ~
-		(o.getAttribute("trace-read") ? "R" : "") ~
-		(o.getAttribute("trace-write") ? "W" : "") ~
-		(o.getAttribute("archive") ? "A" : "") ~
-		(o.getAttribute("userarchive") ? "U" : "") ~
-		(o.getAttribute("tied") ? "T" : "");
+		(!p.getAttribute("read") ? "r" : "") ~
+		(!p.getAttribute("write") ? "w" : "") ~
+		(p.getAttribute("trace-read") ? "R" : "") ~
+		(p.getAttribute("trace-write") ? "W" : "") ~
+		(p.getAttribute("archive") ? "A" : "") ~
+		(p.getAttribute("userarchive") ? "U" : "") ~
+		(p.getAttribute("tied") ? "T" : "");
 
-	var cat = "(" ~ _proptype(o.getType()) ~ (size(attrib) ? "; " ~ attrib : "") ~ ")";
-	_path(o.getPath()) ~ "=" ~ _dump(o.getValue()) ~ " " ~ cat;
+	var type = "(" ~ _proptype(p.getType()) ~ (size(attrib) ? ", " ~ attrib : "") ~ ")";
+	return _path(p.getPath()) ~ "=" ~ _dump(p.getValue()) ~ " " ~ type;
 }
 
 
 _dump_var = func(v) {
 	if (v == "me" or v == "parents") {
-		return _keyword(v);
+		return _internal(v);
 	} else {
 		return _varname(v);
 	}
@@ -81,7 +84,7 @@ _dump = func(o) {
 		}
 		return result ~ " " ~ _brace("}");
 	} else {
-		return _angle("<") ~ _type(t) ~ _angle(">");
+		return _angle("<") ~ _vartype(t) ~ _angle(">");
 	}
 }
 

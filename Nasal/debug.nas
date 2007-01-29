@@ -99,9 +99,9 @@ backtrace = func(desc = nil, l = 0) {
 	}
 	if (l == 0) {
 		var d = desc == nil ? "" : " '" ~ desc ~ "'";
-		print("\n" ~ _title("\n## backtrace" ~ d ~ " ##"));
+		print("\n" ~ _title("\n### backtrace" ~ d ~ " ###"));
 	} else {
-		print(_section("  called from: " ~ v[2] ~ ", line " ~ v[3] ~ ":  "));
+		print(_section(sprintf("#%-2d called from %s, line %s:", l - 1, v[2], v[3])));
 		dump(v[0]);
 	}
 	backtrace(nil, l + 1);

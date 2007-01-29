@@ -21,6 +21,16 @@ Actions are hotspots on the instrument that will respond to a mouse
 click.  Actions always modify the values of properties, either by
 adjusting them, toggling them, or swaping them with other
 properties' values.
+
+
+Note: this file depends on the $FG_ROOT/Aircraft/Generic/annunciator.nas
+      file being included. Add this to your *-set.xml file:
+
+      <nasal>
+          <annunciator>
+              <file>Aircraft/Generic/annunciator.nas</file>
+          </annunciator>
+      </nasal>
 -->
 
 <PropertyList>

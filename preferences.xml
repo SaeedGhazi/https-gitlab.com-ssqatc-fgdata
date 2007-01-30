@@ -91,6 +91,7 @@ Started September 2000 by David Megginson, david@megginson.com
     <cone-height type="float">30.0</cone-height>
    </precipitation>
    <lightning-enable type="bool" userarchive="y">false</lightning-enable>
+   <specular-highlight type="bool" userarchive="y"></specular-highlight>
    <bump-mapping type="bool" userarchive="y">false</bump-mapping>
    <clouds3d-enable type="bool" userarchive="y">false</clouds3d-enable>
    <clouds3d-vis-range type="float" userarchive="y">25000</clouds3d-vis-range>
@@ -282,7 +283,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <front-right-direction-deg type="double">315</front-right-direction-deg>
     </config>
     <dynamic>
-     <enabled type="bool" userarchive="y">false</enabled>
+      <enabled type="bool" userarchive="y">false</enabled>
     </dynamic>
   </view>
 

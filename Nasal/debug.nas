@@ -12,7 +12,7 @@
 # enable colors on Unix (checks second character in module path for colon)
 #
 if (caller(0)[2][1] != `:`) {
-	_c = func(color, s) { "\x1b[" ~ color ~ "m" ~ s ~ "\x1b[m"  }
+	_c = func(color, s) { "\x1b[" ~ color ~ "m" ~ s ~ "\x1b[m" }
 } else {
 	_c = func(dummy, s) { s }
 }
@@ -37,15 +37,14 @@ _varname     = func(s) { _c("1", s) }		# variable_name
 
 
 _dump_prop = func(p) {
-	var attrib =
-		(!p.getAttribute("read") ? "r" : "") ~
-		(!p.getAttribute("write") ? "w" : "") ~
-		(p.getAttribute("trace-read") ? "R" : "") ~
-		(p.getAttribute("trace-write") ? "W" : "") ~
-		(p.getAttribute("archive") ? "A" : "") ~
-		(p.getAttribute("userarchive") ? "U" : "") ~
-		(p.getAttribute("tied") ? "T" : "");
-
+	var r = p.getAttribute("read")        ? "" : "r";
+	var w = p.getAttribute("write")       ? "" : "w";
+	var R = p.getAttribute("trace-read")  ? "R" : "";
+	var W = p.getAttribute("trace-write") ? "W" : "";
+	var A = p.getAttribute("archive")     ? "A" : "";
+	var U = p.getAttribute("userarchive") ? "U" : "";
+	var T = p.getAttribute("tied")        ? "T" : "";
+	var attrib = r ~ w ~ R ~ W ~ A ~ U ~ T;
 	var type = "(" ~ _proptype(p.getType()) ~ (size(attrib) ? ", " ~ attrib : "") ~ ")";
 	return _path(p.getPath()) ~ "=" ~ _dump(p.getValue()) ~ " " ~ type;
 }
@@ -67,22 +66,22 @@ _dump = func(o) {
 	} elsif (t == "scalar") {
 		return num(o) == nil ? _string('"' ~ o ~ '"') : _num(o);
 	} elsif (t == "vector") {
-		var result = _bracket("[") ~ " ";
+		var s = "";
 		forindex (var i; o) {
-			result ~= (i == 0 ? "" : ", ") ~ _dump(o[i]);
+			s ~= (i == 0 ? "" : ", ") ~ _dump(o[i]);
 		}
-		return result ~ " " ~ _bracket("]");
+		return _bracket("[") ~ " " ~ s ~ " " ~ _bracket("]");
 	} elsif (t == "hash") {
 		if (contains(o, "parents") and typeof(o.parents) == "vector"
 				and size(o.parents) == 1 and o.parents[0] == props.Node) {
 			return _angle("<") ~ _dump_prop(o) ~ _angle(">");
 		}
 		var k = keys(o);
-		var result = _brace("{") ~ " ";
+		var s = "";
 		forindex (var i; k) {
-			result ~= (i == 0 ? "" : ", ") ~ _dump_var(k[i]) ~ " : " ~ _dump(o[k[i]]);
+			s ~= (i == 0 ? "" : ", ") ~ _dump_var(k[i]) ~ " : " ~ _dump(o[k[i]]);
 		}
-		return result ~ " " ~ _brace("}");
+		return _brace("{") ~ " " ~ s ~ " " ~ _brace("}");
 	} else {
 		return _angle("<") ~ _vartype(t) ~ _angle(">");
 	}

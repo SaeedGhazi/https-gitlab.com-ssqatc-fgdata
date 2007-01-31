@@ -456,10 +456,9 @@ var setWeightOpts = func {
     }
     return tankchange;
 }
-# Run it at startup to make sure the tank settings are correct
-_setlistener("/sim/signals/fdm-initialized", func {
-    settimer(setWeightOpts, 0);
-});
+# Run it at startup and on reset to make sure the tank settings are correct
+_setlistener("/sim/signals/fdm-initialized", func { settimer(setWeightOpts, 0) });
+_setlistener("/sim/signals/reset", func { cmdarg().getBoolValue() or setWeightOpts() });
 
 
 # Called from the F&W dialog when the user selects a weight option

@@ -457,7 +457,9 @@ var setWeightOpts = func {
     return tankchange;
 }
 # Run it at startup to make sure the tank settings are correct
-settimer(setWeightOpts, 0);
+_setlistener("/sim/signals/fdm-initialized", func {
+    settimer(setWeightOpts, 0);
+});
 
 
 # Called from the F&W dialog when the user selects a weight option

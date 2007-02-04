@@ -51,7 +51,7 @@ properties' values.
    <condition>
     <equals>
      <property>/autopilot/KAP140/annunciators/ap</property>
-     <value>on</value>
+     <value type="bool">true</value>
     </equals>
    </condition>
    <texture>
@@ -80,7 +80,7 @@ properties' values.
    <condition>
     <equals>
      <property>/autopilot/KAP140/annunciators/rol</property>
-     <value>on</value>
+     <value type="bool">true</value>
     </equals>
    </condition>
    <texture>
@@ -109,7 +109,7 @@ properties' values.
    <condition>
     <equals>
      <property>/autopilot/KAP140/annunciators/hdg</property>
-     <value>on</value>
+     <value type="bool">true</value>
     </equals>
    </condition>
    <texture>
@@ -138,7 +138,7 @@ properties' values.
    <condition>
     <equals>
      <property>/autopilot/KAP140/annunciators/nav</property>
-     <value>on</value>
+     <value type="bool">true</value>
     </equals>
    </condition>
    <texture>
@@ -167,7 +167,7 @@ properties' values.
    <condition>
     <equals>
      <property>/autopilot/KAP140/annunciators/nav-arm</property>
-     <value>on</value>
+     <value type="bool">true</value>
     </equals>
    </condition>
    <texture>
@@ -196,7 +196,7 @@ properties' values.
    <condition>
     <equals>
      <property>/autopilot/KAP140/annunciators/apr</property>
-     <value>on</value>
+     <value type="bool">true</value>
     </equals>
    </condition>
    <texture>
@@ -225,7 +225,7 @@ properties' values.
    <condition>
     <equals>
      <property>/autopilot/KAP140/annunciators/apr-arm</property>
-     <value>on</value>
+     <value type="bool">true</value>
     </equals>
    </condition>
    <texture>
@@ -254,7 +254,7 @@ properties' values.
    <condition>
     <equals>
      <property>/autopilot/KAP140/annunciators/rev</property>
-     <value>on</value>
+     <value type="bool">true</value>
     </equals>
    </condition>
    <texture>
@@ -283,7 +283,7 @@ properties' values.
    <condition>
     <equals>
      <property>/autopilot/KAP140/annunciators/rev-arm</property>
-     <value>on</value>
+     <value type="bool">true</value>
     </equals>
    </condition>
    <texture>
@@ -312,7 +312,7 @@ properties' values.
    <condition>
     <equals>
      <property>/autopilot/KAP140/annunciators/vs</property>
-     <value>on</value>
+     <value type="bool">true</value>
     </equals>
    </condition>
    <texture>
@@ -341,7 +341,7 @@ properties' values.
    <condition>
     <equals>
      <property>/autopilot/KAP140/annunciators/fpm</property>
-     <value>on</value>
+     <value type="bool">true</value>
     </equals>
    </condition>
    <texture>
@@ -370,7 +370,7 @@ properties' values.
    <condition>
     <equals>
      <property>/autopilot/KAP140/annunciators/vs-number</property>
-     <value>on</value>
+     <value type="bool">true</value>
     </equals>
    </condition>
    <type>text</type>
@@ -406,7 +406,7 @@ properties' values.
    <condition>
     <equals>
      <property>/autopilot/KAP140/annunciators/alt</property>
-     <value>on</value>
+     <value type="bool">true</value>
     </equals>
    </condition>
    <texture>
@@ -435,7 +435,7 @@ properties' values.
    <condition>
     <equals>
      <property>/autopilot/KAP140/annunciators/gs</property>
-     <value>on</value>
+     <value type="bool">true</value>
     </equals>
    </condition>
    <texture>
@@ -464,7 +464,7 @@ properties' values.
    <condition>
     <equals>
      <property>/autopilot/KAP140/annunciators/gs-arm</property>
-     <value>on</value>
+     <value type="bool">true</value>
     </equals>
    </condition>
    <texture>
@@ -504,7 +504,7 @@ properties' values.
    <binding>
     <command>nasal</command>
      <script>
-      kap140.ap_button();
+      kap140.apButton();
      </script>
    </binding>
   </action>
@@ -519,7 +519,7 @@ properties' values.
    <binding>
     <command>nasal</command>
      <script>
-      kap140.hdg_button();
+      kap140.hdgButton();
      </script>
    </binding>
   </action>
@@ -534,7 +534,7 @@ properties' values.
    <binding>
     <command>nasal</command>
      <script>
-      kap140.nav_button();
+      kap140.navButton();
      </script>
    </binding>
   </action>
@@ -549,7 +549,7 @@ properties' values.
    <binding>
     <command>nasal</command>
      <script>
-      kap140.apr_button();
+      kap140.aprButton();
      </script>
    </binding>
   </action>
@@ -564,7 +564,7 @@ properties' values.
    <binding>
     <command>nasal</command>
      <script>
-      kap140.alt_button();
+      kap140.altButton();
      </script>
    </binding>
   </action>
@@ -579,7 +579,7 @@ properties' values.
    <binding>
     <command>nasal</command>
      <script>
-      kap140.rev_button();
+      kap140.revButton();
      </script>
    </binding>
   </action>
@@ -594,7 +594,7 @@ properties' values.
    <binding>
     <command>nasal</command>
      <script>
-      kap140.dn_button();
+      kap140.downButton();
      </script>
    </binding>
   </action>
@@ -609,7 +609,7 @@ properties' values.
    <binding>
     <command>nasal</command>
      <script>
-      kap140.up_button();
+      kap140.upButton();
      </script>
    </binding>
   </action>

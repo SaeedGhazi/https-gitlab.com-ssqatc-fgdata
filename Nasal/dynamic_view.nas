@@ -243,7 +243,7 @@ main_loop = func(id) {
 	if (id != loop_id) {
 		return;
 	}
-	if (cockpit_view and !panel_visible and !mouse_button) {
+	if (cockpit_view and !panel_visible and mouse_mode) {
 		view_manager.apply();
 	}
 	settimer(func { main_loop(id) }, 0);
@@ -262,6 +262,7 @@ lookat = func(heading = nil, pitch = nil) {
 	view_manager.lookat(heading, pitch);
 }
 
+
 var original_resetView = nil;
 var panel_visibilityN = nil;
 var dynamic_view = nil;
@@ -269,16 +270,15 @@ var view_manager = nil;
 
 var cockpit_view = nil;
 var panel_visible = nil;
-var mouse_button = nil;
+var mouse_mode = nil;
 
 var loop_id = 0;
-var L = [];	# vector of listener ids; allows to remove all listeners (= useless feature :-)
-
 
 
 # Initialization.
 #
-_setlistener("/sim/signals/nasal-dir-initialized", func {
+var L = _setlistener("/sim/signals/nasal-dir-initialized", func {
+	removelistener(L);
 	# disable menu entry and return for inappropriate FDMs  (see Main/fg_init.cxx)
 	var fdms = {
 		acms:0, ada:0, balloon:0, external:0,
@@ -299,22 +299,14 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
 	# let listeners keep some variables up-to-date, so that they don't have
 	# to be queried in the loop
-	append(L, setlistener("/sim/current-view/view-number", func {
-		cockpit_view = (cmdarg().getValue() == 0);
-	}, 1));
+	setlistener("/sim/current-view/view-number", func { cockpit_view = !cmdarg().getValue() }, 1);
+	setlistener("/devices/status/mice/mouse/mode", func { mouse_mode = cmdarg().getValue() }, 1);
+	setlistener("/sim/panel/visibility", func { panel_visible = cmdarg().getValue() }, 1);
 
-	append(L, setlistener("/sim/signals/reinit", func {
+	setlistener("/sim/signals/reinit", func {
 		cockpit_view = getprop("/sim/current-view/view-number") == 0;
 		view_manager.reset();
-	}, 0));
-
-	append(L, setlistener("/sim/panel/visibility", func {
-		panel_visible = cmdarg().getBoolValue();
-	}, 1));
-
-	append(L, setlistener("/devices/status/mice/mouse/button", func {
-		mouse_button = cmdarg().getBoolValue();
-	}, 1));
+	}, 0);
 
 	view_manager = ViewManager.new();
 
@@ -326,14 +318,14 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 		}
 	}
 
-	append(L, setlistener("/sim/view/dynamic/enabled", func {
+	setlistener("/sim/view/dynamic/enabled", func {
 		dynamic_view = cmdarg().getBoolValue();
 		loop_id += 1;
 		view.resetView();
 		if (dynamic_view) {
 			main_loop(loop_id);
 		}
-	}, 1));
+	}, 1);
 });
 
 

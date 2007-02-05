@@ -243,11 +243,10 @@ main_loop = func(id) {
 	if (id != loop_id) {
 		return;
 	}
-	if (mouse_button) {
-		freeze();
-	} else {
-		var alive = elapsedN.getValue() > mouse_freeze;
-		if (cockpit_view and !panel_visible and alive) {
+	if (cockpit_view and !panel_visible) {
+		if (mouse_button) {
+			freeze();
+		} elsif (elapsedN.getValue() > mouse_freeze) {
 			view_manager.apply();
 		}
 	}
@@ -280,8 +279,8 @@ var view_manager = nil;
 
 var cockpit_view = nil;
 var panel_visible = nil;
-var mouse_mode = nil;
 var elapsedN = nil;
+var mouse_mode = nil;
 var mouse_freeze = 0;
 var mouse_button = nil;
 

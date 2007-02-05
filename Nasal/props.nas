@@ -41,7 +41,7 @@ Node = {
     getBoolValue : func {
         val = me.getValue();
         if(me.getType() == "STRING" and val == "false") { 0 }
-        else { val != 0 }
+        else { val != nil and val != 0 }
     }
 };
 

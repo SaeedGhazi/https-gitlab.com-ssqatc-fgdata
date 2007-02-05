@@ -243,9 +243,13 @@ main_loop = func(id) {
 	if (id != loop_id) {
 		return;
 	}
-	var alive = elapsedN.getValue() > mouse_freeze;
-	if (cockpit_view and !panel_visible and alive) {
-		view_manager.apply();
+	if (mouse_button) {
+		freeze();
+	} else {
+		var alive = elapsedN.getValue() > mouse_freeze;
+		if (cockpit_view and !panel_visible and alive) {
+			view_manager.apply();
+		}
 	}
 	settimer(func { main_loop(id) }, 0);
 }
@@ -279,6 +283,7 @@ var panel_visible = nil;
 var mouse_mode = nil;
 var elapsedN = nil;
 var mouse_freeze = 0;
+var mouse_button = nil;
 
 var loop_id = 0;
 
@@ -310,7 +315,7 @@ var L = _setlistener("/sim/signals/nasal-dir-initialized", func {
 	# to be queried in the loop
 	setlistener("/devices/status/mice/mouse/x", freeze);
 	setlistener("/devices/status/mice/mouse/y", freeze);
-	setlistener("/devices/status/mice/mouse/button", freeze);
+	setlistener("/devices/status/mice/mouse/button", func { mouse_button = cmdarg().getValue() }, 1);
 	setlistener("/sim/current-view/view-number", func { cockpit_view = !cmdarg().getValue() }, 1);
 	setlistener("/devices/status/mice/mouse/mode", func { mouse_mode = cmdarg().getValue() }, 1);
 	setlistener("/sim/panel/visibility", func { panel_visible = cmdarg().getValue() }, 1);

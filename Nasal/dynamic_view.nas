@@ -243,12 +243,18 @@ main_loop = func(id) {
 	if (id != loop_id) {
 		return;
 	}
-	if (cockpit_view and !panel_visible and mouse_mode) {
+	var alive = elapsedN.getValue() > mouse_freeze;
+	if (cockpit_view and !panel_visible and alive) {
 		view_manager.apply();
 	}
 	settimer(func { main_loop(id) }, 0);
 }
 
+freeze = func {
+	if (mouse_mode == 0) {
+		mouse_freeze = elapsedN.getValue() + 2;
+	}
+}
 
 register = func(f) {
 	view_manager.calculate = f;
@@ -271,6 +277,8 @@ var view_manager = nil;
 var cockpit_view = nil;
 var panel_visible = nil;
 var mouse_mode = nil;
+var elapsedN = nil;
+var mouse_freeze = 0;
 
 var loop_id = 0;
 
@@ -296,9 +304,13 @@ var L = _setlistener("/sim/signals/nasal-dir-initialized", func {
 	props.globals.getNode("/accelerations/pilot/z-accel-fps_sec", 1).setDoubleValue(-32);
 	props.globals.getNode("/orientation/side-slip-deg", 1).setDoubleValue(0);
 	props.globals.getNode("/gear/gear/wow", 1).setBoolValue(1);
+	elapsedN = props.globals.getNode("/sim/time/elapsed-sec", 1);
 
 	# let listeners keep some variables up-to-date, so that they don't have
 	# to be queried in the loop
+	setlistener("/devices/status/mice/mouse/x", freeze);
+	setlistener("/devices/status/mice/mouse/y", freeze);
+	setlistener("/devices/status/mice/mouse/button", freeze);
 	setlistener("/sim/current-view/view-number", func { cockpit_view = !cmdarg().getValue() }, 1);
 	setlistener("/devices/status/mice/mouse/mode", func { mouse_mode = cmdarg().getValue() }, 1);
 	setlistener("/sim/panel/visibility", func { panel_visible = cmdarg().getValue() }, 1);

@@ -107,7 +107,7 @@ var ViewManager = {
 		m.pitch_axis = ViewAxis.new("/sim/current-view/goal-pitch-offset-deg");
 		m.roll_axis = ViewAxis.new("/sim/current-view/goal-roll-offset-deg");
 
-		# accelerations are converted to G (one G is subtracted from z-accel)
+		# accelerations are converted to G (Earth gravitation is omitted)
 		m.ax = Input.new("/accelerations/pilot/x-accel-fps_sec", 0.03108095, 0, 0.58, 0);
 		m.ay = Input.new("/accelerations/pilot/y-accel-fps_sec", 0.03108095, 0, 0.95);
 		m.az = Input.new("/accelerations/pilot/z-accel-fps_sec", -0.03108095, -1, 0.46);
@@ -124,6 +124,14 @@ var ViewManager = {
 		m.last_heading = m.headingN.getValue();
 		m.size_factor = getprop("/sim/chase-distance-m") / -25;
 
+		# "lookat" blending
+		m.heading = m.target_heading = 0;
+		m.pitch = m.target_pitch = 0;
+		m.roll = m.target_roll = 0;
+		m.blendN = props.globals.getNode("/sim/view/dynamic/blend", 1);
+		m.blendN.setDoubleValue(0);
+		m.frozen = 0;
+
 		if (props.globals.getNode("rotors", 0) != nil) {
 			m.calculate = m.default_helicopter;
 		} else {
@@ -133,7 +141,8 @@ var ViewManager = {
 		return m;
 	},
 	reset : func {
-		me.lookat_active = 0;
+		interpolate(me.blendN);
+		me.blendN.setDoubleValue(0);
 		me.heading_axis.reset();
 		me.pitch_axis.reset();
 		me.roll_axis.reset();
@@ -145,39 +154,49 @@ var ViewManager = {
 		me.roll_axis.add_offset();
 	},
 	apply : func {
+		if (me.elapsedN.getValue() < me.frozen) {
+			return;
+		} elsif (me.frozen) {
+			me.unfreeze();
+		}
+
 		me.pitch = me.pitchN.getValue();
 		me.roll = me.rollN.getValue();
 
 		me.calculate();
-		if (!me.lookat_active) {
-			me.heading_axis.apply(me.heading_offset);
-			me.pitch_axis.apply(me.pitch_offset);
-			me.roll_axis.apply(me.roll_offset);
+
+		var b = me.blendN.getValue();
+		var B = 1 - b;
+		me.heading = me.target_heading * b + me.heading_offset * B;
+		me.pitch = me.target_pitch * b + me.pitch_offset * B;
+		me.roll = me.target_roll * b + me.roll_offset * B;
+
+		me.heading_axis.apply(me.heading);
+		me.pitch_axis.apply(me.pitch);
+		me.roll_axis.apply(me.roll);
+	},
+	lookat : func(heading = nil, pitch = nil, roll = nil) {
+		if (heading == nil) {
+			interpolate(me.blendN, 0, 0.1);
+		} else {
+			me.target_heading = heading;
+			me.target_pitch = pitch;
+			me.target_roll = roll;
+			interpolate(me.blendN, 1, 0.1);
 		}
 	},
-	lookat : func(heading = nil, pitch = nil) {
-		if (heading != nil and pitch != nil) {
-			if (!me.lookat_active) {
-				me.save_heading = me.heading_axis.sub_offset();
-				me.save_pitch = me.pitch_axis.sub_offset();
-				me.save_roll = me.roll_axis.sub_offset();
-			}
-			me.lookat_active = 1;
-			me.heading_axis.prop.setDoubleValue(heading);
-			me.pitch_axis.prop.setDoubleValue(pitch);
-			me.roll_axis.prop.setDoubleValue(0);
-		} else {
-			if (me.lookat_active) {
-				me.heading_axis.prop.setDoubleValue(me.save_heading);
-				me.pitch_axis.prop.setDoubleValue(me.save_pitch);
-				me.roll_axis.prop.setDoubleValue(me.save_roll);
-				me.add_offset();
-			}
-			me.lookat_active = 0;
-			me.heading_axis.apply(me.heading_offset);
-			me.pitch_axis.apply(me.pitch_offset);
-			me.roll_axis.apply(me.roll_offset);
+	freeze : func {
+		if (!me.frozen) {
+			me.target_heading = me.heading;
+			me.target_pitch = me.pitch;
+			me.target_roll = me.roll;
+			me.blendN.setDoubleValue(1);
 		}
+		me.frozen = me.elapsedN.getValue() + 2;
+	},
+	unfreeze : func {
+		me.frozen = 0;
+		me.lookat();
 	},
 };
 
@@ -246,7 +265,7 @@ var main_loop = func(id) {
 	if (cockpit_view and !panel_visible) {
 		if (mouse_button) {
 			freeze();
-		} elsif (elapsedN.getValue() > mouse_freeze) {
+		} else {
 			view_manager.apply();
 		}
 	}
@@ -255,7 +274,7 @@ var main_loop = func(id) {
 
 var freeze = func {
 	if (mouse_mode == 0) {
-		mouse_freeze = elapsedN.getValue() + 2;
+		view_manager.freeze();
 	}
 }
 
@@ -267,8 +286,8 @@ var reset = func {
 	view_manager.reset();
 }
 
-var lookat = func(heading = nil, pitch = nil) {
-	view_manager.lookat(heading, pitch);
+var lookat = func(heading = nil, pitch = nil, roll = nil) {
+	view_manager.lookat(heading, pitch, roll);
 }
 
 
@@ -282,7 +301,6 @@ var panel_visible = nil;	# whether 2D panel is visible
 var elapsedN = nil;
 var mouse_mode = nil;
 var mouse_button = nil;
-var mouse_freeze = 0;
 
 var loop_id = 0;
 

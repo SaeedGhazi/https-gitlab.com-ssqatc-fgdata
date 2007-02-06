@@ -3,16 +3,16 @@
 # acceleration.
 
 
-sin = func(a) { math.sin(a * math.pi / 180.0) }
-cos = func(a) { math.cos(a * math.pi / 180.0) }
-sigmoid = func(x) { 1 / (1 + math.exp(-x)) }
-nsigmoid = func(x) { 2 / (1 + math.exp(-x)) - 1 }
-pow = func(v, w) { math.exp(math.ln(v) * w) }
-npow = func(v, w) { math.exp(math.ln(abs(v)) * w) * (v < 0 ? -1 : 1) }
-clamp = func(v, min, max) { v < min ? min : v > max ? max : v }
-normatan = func(x) { math.atan2(x, 1) * 2 / math.pi }
+var sin = func(a) { math.sin(a * math.pi / 180.0) }
+var cos = func(a) { math.cos(a * math.pi / 180.0) }
+var sigmoid = func(x) { 1 / (1 + math.exp(-x)) }
+var nsigmoid = func(x) { 2 / (1 + math.exp(-x)) - 1 }
+var pow = func(v, w) { math.exp(math.ln(v) * w) }
+var npow = func(v, w) { math.exp(math.ln(abs(v)) * w) * (v < 0 ? -1 : 1) }
+var clamp = func(v, min, max) { v < min ? min : v > max ? max : v }
+var normatan = func(x) { math.atan2(x, 1) * 2 / math.pi }
 
-normdeg = func(a) {
+var normdeg = func(a) {
 	while (a >= 180) {
 		a -= 360;
 	}
@@ -27,7 +27,7 @@ normdeg = func(a) {
 # Class that reads a property value, applies factor & offset, clamps to min & max,
 # and optionally lowpass filters.
 #
-Input = {
+var Input = {
 	new : func(prop = "/null", factor = 1, offset = 0, filter = 0, min = nil, max = nil) {
 		var m = { parents : [Input] };
 		m.prop = isa(props.Node, prop) ? prop : props.globals.getNode(prop, 1);
@@ -58,7 +58,7 @@ Input = {
 
 # Class that maintains one sim/current-view/goal-*-offset-deg property.
 #
-ViewAxis = {
+var ViewAxis = {
 	new : func(prop) {
 		var m = { parents : [ViewAxis] };
 		m.prop = props.globals.getNode(prop, 0);
@@ -88,7 +88,7 @@ ViewAxis = {
 # Class that manages a dynamic cockpit view by manipulating
 # sim/current-view/goal-*-offset-deg properties.
 #
-ViewManager = {
+var ViewManager = {
 	new : func {
 		var m = { parents : [ViewManager] };
 		m.elapsedN = props.globals.getNode("/sim/time/elapsed-sec", 1);
@@ -239,7 +239,7 @@ ViewManager.default_helicopter = func {
 # Update loop for the whole dynamic view manager. It only runs if
 # /sim/view[0]/dynamic/enabled is true.
 #
-main_loop = func(id) {
+var main_loop = func(id) {
 	if (id != loop_id) {
 		return;
 	}
@@ -253,21 +253,21 @@ main_loop = func(id) {
 	settimer(func { main_loop(id) }, 0);
 }
 
-freeze = func {
+var freeze = func {
 	if (mouse_mode == 0) {
 		mouse_freeze = elapsedN.getValue() + 2;
 	}
 }
 
-register = func(f) {
+var register = func(f) {
 	view_manager.calculate = f;
 }
 
-reset = func {
+var reset = func {
 	view_manager.reset();
 }
 
-lookat = func(heading = nil, pitch = nil) {
+var lookat = func(heading = nil, pitch = nil) {
 	view_manager.lookat(heading, pitch);
 }
 
@@ -278,11 +278,11 @@ var dynamic_view = nil;
 var view_manager = nil;
 
 var cockpit_view = nil;
-var panel_visible = nil;
+var panel_visible = nil;	# whether 2D panel is visible
 var elapsedN = nil;
 var mouse_mode = nil;
-var mouse_freeze = 0;
 var mouse_button = nil;
+var mouse_freeze = 0;
 
 var loop_id = 0;
 
@@ -312,14 +312,15 @@ var L = _setlistener("/sim/signals/nasal-dir-initialized", func {
 
 	# let listeners keep some variables up-to-date, so that they don't have
 	# to be queried in the loop
-	setlistener("/devices/status/mice/mouse/x", freeze);
-	setlistener("/devices/status/mice/mouse/y", freeze);
-	setlistener("/devices/status/mice/mouse/button", func { mouse_button = cmdarg().getValue() }, 1);
 	setlistener("/sim/current-view/view-number", func { cockpit_view = !cmdarg().getValue() }, 1);
 	setlistener("/devices/status/mice/mouse/mode", func { mouse_mode = cmdarg().getValue() }, 1);
 	setlistener("/sim/panel/visibility", func { panel_visible = cmdarg().getValue() }, 1);
+	setlistener("/devices/status/mice/mouse/button", func { mouse_button = cmdarg().getValue() }, 1);
+	setlistener("/devices/status/mice/mouse/x", freeze);
+	setlistener("/devices/status/mice/mouse/y", freeze);
 
 	setlistener("/sim/signals/reinit", func {
+		cmdarg().getValue() and return;
 		cockpit_view = getprop("/sim/current-view/view-number") == 0;
 		view_manager.reset();
 	}, 0);

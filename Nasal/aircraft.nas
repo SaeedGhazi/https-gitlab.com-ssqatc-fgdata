@@ -341,9 +341,9 @@ lowpass = {
 #	aircraft.data.add(p, vec, hash, "/sim/fg-root");
 #
 #	# now save only once (and at exit/reinit, which is automatically done)
-#	aircraft.data.save();     # or aircraft.data.save(0)
+#	aircraft.data.save();
 #
-#	# or save now and all 30 sec (and at exit/reinit)
+#	# or save now and every 30 sec (and at exit/reinit)
 #	aircraft.data.save(0.5);
 #
 Data = {

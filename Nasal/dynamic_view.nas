@@ -81,6 +81,9 @@ var ViewAxis = {
 		me.applied_offset = v;
 		me.prop.setDoubleValue(raw + me.applied_offset);
 	},
+	static : func(v) {
+		normdeg(v - me.prop.getValue() + me.applied_offset);
+	},
 };
 
 
@@ -177,12 +180,12 @@ var ViewManager = {
 	},
 	lookat : func(heading = nil, pitch = nil, roll = nil) {
 		if (heading == nil) {
-			interpolate(me.blendN, 0, 0.1);
+			interpolate(me.blendN, 0, 0.2);
 		} else {
-			me.target_heading = heading;
-			me.target_pitch = pitch;
-			me.target_roll = roll;
-			interpolate(me.blendN, 1, 0.1);
+			me.target_heading = me.heading_axis.static(heading);
+			me.target_pitch = me.pitch_axis.static(pitch);
+			me.target_roll = me.roll_axis.static(roll);
+			interpolate(me.blendN, 1, 0.2);
 		}
 	},
 	freeze : func {

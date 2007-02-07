@@ -61,7 +61,10 @@ var Input = {
 var ViewAxis = {
 	new : func(prop) {
 		var m = { parents : [ViewAxis] };
-		m.prop = props.globals.getNode(prop, 0);
+		m.prop = props.globals.getNode(prop, 1);
+		if (m.prop.getType() == "NONE") {
+			m.prop.setDoubleValue(0);
+		}
 		m.reset();
 		return m;
 	},
@@ -109,6 +112,10 @@ var ViewManager = {
 		m.heading_axis = ViewAxis.new("/sim/current-view/goal-heading-offset-deg");
 		m.pitch_axis = ViewAxis.new("/sim/current-view/goal-pitch-offset-deg");
 		m.roll_axis = ViewAxis.new("/sim/current-view/goal-roll-offset-deg");
+
+		m.x_axis = ViewAxis.new("/sim/current-view/x-offset-m");
+		m.y_axis = ViewAxis.new("/sim/current-view/y-offset-m");
+		m.z_axis = ViewAxis.new("/sim/current-view/z-offset-m");
 
 		# accelerations are converted to G (Earth gravitation is omitted)
 		m.ax = Input.new("/accelerations/pilot/x-accel-fps_sec", 0.03108095, 0, 0.58, 0);
@@ -167,6 +174,7 @@ var ViewManager = {
 		me.roll = me.rollN.getValue();
 
 		me.calculate();
+		me.headshake();
 
 		var b = me.blendN.getValue();
 		var B = 1 - b;
@@ -177,6 +185,10 @@ var ViewManager = {
 		me.heading_axis.apply(me.heading);
 		me.pitch_axis.apply(me.pitch);
 		me.roll_axis.apply(me.roll);
+
+		me.x_axis.apply(me.x_offset);
+		me.y_axis.apply(me.y_offset);
+		me.z_axis.apply(me.z_offset);
 	},
 	lookat : func(heading = nil, pitch = nil, roll = nil) {
 		if (heading == nil) {
@@ -258,6 +270,13 @@ ViewManager.default_helicopter = func {
 
 
 
+# default headshaking code (NOOP)
+#
+ViewManager.headshake = func {
+	me.x_offset = me.y_offset = me.z_offset = 0;
+}
+
+
 # Update loop for the whole dynamic view manager. It only runs if
 # /sim/view[0]/dynamic/enabled is true.
 #
@@ -283,6 +302,10 @@ var freeze = func {
 
 var register = func(f) {
 	view_manager.calculate = f;
+}
+
+var register_headshake = func(f) {
+	view_manager.headshake = f;
 }
 
 var reset = func {

@@ -109,13 +109,15 @@ var ViewManager = {
 		m.wind_dirN = props.globals.getNode("/environment/wind-from-heading-deg", 1);
 		m.wind_speedN = props.globals.getNode("/environment/wind-speed-kt", 1);
 
-		m.heading_axis = ViewAxis.new("/sim/current-view/goal-heading-offset-deg");
-		m.pitch_axis = ViewAxis.new("/sim/current-view/goal-pitch-offset-deg");
-		m.roll_axis = ViewAxis.new("/sim/current-view/goal-roll-offset-deg");
-
-		m.x_axis = ViewAxis.new("/sim/current-view/x-offset-m");
-		m.y_axis = ViewAxis.new("/sim/current-view/y-offset-m");
-		m.z_axis = ViewAxis.new("/sim/current-view/z-offset-m");
+		m.axes = [
+			m.heading_axis = ViewAxis.new("/sim/current-view/goal-heading-offset-deg"),
+			m.pitch_axis = ViewAxis.new("/sim/current-view/goal-pitch-offset-deg"),
+			m.roll_axis = ViewAxis.new("/sim/current-view/goal-roll-offset-deg"),
+			m.x_axis = ViewAxis.new("/sim/current-view/x-offset-m"),
+			m.y_axis = ViewAxis.new("/sim/current-view/y-offset-m"),
+			m.z_axis = ViewAxis.new("/sim/current-view/z-offset-m"),
+			m.fov_axis = ViewAxis.new("/sim/current-view/field-of-view"),
+		];
 
 		# accelerations are converted to G (Earth gravitation is omitted)
 		m.ax = Input.new("/accelerations/pilot/x-accel-fps_sec", 0.03108095, 0, 0.58, 0);
@@ -134,10 +136,16 @@ var ViewManager = {
 		m.last_heading = m.headingN.getValue();
 		m.size_factor = getprop("/sim/chase-distance-m") / -25;
 
-		# "lookat" blending
 		m.heading = m.target_heading = 0;
 		m.pitch = m.target_pitch = 0;
 		m.roll = m.target_roll = 0;
+		m.x_offset = m.x = m.target_x = 0;
+		m.y_offset = m.y = m.target_y = 0;
+		m.z_offset = m.z = m.target_z = 0;
+		m.fov = m.target_fov = 0;
+		m.fov_offset = 0;
+
+		# "lookat" blending
 		m.blendN = props.globals.getNode("/sim/view/dynamic/blend", 1);
 		m.blendN.setDoubleValue(0);
 		m.frozen = 0;
@@ -153,15 +161,16 @@ var ViewManager = {
 	reset : func {
 		interpolate(me.blendN);
 		me.blendN.setDoubleValue(0);
-		me.heading_axis.reset();
-		me.pitch_axis.reset();
-		me.roll_axis.reset();
+		foreach (var a; me.axes) {
+			a.reset();
+		}
 		me.add_offset();
 	},
 	add_offset : func {
 		me.heading_axis.add_offset();
 		me.pitch_axis.add_offset();
 		me.roll_axis.add_offset();
+		me.fov_axis.add_offset();
 	},
 	apply : func {
 		if (me.elapsedN.getValue() < me.frozen) {
@@ -174,44 +183,54 @@ var ViewManager = {
 		me.roll = me.rollN.getValue();
 
 		me.calculate();
-		me.headshake();
 
 		var b = me.blendN.getValue();
 		var B = 1 - b;
 		me.heading = me.target_heading * b + me.heading_offset * B;
 		me.pitch = me.target_pitch * b + me.pitch_offset * B;
 		me.roll = me.target_roll * b + me.roll_offset * B;
+		me.x = me.target_x * b + me.x_offset * B;
+		me.y = me.target_y * b + me.y_offset * B;
+		me.z = me.target_z * b + me.z_offset * B;
+		me.fov = me.target_fov * b + me.fov_offset * B;
 
 		me.heading_axis.apply(me.heading);
 		me.pitch_axis.apply(me.pitch);
 		me.roll_axis.apply(me.roll);
-
-		me.x_axis.apply(me.x_offset);
-		me.y_axis.apply(me.y_offset);
-		me.z_axis.apply(me.z_offset);
+		me.x_axis.apply(me.x);
+		me.y_axis.apply(me.y);
+		me.z_axis.apply(me.z);
+		me.fov_axis.apply(me.fov);
 	},
-	lookat : func(heading = nil, pitch = nil, roll = nil) {
-		if (heading == nil) {
-			interpolate(me.blendN, 0, 0.2);
-		} else {
-			me.target_heading = me.heading_axis.static(heading);
-			me.target_pitch = me.pitch_axis.static(pitch);
-			me.target_roll = me.roll_axis.static(roll);
-			interpolate(me.blendN, 1, 0.2);
-		}
+	lookat : func(heading, pitch, roll, x, y, z, fov = 0) {
+		me.target_heading = me.heading_axis.static(heading);
+		me.target_pitch = me.pitch_axis.static(pitch);
+		me.target_roll = me.roll_axis.static(roll);
+		me.target_x = me.x_axis.static(x);
+		me.target_y = me.y_axis.static(y);
+		me.target_z = me.z_axis.static(z);
+		me.target_fov = me.fov_axis.static(fov);
+		interpolate(me.blendN, 1, 0.2);
+	},
+	resume : func {
+		interpolate(me.blendN, 0, 0.2);
 	},
 	freeze : func {
 		if (!me.frozen) {
 			me.target_heading = me.heading;
 			me.target_pitch = me.pitch;
 			me.target_roll = me.roll;
+			me.target_x = me.x;
+			me.target_y = me.y;
+			me.target_z = me.z;
+			me.target_fov = me.fov;
 			me.blendN.setDoubleValue(1);
 		}
 		me.frozen = me.elapsedN.getValue() + 2;
 	},
 	unfreeze : func {
 		me.frozen = 0;
-		me.lookat();
+		me.resume();
 	},
 };
 
@@ -270,13 +289,6 @@ ViewManager.default_helicopter = func {
 
 
 
-# default headshaking code (NOOP)
-#
-ViewManager.headshake = func {
-	me.x_offset = me.y_offset = me.z_offset = 0;
-}
-
-
 # Update loop for the whole dynamic view manager. It only runs if
 # /sim/view[0]/dynamic/enabled is true.
 #
@@ -294,6 +306,8 @@ var main_loop = func(id) {
 	settimer(func { main_loop(id) }, 0);
 }
 
+
+
 var freeze = func {
 	if (mouse_mode == 0) {
 		view_manager.freeze();
@@ -304,16 +318,16 @@ var register = func(f) {
 	view_manager.calculate = f;
 }
 
-var register_headshake = func(f) {
-	view_manager.headshake = f;
-}
-
 var reset = func {
 	view_manager.reset();
 }
 
-var lookat = func(heading = nil, pitch = nil, roll = nil) {
-	view_manager.lookat(heading, pitch, roll);
+var lookat = func(h, p, r, x, y, z, f) {
+	view_manager.lookat(h, p, r, x, y, z, f);
+}
+
+var resume = func {
+	view_manager.resume();
 }
 
 
@@ -379,14 +393,16 @@ var L = _setlistener("/sim/signals/nasal-dir-initialized", func {
 		}
 	}
 
-	setlistener("/sim/view/dynamic/enabled", func {
-		dynamic_view = cmdarg().getBoolValue();
-		loop_id += 1;
-		view.resetView();
-		if (dynamic_view) {
-			main_loop(loop_id);
-		}
-	}, 1);
+	settimer(func {
+		setlistener("/sim/view/dynamic/enabled", func {
+			dynamic_view = cmdarg().getBoolValue();
+			loop_id += 1;
+			view.resetView();
+			if (dynamic_view) {
+				main_loop(loop_id);
+			}
+		}, 1);
+	}, 0);
 });
 
 

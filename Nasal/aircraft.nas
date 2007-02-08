@@ -412,29 +412,6 @@ Data = {
 };
 
 
-var data = nil;
-var L = _setlistener("/sim/signals/nasal-dir-initialized", func {
-	removelistener(L);
-	data = Data.new();
-	Data.new = nil;
-	if (getprop("/sim/startup/save-on-exit")) {
-		data.load();
-		var n = props.globals.getNode("/sim/aircraft-data");
-		if (n != nil) {
-			foreach (var c; n.getChildren("path")) {
-				if (c.getType() != "NONE") {
-					data.add(c.getValue());
-				}
-			}
-		}
-	} else {
-		Data._save_ = func {}
-		Data._loop_ = func {}
-	}
-});
-
-
-
 # timer
 # ==============================================================================
 # class that implements timer that can be started, stopped, reset, and can
@@ -522,7 +499,8 @@ timer = {
 
 
 
-# HUD control class to handle both HUD implementations.
+# HUD control class to handle both HUD implementations
+# ==============================================================================
 #
 HUDControl = {
 	new : func {
@@ -574,8 +552,36 @@ HUDControl = {
 	oldinit2 : func { fgcommand("hud-init2", props.Node.new()) },
 };
 
-var HUD = nil;
-settimer(func { HUD = HUDControl.new() }, 0);
 
+
+# module initialization
+# ==============================================================================
+#
+var HUD = nil;
+var data = nil;
+
+var L = _setlistener("/sim/signals/nasal-dir-initialized", func {
+	removelistener(L);
+
+	props.globals.getNode("/sim/time/delta-realtime-sec", 1).setDoubleValue(0.00000001);
+	HUD = HUDControl.new();
+
+	data = Data.new();
+	Data.new = nil;
+	if (getprop("/sim/startup/save-on-exit")) {
+		data.load();
+		var n = props.globals.getNode("/sim/aircraft-data");
+		if (n != nil) {
+			foreach (var c; n.getChildren("path")) {
+				if (c.getType() != "NONE") {
+					data.add(c.getValue());
+				}
+			}
+		}
+	} else {
+		Data._save_ = func {}
+		Data._loop_ = func {}
+	}
+});
 
 

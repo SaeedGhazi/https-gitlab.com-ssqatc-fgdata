@@ -322,7 +322,7 @@ var reset = func {
 	view_manager.reset();
 }
 
-var lookat = func(h, p, r, x, y, z, f) {
+var lookat = func(h, p, r, x, y, z, f = 55) {
 	view_manager.lookat(h, p, r, x, y, z, f);
 }
 

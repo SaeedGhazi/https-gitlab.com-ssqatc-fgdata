@@ -1,6 +1,37 @@
 # Dynamic Cockpit View manager. Tries to simulate the pilot's most likely
 # deliberate view direction. Doesn't consider forced view changes due to
 # acceleration.
+#
+# To override the default recipes, put something like this into one of
+# your aircraft's Nasal files:
+#
+#   dynamic_view.register(func {
+#           # me.default_plane();      # uncomment one of these if you want
+#           # me.default_helicopter(); # to base your code on the defaults
+#
+#                                      # positive values rotate (deg) or move (m)
+#           me.heading_offset = ...    #     left
+#           me.pitch_offset = ...      #     up
+#           me.roll_offset = ...       #     right
+#           me.x_offset = ...          #     right     (transversal axis)
+#           me.y_offset = ...          #     up        (vertical axis)
+#           me.z_offset = ...          #     back/aft  (longitudinal axis)
+#           me.fov_offset = ...        #     zoom out  (field of view)
+#   });
+#
+# All offsets are by default 0, and you only need to set them if they should
+# be non-zero. The registered function is called for each frame and the respective
+# view parameters are set accordingly. The function can access all internal
+# variables of the ViewManager class, such as me.roll, me.pitch, etc., and it
+# can, of course, also use module variables from the file where it's defined.
+#
+# The following commands move smoothly to a fixed view position and back.
+# All values are relative to aircraft origin (absolute), not relative to
+# the default cockpit view position. The field-of-view argument is optional.
+#
+#   dynamic_view.lookat(hdg, pitch, roll, x, y, z [, fov=55]);
+#   dynamic_view.resume();
+
 
 
 var sin = func(a) { math.sin(a * math.pi / 180.0) }
@@ -136,15 +167,6 @@ var ViewManager = {
 		m.last_heading = m.headingN.getValue();
 		m.size_factor = getprop("/sim/chase-distance-m") / -25;
 
-		m.heading = m.target_heading = 0;
-		m.pitch = m.target_pitch = 0;
-		m.roll = m.target_roll = 0;
-		m.x_offset = m.x = m.target_x = 0;
-		m.y_offset = m.y = m.target_y = 0;
-		m.z_offset = m.z = m.target_z = 0;
-		m.fov = m.target_fov = 0;
-		m.fov_offset = 0;
-
 		# "lookat" blending
 		m.blendN = props.globals.getNode("/sim/view/dynamic/blend", 1);
 		m.blendN.setDoubleValue(0);
@@ -159,6 +181,14 @@ var ViewManager = {
 		return m;
 	},
 	reset : func {
+		me.heading_offset = me.heading = me.target_heading = 0;
+		me.pitch_offset = me.pitch = me.target_pitch = 0;
+		me.roll_offset = me.roll = me.target_roll = 0;
+		me.x_offset = me.x = me.target_x = 0;
+		me.y_offset = me.y = me.target_y = 0;
+		me.z_offset = me.z = me.target_z = 0;
+		me.fov_offset = me.fov = me.target_fov = 0;
+
 		interpolate(me.blendN);
 		me.blendN.setDoubleValue(0);
 		foreach (var a; me.axes) {

@@ -7,8 +7,8 @@ var sin = func(a) { math.sin(a * math.pi / 180.0) }
 var cos = func(a) { math.cos(a * math.pi / 180.0) }
 var sigmoid = func(x) { 1 / (1 + math.exp(-x)) }
 var nsigmoid = func(x) { 2 / (1 + math.exp(-x)) - 1 }
-var pow = func(v, w) { math.exp(math.ln(v) * w) }
-var npow = func(v, w) { math.exp(math.ln(abs(v)) * w) * (v < 0 ? -1 : 1) }
+var pow = func(v, w) { v < 0 ? nil : v == 0 ? 0 : math.exp(math.ln(v) * w) }
+var npow = func(v, w) { v == 0 ? 0 : math.exp(math.ln(abs(v)) * w) * (v < 0 ? -1 : 1) }
 var clamp = func(v, min, max) { v < min ? min : v > max ? max : v }
 var normatan = func(x) { math.atan2(x, 1) * 2 / math.pi }
 

@@ -69,8 +69,8 @@
   <item>
    <label>Browse Internal Properties</label>
    <binding>
-    <command>dialog-show</command>
-    <dialog-name>property-browser</dialog-name>
+    <command>nasal</command>
+    <script>gui.property_browser()</script>
    </binding>
   </item>
 

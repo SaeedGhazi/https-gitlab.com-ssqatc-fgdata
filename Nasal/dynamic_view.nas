@@ -27,11 +27,11 @@
 #
 # The following commands move smoothly to a fixed view position and back.
 # All values are relative to aircraft origin (absolute), not relative to
-# the default cockpit view position. The field-of-view argument is optional.
+# the default cockpit view position. The speed and field-of-view argument
+# is optional.
 #
-#   dynamic_view.lookat(hdg, pitch, roll, x, y, z [, fov=55]);
+#   dynamic_view.lookat(hdg, pitch, roll, x, y, z [, speed=0.2 [, fov=55]]);
 #   dynamic_view.resume();
-
 
 
 var sin = func(a) { math.sin(a * math.pi / 180.0) }
@@ -52,6 +52,12 @@ var normdeg = func(a) {
 	}
 	return a;
 }
+
+
+
+
+var FREEZE_DURATION = 2;
+var BLEND_SPEED = 0.2;
 
 
 
@@ -170,6 +176,7 @@ var ViewManager = {
 		# "lookat" blending
 		m.blendN = props.globals.getNode("/sim/view/dynamic/blend", 1);
 		m.blendN.setDoubleValue(0);
+		m.blendspeed = BLEND_SPEED;
 		m.frozen = 0;
 
 		if (props.globals.getNode("rotors", 0) != nil) {
@@ -232,7 +239,7 @@ var ViewManager = {
 		me.z_axis.apply(me.z);
 		me.fov_axis.apply(me.fov);
 	},
-	lookat : func(heading, pitch, roll, x, y, z, fov = 0) {
+	lookat : func(heading, pitch, roll, x, y, z, speed, fov) {
 		me.target_heading = me.heading_axis.static(heading);
 		me.target_pitch = me.pitch_axis.static(pitch);
 		me.target_roll = me.roll_axis.static(roll);
@@ -240,10 +247,14 @@ var ViewManager = {
 		me.target_y = me.y_axis.static(y);
 		me.target_z = me.z_axis.static(z);
 		me.target_fov = me.fov_axis.static(fov);
-		interpolate(me.blendN, 1, 0.2);
+
+		me.blendspeed = speed;
+		me.blendN.setValue(0);
+		interpolate(me.blendN, 1, me.blendspeed);
 	},
 	resume : func {
-		interpolate(me.blendN, 0, 0.2);
+		interpolate(me.blendN, 0, me.blendspeed);
+		me.blendspeed = BLEND_SPEED;
 	},
 	freeze : func {
 		if (!me.frozen) {
@@ -256,7 +267,7 @@ var ViewManager = {
 			me.target_fov = me.fov;
 			me.blendN.setDoubleValue(1);
 		}
-		me.frozen = me.elapsedN.getValue() + 2;
+		me.frozen = me.elapsedN.getValue() + FREEZE_DURATION;
 	},
 	unfreeze : func {
 		me.frozen = 0;
@@ -352,8 +363,8 @@ var reset = func {
 	view_manager.reset();
 }
 
-var lookat = func(h, p, r, x, y, z, f = 55) {
-	view_manager.lookat(h, p, r, x, y, z, f);
+var lookat = func(h, p, r, x, y, z, s = BLEND_SPEED, f = 55) {
+	view_manager.lookat(h, p, r, x, y, z, s, f);
 }
 
 var resume = func {

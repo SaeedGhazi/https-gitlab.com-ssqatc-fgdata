@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+ <comment>
+  <![CDATA[
+    This is the protocol definition for fg_sqawk.pl.
+    See http://squonk.abacab.org/dokuwiki/fg_sqawk
+
+    Usage:
+    # fgfs --generic=socket,out,<hz>,<host>,<port>,udp,fg_squawk
+
+    Check data with:
+    #  netcat -u -l -p <port>
+  ]]>
+ </comment>
+
+ <generic>
+
+  <output>
+   <line_separator>newline</line_separator>
+   <var_separator>,</var_separator>
+
+   <chunk>
+    <name>comm1frq</name>
+    <type>float</type>
+    <format>COM1_FRQ=%03.3f</format>
+    <node>/instrumentation/comm/frequencies/selected-mhz</node>
+   </chunk>
+
+   <chunk>
+    <name>ptt-key-status</name>
+    <type>bool</type>
+    <format>PTT=%d</format>
+    <node>/instrumentation/comm/ptt</node>
+   </chunk>
+
+   <chunk>
+    <name>transponder-code</name>
+    <type>int</type>
+    <format>TRANSPONDER=%d</format>
+    <node>/instrumentation/transponder/id-code</node>
+   </chunk>
+
+   <chunk>
+    <name>airspeed</name>
+    <type>float</type>
+    <format>AIRSPEED=%04.1f</format>
+    <node>instrumentation/airspeed-indicator/indicated-speed-kt</node>
+   </chunk>
+
+   <chunk>
+    <name>pos-longitude-deg</name>
+    <type>float</type>
+    <format>LON=%03.6f</format>
+    <node>/position/longitude-deg</node>
+   </chunk>
+
+   <chunk>
+    <name>pos-latitude-deg</name>
+    <type>float</type>
+    <format>LAT=%03.6f</format>
+    <node>/position/latitude-deg</node>
+   </chunk>
+
+   <chunk>
+    <name>pos-alt</name>
+    <type>float</type>
+    <format>ALT=%05.0f</format>
+    <node>/position/altitude-ft</node>
+   </chunk>
+
+   <chunk>
+    <name>heading</name>
+    <type>float</type>
+    <format>HEAD=%03.1f</format>
+    <node>/instrumentation/heading-indicator/indicated-heading-deg</node>
+   </chunk>
+
+  </output>
+
+ </generic>
+
+</PropertyList>

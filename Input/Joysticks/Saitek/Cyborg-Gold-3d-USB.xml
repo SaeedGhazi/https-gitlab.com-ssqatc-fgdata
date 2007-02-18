@@ -44,7 +44,7 @@ Control +            no modifier
                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 button 0 (trigger):  trigger selected weapon
 button 1 (left):     switch to previous weapon system
-button 3 (right):    switch to next weapobn system
+button 3 (right):    switch to next weapon system
 
 
 
@@ -134,7 +134,7 @@ ________________________________________________________________________________
 			harrier = func {
 				if (getprop("/sim/aero") == "harrier") {
 					thv = getprop("/controls/engines/engine[0]/mixture");
-					gui.popupTip("Thrust vector " ~ int(thv * 120 - 20));
+					gui.popupTip("Thrust vector " ~ int(thv * 120 - 20 + 0.5));
 				}
 			}
 		]]></script>
@@ -225,16 +225,16 @@ ________________________________________________________________________________
 						controls.applyBrakes(0);
 					} elsif (m == 1) {
 						i = controls.applyParkingBrake(1);
-						gui.popupTip("Parking Brake " ~ ["OFF", "ON"][i]);
+						gui.popupTip("Parking Brake " ~ (i ? "ON" : "OFF"));
 						controls.applyBrakes(0);
 					} elsif (m == 2) {
 						i = !getprop("/controls/flight/speedbrake");
 						setprop("/controls/flight/speedbrake", i);
-						gui.popupTip("Speed Brake " ~ ["OFF", "ON"][i]);
+						gui.popupTip("Speed Brake " ~ (i ? "ON" : "OFF"));
 					} elsif (m == 3) {
 						i = !getprop("/controls/engines/engine[0]/reverser");
 						props.setAll("/controls/engines/engine", "reverser", i);
-						gui.popupTip("Thrust Reverser " ~ ["OFF", "ON"][i]);
+						gui.popupTip("Thrust Reverser " ~ (i ? "ON" : "OFF"));
 					}
 				</script>
 			</binding>

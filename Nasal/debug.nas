@@ -18,9 +18,7 @@
 
 
 
-# enable colors on Unix (checks second character in module path for colon)
-#
-if (caller(0)[2][1] != `:`) {
+if (getprop("/sim/startup/terminal-ansi-colors")) {
 	_c = func(color, s) { "\x1b[" ~ color ~ "m" ~ s ~ "\x1b[m" }
 } else {
 	_c = func(dummy, s) { s }

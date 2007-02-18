@@ -12,11 +12,6 @@ Started September 2000 by David Megginson, david@megginson.com
 
  <!-- General simulation preferences -->
  <sim>
-  <!-- Multiplayer chat requires that these properties be defined -->
-  <multiplay>
-    <chat type="string">Hello</chat>
-    <transmission-freq-hz type="string">118500000</transmission-freq-hz>
-  </multiplay>
   <!-- hide some development tools, such as parts of the HUD adjustment dialog -->
   <devel type="bool">false</devel>
 
@@ -49,6 +44,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <units>feet</units>
    <save-on-exit type="bool" userarchive="y">true</save-on-exit>
    <browser-app>netscape</browser-app><!--  help viewer -->
+   <terminal-ansi-colors type="bool">true</terminal-ansi-colors>
   </startup>
   <rendering>
    <debug type="bool">false</debug>
@@ -447,6 +443,11 @@ Started September 2000 by David Megginson, david@megginson.com
    <scenario>aircraft_demo</scenario>
    <!-- <scenario>refueling_demo</scenario> -->
   </ai>
+
+  <multiplay>
+   <chat type="string">Hello</chat>
+   <transmission-freq-hz type="string">118500000</transmission-freq-hz>
+  </multiplay>
 
   <user>
    <callsign type="string">Golf Foxtrot Sierra</callsign>

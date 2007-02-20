@@ -45,7 +45,7 @@
     <name>airspeed</name>
     <type>float</type>
     <format>AIRSPEED=%04.1f</format>
-    <node>instrumentation/airspeed-indicator/indicated-speed-kt</node>
+    <node>/instrumentation/airspeed-indicator/indicated-speed-kt</node>
    </chunk>
 
    <chunk>

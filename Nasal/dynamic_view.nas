@@ -27,11 +27,15 @@
 #
 # The following commands move smoothly to a fixed view position and back.
 # All values are relative to aircraft origin (absolute), not relative to
-# the default cockpit view position. The speed and field-of-view argument
+# the default cockpit view position. The time and field-of-view argument
 # is optional.
 #
-#   dynamic_view.lookat(hdg, pitch, roll, x, y, z [, speed=0.2 [, fov=55]]);
+#   dynamic_view.lookat(hdg, pitch, roll, x, y, z [, time=0.2 [, fov=55]]);
 #   dynamic_view.resume();
+
+
+var FREEZE_DURATION = 2;
+var BLEND_TIME = 0.2;
 
 
 var sin = func(a) { math.sin(a * math.pi / 180.0) }
@@ -52,12 +56,6 @@ var normdeg = func(a) {
 	}
 	return a;
 }
-
-
-
-
-var FREEZE_DURATION = 2;
-var BLEND_SPEED = 0.2;
 
 
 
@@ -176,7 +174,7 @@ var ViewManager = {
 		# "lookat" blending
 		m.blendN = props.globals.getNode("/sim/view/dynamic/blend", 1);
 		m.blendN.setDoubleValue(0);
-		m.blendspeed = BLEND_SPEED;
+		m.blendtime = BLEND_TIME;
 		m.frozen = 0;
 
 		if (props.globals.getNode("rotors", 0) != nil) {
@@ -239,7 +237,7 @@ var ViewManager = {
 		me.z_axis.apply(me.z);
 		me.fov_axis.apply(me.fov);
 	},
-	lookat : func(heading, pitch, roll, x, y, z, speed, fov) {
+	lookat : func(heading, pitch, roll, x, y, z, time, fov) {
 		me.target_heading = me.heading_axis.static(heading);
 		me.target_pitch = me.pitch_axis.static(pitch);
 		me.target_roll = me.roll_axis.static(roll);
@@ -248,13 +246,13 @@ var ViewManager = {
 		me.target_z = me.z_axis.static(z);
 		me.target_fov = me.fov_axis.static(fov);
 
-		me.blendspeed = speed;
+		me.blendtime = time;
 		me.blendN.setValue(0);
-		interpolate(me.blendN, 1, me.blendspeed);
+		interpolate(me.blendN, 1, me.blendtime);
 	},
 	resume : func {
-		interpolate(me.blendN, 0, me.blendspeed);
-		me.blendspeed = BLEND_SPEED;
+		interpolate(me.blendN, 0, me.blendtime);
+		me.blendtime = BLEND_TIME;
 	},
 	freeze : func {
 		if (!me.frozen) {
@@ -270,8 +268,10 @@ var ViewManager = {
 		me.frozen = me.elapsedN.getValue() + FREEZE_DURATION;
 	},
 	unfreeze : func {
-		me.frozen = 0;
-		me.resume();
+		if (me.frozen) {
+			me.frozen = 0;
+			me.resume();
+		}
 	},
 };
 
@@ -363,7 +363,7 @@ var reset = func {
 	view_manager.reset();
 }
 
-var lookat = func(h, p, r, x, y, z, s = BLEND_SPEED, f = 55) {
+var lookat = func(h, p, r, x, y, z, s = BLEND_TIME, f = 55) {
 	view_manager.lookat(h, p, r, x, y, z, s, f);
 }
 
@@ -412,11 +412,15 @@ var L = _setlistener("/sim/signals/nasal-dir-initialized", func {
 	# let listeners keep some variables up-to-date, so that they don't have
 	# to be queried in the loop
 	setlistener("/sim/current-view/view-number", func { cockpit_view = !cmdarg().getValue() }, 1);
-	setlistener("/devices/status/mice/mouse/mode", func { mouse_mode = cmdarg().getValue() }, 1);
 	setlistener("/sim/panel/visibility", func { panel_visible = cmdarg().getValue() }, 1);
 	setlistener("/devices/status/mice/mouse/button", func { mouse_button = cmdarg().getValue() }, 1);
 	setlistener("/devices/status/mice/mouse/x", freeze);
 	setlistener("/devices/status/mice/mouse/y", freeze);
+	setlistener("/devices/status/mice/mouse/mode", func {
+		if (mouse_mode = cmdarg().getValue()) {
+			view_manager.unfreeze();
+		}
+	}, 1);
 
 	setlistener("/sim/signals/reinit", func {
 		cmdarg().getValue() and return;

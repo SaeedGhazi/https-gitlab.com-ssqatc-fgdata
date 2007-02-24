@@ -113,7 +113,7 @@
     <desc>Show model adjustment dialog</desc>
     <binding>
      <command>nasal</command>
-     <script>ufo.showModelAdjustDialog()</script>
+     <script>ufo.adjust_dialog.toggle()</script>
     </binding>
    </key>
 
@@ -140,7 +140,7 @@
     <desc>Show model select dialog</desc>
     <binding>
      <command>nasal</command>
-     <script>ufo.showModelSelectDialog()</script>
+     <script>ufo.select_dialog.toggle()</script>
     </binding>
    </key>
   </keyboard>

@@ -1,0 +1,549 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<name>ufo-adjust</name>
+	<layout>vbox</layout>
+	<x>-20</x>
+	<y>-20</y>
+
+	<group>
+		<layout>hbox</layout>
+		<empty><stretch>1</stretch></empty>
+
+		<text>
+			<label>Adjust model</label>
+		</text>
+
+		<empty><stretch>1</stretch></empty>
+
+		<button>
+			<pref-width>16</pref-width>
+			<pref-height>16</pref-height>
+			<legend></legend>
+			<default>1</default>
+			<keynum>27</keynum>
+			<border>2</border>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust_dialog.close()</script>
+			</binding>
+		</button>
+	</group>
+
+	<hrule><whatever/></hrule>
+
+	<nasal>
+		<open>
+			var self = cmdarg();
+			ufo.adjust.center_sliders();
+		</open>
+	</nasal>
+
+	<group>
+		<layout>hbox</layout>
+		<default-padding>0</default-padding>
+
+		<button>
+			<legend>&lt;&lt;</legend>
+			<pref-width>22</pref-width>
+			<pref-height>22</pref-height>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.step("lon", -0.0004)</script>
+			</binding>
+		</button>
+
+		<button>
+			<legend>&lt;</legend>
+			<pref-width>22</pref-width>
+			<pref-height>22</pref-height>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.step("lon", -0.00004)</script>
+			</binding>
+		</button>
+
+		<slider>
+			<property>/data/offsets/longitude-deg</property>
+			<legend>lon</legend>
+			<pref-width>250</pref-width>
+			<live>1</live>
+			<min>-0.00004</min>
+			<max>0.00004</max>
+
+			<color>
+				<red>1.0</red>
+				<green>0.6</green>
+				<blue>0.6</blue>
+				<alpha>1</alpha>
+			</color>
+
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</slider>
+
+		<button>
+			<legend>&gt;</legend>
+			<pref-width>22</pref-width>
+			<pref-height>22</pref-height>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.step("lon", 0.00004)</script>
+			</binding>
+		</button>
+
+		<button>
+			<legend>&gt;&gt;</legend>
+			<pref-width>22</pref-width>
+			<pref-height>22</pref-height>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.step("lon", 0.0004)</script>
+			</binding>
+		</button>
+	</group>
+
+	<group>
+		<layout>hbox</layout>
+		<default-padding>0</default-padding>
+
+		<button>
+			<legend>&lt;&lt;</legend>
+			<pref-width>22</pref-width>
+			<pref-height>22</pref-height>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.step("lat", -0.0002)</script>
+			</binding>
+		</button>
+
+		<button>
+			<legend>&lt;</legend>
+			<pref-width>22</pref-width>
+			<pref-height>22</pref-height>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.step("lat", -0.00002)</script>
+			</binding>
+		</button>
+
+		<slider>
+			<property>/data/offsets/latitude-deg</property>
+			<legend>lat</legend>
+			<pref-width>250</pref-width>
+			<live>1</live>
+			<min>-0.00002</min>
+			<max>0.00002</max>
+
+			<color>
+				<red>0.6</red>
+				<green>1.0</green>
+				<blue>0.6</blue>
+				<alpha>1.0</alpha>
+			</color>
+
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</slider>
+
+		<button>
+			<legend>&gt;</legend>
+			<pref-width>22</pref-width>
+			<pref-height>22</pref-height>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.step("lat", 0.00002)</script>
+			</binding>
+		</button>
+
+		<button>
+			<legend>&gt;&gt;</legend>
+			<pref-width>22</pref-width>
+			<pref-height>22</pref-height>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.step("lat", 0.0002)</script>
+			</binding>
+		</button>
+	</group>
+
+	<group>
+		<layout>hbox</layout>
+		<default-padding>0</default-padding>
+
+		<button>
+			<legend>&lt;&lt;</legend>
+			<pref-width>22</pref-width>
+			<pref-height>22</pref-height>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.step("elev", -10)</script>
+			</binding>
+		</button>
+
+		<button>
+			<legend>&lt;</legend>
+			<pref-width>22</pref-width>
+			<pref-height>22</pref-height>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.step("elev", -2)</script>
+			</binding>
+		</button>
+
+		<slider>
+			<property>/data/offsets/elevation-ft</property>
+			<legend>elev</legend>
+			<pref-width>250</pref-width>
+			<live>1</live>
+			<min>-2</min>
+			<max>2</max>
+
+			<color>
+				<red>0.6</red>
+				<green>0.6</green>
+				<blue>1.0</blue>
+				<alpha>1.0</alpha>
+			</color>
+
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</slider>
+
+		<button>
+			<legend>&gt;</legend>
+			<pref-width>22</pref-width>
+			<pref-height>22</pref-height>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.step("elev", 2)</script>
+			</binding>
+		</button>
+
+		<button>
+			<legend>&gt;&gt;</legend>
+			<pref-width>22</pref-width>
+			<pref-height>22</pref-height>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.step("elev", 10)</script>
+			</binding>
+		</button>
+	</group>
+
+	<group>
+		<layout>hbox</layout>
+		<default-padding>0</default-padding>
+
+		<button>
+			<legend>&lt;&lt;</legend>
+			<pref-width>22</pref-width>
+			<pref-height>22</pref-height>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.step("hdg", -36)</script>
+			</binding>
+		</button>
+
+		<button>
+			<legend>&lt;</legend>
+			<pref-width>22</pref-width>
+			<pref-height>22</pref-height>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.step("hdg", -6)</script>
+			</binding>
+		</button>
+
+		<slider>
+			<property>/data/offsets/heading-deg</property>
+			<legend>hdg</legend>
+			<pref-width>250</pref-width>
+			<live>1</live>
+			<min>-6</min>
+			<max>6</max>
+
+			<color>
+				<red>1.0</red>
+				<green>1.0</green>
+				<blue>0.6</blue>
+				<alpha>1.0</alpha>
+			</color>
+
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</slider>
+
+		<button>
+			<legend>&gt;</legend>
+			<pref-width>22</pref-width>
+			<pref-height>22</pref-height>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.step("hdg", 6)</script>
+			</binding>
+		</button>
+
+		<button>
+			<legend>&gt;&gt;</legend>
+			<pref-width>22</pref-width>
+			<pref-height>22</pref-height>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.step("hdg", 36)</script>
+			</binding>
+		</button>
+	</group>
+
+	<group>
+		<layout>hbox</layout>
+		<default-padding>0</default-padding>
+
+		<button>
+			<legend>&lt;&lt;</legend>
+			<pref-width>22</pref-width>
+			<pref-height>22</pref-height>
+			<live>1</live>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.step("pitch", -36)</script>
+			</binding>
+		</button>
+
+		<button>
+			<legend>&lt;</legend>
+			<pref-width>22</pref-width>
+			<pref-height>22</pref-height>
+			<live>1</live>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.step("pitch", -6)</script>
+			</binding>
+		</button>
+
+		<slider>
+			<property>/data/offsets/pitch-deg</property>
+			<legend>pitch</legend>
+			<pref-width>250</pref-width>
+			<live>1</live>
+			<min>-6</min>
+			<max>6</max>
+
+			<color>
+				<red>1.0</red>
+				<green>0.6</green>
+				<blue>1.0</blue>
+				<alpha>1.0</alpha>
+			</color>
+
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</slider>
+
+		<button>
+			<legend>&gt;</legend>
+			<pref-width>22</pref-width>
+			<pref-height>22</pref-height>
+			<live>1</live>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.step("pitch", 6)</script>
+			</binding>
+		</button>
+
+		<button>
+			<legend>&gt;&gt;</legend>
+			<pref-width>22</pref-width>
+			<pref-height>22</pref-height>
+			<live>1</live>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.step("pitch", 36)</script>
+			</binding>
+		</button>
+	</group>
+
+	<group>
+		<layout>hbox</layout>
+		<default-padding>0</default-padding>
+
+		<button>
+			<legend>&lt;&lt;</legend>
+			<pref-width>22</pref-width>
+			<pref-height>22</pref-height>
+			<live>1</live>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.step("roll", -36)</script>
+			</binding>
+		</button>
+
+		<button>
+			<legend>&lt;</legend>
+			<pref-width>22</pref-width>
+			<pref-height>22</pref-height>
+			<live>1</live>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.step("roll", -6)</script>
+			</binding>
+		</button>
+
+		<slider>
+			<property>/data/offsets/roll-deg</property>
+			<legend>roll</legend>
+			<pref-width>250</pref-width>
+			<live>1</live>
+			<min>-6</min>
+			<max>6</max>
+
+			<color>
+				<red>0.6</red>
+				<green>1.0</green>
+				<blue>1.0</blue>
+				<alpha>1.0</alpha>
+			</color>
+
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</slider>
+
+		<button>
+			<legend>&gt;</legend>
+			<pref-width>22</pref-width>
+			<pref-height>22</pref-height>
+			<live>1</live>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.step("roll", 6)</script>
+			</binding>
+		</button>
+
+		<button>
+			<legend>&gt;&gt;</legend>
+			<pref-width>22</pref-width>
+			<pref-height>22</pref-height>
+			<live>1</live>
+
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.step("roll", 36)</script>
+			</binding>
+		</button>
+	</group>
+
+	<group>
+		<layout>hbox</layout>
+
+		<text>
+			<halign>left</halign>
+			<label>Heading    </label>
+		</text>
+
+		<text>
+			<halign>center</halign>
+			<label>Sliders</label>
+		</text>
+
+		<text>
+			<halign>right</halign>
+			<label>Orientation</label>
+		</text>
+	</group>
+
+	<group>
+		<layout>hbox</layout>
+		<default-padding>2</default-padding>
+
+		<button>
+			<halign>right</halign>
+			<legend>Reset</legend>
+			<pref-height>22</pref-height>
+			<pref-width>60</pref-width>
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.orient()</script>
+			</binding>
+		</button>
+
+		<button>
+			<legend>Sticky</legend>
+			<one-shot>0</one-shot>
+			<pref-height>22</pref-height>
+			<pref-width>55</pref-width>
+			<live>1</live>
+			<property>/data/sticky-heading</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</button>
+
+		<empty><stretch>1</stretch></empty>
+
+		<button>
+			<halign>center</halign>
+			<legend>Center</legend>
+			<pref-height>22</pref-height>
+			<pref-width>60</pref-width>
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.center_sliders()</script>
+			</binding>
+		</button>
+
+		<empty><stretch>1</stretch></empty>
+
+		<button>
+			<legend>Sticky</legend>
+			<one-shot>0</one-shot>
+			<pref-height>22</pref-height>
+			<pref-width>55</pref-width>
+			<live>1</live>
+			<property>/data/sticky-orientation</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</button>
+
+		<button>
+			<halign>left</halign>
+			<legend>Reset</legend>
+			<pref-height>22</pref-height>
+			<pref-width>60</pref-width>
+			<binding>
+				<command>nasal</command>
+				<script>ufo.adjust.upright()</script>
+			</binding>
+		</button>
+	</group>
+</PropertyList>

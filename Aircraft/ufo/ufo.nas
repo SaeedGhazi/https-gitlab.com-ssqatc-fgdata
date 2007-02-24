@@ -26,18 +26,29 @@ controls.flapsDown = func(x) {
 
 # library stuff -----------------------------------------------------------------------------------
 
+var EPSILON = 0.0000001;
 var ERAD = 6378138.12;		# Earth radius (m)
 var D2R = math.pi / 180;
 var R2D = 180 / math.pi;
 
 
-ft2m = func { arg[0] * 0.3048 }
-m2ft = func { arg[0] / 0.3048 }
-floor = func(v) { v < 0.0 ? -int(-v) - 1 : int(v) }
-ceil = func(v) { -floor(-v) }
-pow = func(v, w) { math.exp(math.ln(v) * w) }
-pow2 = func(e) { e ? 2 * pow2(e - 1) : 1 }
-printf = func(_...) { print(call(sprintf, _)) }
+var printf = func(_...) { print(call(sprintf, _)) }
+var ft2m = func(v) { v * 0.3048 }
+var m2ft = func(v) { v / 0.3048 }
+var floor = func(v) { v < 0.0 ? -int(-v) - 1 : int(v) }
+var ceil = func(v) { -floor(-v) }
+var pow = func(v, w) { v < 0 ? nil : v ? math.exp(math.ln(v) * w) : 0 }
+var pow2 = func(e) { e ? 2 * pow2(e - 1) : 1 }
+var sin = math.sin;
+var cos = math.cos;
+var atan2 = math.atan2;
+var sqrt = math.sqrt;
+var asin = func(v) { math.atan2(v, math.sqrt(1 - v * v)) }
+var acos = func(v) { math.atan2(math.sqrt(1 - v * v), v) }
+var mod = func(v, w) {
+	var x = v - w * int(v / w);
+	return x < 0 ? x + abs(w) : x;
+}
 
 
 
@@ -60,8 +71,8 @@ xyz2lonlat = func(xyz) {
 	var x = xyz[0];
 	var y = xyz[1];
 	var z = xyz[2];
-	var lat = math.atan2(z, math.sqrt(x * x + y * y)) * R2D;
-	var lon = math.atan2(y, x) * R2D;
+	var lat = atan2(z, sqrt(x * x + y * y)) * R2D;
+	var lon = atan2(y, x) * R2D;
 	return [lon, lat];
 }
 
@@ -391,7 +402,7 @@ Model = {
 		var m = { parents: [Model] };
 		var models = props.globals.getNode("/models", 1);
 
-		for (var i = 0; 42; i += 1) {
+		for (var i = 0; 1; i += 1) {
 			if (models.getChild("model", i, 0) == nil) {
 				m.node = models.getChild("model", i, 1);
 				break;
@@ -575,7 +586,7 @@ ModelMgr = {
 		return m;
 	},
 	click : func {
-		showStatusDialog(1);
+		status_dialog.open();
 		if (KbdCtrl.getBoolValue()) {
 			me.select();
 		} elsif (KbdShift.getBoolValue()) {
@@ -723,28 +734,6 @@ controls.incElevator = func(step, apstep) {
 
 
 
-var lastXYZ = lonlat2xyz([getprop("/position/longitude-deg"), getprop("/position/latitude-deg")]);
-var lastElev = 0;
-
-printDistance = func {
-	# print distance to last cursor coordinates (horizontal distance
-	# doesn't consider elevation and is rather imprecise)
-	var lon = getprop("/sim/input/click/longitude-deg");
-	var lat = getprop("/sim/input/click/latitude-deg");
-	var elev = getprop("/sim/input/click/elevation-ft");
-	var newXYZ = lonlat2xyz([lon, lat]);
-	var hdist = math.sqrt(coord_dist_sq(lastXYZ, newXYZ) * ERAD);
-	var vdist = ft2m(elev - lastElev);
-	var s = hdist < 4 ? sprintf("%.1f m HOR, %.1f m VERT", hdist * 1000, vdist)
-			: sprintf("%.1f km HOR, %.1f m VERT", hdist, vdist);
-	screen.log.write(s);
-
-	lastXYZ = newXYZ;
-	lastElev = elev;
-}
-
-
-
 scanDirs = func(csv) {
 	var list = ["Aircraft/ufo/Models/sign.ac"];
 	foreach(var dir; split(",", csv)) {
@@ -862,27 +851,22 @@ removeSelectedModel = func { modelmgr.remove_selected(); modelmgr.select(); }
 
 # init --------------------------------------------------------------------------------------------
 
+var KbdShift = props.globals.getNode("/devices/status/keyboard/shift");
+var KbdCtrl = props.globals.getNode("/devices/status/keyboard/ctrl");
+var KbdAlt = props.globals.getNode("/devices/status/keyboard/alt");
+
 var modellist = nil;
 var adjust = nil;
 var modelmgr = nil;
 
-var KbdShift = nil;
-var KbdCtrl = nil;
-var KbdAlt = nil;
-
 
 settimer(func {
-	KbdShift = props.globals.getNode("/devices/status/keyboard/shift");
-	KbdCtrl = props.globals.getNode("/devices/status/keyboard/ctrl");
-	KbdAlt = props.globals.getNode("/devices/status/keyboard/alt");
-
 	modellist = scanDirs(getprop("/source"));
 	adjust = Adjust.new("/data");
 	modelmgr = ModelMgr.new(getprop("/cursor"));
 	setlistener("/sim/signals/click", func { modelmgr.click() });
-	#setlistener("/sim/signals/click", printDistance);
 	if (modelmgr.modelpath != "Aircraft/ufo/Models/cursor.ac") {
-		showStatusDialog(1);
+		status_dialog.open();
 	}
 }, 1);
 
@@ -892,275 +876,18 @@ settimer(func {
 
 # dialogs -----------------------------------------------------------------------------------------
 
+var status_dialog = gui.Dialog.new("/sim/gui/dialogs/ufo/status/dialog", "Aircraft/ufo/Dialogs/status.xml");
+var select_dialog = gui.Dialog.new("/sim/gui/dialogs/ufo/select/dialog", "Aircraft/ufo/Dialogs/select.xml");
+var adjust_dialog = gui.Dialog.new("/sim/gui/dialogs/ufo/adjust/dialog", "Aircraft/ufo/Dialogs/adjust.xml");
 
-var dialog = {};
-
-showModelSelectDialog = func {
-	name = "ufo-model-select-dialog";
-
-	if (contains(dialog, name)) {
-		closeModelSelectDialog();
-		return;
-	}
-
-	var title = 'Select Model';
-
-	dialog[name] = gui.Widget.new();
-	dialog[name].set("layout", "vbox");
-	dialog[name].set("name", name);
-	dialog[name].set("x", -20);
-	dialog[name].set("pref-width", 600);
-
-	# "window" titlebar
-	titlebar = dialog[name].addChild("group");
-	titlebar.set("layout", "hbox");
-	titlebar.addChild("empty").set("stretch", 1);
-	titlebar.addChild("text").set("label", title);
-	titlebar.addChild("empty").set("stretch", 1);
-
-	dialog[name].addChild("hrule").addChild("dummy");
-
-	w = titlebar.addChild("button");
-	w.set("pref-width", 16);
-	w.set("pref-height", 16);
-	w.set("legend", "");
-	w.set("default", 1);
-	w.set("keynum", 27);
-	w.set("border", 1);
-	w.setBinding("nasal", "ufo.closeModelSelectDialog()");
-
-	w = dialog[name].addChild("list");
-	w.set("halign", "fill");
-	w.set("pref-height", 300);
-	w.set("property", "/cursor");
-	forindex (var i; modellist) {
-		w.prop().getChild("value", i, 1).setValue(modellist[i]);
-	}
-	w.setBinding("dialog-apply");
-	w.setBinding("nasal", "ufo.modelmgr.setmodelpath(getprop('/cursor'))");
-
-	fgcommand("dialog-new", dialog[name].prop());
-	gui.showDialog(name);
-}
-
-
-closeModelSelectDialog = func {
-	var name = "ufo-model-select-dialog";
-	var dlg = props.Node.new({"dialog-name": name});
-	fgcommand("dialog-apply", dlg);
-	fgcommand("dialog-close", dlg);
-	delete(dialog, name);
-}
-
-
-showModelAdjustDialog = func {
-	name = "ufo-cursor-dialog";
-
-	if (contains(dialog, name)) {
-		fgcommand("dialog-close", props.Node.new({ "dialog-name" : name }));
-		delete(dialog, name);
-		return;
-	}
-
-	adjust.center_sliders();
-
-	dialog[name] = gui.Widget.new();
-	dialog[name].set("layout", "vbox");
-	dialog[name].set("name", name);
-	dialog[name].set("x", -20);
-	dialog[name].set("y", -20);
-
-	# "window" titlebar
-	titlebar = dialog[name].addChild("group");
-	titlebar.set("layout", "hbox");
-	titlebar.addChild("empty").set("stretch", 1);
-	titlebar.addChild("text").set("label", "Adjust Model");
-	titlebar.addChild("empty").set("stretch", 1);
-
-	dialog[name].addChild("hrule").addChild("dummy");
-
-	w = titlebar.addChild("button");
-	w.set("pref-width", 16);
-	w.set("pref-height", 16);
-	w.set("legend", "");
-	w.set("default", 1);
-	w.set("keynum", 27);
-	w.set("border", 1);
-	w.setBinding("nasal", "delete(ufo.dialog, \"" ~ name ~ "\")");
-	w.setBinding("dialog-close");
-
-	slider = func(legend, col, coarse, fine) {
-		group = dialog[name].addChild("group");
-		group.set("layout", "hbox");
-		group.set("default-padding", 0);
-
-		button = func(leg, step) {
-			b = group.addChild("button");
-			b.set("legend", leg);
-			b.set("pref-width", 22);
-			b.set("pref-height", 22);
-			b.set("live", 1);
-			b.setBinding("nasal", 'ufo.adjust.step("'~legend~'", '~step~')');
-			return b;
-		}
-
-		cl = button("<<", -coarse);
-		fl = button("<", -fine);
-
-		s = group.addChild("slider");
-		s.set("property", adjust.offsetNode(legend).getPath());
-		s.set("legend", legend);
-		s.set("pref-width", 250);
-		s.set("live", 1);
-		s.set("min", -1 * fine);
-		s.set("max", 1 * fine);
-		s.setColor(col[0], col[1], col[2]);
-		s.setBinding("dialog-apply");
-
-		fr = button(">", fine);
-		cr = button(">>", coarse);
-	}
-
-	slider("lon", [1.0, 0.6, 0.6], 0.0004, 0.00004);
-	slider("lat", [0.6, 1.0, 0.6], 0.0002, 0.00002);
-	slider("elev", [0.6, 0.6, 1.0], 10, 2);
-
-	slider("hdg", [1.0, 1.0, 0.6], 36, 6);
-	slider("pitch", [1.0, 0.6, 1.0], 36, 6);
-	slider("roll", [0.6, 1.0, 1.0], 36, 6);
-
-
-	g = dialog[name].addChild("group");
-	g.set("layout", "hbox");
-
-	w = g.addChild("text");
-	w.set("halign", "left");
-	w.set("label", "Heading    ");
-
-	w = g.addChild("text");
-	w.set("halign", "center");
-	w.set("label", "Sliders");
-
-	w = g.addChild("text");
-	w.set("halign", "right");
-	w.set("label", "Orientation");
-
-
-	g = dialog[name].addChild("group");
-	g.set("layout", "hbox");
-	g.set("default-padding", 2);
-	var wide = 60;
-	var narrow = 55;
-
-	w = g.addChild("button");
-	w.set("halign", "right");
-	w.set("legend", "Reset");
-	w.set("pref-height", 22);
-	w.set("pref-width", wide);
-	w.setBinding("nasal", "ufo.adjust.orient()");
-
-	w = g.addChild("button");
-	w.set("legend", "Sticky");
-	w.set("one-shot", 0);
-	w.set("pref-height", 22);
-	w.set("pref-width", narrow);
-	w.set("live", 1);
-	w.set("property", adjust.stk_hdgN.getPath());
-	w.setBinding("dialog-apply");
-
-	g.addChild("empty").set("stretch", 1);
-
-	w = g.addChild("button");
-	w.set("halign", "center");
-	w.set("legend", "Center");
-	w.set("pref-height", 22);
-	w.set("pref-width", wide);
-	w.setBinding("nasal", "ufo.adjust.center_sliders()");
-
-	g.addChild("empty").set("stretch", 1);
-
-	w = g.addChild("button");
-	w.set("legend", "Sticky");
-	w.set("one-shot", 0);
-	w.set("pref-height", 22);
-	w.set("pref-width", narrow);
-	w.set("live", 1);
-	w.set("property", adjust.stk_orientN.getPath());
-	w.setBinding("dialog-apply");
-
-	w = g.addChild("button");
-	w.set("halign", "left");
-	w.set("legend", "Reset");
-	w.set("pref-height", 22);
-	w.set("pref-width", wide);
-	w.setBinding("nasal", "ufo.adjust.upright()");
-
-	fgcommand("dialog-new", dialog[name].prop());
-	gui.showDialog(name);
-}
-
-
-
-
-showStatusDialog = func(v = nil) {
-	name = "ufo-status-dialog";
-
-	var is_open = contains(dialog, name);
-	if (v == nil) {
-		return is_open;
-	} elsif (!v) {
-		if (is_open) {
-			fgcommand("dialog-close", props.Node.new({ "dialog-name" : name }));
-			delete(dialog, name);
-		}
-		return 0;
-	}
-
-	dialog[name] = gui.Widget.new();
-	dialog[name].set("layout", "vbox");
-	dialog[name].set("name", name);
-	dialog[name].set("x", 8);
-	dialog[name].set("y", 8);
-	dialog[name].set("pref-width", 300);
-	dialog[name].set("default-padding", 0);
-	dialog[name].setColor(0, 0, 0, 0);
-	dialog[name].setFont("HELVETICA_12");
-
-	# legend input field
-	w = dialog[name].addChild("input");
-	w.set("halign", "left");
-	w.set("pref-width", 300);
-	w.set("live", 1);
-	w.set("property", adjust.legendN.getPath());
-	w.setColor(0, 0, 0, 0);
-	w.prop().setValues({"color-legend": {red:1, green:1, blue:1, alpha:1}});
-	w.prop().setValues({"color-background": {red:0, green:0, blue:0, alpha:0}});
-	w.prop().setValues({"color-highlight": {red:0, green:0, blue:0, alpha:0}});
-	w.setBinding("dialog-apply");
-
-	# current object
-	g = dialog[name].addChild("group");
-	g.set("layout", "vbox");
-	g.set("default-padding", 2);
-	w = g.addChild("text");
-	w.set("pref-width", 0);
-	w.set("halign", "left");
-	w.set("property", "/sim/model/ufo/status");
-	w.set("live", 1);
-	w.setColor(0.6, 1, 0.6, 1);
-
-	fgcommand("dialog-new", dialog[name].prop());
-	gui.showDialog(name);
-	return 1;
-}
-
-var stat_dlg = nil;
+var status_restore = nil;
 setlistener("/sim/signals/screenshot", func {
 	if (cmdarg().getBoolValue()) {
-		stat_dlg = showStatusDialog();
-		showStatusDialog(0);
+		status_restore = status_dialog.is_open();
+		status_dialog.close();
 	} else {
-		showStatusDialog(stat_dlg);
+		status_restore and status_dialog.open();
 	}
 });
+
 

@@ -840,6 +840,7 @@ debug_keys = {
         { name : "Shift-F3",  desc : "load panel" },
         { name : "Shift-F4",  desc : "reload global preferences" },
         { name : "Shift-F9",  desc : "toggle FDM data logging" },
+        { name : "Shift-Space", desc : "open property browser" },
     ],
 };
 

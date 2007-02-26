@@ -174,12 +174,18 @@ Dialog = {
     load : func {
         fgcommand("loadxml", props.Node.new({"filename": me.path,
                 "targetnode": me.prop.getPath()}));
-        var name = me.prop.getNode("name");
-        if (name == nil) {
+        var n = me.prop.getNode("name");
+        if (n == nil) {
             die("Dialog class: XML dialog must have <name>");
         }
-        me.prop.getNode("dialog-name", 1).setValue(name.getValue());
+        me.name = n.getValue();
+        me.prop.getNode("dialog-name", 1).setValue(me.name);
         fgcommand("dialog-new", me.prop);
+    },
+    # allows access to dialog-embedded Nasal variables/functions
+    namespace : func {
+        var ns = "__dlg:" ~ me.name;
+        me.state and contains(globals, ns) ? globals[ns] : nil;
     },
     open : func {
         fgcommand("dialog-show", me.prop);

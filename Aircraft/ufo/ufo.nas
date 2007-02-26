@@ -746,7 +746,7 @@ var ModelMgr = {
 			}
 		} elsif (name == "heading") {
 			foreach (var m; me.models) {
-				m.selected and m.hdg.set(m.hdg.get() + value * dist);
+				m.selected and m.hdg.set(m.hdg.get() + value * 4);
 			}
 		} elsif (name == "pitch") {
 			foreach (var m; me.models) {

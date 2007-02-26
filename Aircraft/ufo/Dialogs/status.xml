@@ -21,6 +21,7 @@
 	</font>
 
 	<input>
+		<name>input</name>
 		<halign>left</halign>
 		<pref-width>300</pref-width>
 		<live>1</live>
@@ -56,6 +57,11 @@
 
 		<binding>
 			<command>dialog-apply</command>
+			<object-name>input</object-name>
+		</binding>
+		<binding>
+			<command>nasal</command>
+			<script>ufo.modelmgr.update_legend()</script>
 		</binding>
 	</input>
 

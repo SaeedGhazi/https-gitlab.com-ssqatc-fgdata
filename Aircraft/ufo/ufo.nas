@@ -3,7 +3,7 @@
 
 
 var maxspeed = props.globals.getNode("engines/engine/speed-max-mps");
-var speed = [10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000];
+var speed = [10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000];
 var current = 7;
 
 
@@ -26,15 +26,15 @@ controls.flapsDown = func(x) {
 
 # library stuff -----------------------------------------------------------------------------------
 
-var EPSILON = 0.0000001;
+var EPSILON = 0.0000000000001;
 var ERAD = 6378138.12;		# Earth radius (m)
 var D2R = math.pi / 180;
 var R2D = 180 / math.pi;
+var FT2M = 0.3048;
+var M2FT = 3.28083989501312335958;
 
 
 var printf = func(_...) { print(call(sprintf, _)) }
-var ft2m = func(v) { v * 0.3048 }
-var m2ft = func(v) { v / 0.3048 }
 var floor = func(v) { v < 0.0 ? -int(-v) - 1 : int(v) }
 var ceil = func(v) { -floor(-v) }
 var pow = func(v, w) { v < 0 ? nil : v ? math.exp(math.ln(v) * w) : 0 }
@@ -51,46 +51,154 @@ var mod = func(v, w) {
 }
 
 
-
-# convert [lon, lat] to [x, y, z]
+# class that maintains one set of geographical coordinates and provides
+# simple conversion methods that assume a spherical Earth
 #
-lonlat2xyz = func(lonlat) {
-	var lonr = lonlat[0] * D2R;
-	var latr = lonlat[1] * D2R;
-	var cosphi = math.cos(latr);
-	var x = cosphi * math.cos(lonr);
-	var y = cosphi * math.sin(lonr);
-	var z = math.sin(latr);
-	return [x, y, z];
-}
+var Coord = {
+	new : func(copy = nil) {
+		var m = { parents: [Coord] };
+		m._pdirty = 1;  # polar
+		m._cdirty = 1;  # cartesian
+		m._lon = nil;   # in radian
+		m._lat = nil;
+		m._alt = nil;   # ASL
+		m._x = nil;     # in m
+		m._y = nil;
+		m._z = nil;
+		if (copy != nil) {
+			m.set(copy);
+		}
+		return m;
+	},
+	_cupdate : func {
+		me._cdirty or return;
+		var rad = ERAD + me._alt;
+		var cosphi = cos(me._lat) * rad;
+		me._x = cosphi * cos(me._lon);
+		me._y = cosphi * sin(me._lon);
+		me._z = sin(me._lat) * rad;
+		me._cdirty = 0;
+	},
+	_pupdate : func {
+		me._pdirty or return;
+		me._lat = atan2(me._z, sqrt(me._x * me._x + me._y * me._y));
+		me._lon = atan2(me._y, me._x);
+		me._alt = sqrt(me._x * me._x + me._y * me._y + me._z * me._z) - ERAD;
+		me._pdirty = 0;
+	},
+
+	x : func { me._cupdate(); me._x },
+	y : func { me._cupdate(); me._y },
+	z : func { me._cupdate(); me._z },
+	xyz : func { me._cupdate(); [me._x, me._y, me._z] },
+
+	lon : func { me._pupdate(); me._lon * R2D },  # return in degree
+	lat : func { me._pupdate(); me._lat * R2D },
+	alt : func { me._pupdate(); me._alt },
+	lonlat : func { me._pupdate(); [me._lon, me._lat, me._alt] },
+
+	set_x : func(x) { me._pupdate(); me._pdirty = 1; me._x = x; me },
+	set_y : func(y) { me._pupdate(); me._pdirty = 1; me._y = y; me },
+	set_z : func(z) { me._pupdate(); me._pdirty = 1; me._z = z; me },
+
+	set_lon : func(lon) { me._cupdate(); me._cdirty = 1; me._lon = lon * D2R; me },
+	set_lat : func(lat) { me._cupdate(); me._cdirty = 1; me._lat = lat * D2R; me },
+	set_alt : func(alt) { me._cupdate(); me._cdirty = 1; me._alt = alt; me },
+
+	set : func(c) {
+		arg[0]._pupdate();
+		me._lon = arg[0]._lon;
+		me._lat = arg[0]._lat;
+		me._alt = arg[0]._alt;
+		me._cdirty = 1;
+		me._pdirty = 0;
+		me;
+	},
+	set_lonlat : func(lon, lat, alt = 0) {
+		me._lon = lon * D2R;
+		me._lat = lat * D2R;
+		me._alt = alt;
+		me._cdirty = 1;
+		me._pdirty = 0;
+		me;
+	},
+	set_xyz : func(x, y, z) {
+		me._x = x;
+		me._y = y;
+		me._z = z;
+		me._pdirty = 1;
+		me._cdirty = 0;
+		me;
+	},
+	apply_course_distance : func(course, dist) {
+		me._pupdate();
+		course *= D2R;
+		dist /= ERAD;
+		me._lat = asin(sin(me._lat) * cos(dist) + cos(me._lat) * sin(dist) * cos(course));
+
+		if (cos(me._lat) > EPSILON) {
+			me._lon = math.pi - mod(math.pi - me._lon - asin(sin(course) * sin(dist)
+					/ cos(me._lat)), 2 * math.pi);
+		}
+		me._cdirty = 1;
+		me;
+	},
+	course_to : func(dest) {
+		me._pupdate();
+		dest._pupdate();
+
+		if (me._lon == dest._lon and me._lat == dest._lat) {
+			return 0;
+		}
+		var dlon = dest._lon - me._lon;
+		return mod(atan2(sin(dlon) * cos(dest._lat), cos(me._lat) * sin(dest._lat)
+				- sin(me._lat) * cos(dest._lat) * cos(dlon)), 2 * math.pi) * R2D;
+	},
+	# arc distance on an earth sphere; doesn't consider altitude
+	distance_to : func(dest) {
+		me._pupdate();
+		dest._pupdate();
+
+		if (me._lon == dest._lon and me._lat == dest._lat) {
+			return 0;
+		}
+		var o = sin((me._lon - dest._lon) * 0.5);
+		var a = sin((me._lat - dest._lat) * 0.5);
+		return 2.0 * ERAD * asin(sqrt(a * a + cos(me._lat) * cos(dest._lat) * o * o));
+	},
+	direct_distance_to : func(dest) {
+		me._cupdate();
+		dest._cupdate();
+		var dx = dest._x - me._x;
+		var dy = dest._y - me._y;
+		var dz = dest._z - me._z;
+		return sqrt(dx * dx + dy * dy + dz * dz);
+	},
+	dump : func {
+		if (me._cdirty and me._pdirty) {
+			print("Coord.print(): coord undefined");
+		}
+		me._cupdate();
+		me._pupdate();
+		printf("x=%f  y=%f  z=%f    lon=%f  lat=%f  alt=%f",
+				me.x(), me.y(), me.z(), me.lon(), me.lat(), me.alt());
+	},
+};
 
 
-# convert [x, y, z] to [lon, lat]
-#
-xyz2lonlat = func(xyz) {
-	var x = xyz[0];
-	var y = xyz[1];
-	var z = xyz[2];
-	var lat = atan2(z, sqrt(x * x + y * y)) * R2D;
-	var lon = atan2(y, x) * R2D;
-	return [lon, lat];
-}
 
-
-# return squared unit distance between two [x, y, z]
-# (to get meter take sqrt and multiply with Earth radius ERAD)
-#
-coord_dist_sq = func(xyz0, xyz1) {
-	var x = xyz0[0] - xyz1[0];
-	var y = xyz0[1] - xyz1[1];
-	var z = xyz0[2] - xyz1[2];
-	return x * x + y * y + z * z;
+var init_prop = func(prop, value) {
+	if (prop.getValue() != nil) {
+		value = prop.getValue();
+	}
+	prop.setDoubleValue(value);
+	return value;
 }
 
 
 # sort vector of strings (bubblesort)
 #
-sort = func(l) {
+var sort = func(l) {
 	while (1) {
 		var n = 0;
 		for (var i = 0; i < size(l) - 1; i += 1) {
@@ -110,7 +218,7 @@ sort = func(l) {
 
 # binary search of string in sorted vector; returns index or -1 if not found
 #
-search = func(list, which) {
+var search = func(list, which) {
 	var left = 0;
 	var right = size(list);
 	var middle = nil;
@@ -133,7 +241,7 @@ search = func(list, which) {
 # scan all objects in subdir of $FG_ROOT. (Prefer *.xml files to *.ac files
 # if both exist)
 #
-scan_models = func(base) {
+var scan_models = func(base) {
 	var result = [];
 	var list = directory(getprop("/sim/fg-root") ~ "/" ~ base);
 	if (list == nil) {
@@ -167,18 +275,18 @@ scan_models = func(base) {
 
 # normalize degree to 0 <= angle < 360
 #
-normdeg = func(angle) {
+var normdeg = func(angle) {
 	while (angle < 0) {
 		angle += 360;
 	}
 	while (angle >= 360) {
 		angle -= 360;
 	}
-	angle;
+	return angle;
 }
 
 
-bucket_span = func(lat) {
+var bucket_span = func(lat) {
 	if (lat >= 89.0 ) {
 		360.0;
 	} elsif (lat >= 88.0 ) {
@@ -213,7 +321,7 @@ bucket_span = func(lat) {
 }
 
 
-tile_index = func(lon, lat) {
+var tile_index = func(lon, lat) {
 	var lon_floor = floor(lon);
 	var lat_floor = floor(lat);
 	var span = bucket_span(lat);
@@ -239,12 +347,12 @@ tile_index = func(lon, lat) {
 }
 
 
-format = func(lon, lat) {
+var format = func(lon, lat) {
 	sprintf("%s%03d%s%02d", lon < 0 ? "w" : "e", abs(lon), lat < 0 ? "s" : "n", abs(lat));
 }
 
 
-tile_path = func(lon, lat) {
+var tile_path = func(lon, lat) {
 	var p = format(floor(lon / 10.0) * 10, floor(lat / 10.0) * 10);
 	p ~= "/" ~ format(floor(lon), floor(lat));
 	p ~= "/" ~ tile_index(lon, lat) ~ ".stg";
@@ -256,181 +364,151 @@ tile_path = func(lon, lat) {
 
 
 
-# cursor ------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------
 
 
-
-## manages one adjustable value for the Adjust class
-#  (applies slider offsets etc.)
+# loop that generates the model flashing pulse
 #
-Value = {
-	new : func(baseN, name, init) {
-		var m = { parents: [Value] };
-		m.lastOffs = 0;
-		m.init = init;
+var clock = 0;
+var clock_loop = func {
+	clock = !clock;
+	settimer(clock_loop, 0.3);
+}
+clock_loop();
 
-		# offset node; fed by the dialog slider
-		m.inOffsN = baseN.getNode("offsets/" ~ name, 1);
-		m.inOffsN.setValue(m.lastOffs);
 
-		# live number property
-		m.outN = baseN.getNode("adjust/" ~ name, 1);
-		m.outN.setDoubleValue(init);
-
-		m.listener = setlistener(m.inOffsN, func { m.update() });
+# class that maintains one adjustable model property (see src/Model/modelmgr.cxx)
+#
+var ModelValue = {
+	new : func(base, name, value) {
+		var m = { parents: [ModelValue] };
+		m.propN = base.getNode(name, 1);
+		m.propN.setDoubleValue(value);
+		base.getNode(name ~ "-prop", 1).setValue(m.propN.getPath());
 		return m;
-	},
-	del : func {
-		removelistener(me.listener);
-	},
-	reset : func {
-		me.center();
-		me.outN.setValue(me.init);
-	},
-	center : func {
-		me.update();
-		me.inOffsN.setValue(me.lastOffs = 0);
-	},
-	update : func {
-		var offs = me.inOffsN.getValue();
-		me.outN.setValue(me.outN.getValue() + offs - me.lastOffs);
-		me.lastOffs = offs;
 	},
 	set : func(v) {
-		me.center();
-		me.outN.setValue(v);
+		me.propN.setDoubleValue(v);
 	},
 	get : func {
-		me.outN.getValue();
-	},
-	add : func(v) {
-		me.center();
-		me.outN.setValue(me.outN.getValue() + v);
+		me.propN.getValue();
 	},
 };
 
 
-## manages a set of adjustable values and is the entry point for data into
-#  the dynamic model
+# class that maintains one scenery object (see src/Model/modelmgr.cxx)
 #
-Adjust = {
-	new : func(prop) {
-		var m = { parents: [Adjust] };
-		m.node = props.globals.getNode(prop, 1);
-		m.val = {
-			lon:   Value.new(m.node, "longitude-deg", 0),
-			lat:   Value.new(m.node, "latitude-deg", 0),
-			elev:  Value.new(m.node, "elevation-ft", -10000),
-
-			hdg:   Value.new(m.node, "heading-deg", 0),
-			pitch: Value.new(m.node, "pitch-deg", 0),
-			roll:  Value.new(m.node, "roll-deg", 0),
-		};
-		m.stk_hdgN = m.node.getNode("sticky-heading", 1);
-		m.stk_orientN = m.node.getNode("sticky-orientation", 1);
-		m.stk_hdgN.setBoolValue(0);
-		m.stk_orientN.setBoolValue(0);
-		m.legendN = m.node.getNode("legend", 1);
-		return m;
-	},
-	del : func {
-		foreach (var v; keys(me.val)) {
-			me.val[v].del();
-		}
-	},
-	offsetNode : func(which) {
-		me.val[which].inOffsN;
-	},
-	outNode : func(which) {
-		me.val[which].outN;
-	},
-	get : func(which) {
-		me.val[which].get();
-	},
-	set : func(which, value) {
-		me.val[which].set(value);
-	},
-	setall : func(legend, lon, lat, elev, hdg = nil, pitch = nil, roll = nil) {
-		me.legendN.setValue(legend);
-		me.val["lon"].set(lon);
-		me.val["lat"].set(lat);
-		me.val["elev"].set(elev);
-		if (hdg != nil) {
-			me.val["hdg"].set(hdg);
-		} elsif (!me.stk_hdgN.getBoolValue()) {
-			me.val["hdg"].reset();
-		}
-		if (pitch != nil) {
-			me.val["pitch"].set(pitch);
-		} elsif (!me.stk_orientN.getBoolValue()) {
-			me.val["pitch"].reset();
-		}
-		if (roll != nil) {
-			me.val["roll"].set(roll);
-		} elsif (!me.stk_orientN.getBoolValue()) {
-			me.val["roll"].reset();
-		}
-	},
-	reset : func {
-		foreach (var v; keys(me.val)) {
-			me.val[v].reset();
-		}
-	},
-	step : func(which, step) {
-		me.val[which].add(step);
-	},
-	upright : func {
-		me.val["pitch"].set(0);
-		me.val["roll"].set(0);
-	},
-	orient : func {
-		me.val["hdg"].set(0);
-	},
-	center_sliders : func {
-		foreach (var v; keys(me.val)) {
-			me.val[v].center();
-		}
-	},
-};
-
-
-## base class for the dynamic and static models
-#
-Model = {
-	# searches first free slot and sets path
-	new : func(path) {
+var Model = {
+	new : func(path, pos, data = nil) {
 		var m = { parents: [Model] };
-		var models = props.globals.getNode("/models", 1);
+		m.pos = pos;
+		m.path = path;
+		m.selected = 1;
+		m.visible = 1;
+		m.flash_until = 0;
+		m.loopid = 0;
+		m.elapsedN = props.globals.getNode("/sim/time/elapsed-sec", 1);
 
+		var models = props.globals.getNode("/models", 1);
 		for (var i = 0; 1; i += 1) {
 			if (models.getChild("model", i, 0) == nil) {
 				m.node = models.getChild("model", i, 1);
 				break;
 			}
 		}
-		m.path = path;
-		m.node.getNode("path", 1).setValue(m.path);
-		m.legend = nil;
+
+		m.node.getNode("legend", 1).setValue("");
+		if (isa(data, props.Node)) {
+			props.copy(data, m.node);		# import node
+		}
+		var hdg = init_prop(m.node.getNode("heading-deg", 1), 0);
+		var pitch = init_prop(m.node.getNode("pitch-deg", 1), 0);
+		var roll = init_prop(m.node.getNode("roll-deg", 1), 0);
+
+		m.node.getNode("path", 1).setValue(path);
+		m.lon = ModelValue.new(m.node, "longitude-deg", pos.lon());
+		m.lat = ModelValue.new(m.node, "latitude-deg", pos.lat());
+		m.alt = ModelValue.new(m.node, "elevation-ft", pos.alt() * M2FT);
+		m.hdg = ModelValue.new(m.node, "heading-deg", hdg);
+		m.pitch = ModelValue.new(m.node, "pitch-deg", pitch);
+		m.roll = ModelValue.new(m.node, "roll-deg", roll);
+
+		m.node.getNode("load", 1).setValue(1);
+		m.node.removeChildren("load");
 		return m;
 	},
-	# signal modelmgr.cxx to load model
-	load : func {
-		me.node.getNode("load", 1).setValue(1);
-		me.node.removeChildren("load");
+	remove : func {
+		props.globals.getNode("/models", 1).removeChild("model", me.node.getIndex());
 	},
-	add_derived_props : func(node) {
+	clone : func(path) {
+		Model.new(path, me.pos, me.node);
+	},
+	direct_distance_to : func(dest) {
+		me.pos.direct_distance_to(dest);
+	},
+	apply_course_distance : func(course, dist) {
+		me.pos.apply_course_distance(course, dist);
+		me.lon.set(me.pos.lon());
+		me.lat.set(me.pos.lat());
+	},
+	flash : func(v) {
+		me.loopid += 1;
+		if (v) {
+			me.flash_until = me.elapsedN.getValue() + 2;
+			me._flash_(me.loopid);
+		} else {
+			me.unhide();
+		}
+	},
+	_flash_ : func(id) {
+		id == me.loopid or return;
+		if (me.elapsedN.getValue() > me.flash_until) {
+			return me.unhide();
+		} elsif (clock) {
+			me.hide();
+		} else {
+			me.unhide();
+		}
+		settimer(func { me._flash_(id) }, 0);
+	},
+	hide : func {
+		me.visible or return;
+		me.alt.set(me.alt.get() - ERAD);
+		me.visible = 0;
+	},
+	unhide : func {
+		me.visible and return;
+		me.alt.set(me.alt.get() + ERAD);
+		me.visible = 1;
+	},
+	get_data : func {
+		var n = props.Node.new();
+		props.copy(me.node, n);
+		me.add_derived_data(n);
+		return n;
+	},
+	add_derived_data : func(node) {
+		node.removeChildren("longitude-deg-prop");
+		node.removeChildren("latitude-deg-prop");
+		node.removeChildren("elevation-ft-prop");
+		node.removeChildren("heading-deg-prop");
+		node.removeChildren("pitch-deg-prop");
+		node.removeChildren("roll-deg-prop");
+
 		var path = node.getNode("path").getValue();
 		var lon = node.getNode("longitude-deg").getValue();
 		var lat = node.getNode("latitude-deg").getValue();
 		var elev = node.getNode("elevation-ft").getValue();
 		var hdg = node.getNode("heading-deg").getValue();
+		var legend = node.getNode("legend").getValue();
 		var type = nil;
 		var spec = "";
 
 		if (path == "Aircraft/ufo/Models/sign.ac") {
 			type = "OBJECT_SIGN";
-			var legend = me.legend != "" ? me.legend :
-					"{@size=10,@material=RedSign}NO_CONTENTS_" ~ int(10000 * rand());
+			if (legend == "") {
+				legend = "{@size=10,@material=RedSign}NO_CONTENTS_" ~ int(10000 * rand());
+			}
 			foreach (var c; split('', legend)) {
 				if (c != ' ') {
 					spec ~= c;
@@ -441,240 +519,129 @@ Model = {
 			spec = path;
 		}
 
-		var elev_m = ft2m(elev);
+		var elev_m = elev * FT2M;
 		var stg_hdg = normdeg(360 - hdg);
 		var stg_path = tile_path(lon, lat);
 		var abs_path = getprop("/sim/fg-root") ~ "/" ~ path;
 		var obj_line = sprintf("%s %s %.8f %.8f %.4f %.1f", type, spec, lon, lat, elev_m, stg_hdg);
 
 		node.getNode("absolute-path", 1).setValue(abs_path);
-		node.getNode("legend", 1).setValue(me.legend);
+		node.getNode("legend", 1).setValue(legend);
 		node.getNode("stg-path", 1).setValue(stg_path);
 		node.getNode("stg-heading-deg", 1).setDoubleValue(stg_hdg);
 		node.getNode("elevation-m", 1).setDoubleValue(elev_m);
-		node.getNode("object-line", 1).setValue(obj_line)
-	}
-};
-
-
-## class for static models (see $FG_ROOT/Docs/README.scenery)
-#
-Static = {
-	new : func(path, legend, lon, lat, elev, hdg, pitch, roll) {
-		var m = Model.new(path);
-		m.parents = [Static, Model];
-
-		m.node.getNode("longitude-deg", 1).setDoubleValue(m.lon = lon);
-		m.node.getNode("latitude-deg", 1).setDoubleValue(m.lat = lat);
-		m.node.getNode("elevation-ft", 1).setDoubleValue(m.elev = elev);
-		m.node.getNode("heading-deg", 1).setDoubleValue(m.hdg = hdg);
-		m.node.getNode("pitch-deg", 1).setDoubleValue(m.pitch = pitch);
-		m.node.getNode("roll-deg", 1).setDoubleValue(m.roll = roll);
-		m.legend = legend;
-		m.load();
-		return m;
-	},
-	del : func {
-		var parent = me.node.getParent();
-		if (parent != nil) {
-			parent.removeChild(me.node.getName(), me.node.getIndex());
-		}
-	},
-	distance_from : func(xyz) {
-		return coord_dist_sq(xyz, lonlat2xyz([me.lon, me.lat]));
-	},
-	get_data : func {
-		var n = props.Node.new();
-		props.copy(me.node, n);
-		me.add_derived_props(n);
-		return n;
+		node.getNode("object-line", 1).setValue(obj_line);
+		return node;
 	},
 };
 
 
-## class for dynamic models. Only one object is dynamic at a time -- the selected object.
-#
-Dynamic = {
-	new : func(path, legend, lon, lat, elev, hdg = nil, pitch = nil, roll = nil) {
-		var m = Model.new(path);
-		m.parents = [Dynamic, Model];
-
-		adjust.setall(legend, lon, lat, elev, hdg, pitch, roll);
-		m.node.getNode("longitude-deg-prop", 1).setValue(adjust.outNode("lon").getPath());
-		m.node.getNode("latitude-deg-prop", 1).setValue(adjust.outNode("lat").getPath());
-		m.node.getNode("elevation-ft-prop", 1).setValue(adjust.outNode("elev").getPath());
-		m.node.getNode("heading-deg-prop", 1).setValue(adjust.outNode("hdg").getPath());
-		m.node.getNode("pitch-deg-prop", 1).setValue(adjust.outNode("pitch").getPath());
-		m.node.getNode("roll-deg-prop", 1).setValue(adjust.outNode("roll").getPath());
-		m.load();
-		m.flash_count = 0;
-		m.visible = 1;
-		return m;
-	},
-	del : func {
-		me.flash(0);
-		var parent = me.node.getParent();
-		if (parent != nil) {
-			parent.removeChild(me.node.getName(), me.node.getIndex());
-		}
-	},
-	make_static : func {
-		me.del();
-		return Static.new(me.path, adjust.legendN.getValue(),
-				adjust.get("lon"), adjust.get("lat"), adjust.get("elev"),
-				adjust.get("hdg"), adjust.get("pitch"), adjust.get("roll"));
-	},
-	distance_from : func(xyz) {
-		var lon = adjust.get("lon");
-		var lat = adjust.get("lat");
-		return coord_dist_sq(xyz, lonlat2xyz([lon, lat]));
-	},
-	get_data : func {
-		me.flash(0);
-		var n = props.Node.new();
-		n.getNode("path", 1).setValue(me.path);
-		props.copy(props.globals.getNode("/data/adjust"), n);
-		me.legend = adjust.legendN.getValue();
-		me.add_derived_props(n);
-		return n;
-	},
-	flash : func(v) {
-		me.flash_count = v;
-		me._flash_();
-	},
-	_flash_ : func {
-		if (!me.visible) {
-			adjust.set("elev", adjust.get("elev") + 10000);
-			me.visible = 1;
-		} elsif (me.flash_count) {
-			adjust.set("elev", adjust.get("elev") - 10000);
-			me.visible = 0;
-		}
-		if (me.flash_count) {
-			me.flash_count -= 1;
-			settimer(func { me._flash_() }, 0.3);
-		}
-	},
-};
-
-
-Static.make_dynamic = func {
-	me.del();
-	return Dynamic.new(me.path, me.legend, me.lon, me.lat, me.elev, me.hdg, me.pitch, me.roll);
-};
-
-
-## manages one dynamic and several static objects
-#
-ModelMgr = {
+var ModelMgr = {
 	new : func(path) {
 		var m = { parents: [ModelMgr] };
-
-		var click = props.globals.getNode("/sim/input/click", 1);
-		m.lonN = click.getNode("longitude-deg", 1);
-		m.latN = click.getNode("latitude-deg", 1);
-		m.elevN = click.getNode("elevation-ft", 1);
-
-		m.lonN.setValue(0);
-		m.latN.setValue(0);
-
+		m.active = nil;
+		m.models = [];
+		m.legendN = props.globals.getNode("/sim/gui/dialogs/ufo-status/input", 1);
+		m.legendN.setValue("");
+		m.mouse_coord = ufo_position();
+		m.import();
 		m.modelpath = path;
 
-		m.dynamic = nil;
-		m.static = [];
-		m.import();
+		if (path != "Aircraft/ufo/Models/cursor.ac") {
+			status_dialog.open();
+		}
 		return m;
 	},
-	click : func {
+	click : func(mouse_coord) {
+		me.mouse_coord = mouse_coord;
 		status_dialog.open();
-		if (KbdCtrl.getBoolValue()) {
+		adjust_dialog.center_sliders();
+
+		if (KbdAlt.getBoolValue()) {	# move active object here (and other selected ones along with it)
+			(me.active == nil) and return;
+			var course = me.active.pos.course_to(me.mouse_coord);
+			var distance = me.active.pos.distance_to(me.mouse_coord);
+			foreach (var m; me.models) {
+				m.pos.set_alt(me.mouse_coord.alt());
+				m.selected and m.apply_course_distance(course, distance);
+			}
+			return;
+		}
+
+		if (!KbdShift.getBoolValue()) {
+			me.deselect_all();
+		}
+
+		if (KbdCtrl.getBoolValue()) {	# select existing object
 			me.select();
-		} elsif (KbdShift.getBoolValue()) {
-			me.remove_selected();
+		} else {			# add one new object
+			me.active = Model.new(me.modelpath, mouse_coord, me.sticky_data());
+			append(me.models, me.active);
+			me.display_status(me.modelpath);
 
-			var hdg = adjust.stk_hdgN.getBoolValue();
-			var orient = adjust.stk_orientN.getBoolValue();
-			adjust.stk_hdgN.setBoolValue(1);
-			adjust.stk_orientN.setBoolValue(1);
-
-			me.add_instance();
-
-			adjust.stk_hdgN.setBoolValue(hdg);
-			adjust.stk_orientN.setBoolValue(orient);
-		} else {
-			me.add_instance();
+			if (KbdShift.getBoolValue()) {
+				foreach (var m; me.models) {
+					m.flash(m.selected);
+				}
+			}
 		}
 	},
-	add_instance : func {
-		if (me.dynamic != nil) {
-			append(me.static, me.dynamic.make_static());
+	select : func() {
+		if (!size(me.models)) {
+			me.active = nil;
+			return;
 		}
-		me.dynamic = Dynamic.new(me.modelpath, "", me.lonN.getValue(), me.latN.getValue(),
-				me.elevN.getValue());
-		me.display_status(me.modelpath);
-	},
-	select : func {
-		var click_xyz = lonlat2xyz([me.lonN.getValue(), me.latN.getValue()]);
-		var min_dist = me.dynamic != nil ? me.dynamic.distance_from(click_xyz) : 1000000;
-		var nearest = nil;
+		var min_dist = 10 * ERAD;
 
-		# find nearest static object
-		forindex (var i; me.static) {
-			var dist = me.static[i].distance_from(click_xyz);
+		forindex (var i; me.models) {
+			var dist = me.models[i].direct_distance_to(me.mouse_coord);
 			if (dist < min_dist) {
 				min_dist = dist;
-				nearest = i;
+				me.active = me.models[i];
 			}
 		}
-		if (nearest != nil) {
-			# swap dynamic with nearest static
-			if (me.dynamic != nil) {
-				var st = me.dynamic.make_static();
-				me.dynamic = me.static[nearest].make_dynamic();
-				me.static[nearest] = st;
-				# actively selected: use this model type
-				me.modelpath = me.dynamic.path;
-			} else {
-				me.dynamic = me.static[nearest].make_dynamic();
-
-				var left = subvec(me.static, 0, nearest);
-				if (nearest + 1 < size(me.static)) {
-					foreach (var v; subvec(me.static, nearest + 1)) {
-						append(left, v);
-					}
-				}
-				me.static = left;
-			}
+		me.active.selected = 1;
+		foreach (var m; me.models) {
+			m.flash(m.selected);
 		}
-		# last object removed?
-		if (me.dynamic == nil) {
-			adjust.legendN.setValue("");
-		} else {
-			me.dynamic.flash(6);
+		me.display_status(me.modelpath = me.active.path);
+	},
+	deselect_all : func {
+		foreach (var m; me.models) {
+			m.flash(m.selected = 0);
 		}
-		me.display_status(me.modelpath);
 	},
 	remove_selected : func {
-		if (me.dynamic != nil) {
-			me.dynamic.del();
-			me.dynamic = nil;
+		var models = [];
+		foreach (var m; me.models) {
+			if (m.selected) {
+				m.remove();
+			} else {
+				append(models, m);
+			}
 		}
+		me.models = models;
+		me.select();
+		me.display_status(me.modelpath);
 	},
-	setmodelpath : func(path) {
+	set_modelpath : func(path) {
 		me.modelpath = path;
 		me.display_status(path);
 	},
-	display_status : func(p) {
-		var count = (me.dynamic != nil) + size(me.static);
-		setprop("/sim/model/ufo/status", "(" ~ count ~ ")  " ~ p);
+	update_legend : func {
+		if (me.active != nil) {
+			me.active.node.getNode("legend", 1).setValue(me.legendN.getValue());
+		}
+	},
+	display_status : func(path) {
+		var legend = me.active == nil ? "" : me.active.node.getNode("legend", 1).getValue();
+		me.legendN.setValue(legend);
+		setprop("/sim/model/ufo/status", "(" ~ size(me.models) ~ ")  " ~ path);
 	},
 	get_data : func {
 		var n = props.Node.new();
-		if (me.dynamic != nil) {
-			props.copy(me.dynamic.get_data(), n.getChild("model", 0, 1));
-		}
-		forindex (var i; me.static) {
-			props.copy(me.static[i].get_data(), n.getChild("model", i + 1, 1));
+		forindex (var i; me.models) {
+			props.copy(me.models[i].get_data(), n.getChild("model", i, 1));
 		}
 		return n;
 	},
@@ -685,15 +652,55 @@ ModelMgr = {
 		} elsif (i >= size(modellist)) {
 			i = 0;
 		}
-		me.setmodelpath(modellist[i]);
-		if (me.dynamic != nil) {
-			var st = me.dynamic.make_static();
-			st.path = me.modelpath;
-			me.dynamic.del();
-			me.dynamic = st.make_dynamic();
+		me.set_modelpath(modellist[i]);
+
+		var models = [];
+		foreach (var m; me.models) {
+			if (m.selected) {
+				append(models, m.clone(modellist[i]));
+				m.remove();
+			} else {
+				append(models, m);
+			}
+		}
+		me.models = models;
+	},
+	sticky_data : func {
+		var n = props.Node.new();
+		var hdg = n.getNode("heading-deg", 1);
+		var pitch = n.getNode("pitch-deg", 1);
+		var roll = n.getNode("roll-deg", 1);
+		if (getprop("/models/adjust/sticky-heading")) {
+			hdg.setDoubleValue(me.active.node.getNode("heading-deg").getValue());
+		} else {
+			hdg.setDoubleValue(0);
+		}
+		if (getprop("/models/adjust/sticky-orientation")) {
+			pitch.setDoubleValue(me.active.node.getNode("pitch-deg").getValue());
+			roll.setDoubleValue(me.active.node.getNode("roll-deg").getValue());
+		} else {
+			pitch.setDoubleValue(0);
+			roll.setDoubleValue(0);
+		}
+		return n;
+	},
+	reset_heading : func {
+		foreach (var m; me.models) {
+			if (m.selected) {
+				m.hdg.set(0);
+			}
+		}
+	},
+	reset_orientation : func {
+		foreach (var m; me.models) {
+			if (m.selected) {
+				m.pitch.set(0);
+				m.roll.set(0);
+			}
 		}
 	},
 	import : func {
+		var active = nil;
 		var mandatory = ["path", "longitude-deg", "latitude-deg", "elevation-ft"];
 		foreach (var m; props.globals.getNode("models", 1).getChildren("model")) {
 			var ok = 1;
@@ -706,35 +713,56 @@ ModelMgr = {
 				var tmp = props.Node.new({legend:"", "heading-deg":0, "pitch-deg":0, "roll-deg":0});
 				props.copy(m, tmp);
 				m.getParent().removeChild(m.getName(), m.getIndex());
-				append(me.static, Static.new(
-						m.getNode("path").getValue(),
-						m.getNode("legend").getValue(),
-						m.getNode("longitude-deg").getValue(),
-						m.getNode("latitude-deg").getValue(),
-						m.getNode("elevation-ft").getValue(),
-						m.getNode("heading-deg").getValue(),
-						m.getNode("pitch-deg").getValue(),
-						m.getNode("roll-deg").getValue()));
+				var c = Coord.new().set_lonlat(
+						tmp.getNode("longitude-deg").getValue(),
+						tmp.getNode("latitude-deg").getValue(),
+						tmp.getNode("elevation-ft").getValue() * FT2M);
+				append(me.models, active = Model.new(tmp.getNode("path").getValue(), c, tmp));
 			}
 		}
-		me.select();
+		if (active != nil) {
+			me.active = active;
+		}
+	},
+	adjust : func(name, value, scale = 0) {
+		if (!size(me.models) or me.active == nil) {
+			return;
+		}
+		var ufo = ufo_position();
+		var dist = scale ? ufo.distance_to(me.active.pos) * 0.05 : 1;
+		if (name == "longitudinal") {
+			var dir = ufo.course_to(me.active.pos);
+			foreach (var m; me.models) {
+				m.selected and m.apply_course_distance(dir, value * dist);
+			}
+		} elsif (name == "transversal") {
+			var dir = ufo.course_to(me.active.pos) + 90;
+			foreach (var m; me.models) {
+				m.selected and m.apply_course_distance(dir, value * dist);
+			}
+		} elsif (name == "altitude") {
+			foreach (var m; me.models) {
+				m.selected and m.alt.set(m.alt.get() + value * dist);
+			}
+		} elsif (name == "heading") {
+			foreach (var m; me.models) {
+				m.selected and m.hdg.set(m.hdg.get() + value * dist);
+			}
+		} elsif (name == "pitch") {
+			foreach (var m; me.models) {
+				m.selected and m.pitch.set(m.pitch.get() + value * 6);
+			}
+		} elsif (name == "roll") {
+			foreach (var m; me.models) {
+				m.selected and m.roll.set(m.roll.get() + value * 6);
+			}
+		}
 	},
 };
 
 
 
-incElevator = controls.incElevator;
-controls.incElevator = func(step, apstep) {
-	if (KbdCtrl.getBoolValue()) {
-		modelmgr.cycle(step > 0 ? 1 : -1);
-	} else {
-		incElevator(step, apstep);
-	}
-}
-
-
-
-scanDirs = func(csv) {
+var scan_dirs = func(csv) {
 	var list = ["Aircraft/ufo/Models/sign.ac"];
 	foreach(var dir; split(",", csv)) {
 		foreach(var m; scan_models(dir)) {
@@ -746,7 +774,7 @@ scanDirs = func(csv) {
 
 
 
-printUFOData = func {
+var print_ufo_data = func {
 	print("\n\n------------------------------ UFO -------------------------------\n");
 
 	var lon = getprop("/position/longitude-deg");
@@ -754,14 +782,14 @@ printUFOData = func {
 	var alt_ft = getprop("/position/altitude-ft");
 	var elev_m = getprop("/position/ground-elev-m");
 	var heading = getprop("/orientation/heading-deg");
-	var agl_ft = alt_ft - m2ft(elev_m);
+	var agl_ft = alt_ft - elev_m * M2FT;
 
 	printf("Longitude:    %.8f deg", lon);
 	printf("Latitude:     %.8f deg", lat);
-	printf("Altitude ASL: %.4f m (%.4f ft)", ft2m(alt_ft), alt_ft);
-	printf("Altitude AGL: %.4f m (%.4f ft)", ft2m(agl_ft), agl_ft);
+	printf("Altitude ASL: %.4f m (%.4f ft)", alt_ft * FT2M, alt_ft);
+	printf("Altitude AGL: %.4f m (%.4f ft)", agl_ft * FT2M, agl_ft);
 	printf("Heading:      %.1f deg", normdeg(heading));
-	printf("Ground Elev:  %.4f m (%.4f ft)", elev_m, m2ft(elev_m));
+	printf("Ground Elev:  %.4f m (%.4f ft)", elev_m, elev_m * M2FT);
 	print();
 	print("# " ~ tile_path(lon, lat));
 	printf("OBJECT_STATIC %.8f %.8f %.4f %.1f", lon, lat, elev_m, normdeg(360 - heading));
@@ -774,13 +802,13 @@ printUFOData = func {
 }
 
 
-printModelData = func(prop) {
+var print_model_data = func(prop) {
 	print("\n\n------------------------ Selected Object -------------------------\n");
 	var elev = prop.getNode("elevation-ft").getValue();
 	printf("Path:         %s", prop.getNode("path").getValue());
 	printf("Longitude:    %.8f deg", prop.getNode("longitude-deg").getValue());
 	printf("Latitude:     %.8f deg", prop.getNode("latitude-deg").getValue());
-	printf("Altitude ASL: %.4f m (%.4f ft)", ft2m(elev), elev);
+	printf("Altitude ASL: %.4f m (%.4f ft)", elev * FT2M, elev);
 	printf("Heading:      %.1f deg", prop.getNode("heading-deg").getValue());
 	printf("Pitch:        %.1f deg", prop.getNode("pitch-deg").getValue());
 	printf("Roll:         %.1f deg", prop.getNode("roll-deg").getValue());
@@ -792,10 +820,10 @@ printModelData = func(prop) {
 
 # interface functions -----------------------------------------------------------------------------
 
-printData = func {
+var print_data = func {
 	var rule = "\n------------------------------------------------------------------\n";
 	print("\n\n");
-	printUFOData();
+	print_ufo_data();
 
 	var data = modelmgr.get_data();
 
@@ -805,7 +833,7 @@ printData = func {
 		return;
 	}
 
-	printModelData(selected);
+	print_model_data(selected);
 	print(rule);
 
 	# group all objects of a bucket
@@ -829,7 +857,7 @@ printData = func {
 }
 
 
-exportData = func {
+var export_data = func {
 	savexml = func(name, node) {
 		fgcommand("savexml", props.Node.new({"filename": name, "sourcenode": node}));
 	}
@@ -843,9 +871,39 @@ exportData = func {
 }
 
 
-removeSelectedModel = func { modelmgr.remove_selected(); modelmgr.select(); }
+var ufo_position = func {
+	Coord.new().set_lonlat(
+			getprop("/position/longitude-deg"),
+			getprop("/position/latitude-deg"),
+			getprop("/position/altitude-ft") * FT2M);
+}
 
 
+# dialogs -----------------------------------------------------------------------------------------
+
+var status_dialog = gui.Dialog.new("/sim/gui/dialogs/ufo/status/dialog", "Aircraft/ufo/Dialogs/status.xml");
+var select_dialog = gui.Dialog.new("/sim/gui/dialogs/ufo/select/dialog", "Aircraft/ufo/Dialogs/select.xml");
+var adjust_dialog = gui.Dialog.new("/sim/gui/dialogs/ufo/adjust/dialog", "Aircraft/ufo/Dialogs/adjust.xml");
+
+adjust_dialog.center_sliders = func {
+	var ns = adjust_dialog.namespace();
+	if (ns != nil) {
+		ns.center();
+	}
+}
+
+
+# hide status line in screenshots
+#
+var status_restore = nil;
+setlistener("/sim/signals/screenshot", func {
+	if (cmdarg().getBoolValue()) {
+		status_restore = status_dialog.is_open();
+		status_dialog.close();
+	} else {
+		status_restore and status_dialog.open();
+	}
+});
 
 
 
@@ -855,39 +913,18 @@ var KbdShift = props.globals.getNode("/devices/status/keyboard/shift");
 var KbdCtrl = props.globals.getNode("/devices/status/keyboard/ctrl");
 var KbdAlt = props.globals.getNode("/devices/status/keyboard/alt");
 
-var modellist = nil;
-var adjust = nil;
-var modelmgr = nil;
+var click_lon = props.globals.getNode("/sim/input/click/longitude-deg", 1);
+var click_lat = props.globals.getNode("/sim/input/click/latitude-deg", 1);
+var click_elev = props.globals.getNode("/sim/input/click/elevation-m", 1);
 
+var modellist = scan_dirs(getprop("/source"));
+var modelmgr = ModelMgr.new(getprop("/cursor"));
 
-settimer(func {
-	modellist = scanDirs(getprop("/source"));
-	adjust = Adjust.new("/data");
-	modelmgr = ModelMgr.new(getprop("/cursor"));
-	setlistener("/sim/signals/click", func { modelmgr.click() });
-	if (modelmgr.modelpath != "Aircraft/ufo/Models/cursor.ac") {
-		status_dialog.open();
-	}
-}, 1);
-
-
-
-
-
-# dialogs -----------------------------------------------------------------------------------------
-
-var status_dialog = gui.Dialog.new("/sim/gui/dialogs/ufo/status/dialog", "Aircraft/ufo/Dialogs/status.xml");
-var select_dialog = gui.Dialog.new("/sim/gui/dialogs/ufo/select/dialog", "Aircraft/ufo/Dialogs/select.xml");
-var adjust_dialog = gui.Dialog.new("/sim/gui/dialogs/ufo/adjust/dialog", "Aircraft/ufo/Dialogs/adjust.xml");
-
-var status_restore = nil;
-setlistener("/sim/signals/screenshot", func {
-	if (cmdarg().getBoolValue()) {
-		status_restore = status_dialog.is_open();
-		status_dialog.close();
-	} else {
-		status_restore and status_dialog.open();
-	}
+setlistener("/sim/signals/click", func {
+	var lon = click_lon.getValue();
+	var lat = click_lat.getValue();
+	var elev = click_elev.getValue();
+	modelmgr.click(Coord.new().set_lonlat(lon, lat, elev));
 });
 
 

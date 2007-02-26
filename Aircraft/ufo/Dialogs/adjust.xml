@@ -36,8 +36,65 @@
 	<nasal>
 		<open>
 			var self = cmdarg();
-			ufo.adjust.center_sliders();
+			var dlgname = self.getNode("name").getValue();
+
+			var Value = {
+				new : func(name) {
+					var m = { parents: [Value] };
+					m.name = name;
+					var n = props.globals.getNode("/models/adjust/" ~ m.name, 1);
+					m.sliderN = n.getNode("slider", 1);
+					m.offsetN = n.getNode("offset", 1);
+					m.offsetN.setDoubleValue(0);
+					m.sliderN.setDoubleValue(0);
+					m.last_slider = 0;
+					m.center();
+					m.sliderL = setlistener(m.sliderN, func { m.update() });
+					return m;
+				},
+				del : func {
+					removelistener(me.sliderL);
+				},
+				update : func {
+					var offs = me.sliderN.getValue();
+					ufo.modelmgr.adjust(me.name, me.offsetN.getValue() + me.sliderN.getValue()
+							- me.last_slider, 1);  # 1 -> scale with distance
+					me.offsetN.setDoubleValue(0);
+					me.last_slider = offs;
+				},
+				center : func {
+					me.offsetN.setValue(me.offsetN.getValue() + me.sliderN.getValue());
+					me.sliderN.setDoubleValue(0);
+				},
+			};
+
+			var values = [
+				Value.new("longitudinal"),
+				Value.new("transversal"),
+				Value.new("altitude"),
+				Value.new("heading"),
+				Value.new("pitch"),
+				Value.new("roll"),
+			];
+
+			var center = func {
+				foreach (var v; values) {
+					v.center();
+				}
+			}
+
+			var update = func(w) {
+				self.setValues({"dialog-name": dlgname, "object-name": w});
+				fgcommand("dialog-update", self);
+				center();
+			}
 		</open>
+
+		<close>
+			foreach (var v; values) {
+				v.del();
+			}
+		</close>
 	</nasal>
 
 	<group>
@@ -50,8 +107,13 @@
 			<pref-height>22</pref-height>
 
 			<binding>
+				<command>property-adjust</command>
+				<property>/models/adjust/longitudinal/offset</property>
+				<step>-10</step>
+			</binding>
+			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.step("lon", -0.0004)</script>
+				<script>update("longitudinal")</script>
 			</binding>
 		</button>
 
@@ -61,18 +123,24 @@
 			<pref-height>22</pref-height>
 
 			<binding>
+				<command>property-adjust</command>
+				<property>/models/adjust/longitudinal/offset</property>
+				<step>-1</step>
+			</binding>
+			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.step("lon", -0.00004)</script>
+				<script>update("longitudinal")</script>
 			</binding>
 		</button>
 
 		<slider>
-			<property>/data/offsets/longitude-deg</property>
-			<legend>lon</legend>
+			<name>longitudinal</name>
+			<property>/models/adjust/longitudinal/slider</property>
+			<legend>near/far</legend>
 			<pref-width>250</pref-width>
 			<live>1</live>
-			<min>-0.00004</min>
-			<max>0.00004</max>
+			<min>-1</min>
+			<max>1</max>
 
 			<color>
 				<red>1.0</red>
@@ -83,6 +151,7 @@
 
 			<binding>
 				<command>dialog-apply</command>
+				<object-name>longitudinal</object-name>
 			</binding>
 		</slider>
 
@@ -92,8 +161,13 @@
 			<pref-height>22</pref-height>
 
 			<binding>
+				<command>property-adjust</command>
+				<property>/models/adjust/longitudinal/offset</property>
+				<step>1</step>
+			</binding>
+			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.step("lon", 0.00004)</script>
+				<script>update("longitudinal")</script>
 			</binding>
 		</button>
 
@@ -103,8 +177,13 @@
 			<pref-height>22</pref-height>
 
 			<binding>
+				<command>property-adjust</command>
+				<property>/models/adjust/longitudinal/offset</property>
+				<step>10</step>
+			</binding>
+			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.step("lon", 0.0004)</script>
+				<script>update("longitudinal")</script>
 			</binding>
 		</button>
 	</group>
@@ -119,8 +198,13 @@
 			<pref-height>22</pref-height>
 
 			<binding>
+				<command>property-adjust</command>
+				<property>/models/adjust/transversal/offset</property>
+				<step>-10</step>
+			</binding>
+			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.step("lat", -0.0002)</script>
+				<script>update("transversal")</script>
 			</binding>
 		</button>
 
@@ -130,18 +214,24 @@
 			<pref-height>22</pref-height>
 
 			<binding>
+				<command>property-adjust</command>
+				<property>/models/adjust/transversal/offset</property>
+				<step>-1</step>
+			</binding>
+			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.step("lat", -0.00002)</script>
+				<script>update("transversal")</script>
 			</binding>
 		</button>
 
 		<slider>
-			<property>/data/offsets/latitude-deg</property>
-			<legend>lat</legend>
+			<name>transversal</name>
+			<property>/models/adjust/transversal/slider</property>
+			<legend>left/right</legend>
 			<pref-width>250</pref-width>
 			<live>1</live>
-			<min>-0.00002</min>
-			<max>0.00002</max>
+			<min>-1</min>
+			<max>1</max>
 
 			<color>
 				<red>0.6</red>
@@ -152,6 +242,7 @@
 
 			<binding>
 				<command>dialog-apply</command>
+				<object-name>transversal</object-name>
 			</binding>
 		</slider>
 
@@ -161,8 +252,13 @@
 			<pref-height>22</pref-height>
 
 			<binding>
+				<command>property-adjust</command>
+				<property>/models/adjust/transversal/offset</property>
+				<step>1</step>
+			</binding>
+			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.step("lat", 0.00002)</script>
+				<script>update("transversal")</script>
 			</binding>
 		</button>
 
@@ -172,8 +268,13 @@
 			<pref-height>22</pref-height>
 
 			<binding>
+				<command>property-adjust</command>
+				<property>/models/adjust/transversal/offset</property>
+				<step>10</step>
+			</binding>
+			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.step("lat", 0.0002)</script>
+				<script>update("transversal")</script>
 			</binding>
 		</button>
 	</group>
@@ -188,8 +289,13 @@
 			<pref-height>22</pref-height>
 
 			<binding>
+				<command>property-adjust</command>
+				<property>/models/adjust/altitude/offset</property>
+				<step>-10</step>
+			</binding>
+			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.step("elev", -10)</script>
+				<script>update("altitude")</script>
 			</binding>
 		</button>
 
@@ -199,18 +305,24 @@
 			<pref-height>22</pref-height>
 
 			<binding>
+				<command>property-adjust</command>
+				<property>/models/adjust/altitude/offset</property>
+				<step>-1</step>
+			</binding>
+			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.step("elev", -2)</script>
+				<script>update("altitude")</script>
 			</binding>
 		</button>
 
 		<slider>
-			<property>/data/offsets/elevation-ft</property>
-			<legend>elev</legend>
+			<name>altitude</name>
+			<property>/models/adjust/altitude/slider</property>
+			<legend>altitude</legend>
 			<pref-width>250</pref-width>
 			<live>1</live>
-			<min>-2</min>
-			<max>2</max>
+			<min>-1</min>
+			<max>1</max>
 
 			<color>
 				<red>0.6</red>
@@ -221,6 +333,7 @@
 
 			<binding>
 				<command>dialog-apply</command>
+				<object-name>altitude</object-name>
 			</binding>
 		</slider>
 
@@ -230,8 +343,13 @@
 			<pref-height>22</pref-height>
 
 			<binding>
+				<command>property-adjust</command>
+				<property>/models/adjust/altitude/offset</property>
+				<step>1</step>
+			</binding>
+			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.step("elev", 2)</script>
+				<script>update("altitude")</script>
 			</binding>
 		</button>
 
@@ -241,8 +359,13 @@
 			<pref-height>22</pref-height>
 
 			<binding>
+				<command>property-adjust</command>
+				<property>/models/adjust/altitude/offset</property>
+				<step>10</step>
+			</binding>
+			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.step("elev", 10)</script>
+				<script>update("altitude")</script>
 			</binding>
 		</button>
 	</group>
@@ -257,8 +380,13 @@
 			<pref-height>22</pref-height>
 
 			<binding>
+				<command>property-adjust</command>
+				<property>/models/adjust/heading/offset</property>
+				<step>-6</step>
+			</binding>
+			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.step("hdg", -36)</script>
+				<script>update("heading")</script>
 			</binding>
 		</button>
 
@@ -268,18 +396,24 @@
 			<pref-height>22</pref-height>
 
 			<binding>
+				<command>property-adjust</command>
+				<property>/models/adjust/heading/offset</property>
+				<step>-1</step>
+			</binding>
+			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.step("hdg", -6)</script>
+				<script>update("heading")</script>
 			</binding>
 		</button>
 
 		<slider>
-			<property>/data/offsets/heading-deg</property>
-			<legend>hdg</legend>
+			<name>heading</name>
+			<property>/models/adjust/heading/slider</property>
+			<legend>heading</legend>
 			<pref-width>250</pref-width>
 			<live>1</live>
-			<min>-6</min>
-			<max>6</max>
+			<min>-1</min>
+			<max>1</max>
 
 			<color>
 				<red>1.0</red>
@@ -290,6 +424,7 @@
 
 			<binding>
 				<command>dialog-apply</command>
+				<object-name>heading</object-name>
 			</binding>
 		</slider>
 
@@ -299,8 +434,13 @@
 			<pref-height>22</pref-height>
 
 			<binding>
+				<command>property-adjust</command>
+				<property>/models/adjust/heading/offset</property>
+				<step>1</step>
+			</binding>
+			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.step("hdg", 6)</script>
+				<script>update("heading")</script>
 			</binding>
 		</button>
 
@@ -310,8 +450,13 @@
 			<pref-height>22</pref-height>
 
 			<binding>
+				<command>property-adjust</command>
+				<property>/models/adjust/heading/offset</property>
+				<step>6</step>
+			</binding>
+			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.step("hdg", 36)</script>
+				<script>update("heading")</script>
 			</binding>
 		</button>
 	</group>
@@ -327,8 +472,13 @@
 			<live>1</live>
 
 			<binding>
+				<command>property-adjust</command>
+				<property>/models/adjust/pitch/offset</property>
+				<step>-6</step>
+			</binding>
+			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.step("pitch", -36)</script>
+				<script>update("pitch")</script>
 			</binding>
 		</button>
 
@@ -339,18 +489,24 @@
 			<live>1</live>
 
 			<binding>
+				<command>property-adjust</command>
+				<property>/models/adjust/pitch/offset</property>
+				<step>-1</step>
+			</binding>
+			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.step("pitch", -6)</script>
+				<script>update("pitch")</script>
 			</binding>
 		</button>
 
 		<slider>
-			<property>/data/offsets/pitch-deg</property>
+			<name>pitch</name>
+			<property>/models/adjust/pitch/slider</property>
 			<legend>pitch</legend>
 			<pref-width>250</pref-width>
 			<live>1</live>
-			<min>-6</min>
-			<max>6</max>
+			<min>-1</min>
+			<max>1</max>
 
 			<color>
 				<red>1.0</red>
@@ -361,6 +517,7 @@
 
 			<binding>
 				<command>dialog-apply</command>
+				<object-name>pitch</object-name>
 			</binding>
 		</slider>
 
@@ -371,8 +528,13 @@
 			<live>1</live>
 
 			<binding>
+				<command>property-adjust</command>
+				<property>/models/adjust/pitch/offset</property>
+				<step>1</step>
+			</binding>
+			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.step("pitch", 6)</script>
+				<script>update("pitch")</script>
 			</binding>
 		</button>
 
@@ -383,8 +545,13 @@
 			<live>1</live>
 
 			<binding>
+				<command>property-adjust</command>
+				<property>/models/adjust/pitch/offset</property>
+				<step>6</step>
+			</binding>
+			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.step("pitch", 36)</script>
+				<script>update("pitch")</script>
 			</binding>
 		</button>
 	</group>
@@ -400,8 +567,13 @@
 			<live>1</live>
 
 			<binding>
+				<command>property-adjust</command>
+				<property>/models/adjust/roll/offset</property>
+				<step>-6</step>
+			</binding>
+			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.step("roll", -36)</script>
+				<script>update("roll")</script>
 			</binding>
 		</button>
 
@@ -412,18 +584,24 @@
 			<live>1</live>
 
 			<binding>
+				<command>property-adjust</command>
+				<property>/models/adjust/roll/offset</property>
+				<step>-1</step>
+			</binding>
+			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.step("roll", -6)</script>
+				<script>update("roll")</script>
 			</binding>
 		</button>
 
 		<slider>
-			<property>/data/offsets/roll-deg</property>
+			<name>roll</name>
+			<property>/models/adjust/roll/slider</property>
 			<legend>roll</legend>
 			<pref-width>250</pref-width>
 			<live>1</live>
-			<min>-6</min>
-			<max>6</max>
+			<min>-1</min>
+			<max>1</max>
 
 			<color>
 				<red>0.6</red>
@@ -434,6 +612,7 @@
 
 			<binding>
 				<command>dialog-apply</command>
+				<object-name>roll</object-name>
 			</binding>
 		</slider>
 
@@ -444,8 +623,13 @@
 			<live>1</live>
 
 			<binding>
+				<command>property-adjust</command>
+				<property>/models/adjust/roll/offset</property>
+				<step>1</step>
+			</binding>
+			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.step("roll", 6)</script>
+				<script>update("roll")</script>
 			</binding>
 		</button>
 
@@ -456,8 +640,13 @@
 			<live>1</live>
 
 			<binding>
+				<command>property-adjust</command>
+				<property>/models/adjust/roll/offset</property>
+				<step>6</step>
+			</binding>
+			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.step("roll", 36)</script>
+				<script>update("roll")</script>
 			</binding>
 		</button>
 	</group>
@@ -492,19 +681,21 @@
 			<pref-width>60</pref-width>
 			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.orient()</script>
+				<script>ufo.modelmgr.reset_heading()</script>
 			</binding>
 		</button>
 
 		<button>
+			<name>sticky-heading</name>
 			<legend>Sticky</legend>
 			<one-shot>0</one-shot>
 			<pref-height>22</pref-height>
 			<pref-width>55</pref-width>
 			<live>1</live>
-			<property>/data/sticky-heading</property>
+			<property>/models/adjust/sticky-heading</property>
 			<binding>
 				<command>dialog-apply</command>
+				<object-name>sticky-heading</object-name>
 			</binding>
 		</button>
 
@@ -517,21 +708,23 @@
 			<pref-width>60</pref-width>
 			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.center_sliders()</script>
+				<script>center()</script>
 			</binding>
 		</button>
 
 		<empty><stretch>1</stretch></empty>
 
 		<button>
+			<name>sticky-orientation</name>
 			<legend>Sticky</legend>
 			<one-shot>0</one-shot>
 			<pref-height>22</pref-height>
 			<pref-width>55</pref-width>
 			<live>1</live>
-			<property>/data/sticky-orientation</property>
+			<property>/models/adjust/sticky-orientation</property>
 			<binding>
 				<command>dialog-apply</command>
+				<object-name>sticky-orientation</object-name>
 			</binding>
 		</button>
 
@@ -542,7 +735,7 @@
 			<pref-width>60</pref-width>
 			<binding>
 				<command>nasal</command>
-				<script>ufo.adjust.upright()</script>
+				<script>ufo.modelmgr.reset_orientation()</script>
 			</binding>
 		</button>
 	</group>

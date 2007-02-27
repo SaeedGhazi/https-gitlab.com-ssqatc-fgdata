@@ -40,19 +40,19 @@
 			</key>
 			<key>
 				<name>Ctrl + mouse click</name>
-				<desc>select nearest model</desc>
+				<desc>select nearest object</desc>
 			</key>
 			<key>
 				<name>Shift + mouse click</name>
-				<desc>add new model to selection</desc>
+				<desc>add new object to selection</desc>
 			</key>
 			<key>
 				<name>Shift + Ctrl + mouse click</name>
-				<desc>add nearest model to selection</desc>
+				<desc>add nearest object to selection</desc>
 			</key>
 			<key>
 				<name>Alt + mouse click</name>
-				<desc>move selected model(s) to new place</desc>
+				<desc>move selected object(s) to new place</desc>
 			</key>
 			<key>
 				<name>Ctrl + PgUp/PgDn</name>
@@ -60,19 +60,23 @@
 			</key>
 			<key>
 				<name>Ctrl + cursor/arrow keys</name>
-				<desc>move selected model(s) away/nearer/left/right</desc>
+				<desc>move selected object(s) away/nearer/left/right</desc>
 			</key>
 			<key>
 				<name>backspace</name>
-				<desc>remove selected model(s)</desc>
+				<desc>remove selected object(s)</desc>
 			</key>
 			<key>
 				<name>d</name>
-				<desc>dump model data to terminal</desc>
+				<desc>dump object data to terminal</desc>
 			</key>
 			<key>
 				<name>e</name>
-				<desc>export model data</desc>
+				<desc>export object data</desc>
+			</key>
+			<key>
+				<name>m</name>
+				<desc>toggle marker for active (= last selected) object</desc>
 			</key>
 			<key>
 				<name>space</name>
@@ -100,7 +104,7 @@
 		<keyboard>
 			<key n="8">
 				<name>Backspace</name>
-				<desc>Remove selected model</desc>
+				<desc>Remove selected object</desc>
 				<binding>
 					<command>nasal</command>
 					<script>ufo.modelmgr.remove_selected()</script>
@@ -109,7 +113,7 @@
 
 			<key n="9">
 				<name>Ctrl-I</name>
-				<desc>Show model adjustment dialog</desc>
+				<desc>Show object adjustment dialog</desc>
 				<binding>
 					<command>nasal</command>
 					<script>ufo.adjust_dialog.toggle()</script>
@@ -136,7 +140,7 @@
 
 			<key n="101">
 				<name>e</name>
-				<desc>Export model data XML file</desc>
+				<desc>Export object data XML file</desc>
 				<binding>
 					<command>nasal</command>
 					<script>ufo.export_data()</script>
@@ -145,7 +149,7 @@
 
 			<key n="109">
 				<name>m</name>
-				<desc>Toggle active object marker</desc>
+				<desc>Toggle "active object" marker</desc>
 				<binding>
 					<command>nasal</command>
 					<script>ufo.modelmgr.toggle_marker()</script>

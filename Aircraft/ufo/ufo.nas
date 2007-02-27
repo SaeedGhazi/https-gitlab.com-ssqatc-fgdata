@@ -569,8 +569,8 @@ var ModelMgr = {
 		m.legendN.setValue("");
 		m.mouse_coord = ufo_position();
 		m.import();
-		m.cursor = Model.new("Aircraft/ufo/Models/marker.ac", Coord.new().set_xyz(0, 0, 0));
-		m.cursor.hide();
+		m.marker = Model.new("Aircraft/ufo/Models/marker.ac", Coord.new().set_xyz(0, 0, 0));
+		m.marker.hide();
 		m.modelpath = path;
 
 		if (path != "Aircraft/ufo/Models/cursor.ac") {
@@ -591,7 +591,7 @@ var ModelMgr = {
 				m.pos.set_alt(me.mouse_coord.alt());
 				m.selected and m.apply_course_distance(course, distance);
 			}
-			me.cursor.move(me.active.pos);
+			me.marker.move(me.active.pos);
 			return;
 		}
 
@@ -605,7 +605,7 @@ var ModelMgr = {
 			me.active = Model.new(me.modelpath, mouse_coord, me.sticky_data());
 			append(me.models, me.active);
 			me.display_status(me.modelpath);
-			me.cursor.move(me.active.pos);
+			me.marker.move(me.active.pos);
 
 			if (KbdShift.getBoolValue()) {
 				foreach (var m; me.models) {
@@ -617,7 +617,7 @@ var ModelMgr = {
 	select : func() {
 		if (!size(me.models)) {
 			me.active = nil;
-			me.cursor.move(Coord.new().set_xyz(0, 0, 0));
+			me.marker.move(Coord.new().set_xyz(0, 0, 0));
 			return;
 		}
 		var min_dist = 10 * ERAD;
@@ -630,7 +630,7 @@ var ModelMgr = {
 			}
 		}
 		me.active.selected = 1;
-		me.cursor.move(me.active.pos);
+		me.marker.move(me.active.pos);
 		foreach (var m; me.models) {
 			m.flash(m.selected);
 		}
@@ -787,10 +787,10 @@ var ModelMgr = {
 				m.selected and m.roll.set(m.roll.get() + value * 6);
 			}
 		}
-		me.cursor.move(me.active.pos);
+		me.marker.move(me.active.pos);
 	},
-	toggle_cursor : func {
-		me.cursor.visible ? me.cursor.hide() : me.cursor.unhide();
+	toggle_marker : func {
+		me.marker.visible ? me.marker.hide() : me.marker.unhide();
 	},
 };
 

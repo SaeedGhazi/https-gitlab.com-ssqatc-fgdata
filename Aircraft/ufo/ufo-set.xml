@@ -125,15 +125,6 @@
 				</binding>
 			</key>
 
-			<key n="99">
-				<name>c</name>
-				<desc>Toggle cursor</desc>
-				<binding>
-					<command>nasal</command>
-					<script>ufo.modelmgr.toggle_cursor()</script>
-				</binding>
-			</key>
-
 			<key n="100">
 				<name>d</name>
 				<desc>Dump coordinates</desc>
@@ -149,6 +140,15 @@
 				<binding>
 					<command>nasal</command>
 					<script>ufo.export_data()</script>
+				</binding>
+			</key>
+
+			<key n="109">
+				<name>m</name>
+				<desc>Toggle active object marker</desc>
+				<binding>
+					<command>nasal</command>
+					<script>ufo.modelmgr.toggle_marker()</script>
 				</binding>
 			</key>
 

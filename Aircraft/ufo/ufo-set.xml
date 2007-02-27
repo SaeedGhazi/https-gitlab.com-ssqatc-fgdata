@@ -59,16 +59,12 @@
 				<desc>cycle through model list</desc>
 			</key>
 			<key>
-				<name>Ctrl + CurUp/Down/Left/Right</name>
+				<name>Ctrl + cursor/arrow keys</name>
 				<desc>move selected model(s) away/nearer/left/right</desc>
 			</key>
 			<key>
 				<name>backspace</name>
 				<desc>remove selected model(s)</desc>
-			</key>
-			<key>
-				<name>tab</name>
-				<desc>open/close cursor dialog</desc>
 			</key>
 			<key>
 				<name>d</name>
@@ -79,8 +75,12 @@
 				<desc>export model data</desc>
 			</key>
 			<key>
-				<name>m</name>
+				<name>space</name>
 				<desc>open/close model select dialog</desc>
+			</key>
+			<key>
+				<name>tab</name>
+				<desc>open/close cursor dialog</desc>
 			</key>
 
 			<line>Pre-select initial model (path relative to $FG_ROOT):</line>
@@ -116,6 +116,24 @@
 				</binding>
 			</key>
 
+			<key n="32">
+				<name>SPACE</name>
+				<desc>Show model select dialog</desc>
+				<binding>
+					<command>nasal</command>
+					<script>ufo.select_dialog.toggle()</script>
+				</binding>
+			</key>
+
+			<key n="99">
+				<name>c</name>
+				<desc>Toggle cursor</desc>
+				<binding>
+					<command>nasal</command>
+					<script>ufo.modelmgr.toggle_cursor()</script>
+				</binding>
+			</key>
+
 			<key n="100">
 				<name>d</name>
 				<desc>Dump coordinates</desc>
@@ -131,15 +149,6 @@
 				<binding>
 					<command>nasal</command>
 					<script>ufo.export_data()</script>
-				</binding>
-			</key>
-
-			<key n="109">
-				<name>m</name>
-				<desc>Show model select dialog</desc>
-				<binding>
-					<command>nasal</command>
-					<script>ufo.select_dialog.toggle()</script>
 				</binding>
 			</key>
 

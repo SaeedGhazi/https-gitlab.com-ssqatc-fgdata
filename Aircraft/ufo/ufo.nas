@@ -106,10 +106,10 @@ var Coord = {
 	set_alt : func(alt) { me._cupdate(); me._cdirty = 1; me._alt = alt; me },
 
 	set : func(c) {
-		arg[0]._pupdate();
-		me._lon = arg[0]._lon;
-		me._lat = arg[0]._lat;
-		me._alt = arg[0]._alt;
+		c._pupdate();
+		me._lon = c._lon;
+		me._lat = c._lat;
+		me._alt = c._alt;
 		me._cdirty = 1;
 		me._pdirty = 0;
 		me;
@@ -377,6 +377,14 @@ var clock_loop = func {
 clock_loop();
 
 
+var ufo_position = func {
+	var lon = getprop("/position/longitude-deg");
+	var lat = getprop("/position/latitude-deg");
+	var alt = getprop("/position/altitude-ft") * FT2M;
+	Coord.new().set_lonlat(lon, lat, alt);
+}
+
+
 # class that maintains one adjustable model property (see src/Model/modelmgr.cxx)
 #
 var ModelValue = {
@@ -443,13 +451,29 @@ var Model = {
 	clone : func(path) {
 		Model.new(path, me.pos, me.node);
 	},
-	direct_distance_to : func(dest) {
-		me.pos.direct_distance_to(dest);
+	move : func(pos) {
+		var v = me.visible;
+		me.unhide();
+		me.pos.set(pos);
+		me.lon.set(me.pos.lon());
+		me.lat.set(me.pos.lat());
+		me.alt.set(me.pos.alt() * M2FT);
+		v or me.hide();
+	},
+	raise : func (dist) {
+		var v = me.visible;
+		me.unhide();
+		me.pos.set_alt(me.pos.alt() + dist);
+		me.alt.set(me.pos.alt() * M2FT);
+		v or me.hide();
 	},
 	apply_course_distance : func(course, dist) {
 		me.pos.apply_course_distance(course, dist);
 		me.lon.set(me.pos.lon());
 		me.lat.set(me.pos.lat());
+	},
+	direct_distance_to : func(dest) {
+		me.pos.direct_distance_to(dest);
 	},
 	flash : func(v) {
 		me.loopid += 1;
@@ -545,6 +569,8 @@ var ModelMgr = {
 		m.legendN.setValue("");
 		m.mouse_coord = ufo_position();
 		m.import();
+		m.cursor = Model.new("Aircraft/ufo/Models/marker.ac", Coord.new().set_xyz(0, 0, 0));
+		m.cursor.hide();
 		m.modelpath = path;
 
 		if (path != "Aircraft/ufo/Models/cursor.ac") {
@@ -565,6 +591,7 @@ var ModelMgr = {
 				m.pos.set_alt(me.mouse_coord.alt());
 				m.selected and m.apply_course_distance(course, distance);
 			}
+			me.cursor.move(me.active.pos);
 			return;
 		}
 
@@ -578,6 +605,7 @@ var ModelMgr = {
 			me.active = Model.new(me.modelpath, mouse_coord, me.sticky_data());
 			append(me.models, me.active);
 			me.display_status(me.modelpath);
+			me.cursor.move(me.active.pos);
 
 			if (KbdShift.getBoolValue()) {
 				foreach (var m; me.models) {
@@ -589,6 +617,7 @@ var ModelMgr = {
 	select : func() {
 		if (!size(me.models)) {
 			me.active = nil;
+			me.cursor.move(Coord.new().set_xyz(0, 0, 0));
 			return;
 		}
 		var min_dist = 10 * ERAD;
@@ -601,6 +630,7 @@ var ModelMgr = {
 			}
 		}
 		me.active.selected = 1;
+		me.cursor.move(me.active.pos);
 		foreach (var m; me.models) {
 			m.flash(m.selected);
 		}
@@ -667,6 +697,9 @@ var ModelMgr = {
 	},
 	sticky_data : func {
 		var n = props.Node.new();
+		if (me.active == nil) {
+			return n;
+		}
 		var hdg = n.getNode("heading-deg", 1);
 		var pitch = n.getNode("pitch-deg", 1);
 		var roll = n.getNode("roll-deg", 1);
@@ -700,7 +733,7 @@ var ModelMgr = {
 		}
 	},
 	import : func {
-		var active = nil;
+		me.active = nil;
 		var mandatory = ["path", "longitude-deg", "latitude-deg", "elevation-ft"];
 		foreach (var m; props.globals.getNode("models", 1).getChildren("model")) {
 			var ok = 1;
@@ -710,18 +743,15 @@ var ModelMgr = {
 				}
 			}
 			if (ok) {
-				var tmp = props.Node.new({legend:"", "heading-deg":0, "pitch-deg":0, "roll-deg":0});
+				var tmp = props.Node.new({ legend:"", "heading-deg":0, "pitch-deg":0, "roll-deg":0 });
 				props.copy(m, tmp);
 				m.getParent().removeChild(m.getName(), m.getIndex());
 				var c = Coord.new().set_lonlat(
 						tmp.getNode("longitude-deg").getValue(),
 						tmp.getNode("latitude-deg").getValue(),
 						tmp.getNode("elevation-ft").getValue() * FT2M);
-				append(me.models, active = Model.new(tmp.getNode("path").getValue(), c, tmp));
+				append(me.models, me.active = Model.new(tmp.getNode("path").getValue(), c, tmp));
 			}
-		}
-		if (active != nil) {
-			me.active = active;
 		}
 	},
 	adjust : func(name, value, scale = 0) {
@@ -742,7 +772,7 @@ var ModelMgr = {
 			}
 		} elsif (name == "altitude") {
 			foreach (var m; me.models) {
-				m.selected and m.alt.set(m.alt.get() + value * dist);
+				m.selected and m.raise(value * dist * 0.4);
 			}
 		} elsif (name == "heading") {
 			foreach (var m; me.models) {
@@ -757,6 +787,10 @@ var ModelMgr = {
 				m.selected and m.roll.set(m.roll.get() + value * 6);
 			}
 		}
+		me.cursor.move(me.active.pos);
+	},
+	toggle_cursor : func {
+		me.cursor.visible ? me.cursor.hide() : me.cursor.unhide();
 	},
 };
 
@@ -859,7 +893,7 @@ var print_data = func {
 
 var export_data = func {
 	savexml = func(name, node) {
-		fgcommand("savexml", props.Node.new({"filename": name, "sourcenode": node}));
+		fgcommand("savexml", props.Node.new({ "filename": name, "sourcenode": node }));
 	}
 	var tmp = "save-ufo-data";
 	save = props.globals.getNode(tmp, 1);
@@ -868,14 +902,6 @@ var export_data = func {
 	savexml(path, save.getPath());
 	print("model data exported to ", path);
 	props.globals.removeChild(tmp);
-}
-
-
-var ufo_position = func {
-	Coord.new().set_lonlat(
-			getprop("/position/longitude-deg"),
-			getprop("/position/latitude-deg"),
-			getprop("/position/altitude-ft") * FT2M);
 }
 
 

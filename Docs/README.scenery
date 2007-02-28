@@ -487,8 +487,8 @@ You feed longitude and latitude to it and it returns the path to the
 
 The ufo has a scenery object editor built-in. It uses the model manager
 described in section 4. To place objects with it, start fgfs, optionally
-with specifying an initial model type (cursor) and a list of subdirectories
-of $FG_ROOT where the ufo should search for available 3D models (source):
+with specifying an initial model type ("cursor") and a list of subdirectories
+of $FG_ROOT where the ufo should search for available 3D models ("source"):
 
   $ fgfs --aircraft=ufo --prop:cursor=Models/Airport/radar.xml  \
                         --prop:source=Models,Scenery/Objects
@@ -496,13 +496,14 @@ of $FG_ROOT where the ufo should search for available 3D models (source):
 Then click anywhere on the terrain to add a model (left mouse button).
 You can open the adjustment dialog (Tab-key) to make adjustments to
 position and orientation. Click as often as you like, choose further
-models from the m-key dialog. You can select an already placed object
+models from the space-key dialog. You can select an already placed object
 by Ctrl-clicking at its base (not at the object itself, but the surface
-point where it's located!). You can remove the selected object with the
-Backspace-key. (See the ?-key dialog for futher available keys.)
-After clicking on the input field right over the status line (invisible
-if there's no text in it) you can enter a comment/legend for the selected
-object.
+point where it's located!). By also holding the Shift key down, you
+can select several objects or add them to a selection. You can remove
+the selected object(s) with the Backspace-key. (See the ?-key dialog
+for futher available keys.) After clicking on the input field right
+over the status line (invisible if there's no text in it) you can enter
+a comment/legend for the selected object.
 
 And finally, you dump the object data to the terminal (d-key) or export
 them to a file $HOME/.fgfs/ufo-model-export.xml (Unix) or

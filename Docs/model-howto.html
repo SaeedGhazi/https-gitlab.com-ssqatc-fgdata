@@ -69,9 +69,9 @@ viewed from behind</li>
 <div><a name="loading"></a>
 <h3>1. Loading the model</h3>
 
-<p>Through <a href="http://plib.sourceforge.net/">plib</a>, FlightGear
-supports many different 3D file formats, including VRML1, AC3D, DXF,
-MDL (from <cite>Microsoft Flight Simulator</cite>), and many others.
+<p>Through <a href="http://www.openscenegraph.org/">OpenSceneGraph</a>,
+FlightGear supports many different 3D file formats, including VRML2,
+AC3D, DXF, and many others.
 The property <var>/sim/model/path</var> in the main FlightGear
 property tree controls what model will be loaded; it takes
 a string value giving the relative path of the model from
@@ -846,17 +846,6 @@ increase by 1.0 + agl * 0.05.  Note that because a shadow has no depth
 we use a z-factor of 0.0 and a z-offset of 1.0 so the formula always
 evalutes to a scaling factor of 1.0 in the Z dimension.</p>
 
-<p>There is still a plib issue to be aware of when using scale
-animation.  When rendering an object, the plib bounding sphere culling
-system isn't aware of the scale transformation so it will do the cull
-based on the object's original size.  If you have made the object
-bigger, it will disappear if the space occupied by the original size
-of the object goes out of the view frustum.  If you make the object
-smaller then this won't be a problem because the larger original
-object will always contain it's currently smaller version.  So one
-work around would be to build the object at it's maximum size and then
-use the scaling transform to always make it smaller.</p>
-
 <h3><a name="blend">"blend" animation type</a></h3>
 
 <p>The blend animation type can be used to adjust the transparency of
@@ -999,7 +988,7 @@ is within is within 1 (e.g. &gt; 99):</p>
 <p>The textmultiple animation type isn't a real animation type, but 
 instead it is a method of combining multiple texture 
 tansform operations on the same object.  Unlike object vertex 
-operations, texture operations can not be stacked (a plib limitation),  
+operations, texture operations can not be stacked,
 which means that if you configure two or more texture animation tags 
 on the same object, only the first in the list will be used.   By 
 listing operations using texmultiple they are combined together in 

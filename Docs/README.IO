@@ -155,3 +155,8 @@ HTTP Server Example
 
     When a value is displayed, you can click on it to bring up a form
     to assign it a new value.
+
+
+ACMS flight data recorder playback
+
+  fgfs --fdm=acms --generic=file,in,1,<path_to_replay_file>,acms

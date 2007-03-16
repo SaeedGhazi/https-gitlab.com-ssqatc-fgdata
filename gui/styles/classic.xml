@@ -17,9 +17,11 @@
 		</gui>
 
 		<splash>
-			<name type="string">default.txf</name>
+			<name type="string">HELVETICA_18</name>
+<!--
 			<size type="float">19</size>
 			<slant type="float">0</slant>
+-->
 		</splash>
 
 		<message-display>

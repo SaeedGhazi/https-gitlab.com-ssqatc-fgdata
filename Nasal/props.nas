@@ -84,7 +84,7 @@ Node._setChildren = func {
     if(typeof(val) == "scalar") { subnode.setValue(val); }
     elsif(typeof(val) == "hash") { subnode.setValues(val); }
     elsif(typeof(val) == "vector") {
-        for(i=0; i<size(val); i=i+1) {
+        for(i=0; i<size(val); i+=1) {
             iname = name ~ "[" ~ i ~ "]";
             me._setChildren(iname, val[i]);
         }
@@ -96,7 +96,7 @@ Node._setChildren = func {
 # Node object to the console.  Try binding "props.dump(props.globals)"
 # to a key for a fun hack.
 #
-dump = func {
+var dump = func {
     if(size(arg) == 1) { prefix = "";     node = arg[0]; }
     else               { prefix = arg[0]; node = arg[1]; }
 
@@ -121,7 +121,7 @@ dump = func {
 # Recursively copy property branch from source Node to
 # destination Node. Doesn't copy aliases.
 #
-copy = func(src, dest) {
+var copy = func(src, dest) {
     foreach(c; src.getChildren()) {
         name = c.getName() ~ "[" ~ c.getIndex() ~ "]";
         copy(src.getNode(name), dest.getNode(name, 1));
@@ -139,14 +139,14 @@ copy = func(src, dest) {
 # Utility.  Turns any ghosts it finds (either solo, or in an
 # array) into Node objects.
 #
-wrap = func {
+var wrap = func {
     argtype = typeof(arg[0]);
     if(argtype == "ghost") {
         return wrapNode(arg[0]);
     } elsif(argtype == "vector") {
         v = arg[0];
         n = size(v);
-        for(i=0; i<n; i=i+1) { v[i] = wrapNode(v[i]); }
+        for(i=0; i<n; i+=1) { v[i] = wrapNode(v[i]); }
         return v;
     }
     return arg[0];
@@ -157,7 +157,7 @@ wrap = func {
 # Node object and its _g (ghost) field set to the specified object.
 # Nasal's literal syntax can be pleasingly terse. I like that. :)
 #
-wrapNode = func { { parents : [Node], _g : arg[0] } }
+var wrapNode = func { { parents : [Node], _g : arg[0] } }
 
 ##
 # Global property tree.  Set once at initialization.  Is that OK?
@@ -172,7 +172,7 @@ props.globals = wrapNode(_globals());
 # path under each node of that name to set (e.g. "throttle"), arg[2]
 # is the value.
 #
-setAll = func {
+var setAll = func {
     node = props.globals.getNode(arg[0]);
     if(node == nil) { return; }
     name = node.getName();
@@ -183,3 +183,71 @@ setAll = func {
         if(c.getName() == name) {
             c.getNode(arg[1], 1).setValue(arg[2]); }}
 }
+
+##
+# Evaluates a <condition> property branch according to the rules
+# set out in $FG_ROOT/Docs/README.condition.
+#
+var condition = func(p) {
+    if(!isa(p, props.Node)) { p = props.globals.getNode(p); }
+    return _cond_and(p)
+}
+
+var _cond_and = func(p) {
+    foreach(var c; p.getChildren()) {
+        if(!_cond(c)) { return 0; }
+    }
+    return 1;
+}
+
+var _cond_or = func(p) {
+    foreach(var c; p.getChildren()) {
+        if(_cond(c)) { return 1; }
+    }
+    return 0;
+}
+
+var _cond = func(p) {
+    var n = p.getName();
+    if(n == "not") { return !_cond_and(p); }
+    if(n == "and") { return _cond_and(p); }
+    if(n == "or") { return _cond_or(p); }
+    if(n == "equals") { return _cond_cmp(p, "EQ"); }
+    if(n == "not-equals") { return !_cond_cmp(p, "EQ"); }
+    if(n == "less-than") { return _cond_cmp(p, "LT"); }
+    if(n == "greater-than") { return _cond_cmp(p, "GT"); }
+    if(n == "less-than-equals") { return !_cond_cmp(p, "GT"); }
+    if(n == "greater-than-equals") { return !_cond_cmp(p, "LT"); }
+    if(n == "property") { return getprop(p.getValue()); }
+    printlog("alert", "condition: invalid operator ", n);
+    dump(p);
+    return nil;
+}
+
+var _cond_cmp = func(p, op) {
+    var left = p.getChild("property", 0, 0);
+    if(left != nil) { left = getprop(left.getValue()); }
+    else {
+        printlog("alert", "condition: no left value");
+        dump(p);
+        return nil;
+    }
+    var right = p.getChild("property", 1, 0);
+    if(right != nil) { right = getprop(right.getValue()); }
+    else {
+        right = p.getChild("value", 0, 0);
+        if(right != nil) { right = right.getValue(); }
+        else {
+            printlog("alert", "condition: no right value");
+            dump(p);
+            return nil;
+        }
+    }
+    if(left == nil or right == nil) {
+        printlog("alert", "condition: comparing with nil");
+        dump(p);
+        return nil;
+    }
+    return op == "LT" ? left < right : op == "GT" ? left > right : left == right;
+}
+

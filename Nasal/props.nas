@@ -218,7 +218,7 @@ var _cond = func(p) {
     if(n == "greater-than") { return _cond_cmp(p, "GT"); }
     if(n == "less-than-equals") { return !_cond_cmp(p, "GT"); }
     if(n == "greater-than-equals") { return !_cond_cmp(p, "LT"); }
-    if(n == "property") { return getprop(p.getValue()); }
+    if(n == "property") { return !!getprop(p.getValue()); }
     printlog("alert", "condition: invalid operator ", n);
     dump(p);
     return nil;

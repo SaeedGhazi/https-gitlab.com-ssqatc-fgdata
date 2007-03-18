@@ -77,18 +77,6 @@ setlistener = func {
 
 
 ##
-# Convenience wrapper for the _condition function. Takes a
-# property path string or props.Node object as argument,
-# evaluates the property as <condition> and returns 1 or 0
-# for true/false (see $FG_ROOT/Docs/README.condition).
-#
-condition = func(prop) {
-    if(isa(prop, props.Node)) { prop = prop._g; }
-    elsif(typeof(prop) != "scalar") { return; }
-    return _condition(prop);
-}
-
-##
 # Returns true if the symbol name is defined in the caller, or the
 # caller's lexical namespace.  (i.e. defined("varname") tells you if
 # you can use varname in an expression without a undefined symbol

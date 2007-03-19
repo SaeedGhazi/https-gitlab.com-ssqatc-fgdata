@@ -186,9 +186,11 @@ var setAll = func {
 
 ##
 # Evaluates a <condition> property branch according to the rules
-# set out in $FG_ROOT/Docs/README.condition.
+# set out in $FG_ROOT/Docs/README.condition. Undefined conditions
+# are true.
 #
 var condition = func(p) {
+    if(p == nil) { return 1; }
     if(!isa(p, props.Node)) { p = props.globals.getNode(p); }
     return _cond_and(p)
 }
@@ -250,4 +252,5 @@ var _cond_cmp = func(p, op) {
     }
     return op == "LT" ? left < right : op == "GT" ? left > right : left == right;
 }
+
 

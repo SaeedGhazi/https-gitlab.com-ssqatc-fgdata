@@ -21,13 +21,15 @@
 #   <longitude-deg>
 #   <heading-deg>
 #   <airspeed-kt>
+#
 # <init>       - Optional: Initialization section consist of one or more
 #                  set nodes:
-#    <set>
-#    <prop> - Property to set
-#    <val>  - value
-# <step>       - Tutorial step - a segment of the tutorial, consisting of
-#                the following:
+#   <set>
+#     <property>  - Property to set
+#     <value>     - value
+#
+# <step>          - Tutorial step - a segment of the tutorial, consisting of
+#                   the following:
 #   <instruction> - Text instruction displayed when the tutorial reaches
 #                   this step, and when neither the exit nor any error
 #                   criteria have been fulfilled
@@ -36,165 +38,104 @@
 #   <error> - Error conditions, causing error messages to be displayed.
 #             The tutorial doesn't advance while any error conditions are
 #             fulfilled. Consists of one or more check nodes:
-#    <check>
-#      <prop> - property to check.
-#        <lt> - less than value. One of <lt>, <gt>, <eq> must be defined
-#        <gt> - greater than value. One of <lt>, <gt>, <eq> must be defined
-#        <eq> - equal value. One of <lt>, <gt>, <eq> must be defined
-#        <msg> - Error message to display if error criteria fulfilled.
-#        <msg-voice> - Optional: wav filename to play when error condition fulfilled.
-# <exit> - Exit criteria causing tutorial to progress to next step. Consists of
-#          one or more check nodes. All check nodes must be fulfilled at the same
-#          time of the tutorial to progress to the next step.
-#      <prop> - property to check.
-#        <lt> - less than value. One of <lt>, <gt>, <eq> must be defined
-#        <gt> - greater than value. One of <lt>, <gt>, <eq> must be defined
-#        <eq> - equal value. One of <lt>, <gt>, <eq> must be defined
+#     <message> - Error message to display if error criteria fulfilled.
+#     <msg-voice> - Optional: wav filename to play when error condition fulfilled.
+#     <condition> - error condition (see $FG_ROOT/Docs/README.condition)
 #
-# <endtext> - Optional: Text to display when the tutorial exits the last step.
-# <endtext-voice> - Optional: wav filename to play when the tutorial exits the last step
+#   <exit> - Exit criteria causing tutorial to progress to next step.
+#     <condition> - exit condition (see $FG_ROOT/Docs/README.condition)
+#
+# <end>
+#   <message>> - Optional: Text to display when the tutorial exits the last step.
+#   <msg-voice> - Optional: wav filename to play when the tutorial exits the last step
 
 #
 # GLOBAL VARIABLES
 #
 
-# Time between tutorial steps.
-STEP_TIME = 5;
 
-# We also have a gap between the fulfillment of a step and the start
-# of the next step. This can be much shorter.
-STEP_EXIT = 1;
+var STEP_INTERVAL = 5;   # time between tutorial steps
+var EXIT_INTERVAL = 1;   # time between fulfillment of a step and the start of the next step
 
-m_currentStep = 0;
-m_errors = 0;
-m_tutorial = 0;
-m_firstEntry = 1;
-m_audioDir = "";
-m_lastmsgcount = 0;
+var current_step = nil;
+var num_errors = nil;
+var tutorial = nil;
+var num_step_runs = nil;
+var audio_dir = nil;
 
-#
-# startTutorial()
-#
-# Start a tutorial defined within xiProp
-#
-startTutorial = func {
-  m_currentStep = 0;
-  m_errors = 0;
 
-  if (getprop("/sim/tutorial/current-tutorial") == nil)
-  {
-    # Tutorial not defined - exit
-    screen.log.write("No tutorial selected");
-    return;
-  }
 
-  ltutorial = getprop("/sim/tutorial/current-tutorial");
-  lfound = 0;
+var startTutorial = func {
+	var name = getprop("/sim/tutorial/current-tutorial");
+	if (name == nil) {
+		screen.log.write("No tutorial selected");
+		return;
+	}
 
-  foreach(c; props.globals.getNode("/sim/tutorial").getChildren("tutorial"))
-  {
-    if (c.getChild("name").getValue() == ltutorial)
-    {
-      m_tutorial = c;
-      lfound = 1;
-    }
-  }
+	tutorial = nil;
+	foreach (var c; props.globals.getNode("/sim/tutorial").getChildren("tutorial")) {
+		if (c.getChild("name").getValue() == name) {
+			tutorial = c;
+			break;
+		}
+	}
 
-  if (lfound == 0)
-  {
-    # Unable to find tutorial
-    screen.log.write("Unable to find tutorial : " ~ ltutorial);
-    return;
-  }
+	if (tutorial == nil) {
+		screen.log.write('Unable to find tutorial "' ~ name ~ '"');
+		return;
+	}
 
-  # Indicate that the tutorial is running
-  screen.log.write("Loading tutorial: " ~ ltutorial ~ " ...");
-  isRunning(1);
+	screen.log.write('Loading tutorial "' ~ name ~ '" ...');
+	is_running(1);
+	current_step = 0;
+	num_step_runs = 0;
+	num_errors = 0;
 
-  # If defined, get the audio directory
-  if (m_tutorial.getChild("audio-dir") != nil)
-  {
-    fg_root = getprop("/sim/fg-root");
-    m_audioDir = sprintf("%s/%s/", fg_root, m_tutorial.getChild("audio-dir").getValue());
-  }
+	set_properties(tutorial.getChild("init"));
+	set_cursor(tutorial);
+	run_nasal(tutorial);
 
-  # Set the time of day, if present
-  timeofday = m_tutorial.getChild("timeofday");
-  if (timeofday != nil)
-  {
-    fgcommand("timeofday", props.Node.new("timeofday", timeofday.getValue()));
-  }
+	var dir = tutorial.getChild("audio-dir");
+	if (dir != nil) {
+		audio_dir = getprop("/sim/fg-root") ~ "/" ~ dir.getValue() ~ "/";
+	} else {
+		audio_dir = "";
+	}
 
-  # First, set any presets that might be present
-  presets = m_tutorial.getChild("presets");
+	var presets = tutorial.getChild("presets");
+	if (presets != nil) {
+		props.copy(presets, props.globals.getNode("/sim/presets"));
+		fgcommand("presets-commit", props.Node.new());
 
-  if ((presets != nil) and (presets.getChildren() != nil))
-  {
-    children = presets.getChildren();
-    foreach(c; children)
-    {
-      setprop("/sim/presets/" ~ c.getName(), c.getValue());
-    }
+		# Set the various engines to be running
+		if (getprop("/sim/presets/on-ground")) {
+			var eng = props.globals.getNode("/controls/engines");
+			if (eng != nil) {
+				foreach (var c; eng.getChildren("engine")) {
+					c.getNode("magnetos", 1).setIntValue(3);
+					c.getNode("throttle", 1).setDoubleValue(0.5);
+				}
+			}
+		}
+	}
 
-    # Apply the presets
-    fgcommand("presets-commit", props.Node.new());
+	var timeofday = tutorial.getChild("timeofday");
+	if (timeofday != nil) {
+		fgcommand("timeofday", props.Node.new({"timeofday": timeofday.getValue()}));
+	}
 
-    # Set the various engines to be running
-    if (getprop("/sim/presets/on-ground"))
-    {
-      var eng = props.globals.getNode("/controls/engines");
-      if (eng != nil)
-      {
-        foreach (c; eng.getChildren("engine"))
-        {
-          c.getNode("magnetos", 1).setIntValue(3);
-          c.getNode("throttle", 1).setDoubleValue(0.5);
-        }
-      }
-    }
-  }
-
-  # Run through any initialization nodes
-  inits = m_tutorial.getChild("init");
-  if ((inits != nil) and (inits.getChildren("set") != nil))
-  {
-    children = inits.getChildren("set");
-    foreach(c; children)
-    {
-      setVal(c);
-    }
-  }
-
-  # Pick up any weather conditions/scenarios set
-  setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers")+1);
-
-  # Set the timer to start the first tutorial step
-  settimer(stepTutorial, STEP_TIME);
+	# Pick up any weather conditions/scenarios set
+	setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers") + 1);
+	settimer(stepTutorial, STEP_INTERVAL);
 }
 
-#
-# stopTutorial
-#
-# Stops the current tutorial .
-#
-stopTutorial = func
-{
-  isRunning(0);
-  settimer(resetStop, STEP_TIME);
+
+var stopTutorial = func {
+	is_running(0);
+	set_cursor(props.Node.new());
 }
 
-#
-# resetStop
-#
-# Reset the stop value, having given any running tutorials the
-# chance to stop. Also reset the various state variables incase
-# they have been changed.
-resetStop = func
-{
-  m_currentStep = 0;
-  m_firstEntry = 1;
-  m_errors = 0;
-}
+
 
 #
 # stepTutorial
@@ -211,256 +152,214 @@ resetStop = func
 #   - Otherwise display the instructions for the step.
 # - Sets the timer for 5 seconds again.
 #
-stepTutorial = func {
+var stepTutorial = func {
+	if (!is_running()) {
+		return;
+	}
 
-  var lerror = 0;
-  var ltts = nil;
-  var lsnd = nil;
-  var lmessage = nil;
+	var voice = nil;
+	var message = nil;
 
-  if (!isRunning())
-  {
-    # If we've been told to stop, just do so.
-    return;
-  }
+	# If we've reached the end of the tutorial, simply indicate and exit
+	if (current_step >= size(tutorial.getChildren("step"))) {
+		message = "Tutorial finished.";
 
-  # If we've reached the end of the tutorial, simply indicate and exit
-  if (m_currentStep == size(m_tutorial.getChildren("step")))
-  {
-    # End of tutorial.
+		var end = tutorial.getNode("end");
+		if (end != nil) {
+			var m = end.getNode("message");
+			if (m != nil) {
+				message = m.getValue();
+			}
 
-    lfinished = "Tutorial finished.";
+			var v = end.getNode("voice");
+			if (v != nil) {
+				voice = v.getValue();
+			}
+			run_nasal(end);
+		}
+		say(message, voice);
+		say("Deviations : " ~ num_errors);
+		is_running(0);
+		return;
+	}
 
-    if (m_tutorial.getChild("endtext") != nil)
-    {
-      lfinished = m_tutorial.getChild("endtext").getValue();
-    }
+	var step = tutorial.getChildren("step")[current_step];
+	set_cursor(step);
 
-    if (m_tutorial.getChild("endtext-voice") != nil)
-    {
-      lsnd = m_tutorial.getChild("endtext-voice").getValue();
-    }
+	var instr = step.getChild("instruction");
+	message = instr != nil ? instr.getValue() : "Tutorial step " ~ current_step;
 
-    say(lfinished, lsnd);
-    say("Deviations : " ~ m_errors);
-    isRunning(0);
-    return;
-  }
+	if (!num_step_runs) {
+		# If this is the first time we've encountered this step :
+		# - Set any values required
+		# - Display any messages
+		# - Play any instructions.
+		#
+		# We then do not go through the error or exit processing, giving the user
+		# time to react to the instructions.
 
-  lstep = m_tutorial.getChildren("step")[m_currentStep];
+		if (step.getChild("instruction-voice") != nil) {
+			voice = step.getChild("instruction-voice").getValue();
+		}
 
-  lmessage = "Tutorial step " ~ m_currentStep;
+		say(message, voice);
+		set_properties(step);
 
+		num_step_runs += 1;
+		settimer(stepTutorial, STEP_INTERVAL);
+		return;
+	}
 
-  if (lstep.getChild("instruction") != nil)
-  {
-    # By default, display the current instruction
-    lmessage = lstep.getChild("instruction").getValue();
-  }
+	run_nasal(step);
 
-  if (m_firstEntry == 1)
-  {
-    # If this is the first time we've encountered this step :
-    # - Set any values required
-    # - Display any messages
-    # - Play any instructions.
-    #
-    # We then do not go through the error or exit processing, giving the user
-    # time to react to the instructions.
+	var error = 0;
+	# Check for error conditions
+	foreach (var e; step.getChildren("error")) {
+		if (props.condition(e.getNode("condition"))) {
+			error = 1;
+			num_errors += 1;
+			run_nasal(e);
 
-    if (lstep.getChild("instruction-voice") != nil)
-    {
-      lsnd = lstep.getChild("instruction-voice").getValue();
-    }
+			var m = e.getNode("message");
+			if (m != nil) {
+				message = m.getValue();
 
-    say(lmessage, lsnd);
-
-    # Set any properties
-    foreach (c; lstep.getChildren("set"))
-    {
-      setVal(c);
-    }
-
-    m_firstEntry = 0;
-    settimer(stepTutorial, STEP_TIME);
-    return;
-  }
-
-  # Check for error conditions
-  if ((lstep.getChild("error") != nil) and
-      (lstep.getChild("error").getChildren("check") != nil))
-  {
-    #print("Checking errors");
-
-    foreach(c; lstep.getChild("error").getChildren("check"))
-    {
-      if (checkVal(c))
-      {
-        # and error condition was fulfilled - set the error message
-        lerror = 1;
-        m_errors += 1;
-
-        if (c.getChild("msg") != nil)
-        {
-          lmessage = c.getChild("msg").getValue();
-
-          if (c.getChild("msg-voice") != nil)
-          {
-            lsnd = c.getChild("msg-voice").getValue();
-          }
-        }
-      }
-    }
-  }
+				var v = e.getChild("msg-voice");
+				voice = v != nil ? v.getValue() : nil;
+			}
+		}
+	}
 
 
-  # Check for exit condition, but only if we didn't hit any errors
-  if (lerror == 0)
-  {
-    if ((lstep.getChild("exit") == nil) or
-        (lstep.getChild("exit").getChildren("check") == nil))
-    {
-      m_currentStep += 1;
-      m_firstEntry = 1;
-      settimer(stepTutorial, STEP_EXIT);
-      return;
-    }
-    else
-    {
-      lexit = 1;
-      foreach(c; lstep.getChild("exit").getChildren("check"))
-      {
-        if (checkVal(c) == 0)
-        {
-          lexit = 0;
-        }
-      }
+	# Check for exit condition, but only if we didn't hit any errors
+	if (!error) {
+		var e = step.getNode("exit");
+		if (e != nil) {
+			if (props.condition(e.getNode("condition"))) {
+				run_nasal(e);
+				current_step += 1;
+				num_step_runs = 0;
+				return settimer(stepTutorial, EXIT_INTERVAL);
+			}
+		} else {
+			current_step += 1;
+			num_step_runs = 0;
+			return settimer(stepTutorial, EXIT_INTERVAL);
+		}
+	}
 
-      if (lexit == 1)
-      {
-        # Passed all exit steps
-        m_currentStep += 1;
-        m_firstEntry = 1;
-        settimer(stepTutorial, STEP_EXIT);
-        return;
-      }
-    }
-  }
-
-
-  # Display the resulting message and wait to go around again.
-  say(lmessage, lsnd, lerror);
-
-  settimer(stepTutorial, STEP_TIME);
+	# Display the resulting message and wait to go around again.
+	say(message, voice, error);
+	settimer(stepTutorial, STEP_INTERVAL);
 }
 
-# Set a value in the property tree based on an entry of the form
+
+# scan all <set> blocks and set their <property> to <value>
 # <set>
-#   <prop>/foo/bar</prop>
-#   <val>woof</val>
+#	 <property>/foo/bar</property>
+#	 <value>woof</value>
 # </set>
 #
-setVal = func(node) {
+var set_properties = func(node) {
+	node != nil or return;
+	foreach (var c; node.getChildren("set")) {
+		var p = c.getChild("property").getValue();
+		var v = c.getChild("value").getValue();
 
-  if (node.getName("set"))
-  {
-    lprop = node.getChild("prop").getValue();
-    lval = node.getChild("val").getValue();
-
-    if ((lprop != nil) and (lval != nil))
-    {
-      setprop(lprop, lval);
-    }
-  }
+		if (p != nil and v != nil) {
+			setprop(p, v);
+		}
+	}
 }
 
-# Check a value in the property tree based on an entry of the form
-#
-#  <check>
-#   <prop>/foo/bar</prop>
-#   <_operator_>woof</_operator_>
-#
-# where _operator_ may be one of "eq", "lt", "gt"
-#
-checkVal = func(node) {
 
-  if (node.getName("check"))
-  {
-    lprop = node.getChild("prop").getValue();
+var set_cursor = func(node) {
+	node != nil or return;
+	var loc = node.getNode("marker");
+	if (loc == nil) {
+		marker.getNode("arrow-enabled", 1).setBoolValue(0);
+		return;
+	}
 
-    if (getprop(lprop) == nil)
-    {
-      # This is probably an error
-      print("Undefined property: " ~ lprop);
-      return 0;
-    }
-
-    if ((node.getChild("eq") != nil) and
-        (getprop(lprop) == node.getChild("eq").getValue()))
-    {
-      return 1;
-    }
-
-    if ((node.getChild("lt") != nil) and
-        (getprop(lprop) < node.getChild("lt").getValue() ))
-    {
-      return 1;
-    }
-
-    if ((node.getChild("gt") != nil) and
-        (getprop(lprop) > node.getChild("gt").getValue() ))
-    {
-      return 1;
-    }
-  }
-
-  return 0;
+	var s = loc.getNode("scale");
+	marker.setValues({
+		"x/value": loc.getNode("x", 1).getValue(),
+		"y/value": loc.getNode("y", 1).getValue(),
+		"z/value": loc.getNode("z", 1).getValue(),
+		"scale/value": s != nil ? s.getValue() : 1,
+		"arrow-enabled": 1,
+	});
 }
+
 
 #
 # Set and return running state. Disable/enable stop menu.
 #
-isRunning = func(which=nil)
-{
-  var prop = "/sim/tutorial/running";
-  if (which != nil)
-  {
-    setprop(prop, which);
-    gui.menuEnable("tutorial-stop", which);
-  }
-  return getprop(prop);
+var is_running = func(which = nil) {
+	var prop = "/sim/tutorial/running";
+	if (which != nil) {
+		setprop(prop, which);
+		gui.menuEnable("tutorial-stop", which);
+	}
+	return getprop(prop);
 }
+
 
 #
 # Output the message and optional sound recording.
 #
-say = func(msg, snd=nil, lerror=0)
-{
-  var lastmsg = getprop("/sim/tutorial/last-message");
+var m_lastmsgcount = 0;
+var say = func(msg, snd = nil, lerror = 0) {
+	var lastmsg = getprop("/sim/tutorial/last-message");
 
-  if ((msg != lastmsg) or (lerror == 1 and m_lastmsgcount == 1))
-  {
-    # Error messages are only displayed every 10 seconds (2 iterations)
-    # Other messages are only displayed if they change
-    if (snd == nil)
-    {
-      # Simply set to the co-pilot channel. TTS is picked up automatically.
-      setprop("/sim/messages/copilot", msg);
-    }
-    else
-    {
-      # Play the audio, and write directly to the screen-logger to avoid
-      # any tts being sent to festival.
-      lprop = { path : m_audioDir, file : snd };
-      fgcommand("play-audio-message", props.Node.new(lprop) );
-      screen.log.write(msg, 1, 1, 1);
-    }
+	if ((msg != lastmsg) or (lerror == 1 and m_lastmsgcount == 1)) {
+		# Error messages are only displayed every 10 seconds (2 iterations)
+		# Other messages are only displayed if they change
+		if (snd == nil) {
+			# Simply set to the co-pilot channel. TTS is picked up automatically.
+			setprop("/sim/messages/copilot", msg);
+		} else {
+			# Play the audio, and write directly to the screen-logger to avoid
+			# any tts being sent to festival.
+			lprop = { path : audio_dir, file : snd };
+			fgcommand("play-audio-message", props.Node.new(lprop) );
+			screen.log.write(msg, 1, 1, 1);
+		}
 
-    setprop("/sim/tutorial/last-message", msg);
-    m_lastmsgcount = 0;
-  }
-  else
-  {
-    m_lastmsgcount += 1;
-  }
+		setprop("/sim/tutorial/last-message", msg);
+		m_lastmsgcount = 0;
+	} else {
+		m_lastmsgcount += 1;
+	}
 }
+
+
+var run_nasal = func(node) {
+	node != nil or return;
+	foreach (var n; node.getChildren("nasal")) {
+		if (n.getNode("module") == nil) {
+			n.getNode("module", 1).setValue("__tut");
+		}
+		fgcommand("nasal", n);
+	}
+}
+
+
+globals.__tut = {
+	say : say,
+	next : func { current_step += 1; num_step_runs = 0 },
+	previous : func {
+		if (current_step > 0) {
+			current_step -= 1;
+		}
+		num_step_runs = 0;
+	},
+};
+
+
+var marker = nil;
+_setlistener("/sim/signals/nasal-dir-initialized", func {
+	marker = props.globals.getNode("/sim/model/marker", 1);
+});
+
+

@@ -30,16 +30,16 @@
 #
 # <step>          - Tutorial step - a segment of the tutorial, consisting of
 #                   the following:
-#   <instruction> - Text instruction displayed when the tutorial reaches
+#   <message>     - Text instruction displayed when the tutorial reaches
 #                   this step, and when neither the exit nor any error
 #                   criteria have been fulfilled
-#   <instruction-voice> - Optional: wav filename to play when displaying
+#   <audio>       - Optional: wav filename to play when displaying
 #                         instruction
 #   <error> - Error conditions, causing error messages to be displayed.
 #             The tutorial doesn't advance while any error conditions are
 #             fulfilled. Consists of one or more check nodes:
-#     <message> - Error message to display if error criteria fulfilled.
-#     <msg-voice> - Optional: wav filename to play when error condition fulfilled.
+#     <message>   - Error message to display if error criteria fulfilled.
+#     <audio>     - Optional: wav filename to play when error condition fulfilled.
 #     <condition> - error condition (see $FG_ROOT/Docs/README.condition)
 #
 #   <exit> - Exit criteria causing tutorial to progress to next step.
@@ -47,7 +47,7 @@
 #
 # <end>
 #   <message>> - Optional: Text to display when the tutorial exits the last step.
-#   <msg-voice> - Optional: wav filename to play when the tutorial exits the last step
+#   <audio>    - Optional: wav filename to play when the tutorial exits the last step
 
 #
 # GLOBAL VARIABLES
@@ -93,6 +93,7 @@ var startTutorial = func {
 
 	set_properties(tutorial.getChild("init"));
 	set_cursor(tutorial);
+	init_nasal();
 	run_nasal(tutorial);
 
 	var dir = tutorial.getChild("audio-dir");
@@ -130,6 +131,7 @@ var startTutorial = func {
 }
 
 
+
 var stopTutorial = func {
 	is_running(0);
 	set_cursor(props.Node.new());
@@ -137,7 +139,6 @@ var stopTutorial = func {
 
 
 
-#
 # stepTutorial
 #
 # This function does the actual work. It is executed every 5 seconds.
@@ -171,14 +172,14 @@ var stepTutorial = func {
 				message = m.getValue();
 			}
 
-			var v = end.getNode("voice");
+			var v = end.getNode("audio");
 			if (v != nil) {
 				voice = v.getValue();
 			}
 			run_nasal(end);
 		}
 		say(message, voice);
-		say("Deviations : " ~ num_errors);
+		say("Deviations: " ~ num_errors);
 		is_running(0);
 		return;
 	}
@@ -186,7 +187,7 @@ var stepTutorial = func {
 	var step = tutorial.getChildren("step")[current_step];
 	set_cursor(step);
 
-	var instr = step.getChild("instruction");
+	var instr = step.getChild("message");
 	message = instr != nil ? instr.getValue() : "Tutorial step " ~ current_step;
 
 	if (!num_step_runs) {
@@ -198,8 +199,9 @@ var stepTutorial = func {
 		# We then do not go through the error or exit processing, giving the user
 		# time to react to the instructions.
 
-		if (step.getChild("instruction-voice") != nil) {
-			voice = step.getChild("instruction-voice").getValue();
+		var v = step.getChild("audio");
+		if (v != nil) {
+			voice = v.getValue();
 		}
 
 		say(message, voice);
@@ -224,7 +226,7 @@ var stepTutorial = func {
 			if (m != nil) {
 				message = m.getValue();
 
-				var v = e.getChild("msg-voice");
+				var v = e.getChild("audio");
 				voice = v != nil ? v.getValue() : nil;
 			}
 		}
@@ -254,6 +256,7 @@ var stepTutorial = func {
 }
 
 
+
 # scan all <set> blocks and set their <property> to <value>
 # <set>
 #	 <property>/foo/bar</property>
@@ -271,6 +274,7 @@ var set_properties = func(node) {
 		}
 	}
 }
+
 
 
 var set_cursor = func(node) {
@@ -292,7 +296,7 @@ var set_cursor = func(node) {
 }
 
 
-#
+
 # Set and return running state. Disable/enable stop menu.
 #
 var is_running = func(which = nil) {
@@ -305,14 +309,14 @@ var is_running = func(which = nil) {
 }
 
 
-#
+
 # Output the message and optional sound recording.
 #
-var m_lastmsgcount = 0;
-var say = func(msg, snd = nil, lerror = 0) {
+var lastmsgcount = 0;
+var say = func(msg, snd = nil, error = 0) {
 	var lastmsg = getprop("/sim/tutorial/last-message");
 
-	if ((msg != lastmsg) or (lerror == 1 and m_lastmsgcount == 1)) {
+	if (msg != lastmsg or (error == 1 and lastmsgcount == 1)) {
 		# Error messages are only displayed every 10 seconds (2 iterations)
 		# Other messages are only displayed if they change
 		if (snd == nil) {
@@ -321,40 +325,51 @@ var say = func(msg, snd = nil, lerror = 0) {
 		} else {
 			# Play the audio, and write directly to the screen-logger to avoid
 			# any tts being sent to festival.
-			lprop = { path : audio_dir, file : snd };
-			fgcommand("play-audio-message", props.Node.new(lprop) );
+			var prop = { path : audio_dir, file : snd };
+			fgcommand("play-audio-message", props.Node.new(prop));
 			screen.log.write(msg, 1, 1, 1);
 		}
 
 		setprop("/sim/tutorial/last-message", msg);
-		m_lastmsgcount = 0;
+		lastmsgcount = 0;
 	} else {
-		m_lastmsgcount += 1;
+		lastmsgcount += 1;
 	}
 }
+
 
 
 var run_nasal = func(node) {
 	node != nil or return;
 	foreach (var n; node.getChildren("nasal")) {
 		if (n.getNode("module") == nil) {
-			n.getNode("module", 1).setValue("__tut");
+			n.getNode("module", 1).setValue("__tutorial");
 		}
 		fgcommand("nasal", n);
 	}
 }
 
 
-globals.__tut = {
-	say : say,
-	next : func { current_step += 1; num_step_runs = 0 },
-	previous : func {
-		if (current_step > 0) {
-			current_step -= 1;
-		}
-		num_step_runs = 0;
-	},
-};
+
+# Set up the namespace for embedded Nasal.
+#
+var init_nasal = func {
+	globals.__tutorial = {
+		say : say,
+		next : func { current_step += 1; num_step_runs = 0 },
+		previous : func {
+			if (current_step > 0) {
+				current_step -= 1;
+			}
+			num_step_runs = 0;
+		},
+	};
+}
+
+
+var dialog = func {
+	fgcommand("dialog-show", props.Node.new({ "dialog-name" : "marker-adjust" }));
+}
 
 
 var marker = nil;

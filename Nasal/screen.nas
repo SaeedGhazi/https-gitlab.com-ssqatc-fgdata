@@ -1,5 +1,3 @@
-# $Id$
-#
 # screen log window
 # =================
 #
@@ -32,12 +30,57 @@
 #                  a message falls off; if 0 then don't scroll at all
 #
 
-dialog_id = 0;
-theme_font = nil;
+var isspace = func(c) { c == ` ` or c == `\t` or c == `\n` or c == `\r` }
+
+
+##
+# trim spaces at the left (lr < 0), at the right (lr > 0), or both (lr = 0)
+#
+var trim = func(s, lr = 0) {
+	var l = 0;
+	if (lr <= 0) {
+		for (; l < size(s); l += 1) {
+			if (!isspace(s[l])) {
+				break;
+			}
+		}
+	}
+	var r = size(s) - 1;
+	if (lr >= 0) {
+		for (; r >= 0; r -= 1) {
+			if (!isspace(s[r])) {
+				break;
+			}
+		}
+	}
+	return r < l ? "" : substr(s, l, r - l + 1);
+}
+
+
+##
+# convert string for output (replaces tabs only for now)
+#
+var sanitize = func(s) {
+	var r = "";
+	for (var i = 0; i < size(s); i += 1) {
+		var c = s[i];
+		if (c == `\t`) {
+			r ~= ' ';
+		} else {
+			r ~= chr(c);
+		}
+	}
+	return r;
+}
+
+
+
+var dialog_id = 0;
+var theme_font = nil;
 
 window = {
 	new : func(x = nil, y = nil, maxlines = 10, autoscroll = 10) {
-		m = { parents : [window] };
+		var m = { parents : [window] };
 		#
 		# "public"
 		m.x = x;
@@ -67,7 +110,8 @@ window = {
 		if (g == nil) { g = me.fg[1] }
 		if (b == nil) { b = me.fg[2] }
 		if (a == nil) { a = me.fg[3] }
-		foreach (line; split("\n", msg)) {
+		foreach (var line; split("\n", trim(msg))) {
+			line = sanitize(trim(line));
 			append(me.lines, [line, r, g, b, a]);
 			if (size(me.lines) > me.maxlines) {
 				me.lines = subvec(me.lines, 1);
@@ -100,7 +144,7 @@ window = {
 		}
 		me.dialog.setColor(me.bg[0], me.bg[1], me.bg[2], me.bg[3]);
 
-		foreach (line; me.lines) {
+		foreach (var line; me.lines) {
 			var w = me.dialog.addChild("text");
 			w.set("halign", me.align);
 			w.set("label", line[0]);
@@ -144,9 +188,10 @@ window = {
 
 
 
-log = nil;
+var log = nil;
 
-_setlistener("/sim/signals/nasal-dir-initialized", func {
+var L = _setlistener("/sim/signals/nasal-dir-initialized", func {
+	removelistener(L);
 	setlistener("/sim/gui/current-style", func {
 		var theme = getprop("/sim/gui/current-style");
 		theme_font = getprop("/sim/gui/style[" ~ theme ~ "]/fonts/message-display/name");
@@ -199,9 +244,10 @@ msg_repeat = func {
 var atc = nil;
 var callsign = nil;
 var atclast = nil;
-listener = {};
+var listener = {};
 
-_setlistener("/sim/signals/nasal-dir-initialized", func {
+var M = _setlistener("/sim/signals/nasal-dir-initialized", func {
+	removelistener(M);
 	# set /sim/screen/nomap=true to prevent default message mapping
 	var nomap = getprop("/sim/screen/nomap");
 	if (nomap != nil and nomap) {

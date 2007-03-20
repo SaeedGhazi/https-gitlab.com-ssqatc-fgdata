@@ -186,8 +186,9 @@ var setAll = func {
 
 ##
 # Evaluates a <condition> property branch according to the rules
-# set out in $FG_ROOT/Docs/README.condition. Undefined conditions
-# are true.
+# set out in $FG_ROOT/Docs/README.conditions. Undefined conditions
+# and a nil argument are "true". The function dumps the condition
+# branch and returns nil on error.
 #
 var condition = func(p) {
     if(p == nil) { return 1; }
@@ -211,9 +212,9 @@ var _cond_or = func(p) {
 
 var _cond = func(p) {
     var n = p.getName();
-    if(n == "not") { return !_cond_and(p); }
-    if(n == "and") { return _cond_and(p); }
     if(n == "or") { return _cond_or(p); }
+    if(n == "and") { return _cond_and(p); }
+    if(n == "not") { return !_cond_and(p); }
     if(n == "equals") { return _cond_cmp(p, "EQ"); }
     if(n == "not-equals") { return !_cond_cmp(p, "EQ"); }
     if(n == "less-than") { return _cond_cmp(p, "LT"); }

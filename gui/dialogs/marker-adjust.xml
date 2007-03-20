@@ -110,7 +110,7 @@
 			var dump = func {
 				print("&lt;marker>");
 				foreach (var v; values) {
-					print(sprintf("    &lt;%s>%.3f&lt;/%s>", v.name, v.valueN.getValue(), v.name));
+					print(sprintf("    &lt;%s>%.4f&lt;/%s>", v.name, v.valueN.getValue(), v.name));
 				}
 				print("&lt;/marker>");
 			}

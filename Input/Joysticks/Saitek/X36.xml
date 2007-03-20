@@ -7,8 +7,9 @@
 -->
 <!--
   Remember to tell the joystick driver that it is a full CHF stick:
+  On GNU/Linux this can be done in this way:
 
-  modprobe analog js=0x7ff,0x7ff
+  % modprobe analog js=0x7ff,0x7ff
 
 -->
 <PropertyList>
@@ -17,9 +18,92 @@
  <name>Saitek X36</name>
  <name>Analog 4-axis 6-button 2-hat CHF joystick</name>
 
+ <data>
+  <view-mode type="int">0</view-mode>
+  <old-heading-offset type="double">0</old-heading-offset>
+  <old-pitch-offset type="double">0</old-pitch-offset>
+  <old-field-of-view type="double">0</old-field-of-view>
+  <quick-view-active type="int">0</quick-view-active>
+ </data>
+
+ <nasal>
+  <script>
+   <![CDATA[
+     self = cmdarg().getParent();
+     data = self.getNode("data");
+     view_mode           = data.getNode("view-mode");
+     old_heading_offset  = data.getNode("old-heading-offset");
+     old_pitch_offset    = data.getNode("old-pitch-offset");
+     old_field_of_view   = data.getNode("old-field-of-view");
+     quick_view_active   = data.getNode("quick-view-active");
+
+     heading_offset      =
+       props.globals.getNode("/sim/current-view/heading-offset-deg", 1);
+     pitch_offset        =
+       props.globals.getNode("/sim/current-view/pitch-offset-deg", 1);
+     goal_heading_offset =
+       props.globals.getNode("/sim/current-view/goal-heading-offset-deg", 1);
+     goal_pitch_offset   =
+       props.globals.getNode("/sim/current-view/goal-pitch-offset-deg", 1);
+
+     kbdshift = props.globals.getNode("/devices/status/keyboard/shift", 1);
+     kbdctrl  = props.globals.getNode("/devices/status/keyboard/ctrl", 1);
+     kbdalt   = props.globals.getNode("/devices/status/keyboard/alt", 1);
+
+     quick_view = func {
+       dir = arg[0];
+       if (dir == 0) {
+         quick_view_active.setIntValue(0);
+         goal_heading_offset.setDoubleValue
+           (old_heading_offset.getValue());
+         goal_pitch_offset.setDoubleValue(old_pitch_offset.getValue());
+         view.fovProp.setDoubleValue(old_field_of_view.getValue());
+       } else {
+         if (quick_view_active.getValue() == 0) {
+           quick_view_active.setIntValue(1);
+           old_heading_offset.setDoubleValue(heading_offset.getValue());
+           old_pitch_offset.setDoubleValue(pitch_offset.getValue());
+           old_field_of_view.setDoubleValue(view.fovProp.getValue());
+
+           if (dir == 1) {
+             goal_heading_offset.setDoubleValue
+               (getprop("/sim/view/config/left-direction-deg"));
+             goal_pitch_offset.setDoubleValue
+               (getprop("/sim/view/config/pitch-offset-deg"));
+             view.fovProp.setDoubleValue
+               (getprop("/sim/view/config/default-field-of-view-deg"));
+           } if (dir == 2) {
+             goal_heading_offset.setDoubleValue
+               (getprop("/sim/view/config/right-direction-deg"));
+             goal_pitch_offset.setDoubleValue
+               (getprop("/sim/view/config/pitch-offset-deg"));
+             view.fovProp.setDoubleValue
+               (getprop("/sim/view/config/default-field-of-view-deg"));
+           } if (dir == 3) {
+             goal_heading_offset.setDoubleValue
+               (getprop("/sim/view/config/front-direction-deg"));
+             goal_pitch_offset.setDoubleValue
+               (getprop("/sim/view/config/pitch-offset-deg"));
+             view.fovProp.setDoubleValue
+               (getprop("/sim/view/config/default-field-of-view-deg"));
+           } if (dir == 4) {
+             goal_heading_offset.setDoubleValue
+               (getprop("/sim/view/config/back-direction-deg"));
+             goal_pitch_offset.setDoubleValue
+               (getprop("/sim/view/config/pitch-offset-deg"));
+             view.fovProp.setDoubleValue
+               (getprop("/sim/view/config/default-field-of-view-deg"));
+           }
+         }
+       }
+     }
+   ]]>
+  </script>
+ </nasal>
+
  <!-- Analog axis 0. Aileron -->
  <axis n="0">
-  <desc>Aileron</desc>
+  <desc>aileron</desc>
   <binding>
    <command>property-scale</command>
    <property>/controls/flight/aileron</property>
@@ -31,7 +115,7 @@
 
  <!-- Analog axis 1. Elevator -->
  <axis n="1">
-  <desc>Elevator</desc>
+  <desc>elevator</desc>
   <binding>
    <command>property-scale</command>
    <property>/controls/flight/elevator</property>
@@ -43,9 +127,11 @@
  </axis>
 
  <!-- Analog axis 3. Rudder -->
- <!-- NOTE: This axis is tweaked due to faulty hardware. -->
+ <!-- NOTE: This axis is tweaked due to faulty hardware.
+            The standard case should be offset=0, factor=1.
+ -->
  <axis n="3">
-  <desc>Rudder</desc>
+  <desc>rudder</desc>
   <binding>
    <command>property-scale</command>
    <property>/controls/flight/rudder</property>
@@ -57,7 +143,7 @@
 
  <!-- Analog axis 2. Throttle -->
  <axis n="2">
-  <desc>Throttle</desc>
+  <desc>throttle</desc>
   <binding>
    <command>nasal</command>
    <script>controls.throttleAxis()</script>
@@ -66,33 +152,23 @@
 
  <!-- Axis 4. Hat 1 -->
  <axis n="4">
-  <desc>View Direction</desc>
+  <name>Right hat left/right</name>
+  <desc>
+   view-mode 0: horizontal view pan, view-mode 1: quick view left/right
+  </desc>
   <low>
    <repeatable type="bool">true</repeatable>
    <binding>
     <command>nasal</command>
-    <script><![CDATA[
-            #print("X36.xml: Axis 4, Hat 1: low!");
-            var mode = "/input/joysticks/js[0]/saitek-x36-mode";
-            if (!getprop(mode)) {
-              if (!getprop("/sim/current-view/tmp/redirected")) {
-                setprop("/sim/current-view/tmp/redirected", 1);
-                setprop("/sim/current-view/tmp/old-heading-offset",
-                        getprop("/sim/current-view/heading-offset-deg"));
-                setprop("/sim/current-view/goal-heading-offset-deg",
-                        getprop("/sim/view/config/left-direction-deg"));
-                setprop("/sim/current-view/tmp/old-pitch-offset",
-                        getprop("/sim/current-view/pitch-offset-deg"));
-                setprop("/sim/current-view/goal-pitch-offset-deg",
-                        getprop("/sim/view/config/pitch-offset-deg"));
-                setprop("/sim/current-view/tmp/old-field-of-view",
-                        view.fovProp.getValue());
-                view.fovProp.setDoubleValue(
-                        getprop("/sim/view/config/default-field-of-view-deg"));
-              }
-            } else {
-              view.panViewDir(0.5);
-            }
+    <script>
+     <![CDATA[
+       #print("X36.xml: Axis 4, Hat 1: low!");
+       m = view_mode.getValue();
+       if (m == 0) {
+         view.panViewDir(0.5);
+       } if (m == 1) {
+         quick_view(1);
+       }
      ]]>
     </script>
    </binding>
@@ -100,17 +176,11 @@
     <binding>
      <command>nasal</command>
      <script>
-             #print("X36.xml: Axis 4, Hat 1: low released!");
-             var mode = "/input/joysticks/js[0]/saitek-x36-mode";
-             setprop("/sim/current-view/tmp/redirected", 0);
-             if (!getprop(mode)) {
-               setprop("/sim/current-view/goal-heading-offset-deg",
-                       getprop("/sim/current-view/tmp/old-heading-offset"));
-               setprop("/sim/current-view/goal-pitch-offset-deg",
-                       getprop("/sim/current-view/tmp/old-pitch-offset"));
-               view.fovProp.setDoubleValue(
-                       getprop("/sim/current-view/tmp/old-field-of-view"));
-             }
+        #print("X36.xml: Axis 4, Hat 1: low released!");
+        m = view_mode.getValue();
+        if (m == 1) {
+          quick_view(0);
+        }
      </script>
     </binding>
    </mod-up>
@@ -119,28 +189,15 @@
    <repeatable type="bool">true</repeatable>
    <binding>
     <command>nasal</command>
-    <script><![CDATA[
-            #print("X36.xml: Axis 4, Hat 1: high!");
-            var mode = "/input/joysticks/js[0]/saitek-x36-mode";
-            if (!getprop(mode)) {
-              if (!getprop("/sim/current-view/tmp/redirected")) {
-                setprop("/sim/current-view/tmp/redirected", 1);
-                setprop("/sim/current-view/tmp/old-heading-offset",
-                        getprop("/sim/current-view/heading-offset-deg"));
-                setprop("/sim/current-view/goal-heading-offset-deg",
-                        getprop("/sim/view/config/right-direction-deg"));
-                setprop("/sim/current-view/tmp/old-pitch-offset",
-                        getprop("/sim/current-view/pitch-offset-deg"));
-                setprop("/sim/current-view/goal-pitch-offset-deg",
-                        getprop("/sim/view/config/pitch-offset-deg"));
-                setprop("/sim/current-view/tmp/old-field-of-view",
-                        view.fovProp.getValue());
-                view.fovProp.setDoubleValue(
-                        getprop("/sim/view/config/default-field-of-view-deg"));
-              }
-            } else {
-              view.panViewDir(-0.5);
-            }
+    <script>
+     <![CDATA[
+       #print("X36.xml: Axis 4, Hat 1: high!");
+       m = view_mode.getValue();
+       if (m == 0) {
+         view.panViewDir(-0.5);
+       } if (m == 1) {
+         quick_view(2);
+       }
      ]]>
     </script>
    </binding>
@@ -148,17 +205,11 @@
     <binding>
      <command>nasal</command>
      <script>
-             #print("X36.xml: Axis 4, Hat 1: low released!");
-             var mode = "/input/joysticks/js[0]/saitek-x36-mode";
-             setprop("/sim/current-view/tmp/redirected", 0);
-             if (!getprop(mode)) {
-               setprop("/sim/current-view/goal-heading-offset-deg",
-                       getprop("/sim/current-view/tmp/old-heading-offset"));
-               setprop("/sim/current-view/goal-pitch-offset-deg",
-                       getprop("/sim/current-view/tmp/old-pitch-offset"));
-               view.fovProp.setDoubleValue(
-                       getprop("/sim/current-view/tmp/old-field-of-view"));
-             }
+        #print("X36.xml: Axis 4, Hat 1: low released!");
+        m = view_mode.getValue();
+        if (m == 1) {
+          quick_view(0);
+        }
      </script>
     </binding>
    </mod-up>
@@ -167,33 +218,23 @@
 
  <!-- Axis 5. Hat 1 -->
  <axis n="5">
-  <desc>View Pitch</desc>
+  <name>Right hat up/down</name>
+  <desc>
+   view-mode 0: vertical view pan, view-mode 1: quick view front/view reset
+  </desc>
   <low>
    <repeatable type="bool">true</repeatable>
    <binding>
     <command>nasal</command>
-    <script><![CDATA[
-            #print("X36.xml: Axis 5, Hat 1: low!");
-            var mode = "/input/joysticks/js[0]/saitek-x36-mode";
-            if (!getprop(mode)) {
-              if (!getprop("/sim/current-view/tmp/redirected")) {
-                setprop("/sim/current-view/tmp/redirected", 1);
-                setprop("/sim/current-view/tmp/old-heading-offset",
-                        getprop("/sim/current-view/heading-offset-deg"));
-                setprop("/sim/current-view/goal-heading-offset-deg",
-                        getprop("/sim/view/config/front-direction-deg"));
-                setprop("/sim/current-view/tmp/old-pitch-offset",
-                        getprop("/sim/current-view/pitch-offset-deg"));
-                setprop("/sim/current-view/goal-pitch-offset-deg",
-                        getprop("/sim/view/config/pitch-offset-deg"));
-                setprop("/sim/current-view/tmp/old-field-of-view",
-                        view.fovProp.getValue());
-                view.fovProp.setDoubleValue(
-                        getprop("/sim/view/config/default-field-of-view-deg"));
-              }
-            } else {
-              view.panViewPitch(0.5);
-            }
+    <script>
+     <![CDATA[
+       #print("X36.xml: Axis 5, Hat 1: low!");
+       m = view_mode.getValue();
+       if (m == 0) {
+         view.panViewPitch(0.5);
+       } if (m == 1) {
+         quick_view(3);
+       }
      ]]>
     </script>
    </binding>
@@ -201,17 +242,11 @@
     <binding>
      <command>nasal</command>
      <script>
-             #print("X36.xml: Axis 4, Hat 1: low released!");
-             var mode = "/input/joysticks/js[0]/saitek-x36-mode";
-             setprop("/sim/current-view/tmp/redirected", 0);
-             if (!getprop(mode)) {
-               setprop("/sim/current-view/goal-heading-offset-deg",
-                       getprop("/sim/current-view/tmp/old-heading-offset"));
-               setprop("/sim/current-view/goal-pitch-offset-deg",
-                       getprop("/sim/current-view/tmp/old-pitch-offset"));
-               view.fovProp.setDoubleValue(
-                       getprop("/sim/current-view/tmp/old-field-of-view"));
-             }
+        #print("X36.xml: Axis 4, Hat 1: low released!");
+        m = view_mode.getValue();
+        if (m == 1) {
+          quick_view(0);
+        }
      </script>
     </binding>
    </mod-up>
@@ -220,29 +255,16 @@
    <repeatable type="bool">true</repeatable>
    <binding>
     <command>nasal</command>
-    <script><![CDATA[
-            #print("X36.xml: Axis 5, Hat 1: low!");
-            var mode = "/input/joysticks/js[0]/saitek-x36-mode";
-            if (!getprop(mode)) {
-              view.resetView();
-              if (0 and !getprop("/sim/current-view/tmp/redirected")) {
-                setprop("/sim/current-view/tmp/redirected", 1);
-                setprop("/sim/current-view/tmp/old-heading-offset",
-                        getprop("/sim/current-view/heading-offset-deg"));
-                setprop("/sim/current-view/goal-heading-offset-deg",
-                        getprop("/sim/view/config/back-direction-deg"));
-                setprop("/sim/current-view/tmp/old-pitch-offset",
-                        getprop("/sim/current-view/pitch-offset-deg"));
-                setprop("/sim/current-view/goal-pitch-offset-deg",
-                        getprop("/sim/view/config/pitch-offset-deg"));
-                setprop("/sim/current-view/tmp/old-field-of-view",
-                        view.fovProp.getValue());
-                view.fovProp.setDoubleValue(
-                        getprop("/sim/view/config/default-field-of-view-deg"));
-              }
-            } else {
-              view.panViewPitch(-0.5);
-            }
+    <script>
+     <![CDATA[
+       #print("X36.xml: Axis 5, Hat 1: low!");
+       m = view_mode.getValue();
+       if (m == 0) {
+         view.panViewPitch(-0.5);
+       } if (m == 1) {
+         view.resetView();
+         #quick_view(4);
+       }
      ]]>
     </script>
    </binding>
@@ -250,17 +272,11 @@
     <binding>
      <command>nasal</command>
      <script>
-             #print("X36.xml: Axis 4, Hat 1: low released!");
-             var mode = "/input/joysticks/js[0]/saitek-x36-mode";
-             setprop("/sim/current-view/tmp/redirected", 0);
-             if (0 and !getprop(mode)) {
-               setprop("/sim/current-view/goal-heading-offset-deg",
-                       getprop("/sim/current-view/tmp/old-heading-offset"));
-               setprop("/sim/current-view/goal-pitch-offset-deg",
-                       getprop("/sim/current-view/tmp/old-pitch-offset"));
-               view.fovProp.setDoubleValue(
-                       getprop("/sim/current-view/tmp/old-field-of-view"));
-             }
+        #print("X36.xml: Axis 4, Hat 1: low released!");
+        m = view_mode.getValue();
+        if (m == 1) {
+          #quick_view(0);
+        }
      </script>
     </binding>
    </mod-up>
@@ -268,19 +284,20 @@
  </axis>
 
  <!-- Axis 6. Hat 2.
-     The axes of hat 2 are messed up on the X36.
-     Up - Down    := Axis 6.low  - Axis 7.high
-     Left - Right := Axis 6.high - Axis 7.low
+     NOTE: The axes of hat 2 are messed up on the X36.
+           Up - Down    := Axis 6.low  - Axis 7.high
+           Left - Right := Axis 6.high - Axis 7.low
  -->
  <axis n="6">
-  <desc>View Zoom / Elevator Trim</desc>
+  <name>Left hat up/down</name>
+  <desc>elevator trim (hat up/down)</desc>
   <low>
    <repeatable type="bool">true</repeatable>
    <binding>
     <command>nasal</command>
     <script>
-            #print("X36.xml: Axis 6, Hat 1: low!");
-            controls.elevatorTrim(-1)
+       #print("X36.xml: Axis 6, Hat 1: low!");
+       controls.elevatorTrim(-1)
     </script>
    </binding>
   </low>
@@ -289,8 +306,8 @@
    <binding>
     <command>nasal</command>
     <script>
-            #print("X36.xml: Axis 6, Hat 1: high!");
-            view.increase()
+       #print("X36.xml: Axis 6, Hat 1: high!");
+       view.increase()
     </script>
    </binding>
   </high>
@@ -298,14 +315,15 @@
 
  <!-- Axis 7. Hat 2.  -->
  <axis n="7">
-  <desc>View Zoom / Elevator Trim</desc>
+  <name>Left hat left/right</name>
+  <desc>Zoom out/in (hat left/right)</desc>
   <low>
    <repeatable type="bool">true</repeatable>
    <binding>
     <command>nasal</command>
     <script>
-            #print("X36.xml: Axis 7, Hat 1: low!");
-            view.decrease()
+       #print("X36.xml: Axis 7, Hat 1: low!");
+       view.decrease()
     </script>
    </binding>
   </low>
@@ -314,8 +332,8 @@
    <binding>
     <command>nasal</command>
     <script>
-            #print("X36.xml: Axis 7, Hat 1: high!");
-            controls.elevatorTrim(1)
+       #print("X36.xml: Axis 7, Hat 1: high!");
+       controls.elevatorTrim(1)
     </script>
    </binding>
   </high>
@@ -323,23 +341,24 @@
 
  <!-- Button: Trigger -->
  <button n="0">
-  <desc>Brakes</desc>
+  <name>Trigger</name>
+  <desc>brakes, +Shift: Toggle parking brake</desc>
   <binding>
    <command>nasal</command>
    <script>
-           #print("X36.xml: Button 0 pressed!");
-           if (!getprop("/devices/status/keyboard/shift")) {
-             controls.applyBrakes(1);
-           } else {
-             controls.applyParkingBrake(1);
-           }
+      #print("X36.xml: Button 0 pressed!");
+      if (kbdshift.getBoolValue()) {
+        controls.applyParkingBrake(1);
+      } else {
+       controls.applyBrakes(1);
+      }
    </script>
   </binding>
   <mod-up>
    <binding>
     <command>nasal</command>
     <script>
-            controls.applyBrakes(0);
+       controls.applyBrakes(0);
     </script>
    </binding>
   </mod-up>
@@ -347,32 +366,34 @@
 
  <!-- Button: Fire C -->
  <button n="1">
-  <desc>View Cycle</desc>
+  <name>Fire C</name>
+  <desc>cycle views</desc>
   <repeatable>false</repeatable>
   <binding>
    <command>nasal</command>
    <script>
-           #print("X36.xml: Button 1 pressed!");
-           view.stepView(1)
+      #print("X36.xml: Button 1 pressed!");
+      view.stepView(1)
    </script>
   </binding>
  </button>
 
  <!-- Button: A -->
  <button n="2">
-  <desc>Left Brake</desc>
+  <name>A</name>
+  <desc>left brake</desc>
   <binding>
    <command>nasal</command>
    <script>
-           #print("X36.xml: Button 2 pressed!");
-           controls.applyBrakes(1, -1);
+      #print("X36.xml: Button 2 pressed!");
+      controls.applyBrakes(1, -1);
    </script>
   </binding>
   <mod-up>
    <binding>
     <command>nasal</command>
     <script>
-            controls.applyBrakes(0, -1);
+       controls.applyBrakes(0, -1);
     </script>
    </binding>
   </mod-up>
@@ -380,19 +401,20 @@
 
  <!-- Button: B -->
  <button n="3">
-  <desc>Right Brake</desc>
+  <name>B</name>
+  <desc>right brake</desc>
   <binding>
    <command>nasal</command>
    <script>
-           #print("X36.xml: Button 3 pressed!");
-           controls.applyBrakes(1, 1);
+      #print("X36.xml: Button 3 pressed!");
+      controls.applyBrakes(1, 1);
    </script>
   </binding>
   <mod-up>
    <binding>
     <command>nasal</command>
     <script>
-            controls.applyBrakes(0, 1);
+       controls.applyBrakes(0, 1);
     </script>
    </binding>
   </mod-up>
@@ -400,35 +422,46 @@
 
  <!-- Button: Launch -->
  <button n="4">
-  <desc>Reset view</desc>
+  <name>Launch</name>
+  <desc>toggle view mode</desc>
   <binding>
    <command>nasal</command>
    <script>
-           #print("X36.xml: Button 4 pressed!");
-           var p = "/input/joysticks/js[0]/saitek-x36-mode";
-           setprop(p, !getprop(p));
+      #print("X36.xml: Button 4 pressed!");
+      if (view_mode.getValue() == 0) {
+        view_mode.setIntValue(1);
+      } else {
+        view_mode.setIntValue(0);
+      }
    </script>
   </binding>
  </button>
 
  <!-- Button: F.lock -->
  <button n="5">
-  <desc>Airbrakes</desc>
+  <name>F.lock</name>
+  <desc>disarm speed brakes, +Shift: deploy speed brakes</desc>
   <binding>
    <command>nasal</command>
    <script>
-           #print("X36.xml: Button 5 pressed!");
-           var p = "/controls/flight/speedbrake";
-           if (!getprop("/devices/status/keyboard/shift")) {
-             setprop(p, 0.0);
-           } else {
-             setprop(p, 1.0);
-           }
+      #print("X36.xml: Button 5 pressed!");
+      var p = "/controls/flight/speedbrake";
+      if (kbdshift.getBoolValue()) {
+        setprop(p, 1.0);
+      } else {
+        setprop(p, 0.0);
+      }
    </script>
   </binding>
  </button>
 
 </PropertyList>
-
-<!-- end of joystick.xml -->
-
+<!--
+ * Overrides tab width for this buffer in Emacs so the tab width is reasonable.
+ * This must remain at the end of the file.
+ * ===========================================================================
+ * Local variables:
+ * tab-width: 1
+ * indent-tabs-mode: nil
+ * End:
+-->

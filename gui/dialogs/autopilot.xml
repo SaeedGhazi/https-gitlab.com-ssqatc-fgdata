@@ -450,26 +450,26 @@
 
     </group> <!-- End of Pitch/Altitude VBox -->
   </group>
-  
+
   <hrule><dummy/></hrule>
 
-	<group> <!-- Passive Mode Toggle -->
-    	<layout>hbox</layout>
-        <checkbox>
-        	<label>FlightDirector Mode</label>
-          	<halign>center</halign>
-          	<property>/autopilot/locks/passive-mode</property>
-          	<live>true</live>
-          	<binding>
-            	<command>dialog-apply</command>
-          	</binding>
-          	<binding>
-            	<command>property-toggle</command>
-          	</binding>
-        </checkbox>
-	</group>
+  <group> <!-- Passive Mode Toggle -->
+    <layout>hbox</layout>
+    <checkbox>
+      <label>FlightDirector Mode</label>
+      <halign>center</halign>
+      <property>/autopilot/locks/passive-mode</property>
+      <live>true</live>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>property-toggle</command>
+      </binding>
+    </checkbox>
+  </group>
 
-	<hrule><dummy/></hrule>
+  <hrule><dummy/></hrule>
 
   <button>
     <legend>Close</legend>

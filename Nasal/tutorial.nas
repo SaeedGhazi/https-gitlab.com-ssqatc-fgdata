@@ -22,6 +22,16 @@
 #   <heading-deg>
 #   <airspeed-kt>
 #
+# <models>
+#   <model>           - scenery object definition
+#     <path>          - path to model (relative to $FG_ROOT)
+#     <longitude-deg>
+#     <latitude-deg>
+#     <elevation-ft>
+#     <heading-deg>
+#     <pitch-deg>
+#     <roll-deg
+#
 # <init>       - Optional: Initialization section consist of one or more
 #                  set nodes:
 #   <set>
@@ -74,7 +84,7 @@ var startTutorial = func {
 
 	tutorial = nil;
 	foreach (var c; props.globals.getNode("/sim/tutorial").getChildren("tutorial")) {
-		if (c.getChild("name").getValue() == name) {
+		if (c.getNode("name").getValue() == name) {
 			tutorial = c;
 			break;
 		}
@@ -91,12 +101,13 @@ var startTutorial = func {
 	num_step_runs = 0;
 	num_errors = 0;
 
-	set_properties(tutorial.getChild("init"));
+	set_properties(tutorial.getNode("init"));
 	set_cursor(tutorial);
+	set_models(tutorial.getNode("models"));
 	init_nasal();
 	run_nasal(tutorial);
 
-	var dir = tutorial.getChild("audio-dir");
+	var dir = tutorial.getNode("audio-dir");
 	if (dir != nil) {
 		audio_dir = getprop("/sim/fg-root") ~ "/" ~ dir.getValue() ~ "/";
 	} else {
@@ -134,6 +145,7 @@ var startTutorial = func {
 
 var stopTutorial = func {
 	is_running(0);
+	remove_models();
 	set_cursor(props.Node.new());
 }
 
@@ -273,6 +285,37 @@ var set_properties = func(node) {
 			setprop(p, v);
 		}
 	}
+}
+
+
+
+var models = [];
+var set_models = func(node) {
+	remove_models();
+
+	node != nil or return;
+	var manager = props.globals.getNode("/models", 1);
+	foreach (var src; node.getChildren("model")) {
+		var i = 0;
+		while (i += 1) {
+			if (manager.getChild("model", i, 0) == nil) {
+				break;
+			}
+		}
+		var dest = manager.getChild("model", i, 1);
+		props.copy(src, dest);
+		dest.getNode("load", 1);  # this make the modelmgr load the model
+		dest.removeChildren("load");
+		append(models, dest);
+	}
+}
+
+
+var remove_models = func {
+	foreach (var m; models) {
+		m.getParent().removeChild(m.getName(), m.getIndex());
+	}
+	models = [];
 }
 
 

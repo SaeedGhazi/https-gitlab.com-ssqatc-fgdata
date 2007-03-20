@@ -1,4 +1,9 @@
 <?xml version="1.0"?>
+<!--
+	Dialog for tutorial marker adjustment.
+	Can be opened with tutorial.dialog() in Help->Nasal Console.
+	Use Ctrl for coarser, and Shift for finer movements.
+-->
 
 <PropertyList>
 	<name>marker-adjust</name>
@@ -36,18 +41,22 @@
 		<open>
 			var self = cmdarg();
 			var dlgname = self.getNode("name").getValue();
+			var kbdctrl = props.globals.getNode("/devices/status/keyboard/ctrl");
+			var kbdshift = props.globals.getNode("/devices/status/keyboard/shift");
 
 			var Value = {
-				new : func(name, init = 0) {
+				new : func(name, factor, init = 0) {
 					var m = { parents: [Value] };
 					m.name = name;
+					m.factor = factor;
+					m.init = init;
 					var n = props.globals.getNode("/sim/model/marker/" ~ m.name, 1);
 					m.sliderN = n.getNode("slider", 1);
 					m.offsetN = n.getNode("offset", 1);
 					m.valueN = n.getNode("value", 1);
 					m.offsetN.setDoubleValue(0);
 					m.sliderN.setDoubleValue(0);
-					m.valueN.setDoubleValue(init);
+					m.valueN.setDoubleValue(m.init);
 					m.last_slider = 0;
 					m.center();
 					m.sliderL = setlistener(m.sliderN, func { m.update() });
@@ -56,10 +65,20 @@
 				del : func {
 					removelistener(me.sliderL);
 				},
+				reset : func {
+					me.center();
+					me.valueN.setDoubleValue(me.init);
+				},
 				update : func {
 					var offs = me.sliderN.getValue();
 					var v = me.offsetN.getValue() + me.sliderN.getValue() - me.last_slider;
-					me.valueN.setValue(me.valueN.getValue() + v * 0.1);
+					var f = me.factor;
+					if (kbdctrl.getValue()) {
+						f *= 5;
+					} elsif (kbdshift.getValue()) {
+						f *= 0.1;
+					}
+					me.valueN.setValue(me.valueN.getValue() + v * f);
 					me.offsetN.setDoubleValue(0);
 					me.last_slider = offs;
 				},
@@ -70,15 +89,21 @@
 			};
 
 			var values = [
-				Value.new("x"),
-				Value.new("y"),
-				Value.new("z"),
-				Value.new("scale", 1),
+				Value.new("x", 0.1),    # aft/fore
+				Value.new("y", 0.1),    # left/right
+				Value.new("z", 0.1),    # down/up
+				Value.new("scale", 2, 1),
 			];
 
 			var center = func {
 				foreach (var v; values) {
 					v.center();
+				}
+			}
+
+			var reset = func {
+				foreach (var v; values) {
+					v.reset();
 				}
 			}
 
@@ -121,7 +146,7 @@
 			<binding>
 				<command>property-adjust</command>
 				<property>/sim/model/marker/x/offset</property>
-				<step>-10</step>
+				<step>10</step>
 			</binding>
 			<binding>
 				<command>nasal</command>
@@ -137,7 +162,7 @@
 			<binding>
 				<command>property-adjust</command>
 				<property>/sim/model/marker/x/offset</property>
-				<step>-1</step>
+				<step>1</step>
 			</binding>
 			<binding>
 				<command>nasal</command>
@@ -148,11 +173,11 @@
 		<slider>
 			<name>x</name>
 			<property>/sim/model/marker/x/slider</property>
-			<legend>fore/aft</legend>
+			<legend>aft/fore</legend>
 			<pref-width>250</pref-width>
 			<live>1</live>
-			<min>-1</min>
-			<max>1</max>
+			<min>1</min>
+			<max>-1</max>
 
 			<color>
 				<red>1.0</red>
@@ -175,7 +200,7 @@
 			<binding>
 				<command>property-adjust</command>
 				<property>/sim/model/marker/x/offset</property>
-				<step>1</step>
+				<step>-1</step>
 			</binding>
 			<binding>
 				<command>nasal</command>
@@ -191,7 +216,7 @@
 			<binding>
 				<command>property-adjust</command>
 				<property>/sim/model/marker/x/offset</property>
-				<step>10</step>
+				<step>-10</step>
 			</binding>
 			<binding>
 				<command>nasal</command>
@@ -476,6 +501,17 @@
 	<group>
 		<layout>hbox</layout>
 		<default-padding>2</default-padding>
+
+		<button>
+			<halign>left</halign>
+			<legend>Reset</legend>
+			<pref-height>22</pref-height>
+			<pref-width>60</pref-width>
+			<binding>
+				<command>nasal</command>
+				<script>reset()</script>
+			</binding>
+		</button>
 
 		<empty><stretch>1</stretch></empty>
 

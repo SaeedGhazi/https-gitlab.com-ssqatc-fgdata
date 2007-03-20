@@ -1,0 +1,332 @@
+# geo functions
+# -------------------------------------------------------------------------------------------------
+# geo.Coord.new([<coord>])        ... class that holds and maintains geographical coordinates
+#                                     can be initialized with another geo.Coord instance
+#     Coord.set(<coord>)          ... sets coordinates from another geo.Coord instance
+#
+#     Coord.set_lon(<num>)        ... functions for setting longitude/latitude/altitude
+#     Coord.set_lat(<num>)
+#     Coord.set_alt(<num>)
+#     Coord.set_lonlat(<num>, <num> [, <num>])      (altitude is optional; default=0)
+#
+#     Coord.set_x(<num>)          ... functions for setting cartesian x/y/z coordinates
+#     Coord.set_y(<num>)
+#     Coord.set_z(<num>)
+#     Coord.set_xyz(<num>, <num>, <num>)
+#
+#     Coord.lon()                 ... functions for getting lon/lat/alt
+#     Coord.lat()
+#     Coord.alt()                     ... returns altitude in m
+#     Coord.lonlat()                  ... returns array  [<lon>, <lat>, <alt>]
+#
+#     Coord.x()                   ... functions for reading cartesian coords (in m)
+#     Coord.y()
+#     Coord.z()
+#     Coord.xyz()                     ... returns array  [<x>, <y>, <z>]
+#
+#     Coord.course_to(<coord>)    ... returns course to another geo.Coord instance (degree)
+#     Coord.distance_to(<coord>)  ... returns distance in m along Earth curvature, ignoring altitudes
+#                                     useful for map distance
+#     Coord.direct_distance_to(<coord>) ...   distance in m direct, considers altitude,
+#                                             but cuts through Earch surface
+#
+#     Coord.apply_course_distance(<course>, <distance>)       ... guess what
+#     Coord.dump()                ... outputs coordinates
+#     Coord.is_defined()          ... returns whether the coords are defined
+#
+# geo.aircraft_position()         ... returns current aircraft position as geo.Coord
+# geo.click_position()            ... returns last click coords as geo.Coord or nil before first click
+#
+# geo.tile_path(<lon>, <lat>)     ... returns tile path string (e.g. "w130n30/w123n37/942056.stg")
+# geo.normdeg(<angle>)            ... returns angle normalized to  0 <= angle < 360
+
+
+var EPSILON = 0.0000000000001;
+var ERAD = 6378138.12;		# Earth radius (m)
+var D2R = math.pi / 180;
+var R2D = 180 / math.pi;
+var FT2M = 0.3048;
+var M2FT = 3.28083989501312335958;
+
+
+var printf = func(_...) { print(call(sprintf, _)) }
+var floor = func(v) { v < 0.0 ? -int(-v) - 1 : int(v) }
+var sin = math.sin;
+var cos = math.cos;
+var atan2 = math.atan2;
+var sqrt = math.sqrt;
+var asin = func(v) { math.atan2(v, math.sqrt(1 - v * v)) }
+var acos = func(v) { math.atan2(math.sqrt(1 - v * v), v) }
+
+var mod = func(v, w) {
+	var x = v - w * int(v / w);
+	return x < 0 ? x + abs(w) : x;
+}
+
+
+# class that maintains one set of geographical coordinates and provides
+# simple conversion methods (which assume a spherical Earth)
+#
+var Coord = {
+	new : func(copy = nil) {
+		var m = { parents: [Coord] };
+		m._pdirty = 1;  # polar
+		m._cdirty = 1;  # cartesian
+		m._lon = nil;   # in radian
+		m._lat = nil;
+		m._alt = nil;   # ASL
+		m._x = nil;     # in m
+		m._y = nil;
+		m._z = nil;
+		if (copy != nil) {
+			m.set(copy);
+		}
+		return m;
+	},
+	_cupdate : func {
+		me._cdirty or return;
+		var rad = ERAD + me._alt;
+		var cosphi = cos(me._lat) * rad;
+		me._x = cosphi * cos(me._lon);
+		me._y = cosphi * sin(me._lon);
+		me._z = sin(me._lat) * rad;
+		me._cdirty = 0;
+	},
+	_pupdate : func {
+		me._pdirty or return;
+		me._lat = atan2(me._z, sqrt(me._x * me._x + me._y * me._y));
+		me._lon = atan2(me._y, me._x);
+		me._alt = sqrt(me._x * me._x + me._y * me._y + me._z * me._z) - ERAD;
+		me._pdirty = 0;
+	},
+
+	x : func { me._cupdate(); me._x },
+	y : func { me._cupdate(); me._y },
+	z : func { me._cupdate(); me._z },
+	xyz : func { me._cupdate(); [me._x, me._y, me._z] },
+
+	lon : func { me._pupdate(); me._lon * R2D },  # return in degree
+	lat : func { me._pupdate(); me._lat * R2D },
+	alt : func { me._pupdate(); me._alt },
+	lonlat : func { me._pupdate(); [me._lon, me._lat, me._alt] },
+
+	set_x : func(x) { me._pupdate(); me._pdirty = 1; me._x = x; me },
+	set_y : func(y) { me._pupdate(); me._pdirty = 1; me._y = y; me },
+	set_z : func(z) { me._pupdate(); me._pdirty = 1; me._z = z; me },
+
+	set_lon : func(lon) { me._cupdate(); me._cdirty = 1; me._lon = lon * D2R; me },
+	set_lat : func(lat) { me._cupdate(); me._cdirty = 1; me._lat = lat * D2R; me },
+	set_alt : func(alt) { me._cupdate(); me._cdirty = 1; me._alt = alt; me },
+
+	set : func(c) {
+		c._pupdate();
+		me._lon = c._lon;
+		me._lat = c._lat;
+		me._alt = c._alt;
+		me._cdirty = 1;
+		me._pdirty = 0;
+		me;
+	},
+	set_lonlat : func(lon, lat, alt = 0) {
+		me._lon = lon * D2R;
+		me._lat = lat * D2R;
+		me._alt = alt;
+		me._cdirty = 1;
+		me._pdirty = 0;
+		me;
+	},
+	set_xyz : func(x, y, z) {
+		me._x = x;
+		me._y = y;
+		me._z = z;
+		me._pdirty = 1;
+		me._cdirty = 0;
+		me;
+	},
+	apply_course_distance : func(course, dist) {
+		me._pupdate();
+		course *= D2R;
+		dist /= ERAD;
+		me._lat = asin(sin(me._lat) * cos(dist) + cos(me._lat) * sin(dist) * cos(course));
+
+		if (cos(me._lat) > EPSILON) {
+			me._lon = math.pi - mod(math.pi - me._lon - asin(sin(course) * sin(dist)
+					/ cos(me._lat)), 2 * math.pi);
+		}
+		me._cdirty = 1;
+		me;
+	},
+	course_to : func(dest) {
+		me._pupdate();
+		dest._pupdate();
+
+		if (me._lon == dest._lon and me._lat == dest._lat) {
+			return 0;
+		}
+		var dlon = dest._lon - me._lon;
+		return mod(atan2(sin(dlon) * cos(dest._lat), cos(me._lat) * sin(dest._lat)
+				- sin(me._lat) * cos(dest._lat) * cos(dlon)), 2 * math.pi) * R2D;
+	},
+	# arc distance on an earth sphere; doesn't consider altitude
+	distance_to : func(dest) {
+		me._pupdate();
+		dest._pupdate();
+
+		if (me._lon == dest._lon and me._lat == dest._lat) {
+			return 0;
+		}
+		var o = sin((me._lon - dest._lon) * 0.5);
+		var a = sin((me._lat - dest._lat) * 0.5);
+		return 2.0 * ERAD * asin(sqrt(a * a + cos(me._lat) * cos(dest._lat) * o * o));
+	},
+	direct_distance_to : func(dest) {
+		me._cupdate();
+		dest._cupdate();
+		var dx = dest._x - me._x;
+		var dy = dest._y - me._y;
+		var dz = dest._z - me._z;
+		return sqrt(dx * dx + dy * dy + dz * dz);
+	},
+	is_defined : func {
+		return !(me._cdirty and me._pdirty);
+	},
+	dump : func {
+		if (me._cdirty and me._pdirty) {
+			print("Coord.print(): coord undefined");
+		}
+		me._cupdate();
+		me._pupdate();
+		printf("x=%f  y=%f  z=%f    lon=%f  lat=%f  alt=%f",
+				me.x(), me.y(), me.z(), me.lon(), me.lat(), me.alt());
+	},
+};
+
+
+# normalize degree to 0 <= angle < 360
+#
+var normdeg = func(angle) {
+	while (angle < 0) {
+		angle += 360;
+	}
+	while (angle >= 360) {
+		angle -= 360;
+	}
+	return angle;
+}
+
+
+var bucket_span = func(lat) {
+	if (lat >= 89.0 ) {
+		360.0;
+	} elsif (lat >= 88.0 ) {
+		8.0;
+	} elsif (lat >= 86.0 ) {
+		4.0;
+	} elsif (lat >= 83.0 ) {
+		2.0;
+	} elsif (lat >= 76.0 ) {
+		1.0;
+	} elsif (lat >= 62.0 ) {
+		0.5;
+	} elsif (lat >= 22.0 ) {
+		0.25;
+	} elsif (lat >= -22.0 ) {
+		0.125;
+	} elsif (lat >= -62.0 ) {
+		0.25;
+	} elsif (lat >= -76.0 ) {
+		0.5;
+	} elsif (lat >= -83.0 ) {
+		1.0;
+	} elsif (lat >= -86.0 ) {
+		2.0;
+	} elsif (lat >= -88.0 ) {
+		4.0;
+	} elsif (lat >= -89.0 ) {
+		8.0;
+	} else {
+		360.0;
+	}
+}
+
+
+var tile_index = func(lon, lat) {
+	var lon_floor = floor(lon);
+	var lat_floor = floor(lat);
+	var span = bucket_span(lat);
+	var x = 0;
+
+	if (span < 0.0000001) {
+		lon = 0;
+	} elsif (span <= 1.0) {
+		x = int((lon - lon_floor) / span);
+	} else {
+		if (lon >= 0) {
+			lon = int(int(lon / span) * span);
+		} else {
+			lon = int(int((lon + 1) / span) * span - span);
+			if (lon < -180) {
+				lon = -180;
+			}
+		}
+	}
+
+	var y = int((lat - lat_floor) * 8);
+	(lon_floor + 180) * 16384 + (lat_floor + 90) * 64 + y * 8 + x;
+}
+
+
+var format = func(lon, lat) {
+	sprintf("%s%03d%s%02d", lon < 0 ? "w" : "e", abs(lon), lat < 0 ? "s" : "n", abs(lat));
+}
+
+
+var tile_path = func(lon, lat) {
+	var p = format(floor(lon / 10.0) * 10, floor(lat / 10.0) * 10);
+	p ~= "/" ~ format(floor(lon), floor(lat));
+	p ~= "/" ~ tile_index(lon, lat) ~ ".stg";
+}
+
+
+
+var aircraft_lon = nil;
+var aircraft_lat = nil;
+var aircraft_alt = nil;
+var aircraft_coord = Coord.new();
+
+var aircraft_position = func {
+	var lon = aircraft_lon.getValue();
+	var lat = aircraft_lat.getValue();
+	var alt = aircraft_alt.getValue() * FT2M;
+	return aircraft_coord.set_lonlat(lon, lat, alt);
+}
+
+
+
+var click_lon = nil;
+var click_lat = nil;
+var click_elev = nil;
+var click_coord = Coord.new();
+
+_setlistener("/sim/signals/click", func {
+	var lon = click_lon.getValue();
+	var lat = click_lat.getValue();
+	var elev = click_elev.getValue();
+	click_coord.set_lonlat(lon, lat, elev);
+});
+
+var click_position = func {
+	return click_coord.is_defined() ? click_coord : nil;
+}
+
+
+
+_setlistener("/sim/signals/nasal-dir-initialized", func {
+	aircraft_lon = props.globals.getNode("/position/longitude-deg", 1);
+	aircraft_lat = props.globals.getNode("/position/latitude-deg", 1);
+	aircraft_alt = props.globals.getNode("/position/altitude-ft", 1);
+
+	click_lon = props.globals.getNode("/sim/input/click/longitude-deg", 1);
+	click_lat = props.globals.getNode("/sim/input/click/latitude-deg", 1);
+	click_elev = props.globals.getNode("/sim/input/click/elevation-m", 1);
+});

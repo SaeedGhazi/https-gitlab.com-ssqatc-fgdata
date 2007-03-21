@@ -1,5 +1,5 @@
-#
 # Functions for XML-based tutorials
+# ---------------------------------------------------------------------------------------
 #
 
 #
@@ -50,24 +50,38 @@
 #                   criteria have been fulfilled
 #   <audio>       - Optional: wav filename to play when displaying
 #                   instruction
+#   <nasal><script>
+#
 #   <error> - Error conditions, causing error messages to be displayed.
 #             The tutorial doesn't advance while any error conditions are
 #             fulfilled. Consists of one or more check nodes:
 #     <message>   - Error message to display if error criteria fulfilled.
 #     <audio>     - Optional: wav filename to play when error condition fulfilled.
+#     <nasal><script>
 #     <condition> - error condition (see $FG_ROOT/Docs/README.condition)
 #
 #   <exit> - Exit criteria causing tutorial to progress to next step.
 #     <condition> - exit condition (see $FG_ROOT/Docs/README.condition)
+#     <nasal><script>
 #
 # <end>
 #   <message>> - Optional: Text to display when the tutorial exits the last step.
 #   <audio>    - Optional: wav filename to play when the tutorial exits the last step
+#   <nasal><script>
 #
 #
 # NOTE: everywhere where <message> and/or <audio> is supported there can be
 #       more than one <message> or <audio> entry defined, in which case one
 #       is randomly chosen.
+#       All <nasal><script> run in a separate Nasal namespace. There are a few
+#       functions pre-defined in this namespace:
+#       - next(n=1)       ... switch to next step (default) or n steps forward
+#       - previous(n=1)   ... switch to previous step (default) or n steps back
+#       - say("...", who="copilot", delay=1)  ... say message, with optional
+#                             speaker and delay. Available speakers are "pilot",
+#                             "copilot", "atc", "ai-plane", "apprach", "ground".
+#                             Examples:   say("Look! There!");
+#                                         say("Oh, dear ...", "pilot", 2);
 #
 #
 # GLOBAL VARIABLES
@@ -77,9 +91,11 @@
 var STEP_INTERVAL = 5;   # time between tutorial steps
 var EXIT_INTERVAL = 1;   # time between fulfillment of a step and the start of the next step
 
+var tutorial = nil;
+var steps = [];
+var loop_id = 0;
 var current_step = nil;
 var num_errors = nil;
-var tutorial = nil;
 var num_step_runs = nil;
 var audio_dir = nil;
 
@@ -105,11 +121,13 @@ var startTutorial = func {
 		return;
 	}
 
-	screen.log.write('Loading tutorial "' ~ name ~ '" ...');
+	stopTutorial();
 	is_running(1);
+	screen.log.write('Loading tutorial "' ~ name ~ '" ...');
 	current_step = 0;
 	num_step_runs = 0;
 	num_errors = 0;
+	steps = tutorial.getChildren("step");
 
 	set_properties(tutorial.getNode("init"));
 	set_cursor(tutorial);
@@ -143,21 +161,23 @@ var startTutorial = func {
 
 	var timeofday = tutorial.getChild("timeofday");
 	if (timeofday != nil) {
-		fgcommand("timeofday", props.Node.new({"timeofday": timeofday.getValue()}));
+		fgcommand("timeofday", props.Node.new({ "timeofday" : timeofday.getValue() }));
 	}
 
 	# Pick up any weather conditions/scenarios set
 	setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers") + 1);
-	settimer(stepTutorial, STEP_INTERVAL);
+	settimer(func { stepTutorial(loop_id += 1) }, STEP_INTERVAL);
 }
 
 
 
 var stopTutorial = func {
+	loop_id += 1;
 	is_running(0);
-	remove_models();
-	set_cursor(props.Node.new());
+	set_cursor();
 }
+
+_setlistener("/sim/crashed", stopTutorial);
 
 
 
@@ -175,59 +195,59 @@ var stopTutorial = func {
 #   - Otherwise display the instructions for the step.
 # - Sets the timer for 5 seconds again.
 #
-var stepTutorial = func {
-	if (!is_running()) {
-		return;
-	}
+var stepTutorial = func(id) {
+	id == loop_id or return;
 
-	var voice = nil;
-	var message = nil;
+	var continue_after = func(i) { settimer(func { stepTutorial(id) }, i) }
 
-	if (current_step >= size(tutorial.getChildren("step"))) {
+	if (current_step >= size(steps)) {
 		# end of the tutorial
-		say_message(tutorial.getNode("end"), "Tutorial finished.");
+		var end = tutorial.getNode("end");
+		say_message(end, "Tutorial finished.");
 		say_message(nil, "Deviations: " ~ num_errors);
-		is_running(0);
+		run_nasal(end);
+		stopTutorial();
 		return;
 	}
 
-	var step = tutorial.getChildren("step")[current_step];
+	var step = steps[current_step];
 	set_cursor(step);
+	set_view(step.getNode("view"));
+	set_targets(tutorial.getNode("targets"));
 
-	if (!num_step_runs) {
+	if (num_step_runs == 0) {
 		# first time we've encountered this step
 		say_message(step, "Tutorial step " ~ current_step);
 		set_properties(step);
+		run_nasal(step);
 
 		num_step_runs += 1;
-		settimer(stepTutorial, STEP_INTERVAL);
-		return;
+		return continue_after(STEP_INTERVAL);
 	}
 
-	set_targets(tutorial.getNode("targets"));
-	run_nasal(step);
-
-	# Check for error conditions
-	foreach (var e; step.getChildren("error")) {
-		if (props.condition(e.getNode("condition"))) {
+	# check for error conditions in random order
+	foreach (var error; shuffle(step.getChildren("error"))) {
+		if (props.condition(error.getNode("condition"))) {
 			num_errors += 1;
-			run_nasal(e);
-			say_message(e);
-			return settimer(stepTutorial, STEP_INTERVAL);
+			run_nasal(error);
+			say_message(error);
+			return continue_after(STEP_INTERVAL);
 		}
 	}
 
-	var e = step.getNode("exit");
-	if (e != nil) {
-		if (!props.condition(e.getNode("condition"))) {
-			return settimer(stepTutorial, STEP_INTERVAL);
+	# check for exit condition
+	var exit = step.getNode("exit");
+	if (exit != nil) {
+		if (!props.condition(exit.getNode("condition"))) {
+			return continue_after(STEP_INTERVAL);
 		}
-		run_nasal(e);
+		run_nasal(exit);
 	}
 
+	# success!
 	current_step += 1;
 	num_step_runs = 0;
-	return settimer(stepTutorial, EXIT_INTERVAL);
+	return continue_after(EXIT_INTERVAL);
 }
 
 
@@ -279,7 +299,6 @@ var set_targets = func(node) {
 
 var models = [];
 var set_models = func(node) {
-	remove_models();
 	node != nil or return;
 
 	var manager = props.globals.getNode("/models", 1);
@@ -307,8 +326,20 @@ var remove_models = func {
 }
 
 
+var set_view = func(node = nil) {
+	node != nil or return;
+	if (!size(node.getChildren())) {
+		var name = node.getValue();
+		node = tutorial.getNode("views");
+		node != nil or die("<view>name</view>, but no <views> group");
+		node = node.getNode(name);
+		node != nil or die("<view>name</view> refers to non existing <views> group");
+	}
+	props.copy(node, props.globals.getNode("/sim/current-view"));
+}
 
-var set_cursor = func(node) {
+
+var set_cursor = func(node = nil) {
 	node != nil or return;
 	var loc = node.getNode("marker");
 	if (loc == nil) {
@@ -327,7 +358,6 @@ var set_cursor = func(node) {
 }
 
 
-
 # Set and return running state. Disable/enable stop menu.
 #
 var is_running = func(which = nil) {
@@ -340,18 +370,19 @@ var is_running = func(which = nil) {
 }
 
 
-
 # Output the message and optional sound recording.
 #
 var lastmsgcount = 0;
 var say_message = func(node, default = nil) {
 	var msg = default;
 	var audio = nil;
-	var error = 0;
+	var is_error = 0;
 
 	if (node != nil) {
-		error = node.getName() == "error";
+		is_error = node.getName() == "error";
 
+		# choose random message/audio, but make sure that in the first
+		# run of a step, the first ones are used
 		var m = node.getChildren("message");
 		if (size(m)) {
 			msg = m[rand() * size(m)].getValue();
@@ -359,13 +390,11 @@ var say_message = func(node, default = nil) {
 
 		var a = node.getChildren("audio");
 		if (size(a)) {
-			audio = a[rand() * size(m)].getValue();
+			audio = a[rand() * size(a)].getValue();
 		}
 	}
 
-	var lastmsg = getprop("/sim/tutorial/last-message");
-
-	if (msg != lastmsg or (error == 1 and lastmsgcount == 1)) {
+	if (msg != last_message.getValue() or (is_error and lastmsgcount == 1)) {
 		# Error messages are only displayed every 10 seconds (2 iterations)
 		# Other messages are only displayed if they change
 		if (audio != nil) {
@@ -376,13 +405,24 @@ var say_message = func(node, default = nil) {
 			setprop("/sim/messages/copilot", msg);
 		}
 
-		setprop("/sim/tutorial/last-message", msg);
+		last_message.setValue(msg);
 		lastmsgcount = 0;
 	} else {
 		lastmsgcount += 1;
 	}
 }
 
+
+var shuffle = func(vec) {
+	var s = size(vec);
+	forindex (var i; vec) {
+		var j = rand() * s;
+		var swap = vec[j];
+		vec[j] = vec[i];
+		vec[i] = swap;
+	}
+	return vec;
+}
 
 
 var run_nasal = func(node) {
@@ -396,18 +436,23 @@ var run_nasal = func(node) {
 }
 
 
+var say = func(what, who = "copilot", delay = 0) {
+	settimer(func { setprop("/sim/messages/", who, what) }, delay);
+}
 
-# Set up the namespace for embedded Nasal.
+
+# Set up namespace "__tutorial" for embedded Nasal.
 #
 var init_nasal = func {
 	globals.__tutorial = {
-		#say : say,
-		next : func { current_step += 1; num_step_runs = 0 },
-		previous : func {
-			if (current_step > 0) {
-				current_step -= 1;
-			}
+		say : say,   # just exporting tutorial.say as __turorial.say
+		next : func(n = 1) { current_step += n; num_step_runs = 0 },
+		previous : func(n = 1) {
+			current_step -= n;
 			num_step_runs = 0;
+			if (current_step < 0) {
+				current_step = 0;
+			}
 		},
 	};
 }
@@ -421,10 +466,12 @@ var dialog = func {
 var marker = nil;
 var heading = nil;
 var slip = nil;
+var last_message = nil;
+
 _setlistener("/sim/signals/nasal-dir-initialized", func {
 	marker = props.globals.getNode("/sim/model/marker", 1);
 	heading = props.globals.getNode("/orientation/heading-deg", 1);
 	slip = props.globals.getNode("/orientation/side-slip-deg", 1);
+	last_message = props.globals.getNode("/sim/tutorial/last-message", 1);
 });
-
 

@@ -32,6 +32,11 @@
 #     <pitch-deg>
 #     <roll-deg
 #
+# <targets>
+#   <target>          - the tutorial will always keep properties
+#     <longitude-deg>   /sim/tutorial/targets/target[*]/{direction-deg,distance-m}
+#     <latitude-deg>    up-to-date for each <target>
+#
 # <init>       - Optional: Initialization section consist of one or more
 #                  set nodes:
 #   <set>
@@ -41,10 +46,10 @@
 # <step>          - Tutorial step - a segment of the tutorial, consisting of
 #                   the following:
 #   <message>     - Text instruction displayed when the tutorial reaches
-#                   this step, and when neither the exit nor any error
+#                   this step, and when neither the exit nor any error.
 #                   criteria have been fulfilled
 #   <audio>       - Optional: wav filename to play when displaying
-#                         instruction
+#                   instruction
 #   <error> - Error conditions, causing error messages to be displayed.
 #             The tutorial doesn't advance while any error conditions are
 #             fulfilled. Consists of one or more check nodes:
@@ -58,7 +63,12 @@
 # <end>
 #   <message>> - Optional: Text to display when the tutorial exits the last step.
 #   <audio>    - Optional: wav filename to play when the tutorial exits the last step
-
+#
+#
+# NOTE: everywhere where <message> and/or <audio> is supported there can be
+#       more than one <message> or <audio> entry defined, in which case one
+#       is randomly chosen.
+#
 #
 # GLOBAL VARIABLES
 #
@@ -173,25 +183,10 @@ var stepTutorial = func {
 	var voice = nil;
 	var message = nil;
 
-	# If we've reached the end of the tutorial, simply indicate and exit
 	if (current_step >= size(tutorial.getChildren("step"))) {
-		message = "Tutorial finished.";
-
-		var end = tutorial.getNode("end");
-		if (end != nil) {
-			var m = end.getNode("message");
-			if (m != nil) {
-				message = m.getValue();
-			}
-
-			var v = end.getNode("audio");
-			if (v != nil) {
-				voice = v.getValue();
-			}
-			run_nasal(end);
-		}
-		say(message, voice);
-		say("Deviations: " ~ num_errors);
+		# end of the tutorial
+		say_message(tutorial.getNode("end"), "Tutorial finished.");
+		say_message(nil, "Deviations: " ~ num_errors);
 		is_running(0);
 		return;
 	}
@@ -199,24 +194,9 @@ var stepTutorial = func {
 	var step = tutorial.getChildren("step")[current_step];
 	set_cursor(step);
 
-	var instr = step.getChild("message");
-	message = instr != nil ? instr.getValue() : "Tutorial step " ~ current_step;
-
 	if (!num_step_runs) {
-		# If this is the first time we've encountered this step :
-		# - Set any values required
-		# - Display any messages
-		# - Play any instructions.
-		#
-		# We then do not go through the error or exit processing, giving the user
-		# time to react to the instructions.
-
-		var v = step.getChild("audio");
-		if (v != nil) {
-			voice = v.getValue();
-		}
-
-		say(message, voice);
+		# first time we've encountered this step
+		say_message(step, "Tutorial step " ~ current_step);
 		set_properties(step);
 
 		num_step_runs += 1;
@@ -224,47 +204,30 @@ var stepTutorial = func {
 		return;
 	}
 
+	set_targets(tutorial.getNode("targets"));
 	run_nasal(step);
 
-	var error = 0;
 	# Check for error conditions
 	foreach (var e; step.getChildren("error")) {
 		if (props.condition(e.getNode("condition"))) {
-			error = 1;
 			num_errors += 1;
 			run_nasal(e);
-
-			var m = e.getNode("message");
-			if (m != nil) {
-				message = m.getValue();
-
-				var v = e.getChild("audio");
-				voice = v != nil ? v.getValue() : nil;
-			}
+			say_message(e);
+			return settimer(stepTutorial, STEP_INTERVAL);
 		}
 	}
 
-
-	# Check for exit condition, but only if we didn't hit any errors
-	if (!error) {
-		var e = step.getNode("exit");
-		if (e != nil) {
-			if (props.condition(e.getNode("condition"))) {
-				run_nasal(e);
-				current_step += 1;
-				num_step_runs = 0;
-				return settimer(stepTutorial, EXIT_INTERVAL);
-			}
-		} else {
-			current_step += 1;
-			num_step_runs = 0;
-			return settimer(stepTutorial, EXIT_INTERVAL);
+	var e = step.getNode("exit");
+	if (e != nil) {
+		if (!props.condition(e.getNode("condition"))) {
+			return settimer(stepTutorial, STEP_INTERVAL);
 		}
+		run_nasal(e);
 	}
 
-	# Display the resulting message and wait to go around again.
-	say(message, voice, error);
-	settimer(stepTutorial, STEP_INTERVAL);
+	current_step += 1;
+	num_step_runs = 0;
+	return settimer(stepTutorial, EXIT_INTERVAL);
 }
 
 
@@ -288,23 +251,48 @@ var set_properties = func(node) {
 }
 
 
+var set_targets = func(node) {
+	node != nil or return;
+
+	var dest = props.globals.getNode("/sim/tutorial/targets", 1);
+	var aircraft = geo.aircraft_position();
+	var hdg = heading.getValue() + slip.getValue();
+	foreach (var t; node.getChildren("target")) {
+		var lon = t.getNode("longitude-deg");
+		var lat = t.getNode("latitude-deg");
+		if (lon == nil or lat == nil) {
+			die("target coords not defined");
+		}
+		var target = geo.Coord.new().set_lonlat(lon.getValue(), lat.getValue());
+		var dist = int(aircraft.distance_to(target));
+		var angle = geo.normdeg(aircraft.course_to(target) - hdg);
+		if (angle >= 180) {
+			angle -= 360;
+		}
+
+		var d = dest.getChild("target", t.getIndex(), 1);
+		d.getNode("distance-m", 1).setDoubleValue(dist);
+		d.getNode("direction-deg", 1).setDoubleValue(angle);
+	}
+}
+
 
 var models = [];
 var set_models = func(node) {
 	remove_models();
-
 	node != nil or return;
+
 	var manager = props.globals.getNode("/models", 1);
 	foreach (var src; node.getChildren("model")) {
 		var i = 0;
-		while (i += 1) {
+		for (; 1; i += 1) {
 			if (manager.getChild("model", i, 0) == nil) {
 				break;
 			}
 		}
 		var dest = manager.getChild("model", i, 1);
 		props.copy(src, dest);
-		dest.getNode("load", 1);  # this make the modelmgr load the model
+		dest.getNode("load", 1);  # makes the modelmgr load the model
 		dest.removeChildren("load");
 		append(models, dest);
 	}
@@ -356,21 +344,36 @@ var is_running = func(which = nil) {
 # Output the message and optional sound recording.
 #
 var lastmsgcount = 0;
-var say = func(msg, snd = nil, error = 0) {
+var say_message = func(node, default = nil) {
+	var msg = default;
+	var audio = nil;
+	var error = 0;
+
+	if (node != nil) {
+		error = node.getName() == "error";
+
+		var m = node.getChildren("message");
+		if (size(m)) {
+			msg = m[rand() * size(m)].getValue();
+		}
+
+		var a = node.getChildren("audio");
+		if (size(a)) {
+			audio = a[rand() * size(m)].getValue();
+		}
+	}
+
 	var lastmsg = getprop("/sim/tutorial/last-message");
 
 	if (msg != lastmsg or (error == 1 and lastmsgcount == 1)) {
 		# Error messages are only displayed every 10 seconds (2 iterations)
 		# Other messages are only displayed if they change
-		if (snd == nil) {
-			# Simply set to the co-pilot channel. TTS is picked up automatically.
-			setprop("/sim/messages/copilot", msg);
-		} else {
-			# Play the audio, and write directly to the screen-logger to avoid
-			# any tts being sent to festival.
-			var prop = { path : audio_dir, file : snd };
+		if (audio != nil) {
+			var prop = { path : audio_dir, file : audio };
 			fgcommand("play-audio-message", props.Node.new(prop));
 			screen.log.write(msg, 1, 1, 1);
+		} else {
+			setprop("/sim/messages/copilot", msg);
 		}
 
 		setprop("/sim/tutorial/last-message", msg);
@@ -398,7 +401,7 @@ var run_nasal = func(node) {
 #
 var init_nasal = func {
 	globals.__tutorial = {
-		say : say,
+		#say : say,
 		next : func { current_step += 1; num_step_runs = 0 },
 		previous : func {
 			if (current_step > 0) {
@@ -416,8 +419,12 @@ var dialog = func {
 
 
 var marker = nil;
+var heading = nil;
+var slip = nil;
 _setlistener("/sim/signals/nasal-dir-initialized", func {
 	marker = props.globals.getNode("/sim/model/marker", 1);
+	heading = props.globals.getNode("/orientation/heading-deg", 1);
+	slip = props.globals.getNode("/orientation/side-slip-deg", 1);
 });
 
 

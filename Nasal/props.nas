@@ -215,12 +215,12 @@ var _cond = func(p) {
     if(n == "or") { return _cond_or(p); }
     if(n == "and") { return _cond_and(p); }
     if(n == "not") { return !_cond_and(p); }
-    if(n == "equals") { return _cond_cmp(p, "EQ"); }
-    if(n == "not-equals") { return !_cond_cmp(p, "EQ"); }
-    if(n == "less-than") { return _cond_cmp(p, "LT"); }
-    if(n == "greater-than") { return _cond_cmp(p, "GT"); }
-    if(n == "less-than-equals") { return !_cond_cmp(p, "GT"); }
-    if(n == "greater-than-equals") { return !_cond_cmp(p, "LT"); }
+    if(n == "equals") { return _cond_cmp(p, 0); }
+    if(n == "not-equals") { return !_cond_cmp(p, 0); }
+    if(n == "less-than") { return _cond_cmp(p, -1); }
+    if(n == "greater-than") { return _cond_cmp(p, 1); }
+    if(n == "less-than-equals") { return !_cond_cmp(p, 1); }
+    if(n == "greater-than-equals") { return !_cond_cmp(p, -1); }
     if(n == "property") { return !!getprop(p.getValue()); }
     printlog("alert", "condition: invalid operator ", n);
     dump(p);
@@ -251,7 +251,9 @@ var _cond_cmp = func(p, op) {
         dump(p);
         return nil;
     }
-    return op == "LT" ? left < right : op == "GT" ? left > right : left == right;
+    if(op < 0) { return left < right; }
+    if(op > 0) { return left > right; }
+    return left == right;
 }
 
 

@@ -105,6 +105,7 @@ var loop_id = 0;
 var current_step = nil;
 var num_errors = nil;
 var num_step_runs = nil;
+var last_run_time = nil;
 var audio_dir = nil;
 
 
@@ -135,6 +136,7 @@ var startTutorial = func {
 	current_step = 0;
 	num_step_runs = 0;
 	num_errors = 0;
+	last_run_time = time_elapsed.getValue();
 	steps = tutorial.getChildren("step");
 	view.point.save();
 	init_nasal();
@@ -302,26 +304,35 @@ var set_properties = func(node) {
 var set_targets = func(node) {
 	node != nil or return;
 
+	var time = time_elapsed.getValue();
 	var dest = props.globals.getNode("/sim/tutorial/targets", 1);
 	var aircraft = geo.aircraft_position();
 	var hdg = heading.getValue() + slip.getValue();
+
 	foreach (var t; node.getChildren()) {
 		var lon = t.getNode("longitude-deg");
 		var lat = t.getNode("latitude-deg");
 		if (lon == nil or lat == nil) {
-			die("target coords not defined");
+			die("target coords undefined");
 		}
 		var target = geo.Coord.new().set_lonlat(lon.getValue(), lat.getValue());
-		var dist = int(aircraft.distance_to(target));
+		var dist = aircraft.distance_to(target);
 		var angle = geo.normdeg(aircraft.course_to(target) - hdg);
 		if (angle >= 180) {
 			angle -= 360;
 		}
 
 		var d = dest.getChild(t.getName(), t.getIndex(), 1);
-		d.getNode("distance-m", 1).setDoubleValue(dist);
 		d.getNode("direction-deg", 1).setDoubleValue(angle);
+		var distN = d.getNode("distance-m", 1);
+		var lastdist = distN.getValue();
+		distN.setDoubleValue(dist);
+		if (lastdist != nil) {
+			var speed = (lastdist - dist) / (time - last_run_time) + 0.00001;  # m/s
+			d.getNode("eta-min", 1).setDoubleValue(dist / (speed * 60));
+		}
 	}
+	last_run_time = time;
 }
 
 
@@ -493,11 +504,13 @@ var marker = nil;
 var heading = nil;
 var slip = nil;
 var last_message = nil;
+var time_elapsed = nil;
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
 	marker = props.globals.getNode("/sim/model/marker", 1);
 	heading = props.globals.getNode("/orientation/heading-deg", 1);
 	slip = props.globals.getNode("/orientation/side-slip-deg", 1);
 	last_message = props.globals.getNode("/sim/tutorial/last-message", 1);
+	time_elapsed = props.globals.getNode("/sim/time/elapsed-sec", 1);
 });
 

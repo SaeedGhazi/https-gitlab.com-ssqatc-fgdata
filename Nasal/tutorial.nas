@@ -32,16 +32,17 @@
 #     <pitch-deg>
 #     <roll-deg
 #
-# <targets>
-#   <target>          - the tutorial will always keep properties
-#     <longitude-deg>   /sim/tutorial/targets/target[*]/{direction-deg,distance-m}
-#     <latitude-deg>    up-to-date for each <target>
+# <targets>           - optional; define targets with arbitrary names
+#   <foo>             - for each target "foo" the tutorial will keep properties
+#     <longitude-deg>   /sim/tutorial/targets/foo/{direction-deg,distance-m}
+#     <latitude-deg>    up-to-date
 #
 # <init>       - Optional: Initialization section consist of one or more
-#                  set nodes:
+#                  set nodes, and optionall a view node:
 #   <set>
-#     <property>  - Property to set
-#     <value>     - value
+#     <property>           - Property to set
+#     <value>/<property>   - value or property to set from
+#   <view>
 #
 # <step>          - Tutorial step - a segment of the tutorial, consisting of
 #                   the following:
@@ -51,6 +52,8 @@
 #   <audio>       - Optional: wav filename to play when displaying
 #                   instruction
 #   <nasal><script>
+#   <marker>
+#   <view>
 #
 #   <error> - Error conditions, causing error messages to be displayed.
 #             The tutorial doesn't advance while any error conditions are
@@ -63,11 +66,16 @@
 #   <exit> - Exit criteria causing tutorial to progress to next step.
 #     <condition> - exit condition (see $FG_ROOT/Docs/README.condition)
 #     <nasal><script>
+#     <view>
 #
 # <end>
 #   <message>> - Optional: Text to display when the tutorial exits the last step.
 #   <audio>    - Optional: wav filename to play when the tutorial exits the last step
 #   <nasal><script>
+#   <set>
+#     <property>
+#     <value>/<property>
+#   <view>
 #
 #
 # NOTE: everywhere where <message> and/or <audio> is supported there can be
@@ -128,12 +136,17 @@ var startTutorial = func {
 	num_step_runs = 0;
 	num_errors = 0;
 	steps = tutorial.getChildren("step");
-
-	set_properties(tutorial.getNode("init"));
-	set_cursor(tutorial);
-	set_models(tutorial.getNode("models"));
+	view.point.save();
 	init_nasal();
+
+	set_marker(tutorial);
 	run_nasal(tutorial);
+	set_models(tutorial.getNode("models"));
+
+	var init = tutorial.getNode("init");
+	set_properties(init);
+	set_view(init);
+	run_nasal(init);
 
 	var dir = tutorial.getNode("audio-dir");
 	if (dir != nil) {
@@ -173,8 +186,13 @@ var startTutorial = func {
 
 var stopTutorial = func {
 	loop_id += 1;
+	if (is_running()) {
+		var end = tutorial.getNode("end");
+		set_properties(end);
+		run_nasal(end);
+	}
+	set_marker();
 	is_running(0);
-	set_cursor();
 }
 
 _setlistener("/sim/crashed", stopTutorial);
@@ -205,19 +223,19 @@ var stepTutorial = func(id) {
 		var end = tutorial.getNode("end");
 		say_message(end, "Tutorial finished.");
 		say_message(nil, "Deviations: " ~ num_errors);
-		run_nasal(end);
+		set_view(end) or view.point.restore();
 		stopTutorial();
 		return;
 	}
 
 	var step = steps[current_step];
-	set_cursor(step);
-	set_view(step.getNode("view"));
+	set_marker(step);
 	set_targets(tutorial.getNode("targets"));
 
 	if (num_step_runs == 0) {
 		# first time we've encountered this step
 		say_message(step, "Tutorial step " ~ current_step);
+		set_view(step);
 		set_properties(step);
 		run_nasal(step);
 
@@ -242,6 +260,7 @@ var stepTutorial = func(id) {
 			return continue_after(STEP_INTERVAL);
 		}
 		run_nasal(exit);
+		set_view(exit);
 	}
 
 	# success!
@@ -252,7 +271,8 @@ var stepTutorial = func(id) {
 
 
 
-# scan all <set> blocks and set their <property> to <value>
+# scan all <set> blocks and set their <property> to <value> or
+# the value of a property that <property n="1"> points to
 # <set>
 #	 <property>/foo/bar</property>
 #	 <value>woof</value>
@@ -261,11 +281,19 @@ var stepTutorial = func(id) {
 var set_properties = func(node) {
 	node != nil or return;
 	foreach (var c; node.getChildren("set")) {
-		var p = c.getChild("property").getValue();
-		var v = c.getChild("value").getValue();
+		var dest = c.getChild("property", 0);
+		var src = c.getChild("property", 1);
+		var val = c.getChild("value");
 
-		if (p != nil and v != nil) {
-			setprop(p, v);
+		dest != nil or die("<set> without <property>");
+		if (val != nil) {
+			setprop(dest.getValue(), val.getValue());
+		} elsif (src != nil) {
+			src = getprop(src.getValue());
+			src != nil or die("<property n=\"1\"> doesn't refer to defined property");
+			setprop(dest.getValue(), src);
+		} else {
+			die("<set> without <value> or <property n=\"1\">");
 		}
 	}
 }
@@ -277,7 +305,7 @@ var set_targets = func(node) {
 	var dest = props.globals.getNode("/sim/tutorial/targets", 1);
 	var aircraft = geo.aircraft_position();
 	var hdg = heading.getValue() + slip.getValue();
-	foreach (var t; node.getChildren("target")) {
+	foreach (var t; node.getChildren()) {
 		var lon = t.getNode("longitude-deg");
 		var lat = t.getNode("latitude-deg");
 		if (lon == nil or lat == nil) {
@@ -290,7 +318,7 @@ var set_targets = func(node) {
 			angle -= 360;
 		}
 
-		var d = dest.getChild("target", t.getIndex(), 1);
+		var d = dest.getChild(t.getName(), t.getIndex(), 1);
 		d.getNode("distance-m", 1).setDoubleValue(dist);
 		d.getNode("direction-deg", 1).setDoubleValue(angle);
 	}
@@ -328,18 +356,16 @@ var remove_models = func {
 
 var set_view = func(node = nil) {
 	node != nil or return;
-	if (!size(node.getChildren())) {
-		var name = node.getValue();
-		node = tutorial.getNode("views");
-		node != nil or die("<view>name</view>, but no <views> group");
-		node = node.getNode(name);
-		node != nil or die("<view>name</view> refers to non existing <views> group");
+	var v = node.getChild("view");
+	if (v != nil) {
+		view.point.move(v);
+		return 1;
 	}
-	props.copy(node, props.globals.getNode("/sim/current-view"));
+	return 0;
 }
 
 
-var set_cursor = func(node = nil) {
+var set_marker = func(node = nil) {
 	node != nil or return;
 	var loc = node.getNode("marker");
 	if (loc == nil) {

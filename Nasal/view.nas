@@ -45,16 +45,6 @@ calcMul = func {
 }
 
 ##
-# Hackish round-to-one-decimal-place function.  Nasal needs a
-# sprintf() interface, or something similar...
-#
-format = func {
-    val = int(arg[0]);
-    frac = int(10 * (arg[0] - val) + 0.5);
-    return val ~ "." ~ substr("" ~ frac, 0, 1);
-}
-
-##
 # Handler.  Increase FOV by one step
 #
 increase = func {
@@ -63,7 +53,7 @@ increase = func {
     if(val == max) { return; }
     if(val > max) { val = max }
     fovProp.setDoubleValue(val);
-    gui.popupTip("FOV: " ~ format(val));
+    gui.popupTip(sprintf("FOV: %.1f", val));
 }
 
 ##
@@ -72,10 +62,8 @@ increase = func {
 decrease = func {
     calcMul();
     val = fovProp.getValue() / mul;
-    msg = "FOV: " ~ format(val);
-    if(val < min) { msg = msg ~ " (overzoom)"; }
     fovProp.setDoubleValue(val);
-    gui.popupTip(msg);
+    gui.popupTip(sprintf("FOV: %.1f%s", val, val < min ? " (overzoom)" : ""));
 }
 
 ##
@@ -116,7 +104,7 @@ stepView = func {
 
 ##
 # Standard view "slew" rate, in degrees/sec.
-# 
+#
 VIEW_PAN_RATE = 60;
 
 ##
@@ -136,3 +124,152 @@ panViewPitch = func {
     controls.slewProp("/sim/current-view/goal-pitch-offset-deg",
                       arg[0] * VIEW_PAN_RATE);
 }
+
+
+
+
+
+#-- view manager --------------------------------------------------------------
+#
+# Saves/restores/moves the view point (position, orientation, field-of-view).
+# Moves are interpolated with sinusoidal characteristic. There's only one
+# instance of this class, available as "view.point".
+#
+# Usage:
+#    view.point.save();        ... save current view and return reference to
+#                                  saved values in the form of a props.Node
+#
+#    view.point.restore();     ... restore saved view parameters
+#
+#    view.point.move(<prop> [, <time>]);
+#                              ... set view parameters from a props.Node with
+#                                  optional move time in seconds. <prop> may be
+#                                  nil, in which case nothing happens.
+#
+# A parameter set as expected by set() and returned by save() is a props.Node
+# object containing any (or none) of these children:
+#
+#   <heading-offset-deg>
+#   <pitch-offset-deg>
+#   <roll-offset-deg>
+#   <x-offset-m>
+#   <y-offset-m>
+#   <z-offset-m>
+#   <field-of-view>
+#   <move-time-sec>
+#
+# The <move-time> isn't really a property of the view, but is available
+# for convenience. The time argument in the move() method overrides it.
+
+
+##
+# Normalize angle to  -180 <= angle < 180
+#
+var normdeg = func(a) {
+    while (a >= 180) {
+        a -= 360;
+    }
+    while (a < -180) {
+        a += 360;
+    }
+    return a;
+}
+
+
+##
+# Manages one translation/rotation axis. (For simplicity reasons the
+# field-of-view parameter is also managed by this class.)
+#
+var ViewAxis = {
+    new : func(prop) {
+        var m = { parents : [ViewAxis] };
+        m.prop = props.globals.getNode(prop, 1);
+        if (m.prop.getType() == "NONE") {
+            m.prop.setDoubleValue(0);
+        }
+        m.from = m.to = m.prop.getValue();
+        return m;
+    },
+    reset : func {
+        me.from = me.to = normdeg(me.prop.getValue());
+    },
+    target : func(v) {
+        me.to = normdeg(v);
+    },
+    move : func(blend) {
+        me.prop.setValue(me.from + blend * (me.to - me.from));
+    },
+};
+
+
+var ViewManager = {
+    new : func {
+        var m = { parents : [ViewManager] };
+        m.axes = {
+            "heading-offset-deg" : ViewAxis.new("/sim/current-view/goal-heading-offset-deg"),
+            "pitch-offset-deg" : ViewAxis.new("/sim/current-view/goal-pitch-offset-deg"),
+            "roll-offset-deg" : ViewAxis.new("/sim/current-view/goal-roll-offset-deg"),
+            "x-offset-m" : ViewAxis.new("/sim/current-view/x-offset-m"),
+            "y-offset-m" : ViewAxis.new("/sim/current-view/y-offset-m"),
+            "z-offset-m" : ViewAxis.new("/sim/current-view/z-offset-m"),
+            "field-of-view" : ViewAxis.new("/sim/current-view/field-of-view"),
+        };
+        m.storeN = props.Node.new();
+        m.dtN = props.globals.getNode("/sim/time/delta-realtime-sec", 1);
+        m.currviewN = props.globals.getNode("/sim/current-view", 1);
+        m.blend = 0;
+        m.loop_id = 0;
+        props.copy(props.globals.getNode("/sim/view/config"), m.storeN);
+        return m;
+    },
+    save : func {
+        me.storeN = props.Node.new();
+        props.copy(me.currviewN, me.storeN);
+        return me.storeN;
+    },
+    restore : func {
+        me.move(me.storeN);
+    },
+    move : func(prop, time = nil) {
+        prop != nil or return;
+        foreach (var a; keys(me.axes)) {
+            var n = prop.getNode(a);
+            me.axes[a].reset();
+            if (n != nil) {
+                me.axes[a].target(n.getValue());
+            }
+        }
+        var m = prop.getNode("move-time-sec");
+        if (m != nil) {
+            time = m.getValue();
+        }
+        if (time == nil) {
+            time = 1;
+        }
+        me.blend = -1;   # range -1 .. 1
+        me._loop_(me.loop_id += 1, time);
+    },
+    _loop_ : func(id, time) {
+        me.loop_id == id or return;
+        me.blend += me.dtN.getValue() / time;
+        if (me.blend > 1) {
+            me.blend = 1;
+        }
+        var b = (math.sin(me.blend * math.pi / 2) + 1) / 2; # range 0 .. 1
+        foreach (var a; keys(me.axes)) {
+            me.axes[a].move(b);
+        }
+        if (me.blend < 1) {
+            settimer(func { me._loop_(id, time) }, 0);
+        }
+    },
+};
+
+
+var point = nil;
+
+_setlistener("/sim/signals/nasal-dir-initialized", func {
+    point = ViewManager.new();
+    ViewManager.new = nil;
+});
+

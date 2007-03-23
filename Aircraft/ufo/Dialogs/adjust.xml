@@ -37,6 +37,8 @@
 		<open>
 			var self = cmdarg();
 			var dlgname = self.getNode("name").getValue();
+			var kbdctrl = props.globals.getNode("/devices/status/keyboard/ctrl");
+			var kbdshift = props.globals.getNode("/devices/status/keyboard/shift");
 
 			var Value = {
 				new : func(name) {
@@ -56,11 +58,12 @@
 					removelistener(me.sliderL);
 				},
 				update : func {
-					var offs = me.sliderN.getValue();
-					ufo.modelmgr.adjust(me.name, me.offsetN.getValue() + me.sliderN.getValue()
-							- me.last_slider, 1);  # 1 -> scale with distance
+					var offset = me.sliderN.getValue();
+					var value = me.offsetN.getValue() + me.sliderN.getValue() - me.last_slider;
+					var factor = kbdctrl.getValue() ? 5 : kbdshift.getValue() ? 0.1 : 1;
+					ufo.modelmgr.adjust(me.name, value * factor, 1);  # 1 -> scale with distance
 					me.offsetN.setDoubleValue(0);
-					me.last_slider = offs;
+					me.last_slider = offset;
 				},
 				center : func {
 					me.offsetN.setValue(me.offsetN.getValue() + me.sliderN.getValue());

@@ -387,11 +387,13 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="51">
   <name>3</name>
+  <desc>Decrease throttle or autopilot autothrottle.</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
-   <command>property-adjust</command>
-   <property>/autopilot/control-overrides/throttle</property>
-   <step type="double">-0.01</step>
+   <command>nasal</command>
+   <script>
+     controls.incThrottle(-0.01, -1.0)
+   </script>
   </binding>
   <mod-shift>
    <desc>Look back right.</desc>
@@ -496,9 +498,10 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <desc>Increase throttle or autopilot autothrottle.</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
-   <command>property-adjust</command>
-   <property>/autopilot/control-overrides/throttle</property>
-   <step type="double">0.01</step>
+  <command>nasal</command>
+   <script>
+     controls.incThrottle(0.01, 1.0)
+   </script>
   </binding>
   <mod-shift>
    <desc>Look front right.</desc>

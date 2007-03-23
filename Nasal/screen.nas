@@ -58,15 +58,23 @@ var trim = func(s, lr = 0) {
 
 
 ##
-# convert string for output (replaces tabs only for now)
+# convert string for output; replaces tabs by spaces, and skips
+# delimitiers and the voice part in "{text|voice}" constructions
 #
 var sanitize = func(s) {
 	var r = "";
+	var skip = 0;
 	for (var i = 0; i < size(s); i += 1) {
 		var c = s[i];
 		if (c == `\t`) {
 			r ~= ' ';
-		} else {
+		} elsif (c == `{`) {
+			#
+		} elsif (c == `|`) {
+			skip = 1;
+		} elsif (c == `}`) {
+			skip = 0;
+		} elsif (!skip) {
 			r ~= chr(c);
 		}
 	}

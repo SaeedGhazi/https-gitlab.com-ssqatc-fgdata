@@ -217,7 +217,6 @@ _setlistener("/sim/crashed", stopTutorial);
 #
 var stepTutorial = func(id) {
 	id == loop_id or return;
-
 	var continue_after = func(i) { settimer(func { stepTutorial(id) }, i) }
 
 	if (current_step >= size(steps)) {
@@ -317,12 +316,14 @@ var set_targets = func(node) {
 		}
 		var target = geo.Coord.new().set_lonlat(lon.getValue(), lat.getValue());
 		var dist = aircraft.distance_to(target);
-		var angle = geo.normdeg(aircraft.course_to(target) - hdg);
+		var course = aircraft.course_to(target);
+		var angle = geo.normdeg(course - hdg);
 		if (angle >= 180) {
 			angle -= 360;
 		}
 
 		var d = dest.getChild(t.getName(), t.getIndex(), 1);
+		d.getNode("heading-deg", 1).setDoubleValue(course);
 		d.getNode("direction-deg", 1).setDoubleValue(angle);
 		var distN = d.getNode("distance-m", 1);
 		var lastdist = distN.getValue();
@@ -377,21 +378,21 @@ var set_view = func(node = nil) {
 
 
 var set_marker = func(node = nil) {
-	node != nil or return;
-	var loc = node.getNode("marker");
-	if (loc == nil) {
-		marker.getNode("arrow-enabled", 1).setBoolValue(0);
-		return;
+	if (node != nil) {
+		var loc = node.getNode("marker");
+		if (loc != nil) {
+			var s = loc.getNode("scale");
+			marker.setValues({
+				"x/value": loc.getNode("x", 1).getValue(),
+				"y/value": loc.getNode("y", 1).getValue(),
+				"z/value": loc.getNode("z", 1).getValue(),
+				"scale/value": s != nil ? s.getValue() : 1,
+				"arrow-enabled": 1,
+			});
+			return;
+		}
 	}
-
-	var s = loc.getNode("scale");
-	marker.setValues({
-		"x/value": loc.getNode("x", 1).getValue(),
-		"y/value": loc.getNode("y", 1).getValue(),
-		"z/value": loc.getNode("z", 1).getValue(),
-		"scale/value": s != nil ? s.getValue() : 1,
-		"arrow-enabled": 1,
-	});
+	marker.getNode("arrow-enabled", 1).setBoolValue(0);
 }
 
 

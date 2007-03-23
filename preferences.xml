@@ -139,7 +139,7 @@ Started September 2000 by David Megginson, david@megginson.com
      <volume type="double">1.0</volume>
      <pitch type="double">100.0</pitch>
      <speed type="double">1.0</speed>
-     <preamble type="string">(voice_en1_mbrola)</preamble>
+     <preamble type="string">(voice_us2_mbrola)</preamble>
      <festival type="bool">true</festival>
     </voice>
     <voice>
@@ -148,7 +148,7 @@ Started September 2000 by David Megginson, david@megginson.com
      <volume type="double">1.0</volume>
      <pitch type="double">100.0</pitch>
      <speed type="double">1.0</speed>
-     <preamble type="string">(voice_us3_mbrola)</preamble>
+     <preamble type="string">(voice_en1_mbrola)</preamble>
      <festival type="bool">true</festival>
     </voice>
     <voice>

@@ -34,7 +34,7 @@
 #
 # <targets>           - optional; define targets with arbitrary names
 #   <foo>             - for each target "foo" the tutorial will keep properties
-#     <longitude-deg>   /sim/tutorial/targets/foo/{direction-deg,distance-m}
+#     <longitude-deg>   /sim/tutorials/targets/foo/{direction-deg,distance-m}
 #     <latitude-deg>    up-to-date
 #
 # <init>       - Optional: Initialization section consist of one or more
@@ -43,6 +43,7 @@
 #     <property>           - Property to set
 #     <value>/<property>   - value or property to set from
 #   <view>
+#   <interval>             - time in seconds until loop runs again (default: 5)
 #
 # <step>          - Tutorial step - a segment of the tutorial, consisting of
 #                   the following:
@@ -54,19 +55,22 @@
 #   <nasal><script>
 #   <marker>
 #   <view>
+#   <interval>
 #
 #   <error> - Error conditions, causing error messages to be displayed.
 #             The tutorial doesn't advance while any error conditions are
 #             fulfilled. Consists of one or more check nodes:
 #     <message>   - Error message to display if error criteria fulfilled.
 #     <audio>     - Optional: wav filename to play when error condition fulfilled.
-#     <nasal><script>
 #     <condition> - error condition (see $FG_ROOT/Docs/README.condition)
+#     <nasal><script>
+#     <interval>
 #
 #   <exit> - Exit criteria causing tutorial to progress to next step.
 #     <condition> - exit condition (see $FG_ROOT/Docs/README.condition)
 #     <nasal><script>
 #     <view>
+#     <interval>
 #
 # <end>
 #   <message>> - Optional: Text to display when the tutorial exits the last step.
@@ -76,6 +80,7 @@
 #     <property>
 #     <value>/<property>
 #   <view>
+#   <interval>
 #
 #
 # NOTE: everywhere where <message> and/or <audio> is supported there can be
@@ -111,14 +116,14 @@ var audio_dir = nil;
 
 
 var startTutorial = func {
-	var name = getprop("/sim/tutorial/current-tutorial");
+	var name = getprop("/sim/tutorials/current-tutorial");
 	if (name == nil) {
 		screen.log.write("No tutorial selected");
 		return;
 	}
 
 	tutorial = nil;
-	foreach (var c; props.globals.getNode("/sim/tutorial").getChildren("tutorial")) {
+	foreach (var c; props.globals.getNode("/sim/tutorials").getChildren("tutorial")) {
 		if (c.getNode("name").getValue() == name) {
 			tutorial = c;
 			break;
@@ -131,7 +136,6 @@ var startTutorial = func {
 	}
 
 	stopTutorial();
-	is_running(1);
 	screen.log.write('Loading tutorial "' ~ name ~ '" ...');
 	current_step = 0;
 	num_step_runs = 0;
@@ -141,14 +145,10 @@ var startTutorial = func {
 	view.point.save();
 	init_nasal();
 
+	STEP_INTERVAL = delay(tutorial, STEP_INTERVAL);
 	set_marker(tutorial);
 	run_nasal(tutorial);
 	set_models(tutorial.getNode("models"));
-
-	var init = tutorial.getNode("init");
-	set_properties(init);
-	set_view(init);
-	run_nasal(init);
 
 	var dir = tutorial.getNode("audio-dir");
 	if (dir != nil) {
@@ -162,7 +162,6 @@ var startTutorial = func {
 		props.copy(presets, props.globals.getNode("/sim/presets"));
 		fgcommand("presets-commit", props.Node.new());
 
-		# Set the various engines to be running
 		if (getprop("/sim/presets/on-ground")) {
 			var eng = props.globals.getNode("/controls/engines");
 			if (eng != nil) {
@@ -178,6 +177,12 @@ var startTutorial = func {
 	if (timeofday != nil) {
 		fgcommand("timeofday", props.Node.new({ "timeofday" : timeofday.getValue() }));
 	}
+
+	var init = tutorial.getNode("init");
+	set_properties(init);
+	set_view(init);
+	run_nasal(init);
+	is_running(1);  # needs to be after "presets-commit"
 
 	# Pick up any weather conditions/scenarios set
 	setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers") + 1);
@@ -201,11 +206,6 @@ _setlistener("/sim/crashed", stopTutorial);
 
 
 
-# stepTutorial
-#
-# This function does the actual work. It is executed every 5 seconds.
-#
-# Each iteration it:
 # - Gets the current step node from the tutorial
 # - If this is the first time the step is entered, it displays the instruction message
 # - Otherwise, it
@@ -213,7 +213,6 @@ _setlistener("/sim/crashed", stopTutorial);
 #   - Checks for any error conditions, in which case it displays a message to the screen and
 #     increments an error counter
 #   - Otherwise display the instructions for the step.
-# - Sets the timer for 5 seconds again.
 #
 var stepTutorial = func(id) {
 	id == loop_id or return;
@@ -241,7 +240,7 @@ var stepTutorial = func(id) {
 		run_nasal(step);
 
 		num_step_runs += 1;
-		return continue_after(STEP_INTERVAL);
+		return continue_after(delay(step, STEP_INTERVAL));
 	}
 
 	# check for error conditions in random order
@@ -250,7 +249,7 @@ var stepTutorial = func(id) {
 			num_errors += 1;
 			run_nasal(error);
 			say_message(error);
-			return continue_after(STEP_INTERVAL);
+			return continue_after(delay(error, STEP_INTERVAL));
 		}
 	}
 
@@ -258,7 +257,7 @@ var stepTutorial = func(id) {
 	var exit = step.getNode("exit");
 	if (exit != nil) {
 		if (!props.condition(exit.getNode("condition"))) {
-			return continue_after(STEP_INTERVAL);
+			return continue_after(delay(exit, STEP_INTERVAL));
 		}
 		run_nasal(exit);
 		set_view(exit);
@@ -267,9 +266,19 @@ var stepTutorial = func(id) {
 	# success!
 	current_step += 1;
 	num_step_runs = 0;
-	return continue_after(EXIT_INTERVAL);
+	return continue_after(delay(tutorial, EXIT_INTERVAL));
 }
 
+
+var delay = func(node, default) {
+	if (node != nil) {
+		var d = node.getNode("interval");
+		if (d != nil) {
+			return num(d.getValue());
+		}
+	}
+	return num(default);
+}
 
 
 # scan all <set> blocks and set their <property> to <value> or
@@ -304,7 +313,7 @@ var set_targets = func(node) {
 	node != nil or return;
 
 	var time = time_elapsed.getValue();
-	var dest = props.globals.getNode("/sim/tutorial/targets", 1);
+	var dest = props.globals.getNode("/sim/tutorials/targets", 1);
 	var aircraft = geo.aircraft_position();
 	var hdg = heading.getValue() + slip.getValue();
 
@@ -399,7 +408,7 @@ var set_marker = func(node = nil) {
 # Set and return running state. Disable/enable stop menu.
 #
 var is_running = func(which = nil) {
-	var prop = "/sim/tutorial/running";
+	var prop = "/sim/tutorials/running";
 	if (which != nil) {
 		setprop(prop, which);
 		gui.menuEnable("tutorial-stop", which);
@@ -419,8 +428,6 @@ var say_message = func(node, default = nil) {
 	if (node != nil) {
 		is_error = node.getName() == "error";
 
-		# choose random message/audio, but make sure that in the first
-		# run of a step, the first ones are used
 		var m = node.getChildren("message");
 		if (size(m)) {
 			msg = m[rand() * size(m)].getValue();
@@ -455,9 +462,11 @@ var shuffle = func(vec) {
 	var s = size(vec);
 	forindex (var i; vec) {
 		var j = rand() * s;
-		var swap = vec[j];
-		vec[j] = vec[i];
-		vec[i] = swap;
+		if (i != j) {
+			var swap = vec[j];
+			vec[j] = vec[i];
+			vec[i] = swap;
+		}
 	}
 	return vec;
 }
@@ -511,7 +520,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	marker = props.globals.getNode("/sim/model/marker", 1);
 	heading = props.globals.getNode("/orientation/heading-deg", 1);
 	slip = props.globals.getNode("/orientation/side-slip-deg", 1);
-	last_message = props.globals.getNode("/sim/tutorial/last-message", 1);
+	last_message = props.globals.getNode("/sim/tutorials/last-message", 1);
 	time_elapsed = props.globals.getNode("/sim/time/elapsed-sec", 1);
 });
 

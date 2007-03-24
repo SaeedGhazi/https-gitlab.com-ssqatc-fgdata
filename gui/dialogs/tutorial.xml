@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<name>tutorial</name>
+	<layout>vbox</layout>
+	<default-padding>4</default-padding>
+
+	<text>
+		<label>Select Tutorial</label>
+	</text>
+
+	<hrule><empty/></hrule>
+
+	<nasal>
+		<open>
+			tutorial.stopTutorial();
+			var list = cmdarg().getNode("group/group[1]/list");
+			var node = props.globals.getNode("/sim/tutorials", 1);
+			var tut = node.getChildren("tutorial");
+			var current = node.getNode("current-tutorial", 1);
+
+			# fill listbox
+			list.removeChildren("value");
+			forindex (var i; tut) {
+				var name = tut[i].getNode("name");
+				if (name == nil) {
+					die("tutorial #" ~ i ~ " has no &lt;name>");
+				}
+				name = name.getValue();
+				list.getChild("value", i, 1).setValue(name);
+			}
+
+			select = func {
+				var name = current.getValue();
+				foreach (var t; tut) {
+					if (t.getNode("name").getValue() == name) {
+						setprop("/sim/tutorials/current-description",
+							screen.trim(t.getNode("description").getValue()));
+						break;
+					}
+				}
+				fgcommand("dialog-update", props.Node.new({"object-name": "textbox",
+						"dialog-name": "tutorial"}));
+			}
+
+
+			if (current.getType() == "NONE" or current.getValue() == "") {
+				current.setValue(tut[0].getNode("name").getValue());
+				select();
+			}
+		</open>
+	</nasal>
+
+	<group>
+		<layout>hbox</layout>
+
+		<group>
+			<layout>vbox</layout>
+
+			<group>
+				<layout>vbox</layout>
+				<text>
+					<halign>left</halign>
+					<label></label>
+					<property>/sim/tutorials/current-tutorial</property>
+					<live>1</live>
+				</text>
+			</group>
+
+			<textbox>
+				<name>textbox</name>
+				<halign>fill</halign>
+				<pref-width>600</pref-width>
+				<pref-height>480</pref-height>
+				<slider>20</slider>
+				<wrap>true</wrap>
+				<editable>false</editable>
+				<live>1</live>
+				<property>/sim/tutorials/current-description</property>
+			</textbox>
+		</group>
+
+		<group>
+			<layout>vbox</layout>
+
+			<list>
+				<name>list</name>
+				<halign>fill</halign>
+				<pref-width>170</pref-width>
+				<pref-height>400</pref-height>
+				<property>/sim/tutorials/current-tutorial</property>
+				<binding>
+					<command>dialog-apply</command>
+					<object-name>list</object-name>
+				</binding>
+				<binding>
+					<command>nasal</command>
+					<script>select()</script>
+				</binding>
+			</list>
+
+			<empty><stretch>true</stretch></empty>
+
+			<button>
+				<legend>Cancel</legend>
+				<equal>true</equal>
+				<key>Esc</key>
+				<binding>
+					<command>dialog-close</command>
+				</binding>
+			</button>
+
+			<button>
+				<legend>Start Tutorial</legend>
+				<equal>true</equal>
+				<default>true</default>
+				<binding>
+					<command>nasal</command>
+					<script>tutorial.startTutorial()</script>
+				</binding>
+				<binding>
+					<command>dialog-close</command>
+				</binding>
+			</button>
+		</group>
+	</group>
+</PropertyList>

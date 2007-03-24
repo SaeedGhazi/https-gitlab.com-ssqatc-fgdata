@@ -494,8 +494,8 @@
    <label>Start Tutorial</label>
    <name>tutorial-start</name>
    <binding>
-    <command>nasal</command>
-    <script>gui.showSelTutDialog()</script>
+    <command>dialog-show</command>
+    <dialog-name>tutorial</dialog-name>
    </binding>
   </item>
 

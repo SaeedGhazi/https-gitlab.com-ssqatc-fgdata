@@ -1,104 +1,5 @@
-# Functions for XML-based tutorials
+# Code to process XML-based tutorials. See $FG_ROOT/Docs/README.tutorials
 # ---------------------------------------------------------------------------------------
-#
-
-#
-# Each tutorial consists of the following XML sections
-#
-# <name>        - Tutorial Name
-# <description> - description
-# <audio-dir>   - Optional:  Directory to pick up audio instructions from.
-#                   Relative to FG_ROOT
-# <timeofday>   - Optional: Time of day setting for tutorial:
-#                   dawn/morning/noon/afternoon etc.
-# <presets>     - Optional: set of presets to used for start position.
-#                   See commit-presets and gui/dialog/location-*.xml for details.
-#   <airport-id>
-#   <on-ground>
-#   <runway>
-#   <altitude-ft>
-#   <latitude-deg>
-#   <longitude-deg>
-#   <heading-deg>
-#   <airspeed-kt>
-#
-# <models>
-#   <model>           - scenery object definition
-#     <path>          - path to model (relative to $FG_ROOT)
-#     <longitude-deg>
-#     <latitude-deg>
-#     <elevation-ft>
-#     <heading-deg>
-#     <pitch-deg>
-#     <roll-deg
-#
-# <targets>           - optional; define targets with arbitrary names
-#   <foo>             - for each target "foo" the tutorial will keep properties
-#     <longitude-deg>   /sim/tutorials/targets/foo/{direction-deg,distance-m}
-#     <latitude-deg>    up-to-date
-#
-# <init>       - Optional: Initialization section consist of one or more
-#                  set nodes, and optionall a view node:
-#   <set>
-#     <property>           - Property to set
-#     <value>/<property>   - value or property to set from
-#   <view>
-#   <interval>             - time in seconds until loop runs again (default: 5)
-#
-# <step>          - Tutorial step - a segment of the tutorial, consisting of
-#                   the following:
-#   <message>     - Text instruction displayed when the tutorial reaches
-#                   this step, and when neither the exit nor any error.
-#                   criteria have been fulfilled
-#   <audio>       - Optional: wav filename to play when displaying
-#                   instruction
-#   <nasal><script>
-#   <marker>
-#   <view>
-#   <interval>
-#
-#   <error> - Error conditions, causing error messages to be displayed.
-#             The tutorial doesn't advance while any error conditions are
-#             fulfilled. Consists of one or more check nodes:
-#     <message>   - Error message to display if error criteria fulfilled.
-#     <audio>     - Optional: wav filename to play when error condition fulfilled.
-#     <condition> - error condition (see $FG_ROOT/Docs/README.condition)
-#     <nasal><script>
-#     <interval>
-#
-#   <exit> - Exit criteria causing tutorial to progress to next step.
-#     <condition> - exit condition (see $FG_ROOT/Docs/README.condition)
-#     <nasal><script>
-#     <view>
-#     <interval>
-#
-# <end>
-#   <message>> - Optional: Text to display when the tutorial exits the last step.
-#   <audio>    - Optional: wav filename to play when the tutorial exits the last step
-#   <nasal><script>
-#   <set>
-#     <property>
-#     <value>/<property>
-#   <view>
-#   <interval>
-#
-#
-# NOTE: everywhere where <message> and/or <audio> is supported there can be
-#       more than one <message> or <audio> entry defined, in which case one
-#       is randomly chosen.
-#       All <nasal><script> run in a separate Nasal namespace. There are a few
-#       functions pre-defined in this namespace:
-#       - next(n=1)       ... switch to next step (default) or n steps forward
-#       - previous(n=1)   ... switch to previous step (default) or n steps back
-#       - say("...", who="copilot", delay=1)  ... say message, with optional
-#                             speaker and delay. Available speakers are "pilot",
-#                             "copilot", "atc", "ai-plane", "apprach", "ground".
-#                             Examples:   say("Look! There!");
-#                                         say("Oh, dear ...", "pilot", 2);
-#
-#
-# GLOBAL VARIABLES
-#
 
 
 var STEP_INTERVAL = 5;   # time between tutorial steps
@@ -185,7 +86,7 @@ var startTutorial = func {
 
 	# Pick up any weather conditions/scenarios set
 	setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers") + 1);
-	settimer(func { stepTutorial(loop_id += 1) }, STEP_INTERVAL);
+	settimer(func { step_tutorial(loop_id += 1) }, STEP_INTERVAL);
 }
 
 
@@ -213,9 +114,9 @@ _setlistener("/sim/crashed", stopTutorial);
 #     increments an error counter
 #   - Otherwise display the instructions for the step.
 #
-var stepTutorial = func(id) {
+var step_tutorial = func(id) {
 	id == loop_id or return;
-	var continue_after = func(i) { settimer(func { stepTutorial(id) }, i) }
+	var continue_after = func(i) { settimer(func { step_tutorial(id) }, i) }
 
 	if (current_step >= size(steps)) {
 		# end of the tutorial

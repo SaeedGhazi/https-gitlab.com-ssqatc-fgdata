@@ -410,6 +410,20 @@ var dialog = func {
 }
 
 
+##
+# Tutorial loader for development purposes.
+# Usage:  tutorial.load("Aircraft/bo105/Tutorials/foo.xml", 1)
+# Loads this file to tutorial slot #1 (/sim/tutorials/tutorial[1])
+#
+var load = func(file, index = 0) {
+	props.globals.getNode("/sim/tutorials", 1).removeChild("tutorial", index);
+	fgcommand("loadxml", props.Node.new({
+		"filename": file,
+		"targetnode": "/sim/tutorials/tutorial[" ~ index ~ "]/",
+	}));
+}
+
+
 var marker = nil;
 var heading = nil;
 var slip = nil;

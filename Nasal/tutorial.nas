@@ -146,7 +146,6 @@ var startTutorial = func {
 	init_nasal();
 
 	STEP_INTERVAL = delay(tutorial, STEP_INTERVAL);
-	set_marker(tutorial);
 	run_nasal(tutorial);
 	set_models(tutorial.getNode("models"));
 
@@ -392,9 +391,9 @@ var set_marker = func(node = nil) {
 		if (loc != nil) {
 			var s = loc.getNode("scale");
 			marker.setValues({
-				"x/value": loc.getNode("x", 1).getValue(),
-				"y/value": loc.getNode("y", 1).getValue(),
-				"z/value": loc.getNode("z", 1).getValue(),
+				"x/value": loc.getNode("x-m", 1).getValue(),
+				"y/value": loc.getNode("y-m", 1).getValue(),
+				"z/value": loc.getNode("z-m", 1).getValue(),
 				"scale/value": s != nil ? s.getValue() : 1,
 				"arrow-enabled": 1,
 			});

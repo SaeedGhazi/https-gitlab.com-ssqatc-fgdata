@@ -110,7 +110,8 @@
 			var dump = func {
 				print("&lt;marker>");
 				foreach (var v; values) {
-					print(sprintf("    &lt;%s>%.4f&lt;/%s>", v.name, v.valueN.getValue(), v.name));
+					var tag = v.name == "scale" ? "scale" : v.name ~ "-m";
+					print(sprintf("    &lt;%s>%.4f&lt;/%s>", tag, v.valueN.getValue(), tag));
 				}
 				print("&lt;/marker>");
 			}

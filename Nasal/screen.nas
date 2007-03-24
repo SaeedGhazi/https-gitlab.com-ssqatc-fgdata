@@ -228,8 +228,8 @@ var L = _setlistener("/sim/signals/nasal-dir-initialized", func {
 
 
 msg_repeat = func {
-	if (getprop("/sim/tutorial/running")) {
-		var last = getprop("/sim/tutorial/last-message");
+	if (getprop("/sim/tutorials/running")) {
+		var last = getprop("/sim/tutorials/last-message");
 		if (last == nil) {
 			return;
 		}

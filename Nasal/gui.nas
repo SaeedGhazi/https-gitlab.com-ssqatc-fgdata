@@ -71,7 +71,7 @@ INIT = func {
     # enable/disable menu entries
     menuEnable("fuel-and-payload", getprop("/sim/flight-model") == "yasim");
     menuEnable("autopilot", props.globals.getNode("/autopilot/KAP140/locks") == nil);
-    menuEnable("tutorial-start", size(props.globals.getNode("/sim").getChildren("tutorial")));
+    menuEnable("tutorial-start", size(props.globals.getNode("/sim/tutorials").getChildren("tutorial")));
     menuEnable("joystick-info", size(props.globals.getNode("/input/joysticks").getChildren("js")));
 
     var fps = props.globals.getNode("/sim/rendering/fps-display", 1);
@@ -281,7 +281,7 @@ showSelTutDialog = func {
 
     dialog[name].addChild("hrule").set("pref-height", 1);
 
-    if (props.globals.getNode("/sim/tutorial") == nil) {
+    if (props.globals.getNode("/sim/tutorials") == nil) {
         msg = dialog[name].addChild("text");
         msg.set("label", "No tutorials available for this aircraft");
         cancel = dialog[name].addChild("button");
@@ -301,10 +301,10 @@ showSelTutDialog = func {
 
     combo = contentArea.addChild("combo");
     combo.set("pref-width", "200");
-    combo.set("property", "/sim/tutorial/current-tutorial");
+    combo.set("property", "/sim/tutorials/current-tutorial");
 
     # Get a list of all tutorials
-    ltutorials = props.globals.getNode("/sim/tutorial").getChildren("tutorial");
+    ltutorials = props.globals.getNode("/sim/tutorials").getChildren("tutorial");
     for(i=0; i<size(ltutorials); i+=1) {
         c = ltutorials[i];
         if (c.getChild("name") != nil) {
@@ -312,7 +312,7 @@ showSelTutDialog = func {
             lentry = combo.addChild("value");
             lentry.prop().setValue(lname);
             if (i == 0) {
-                setprop("/sim/tutorial/current-tutorial", lname);
+                setprop("/sim/tutorials/current-tutorial", lname);
             }
         }
     }
@@ -345,19 +345,19 @@ showTutorialDialog = func {
     name = "displayTutorial";
 
     # Get tutorial title and description
-    ltutorial = getprop("/sim/tutorial/current-tutorial");
+    ltutorial = getprop("/sim/tutorials/current-tutorial");
 
     if (ltutorial == nil) { ltutorial = "<undefined>"; }
 
     lfound = 0;
     ldescription = "No description available for this tutorial.";
 
-    foreach(c; props.globals.getNode("/sim/tutorial").getChildren("tutorial")) {
+    foreach(c; props.globals.getNode("/sim/tutorials").getChildren("tutorial")) {
         if (c.getChild("name").getValue() == ltutorial) {
             lfound = 1;
             if (c.getChild("description") != nil) {
                 ldescription = c.getChild("description") .getValue();
-                setprop("/sim/tutorial/description", ldescription);
+                setprop("/sim/tutorials/description", ldescription);
             }
         }
     }
@@ -397,7 +397,7 @@ showTutorialDialog = func {
     textarea.set("editable", "false");
     textarea.set("valign", "top");
     textarea.set("halign", "fill");
-    textarea.set("property", "/sim/tutorial/description");
+    textarea.set("property", "/sim/tutorials/description");
 
     buttonBar = dialog[name].addChild("group");
     buttonBar.set("layout", "hbox");

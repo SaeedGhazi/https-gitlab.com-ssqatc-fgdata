@@ -87,7 +87,7 @@
 				<name>list</name>
 				<halign>fill</halign>
 				<pref-width>170</pref-width>
-				<pref-height>400</pref-height>
+				<pref-height>420</pref-height>
 				<property>/sim/tutorials/current-tutorial</property>
 				<binding>
 					<command>dialog-apply</command>

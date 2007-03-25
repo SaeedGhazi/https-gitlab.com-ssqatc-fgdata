@@ -172,6 +172,11 @@ Dialog = {
     },
     # doesn't need to be called explicitly, but can be used to force a reload
     load : func {
+        var state = me.state;
+        if (state) {
+            me.close();
+        }
+        me.prop.removeChildren();
         fgcommand("loadxml", props.Node.new({"filename": me.path,
                 "targetnode": me.prop.getPath()}));
         var n = me.prop.getNode("name");
@@ -181,6 +186,9 @@ Dialog = {
         me.name = n.getValue();
         me.prop.getNode("dialog-name", 1).setValue(me.name);
         fgcommand("dialog-new", me.prop);
+        if (state) {
+            me.open();
+        }
     },
     # allows access to dialog-embedded Nasal variables/functions
     namespace : func {

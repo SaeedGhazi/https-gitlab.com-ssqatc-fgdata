@@ -41,8 +41,8 @@
 		<open>
 			var self = cmdarg();
 			var dlgname = self.getNode("name").getValue();
-			var kbdctrl = props.globals.getNode("/devices/status/keyboard/ctrl");
-			var kbdshift = props.globals.getNode("/devices/status/keyboard/shift");
+			var kbdctrl = props.globals.getNode("/devices/status/keyboard/ctrl", 1);
+			var kbdshift = props.globals.getNode("/devices/status/keyboard/shift", 1);
 
 			var Value = {
 				new : func(name, factor, init = 0) {
@@ -108,12 +108,20 @@
 			}
 
 			var dump = func {
+				var v = props.globals.getNode("/sim/current-view", 1);
+				print("&lt;view>");
+				foreach (var n; ["heading-offset-deg", "pitch-offset-deg", "roll-offset-deg",
+						"x-offset-m", "y-offset-m", "z-offset-m", "field-of-view"]) {
+					print(sprintf("    &lt;%s>%.1f&lt;/%s>", n, v.getNode(n, 1).getValue(), n));
+				}
+				print("&lt;/view>\n");
+
 				print("&lt;marker>");
 				foreach (var v; values) {
 					var tag = v.name == "scale" ? "scale" : v.name ~ "-m";
 					print(sprintf("    &lt;%s>%.4f&lt;/%s>", tag, v.valueN.getValue(), tag));
 				}
-				print("&lt;/marker>");
+				print("&lt;/marker>\n");
 			}
 
 			var update = func(w) {

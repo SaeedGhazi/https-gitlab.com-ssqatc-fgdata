@@ -343,7 +343,7 @@ showWeightDialog = func {
     header = dialog[name].addChild("text");
     header.set("label", title);
 
-    dialog[name].addChild("hrule").set("pref-height", 1);
+    dialog[name].addChild("hrule");
 
     if (props.globals.getNode("/yasim") == nil) {
         msg = dialog[name].addChild("text");
@@ -603,7 +603,7 @@ showHelpDialog = func {
     w.setBinding("nasal", "delete(gui.dialog, \"" ~ name ~ "\")");
     w.setBinding("dialog-close");
 
-    dialog[name].addChild("hrule").addChild("empty");
+    dialog[name].addChild("hrule");
 
     # key list
     keylist = dialog[name].addChild("group");
@@ -637,7 +637,7 @@ showHelpDialog = func {
     if (size(lines)) {
         if (size(keydefs)) {
             dialog[name].addChild("empty").set("pref-height", 4);
-            dialog[name].addChild("hrule").addChild("empty");
+            dialog[name].addChild("hrule");
             dialog[name].addChild("empty").set("pref-height", 4);
         }
 

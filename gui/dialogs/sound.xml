@@ -10,7 +10,7 @@
     <label>Sound Configuration</label>
   </text>
 
-  <hrule><dummy/></hrule>
+  <hrule/>
 
   <group>
     <layout>hbox</layout>

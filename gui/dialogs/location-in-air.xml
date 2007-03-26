@@ -40,7 +40,7 @@
     <label>Location (in air)</label>
   </text>
 
-  <hrule><dummy/></hrule>
+  <hrule/>
 
   <text>
     <label>Surface Point</label>

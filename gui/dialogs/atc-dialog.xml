@@ -8,7 +8,7 @@
 		<label>ATC Communication</label>
 	</text>
 
-	<hrule><dummy/></hrule>
+	<hrule/>
 
 	<group>
 		<name>transmission-choice</name>

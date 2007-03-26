@@ -9,7 +9,7 @@
     <label>Rendering Options</label>
   </text>
 
-  <hrule><dummy/></hrule>
+  <hrule/>
 
   <group>
     <layout>vbox</layout>
@@ -115,7 +115,7 @@
     </checkbox>
   </group>
 
-  <hrule><dummy/></hrule>
+  <hrule/>
 
   <group>
     <padding>8</padding>
@@ -200,7 +200,7 @@
     </group>
   </group>
 
-  <hrule><dummy/></hrule>
+  <hrule/>
 
   <group>
     <padding>8</padding>

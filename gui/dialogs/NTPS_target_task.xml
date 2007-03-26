@@ -38,7 +38,7 @@
    <label>Target Task Selection</label>
   </text>
 
-  <hrule><dummy/></hrule>
+  <hrule/>
 
   <group>
     <layout>hbox</layout>

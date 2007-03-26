@@ -7,7 +7,7 @@
   <text>
     <label>Instant Replay</label>
   </text>
-  <hrule><dummy/></hrule>
+  <hrule/>
 
   <group>
     <layout>table</layout>

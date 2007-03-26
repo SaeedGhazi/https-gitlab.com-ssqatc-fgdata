@@ -8,7 +8,7 @@
     <label>Static Scenery Level Of Detail</label>
   </text>
 
-  <hrule><empty/></hrule>
+  <hrule/>
 
   <group>
     <layout>table</layout>

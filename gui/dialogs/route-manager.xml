@@ -20,7 +20,7 @@ command interface /autopilot/route-manager/input:
 		<label>Route Manager</label>
 	</text>
 
-	<hrule><empty/></hrule>
+	<hrule/>
 
 	<nasal>
 		<open>
@@ -34,7 +34,7 @@ command interface /autopilot/route-manager/input:
 
 			var list = cmdarg().getNode("list");
 			var cmd = props.globals.getNode("/autopilot/route-manager/input", 1);
-			var routemgr = props.globals.getNode("/autopilot/route-manager/route", 1);
+			var route = props.globals.getNode("/autopilot/route-manager/route", 1);
 
 			sel_index = func {
 				var s = selection.getValue();
@@ -58,7 +58,7 @@ command interface /autopilot/route-manager/input:
 
 			route_changed = func {
 				list.removeChildren("value");
-				var wp = routemgr.getChildren("wp");
+				var wp = route.getChildren("wp");
 				forindex (var i; wp) {
 					var id = wp[i].getNode("id").getValue();
 					var lon = wp[i].getNode("longitude-deg").getValue();

@@ -20,7 +20,7 @@
 
   <text><label>Autopilot Settings</label></text>
 
-  <hrule><dummy/></hrule>
+  <hrule/>
 
   <nasal>
     <open>
@@ -227,7 +227,7 @@
         </radio>
       </group>
 
-      <hrule><dummy/></hrule>
+      <hrule/>
 
       <group>
         <layout>hbox</layout>
@@ -291,7 +291,7 @@
     </group> <!-- End of Heading/Speed -->
 
 
-    <vrule><dummy/></vrule>
+    <vrule/>
 
 
     <group> <!-- Pitch/Altitude -->
@@ -451,7 +451,7 @@
     </group> <!-- End of Pitch/Altitude VBox -->
   </group>
 
-  <hrule><dummy/></hrule>
+  <hrule/>
 
   <group> <!-- Passive Mode Toggle -->
     <layout>hbox</layout>
@@ -469,7 +469,7 @@
     </checkbox>
   </group>
 
-  <hrule><dummy/></hrule>
+  <hrule/>
 
   <button>
     <legend>Close</legend>

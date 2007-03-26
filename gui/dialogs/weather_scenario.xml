@@ -9,7 +9,7 @@
     <label>Weather Scenario</label>
   </text>
 
-  <hrule><dummy/></hrule>
+  <hrule/>
 
   <text>
     <label></label>

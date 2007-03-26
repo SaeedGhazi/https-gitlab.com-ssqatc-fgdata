@@ -11,7 +11,7 @@
   <label>ATC/AI Options</label>
  </text>
 
- <hrule><dummy/></hrule>
+ <hrule/>
 
  <group>
   <layout>hbox</layout>
@@ -56,7 +56,7 @@
   <empty><stretch>true</stretch></empty>
  </group>
 
- <hrule><dummy/></hrule>
+ <hrule/>
 
  <text>
   <halign>left</halign>

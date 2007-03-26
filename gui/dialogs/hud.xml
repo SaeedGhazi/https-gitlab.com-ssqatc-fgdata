@@ -10,7 +10,7 @@
 		<label>HUD Configuration</label>
 	</text>
 
-	<hrule><dummy/></hrule>
+	<hrule/>
 
 	<checkbox>
 		<label>Transparent</label>
@@ -64,7 +64,7 @@
 		</slider>
 	</group>
 
-	<hrule><whatever/></hrule>
+	<hrule/>
 
 	<group>
 		<layout>hbox</layout>

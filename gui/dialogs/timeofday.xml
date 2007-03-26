@@ -10,7 +10,7 @@
 		<label>Set Time of Day</label>
 	</text>
 
-	<hrule><dummy/></hrule>
+	<hrule/>
 
 	<group>
 		<layout>hbox</layout>
@@ -28,7 +28,7 @@
 			</text>
 
 			<empty><pref-height>6</pref-height></empty>
-			<hrule><dummy/></hrule>
+			<hrule/>
 			<empty><pref-height>6</pref-height></empty>
 
 			<text>
@@ -41,7 +41,7 @@
 			</text>
 
 			<empty><pref-height>6</pref-height></empty>
-			<hrule><dummy/></hrule>
+			<hrule/>
 			<empty><pref-height>6</pref-height></empty>
 
 			<empty>

@@ -10,7 +10,7 @@
 		<label>Nasal Console</label>
 	</text>
 
-	<hrule><dummy/></hrule>
+	<hrule/>
 
 	<textbox>
 		<halign>fill</halign>

@@ -7,7 +7,7 @@
 		<label>Display Airport Frequencies</label>
 	</text>
 
-	<hrule><dummy/></hrule>
+	<hrule/>
 
 	<group>
 		<name>quick-buttons</name>

@@ -9,7 +9,7 @@
     <label>Multiplayer Chat</label>
   </text>
 
-  <hrule><dummy/></hrule>
+  <hrule/>
 
   <textbox>
     <halign>fill</halign>

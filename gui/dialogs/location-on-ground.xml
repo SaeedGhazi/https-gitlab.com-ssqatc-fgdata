@@ -8,7 +8,7 @@
     <label>Set New Location</label>
   </text>
 
-  <hrule><empty/></hrule>
+  <hrule/>
 
   <nasal>
     <open>

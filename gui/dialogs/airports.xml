@@ -8,7 +8,7 @@
     <label>Select an Airport</label>
   </text>
 
-  <hrule><empty/></hrule>
+  <hrule/>
 
   <nasal>
     <open>

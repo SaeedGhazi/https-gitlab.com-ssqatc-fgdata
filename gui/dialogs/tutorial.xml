@@ -9,11 +9,10 @@
 		<label>Select Tutorial</label>
 	</text>
 
-	<hrule><empty/></hrule>
+	<hrule/>
 
 	<nasal>
 		<open>
-			tutorial.stopTutorial();
 			var list = cmdarg().getNode("group[1]/group/list");
 			var node = props.globals.getNode("/sim/tutorials", 1);
 			var tut = node.getChildren("tutorial");
@@ -30,7 +29,7 @@
 				list.getChild("value", i, 1).setValue(name);
 			}
 
-			select = func {
+			var select = func {
 				var name = current.getValue();
 				foreach (var t; tut) {
 					if (t.getNode("name").getValue() == name) {
@@ -42,7 +41,6 @@
 				fgcommand("dialog-update", props.Node.new({"object-name": "textbox",
 						"dialog-name": "tutorial"}));
 			}
-
 
 			if (current.getType() == "NONE" or current.getValue() == "") {
 				current.setValue(tut[0].getNode("name").getValue());

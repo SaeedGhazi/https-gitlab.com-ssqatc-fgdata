@@ -7,7 +7,7 @@
 		<label>TITLE ("ICAO Frequencies")</label>
 	</text>
 
-	<hrule><dummy/></hrule>
+	<hrule/>
 
 	<group>
 		<name>frequency-list</name>

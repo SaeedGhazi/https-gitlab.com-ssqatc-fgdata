@@ -206,7 +206,7 @@ var L = _setlistener("/sim/signals/nasal-dir-initialized", func {
 	}, 1);
 
 	log = window.new(nil, -30, 10, 10);
-	log.sticky = 1;
+	log.sticky = 0;  # don't turn on; makes scrolling up messages jump left and right
 
 	var b = "/sim/screen/";
 	setlistener(b ~ "black",   func { log.write(cmdarg().getValue(), 0,   0,   0) });

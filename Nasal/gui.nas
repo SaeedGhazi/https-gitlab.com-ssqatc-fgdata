@@ -167,7 +167,7 @@ Dialog = {
         if (m.prop.getName() != "dialog") {
             die("Dialog class: node name must end with '/dialog'");
         }
-        m.load();
+        m.listener = setlistener("/sim/signals/reinit-gui", func { m.load () }, 1);
         return m;
     },
     # doesn't need to be called explicitly, but can be used to force a reload

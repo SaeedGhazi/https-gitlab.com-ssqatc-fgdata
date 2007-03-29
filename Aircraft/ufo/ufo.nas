@@ -175,7 +175,7 @@ var Model = {
 		}
 
 		m.node.getNode("legend", 1).setValue("");
-		if (isa(data, props.Node)) {
+		if (data != nil and isa(data, props.Node)) {
 			props.copy(data, m.node);		# import node
 		}
 		var hdg = init_prop(m.node.getNode("heading-deg", 1), 0);

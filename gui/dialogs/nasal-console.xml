@@ -185,9 +185,9 @@
 				f = bind(f, globals);
 				call(f, nil, nil, locals, err);
 				if (size(err)) {
-					printf("%s at %s line %d\n", err[0], err[1], err[2]);
+					printf("%s at %s line %d", err[0], err[1], err[2]);
 					for (var i = 3; i &lt; size(err); i += 2) {
-						printf("  called from %s line %d\n", err[i], err[i + 1]);
+						printf("  called from %s line %d", err[i], err[i + 1]);
 					}
 				}
 			}

@@ -43,6 +43,10 @@
 			<command>dialog-apply</command>
 			<object-name>editfield</object-name>
 		</binding>
+		<binding>
+			<command>nasal</command>
+			<script>select(active)</script>
+		</binding>
 	</textbox>
 
 	<group>
@@ -110,8 +114,8 @@
 		</button>
 
 		<button>
-			<legend>Print</legend>
-			<key>Ctrl-p</key>
+			<legend>Dump</legend>
+			<key>Ctrl-d</key>
 			<equal>true</equal>
 			<binding>
 				<command>dialog-apply</command>
@@ -144,16 +148,18 @@
 			var kbdctrl = props.globals.getNode("/devices/status/keyboard/ctrl", 1);
 			var printf = func { print(call(sprintf, arg)) }
 			var edit = dlg.getNode("edit", 1);
-			if (!contains(globals, "__nasal_console_locals")) {
-				globals["__nasal_console_locals"] = {};
+			if (!contains(globals, "__nasal_console")) {
+				globals["__nasal_console"] = {};
 			}
-			var locals = globals["__nasal_console_locals"];
+			var locals = globals["__nasal_console"];
 			var numtabs = size(dlg.getChildren("code"));
 			if (!numtabs) {
 				numtabs = 10;
 			}
 
 			var dump = func {
+				gui.dialog_apply("nasal-console", "editfield");
+				select(active);
 				rule = "--------------------------------------------------------------------------------";
 				print(rule ~ "\n");
 				print(edit.getValue());
@@ -162,6 +168,7 @@
 
 			var clear = func {
 				edit.setValue("");
+				select(active);
 			}
 
 			var execute = func(what = nil) {
@@ -201,7 +208,6 @@
 				foreach (var c; dlg.getChildren("tab-down")) {
 					c.setBoolValue(c.getIndex() == active);
 				}
-				# animate tab buttons
 				dlg.getNode("active").setIntValue(active = which);
 				edit.setValue(dlg.getChild("code", active).getValue());
 			}
@@ -215,8 +221,8 @@
 					~ "  tab ... leave edit mode (visible text cursor)\n"
 					~ "  return ... execute active code\n"
 					~ "  ctrl-c ... clear input field\n"
-					~ "  ctrl-p ... print input field contents to terminal\n"
-					~ "  escape ... close dialog\n\n"
+					~ "  ctrl-d ... dump input field contents to terminal\n"
+					~ "  esc ... close dialog\n\n"
 					~ "Ctrl-click on tab buttons executes code without switching to the tab.\n"
 					~ "Add more &lt;code> properties in ~/.fgfs/autosave.xml for more tab buttons.");
 			}

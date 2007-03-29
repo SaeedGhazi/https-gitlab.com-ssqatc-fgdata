@@ -85,8 +85,8 @@ settimer(INIT, 1);
 ##
 # Show/hide the fps display dialog.
 #
-fpsDisplay = func(v = nil) {
-    var w = v != nil ? v : cmdarg().getBoolValue();
+fpsDisplay = func {
+    var w = (caller(0)[0]["arg"] == nil) ? cmdarg().getBoolValue() : arg[0];
     fgcommand(w ? "dialog-show" : "dialog-close", props.Node.new({"dialog-name": "fps"}));
 }
 

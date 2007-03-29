@@ -164,7 +164,7 @@ var wrapNode = func { { parents : [Node], _g : arg[0] } }
 # Does anything ever call globals.set_props() from C++?  May need to
 # turn this into a function if so.
 #
-props.globals = wrapNode(_globals());
+var globals = wrapNode(_globals());
 
 ##
 # Sets all indexed property children to a single value.  arg[0]

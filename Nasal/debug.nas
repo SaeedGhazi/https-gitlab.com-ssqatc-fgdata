@@ -15,6 +15,8 @@
 #
 # debug.string(<variable>)             ... returns contents of variable as string
 #
+# debug.load_xml_nasal(<file>)         ... load and run XML embedded Nasal
+#
 
 
 
@@ -129,6 +131,45 @@ var exit = func { fgcommand("exit", props.Node.new()) }
 if (getprop("/sim/logging/priority") != "alert") {
 	_setlistener("/sim/signals/nasal-dir-initialized", func { print(_c("32", "** NASAL initialized **")) });
 	_setlistener("/sim/signals/fdm-initialized", func { print(_c("36", "** FDM initialized **")) });
+}
+
+
+
+##
+# Loads embedded Nasal from an XML file into a Nasal namespace.
+# The namespace is by default the file's basename. Optionally,
+# a module can be defined in a <module> entry. The file name
+# doesn't have to carry an *.xml extension. It may even be
+# desirable to use *.nas, so that editors pick up Nasal syntax
+# coloring.
+#
+# Usage:   debug.load_xml_nasal(<filename>);
+#
+# Example:
+#
+#   debug.load_xml_nasal("Aircraft/mine/test.nas");
+#
+#   contents of test.nas:
+#
+#       <PropertyList>
+#           <module>test</module>    <!-- optional -->
+#           <script><![CDATA[
+#
+#       print("I'm being reloaded.");
+#
+#           ]]></script>
+#       </PropertyList>
+#
+var load_xml_nasal = func(file) {
+	var n = props.globals.getNode("/tmp/nasal", 1);
+	n.getNode("filename", 1).setValue(file);
+	n.getNode("targetnode", 1).setValue(n.getPath());
+	if (n.getNode("module", 0) == nil) {
+		var basename = split(".", split("/", file)[-1])[0];
+		n.getNode("module", 1).setValue(basename);
+	}
+	fgcommand("loadxml", n);
+	fgcommand("nasal", n);
 }
 
 

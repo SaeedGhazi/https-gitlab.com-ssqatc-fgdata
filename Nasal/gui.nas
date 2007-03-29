@@ -167,7 +167,7 @@ Dialog = {
         if (m.prop.getName() != "dialog") {
             die("Dialog class: node name must end with '/dialog'");
         }
-        m.listener = setlistener("/sim/signals/reinit-gui", func { m.load () }, 1);
+        m.listener = setlistener("/sim/signals/reinit-gui", func { m.load() }, 1);
         return m;
     },
     # doesn't need to be called explicitly, but can be used to force a reload
@@ -242,6 +242,39 @@ settimer(func {
     props.globals.removeChildren("browser");
 }, 0);
 
+
+##
+# Apply whole dialog or list of widgets. This copies the widgets'
+# visible contents to the respective <property>.
+#
+var dialog_apply = func(dialog, objects...) {
+    var n = props.Node.new({ "dialog-name" : dialog });
+    if (!size(objects)) {
+        return fgcommand("dialog-apply", n);
+    }
+    var name = n.getNode("object-name", 1);
+    foreach (var o; objects) {
+        name.setValue(o);
+        fgcommand("dialog-apply", n);
+    }
+}
+
+
+##
+# Update whole dialog or list of widgets. This makes the widgets
+# adopt and display the value of their <property>.
+#
+var dialog_update = func(dialog, objects...) {
+    var n = props.Node.new({ "dialog-name" : dialog });
+    if (!size(objects)) {
+        return fgcommand("dialog-update", n);
+    }
+    var name = n.getNode("object-name", 1);
+    foreach (var o; objects) {
+        name.setValue(o);
+        fgcommand("dialog-update", n);
+    }
+}
 
 
 ########################################################################
@@ -429,10 +462,12 @@ showWeightDialog = func {
 
         sel = tcell(fuelTable, "checkbox", i+1, 1);
         sel.set("property", tankprop ~ "/selected");
+        sel.set("live", 1);
         sel.setBinding("dialog-apply");
 
         slider = tcell(fuelTable, "slider", i+1, 2);
         slider.set("property", tankprop ~ "/level-gal_us");
+        slider.set("live", 1);
         slider.set("min", 0);
         slider.set("max", cap);
         slider.setBinding("dialog-apply");
@@ -513,6 +548,7 @@ showWeightDialog = func {
             var max = w.getNode("max-lb", 1).getValue();
             slider.set("min", min != nil ? min : 0);
             slider.set("max", max != nil ? max : 100);
+            slider.set("live", 1);
             slider.setBinding("dialog-apply");
         }
 

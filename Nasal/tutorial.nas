@@ -2,17 +2,39 @@
 # ---------------------------------------------------------------------------------------
 
 
-var STEP_INTERVAL = 5;   # time between tutorial steps
-var EXIT_INTERVAL = 1;   # time between fulfillment of a step and the start of the next step
+var step_interval = 5;   # time between tutorial steps
+var exit_interval = 1;   # time between fulfillment of a step and the start of the next step
 
-var tutorial = nil;
-var steps = [];
 var loop_id = 0;
+var tutorialN = nil;
+var steps = [];
 var current_step = nil;
+var is_first_step = nil;
 var num_errors = nil;
-var num_step_runs = nil;
-var last_run_time = nil;
+var step_start_time = nil;
+var step_iter_count = 0;    # number or step loop iterations
+var last_step_time = nil;   # for set_targets() eta calculation
 var audio_dir = nil;
+
+
+# property nodes (to be initialized with listener)
+var markerN = nil;
+var headingN = nil;
+var slipN = nil;
+var time_elapsedN = nil;
+var last_messageN = nil;
+var step_countN = nil;
+var step_timeN = nil;
+
+_setlistener("/sim/signals/nasal-dir-initialized", func {
+	markerN = props.globals.getNode("/sim/model/marker", 1);
+	headingN = props.globals.getNode("/orientation/heading-deg", 1);
+	slipN = props.globals.getNode("/orientation/side-slip-deg", 1);
+	time_elapsedN = props.globals.getNode("/sim/time/elapsed-sec", 1);
+	last_messageN = props.globals.getNode("/sim/tutorials/last-message", 1);
+	step_countN = props.globals.getNode("/sim/tutorials/step-count", 1);
+	step_timeN = props.globals.getNode("/sim/tutorials/step-time", 1);
+});
 
 
 
@@ -23,41 +45,42 @@ var startTutorial = func {
 		return;
 	}
 
-	tutorial = nil;
+	tutorialN = nil;
 	foreach (var c; props.globals.getNode("/sim/tutorials").getChildren("tutorial")) {
 		if (c.getNode("name").getValue() == name) {
-			tutorial = c;
+			tutorialN = c;
 			break;
 		}
 	}
 
-	if (tutorial == nil) {
+	if (tutorialN == nil) {
 		screen.log.write('Unable to find tutorial "' ~ name ~ '"');
 		return;
 	}
 
 	stopTutorial();
 	screen.log.write('Loading tutorial "' ~ name ~ '" ...');
-	current_step = 0;
-	num_step_runs = 0;
-	num_errors = 0;
-	last_run_time = time_elapsed.getValue();
-	steps = tutorial.getChildren("step");
 	view.point.save();
 	init_nasal();
 
-	STEP_INTERVAL = delay(tutorial, STEP_INTERVAL);
-	run_nasal(tutorial);
-	set_models(tutorial.getNode("models"));
+	current_step = 0;
+	is_first_step = 1;
+	num_errors = 0;
+	last_step_time = time_elapsedN.getValue();
+	steps = tutorialN.getChildren("step");
 
-	var dir = tutorial.getNode("audio-dir");
-	if (dir != nil) {
+	step_interval = read_double(tutorialN, "step-time", step_interval);
+	exit_interval = read_double(tutorialN, "exit-time", exit_interval);
+	run_nasal(tutorialN);
+	set_models(tutorialN.getNode("models"));
+
+	var dir = tutorialN.getNode("audio-dir");
+	if (dir != nil)
 		audio_dir = getprop("/sim/fg-root") ~ "/" ~ dir.getValue() ~ "/";
-	} else {
+	else
 		audio_dir = "";
-	}
 
-	var presets = tutorial.getChild("presets");
+	var presets = tutorialN.getChild("presets");
 	if (presets != nil) {
 		props.copy(presets, props.globals.getNode("/sim/presets"));
 		fgcommand("presets-commit", props.Node.new());
@@ -73,20 +96,17 @@ var startTutorial = func {
 		}
 	}
 
-	var timeofday = tutorial.getChild("timeofday");
-	if (timeofday != nil) {
+	var timeofday = tutorialN.getChild("timeofday");
+	if (timeofday != nil)
 		fgcommand("timeofday", props.Node.new({ "timeofday" : timeofday.getValue() }));
-	}
 
-	var init = tutorial.getNode("init");
-	set_properties(init);
-	set_view(init);
-	run_nasal(init);
+	# <init>
+	do_group(tutorialN.getNode("init"));
 	is_running(1);  # needs to be after "presets-commit"
 
 	# Pick up any weather conditions/scenarios set
 	setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers") + 1);
-	settimer(func { step_tutorial(loop_id += 1) }, STEP_INTERVAL);
+	settimer(func { step_tutorial(loop_id += 1) }, step_interval);
 }
 
 
@@ -94,9 +114,10 @@ var startTutorial = func {
 var stopTutorial = func {
 	loop_id += 1;
 	if (is_running()) {
-		var end = tutorial.getNode("end");
+		var end = tutorialN.getNode("end");
 		set_properties(end);
 		run_nasal(end);
+		set_view(end) or view.point.restore();
 	}
 	set_marker();
 	is_running(0);
@@ -116,71 +137,95 @@ _setlistener("/sim/crashed", stopTutorial);
 #
 var step_tutorial = func(id) {
 	id == loop_id or return;
-	var continue_after = func(i) { settimer(func { step_tutorial(id) }, i) }
+	var continue_after = func(n, dflt) {
+		settimer(func { step_tutorial(id) }, read_double(n, "wait", dflt));
+	}
 
+	# <end>
 	if (current_step >= size(steps)) {
-		# end of the tutorial
-		var end = tutorial.getNode("end");
+		var end = tutorialN.getNode("end");
 		say_message(end, "Tutorial finished.");
 		say_message(nil, "Deviations: " ~ num_errors);
-		set_view(end) or view.point.restore();
 		stopTutorial();
 		return;
 	}
 
 	var step = steps[current_step];
 	set_marker(step);
-	set_targets(tutorial.getNode("targets"));
+	set_targets(tutorialN.getNode("targets"));
 
-	if (num_step_runs == 0) {
-		# first time we've encountered this step
-		say_message(step, "Tutorial step " ~ current_step);
-		set_view(step);
-		set_properties(step);
-		run_nasal(step);
+	# <step>
+	if (is_first_step) {
+		is_first_step = 0;
+		step_start_time = time_elapsedN.getValue();
+		step_timeN.setDoubleValue(0);
+		step_countN.setIntValue(step_iter_count = 0);
 
-		num_step_runs += 1;
-		return continue_after(delay(step, STEP_INTERVAL));
+		do_group(step, "Tutorial step " ~ current_step);
+		return continue_after(step, step_interval);
 	}
 
-	# check for error conditions in random order
+	step_countN.setIntValue(step_iter_count += 1);
+	step_timeN.setDoubleValue(time_elapsedN.getValue() - step_start_time);
+
+	# <abort>
+	var abort = step.getNode("abort");
+	if (abort != nil) {
+		if (props.condition(abort.getNode("condition"))) {
+			do_group(abort);
+			current_step += 1;
+			is_first_step = 1;
+			return continue_after(abort, exit_interval);
+		}
+	}
+
+	# <error>
 	foreach (var error; shuffle(step.getChildren("error"))) {
 		if (props.condition(error.getNode("condition"))) {
 			num_errors += 1;
-			run_nasal(error);
-			say_message(error);
-			return continue_after(delay(error, STEP_INTERVAL));
+			do_group(error);
+			return continue_after(error, step_interval);
 		}
 	}
 
-	# check for exit condition
+	# <exit>
 	var exit = step.getNode("exit");
 	if (exit != nil) {
-		if (!props.condition(exit.getNode("condition"))) {
-			return continue_after(delay(exit, STEP_INTERVAL));
-		}
-		run_nasal(exit);
-		set_view(exit);
+		if (!props.condition(exit.getNode("condition")))
+			return continue_after(exit, step_interval);
+
+		do_group(exit);
 	}
 
 	# success!
 	current_step += 1;
-	num_step_runs = 0;
-	return continue_after(delay(tutorial, EXIT_INTERVAL));
+	is_first_step = 1;
+	return continue_after(tutorialN, exit_interval);
 }
 
 
-var delay = func(node, default) {
-	if (node != nil) {
-		var d = node.getNode("interval");
-		if (d != nil) {
-			return num(d.getValue());
-		}
-	}
-	return num(default);
+##
+# Do the stuff that's shared by <init>, <step>, <error>, <exit>, and <abort>.
+# <end> doesn't use it.
+#
+var do_group = func(node, default_msg = nil) {
+	say_message(node, default_msg);
+	set_view(node);
+	set_properties(node);
+	run_nasal(node);
 }
 
 
+var read_double = func(node, child, default) {
+	var c = node.getNode(child);
+	if (c == nil)
+		return default;
+	c = c.getValue();
+	return c != nil ? c : default;
+}
+
+
+##
 # scan all <set> blocks and set their <property> to <value> or
 # the value of a property that <property n="1"> points to
 # <set>
@@ -209,27 +254,35 @@ var set_properties = func(node) {
 }
 
 
+##
+# For each <target><*><longitude-deg|latitude-deg> calculate and update
+# /sim/tutorials/targets/*/...
+#   heading-deg   ... absolute heading to target  (0 -> North)
+#   direction-deg ... relative angle to target    (0 -> ahead, 90 -> to the right)
+#   distance-m    ... distance in meters
+#   eta-min       ... estimated time of arrival (assuming aircraft flies in
+#                     in current speed towards target)
+#
 var set_targets = func(node) {
 	node != nil or return;
 
-	var time = time_elapsed.getValue();
+	var time = time_elapsedN.getValue();
 	var dest = props.globals.getNode("/sim/tutorials/targets", 1);
 	var aircraft = geo.aircraft_position();
-	var hdg = heading.getValue() + slip.getValue();
+	var hdg = headingN.getValue() + slipN.getValue();
 
 	foreach (var t; node.getChildren()) {
 		var lon = t.getNode("longitude-deg");
 		var lat = t.getNode("latitude-deg");
-		if (lon == nil or lat == nil) {
+		if (lon == nil or lat == nil)
 			die("target coords undefined");
-		}
+
 		var target = geo.Coord.new().set_lonlat(lon.getValue(), lat.getValue());
 		var dist = aircraft.distance_to(target);
 		var course = aircraft.course_to(target);
 		var angle = geo.normdeg(course - hdg);
-		if (angle >= 180) {
+		if (angle >= 180)
 			angle -= 360;
-		}
 
 		var d = dest.getChild(t.getName(), t.getIndex(), 1);
 		d.getNode("heading-deg", 1).setDoubleValue(course);
@@ -238,11 +291,11 @@ var set_targets = func(node) {
 		var lastdist = distN.getValue();
 		distN.setDoubleValue(dist);
 		if (lastdist != nil) {
-			var speed = (lastdist - dist) / (time - last_run_time) + 0.00001;  # m/s
+			var speed = (lastdist - dist) / (time - last_step_time) + 0.00001;  # m/s
 			d.getNode("eta-min", 1).setDoubleValue(dist / (speed * 60));
 		}
 	}
-	last_run_time = time;
+	last_step_time = time;
 }
 
 
@@ -253,11 +306,10 @@ var set_models = func(node) {
 	var manager = props.globals.getNode("/models", 1);
 	foreach (var src; node.getChildren("model")) {
 		var i = 0;
-		for (; 1; i += 1) {
-			if (manager.getChild("model", i, 0) == nil) {
+		for (; 1; i += 1)
+			if (manager.getChild("model", i, 0) == nil)
 				break;
-			}
-		}
+
 		var dest = manager.getChild("model", i, 1);
 		props.copy(src, dest);
 		dest.getNode("load", 1);  # makes the modelmgr load the model
@@ -268,9 +320,9 @@ var set_models = func(node) {
 
 
 var remove_models = func {
-	foreach (var m; models) {
+	foreach (var m; models)
 		m.getParent().removeChild(m.getName(), m.getIndex());
-	}
+
 	models = [];
 }
 
@@ -291,7 +343,7 @@ var set_marker = func(node = nil) {
 		var loc = node.getNode("marker");
 		if (loc != nil) {
 			var s = loc.getNode("scale");
-			marker.setValues({
+			markerN.setValues({
 				"x/value": loc.getNode("x-m", 1).getValue(),
 				"y/value": loc.getNode("y-m", 1).getValue(),
 				"z/value": loc.getNode("z-m", 1).getValue(),
@@ -301,7 +353,7 @@ var set_marker = func(node = nil) {
 			return;
 		}
 	}
-	marker.getNode("arrow-enabled", 1).setBoolValue(0);
+	markerN.getNode("arrow-enabled", 1).setBoolValue(0);
 }
 
 
@@ -329,28 +381,28 @@ var say_message = func(node, default = nil) {
 		is_error = node.getName() == "error";
 
 		var m = node.getChildren("message");
-		if (size(m)) {
+		if (size(m))
 			msg = m[rand() * size(m)].getValue();
-		}
 
 		var a = node.getChildren("audio");
-		if (size(a)) {
+		if (size(a))
 			audio = a[rand() * size(a)].getValue();
-		}
 	}
 
-	if (msg != last_message.getValue() or (is_error and lastmsgcount == 1)) {
+	if (msg != last_messageN.getValue() or (is_error and lastmsgcount == 1)) {
 		# Error messages are only displayed every 10 seconds (2 iterations)
 		# Other messages are only displayed if they change
 		if (audio != nil) {
 			var prop = { path : audio_dir, file : audio };
 			fgcommand("play-audio-message", props.Node.new(prop));
 			screen.log.write(msg, 1, 1, 1);
-		} else {
+		} elsif (msg != nil) {
 			setprop("/sim/messages/copilot", msg);
 		}
 
-		last_message.setValue(msg);
+		if (msg != nil)
+			last_messageN.setValue(msg);
+
 		lastmsgcount = 0;
 	} else {
 		lastmsgcount += 1;
@@ -375,9 +427,9 @@ var shuffle = func(vec) {
 var run_nasal = func(node) {
 	node != nil or return;
 	foreach (var n; node.getChildren("nasal")) {
-		if (n.getNode("module") == nil) {
+		if (n.getNode("module") == nil)
 			n.getNode("module", 1).setValue("__tutorial");
-		}
+
 		fgcommand("nasal", n);
 	}
 }
@@ -393,13 +445,12 @@ var say = func(what, who = "copilot", delay = 0) {
 var init_nasal = func {
 	globals.__tutorial = {
 		say : say,   # just exporting tutorial.say as __turorial.say
-		next : func(n = 1) { current_step += n; num_step_runs = 0 },
+		next : func(n = 1) { current_step += n; is_first_step = 1; },
 		previous : func(n = 1) {
 			current_step -= n;
-			num_step_runs = 0;
-			if (current_step < 0) {
+			is_first_step = 1;
+			if (current_step < 0)
 				current_step = 0;
-			}
 		},
 	};
 }
@@ -423,18 +474,4 @@ var load = func(file, index = 0) {
 	}));
 }
 
-
-var marker = nil;
-var heading = nil;
-var slip = nil;
-var last_message = nil;
-var time_elapsed = nil;
-
-_setlistener("/sim/signals/nasal-dir-initialized", func {
-	marker = props.globals.getNode("/sim/model/marker", 1);
-	heading = props.globals.getNode("/orientation/heading-deg", 1);
-	slip = props.globals.getNode("/orientation/side-slip-deg", 1);
-	last_message = props.globals.getNode("/sim/tutorials/last-message", 1);
-	time_elapsed = props.globals.getNode("/sim/time/elapsed-sec", 1);
-});
 

@@ -44,8 +44,15 @@
    <chunk>
     <name>airspeed</name>
     <type>float</type>
-    <format>AIRSPEED=%04.1f</format>
-    <node>/instrumentation/airspeed-indicator/indicated-speed-kt</node>
+    <format>IAS=%04.1f</format>
+    <node>/velocities/airspeed-kt</node>
+   </chunk>
+
+   <chunk>
+    <name>groundspeed</name>
+    <type>float</type>
+    <format>GS=%04.1f</format>
+    <node>/velocities/mach</node>
    </chunk>
 
    <chunk>

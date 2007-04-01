@@ -5,7 +5,7 @@
       "true" causes the submodel to be released/launched.
 
       A submodel will create an AIBallistic object which will follow a ballistic
-      path. By default one submodel will be released when the corresponding 
+      path. By default one submodel will be released when the corresponding
       trigger is "true".
 
       The initial conditions (IC) define the object's starting point (relative
@@ -17,8 +17,8 @@
       <name>         The name of the submodel.
       <model>        The path to the visual model.
       <trigger>      The property which will act as the trigger. If this tag is
-			               not included, the submodels will be released continuously, 
-										 provided <count> is set to -1.
+                     not included, the submodels will be released continuously,
+                      provided <count> is set to -1.
       <speed>        Initial speed, in feet/sec, relative to user aircraft.
       <speed-prop>   The property containing the Initial speed, in feet/sec,
                      relative to user aircraft. If this path is found, <speed>
@@ -40,21 +40,21 @@
                      aircraft's pitch.    Up is positive.
       <life>         Life span in seconds.  Default is 900.0.
       <buoyancy>     In ft/sec/sec.  Works opposite acceleration of gravity.
-                     For example, if set to 32 the submodel will feel no 
+                     For example, if set to 32 the submodel will feel no
                      gravity. If greater than 32 the object will rise.
                      Default is 0.
       <wind>         Set to true if you want the submodel to react to the wind.
-                     Default is "false". 
-      <cd>           The Coeffient of Drag. Varies with submodel shape - 0.295 for a bullet, 
+                     Default is "false".
+      <cd>           The Coeffient of Drag. Varies with submodel shape - 0.295 for a bullet,
                      0.045 for an airfoil. Enter an appropriate value. Defaults to 0.295.
       <random>       When this is true the Cd is varied by +- 5%. Useful for smoke or contrails.
       <eda>          Effective drag area (sq ft). Usually the cross-sectional area of the
                      submodel normal to the airflow.
-      <weight>       The weight of the submodel (lbs). NOT set to 0 on submodel release.You 
+      <weight>       The weight of the submodel (lbs). NOT set to 0 on submodel release.You
                      may wish to set this value to 0 by means of key bindings or Nasal script.
                      Defaults to 0.25.
       <contents>     The path to the contents of a submodel. The contents must be in lbs.
-                     Intended for use with drop tanks. The property value will be set 
+                     Intended for use with drop tanks. The property value will be set
                      to 0 on release of the submodel: do not also set to 0 elsewhere e.g.
                      in key bindings. Defaults to 0.
 -->
@@ -92,8 +92,8 @@
     <pitch-offset>1.8</pitch-offset>
     <life>2.0</life>
   </submodel>
-  
-  <submodel> 
+
+  <submodel>
     <name>droptank-l</name>
     <model>Aircraft/Hunter/Models/droptank-100gal.ac</model>
     <trigger>controls/armament/station[0]/jettison-all</trigger>
@@ -112,7 +112,7 @@
     <contents>consumables/fuel/tank[2]/level-lbs</contents>
   </submodel>
 
-  <submodel> 
+  <submodel>
     <name>droptank-r</name>
     <model>Aircraft/Hunter/Models/droptank-100gal.ac</model>
     <trigger>controls/armament/station[1]/jettison-all</trigger>

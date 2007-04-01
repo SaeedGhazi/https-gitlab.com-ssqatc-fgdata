@@ -144,7 +144,7 @@
 
 	<nasal>
 		<open>
-			var dlg = props.globals.getNode("/sim/gui/dialogs/nasal-console");
+			var dlg = props.globals.getNode("/sim/gui/dialogs/nasal-console", 1);
 			var kbdctrl = props.globals.getNode("/devices/status/keyboard/ctrl", 1);
 			var printf = func { print(call(sprintf, arg)) }
 			var edit = dlg.getNode("edit", 1);

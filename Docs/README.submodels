@@ -18,7 +18,7 @@
       <model>        The path to the visual model.
       <trigger>      The property which will act as the trigger. If this tag is
                      not included, the submodels will be released continuously,
-                      provided <count> is set to -1.
+                     provided <count> is set to -1.
       <speed>        Initial speed, in feet/sec, relative to user aircraft.
       <speed-prop>   The property containing the Initial speed, in feet/sec,
                      relative to user aircraft. If this path is found, <speed>

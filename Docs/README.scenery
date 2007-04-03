@@ -28,6 +28,9 @@ Contents ----------------------------------------------------------------------
    5.1  calc-tile.pl
    5.2  ufo scenery object editor
 
+6  embedded Nasal
+   6.1  static models
+   6.2  AI models
 
 
 
@@ -526,5 +529,98 @@ matter where you are actually flying, so the *.stg method is preferable.
 
 
 
-Melchior FRANZ, 2006/04/12
+
+
+6 embedded Nasal in XML files (static objects and AI) -------------------------
+
+
+6.1 static models
+-----------------
+
+Objects loaded via OBJECT_STATIC in *.stg files as well as AI models loaded
+via scenarios may contain embedded Nasal code. This can be used to drive
+more advanced animations. An example is a lighthouse with specific light
+signals, or hangar doors that open when the "player"'s aircraft is nearby.
+The Nasal code is added to the object's XML wrapper/animation file, anywhere
+on the top level, for example:
+
+
+   <PropertyList>
+       <path>lighthouse.ac</path>
+
+       <nasal>
+           <load>
+               var loop_id = 0;
+               var light = aircraft.light.new("
+                       "/models/static/w120n30/w118n35/lighthouse/light",
+                       [2, 1, 2, 1, 2, 1, 2, 5]);
+
+               var loop = func(id) {
+                   id == loop_id or return;
+                   light.switch(getprop("/sim/time/sun-angle-rad") > 1.37);
+                   settimer(func { loop(id) }, 30);
+               }
+               loop(loop_id += 1);
+           </load>
+
+           <unload>loop_id += 1</unload>
+       </nasal>
+
+       <animation>
+           <type>select</type>
+           <object-name>light-halo</object-name>
+           <property>/models/static/w120n30/w118n35/lighthouse/light/state</property>
+       </animation>
+
+       ...
+   </PropertyList>
+
+
+The <load> part is executed when the scenery tile on which the model is placed
+is loaded into memory. It can start timers or listeners that modify properties,
+which are then queried by the <animation>. As a convention developers are requested
+to use "/models/static/" + <tile-path> + <file-basename>. So, in the above example
+file "$FG_ROOT/Scenery/Objects/w120n30/w118n35/lighthouse.xml" all properties
+are stored under "/models/static/w120n30/w118n35/lighthouse/". That way collisions
+with other models are quite unlikely.
+
+An optional <unload> part is executed when the tile and model is removed from
+memory. Note that this is only when the "player" is already far away! To
+cause minimal impact on the framerate it is recommended to do as few
+calculations as possible, to use as large timer intervals as possible, and to
+stop all timers and listeners in the <unload> part, as shown in the example.
+
+All Nasal variables/functions are in a separate namespace, which is named
+after the file name. It's recommended not to access this namespace from
+outside for other than development purposes.
+
+What the above code does: as soon as the model is loaded, an aircraft.light
+is created with a specific light sequence. Then, in half-minute intervals,
+the light is turned on or off depending on the sun angle. On <unload> the
+loop identifier is increased, which makes the loop terminate itself. For
+more info about this technique, see the Nasal wiki.
+
+
+
+
+6.2 AI models
+-------------
+
+Here the syntax is the same like for static models. The only two differences
+are:
+
+- these models are currently only removed at program end, so it's more
+  important to consider effects on performance.
+
+- AI models don't need to store their properties in /models/static/...,
+  but get a separate node under /ai/models/, for example /ai/models/carrier[1].
+  The embedded Nasal code can access this dynamically assigned property
+  via cmdarg() function, which returns a props.Node hash. Example:
+
+     <nasal>
+         <load>print("my data are under ", cmdarg().getPath())</load>
+         <unload>print("Currently I'm only called at fgfs exit!")</unload>
+     </nasal>
+
+
 

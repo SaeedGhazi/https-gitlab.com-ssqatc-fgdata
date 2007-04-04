@@ -119,12 +119,13 @@ var dump = func {
 
 ##
 # Recursively copy property branch from source Node to
-# destination Node. Doesn't copy aliases.
+# destination Node. Doesn't copy aliases. Copies attributes
+# if optional third argument is set and non-zero.
 #
-var copy = func(src, dest) {
+var copy = func(src, dest, attr = 0) {
     foreach(c; src.getChildren()) {
         name = c.getName() ~ "[" ~ c.getIndex() ~ "]";
-        copy(src.getNode(name), dest.getNode(name, 1));
+        copy(src.getNode(name), dest.getNode(name, 1), attr);
     }
     var type = src.getType();
     var val = src.getValue();
@@ -133,6 +134,7 @@ var copy = func(src, dest) {
     elsif(type == "INT") { dest.setIntValue(val); }
     elsif(type == "DOUBLE") { dest.setDoubleValue(val); }
     else { dest.setValue(val); }
+    if(attr) dest.setAttribute(src.getAttribute());
 }
 
 ##

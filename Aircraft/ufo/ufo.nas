@@ -43,26 +43,6 @@ var init_prop = func(prop, value) {
 }
 
 
-# sort vector of strings (bubblesort)
-#
-var sort = func(l) {
-	while (1) {
-		var n = 0;
-		for (var i = 0; i < size(l) - 1; i += 1) {
-			if (cmp(l[i], l[i + 1]) > 0) {
-				var t = l[i + 1];
-				l[i + 1] = l[i];
-				l[i] = t;
-				n += 1;
-			}
-		}
-		if (!n) {
-			return l;
-		}
-	}
-}
-
-
 # binary search of string in sorted vector; returns index or -1 if not found
 #
 var search = func(list, which) {
@@ -98,9 +78,9 @@ var scan_models = func(base) {
 	var ac = {};
 	foreach (var d; list) {
 		if (d[0] != `.` and d != "CVS") {
-			if (substr(d, size(d) - 4) == ".xml") {
+			if (substr(d, -4) == ".xml") {
 				xml[base ~ "/" ~ d] = 1;
-			} elsif (substr(d, size(d) - 3) == ".ac") {
+			} elsif (substr(d, -3) == ".ac") {
 				ac[base ~ "/" ~ d] = 1;
 			} else {
 				foreach (var s; scan_models(base ~ "/" ~ d)) {
@@ -547,12 +527,11 @@ var ModelMgr = {
 
 var scan_dirs = func(csv) {
 	var list = ["Aircraft/ufo/Models/sign.ac"];
-	foreach(var dir; split(",", csv)) {
-		foreach(var m; scan_models(dir)) {
+	foreach (var dir; split(",", csv))
+		foreach(var m; scan_models(dir))
 			append(list, m);
-		}
-	}
-	return sort(list);
+
+	return sort(list, func(a, b) cmp(a, b));
 }
 
 

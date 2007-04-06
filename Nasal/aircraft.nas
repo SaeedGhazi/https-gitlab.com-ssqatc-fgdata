@@ -232,9 +232,11 @@ light = {
 	},
 
 	# light.blink()        ->  blinking light  (default)
-	# light.blink(3)       ->  when switched on, only run three blink sequences
-	blink : func(count = 1000000000) {	# FIXME: hack around nasal bug, should be -1
+	# light.blink(3)       ->  when switched on, only run three blink sequences;
+	#                          second optional arg defines state after the sequences
+	blink : func(count = -1, endstate = 0) {
 		me.seqcount = count;
+		me.endstate = endstate;
 		if (me.continuous) {
 			me.continuous = 0;
 			me.index = 0;
@@ -262,7 +264,8 @@ light = {
 	_loop_ : func(id) {
 		id == me.loopid or return;
 		if (!me.count) {
-			me.switch(0);
+			me.loopid += 1;
+			me.stateN.setBoolValue(me.endstate);
 			return;
 		}
 		me.stateN.setBoolValue(me.index == 2 * int(me.index / 2));

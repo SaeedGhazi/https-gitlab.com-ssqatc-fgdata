@@ -206,6 +206,7 @@ light = {
 		m.continuous = 0;
 		m.lastswitch = 0;
 		m.seqcount = -1;
+		m.endstate = 0;
 		m.count = nil;
 		m.switchL = setlistener(m.switchN, func { m._switch_() }, 1);
 		return m;

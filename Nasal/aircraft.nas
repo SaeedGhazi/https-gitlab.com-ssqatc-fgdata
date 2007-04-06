@@ -205,6 +205,8 @@ light = {
 		m.loopid = 0;
 		m.continuous = 0;
 		m.lastswitch = 0;
+		m.seqcount = -1;
+		m.count = nil;
 		m.switchL = setlistener(m.switchN, func { m._switch_() }, 1);
 		return m;
 	},
@@ -230,7 +232,9 @@ light = {
 	},
 
 	# light.blink()        ->  blinking light  (default)
-	blink : func {
+	# light.blink(3)       ->  when switched on, only run three blink sequences
+	blink : func(count = 1000000000) {	# FIXME: hack around nasal bug, should be -1
+		me.seqcount = count;
 		if (me.continuous) {
 			me.continuous = 0;
 			me.index = 0;
@@ -250,16 +254,23 @@ light = {
 		} elsif (switch) {
 			me.stateN.setBoolValue(0);
 			me.index = 0;
+			me.count = me.seqcount;
 			me._loop_(me.loopid);
 		}
 	},
 
 	_loop_ : func(id) {
 		id == me.loopid or return;
+		if (!me.count) {
+			me.switch(0);
+			return;
+		}
 		me.stateN.setBoolValue(me.index == 2 * int(me.index / 2));
 		settimer(func { me._loop_(id) }, me.pattern[me.index]);
 		if ((me.index += 1) >= size(me.pattern)) {
 			me.index = 0;
+			if (me.count > 0)
+				me.count -= 1;
 		}
 	},
 };

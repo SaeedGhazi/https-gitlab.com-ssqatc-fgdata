@@ -250,9 +250,9 @@ Started September 2000 by David Megginson, david@megginson.com
 
   <!-- "tower" positioned to right of runway at KSFO -->
   <tower>
-    <longitude-deg type="double">-122.38410839</longitude-deg>
-    <latitude-deg type="double">37.61712474</latitude-deg>
-    <altitude-ft type="double">130</altitude-ft>
+    <longitude-deg type="double">-122.23045</longitude-deg>
+    <latitude-deg type="double">37.37027</latitude-deg>
+    <altitude-ft type="double">150</altitude-ft>
     <roll-deg type="double">0</roll-deg>
     <pitch-deg type="double">0</pitch-deg>
     <heading-deg type="double">0</heading-deg>

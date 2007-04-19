@@ -113,6 +113,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <volume type="float" userarchive="y">0.8</volume>
    <pause type="bool">false</pause>
    <atc-chatter type="bool" userarchive="y">false</atc-chatter>
+   <atc-chatter-volume type="double" userarchive="y">0.5</atc-chatter-volume>
    <voice type="bool">true</voice>
    <voices>
     <host type="string" write="n">localhost</host>

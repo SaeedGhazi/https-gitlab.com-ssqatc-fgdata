@@ -3,67 +3,77 @@
 <!-- Sound control dialog -->
 
 <PropertyList>
-  <name>sound-dialog</name>
-  <layout>vbox</layout>
+	<name>sound-dialog</name>
+	<layout>vbox</layout>
 
-  <text>
-    <label>Sound Configuration</label>
-  </text>
+	<text>
+	<label>Sound Configuration</label>
+	</text>
 
-  <hrule/>
+	<hrule/>
 
-  <group>
-    <layout>hbox</layout>
-    <empty><dummy/></empty>
+	<group>
+		<layout>hbox</layout>
+		<empty><dummy/></empty>
 
-    <group>
-      <layout>vbox</layout>
+		<group>
+			<layout>vbox</layout>
 
-      <checkbox>
-        <label>Mute Sound</label>
-        <halign>left</halign>
-        <property>/sim/sound/pause</property>
-        <binding>
-          <command>dialog-apply</command>
-        </binding>
-      </checkbox>
+			<checkbox>
+				<label>Mute Sound</label>
+				<halign>left</halign>
+				<property>/sim/sound/pause</property>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+			</checkbox>
 
-      <group>
-        <layout>hbox</layout>
-        <text><label>Volume:</label></text>
-        <slider>
-          <property>/sim/sound/volume</property>
-          <binding>
-            <command>dialog-apply</command>
-          </binding>
-        </slider>
-      </group>
+			<group>
+				<layout>hbox</layout>
+				<text><label>Volume:</label></text>
+				<slider>
+					<property>/sim/sound/volume</property>
+					<binding>
+						<command>dialog-apply</command>
+					</binding>
+				</slider>
+			</group>
 
-      <checkbox>
-        <label>ATC Chatter</label>
-        <halign>left</halign>
-        <property>/sim/sound/atc-chatter</property>
-        <binding>
-          <command>dialog-apply</command>
-        </binding>
-      </checkbox>
-    </group>
+			<checkbox>
+				<label>ATC Chatter</label>
+				<halign>left</halign>
+				<property>/sim/sound/atc-chatter</property>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+			</checkbox>
+        
+			<group>
+				<layout>hbox</layout>
+				<text><label>ATC Volume:</label></text>
+				<slider>
+					<property>/sim/sound/atc-chatter-volume</property>
+					<binding>
+						<command>dialog-apply</command>
+					</binding>
+				</slider>
+			</group>
+			
+		</group>
+		<empty><dummy/></empty>
+	</group>
 
-    <empty><dummy/></empty>
-  </group>
-
-  <group>
-    <layout>hbox</layout>
-    <default-padding>10</default-padding>
-
-    <button>
-      <legend>Close</legend>
-      <default>true</default>
-      <key>Esc</key>
-      <binding>
-        <command>dialog-close</command>
-      </binding>
-    </button>
-  </group>
+	<group>
+		<layout>hbox</layout>
+		<default-padding>10</default-padding>
+		<button>
+			<legend>Close</legend>
+			<default>true</default>
+			<key>Esc</key>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+	</group>
 
 </PropertyList>

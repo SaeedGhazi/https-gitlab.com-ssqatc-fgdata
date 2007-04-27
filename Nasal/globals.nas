@@ -71,7 +71,6 @@ interpolate = func {
 #
 setlistener = func {
     if(isa(arg[0], props.Node)) { arg[0] = arg[0]._g; }
-    elsif(typeof(arg[0]) != "scalar") { return; }
     var id = _setlistener(arg[0], arg[1], size(arg) > 2 ? arg[2] : 0);
     if(__.log_level <= 2) {
         var c = caller(1);

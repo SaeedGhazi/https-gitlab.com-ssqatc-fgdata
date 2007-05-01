@@ -542,16 +542,19 @@ HUDControl = {
 		}
 	},
 	cycle_brightness : func {	# H-key
+		me.is_active() or return;
 		var br = me.brightnessN.getValue() - 0.2;
 		me.brightnessN.setValue(br > 0.01 ? br : 1);
 	},
 	normal_type : func {		# i-key
+		me.is_active() or return;
 		me.oldinit1();
 		me.vis0N.setBoolValue(1);
 		me.vis1N.setBoolValue(0);
 		me.currentN = me.vis0N;
 	},
 	cycle_type : func {		# I-key
+		me.is_active() or return;
 		if (me.currentN == me.vis0N) {
 			me.vis0N.setBoolValue(0);
 			me.vis1N.setBoolValue(1);
@@ -565,6 +568,7 @@ HUDControl = {
 	},
 	oldinit1 : func { fgcommand("hud-init", props.Node.new()) },
 	oldinit2 : func { fgcommand("hud-init2", props.Node.new()) },
+	is_active : func { me.vis0N.getValue() or me.vis1N.getValue() },
 };
 
 

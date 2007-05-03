@@ -38,6 +38,7 @@
 # geo.click_position()            ... returns last click coords as geo.Coord or nil before first click
 #
 # geo.tile_path(<lon>, <lat>)     ... returns tile path string (e.g. "w130n30/w123n37/942056.stg")
+# geo.elevation(<lon>, <lat>)     ... returns elevation in meter for given lon/lat, or nil on error
 # geo.normdeg(<angle>)            ... returns angle normalized to  0 <= angle < 360
 
 
@@ -49,7 +50,7 @@ var FT2M = 0.3048;
 var M2FT = 3.28083989501312335958;
 
 
-var printf = func(_...) { print(call(sprintf, _)) }
+var printf = func { print(call(sprintf, arg)) }
 var floor = func(v) { v < 0.0 ? -int(-v) - 1 : int(v) }
 var sin = math.sin;
 var cos = math.cos;
@@ -287,6 +288,12 @@ var tile_path = func(lon, lat) {
 	p ~= "/" ~ tile_index(lon, lat) ~ ".stg";
 }
 
+
+var elevation = func(lon, lat) {
+	var n = props.Node.new({ "longitude-deg" : lon, "latitude-deg" : lat });
+	var success = fgcommand("terrain-elevation", n);
+	return success ? n.getNode("elevation-m").getValue() : nil;
+}
 
 
 var aircraft_lon = nil;

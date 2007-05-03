@@ -3,16 +3,17 @@
 # files. Currently only reading from a string is supported, and the XML 1.0 standard
 # isn't fully implemented.
 #
-# Synopsis:  xml.process_string(<xml-data:string>, <interface:hash>);
+# Synopsis:  xml.process_string(<xml-data:string>, <action:hash>);
+#            xml.process_file(<filepath>, <acdtion:hash>);
 #
-# Example:
-#            var string = io.readfile("foo.xml");
-#            var node = xml.process_string(string, xml.tree, "__");
+# Examples:
+#            var n = xml.process_string("<foo>123<foo>", xml.tree, "__");
+#            var node = xml.process_file("foor/bar.xml", xml.tree, "__");
 #            if (node != nil)
 #                    props.dump(node);
 #
-# The "interface" (xml.tree) is a hash with function members begin(), end(), open(),
-# close(), and data(). Its methods are called by the parser:
+# The <action> interface (xml.tree) is a hash with function members begin(),
+# end(), open(), close(), and data(). Its methods are called by the parser:
 #
 #     begin(...)
 #         called once at the beginning; the method gets all arguments but the
@@ -23,10 +24,10 @@
 #         called once at the end; its return value is used as return value for
 #         xml.process_string()
 #
-#     open(<tag:string>, <attr:hash>, <selfclosing:bool>)
-#         called for every opening tag (selfclosing=0) or self-closing empty
-#         tag (selfclosing=1). <tag> is the tag name, and <attr> is a hash
-#         with name/value string pairs.
+#     open(<tag:string>, <attr:hash>, <empty:bool>)
+#         called for every opening tag (empty=0) or self-closing, empty tag
+#         (empty=1). <tag> is the tag name, and <attr> is a hash with one
+#         name/value string pair per attribute.
 #
 #     close(<tag:string>, <numchildren:int>)
 #         called for every closing tag, with tag name and number of child
@@ -41,17 +42,17 @@
 #
 #         <foo>123<bar this='is' a="test"/>456</foo>
 #
-#     would cause these interface calls:
+#     would cause these action interface calls:
 #
 #         open("foo", {}, 0);
-#         data(123);
+#         data("123");
 #         open("bar", { this: "is", a: "test" }, 1);
 #         close("bar", 0);
-#         data(456);
+#         data("456");
 #         close("foo", 1);
 #
 #
-# Predefined are two interfaces:
+# Predefined are two action hashes:
 #
 # xml.tree
 #
@@ -67,7 +68,7 @@
 #     prefix can be an empty string. If it's nil, then attributes are dropped
 #     altogether. FlightGear's standard attributes are *not* considered, as this
 #     parser is explicitly for non-standard XML sources. Standard files can
-#     easier be loaded with fgfs means.
+#     easier and quicker be loaded with fgfs means.
 #
 # xml.dump
 #
@@ -80,7 +81,7 @@
 #
 # A minimal interface hash can look like this:
 #
-#     var empty = {
+#     var do_nothing = {
 #         begin : func {},
 #         end : func {},
 #         open : func {},
@@ -88,7 +89,7 @@
 #         data : func {},
 #     };
 #
-# and would be used as:  xml.process_string("<foo>bar</foo>", empty);
+# and would be used as:  xml.process_string("<foo>bar</foo>", do_nothing);
 
 var printf = func { print(call(sprintf, arg)) }
 
@@ -102,8 +103,8 @@ var istagother = func(c) { isalnum(c) or c == `_` or c == `:` or c == `-` or c =
 
 var ctab = { "lt" : `<`, "gt" : `>`, "amp" : `&`, "quot" : `"`, "apos" : `'` };
 
-var xml_error = "__xml__";
-var error = func(msg) die(xml_error ~ msg ~ scan.location());
+var error_label = "xml.nas: ";
+var error = func(msg) die(error_label ~ msg ~ scan.location());
 
 
 # SCANNER =========================================================================================
@@ -117,13 +118,18 @@ var Scanner = {
 		var m = { parents : [Scanner] };
 		m.line = 1;
 		m.column = 0;
+		m.source = " in";
 		return m;
 	},
 	get : func die("get() method not implemented"),
 	put : func die("put() method not implemented"),
-	skip : func(w, spc = 1) {
-		spc and me.skip_spaces();
+	skip : func(w, skipspaces = 1) {
 		var revert = [];
+		if (skipspaces) {
+			while (isspace(var c = scan.get()))
+				revert = [c] ~ revert;
+			scan.put(c);
+		}
 		for (var i = 0; i < size(w); i += 1) {
 			var c = me.get();
 			revert = [c] ~ revert;
@@ -213,49 +219,51 @@ var Scanner = {
 		}
 	},
 	location : func {
-		return " in line " ~ me.line ~ " at position " ~ me.column;
+		return me.source ~ " line " ~ me.line ~ ", column " ~ me.column;
 	},
 	dump : func {
-		var s = "REST=(";
+		var s = "";
 		while ((var c = me.get()) != nil)
 			s ~= chr(c);
-		error(s ~ ")");
+		error("REST={" ~ s ~ "}");
 	},
 };
 
 
+##
+# childclass of Scanner class; knows how to read characters from a string,
+# and how to push them back for later use
+#
 var StringScanner = {
 	new : func(s) {
 		var m = Scanner.new();
 		m.parents = [StringScanner] ~ m.parents;
-		m.source = s;
+		m.string = s;
 		m.pos = 0;
-		m.buf = [];
+		m.stack = [];
 		return m;
 	},
 	get : func {
-		if (size(me.buf))
-			return pop(me.buf);
-		if (me.pos >= size(me.source))
+		if (size(me.stack))
+			return pop(me.stack);
+		if (me.pos >= size(me.string))
 			return nil;
-		var c = me.source[me.pos];
+		var c = me.string[me.pos];
 		me.pos += 1;
 		me.setmark(c);
 		return c;
 	},
 	put : func {
 		foreach (var c; arg)
-			append(me.buf, c);
-		return nil;
+			append(me.stack, c);
 	},
 };
 
 
 # PARSER ==========================================================================================
 
-var parse_xml = func {
-	var args = caller(0)[0]["arg"] == nil ? [] : arg; # FIXME  nasal bug
-	call(action.begin, args, action);
+var parse_document = func {
+	call(action.begin, caller(0)[0]["arg"]!=nil?arg:[], action);		# FIXME work around nasal bug
 	parse_prolog();
 	if (!parse_element()) {
 		var c = scan.get();
@@ -266,6 +274,7 @@ var parse_xml = func {
 	}
 
 	parse_misc();
+	scan.skip_spaces();
 	if (scan.get() != nil)
 		error("trailing garbage");
 
@@ -285,7 +294,7 @@ var parse_xmldecl = func {
 	if (!scan.skip("<?"))
 		return;
 	if (!scan.skip("xml") or !scan.skip_spaces())
-		error("prolog with unexpected identifier. xml: epxected");
+		error("prolog with invalid identifier. xml: expected");
 	if (!scan.skip("version"))
 		error("prolog without version statement");
 	scan.getassign();	# returns lvalue
@@ -323,8 +332,14 @@ var parse_comment = func {
 
 
 var parse_pi = func {
-	# TODO
-	return 0;
+	if (!scan.skip("<?"))
+		return 0;
+	while (1) {
+		if (scan.skip("?>"))
+			return 1;
+		scan.get();
+	}
+	error("unfinished processing instruction");
 }
 
 
@@ -411,7 +426,7 @@ var parse_opening_tag = func {
 	elsif (scan.skip(">"))
 		selfclosing = 0;
 	else
-		error("trailing garbage in opening tag");
+		error("garbage in opening tag");
 	action.open(name, attr, selfclosing);
 	return [name, attr, selfclosing];
 }
@@ -430,34 +445,13 @@ var parse_closing_tag = func {
 }
 
 
-var scan = nil;
-var action = nil;
-
-var process_string = func(s, a) {
-	scan = StringScanner.new(s);
-	action = a;
-	var err = [];
-	var args = caller(0)[0]["arg"] == nil ? [] : arg;	# FIXME  nasal bug
-	var ret = call(parse_xml, args, nil, nil, err);
-	if (!size(err))
-		return ret;
-	if (substr(err[0], 0, size(xml_error)) == xml_error) {
-		print("XML: ", substr(err[0], size(xml_error)));
-	} else {
-		printf("%s at %s line %d", err[0], err[1], err[2]);
-		for (var i = 3; i < size(err); i += 2)
-			printf("  called from %s line %d", err[i], err[i + 1]);
-	}
-	return nil;
-}
-
-
+# ACTION INTERFACES ===============================================================================
 
 var tree = {
 	begin : func(prefix = nil) {
-		me.attr_prefix = prefix;
+		me.prefix = prefix;
 		me.stack = [];
-		me.root = me.node = props.Node.new();
+		me.node = props.Node.new();
 	},
 	end : func {
 		return me.node;
@@ -466,9 +460,9 @@ var tree = {
 		append(me.stack, "");
 		var index = size(me.node.getChildren(name));
 		me.node = me.node.getChild(name, index, 1);
-		if (me.attr_prefix != nil)
-			foreach (var a; keys(attr))
-				me.node.getNode(me.attr_prefix ~ a, 1).setValue(attr[a]);
+		if (me.prefix != nil)
+			foreach (var at; keys(attr))
+				me.node.getNode(me.prefix ~ at, 1).setValue(attr[at]);
 	},
 	close : func(name, children) {
 		var buf = pop(me.stack);
@@ -491,9 +485,8 @@ var dump = {
 	open : func(name, attr, selfclosed) {
 		me.print("<", name, ">");
 		me.level += 1;
-		foreach (var a; keys(attr)) {
-			me.print("<attr:" ~ a ~ ">" ~ attr[a] ~ "</attr:" ~ a ~ ">");
-		}
+		foreach (var a; sort(keys(attr), func(a, b) cmp(a, b)))
+			me.print("<__", a, ">", attr[a], "</__", a, ">");
 	},
 	close : func(name, chld) {
 		me.level -= 1;
@@ -508,9 +501,45 @@ var dump = {
 		var s = "";
 		for (var i = 0; i < me.level; i += 1)
 			s ~= "\t";
-		arg = [s] ~ arg;
-		call(print, arg);
+		call(print, [s] ~ arg);
 	},
 };
+
+
+var process = func {
+	var err = [];
+	var ret = call(parse_document, caller(0)[0]["arg"]!=nil?arg:[], nil, nil, err);		# FIXME work around nasal bug
+	if (!size(err))
+		return ret;
+	if (substr(err[0], 0, size(error_label)) == error_label) {
+		print(err[0]);
+	} else {
+		printf("%s at %s line %d", err[0], err[1], err[2]);
+		for (var i = 3; i < size(err); i += 2)
+			printf("  called from %s line %d", err[i], err[i + 1]);
+	}
+	return nil;
+}
+
+
+var scan = nil;
+var action = nil;
+
+
+# INTERFACE =======================================================================================
+
+var process_string = func(string, act) {
+	scan = StringScanner.new(string);
+	action = act;
+	return call(process, caller(0)[0]["arg"]!=nil?arg:[]);		# FIXME work around nasal bug
+}
+
+
+var process_file = func(file, act) {
+	scan = StringScanner.new(io.readfile(file));
+	scan.source = "\n  in file " ~ file ~ ",";
+	action = act;
+	return call(process, caller(0)[0]["arg"]!=nil?arg:[]);		# FIXME work around nasal bug
+}
 
 

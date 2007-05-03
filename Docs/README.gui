@@ -387,7 +387,7 @@ Ctrl +
   (bool)  ->  toggle bool value
 
 Shift +
-  "."     ->  dump contents of that tree level as XML to the terminal
+  "."     ->  dump contents of that tree level to the terminal
 
 The flags printed after the node type have the following meaning:
 

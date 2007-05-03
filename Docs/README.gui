@@ -379,11 +379,15 @@ property in <property> on dialog-apply. It's up to the caller to check
 if the path belongs to a dir node or a value node. The widget shows
 the contents of the dir property given in <property> on dialog-apply.
 It does *not* handle setting of property values! Clicking on some
-entries with the "control" key pressed has a special meaning:
+entries with the "control" or "shift" key pressed has a special meaning:
 
+Ctrl +
   "."     ->  toggle display of property flags (see below)
   ".."    ->  go to root node
   (bool)  ->  toggle bool value
+
+Shift +
+  "."     ->  dump contents of that tree level as XML to the terminal
 
 The flags printed after the node type have the following meaning:
 

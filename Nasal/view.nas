@@ -111,21 +111,86 @@ VIEW_PAN_RATE = 60;
 # Pans the view horizontally.  The argument specifies a relative rate
 # (or number of "steps" -- same thing) to the standard rate.
 #
-panViewDir = func {
-    controls.slewProp("/sim/current-view/goal-heading-offset-deg",
-                      arg[0] * VIEW_PAN_RATE);
+panViewDir = func(step) {
+    if (getprop("/sim/freeze/master"))
+        prop = "/sim/current-view/heading-offset-deg";
+    else
+        prop = "/sim/current-view/goal-heading-offset-deg";
+
+    controls.slewProp(prop, step * VIEW_PAN_RATE);
 }
 
 ##
 # Pans the view vertically.  The argument specifies a relative rate
 # (or number of "steps" -- same thing) to the standard rate.
 #
-panViewPitch = func {
-    controls.slewProp("/sim/current-view/goal-pitch-offset-deg",
-                      arg[0] * VIEW_PAN_RATE);
+panViewPitch = func(step) {
+    if (getprop("/sim/freeze/master"))
+        prop = "/sim/current-view/pitch-offset-deg";
+    else
+        prop = "/sim/current-view/goal-pitch-offset-deg";
+
+    controls.slewProp(prop, step * VIEW_PAN_RATE);
 }
 
 
+
+
+var flyby = {
+    init : func {
+        me.lonN = props.globals.getNode("/sim/viewer/longitude-deg", 1);
+        me.latN = props.globals.getNode("/sim/viewer/latitude-deg", 1);
+        me.altN = props.globals.getNode("/sim/viewer/altitude-ft", 1);
+        me.loopid = 0;
+        me.number = nil;
+        forindex (var i; views)
+            if (views[i].getNode("name").getValue() == "Fly-By View")
+                me.number = i;
+        if (me.number == nil)
+            die("can't find 'Fly-By View'");
+
+        setlistener("/sim/freeze/replay-state", func { me.reset() });
+        setlistener("/sim/signals/reinit", func { cmdarg().getValue() or me.reset() });
+        setlistener("/sim/current-view/view-number", func {
+            me.loopid += 1;
+            if (cmdarg().getValue() == me.number) {
+                me.reset();
+                me.loop(me.loopid);
+            }
+        }, 1);
+    },
+    reset: func {
+        me.chase = -getprop("/sim/chase-distance-m") / 2;
+        me.course = getprop("/orientation/heading-deg");
+        me.coord = geo.Coord.new().set(geo.aircraft_position());
+        me.dist = 20;
+        me.setpos();
+    },
+    setpos : func {
+        var pos = geo.aircraft_position();
+        var course = me.coord.course_to(pos);
+        var dist = me.coord.distance_to(pos);
+        pos.apply_course_distance(course, 30 + dist * 0.5);
+        pos.apply_course_distance(course + 90, me.chase * 0.75);
+        var lon = pos.lon();
+        var lat = pos.lat();
+        var elev = geo.elevation(lon, lat);
+        var alt = pos.alt();
+        alt += (alt - me.coord.alt()) * 0.5;
+        if (elev != nil and alt < elev + 10)
+            alt = elev + 10;
+
+        me.lonN.setValue(lon);
+        me.latN.setValue(lat);
+        me.altN.setValue(alt * geo.M2FT);
+        me.coord.set_lonlat(lon, lat, alt);
+    },
+    loop : func(id) {
+        id == me.loopid or return;
+        me.setpos();
+        settimer(func { me.loop(id) }, 6);
+    }
+};
 
 
 
@@ -275,4 +340,10 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     point.init();
     views = props.globals.getNode("/sim").getChildren("view");
 });
+
+_setlistener("/sim/signals/fdm-initialized", func {
+    flyby.init();
+});
+
+
 

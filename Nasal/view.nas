@@ -90,16 +90,16 @@ resetView = func {
 ##
 # Handler.  Step to the next view.
 #
-stepView = func {
-    curr = getprop("/sim/current-view/view-number");
-    views = props.globals.getNode("/sim").getChildren("view");
-    curr = curr + arg[0];
-    if   (curr < 0)            { curr = size(views) - 1; }
-    elsif(curr >= size(views)) { curr = 0; }
-    setprop("/sim/current-view/view-number", curr);
+var stepView = func(n) {
+    var i = getprop("/sim/current-view/view-number") + n;
+    if (i < 0)
+        i = size(views) - 1;
+    elsif (i >= size(views))
+        i = 0;
+    setprop("/sim/current-view/view-number", i);
 
     # And pop up a nice reminder
-    gui.popupTip(views[curr].getNode("name").getValue());
+    gui.popupTip(views[i].getNode("name").getValue());
 }
 
 ##
@@ -202,10 +202,13 @@ var ViewAxis = {
 };
 
 
-var ViewManager = {
-    new : func {
-        var m = { parents : [ViewManager] };
-        m.axes = {
+
+##
+# view.point: handles smooth view movements
+#
+var point = {
+    init : func {
+        me.axes = {
             "heading-offset-deg" : ViewAxis.new("/sim/current-view/goal-heading-offset-deg"),
             "pitch-offset-deg" : ViewAxis.new("/sim/current-view/goal-pitch-offset-deg"),
             "roll-offset-deg" : ViewAxis.new("/sim/current-view/goal-roll-offset-deg"),
@@ -214,13 +217,12 @@ var ViewManager = {
             "z-offset-m" : ViewAxis.new("/sim/current-view/z-offset-m"),
             "field-of-view" : ViewAxis.new("/sim/current-view/field-of-view"),
         };
-        m.storeN = props.Node.new();
-        m.dtN = props.globals.getNode("/sim/time/delta-realtime-sec", 1);
-        m.currviewN = props.globals.getNode("/sim/current-view", 1);
-        m.blend = 0;
-        m.loop_id = 0;
-        props.copy(props.globals.getNode("/sim/view/config"), m.storeN);
-        return m;
+        me.storeN = props.Node.new();
+        me.dtN = props.globals.getNode("/sim/time/delta-realtime-sec", 1);
+        me.currviewN = props.globals.getNode("/sim/current-view", 1);
+        me.blend = 0;
+        me.loop_id = 0;
+        props.copy(props.globals.getNode("/sim/view/config"), me.storeN);
     },
     save : func {
         me.storeN = props.Node.new();
@@ -266,10 +268,11 @@ var ViewManager = {
 };
 
 
-var point = nil;
+
+var views = nil;
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
-    point = ViewManager.new();
-    ViewManager.new = nil;
+    point.init();
+    views = props.globals.getNode("/sim").getChildren("view");
 });
 

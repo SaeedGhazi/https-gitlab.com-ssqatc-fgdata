@@ -149,7 +149,7 @@ var flyby = {
         if (me.number == nil)
             die("can't find 'Fly-By View'");
 
-        setlistener("/sim/freeze/replay-state", func { me.reset() });
+        setlistener("/sim/freeze/replay-state", func { cmdarg().getValue() or me.reset() });
         setlistener("/sim/signals/reinit", func { cmdarg().getValue() or me.reset() });
         setlistener("/sim/current-view/view-number", func {
             me.loopid += 1;
@@ -160,25 +160,28 @@ var flyby = {
         }, 1);
     },
     reset: func {
-        me.chase = -getprop("/sim/chase-distance-m") / 2;
+        me.chase = -getprop("/sim/chase-distance-m");
         me.course = getprop("/orientation/heading-deg");
         me.coord = geo.Coord.new().set(geo.aircraft_position());
         me.dist = 20;
-        me.setpos();
+        me.setpos(1);
     },
-    setpos : func {
+    setpos : func(force = 0) {
         var pos = geo.aircraft_position();
         var course = me.coord.course_to(pos);
         var dist = me.coord.distance_to(pos);
-        pos.apply_course_distance(course, 30 + dist * 0.5);
-        pos.apply_course_distance(course + 90, me.chase * 0.75);
+        if (dist < 1.5 * me.chase and !force)
+            return;
+        var side = (rand() - 0.5 < 0) ? -90 : 90;;
+        pos.apply_course_distance(course, dist * 0.6);
+        pos.apply_course_distance(course + side, me.chase);
         var lon = pos.lon();
         var lat = pos.lat();
         var elev = geo.elevation(lon, lat);
         var alt = pos.alt();
         alt += (alt - me.coord.alt()) * 0.5;
-        if (elev != nil and alt < elev + 10)
-            alt = elev + 10;
+        if (elev != nil and alt < elev + 5)
+            alt = elev + 5;
 
         me.lonN.setValue(lon);
         me.latN.setValue(lat);
@@ -188,8 +191,8 @@ var flyby = {
     loop : func(id) {
         id == me.loopid or return;
         me.setpos();
-        settimer(func { me.loop(id) }, 6);
-    }
+        settimer(func { me.loop(id) }, 6.3);
+    },
 };
 
 

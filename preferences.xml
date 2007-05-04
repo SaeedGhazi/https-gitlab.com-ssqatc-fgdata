@@ -402,6 +402,22 @@ Started September 2000 by David Megginson, david@megginson.com
     </config>
   </view>
 
+  <view>
+    <name>Fly-By View</name>
+    <type>lookat</type>
+    <config>
+      <eye-lon-deg-path>/sim/viewer/longitude-deg</eye-lon-deg-path>
+      <eye-lat-deg-path>/sim/viewer/latitude-deg</eye-lat-deg-path>
+      <eye-alt-ft-path>/sim/viewer/altitude-ft</eye-alt-ft-path>
+
+      <at-model type="bool">true</at-model>
+      <at-model-idx type="int">0</at-model-idx>
+
+      <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
+      <default-field-of-view-deg type="double">55.0</default-field-of-view-deg>
+    </config>
+  </view>
+
   <menubar>
    <visibility type="bool" userarchive="y">true</visibility>
    <default include="gui/menubar.xml"/>

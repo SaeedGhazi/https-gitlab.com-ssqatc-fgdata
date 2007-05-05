@@ -216,6 +216,7 @@
  <native-desc>Polacz uzywajac protokolu FG Native</native-desc>
  <nmea-desc>Polacz uzywajac protokolu NMEA</nmea-desc>
  <opengc-desc>Polacz uzywajac protokolu OpenGC</opengc-desc>
+ <props-desc>Polacz uzywajac interaktywnego menadzera wlasciwosci</props-desc>
  <pve-desc>Polacz uzywajac protokolu PVE</pve-desc>
  <ray-desc>Polacz uzywajac protokolu Ray Woodworth motion chair</ray-desc>
  <rul-desc>Polacz uzywajac protokolu RUL</rul-desc>

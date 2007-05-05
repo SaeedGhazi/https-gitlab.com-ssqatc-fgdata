@@ -932,6 +932,12 @@
    </option>
 
    <option>
+    <name>props</name>
+    <arg>params</arg>
+    <description>strings/props-desc</description>
+   </option>
+
+   <option>
     <name>pve</name>
     <arg>params</arg>
     <description>strings/pve-desc</description>

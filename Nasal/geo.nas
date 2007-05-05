@@ -28,7 +28,7 @@
 #     Coord.distance_to(<coord>)  ... returns distance in m along Earth curvature, ignoring altitudes
 #                                     useful for map distance
 #     Coord.direct_distance_to(<coord>) ...   distance in m direct, considers altitude,
-#                                             but cuts through Earch surface
+#                                             but cuts through Earth surface
 #
 #     Coord.apply_course_distance(<course>, <distance>)       ... guess what
 #     Coord.dump()                ... outputs coordinates
@@ -289,10 +289,16 @@ var tile_path = func(lon, lat) {
 }
 
 
+var terr_tree = nil;
+var terr_lon = nil;
+var terr_lat = nil;
+var terr_elev = nil;
+
 var elevation = func(lon, lat) {
-	var n = props.Node.new({ "longitude-deg" : lon, "latitude-deg" : lat });
-	var success = fgcommand("terrain-elevation", n);
-	return success ? n.getNode("elevation-m").getValue() : nil;
+	terr_lon.setDoubleValue(lon);
+	terr_lat.setDoubleValue(lat);
+	var success = fgcommand("terrain-elevation", terr_tree);
+	return success ? terr_elev.getValue() : nil;
 }
 
 
@@ -329,6 +335,14 @@ var click_position = func {
 
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
+	terr_tree = props.Node.new();
+	terr_lon = terr_tree.getNode("longitude-deg", 1);
+	terr_lat = terr_tree.getNode("latitude-deg", 1);
+	terr_elev = terr_tree.getNode("elevation-m", 1);
+	terr_lon.setDoubleValue(0.0);
+	terr_lat.setDoubleValue(0.0);
+	terr_elev.setDoubleValue(0.0);
+
 	aircraft_lon = props.globals.getNode("/position/longitude-deg", 1);
 	aircraft_lat = props.globals.getNode("/position/latitude-deg", 1);
 	aircraft_alt = props.globals.getNode("/position/altitude-ft", 1);
@@ -337,3 +351,4 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	click_lat = props.globals.getNode("/sim/input/click/latitude-deg", 1);
 	click_elev = props.globals.getNode("/sim/input/click/elevation-m", 1);
 });
+

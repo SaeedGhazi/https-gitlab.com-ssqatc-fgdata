@@ -225,7 +225,6 @@
   <nmea-desc>Verbinden met het NMEA protocol</nmea-desc>
   <generic-desc>Verbinden met een voorop aangegeven communicatie interface een een voorgeselecteerde communicatie protocol</generic-desc>
   <opengc-desc>Verbinden met het OpenGC protocol</opengc-desc>
-  <props-desc>Verbinden met de interactive instelling manager</props-desc>
   <pve-desc>Verbinden met het PVE protocol</pve-desc>
   <ray-desc>Verbinden met het Ray Woodworth bewegende stoel protocol</ray-desc>
   <rul-desc>Verbinden met het RUL protocol</rul-desc>

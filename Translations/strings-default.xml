@@ -251,7 +251,6 @@
  <nmea-desc>Open connection using the NMEA protocol</nmea-desc>
  <generic-desc>Open connection using a predefined communication interface and a preselected communication protocol</generic-desc>
  <opengc-desc>Open connection using the OpenGC protocol</opengc-desc>
- <props-desc>Open connection using the interactive property manager</props-desc>
  <pve-desc>Open connection using the PVE protocol</pve-desc>
  <ray-desc>Open connection using the Ray Woodworth motion chair protocol</ray-desc>
  <rul-desc>Open connection using the RUL protocol</rul-desc>

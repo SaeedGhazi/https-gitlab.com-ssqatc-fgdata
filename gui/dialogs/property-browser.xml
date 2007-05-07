@@ -152,7 +152,7 @@
 					if (type == "BOOL") {
 						value = node.getBoolValue() ? "true" : "false";
 						title.setValue("Hint: Ctrl-click toggles bool values");
-						settimer(func {title.setValue(dir) }, 5);
+						settimer(func {title.setValue(dir) }, 5, 1);
 					} elsif (type == "STRING") {
 						value = node.getValue();
 					} elsif (type == "NONE") {
@@ -192,7 +192,7 @@
 				list.setValue(dir);
 				update("property-list");
 				if (update_interval) {
-					settimer(auto_update, update_interval);
+					settimer(auto_update, update_interval, 1);
 				}
 			}
 

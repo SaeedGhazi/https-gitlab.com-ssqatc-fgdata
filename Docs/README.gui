@@ -382,7 +382,7 @@ It does *not* handle setting of property values! Clicking on some
 entries with the "control" or "shift" key pressed has a special meaning:
 
 Ctrl +
-  "."     ->  toggle display of property flags (see below)
+  "."     ->  toggle verbose mode (shows flags, listeners, dir-values)
   ".."    ->  go to root node
   (bool)  ->  toggle bool value
 
@@ -398,6 +398,8 @@ The flags printed after the node type have the following meaning:
   A       ->  archive bit set
   U       ->  user archive bit set
   T       ->  property is "tied"
+
+  Ln      ->  number of listeners attached to this node
 
 
 

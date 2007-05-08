@@ -367,7 +367,7 @@ Data = {
 		m.path = getprop("/sim/fg-home") ~ "/aircraft-data/" ~ getprop("/sim/aircraft") ~ ".xml";
 		m.signalN = props.globals.getNode("/sim/signals/save", 1);
 		m.catalog = [];
-		m.loop_id = 0;
+		m.loopid = 0;
 		m.interval = 0;
 
 		setlistener("/sim/signals/reinit", func { cmdarg().getBoolValue() and m._save_() });
@@ -379,12 +379,12 @@ Data = {
 		fgcommand("load", props.Node.new({ "file": me.path }));
 	},
 	save : func(v = nil) {
-		me.loop_id += 1;
+		me.loopid += 1;
 		me.interval = 60 * v;
-		v == nil ? me._save_() : me._loop_(me.loop_id);
+		v == nil ? me._save_() : me._loop_(me.loopid);
 	},
 	_loop_ : func(id) {
-		id == me.loop_id or return;
+		id == me.loopid or return;
 		me._save_();
 		settimer(func { me._loop_(id) }, me.interval);
 	},
@@ -459,7 +459,7 @@ timer = {
 		m.systimeN = props.globals.getNode("/sim/time/elapsed-sec", 1);
 		m.last_systime = nil;
 		m.interval = res;
-		m.loop_id = 0;
+		m.loopid = 0;
 		m.running = 0;
 		if (save) {
 			data.add(m.node);
@@ -478,14 +478,14 @@ timer = {
 	start : func {
 		me.running and return;
 		me.last_systime = me.systimeN.getValue();
-		me.interval != nil and me._loop_(me.loop_id);
+		me.interval != nil and me._loop_(me.loopid);
 		me.running = 1;
 		me;
 	},
 	stop : func {
 		me.running or return;
 		me.running = 0;
-		me.loop_id += 1;
+		me.loopid += 1;
 		me._apply_();
 	},
 	reset : func {
@@ -503,7 +503,7 @@ timer = {
 		}
 	},
 	_loop_ : func(id) {
-		id != me.loop_id and return;
+		id != me.loopid and return;
 		me._apply_();
 		settimer(func { me._loop_(id) }, me.interval);
 	},
@@ -513,7 +513,9 @@ timer = {
 
 # steering
 # =============================================================================
-# class that implements differential braking depending on rudder position
+# Class that implements differential braking depending on rudder position.
+# Note that this overrides the controls.applyBrakes() wrapper. If you need
+# your own version, then override it again after the steering.init() call.
 #
 # SYNOPSIS:
 #	steering.init([<property> [, <threshold>]]);
@@ -530,22 +532,27 @@ timer = {
 var steering = {
 	init : func(switch = "/controls/gear/brake-steering", threshold = 0.3) {
 		me.threshold = threshold;
+		me.switchN = makeNode(switch);
+		me.switchN.setBoolValue(me.switchN.getBoolValue());
 		me.leftN = props.globals.getNode("/controls/gear/brake-left", 1);
 		me.rightN = props.globals.getNode("/controls/gear/brake-right", 1);
 		me.rudderN = props.globals.getNode("/controls/flight/rudder", 1);
-		var n = makeNode(switch);
-		n.setBoolValue(n.getBoolValue());
 		me.loopid = 0;
-		setlistener(n, func {
+
+		controls.applyBrakes = func(v, w = 0) {
+			call(func(v, w) (w < 0 ? leftN : w > 0 ? rightN : switchN).setValue(v),
+					[v, w], nil, aircraft.steering);
+		}
+		setlistener(me.switchN, func {
 			me.loopid += 1;
-			if (cmdarg().getBoolValue())
+			if (cmdarg().getValue())
 				me._loop_(me.loopid);
 			else
 				me.setbrakes(0, 0);
 		}, 1);
 	},
 	_loop_ : func(id) {
-		me.loopid == id or return;
+		id == me.loopid or return;
 		var rudder = me.rudderN.getValue();
 		if (rudder > me.threshold)
 			me.setbrakes(0, rudder);

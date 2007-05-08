@@ -511,6 +511,56 @@ timer = {
 
 
 
+# steering
+# =============================================================================
+# class that implements differential braking depending on rudder position
+#
+# SYNOPSIS:
+#	steering.init([<property> [, <threshold>]]);
+#
+#	<property>  ... property path or props.Node hash that enables/disables
+#	                brake steering (usually bound to the js trigger button)
+#	<threshold> ... defines range (+- threshold) around neutral rudder
+#	                position in which both brakes are applied
+#
+# EXAMPLES:
+#	aircraft.steering.init("/controls/gear/steering", 0.2);
+#	aircraft.steering.init();
+#
+var steering = {
+	init : func(switch = "/controls/gear/brake-steering", threshold = 0.3) {
+		me.threshold = threshold;
+		me.leftN = props.globals.getNode("/controls/gear/brake-left", 1);
+		me.rightN = props.globals.getNode("/controls/gear/brake-right", 1);
+		me.rudderN = props.globals.getNode("/controls/flight/rudder", 1);
+		var n = makeNode(switch);
+		n.setBoolValue(n.getBoolValue());
+		me.loopid = 0;
+		setlistener(n, func {
+			me.loopid += 1;
+			if (cmdarg().getBoolValue())
+				me._loop_(me.loopid);
+			else
+				me.setbrakes(0, 0);
+		}, 1);
+	},
+	_loop_ : func(id) {
+		me.loopid == id or return;
+		var rudder = me.rudderN.getValue();
+		if (rudder > me.threshold)
+			me.setbrakes(0, rudder);
+		elsif (rudder < -me.threshold)
+			me.setbrakes(-rudder, 0);
+		else
+			me.setbrakes(1, 1);
+
+		settimer(func { me._loop_(id) }, 0);
+	},
+	setbrakes : func(left, right) {
+		me.leftN.setDoubleValue(left);
+		me.rightN.setDoubleValue(right);
+	},
+};
 
 
 

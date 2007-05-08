@@ -420,7 +420,6 @@ var parse_opening_tag = func {
 		var v = scan.getassign();
 		attr[n] = v;
 	}
-	scan.skip_spaces();
 	if (scan.skip("/>"))
 		selfclosing = 1;
 	elsif (scan.skip(">"))
@@ -438,7 +437,6 @@ var parse_closing_tag = func {
 	var name = scan.getname();
 	if (name == nil)
 		error("closing tag without name");
-	scan.skip_spaces();
 	if (!scan.skip(">"))
 		error("closing tag not ended with >");
 	return name;
@@ -511,13 +509,10 @@ var process = func {
 	var ret = call(parse_document, caller(0)[0]["arg"]!=nil?arg:[], nil, nil, err);		# FIXME work around nasal bug
 	if (!size(err))
 		return ret;
-	if (substr(err[0], 0, size(error_label)) == error_label) {
+	if (substr(err[0], 0, size(error_label)) == error_label)
 		print(err[0]);
-	} else {
-		printf("%s at %s line %d", err[0], err[1], err[2]);
-		for (var i = 3; i < size(err); i += 2)
-			printf("  called from %s line %d", err[i], err[i + 1]);
-	}
+	else
+		die(err[0]);  # rethrow
 	return nil;
 }
 

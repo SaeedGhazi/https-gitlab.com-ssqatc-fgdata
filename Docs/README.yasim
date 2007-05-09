@@ -602,6 +602,7 @@ rotor:    A rotor. Used for simulating helicopters. You can have one, two
           rel-len-blade-start: Typically the blade is not mounted in the
                    center of the rotor [a/R]
           rpm:     rounds per minute.
+          phi0:    initial position of this rotor
           ccw:     determines if the rotor rotates clockwise (="0") or
                    counterclockwise (="1"), (if you look on the top of the
                    normal, so the bo105 has counterclockwise rotor).
@@ -646,7 +647,6 @@ rotor:    A rotor. Used for simulating helicopters. You can have one, two
                    is stall. In the range between this incidences it is
                    interpolated linear.
 
-
           pitch-a:
           pitch-b: collective incidence angles, If you start flightgear
                    with --log-level=info, flightgear reports lift and needed
@@ -682,6 +682,7 @@ rotor:    A rotor. Used for simulating helicopters. You can have one, two
                    in the internet. Parameters for the airfoils NACA 23012
                    (main rotor of bo105) and NACA 0012 (tail rotor of bo105?)
                    are included.
+
           rotor-correction-factor:
                    If you calculate the lift of a heli rotor or even of a
                    propeller, you get a value larger than the real measured

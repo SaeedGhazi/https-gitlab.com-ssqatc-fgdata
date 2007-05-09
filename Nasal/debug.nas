@@ -1,4 +1,7 @@
 # debug.nas -- debugging helpers
+#------------------------------------------------------------------------------
+#
+# debug.color(<enabled>);              ... turns terminal colors on (1) or off (0)
 #
 # debug.dump(<variable>)               ... dumps contents of variable to terminal;
 #                                          abbreviation for print(debug.string(v))
@@ -9,6 +12,12 @@
 # debug.backtrace([<comment:string>]}  ... writes backtrace with local variables
 #                                          (similar to gdb's "bt full)
 #
+# debug.tree([<property> [, <mode>])   ... dump property tree under property path
+#                                          or props.Node hash (default: root). If
+#                                          <mode> is unset or 0, use flat mode
+#                                          (similar to props.dump()), otherwise
+#                                          use space indentation
+#
 # debug.exit()                         ... exits fgfs
 #
 # debug.bt                             ... abbreviation for debug.backtrace
@@ -16,14 +25,15 @@
 # debug.string(<variable>)             ... returns contents of variable as string
 #
 # debug.load_xml_nasal(<file>)         ... load and run XML embedded Nasal
-#
 
+var _c = nil;
 
-
-if (getprop("/sim/startup/terminal-ansi-colors")) {
-	_c = func(color, s) { "\x1b[" ~ color ~ "m" ~ s ~ "\x1b[m" }
-} else {
-	_c = func(dummy, s) { s }
+var color = func(enabled) {
+	if (enabled) {
+		_c = func(color, s) { "\x1b[" ~ color ~ "m" ~ s ~ "\x1b[m" }
+	} else {
+		_c = func(dummy, s) { s }
+	}
 }
 
 
@@ -46,7 +56,46 @@ var _internal    = func(s) { _c("35", s) }      # me parents
 var _varname     = func(s) { _c("1", s) }       # variable_name
 
 
-var _dump_prop = func(p) {
+var tree = func(p = "", graph = 1) {
+	var n = isa(p, props.Node) ? p : props.globals.getNode(p, 0);
+	if (n == nil)
+		dump(n);
+	else
+		_tree(n, graph);
+}
+
+
+var _tree = func(n, graph = 1, prefix = "", level = 0) {
+	var path = n.getPath();
+	var children = n.getChildren();
+	var s = "";
+
+	if (graph) {
+		s = prefix ~ n.getName();
+		var index = n.getIndex();
+		if (index)
+			s ~= "[" ~ index ~ "]";
+	} else {
+		s = n.getPath();
+	}
+
+	if (size(children)) {
+		s ~= "/";
+		if (n.getType() != "NONE")
+			s ~= " = " ~ string(n.getValue()) ~ " " ~ _attrib(n)
+					~ "    " ~ _section(" PARENT-VALUE ");
+	} else {
+		s ~= " = " ~ string(n.getValue()) ~ " " ~ _attrib(n);
+	}
+	print(s);
+
+	if (n.getType() != "ALIAS")
+		forindex (var i; children)
+			_tree(children[i], graph, prefix ~ ".   ", level + 1);
+}
+
+
+var _attrib = func(p) {
 	var r = p.getAttribute("read")        ? "" : "r";
 	var w = p.getAttribute("write")       ? "" : "w";
 	var R = p.getAttribute("trace-read")  ? "R" : "";
@@ -54,18 +103,26 @@ var _dump_prop = func(p) {
 	var A = p.getAttribute("archive")     ? "A" : "";
 	var U = p.getAttribute("userarchive") ? "U" : "";
 	var T = p.getAttribute("tied")        ? "T" : "";
-	var attrib = r ~ w ~ R ~ W ~ A ~ U ~ T;
-	var type = "(" ~ _proptype(p.getType()) ~ (size(attrib) ? ", " ~ attrib : "") ~ ")";
-	return _path(p.getPath()) ~ "=" ~ string(p.getValue()) ~ " " ~ type;
+	var attr = r ~ w ~ R ~ W ~ A ~ U ~ T;
+	var type = "(" ~ _proptype(p.getType());
+	if (size(attr))
+		type ~= ", " ~ attr;
+	if (var l = p.getAttribute("listeners"))
+		type ~= ", L" ~ l;
+	return type ~ ")";
+}
+
+
+var _dump_prop = func(p) {
+	_path(p.getPath()) ~ " = " ~ string(p.getValue()) ~ " " ~ _attrib(p);
 }
 
 
 var _dump_var = func(v) {
-	if (v == "me" or v == "parents") {
+	if (v == "me" or v == "parents")
 		return _internal(v);
-	} else {
+	else
 		return _varname(v);
-	}
 }
 
 
@@ -77,9 +134,9 @@ var string = func(o) {
 		return num(o) == nil ? _string('"' ~ o ~ '"') : _num(o);
 	} elsif (t == "vector") {
 		var s = "";
-		forindex (var i; o) {
+		forindex (var i; o)
 			s ~= (i == 0 ? "" : ", ") ~ string(o[i]);
-		}
+
 		return _bracket("[") ~ " " ~ s ~ " " ~ _bracket("]");
 	} elsif (t == "hash") {
 		if (contains(o, "parents") and typeof(o.parents) == "vector"
@@ -88,9 +145,9 @@ var string = func(o) {
 		}
 		var k = keys(o);
 		var s = "";
-		forindex (var i; k) {
+		forindex (var i; k)
 			s ~= (i == 0 ? "" : ", ") ~ _dump_var(k[i]) ~ " : " ~ string(o[k[i]]);
-		}
+
 		return _brace("{") ~ " " ~ s ~ " " ~ _brace("}");
 	} else {
 		return _angle("<") ~ _vartype(t) ~ _angle(">");
@@ -110,9 +167,9 @@ var local = func(frame = 0) {
 
 var backtrace = func(desc = nil, l = 0) {
 	var v = caller(l);
-	if (v == nil) {
+	if (v == nil)
 		return;
-	}
+
 	if (l == 0) {
 		var d = desc == nil ? "" : " '" ~ desc ~ "'";
 		print("\n" ~ _title("\n### backtrace" ~ d ~ " ###"));
@@ -171,5 +228,13 @@ var load_xml_nasal = func(file) {
 	fgcommand("loadxml", n);
 	fgcommand("nasal", n);
 }
+
+
+
+_setlistener("/sim/signals/nasal-dir-initialized", func {
+	setlistener("/sim/startup/terminal-ansi-colors", func {
+		color(cmdarg().getBoolValue());
+	}, 1);
+});
 
 

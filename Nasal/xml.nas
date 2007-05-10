@@ -503,9 +503,9 @@ var dump = {
 };
 
 
-var process = func {
+var process = func(arg...) {
 	var err = [];
-	var ret = call(parse_document, caller(0)[0]["arg"]!=nil?arg:[], err);	# FIXME work around nasal bug
+	var ret = call(parse_document, arg, err);
 	if (!size(err))
 		return ret;
 	if (substr(err[0], 0, size(error_label)) != error_label)

@@ -91,7 +91,6 @@
 #
 # and would be used as:  xml.process_string("<foo>bar</foo>", do_nothing);
 
-var printf = func { print(call(sprintf, arg)) }
 
 var isspace = func(c) { c == ` ` or c == `\t` or c == `\n` or c == `\r` }
 var isletter = func(c) { c >= `a` and c <= `z` or c >= `A` and c <= `Z` }
@@ -262,8 +261,8 @@ var StringScanner = {
 
 # PARSER ==========================================================================================
 
-var parse_document = func {
-	call(action.begin, caller(0)[0]["arg"]!=nil?arg:[], action);		# FIXME work around nasal bug
+var parse_document = func(arg...) {
+	call(action.begin, arg, action);
 	parse_prolog();
 	if (!parse_element()) {
 		var c = scan.get();
@@ -506,13 +505,13 @@ var dump = {
 
 var process = func {
 	var err = [];
-	var ret = call(parse_document, caller(0)[0]["arg"]!=nil?arg:[], nil, nil, err);		# FIXME work around nasal bug
+	var ret = call(parse_document, caller(0)[0]["arg"]!=nil?arg:[], err);	# FIXME work around nasal bug
 	if (!size(err))
 		return ret;
-	if (substr(err[0], 0, size(error_label)) == error_label)
-		print(err[0]);
-	else
+	if (substr(err[0], 0, size(error_label)) != error_label)
 		die(err[0]);  # rethrow
+
+	print(err[0]);
 	return nil;
 }
 
@@ -523,18 +522,18 @@ var action = nil;
 
 # INTERFACE =======================================================================================
 
-var process_string = func(string, act) {
+var process_string = func(string, act, arg...) {
 	scan = StringScanner.new(string);
 	action = act;
-	return call(process, caller(0)[0]["arg"]!=nil?arg:[]);		# FIXME work around nasal bug
+	return call(process, arg);
 }
 
 
-var process_file = func(file, act) {
+var process_file = func(file, act, arg...) {
 	scan = StringScanner.new(io.readfile(file));
 	scan.source = "\n  in file " ~ file ~ ",";
 	action = act;
-	return call(process, caller(0)[0]["arg"]!=nil?arg:[]);		# FIXME work around nasal bug
+	return call(process, arg);
 }
 
 

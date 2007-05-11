@@ -26,7 +26,7 @@
 #
 # debug.load_xml_nasal(<file>)         ... load and run XML embedded Nasal
 
-var _c = nil;
+var _c = func {}
 
 var color = func(enabled) {
 	if (enabled) {

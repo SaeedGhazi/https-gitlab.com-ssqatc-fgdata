@@ -22,7 +22,7 @@
 # All offsets are by default 0, and you only need to set them if they should
 # be non-zero. The registered function is called for each frame and the respective
 # view parameters are set accordingly. The function can access all internal
-# variables of the ViewManager class, such as me.roll, me.pitch, etc., and it
+# variables of the view_manager class, such as me.roll, me.pitch, etc., and it
 # can, of course, also use module variables from the file where it's defined.
 #
 # The following commands move smoothly to a fixed view position and back.
@@ -48,12 +48,10 @@ var clamp = func(v, min, max) { v < min ? min : v > max ? max : v }
 var normatan = func(x) { math.atan2(x, 1) * 2 / math.pi }
 
 var normdeg = func(a) {
-	while (a >= 180) {
+	while (a >= 180)
 		a -= 360;
-	}
-	while (a < -180) {
+	while (a < -180)
 		a += 360;
-	}
 	return a;
 }
 
@@ -75,14 +73,12 @@ var Input = {
 	},
 	get : func {
 		var v = me.prop.getValue() * me.factor + me.offset;
-		if (me.min != nil and v < me.min) {
+		if (me.min != nil and v < me.min)
 			v = me.min;
-		}
-		if (me.max != nil and v > me.max) {
+		if (me.max != nil and v > me.max)
 			v = me.max;
-		}
-		return me.lowpass == nil ? v : me.lowpass.filter(v);
 
+		return me.lowpass == nil ? v : me.lowpass.filter(v);
 	},
 	set : func(v) {
 		me.prop.setDoubleValue(v);
@@ -97,9 +93,9 @@ var ViewAxis = {
 	new : func(prop) {
 		var m = { parents : [ViewAxis] };
 		m.prop = props.globals.getNode(prop, 1);
-		if (m.prop.getType() == "NONE") {
+		if (m.prop.getType() == "NONE")
 			m.prop.setDoubleValue(0);
-		}
+
 		m.reset();
 		return m;
 	},
@@ -126,64 +122,61 @@ var ViewAxis = {
 
 
 
-# Class that manages a dynamic cockpit view by manipulating
+# Singleton class that manages a dynamic cockpit view by manipulating
 # sim/current-view/goal-*-offset-deg properties.
 #
-var ViewManager = {
-	new : func {
-		var m = { parents : [ViewManager] };
-		m.elapsedN = props.globals.getNode("/sim/time/elapsed-sec", 1);
-		m.deltaN = props.globals.getNode("/sim/time/delta-realtime-sec", 1);
+var view_manager = {
+	init : func {
+		me.elapsedN = props.globals.getNode("/sim/time/elapsed-sec", 1);
+		me.deltaN = props.globals.getNode("/sim/time/delta-realtime-sec", 1);
 
-		m.headingN = props.globals.getNode("/orientation/heading-deg", 1);
-		m.pitchN = props.globals.getNode("/orientation/pitch-deg", 1);
-		m.rollN = props.globals.getNode("/orientation/roll-deg", 1);
-		m.slipN = props.globals.getNode("/orientation/side-slip-deg", 1);
-		m.speedN = props.globals.getNode("velocities/airspeed-kt", 1);
+		me.headingN = props.globals.getNode("/orientation/heading-deg", 1);
+		me.pitchN = props.globals.getNode("/orientation/pitch-deg", 1);
+		me.rollN = props.globals.getNode("/orientation/roll-deg", 1);
+		me.slipN = props.globals.getNode("/orientation/side-slip-deg", 1);
+		me.speedN = props.globals.getNode("velocities/airspeed-kt", 1);
 
-		m.wind_dirN = props.globals.getNode("/environment/wind-from-heading-deg", 1);
-		m.wind_speedN = props.globals.getNode("/environment/wind-speed-kt", 1);
+		me.wind_dirN = props.globals.getNode("/environment/wind-from-heading-deg", 1);
+		me.wind_speedN = props.globals.getNode("/environment/wind-speed-kt", 1);
 
-		m.axes = [
-			m.heading_axis = ViewAxis.new("/sim/current-view/goal-heading-offset-deg"),
-			m.pitch_axis = ViewAxis.new("/sim/current-view/goal-pitch-offset-deg"),
-			m.roll_axis = ViewAxis.new("/sim/current-view/goal-roll-offset-deg"),
-			m.x_axis = ViewAxis.new("/sim/current-view/x-offset-m"),
-			m.y_axis = ViewAxis.new("/sim/current-view/y-offset-m"),
-			m.z_axis = ViewAxis.new("/sim/current-view/z-offset-m"),
-			m.fov_axis = ViewAxis.new("/sim/current-view/field-of-view"),
+		me.axes = [
+			me.heading_axis = ViewAxis.new("/sim/current-view/goal-heading-offset-deg"),
+			me.pitch_axis = ViewAxis.new("/sim/current-view/goal-pitch-offset-deg"),
+			me.roll_axis = ViewAxis.new("/sim/current-view/goal-roll-offset-deg"),
+			me.x_axis = ViewAxis.new("/sim/current-view/x-offset-m"),
+			me.y_axis = ViewAxis.new("/sim/current-view/y-offset-m"),
+			me.z_axis = ViewAxis.new("/sim/current-view/z-offset-m"),
+			me.fov_axis = ViewAxis.new("/sim/current-view/field-of-view"),
 		];
 
 		# accelerations are converted to G (Earth gravitation is omitted)
-		m.ax = Input.new("/accelerations/pilot/x-accel-fps_sec", 0.03108095, 0, 0.58, 0);
-		m.ay = Input.new("/accelerations/pilot/y-accel-fps_sec", 0.03108095, 0, 0.95);
-		m.az = Input.new("/accelerations/pilot/z-accel-fps_sec", -0.03108095, -1, 0.46);
+		me.ax = Input.new("/accelerations/pilot/x-accel-fps_sec", 0.03108095, 0, 0.58, 0);
+		me.ay = Input.new("/accelerations/pilot/y-accel-fps_sec", 0.03108095, 0, 0.95);
+		me.az = Input.new("/accelerations/pilot/z-accel-fps_sec", -0.03108095, -1, 0.46);
 
 		# velocities are converted to knots
-		m.vx = Input.new("/velocities/uBody-fps", 0.5924838, 0, 0.45);
-		m.vy = Input.new("/velocities/vBody-fps", 0.5924838, 0);
-		m.vz = Input.new("/velocities/wBody-fps", 0.5924838, 0);
+		me.vx = Input.new("/velocities/uBody-fps", 0.5924838, 0, 0.45);
+		me.vy = Input.new("/velocities/vBody-fps", 0.5924838, 0);
+		me.vz = Input.new("/velocities/wBody-fps", 0.5924838, 0);
 
 		# turn WoW bool into smooth values ranging from 0 to 1
-		m.wow = Input.new("/gear/gear/wow", 1, 0, 0.74);
-		m.hdg_change = aircraft.lowpass.new(0.95);
-		m.ubody = aircraft.lowpass.new(0.95);
-		m.last_heading = m.headingN.getValue();
-		m.size_factor = getprop("/sim/chase-distance-m") / -25;
+		me.wow = Input.new("/gear/gear/wow", 1, 0, 0.74);
+		me.hdg_change = aircraft.lowpass.new(0.95);
+		me.ubody = aircraft.lowpass.new(0.95);
+		me.last_heading = me.headingN.getValue();
+		me.size_factor = getprop("/sim/chase-distance-m") / -25;
 
 		# "lookat" blending
-		m.blendN = props.globals.getNode("/sim/view/dynamic/blend", 1);
-		m.blendN.setDoubleValue(0);
-		m.blendtime = BLEND_TIME;
-		m.frozen = 0;
+		me.blendN = props.globals.getNode("/sim/view/dynamic/blend", 1);
+		me.blendN.setDoubleValue(0);
+		me.blendtime = BLEND_TIME;
+		me.frozen = 0;
 
-		if (props.globals.getNode("rotors", 0) != nil) {
-			m.calculate = m.default_helicopter;
-		} else {
-			m.calculate = m.default_plane;
-		}
-		m.reset();
-		return m;
+		if (props.globals.getNode("rotors", 0) != nil)
+			me.calculate = me.default_helicopter;
+		else
+			me.calculate = me.default_plane;
+		me.reset();
 	},
 	reset : func {
 		me.heading_offset = me.heading = me.target_heading = 0;
@@ -196,9 +189,9 @@ var ViewManager = {
 
 		interpolate(me.blendN);
 		me.blendN.setDoubleValue(0);
-		foreach (var a; me.axes) {
+		foreach (var a; me.axes)
 			a.reset();
-		}
+
 		me.add_offset();
 	},
 	add_offset : func {
@@ -208,11 +201,10 @@ var ViewManager = {
 		me.fov_axis.add_offset();
 	},
 	apply : func {
-		if (me.elapsedN.getValue() < me.frozen) {
+		if (me.elapsedN.getValue() < me.frozen)
 			return;
-		} elsif (me.frozen) {
+		elsif (me.frozen)
 			me.unfreeze();
-		}
 
 		me.pitch = me.pitchN.getValue();
 		me.roll = me.rollN.getValue();
@@ -279,7 +271,7 @@ var ViewManager = {
 
 # default calculations for a plane
 #
-ViewManager.default_plane = func {
+view_manager.default_plane = func {
 	var wow = me.wow.get();
 
 	# calculate steering factor
@@ -314,7 +306,7 @@ ViewManager.default_plane = func {
 
 # default calculations for a helicopter
 #
-ViewManager.default_helicopter = func {
+view_manager.default_helicopter = func {
 	var lowspeed = 1 - normatan(me.speedN.getValue() / 20);
 
 	me.heading_offset =							# view heading due to
@@ -334,15 +326,12 @@ ViewManager.default_helicopter = func {
 # /sim/view[0]/dynamic/enabled is true.
 #
 var main_loop = func(id) {
-	if (id != loop_id) {
-		return;
-	}
+	id == loop_id or return;
 	if (cockpit_view and !panel_visible) {
-		if (mouse_button) {
+		if (mouse_button)
 			freeze();
-		} else {
+		else
 			view_manager.apply();
-		}
 	}
 	settimer(func { main_loop(id) }, 0);
 }
@@ -350,9 +339,8 @@ var main_loop = func(id) {
 
 
 var freeze = func {
-	if (mouse_mode == 0) {
+	if (mouse_mode == 0)
 		view_manager.freeze();
-	}
 }
 
 var register = func(f) {
@@ -363,8 +351,8 @@ var reset = func {
 	view_manager.reset();
 }
 
-var lookat = func(h, p, r, x, y, z, s = BLEND_TIME, f = 55) {
-	view_manager.lookat(h, p, r, x, y, z, s, f);
+var lookat = func {
+	call(view_manager.lookat, arg, view_manager);
 }
 
 var resume = func {
@@ -375,7 +363,6 @@ var resume = func {
 var original_resetView = nil;
 var panel_visibilityN = nil;
 var dynamic_view = nil;
-var view_manager = nil;
 
 var cockpit_view = nil;
 var panel_visible = nil;	# whether 2D panel is visible
@@ -388,8 +375,7 @@ var loop_id = 0;
 
 # Initialization.
 #
-var L = _setlistener("/sim/signals/nasal-dir-initialized", func {
-	removelistener(L);
+_setlistener("/sim/signals/nasal-dir-initialized", func {
 	# disable menu entry and return for inappropriate FDMs  (see Main/fg_init.cxx)
 	var fdms = {
 		acms:0, ada:0, balloon:0, external:0,
@@ -397,9 +383,8 @@ var L = _setlistener("/sim/signals/nasal-dir-initialized", func {
 		null:0, pipe:0, ufo:0, yasim:1,
 	};
 	var fdm = getprop("/sim/flight-model");
-	if (!contains(fdms, fdm) or !fdms[fdm]) {
+	if (!contains(fdms, fdm) or !fdms[fdm])
 		return gui.menuEnable("dynamic-view", 0);
-	}
 
 	# some properties may still be unavailable or nil
 	props.globals.getNode("/accelerations/pilot/x-accel-fps_sec", 1).setDoubleValue(0);
@@ -411,15 +396,14 @@ var L = _setlistener("/sim/signals/nasal-dir-initialized", func {
 
 	# let listeners keep some variables up-to-date, so that they don't have
 	# to be queried in the loop
-	setlistener("/sim/current-view/view-number", func { cockpit_view = !cmdarg().getValue() }, 1);
 	setlistener("/sim/panel/visibility", func { panel_visible = cmdarg().getValue() }, 1);
+	setlistener("/sim/current-view/view-number", func { cockpit_view = !cmdarg().getValue() }, 1);
 	setlistener("/devices/status/mice/mouse/button", func { mouse_button = cmdarg().getValue() }, 1);
 	setlistener("/devices/status/mice/mouse/x", freeze);
 	setlistener("/devices/status/mice/mouse/y", freeze);
 	setlistener("/devices/status/mice/mouse/mode", func {
-		if (mouse_mode = cmdarg().getValue()) {
+		if (mouse_mode = cmdarg().getValue())
 			view_manager.unfreeze();
-		}
 	}, 1);
 
 	setlistener("/sim/signals/reinit", func {
@@ -428,14 +412,13 @@ var L = _setlistener("/sim/signals/nasal-dir-initialized", func {
 		view_manager.reset();
 	}, 0);
 
-	view_manager = ViewManager.new();
+	view_manager.init();
 
 	original_resetView = view.resetView;
 	view.resetView = func {
 		original_resetView();
-		if (cockpit_view and dynamic_view) {
+		if (cockpit_view and dynamic_view)
 			view_manager.add_offset();
-		}
 	}
 
 	settimer(func {
@@ -443,9 +426,8 @@ var L = _setlistener("/sim/signals/nasal-dir-initialized", func {
 			dynamic_view = cmdarg().getBoolValue();
 			loop_id += 1;
 			view.resetView();
-			if (dynamic_view) {
+			if (dynamic_view)
 				main_loop(loop_id);
-			}
 		}, 1);
 	}, 0);
 });

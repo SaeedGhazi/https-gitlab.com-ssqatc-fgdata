@@ -95,7 +95,7 @@ mat = func {
 			slider.set("min", arg[4]);
 			slider.set("max", arg[5]);
 		}
-		slider.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
+		slider.setBinding("dialog-apply");
 
 		number = grp.addChild("text");
 		number.set("label", "-0.123");
@@ -144,7 +144,7 @@ showDialog = func {
 	w.set("default", 1);
 	w.set("keynum", 27);
 	w.set("border", 1);
-	w.prop().getNode("binding[0]/command", 1).setValue("dialog-close");
+	w.setBinding("dialog-close");
 
 	h = 0;
 	h += colorgroup(dialog, "diffuse", base, h);
@@ -181,7 +181,7 @@ showDialog = func {
 		w.set("live", 1);
 		w.set("pref-width", 200);
 		w.set("property", base ~ "texture");
-		w.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
+		w.setBinding("dialog-apply");
 	}
 	dialog.addChild("empty").set("pref-height", "3");
 

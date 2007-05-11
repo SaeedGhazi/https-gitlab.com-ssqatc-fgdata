@@ -48,23 +48,21 @@
 # creates (if necessary) and returns a property node from arg[0],
 # which can be a property node already, or a property path
 #
-makeNode = func {
-	if (isa(arg[0], props.Node)) {
-		return arg[0];
-	} else {
-		return props.globals.getNode(arg[0], 1);
-	}
+var makeNode = func(n) {
+	if (isa(n, props.Node))
+		return n;
+	else
+		return props.globals.getNode(n, 1);
 }
 
 
 # returns arg[1]-th optional argument of vector arg[0] or default value arg[2]
 #
-optarg = func {
-	if (size(arg[0]) > arg[1] and arg[0][arg[1]] != nil) {
+var optarg = func {
+	if (size(arg[0]) > arg[1] and arg[0][arg[1]] != nil)
 		arg[0][arg[1]];
-	} else {
+	else
 		arg[2];
-	}
 }
 
 
@@ -90,20 +88,20 @@ optarg = func {
 #	var canopy = aircraft.door.new("sim/model/foo/canopy", 5);
 #	canopy.open();
 #
-door = {
+var door = {
 	new : func {
 		m = { parents : [door] };
 		m.node = makeNode(arg[0]);
 		m.swingtime = arg[1];
 		m.positionN = m.node.getNode("position-norm", 1);
 		m.enabledN = m.node.getNode("enabled", 1);
-		if (m.enabledN.getValue() == nil) {
+		if (m.enabledN.getValue() == nil)
 			m.enabledN.setBoolValue(1);
-		}
+
 		pos = optarg(arg, 2, 0);
-		if (m.positionN.getValue() == nil) {
+		if (m.positionN.getValue() == nil)
 			m.positionN.setDoubleValue(pos);
-		}
+
 		m.target = pos < 0.5;
 		return m;
 	},
@@ -169,7 +167,7 @@ door = {
 #	aircraft.light.new("sim/model/foo/strobe-top", 1.001, pattern, switch);
 #	aircraft.light.new("sim/model/foo/strobe-bot", 1.005, pattern, switch);
 #
-light = {
+var light = {
 	new : func {
 		m = { parents : [light] };
 		m.node = makeNode(arg[0]);
@@ -186,21 +184,21 @@ light = {
 		}
 		m.pattern = arg[c];
 		c += 1;
-		if (size(arg) > c and arg[c] != nil) {
+		if (size(arg) > c and arg[c] != nil)
 			m.switchN = makeNode(arg[c]);
-		} else {
+		else
 			m.switchN = m.node.getNode("enabled", 1);
-		}
-		if (m.switchN.getValue() == nil) {
+
+		if (m.switchN.getValue() == nil)
 			m.switchN.setBoolValue(0);
-		}
+
 		m.stateN = m.node.getNode("state", 1);
-		if (m.stateN.getValue() == nil) {
+		if (m.stateN.getValue() == nil)
 			m.stateN.setBoolValue(0);
-		}
-		forindex (var i; m.pattern) {
+
+		forindex (var i; m.pattern)
 			m.pattern[i] *= stretch;
-		}
+
 		m.index = 0;
 		m.loopid = 0;
 		m.continuous = 0;
@@ -295,7 +293,7 @@ light = {
 #	print(lp.filter(10));  # prints 10
 #	print(lp.filter(0));
 #
-lowpass = {
+var lowpass = {
 	new : func(coeff) {
 		var m = { parents : [lowpass] };
 		m.dtN = props.globals.getNode("/sim/time/delta-realtime-sec", 1);
@@ -361,18 +359,16 @@ lowpass = {
 #	# or save now and every 30 sec (and at exit/reinit)
 #	aircraft.data.save(0.5);
 #
-Data = {
-	new : func {
-		var m = { parents : [Data] };
-		m.path = getprop("/sim/fg-home") ~ "/aircraft-data/" ~ getprop("/sim/aircraft") ~ ".xml";
-		m.signalN = props.globals.getNode("/sim/signals/save", 1);
-		m.catalog = [];
-		m.loopid = 0;
-		m.interval = 0;
+var data = {
+	init : func {
+		me.path = getprop("/sim/fg-home") ~ "/aircraft-data/" ~ getprop("/sim/aircraft") ~ ".xml";
+		me.signalN = props.globals.getNode("/sim/signals/save", 1);
+		me.catalog = [];
+		me.loopid = 0;
+		me.interval = 0;
 
-		setlistener("/sim/signals/reinit", func { cmdarg().getBoolValue() and m._save_() });
-		setlistener("/sim/signals/exit", func { m._save_() });
-		return m;
+		setlistener("/sim/signals/reinit", func { cmdarg().getBoolValue() and me._save_() });
+		setlistener("/sim/signals/exit", func { me._save_() });
 	},
 	load : func {
 		printlog("warn", "trying to load aircraft data from ", me.path, " (OK if not found)");
@@ -396,9 +392,9 @@ Data = {
 		props.globals.removeChildren(tmp);
 		var root = props.globals.getNode(tmp, 1);
 		foreach (var c; me.catalog) {
-			if (c[0] == `/`) {
+			if (c[0] == `/`)
 				c = substr(c, 1);
-			}
+
 			props.copy(props.globals.getNode(c, 1), root.getNode(c, 1));
 		}
 		fgcommand("savexml", props.Node.new({ "filename": me.path, "sourcenode": tmp }));
@@ -412,13 +408,11 @@ Data = {
 			} elsif (t == "scalar") {
 				append(me.catalog, a);
 			} elsif (t == "vector") {
-				foreach (var i; a) {
+				foreach (var i; a)
 					me.add(i);
-				}
 			} elsif (t == "hash") {
-				foreach (var i; keys(a)) {
+				foreach (var i; keys(a))
 					me.add(a[i]);
-				}
 			} else {
 				die("aircraft.data.add(): invalid item of type " ~ t);
 			}
@@ -449,13 +443,13 @@ Data = {
 #	
 #	aircraft.timer.new("/sim/time/hobbs/battery", 60).start();  # anonymous timer
 #
-timer = {
+var timer = {
 	new : func(prop, res = 1, save = 1) {
 		var m = { parents : [timer] };
 		m.node = makeNode(prop);
-		if (m.node.getType() == "NONE") {
+		if (m.node.getType() == "NONE")
 			m.node.setDoubleValue(0);
-		}
+
 		m.systimeN = props.globals.getNode("/sim/time/elapsed-sec", 1);
 		m.last_systime = nil;
 		m.interval = res;
@@ -471,9 +465,8 @@ timer = {
 	},
 	del : func {
 		me.stop();
-		if (me.saveL != nil) {
+		if (me.saveL != nil)
 			removelistener(me.saveL);
-		}
 	},
 	start : func {
 		me.running and return;
@@ -498,9 +491,8 @@ timer = {
 		me.last_systime = sys;
 	},
 	_save_ : func {
-		if (me.running) {
+		if (me.running)
 			me._apply_();
-		}
 	},
 	_loop_ : func(id) {
 		id != me.loopid and return;
@@ -574,21 +566,19 @@ var steering = {
 # HUD control class to handle both HUD implementations
 # ==============================================================================
 #
-HUDControl = {
-	new : func {
-		var m = { parents : [HUDControl] };
-		m.vis0N = props.globals.getNode("/sim/hud/visibility[0]", 1);
-		m.vis1N = props.globals.getNode("/sim/hud/visibility[1]", 1);
-		m.currcolN = props.globals.getNode("/sim/hud/current-color", 1);
-		m.paletteN = props.globals.getNode("/sim/hud/palette", 1);
-		m.brightnessN = props.globals.getNode("/sim/hud/color/brightness", 1);
-		m.currentN = m.vis0N;
-		return m;
+var HUD = {
+	init : func {
+		me.vis0N = props.globals.getNode("/sim/hud/visibility[0]", 1);
+		me.vis1N = props.globals.getNode("/sim/hud/visibility[1]", 1);
+		me.currcolN = props.globals.getNode("/sim/hud/current-color", 1);
+		me.paletteN = props.globals.getNode("/sim/hud/palette", 1);
+		me.brightnessN = props.globals.getNode("/sim/hud/color/brightness", 1);
+		me.currentN = me.vis0N;
 	},
 	cycle_color : func {		# h-key
-		if (!me.currentN.getBoolValue()) {		# if off, turn on
+		if (!me.currentN.getBoolValue())		# if off, turn on
 			return me.currentN.setBoolValue(1);
-		}
+
 		var i = me.currcolN.getValue() + 1;		# if through, turn off
 		if (i < 0 or i >= size(me.paletteN.getChildren("color"))) {
 			me.currentN.setBoolValue(0);
@@ -633,30 +623,23 @@ HUDControl = {
 # module initialization
 # ==============================================================================
 #
-var HUD = nil;
-var data = nil;
 
-var L = _setlistener("/sim/signals/nasal-dir-initialized", func {
-	removelistener(L);
+_setlistener("/sim/signals/nasal-dir-initialized", func {
 
 	props.globals.getNode("/sim/time/delta-realtime-sec", 1).setDoubleValue(0.00000001);
-	HUD = HUDControl.new();
+	HUD.init();
+	data.init();
 
-	data = Data.new();
-	Data.new = nil;
 	if (getprop("/sim/startup/save-on-exit")) {
 		data.load();
 		var n = props.globals.getNode("/sim/aircraft-data");
-		if (n != nil) {
-			foreach (var c; n.getChildren("path")) {
-				if (c.getType() != "NONE") {
+		if (n != nil)
+			foreach (var c; n.getChildren("path"))
+				if (c.getType() != "NONE")
 					data.add(c.getValue());
-				}
-			}
-		}
 	} else {
-		Data._save_ = func {}
-		Data._loop_ = func {}
+		data._save_ = func {}
+		data._loop_ = func {}
 	}
 });
 

@@ -1,30 +1,9 @@
 ##
 ## view.nas
 ##
-##  Nasal code for implementing view-specific functionality.  Right
-##  now, it does intelligent FOV scaling in the view.increase() and
-##  view.decrease() handlers.
-##
+##  Nasal code for implementing view-specific functionality.
 
-#
-# This is a neat trick.  We want these globals to be initialized at
-# startup, but there is no guarantee that the props.nas module will be
-# loaded yet when we are run.  So set the values to nil at startup (so
-# that there is a value in the lexical environment -- otherwise
-# assigning them in INIT() will only make local variables),
-# and then assign them from inside a timer that we set to run
-# immediately *after* startup.
-#
-# Nifty hacks notwithstanding, this really isn't the right way to do
-# this.  There ought to be an "import" mechanism we can use to resolve
-# dependencies between modules.
-#
-fovProp = nil;
-INIT = func {
-    fovProp = props.globals.getNode("/sim/current-view/field-of-view");
 
-}
-settimer(INIT, 0);
 
 # Dynamically calculate limits so that it takes STEPS iterations to
 # traverse the whole range, the maximum FOV is fixed at 120 degrees,
@@ -78,6 +57,9 @@ resetFOV = func {
 # Handler.  Reset view to default.
 #
 resetView = func {
+    if (getprop("/sim/current-view/view-number") == 6)
+        return flyby.setpos(1);
+
     setprop("/sim/current-view/goal-heading-offset-deg",
             getprop("/sim/current-view/config/heading-offset-deg"));
     setprop("/sim/current-view/goal-pitch-offset-deg",
@@ -135,7 +117,10 @@ panViewPitch = func(step) {
 
 
 
-
+##
+# Singleton class that manages "Fly-By View". It's started with flyby.init()
+# and then works autonomously.
+#
 var flyby = {
     init : func {
         me.lonN = props.globals.getNode("/sim/viewer/longitude-deg", 1);
@@ -169,7 +154,7 @@ var flyby = {
         me.coord = geo.Coord.new().set(geo.aircraft_position());
         me.dist = 20;
         me.setpos(1);
-        me.loop(me.loopid);
+        me._loop_(me.loopid);
     },
     setpos : func(force = 0) {
         var pos = geo.aircraft_position();
@@ -193,10 +178,10 @@ var flyby = {
         me.altN.setValue(alt * geo.M2FT);
         me.coord.set_lonlat(lon, lat, alt);
     },
-    loop : func(id) {
+    _loop_ : func(id) {
         id == me.loopid or return;
         me.setpos();
-        settimer(func { me.loop(id) }, 6.3);
+        settimer(func { me._loop_(id) }, 6.3);
     },
 };
 
@@ -343,15 +328,18 @@ var point = {
 
 
 var views = nil;
+var fovProp = nil;
+
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
-    point.init();
     views = props.globals.getNode("/sim").getChildren("view");
+    fovProp = props.globals.getNode("/sim/current-view/field-of-view");
+    point.init();
 });
+
 
 _setlistener("/sim/signals/fdm-initialized", func {
     flyby.init();
 });
-
 
 

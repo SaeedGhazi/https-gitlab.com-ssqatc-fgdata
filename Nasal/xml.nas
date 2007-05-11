@@ -4,11 +4,11 @@
 # isn't fully implemented.
 #
 # Synopsis:  xml.process_string(<xml-data:string>, <action:hash>);
-#            xml.process_file(<filepath>, <acdtion:hash>);
+#            xml.process_file(<filepath>, <action:hash>);
 #
 # Examples:
 #            var n = xml.process_string("<foo>123<foo>", xml.tree, "__");
-#            var node = xml.process_file("foor/bar.xml", xml.tree, "__");
+#            var node = xml.process_file("foo/bar.xml", xml.tree, "__");
 #            if (node != nil)
 #                    props.dump(node);
 #
@@ -33,7 +33,7 @@
 #         called for every closing tag, with tag name and number of child
 #         elements. From the latter it can be determined if the closed tag
 #         is a branch or a leaf node. The close() method is also called for
-#         selfclosing tags, in which case <numchildren> is always 0.
+#         self-closing tags, in which case <numchildren> is always 0.
 #
 #     data(<string>)
 #         called for each data segment
@@ -56,7 +56,7 @@
 #
 # xml.tree
 #
-#     Synposis: <node> = xml.process_string(<xml-string>, xml.tree, <attr-prefix:string>);
+#     Synopsis: <node> = xml.process_string(<xml-string>, xml.tree, <attr-prefix:string>);
 #
 #     Example:  var node = xml.process_string("<foo>bar</foo>", xml.tree, "attr__");
 #
@@ -230,7 +230,7 @@ var Scanner = {
 
 
 ##
-# childclass of Scanner class; knows how to read characters from a string,
+# child class of Scanner class; knows how to read characters from a string,
 # and how to push them back for later use
 #
 var StringScanner = {
@@ -284,8 +284,8 @@ var parse_document = func(arg...) {
 var parse_prolog = func {
 	parse_xmldecl();
 	parse_misc();
-	#parse_dtd();
-	#parse_misc();
+	parse_doctype();
+	parse_misc();
 }
 
 
@@ -338,7 +338,21 @@ var parse_pi = func {
 			return 1;
 		scan.get();
 	}
-	error("unfinished processing instruction");
+	error("unfinished 'processing instruction'");
+}
+
+
+var parse_doctype = func {
+	if (!scan.skip("<!"))
+		return 0;
+	while (1) {
+		parse_doctype();
+
+		if (scan.skip(">"))
+			return 1;
+		scan.get();
+	}
+	error("unfinished doctype");
 }
 
 
@@ -442,10 +456,10 @@ var parse_closing_tag = func {
 }
 
 
-# ACTION INTERFACES ===============================================================================
+# ACTION HASHES ===================================================================================
 
 var tree = {
-	begin : func(prefix = nil) {
+	begin : func(prefix) {
 		me.prefix = prefix;
 		me.stack = [];
 		me.node = props.Node.new();
@@ -453,13 +467,13 @@ var tree = {
 	end : func {
 		return me.node;
 	},
-	open : func(name, attr, sc) {
+	open : func(name, attr) {
 		append(me.stack, "");
 		var index = size(me.node.getChildren(name));
 		me.node = me.node.getChild(name, index, 1);
 		if (me.prefix != nil)
-			foreach (var at; keys(attr))
-				me.node.getNode(me.prefix ~ at, 1).setValue(attr[at]);
+			foreach (var n; keys(attr))
+				me.node.getNode(me.prefix ~ n, 1).setValue(attr[n]);
 	},
 	close : func(name, children) {
 		var buf = pop(me.stack);
@@ -474,18 +488,19 @@ var tree = {
 
 
 var dump = {
-	begin : func {
+	begin : func(prefix = "__") {
+		me.prefix = prefix;
 		me.level = 0;
 	},
 	end : func {
 	},
-	open : func(name, attr, selfclosed) {
+	open : func(name, attr) {
 		me.print("<", name, ">");
 		me.level += 1;
-		foreach (var a; sort(keys(attr), func(a, b) cmp(a, b)))
-			me.print("<__", a, ">", attr[a], "</__", a, ">");
+		foreach (var n; sort(keys(attr), cmp))
+			me.print("<", , me.prefix, n, ">", attr[n], "</", me.prefix, n, ">");
 	},
-	close : func(name, chld) {
+	close : func(name) {
 		me.level -= 1;
 		me.print("</", name, ">");
 	},

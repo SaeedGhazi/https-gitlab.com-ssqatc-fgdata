@@ -289,6 +289,29 @@ var tile_path = func(lon, lat) {
 }
 
 
+var put_model = func(path, lon, lat, elev_m = nil, hdg = 0, pitch = 0, roll = 0) {
+	if (elev_m == nil)
+		elev_m = elevation(lon, lat);
+	if (elev_m == nil)
+		die("can't get elevation for " ~ lon ~ "/" ~ lat);
+	var n = props.globals.getNode("/models");
+	for (var i = 0; 1; i += 1)
+		if (n.getChild("model", i, 0) == nil)
+			break;
+	n = n.getChild("model", i, 1);
+	n.getNode("path", 1).setValue(path);
+	n.getNode("longitude-deg", 1).setDoubleValue(lon);
+	n.getNode("latitude-deg", 1).setDoubleValue(lat);
+	n.getNode("elevation-ft", 1).setDoubleValue(elev_m * FT2M);
+	n.getNode("heading-deg", 1).setDoubleValue(hdg);
+	n.getNode("pitch-deg", 1).setDoubleValue(pitch);
+	n.getNode("roll-deg", 1).setDoubleValue(roll);
+	n.getNode("load", 1).setBoolValue(1);
+	n.removeChildren("load");
+	return n;
+}
+
+
 var terr_tree = nil;
 var terr_lon = nil;
 var terr_lat = nil;
@@ -305,13 +328,12 @@ var elevation = func(lon, lat) {
 var aircraft_lon = nil;
 var aircraft_lat = nil;
 var aircraft_alt = nil;
-var aircraft_coord = Coord.new();
 
 var aircraft_position = func {
 	var lon = aircraft_lon.getValue();
 	var lat = aircraft_lat.getValue();
 	var alt = aircraft_alt.getValue() * FT2M;
-	return aircraft_coord.set_lonlat(lon, lat, alt);
+	return Coord.new().set_lonlat(lon, lat, alt);
 }
 
 
@@ -329,7 +351,7 @@ _setlistener("/sim/signals/click", func {
 });
 
 var click_position = func {
-	return click_coord.is_defined() ? click_coord : nil;
+	return click_coord.is_defined() ? Coord.new(click_coord) : nil;
 }
 
 

@@ -151,16 +151,17 @@ var flyby = {
         me.currview == me.number or return;
         me.chase = -getprop("/sim/chase-distance-m");
         me.course = me.hdgN.getValue();
-        me.coord = geo.Coord.new().set(geo.aircraft_position());
-        me.dist = 20;
+        me.coord = geo.aircraft_position();
         me.setpos(1);
+        me.dist = 20;
         me._loop_(me.loopid);
     },
     setpos : func(force = 0) {
         var pos = geo.aircraft_position();
         var dist = me.coord.distance_to(pos);
         if (dist < 1.7 * me.chase and !force)
-            return;
+            return 1.13;
+
         var side = (rand() - 0.5 < 0) ? -90 : 90;
         var course = me.hdgN.getValue();
         pos.apply_course_distance(course, dist * 0.8);
@@ -177,11 +178,11 @@ var flyby = {
         me.latN.setValue(lat);
         me.altN.setValue(alt * geo.M2FT);
         me.coord.set_lonlat(lon, lat, alt);
+        return 6.3;
     },
     _loop_ : func(id) {
         id == me.loopid or return;
-        me.setpos();
-        settimer(func { me._loop_(id) }, 6.3);
+        settimer(func { me._loop_(id) }, me.setpos());
     },
 };
 

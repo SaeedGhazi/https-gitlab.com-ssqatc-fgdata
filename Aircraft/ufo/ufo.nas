@@ -531,7 +531,7 @@ var scan_dirs = func(csv) {
 		foreach(var m; scan_models(dir))
 			append(list, m);
 
-	return sort(list, func(a, b) cmp(a, b));
+	return sort(list, cmp);
 }
 
 
@@ -671,7 +671,7 @@ var modellist = scan_dirs(getprop("/source"));
 var modelmgr = ModelMgr.new(getprop("/cursor"));
 
 setlistener("/sim/signals/click", func {
-	modelmgr.click(geo.Coord.new(geo.click_position()));  # assign copy
+	modelmgr.click(geo.click_position());
 });
 
 

@@ -720,11 +720,11 @@ Shared parameters for various materials.
 
 <!-- Default -->
 <material>
- <name>Default</name>
  <name>Landmass</name>
  <name>SomeSort</name>
  <name>EvergreenBroadCover</name>
  <name>Island</name>
+ <name>Default</name>
  <texture>Terrain/forest1a.rgb</texture>
  <texture>Terrain/forest1b.rgb</texture>
  <texture>Terrain/forest1c.rgb</texture>
@@ -1727,7 +1727,7 @@ Shared parameters for various materials.
  <glyph> <name>right-up</name>   <left>0.87573</left> <right>0.89527</right> </glyph>
  <glyph> <name>left-down</name>  <left>0.89527</left> <right>0.91529</right> </glyph>
  <glyph> <name>right-down</name> <left>0.91529</left> <right>0.93457</right> </glyph>
- <glyph> <name>no-entry</name>    <left>0.93872</left> <right>0.96997</right> </glyph>
+ <glyph> <name>no-entry</name>   <left>0.93872</left> <right>0.96997</right> </glyph>
  <glyph> <name>start-frame</name><left>0.98462</left> <right>0.98926</right> </glyph>
  <glyph> <name>stop-frame</name> <left>0.99390</left> <right>0.99854</right> </glyph>
 </material>

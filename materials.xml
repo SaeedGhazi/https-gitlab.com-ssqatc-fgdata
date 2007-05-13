@@ -1536,7 +1536,7 @@ Shared parameters for various materials.
 <material>
  <name>Freeway</name>
  <name>Road</name>
- <texture>Terrain/asphault.rgb</texture>
+ <texture>Terrain/asphalt.rgb</texture>
  <xsize>400</xsize>
  <ysize>400</ysize>
  <light-coverage>10000.0</light-coverage>

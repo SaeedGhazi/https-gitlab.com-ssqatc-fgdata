@@ -72,7 +72,7 @@ Properties currently used:
   bumpiness: normalized bumpiness factor for this particular terrain.
     (default: 0.0 for a smooth surface).
 
-  load-resistence: a pressure value how much force per surface area this
+  load-resistance: a pressure value how much force per surface area this
     surface can carry without deformation. The value should be in N/m^2
     (default: FLT_MAX).
 
@@ -105,7 +105,7 @@ Shared parameters for various materials.
  <friction-factor>0.8</friction-factor>
  <rolling-friction>0.05</rolling-friction>
  <bumpiness>0.05</bumpiness>
- <load-resistence>1e5</load-resistence>
+ <load-resistance>1e5</load-resistance>
 </material>
 
 <material>
@@ -1190,7 +1190,7 @@ Shared parameters for various materials.
  <friction-factor>0.8</friction-factor>
  <rolling-friction>0.3</rolling-friction>
  <bumpiness>0.2</bumpiness>
- <load-resistence>1e30</load-resistence>
+ <load-resistance>1e30</load-resistance>
 </material>
 
 <!-- Moved to Tundra (see below)
@@ -1232,7 +1232,7 @@ Shared parameters for various materials.
  <friction-factor>0.7</friction-factor>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.15</bumpiness>
- <load-resistence>1e30</load-resistence>
+ <load-resistance>1e30</load-resistance>
 </material>
 
 <material>
@@ -1260,7 +1260,7 @@ Shared parameters for various materials.
  <friction-factor>0.8</friction-factor>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.15</bumpiness>
- <load-resistence>1e30</load-resistence>
+ <load-resistance>1e30</load-resistance>
 </material>
 
 <material>
@@ -1273,7 +1273,7 @@ Shared parameters for various materials.
  <friction-factor>0.8</friction-factor>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.2</bumpiness>
- <load-resistence>1e30</load-resistence>
+ <load-resistance>1e30</load-resistance>
 </material>
 
 <material>
@@ -1301,7 +1301,7 @@ Shared parameters for various materials.
  <friction-factor>0.7</friction-factor>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.1</bumpiness>
- <load-resistence>1e30</load-resistence>
+ <load-resistance>1e30</load-resistance>
 </material>
 
 <material>
@@ -1316,7 +1316,7 @@ Shared parameters for various materials.
  <friction-factor>0.9</friction-factor>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.7</bumpiness>
- <load-resistence>1e30</load-resistence>
+ <load-resistance>1e30</load-resistance>
  <object-group>
   <range-m>5000</range-m>
   <object>
@@ -1370,7 +1370,7 @@ Shared parameters for various materials.
  <friction-factor>0.9</friction-factor>
  <rolling-friction>0.3</rolling-friction>
  <bumpiness>0.6</bumpiness>
- <load-resistence>1e30</load-resistence>
+ <load-resistance>1e30</load-resistance>
  <object-group>
   <range-m>5000</range-m>
   <object>
@@ -1424,7 +1424,7 @@ Shared parameters for various materials.
  <friction-factor>0.9</friction-factor>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.6</bumpiness>
- <load-resistence>1e30</load-resistence>
+ <load-resistance>1e30</load-resistance>
  <light-coverage>2000000.0</light-coverage>
  <object-group>
   <range-m>5000</range-m>
@@ -1492,7 +1492,7 @@ Shared parameters for various materials.
  <friction-factor>0.7</friction-factor>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.3</bumpiness>
- <load-resistence>1e30</load-resistence>
+ <load-resistance>1e30</load-resistance>
  <object-group>
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
@@ -1517,7 +1517,7 @@ Shared parameters for various materials.
  <friction-factor>0.4</friction-factor>
  <rolling-friction>0.6</rolling-friction>
  <bumpiness>0.7</bumpiness>
- <load-resistence>10</load-resistence>
+ <load-resistance>10</load-resistance>
  <object-group>
   <range-m alias="/params/forest/tree-range-m"/>
   <object>
@@ -1544,7 +1544,7 @@ Shared parameters for various materials.
  <friction-factor>1.0</friction-factor>
  <rolling-friction>0.02</rolling-friction>
  <bumpiness>0.01</bumpiness>
- <load-resistence>1e10</load-resistence>
+ <load-resistance>1e10</load-resistance>
 </material>
 
 <material>
@@ -1557,7 +1557,7 @@ Shared parameters for various materials.
  <friction-factor>0.5</friction-factor>
  <rolling-friction>0.04</rolling-friction>
  <bumpiness>0.5</bumpiness>
- <load-resistence>1e10</load-resistence>
+ <load-resistance>1e10</load-resistance>
 </material>
 
 

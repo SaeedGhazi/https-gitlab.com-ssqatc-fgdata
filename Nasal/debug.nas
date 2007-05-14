@@ -25,6 +25,11 @@
 # debug.string(<variable>)             ... returns contents of variable as string
 #
 # debug.load_xml_nasal(<file>)         ... load and run XML embedded Nasal
+#
+# debug.benchmark(<label:string>, <func> [<args>])
+#                                      ... calls function with optional args and
+#                                          prints execution time in seconds,
+#                                          prefixed with <label>.
 
 var _c = func {}
 
@@ -41,7 +46,8 @@ var color = func(enabled) {
 #
 var _title       = func(s) { _c("33;42;1", s) } # backtrace header
 var _section     = func(s) { _c("37;41;1", s) } # backtrace frame
-var _error       = func(s) { _c("31;1", s) }    # internal errors
+var _error       = func(s) { _c("31;1",    s) } # internal errors
+var _bench       = func(s) { _c("37;45;1", s) } # benchmark info
 
 var _nil         = func(s) { _c("32", s) }      # nil
 var _string      = func(s) { _c("31", s) }      # "foo"
@@ -180,6 +186,21 @@ var backtrace = func(desc = nil, l = 0) {
 	backtrace(nil, l + 1);
 }
 var bt = backtrace;
+
+
+##
+# Excecutes function f with option arguments and prints execution
+# time in seconds. Examples:
+#
+# var test = func(n) { for (var i = 0; i < n; i +=1) { print(i) }
+# debug.benchmark("test()/1", test, 10);
+# debug.benchmark("test()/2", func { test(10) });
+#
+var benchmark = func(label, f, arg...) {
+	var start = systime();
+	call(f, arg);
+	print(_bench(sprintf(" %s --> %.6f s ", label, systime() - start)));
+}
 
 
 var exit = func { fgcommand("exit", props.Node.new()) }

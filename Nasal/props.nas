@@ -1,6 +1,6 @@
 ##
 # Node class definition.  The class methods simply wrap the
-# low level exention functions which work on a "ghost" handle to a
+# low level extension functions which work on a "ghost" handle to a
 # SGPropertyNode object stored in the _g field.
 #
 # Not all of the features of SGPropertyNode are supported.  There is
@@ -69,8 +69,8 @@ Node.new = func {
 #   name : "exit", width : 180, height : 100, modal : 0,
 #   text : { x : 10, y : 70, label : "Hello World!" } };
 #
-Node.setValues = func {
-    foreach(k; keys(arg[0])) { me._setChildren(k, arg[0][k]); }
+Node.setValues = func(val) {
+    foreach(var k; keys(val)) { me._setChildren(k, val[k]); }
 }
 
 ##
@@ -78,17 +78,43 @@ Node.setValues = func {
 # The first argument is a child name, the second a nasal scalar,
 # vector, or hash.
 #
-Node._setChildren = func {
-    name = arg[0]; val = arg[1];
-    subnode = me.getNode(name, 1);
+Node._setChildren = func(name, val) {
+    var subnode = me.getNode(name, 1);
     if(typeof(val) == "scalar") { subnode.setValue(val); }
     elsif(typeof(val) == "hash") { subnode.setValues(val); }
     elsif(typeof(val) == "vector") {
-        for(i=0; i<size(val); i+=1) {
-            iname = name ~ "[" ~ i ~ "]";
+        for(var i=0; i<size(val); i+=1) {
+            var iname = name ~ "[" ~ i ~ "]";
             me._setChildren(iname, val[i]);
         }
     }
+}
+
+##
+# Counter piece of setValues(). Returns a hash with all values
+# in the subtree. Nodes with same name are returned as vector,
+# where the original node indices are lost. The function should
+# only be used if all or almost all values are needed, and never
+# in performance-critical code paths. If it's called on a node
+# without children, then the result is equivalent to getValue().
+#
+Node.getValues = func {
+    var children = me.getChildren();
+    if(!size(children)) return me.getValue();
+    var val = {};
+    var numchld = {};
+    foreach(var c; children) {
+        var name = c.getName();
+        if(contains(numchld, name)) { var nc = numchld[name]; }
+        else {
+            var nc = size(me.getChildren(name));
+            numchld[name] = nc;
+            if (nc > 1 and !contains(val, name)) val[name] = [];
+        }
+        if(nc > 1) append(val[name], c.getValues());
+        else val[name] = c.getValues();
+    }
+    return val;
 }
 
 ##
@@ -123,8 +149,8 @@ var dump = func {
 # if optional third argument is set and non-zero.
 #
 var copy = func(src, dest, attr = 0) {
-    foreach(c; src.getChildren()) {
-        name = c.getName() ~ "[" ~ c.getIndex() ~ "]";
+    foreach(var c; src.getChildren()) {
+        var name = c.getName() ~ "[" ~ c.getIndex() ~ "]";
         copy(src.getNode(name), dest.getNode(name, 1), attr);
     }
     var type = src.getType();

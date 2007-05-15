@@ -15,7 +15,7 @@ New in 0.9.10
 * Updated/improved rain cone rendering.
 * Updated manual.
 
-* Upgraded to JSBSim v2.0
+* Upgraded to v2.0 of the JSBSim config file format.
 * Fix a discrepancy in sign of twist and incidence values in YASim
   between code and documentation.
 * Updates to YASim for more fine grained propeller modeling.

@@ -458,6 +458,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <!-- scenario>nimitz_demo</scenario -->
    <scenario>aircraft_demo</scenario>
    <!-- <scenario>refueling_demo</scenario> -->
+   <!-- <scenario>lead_aircraft</scenario> -->
   </ai>
 
   <multiplay>

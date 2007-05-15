@@ -302,7 +302,7 @@ var put_model = func(path, lon, lat, elev_m = nil, hdg = 0, pitch = 0, roll = 0)
 	n.getNode("path", 1).setValue(path);
 	n.getNode("longitude-deg", 1).setDoubleValue(lon);
 	n.getNode("latitude-deg", 1).setDoubleValue(lat);
-	n.getNode("elevation-ft", 1).setDoubleValue(elev_m * FT2M);
+	n.getNode("elevation-ft", 1).setDoubleValue(elev_m * M2FT);
 	n.getNode("heading-deg", 1).setDoubleValue(hdg);
 	n.getNode("pitch-deg", 1).setDoubleValue(pitch);
 	n.getNode("roll-deg", 1).setDoubleValue(roll);
@@ -337,7 +337,6 @@ var aircraft_position = func {
 }
 
 
-
 var click_lon = nil;
 var click_lat = nil;
 var click_elev = nil;
@@ -361,9 +360,10 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	terr_lon = terr_tree.getNode("longitude-deg", 1);
 	terr_lat = terr_tree.getNode("latitude-deg", 1);
 	terr_elev = terr_tree.getNode("elevation-m", 1);
+
 	terr_lon.setDoubleValue(0.0);
 	terr_lat.setDoubleValue(0.0);
-	terr_elev.setDoubleValue(0.0);
+	terr_elev.setDoubleValue(-9999.0);
 
 	aircraft_lon = props.globals.getNode("/position/longitude-deg", 1);
 	aircraft_lat = props.globals.getNode("/position/latitude-deg", 1);

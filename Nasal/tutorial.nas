@@ -394,7 +394,7 @@ var say_message = func(node, default = nil) {
 		# Other messages are only displayed if they change
 		if (audio != nil) {
 			var prop = { path : audio_dir, file : audio };
-			fgcommand("play-audio-message", props.Node.new(prop));
+			fgcommand("play-audio-sample", props.Node.new(prop));
 			screen.log.write(msg, 1, 1, 1);
 		} elsif (msg != nil) {
 			setprop("/sim/messages/copilot", msg);

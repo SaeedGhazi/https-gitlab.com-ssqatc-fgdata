@@ -61,7 +61,7 @@ chatter_update = func {
             # go through the motions, but only schedule the message to play
             # if atc-chatter is enabled.
             printlog("info", "update atc chatter ", chatter_list[chatter_index] );
-	    fgcommand("play-audio-message", props.Node.new(tmpl) );
+	    fgcommand("play-audio-sample", props.Node.new(tmpl) );
         }
     } else {
         # skip non-wav file found in directory

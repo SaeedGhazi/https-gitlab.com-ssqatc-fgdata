@@ -706,6 +706,9 @@ rotor:    A rotor. Used for simulating helicopters. You can have one, two
                    are twisted instead, i.e. Bo 105, Lynx) use a mean value,
                    maybe 0.2. This value has a extreme result in the behavior
                    of the rotor [F/r]
+          sharedflaphinge: determines, if the rotor has one central flapping
+                   hinge (="1") for the blades (like the Bell206) or the tail
+                   rotor of the Bo 105, default is "0".
           delta3: Some rotors have a delta3 effect, which results in a
                    decreasing of the incidence when the rotor is flapping.
                    A value of 0 (as most helicopters have) means no change in

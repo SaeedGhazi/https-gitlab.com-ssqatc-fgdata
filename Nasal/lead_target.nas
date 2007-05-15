@@ -2,7 +2,7 @@
 # tasks.
 
 
-#print("Target Lead script loading ...");
+# print("Target Lead script loading ...");
 
 # script defaults (configurable if you like)
 default_update_period = 0.05;

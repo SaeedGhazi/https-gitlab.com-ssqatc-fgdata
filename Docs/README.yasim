@@ -707,8 +707,8 @@ rotor:    A rotor. Used for simulating helicopters. You can have one, two
                    maybe 0.2. This value has a extreme result in the behavior
                    of the rotor [F/r]
           sharedflaphinge: determines, if the rotor has one central flapping
-                   hinge (="1") for the blades (like the Bell206) or the tail
-                   rotor of the Bo 105, default is "0".
+                   hinge (="1") for the blades (like the Bell206 or the tail
+                   rotor of the Bo 105), default is "0".
           delta3: Some rotors have a delta3 effect, which results in a
                    decreasing of the incidence when the rotor is flapping.
                    A value of 0 (as most helicopters have) means no change in
@@ -754,6 +754,9 @@ rotor:    A rotor. Used for simulating helicopters. You can have one, two
                    parameters have very large impact to the cyclic response)
                    With this parameter (default 1) you can adjust the
                    simulator to the real helo.
+          balance: The balance of the rotor. 1.0: the rotor is 100% balanced,
+                   0.0: half of the blades are missing. Use a value near one
+                   (0.98 ... 0.999) to add some vibration.
 
           All rotor can have <control> subelements for the cyclic
           (CYCLICELE, CYCLICAIL) and collective (COLLECTIVE) input.

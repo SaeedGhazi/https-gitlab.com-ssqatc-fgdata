@@ -445,6 +445,12 @@
    </binding>
   </item>
 
+  <item>
+   <label>Dump Scene Graph</label>
+   <binding>
+    <command>dump-scenegraph</command>
+   </binding>
+  </item>
  </menu>
 
  <menu>

@@ -791,8 +791,22 @@ rotorgear: If you are using one ore more rotors you have to define a
                    They do not need to match any real value.
 
           The rotorgear needs a <control> subelement for the engine
-          (ROTORGEARENGINEON) and can have a <control> subelement for the
-          rotor brake (ROTORBRAKE).
+          (ROTORGEARENGINEON) and can have furhter <control> subelements:
+                   ROTORBRAKE: rotor brake
+                   ROTORELTARGET: the target rpm of the engine relative to
+                               the "normal" value for the governor. Default is
+                               1. Additionally you can modify this value in
+                               the property tree (/rotors/gear/target-rel-rpm)
+                               limited internally to 2.5
+                   ROTORENGINEMAXRELTORQUE: the maximum torque of the engine
+                               relativ to the torque defined by the engine-
+                               power. Default is 1. By setting the rel-target
+                               to a large number you get control over the
+                               engine by this control.  Additionally you can
+                               modify this value in the property tree
+                               (/rotors/gear/max-rel-torque)
+                               Alternativ you can use these two values for
+                               individual start-up sequences (see the s58)
 
           The rotor simulation is still "beta".
 

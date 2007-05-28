@@ -1923,4 +1923,194 @@ Shared parameters for various materials.
  <glyph> <name>RWY</name>        <left>0.24512</left> <right>0.73340</right> </glyph>
 </material>
 
+<material>
+ <name>RUNWAY_LIGHTS</name>
+ <emissive>
+  <r>0.92157</r>
+  <g>0.92157</g>
+  <b>0.76471</b>
+  <a>1</a>
+ </emissive>
+</material>
+
+<material>
+ <name>RWY_LIGHTS</name>
+ <emissive>
+  <r>0.92157</r>
+  <g>0.92157</g>
+  <b>0.76471</b>
+  <a>1</a>
+ </emissive>
+</material>
+
+<material>
+ <name>RWY_WHITE_LIGHTS</name>
+ <emissive>
+  <r>0.92157</r>
+  <g>0.92157</g>
+  <b>0.76471</b>
+  <a>1</a>
+ </emissive>
+</material>
+
+<material>
+ <name>RWY_WHITE_MEDIUM_LIGHTS</name>
+ <emissive>
+  <r>0.92157</r>
+  <g>0.92157</g>
+  <b>0.76471</b>
+  <a>0.80392</a>
+ </emissive>
+</material>
+
+<material>
+ <name>RWY_WHITE_LOW_LIGHTS</name>
+ <emissive>
+  <r>0.92157</r>
+  <g>0.92157</g>
+  <b>0.76471</b>
+  <a>0.60784</a>
+ </emissive>
+</material>
+
+<material>
+ <name>RWY_SEQUENCED_LIGHTS</name>
+ <emissive>
+  <r>0.92157</r>
+  <g>0.92157</g>
+  <b>0.76471</b>
+  <a>1</a>
+ </emissive>
+</material>
+
+<material>
+ <name>RWY_REIL_LIGHTS</name>
+ <emissive>
+  <r>0.92157</r>
+  <g>0.92157</g>
+  <b>0.76471</b>
+  <a>1</a>
+ </emissive>
+</material>
+
+<material>
+ <name>RWY_YELLOW_LIGHTS</name>
+ <emissive>
+  <r>0.92157</r>
+  <g>0.84314</g>
+  <b>0.078431</b>
+  <a>1</a>
+ </emissive>
+</material>
+
+<material>
+ <name>RWY_YELLOW_MEDIUM_LIGHTS</name>
+ <emissive>
+  <r>0.92157</r>
+  <g>0.84314</g>
+  <b>0.078431</b>
+  <a>0.80392</a>
+ </emissive>
+</material>
+
+<material>
+ <name>RWY_YELLOW_LOW_LIGHTS</name>
+ <emissive>
+  <r>0.92157</r>
+  <g>0.84314</g>
+  <b>0.078431</b>
+  <a>0.60784</a>
+ </emissive>
+</material>
+
+<material>
+ <name>RWY_RED_LIGHTS</name>
+ <emissive>
+  <r>0.92157</r>
+  <g>0.35294</g>
+  <b>0.35294</b>
+  <a>1</a>
+ </emissive>
+</material>
+
+<material>
+ <name>RWY_RED_MEDIUM_LIGHTS</name>
+ <emissive>
+  <r>0.92157</r>
+  <g>0.35294</g>
+  <b>0.35294</b>
+  <a>0.80392</a>
+ </emissive>
+</material>
+
+<material>
+ <name>RWY_RED_LOW_LIGHTS</name>
+ <emissive>
+  <r>0.92157</r>
+  <g>0.35294</g>
+  <b>0.35294</b>
+  <a>0.60784</a>
+ </emissive>
+</material>
+
+<material>
+ <name>RWY_GREEN_LIGHTS</name>
+ <emissive>
+  <r>0.078431</r>
+  <g>0.92157</g>
+  <b>0.078431</b>
+  <a>1</a>
+ </emissive>
+</material>
+
+<material>
+ <name>RWY_GREEN_MEDIUM_LIGHTS</name>
+ <emissive>
+  <r>0.078431</r>
+  <g>0.92157</g>
+  <b>0.078431</b>
+  <a>0.80392</a>
+ </emissive>
+</material>
+
+<material>
+ <name>RWY_GREEN_LOW_LIGHTS</name>
+ <emissive>
+  <r>0.078431</r>
+  <g>0.92157</g>
+  <b>0.078431</b>
+  <a>0.60784</a>
+ </emissive>
+</material>
+
+<material>
+ <name>RWY_GREEN_TAXIWAY_LIGHTS</name>
+ <emissive>
+  <r>0.078431</r>
+  <g>0.92157</g>
+  <b>0.078431</b>
+  <a>0.60784</a>
+ </emissive>
+</material>
+
+<material>
+ <name>RWY_BLUE_TAXIWAY_LIGHTS</name>
+ <emissive>
+  <r>0.35294</r>
+  <g>0.35294</g>
+  <b>0.92157</b>
+  <a>0.80392</a>
+ </emissive>
+</material>
+
+<material>
+ <name>RWY_VASI_LIGHTS</name>
+ <emissive>
+  <r>0.92157</r>
+  <g>0.92157</g>
+  <b>0.76471</b>
+  <a>1.0</a>
+ </emissive>
+</material>
+
 </PropertyList>

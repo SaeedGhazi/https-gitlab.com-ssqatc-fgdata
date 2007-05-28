@@ -404,6 +404,12 @@
    </option>
 
    <option>
+    <name>texture-filtering</name>
+    <arg>value</arg>
+    <description>strings/texture-filtering-desc</description>
+   </option>
+
+   <option>
     <name>disable-wireframe</name>
     <description>strings/disable-wireframe-desc</description>
    </option>

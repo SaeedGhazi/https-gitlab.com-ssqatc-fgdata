@@ -7,18 +7,21 @@
 
 	<nasal>
 		<open>
-			mod = func(x, y) { x - int(x / y) * y }
-			p = "/sim/gui/dialogs/stopwatch-dialog/";
-			display = props.globals.getNode(p ~ "display", 1);
-			time = props.globals.getNode("/sim/time/elapsed-sec");
+			var p = "/sim/gui/dialogs/stopwatch-dialog/";
+			var display = props.globals.getNode(p ~ "display", 1);
+			var time = props.globals.getNode("/sim/time/elapsed-sec");
 
-			start_time = props.globals.getNode(p ~ "start-time", 1).getValue();
-			accu = props.globals.getNode(p ~ "accu", 1).getValue();
+			var start_time = props.globals.getNode(p ~ "start-time", 1).getValue();
+			var accu = props.globals.getNode(p ~ "accu", 1).getValue();
+			if (start_time == nil)
+				start_time = 0;
+			if (accu == nil)
+				accu = 0;
 
-			r = props.globals.getNode(p ~ "running");
-			running = r != nil ? r.getBoolValue() : 0;
+			var r = props.globals.getNode(p ~ "running");
+			var running = r != nil ? r.getBoolValue() : 0;
 
-			start = func {
+			var start = func {
 				if (!running) {
 					start_time = time.getValue();
 					running = 1;
@@ -26,34 +29,33 @@
 				}
 			}
 
-			stop = func {
+			var stop = func {
 				if (running) {
 					running = 0;
 					show(accu += time.getValue() - start_time);
 				}
 			}
 
-			reset = func {
+			var reset = func {
 				accu = 0;
-				if (running) {
+				if (running)
 					start_time = time.getValue();
-				} else {
+				else
 					show(0);
-				}
 			}
 
-			loop = func {
+			var loop = func {
 				if (running) {
 					show(time.getValue() - start_time + accu);
 					settimer(loop, 0.02);
 				}
 			}
 
-			show = func(s) {
+			var show = func(s) {
 				var hours = s / 3600;
-				var minutes = int(mod(s / 60, 60));
-				var seconds = int(mod(s, 60));
-				var msec = int(mod(s * 1000, 1000) / 100);
+				var minutes = int(math.mod(s / 60, 60));
+				var seconds = int(math.mod(s, 60));
+				var msec = int(math.mod(s * 1000, 1000) / 100);
 				var d = sprintf("%3d : %02d : %02d.%d", hours, minutes, seconds, msec);
 				display.setValue(d);
 			}
@@ -61,9 +63,8 @@
 			if (running) {
 				loop();
 			} else {
-				if (accu == nil) {
+				if (accu == nil)
 					accu = 0;
-				}
 				show(accu);
 			}
 		</open>

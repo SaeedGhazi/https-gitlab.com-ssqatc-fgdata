@@ -793,7 +793,7 @@ rotorgear: If you are using one ore more rotors you have to define a
           The rotorgear needs a <control> subelement for the engine
           (ROTORGEARENGINEON) and can have furhter <control> subelements:
                    ROTORBRAKE: rotor brake
-                   ROTORELTARGET: the target rpm of the engine relative to
+                   ROTORRELTARGET: the target rpm of the engine relative to
                                the "normal" value for the governor. Default is
                                1. Additionally you can modify this value in
                                the property tree (/rotors/gear/target-rel-rpm)

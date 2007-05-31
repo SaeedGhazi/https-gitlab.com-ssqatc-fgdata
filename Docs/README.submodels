@@ -44,8 +44,8 @@
 <contents>     The path to the contents of a submodel. The contents must be in lbs. Intended for use with drop tanks. The property value will be set to 0 on release of the submodel: do not also set to 0 elsewhere e.g. in key bindings. Defaults to 0.
 <random>       Varies CD by +- 5%.
 <no-roll>      If true the submodel does not roll.
-<impact>	    If true, the impact location (lat/lon) on the terrain is calculated. The Material (e.g Grass)of the terrain, load resistance, impact velocity and energy are returned. Altitude agl is calculated.
-<impact-reports> Defines a report node. When an impact happens, then the path of the submodel will be written to this node. An attached listener function can evaluate the impact properties.
+<impact>       If true, the impact location (lat/lon) on the terrain is calculated. The Material (e.g Grass)of the terrain, load resistance, impact velocity and energy are returned. Altitude agl is calculated.
+<impact-reports> Defines a report node. When an impact happens, then the path of the submodel will be written to this node. An attached listener function can evaluate the impact properties. If unset, reports go to /ai/models/model-impact.
 
 -->
 

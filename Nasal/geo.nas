@@ -40,6 +40,11 @@
 # geo.tile_path(<lon>, <lat>)     ... returns tile path string (e.g. "w130n30/w123n37/942056.stg")
 # geo.elevation(<lon>, <lat>)     ... returns elevation in meter for given lon/lat, or nil on error
 # geo.normdeg(<angle>)            ... returns angle normalized to  0 <= angle < 360
+#
+# geo.put_model(<path>, <lon>, <lat> [, <elev:nil> [, <hdg:0> [, <pitch:0> [, <roll:0>]]]]);
+#                                 ... put model <path> at location <lon>/<lat> with given elevation
+#                                     (optional, default: surface). <hdg>/<pitch>/<roll> are optional
+#                                     and default to zero.
 
 
 var EPSILON = 0.0000000000001;

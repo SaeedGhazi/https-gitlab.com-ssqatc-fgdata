@@ -17,7 +17,7 @@
         <blue>0.8</blue>
         <alpha>0</alpha>
     </color>
-    <draggable>false</draggable>
+    <draggable>true</draggable>
 
   <textbox>
     <color>

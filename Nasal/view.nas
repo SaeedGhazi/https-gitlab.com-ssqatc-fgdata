@@ -131,7 +131,7 @@ var flyby = {
         me.number = nil;
         me.currview = nil;
         forindex (var i; views)
-            if (views[i].getNode("name").getValue() == "Fly-By View")
+            if ((var v = views[i].getNode("name")) != nil and v.getValue() == "Fly-By View")
                 me.number = i;
         if (me.number == nil)
             die("can't find 'Fly-By View'");

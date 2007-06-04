@@ -148,47 +148,60 @@ Widget = {
 
 ##
 # Dialog class. Maintains one XML dialog.
-#     prop ... target node (name must be "dialog")
-#     path ... file path relative to $FG_ROOT
 #
-# Example:
+# SYNOPSIS:
+# (B) Dialog.new(<dialog-name>);   ... use dialog from $FG_ROOT/gui/dialogs/
+# (A) Dialog.new(<prop>, <path>);  ... load aircraft specific dialog from
+#                                      <path> under property <prop>
+#
+#         prop        ... target node (name must be "dialog")
+#         path        ... file path relative to $FG_ROOT
+#         dialog-name ... dialog <name> of dialog in $FG_ROOT/gui/dialogs/
+#
+# EXAMPLES:
 #
 #     var dlg = gui.Dialog.new("/sim/gui/dialogs/foo-config/dialog",
 #                              "Aircraft/foo/foo_config.xml");
 #     dlg.open();
 #     dlg.close();
 #
+#     var livery_dialog = gui.Dialog.new("livery-select");
+#     livery_dialog.toggle();
+#
 Dialog = {
-    new : func(prop, path) {
+    new : func(prop, path = nil) {
         var m = { parents : [Dialog] };
-        m.path = path;
-        m.prop = isa(props.Node, prop) ? prop : props.globals.getNode(prop, 1);
         m.state = 0;
-        if (m.prop.getName() != "dialog") {
-            die("Dialog class: node name must end with '/dialog'");
+        if (path == nil) { # global dialog in $FG_ROOT/gui/dialogs/
+            m.prop = props.Node.new({ "dialog-name" : prop });
+        } else {           # aircraft dialog with given path
+            m.path = path;
+            m.prop = isa(props.Node, prop) ? prop : props.globals.getNode(prop, 1);
+            if (m.prop.getName() != "dialog") {
+                die("Dialog class: node name must end with '/dialog'");
+            }
+            m.listener = setlistener("/sim/signals/reinit-gui", func { m.load() }, 1);
         }
-        m.listener = setlistener("/sim/signals/reinit-gui", func { m.load() }, 1);
         return m;
     },
     # doesn't need to be called explicitly, but can be used to force a reload
     load : func {
         var state = me.state;
-        if (state) {
+        if (state)
             me.close();
-        }
+
         me.prop.removeChildren();
         fgcommand("loadxml", props.Node.new({"filename": me.path,
                 "targetnode": me.prop.getPath()}));
         var n = me.prop.getNode("name");
-        if (n == nil) {
+        if (n == nil)
             die("Dialog class: XML dialog must have <name>");
-        }
+
         me.name = n.getValue();
         me.prop.getNode("dialog-name", 1).setValue(me.name);
         fgcommand("dialog-new", me.prop);
-        if (state) {
+        if (state)
             me.open();
-        }
     },
     # allows access to dialog-embedded Nasal variables/functions
     namespace : func {

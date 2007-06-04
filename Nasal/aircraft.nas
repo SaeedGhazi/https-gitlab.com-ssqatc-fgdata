@@ -503,6 +503,56 @@ var timer = {
 
 
 
+# livery
+# =============================================================================
+# Class that maintains livery XML files (see English Electric Lightning for an
+# example. The last used livery is saved on exit and restored next time.
+#
+# SYNOPSIS:
+#	livery.init(<livery-dir> [, <name-path>]);
+#
+#	<livery-dir> ... directory with livery XML files, relative to $FG_ROOT
+#	<name-path>  ... property under which the livery name is stored in the
+#	                 livery files and the property tree
+#
+# EXAMPLE:
+#	aircraft.livery.init("Aircraft/Lightning/Models/Liveries",
+#	                     "sim/model/livery/variant");
+#
+#	aircraft.livery.dialog.toggle();
+#
+var livery = {
+	init : func(livery_dir, name_path = "sim/model/livery/name") {
+		me.dir = livery_dir;
+		if (me.dir[-1] != `/`)
+			me.dir ~= "/";
+		me.name_path = name_path;
+		data.add(name_path);
+		me.rescan();
+		me.select(getprop(name_path));
+		me.dialog = gui.Dialog.new("livery-select");
+	},
+	rescan : func {
+		me.data = {};
+		foreach (var file; directory(getprop("/sim/fg-root") ~ "/" ~ me.dir)) {
+			if (substr(file, -4) != ".xml")
+				continue;
+			var n = props.Node.new({ filename : me.dir ~ file });
+			fgcommand("loadxml", n);
+			n = n.getNode("data");
+			var name = n.getNode(me.name_path);
+			if (name == nil)
+				continue;
+			me.data[name.getValue()] = n.getValues();
+		}
+	},
+	select : func(name) {
+		if (contains(me.data, name))
+			props.globals.setValues(me.data[name]);
+	},
+};
+
+
 # steering
 # =============================================================================
 # Class that implements differential braking depending on rudder position.

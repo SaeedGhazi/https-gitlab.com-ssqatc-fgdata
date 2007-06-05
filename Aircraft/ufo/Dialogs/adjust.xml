@@ -31,7 +31,7 @@
 		</button>
 	</group>
 
-	<hrule><whatever/></hrule>
+	<hrule/>
 
 	<nasal>
 		<open>
@@ -60,7 +60,7 @@
 				update : func {
 					var offset = me.sliderN.getValue();
 					var value = me.offsetN.getValue() + me.sliderN.getValue() - me.last_slider;
-					var factor = kbdctrl.getValue() ? 5 : kbdshift.getValue() ? 0.1 : 1;
+					var factor = kbdctrl.getValue() ? 10 : kbdshift.getValue() ? 0.1 : 1;
 					ufo.modelmgr.adjust(me.name, value * factor, 1);  # 1 -> scale with distance
 					me.offsetN.setDoubleValue(0);
 					me.last_slider = offset;

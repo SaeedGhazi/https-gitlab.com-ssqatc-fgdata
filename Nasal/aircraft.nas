@@ -506,51 +506,80 @@ var timer = {
 # livery
 # =============================================================================
 # Class that maintains livery XML files (see English Electric Lightning for an
-# example. The last used livery is saved on exit and restored next time.
+# example). The last used livery is saved on exit and restored next time. Livery
+# files are regular PropertyList XML files whose properties are copied to the
+# main tree (whereby the node types are ignored).
 #
 # SYNOPSIS:
-#	livery.init(<livery-dir> [, <name-path>]);
+#	livery.init(<livery-dir> [, <name-path> [, <sort-path>]]);
 #
 #	<livery-dir> ... directory with livery XML files, relative to $FG_ROOT
-#	<name-path>  ... property under which the livery name is stored in the
-#	                 livery files and the property tree
+#	<name-path>  ... property path to the livery name in the livery files
+#	                 and the property tree (default: /sim/model/livery/name)
+#	<sort-path>  ... property path to the sort criterion (default: same as
+#	                 <name-path> -- that is: alphabetic sorting)
 #
 # EXAMPLE:
 #	aircraft.livery.init("Aircraft/Lightning/Models/Liveries",
-#	                     "sim/model/livery/variant");
+#	                     "sim/model/livery/variant",
+#	                     "sim/model/livery/index");  # optional
 #
 #	aircraft.livery.dialog.toggle();
+#	aircraft.livery.select("OEBH");
+#	aircraft.livery.next();
 #
 var livery = {
-	init : func(livery_dir, name_path = "sim/model/livery/name") {
+	init : func(livery_dir, name_path = "sim/model/livery/name", sort_path = nil) {
 		me.dir = livery_dir;
 		if (me.dir[-1] != `/`)
 			me.dir ~= "/";
 		me.name_path = name_path;
-		data.add(name_path);
+		me.sort_path = sort_path != nil ? sort_path : name_path;
 		me.rescan();
-		me.select(getprop(name_path));
+		aircraft.data.add(name_path);
 		me.dialog = gui.Dialog.new("livery-select");
 	},
 	rescan : func {
-		me.data = {};
+		me.data = [];
 		foreach (var file; directory(getprop("/sim/fg-root") ~ "/" ~ me.dir)) {
 			if (substr(file, -4) != ".xml")
 				continue;
 			var n = props.Node.new({ filename : me.dir ~ file });
 			fgcommand("loadxml", n);
 			n = n.getNode("data");
+
 			var name = n.getNode(me.name_path);
-			if (name == nil)
+			var index = n.getNode(me.sort_path);
+			if (name == nil or index == nil)
 				continue;
-			me.data[name.getValue()] = n.getValues();
+
+			append(me.data, [name.getValue(), index.getValue(), n.getValues()]);
 		}
+		me.data = sort(me.data, func(a, b) {
+			num(a[1]) == nil or num(b[1]) == nil ? cmp(a[1], b[1]) : a[1] - b[1];
+		});
+		me.select(getprop(me.name_path));
 	},
+	# select by index (out-of-bounds indices are wrapped)
+	set : func(i) {
+		i = i < 0 ? size(me.data - 1) : i >= size(me.data) ? 0 : i;
+		props.globals.setValues(me.data[i][2]);
+		me.current = i;
+	},
+	# select by name
 	select : func(name) {
-		if (contains(me.data, name))
-			props.globals.setValues(me.data[name]);
+		forindex (var i; me.data)
+			if (me.data[i][0] == name)
+				me.set(i);
+	},
+	next : func {
+		me.set(me.current + 1);
+	},
+	previous : func {
+		me.set(me.current - 1);
 	},
 };
+
 
 
 # steering

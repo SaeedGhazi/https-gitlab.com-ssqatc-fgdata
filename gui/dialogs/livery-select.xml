@@ -10,9 +10,8 @@
 		<open>
 			var list = cmdarg().getNode("list");
 			list.removeChildren("value");
-			var names = sort(keys(aircraft.livery.data), cmp);
-			forindex (var i; names)
-				list.getChild("value", i, 1).setValue(names[i]);
+			forindex (var i; aircraft.livery.data)
+				list.getChild("value", i, 1).setValue(aircraft.livery.data[i][0]);
 		</open>
 	</nasal>
 

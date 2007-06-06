@@ -386,19 +386,17 @@ var data = {
 	},
 	_save_ : func {
 		size(me.catalog) or return;
-		me.signalN.setBoolValue(1);
-		var tmp = "_-_-_-_-_-_aircraft.Data_-_-_-_-_-_";
 		printlog("info", "saving aircraft data to ", me.path);
-		props.globals.removeChildren(tmp);
-		var root = props.globals.getNode(tmp, 1);
+		me.signalN.setBoolValue(1);
+		var args = props.Node.new({ "filename": me.path });
+		var data = args.getNode("data", 1);
 		foreach (var c; me.catalog) {
 			if (c[0] == `/`)
 				c = substr(c, 1);
 
-			props.copy(props.globals.getNode(c, 1), root.getNode(c, 1));
+			props.copy(props.globals.getNode(c, 1), data.getNode(c, 1));
 		}
-		fgcommand("savexml", props.Node.new({ "filename": me.path, "sourcenode": tmp }));
-		props.globals.removeChildren(tmp);
+		fgcommand("savexml", args);
 	},
 	add : func {
 		foreach (var a; arg) {
@@ -562,7 +560,10 @@ var livery = {
 	},
 	# select by index (out-of-bounds indices are wrapped)
 	set : func(i) {
-		i = i < 0 ? size(me.data - 1) : i >= size(me.data) ? 0 : i;
+		if (i < 0)
+			i = size(me.data - 1);
+		if (i >= size(me.data))
+			i = 0;
 		props.globals.setValues(me.data[i][2]);
 		me.current = i;
 	},

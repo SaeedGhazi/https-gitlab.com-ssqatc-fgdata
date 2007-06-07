@@ -981,7 +981,15 @@ calculated by adding 256 to the GLUT key value in glut.h.
   <name>F3</name>
   <desc>Capture screen.</desc>
   <binding>
-   <command>screen-capture</command>
+   <command>nasal</command>
+   <script>
+     fgcommand("screen-capture");
+     var file = getprop("/sim/last-screenshot");
+     if(file == "")
+         gui.popupTip("Error writing screenshot");
+     else
+         gui.popupTip("Screenshot written to " ~ file);
+   </script>
   </binding>
   <mod-shift>
    <desc>Load panel.</desc>

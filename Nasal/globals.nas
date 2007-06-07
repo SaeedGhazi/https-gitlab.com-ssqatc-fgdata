@@ -4,7 +4,7 @@
 #
 isa = func {
     obj = arg[0]; class = arg[1];
-    if(!contains(obj, "parents")) { return 0; }
+    if(obj == nil or !contains(obj, "parents")) { return 0; }
     foreach(c; obj.parents) {
         if(c == class)     { return 1; }
         elsif(isa(obj, c)) { return 1; }
@@ -19,9 +19,9 @@ isa = func {
 # string, in which case it specifies a path in the global property
 # tree.
 #
-fgcommand = func {
-    if(isa(arg[1], props.Node)) { arg[1] = arg[1]._g }
-    _fgcommand(arg[0], arg[1]);
+fgcommand = func(cmd, node=nil) {
+    if(isa(node, props.Node)) node = node._g;
+    _fgcommand(cmd, node);
 }
 
 ##

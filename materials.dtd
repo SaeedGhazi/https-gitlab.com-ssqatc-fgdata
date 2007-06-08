@@ -10,7 +10,7 @@ properties in materials.xml.
 <!ENTITY % colours "r?, g?, b?, a?">
 
 <!ELEMENT PropertyList (material+)>
-<!ELEMENT material (name+, texture, wrapu?, wrapv?, mipmap?, filtering?, 
+<!ELEMENT material (name+, texture, wrapu?, wrapv?, mipmap?,  
                     xsize?, ysize?,
 		    light-coverage?, ambient?, diffuse?, specular?, emissive?)>
 <!ELEMENT name (#PCDATA)>

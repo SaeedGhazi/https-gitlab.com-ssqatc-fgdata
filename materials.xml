@@ -126,34 +126,29 @@ Shared parameters for various materials.
 <material>
  <name>pa_taxiway</name>
  <texture>Runway/pa_taxiway.rgb</texture>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_tiedown</name>
  <texture>Runway/pa_tiedown.rgb</texture>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_dspl_thresh</name>
  <texture>Runway/pa_dspl_thresh.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_dspl_arrows</name>
  <texture>Runway/pa_dspl_arrows.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_threshold</name>
  <texture>Runway/pa_threshold.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
  <wrapv>false</wrapv>
 </material>
 
@@ -161,273 +156,234 @@ Shared parameters for various materials.
  <name>pa_L</name>
  <texture>Runway/pa_L.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_R</name>
  <texture>Runway/pa_R.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_C</name>
  <texture>Runway/pa_C.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_0l</name>
  <texture>Runway/pa_0l.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_0r</name>
  <texture>Runway/pa_0r.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_1c</name>
  <texture>Runway/pa_1c.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_1l</name>
  <texture>Runway/pa_1l.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_1r</name>
  <texture>Runway/pa_1r.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_11</name>
  <texture>Runway/pa_11.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_2c</name>
  <texture>Runway/pa_2c.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_2l</name>
  <texture>Runway/pa_2l.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_2r</name>
  <texture>Runway/pa_2r.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_3c</name>
  <texture>Runway/pa_3c.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_3l</name>
  <texture>Runway/pa_3l.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_3r</name>
  <texture>Runway/pa_3r.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_4c</name>
  <texture>Runway/pa_4c.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_4r</name>
  <texture>Runway/pa_4r.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_5c</name>
  <texture>Runway/pa_5c.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_5r</name>
  <texture>Runway/pa_5r.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_6c</name>
  <texture>Runway/pa_6c.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_6r</name>
  <texture>Runway/pa_6r.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_7c</name>
  <texture>Runway/pa_7c.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_7r</name>
  <texture>Runway/pa_7r.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_8c</name>
  <texture>Runway/pa_8c.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_8r</name>
  <texture>Runway/pa_8r.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_9c</name>
  <texture>Runway/pa_9c.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_9r</name>
  <texture>Runway/pa_9r.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_tz_three</name>
  <texture>Runway/pa_tz_three.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_aim</name>
  <texture>Runway/pa_aim.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_tz_two_a</name>
  <texture>Runway/pa_tz_two_a.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_tz_two_b</name>
  <texture>Runway/pa_tz_two_b.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_tz_one_a</name>
  <texture>Runway/pa_tz_one_a.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_tz_one_b</name>
  <texture>Runway/pa_tz_one_b.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_centerline</name>
  <texture>Runway/pa_centerline.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pa_rest</name>
  <texture>Runway/pa_rest.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pc_taxiway</name>
  <name>dirt_rwytaxiway</name>
  <texture>Runway/pc_taxiway.rgb</texture>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pc_tiedown</name>
  <name>dirt_rwytiedown</name>
  <texture>Runway/pc_tiedown.rgb</texture>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pc_dspl_thresh</name>
  <texture>Runway/pc_dspl_thresh.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
  <name>pc_dspl_arrows</name>
  <texture>Runway/pc_dspl_arrows.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -436,7 +392,6 @@ Shared parameters for various materials.
  <texture>Runway/pc_threshold.rgb</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -444,7 +399,6 @@ Shared parameters for various materials.
  <name>dirt_rwyL</name>
  <texture>Runway/pc_L.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -452,7 +406,6 @@ Shared parameters for various materials.
  <name>dirt_rwyR</name>
  <texture>Runway/pc_R.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -460,7 +413,6 @@ Shared parameters for various materials.
  <name>dirt_rwyC</name>
  <texture>Runway/pc_C.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -468,7 +420,6 @@ Shared parameters for various materials.
  <name>dirt_rwy0l</name>
  <texture>Runway/pc_0l.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -476,7 +427,6 @@ Shared parameters for various materials.
  <name>dirt_rwy0r</name>
  <texture>Runway/pc_0r.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -484,7 +434,6 @@ Shared parameters for various materials.
  <name>dirt_rwy1c</name>
  <texture>Runway/pc_1c.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -492,7 +441,6 @@ Shared parameters for various materials.
  <name>dirt_rwy1l</name>
  <texture>Runway/pc_1l.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -500,7 +448,6 @@ Shared parameters for various materials.
  <name>dirt_rwy1r</name>
  <texture>Runway/pc_1r.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -508,7 +455,6 @@ Shared parameters for various materials.
  <name>dirt_rwy11</name>
  <texture>Runway/pc_11.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -516,7 +462,6 @@ Shared parameters for various materials.
  <name>dirt_rwy2c</name>
  <texture>Runway/pc_2c.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -524,7 +469,6 @@ Shared parameters for various materials.
  <name>dirt_rwy2l</name>
  <texture>Runway/pc_2l.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -532,7 +476,6 @@ Shared parameters for various materials.
  <name>dirt_rwy2r</name>
  <texture>Runway/pc_2r.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -540,7 +483,6 @@ Shared parameters for various materials.
  <name>dirt_rwy3c</name>
  <texture>Runway/pc_3c.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -548,7 +490,6 @@ Shared parameters for various materials.
  <name>dirt_rwy3l</name>
  <texture>Runway/pc_3l.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -563,7 +504,6 @@ Shared parameters for various materials.
  <name>dirt_rwy4c</name>
  <texture>Runway/pc_4c.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -571,7 +511,6 @@ Shared parameters for various materials.
  <name>dirt_rwy4r</name>
  <texture>Runway/pc_4r.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -579,7 +518,6 @@ Shared parameters for various materials.
  <name>dirt_rwy5c</name>
  <texture>Runway/pc_5c.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -587,7 +525,6 @@ Shared parameters for various materials.
  <name>dirt_rwy5r</name>
  <texture>Runway/pc_5r.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -595,7 +532,6 @@ Shared parameters for various materials.
  <name>dirt_rwy6c</name>
  <texture>Runway/pc_6c.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -603,7 +539,6 @@ Shared parameters for various materials.
  <name>dirt_rwy6r</name>
  <texture>Runway/pc_6r.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -611,7 +546,6 @@ Shared parameters for various materials.
  <name>dirt_rwy7c</name>
  <texture>Runway/pc_7c.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -619,7 +553,6 @@ Shared parameters for various materials.
  <name>dirt_rwy7r</name>
  <texture>Runway/pc_7r.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -627,7 +560,6 @@ Shared parameters for various materials.
  <name>dirt_rwy8c</name>
  <texture>Runway/pc_8c.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -635,7 +567,6 @@ Shared parameters for various materials.
  <name>dirt_rwy8r</name>
  <texture>Runway/pc_8r.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -643,7 +574,6 @@ Shared parameters for various materials.
  <name>dirt_rwy9c</name>
  <texture>Runway/pc_9c.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -651,7 +581,6 @@ Shared parameters for various materials.
  <name>dirt_rwy9r</name>
  <texture>Runway/pc_9r.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -659,7 +588,6 @@ Shared parameters for various materials.
  <name>dirt_rwytz_three</name>
  <texture>Runway/pc_tz_three.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -667,7 +595,6 @@ Shared parameters for various materials.
  <name>dirt_rwyaim</name>
  <texture>Runway/pc_aim.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -675,7 +602,6 @@ Shared parameters for various materials.
  <name>dirt_rwytz_two_a</name>
  <texture>Runway/pc_tz_two_a.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -683,7 +609,6 @@ Shared parameters for various materials.
  <name>dirt_rwytz_two_b</name>
  <texture>Runway/pc_tz_two_b.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -691,7 +616,6 @@ Shared parameters for various materials.
  <name>dirt_rwytz_one_a</name>
  <texture>Runway/pc_tz_one_a.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -699,7 +623,6 @@ Shared parameters for various materials.
  <name>dirt_rwytz_one_b</name>
  <texture>Runway/pc_tz_one_b.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -707,7 +630,6 @@ Shared parameters for various materials.
  <name>dirt_rwycenterline</name>
  <texture>Runway/pc_centerline.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <material>
@@ -715,7 +637,6 @@ Shared parameters for various materials.
  <name>dirt_rwyrest</name>
  <texture>Runway/pc_rest.rgb</texture>
  <wrapu>false</wrapu>
- <filtering>8.</filtering>
 </material>
 
 <!-- Default -->

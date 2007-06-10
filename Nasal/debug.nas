@@ -30,6 +30,11 @@
 #                                      ... calls function with optional args and
 #                                          prints execution time in seconds,
 #                                          prefixed with <label>.
+#
+# CAVE: this file makes extensive use of ANSI color codes. These are
+#       interpreted by UNIX shells and MS Windows with ANSI.SYS extension
+#       installed. If the color codes aren't interpreted correctly, then
+#       set property /sim/startup/terminal-ansi-colors=0
 
 var _c = func {}
 
@@ -171,19 +176,16 @@ var local = func(frame = 0) {
 }
 
 
-var backtrace = func(desc = nil, l = 0) {
-	var v = caller(l);
-	if (v == nil)
-		return;
-
-	if (l == 0) {
-		var d = desc == nil ? "" : " '" ~ desc ~ "'";
-		print("\n" ~ _title("\n### backtrace" ~ d ~ " ###"));
-	} else {
-		print(_section(sprintf("#%-2d called from %s, line %s:", l - 1, v[2], v[3])));
+var backtrace = func(desc = nil) {
+	var d = desc == nil ? "" : " '" ~ desc ~ "'";
+	print("\n" ~ _title("\n### backtrace" ~ d ~ " ###"));
+	for (var i = 1; 1; i += 1) {
+		v = caller(i);
+		if (v == nil)
+			return;
+		print(_section(sprintf("#%-2d called from %s, line %s:", i - 1, v[2], v[3])));
 		dump(v[0]);
 	}
-	backtrace(nil, l + 1);
 }
 var bt = backtrace;
 
@@ -203,7 +205,7 @@ var benchmark = func(label, f, arg...) {
 }
 
 
-var exit = func { fgcommand("exit", props.Node.new()) }
+var exit = func { fgcommand("exit") }
 
 
 if (getprop("/sim/logging/priority") != "alert") {

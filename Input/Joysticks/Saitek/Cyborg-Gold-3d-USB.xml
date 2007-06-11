@@ -112,26 +112,28 @@ ________________________________________________________________________________
 
 	<nasal>
 		<script><![CDATA[
-			self = cmdarg().getParent();
-			data = self.getNode("data");
-			mode = data.getNode("mode");
-			modifier = data.getNode("modifier");
-			f1 = f2 = 0;
-			left_brake = right_brake = 0;
-			trigger = 0;
+			var self = cmdarg().getParent();
+			var data = self.getNode("data");
+			var mode = data.getNode("mode");
+			var modifier = data.getNode("modifier");
+			var f1 = 0;
+			var f2 = 0;
+			var left_brake = 0;
+			var right_brake = 0;
+			var trigger = 0;
 
 			if (props.globals.getNode("/rotors", 0) != nil) {
 				self.getNode("axis[0]/binding/power").setIntValue(1);
 				self.getNode("axis[1]/binding/power").setIntValue(1);
 			}
 
-			kbdshift = props.globals.getNode("/devices/status/keyboard/shift", 1);
-			kbdctrl = props.globals.getNode("/devices/status/keyboard/ctrl", 1);
-			kbdalt = props.globals.getNode("/devices/status/keyboard/alt", 1);
+			var kbdshift = props.globals.getNode("/devices/status/keyboard/shift", 1);
+			var kbdctrl = props.globals.getNode("/devices/status/keyboard/ctrl", 1);
+			var kbdalt = props.globals.getNode("/devices/status/keyboard/alt", 1);
 
-			get_mode = func { modifier.getValue() + mode.getValue() * 4 }
+			var get_mode = func { modifier.getValue() + mode.getValue() * 4 }
 
-			harrier = func {
+			var harrier = func {
 				if (getprop("/sim/aero") == "harrier") {
 					thv = getprop("/controls/engines/engine[0]/mixture");
 					gui.popupTip("Thrust vector " ~ int(thv * 120 - 20 + 0.5));
@@ -296,7 +298,7 @@ ________________________________________________________________________________
 				} elsif (m == 1) {
 					i = !getprop("/controls/gear/tailwheel-lock");
 					setprop("/controls/gear/tailwheel-lock", i);
-					gui.popupTip("Tail Wheel " ~ ["UNLOCKED", "LOCKED"][i]);
+					gui.popupTip("Tail Wheel " ~ (i ? "LOCKED" : "UNLOCKED"));
 				} elsif (m == 2) {
 					setprop("/sim/current-view/view-number", 0);
 					view.resetView();

@@ -208,7 +208,8 @@ $Id$
   <desc>Cycle View</desc>
   <repeatable>false</repeatable>
   <binding>
-   <command>view-cycle</command>
+   <command>nasal</command>
+   <script>view.stepView(1)</script>
   </binding>
  </button>
 

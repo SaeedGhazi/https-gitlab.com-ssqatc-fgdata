@@ -93,7 +93,8 @@
   <button n="1">
     <repeatable>false</repeatable>
     <binding>
-      <command>view-cycle</command>
+      <command>nasal</command>
+      <script>view.stepView(1)</script>
     </binding>
   </button>
   <button n="2">

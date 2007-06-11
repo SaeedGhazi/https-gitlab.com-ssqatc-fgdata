@@ -131,8 +131,8 @@ $Id$
   <desc>External Views</desc>
   <repeatable type="bool">false</repeatable>
   <binding>
-   <command>view-cycle</command>
-   <step type="double">1</step>
+   <command>nasal</command>
+   <script>view.stepView(1)</script>
   </binding>
  </button>
 

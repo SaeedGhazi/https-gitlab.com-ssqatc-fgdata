@@ -166,10 +166,11 @@ $Id$
 
 
  <button n="1">
-  <desc>view-cycle</desc>
+  <desc>Cycle view</desc>
   <repeatable>false</repeatable>
   <binding>
-   <command>view-cycle</command>
+   <command>nasal</command>
+   <script>view.stepView(1)</script>
   </binding>
  </button>
 

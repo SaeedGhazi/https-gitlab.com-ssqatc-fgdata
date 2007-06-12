@@ -24,7 +24,9 @@
 #
 # debug.string(<variable>)             ... returns contents of variable as string
 #
-# debug.load_xml_nasal(<file>)         ... load and run XML embedded Nasal
+# debug.load_nasal(<file> [, <module>])) ... load and run Nasal file (under namespace
+#                                          <module> if defined, or the basename
+#                                          otherwise)
 #
 # debug.benchmark(<label:string>, <func> [<args>])
 #                                      ... calls function with optional args and
@@ -151,9 +153,9 @@ var string = func(o) {
 		return _bracket("[") ~ " " ~ s ~ " " ~ _bracket("]");
 	} elsif (t == "hash") {
 		if (contains(o, "parents") and typeof(o.parents) == "vector"
-				and size(o.parents) == 1 and o.parents[0] == props.Node) {
+				and size(o.parents) == 1 and o.parents[0] == props.Node)
 			return _angle("<") ~ _dump_prop(o) ~ _angle(">");
-		}
+
 		var k = keys(o);
 		var s = "";
 		forindex (var i; k)
@@ -191,7 +193,7 @@ var bt = backtrace;
 
 
 ##
-# Excecutes function f with option arguments and prints execution
+# Excecutes function f with optional arguments and prints execution
 # time in seconds. Examples:
 #
 # var test = func(n) { for (var i = 0; i < n; i +=1) { print(i) }

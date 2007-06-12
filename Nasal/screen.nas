@@ -198,8 +198,7 @@ window = {
 
 var log = nil;
 
-var L = _setlistener("/sim/signals/nasal-dir-initialized", func {
-	removelistener(L);
+_setlistener("/sim/signals/nasal-dir-initialized", func {
 	setlistener("/sim/gui/current-style", func {
 		var theme = getprop("/sim/gui/current-style");
 		theme_font = getprop("/sim/gui/style[" ~ theme ~ "]/fonts/message-display/name");
@@ -255,8 +254,7 @@ var callsign = nil;
 var atclast = nil;
 var listener = {};
 
-var M = _setlistener("/sim/signals/nasal-dir-initialized", func {
-	removelistener(M);
+_setlistener("/sim/signals/nasal-dir-initialized", func {
 	# set /sim/screen/nomap=true to prevent default message mapping
 	var nomap = getprop("/sim/screen/nomap");
 	if (nomap != nil and nomap) {

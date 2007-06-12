@@ -542,7 +542,7 @@ var livery = {
 		foreach (var file; directory(getprop("/sim/fg-root") ~ "/" ~ me.dir)) {
 			if (substr(file, -4) != ".xml")
 				continue;
-			var n = props.Node.new({ filename : me.dir ~ file });
+			var n = props.Node.new({ filename : getprop("/sim/fg-root") ~ "/" ~ me.dir ~ file });
 			fgcommand("loadxml", n);
 			n = n.getNode("data");
 
@@ -713,6 +713,7 @@ var autotrim = {
 };
 
 
+
 # HUD control class to handle both HUD implementations
 # ==============================================================================
 #
@@ -763,8 +764,8 @@ var HUD = {
 			me.currentN = me.vis0N;
 		}
 	},
-	oldinit1 : func { fgcommand("hud-init", props.Node.new()) },
-	oldinit2 : func { fgcommand("hud-init2", props.Node.new()) },
+	oldinit1 : func { fgcommand("hud-init") },
+	oldinit2 : func { fgcommand("hud-init2") },
 	is_active : func { me.vis0N.getValue() or me.vis1N.getValue() },
 };
 

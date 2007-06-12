@@ -242,7 +242,7 @@ if (getprop("/sim/logging/priority") != "alert") {
 #
 var load_xml_nasal = func(file) {
 	var n = props.globals.getNode("/tmp/nasal", 1);
-	n.getNode("filename", 1).setValue(file);
+	n.getNode("filename", 1).setValue(getprop("/sim/fg-root") ~ "/" ~ file);
 	n.getNode("targetnode", 1).setValue(n.getPath());
 	if (n.getNode("module", 0) == nil) {
 		var basename = split(".", split("/", file)[-1])[0];

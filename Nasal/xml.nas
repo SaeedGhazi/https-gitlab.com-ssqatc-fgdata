@@ -1,7 +1,6 @@
 # XML parser that allows to parse XML files that don't follow the FlightGear standard by
 # storing information in attributes, like the crappy Traffic Manager and AI definition
-# files. Currently only reading from a string is supported, and the XML 1.0 standard
-# isn't fully implemented.
+# files.The XML 1.0 standard isn't fully implemented.
 #
 # Synopsis:  xml.process_string(<xml-data:string>, <action:hash>);
 #            xml.process_file(<filepath>, <action:hash>);

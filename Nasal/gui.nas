@@ -191,7 +191,7 @@ Dialog = {
             me.close();
 
         me.prop.removeChildren();
-        fgcommand("loadxml", props.Node.new({"filename": me.path,
+        fgcommand("loadxml", props.Node.new({"filename": getprop("/sim/fg-root") ~ "/" ~ me.path,
                 "targetnode": me.prop.getPath()}));
         var n = me.prop.getNode("name");
         if (n == nil)
@@ -301,7 +301,7 @@ nextStyle = func {
         curr = 0;
     }
     setprop("/sim/gui/current-style", curr);
-    fgcommand("gui-redraw", props.Node.new());
+    fgcommand("gui-redraw");
 }
 
 

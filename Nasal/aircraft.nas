@@ -539,10 +539,11 @@ var livery = {
 	},
 	rescan : func {
 		me.data = [];
-		foreach (var file; directory(getprop("/sim/fg-root") ~ "/" ~ me.dir)) {
+		var path = getprop("/sim/fg-root") ~ "/" ~ me.dir;
+		foreach (var file; directory(path)) {
 			if (substr(file, -4) != ".xml")
 				continue;
-			var n = props.Node.new({ filename : getprop("/sim/fg-root") ~ "/" ~ me.dir ~ file });
+			var n = props.Node.new({ filename : path ~ file });
 			fgcommand("loadxml", n);
 			n = n.getNode("data");
 

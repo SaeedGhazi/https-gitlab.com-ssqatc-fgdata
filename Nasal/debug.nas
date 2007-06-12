@@ -216,42 +216,27 @@ if (getprop("/sim/logging/priority") != "alert") {
 
 
 ##
-# Loads embedded Nasal from an XML file into a Nasal namespace.
-# The namespace is by default the file's basename. Optionally,
-# a module can be defined in a <module> entry. The file name
-# doesn't have to carry an *.xml extension. It may even be
-# desirable to use *.nas, so that editors pick up Nasal syntax
-# coloring.
+# Loads Nasal file into namespace and executes it. The namespace
+# (module name) is taken from the optional second argument, or
+# derived from the Nasal file's name.
 #
-# Usage:   debug.load_xml_nasal(<filename>);
+# Usage:   debug.load_nasal(<filename> [, <modulename>]);
 #
 # Example:
 #
-#   debug.load_xml_nasal("Aircraft/mine/test.nas");
+#   debug.load_nasal(getprop("/sim/fg-root") ~ "/Local/test.nas");
+#   debug.load_nasal("/tmp/foo.nas", "test");
 #
-#   contents of test.nas:
-#
-#       <PropertyList>
-#           <module>test</module>    <!-- optional -->
-#           <script><![CDATA[
-#
-#       print("I'm being reloaded.");
-#
-#           ]]></script>
-#       </PropertyList>
-#
-var load_xml_nasal = func(file) {
-	var n = props.globals.getNode("/tmp/nasal", 1);
-	n.getNode("filename", 1).setValue(getprop("/sim/fg-root") ~ "/" ~ file);
-	n.getNode("targetnode", 1).setValue(n.getPath());
-	if (n.getNode("module", 0) == nil) {
-		var basename = split(".", split("/", file)[-1])[0];
-		n.getNode("module", 1).setValue(basename);
-	}
-	fgcommand("loadxml", n);
-	fgcommand("nasal", n);
-}
+var load_nasal = func(file, module = nil) {
+	if (module == nil)
+		module = split(".", split("/", file)[-1])[0];
 
+	if (!contains(globals, module))
+		globals[module] = {};
+
+	printlog("info", "loading ", file, " into namespace ", module);
+	call(compile(io.readfile(file), file), nil, nil, globals[module]);
+}
 
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {

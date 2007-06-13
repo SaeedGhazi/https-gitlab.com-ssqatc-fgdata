@@ -25,12 +25,14 @@ var ifmts = {dir:4, reg:8, lnk:10, sock:12, fifo:1, blk:6, chr:2};
 foreach(fmt; keys(ifmts))
     caller(0)[0]["is" ~ fmt] = _gen_ifmt_test(ifmts[fmt]);
 
-# Removes trailing slashes, emtpy and "." elements, and expands
-# all ".." elements.
-var fixpath = func(d) {
-    while(size(d) and d[0] == `/`) d = substr(d, 1);
-    while(size(d) and d[size(d) - 1] == `/`) d = substr(d, 0, size(d) - 1);
-
+# Removes superfluous slashes, emtpy and "." elements, expands
+# all ".." elements, and turns all backslashes into slashes.
+var fixpath = func(path) {
+    var d = "";
+    for(var i = 0; i < size(path); i += 1) {
+        if(path[i] == `\\`) d ~= "/";
+        else d ~= chr(path[i]);
+    }
     var stack = [];
     foreach(var e; split("/", d)) {
         if(e == "." or e == "") continue;
@@ -38,7 +40,7 @@ var fixpath = func(d) {
         else append(stack, e);
     }
     if(!size(stack)) return "/";
-    var path = "";
+    path = "";
     foreach(var s; stack) path ~= "/" ~ s;
     return path;
 }

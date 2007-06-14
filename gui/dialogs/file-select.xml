@@ -62,7 +62,7 @@
 
 		<input>
 			<name>input</name>
-			<pref-width>280</pref-width>
+			<pref-width>230</pref-width>
 			<property>/sim/gui/dialogs/file-select/selection</property>
 			<live>1</live>
 			<binding>
@@ -78,7 +78,7 @@
 		<button>
 			<legend>OK</legend>
 			<live>1</live>
-			<pref-width>150</pref-width>
+			<pref-width>200</pref-width>
 			<default>true</default>
 			<binding>
 				<command>dialog-apply</command>
@@ -86,9 +86,6 @@
 			<binding>
 				<command>nasal</command>
 				<script>ok()</script>
-			</binding>
-			<binding>
-				<command>dialog-close</command>
 			</binding>
 		</button>
 	</group>
@@ -115,7 +112,6 @@
 
 			var kbdctrl = props.globals.getNode("/devices/status/keyboard/ctrl", 1);
 			var kbdshift = props.globals.getNode("/devices/status/keyboard/shift", 1);
-			var root = getprop("/sim/fg-root");
 			var current = { dir : "", file : "" };
 
 			var squeeze = func(s, n) {
@@ -123,25 +119,27 @@
 			}
 
 			var update = func(d) {
-				dir.setValue(d);
-				title.setValue(squeeze(d, 45));
-				list.removeChildren("value");
-				var dents = directory(current.dir);
-				if (dents == nil)
-					return;
+				var entries = directory(d);
+				if (entries == nil)  # dir doesn't exist or no permissions
+					return 0;
+
 				var files = [];
 				var dirs = [];
 				var hide = !show_hidden.getValue();
-				foreach (var e; dents) {
-					if (e == "." or e == "..") {
-						if (current.dir != "/")
+				foreach (var e; entries) {
+					if (e == ".") {
+						append(dirs, e);
+						continue;
+					}
+					if (e == "..") {
+						if (d != "/")
 							append(dirs, e);
 						continue;
 					}
 					if (hide and e[0] == `.`)
 						continue;
 
-					var stat = io.stat(current.dir ~ "/" ~ e);
+					var stat = io.stat(d ~ "/" ~ e);
 					if (stat == nil)  # dead link
 						continue;
 
@@ -150,9 +148,15 @@
 					else
 						append(files, e);
 				}
+
+				list.removeChildren("value");
 				var entries = sort(dirs, cmp) ~ sort(files, cmp);
 				forindex (var i; entries)
 					list.getChild("value", i, 1).setValue(entries[i]);
+
+				dir.setValue(d);
+				title.setValue(squeeze(d, 45));
+				return 1;
 			}
 
 			var select = func {
@@ -165,7 +169,7 @@
 						show_hidden.setBoolValue(!show_hidden.getValue());
 				} elsif (e == "..") {
 					if (kbdctrl.getValue())
-						new = root;
+						new = getprop("/sim/fg-root");
 					elsif (kbdshift.getValue())
 						new = getprop("/sim/fg-home");
 					else
@@ -177,7 +181,9 @@
 					gui.dialog_update(dlgname, "input");
 				}
 				if (new != nil) {
-					update(current.dir = io.fixpath(new));
+					var p = io.fixpath(new);
+					if (update(p))
+						current.dir = p;
 					selection.setValue("");
 					gui.dialog_update(dlgname, "list", "input");
 				}
@@ -195,8 +201,12 @@
 
 			var ok = func {
 				input();
+				var p = io.fixpath(current.dir ~ "/" ~ current.file);
+				var stat = io.stat(p);
+				if (stat == nil)
+					return;
+				path.setValue(io.isdir(stat[2]) ? p ~ "/" : p);
 				file.setValue(current.file);
-				path.setValue(current.dir ~ "/" ~ current.file);
 				close();
 			}
 
@@ -205,15 +215,11 @@
 				op = "OK";
 			self.getNode("group[1]/button/legend").setValue(op);
 
-			current.dir = (var d = dir.getValue()) != nil and d != "" ? d : root;
+			current.dir = (var d = dir.getValue()) != nil and d != "" ? d : getprop("/sim/fg-root");
 			current.file = (var d = file.getValue()) != nil and d != "" ? d : "";
 			gui.dialog_update(dlgname, "input");
 			update(io.fixpath(current.dir));
+			title.setValue(current.dir);
 		</open>
-
-		<close>
-			operation.setValue("");
-			selection.setValue("");
-		</close>
 	</nasal>
 </PropertyList>

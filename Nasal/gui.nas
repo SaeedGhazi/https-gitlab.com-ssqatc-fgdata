@@ -151,8 +151,12 @@ Widget = {
 #
 # SYNOPSIS:
 # (B) Dialog.new(<dialog-name>);   ... use dialog from $FG_ROOT/gui/dialogs/
-# (A) Dialog.new(<prop>, <path>);  ... load aircraft specific dialog from
-#                                      <path> under property <prop>
+#
+# (A) Dialog.new(<prop>, <path> [, <dialog-name>]);
+#                                  ... load aircraft specific dialog from
+#                                      <path> under property <prop> and under
+#                                      name <dialog-name>; if no name is given,
+#                                      then it's taken from the XML dialog
 #
 #         prop        ... target node (name must be "dialog")
 #         path        ... file path relative to $FG_ROOT
@@ -169,17 +173,18 @@ Widget = {
 #     livery_dialog.toggle();
 #
 Dialog = {
-    new : func(prop, path = nil) {
+    new : func(prop, path = nil, name = nil) {
         var m = { parents : [Dialog] };
         m.state = 0;
+        m.name = name;
         if (path == nil) { # global dialog in $FG_ROOT/gui/dialogs/
             m.prop = props.Node.new({ "dialog-name" : prop });
         } else {           # aircraft dialog with given path
             m.path = path;
-            m.prop = isa(props.Node, prop) ? prop : props.globals.getNode(prop, 1);
-            if (m.prop.getName() != "dialog") {
+            m.prop = isa(prop, props.Node) ? prop : props.globals.getNode(prop, 1);
+            if (m.prop.getName() != "dialog")
                 die("Dialog class: node name must end with '/dialog'");
-            }
+
             m.listener = setlistener("/sim/signals/reinit-gui", func { m.load() }, 1);
         }
         return m;
@@ -193,11 +198,16 @@ Dialog = {
         me.prop.removeChildren();
         fgcommand("loadxml", props.Node.new({"filename": getprop("/sim/fg-root") ~ "/" ~ me.path,
                 "targetnode": me.prop.getPath()}));
+
         var n = me.prop.getNode("name");
         if (n == nil)
             die("Dialog class: XML dialog must have <name>");
 
-        me.name = n.getValue();
+        if (me.name == nil)
+            me.name = n.getValue();
+        else
+            n.setValue(me.name);
+
         me.prop.getNode("dialog-name", 1).setValue(me.name);
         fgcommand("dialog-new", me.prop);
         if (state)
@@ -226,9 +236,50 @@ Dialog = {
 
 
 ##
+# Open file select dialog (subclass of the Dialog class).
+#
+# SYNOPSIS: FileSelector.new(<callback> [, <oper> [, <dir> [, <file> [, <hidden>]]])
+#
+#         callback ... callback function that gets return value as cmdarg().getValue()
+#         oper     ... string that describes purpose (put on the "OK" button)
+#         dir      ... starting dir ($FG_ROOT if unset)
+#         file     ... pre-selected default file name
+#         hidden   ... flag that decids whether UNIX dotfiles should be shown (1) or not (0)
+#
+# EXAMPLE:
+#
+#     var report = func { print("file ", cmdarg().getValue(), " selected") }
+#     var selector = gui.FileSelector(report, "Save Flight", "/tmp", "flight.sav");
+#     selector.open();   # see the Dialog class for other methods
+#
+var FileSelector = {
+    new : func(callback, operation = "OK", dir = "", file = "", show_hidden = 0) {
+        var name = "file-select-" ~ int(1e9 * rand());
+        var data = props.globals.getNode("/sim/gui/dialogs/" ~ name, 1);
+        var m = Dialog.new(data.getNode("dialog", 1), "gui/dialogs/file-select.xml", name);
+        m.parents = [FileSelector, Dialog];
+        data.getNode("operation", 1).setValue(operation);
+        data.getNode("directory", 1).setValue(dir);
+        data.getNode("selection", 1).setValue(file);
+        data.getNode("show-hidden", 1).setBoolValue(show_hidden);
+        m.cblistener = setlistener(data.getNode("path", 1), callback);
+        FileSelector.instance[name] = m;
+        return m;
+    },
+    del : func {
+        me.close();
+        delete(me.instance, me.name);
+        removelistener(me.cblistener);
+        me.prop.getParent().removeChild(me.prop.getName(), me.prop.getIndex());
+    },
+    instance : {},
+};
+
+
+##
 # Open property browser with given target path.
 #
-property_browser = func(dir = "/") {
+var property_browser = func(dir = "/") {
     var dlgname = "property-browser";
     foreach (var module; keys(globals)) {
         if (find("__dlg:" ~ dlgname, module) == 0) {
@@ -248,9 +299,8 @@ property_browser = func(dir = "/") {
 settimer(func {
     foreach (var b; props.globals.getChildren("browser")) {
         var path = b.getValue();
-        if (path != nil and size(path)) {
+        if (path != nil and size(path))
             property_browser(path);
-        }
     }
     props.globals.removeChildren("browser");
 }, 0);

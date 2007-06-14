@@ -87,6 +87,9 @@
 				<command>nasal</command>
 				<script>ok()</script>
 			</binding>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
 		</button>
 	</group>
 
@@ -194,9 +197,8 @@
 			}
 
 			var close = func {
-				if (contains(globals.gui, "file_selector")
-						and contains(gui.file_selector.instance, dlgname))
-					gui.file_selector.instance[dlgname].close();
+				var err = [];
+				call(func { gui.FileSelector.instance[dlgname].close() }, nil, err);
 			}
 
 			var ok = func {

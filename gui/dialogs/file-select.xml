@@ -198,7 +198,7 @@
 
 			var close = func {
 				var err = [];
-				call(func { gui.FileSelector.instance[dlgname].close() }, nil, err);
+				call(func { gui.Dialog.instance[dlgname].close() }, nil, err);
 			}
 
 			var ok = func {

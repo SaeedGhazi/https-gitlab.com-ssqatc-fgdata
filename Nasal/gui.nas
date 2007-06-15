@@ -187,7 +187,7 @@ Dialog = {
 
             m.listener = setlistener("/sim/signals/reinit-gui", func { m.load() }, 1);
         }
-        return m;
+        return Dialog.instance[m.name] = m;
     },
     # doesn't need to be called explicitly, but can be used to force a reload
     load : func {
@@ -232,11 +232,12 @@ Dialog = {
     is_open : func {
         me.state;
     },
+    instance : {},
 };
 
 
 ##
-# Open file select dialog (subclass of the Dialog class).
+# FileSelector class (derived from Dialog class).
 #
 # SYNOPSIS: FileSelector.new(<callback> [, <oper> [, <dir> [, <file> [, <hidden>]]])
 #
@@ -249,7 +250,7 @@ Dialog = {
 # EXAMPLE:
 #
 #     var report = func { print("file ", cmdarg().getValue(), " selected") }
-#     var selector = gui.FileSelector(report, "Save Flight", "/tmp", "flight.sav");
+#     var selector = gui.FileSelector.new(report, "Save Flight", "/tmp", "flight.sav");
 #     selector.open();   # see the Dialog class for other methods
 #
 var FileSelector = {
@@ -263,7 +264,6 @@ var FileSelector = {
         data.getNode("selection", 1).setValue(file);
         data.getNode("show-hidden", 1).setBoolValue(show_hidden);
         m.cblistener = setlistener(data.getNode("path", 1), callback);
-        FileSelector.instance[name] = m;
         return m;
     },
     del : func {
@@ -272,7 +272,6 @@ var FileSelector = {
         removelistener(me.cblistener);
         me.prop.getParent().removeChild(me.prop.getName(), me.prop.getIndex());
     },
-    instance : {},
 };
 
 

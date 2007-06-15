@@ -52,7 +52,7 @@
     <name>groundspeed</name>
     <type>float</type>
     <format>GS=%04.1f</format>
-    <node>/velocities/mach</node>
+    <node>/velocities/groundspeed-kt</node>
    </chunk>
 
    <chunk>

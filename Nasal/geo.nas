@@ -91,18 +91,18 @@ var Coord = {
 	},
 	_cupdate : func {
 		me._cdirty or return;
-		var rad = ERAD + me._alt;
-		var cosphi = cos(me._lat) * rad;
-		me._x = cosphi * cos(me._lon);
-		me._y = cosphi * sin(me._lon);
-		me._z = sin(me._lat) * rad;
+		var xyz = geodtocart(me._lat * R2D, me._lon * R2D, me._alt);
+		me._x = xyz[0];
+		me._y = xyz[1];
+		me._z = xyz[2];
 		me._cdirty = 0;
 	},
 	_pupdate : func {
 		me._pdirty or return;
-		me._lat = atan2(me._z, sqrt(me._x * me._x + me._y * me._y));
-		me._lon = atan2(me._y, me._x);
-		me._alt = sqrt(me._x * me._x + me._y * me._y + me._z * me._z) - ERAD;
+		var lla = carttogeod(me._x, me._y, me._z);
+		me._lat = lla[0] * D2R;
+		me._lon = lla[1] * D2R;
+		me._alt = lla[2];
 		me._pdirty = 0;
 	},
 

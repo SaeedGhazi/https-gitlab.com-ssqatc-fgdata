@@ -954,6 +954,9 @@ Started September 2000 by David Megginson, david@megginson.com
   <vacuum>
    <serviceable type="bool" archive="y">true</serviceable>
   </vacuum>
+  <refuel>
+   <serviceable type="bool" archive="y">true</serviceable>
+  </refuel>
  </systems>
 
  <autopilot>

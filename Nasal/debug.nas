@@ -33,6 +33,9 @@
 #                                          prints execution time in seconds,
 #                                          prefixed with <label>.
 #
+# debug.printerror(<err-vector>)       ... prints error vector as set by call()
+#
+#
 # CAVE: this file makes extensive use of ANSI color codes. These are
 #       interpreted by UNIX shells and MS Windows with ANSI.SYS extension
 #       installed. If the color codes aren't interpreted correctly, then
@@ -196,9 +199,9 @@ var bt = backtrace;
 # Excecutes function f with optional arguments and prints execution
 # time in seconds. Examples:
 #
-# var test = func(n) { for (var i = 0; i < n; i +=1) { print(i) }
-# debug.benchmark("test()/1", test, 10);
-# debug.benchmark("test()/2", func { test(10) });
+#     var test = func(n) { for (var i = 0; i < n; i +=1) { print(i) }
+#     debug.benchmark("test()/1", test, 10);
+#     debug.benchmark("test()/2", func { test(10) });
 #
 var benchmark = func(label, f, arg...) {
 	var start = systime();
@@ -208,6 +211,23 @@ var benchmark = func(label, f, arg...) {
 
 
 var exit = func { fgcommand("exit") }
+
+
+# print error vector as set by call(). By using call() one can execute
+# code that catches "exceptions" (by a die() call or errors). The Nasal
+# code doesn't abort in this case. Example:
+#
+#     call(func { possibly_buggy() }, nil, var err = []);
+#     debug.printerror(err);
+#
+var printerror = func(err) {
+	if (!size(err))
+		return;
+
+	print(sprintf("%s at %s line %d", err[0], err[1], err[2]));
+	for (var i = 3; i < size(err); i += 2)
+		print(sprintf("  called from %s line %d", err[i], err[i + 1]));
+}
 
 
 if (getprop("/sim/logging/priority") != "alert") {
@@ -226,8 +246,8 @@ if (getprop("/sim/logging/priority") != "alert") {
 #
 # Example:
 #
-#   debug.load_nasal(getprop("/sim/fg-root") ~ "/Local/test.nas");
-#   debug.load_nasal("/tmp/foo.nas", "test");
+#     debug.load_nasal(getprop("/sim/fg-root") ~ "/Local/test.nas");
+#     debug.load_nasal("/tmp/foo.nas", "test");
 #
 var load_nasal = func(file, module = nil) {
 	if (module == nil)

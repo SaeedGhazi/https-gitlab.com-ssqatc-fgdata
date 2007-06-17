@@ -148,14 +148,13 @@
 			var kbdctrl = props.globals.getNode("/devices/status/keyboard/ctrl", 1);
 			var printf = func { print(call(sprintf, arg)) }
 			var edit = dlg.getNode("edit", 1);
-			if (!contains(globals, "__nasal_console")) {
+			if (!contains(globals, "__nasal_console"))
 				globals["__nasal_console"] = {};
-			}
+
 			var locals = globals["__nasal_console"];
 			var numtabs = size(dlg.getChildren("code"));
-			if (!numtabs) {
+			if (!numtabs)
 				numtabs = 10;
-			}
 
 			var dump = func {
 				gui.dialog_apply("nasal-console", "editfield");
@@ -172,11 +171,12 @@
 			}
 
 			var execute = func(what = nil) {
-				var tag = "&lt;nasal-console>";
+				var num = what != nil ? what.getIndex() : active;
+				var tag = "&lt;nasal-console/#" ~ num ~ ">";
 				var err = [];
-				if (what == nil) {
+				if (what == nil)
 					what = edit;
-				}
+
 				var f = call(func { compile(what.getValue(), tag) }, nil, nil, nil, err);
 				if (size(err)) {
 					print(tag ~ ": " ~ err[0]);
@@ -184,39 +184,33 @@
 				}
 				f = bind(f, globals);
 				call(f, nil, nil, locals, err);
-				if (size(err)) {
-					printf("%s at %s line %d", err[0], err[1], err[2]);
-					for (var i = 3; i &lt; size(err); i += 2) {
-						printf("  called from %s line %d", err[i], err[i + 1]);
-					}
-				}
+				debug.printerror(err);
 			}
 
 			var tabs = cmdarg().getNode("group[1]");
 			var select = func(which, init = 0) {
 				if (active) { # false in help mode
 					dlg.getNode("active").setIntValue(active);
-					if (!init) {
+					if (!init)
 						dlg.getChild("code", active).setValue(screen.trim(edit.getValue()));
-					}
 				}
 				if (kbdctrl.getValue()) {
 					execute(dlg.getChild("code", which));
 					return;
 				}
 				active = which;
-				foreach (var c; dlg.getChildren("tab-down")) {
+				foreach (var c; dlg.getChildren("tab-down"))
 					c.setBoolValue(c.getIndex() == active);
-				}
+
 				dlg.getNode("active").setIntValue(active = which);
 				edit.setValue(dlg.getChild("code", active).getValue());
 			}
 
 			var help = func {
 				active = 0;
-				foreach (var c; dlg.getChildren("tab-down")) {
+				foreach (var c; dlg.getChildren("tab-down"))
 					c.setBoolValue(0);
-				}
+
 				edit.setValue("Keys:\n"
 					~ "  tab ... leave edit mode (visible text cursor)\n"
 					~ "  return ... execute active code\n"
@@ -251,9 +245,9 @@
 
 			edit.setValue("");
 			var active = dlg.getNode("active", 1).getValue();
-			if (active == nil) {
+			if (active == nil)
 				active = 1;
-			}
+
 			select(active, 1);
 		</open>
 	</nasal>

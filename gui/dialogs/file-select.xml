@@ -14,11 +14,10 @@
 
 	<group>
 		<layout>hbox</layout>
-		<empty><whatever/></empty>
+		<empty><stretch>1</stretch></empty>
 
 		<text>
-			<property>/sim/gui/dialogs/file-select/title</property>
-			<live>1</live>
+			<label>Select File</label>
 		</text>
 
 		<empty><stretch>1</stretch></empty>
@@ -42,6 +41,21 @@
 
 	<hrule/>
 
+	<input>
+		<name>dir-input</name>
+		<pref-width>442</pref-width>
+		<property>/sim/gui/dialogs/file-select/directory</property>
+		<live>1</live>
+		<binding>
+			<command>dialog-apply</command>
+			<object-name>dir-input</object-name>
+		</binding>
+		<binding>
+			<command>nasal</command>
+			<script>dir_input()</script>
+		</binding>
+	</input>
+
 	<list>
 		<name>list</name>
 		<halign>fill</halign>
@@ -61,17 +75,17 @@
 		<layout>hbox</layout>
 
 		<input>
-			<name>input</name>
+			<name>file-input</name>
 			<pref-width>230</pref-width>
 			<property>/sim/gui/dialogs/file-select/selection</property>
 			<live>1</live>
 			<binding>
 				<command>dialog-apply</command>
-				<object-name>input</object-name>
+				<object-name>file-input</object-name>
 			</binding>
 			<binding>
 				<command>nasal</command>
-				<script>input()</script>
+				<script>file_input()</script>
 			</binding>
 		</input>
 
@@ -99,19 +113,19 @@
 			var list = self.getNode("list");
 
 			var dlgname = self.getNode("name").getValue();
-			self.getNode("group/text/property").setValue("/sim/gui/dialogs/" ~ dlgname ~ "/title");
+			self.getNode("input/property").setValue("/sim/gui/dialogs/" ~ dlgname ~ "/directory");
 			self.getNode("list/property").setValue("/sim/gui/dialogs/" ~ dlgname ~ "/selection");
 			self.getNode("group[1]/input/property").setValue("/sim/gui/dialogs/" ~ dlgname ~ "/selection");
 
 			var dlg = props.globals.getNode("/sim/gui/dialogs/" ~ dlgname, 1);
 			var selection = dlg.getNode("selection", 1);
-			var operation = dlg.getNode("operation", 1);
 			var title = dlg.getNode("title", 1);
+			var button = dlg.getNode("button", 1);
 			var dir = dlg.getNode("directory", 1);
 			var file = dlg.getNode("file", 1);
 			var path = dlg.getNode("path", 1);
-			var show_hidden = dlg.getNode("show-hidden", 1);
-			show_hidden.setBoolValue(show_hidden.getValue());
+			var dotfiles = dlg.getNode("dotfiles", 1);
+			dotfiles.setBoolValue(dotfiles.getValue());
 
 			var kbdctrl = props.globals.getNode("/devices/status/keyboard/ctrl", 1);
 			var kbdshift = props.globals.getNode("/devices/status/keyboard/shift", 1);
@@ -128,7 +142,7 @@
 
 				var files = [];
 				var dirs = [];
-				var hide = !show_hidden.getValue();
+				var hide = !dotfiles.getValue();
 				foreach (var e; entries) {
 					if (e == ".") {
 						append(dirs, e);
@@ -158,7 +172,7 @@
 					list.getChild("value", i, 1).setValue(entries[i]);
 
 				dir.setValue(d);
-				title.setValue(squeeze(d, 45));
+				gui.dialog_apply("dir-input", "list");
 				return 1;
 			}
 
@@ -169,7 +183,7 @@
 				if (e == ".") {
 					new = current.dir;
 					if (kbdctrl.getValue())
-						show_hidden.setBoolValue(!show_hidden.getValue());
+						dotfiles.setBoolValue(!dotfiles.getValue());
 				} elsif (e == "..") {
 					if (kbdctrl.getValue())
 						new = getprop("/sim/fg-root");
@@ -181,28 +195,36 @@
 					new = current.dir ~ "/" ~ e;
 				} else {
 					current.file = e;
-					gui.dialog_update(dlgname, "input");
+					gui.dialog_update(dlgname, "file-input");
 				}
 				if (new != nil) {
 					var p = io.fixpath(new);
 					if (update(p))
 						current.dir = p;
 					selection.setValue("");
-					gui.dialog_update(dlgname, "list", "input");
+					gui.dialog_update(dlgname, "list", "file-input"); ## apply?
 				}
 			}
 
-			var input = func {
+			var file_input = func {
 				current.file = selection.getValue();
 			}
 
+			var dir_input = func {
+				print("dir input");
+				var p = io.fixpath(dir.getValue());
+				if (update(p))
+					current.dir = p;
+				gui.dialog_update(dlgname, "list");
+			}
+
 			var close = func {
-				var err = [];
-				call(func { gui.Dialog.instance[dlgname].close() }, nil, err);
+				call(func { gui.Dialog.instance[dlgname].close() }, nil, var err = []);
 			}
 
 			var ok = func {
-				input();
+				dir_input();
+				file_input();
 				var p = io.fixpath(current.dir ~ "/" ~ current.file);
 				var stat = io.stat(p);
 				if (stat == nil)
@@ -212,16 +234,21 @@
 				close();
 			}
 
-			var op = operation.getValue();
+			var op = button.getValue();
 			if (op == nil or op == "")
 				op = "OK";
 			self.getNode("group[1]/button/legend").setValue(op);
 
+			var t = title.getValue();
+			if (t == nil or t == "")
+				t = "Select File";
+			self.getNode("group[0]/text/label").setValue(t);
+
 			current.dir = (var d = dir.getValue()) != nil and d != "" ? d : getprop("/sim/fg-root");
 			current.file = (var d = file.getValue()) != nil and d != "" ? d : "";
-			gui.dialog_update(dlgname, "input");
+			gui.dialog_update(dlgname, "file-input"); ## dir-input ?
 			update(io.fixpath(current.dir));
-			title.setValue(current.dir);
+			dir.setValue(current.dir);
 		</open>
 	</nasal>
 </PropertyList>

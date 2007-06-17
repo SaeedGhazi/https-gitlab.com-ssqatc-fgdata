@@ -239,30 +239,39 @@ Dialog = {
 ##
 # FileSelector class (derived from Dialog class).
 #
-# SYNOPSIS: FileSelector.new(<callback> [, <oper> [, <dir> [, <file> [, <hidden>]]])
+# SYNOPSIS: FileSelector.new(<callback> [, <title> [, <button> [, <dir> [, <file> [, <dotfiles>]]]])
 #
 #         callback ... callback function that gets return value as cmdarg().getValue()
-#         oper     ... string that describes purpose (put on the "OK" button)
+#         title    ... dialog title
+#         button   ... button text ("OK" by default, but should say "Save", "Load", etc.))
 #         dir      ... starting dir ($FG_ROOT if unset)
 #         file     ... pre-selected default file name
-#         hidden   ... flag that decids whether UNIX dotfiles should be shown (1) or not (0)
+#         dotfiles ... flag that decids whether UNIX dotfiles should be shown (1) or not (0)
 #
 # EXAMPLE:
 #
 #     var report = func { print("file ", cmdarg().getValue(), " selected") }
-#     var selector = gui.FileSelector.new(report, "Save Flight", "/tmp", "flight.sav");
+#     var selector = gui.FileSelector.new(report, "Save Flight", "Save", "/tmp", "flight.sav");
 #     selector.open();   # see the Dialog class for other methods
 #
 var FileSelector = {
-    new : func(callback, operation = "OK", dir = "", file = "", show_hidden = 0) {
-        var name = "file-select-" ~ int(1e9 * rand());
-        var data = props.globals.getNode("/sim/gui/dialogs/" ~ name, 1);
+    new : func(callback, title = "File Selection", button = "OK",
+            dir = "", file = "", dotfiles = 0) {
+        var name = "file-select-";
+        var data = props.globals.getNode("/sim/gui/dialogs/", 1);
+        var i = nil;
+        for (i = 1; 1; i += 1)
+            if (data.getNode(name ~ i, 0) == nil)
+                break;
+        data = data.getNode(name ~= i, 1);
         var m = Dialog.new(data.getNode("dialog", 1), "gui/dialogs/file-select.xml", name);
         m.parents = [FileSelector, Dialog];
-        data.getNode("operation", 1).setValue(operation);
-        data.getNode("directory", 1).setValue(dir);
-        data.getNode("selection", 1).setValue(file);
-        data.getNode("show-hidden", 1).setBoolValue(show_hidden);
+        m.data = data;
+        m.data.getNode("title", 1).setValue(title);
+        m.data.getNode("button", 1).setValue(button);
+        m.data.getNode("directory", 1).setValue(dir);
+        m.data.getNode("selection", 1).setValue(file);
+        m.data.getNode("dotfiles", 1).setBoolValue(dotfiles);
         m.cblistener = setlistener(data.getNode("path", 1), callback);
         return m;
     },
@@ -270,7 +279,7 @@ var FileSelector = {
         me.close();
         delete(me.instance, me.name);
         removelistener(me.cblistener);
-        me.prop.getParent().removeChild(me.prop.getName(), me.prop.getIndex());
+        props.globals.getNode("/sim/gui/dialogs", 1).removeChildren(me.name);
     },
 };
 

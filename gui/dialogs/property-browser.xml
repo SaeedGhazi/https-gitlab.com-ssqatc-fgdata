@@ -115,12 +115,12 @@
 			var root_title = "Internal Properties";
 			var no_selection = "[none]";
 
-			update = func(w) {
+			var update = func(w) {
 				self.setValues({"dialog-name": dlgname, "object-name": w});
 				fgcommand("dialog-update", self);
 			}
 
-			squeeze = func(s, n) {
+			var squeeze = func(s, n) {
 				if (n >= size(s) or 7 > n ) {
 					return s;
 				}
@@ -129,7 +129,7 @@
 				return l ~ "..." ~ r;
 			}
 
-			select = func {
+			var select = func {
 				var lst = list.getValue();
 				node = props.globals.getNode(lst);
 				if (node == nil) {
@@ -166,29 +166,34 @@
 				update("input");
 			}
 
-			set = func {
+			var set = func {
 				if (node != nil) {
 					node.setValue(input.getValue());
 				}
 			}
 
-			clone = func(startdir) {
-				var name = "property-browser--" ~ int(rand() * 10000000);
-				var base = "/sim/gui/dialogs/" ~ name ~ "/";
+			var clone = func(startdir) {
+				var base = props.globals.getNode("/sim/gui/dialogs", 1);
+				var name = "property-browser-";
+				var i = nil;
+				for (i = 1; 1; i += 1)
+					if (base.getNode(name ~ i, 0) == nil)
+						break;
+				base = base.getNode(name ~ i, 1).getPath();
 				setprop(base ~ "/last", startdir);
 				self.setValues({
-						"name": name,
-						"dialog-name": name,
-						"group[0]/text/property": base ~ "title",
-						"property-list/property": base ~ "list",
-						"group[1]/text/property": base ~ "label",
-						"group[1]/input/property": base ~ "input",
+						"name": name ~ i,
+						"dialog-name": name ~ i,
+						"group[0]/text/property": base ~ "/title",
+						"property-list/property": base ~ "/list",
+						"group[1]/text/property": base ~ "/label",
+						"group[1]/input/property": base ~ "/input",
 				});
 				fgcommand("dialog-new", self);
 				fgcommand("dialog-show", self);
 			}
 
-			auto_update = func {
+			var auto_update = func {
 				list.setValue(dir);
 				update("property-list");
 				if (update_interval) {
@@ -204,7 +209,7 @@
 
 		<close>
 			update_interval = 0;
-			if (find("--", dlgname) >= 0) {
+			if (find("property-browser-", dlgname) >= 0) {
 				dlg.getParent().removeChildren(dlgname);
 			} else {
 				dlg.getNode("last", 1).setValue(dir);

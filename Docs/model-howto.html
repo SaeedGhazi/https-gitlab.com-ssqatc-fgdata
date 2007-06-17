@@ -834,16 +834,16 @@ If unset this defaults to the (0, 0, 0).</p>
 following formula (and then clamped if a min or max value is
 specified.)</p>
 
-<blockquote><pre>  scale = offset + property * factor
+<blockquote><pre>  scale = property * factor + offset
 </pre></blockquote>
 
-<p>Specifying an offset of 1.0 and a factor of 0.0 is equivalent to no
+<p>Specifying a factor of 1.0 and an offset of 0.0 is equivalent to no
 scaling at all.</p>
 
 <p>As you can see in the above example, at ground level (the property
 value = 0.0) the scaling formula will evaluate to 1.0 (no scaling.)
 As altitude above the ground increases, the scaling factor will
-increase by 1.0 + agl * 0.05.  Note that because a shadow has no depth
+increase by agl * 0.05 + 1.0.  Note that because a shadow has no depth
 we use a z-factor of 0.0 and a z-offset of 1.0 so the formula always
 evalutes to a scaling factor of 1.0 in the Z dimension.</p>
 

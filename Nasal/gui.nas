@@ -239,11 +239,11 @@ Dialog = {
 ##
 # FileSelector class (derived from Dialog class).
 #
-# SYNOPSIS: FileSelector.new(<callback> [, <title> [, <button> [, <dir> [, <file> [, <dotfiles>]]]])
+# SYNOPSIS: FileSelector.new(<callback>, <title>, <button> [, <dir> [, <file> [, <dotfiles>]]])
 #
 #         callback ... callback function that gets return value as cmdarg().getValue()
 #         title    ... dialog title
-#         button   ... button text ("OK" by default, but should say "Save", "Load", etc.))
+#         button   ... button text (should say "Save", "Load", etc. and not just "OK")
 #         dir      ... starting dir ($FG_ROOT if unset)
 #         file     ... pre-selected default file name
 #         dotfiles ... flag that decids whether UNIX dotfiles should be shown (1) or not (0)
@@ -252,11 +252,14 @@ Dialog = {
 #
 #     var report = func { print("file ", cmdarg().getValue(), " selected") }
 #     var selector = gui.FileSelector.new(report, "Save Flight", "Save", "/tmp", "flight.sav");
-#     selector.open();   # see the Dialog class for other methods
+#     selector.open();
+#
+#     selector.close();
+#     selector.set_title("Save Another Flight");
+#     selector.open();
 #
 var FileSelector = {
-    new : func(callback, title = "File Selection", button = "OK",
-            dir = "", file = "", dotfiles = 0) {
+    new : func(callback, title, button, dir = "", file = "", dotfiles = 0) {
         var name = "file-select-";
         var data = props.globals.getNode("/sim/gui/dialogs/", 1);
         var i = nil;
@@ -264,17 +267,24 @@ var FileSelector = {
             if (data.getNode(name ~ i, 0) == nil)
                 break;
         data = data.getNode(name ~= i, 1);
+
         var m = Dialog.new(data.getNode("dialog", 1), "gui/dialogs/file-select.xml", name);
         m.parents = [FileSelector, Dialog];
         m.data = data;
-        m.data.getNode("title", 1).setValue(title);
-        m.data.getNode("button", 1).setValue(button);
-        m.data.getNode("directory", 1).setValue(dir);
-        m.data.getNode("selection", 1).setValue(file);
-        m.data.getNode("dotfiles", 1).setBoolValue(dotfiles);
+        m.set_title(title);
+        m.set_button(button);
+        m.set_directory(dir);
+        m.set_file(file);
+        m.set_dotfiles(dotfiles);
         m.cblistener = setlistener(data.getNode("path", 1), callback);
         return m;
     },
+    # setters only take effect after the next call to open()
+    set_title     : func(title) { me.data.getNode("title", 1).setValue(title) },
+    set_button    : func(button) { me.data.getNode("button", 1).setValue(button) },
+    set_directory : func(dir) { me.data.getNode("directory", 1).setValue(dir) },
+    set_file      : func(file) { me.data.getNode("selection", 1).setValue(file) },
+    set_dotfiles  : func(dot) { me.data.getNode("dotfiles", 1).setBoolValue(dot) },
     del : func {
         me.close();
         delete(me.instance, me.name);

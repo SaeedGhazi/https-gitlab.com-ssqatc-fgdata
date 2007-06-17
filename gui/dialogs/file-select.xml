@@ -4,6 +4,7 @@
  Ctrl-click on "."    toggles display of hidden Unix filex (dotfiles)
  Ctrl-click on ".."   enters $FG_ROOT
  Shift-click on ".."  enters $FG_HOME
+ Alt-click on ".."    enters current working directory
 -->
 
 <PropertyList>
@@ -129,7 +130,10 @@
 
 			var kbdctrl = props.globals.getNode("/devices/status/keyboard/ctrl", 1);
 			var kbdshift = props.globals.getNode("/devices/status/keyboard/shift", 1);
+			var kbdalt = props.globals.getNode("/devices/status/keyboard/alt", 1);
 			var current = { dir : "", file : "" };
+
+			var isletter = func(c) { c >= `A` and `Z` >= c or c >= `a` and `z` >= c }
 
 			var squeeze = func(s, n) {
 				return n >= size(s) ? s : "... " ~ substr(s, size(s) - n);
@@ -157,7 +161,7 @@
 						continue;
 
 					var stat = io.stat(d ~ "/" ~ e);
-					if (stat == nil)  # dead link
+					if (stat == nil)  # dead link, no permission
 						continue;
 
 					if (io.isdir(stat[2]))
@@ -172,7 +176,7 @@
 					list.getChild("value", i, 1).setValue(entries[i]);
 
 				dir.setValue(d);
-				gui.dialog_apply("dir-input", "list");
+				gui.dialog_update(dlgname, "dir-input", "list");
 				return 1;
 			}
 
@@ -189,6 +193,8 @@
 						new = getprop("/sim/fg-root");
 					elsif (kbdshift.getValue())
 						new = getprop("/sim/fg-home");
+					elsif (kbdalt.getValue())
+						new = getprop("/sim/fg-current");
 					else
 						new = current.dir ~ "/..";
 				} elsif (e[size(e) - 1] == `/`) {
@@ -202,7 +208,6 @@
 					if (update(p))
 						current.dir = p;
 					selection.setValue("");
-					gui.dialog_update(dlgname, "list", "file-input"); ## apply?
 				}
 			}
 
@@ -211,7 +216,6 @@
 			}
 
 			var dir_input = func {
-				print("dir input");
 				var p = io.fixpath(dir.getValue());
 				if (update(p))
 					current.dir = p;
@@ -244,7 +248,7 @@
 				t = "Select File";
 			self.getNode("group[0]/text/label").setValue(t);
 
-			current.dir = (var d = dir.getValue()) != nil and d != "" ? d : getprop("/sim/fg-root");
+			current.dir = (var d = dir.getValue()) != nil and d != "" ? d : getprop("/sim/fg-current");
 			current.file = (var d = file.getValue()) != nil and d != "" ? d : "";
 			gui.dialog_update(dlgname, "file-input"); ## dir-input ?
 			update(io.fixpath(current.dir));

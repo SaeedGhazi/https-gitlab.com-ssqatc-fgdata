@@ -4,20 +4,20 @@
 #                                     can be initialized with another geo.Coord instance
 #     Coord.set(<coord>)          ... sets coordinates from another geo.Coord instance
 #
-#     Coord.set_lon(<num>)        ... functions for setting longitude/latitude/altitude
-#     Coord.set_lat(<num>)
+#     Coord.set_lat(<num>)        ... functions for setting latitude/longitude/altitude
+#     Coord.set_lon(<num>)
 #     Coord.set_alt(<num>)
-#     Coord.set_lonlat(<num>, <num> [, <num>])      (altitude is optional; default=0)
+#     Coord.set_latlon(<num>, <num> [, <num>])      (altitude is optional; default=0)
 #
 #     Coord.set_x(<num>)          ... functions for setting cartesian x/y/z coordinates
 #     Coord.set_y(<num>)
 #     Coord.set_z(<num>)
 #     Coord.set_xyz(<num>, <num>, <num>)
 #
-#     Coord.lon()                 ... functions for getting lon/lat/alt
 #     Coord.lat()
+#     Coord.lon()                 ... functions for getting lat/lon/alt
 #     Coord.alt()                     ... returns altitude in m
-#     Coord.lonlat()                  ... returns array  [<lon>, <lat>, <alt>]
+#     Coord.latlon()                  ... returns array  [<lat>, <lon>, <alt>]
 #
 #     Coord.x()                   ... functions for reading cartesian coords (in m)
 #     Coord.y()
@@ -37,12 +37,12 @@
 # geo.aircraft_position()         ... returns current aircraft position as geo.Coord
 # geo.click_position()            ... returns last click coords as geo.Coord or nil before first click
 #
-# geo.tile_path(<lon>, <lat>)     ... returns tile path string (e.g. "w130n30/w123n37/942056.stg")
-# geo.elevation(<lon>, <lat>)     ... returns elevation in meter for given lon/lat, or nil on error
+# geo.tile_path(<lat>, <lon>)     ... returns tile path string (e.g. "w130n30/w123n37/942056.stg")
+# geo.elevation(<lat>, <lon>)     ... returns elevation in meter for given lat/lon, or nil on error
 # geo.normdeg(<angle>)            ... returns angle normalized to  0 <= angle < 360
 #
-# geo.put_model(<path>, <lon>, <lat> [, <elev:nil> [, <hdg:0> [, <pitch:0> [, <roll:0>]]]]);
-#                                 ... put model <path> at location <lon>/<lat> with given elevation
+# geo.put_model(<path>, <lat>, <lon> [, <elev:nil> [, <hdg:0> [, <pitch:0> [, <roll:0>]]]]);
+#                                 ... put model <path> at location <lat>/<lon> with given elevation
 #                                     (optional, default: surface). <hdg>/<pitch>/<roll> are optional
 #                                     and default to zero.
 
@@ -70,16 +70,15 @@ var mod = func(v, w) {
 }
 
 
-# class that maintains one set of geographical coordinates and provides
-# simple conversion methods (which assume a spherical Earth)
+# class that maintains one set of geographical coordinates
 #
 var Coord = {
 	new : func(copy = nil) {
 		var m = { parents: [Coord] };
 		m._pdirty = 1;  # polar
 		m._cdirty = 1;  # cartesian
-		m._lon = nil;   # in radian
-		m._lat = nil;
+		m._lat = nil;   # in radian
+		m._lon = nil;   #
 		m._alt = nil;   # ASL
 		m._x = nil;     # in m
 		m._y = nil;
@@ -111,31 +110,31 @@ var Coord = {
 	z : func { me._cupdate(); me._z },
 	xyz : func { me._cupdate(); [me._x, me._y, me._z] },
 
-	lon : func { me._pupdate(); me._lon * R2D },  # return in degree
-	lat : func { me._pupdate(); me._lat * R2D },
+	lat : func { me._pupdate(); me._lat * R2D },  # return in degree
+	lon : func { me._pupdate(); me._lon * R2D },
 	alt : func { me._pupdate(); me._alt },
-	lonlat : func { me._pupdate(); [me._lon, me._lat, me._alt] },
+	latlon : func { me._pupdate(); [me._lat, me._lon, me._alt] },
 
 	set_x : func(x) { me._pupdate(); me._pdirty = 1; me._x = x; me },
 	set_y : func(y) { me._pupdate(); me._pdirty = 1; me._y = y; me },
 	set_z : func(z) { me._pupdate(); me._pdirty = 1; me._z = z; me },
 
-	set_lon : func(lon) { me._cupdate(); me._cdirty = 1; me._lon = lon * D2R; me },
 	set_lat : func(lat) { me._cupdate(); me._cdirty = 1; me._lat = lat * D2R; me },
+	set_lon : func(lon) { me._cupdate(); me._cdirty = 1; me._lon = lon * D2R; me },
 	set_alt : func(alt) { me._cupdate(); me._cdirty = 1; me._alt = alt; me },
 
 	set : func(c) {
 		c._pupdate();
-		me._lon = c._lon;
 		me._lat = c._lat;
+		me._lon = c._lon;
 		me._alt = c._alt;
 		me._cdirty = 1;
 		me._pdirty = 0;
 		me;
 	},
-	set_lonlat : func(lon, lat, alt = 0) {
-		me._lon = lon * D2R;
+	set_latlon : func(lat, lon, alt = 0) {
 		me._lat = lat * D2R;
+		me._lon = lon * D2R;
 		me._alt = alt;
 		me._cdirty = 1;
 		me._pdirty = 0;
@@ -166,7 +165,7 @@ var Coord = {
 		me._pupdate();
 		dest._pupdate();
 
-		if (me._lon == dest._lon and me._lat == dest._lat) {
+		if (me._lat == dest._lat and me._lon == dest._lon) {
 			return 0;
 		}
 		var dlon = dest._lon - me._lon;
@@ -178,11 +177,11 @@ var Coord = {
 		me._pupdate();
 		dest._pupdate();
 
-		if (me._lon == dest._lon and me._lat == dest._lat) {
+		if (me._lat == dest._lat and me._lon == dest._lon) {
 			return 0;
 		}
-		var o = sin((me._lon - dest._lon) * 0.5);
 		var a = sin((me._lat - dest._lat) * 0.5);
+		var o = sin((me._lon - dest._lon) * 0.5);
 		return 2.0 * ERAD * asin(sqrt(a * a + cos(me._lat) * cos(dest._lat) * o * o));
 	},
 	direct_distance_to : func(dest) {
@@ -202,8 +201,8 @@ var Coord = {
 		}
 		me._cupdate();
 		me._pupdate();
-		printf("x=%f  y=%f  z=%f    lon=%f  lat=%f  alt=%f",
-				me.x(), me.y(), me.z(), me.lon(), me.lat(), me.alt());
+		printf("x=%f  y=%f  z=%f    lat=%f  lon=%f  alt=%f",
+				me.x(), me.y(), me.z(), me.lat(), me.lon(), me.alt());
 	},
 };
 
@@ -256,9 +255,9 @@ var bucket_span = func(lat) {
 }
 
 
-var tile_index = func(lon, lat) {
-	var lon_floor = floor(lon);
+var tile_index = func(lat, lon) {
 	var lat_floor = floor(lat);
+	var lon_floor = floor(lon);
 	var span = bucket_span(lat);
 	var x = 0;
 
@@ -278,35 +277,35 @@ var tile_index = func(lon, lat) {
 	}
 
 	var y = int((lat - lat_floor) * 8);
-	(lon_floor + 180) * 16384 + (lat_floor + 90) * 64 + y * 8 + x;
+	return (lon_floor + 180) * 16384 + (lat_floor + 90) * 64 + y * 8 + x;
 }
 
 
-var format = func(lon, lat) {
+var format = func(lat, lon) {
 	sprintf("%s%03d%s%02d", lon < 0 ? "w" : "e", abs(lon), lat < 0 ? "s" : "n", abs(lat));
 }
 
 
-var tile_path = func(lon, lat) {
-	var p = format(floor(lon / 10.0) * 10, floor(lat / 10.0) * 10);
-	p ~= "/" ~ format(floor(lon), floor(lat));
-	p ~= "/" ~ tile_index(lon, lat) ~ ".stg";
+var tile_path = func(lat, lon) {
+	var p = format(floor(lat / 10.0) * 10, floor(lon / 10.0) * 10);
+	p ~= "/" ~ format(floor(lat), floor(lon));
+	p ~= "/" ~ tile_index(lat, lon) ~ ".stg";
 }
 
 
-var put_model = func(path, lon, lat, elev_m = nil, hdg = 0, pitch = 0, roll = 0) {
+var put_model = func(path, lat, lon, elev_m = nil, hdg = 0, pitch = 0, roll = 0) {
 	if (elev_m == nil)
-		elev_m = elevation(lon, lat);
+		elev_m = elevation(lat, lon);
 	if (elev_m == nil)
-		die("can't get elevation for " ~ lon ~ "/" ~ lat);
+		die("can't get elevation for " ~ lat ~ "/" ~ lon);
 	var n = props.globals.getNode("/models");
 	for (var i = 0; 1; i += 1)
 		if (n.getChild("model", i, 0) == nil)
 			break;
 	n = n.getChild("model", i, 1);
 	n.getNode("path", 1).setValue(path);
-	n.getNode("longitude-deg", 1).setDoubleValue(lon);
 	n.getNode("latitude-deg", 1).setDoubleValue(lat);
+	n.getNode("longitude-deg", 1).setDoubleValue(lon);
 	n.getNode("elevation-ft", 1).setDoubleValue(elev_m * M2FT);
 	n.getNode("heading-deg", 1).setDoubleValue(hdg);
 	n.getNode("pitch-deg", 1).setDoubleValue(pitch);
@@ -322,36 +321,36 @@ var terr_lon = nil;
 var terr_lat = nil;
 var terr_elev = nil;
 
-var elevation = func(lon, lat) {
-	terr_lon.setDoubleValue(lon);
+var elevation = func(lat, lon) {
 	terr_lat.setDoubleValue(lat);
+	terr_lon.setDoubleValue(lon);
 	var success = fgcommand("terrain-elevation", terr_tree);
 	return success ? terr_elev.getValue() : nil;
 }
 
 
-var aircraft_lon = nil;
 var aircraft_lat = nil;
+var aircraft_lon = nil;
 var aircraft_alt = nil;
 
 var aircraft_position = func {
-	var lon = aircraft_lon.getValue();
 	var lat = aircraft_lat.getValue();
+	var lon = aircraft_lon.getValue();
 	var alt = aircraft_alt.getValue() * FT2M;
-	return Coord.new().set_lonlat(lon, lat, alt);
+	return Coord.new().set_latlon(lat, lon, alt);
 }
 
 
-var click_lon = nil;
 var click_lat = nil;
+var click_lon = nil;
 var click_elev = nil;
 var click_coord = Coord.new();
 
 _setlistener("/sim/signals/click", func {
-	var lon = click_lon.getValue();
 	var lat = click_lat.getValue();
+	var lon = click_lon.getValue();
 	var elev = click_elev.getValue();
-	click_coord.set_lonlat(lon, lat, elev);
+	click_coord.set_latlon(lat, lon, elev);
 });
 
 var click_position = func {
@@ -362,20 +361,20 @@ var click_position = func {
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
 	terr_tree = props.Node.new();
-	terr_lon = terr_tree.getNode("longitude-deg", 1);
 	terr_lat = terr_tree.getNode("latitude-deg", 1);
+	terr_lon = terr_tree.getNode("longitude-deg", 1);
 	terr_elev = terr_tree.getNode("elevation-m", 1);
 
-	terr_lon.setDoubleValue(0.0);
 	terr_lat.setDoubleValue(0.0);
+	terr_lon.setDoubleValue(0.0);
 	terr_elev.setDoubleValue(-9999.0);
 
-	aircraft_lon = props.globals.getNode("/position/longitude-deg", 1);
 	aircraft_lat = props.globals.getNode("/position/latitude-deg", 1);
+	aircraft_lon = props.globals.getNode("/position/longitude-deg", 1);
 	aircraft_alt = props.globals.getNode("/position/altitude-ft", 1);
 
-	click_lon = props.globals.getNode("/sim/input/click/longitude-deg", 1);
 	click_lat = props.globals.getNode("/sim/input/click/latitude-deg", 1);
+	click_lon = props.globals.getNode("/sim/input/click/longitude-deg", 1);
 	click_elev = props.globals.getNode("/sim/input/click/elevation-m", 1);
 });
 

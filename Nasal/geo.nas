@@ -61,13 +61,9 @@ var sin = math.sin;
 var cos = math.cos;
 var atan2 = math.atan2;
 var sqrt = math.sqrt;
-var asin = func(v) { math.atan2(v, math.sqrt(1 - v * v)) }
-var acos = func(v) { math.atan2(math.sqrt(1 - v * v), v) }
-
-var mod = func(v, w) {
-	var x = v - w * int(v / w);
-	return x < 0 ? x + abs(w) : x;
-}
+var asin = math.asin;
+var acos = math.acos;
+var mod = math.mod;
 
 
 # class that maintains one set of geographical coordinates
@@ -83,9 +79,9 @@ var Coord = {
 		m._x = nil;     # in m
 		m._y = nil;
 		m._z = nil;
-		if (copy != nil) {
+		if (copy != nil)
 			m.set(copy);
-		}
+
 		return m;
 	},
 	_cupdate : func {
@@ -154,10 +150,10 @@ var Coord = {
 		dist /= ERAD;
 		me._lat = asin(sin(me._lat) * cos(dist) + cos(me._lat) * sin(dist) * cos(course));
 
-		if (cos(me._lat) > EPSILON) {
+		if (cos(me._lat) > EPSILON)
 			me._lon = math.pi - mod(math.pi - me._lon - asin(sin(course) * sin(dist)
 					/ cos(me._lat)), 2 * math.pi);
-		}
+
 		me._cdirty = 1;
 		me;
 	},
@@ -165,9 +161,9 @@ var Coord = {
 		me._pupdate();
 		dest._pupdate();
 
-		if (me._lat == dest._lat and me._lon == dest._lon) {
+		if (me._lat == dest._lat and me._lon == dest._lon)
 			return 0;
-		}
+
 		var dlon = dest._lon - me._lon;
 		return mod(atan2(sin(dlon) * cos(dest._lat), cos(me._lat) * sin(dest._lat)
 				- sin(me._lat) * cos(dest._lat) * cos(dlon)), 2 * math.pi) * R2D;
@@ -177,9 +173,9 @@ var Coord = {
 		me._pupdate();
 		dest._pupdate();
 
-		if (me._lat == dest._lat and me._lon == dest._lon) {
+		if (me._lat == dest._lat and me._lon == dest._lon)
 			return 0;
-		}
+
 		var a = sin((me._lat - dest._lat) * 0.5);
 		var o = sin((me._lon - dest._lon) * 0.5);
 		return 2.0 * ERAD * asin(sqrt(a * a + cos(me._lat) * cos(dest._lat) * o * o));
@@ -196,9 +192,9 @@ var Coord = {
 		return !(me._cdirty and me._pdirty);
 	},
 	dump : func {
-		if (me._cdirty and me._pdirty) {
+		if (me._cdirty and me._pdirty)
 			print("Coord.print(): coord undefined");
-		}
+
 		me._cupdate();
 		me._pupdate();
 		printf("x=%f  y=%f  z=%f    lat=%f  lon=%f  alt=%f",
@@ -210,48 +206,45 @@ var Coord = {
 # normalize degree to 0 <= angle < 360
 #
 var normdeg = func(angle) {
-	while (angle < 0) {
+	while (angle < 0)
 		angle += 360;
-	}
-	while (angle >= 360) {
+	while (angle >= 360)
 		angle -= 360;
-	}
 	return angle;
 }
 
 
 var bucket_span = func(lat) {
-	if (lat >= 89.0 ) {
+	if (lat >= 89.0)
 		360.0;
-	} elsif (lat >= 88.0 ) {
+	elsif (lat >= 88.0)
 		8.0;
-	} elsif (lat >= 86.0 ) {
+	elsif (lat >= 86.0)
 		4.0;
-	} elsif (lat >= 83.0 ) {
+	elsif (lat >= 83.0)
 		2.0;
-	} elsif (lat >= 76.0 ) {
+	elsif (lat >= 76.0)
 		1.0;
-	} elsif (lat >= 62.0 ) {
+	elsif (lat >= 62.0)
 		0.5;
-	} elsif (lat >= 22.0 ) {
+	elsif (lat >= 22.0)
 		0.25;
-	} elsif (lat >= -22.0 ) {
+	elsif (lat >= -22.0)
 		0.125;
-	} elsif (lat >= -62.0 ) {
+	elsif (lat >= -62.0)
 		0.25;
-	} elsif (lat >= -76.0 ) {
+	elsif (lat >= -76.0)
 		0.5;
-	} elsif (lat >= -83.0 ) {
+	elsif (lat >= -83.0)
 		1.0;
-	} elsif (lat >= -86.0 ) {
+	elsif (lat >= -86.0)
 		2.0;
-	} elsif (lat >= -88.0 ) {
+	elsif (lat >= -88.0)
 		4.0;
-	} elsif (lat >= -89.0 ) {
+	elsif (lat >= -89.0)
 		8.0;
-	} else {
+	else
 		360.0;
-	}
 }
 
 
@@ -270,9 +263,8 @@ var tile_index = func(lat, lon) {
 			lon = int(int(lon / span) * span);
 		} else {
 			lon = int(int((lon + 1) / span) * span - span);
-			if (lon < -180) {
+			if (lon < -180)
 				lon = -180;
-			}
 		}
 	}
 

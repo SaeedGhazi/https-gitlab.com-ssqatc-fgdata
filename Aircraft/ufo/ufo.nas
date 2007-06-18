@@ -620,17 +620,37 @@ var print_data = func {
 
 
 var export_data = func {
-	savexml = func(name, node) {
-		fgcommand("savexml", props.Node.new({ "filename": name, "sourcenode": node }));
-	}
-	var tmp = "save-ufo-data";
-	save = props.globals.getNode(tmp, 1);
-	props.copy(modelmgr.get_data(), save.getNode("models", 1));
 	var path = getprop("/sim/fg-home") ~ "/ufo-model-export.xml";
-	savexml(path, save.getPath());
+	var args = props.Node.new({ filename : path });
+	props.copy(modelmgr.get_data(), args.getNode("data", 1));
+	fgcommand("savexml", args);
 	print("model data exported to ", path);
-	props.globals.removeChild(tmp);
 }
+
+
+
+var file_selector = nil;
+
+# called via l-key (load object from disk)
+var file_select_model = func {
+	if (file_selector == nil) {
+		file_selector = gui.FileSelector.new(fsel_callback,
+				"Select *.ac or *.xml model file",
+				"Load Model", getprop("/sim/fg-root"));
+	}
+	file_selector.open();
+}
+
+var fsel_callback = func {
+	var model = cmdarg().getValue();
+	var root = io.fixpath(getprop("/sim/fg-root")) ~ "/";
+	if (substr(model, 0, size(root)) == root)
+		model = substr(model, size(root));
+
+	append(modellist, model);
+	modelmgr.set_modelpath(model);
+}
+
 
 
 # dialogs -----------------------------------------------------------------------------------------

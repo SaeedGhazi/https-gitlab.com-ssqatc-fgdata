@@ -75,6 +75,10 @@
 				<desc>export object data</desc>
 			</key>
 			<key>
+				<name>l</name>
+				<desc>load model file via file selector</desc>
+			</key>
+			<key>
 				<name>m</name>
 				<desc>toggle marker for active (= last selected) object</desc>
 			</key>
@@ -147,6 +151,15 @@
 				<binding>
 					<command>nasal</command>
 					<script>ufo.export_data()</script>
+				</binding>
+			</key>
+
+			<key n="108">
+				<name>l</name>
+				<desc>Open file selector</desc>
+				<binding>
+					<command>nasal</command>
+					<script>ufo.file_select_model()</script>
 				</binding>
 			</key>
 

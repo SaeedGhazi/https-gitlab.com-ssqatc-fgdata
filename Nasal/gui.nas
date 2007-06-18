@@ -176,10 +176,11 @@ Dialog = {
     new : func(prop, path = nil, name = nil) {
         var m = { parents : [Dialog] };
         m.state = 0;
-        m.name = name;
         if (path == nil) { # global dialog in $FG_ROOT/gui/dialogs/
+            m.name = prop;
             m.prop = props.Node.new({ "dialog-name" : prop });
         } else {           # aircraft dialog with given path
+            m.name = name;
             m.path = path;
             m.prop = isa(prop, props.Node) ? prop : props.globals.getNode(prop, 1);
             if (m.prop.getName() != "dialog")

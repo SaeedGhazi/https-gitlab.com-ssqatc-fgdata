@@ -45,6 +45,8 @@
 #                                 ... put model <path> at location <lat>/<lon> with given elevation
 #                                     (optional, default: surface). <hdg>/<pitch>/<roll> are optional
 #                                     and default to zero.
+# geo.put_model(<path>, <coord> [, <hdg:0> [, <pitch:0> [, <roll:0>]]]);
+#                                 ... same as above, but lat/lon/elev are taken from a Coord object
 
 
 var EPSILON = 0.0000000000001;
@@ -109,7 +111,7 @@ var Coord = {
 	lat : func { me._pupdate(); me._lat * R2D },  # return in degree
 	lon : func { me._pupdate(); me._lon * R2D },
 	alt : func { me._pupdate(); me._alt },
-	latlon : func { me._pupdate(); [me._lat, me._lon, me._alt] },
+	latlon : func { me._pupdate(); [me._lat * R2D, me._lon * R2D, me._alt] },
 
 	set_x : func(x) { me._pupdate(); me._pdirty = 1; me._x = x; me },
 	set_y : func(y) { me._pupdate(); me._pdirty = 1; me._y = y; me },
@@ -284,8 +286,11 @@ var tile_path = func(lat, lon) {
 	p ~= "/" ~ tile_index(lat, lon) ~ ".stg";
 }
 
+var put_model = func(path, c, arg...) {
+	call(_put_model, [path] ~ (isa(c, Coord) ? c.latlon() : [c]) ~ arg);
+}
 
-var put_model = func(path, lat, lon, elev_m = nil, hdg = 0, pitch = 0, roll = 0) {
+var _put_model = func(path, lat, lon, elev_m = nil, hdg = 0, pitch = 0, roll = 0) {
 	if (elev_m == nil)
 		elev_m = elevation(lat, lon);
 	if (elev_m == nil)

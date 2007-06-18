@@ -3,11 +3,12 @@
 <PropertyList>
  <comment>
   <![CDATA[
-    This is the protocol definition for fg_sqawk.pl.
-    See http://squonk.abacab.org/dokuwiki/fg_sqawk
+    This is the protocol definition for fgcom - a realtime communication
+    middleware based on IAX2 (Asterisk) for FlightGear
+    See http://squonk.abacab.org/dokuwiki/fgcom
 
     Usage:
-    # fgfs --generic=socket,out,<hz>,<host>,<port>,udp,fg_squawk
+    # fgfs --generic=socket,out,<hz>,<host>,16661,udp,fgcom
 
     Check data with:
     #  netcat -u -l -p <port>
@@ -21,10 +22,17 @@
    <var_separator>,</var_separator>
 
    <chunk>
-    <name>comm1frq</name>
+    <name>com1frq</name>
     <type>float</type>
     <format>COM1_FRQ=%03.3f</format>
     <node>/instrumentation/comm/frequencies/selected-mhz</node>
+   </chunk>
+
+   <chunk>
+    <name>nav1frq</name>
+    <type>float</type>
+    <format>NAV1_FRQ=%03.3f</format>
+    <node>/instrumentation/nav/frequencies/selected-mhz</node>
    </chunk>
 
    <chunk>

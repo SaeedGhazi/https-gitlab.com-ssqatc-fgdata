@@ -59,13 +59,13 @@ var M2FT = 3.28083989501312335958;
 
 var printf = func { print(call(sprintf, arg)) }
 var floor = func(v) { v < 0.0 ? -int(-v) - 1 : int(v) }
-var sin = math.sin;
-var cos = math.cos;
-var atan2 = math.atan2;
-var sqrt = math.sqrt;
-var asin = math.asin;
-var acos = math.acos;
-var mod = math.mod;
+var sin = nil;
+var cos = nil;
+var atan2 = nil;
+var sqrt = nil;
+var asin = nil;
+var acos = nil;
+var mod = nil;
 
 
 # class that maintains one set of geographical coordinates
@@ -357,6 +357,14 @@ var click_position = func {
 
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
+	sin = math.sin;
+	cos = math.cos;
+	atan2 = math.atan2;
+	sqrt = math.sqrt;
+	asin = math.asin;
+	acos = math.acos;
+	mod = math.mod;
+
 	terr_tree = props.Node.new();
 	terr_lat = terr_tree.getNode("latitude-deg", 1);
 	terr_lon = terr_tree.getNode("longitude-deg", 1);

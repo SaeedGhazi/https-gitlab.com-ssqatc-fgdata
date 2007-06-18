@@ -163,8 +163,8 @@ var Model = {
 		var roll = init_prop(m.node.getNode("roll-deg", 1), 0);
 
 		m.node.getNode("path", 1).setValue(path);
-		m.lon = ModelValue.new(m.node, "longitude-deg", pos.lon());
 		m.lat = ModelValue.new(m.node, "latitude-deg", pos.lat());
+		m.lon = ModelValue.new(m.node, "longitude-deg", pos.lon());
 		m.alt = ModelValue.new(m.node, "elevation-ft", pos.alt() * M2FT);
 		m.hdg = ModelValue.new(m.node, "heading-deg", hdg);
 		m.pitch = ModelValue.new(m.node, "pitch-deg", pitch);
@@ -184,8 +184,8 @@ var Model = {
 		var v = me.visible;
 		me.unhide();
 		me.pos.set(pos);
-		me.lon.set(me.pos.lon());
 		me.lat.set(me.pos.lat());
+		me.lon.set(me.pos.lon());
 		me.alt.set(me.pos.alt() * M2FT);
 		v or me.hide();
 	},
@@ -198,8 +198,8 @@ var Model = {
 	},
 	apply_course_distance : func(course, dist) {
 		me.pos.apply_course_distance(course, dist);
-		me.lon.set(me.pos.lon());
 		me.lat.set(me.pos.lat());
+		me.lon.set(me.pos.lon());
 	},
 	direct_distance_to : func(dest) {
 		me.pos.direct_distance_to(dest);
@@ -241,16 +241,16 @@ var Model = {
 		return n;
 	},
 	add_derived_data : func(node) {
-		node.removeChildren("longitude-deg-prop");
 		node.removeChildren("latitude-deg-prop");
+		node.removeChildren("longitude-deg-prop");
 		node.removeChildren("elevation-ft-prop");
 		node.removeChildren("heading-deg-prop");
 		node.removeChildren("pitch-deg-prop");
 		node.removeChildren("roll-deg-prop");
 
 		var path = node.getNode("path").getValue();
-		var lon = node.getNode("longitude-deg").getValue();
 		var lat = node.getNode("latitude-deg").getValue();
+		var lon = node.getNode("longitude-deg").getValue();
 		var elev = node.getNode("elevation-ft").getValue();
 		var hdg = node.getNode("heading-deg").getValue();
 		var legend = node.getNode("legend").getValue();
@@ -274,7 +274,7 @@ var Model = {
 
 		var elev_m = elev * FT2M;
 		var stg_hdg = normdeg(360 - hdg);
-		var stg_path = geo.tile_path(lon, lat);
+		var stg_path = geo.tile_path(lat, lon);
 		var abs_path = getprop("/sim/fg-root") ~ "/" ~ path;
 		var obj_line = sprintf("%s %s %.8f %.8f %.4f %.1f", type, spec, lon, lat, elev_m, stg_hdg);
 
@@ -463,7 +463,7 @@ var ModelMgr = {
 	},
 	import : func {
 		me.active = nil;
-		var mandatory = ["path", "longitude-deg", "latitude-deg", "elevation-ft"];
+		var mandatory = ["path", "latitude-deg", "longitude-deg", "elevation-ft"];
 		foreach (var m; props.globals.getNode("models", 1).getChildren("model")) {
 			var ok = 1;
 			foreach (var a; mandatory) {
@@ -475,9 +475,9 @@ var ModelMgr = {
 				var tmp = props.Node.new({ legend:"", "heading-deg":0, "pitch-deg":0, "roll-deg":0 });
 				props.copy(m, tmp);
 				m.getParent().removeChild(m.getName(), m.getIndex());
-				var c = geo.Coord.new().set_lonlat(
-						tmp.getNode("longitude-deg").getValue(),
+				var c = geo.Coord.new().set_latlon(
 						tmp.getNode("latitude-deg").getValue(),
+						tmp.getNode("longitude-deg").getValue(),
 						tmp.getNode("elevation-ft").getValue() * FT2M);
 				append(me.models, me.active = Model.new(tmp.getNode("path").getValue(), c, tmp));
 			}
@@ -539,27 +539,27 @@ var scan_dirs = func(csv) {
 var print_ufo_data = func {
 	print("\n\n------------------------------ UFO -------------------------------\n");
 
-	var lon = getprop("/position/longitude-deg");
 	var lat = getprop("/position/latitude-deg");
+	var lon = getprop("/position/longitude-deg");
 	var alt_ft = getprop("/position/altitude-ft");
 	var elev_m = getprop("/position/ground-elev-m");
 	var heading = getprop("/orientation/heading-deg");
 	var agl_ft = alt_ft - elev_m * M2FT;
 
-	printf("Longitude:    %.8f deg", lon);
 	printf("Latitude:     %.8f deg", lat);
+	printf("Longitude:    %.8f deg", lon);
 	printf("Altitude ASL: %.4f m (%.4f ft)", alt_ft * FT2M, alt_ft);
 	printf("Altitude AGL: %.4f m (%.4f ft)", agl_ft * FT2M, agl_ft);
 	printf("Heading:      %.1f deg", normdeg(heading));
 	printf("Ground Elev:  %.4f m (%.4f ft)", elev_m, elev_m * M2FT);
 	print();
-	print("# " ~ geo.tile_path(lon, lat));
+	print("# " ~ geo.tile_path(lat, lon));
 	printf("OBJECT_STATIC %.8f %.8f %.4f %.1f", lon, lat, elev_m, normdeg(360 - heading));
 	print();
 
 	var hdg = normdeg(heading + getprop("/sim/current-view/goal-pitch-offset-deg"));
-	var fgfs = sprintf("$ fgfs --aircraft=ufo --lon=%.6f --lat=%.6f --altitude=%.2f --heading=%.1f",
-			lon, lat, agl_ft, hdg);
+	var fgfs = sprintf("$ fgfs --aircraft=ufo --lat=%.6f --lon=%.6f --altitude=%.2f --heading=%.1f",
+			lat, lon, agl_ft, hdg);
 	print(fgfs);
 }
 
@@ -568,8 +568,8 @@ var print_model_data = func(prop) {
 	print("\n\n------------------------ Selected Object -------------------------\n");
 	var elev = prop.getNode("elevation-ft").getValue();
 	printf("Path:         %s", prop.getNode("path").getValue());
-	printf("Longitude:    %.8f deg", prop.getNode("longitude-deg").getValue());
 	printf("Latitude:     %.8f deg", prop.getNode("latitude-deg").getValue());
+	printf("Longitude:    %.8f deg", prop.getNode("longitude-deg").getValue());
 	printf("Altitude ASL: %.4f m (%.4f ft)", elev * FT2M, elev);
 	printf("Heading:      %.1f deg", prop.getNode("heading-deg").getValue());
 	printf("Pitch:        %.1f deg", prop.getNode("pitch-deg").getValue());

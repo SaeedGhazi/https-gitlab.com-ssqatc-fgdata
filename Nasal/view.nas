@@ -123,8 +123,8 @@ panViewPitch = func(step) {
 #
 var flyby = {
     init : func {
-        me.lonN = props.globals.getNode("/sim/viewer/longitude-deg", 1);
         me.latN = props.globals.getNode("/sim/viewer/latitude-deg", 1);
+        me.lonN = props.globals.getNode("/sim/viewer/longitude-deg", 1);
         me.altN = props.globals.getNode("/sim/viewer/altitude-ft", 1);
         me.hdgN = props.globals.getNode("/orientation/heading-deg", 1);
         me.loopid = 0;
@@ -166,18 +166,18 @@ var flyby = {
         var course = me.hdgN.getValue();
         pos.apply_course_distance(course, dist * 0.8);
         pos.apply_course_distance(course + side, me.chase);
-        var lon = pos.lon();
         var lat = pos.lat();
-        var elev = geo.elevation(lon, lat);
+        var lon = pos.lon();
+        var elev = geo.elevation(lat, lon);
         var alt = pos.alt();
         alt += (alt - me.coord.alt()) * 0.5;
         if (elev != nil and alt < elev + 5)
             alt = elev + 5;
 
-        me.lonN.setValue(lon);
         me.latN.setValue(lat);
+        me.lonN.setValue(lon);
         me.altN.setValue(alt * geo.M2FT);
-        me.coord.set_lonlat(lon, lat, alt);
+        me.coord.set_latlon(lat, lon, alt);
         return 6.3;
     },
     _loop_ : func(id) {

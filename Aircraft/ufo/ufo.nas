@@ -35,9 +35,9 @@ var printf = func(_...) { print(call(sprintf, _)) }
 
 
 var init_prop = func(prop, value) {
-	if (prop.getValue() != nil) {
+	if (prop.getValue() != nil)
 		value = prop.getValue();
-	}
+
 	prop.setDoubleValue(value);
 	return value;
 }
@@ -52,15 +52,14 @@ var search = func(list, which) {
 	while (1) {
 		middle = int((left + right) / 2);
 		var c = cmp(list[middle], which);
-		if (!c) {
+		if (!c)
 			return middle;
-		} elsif (left == middle) {
+		elsif (left == middle)
 			return -1;
-		} elsif (c > 0) {
+		elsif (c > 0)
 			right = middle;
-		} else {
+		else
 			left = middle;
-		}
 	}
 }
 
@@ -71,9 +70,9 @@ var search = func(list, which) {
 var scan_models = func(base) {
 	var result = [];
 	var list = directory(getprop("/sim/fg-root") ~ "/" ~ base);
-	if (list == nil) {
+	if (list == nil)
 		return result;
-	}
+
 	var xml = {};
 	var ac = {};
 	foreach (var d; list) {
@@ -603,17 +602,15 @@ var print_data = func {
 	foreach (var m; data.getChildren("model")) {
 		var stg = m.getNode("stg-path").getValue();
 		var obj = m.getNode("object-line").getValue();
-		if (contains(bucket, stg)) {
+		if (contains(bucket, stg))
 			append(bucket[stg], obj);
-		} else {
+		else
 			bucket[stg] = [obj];
-		}
 	}
 	foreach (var key; keys(bucket)) {
 		print("\n# ", key);
-		foreach (var obj; bucket[key]) {
+		foreach (var obj; bucket[key])
 			print(obj);
-		}
 	}
 	print(rule);
 }
@@ -648,6 +645,7 @@ var fsel_callback = func {
 		model = substr(model, size(root));
 
 	append(modellist, model);
+	modellist = sort(modellist, cmp);
 	modelmgr.set_modelpath(model);
 }
 
@@ -661,9 +659,8 @@ var adjust_dialog = gui.Dialog.new("/sim/gui/dialogs/ufo/adjust/dialog", "Aircra
 
 adjust_dialog.center_sliders = func {
 	var ns = adjust_dialog.namespace();
-	if (ns != nil) {
+	if (ns != nil)
 		ns.center();
-	}
 }
 
 

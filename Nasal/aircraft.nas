@@ -376,8 +376,12 @@ var data = {
 	},
 	save : func(v = nil) {
 		me.loopid += 1;
-		me.interval = 60 * v;
-		v == nil ? me._save_() : me._loop_(me.loopid);
+		if (v == nil) {
+			me._save_();
+		} else {
+			me.interval = 60 * v;
+			me._loop_(me.loopid);
+		}
 	},
 	_loop_ : func(id) {
 		id == me.loopid or return;

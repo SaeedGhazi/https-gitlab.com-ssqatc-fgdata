@@ -196,9 +196,11 @@ Configuration description:
 
    <position>
         Specify the position of the sounds source relative to the
-        pilot's ears.  The coordinate system used is a right hand
-        coordinate system where -X = left, +X = right, -Y = down, +Y =
-        up, -Z = forward, +Z = aft.  Distances are in meters.
+        aircraft center.  The coordinate system used is a right hand
+        coordinate system where +Y = left, -Y = right, -Z = down, +Z =
+        up, -X = forward, +X = aft.  Distances are in meters.
+        The volume calculation due to distance and orientation of the
+        sounds source ONLY work on mono samples!
 
      <x>
         X dimension offset
@@ -214,16 +216,17 @@ Configuration description:
         Specify the orientation of the sounds source.
 
         The zero vector is default, indicating that a Source is not directional.
-        Specifying a non-zero vector will make the Source directional.
+        Specifying a non-zero vector will make the Source directional in
+        the X,Y,Z direction
 
      <x>
-        X dimension angle (0.0 - 360.0)
+        X dimension
 
      <y>
-        Y dimension angle (0.0 - 360.0)
+        Y dimension
 
      <z>
-        Z dimension angle (0.0 - 360.0)
+        Z dimension
 
      <inner-cone>
         The inner edge of the audio cone in degrees (0.0 - 360.0).

@@ -165,6 +165,8 @@ var string = func(o) {
 			s ~= (i == 0 ? "" : ", ") ~ _dump_var(k[i]) ~ " : " ~ string(o[k[i]]);
 
 		return _brace("{") ~ " " ~ s ~ " " ~ _brace("}");
+	} elsif (t == "ghost") {
+		return _angle("<") ~ _nil(ghosttype(o)) ~ _angle(">");
 	} else {
 		return _angle("<") ~ _vartype(t) ~ _angle(">");
 	}

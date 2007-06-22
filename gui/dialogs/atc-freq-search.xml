@@ -30,7 +30,7 @@
 	<text>
 		<name>no-atc-in-range</name>
 		<hide>true</hide>
-		<label>No ATC in range 40 nm.</label>
+		<label>No ATC in range 50 nm.</label>
 	</text>
 
 	<group>

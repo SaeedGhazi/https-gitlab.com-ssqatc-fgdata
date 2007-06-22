@@ -68,24 +68,24 @@ var imatch = func(a, b) match(lc(a), lc(b));
 #     \? stands for a question mark (not "any single character")
 # []  stands for a group of characters:
 #     [abc]      stands for letters a or b or c
-#     [^abc]     stands for any letter but any of a, b, and c
+#     [^abc]     stands for any character but any of a, b, and c
 #     [1-4]      stands for digits 1 to 4 (1, 2, 3, 4)
-#     [1-4-]     stands for digits 1 to 4 (1, 2, 3, 4), and the minus
+#     [1-4-]     stands for digits 1 to 4, and the minus
 #     [-1-4]     same as above
 #     [1-3-6]    stands for digits 1 to 3, minus, and 6
 #     [1-3-6-9]  stands for digits 1 to 3, minus, and 6 to 9
-#     [][]       stands for the closing bracket and the opening bracket
+#     [][]       stands for the closing and the opening bracket (']' must come first!)
 #     [^^]       stands for all characters but the caret symbol
 #
 # Example:
-#     string.match(file, "*[0-9].xml"); ... true if string ends with digit followed by ".xml"
+#     string.match(name, "*[0-9].xml"); ... true if 'name' ends with digit followed by ".xml"
 #
 var match = func(str, patt) {
 	var s = 0;
 	for (var p = 0; p < size(patt) and s < size(str); ) {
 		if (patt[p] == `\\`) {
 			if ((p += 1) >= size(patt))
-				return !size(str); # pattern ends with backslash
+				return 0;  # pattern ends with backslash
 
 		} elsif (patt[p] == `?`) {
 			s += 1;

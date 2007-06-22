@@ -65,10 +65,10 @@ var imatch = func(a, b) match(lc(a), lc(b));
 # ?   stands for any single character
 # *   stands for any number (including zero) of arbitrary characters
 # \   escapes the next character and makes it stand for itself; that is:
-#     \? stands for a question mark (not "any single character" placeholder)
+#     \? stands for a question mark (not the "any single character" placeholder)
 # []  stands for a group of characters:
-#     [abc]      stands for letters a or b or c
-#     [^abc]     stands for any character but any of a, b, and c
+#     [abc]      stands for letters a, b or c
+#     [^abc]     stands for any character but a, b, and c
 #     [1-4]      stands for digits 1 to 4 (1, 2, 3, 4)
 #     [1-4-]     stands for digits 1 to 4, and the minus
 #     [-1-4]     same as above
@@ -76,6 +76,8 @@ var imatch = func(a, b) match(lc(a), lc(b));
 #     [1-3-6-9]  stands for digits 1 to 3, minus, and 6 to 9
 #     [][]       stands for the closing and the opening bracket (']' must be first!)
 #     [^^]       stands for all characters but the caret symbol
+#
+# Note that a minus can't be a range delimiter, as in [a--b]
 #
 # Example:
 #     string.match(name, "*[0-9].xml"); ... true if 'name' ends with digit followed by ".xml"
@@ -117,7 +119,8 @@ var match = func(str, patt) {
 				x[patt[p]] = 1;
 				i += 1;
 
-				if (p + 2 < patt[p] and patt[p + 1] == `-` and patt[p + 2] != `]`) {
+				if (p + 2 < patt[p] and patt[p] != `-` and patt[p + 1] == `-`
+						and patt[p + 2] != `]` and patt[p + 2] != `-`) {
 					var from = patt[p];
 					var to = patt[p += 2];
 					for (var c = from; c <= to; c += 1)

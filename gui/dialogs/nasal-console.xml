@@ -192,7 +192,7 @@
 				if (active) { # false in help mode
 					dlg.getNode("active").setIntValue(active);
 					if (!init)
-						dlg.getChild("code", active).setValue(screen.trim(edit.getValue()));
+						dlg.getChild("code", active).setValue(string.trim(edit.getValue()));
 				}
 				if (kbdctrl.getValue()) {
 					execute(dlg.getChild("code", which));

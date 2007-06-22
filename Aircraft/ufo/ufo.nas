@@ -31,7 +31,7 @@ var FT2M = 0.3048;
 var M2FT = 3.28083989501312335958;
 
 var normdeg = geo.normdeg;
-var printf = func(_...) { print(call(sprintf, _)) }
+var printf = func { print(call(sprintf, arg)) }
 
 
 var init_prop = func(prop, value) {
@@ -632,15 +632,15 @@ var file_selector = nil;
 var file_select_model = func {
 	if (file_selector == nil) {
 		file_selector = gui.FileSelector.new(fsel_callback,
-				"Select *.ac or *.xml model file",
-				"Load Model", getprop("/sim/fg-root"));
+				"Select 3D model file", "Load Model",
+				["*.ac", "*.xml"], getprop("/sim/fg-root"));
 	}
 	file_selector.open();
 }
 
 var fsel_callback = func {
 	var model = cmdarg().getValue();
-	var root = io.fixpath(getprop("/sim/fg-root")) ~ "/";
+	var root = string.fixpath(getprop("/sim/fg-root")) ~ "/";
 	if (substr(model, 0, size(root)) == root)
 		model = substr(model, size(root));
 

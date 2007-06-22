@@ -30,32 +30,6 @@
 #                  a message falls off; if 0 then don't scroll at all
 #
 
-var isspace = func(c) { c == ` ` or c == `\t` or c == `\n` or c == `\r` }
-
-
-##
-# trim spaces at the left (lr < 0), at the right (lr > 0), or both (lr = 0)
-#
-var trim = func(s, lr = 0) {
-	var l = 0;
-	if (lr <= 0) {
-		for (; l < size(s); l += 1) {
-			if (!isspace(s[l])) {
-				break;
-			}
-		}
-	}
-	var r = size(s) - 1;
-	if (lr >= 0) {
-		for (; r >= 0; r -= 1) {
-			if (!isspace(s[r])) {
-				break;
-			}
-		}
-	}
-	return r < l ? "" : substr(s, l, r - l + 1);
-}
-
 
 ##
 # convert string for output; replaces tabs by spaces, and skips
@@ -86,7 +60,7 @@ var sanitize = func(s) {
 var dialog_id = 0;
 var theme_font = nil;
 
-window = {
+var window = {
 	new : func(x = nil, y = nil, maxlines = 10, autoscroll = 10) {
 		var m = { parents : [window] };
 		#
@@ -118,8 +92,8 @@ window = {
 		if (g == nil) { g = me.fg[1] }
 		if (b == nil) { b = me.fg[2] }
 		if (a == nil) { a = me.fg[3] }
-		foreach (var line; split("\n", trim(msg))) {
-			line = sanitize(trim(line));
+		foreach (var line; split("\n", string.trim(msg))) {
+			line = sanitize(string.trim(line));
 			append(me.lines, [line, r, g, b, a]);
 			if (size(me.lines) > me.maxlines) {
 				me.lines = subvec(me.lines, 1);
@@ -227,7 +201,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 ##############################################################################
 
 
-msg_repeat = func {
+var msg_repeat = func {
 	if (getprop("/sim/tutorials/running")) {
 		var last = getprop("/sim/tutorials/last-message");
 		if (last == nil) {

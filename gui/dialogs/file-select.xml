@@ -113,6 +113,7 @@
 			var self = cmdarg();
 			var list = self.getNode("list");
 
+			# cloning
 			var dlgname = self.getNode("name").getValue();
 			self.getNode("input/property").setValue("/sim/gui/dialogs/" ~ dlgname ~ "/directory");
 			self.getNode("list/property").setValue("/sim/gui/dialogs/" ~ dlgname ~ "/selection");
@@ -132,11 +133,15 @@
 			var kbdshift = props.globals.getNode("/devices/status/keyboard/shift", 1);
 			var kbdalt = props.globals.getNode("/devices/status/keyboard/alt", 1);
 			var current = { dir : "", file : "" };
+			var pattern = [];
+			foreach (var p; dlg.getChildren("pattern"))
+				append(pattern, p.getValue());
 
-			var isletter = func(c) { c >= `A` and `Z` >= c or c >= `a` and `z` >= c }
-
-			var squeeze = func(s, n) {
-				return n >= size(s) ? s : "... " ~ substr(s, size(s) - n);
+			var matches = func(s) {
+				foreach (var p; pattern)
+					if (string.match(s, p))
+						return 1;
+				return 0;
 			}
 
 			var update = func(d) {
@@ -161,12 +166,12 @@
 						continue;
 
 					var stat = io.stat(d ~ "/" ~ e);
-					if (stat == nil)  # dead link, no permission
+					if (stat == nil)  # dead link
 						continue;
 
 					if (io.isdir(stat[2]))
 						append(dirs, e ~ "/");
-					else
+					elsif (!size(pattern) or matches(e))
 						append(files, e);
 				}
 
@@ -204,7 +209,7 @@
 					gui.dialog_update(dlgname, "file-input");
 				}
 				if (new != nil) {
-					var p = io.fixpath(new);
+					var p = string.fixpath(new);
 					if (update(p))
 						current.dir = p;
 					selection.setValue("");
@@ -216,7 +221,7 @@
 			}
 
 			var dir_input = func {
-				var p = io.fixpath(dir.getValue());
+				var p = string.fixpath(dir.getValue());
 				if (update(p))
 					current.dir = p;
 				gui.dialog_update(dlgname, "list");
@@ -229,7 +234,7 @@
 			var ok = func {
 				dir_input();
 				file_input();
-				var p = io.fixpath(current.dir ~ "/" ~ current.file);
+				var p = string.fixpath(current.dir ~ "/" ~ current.file);
 				var stat = io.stat(p);
 				if (stat == nil)
 					return;
@@ -251,7 +256,7 @@
 			current.dir = (var d = dir.getValue()) != nil and d != "" ? d : getprop("/sim/fg-current");
 			current.file = (var d = file.getValue()) != nil and d != "" ? d : "";
 			gui.dialog_update(dlgname, "file-input"); ## dir-input ?
-			update(io.fixpath(current.dir));
+			update(string.fixpath(current.dir));
 			dir.setValue(current.dir);
 		</open>
 	</nasal>

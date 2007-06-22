@@ -240,11 +240,12 @@ Dialog = {
 ##
 # FileSelector class (derived from Dialog class).
 #
-# SYNOPSIS: FileSelector.new(<callback>, <title>, <button> [, <dir> [, <file> [, <dotfiles>]]])
+# SYNOPSIS: FileSelector.new(<callback>, <title>, <button> [, <pattern> [, <dir> [, <file> [, <dotfiles>]]]])
 #
 #         callback ... callback function that gets return value as cmdarg().getValue()
 #         title    ... dialog title
 #         button   ... button text (should say "Save", "Load", etc. and not just "OK")
+#         pattern  ... array with shell pattern or nil (which is equivalent to "*")
 #         dir      ... starting dir ($FG_ROOT if unset)
 #         file     ... pre-selected default file name
 #         dotfiles ... flag that decids whether UNIX dotfiles should be shown (1) or not (0)
@@ -252,7 +253,13 @@ Dialog = {
 # EXAMPLE:
 #
 #     var report = func { print("file ", cmdarg().getValue(), " selected") }
-#     var selector = gui.FileSelector.new(report, "Save Flight", "Save", "/tmp", "flight.sav");
+#     var selector = gui.FileSelector.new(
+#             report,                 # callback function
+#             "Save Flight",          # dialot title
+#             "Save",                 # button text
+#             ["*.sav", "*.xml"],     # pattern for displayed files
+#             "/tmp",                 # start dir
+#             "flight.sav");          # default file name
 #     selector.open();
 #
 #     selector.close();
@@ -260,7 +267,7 @@ Dialog = {
 #     selector.open();
 #
 var FileSelector = {
-    new : func(callback, title, button, dir = "", file = "", dotfiles = 0) {
+    new : func(callback, title, button, pattern = nil, dir = "", file = "", dotfiles = 0) {
         var name = "file-select-";
         var data = props.globals.getNode("/sim/gui/dialogs/", 1);
         var i = nil;
@@ -277,6 +284,7 @@ var FileSelector = {
         m.set_directory(dir);
         m.set_file(file);
         m.set_dotfiles(dotfiles);
+        m.set_pattern(pattern);
         m.cblistener = setlistener(data.getNode("path", 1), callback);
         return m;
     },
@@ -286,6 +294,12 @@ var FileSelector = {
     set_directory : func(dir) { me.data.getNode("directory", 1).setValue(dir) },
     set_file      : func(file) { me.data.getNode("selection", 1).setValue(file) },
     set_dotfiles  : func(dot) { me.data.getNode("dotfiles", 1).setBoolValue(dot) },
+    set_pattern   : func(pattern) {
+        me.data.removeChildren("pattern");
+        if (pattern != nil)
+            forindex (var i; pattern)
+                me.data.getChild("pattern", i, 1).setValue(pattern[i]);
+    },
     del : func {
         me.close();
         delete(me.instance, me.name);

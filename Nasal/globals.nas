@@ -27,7 +27,7 @@ fgcommand = func(cmd, node=nil) {
 ##
 # Returns the SGPropertyNode argument to the currently executing
 # function. Wrapper for the internal _cmdarg function that retrieves
-# the ghost handlet to the argument and wraps it in a
+# the ghost handle to the argument and wraps it in a
 # props.Node object.
 #
 cmdarg = func { props.wrapNode(_cmdarg()) }

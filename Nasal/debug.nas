@@ -198,7 +198,7 @@ var bt = backtrace;
 
 
 ##
-# Excecutes function f with optional arguments and prints execution
+# Executes function f with optional arguments and prints execution
 # time in seconds. Examples:
 #
 #     var test = func(n) { for (var i = 0; i < n; i +=1) { print(i) }

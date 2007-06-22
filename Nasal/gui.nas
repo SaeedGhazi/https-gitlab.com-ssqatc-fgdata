@@ -248,14 +248,14 @@ Dialog = {
 #         pattern  ... array with shell pattern or nil (which is equivalent to "*")
 #         dir      ... starting dir ($FG_ROOT if unset)
 #         file     ... pre-selected default file name
-#         dotfiles ... flag that decids whether UNIX dotfiles should be shown (1) or not (0)
+#         dotfiles ... flag that decides whether UNIX dotfiles should be shown (1) or not (0)
 #
 # EXAMPLE:
 #
 #     var report = func { print("file ", cmdarg().getValue(), " selected") }
 #     var selector = gui.FileSelector.new(
 #             report,                 # callback function
-#             "Save Flight",          # dialot title
+#             "Save Flight",          # dialog title
 #             "Save",                 # button text
 #             ["*.sav", "*.xml"],     # pattern for displayed files
 #             "/tmp",                 # start dir

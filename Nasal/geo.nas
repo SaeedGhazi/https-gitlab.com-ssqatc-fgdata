@@ -286,9 +286,11 @@ var tile_path = func(lat, lon) {
 	p ~= "/" ~ tile_index(lat, lon) ~ ".stg";
 }
 
+
 var put_model = func(path, c, arg...) {
 	call(_put_model, [path] ~ (isa(c, Coord) ? c.latlon() : [c]) ~ arg);
 }
+
 
 var _put_model = func(path, lat, lon, elev_m = nil, hdg = 0, pitch = 0, roll = 0) {
 	if (elev_m == nil)

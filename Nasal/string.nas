@@ -63,9 +63,9 @@ var imatch = func(a, b) match(lc(a), lc(b));
 #
 # Rules:
 # ?   stands for any single character
-# *   stands for zero or any number of arbitrary characters
+# *   stands for any number (including zero) of arbitrary characters
 # \   escapes the next character and makes it stand for itself; that is:
-#     \? stands for a question mark (not "any single character")
+#     \? stands for a question mark (not "any single character" placeholder)
 # []  stands for a group of characters:
 #     [abc]      stands for letters a or b or c
 #     [^abc]     stands for any character but any of a, b, and c
@@ -74,7 +74,7 @@ var imatch = func(a, b) match(lc(a), lc(b));
 #     [-1-4]     same as above
 #     [1-3-6]    stands for digits 1 to 3, minus, and 6
 #     [1-3-6-9]  stands for digits 1 to 3, minus, and 6 to 9
-#     [][]       stands for the closing and the opening bracket (']' must come first!)
+#     [][]       stands for the closing and the opening bracket (']' must be first!)
 #     [^^]       stands for all characters but the caret symbol
 #
 # Example:
@@ -141,7 +141,7 @@ var match = func(str, patt) {
 
 
 ##
-# Removes superfluous slashes, emtpy and "." elements, expands
+# Removes superfluous slashes, empty and "." elements, expands
 # all ".." elements, and turns all backslashes into slashes.
 # The result will start with a slash if it started with a slash
 # or backslash, it will end without slash. Should be applied on

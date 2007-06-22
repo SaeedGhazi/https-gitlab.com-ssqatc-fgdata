@@ -444,7 +444,7 @@ var say = func(what, who = "copilot", delay = 0) {
 #
 var init_nasal = func {
 	globals.__tutorial = {
-		say : say,   # just exporting tutorial.say as __turorial.say
+		say : say,   # just exporting tutorial.say as __tutorial.say
 		next : func(n = 1) { current_step += n; is_first_step = 1; },
 		previous : func(n = 1) {
 			current_step -= n;

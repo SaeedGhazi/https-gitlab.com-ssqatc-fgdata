@@ -290,7 +290,7 @@ incAileron = func {
 
 ##
 # arg[0] is the elevator increment
-# arg[1] is the autopilot target alitude increment
+# arg[1] is the autopilot target altitude increment
 incElevator = func {
     auto = props.globals.getNode("/autopilot/locks/altitude", 1);
     if ( !auto.getValue() or auto.getValue() == 0 ) {

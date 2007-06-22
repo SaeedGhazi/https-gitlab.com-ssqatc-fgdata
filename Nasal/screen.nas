@@ -33,7 +33,7 @@
 
 ##
 # convert string for output; replaces tabs by spaces, and skips
-# delimitiers and the voice part in "{text|voice}" constructions
+# delimiters and the voice part in "{text|voice}" constructions
 #
 var sanitize = func(s) {
 	var r = "";

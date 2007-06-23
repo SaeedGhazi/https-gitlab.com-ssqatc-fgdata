@@ -315,16 +315,9 @@ var _put_model = func(path, lat, lon, elev_m = nil, hdg = 0, pitch = 0, roll = 0
 }
 
 
-var terr_tree = nil;
-var terr_lon = nil;
-var terr_lat = nil;
-var terr_elev = nil;
-
 var elevation = func(lat, lon) {
-	terr_lat.setDoubleValue(lat);
-	terr_lon.setDoubleValue(lon);
-	var success = fgcommand("terrain-elevation", terr_tree);
-	return success ? terr_elev.getValue() : nil;
+	var d = geodinfo(lat, lon);
+	return d == nil ? nil : d[0];
 }
 
 
@@ -366,15 +359,6 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	asin = math.asin;
 	acos = math.acos;
 	mod = math.mod;
-
-	terr_tree = props.Node.new();
-	terr_lat = terr_tree.getNode("latitude-deg", 1);
-	terr_lon = terr_tree.getNode("longitude-deg", 1);
-	terr_elev = terr_tree.getNode("elevation-m", 1);
-
-	terr_lat.setDoubleValue(0.0);
-	terr_lon.setDoubleValue(0.0);
-	terr_elev.setDoubleValue(-9999.0);
 
 	aircraft_lat = props.globals.getNode("/position/latitude-deg", 1);
 	aircraft_lon = props.globals.getNode("/position/longitude-deg", 1);

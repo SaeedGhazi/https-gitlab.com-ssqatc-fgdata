@@ -34,7 +34,7 @@
 				foreach (var t; tut) {
 					if (t.getNode("name").getValue() == name) {
 						setprop("/sim/tutorials/current-description",
-							screen.trim(t.getNode("description").getValue()));
+							string.trim(t.getNode("description").getValue()));
 						break;
 					}
 				}

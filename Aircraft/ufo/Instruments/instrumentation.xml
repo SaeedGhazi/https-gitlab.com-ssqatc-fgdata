@@ -102,10 +102,10 @@
 		<number>0</number>
 	</gps>
 
-	<wxradar>
+	<radar>
 		<name>radar</name>
 		<number>0</number>
-	</wxradar>
+	</radar>
 
 	<tacan>
 		<name>tacan</name>

@@ -105,6 +105,7 @@
 	<radar>
 		<name>radar</name>
 		<number>0</number>
+		<update-interval-sec>0</update-interval-sec>
 	</radar>
 
 	<tacan>

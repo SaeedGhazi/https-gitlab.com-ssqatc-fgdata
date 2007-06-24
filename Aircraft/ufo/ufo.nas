@@ -1,4 +1,12 @@
 
+setlistener("/sim/panel/visibility", func {
+	setprop("/instrumentation/radar/serviceable", cmdarg().getValue());
+}, 1);
+
+
+
+
+
 # maximum speed -----------------------------------------------------------------------------------
 
 

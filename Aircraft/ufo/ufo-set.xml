@@ -13,12 +13,17 @@
 
 		<panel>
 			<visibility>false</visibility>
+			<path>Aircraft/ufo/Instruments/panel.xml</path>
 		</panel>
 
 		<model>
 			<path>Aircraft/ufo/Models/ufo.xml</path>
 			<always-show-in-MP type="bool">false</always-show-in-MP>
 		</model>
+
+		<instrumentation>
+			<path>Aircraft/ufo/Instruments/instrumentation.xml</path>
+		</instrumentation>
 
 		<help>
 			<title>UFO</title>
@@ -361,7 +366,20 @@
 
 	<instrumentation>
 		<radar>
-			<debug-mode type="bool">true</debug-mode>
+			<serviceable type="bool">true</serviceable>
+			<switch type="string" archive="y">on</switch>
+			<range type="double" archive="y">40</range>
+			<mode-control type="int" archive="y">2</mode-control>
+
+			<mode type="string" archive="y">WX</mode>
+			<lightning type="bool" archive="y">true</lightning>
+			<display-mode type="string" archive="y">plan</display-mode>
+
+			<display-controls>
+				<WX type="bool" archive="y">false</WX>
+				<data type="bool" archive="y">true</data>
+				<pos type="bool" archive="y">true</pos>
+			</display-controls>
 		</radar>
 	</instrumentation>
 

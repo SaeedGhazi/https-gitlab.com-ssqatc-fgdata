@@ -185,5 +185,44 @@
 				</script>
 			</binding>
 		</action>
+
+		<action>
+			<name>wx toggle</name>
+			<button>0</button>
+			<x>-119</x>
+			<y>-119</y>
+			<w>50</w>
+			<h>30</h>
+			<binding>
+				<command>property-toggle</command>
+				<property>instrumentation/radar/display-controls/WX</property>
+			</binding>
+		</action>
+
+		<action>
+			<name>data toggle</name>
+			<button>0</button>
+			<x>3</x>
+			<y>-119</y>
+			<w>50</w>
+			<h>30</h>
+			<binding>
+				<command>property-toggle</command>
+				<property>instrumentation/radar/display-controls/data</property>
+			</binding>
+		</action>
+
+		<action>
+			<name>echo toggle</name>
+			<button>0</button>
+			<x>69</x>
+			<y>-119</y>
+			<w>50</w>
+			<h>30</h>
+			<binding>
+				<command>property-toggle</command>
+				<property>instrumentation/radar/display-controls/pos</property>
+			</binding>
+		</action>
 	</actions>
 </PropertyList>

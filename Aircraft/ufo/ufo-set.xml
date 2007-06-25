@@ -88,6 +88,10 @@
 				<desc>toggle marker for active (= last selected) object</desc>
 			</key>
 			<key>
+				<name>P</name>
+				<desc>toggle radar panel (see Ctrl-C for the control areas)</desc>
+			</key>
+			<key>
 				<name>space</name>
 				<desc>open/close model select dialog</desc>
 			</key>

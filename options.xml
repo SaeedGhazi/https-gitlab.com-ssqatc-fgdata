@@ -115,7 +115,7 @@
    </option>
 
    <option>
-    <name>prop:name</name>
+    <name>prop:[type:]name</name>
     <arg>value</arg>
     <description>strings/prop-desc</description>
    </option>

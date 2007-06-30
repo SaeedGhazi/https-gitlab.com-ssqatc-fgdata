@@ -27,25 +27,37 @@ foreach(fmt; keys(ifmts))
     caller(0)[0]["is" ~ fmt] = _gen_ifmt_test(ifmts[fmt]);
 
 # Reads an XML file from an absolute path and returns it as property
-# tree. All nodes are of type STRING, attributes are written as regular
-# nodes with the optional prefix prepended to the name. If the prefix
-# is nil, then attributes are ignored. Returns nil on error.
+# tree. All nodes are of type STRING. Data are only written to leafs.
+# Attributes are written as regular nodes with the optional prefix
+# prepended to the name. If the prefix is nil, then attributes are
+# ignored. Returns nil on error.
+#
+# NOTE: this function is meant for importing 'foreign' XML files, *not*
+# for reading FlighGear's standard "PropertyList" XML files. For those
+# we have better means, like the loadxml/savexml fgcommands. This
+# function does neither interpret the "type" nor the "n" (index) or
+# "archive" attribute.
+#
 var readxml = func(file, prefix = "") {
-    var stack = [[0, ""]];
+    var stack = [[{}, ""]];
     var node = props.Node.new();
     var tree = node;           # prevent GC
     var start = func(name, attr) {
-        stack[-1][0] += 1;     # count children
-        append(stack, [0, ""]);
-        var index = size(node.getChildren(name));
-        node = node.getChild(name, index, 1);
+        var index = stack[-1][0];
+        if (!contains(index, name))
+            index[name] = 0;
+
+        node = node.getChild(name, index[name], 1);
         if(prefix != nil)
             foreach(var n; keys(attr))
                 node.getNode(prefix ~ n, 1).setValue(attr[n]);
+
+        index[name] += 1;
+        append(stack, [{}, ""]);
     }
     var end = func(name) {
         var buf = pop(stack);
-        if(!buf[0] and size(buf[1]))
+        if(!size(buf[0]) and size(buf[1]))
             node.setValue(buf[1]);
         node = node.getParent();
     }

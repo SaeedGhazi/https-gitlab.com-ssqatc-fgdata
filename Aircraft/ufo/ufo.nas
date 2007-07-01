@@ -627,7 +627,7 @@ var print_data = func {
 var export_data = func {
 	var path = getprop("/sim/fg-home") ~ "/ufo-model-export.xml";
 	var args = props.Node.new({ filename : path });
-	props.copy(modelmgr.get_data(), args.getNode("data", 1));
+	props.copy(modelmgr.get_data(), args.getNode("data/models", 1));
 	fgcommand("savexml", args);
 	print("model data exported to ", path);
 }

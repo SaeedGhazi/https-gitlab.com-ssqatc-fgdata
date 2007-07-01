@@ -72,15 +72,17 @@ var readxml = func(file, prefix = "___") {
     return parsexml(file, start, end, data) == nil ? nil : tree;
 }
 
-# Writes a property tree as returned by readxml() to a file. Chidren
+# Writes a property tree as returned by readxml() to a file. Children
 # with name starting with <prefix> are again turned into attributes of
 # their parent. <node> must contain exactly one child, which will
-# become the XML file's outmost element.
+# become the XML file's outermost element.
 #
 var writexml = func(file, node, indent = "\t", prefix = "___") {
     var root = node.getChildren();
-    if(!size(root)) die("writexml(): tree doesn't have a root node");
-    if(substr(file, -4) != ".xml") file ~= ".xml";
+    if(!size(root))
+        die("writexml(): tree doesn't have a root node");
+    if(substr(file, -4) != ".xml")
+        file ~= ".xml";
     var fh = open(file, "w");
     var pre = size(prefix);
     write(fh, "<?xml version=\"1.0\"?>\n\n");
@@ -108,7 +110,8 @@ var writexml = func(file, node, indent = "\t", prefix = "___") {
     }
     writenode(root[0]);
     close(fh);
-    if(size(root) != 1) die("writexml(): tree has more than one root node");
+    if(size(root) != 1)
+        die("writexml(): tree has more than one root node");
 }
 
 

@@ -3,14 +3,14 @@
 sample
 
 <instrumentation>
- <wxradar>
+ <radar>
   <range type="int" archive="y">32</range>
   <minimized type="bool" archive="y">false</minimized>
   <switch archive="y">ON</switch>
   <mode archive="y">WX</mode>
   <lightning type="bool" archive="y">false</lightning>
   <display-mode archive="y">arc</display-mode>
- </wxradar>
+ </radar>
 </instrumentation>
 
 -->

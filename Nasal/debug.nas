@@ -71,6 +71,8 @@ var _path        = func(s) { _c("36", s) }      # /some/property/path
 var _internal    = func(s) { _c("35", s) }      # me parents
 var _varname     = func(s) { _c("1", s) }       # variable_name
 
+var ghosttypes = {};
+
 
 var tree = func(p = "", graph = 1) {
 	var n = isa(p, props.Node) ? p : props.globals.getNode(p, 0);
@@ -166,7 +168,11 @@ var string = func(o) {
 
 		return _brace("{") ~ " " ~ s ~ " " ~ _brace("}");
 	} elsif (t == "ghost") {
-		return _angle("<") ~ _nil(ghosttype(o)) ~ _angle(">");
+		var gt = ghosttype(o);
+		if (contains(ghosttypes, gt))
+			return _angle("<") ~ _nil(ghosttypes[gt]) ~ _angle(">");
+		else
+			return _angle("<") ~ _nil(gt) ~ _angle(">");
 	} else {
 		return _angle("<") ~ _vartype(t) ~ _angle(">");
 	}
@@ -264,6 +270,9 @@ var load_nasal = func(file, module = nil) {
 
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
+	ghosttypes[ghosttype(props._globals())] = "PropertyNode";
+	ghosttypes[ghosttype(io.stderr)] = "FileHandle";
+
 	setlistener("/sim/startup/terminal-ansi-colors", func {
 		color(cmdarg().getBoolValue());
 	}, 1);

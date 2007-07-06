@@ -41,6 +41,13 @@
 #
 #
 
+# constants
+# ==============================================================================
+var D2R = math.pi / 180;
+var R2D = 180 / math.pi;
+
+
+
 
 # helper functions
 # ==============================================================================
@@ -322,8 +329,34 @@ var lowpass = {
 };
 
 
+# angular lowpass
+# ==============================================================================
+# same as above, but for angles. Filters sin/cos separately and calculates the
+# angle again from them. This avoids unexpected jumps from 180 to -179.99 degree.
+#
+var angular_lowpass = {
+	new : func(coeff) {
+		var m = { parents : [angular_lowpass] };
+		m.sin = aircraft.lowpass.new(coeff);
+		m.cos = aircraft.lowpass.new(coeff);
+		return m;
+	},
+	filter : func(v) {
+		v *= D2R;
+		math.atan2(me.sin.filter(math.sin(v)), me.cos.filter(math.cos(v))) * R2D;
+	},
+	set : func(v) {
+		v *= D2R;
+		me.sin.set(math.sin(v));
+		me.cos.set(math.cos(v));
+	},
+	get : func {
+		math.atan2(me.sin.get(), me.cos.get()) * R2D;
+	},
+};
 
-# Data
+
+# data
 # ==============================================================================
 # class that loads and saves properties to aircraft-specific data files in
 # ~/.fgfs/aircraft-data/ (Unix) or %APPDATA%\flightgear.org\aircraft-data\.

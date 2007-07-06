@@ -285,7 +285,6 @@ var light = {
 };
 
 
-
 # lowpass
 # ==============================================================================
 # class that implements a variable-interval EWMA (Exponentially Weighted
@@ -303,7 +302,6 @@ var light = {
 var lowpass = {
 	new : func(coeff) {
 		var m = { parents : [lowpass] };
-		m.dtN = props.globals.getNode("/sim/time/delta-realtime-sec", 1);
 		m.coeff = coeff >= 0 ? coeff : die("aircraft.lowpass(): coefficient must be >= 0");
 		m.value = nil;
 		return m;
@@ -322,7 +320,7 @@ var lowpass = {
 		me.value = v;
 	},
 	_filter_ : func(v) {
-		var dt = me.dtN.getValue();
+		var dt = getprop("/sim/time/delta-realtime-sec");
 		var c = dt / (me.coeff + dt);
 		me.value = v * c + me.value * (1 - c);
 	},
@@ -337,8 +335,8 @@ var lowpass = {
 var angular_lowpass = {
 	new : func(coeff) {
 		var m = { parents : [angular_lowpass] };
-		m.sin = aircraft.lowpass.new(coeff);
-		m.cos = aircraft.lowpass.new(coeff);
+		m.sin = lowpass.new(coeff);
+		m.cos = lowpass.new(coeff);
 		return m;
 	},
 	filter : func(v) {

@@ -9,18 +9,23 @@ var sin = func(v) math.sin(v * D2R);
 var cos = func(v) math.cos(v * D2R);
 var atan2 = func(v, w) math.atan2(v, w) * R2D;
 
-var ViewNum = 0;
-var Grd_Offset = 5.0;
-var panel = gui.Dialog.new("/sim/gui/dialogs/cam/dialog", "Aircraft/ufo/Dialogs/campanel.xml");
+var panel_dialog = gui.Dialog.new("/sim/gui/dialogs/cam/panel/dialog",
+        "Aircraft/ufo/Dialogs/cam.xml");
+var callsign_dialog = gui.Dialog.new("/sim/gui/dialogs/cam/select/dialog",
+        "Aircraft/ufo/Dialogs/callsign.xml");
+
 var maxspeedN = props.globals.getNode("engines/engine/speed-max-mps");
 var speed = [10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000];
 var current = 7;
 var maxspeed = speed[current];
 var cam_view = nil;
+var view_number = 0;
+var ground_offset = 5.0;
 
 var targetN = nil;
 var target = geo.Coord.new();
 var self = nil;
+var aircraft_list = [];
 
 
 controls.flapsDown = func(x) {
@@ -35,61 +40,31 @@ controls.flapsDown = func(x) {
 }
 
 
-var throttle = 0;
-controls.throttleAxis = func {
-	val = cmdarg().getNode("setting").getValue();
-	if (size(arg) > 0)
-		val = -val;
-	throttle = (1 - val) * 0.5;
+#var throttle = 0;
+#controls.throttleAxis = func {
+#	val = cmdarg().getNode("setting").getValue();
+#	if (size(arg) > 0)
+#		val = -val;
+#	throttle = (1 - val) * 0.5;
+#	props.setAll("/controls/engines/engine", "throttle", throttleL.filter(throttle));
+#}
+
+
+var by_callsign = func(a, b) {
+	cmp(a.getNode("callsign").getValue(), b.getNode("callsign").getValue());
 }
 
 
-# directly called from the dialog
-var goto_target = func {
-	targetN != nil or return;
-	var lat = targetN.getNode("position/latitude-deg").getValue();
-	var lon = targetN.getNode("position/longitude-deg").getValue();
-	var alt = targetN.getNode("position/altitude-ft").getValue() * geo.FT2M;
-	var speed = targetN.getNode("velocities/true-airspeed-kt").getValue() * MPS * 2;
-	var course = targetN.getNode("orientation/true-heading-deg").getValue();
-	self.set_latlon(lat, lon, alt).apply_course_distance(course + 180, 100);
-	setprop("/position/latitude-deg", self.lat());
-	setprop("/position/longitude-deg", self.lon());
-	altL.set(self.alt());
-	speedL.set(speed);
-	mode.chase.setValue(1);
-	mode.focus.setValue(1);
-	mode.alt.setValue(1);
-	mode.speed.setValue(1);
-	maxspeed = speed * 2;
-	throttleL.set(0.5);
-}
+var update_aircraft_list = func {
+	var ac = [];
+	var n = props.globals.getNode("/ai/models");
 
-
-var set_aircraft = func {
-	var list = [];
 	if (getprop("/sim/cam/target-ai"))
-		list ~= props.globals.getNode("/ai/models").getChildren("aircraft");
+		ac ~= n.getChildren("aircraft");
 	if (getprop("/sim/cam/target-mp"))
-		list ~= props.globals.getNode("/ai/models").getChildren("multiplayer");
+		ac ~= n.getChildren("multiplayer");
 
-	var name = "";
-	var index = getprop("/sim/cam/target-number");
-	targetN = nil;
-
-	if (size(list)) {
-		if (index < 0)
-			index = size(list) - 1;
-		elsif (index >= size(list))
-			index = 0;
-
-		targetN = list[index];
-		name = targetN.getNode("callsign").getValue();
-		printlog("info", "cam: new aircraft: ", targetN.getPath(), "\t", name);
-	}
-
-	setprop("/sim/cam/target-number", index);
-	setprop("/sim/cam/target-name", name);
+	aircraft_list = sort(ac, by_callsign);
 }
 
 
@@ -175,30 +150,77 @@ if (0) {
 	maxspeedN.setDoubleValue(speedL.filter(maxspeed));
 
 	var AGL = getprop("/position/altitude-agl-ft");
-	if (AGL < Grd_Offset)
-		setprop("/position/altitude-ft", getprop("/position/altitude-ft") + Grd_Offset - AGL);
-
-	props.setAll("/controls/engines/engine", "throttle", throttleL.filter(throttle));
+	if (AGL < ground_offset)
+		setprop("/position/altitude-ft", getprop("/position/altitude-ft") + ground_offset - AGL);
 }
 
 
 var loop = func {
-	if (ViewNum == cam_view and targetN != nil)
+	if (view_number == cam_view and targetN != nil)
 		update();
 
 	settimer(loop, 0);
 }
 
 
-setlistener("/sim/cam/target-number", set_aircraft);
-setlistener("/sim/cam/target-ai", set_aircraft);
-setlistener("/sim/cam/target-mp", set_aircraft);
+var select_aircraft = func(index) {
+	update_aircraft_list();
+
+	var number = size(aircraft_list);
+	var name = "";
+	targetN = nil;
+
+	if (number) {
+		if (index < 0)
+			index = number - 1;
+		elsif (index >= number)
+			index = 0;
+
+		targetN = aircraft_list[index];
+		name = targetN.getNode("callsign").getValue();
+	}
+	setprop("/sim/cam/target-number", index);
+	setprop("/sim/cam/target-name", name);
+}
+
+
+# called from the dialog
+var goto_target = func {
+	targetN != nil or return;
+	var lat = targetN.getNode("position/latitude-deg").getValue();
+	var lon = targetN.getNode("position/longitude-deg").getValue();
+	var alt = targetN.getNode("position/altitude-ft").getValue() * geo.FT2M;
+	var speed = targetN.getNode("velocities/true-airspeed-kt").getValue() * MPS * 2;
+	var course = targetN.getNode("orientation/true-heading-deg").getValue();
+	self.set_latlon(lat, lon, alt).apply_course_distance(course + 180, 100);
+	setprop("/position/latitude-deg", self.lat());
+	setprop("/position/longitude-deg", self.lon());
+	altL.set(self.alt());
+	speedL.set(speed);
+	mode.chase.setValue(1);
+	mode.focus.setValue(1);
+	mode.alt.setValue(1);
+	mode.speed.setValue(1);
+	maxspeed = speed * 2;
+#	props.setAll("/controls/engines/engine", "throttle", throttleL.set(0.5));
+}
+
+
+var update_aircraft = func {
+	select_aircraft(getprop("/sim/cam/target-number"));
+}
+
+
+setlistener("/sim/cam/target-number", update_aircraft);
+setlistener("/sim/cam/target-ai", update_aircraft);
+setlistener("/sim/cam/target-mp", update_aircraft);
+
 setlistener("/sim/current-view/view-number", func {
-	ViewNum = cmdarg().getValue();
-	if (ViewNum == 7)
-		panel.open();
+	view_number = cmdarg().getValue();
+	if (view_number == cam_view)
+		panel_dialog.open();
 	else
-		panel.dialog.close();
+		panel_dialog.close();
 });
 
 
@@ -222,7 +244,7 @@ setlistener("/sim/signals/fdm-initialized", func {
 
 	setprop("/sim/current-view/view-number", cam_view);
 	setprop("/engines/engine/speed-max-mps", 500);
-	settimer(set_aircraft, 1);
+	update_aircraft();
 	loop();
 });
 

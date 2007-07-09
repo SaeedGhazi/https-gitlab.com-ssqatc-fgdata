@@ -1,13 +1,14 @@
 <?xml version="1.0"?>
 
 <PropertyList>
-	<name>cam-keys</name>
+	<name>cam</name>
 	<layout>vbox</layout>
 	<x>0</x>
 	<y>24</y>
 	<pref-width>1024</pref-width>
 	<pref-height>24</pref-height>
 	<modal>false</modal>
+
 	<color>
 		<red>0.5</red>
 		<green>0.5</green>
@@ -36,6 +37,21 @@
 			</binding>
 		</checkbox>
 
+		<button>
+			<color>
+				<red>0.5</red>
+				<green>0.5</green>
+				<blue>0.5</blue>
+			</color>
+			<pref-width>20</pref-width>
+			<pref-height>20</pref-height>
+			<legend>^</legend>
+			<binding>
+				<command>nasal</command>
+				<script>cam.callsign_dialog.toggle()</script>
+			</binding>
+		</button>
+
 		<text>
 			<label>000000</label>
 			<format>No# %d</format>
@@ -60,9 +76,11 @@
 			<pref-height>20</pref-height>
 			<legend>&lt;&lt;</legend>
 			<binding>
-				<command>property-adjust</command>
-				<property>/sim/cam/target-number</property>
-				<step>-1</step>
+				<command>nasal</command>
+				<script>
+					cam.update_aircraft_list();
+					cam.select_aircraft(getprop("/sim/cam/target-number") - 1);
+				</script>
 			</binding>
 		</button>
 
@@ -77,9 +95,11 @@
 			<pref-height>20</pref-height>
 			<legend>&gt;&gt;</legend>
 			<binding>
-				<command>property-adjust</command>
-				<property>/sim/cam/target-number</property>
-				<step>1</step>
+				<command>nasal</command>
+				<script>
+					cam.update_aircraft_list();
+					cam.select_aircraft(getprop("/sim/cam/target-number") + 1);
+				</script>
 			</binding>
 		</button>
 

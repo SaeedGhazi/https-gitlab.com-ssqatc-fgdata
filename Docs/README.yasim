@@ -757,9 +757,23 @@ rotor:    A rotor. Used for simulating helicopters. You can have one, two
           balance: The balance of the rotor. 1.0: the rotor is 100% balanced,
                    0.0: half of the blades are missing. Use a value near one
                    (0.98 ... 0.999) to add some vibration.
+          tiltcenterx:
+          tiltcentery:
+          tiltcenterz: The center for the tilting of the complete rotorhead/
+                       mast. Can be used for simulating of the Osprey or small
+                       autogyros.
+          mintiltyaw:
+          mintiltpitch:
+          mintiltroll:
+          maxtiltyaw:
+          maxtiltpitch:
+          maxtiltroll: The limits (in degree) for tilting the rotor head
 
           All rotor can have <control> subelements for the cyclic
           (CYCLICELE, CYCLICAIL) and collective (COLLECTIVE) input.
+          and can have <control> subelements for the tilting the whole rotor
+          head around the y-axis (TILTPITCH), the x-axis (TILTROLL) and the
+          z-axis (TILTYAW).
 
 rotorgear: If you are using one ore more rotors you have to define a
           rotorgear. It connects all the rotors and adds a simple engine.
@@ -795,18 +809,12 @@ rotorgear: If you are using one ore more rotors you have to define a
                    ROTORBRAKE: rotor brake
                    ROTORRELTARGET: the target rpm of the engine relative to
                                the "normal" value for the governor. Default is
-                               1. Additionally you can modify this value in
-                               the property tree (/rotors/gear/target-rel-rpm)
-                               limited internally to 2.5
+                               1.
                    ROTORENGINEMAXRELTORQUE: the maximum torque of the engine
                                relativ to the torque defined by the engine-
                                power. Default is 1. By setting the rel-target
                                to a large number you get control over the
-                               engine by this control.  Additionally you can
-                               modify this value in the property tree
-                               (/rotors/gear/max-rel-torque)
+                               engine by this control.
                                Alternativ you can use these two values for
                                individual start-up sequences (see the s58)
-
-          The rotor simulation is still "beta".
 

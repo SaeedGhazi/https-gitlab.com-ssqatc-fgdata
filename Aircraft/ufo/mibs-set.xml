@@ -4,6 +4,7 @@
     <sim>
         <description>FG video assistant</description>
         <author>Syd Adams, Melchior Franz</author>
+        <status>alpha</status>
         <flight-model>ufo</flight-model>
         <sound>
             <path>Aircraft/ufo/ufo-sound.xml</path>
@@ -12,11 +13,6 @@
         <panel>
             <visibility>false</visibility>
         </panel>
-
-        <model>
-            <path>Aircraft/ufo/Models/camera.xml</path>
-            <always-show-in-MP type="bool">false</always-show-in-MP>
-        </model>
 
         <view n="100">
             <name>Cam View</name>

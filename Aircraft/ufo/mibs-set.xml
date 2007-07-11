@@ -6,6 +6,11 @@
         <author>Syd Adams, Melchior Franz</author>
         <status>alpha</status>
         <flight-model>ufo</flight-model>
+
+        <model>
+            <path>Aircraft/ufo/Models/mibs.ac</path>
+        </model>
+
         <sound>
             <path>Aircraft/ufo/ufo-sound.xml</path>
         </sound>

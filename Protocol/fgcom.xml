@@ -11,7 +11,7 @@
     # fgfs --generic=socket,out,<hz>,<host>,16661,udp,fgcom
 
     Check data with:
-    #  netcat -u -l -p <port>
+    #  netcat -u -l -p 16661
   ]]>
  </comment>
 
@@ -29,6 +29,27 @@
    </chunk>
 
    <chunk>
+    <name>com1-serviceable</name>
+    <type>bool</type>
+    <format>COM1_SRV=%d</format>
+    <node>/instrumentation/comm/serviceable</node>
+   </chunk>
+
+   <chunk>
+    <name>com2frq</name>
+    <type>float</type>
+    <format>COM2_FRQ=%03.3f</format>
+    <node>/instrumentation/comm[1]/frequencies/selected-mhz</node>
+   </chunk>
+
+   <chunk>
+    <name>com2-serviceable</name>
+    <type>bool</type>
+    <format>COM2_SRV=%d</format>
+    <node>/instrumentation/comm[1]/serviceable</node>
+   </chunk>
+
+   <chunk>
     <name>nav1frq</name>
     <type>float</type>
     <format>NAV1_FRQ=%03.3f</format>
@@ -36,8 +57,29 @@
    </chunk>
 
    <chunk>
-    <name>ptt-key-status</name>
+    <name>nav1-serviceable</name>
     <type>bool</type>
+    <format>NAV1_SRV=%d</format>
+    <node>/instrumentation/nav/serviceable</node>
+   </chunk>
+
+   <chunk>
+    <name>nav2frq</name>
+    <type>float</type>
+    <format>NAV2_FRQ=%03.3f</format>
+    <node>/instrumentation/nav[1]/frequencies/selected-mhz</node>
+   </chunk>
+
+   <chunk>
+    <name>nav2-serviceable</name>
+    <type>bool</type>
+    <format>NAV2_SRV=%d</format>
+    <node>/instrumentation/nav[1]/serviceable</node>
+   </chunk>
+
+   <chunk>
+    <name>ptt-key-status</name>
+    <type>int</type>
     <format>PTT=%d</format>
     <node>/instrumentation/comm/ptt</node>
    </chunk>

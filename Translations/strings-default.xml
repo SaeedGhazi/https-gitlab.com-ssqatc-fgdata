@@ -106,7 +106,7 @@
  <enable-auto-coordination-desc>Enable auto coordination</enable-auto-coordination-desc>
  <disable-auto-coordination-desc>Disable auto coordination</disable-auto-coordination-desc>
  <browser-app-desc>Specify path to your web browser</browser-app-desc>
- <prop-desc>Set property &lt;name&gt; to &lt;value&gt;. &lt;type&gt; can be one of string, double, float, long, int, or bool. Default is string.</prop-desc>
+ <prop-desc>Set property &lt;name&gt; to &lt;value&gt;. &lt;type&gt; can be one of string, double, float, long, int, or bool.</prop-desc>
  <config-desc>Load additional properties from path</config-desc>
  <units-feet-desc>Use feet for distances</units-feet-desc>
  <units-meters-desc>Use meters for distances</units-meters-desc>

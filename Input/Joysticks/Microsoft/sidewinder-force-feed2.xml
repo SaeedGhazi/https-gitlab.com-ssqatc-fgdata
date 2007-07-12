@@ -101,8 +101,9 @@ ________________________________________________________________________________
 
 	<nasal>
 		<script><![CDATA[
-			data = props.globals.getNode(this).getNode("data");
-			mode = data.getNode("mode");
+			var self = cmdarg().getParent();
+			var data = self.getNode("data");
+			var mode = data.getNode("mode");
 			modifier = data.getNode("modifier");
 			f1 = f2 = 0;
 			left_brake = right_brake = 0;

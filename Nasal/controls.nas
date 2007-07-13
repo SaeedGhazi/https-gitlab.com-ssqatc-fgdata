@@ -327,25 +327,25 @@ rudderTrimAxis = func { rudderTrim(cmdarg().getNode("value").getValue()); }
 ##
 # Gear handling.
 #
-gearDown = func {
+var gearDown = func {
     if (arg[0] < 0) {
       setprop("/controls/gear/gear-down", 0);
     } elsif (arg[0] > 0) {
       setprop("/controls/gear/gear-down", 1);
     }
 }
-gearToggle = func { gearDown(getprop("/controls/gear/gear-down") > 0 ? -1 : 1); }
+var gearToggle = func { gearDown(getprop("/controls/gear/gear-down") > 0 ? -1 : 1); }
 
 ##
 # Brake handling.
 #
-fullBrakeTime = 0.5;
-applyBrakes = func(v, which = 0) {
+var fullBrakeTime = 0.5;
+var applyBrakes = func(v, which = 0) {
     if (which <= 0) { interpolate("/controls/gear/brake-left", v, fullBrakeTime); }
     if (which >= 0) { interpolate("/controls/gear/brake-right", v, fullBrakeTime); }
 }
 
-applyParkingBrake = func(v) {
+var applyParkingBrake = func(v) {
     if (!v) { return; }
     var p = "/controls/gear/brake-parking";
     setprop(p, var i = !getprop(p));
@@ -355,11 +355,16 @@ applyParkingBrake = func(v) {
 ##
 # Weapon handling.
 #
-trigger = func(b) { setprop("/controls/armament/trigger", b); }
-weaponSelect = func(d) {
+var trigger = func(b) setprop("/controls/armament/trigger", b);
+var weaponSelect = func(d) {
     var ws = props.globals.getNode("/controls/armament/selected", 1);
     var n = ws.getValue();
     if (n == nil) { n = 0; }
     ws.setIntValue(n + d);
 }
+
+##
+# Communication.
+#
+var ptt = func(b) setprop("/instrumentation/comm/ptt", b);
 

@@ -821,7 +821,7 @@ debug_keys = {
         { name : "Shift-F3",  desc : "load panel" },
         { name : "Shift-F4",  desc : "reload global preferences" },
         { name : "Shift-F9",  desc : "toggle FDM data logging" },
-        { name : "Shift-Space", desc : "open property browser" },
+        { name : "Shift-Enter", desc : "open property browser" },
     ],
 };
 
@@ -869,7 +869,7 @@ common_aircraft_keys = {
         { name : "7/Home",    desc : "increase elevator trim" },
         { name : "8/Down",    desc : "decrease elevator or AP altitude" },
         { name : "9/PgUp",    desc : "incr. throttle or AP autothrottle" },
-        { name : "Space",     desc : "fire starter on selected eng." },
+        { name : "Space",     desc : "PTT - Push To Talk (via VoIP)" },
         { name : "!/@/#/$",   desc : "select engine 1/2/3/4" },
         { name : "b",         desc : "apply all brakes" },
         { name : "B",         desc : "toggle parking brake" },
@@ -884,7 +884,8 @@ common_aircraft_keys = {
         { name : "m/M",       desc : "mixture richer/leaner" },
         { name : "n/N",       desc : "propeller finer/coarser" },
         { name : "P",         desc : "toggle 2D panel" },
-        { name : "s",         desc : "swap panels" },
+        { name : "S",         desc : "swap panels" },
+        { name : "s",         desc : "fire starter on selected eng." },
         { name : ", .",       desc : "left/right brake (comma, period)" },
         { name : "~",         desc : "select all engines (tilde)" },
         { name : "[ ]",       desc : "flaps up/down" },

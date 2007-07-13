@@ -2,14 +2,39 @@
 <!--
 Key binding definitions.
 
-The list here is not yet comprehensive: a few of the bindings are
-still handled in the C++ code.
+The *-key in fg/osg/osgviewer is handled in the C++ code.
 
 Regular keycodes go up to 255; special keys start at 256, and can be
 calculated by adding 256 to the GLUT key value in glut.h.
 -->
 
 <PropertyList>
+
+ <nasal>
+  <script>
+      var kbdshift = props.globals.getNode("/devices/status/keyboard/shift");
+      var kbdctrl = props.globals.getNode("/devices/status/keyboard/ctrl");
+      var kbdalt = props.globals.getNode("/devices/status/keyboard/alt");
+
+      var get_modifiers = func {
+          kbdshift.getValue() + 2 * kbdctrl.getValue() + 4 * kbdalt.getValue();
+      }
+
+      var space_release = func {}
+      var space = func(state, mod) {
+          if (!state) {
+              space_release();
+              return space_release = func {}
+          }
+          if (mod == 0 or mod == 1) {
+              controls.ptt(mod + 1);
+              space_release = func { controls.ptt(0) }
+          } else {
+              gui.popupTip("SPACE " ~ mod ~ " " ~ (state ? "press" : "release"));
+          }
+      }
+  </script>
+ </nasal>
 
  <key n="1">
   <name>Ctrl-A</name>
@@ -95,6 +120,12 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <property>/controls/flight/rudder</property>
    <step type="double">0.05</step>
   </binding>
+  <mod-shift>
+   <binding>
+    <command>nasal</command>
+    <script>gui.property_browser()</script>
+   </binding>
+  </mod-shift>
  </key>
 
  <key n="14">
@@ -242,22 +273,28 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="32">
   <name>SPACE</name>
-  <desc>Fire Starter on Selected Engine(s)</desc>
+  <desc>PTT - Push To Talk (via VoIP)</desc>
   <binding>
    <command>nasal</command>
-   <script>controls.startEngine()</script>
+   <script>space(1, get_modifiers())</script>
   </binding>
   <mod-up>
    <binding>
     <command>nasal</command>
-    <script>props.setAll("/controls/engines/engine", "starter", 0)</script>
+    <script>space(0, get_modifiers())</script>
    </binding>
   </mod-up>
   <mod-shift>
    <binding>
     <command>nasal</command>
-    <script>gui.property_browser()</script>
+    <script>space(1, get_modifiers())</script>
    </binding>
+   <mod-up>
+    <binding>
+     <command>nasal</command>
+     <script>space(0, get_modifiers())</script>
+    </binding>
+   </mod-up>
   </mod-shift>
  </key>
 
@@ -619,6 +656,29 @@ calculated by adding 256 to the GLUT key value in glut.h.
   </binding>
  </key>
 
+ <key n="83">
+  <name>S</name>
+  <desc>Swap panels.</desc>
+  <binding>
+   <condition>
+     <not>
+     <property>/sim/allow-toggle-cockpit</property>
+     </not>
+   </condition>
+   <command>property-swap</command>
+   <property>/sim/panel/path</property>
+   <property>/sim/panel_2/path</property>
+  </binding>
+  <binding>
+   <condition>
+     <not>
+     <property>/sim/allow-toggle-cockpit</property>
+     </not>
+   </condition>
+   <command>panel-load</command>
+  </binding>
+ </key>
+
  <key n="84">
   <name>T</name>
   <desc>Decrease warp delta.</desc>
@@ -856,26 +916,30 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <key n="115">
   <name>s</name>
-  <desc>Swap panels.</desc>
+  <desc>Fire Starter on Selected Engine(s)</desc>
   <binding>
-   <condition>
-     <not>
-     <property>/sim/allow-toggle-cockpit</property>
-     </not>
-   </condition>
-   <command>property-swap</command>
-   <property>/sim/panel/path</property>
-   <property>/sim/panel_2/path</property>
+   <command>nasal</command>
+   <script>controls.startEngine()</script>
   </binding>
-  <binding>
-   <condition>
-     <not>
-     <property>/sim/allow-toggle-cockpit</property>
-     </not>
-   </condition>
-   <command>panel-load</command>
-  </binding>
+  <mod-up>
+   <binding>
+    <command>nasal</command>
+    <script>props.setAll("/controls/engines/engine", "starter", 0)</script>
+   </binding>
+  </mod-up>
+  <mod-shift>
+   <binding>
+    <command>nasal</command>
+    <script>gui.property_browser()</script>
+   </binding>
+  </mod-shift>
  </key>
+
+ <nasal>
+  <script>
+    t_id = 0;
+  </script>
+ </nasal>
 
  <key n="116">
   <name>t</name>
@@ -885,6 +949,24 @@ calculated by adding 256 to the GLUT key value in glut.h.
    <property>/sim/time/warp-delta</property>
    <step type="int">30</step>
   </binding>
+  <binding>
+   <command>nasal</command>
+   <script>
+    (func(x) {
+        settimer(func {
+            x == t_id or return;
+            gui.popupTip("resetting warp");
+            setprop("/sim/time/warp-delta", 0);
+        }, 1, 1)
+    })(t_id += 1)
+   </script>
+  </binding>
+  <mod-up>
+   <binding>
+    <command>nasal</command>
+    <script>t_id += 1</script>
+   </binding>
+  </mod-up>
  </key>
 
  <key n="118">

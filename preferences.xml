@@ -762,6 +762,7 @@ Started September 2000 by David Megginson, david@megginson.com
    </frequencies>
    <volume type="double">0.6</volume>
    <serviceable>true</serviceable>
+   <ptt type="int">0</ptt>
   </comm>
 
   <comm n="1">
@@ -771,6 +772,7 @@ Started September 2000 by David Megginson, david@megginson.com
    </frequencies>
    <volume type="double">0.6</volume>
    <serviceable>true</serviceable>
+   <ptt type="int">0</ptt>
   </comm>
 
   <nav n="0">

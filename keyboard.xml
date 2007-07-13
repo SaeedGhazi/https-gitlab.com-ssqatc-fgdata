@@ -12,12 +12,12 @@ calculated by adding 256 to the GLUT key value in glut.h.
 
  <nasal>
   <script>
-      var kbdshift = props.globals.getNode("/devices/status/keyboard/shift");
-      var kbdctrl = props.globals.getNode("/devices/status/keyboard/ctrl");
-      var kbdalt = props.globals.getNode("/devices/status/keyboard/alt");
+      var shift = props.globals.getNode("/devices/status/keyboard/shift");
+      var ctrl = props.globals.getNode("/devices/status/keyboard/ctrl");
+      var alt = props.globals.getNode("/devices/status/keyboard/alt");
 
       var get_modifiers = func {
-          kbdshift.getValue() + 2 * kbdctrl.getValue() + 4 * kbdalt.getValue();
+          shift.getValue() + 2 * ctrl.getValue() + 4 * alt.getValue();
       }
 
       var space_release = func {}
@@ -30,7 +30,7 @@ calculated by adding 256 to the GLUT key value in glut.h.
               controls.ptt(mod + 1);
               space_release = func { controls.ptt(0) }
           } else {
-              gui.popupTip("SPACE " ~ mod ~ " " ~ (state ? "press" : "release"));
+              gui.popupTip("SPACE " ~ mod);
           }
       }
   </script>

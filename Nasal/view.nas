@@ -151,33 +151,57 @@ var flyby = {
         me.currview == me.number or return;
         me.chase = -getprop("/sim/chase-distance-m");
         me.course = me.hdgN.getValue();
-        me.coord = geo.aircraft_position();
+        me.last = geo.aircraft_position();
         me.setpos(1);
         me.dist = 20;
         me._loop_(me.loopid);
     },
     setpos : func(force = 0) {
         var pos = geo.aircraft_position();
-        var dist = me.coord.distance_to(pos);
+
+        # check if the aircraft has moved enough
+        var dist = me.last.distance_to(pos);
         if (dist < 1.7 * me.chase and !force)
             return 1.13;
 
-        var side = (rand() - 0.5 < 0) ? -90 : 90;
+        # "predict" and remember next aircraft position
         var course = me.hdgN.getValue();
+        var delta_alt = (pos.alt() - me.last.alt()) * 0.5;
         pos.apply_course_distance(course, dist * 0.8);
-        pos.apply_course_distance(course + side, me.chase);
+        pos.set_alt(pos.alt() + delta_alt);
+        me.last.set(pos);
+
+        # apply random deviation
+        var radius = me.chase * (0.5 * rand() + 0.7);
+        var agl = getprop("/position/altitude-agl-ft") * geo.FT2M;
+        if (agl > me.chase)
+            var angle = rand() * 2 * math.pi;
+        else
+            var angle = ((2 * rand() - 1) * 0.15 + 0.5) * (rand() < 0.5 ? -math.pi : math.pi);
+
+        var dev_alt = math.cos(angle) * radius;
+        var dev_side = math.sin(angle) * radius;
+        pos.apply_course_distance(course + 90, dev_side);
+
+        # and make sure it's not under ground
         var lat = pos.lat();
         var lon = pos.lon();
-        var elev = geo.elevation(lat, lon);
         var alt = pos.alt();
-        alt += (alt - me.coord.alt()) * 0.5;
-        if (elev != nil and alt < elev + 5)
-            alt = elev + 5;
+        var elev = geo.elevation(lat, lon);
+        if (elev != nil) {
+            elev += 2;   # min elevation
+            if (alt + dev_alt < elev and dev_alt < 0)
+                dev_alt = -dev_alt;
+            if (alt + dev_alt < elev)
+                alt = elev;
+            else
+                alt += dev_alt;
+        }
 
+        # set new view point
         me.latN.setValue(lat);
         me.lonN.setValue(lon);
         me.altN.setValue(alt * geo.M2FT);
-        me.coord.set_latlon(lat, lon, alt);
         return 6.3;
     },
     _loop_ : func(id) {

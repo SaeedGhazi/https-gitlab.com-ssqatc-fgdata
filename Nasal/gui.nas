@@ -377,16 +377,17 @@ var dialog_update = func(dialog, objects...) {
 # GUI theming
 ########################################################################
 
-nextStyle = func {
-    numStyles = size(props.globals.getNode("/sim/gui").getChildren("style"));
-    curr = getprop("/sim/gui/current-style") + 1;
-    if (curr >= numStyles) {
-        curr = 0;
-    }
-    setprop("/sim/gui/current-style", curr);
+var nextStyle = func {
+    var curr = getprop("/sim/gui/current-style");
+    var styles = props.globals.getNode("/sim/gui").getChildren("style");
+    forindex (var i; styles)
+        if (styles[i].getIndex() == curr)
+            break;
+    if ((i += 1) >= size(styles))
+        i = 0;
+    setprop("/sim/gui/current-style", styles[i].getIndex());
     fgcommand("gui-redraw");
 }
-
 
 
 ########################################################################

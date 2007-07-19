@@ -27,6 +27,20 @@ selectEngine = func {
     foreach(node; sel) { node.setBoolValue(node.getIndex() == arg[0]); }
 }
 
+# Selects (state=1) or deselects (state=0) a list of engines, or all
+# engines if no list is specified. Example:  selectEngines(1, 1, 3, 5);
+#
+var selectEngines = func (state, engines...) {
+    var sel = props.globals.getNode("/sim/input/selected");
+    if(size(engines)) {
+        foreach(var e; engines)
+            sel.getChild("engine", e, 1).setBoolValue(state);
+    } else {
+        foreach(var e; sel.getChildren("engine"))
+            e.setBoolValue(state);
+    }
+}
+
 selectAllEngines = func {
     sel = props.globals.getNode("/sim/input/selected").getChildren("engine");
     foreach(node; sel) { node.setBoolValue(1); }
@@ -51,20 +65,29 @@ centerFlightControls = func {
     setprop("/controls/flight/rudder", 0);
 }
 
-throttleMouse = func {
-    if(!getprop("/devices/status/mice/mouse[0]/button[1]")) { return; }
-    val = (cmdarg().getNode("offset").getValue() * -4
-           + getprop("/controls/engines/engine/throttle"));
-    if(size(arg) > 0) { val = -val; }
-    props.setAll("/controls/engines/engine", "throttle", val);
+var throttleMouse = func {
+    if(!getprop("/devices/status/mice/mouse[0]/button[1]")) return;
+    var sel = props.globals.getNode("/sim/input/selected").getChildren("engine");
+    var delta = cmdarg().getNode("offset").getValue() * -4;
+    foreach(var n; sel) {
+        if(!n.getValue()) continue;
+        var throttle = "/controls/engines/engine[" ~ n.getIndex() ~ "]/throttle";
+        var val = getprop(throttle) + delta;
+        if(size(arg) > 0) val = -val;
+        setprop(throttle, val);
+    }
 }
 
 # Joystick axis handlers (uses cmdarg).  Shouldn't be called from
 # other contexts.
-throttleAxis = func {
-    val = cmdarg().getNode("setting").getValue();
-    if(size(arg) > 0) { val = -val; }
-    props.setAll("/controls/engines/engine", "throttle", (1 - val)/2);
+var throttleAxis = func {
+    var val = cmdarg().getNode("setting").getValue();
+    if(size(arg) > 0) val = -val;
+    var sel = props.globals.getNode("/sim/input/selected").getChildren("engine");
+    foreach(var n; sel)
+        if(n.getValue())
+            setprop("/controls/engines/engine[" ~ n.getIndex() ~ "]/throttle",
+                    (1 - val)/2);
 }
 mixtureAxis = func {
     val = cmdarg().getNode("setting").getValue();
@@ -216,18 +239,16 @@ adjEngControl = func {
 ##
 # arg[0] is the throttle increment
 # arg[1] is the auto-throttle target speed increment
-incThrottle = func {
-    auto = props.globals.getNode("/autopilot/locks/speed", 1);
+var incThrottle = func {
+    var auto = props.globals.getNode("/autopilot/locks/speed", 1);
+    var sel = props.globals.getNode("/sim/input/selected");
     if ( !auto.getValue() ) {
-      engs = props.globals.getNode("/controls/engines").getChildren("engine");
-      foreach(e; engs) {
-        node = e.getNode("throttle", 1);
-        node.setValue(node.getValue() + arg[0]);
-        if ( node.getValue() < -1.0 ) {
-          node.setValue( -1.0 );
-        }
-        if ( node.getValue() > 1.0 ) {
-          node.setValue( 1.0 );
+      var engs = props.globals.getNode("/controls/engines").getChildren("engine");
+      foreach(var e; engs) {
+        if(sel.getChild("engine", e.getIndex(), 1).getBoolValue()) {
+          var node = e.getNode("throttle", 1);
+          var val = node.getValue() + arg[0];
+          node.setValue(val < -1.0 ? -1.0 : val > 1.0 ? 1.0 : val);
         }
       }
     } else {

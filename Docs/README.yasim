@@ -754,6 +754,7 @@ rotor:    A rotor. Used for simulating helicopters. You can have one, two
                    parameters have very large impact to the cyclic response)
                    With this parameter (default 1) you can adjust the
                    simulator to the real helo.
+          downwashfactor: A factor for the downwash of the rotor, default 1.
           balance: The balance of the rotor. 1.0: the rotor is 100% balanced,
                    0.0: half of the blades are missing. Use a value near one
                    (0.98 ... 0.999) to add some vibration.

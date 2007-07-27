@@ -20,12 +20,38 @@ var current = 7;
 var maxspeed = speed[current];
 var cam_view = nil;
 var view_number = 0;
-var ground_offset = 5.0;
+var min_alt_agl = 5.0; # meter
 
 var targetN = nil;
 var target = geo.Coord.new();
 var self = nil;
 var aircraft_list = [];
+
+
+var goal_headingN = props.globals.getNode("sim/current-view/goal-heading-offset-deg");
+var goal_pitchN = props.globals.getNode("sim/current-view/goal-pitch-offset-deg");
+var goal_rollN = props.globals.getNode("sim/current-view/goal-roll-offset-deg");
+
+
+var mode = {
+	chase : props.globals.getNode("/sim/cam/chase"),
+	focus : props.globals.getNode("/sim/cam/focus"),
+	speed : props.globals.getNode("/sim/cam/speed"),
+	alt   : props.globals.getNode("/sim/cam/alt"),
+	lock  : props.globals.getNode("/sim/cam/lock"),
+};
+
+
+var lowpass = {
+	viewheading : aircraft.angular_lowpass.new(0.2),
+	viewpitch   : aircraft.lowpass.new(0.1),
+	viewroll    : aircraft.lowpass.new(0.1),
+
+	hdg         : aircraft.angular_lowpass.new(0.6),
+	alt         : aircraft.lowpass.new(3),
+	speed       : aircraft.lowpass.new(2),
+	throttle    : aircraft.lowpass.new(0.3),
+};
 
 
 controls.flapsDown = func(x) {
@@ -46,10 +72,11 @@ controls.flapsDown = func(x) {
 #	if (size(arg) > 0)
 #		val = -val;
 #	throttle = (1 - val) * 0.5;
-#	props.setAll("/controls/engines/engine", "throttle", throttleL.filter(throttle));
+#	props.setAll("/controls/engines/engine", "throttle", lowpass.throttle.filter(throttle));
 #}
 
 
+# sort function
 var by_callsign = func(a, b) {
 	cmp(a.getNode("callsign").getValue(), b.getNode("callsign").getValue());
 }
@@ -60,7 +87,7 @@ var update_aircraft_list = func {
 	var n = props.globals.getNode("/ai/models");
 
 	if (getprop("/sim/cam/target-ai"))
-		ac ~= n.getChildren("aircraft");
+		ac ~= n.getChildren("aircraft") ~ n.getChildren("tanker");
 	if (getprop("/sim/cam/target-mp"))
 		ac ~= n.getChildren("multiplayer");
 
@@ -68,34 +95,15 @@ var update_aircraft_list = func {
 }
 
 
-var viewhdgL = aircraft.angular_lowpass.new(0.2);
-var viewpitchL = aircraft.lowpass.new(0.1);
-var viewrollL = aircraft.lowpass.new(0.1);
-
-var hdgL = aircraft.angular_lowpass.new(0.6);
-var altL = aircraft.lowpass.new(3);
-var speedL = aircraft.lowpass.new(2);
-var throttleL = aircraft.lowpass.new(0.3);
-
-var goal_headingN = props.globals.getNode("sim/current-view/goal-heading-offset-deg");
-var goal_pitchN = props.globals.getNode("sim/current-view/goal-pitch-offset-deg");
-var goal_rollN = props.globals.getNode("sim/current-view/goal-roll-offset-deg");
-var mode = {
-	chase : props.globals.getNode("/sim/cam/chase"),
-	focus : props.globals.getNode("/sim/cam/focus"),
-	speed : props.globals.getNode("/sim/cam/speed"),
-	alt   : props.globals.getNode("/sim/cam/alt"),
-	lock  : props.globals.getNode("/sim/cam/lock"),
-};
-
-
 var update = func {
+	# data acquisition
 	target.set_latlon(
 		targetN.getNode("position/latitude-deg").getValue(),
 		targetN.getNode("position/longitude-deg").getValue(),
 		targetN.getNode("position/altitude-ft").getValue() * geo.FT2M);
 
 	self = geo.aircraft_position();
+
 if (0) {
 	if (mode.lock.getValue()) {
 		self.set(target);
@@ -111,16 +119,22 @@ if (0) {
 	var self_pitch = getprop("/orientation/pitch-deg");
 	var self_roll = getprop("/orientation/roll-deg");
 
+	# check whether to unlock altitude/heading
 	if (abs(self_pitch) > 2)
 		mode.alt.setValue(0);
 	if (abs(self_roll) > 2)
 		mode.chase.setValue(0);
 
-	if (mode.alt.getValue())
-		setprop("/position/altitude-ft", altL.filter(target.alt()) * geo.M2FT);
+	# calculate own altitude
+	var min_alt_asl = target.alt() - getprop("/position/altitude-agl-ft") * geo.FT2M + min_alt_agl;
+	if (self.alt() <= min_alt_asl)
+		setprop("/position/altitude-ft", lowpass.alt.filter(min_alt_asl) * geo.M2FT);
+	elsif (mode.alt.getValue())
+		setprop("/position/altitude-ft", lowpass.alt.filter(target.alt()) * geo.M2FT);
 	else
-		altL.filter(self.alt());
+		lowpass.alt.filter(self.alt());
 
+	# calculate position relative to target
 	var distance = self.direct_distance_to(target);
 	if (distance < 1) {
 		var course = targetN.getNode("orientation/true-heading-deg").getValue();
@@ -129,29 +143,28 @@ if (0) {
 	} else {
 		var course = self.course_to(target);
 	}
-	var elevation = atan2(target.alt() - altL.get(), distance);
+	var elevation = atan2(target.alt() - lowpass.alt.get(), distance);
 
+	# set own heading
 	if (mode.chase.getValue())
-		setprop("/orientation/heading-deg", self_heading = hdgL.filter(course));
+		setprop("/orientation/heading-deg", self_heading = lowpass.hdg.filter(course));
 
+	# calculate focus view direction
 	if (mode.focus.getValue()) {
-		var h = viewhdgL.filter(self_heading - course);
+		var h = lowpass.viewheading.filter(self_heading - course);
 		var p = elevation - self_pitch * cos(h);
 		var r = -self_roll * sin(h);
 		goal_headingN.setValue(h);
-		goal_pitchN.setValue(viewpitchL.filter(p));
-		goal_rollN.setValue(viewrollL.filter(r));
+		goal_pitchN.setValue(lowpass.viewpitch.filter(p));
+		goal_rollN.setValue(lowpass.viewroll.filter(r));
 	}
 
+	# calculate own speed
 	if (mode.speed.getValue())
 		maxspeed = targetN.getNode("velocities/true-airspeed-kt").getValue() * MPS * 2;
 	else
 		maxspeed = speed[current];
-	maxspeedN.setDoubleValue(speedL.filter(maxspeed));
-
-	var AGL = getprop("/position/altitude-agl-ft");
-	if (AGL < ground_offset)
-		setprop("/position/altitude-ft", getprop("/position/altitude-ft") + ground_offset - AGL);
+	maxspeedN.setDoubleValue(lowpass.speed.filter(maxspeed));
 }
 
 
@@ -195,14 +208,14 @@ var goto_target = func {
 	self.set_latlon(lat, lon, alt).apply_course_distance(course + 180, 100);
 	setprop("/position/latitude-deg", self.lat());
 	setprop("/position/longitude-deg", self.lon());
-	altL.set(self.alt());
-	speedL.set(speed);
+	lowpass.alt.set(self.alt());
+	lowpass.speed.set(speed);
 	mode.chase.setValue(1);
 	mode.focus.setValue(1);
 	mode.alt.setValue(1);
 	mode.speed.setValue(1);
 	maxspeed = speed * 2;
-#	props.setAll("/controls/engines/engine", "throttle", throttleL.set(0.5));
+#	props.setAll("/controls/engines/engine", "throttle", lowpass.throttle.set(0.5));
 }
 
 

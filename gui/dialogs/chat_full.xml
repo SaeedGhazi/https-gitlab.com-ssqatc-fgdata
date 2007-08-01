@@ -28,15 +28,15 @@
 
   <group>
     <layout>hbox</layout>
-   
+
     <input>
-     <name>compose</name>   
+     <name>compose</name>
      <stretch>true</stretch>
      <halign>fill</halign>
      <length>50</length>
-     <pref-width>500</pref-width>  
+     <pref-width>500</pref-width>
      <property>/sim/multiplay/chat-compose</property>
-    </input>   
+    </input>
 
     <button>
       <legend>Send</legend>
@@ -53,14 +53,12 @@
           {
             setprop("/sim/multiplay/chat", lchat);
             setprop("/sim/multiplay/chat-compose", "");
-            fgcommand("dialog-update", props.Node.new({"object-name": "compose",
-                                                       "dialog-name": "chat-full"}));
-          }          
+            gui.dialog_update("chat-full", "compose");
+          }
         </script>
       </binding>
     </button>
   </group>
-
 
   <text>
     <label></label>
@@ -78,7 +76,7 @@
         <command>dialog-close</command>
       </binding>
     </button>
-    
+
     <button>
       <legend>Less ^</legend>
       <default>false</default>
@@ -90,8 +88,6 @@
         <command>dialog-close</command>
       </binding>
     </button>
-    
-    
 
     <empty><stretch>true</stretch></empty>
   </group>

@@ -77,7 +77,6 @@ resetView = func {
     if (getprop("/sim/current-view/view-number") == 6)
         return flyby.setpos(1);
 
-    resetViewPos();
     resetViewDir();
     resetFOV();
 }

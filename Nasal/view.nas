@@ -48,9 +48,26 @@ decrease = func {
 ##
 # Handler.  Reset FOV to default.
 #
-resetFOV = func {
+var resetFOV = func {
     setprop("/sim/current-view/field-of-view",
             getprop("/sim/current-view/config/default-field-of-view-deg"));
+}
+
+var resetViewPos = func {
+    var n = getprop("/sim/current-view/view-number");
+    var v = views[n].getNode("config");
+    setprop("/sim/current-view/x-offset-m", v.getNode("x-offset-m", 1).getValue() or 0);
+    setprop("/sim/current-view/y-offset-m", v.getNode("y-offset-m", 1).getValue() or 0);
+    setprop("/sim/current-view/z-offset-m", v.getNode("z-offset-m", 1).getValue() or 0);
+}
+
+var resetViewDir = func {
+    setprop("/sim/current-view/goal-heading-offset-deg",
+            getprop("/sim/current-view/config/heading-offset-deg"));
+    setprop("/sim/current-view/goal-pitch-offset-deg",
+            getprop("/sim/current-view/config/pitch-offset-deg"));
+    setprop("/sim/current-view/goal-roll-offset-deg",
+            getprop("/sim/current-view/config/roll-offset-deg"));
 }
 
 ##
@@ -60,12 +77,8 @@ resetView = func {
     if (getprop("/sim/current-view/view-number") == 6)
         return flyby.setpos(1);
 
-    setprop("/sim/current-view/goal-heading-offset-deg",
-            getprop("/sim/current-view/config/heading-offset-deg"));
-    setprop("/sim/current-view/goal-pitch-offset-deg",
-            getprop("/sim/current-view/config/pitch-offset-deg"));
-    setprop("/sim/current-view/goal-roll-offset-deg",
-            getprop("/sim/current-view/config/roll-offset-deg"));
+    resetViewPos();
+    resetViewDir();
     resetFOV();
 }
 

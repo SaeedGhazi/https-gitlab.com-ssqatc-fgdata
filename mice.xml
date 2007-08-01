@@ -167,38 +167,20 @@ current mode for each mouse is held in the
    <!-- left button centres view direction; middle + left also resets view point -->
    <button n="0">
     <binding>
-     <command>property-assign</command>
-     <property>/sim/current-view/heading-offset-deg</property>
-     <property>/sim/view/config/front-direction-deg</property>
-    </binding>
-    <binding>
-     <command>property-assign</command>
-     <property>/sim/current-view/goal-pitch-offset-deg</property>
-     <property>/sim/view/config/pitch-offset-deg</property>
+     <command>nasal</command>
+     <script>
+         view.resetViewDir();
+         view.resetFOV();
+     </script>
     </binding>
     <binding>
      <condition>
       <property>/devices/status/mice/mouse[0]/button[1]</property>
      </condition>
-     <command>property-assign</command>
-     <property>/sim/current-view/x-offset-m</property>
-     <property>/sim/view/config/x-offset-m</property>
-    </binding>
-    <binding>
-     <condition>
-      <property>/devices/status/mice/mouse[0]/button[1]</property>
-     </condition>
-     <command>property-assign</command>
-     <property>/sim/current-view/y-offset-m</property>
-     <property>/sim/view/config/y-offset-m</property>
-    </binding>
-    <binding>
-     <condition>
-      <property>/devices/status/mice/mouse[0]/button[1]</property>
-     </condition>
-     <command>property-assign</command>
-     <property>/sim/current-view/z-offset-m</property>
-     <property>/sim/view/config/z-offset-m</property>
+     <command>nasal</command>
+     <script>
+         view.resetViewPos();
+     </script>
     </binding>
    </button>
 

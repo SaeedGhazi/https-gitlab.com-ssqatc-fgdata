@@ -45,7 +45,7 @@ top down before the key bindings are parsed.
   <binding>
    <command>nasal</command>
    <script>
-     node = props.globals.getNode("/autopilot/locks/altitude", 1);
+     var node = props.globals.getNode("/autopilot/locks/altitude", 1);
      if ( node.getValue() == "altitude-hold" ) {
        node.setValue( "" );
      } else {
@@ -79,7 +79,7 @@ top down before the key bindings are parsed.
   <binding>
    <command>nasal</command>
    <script>
-     node = props.globals.getNode("/autopilot/locks/altitude", 1);
+     var node = props.globals.getNode("/autopilot/locks/altitude", 1);
      if ( node.getValue() == "gs1-hold" ) {
        node.setValue( "" );
      } else {
@@ -95,7 +95,7 @@ top down before the key bindings are parsed.
   <binding>
    <command>nasal</command>
    <script>
-     node = props.globals.getNode("/autopilot/locks/heading", 1);
+     var node = props.globals.getNode("/autopilot/locks/heading", 1);
      if ( node.getValue() == "dg-heading-hold" ) {
        node.setValue( "" );
      } else {
@@ -131,7 +131,7 @@ top down before the key bindings are parsed.
   <binding>
    <command>nasal</command>
    <script>
-     node = props.globals.getNode("/autopilot/locks/heading", 1);
+     var node = props.globals.getNode("/autopilot/locks/heading", 1);
      if ( node.getValue() == "nav1-hold" ) {
        node.setValue( "" );
      } else {
@@ -147,12 +147,12 @@ top down before the key bindings are parsed.
   <binding>
    <command>nasal</command>
    <script>
-     node = props.globals.getNode("/autopilot/locks/altitude", 1);
+     var node = props.globals.getNode("/autopilot/locks/altitude", 1);
      if ( node.getValue() == "pitch-hold" ) {
        node.setValue( "" );
      } else {
        node.setValue( "pitch-hold" );
-       pitch = props.globals.getNode("/autopilot/settings/target-pitch-deg", 1);
+       var pitch = props.globals.getNode("/autopilot/settings/target-pitch-deg", 1);
        pitch.setValue( getprop("/orientation/pitch-deg") );
      }
    </script>
@@ -174,7 +174,7 @@ top down before the key bindings are parsed.
   <binding>
    <command>nasal</command>
    <script>
-     node = props.globals.getNode("/autopilot/locks/speed", 1);
+     var node = props.globals.getNode("/autopilot/locks/speed", 1);
      if ( node.getValue() == "speed-with-throttle" ) {
        node.setValue( "" );
      } else {
@@ -190,12 +190,12 @@ top down before the key bindings are parsed.
   <binding>
    <command>nasal</command>
    <script>
-     node = props.globals.getNode("/autopilot/locks/altitude", 1);
+     var node = props.globals.getNode("/autopilot/locks/altitude", 1);
      if ( node.getValue() == "agl-hold" ) {
        node.setValue( "" );
      } else {
        node.setValue( "agl-hold" );
-       agl = props.globals.getNode("/autopilot/settings/target-agl-ft", 1);
+       var agl = props.globals.getNode("/autopilot/settings/target-agl-ft", 1);
        agl.setValue( getprop("/position/altitude-agl-ft") );
      }
    </script>
@@ -233,7 +233,7 @@ top down before the key bindings are parsed.
   <binding>
    <command>nasal</command>
    <script>
-     node = props.globals.getNode("/autopilot/locks/heading", 1);
+     var node = props.globals.getNode("/autopilot/locks/heading", 1);
      if ( node.getValue() == "wing-leveler" ) {
        node.setValue( "" );
      } else {
@@ -1106,8 +1106,8 @@ top down before the key bindings are parsed.
   <binding>
    <command>nasal</command>
    <script>
-    prop = "/autopilot/locks/heading";
-    curr = getprop(prop);
+    var prop = "/autopilot/locks/heading";
+    var curr = getprop(prop);
     if(curr == "true-heading-hold") { setprop(prop, ""); }
     else { setprop(prop, "true-heading-hold"); }
    </script>

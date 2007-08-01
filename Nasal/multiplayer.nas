@@ -11,15 +11,15 @@
 var messages = {};
 
 check_messages = func
-{  
+{
 
   var mp = props.globals.getNode("/ai/models").getChildren("multiplayer");
-  
+
   foreach (i; mp)
   {
     var lmsg           = getprop(i.getPath() ~ "/sim/multiplay/chat");
     var lcallsign      = getprop(i.getPath() ~ "/callsign");
-    
+
     if ((lmsg != nil) and (lmsg != "") and (lcallsign != nil) and (lcallsign != ""))
     {
       #print("Call Sign: " ~ lcallsign);
@@ -30,13 +30,13 @@ check_messages = func
       {
         # Indicate we've seen this message.
         messages[lcallsign] = lmsg;
-        echo_message(lmsg, lcallsign);        
+        echo_message(lmsg, lcallsign);
       }
     }
   }
-  
+
   # Check for new messages every couple of seconds.
-  settimer(check_messages, 3);  
+  settimer(check_messages, 3);
 }
 
 echo_message = func(msg, callsign)
@@ -45,8 +45,8 @@ echo_message = func(msg, callsign)
    {
      msg = callsign ~ ": " ~ msg;
    }
-   
-   var ldisplay = getprop("/sim/multiplay/chat_display");
+
+   var ldisplay = getprop("/sim/multiplay/chat-display");
 
    if ((ldisplay != nil) and (ldisplay == "1"))
    {
@@ -55,20 +55,20 @@ echo_message = func(msg, callsign)
    }
 
    # Add the chat to the chat history.
-   var lchat = getprop("/sim/multiplay/chat_history");
+   var lchat = getprop("/sim/multiplay/chat-history");
 
    if (lchat == nil)
    {
-     setprop("/sim/multiplay/chat_history", msg);
-   } 
+     setprop("/sim/multiplay/chat-history", msg);
+   }
    else
    {
      if (substr(lchat, size(lchat) -1, 1) != "\n")
      {
        lchat = lchat ~ "\n";
      }
-     
-     setprop("/sim/multiplay/chat_history", lchat ~ msg);
+
+     setprop("/sim/multiplay/chat-history", lchat ~ msg);
    }
 }
 
@@ -79,7 +79,7 @@ settimer(func {
 
   # check for new messages
   check_messages();
-  
+
 }, 1);
 
 

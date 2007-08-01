@@ -27,7 +27,7 @@
     <checkbox>
       <halign>left</halign>
       <label>Show chat messages</label>
-      <property>/sim/multiplay/chat_display</property>
+      <property>/sim/multiplay/chat-display</property>
       <binding>
         <command>dialog-apply</command>
       </binding>

@@ -32,17 +32,22 @@ Node = {
     getNode        : func { wrap(_getNode(me._g, arg)) },
 
     getPath : func {
-        name = me.getName();
+        var name = me.getName();
         if(me.getIndex() != 0)    { name = name ~ "[" ~ me.getIndex() ~ "]"; }
         if(me.getParent() != nil) { name = me.getParent().getPath() ~ "/" ~ name; }
         return name;
     },
 
     getBoolValue : func {
-        val = me.getValue();
+        var val = me.getValue();
         if(me.getType() == "STRING" and val == "false") { 0 }
         elsif (val == nil) { 0 }
         else { val != 0 }
+    },
+
+    remove : func {
+        if((var p = me.getParent()) == nil) return nil;
+        p.removeChild(me.getName(), me.getIndex());
     },
 };
 

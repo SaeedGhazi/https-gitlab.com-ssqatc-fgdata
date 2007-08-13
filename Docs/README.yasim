@@ -163,6 +163,18 @@ flap0, flap1, slat, spoiler:
                   angle by which the stall AoA is translated by the
                   slat extension.
 
+thruster: A very simple "thrust only" engine object.  Useful for
+          things like thrust vectoring nozzles.  All it does is map
+          its THROTTLE input axis to its output thrust rating.  Does
+          not consume fuel, etc...
+          thrust:   Maximum thrust in pounds
+          x,y,z:    The point on the airframe where thrust will be
+                    applied.
+          vx,vy,vy: The direction of the thrust in airframe
+                    coordinates.  The vector will be normalized
+                    automatically, so any non-zero vector will work
+                    fine.
+
 jet:      A turbojet/fan engine.  It accepts a <control> subelement to map a
           property to its throttle setting, and an <actionpt> subelement
           to place the action point of the thrust at a different

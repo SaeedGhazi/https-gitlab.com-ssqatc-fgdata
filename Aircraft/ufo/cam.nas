@@ -91,7 +91,16 @@ var update_aircraft_list = func {
 	if (getprop("/sim/cam/target-mp"))
 		ac ~= n.getChildren("multiplayer");
 
-	aircraft_list = sort(ac, by_callsign);
+	aircraft_list = [];
+
+	foreach (var model; ac) {
+		var model_node = model.getNode("valid");
+		if (model_node != nil and model_node.getBoolValue()) {
+			append(aircraft_list, model);
+		}
+        }
+
+	aircraft_list = sort(aircraft_list, by_callsign);
 }
 
 
@@ -197,9 +206,34 @@ var select_aircraft = func(index) {
 }
 
 
+var target_name_changed = func() {
+
+	var target_name = getprop("/sim/cam/target-name");
+
+	if (target_name == nil or cmp(target_name, "") == 0)
+		return;
+
+	forindex (var i; aircraft_list) {
+		if (cmp(target_name,
+			aircraft_list[i].getNode("callsign").getValue()) == 0) {
+			if (i != getprop("/sim/cam/target-number")) {
+				# found the index for the new target-name
+				select_aircraft(i);
+			}
+
+			return;
+		}
+	}
+
+	# no matches, select the current index again
+	update_aircraft();
+}
+
+
 # called from the dialog
 var goto_target = func {
 	targetN != nil or return;
+	self != nil or return;
 	var lat = targetN.getNode("position/latitude-deg").getValue();
 	var lon = targetN.getNode("position/longitude-deg").getValue();
 	var alt = targetN.getNode("position/altitude-ft").getValue() * geo.FT2M;
@@ -218,15 +252,32 @@ var goto_target = func {
 #	props.setAll("/controls/engines/engine", "throttle", lowpass.throttle.set(0.5));
 }
 
+var update_goto = func {
+	if (!getprop("/sim/cam/goto"))
+		return;
+
+	goto_target();
+	setprop("/sim/cam/goto", 0);
+}
 
 var update_aircraft = func {
 	select_aircraft(getprop("/sim/cam/target-number"));
 }
 
+var ai_removed = func {
+	var node_str = getprop("/ai/models/model-removed") ~ "/callsign";
+	var target_name = getprop(node_str);
+	if (cmp(target_name, getprop("/sim/cam/target-name")) == 0) {
+		update_aircraft();
+	}
+}
 
 setlistener("/sim/cam/target-number", update_aircraft);
+setlistener("/sim/cam/target-name", target_name_changed);
 setlistener("/sim/cam/target-ai", update_aircraft);
 setlistener("/sim/cam/target-mp", update_aircraft);
+setlistener("/sim/cam/goto", update_goto);
+setlistener("/ai/models/model-removed", ai_removed);
 
 setlistener("/sim/current-view/view-number", func {
 	view_number = cmdarg().getValue();

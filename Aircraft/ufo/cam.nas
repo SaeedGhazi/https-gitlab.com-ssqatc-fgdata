@@ -8,11 +8,7 @@ var R2D = 180 / math.pi;
 var sin = func(v) math.sin(v * D2R);
 var cos = func(v) math.cos(v * D2R);
 var atan2 = func(v, w) math.atan2(v, w) * R2D;
-var time=0;
-var lasttime=0;
-var seconds =0;
-var dist=0;
-var lastdist=0;
+
 var panel_dialog = gui.Dialog.new("/sim/gui/dialogs/cam/panel/dialog",
         "Aircraft/ufo/Dialogs/cam.xml");
 var callsign_dialog = gui.Dialog.new("/sim/gui/dialogs/cam/select/dialog",
@@ -20,7 +16,7 @@ var callsign_dialog = gui.Dialog.new("/sim/gui/dialogs/cam/select/dialog",
 
 var maxspeedN = props.globals.getNode("engines/engine/speed-max-mps");
 var speed = [10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000];
-var current = 7;
+var current = 5;
 var maxspeed = speed[current];
 var cam_view = nil;
 var view_number = 0;
@@ -110,7 +106,6 @@ var update_aircraft_list = func {
 
 var update = func {
     # data acquisition
-    
     target.set_latlon(
         targetN.getNode("position/latitude-deg").getValue(),
         targetN.getNode("position/longitude-deg").getValue(),
@@ -160,9 +155,13 @@ if (0) {
     var elevation = atan2(target.alt() - lowpass.alt.get(), distance);
 
     # set own heading
-    if (mode.chase.getValue())
-        setprop("/orientation/heading-deg", self_heading = lowpass.hdg.filter(course));
-
+    if (mode.chase.getValue()){
+    var voff=targetN.getNode("radar/v-offset").getValue();
+    if(voff >60 or voff < -60){mode.chase.setValue(0);}
+    var dist=targetN.getNode("radar/range-nm").getValue();
+    if(dist < 0.01){mode.chase.setValue(0);}
+    setprop("/orientation/heading-deg", self_heading = lowpass.hdg.filter(course));
+    }
     # calculate focus view direction
     if (mode.focus.getValue()) {
         var h = lowpass.viewheading.filter(self_heading - course);
@@ -174,25 +173,18 @@ if (0) {
     }
 
     # calculate own speed
-    if (mode.speed.getValue()){
-    dist=targetN.getNode("radar/range-nm").getValue();
-    var nmps =dist-lastdist*seconds;
-    nmps =nmps*1852;
-    maxspeed = nmps * 2;
-    lastdist=dist;
-    }else{
+    if (mode.speed.getValue())
+        maxspeed = targetN.getNode("velocities/true-airspeed-kt").getValue() * MPS * 2;
+    else
         maxspeed = speed[current];
-        }
     maxspeedN.setDoubleValue(lowpass.speed.filter(maxspeed));
 }
 
 
 var loop = func {
-    time=getprop("/sim/time/elapsed-sec");
-    seconds=time-lasttime;
     if (view_number == cam_view and targetN != nil)
         update();
-    lasttime=time;
+
     settimer(loop, 0);
 }
 
@@ -321,7 +313,6 @@ setlistener("/sim/signals/fdm-initialized", func {
     setprop("/sim/current-view/view-number", cam_view);
     setprop("/engines/engine/speed-max-mps", 500);
     update_aircraft();
-    lasttime=getprop("/sim/time/elapsed-sec");
     loop();
 });
 

@@ -278,6 +278,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <back-right-direction-deg type="double">225</back-right-direction-deg>
       <right-direction-deg type="double">270</right-direction-deg>
       <front-right-direction-deg type="double">315</front-right-direction-deg>
+      <dynamic-view type="bool">true</dynamic-view>
     </config>
     <dynamic>
       <enabled type="bool" userarchive="y">false</enabled>

@@ -369,7 +369,7 @@ var panel_visible = nil;	# whether 2D panel is visible
 var elapsedN = nil;
 var mouse_mode = nil;
 var mouse_button = nil;
-var enabled = props.globals.getNode("/sim").getChildren("view");
+var enabled = nil;
 
 var loop_id = 0;
 
@@ -387,6 +387,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	if (!contains(fdms, fdm) or !fdms[fdm])
 		return gui.menuEnable("dynamic-view", 0);
 
+	enabled = props.globals.getNode("/sim").getChildren("view");
 	forindex (var i; enabled)
 		enabled[i] = ((var n = enabled[i].getNode("config/dynamic-view")) != nil) and n.getBoolValue();
 

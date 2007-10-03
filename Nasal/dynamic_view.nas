@@ -369,6 +369,7 @@ var panel_visible = nil;	# whether 2D panel is visible
 var elapsedN = nil;
 var mouse_mode = nil;
 var mouse_button = nil;
+var enabled = props.globals.getNode("/sim").getChildren("view");
 
 var loop_id = 0;
 
@@ -386,6 +387,9 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	if (!contains(fdms, fdm) or !fdms[fdm])
 		return gui.menuEnable("dynamic-view", 0);
 
+	forindex (var i; enabled)
+		enabled[i] = ((var n = enabled[i].getNode("config/dynamic-view")) != nil) and n.getBoolValue();
+
 	# some properties may still be unavailable or nil
 	props.globals.getNode("/accelerations/pilot/x-accel-fps_sec", 1).setDoubleValue(0);
 	props.globals.getNode("/accelerations/pilot/y-accel-fps_sec", 1).setDoubleValue(0);
@@ -397,7 +401,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	# let listeners keep some variables up-to-date, so that they don't have
 	# to be queried in the loop
 	setlistener("/sim/panel/visibility", func { panel_visible = cmdarg().getValue() }, 1);
-	setlistener("/sim/current-view/view-number", func { cockpit_view = !cmdarg().getValue() }, 1);
+	setlistener("/sim/current-view/view-number", func { cockpit_view = enabled[cmdarg().getValue()] }, 1);
 	setlistener("/devices/status/mice/mouse/button", func { mouse_button = cmdarg().getValue() }, 1);
 	setlistener("/devices/status/mice/mouse/x", freeze);
 	setlistener("/devices/status/mice/mouse/y", freeze);
@@ -408,7 +412,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
 	setlistener("/sim/signals/reinit", func {
 		cmdarg().getValue() and return;
-		cockpit_view = getprop("/sim/current-view/view-number") == 0;
+		cockpit_view = enabled[getprop("/sim/current-view/view-number")];
 		view_manager.reset();
 	}, 0);
 

@@ -98,7 +98,7 @@ var stepView = func(n) {
 ##
 # Get view index by name.
 #
-var index = func(name) {
+var indexof = func(name) {
     forindex (var i; views)
         if (views[i].getNode("name", 1).getValue() == name)
             return i;
@@ -150,7 +150,7 @@ var flyby = {
         me.hdgN = props.globals.getNode("/orientation/heading-deg", 1);
         me.loopid = 0;
         me.currview = nil;
-        me.number = index("Fly-By View");
+        me.number = indexof("Fly-By View");
         if (me.number == nil)
             die("can't find 'Fly-By View'");
 

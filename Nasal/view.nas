@@ -54,8 +54,7 @@ var resetFOV = func {
 }
 
 var resetViewPos = func {
-    var n = getprop("/sim/current-view/view-number");
-    var v = views[n].getNode("config");
+    var v = views[getprop("/sim/current-view/view-number")].getNode("config");
     setprop("/sim/current-view/x-offset-m", v.getNode("x-offset-m", 1).getValue() or 0);
     setprop("/sim/current-view/y-offset-m", v.getNode("y-offset-m", 1).getValue() or 0);
     setprop("/sim/current-view/z-offset-m", v.getNode("z-offset-m", 1).getValue() or 0);
@@ -94,6 +93,16 @@ var stepView = func(n) {
 
     # And pop up a nice reminder
     gui.popupTip(views[i].getNode("name").getValue());
+}
+
+##
+# Get view index by name.
+#
+var index = func(name) {
+    forindex (var i; views)
+        if (views[i].getNode("name", 1).getValue() == name)
+            return i;
+    return nil;
 }
 
 ##
@@ -140,11 +149,8 @@ var flyby = {
         me.altN = props.globals.getNode("/sim/viewer/altitude-ft", 1);
         me.hdgN = props.globals.getNode("/orientation/heading-deg", 1);
         me.loopid = 0;
-        me.number = nil;
         me.currview = nil;
-        forindex (var i; views)
-            if ((var v = views[i].getNode("name")) != nil and v.getValue() == "Fly-By View")
-                me.number = i;
+        me.number = index("Fly-By View");
         if (me.number == nil)
             die("can't find 'Fly-By View'");
 

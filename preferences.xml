@@ -29,7 +29,7 @@ Started September 2000 by David Megginson, david@megginson.com
   <virtual-cockpit type="bool">false</virtual-cockpit>
   <presets>
    <airport-id>KSFO</airport-id>
-   <runway>28R</runway>
+   <runway></runway>
    <trim type="bool">true</trim>
   </presets>
   <startup>

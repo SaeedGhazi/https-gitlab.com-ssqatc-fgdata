@@ -12,10 +12,10 @@
 
   <nasal>
     <open>
-      dlg = props.globals.getNode("/sim/gui/dialogs/location-on-ground", 1);
-      apt = dlg.getNode("airport", 1);
+      var dlg = props.globals.getNode("/sim/gui/dialogs/location-on-ground", 1);
+      var apt = dlg.getNode("airport", 1);
       apt.setValue("");
-      rwy = dlg.getNode("runway", 1);
+      var rwy = dlg.getNode("runway", 1);
       rwy.setValue("");
     </open>
   </nasal>
@@ -65,7 +65,7 @@
           setprop("/sim/presets/offset-distance", 0);
           setprop("/sim/presets/offset-azimuth", 0);
           setprop("/sim/presets/glideslope-deg", 0);
-          setprop("/sim/presets/heading-deg", 0);
+          setprop("/sim/presets/heading-deg", 9999);
         </script>
       </binding>
       <binding>

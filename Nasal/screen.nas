@@ -194,6 +194,8 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	settimer(func {
 		setlistener("/sim/atc/runway", func {
 			var rwy = cmdarg().getValue();
+			if (rwy == nil)
+				return;
 			if (!(getprop("/sim/presets/airport-id") == "KSFO" and rwy == "28R"))
 				setprop("/sim/messages/atc", "You are on runway " ~ rwy ~ ".");
 		}, 1);

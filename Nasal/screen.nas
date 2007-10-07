@@ -250,7 +250,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 				return;
 			if (getprop("/sim/presets/airport-id") == "KSFO" and rwy == "28R")
 				return;
-			if (getprop("/position/altitude-agl-ft") > 100)
+			if ((var agl = getprop("/position/altitude-agl-ft")) != nil and agl > 100)
 				return;
 			atc.setValue("You are on runway " ~ rwy);
 		}, 1);

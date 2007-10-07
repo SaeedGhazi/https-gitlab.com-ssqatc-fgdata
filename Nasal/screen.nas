@@ -40,17 +40,16 @@ var sanitize = func(s) {
 	var skip = 0;
 	for (var i = 0; i < size(s); i += 1) {
 		var c = s[i];
-		if (c == `\t`) {
+		if (c == `\t`)
 			r ~= ' ';
-		} elsif (c == `{`) {
-			#
-		} elsif (c == `|`) {
+		elsif (c == `{`)
+			nil;
+		elsif (c == `|`)
 			skip = 1;
-		} elsif (c == `}`) {
+		elsif (c == `}`)
 			skip = 0;
-		} elsif (!skip) {
+		elsif (!skip)
 			r ~= chr(c);
-		}
 	}
 	return r;
 }
@@ -87,43 +86,47 @@ var window = {
 	},
 
 	write : func(msg, r = nil, g = nil, b = nil, a = nil) {
-		if (me.namenode == nil) { return }
-		if (r == nil) { r = me.fg[0] }
-		if (g == nil) { g = me.fg[1] }
-		if (b == nil) { b = me.fg[2] }
-		if (a == nil) { a = me.fg[3] }
+		if (me.namenode == nil)
+			return;
+		if (r == nil)
+			r = me.fg[0];
+		if (g == nil)
+			g = me.fg[1];
+		if (b == nil)
+			b = me.fg[2];
+		if (a == nil)
+			a = me.fg[3];
 		foreach (var line; split("\n", string.trim(msg))) {
 			line = sanitize(string.trim(line));
 			append(me.lines, [line, r, g, b, a]);
 			if (size(me.lines) > me.maxlines) {
 				me.lines = subvec(me.lines, 1);
-				if (me.autoscroll) {
+				if (me.autoscroll)
 					me.skiptimer += 1;
-				}
 			}
-			if (me.autoscroll) {
+			if (me.autoscroll)
 				settimer(func { me._timeout_() }, me.autoscroll, 1);
-			}
 		}
 		me.show();
 	},
 
 	show : func {
-		if (me.dialog != nil) {
+		if (me.dialog != nil)
 			me.close();
-		}
 
 		me.dialog = gui.Widget.new();
 		me.dialog.set("name", me.name);
-		if (me.x != nil) { me.dialog.set("x", me.x) }
-		if (me.y != nil) { me.dialog.set("y", me.y) }
+		if (me.x != nil)
+			me.dialog.set("x", me.x);
+		if (me.y != nil)
+			me.dialog.set("y", me.y);
 		me.dialog.set("layout", "vbox");
 		me.dialog.set("default-padding", 2);
-		if (me.font != nil) {
+		if (me.font != nil)
 			me.dialog.setFont(me.font);
-		} elsif (theme_font != nil) {
+		elsif (theme_font != nil)
 			me.dialog.setFont(theme_font);
-		}
+
 		me.dialog.setColor(me.bg[0], me.bg[1], me.bg[2], me.bg[3]);
 
 		foreach (var line; me.lines) {
@@ -190,16 +193,6 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	setlistener(b ~ "yellow",  func { log.write(cmdarg().getValue(), 0.8, 0.8, 0) });
 	setlistener(b ~ "magenta", func { log.write(cmdarg().getValue(), 0.7, 0,   0.7) });
 	setlistener(b ~ "cyan",    func { log.write(cmdarg().getValue(), 0,   0.6, 0.6) });
-
-	settimer(func {
-		setlistener("/sim/atc/runway", func {
-			var rwy = cmdarg().getValue();
-			if (rwy == nil)
-				return;
-			if (!(getprop("/sim/presets/airport-id") == "KSFO" and rwy == "28R"))
-				setprop("/sim/messages/atc", "You are on runway " ~ rwy ~ ".");
-		}, 1);
-	}, 5);
 });
 
 
@@ -214,17 +207,17 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 var msg_repeat = func {
 	if (getprop("/sim/tutorials/running")) {
 		var last = getprop("/sim/tutorials/last-message");
-		if (last == nil) {
+		if (last == nil)
 			return;
-		}
+
 		setprop("/sim/messages/pilot", "Say again ...");
 		settimer(func { setprop("/sim/messages/copilot", last) }, 1.5);
 
 	} else {
 		var last = atc.getValue();
-		if (last == nil) {
+		if (last == nil)
 			return;
-		}
+
 		setprop("/sim/messages/pilot", "This is " ~ callsign.getValue() ~ ". Say again, over.");
 		settimer(func {
 			atc.setValue(atclast.getValue());
@@ -241,14 +234,27 @@ var listener = {};
 _setlistener("/sim/signals/nasal-dir-initialized", func {
 	# set /sim/screen/nomap=true to prevent default message mapping
 	var nomap = getprop("/sim/screen/nomap");
-	if (nomap != nil and nomap) {
+	if (nomap != nil and nomap)
 		return;
-	}
 
 	callsign = props.globals.getNode("/sim/user/callsign", 1);
 	atc = props.globals.getNode("/sim/messages/atc", 1);
 	atclast = props.globals.getNode("/sim/messages/atc-last", 1);
 	atclast.setValue("");
+
+	# let ATC tell which runway was automatically chosen after startup/teleportation
+	settimer(func {
+		setlistener("/sim/atc/runway", func { # set in src/Main/fg_init.cxx
+			var rwy = cmdarg().getValue();
+			if (rwy == nil)
+				return;
+			if (getprop("/sim/presets/airport-id") == "KSFO" and rwy == "28R")
+				return;
+			if (getprop("/position/altitude-agl-ft") > 100)
+				return;
+			atc.setValue("You are on runway " ~ rwy);
+		}, 1);
+	}, 5);
 
 	# map ATC messages to the screen log and to the voice subsystem
 	var map = func(type, msg, r, g, b) {

@@ -43,7 +43,7 @@ foreach(fmt; keys(ifmts))
 # prefix prepended to the name. If the prefix is nil, then attributes
 # are ignored. Returns nil on error.
 #
-var readxml = func(file, prefix = "___") {
+var readxml = func(path, prefix = "___") {
     var stack = [[{}, ""]];
     var node = props.Node.new();
     var tree = node;           # prevent GC
@@ -69,7 +69,7 @@ var readxml = func(file, prefix = "___") {
     var data = func(d) {
         stack[-1][1] ~= d;
     }
-    return parsexml(file, start, end, data) == nil ? nil : tree;
+    return parsexml(path, start, end, data) == nil ? nil : tree;
 }
 
 # Writes a property tree as returned by readxml() to a file. Children
@@ -77,39 +77,38 @@ var readxml = func(file, prefix = "___") {
 # their parent. <node> must contain exactly one child, which will
 # become the XML file's outermost element.
 #
-var writexml = func(file, node, indent = "\t", prefix = "___") {
+var writexml = func(path, node, indent = "\t", prefix = "___") {
     var root = node.getChildren();
     if(!size(root))
         die("writexml(): tree doesn't have a root node");
-    if(substr(file, -4) != ".xml")
-        file ~= ".xml";
-    var fh = open(file, "w");
-    var pre = size(prefix);
-    write(fh, "<?xml version=\"1.0\"?>\n\n");
+    if(substr(path, -4) != ".xml")
+        path ~= ".xml";
+    var file = open(path, "w");
+    write(file, "<?xml version=\"1.0\"?>\n\n");
     var writenode = func(n, ind = "") {
         var name = n.getName();
         var name_attr = name;
         var children = [];
         foreach(var c; n.getChildren()) {
-            var aname = c.getName();
-            if(substr(aname, 0, pre) == prefix)
-                name_attr ~= " " ~ substr(aname, pre) ~ '="' ~  c.getValue() ~ '"';
+            var a = c.getName();
+            if(substr(a, 0, size(prefix)) == prefix)
+                name_attr ~= " " ~ substr(a, size(prefix)) ~ '="' ~  c.getValue() ~ '"';
             else
                 append(children, c);
         }
         if(size(children)) {
-            write(fh, ind ~ "<" ~ name_attr ~ ">\n");
+            write(file, ind ~ "<" ~ name_attr ~ ">\n");
             foreach(var c; children)
                 writenode(c, ind ~ indent);
-            write(fh, ind ~ "</" ~ name ~ ">\n");
+            write(file, ind ~ "</" ~ name ~ ">\n");
         } elsif((var value = n.getValue()) != nil) {
-            write(fh, ind ~ "<" ~ name_attr ~ ">" ~ value ~ "</" ~ name ~ ">\n");
+            write(file, ind ~ "<" ~ name_attr ~ ">" ~ value ~ "</" ~ name ~ ">\n");
         } else {
-            write(fh, ind ~ "<" ~ name_attr ~ "/>\n");
+            write(file, ind ~ "<" ~ name_attr ~ "/>\n");
         }
     }
     writenode(root[0]);
-    close(fh);
+    close(file);
     if(size(root) != 1)
         die("writexml(): tree has more than one root node");
 }

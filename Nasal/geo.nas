@@ -296,7 +296,7 @@ var _put_model = func(path, lat, lon, elev_m = nil, hdg = 0, pitch = 0, roll = 0
 	if (elev_m == nil)
 		elev_m = elevation(lat, lon);
 	if (elev_m == nil)
-		die("can't get elevation for " ~ lat ~ "/" ~ lon);
+		die("geo.put_model(): can't get elevation for " ~ lat ~ "/" ~ lon);
 	var n = props.globals.getNode("/models");
 	for (var i = 0; 1; i += 1)
 		if (n.getChild("model", i, 0) == nil)

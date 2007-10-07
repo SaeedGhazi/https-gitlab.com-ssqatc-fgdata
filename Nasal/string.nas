@@ -68,7 +68,7 @@ var imatch = func(a, b) match(lc(a), lc(b));
 #     \? stands for a question mark (not the "any single character" placeholder)
 # []  stands for a group of characters:
 #     [abc]      stands for letters a, b or c
-#     [^abc]     stands for any character but a, b, and c
+#     [^abc]     stands for any character but a, b, and c  (^ as first character -> inversion)
 #     [1-4]      stands for digits 1 to 4 (1, 2, 3, 4)
 #     [1-4-]     stands for digits 1 to 4, and the minus
 #     [-1-4]     same as above
@@ -76,8 +76,11 @@ var imatch = func(a, b) match(lc(a), lc(b));
 #     [1-3-6-9]  stands for digits 1 to 3, minus, and 6 to 9
 #     [][]       stands for the closing and the opening bracket (']' must be first!)
 #     [^^]       stands for all characters but the caret symbol
+#     [\/]       stands for a backslash or a slash  (the backslash isn't an
+#                escape character in a [] character group)
 #
-# Note that a minus can't be a range delimiter, as in [a--b]
+#     Note that a minus can't be a range delimiter, as in [a--e],
+#     which would be interpreted as any of a, e, or minus.
 #
 # Example:
 #     string.match(name, "*[0-9].xml"); ... true if 'name' ends with digit followed by ".xml"

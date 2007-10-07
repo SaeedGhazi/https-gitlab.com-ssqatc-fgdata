@@ -116,21 +116,21 @@ printlog = func(level, args...) {
 #
 _setlistener("/sim/signals/nasal-dir-initialized", func {
     var path = getprop("/sim/fg-home") ~ "/Nasal";
-    if ((var dir = directory(path)) == nil) return;
-    foreach (var file; sort(dir, cmp)) {
-        if (substr(file, -4) != ".nas") continue;
+    if((var dir = directory(path)) == nil) return;
+    foreach(var file; sort(dir, cmp)) {
+        if(substr(file, -4) != ".nas") continue;
 
         var module = substr(file, 0, size(file) - 4);
         file = path ~ "/" ~ file;
         printlog("info", ">>> executing local Nasal file ", file);
 
-        if (!contains(globals, module)) var locals = globals[module] = {};
-        elsif (typeof(globals[module]) == "hash") var locals = globals[module];
+        if(!contains(globals, module)) var locals = globals[module] = {};
+        elsif(typeof(globals[module]) == "hash") var locals = globals[module];
         else var locals = {};
 
         var err = [];
         var code = call(func { compile(io.readfile(file), file) }, nil, err);
-        if (size(err)) {
+        if(size(err)) {
             print(file ~ ": " ~ err[0]);
             continue;
         }

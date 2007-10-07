@@ -330,18 +330,19 @@ var lowpass = {
 # angular lowpass
 # ==============================================================================
 # same as above, but for angles. Filters sin/cos separately and calculates the
-# angle again from them. This avoids unexpected jumps from 180 to -179.99 degree.
+# angle again from them. This avoids unexpected jumps from 179.99 to -180 degree.
 #
 var angular_lowpass = {
 	new : func(coeff) {
 		var m = { parents : [angular_lowpass] };
 		m.sin = lowpass.new(coeff);
 		m.cos = lowpass.new(coeff);
+		m.buf = nil;
 		return m;
 	},
 	filter : func(v) {
 		v *= D2R;
-		math.atan2(me.sin.filter(math.sin(v)), me.cos.filter(math.cos(v))) * R2D;
+		me.buf = math.atan2(me.sin.filter(math.sin(v)), me.cos.filter(math.cos(v))) * R2D;
 	},
 	set : func(v) {
 		v *= D2R;
@@ -349,7 +350,7 @@ var angular_lowpass = {
 		me.cos.set(math.cos(v));
 	},
 	get : func {
-		math.atan2(me.sin.get(), me.cos.get()) * R2D;
+		me.buf;
 	},
 };
 

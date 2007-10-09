@@ -111,7 +111,7 @@ ________________________________________________________________________________
 	</data>
 
 	<nasal>
-		<script><![CDATA[
+		<script>
 			var self = cmdarg().getParent();
 			var data = self.getNode("data");
 			var mode = data.getNode("mode");
@@ -127,19 +127,26 @@ ________________________________________________________________________________
 				self.getNode("axis[1]/binding/power").setIntValue(1);
 			}
 
+			var viewdir = props.globals.getNode("/sim").getChildren("view");
+			forindex (var i; viewdir) {
+				var t = viewdir[i].getNode("type");
+				viewdir[i] = t != nil and t.getValue() == "lookfrom" ? 1 : -1;
+			}
+
 			var kbdshift = props.globals.getNode("/devices/status/keyboard/shift", 1);
 			var kbdctrl = props.globals.getNode("/devices/status/keyboard/ctrl", 1);
 			var kbdalt = props.globals.getNode("/devices/status/keyboard/alt", 1);
 
 			var get_mode = func { modifier.getValue() + mode.getValue() * 4 }
+			var aircraft = getprop("/sim/aircraft");
 
 			var harrier = func {
-				if (getprop("/sim/aero") == "harrier") {
+				if (aircraft == "harrier") {
 					thv = getprop("/controls/engines/engine[0]/mixture");
 					gui.popupTip("Thrust vector " ~ int(thv * 120 - 20 + 0.5));
 				}
 			}
-		]]></script>
+		</script>
 	</nasal>
 
 	<axis n="0">
@@ -552,7 +559,7 @@ ________________________________________________________________________________
 				m = get_mode();
 				if (m == 0) {
 					v = getprop("/sim/current-view/view-number");
-					view.panViewDir(v == 0 or v == 4 ? 1 : -1);
+					view.panViewDir(viewdir[v]);
 				} elsif (m == 1) {
 					controls.adjMixture(-1);
 					harrier();
@@ -575,7 +582,7 @@ ________________________________________________________________________________
 				m = get_mode();
 				if (m == 0) {
 					v = getprop("/sim/current-view/view-number");
-					view.panViewDir(v == 0 or v == 4 ? -1 : 1);
+					view.panViewDir(-viewdir[v]);
 				} elsif (m == 1) {
 					controls.adjMixture(1);
 					harrier();

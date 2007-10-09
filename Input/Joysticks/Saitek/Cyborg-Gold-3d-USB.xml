@@ -130,7 +130,7 @@ ________________________________________________________________________________
 			var viewdir = props.globals.getNode("/sim").getChildren("view");
 			forindex (var i; viewdir) {
 				var t = viewdir[i].getNode("type");
-				viewdir[i] = t != nil and t.getValue() == "lookfrom" ? 1 : -1;
+				viewdir[i] = t != nil and t.getValue() == "lookat" ? 1 : -1;
 			}
 
 			var kbdshift = props.globals.getNode("/devices/status/keyboard/shift", 1);
@@ -559,7 +559,7 @@ ________________________________________________________________________________
 				m = get_mode();
 				if (m == 0) {
 					v = getprop("/sim/current-view/view-number");
-					view.panViewDir(viewdir[v]);
+					view.panViewDir(-viewdir[v]);
 				} elsif (m == 1) {
 					controls.adjMixture(-1);
 					harrier();
@@ -582,7 +582,7 @@ ________________________________________________________________________________
 				m = get_mode();
 				if (m == 0) {
 					v = getprop("/sim/current-view/view-number");
-					view.panViewDir(-viewdir[v]);
+					view.panViewDir(viewdir[v]);
 				} elsif (m == 1) {
 					controls.adjMixture(1);
 					harrier();

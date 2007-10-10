@@ -1,10 +1,7 @@
-var metar_runway = func {
-	# select runway according to wind direction reported by METAR
+var set_runway_from_metar_wind = func {
 
 	if (!getprop("/environment/metar/real-metar"))
 		return printlog("info", "metar-rwy: no live weather");
-	if (getprop("/environment/metar/base-wind-speed-kt") < 1)
-		return;		# windspeed pointless for runway choice
 	if (!getprop("/sim/startup/options/airport"))
 		return printlog("info", "metar-rwy: no airport requested");
 	if (getprop("/sim/startup/options/runway"))
@@ -13,6 +10,8 @@ var metar_runway = func {
 		return printlog("info", "metar-rwy: won't override explicit heading");
 	if (!getprop("/sim/presets/onground"))
 		return printlog("info", "metar-rwy: we aren't on ground");
+	if (getprop("/environment/metar/base-wind-speed-kt") < 1)
+		return;
 
 	var from = getprop("/environment/metar/base-wind-range-from");
 	var to = getprop("/environment/metar/base-wind-range-to");
@@ -28,6 +27,6 @@ var metar_runway = func {
 
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
-	metar_runway();
+	set_runway_from_metar_wind();
 	delete(globals, "startup");
 });

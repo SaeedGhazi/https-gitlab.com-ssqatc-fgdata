@@ -229,7 +229,7 @@ var msg_repeat = func {
 var atc = nil;
 var callsign = nil;
 var atclast = nil;
-var last_launchbar = nil;
+var launchbar = nil;
 var listener = {};
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
@@ -253,15 +253,15 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 				return;
 			if ((var agl = getprop("/position/altitude-agl-ft")) != nil and agl > 100)
 				return;
-			atc.setValue("You are on runway " ~ rwy);
+			screen.log.write("You are on runway " ~ rwy, 0.7, 1.0, 0.7);
 		}, 1);
 	}, 5);
 
 	setlistener("/gear/launchbar/state", func {
 		var e = cmdarg().getValue();
-		if (e != last_launchbar and e == "Engaged")
+		if (e != launchbar and e == "Engaged")
 			setprop("/sim/messages/copilot", "Engaged!");
-		last_launchbar = e;
+		launchbar = e;
 	});
 
 	# map ATC messages to the screen log and to the voice subsystem

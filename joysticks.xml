@@ -20,6 +20,4 @@
 
 	<js n="0" include="Input/Joysticks/Local/joystick_0.xml"/>
 -->
-
-	<js-named/> <!-- dummy to keep SimGear happy -->
 </PropertyList>

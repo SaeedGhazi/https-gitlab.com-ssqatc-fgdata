@@ -257,12 +257,12 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 		}, 1);
 	}, 5);
 
-	setlistener("/gear/launchbar/state", func {
-		var e = cmdarg().getValue();
-		if (e != launchbar and e == "Engaged")
-			setprop("/sim/messages/copilot", "Engaged!");
-		launchbar = e;
-	});
+	#setlistener("/gear/launchbar/state", func {
+	#	var e = cmdarg().getValue();
+	#	if (e != launchbar and e == "Engaged")
+	#		setprop("/sim/messages/copilot", "Engaged!");
+	#	launchbar = e;
+	#});
 
 	# map ATC messages to the screen log and to the voice subsystem
 	var map = func(type, msg, r, g, b) {

@@ -229,7 +229,6 @@ var msg_repeat = func {
 var atc = nil;
 var callsign = nil;
 var atclast = nil;
-var launchbar = nil;
 var listener = {};
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
@@ -257,12 +256,10 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 		}, 1);
 	}, 5);
 
-	#setlistener("/gear/launchbar/state", func {
-	#	var e = cmdarg().getValue();
-	#	if (e != launchbar and e == "Engaged")
-	#		setprop("/sim/messages/copilot", "Engaged!");
-	#	launchbar = e;
-	#});
+	setlistener("/gear/launchbar/state", func {
+		if (cmdarg().getValue() == "Engaged")
+			setprop("/sim/messages/copilot", "Engaged!");
+	}, 2);
 
 	# map ATC messages to the screen log and to the voice subsystem
 	var map = func(type, msg, r, g, b) {

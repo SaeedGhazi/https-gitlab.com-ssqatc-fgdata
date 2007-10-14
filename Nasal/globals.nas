@@ -71,7 +71,8 @@ interpolate = func {
 #
 setlistener = func {
     if(isa(arg[0], props.Node)) { arg[0] = arg[0]._g; }
-    var id = _setlistener(arg[0], arg[1], size(arg) > 2 ? arg[2] : 0);
+    var id = _setlistener(arg[0], arg[1], size(arg) > 2 ? arg[2] : 0,
+            size(arg) > 3 ? arg[3] : 1);
     if(__.log_level <= 2) {
         var c = caller(1);
         print(sprintf("setting listener #%d in %s, line %s", id, c[2], c[3]))

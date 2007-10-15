@@ -67,8 +67,8 @@ controls.flapsDown = func(x) {
 
 
 #var throttle = 0;
-#controls.throttleAxis = func {
-#	val = cmdarg().getNode("setting").getValue();
+#controls.throttleAxis = func(n) {
+#	val = n.getNode("setting").getValue();
 #	if (size(arg) > 0)
 #		val = -val;
 #	throttle = (1 - val) * 0.5;
@@ -283,8 +283,8 @@ setlistener("/sim/cam/target-mp", update_aircraft);
 setlistener("/sim/cam/goto", update_goto);
 setlistener("/ai/models/model-removed", ai_removed);
 
-setlistener("/sim/current-view/view-number", func {
-    view_number = cmdarg().getValue();
+setlistener("/sim/current-view/view-number", func(n) {
+    view_number = n.getValue();
     if (view_number == cam_view)
         panel_dialog.open();
     else
@@ -294,8 +294,8 @@ setlistener("/sim/current-view/view-number", func {
 
 if (0) {
 var rel = { course: 0, distance: 0, alt: 0 };
-setlistener("/sim/cam/lock", func {
-    if (cmdarg().getValue()) {
+setlistener("/sim/cam/lock", func(n) {
+    if (n.getValue()) {
         rel.course = target.course_to(self);
         rel.distance = target.distance_to(self);
         rel.alt = self.alt() - target.alt();

@@ -52,7 +52,7 @@
                       m.mode = o;
                   }
               }
-              m.listener = setlistener(m.lock,  func { m.update(cmdarg().getValue()) }, 1);
+              m.listener = setlistener(m.lock, func(n) { m.update(n.getValue()) }, 1);
               return m;
           },
           del : func {

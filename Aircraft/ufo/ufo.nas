@@ -1,6 +1,6 @@
 
-setlistener("/sim/panel/visibility", func {
-	setprop("/instrumentation/radar/serviceable", cmdarg().getValue());
+setlistener("/sim/panel/visibility", func(n) {
+	setprop("/instrumentation/radar/serviceable", n.getValue());
 }, 1);
 
 
@@ -675,8 +675,8 @@ adjust_dialog.center_sliders = func {
 # hide status line in screenshots
 #
 var status_restore = nil;
-setlistener("/sim/signals/screenshot", func {
-	if (cmdarg().getBoolValue()) {
+setlistener("/sim/signals/screenshot", func(n) {
+	if (n.getBoolValue()) {
 		status_restore = status_dialog.is_open();
 		status_dialog.close();
 	} else {

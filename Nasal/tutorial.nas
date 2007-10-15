@@ -34,6 +34,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	last_messageN = props.globals.getNode("/sim/tutorials/last-message", 1);
 	step_countN = props.globals.getNode("/sim/tutorials/step-count", 1);
 	step_timeN = props.globals.getNode("/sim/tutorials/step-time", 1);
+	setlistener("/sim/crashed", stopTutorial);
 });
 
 
@@ -123,7 +124,6 @@ var stopTutorial = func {
 	is_running(0);
 }
 
-_setlistener("/sim/crashed", stopTutorial);
 
 
 

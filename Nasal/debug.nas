@@ -273,8 +273,8 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	ghosttypes[ghosttype(props._globals())] = "PropertyNode";
 	ghosttypes[ghosttype(io.stderr)] = "FileHandle";
 
-	setlistener("/sim/startup/terminal-ansi-colors", func {
-		color(cmdarg().getBoolValue());
+	setlistener("/sim/startup/terminal-ansi-colors", func(n) {
+		color(n.getBoolValue());
 	}, 1);
 });
 

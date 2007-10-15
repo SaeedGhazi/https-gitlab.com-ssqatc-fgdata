@@ -75,7 +75,7 @@ echo_message = func(msg, callsign)
 
 settimer(func {
   # Call-back to ensure we see our own messages.
-  setlistener("/sim/multiplay/chat", func{ echo_message(cmdarg().getValue(), getprop("/sim/multiplay/callsign")); });
+  setlistener("/sim/multiplay/chat", func(n) { echo_message(n.getValue(), getprop("/sim/multiplay/callsign")); });
 
   # check for new messages
   check_messages();

@@ -70,7 +70,6 @@ var interpolate = func(node, val...) {
 #
 var setlistener = func(node, fun, init=0, runtime=1) {
     if(isa(node, props.Node)) node = node._g;
-    var propghost = ghosttype(node);
     var id = _setlistener(node, func {
         arg[0] = props.wrapNode(arg[0], nil);
         arg[1] = props.wrapNode(arg[1], nil);

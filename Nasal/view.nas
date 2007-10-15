@@ -154,13 +154,13 @@ var flyby = {
         if (me.number == nil)
             die("can't find 'Fly-By View'");
 
-        setlistener("/sim/signals/reinit", func { cmdarg().getValue() or me.reset() });
-        setlistener("/sim/crashed", func { cmdarg().getValue() and me.reset() });
+        setlistener("/sim/signals/reinit", func(n) { n.getValue() or me.reset() });
+        setlistener("/sim/crashed", func(n) { n.getValue() and me.reset() });
         setlistener("/sim/freeze/replay-state", func {
             settimer(func { me.reset() }, 1); # time for replay to catch up
         });
-        setlistener("/sim/current-view/view-number", func {
-            me.currview = cmdarg().getValue();
+        setlistener("/sim/current-view/view-number", func(n) {
+            me.currview = n.getValue();
             me.reset();
         }, 1);
     },

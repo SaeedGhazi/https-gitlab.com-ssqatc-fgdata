@@ -185,14 +185,14 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	log.sticky = 0;  # don't turn on; makes scrolling up messages jump left and right
 
 	var b = "/sim/screen/";
-	setlistener(b ~ "black",   func { log.write(cmdarg().getValue(), 0,   0,   0) });
-	setlistener(b ~ "white",   func { log.write(cmdarg().getValue(), 1,   1,   1) });
-	setlistener(b ~ "red",     func { log.write(cmdarg().getValue(), 0.8, 0,   0) });
-	setlistener(b ~ "green",   func { log.write(cmdarg().getValue(), 0,   0.6, 0) });
-	setlistener(b ~ "blue",    func { log.write(cmdarg().getValue(), 0,   0,   0.8) });
-	setlistener(b ~ "yellow",  func { log.write(cmdarg().getValue(), 0.8, 0.8, 0) });
-	setlistener(b ~ "magenta", func { log.write(cmdarg().getValue(), 0.7, 0,   0.7) });
-	setlistener(b ~ "cyan",    func { log.write(cmdarg().getValue(), 0,   0.6, 0.6) });
+	setlistener(b ~ "black",   func(n) { log.write(n.getValue(), 0,   0,   0) });
+	setlistener(b ~ "white",   func(n) { log.write(n.getValue(), 1,   1,   1) });
+	setlistener(b ~ "red",     func(n) { log.write(n.getValue(), 0.8, 0,   0) });
+	setlistener(b ~ "green",   func(n) { log.write(n.getValue(), 0,   0.6, 0) });
+	setlistener(b ~ "blue",    func(n) { log.write(n.getValue(), 0,   0,   0.8) });
+	setlistener(b ~ "yellow",  func(n) { log.write(n.getValue(), 0.8, 0.8, 0) });
+	setlistener(b ~ "magenta", func(n) { log.write(n.getValue(), 0.7, 0,   0.7) });
+	setlistener(b ~ "cyan",    func(n) { log.write(n.getValue(), 0,   0.6, 0.6) });
 });
 
 
@@ -244,8 +244,8 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
 	# let ATC tell which runway was automatically chosen after startup/teleportation
 	settimer(func {
-		setlistener("/sim/atc/runway", func { # set in src/Main/fg_init.cxx
-			var rwy = cmdarg().getValue();
+		setlistener("/sim/atc/runway", func(n) { # set in src/Main/fg_init.cxx
+			var rwy = n.getValue();
 			if (rwy == nil)
 				return;
 			if (getprop("/sim/presets/airport-id") == "KSFO" and rwy == "28R")
@@ -256,10 +256,10 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 		}, 1);
 	}, 5);
 
-	setlistener("/gear/launchbar/state", func {
-		if (cmdarg().getValue() == "Engaged")
+	setlistener("/gear/launchbar/state", func(n) {
+		if (n.getValue() == "Engaged")
 			setprop("/sim/messages/copilot", "Engaged!");
-	}, 1, 0);
+	}, 0, 0);
 
 	# map ATC messages to the screen log and to the voice subsystem
 	var map = func(type, msg, r, g, b) {
@@ -291,18 +291,18 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
 	var m = "/sim/messages/";
 	listener["atc"] = setlistener(m ~ "atc",
-			func { map("atc",      cmdarg().getValue(), 0.7, 1.0, 0.7) });
+			func(n) { map("atc",      n.getValue(), 0.7, 1.0, 0.7) });
 	listener["approach"] = setlistener(m ~ "approach",
-			func { map("approach", cmdarg().getValue(), 0.7, 1.0, 0.7) });
+			func(n) { map("approach", n.getValue(), 0.7, 1.0, 0.7) });
 	listener["ground"] = setlistener(m ~ "ground",
-			func { map("ground",   cmdarg().getValue(), 0.7, 1.0, 0.7) });
+			func(n) { map("ground",   n.getValue(), 0.7, 1.0, 0.7) });
 
 	listener["pilot"] = setlistener(m ~ "pilot",
-			func { map("pilot",    cmdarg().getValue(), 1.0, 0.8, 0.0) });
+			func(n) { map("pilot",    n.getValue(), 1.0, 0.8, 0.0) });
 	listener["copilot"] = setlistener(m ~ "copilot",
-			func { map("copilot",  cmdarg().getValue(), 1.0, 1.0, 1.0) });
+			func(n) { map("copilot",  n.getValue(), 1.0, 1.0, 1.0) });
 	listener["ai-plane"] = setlistener(m ~ "ai-plane",
-			func { map("ai-plane", cmdarg().getValue(), 0.9, 0.4, 0.2) });
+			func(n) { map("ai-plane", n.getValue(), 0.9, 0.4, 0.2) });
 });
 
 

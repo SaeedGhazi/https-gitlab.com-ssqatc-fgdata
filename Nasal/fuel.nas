@@ -104,7 +104,7 @@ var total_norm = nil;
 
 
 _setlistener("/sim/signals/fdm-initialized", func {
-	setlistener("/sim/freeze/fuel", func { fuel_freeze = cmdarg().getBoolValue() }, 1);
+	setlistener("/sim/freeze/fuel", func(n) { fuel_freeze = n.getBoolValue() }, 1);
 
 	total_gals = props.globals.getNode("/consumables/fuel/total-fuel-gals", 1);
 	total_lbs = props.globals.getNode("/consumables/fuel/total-fuel-lbs", 1);

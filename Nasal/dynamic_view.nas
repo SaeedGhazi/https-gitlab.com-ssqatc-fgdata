@@ -401,18 +401,18 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
 	# let listeners keep some variables up-to-date, so that they don't have
 	# to be queried in the loop
-	setlistener("/sim/panel/visibility", func { panel_visible = cmdarg().getValue() }, 1);
-	setlistener("/sim/current-view/view-number", func { cockpit_view = enabled[cmdarg().getValue()] }, 1);
-	setlistener("/devices/status/mice/mouse/button", func { mouse_button = cmdarg().getValue() }, 1);
+	setlistener("/sim/panel/visibility", func(n) { panel_visible = n.getValue() }, 1);
+	setlistener("/sim/current-view/view-number", func(n) { cockpit_view = enabled[n.getValue()] }, 1);
+	setlistener("/devices/status/mice/mouse/button", func(n) { mouse_button = n.getValue() }, 1);
 	setlistener("/devices/status/mice/mouse/x", freeze);
 	setlistener("/devices/status/mice/mouse/y", freeze);
-	setlistener("/devices/status/mice/mouse/mode", func {
-		if (mouse_mode = cmdarg().getValue())
+	setlistener("/devices/status/mice/mouse/mode", func(n) {
+		if (mouse_mode = n.getValue())
 			view_manager.unfreeze();
 	}, 1);
 
-	setlistener("/sim/signals/reinit", func {
-		cmdarg().getValue() and return;
+	setlistener("/sim/signals/reinit", func(n) {
+		n.getValue() and return;
 		cockpit_view = enabled[getprop("/sim/current-view/view-number")];
 		view_manager.reset();
 	}, 0);
@@ -427,8 +427,8 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	}
 
 	settimer(func {
-		setlistener("/sim/view/dynamic/enabled", func {
-			dynamic_view = cmdarg().getBoolValue();
+		setlistener("/sim/view/dynamic/enabled", func(n) {
+			dynamic_view = n.getBoolValue();
 			loop_id += 1;
 			view.resetView();
 			if (dynamic_view)

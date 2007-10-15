@@ -242,7 +242,7 @@ Dialog = {
 #
 # SYNOPSIS: FileSelector.new(<callback>, <title>, <button> [, <pattern> [, <dir> [, <file> [, <dotfiles>]]]])
 #
-#         callback ... callback function that gets return value as cmdarg().getValue()
+#         callback ... callback function that gets return value as first argument
 #         title    ... dialog title
 #         button   ... button text (should say "Save", "Load", etc. and not just "OK")
 #         pattern  ... array with shell pattern or nil (which is equivalent to "*")
@@ -252,7 +252,7 @@ Dialog = {
 #
 # EXAMPLE:
 #
-#     var report = func { print("file ", cmdarg().getValue(), " selected") }
+#     var report = func(n) { print("file ", n.getValue(), " selected") }
 #     var selector = gui.FileSelector.new(
 #             report,                 # callback function
 #             "Save Flight",          # dialog title
@@ -437,7 +437,7 @@ var setWeightOpts = func {
 }
 # Run it at startup and on reset to make sure the tank settings are correct
 _setlistener("/sim/signals/fdm-initialized", func { settimer(setWeightOpts, 0) });
-_setlistener("/sim/signals/reset", func { cmdarg().getBoolValue() or setWeightOpts() });
+_setlistener("/sim/signals/reset", func(n) { n.getBoolValue() or setWeightOpts() });
 
 
 # Called from the F&W dialog when the user selects a weight option

@@ -399,7 +399,7 @@ var data = {
 		me.loopid = 0;
 		me.interval = 0;
 
-		setlistener("/sim/signals/reinit", func { cmdarg().getBoolValue() and me._save_() });
+		setlistener("/sim/signals/reinit", func(n) { n.getBoolValue() and me._save_() });
 		setlistener("/sim/signals/exit", func { me._save_() });
 	},
 	load : func {
@@ -652,9 +652,9 @@ var steering = {
 			call(func(v, w) (w < 0 ? leftN : w > 0 ? rightN : switchN).setValue(v),
 					[v, w], nil, aircraft.steering);
 		}
-		setlistener(me.switchN, func {
+		setlistener(me.switchN, func(n) {
 			me.loopid += 1;
-			if (cmdarg().getValue())
+			if (n.getValue())
 				me._loop_(me.loopid);
 			else
 				me.setbrakes(0, 0);

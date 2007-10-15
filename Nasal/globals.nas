@@ -72,9 +72,8 @@ var setlistener = func(node, fun, init=0, runtime=1) {
     if(isa(node, props.Node)) node = node._g;
     var propghost = ghosttype(node);
     var id = _setlistener(node, func {
-        forindex (var i; arg)
-            if(ghosttype(arg[i]) == propghost)
-                arg[i] = props.wrapNode(arg[i], nil);
+        arg[0] = props.wrapNode(arg[0], nil);
+        arg[1] = props.wrapNode(arg[1], nil);
         call(fun, arg);
     }, init, runtime);
     if(__.log_level <= 2) {

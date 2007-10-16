@@ -63,10 +63,13 @@ var interpolate = func(node, val...) {
 
 
 ##
-# Convenience wrapper for the _setlistener function. Takes a
-# single string or props.Node object in arg[0] indicating the
-# listened to property, a function in arg[1], and an optional
-# bool in arg[2], which triggers the function initially if true.
+# Wrapper for the _setlistener function. Takes a property path string
+# or props.Node object in arg[0] indicating the listened to property,
+# a function in arg[1], an optional bool in arg[2], which triggers the
+# function initially if true, and an optional integer in arg[3], which
+# sets the listener's runtime behavior to "only trigger on change" (0),
+# "always trigger on write" (2), and "trigger even when children are
+# written to" (2).
 #
 var setlistener = func(node, fun, init=0, runtime=1) {
     if(isa(node, props.Node)) node = node._g;

@@ -12,6 +12,10 @@
 # debug.backtrace([<comment:string>]}  ... writes backtrace with local variables
 #                                          (similar to gdb's "bt full)
 #
+# debug.proptrace([<property [, <time>]]) ... trace property write/add/remove
+#                                          events under the <property> subtree.
+#                                          Defaults are "/" and 1 second.
+#
 # debug.tree([<property> [, <mode>])   ... dump property tree under property path
 #                                          or props.Node hash (default: root). If
 #                                          <mode> is unset or 0, use flat mode
@@ -35,6 +39,7 @@
 #
 # debug.printerror(<err-vector>)       ... prints error vector as set by call()
 #
+# debug.propify(<variable>)            ... turn about everything into a props.Node
 #
 # CAVE: this file makes extensive use of ANSI color codes. These are
 #       interpreted by UNIX shells and MS Windows with ANSI.SYS extension
@@ -74,8 +79,23 @@ var _varname     = func(s) { _c("1", s) }       # variable_name
 var ghosttypes = {};
 
 
-var tree = func(p = "", graph = 1) {
-	var n = isa(p, props.Node) ? p : props.globals.getNode(p, 0);
+##
+# Turn p into props.Node (if it isn't yet), or return nil.
+#
+var propify = func(p, create = 0) {
+	var type = typeof(p);
+	if (type == "ghost" and ghosttype(p) == ghosttype(props.globals._g))
+		return props.wrapNode(p);
+	if (type == "scalar" and num(p) == nil)
+		return props.globals.getNode(p, create);
+	if (isa(p, props.Node))
+		return p;
+	return nil;
+}
+
+
+var tree = func(n = "", graph = 1) {
+	n = propify(n);
 	if (n == nil)
 		dump(n);
 	else
@@ -201,6 +221,28 @@ var backtrace = func(desc = nil) {
 	}
 }
 var bt = backtrace;
+
+
+var proptrace = func(root = "/", time = 1) {
+	var i = 0;
+	var mark = setlistener("/sim/signals/frame", func {
+		print("-------------------- FRAME --------------------");
+	});
+	var trace = setlistener(propify(root), func(this, base, type) {
+		i += 1;
+		if (type > 0)
+			print("ADD ", this.getPath());
+		elsif (type < 0)
+			print("DEL ", this.getPath());
+		else
+			print("SET ", this.getPath(), " = ", string(this.getValue()), " ", _attrib(this));
+	}, 0, 2);
+	settimer(func {
+		removelistener(trace);
+		removelistener(mark);
+		print("proptrace: stop (", i, " calls)");
+	}, time, 1);
+}
 
 
 ##

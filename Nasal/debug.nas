@@ -229,9 +229,9 @@ var proptrace = func(root = "/", frames = 1) {
 	var trace = setlistener(propify(root), func(this, base, type) {
 		events += 1;
 		if (type > 0)
-			print("ADD ", this.getPath());
+			print(_nil("ADD "), this.getPath());
 		elsif (type < 0)
-			print("DEL ", this.getPath());
+			print(_num("DEL "), this.getPath());
 		else
 			print("SET ", this.getPath(), " = ", string(this.getValue()), " ", _attrib(this));
 	}, 0, 2);

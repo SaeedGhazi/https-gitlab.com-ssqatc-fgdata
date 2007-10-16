@@ -12,9 +12,10 @@
 # debug.backtrace([<comment:string>]}  ... writes backtrace with local variables
 #                                          (similar to gdb's "bt full)
 #
-# debug.proptrace([<property [, <time>]]) ... trace property write/add/remove
-#                                          events under the <property> subtree.
-#                                          Defaults are "/" and 1 second.
+# debug.proptrace([<property [, <frames>]]) ... trace property write/add/remove
+#                                          events under the <property> subtree for
+#                                          a number of frames. Defaults are "/" and
+#                                          1 frame.
 #
 # debug.tree([<property> [, <mode>])   ... dump property tree under property path
 #                                          or props.Node hash (default: root). If
@@ -223,13 +224,10 @@ var backtrace = func(desc = nil) {
 var bt = backtrace;
 
 
-var proptrace = func(root = "/", time = 1) {
-	var i = 0;
-	var mark = setlistener("/sim/signals/frame", func {
-		print("-------------------- FRAME --------------------");
-	});
+var proptrace = func(root = "/", frames = 1) {
+	var events = 0;
 	var trace = setlistener(propify(root), func(this, base, type) {
-		i += 1;
+		events += 1;
 		if (type > 0)
 			print("ADD ", this.getPath());
 		elsif (type < 0)
@@ -237,11 +235,15 @@ var proptrace = func(root = "/", time = 1) {
 		else
 			print("SET ", this.getPath(), " = ", string(this.getValue()), " ", _attrib(this));
 	}, 0, 2);
-	settimer(func {
-		removelistener(trace);
-		removelistener(mark);
-		print("proptrace: stop (", i, " calls)");
-	}, time, 1);
+	var mark = setlistener("/sim/signals/frame", func {
+		print("-------------------- FRAME --------------------");
+		if (!frames) {
+			removelistener(trace);
+			removelistener(mark);
+			print("proptrace: stop (", events, " calls)");
+		}
+		frames -= 1;
+	});
 }
 
 

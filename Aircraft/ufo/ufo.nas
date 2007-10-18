@@ -648,7 +648,7 @@ var export_flightplan = func {
 		to.getNode("on-ground", 1).setBoolValue(1);
 		to.getNode("ktas", 1).setDoubleValue(100);
 	}
-	export.getChild("wpt", i, 1).getNode("name", 1).setValue("END");
+	export.getChild("wpt", i + 1, 1).getNode("name", 1).setValue("END");
 
 	fgcommand("savexml", args);
 	print("flightplan exported to ", path);

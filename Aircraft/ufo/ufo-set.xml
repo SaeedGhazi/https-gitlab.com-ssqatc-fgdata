@@ -88,6 +88,10 @@
 				<desc>toggle marker for active (= last selected) object</desc>
 			</key>
 			<key>
+				<name>n</name>
+				<desc>export flightplan</desc>
+			</key>
+			<key>
 				<name>P</name>
 				<desc>toggle radar panel (see Ctrl-C for the control areas)</desc>
 			</key>
@@ -178,6 +182,15 @@
 				<binding>
 					<command>nasal</command>
 					<script>ufo.modelmgr.toggle_marker()</script>
+				</binding>
+			</key>
+
+			<key n="110">
+				<name>n</name>
+				<desc>Export FlightPlan</desc>
+				<binding>
+					<command>nasal</command>
+					<script>ufo.export_flightplan()</script>
 				</binding>
 			</key>
 
@@ -374,6 +387,7 @@
 			<switch type="string" archive="y">on</switch>
 			<range type="double" archive="y">40</range>
 			<mode-control type="int" archive="y">2</mode-control>
+			<limit-deg type="double">180</limit-deg>
 
 			<mode type="string" archive="y">WX</mode>
 			<lightning type="bool" archive="y">true</lightning>

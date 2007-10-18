@@ -633,6 +633,27 @@ var export_data = func {
 }
 
 
+var export_flightplan = func {
+	var path = getprop("/sim/fg-home") ~ "/ufo-flightplan-export.xml";
+	var args = props.Node.new({ filename : path });
+	var export = args.getNode("data/flightplan", 1);
+	var waypoints = modelmgr.get_data().getChildren("model");
+	forindex (var i; waypoints) {
+		var from = waypoints[i];
+		var to = export.getChild("wpt", i, 1);
+		to.getNode("name", 1).setValue("#" ~ i);
+		to.getNode("lat", 1).setDoubleValue(from.getNode("latitude-deg").getValue());
+		to.getNode("lon", 1).setDoubleValue(from.getNode("longitude-deg").getValue());
+		to.getNode("crossat", 1).setDoubleValue(from.getNode("elevation-ft").getValue());
+		to.getNode("on-ground", 1).setBoolValue(1);
+		to.getNode("ktas", 1).setDoubleValue(100);
+	}
+	export.getChild("wpt", i, 1).getNode("name", 1).setValue("END");
+
+	fgcommand("savexml", args);
+	print("flightplan exported to ", path);
+}
+
 
 var file_selector = nil;
 

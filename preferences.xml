@@ -167,6 +167,7 @@ Started September 2000 by David Megginson, david@megginson.com
   <current-view>
     <field-of-view type="double">55.0</field-of-view>
     <aspect-ratio-multiplier type="double">1.0</aspect-ratio-multiplier>
+    <dynamic-view type="bool" userarchive="y">false</dynamic-view>
   </current-view>
   <panel>
    <path>Aircraft/Generic/Panels/generic-vfr-panel.xml</path>
@@ -280,9 +281,6 @@ Started September 2000 by David Megginson, david@megginson.com
       <front-right-direction-deg type="double">315</front-right-direction-deg>
       <dynamic-view type="bool">true</dynamic-view>
     </config>
-    <dynamic>
-      <enabled type="bool" userarchive="y">false</enabled>
-    </dynamic>
   </view>
 
   <view>

@@ -323,7 +323,7 @@ view_manager.default_helicopter = func {
 
 
 # Update loop for the whole dynamic view manager. It only runs if
-# /sim/view[0]/dynamic/enabled is true.
+# /sim/current-view/dynamic-view is true.
 #
 var main_loop = func(id) {
 	id == loop_id or return;
@@ -427,7 +427,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	}
 
 	settimer(func {
-		setlistener("/sim/view/dynamic/enabled", func(n) {
+		setlistener("/sim/current-view/dynamic-view", func(n) {
 			dynamic_view = n.getBoolValue();
 			loop_id += 1;
 			view.resetView();

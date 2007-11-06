@@ -68,7 +68,7 @@ var interpolate = func(node, val...) {
 # a function in arg[1], an optional bool in arg[2], which triggers the
 # function initially if true, and an optional integer in arg[3], which
 # sets the listener's runtime behavior to "only trigger on change" (0),
-# "always trigger on write" (2), and "trigger even when children are
+# "always trigger on write" (1), and "trigger even when children are
 # written to" (2).
 #
 var setlistener = func(node, fun, init=0, runtime=1) {
@@ -80,7 +80,7 @@ var setlistener = func(node, fun, init=0, runtime=1) {
     }, init, runtime);
     if(__.log_level <= 2) {
         var c = caller(1);
-        print(sprintf("setting listener #%d in %s, line %s", id, c[2], c[3]))
+        print(sprintf("setting listener #%d in %s, line %s", id, c[2], c[3]));
     }
     return id;
 }

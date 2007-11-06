@@ -320,7 +320,7 @@ var lowpass = {
 		me.value = v;
 	},
 	_filter_ : func(v) {
-		var dt = getprop("/sim/time/delta-realtime-sec");
+		var dt = getprop("/sim/time/delta-sec");
 		var c = dt / (me.coeff + dt);
 		me.value = v * c + me.value * (1 - c);
 	},

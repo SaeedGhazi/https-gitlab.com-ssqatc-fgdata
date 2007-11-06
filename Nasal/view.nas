@@ -70,17 +70,6 @@ var resetViewDir = func {
 }
 
 ##
-# Handler.  Reset view to default.
-#
-resetView = func {
-    if (getprop("/sim/current-view/view-number") == 6)
-        return flyby.setpos(1);
-
-    resetViewDir();
-    resetFOV();
-}
-
-##
 # Handler.  Step to the next view.
 #
 var stepView = func(n) {
@@ -137,100 +126,183 @@ panViewPitch = func(step) {
 }
 
 
+##
+# Reset view to default using current view manager (see default_handler).
+#
+var resetView = func {
+	manager.reset();
+}
+
 
 ##
-# Singleton class that manages "Fly-By View". It's started with flyby.init()
-# and then works autonomously.
+# Default view handler used by view.manager.
 #
-var flyby = {
-    init : func {
-        me.latN = props.globals.getNode("/sim/viewer/latitude-deg", 1);
-        me.lonN = props.globals.getNode("/sim/viewer/longitude-deg", 1);
-        me.altN = props.globals.getNode("/sim/viewer/altitude-ft", 1);
-        me.hdgN = props.globals.getNode("/orientation/heading-deg", 1);
-        me.loopid = 0;
-        me.currview = nil;
-        me.number = indexof("Fly-By View");
-        if (me.number == nil)
-            die("can't find 'Fly-By View'");
-
-        setlistener("/sim/signals/reinit", func(n) { n.getValue() or me.reset() });
-        setlistener("/sim/crashed", func(n) { n.getValue() and me.reset() });
-        setlistener("/sim/freeze/replay-state", func {
-            settimer(func { me.reset() }, 1); # time for replay to catch up
-        });
-        setlistener("/sim/current-view/view-number", func(n) {
-            me.currview = n.getValue();
-            me.reset();
-        }, 1);
-    },
-    reset: func {
-        me.loopid += 1;
-        me.currview == me.number or return;
-        me.chase = -getprop("/sim/chase-distance-m");
-        me.course = me.hdgN.getValue();
-        me.last = geo.aircraft_position();
-        me.setpos(1);
-        me.dist = 20;
-        me._loop_(me.loopid);
-    },
-    setpos : func(force = 0) {
-        var pos = geo.aircraft_position();
-
-        # check if the aircraft has moved enough
-        var dist = me.last.distance_to(pos);
-        if (dist < 1.7 * me.chase and !force)
-            return 1.13;
-
-        # "predict" and remember next aircraft position
-        var course = me.hdgN.getValue();
-        var delta_alt = (pos.alt() - me.last.alt()) * 0.5;
-        pos.apply_course_distance(course, dist * 0.8);
-        pos.set_alt(pos.alt() + delta_alt);
-        me.last.set(pos);
-
-        # apply random deviation
-        var radius = me.chase * (0.5 * rand() + 0.7);
-        var agl = getprop("/position/altitude-agl-ft") * geo.FT2M;
-        if (agl > me.chase)
-            var angle = rand() * 2 * math.pi;
-        else
-            var angle = ((2 * rand() - 1) * 0.15 + 0.5) * (rand() < 0.5 ? -math.pi : math.pi);
-
-        var dev_alt = math.cos(angle) * radius;
-        var dev_side = math.sin(angle) * radius;
-        pos.apply_course_distance(course + 90, dev_side);
-
-        # and make sure it's not under ground
-        var lat = pos.lat();
-        var lon = pos.lon();
-        var alt = pos.alt();
-        var elev = geo.elevation(lat, lon);
-        if (elev != nil) {
-            elev += 2;   # min elevation
-            if (alt + dev_alt < elev and dev_alt < 0)
-                dev_alt = -dev_alt;
-            if (alt + dev_alt < elev)
-                alt = elev;
-            else
-                alt += dev_alt;
-        }
-
-        # set new view point
-        me.latN.setValue(lat);
-        me.lonN.setValue(lon);
-        me.altN.setValue(alt * geo.M2FT);
-        return 6.3;
-    },
-    _loop_ : func(id) {
-        id == me.loopid or return;
-        settimer(func { me._loop_(id) }, me.setpos());
-    },
+var default_handler = {
+	reset : func {
+		resetViewDir();
+		resetFOV();
+	},
 };
 
 
+##
+# View manager. Administrates optional Nasal view handlers.
+# Usage:  view.manager.register(<view-id>, <view-handler>);
+#
+#   view-id:      the view's name, e.g. "Chase View"
+#   view-handler: a hash with any combination of the functions listed in the
+#                 following example, or none at all. Only define the interface
+#                 functions that you really need! The hash may contain local
+#                 variables and other, non-interface functions.
+#
+# Example:
+#
+#   var some_view_handler = {
+#           init   : func {},    # called only once at startup
+#           start  : func {},    # called when view is switched to our view
+#           stop   : func {},    # called when view is switched away from our view
+#           reset  : func {},    # called with view.resetView()
+#           update : func { 0 }, # called iteratively if defined. Must return
+#   };                           # interval in seconds until next invocation
+#                                # Don't define it if you don't need it!
+#
+#   view.manager.register("Some View", some_view_handler);
+#
+#
+var manager = {
+	current : { node: nil, handler: default_handler },
+	init : func {
+		me.views = {};
+		me.loopid = 0;
+		var viewnodes = props.globals.getNode("sim").getChildren("view");
+		forindex (var i; viewnodes)
+			me.views[i] = { node: viewnodes[i], handler: default_handler };
+		setlistener("/sim/current-view/view-number", func(n) {
+			manager.set_view(n.getValue());
+		}, 1);
+	},
+	register : func(which, handler = nil) {
+		if (num(which) == nil)
+			which = view.indexof(which);
+		if (handler == nil)
+			handler = default_handler;
+		me.views[which]["handler"] = handler;
+		if (contains(handler, "init"))
+			handler.init(me.views[which].node);
+		me.set_view();
+	},
+	set_view : func(which = nil) {
+		if (which == nil)
+			which = getprop("/sim/current-view/view-number");
+		elsif (num(which) == nil)
+			which = view.indexof(which);
 
-#-- view manager --------------------------------------------------------------
+		me.loopid += 1;
+		if (contains(me.current.handler, "stop"))
+			me.current.handler.stop();
+
+		me.current = me.views[which];
+
+		if (contains(me.current.handler, "start"))
+			me.current.handler.start();
+		if (contains(me.current.handler, "update"))
+			me._loop_(me.loopid += 1);
+	},
+	reset : func {
+		if (contains(me.current.handler, "reset"))
+			me.current.handler.reset();
+		else
+			default_handler.reset();
+	},
+	_loop_ : func(id) {
+		id == me.loopid or return;
+		settimer(func { me._loop_(id) }, me.current.handler.update());
+	},
+};
+
+
+##
+# View handler for fly-by view.
+#
+var fly_by_view_handler = {
+	init : func {
+		me.latN = props.globals.getNode("/sim/viewer/latitude-deg", 1);
+		me.lonN = props.globals.getNode("/sim/viewer/longitude-deg", 1);
+		me.altN = props.globals.getNode("/sim/viewer/altitude-ft", 1);
+		me.hdgN = props.globals.getNode("/orientation/heading-deg", 1);
+
+		setlistener("/sim/signals/reinit", func(n) { n.getValue() or me.reset() });
+		setlistener("/sim/crashed", func(n) { n.getValue() and me.reset() });
+		setlistener("/sim/freeze/replay-state", func {
+			settimer(func { me.reset() }, 1); # time for replay to catch up
+		});
+		me.reset();
+	},
+	start : func {
+		me.reset();
+	},
+	reset: func {
+		me.chase = -getprop("/sim/chase-distance-m");
+		me.course = me.hdgN.getValue();
+		me.last = geo.aircraft_position();
+		me.setpos(1);
+		me.dist = 20;
+	},
+	setpos : func(force = 0) {
+		var pos = geo.aircraft_position();
+
+		# check if the aircraft has moved enough
+		var dist = me.last.distance_to(pos);
+		if (dist < 1.7 * me.chase and !force)
+			return 1.13;
+
+		# "predict" and remember next aircraft position
+		var course = me.hdgN.getValue();
+		var delta_alt = (pos.alt() - me.last.alt()) * 0.5;
+		pos.apply_course_distance(course, dist * 0.8);
+		pos.set_alt(pos.alt() + delta_alt);
+		me.last.set(pos);
+
+		# apply random deviation
+		var radius = me.chase * (0.5 * rand() + 0.7);
+		var agl = getprop("/position/altitude-agl-ft") * geo.FT2M;
+		if (agl > me.chase)
+			var angle = rand() * 2 * math.pi;
+		else
+			var angle = ((2 * rand() - 1) * 0.15 + 0.5) * (rand() < 0.5 ? -math.pi : math.pi);
+
+		var dev_alt = math.cos(angle) * radius;
+		var dev_side = math.sin(angle) * radius;
+		pos.apply_course_distance(course + 90, dev_side);
+
+		# and make sure it's not under ground
+		var lat = pos.lat();
+		var lon = pos.lon();
+		var alt = pos.alt();
+		var elev = geo.elevation(lat, lon);
+		if (elev != nil) {
+			elev += 2;   # min elevation
+			if (alt + dev_alt < elev and dev_alt < 0)
+				dev_alt = -dev_alt;
+			if (alt + dev_alt < elev)
+				alt = elev;
+			else
+				alt += dev_alt;
+		}
+
+		# set new view point
+		me.latN.setValue(lat);
+		me.lonN.setValue(lon);
+		me.altN.setValue(alt * geo.M2FT);
+		return 6.3;
+	},
+	update : func {
+		return me.setpos();
+	},
+};
+
+
+#------------------------------------------------------------------------------
 #
 # Saves/restores/moves the view point (position, orientation, field-of-view).
 # Moves are interpolated with sinusoidal characteristic. There's only one
@@ -267,13 +339,13 @@ var flyby = {
 # Normalize angle to  -180 <= angle < 180
 #
 var normdeg = func(a) {
-    while (a >= 180) {
-        a -= 360;
-    }
-    while (a < -180) {
-        a += 360;
-    }
-    return a;
+	while (a >= 180) {
+		a -= 360;
+	}
+	while (a < -180) {
+		a += 360;
+	}
+	return a;
 }
 
 
@@ -282,24 +354,24 @@ var normdeg = func(a) {
 # field-of-view parameter is also managed by this class.)
 #
 var ViewAxis = {
-    new : func(prop) {
-        var m = { parents : [ViewAxis] };
-        m.prop = props.globals.getNode(prop, 1);
-        if (m.prop.getType() == "NONE") {
-            m.prop.setDoubleValue(0);
-        }
-        m.from = m.to = m.prop.getValue();
-        return m;
-    },
-    reset : func {
-        me.from = me.to = normdeg(me.prop.getValue());
-    },
-    target : func(v) {
-        me.to = normdeg(v);
-    },
-    move : func(blend) {
-        me.prop.setValue(me.from + blend * (me.to - me.from));
-    },
+	new : func(prop) {
+		var m = { parents : [ViewAxis] };
+		m.prop = props.globals.getNode(prop, 1);
+		if (m.prop.getType() == "NONE") {
+			m.prop.setDoubleValue(0);
+		}
+		m.from = m.to = m.prop.getValue();
+		return m;
+	},
+	reset : func {
+		me.from = me.to = normdeg(me.prop.getValue());
+	},
+	target : func(v) {
+		me.to = normdeg(v);
+	},
+	move : func(blend) {
+		me.prop.setValue(me.from + blend * (me.to - me.from));
+	},
 };
 
 
@@ -308,64 +380,64 @@ var ViewAxis = {
 # view.point: handles smooth view movements
 #
 var point = {
-    init : func {
-        me.axes = {
-            "heading-offset-deg" : ViewAxis.new("/sim/current-view/goal-heading-offset-deg"),
-            "pitch-offset-deg" : ViewAxis.new("/sim/current-view/goal-pitch-offset-deg"),
-            "roll-offset-deg" : ViewAxis.new("/sim/current-view/goal-roll-offset-deg"),
-            "x-offset-m" : ViewAxis.new("/sim/current-view/x-offset-m"),
-            "y-offset-m" : ViewAxis.new("/sim/current-view/y-offset-m"),
-            "z-offset-m" : ViewAxis.new("/sim/current-view/z-offset-m"),
-            "field-of-view" : ViewAxis.new("/sim/current-view/field-of-view"),
-        };
-        me.storeN = props.Node.new();
-        me.dtN = props.globals.getNode("/sim/time/delta-realtime-sec", 1);
-        me.currviewN = props.globals.getNode("/sim/current-view", 1);
-        me.blend = 0;
-        me.loop_id = 0;
-        props.copy(props.globals.getNode("/sim/view/config"), me.storeN);
-    },
-    save : func {
-        me.storeN = props.Node.new();
-        props.copy(me.currviewN, me.storeN);
-        return me.storeN;
-    },
-    restore : func {
-        me.move(me.storeN);
-    },
-    move : func(prop, time = nil) {
-        prop != nil or return;
-        foreach (var a; keys(me.axes)) {
-            var n = prop.getNode(a);
-            me.axes[a].reset();
-            if (n != nil) {
-                me.axes[a].target(n.getValue());
-            }
-        }
-        var m = prop.getNode("move-time-sec");
-        if (m != nil) {
-            time = m.getValue();
-        }
-        if (time == nil) {
-            time = 1;
-        }
-        me.blend = -1;   # range -1 .. 1
-        me._loop_(me.loop_id += 1, time);
-    },
-    _loop_ : func(id, time) {
-        me.loop_id == id or return;
-        me.blend += me.dtN.getValue() / time;
-        if (me.blend > 1) {
-            me.blend = 1;
-        }
-        var b = (math.sin(me.blend * math.pi / 2) + 1) / 2; # range 0 .. 1
-        foreach (var a; keys(me.axes)) {
-            me.axes[a].move(b);
-        }
-        if (me.blend < 1) {
-            settimer(func { me._loop_(id, time) }, 0);
-        }
-    },
+	init : func {
+		me.axes = {
+			"heading-offset-deg" : ViewAxis.new("/sim/current-view/goal-heading-offset-deg"),
+			"pitch-offset-deg" : ViewAxis.new("/sim/current-view/goal-pitch-offset-deg"),
+			"roll-offset-deg" : ViewAxis.new("/sim/current-view/goal-roll-offset-deg"),
+			"x-offset-m" : ViewAxis.new("/sim/current-view/x-offset-m"),
+			"y-offset-m" : ViewAxis.new("/sim/current-view/y-offset-m"),
+			"z-offset-m" : ViewAxis.new("/sim/current-view/z-offset-m"),
+			"field-of-view" : ViewAxis.new("/sim/current-view/field-of-view"),
+		};
+		me.storeN = props.Node.new();
+		me.dtN = props.globals.getNode("/sim/time/delta-realtime-sec", 1);
+		me.currviewN = props.globals.getNode("/sim/current-view", 1);
+		me.blend = 0;
+		me.loop_id = 0;
+		props.copy(props.globals.getNode("/sim/view/config"), me.storeN);
+	},
+	save : func {
+		me.storeN = props.Node.new();
+		props.copy(me.currviewN, me.storeN);
+		return me.storeN;
+	},
+	restore : func {
+		me.move(me.storeN);
+	},
+	move : func(prop, time = nil) {
+		prop != nil or return;
+		foreach (var a; keys(me.axes)) {
+			var n = prop.getNode(a);
+			me.axes[a].reset();
+			if (n != nil) {
+				me.axes[a].target(n.getValue());
+			}
+		}
+		var m = prop.getNode("move-time-sec");
+		if (m != nil) {
+			time = m.getValue();
+		}
+		if (time == nil) {
+			time = 1;
+		}
+		me.blend = -1;   # range -1 .. 1
+		me._loop_(me.loop_id += 1, time);
+	},
+	_loop_ : func(id, time) {
+		me.loop_id == id or return;
+		me.blend += me.dtN.getValue() / time;
+		if (me.blend > 1) {
+			me.blend = 1;
+		}
+		var b = (math.sin(me.blend * math.pi / 2) + 1) / 2; # range 0 .. 1
+		foreach (var a; keys(me.axes)) {
+			me.axes[a].move(b);
+		}
+		if (me.blend < 1) {
+			settimer(func { me._loop_(id, time) }, 0);
+		}
+	},
 };
 
 
@@ -375,14 +447,15 @@ var fovProp = nil;
 
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
-    views = props.globals.getNode("/sim").getChildren("view");
-    fovProp = props.globals.getNode("/sim/current-view/field-of-view");
-    point.init();
+	views = props.globals.getNode("/sim").getChildren("view");
+	fovProp = props.globals.getNode("/sim/current-view/field-of-view");
+	point.init();
 });
 
 
 _setlistener("/sim/signals/fdm-initialized", func {
-    flyby.init();
+	manager.init();
+	manager.register("Fly-By View", fly_by_view_handler);
 });
 
 

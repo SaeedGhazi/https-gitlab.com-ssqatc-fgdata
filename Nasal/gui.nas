@@ -1,38 +1,40 @@
 ##
 # Pop up a "tip" dialog for a moment, then remove it.  The delay in
 # seconds can be specified as the second argument.  The default is 1
-# second.  Note that the tip dialog is a shared resource.  If
-# someone else comes along and wants to pop a tip up before your delay
-# is finished, you lose. :)
+# second.  The third argument can be a hash with override values.
+# Note that the tip dialog is a shared resource.  If someone else
+# comes along and wants to pop a tip up before your delay is finished,
+# you lose. :)
 #
-popupTip = func {
-    delay = if(size(arg) > 1) {arg[1]} else {DELAY};
-    tmpl = { name : "PopTip", modal : 0, layout : "hbox",
-             y: screenHProp.getValue() - 140,
-             text : { label : arg[0], padding : 6 } };
+var popupTip = func(label, delay = nil, override = nil) {
+    var tmpl = props.Node.new({
+            name : "PopTip", modal : 0, layout : "hbox",
+            y: screenHProp.getValue() - 140,
+            text : { label : label, padding : 6 }
+    });
 
+    if (override != nil) tmpl.setValues(override);
     popdown();
-    fgcommand("dialog-new", props.Node.new(tmpl));
+    fgcommand("dialog-new", tmpl);
     fgcommand("dialog-show", tipArg);
 
-    currTimer = currTimer + 1;
-    thisTimer = currTimer;
+    currTimer += 1;
+    var thisTimer = currTimer;
 
     # Final argument is a flag to use "real" time, not simulated time
-    settimer(func { if(currTimer == thisTimer) { popdown() } }, DELAY, 1);
+    settimer(func { if(currTimer == thisTimer) { popdown() } }, delay or DELAY, 1);
 }
 
-showDialog = func {
-    fgcommand("dialog-show",
-              props.Node.new({ "dialog-name" : arg[0]}));
+var showDialog = func(name) {
+    fgcommand("dialog-show", props.Node.new({ "dialog-name" : name }));
 }
 
 ##
 # Enable/disable named menu entry
 #
-menuEnable = func(searchname, state) {
-    foreach (menu; props.globals.getNode("/sim/menubar/default").getChildren("menu")) {
-        foreach (name; menu.getChildren("name")) {
+var menuEnable = func(searchname, state) {
+    foreach (var menu; props.globals.getNode("/sim/menubar/default").getChildren("menu")) {
+        foreach (var name; menu.getChildren("name")) {
             if (name.getValue() == searchname) {
                 menu.getNode("enabled").setBoolValue(state);
             }

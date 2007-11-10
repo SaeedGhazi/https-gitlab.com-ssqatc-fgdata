@@ -388,3 +388,29 @@ var weaponSelect = func(d) {
 #
 var ptt = func(b) setprop("/instrumentation/comm/ptt", b);
 
+##
+# Lighting
+#
+var toggleLights = func () {
+    if (getprop("/controls/switches/panel-lights")) {
+        setprop("/controls/switches/panel-lights-factor", 0);
+        setprop("/controls/switches/panel-lights", 0);
+        setprop("/controls/switches/landing-light", 0);
+        setprop("/controls/switches/flashing-beacon", 0);
+        setprop("/controls/switches/strobe-lights", 0);
+        setprop("/controls/switches/map-lights", 0);
+        setprop("/controls/switches/cabin-lights", 0);
+        setprop("/controls/switches/nav-lights", 0);
+    } else {
+        setprop("/controls/electric/battery-switch", 1);
+        setprop("/controls/electric/alternator-switch", 1);
+        setprop("/controls/switches/panel-lights-factor", 0.1);
+        setprop("/controls/switches/panel-lights", 1);
+        setprop("/controls/switches/landing-light", 1);
+        setprop("/controls/switches/flashing-beacon", 1);
+        setprop("/controls/switches/strobe-lights", 1);
+        setprop("/controls/switches/map-lights", 1);
+        setprop("/controls/switches/cabin-lights", 1);
+        setprop("/controls/switches/nav-lights", 1);
+    }
+}

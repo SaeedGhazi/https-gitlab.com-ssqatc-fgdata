@@ -624,15 +624,6 @@ top down before the key bindings are parsed.
   </binding>
  </key>
 
- <key n="76">
-  <name>L</name>
-  <desc>Toggle tail-wheel lock.</desc>
-  <binding>
-   <command>property-toggle</command>
-   <property>/controls/gear/tailwheel-lock</property>
-  </binding>
- </key>
-
  <key n="77">
   <name>M</name>
   <desc>Mixture leaner.</desc>
@@ -864,10 +855,10 @@ top down before the key bindings are parsed.
 
  <key n="108">
   <name>l</name>
-  <desc>Turn on aircraft panel lighting.</desc>
+  <desc>Toggle tail-wheel lock.</desc>
   <binding>
-   <command>nasal</command>
-   <script>controls.toggleLights()</script>
+   <command>property-toggle</command>
+   <property>/controls/gear/tailwheel-lock</property>
   </binding>
  </key>
 

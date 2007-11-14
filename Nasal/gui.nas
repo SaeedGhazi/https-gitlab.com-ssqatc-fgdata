@@ -315,6 +315,8 @@ var FileSelector = {
 # Open property browser with given target path.
 #
 var property_browser = func(dir = "/") {
+    if (isa(dir, props.Node))
+        dir = dir.getPath();
     var dlgname = "property-browser";
     foreach (var module; keys(globals)) {
         if (find("__dlg:" ~ dlgname, module) == 0) {

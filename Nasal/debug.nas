@@ -28,6 +28,9 @@
 # debug.bt                             ... abbreviation for debug.backtrace
 #
 # debug.string(<variable>)             ... returns contents of variable as string
+# debug.attributes(<property> [, <verb>]) ... returns attribute string for a given property.
+#                                          <verb>ose is by default 0, and shows the
+#                                          node's refcounter if 1.
 #
 # debug.load_nasal(<file> [, <module>])) ... load and run Nasal file (under namespace
 #                                          <module> if defined, or the basename
@@ -121,10 +124,10 @@ var _tree = func(n, graph = 1, prefix = "", level = 0) {
 	if (size(children)) {
 		s ~= "/";
 		if (n.getType() != "NONE")
-			s ~= " = " ~ string(n.getValue()) ~ " " ~ _attrib(n)
+			s ~= " = " ~ string(n.getValue()) ~ " " ~ attributes(n)
 					~ "    " ~ _section(" PARENT-VALUE ");
 	} else {
-		s ~= " = " ~ string(n.getValue()) ~ " " ~ _attrib(n);
+		s ~= " = " ~ string(n.getValue()) ~ " " ~ attributes(n);
 	}
 	print(s);
 
@@ -134,7 +137,7 @@ var _tree = func(n, graph = 1, prefix = "", level = 0) {
 }
 
 
-var _attrib = func(p) {
+var attributes = func(p, verbose = 0) {
 	var r = p.getAttribute("read")        ? "" : "r";
 	var w = p.getAttribute("write")       ? "" : "w";
 	var R = p.getAttribute("trace-read")  ? "R" : "";
@@ -148,12 +151,14 @@ var _attrib = func(p) {
 		type ~= ", " ~ attr;
 	if (var l = p.getAttribute("listeners"))
 		type ~= ", L" ~ l;
+	if (verbose and (var c = p.getAttribute("references")) > 2)
+		type ~= ", #" ~ (c - 2);
 	return type ~ ")";
 }
 
 
 var _dump_prop = func(p) {
-	_path(p.getPath()) ~ " = " ~ string(p.getValue()) ~ " " ~ _attrib(p);
+	_path(p.getPath()) ~ " = " ~ string(p.getValue()) ~ " " ~ attributes(p);
 }
 
 
@@ -233,7 +238,7 @@ var proptrace = func(root = "/", frames = 1) {
 		elsif (type < 0)
 			print(_num("DEL "), this.getPath());
 		else
-			print("SET ", this.getPath(), " = ", string(this.getValue()), " ", _attrib(this));
+			print("SET ", this.getPath(), " = ", string(this.getValue()), " ", attributes(this));
 	}, 0, 2);
 	var mark = setlistener("/sim/signals/frame", func {
 		print("-------------------- FRAME --------------------");
@@ -265,6 +270,7 @@ var benchmark = func(label, f, arg...) {
 var exit = func { fgcommand("exit") }
 
 
+##
 # print error vector as set by call(). By using call() one can execute
 # code that catches "exceptions" (by a die() call or errors). The Nasal
 # code doesn't abort in this case. Example:
@@ -308,8 +314,14 @@ var load_nasal = func(file, module = nil) {
 	if (!contains(globals, module))
 		globals[module] = {};
 
+	var err = [];
 	printlog("info", "loading ", file, " into namespace ", module);
-	call(compile(io.readfile(file), file), nil, nil, globals[module]);
+	var code = call(func { compile(io.readfile(file), file) }, nil, err);
+	if (size(err))
+		return print(file ~ ": " ~ err[0]);
+
+	call(bind(code, globals), nil, nil, globals[module], err);
+	printerror(err);
 }
 
 

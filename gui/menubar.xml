@@ -450,6 +450,14 @@
   </item>
 
   <item>
+   <label>Configure Development Extensions</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>devel-extensions</dialog-name>
+   </binding>
+  </item>
+
+  <item>
    <label>Dump Scene Graph</label>
    <binding>
     <command>dump-scenegraph</command>

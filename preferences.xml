@@ -12,9 +12,6 @@ Started September 2000 by David Megginson, david@megginson.com
 
  <!-- General simulation preferences -->
  <sim>
-  <!-- hide some development tools, such as parts of the HUD adjustment dialog -->
-  <devel type="bool">false</devel>
-
   <!-- show-aircraft option: show ALL aircraft regardless by default -->
   <aircraft-min-status>all</aircraft-min-status>
 
@@ -245,6 +242,7 @@ Started September 2000 by David Megginson, david@megginson.com
     <engine n="6" type="bool">true</engine>
     <engine n="7" type="bool">true</engine>
    </selected>
+   <property-key-handler type="bool" userarchive="y">false</property-key-handler>
   </input>
 
   <chase-distance-m type="double">-25.0</chase-distance-m>
@@ -427,6 +425,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <current-style type="int" userarchive="y">0</current-style>
    <style n="0" include="gui/styles/classic.xml"/>
    <style n="1" include="gui/styles/anthrax.xml"/>
+   <devel-widgets type="bool" userarchive="y">false</devel-widgets>
   </gui>
 
   <mouse>

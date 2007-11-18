@@ -1,9 +1,10 @@
 # Property Key Handler
-# -------------------------------------------------------------------------------------------------
-# This is an extension mainly targeted at developers. It implements some useful tools
-# for dealing with internal properties if enabled (Menu->Debug->Configure Development Extensions).
-# To use this feature, press the '/'-key, then type a property path (using the <TAB> key
-# to complete property path elements if possible), or a search string ...
+# ------------------------------------------------------------------
+# This is an extension mainly targeted at developers. It implements
+# some useful tools for dealing with internal properties if enabled
+# (Menu->Debug->Configure Development Extensions). To use this feature,
+# press the '/'-key, then type a property path (using the <TAB> key to
+# complete property path elements if possible), or a search string ...
 #
 #
 # Commands:
@@ -17,11 +18,13 @@
 #
 # Keys:
 #
-#   <CR>            ... carriage return or enter, to confirm some operations
-#   <TAB>           ... complete property path element (if possible), or
-#                       cycle through available elements
-#   <CurUp>/<Down>  ... switch back/forth in the history
-#   <Escape>        ... cancel the operation
+#   <CR>              ... carriage return or enter, to confirm some operations
+#   <TAB>             ... complete property path element (if possible), or
+#                         cycle through available elements
+#   <Shift-TAB>       ... like <TAB> but cycles backwards
+#   <CurUp>/<CurDown> ... switch back/forth in the history
+#   <Escape>          ... cancel the operation
+#   <Shift-Backspace> ... removes last, whole path element
 #
 #
 # Colors:

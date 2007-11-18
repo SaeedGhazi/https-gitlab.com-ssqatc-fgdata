@@ -34,20 +34,15 @@
 		</checkbox>
 	</group>
 
-	<group>
-		<layout>hbox</layout>
-		<empty><stretch>true</stretch></empty>
-
-		<button>
-			<legend>Close</legend>
-			<default>true</default>
-			<key>Esc</key>
-			<binding>
-				<command>dialog-apply</command>
-			</binding>
-			<binding>
-				<command>dialog-close</command>
-			</binding>
-		</button>
-	</group>
+	<button>
+		<legend>Close</legend>
+		<default>true</default>
+		<key>Esc</key>
+		<binding>
+			<command>dialog-apply</command>
+		</binding>
+		<binding>
+			<command>dialog-close</command>
+		</binding>
+	</button>
 </PropertyList>

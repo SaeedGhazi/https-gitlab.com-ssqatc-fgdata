@@ -49,7 +49,9 @@
 #       interpreted by UNIX shells and MS Windows with ANSI.SYS extension
 #       installed. If the color codes aren't interpreted correctly, then
 #       set property /sim/startup/terminal-ansi-colors=0
-var String = nil;
+var isprint = nil;
+var isalnum = nil;
+var isalpha = nil;
 
 var _c = func {}
 
@@ -174,7 +176,7 @@ var _dump_var = func(v) {
 var _dump_string = func(str) {
 	var s = "\"";
 	for (var i = 0; i < size(str); i += 1) {
-		if (String.isprint(str[i])) {
+		if (isprint(str[i])) {
 			s ~= chr(str[i]);
 		} else {
 			s ~= sprintf("\\x%02x", str[i]);
@@ -186,10 +188,12 @@ var _dump_string = func(str) {
 
 # dump hash keys as variables if they are valid variable names, or as string otherwise
 var _dump_key = func(s) {
-	if (!String.isalpha(s[0]) and s[0] != `_`)
+	if (num(s) != nil)
+		return _num(s);
+	if (!isalpha(s[0]) and s[0] != `_`)
 		return _dump_string(s);
 	for (var i = 1; i < size(s); i += 1) {
-		if (!String.isalnum(s[i]) and s[i] != `_`)
+		if (!isalnum(s[i]) and s[i] != `_`)
 			return _dump_string(s);
 	}
 	_dump_var(s);
@@ -355,7 +359,9 @@ var load_nasal = func(file, module = nil) {
 
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
-	String = globals["string"];
+	isalnum = globals["string"].isalnum;
+	isalpha = globals["string"].isalpha;
+	isprint = globals["string"].isprint;
 	ghosttypes[ghosttype(props._globals())] = "PropertyNode";
 	ghosttypes[ghosttype(io.stderr)] = "FileHandle";
 

@@ -384,7 +384,7 @@ Started September 2000 by David Megginson, david@megginson.com
   </view>
 
   <view>
-    <name>Chase View wo yaw</name>
+    <name>Chase View Without Yaw</name>
     <enabled type="bool" userarchive="y">true</enabled>
     <type>lookat</type>
     <config>

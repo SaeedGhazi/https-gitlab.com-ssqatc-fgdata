@@ -49,6 +49,7 @@
 #       interpreted by UNIX shells and MS Windows with ANSI.SYS extension
 #       installed. If the color codes aren't interpreted correctly, then
 #       set property /sim/startup/terminal-ansi-colors=0
+var String = nil;
 
 var _c = func {}
 
@@ -170,18 +171,45 @@ var _dump_var = func(v) {
 }
 
 
+var _dump_string = func(str) {
+	var s = "\"";
+	for (var i = 0; i < size(str); i += 1) {
+		if (String.isprint(str[i])) {
+			s ~= chr(str[i]);
+		} else {
+			s ~= sprintf("\\x%02x", str[i]);
+		}
+	}
+	return _string(s ~ "\"");
+}
+
+
+# dump hash keys as variables if they are valid variable names, or as string otherwise
+var _dump_key = func(s) {
+	if (!String.isalpha(s[0]) and s[0] != `_`)
+		return _dump_string(s);
+	for (var i = 1; i < size(s); i += 1) {
+		if (!String.isalnum(s[i]) and s[i] != `_`)
+			return _dump_string(s);
+	}
+	_dump_var(s);
+}
+
+
 var string = func(o) {
 	var t = typeof(o);
 	if (t == "nil") {
 		return _nil("nil");
+
 	} elsif (t == "scalar") {
-		return num(o) == nil ? _string('"' ~ o ~ '"') : _num(o);
+		return num(o) == nil ? _dump_string(o) : _num(o);
+
 	} elsif (t == "vector") {
 		var s = "";
 		forindex (var i; o)
 			s ~= (i == 0 ? "" : ", ") ~ string(o[i]);
-
 		return _bracket("[") ~ " " ~ s ~ " " ~ _bracket("]");
+
 	} elsif (t == "hash") {
 		if (contains(o, "parents") and typeof(o.parents) == "vector"
 				and size(o.parents) == 1 and o.parents[0] == props.Node)
@@ -190,15 +218,16 @@ var string = func(o) {
 		var k = keys(o);
 		var s = "";
 		forindex (var i; k)
-			s ~= (i == 0 ? "" : ", ") ~ _dump_var(k[i]) ~ " : " ~ string(o[k[i]]);
-
+			s ~= (i == 0 ? "" : ", ") ~ _dump_key(k[i]) ~ " : " ~ string(o[k[i]]);
 		return _brace("{") ~ " " ~ s ~ " " ~ _brace("}");
+
 	} elsif (t == "ghost") {
 		var gt = ghosttype(o);
 		if (contains(ghosttypes, gt))
 			return _angle("<") ~ _nil(ghosttypes[gt]) ~ _angle(">");
 		else
 			return _angle("<") ~ _nil(gt) ~ _angle(">");
+
 	} else {
 		return _angle("<") ~ _vartype(t) ~ _angle(">");
 	}
@@ -326,6 +355,7 @@ var load_nasal = func(file, module = nil) {
 
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
+	String = globals["string"];
 	ghosttypes[ghosttype(props._globals())] = "PropertyNode";
 	ghosttypes[ghosttype(io.stderr)] = "FileHandle";
 

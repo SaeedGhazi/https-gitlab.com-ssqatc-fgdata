@@ -19,16 +19,6 @@
    </binding>
   </item>
 
-<!--
-  <item>
-   <label>Load Aircraft</label>
-   <binding>
-    <command>dialog-show</command>
-    <dialog-name>aircraft</dialog-name>
-   </binding>
-  </item>
--->
-
   <item>
    <label>Reset</label>
    <binding>
@@ -117,7 +107,15 @@
   </item>
 
   <item>
-   <label>Rendering options</label>
+   <label>View Options</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>view</dialog-name>
+   </binding>
+  </item>
+
+  <item>
+   <label>Rendering Options</label>
    <binding>
     <command>dialog-show</command>
     <dialog-name>rendering</dialog-name>
@@ -156,7 +154,6 @@
    </binding>
   </item>
 
-
   <item>
    <label>Chat</label>
    <binding>
@@ -164,7 +161,7 @@
     <dialog-name>chat</dialog-name>
    </binding>
   </item>
-  
+
  </menu>
 
  <menu>
@@ -380,7 +377,7 @@
     <command>ATC-freq-search</command>
    </binding>
   </item>
- 
+
   <item>
    <label>Options</label>
    <binding>
@@ -388,7 +385,7 @@
     <dialog-name>atc-ai</dialog-name>
    </binding>
   </item>
-  
+
  </menu>
 
  <menu>
@@ -463,6 +460,7 @@
     <command>dump-scenegraph</command>
    </binding>
   </item>
+
  </menu>
 
  <menu>

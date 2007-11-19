@@ -260,6 +260,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
   <view>
     <name>Cockpit View</name>
+    <enabled type="bool" userarchive="y">true</enabled>
     <type>lookfrom</type>
     <internal type="bool">false</internal>
     <config>
@@ -283,6 +284,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
   <view>
     <name>Helicopter View</name>
+    <enabled type="bool" userarchive="y">true</enabled>
     <type>lookat</type>
     <config>
       <from-model type="bool">false</from-model>
@@ -308,6 +310,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
   <view>
     <name>Chase View</name>
+    <enabled type="bool" userarchive="y">true</enabled>
     <type>lookat</type>
     <config>
       <from-model type="bool">false</from-model>
@@ -337,6 +340,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
   <view>
     <name>Tower View</name>
+    <enabled type="bool" userarchive="y">true</enabled>
     <type>lookat</type>
     <config>
       <eye-lat-deg-path>/sim/tower/latitude-deg</eye-lat-deg-path>
@@ -360,6 +364,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
   <view>
     <name>Tower View Look From</name>
+    <enabled type="bool" userarchive="y">true</enabled>
     <type>lookfrom</type>
     <config>
       <eye-lat-deg-path>/sim/tower/latitude-deg</eye-lat-deg-path>
@@ -380,6 +385,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
   <view>
     <name>Chase View wo yaw</name>
+    <enabled type="bool" userarchive="y">true</enabled>
     <type>lookat</type>
     <config>
       <from-model type="bool">false</from-model>
@@ -402,6 +408,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
   <view>
     <name>Fly-By View</name>
+    <enabled type="bool" userarchive="y">true</enabled>
     <type>lookat</type>
     <config>
       <eye-lon-deg-path>/sim/viewer/longitude-deg</eye-lon-deg-path>

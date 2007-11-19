@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<name>view</name>
+	<modal>false</modal>
+	<layout>vbox</layout>
+
+	<text>
+		<label>Configure Active Views</label>
+	</text>
+
+	<hrule/>
+
+	<nasal>
+		<open>
+			var group = cmdarg().getNode("group");
+			var ac = getprop("/sim/aircraft");
+			group.removeChildren("checkbox");
+			group.removeChildren("hrule");
+			group.removeChildren("text");
+			var system = 1;
+			foreach (var v; view.views) {
+				var index = v.getIndex();
+				if (index == 0 or index >= 200)
+					continue;
+
+				if (index >= 100) {
+					if (system) {
+						group.getNode("hrule", 1);
+						var t = group.getNode("text", 1);
+						t.getNode("label", 1).setValue("\"" ~ ac ~ "\" Specific Views");
+						system = 0;
+					}
+					aircraft.data.add(v.getPath() ~ "/enabled");
+				}
+				if (v.getNode("enabled") == nil)
+					v.getNode("enabled", 1).setBoolValue(1);
+
+				var target = group.getChild("checkbox", index, 1);
+				props.copy(group.getNode("checkbox-template"), target);
+				target.getNode("label").setValue(v.getNode("name").getValue());
+				target.getNode("property").setValue(v.getPath() ~ "/enabled");
+			}
+		</open>
+	</nasal>
+
+	<group>
+		<layout>vbox</layout>
+		<halign>center</halign>
+
+		<checkbox-template>
+			<halign>left</halign>
+			<label><!----></label>
+			<property><!----></property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox-template>
+	</group>
+
+	<button>
+		<legend>Close</legend>
+		<default>true</default>
+		<key>Esc</key>
+		<binding>
+			<command>dialog-apply</command>
+		</binding>
+		<binding>
+			<command>dialog-close</command>
+		</binding>
+	</button>
+</PropertyList>

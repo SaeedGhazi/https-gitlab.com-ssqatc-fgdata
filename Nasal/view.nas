@@ -460,7 +460,8 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 			die("\n***\n*\n*  Illegal use of reserved view index "
 					~ index ~ ". Use indices >= 100!\n*\n***");
 		} elsif (index >= 100 and index < 200) {
-			settimer(func { aircraft.data.add(v.getPath() ~ "/enabled") }, 0);
+			var enabled = v.getPath() ~ "/enabled";
+			settimer(func { aircraft.data.add(enabled) }, 0);
 		}
 	}
 

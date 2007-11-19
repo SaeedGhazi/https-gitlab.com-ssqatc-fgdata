@@ -73,15 +73,15 @@ var resetViewDir = func {
 # Handler.  Step to the next (force=1) or next enabled view.
 #
 var stepView = func(n, force = 0) {
-    var i = getprop("/sim/current-view/view-number");
+    var i = getprop("/sim/current-view/view-number") + n;
     while (1) {
-        i += n;
         if (i < 0)
             i = size(views) - 1;
         elsif (i >= size(views))
             i = 0;
         if (!i or force or (var e = views[i].getNode("enabled")) == nil or e.getValue())
             break;
+        i += n > 0 ? 1 : -1;
     }
     setprop("/sim/current-view/view-number", i);
 

@@ -453,6 +453,7 @@ var fovProp = nil;
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
 	views = props.globals.getNode("/sim").getChildren("view");
+	var ac_views = [];
 	foreach (var v; views) {
 		var index = v.getIndex();
 		if (index > 6 and index < 100) {
@@ -460,10 +461,13 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 			die("\n***\n*\n*  Illegal use of reserved view index "
 					~ index ~ ". Use indices >= 100!\n*\n***");
 		} elsif (index >= 100 and index < 200) {
-			var enabled = v.getPath() ~ "/enabled";
-			settimer(func { aircraft.data.add(enabled) }, 0);
+			append(ac_views, v.getPath() ~ "/enabled");
 		}
 	}
+	settimer(func {
+		foreach(var v; ac_views)
+			aircraft.data.add(v);
+	}, 0);
 
 	fovProp = props.globals.getNode("/sim/current-view/field-of-view");
 	point.init();

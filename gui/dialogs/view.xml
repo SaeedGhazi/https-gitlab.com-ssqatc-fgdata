@@ -18,21 +18,27 @@
 			group.removeChildren("checkbox");
 			group.removeChildren("hrule");
 			group.removeChildren("text");
-			var system = 1;
+			var mode = 0;
 			foreach (var v; view.views) {
 				var index = v.getIndex();
-				if (index >= 200)
-					continue;
-
-				if (index >= 100) {
-					if (system) {
-						group.getNode("hrule", 1);
-						var t = group.getNode("text", 1);
-						t.getNode("label", 1).setValue("\"" ~ ac ~ "\" Specific Views");
-						system = 0;
+				if (index >= 200) {
+					if (mode != 2) {
+						mode = 2;
+						group.getChild("hrule", 1, 1);
+						var t = group.getChild("text", 1, 1);
+						t.getNode("label", 1).setValue("Other Views");
 					}
+
+				} elsif (index >= 100) {
 					aircraft.data.add(v.getPath() ~ "/enabled");
+					if (mode != 1) {
+						mode = 1;
+						group.getChild("hrule", 0, 1);
+						var t = group.getChild("text", 0, 1);
+						t.getNode("label", 1).setValue("\"" ~ ac ~ "\" Specific Views");
+					}
 				}
+
 				if (v.getNode("enabled") == nil)
 					v.getNode("enabled", 1).setBoolValue(1);
 

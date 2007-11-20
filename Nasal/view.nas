@@ -72,21 +72,22 @@ var resetViewDir = func {
 ##
 # Handler.  Step to the next (force=1) or next enabled view.
 #
-var stepView = func(n, force = 0) {
-    var i = getprop("/sim/current-view/view-number") + n;
-    while (1) {
-        if (i < 0)
-            i = size(views) - 1;
-        elsif (i >= size(views))
-            i = 0;
-        if (!i or force or (var e = views[i].getNode("enabled")) == nil or e.getValue())
+var stepView = func(step, force = 0) {
+    step = step > 0 ? 1 : -1;
+    var n = getprop("/sim/current-view/view-number");
+    for (var i = 0; i < size(views); i += 1) {
+        n += step;
+        if (n < 0)
+            n = size(views) - 1;
+        elsif (n >= size(views))
+            n = 0;
+        if (force or (var e = views[n].getNode("enabled")) == nil or e.getValue())
             break;
-        i += n > 0 ? 1 : -1;
     }
-    setprop("/sim/current-view/view-number", i);
+    setprop("/sim/current-view/view-number", n);
 
     # And pop up a nice reminder
-    gui.popupTip(views[i].getNode("name").getValue());
+    gui.popupTip(views[n].getNode("name").getValue());
 }
 
 ##

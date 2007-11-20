@@ -21,7 +21,7 @@
 			var system = 1;
 			foreach (var v; view.views) {
 				var index = v.getIndex();
-				if (index == 0 or index >= 200)
+				if (index >= 200)
 					continue;
 
 				if (index >= 100) {

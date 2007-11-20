@@ -15,9 +15,9 @@ axis 3:              throttle
                      no modifier     F3              F4              F3+F4
                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 button 0 (trigger):  brakes          parking brake   speed brake     thrust revers.
-button 1 (left):     flaps up        gear up         previous view   *
+button 1 (left):     flaps up        gear up         previous view   previous view (all)
 button 2 (middle):   reset view dir  tail wheel lock cockpit view    reset all trim
-button 3 (right):    flaps down      gear down       next view       *
+button 3 (right):    flaps down      gear down       next view       next view (all)
 button 4 (F1):       brakes left     *               zoom out        *
 button 5 (F2):       brakes right    *               zoom in         *
 button 6 (F3):       //////////////////////// modifier 0 /////////////////////////
@@ -121,6 +121,9 @@ ________________________________________________________________________________
 			var left_brake = 0;
 			var right_brake = 0;
 			var trigger = 0;
+
+			var viewnumber = nil;
+			setlistener("/sim/current-view/view-number", func(n) { viewnumber = n.getValue() }, 1);
 
 			if (props.globals.getNode("/rotors", 0) != nil) {
 				self.getNode("axis[0]/binding/power").setIntValue(1);
@@ -252,7 +255,7 @@ ________________________________________________________________________________
 
 	<button n="1">
 		<name>Left Button</name>
-		<desc>flaps up,  +F3: gear up,  +F4: previous view</desc>
+		<desc>flaps up,  +F3: gear up,  +F4: previous active view,  +F3+F4: previous view</desc>
 		<repeatable type="bool">false</repeatable>
 		<binding>
 			<command>nasal</command>
@@ -267,9 +270,9 @@ ________________________________________________________________________________
 				} elsif (m == 1) {
 					controls.gearDown(-1);
 				} elsif (m == 2) {
-					view.stepView(-1);
+					view.stepView(-1, 0);
 				} elsif (m == 3) {
-					#
+					view.stepView(-1, 1);
 				}
 			</script>
 		</binding>
@@ -320,7 +323,7 @@ ________________________________________________________________________________
 
 	<button n="3">
 		<name>Right Button</name>
-		<desc>flaps down,  +Ctrl: weapon select,  +F3: gear down,  +F4: next view</desc>
+		<desc>flaps down,  +Ctrl: weapon select,  +F3: gear down,  +F4: next active view,  +F3+F4: next view</desc>
 		<repeatable type="bool">false</repeatable>
 		<binding>
 			<command>nasal</command>
@@ -335,9 +338,9 @@ ________________________________________________________________________________
 				} elsif (m == 1) {
 					controls.gearDown(1);
 				} elsif (m == 2) {
-					view.stepView(1);
+					view.stepView(1, 0);
 				} elsif (m == 3) {
-					#
+					view.stepView(1, 1);
 				}
 			</script>
 		</binding>
@@ -558,8 +561,7 @@ ________________________________________________________________________________
 			<script>
 				m = get_mode();
 				if (m == 0) {
-					v = getprop("/sim/current-view/view-number");
-					view.panViewDir(-viewdir[v]);
+					view.panViewDir(-viewdir[viewnumber]);
 				} elsif (m == 1) {
 					controls.adjMixture(-1);
 					harrier();
@@ -581,8 +583,7 @@ ________________________________________________________________________________
 			<script>
 				m = get_mode();
 				if (m == 0) {
-					v = getprop("/sim/current-view/view-number");
-					view.panViewDir(viewdir[v]);
+					view.panViewDir(viewdir[viewnumber]);
 				} elsif (m == 1) {
 					controls.adjMixture(1);
 					harrier();

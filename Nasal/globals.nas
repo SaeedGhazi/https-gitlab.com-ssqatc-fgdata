@@ -71,7 +71,7 @@ var interpolate = func(node, val...) {
 # "always trigger on write" (1), and "trigger even when children are
 # written to" (2).
 #
-var setlistener = func(node, fun, init=0, runtime=1) {
+var setlistener = func(node, fun, init = 0, runtime = 1) {
     if(isa(node, props.Node)) node = node._g;
     var id = _setlistener(node, func {
         arg[0] = props.wrapNode(arg[0]);

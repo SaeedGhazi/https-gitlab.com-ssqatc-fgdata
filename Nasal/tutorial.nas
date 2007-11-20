@@ -84,7 +84,7 @@ var startTutorial = func {
 	var presets = tutorialN.getChild("presets");
 	if (presets != nil) {
 		props.copy(presets, props.globals.getNode("/sim/presets"));
-		fgcommand("presets-commit", props.Node.new());
+		fgcommand("presets-commit");
 
 		if (getprop("/sim/presets/on-ground")) {
 			var eng = props.globals.getNode("/controls/engines");

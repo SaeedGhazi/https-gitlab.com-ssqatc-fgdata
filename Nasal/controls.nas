@@ -391,7 +391,7 @@ var ptt = func(b) setprop("/instrumentation/comm/ptt", b);
 ##
 # Lighting
 #
-var toggleLights = func () {
+var toggleLights = func {
     if (getprop("/controls/switches/panel-lights")) {
         setprop("/controls/switches/panel-lights-factor", 0);
         setprop("/controls/switches/panel-lights", 0);

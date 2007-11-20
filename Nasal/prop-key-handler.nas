@@ -125,7 +125,7 @@ var handle_key = func(key, shift) {
 			input = complete(explicit_input, shift ? -1 : 1);
 			build_completion(explicit_input);
 			var n = call(func { props.globals.getNode(input) }, [], var err = []);
-			if (!size(err) and n.getAttribute("children") and size(completion) == 1)
+			if (!size(err) and n != nil and n.getAttribute("children") and size(completion) == 1)
 				handle_key(`/`, 0);
 		}
 

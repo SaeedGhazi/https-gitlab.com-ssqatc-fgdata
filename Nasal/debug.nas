@@ -49,6 +49,7 @@
 #       interpreted by UNIX shells and MS Windows with ANSI.SYS extension
 #       installed. If the color codes aren't interpreted correctly, then
 #       set property /sim/startup/terminal-ansi-colors=0
+#
 var isprint = nil;
 var isalnum = nil;
 var isalpha = nil;
@@ -174,15 +175,23 @@ var _dump_var = func(v) {
 
 
 var _dump_string = func(str) {
-	var s = "\"";
+	var s = "'";
 	for (var i = 0; i < size(str); i += 1) {
-		if (isprint(str[i])) {
-			s ~= chr(str[i]);
-		} else {
-			s ~= sprintf("\\x%02x", str[i]);
-		}
+		var c = str[i];
+		if (c == `\``)
+			s ~= "\\`";
+		elsif (c == `\n`)
+			s ~= "\\n";
+		elsif (c == `\r`)
+			s ~= "\\r";
+		elsif (c == `\t`)
+			s ~= "\\t";
+		elsif (isprint(c))
+			s ~= chr(c);
+		else
+			s ~= sprintf("\\x%02x", c);
 	}
-	return _string(s ~ "\"");
+	return _string(s ~ "'");
 }
 
 

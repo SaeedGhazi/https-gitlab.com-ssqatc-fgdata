@@ -77,9 +77,6 @@ var handle_key = func(key, shift) {
 	} elsif (key == 359) {             # down
 		set_history(1);
 
-	} elsif (key > 128) {
-		return 0;                  # pass other funny events
-
 	} elsif (key == `\n` or key == `\r`) {
 		if (state.error)
 			return 1;
@@ -103,23 +100,6 @@ var handle_key = func(key, shift) {
 		active = 0;
 		return 1;
 
-	} elsif (key == `?` and state.value == nil) {
-		print("\n-- property search: '", input, "' ----------------------------------");
-		search(props.globals, input);
-		print("-- done --\n");
-		gui.popdown();
-		active = 0;
-		return 1;
-
-	} elsif (key == `*` and state.node != nil and state.value == nil) {
-		debug.tree(state.node);
-		active = 0;
-
-	} elsif (key == `:` and state.node != nil and state.value == nil) {
-		var n = state.node.getAttribute("children") ? state.node : state.parent;
-		gui.property_browser(n);
-		active = 0;
-
 	} elsif (key == 9) {               # tab
 		if (size(input) and input[0] == `/`) {
 			input = complete(explicit_input, shift ? -1 : 1);
@@ -139,6 +119,26 @@ var handle_key = func(key, shift) {
 		}
 		completion_pos = -1;
 
+	} elsif (!string.isprint(key)) {
+		return 0;                  # pass other funny events
+
+	} elsif (key == `?` and state.value == nil) {
+		print("\n-- property search: '", input, "' ----------------------------------");
+		search(props.globals, input);
+		print("-- done --\n");
+		gui.popdown();
+		active = 0;
+		return 1;
+
+	} elsif (key == `*` and state.node != nil and state.value == nil) {
+		debug.tree(state.node);
+		active = 0;
+
+	} elsif (key == `:` and state.node != nil and state.value == nil) {
+		var n = state.node.getAttribute("children") ? state.node : state.parent;
+		gui.property_browser(n);
+		active = 0;
+
 	} else {
 		input ~= chr(key);
 		explicit_input = input;
@@ -157,7 +157,7 @@ var handle_key = func(key, shift) {
 	build_completion(explicit_input);
 
 	var color = nil;
-	if (!size(input) or input[0] != `/`)     # search mode (magenta)
+	if (size(input) and input[0] != `/`)     # search mode (magenta)
 		color = set_color(1, 0.4, 0.9);
 	elsif (state.error)                      # error mode (red)
 		color = set_color(1, 0.4, 0.4);
@@ -228,15 +228,8 @@ var build_completion = func(in) {
 				append(completion, [fullname, name, -1]);
 		}
 	}
-	completion = sort(completion, name_compare);
+	completion = sort(completion, func(a, b) cmp(a[1], b[1]) or a[2] - b[2]);
 	#print(debug.string([completion_pos, completion]), "\n");
-}
-
-
-var name_compare = func(a, b) {
-	if (var c = cmp(a[1], b[1]))
-		return c;
-	return a[2] - b[2];
 }
 
 

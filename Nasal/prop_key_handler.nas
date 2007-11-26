@@ -219,12 +219,8 @@ var build_completion = func(in) {
 		var fullname = name;
 		if (index > 0)
 			fullname ~= "[" ~ index ~ "]";
-		if (substr(fullname, 0, size(s.raw_name)) == s.raw_name) {
-			if (size(s.parent.getChildren(name)) > 1 and index != 0)
-				append(completion, [fullname, name, index]);
-			else
-				append(completion, [fullname, name, -1]);
-		}
+		if (substr(fullname, 0, size(s.raw_name)) == s.raw_name)
+			append(completion, [fullname, name, index]);
 	}
 	completion = sort(completion, func(a, b) cmp(a[1], b[1]) or a[2] - b[2]);
 	#print(debug.string([completion_pos, completion]), "\n");

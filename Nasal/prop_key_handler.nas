@@ -52,7 +52,6 @@ var history_pos = -1;
 
 var start = func {
 	listener = setlistener("/devices/status/keyboard/event", func(event) {
-		debug.tree(event);
 		if (!event.getNode("pressed").getValue())
 			return;
 		var key = event.getNode("key");

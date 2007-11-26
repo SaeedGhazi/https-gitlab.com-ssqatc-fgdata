@@ -369,7 +369,7 @@ top down before the key bindings are parsed.
 
  <key n="47">
   <name>/</name>
-  <desc>Activate property handler development tool</desc>
+  <desc>Open property browser</desc>
   <binding>
    <condition>
     <not>

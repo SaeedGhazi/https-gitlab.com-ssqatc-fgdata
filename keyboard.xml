@@ -32,8 +32,6 @@ top down before the key bindings are parsed.
           if (mod == 0 or mod == 1) {
               controls.ptt(mod + 1);
               space_release = func { controls.ptt(0) }
-          } else {
-              gui.property_browser();
           }
       }
   </script>
@@ -367,6 +365,27 @@ top down before the key bindings are parsed.
     <script>controls.applyBrakes(0, 1)</script>
    </binding>
   </mod-up>
+ </key>
+
+ <key n="47">
+  <name>/</name>
+  <desc>Activate property handler development tool</desc>
+  <binding>
+   <condition>
+    <not>
+     <property>/sim/input/property-key-handler</property>
+    </not>
+   </condition>
+   <command>nasal</command>
+   <script>gui.property_browser()</script>
+  </binding>
+  <binding>
+   <condition>
+    <property>/sim/input/property-key-handler</property>
+   </condition>
+   <command>nasal</command>
+   <script>prop_key_handler.start()</script>
+  </binding>
  </key>
 
  <key n="48">

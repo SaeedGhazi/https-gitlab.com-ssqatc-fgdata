@@ -26,7 +26,7 @@
 
 		<checkbox>
 			<halign>left</halign>
-			<label>Enable '/'-key property handler (see $FG_ROOT/Nasal/prop-key-handler.nas)</label>
+			<label>Enable '/'-key property handler (see $FG_ROOT/Nasal/prop_key_handler.nas)</label>
 			<property>/sim/input/property-key-handler</property>
 			<binding>
 				<command>dialog-apply</command>

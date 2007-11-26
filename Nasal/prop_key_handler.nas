@@ -24,7 +24,7 @@
 #   <Shift-TAB>       ... like <TAB> but cycles backwards
 #   <CurUp>/<CurDown> ... switch back/forth in the history
 #   <Escape>          ... cancel the operation
-#   <Shift-Backspace> ... removes last, whole path element
+#   <Shift-Backspace> ... remove last, whole path element
 #
 #
 # Colors:
@@ -33,25 +33,13 @@
 #   green   ... path to existing property
 #   red     ... broken path syntax  (e.g. "/foo*bar" ... '*' not allowed)
 #   yellow  ... while typing in value for a valid property path
-#   magenta ... while typing search string (except when first char is '/')
+#   magenta ... while typing search string (except when first character is '/')
 #
 #
 # For example, to open the property browser in /position/, type '/p<TAB>:'.
 
 
-var kbdevent = _setlistener("/devices/status/keyboard/event", func {
-	var event = cmdarg();
-	#debug.tree(event);
-	if (!getprop("/sim/input/property-key-handler") or !event.getNode("pressed").getValue())
-		return;
-	var key = event.getNode("key");
-	var shift = event.getNode("modifier/shift").getValue();
-	if (handle_key(key.getValue(), shift))
-		key.setValue(0);           # drop key event
-});
-
-
-var active = 0;
+var listener = nil;
 var input = nil;            # what is shown in the popup
 var explicit_input = nil;   # what the user typed (doesn't contain unconfirmed autocompleted parts)
 var state = nil;
@@ -62,15 +50,32 @@ var history = [];
 var history_pos = -1;
 
 
-var handle_key = func(key, shift) {
-	if (!active) {
-		if (key != `/`)
-			return 0;          # pass event
+var start = func {
+	listener = setlistener("/devices/status/keyboard/event", func(event) {
+		debug.tree(event);
+		if (!event.getNode("pressed").getValue())
+			return;
+		var key = event.getNode("key");
+		var shift = event.getNode("modifier/shift").getValue();
+		if (handle_key(key.getValue(), shift))
+			key.setValue(0);           # drop key event
+	});
+	state = parse_input(input = "");
+	handle_key(`/`, 0);
+}
 
-		active = 1;
-		state = parse_input(input = "");
+
+var stop = func(save_history = 0) {
+	removelistener(listener);
+	gui.popdown();
+	if (save_history) {
+		append(history, input);
+		history_pos = size(history);
 	}
+}
 
+
+var handle_key = func(key, shift) {
 	if (key == 357) {                  # up
 		set_history(-1);
 
@@ -93,11 +98,11 @@ var handle_key = func(key, shift) {
 			s ~= " does not exist";
 		}
 		screen.log.write(s, 1, 1, 1);
-		active = 0;
+		stop(1);
+		return 1;
 
 	} elsif (key == 27) {              # escape -> cancel
-		gui.popdown();
-		active = 0;
+		stop(0);
 		return 1;
 
 	} elsif (key == 9) {               # tab
@@ -126,31 +131,25 @@ var handle_key = func(key, shift) {
 		print("\n-- property search: '", input, "' ----------------------------------");
 		search(props.globals, input);
 		print("-- done --\n");
-		gui.popdown();
-		active = 0;
+		stop(0);
 		return 1;
 
 	} elsif (key == `*` and state.node != nil and state.value == nil) {
 		debug.tree(state.node);
-		active = 0;
+		stop(1);
+		return 1;
 
 	} elsif (key == `:` and state.node != nil and state.value == nil) {
 		var n = state.node.getAttribute("children") ? state.node : state.parent;
 		gui.property_browser(n);
-		active = 0;
+		stop(1);
+		return 1;
 
 	} else {
 		input ~= chr(key);
 		explicit_input = input;
 		completion_pos = -1;
 		history_pos = size(history);
-	}
-
-	if (!active) {
-		append(history, input);
-		history_pos = size(history);
-		gui.popdown();
-		return 1;
 	}
 
 	state = parse_input(input);
@@ -167,7 +166,7 @@ var handle_key = func(key, shift) {
 		color = set_color(0.7, 1, 0.7);
 
 	gui.popupTip(input, 1000000, color);
-	return 1;                          # yes, we used the key
+	return 1;                                # we used the key
 }
 
 

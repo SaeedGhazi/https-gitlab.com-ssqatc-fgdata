@@ -1,4 +1,4 @@
-var iscntrl = func(c) { c >= 0 and c <= 31 }
+var iscntrl = func(c) { c >= 1 and c <= 31 or c == 127 }
 var isascii = func(c) { c >= 0 and c <= 127 }
 var isupper = func(c) { c >= `A` and c <= `Z` }
 var islower = func(c) { c >= `a` and c <= `z` }
@@ -7,12 +7,12 @@ var isblank = func(c) { c == ` ` or c == `\t` }
 var ispunct = func(c) { c >= `!` and c <= `/` or c >= `:` and c <= `@`
 		or c >= `[` and c <= `\`` or c >= `{` and c <= `~` }
 
-var isxdigit = func(c) { isdigit(c) or c >= `a` and c <= `f` or c >= `A` and c <= `Z` }
-var isspace = func(c) { isblank(c) or c == `\n` or c == `\r` or c == `\x0b` or c == `\x0c`}
+var isxdigit = func(c) { isdigit(c) or c >= `a` and c <= `f` or c >= `A` and c <= `F` }
+var isspace = func(c) { c == ` ` or c >= `\t` and c <= `\r` }
 var isalpha = func(c) { isupper(c) or islower(c) }
 var isalnum = func(c) { isalpha(c) or isdigit(c) }
-var isgraph = func(c) { isdigit(c) or isalnum(c) or ispunct(c) }
-var isprint = func(c) { isgraph(c) or isblank(c) }
+var isgraph = func(c) { isalnum(c) or ispunct(c) }
+var isprint = func(c) { isgraph(c) or c == ` ` }
 
 var toupper = func(c) { islower(c) ? c + `A` - `a` : c }
 var tolower = func(c) { isupper(c) ? c + `a` - `A` : c }

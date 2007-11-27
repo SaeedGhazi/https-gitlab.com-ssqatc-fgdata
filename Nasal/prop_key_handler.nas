@@ -67,10 +67,10 @@ var start = func {
 var stop = func(save_history = 0) {
 	removelistener(listener);
 	gui.popdown();
-	if (save_history) {
+	if (save_history and (!size(history) or !streq(history[-1], input)))
 		append(history, input);
-		history_pos = size(history);
-	}
+
+	history_pos = size(history);
 }
 
 
@@ -245,18 +245,6 @@ var complete = func(in, step) {
 
 
 var set_history = func(step) {
-	# eliminate identical subsequent entries
-	var new_history = [];
-	var last = "";
-	foreach (var h; history) {
-		if (h == last)
-			history_pos -= 1;
-		else
-			append(new_history, h);
-		last = h;
-	}
-	history = new_history;
-
 	history_pos += step;
 	if (history_pos < 0) {
 		history_pos = 0;

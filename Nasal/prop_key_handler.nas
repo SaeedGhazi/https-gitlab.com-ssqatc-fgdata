@@ -40,8 +40,8 @@
 
 
 var listener = nil;
-var input = nil;            # what is shown in the popup
-var explicit_input = nil;   # what the user typed (doesn't contain unconfirmed autocompleted parts)
+var input = nil;   # what the user typed (doesn't contain unconfirmed autocompleted parts)
+var text = nil;    # what is shown in the popup
 var state = nil;
 
 var completion = [];
@@ -51,6 +51,9 @@ var history_pos = -1;
 
 
 var start = func {
+	state = parse_input(text = "");
+	handle_key(`/`, 0);
+
 	listener = setlistener("/devices/status/keyboard/event", func(event) {
 		if (!event.getNode("pressed").getValue())
 			return;
@@ -59,18 +62,16 @@ var start = func {
 		if (handle_key(key.getValue(), shift))
 			key.setValue(0);           # drop key event
 	});
-	state = parse_input(input = "");
-	handle_key(`/`, 0);
 }
 
 
 var stop = func(save_history = 0) {
 	removelistener(listener);
-	gui.popdown();
-	if (save_history and (!size(history) or !streq(history[-1], input)))
-		append(history, input);
+	if (save_history and (!size(history) or !streq(history[-1], text)))
+		append(history, text);
 
 	history_pos = size(history);
+	gui.popdown();
 }
 
 
@@ -105,21 +106,21 @@ var handle_key = func(key, shift) {
 		return 1;
 
 	} elsif (key == 9) {               # tab
-		if (size(input) and input[0] == `/`) {
-			input = complete(explicit_input, shift ? -1 : 1);
-			build_completion(explicit_input);
-			var n = call(func { props.globals.getNode(input) }, [], var err = []);
+		if (size(text) and text[0] == `/`) {
+			text = complete(input, shift ? -1 : 1);
+			build_completion(input);
+			var n = call(func { props.globals.getNode(text) }, [], var err = []);
 			if (!size(err) and n != nil and n.getAttribute("children") and size(completion) == 1)
 				handle_key(`/`, 0);
 		}
 
 	} elsif (key == 8) {               # backspace
 		if (shift) {               #     + shift: remove one path element
-			explicit_input = input = state.parent.getPath();
-			if (input == "")
+			input = text = state.parent.getPath();
+			if (text == "")
 				handle_key(`/`, 0);
 		} else {
-			explicit_input = input = substr(input, 0, size(input) - 1);
+			input = text = substr(text, 0, size(text) - 1);
 		}
 		completion_pos = -1;
 
@@ -127,8 +128,8 @@ var handle_key = func(key, shift) {
 		return 0;                  # pass other funny events
 
 	} elsif (key == `?` and state.value == nil) {
-		print("\n-- property search: '", input, "' ----------------------------------");
-		search(props.globals, input);
+		print("\n-- property search: '", text, "' ----------------------------------");
+		search(props.globals, text);
 		print("-- done --\n");
 		stop(0);
 		return 1;
@@ -145,17 +146,17 @@ var handle_key = func(key, shift) {
 		return 1;
 
 	} else {
-		input ~= chr(key);
-		explicit_input = input;
+		text ~= chr(key);
+		input = text;
 		completion_pos = -1;
 		history_pos = size(history);
 	}
 
-	state = parse_input(input);
-	build_completion(explicit_input);
+	state = parse_input(text);
+	build_completion(input);
 
 	var color = nil;
-	if (size(input) and input[0] != `/`)     # search mode (magenta)
+	if (size(text) and text[0] != `/`)     # search mode (magenta)
 		color = set_color(1, 0.4, 0.9);
 	elsif (state.error)                      # error mode (red)
 		color = set_color(1, 0.4, 0.4);
@@ -164,8 +165,8 @@ var handle_key = func(key, shift) {
 	elsif (state.node != nil)                # existing node (green)
 		color = set_color(0.7, 1, 0.7);
 
-	gui.popupTip(input, 1000000, color);
-	return 1;                                # we used the key
+	gui.popupTip(text, 1000000, color);
+	return 1;                                # discard key event
 }
 
 
@@ -250,11 +251,11 @@ var set_history = func(step) {
 		history_pos = 0;
 	} elsif (history_pos >= size(history)) {
 		history_pos = size(history);
-		input = "";
+		text = "";
 	} else {
-		input = history[history_pos];
+		text = history[history_pos];
 	}
-	explicit_input = input;
+	input = text;
 }
 
 

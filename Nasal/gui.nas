@@ -314,8 +314,10 @@ var FileSelector = {
 ##
 # Open property browser with given target path.
 #
-var property_browser = func(dir = "/") {
-    if (isa(dir, props.Node))
+var property_browser = func(dir = nil) {
+    if (dir == nil)
+        dir = "/";
+    elsif (isa(dir, props.Node))
         dir = dir.getPath();
     var dlgname = "property-browser";
     foreach (var module; keys(globals)) {
@@ -334,11 +336,12 @@ var property_browser = func(dir = "/") {
 # the target path. On the command line use  --prop:browser=orientation
 #
 settimer(func {
-    foreach (var b; props.globals.getChildren("browser")) {
-        var path = b.getValue();
-        if (path != nil and size(path))
-            property_browser(path);
-    }
+    foreach (var b; props.globals.getChildren("browser"))
+        if ((var browser = b.getValue()) != nil)
+            foreach (var path; split(",", browser))
+                if (size(path))
+                    property_browser(string.trim(path));
+
     props.globals.removeChildren("browser");
 }, 0);
 

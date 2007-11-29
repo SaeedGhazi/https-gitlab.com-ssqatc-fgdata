@@ -110,38 +110,46 @@ var carbHeatAxis = func {
 # Wrapper around stepProps() which emulates the "old" flap behavior for
 # configurations that aren't using the new mechanism.
 #
-var flapsDown = func {
-    if(arg[0] == 0) { return; }
+var flapsDown = func(step) {
+    if(step == 0) return;
     if(props.globals.getNode("/sim/flaps") != nil) {
-        stepProps("/controls/flight/flaps", "/sim/flaps", arg[0]);
+        stepProps("/controls/flight/flaps", "/sim/flaps", step);
         return;
     }
     # Hard-coded flaps movement in 3 equal steps:
-    var val = 0.3333334 * arg[0] + getprop("/controls/flight/flaps");
-    if(val > 1) { val = 1 } elsif(val < 0) { val = 0 }
-    setprop("/controls/flight/flaps", val);
+    var val = 0.3333334 * step + getprop("/controls/flight/flaps");
+    setprop("/controls/flight/flaps", val > 1 ? 1 : val < 0 ? 0 : val);
 }
 
-var stepSpoilers = func {
+var wingSweep = func(step) {
+    if(step == 0) return;
+    if(props.globals.getNode("/sim/wing-sweep") != nil) {
+        stepProps("/controls/flight/wing-sweep", "/sim/wing-sweep", step);
+        return;
+    }
+    # Hard-coded wing movement in 5 equal steps:
+    var val = 0.20 * step + getprop("/controls/flight/wing-sweep");
+    setprop("/controls/flight/wing-sweep", val > 1 ? 1 : val < 0 ? 0 : val);
+}
+
+var stepSpoilers = func(step) {
     if(props.globals.getNode("/sim/spoilers") != nil) {
-        stepProps("/controls/flight/spoilers", "/sim/spoilers", arg[0]);
+        stepProps("/controls/flight/spoilers", "/sim/spoilers", step);
         return;
     }
     # Hard-coded spoilers movement in 4 equal steps:
-    var val = 0.25 * arg[0] + getprop("/controls/flight/spoilers");
-    if(val > 1) { val = 1 } elsif(val < 0) { val = 0 }
-    setprop("/controls/flight/spoilers", val);
+    var val = 0.25 * step + getprop("/controls/flight/spoilers");
+    setprop("/controls/flight/spoilers", val > 1 ? 1 : val < 0 ? 0 : val);
 }
 
-var stepSlats = func {
+var stepSlats = func(step) {
     if(props.globals.getNode("/sim/slats") != nil) {
-        stepProps("/controls/flight/slats", "/sim/slats", arg[0]);
+        stepProps("/controls/flight/slats", "/sim/slats", step);
         return;
     }
     # Hard-coded slats movement in 4 equal steps:
-    var val = 0.25 * arg[0] + getprop("/controls/flight/slats");
-    if(val > 1) { val = 1 } elsif(val < 0) { val = 0 }
-    setprop("/controls/flight/slats", val);
+    var val = 0.25 * step + getprop("/controls/flight/slats");
+    setprop("/controls/flight/slats", val > 1 ? 1 : val < 0 ? 0 : val);
 }
 
 ##

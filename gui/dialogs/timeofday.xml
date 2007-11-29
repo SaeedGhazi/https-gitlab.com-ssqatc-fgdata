@@ -7,7 +7,7 @@
 	<modal>false</modal>
 
 	<text>
-		<label>Set Time of Day</label>
+		<label>Time Settings</label>
 	</text>
 
 	<hrule/>
@@ -22,17 +22,21 @@
 				<label>UTC</label>
 			</text>
 			<text>
-				<label>000:00:00</label>
+				<label>00:00:00</label>
 				<live>true</live>
 				<property>/sim/time/gmt-string</property>
 			</text>
 
-			<empty><pref-height>6</pref-height></empty>
+			<empty>
+				<pref-height>6</pref-height>
+			</empty>
 			<hrule/>
-			<empty><pref-height>6</pref-height></empty>
+			<empty>
+				<pref-height>6</pref-height>
+			</empty>
 
 			<text>
-				<label>local</label>
+				<label>Local</label>
 			</text>
 			<text>
 				<label>00:00</label>
@@ -40,14 +44,121 @@
 				<property>/instrumentation/clock/local-short-string</property>
 			</text>
 
-			<empty><pref-height>6</pref-height></empty>
+			<empty>
+				<pref-height>6</pref-height>
+			</empty>
 			<hrule/>
-			<empty><pref-height>6</pref-height></empty>
+			<empty>
+				<pref-height>6</pref-height>
+			</empty>
+
+			<text>
+				<label>Simulation Rate</label>
+			</text>
+			<text>
+				<label></label>
+				<live>true</live>
+				<property>/sim/speed-up</property>
+			</text>
+
+			<group>
+				<layout>hbox</layout>
+				<default-padding>0</default-padding>
+				<button>
+					<legend>-</legend>
+					<binding>
+						<command>property-adjust</command>
+						<property>/sim/speed-up</property>
+						<min>1</min>
+						<step type="double">-1</step>
+					</binding>
+				</button>
+				<button>
+					<legend>Reset</legend>
+					<binding>
+						<command>property-assign</command>
+						<property>/sim/speed-up</property>
+						<property>/sim/time/warp-delta</property>
+						<value>1</value>
+					</binding>
+				</button>
+				<button>
+					<legend>+</legend>
+					<binding>
+						<command>property-adjust</command>
+						<property>/sim/speed-up</property>
+						<min>1</min>
+						<step type="double">1</step>
+					</binding>
+				</button>
+			</group>
+
+			<empty>
+				<pref-height>6</pref-height>
+			</empty>
+			<hrule/>
+			<empty>
+				<pref-height>6</pref-height>
+			</empty>
+
+			<text>
+				<label>Time Warp</label>
+			</text>
+			<text>
+				<live>true</live>
+				<property>/sim/time/warp-delta</property>
+			</text>
+
+			<group>
+			<layout>hbox</layout>
+			<default-padding>0</default-padding>
+				<button>
+					<legend>-</legend>
+					<binding>
+						<command>property-adjust</command>
+						<property>/sim/time/warp-delta</property>
+						<step type="int">-30</step>
+					</binding>
+				</button>
+				<button>
+					<legend>Reset</legend>
+					<binding>
+						<command>property-assign</command>
+						<property>/sim/time/warp-delta</property>
+						<value>0</value>
+					</binding>
+				</button>
+				<button>
+					<legend>+</legend>
+					<binding>
+						<command>property-adjust</command>
+						<property>/sim/time/warp-delta</property>
+						<step type="int">30</step>
+					</binding>
+				</button>
+			</group>
+
+			<empty>
+				<pref-height>6</pref-height>
+			</empty>
+			<hrule/>
+			<empty>
+				<pref-height>6</pref-height>
+			</empty>
 
 			<empty>
 				<stretch>true</stretch>
 			</empty>
 
+		</group>
+
+		<empty>
+			<pref-width>2</pref-width>
+		</empty>
+
+		<group>
+			<layout>vbox</layout>
+			<default-padding>0</default-padding>
 			<button>
 				<legend>Clock Time</legend>
 				<equal>true</equal>
@@ -57,13 +168,7 @@
 					<timeofday>real</timeofday>
 				</binding>
 			</button>
-		</group>
 
-		<empty><pref-width>2</pref-width></empty>
-
-		<group>
-			<layout>vbox</layout>
-			<default-padding>0</default-padding>
 			<button>
 				<legend>Dawn</legend>
 				<equal>true</equal>

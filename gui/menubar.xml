@@ -305,7 +305,7 @@
   </item>
 
   <item>
-   <label>Time of Day</label>
+   <label>Time Settings</label>
    <binding>
     <command>dialog-show</command>
     <dialog-name>timeofday</dialog-name>

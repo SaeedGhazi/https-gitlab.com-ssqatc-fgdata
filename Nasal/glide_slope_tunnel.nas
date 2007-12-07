@@ -112,7 +112,10 @@ var loop = func(id) {
 var loopid = 0;
 
 settimer(func {
-	props.globals.getNode("/sim/model/geometry/square/top", 1).setBoolValue(1);
+	var top = props.globals.getNode("/sim/model/geometry/square/top", 1);
+	if (top.getType() == "NONE")
+		top.setBoolValue(1);  # remove top bar unless otherwise specified
+
 	setlistener("/sim/rendering/glide-slope-tunnel", func(n) {
 		loopid += 1;
 		if (n.getValue()) {

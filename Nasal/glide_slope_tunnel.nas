@@ -119,6 +119,7 @@ settimer(func {
 	setlistener("/sim/rendering/glide-slope-tunnel", func(n) {
 		loopid += 1;
 		if (n.getValue()) {
+			apt = nil;
 			loop(loopid);
 		} else {
 			forindex (var i; tunnel) {

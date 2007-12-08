@@ -164,7 +164,7 @@
   <item>
    <label>Chat Menu</label>
    <binding>
-+    <command>dialog-show</command>
+    <command>dialog-show</command>
     <dialog-name>chat-menu</dialog-name>
    </binding>
   </item>

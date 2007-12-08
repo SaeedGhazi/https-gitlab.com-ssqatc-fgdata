@@ -362,7 +362,7 @@ top down before the key bindings are parsed.
   </binding>
  </key>
 
-	<key n="46">
+ <key n="46">
   <name>.</name>
   <desc>Right brake</desc>
   <binding>
@@ -793,7 +793,7 @@ top down before the key bindings are parsed.
   </binding>
  </key>
 
-	<key n="97">
+ <key n="97">
   <name>a</name>
   <desc>Increase speed-up.</desc>
   <binding>

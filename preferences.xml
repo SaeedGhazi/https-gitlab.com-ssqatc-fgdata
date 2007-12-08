@@ -472,6 +472,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <chat type="string">Hello</chat>
    <transmission-freq-hz type="string">118500000</transmission-freq-hz>
    <chat-display type="bool" userarchive="y">true</chat-display>
+   <chat-menu include="ATC/chat-menu-entries.xml"/>
   </multiplay>
 
   <user>

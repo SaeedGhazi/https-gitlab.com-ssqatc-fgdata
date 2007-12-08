@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <!-- 
+
+[ at the start of the <name> tag indicates that the text will not be added to the message.
+
+
+Special characters (in place of proper substitutions)
+
+! - airport direction
+^ - airport distance
+% - aircraft type (First word from /sim/description
+# - Callsign
+$ - Current Altitude
+* - Airport ID
+( - current runway
+
+-->
+  <config>
+    <menu>
+      <name>[SAFETYCOM/UNICOM]</name>
+      <menu>
+        <name>* Traffic, # lining up for departure runway (.</name>
+      </menu>
+      <menu>
+        <name>* Traffic, # taking off runway (.</name>
+      </menu>
+      <menu>
+        <name>* Traffic, # overhead, joining for runway (.</name>
+      </menu>
+      <menu>
+        <name>* Traffic, # crosswind, runway (.</name>
+      </menu>
+      <menu>
+        <name>* Traffic, # downwind, runway (.</name>
+      </menu>
+      <menu>
+        <name>* Traffic, # base leg, runway (.</name>
+      </menu>
+      <menu>
+        <name>* Traffic, # final, runway (.</name>
+      </menu>
+      <menu>
+        <name>* Traffic, # going around.</name>
+      </menu>
+      <menu>
+        <name>* Traffic, runway vacated.</name>
+      </menu>
+    </menu>
+
+    <menu>
+      <name>[ATC]</name>
+      <menu>
+        <name>[Ground]</name>
+        <menu>
+          <name>* Ground, #, request taxi instructions for departure.</name>
+        </menu>
+        <menu>
+          <name>* Ground, # request departure information.</name>
+        </menu>
+        <menu>
+          <name>* Ground, # request startup.</name>
+        </menu>
+        <menu>
+          <name>* Ground, # request pushback.</name>
+        </menu>
+        <menu>
+          <name>* Ground, # request taxi.</name>
+        </menu>
+        <menu>
+          <name>#, ready for departure.</name>
+        </menu>
+        <menu>
+          <name>Line up #.</name>
+        </menu>
+        <menu>
+          <name>Cleared for take-off #.</name>
+        </menu>
+        <menu>
+          <name># runway vacated.</name>
+        </menu>
+      </menu>
+      <menu>
+        <name>[Air]</name>
+        <menu>
+          <name>* Tower, ^ miles ! altitude $ feet request joining instructions.</name>
+        </menu>
+        <menu>
+          <name>* Tower, ^ miles ! altitude $ feet request straight in approach runway (.</name>
+        </menu>
+        <menu>
+          <name># crosswind.</name>
+        </menu>
+        <menu>
+          <name># downwind</name>
+          <menu>
+            <name>touch and go.</name>
+          </menu>
+          <menu>
+            <name>full stop.</name>
+          </menu>
+        </menu>
+        <menu>
+          <name># base.</name>
+        </menu>
+        <menu>
+          <name># final.</name>
+        </menu>
+        <menu>
+          <name># long final.</name>
+        </menu>
+        <menu>
+          <name># going around.</name>
+        </menu>
+      </menu>
+      <menu>
+        <name>[Enroute]</name>
+        <menu>
+          <name>* Approach, # inbound from the !, IFR ^ miles at $ feet.</name>
+        </menu>
+        <menu>
+          <name>* Approach, # inbound from the !, VFR ^ miles at $ feet.</name>
+        </menu>
+        <menu>
+          <name>* Approach, request Radar Information Service.</name>
+        </menu>
+      </menu>
+    </menu>
+    <menu>
+      <name>[Formation]</name>
+      <menu>
+        <name>Form up on my wing.</name>
+      </menu>
+      <menu>
+        <name>Break left.</name>
+      </menu>
+      <menu>
+        <name>Break right.</name>
+      </menu>
+    </menu>
+  </config>
+</PropertyList>

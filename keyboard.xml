@@ -352,7 +352,17 @@ top down before the key bindings are parsed.
   </mod-up>
  </key>
 
- <key n="46">
+ <key n="45">
+  <name>-</name>
+  <repeatable type="bool">false</repeatable>
+  <desc>Compose Chat</desc>
+  <binding>
+     <command>dialog-show</command>
+     <dialog-name>chat-menu</dialog-name>
+  </binding>
+ </key>
+
+	<key n="46">
   <name>.</name>
   <desc>Right brake</desc>
   <binding>
@@ -773,7 +783,17 @@ top down before the key bindings are parsed.
   </mod-up>
  </key>
 
- <key n="97">
+ <key n="95">
+  <name>_</name>
+  <repeatable type="bool">false</repeatable>
+  <desc>Compose Chat</desc>
+  <binding>
+    <command>nasal</command>
+    <script>multiplayer.compose_message()</script>
+  </binding>
+ </key>
+
+	<key n="97">
   <name>a</name>
   <desc>Increase speed-up.</desc>
   <binding>

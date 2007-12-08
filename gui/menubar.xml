@@ -161,7 +161,13 @@
     <dialog-name>chat</dialog-name>
    </binding>
   </item>
-
+  <item>
+   <label>Chat Menu</label>
+   <binding>
++    <command>dialog-show</command>
+    <dialog-name>chat-menu</dialog-name>
+   </binding>
+  </item>
  </menu>
 
  <menu>

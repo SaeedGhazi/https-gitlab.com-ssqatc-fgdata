@@ -818,7 +818,7 @@ showHelpDialog = func {
 }
 
 
-debug_keys = {
+var debug_keys = {
     title : "Development Keys",
     key : [
        #{ name : "Ctrl-U",    desc : "add 1000 ft of emergency altitude" },
@@ -829,11 +829,11 @@ debug_keys = {
         { name : "Shift-F3",  desc : "load panel" },
         { name : "Shift-F4",  desc : "reload global preferences" },
         { name : "Shift-F9",  desc : "toggle FDM data logging" },
-        { name : "Ctrl-Space", desc : "open property browser" },
+        { name : "/",         desc : "open property browser" },
     ],
 };
 
-basic_keys = {
+var basic_keys = {
     title : "Basic Keys",
     key : [
         { name : "?",         desc : "show/hide aircraft help dialog" },
@@ -855,6 +855,8 @@ basic_keys = {
         { name : "z/Z",       desc : "increase/decrease visibility" },
         { name : "'",         desc : "display ATC setting dialog" },
         { name : "+",         desc : "let ATC/instructor repeat last message" },
+        { name : "-",         desc : "open chat dialog" },
+        { name : "_",         desc : "compose chat message" },
         { name : "F1",        desc : "load flight" },
         { name : "F3",        desc : "capture screen" },
         { name : "F10",       desc : "toggle menubar" },
@@ -863,7 +865,7 @@ basic_keys = {
     ],
 };
 
-common_aircraft_keys = {
+var common_aircraft_keys = {
     title : "Common Aircraft Keys",
     key : [
         { name : "Enter",     desc : "move rudder right" },

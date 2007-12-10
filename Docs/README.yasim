@@ -786,7 +786,7 @@ rotor:    A rotor. Used for simulating helicopters. You can have one, two
           (CYCLICELE, CYCLICAIL) and collective (COLLECTIVE) input.
           and can have <control> subelements for the tilting the whole rotor
           head around the y-axis (TILTPITCH), the x-axis (TILTROLL) and the
-          z-axis (TILTYAW).
+          z-axis (TILTYAW). ROTORBALANCE is a factor for the balance.
 
 rotorgear: If you are using one ore more rotors you have to define a
           rotorgear. It connects all the rotors and adds a simple engine.

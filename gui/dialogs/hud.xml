@@ -167,7 +167,7 @@
 	<nasal>
 		<open>
 			var self = cmdarg();
-			if (!getprop("/sim/devel")) {
+			if (!getprop("/sim/gui/devel-widgets")) {
 				foreach(var w; [1, 3, 4, 5]) {
 					self.removeChild("group", w);
 				}

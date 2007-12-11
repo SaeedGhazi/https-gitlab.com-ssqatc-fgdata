@@ -288,7 +288,7 @@
 
   <nasal>
     <open>
-      if (!getprop("/sim/devel")) {
+      if (!getprop("/sim/gui/devel-widgets")) {
         cmdarg().getNode("group[2]/group[1]").removeChild("checkbox", 2);
       }
     </open>

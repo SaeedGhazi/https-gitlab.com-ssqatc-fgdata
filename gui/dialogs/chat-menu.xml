@@ -179,26 +179,60 @@
         };
       }      
       
-      # Determine the active runway.
-      var wind_speed = getprop("/environment/wind-speed-kt");
-      var wind_from = wind_speed ? getprop("/environment/wind-from-heading-deg") : 270;
-      var max = -1;
+      # Determine the active runway. We have two ways to do this:
+      # - If the aircraft is on the ground (or very close to it), we'll try to determine 
+      # the runway it is closest to.
+      # - If the aircraft is in the air, we'll work out the active runway based on the wind.
+      
       var active_runway = "";
-
-      foreach (var r; keys(airport.runways)) {
-        var curr = airport.runways[r];
+      var on_ground = (getprop("/position/altitude-agl-ft") < 100);
+      
+      if (on_ground)
+      {
+        # To find out the closest runway to the aircrafts position, we'll look at the heading 
+        # required to go from the aircraft's current position to the center of each runway. 
+        # The closer this is to the runways real heading, the more likely this is the runway 
+        # we're on. Note that we can't rely on /sim/atc/runway, as this is only set on 
+        # initialization.
+        var max = 360;
+        var loc = geo.aircraft_position();
         
-        var wind = wind_from - curr.heading;
-        while (wind >= 180) wind -= 360;
-        while (wind < -180) wind += 360;
-        
-        var deviation = math.abs(wind) + 1e-20;
-        var v = (0.01 * curr.length + 0.01 * curr.width) / deviation;
-
-        if (v > max) {
-          max = v;
-          active_runway = r;
+        foreach (var r; keys(airport.runways)) {
+          var curr = airport.runways[r];
+          var p = geo.Coord.new();
+          p.set_latlon(curr.lat, curr.lon, airport.elevation);
+          
+          var course = loc.course_to(p);
+          var deviation = math.abs(course - curr.heading);
+          
+          if (deviation < max)
+          {
+            active_runway = r;
+            max = deviation;
+          }
         }
+      }
+      else
+      {      
+        var wind_speed = getprop("/environment/wind-speed-kt");
+        var wind_from = wind_speed ? getprop("/environment/wind-from-heading-deg") : 270;
+        var max = -1;
+
+        foreach (var r; keys(airport.runways)) {
+          var curr = airport.runways[r];
+        
+          var wind = wind_from - curr.heading;
+          while (wind >= 180) wind -= 360;
+          while (wind < -180) wind += 360;
+        
+          var deviation = math.abs(wind) + 1e-20;
+          var v = (0.01 * curr.length + 0.01 * curr.width) / deviation;
+
+          if (v > max) {
+            max = v;
+            active_runway = r;
+          }
+        }        
       }
                
       # Find our distance and cardinal direction to the airport.            

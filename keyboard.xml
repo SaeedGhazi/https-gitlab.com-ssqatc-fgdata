@@ -355,7 +355,7 @@ top down before the key bindings are parsed.
  <key n="45">
   <name>-</name>
   <repeatable type="bool">false</repeatable>
-  <desc>Compose Chat</desc>
+  <desc>Chat Menu</desc>
   <binding>
      <command>dialog-show</command>
      <dialog-name>chat-menu</dialog-name>

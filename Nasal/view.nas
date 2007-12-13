@@ -14,10 +14,10 @@
 #   mul^steps = max/min
 #   steps * ln(mul) = ln(max/min)
 #   mul = exp(ln(max/min) / steps)
-STEPS = 40;
-ACUITY = 1/60; # Maximum angle subtended by one pixel (== 1 arc minute)
-max = min = mul = 0;
-calcMul = func {
+var STEPS = 40;
+var ACUITY = 1/60; # Maximum angle subtended by one pixel (== 1 arc minute)
+var max = var min = var mul = 0;
+var calcMul = func {
     max = 120; # Fixed at 120 degrees
     min = getprop("/sim/startup/xsize") * ACUITY;
     mul = math.exp(math.ln(max/min) / STEPS);
@@ -26,9 +26,9 @@ calcMul = func {
 ##
 # Handler.  Increase FOV by one step
 #
-increase = func {
+var increase = func {
     calcMul();
-    val = fovProp.getValue() * mul;
+    var val = fovProp.getValue() * mul;
     if(val == max) { return; }
     if(val > max) { val = max }
     fovProp.setDoubleValue(val);
@@ -38,9 +38,9 @@ increase = func {
 ##
 # Handler.  Decrease FOV by one step
 #
-decrease = func {
+var decrease = func {
     calcMul();
-    val = fovProp.getValue() / mul;
+    var val = fovProp.getValue() / mul;
     fovProp.setDoubleValue(val);
     gui.popupTip(sprintf("FOV: %.1f%s", val, val < min ? " (overzoom)" : ""));
 }
@@ -81,7 +81,7 @@ var stepView = func(step, force = 0) {
             n = size(views) - 1;
         elsif (n >= size(views))
             n = 0;
-        if (force or (var e = views[n].getNode("enabled")) == nil or e.getValue())
+        if (force or (var e = views[n].getNode("enabled")) == nil or e.getBoolValue())
             break;
     }
     setprop("/sim/current-view/view-number", n);
@@ -103,17 +103,17 @@ var indexof = func(name) {
 ##
 # Standard view "slew" rate, in degrees/sec.
 #
-VIEW_PAN_RATE = 60;
+var VIEW_PAN_RATE = 60;
 
 ##
 # Pans the view horizontally.  The argument specifies a relative rate
 # (or number of "steps" -- same thing) to the standard rate.
 #
-panViewDir = func(step) {
+var panViewDir = func(step) {
     if (getprop("/sim/freeze/master"))
-        prop = "/sim/current-view/heading-offset-deg";
+        var prop = "/sim/current-view/heading-offset-deg";
     else
-        prop = "/sim/current-view/goal-heading-offset-deg";
+        var prop = "/sim/current-view/goal-heading-offset-deg";
 
     controls.slewProp(prop, step * VIEW_PAN_RATE);
 }
@@ -122,11 +122,11 @@ panViewDir = func(step) {
 # Pans the view vertically.  The argument specifies a relative rate
 # (or number of "steps" -- same thing) to the standard rate.
 #
-panViewPitch = func(step) {
+var panViewPitch = func(step) {
     if (getprop("/sim/freeze/master"))
-        prop = "/sim/current-view/pitch-offset-deg";
+        var prop = "/sim/current-view/pitch-offset-deg";
     else
-        prop = "/sim/current-view/goal-pitch-offset-deg";
+        var prop = "/sim/current-view/goal-pitch-offset-deg";
 
     controls.slewProp(prop, step * VIEW_PAN_RATE);
 }

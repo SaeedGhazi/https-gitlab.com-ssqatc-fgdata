@@ -20,6 +20,8 @@
 			group.removeChildren("text");
 			var mode = 0;
 			foreach (var v; view.views) {
+				if ((var hide = v.getNode("hide")) != nil and hide.getBoolValue())
+					continue;
 				var index = v.getIndex();
 				if (index >= 200) {
 					if (mode != 2) {
@@ -44,7 +46,8 @@
 
 				var target = group.getChild("checkbox", index, 1);
 				props.copy(group.getNode("checkbox-template"), target);
-				target.getNode("label").setValue(v.getNode("name").getValue());
+				var name = v.getNode("name");
+				target.getNode("label").setValue(name != nil ? name.getValue() : ("** unnamed view " ~ index ~ " **"));
 				target.getNode("property").setValue(v.getPath() ~ "/enabled");
 			}
 		</open>

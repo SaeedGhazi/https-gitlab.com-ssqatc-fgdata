@@ -598,7 +598,7 @@ var livery = {
 	# select by index (out-of-bounds indices are wrapped)
 	set : func(i) {
 		if (i < 0)
-			i = size(me.data - 1);
+			i = size(me.data) - 1;
 		if (i >= size(me.data))
 			i = 0;
 		props.globals.setValues(me.data[i][2]);

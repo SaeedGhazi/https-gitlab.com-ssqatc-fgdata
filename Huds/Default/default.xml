@@ -17,7 +17,7 @@ in a separate file.
 -->
 
 <PropertyList>
- <no-warning/>
+ <depreciated/>
 
  <name>Default Aircraft Hud</name>
 

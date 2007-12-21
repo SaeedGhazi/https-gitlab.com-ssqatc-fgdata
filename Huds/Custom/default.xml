@@ -17,6 +17,7 @@ in a separate file.
 -->
 
 <PropertyList>
+ <no-warning/>
 
  <name>Fighter Hud</name>
 

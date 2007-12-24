@@ -7,6 +7,22 @@
       A submodel will create an AIBallistic object which will follow a ballistic
       path. By default one submodel will be released when the corresponding 
       trigger is "true".
+			
+			Notes: 
+				 1.  This utility is intended for ballistic objects which align to the
+				 trajectory. Drag is applied based on this assumption: no allowance is 
+				 for changes in drag for objects which do not conform to this asumption.
+				 made 
+				
+				2.  While Inertia is calculated properly, Moment of Inertia and rotational
+				aerodynamic damping are simulated. It is assumed that the object is a cylinder
+				of uniform density - if your object does not conform to this, there will be
+				inaccuracies.
+						
+				3.  The program does not calculate windage for ballistic objects well. While 
+				adequate for smoke effects, etc., for bullets, bombs, droptanks this is probably
+				best left at "False". Since the effects of wind on various ballistic objects is
+				uncertain, there is no plan to change this situation.
 
       The initial conditions (IC) define the object's starting point (relative
       to the user aircraft's "reported position"), and its initial speed and
@@ -35,7 +51,7 @@
                For example, if set to 32 the submodel will feel no 
                gravity. If greater than 32 the object will rise.
                Default is 0.
-<wind>         Set to true if you want the submodel to react to the wind.Default is "false". 
+<wind>         Set to true if you want the submodel to react to the wind. Default is "false". 
 <cd>           The Coeffient of Drag. Varies with submodel shape - 0.295 for a bullet, 0.045 for an airfoil. Enter an appropriate value. Defaults to 0.295.
 <random>       When this is true the Cd is varied by +- 5%. Useful for smoke or contrails.
 <eda>          Effective drag area (sq ft). Usually the cross-sectional area of the submodel normal to the airflow.
@@ -47,7 +63,14 @@
 <impact>       If true, the impact location (lat/lon) on the terrain is calculated. The Material (e.g Grass)of the terrain, load resistance, impact velocity and energy are returned. Altitude agl is calculated.
 <impact-reports> Defines a report node. When an impact happens, then the path of the submodel will be written to this node. An attached listener function can evaluate the impact properties. If unset, reports go to /ai/models/model-impact.
 
--->
+***** experimental ****
+<external-force> If true the submodel is subjected to an external force<force-path>   	A string describing the property where the magnitude, azimuth and elevation of the external force is to be found. The following child properties are instantiated: 
+			~/force-lb"
+			~/force-azimuth-deg
+			~/force-elevation-deg
+				 
+You will have to set these values by some means (Nasal script etc.) to make use of this utility
+
 
 <PropertyList>
 

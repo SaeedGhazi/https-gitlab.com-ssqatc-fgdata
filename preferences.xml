@@ -401,8 +401,8 @@ Started September 2000 by David Megginson, david@megginson.com
       <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
       <default-field-of-view-deg type="double">55.0</default-field-of-view-deg>
 
-      <x-offset-m type="double">2</x-offset-m>
-      <y-offset-m type="double">25</y-offset-m>
+      <x-offset-m type="double">25</x-offset-m>
+      <y-offset-m type="double">2</y-offset-m>
       <z-offset-m alias="/sim/chase-distance-m"/>
     </config>
   </view>

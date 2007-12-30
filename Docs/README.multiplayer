@@ -72,17 +72,17 @@ See <http://pigeond.net/flightgear/fg_server_map.html>.
 
 Options needed to enable multiplayer game with a server:
 Player1:
---multiplay=out,10,serveraddress,5002 --multiplay=in,10,myaddress,5002
+--multiplay=out,10,serveraddress,5000 --multiplay=in,10,myaddress,5000
 --callsign=player1
 
 Player2:
---multiplay=out,10,serveraddress,5002 --multiplay=in,10,myaddress,5002
+--multiplay=out,10,serveraddress,5000 --multiplay=in,10,myaddress,5000
 --callsign=player2
 
 ...
 
 PlayerN:
---multiplay=out,10,serveraddress,5002 --multiplay=in,10,myaddress,5002
+--multiplay=out,10,serveraddress,5000 --multiplay=in,10,myaddress,5000
 --callsign=playerN
 
 Note that if every player using a particular server, such as one of those
@@ -91,12 +91,12 @@ already in use on that server.
 
 If you are sitting behind a NAT'ting firewall, then you need to forward
 the incoming traffic on the firewall outer (visible to the internet)
-address arriving at the UDP port you use (5002 in the case above)
+address arriving at the UDP port you use (5000 in the case above)
 over to your private LAN address. In this case, use your PRIVATE LAN address
 as <myaddress>. Example (if your private LAN address is 10.0.0.1,
 in order to play on pigeond.net):
 
-fgfs --multiplay=in,10,10.0.0.1,5002 --multiplay=out,10,pigeond.net,5002
+fgfs --multiplay=in,10,10.0.0.1,5000 --multiplay=out,10,pigeond.net,5000
 	--callsign=...UNIQUE callsign here...
 
 If you and the server are in the same address space (i.e., both have a public

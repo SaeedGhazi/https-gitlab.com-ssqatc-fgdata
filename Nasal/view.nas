@@ -467,6 +467,8 @@ _setlistener("/sim/signals/fdm-initialized", func {
 			die("\n***\n*\n*  Illegal use of reserved view index "
 					~ index ~ ". Use indices >= 100!\n*\n***");
 		} elsif (index >= 100 and index < 200) {
+			if (v.getNode("name") == nil)
+				continue;
 			var e = v.getNode("enabled");
 			if (e != nil) {
 				aircraft.data.add(e);

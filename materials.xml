@@ -1840,8 +1840,8 @@ Shared parameters for various materials.
  </emissive>
  <xsize>1024</xsize>
  <ysize>128</ysize>
- <glyph> <name>ILS</name>        <left>0.00000</left> <right>0.23633</right> </glyph>
- <glyph> <name>RWY</name>        <left>0.24512</left> <right>0.73340</right> </glyph>
+ <glyph> <name>critical</name>   <left>0.00000</left> <right>0.23633</right> </glyph>
+ <glyph> <name>safety</name>     <left>0.24512</left> <right>0.73340</right> </glyph>
 </material>
 
 <material>

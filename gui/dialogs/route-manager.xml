@@ -82,10 +82,14 @@ command interface /autopilot/route-manager/input:
 			var load_wp_file = func(path) {
 				call(func {
 					var file = io.open(path.getValue(), "r");
+					var index = sel_index();
 					while ((var wp = io.readln(file)) != nil) {
 						wp = string.trim(wp);
-						if (wp != "")
-							setprop("/autopilot/route-manager/input", wp);
+						if (wp != "") {
+							cmd.setValue("@insert" ~ index ~ ":" ~ wp);
+							if (index >= 0)
+								index += 1;
+						}
 					}
 					io.close(file);
 				}, [], var err = []);
@@ -93,7 +97,7 @@ command interface /autopilot/route-manager/input:
 					gui.popupTip("can't open file " ~ path.getValue(), 5);
 			}
 
-			var file_selector = gui.FileSelector.new(load_wp_file, "Select waypoint list", "Load File");
+			var file_selector = gui.FileSelector.new(load_wp_file, "Load waypoint list", "Load");
 		</open>
 
 		<close>

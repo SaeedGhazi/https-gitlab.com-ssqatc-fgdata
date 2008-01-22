@@ -83,7 +83,7 @@ command interface /autopilot/route-manager/input:
 				call(func {
 					var file = io.open(path.getValue(), "r");
 					while ((var wp = io.readln(file)) != nil) {
-						string.trim(wp);
+						wp = string.trim(wp);
 						if (wp != "")
 							setprop("/autopilot/route-manager/input", wp);
 					}

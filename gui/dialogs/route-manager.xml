@@ -102,7 +102,7 @@ command interface /autopilot/route-manager/input:
 
 		<close>
 			removelistener(lst);
-			file_selector.data.remove();
+			file_selector.del();
 		</close>
 	</nasal>
 

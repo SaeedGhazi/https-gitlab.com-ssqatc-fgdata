@@ -80,31 +80,22 @@ var throttleMouse = func {
 
 # Joystick axis handlers (uses cmdarg).  Shouldn't be called from
 # other contexts.
-var throttleAxis = func {
+var adjustAxis = func(invert, pre, post) {
     var val = cmdarg().getNode("setting").getValue();
-    if(size(arg) > 0) val = -val;
+    if(invert) val = -val;
     var sel = props.globals.getNode("/sim/input/selected").getChildren("engine");
     foreach(var n; sel)
         if(n.getValue())
-            setprop("/controls/engines/engine[" ~ n.getIndex() ~ "]/throttle",
-                    (1 - val)/2);
+            setprop(pre ~ n.getIndex() ~ post, (1 - val)/2);
 }
-var mixtureAxis = func {
-    var val = cmdarg().getNode("setting").getValue();
-    if(size(arg) > 0) { val = -val; }
-    props.setAll("/controls/engines/engine", "mixture", (1 - val)/2);
-}
-var propellerAxis = func {
-    var val = cmdarg().getNode("setting").getValue();
-    if(size(arg) > 0) { val = -val; }
-    props.setAll("/controls/engines/engine", "propeller-pitch", (1 - val)/2);
-}
-var carbHeatAxis = func {
-    var val = cmdarg().getNode("setting").getValue();
-    if(size(arg) > 0) { val = -val; }
-    props.setAll("/controls/anti-ice/engine", "carb-heat", (1 - val)/2);
-}
-
+var throttleAxis = func
+    adjustAxis(size(arg), "/controls/engines/engine[", "]/throttle");
+var mixtureAxis = func
+    adjustAxis(size(arg), "/controls/engines/engine[", "]/mixture");
+var propellerAxis = func
+    adjustAxis(size(arg), "/controls/engines/engine[", "]/propeller-pitch");
+var carbHeatAxis = func
+    adjustAxis(size(arg), "/controls/anti-ice/engine[", "]/carb-heat");
 
 ##
 # Wrapper around stepProps() which emulates the "old" flap behavior for

@@ -242,6 +242,10 @@ Started September 2000 by David Megginson, david@megginson.com
     <engine n="5" type="bool">true</engine>
     <engine n="6" type="bool">true</engine>
     <engine n="7" type="bool">true</engine>
+    <engine n="8" type="bool">true</engine>
+    <engine n="9" type="bool">true</engine>
+    <engine n="10" type="bool">true</engine>
+    <engine n="11" type="bool">true</engine>
    </selected>
    <property-key-handler type="bool" userarchive="y">false</property-key-handler>
   </input>

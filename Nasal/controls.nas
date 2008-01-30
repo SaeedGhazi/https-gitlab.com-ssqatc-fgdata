@@ -55,22 +55,20 @@ var throttleMouse = func {
 }
 
 # Joystick axis handlers (uses cmdarg).  Shouldn't be called from
-# other contexts.
-var adjustAxis = func(invert, pre, post) {
-    var val = cmdarg().getNode("setting").getValue();
-    if(invert) val = -val;
-    foreach(var e; engines)
-        if(e.selected.getValue())
-            setprop(pre ~ e.index ~ post, (1 - val)/2);
+# other contexts.  A non-null argument inverts the direction of the axis.
+var axisHandler = func(pre, post) {
+    func(invert = 0) {
+        var val = cmdarg().getNode("setting").getValue();
+        if(invert) val = -val;
+        foreach(var e; engines)
+            if(e.selected.getValue())
+                setprop(pre ~ e.index ~ post, (1 - val) / 2);
+    }
 }
-var throttleAxis = func
-    adjustAxis(size(arg), "/controls/engines/engine[", "]/throttle");
-var mixtureAxis = func
-    adjustAxis(size(arg), "/controls/engines/engine[", "]/mixture");
-var propellerAxis = func
-    adjustAxis(size(arg), "/controls/engines/engine[", "]/propeller-pitch");
-var carbHeatAxis = func
-    adjustAxis(size(arg), "/controls/anti-ice/engine[", "]/carb-heat");
+var throttleAxis = axisHandler("/controls/engines/engine[", "]/throttle");
+var mixtureAxis = axisHandler("/controls/engines/engine[", "]/mixture");
+var propellerAxis = axisHandler("/controls/engines/engine[", "]/propeller-pitch");
+var carbHeatAxis = axisHandler("/controls/anti-ice/engine[", "]/carb-heat");
 
 ##
 # Wrapper around stepProps() which emulates the "old" flap behavior for

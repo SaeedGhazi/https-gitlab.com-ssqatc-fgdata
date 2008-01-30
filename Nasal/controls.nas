@@ -1,59 +1,36 @@
-var startEngine = func {
-    var sel = props.globals.getNode("/sim/input/selected");
-    var engs = props.globals.getNode("/controls/engines").getChildren("engine");
-    for(var i=0; i<size(engs); i+=1) {
-        var select = sel.getChild("engine", i);
-        if(select != nil and select.getValue() != 0) {
-            engs[i].getNode("starter").setBoolValue(1);
-        }
-    }
+var startEngine = func(v = 1) {
+    foreach(var e; engines)
+        if(e.selected.getValue())
+            e.controls.getNode("starter").setBoolValue(v);
 }
 
-# Initialization hack (called after initialization via a timeout), to
-# make sure that the number of engine properties in the selection tree
-# match the actual number of engines.  This should probably be fixed in a
-# more elegant way...
-var initSelectProps = func {
-    var engs = props.globals.getNode("/controls/engines").getChildren("engine");
-    var sel = props.globals.getNode("/sim/input/selected");
-    for(var i=0; i<size(engs); i+=1) {
-        if(sel.getChild("engine", i) == nil) {
-            sel.getNode("engine[" ~ i ~ "]", 1); }}
-}
-settimer(initSelectProps, 0);
-
-var selectEngine = func {
-    var sel = props.globals.getNode("/sim/input/selected").getChildren("engine");
-    foreach(var node; sel) { node.setBoolValue(node.getIndex() == arg[0]); }
+var selectEngine = func(which) {
+    foreach(var e; engines) e.selected.setBoolValue(which == e.index);
 }
 
 # Selects (state=1) or deselects (state=0) a list of engines, or all
 # engines if no list is specified. Example:  selectEngines(1, 1, 3, 5);
 #
-var selectEngines = func (state, engines...) {
-    var sel = props.globals.getNode("/sim/input/selected");
-    if(size(engines)) {
-        foreach(var e; engines)
-            sel.getChild("engine", e, 1).setBoolValue(state);
+var selectEngines = func (state, which...) {
+    if(size(which)) {
+        foreach(var i; which)
+            foreach(var e; engines)
+                if(e.index == i)
+                    e.selected.setBoolValue(state);
     } else {
-        foreach(var e; sel.getChildren("engine"))
-            e.setBoolValue(state);
+        foreach(var e; engines)
+            e.selected.setBoolValue(state);
     }
 }
 
 var selectAllEngines = func {
-    var sel = props.globals.getNode("/sim/input/selected").getChildren("engine");
-    foreach(var node; sel) { node.setBoolValue(1); }
+    foreach(var e; engines) e.selected.setBoolValue(1);
 }
 
-var stepMagnetos = func {
-    var change = arg[0];
-    var engs = props.globals.getNode("/controls/engines").getChildren("engine");
-    var sel = props.globals.getNode("/sim/input/selected");
-    for(var i=0; i<size(engs); i+=1) {
-        var select = sel.getChild("engine", i);
-        if(select != nil and select.getValue() != 0) {
-            var mag = engs[i].getNode("magnetos", 1);
+var stepMagnetos = func(change) {
+    foreach(var e; engines) {
+        if(e.selected.getValue()) {
+            var mag = e.controls.getNode("magnetos", 1);
             mag.setIntValue(mag.getValue() + change);
         }
     }
@@ -67,14 +44,13 @@ var centerFlightControls = func {
 
 var throttleMouse = func {
     if(!getprop("/devices/status/mice/mouse[0]/button[1]")) return;
-    var sel = props.globals.getNode("/sim/input/selected").getChildren("engine");
     var delta = cmdarg().getNode("offset").getValue() * -4;
-    foreach(var n; sel) {
-        if(!n.getValue()) continue;
-        var throttle = "/controls/engines/engine[" ~ n.getIndex() ~ "]/throttle";
-        var val = getprop(throttle) + delta;
+    foreach(var e; engines) {
+        if(!e.selected.getValue()) continue;
+        var throttle = e.controls.getNode("throttle");
+        var val = throttle.getValue() + delta;
         if(size(arg) > 0) val = -val;
-        setprop(throttle, val);
+        throttle.setDoubleValue(val);
     }
 }
 
@@ -83,10 +59,9 @@ var throttleMouse = func {
 var adjustAxis = func(invert, pre, post) {
     var val = cmdarg().getNode("setting").getValue();
     if(invert) val = -val;
-    var sel = props.globals.getNode("/sim/input/selected").getChildren("engine");
-    foreach(var n; sel)
-        if(n.getValue())
-            setprop(pre ~ n.getIndex() ~ post, (1 - val)/2);
+    foreach(var e; engines)
+        if(e.selected.getValue())
+            setprop(pre ~ e.index ~ post, (1 - val)/2);
 }
 var throttleAxis = func
     adjustAxis(size(arg), "/controls/engines/engine[", "]/throttle");
@@ -223,12 +198,10 @@ var adjPropeller = func {
     adjEngControl("propeller-pitch", arg[0]); }
 
 var adjEngControl = func {
-    var engs = props.globals.getNode("/controls/engines").getChildren("engine");
-    var selected = props.globals.getNode("/sim/input/selected");
     var delta = arg[1] * THROTTLE_RATE * getprop("/sim/time/delta-realtime-sec");
-    foreach(var e; engs) {
-        if(selected.getChild("engine", e.getIndex(), 1).getBoolValue()) {
-            var node = e.getNode(arg[0], 1);
+    foreach(var e; engines) {
+        if(e.selected.getValue()) {
+            var node = e.controls.getNode(arg[0], 1);
             node.setValue(node.getValue() + delta);
         }
     }
@@ -239,12 +212,10 @@ var adjEngControl = func {
 # arg[1] is the auto-throttle target speed increment
 var incThrottle = func {
     var auto = props.globals.getNode("/autopilot/locks/speed", 1);
-    var sel = props.globals.getNode("/sim/input/selected");
     if (!auto.getValue()) {
-        var engs = props.globals.getNode("/controls/engines").getChildren("engine");
-        foreach(var e; engs) {
-            if(sel.getChild("engine", e.getIndex(), 1).getBoolValue()) {
-                var node = e.getNode("throttle", 1);
+        foreach(var e; engines) {
+            if(e.selected.getValue()) {
+                var node = e.controls.getNode("throttle", 1);
                 var val = node.getValue() + arg[0];
                 node.setValue(val < -1.0 ? -1.0 : val > 1.0 ? 1.0 : val);
             }
@@ -388,7 +359,7 @@ var weaponSelect = func(d) {
 var ptt = func(b) setprop("/instrumentation/comm/ptt", b);
 
 ##
-# Lighting
+# Lighting.
 #
 var toggleLights = func {
     if (getprop("/controls/switches/panel-lights")) {
@@ -413,3 +384,20 @@ var toggleLights = func {
         setprop("/controls/switches/nav-lights", 1);
     }
 }
+
+##
+# Initialization.
+#
+var engines = [];
+_setlistener("/sim/signals/fdm-initialized", func {
+    var sel = props.globals.getNode("/sim/input/selected", 1);
+    var engs = props.globals.getNode("/controls/engines").getChildren("engine");
+
+    foreach(var e; engs) {
+        var index = e.getIndex();
+        var s = sel.getChild("engine", index, 1);
+        if(s.getType() == "NONE") s.setBoolValue(1);
+        append(engines, { index: index, controls: e, selected: s });
+    }
+});
+

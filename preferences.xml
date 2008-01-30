@@ -233,20 +233,6 @@ Started September 2000 by David Megginson, david@megginson.com
    </dg>
   </instrument-options>
   <input>
-   <selected>
-    <engine n="0" type="bool">true</engine>
-    <engine n="1" type="bool">true</engine>
-    <engine n="2" type="bool">true</engine>
-    <engine n="3" type="bool">true</engine>
-    <engine n="4" type="bool">true</engine>
-    <engine n="5" type="bool">true</engine>
-    <engine n="6" type="bool">true</engine>
-    <engine n="7" type="bool">true</engine>
-    <engine n="8" type="bool">true</engine>
-    <engine n="9" type="bool">true</engine>
-    <engine n="10" type="bool">true</engine>
-    <engine n="11" type="bool">true</engine>
-   </selected>
    <property-key-handler type="bool" userarchive="y">false</property-key-handler>
   </input>
 

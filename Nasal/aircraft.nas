@@ -105,7 +105,7 @@ var door = {
 		if (m.enabledN.getValue() == nil)
 			m.enabledN.setBoolValue(1);
 
-		pos = optarg(arg, 2, 0);
+		var pos = optarg(arg, 2, 0);
 		if (m.positionN.getValue() == nil)
 			m.positionN.setDoubleValue(pos);
 
@@ -113,30 +113,38 @@ var door = {
 		return m;
 	},
 	# door.enable(bool)    ->  set ./enabled
-	enable  : func { me.enabledN.setBoolValue(arg[0]); me },
-
+	enable : func(v) {
+		me.enabledN.setBoolValue(v);
+		me;
+	},
 	# door.setpos(double)  ->  set ./position-norm without movement
-	setpos  : func { me.positionN.setValue(arg[0]); me.target = arg[0] < 0.5; me },
-
+	setpos : func(pos) {
+		me.positionN.setValue(pos);
+		me.target = pos < 0.5;
+		me;
+	},
 	# double door.getpos() ->  return current position as double
-	getpos  : func { me.positionN.getValue() },
+	getpos : func { me.positionN.getValue() },
 
 	# door.close()         ->  move to closed state
-	close   : func { me.move(me.target = 0) },
+	close : func { me.move(me.target = 0) },
 
 	# door.open()          ->  move to open state
-	open    : func { me.move(me.target = 1) },
+	open : func { me.move(me.target = 1) },
 
 	# door.toggle()        ->  move to opposite end position
-	toggle  : func { me.move(me.target) },
+	toggle : func { me.move(me.target) },
 
 	# door.stop()          ->  stop movement
-	stop    : func { interpolate(me.positionN) },
+	stop : func { interpolate(me.positionN) },
 
 	# door.move(double)    ->  move to arbitrary position
-	move    : func {
-		time = abs(me.getpos() - arg[0]) * me.swingtime;
-		interpolate(me.positionN, arg[0], time);
+	move : func(target) {
+		var pos = me.getpos();
+		if (pos != target) {
+			var time = abs(pos - target) * me.swingtime;
+			interpolate(me.positionN, target, time);
+		}
 		me.target = !me.target;
 	},
 };
@@ -514,6 +522,7 @@ var timer = {
 		me.running = 0;
 		me.loopid += 1;
 		me._apply_();
+		me;
 	},
 	reset : func {
 		me.node.setDoubleValue(0);

@@ -278,7 +278,7 @@ view_manager.default_plane = func {
 	var hdg = me.headingN.getValue();
 	var hdiff = normdeg(me.last_heading - hdg);
 	me.last_heading = hdg;
-	var steering = normatan(me.hdg_change.filter(hdiff)) * me.size_factor;
+	var steering = 0; # normatan(me.hdg_change.filter(hdiff)) * me.size_factor;
 
 	var az = me.az.get();
 	var vx = me.vx.get();

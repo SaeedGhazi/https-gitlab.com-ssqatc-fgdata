@@ -3,11 +3,10 @@
 # (class) object.  Example: isa(someObject, props.Node)
 #
 var isa = func(obj, class) {
-    if(obj == nil or !contains(obj, "parents")) { return 0; }
-    foreach(c; obj.parents) {
-        if(c == class)     { return 1; }
-        elsif(isa(obj, c)) { return 1; }
-    }
+    if(contains(obj, "parents"))
+	foreach(c; obj.parents)
+  	    if(c == class or isa(c, class))
+	        return 1;
     return 0;
 }
 

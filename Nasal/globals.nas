@@ -3,7 +3,7 @@
 # (class) object.  Example: isa(someObject, props.Node)
 #
 var isa = func(obj, class) {
-    if(contains(obj, "parents"))
+    if(typeof(obj) == "hash" and obj["parents"] != nil)
 	foreach(c; obj.parents)
   	    if(c == class or isa(c, class))
 	        return 1;
@@ -31,7 +31,7 @@ var fgcommand = func(cmd, node=nil) {
 var cmdarg = func { props.wrapNode(_cmdarg()) }
 
 ##
-# Utility.  Does what it you think it does.
+# Utility.  Does what you think it does.
 #
 var abs = func(v) { return v < 0 ? -v : v }
 

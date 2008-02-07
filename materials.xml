@@ -79,22 +79,24 @@ Properties currently used:
   glyph: group that defines one letter/digit/symbol in a font texture
     subentries: name, left (default: 0.0), right (default: 1.0)
     (left and right describe the horizontal position in the texture.)
-    
+
   tree-coverage: The coverage of trees in m^2. A lower number means a 
     higher density of trees. A value of 0 indicates no trees.
-    
+
   tree-range-m: The range at which trees become visible. Note that this
     is not absolute, as trees are loaded in blocks. A lower number means
     trees will not become visible until you are closer.
-  
-  tree-texture: A texture to use for the trees. Multiple textures may be
-    defined, but currently each tile will only use one of them.
+
+  tree-texture: A texture to use for the trees. Typically this will be a
+    strip with multiple tree textures.
+
+  tree-varieties: The number of different trees defined in the tree-texture
     
   tree-height-m: The average height of the trees cover. Actual tree height
-    will vary by +/- 20%.
+    will vary by +/- 50%.
   
   tree-width-m: The average width of the tree cover. Actual tree width
-    will vary by +/- 20%.
+    will vary by +/- 50%.
 ************************************************************************
 -->
 
@@ -667,11 +669,11 @@ Shared parameters for various materials.
  <ysize>2000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <tree-coverage>4000.0</tree-coverage>
- <tree-texture>Models/Trees/coniferous-tree.rgb</tree-texture>
- <tree-texture>Models/Trees/coniferous-tree2.rgb</tree-texture>
+ <tree-texture>Textures/Trees/coniferous-tree-strip4.rgb</tree-texture>
+ <tree-varieties>4</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
- <tree-height-m>6.0</tree-height-m>
- <tree-width-m>4.0</tree-width-m>
+ <tree-height-m>25.0</tree-height-m>
+ <tree-width-m>15.0</tree-width-m> 
  <rolling-friction>1</rolling-friction>
  <bumpiness>1</bumpiness>
 </material>
@@ -686,11 +688,11 @@ Shared parameters for various materials.
  <ysize>2000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <tree-coverage>4000.0</tree-coverage>
- <tree-texture>Models/Trees/deciduous-tree.rgb</tree-texture>
- <tree-texture>Models/Trees/deciduous-tree2.rgb</tree-texture>
+ <tree-texture>Textures/Trees/deciduous-tree-strip8.rgb</tree-texture>
+ <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
- <tree-height-m>5.0</tree-height-m>
- <tree-width-m>4.0</tree-width-m>
+ <tree-height-m>15.0</tree-height-m>
+ <tree-width-m>12.0</tree-width-m>
  <rolling-friction>1</rolling-friction>
  <bumpiness>0.85</bumpiness>
 </material>
@@ -704,13 +706,11 @@ Shared parameters for various materials.
  <ysize>2000</ysize>
  <light-coverage>5000000.0</light-coverage>
  <tree-coverage>4000.0</tree-coverage>
- <tree-texture>Models/Trees/deciduous-tree.rgb</tree-texture>
- <tree-texture>Models/Trees/deciduous-tree2.rgb</tree-texture>
- <tree-texture>Models/Trees/coniferous-tree.rgb</tree-texture>
- <tree-texture>Models/Trees/coniferous-tree2.rgb</tree-texture>
+ <tree-texture>Textures/Trees/mixed-tree-strip8.rgb</tree-texture>
+ <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
- <tree-height-m>5.0</tree-height-m>
- <tree-width-m>4.0</tree-width-m>
+ <tree-height-m>15.0</tree-height-m>
+ <tree-width-m>8.0</tree-width-m>
  <rolling-friction>1</rolling-friction>
  <bumpiness>0.95</bumpiness>
 </material>
@@ -723,11 +723,11 @@ Shared parameters for various materials.
  <ysize>1000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <tree-coverage>4000.0</tree-coverage>
- <tree-texture>Models/Trees/coniferous-tree.rgb</tree-texture>
- <tree-texture>Models/Trees/coniferous-tree2.rgb</tree-texture>
+ <tree-texture>Textures/Trees/coniferous-tree-strip4.rgb</tree-texture>
+ <tree-varieties>4</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
- <tree-height-m>7.0</tree-height-m>
- <tree-width-m>4.0</tree-width-m>
+ <tree-height-m>20.0</tree-height-m>
+ <tree-width-m>12.0</tree-width-m>
  <rolling-friction>1</rolling-friction>
  <bumpiness>1</bumpiness>
 </material>
@@ -739,11 +739,11 @@ Shared parameters for various materials.
  <ysize>1000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <tree-coverage>4000.0</tree-coverage>
- <tree-texture>Models/Trees/coniferous-tree.rgb</tree-texture>
- <tree-texture>Models/Trees/coniferous-tree2.rgb</tree-texture>
+ <tree-texture>Textures/Trees/coniferous-tree-strip4.rgb</tree-texture>
+ <tree-varieties>4</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
- <tree-height-m>5.0</tree-height-m>
- <tree-width-m>4.0</tree-width-m>
+ <tree-height-m>15.0</tree-height-m>
+ <tree-width-m>8.0</tree-width-m>
  <rolling-friction>1</rolling-friction>
  <bumpiness>1</bumpiness>
 </material>

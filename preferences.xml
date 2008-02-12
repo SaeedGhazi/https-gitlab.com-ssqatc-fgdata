@@ -51,7 +51,8 @@ Started September 2000 by David Megginson, david@megginson.com
     <rough userarchive="y">9000</rough>
     <bare userarchive="y">30000</bare>
    </static-lod>
-   <random-objects type="bool" userarchive="y">true</random-objects>
+   <random-objects type="bool">true</random-objects>
+   <random-vegetation type="bool">true</random-vegetation>
    <horizon-effect type="bool" userarchive="y">false</horizon-effect>
    <point-sprites type="bool" userarchive="y">true</point-sprites>
    <enhanced-lighting type="bool" userarchive="y">false</enhanced-lighting>

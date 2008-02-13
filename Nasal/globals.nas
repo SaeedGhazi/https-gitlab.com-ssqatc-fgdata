@@ -72,10 +72,8 @@ var interpolate = func(node, val...) {
 #
 var setlistener = func(node, fun, init = 0, runtime = 1) {
     if(isa(node, props.Node)) node = node._g;
-    var id = _setlistener(node, func {
-        arg[0] = props.wrapNode(arg[0]);
-        arg[1] = props.wrapNode(arg[1]);
-        call(fun, arg);
+    var id = _setlistener(node, func(chg, lst, mode, is_child) {
+        fun(props.wrapNode(chg), props.wrapNode(lst), mode, is_child);
     }, init, runtime);
     if(__.log_level <= 2) {
         var c = caller(1);

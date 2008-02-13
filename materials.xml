@@ -1502,7 +1502,7 @@ Shared parameters for various materials.
  </emissive>
  <xsize>4096</xsize>
  <ysize>128</ysize>
- <glyph> <name>.</name>          <left>0.00439</left> <right>0.01758</right> </glyph>
+ <glyph> <name>*</name>          <left>0.00439</left> <right>0.01758</right> </glyph>
  <glyph> <name>_</name>          <left>0.01392</left> <right>0.02148</right> </glyph>
  <glyph> <name>-</name>          <left>0.01758</left> <right>0.03418</right> </glyph>
  <glyph> <name>A</name>          <left>0.03418</left> <right>0.05469</right> </glyph>
@@ -1551,14 +1551,14 @@ Shared parameters for various materials.
  <glyph> <name>t7</name>         <left>0.73120</left> <right>0.74634</right> </glyph>
  <glyph> <name>t8</name>         <left>0.74634</left> <right>0.76001</right> </glyph>
  <glyph> <name>t9</name>         <left>0.76001</left> <right>0.77441</right> </glyph>
- <glyph> <name>up</name>         <left>0.77441</left> <right>0.79200</right> </glyph>
- <glyph> <name>down</name>       <left>0.79200</left> <right>0.81006</right> </glyph>
- <glyph> <name>left</name>       <left>0.81006</left> <right>0.83276</right> </glyph>
- <glyph> <name>right</name>      <left>0.83276</left> <right>0.85571</right> </glyph>
- <glyph> <name>left-up</name>    <left>0.85571</left> <right>0.87573</right> </glyph>
- <glyph> <name>right-up</name>   <left>0.87573</left> <right>0.89527</right> </glyph>
- <glyph> <name>left-down</name>  <left>0.89527</left> <right>0.91529</right> </glyph>
- <glyph> <name>right-down</name> <left>0.91529</left> <right>0.93457</right> </glyph>
+ <glyph> <name>^u</name>         <left>0.77441</left> <right>0.79200</right> </glyph>
+ <glyph> <name>^d</name>         <left>0.79200</left> <right>0.81006</right> </glyph>
+ <glyph> <name>^l</name>         <left>0.81006</left> <right>0.83276</right> </glyph>
+ <glyph> <name>^r</name>         <left>0.83276</left> <right>0.85571</right> </glyph>
+ <glyph> <name>^lu</name>        <left>0.85571</left> <right>0.87573</right> </glyph>
+ <glyph> <name>^ru</name>        <left>0.87573</left> <right>0.89527</right> </glyph>
+ <glyph> <name>^ld</name>        <left>0.89527</left> <right>0.91529</right> </glyph>
+ <glyph> <name>^rd</name>        <left>0.91529</left> <right>0.93457</right> </glyph>
  <glyph> <name>|</name>          <left>0.97974</left> <right>0.98926</right> </glyph>
  <glyph> <name>start-frame</name><left>0.98462</left> <right>0.98926</right> </glyph>
  <glyph> <name>stop-frame</name> <left>0.99390</left> <right>0.99854</right> </glyph>
@@ -1586,7 +1586,7 @@ Shared parameters for various materials.
  <xsize>4096</xsize>
  <ysize>128</ysize>
  <glyph> <name>|</name>          <left>0.00000</left> <right>0.00244</right> </glyph>
- <glyph> <name>.</name>          <left>0.00439</left> <right>0.01758</right> </glyph>
+ <glyph> <name>*</name>          <left>0.00439</left> <right>0.01758</right> </glyph>
  <glyph> <name>_</name>          <left>0.01392</left> <right>0.02148</right> </glyph>
  <glyph> <name>-</name>          <left>0.01758</left> <right>0.03418</right> </glyph>
  <glyph> <name>A</name>          <left>0.03418</left> <right>0.05469</right> </glyph>
@@ -1635,14 +1635,14 @@ Shared parameters for various materials.
  <glyph> <name>t7</name>         <left>0.73120</left> <right>0.74634</right> </glyph>
  <glyph> <name>t8</name>         <left>0.74634</left> <right>0.76001</right> </glyph>
  <glyph> <name>t9</name>         <left>0.76001</left> <right>0.77441</right> </glyph>
- <glyph> <name>up</name>         <left>0.77441</left> <right>0.79200</right> </glyph>
- <glyph> <name>down</name>       <left>0.79200</left> <right>0.81006</right> </glyph>
- <glyph> <name>left</name>       <left>0.81006</left> <right>0.83276</right> </glyph>
- <glyph> <name>right</name>      <left>0.83276</left> <right>0.85571</right> </glyph>
- <glyph> <name>left-up</name>    <left>0.85571</left> <right>0.87573</right> </glyph>
- <glyph> <name>right-up</name>   <left>0.87573</left> <right>0.89527</right> </glyph>
- <glyph> <name>left-down</name>  <left>0.89527</left> <right>0.91529</right> </glyph>
- <glyph> <name>right-down</name> <left>0.91529</left> <right>0.93457</right> </glyph>
+ <glyph> <name>^u</name>         <left>0.77441</left> <right>0.79200</right> </glyph>
+ <glyph> <name>^d</name>         <left>0.79200</left> <right>0.81006</right> </glyph>
+ <glyph> <name>^l</name>         <left>0.81006</left> <right>0.83276</right> </glyph>
+ <glyph> <name>^r</name>         <left>0.83276</left> <right>0.85571</right> </glyph>
+ <glyph> <name>^lu</name>        <left>0.85571</left> <right>0.87573</right> </glyph>
+ <glyph> <name>^ru</name>        <left>0.87573</left> <right>0.89527</right> </glyph>
+ <glyph> <name>^ld</name>        <left>0.89527</left> <right>0.91529</right> </glyph>
+ <glyph> <name>^rd</name>        <left>0.91529</left> <right>0.93457</right> </glyph>
  <glyph> <name>no-entry</name>   <left>0.93872</left> <right>0.96997</right> </glyph>
  <glyph> <name>start-frame</name><left>0.98462</left> <right>0.98926</right> </glyph>
  <glyph> <name>stop-frame</name> <left>0.99390</left> <right>0.99854</right> </glyph>
@@ -1670,7 +1670,7 @@ Shared parameters for various materials.
  <xsize>4096</xsize>
  <ysize>128</ysize>
  <glyph> <name>|</name>          <left>0.00000</left> <right>0.00244</right> </glyph>
- <glyph> <name>.</name>          <left>0.00439</left> <right>0.01758</right> </glyph>
+ <glyph> <name>*</name>          <left>0.00439</left> <right>0.01758</right> </glyph>
  <glyph> <name>_</name>          <left>0.01392</left> <right>0.02148</right> </glyph>
  <glyph> <name>-</name>          <left>0.01758</left> <right>0.03418</right> </glyph>
  <glyph> <name>A</name>          <left>0.03418</left> <right>0.05469</right> </glyph>
@@ -1719,14 +1719,14 @@ Shared parameters for various materials.
  <glyph> <name>7</name>          <left>0.73120</left> <right>0.74634</right> </glyph>
  <glyph> <name>8</name>          <left>0.74634</left> <right>0.76001</right> </glyph>
  <glyph> <name>9</name>          <left>0.76001</left> <right>0.77441</right> </glyph>
- <glyph> <name>up</name>         <left>0.77441</left> <right>0.79200</right> </glyph>
- <glyph> <name>down</name>       <left>0.79200</left> <right>0.81006</right> </glyph>
- <glyph> <name>left</name>       <left>0.81006</left> <right>0.83276</right> </glyph>
- <glyph> <name>right</name>      <left>0.83276</left> <right>0.85571</right> </glyph>
- <glyph> <name>left-up</name>    <left>0.85571</left> <right>0.87573</right> </glyph>
- <glyph> <name>right-up</name>   <left>0.87573</left> <right>0.89527</right> </glyph>
- <glyph> <name>left-down</name>  <left>0.89527</left> <right>0.91529</right> </glyph>
- <glyph> <name>right-down</name> <left>0.91529</left> <right>0.93457</right> </glyph>
+ <glyph> <name>^u</name>         <left>0.77441</left> <right>0.79200</right> </glyph>
+ <glyph> <name>^d</name>         <left>0.79200</left> <right>0.81006</right> </glyph>
+ <glyph> <name>^l</name>         <left>0.81006</left> <right>0.83276</right> </glyph>
+ <glyph> <name>^r</name>         <left>0.83276</left> <right>0.85571</right> </glyph>
+ <glyph> <name>^lu</name>        <left>0.85571</left> <right>0.87573</right> </glyph>
+ <glyph> <name>^ru</name>        <left>0.87573</left> <right>0.89527</right> </glyph>
+ <glyph> <name>^ld</name>        <left>0.89527</left> <right>0.91529</right> </glyph>
+ <glyph> <name>^rd</name>        <left>0.91529</left> <right>0.93457</right> </glyph>
  <glyph> <name>start-frame</name><left>0.98462</left> <right>0.98926</right> </glyph>
  <glyph> <name>stop-frame</name> <left>0.99390</left> <right>0.99854</right> </glyph>
 </material>
@@ -1753,7 +1753,7 @@ Shared parameters for various materials.
  <xsize>4096</xsize>
  <ysize>128</ysize>
  <glyph> <name>|</name>          <left>0.00000</left> <right>0.00244</right> </glyph>
- <glyph> <name>.</name>          <left>0.00439</left> <right>0.01758</right> </glyph>
+ <glyph> <name>*</name>          <left>0.00439</left> <right>0.01758</right> </glyph>
  <glyph> <name>_</name>          <left>0.01392</left> <right>0.02148</right> </glyph>
  <glyph> <name>-</name>          <left>0.01758</left> <right>0.03418</right> </glyph>
  <glyph> <name>A</name>          <left>0.03418</left> <right>0.05469</right> </glyph>
@@ -1802,14 +1802,14 @@ Shared parameters for various materials.
  <glyph> <name>t7</name>         <left>0.73120</left> <right>0.74634</right> </glyph>
  <glyph> <name>t8</name>         <left>0.74634</left> <right>0.76001</right> </glyph>
  <glyph> <name>t9</name>         <left>0.76001</left> <right>0.77441</right> </glyph>
- <glyph> <name>up</name>         <left>0.77441</left> <right>0.79200</right> </glyph>
- <glyph> <name>down</name>       <left>0.79200</left> <right>0.81006</right> </glyph>
- <glyph> <name>left</name>       <left>0.81006</left> <right>0.83276</right> </glyph>
- <glyph> <name>right</name>      <left>0.83276</left> <right>0.85571</right> </glyph>
- <glyph> <name>left-up</name>    <left>0.85571</left> <right>0.87573</right> </glyph>
- <glyph> <name>right-up</name>   <left>0.87573</left> <right>0.89527</right> </glyph>
- <glyph> <name>left-down</name>  <left>0.89527</left> <right>0.91529</right> </glyph>
- <glyph> <name>right-down</name> <left>0.91529</left> <right>0.93457</right> </glyph>
+ <glyph> <name>^u</name>         <left>0.77441</left> <right>0.79200</right> </glyph>
+ <glyph> <name>^d</name>         <left>0.79200</left> <right>0.81006</right> </glyph>
+ <glyph> <name>^l</name>         <left>0.81006</left> <right>0.83276</right> </glyph>
+ <glyph> <name>^r</name>         <left>0.83276</left> <right>0.85571</right> </glyph>
+ <glyph> <name>^lu</name>        <left>0.85571</left> <right>0.87573</right> </glyph>
+ <glyph> <name>^ru</name>        <left>0.87573</left> <right>0.89527</right> </glyph>
+ <glyph> <name>^ld</name>        <left>0.89527</left> <right>0.91529</right> </glyph>
+ <glyph> <name>^rd</name>        <left>0.91529</left> <right>0.93457</right> </glyph>
  <glyph> <name>start-frame</name><left>0.98389</left> <right>0.98926</right> </glyph>
  <glyph> <name>stop-frame</name> <left>0.99390</left> <right>0.99976</right> </glyph>
 </material>

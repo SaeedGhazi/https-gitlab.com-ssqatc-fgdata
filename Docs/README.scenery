@@ -261,58 +261,55 @@ In the simplest form it contains just 'normal' text, for example:
 
 This will create a black panel of 1m height with "EXIT" written on it
 in white versal letters. Actually, each of those characters are
-single-letter-glyph-names that are looked up in the <glyph> map of a
+single-letter glyph names that are looked up in the <glyph> map of a
 texture font <material> entry in $FG_ROOT/materials.xml. It just
 happens that the <glyph> entry for <name> 'E' maps to a drawn 'E' in
 the font texture. This isn't true for all ASCII characters. Many aren't
 mapped at all (and thus not available), others are mapped to non-standard
 drawings. The '_', for example, is mapped to an empty black area and can
 therefore be used as a space. (The sign specification must not contain
-real spaces.) But this is not hard-coded.
+real spaces.) The '*' is mapped to a raised period.
 
-Some glyph-names consist of more than one character, and can't, thus, be
+Some glyph names consist of more than one character, and can't, thus, be
 used directly. They have to be put in a pair of curly braces:
 
-  {right-down}
+  {^rd}
 
 This creates an arrow that points to the right and down. Braces can really
-contain a list of glyph-names, separated by commas (no space!).
-Single-letter-glyph-names can be used that way, too, or in any mixture
+contain a list of glyph names, separated by commas (no space!).
+Single-letter glyph names can be used that way, too, or in any mixture
 of both methods:
 
   EXIT
   {E,X,I,T}
   {E}{X}{I}{T}
   EX{I,T}
-  E{X,I}T{left-up,right-down}
-
-Besides single- or multi-letter-glyph-names, there are also commands.
-These always start with an '@'.
-
-  {@rd}EXIT{@dr}
-
-Both @rd and @dr are abbreviations for the "right-down" arrow, and
-the line is equivalent to
-
-  {right-down}EXIT{right-down}
+  E{X,I}T{^lu,^rd}
+  {^u}EXIT{^u}
 
 
-
-The following abbreviations are available -- all expand to arrow symbols:
-
-  abbrev.       glyph-name
-  -----------------------------------------------------------------
-  @u         -> up             (not really an abbreviation :-)
-  @d         -> down
-  @l         -> left
-  @r         -> right
-  @ru @ur    -> right-up
-  @rd @dr    -> right-down
-  @lu @ul    -> left-up
-  @ld @dl    -> left-down
+Multi-letter glyph names are usually used for symbols. Arrow symbol names
+always start with a caret ("arrow head") and the left or right direction
+always comes first (like the x in a Cartesian coordinate system). Here's
+a list of some of the available names (see $FG_ROOT/materials.xml for
+more):
 
 
+  ^l       left arrow
+  ^r       right arrow
+  ^u       up arrow
+  ^d       down arrow
+  ^lu      left-up arrow
+  ^ld      left-down arrow
+  ^ru      right-up arrow
+  ^rd      right-down arrow
+  no-entry "no entry" symbol
+  critical runway critical area
+  safety   ils safety area
 
+
+In addition to multi-letter glyph names there are also commands, which
+always start with an '@' symbol.
 The following commands are available -- for sign properties:
 
   @size=2.3        set sign height to 2.3m (width is derived from that
@@ -350,8 +347,8 @@ Frames can be opened/closed using glyph names {start-frame} and {stop-frame}.
 Examples:
 
   {@R}10L-28R{@L}C
-  {@Y,@l}P|{@ul}N{@L}F{@Y}F{@ur}
-  {@Y,@dl}C   ...  same as any of {@Y}{@dl}C  {@Y,@dl,C}  {@Y,left-down,C}
+  {@Y,^l}P|{^lu}N{@L}F{@Y}F{^ru}
+  {@Y,^ld}C   ...  same as any of {@Y}{@ld}C  {@Y,@ld,C}
   {@B}17
   {@material=RedSign,@size=1.6,no-exit}
 

@@ -430,7 +430,7 @@ var data = {
 	},
 	_save_ : func {
 		size(me.catalog) or return;
-		printlog("info", "saving aircraft data to ", me.path);
+		printlog("debug", "saving aircraft data to ", me.path);
 		me.signalN.setBoolValue(1);
 		var args = props.Node.new({ "filename": me.path });
 		var data = args.getNode("data", 1);
@@ -596,7 +596,6 @@ var livery = {
 			var index = n.getNode(me.sort_path);
 			if (name == nil or index == nil)
 				continue;
-
 			append(me.data, [name.getValue(), index.getValue(), n.getValues()]);
 		}
 		me.data = sort(me.data, func(a, b) {
@@ -627,7 +626,86 @@ var livery = {
 	},
 };
 
+# formation
+# =============================================================================
+# A modification of  the Livery Class. This Class maintains formation 
+# XML files (see Blackburn Buccaneer for an example). Files are regular
+# PropertyList XML files whose properties are copied to the
+# main tree (whereby the node types are ignored).
+#
+# SYNOPSIS:
+#	formation.init(<formation-dir> [, <name-path> [, <sort-path>]]);
+#
+#	<formation-dir> ... directory with livery XML files, relative to $FG_ROOT
+#	<name-path>  ... property path to the livery name in the livery files
+#	                 and the property tree (default: /sim/model/formation/name)
+#	<sort-path>  ... property path to the sort criterion (default: same as
+#	                 <name-path> -- that is: alphabetic sorting)
+#
+# EXAMPLE:
+#	aircraft.formation.init("Aircraft/Buccaneer/Formations",
+#	                     "sim/model/formation/variant",
+#	                     "sim/model/formation/index");  # optional
+#
+#	aircraft.formation.dialog.toggle();
+#	aircraft.formation.select("take off");
+#	aircraft.formation.next();
+#
 
+var formation = {
+	init : func(formation_dir, name_path = "sim/model/formation/name", sort_path = nil) {
+		me.dir = formation_dir;
+		if (me.dir[-1] != `/`)
+			me.dir ~= "/";
+		me.name_path = name_path;
+		me.sort_path = sort_path != nil ? sort_path : name_path;
+		me.rescan();
+		aircraft.data.add(name_path);
+		me.dialog = gui.Dialog.new("formation-select");
+	},
+	rescan : func {
+		me.data = [];
+		var path = getprop("/sim/fg-root") ~ "/" ~ me.dir;
+		foreach (var file; directory(path)) {
+			if (substr(file, -4) != ".xml")
+				continue;
+			var n = props.Node.new({ filename : path ~ file });
+			fgcommand("loadxml", n);
+			n = n.getNode("data");
+
+			var name = n.getNode(me.name_path);
+			var index = n.getNode(me.sort_path);
+			if (name == nil or index == nil)
+				continue;
+			append(me.data, [name.getValue(), index.getValue(), n.getValues()]);
+		}
+		me.data = sort(me.data, func(a, b) {
+			num(a[1]) == nil or num(b[1]) == nil ? cmp(a[1], b[1]) : a[1] - b[1];
+		});
+		me.select(getprop(me.name_path));
+	},
+	# select by index (out-of-bounds indices are wrapped)
+	set : func(i) {
+		if (i < 0)
+			i = size(me.data) - 1;
+		if (i >= size(me.data))
+			i = 0;
+		props.globals.setValues(me.data[i][2]);
+		me.current = i;
+	},
+	# select by name
+	select : func(name) {
+		forindex (var i; me.data)
+			if (me.data[i][0] == name)
+				me.set(i);
+	},
+	next : func {
+		me.set(me.current + 1);
+	},
+	previous : func {
+		me.set(me.current - 1);
+	},
+};
 
 # steering
 # =============================================================================

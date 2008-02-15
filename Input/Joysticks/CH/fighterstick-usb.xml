@@ -53,8 +53,12 @@
     </binding>
   </axis>
 
-  <axis n="6">
+  <axis>
     <desc>Rudder Trim</desc>
+    <number>
+      <unix>3</unix>
+      <windows>6</windows>
+    </number>
     <low>
       <repeatable>true</repeatable>
       <binding>
@@ -71,8 +75,12 @@
     </high>
   </axis>
 
-  <axis n="7">
+  <axis>
     <desc>Elevator Trim</desc>
+    <number>
+      <unix>4</unix>
+      <windows>7</windows>
+    </number>
     <low>
       <repeatable>true</repeatable>
       <binding>

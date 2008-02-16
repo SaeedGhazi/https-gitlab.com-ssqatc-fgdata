@@ -103,10 +103,12 @@ Started September 2000 by David Megginson, david@megginson.com
    <glide-slope-tunnel type="bool" userarchive="y">false</glide-slope-tunnel>
    <redout>
      <enabled type="bool" userarchive="y">true</enabled>
-     <blackout-onset-g>3.5</blackout-onset-g>
-     <blackout-complete-g>5</blackout-complete-g>
-     <redout-onset-g>-2</redout-onset-g>
-     <redout-complete-g>-4</redout-complete-g>
+     <parameters>
+       <blackout-onset-g>3.5</blackout-onset-g>
+       <blackout-complete-g>5</blackout-complete-g>
+       <redout-onset-g>-2</redout-onset-g>
+       <redout-complete-g>-4</redout-complete-g>
+     </parameters>
    </redout>
   </rendering>
   <model-hz type="int">120</model-hz>

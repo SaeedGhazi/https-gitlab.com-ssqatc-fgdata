@@ -1,40 +1,40 @@
 <?xml version="1.0"?>
 
 <PropertyList>
-	<name>redout</name>
-	<layout>vbox</layout>
-	<default-padding>4</default-padding>
-	<modal>false</modal>
+  <name>redout</name>
+  <layout>vbox</layout>
+  <default-padding>4</default-padding>
+  <modal>false</modal>
 
-	<text>
-		<label>G-Force Blackout Settings</label>
-	</text>
+  <text>
+    <label>G-Force Blackout Settings</label>
+  </text>
 
-	<hrule/>
-	
-	<checkbox>
-		<halign>left</halign>
-		<label>Enable Blackout and Redout due to G-force.</label>
-		<property>/sim/rendering/redout/enabled</property>
-		<binding>
-			<command>dialog-apply</command>
-		</binding>
-	</checkbox>
+  <hrule/>
 
-	<hrule/>
-	
-	<text>
-		<halign>center</halign>
-		<label>Blackout</label>
-	</text>
-	
-	<group>
-		<layout>table</layout>		
-		<text>
+  <checkbox>
+    <halign>left</halign>
+    <label>Enable Blackout and Redout due to G-force.</label>
+    <property>/sim/rendering/redout/enabled</property>
+    <binding>
+      <command>dialog-apply</command>
+    </binding>
+  </checkbox>
+
+  <hrule/>
+
+  <text>
+    <halign>center</halign>
+    <label>Blackout</label>
+  </text>
+
+  <group>
+    <layout>table</layout>
+    <text>
       <row>0</row>
       <col>0</col>
-			<label>Onset</label>
-		</text>
+      <label>Onset</label>
+    </text>
 
     <text>
       <row>0</row>
@@ -43,25 +43,25 @@
       <label>15.0</label>
       <format>%2.1f</format>
       <live>true</live>
-      <property>/sim/rendering/redout/blackout-onset-g</property>
+      <property>/sim/rendering/redout/parameters/blackout-onset-g</property>
     </text>
 
-		<slider>
+    <slider>
       <row>0</row>
       <col>2</col>
-			<min>1.0</min>
-			<max>15</max>
-  		<property>/sim/rendering/redout/blackout-onset-g</property>
+      <min>1.0</min>
+      <max>15</max>
+      <property>/sim/rendering/redout/parameters/blackout-onset-g</property>
       <binding>
-				<command>dialog-apply</command>
-			</binding>
-		</slider>
+        <command>dialog-apply</command>
+      </binding>
+    </slider>
 
-		<text>
+    <text>
       <row>1</row>
       <col>0</col>
-			<label>Complete</label>
-		</text>
+      <label>Complete</label>
+    </text>
 
     <text>
       <row>1</row>
@@ -70,35 +70,35 @@
       <label>15.0</label>
       <format>%2.1f</format>
       <live>true</live>
-      <property>/sim/rendering/redout/blackout-complete-g</property>
+      <property>/sim/rendering/redout/parameters/blackout-complete-g</property>
     </text>
 
-		<slider>
+    <slider>
       <row>1</row>
       <col>2</col>
-			<min>1.0</min>
-			<max>15</max>
-      <property>/sim/rendering/redout/blackout-complete-g</property>
+      <min>1.0</min>
+      <max>15</max>
+      <property>/sim/rendering/redout/parameters/blackout-complete-g</property>
       <binding>
-				<command>dialog-apply</command>
-			</binding>
-		</slider>
-	</group>		
-	
-	<hrule/>
+        <command>dialog-apply</command>
+      </binding>
+    </slider>
+  </group>
 
-	<text>
-		<halign>center</halign>
-		<label>Redout</label>
-	</text>
-  
-	<group>
-		<layout>table</layout>		
-		<text>
+  <hrule/>
+
+  <text>
+    <halign>center</halign>
+    <label>Redout</label>
+  </text>
+
+  <group>
+    <layout>table</layout>
+    <text>
       <row>0</row>
       <col>0</col>
-			<label>Onset</label>
-		</text>
+      <label>Onset</label>
+    </text>
 
     <text>
       <row>0</row>
@@ -107,25 +107,25 @@
       <label>15.0</label>
       <format>%2.1f</format>
       <live>true</live>
-      <property>/sim/rendering/redout/redout-onset-g</property>
+      <property>/sim/rendering/redout/parameters/redout-onset-g</property>
     </text>
 
-		<slider>
+    <slider>
       <row>0</row>
       <col>2</col>
-			<min>-1.0</min>
-			<max>-15.0</max>
-      <property>/sim/rendering/redout/redout-onset-g</property>
+      <min>-1.0</min>
+      <max>-15.0</max>
+      <property>/sim/rendering/redout/parameters/redout-onset-g</property>
       <binding>
-				<command>dialog-apply</command>
-			</binding>
-		</slider>
-    
-		<text>
+        <command>dialog-apply</command>
+      </binding>
+    </slider>
+
+    <text>
       <row>1</row>
       <col>0</col>
-			<label>Complete</label>
-		</text>
+      <label>Complete</label>
+    </text>
 
     <text>
       <row>1</row>
@@ -133,27 +133,27 @@
       <label>15.0</label>
       <format>%2.1f</format>
       <live>true</live>
-      <property>/sim/rendering/redout/redout-complete-g</property>
+      <property>/sim/rendering/redout/parameters/redout-complete-g</property>
     </text>
 
-		<slider>
+    <slider>
       <row>1</row>
       <col>2</col>
-			<min>-1.0</min>
-			<max>-15.0</max>
-      <property>/sim/rendering/redout/redout-complete-g</property>
+      <min>-1.0</min>
+      <max>-15.0</max>
+      <property>/sim/rendering/redout/parameters/redout-complete-g</property>
       <binding>
-				<command>dialog-apply</command>
-			</binding>
-		</slider>
-	</group>
+        <command>dialog-apply</command>
+      </binding>
+    </slider>
+  </group>
 
-	<button>
-		<legend>Close</legend>
-		<default>true</default>
-		<key>Esc</key>
-		<binding>
-			<command>dialog-close</command>
-		</binding>
-	</button>
+  <button>
+    <legend>Close</legend>
+    <default>true</default>
+    <key>Esc</key>
+    <binding>
+      <command>dialog-close</command>
+    </binding>
+  </button>
 </PropertyList>

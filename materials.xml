@@ -655,8 +655,15 @@ Shared parameters for various materials.
  <wrapu>false</wrapu>
 </material>
 
-<!-- Default -->
+<!-- Default Summer-->
+
 <material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>summer</value>
+  </equals>
+ </condition>
  <name>Landmass</name>
  <name>SomeSort</name>
  <name>EvergreenBroadCover</name>
@@ -669,8 +676,8 @@ Shared parameters for various materials.
  <ysize>2000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <tree-coverage>4000.0</tree-coverage>
- <tree-texture>Textures/Trees/coniferous-tree-strip4.rgb</tree-texture>
- <tree-varieties>4</tree-varieties>
+ <tree-texture>Textures/Trees/coniferous-summer.rgb</tree-texture>
+ <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>25.0</tree-height-m>
  <tree-width-m>15.0</tree-width-m> 
@@ -679,6 +686,12 @@ Shared parameters for various materials.
 </material>
 
 <material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>summer</value>
+  </equals>
+ </condition>
  <name>DeciduousBroadCover</name>
  <name>Bog</name>
  <texture>Terrain/deciduous1.rgb</texture>
@@ -688,16 +701,22 @@ Shared parameters for various materials.
  <ysize>2000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <tree-coverage>4000.0</tree-coverage>
- <tree-texture>Textures/Trees/deciduous-tree-strip8.rgb</tree-texture>
+ <tree-texture>Textures/Trees/deciduous-summer.rgb</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
- <tree-height-m>15.0</tree-height-m>
- <tree-width-m>12.0</tree-width-m>
+ <tree-height-m>25.0</tree-height-m>
+ <tree-width-m>15.0</tree-width-m>
  <rolling-friction>1</rolling-friction>
  <bumpiness>0.85</bumpiness>
 </material>
 
 <material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>summer</value>
+  </equals>
+ </condition>
  <name>MixedForestCover</name>
  <texture>Terrain/mixedforest.rgb</texture>
  <texture>Terrain/mixedforest2.rgb</texture>
@@ -706,16 +725,22 @@ Shared parameters for various materials.
  <ysize>2000</ysize>
  <light-coverage>5000000.0</light-coverage>
  <tree-coverage>4000.0</tree-coverage>
- <tree-texture>Textures/Trees/mixed-tree-strip8.rgb</tree-texture>
+ <tree-texture>Textures/Trees/mixed-summer.rgb</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
- <tree-height-m>15.0</tree-height-m>
- <tree-width-m>8.0</tree-width-m>
+ <tree-height-m>25.0</tree-height-m>
+ <tree-width-m>15.0</tree-width-m>
  <rolling-friction>1</rolling-friction>
  <bumpiness>0.95</bumpiness>
 </material>
 
 <material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>summer</value>
+  </equals>
+ </condition>
  <name>EvergreenNeedleCover</name>
  <name>WoodedTundraCover</name>
  <texture>Terrain/evergreen.rgb</texture>
@@ -723,24 +748,30 @@ Shared parameters for various materials.
  <ysize>1000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <tree-coverage>4000.0</tree-coverage>
- <tree-texture>Textures/Trees/coniferous-tree-strip4.rgb</tree-texture>
- <tree-varieties>4</tree-varieties>
+ <tree-texture>Textures/Trees/coniferous-summer.rgb</tree-texture>
+ <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>20.0</tree-height-m>
- <tree-width-m>12.0</tree-width-m>
+ <tree-width-m>15.0</tree-width-m>
  <rolling-friction>1</rolling-friction>
  <bumpiness>1</bumpiness>
 </material>
 
 <material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>summer</value>
+  </equals>
+ </condition>
  <name>DeciduousNeedleCover</name>
  <texture>Terrain/dec_evergreen.rgb</texture>
  <xsize>1000</xsize>
  <ysize>1000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <tree-coverage>4000.0</tree-coverage>
- <tree-texture>Textures/Trees/coniferous-tree-strip4.rgb</tree-texture>
- <tree-varieties>4</tree-varieties>
+ <tree-texture>Textures/Trees/coniferous-summer.rgb</tree-texture>
+ <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>15.0</tree-height-m>
  <tree-width-m>8.0</tree-width-m>
@@ -749,6 +780,12 @@ Shared parameters for various materials.
 </material>
 
 <material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>summer</value>
+  </equals>
+ </condition>
  <name>Sand</name>
  <texture>Terrain/sand4.rgb</texture>
  <texture>Terrain/sand5.rgb</texture>
@@ -763,6 +800,12 @@ Shared parameters for various materials.
 </material>
 
 <material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>summer</value>
+  </equals>
+ </condition>
  <name>ShrubCover</name>
  <name>ShrubGrassCover</name>
  <name>ScrubCover</name>
@@ -790,6 +833,12 @@ Shared parameters for various materials.
 </material>
 
 <material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>summer</value>
+  </equals>
+ </condition>
  <name>BuiltUpCover</name>
  <name>Urban</name>
  <texture>Terrain/city1.rgb</texture>
@@ -856,21 +905,21 @@ Shared parameters for various materials.
    <heading-type>random</heading-type>
   </object>
  </object-group>
- <object-group>
-  <range-m alias="/params/forest/tree-range-m"/>
-  <object>
-   <path>Models/Trees/deciduous-tree.ac</path>
-   <path>Models/Trees/deciduous-tree2.ac</path>
-   <path>Models/Trees/deciduous-tree3.ac</path>
-   <path>Models/Trees/coniferous-tree.ac</path>
-   <path>Models/Trees/coniferous-tree2.ac</path>
-   <coverage-m2>250000</coverage-m2>
-   <heading-type>billboard</heading-type>
-  </object>
- </object-group>
+ <tree-coverage>250000.0</tree-coverage>
+ <tree-texture>Textures/Trees/mixed-summer.rgb</tree-texture>
+ <tree-varieties>8</tree-varieties>
+ <tree-range-m alias="/params/forest/tree-range-m"/>
+ <tree-height-m>25.0</tree-height-m>
+ <tree-width-m>15.0</tree-width-m>
 </material>
 
 <material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>summer</value>
+  </equals>
+ </condition>
  <name>Town</name>
  <texture>Terrain/Town1.rgb</texture>
  <xsize>1024</xsize>
@@ -920,19 +969,1239 @@ Shared parameters for various materials.
    <heading-type>random</heading-type>
   </object>
  </object-group>
+ <tree-coverage>500000.0</tree-coverage>
+ <tree-texture>Textures/Trees/mixed-summer.rgb</tree-texture>
+ <tree-varieties>8</tree-varieties>
+ <tree-range-m alias="/params/forest/tree-range-m"/>
+ <tree-height-m>25.0</tree-height-m>
+ <tree-width-m>15.0</tree-width-m>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>summer</value>
+  </equals>
+ </condition>
+ <name>Lake</name>
+ <name>Pond</name>
+ <name>Reservoir</name>
+ <name>Stream</name>
+ <name>Canal</name>
+ <texture>Terrain/water-lake.rgb</texture>
+ <xsize>400</xsize>
+ <ysize>400</ysize>
+ <ambient>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </ambient>
+ <diffuse>
+  <r>0.5</r>
+  <g>0.5</g>
+  <b>0.5</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.3</r>
+  <g>0.3</g>
+  <b>0.3</b>
+  <a>1.0</a>
+ </specular>
+ <shininess>1.2</shininess>
+ <solid>0</solid>
+ <rolling-friction>1.5</rolling-friction>
+ <bumpiness>0.6</bumpiness>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>summer</value>
+  </equals>
+ </condition>
+ <name>DryLake</name>
+ <name>IntermittentReservoir</name>
+ <name>IntermittentLake</name>
+ <texture>Terrain/sand1.rgb</texture>
+ <texture>Terrain/sand2.rgb</texture>
+ <texture>Terrain/sand3.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <solid>1</solid>
+ <friction-factor>0.9</friction-factor>
+ <rolling-friction>0.04</rolling-friction>
+ <bumpiness>0.1</bumpiness>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>summer</value>
+  </equals>
+ </condition>
+ <name>IntermittentStream</name>
+ <texture>Terrain/wash.rgb</texture>
+ <xsize>200</xsize>
+ <ysize>200</ysize>
+ <shininess>1.5</shininess>
+ <solid>0</solid>
+ <rolling-friction>2.5</rolling-friction>
+ <bumpiness>0.6</bumpiness>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>summer</value>
+  </equals>
+ </condition>
+ <name>Marsh</name>
+ <name>Littoral</name>
+ <name>HerbWetlandCover</name>
+ <name>WoodedWetlandCover</name>
+ <texture>Terrain/marsh2.rgb</texture>
+ <texture>Terrain/marsh3.rgb</texture>
+ <texture>Terrain/marsh4.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <solid>1</solid>
+ <light-coverage>40000000.0</light-coverage>
+ <friction-factor>0.8</friction-factor>
+ <rolling-friction>0.3</rolling-friction>
+ <bumpiness>0.2</bumpiness>
+ <load-resistance>1e30</load-resistance>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>summer</value>
+  </equals>
+ </condition>
+ <name>GrassCover</name>
+ <name>BareTundraCover</name>
+ <name>MixedTundraCover</name>
+ <texture>Terrain/tundra.rgb</texture>
+ <texture>Terrain/tundra2.rgb</texture>
+ <texture>Terrain/tundra3.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <light-coverage>4000000.0</light-coverage>
+ <diffuse>
+  <r>0.93</r>
+  <g>0.95</g>
+  <b>0.93</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.1</r>
+  <g>0.12</g>
+  <b>0.1</b>
+  <a>1.0</a>
+ </specular>
+ <shininess>1.2</shininess>
+ <solid>1</solid>
+ <friction-factor>0.7</friction-factor>
+ <rolling-friction>0.1</rolling-friction>
+ <bumpiness>0.15</bumpiness>
+ <load-resistance>1e30</load-resistance>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>summer</value>
+  </equals>
+ </condition>
+ <name>HerbTundraCover</name>
+ <texture>Terrain/herbtundra.rgb</texture>
+ <texture>Terrain/herbtundra2.rgb</texture>
+ <texture>Terrain/herbtundra3.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <light-coverage>4000000.0</light-coverage>
+ <diffuse>
+  <r>0.93</r>
+  <g>0.95</g>
+  <b>0.93</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.1</r>
+  <g>0.12</g>
+  <b>0.1</b>
+  <a>1.0</a>
+ </specular>
+ <shininess>1.2</shininess>
+ <solid>1</solid>
+ <friction-factor>0.8</friction-factor>
+ <rolling-friction>0.1</rolling-friction>
+ <bumpiness>0.15</bumpiness>
+ <load-resistance>1e30</load-resistance>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>summer</value>
+  </equals>
+ </condition>
+ <name>SavannaCover</name>
+ <texture>Terrain/savanna.rgb</texture>
+ <xsize>1000</xsize>
+ <ysize>1000</ysize>
+ <light-coverage>4000000.0</light-coverage>
+ <solid>1</solid>
+ <friction-factor>0.8</friction-factor>
+ <rolling-friction>0.1</rolling-friction>
+ <bumpiness>0.2</bumpiness>
+ <load-resistance>1e30</load-resistance>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>summer</value>
+  </equals>
+ </condition>
+ <name>Grass</name>
+ <name>Airport</name>
+ <name>AirportKeep</name>
+ <texture>Terrain/airport.rgb</texture>
+ <xsize>125</xsize>
+ <ysize>125</ysize>
+ <light-coverage>4000000.0</light-coverage>
+ <diffuse>
+  <r>0.93</r>
+  <g>0.95</g>
+  <b>0.93</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.1</r>
+  <g>0.12</g>
+  <b>0.1</b>
+  <a>1.0</a>
+ </specular>
+ <shininess>1.2</shininess>
+ <solid>1</solid>
+ <friction-factor>0.7</friction-factor>
+ <rolling-friction>0.1</rolling-friction>
+ <bumpiness>0.1</bumpiness>
+ <load-resistance>1e30</load-resistance>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>summer</value>
+  </equals>
+ </condition>
+ <name>MixedCropPastureCover</name>
+ <texture>Terrain/mixedcrop1.rgb</texture>
+ <texture>Terrain/mixedcrop4.rgb</texture>
+ <texture>Terrain/mixedcrop3.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <light-coverage>2000000.0</light-coverage>
+ <solid>1</solid>
+ <friction-factor>0.9</friction-factor>
+ <rolling-friction>0.1</rolling-friction>
+ <bumpiness>0.7</bumpiness>
+ <load-resistance>1e30</load-resistance>
  <object-group>
-  <range-m alias="/params/forest/tree-range-m"/>
+  <range-m>5000</range-m>
   <object>
-   <path>Models/Trees/deciduous-tree.ac</path>
-   <path>Models/Trees/deciduous-tree2.ac</path>
-   <path>Models/Trees/deciduous-tree3.ac</path>
-   <path>Models/Trees/coniferous-tree.ac</path>
-   <path>Models/Trees/coniferous-tree2.ac</path>
-   <coverage-m2>500000</coverage-m2>
-   <heading-type>billboard</heading-type>
+   <path>Models/Buildings/silo.ac</path>
+   <coverage-m2>5000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/red-barn.ac</path>
+   <path>Models/Buildings/horse-stable.ac</path>
+   <path>Models/Buildings/cow-stable.ac</path>
+   <path>Models/Buildings/farmhouse1.ac</path>
+   <path>Models/Buildings/farmhouse2.ac</path>
+   <path>Models/Buildings/farmhouse3.ac</path>
+   <coverage-m2>750000</coverage-m2>
+   <heading-type>random</heading-type>
   </object>
  </object-group>
+ <object-group>
+  <range-m>1000</range-m>
+  <object>
+   <path>Models/Fauna/cow.ac</path>
+   <coverage-m2>100000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+ </object-group>
+ <tree-coverage>500000.0</tree-coverage>
+ <tree-texture>Textures/Trees/mixed-summer.rgb</tree-texture>
+ <tree-varieties>8</tree-varieties>
+ <tree-range-m alias="/params/forest/tree-range-m"/>
+ <tree-height-m>20.0</tree-height-m>
+ <tree-width-m>12.0</tree-width-m>
 </material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>summer</value>
+  </equals>
+ </condition>
+ <name>IrrCropPastureCover</name>
+ <texture>Terrain/irrcrop1.rgb</texture>
+ <texture>Terrain/irrcrop2.rgb</texture>
+ <texture>Terrain/irrcrop3.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <light-coverage>2000000.0</light-coverage>
+ <solid>1</solid>
+ <friction-factor>0.9</friction-factor>
+ <rolling-friction>0.3</rolling-friction>
+ <bumpiness>0.6</bumpiness>
+ <load-resistance>1e30</load-resistance>
+ <object-group>
+  <range-m>5000</range-m>
+  <object>
+   <path>Models/Buildings/silo.ac</path>
+   <coverage-m2>5000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/red-barn.ac</path>
+   <path>Models/Buildings/horse-stable.ac</path>
+   <path>Models/Buildings/cow-stable.ac</path>
+   <path>Models/Buildings/farmhouse1.ac</path>
+   <path>Models/Buildings/farmhouse2.ac</path>
+   <path>Models/Buildings/farmhouse3.ac</path>
+   <coverage-m2>750000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+ </object-group>
+ <object-group>
+  <range-m>1000</range-m>
+  <object>
+   <path>Models/Fauna/cow.ac</path>
+   <coverage-m2>100000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+ </object-group>
+ <tree-coverage>500000.0</tree-coverage>
+ <tree-texture>Textures/Trees/mixed-summer.rgb</tree-texture>
+ <tree-varieties>8</tree-varieties>
+ <tree-range-m alias="/params/forest/tree-range-m"/>
+ <tree-height-m>20.0</tree-height-m>
+ <tree-width-m>12.0</tree-width-m>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>summer</value>
+  </equals>
+ </condition>
+ <name>DryCropPastureCover</name>
+ <texture>Terrain/drycrop1.rgb</texture>
+ <texture>Terrain/drycrop2.rgb</texture>
+ <texture>Terrain/drycrop3.rgb</texture>
+ <texture>Terrain/drycrop4.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <solid>1</solid>
+ <friction-factor>0.9</friction-factor>
+ <rolling-friction>0.1</rolling-friction>
+ <bumpiness>0.6</bumpiness>
+ <load-resistance>1e30</load-resistance>
+ <light-coverage>2000000.0</light-coverage>
+ <object-group>
+  <range-m>5000</range-m>
+  <object>
+   <path>Models/Buildings/silo.ac</path>
+   <coverage-m2>5000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/red-barn.ac</path>
+   <path>Models/Buildings/horse-stable.ac</path>
+   <path>Models/Buildings/cow-stable.ac</path>
+   <path>Models/Buildings/farmhouse1.ac</path>
+   <path>Models/Buildings/farmhouse2.ac</path>
+   <path>Models/Buildings/farmhouse3.ac</path>
+   <coverage-m2>750000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+ </object-group>
+ <object-group>
+  <range-m>1000</range-m>
+  <object>
+   <path>Models/Fauna/cow.ac</path>
+   <coverage-m2>100000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+ </object-group>
+ <tree-coverage>500000.0</tree-coverage>
+ <tree-texture>Textures/Trees/mixed-summer.rgb</tree-texture>
+ <tree-varieties>8</tree-varieties>
+ <tree-range-m alias="/params/forest/tree-range-m"/>
+ <tree-height-m>20.0</tree-height-m>
+ <tree-width-m>12.0</tree-width-m>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>summer</value>
+  </equals>
+ </condition>
+ <name>CropGrassCover</name>
+ <texture>Terrain/cropgrass1.rgb</texture>
+ <texture>Terrain/cropgrass2.rgb</texture>
+ <texture>Terrain/cropgrass3.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <light-coverage>2000000.0</light-coverage>
+ <diffuse>
+  <r>0.93</r>
+  <g>0.95</g>
+  <b>0.93</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.1</r>
+  <g>0.12</g>
+  <b>0.1</b>
+  <a>1.0</a>
+ </specular>
+ <shininess>1.2</shininess>
+ <solid>1</solid>
+ <friction-factor>0.7</friction-factor>
+ <rolling-friction>0.1</rolling-friction>
+ <bumpiness>0.3</bumpiness>
+ <load-resistance>1e30</load-resistance>
+ <tree-coverage>500000.0</tree-coverage>
+ <tree-texture>Textures/Trees/mixed-summer.rgb</tree-texture>
+ <tree-varieties>8</tree-varieties>
+ <tree-range-m alias="/params/forest/tree-range-m"/>
+ <tree-height-m>20.0</tree-height-m>
+ <tree-width-m>12.0</tree-width-m>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>summer</value>
+  </equals>
+ </condition>
+ <name>CropWoodCover</name>
+ <texture>Terrain/cropwood.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <light-coverage>2000000.0</light-coverage>
+ <solid>1</solid>
+ <friction-factor>0.4</friction-factor>
+ <rolling-friction>0.6</rolling-friction>
+ <bumpiness>0.7</bumpiness>
+ <load-resistance>10</load-resistance>
+ <tree-coverage>200000.0</tree-coverage>
+ <tree-texture>Textures/Trees/mixed-summer.rgb</tree-texture>
+ <tree-varieties>8</tree-varieties>
+ <tree-range-m alias="/params/forest/tree-range-m"/>
+ <tree-height-m>20.0</tree-height-m>
+ <tree-width-m>12.0</tree-width-m>
+</material>
+
+<!-- end summer-->
+
+<!-- Winter-->
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>winter</value>
+  </equals>
+ </condition>
+ <name>Landmass</name>
+ <name>SomeSort</name>
+ <name>EvergreenBroadCover</name>
+ <name>Island</name>
+ <name>Default</name>
+  <texture>Terrain.winter/forest1a.rgb</texture>
+  <texture>Terrain.winter/forest1b.rgb</texture>
+  <texture>Terrain.winter/forest1c.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <light-coverage>10000000.0</light-coverage>
+ <tree-coverage>4000.0</tree-coverage>
+ <tree-texture>Textures/Trees/coniferous-winter.rgb</tree-texture>
+ <tree-varieties>8</tree-varieties>
+ <tree-range-m alias="/params/forest/tree-range-m"/>
+ <tree-height-m>25.0</tree-height-m>
+ <tree-width-m>15.0</tree-width-m> 
+ <rolling-friction>1</rolling-friction>
+ <bumpiness>1</bumpiness>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>winter</value>
+  </equals>
+ </condition>
+ <name>DeciduousBroadCover</name>
+ <name>Bog</name>
+  <texture>Terrain.winter/deciduous1.rgb</texture>
+  <texture>Terrain.winter/deciduous2.rgb</texture>
+  <texture>Terrain.winter/deciduous4.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <light-coverage>10000000.0</light-coverage>
+ <tree-coverage>4000.0</tree-coverage>
+ <tree-texture>Textures/Trees/deciduous-winter.rgb</tree-texture>
+ <tree-varieties>8</tree-varieties>
+ <tree-range-m alias="/params/forest/tree-range-m"/>
+ <tree-height-m>25.0</tree-height-m>
+ <tree-width-m>15.0</tree-width-m>
+ <rolling-friction>1</rolling-friction>
+ <bumpiness>0.85</bumpiness>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>winter</value>
+  </equals>
+ </condition>
+ <name>MixedForestCover</name>
+  <texture>Terrain.winter/mixedforest.rgb</texture>
+  <texture>Terrain.winter/mixedforest2.rgb</texture>
+  <texture>Terrain.winter/mixedforest3.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <light-coverage>5000000.0</light-coverage>
+ <tree-coverage>4000.0</tree-coverage>
+ <tree-texture>Textures/Trees/mixed-winter.rgb</tree-texture>
+ <tree-varieties>8</tree-varieties>
+ <tree-range-m alias="/params/forest/tree-range-m"/>
+ <tree-height-m>25.0</tree-height-m>
+ <tree-width-m>15.0</tree-width-m>
+ <rolling-friction>1</rolling-friction>
+ <bumpiness>0.95</bumpiness>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>winter</value>
+  </equals>
+ </condition>
+ <name>EvergreenNeedleCover</name>
+ <name>WoodedTundraCover</name>
+  <texture>Terrain.winter/evergreen.rgb</texture>
+ <xsize>1000</xsize>
+ <ysize>1000</ysize>
+ <light-coverage>10000000.0</light-coverage>
+ <tree-coverage>4000.0</tree-coverage>
+ <tree-texture>Textures/Trees/coniferous-winter.rgb</tree-texture>
+ <tree-varieties>8</tree-varieties>
+ <tree-range-m alias="/params/forest/tree-range-m"/>
+ <tree-height-m>20.0</tree-height-m>
+ <tree-width-m>15.0</tree-width-m>
+ <rolling-friction>1</rolling-friction>
+ <bumpiness>1</bumpiness>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>winter</value>
+  </equals>
+ </condition>
+ <name>DeciduousNeedleCover</name>
+  <texture>Terrain.winter/dec_evergreen.rgb</texture>
+ <xsize>1000</xsize>
+ <ysize>1000</ysize>
+ <light-coverage>10000000.0</light-coverage>
+ <tree-coverage>4000.0</tree-coverage>
+ <tree-texture>Textures/Trees/coniferous-winter.rgb</tree-texture>
+ <tree-varieties>8</tree-varieties>
+ <tree-range-m alias="/params/forest/tree-range-m"/>
+ <tree-height-m>15.0</tree-height-m>
+ <tree-width-m>8.0</tree-width-m>
+ <rolling-friction>1</rolling-friction>
+ <bumpiness>1</bumpiness>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>winter</value>
+  </equals>
+ </condition>
+ <name>Sand</name>
+  <texture>Terrain.winter/sand4.rgb</texture>
+  <texture>Terrain.winter/sand5.rgb</texture>
+  <texture>Terrain.winter/sand6.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <light-coverage>10000000.0</light-coverage>
+ <shininess>2.5</shininess>
+ <rolling-friction>0.1</rolling-friction>
+ <friction-factor>0.7</friction-factor>
+ <bumpiness>0.1</bumpiness>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>winter</value>
+  </equals>
+ </condition>
+ <name>ShrubCover</name>
+ <name>ShrubGrassCover</name>
+ <name>ScrubCover</name>
+  <texture>Terrain.winter/shrub.rgb</texture>
+  <texture>Terrain.winter/shrub2.rgb</texture>
+  <texture>Terrain.winter/shrub3.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <diffuse>
+  <r>0.86</r>
+  <g>0.86</g>
+  <b>0.86</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.1</r>
+  <g>0.1</g>
+  <b>0.1</b>
+  <a>1.0</a>
+ </specular>
+ <shininess>1.2</shininess>
+ <light-coverage>20000000.0</light-coverage>
+ <rolling-friction>0.6</rolling-friction>
+ <bumpiness>0.4</bumpiness>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>winter</value>
+  </equals>
+ </condition>
+ <name>BuiltUpCover</name>
+ <name>Urban</name>
+  <texture>Terrain/city1.rgb</texture>
+  <texture>Terrain/city2.rgb</texture>
+  <texture>Terrain/city3.rgb</texture>
+ <xsize>1024</xsize>
+ <ysize>1024</ysize>
+ <light-coverage>100000.0</light-coverage>
+ <emissive>
+  <r>0.05</r>
+  <g>0.05</g>
+  <b>0.02</b>
+  <a>1.0</a>
+ </emissive>
+ <object-group>
+  <range-m>10000</range-m>
+  <object>
+   <path>Models/Buildings/oil-tanks.ac</path>
+   <coverage-m2>10000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/big-apartment.ac</path>
+   <coverage-m2>10000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/factory.ac</path>
+   <coverage-m2>4000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+ </object-group>
+ <object-group>
+  <range-m>5000</range-m>
+  <object>
+   <path>Models/Buildings/cube-apartment.ac</path>
+   <path>Models/Buildings/medium-apartment.ac</path>
+   <path>Models/Buildings/renovated-apartment.ac</path>
+   <coverage-m2>1000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/small-glass-office-building.ac</path>
+   <path>Models/Buildings/medium-glass-office-building.ac</path>
+   <path>Models/Buildings/small-modern-office.ac</path>
+   <path>Models/Buildings/small-office.ac</path>
+   <coverage-m2>500000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/big-church.ac</path>
+   <coverage-m2>5000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/brick-school.ac</path>
+   <path>Models/Buildings/bank-building.ac</path>
+   <coverage-m2>4000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/water-tower.ac</path>
+   <coverage-m2>100000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+ </object-group>
+ <tree-coverage>250000.0</tree-coverage>
+ <tree-texture>Textures/Trees/mixed-winter.rgb</tree-texture>
+ <tree-varieties>8</tree-varieties>
+ <tree-range-m alias="/params/forest/tree-range-m"/>
+ <tree-height-m>25.0</tree-height-m>
+ <tree-width-m>15.0</tree-width-m>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>winter</value>
+  </equals>
+ </condition>
+ <name>Town</name>
+  <texture>Terrain.winter/Town1.rgb</texture>
+ <xsize>1024</xsize>
+ <ysize>1024</ysize>
+ <light-coverage>100000.0</light-coverage>
+ <emissive>
+  <r>0.05</r>
+  <g>0.05</g>
+  <b>0.02</b>
+  <a>1.0</a>
+ </emissive>
+ <object-group>
+  <range-m>10000</range-m>
+  <object>
+   <path>Models/Buildings/oil-tanks.ac</path>
+   <coverage-m2>20000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/big-church.ac</path>
+   <coverage-m2>90000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/shop.ac</path>
+   <coverage-m2>40000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/hosshop.ac</path>
+   <coverage-m2>75000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/weapshop.ac</path>
+   <coverage-m2>40000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/brick-school.ac</path>
+   <coverage-m2>285000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/water-tower.ac</path>
+   <coverage-m2>300000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+ </object-group>
+ <tree-coverage>500000.0</tree-coverage>
+ <tree-texture>Textures/Trees/mixed-winter.rgb</tree-texture>
+ <tree-varieties>8</tree-varieties>
+ <tree-range-m alias="/params/forest/tree-range-m"/>
+ <tree-height-m>25.0</tree-height-m>
+ <tree-width-m>15.0</tree-width-m>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>winter</value>
+  </equals>
+ </condition>
+ <name>Lake</name>
+ <name>Pond</name>
+ <name>Reservoir</name>
+ <name>Stream</name>
+ <name>Canal</name>
+  <texture>Terrain.winter/water-lake.rgb</texture>
+ <xsize>400</xsize>
+ <ysize>400</ysize>
+ <ambient>
+  <r>0.0</r>
+  <g>0.0</g>
+  <b>0.0</b>
+  <a>1.0</a>
+ </ambient>
+ <diffuse>
+  <r>0.5</r>
+  <g>0.5</g>
+  <b>0.5</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.3</r>
+  <g>0.3</g>
+  <b>0.3</b>
+  <a>1.0</a>
+ </specular>
+ <shininess>1.2</shininess>
+ <solid>1</solid>
+ <rolling-friction>0.5</rolling-friction>
+ <bumpiness>0.1</bumpiness>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>winter</value>
+  </equals>
+ </condition>
+ <name>DryLake</name>
+ <name>IntermittentReservoir</name>
+ <name>IntermittentLake</name>
+  <texture>Terrain.winter/sand1.rgb</texture>
+  <texture>Terrain.winter/sand2.rgb</texture>
+  <texture>Terrain.winter/sand3.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <solid>1</solid>
+ <friction-factor>0.9</friction-factor>
+ <rolling-friction>0.04</rolling-friction>
+ <bumpiness>0.1</bumpiness>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>winter</value>
+  </equals>
+ </condition>
+ <name>IntermittentStream</name>
+  <texture>Terrain.winter/wash.rgb</texture>
+ <xsize>200</xsize>
+ <ysize>200</ysize>
+ <shininess>1.5</shininess>
+ <solid>0</solid>
+ <rolling-friction>2.5</rolling-friction>
+ <bumpiness>0.6</bumpiness>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>winter</value>
+  </equals>
+ </condition>
+ <name>Marsh</name>
+ <name>Littoral</name>
+ <name>HerbWetlandCover</name>
+ <name>WoodedWetlandCover</name>
+  <texture>Terrain.winter/marsh2.rgb</texture>
+  <texture>Terrain.winter/marsh3.rgb</texture>
+  <texture>Terrain.winter/marsh4.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <solid>1</solid>
+ <light-coverage>40000000.0</light-coverage>
+ <friction-factor>0.8</friction-factor>
+ <rolling-friction>0.3</rolling-friction>
+ <bumpiness>0.2</bumpiness>
+ <load-resistance>1e30</load-resistance>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>winter</value>
+  </equals>
+ </condition>
+ <name>GrassCover</name>
+ <name>BareTundraCover</name>
+ <name>MixedTundraCover</name>
+  <texture>Terrain.winter/tundra.rgb</texture>
+  <texture>Terrain.winter/tundra2.rgb</texture>
+  <texture>Terrain.winter/tundra3.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <light-coverage>4000000.0</light-coverage>
+ <diffuse>
+  <r>0.93</r>
+  <g>0.95</g>
+  <b>0.93</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.1</r>
+  <g>0.12</g>
+  <b>0.1</b>
+  <a>1.0</a>
+ </specular>
+ <shininess>1.2</shininess>
+ <solid>1</solid>
+ <friction-factor>0.7</friction-factor>
+ <rolling-friction>0.1</rolling-friction>
+ <bumpiness>0.15</bumpiness>
+ <load-resistance>1e30</load-resistance>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>winter</value>
+  </equals>
+ </condition>
+ <name>HerbTundraCover</name>
+  <texture>Terrain.winter/herbtundra.rgb</texture>
+  <texture>Terrain.winter/herbtundra2.rgb</texture>
+  <texture>Terrain.winter/herbtundra3.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <light-coverage>4000000.0</light-coverage>
+ <diffuse>
+  <r>0.93</r>
+  <g>0.95</g>
+  <b>0.93</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.1</r>
+  <g>0.12</g>
+  <b>0.1</b>
+  <a>1.0</a>
+ </specular>
+ <shininess>1.2</shininess>
+ <solid>1</solid>
+ <friction-factor>0.8</friction-factor>
+ <rolling-friction>0.1</rolling-friction>
+ <bumpiness>0.15</bumpiness>
+ <load-resistance>1e30</load-resistance>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>winter</value>
+  </equals>
+ </condition>
+ <name>SavannaCover</name>
+  <texture>Terrain.winter/savanna.rgb</texture>
+ <xsize>1000</xsize>
+ <ysize>1000</ysize>
+ <light-coverage>4000000.0</light-coverage>
+ <solid>1</solid>
+ <friction-factor>0.8</friction-factor>
+ <rolling-friction>0.1</rolling-friction>
+ <bumpiness>0.2</bumpiness>
+ <load-resistance>1e30</load-resistance>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>winter</value>
+  </equals>
+ </condition>
+ <name>Grass</name>
+ <name>Airport</name>
+ <name>AirportKeep</name>
+  <texture>Terrain.winter/airport.rgb</texture>
+ <xsize>125</xsize>
+ <ysize>125</ysize>
+ <light-coverage>4000000.0</light-coverage>
+ <diffuse>
+  <r>0.93</r>
+  <g>0.95</g>
+  <b>0.93</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.1</r>
+  <g>0.12</g>
+  <b>0.1</b>
+  <a>1.0</a>
+ </specular>
+ <shininess>1.2</shininess>
+ <solid>1</solid>
+ <friction-factor>0.7</friction-factor>
+ <rolling-friction>0.1</rolling-friction>
+ <bumpiness>0.1</bumpiness>
+ <load-resistance>1e30</load-resistance>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>winter</value>
+  </equals>
+ </condition>
+ <name>MixedCropPastureCover</name>
+  <texture>Terrain.winter/mixedcrop1.rgb</texture>
+  <texture>Terrain.winter/mixedcrop4.rgb</texture>
+  <texture>Terrain.winter/mixedcrop3.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <light-coverage>2000000.0</light-coverage>
+ <solid>1</solid>
+ <friction-factor>0.9</friction-factor>
+ <rolling-friction>0.1</rolling-friction>
+ <bumpiness>0.7</bumpiness>
+ <load-resistance>1e30</load-resistance>
+ <object-group>
+  <range-m>5000</range-m>
+  <object>
+   <path>Models/Buildings/silo.ac</path>
+   <coverage-m2>5000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/red-barn.ac</path>
+   <path>Models/Buildings/horse-stable.ac</path>
+   <path>Models/Buildings/cow-stable.ac</path>
+   <path>Models/Buildings/farmhouse1.ac</path>
+   <path>Models/Buildings/farmhouse2.ac</path>
+   <path>Models/Buildings/farmhouse3.ac</path>
+   <coverage-m2>750000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+ </object-group>
+ <object-group>
+  <range-m>1000</range-m>
+  <object>
+   <path>Models/Fauna/cow.ac</path>
+   <coverage-m2>100000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+ </object-group>
+ <tree-coverage>500000.0</tree-coverage>
+ <tree-texture>Textures/Trees/mixed-winter.rgb</tree-texture>
+ <tree-varieties>8</tree-varieties>
+ <tree-range-m alias="/params/forest/tree-range-m"/>
+ <tree-height-m>20.0</tree-height-m>
+ <tree-width-m>12.0</tree-width-m>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>winter</value>
+  </equals>
+ </condition>
+ <name>IrrCropPastureCover</name>
+  <texture>Terrain.winter/irrcrop1.rgb</texture>
+  <texture>Terrain.winter/irrcrop2.rgb</texture>
+  <texture>Terrain.winter/irrcrop3.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <light-coverage>2000000.0</light-coverage>
+ <solid>1</solid>
+ <friction-factor>0.9</friction-factor>
+ <rolling-friction>0.3</rolling-friction>
+ <bumpiness>0.6</bumpiness>
+ <load-resistance>1e30</load-resistance>
+ <object-group>
+  <range-m>5000</range-m>
+  <object>
+   <path>Models/Buildings/silo.ac</path>
+   <coverage-m2>5000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/red-barn.ac</path>
+   <path>Models/Buildings/horse-stable.ac</path>
+   <path>Models/Buildings/cow-stable.ac</path>
+   <path>Models/Buildings/farmhouse1.ac</path>
+   <path>Models/Buildings/farmhouse2.ac</path>
+   <path>Models/Buildings/farmhouse3.ac</path>
+   <coverage-m2>750000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+ </object-group>
+ <object-group>
+  <range-m>1000</range-m>
+  <object>
+   <path>Models/Fauna/cow.ac</path>
+   <coverage-m2>100000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+ </object-group>
+ <tree-coverage>500000.0</tree-coverage>
+ <tree-texture>Textures/Trees/mixed-winter.rgb</tree-texture>
+ <tree-varieties>8</tree-varieties>
+ <tree-range-m alias="/params/forest/tree-range-m"/>
+ <tree-height-m>20.0</tree-height-m>
+ <tree-width-m>12.0</tree-width-m>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>winter</value>
+  </equals>
+ </condition>
+ <name>DryCropPastureCover</name>
+  <texture>Terrain.winter/drycrop1.rgb</texture>
+  <texture>Terrain.winter/drycrop2.rgb</texture>
+  <texture>Terrain.winter/drycrop3.rgb</texture>
+  <texture>Terrain.winter/drycrop4.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <solid>1</solid>
+ <friction-factor>0.9</friction-factor>
+ <rolling-friction>0.1</rolling-friction>
+ <bumpiness>0.6</bumpiness>
+ <load-resistance>1e30</load-resistance>
+ <light-coverage>2000000.0</light-coverage>
+ <object-group>
+  <range-m>5000</range-m>
+  <object>
+   <path>Models/Buildings/silo.ac</path>
+   <coverage-m2>5000000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Buildings/red-barn.ac</path>
+   <path>Models/Buildings/horse-stable.ac</path>
+   <path>Models/Buildings/cow-stable.ac</path>
+   <path>Models/Buildings/farmhouse1.ac</path>
+   <path>Models/Buildings/farmhouse2.ac</path>
+   <path>Models/Buildings/farmhouse3.ac</path>
+   <coverage-m2>750000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+ </object-group>
+ <object-group>
+  <range-m>1000</range-m>
+  <object>
+   <path>Models/Fauna/cow.ac</path>
+   <coverage-m2>100000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+ </object-group>
+ <tree-coverage>500000.0</tree-coverage>
+ <tree-texture>Textures/Trees/mixed-winter.rgb</tree-texture>
+ <tree-varieties>8</tree-varieties>
+ <tree-range-m alias="/params/forest/tree-range-m"/>
+ <tree-height-m>20.0</tree-height-m>
+ <tree-width-m>12.0</tree-width-m>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>winter</value>
+  </equals>
+ </condition>
+ <name>CropGrassCover</name>
+  <texture>Terrain.winter/cropgrass1.rgb</texture>
+  <texture>Terrain.winter/cropgrass2.rgb</texture>
+  <texture>Terrain.winter/cropgrass3.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <light-coverage>2000000.0</light-coverage>
+ <diffuse>
+  <r>0.93</r>
+  <g>0.95</g>
+  <b>0.93</b>
+  <a>1.0</a>
+ </diffuse>
+ <specular>
+  <r>0.1</r>
+  <g>0.12</g>
+  <b>0.1</b>
+  <a>1.0</a>
+ </specular>
+ <shininess>1.2</shininess>
+ <solid>1</solid>
+ <friction-factor>0.7</friction-factor>
+ <rolling-friction>0.1</rolling-friction>
+ <bumpiness>0.3</bumpiness>
+ <load-resistance>1e30</load-resistance>
+ <tree-coverage>500000.0</tree-coverage>
+ <tree-texture>Textures/Trees/mixed-winter.rgb</tree-texture>
+ <tree-varieties>8</tree-varieties>
+ <tree-range-m alias="/params/forest/tree-range-m"/>
+ <tree-height-m>20.0</tree-height-m>
+ <tree-width-m>12.0</tree-width-m>
+</material>
+
+<material>
+ <condition>
+  <equals>
+   <property>sim/startup/season</property>
+   <value>winter</value>
+  </equals>
+ </condition>
+ <name>CropWoodCover</name>
+  <texture>Terrain.winter/cropwood.rgb</texture>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
+ <light-coverage>2000000.0</light-coverage>
+ <solid>1</solid>
+ <friction-factor>0.4</friction-factor>
+ <rolling-friction>0.6</rolling-friction>
+ <bumpiness>0.7</bumpiness>
+ <load-resistance>10</load-resistance>
+ <tree-coverage>200000.0</tree-coverage>
+ <tree-texture>Textures/Trees/mixed-winter.rgb</tree-texture>
+ <tree-varieties>8</tree-varieties>
+ <tree-range-m alias="/params/forest/tree-range-m"/>
+ <tree-height-m>20.0</tree-height-m>
+ <tree-width-m>12.0</tree-width-m>
+</material>
+
+<!-- end winter-->
+
+
 
 <material>
  <name>Unknown</name>
@@ -1021,65 +2290,6 @@ Shared parameters for various materials.
 </material>
 
 <material>
- <name>Lake</name>
- <name>Pond</name>
- <name>Reservoir</name>
- <name>Stream</name>
- <name>Canal</name>
- <texture>Terrain/water-lake.rgb</texture>
- <xsize>400</xsize>
- <ysize>400</ysize>
- <ambient>
-  <r>0.0</r>
-  <g>0.0</g>
-  <b>0.0</b>
-  <a>1.0</a>
- </ambient>
- <diffuse>
-  <r>0.5</r>
-  <g>0.5</g>
-  <b>0.5</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.3</r>
-  <g>0.3</g>
-  <b>0.3</b>
-  <a>1.0</a>
- </specular>
- <shininess>1.2</shininess>
- <solid>0</solid>
- <rolling-friction>1.5</rolling-friction>
- <bumpiness>0.6</bumpiness>
-</material>
-
-<material>
- <name>IntermittentStream</name>
- <texture>Terrain/wash.rgb</texture>
- <xsize>200</xsize>
- <ysize>200</ysize>
- <shininess>1.5</shininess>
- <solid>0</solid>
- <rolling-friction>2.5</rolling-friction>
- <bumpiness>0.6</bumpiness>
-</material>
-
-<material>
- <name>DryLake</name>
- <name>IntermittentReservoir</name>
- <name>IntermittentLake</name>
- <texture>Terrain/sand1.rgb</texture>
- <texture>Terrain/sand2.rgb</texture>
- <texture>Terrain/sand3.rgb</texture>
- <xsize>2000</xsize>
- <ysize>2000</ysize>
- <solid>1</solid>
- <friction-factor>0.9</friction-factor>
- <rolling-friction>0.04</rolling-friction>
- <bumpiness>0.1</bumpiness>
-</material>
-
-<material>
  <name>BarrenCover</name>
  <name>Lava</name>
  <texture>Terrain/rock.rgb</texture>
@@ -1089,364 +2299,6 @@ Shared parameters for various materials.
  <friction-factor>0.9</friction-factor>
  <rolling-friction>0.1</rolling-friction>
  <bumpiness>0.3</bumpiness>
-</material>
-
-<material>
- <name>Marsh</name>
- <name>Littoral</name>
- <name>HerbWetlandCover</name>
- <name>WoodedWetlandCover</name>
- <texture>Terrain/marsh2.rgb</texture>
- <texture>Terrain/marsh3.rgb</texture>
- <texture>Terrain/marsh4.rgb</texture>
- <xsize>2000</xsize>
- <ysize>2000</ysize>
- <solid>1</solid>
- <light-coverage>40000000.0</light-coverage>
- <friction-factor>0.8</friction-factor>
- <rolling-friction>0.3</rolling-friction>
- <bumpiness>0.2</bumpiness>
- <load-resistance>1e30</load-resistance>
-</material>
-
-<!-- Moved to Tundra (see below)
-<material>
- <name>GrassCover</name>
- <texture>Terrain/grass.rgb</texture>
- <xsize>1000</xsize>
- <ysize>1000</ysize>
- <light-coverage>4000000.0</light-coverage>
- <rolling-friction>0.1</rolling-friction>
- <bumpiness>0.1</bumpiness>
-</material>
--->
-
-<material>
- <name>GrassCover</name>
- <name>BareTundraCover</name>
- <name>MixedTundraCover</name>
- <texture>Terrain/tundra.rgb</texture>
- <texture>Terrain/tundra2.rgb</texture>
- <texture>Terrain/tundra3.rgb</texture>
- <xsize>2000</xsize>
- <ysize>2000</ysize>
- <light-coverage>4000000.0</light-coverage>
- <diffuse>
-  <r>0.93</r>
-  <g>0.95</g>
-  <b>0.93</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.1</r>
-  <g>0.12</g>
-  <b>0.1</b>
-  <a>1.0</a>
- </specular>
- <shininess>1.2</shininess>
- <solid>1</solid>
- <friction-factor>0.7</friction-factor>
- <rolling-friction>0.1</rolling-friction>
- <bumpiness>0.15</bumpiness>
- <load-resistance>1e30</load-resistance>
-</material>
-
-<material>
- <name>HerbTundraCover</name>
- <texture>Terrain/herbtundra.rgb</texture>
- <texture>Terrain/herbtundra2.rgb</texture>
- <texture>Terrain/herbtundra3.rgb</texture>
- <xsize>2000</xsize>
- <ysize>2000</ysize>
- <light-coverage>4000000.0</light-coverage>
- <diffuse>
-  <r>0.93</r>
-  <g>0.95</g>
-  <b>0.93</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.1</r>
-  <g>0.12</g>
-  <b>0.1</b>
-  <a>1.0</a>
- </specular>
- <shininess>1.2</shininess>
- <solid>1</solid>
- <friction-factor>0.8</friction-factor>
- <rolling-friction>0.1</rolling-friction>
- <bumpiness>0.15</bumpiness>
- <load-resistance>1e30</load-resistance>
-</material>
-
-<material>
- <name>SavannaCover</name>
- <texture>Terrain/savanna.rgb</texture>
- <xsize>1000</xsize>
- <ysize>1000</ysize>
- <light-coverage>4000000.0</light-coverage>
- <solid>1</solid>
- <friction-factor>0.8</friction-factor>
- <rolling-friction>0.1</rolling-friction>
- <bumpiness>0.2</bumpiness>
- <load-resistance>1e30</load-resistance>
-</material>
-
-<material>
- <name>Grass</name>
- <name>Airport</name>
- <name>AirportKeep</name>
- <texture>Terrain/airport.rgb</texture>
- <xsize>125</xsize>
- <ysize>125</ysize>
- <light-coverage>4000000.0</light-coverage>
- <diffuse>
-  <r>0.93</r>
-  <g>0.95</g>
-  <b>0.93</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.1</r>
-  <g>0.12</g>
-  <b>0.1</b>
-  <a>1.0</a>
- </specular>
- <shininess>1.2</shininess>
- <solid>1</solid>
- <friction-factor>0.7</friction-factor>
- <rolling-friction>0.1</rolling-friction>
- <bumpiness>0.1</bumpiness>
- <load-resistance>1e30</load-resistance>
-</material>
-
-<material>
- <name>MixedCropPastureCover</name>
- <texture>Terrain/mixedcrop1.rgb</texture>
- <texture>Terrain/mixedcrop4.rgb</texture>
- <texture>Terrain/mixedcrop3.rgb</texture>
- <xsize>2000</xsize>
- <ysize>2000</ysize>
- <light-coverage>2000000.0</light-coverage>
- <solid>1</solid>
- <friction-factor>0.9</friction-factor>
- <rolling-friction>0.1</rolling-friction>
- <bumpiness>0.7</bumpiness>
- <load-resistance>1e30</load-resistance>
- <object-group>
-  <range-m>5000</range-m>
-  <object>
-   <path>Models/Buildings/silo.ac</path>
-   <coverage-m2>5000000</coverage-m2>
-   <heading-type>random</heading-type>
-  </object>
-  <object>
-   <path>Models/Buildings/red-barn.ac</path>
-   <path>Models/Buildings/horse-stable.ac</path>
-   <path>Models/Buildings/cow-stable.ac</path>
-   <path>Models/Buildings/farmhouse1.ac</path>
-   <path>Models/Buildings/farmhouse2.ac</path>
-   <path>Models/Buildings/farmhouse3.ac</path>
-   <coverage-m2>750000</coverage-m2>
-   <heading-type>random</heading-type>
-  </object>
- </object-group>
- <object-group>
-  <range-m>1000</range-m>
-  <object>
-   <path>Models/Fauna/cow.ac</path>
-   <coverage-m2>100000</coverage-m2>
-   <heading-type>random</heading-type>
-  </object>
- </object-group>
- <object-group>
-  <range-m alias="/params/forest/tree-range-m"/>
-  <object>
-   <path>Models/Trees/deciduous-tree.ac</path>
-   <path>Models/Trees/deciduous-tree2.ac</path>
-   <path>Models/Trees/deciduous-tree3.ac</path>
-   <path>Models/Trees/coniferous-tree.ac</path>
-   <path>Models/Trees/coniferous-tree2.ac</path>
-   <path>Models/Trees/deciduous-tree3.ac</path>
-   <coverage-m2>500000</coverage-m2>
-   <heading-type>billboard</heading-type>
-  </object>
- </object-group>
-</material>
-
-<material>
- <name>IrrCropPastureCover</name>
- <texture>Terrain/irrcrop1.rgb</texture>
- <texture>Terrain/irrcrop2.rgb</texture>
- <texture>Terrain/irrcrop3.rgb</texture>
- <xsize>2000</xsize>
- <ysize>2000</ysize>
- <light-coverage>2000000.0</light-coverage>
- <solid>1</solid>
- <friction-factor>0.9</friction-factor>
- <rolling-friction>0.3</rolling-friction>
- <bumpiness>0.6</bumpiness>
- <load-resistance>1e30</load-resistance>
- <object-group>
-  <range-m>5000</range-m>
-  <object>
-   <path>Models/Buildings/silo.ac</path>
-   <coverage-m2>5000000</coverage-m2>
-   <heading-type>random</heading-type>
-  </object>
-  <object>
-   <path>Models/Buildings/red-barn.ac</path>
-   <path>Models/Buildings/horse-stable.ac</path>
-   <path>Models/Buildings/cow-stable.ac</path>
-   <path>Models/Buildings/farmhouse1.ac</path>
-   <path>Models/Buildings/farmhouse2.ac</path>
-   <path>Models/Buildings/farmhouse3.ac</path>
-   <coverage-m2>750000</coverage-m2>
-   <heading-type>random</heading-type>
-  </object>
- </object-group>
- <object-group>
-  <range-m>1000</range-m>
-  <object>
-   <path>Models/Fauna/cow.ac</path>
-   <coverage-m2>100000</coverage-m2>
-   <heading-type>random</heading-type>
-  </object>
- </object-group>
- <object-group>
-  <range-m alias="/params/forest/tree-range-m"/>
-  <object>
-   <path>Models/Trees/deciduous-tree.ac</path>
-   <path>Models/Trees/deciduous-tree2.ac</path>
-   <path>Models/Trees/deciduous-tree3.ac</path>
-   <path>Models/Trees/coniferous-tree.ac</path>
-   <path>Models/Trees/coniferous-tree2.ac</path>
-   <path>Models/Trees/deciduous-tree3.ac</path>
-   <coverage-m2>500000</coverage-m2>
-   <heading-type>billboard</heading-type>
-  </object>
- </object-group>
-</material>
-
-<material>
- <name>DryCropPastureCover</name>
- <texture>Terrain/drycrop1.rgb</texture>
- <texture>Terrain/drycrop2.rgb</texture>
- <texture>Terrain/drycrop3.rgb</texture>
- <texture>Terrain/drycrop4.rgb</texture>
- <xsize>2000</xsize>
- <ysize>2000</ysize>
- <solid>1</solid>
- <friction-factor>0.9</friction-factor>
- <rolling-friction>0.1</rolling-friction>
- <bumpiness>0.6</bumpiness>
- <load-resistance>1e30</load-resistance>
- <light-coverage>2000000.0</light-coverage>
- <object-group>
-  <range-m>5000</range-m>
-  <object>
-   <path>Models/Buildings/silo.ac</path>
-   <coverage-m2>5000000</coverage-m2>
-   <heading-type>random</heading-type>
-  </object>
-  <object>
-   <path>Models/Buildings/red-barn.ac</path>
-   <path>Models/Buildings/horse-stable.ac</path>
-   <path>Models/Buildings/cow-stable.ac</path>
-   <path>Models/Buildings/farmhouse1.ac</path>
-   <path>Models/Buildings/farmhouse2.ac</path>
-   <path>Models/Buildings/farmhouse3.ac</path>
-   <coverage-m2>750000</coverage-m2>
-   <heading-type>random</heading-type>
-  </object>
- </object-group>
- <object-group>
-  <range-m>1000</range-m>
-  <object>
-   <path>Models/Fauna/cow.ac</path>
-   <coverage-m2>100000</coverage-m2>
-   <heading-type>random</heading-type>
-  </object>
- </object-group>
- <object-group>
-  <range-m alias="/params/forest/tree-range-m"/>
-  <object>
-   <path>Models/Trees/deciduous-tree.ac</path>
-   <path>Models/Trees/deciduous-tree2.ac</path>
-   <path>Models/Trees/deciduous-tree3.ac</path>
-   <path>Models/Trees/coniferous-tree.ac</path>
-   <path>Models/Trees/coniferous-tree2.ac</path>
-   <path>Models/Trees/deciduous-tree3.ac</path>
-   <coverage-m2>500000</coverage-m2>
-   <heading-type>billboard</heading-type>
-  </object>
- </object-group>
-</material>
-
-<material>
- <name>CropGrassCover</name>
- <texture>Terrain/cropgrass1.rgb</texture>
- <texture>Terrain/cropgrass2.rgb</texture>
- <texture>Terrain/cropgrass3.rgb</texture>
- <xsize>2000</xsize>
- <ysize>2000</ysize>
- <light-coverage>2000000.0</light-coverage>
- <diffuse>
-  <r>0.93</r>
-  <g>0.95</g>
-  <b>0.93</b>
-  <a>1.0</a>
- </diffuse>
- <specular>
-  <r>0.1</r>
-  <g>0.12</g>
-  <b>0.1</b>
-  <a>1.0</a>
- </specular>
- <shininess>1.2</shininess>
- <solid>1</solid>
- <friction-factor>0.7</friction-factor>
- <rolling-friction>0.1</rolling-friction>
- <bumpiness>0.3</bumpiness>
- <load-resistance>1e30</load-resistance>
- <object-group>
-  <range-m alias="/params/forest/tree-range-m"/>
-  <object>
-   <path>Models/Trees/deciduous-tree.ac</path>
-   <path>Models/Trees/deciduous-tree2.ac</path>
-   <path>Models/Trees/deciduous-tree3.ac</path>
-   <path>Models/Trees/coniferous-tree.ac</path>
-   <path>Models/Trees/coniferous-tree2.ac</path>
-   <coverage-m2>500000</coverage-m2>
-   <heading-type>billboard</heading-type>
-  </object>
- </object-group>
-</material>
-
-<material>
- <name>CropWoodCover</name>
- <texture>Terrain/cropwood.rgb</texture>
- <xsize>2000</xsize>
- <ysize>2000</ysize>
- <light-coverage>2000000.0</light-coverage>
- <solid>1</solid>
- <friction-factor>0.4</friction-factor>
- <rolling-friction>0.6</rolling-friction>
- <bumpiness>0.7</bumpiness>
- <load-resistance>10</load-resistance>
- <object-group>
-  <range-m alias="/params/forest/tree-range-m"/>
-  <object>
-   <path>Models/Trees/deciduous-tree.ac</path>
-   <path>Models/Trees/deciduous-tree2.ac</path>
-   <path>Models/Trees/deciduous-tree3.ac</path>
-   <path>Models/Trees/coniferous-tree.ac</path>
-   <path>Models/Trees/coniferous-tree2.ac</path>
-   <path>Models/Trees/deciduous-tree3.ac</path>
-   <coverage-m2>200000</coverage-m2>
-   <heading-type>billboard</heading-type>
-  </object>
- </object-group>
 </material>
 
 <material>

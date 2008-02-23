@@ -28,6 +28,8 @@ var selectAllEngines = func {
 }
 
 var stepMagnetos = func(change) {
+    if (!change)
+        return;
     foreach(var e; engines) {
         if(e.selected.getValue()) {
             var mag = e.controls.getNode("magnetos", 1);
@@ -54,8 +56,8 @@ var throttleMouse = func {
     }
 }
 
-# Joystick axis handlers (uses cmdarg).  Shouldn't be called from
-# other contexts.  A non-null argument inverts the direction of the axis.
+# Joystick axis handlers (use cmdarg).  Shouldn't be called from
+# other contexts.  A non-null argument reverses the axis direction.
 var axisHandler = func(pre, post) {
     func(invert = 0) {
         var val = cmdarg().getNode("setting").getValue();

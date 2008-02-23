@@ -1044,6 +1044,12 @@ top down before the key bindings are parsed.
    <command>nasal</command>
    <script>controls.stepMagnetos(-1)</script>
   </binding>
+  <mod-up>
+   <binding>
+    <command>nasal</command>
+    <script>controls.stepMagnetos(0)</script>
+   </binding>
+  </mod-up>
  </key>
 
  <key n="125">
@@ -1053,6 +1059,12 @@ top down before the key bindings are parsed.
    <command>nasal</command>
    <script>controls.stepMagnetos(1)</script>
   </binding>
+  <mod-up>
+   <binding>
+    <command>nasal</command>
+    <script>controls.stepMagnetos(0)</script>
+   </binding>
+  </mod-up>
  </key>
 
  <key n="126">

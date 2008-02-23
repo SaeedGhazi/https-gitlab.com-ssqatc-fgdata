@@ -626,9 +626,11 @@ var livery = {
 	},
 };
 
+
+
 # formation
 # =============================================================================
-# A modification of  the Livery Class. This Class maintains formation 
+# A modification of the livery class. This class maintains formation
 # XML files (see Blackburn Buccaneer for an example). Files are regular
 # PropertyList XML files whose properties are copied to the
 # main tree (whereby the node types are ignored).
@@ -637,21 +639,20 @@ var livery = {
 #	formation.init(<formation-dir> [, <name-path> [, <sort-path>]]);
 #
 #	<formation-dir> ... directory with livery XML files, relative to $FG_ROOT
-#	<name-path>  ... property path to the livery name in the livery files
-#	                 and the property tree (default: /sim/model/formation/name)
-#	<sort-path>  ... property path to the sort criterion (default: same as
-#	                 <name-path> -- that is: alphabetic sorting)
+#	<name-path>     ... property path to the livery name in the livery files
+#	                    and the property tree (default: /sim/model/formation/name)
+#	<sort-path>     ... property path to the sort criterion (default: same as
+#	                    <name-path> -- that is: alphabetic sorting)
 #
 # EXAMPLE:
 #	aircraft.formation.init("Aircraft/Buccaneer/Formations",
-#	                     "sim/model/formation/variant",
-#	                     "sim/model/formation/index");  # optional
+#	                        "sim/model/formation/variant",
+#	                        "sim/model/formation/index");  # optional
 #
 #	aircraft.formation.dialog.toggle();
 #	aircraft.formation.select("take off");
 #	aircraft.formation.next();
 #
-
 var formation = {
 	init : func(formation_dir, name_path = "sim/model/formation/name", sort_path = nil) {
 		me.dir = formation_dir;
@@ -706,6 +707,8 @@ var formation = {
 		me.set(me.current - 1);
 	},
 };
+
+
 
 # steering
 # =============================================================================

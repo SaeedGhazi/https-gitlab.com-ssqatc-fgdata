@@ -16,6 +16,7 @@ $Id$
 
 <PropertyList>
 
+ <name>Saitek Pro Flight Rudder Pedals</name>
  <name>Saitek Saitek Pro Flight Rudder Pedals</name>
 
  <axis n="0">
@@ -39,6 +40,11 @@ $Id$
  </axis>
 
  <axis n="2">
+  <number>
+   <windows>3</windows>
+   <mac>3</mac>
+   <linux>2</linux>
+  </number>
   <desc>Rudder</desc>
   <binding>
    <command>property-scale</command>

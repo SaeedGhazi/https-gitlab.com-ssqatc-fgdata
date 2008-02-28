@@ -42,7 +42,7 @@ $Id$
  <axis n="2">
   <number>
    <windows>3</windows>
-   <mac>3</mac>
+   <mac>2</mac>
    <linux>2</linux>
   </number>
   <desc>Rudder</desc>

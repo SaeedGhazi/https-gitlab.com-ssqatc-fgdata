@@ -43,7 +43,7 @@ $Id$
   <number>
    <windows>3</windows>
    <mac>2</mac>
-   <linux>2</linux>
+   <unix>2</unix>
   </number>
   <desc>Rudder</desc>
   <binding>

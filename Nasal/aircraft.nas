@@ -598,6 +598,7 @@ var livery = {
 		me.rescan();
 		aircraft.data.add(name_path);
 		me.dialog = gui.Dialog.new("livery-select");
+		me.current = 0;
 	},
 	rescan : func {
 		me.data = [];

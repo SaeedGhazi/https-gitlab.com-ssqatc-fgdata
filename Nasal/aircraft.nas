@@ -571,6 +571,23 @@ var timer = {
 #	aircraft.livery.select("OEBH");
 #	aircraft.livery.next();
 #
+#
+#
+# For updating liveries in multiplayer aircraft put something like the following
+# in the XML animation file, whereby the relative path points to the livery directory,
+# and the optional number is the update interval in seconds (default: 10).
+#
+#	<nasal>
+#		<load>
+#			var livery_update = aircraft.livery.update("Aircraft/R22/Models/Liveries", 10);
+#		</load>
+#
+#		<unload>
+#			livery_update.stop();
+#		</unload>
+#	</nasal>
+#
+#
 var livery = {
 	init : func(livery_dir, name_path = "sim/model/livery/name", sort_path = nil) {
 		me.dir = livery_dir;
@@ -596,7 +613,8 @@ var livery = {
 			var index = n.getNode(me.sort_path);
 			if (name == nil or index == nil)
 				continue;
-			append(me.data, [name.getValue(), index.getValue(), n.getValues()]);
+			append(me.data, [name.getValue(), index.getValue(), n.getValues(),
+					substr(file, 0, size(file) - 4)]);
 		}
 		me.data = sort(me.data, func(a, b) {
 			num(a[1]) == nil or num(b[1]) == nil ? cmp(a[1], b[1]) : a[1] - b[1];
@@ -610,6 +628,7 @@ var livery = {
 		if (i >= size(me.data))
 			i = 0;
 		props.globals.setValues(me.data[i][2]);
+		setprop("sim/model/livery/file", me.data[i][3]);
 		me.current = i;
 	},
 	# select by name
@@ -623,6 +642,34 @@ var livery = {
 	},
 	previous : func {
 		me.set(me.current - 1);
+	},
+
+	# methods for embedding in animation XML files for livery update via multiplayer
+	update : func(liveriesdir, interval = 10) {
+		var m = { parents : [livery] };
+		var root = cmdarg();
+		m.mp_root = root.getPath();
+		m.mp_fileN = root.getNode("sim/model/livery/file", 1);
+		m.mp_dir = getprop("/sim/fg-root") ~ "/" ~ liveriesdir ~ "/";
+		m.mp_interval = interval;
+		m.mp_last = "";
+		m.mp_running = 1;
+		if (root.getName() == "multiplayer")
+			m._loop_();
+		return m;
+	},
+	_loop_ : func {
+		me.mp_running or return;
+		var file = me.mp_fileN.getValue();
+		if (file != nil and file != me.mp_last) {
+			fgcommand("loadxml", props.Node.new({ filename: me.mp_dir ~ file ~ ".xml",
+					targetnode: me.mp_root }));
+			me.mp_last = file;
+		}
+		settimer(func { me._loop_() }, me.mp_interval);
+	},
+	stop : func {
+		me.mp_running = 0;
 	},
 };
 

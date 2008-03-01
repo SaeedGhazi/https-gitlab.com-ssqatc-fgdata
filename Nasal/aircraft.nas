@@ -581,7 +581,6 @@ var livery = {
 		me.rescan();
 		aircraft.data.add(name_path);
 		me.dialog = gui.Dialog.new("livery-select");
-		me.current = 0;
 	},
 	rescan : func {
 		me.data = [];
@@ -611,9 +610,9 @@ var livery = {
 			i = size(me.data) - 1;
 		if (i >= size(me.data))
 			i = 0;
+		me.current = i;
 		props.globals.setValues(me.data[i][2]);
 		setprop("sim/model/livery/file", me.data[i][3]);
-		me.current = i;
 	},
 	# select by name
 	select : func(name) {

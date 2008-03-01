@@ -571,23 +571,6 @@ var timer = {
 #	aircraft.livery.select("OEBH");
 #	aircraft.livery.next();
 #
-#
-#
-# For updating liveries in multiplayer aircraft put something like the following
-# in the XML animation file, whereby the relative path points to the livery directory,
-# and the optional number is the update interval in seconds (default: 10).
-#
-#	<nasal>
-#		<load>
-#			var livery_update = aircraft.livery.update("Aircraft/R22/Models/Liveries", 10);
-#		</load>
-#
-#		<unload>
-#			livery_update.stop();
-#		</unload>
-#	</nasal>
-#
-#
 var livery = {
 	init : func(livery_dir, name_path = "sim/model/livery/name", sort_path = nil) {
 		me.dir = livery_dir;
@@ -644,33 +627,68 @@ var livery = {
 	previous : func {
 		me.set(me.current - 1);
 	},
+};
 
-	# methods for embedding in animation XML files for livery update via multiplayer
-	update : func(liveriesdir, interval = 10) {
-		var m = { parents : [livery] };
+
+
+# livery_update
+# =============================================================================
+# Class for maintaining liveries in MP aircraft. It is used in Nasal code that's
+# embedded in aircraft animation XML files, and checks in intervals whether the
+# parent aircraft has changed livery, in which case it changes the livery
+# in the remote aircraft accordingly.
+#
+# SYNOPSIS:
+#	livery_update(<livery-dir> [, <interval:10> [, <func>]]);
+#
+#	<livery-dir> ... directory with livery files, relative to $FG_ROOT
+#	<interval>   ... checking interval in seconds (default: 10)
+#	<func>       ... callback function that's called with the ./sim/model/livery/file
+#	                 contents as argument whenever the livery has changed. This can
+#	                 be used for post-processing.
+#
+# EXAMPLE:
+#	<nasal>
+#		<load>
+#			var livery_update = aircraft.livery_update.new(
+#					"Aircraft/R22/Models/Liveries", 30,
+#					func { print("R22 livery update") });
+#		</load>
+#
+#		<unload>
+#			livery_update.stop();
+#		</unload>
+#	</nasal>
+#
+var livery_update = {
+	new : func(liveriesdir, interval = 10, callback = nil) {
+		var m = { parents : [livery_update] };
 		var root = cmdarg();
-		m.mp_root = root.getPath();
-		m.mp_fileN = root.getNode("sim/model/livery/file", 1);
-		m.mp_dir = getprop("/sim/fg-root") ~ "/" ~ liveriesdir ~ "/";
-		m.mp_interval = interval;
-		m.mp_last = "";
-		m.mp_running = 1;
+		m.root = root.getPath();
+		m.fileN = root.getNode("sim/model/livery/file", 1);
+		m.dir = getprop("/sim/fg-root") ~ "/" ~ liveriesdir ~ "/";
+		m.interval = interval;
+		m.last = "";
+		m.running = 1;
+		m.callback = callback;
 		if (root.getName() == "multiplayer")
 			m._loop_();
 		return m;
 	},
-	_loop_ : func {
-		me.mp_running or return;
-		var file = me.mp_fileN.getValue();
-		if (file != nil and file != me.mp_last) {
-			fgcommand("loadxml", props.Node.new({ filename: me.mp_dir ~ file ~ ".xml",
-					targetnode: me.mp_root }));
-			me.mp_last = file;
-		}
-		settimer(func { me._loop_() }, me.mp_interval);
-	},
 	stop : func {
-		me.mp_running = 0;
+		me.running = 0;
+	},
+	_loop_ : func {
+		me.running or return;
+		var file = me.fileN.getValue();
+		if (file != nil and file != me.last) {
+			fgcommand("loadxml", props.Node.new({ filename: me.dir ~ file ~ ".xml",
+					targetnode: me.root }));
+			me.last = file;
+			if (me.callback != nil)
+				me.callback(file);
+		}
+		settimer(func { me._loop_() }, me.interval);
 	},
 };
 

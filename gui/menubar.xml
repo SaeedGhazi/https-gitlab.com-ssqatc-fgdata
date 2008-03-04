@@ -326,6 +326,14 @@
    </binding>
   </item>
 
+  <item>
+   <label>Rain/Snow Settings</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>rainsnow</dialog-name>
+   </binding>
+  </item>
+
  </menu>
 
  <menu>

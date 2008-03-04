@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+  <name>rainsnow</name>
+  <modal>false</modal>
+  <layout>vbox</layout>
+
+  <text>
+    <x>10</x>
+    <y>540</y>
+    <label>Rain and Snow configuration</label>
+  </text>
+
+  <text>
+    <x>10</x>
+    <y>480</y>
+    <label>Rain</label>
+  </text>
+
+  <slider>
+    <x>330</x>
+    <y>0</y>
+    <width>75</width>
+    <height>25</height>
+    <property>/environment/metar/rain-norm</property>
+    <binding>
+      <command>dialog-apply</command>
+    </binding>
+  </slider>
+
+  <text>
+    <x>10</x>
+    <y>480</y>
+    <label>Snow</label>
+  </text>
+
+  <slider>
+    <x>330</x>
+    <y>0</y>
+    <width>75</width>
+    <height>25</height>
+    <property>/environment/metar/snow-norm</property>
+    <binding>
+      <command>dialog-apply</command>
+    </binding>
+  </slider>
+
+  <button>
+    <legend>Close</legend>
+    <default>true</default>
+    <key>Esc</key>
+    <binding>
+      <command>dialog-apply</command>
+    </binding>
+    <binding>
+      <command>dialog-close</command>
+    </binding>
+  </button>
+
+</PropertyList>

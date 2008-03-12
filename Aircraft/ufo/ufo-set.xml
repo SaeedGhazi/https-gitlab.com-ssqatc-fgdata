@@ -72,6 +72,14 @@
 				<desc>decrease/increase maximum speed</desc>
 			</key>
 			<key>
+				<name>Home</name>
+				<desc>Hover up</desc>
+			</key>
+			<key>
+				<name>End</name>
+				<desc>Hover down</desc>
+			</key>
+			<key>
 				<name>mouse click</name>
 				<desc>add model to scenery</desc>
 			</key>
@@ -393,6 +401,66 @@
 						</script>
 					</binding>
 				</mod-shift>
+			</key>
+
+			<key n="362">
+				<name>Home</name>
+				<desc>Hover Up</desc>
+				<binding>
+					<command>nasal</command>
+					<script>ufo.up(1)</script>
+				</binding>
+				<mod-up>
+					<binding>
+						<command>nasal</command>
+						<script>ufo.up(0)</script>
+					</binding>
+				</mod-up>
+			</key>
+
+			<key n="363">
+				<name>End</name>
+				<desc>Hover Down</desc>
+				<binding>
+					<command>nasal</command>
+					<script>ufo.up(-1)</script>
+				</binding>
+				<mod-up>
+					<binding>
+						<command>nasal</command>
+						<script>ufo.up(0)</script>
+					</binding>
+				</mod-up>
+			</key>
+
+			<key n="311">
+				<name>KP7</name>
+				<desc>Hover Up</desc>
+				<binding>
+					<command>nasal</command>
+					<script>ufo.up(1)</script>
+				</binding>
+				<mod-up>
+					<binding>
+						<command>nasal</command>
+						<script>ufo.up(0)</script>
+					</binding>
+				</mod-up>
+			</key>
+
+			<key n="305">
+				<name>KP1</name>
+				<desc>Hover Down</desc>
+				<binding>
+					<command>nasal</command>
+					<script>ufo.up(-1)</script>
+				</binding>
+				<mod-up>
+					<binding>
+						<command>nasal</command>
+						<script>ufo.up(0)</script>
+					</binding>
+				</mod-up>
 			</key>
 		</keyboard>
 	</input>

@@ -566,7 +566,7 @@ var print_ufo_data = func {
 
 	var hdg = normdeg(heading + getprop("/sim/current-view/goal-pitch-offset-deg"));
 	var fgfs = sprintf("$ fgfs --aircraft=ufo --lat=%.6f --lon=%.6f --altitude=%.2f --heading=%.1f",
-			lat, lon, agl_ft, hdg);
+			lat, lon, alt_ft, hdg);
 	print(fgfs);
 }
 
@@ -588,6 +588,17 @@ var print_model_data = func(prop) {
 
 
 # interface functions -----------------------------------------------------------------------------
+
+
+var vert_factor = 1;
+var up = func(dir) {
+	if (!dir)
+		return vert_factor = 1;
+	var alt = "position/altitude-ft";
+	setprop(alt, getprop(alt) + 0.15 * vert_factor * dir);
+	vert_factor += 0.25;
+}
+
 
 var print_data = func {
 	var rule = "\n------------------------------------------------------------------\n";

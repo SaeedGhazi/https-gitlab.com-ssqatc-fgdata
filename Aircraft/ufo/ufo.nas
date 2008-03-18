@@ -367,9 +367,17 @@ var ModelMgr = {
 		}
 		me.active.selected = 1;
 		me.marker.move(me.active.pos);
+		var selected = [];
 		foreach (var m; me.models) {
 			m.flash(m.selected);
+			if (m.selected)
+				append(selected, m);
 		}
+		if (size(selected) == 2) {
+			var dist = selected[0].direct_distance_to(selected[1].pos);
+			screen.log.write(sprintf("%.3f m", dist));
+		}
+
 		me.display_status(me.modelpath = me.active.path);
 	},
 	deselect_all : func {

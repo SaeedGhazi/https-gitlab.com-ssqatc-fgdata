@@ -212,7 +212,8 @@ var adjEngControl = func {
 # arg[1] is the auto-throttle target speed increment
 var incThrottle = func {
     var auto = props.globals.getNode("/autopilot/locks/speed", 1);
-    if (!auto.getValue()) {
+    var passive = props.globals.getNode("/autopilot/locks/passive-mode", 1);
+    if (!auto.getValue() or passive.getValue()) {
         foreach(var e; engines) {
             if(e.selected.getValue()) {
                 var node = e.controls.getNode("throttle", 1);
@@ -237,7 +238,8 @@ var incThrottle = func {
 # arg[1] is the autopilot target heading increment
 var incAileron = func {
     var auto = props.globals.getNode("/autopilot/locks/heading", 1);
-    if (!auto.getValue()) {
+    var passive = props.globals.getNode("/autopilot/locks/passive-mode", 1);
+    if (!auto.getValue() or passive.getValue()){
         var aileron = props.globals.getNode("/controls/flight/aileron");
         if (aileron.getValue() == nil) {
             aileron.setValue(0.0);
@@ -283,7 +285,8 @@ var incAileron = func {
 # arg[1] is the autopilot target altitude increment
 var incElevator = func {
     var auto = props.globals.getNode("/autopilot/locks/altitude", 1);
-    if (!auto.getValue() or auto.getValue() == 0) {
+    var passive = props.globals.getNode("/autopilot/locks/passive-mode", 1);
+    if (!auto.getValue() or auto.getValue() == 0  or passive.getValue()) {
         var elevator = props.globals.getNode("/controls/flight/elevator");
         if (elevator.getValue() == nil) {
             elevator.setValue(0.0);

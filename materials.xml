@@ -2259,11 +2259,19 @@ Shared parameters for various materials.
  <ysize>400</ysize>
  <object-group>
   <range-m>40000</range-m>
-  <object>
-   <path>Models/Geometry/saratoga.ac</path>
-   <coverage-m2>500000000</coverage-m2>
-   <heading-type>random</heading-type>
-  </object>
+	 <object-group>
+		 <range-m>40000</range-m>
+		 <object>
+			 <path>Models/Geometry/container_carrier.ac</path>
+			 <coverage-m2>500000000</coverage-m2>
+			 <heading-type>random</heading-type>
+		 </object>
+		 <object>
+			 <path>Models/Geometry/ContainerShip.xml</path>
+			 <coverage-m2>500000000</coverage-m2>
+			 <heading-type>random</heading-type>
+		 </object>
+	 </object-group>
  </object-group>
  <ambient>
   <r>0.0</r>

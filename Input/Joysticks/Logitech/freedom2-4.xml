@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-  <!--
+<!--
 ************************************************************************
 * Bindings for Logitech Freeedom2-4 (USB) joystick based on
 * Bindings for Logitech WingMan Extreme Digital 3D (USB) joystick.
@@ -24,278 +24,279 @@
 ************************************************************************
 
 -->
-  <PropertyList>
-    <name>Logitech Freedom 2.4</name>
-    <name>Logitech Logitech Freedom 2.4</name>
+<PropertyList>
+	<name>Logitech Freedom 2.4</name>
+	<name>Logitech Logitech Freedom 2.4</name>
+	<name>Logitech Freedom 2.4 USB</name>
 
-    <axis>
-      <desc>Aileron</desc>
-      <number>
-        <unix>0</unix>
-        <windows>0</windows>
-      </number>
-      <binding>
-        <command>property-scale</command>
-        <property>/controls/flight/aileron</property>
-        <squared type="bool">true</squared>
-      </binding>
-    </axis>
+	<axis>
+		<desc>Aileron</desc>
+		<number>
+			<unix>0</unix>
+			<windows>0</windows>
+		</number>
+		<binding>
+			<command>property-scale</command>
+			<property>/controls/flight/aileron</property>
+			<squared type="bool">true</squared>
+		</binding>
+	</axis>
 
-    <axis>
-      <desc>Elevator</desc>
-      <number>
-        <unix>1</unix>
-        <windows>1</windows>
-      </number>
-      <binding>
-        <command>property-scale</command>
-        <property>/controls/flight/elevator</property>
-        <factor type="double">-1.0</factor>
-        <squared type="bool">true</squared>
-      </binding>
-    </axis>
+	<axis>
+		<desc>Elevator</desc>
+		<number>
+			<unix>1</unix>
+			<windows>1</windows>
+		</number>
+		<binding>
+			<command>property-scale</command>
+			<property>/controls/flight/elevator</property>
+			<factor type="double">-1.0</factor>
+			<squared type="bool">true</squared>
+		</binding>
+	</axis>
 
-    <axis>
-      <desc>Throttle</desc>
-      <number>
-        <unix>3</unix>
-        <windows>2</windows>
-      </number>
-      <binding>
-        <command>nasal</command>
-        <script>controls.throttleAxis()</script>
-      </binding>
-    </axis>
+	<axis>
+		<desc>Throttle</desc>
+		<number>
+			<unix>3</unix>
+			<windows>2</windows>
+		</number>
+		<binding>
+			<command>nasal</command>
+			<script>controls.throttleAxis()</script>
+		</binding>
+	</axis>
 
-    <axis>
-      <desc>Rudder</desc>
-      <number>
-        <unix>2</unix>
-        <windows>3</windows>
-      </number>
-      <binding>
-        <command>property-scale</command>
-        <property>/controls/flight/rudder</property>
-        <factor type="double">1.0</factor>
-      </binding>
-    </axis>
+	<axis>
+		<desc>Rudder</desc>
+		<number>
+			<unix>2</unix>
+			<windows>3</windows>
+		</number>
+		<binding>
+			<command>property-scale</command>
+			<property>/controls/flight/rudder</property>
+			<factor type="double">1.0</factor>
+		</binding>
+	</axis>
 
-    <axis>
-      <desc>View Direction</desc>
-      <number>
-        <unix>4</unix>
-        <windows>6</windows>
-      </number>
-      <low>
-        <repeatable>true</repeatable>
-        <binding>
-          <command>property-adjust</command>
-          <property>/sim/current-view/goal-heading-offset-deg</property>
-          <step type="double">5.0</step>
-        </binding>
-      </low>
-      <high>
-        <repeatable>true</repeatable>
-        <binding>
-          <command>property-adjust</command>
-          <property>/sim/current-view/goal-heading-offset-deg</property>
-          <step type="double">-5.0</step>
-        </binding>
-      </high>
-    </axis>
+	<axis>
+		<desc>View Direction</desc>
+		<number>
+			<unix>4</unix>
+			<windows>6</windows>
+		</number>
+		<low>
+			<repeatable>true</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>/sim/current-view/goal-heading-offset-deg</property>
+				<step type="double">5.0</step>
+			</binding>
+		</low>
+		<high>
+			<repeatable>true</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>/sim/current-view/goal-heading-offset-deg</property>
+				<step type="double">-5.0</step>
+			</binding>
+		</high>
+	</axis>
 
-    <axis>
-      <desc>View Elevation</desc>
-      <number>
-        <unix>5</unix>
-        <windows>7</windows>
-      </number>
-      <low>
-        <repeatable>true</repeatable>
-        <binding>
-          <command>property-adjust</command>
-          <property>/sim/current-view/goal-pitch-offset-deg</property>
-          <step type="double">5.0</step>
-        </binding>
-      </low>
-      <high>
-        <repeatable>true</repeatable>
-        <binding>
-          <command>property-adjust</command>
-          <property>/sim/current-view/goal-pitch-offset-deg</property>
-          <step type="double">-5.0</step>
-        </binding>
-      </high>
-    </axis>
+	<axis>
+		<desc>View Elevation</desc>
+		<number>
+			<unix>5</unix>
+			<windows>7</windows>
+		</number>
+		<low>
+			<repeatable>true</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>/sim/current-view/goal-pitch-offset-deg</property>
+				<step type="double">5.0</step>
+			</binding>
+		</low>
+		<high>
+			<repeatable>true</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>/sim/current-view/goal-pitch-offset-deg</property>
+				<step type="double">-5.0</step>
+			</binding>
+		</high>
+	</axis>
 
-    <button>
-      <desc>Brakes</desc>
-      <number>
-        <unix>0</unix>
-        <windows>0</windows>
-      </number>
-      <binding>
-        <command>nasal</command>
-        <script>controls.applyBrakes(1)</script>
-      </binding>
-      <mod-up>
-        <binding>
-          <command>nasal</command>
-          <script>controls.applyBrakes(0)</script>
-        </binding>
-      </mod-up>
-    </button>
+	<button>
+		<desc>Brakes</desc>
+		<number>
+			<unix>0</unix>
+			<windows>0</windows>
+		</number>
+		<binding>
+			<command>nasal</command>
+			<script>controls.applyBrakes(1)</script>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>controls.applyBrakes(0)</script>
+			</binding>
+		</mod-up>
+	</button>
 
-    <button>
-      <desc>Trigger</desc>
-      <number>
-        <unix>1</unix>
-        <windows>1</windows>
-      </number>
-      <binding>
-        <command>property-assign</command>
-        <property>ai/submodels/trigger</property>
-        <value type="bool">1</value>
-      </binding>
-      <mod-up>
-        <binding>
-          <command>property-assign</command>
-          <property>ai/submodels/trigger</property>
-          <value type="bool">0</value>
-        </binding>
-      </mod-up>
-    </button>
+	<button>
+		<desc>Trigger</desc>
+		<number>
+			<unix>1</unix>
+			<windows>1</windows>
+		</number>
+		<binding>
+			<command>property-assign</command>
+			<property>ai/submodels/trigger</property>
+			<value type="bool">1</value>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>property-assign</command>
+				<property>ai/submodels/trigger</property>
+				<value type="bool">0</value>
+			</binding>
+		</mod-up>
+	</button>
 
-    <button>
-      <desc>Elevator trim up</desc>
-      <number>
-        <unix>2</unix>
-        <windows>2</windows>
-      </number>
-      <repeatable type="bool">true</repeatable>
-      <binding>
-        <command>nasal</command>
-        <script>controls.elevatorTrim(-1)</script>
-      </binding>
-    </button>
+	<button>
+		<desc>Elevator trim up</desc>
+		<number>
+			<unix>2</unix>
+			<windows>2</windows>
+		</number>
+		<repeatable type="bool">true</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>controls.elevatorTrim(-1)</script>
+		</binding>
+	</button>
 
-    <button>
-      <desc>Elevator trim down</desc>
-      <number>
-        <unix>4</unix>
-        <windows>4</windows>
-      </number>
-      <repeatable type="bool">true</repeatable>
-      <binding>
-        <command>nasal</command>
-        <script>controls.elevatorTrim(1)</script>
-      </binding>
-    </button>
+	<button>
+		<desc>Elevator trim down</desc>
+		<number>
+			<unix>4</unix>
+			<windows>4</windows>
+		</number>
+		<repeatable type="bool">true</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>controls.elevatorTrim(1)</script>
+		</binding>
+	</button>
 
-    <button>
-      <desc>Flaps down</desc>
-      <number>
-        <unix>3</unix>
-        <windows>3</windows>
-      </number>
-      <repeatable>false</repeatable>
-      <binding>
-        <command>nasal</command>
-        <script>controls.flapsDown(-1)</script>
-      </binding>
-      <mod-up>
-        <binding>
-          <command>nasal</command>
-          <script>controls.flapsDown(0)</script>
-        </binding>
-      </mod-up>
-    </button>
+	<button>
+		<desc>Flaps down</desc>
+		<number>
+			<unix>3</unix>
+			<windows>3</windows>
+		</number>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>controls.flapsDown(-1)</script>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>controls.flapsDown(0)</script>
+			</binding>
+		</mod-up>
+	</button>
 
-    <button>
-      <desc>Flaps up</desc>
-      <number>
-        <unix>5</unix>
-        <windows>5</windows>
-      </number>
-      <repeatable>false</repeatable>
-      <binding>
-        <command>nasal</command>
-        <script>controls.flapsDown(1)</script>
-      </binding>
-      <mod-up>
-        <binding>
-          <command>nasal</command>
-          <script>controls.flapsDown(0)</script>
-        </binding>
-      </mod-up>
-    </button>
+	<button>
+		<desc>Flaps up</desc>
+		<number>
+			<unix>5</unix>
+			<windows>5</windows>
+		</number>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>controls.flapsDown(1)</script>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>controls.flapsDown(0)</script>
+			</binding>
+		</mod-up>
+	</button>
 
-    <button>
-      <desc>Left brake</desc>
-      <number>
-        <unix>6</unix>
-        <windows>6</windows>
-      </number>
-      <binding>
-        <command>nasal</command>
-        <script>controls.applyBrakes(1, -1)</script>
-      </binding>
-      <mod-up>
-        <binding>
-          <command>nasal</command>
-          <script>controls.applyBrakes(0, -1)</script>
-        </binding>
-      </mod-up>
-    </button>
+	<button>
+		<desc>Left brake</desc>
+		<number>
+			<unix>6</unix>
+			<windows>6</windows>
+		</number>
+		<binding>
+			<command>nasal</command>
+			<script>controls.applyBrakes(1, -1)</script>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>controls.applyBrakes(0, -1)</script>
+			</binding>
+		</mod-up>
+	</button>
 
-    <button>
-      <desc>Right brake</desc>
-      <number>
-        <unix>7</unix>
-        <windows>7</windows>
-      </number>
-      <binding>
-        <command>nasal</command>
-        <script>controls.applyBrakes(1, 1)</script>
-      </binding>
-      <mod-up>
-        <binding>
-          <command>nasal</command>
-          <script>controls.applyBrakes(0, 1)</script>
-        </binding>
-      </mod-up>
-    </button>
+	<button>
+		<desc>Right brake</desc>
+		<number>
+			<unix>7</unix>
+			<windows>7</windows>
+		</number>
+		<binding>
+			<command>nasal</command>
+			<script>controls.applyBrakes(1, 1)</script>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>controls.applyBrakes(0, 1)</script>
+			</binding>
+		</mod-up>
+	</button>
 
-    <button>
-      <desc>Propeller Coarse</desc>
-      <number>
-        <unix>8</unix>
-        <windows>8</windows>
-      </number>
-      <repeatable>true</repeatable>
-      <binding>
-        <command>property-adjust</command>
-        <property>/controls/engines/engine/propeller-pitch</property>
-        <step type="double">0.1</step>
-        <min type="double">-1</min>
-        <max type="double">1</max>
-      </binding>
-    </button>
+	<button>
+		<desc>Propeller Coarse</desc>
+		<number>
+			<unix>8</unix>
+			<windows>8</windows>
+		</number>
+		<repeatable>true</repeatable>
+		<binding>
+			<command>property-adjust</command>
+			<property>/controls/engines/engine/propeller-pitch</property>
+			<step type="double">0.1</step>
+			<min type="double">-1</min>
+			<max type="double">1</max>
+		</binding>
+	</button>
 
-    <button>
-      <desc>Propeller Fine</desc>
-      <number>
-        <unix>9</unix>
-        <windows>9</windows>
-      </number>
-      <repeatable>true</repeatable>
-      <binding>
-        <command>property-adjust</command>
-        <property>/controls/engines/engine/propeller-pitch</property>
-        <step type="double">-0.1</step>
-        <min type="double">-1</min>
-        <max type="double">1</max>
-      </binding>
-    </button>
-    <!-- -->
-  </PropertyList>
+	<button>
+		<desc>Propeller Fine</desc>
+		<number>
+			<unix>9</unix>
+			<windows>9</windows>
+		</number>
+		<repeatable>true</repeatable>
+		<binding>
+			<command>property-adjust</command>
+			<property>/controls/engines/engine/propeller-pitch</property>
+			<step type="double">-0.1</step>
+			<min type="double">-1</min>
+			<max type="double">1</max>
+		</binding>
+	</button>
+	<!-- -->
+</PropertyList>

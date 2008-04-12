@@ -3,6 +3,9 @@
 ##
 ##  Nasal code for implementing view-specific functionality.
 
+var index = nil;    # current view index
+var views = nil;    # list of all view branches (/sim/view[n]) as props.Node
+var current = nil;  # current view branch (e.g. /sim/view[1]) as props.Node
 
 
 # Dynamically calculate limits so that it takes STEPS iterations to
@@ -54,7 +57,7 @@ var resetFOV = func {
 }
 
 var resetViewPos = func {
-    var v = views[getprop("/sim/current-view/view-number")].getNode("config");
+    var v = current.getNode("config");
     setprop("/sim/current-view/x-offset-m", v.getNode("x-offset-m", 1).getValue() or 0);
     setprop("/sim/current-view/y-offset-m", v.getNode("y-offset-m", 1).getValue() or 0);
     setprop("/sim/current-view/z-offset-m", v.getNode("z-offset-m", 1).getValue() or 0);
@@ -74,7 +77,7 @@ var resetViewDir = func {
 #
 var stepView = func(step, force = 0) {
     step = step > 0 ? 1 : -1;
-    var n = getprop("/sim/current-view/view-number");
+    var n = index;
     for (var i = 0; i < size(views); i += 1) {
         n += step;
         if (n < 0)
@@ -199,7 +202,7 @@ var manager = {
 	},
 	set_view : func(which = nil) {
 		if (which == nil)
-			which = getprop("/sim/current-view/view-number");
+			which = index;
 		elsif (num(which) == nil)
 			which = view.indexof(which);
 
@@ -300,7 +303,7 @@ var fly_by_view_handler = {
 		me.latN.setValue(lat);
 		me.lonN.setValue(lon);
 		me.altN.setValue(alt * geo.M2FT);
-		return 6.3;
+		return 9.3;
 	},
 	update : func {
 		return me.setpos();
@@ -448,7 +451,6 @@ var point = {
 
 
 
-var views = nil;
 var fovProp = nil;
 
 
@@ -456,6 +458,10 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	views = props.globals.getNode("/sim").getChildren("view");
 	fovProp = props.globals.getNode("/sim/current-view/field-of-view");
 	point.init();
+
+	setlistener("/sim/current-view/view-number", func(n) {
+		current = views[index = n.getValue()];
+	}, 1);
 });
 
 

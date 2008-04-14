@@ -282,6 +282,14 @@ Started September 2000 by David Megginson, david@megginson.com
       <right-direction-deg type="double">270</right-direction-deg>
       <front-right-direction-deg type="double">315</front-right-direction-deg>
       <dynamic-view type="bool">true</dynamic-view>
+      <limits>
+        <enabled type="bool">false</enabled>
+        <heading-min-deg type="double">-140</heading-min-deg>
+        <heading-max-deg type="double">140</heading-max-deg>
+        <x-offset-max-m type="double">0.15</x-offset-max-m>
+        <x-offset-heading-min-deg type="double">-65</x-offset-heading-min-deg>
+        <x-offset-heading-max-deg type="double">65</x-offset-heading-max-deg>
+      </limits>
     </config>
   </view>
 

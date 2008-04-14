@@ -192,7 +192,7 @@ var manager = {
 	},
 	register : func(which, handler = nil) {
 		if (num(which) == nil)
-			which = view.indexof(which);
+			which = indexof(which);
 		if (handler == nil)
 			handler = default_handler;
 		me.views[which]["handler"] = handler;
@@ -204,7 +204,7 @@ var manager = {
 		if (which == nil)
 			which = index;
 		elsif (num(which) == nil)
-			which = view.indexof(which);
+			which = indexof(which);
 
 		me.loopid += 1;
 		if (contains(me.current.handler, "stop"))
@@ -303,12 +303,75 @@ var fly_by_view_handler = {
 		me.latN.setValue(lat);
 		me.lonN.setValue(lon);
 		me.altN.setValue(alt * geo.M2FT);
-		return 9.3;
+		return 8.3;
 	},
 	update : func {
 		return me.setpos();
 	},
 };
+
+
+var pilot_view_limiter = {
+	init : func {
+		me.hdgN = props.globals.getNode("/sim/current-view/heading-offset-deg");
+		me.xoffsetN = props.globals.getNode("/sim/current-view/x-offset-m");
+		me.xoffset_lowpass = aircraft.lowpass.new(0.1);
+		me.old_offset = 0;
+	},
+	start : func {
+		var limits = current.getNode("config/limits", 1);
+		me.heading_min = limits.getNode("heading-min-deg", 1).getValue();
+		me.heading_max = limits.getNode("heading-max-deg", 1).getValue();
+		me.max_xoffset = limits.getNode("x-offset-max-m", 1).getValue() or 0;
+		me.threshold_min = limits.getNode("x-offset-heading-min-deg", 1).getValue() or 0;
+		me.threshold_max = limits.getNode("x-offset-heading-max-deg", 1).getValue() or 0;
+
+		if (me.heading_max == nil)
+			me.heading_max = 1000;
+		if (me.heading_min == nil)
+			me.heading_min = -1000;
+	},
+	update : func {
+		var hdg = normdeg(me.hdgN.getValue());
+
+		if (hdg > me.heading_max)
+			me.hdgN.setDoubleValue(hdg = me.heading_max);
+		elsif (hdg < me.heading_min)
+			me.hdgN.setDoubleValue(hdg = me.heading_min);
+
+		# translate view on X axis to look far right or far left
+		if (me.max_xoffset) {
+			var norm = 0;
+			if (hdg <= me.threshold_min)
+				norm = (hdg - me.threshold_min) / (me.heading_min - me.threshold_min);
+			elsif (hdg >= me.threshold_max)
+				norm = -(hdg - me.threshold_max) / (me.heading_max - me.threshold_max);
+
+			var new_offset = me.xoffset_lowpass.filter(norm * me.max_xoffset);
+			me.xoffsetN.setDoubleValue(me.xoffsetN.getValue() - me.old_offset + new_offset);
+			me.old_offset = new_offset;
+		}
+		return 0;
+	},
+};
+
+
+var panViewDir = func(step) {	# FIXME overrides panViewDir function from above; needs better integration
+	if (getprop("/sim/freeze/master"))
+		var prop = "/sim/current-view/heading-offset-deg";
+	else
+		var prop = "/sim/current-view/goal-heading-offset-deg";
+	var viewVal = getprop(prop);
+	var delta = step * VIEW_PAN_RATE * getprop("/sim/time/delta-realtime-sec");
+	var viewValSlew = normdeg(viewVal + delta);
+	var headingMax = current.getNode("config/limits/heading-max-deg", 1).getValue() or 1000;
+	var headingMin = current.getNode("config/limits/heading-min-deg", 1).getValue() or -1000;
+	if (viewValSlew > headingMax)
+		viewValSlew = headingMax;
+	elsif (viewValSlew < headingMin)
+		viewValSlew = headingMin;
+	setprop(prop, viewValSlew);
+}
 
 
 #------------------------------------------------------------------------------
@@ -485,6 +548,18 @@ _setlistener("/sim/signals/fdm-initialized", func {
 
 	manager.init();
 	manager.register("Fly-By View", fly_by_view_handler);
+
+	forindex (var i; views) {
+		var limits = views[i].getNode("config/limits/enabled");
+		if (limits != nil) {
+			func (index) {
+				setlistener(limits, func(n) {
+					manager.register(index, n.getValue() ? pilot_view_limiter : nil);
+					manager.set_view();
+				}, 1);
+			}(i);
+		}
+	}
 });
 
 

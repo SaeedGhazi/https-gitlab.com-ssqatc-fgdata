@@ -314,7 +314,7 @@ var fly_by_view_handler = {
 		me.latN.setValue(lat);
 		me.lonN.setValue(lon);
 		me.altN.setValue(alt * geo.M2FT);
-		return 8.3;
+		return 7.3;
 	},
 	update : func {
 		return me.setpos();
@@ -329,7 +329,7 @@ var pilot_view_limiter = {
 	init : func {
 		me.hdgN = props.globals.getNode("/sim/current-view/heading-offset-deg");
 		me.xoffsetN = props.globals.getNode("/sim/current-view/x-offset-m");
-		me.xoffset_lowpass = aircraft.lowpass.new(0.05);
+		me.xoffset_lowpass = aircraft.lowpass.new(0.1);
 		me.old_offset = 0;
 	},
 	start : func {
@@ -384,8 +384,8 @@ var panViewDir = func(step) {	# FIXME overrides panViewDir function from above; 
 	var viewVal = getprop(prop);
 	var delta = step * VIEW_PAN_RATE * getprop("/sim/time/delta-realtime-sec");
 	var viewValSlew = normdeg(viewVal + delta);
-	var headingMax = current.getNode("config/limits/heading-max-deg", 1).getValue() or 1000;
-	var headingMin = current.getNode("config/limits/heading-min-deg", 1).getValue() or -1000;
+	var headingMax = abs(current.getNode("config/limits/left/heading-max-deg", 1).getValue() or 1000);
+	var headingMin = -abs(current.getNode("config/limits/right/heading-max-deg", 1).getValue() or 1000);
 	if (viewValSlew > headingMax)
 		viewValSlew = headingMax;
 	elsif (viewValSlew < headingMin)

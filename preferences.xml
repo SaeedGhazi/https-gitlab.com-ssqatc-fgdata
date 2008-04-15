@@ -283,7 +283,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <front-right-direction-deg type="double">315</front-right-direction-deg>
       <dynamic-view type="bool">true</dynamic-view>
       <limits>
-        <enabled type="bool">false</enabled>
+        <enabled type="bool">true</enabled>
         <left>
           <heading-max-deg type="double">140</heading-max-deg>
           <x-offset-max-m type="double">0.15</x-offset-max-m>

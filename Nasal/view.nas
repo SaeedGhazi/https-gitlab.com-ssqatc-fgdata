@@ -323,42 +323,51 @@ var fly_by_view_handler = {
 
 
 var pilot_view_limiter = {
+	new : func {
+		return { parents: [pilot_view_limiter] };
+	},
 	init : func {
 		me.hdgN = props.globals.getNode("/sim/current-view/heading-offset-deg");
 		me.xoffsetN = props.globals.getNode("/sim/current-view/x-offset-m");
-		me.xoffset_lowpass = aircraft.lowpass.new(0.1);
+		me.xoffset_lowpass = aircraft.lowpass.new(0.05);
 		me.old_offset = 0;
 	},
 	start : func {
 		var limits = current.getNode("config/limits", 1);
-		me.heading_min = limits.getNode("heading-min-deg", 1).getValue();
-		me.heading_max = limits.getNode("heading-max-deg", 1).getValue();
-		me.max_xoffset = limits.getNode("x-offset-max-m", 1).getValue() or 0;
-		me.threshold_min = limits.getNode("x-offset-heading-min-deg", 1).getValue() or 0;
-		me.threshold_max = limits.getNode("x-offset-heading-max-deg", 1).getValue() or 0;
-
-		if (me.heading_max == nil)
-			me.heading_max = 1000;
-		if (me.heading_min == nil)
-			me.heading_min = -1000;
+		me.left = {
+			heading_max : abs(limits.getNode("left/heading-max-deg", 1).getValue() or 1000),
+			xoffset_max : abs(limits.getNode("left/x-offset-max-m", 1).getValue() or 0),
+			threshold : -abs(limits.getNode("left/x-offset-threshold-deg", 1).getValue() or 0),
+		};
+		me.right = {
+			heading_max : -abs(limits.getNode("right/heading-max-deg", 1).getValue() or 1000),
+			xoffset_max : -abs(limits.getNode("right/x-offset-max-m", 1).getValue() or 0),
+			threshold : abs(limits.getNode("right/x-offset-threshold-deg", 1).getValue() or 0),
+		};
+		me.left.range = me.left.threshold - me.left.heading_max;
+		me.right.range = me.right.threshold - me.right.heading_max;
+		me.last_hdg = normdeg(me.hdgN.getValue());
+		me.enable_xoffset = me.right.xoffset_max > 0.001 or me.left.xoffset_max > 0.001;
 	},
 	update : func {
 		var hdg = normdeg(me.hdgN.getValue());
-
-		if (hdg > me.heading_max)
-			me.hdgN.setDoubleValue(hdg = me.heading_max);
-		elsif (hdg < me.heading_min)
-			me.hdgN.setDoubleValue(hdg = me.heading_min);
+		if (abs(me.last_hdg - hdg) > 180)  # avoid wrap-around skips
+			me.hdgN.setDoubleValue(hdg = me.last_hdg);
+		elsif (hdg > me.left.heading_max)
+			me.hdgN.setDoubleValue(hdg = me.left.heading_max);
+		elsif (hdg < me.right.heading_max)
+			me.hdgN.setDoubleValue(hdg = me.right.heading_max);
+		me.last_hdg = hdg;
 
 		# translate view on X axis to look far right or far left
-		if (me.max_xoffset > 0.001) {
-			var norm = 0;
-			if (hdg <= me.threshold_min)
-				norm = (hdg - me.threshold_min) / (me.heading_min - me.threshold_min);
-			elsif (hdg >= me.threshold_max)
-				norm = -(hdg - me.threshold_max) / (me.heading_max - me.threshold_max);
+		if (me.enable_xoffset) {
+			var offset = 0;
+			if (hdg >= me.left.threshold)
+				offset = me.left.xoffset_max * (hdg - me.left.threshold) / me.left.range;
+			elsif (hdg <= me.right.threshold)
+				offset = me.right.xoffset_max * (hdg - me.right.threshold) / me.right.range;
 
-			var new_offset = me.xoffset_lowpass.filter(norm * me.max_xoffset);
+			var new_offset = me.xoffset_lowpass.filter(offset);
 			me.xoffsetN.setDoubleValue(me.xoffsetN.getValue() - me.old_offset + new_offset);
 			me.old_offset = new_offset;
 		}
@@ -560,7 +569,7 @@ _setlistener("/sim/signals/fdm-initialized", func {
 		var limits = views[i].getNode("config/limits/enabled");
 		if (limits != nil) {
 			func (i) {
-				var limiter = { parents: [ pilot_view_limiter ] };
+				var limiter = pilot_view_limiter.new();
 				setlistener(limits, func(n) {
 					manager.register(i, n.getBoolValue() ? limiter : nil);
 					manager.set_view();

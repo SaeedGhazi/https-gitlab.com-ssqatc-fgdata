@@ -19,6 +19,14 @@
             <visibility>false</visibility>
         </panel>
 
+        <view n="0">
+            <config>
+                <limits>
+                    <enabled type="bool">false</enabled>
+                </limits>
+            </config>
+        </view>
+
         <view n="100">
             <name>Cam View</name>
             <type>lookfrom</type>

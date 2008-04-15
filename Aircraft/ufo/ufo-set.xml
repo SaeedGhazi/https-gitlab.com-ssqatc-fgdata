@@ -29,6 +29,14 @@
 			<view-number>-100</view-number>
 		</current-view>
 
+		<view n="0">
+			<config>
+				<limits>
+					<enabled type="bool">false</enabled>
+				</limits>
+			</config>
+		</view>
+
 		<view n="100">
 			<name>Camera View</name>
 			<!--

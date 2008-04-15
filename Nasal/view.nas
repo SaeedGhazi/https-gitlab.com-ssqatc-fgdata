@@ -8,6 +8,20 @@ var views = nil;    # list of all view branches (/sim/view[n]) as props.Node
 var current = nil;  # current view branch (e.g. /sim/view[1]) as props.Node
 
 
+var hasmember = func(class, member) {
+	if (contains(class, member))
+		return 1;
+	if (!contains(class, "parents"))
+		return 0;
+	if (typeof(class.parents) != "vector")
+		return 0;
+	foreach (var parent; class.parents)
+		if (hasmember(parent, member))
+			return 1;
+	return 0;
+}
+
+
 # Dynamically calculate limits so that it takes STEPS iterations to
 # traverse the whole range, the maximum FOV is fixed at 120 degrees,
 # and the minimum corresponds to normal maximum human visual acuity
@@ -196,7 +210,7 @@ var manager = {
 		if (handler == nil)
 			handler = default_handler;
 		me.views[which]["handler"] = handler;
-		if (contains(handler, "init"))
+		if (hasmember(handler, "init"))
 			handler.init(me.views[which].node);
 		me.set_view();
 	},
@@ -207,18 +221,18 @@ var manager = {
 			which = indexof(which);
 
 		me.loopid += 1;
-		if (contains(me.current.handler, "stop"))
+		if (hasmember(me.current.handler, "stop"))
 			me.current.handler.stop();
 
 		me.current = me.views[which];
 
-		if (contains(me.current.handler, "start"))
+		if (hasmember(me.current.handler, "start"))
 			me.current.handler.start();
-		if (contains(me.current.handler, "update"))
+		if (hasmember(me.current.handler, "update"))
 			me._loop_(me.loopid += 1);
 	},
 	reset : func {
-		if (contains(me.current.handler, "reset"))
+		if (hasmember(me.current.handler, "reset"))
 			me.current.handler.reset();
 		else
 			default_handler.reset();
@@ -230,9 +244,6 @@ var manager = {
 };
 
 
-##
-# View handler for fly-by view.
-#
 var fly_by_view_handler = {
 	init : func {
 		me.latN = props.globals.getNode("/sim/viewer/latitude-deg", 1);
@@ -340,7 +351,7 @@ var pilot_view_limiter = {
 			me.hdgN.setDoubleValue(hdg = me.heading_min);
 
 		# translate view on X axis to look far right or far left
-		if (me.max_xoffset) {
+		if (me.max_xoffset > 0.001) {
 			var norm = 0;
 			if (hdg <= me.threshold_min)
 				norm = (hdg - me.threshold_min) / (me.heading_min - me.threshold_min);
@@ -411,12 +422,10 @@ var panViewDir = func(step) {	# FIXME overrides panViewDir function from above; 
 # Normalize angle to  -180 <= angle < 180
 #
 var normdeg = func(a) {
-	while (a >= 180) {
+	while (a >= 180)
 		a -= 360;
-	}
-	while (a < -180) {
+	while (a < -180)
 		a += 360;
-	}
 	return a;
 }
 
@@ -429,9 +438,9 @@ var ViewAxis = {
 	new : func(prop) {
 		var m = { parents : [ViewAxis] };
 		m.prop = props.globals.getNode(prop, 1);
-		if (m.prop.getType() == "NONE") {
+		if (m.prop.getType() == "NONE")
 			m.prop.setDoubleValue(0);
-		}
+
 		m.from = m.to = m.prop.getValue();
 		return m;
 	},
@@ -482,33 +491,31 @@ var point = {
 		foreach (var a; keys(me.axes)) {
 			var n = prop.getNode(a);
 			me.axes[a].reset();
-			if (n != nil) {
+			if (n != nil)
 				me.axes[a].target(n.getValue());
-			}
 		}
 		var m = prop.getNode("move-time-sec");
-		if (m != nil) {
+		if (m != nil)
 			time = m.getValue();
-		}
-		if (time == nil) {
+
+		if (time == nil)
 			time = 1;
-		}
+
 		me.blend = -1;   # range -1 .. 1
 		me._loop_(me.loop_id += 1, time);
 	},
 	_loop_ : func(id, time) {
 		me.loop_id == id or return;
 		me.blend += me.dtN.getValue() / time;
-		if (me.blend > 1) {
+		if (me.blend > 1)
 			me.blend = 1;
-		}
+
 		var b = (math.sin(me.blend * math.pi / 2) + 1) / 2; # range 0 .. 1
-		foreach (var a; keys(me.axes)) {
+		foreach (var a; keys(me.axes))
 			me.axes[a].move(b);
-		}
-		if (me.blend < 1) {
+
+		if (me.blend < 1)
 			settimer(func { me._loop_(id, time) }, 0);
-		}
 	},
 };
 
@@ -552,9 +559,10 @@ _setlistener("/sim/signals/fdm-initialized", func {
 	forindex (var i; views) {
 		var limits = views[i].getNode("config/limits/enabled");
 		if (limits != nil) {
-			func (index) {
+			func (i) {
+				var limiter = { parents: [ pilot_view_limiter ] };
 				setlistener(limits, func(n) {
-					manager.register(index, n.getValue() ? pilot_view_limiter : nil);
+					manager.register(i, n.getBoolValue() ? limiter : nil);
 					manager.set_view();
 				}, 1);
 			}(i);

@@ -337,15 +337,15 @@ var pilot_view_limiter = {
 		me.left = {
 			heading_max : abs(limits.getNode("left/heading-max-deg", 1).getValue() or 1000),
 			xoffset_max : abs(limits.getNode("left/x-offset-max-m", 1).getValue() or 0),
-			threshold : -abs(limits.getNode("left/x-offset-threshold-deg", 1).getValue() or 0),
+			threshold : abs(limits.getNode("left/x-offset-threshold-deg", 1).getValue() or 0),
 		};
 		me.right = {
 			heading_max : -abs(limits.getNode("right/heading-max-deg", 1).getValue() or 1000),
 			xoffset_max : -abs(limits.getNode("right/x-offset-max-m", 1).getValue() or 0),
-			threshold : abs(limits.getNode("right/x-offset-threshold-deg", 1).getValue() or 0),
+			threshold : -abs(limits.getNode("right/x-offset-threshold-deg", 1).getValue() or 0),
 		};
-		me.left.range = me.left.threshold - me.left.heading_max;
-		me.right.range = me.right.threshold - me.right.heading_max;
+		me.left.range = me.left.heading_max - me.left.threshold;
+		me.right.range = me.right.heading_max - me.right.threshold;
 		me.last_hdg = normdeg(me.hdgN.getValue());
 		me.enable_xoffset = me.right.xoffset_max > 0.001 or me.left.xoffset_max > 0.001;
 	},
@@ -362,10 +362,10 @@ var pilot_view_limiter = {
 		# translate view on X axis to look far right or far left
 		if (me.enable_xoffset) {
 			var offset = 0;
-			if (hdg >= me.left.threshold)
-				offset = me.left.xoffset_max * (hdg - me.left.threshold) / me.left.range;
-			elsif (hdg <= me.right.threshold)
-				offset = me.right.xoffset_max * (hdg - me.right.threshold) / me.right.range;
+			if (hdg > me.left.threshold)
+				offset = me.left.xoffset_max * (me.left.threshold - hdg) / me.left.range;
+			elsif (hdg < me.right.threshold)
+				offset = me.right.xoffset_max * (me.right.threshold - hdg) / me.right.range;
 
 			var new_offset = me.xoffset_lowpass.filter(offset);
 			me.xoffsetN.setDoubleValue(me.xoffsetN.getValue() - me.old_offset + new_offset);

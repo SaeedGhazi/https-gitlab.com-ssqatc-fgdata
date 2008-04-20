@@ -113,6 +113,15 @@
         <command>dialog-apply</command>
       </binding>
     </checkbox>
+
+    <checkbox>
+      <halign>left</halign>
+      <label>Random vegetation</label>
+      <property>/sim/rendering/random-vegetation</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
   </group>
 
   <hrule/>

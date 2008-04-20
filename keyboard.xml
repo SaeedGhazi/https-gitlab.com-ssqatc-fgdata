@@ -34,7 +34,7 @@ top down before the key bindings are parsed.
       }
 
       ## uncomment this line to get keycode reports to the terminal window
-      setlistener("devices/status/keyboard/event", func(n) debug.dump(n.getValues()));
+      #setlistener("devices/status/keyboard/event", func(n) debug.dump(n.getValues()));
   </script>
  </nasal>
 

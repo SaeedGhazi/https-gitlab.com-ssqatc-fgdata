@@ -483,6 +483,23 @@
    </binding>
   </item>
 
+  <item>
+   <label>Print Statistics</label>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/rendering/print-statistics</property>
+    <value>true</value>
+   </binding>
+  </item>
+
+  <item>
+   <label>Cycle On-Screen Statistics</label>
+   <binding>
+    <command>property-assign</command>
+    <property>/sim/rendering/on-screen-statistics</property>
+    <value>true</value>
+   </binding>
+  </item>
  </menu>
 
  <menu>

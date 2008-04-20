@@ -2,8 +2,6 @@
 <!--
 Key binding definitions.
 
-The *-key in fg/osg/osgviewer is handled in the C++ code.
-
 Regular keycodes go up to 255; special keys start at 256, and can be
 calculated by adding 256 to the GLUT key value in glut.h.
 
@@ -34,6 +32,9 @@ top down before the key bindings are parsed.
               space_release = func { controls.ptt(0) }
           }
       }
+
+      ## uncomment this line to get keycode reports to the terminal window
+      setlistener("devices/status/keyboard/event", func(n) debug.dump(n.getValues()));
   </script>
  </nasal>
 

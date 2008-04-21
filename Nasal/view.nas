@@ -172,7 +172,7 @@ var default_handler = {
 # View manager. Administrates optional Nasal view handlers.
 # Usage:  view.manager.register(<view-id>, <view-handler>);
 #
-#   view-id:      the view's name, e.g. "Chase View"
+#   view-id:      the view's name (e.g. "Chase View") or index number
 #   view-handler: a hash with any combination of the functions listed in the
 #                 following example, or none at all. Only define the interface
 #                 functions that you really need! The hash may contain local
@@ -239,7 +239,7 @@ var manager = {
 	},
 	_loop_ : func(id) {
 		id == me.loopid or return;
-		settimer(func { me._loop_(id) }, me.current.handler.update());
+		settimer(func { me._loop_(id) }, me.current.handler.update() or 0);
 	},
 };
 
@@ -330,22 +330,22 @@ var pilot_view_limiter = {
 		me.hdgN = props.globals.getNode("/sim/current-view/heading-offset-deg");
 		me.xoffsetN = props.globals.getNode("/sim/current-view/x-offset-m");
 		me.xoffset_lowpass = aircraft.lowpass.new(0.1);
-		me.old_offset = 0;
+		me.last_offset = 0;
 	},
 	start : func {
 		var limits = current.getNode("config/limits", 1);
 		me.left = {
 			heading_max : abs(limits.getNode("left/heading-max-deg", 1).getValue() or 1000),
-			xoffset_max : abs(limits.getNode("left/x-offset-max-m", 1).getValue() or 0),
 			threshold : abs(limits.getNode("left/x-offset-threshold-deg", 1).getValue() or 0),
+			xoffset_max : abs(limits.getNode("left/x-offset-max-m", 1).getValue() or 0),
 		};
 		me.right = {
 			heading_max : -abs(limits.getNode("right/heading-max-deg", 1).getValue() or 1000),
-			xoffset_max : -abs(limits.getNode("right/x-offset-max-m", 1).getValue() or 0),
 			threshold : -abs(limits.getNode("right/x-offset-threshold-deg", 1).getValue() or 0),
+			xoffset_max : -abs(limits.getNode("right/x-offset-max-m", 1).getValue() or 0),
 		};
-		me.left.range = me.left.heading_max - me.left.threshold;
-		me.right.range = me.right.heading_max - me.right.threshold;
+		me.left.scale = me.left.xoffset_max / (me.left.heading_max - me.left.threshold);
+		me.right.scale = me.right.xoffset_max / (me.right.heading_max - me.right.threshold);
 		me.last_hdg = normdeg(me.hdgN.getValue());
 		me.enable_xoffset = me.right.xoffset_max > 0.001 or me.left.xoffset_max > 0.001;
 	},
@@ -363,13 +363,13 @@ var pilot_view_limiter = {
 		if (me.enable_xoffset) {
 			var offset = 0;
 			if (hdg > me.left.threshold)
-				offset = me.left.xoffset_max * (me.left.threshold - hdg) / me.left.range;
+				offset = (me.left.threshold - hdg) * me.left.scale;
 			elsif (hdg < me.right.threshold)
-				offset = me.right.xoffset_max * (me.right.threshold - hdg) / me.right.range;
+				offset = (me.right.threshold - hdg) * me.right.scale;
 
 			var new_offset = me.xoffset_lowpass.filter(offset);
-			me.xoffsetN.setDoubleValue(me.xoffsetN.getValue() - me.old_offset + new_offset);
-			me.old_offset = new_offset;
+			me.xoffsetN.setDoubleValue(me.xoffsetN.getValue() - me.last_offset + new_offset);
+			me.last_offset = new_offset;
 		}
 		return 0;
 	},

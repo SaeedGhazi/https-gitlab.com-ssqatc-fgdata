@@ -101,6 +101,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <shadows-to type="bool" userarchive="y">false</shadows-to>
    <shadows-debug type="bool" userarchive="y">false</shadows-debug>
    <fps-display type="bool" userarchive="y">false</fps-display>
+   <on-screen-statistics type="int">0</on-screen-statistics>
    <glide-slope-tunnel type="bool" userarchive="y">false</glide-slope-tunnel>
    <redout>
      <enabled type="bool" userarchive="y">true</enabled>

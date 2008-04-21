@@ -495,9 +495,9 @@
   <item>
    <label>Cycle On-Screen Statistics</label>
    <binding>
-    <command>property-assign</command>
+    <command>property-adjust</command>
     <property>/sim/rendering/on-screen-statistics</property>
-    <value>true</value>
+    <step type="int">1</step>
    </binding>
   </item>
  </menu>

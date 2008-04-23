@@ -31,9 +31,9 @@ var run = func {
       GCurrent = getprop("/accelerations/pilot-g[0]");
     }
 
-    if (GCurrent == nil) 
-    { 
-      GCurrent = 1.0; 
+    if (GCurrent == nil)
+    {
+      GCurrent = 1.0;
     }
 
     # Updated the GDamped using a filter.
@@ -114,7 +114,7 @@ var check_params = func() {
   }
 }
 
-_setlistener("/sim/signals/nasal-dir-initialized",
+_setlistener("/sim/signals/fdm-initialized",
   func {
     fdm = getprop("/sim/flight-model");
     check_params();

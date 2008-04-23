@@ -328,7 +328,7 @@ var lowpass = {
 		me.value = v;
 	},
 	_filter_ : func(v) {
-		var dt = getprop("/sim/time/delta-sec");
+		var dt = getprop("/sim/time/delta-sec") or 0;
 		var c = dt / (me.coeff + dt);
 		me.value = v * c + me.value * (1 - c);
 	},
@@ -345,12 +345,12 @@ var angular_lowpass = {
 		var m = { parents : [angular_lowpass] };
 		m.sin = lowpass.new(coeff);
 		m.cos = lowpass.new(coeff);
-		m.buf = nil;
+		m.value = nil;
 		return m;
 	},
 	filter : func(v) {
 		v *= D2R;
-		me.buf = math.atan2(me.sin.filter(math.sin(v)), me.cos.filter(math.cos(v))) * R2D;
+		me.value = math.atan2(me.sin.filter(math.sin(v)), me.cos.filter(math.cos(v))) * R2D;
 	},
 	set : func(v) {
 		v *= D2R;
@@ -358,7 +358,7 @@ var angular_lowpass = {
 		me.cos.set(math.cos(v));
 	},
 	get : func {
-		me.buf;
+		me.value;
 	},
 };
 

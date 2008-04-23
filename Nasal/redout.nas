@@ -1,12 +1,15 @@
 # Damped G value - starts at 1.
 var GDamped = 1.0;
-var running = 0;
+var previousG = 1.0;
+var running_redout = 0;
+var running_compression = 0;
 var fdm = "jsb";
 
 var blackout_start = nil;
 var blackout_end = nil;
 var redout_start = nil;
 var redout_end = nil;
+var compression_rate = nil;
 var internal = nil;
 
 var lp_black = nil;
@@ -14,7 +17,7 @@ var lp_red = nil;
 
 var run = func {
 
-  if (running)
+  if (running_redout or running_compression)
   {
     var GCurrent = 1.0;
 
@@ -28,7 +31,10 @@ var run = func {
       GCurrent = getprop("/accelerations/pilot-g[0]");
     }
 
-    if (GCurrent == nil) { GCurrent = 1.0; }
+    if (GCurrent == nil) 
+    { 
+      GCurrent = 1.0; 
+    }
 
     # Updated the GDamped using a filter.
     if (GDamped < 0)
@@ -45,23 +51,37 @@ var run = func {
 
     if (internal)
     {
-      if (GDamped > blackout_start)
+      if (running_redout)
       {
+        if (GDamped > blackout_start)
+        {
           # Blackout
           setprop("/sim/rendering/redout/red",0);
           setprop("/sim/rendering/redout/alpha",
             (GDamped - blackout_start) / (blackout_end - blackout_start));
-      }
-      elsif (GDamped < redout_start)
-      {
+        }
+        elsif (GDamped < redout_start)
+        {
           # Redout
           setprop("/sim/rendering/redout/red",1);
           setprop("/sim/rendering/redout/alpha",
             abs((GDamped - redout_start) / (redout_end - redout_start)));
-      }
-      else
-      {
+        }
+        else
+        {
           setprop("/sim/rendering/redout/alpha",0);
+        }
+      }
+
+      if (running_compression)
+      {
+        # Apply any compression due to G-forces
+        if (GDamped != previousG)
+        {
+          var current_y_offset = getprop("/sim/current-view/y-offset-m");
+          setprop("/sim/current-view/y-offset-m", current_y_offset - (GDamped - previousG) * compression_rate);
+          previousG = GDamped;
+        }
       }
     }
     else
@@ -84,14 +104,13 @@ var check_params = func() {
   blackout_end = getprop("/sim/rendering/redout/parameters/blackout-complete-g");
   redout_start = getprop("/sim/rendering/redout/parameters/redout-onset-g");
   redout_end = getprop("/sim/rendering/redout/parameters/redout-complete-g");
-
   if ((blackout_start == nil) or
       (blackout_end == nil)   or
       (redout_start == nil)   or
       (redout_end == nil)       )
   {
     # No valid properties - no point running
-    running = 0;
+    running_redout = 0;
   }
 }
 
@@ -99,23 +118,23 @@ _setlistener("/sim/signals/nasal-dir-initialized",
   func {
     fdm = getprop("/sim/flight-model");
     check_params();
-    running = getprop("/sim/rendering/redout/enabled");
+    running_redout = getprop("/sim/rendering/redout/enabled");
     internal = getprop("/sim/current-view/internal");
     lp_black = aircraft.lowpass.new(0.2);
     lp_red = aircraft.lowpass.new(0.25);
     run();
 
     setlistener("/sim/rendering/redout/enabled", func(n) {
-      if ((running == 0) and n.getBoolValue())
+      if ((running_redout == 0) and n.getBoolValue())
       {
-        running = 1;
+        running_redout = 1;
         run();
       }
       else
       {
-        running = n.getBoolValue();
+        running_redout = n.getBoolValue();
       }
-    });
+    }, 1);
 
     setlistener("/sim/rendering/redout/parameters", func {
       # one parameter has changed, read them all in again
@@ -125,5 +144,21 @@ _setlistener("/sim/signals/nasal-dir-initialized",
     setlistener("/sim/current-view/internal", func(n) {
       internal = n.getBoolValue();
     });
+
+    setlistener("/sim/rendering/headshake/enabled", func(n) {
+      if ((running_compression == 0) and n.getBoolValue())
+      {
+        running_compression = 1;
+        run();
+      }
+      else
+      {
+        running_compression = n.getBoolValue();
+      }
+    }, 1);
+
+    setlistener("/sim/rendering/headshake/rate-m-g", func(n) {
+      compression_rate = n.getValue();
+    }, 1);
   }
 );

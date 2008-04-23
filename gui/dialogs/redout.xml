@@ -7,10 +7,19 @@
   <modal>false</modal>
 
   <text>
-    <label>G-Force Blackout Settings</label>
+    <label>G-Force Blackout and Movement Settings</label>
   </text>
 
   <hrule/>
+
+  <checkbox>
+    <halign>left</halign>
+    <label>Enable view movement due to G-force.</label>
+    <property>/sim/rendering/headshake/enabled</property>
+    <binding>
+      <command>dialog-apply</command>
+    </binding>
+  </checkbox>
 
   <checkbox>
     <halign>left</halign>
@@ -21,7 +30,7 @@
     </binding>
   </checkbox>
 
-  <hrule/>
+  <hrule/>	
 
   <text>
     <halign>center</halign>

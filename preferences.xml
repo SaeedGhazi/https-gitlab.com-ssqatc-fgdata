@@ -112,6 +112,10 @@ Started September 2000 by David Megginson, david@megginson.com
        <redout-complete-g>-4</redout-complete-g>
      </parameters>
    </redout>
+   <headshake>
+    <enabled type="bool" userarchive="y">true</enabled>
+    <rate-m-g>0.005</rate-m-g>
+  </headshake>
   </rendering>
   <model-hz type="int">120</model-hz>
   <navdb>

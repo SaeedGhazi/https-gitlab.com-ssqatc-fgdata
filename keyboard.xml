@@ -1105,12 +1105,12 @@ top down before the key bindings are parsed.
   <binding>
    <command>nasal</command>
    <script>
-     fgcommand("screen-capture");
-     var file = getprop("/sim/last-screenshot");
-     if(file == "")
-         gui.popupTip("Error writing screenshot");
+     var success = fgcommand("screen-capture");
+     var path = getprop("/sim/paths/screenshot-last");
+     if (success)
+         gui.popupTip("Screenshot written to '" ~ path ~ "'");
      else
-         gui.popupTip("Screenshot written to " ~ file);
+         gui.popupTip("Error writing screenshot '" ~ path ~ "'");
    </script>
   </binding>
   <mod-shift>

@@ -60,7 +60,7 @@ var start = func {
 		var key = event.getNode("key");
 		var shift = event.getNode("modifier/shift").getValue();
 		if (handle_key(key.getValue(), shift))
-			key.setValue(0);           # drop key event
+			key.setValue(-1);           # drop key event
 	});
 }
 
@@ -105,7 +105,7 @@ var handle_key = func(key, shift) {
 		stop(0);
 		return 1;
 
-	} elsif (key == 9) {               # tab
+	} elsif (key == `\t`) {            # tab
 		if (size(text) and text[0] == `/`) {
 			text = complete(input, shift ? -1 : 1);
 			build_completion(input);
@@ -156,7 +156,7 @@ var handle_key = func(key, shift) {
 	build_completion(input);
 
 	var color = nil;
-	if (size(text) and text[0] != `/`)     # search mode (magenta)
+	if (size(text) and text[0] != `/`)       # search mode (magenta)
 		color = set_color(1, 0.4, 0.9);
 	elsif (state.error)                      # error mode (red)
 		color = set_color(1, 0.4, 0.4);
@@ -265,8 +265,7 @@ var set_color = func(r, g, b) {
 
 
 var print_prop = func(n) {
-	print(n.getPath(), " = ", debug.string(n.getValue()),
-			"  ", debug.attributes(n));
+	print(n.getPath(), " = ", debug.string(n.getValue()), "  ", debug.attributes(n));
 }
 
 

@@ -13,13 +13,10 @@ top down before the key bindings are parsed.
 <PropertyList>
  <nasal>
   <script>
+      var modifiers = props.globals.getNode("/devices/status/keyboard");
       var shift = props.globals.getNode("/devices/status/keyboard/shift");
       var ctrl = props.globals.getNode("/devices/status/keyboard/ctrl");
       var alt = props.globals.getNode("/devices/status/keyboard/alt");
-
-      var get_modifiers = func {
-          shift.getValue() + 2 * ctrl.getValue() + 4 * alt.getValue();
-      }
 
       var space_release = func {}
       var space = func(state, mod) {
@@ -29,7 +26,7 @@ top down before the key bindings are parsed.
           }
           if (mod == 0 or mod == 1) {
               controls.ptt(mod + 1);
-              space_release = func { controls.ptt(0) }
+              space_release = func controls.ptt(0);
           }
       }
 
@@ -272,23 +269,23 @@ top down before the key bindings are parsed.
   <desc>PTT - Push To Talk (via VoIP)</desc>
   <binding>
    <command>nasal</command>
-   <script>space(1, get_modifiers())</script>
+   <script>space(1, modifiers.getValue())</script>
   </binding>
   <mod-up>
    <binding>
     <command>nasal</command>
-    <script>space(0, get_modifiers())</script>
+    <script>space(0, modifiers.getValue())</script>
    </binding>
   </mod-up>
   <mod-shift>
    <binding>
     <command>nasal</command>
-    <script>space(1, get_modifiers())</script>
+    <script>space(1, modifiers.getValue())</script>
    </binding>
    <mod-up>
     <binding>
      <command>nasal</command>
-     <script>space(0, get_modifiers())</script>
+     <script>space(0, modifiers.getValue())</script>
     </binding>
    </mod-up>
   </mod-shift>

@@ -37,7 +37,15 @@
   <item>
    <label>Snapshot</label>
    <binding>
-    <command>screen-capture</command>
+    <command>nasal</command>
+    <script>
+      var success = fgcommand("screen-capture");
+      var path = getprop("/sim/paths/screenshot-last");
+      if (success)
+          gui.popupTip("Screenshot written to '" ~ path ~ "'");
+      else
+          gui.popupTip("Error writing screenshot '" ~ path ~ "'");
+    </script>
    </binding>
   </item>
 

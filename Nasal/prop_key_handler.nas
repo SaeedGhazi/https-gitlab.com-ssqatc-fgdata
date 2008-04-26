@@ -211,7 +211,7 @@ var parse_input = func(expr) {
 var build_completion = func(in) {
 	completion = [];
 	var s = parse_input(in);
-	if (s.parent == nil)
+	if (s.error or s.parent == nil)
 		return;
 
 	foreach (var c; s.parent.getChildren()) {

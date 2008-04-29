@@ -117,24 +117,11 @@ var check_params = func() {
 _setlistener("/sim/signals/fdm-initialized",
   func {
     fdm = getprop("/sim/flight-model");
-    check_params();
     running_redout = getprop("/sim/rendering/redout/enabled");
+    running_compression = getprop("/sim/rendering/headshake/enabled");
     internal = getprop("/sim/current-view/internal");
     lp_black = aircraft.lowpass.new(0.2);
     lp_red = aircraft.lowpass.new(0.25);
-    run();
-
-    setlistener("/sim/rendering/redout/enabled", func(n) {
-      if ((running_redout == 0) and n.getBoolValue())
-      {
-        running_redout = 1;
-        run();
-      }
-      else
-      {
-        running_redout = n.getBoolValue();
-      }
-    }, 1);
 
     setlistener("/sim/rendering/redout/parameters", func {
       # one parameter has changed, read them all in again
@@ -144,6 +131,10 @@ _setlistener("/sim/signals/fdm-initialized",
     setlistener("/sim/current-view/internal", func(n) {
       internal = n.getBoolValue();
     });
+
+    setlistener("/sim/rendering/headshake/rate-m-g", func(n) {
+      compression_rate = n.getValue();
+    }, 1);
 
     setlistener("/sim/rendering/headshake/enabled", func(n) {
       if ((running_compression == 0) and n.getBoolValue())
@@ -157,8 +148,19 @@ _setlistener("/sim/signals/fdm-initialized",
       }
     }, 1);
 
-    setlistener("/sim/rendering/headshake/rate-m-g", func(n) {
-      compression_rate = n.getValue();
+    setlistener("/sim/rendering/redout/enabled", func(n) {
+      if ((running_redout == 0) and n.getBoolValue())
+      {
+        running_redout = 1;
+        run();
+      }
+      else
+      {
+        running_redout = n.getBoolValue();
+      }
     }, 1);
+
+    # Now we've set up the listeners (which will have triggered), run it.
+    run();
   }
 );

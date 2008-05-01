@@ -191,7 +191,7 @@
     </text>
     <input>
       <row>0</row><col>1</col>
-      <property>/sim/presets/offset-distance</property>
+      <property>/sim/presets/offset-distance-nm</property>
     </input>
 
     <text>
@@ -201,7 +201,7 @@
     </text>
     <input>
       <row>0</row><col>3</col>
-      <property>/sim/presets/offset-azimuth</property>
+      <property>/sim/presets/offset-azimuth-deg</property>
     </input>
 
 

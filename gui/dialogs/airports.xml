@@ -30,8 +30,8 @@
           setprop("/sim/presets/latitude-deg", -9999);
           setprop("/sim/presets/altitude-ft", -9999);
           setprop("/sim/presets/airspeed-kt", 0);
-          setprop("/sim/presets/offset-distance", 0);
-          setprop("/sim/presets/offset-azimuth", 0);
+          setprop("/sim/presets/offset-distance-nm", 0);
+          setprop("/sim/presets/offset-azimuth-deg", 0);
           setprop("/sim/presets/glideslope-deg", 0);
           setprop("/sim/presets/heading-deg", 0);
           setprop("/sim/presets/runway", "");

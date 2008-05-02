@@ -21,6 +21,10 @@ Started September 2000 by David Megginson, david@megginson.com
   <!-- Limit the time we need to spend in simulation loops to 1 second -->
   <max-simtime-per-frame>1.0</max-simtime-per-frame>
 
+  <paths>
+   <screenshot-dir/> <!-- defaults to current working dir -->
+  </paths>
+
   <intl include="Translations/locale.xml"/>
   <aircraft>c172p</aircraft>
   <virtual-cockpit type="bool">false</virtual-cockpit>
@@ -465,6 +469,18 @@ Started September 2000 by David Megginson, david@megginson.com
    <duration type="double">90</duration>
    <view type="int">1</view>
   </replay>
+
+  <airport>
+   <runways>
+    <start-offset-m>5.0</start-offset-m>
+    <search>
+     <length-weight>0.01</length-weight>
+     <width-weight>0.01</width-weight>
+     <surface-weight>10</surface-weight>
+     <deviation-weight>1</deviation-weight>
+    </search>
+   </runways>
+  </airport>
 
   <atc>
    <enabled type="bool">true</enabled>

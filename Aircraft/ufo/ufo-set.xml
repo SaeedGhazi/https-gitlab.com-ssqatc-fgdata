@@ -482,6 +482,7 @@
 	<nasal>
 		<ufo>
 			<file>Aircraft/ufo/ufo.nas</file>
+            <file>Aircraft/ufo/terrain.nas</file>
 		</ufo>
 
 		<aar>

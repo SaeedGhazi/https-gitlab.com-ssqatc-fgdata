@@ -115,7 +115,7 @@ var compose_message = func(msg = "")
       return;
 
     if (handle_key(key.getValue()))
-      key.setValue(0);           # drop key event
+      key.setValue(-1);           # drop key event
   });
 }
 

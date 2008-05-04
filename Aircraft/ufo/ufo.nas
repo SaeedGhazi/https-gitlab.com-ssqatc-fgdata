@@ -319,12 +319,12 @@ var ModelMgr = {
 		return m;
 	},
 	click : func(mouse_coord) {
+		if (gear_key_down)
+			return teleport(mouse_coord, me.active);
+
 		me.mouse_coord = mouse_coord;
 		status_dialog.open();
 		adjust_dialog.center_sliders();
-
-		if (gear_key_down)
-			return teleport(mouse_coord, me.active);
 
 		if (KbdAlt.getBoolValue()) {	# move active object here (and other selected ones along with it)
 			(me.active == nil) and return;
@@ -603,9 +603,13 @@ var teleport = func(target, lookat) {
 	setprop("/position/latitude-deg", target.lat());
 	setprop("/position/longitude-deg", target.lon());
 	setprop("/position/altitude-ft", target.alt() * geo.M2FT + getprop("/position/altitude-agl-ft"));
-	view.resetView();
+
+	var hdg = props.globals.getNode("/orientation/heading-deg");
 	if (lookat != nil)
-		setprop("/orientation/heading-deg", target.course_to(lookat.pos));
+		hdg.setDoubleValue(target.course_to(lookat.pos));
+	else
+		hdg.setDoubleValue(hdg.getValue() - getprop("/sim/current-view/heading-offset-deg"));
+	view.resetView();
 }
 
 

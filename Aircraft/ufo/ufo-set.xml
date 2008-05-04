@@ -108,6 +108,10 @@
 				<desc>move selected object(s) to new place</desc>
 			</key>
 			<key>
+				<name>g (gear) + click</name>
+				<desc>teleport to click position, looking at active object</desc>
+			</key>
+			<key>
 				<name>Ctrl + PgUp/PgDn</name>
 				<desc>cycle through model list</desc>
 			</key>

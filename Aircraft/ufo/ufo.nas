@@ -4,6 +4,10 @@ setlistener("/sim/panel/visibility", func(n) {
 }, 1);
 
 
+var gear_key_down = 0;
+controls.gearDown = func (x) gear_key_down = x != 0;
+
+
 
 
 
@@ -319,6 +323,9 @@ var ModelMgr = {
 		status_dialog.open();
 		adjust_dialog.center_sliders();
 
+		if (gear_key_down)
+			return teleport(mouse_coord, me.active);
+
 		if (KbdAlt.getBoolValue()) {	# move active object here (and other selected ones along with it)
 			(me.active == nil) and return;
 			var course = me.active.pos.course_to(me.mouse_coord);
@@ -591,6 +598,15 @@ var print_model_data = func(prop) {
 	printf("Roll:         %.1f deg", prop.getNode("roll-deg").getValue());
 }
 
+
+var teleport = func(target, lookat) {
+	setprop("/position/latitude-deg", target.lat());
+	setprop("/position/longitude-deg", target.lon());
+	setprop("/position/altitude-ft", target.alt() * geo.M2FT + getprop("/position/altitude-agl-ft"));
+	view.resetView();
+	if (lookat != nil)
+		setprop("/orientation/heading-deg", target.course_to(lookat.pos));
+}
 
 
 

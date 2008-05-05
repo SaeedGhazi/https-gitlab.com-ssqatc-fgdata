@@ -90,20 +90,20 @@ mouse.loop = func {
 
 			if (dx) {
 				mouse.startx = mouse.x;
-				dx = npow(dx, 1.5) * 0.1;
+				var powx = npow(dx, 1.7) * 0.1;
 				if (ctrl)
-					pos.apply_course_distance(hdg + 90, dx);
+					pos.apply_course_distance(hdg + 90, powx);
 				else
-					setprop("/orientation/heading-deg", hdg + dx);
+					setprop("/orientation/heading-deg", hdg + dx * 0.2);
 			}
 
 			if (dy) {
 				mouse.starty = mouse.y;
-				dy = npow(dy, 1.5) * 0.1;
+				var powy = npow(dy, 1.7) * 0.1;
 				if (ctrl)
-					dalt -= dy;
+					dalt -= powy;
 				else
-					pos.apply_course_distance(hdg + 180, dy);
+					pos.apply_course_distance(hdg + 180, powy);
 			}
 
 			setprop("/position/latitude-deg", pos.lat());

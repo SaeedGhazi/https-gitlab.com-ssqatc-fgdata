@@ -43,6 +43,7 @@ setlistener("/devices/status/mice/mouse/button[1]", func(n) {
 	mouse.startx = mouse.x;
 	mouse.starty = mouse.y;
 	lastelev = getprop("/position/ground-elev-ft");
+	setprop("/controls/engines/engine/throttle", 0);
 }, 1);
 
 

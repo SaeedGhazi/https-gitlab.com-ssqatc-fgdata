@@ -31,6 +31,33 @@ controls.flapsDown = func(x) {
 
 
 
+# dialogs -----------------------------------------------------------------------------------------
+
+var status_dialog = gui.Dialog.new("/sim/gui/dialogs/ufo/status/dialog", "Aircraft/ufo/Dialogs/status.xml");
+var select_dialog = gui.Dialog.new("/sim/gui/dialogs/ufo/select/dialog", "Aircraft/ufo/Dialogs/select.xml");
+var adjust_dialog = gui.Dialog.new("/sim/gui/dialogs/ufo/adjust/dialog", "Aircraft/ufo/Dialogs/adjust.xml");
+
+adjust_dialog.center_sliders = func {
+	var ns = adjust_dialog.namespace();
+	if (ns != nil)
+		ns.center();
+}
+
+
+# hide status line in screenshots
+#
+var status_restore = nil;
+setlistener("/sim/signals/screenshot", func(n) {
+	if (n.getBoolValue()) {
+		status_restore = status_dialog.is_open();
+		status_dialog.close();
+	} else {
+		status_restore and status_dialog.open();
+	}
+});
+
+
+
 # mouse walk --------------------------------------------------------------------------------------
 
 var mouse = {};
@@ -87,6 +114,7 @@ mouse.loop = func {
 	settimer(mouse.loop, 0);
 }
 
+mouse.loop();
 
 
 # library stuff -----------------------------------------------------------------------------------
@@ -757,33 +785,6 @@ var fsel_callback = func {
 
 
 
-# dialogs -----------------------------------------------------------------------------------------
-
-var status_dialog = gui.Dialog.new("/sim/gui/dialogs/ufo/status/dialog", "Aircraft/ufo/Dialogs/status.xml");
-var select_dialog = gui.Dialog.new("/sim/gui/dialogs/ufo/select/dialog", "Aircraft/ufo/Dialogs/select.xml");
-var adjust_dialog = gui.Dialog.new("/sim/gui/dialogs/ufo/adjust/dialog", "Aircraft/ufo/Dialogs/adjust.xml");
-
-adjust_dialog.center_sliders = func {
-	var ns = adjust_dialog.namespace();
-	if (ns != nil)
-		ns.center();
-}
-
-
-# hide status line in screenshots
-#
-var status_restore = nil;
-setlistener("/sim/signals/screenshot", func(n) {
-	if (n.getBoolValue()) {
-		status_restore = status_dialog.is_open();
-		status_dialog.close();
-	} else {
-		status_restore and status_dialog.open();
-	}
-});
-
-
-
 # init --------------------------------------------------------------------------------------------
 
 var KbdShift = props.globals.getNode("/devices/status/keyboard/shift");
@@ -797,5 +798,4 @@ setlistener("/sim/signals/click", func {
 	modelmgr.click(geo.click_position());
 });
 
-mouse.loop();
 

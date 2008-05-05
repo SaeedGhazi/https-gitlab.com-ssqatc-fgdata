@@ -44,6 +44,7 @@ setlistener("/devices/status/mice/mouse/button[1]", func(n) {
 	mouse.starty = mouse.y;
 	lastelev = getprop("/position/ground-elev-ft");
 	setprop("/controls/engines/engine/throttle", 0);
+	adjust_dialog.center_sliders();
 }, 1);
 
 
@@ -85,7 +86,6 @@ mouse.loop = func {
 	}
 	settimer(mouse.loop, 0);
 }
-mouse.loop();
 
 
 
@@ -797,4 +797,5 @@ setlistener("/sim/signals/click", func {
 	modelmgr.click(geo.click_position());
 });
 
+mouse.loop();
 

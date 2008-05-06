@@ -71,6 +71,7 @@ setlistener("/devices/status/mice/mouse/button[1]", func(n) {
 	mouse.starty = mouse.y;
 	lastelev = getprop("/position/ground-elev-ft");
 	setprop("/controls/engines/engine/throttle", 0);
+	controls.centerFlightControls();
 	adjust_dialog.center_sliders();
 }, 1);
 
@@ -87,10 +88,12 @@ mouse.loop = func {
 			var elev = getprop("/position/ground-elev-ft");
 			var dalt = elev - lastelev;
 			lastelev = elev;
+			var speed = KbdShift.getValue() ? 1 : 0.1;
+			var progress = 1.7;
 
 			if (dx) {
 				mouse.startx = mouse.x;
-				var powx = npow(dx, 1.7) * 0.1;
+				var powx = npow(dx, progress) * speed;
 				if (ctrl)
 					pos.apply_course_distance(hdg + 90, powx);
 				else
@@ -99,7 +102,7 @@ mouse.loop = func {
 
 			if (dy) {
 				mouse.starty = mouse.y;
-				var powy = npow(dy, 1.7) * 0.1;
+				var powy = npow(dy, progress) * speed;
 				if (ctrl)
 					dalt -= powy;
 				else

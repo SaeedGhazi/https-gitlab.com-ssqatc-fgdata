@@ -65,6 +65,7 @@ var lastelev = nil;
 setlistener("/devices/status/mice/mouse/x", func(n) mouse.x = n.getValue(), 1);
 setlistener("/devices/status/mice/mouse/y", func(n) mouse.y = n.getValue(), 1);
 setlistener("/devices/status/mice/mouse/mode", func(n) mouse.mode = n.getValue(), 1);
+setlistener("/devices/status/mice/mouse/button[0]", func(n) mouse.lmb = n.getValue(), 1);
 setlistener("/devices/status/mice/mouse/button[1]", func(n) {
 	mouse.mmb = n.getValue();
 	mouse.startx = mouse.x;
@@ -94,7 +95,7 @@ mouse.loop = func {
 			if (dx) {
 				mouse.startx = mouse.x;
 				var powx = npow(dx, progress) * speed;
-				if (ctrl)
+				if (mouse.lmb)
 					pos.apply_course_distance(hdg + 90, powx);
 				else
 					setprop("/orientation/heading-deg", hdg + dx * 0.2);
@@ -103,7 +104,7 @@ mouse.loop = func {
 			if (dy) {
 				mouse.starty = mouse.y;
 				var powy = npow(dy, progress) * speed;
-				if (ctrl)
+				if (mouse.lmb)
 					dalt -= powy;
 				else
 					pos.apply_course_distance(hdg + 180, powy);
@@ -798,7 +799,8 @@ var modellist = scan_dirs(getprop("/source"));
 var modelmgr = ModelMgr.new(getprop("/cursor"));
 
 setlistener("/sim/signals/click", func {
-	modelmgr.click(geo.click_position());
+	if (!mouse.mmb)
+		modelmgr.click(geo.click_position());
 });
 
 

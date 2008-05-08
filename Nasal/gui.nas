@@ -50,6 +50,28 @@ var menuEnable = func(searchname, state) {
 }
 
 
+##
+# Set mouse cursor coordinates and shape (number or name), and return
+# current shape (number).
+#
+# Example:  var cursor = gui.setCursor();
+#           gui.setCursor(nil, nil, "wait");
+#
+var setCursor = func(x = nil, y = nil, cursor = nil) {
+    var args = props.Node.new();
+    if (x != nil) args.getNode("x", 1).setIntValue(x);
+    if (y != nil) args.getNode("y", 1).setIntValue(y);
+    if (cursor != nil) {
+        if (num(cursor) == nil) cursor = cursor_types[cursor];
+        setprop("/sim/mouse/hide-cursor", cursor);
+        args.getNode("cursor", 1).setIntValue(cursor);
+    }
+    fgcommand("set-cursor", args);
+    return args.getNode("cursor").getValue();
+}
+var cursor_types = { none: 0, pointer: 1, wait: 2, crosshair: 3, leftright: 4 };
+
+
 
 ########################################################################
 # Private Stuff:
@@ -306,7 +328,7 @@ var FileSelector = {
         me.close();
         delete(me.instance, me.name);
         removelistener(me.cblistener);
-        props.globals.getNode("/sim/gui/dialogs", 1).removeChildren(me.name);
+        me.data.remove();
     },
 };
 
@@ -444,7 +466,7 @@ var setWeightOpts = func {
 }
 # Run it at startup and on reset to make sure the tank settings are correct
 _setlistener("/sim/signals/fdm-initialized", func { settimer(setWeightOpts, 0) });
-_setlistener("/sim/signals/reset", func(n) { n.getBoolValue() or setWeightOpts() });
+_setlistener("/sim/signals/reinit", func(n) { props._getValue(n, []) or setWeightOpts() });
 
 
 # Called from the F&W dialog when the user selects a weight option

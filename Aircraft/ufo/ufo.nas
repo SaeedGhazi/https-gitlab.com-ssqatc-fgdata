@@ -60,27 +60,37 @@ setlistener("/sim/signals/screenshot", func(n) {
 
 # mouse walk --------------------------------------------------------------------------------------
 
-var mouse = {};
 var lastelev = nil;
+var mouse = { savex: nil, savey: nil };
+setlistener("/sim/startup/xsize", func(n) mouse.centerx = n.getValue() / 2, 1);
+setlistener("/sim/startup/ysize", func(n) mouse.centery = n.getValue() / 2, 1);
+setlistener("/sim/mouse/hide-cursor", func(n) mouse.hide = n.getValue(), 1);
 setlistener("/devices/status/mice/mouse/x", func(n) mouse.x = n.getValue(), 1);
 setlistener("/devices/status/mice/mouse/y", func(n) mouse.y = n.getValue(), 1);
 setlistener("/devices/status/mice/mouse/mode", func(n) mouse.mode = n.getValue(), 1);
 setlistener("/devices/status/mice/mouse/button[0]", func(n) mouse.lmb = n.getValue(), 1);
 setlistener("/devices/status/mice/mouse/button[1]", func(n) {
 	mouse.mmb = n.getValue();
-	mouse.startx = mouse.x;
-	mouse.starty = mouse.y;
-	lastelev = getprop("/position/ground-elev-ft");
-	setprop("/controls/engines/engine/throttle", 0);
-	controls.centerFlightControls();
-	adjust_dialog.center_sliders();
+	if (mouse.mode)
+		return;
+	if (mouse.mmb) {
+		setprop("/controls/engines/engine/throttle", 0);
+		lastelev = getprop("/position/ground-elev-ft");
+		controls.centerFlightControls();
+		adjust_dialog.center_sliders();
+		mouse.savex = mouse.x;
+		mouse.savey = mouse.y;
+		gui.setCursor(mouse.centerx, mouse.centery, "none");
+	} else {
+		gui.setCursor(mouse.savex, mouse.savey, "pointer");
+	}
 }, 1);
 
 
 mouse.loop = func {
 	if (!mouse.mode and mouse.mmb) {
-		var dx = mouse.x - mouse.startx;
-		var dy = mouse.y - mouse.starty;
+		var dx = mouse.x - mouse.centerx;
+		var dy = mouse.y - mouse.centery;
 
 		if (dx or dy) {
 			var hdg = getprop("/orientation/heading-deg");
@@ -93,18 +103,16 @@ mouse.loop = func {
 			var progress = 1.7;
 
 			if (dx) {
-				mouse.startx = mouse.x;
 				var powx = npow(dx, progress) * speed;
-				if (mouse.lmb)
+				if (mouse.lmb or gear_key_down)
 					pos.apply_course_distance(hdg + 90, powx);
 				else
 					setprop("/orientation/heading-deg", hdg + dx * 0.2);
 			}
 
 			if (dy) {
-				mouse.starty = mouse.y;
 				var powy = npow(dy, progress) * speed;
-				if (mouse.lmb)
+				if (mouse.lmb or gear_key_down)
 					dalt -= powy;
 				else
 					pos.apply_course_distance(hdg + 180, powy);
@@ -113,12 +121,14 @@ mouse.loop = func {
 			setprop("/position/latitude-deg", pos.lat());
 			setprop("/position/longitude-deg", pos.lon());
 			setprop("/position/altitude-ft", getprop("/position/altitude-ft") + dalt);
+			gui.setCursor(mouse.centerx, mouse.centery);
 		}
 	}
 	settimer(mouse.loop, 0);
 }
 
 mouse.loop();
+
 
 
 # library stuff -----------------------------------------------------------------------------------

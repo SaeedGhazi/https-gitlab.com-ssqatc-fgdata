@@ -62,8 +62,8 @@ setlistener("/sim/signals/screenshot", func(n) {
 
 var lastelev = nil;
 var mouse = { savex: nil, savey: nil };
-setlistener("/sim/startup/xsize", func(n) mouse.centerx = n.getValue() / 2, 1);
-setlistener("/sim/startup/ysize", func(n) mouse.centery = n.getValue() / 2, 1);
+setlistener("/sim/startup/xsize", func(n) mouse.centerx = int(n.getValue() / 2), 1);
+setlistener("/sim/startup/ysize", func(n) mouse.centery = int(n.getValue() / 2), 1);
 setlistener("/sim/mouse/hide-cursor", func(n) mouse.hide = n.getValue(), 1);
 setlistener("/devices/status/mice/mouse/x", func(n) mouse.x = n.getValue(), 1);
 setlistener("/devices/status/mice/mouse/y", func(n) mouse.y = n.getValue(), 1);
@@ -88,42 +88,60 @@ setlistener("/devices/status/mice/mouse/button[1]", func(n) {
 
 
 mouse.loop = func {
-	if (!mouse.mode and mouse.mmb) {
-		var dx = mouse.x - mouse.centerx;
-		var dy = mouse.y - mouse.centery;
+	if (mouse.mode or !mouse.mmb)
+		return settimer(mouse.loop, 0);
 
-		if (dx or dy) {
-			var hdg = getprop("/orientation/heading-deg");
-			var pos = geo.aircraft_position();
-			var ctrl = KbdCtrl.getValue();
-			var elev = getprop("/position/ground-elev-ft");
-			var dalt = elev - lastelev;
-			lastelev = elev;
-			var speed = KbdShift.getValue() ? 1 : 0.1;
-			var progress = 1.7;
+	var dx = mouse.x - mouse.centerx;
+	var dy = mouse.y - mouse.centery;
+	if (!dx and !dy)
+		return settimer(mouse.loop, 0);
 
-			if (dx) {
-				var powx = npow(dx, progress) * speed;
-				if (mouse.lmb or gear_key_down)
-					pos.apply_course_distance(hdg + 90, powx);
-				else
-					setprop("/orientation/heading-deg", hdg + dx * 0.2);
-			}
+	var speed = KbdShift.getValue() ? 1 : 0.1;
+	var progress = 1.7;
+	var powx = npow(dx, progress) * speed;
+	var powy = -npow(dy, progress) * speed;
 
-			if (dy) {
-				var powy = npow(dy, progress) * speed;
-				if (mouse.lmb or gear_key_down)
-					dalt -= powy;
-				else
-					pos.apply_course_distance(hdg + 180, powy);
-			}
-
-			setprop("/position/latitude-deg", pos.lat());
-			setprop("/position/longitude-deg", pos.lon());
-			setprop("/position/altitude-ft", getprop("/position/altitude-ft") + dalt);
-			gui.setCursor(mouse.centerx, mouse.centery);
+	if (KbdCtrl.getValue()) {     # operation
+		if (dx) {
+			if (mouse.lmb or gear_key_down)
+				modelmgr.adjust("bearing", dx * 0.2);
+			else
+				modelmgr.adjust("transversal", powx);
 		}
+
+		if (dy) {
+			if (mouse.lmb or gear_key_down)
+				modelmgr.adjust("altitude", powy);
+			else
+				modelmgr.adjust("longitudinal", powy);
+		}
+
+	} else {                      # navigation
+		var pos = geo.aircraft_position();
+		var hdg = getprop("/orientation/heading-deg");
+		var elev = getprop("/position/ground-elev-ft");
+		var dalt = elev - lastelev;
+		lastelev = elev;
+
+		if (dx) {
+			if (mouse.lmb or gear_key_down)
+				pos.apply_course_distance(hdg + 90, powx);
+			else
+				setprop("/orientation/heading-deg", hdg + dx * 0.2);
+		}
+
+		if (dy) {
+			if (mouse.lmb or gear_key_down)
+				dalt += powy;
+			else
+				pos.apply_course_distance(hdg, powy);
+		}
+		setprop("/position/latitude-deg", pos.lat());
+		setprop("/position/longitude-deg", pos.lon());
+		setprop("/position/altitude-ft", getprop("/position/altitude-ft") + dalt);
 	}
+
+	gui.setCursor(mouse.centerx, mouse.centery);
 	settimer(mouse.loop, 0);
 }
 
@@ -405,6 +423,8 @@ var ModelMgr = {
 		m.marker = Model.new("Aircraft/ufo/Models/marker.ac", geo.Coord.new().set_xyz(0, 0, 0));
 		m.marker.hide();
 		m.modelpath = path;
+		if (m.active != nil)
+			m.marker.move(m.active.pos);
 
 		if (path != "Aircraft/ufo/Models/cursor.ac")
 			status_dialog.open();
@@ -450,7 +470,7 @@ var ModelMgr = {
 	select : func() {
 		if (!size(me.models)) {
 			me.active = nil;
-			me.marker.move(geo.Coord.new().set_xyz(0, 0, 0));
+			me.marker.hide();
 			return;
 		}
 		var min_dist = 10 * ERAD;
@@ -585,6 +605,7 @@ var ModelMgr = {
 						tmp.getNode("longitude-deg").getValue(),
 						tmp.getNode("elevation-ft").getValue() * FT2M);
 				append(me.models, me.active = Model.new(tmp.getNode("path").getValue(), c, tmp));
+				#me.marker.move(me.active.pos);
 			}
 		}
 	},
@@ -620,6 +641,15 @@ var ModelMgr = {
 			foreach (var m; me.models)
 				m.selected and m.roll.set(m.roll.get() + value * 6);
 
+		} elsif (name == "bearing") {
+			foreach (var m; me.models)
+				if (m.selected) {
+					var course = me.active.pos.course_to(m.pos);
+					var dist = me.active.pos.distance_to(m.pos);
+					m.apply_course_distance(course, -dist);
+					m.apply_course_distance(course + value * 4, dist);
+					m.hdg.set(m.hdg.get() + value * 4);
+				}
 		}
 		me.marker.move(me.active.pos);
 	},

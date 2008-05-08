@@ -27,7 +27,7 @@
         <menu><name>* Traffic, # departing runway (. Departing the pattern to the South.</name></menu>
         <menu><name>* Traffic, # departing runway (. Departing the pattern to the West.</name></menu>
       </menu>
-      <menu><name>* UNICOM, # ^ miles ! descending through $ feet, inbound the enter the traffic pattern.</name></menu>
+      <menu><name>* UNICOM, # ^ miles ! descending through $ feet, inbound to enter the traffic pattern.</name></menu>
       <menu><name>* Traffic, # crosswind for runway (.</name></menu>
       <menu><name>* Traffic, # downwind for runway (.</name></menu>
       <menu><name>* Traffic, # turning base for runway (.</name></menu>

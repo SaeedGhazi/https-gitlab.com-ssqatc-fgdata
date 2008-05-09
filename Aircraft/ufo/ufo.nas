@@ -105,16 +105,16 @@ mouse.loop = func {
 	if (KbdCtrl.getValue()) {     # operation
 		if (dx) {
 			if (option)
-				modelmgr.adjust("bearing", dx * 0.05);
+				modelmgr.adjust("bearing", dx * 0.05, 1);
 			else
-				modelmgr.adjust("transversal", powx);
+				modelmgr.adjust("transversal", powx * 0.05, 1);
 		}
 
 		if (dy) {
 			if (option)
-				modelmgr.adjust("altitude", powy);
+				modelmgr.adjust("altitude", powy * 0.05, 1);
 			else
-				modelmgr.adjust("longitudinal", powy);
+				modelmgr.adjust("longitudinal", powy * 0.05, 1);
 		}
 
 	} else {                      # navigation
@@ -214,13 +214,12 @@ var scan_models = func(base) {
 			continue;
 		}
 		foreach (var e; keys(extensions)) {
-			if (substr(d, -size(e)) != e)
-				continue;
-
-			var basepath = base ~ "/" ~ substr(d, 0, size(d) - size(e));
-			if (!contains(files, basepath) or extensions[e] > extensions[files[basepath]])
-				files[basepath] = e;
-			break;
+			if (substr(d, -size(e)) == e) {
+				var basepath = base ~ "/" ~ substr(d, 0, size(d) - size(e));
+				if (!contains(files, basepath) or extensions[e] > extensions[files[basepath]])
+					files[basepath] = e;
+				break;
+			}
 		}
 	}
 	foreach (var m; keys(files))
@@ -665,7 +664,7 @@ var ModelMgr = {
 
 
 var scan_dirs = func(csv) {
-	var list = ["Aircraft/ufo/Models/sign.ac"];
+	var list = ["Aircraft/ufo/Models/sign.ac", "Aircraft/ufo/Models/cursor.ac"];
 	foreach (var dir; split(",", csv))
 		foreach(var m; scan_models(dir))
 			append(list, m);

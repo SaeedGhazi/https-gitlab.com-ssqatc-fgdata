@@ -75,9 +75,9 @@ setlistener("/devices/status/mice/mouse/button[1]", func(n) {
 		return;
 	if (mouse.mmb) {
 		setprop("/controls/engines/engine/throttle", 0);
-		lastelev = getprop("/position/ground-elev-ft");
 		controls.centerFlightControls();
 		adjust_dialog.center_sliders();
+		lastelev = getprop("/position/ground-elev-ft");
 		mouse.savex = mouse.x;
 		mouse.savey = mouse.y;
 		gui.setCursor(mouse.centerx, mouse.centery, "none");
@@ -100,17 +100,18 @@ mouse.loop = func {
 	var progress = 1.7;
 	var powx = npow(dx, progress) * speed;
 	var powy = -npow(dy, progress) * speed;
+	var option = mouse.lmb or gear_key_down;
 
 	if (KbdCtrl.getValue()) {     # operation
 		if (dx) {
-			if (mouse.lmb or gear_key_down)
-				modelmgr.adjust("bearing", dx * 0.2);
+			if (option)
+				modelmgr.adjust("bearing", dx * 0.05);
 			else
 				modelmgr.adjust("transversal", powx);
 		}
 
 		if (dy) {
-			if (mouse.lmb or gear_key_down)
+			if (option)
 				modelmgr.adjust("altitude", powy);
 			else
 				modelmgr.adjust("longitudinal", powy);
@@ -124,14 +125,14 @@ mouse.loop = func {
 		lastelev = elev;
 
 		if (dx) {
-			if (mouse.lmb or gear_key_down)
+			if (option)
 				pos.apply_course_distance(hdg + 90, powx);
 			else
 				setprop("/orientation/heading-deg", hdg + dx * 0.2);
 		}
 
 		if (dy) {
-			if (mouse.lmb or gear_key_down)
+			if (option)
 				dalt += powy;
 			else
 				pos.apply_course_distance(hdg, powy);
@@ -156,7 +157,7 @@ var FT2M = geo.FT2M;
 var M2FT = geo.M2FT;
 
 var normdeg = geo.normdeg;
-var printf = func { print(call(sprintf, arg)) }
+var printf = func print(call(sprintf, arg));
 var npow = func(v, w) v == 0 ? 0 : math.exp(math.ln(abs(v)) * w) * (v < 0 ? -1 : 1);
 
 
@@ -190,37 +191,40 @@ var search = func(list, which) {
 }
 
 
-# scan all objects in subdir of $FG_ROOT. (Prefer *.xml files to *.ac files
-# if both exist)
+# scan all objects in subdir of $FG_ROOT. (Prefer *.xml files to *.osg files
+# to *.ac files with the same basename.)
 #
 var scan_models = func(base) {
 	var result = [];
-	var list = directory(getprop("/sim/fg-root") ~ "/" ~ base);
+	var root = getprop("/sim/fg-root");
+	var list = directory(root ~ "/" ~ base);
 	if (list == nil)
 		return result;
 
-	var xml = {};
-	var ac = {};
+	var extensions = { ".ac": 1, ".osg": 2, ".xml": 3 }; # priority
+	var files = {};
 	foreach (var d; list) {
-		if (d[0] != `.` and d != "CVS") {
-			if (substr(d, -4) == ".xml") {
-				xml[base ~ "/" ~ d] = 1;
-			} elsif (substr(d, -3) == ".ac") {
-				ac[base ~ "/" ~ d] = 1;
-			} else {
-				foreach (var s; scan_models(base ~ "/" ~ d)) {
-					append(result, s);
-				}
-			}
+		if (d[0] == `.` or d == "CVS")
+			continue;
+		if ((var stat = io.stat(root ~ "/" ~ base ~ "/" ~ d)) == nil)
+			continue;
+		if (io.isdir(stat[2])) {
+			foreach (var s; scan_models(base ~ "/" ~ d))
+				append(result, s);
+			continue;
+		}
+		foreach (var e; keys(extensions)) {
+			if (substr(d, -size(e)) != e)
+				continue;
+
+			var basepath = base ~ "/" ~ substr(d, 0, size(d) - size(e));
+			if (!contains(files, basepath) or extensions[e] > extensions[files[basepath]])
+				files[basepath] = e;
+			break;
 		}
 	}
-	foreach (var m; keys(xml)) {
-		append(result, m);
-		delete(ac, substr(m, 0, size(m) - 3) ~ "ac");
-	}
-	foreach (var m; keys(ac)) {
-		append(result, m);
-	}
+	foreach (var m; keys(files))
+		append(result, m ~ files[m]);
 	return result;
 }
 
@@ -605,7 +609,6 @@ var ModelMgr = {
 						tmp.getNode("longitude-deg").getValue(),
 						tmp.getNode("elevation-ft").getValue() * FT2M);
 				append(me.models, me.active = Model.new(tmp.getNode("path").getValue(), c, tmp));
-				#me.marker.move(me.active.pos);
 			}
 		}
 	},
@@ -642,7 +645,7 @@ var ModelMgr = {
 				m.selected and m.roll.set(m.roll.get() + value * 6);
 
 		} elsif (name == "bearing") {
-			foreach (var m; me.models)
+			foreach (var m; me.models) {
 				if (m.selected) {
 					var course = me.active.pos.course_to(m.pos);
 					var dist = me.active.pos.distance_to(m.pos);
@@ -650,6 +653,7 @@ var ModelMgr = {
 					m.apply_course_distance(course + value * 4, dist);
 					m.hdg.set(m.hdg.get() + value * 4);
 				}
+			}
 		}
 		me.marker.move(me.active.pos);
 	},
@@ -811,7 +815,7 @@ var file_select_model = func {
 	if (file_selector == nil) {
 		file_selector = gui.FileSelector.new(fsel_callback,
 				"Select 3D model file", "Load Model",
-				["*.ac", "*.xml"], getprop("/sim/fg-root"));
+				["*.ac", "*.osg", "*.xml"], getprop("/sim/fg-root"));
 	}
 	file_selector.open();
 }

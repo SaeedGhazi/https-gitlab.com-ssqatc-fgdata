@@ -201,7 +201,7 @@ var scan_models = func(base) {
 	if (list == nil)
 		return result;
 
-	var extensions = { ".ac": 1, ".osg": 2, ".xml": 3 }; # priority
+	var ext = { ".ac": 1, ".osg": 2, ".xml": 3 }; # extension priorities
 	var files = {};
 	foreach (var d; list) {
 		if (d[0] == `.` or d == "CVS")
@@ -213,10 +213,10 @@ var scan_models = func(base) {
 				append(result, s);
 			continue;
 		}
-		foreach (var e; keys(extensions)) {
+		foreach (var e; keys(ext)) {
 			if (substr(d, -size(e)) == e) {
 				var basepath = base ~ "/" ~ substr(d, 0, size(d) - size(e));
-				if (!contains(files, basepath) or extensions[e] > extensions[files[basepath]])
+				if (!contains(files, basepath) or ext[e] > ext[files[basepath]])
 					files[basepath] = e;
 				break;
 			}
@@ -666,7 +666,7 @@ var ModelMgr = {
 var scan_dirs = func(csv) {
 	var list = ["Aircraft/ufo/Models/sign.ac", "Aircraft/ufo/Models/cursor.ac"];
 	foreach (var dir; split(",", csv))
-		foreach(var m; scan_models(dir))
+		foreach (var m; scan_models(dir))
 			append(list, m);
 
 	return sort(list, cmp);
@@ -811,16 +811,15 @@ var file_selector = nil;
 
 # called via l-key (load object from disk)
 var file_select_model = func {
-	if (file_selector == nil) {
+	if (file_selector == nil)
 		file_selector = gui.FileSelector.new(fsel_callback,
 				"Select 3D model file", "Load Model",
 				["*.ac", "*.osg", "*.xml"], getprop("/sim/fg-root"));
-	}
 	file_selector.open();
 }
 
-var fsel_callback = func {
-	var model = cmdarg().getValue();
+var fsel_callback = func(n) {
+	var model = n.getValue();
 	var root = string.fixpath(getprop("/sim/fg-root")) ~ "/";
 	if (substr(model, 0, size(root)) == root)
 		model = substr(model, size(root));

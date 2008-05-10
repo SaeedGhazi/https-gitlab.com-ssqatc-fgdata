@@ -306,7 +306,7 @@ var Model = {
 		props.globals.getNode("/models", 1).removeChild("model", me.node.getIndex());
 	},
 	clone : func(path) {
-		Model.new(path, me.pos, me.node);
+		Model.new(path, geo.Coord.new(me.pos), me.node);
 	},
 	move : func(pos) {
 		var v = me.visible;
@@ -658,6 +658,22 @@ var ModelMgr = {
 	},
 	toggle_marker : func {
 		me.marker.visible ? me.marker.hide() : me.marker.unhide();
+	},
+	clone_selected : func {
+		var clones = [];
+		foreach (var m; me.models) {
+			if (m.selected) {
+				m.selected = 0;
+				var c = m.clone(m.path);
+				append(clones, c);
+				if (m == me.active)
+					me.active = c;
+			}
+		}
+		foreach (var m; clones) {
+			m.selected = 1;
+			append(me.models, m);
+		}
 	},
 };
 

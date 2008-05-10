@@ -216,6 +216,15 @@
 				</binding>
 			</key>
 
+			<key n="68">
+				<name>D</name>
+				<desc>Clone selected objects</desc>
+				<binding>
+					<command>nasal</command>
+					<script>ufo.modelmgr.clone_selected()</script>
+				</binding>
+			</key>
+
 			<key n="100">
 				<name>d</name>
 				<desc>Dump coordinates</desc>

@@ -216,8 +216,8 @@
 				</binding>
 			</key>
 
-			<key n="68">
-				<name>D</name>
+			<key n="99">
+				<name>c</name>
 				<desc>Clone selected objects</desc>
 				<binding>
 					<command>nasal</command>

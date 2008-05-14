@@ -172,7 +172,7 @@ var window = {
 
 
 var property_display = {
-	init : func(x, y, lines) {
+	init : func(x, y) {
 		me.listener = setlistener("/sim/gui/dialogs/property-browser/selected", func(n) {
 			var n = n.getValue();
 			if (n != "" and getprop("/devices/status/keyboard/shift")) {
@@ -183,24 +183,53 @@ var property_display = {
 					me.add(n);
 			}
 		});
-		me.window = window.new(x, y, lines, 0);
-		me.window.align = "left";
-		me.window.font = "HELVETICA_14";
-		me.interval = 0.5;
-		me.color = [1, 1, 0.5, 1];
+		me.x = x;
+		me.y = y;
+		me.font = "HELVETICA_14";
+		me.interval = 0;
+		me.bg = [0, 0, 0, 0];           # background color
+		me.fg = [1, 1, 1, 1];           # default foreground color
 		me.loopid = 0;
+		me.dialog = nil;
+		me.base = props.globals.getNode("/sim/gui/dialogs/property-display", 1);
+		me.namenode = props.Node.new({ "dialog-name" : "__property_display__" });
 		me.reset();
 	},
-	reset : func {
-		me.loopid += 1;
-		me.window.close();
-		me.entries = [];
+	create : func {
+		me.dialog = gui.Widget.new();
+		me.dialog.set("name", "__property_display__");
+		me.dialog.set("x", me.x);
+		me.dialog.set("y", me.y);
+		me.dialog.set("layout", "vbox");
+		me.dialog.set("default-padding", 2);
+		me.dialog.setFont(me.font);
+		me.dialog.setColor(me.bg[0], me.bg[1], me.bg[2], me.bg[3]);
+
+		foreach (var e; me.entries) {
+			var w = me.dialog.addChild("text");
+			w.set("halign", "left");
+			w.set("label", "XX");   # mouse-grab sensitive area
+			w.set("format", e[2] ~ " = %s");
+			w.set("property", e[3].getPath());
+			w.set("live", 1);
+			w.setColor(me.fg[0], me.fg[1], me.fg[2], me.fg[3]);
+		}
+		fgcommand("dialog-new", me.dialog.prop());
 	},
-	nameof : func(n) {
-		var name = n.getName();
-		if (var i = n.getIndex())
-			name ~= '[' ~ i ~ ']';
-		return name;
+	open : func {
+		if (me.dialog != nil)
+			fgcommand("dialog-show", me.namenode);
+	},
+	close : func {
+		if (me.dialog != nil) {
+			fgcommand("dialog-close", me.namenode);
+			me.dialog = nil;
+		}
+	},
+	reset : func {
+		me.close();
+		me.loopid += 1;
+		me.entries = [];
 	},
 	add : func(n) {
 		if (!isa(n, props.Node))
@@ -212,7 +241,7 @@ var property_display = {
 			e[1] = e[0];
 			e[2] = me.nameof(e[0]);
 		}
-		append(me.entries, [n, n, me.nameof(n)]);
+		append(me.entries, [n, n, me.nameof(n), me.base.getChild("entry", size(me.entries), 1)]);
 
 		# extend names to the left until they are unique
 		while (1) {
@@ -237,22 +266,28 @@ var property_display = {
 			if (finished)
 				break;
 		}
+		me.close();
+		me.create();
+		me.open();
 		me._loop_(me.loopid += 1);
 	},
 	update : func {
-		me.window.lines = [];
 		foreach (var e; me.entries) {
 			if ((var val = e[0].getValue()) == nil)
 				val = "nil";
-			append(me.window.lines, [e[2] ~ " = " ~ sanitize(val, 1),
-					me.color[0], me.color[1], me.color[2], me.color[3]]);
+			e[3].setValue(sanitize(val, 1));
 		}
-		me.window.show();
 	},
 	_loop_ : func(id) {
 		id != me.loopid and return;
 		me.update();
 		settimer(func { me._loop_(id) }, me.interval);
+	},
+	nameof : func(n) {
+		var name = n.getName();
+		if (var i = n.getIndex())
+			name ~= '[' ~ i ~ ']';
+		return name;
 	},
 };
 
@@ -261,7 +296,7 @@ var property_display = {
 var log = nil;
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
-	property_display.init(5, -25, 999);
+	property_display.init(5, -25);
 
 	setlistener("/sim/gui/current-style", func {
 		var theme = getprop("/sim/gui/current-style");

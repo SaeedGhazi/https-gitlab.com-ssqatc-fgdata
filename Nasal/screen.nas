@@ -35,9 +35,10 @@
 # convert string for output; replaces tabs by spaces, and skips
 # delimiters and the voice part in "{text|voice}" constructions
 #
-var sanitize = func(s) {
+var sanitize = func(s, newline = 0) {
 	var r = "";
 	var skip = 0;
+	s ~= "";
 	for (var i = 0; i < size(s); i += 1) {
 		var c = s[i];
 		if (c == `\t`)
@@ -48,6 +49,8 @@ var sanitize = func(s) {
 			skip = 1;
 		elsif (c == `}`)
 			skip = 0;
+		elsif (c == `\n` and newline)
+			r ~= "\\n";
 		elsif (!skip)
 			r ~= chr(c);
 	}
@@ -182,7 +185,9 @@ var property_display = {
 		});
 		me.window = window.new(x, y, lines, 0);
 		me.window.align = "left";
-		me.window.font = "HELVETICA_12";
+		me.window.font = "HELVETICA_14";
+		me.interval = 0.5;
+		me.color = [1, 1, 0.5, 1];
 		me.loopid = 0;
 		me.reset();
 	},
@@ -200,14 +205,15 @@ var property_display = {
 		foreach (var n; me.nodes) {
 			if ((val = n.getValue()) == nil)
 				val = "nil";
-			append(me.window.lines, [n.getName() ~ " = " ~ val, 1, 1, 0.5, 1]);
+			append(me.window.lines, [n.getName() ~ " = " ~ sanitize(val, 1),
+					me.color[0], me.color[1], me.color[2], me.color[3]]);
 		}
 		me.window.show();
 	},
 	_loop_ : func(id) {
 		id != me.loopid and return;
 		me.update();
-		settimer(func { me._loop_(id) }, 0.5);
+		settimer(func { me._loop_(id) }, me.interval);
 	},
 };
 

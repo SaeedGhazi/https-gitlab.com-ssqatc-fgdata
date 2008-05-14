@@ -182,6 +182,7 @@ var property_display = {
 		});
 		me.window = window.new(x, y, lines, 0);
 		me.window.align = "left";
+		me.window.font = "HELVETICA_12";
 		me.loopid = 0;
 		me.reset();
 	},

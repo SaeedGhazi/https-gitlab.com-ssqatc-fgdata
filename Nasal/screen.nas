@@ -84,7 +84,6 @@ var window = {
 		setlistener("/sim/startup/ysize", func { m._redraw_() });
 		return m;
 	},
-
 	write : func(msg, r = nil, g = nil, b = nil, a = nil) {
 		if (me.namenode == nil)
 			return;
@@ -109,7 +108,6 @@ var window = {
 		}
 		me.show();
 	},
-
 	show : func {
 		if (me.dialog != nil)
 			me.close();
@@ -139,7 +137,6 @@ var window = {
 		fgcommand("dialog-new", me.dialog.prop());
 		fgcommand("dialog-show", me.namenode);
 	},
-
 	close : func {
 		fgcommand("dialog-close", me.namenode);
 		if (me.dialog != nil and me.sticky) {
@@ -147,7 +144,6 @@ var window = {
 			me.y = me.dialog.prop().getNode("lasty").getValue();
 		}
 	},
-
 	_timeout_ : func {
 		if (me.skiptimer > 0) {
 			me.skiptimer -= 1;
@@ -162,7 +158,6 @@ var window = {
 			me.lines = [];
 		}
 	},
-
 	_redraw_ : func {
 		if (me.dialog != nil) {
 			me.close();
@@ -173,9 +168,52 @@ var window = {
 
 
 
+var property_display = {
+	init : func(x, y, lines) {
+		me.listener = setlistener("/sim/gui/dialogs/property-browser/selected", func(n) {
+			var n = n.getValue();
+			if (n != "" and getprop("/devices/status/keyboard/shift")) {
+				if (getprop("/devices/status/keyboard/ctrl"))
+					return me.reset();
+				n = props.globals.getNode(n);
+				if (!n.getAttribute("children"))
+					me.add(n);
+			}
+		});
+		me.window = window.new(x, y, lines, 0);
+		me.window.align = "left";
+		me.loopid = 0;
+		me.reset();
+	},
+	reset : func {
+		me.loopid += 1;
+		me.window.close();
+		me.nodes = [];
+	},
+	add : func(n) {
+		append(me.nodes, isa(n, props.Node) ? n : props.globals.getNode(n, 1));
+		me._loop_(me.loopid += 1);
+	},
+	update : func {
+		me.window.lines = [];
+		foreach (var n; me.nodes)
+			append(me.window.lines, [n.getName() ~ " = " ~ n.getValue(), 1, 1, 0.7, 1]);
+		me.window.show();
+	},
+	_loop_ : func(id) {
+		id != me.loopid and return;
+		me.update();
+		settimer(func { me._loop_(id) }, 0.5);
+	},
+};
+
+
+
 var log = nil;
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
+	property_display.init(5, -25, 999);
+
 	setlistener("/sim/gui/current-style", func {
 		var theme = getprop("/sim/gui/current-style");
 		theme_font = getprop("/sim/gui/style[" ~ theme ~ "]/fonts/message-display/name");

@@ -12,6 +12,7 @@
 #   <property>=<value><CR> -> set property to value
 #   <property><CR>         -> print property and value to screen and terminal
 #   <property>*            -> print property and all children to terminal
+#   <property>!            -> add property to display list  (reset list with  /!)
 #   <property>:            -> open property browser in this property's directory
 #   <string>?              -> print all properties whose path contains this string
 #
@@ -132,6 +133,16 @@ var handle_key = func(key, shift) {
 		search(props.globals, text);
 		print("-- done --\n");
 		stop(0);
+		return 1;
+
+	} elsif (key == `!` and state.node != nil and state.value == nil) {
+		if (!state.node.getPath()) {
+			screen.property_display.reset();
+			stop(0);
+		} else {
+			screen.property_display.add(state.node);
+			stop(1);
+		}
 		return 1;
 
 	} elsif (key == `*` and state.node != nil and state.value == nil) {

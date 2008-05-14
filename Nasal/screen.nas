@@ -194,18 +194,57 @@ var property_display = {
 	reset : func {
 		me.loopid += 1;
 		me.window.close();
-		me.nodes = [];
+		me.entries = [];
+	},
+	nameof : func(n) {
+		var name = n.getName();
+		if (var i = n.getIndex())
+			name ~= '[' ~ i ~ ']';
+		return name;
 	},
 	add : func(n) {
-		append(me.nodes, isa(n, props.Node) ? n : props.globals.getNode(n, 1));
+		if (!isa(n, props.Node))
+			n = props.globals.getNode(n, 1);
+		var path = n.getPath();
+		foreach (var e; me.entries) {
+			if (e[0].getPath() == path)
+				return;
+			e[1] = e[0];
+			e[2] = me.nameof(e[0]);
+		}
+		append(me.entries, [n, n, me.nameof(n)]);
+
+		# extend names to the left until they are unique
+		while (1) {
+			var uniq = {};
+			foreach (var e; me.entries) {
+				if (!contains(uniq, e[2]))
+					uniq[e[2]] = [];
+				append(uniq[e[2]], e);
+			}
+
+			var finished = 1;
+			foreach (var u; keys(uniq)) {
+				if (size(uniq[u]) == 1)
+					continue;
+				finished = 0;
+				foreach (var e; uniq[u]) {
+					e[1] = e[1].getParent();
+					if (e[1] != nil)
+						e[2] = me.nameof(e[1]) ~ '/' ~ e[2];
+				}
+			}
+			if (finished)
+				break;
+		}
 		me._loop_(me.loopid += 1);
 	},
 	update : func {
 		me.window.lines = [];
-		foreach (var n; me.nodes) {
-			if ((val = n.getValue()) == nil)
+		foreach (var e; me.entries) {
+			if ((var val = e[0].getValue()) == nil)
 				val = "nil";
-			append(me.window.lines, [n.getName() ~ " = " ~ sanitize(val, 1),
+			append(me.window.lines, [e[2] ~ " = " ~ sanitize(val, 1),
 					me.color[0], me.color[1], me.color[2], me.color[3]]);
 		}
 		me.window.show();

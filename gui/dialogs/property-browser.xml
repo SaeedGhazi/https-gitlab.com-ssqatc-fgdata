@@ -14,13 +14,13 @@
 			<pref-width>16</pref-width>
 			<pref-height>16</pref-height>
 			<border>2</border>
-		<!-- looks better in anthrax style
+		<!-- looks better in anthrax style -->
 			<color>
 				<red>0.34</red>
 				<green>0.33</green>
 				<blue>0.35</blue>
 			</color>
-		-->
+		<!-- -->
 			<binding>
 				<command>nasal</command>
 				<script>clone(dir)</script>
@@ -109,8 +109,8 @@
 			var label = dlg.getNode("label", 1);
 			var input = dlg.getNode("input", 1);
 			var list = dlg.getNode("list", 1);
-			var node = nil;		# selected node entry (props.Node)
-			var dir = nil;		# current directory (string)
+			var node = nil;         # selected node entry (props.Node)
+			var dir = nil;          # current directory (string)
 			var update_interval = 2;
 			var root_title = "Internal Properties";
 			var no_selection = "[none]";
@@ -121,9 +121,9 @@
 			}
 
 			var squeeze = func(s, n) {
-				if (n >= size(s) or 7 > n ) {
+				if (n >= size(s) or 7 > n )
 					return s;
-				}
+
 				var l = substr(s, 0, (n - 3) / 2);
 				var r = substr(s, size(s) + size(l) + 3 - n);
 				return l ~ "..." ~ r;
@@ -132,9 +132,10 @@
 			var select = func {
 				var lst = list.getValue();
 				node = props.globals.getNode(lst);
-				if (node == nil) {
+				if (node == nil)
 					node = props.globals;
-				}
+
+				setprop("/sim/gui/dialogs/property-browser/selected", node.getPath());
 				if (size(node.getChildren())) {
 					dir = node.getPath();
 					title.setValue(node.getPath() == "" ? root_title : lst);
@@ -145,9 +146,9 @@
 					var name = node.getName();
 					var index = node.getIndex();
 					var type = node.getType();
-					if (index) {
+					if (index)
 						name ~= "[" ~ index ~ "]";
-					}
+
 					var value = nil;
 					if (type == "BOOL") {
 						value = node.getBoolValue() ? "true" : "false";
@@ -167,9 +168,8 @@
 			}
 
 			var set = func {
-				if (node != nil) {
+				if (node != nil)
 					node.setValue(input.getValue());
-				}
 			}
 
 			var clone = func(startdir) {
@@ -196,9 +196,8 @@
 			var auto_update = func {
 				list.setValue(dir);
 				update("property-list");
-				if (update_interval) {
+				if (update_interval)
 					settimer(auto_update, update_interval, 1);
-				}
 			}
 
 			dir = dlg.getNode("last") != nil ? dlg.getNode("last").getValue() : "/";
@@ -209,11 +208,10 @@
 
 		<close>
 			update_interval = 0;
-			if (find("property-browser-", dlgname) >= 0) {
+			if (find("property-browser-", dlgname) >= 0)
 				dlg.getParent().removeChildren(dlgname);
-			} else {
+			else
 				dlg.getNode("last", 1).setValue(dir);
-			}
 		</close>
 	</nasal>
 </PropertyList>

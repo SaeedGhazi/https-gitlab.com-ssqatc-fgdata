@@ -197,8 +197,11 @@ var property_display = {
 	},
 	update : func {
 		me.window.lines = [];
-		foreach (var n; me.nodes)
-			append(me.window.lines, [n.getName() ~ " = " ~ n.getValue(), 1, 1, 0.7, 1]);
+		foreach (var n; me.nodes) {
+			if ((val = n.getValue()) == nil)
+				val = "nil";
+			append(me.window.lines, [n.getName() ~ " = " ~ val, 1, 1, 0.5, 1]);
+		}
 		me.window.show();
 	},
 	_loop_ : func(id) {

@@ -59,8 +59,8 @@ var sanitize = func(s, newline = 0) {
 
 
 
-var dialog_id = 0;
 var theme_font = nil;
+var window_id = 0;
 
 var window = {
 	new : func(x = nil, y = nil, maxlines = 10, autoscroll = 10) {
@@ -78,7 +78,7 @@ var window = {
 		m.align = "center";		# "left", "right", "center"
 		#
 		# "private"
-		m.name = "__screen_window_" ~ (dialog_id += 1) ~ "__";
+		m.name = "__screen_window_" ~ (window_id += 1) ~ "__";
 		m.lines = [];
 		m.skiptimer = 0;
 		m.dialog = nil;
@@ -171,48 +171,51 @@ var window = {
 
 
 
-var property_display = {
-	init : func(x, y) {
-		me.listener = setlistener("/sim/gui/dialogs/property-browser/selected", func(n) {
-			var n = n.getValue();
-			if (n != "" and getprop("/devices/status/keyboard/shift")) {
-				if (getprop("/devices/status/keyboard/ctrl"))
-					return me.reset();
-				n = props.globals.getNode(n);
-				if (!n.getAttribute("children"))
-					me.add(n);
-			}
-		});
-		me.x = x;
-		me.y = y;
-		me.font = "HELVETICA_14";
-		me.interval = 0;
-		me.bg = [0, 0, 0, 0];           # background color
-		me.fg = [1, 1, 1, 1];           # default foreground color
-		me.loopid = 0;
-		me.dialog = nil;
-		me.base = props.globals.getNode("/sim/gui/dialogs/property-display", 1);
-		me.namenode = props.Node.new({ "dialog-name" : "__property_display__" });
-		me.reset();
+var display_id = 0;
+
+var display = {
+	new : func(x, y) {
+		var m = { parents: [display] };
+		#
+		# "public"
+		m.x = x;
+		m.y = y;
+		m.font = "HELVETICA_14";
+		m.color = [1, 0.9, 0, 1];
+		m.interval = 0.1;
+		#
+		# "private"
+		m.loopid = 0;
+		m.dialog = nil;
+		m.name = "__screen_display_" ~ (display_id += 1) ~ "__";
+		m.base = props.globals.getNode("/sim/gui/dialogs/property-display-" ~ display_id, 1);
+		m.namenode = props.Node.new({ "dialog-name" : m.name });
+		m.reset();
+		return m;
+	},
+	setcolor : func(r, g, b, a = 1) {
+		me.color = [r, g, b, a];
+		me.redraw();
+		me;
 	},
 	create : func {
 		me.dialog = gui.Widget.new();
-		me.dialog.set("name", "__property_display__");
+		me.dialog.set("name", me.name);
 		me.dialog.set("x", me.x);
 		me.dialog.set("y", me.y);
 		me.dialog.set("layout", "vbox");
 		me.dialog.set("default-padding", 2);
 		me.dialog.setFont(me.font);
-		me.dialog.setColor(me.bg[0], me.bg[1], me.bg[2], me.bg[3]);
+		me.dialog.setColor(0, 0, 0, 0);
 
 		foreach (var e; me.entries) {
 			var w = me.dialog.addChild("text");
 			w.set("halign", "left");
-			w.set("label", "XX");   # mouse-grab sensitive area
-			w.set("format", e[2] ~ " = %s");
-			w.set("property", e[3].getPath());
+			w.set("label", "M");    # mouse-grab sensitive area
+			w.set("format", e.tag ~ " = %s");
+			w.set("property", e.target.getPath());
 			w.set("live", 1);
-			w.setColor(me.fg[0], me.fg[1], me.fg[2], me.fg[3]);
+			w.setColor(me.color[0], me.color[1], me.color[2], me.color[3]);
 		}
 		fgcommand("dialog-new", me.dialog.prop());
 	},
@@ -231,25 +234,31 @@ var property_display = {
 		me.loopid += 1;
 		me.entries = [];
 	},
-	add : func(n) {
-		if (!isa(n, props.Node))
-			n = props.globals.getNode(n, 1);
-		var path = n.getPath();
-		foreach (var e; me.entries) {
-			if (e[0].getPath() == path)
-				return;
-			e[1] = e[0];
-			e[2] = me.nameof(e[0]);
+	redraw : func {
+		me.close();
+		me.create();
+		me.open();
+	},
+	add : func(p...) {
+		foreach (PROP; var n; props.nodeList(p)) {
+			var path = n.getPath();
+			foreach (var e; me.entries) {
+				if (e.node.getPath() == path)
+					continue PROP;
+				e.parent = e.node;
+				e.tag = me.nameof(e.node);
+			}
+			append(me.entries, { node: n, parent: n, tag: me.nameof(n),
+					target: me.base.getChild("entry", size(me.entries), 1) });
 		}
-		append(me.entries, [n, n, me.nameof(n), me.base.getChild("entry", size(me.entries), 1)]);
 
 		# extend names to the left until they are unique
 		while (1) {
 			var uniq = {};
 			foreach (var e; me.entries) {
-				if (!contains(uniq, e[2]))
-					uniq[e[2]] = [];
-				append(uniq[e[2]], e);
+				if (!contains(uniq, e.tag))
+					uniq[e.tag] = [];
+				append(uniq[e.tag], e);
 			}
 
 			var finished = 1;
@@ -258,9 +267,9 @@ var property_display = {
 					continue;
 				finished = 0;
 				foreach (var e; uniq[u]) {
-					e[1] = e[1].getParent();
-					if (e[1] != nil)
-						e[2] = me.nameof(e[1]) ~ '/' ~ e[2];
+					e.parent = e.parent.getParent();
+					if (e.parent != nil)
+						e.tag = me.nameof(e.parent) ~ '/' ~ e.tag;
 				}
 			}
 			if (finished)
@@ -270,12 +279,13 @@ var property_display = {
 		me.create();
 		me.open();
 		me._loop_(me.loopid += 1);
+		me;
 	},
 	update : func {
 		foreach (var e; me.entries) {
-			if ((var val = e[0].getValue()) == nil)
+			if ((var val = e.node.getValue()) == nil)
 				val = "nil";
-			e[3].setValue(sanitize(val, 1));
+			e.target.setValue(sanitize(val, 1));
 		}
 	},
 	_loop_ : func(id) {
@@ -293,10 +303,25 @@ var property_display = {
 
 
 
+
+var listener = {};
 var log = nil;
+var property_display = nil;
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
-	property_display.init(5, -25);
+	property_display = display.new(5, -25);
+	listener["display"] = setlistener("/sim/gui/dialogs/property-browser/selected", func(n) {
+		var n = n.getValue();
+		if (n != "" and getprop("/devices/status/keyboard/shift")) {
+			if (getprop("/devices/status/keyboard/ctrl"))
+				return property_display.reset();
+			n = props.globals.getNode(n);
+			if (!n.getAttribute("children"))
+				property_display.add(n);
+			elsif (getprop("/devices/status/keyboard/alt"))
+				property_display.add(n.getChildren());
+		}
+	});
 
 	setlistener("/sim/gui/current-style", func {
 		var theme = getprop("/sim/gui/current-style");
@@ -307,14 +332,14 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	log.sticky = 0;  # don't turn on; makes scrolling up messages jump left and right
 
 	var b = "/sim/screen/";
-	setlistener(b ~ "black",   func(n) { log.write(n.getValue(), 0,   0,   0) });
-	setlistener(b ~ "white",   func(n) { log.write(n.getValue(), 1,   1,   1) });
-	setlistener(b ~ "red",     func(n) { log.write(n.getValue(), 0.8, 0,   0) });
-	setlistener(b ~ "green",   func(n) { log.write(n.getValue(), 0,   0.6, 0) });
-	setlistener(b ~ "blue",    func(n) { log.write(n.getValue(), 0,   0,   0.8) });
-	setlistener(b ~ "yellow",  func(n) { log.write(n.getValue(), 0.8, 0.8, 0) });
-	setlistener(b ~ "magenta", func(n) { log.write(n.getValue(), 0.7, 0,   0.7) });
-	setlistener(b ~ "cyan",    func(n) { log.write(n.getValue(), 0,   0.6, 0.6) });
+	setlistener(b ~ "black",   func(n) log.write(n.getValue(), 0,   0,   0));
+	setlistener(b ~ "white",   func(n) log.write(n.getValue(), 1,   1,   1));
+	setlistener(b ~ "red",     func(n) log.write(n.getValue(), 0.8, 0,   0));
+	setlistener(b ~ "green",   func(n) log.write(n.getValue(), 0,   0.6, 0));
+	setlistener(b ~ "blue",    func(n) log.write(n.getValue(), 0,   0,   0.8));
+	setlistener(b ~ "yellow",  func(n) log.write(n.getValue(), 0.8, 0.8, 0));
+	setlistener(b ~ "magenta", func(n) log.write(n.getValue(), 0.7, 0,   0.7));
+	setlistener(b ~ "cyan",    func(n) log.write(n.getValue(), 0,   0.6, 0.6));
 });
 
 
@@ -333,7 +358,7 @@ var msg_repeat = func {
 			return;
 
 		setprop("/sim/messages/pilot", "Say again ...");
-		settimer(func { setprop("/sim/messages/copilot", last) }, 1.5);
+		settimer(func setprop("/sim/messages/copilot", last), 1.5);
 
 	} else {
 		var last = atc.getValue();
@@ -341,9 +366,7 @@ var msg_repeat = func {
 			return;
 
 		setprop("/sim/messages/pilot", "This is " ~ callsign.getValue() ~ ". Say again, over.");
-		settimer(func {
-			atc.setValue(atclast.getValue());
-		}, 6);
+		settimer(func atc.setValue(atclast.getValue()), 6);
 	}
 }
 
@@ -351,7 +374,6 @@ var msg_repeat = func {
 var atc = nil;
 var callsign = nil;
 var atclast = nil;
-var listener = {};
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
 	# set /sim/screen/nomap=true to prevent default message mapping
@@ -413,18 +435,18 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
 	var m = "/sim/messages/";
 	listener["atc"] = setlistener(m ~ "atc",
-			func(n) { map("atc",      n.getValue(), 0.7, 1.0, 0.7) });
+			func(n) map("atc",      n.getValue(), 0.7, 1.0, 0.7));
 	listener["approach"] = setlistener(m ~ "approach",
-			func(n) { map("approach", n.getValue(), 0.7, 1.0, 0.7) });
+			func(n) map("approach", n.getValue(), 0.7, 1.0, 0.7));
 	listener["ground"] = setlistener(m ~ "ground",
-			func(n) { map("ground",   n.getValue(), 0.7, 1.0, 0.7) });
+			func(n) map("ground",   n.getValue(), 0.7, 1.0, 0.7));
 
 	listener["pilot"] = setlistener(m ~ "pilot",
-			func(n) { map("pilot",    n.getValue(), 1.0, 0.8, 0.0) });
+			func(n) map("pilot",    n.getValue(), 1.0, 0.8, 0.0));
 	listener["copilot"] = setlistener(m ~ "copilot",
-			func(n) { map("copilot",  n.getValue(), 1.0, 1.0, 1.0) });
+			func(n) map("copilot",  n.getValue(), 1.0, 1.0, 1.0));
 	listener["ai-plane"] = setlistener(m ~ "ai-plane",
-			func(n) { map("ai-plane", n.getValue(), 0.9, 0.4, 0.2) });
+			func(n) map("ai-plane", n.getValue(), 0.9, 0.4, 0.2));
 });
 
 

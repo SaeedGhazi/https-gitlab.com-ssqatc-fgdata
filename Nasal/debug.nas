@@ -54,35 +54,34 @@ var isprint = nil;
 var isalnum = nil;
 var isalpha = nil;
 
-var _c = func {}
+var _c = func nil;
 
 var color = func(enabled) {
-	if (enabled) {
-		_c = func(color, s) { "\x1b[" ~ color ~ "m" ~ s ~ "\x1b[m" }
-	} else {
-		_c = func(dummy, s) { s }
-	}
+	if (enabled)
+		_c = func(color, s) "\x1b[" ~ color ~ "m" ~ s ~ "\x1b[m";
+	else
+		_c = func(dummy, s) s;
 }
 
 
 # for color codes see  $ man console_codes
 #
-var _title       = func(s) { _c("33;42;1", s) } # backtrace header
-var _section     = func(s) { _c("37;41;1", s) } # backtrace frame
-var _error       = func(s) { _c("31;1",    s) } # internal errors
-var _bench       = func(s) { _c("37;45;1", s) } # benchmark info
+var _title       = func(s) _c("33;42;1", s); # backtrace header
+var _section     = func(s) _c("37;41;1", s); # backtrace frame
+var _error       = func(s) _c("31;1",    s); # internal errors
+var _bench       = func(s) _c("37;45;1", s); # benchmark info
 
-var _nil         = func(s) { _c("32", s) }      # nil
-var _string      = func(s) { _c("31", s) }      # "foo"
-var _num         = func(s) { _c("31", s) }      # 0.0
-var _bracket     = func(s) { _c("", s) }        # [ ]
-var _brace       = func(s) { _c("", s) }        # { }
-var _angle       = func(s) { _c("", s) }        # < >
-var _vartype     = func(s) { _c("33", s) }      # func ghost
-var _proptype    = func(s) { _c("34", s) }      # BOOL INT LONG DOUBLE ...
-var _path        = func(s) { _c("36", s) }      # /some/property/path
-var _internal    = func(s) { _c("35", s) }      # me parents
-var _varname     = func(s) { _c("1", s) }       # variable_name
+var _nil         = func(s) _c("32", s);      # nil
+var _string      = func(s) _c("31", s);      # "foo"
+var _num         = func(s) _c("31", s);      # 0.0
+var _bracket     = func(s) _c("", s);        # [ ]
+var _brace       = func(s) _c("", s);        # { }
+var _angle       = func(s) _c("", s);        # < >
+var _vartype     = func(s) _c("33", s);      # func ghost
+var _proptype    = func(s) _c("34", s);      # BOOL INT LONG DOUBLE ...
+var _path        = func(s) _c("36", s);      # /some/property/path
+var _internal    = func(s) _c("35", s);      # me parents
+var _varname     = func(s) s;                # variable_name
 
 var ghosttypes = {};
 
@@ -150,14 +149,14 @@ var attributes = func(p, verbose = 1) {
 	var U = p.getAttribute("userarchive") ? "U" : "";
 	var T = p.getAttribute("tied")        ? "T" : "";
 	var attr = r ~ w ~ R ~ W ~ A ~ U ~ T;
-	var type = "(" ~ _proptype(p.getType());
+	var type = "(" ~ p.getType();
 	if (size(attr))
 		type ~= ", " ~ attr;
 	if (var l = p.getAttribute("listeners"))
 		type ~= ", L" ~ l;
 	if (verbose and (var c = p.getAttribute("references")) > 2)
 		type ~= ", #" ~ (c - 2);
-	return type ~ ")";
+	return _proptype(type ~ ")");
 }
 
 
@@ -247,7 +246,14 @@ var string = func(o) {
 }
 
 
-var dump = func { size(arg) ? print(string(arg[0])) : local(1) }
+var dump = func(vars...) {
+	if (!size(vars))
+		return local(1);
+	if (size(vars) == 1)
+		return print(string(vars[0]));
+	forindex (var i; vars)
+		print(_c("33;40;1", "#" ~ i) ~ " ", string(vars[i]));
+}
 
 
 var local = func(frame = 0) {
@@ -309,7 +315,7 @@ var benchmark = func(label, f, arg...) {
 }
 
 
-var exit = func { fgcommand("exit") }
+var exit = func fgcommand("exit");
 
 
 ##
@@ -331,8 +337,8 @@ var printerror = func(err) {
 
 
 if (getprop("/sim/logging/priority") != "alert") {
-	_setlistener("/sim/signals/nasal-dir-initialized", func { print(_c("32", "** NASAL initialized **")) });
-	_setlistener("/sim/signals/fdm-initialized", func { print(_c("36", "** FDM initialized **")) });
+	_setlistener("/sim/signals/nasal-dir-initialized", func print(_c("32", "** NASAL initialized **")));
+	_setlistener("/sim/signals/fdm-initialized", func print(_c("36", "** FDM initialized **")));
 }
 
 
@@ -374,9 +380,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	ghosttypes[ghosttype(props._globals())] = "PropertyNode";
 	ghosttypes[ghosttype(io.stderr)] = "FileHandle";
 
-	setlistener("/sim/startup/terminal-ansi-colors", func(n) {
-		color(n.getBoolValue());
-	}, 1);
+	setlistener("/sim/startup/terminal-ansi-colors", func(n) color(n.getBoolValue()), 1);
 });
 
 

@@ -181,7 +181,7 @@ var display = {
 		m.x = x;
 		m.y = y;
 		m.font = "HELVETICA_14";
-		m.color = [1, 0.9, 0, 1];
+		m.color = [1, 1, 1, 1];
 		m.interval = 0.1;
 		#
 		# "private"

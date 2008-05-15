@@ -8,10 +8,9 @@
 # from a Nasal context.  The various get/set methods work only on the
 # local node, there is no equivalent of the "relative path" variants
 # available in C++; just use node.getNode(path).whatever() instead.
-# There is no support for the "listener" interface yet.  The aliasing
-# feature isn't exposed, except that you can get an "ALIAS" return
-# from getType to detect them (to avoid cycles while walking the
-# tree).
+# The aliasing feature isn't exposed, except that you can get an
+# "ALIAS" return from getType to detect them (to avoid cycles while
+# walking the tree).
 #
 Node = {
     getType        : func { wrap(_getType(me._g, arg)) },
@@ -160,11 +159,11 @@ var copy = func(src, dest, attr = 0) {
     }
     var type = src.getType();
     var val = src.getValue();
-    if(type == "ALIAS" or type == "NONE") { return; }
-    elsif(type == "BOOL") { dest.setBoolValue(val); }
-    elsif(type == "INT") { dest.setIntValue(val); }
-    elsif(type == "DOUBLE") { dest.setDoubleValue(val); }
-    else { dest.setValue(val); }
+    if(type == "ALIAS" or type == "NONE") return;
+    elsif(type == "BOOL") dest.setBoolValue(val);
+    elsif(type == "INT" or type == "LONG") dest.setIntValue(val);
+    elsif(type == "FLOAT" or type == "DOUBLE") dest.setDoubleValue(val);
+    else dest.setValue(val);
     if(attr) dest.setAttribute(src.getAttribute());
 }
 
@@ -218,43 +217,72 @@ var setAll = func {
 }
 
 ##
+# Turns about anything into a list of props.Nodes, including ghosts,
+# path strings, vectors or hashes containing, as well as functions
+# returning any of the former and in arbitrary nesting. This is meant
+# to be used in functions whose main purpose is to handle collections
+# of properties.
+#
+var nodeList = func {
+    var list = [];
+    foreach(var a; arg) {
+        var t = typeof(a);
+        if(isa(a, props.Node))
+            append(list, a);
+        elsif(t == "scalar")
+            append(list, props.globals.getNode(a, 1));
+        elsif(t == "vector")
+            foreach(var i; a)
+                list ~= nodeList(i);
+        elsif(t == "hash")
+            foreach(var i; keys(a))
+                list ~= nodeList(a[i]);
+        elsif(t == "func")
+            list ~= nodeList(a());
+        elsif(t == "ghost" and ghosttype(a) == ghosttype(props._globals()))
+            append(list, props.wrapNode(a));
+        else
+            die("nodeList: invalid nil property");
+    }
+    return list;
+}
+
+##
 # Evaluates a <condition> property branch according to the rules
 # set out in $FG_ROOT/Docs/README.conditions. Undefined conditions
 # and a nil argument are "true". The function dumps the condition
 # branch and returns nil on error.
 #
 var condition = func(p) {
-    if(p == nil) { return 1; }
-    if(!isa(p, props.Node)) { p = props.globals.getNode(p); }
+    if(p == nil) return 1;
+    if(!isa(p, props.Node)) p = props.globals.getNode(p);
     return _cond_and(p)
 }
 
 var _cond_and = func(p) {
-    foreach(var c; p.getChildren()) {
-        if(!_cond(c)) { return 0; }
-    }
+    foreach(var c; p.getChildren())
+        if(!_cond(c)) return 0;
     return 1;
 }
 
 var _cond_or = func(p) {
-    foreach(var c; p.getChildren()) {
-        if(_cond(c)) { return 1; }
-    }
+    foreach(var c; p.getChildren())
+        if(_cond(c)) return 1;
     return 0;
 }
 
 var _cond = func(p) {
     var n = p.getName();
-    if(n == "or") { return _cond_or(p); }
-    if(n == "and") { return _cond_and(p); }
-    if(n == "not") { return !_cond_and(p); }
-    if(n == "equals") { return _cond_cmp(p, 0); }
-    if(n == "not-equals") { return !_cond_cmp(p, 0); }
-    if(n == "less-than") { return _cond_cmp(p, -1); }
-    if(n == "greater-than") { return _cond_cmp(p, 1); }
-    if(n == "less-than-equals") { return !_cond_cmp(p, 1); }
-    if(n == "greater-than-equals") { return !_cond_cmp(p, -1); }
-    if(n == "property") { return !!getprop(p.getValue()); }
+    if(n == "or") return _cond_or(p);
+    if(n == "and") return _cond_and(p);
+    if(n == "not") return !_cond_and(p);
+    if(n == "equals") return _cond_cmp(p, 0);
+    if(n == "not-equals") return !_cond_cmp(p, 0);
+    if(n == "less-than") return _cond_cmp(p, -1);
+    if(n == "greater-than") return _cond_cmp(p, 1);
+    if(n == "less-than-equals") return !_cond_cmp(p, 1);
+    if(n == "greater-than-equals") return !_cond_cmp(p, -1);
+    if(n == "property") return !!getprop(p.getValue());
     printlog("alert", "condition: invalid operator ", n);
     dump(p);
     return nil;
@@ -284,8 +312,8 @@ var _cond_cmp = func(p, op) {
         dump(p);
         return nil;
     }
-    if(op < 0) { return left < right; }
-    if(op > 0) { return left > right; }
+    if(op < 0) return left < right;
+    if(op > 0) return left > right;
     return left == right;
 }
 

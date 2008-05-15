@@ -64,7 +64,7 @@ var window_id = 0;
 
 var window = {
 	new : func(x = nil, y = nil, maxlines = 10, autoscroll = 10) {
-		var m = { parents : [window] };
+		var m = { parents: [window] };
 		#
 		# "public"
 		m.x = x;
@@ -82,7 +82,7 @@ var window = {
 		m.lines = [];
 		m.skiptimer = 0;
 		m.dialog = nil;
-		m.namenode = props.Node.new({ "dialog-name" : m.name });
+		m.namenode = props.Node.new({ "dialog-name": m.name });
 		setlistener("/sim/startup/xsize", func { m._redraw_() });
 		setlistener("/sim/startup/ysize", func { m._redraw_() });
 		return m;
@@ -182,6 +182,7 @@ var display = {
 		m.y = y;
 		m.font = "HELVETICA_14";
 		m.color = [1, 1, 1, 1];
+		m.format = "%.12g";
 		m.interval = 0.1;
 		#
 		# "private"
@@ -189,7 +190,7 @@ var display = {
 		m.dialog = nil;
 		m.name = "__screen_display_" ~ (display_id += 1) ~ "__";
 		m.base = props.globals.getNode("/sim/gui/dialogs/property-display-" ~ display_id, 1);
-		m.namenode = props.Node.new({ "dialog-name" : m.name });
+		m.namenode = props.Node.new({ "dialog-name": m.name });
 		m.reset();
 		return m;
 	},
@@ -283,9 +284,16 @@ var display = {
 	},
 	update : func {
 		foreach (var e; me.entries) {
-			if ((var val = e.node.getValue()) == nil)
-				val = "nil";
-			e.target.setValue(sanitize(val, 1));
+			var type = e.node.getType();
+			if (type == "NONE")
+				var val = "nil";
+			elsif (type == "BOOL")
+				var val = e.node.getValue() ? "true" : "false";
+			elsif (type == "STRING" or type == "UNSPECIFIED")
+				var val = "'" ~ sanitize(e.node.getValue(), 1) ~ "'";
+			else
+				var val = sprintf(me.format, e.node.getValue());
+			e.target.setValue(val);
 		}
 	},
 	_loop_ : func(id) {

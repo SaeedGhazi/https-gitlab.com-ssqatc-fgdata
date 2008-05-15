@@ -442,23 +442,9 @@ var data = {
 		}
 		fgcommand("savexml", args);
 	},
-	add : func {
-		foreach (var a; arg) {
-			var t = typeof(a);
-			if (isa(a, props.Node)) {
-				append(me.catalog, a.getPath());
-			} elsif (t == "scalar") {
-				append(me.catalog, a);
-			} elsif (t == "vector") {
-				foreach (var i; a)
-					me.add(i);
-			} elsif (t == "hash") {
-				foreach (var i; keys(a))
-					me.add(a[i]);
-			} else {
-				die("aircraft.data.add(): invalid item of type " ~ t);
-			}
-		}
+	add : func(p...) {
+		foreach (var n; props.nodeList(p))
+			append(me.catalog, n.getPath());
 	},
 };
 

@@ -1,34 +1,5 @@
-# screen log window
-# =================
-#
-#
-# simple use:
-#
-#     foo = screen.window.new()
-#     foo.write("message in the middle of the screen");
-#
-#
-# advanced use:
-#
-#     bar = screen.window.new(nil, -100, 3, 10);
-#     bar.fg = [1, 1, 1, 1];    # choose white color
-#     bar.align = "left";
-#
-#     bar.write("first line");
-#     bar.write("second line (red)", 1, 0, 0);
-#
-#
-#
-# arguments:
-#            x ... x coordinate
-#            y ... y coordinate
-#                  positive coords position relative to the left/lower corner,
-#                  negative coords from the right/upper corner, nil centers
-#     maxlines ... max number of displayed lines; if more are pushed into the
-#                  screen, then the ones on top fall off
-#   autoscroll ... seconds that each line should be shown; can be less if
-#                  a message falls off; if 0 then don't scroll at all
-#
+# on-screen displays
+#==============================================================================
 
 
 ##
@@ -60,9 +31,43 @@ var sanitize = func(s, newline = 0) {
 
 
 var theme_font = nil;
-var window_id = 0;
 
+
+
+# screen.window
+#------------------------------------------------------------------------------
+# Class that manages a dialog with fixed number of lines, where you can push in
+# text at the bottom, which then (optionally) scrolls up after some time.
+#
+# simple use:
+#
+#     var window = screen.window.new();
+#     window.write("message in the middle of the screen");
+#
+#
+# advanced use:
+#
+#     var window = screen.window.new(nil, -100, 3, 10);
+#     window.fg = [1, 1, 1, 1];    # choose white default color
+#     window.align = "left";
+#
+#     window.write("first line");
+#     window.write("second line (red)", 1, 0, 0);
+#
+#
+#
+# arguments:
+#            x ... x coordinate
+#            y ... y coordinate
+#                  positive coords position relative to the left/lower corner,
+#                  negative coords from the right/upper corner, nil centers
+#     maxlines ... max number of displayed lines; if more are pushed into the
+#                  screen, then the ones on top fall off
+#   autoscroll ... seconds that each line should be shown; can be less if
+#                  a message falls off; if 0 then don't scroll at all
+#
 var window = {
+	id : 0,
 	new : func(x = nil, y = nil, maxlines = 10, autoscroll = 10) {
 		var m = { parents: [window] };
 		#
@@ -78,7 +83,7 @@ var window = {
 		m.align = "center";		# "left", "right", "center"
 		#
 		# "private"
-		m.name = "__screen_window_" ~ (window_id += 1) ~ "__";
+		m.name = "__screen_window_" ~ (window.id += 1) ~ "__";
 		m.lines = [];
 		m.skiptimer = 0;
 		m.dialog = nil;
@@ -107,7 +112,7 @@ var window = {
 					me.skiptimer += 1;
 			}
 			if (me.autoscroll)
-				settimer(func { me._timeout_() }, me.autoscroll, 1);
+				settimer(func me._timeout_(), me.autoscroll, 1);
 		}
 		me.show();
 	},
@@ -171,15 +176,50 @@ var window = {
 
 
 
-var display_id = 0;
-
+# screen.display
+#------------------------------------------------------------------------------
+# Class that manages a dialog, which displays an arbitrary number of properties
+# periodically updating the values. Property names are abbreviated to the
+# shortest possible unique part.
+#
+# Example:
+#
+#     var dpy = screen.display.new(20, 10);    # x/y coordinate
+#     dpy.setcolor(1, 0, 1);                   # magenta (default: white)
+#
+#     dpy.add("/position/latitude-deg", "/position/longitude-deg");
+#     dpy.add(props.globals.getNode("/orientation").getChildren());
+#
+#
+# The add() method takes one or more property paths or props.Nodes, or a vector
+# containing those, or a hash with properties, or vectors with properties, etc.
+# Internal "public" parameters may be set directly:
+#
+#     dpy.interval = 0;                        # update every frame
+#     dpy.format = "%.3g";                     # max. 3 digits fractional part
+#     dpy.font = "SANS_12B";                   # see $FG_ROOT/gui/styles/*.xml
+#     dpy.redraw();                            # pick up new settings
+#
+#
+# The open() method should only be used to undo a close() call. In all other
+# cases this is done implicitly. redraw() is automatically called by an add(),
+# but can be used to let the dialog pick up new settings of internal variables.
+#
+#
+# Methods add(), setfont() and setcolor() can be appended to the new()
+# constructor (-> show big yellow frame rate counter in upper right corner):
+#
+#     screen.display.new(-15, -5, 0).setfont("TIMES_24").setcolor(1, 0.9, 0).add("/sim/frame-rate");
+#
 var display = {
-	new : func(x, y) {
+	id : 0,
+	new : func(x, y, show_tags = 1) {
 		var m = { parents: [display] };
 		#
 		# "public"
 		m.x = x;
 		m.y = y;
+		m.tags = show_tags;
 		m.font = "HELVETICA_14";
 		m.color = [1, 1, 1, 1];
 		m.format = "%.12g";
@@ -188,8 +228,8 @@ var display = {
 		# "private"
 		m.loopid = 0;
 		m.dialog = nil;
-		m.name = "__screen_display_" ~ (display_id += 1) ~ "__";
-		m.base = props.globals.getNode("/sim/gui/dialogs/property-display-" ~ display_id, 1);
+		m.name = "__screen_display_" ~ (display.id += 1) ~ "__";
+		m.base = props.globals.getNode("/sim/gui/dialogs/property-display-" ~ display.id, 1);
 		m.namenode = props.Node.new({ "dialog-name": m.name });
 		m.reset();
 		return m;
@@ -199,7 +239,12 @@ var display = {
 		me.redraw();
 		me;
 	},
-	create : func {
+	setfont : func(font) {
+		me.font = font;
+		me.redraw();
+		me;
+	},
+	_create_ : func {
 		me.dialog = gui.Widget.new();
 		me.dialog.set("name", me.name);
 		me.dialog.set("x", me.x);
@@ -213,22 +258,29 @@ var display = {
 			var w = me.dialog.addChild("text");
 			w.set("halign", "left");
 			w.set("label", "M");    # mouse-grab sensitive area
-			w.set("format", e.tag ~ " = %s");
 			w.set("property", e.target.getPath());
+			w.set("format", me.tags ? e.tag ~ " = %s" : "%s");
 			w.set("live", 1);
 			w.setColor(me.color[0], me.color[1], me.color[2], me.color[3]);
 		}
 		fgcommand("dialog-new", me.dialog.prop());
 	},
+	# add() opens already, so call open() explicitly only after close()!
 	open : func {
-		if (me.dialog != nil)
+		if (me.dialog != nil) {
 			fgcommand("dialog-show", me.namenode);
+			me._loop_(me.loopid += 1);
+		}
 	},
 	close : func {
 		if (me.dialog != nil) {
 			fgcommand("dialog-close", me.namenode);
+			me.loopid += 1;
 			me.dialog = nil;
 		}
+	},
+	toggle : func {
+		me.dialog == nil ? me.redraw() : me.close();
 	},
 	reset : func {
 		me.close();
@@ -237,7 +289,7 @@ var display = {
 	},
 	redraw : func {
 		me.close();
-		me.create();
+		me._create_();
 		me.open();
 	},
 	add : func(p...) {
@@ -254,32 +306,30 @@ var display = {
 		}
 
 		# extend names to the left until they are unique
-		while (1) {
+		while (me.tags) {
 			var uniq = {};
 			foreach (var e; me.entries) {
-				if (!contains(uniq, e.tag))
-					uniq[e.tag] = [];
-				append(uniq[e.tag], e);
+				if (contains(uniq, e.tag))
+					append(uniq[e.tag], e);
+				else
+					uniq[e.tag] = [e];
 			}
 
-			var finished = 1;
+			var done = 1;
 			foreach (var u; keys(uniq)) {
 				if (size(uniq[u]) == 1)
 					continue;
-				finished = 0;
+				done = 0;
 				foreach (var e; uniq[u]) {
 					e.parent = e.parent.getParent();
 					if (e.parent != nil)
 						e.tag = me.nameof(e.parent) ~ '/' ~ e.tag;
 				}
 			}
-			if (finished)
+			if (done)
 				break;
 		}
-		me.close();
-		me.create();
-		me.open();
-		me._loop_(me.loopid += 1);
+		me.redraw();
 		me;
 	},
 	update : func {
@@ -299,7 +349,7 @@ var display = {
 	_loop_ : func(id) {
 		id != me.loopid and return;
 		me.update();
-		settimer(func { me._loop_(id) }, me.interval);
+		settimer(func me._loop_(id), me.interval);
 	},
 	nameof : func(n) {
 		var name = n.getName();

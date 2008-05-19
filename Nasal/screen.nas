@@ -88,8 +88,8 @@ var window = {
 		m.skiptimer = 0;
 		m.dialog = nil;
 		m.namenode = props.Node.new({ "dialog-name": m.name });
-		setlistener("/sim/startup/xsize", func { m._redraw_() });
-		setlistener("/sim/startup/ysize", func { m._redraw_() });
+		setlistener("/sim/startup/xsize", func m._redraw_());
+		setlistener("/sim/startup/ysize", func m._redraw_());
 		return m;
 	},
 	write : func(msg, r = nil, g = nil, b = nil, a = nil) {
@@ -186,6 +186,7 @@ var window = {
 #
 #     var dpy = screen.display.new(20, 10);    # x/y coordinate
 #     dpy.setcolor(1, 0, 1);                   # magenta (default: white)
+#     dpy.setfont("SANS_12B");                 # see $FG_ROOT/gui/styles/*.xml
 #
 #     dpy.add("/position/latitude-deg", "/position/longitude-deg");
 #     dpy.add(props.globals.getNode("/orientation").getChildren());
@@ -197,7 +198,6 @@ var window = {
 #
 #     dpy.interval = 0;                        # update every frame
 #     dpy.format = "%.3g";                     # max. 3 digits fractional part
-#     dpy.font = "SANS_12B";                   # see $FG_ROOT/gui/styles/*.xml
 #     dpy.redraw();                            # pick up new settings
 #
 #
@@ -231,6 +231,8 @@ var display = {
 		m.name = "__screen_display_" ~ (display.id += 1) ~ "__";
 		m.base = props.globals.getNode("/sim/gui/dialogs/property-display-" ~ display.id, 1);
 		m.namenode = props.Node.new({ "dialog-name": m.name });
+		setlistener("/sim/startup/xsize", func m.redraw());
+		setlistener("/sim/startup/ysize", func m.redraw());
 		m.reset();
 		return m;
 	},
@@ -293,11 +295,11 @@ var display = {
 		me.open();
 	},
 	add : func(p...) {
-		foreach (PROP; var n; props.nodeList(p)) {
+		foreach (nextprop; var n; props.nodeList(p)) {
 			var path = n.getPath();
 			foreach (var e; me.entries) {
 				if (e.node.getPath() == path)
-					continue PROP;
+					continue nextprop;
 				e.parent = e.node;
 				e.tag = me.nameof(e.node);
 			}
@@ -365,10 +367,11 @@ var display = {
 var listener = {};
 var log = nil;
 var property_display = nil;
+var controls = nil;
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
 	property_display = display.new(5, -25);
-	listener["display"] = setlistener("/sim/gui/dialogs/property-browser/selected", func(n) {
+	listener.display = setlistener("/sim/gui/dialogs/property-browser/selected", func(n) {
 		var n = n.getValue();
 		if (n != "" and getprop("/devices/status/keyboard/shift")) {
 			if (getprop("/devices/status/keyboard/ctrl"))
@@ -492,18 +495,18 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	}
 
 	var m = "/sim/messages/";
-	listener["atc"] = setlistener(m ~ "atc",
+	listener.atc = setlistener(m ~ "atc",
 			func(n) map("atc",      n.getValue(), 0.7, 1.0, 0.7));
-	listener["approach"] = setlistener(m ~ "approach",
+	listener.approach = setlistener(m ~ "approach",
 			func(n) map("approach", n.getValue(), 0.7, 1.0, 0.7));
-	listener["ground"] = setlistener(m ~ "ground",
+	listener.ground = setlistener(m ~ "ground",
 			func(n) map("ground",   n.getValue(), 0.7, 1.0, 0.7));
 
-	listener["pilot"] = setlistener(m ~ "pilot",
+	listener.pilot = setlistener(m ~ "pilot",
 			func(n) map("pilot",    n.getValue(), 1.0, 0.8, 0.0));
-	listener["copilot"] = setlistener(m ~ "copilot",
+	listener.copilot = setlistener(m ~ "copilot",
 			func(n) map("copilot",  n.getValue(), 1.0, 1.0, 1.0));
-	listener["ai-plane"] = setlistener(m ~ "ai-plane",
+	listener.ai_plane = setlistener(m ~ "ai-plane",
 			func(n) map("ai-plane", n.getValue(), 0.9, 0.4, 0.2));
 });
 

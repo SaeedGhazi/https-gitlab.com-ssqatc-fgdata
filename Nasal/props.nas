@@ -239,12 +239,31 @@ var nodeList = func {
                 list ~= nodeList(a[i]);
         elsif(t == "func")
             list ~= nodeList(a());
-        elsif(t == "ghost" and ghosttype(a) == ghosttype(props._globals()))
-            append(list, props.wrapNode(a));
+        elsif(t == "ghost" and ghosttype(a) == ghosttype(_globals()))
+            append(list, wrapNode(a));
         else
             die("nodeList: invalid nil property");
     }
     return list;
+}
+
+##
+# Initializes property if it's still undefined.  First argument is a property
+# path or a props.Node.  Second argument is the default value.  The third,
+# optional argument is a property type (one of "STRING", "DOUBLE", "INT", or
+# "BOOL").  If it is omitted, then "DOUBLE" is used for numbers, and STRING
+# for everything else.  Returns the property as props.Node.
+#
+var initNode = func(prop, value, type = nil) {
+    if(!isa(prop, props.Node)) prop = props.globals.getNode(prop, 1);
+    if(prop.getType() != "NONE") value = prop.getValue();
+    if(type == nil) prop.setValue(value);
+    elsif(type == "DOUBLE") prop.setDoubleValue(value);
+    elsif(type == "INT") prop.setIntValue(value);
+    elsif(type == "BOOL") prop.setBoolValue(value);
+    elsif(type == "STRING") prop.setValue("" ~ value);
+    else die("initNode(): unsupported type '" ~ type ~ "'");
+    return prop;
 }
 
 ##

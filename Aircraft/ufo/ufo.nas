@@ -51,8 +51,8 @@ setlistener("/sim/signals/screenshot", func(n) {
 	if (n.getBoolValue()) {
 		status_restore = status_dialog.is_open();
 		status_dialog.close();
-	} else {
-		status_restore and status_dialog.open();
+	} elsif (status_restore) {
+		status_dialog.open();
 	}
 });
 
@@ -92,29 +92,29 @@ mouse.loop = func {
 		return settimer(mouse.loop, 0);
 
 	var dx = mouse.x - mouse.centerx;
-	var dy = mouse.y - mouse.centery;
+	var dy = -mouse.y + mouse.centery;
 	if (!dx and !dy)
 		return settimer(mouse.loop, 0);
 
 	var speed = KbdShift.getValue() ? 1 : 0.1;
 	var progress = 1.7;
 	var powx = npow(dx, progress) * speed;
-	var powy = -npow(dy, progress) * speed;
+	var powy = npow(dy, progress) * speed;
 	var option = mouse.lmb or gear_key_down;
 
 	if (KbdCtrl.getValue()) {     # operation
 		if (dx) {
 			if (option)
-				modelmgr.adjust("bearing", dx * 0.05, 1);
+				modelmgr.adjust("bearing", dx * 0.03, 1);
 			else
-				modelmgr.adjust("transversal", powx * 0.05, 1);
+				modelmgr.adjust("transversal", powx * 0.03, 1);
 		}
 
 		if (dy) {
 			if (option)
-				modelmgr.adjust("altitude", powy * 0.05, 1);
+				modelmgr.adjust("altitude", powy * 0.03, 1);
 			else
-				modelmgr.adjust("longitudinal", powy * 0.05, 1);
+				modelmgr.adjust("longitudinal", powy * 0.03, 1);
 		}
 
 	} else {                      # navigation
@@ -297,13 +297,11 @@ var Model = {
 		m.hdg = ModelValue.new(m.node, "heading-deg", hdg);
 		m.pitch = ModelValue.new(m.node, "pitch-deg", pitch);
 		m.roll = ModelValue.new(m.node, "roll-deg", roll);
-
-		m.node.getNode("load", 1).setValue(1);
-		m.node.removeChildren("load");
+		m.node.getNode("load", 1).remove();
 		return m;
 	},
 	remove : func {
-		props.globals.getNode("/models", 1).removeChild("model", me.node.getIndex());
+		me.node.remove();
 	},
 	clone : func(path) {
 		Model.new(path, geo.Coord.new(me.pos), me.node);
@@ -414,25 +412,22 @@ var Model = {
 };
 
 
-var ModelMgr = {
-	new : func(path) {
-		var m = { parents: [ModelMgr] };
-		m.active = nil;
-		m.models = [];
-		m.legendN = props.globals.getNode("/sim/gui/dialogs/ufo-status/input", 1);
-		m.legendN.setValue("");
-		m.mouse_coord = geo.aircraft_position();
-		m.import();
-		m.marker = Model.new("Aircraft/ufo/Models/marker.ac", geo.Coord.new().set_xyz(0, 0, 0));
-		m.marker.hide();
-		m.modelpath = path;
-		if (m.active != nil)
-			m.marker.move(m.active.pos);
+var modelmgr = {
+	init : func(path) {
+		me.active = nil;
+		me.models = [];
+		me.legendN = props.globals.getNode("/sim/gui/dialogs/ufo-status/input", 1);
+		me.legendN.setValue("");
+		me.mouse_coord = geo.aircraft_position();
+		me.import();
+		me.marker = Model.new("Aircraft/ufo/Models/marker.ac", geo.Coord.new().set_xyz(0, 0, 0));
+		me.marker.hide();
+		me.modelpath = path;
+		if (me.active != nil)
+			me.marker.move(me.active.pos);
 
 		if (path != "Aircraft/ufo/Models/cursor.ac")
 			status_dialog.open();
-
-		return m;
 	},
 	click : func(mouse_coord) {
 		if (gear_key_down)
@@ -500,6 +495,13 @@ var ModelMgr = {
 
 		me.display_status(me.modelpath = me.active.path);
 	},
+	selected_models : func {
+		var models = [];
+		foreach (var m; me.models)
+			if (m.selected)
+				append(models, m);
+		return models;
+	},
 	deselect_all : func {
 		foreach (var m; me.models)
 			m.flash(m.selected = 0);
@@ -558,9 +560,9 @@ var ModelMgr = {
 	},
 	sticky_data : func {
 		var n = props.Node.new();
-		if (me.active == nil) {
+		if (me.active == nil)
 			return n;
-		}
+
 		var hdg = n.getNode("heading-deg", 1);
 		var pitch = n.getNode("pitch-deg", 1);
 		var roll = n.getNode("roll-deg", 1);
@@ -579,16 +581,13 @@ var ModelMgr = {
 		return n;
 	},
 	reset_heading : func {
-		foreach (var m; me.models)
-			if (m.selected)
-				m.hdg.set(0);
+		foreach (var m; me.selected_models())
+			m.hdg.set(0);
 	},
 	reset_orientation : func {
-		foreach (var m; me.models) {
-			if (m.selected) {
-				m.pitch.set(0);
-				m.roll.set(0);
-			}
+		foreach (var m; me.selected_models()) {
+			m.pitch.set(0);
+			m.roll.set(0);
 		}
 	},
 	import : func {
@@ -619,39 +618,37 @@ var ModelMgr = {
 		var dist = scale ? ufo.distance_to(me.active.pos) * 0.05 : 1;
 		if (name == "longitudinal") {
 			var dir = ufo.course_to(me.active.pos);
-			foreach (var m; me.models)
-				m.selected and m.apply_course_distance(dir, value * dist);
+			foreach (var m; me.selected_models())
+				m.apply_course_distance(dir, value * dist);
 
 		} elsif (name == "transversal") {
 			var dir = ufo.course_to(me.active.pos) + 90;
-			foreach (var m; me.models)
-				m.selected and m.apply_course_distance(dir, value * dist);
+			foreach (var m; me.selected_models())
+				m.apply_course_distance(dir, value * dist);
 
 		} elsif (name == "altitude") {
-			foreach (var m; me.models)
-				m.selected and m.raise(value * dist * 0.4);
+			foreach (var m; me.selected_models())
+				m.raise(value * dist * 0.4);
 
 		} elsif (name == "heading") {
-			foreach (var m; me.models)
-				m.selected and m.hdg.set(m.hdg.get() + value * 4);
+			foreach (var m; me.selected_models())
+				m.hdg.set(m.hdg.get() + value * 4);
 
 		} elsif (name == "pitch") {
-			foreach (var m; me.models)
-				m.selected and m.pitch.set(m.pitch.get() + value * 6);
+			foreach (var m; me.selected_models())
+				m.pitch.set(m.pitch.get() + value * 6);
 
 		} elsif (name == "roll") {
-			foreach (var m; me.models)
-				m.selected and m.roll.set(m.roll.get() + value * 6);
+			foreach (var m; me.selected_models())
+				m.roll.set(m.roll.get() + value * 6);
 
 		} elsif (name == "bearing") {
-			foreach (var m; me.models) {
-				if (m.selected) {
-					var course = me.active.pos.course_to(m.pos);
-					var dist = me.active.pos.distance_to(m.pos);
-					m.apply_course_distance(course, -dist);
-					m.apply_course_distance(course + value * 4, dist);
-					m.hdg.set(m.hdg.get() + value * 4);
-				}
+			foreach (var m; me.selected_models()) {
+				var course = me.active.pos.course_to(m.pos);
+				var dist = me.active.pos.distance_to(m.pos);
+				m.apply_course_distance(course, -dist);
+				m.apply_course_distance(course + value * 4, dist);
+				m.hdg.set(m.hdg.get() + value * 4);
 			}
 		}
 		me.marker.move(me.active.pos);
@@ -661,19 +658,16 @@ var ModelMgr = {
 	},
 	clone_selected : func {
 		var clones = [];
-		foreach (var m; me.models) {
-			if (m.selected) {
-				m.selected = 0;
-				var c = m.clone(m.path);
-				append(clones, c);
-				if (m == me.active)
-					me.active = c;
-			}
+		foreach (var m; me.selected_models()) {
+			m.selected = 0;
+			var c = m.clone(m.path);
+			#c.selected = 1;
+			append(clones, c);
+			if (m == me.active)
+				me.active = c;
 		}
-		foreach (var m; clones) {
-			m.selected = 1;
+		foreach (var m; clones)
 			append(me.models, m);
-		}
 	},
 };
 
@@ -854,7 +848,7 @@ var KbdCtrl = props.globals.getNode("/devices/status/keyboard/ctrl");
 var KbdAlt = props.globals.getNode("/devices/status/keyboard/alt");
 
 var modellist = scan_dirs(getprop("/source"));
-var modelmgr = ModelMgr.new(getprop("/cursor"));
+modelmgr.init(getprop("/cursor"));
 
 setlistener("/sim/signals/click", func {
 	if (!mouse.mmb)

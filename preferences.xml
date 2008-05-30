@@ -117,9 +117,9 @@ Started September 2000 by David Megginson, david@megginson.com
      </parameters>
    </redout>
    <headshake>
-    <enabled type="bool" userarchive="y">true</enabled>
+    <enabled type="bool" userarchive="y">false</enabled>
     <rate-m-g>0.005</rate-m-g>
-  </headshake>
+   </headshake>
   </rendering>
   <model-hz type="int">120</model-hz>
   <navdb>

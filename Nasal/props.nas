@@ -254,7 +254,7 @@ var nodeList = func {
 # "BOOL").  If it is omitted, then "DOUBLE" is used for numbers, and STRING
 # for everything else.  Returns the property as props.Node.
 #
-var initNode = func(prop, value, type = nil) {
+var initNode = func(prop, value = 0, type = nil) {
     if(!isa(prop, props.Node)) prop = props.globals.getNode(prop, 1);
     if(prop.getType() != "NONE") value = prop.getValue();
     if(type == nil) prop.setValue(value);

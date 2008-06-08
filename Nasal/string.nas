@@ -60,7 +60,7 @@ var uc = func(str) {
 
 ##
 # case insensitive string compare and match functions
-# (not very effective -- converting the array to be sorted
+# (not very efficient -- converting the array to be sorted
 # first is faster)
 #
 var icmp = func(a, b) cmp(lc(a), lc(b));

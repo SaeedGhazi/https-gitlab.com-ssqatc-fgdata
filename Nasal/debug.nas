@@ -25,12 +25,12 @@
 #
 # debug.exit()                         ... exits fgfs
 #
-# debug.bt                             ... abbreviation for debug.backtrace
+# debug.bt()                           ... abbreviation for debug.backtrace()
 #
 # debug.string(<variable>)             ... returns contents of variable as string
 # debug.attributes(<property> [, <verb>]) ... returns attribute string for a given property.
-#                                          <verb>ose is by default 0, and shows the
-#                                          node's refcounter if 1.
+#                                          <verb>ose is by default 1, and suppressed the
+#                                          node's refcounter if 0.
 #
 # debug.load_nasal(<file> [, <module>])) ... load and run Nasal file (under namespace
 #                                          <module> if defined, or the basename

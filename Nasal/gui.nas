@@ -95,7 +95,7 @@ INIT = func {
     # enable/disable menu entries
     menuEnable("fuel-and-payload", getprop("/sim/flight-model") == "yasim");
     menuEnable("autopilot", props.globals.getNode("/autopilot/KAP140/locks") == nil);
-    menuEnable("multiplayer", getprop("/sim/multiplay/rxport"));
+    menuEnable("multiplayer", getprop("/sim/multiplay/txport") or getprop("/sim/multiplay/rxport"));
     menuEnable("tutorial-start", size(props.globals.getNode("/sim/tutorials").getChildren("tutorial")));
     menuEnable("joystick-info", size(props.globals.getNode("/input/joysticks").getChildren("js")));
 

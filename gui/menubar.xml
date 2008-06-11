@@ -87,7 +87,6 @@
     <dialog-name>exit</dialog-name>
    </binding>
   </item>
-
  </menu>
 
  <menu>
@@ -167,21 +166,6 @@
    <binding>
     <command>dialog-show</command>
     <dialog-name>static-lod</dialog-name>
-   </binding>
-  </item>
-
-  <item>
-   <label>Chat</label>
-   <binding>
-    <command>dialog-show</command>
-    <dialog-name>chat</dialog-name>
-   </binding>
-  </item>
-  <item>
-   <label>Chat Menu</label>
-   <binding>
-    <command>dialog-show</command>
-    <dialog-name>chat-menu</dialog-name>
    </binding>
   </item>
  </menu>
@@ -296,7 +280,6 @@
     </script>
    </binding>
   </item>
-
  </menu>
 
  <menu>
@@ -341,7 +324,6 @@
     <dialog-name>rainsnow</dialog-name>
    </binding>
   </item>
-
  </menu>
 
  <menu>
@@ -395,7 +377,6 @@
     <dialog-name>instrument-failures</dialog-name>
    </binding>
   </item>
-
  </menu>
 
  <menu>
@@ -415,7 +396,35 @@
     <dialog-name>atc-ai</dialog-name>
    </binding>
   </item>
+ </menu>
 
+ <menu>
+  <label>Multiplayer</label>
+  <name>multiplayer</name>
+
+  <item>
+   <label>Chat</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>chat</dialog-name>
+   </binding>
+  </item>
+
+  <item>
+   <label>Chat Menu</label>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>chat-menu</dialog-name>
+   </binding>
+  </item>
+
+  <item>
+   <label>Show Pilot List</label>
+   <binding>
+    <command>nasal</command>
+    <script>multiplayer.dialog.show()</script>
+   </binding>
+  </item>
  </menu>
 
  <menu>
@@ -583,7 +592,6 @@
     <script>tutorial.stopTutorial()</script>
    </binding>
   </item>
-
  </menu>
 
 </PropertyList>

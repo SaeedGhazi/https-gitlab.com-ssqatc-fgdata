@@ -101,19 +101,6 @@
   </item>
 
   <item>
-   <label>Toggle Dynamic Cockpit View</label>
-   <name>dynamic-view</name>
-   <binding>
-    <command>nasal</command>
-    <script>
-     var p = "/sim/current-view/dynamic-view";
-     setprop(p, var i = !getprop(p));
-     gui.popupTip("Dynamic View " ~ (i ? "enabled" : "disabled"));
-    </script>
-   </binding>
-  </item>
-
-  <item>
    <label>View Options</label>
    <binding>
     <command>dialog-show</command>
@@ -130,10 +117,10 @@
   </item>
 
   <item>
-    <label>G-force Options</label>
+    <label>Cockpit View Options</label>
     <binding>
       <command>dialog-show</command>
-      <dialog-name>redout</dialog-name>
+      <dialog-name>cockpit-view</dialog-name>
     </binding>
   </item>
 

@@ -136,7 +136,7 @@
       <dialog-name>redout</dialog-name>
     </binding>
   </item>
-  
+
   <item>
    <label>Adjust View Distance</label>
    <binding>
@@ -419,7 +419,7 @@
   </item>
 
   <item>
-   <label>Show Pilot List</label>
+   <label>Pilot List</label>
    <binding>
     <command>nasal</command>
     <script>multiplayer.dialog.show()</script>

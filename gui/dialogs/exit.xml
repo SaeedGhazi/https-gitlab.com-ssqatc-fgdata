@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <PropertyList>
   <name>exit</name>
-  <modal>true</modal>
+  <modal>false</modal>
   <layout>vbox</layout>
 
   <text>
     <label>Exit FlightGear?</label>
   </text>
-  
+
   <group>
     <layout>hbox</layout>
     <halign>fill</halign>
@@ -19,10 +19,10 @@
       <default>true</default>
       <equal>true</equal>
       <binding>
-	<command>exit</command>
+        <command>exit</command>
       </binding>
       <binding>
-	<command>dialog-close</command>
+        <command>dialog-close</command>
       </binding>
     </button>
 
@@ -33,11 +33,10 @@
       <equal>true</equal>
       <key>Esc</key>
       <binding>
-	<command>dialog-close</command>
+        <command>dialog-close</command>
       </binding>
     </button>
 
     <empty><stretch>true</stretch></empty>
   </group>
-  
 </PropertyList>

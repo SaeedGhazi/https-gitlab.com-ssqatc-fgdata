@@ -146,6 +146,7 @@ var fixpath = func(path) {
 # Redefine io.open() such that files can only be written under authorized directories.
 #
 setlistener("/sim/signals/nasal-dir-initialized", func {
+    var _open = open;
     var writable_dirs = [
         # "*",   # any
         # fixpath(getprop("/sim/fg-root")) ~ "/Scenery/",
@@ -155,13 +156,12 @@ setlistener("/sim/signals/nasal-dir-initialized", func {
         "[A-Za-z]:/TMP/", "[A-Za-z]:/TEMP/",
     ];
 
-    var _open = open;
     open = func(path, mode = "rb") {
          var c = caller(1);
          print(debug._path("SECURITY: io.open(\"" ~ path ~ "\", \"" ~ mode ~ "\")\n  in file "
                  ~ c[2] ~ ", line " ~ c[3]));
 
-         if(mode == "r") {
+         if(mode == "r" or mode == "rb") {
              print(debug._nil("SECURITY: allow reading of file '" ~ path ~ "'"));
              return _open(path, mode);
          }

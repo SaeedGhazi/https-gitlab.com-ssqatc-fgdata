@@ -155,34 +155,3 @@ var match = func(str, patt) {
 }
 
 
-##
-# Removes superfluous slashes, empty and "." elements, expands
-# all ".." elements, and turns all backslashes into slashes.
-# The result will start with a slash if it started with a slash
-# or backslash, it will end without slash. Should be applied on
-# absolute property or file paths, otherwise ".." elements might
-# be resolved wrongly.
-#
-var fixpath = func(path) {
-	var d = "";
-	for (var i = 0; i < size(path); i += 1)
-		d ~= path[i] == `\\` ? "/" : chr(path[i]);
-
-	var prefix = d[0] == `/` ? "/" : "";
-	var stack = [];
-	foreach (var e; split("/", d)) {
-		if (e == "." or e == "")
-			continue;
-		elsif (e == "..")
-			pop(stack);
-		else
-			append(stack, e);
-	}
-	if (!size(stack))
-		return "/";
-	path = stack[0];
-	foreach (var s; subvec(stack, 1))
-		path ~= "/" ~ s;
-	return prefix ~ path;
-}
-

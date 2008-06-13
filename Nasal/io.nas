@@ -161,7 +161,7 @@ setlistener("/sim/signals/nasal-dir-initialized", func {
          print(debug._path("SECURITY: io.open(\"" ~ path ~ "\", \"" ~ mode ~ "\")\n  in file "
                  ~ c[2] ~ ", line " ~ c[3]));
 
-         if(mode == "r" or mode == "rb") {
+         if(mode == "r" or mode == "rb" or mode == "br") {
              print(debug._nil("SECURITY: allow reading of file '" ~ path ~ "'"));
              return _open(path, mode);
          }

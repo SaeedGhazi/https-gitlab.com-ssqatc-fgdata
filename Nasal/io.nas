@@ -135,7 +135,7 @@ setlistener("/sim/signals/nasal-dir-initialized", func {
              if(string.match(fpath, p ~ '*'))
                  return _open(fpath, mode);
 
-         die(debug._error("io.open(): writing to file '" ~ path ~ "' denied (unauthorized directory)\n "));
+         die("io.open(): writing to file '" ~ path ~ "' denied (unauthorized directory)\n ");
     }
 });
 

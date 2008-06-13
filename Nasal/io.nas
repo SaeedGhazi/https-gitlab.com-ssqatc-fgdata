@@ -128,7 +128,7 @@ setlistener("/sim/signals/nasal-dir-initialized", func {
 
     open = func(path, mode = "rb") {
          var c = caller(1);
-         print(debug._path("SECURITY: io.open(\"" ~ path ~ "\", \"" ~ mode ~ "\")\n  in file "
+         print(debug._path("\nSECURITY: io.open(\"" ~ path ~ "\", \"" ~ mode ~ "\")\n  in file "
                  ~ c[2] ~ ", line " ~ c[3]));
 
          if(mode == "r" or mode == "rb" or mode == "br") {
@@ -146,7 +146,7 @@ setlistener("/sim/signals/nasal-dir-initialized", func {
              }
          }
 
-         die("io.open(): security: writing to file '" ~ path ~ "' denied\n ");
+         die("io.open(): writing to file '" ~ path ~ "' denied (unauthorized directory)\n ");
     }
 });
 

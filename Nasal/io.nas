@@ -150,7 +150,7 @@ setlistener("/sim/signals/nasal-dir-initialized", func {
         # "*",   # any
         # fixpath(getprop("/sim/fg-root")) ~ "/Scenery/",
         fixpath(getprop("/sim/fg-home")) ~ "/",
-        "/tmp/", "/var/tmp/", "/var/log/",
+        "/tmp/", "/var/tmp/",
         "[A-Za-z]:TMP/", "[A-Za-z]:TEMP/",
         "[A-Za-z]:/TMP/", "[A-Za-z]:/TEMP/",
     ];

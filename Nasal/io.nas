@@ -26,6 +26,34 @@ var ifmts = {dir:4, reg:8, lnk:10, sock:12, fifo:1, blk:6, chr:2};
 foreach(fmt; keys(ifmts))
     caller(0)[0]["is" ~ fmt] = _gen_ifmt_test(ifmts[fmt]);
 
+# Loads Nasal file into namespace and executes it. The namespace
+# (module name) is taken from the optional second argument, or
+# derived from the Nasal file's name.
+#
+# Usage:   io.load_nasal(<filename> [, <modulename>]);
+#
+# Example:
+#
+#     io.load_nasal(getprop("/sim/fg-root") ~ "/Local/test.nas");
+#     io.load_nasal("/tmp/foo.nas", "test");
+#
+var load_nasal = func(file, module = nil) {
+    if(module == nil)
+        module = split(".", split("/", file)[-1])[0];
+
+    if(!contains(globals, module))
+        globals[module] = {};
+
+    var err = [];
+    printlog("info", "loading ", file, " into namespace ", module);
+    var code = call(func compile(io.readfile(file), file), nil, err);
+    if(size(err))
+        return print(file ~ ": " ~ err[0]);
+
+    call(bind(code, globals), nil, nil, globals[module], err);
+    printerror(err);
+}
+
 # The following two functions are for reading generic XML files into
 # the property tree and for writing them from there to the disk. The
 # built-in fgcommands (load, save, loadxml, savexml) are for FlightGear's

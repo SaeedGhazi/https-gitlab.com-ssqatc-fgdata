@@ -48,11 +48,11 @@ var load_nasal = func(file, module = nil) {
     printlog("info", "loading ", file, " into namespace ", module);
     var code = call(func compile(readfile(file), file), nil, err);
     if(size(err))
-        return print(file ~ ": " ~ err[0]);
+        return !!print(file ~ ": " ~ err[0]);
 
     call(bind(code, globals), nil, nil, globals[module], err);
     debug.printerror(err);
-    return size(err);
+    return !!size(err);
 }
 
 # The following two functions are for reading generic XML files into

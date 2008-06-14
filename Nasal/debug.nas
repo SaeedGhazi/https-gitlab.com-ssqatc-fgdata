@@ -32,10 +32,6 @@
 #                                          <verb>ose is by default 1, and suppressed the
 #                                          node's refcounter if 0.
 #
-# debug.load_nasal(<file> [, <module>])) ... load and run Nasal file (under namespace
-#                                          <module> if defined, or the basename
-#                                          otherwise)
-#
 # debug.benchmark(<label:string>, <func> [<args>])
 #                                      ... calls function with optional args and
 #                                          prints execution time in seconds,
@@ -341,36 +337,6 @@ if (getprop("/sim/logging/priority") != "alert") {
 	_setlistener("/sim/signals/fdm-initialized", func print(_c("36", "** FDM initialized **")));
 }
 
-
-
-##
-# Loads Nasal file into namespace and executes it. The namespace
-# (module name) is taken from the optional second argument, or
-# derived from the Nasal file's name.
-#
-# Usage:   debug.load_nasal(<filename> [, <modulename>]);
-#
-# Example:
-#
-#     debug.load_nasal(getprop("/sim/fg-root") ~ "/Local/test.nas");
-#     debug.load_nasal("/tmp/foo.nas", "test");
-#
-var load_nasal = func(file, module = nil) {
-	if (module == nil)
-		module = split(".", split("/", file)[-1])[0];
-
-	if (!contains(globals, module))
-		globals[module] = {};
-
-	var err = [];
-	printlog("info", "loading ", file, " into namespace ", module);
-	var code = call(func { compile(io.readfile(file), file) }, nil, err);
-	if (size(err))
-		return print(file ~ ": " ~ err[0]);
-
-	call(bind(code, globals), nil, nil, globals[module], err);
-	printerror(err);
-}
 
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {

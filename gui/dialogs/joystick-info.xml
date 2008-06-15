@@ -92,6 +92,91 @@
 		</close>
 	</nasal>
 
+	<group>
+		<layout>table</layout>
+		<default-padding>2</default-padding>
+
+		<empty>
+			<width>150</width>
+			<col>0</col>
+			<row>0</row>
+		</empty>
+
+		<text>
+			<label>Aileron:  </label>
+			<halign>right</halign>
+			<col>1</col>
+			<row>0</row>
+		</text>
+
+		<text>
+			<label>-0.00000</label>
+			<halign>left</halign>
+			<format>%.5f</format>
+			<property>/controls/flight/aileron</property>
+			<live>1</live>
+			<col>2</col>
+			<row>0</row>
+		</text>
+
+		<text>
+			<label>Elevator:  </label>
+			<halign>right</halign>
+			<col>1</col>
+			<row>1</row>
+		</text>
+
+		<text>
+			<label>-0.00000</label>
+			<halign>left</halign>
+			<format>%.5f</format>
+			<property>/controls/flight/elevator</property>
+			<live>1</live>
+			<col>2</col>
+			<row>1</row>
+		</text>
+
+		<text>
+			<label>Rudder:  </label>
+			<halign>right</halign>
+			<col>3</col>
+			<row>0</row>
+		</text>
+
+		<text>
+			<label>-0.00000</label>
+			<halign>left</halign>
+			<format>%.5f</format>
+			<property>/controls/flight/rudder</property>
+			<live>1</live>
+			<col>4</col>
+			<row>0</row>
+		</text>
+
+		<text>
+			<label>Throttle:  </label>
+			<halign>right</halign>
+			<col>3</col>
+			<row>1</row>
+		</text>
+
+		<text>
+			<label>-0.00000</label>
+			<halign>left</halign>
+			<format>%.5f</format>
+			<property>/controls/engines/engine/throttle</property>
+			<live>1</live>
+			<col>4</col>
+			<row>1</row>
+		</text>
+
+		<empty>
+			<width>150</width>
+			<col>5</col>
+			<row>0</row>
+		</empty>
+	</group>
+
 	<textbox>
 		<halign>fill</halign>
 		<pref-width>640</pref-width>

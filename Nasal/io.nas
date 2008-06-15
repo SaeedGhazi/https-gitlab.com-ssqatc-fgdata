@@ -144,7 +144,7 @@ var writexml = func(path, node, indent = "\t", prefix = "___") {
 
 # Redefine io.open() such that files can only be written under authorized directories.
 #
-setlistener("/sim/signals/nasal-dir-initialized", func {
+_setlistener("/sim/signals/nasal-dir-initialized", func {
     var _open = open;
     var writable_dirs = [
         # "",   # any

@@ -185,7 +185,13 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
         return 1;
     }
 
-    load_rules(home ~ "/" ~ config) or load_rules(root ~ "/" ~ config);
+    # catch exceptions so that a die() doesn't ruin everything
+    call(func load_rules(home ~ "/" ~ config) or load_rules(root ~ "/" ~ config), nil, var err = []);
+    if(size(err)) {
+        debug.printerror(err);
+        read_rules = write_rules = [];
+    }
+
     read_rules = [["*/" ~ config, 0]] ~ read_rules;
     write_rules = [["*/" ~ config, 0]] ~ write_rules;
     if(getprop("/sim/logging/priority") == "info") {

@@ -167,7 +167,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
                 continue;
 
             var f = split(" ", line);
-            if(size(f) < 3 or (f[0] != "READ" and f[0] != "WRITE") and (f[1] != "DENY" and f[1] != "ALLOW")) {
+            if(size(f) < 3 or (f[0] != "READ" and f[0] != "WRITE") or (f[1] != "DENY" and f[1] != "ALLOW")) {
                 printlog("alert", "ERROR: invalid io.open() rule in ", path, ", line ", no, ": ", line);
                 read_rules = write_rules = [];
                 break;  # don't use die() or return, as io.open() has yet to be redefined

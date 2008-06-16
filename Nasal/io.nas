@@ -142,7 +142,7 @@ var writexml = func(path, node, indent = "\t", prefix = "___") {
         die("writexml(): tree has more than one root node");
 }
 
-# Redefine io.open() such that files can only be written under authorized directories.
+# Redefine io.open() such that files can only be opened under authorized directories.
 #
 _setlistener("/sim/signals/nasal-dir-initialized", func {
     var _open = open;
@@ -160,20 +160,20 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     ];
 
     open = func(path, mode = "rb") {
-         var rules = write_rules;
-         if(mode == "r" or mode == "rb" or mode == "br")
-             rules = read_rules;
+        var rules = write_rules;
+        if(mode == "r" or mode == "rb" or mode == "br")
+            rules = read_rules;
 
-         var fpath = string.fixpath(path);
-         foreach(var d; rules) {
-             if(string.match(fpath, d[0])) {
-                 if(d[1])
-                     return _open(fpath, mode);
-                 break;
-             }
-         }
+        var fpath = string.fixpath(path);
+        foreach(var d; rules) {
+            if(string.match(fpath, d[0])) {
+                if(d[1])
+                    return _open(fpath, mode);
+                break;
+            }
+        }
 
-         die("io.open(): opening file '" ~ path ~ "' denied (unauthorized directory)\n ");
+        die("io.open(): opening file '" ~ path ~ "' denied (unauthorized directory)\n ");
     }
 });
 

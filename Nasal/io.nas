@@ -148,16 +148,50 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     var _open = open;
     var root = string.fixpath(getprop("/sim/fg-root"));
     var home = string.fixpath(getprop("/sim/fg-home"));
+    var config = "Nasal/IOrules";
 
-    var read_rules = [ # [pattern, allow(1)/deny(0)]
-        [root ~ "/*", 1],
-        [home ~ "/*", 1],
-    ];
+    var read_rules = [];
+    var write_rules = [];
 
-    var write_rules = [
-        [home ~ "/Scenery/*.stg", 1],
-        [home ~ "/Export/*", 1],
-    ];
+    var load_rules = func(path) {
+        if(stat(path) == nil)
+            return 0;
+        printlog("info", "using io.open() rules from ", path);
+        read_rules = [];
+        write_rules = [];
+        var file = open(path, "r");
+        var no = 0;
+        while ((var line = readln(file)) != nil) {
+            no += 1;
+            if(!size(line) or line[0] == `#`)
+                continue;
+
+            var f = split(" ", line);
+            if(size(f) < 3 or (f[0] != "READ" and f[0] != "WRITE") and (f[1] != "DENY" and f[1] != "ALLOW")) {
+                printlog("alert", "ERROR: invalid io.open() rule in ", path, ", line ", no, ": ", line);
+                read_rules = write_rules = [];
+                break;  # don't use die() or return, as io.open() has yet to be redefined
+            }
+            var pattern = f[2];
+            foreach (var p; subvec(f, 3))
+                pattern ~= " " ~ p;
+            if (substr(pattern, 0, 9) == "$FG_ROOT/")
+                pattern = root ~ "/" ~ substr(pattern, 9);
+            elsif (substr(pattern, 0, 9) == "$FG_HOME/")
+                pattern = home ~ "/" ~ substr(pattern, 9);
+            append(f[0] == "READ" ? read_rules : write_rules, [pattern, f[1] == "ALLOW"]);
+        }
+        close(file);
+        return 1;
+    }
+
+    load_rules(home ~ "/" ~ config) or load_rules(root ~ "/" ~ config);
+    read_rules = [["*/" ~ config, 0]] ~ read_rules;
+    write_rules = [["*/" ~ config, 0]] ~ write_rules;
+    if(getprop("/sim/logging/priority") == "info") {
+        print("READ:  ", debug.string(read_rules));
+        print("WRITE: ", debug.string(write_rules));
+    }
 
     open = func(path, mode = "rb") {
         var rules = write_rules;

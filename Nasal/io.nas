@@ -146,13 +146,11 @@ var writexml = func(path, node, indent = "\t", prefix = "___") {
 #
 _setlistener("/sim/signals/nasal-dir-initialized", func {
     var _open = open;
-    var writable_dirs = [
-        # "",   # any
-        # string.fixpath(getprop("/sim/fg-root")) ~ "/Scenery/",
-        string.fixpath(getprop("/sim/fg-home")) ~ "/",
-        "/tmp/", "/var/tmp/",
-        "[A-Za-z]:TMP/", "[A-Za-z]:TEMP/",
-        "[A-Za-z]:/TMP/", "[A-Za-z]:/TEMP/",
+    var fghome = string.fixpath(getprop("/sim/fg-home"));
+
+    var dirs = [ # pattern, allow(1)/deny(0)
+        [fghome ~ "/Scenery/*.stg", 1],
+        [fghome ~ "/Export/*", 1],
     ];
 
     open = func(path, mode = "rb") {
@@ -160,9 +158,13 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
              return _open(path, mode);
 
          var fpath = string.fixpath(path);
-         foreach(var p; writable_dirs)
-             if(string.match(fpath, p ~ '*'))
-                 return _open(fpath, mode);
+         forindex(var i; dirs) {
+             if(string.match(fpath, dirs[i][0])) {
+                 if(dirs[i][1])
+                     return _open(fpath, mode);
+                 break;
+             }
+         }
 
          die("io.open(): writing to file '" ~ path ~ "' denied (unauthorized directory)\n ");
     }

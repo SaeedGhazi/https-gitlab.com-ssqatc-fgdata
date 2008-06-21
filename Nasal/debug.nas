@@ -32,9 +32,9 @@
 #                                          <verb>ose is by default 1, and suppressed the
 #                                          node's refcounter if 0.
 #
-# debug.benchmark(<label:string>, <func> [<args>])
-#                                      ... calls function with optional args and
-#                                          prints execution time in seconds,
+# debug.benchmark(<label:string>, <func> [, <repeat:int>])
+#                                      ... runs function <repeat> times (default: 1)
+#                                          and prints execution time in seconds,
 #                                          prefixed with <label>.
 #
 # debug.printerror(<err-vector>)       ... prints error vector as set by call()
@@ -297,16 +297,17 @@ var proptrace = func(root = "/", frames = 1) {
 
 
 ##
-# Executes function f with optional arguments and prints execution
+# Executes function fun with repeat times prints execution
 # time in seconds. Examples:
 #
-#     var test = func(n) { for (var i = 0; i < n; i +=1) { print(i) }
-#     debug.benchmark("test()/1", test, 10);
-#     debug.benchmark("test()/2", func { test(10) });
+#     var test = func { getprop("/sim/aircraft"); }
+#     debug.benchmark("test()/2", 1000, test);
+#     debug.benchmark("test()/2", 1000, func setprop("/sim/aircraft", ""));
 #
-var benchmark = func(label, f, arg...) {
+var benchmark = func(label, fun, repeat = 1) {
 	var start = systime();
-	call(f, arg);
+	for (var i = 0; i < repeat; i += 1)
+		fun();
 	print(_bench(sprintf(" %s --> %.6f s ", label, systime() - start)));
 }
 

@@ -37,6 +37,27 @@ var trim = func(s, lr = 0) {
 
 
 ##
+# Join all elements of a list inserting a separator between every two of them.
+#
+var join = func(sep, list) {
+	if (!size(list))
+		return "";
+	var str = list[0];
+	foreach (var s; subvec(list, 1))
+		str ~= sep ~ s;
+	return str;
+}
+
+
+##
+# Replace all occurrences of 'old' by 'new'.
+#
+var replace = func(str, old, new) {
+	join(new, split(old, str));
+}
+
+
+##
 # return string converted to lower case letters
 #
 var lc = func(str) {
@@ -180,7 +201,7 @@ var fixpath = func(path) {
 	}
 	if (!size(stack))
 		return "/";
-	path = stack[0];
+	var path = stack[0];
 	foreach (var s; subvec(stack, 1))
 		path ~= "/" ~ s;
 	return prefix ~ path;

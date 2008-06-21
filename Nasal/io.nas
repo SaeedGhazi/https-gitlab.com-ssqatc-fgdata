@@ -160,24 +160,22 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
         read_rules = [];
         write_rules = [];
         var file = open(path, "r");
-        var no = 0;
-        while ((var line = readln(file)) != nil) {
-            no += 1;
+        for(var no = 1; (var line = readln(file)) != nil; no += 1) {
             if(!size(line) or line[0] == `#`)
                 continue;
 
             var f = split(" ", line);
-            if(size(f) < 3 or (f[0] != "READ" and f[0] != "WRITE") or (f[1] != "DENY" and f[1] != "ALLOW")) {
+            if(size(f) < 3 or f[0] != "READ" and f[0] != "WRITE" or f[1] != "DENY" and f[1] != "ALLOW") {
                 printlog("alert", "ERROR: invalid io.open() rule in ", path, ", line ", no, ": ", line);
                 read_rules = write_rules = [];
-                break;  # don't use die() or return, as io.open() has yet to be redefined
+                break;  # don't use die(), as io.open() has yet to be redefined
             }
             var pattern = f[2];
-            foreach (var p; subvec(f, 3))
+            foreach(var p; subvec(f, 3))
                 pattern ~= " " ~ p;
-            if (substr(pattern, 0, 9) == "$FG_ROOT/")
+            if(substr(pattern, 0, 9) == "$FG_ROOT/")
                 pattern = root ~ "/" ~ substr(pattern, 9);
-            elsif (substr(pattern, 0, 9) == "$FG_HOME/")
+            elsif(substr(pattern, 0, 9) == "$FG_HOME/")
                 pattern = home ~ "/" ~ substr(pattern, 9);
             append(f[0] == "READ" ? read_rules : write_rules, [pattern, f[1] == "ALLOW"]);
         }

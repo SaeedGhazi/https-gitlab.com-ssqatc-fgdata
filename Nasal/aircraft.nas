@@ -328,7 +328,7 @@ var lowpass = {
 		me.value = v;
 	},
 	_filter_ : func(v) {
-		var dt = getprop("/sim/time/delta-sec") or 0;
+		var dt = getprop("/sim/time/delta-sec");
 		var c = dt / (me.coeff + dt);
 		me.value = v * c + me.value * (1 - c);
 	},
@@ -954,8 +954,9 @@ var HUD = {
 #
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
+	props.initNode("/sim/time/delta-sec", 0);
+	props.initNode("/sim/time/delta-realtime-sec", 0.00000001);
 
-	props.globals.getNode("/sim/time/delta-realtime-sec", 1).setDoubleValue(0.00000001);
 	HUD.init();
 	data.init();
 	autotrim.init();

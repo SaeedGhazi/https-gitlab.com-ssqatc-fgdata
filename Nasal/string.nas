@@ -53,7 +53,7 @@ var join = func(sep, list) {
 # Replace all occurrences of 'old' by 'new'.
 #
 var replace = func(str, old, new) {
-	join(new, split(old, str));
+	return join(new, split(old, str));
 }
 
 
@@ -185,13 +185,11 @@ var match = func(str, patt) {
 # be resolved wrongly.
 #
 var fixpath = func(path) {
-	var d = "";
-	for (var i = 0; i < size(path); i += 1)
-		d ~= path[i] == `\\` ? "/" : chr(path[i]);
-
-	var prefix = d[0] == `/` ? "/" : "";
+	path = replace(path, "\\", "/");
+	var prefix = path[0] == `/` ? "/" : "";
 	var stack = [];
-	foreach (var e; split("/", d)) {
+
+	foreach (var e; split("/", path)) {
 		if (e == "." or e == "")
 			continue;
 		elsif (e == "..")
@@ -199,11 +197,7 @@ var fixpath = func(path) {
 		else
 			append(stack, e);
 	}
-	if (!size(stack))
-		return "/";
-	var path = stack[0];
-	foreach (var s; subvec(stack, 1))
-		path ~= "/" ~ s;
-	return prefix ~ path;
+	return size(stack) ? prefix ~ join("/", stack) : "/";
 }
+
 

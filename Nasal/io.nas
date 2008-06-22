@@ -203,7 +203,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
         if(mode == "r" or mode == "rb" or mode == "br")
             rules = read_rules;
 
-        if(path[0] != '/')
+        if(path[0] != `/`)
             path = curr ~ '/' ~ path;
 
         var fpath = string.fixpath(path);

@@ -168,7 +168,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
             if(size(f) < 3 or f[0] != "READ" and f[0] != "WRITE" or f[1] != "DENY" and f[1] != "ALLOW") {
                 printlog("alert", "ERROR: invalid io.open() rule in ", path, ", line ", no, ": ", line);
                 read_rules = write_rules = [];
-                break;  # don't use die(), as io.open() has yet to be redefined
+                break;
             }
             var pattern = f[2];
             foreach(var p; subvec(f, 3))
@@ -185,7 +185,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
     # catch exceptions so that a die() doesn't ruin everything
     call(func load_rules(home ~ "/" ~ config) or load_rules(root ~ "/" ~ config), nil, var err = []);
-    if(curr == "" or size(err)) {
+    if(size(err)) {
         debug.printerror(err);
         read_rules = write_rules = [];
     }
@@ -197,7 +197,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
         print("WRITE: ", debug.string(write_rules));
     }
 
-    open = func(path, mode = "rb") {
+    io.open = func(path, mode = "rb") {
         var rules = write_rules;
         if(mode == "r" or mode == "rb" or mode == "br")
             rules = read_rules;

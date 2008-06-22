@@ -148,6 +148,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     var _open = open;
     var root = string.fixpath(getprop("/sim/fg-root"));
     var home = string.fixpath(getprop("/sim/fg-home"));
+    var curr = string.fixpath(getprop("/sim/fg-current"));
     var config = "Nasal/IOrules";
 
     var read_rules = [];
@@ -185,7 +186,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
     # catch exceptions so that a die() doesn't ruin everything
     call(func load_rules(home ~ "/" ~ config) or load_rules(root ~ "/" ~ config), nil, var err = []);
-    if(size(err)) {
+    if(curr == "" or size(err)) {
         debug.printerror(err);
         read_rules = write_rules = [];
     }
@@ -201,6 +202,9 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
         var rules = write_rules;
         if(mode == "r" or mode == "rb" or mode == "br")
             rules = read_rules;
+
+        if(path[0] != '/')
+            path = curr ~ '/' ~ path;
 
         var fpath = string.fixpath(path);
         foreach(var d; rules) {

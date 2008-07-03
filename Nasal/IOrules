@@ -17,7 +17,8 @@
 # Entries are considered from top down. If no entry matches, then file
 # access is denied. A local rules file $FG_HOME/Nasal/IOrules using the
 # same syntax takes precedence over this file. The default rules that
-# apply when there's no Nasal/IOrules file at all are equivalent to this:
+# apply if there's no Nasal/IOrules file at all, or there are no rules
+# defined in it are equivalent to this:
 #
 #   READ DENY *
 #   WRITE DENY *

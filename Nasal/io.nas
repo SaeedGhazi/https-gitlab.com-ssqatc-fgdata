@@ -48,11 +48,11 @@ var load_nasal = func(file, module = nil) {
     printlog("info", "loading ", file, " into namespace ", module);
     var code = call(func compile(readfile(file), file), nil, err);
     if(size(err))
-        return !!print(file ~ ": " ~ err[0]);
+        return !print(file ~ ": " ~ err[0]);
 
     call(bind(code, globals), nil, nil, globals[module], err);
     debug.printerror(err);
-    return !!size(err);
+    return !size(err);
 }
 
 # The following two functions are for reading generic XML files into
@@ -95,9 +95,7 @@ var readxml = func(path, prefix = "___") {
             node.setValue(buf[1]);
         node = node.getParent();
     }
-    var data = func(d) {
-        stack[-1][1] ~= d;
-    }
+    var data = func(d) stack[-1][1] ~= d;
     return parsexml(path, start, end, data) == nil ? nil : tree;
 }
 
@@ -145,17 +143,18 @@ var writexml = func(path, node, indent = "\t", prefix = "___") {
 # Redefine io.open() such that files can only be opened under authorized directories.
 #
 _setlistener("/sim/signals/nasal-dir-initialized", func {
-    var _open = open;
+    var _open = io.open;
     var root = string.fixpath(getprop("/sim/fg-root"));
     var home = string.fixpath(getprop("/sim/fg-home"));
     var config = "Nasal/IOrules";
 
+    var rules_file = nil;
     var read_rules = [];
     var write_rules = [];
 
     var load_rules = func(path) {
         if(stat(path) == nil)
-            return 0;
+            return nil;
         printlog("info", "using io.open() rules from ", path);
         read_rules = [];
         write_rules = [];
@@ -180,11 +179,12 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
             append(f[0] == "READ" ? read_rules : write_rules, [pattern, f[1] == "ALLOW"]);
         }
         close(file);
-        return 1;
+        return path;
     }
 
     # catch exceptions so that a die() doesn't ruin everything
-    call(func load_rules(home ~ "/" ~ config) or load_rules(root ~ "/" ~ config), nil, var err = []);
+    var rules_file = call(func load_rules(home ~ "/" ~ config)
+            or load_rules(root ~ "/" ~ config), nil, var err = []);
     if(size(err)) {
         debug.printerror(err);
         read_rules = write_rules = [];
@@ -192,9 +192,9 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
     read_rules = [["*/" ~ config, 0]] ~ read_rules;
     write_rules = [["*/" ~ config, 0]] ~ write_rules;
-    if(getprop("/sim/logging/priority") == "info") {
-        print("READ:  ", debug.string(read_rules));
-        print("WRITE: ", debug.string(write_rules));
+    if(__.log_level <= 3) {
+        print("io.open()/READ:  ", debug.string(read_rules));
+        print("io.open()/WRITE: ", debug.string(write_rules));
     }
 
     io.open = func(path, mode = "rb") {
@@ -211,7 +211,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
             }
         }
 
-        die("io.open(): opening file '" ~ path ~ "' denied (unauthorized directory)\n ");
+        die("io.open(): opening file '" ~ path ~ "' denied (unauthorized access)\n ");
     }
 });
 

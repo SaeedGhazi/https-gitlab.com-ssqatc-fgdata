@@ -137,8 +137,8 @@ var _tree = func(n, graph = 1, prefix = "", level = 0) {
 
 
 var attributes = func(p, verbose = 1) {
-	var r = p.getAttribute("read")        ? "" : "r";
-	var w = p.getAttribute("write")       ? "" : "w";
+	var r = p.getAttribute("readable")    ? "" : "r";
+	var w = p.getAttribute("writable")    ? "" : "w";
 	var R = p.getAttribute("trace-read")  ? "R" : "";
 	var W = p.getAttribute("trace-write") ? "W" : "";
 	var A = p.getAttribute("archive")     ? "A" : "";

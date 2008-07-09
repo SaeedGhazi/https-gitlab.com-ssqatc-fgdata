@@ -44,7 +44,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <fullscreen type="bool">false</fullscreen>
    <units>feet</units>
    <save-on-exit type="bool" userarchive="y">true</save-on-exit>
-   <browser-app>netscape</browser-app><!--  help viewer -->
+   <browser-app write="n">netscape</browser-app><!--  help viewer -->
    <terminal-ansi-colors type="bool">true</terminal-ansi-colors>
    <season type="string">summer</season>
   </startup>

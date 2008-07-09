@@ -18,11 +18,11 @@ top down before the key bindings are parsed.
       var ctrl = props.globals.getNode("/devices/status/keyboard/ctrl");
       var alt = props.globals.getNode("/devices/status/keyboard/alt");
 
-      var space_release = func {}
+      var space_release = func nil;
       var space = func(state, mod) {
           if (!state) {
               space_release();
-              return space_release = func {};
+              return space_release = func nil;
           }
           if (mod == 0 or mod == 1) {
               controls.ptt(mod + 1);
@@ -30,7 +30,7 @@ top down before the key bindings are parsed.
           }
       }
 
-      ## uncomment this line to get keycode reports to the terminal window
+      ## uncomment this line to get keycode reports printed to the terminal window
       #setlistener("devices/status/keyboard/event", func(n) debug.dump(n.getValues()));
   </script>
  </nasal>
@@ -259,7 +259,7 @@ top down before the key bindings are parsed.
   <mod-shift>
    <desc>Reset FlightGear.</desc>
    <binding>
-    <command>old-reinit-dialog</command>
+    <command>reset</command>
    </binding>
   </mod-shift>
  </key>

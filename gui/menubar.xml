@@ -22,7 +22,7 @@
   <item>
    <label>Reset</label>
    <binding>
-    <command>old-reinit-dialog</command>
+    <command>reset</command>
    </binding>
   </item>
 

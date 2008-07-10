@@ -91,7 +91,7 @@ var read_properties = func(path, target = nil) {
 # determine whether the tree is a subtree of the global tree, in
 # which case the branch is writen directly from that tree, as this
 # yields a more accurate result. (The attributes are "readable"
-# + "writeable" + the lowest unused bit.)
+# + "writable" + the lowest unused bit.)
 #
 # Usage:   io.write_properties(<filename>, <props.Node or property-path>);
 #

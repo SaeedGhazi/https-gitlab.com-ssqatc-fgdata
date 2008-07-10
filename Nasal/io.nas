@@ -55,6 +55,69 @@ var load_nasal = func(file, module = nil) {
     return !size(err);
 }
 
+# Load XML file in FlightGear's native <PropertyList> format.
+# If the second, optional target parameter is set, then the properties
+# are loaded to this node in the global property tree. Otherwise they
+# are returned as a separate props.Node tree. Returns the data as a
+# props.Node on success or nil on error.
+#
+# Usage:   io.read_properties(<filename> [, <props.Node or property-path>]);
+#
+# Examples:
+#
+#     var target = props.globals.getNode("/sim/model");
+#     io.read_properties("/tmp/foo.xml", target);
+#
+#     var data = io.read_properties("/tmp/foo.xml", "/sim/model");
+#     var data = io.read_properties("/tmp/foo.xml");
+#
+var read_properties = func(path, target = nil) {
+    var args = props.Node.new({ filename: path });
+    if(target == nil) {
+        var ret = args.getNode("data", 1);
+    } elsif(isa(target, props.Node)) {
+        args.getNode("targetnode", 1).setValue(target.getPath());
+        var ret = target;
+    } else {
+        args.getNode("targetnode", 1).setValue(target);
+        var ret = props.globals.getNode(target, 1);
+    }
+    return fgcommand("loadxml", args) ? ret : nil;
+}
+
+# Write XML file in FlightGear's native <PropertyList> format.
+# Returns the filename on success or nil on error. If the source
+# is a props.Node, then a unique node attribute number is used to
+# determine whether the tree is a subtree of the global tree, in
+# which case the branch is writen directly from that tree, as this
+# yields a more accurate result. (The attributes are "readable"
+# + "writeable" + the lowest unused bit.)
+#
+# Usage:   io.write_properties(<filename>, <props.Node or property-path>);
+#
+# Examples:
+#
+#     var data = props.Node.new({ a:1, b:2, c:{ d:3, e:4 } });
+#     io.write_properties("/tmp/foo.xml", data);
+#     io.write_properties("/tmp/foo.xml", "/sim/model");
+#
+var write_properties = func(path, prop) {
+    var attr = props.globals.getAttribute("last") * 2 + 3;
+    props.globals.setAttribute(attr);
+    var args = props.Node.new({ filename: path });
+    if(isa(prop, props.Node)) {
+        for(var root = prop; (var p = root.getParent()) != nil;)
+            root = p;
+        if(root.getAttribute() == attr)
+            args.getNode("sourcenode", 1).setValue(prop.getPath());
+        else
+            props.copy(prop, args.getNode("data", 1), 1);
+    } else {
+        args.getNode("sourcenode", 1).setValue(prop);
+    }
+    return fgcommand("savexml", args) ? path : nil;
+}
+
 # The following two functions are for reading generic XML files into
 # the property tree and for writing them from there to the disk. The
 # built-in fgcommands (load, save, loadxml, savexml) are for FlightGear's
@@ -143,7 +206,6 @@ var writexml = func(path, node, indent = "\t", prefix = "___") {
 # Redefine io.open() such that files can only be opened under authorized directories.
 #
 _setlistener("/sim/signals/nasal-dir-initialized", func {
-    var _open = io.open;
     var root = string.fixpath(getprop("/sim/fg-root"));
     var home = string.fixpath(getprop("/sim/fg-home"));
     var config = "Nasal/IOrules";
@@ -197,6 +259,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
         print("io.open()/WRITE: ", debug.string(write_rules));
     }
 
+    var _open = io.open;
     io.open = func(path, mode = "rb") {
         var rules = write_rules;
         if(mode == "r" or mode == "rb" or mode == "br")

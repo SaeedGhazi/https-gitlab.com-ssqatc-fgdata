@@ -83,8 +83,11 @@ var cursor_types = { none: 0, pointer: 1, wait: 2, crosshair: 3, leftright: 4 };
 # property and the argument for the "dialog-show" command.  This
 # probably isn't really needed...
 #
-screenHProp = tipArg = nil;
-INIT = func {
+var fdm = getprop("/sim/flight-model");
+var screenHProp = nil;
+var tipArg = nil;
+
+var INIT = func {
     screenHProp = props.globals.getNode("/sim/startup/ysize");
     tipArg = props.Node.new({ "dialog-name" : "PopTip" });
 
@@ -93,7 +96,7 @@ INIT = func {
     props.globals.getNode("/sim/help/common", 1).setValues(common_aircraft_keys);
 
     # enable/disable menu entries
-    menuEnable("fuel-and-payload", getprop("/sim/flight-model") == "yasim");
+    menuEnable("fuel-and-payload", fdm == "yasim" or fdm == "jsb");
     menuEnable("autopilot", props.globals.getNode("/autopilot/KAP140/locks") == nil);
     menuEnable("multiplayer", getprop("/sim/multiplay/txport") or getprop("/sim/multiplay/rxport"));
     menuEnable("tutorial-start", size(props.globals.getNode("/sim/tutorials").getChildren("tutorial")));
@@ -119,17 +122,17 @@ var fpsDisplay = func(n) {
 ##
 # How many seconds do we show the tip?
 #
-DELAY = 1.0;
+var DELAY = 1.0;
 
 ##
 # Pop down the tip dialog, if it is visible.
 #
-popdown = func { fgcommand("dialog-close", tipArg); }
+var popdown = func { fgcommand("dialog-close", tipArg); }
 
 # Marker for the "current" timer.  This value gets stored in the
 # closure of the timer function, and is used to check that there
 # hasn't been a more recent timer set that should override.
-currTimer = 0;
+var currTimer = 0;
 
 ########################################################################
 # Widgets & Layout Management
@@ -140,7 +143,7 @@ currTimer = 0;
 # helper methods that are difficult or tedious with the raw property
 # API.  Note especially the slightly tricky addChild() method.
 #
-Widget = {
+var Widget = {
     set : func { me.node.getNode(arg[0], 1).setValue(arg[1]); },
     prop : func { return me.node; },
     new : func { return { parents : [Widget], node : props.Node.new() } },
@@ -197,7 +200,7 @@ Widget = {
 #     var livery_dialog = gui.Dialog.new("livery-select");
 #     livery_dialog.toggle();
 #
-Dialog = {
+var Dialog = {
     new : func(prop, path = nil, name = nil) {
         var m = { parents : [Dialog] };
         m.state = 0;
@@ -424,7 +427,7 @@ var nextStyle = func {
 # Dialog Boxes
 ########################################################################
 
-dialog = {};
+var dialog = {};
 
 var setWeight = func(wgt, opt) {
     var lbs = opt.getNode("lbs", 1).getValue();
@@ -485,13 +488,15 @@ var weightChangeHandler = func {
     }
 }
 
+
+
 ##
 # Dynamically generates a weight & fuel configuration dialog specific to
 # the aircraft.
 #
-showWeightDialog = func {
-    name = "WeightAndFuel";
-    title = "Weight and Fuel Settings";
+var showWeightDialog = func {
+    var name = "WeightAndFuel";
+    var title = "Weight and Fuel Settings";
 
     #
     # General Dialog Structure
@@ -500,15 +505,15 @@ showWeightDialog = func {
     dialog[name].set("name", name);
     dialog[name].set("layout", "vbox");
 
-    header = dialog[name].addChild("text");
+    var header = dialog[name].addChild("text");
     header.set("label", title);
 
     dialog[name].addChild("hrule");
 
-    if (props.globals.getNode("/yasim") == nil) {
-        msg = dialog[name].addChild("text");
+    if (fdm != "yasim" and fdm != "jsb") {
+        var msg = dialog[name].addChild("text");
         msg.set("label", "Not supported for this aircraft");
-        cancel = dialog[name].addChild("button");
+        var cancel = dialog[name].addChild("button");
         cancel.set("legend", "Cancel");
         cancel.setBinding("dialog-close");
         fgcommand("dialog-new", dialog[name].prop());
@@ -516,37 +521,51 @@ showWeightDialog = func {
         return;
     }
 
+    # FDM dependent settings
+    if(fdm == "yasim") {
+        var fdmdata = {
+            grosswgt : "/yasim/gross-weight-lbs",
+            payload  : "/sim",
+            level    : "level-lbs",
+        };
+    } elsif(fdm == "jsb") {
+        var fdmdata = {
+            grosswgt : "/fdm/jsbsim/inertia/weight-lbs",
+            payload  : "/payload",
+            level    : "level-lb",
+        };
+    }
 
-    contentArea = dialog[name].addChild("group");
+    var contentArea = dialog[name].addChild("group");
     contentArea.set("layout", "hbox");
 
-    grossWgt = props.globals.getNode("/yasim/gross-weight-lbs");
+    var grossWgt = props.globals.getNode(fdmdata.grosswgt);
     if(grossWgt != nil) {
-        gwg = dialog[name].addChild("group");
+        var gwg = dialog[name].addChild("group");
         gwg.set("layout", "hbox");
         gwg.addChild("empty").set("stretch", 1);
         gwg.addChild("text").set("label", "Gross Weight:");
-        txt = gwg.addChild("text");
+        var txt = gwg.addChild("text");
         txt.set("label", "0123456789");
         txt.set("format", "%.0f lb");
-        txt.set("property", "/yasim/gross-weight-lbs");
+        txt.set("property", fdmdata.grosswgt);
         txt.set("live", 1);
         gwg.addChild("empty").set("stretch", 1);
     }
 
-    buttonBar = dialog[name].addChild("group");
+    var buttonBar = dialog[name].addChild("group");
     buttonBar.set("layout", "hbox");
     buttonBar.set("default-padding", 10);
 
-    ok = buttonBar.addChild("button");
+    var ok = buttonBar.addChild("button");
     ok.set("legend", "OK");
     ok.set("key", "esc");
     ok.setBinding("dialog-apply");
     ok.setBinding("dialog-close");
 
     # Temporary helper function
-    tcell = func(parent, type, row, col) {
-        cell = parent.addChild(type);
+    var tcell = func(parent, type, row, col) {
+        var cell = parent.addChild(type);
         cell.set("row", row);
         cell.set("col", col);
         return cell;
@@ -555,11 +574,11 @@ showWeightDialog = func {
     #
     # Fill in the content area
     #
-    fuelArea = contentArea.addChild("group");
+    var fuelArea = contentArea.addChild("group");
     fuelArea.set("layout", "vbox");
     fuelArea.addChild("text").set("label", "Fuel Tanks");
 
-    fuelTable = fuelArea.addChild("group");
+    var fuelTable = fuelArea.addChild("group");
     fuelTable.set("layout", "table");
 
     fuelArea.addChild("empty").set("stretch", 1);
@@ -568,55 +587,55 @@ showWeightDialog = func {
     tcell(fuelTable, "text", 0, 3).set("label", "Pounds");
     tcell(fuelTable, "text", 0, 4).set("label", "Gallons");
 
-    tanks = props.globals.getNode("/consumables/fuel").getChildren("tank");
+    var tanks = props.globals.getNode("/consumables/fuel").getChildren("tank");
     for(i=0; i<size(tanks); i+=1) {
-        t = tanks[i];
+        var t = tanks[i];
 
-        tname = i ~ "";
-        tnode = t.getNode("name");
+        var tname = i ~ "";
+        var tnode = t.getNode("name");
         if(tnode != nil) { tname = tnode.getValue(); }
 
-        tankprop = "/consumables/fuel/tank["~i~"]";
+        var tankprop = "/consumables/fuel/tank["~i~"]";
 
-        cap = t.getNode("capacity-gal_us", 1).getValue();
+        var cap = t.getNode("capacity-gal_us", 1).getValue();
 
         # Hack, to ignore the "ghost" tanks created by the C++ code.
         if(cap == nil or cap < 1) { continue; }
 
-        title = tcell(fuelTable, "text", i+1, 0);
+        var title = tcell(fuelTable, "text", i+1, 0);
         title.set("label", tname);
         title.set("halign", "right");
 
-        sel = tcell(fuelTable, "checkbox", i+1, 1);
+        var sel = tcell(fuelTable, "checkbox", i+1, 1);
         sel.set("property", tankprop ~ "/selected");
         sel.set("live", 1);
         sel.setBinding("dialog-apply");
 
-        slider = tcell(fuelTable, "slider", i+1, 2);
+        var slider = tcell(fuelTable, "slider", i+1, 2);
         slider.set("property", tankprop ~ "/level-gal_us");
         slider.set("live", 1);
         slider.set("min", 0);
         slider.set("max", cap);
         slider.setBinding("dialog-apply");
 
-        lbs = tcell(fuelTable, "text", i+1, 3);
-        lbs.set("property", tankprop ~ "/level-lbs");
+        var lbs = tcell(fuelTable, "text", i+1, 3);
+        lbs.set("property", tankprop ~ "/" ~ fdmdata.level);
         lbs.set("label", "0123456");
         lbs.set("format", "%.3f");
         lbs.set("live", 1);
 
-        gals = tcell(fuelTable, "text", i+1, 4);
+        var gals = tcell(fuelTable, "text", i+1, 4);
         gals.set("property", tankprop ~ "/level-gal_us");
         gals.set("label", "0123456");
         gals.set("format", "%.3f");
         gals.set("live", 1);
     }
 
-    weightArea = contentArea.addChild("group");
+    var weightArea = contentArea.addChild("group");
     weightArea.set("layout", "vbox");
     weightArea.addChild("text").set("label", "Payload");
 
-    weightTable = weightArea.addChild("group");
+    var weightTable = weightArea.addChild("group");
     weightTable.set("layout", "table");
 
     weightArea.addChild("empty").set("stretch", 1);
@@ -624,13 +643,17 @@ showWeightDialog = func {
     tcell(weightTable, "text", 0, 0).set("label", "Location");
     tcell(weightTable, "text", 0, 2).set("label", "Pounds");
 
-    wgts = props.globals.getNode("/sim").getChildren("weight");
+    var payload_base = props.globals.getNode(fdmdata.payload);
+    if (payload_base != nil)
+        var wgts = payload_base.getChildren("weight");
+    else
+        var wgts = [];
     for(i=0; i<size(wgts); i+=1) {
         var w = wgts[i];
         var wname = w.getNode("name", 1).getValue();
-        var wprop = "/sim/weight[" ~ i ~ "]";
+        var wprop = fdmdata.payload ~ "/weight[" ~ i ~ "]";
 
-        title = tcell(weightTable, "text", i+1, 0);
+        var title = tcell(weightTable, "text", i+1, 0);
         title.set("label", wname);
         title.set("halign", "right");
 
@@ -679,7 +702,7 @@ showWeightDialog = func {
             slider.setBinding("dialog-apply");
         }
 
-        lbs = tcell(weightTable, "text", i+1, 2);
+        var lbs = tcell(weightTable, "text", i+1, 2);
         lbs.set("property", wprop ~ "/weight-lb");
         lbs.set("label", "0123456");
         lbs.set("format", "%.0f");

@@ -47,9 +47,13 @@ var load_nasal = func(file, module = nil) {
     var err = [];
     printlog("info", "loading ", file, " into namespace ", module);
     var code = call(func compile(readfile(file), file), nil, err);
-    if(size(err))
-        return !print(file ~ ": " ~ err[0]);
-
+    if(size(err)) {
+        (func nil)(); # needed to get correct caller results (?!?)
+        for(var i = 1; (var c = caller(i)) != nil; i += 1)
+            err ~= subvec(c, 2, 2);
+        debug.printerror(err);
+        return 0;
+    }
     call(bind(code, globals), nil, nil, globals[module], err);
     debug.printerror(err);
     return !size(err);
@@ -259,22 +263,30 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
         print("io.open()/WRITE: ", debug.string(write_rules));
     }
 
+    var valid = func(path, rules) {
+        var fpath = string.fixpath(path);
+        foreach(var d; rules)
+            if(string.match(fpath, d[0]))
+                return d[1] ? fpath : nil;
+        return nil;
+    }
+
     var _open = io.open;
     io.open = func(path, mode = "rb") {
         var rules = write_rules;
         if(mode == "r" or mode == "rb" or mode == "br")
             rules = read_rules;
 
-        var fpath = string.fixpath(path);
-        foreach(var d; rules) {
-            if(string.match(fpath, d[0])) {
-                if(d[1])
-                    return _open(fpath, mode);
-                break;
-            }
-        }
+        if(var vpath = valid(path, rules))
+            return _open(vpath, mode);
 
         die("io.open(): opening file '" ~ path ~ "' denied (unauthorized access)\n ");
     }
+
+    # validation listeners for loadxml/savexml (see utils.cxx:fgValidatePath)
+    var v = props.globals.getNode("/sim/paths/validate", 1);
+    setlistener(v.getNode("read", 1), func(n) n.setValue(valid(n.getValue(), read_rules) or ""));
+    setlistener(v.getNode("write", 1), func(n) n.setValue(valid(n.getValue(), write_rules) or ""));
+    v.remove();
 });
 

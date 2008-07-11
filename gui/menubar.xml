@@ -6,16 +6,16 @@
   <item>
    <label>Save</label>
    <binding>
-    <command>dialog-show</command>
-    <dialog-name>save_flight</dialog-name>
+    <command>nasal</command>
+    <script>gui.save_flight()</script>
    </binding>
   </item>
 
   <item>
    <label>Load</label>
    <binding>
-    <command>dialog-show</command>
-    <dialog-name>load_flight</dialog-name>
+    <command>nasal</command>
+    <script>gui.load_flight()</script>
    </binding>
   </item>
 

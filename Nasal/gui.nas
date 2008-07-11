@@ -337,6 +337,30 @@ var FileSelector = {
 
 
 ##
+# Save/load flight menu functions.
+#
+var save_flight_sel = nil;
+var save_flight = func {
+    var save = func(n) fgcommand("save", props.Node.new({ file: n.getValue() }));
+    if (save_flight_sel == nil)
+        save_flight_sel = FileSelector.new(save, "Save Flight", "Save",
+                ["*.sav"], getprop("/sim/fg-home"), "flight.sav");
+    save_flight_sel.open();
+}
+
+
+var load_flight_sel = nil;
+var load_flight = func {
+    var load = func fgcommand("load", props.Node.new({ file: cmdarg().getValue() }));
+    if (load_flight_sel == nil)
+        load_flight_sel = FileSelector.new(load, "Load Flight", "Load",
+                ["*.sav"], getprop("/sim/fg-home"), "flight.sav");
+    load_flight_sel.open();
+}
+
+
+
+##
 # Open property browser with given target path.
 #
 var property_browser = func(dir = nil) {

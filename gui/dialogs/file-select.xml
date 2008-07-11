@@ -236,9 +236,7 @@
 				file_input();
 				var p = string.fixpath(current.dir ~ "/" ~ current.file);
 				var stat = io.stat(p);
-				if (stat == nil)
-					return;
-				path.setValue(io.isdir(stat[2]) ? p ~ "/" : p);
+				path.setValue(stat != nil and io.isdir(stat[2]) ? p ~ "/" : p);
 				file.setValue(current.file);
 				close();
 			}

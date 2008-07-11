@@ -23,6 +23,10 @@ Started September 2000 by David Megginson, david@megginson.com
 
   <paths>
    <screenshot-dir/> <!-- defaults to current working dir -->
+   <validate>
+    <read type="string"/>
+    <write type="string"/>
+   </validate>
   </paths>
 
   <intl include="Translations/locale.xml"/>

@@ -412,7 +412,7 @@ var data = {
 	},
 	load : func {
 		printlog("warn", "trying to load aircraft data from ", me.path, " (OK if not found)");
-		fgcommand("load", props.Node.new({ "file": me.path }));
+		io.read_properties(me.path, props.globals);
 	},
 	save : func(v = nil) {
 		me.loopid += 1;

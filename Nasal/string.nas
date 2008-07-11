@@ -186,7 +186,7 @@ var match = func(str, patt) {
 #
 var fixpath = func(path) {
 	path = replace(path, "\\", "/");
-	var prefix = path[0] == `/` ? "/" : "";
+	var prefix = size(path) and path[0] == `/` ? "/" : "";
 	var stack = [];
 
 	foreach (var e; split("/", path)) {

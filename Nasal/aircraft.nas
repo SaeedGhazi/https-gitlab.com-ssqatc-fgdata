@@ -432,15 +432,14 @@ var data = {
 		size(me.catalog) or return;
 		printlog("debug", "saving aircraft data to ", me.path);
 		me.signalN.setBoolValue(1);
-		var args = props.Node.new({ "filename": me.path });
-		var data = args.getNode("data", 1);
+		var data = props.Node.new();
 		foreach (var c; me.catalog) {
 			if (c[0] == `/`)
 				c = substr(c, 1);
 
 			props.copy(props.globals.getNode(c, 1), data.getNode(c, 1));
 		}
-		fgcommand("savexml", args);
+		io.write_properties(me.path, data);
 	},
 	add : func(p...) {
 		foreach (var n; props.nodeList(p))
@@ -574,10 +573,7 @@ var livery = {
 		foreach (var file; directory(path)) {
 			if (substr(file, -4) != ".xml")
 				continue;
-			var n = props.Node.new({ filename : path ~ file });
-			fgcommand("loadxml", n);
-			n = n.getNode("data");
-
+			var n = io.read_properties(path ~ file);
 			var name = n.getNode(me.name_path);
 			var index = n.getNode(me.sort_path);
 			if (name == nil or index == nil)
@@ -624,7 +620,7 @@ var livery = {
 # in the remote aircraft accordingly.
 #
 # SYNOPSIS:
-#	livery_update(<livery-dir> [, <interval:10> [, <func>]]);
+#	livery_update.new(<livery-dir> [, <interval:10> [, <func>]]);
 #
 #	<livery-dir> ... directory with livery files, relative to $FG_ROOT
 #	<interval>   ... checking interval in seconds (default: 10)
@@ -667,8 +663,7 @@ var livery_update = {
 		me.running or return;
 		var file = me.fileN.getValue();
 		if (file != nil and file != me.last) {
-			fgcommand("loadxml", props.Node.new({ filename: me.dir ~ file ~ ".xml",
-					targetnode: me.root }));
+			io.read_properties(me.dir ~ file ~ ".xml", me.root);
 			me.last = file;
 			if (me.callback != nil)
 				me.callback(file);
@@ -721,10 +716,7 @@ var formation = {
 		foreach (var file; directory(path)) {
 			if (substr(file, -4) != ".xml")
 				continue;
-			var n = props.Node.new({ filename : path ~ file });
-			fgcommand("loadxml", n);
-			n = n.getNode("data");
-
+			var n = io.read_properties(path ~ file);
 			var name = n.getNode(me.name_path);
 			var index = n.getNode(me.sort_path);
 			if (name == nil or index == nil)

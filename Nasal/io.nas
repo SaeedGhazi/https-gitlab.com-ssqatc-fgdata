@@ -87,11 +87,10 @@ var read_properties = func(path, target = nil) {
 
 # Write XML file in FlightGear's native <PropertyList> format.
 # Returns the filename on success or nil on error. If the source
-# is a props.Node, then a unique node attribute number is used to
-# determine whether the tree is a subtree of the global tree, in
-# which case the branch is writen directly from that tree, as this
-# yields a more accurate result. (The attributes are "readable"
-# + "writable" + the lowest unused bit.)
+# is a props.Node that refers to a node in the main tree, then
+# the data are directly written from the tree, yielding a more
+# accurate result. Otherwise the data need to be copied first,
+# which may slightly change node types (FLOAT becomes DOUBLE etc.)
 #
 # Usage:   io.write_properties(<filename>, <props.Node or property-path>);
 #
@@ -102,9 +101,10 @@ var read_properties = func(path, target = nil) {
 #     io.write_properties("/tmp/foo.xml", "/sim/model");
 #
 var write_properties = func(path, prop) {
-    var attr = props.globals.getAttribute("last") * 2 + 3;
-    props.globals.setAttribute(attr);
     var args = props.Node.new({ filename: path });
+    # default attributes of a new node plus the lowest unused bit
+    var attr = args.getAttribute() + args.getAttribute("last") * 2;
+    props.globals.setAttribute(attr);
     if(isa(prop, props.Node)) {
         for(var root = prop; (var p = root.getParent()) != nil;)
             root = p;

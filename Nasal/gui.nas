@@ -225,8 +225,7 @@ var Dialog = {
             me.close();
 
         me.prop.removeChildren();
-        fgcommand("loadxml", props.Node.new({"filename": getprop("/sim/fg-root") ~ "/" ~ me.path,
-                "targetnode": me.prop.getPath()}));
+        io.read_properties(getprop("/sim/fg-root") ~ "/" ~ me.path, me.prop);
 
         var n = me.prop.getNode("name");
         if (n == nil)

@@ -468,10 +468,7 @@ var dialog = func {
 #
 var load = func(file, index = 0) {
 	props.globals.getNode("/sim/tutorials", 1).removeChild("tutorial", index);
-	fgcommand("loadxml", props.Node.new({
-		"filename": getprop("/sim/fg-root") ~ "/" ~ file,
-		"targetnode": "/sim/tutorials/tutorial[" ~ index ~ "]/",
-	}));
+	io.read_properties(getprop("/sim/fg-root") ~ "/" ~ file, "/sim/tutorials/tutorial[" ~ index ~ "]/");
 }
 
 

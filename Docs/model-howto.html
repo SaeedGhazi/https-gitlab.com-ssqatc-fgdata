@@ -323,7 +323,7 @@ to provide the property name:</p>
 <blockquote><pre>&lt;animation&gt;
  &lt;type&gt;rotate&lt;/type&gt;
  &lt;object-name&gt;Rudder&lt;/object-name&gt;
- &lt;property&gt;/controls/rudder&lt;/property&gt;
+ &lt;property&gt;controls/rudder&lt;/property&gt;
 &lt;/animation&gt;
 </pre></blockquote>
 
@@ -340,7 +340,7 @@ position from -18 degrees to 18 degrees:</p>
 <blockquote><pre>&lt;animation&gt;
  &lt;type&gt;rotate&lt;/type&gt;
  &lt;object-name&gt;Rudder&lt;/object-name&gt;
- &lt;property&gt;/controls/rudder&lt;/property&gt;
+ &lt;property&gt;controls/rudder&lt;/property&gt;
  &lt;factor&gt;18&lt;/factor&gt;
 &lt;/animation&gt;
 </pre></blockquote>
@@ -356,7 +356,7 @@ dead center; you could specify that like this:</p>
 <blockquote><pre>&lt;animation&gt;
  &lt;type&gt;rotate&lt;/type&gt;
  &lt;object-name&gt;Rudder&lt;/object-name&gt;
- &lt;property&gt;/controls/rudder&lt;/property&gt;
+ &lt;property&gt;controls/rudder&lt;/property&gt;
  &lt;offset-deg&gt;-0.01&lt;/offset-deg&gt;
  &lt;factor&gt;18&lt;/factor&gt;
 &lt;/animation&gt;
@@ -371,7 +371,7 @@ complicated) example for the Cessna 310 landing gear:</p>
 <blockquote><pre>&lt;animation&gt;
  &lt;type&gt;rotate&lt;/type&gt;
  &lt;object-name&gt;NoseWheel&lt;/object-name&gt;
- &lt;property&gt;/gear/gear[0]/position-norm&lt;/property&gt;
+ &lt;property&gt;gear/gear[0]/position-norm&lt;/property&gt;
  &lt;factor&gt;120&lt;/factor&gt;
  &lt;offset-deg&gt;-1&lt;/offset-deg&gt;
  &lt;min&gt;-90&lt;/min&gt;
@@ -515,7 +515,7 @@ x-axis.  Here is an example for a rudder:</p>
 <blockquote><pre>&lt;animation&gt;
  &lt;type&gt;rotate&lt;/type&gt;
  &lt;object-name&gt;Rudder&lt;/object-name&gt;
- &lt;property&gt;/controls/rudder&lt;/property&gt;
+ &lt;property&gt;controls/rudder&lt;/property&gt;
  &lt;factor&gt;18&lt;/factor&gt;
  &lt;center&gt;
   &lt;x-m&gt;5.45&lt;/x-m&gt;
@@ -590,7 +590,7 @@ the Cessna 172:</p>
 <blockquote><pre>&lt;animation&gt;
  &lt;type&gt;rotate&lt;/type&gt;
  &lt;object-name&gt;Rudder&lt;/object-name&gt;
- &lt;property&gt;/controls/rudder&lt;/property&gt;
+ &lt;property&gt;controls/rudder&lt;/property&gt;
  &lt;factor&gt;18&lt;/factor&gt;
  &lt;center&gt;
   &lt;x-m&gt;5.45&lt;/x-m&gt;
@@ -611,7 +611,7 @@ propeller:</p>
 <blockquote><pre>&lt;animation&gt;
  &lt;type&gt;spin&lt;/type&gt;
  &lt;object-name&gt;Propeller&lt;/object-name&gt;
- &lt;property&gt;/engines/engine[0]/rpm&lt;/property&gt;
+ &lt;property&gt;engines/engine[0]/rpm&lt;/property&gt;
  &lt;center&gt;
   &lt;x-m&gt;0&lt;/x-m&gt;
   &lt;y-m&gt;0&lt;/y-m&gt;
@@ -643,7 +643,7 @@ and x2, y1 and y2, z1 and z2).</p>
 <blockquote><pre>&lt;animation&gt;
   &lt;type&gt;rotate&lt;/type&gt;
   &lt;object-name&gt;AileronLeftOuter&lt;/object-name&gt;
-  &lt;property&gt;/surface-positions/left-aileron-pos-norm&lt;/property&gt;
+  &lt;property&gt;surface-positions/left-aileron-pos-norm&lt;/property&gt;
   &lt;factor&gt;-30&lt;/factor&gt;
   &lt;axis&gt;
    &lt;x1-m&gt;18.28&lt;/x1-m&gt;
@@ -688,7 +688,7 @@ properties. A condition is introduced by the <var>condition</var> element,
 like in this example&nbsp;:</p>
 <blockquote><pre> &lt;condition&gt;
    &lt;greater-than&gt;
-    &lt;property&gt;/sim/time/sun-angle-rad&lt;/property&gt;
+    &lt;property&gt;sim/time/sun-angle-rad&lt;/property&gt;
     &lt;value&gt;1.57&lt;/value&gt;
    &lt;/greater-than&gt;
   &lt;/condition&gt;</pre></blockquote>
@@ -735,7 +735,7 @@ elements ) from the scene when the associated condition evaluated to <var>false<
   &lt;object-name&gt;Fixed&lt;/object-name&gt;
   &lt;condition&gt;
    &lt;greater-than&gt;
-    &lt;property&gt;/sim/time/sun-angle-rad&lt;/property&gt;
+    &lt;property&gt;sim/time/sun-angle-rad&lt;/property&gt;
     &lt;value&gt;1.57&lt;/value&gt;
    &lt;/greater-than&gt;
   &lt;/condition&gt;
@@ -799,7 +799,7 @@ landing light.</p>
 <blockquote><pre> &lt;animation&gt;
   &lt;type&gt;scale&lt;/type&gt;
   &lt;object-name&gt;ShadowMap&lt;/object-name&gt;
-  &lt;property&gt;/position/altitude-agl-ft&lt;/property&gt;
+  &lt;property&gt;position/altitude-agl-ft&lt;/property&gt;
   &lt;x-factor&gt;0.05&lt;/x-factor&gt;
   &lt;x-offset&gt;1.0&lt;/x-offset&gt;
   &lt;y-factor&gt;0.05&lt;/y-factor&gt;
@@ -907,7 +907,7 @@ an example of a rotating compass rose on the 747-400 PDF
 <blockquote><pre> &lt;animation&gt;
   &lt;type&gt;texrotate&lt;/type&gt;
   &lt;object-name&gt;rose&lt;/object-name&gt;
-  &lt;property&gt;/orientation/heading-magnetic-deg&lt;/property&gt;
+  &lt;property&gt;orientation/heading-magnetic-deg&lt;/property&gt;
   &lt;center&gt;
    &lt;x&gt;0.75&lt;/x&gt;
    &lt;y&gt;0.75&lt;/y&gt;
@@ -940,7 +940,7 @@ on the primary flight display:</p>
  <blockquote><pre> &lt;animation&gt;
   &lt;type&gt;textranslate&lt;/type&gt;
   &lt;object-name&gt;alt1&lt;/object-name&gt;
-  &lt;property&gt;/position/altitude-ft&lt;/property&gt;
+  &lt;property&gt;position/altitude-ft&lt;/property&gt;
   &lt;factor&gt;0.01&lt;/factor&gt;
   &lt;axis&gt;
    &lt;x&gt;0&lt;/x&gt;
@@ -953,16 +953,17 @@ on the primary flight display:</p>
 <p>There are also some special properties available for use in the texture animations.  These are:</p>
 
 <ol>
-<li>step 
+<li>step</li>
 <li>scroll</li>
+<li>bias</li>
 </ol>
 
-<p>The &lt;step&gt; property is useful if you want animations to 
+<p>The &lt;step&gt; tag is useful if you want animations to 
 happen in steps rather than smoothly.  It causes values that are 
 fractional (between) steps size to be ingnored.  It can be used for 
 things like changing digits on nurmeric displays or a ticking second 
-hand on a clock.  The &lt;scroll&gt; property works with the
- &lt;step&gt; property.  The scroll value specifies the distance the input 
+hand on a clock.  The &lt;scroll&gt; tag works with the
+ &lt;step&gt; tag.  The scroll value specifies the distance the input 
 property value should be from a step when scrolling to the next 
 position begins.  This type of scrolling is common on EFIS cockpit 
 displays. The following example gives an "odometer effect" 
@@ -972,10 +973,29 @@ is within is within 1 (e.g. &gt; 99):</p>
  <blockquote><pre>&lt;animation&gt;
   &lt;type&gt;textranslate&lt;/type&gt;
   &lt;object-name&gt;asi3&lt;/object-name&gt;
-  &lt;property&gt;/velocities/airspeed-kt&lt;/property&gt;
+  &lt;property&gt;velocities/airspeed-kt&lt;/property&gt;
   &lt;factor&gt;0.001&lt;/factor&gt;
   &lt;step&gt;100&lt;/step&gt;
   &lt;scroll&gt;1&lt;/scroll&gt;
+  &lt;axis&gt;
+   &lt;x&gt;0&lt;/x&gt;
+   &lt;y&gt;1&lt;/y&gt;
+   &lt;z&gt;0&lt;/z&gt;
+  &lt;/axis&gt;
+ &lt;/animation&gt;
+</pre></blockquote>
+
+<p>The &lt;bias&gt; tag was added because the normal tags for adjusting properties, &lt;offset&gt; and
+&lt;factor&gt; are applied after the &lt;step&gt; tag.  The &lt;bias&gt; tag allows you to apply an
+offset before the &lt;step&gt; tag and, for example, fix the a radio frequency to display correctly.</p>
+
+ <blockquote><pre>&lt;animation&gt;
+  &lt;type&gt;textranslate&lt;/type&gt;
+  &lt;object-name&gt;comm-digit1&lt;/object-name&gt;
+  &lt;property&gt;instrumentation/comm/frequencies/standby-mhz&lt;/property&gt;
+  &lt;factor&gt;10.0&lt;/factor&gt;
+  &lt;step&gt;0.01&lt;/step&gt;
+  &lt;bias&gt;0.005&lt;/bias&gt;
   &lt;axis&gt;
    &lt;x&gt;0&lt;/x&gt;
    &lt;y&gt;1&lt;/y&gt;
@@ -1006,7 +1026,7 @@ display explains the format clearly:</p>
   &lt;type&gt;texmultiple&lt;/type&gt;
   &lt;object-name&gt;horizon&lt;/object-name&gt;
   &lt;transform&gt;
-    &lt;property&gt;/orientation/pitch-deg&lt;/property&gt;
+    &lt;property&gt;orientation/pitch-deg&lt;/property&gt;
     &lt;subtype&gt;textranslate&lt;/subtype&gt;
     &lt;factor&gt;0.0045&lt;/factor&gt;
     &lt;axis&gt;
@@ -1016,7 +1036,7 @@ display explains the format clearly:</p>
    &lt;/axis&gt;
   &lt;/transform&gt;
   &lt;transform&gt;
-    &lt;property&gt;/orientation/roll-deg&lt;/property&gt;
+    &lt;property&gt;orientation/roll-deg&lt;/property&gt;
     &lt;subtype&gt;texrotate&lt;/subtype&gt;
     &lt;center&gt;
      &lt;x&gt;0.50&lt;/x&gt;
@@ -1194,7 +1214,7 @@ The following example shows all available elements:</p>
   &lt;type&gt;material&lt;/type&gt;
   &lt;object-name&gt;fuselage&lt;/object-name&gt;
   &lt;condition&gt;
-    &lt;property&gt;/sim/model/foo/animate-fuselage-material&lt;/property&gt;
+    &lt;property&gt;sim/model/foo/animate-fuselage-material&lt;/property&gt;
   &lt;/condition&gt;
   &lt;global type="bool"&gt;true&lt;/global&gt;
   &lt;property-base&gt;/sim/model/foo/material/fuselage&lt;/property-base&gt;

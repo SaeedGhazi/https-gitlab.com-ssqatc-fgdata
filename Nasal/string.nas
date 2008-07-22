@@ -140,7 +140,7 @@ match = func(str, patt) {
 				return 1;
 
 			for (; s < size(str); s += 1)
-				if (caller(0)[1](substr(str, s), substr(patt, p)))
+				if (thisfunc()(substr(str, s), substr(patt, p)))
 					return 1;
 			continue;
 

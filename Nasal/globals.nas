@@ -100,6 +100,14 @@ var defined = func(sym) {
 
 
 ##
+# Returns reference to calling function. This allows a function to
+# reliably call itself from a closure, rather than the global function
+# with the same name.
+#
+var thisfunc = func caller(1)[1];
+
+
+##
 # Print log messages in appropriate --log-level.
 # Usage: printlog("warn", "...");
 # The underscore hash prevents helper functions/variables from
@@ -109,7 +117,7 @@ __ = {};
 __.dbg_types = { none:0, bulk:1, debug:2, info:3, warn:4, alert:5 };
 __.log_level = __.dbg_types[getprop("/sim/logging/priority")];
 var printlog = func(level, args...) {
-    if(__.dbg_types[level] >= __.log_level) { call(print, args); }
+    if(__.dbg_types[level] >= __.log_level) call(print, args);
 }
 
 

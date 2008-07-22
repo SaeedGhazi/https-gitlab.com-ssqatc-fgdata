@@ -290,7 +290,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
     var _closure = globals.closure;
     globals.closure = func(fn, level) {
-        if(fn != self and fn != caller(0)[1])
+        if(fn != self and fn != caller(0)[1] and fn != io.open)
             return _closure(fn, level);
 
         die("closure(): query denied (unauthorized access)");

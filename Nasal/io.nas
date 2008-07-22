@@ -290,7 +290,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
     var _io_open = io.open;
     var _closure = globals.closure;
-    globals.closure = func(fn, level) {
+    globals.closure = func(fn, level = 0) {
         if(fn != self and fn != caller(0)[1] and fn != _io_open)
             return _closure(fn, level);
 

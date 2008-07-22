@@ -263,10 +263,13 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
         print("io.open()/WRITE: ", debug.string(write_rules));
     }
 
+    var fixpath = string.fixpath;
+    var match = string.match;
+
     var valid = func(path, rules) {
-        var fpath = string.fixpath(path);
+        var fpath = fixpath(path);
         foreach(var d; rules)
-            if(string.match(fpath, d[0]))
+            if(match(fpath, d[0]))
                 return d[1] ? fpath : nil;
         return nil;
     }
@@ -287,6 +290,6 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     var v = props.globals.getNode("/sim/paths/validate", 1);
     setlistener(v.getNode("read", 1), func(n) n.setValue(valid(n.getValue(), read_rules) or ""));
     setlistener(v.getNode("write", 1), func(n) n.setValue(valid(n.getValue(), write_rules) or ""));
-    v.remove();
+    v.remove();  # detach nodes to make them inaccessible for others
 });
 

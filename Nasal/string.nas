@@ -37,27 +37,6 @@ var trim = func(s, lr = 0) {
 
 
 ##
-# Join all elements of a list inserting a separator between every two of them.
-#
-var join = func(sep, list) {
-	if (!size(list))
-		return "";
-	var str = list[0];
-	foreach (var s; subvec(list, 1))
-		str ~= sep ~ s;
-	return str;
-}
-
-
-##
-# Replace all occurrences of 'old' by 'new'.
-#
-var replace = func(str, old, new) {
-	return join(new, split(old, str));
-}
-
-
-##
 # return string converted to lower case letters
 #
 var lc = func(str) {
@@ -88,6 +67,32 @@ var icmp = func(a, b) cmp(lc(a), lc(b));
 var imatch = func(a, b) match(lc(a), lc(b));
 
 
+
+
+##
+# Functions that are used in the IO security code (io.nas) are defined in a
+# closure that holds safe copies of system functions. Later manipulation of
+# append(), pop() etc. doesn't affect them. Of course, any security code
+# must itself store safe copies of these tamper-proof functions before user
+# code can redefine them, and the closure() command must be made inaccessible.
+##
+
+var match = nil;
+var fixpath = nil;
+var join = nil;
+var replace = nil;
+
+(func {
+	var append = append;
+	var caller = caller;
+	var pop = pop;
+	var setsize = setsize;
+	var size = size;
+	var split = split;
+	var substr = substr;
+	var subvec = subvec;
+
+
 ##
 # check if string <str> matches shell style pattern <patt>
 #
@@ -115,7 +120,7 @@ var imatch = func(a, b) match(lc(a), lc(b));
 # Example:
 #     string.match(name, "*[0-9].xml"); ... true if 'name' ends with digit followed by ".xml"
 #
-var match = func(str, patt) {
+match = func(str, patt) {
 	var s = 0;
 	for (var p = 0; p < size(patt) and s < size(str); ) {
 		if (patt[p] == `\\`) {
@@ -135,11 +140,12 @@ var match = func(str, patt) {
 				return 1;
 
 			for (; s < size(str); s += 1)
-				if (match(substr(str, s), substr(patt, p)))
+				if (caller(0)[1](substr(str, s), substr(patt, p)))
 					return 1;
 			continue;
 
 		} elsif (patt[p] == `[`) {
+			print("**setsize**");
 			setsize(var x = [], 256);
 			var invert = 0;
 			if ((p += 1) < size(patt) and patt[p] == `^`) {
@@ -184,7 +190,7 @@ var match = func(str, patt) {
 # absolute property or file paths, otherwise ".." elements might
 # be resolved wrongly.
 #
-var fixpath = func(path) {
+fixpath = func(path) {
 	path = replace(path, "\\", "/");
 	var prefix = size(path) and path[0] == `/` ? "/" : "";
 	var stack = [];
@@ -201,3 +207,24 @@ var fixpath = func(path) {
 }
 
 
+##
+# Join all elements of a list inserting a separator between every two of them.
+#
+join = func(sep, list) {
+	if (!size(list))
+		return "";
+	var str = list[0];
+	foreach (var s; subvec(list, 1))
+		str ~= sep ~ s;
+	return str;
+}
+
+
+##
+# Replace all occurrences of 'old' by 'new'.
+#
+replace = func(str, old, new) {
+	return join(new, split(old, str));
+}
+
+})(); # end tamper-proof environment

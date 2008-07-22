@@ -294,7 +294,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
         if(fn != self and fn != caller(0)[1] and fn != _io_open)
             return _closure(fn, level);
 
-        die("closure(): query denied (unauthorized access)");
+        die("closure(): query denied (unauthorized access)\n ");
     }
 
     # validation listeners for loadxml/savexml (see utils.cxx:fgValidatePath)

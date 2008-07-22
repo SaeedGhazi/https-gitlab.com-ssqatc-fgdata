@@ -288,9 +288,10 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
         die("io.open(): opening file '" ~ path ~ "' denied (unauthorized access)\n ");
     }
 
+    var _io_open = io.open;
     var _closure = globals.closure;
     globals.closure = func(fn, level) {
-        if(fn != self and fn != caller(0)[1] and fn != io.open)
+        if(fn != self and fn != caller(0)[1] and fn != _io_open)
             return _closure(fn, level);
 
         die("closure(): query denied (unauthorized access)");

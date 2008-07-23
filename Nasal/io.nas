@@ -210,7 +210,7 @@ var writexml = func(path, node, indent = "\t", prefix = "___") {
 # Redefine io.open() such that files can only be opened under authorized directories.
 #
 _setlistener("/sim/signals/nasal-dir-initialized", func {
-    var self = thisfunc();
+    var thislistener = thisfunc();
     var root = string.fixpath(getprop("/sim/fg-root"));
     var home = string.fixpath(getprop("/sim/fg-home"));
     var config = "Nasal/IOrules";
@@ -267,6 +267,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     var fixpath = string.fixpath;  # safe copies
     var match = string.match;
     var die = die;
+    var caller = caller;
 
     var valid = func(path, rules) {
         var fpath = fixpath(path);
@@ -291,7 +292,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
     var _closure = globals.closure;
     globals.closure = func(fn, level = 0) {
-        if(fn != self and fn != thisfunc() and fn != io_open)
+        if(fn != thislistener and fn != caller(0)[1] and fn != io_open)
             return _closure(fn, level);
 
         die("closure(): query denied (unauthorized access)\n ");

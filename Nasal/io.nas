@@ -210,7 +210,7 @@ var writexml = func(path, node, indent = "\t", prefix = "___") {
 # Redefine io.open() such that files can only be opened under authorized directories.
 #
 _setlistener("/sim/signals/nasal-dir-initialized", func {
-    var thislistener = thisfunc();
+    # read IO rules
     var root = string.fixpath(getprop("/sim/fg-root"));
     var home = string.fixpath(getprop("/sim/fg-home"));
     var config = "Nasal/IOrules";
@@ -264,10 +264,13 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
         print("io.open()/WRITE: ", debug.string(write_rules));
     }
 
-    var fixpath = string.fixpath;  # safe copies
+    # make safe, local copies
+    var setValue = props._setValue;
+    var getValue = props._getValue;
+    var fixpath = string.fixpath;
     var match = string.match;
-    var die = die;
     var caller = caller;
+    var die = die;
 
     var valid = func(path, rules) {
         var fpath = fixpath(path);
@@ -277,7 +280,20 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
         return nil;
     }
 
-    var io_open = func(path, mode = "rb") {
+    # validation listeners for load[xml]/save[xml]/parsexml()  (see utils.cxx:fgValidatePath)
+    var v = props.globals.getNode(var val = "/sim/paths/validate", 1);
+    _setlistener(val ~ "/read", var read_validator = func(n) {
+        setValue(n, [valid(getValue(n, []), read_rules) or ""]);
+    });
+    _setlistener(val ~ "/write", var write_validator = func(n) {
+        setValue(n, [valid(getValue(n, []), write_rules) or ""]);
+    });
+    v.remove();  # detach nodes to make them inaccessible for others
+
+
+    # wrap io.open()
+    var _open = io.open;
+    io.open = var io_open = func(path, mode = "rb") {
         var rules = write_rules;
         if(mode == "r" or mode == "rb" or mode == "br")
             rules = read_rules;
@@ -287,21 +303,16 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
         die("io.open(): opening file '" ~ path ~ "' denied (unauthorized access)\n ");
     }
-    var _open = io.open;
-    io.open = io_open;
 
+    # wrap closure() to prevent tampering of security related functions
+    var thislistener = caller(0)[1];
     var _closure = globals.closure;
     globals.closure = func(fn, level = 0) {
-        if(fn != thislistener and fn != caller(0)[1] and fn != io_open)
+        if(fn != thislistener and fn != io_open and fn != caller(0)[1]
+                and fn != read_validator and fn != write_validator)
             return _closure(fn, level);
 
         die("closure(): query denied (unauthorized access)\n ");
     }
-
-    # validation listeners for loadxml/savexml (see utils.cxx:fgValidatePath)
-    var v = props.globals.getNode("/sim/paths/validate", 1);
-    setlistener(v.getNode("read", 1), func(n) n.setValue(valid(n.getValue(), read_rules) or ""));
-    setlistener(v.getNode("write", 1), func(n) n.setValue(valid(n.getValue(), write_rules) or ""));
-    v.remove();  # detach nodes to make them inaccessible for others
 });
 

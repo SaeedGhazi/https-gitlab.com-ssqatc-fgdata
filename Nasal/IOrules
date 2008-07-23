@@ -1,4 +1,5 @@
-# Permissions for Nasal's io.open()
+# Permissions for Nasal's io.open() and parsexml(), and fgcommands
+# load[xml], save[xml]
 #
 # This file defines which file paths can be opened for reading and/or
 # writing using Nasal's io.open() command. The respective code can be

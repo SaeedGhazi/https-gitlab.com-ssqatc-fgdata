@@ -327,9 +327,9 @@ var printerror = func(err) {
 	if (!size(err))
 		return;
 
-	print(sprintf("%s at %s line %d", err[0], err[1], err[2]));
+	printf("%s at %s line %d", err[0], err[1], err[2]);
 	for (var i = 3; i < size(err); i += 2)
-		print(sprintf("  called from %s line %d", err[i], err[i + 1]));
+		printf("  called from %s line %d", err[i], err[i + 1]);
 }
 
 

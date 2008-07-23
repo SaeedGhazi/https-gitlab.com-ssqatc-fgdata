@@ -77,7 +77,7 @@ var setlistener = func(node, fun, init = 0, runtime = 1) {
     }, init, runtime);
     if(__.log_level <= 2) {
         var c = caller(1);
-        print(sprintf("setting listener #%d in %s, line %s", id, c[2], c[3]));
+        printf("setting listener #%d in %s, line %s", id, c[2], c[3]);
     }
     return id;
 }
@@ -105,6 +105,12 @@ var defined = func(sym) {
 # with the same name.
 #
 var thisfunc = func caller(1)[1];
+
+
+##
+# Just what it says it is.
+#
+var printf = func print(call(sprintf, arg));
 
 
 ##

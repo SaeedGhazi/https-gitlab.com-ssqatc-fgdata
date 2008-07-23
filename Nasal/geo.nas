@@ -57,7 +57,6 @@ var FT2M = 0.3048;
 var M2FT = 3.28083989501312335958;
 
 
-var printf = func { print(call(sprintf, arg)) }
 var floor = func(v) { v < 0.0 ? -int(-v) - 1 : int(v) }
 var sin = nil;
 var cos = nil;

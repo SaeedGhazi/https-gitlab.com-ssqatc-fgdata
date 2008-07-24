@@ -281,6 +281,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     var caller = caller;
     var die = die;
 
+    # validators
     var valid = func(path, rules) {
         var fpath = fixpath(path);
         foreach (var d; rules)
@@ -289,15 +290,13 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
         return nil;
     }
 
+    var read_validator = func(n) setValue(n, [valid(getValue(n, []), read_rules) or ""]);
+    var write_validator = func(n) setValue(n, [valid(getValue(n, []), write_rules) or ""]);
+
     # validation listeners for load[xml]/save[xml]/parsexml()  (see utils.cxx:fgValidatePath)
-    var v = props.globals.getNode(var val = "/sim/paths/validate", 1);
-    _setlistener(val ~ "/read", var read_validator = func(n) {
-        setValue(n, [valid(getValue(n, []), read_rules) or ""]);
-    });
-    _setlistener(val ~ "/write", var write_validator = func(n) {
-        setValue(n, [valid(getValue(n, []), write_rules) or ""]);
-    });
-    v.remove();  # detach nodes to make them inaccessible for others
+    var n = props.globals.getNode("/sim/paths/validate", 1).remove();
+    _setlistener(n.getNode("read", 1)._g, read_validator);
+    _setlistener(n.getNode("write", 1)._g, write_validator);
 
 
     # wrap io.open()
@@ -313,7 +312,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
         die("io.open(): opening file '" ~ path ~ "' denied (unauthorized access)\n ");
     }
 
-    # wrap closure() to prevent tampering of security related functions
+    # wrap closure() to prevent tampering with security related functions
     var thislistener = caller(0)[1];
     var _closure = globals.closure;
     globals.closure = func(fn, level = 0) {

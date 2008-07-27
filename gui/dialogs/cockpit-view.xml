@@ -1,20 +1,29 @@
 <?xml version="1.0"?>
 
 <PropertyList>
-  <name>redout</name>
+  <name>cockpit-view</name>
   <layout>vbox</layout>
   <default-padding>4</default-padding>
   <modal>false</modal>
 
   <text>
-    <label>G-Force Blackout and Movement Settings</label>
+    <label>Cockpit View Options</label>
   </text>
 
   <hrule/>
 
   <checkbox>
     <halign>left</halign>
-    <label>Enable view movement due to G-force.</label>
+    <label>Enable dynamic cockpit view</label>
+    <property>/sim/current-view/dynamic-view</property>
+    <binding>
+      <command>dialog-apply</command>
+    </binding>
+  </checkbox>
+
+  <checkbox>
+    <halign>left</halign>
+    <label>Enable view movement due to G-force</label>
     <property>/sim/rendering/headshake/enabled</property>
     <binding>
       <command>dialog-apply</command>
@@ -23,14 +32,14 @@
 
   <checkbox>
     <halign>left</halign>
-    <label>Enable Blackout and Redout due to G-force.</label>
+    <label>Enable Blackout and Redout due to G-force</label>
     <property>/sim/rendering/redout/enabled</property>
     <binding>
       <command>dialog-apply</command>
     </binding>
   </checkbox>
 
-  <hrule/>	
+  <hrule/>
 
   <text>
     <halign>center</halign>

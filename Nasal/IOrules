@@ -1,9 +1,7 @@
-# Permissions for Nasal's io.open() and parsexml(), and fgcommands
-# load[xml], save[xml]
-#
 # This file defines which file paths can be opened for reading and/or
-# writing using Nasal's io.open() command. The respective code can be
-# found in $FG_ROOT/Nasal/io.nas.
+# writing using Nasal's io.open() and parsexml() functions, as well as
+# the fgcommands load, save, loadxml, and savexml. The evaluation code
+# can be found in $FG_ROOT/Nasal/io.nas.
 #
 # Empty lines and lines starting with '#' are ignored. All other entries
 # must be of the form

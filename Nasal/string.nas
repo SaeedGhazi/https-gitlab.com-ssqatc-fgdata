@@ -186,7 +186,7 @@ match = func(str, patt) {
 # Removes superfluous slashes, empty and "." elements, expands
 # all ".." elements, and turns all backslashes into slashes.
 # The result will start with a slash if it started with a slash
-# or backslash, it will end without slash. Should be applied on
+# or backslash, it will end without slash. Should be applied to
 # absolute property or file paths, otherwise ".." elements might
 # be resolved wrongly.
 #

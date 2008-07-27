@@ -1,6 +1,6 @@
 # Draw 3 degree glide slope tunnel for the nearest airport's most suitable runway
 # considering wind direction and runway size.
-# Activate with  --prop:sim/rendering/glide-slope-tunnel=1
+# Activate with  --prop:sim/rendering/glide-slope-tunnel=1 or via Help menu
 
 var MARKER = "Models/Geometry/square.xml";	# tunnel marker
 var DIST = 1000;				# distance between markers
@@ -35,11 +35,13 @@ var complement_runways = func(apt) {
 		var side = substr(rwy, 2, 1);
 		var comp = sprintf("%02d%s", number, side == "R" ? "L" : side == "L" ? "R" : side);
 		var r = apt.runways[rwy];
-		apt.runways[comp] = { lat: r.lat, lon: r.lon, length: r.length,
-				width: r.width, heading: math.mod(r.heading + 180, 360),
-				threshold1: r.threshold2,
-				#threshold2: r.threshold1
-				#stopway1: r.stopway2, stopway2: r.stopway1,
+		apt.runways[comp] = {
+			lat: r.lat, lon: r.lon, length: r.length,
+			width: r.width, heading: math.mod(r.heading + 180, 360),
+			threshold1: r.threshold2,
+			threshold2: r.threshold1,
+			stopway1: r.stopway2,
+			stopway2: r.stopway1,
 		};
 	}
 }
@@ -97,40 +99,36 @@ var loop = func(id) {
 			if (rwy[0] != `H`)
 				is_heliport = 0;
 
-		if (is_heliport) {
-			#print(apt.id, " -- \"", apt.name, "\"  --> heliport; ignored");
-		} else {
+		if (!is_heliport) {
 			complement_runways(apt);
 			draw_tunnel(best_runway(apt));
-			#print(apt.id, " -- \"", apt.name, "\"");
+			gui.popupTip(apt.id ~ " - \"" ~ apt.name ~ "\"", 6);
 		}
 	}
-	settimer(func { loop(id) }, INTERVAL);
+	settimer(func loop(id), INTERVAL);
 }
 
 
 var loopid = 0;
 
-settimer(func {
-	var top = props.globals.getNode("/sim/model/geometry/square/top", 1);
-	if (top.getType() == "NONE")
-		top.setBoolValue(1);  # remove top bar unless otherwise specified
+_setlistener("/sim/signals/fdm-initialized", func {
+	# remove top bar unless otherwise specified
+	var top = props.initNode("/sim/model/geometry/square/top", 1, "BOOL");
 
 	setlistener("/sim/rendering/glide-slope-tunnel", func(n) {
 		loopid += 1;
 		if (n.getValue()) {
 			apt = nil;
-			loop(loopid);
-		} else {
-			forindex (var i; tunnel) {
-				if (tunnel[i] != nil) {
-					tunnel[i].remove();
-					tunnel[i] = nil;
-				}
-			}
+			return loop(loopid);
 		}
 
+		forindex (var i; tunnel) {
+			if (tunnel[i] != nil) {
+				tunnel[i].remove();
+				tunnel[i] = nil;
+			}
+		}
 	}, 1);
-}, 0);
+});
 
 

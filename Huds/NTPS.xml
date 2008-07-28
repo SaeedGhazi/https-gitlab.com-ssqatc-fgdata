@@ -25,7 +25,10 @@
   <compression-factor>11</compression-factor>
   <display-span>30.0</display-span>
   <divisions>5.0</divisions>
-  <screen-hole>70</screen-hole>
+  <screen-hole>50</screen-hole>
+  <zero-bar-overlength>50</zero-bar-overlength>
+  <tick-length>5</tick-length>
+  <enable-dive-bar-angle>true</enable-dive-bar-angle>
   <lbl-pos>0</lbl-pos>
   <glide-slope>0.0</glide-slope>
   <enable-dynamic-origin>true</enable-dynamic-origin>

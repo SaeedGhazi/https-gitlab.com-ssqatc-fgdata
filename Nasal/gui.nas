@@ -341,6 +341,8 @@ var FileSelector = {
 #
 var save_flight_sel = nil;
 var save_flight = func {
+    foreach (var n; props.globals.getNode("/sim/presets").getChildren())
+        n.setAttribute("archive", 1);
     var save = func(n) fgcommand("save", props.Node.new({ file: n.getValue() }));
     if (save_flight_sel == nil)
         save_flight_sel = FileSelector.new(save, "Save Flight", "Save",
@@ -351,7 +353,10 @@ var save_flight = func {
 
 var load_flight_sel = nil;
 var load_flight = func {
-    var load = func fgcommand("load", props.Node.new({ file: cmdarg().getValue() }));
+    var load = func {
+        fgcommand("load", props.Node.new({ file: cmdarg().getValue() }));
+        fgcommand("presets-commit");
+    }
     if (load_flight_sel == nil)
         load_flight_sel = FileSelector.new(load, "Load Flight", "Load",
                 ["*.sav"], getprop("/sim/fg-home"), "flight.sav");

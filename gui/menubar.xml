@@ -4,18 +4,18 @@
   <label>File</label>
 
   <item>
-   <label>Save</label>
-   <binding>
-    <command>nasal</command>
-    <script>gui.save_flight()</script>
-   </binding>
-  </item>
-
-  <item>
    <label>Load</label>
    <binding>
     <command>nasal</command>
     <script>gui.load_flight()</script>
+   </binding>
+  </item>
+
+  <item>
+   <label>Save</label>
+   <binding>
+    <command>nasal</command>
+    <script>gui.save_flight()</script>
    </binding>
   </item>
 

@@ -4,9 +4,9 @@
 #
 var isa = func(obj, class) {
     if(typeof(obj) == "hash" and obj["parents"] != nil)
-	foreach(c; obj.parents)
-  	    if(c == class or isa(c, class))
-	        return 1;
+        foreach(c; obj.parents)
+            if(c == class or isa(c, class))
+                return 1;
     return 0;
 }
 
@@ -92,7 +92,7 @@ var setlistener = func(node, fn, init = 0, runtime = 1) {
 var defined = func(sym) {
     var fn = 1;
     while((var frame = caller(fn)) != nil) {
-        if(contains(frame[0], sym)) { return 1; }
+        if(contains(frame[0], sym)) return 1;
         fn += 1;
     }
     return 0;
@@ -134,10 +134,8 @@ var printlog = func(level, args...) {
 _setlistener("/sim/signals/nasal-dir-initialized", func {
     var path = getprop("/sim/fg-home") ~ "/Nasal";
     if((var dir = directory(path)) == nil) return;
-    foreach(var file; sort(dir, cmp)) {
-        if(substr(file, -4) != ".nas") continue;
-        printlog("info", ">>> executing local Nasal file ", file);
-        io.load_nasal(path ~ "/" ~ file);
-    }
+    foreach(var file; sort(dir, cmp))
+        if(substr(file, -4) == ".nas")
+            io.load_nasal(path ~ "/" ~ file);
 });
 

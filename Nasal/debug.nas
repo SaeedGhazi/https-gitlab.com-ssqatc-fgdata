@@ -46,10 +46,6 @@
 #       installed. If the color codes aren't interpreted correctly, then
 #       set property /sim/startup/terminal-ansi-colors=0
 #
-var isprint = nil;
-var isalnum = nil;
-var isalpha = nil;
-
 var _c = func nil;
 
 var color = func(enabled) {
@@ -123,10 +119,10 @@ var _tree = func(n, graph = 1, prefix = "", level = 0) {
 	if (size(children)) {
 		s ~= "/";
 		if (n.getType() != "NONE")
-			s ~= " = " ~ string(n.getValue()) ~ " " ~ attributes(n)
+			s ~= " = " ~ debug.string(n.getValue()) ~ " " ~ attributes(n)
 					~ "    " ~ _section(" PARENT-VALUE ");
 	} else {
-		s ~= " = " ~ string(n.getValue()) ~ " " ~ attributes(n);
+		s ~= " = " ~ debug.string(n.getValue()) ~ " " ~ attributes(n);
 	}
 	print(s);
 
@@ -157,7 +153,7 @@ var attributes = func(p, verbose = 1) {
 
 
 var _dump_prop = func(p) {
-	_path(p.getPath()) ~ " = " ~ string(p.getValue()) ~ " " ~ attributes(p);
+	_path(p.getPath()) ~ " = " ~ debug.string(p.getValue()) ~ " " ~ attributes(p);
 }
 
 
@@ -181,7 +177,7 @@ var _dump_string = func(str) {
 			s ~= "\\r";
 		elsif (c == `\t`)
 			s ~= "\\t";
-		elsif (isprint(c))
+		elsif (globals.string.isprint(c))
 			s ~= chr(c);
 		else
 			s ~= sprintf("\\x%02x", c);
@@ -194,10 +190,10 @@ var _dump_string = func(str) {
 var _dump_key = func(s) {
 	if (num(s) != nil)
 		return _num(s);
-	if (!isalpha(s[0]) and s[0] != `_`)
+	if (!globals.string.isalpha(s[0]) and s[0] != `_`)
 		return _dump_string(s);
 	for (var i = 1; i < size(s); i += 1) {
-		if (!isalnum(s[i]) and s[i] != `_`)
+		if (!globals.string.isalnum(s[i]) and s[i] != `_`)
 			return _dump_string(s);
 	}
 	_dump_var(s);
@@ -215,7 +211,7 @@ var string = func(o) {
 	} elsif (t == "vector") {
 		var s = "";
 		forindex (var i; o)
-			s ~= (i == 0 ? "" : ", ") ~ string(o[i]);
+			s ~= (i == 0 ? "" : ", ") ~ debug.string(o[i]);
 		return _bracket("[") ~ " " ~ s ~ " " ~ _bracket("]");
 
 	} elsif (t == "hash") {
@@ -226,7 +222,7 @@ var string = func(o) {
 		var k = keys(o);
 		var s = "";
 		forindex (var i; k)
-			s ~= (i == 0 ? "" : ", ") ~ _dump_key(k[i]) ~ " : " ~ string(o[k[i]]);
+			s ~= (i == 0 ? "" : ", ") ~ _dump_key(k[i]) ~ " : " ~ debug.string(o[k[i]]);
 		return _brace("{") ~ " " ~ s ~ " " ~ _brace("}");
 
 	} elsif (t == "ghost") {
@@ -246,15 +242,15 @@ var dump = func(vars...) {
 	if (!size(vars))
 		return local(1);
 	if (size(vars) == 1)
-		return print(string(vars[0]));
+		return print(debug.string(vars[0]));
 	forindex (var i; vars)
-		print(_c("33;40;1", "#" ~ i) ~ " ", string(vars[i]));
+		print(_c("33;40;1", "#" ~ i) ~ " ", debug.string(vars[i]));
 }
 
 
 var local = func(frame = 0) {
 	var v = caller(frame + 1);
-	print(v == nil ? _error("<no such frame>") : string(v[0]));
+	print(v == nil ? _error("<no such frame>") : debug.string(v[0]));
 	return v;
 }
 
@@ -282,7 +278,7 @@ var proptrace = func(root = "/", frames = 1) {
 		elsif (type < 0)
 			print(_num("DEL "), this.getPath());
 		else
-			print("SET ", this.getPath(), " = ", string(this.getValue()), " ", attributes(this));
+			print("SET ", this.getPath(), " = ", debug.string(this.getValue()), " ", attributes(this));
 	}, 0, 2);
 	var mark = setlistener("/sim/signals/frame", func {
 		print("-------------------- FRAME --------------------");
@@ -341,9 +337,6 @@ if (getprop("/sim/logging/priority") != "alert") {
 
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
-	isalnum = globals["string"].isalnum;
-	isalpha = globals["string"].isalpha;
-	isprint = globals["string"].isprint;
 	ghosttypes[ghosttype(props._globals())] = "PropertyNode";
 	ghosttypes[ghosttype(io.stderr)] = "FileHandle";
 

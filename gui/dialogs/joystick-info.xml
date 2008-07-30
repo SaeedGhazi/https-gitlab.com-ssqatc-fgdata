@@ -33,11 +33,11 @@
 
 	<nasal>
 		<open>
-			value = func(p, default = "") {
+			var value = func(p, default = "") {
 				return p != nil and (var v = p.getValue()) != nil ? v : default;
 			}
 
-			items = func(it, name) {
+			var items = func(it, name) {
 				var t = "";
 				foreach (var x; it) {
 					t ~= "    [";
@@ -63,9 +63,9 @@
 				if (size(names)) {
 					t ~= "    Used for: ";
 					var last = pop(names);
-					foreach (var n; names) {
+					foreach (var n; names)
 						t ~= '"' ~ value(n) ~ '", ';
-					}
+
 					t ~= '"' ~ value(last) ~ '"';
 				}
 				t ~= "\n\n";
@@ -74,13 +74,11 @@
 				t ~= items(js.getChildren("button"), "Button");
 
 				var help = value(js.getNode("help"), nil);
-				if (help != nil) {
+				if (help != nil)
 					t ~= "\n\n" ~ help;
-				}
 
-				if (numjs > 1 and i &lt; numjs - 1) {
+				if (numjs > 1 and i &lt; numjs - 1)
 					t ~= "\n\n\n----------------------------------------\n\n\n";
-				}
 			}
 
 			var text = props.globals.getNode("/sim/gui/dialogs/joystick-info/text", 1);

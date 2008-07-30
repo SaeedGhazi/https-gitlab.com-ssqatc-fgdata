@@ -45,11 +45,14 @@ var load_nasal = func(file, module = nil) {
     if (module == nil)
         module = split(".", split("/", file)[-1])[0];
 
+    printlog("info", "loading ", file, " into namespace ", module);
+
     if (!contains(globals, module))
         globals[module] = {};
+    elsif (typeof(globals[module]) != "hash")
+        die("io.load_nasal(): namespace '" ~ module ~ "' already in use, but not a hash");
 
     var err = [];
-    printlog("info", "loading ", file, " into namespace ", module);
     var code = call(func compile(readfile(file), file), nil, err);
     if (size(err)) {
         (func nil)(); # needed to get correct caller results (?!?)
@@ -316,7 +319,8 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     var thislistener = caller(0)[1];
     var _closure = globals.closure;
     globals.closure = func(fn, level = 0) {
-        if (fn != thislistener and fn != io_open and fn != caller(0)[1]
+        var thisfunction = caller(0)[1];
+        if (fn != thislistener and fn != io_open and fn != thisfunction
                 and fn != read_validator and fn != write_validator)
             return _closure(fn, level);
 

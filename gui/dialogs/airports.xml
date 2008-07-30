@@ -14,17 +14,17 @@
     <open>
       var id = "";
       var node = props.globals.getNode("/sim/gui/dialogs/airports", 1);
-      if (node.getNode("list") == nil) {
+      if (node.getNode("list") == nil)
           node.getNode("list", 1).setValue("");
-      }
+
       node = node.getNode("list");
 
-      listbox = func {
+      var listbox = func {
           id = pop(split(" ", node.getValue()));
           id = substr(id, 1, size(id) - 2);  # strip parentheses
       }
 
-      apply = func {
+      var apply = func {
           setprop("/sim/presets/airport-id", id);
           setprop("/sim/presets/longitude-deg", -9999);
           setprop("/sim/presets/latitude-deg", -9999);

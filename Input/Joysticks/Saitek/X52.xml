@@ -54,13 +54,14 @@ $Id$
 <PropertyList>
  
  <name>Saitek X52</name>
- <name>Saitek Saitek X52</name>
  <name>Saitek X52 Flight Controller USB</name>
  <name>Saitek X52 Flight Controller</name>
  <name>Saitek X52 Flight Control Stick </name>
- <name>Saitek Saitek X52 Flight Control Stick </name>
  <name>Saitek X52 Flight Stick (USB)</name>
+ <name>Saitek X52 Flight Control System</name>
+ <name>Saitek Saitek X52</name>
  <name>Saitek Saitek X52 Flight Stick (USB)</name>
+ <name>Saitek Saitek X52 Flight Control Stick </name>
  <name>Saitek Saitek X52 Flight Control System</name>
 
  <axis n="0">

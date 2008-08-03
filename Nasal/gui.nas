@@ -353,8 +353,8 @@ var save_flight = func {
 
 var load_flight_sel = nil;
 var load_flight = func {
-    var load = func {
-        fgcommand("load", props.Node.new({ file: cmdarg().getValue() }));
+    var load = func(n) {
+        fgcommand("load", props.Node.new({ file: n.getValue() }));
         fgcommand("presets-commit");
     }
     if (load_flight_sel == nil)
@@ -432,6 +432,19 @@ var dialog_update = func(dialog, objects...) {
         fgcommand("dialog-update", n);
     }
 }
+
+
+##
+# Searches a dialog tree for widgets with a particular <name> entry and
+# sets their <hide> according to "show".
+#
+var show_widgets = func(node, name, show = 1) {
+    foreach (var n; node.getChildren())
+        show_widgets(n, name, show);
+    if ((var n = node.getNode("name")) != nil and n.getValue() == name)
+        node.getNode("hide", 1).setBoolValue(!show);
+}
+
 
 
 ########################################################################

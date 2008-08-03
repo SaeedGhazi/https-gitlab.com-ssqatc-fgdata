@@ -294,12 +294,4 @@
 
     <empty><stretch>true</stretch></empty>
   </group>
-
-  <nasal>
-    <open>
-      if (!getprop("/sim/gui/devel-widgets")) {
-        cmdarg().getNode("group[2]/group[1]").removeChild("checkbox", 2);
-      }
-    </open>
-  </nasal>
 </PropertyList>

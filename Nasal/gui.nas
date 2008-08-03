@@ -436,11 +436,11 @@ var dialog_update = func(dialog, objects...) {
 
 ##
 # Searches a dialog tree for widgets with a particular <name> entry and
-# sets their <hide> according to "show".
+# sets their <hide> flag according to "show".
 #
-var show_widgets = func(node, name, show = 1) {
+var enable_widgets = func(node, name, show = 1) {
     foreach (var n; node.getChildren())
-        show_widgets(n, name, show);
+        enable_widgets(n, name, show);
     if ((var n = node.getNode("name")) != nil and n.getValue() == name)
         node.getNode("hide", 1).setBoolValue(!show);
 }

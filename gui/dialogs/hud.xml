@@ -170,7 +170,7 @@
 
 	<nasal>
 		<open>
-			gui.show_widgets(cmdarg(), "devel-stuff", getprop("/sim/gui/devel-widgets"));
+			gui.enable_widgets(cmdarg(), "devel-stuff", getprop("/sim/gui/devel-widgets"));
 		</open>
 	</nasal>
 </PropertyList>

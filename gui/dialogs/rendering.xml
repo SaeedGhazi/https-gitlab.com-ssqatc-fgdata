@@ -298,7 +298,7 @@
 
   <nasal>
     <open>
-      gui.show_widgets(cmdarg(), "shadows-debug", getprop("/sim/gui/devel-widgets"));
+      gui.enable_widgets(cmdarg(), "shadows-debug", getprop("/sim/gui/devel-widgets"));
     </open>
   </nasal>
 </PropertyList>

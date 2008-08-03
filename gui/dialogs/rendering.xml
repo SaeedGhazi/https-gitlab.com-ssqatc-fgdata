@@ -268,6 +268,7 @@
       <checkbox>
         <halign>left</halign>
         <label>Silhouette (debug)</label>
+        <name>shadows-debug</name>
         <property>/sim/rendering/shadows-debug</property>
         <binding>
           <command>dialog-apply</command>
@@ -294,4 +295,10 @@
 
     <empty><stretch>true</stretch></empty>
   </group>
+
+  <nasal>
+    <open>
+      gui.show_widgets(cmdarg(), "shadows-debug", getprop("/sim/gui/devel-widgets"));
+    </open>
+  </nasal>
 </PropertyList>

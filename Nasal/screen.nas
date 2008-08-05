@@ -384,9 +384,9 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 		}
 	});
 
-	foreach (var n; props.globals.getChildren("live"))
+	foreach (var n; props.globals.getChildren("display"))
 		property_display.add(n.getValue());
-	props.globals.removeChildren("live");
+	props.globals.removeChildren("display");
 
 	setlistener("/sim/gui/current-style", func {
 		var theme = getprop("/sim/gui/current-style");

@@ -384,15 +384,6 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 		}
 	});
 
-	foreach (var n; props.globals.getChildren("display")) {
-		var prop = n.getValue();
-		if (size(prop) and prop[-1] == `/`)
-			property_display.add(props.globals.getNode(prop, 1).getChildren());
-		else
-			property_display.add(prop);
-	}
-	props.globals.removeChildren("display");
-
 	setlistener("/sim/gui/current-style", func {
 		var theme = getprop("/sim/gui/current-style");
 		theme_font = getprop("/sim/gui/style[" ~ theme ~ "]/fonts/message-display/name");
@@ -412,6 +403,17 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	setlistener(b ~ "cyan",    func(n) log.write(n.getValue(), 0,   0.6, 0.6));
 });
 
+
+_setlistener("/sim/signals/fdm-initialized", func {
+	foreach (var n; props.globals.getChildren("display")) {
+		var prop = n.getValue();
+		if (size(prop) and prop[-1] == `/`)
+			property_display.add(props.globals.getNode(prop, 1).getChildren());
+		else
+			property_display.add(prop);
+	}
+	props.globals.removeChildren("display");
+});
 
 
 

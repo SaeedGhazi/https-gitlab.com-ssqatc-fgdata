@@ -55,7 +55,7 @@
 		<default-padding>4</default-padding>
 
 		<button-template>
-			<hide>1</hide>
+			<enabled>false</enabled>
 			<halign>fill</halign>
 			<pref-width>20</pref-width>
 			<pref-height>20</pref-height>
@@ -231,7 +231,7 @@
 				state.setBoolValue(0);
 
 				props.copy(template, button);
-				button.getNode("hide").setValue(0);
+				button.getNode("enabled").setBoolValue(1);
 				button.getNode("legend").setIntValue(i);
 				button.getNode("binding[1]/script").setValue("select(" ~ i ~ ")");
 				button.getNode("property").setValue(state.getPath());

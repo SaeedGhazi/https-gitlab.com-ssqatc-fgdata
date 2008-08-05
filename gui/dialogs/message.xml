@@ -7,7 +7,7 @@
 	<default-padding>6</default-padding>
 
 	<group-template>
-		<hide>1</hide>
+		<enabled>false</enabled>
 		<layout>hbox</layout>
 		<default-padding>0</default-padding>
 		<text>
@@ -49,7 +49,7 @@
 				var target = self.getNode("group/group").getChild("group", i, 1);
 				props.copy(textgroup, target);
 				target.getNode("text/label").setValue(lines[i]);
-				target.getNode("hide").setValue(0);
+				target.getNode("enabled").setValue(1);
 			}
 		</open>
 

@@ -14,7 +14,7 @@
 		<layout>vbox</layout>
 		<!-- using one copy of group-template per frequency line -->
 		<group-template>
-			<hide>true</hide>
+			<enabled>false</enabled>
 			<layout>hbox</layout>
 			<text>
 				<halign>left</halign>

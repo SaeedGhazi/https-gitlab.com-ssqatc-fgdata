@@ -374,12 +374,10 @@ var property_browser = func(dir = nil) {
     elsif (isa(dir, props.Node))
         dir = dir.getPath();
     var dlgname = "property-browser";
-    foreach (var module; keys(globals)) {
-        if (find("__dlg:" ~ dlgname, module) == 0) {
-            globals[module].clone(dir);
-            return;
-        }
-    }
+    foreach (var module; keys(globals))
+        if (find("__dlg:" ~ dlgname, module) == 0)
+            return globals[module].clone(dir);
+
     setprop("/sim/gui/dialogs/" ~ dlgname ~ "/last", dir);
     fgcommand("dialog-show", props.Node.new({"dialog-name": dlgname}));
 }
@@ -406,9 +404,9 @@ settimer(func {
 #
 var dialog_apply = func(dialog, objects...) {
     var n = props.Node.new({ "dialog-name" : dialog });
-    if (!size(objects)) {
+    if (!size(objects))
         return fgcommand("dialog-apply", n);
-    }
+
     var name = n.getNode("object-name", 1);
     foreach (var o; objects) {
         name.setValue(o);
@@ -423,9 +421,9 @@ var dialog_apply = func(dialog, objects...) {
 #
 var dialog_update = func(dialog, objects...) {
     var n = props.Node.new({ "dialog-name" : dialog });
-    if (!size(objects)) {
+    if (!size(objects))
         return fgcommand("dialog-update", n);
-    }
+
     var name = n.getNode("object-name", 1);
     foreach (var o; objects) {
         name.setValue(o);
@@ -436,13 +434,13 @@ var dialog_update = func(dialog, objects...) {
 
 ##
 # Searches a dialog tree for widgets with a particular <name> entry and
-# sets their <hide> flag according to "show".
+# sets their <enabled> flag.
 #
-var enable_widgets = func(node, name, show = 1) {
+var enable_widgets = func(node, name, enable = 1) {
     foreach (var n; node.getChildren())
-        enable_widgets(n, name, show);
+        enable_widgets(n, name, enable);
     if ((var n = node.getNode("name")) != nil and n.getValue() == name)
-        node.getNode("hide", 1).setBoolValue(!show);
+        node.getNode("enabled", 1).setBoolValue(enable);
 }
 
 

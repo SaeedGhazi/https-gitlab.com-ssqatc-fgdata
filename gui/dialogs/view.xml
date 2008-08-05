@@ -20,8 +20,6 @@
 			group.removeChildren("text");
 			var mode = 0;
 			foreach (var v; view.views) {
-				if ((var hide = v.getNode("hide")) != nil and hide.getBoolValue())
-					continue;
 				var index = v.getIndex();
 				var enabled = v.getNode("enabled", 1);
 				props.initNode(enabled, 1, "BOOL");

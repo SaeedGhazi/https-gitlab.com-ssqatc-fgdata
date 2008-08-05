@@ -15,7 +15,7 @@
 		<layout>vbox</layout>
 		<!-- using one copy of button-template per ATC message -->
 		<button-template>
-			<hide>true</hide>
+			<enabled>false</enabled>
 			<legend>LEGEND</legend>
 			<equal>true</equal>
 			<property>PROPERTY</property>

@@ -384,8 +384,13 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 		}
 	});
 
-	foreach (var n; props.globals.getChildren("display"))
-		property_display.add(n.getValue());
+	foreach (var n; props.globals.getChildren("display")) {
+		var prop = n.getValue();
+		if (size(prop) and prop[-1] == `/`)
+			property_display.add(props.globals.getNode(prop, 1).getChildren());
+		else
+			property_display.add(prop);
+	}
 	props.globals.removeChildren("display");
 
 	setlistener("/sim/gui/current-style", func {

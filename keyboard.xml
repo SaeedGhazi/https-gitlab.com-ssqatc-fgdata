@@ -101,15 +101,6 @@ top down before the key bindings are parsed.
   </binding>
  </key>
 
- <key n="9">
-  <name>Ctrl-I</name>
-  <desc>Show instrument setting dialog.</desc>
-  <binding>
-   <command>dialog-show</command>
-   <dialog-name>instruments</dialog-name>
-  </binding>
- </key>
-
  <key n="13">
   <name>Enter</name>
   <desc>Move rudder right.</desc>

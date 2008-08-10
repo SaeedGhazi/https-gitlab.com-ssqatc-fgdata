@@ -272,8 +272,8 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     read_rules = [["*/" ~ config, 0]] ~ read_rules;
     write_rules = [["*/" ~ config, 0]] ~ write_rules;
     if (__.log_level <= 3) {
-        print("io.open()/READ:  ", debug.string(read_rules));
-        print("io.open()/WRITE: ", debug.string(write_rules));
+        print("IOrules/READ:  ", debug.string(read_rules));
+        print("IOrules/WRITE: ", debug.string(write_rules));
     }
 
     # make safe, local copies

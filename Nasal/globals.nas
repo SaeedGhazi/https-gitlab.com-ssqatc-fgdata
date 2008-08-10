@@ -135,7 +135,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     var path = getprop("/sim/fg-home") ~ "/Nasal";
     if((var dir = directory(path)) == nil) return;
     foreach(var file; sort(dir, cmp))
-        if(substr(file, -4) == ".nas")
-            io.load_nasal(path ~ "/" ~ file);
+        if(size(file) > 4 and substr(file, -4) == ".nas")
+            io.load_nasal(path ~ "/" ~ file, substr(file, 0, size(file) - 4));
 });
 

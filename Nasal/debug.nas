@@ -228,9 +228,8 @@ var string = func(o) {
 	} elsif (t == "ghost") {
 		var gt = ghosttype(o);
 		if (contains(ghosttypes, gt))
-			return _angle("<") ~ _nil(ghosttypes[gt]) ~ _angle(">");
-		else
-			return _angle("<") ~ _nil(gt) ~ _angle(">");
+			gt = ghosttypes[gt];
+		return _angle("<") ~ _nil(gt) ~ _angle(">");
 
 	} else {
 		return _angle("<") ~ _vartype(t) ~ _angle(">");
@@ -297,8 +296,8 @@ var proptrace = func(root = "/", frames = 1) {
 # time in seconds. Examples:
 #
 #     var test = func { getprop("/sim/aircraft"); }
-#     debug.benchmark("test()/2", 1000, test);
-#     debug.benchmark("test()/2", 1000, func setprop("/sim/aircraft", ""));
+#     debug.benchmark("test()/2", test, 1000);
+#     debug.benchmark("test()/2", func setprop("/sim/aircraft", ""), 1000);
 #
 var benchmark = func(label, fun, repeat = 1) {
 	var start = systime();

@@ -86,15 +86,6 @@ var loop = func {
 }
 
 
-var init_double_prop = func(node, prop, val) {
-	if (node.getNode(prop) != nil)
-		val = num(node.getNode(prop).getValue());
-
-	node.getNode(prop, 1).setDoubleValue(val);
-}
-
-
-
 var tanks = [];
 var engines = [];
 var fuel_freeze = nil;
@@ -117,17 +108,15 @@ _setlistener("/sim/signals/fdm-initialized", func {
 	}
 
 	foreach (var t; props.globals.getNode("/consumables/fuel", 1).getChildren("tank")) {
-		if (!size(t.getChildren()))
+		if (!t.getAttribute("children"))
 			continue;           # skip native_fdm.cxx generated zombie tanks
 
 		append(tanks, t);
-		init_double_prop(t, "level-gal_us", 0.0);
-		init_double_prop(t, "level-lbs", 0.0);
-		init_double_prop(t, "capacity-gal_us", 0.01); # not zero (div/zero issue)
-		init_double_prop(t, "density-ppg", 6.0);      # gasoline
-
-		if (t.getNode("selected") == nil)
-			t.getNode("selected", 1).setBoolValue(1);
+		props.initNode(t.getNode("level-gal_us", 1), 0.0);
+		props.initNode(t.getNode("level-lbs", 1), 0.0);
+		props.initNode(t.getNode("capacity-gal_us", 1), 0.01); # not zero (div/zero issue)
+		props.initNode(t.getNode("density-ppg", 1), 6.0);      # gasoline
+		props.initNode(t.getNode("selected", 1), 1, "BOOL");
 	}
 
 	loop();

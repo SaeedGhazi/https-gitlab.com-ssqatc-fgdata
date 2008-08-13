@@ -517,6 +517,13 @@
 		</aar>
 	</nasal>
 
+	<systems>
+		<refuel>
+			<system>boom</system>
+			<system>probe</system>
+		</refuel>
+	</systems>
+
 	<instrumentation>
 		<radar>
 			<serviceable type="bool">true</serviceable>

@@ -519,8 +519,8 @@
 
 	<systems>
 		<refuel>
-			<system>boom</system>
-			<system>probe</system>
+			<type>boom</type>
+			<type>probe</type>
 		</refuel>
 	</systems>
 

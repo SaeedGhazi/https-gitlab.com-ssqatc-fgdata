@@ -13,6 +13,11 @@ top down before the key bindings are parsed.
 <PropertyList>
  <nasal>
   <script>
+      # /devices/status/keyboard/event/modifier/ and /devices/status/keyboard/
+      # don't only have one BOOL child per modifier, but also contain the
+      # modifier bitmap themselves, using these bit values:
+      var mod = { shift: 1, ctrl: 2, alt: 4, meta: 8, super: 16, hyper: 32 };
+
       var modifiers = props.globals.getNode("/devices/status/keyboard");
       var shift = props.globals.getNode("/devices/status/keyboard/shift");
       var ctrl = props.globals.getNode("/devices/status/keyboard/ctrl");

@@ -411,8 +411,10 @@ var data = {
 		setlistener("/sim/signals/exit", func { me._save_() });
 	},
 	load : func {
-		printlog("warn", "trying to load aircraft data from ", me.path, " (OK if not found)");
-		io.read_properties(me.path, props.globals);
+		if (io.stat(me.path) != nil) {
+			printlog("info", "loading aircraft data from ", me.path);
+			io.read_properties(me.path, props.globals);
+		}
 	},
 	save : func(v = nil) {
 		me.loopid += 1;

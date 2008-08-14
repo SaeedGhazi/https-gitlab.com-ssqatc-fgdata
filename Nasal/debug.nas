@@ -222,7 +222,7 @@ var string = func(o) {
 		var k = keys(o);
 		var s = "";
 		forindex (var i; k)
-			s ~= (i == 0 ? "" : ", ") ~ _dump_key(k[i]) ~ " : " ~ debug.string(o[k[i]]);
+			s ~= (i == 0 ? "" : ", ") ~ _dump_key(k[i]) ~ ": " ~ debug.string(o[k[i]]);
 		return _brace("{") ~ " " ~ s ~ " " ~ _brace("}");
 
 	} elsif (t == "ghost") {
@@ -292,17 +292,17 @@ var proptrace = func(root = "/", frames = 1) {
 
 
 ##
-# Executes function fun with repeat times prints execution
+# Executes function fn with repeat times prints execution
 # time in seconds. Examples:
 #
 #     var test = func { getprop("/sim/aircraft"); }
 #     debug.benchmark("test()/2", test, 1000);
 #     debug.benchmark("test()/2", func setprop("/sim/aircraft", ""), 1000);
 #
-var benchmark = func(label, fun, repeat = 1) {
+var benchmark = func(label, fn, repeat = 1) {
 	var start = systime();
 	for (var i = 0; i < repeat; i += 1)
-		fun();
+		fn();
 	print(_bench(sprintf(" %s --> %.6f s ", label, systime() - start)));
 }
 
@@ -315,7 +315,8 @@ var exit = func fgcommand("exit");
 # code that catches "exceptions" (by a die() call or errors). The Nasal
 # code doesn't abort in this case. Example:
 #
-#     call(func { possibly_buggy() }, nil, var err = []);
+#     var possibly_buggy = func { ... }
+#     call(possibly_buggy, nil, var err = []);
 #     debug.printerror(err);
 #
 var printerror = func(err) {

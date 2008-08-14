@@ -145,7 +145,6 @@ match = func(str, patt) {
 			continue;
 
 		} elsif (patt[p] == `[`) {
-			print("**setsize**");
 			setsize(var x = [], 256);
 			var invert = 0;
 			if ((p += 1) < size(patt) and patt[p] == `^`) {

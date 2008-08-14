@@ -171,17 +171,17 @@ var copy = func(src, dest, attr = 0) {
 # Utility.  Turns any ghosts it finds (either solo, or in an
 # array) into Node objects.
 #
-var wrap = func {
-    argtype = typeof(arg[0]);
+var wrap = func(node) {
+    var argtype = typeof(node);
     if(argtype == "ghost") {
-        return wrapNode(arg[0]);
+        return wrapNode(node);
     } elsif(argtype == "vector") {
-        v = arg[0];
-        n = size(v);
+        var v = node;
+        var n = size(v);
         for(i=0; i<n; i+=1) { v[i] = wrapNode(v[i]); }
         return v;
     }
-    return arg[0];
+    return node;
 }
 
 ##
@@ -189,7 +189,7 @@ var wrap = func {
 # Node object and its _g (ghost) field set to the specified object.
 # Nasal's literal syntax can be pleasingly terse. I like that. :)
 #
-var wrapNode = func { { parents : [Node], _g : arg[0] } }
+var wrapNode = func(node) { { parents : [Node], _g : node } }
 
 ##
 # Global property tree.  Set once at initialization.  Is that OK?
@@ -204,16 +204,16 @@ var globals = wrapNode(_globals());
 # path under each node of that name to set (e.g. "throttle"), arg[2]
 # is the value.
 #
-var setAll = func {
-    node = props.globals.getNode(arg[0]);
-    if(node == nil) { return; }
-    name = node.getName();
+var setAll = func(base, child, value) {
+    var node = props.globals.getNode(base);
+    if(node == nil) return;
+    var name = node.getName();
     node = node.getParent();
-    if(node == nil) { return; }
-    children = node.getChildren();
-    foreach(c; children) {
-        if(c.getName() == name) {
-            c.getNode(arg[1], 1).setValue(arg[2]); }}
+    if(node == nil) return;
+    var children = node.getChildren();
+    foreach(c; children)
+        if(c.getName() == name)
+            c.getNode(child, 1).setValue(value);
 }
 
 ##

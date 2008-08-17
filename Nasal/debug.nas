@@ -15,7 +15,7 @@
 # debug.proptrace([<property [, <frames>]]) ... trace property write/add/remove
 #                                          events under the <property> subtree for
 #                                          a number of frames. Defaults are "/" and
-#                                          1 frame.
+#                                          2 frames (of which the first one is incomplete).
 #
 # debug.tree([<property> [, <mode>])   ... dump property tree under property path
 #                                          or props.Node hash (default: root). If
@@ -268,7 +268,7 @@ var backtrace = func(desc = nil) {
 var bt = backtrace;
 
 
-var proptrace = func(root = "/", frames = 1) {
+var proptrace = func(root = "/", frames = 2) {
 	var events = 0;
 	var trace = setlistener(propify(root), func(this, base, type) {
 		events += 1;

@@ -201,7 +201,7 @@ Configuration description:
 
    <position>
         Specify the position of the sounds source relative to the
-        aircraft center.  The coordinate system used is a right hand
+        aircraft center.  The coordinate system used is a left hand
         coordinate system where +Y = left, -Y = right, -Z = down, +Z =
         up, -X = forward, +X = aft.  Distances are in meters.
         The volume calculation due to distance and orientation of the

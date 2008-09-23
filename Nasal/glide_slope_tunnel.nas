@@ -24,29 +24,6 @@ var normdeg = func(a) {
 }
 
 
-# For each runway complement the opposite end, as airportinfo() returns only one end.
-#
-var complement_runways = func(apt) {
-	foreach (var rwy; keys(apt.runways)) {
-		if (!string.isdigit(rwy[0]))
-			continue;
-
-		var number = math.mod(num(substr(rwy, 0, 2)) + 18, 36);
-		var side = substr(rwy, 2, 1);
-		var comp = sprintf("%02d%s", number, side == "R" ? "L" : side == "L" ? "R" : side);
-		var r = apt.runways[rwy];
-		apt.runways[comp] = {
-			lat: r.lat, lon: r.lon, length: r.length,
-			width: r.width, heading: math.mod(r.heading + 180, 360),
-			threshold1: r.threshold2,
-			threshold2: r.threshold1,
-			stopway1: r.stopway2,
-			stopway2: r.stopway1,
-		};
-	}
-}
-
-
 # Find best runway for current wind direction (or 270), also considering length and width.
 #
 var best_runway = func(apt) {
@@ -73,7 +50,7 @@ var best_runway = func(apt) {
 #
 var draw_tunnel = func(rwy) {
 	var m = geo.Coord.new().set_latlon(rwy.lat, rwy.lon);
-	m.apply_course_distance(rwy.heading + 180, rwy.length / 2 - rwy.threshold1 - HOFFSET);
+	m.apply_course_distance(rwy.heading + 180, rwy.length / 2 - rwy.threshold - HOFFSET);
 
 	var g = geodinfo(m.lat(), m.lon());
 	var elev = g != nil ? g[0] : apt.elevation;
@@ -100,7 +77,6 @@ var loop = func(id) {
 				is_heliport = 0;
 
 		if (!is_heliport) {
-			complement_runways(apt);
 			draw_tunnel(best_runway(apt));
 			gui.popupTip(apt.id ~ " - \"" ~ apt.name ~ "\"", 6);
 		}

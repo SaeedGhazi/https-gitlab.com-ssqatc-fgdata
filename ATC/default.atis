@@ -1,4 +1,7 @@
 # Flightgear ATIS data.  Compiled 2001 by David Luff from the DAFIF data.  Comments to david.luff@nottingham.ac.uk
+I  21.317454 -157.916030 13 257.8 50 PHNL "Honolulu International"
+I  21.317454 -157.916030 13 127.9 50 PHNL "Honolulu International"
+I  32.366673 -064.678947 13 119.6 50 TXKF "Bermuda International"
 I  12.5014  -70.0152  60  132.1  50  TNCA  "Reina Beatrix International"
 I  25.3286  55.5172  111  112.3  50  OMSJ  "Sharjah International"
 I  24.433  54.6511  88  113  50  OMAA  "Abu Dhabi International"

@@ -163,21 +163,6 @@
       # Get the nearest airport.
       var airport = airportinfo();
 
-      # Get the complement of each runway to create a full set.
-      foreach (var rwy; keys(airport.runways)) {
-        if (!string.isdigit(rwy[0]))
-          continue;
-
-        var number = math.mod(num(substr(rwy, 0, 2)) + 18, 36);
-        var side = substr(rwy, 2, 1);
-        var comp = sprintf("%02d%s", number, side == "R" ? "L" : side == "L" ? "R" : side);
-        var r = airport.runways[rwy];
-        airport.runways[comp] = { lat: r.lat, lon: r.lon, length: r.length,
-          width: r.width, heading: math.mod(r.heading + 180, 360),
-          threshold1: r.threshold2,
-        };
-      }
-
       # Determine the active runway. We have two ways to do this:
       # - If the aircraft is on the ground (or very close to it), we'll try to determine
       # the runway it is closest to, and facing the correct direction for.

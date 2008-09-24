@@ -50,9 +50,9 @@ var _c = func nil;
 
 var color = func(enabled) {
 	if (enabled)
-		_c = func(color, s) "\x1b[" ~ color ~ "m" ~ s ~ "\x1b[m";
+		_c = func(color, s) { "\x1b[" ~ color ~ "m" ~ s ~ "\x1b[m" }
 	else
-		_c = func(dummy, s) s;
+		_c = func(dummy, s) { s }
 }
 
 

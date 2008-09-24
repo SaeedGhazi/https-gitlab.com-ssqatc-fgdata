@@ -337,3 +337,12 @@ var _cond_cmp = func(p, op) {
 }
 
 
+##
+# Runs <binding> as described in $FG_ROOT/Docs/README.commands, and
+# returns fgcommand() result: 1 for succes, 0 for failure.
+#
+var runBinding = func(n) {
+    var cmd = n.getNode("command", 1).getValue() or "null";
+    condition(n.getNode("condition")) ? fgcommand(cmd, n) : 0;
+}
+

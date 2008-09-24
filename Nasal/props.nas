@@ -336,10 +336,9 @@ var _cond_cmp = func(p, op) {
     return left == right;
 }
 
-
 ##
 # Runs <binding> as described in $FG_ROOT/Docs/README.commands, and
-# returns fgcommand() result: 1 for succes, 0 for failure.
+# returns fgcommand() result: 1 for success, 0 for failure.
 #
 var runBinding = func(n) {
     var cmd = n.getNode("command", 1).getValue() or "null";

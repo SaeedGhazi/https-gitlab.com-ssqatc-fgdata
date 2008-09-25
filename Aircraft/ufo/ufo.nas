@@ -800,6 +800,8 @@ var export_flightplan = func {
 	var args = props.Node.new({ filename : path });
 	var export = args.getNode("data/flightplan", 1);
 	var waypoints = modelmgr.get_data().getChildren("model");
+	if (!size(waypoints))
+		return;
 	forindex (var i; waypoints) {
 		var from = waypoints[i];
 		var to = export.getChild("wpt", i, 1);

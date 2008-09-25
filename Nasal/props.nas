@@ -337,11 +337,15 @@ var _cond_cmp = func(p, op) {
 }
 
 ##
-# Runs <binding> as described in $FG_ROOT/Docs/README.commands, and
-# returns fgcommand() result: 1 for success, 0 for failure.
+# Runs <binding> as described in $FG_ROOT/Docs/README.commands using
+# a given module by default, and returns 1 if fgcommand() succeeded,
+# or 0 otherwise. The module name won't override a <module> defined
+# in the binding.
 #
-var runBinding = func(n) {
-    var cmd = n.getNode("command", 1).getValue() or "null";
-    condition(n.getNode("condition")) ? fgcommand(cmd, n) : 0;
+var runBinding = func(node, module = nil) {
+    if(module != nil and node.getNode("module") == nil)
+       node.getNode("module", 1).setValue(module);
+    var cmd = node.getNode("command", 1).getValue() or "null";
+    condition(node.getNode("condition")) ? fgcommand(cmd, node) : 0;
 }
 

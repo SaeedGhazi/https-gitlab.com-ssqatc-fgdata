@@ -789,7 +789,7 @@ var steering = {
 			elsif (w > 0)
 				steering.rightN.setValue(v);
 			else
-				steering.switrhN.setValue(v);
+				steering.switchN.setValue(v);
 		}
 		setlistener(me.switchN, func(n) {
 			me.loopid += 1;

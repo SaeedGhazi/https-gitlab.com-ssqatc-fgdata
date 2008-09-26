@@ -784,8 +784,12 @@ var steering = {
 		me.loopid = 0;
 
 		controls.applyBrakes = func(v, w = 0) {
-			call(func(v, w) (w < 0 ? leftN : w > 0 ? rightN : switchN).setValue(v),
-					[v, w], nil, aircraft.steering);
+			if (w < 0)
+				steering.leftN.setValue(v);
+			elsif (w > 0)
+				steering.rightN.setValue(v);
+			else
+				steering.switrhN.setValue(v);
 		}
 		setlistener(me.switchN, func(n) {
 			me.loopid += 1;

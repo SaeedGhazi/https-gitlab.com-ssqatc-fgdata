@@ -227,3 +227,98 @@ replace = func(str, old, new) {
 }
 
 })(); # end tamper-proof environment
+
+
+
+
+##
+# Simple scanf function. Takes an input string and a pattern
+# and returns a vector containing success value and found elements.
+#
+#   var r = string.scanf("comm3freq123.456", "comm%dfreq%f");
+#
+# The resulting vector is [1, 3, 123.456].
+#
+var Scan = {
+	new : func(s) {{ str: s, pos: 0, parents: [Scan] }},
+	getc : func {
+		if (me.pos >= size(me.str))
+			return nil;
+		var c = me.str[me.pos];
+		me.pos += 1;
+		return c;
+	},
+	ungetc : func { me.pos -= 1 },
+	rest : func { substr(me.str, me.pos) },
+};
+
+
+var scanf = func(str, format) {
+	if (find("%", format) < 0)
+		return cmp(str, format) ? nil : [2];
+
+	var result = [0];
+	var str = Scan.new(str);
+	var format = Scan.new(format);
+
+	while (1) {
+		var f = format.getc();
+		if (f == nil) {
+			break;
+
+		} elsif (f == `%`) {
+			result[0] = 1;		# unsafe match
+			f = format.getc();
+			if (f == nil)
+				die("trailing %");
+			if (f == `%` and str.getc() != `%`)
+				return nil;
+
+			var fnum = nil;
+			if (isdigit(f)) {
+				fnum = f - `0`;
+				while ((f = format.getc()) != nil and isdigit(f))
+					fnum = fnum * 10 + f - `0`;
+			}
+
+			var numstr = "";
+			if (f == `d` or f == `f`) {				# int or float with optional minus
+				if (str.getc() == `-`)
+					numstr = "-";
+				else
+					str.ungetc();
+			}
+			if (f == `D` or f == `F` or f == `d` or f == `f`) {	# integer part
+				while ((var c = str.getc()) != nil and isdigit(c))
+					numstr ~= chr(c);
+				if (c != nil)
+					str.ungetc();
+			}
+			if (f == `f` or f == `F`) {				# fractional part
+				while ((var c = str.getc()) != nil) {
+					if (num(numstr ~ chr(c)) != nil)
+						numstr ~= chr(c);
+					else
+						break;
+				}
+				if (c != nil)
+					str.ungetc();
+			}
+
+			if (fnum != nil and size(numstr) > fnum)
+				for (var i = size(numstr) - fnum; i; i -= 1)
+					str.ungetc();
+
+			append(result, num(numstr));
+
+		} elsif (f != (var c = str.getc())) {
+			return nil;
+		} else {
+			result[0] = 2;		# safe match
+		}
+	}
+	return str.getc() == nil and format.getc() == nil ? result : nil;
+}
+
+
+

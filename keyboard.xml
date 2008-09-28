@@ -570,6 +570,15 @@ top down before the key bindings are parsed.
   </mod-shift>
  </key>
 
+ <key n="58">
+  <name>:</name>
+  <desc>Start multikey command</desc>
+  <binding>
+   <command>nasal</command>
+   <script>multikey.start()</script>
+  </binding>
+ </key>
+
  <key n="63">
   <name>?</name>
   <desc>Show help dialog</desc>

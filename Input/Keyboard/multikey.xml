@@ -4,19 +4,18 @@
 	<nasal>
 		<script>
 			<![CDATA[
-				var limitvalue = func(val, min, max) {
+				var clamp = func(val, min, max) {
 					return (val > max) ? max : (val < min) ? min : val;
 				}
 
 				var adjustprop = func(path, offset, min = -1, max = 1) {
 					var val = getprop(path);
-					setprop(path, limitvalue(val + offset, min, max));
+					setprop(path, clamp(val + offset, min, max));
 				}
 			]]>
 		</script>
 	</nasal>
 
-	<!-- example of immediately exiting key -->
 	<key n="900">
 		<name>%d</name>
 		<desc>Execute nasal-console tab #%d</desc>
@@ -54,7 +53,7 @@
 						<command>nasal</command>
 						<script>
 							setprop("/environment/weather-scenario", "Fair weather");
-							setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers")+1)
+							setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers") + 1);
 						</script>
 					</binding>
 				</key>
@@ -66,7 +65,7 @@
 						<command>nasal</command>
 						<script>
 							setprop("/environment/weather-scenario", "METAR");
-							setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers")+1)
+							setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers") + 1);
 						</script>
 					</binding>
 				</key>
@@ -78,7 +77,7 @@
 						<command>nasal</command>
 						<script>
 							setprop("/environment/weather-scenario", "none");
-							setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers")+1)
+							setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers") + 1);
 						</script>
 					</binding>
 				</key>
@@ -90,7 +89,7 @@
 						<command>nasal</command>
 						<script>
 							setprop("/environment/weather-scenario", "Thunderstorm");
-							setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers")+1)
+							setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers") + 1);
 						</script>
 					</binding>
 				</key>
@@ -124,7 +123,7 @@
 	<!-- Autopilot multikey commands -->
 	<key n="97">
 		<name>a</name>
-		<desc>autopilot</desc>
+		<desc>Autopilot</desc>
 		<key n="104">
 			<name>h</name>
 			<desc>Heading Control</desc>
@@ -147,7 +146,7 @@
 						<command>nasal</command>
 						<script>
 							setprop("/autopilot/locks/heading", "dg-heading-hold");
-							setprop("/autopilot/settings/heading-bug-deg", arg[0])
+							setprop("/autopilot/settings/heading-bug-deg", arg[0]);
 						</script>
 					</binding>
 				</key>
@@ -163,7 +162,7 @@
 						<command>nasal</command>
 						<script>
 							setprop("/autopilot/locks/heading", "true-heading-hold");
-							setprop("/autopilot/settings/true-heading-deg", arg[0])
+							setprop("/autopilot/settings/true-heading-deg", arg[0]);
 						</script>
 					</binding>
 				</key>
@@ -179,7 +178,7 @@
 			</key>
 
 			<key n="47">
-				<name>&#47;</name> <!-- slash -->
+				<name>/</name>
 				<desc>Heading control disabled</desc>
 				<binding>
 					<command>property-assign</command>
@@ -202,7 +201,7 @@
 						<command>nasal</command>
 						<script>
 							setprop("/autopilot/settings/target-speed-kt", arg[0]);
-							setprop("/autopilot/locks/speed", "speed-with-throttle")
+							setprop("/autopilot/locks/speed", "speed-with-throttle");
 						</script>
 					</binding>
 				</key>
@@ -218,14 +217,14 @@
 						<command>nasal</command>
 						<script>
 							setprop("/autopilot/settings/target-speed-kt", arg[0]);
-							setprop("/autopilot/locks/speed", "speed-with-pitch-trim")
+							setprop("/autopilot/locks/speed", "speed-with-pitch-trim");
 						</script>
 					</binding>
 				</key>
 			</key>
 
 			<key n="47">
-				<name>&#47;</name> <!-- slash -->
+				<name>/</name>
 				<desc>Velocity control disabled</desc>
 				<binding>
 					<command>property-assign</command>
@@ -248,7 +247,7 @@
 						<command>nasal</command>
 						<script>
 							setprop("/autopilot/settings/vertical-speed-fpm", arg[0]);
-							setprop("/autopilot/locks/altitude", "vertical-speed-hold")
+							setprop("/autopilot/locks/altitude", "vertical-speed-hold");
 						</script>
 					</binding>
 				</key>
@@ -264,7 +263,7 @@
 						<command>nasal</command>
 						<script>
 							setprop("/autopilot/settings/target-pitch-degree", arg[0]);
-							setprop("/autopilot/locks/altitude", "pitch-hold")
+							setprop("/autopilot/locks/altitude", "pitch-hold");
 						</script>
 					</binding>
 				</key>
@@ -280,7 +279,7 @@
 						<command>nasal</command>
 						<script>
 							setprop("/autopilot/settings/target-aoa-degree", arg[0]);
-							 setprop("/autopilot/locks/altitude", "aoa-hold")
+							 setprop("/autopilot/locks/altitude", "aoa-hold");
 						</script>
 					</binding>
 				</key>
@@ -296,7 +295,7 @@
 						<command>nasal</command>
 						<script>
 							setprop("/autopilot/settings/target-altitude-ft", arg[0]);
-							setprop("/autopilot/locks/altitude", "altitude-hold")
+							setprop("/autopilot/locks/altitude", "altitude-hold");
 						</script>
 					</binding>
 				</key>
@@ -312,7 +311,7 @@
 						<command>nasal</command>
 						<script>
 							setprop("/autopilot/settings/target-agl-ft", arg[0]);
-							setprop("/autopilot/locks/altitude", "agl-hold")
+							setprop("/autopilot/locks/altitude", "agl-hold");
 						</script>
 					</binding>
 				</key>
@@ -329,118 +328,13 @@
 			</key>
 
 			<key n="47">
-				<name>&#47;</name> <!-- slash -->
+				<name>/</name>
 				<desc>Pitch/Altitude control disabled</desc>
 				<binding>
 					<command>property-assign</command>
 					<property>/autopilot/locks/altitude</property>
 					<value></value>
 				</binding>
-			</key>
-		</key>
-	</key>
-
-	<nasal>
-		<script>
-			<![CDATA[
-				var radio_fmt = "/instrumentation/%s[%d]/frequencies/%s-mhz";
-
-				var setfreq = func(type, index, which, value) {
-					index = (index >= 1) ? index - 1 : 0;
-					setprop(sprintf(radio_fmt, type, index, which), value);
-				}
-
-				var togglefreq = func(type, index) {
-					index = (index >= 1) ? index - 1 : 0;
-					var sel = sprintf(radio_fmt, type, index, "selected");
-					var stby = sprintf(radio_fmt, type, index, "standby");
-					var s = getprop(stby);
-					setprop(stby, getprop(sel));
-					setprop(sel, s);
-				}
-			]]>
-		</script>
-	</nasal>
-
-	<key n="114">
-		<name>r</name>
-		<desc>Radio</desc>
-
-		<key n="97">
-			<name>a</name>
-			<desc>Radio ADF</desc>
-			<key n="102">
-				<name>f</name>
-				<desc>Radio ADF frequency = ? kHz</desc>
-				<key n="900">
-					<name>%d</name>
-					<desc>Radio ADF frequency = %d kHz</desc>
-					<binding>
-						<command>nasal</command>
-						<script>setprop("/instrumentation/adf[0]/frequencies/selected-khz", arg[0])</script>
-					</binding>
-				</key>
-			</key>
-		</key>
-
-		<key n="99">
-			<name>c</name>
-			<desc>Radio COMM</desc>
-			<key n="900">
-				<name>%d</name>
-				<desc>Radio COMM%d</desc>
-				<key n="102">
-					<name>f</name>
-					<desc>Radio COMM%d frequency = ? MHz</desc>
-					<key n="37">
-						<name>%f</name>
-						<desc>Radio COMM%d frequency = %.3f MHz</desc>
-						<binding>
-							<command>nasal</command>
-							<script>setfreq("comm", arg[0], "selected", arg[1])</script>
-						</binding>
-					</key>
-				</key>
-
-				<key n="116">
-					<name>t</name>
-					<desc>Radio COMM%d toggle selected/standby</desc>
-					<binding>
-						<command>nasal</command>
-						<script>togglefreq("comm", arg[0])</script>
-					</binding>
-				</key>
-			</key>
-		</key>
-
-		<key n="110">
-			<name>n</name>
-			<desc>radio nav</desc>
-			<key n="900">
-				<name>%d</name>
-				<desc>radio nav%d</desc>
-				<key n="102">
-					<name>f</name>
-					<desc>radio nav%d frequency = ? MHz</desc>
-					<key n="901">
-						<name>%f</name>
-						<desc>radio nav%d frequency = %.3f MHz</desc>
-						<binding>
-							<command>nasal</command>
-							<script>setfreq("nav", arg[0], "selected", arg[1])</script>
-						</binding>
-					</key>
-				</key>
-
-				<key n="116">
-					<name>t</name>
-					<desc>radio nav%d toggle selected/standby</desc>
-					<binding>
-						<command>nasal</command>
-						<script>togglefreq("nav", arg[0]);
-						</script>
-					</binding>
-				</key>
 			</key>
 		</key>
 	</key>
@@ -685,7 +579,7 @@
 					<script>
 						setprop("/controls/flight/airelon-trim", 0);
 						setprop("/controls/flight/elevator-trim", 0);
-						setprop("/controls/flight/rudder-trim", 0)
+						setprop("/controls/flight/rudder-trim", 0);
 					</script>
 				</binding>
 			</key>
@@ -730,10 +624,115 @@
 		</key>
 	</key>
 
+	<nasal>
+		<script>
+			<![CDATA[
+				var radio_fmt = "/instrumentation/%s[%d]/frequencies/%s-mhz";
+
+				var setfreq = func(type, index, which, value) {
+					index = (index >= 1) ? index - 1 : 0;
+					setprop(sprintf(radio_fmt, type, index, which), value);
+				}
+
+				var togglefreq = func(type, index) {
+					index = (index >= 1) ? index - 1 : 0;
+					var sel = sprintf(radio_fmt, type, index, "selected");
+					var stby = sprintf(radio_fmt, type, index, "standby");
+					var s = getprop(stby);
+					setprop(stby, getprop(sel));
+					setprop(sel, s);
+				}
+			]]>
+		</script>
+	</nasal>
+
+	<key n="114">
+		<name>r</name>
+		<desc>Radio</desc>
+
+		<key n="97">
+			<name>a</name>
+			<desc>Radio ADF</desc>
+			<key n="102">
+				<name>f</name>
+				<desc>Radio ADF frequency = ? kHz</desc>
+				<key n="900">
+					<name>%d</name>
+					<desc>Radio ADF frequency = %d kHz</desc>
+					<binding>
+						<command>nasal</command>
+						<script>setprop("/instrumentation/adf[0]/frequencies/selected-khz", arg[0])</script>
+					</binding>
+				</key>
+			</key>
+		</key>
+
+		<key n="99">
+			<name>c</name>
+			<desc>Radio COMM</desc>
+			<key n="900">
+				<name>%d</name>
+				<desc>Radio COMM%d</desc>
+				<key n="102">
+					<name>f</name>
+					<desc>Radio COMM%d frequency = ? MHz</desc>
+					<key n="37">
+						<name>%f</name>
+						<desc>Radio COMM%d frequency = %.3f MHz</desc>
+						<binding>
+							<command>nasal</command>
+							<script>setfreq("comm", arg[0], "selected", arg[1])</script>
+						</binding>
+					</key>
+				</key>
+
+				<key n="116">
+					<name>t</name>
+					<desc>Radio COMM%d toggle selected/standby</desc>
+					<binding>
+						<command>nasal</command>
+						<script>togglefreq("comm", arg[0])</script>
+					</binding>
+				</key>
+			</key>
+		</key>
+
+		<key n="110">
+			<name>n</name>
+			<desc>radio nav</desc>
+			<key n="900">
+				<name>%d</name>
+				<desc>radio nav%d</desc>
+				<key n="102">
+					<name>f</name>
+					<desc>radio nav%d frequency = ? MHz</desc>
+					<key n="901">
+						<name>%f</name>
+						<desc>radio nav%d frequency = %.3f MHz</desc>
+						<binding>
+							<command>nasal</command>
+							<script>setfreq("nav", arg[0], "selected", arg[1])</script>
+						</binding>
+					</key>
+				</key>
+
+				<key n="116">
+					<name>t</name>
+					<desc>radio nav%d toggle selected/standby</desc>
+					<binding>
+						<command>nasal</command>
+						<script>togglefreq("nav", arg[0]);
+						</script>
+					</binding>
+				</key>
+			</key>
+		</key>
+	</key>
+
 	<!-- example of non-exiting keys (here cursor keys) -->
 	<key n="118">
 		<name>v</name>
-		<desc>view direction (use cursor keys)</desc>
+		<desc>View direction (use cursor keys)</desc>
 		<binding>
 			<command>null</command> <!-- to allow exiting via return key -->
 		</binding>
@@ -744,7 +743,7 @@
 			<no-exit/>
 			<binding>
 				<command>nasal</command>
-				<script>var h = "/sim/current-view/goal-heading-offset-deg"; setprop(h, getprop(h) + 1)</script>
+				<script>var h = "/sim/current-view/goal-heading-offset-deg"; setprop(h, desc = getprop(h) + 1)</script>
 			</binding>
 		</key>
 
@@ -754,7 +753,7 @@
 			<no-exit/>
 			<binding>
 				<command>nasal</command>
-				<script>var h = "/sim/current-view/goal-heading-offset-deg"; setprop(h, getprop(h) - 1)</script>
+				<script>var h = "/sim/current-view/goal-heading-offset-deg"; setprop(h, desc = getprop(h) - 1)</script>
 			</binding>
 		</key>
 
@@ -764,7 +763,7 @@
 			<no-exit/>
 			<binding>
 				<command>nasal</command>
-				<script>var h = "/sim/current-view/goal-pitch-offset-deg"; setprop(h, getprop(h) + 1)</script>
+				<script>var h = "/sim/current-view/goal-pitch-offset-deg"; setprop(h, desc = getprop(h) + 1)</script>
 			</binding>
 		</key>
 
@@ -774,7 +773,7 @@
 			<no-exit/>
 			<binding>
 				<command>nasal</command>
-				<script>var h = "/sim/current-view/goal-pitch-offset-deg"; setprop(h, getprop(h) - 1)</script>
+				<script>var h = "/sim/current-view/goal-pitch-offset-deg"; setprop(h, desc = getprop(h) - 1)</script>
 			</binding>
 		</key>
 	</key>

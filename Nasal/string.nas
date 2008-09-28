@@ -274,49 +274,51 @@ var scanf = func(str, format) {
 			if (f == `%` and str.getc() != `%`)
 				return nil;
 
-			var fnum = nil;
 			if (isdigit(f)) {
-				fnum = f - `0`;
+				var fnum = f - `0`;
 				while ((f = format.getc()) != nil and isdigit(f))
 					fnum = fnum * 10 + f - `0`;
+			} else {
+				var fnum = -2; # because we add one if !prefix
 			}
 
 			var numstr = "";
-			var plus = 0;
-			if (f == `d` or f == `f`) {				# int or float with optional minus
+			var prefix = 0;
+			var sign = 1;
+			if (f == `d` or f == `f` or f == `u`) {
 				var c = str.getc();
-				if (c == `+`)
-					plus = 1;
-				elsif (c == `-`)
-					numstr = chr(c);
-				else
+				if (c == `+`) {
+					prefix = 1;
+				} elsif (c == `-`) {
+					if (f == `u`)
+						return nil;
+					(prefix, sign) = (1, -1);
+				} else {
 					str.ungetc();
-			}
-			if (f == `D` or f == `F` or f == `d` or f == `f`) {	# integer part
-				while ((var c = str.getc()) != nil and isdigit(c))
-					numstr ~= chr(c);
-				if (c != nil)
-					str.ungetc();
-			}
-			if (f == `f` or f == `F`) {				# fractional part
-				while ((var c = str.getc()) != nil) {
-					if (num(numstr ~ chr(c)) != nil)
+				}
+				if (!prefix)
+					fnum += 1;
+
+				while ((var c = str.getc()) != nil and (fnum -= 1)) {
+					if (f != `f` and c == `.`)
+						break;
+					elsif (num(numstr ~ chr(c) ~ '0') != nil)
 						numstr ~= chr(c);
 					else
 						break;
 				}
 				if (c != nil)
 					str.ungetc();
+				if (num(numstr) == nil)
+					return nil;
+			} else {
+				die("scanf: bad format %" ~ chr(f));
 			}
 
-			if (!size(numstr) and plus or numstr == "-")
+			if (!size(numstr) and prefix)
 				return nil;
 
-			if (fnum != nil and size(numstr) > fnum)
-				for (var i = size(numstr) - fnum; i; i -= 1)
-					str.ungetc();
-
-			append(result, num(numstr));
+			append(result, sign * num(numstr));
 
 		} elsif (f != (var c = str.getc())) {
 			return nil;

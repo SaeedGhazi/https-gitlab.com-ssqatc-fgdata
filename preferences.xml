@@ -788,16 +788,11 @@ Started September 2000 by David Megginson, david@megginson.com
  <!-- User input devices -->
 
  <input>
-
-  <!-- included externally -->
-  <keyboard include="keyboard.xml"/>
-
-  <!-- included externally -->
+  <keyboard include="keyboard.xml">
+   <multikey include="Input/Keyboard/multikey.xml"/>
+  </keyboard>
   <joysticks include="joysticks.xml"/>
-
-  <!-- included externally -->
   <mice include="mice.xml"/>
-
  </input>
 
 

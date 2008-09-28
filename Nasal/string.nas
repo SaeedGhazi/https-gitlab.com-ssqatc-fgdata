@@ -282,9 +282,13 @@ var scanf = func(str, format) {
 			}
 
 			var numstr = "";
+			var plus = 0;
 			if (f == `d` or f == `f`) {				# int or float with optional minus
-				if (str.getc() == `-`)
-					numstr = "-";
+				var c = str.getc();
+				if (c == `+`)
+					plus = 1;
+				elsif (c == `-`)
+					numstr = chr(c);
 				else
 					str.ungetc();
 			}
@@ -304,6 +308,9 @@ var scanf = func(str, format) {
 				if (c != nil)
 					str.ungetc();
 			}
+
+			if (!size(numstr) and plus or numstr == "-")
+				return nil;
 
 			if (fnum != nil and size(numstr) > fnum)
 				for (var i = size(numstr) - fnum; i; i -= 1)

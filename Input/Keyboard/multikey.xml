@@ -1,0 +1,781 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<nasal>
+		<script>
+			<![CDATA[
+				var limitvalue = func(val, min, max) {
+					return (val > max) ? max : (val < min) ? min : val;
+				}
+
+				var adjustprop = func(path, offset, min = -1, max = 1) {
+					var val = getprop(path);
+					setprop(path, limitvalue(val + offset, min, max));
+				}
+			]]>
+		</script>
+	</nasal>
+
+	<!-- example of immediately exiting key -->
+	<key n="900">
+		<name>%d</name>
+		<desc>Execute nasal-console tab #%d</desc>
+		<exit/>
+		<binding>
+			<command>nasal</command>
+			<script>
+				fgcommand("nasal", props.Node.new({
+					module: "__nasal_console",
+					script: getprop("/sim/gui/dialogs/nasal-console/code[" ~ arg[0] ~ "]") or "",
+				}));
+			</script>
+		</binding>
+	</key>
+
+	<key n="58">
+		<name>:</name>
+		<desc>User command</desc>
+	</key>
+
+	<!-- environment -->
+	<key n="69">
+		<name>E</name>
+		<desc>Environment</desc>
+		<key n="69">
+			<name>w</name>
+			<desc>Weather</desc>
+			<key n="119">
+				<name>s</name>
+				<desc>Weather Scenario</desc>
+				<key n="115">
+					<name>f</name>
+					<desc>Weather Scenerio = Fair weather</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							setprop("/environment/weather-scenario", "Fair weather");
+							setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers")+1)
+						</script>
+					</binding>
+				</key>
+
+				<key n="109">
+					<name>m</name>
+					<desc>Weather Scenerio = METAR</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							setprop("/environment/weather-scenario", "METAR");
+							setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers")+1)
+						</script>
+					</binding>
+				</key>
+
+				<key n="110">
+					<name>n</name>
+					<desc>Weather Scenerio = none</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							setprop("/environment/weather-scenario", "none");
+							setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers")+1)
+						</script>
+					</binding>
+				</key>
+
+				<key n="116">
+					<name>t</name>
+					<desc>Weather Scenerio = Thunderstorm</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							setprop("/environment/weather-scenario", "Thunderstorm");
+							setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers")+1)
+						</script>
+					</binding>
+				</key>
+			</key>
+		</key>
+
+		<key n="116">
+			<name>t</name>
+			<desc>Time Settings</desc>
+			<!-- only Clock Time and noon are implemented -->
+			<key n="99">
+				<name>c</name>
+				<desc>Time = Clock Time</desc>
+				<binding>
+					<command>timeofday</command>
+					<timeofday>real</timeofday>
+				</binding>
+			</key>
+
+			<key n="110">
+				<name>n</name>
+				<desc>Time = noon</desc>
+				<binding>
+					<command>timeofday</command>
+					<timeofday>noon</timeofday>
+				</binding>
+			</key>
+		</key>
+	</key>
+
+	<!-- Autopilot multikey commands -->
+	<key n="97">
+		<name>a</name>
+		<desc>autopilot</desc>
+		<key n="104">
+			<name>h</name>
+			<desc>Heading Control</desc>
+			<key n="119">
+				<name>w</name>
+				<desc>Wing Level</desc>
+				<binding>
+					<command>nasal</command>
+					<script>setprop("/autopilot/locks/heading", "wing-leveler")</script>
+				</binding>
+			</key>
+
+			<key n="98">
+				<name>b</name>
+				<desc>Heading Bug</desc>
+				<key n="901">
+					<name>%f</name>
+					<desc>Heading Bug = %f degree</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							setprop("/autopilot/locks/heading", "dg-heading-hold");
+							setprop("/autopilot/settings/heading-bug-deg", arg[0])
+						</script>
+					</binding>
+				</key>
+			</key>
+
+			<key n="116">
+				<name>t</name>
+				<desc>True Heading</desc>
+				<key n="901">
+					<name>%f</name>
+					<desc>True Heading = %f degree</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							setprop("/autopilot/locks/heading", "true-heading-hold");
+							setprop("/autopilot/settings/true-heading-deg", arg[0])
+						</script>
+					</binding>
+				</key>
+			</key>
+
+			<key n="110">
+				<name>n</name>
+				<desc>Nav1 Hold</desc>
+				<binding>
+					<command>nasal</command>
+					<script>setprop("/autopilot/locks/heading", "nav1-hold")</script>
+				</binding>
+			</key>
+
+			<key n="47">
+				<name>&#47;</name> <!-- slash -->
+				<desc>Heading control disabled</desc>
+				<binding>
+					<command>property-assign</command>
+					<property>/autopilot/locks/heading</property>
+					<value></value>
+				</binding>
+			</key>
+		</key>
+
+		<key n="118">
+			<name>v</name>
+			<desc>Velocity control</desc>
+			<key n="116">
+				<name>t</name>
+				<desc>Speed with throttle</desc>
+				<key n="901">
+					<name>%f</name>
+					<desc>Speed with throttle = %.1f knots</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							setprop("/autopilot/settings/target-speed-kt", arg[0]);
+							setprop("/autopilot/locks/speed", "speed-with-throttle")
+						</script>
+					</binding>
+				</key>
+			</key>
+
+			<key n="112">
+				<name>p</name>
+				<desc>Speed with pitch</desc>
+				<key n="901">
+					<name>%f</name>
+					<desc>Speed with pitch = %.2f knots</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							setprop("/autopilot/settings/target-speed-kt", arg[0]);
+							setprop("/autopilot/locks/speed", "speed-with-pitch-trim")
+						</script>
+					</binding>
+				</key>
+			</key>
+
+			<key n="47">
+				<name>&#47;</name> <!-- slash -->
+				<desc>Velocity control disabled</desc>
+				<binding>
+					<command>property-assign</command>
+					<property>/autopilot/locks/speed</property>
+					<value></value>
+				</binding>
+			</key>
+		</key>
+
+		<key n="112">
+			<name>p</name>
+			<desc>Pitch/Altitude control</desc>
+			<key n="118">
+				<name>v</name>
+				<desc>Vertical Speed Hold</desc>
+				<key n="901">
+					<name>%f</name>
+					<desc>Vertical Speed = %f fpm</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							setprop("/autopilot/settings/vertical-speed-fpm", arg[0]);
+							setprop("/autopilot/locks/altitude", "vertical-speed-hold")
+						</script>
+					</binding>
+				</key>
+			</key>
+
+			<key n="112">
+				<name>p</name>
+				<desc>Pitch hold</desc>
+				<key n="901">
+					<name>%f</name>
+					<desc>Pitch angle = %f degree</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							setprop("/autopilot/settings/target-pitch-degree", arg[0]);
+							setprop("/autopilot/locks/altitude", "pitch-hold")
+						</script>
+					</binding>
+				</key>
+			</key>
+
+			<key n="111">
+				<name>o</name>
+				<desc>AoA hold</desc>
+				<key n="901">
+					<name>%f</name>
+					<desc>AoA angle = %f degree</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							setprop("/autopilot/settings/target-aoa-degree", arg[0]);
+							 setprop("/autopilot/locks/altitude", "aoa-hold")
+						</script>
+					</binding>
+				</key>
+			</key>
+
+			<key n="97">
+				<name>a</name>
+				<desc>Altitude hold</desc>
+				<key n="901">
+					<name>%f</name>
+					<desc>Target altitude = %f feet</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							setprop("/autopilot/settings/target-altitude-ft", arg[0]);
+							setprop("/autopilot/locks/altitude", "altitude-hold")
+						</script>
+					</binding>
+				</key>
+			</key>
+
+			<key n="103">
+				<name>g</name>
+				<desc>AGL hold</desc>
+				<key n="901">
+					<name>%f</name>
+					<desc>Target AGL = %f feet</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							setprop("/autopilot/settings/target-agl-ft", arg[0]);
+							setprop("/autopilot/locks/altitude", "agl-hold")
+						</script>
+					</binding>
+				</key>
+			</key>
+
+			<key n="110">
+				<name>n</name>
+				<desc>Nav1 glideslope</desc>
+				<binding>
+					<command>property-assign</command>
+					<property>/autopilot/locks/altitude</property>
+					<value>gs1-hold</value>
+				</binding>
+			</key>
+
+			<key n="47">
+				<name>&#47;</name> <!-- slash -->
+				<desc>Pitch/Altitude control disabled</desc>
+				<binding>
+					<command>property-assign</command>
+					<property>/autopilot/locks/altitude</property>
+					<value></value>
+				</binding>
+			</key>
+		</key>
+	</key>
+
+	<nasal>
+		<script>
+			<![CDATA[
+				var radio_fmt = "/instrumentation/%s[%d]/frequencies/%s-mhz";
+
+				var setfreq = func(type, index, which, value) {
+					index = (index >= 1) ? index - 1 : 0;
+					setprop(sprintf(radio_fmt, type, index, which), value);
+				}
+
+				var togglefreq = func(type, index) {
+					index = (index >= 1) ? index - 1 : 0;
+					var sel = sprintf(radio_fmt, type, index, "selected");
+					var stby = sprintf(radio_fmt, type, index, "standby");
+					var s = getprop(stby);
+					setprop(stby, getprop(sel));
+					setprop(sel, s);
+				}
+			]]>
+		</script>
+	</nasal>
+
+	<key n="114">
+		<name>r</name>
+		<desc>Radio</desc>
+
+		<key n="97">
+			<name>a</name>
+			<desc>Radio ADF</desc>
+			<key n="102">
+				<name>f</name>
+				<desc>Radio ADF frequency = ? kHz</desc>
+				<key n="900">
+					<name>%d</name>
+					<desc>Radio ADF frequency = %d kHz</desc>
+					<binding>
+						<command>nasal</command>
+						<script>setprop("/instrumentation/adf[0]/frequencies/selected-khz", arg[0])</script>
+					</binding>
+				</key>
+			</key>
+		</key>
+
+		<key n="99">
+			<name>c</name>
+			<desc>Radio COMM</desc>
+			<key n="900">
+				<name>%d</name>
+				<desc>Radio COMM%d</desc>
+				<key n="102">
+					<name>f</name>
+					<desc>Radio COMM%d frequency = ? MHz</desc>
+					<key n="37">
+						<name>%f</name>
+						<desc>Radio COMM%d frequency = %.3f MHz</desc>
+						<binding>
+							<command>nasal</command>
+							<script>setfreq("comm", arg[0], "selected", arg[1])</script>
+						</binding>
+					</key>
+				</key>
+
+				<key n="116">
+					<name>t</name>
+					<desc>Radio COMM%d toggle selected/standby</desc>
+					<binding>
+						<command>nasal</command>
+						<script>togglefreq("comm", arg[0])</script>
+					</binding>
+				</key>
+			</key>
+		</key>
+
+		<key n="110">
+			<name>n</name>
+			<desc>radio nav</desc>
+			<key n="900">
+				<name>%d</name>
+				<desc>radio nav%d</desc>
+				<key n="102">
+					<name>f</name>
+					<desc>radio nav%d frequency = ? MHz</desc>
+					<key n="901">
+						<name>%f</name>
+						<desc>radio nav%d frequency = %.3f MHz</desc>
+						<binding>
+							<command>nasal</command>
+							<script>setfreq("nav", arg[0], "selected", arg[1])</script>
+						</binding>
+					</key>
+				</key>
+
+				<key n="116">
+					<name>t</name>
+					<desc>radio nav%d toggle selected/standby</desc>
+					<binding>
+						<command>nasal</command>
+						<script>togglefreq("nav", arg[0]);
+						</script>
+					</binding>
+				</key>
+			</key>
+		</key>
+	</key>
+
+	<key n="101">
+		<name>e</name>
+		<desc>Engine</desc>
+		<key n="109">
+			<name>m</name>
+			<desc>Mixture (0.0 to 1.0)</desc>
+			<key n="901">
+				<name>%f</name>
+				<desc>Mixture = %.3f</desc>
+				<binding>
+					<command>nasal</command>
+					<script>
+						var engines = props.globals.getNode("/controls/engines").getChildren("engine");
+						foreach (var e; engines) {
+							var node = e.getNode("mixture");
+							node.setValue(arg[0]);
+						}
+					</script>
+				</binding>
+			</key>
+		</key>
+
+		<key n="112">
+			<name>p</name>
+			<desc>Propeller pitch (0.0 to 1.0)</desc>
+			<key n="901">
+				<name>%f</name>
+				<desc>Propeller pitch = %.3f</desc>
+				<binding>
+					<command>nasal</command>
+					<script>
+						var engines = props.globals.getNode("/controls/engines").getChildren("engine");
+						foreach (var e; engines) {
+							var node = e.getNode("propeller-pitch");
+							node.setValue(arg[0]);
+						}
+					</script>
+				</binding>
+			</key>
+		</key>
+
+		<key n="116">
+			<name>t</name>
+			<desc>Throttle (0.0 to 1.0)</desc>
+			<key n="901">
+				<name>%f</name>
+				<desc>Throttle = %.3f</desc>
+				<binding>
+					<command>nasal</command>
+					<script>
+						var engines = props.globals.getNode("/controls/engines").getChildren("engine");
+						foreach (var e; engines) {
+							var node = e.getNode("throttle");
+							node.setValue(arg[0]);
+						}
+					</script>
+				</binding>
+			</key>
+		</key>
+	</key>
+
+	<!-- Controls -->
+	<!-- Flight Controls -->
+	<key n="102">
+		<name>f</name>
+		<desc>Flight controls</desc>
+		<key n="97">
+			<name>a</name>
+			<desc>Aileron</desc>
+			<key n="901">
+				<name>%f</name>
+				<desc>Aileron adjustment: %.3f</desc>
+				<binding>
+					<command>nasal</command>
+					<script>adjustprop("/controls/flight/aileron", arg[0])</script>
+				</binding>
+			</key>
+
+			<key n="116">
+				<name>t</name>
+				<desc>Aileron trim</desc>
+				<binding>
+					<command>null</command>
+				</binding>
+
+				<key n="901">
+					<name>%f</name>
+					<desc>Aileron trim adjustment: %.3f</desc>
+					<binding>
+						<command>nasal</command>
+						<script>adjustprop("/controls/flight/aileron-trim", arg[0])</script>
+					</binding>
+				</key>
+
+				<key n="60">
+					<name>&lt;</name>
+					<desc>Aileron trim adjustment left</desc>
+					<no-exit/>
+					<binding>
+						<command>nasal</command>
+						<script>adjustprop("/controls/flight/aileron-trim", -0.001)</script>
+					</binding>
+				</key>
+
+				<key n="62">
+					<name>&gt;</name>
+					<desc>Aileron trim adjustment right</desc>
+					<no-exit/>
+					<binding>
+						<command>nasal</command>
+						<script>adjustprop("/controls/flight/aileron-trim", 0.001)</script>
+					</binding>
+				</key>
+			</key>
+		</key>
+
+		<key n="101">
+			<name>e</name>
+			<desc>Elevator</desc>
+			<key n="901">
+				<name>%f</name>
+				<desc>Elevator adjustment: %.3f</desc>
+				<binding>
+					<command>nasal</command>
+					<script>adjustprop("/controls/flight/elevator", arg[0])</script>
+				</binding>
+			</key>
+
+			<key n="116">
+				<name>t</name>
+				<desc>Elevator trim</desc>
+				<binding>
+					<command>null</command>
+				</binding>
+
+				<key n="901">
+					<name>%f</name>
+					<desc>Elevator trim adjustment: %.3f</desc>
+					<binding>
+						<command>nasal</command>
+						<script>adjustprop("/controls/flight/elevator-trim", arg[0])</script>
+					</binding>
+				</key>
+
+				<key n="94">
+					<name>^</name>
+					<desc>Elevator trim adjustment down</desc>
+					<no-exit/>
+					<binding>
+						<command>nasal</command>
+						<script>adjustprop("/controls/flight/elevator-trim", 0.001)</script>
+					</binding>
+				</key>
+
+				<key n="95">
+					<name>_</name>
+					<desc>Elevator trim adjustment up</desc>
+					<no-exit/>
+					<binding>
+						<command>nasal</command>
+						<script>adjustprop("/controls/flight/elevator-trim", -0.001)</script>
+					</binding>
+				</key>
+			</key>
+		</key>
+
+		<key n="114">
+			<name>r</name>
+			<desc>Rudder</desc>
+			<key n="901">
+				<name>%f</name>
+				<desc>Rudder adjustment: %.3f</desc>
+				<binding>
+					<command>nasal</command>
+					<script>adjustprop("/controls/flight/rudder", arg[0])</script>
+				</binding>
+			</key>
+
+<!-- Do we need absolute control position settings?
+			<key n="61">
+				<name>&#61;</name>
+				<key n="37">
+					<name>%f</name>
+					<desc>Rudder = %.3f</desc>
+					<binding>
+						<command>nasal</command>
+						<script>setprop("/controls/flight/rudder-trim", arg[0])</script>
+					</binding>
+				</key>
+			</key>
+-->
+			<key n="116">
+				<name>t</name>
+				<desc>Rudder trim</desc>
+				<binding>
+					<command>null</command>
+				</binding>
+
+				<key n="901">
+					<name>%f</name>
+					<desc>Rudder trim adjustment: %.3f</desc>
+					<binding>
+						<command>nasal</command>
+						<script>adjustprop("/controls/flight/rudder-trim", arg[0])</script>
+					</binding>
+				</key>
+
+				<key n="60">
+					<name>&lt;</name>
+					<desc>Rudder trim adjustment left</desc>
+					<no-exit/>
+					<binding>
+						<command>nasal</command>
+						<script>adjustprop("/controls/flight/rudder-trim", -0.001)</script>
+					</binding>
+				</key>
+
+				<key n="62">
+					<name>&gt;</name>
+					<desc>Rudder trim adjustment right</desc>
+					<no-exit/>
+					<binding>
+						<command>nasal</command>
+						<script>adjustprop("/controls/flight/rudder-trim", 0.001)</script>
+					</binding>
+				</key>
+			</key>
+		</key>
+
+		<key n="105">
+			<name>i</name> <!-- FIXME: for good name -->
+			<desc>Initialize</desc>
+			<key n="97">
+				<name>a</name>
+				<desc>Initialize all trims</desc>
+				<binding>
+					<command>nasal</command>
+					<script>
+						setprop("/controls/flight/airelon-trim", 0);
+						setprop("/controls/flight/elevator-trim", 0);
+						setprop("/controls/flight/rudder-trim", 0)
+					</script>
+				</binding>
+			</key>
+		</key>
+
+		<key n="119">
+			<name>w</name>
+			<desc>Wing</desc>
+			<key n="102">
+				<name>f</name>
+				<desc>Toggle wing fold</desc>
+				<binding>
+					<command>property-toggle</command>
+					<property>/controls/flight/wing-fold</property>
+				</binding>
+			</key>
+
+			<key n="119">
+				<name>w</name>
+				<desc>Wing sweep</desc>
+				<key n="901">
+					<name>%f</name>
+					<desc>Wing sweep = %.3f</desc>
+					<binding>
+						<command>nasal</command>
+						<script>setprop("/controls/flight/wing-sweep", arg[0])</script>
+					</binding>
+				</key>
+			</key>
+		</key>
+	</key>
+
+	<key n="113">
+		<name>q</name>
+		<desc>Quit</desc>
+		<key n="33">
+			<name>!</name>
+			<desc>Quit without saving</desc>
+			<binding>
+				<command>exit</command>
+			</binding>
+		</key>
+	</key>
+
+	<!-- example of non-exiting keys (here cursor keys) -->
+	<key n="118">
+		<name>v</name>
+		<desc>view direction (use cursor keys)</desc>
+		<binding>
+			<command>null</command> <!-- to allow exiting via return key -->
+		</binding>
+
+		<key n="60">
+			<name>&lt;</name>
+			<desc>left</desc>
+			<no-exit/>
+			<binding>
+				<command>nasal</command>
+				<script>var h = "/sim/current-view/goal-heading-offset-deg"; setprop(h, getprop(h) + 1)</script>
+			</binding>
+		</key>
+
+		<key n="62">
+			<name>&gt;</name>
+			<desc>right</desc>
+			<no-exit/>
+			<binding>
+				<command>nasal</command>
+				<script>var h = "/sim/current-view/goal-heading-offset-deg"; setprop(h, getprop(h) - 1)</script>
+			</binding>
+		</key>
+
+		<key n="94">
+			<name>^</name>
+			<desc>up</desc>
+			<no-exit/>
+			<binding>
+				<command>nasal</command>
+				<script>var h = "/sim/current-view/goal-pitch-offset-deg"; setprop(h, getprop(h) + 1)</script>
+			</binding>
+		</key>
+
+		<key n="95">
+			<name>_</name>
+			<desc>down</desc>
+			<no-exit/>
+			<binding>
+				<command>nasal</command>
+				<script>var h = "/sim/current-view/goal-pitch-offset-deg"; setprop(h, getprop(h) - 1)</script>
+			</binding>
+		</key>
+	</key>
+</PropertyList>

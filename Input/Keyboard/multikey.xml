@@ -16,21 +16,6 @@
 		</script>
 	</nasal>
 
-	<key n="900">
-		<name>%d</name>
-		<desc>Execute nasal-console tab #%d</desc>
-		<exit/>
-		<binding>
-			<command>nasal</command>
-			<script>
-				fgcommand("nasal", props.Node.new({
-					module: "__nasal_console",
-					script: getprop("/sim/gui/dialogs/nasal-console/code[" ~ arg[0] ~ "]") or "",
-				}));
-			</script>
-		</binding>
-	</key>
-
 	<key n="58">
 		<name>:</name>
 		<desc>User command</desc>
@@ -354,7 +339,8 @@
 						var engines = props.globals.getNode("/controls/engines").getChildren("engine");
 						foreach (var e; engines) {
 							var node = e.getNode("mixture");
-							node.setValue(arg[0]);
+							if (node != nil)
+								node.setValue(arg[0]);
 						}
 					</script>
 				</binding>
@@ -373,7 +359,8 @@
 						var engines = props.globals.getNode("/controls/engines").getChildren("engine");
 						foreach (var e; engines) {
 							var node = e.getNode("propeller-pitch");
-							node.setValue(arg[0]);
+							if (node != nil)
+								node.setValue(arg[0]);
 						}
 					</script>
 				</binding>
@@ -392,10 +379,54 @@
 						var engines = props.globals.getNode("/controls/engines").getChildren("engine");
 						foreach (var e; engines) {
 							var node = e.getNode("throttle");
-							node.setValue(arg[0]);
+							if (node != nil)
+								node.setValue(arg[0]);
 						}
 					</script>
 				</binding>
+			</key>
+		</key>
+
+		<key n="900">
+			<name>%d</name>
+			<desc>Engine #%d</desc>
+			<key n="109">
+				<name>m</name>
+				<desc>Mixture (0.0 to 1.0)</desc>
+				<key n="901">
+					<name>%f</name>
+					<desc>Mixture = %.3f</desc>
+					<binding>
+						<command>nasal</command>
+						<script>setprop("/controls/engines/engine[" ~ arg[0] ~ "]/mixture", arg[1])</script>
+					</binding>
+				</key>
+			</key>
+
+			<key n="112">
+				<name>p</name>
+				<desc>Propeller pitch (0.0 to 1.0)</desc>
+				<key n="901">
+					<name>%f</name>
+					<desc>Propeller pitch = %.3f</desc>
+					<binding>
+						<command>nasal</command>
+						<script>setprop("/controls/engines/engine[" ~ arg[0] ~ "]/propeller-pitch", arg[1])</script>
+					</binding>
+				</key>
+			</key>
+
+			<key n="116">
+				<name>t</name>
+				<desc>Throttle (0.0 to 1.0)</desc>
+				<key n="901">
+					<name>%f</name>
+					<desc>Throttle = %.3f</desc>
+					<binding>
+						<command>nasal</command>
+						<script>setprop("/controls/engines/engine[" ~ arg[0] ~ "]/throttle", arg[1])</script>
+					</binding>
+				</key>
 			</key>
 		</key>
 	</key>
@@ -776,5 +807,20 @@
 				<script>var h = "/sim/current-view/goal-pitch-offset-deg"; setprop(h, desc = getprop(h) - 1)</script>
 			</binding>
 		</key>
+	</key>
+
+	<key n="900">
+		<name>%d</name>
+		<desc>Execute nasal-console tab #%d</desc>
+		<exit/>
+		<binding>
+			<command>nasal</command>
+			<script>
+				fgcommand("nasal", props.Node.new({
+					module: "__nasal_console",
+					script: getprop("/sim/gui/dialogs/nasal-console/code[" ~ arg[0] ~ "]") or "",
+				}));
+			</script>
+		</binding>
 	</key>
 </PropertyList>

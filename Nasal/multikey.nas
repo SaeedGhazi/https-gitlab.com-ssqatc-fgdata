@@ -9,8 +9,8 @@ var start = func {
 	listener = setlistener("/devices/status/keyboard/event", func(event) {
 		var key = event.getNode("key");
 		if (!event.getNode("pressed").getValue()) {
-			if (key.getValue() == 59)	# FIXME hack around kbd bug
-				key.setValue(58);
+			if (key.getValue() == `;`)	# FIXME hack around kbd bug
+				key.setValue(`:`);
 			return;
 		}
 		if (handle_key(key.getValue()))
@@ -90,7 +90,7 @@ var popup = func(cmd, title = nil) {
 
 
 var init = func {
-	globals["__multikey"] = { desc: };
+	globals["__multikey"] = { _: };
 	var tree = props.globals.getNode("/input/keyboard/multikey", 1);
 
 	foreach (var n; tree.getChildren("nasal")) {
@@ -100,7 +100,7 @@ var init = func {
 
 	var add = func(node, label) {
 		var name = node.getNode("name", 1).getValue();
-		if (name == nil)	# 'or ""' doesn't work here, as '-' is false
+		if (name == nil)  # 'or ""' doesn't work here, as we don't want to drop '0'
 			name = "";
 		foreach (var key; node.getChildren("key"))
 			add(key, label ~ name);
@@ -115,4 +115,5 @@ var init = func {
 
 
 _setlistener("/sim/signals/nasal-dir-initialized", init);
+
 

@@ -43,7 +43,7 @@ var handle_key = func(key) {
 		cmd ~= chr(key);
 	}
 
-	var desc = __multikey.desc = nil;
+	var desc = __multikey._ = nil;
 	var bindings = [];
 	if (size(cmd)) {
 		foreach (var e; data) {
@@ -70,7 +70,7 @@ var handle_key = func(key) {
 			stop();
 	}
 	if (mode < 2)
-		popup(cmd, __multikey.desc or desc);
+		popup(cmd, __multikey._ or desc);
 	return 1;
 }
 

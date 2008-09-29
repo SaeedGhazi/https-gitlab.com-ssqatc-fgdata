@@ -344,7 +344,7 @@ var _cond_cmp = func(p, op) {
 #
 var runBinding = func(node, module = nil) {
     if(module != nil and node.getNode("module") == nil)
-       node.getNode("module", 1).setValue(module);
+        node.getNode("module", 1).setValue(module);
     var cmd = node.getNode("command", 1).getValue() or "null";
     condition(node.getNode("condition")) ? fgcommand(cmd, node) : 0;
 }

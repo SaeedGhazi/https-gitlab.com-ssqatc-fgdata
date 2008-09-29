@@ -221,7 +221,7 @@ var light = {
 		m.seqcount = -1;
 		m.endstate = 0;
 		m.count = nil;
-		m.switchL = setlistener(m.switchN, func { m._switch_() }, 1);
+		m.switchL = setlistener(m.switchN, func m._switch_(), 1);
 		return m;
 	},
 	# class destructor
@@ -283,7 +283,7 @@ var light = {
 			return;
 		}
 		me.stateN.setBoolValue(me.index == 2 * int(me.index / 2));
-		settimer(func { me._loop_(id) }, me.pattern[me.index]);
+		settimer(func me._loop_(id), me.pattern[me.index]);
 		if ((me.index += 1) >= size(me.pattern)) {
 			me.index = 0;
 			if (me.count > 0)
@@ -408,7 +408,7 @@ var data = {
 		me.interval = 0;
 
 		setlistener("/sim/signals/reinit", func(n) { n.getBoolValue() and me._save_() });
-		setlistener("/sim/signals/exit", func { me._save_() });
+		setlistener("/sim/signals/exit", func me._save_());
 	},
 	load : func {
 		if (io.stat(me.path) != nil) {
@@ -428,7 +428,7 @@ var data = {
 	_loop_ : func(id) {
 		id == me.loopid or return;
 		me._save_();
-		settimer(func { me._loop_(id) }, me.interval);
+		settimer(func me._loop_(id), me.interval);
 	},
 	_save_ : func {
 		size(me.catalog) or return;
@@ -486,7 +486,7 @@ var timer = {
 		m.running = 0;
 		if (save) {
 			data.add(m.node);
-			m.saveL = setlistener("/sim/signals/save", func { m._save_() });
+			m.saveL = setlistener("/sim/signals/save", func m._save_());
 		} else {
 			m.saveL = nil;
 		}
@@ -527,7 +527,7 @@ var timer = {
 	_loop_ : func(id) {
 		id != me.loopid and return;
 		me._apply_();
-		settimer(func { me._loop_(id) }, me.interval);
+		settimer(func me._loop_(id), me.interval);
 	},
 };
 
@@ -670,7 +670,7 @@ var livery_update = {
 			if (me.callback != nil)
 				me.callback(file);
 		}
-		settimer(func { me._loop_() }, me.interval);
+		settimer(func me._loop_(), me.interval);
 	},
 };
 
@@ -809,7 +809,7 @@ var steering = {
 		else
 			me.setbrakes(1, 1);
 
-		settimer(func { me._loop_(id) }, 0);
+		settimer(func me._loop_(id), 0);
 	},
 	setbrakes : func(left, right) {
 		me.leftN.setDoubleValue(left);
@@ -863,7 +863,7 @@ var autotrim = {
 	_loop_ : func(id) {
 		id == me.loopid or return;
 		me.update();
-		settimer(func { me._loop_(id) }, 0);
+		settimer(func me._loop_(id), 0);
 	},
 	update : func {
 		me.elevator.update();
@@ -967,8 +967,8 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 				if (c.getType() != "NONE")
 					data.add(c.getValue());
 	} else {
-		data._save_ = func {}
-		data._loop_ = func {}
+		data._save_ = func nil;
+		data._loop_ = func nil;
 	}
 });
 

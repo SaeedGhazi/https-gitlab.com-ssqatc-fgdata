@@ -8,9 +8,13 @@
 	- <Return>/<Enter> executes and terminates the command mode, given that
 	  <binding>s exist (use "null" if there's nothing else to do) and <no-exit/>
 	  isn't defined.
-	- Keys with defined <exit/> property execute their bindings immediately.
+	- Keys with defined <exit/> property execute their bindings immediately,
+	  that is: without having to press <Return>/<Enter>.
 	- Format placeholder values are available to Nasal code via arg[].
 	- Nasal code can set the dialog title by assignment to the _ variable.
+	- <key> indices aren't used by the system, but are recommended to allow
+	  reliable overwriting by aircraft or user xml files.
+	- Cursor keys are equivalent to characters <, >, ^, _.
 -->
 
 <PropertyList>
@@ -279,7 +283,7 @@
 						<command>nasal</command>
 						<script>
 							setprop("/autopilot/settings/target-aoa-degree", arg[0]);
-							 setprop("/autopilot/locks/altitude", "aoa-hold");
+							setprop("/autopilot/locks/altitude", "aoa-hold");
 						</script>
 					</binding>
 				</key>
@@ -333,7 +337,7 @@
 				<binding>
 					<command>property-assign</command>
 					<property>/autopilot/locks/altitude</property>
-					<value></value>
+					<value/>
 				</binding>
 			</key>
 		</key>
@@ -788,7 +792,10 @@
 			<no-exit/>
 			<binding>
 				<command>nasal</command>
-				<script>var h = "/sim/current-view/goal-heading-offset-deg"; setprop(h, _ = getprop(h) + 1)</script>
+				<script>
+					var h = "/sim/current-view/goal-heading-offset-deg";
+					setprop(h, _ = getprop(h) + 1);
+				</script>
 			</binding>
 		</key>
 
@@ -798,7 +805,10 @@
 			<no-exit/>
 			<binding>
 				<command>nasal</command>
-				<script>var h = "/sim/current-view/goal-heading-offset-deg"; setprop(h, _ = getprop(h) - 1)</script>
+				<script>
+					var h = "/sim/current-view/goal-heading-offset-deg";
+					setprop(h, _ = getprop(h) - 1);
+				</script>
 			</binding>
 		</key>
 
@@ -808,7 +818,10 @@
 			<no-exit/>
 			<binding>
 				<command>nasal</command>
-				<script>var h = "/sim/current-view/goal-pitch-offset-deg"; setprop(h, _ = getprop(h) + 1)</script>
+				<script>
+					var h = "/sim/current-view/goal-pitch-offset-deg";
+					setprop(h, _ = getprop(h) + 1);
+				</script>
 			</binding>
 		</key>
 
@@ -818,7 +831,10 @@
 			<no-exit/>
 			<binding>
 				<command>nasal</command>
-				<script>var h = "/sim/current-view/goal-pitch-offset-deg"; setprop(h, _ = getprop(h) - 1)</script>
+				<script>
+					var h = "/sim/current-view/goal-pitch-offset-deg";
+					setprop(h, _ = getprop(h) - 1);
+				</script>
 			</binding>
 		</key>
 	</key>

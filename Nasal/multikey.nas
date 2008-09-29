@@ -7,9 +7,12 @@ var translate = { 356: '<', 357: '^', 358: '>', 359: '_' };
 var start = func {
 	popup(cmd = "");
 	listener = setlistener("/devices/status/keyboard/event", func(event) {
-		if (!event.getNode("pressed").getValue())
-			return;
 		var key = event.getNode("key");
+		if (!event.getNode("pressed").getValue()) {
+			if (key.getValue() == 59)	# FIXME hack around kbd bug
+				key.setValue(58);
+			return;
+		}
 		if (handle_key(key.getValue()))
 			key.setValue(-1);
 	});
@@ -17,9 +20,9 @@ var start = func {
 
 
 var stop = func {
+	gui.popdown();
 	removelistener(listener);
 	listener = nil;
-	gui.popdown();
 }
 
 

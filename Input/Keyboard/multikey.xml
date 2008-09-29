@@ -1,5 +1,18 @@
 <?xml version="1.0"?>
 
+<!--
+	This file defines vi-like key sequences which are started with the ':'-key.
+	It's evaluated by $FG_ROOT/Nasal/multikey.nas.
+
+	- <Esc> always aborts.
+	- <Return>/<Enter> executes and terminates the command mode, given that
+	  <binding>s exist (use "null" if there's nothing else to do) and <no-exit/>
+	  isn't defined.
+	- Keys with defined <exit/> property execute their bindings immediately.
+	- Format placeholder values are available to Nasal code via arg[].
+	- Nasal code can set the dialog title by assignment to the _ variable.
+-->
+
 <PropertyList>
 	<nasal>
 		<script>
@@ -20,6 +33,7 @@
 	<key n="58">
 		<name>:</name>
 		<desc>User command</desc>
+		<!-- reserved for user extensions -->
 	</key>
 
 	<!-- environment -->

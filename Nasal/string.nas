@@ -232,12 +232,13 @@ replace = func(str, old, new) {
 
 
 ##
-# Simple scanf function. Takes an input string and a pattern
-# and returns a vector containing success value and found elements.
+# Simple scanf function. Takes an input string, a pattern, and a
+# vector. It returns 0 if the format didn't match, and appends
+# all found elements to the given vector.
 #
-#   var r = string.scanf("comm3freq123.456", "comm%dfreq%f");
+#   var r = string.scanf("comm3freq123.456", "comm%ufreq%f", var result = []);
 #
-# The resulting vector is [1, 3, 123.456].
+# The result vector will be set to [3, 123.456].
 #
 var Scan = {
 	new : func(s) {{ str: s, pos: 0, parents: [Scan] }},
@@ -253,12 +254,12 @@ var Scan = {
 };
 
 
-var scanf = func(str, format) {
+var scanf = func(test, format, result) {
 	if (find("%", format) < 0)
-		return cmp(str, format) ? nil : [2];
+		return cmp(test, format) ? 0 : 2;
 
-	var result = [0];
-	var str = Scan.new(str);
+	var success = 0;
+	var str = Scan.new(test);
 	var format = Scan.new(format);
 
 	while (1) {
@@ -267,12 +268,12 @@ var scanf = func(str, format) {
 			break;
 
 		} elsif (f == `%`) {
-			result[0] = 1;		# unsafe match
+			success = 1;		# unsafe match
 			f = format.getc();
 			if (f == nil)
-				die("trailing %");
+				die("scanf: trailing % in format");
 			if (f == `%` and str.getc() != `%`)
-				return nil;
+				return 0;
 
 			if (isdigit(f)) {
 				var fnum = f - `0`;
@@ -291,7 +292,7 @@ var scanf = func(str, format) {
 					prefix = 1;
 				} elsif (c == `-`) {
 					if (f == `u`)
-						return nil;
+						return 0;
 					(prefix, sign) = (1, -1);
 				} else {
 					str.ungetc();
@@ -302,7 +303,7 @@ var scanf = func(str, format) {
 				while ((var c = str.getc()) != nil and (fnum -= 1)) {
 					if (f != `f` and c == `.`)
 						break;
-					elsif (num(numstr ~ chr(c) ~ '0') != nil)
+					elsif (num(numstr ~ chr(c) ~ '0') != nil) # append 0 to digest e/E
 						numstr ~= chr(c);
 					else
 						break;
@@ -310,23 +311,30 @@ var scanf = func(str, format) {
 				if (c != nil)
 					str.ungetc();
 				if (num(numstr) == nil)
-					return nil;
+					return 0;
 			} else {
-				die("scanf: bad format %" ~ chr(f));
+				die("scanf: bad format element %" ~ chr(f));
 			}
 
 			if (!size(numstr) and prefix)
-				return nil;
+				return 0;
 
 			append(result, sign * num(numstr));
 
+		} elsif (isspace(f)) {
+			while ((var c = str.getc()) != nil and isspace(c))
+				nil;
+			if (c != nil)
+				str.ungetc();
+
 		} elsif (f != (var c = str.getc())) {
-			return nil;
+			return 0;
+
 		} else {
-			result[0] = 2;		# safe match
+			sucess = 2;		# safe match
 		}
 	}
-	return str.getc() == nil and format.getc() == nil ? result : nil;
+	return str.getc() == nil and format.getc() == nil ? success : 0;
 }
 
 

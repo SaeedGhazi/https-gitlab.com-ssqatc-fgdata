@@ -1,7 +1,7 @@
 var listener = nil;
 var cmd = nil;
 var data = nil;
-var trans = { 356: '<', 357: '^', 358: '>', 359: '_' };
+var translate = { 356: '<', 357: '^', 358: '>', 359: '_' };
 
 
 var start = func {
@@ -18,6 +18,7 @@ var start = func {
 
 var stop = func {
 	removelistener(listener);
+	listener = nil;
 	gui.popdown();
 }
 
@@ -31,8 +32,8 @@ var handle_key = func(key) {
 		cmd = substr(cmd, 0, size(cmd) - 1);
 	} elsif (key == `\n` or key == `\r`) {
 		mode = 2;
-	} elsif (contains(trans, key)) {
-		cmd ~= trans[key];
+	} elsif (contains(translate, key)) {
+		cmd ~= translate[key];
 	} elsif (!string.isprint(key)) {
 		return 0;
 	} else {
@@ -43,10 +44,10 @@ var handle_key = func(key) {
 	var bindings = [];
 	if (size(cmd)) {
 		foreach (var e; data) {
-			var r = string.scanf(cmd, e[0]);
-			if (r != nil and r[0]) {
-				__multikey.arg = size(r) > 1 ? subvec(r, 1) : [];
-				desc = call(sprintf, [e[1].getNode("desc", 1).getValue() or ""] ~ __multikey.arg);
+			var match = string.scanf(cmd, e[0], __multikey.arg = []);
+			if (match) {
+				desc = e[1].getNode("desc", 1).getValue() or "";
+				desc = call(sprintf, [desc] ~ __multikey.arg);
 				bindings = e[1].getChildren("binding");
 				if (e[1].getNode("no-exit") != nil) {
 					cmd = substr(cmd, 0, size(cmd) - 1);

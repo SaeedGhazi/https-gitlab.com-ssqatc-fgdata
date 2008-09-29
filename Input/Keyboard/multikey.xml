@@ -9,8 +9,9 @@
 				}
 
 				var adjustprop = func(path, offset, min = -1, max = 1) {
-					var val = getprop(path);
-					setprop(path, clamp(val + offset, min, max));
+					var val = getprop(path) + offset;
+					setprop(path, clamp(val, min, max));
+					return val;
 				}
 			]]>
 		</script>
@@ -126,7 +127,7 @@
 				<desc>Heading Bug</desc>
 				<key n="901">
 					<name>%f</name>
-					<desc>Heading Bug = %f degree</desc>
+					<desc>Heading Bug = %.3f degree</desc>
 					<binding>
 						<command>nasal</command>
 						<script>
@@ -142,7 +143,7 @@
 				<desc>True Heading</desc>
 				<key n="901">
 					<name>%f</name>
-					<desc>True Heading = %f degree</desc>
+					<desc>True Heading = %.3f degree</desc>
 					<binding>
 						<command>nasal</command>
 						<script>
@@ -164,7 +165,7 @@
 
 			<key n="47">
 				<name>/</name>
-				<desc>Heading control disabled</desc>
+				<desc>Heading control: disable</desc>
 				<binding>
 					<command>property-assign</command>
 					<property>/autopilot/locks/heading</property>
@@ -210,7 +211,7 @@
 
 			<key n="47">
 				<name>/</name>
-				<desc>Velocity control disabled</desc>
+				<desc>Velocity control: disable</desc>
 				<binding>
 					<command>property-assign</command>
 					<property>/autopilot/locks/speed</property>
@@ -227,7 +228,7 @@
 				<desc>Vertical Speed Hold</desc>
 				<key n="901">
 					<name>%f</name>
-					<desc>Vertical Speed = %f fpm</desc>
+					<desc>Vertical Speed = %.2f fpm</desc>
 					<binding>
 						<command>nasal</command>
 						<script>
@@ -243,7 +244,7 @@
 				<desc>Pitch hold</desc>
 				<key n="901">
 					<name>%f</name>
-					<desc>Pitch angle = %f degree</desc>
+					<desc>Pitch angle = %.1f degree</desc>
 					<binding>
 						<command>nasal</command>
 						<script>
@@ -259,7 +260,7 @@
 				<desc>AoA hold</desc>
 				<key n="901">
 					<name>%f</name>
-					<desc>AoA angle = %f degree</desc>
+					<desc>AoA angle = %.1f degree</desc>
 					<binding>
 						<command>nasal</command>
 						<script>
@@ -275,7 +276,7 @@
 				<desc>Altitude hold</desc>
 				<key n="901">
 					<name>%f</name>
-					<desc>Target altitude = %f feet</desc>
+					<desc>Target altitude = %.2f feet</desc>
 					<binding>
 						<command>nasal</command>
 						<script>
@@ -291,7 +292,7 @@
 				<desc>AGL hold</desc>
 				<key n="901">
 					<name>%f</name>
-					<desc>Target AGL = %f feet</desc>
+					<desc>Target AGL = %.1f feet</desc>
 					<binding>
 						<command>nasal</command>
 						<script>
@@ -314,7 +315,7 @@
 
 			<key n="47">
 				<name>/</name>
-				<desc>Pitch/Altitude control disabled</desc>
+				<desc>Pitch/Altitude control: disable</desc>
 				<binding>
 					<command>property-assign</command>
 					<property>/autopilot/locks/altitude</property>
@@ -470,7 +471,7 @@
 					<no-exit/>
 					<binding>
 						<command>nasal</command>
-						<script>adjustprop("/controls/flight/aileron-trim", -0.001)</script>
+						<script>_ = sprintf("Aileron trim = %.3f", adjustprop("/controls/flight/aileron-trim", -0.001))</script>
 					</binding>
 				</key>
 
@@ -480,7 +481,7 @@
 					<no-exit/>
 					<binding>
 						<command>nasal</command>
-						<script>adjustprop("/controls/flight/aileron-trim", 0.001)</script>
+						<script>_ = sprintf("Aileron trim = %.3f", adjustprop("/controls/flight/aileron-trim", 0.001))</script>
 					</binding>
 				</key>
 			</key>
@@ -520,7 +521,7 @@
 					<no-exit/>
 					<binding>
 						<command>nasal</command>
-						<script>adjustprop("/controls/flight/elevator-trim", 0.001)</script>
+						<script>_ = sprintf("Elevator trim = %.3f", adjustprop("/controls/flight/elevator-trim", 0.001))</script>
 					</binding>
 				</key>
 
@@ -530,7 +531,7 @@
 					<no-exit/>
 					<binding>
 						<command>nasal</command>
-						<script>adjustprop("/controls/flight/elevator-trim", -0.001)</script>
+						<script>_ = sprintf("Elevator trim = %.3f", adjustprop("/controls/flight/elevator-trim", -0.001))</script>
 					</binding>
 				</key>
 			</key>
@@ -583,7 +584,7 @@
 					<no-exit/>
 					<binding>
 						<command>nasal</command>
-						<script>adjustprop("/controls/flight/rudder-trim", -0.001)</script>
+						<script>_ = sprintf("Rudder trim = %.3f", adjustprop("/controls/flight/rudder-trim", -0.001))</script>
 					</binding>
 				</key>
 
@@ -593,7 +594,7 @@
 					<no-exit/>
 					<binding>
 						<command>nasal</command>
-						<script>adjustprop("/controls/flight/rudder-trim", 0.001)</script>
+						<script>_ = sprintf("Rudder trim = %.3f", adjustprop("/controls/flight/rudder-trim", 0.001))</script>
 					</binding>
 				</key>
 			</key>
@@ -700,16 +701,16 @@
 
 		<key n="99">
 			<name>c</name>
-			<desc>Radio COMM</desc>
+			<desc>Radio Comm</desc>
 			<key n="900">
 				<name>%d</name>
-				<desc>Radio COMM%d</desc>
+				<desc>Radio Comm%d</desc>
 				<key n="102">
 					<name>f</name>
-					<desc>Radio COMM%d frequency = ? MHz</desc>
+					<desc>Radio Comm%d frequency = ? MHz</desc>
 					<key n="37">
 						<name>%f</name>
-						<desc>Radio COMM%d frequency = %.3f MHz</desc>
+						<desc>Radio Comm%d frequency = %.3f MHz</desc>
 						<binding>
 							<command>nasal</command>
 							<script>setfreq("comm", arg[0], "selected", arg[1])</script>
@@ -719,7 +720,7 @@
 
 				<key n="116">
 					<name>t</name>
-					<desc>Radio COMM%d toggle selected/standby</desc>
+					<desc>Radio Comm%d toggle selected/standby</desc>
 					<binding>
 						<command>nasal</command>
 						<script>togglefreq("comm", arg[0])</script>
@@ -730,16 +731,16 @@
 
 		<key n="110">
 			<name>n</name>
-			<desc>radio nav</desc>
+			<desc>Radio Nav</desc>
 			<key n="900">
 				<name>%d</name>
-				<desc>radio nav%d</desc>
+				<desc>Radio Nav%d</desc>
 				<key n="102">
 					<name>f</name>
-					<desc>radio nav%d frequency = ? MHz</desc>
+					<desc>Radio Nav%d frequency = ? MHz</desc>
 					<key n="901">
 						<name>%f</name>
-						<desc>radio nav%d frequency = %.3f MHz</desc>
+						<desc>Radio Nav%d frequency = %.3f MHz</desc>
 						<binding>
 							<command>nasal</command>
 							<script>setfreq("nav", arg[0], "selected", arg[1])</script>
@@ -749,11 +750,10 @@
 
 				<key n="116">
 					<name>t</name>
-					<desc>radio nav%d toggle selected/standby</desc>
+					<desc>Radio Nav%d toggle selected/standby</desc>
 					<binding>
 						<command>nasal</command>
-						<script>togglefreq("nav", arg[0]);
-						</script>
+						<script>togglefreq("nav", arg[0])</script>
 					</binding>
 				</key>
 			</key>
@@ -774,7 +774,7 @@
 			<no-exit/>
 			<binding>
 				<command>nasal</command>
-				<script>var h = "/sim/current-view/goal-heading-offset-deg"; setprop(h, desc = getprop(h) + 1)</script>
+				<script>var h = "/sim/current-view/goal-heading-offset-deg"; setprop(h, _ = getprop(h) + 1)</script>
 			</binding>
 		</key>
 
@@ -784,7 +784,7 @@
 			<no-exit/>
 			<binding>
 				<command>nasal</command>
-				<script>var h = "/sim/current-view/goal-heading-offset-deg"; setprop(h, desc = getprop(h) - 1)</script>
+				<script>var h = "/sim/current-view/goal-heading-offset-deg"; setprop(h, _ = getprop(h) - 1)</script>
 			</binding>
 		</key>
 
@@ -794,7 +794,7 @@
 			<no-exit/>
 			<binding>
 				<command>nasal</command>
-				<script>var h = "/sim/current-view/goal-pitch-offset-deg"; setprop(h, desc = getprop(h) + 1)</script>
+				<script>var h = "/sim/current-view/goal-pitch-offset-deg"; setprop(h, _ = getprop(h) + 1)</script>
 			</binding>
 		</key>
 
@@ -804,7 +804,7 @@
 			<no-exit/>
 			<binding>
 				<command>nasal</command>
-				<script>var h = "/sim/current-view/goal-pitch-offset-deg"; setprop(h, desc = getprop(h) - 1)</script>
+				<script>var h = "/sim/current-view/goal-pitch-offset-deg"; setprop(h, _ = getprop(h) - 1)</script>
 			</binding>
 		</key>
 	</key>

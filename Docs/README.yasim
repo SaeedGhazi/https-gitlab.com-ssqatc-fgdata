@@ -462,6 +462,8 @@ control-input:
                   INCIDENCE - The incidence angle of a wing.
                   FLAP0 - The flap0 deflection of a wing.
                   FLAP1 - The flap1 deflection of a wing.
+                  FLAP[0/1]EFFECTIVENESS - a multiplier for flap lift, but not drag 
+                                           (useful for blown flaps
                   SLAT - The slat extension of a wing.
                   SPOILER - The spoiler extension for a wing.
                   CYCLICAIL - The "aileron" cyclic input of a rotor

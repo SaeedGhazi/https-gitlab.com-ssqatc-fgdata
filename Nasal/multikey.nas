@@ -9,7 +9,7 @@ var start = func {
 	listener = setlistener("/devices/status/keyboard/event", func(event) {
 		var key = event.getNode("key");
 		if (!event.getNode("pressed").getValue()) {
-			if (key.getValue() == `;`)	# FIXME hack around kbd bug
+			if (cmd == "" and key.getValue() == `;`)  # FIXME hack around kbd bug
 				key.setValue(`:`);
 			return;
 		}

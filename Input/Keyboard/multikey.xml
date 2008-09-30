@@ -343,25 +343,51 @@
 		</key>
 	</key>
 
+	<nasal>
+		<script>
+			var slewEngineProp = func(format, index, prop, value) {
+				value = controls.slewProp("/controls/engines/engine[" ~ index ~ "]/" ~ prop, value);
+				_ = sprintf(format, index, value);
+			}
+		</script>
+	</nasal>
+
 	<key n="101">
 		<name>e</name>
 		<desc>Engine</desc>
 		<key n="109">
 			<name>m</name>
 			<desc>Mixture (0.0 to 1.0)</desc>
+			<binding>
+				<command>null</command>
+			</binding>
+
 			<key n="901">
 				<name>%f</name>
 				<desc>Mixture = %.3f</desc>
 				<binding>
 					<command>nasal</command>
-					<script>
-						var engines = props.globals.getNode("/controls/engines").getChildren("engine");
-						foreach (var e; engines) {
-							var node = e.getNode("mixture");
-							if (node != nil)
-								node.setValue(arg[0]);
-						}
-					</script>
+					<script>props.setAll("/controls/engines/engine", "mixture", arg[0])</script>
+				</binding>
+			</key>
+
+			<key n="94">
+				<name>^</name>
+				<desc>Mixture up</desc>
+				<no-exit/>
+				<binding>
+					<command>nasal</command>
+					<script>_ = sprintf("Mixture = %.3f", controls.adjMixture(0.25))</script>
+				</binding>
+			</key>
+
+			<key n="95">
+				<name>_</name>
+				<desc>Mixture down</desc>
+				<no-exit/>
+				<binding>
+					<command>nasal</command>
+					<script>_ = sprintf("Mixture = %.3f", controls.adjMixture(-0.25))</script>
 				</binding>
 			</key>
 		</key>
@@ -369,19 +395,36 @@
 		<key n="112">
 			<name>p</name>
 			<desc>Propeller pitch (0.0 to 1.0)</desc>
+			<binding>
+				<command>null</command>
+			</binding>
+
 			<key n="901">
 				<name>%f</name>
 				<desc>Propeller pitch = %.3f</desc>
 				<binding>
 					<command>nasal</command>
-					<script>
-						var engines = props.globals.getNode("/controls/engines").getChildren("engine");
-						foreach (var e; engines) {
-							var node = e.getNode("propeller-pitch");
-							if (node != nil)
-								node.setValue(arg[0]);
-						}
-					</script>
+					<script>props.setAll("/controls/engines/engine", "propeller-pitch", arg[0])</script>
+				</binding>
+			</key>
+
+			<key n="94">
+				<name>^</name>
+				<desc>Propeller pitch up</desc>
+				<no-exit/>
+				<binding>
+					<command>nasal</command>
+					<script>_ = sprintf("Propeller pitch = %.3f", controls.adjPropeller(0.25))</script>
+				</binding>
+			</key>
+
+			<key n="95">
+				<name>_</name>
+				<desc>Propeller pitch down</desc>
+				<no-exit/>
+				<binding>
+					<command>nasal</command>
+					<script>_ = sprintf("Propeller pitch = %.3f", controls.adjPropeller(-0.25))</script>
 				</binding>
 			</key>
 		</key>
@@ -389,29 +432,50 @@
 		<key n="116">
 			<name>t</name>
 			<desc>Throttle (0.0 to 1.0)</desc>
+			<binding>
+				<command>null</command>
+			</binding>
+
 			<key n="901">
 				<name>%f</name>
 				<desc>Throttle = %.3f</desc>
 				<binding>
 					<command>nasal</command>
-					<script>
-						var engines = props.globals.getNode("/controls/engines").getChildren("engine");
-						foreach (var e; engines) {
-							var node = e.getNode("throttle");
-							if (node != nil)
-								node.setValue(arg[0]);
-						}
-					</script>
+					<script>props.setAll("/controls/engines/engine", "throttle", arg[0])</script>
+				</binding>
+			</key>
+
+			<key n="94">
+				<name>^</name>
+				<desc>Throttle up</desc>
+				<no-exit/>
+				<binding>
+					<command>nasal</command>
+					<script>_ = sprintf("Throttle = %.3f", controls.adjThrottle(0.25))</script>
+				</binding>
+			</key>
+
+			<key n="95">
+				<name>_</name>
+				<desc>Throttle down</desc>
+				<no-exit/>
+				<binding>
+					<command>nasal</command>
+					<script>_ = sprintf("Throttle = %.3f", controls.adjThrottle(-0.25))</script>
 				</binding>
 			</key>
 		</key>
 
-		<key n="900">
-			<name>%d</name>
-			<desc>Engine #%d</desc>
+		<key n="902">
+			<name>%u</name>
+			<desc>Engine #%u</desc>
 			<key n="109">
 				<name>m</name>
 				<desc>Mixture (0.0 to 1.0)</desc>
+				<binding>
+					<command>null</command>
+				</binding>
+
 				<key n="901">
 					<name>%f</name>
 					<desc>Mixture = %.3f</desc>
@@ -420,11 +484,35 @@
 						<script>setprop("/controls/engines/engine[" ~ arg[0] ~ "]/mixture", arg[1])</script>
 					</binding>
 				</key>
+
+				<key n="94">
+					<name>^</name>
+					<desc>Mixture up</desc>
+					<no-exit/>
+					<binding>
+						<command>nasal</command>
+						<script>slewEngineProp("Mixture #%u = %.3f", arg[0], "mixture", 0.25)</script>
+					</binding>
+				</key>
+
+				<key n="95">
+					<name>_</name>
+					<desc>Mixture down</desc>
+					<no-exit/>
+					<binding>
+						<command>nasal</command>
+						<script>slewEngineProp("Mixture #%u = %.3f", arg[0], "mixture", -0.25)</script>
+					</binding>
+				</key>
 			</key>
 
 			<key n="112">
 				<name>p</name>
 				<desc>Propeller pitch (0.0 to 1.0)</desc>
+				<binding>
+					<command>null</command>
+				</binding>
+
 				<key n="901">
 					<name>%f</name>
 					<desc>Propeller pitch = %.3f</desc>
@@ -433,17 +521,61 @@
 						<script>setprop("/controls/engines/engine[" ~ arg[0] ~ "]/propeller-pitch", arg[1])</script>
 					</binding>
 				</key>
+
+				<key n="94">
+					<name>^</name>
+					<desc>Propeller up</desc>
+					<no-exit/>
+					<binding>
+						<command>nasal</command>
+						<script>slewEngineProp("Propeller pitch #%u = %.3f", arg[0], "propeller-pitch", 0.25)</script>
+					</binding>
+				</key>
+
+				<key n="95">
+					<name>_</name>
+					<desc>Propeller down</desc>
+					<no-exit/>
+					<binding>
+						<command>nasal</command>
+						<script>slewEngineProp("Propeller pitch #%u = %.3f", arg[0], "propeller-pitch", -0.25)</script>
+					</binding>
+				</key>
 			</key>
 
 			<key n="116">
 				<name>t</name>
 				<desc>Throttle (0.0 to 1.0)</desc>
+				<binding>
+					<command>null</command>
+				</binding>
+
 				<key n="901">
 					<name>%f</name>
 					<desc>Throttle = %.3f</desc>
 					<binding>
 						<command>nasal</command>
 						<script>setprop("/controls/engines/engine[" ~ arg[0] ~ "]/throttle", arg[1])</script>
+					</binding>
+				</key>
+
+				<key n="94">
+					<name>^</name>
+					<desc>Throttle up</desc>
+					<no-exit/>
+					<binding>
+						<command>nasal</command>
+						<script>slewEngineProp("Throttle #%u = %.3f", arg[0], "throttle", 0.25)</script>
+					</binding>
+				</key>
+
+				<key n="95">
+					<name>_</name>
+					<desc>Throttle down</desc>
+					<no-exit/>
+					<binding>
+						<command>nasal</command>
+						<script>slewEngineProp("Throttle #%u = %.3f", arg[0], "throttle", -0.25)</script>
 					</binding>
 				</key>
 			</key>
@@ -489,7 +621,7 @@
 					<no-exit/>
 					<binding>
 						<command>nasal</command>
-						<script>_ = sprintf("Aileron trim = %.3f", adjustprop("/controls/flight/aileron-trim", -0.001))</script>
+						<script>_ = sprintf("Aileron trim = %.3f", controls.aileronTrim(-0.5))</script>
 					</binding>
 				</key>
 
@@ -499,7 +631,7 @@
 					<no-exit/>
 					<binding>
 						<command>nasal</command>
-						<script>_ = sprintf("Aileron trim = %.3f", adjustprop("/controls/flight/aileron-trim", 0.001))</script>
+						<script>_ = sprintf("Aileron trim = %.3f", controls.aileronTrim(0.5))</script>
 					</binding>
 				</key>
 			</key>
@@ -539,7 +671,7 @@
 					<no-exit/>
 					<binding>
 						<command>nasal</command>
-						<script>_ = sprintf("Elevator trim = %.3f", adjustprop("/controls/flight/elevator-trim", 0.001))</script>
+						<script>_ = sprintf("Elevator trim = %.3f", controls.elevatorTrim(0.5))</script>
 					</binding>
 				</key>
 
@@ -549,7 +681,7 @@
 					<no-exit/>
 					<binding>
 						<command>nasal</command>
-						<script>_ = sprintf("Elevator trim = %.3f", adjustprop("/controls/flight/elevator-trim", -0.001))</script>
+						<script>_ = sprintf("Elevator trim = %.3f", controls.elevatorTrim(-0.5))</script>
 					</binding>
 				</key>
 			</key>
@@ -602,7 +734,7 @@
 					<no-exit/>
 					<binding>
 						<command>nasal</command>
-						<script>_ = sprintf("Rudder trim = %.3f", adjustprop("/controls/flight/rudder-trim", -0.001))</script>
+						<script>_ = sprintf("Rudder trim = %.3f", controls.rudderTrim(-0.5))</script>
 					</binding>
 				</key>
 
@@ -612,7 +744,7 @@
 					<no-exit/>
 					<binding>
 						<command>nasal</command>
-						<script>_ = sprintf("Rudder trim = %.3f", adjustprop("/controls/flight/rudder-trim", 0.001))</script>
+						<script>_ = sprintf("Rudder trim = %.3f", controls.rudderTrim(0.5))</script>
 					</binding>
 				</key>
 			</key>
@@ -665,6 +797,11 @@
 	<key n="113">
 		<name>q</name>
 		<desc>Quit</desc>
+		<type>just for fun</type>
+		<binding>
+			<command>exit</command>
+		</binding>
+
 		<key n="33">
 			<name>!</name>
 			<desc>Quit without saving</desc>
@@ -677,7 +814,7 @@
 	<nasal>
 		<script>
 			<![CDATA[
-				var radio_fmt = "/instrumentation/%s[%d]/frequencies/%s-mhz";
+				var radio_fmt = "/instrumentation/%s[%u]/frequencies/%s-mhz";
 
 				var setfreq = func(type, index, which, value) {
 					index = (index >= 1) ? index - 1 : 0;
@@ -706,9 +843,9 @@
 			<key n="102">
 				<name>f</name>
 				<desc>Radio ADF frequency = ? kHz</desc>
-				<key n="900">
-					<name>%d</name>
-					<desc>Radio ADF frequency = %d kHz</desc>
+				<key n="902">
+					<name>%u</name>
+					<desc>Radio ADF frequency = %u kHz</desc>
 					<binding>
 						<command>nasal</command>
 						<script>setprop("/instrumentation/adf[0]/frequencies/selected-khz", arg[0])</script>
@@ -720,15 +857,15 @@
 		<key n="99">
 			<name>c</name>
 			<desc>Radio Comm</desc>
-			<key n="900">
-				<name>%d</name>
-				<desc>Radio Comm%d</desc>
+			<key n="902">
+				<name>%u</name>
+				<desc>Radio Comm%u</desc>
 				<key n="102">
 					<name>f</name>
-					<desc>Radio Comm%d frequency = ? MHz</desc>
+					<desc>Radio Comm%u frequency = ? MHz</desc>
 					<key n="37">
 						<name>%f</name>
-						<desc>Radio Comm%d frequency = %.3f MHz</desc>
+						<desc>Radio Comm%u frequency = %.3f MHz</desc>
 						<binding>
 							<command>nasal</command>
 							<script>setfreq("comm", arg[0], "selected", arg[1])</script>
@@ -738,7 +875,7 @@
 
 				<key n="116">
 					<name>t</name>
-					<desc>Radio Comm%d toggle selected/standby</desc>
+					<desc>Radio Comm%u toggle selected/standby</desc>
 					<binding>
 						<command>nasal</command>
 						<script>togglefreq("comm", arg[0])</script>
@@ -750,15 +887,15 @@
 		<key n="110">
 			<name>n</name>
 			<desc>Radio Nav</desc>
-			<key n="900">
-				<name>%d</name>
-				<desc>Radio Nav%d</desc>
+			<key n="902">
+				<name>%u</name>
+				<desc>Radio Nav%u</desc>
 				<key n="102">
 					<name>f</name>
-					<desc>Radio Nav%d frequency = ? MHz</desc>
+					<desc>Radio Nav%u frequency = ? MHz</desc>
 					<key n="901">
 						<name>%f</name>
-						<desc>Radio Nav%d frequency = %.3f MHz</desc>
+						<desc>Radio Nav%u frequency = %.3f MHz</desc>
 						<binding>
 							<command>nasal</command>
 							<script>setfreq("nav", arg[0], "selected", arg[1])</script>
@@ -768,7 +905,7 @@
 
 				<key n="116">
 					<name>t</name>
-					<desc>Radio Nav%d toggle selected/standby</desc>
+					<desc>Radio Nav%u toggle selected/standby</desc>
 					<binding>
 						<command>nasal</command>
 						<script>togglefreq("nav", arg[0])</script>
@@ -839,9 +976,9 @@
 		</key>
 	</key>
 
-	<key n="900">
-		<name>%d</name>
-		<desc>Execute nasal-console tab #%d</desc>
+	<key n="902">
+		<name>%u</name>
+		<desc>Execute nasal-console tab #%u</desc>
 		<exit/>
 		<binding>
 			<command>nasal</command>

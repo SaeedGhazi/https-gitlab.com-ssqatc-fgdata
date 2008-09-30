@@ -1251,6 +1251,11 @@ Shared parameters for various materials.
    <coverage-m2>100000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
+  <object>
+   <path>Models/Fauna/horse.ac</path>
+   <coverage-m2>300000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
  </object-group>
  <tree-coverage>500000.0</tree-coverage>
  <tree-texture>Textures/Trees/mixed-summer.rgb</tree-texture>
@@ -1302,6 +1307,11 @@ Shared parameters for various materials.
   <object>
    <path>Models/Fauna/cow.ac</path>
    <coverage-m2>100000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Fauna/horse.ac</path>
+   <coverage-m2>300000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
  </object-group>
@@ -1356,6 +1366,11 @@ Shared parameters for various materials.
   <object>
    <path>Models/Fauna/cow.ac</path>
    <coverage-m2>100000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Fauna/horse.ac</path>
+   <coverage-m2>300000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
  </object-group>
@@ -2030,6 +2045,11 @@ Shared parameters for various materials.
    <coverage-m2>100000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
+  <object>
+   <path>Models/Fauna/horse.ac</path>
+   <coverage-m2>300000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
  </object-group>
  <tree-coverage>500000.0</tree-coverage>
  <tree-texture>Textures/Trees/mixed-winter.rgb</tree-texture>
@@ -2081,6 +2101,11 @@ Shared parameters for various materials.
   <object>
    <path>Models/Fauna/cow.ac</path>
    <coverage-m2>100000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Fauna/horse.ac</path>
+   <coverage-m2>300000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
  </object-group>
@@ -2135,6 +2160,11 @@ Shared parameters for various materials.
   <object>
    <path>Models/Fauna/cow.ac</path>
    <coverage-m2>100000</coverage-m2>
+   <heading-type>random</heading-type>
+  </object>
+  <object>
+   <path>Models/Fauna/horse.ac</path>
+   <coverage-m2>300000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
  </object-group>

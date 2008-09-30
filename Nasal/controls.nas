@@ -162,11 +162,12 @@ var stepProps = func {
 # a rate, in units per second.  NOTE: this modifies the property for
 # the current frame only; it is intended to be called by bindings
 # which repeat each frame.  If you want to cause motion over time, see
-# interpolate().
+# interpolate(). Returns new value.
 #
 var slewProp = func(prop, delta) {
     delta *= getprop("/sim/time/delta-realtime-sec");
-    setprop(prop, getprop(prop) + delta);
+    setprop(prop, var val = getprop(prop) + delta);
+    return val;
 }
 
 # Standard trim rate, in units per second.  Remember that the full

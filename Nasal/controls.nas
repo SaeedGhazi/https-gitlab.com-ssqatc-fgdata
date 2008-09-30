@@ -166,8 +166,8 @@ var stepProps = func {
 #
 var slewProp = func(prop, delta) {
     delta *= getprop("/sim/time/delta-realtime-sec");
-    setprop(prop, var val = getprop(prop) + delta);
-    return val;
+    setprop(prop, getprop(prop) + delta);
+    return getprop(prop); # must read again because of clamping
 }
 
 # Standard trim rate, in units per second.  Remember that the full
@@ -200,12 +200,16 @@ var adjPropeller = func {
 
 var adjEngControl = func {
     var delta = arg[1] * THROTTLE_RATE * getprop("/sim/time/delta-realtime-sec");
+    var (value, count) = (0, 0);
     foreach(var e; engines) {
         if(e.selected.getValue()) {
             var node = e.controls.getNode(arg[0], 1);
             node.setValue(node.getValue() + delta);
+            value += node.getValue(); # must read again because of clamping
+            count += 1;
         }
     }
+    return value / count;
 }
 
 ##

@@ -40,6 +40,144 @@
 		<!-- reserved for user extensions -->
 	</key>
 
+	<key n="68">
+		<name>D</name>
+		<desc>Dialogs</desc>
+		<key n="97">
+			<name>a</name>
+			<desc>Autopilot Settings</desc>
+			<exit/>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>autopilot</dialog-name>
+			</binding>
+		</key>
+
+		<key n="99">
+			<name>c</name>
+			<desc>Clouds</desc>
+			<exit/>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>clouds</dialog-name>
+			</binding>
+		</key>
+
+		<key n="102">
+			<name>f</name>
+			<desc>Fuel and Payload</desc>
+			<exit/>
+			<binding>
+				<command>nasal</command>
+				<script>gui.showWeightDialog()</script>
+			</binding>
+		</key>
+
+		<key n="103">
+			<name>g</name>
+			<desc>GPS Settings</desc>
+			<exit/>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>gps</dialog-name>
+			</binding>
+		</key>
+
+		<key n="105">
+			<name>i</name>
+			<desc>Instrument Settings</desc>
+			<exit/>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>instruments</dialog-name>
+			</binding>
+		</key>
+
+		<key n="109">
+			<name>m</name>
+			<desc>Multiplayer Pilot List</desc>
+			<exit/>
+			<binding>
+				<command>nasal</command>
+				<script>multiplayer.dialog.show()</script>
+			</binding>
+		</key>
+
+		<key n="112">
+			<name>p</name>
+			<desc>Position aircraft</desc>
+			<key n="97">
+				<name>a</name>
+				<desc>Position aircraft in air</desc>
+				<exit/>
+				<binding>
+					<command>dialog-show</command>
+					<dialog-name>location-in-air</dialog-name>
+				</binding>
+			</key>
+
+			<key n="103">
+				<name>g</name>
+				<desc>Position aircraft on ground</desc>
+				<exit/>
+				<binding>
+					<command>dialog-show</command>
+					<dialog-name>loaction-on-ground</dialog-name>
+				</binding>
+			</key>
+		</key>
+
+		<key n="114">
+			<name>r</name>
+			<desc>Radio Settings</desc>
+			<exit/>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>radios</dialog-name>
+			</binding>
+		</key>
+
+		<key n="115">
+			<name>s</name>
+			<desc>Sound Configuration</desc>
+			<exit/>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>sound-dialog</dialog-name>
+			</binding>
+		</key>
+
+		<key n="116">
+			<name>t</name>
+			<desc>Time Settings</desc>
+			<exit/>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>timeofday</dialog-name>
+			</binding>
+		</key>
+
+		<key n="118">
+			<name>v</name>
+			<desc>View options</desc>
+			<exit/>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>view</dialog-name>
+			</binding>
+		</key>
+
+		<key n="119">
+			<name>w</name>
+			<desc>Weather Conditions</desc>
+			<exit/>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>weather</dialog-name>
+			</binding>
+		</key>
+	</key>
+
 	<!-- environment -->
 	<key n="69">
 		<name>E</name>

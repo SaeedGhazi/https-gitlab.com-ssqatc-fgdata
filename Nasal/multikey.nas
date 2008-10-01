@@ -33,6 +33,8 @@ var handle_key = func(key) {
 		return 1;
 	} elsif (key == 8) {
 		cmd = substr(cmd, 0, size(cmd) - 1);
+	} elsif (key == 9) {
+		#
 	} elsif (key == `\n` or key == `\r`) {
 		mode = 2;
 	} elsif (contains(translate, key)) {
@@ -86,6 +88,42 @@ var popup = func(cmd, title = nil) {
 	gui.popupTip("", 1e9, { layout: "vbox", text:
 			[{ label: title, color: { red: r, green: g, blue: b } },
 			{ label: cmd }] });
+}
+
+
+var help = func {
+	var (curr, title) = (0, "");
+	foreach (var k; sort(data, func(a, b) cmp(a[0], b[0]))) {
+		var bndg = k[1].getChildren("binding");
+		var desc = k[1].getNode("desc", 1).getValue() or "??";
+		if (size(k[0]) == 1 or k[0][0] == `%`)
+			title = desc;
+		if (!size(bndg) or size(bndg) == 1
+					and bndg[0].getNode("command", 1).getValue() == "null")
+			continue;
+		if (string.isalnum(k[0][0]) and k[0][0] != curr) {
+			curr = k[0][0];
+			var line = "--------------------------------------------";
+			print(debug._c("33", sprintf("\n-- %s %s", title, substr(line, size(title) + 2))));
+		}
+		var cmd = k[0];
+		cmd = string.replace(cmd, "%u", debug._c("32", "%u"));
+		cmd = string.replace(cmd, "%d", debug._c("31", "%d"));
+		cmd = string.replace(cmd, "%f", debug._c("36", "%f"));
+		cmd = string.replace(cmd, "&lt;", debug._c("35", "&lt;"));
+		cmd = string.replace(cmd, "&gt;", debug._c("35", "&gt;"));
+		cmd = string.replace(cmd, "^", debug._c("35", "^"));
+		cmd = string.replace(cmd, "_", debug._c("35", "_"));
+		printf("%s\t%s", cmd, desc);
+	}
+	print(debug._c("33", "\n-- Legend ------------------------------------"));
+	printf("\t%s ... unsigned number", debug._c("32", "%u"));
+	printf("\t%s ... signed number", debug._c("31", "%d"));
+	printf("\t%s ... floation point number", debug._c("36", "%f"));
+	printf("\t%s  ... cursor left", debug._c("35", "&lt;"));
+	printf("\t%s  ... cursor right", debug._c("35", ">"));
+	printf("\t%s  ... cursor up", debug._c("35", "^"));
+	printf("\t%s  ... cursor down", debug._c("35", "_"));
 }
 
 

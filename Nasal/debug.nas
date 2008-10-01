@@ -49,7 +49,7 @@
 var _c = func nil;
 
 var color = func(enabled) {
-	if (enabled)
+	if (enabled and getprop("/sim/startup/stderr-to-terminal"))
 		_c = func(color, s) { "\x1b[" ~ color ~ "m" ~ s ~ "\x1b[m" }
 	else
 		_c = func(dummy, s) { s }

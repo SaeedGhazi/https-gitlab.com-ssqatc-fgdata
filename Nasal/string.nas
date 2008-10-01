@@ -315,15 +315,19 @@ var scanf = func(test, format, result) {
 				if (!size(scanstr) and prefix)
 					return 0;
 				append(result, sign * num(scanstr));
+
 			} elsif (f == `s`) {
-				while ((var c = str.getc()) != nil and (c != ` `)) {
+				fnum += 1;
+				while ((var c = str.getc()) != nil and c != ` ` and (fnum -= 1))
 					scanstr ~= chr(c);
-				}
+
 				if (c != nil)
 					str.ungetc();
 				if (!size(scanstr))
 					return 0;
+
 				append(result, scanstr);
+
 			} else {
 				die("scanf: bad format element %" ~ chr(f));
 			}
@@ -344,3 +348,5 @@ var scanf = func(test, format, result) {
 	}
 	return str.getc() == nil and format.getc() == nil ? success : 0;
 }
+
+

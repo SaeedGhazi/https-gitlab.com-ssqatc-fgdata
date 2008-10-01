@@ -502,7 +502,7 @@
 
 	<key n="101">
 		<name>e</name>
-		<desc>Engine</desc>
+		<desc>Engines</desc>
 		<key n="109">
 			<name>m</name>
 			<desc>Mixture (0.0 to 1.0)</desc>
@@ -1021,6 +1021,19 @@
 					</key>
 				</key>
 
+				<key n="115">
+					<name>s</name>
+					<desc>Radio Comm%u standby frequency = ? MHz</desc>
+					<key n="901">
+						<name>%f</name>
+						<desc>Radio Comm%u standby frequency = %.3f MHz</desc>
+						<binding>
+							<command>nasal</command>
+							<script>setfreq("comm", arg[0], "standby", arg[1])</script>
+						</binding>
+					</key>
+				</key>
+
 				<key n="116">
 					<name>t</name>
 					<desc>Radio Comm%u toggle selected/standby</desc>
@@ -1051,12 +1064,63 @@
 					</key>
 				</key>
 
+				<key n="115">
+					<name>s</name>
+					<desc>Radio Nav%u standby frequency = ? MHz</desc>
+					<key n="901">
+						<name>%f</name>
+						<desc>Radio Nav%u standby frequency = %.3f MHz</desc>
+						<binding>
+							<command>nasal</command>
+							<script>setfreq("nav", arg[0], "standby", arg[1])</script>
+						</binding>
+					</key>
+				</key>
+
 				<key n="116">
 					<name>t</name>
 					<desc>Radio Nav%u toggle selected/standby</desc>
 					<binding>
 						<command>nasal</command>
 						<script>togglefreq("nav", arg[0])</script>
+					</binding>
+				</key>
+			</key>
+		</key>
+
+		<key n="116">
+			<name>t</name>
+			<desc>Radio TACAN channel = ?</desc>
+			<key n="902">
+				<name>%3u</name>
+				<desc>Radio TACAN channel = %u</desc>
+				<key n="120">
+					<name>x</name>
+					<desc>Radio TACAN channel = %ux</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							var ch = sprintf("%03u", arg[0]);
+							setprop("/instrumentation/tacan/frequencies/selected-channel[1]", chr(ch[0]));
+							setprop("/instrumentation/tacan/frequencies/selected-channel[2]", chr(ch[1]));
+							setprop("/instrumentation/tacan/frequencies/selected-channel[3]", chr(ch[2]));
+							setprop("/instrumentation/tacan/frequencies/selected-channel[4]", "x");
+						</script>
+					</binding>
+				</key>
+
+				<key n="121">
+					<name>y</name>
+					<desc>Radio TACAN channel = %uy</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							var ch = sprintf("%03u", arg[0]);
+							setprop("/instrumentation/tacan/frequencies/selected-channel[1]", chr(ch[0]));
+							setprop("/instrumentation/tacan/frequencies/selected-channel[2]", chr(ch[1]));
+							setprop("/instrumentation/tacan/frequencies/selected-channel[3]", chr(ch[2]));
+							setprop("/instrumentation/tacan/frequencies/selected-channel[4]", "y");
+						</script>
 					</binding>
 				</key>
 			</key>

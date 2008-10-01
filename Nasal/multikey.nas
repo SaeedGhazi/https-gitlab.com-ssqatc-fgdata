@@ -110,8 +110,8 @@ var help = func {
 		cmd = string.replace(cmd, "%u", debug._c("32", "%u"));
 		cmd = string.replace(cmd, "%d", debug._c("31", "%d"));
 		cmd = string.replace(cmd, "%f", debug._c("36", "%f"));
-		cmd = string.replace(cmd, "&lt;", debug._c("35", "&lt;"));
-		cmd = string.replace(cmd, "&gt;", debug._c("35", "&gt;"));
+		cmd = string.replace(cmd, "<", debug._c("35", "<"));
+		cmd = string.replace(cmd, ">", debug._c("35", ">"));
 		cmd = string.replace(cmd, "^", debug._c("35", "^"));
 		cmd = string.replace(cmd, "_", debug._c("35", "_"));
 		printf("%s\t%s", cmd, desc);
@@ -120,7 +120,7 @@ var help = func {
 	printf("\t%s ... unsigned number", debug._c("32", "%u"));
 	printf("\t%s ... signed number", debug._c("31", "%d"));
 	printf("\t%s ... floation point number", debug._c("36", "%f"));
-	printf("\t%s  ... cursor left", debug._c("35", "&lt;"));
+	printf("\t%s  ... cursor left", debug._c("35", "<"));
 	printf("\t%s  ... cursor right", debug._c("35", ">"));
 	printf("\t%s  ... cursor up", debug._c("35", "^"));
 	printf("\t%s  ... cursor down", debug._c("35", "_"));

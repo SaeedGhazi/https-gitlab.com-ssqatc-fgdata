@@ -1080,67 +1080,6 @@
 		</key>
 	</key>
 
-	<!-- example of non-exiting keys (here cursor keys) -->
-	<key n="118">
-		<name>v</name>
-		<desc>View direction (use cursor keys)</desc>
-		<binding>
-			<command>null</command> <!-- to allow exiting via return key -->
-		</binding>
-
-		<key n="60">
-			<name>&lt;</name>
-			<desc>left</desc>
-			<no-exit/>
-			<binding>
-				<command>nasal</command>
-				<script>
-					var h = "/sim/current-view/goal-heading-offset-deg";
-					setprop(h, _ = getprop(h) + 1);
-				</script>
-			</binding>
-		</key>
-
-		<key n="62">
-			<name>&gt;</name>
-			<desc>right</desc>
-			<no-exit/>
-			<binding>
-				<command>nasal</command>
-				<script>
-					var h = "/sim/current-view/goal-heading-offset-deg";
-					setprop(h, _ = getprop(h) - 1);
-				</script>
-			</binding>
-		</key>
-
-		<key n="94">
-			<name>^</name>
-			<desc>up</desc>
-			<no-exit/>
-			<binding>
-				<command>nasal</command>
-				<script>
-					var h = "/sim/current-view/goal-pitch-offset-deg";
-					setprop(h, _ = getprop(h) + 1);
-				</script>
-			</binding>
-		</key>
-
-		<key n="95">
-			<name>_</name>
-			<desc>down</desc>
-			<no-exit/>
-			<binding>
-				<command>nasal</command>
-				<script>
-					var h = "/sim/current-view/goal-pitch-offset-deg";
-					setprop(h, _ = getprop(h) - 1);
-				</script>
-			</binding>
-		</key>
-	</key>
-
 	<key n="902">
 		<name>%u</name>
 		<desc>Execute nasal-console tab #%u</desc>

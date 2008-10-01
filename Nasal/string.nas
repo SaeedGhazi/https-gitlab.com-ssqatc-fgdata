@@ -283,7 +283,7 @@ var scanf = func(test, format, result) {
 				var fnum = -2; # because we add one if !prefix
 			}
 
-			var numstr = "";
+			var scanstr = "";
 			var prefix = 0;
 			var sign = 1;
 			if (f == `d` or f == `f` or f == `u`) {
@@ -303,23 +303,31 @@ var scanf = func(test, format, result) {
 				while ((var c = str.getc()) != nil and (fnum -= 1)) {
 					if (f != `f` and c == `.`)
 						break;
-					elsif (num(numstr ~ chr(c) ~ '0') != nil) # append 0 to digest e/E
-						numstr ~= chr(c);
+					elsif (num(scanstr ~ chr(c) ~ '0') != nil) # append 0 to digest e/E
+						scanstr ~= chr(c);
 					else
 						break;
 				}
 				if (c != nil)
 					str.ungetc();
-				if (num(numstr) == nil)
+				if (num(scanstr) == nil)
 					return 0;
+				if (!size(scanstr) and prefix)
+					return 0;
+				append(result, sign * num(scanstr));
+			} elsif (f == `s`) {
+				while ((var c = str.getc()) != nil and (c != ` `)) {
+					scanstr ~= chr(c);
+				}
+				if (c != nil)
+					str.ungetc();
+				if (!size(scanstr))
+					return 0;
+				append(result, scanstr);
 			} else {
 				die("scanf: bad format element %" ~ chr(f));
 			}
 
-			if (!size(numstr) and prefix)
-				return 0;
-
-			append(result, sign * num(numstr));
 
 		} elsif (isspace(f)) {
 			while ((var c = str.getc()) != nil and isspace(c))
@@ -336,6 +344,3 @@ var scanf = func(test, format, result) {
 	}
 	return str.getc() == nil and format.getc() == nil ? success : 0;
 }
-
-
-

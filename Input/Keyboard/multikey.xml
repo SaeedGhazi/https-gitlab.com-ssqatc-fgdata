@@ -272,6 +272,62 @@
 		</key>
 	</key>
 
+	<!-- Position commands -->
+	<nasal>
+		<script>
+			<![CDATA[
+				var setpresets = func(airportID, runwayID="", lon=-9999, lat=-9999, alt=0, seed=0, distance=0, glideslope=0, heading=9999) {
+					setprop("/sim/presets/airport-id", airportID);
+					setprop("/sim/presets/runway", runwayID);
+					setprop("/sim/presets/longitude-deg", lon);
+					setprop("/sim/presets/latitude-deg", lat);
+					setprop("/sim/presets/altitude-ft", alt);
+					setprop("/sim/presets/airspeed-kt", speed);
+					setprop("/sim/presets/offset-distance-nm", distance);
+					setprop("/sim/presets/offset-azimuth-nm", 0);
+					setprop("/sim/presets/glideslope-deg", glideslope);
+					setprop("/sim/presets/heading-deg", heading);
+				}
+
+			]]>
+		</script>
+	</nasal>
+
+	<key n="80">
+	<name>P</name>
+	<desc>Position</desc>
+		<key n="103">
+			<name>g</name>
+			<desc>Position on ground</desc>
+			<key n="903">
+				<name>%s</name>
+				<desc>Position on ground: airport=%s</desc>
+				<key n="32">
+					<name> </name>
+					<desc>Position on ground: airport=%s runway=</desc>
+					<binding>
+						<command>nasal</command>
+						<script>setpresets(arg[0])</script>
+					</binding>
+					<binding>
+						<command>presets-commit</command>
+					</binding>
+					<key n="903">
+						<name>%s</name>
+						<desc>Position on ground: airport=%s runway=%s</desc>
+						<binding>
+							<command>nasal</command>
+							<script>setpresets(arg[0], arg[1])</script>
+						</binding>
+						<binding>
+							<command>presets-commit</command>
+						</binding>
+					</key>
+				</key>
+			</key>
+		</key>
+	</key>
+
 	<!-- Autopilot multikey commands -->
 	<key n="97">
 		<name>a</name>
@@ -1154,60 +1210,5 @@
 				}));
 			</script>
 		</binding>
-	</key>
-
-	<nasal>
-		<script>
-			<![CDATA[
-				var setpresets = func(airportID, runwayID="", lon=-9999, lat=-9999, alt=0, seed=0, distance=0, glideslope=0, heading=9999) {
-					setprop("/sim/presets/airport-id", airportID);
-					setprop("/sim/presets/runway", runwayID);
-					setprop("/sim/presets/longitude-deg", lon);
-					setprop("/sim/presets/latitude-deg", lat);
-					setprop("/sim/presets/altitude-ft", alt);
-					setprop("/sim/presets/airspeed-kt", speed);
-					setprop("/sim/presets/offset-distance-nm", distance);
-					setprop("/sim/presets/offset-azimuth-nm", 0);
-					setprop("/sim/presets/glideslope-deg", glideslope);
-					setprop("/sim/presets/heading-deg", heading);
-				}
-
-			]]>
-		</script>
-	</nasal>
-
-	<key n="80">
-	<name>P</name>
-	<desc>Position</desc>
-		<key n="103">
-			<name>g</name>
-			<desc>Position on ground</desc>
-			<key n="903">
-				<name>%s</name>
-				<desc>Position on ground: airport=%s</desc>
-				<key n="32">
-					<name> </name>
-					<desc>Position on ground: airport=%s runway=</desc>
-					<binding>
-						<command>nasal</command>
-						<script>setpresets(arg[0])</script>
-					</binding>
-					<binding>
-						<command>presets-commit</command>
-					</binding>
-					<key n="903">
-						<name>%s</name>
-						<desc>Position on ground: airport=%s runway=%s</desc>
-						<binding>
-							<command>nasal</command>
-							<script>setpresets(arg[0], arg[1])</script>
-						</binding>
-						<binding>
-							<command>presets-commit</command>
-						</binding>
-					</key>
-				</key>
-			</key>
-		</key>
 	</key>
 </PropertyList>

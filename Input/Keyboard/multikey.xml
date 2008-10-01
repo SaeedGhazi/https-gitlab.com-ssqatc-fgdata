@@ -40,6 +40,33 @@
 		<!-- reserved for user extensions -->
 	</key>
 
+	<key n="63">
+		<name>?</name>
+		<desc>Help</desc>
+		<exit/>
+		<binding>
+			<command>nasal</command>
+			<script>
+				var curr = 0;
+				foreach (var k; sort(multikey.data, func(a, b) cmp(a[0], b[0]))) {
+					var bndg = k[1].getChildren("binding");
+					if (!size(bndg))
+						continue;
+					if (size(bndg) == 1 and bndg[0].getNode("command", 1).getValue() == "null")
+						continue;
+					if (k[0][0] != curr) {
+						curr = k[0][0];
+						print("------------------------------------------");
+					}
+					printf("%s\t%s", k[0], k[1].getNode("desc", 1).getValue() or "??");
+				}
+				print("------------------------------------------\n\tLegend:");
+				print("\n\t%u ... unsigned number\n\t%d ... signed number\n\t%f ... floation point number");
+				print("\t&lt; ... cursor left\n\t> ... cursor right\n\t^ ... cursor up\n\t_ ... cursor down");
+			</script>
+		</binding>
+	</key>
+
 	<key n="68">
 		<name>D</name>
 		<desc>Dialogs</desc>

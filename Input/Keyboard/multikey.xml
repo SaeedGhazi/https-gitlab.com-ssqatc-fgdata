@@ -47,22 +47,38 @@
 		<binding>
 			<command>nasal</command>
 			<script>
-				var curr = 0;
+				var (curr, title) = (0, "");
 				foreach (var k; sort(multikey.data, func(a, b) cmp(a[0], b[0]))) {
 					var bndg = k[1].getChildren("binding");
-					if (!size(bndg))
-						continue;
-					if (size(bndg) == 1 and bndg[0].getNode("command", 1).getValue() == "null")
+					var desc = k[1].getNode("desc", 1).getValue() or "??";
+					if (size(k[0]) == 1 or k[0][0] == `%`)
+						title = desc;
+					if (!size(bndg) or size(bndg) == 1
+								and bndg[0].getNode("command", 1).getValue() == "null")
 						continue;
 					if (k[0][0] != curr) {
 						curr = k[0][0];
-						print("------------------------------------------");
+						var line = "--------------------------------------------";
+						printf("-- %s %s", title, substr(line, size(title) + 2));
 					}
-					printf("%s\t%s", k[0], k[1].getNode("desc", 1).getValue() or "??");
+					var cmd = k[0];
+					cmd = string.replace(cmd, "%u", debug._c("32", "%u"));
+					cmd = string.replace(cmd, "%d", debug._c("31", "%d"));
+					cmd = string.replace(cmd, "%f", debug._c("36", "%f"));
+					cmd = string.replace(cmd, "&lt;", debug._c("35", "&lt;"));
+					cmd = string.replace(cmd, "&gt;", debug._c("35", "&gt;"));
+					cmd = string.replace(cmd, "^", debug._c("35", "^"));
+					cmd = string.replace(cmd, "_", debug._c("35", "_"));
+					printf("%s\t%s", cmd, desc);
 				}
-				print("------------------------------------------\n\tLegend:");
-				print("\n\t%u ... unsigned number\n\t%d ... signed number\n\t%f ... floation point number");
-				print("\t&lt; ... cursor left\n\t> ... cursor right\n\t^ ... cursor up\n\t_ ... cursor down");
+				print("------------------------------------------\n\tLegend:\n");
+				printf("\t%s ... unsigned number", debug._c("32", "%u"));
+				printf("\t%s ... signed number", debug._c("31", "%d"));
+				printf("\t%s ... floation point number", debug._c("36", "%f"));
+				printf("\t%s  ... cursor left", debug._c("35", "&lt;"));
+				printf("\t%s  ... cursor right", debug._c("35", ">"));
+				printf("\t%s  ... cursor up", debug._c("35", "^"));
+				printf("\t%s  ... cursor down", debug._c("35", "_"));
 			</script>
 		</binding>
 	</key>
@@ -944,8 +960,8 @@
 				</binding>
 			</key>
 
-			<key n="119">
-				<name>w</name>
+			<key n="115">
+				<name>s</name>
 				<desc>Wing sweep</desc>
 				<key n="901">
 					<name>%f</name>

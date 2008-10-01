@@ -489,6 +489,20 @@
 				</binding>
 			</key>
 		</key>
+
+		<key n="114">
+			<name>r</name>
+			<desc>Route Manager</desc>
+			<key n="903">
+				<name>%s</name>
+				<desc>Route Manaager: command = %s</desc>
+				<binding>
+					<command>nasal</command>
+					<script>setprop("/autopilot/route-manager/input", arg[0])</script>
+				</binding>
+			</key>
+		</key>
+
 	</key>
 
 	<nasal>
@@ -1163,16 +1177,16 @@
 	</nasal>
 
 	<key n="80">
-		<name>P</name>
-		<desc>Position</desc>
-		<key>
+	<name>P</name>
+	<desc>Position</desc>
+		<key n="103">
 			<name>g</name>
 			<desc>Position on ground</desc>
-			<key>
+			<key n="903">
 				<name>%s</name>
 				<desc>Position on ground: airport=%s</desc>
-				<key>
-					<name>&#32;</name>
+				<key n="32">
+					<name> </name>
 					<desc>Position on ground: airport=%s runway=</desc>
 					<binding>
 						<command>nasal</command>
@@ -1181,7 +1195,7 @@
 					<binding>
 						<command>presets-commit</command>
 					</binding>
-					<key>
+					<key n="903">
 						<name>%s</name>
 						<desc>Position on ground: airport=%s runway=%s</desc>
 						<binding>

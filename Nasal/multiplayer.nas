@@ -291,7 +291,7 @@ var dialog = {
         var loc = geo.aircraft_position();
         var players = 0;
         foreach(var c; children) {
-            if (!c.getNode("valid").getValue())
+            if ( c.getNode("valid") == nil or !c.getNode("valid").getValue())
                 continue;
             players+=1;
             var ploc = me.getloc(c.getNode("position"));

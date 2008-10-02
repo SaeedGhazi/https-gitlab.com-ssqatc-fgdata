@@ -554,16 +554,76 @@
 		<key n="114">
 			<name>r</name>
 			<desc>Route Manager</desc>
-			<key n="903">
-				<name>%s</name>
-				<desc>Route Manager: command = %s</desc>
+			<key n="97">
+				<name>a</name>
+				<desc>Append waypoint</desc>
+				<key n="903">
+					<name>%s</name>
+					<desc>Append waypoint: airport ID[@altitude] = %s</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							var command = sprintf("%s", arg[0]);
+							setprop("/autopilot/route-manager/input", command)
+						</script>
+					</binding>
+				</key>
+			</key>
+
+			<key n="99">
+				<name>c</name>
+				<desc>Clear waypoints</desc>
 				<binding>
 					<command>nasal</command>
-					<script>setprop("/autopilot/route-manager/input", arg[0])</script>
+					<script>setprop("/autopilot/route-manager/input", "@clear")</script>
+				</binding>
+			</key>
+
+			<key n="100">
+				<name>d</name>
+				<desc>Delete waypoint</desc>
+				<key n="902">
+					<name>%u</name>
+					<desc>Delete waypoint at %u</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							var command = sprintf("@delete%d", arg[0] > 0 ? arg[0]-1 : 0);
+							setprop("/autopilot/route-manager/input", command)
+						</script>
+					</binding>
+				</key>
+			</key>
+
+			<key n="105">
+				<name>i</name>
+				<desc>Insert waypoint</desc>
+				<key n="902">
+					<name>%u</name>
+					<desc>Insert waypoint at %u</desc>
+					<key n="903">
+						<name>%s</name>
+						<desc>Insert waypoint at %u: airport ID = %s</desc>
+						<binding>
+							<command>nasal</command>
+							<script>
+								var command = sprintf("@insert%d:%s", arg[0] > 0 ? arg[0]-1 : 0, arg[1]);
+								setprop("/autopilot/route-manager/input", command)
+							</script>
+						</binding>
+					</key>
+				</key>
+			</key>
+
+			<key n="112">
+				<name>p</name>
+				<desc>Remove first waypoint</desc>
+				<binding>
+					<command>nasal</command>
+					<script>setprop("/autopilot/route-manager/input", "@pop")</script>
 				</binding>
 			</key>
 		</key>
-
 	</key>
 
 	<nasal>

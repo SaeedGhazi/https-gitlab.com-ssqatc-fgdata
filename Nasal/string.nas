@@ -288,7 +288,9 @@ var scanf = func(test, format, result) {
 			var sign = 1;
 			if (f == `d` or f == `f` or f == `u`) {
 				var c = str.getc();
-				if (c == `+`) {
+				if (c == nil) {
+					return 0;
+				} elsif (c == `+`) {
 					prefix = 1;
 				} elsif (c == `-`) {
 					if (f == `u`)

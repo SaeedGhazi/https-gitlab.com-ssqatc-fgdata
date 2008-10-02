@@ -82,7 +82,7 @@ var Dialog = {
 		m.name = "multikey";
 		m.prop = props.Node.new({ "dialog-name": m.name });
 		m.isopen = 0;
-		m.update("", "", []);
+		m.firstrun = 1;
 		return m;
 	},
 	del : func {
@@ -106,13 +106,19 @@ var Dialog = {
 		var t = dlg.addChild("text");
 		t.set("label", title);
 		t.setColor(r, g, b);
-		dlg.addChild("text").set("label", cmd);
+		var t = dlg.addChild("text");
+		if (me.firstrun) {
+			me.firstrun = 0;
+			cmd = "Use <Tab> to toggle options!";
+			t.setColor(0.5, 0.5, 0.5);
+		}
+		t.set("label", cmd);
 
 		if (options != nil and size(options)) {
 			dlg.addChild("hrule");
 			var g = dlg.addChild("group");
 			g.set("layout", "table");
-			g.set("default-padding", 3);
+			g.set("default-padding", 2);
 			forindex (var i; options) {
 				var name = options[i].getNode("name", 1).getValue();
 				var desc = options[i].getNode("desc", 1).getValue() or "";
@@ -230,13 +236,11 @@ var init = func {
 
 	var scan = func(tree, format = "") {
 		var d = [];
-		foreach (var key; tree.getChildren("key")) {
-			foreach (var name; key.getChildren("name")) {
+		foreach (var key; tree.getChildren("key"))
+			foreach (var name; key.getChildren("name"))
 				if ((var n = name.getValue()) != nil)
 					append(d, { format: format ~ n, node: key,
 							children: scan(key, format ~ n) });
-			}
-		}
 		return d;
 	}
 

@@ -36,7 +36,7 @@
 
 	<key n="58">
 		<name>:</name>
-		<desc>User command</desc>
+		<desc>User commands</desc>
 		<!-- reserved for user extensions -->
 	</key>
 
@@ -132,7 +132,7 @@
 				<exit/>
 				<binding>
 					<command>dialog-show</command>
-					<dialog-name>loaction-on-ground</dialog-name>
+					<dialog-name>location-on-ground</dialog-name>
 				</binding>
 			</key>
 		</key>
@@ -185,6 +185,12 @@
 				<command>dialog-show</command>
 				<dialog-name>weather</dialog-name>
 			</binding>
+		</key>
+
+		<key n="120">
+			<name>x</name>
+			<desc>Experimental</desc>
+			<!-- reserved for experimental features -->
 		</key>
 	</key>
 
@@ -1015,7 +1021,6 @@
 	<key n="113">
 		<name>q</name>
 		<desc>Quit</desc>
-		<type>just for fun</type>
 		<binding>
 			<command>exit</command>
 		</binding>
@@ -1047,6 +1052,14 @@
 					setprop(stby, getprop(sel));
 					setprop(sel, s);
 				}
+
+				var settacan = func(number, letter) {
+					var ch = sprintf("%03u%s", number, letter);
+					setprop("/instrumentation/tacan/frequencies/selected-channel[1]", chr(ch[0]));
+					setprop("/instrumentation/tacan/frequencies/selected-channel[2]", chr(ch[1]));
+					setprop("/instrumentation/tacan/frequencies/selected-channel[3]", chr(ch[2]));
+					setprop("/instrumentation/tacan/frequencies/selected-channel[4]", chr(ch[3]));
+				}
 			]]>
 		</script>
 	</nasal>
@@ -1057,13 +1070,13 @@
 
 		<key n="97">
 			<name>a</name>
-			<desc>Radio ADF</desc>
+			<desc>ADF</desc>
 			<key n="102">
 				<name>f</name>
-				<desc>Radio ADF frequency = ? kHz</desc>
+				<desc>ADF frequency = ? kHz</desc>
 				<key n="902">
 					<name>%u</name>
-					<desc>Radio ADF frequency = %u kHz</desc>
+					<desc>ADF frequency = %u kHz</desc>
 					<binding>
 						<command>nasal</command>
 						<script>setprop("/instrumentation/adf[0]/frequencies/selected-khz", arg[0])</script>
@@ -1074,16 +1087,16 @@
 
 		<key n="99">
 			<name>c</name>
-			<desc>Radio Comm</desc>
+			<desc>Comm</desc>
 			<key n="902">
 				<name>%u</name>
-				<desc>Radio Comm%u</desc>
+				<desc>Comm%u</desc>
 				<key n="102">
 					<name>f</name>
-					<desc>Radio Comm%u frequency = ? MHz</desc>
+					<desc>Comm%u frequency = ? MHz</desc>
 					<key n="37">
 						<name>%f</name>
-						<desc>Radio Comm%u frequency = %.3f MHz</desc>
+						<desc>Comm%u frequency = %.3f MHz</desc>
 						<binding>
 							<command>nasal</command>
 							<script>setfreq("comm", arg[0], "selected", arg[1])</script>
@@ -1093,10 +1106,10 @@
 
 				<key n="115">
 					<name>s</name>
-					<desc>Radio Comm%u standby frequency = ? MHz</desc>
+					<desc>Comm%u standby frequency = ? MHz</desc>
 					<key n="901">
 						<name>%f</name>
-						<desc>Radio Comm%u standby frequency = %.3f MHz</desc>
+						<desc>Comm%u standby frequency = %.3f MHz</desc>
 						<binding>
 							<command>nasal</command>
 							<script>setfreq("comm", arg[0], "standby", arg[1])</script>
@@ -1106,7 +1119,7 @@
 
 				<key n="116">
 					<name>t</name>
-					<desc>Radio Comm%u toggle selected/standby</desc>
+					<desc>Comm%u toggle selected/standby</desc>
 					<binding>
 						<command>nasal</command>
 						<script>togglefreq("comm", arg[0])</script>
@@ -1117,16 +1130,16 @@
 
 		<key n="110">
 			<name>n</name>
-			<desc>Radio Nav</desc>
+			<desc>Nav</desc>
 			<key n="902">
 				<name>%u</name>
-				<desc>Radio Nav%u</desc>
+				<desc>Nav%u</desc>
 				<key n="102">
 					<name>f</name>
-					<desc>Radio Nav%u frequency = ? MHz</desc>
+					<desc>Nav%u frequency = ? MHz</desc>
 					<key n="901">
 						<name>%f</name>
-						<desc>Radio Nav%u frequency = %.3f MHz</desc>
+						<desc>Nav%u frequency = %.3f MHz</desc>
 						<binding>
 							<command>nasal</command>
 							<script>setfreq("nav", arg[0], "selected", arg[1])</script>
@@ -1136,10 +1149,10 @@
 
 				<key n="115">
 					<name>s</name>
-					<desc>Radio Nav%u standby frequency = ? MHz</desc>
+					<desc>Nav%u standby frequency = ? MHz</desc>
 					<key n="901">
 						<name>%f</name>
-						<desc>Radio Nav%u standby frequency = %.3f MHz</desc>
+						<desc>Nav%u standby frequency = %.3f MHz</desc>
 						<binding>
 							<command>nasal</command>
 							<script>setfreq("nav", arg[0], "standby", arg[1])</script>
@@ -1149,7 +1162,7 @@
 
 				<key n="116">
 					<name>t</name>
-					<desc>Radio Nav%u toggle selected/standby</desc>
+					<desc>Nav%u toggle selected/standby</desc>
 					<binding>
 						<command>nasal</command>
 						<script>togglefreq("nav", arg[0])</script>
@@ -1160,37 +1173,25 @@
 
 		<key n="116">
 			<name>t</name>
-			<desc>Radio TACAN channel = ?</desc>
+			<desc>TACAN channel = ?</desc>
 			<key n="902">
 				<name>%3u</name>
-				<desc>Radio TACAN channel = %u</desc>
+				<desc>TACAN channel = %u</desc>
 				<key n="120">
 					<name>x</name>
-					<desc>Radio TACAN channel = %ux</desc>
+					<desc>TACAN channel = %ux</desc>
 					<binding>
 						<command>nasal</command>
-						<script>
-							var ch = sprintf("%03u", arg[0]);
-							setprop("/instrumentation/tacan/frequencies/selected-channel[1]", chr(ch[0]));
-							setprop("/instrumentation/tacan/frequencies/selected-channel[2]", chr(ch[1]));
-							setprop("/instrumentation/tacan/frequencies/selected-channel[3]", chr(ch[2]));
-							setprop("/instrumentation/tacan/frequencies/selected-channel[4]", "x");
-						</script>
+						<script>settacan(arg[0], "x")</script>
 					</binding>
 				</key>
 
 				<key n="121">
 					<name>y</name>
-					<desc>Radio TACAN channel = %uy</desc>
+					<desc>TACAN channel = %uy</desc>
 					<binding>
 						<command>nasal</command>
-						<script>
-							var ch = sprintf("%03u", arg[0]);
-							setprop("/instrumentation/tacan/frequencies/selected-channel[1]", chr(ch[0]));
-							setprop("/instrumentation/tacan/frequencies/selected-channel[2]", chr(ch[1]));
-							setprop("/instrumentation/tacan/frequencies/selected-channel[3]", chr(ch[2]));
-							setprop("/instrumentation/tacan/frequencies/selected-channel[4]", "y");
-						</script>
+						<script>settacan(arg[0], "y")</script>
 					</binding>
 				</key>
 			</key>

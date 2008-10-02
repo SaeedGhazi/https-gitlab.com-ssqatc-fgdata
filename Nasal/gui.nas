@@ -553,6 +553,7 @@ var showWeightDialog = func {
         var msg = dialog[name].addChild("text");
         msg.set("label", "Not supported for this aircraft");
         var cancel = dialog[name].addChild("button");
+        cancel.set("key", "Esc");
         cancel.set("legend", "Cancel");
         cancel.setBinding("dialog-close");
         fgcommand("dialog-new", dialog[name].prop());

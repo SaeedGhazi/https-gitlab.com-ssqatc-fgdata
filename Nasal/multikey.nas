@@ -205,10 +205,10 @@ var help = func {
 	printf("\t%s ... signed number", colorize("%d"));
 	printf("\t%s ... floating point number", colorize("%f"));
 	printf("\t%s ... string", colorize("%s"));
-	printf("\t%s  ... cursor left", colorize("<"));
-	printf("\t%s  ... cursor right", colorize(">"));
-	printf("\t%s  ... cursor up", colorize("^"));
-	printf("\t%s  ... cursor down", colorize("_"));
+	printf("\t%s  ... < or cursor left", colorize("<"));
+	printf("\t%s  ... > or cursor right", colorize(">"));
+	printf("\t%s  ... ^ or cursor up", colorize("^"));
+	printf("\t%s  ... _ or cursor down", colorize("_"));
 }
 
 

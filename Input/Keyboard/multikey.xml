@@ -1220,19 +1220,19 @@
 				<desc>TACAN channel = %u</desc>
 				<key n="120">
 					<name>x</name>
-					<desc>TACAN channel = %ux</desc>
+					<desc>TACAN channel = %uX</desc>
 					<binding>
 						<command>nasal</command>
-						<script>settacan(arg[0], "x")</script>
+						<script>settacan(arg[0], "X")</script>
 					</binding>
 				</key>
 
 				<key n="121">
 					<name>y</name>
-					<desc>TACAN channel = %uy</desc>
+					<desc>TACAN channel = %uY</desc>
 					<binding>
 						<command>nasal</command>
-						<script>settacan(arg[0], "y")</script>
+						<script>settacan(arg[0], "Y")</script>
 					</binding>
 				</key>
 			</key>

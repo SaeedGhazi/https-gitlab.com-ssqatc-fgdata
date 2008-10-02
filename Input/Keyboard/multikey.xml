@@ -50,6 +50,12 @@
 		</binding>
 	</key>
 
+	<key n="65">
+		<name>A</name>
+		<desc>Aircraft</desc>
+		<!-- reserved for aircraft extensions -->
+	</key>
+
 	<key n="68">
 		<name>D</name>
 		<desc>Dialogs</desc>
@@ -186,12 +192,6 @@
 				<dialog-name>weather</dialog-name>
 			</binding>
 		</key>
-
-		<key n="120">
-			<name>x</name>
-			<desc>Experimental</desc>
-			<!-- reserved for experimental features -->
-		</key>
 	</key>
 
 	<!-- environment -->
@@ -294,7 +294,6 @@
 					setprop("/sim/presets/glideslope-deg", glideslope);
 					setprop("/sim/presets/heading-deg", heading);
 				}
-
 			]]>
 		</script>
 	</nasal>
@@ -557,7 +556,7 @@
 			<desc>Route Manager</desc>
 			<key n="903">
 				<name>%s</name>
-				<desc>Route Manaager: command = %s</desc>
+				<desc>Route Manager: command = %s</desc>
 				<binding>
 					<command>nasal</command>
 					<script>setprop("/autopilot/route-manager/input", arg[0])</script>
@@ -1018,49 +1017,31 @@
 		</key>
 	</key>
 
-	<key n="113">
-		<name>q</name>
-		<desc>Quit</desc>
-		<binding>
-			<command>exit</command>
-		</binding>
-
-		<key n="33">
-			<name>!</name>
-			<desc>Quit without saving</desc>
-			<binding>
-				<command>exit</command>
-			</binding>
-		</key>
-	</key>
-
 	<nasal>
 		<script>
-			<![CDATA[
-				var radio_fmt = "/instrumentation/%s[%u]/frequencies/%s-mhz";
+			var radio_fmt = "/instrumentation/%s[%u]/frequencies/%s-mhz";
 
-				var setfreq = func(type, index, which, value) {
-					index = (index >= 1) ? index - 1 : 0;
-					setprop(sprintf(radio_fmt, type, index, which), value);
-				}
+			var setfreq = func(type, index, which, value) {
+				index = (index >= 1) ? index - 1 : 0;
+				setprop(sprintf(radio_fmt, type, index, which), value);
+			}
 
-				var togglefreq = func(type, index) {
-					index = (index >= 1) ? index - 1 : 0;
-					var sel = sprintf(radio_fmt, type, index, "selected");
-					var stby = sprintf(radio_fmt, type, index, "standby");
-					var s = getprop(stby);
-					setprop(stby, getprop(sel));
-					setprop(sel, s);
-				}
+			var togglefreq = func(type, index) {
+				index = (index >= 1) ? index - 1 : 0;
+				var sel = sprintf(radio_fmt, type, index, "selected");
+				var stby = sprintf(radio_fmt, type, index, "standby");
+				var s = getprop(stby);
+				setprop(stby, getprop(sel));
+				setprop(sel, s);
+			}
 
-				var settacan = func(number, letter) {
-					var ch = sprintf("%03u%s", number, letter);
-					setprop("/instrumentation/tacan/frequencies/selected-channel[1]", chr(ch[0]));
-					setprop("/instrumentation/tacan/frequencies/selected-channel[2]", chr(ch[1]));
-					setprop("/instrumentation/tacan/frequencies/selected-channel[3]", chr(ch[2]));
-					setprop("/instrumentation/tacan/frequencies/selected-channel[4]", chr(ch[3]));
-				}
-			]]>
+			var settacan = func(number, letter) {
+				var ch = sprintf("%03u%s", number, letter);
+				setprop("/instrumentation/tacan/frequencies/selected-channel[1]", chr(ch[0]));
+				setprop("/instrumentation/tacan/frequencies/selected-channel[2]", chr(ch[1]));
+				setprop("/instrumentation/tacan/frequencies/selected-channel[3]", chr(ch[2]));
+				setprop("/instrumentation/tacan/frequencies/selected-channel[4]", chr(ch[3]));
+			}
 		</script>
 	</nasal>
 
@@ -1196,6 +1177,12 @@
 				</key>
 			</key>
 		</key>
+	</key>
+
+	<key n="120">
+		<name>x</name>
+		<desc>Experimental</desc>
+		<!-- reserved for experimental features -->
 	</key>
 
 	<key n="902">

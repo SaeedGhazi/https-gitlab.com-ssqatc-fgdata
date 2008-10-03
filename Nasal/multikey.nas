@@ -125,6 +125,8 @@ var Dialog = {
 			forindex (var i; options) {
 				var name = options[i].getNode("name", 1).getValue();
 				var desc = options[i].getNode("desc", 1).getValue() or "";
+				if (name == "%%")
+					name = '%';
 				var c = g.addChild("text");
 				c.set("label", name);
 				c.set("row", i);
@@ -201,9 +203,9 @@ var help = func {
 			print(string.color("33", sprintf("\n-- %s %s", title, substr(line, size(title) + 2))));
 		}
 		if (k[1].getNode("no-exit") != nil)
-			desc ~= string.color("32", " +");
+			desc ~= string.color("32", "  +");
 		elsif (k[1].getNode("exit") != nil)
-			desc ~= string.color("31", " $");
+			desc ~= string.color("31", "  $");
 		printf("%s\t%s", colorize(k[0]), desc);
 	}
 	print(string.color("33", "\n-- Legend -------------------------------------------"));

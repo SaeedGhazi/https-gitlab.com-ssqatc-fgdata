@@ -192,11 +192,6 @@ var light = {
 			stretch = arg[c];
 			c += 1;
 		}
-		if (typeof(arg[c]) != "vector") {
-			die("aircraft.nas: the arguments of aircraft.light.new() have changed!\n" ~
-					"  *** BEFORE: aircraft.light.new(property, 0.1, 0.9, switch)\n" ~
-					"  ***    NOW: aircraft.light.new(property, [0.1, 0.9], switch)");
-		}
 		m.pattern = arg[c];
 		c += 1;
 		if (size(arg) > c and arg[c] != nil)

@@ -234,7 +234,12 @@ replace = func(str, old, new) {
 ##
 # Simple scanf function. Takes an input string, a pattern, and a
 # vector. It returns 0 if the format didn't match, and appends
-# all found elements to the given vector.
+# all found elements to the given vector. Return values:
+#
+# -1 string matched format ending with % (i.e. more chars than format cared about)
+#  0 string didn't match format
+#  1 string matched, but would still match if the right chars were added
+#  2 string matched, and would not if any character would be added
 #
 #   var r = string.scanf("comm3freq123.456", "comm%ufreq%f", var result = []);
 #
@@ -271,7 +276,7 @@ var scanf = func(test, format, result) {
 			success = 1;		# unsafe match
 			f = format.getc();
 			if (f == nil)
-				die("scanf: trailing % in format");
+				return -1;	# format ended with %
 			if (f == `%`) {
 				if (str.getc() != `%`)
 					return 0;
@@ -371,7 +376,7 @@ var setcolors = func(enabled) {
 # Add ANSI color codes to string, if terminal-ansi-colors are enabled and
 # stderr prints to a terminal. Example:
 #
-#   print(string.color("31", "this is red"));
+#   print(string.color("31;1", "this is red"));
 #
 var color = func nil;
 setcolors(getprop("/sim/startup/terminal-ansi-colors"));

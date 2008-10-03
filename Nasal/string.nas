@@ -356,3 +356,25 @@ var scanf = func(test, format, result) {
 }
 
 
+##
+# ANSI colors  (see $ man console_codes)
+#
+var setcolors = func(enabled) {
+	if (enabled and getprop("/sim/startup/stderr-to-terminal"))
+		color = func(color, s) { "\x1b[" ~ color ~ "m" ~ s ~ "\x1b[m" }
+	else
+		color = func(dummy, s) { s }
+}
+
+
+##
+# Add ANSI color codes to string, if terminal-ansi-colors are enabled and
+# stderr prints to a terminal. Example:
+#
+#   print(string.color("31", "this is red"));
+#
+var color = func nil;
+setcolors(getprop("/sim/startup/terminal-ansi-colors"));
+setlistener("/sim/startup/terminal-ansi-colors", func(n) setcolors(n.getBoolValue()));
+
+

@@ -153,7 +153,7 @@ var help = func {
 		for (var i = 0; i < size(str); i += 1) {
 			var c = str[i];
 			if (c == `<` or c == `>` or c == `^` or c == `_`) {
-				s ~= debug._c("35", chr(c));
+				s ~= string.color("35", chr(c));
 			} elsif (c == `%`) {
 				if ((i += 1) < size(str) and str[i] == `%`) {
 					s ~= '%';
@@ -163,13 +163,13 @@ var help = func {
 				for (; i < size(str) and (c = str[i]) != nil and string.isdigit(c); i += 1)
 					f ~= chr(c);
 				if (c == `d`)
-					s ~= debug._c("31", f ~ 'd');
+					s ~= string.color("31", f ~ 'd');
 				elsif (c == `u`)
-					s ~= debug._c("32", f ~ 'u');
+					s ~= string.color("32", f ~ 'u');
 				elsif (c == `f`)
-					s ~= debug._c("36", f ~ 'f');
+					s ~= string.color("36", f ~ 'f');
 				elsif (c == `s`)
-					s ~= debug._c("34", f ~ 's');
+					s ~= string.color("34", f ~ 's');
 			} else {
 				s ~= chr(c);
 			}
@@ -198,12 +198,15 @@ var help = func {
 		if (string.isalnum(k[0][0]) and k[0][0] != curr) {
 			curr = k[0][0];
 			var line = "---------------------------------------------------";
-			print(debug._c("33", sprintf("\n-- %s %s", title, substr(line, size(title) + 2))));
+			print(string.color("33", sprintf("\n-- %s %s", title, substr(line, size(title) + 2))));
 		}
-		
+		if (k[1].getNode("no-exit") != nil)
+			desc ~= string.color("32", " +");
+		elsif (k[1].getNode("exit") != nil)
+			desc ~= string.color("31", " $");
 		printf("%s\t%s", colorize(k[0]), desc);
 	}
-	print(debug._c("33", "\n-- Legend -------------------------------------------"));
+	print(string.color("33", "\n-- Legend -------------------------------------------"));
 	printf("\t%s ... unsigned number", colorize("%u"));
 	printf("\t%s ... signed number", colorize("%d"));
 	printf("\t%s ... floating point number", colorize("%f"));
@@ -212,6 +215,8 @@ var help = func {
 	printf("\t%s  ... > or cursor right", colorize(">"));
 	printf("\t%s  ... ^ or cursor up", colorize("^"));
 	printf("\t%s  ... _ or cursor down", colorize("_"));
+	printf("\t%s  ... repeatable action", string.color("32", "+"));
+	printf("\t%s  ... immediate action", string.color("31", "$"));
 }
 
 

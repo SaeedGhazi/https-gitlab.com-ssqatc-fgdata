@@ -272,8 +272,12 @@ var scanf = func(test, format, result) {
 			f = format.getc();
 			if (f == nil)
 				die("scanf: trailing % in format");
-			if (f == `%` and str.getc() != `%`)
-				return 0;
+			if (f == `%`) {
+				if (str.getc() != `%`)
+					return 0;
+				success = 2;
+				continue;
+			}
 
 			if (isdigit(f)) {
 				var fnum = f - `0`;

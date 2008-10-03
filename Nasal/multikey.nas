@@ -49,6 +49,7 @@ var handle_key = func(key) {
 		cmd ~= chr(key);
 	}
 
+	var options = [];
 	var bindings = [];
 	var desc = __multikey._ = nil;
 	if ((var node = find_entry(cmd, data, __multikey.arg = [])) != nil) {
@@ -61,6 +62,9 @@ var handle_key = func(key) {
 		} elsif (node.getNode("exit") != nil) {
 			mode = 2;
 		}
+		foreach (var c; node.getChildren("key"))
+			if (size(c.getChildren("binding")) or size(c.getChildren("key")))
+				append(options, c);
 	}
 
 	if (mode and size(bindings)) {
@@ -70,8 +74,7 @@ var handle_key = func(key) {
 			stop();
 	}
 	if (mode < 2)
-		dialog.update(cmd, __multikey._ or desc,
-				menu and node != nil ? node.getChildren("key") : []);
+		dialog.update(cmd, __multikey._ or desc, menu ? options : []);
 	return 1;
 }
 
@@ -194,13 +197,13 @@ var help = func {
 			continue;
 		if (string.isalnum(k[0][0]) and k[0][0] != curr) {
 			curr = k[0][0];
-			var line = "-----------------------------------------------";
+			var line = "---------------------------------------------------";
 			print(debug._c("33", sprintf("\n-- %s %s", title, substr(line, size(title) + 2))));
 		}
 		
 		printf("%s\t%s", colorize(k[0]), desc);
 	}
-	print(debug._c("33", "\n-- Legend ---------------------------------------"));
+	print(debug._c("33", "\n-- Legend -------------------------------------------"));
 	printf("\t%s ... unsigned number", colorize("%u"));
 	printf("\t%s ... signed number", colorize("%d"));
 	printf("\t%s ... floating point number", colorize("%f"));

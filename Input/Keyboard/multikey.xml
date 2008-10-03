@@ -46,58 +46,13 @@
 	<key n="37">
 		<name>%%</name>
 		<desc>On-screen statistics</desc>
-		<key n="48">
-			<name>0</name>
-			<desc>Statistics: off</desc>
+		<key n="901">
+			<name>%u</name>
+			<desc>Set on-screen statistics level</desc>
 			<exit/>
 			<binding>
-				<command>property-assign</command>
-				<property>/sim/rendering/on-screen-statistics</property>
-				<value>0</value>
-			</binding>
-		</key>
-
-		<key n="49">
-			<name>1</name>
-			<desc>Statistics: frame rate</desc>
-			<exit/>
-			<binding>
-				<command>property-assign</command>
-				<property>/sim/rendering/on-screen-statistics</property>
-				<value>1</value>
-			</binding>
-		</key>
-
-		<key n="50">
-			<name>2</name>
-			<desc>Statistics: viewer</desc>
-			<exit/>
-			<binding>
-				<command>property-assign</command>
-				<property>/sim/rendering/on-screen-statistics</property>
-				<value>2</value>
-			</binding>
-		</key>
-
-		<key n="51">
-			<name>3</name>
-			<desc>Statistics: camera scene</desc>
-			<exit/>
-			<binding>
-				<command>property-assign</command>
-				<property>/sim/rendering/on-screen-statistics</property>
-				<value>3</value>
-			</binding>
-		</key>
-
-		<key n="52">
-			<name>4</name>
-			<desc>Statistics: viewer scene</desc>
-			<exit/>
-			<binding>
-				<command>property-assign</command>
-				<property>/sim/rendering/on-screen-statistics</property>
-				<value>4</value>
+				<command>nasal</command>
+				<script>setprop("/sim/rendering/on-screen-statistics", arg[0])</script>
 			</binding>
 		</key>
 	</key>
@@ -347,26 +302,6 @@
 	</key>
 
 	<!-- Position commands -->
-	<nasal>
-		<script>
-			<![CDATA[
-				var setpresets = func(airportID, runwayID = "", lon = -9999, lat = -9999, alt = 0,
-						speed = 0, distance = 0, glideslope = 0, heading = 9999) {
-					setprop("/sim/presets/airport-id", airportID);
-					setprop("/sim/presets/runway", runwayID);
-					setprop("/sim/presets/longitude-deg", lon);
-					setprop("/sim/presets/latitude-deg", lat);
-					setprop("/sim/presets/altitude-ft", alt);
-					setprop("/sim/presets/airspeed-kt", speed);
-					setprop("/sim/presets/offset-distance-nm", distance);
-					setprop("/sim/presets/offset-azimuth-nm", 0);
-					setprop("/sim/presets/glideslope-deg", glideslope);
-					setprop("/sim/presets/heading-deg", heading);
-				}
-			]]>
-		</script>
-	</nasal>
-
 	<key n="80">
 	<name>P</name>
 	<desc>Position</desc>
@@ -381,20 +316,15 @@
 					<desc>Position on ground: airport=%s runway=</desc>
 					<binding>
 						<command>nasal</command>
-						<script>setpresets(arg[0])</script>
+						<script>aircraft.teleport(airport:arg[0])</script>
 					</binding>
-					<binding>
-						<command>presets-commit</command>
-					</binding>
+
 					<key n="903">
 						<name>%s</name>
 						<desc>Position on ground: airport=%s runway=%s</desc>
 						<binding>
 							<command>nasal</command>
-							<script>setpresets(arg[0], arg[1])</script>
-						</binding>
-						<binding>
-							<command>presets-commit</command>
+							<script>aircraft.teleport(airport:arg[0], runway:arg[1])</script>
 						</binding>
 					</key>
 				</key>

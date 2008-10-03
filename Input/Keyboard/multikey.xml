@@ -30,9 +30,77 @@
 					setprop(path, clamp(val, min, max));
 					return val;
 				}
+
+				var setpropf = func {
+					var val = pop(arg);
+					setprop(call(sprintf, arg), val);
+				}
+
+				var getpropf = func {
+					getprop(call(sprintf, arg));
+				}
 			]]>
 		</script>
 	</nasal>
+
+	<key n="37">
+		<name>%%</name>
+		<desc>On-screen statistics</desc>
+		<key n="48">
+			<name>0</name>
+			<desc>Statistics: off</desc>
+			<exit/>
+			<binding>
+				<command>property-assign</command>
+				<property>/sim/rendering/on-screen-statistics</property>
+				<value>0</value>
+			</binding>
+		</key>
+
+		<key n="49">
+			<name>1</name>
+			<desc>Statistics: frame rate</desc>
+			<exit/>
+			<binding>
+				<command>property-assign</command>
+				<property>/sim/rendering/on-screen-statistics</property>
+				<value>1</value>
+			</binding>
+		</key>
+
+		<key n="50">
+			<name>2</name>
+			<desc>Statistics: viewer</desc>
+			<exit/>
+			<binding>
+				<command>property-assign</command>
+				<property>/sim/rendering/on-screen-statistics</property>
+				<value>2</value>
+			</binding>
+		</key>
+
+		<key n="51">
+			<name>3</name>
+			<desc>Statistics: camera scene</desc>
+			<exit/>
+			<binding>
+				<command>property-assign</command>
+				<property>/sim/rendering/on-screen-statistics</property>
+				<value>3</value>
+			</binding>
+		</key>
+
+		<key n="52">
+			<name>4</name>
+			<desc>Statistics: viewer scene</desc>
+			<exit/>
+			<binding>
+				<command>property-assign</command>
+				<property>/sim/rendering/on-screen-statistics</property>
+				<value>4</value>
+			</binding>
+		</key>
+	</key>
 
 	<key n="58">
 		<name>:</name>
@@ -282,7 +350,8 @@
 	<nasal>
 		<script>
 			<![CDATA[
-				var setpresets = func(airportID, runwayID="", lon=-9999, lat=-9999, alt=0, seed=0, distance=0, glideslope=0, heading=9999) {
+				var setpresets = func(airportID, runwayID = "", lon = -9999, lat = -9999, alt = 0,
+						speed = 0, distance = 0, glideslope = 0, heading = 9999) {
 					setprop("/sim/presets/airport-id", airportID);
 					setprop("/sim/presets/runway", runwayID);
 					setprop("/sim/presets/longitude-deg", lon);
@@ -562,10 +631,7 @@
 					<desc>Append waypoint: airport ID[@altitude] = %s</desc>
 					<binding>
 						<command>nasal</command>
-						<script>
-							var command = sprintf("%s", arg[0]);
-							setprop("/autopilot/route-manager/input", command)
-						</script>
+						<script>setprop("/autopilot/route-manager/input", arg[0])</script>
 					</binding>
 				</key>
 			</key>
@@ -588,8 +654,8 @@
 					<binding>
 						<command>nasal</command>
 						<script>
-							var command = sprintf("@delete%d", arg[0] > 0 ? arg[0]-1 : 0);
-							setprop("/autopilot/route-manager/input", command)
+							var command = sprintf("@delete%d", arg[0] > 0 ? arg[0] - 1 : 0);
+							setprop("/autopilot/route-manager/input", command);
 						</script>
 					</binding>
 				</key>
@@ -607,8 +673,8 @@
 						<binding>
 							<command>nasal</command>
 							<script>
-								var command = sprintf("@insert%d:%s", arg[0] > 0 ? arg[0]-1 : 0, arg[1]);
-								setprop("/autopilot/route-manager/input", command)
+								var command = sprintf("@insert%d:%s", arg[0] > 0 ? arg[0] - 1 : 0, arg[1]);
+								setprop("/autopilot/route-manager/input", command);
 							</script>
 						</binding>
 					</key>
@@ -1097,10 +1163,11 @@
 
 			var settacan = func(number, letter) {
 				var ch = sprintf("%03u%s", number, letter);
-				setprop("/instrumentation/tacan/frequencies/selected-channel[1]", chr(ch[0]));
-				setprop("/instrumentation/tacan/frequencies/selected-channel[2]", chr(ch[1]));
-				setprop("/instrumentation/tacan/frequencies/selected-channel[3]", chr(ch[2]));
-				setprop("/instrumentation/tacan/frequencies/selected-channel[4]", chr(ch[3]));
+				var p = "/instrumentation/tacan/frequencies/selected-channel[%u]";
+				setpropf(p, 1, chr(ch[0]));
+				setpropf(p, 2, chr(ch[1]));
+				setpropf(p, 3, chr(ch[2]));
+				setpropf(p, 4, chr(ch[3]));
 			}
 		</script>
 	</nasal>

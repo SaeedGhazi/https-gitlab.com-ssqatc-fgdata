@@ -123,10 +123,9 @@ var Dialog = {
 			g.set("layout", "table");
 			g.set("default-padding", 2);
 			forindex (var i; options) {
-				var name = options[i].getNode("name", 1).getValue();
 				var desc = options[i].getNode("desc", 1).getValue() or "";
-				if (name == "%%")
-					name = '%';
+				var name = options[i].getNode("name", 1).getValue();
+				name = string.replace(name, "%%", "%");
 				var c = g.addChild("text");
 				c.set("label", name);
 				c.set("row", i);
@@ -194,8 +193,7 @@ var help = func {
 		var desc = k[1].getNode("desc", 1).getValue() or "??";
 		if (size(k[0]) == 1 or k[0][0] == `%`)
 			title = desc;
-		if (!size(bndg) or size(bndg) == 1
-					and bndg[0].getNode("command", 1).getValue() == "null")
+		if (!size(bndg) or size(bndg) == 1 and bndg[0].getNode("command", 1).getValue() == "null")
 			continue;
 		if (string.isalnum(k[0][0]) and k[0][0] != curr) {
 			curr = k[0][0];

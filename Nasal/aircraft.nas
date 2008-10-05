@@ -906,12 +906,12 @@ var autotrim = {
 #	tyresmoke_0.update();
 #
 var tyresmoke = {
-	new: func(number) {
+	new : func(number) {
 		var m = { parents: [tyresmoke] };
 		m.vertical_speed = props.globals.getNode("velocities/vertical-speed-fps", 1);
 		m.speed = props.globals.getNode("velocities/groundspeed-kt", 1);
 
-		var gear = props.globals.getNode("gear/gear", number);
+		var gear = props.globals.getNode("gear", 1).getChild("gear", number, 1);
 		m.wow = props.initNode(gear.getNode("wow", 1));
 		m.tyresmoke = props.initNode(gear.getNode("tyre-smoke", 1), 0, "BOOL");
 		m.friction_factor = props.initNode(gear.getNode("ground-friction-factor", 1), 1);
@@ -919,7 +919,7 @@ var tyresmoke = {
 		m.lp = lowpass.new(2);
 		return m;
 	},
-	update: func {
+	update : func {
 		var rollspeed = me.rollspeed.getValue();
 		var vert_speed = me.vertical_speed.getValue();
 		var groundspeed = me.speed.getValue();

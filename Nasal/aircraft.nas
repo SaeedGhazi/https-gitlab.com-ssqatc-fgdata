@@ -885,6 +885,61 @@ var autotrim = {
 
 
 
+# tyre smoke
+# =============================================================================
+# Provides a property which can be used to contol particles used to simulate tyre
+# smoke on landing. Weight on wheels, vertical speed, ground speed, ground friction
+# factor are taken into account. Tyre slip is simulated by low pass filters.
+#
+# Modifications to the model file are required.
+#
+# Generic XML particle files are available, but are not mandatory
+# (see Hawker Seahawk for an example).
+#
+# SYNOPSIS:
+#	aircraft.tyresmoke.new(<gear index>)
+#	<gear index> - the index of the gear to which the tyre smoke is attached
+#	aircraft.tyresmoke.update()
+#
+# EXAMPLE:
+#	var tyresmoke_0 = aircraft.tyresmoke.new(0);
+#	tyresmoke_0.update();
+#
+var tyresmoke = {
+	new: func(number) {
+		var m = { parents: [tyresmoke] };
+		m.vertical_speed = props.globals.getNode("velocities/vertical-speed-fps", 1);
+		m.speed = props.globals.getNode("velocities/groundspeed-kt", 1);
+
+		var gear = props.globals.getNode("gear/gear", number);
+		m.wow = props.initNode(gear.getNode("wow", 1));
+		m.tyresmoke = props.initNode(gear.getNode("tyre-smoke", 1), 0, "BOOL");
+		m.friction_factor = props.initNode(gear.getNode("ground-friction-factor", 1), 1);
+		m.rollspeed = props.initNode(gear.getNode("rollspeed-ms", 1));
+		m.lp = lowpass.new(2);
+		return m;
+	},
+	update: func {
+		var rollspeed = me.rollspeed.getValue();
+		var vert_speed = me.vertical_speed.getValue();
+		var groundspeed = me.speed.getValue();
+		var friction_factor = me.friction_factor.getValue();
+		var wow = me.wow.getValue();
+
+		var filtered_rollspeed = me.lp.filter(rollspeed);
+		var diff = math.abs(rollspeed - filtered_rollspeed);
+		var diff_norm = diff > 0 ? diff / rollspeed : 0;
+
+		if (wow and vert_speed < -0.05 and diff_norm > 0.05
+				and friction_factor > 0.7 and groundspeed > 50)
+			me.tyresmoke.setValue(1);
+		else
+			me.tyresmoke.setValue(0);
+	},
+};
+
+
+
 # teleport
 # =============================================================================
 # Usage:  aircraft.teleport(lat:48.3, lon:32.4, alt:5000);
@@ -987,82 +1042,4 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 		data._loop_ = func nil;
 	}
 });
-
-# tyre smoke
-# =============================================================================
-# Provides a property which can be used to contol particles used to simulate tyre 
-# smoke on landing. Weight on wheels, vertical speed, ground speed, ground friction factor
-# are taken into account. Tyre slip is simulated be low pass filters.
-#
-# Modifications to the model file are required.
-#
-# Generic XML particle files are available, but are not mandatory
-# (see Hawker Seahawk for an example). 
-#
-# SYNOPSIS:
-#	aircraft.tyresmoke.new(<gear index>)
-#	<gear index> - the index of the gear to which the tyre smoke is attached
-#	aircraft.tyresmoke.update()
-#
-# EXAMPLE:
-#	var tyresmoke_0 = aircraft.tyresmoke.new(0);
-#	tyresmoke_0.update();
-#
-
-var tyresmoke = {
-	new : func (number,
-				){
-		var m = {parents : [tyresmoke] };
-		m.name = "tyre-smoke " ~ number;
-		m.wow = props.globals.getNode("gear/gear[" ~ number ~"]/wow", 1);
-		m.tyresmoke = props.globals.getNode("gear/gear[" ~ number ~"]/tyre-smoke", 1);
-		m.tyresmoke.setBoolValue(0);
-		m.vertical_speed = props.globals.getNode("velocities/vertical-speed-fps", 1);
-		m.speed = props.globals.getNode("velocities/groundspeed-kt", 1);
-		m.friction_factor = props.globals.getNode("gear/gear[" ~ number ~"]/ground-friction-factor", 1);
-		m.friction_factor.setValue(1);
-		m.rollspeed = props.globals.getNode("gear/gear[" ~ number ~"]/rollspeed-ms", 1);
-		m.rollspeed.setValue(0);
-		m.lp = lowpass.new(2);
-#		print ("initialising ", obj.name," ", obj.tyresmoke.getValue());
-		return m;
-	},
-
-	update: func {    # set the smoke value according to the conditions
-
-		var vert_speed = me.vertical_speed.getValue();
-		var groundspeed = me.speed.getValue();
-		var friction_factor = me.friction_factor.getValue();
-		var wow = me.wow.getValue();
-		var rollspeed = me.rollspeed.getValue();
-		var filtered_rollspeed = me.lp.filter(me.rollspeed.getValue());
-		
-		var diff_norm = 0;
-
-#       print (me.name, " rollspeed ", rollspeed, " filtered_rollspeed ",filtered_rollspeed);
-
-		var diff = math.abs(rollspeed - filtered_rollspeed);
-
-		if (diff > 0)
-			diff_norm = diff/rollspeed;
-		else
-			diff_norm = 0;
-
-		if (wow == nil or diff_norm == nil or rollspeed == nil)
-			return;
-
-		if (wow and vert_speed < -0.05 and diff_norm > 0.05 
-				and friction_factor > 0.7 and groundspeed > 50){
-			me.tyresmoke.setValue(1);
-		}
-		else{
-			me.tyresmoke.setValue(0);
-		}
-
-#		print("updating ", me.name, " diff ", diff,
-#			 " diff_norm ", diff_norm, " ", me.tyresmoke.getValue());
-
-	 }, # end function
-
-}; #
 

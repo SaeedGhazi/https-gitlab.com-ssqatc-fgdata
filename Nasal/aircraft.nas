@@ -1012,7 +1012,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 var tyresmoke = {
 	new : func (number,
 				){
-		var obj = {parents : [tyresmoke] };
+		var m = {parents : [tyresmoke] };
 		m.name = "tyre-smoke " ~ number;
 		m.wow = props.globals.getNode("gear/gear[" ~ number ~"]/wow", 1);
 		m.tyresmoke = props.globals.getNode("gear/gear[" ~ number ~"]/tyre-smoke", 1);
@@ -1025,7 +1025,7 @@ var tyresmoke = {
 		m.rollspeed.setValue(0);
 		m.lp = lowpass.new(2);
 #		print ("initialising ", obj.name," ", obj.tyresmoke.getValue());
-		return obj;
+		return m;
 	},
 
 	update: func {    # set the smoke value according to the conditions

@@ -93,31 +93,36 @@ var Dialog = {
 		me.isopen = 0;
 	},
 	update : func(cmd, title, options) {
-		if (!size(cmd))
-			var (title, r, g, b) = ("Command Mode", 1, 0.7, 0);
-		elsif (title)
-			var (r, g, b) = (0.7, 1, 0.7);
-		else
-			var (title, r, g, b) = ("<unknown>", 1, 0.4, 0.4);
-
-		me.del();
 		var dlg = gui.Widget.new();
 		dlg.set("name", me.name);
 		dlg.set("y", -80);
 		dlg.set("layout", "vbox");
-		dlg.set("default-padding", 5);
+		dlg.set("default-padding", 2);
+
+		# title/description
 		var t = dlg.addChild("text");
-		t.set("label", title);
-		t.setColor(r, g, b);
+		if (!size(cmd)) {
+			t.set("label", "  Command Mode  ");
+			t.setColor(1, 0.7, 0);
+		} elsif (title) {
+			t.set("label", "  " ~ title ~ "  ");
+			t.setColor(0.7, 1, 0.7);
+		} else {
+			t.set("label", "  <unknown>  ");
+			t.setColor(1, 0.4, 0.4);
+		}
+
+		# typed command
 		var t = dlg.addChild("text");
 		if (me.firstrun) {
 			me.firstrun = 0;
-			cmd = "Use <Tab> to toggle options!";
+			cmd = "  Use <Tab> to toggle options!  ";
 			t.setColor(0.5, 0.5, 0.5);
 		}
 		t.set("label", cmd);
 
-		if (options != nil and size(options)) {
+		# option menu
+		if (size(options)) {
 			dlg.addChild("hrule");
 			var g = dlg.addChild("group");
 			g.set("layout", "table");
@@ -141,6 +146,7 @@ var Dialog = {
 				c.set("halign", "left");
 			}
 		}
+		me.del();
 		fgcommand("dialog-new", dlg.prop());
 		fgcommand("dialog-show", me.prop);
 		me.isopen = 1;

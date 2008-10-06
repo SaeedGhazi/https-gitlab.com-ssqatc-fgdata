@@ -380,6 +380,6 @@ var setcolors = func(enabled) {
 #
 var color = func nil;
 setcolors(getprop("/sim/startup/terminal-ansi-colors"));
-setlistener("/sim/startup/terminal-ansi-colors", func(n) setcolors(n.getBoolValue()));
+_setlistener("/sim/startup/terminal-ansi-colors", func(n) setcolors(n.getBoolValue()));
 
 

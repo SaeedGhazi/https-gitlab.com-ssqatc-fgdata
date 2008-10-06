@@ -55,7 +55,8 @@ var load_nasal = func(file, module = nil) {
     var err = [];
     var code = call(func compile(readfile(file), file), nil, err);
     if (size(err)) {
-        (func nil)(); # needed to get correct caller results (?!?)
+        (func nil)();                     # FIXME hack for Nasal bug #1
+        err[0] ~= " of " ~ file ~ "\n ";  # FIXME hack for Nasal bug #2
         for (var i = 1; (var c = caller(i)) != nil; i += 1)
             err ~= subvec(c, 2, 2);
         debug.printerror(err);

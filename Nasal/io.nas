@@ -52,11 +52,15 @@ var load_nasal = func(file, module = nil) {
     elsif (typeof(globals[module]) != "hash")
         die("io.load_nasal(): namespace '" ~ module ~ "' already in use, but not a hash");
 
-    var err = [];
-    var code = call(func compile(readfile(file), file), nil, err);
+    var code = call(func compile(readfile(file), file), nil, var err = []);
     if (size(err)) {
-        (func nil)();                     # FIXME hack for Nasal bug #1
-        err[0] ~= " of " ~ file ~ "\n ";  # FIXME hack for Nasal bug #2
+        (func nil)();                                  # FIXME hack around Nasal bug
+
+        if (substr(err[0], 0, 12) == "Parse error:") { # hack around Nasal feature
+            var e = split(" at line ", err[0]);
+            if (size(e) == 2)
+                err[0] = string.join("", [e[0], "\n  at ", file, ", line ", e[1], "\n "]);
+        }
         for (var i = 1; (var c = caller(i)) != nil; i += 1)
             err ~= subvec(c, 2, 2);
         debug.printerror(err);

@@ -350,6 +350,9 @@ var applyParkingBrake = func(v) {
     return i;
 }
 
+# 1: Deploy, -1: Release
+var deployChute = func(v) setprop("/controls/flight/drag-chute", v);
+
 ##
 # Weapon handling.
 #

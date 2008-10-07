@@ -1,9 +1,9 @@
-var listener = nil;
-var cmd = nil;
-var data = nil;
-var dialog = nil;
-var menu = 0;
 var translate = { 356: '<', 357: '^', 358: '>', 359: '_' };
+var listener = nil;
+var dialog = nil;
+var data = nil;
+var cmd = nil;
+var menu = 0;
 
 
 var start = func {
@@ -24,9 +24,9 @@ var start = func {
 
 
 var stop = func {
-	dialog.del();
 	removelistener(listener);
 	listener = nil;
+	dialog.del();
 }
 
 
@@ -37,7 +37,7 @@ var handle_key = func(key) {
 		return 1;
 	} elsif (key == 8) {
 		cmd = substr(cmd, 0, size(cmd) - 1);
-	} elsif (key == 9) {
+	} elsif (key == `\t`) {
 		menu = !menu;
 	} elsif (key == `\n` or key == `\r`) {
 		mode = 2;
@@ -62,9 +62,10 @@ var handle_key = func(key) {
 		} elsif (node.getNode("exit") != nil) {
 			mode = 2;
 		}
-		foreach (var c; node.getChildren("key"))
-			if (size(c.getChildren("binding")) or size(c.getChildren("key")))
-				append(options, c);
+		if (menu)
+			foreach (var c; node.getChildren("key"))
+				if (size(c.getChildren("binding")) or size(c.getChildren("key")))
+					append(options, c);
 	}
 
 	if (mode and size(bindings)) {
@@ -74,7 +75,7 @@ var handle_key = func(key) {
 			stop();
 	}
 	if (mode < 2)
-		dialog.update(cmd, __multikey._ or desc, menu ? options : []);
+		dialog.update(cmd, __multikey._ or desc, options);
 	return 1;
 }
 
@@ -122,28 +123,33 @@ var Dialog = {
 		t.set("label", cmd);
 
 		# option menu
-		if (size(options)) {
+		if (var numopt = size(options)) {
 			dlg.addChild("hrule");
 			var g = dlg.addChild("group");
 			g.set("layout", "table");
 			g.set("default-padding", 2);
+			var column_height = numopt / (1 + (numopt > 15) + (numopt > 30));
 			forindex (var i; options) {
-				var desc = options[i].getNode("desc", 1).getValue() or "";
-				var name = options[i].getNode("name", 1).getValue();
+				var col = 3 * int(i / column_height);
+				var row = math.mod(i, column_height);
+
+				var desc = (options[i].getNode("desc", 1).getValue() or "") ~ "  ";
+				var name = "  " ~ options[i].getNode("name", 1).getValue();
 				name = string.replace(name, "%%", "%");
-				var c = g.addChild("text");
-				c.set("label", name);
-				c.set("row", i);
-				c.set("col", 0);
-				var c = g.addChild("text");
-				c.set("label", " ... ");
-				c.set("row", i);
-				c.set("col", 1);
-				var c = g.addChild("text");
-				c.set("label", desc);
-				c.set("row", i);
-				c.set("col", 2);
-				c.set("halign", "left");
+
+				var o = g.addChild("text");
+				o.set("label", name);
+				o.set("row", row);
+				o.set("col", col);
+				var o = g.addChild("text");
+				o.set("label", " ... ");
+				o.set("row", row);
+				o.set("col", col + 1);
+				var o = g.addChild("text");
+				o.set("label", desc);
+				o.set("row", row);
+				o.set("col", col + 2);
+				o.set("halign", "left");
 			}
 		}
 		me.del();

@@ -42,7 +42,7 @@ top down before the key bindings are parsed.
 
  <key n="1">
   <name>Ctrl-A</name>
-  <desc>Toggle autopilot altitude lock.</desc>
+  <desc>Toggle autopilot altitude lock</desc>
   <binding>
    <command>nasal</command>
    <script>
@@ -58,7 +58,7 @@ top down before the key bindings are parsed.
 
  <key n="2">
   <name>Ctrl-B</name>
-  <desc>Toggle speedbrake.</desc>
+  <desc>Toggle speedbrake</desc>
   <binding>
    <command>property-toggle</command>
    <property>/controls/flight/speedbrake</property>
@@ -76,7 +76,7 @@ top down before the key bindings are parsed.
 
  <key n="7">
   <name>Ctrl-G</name>
-  <desc>Toggle autopilot glide slope lock.</desc>
+  <desc>Toggle autopilot glide slope lock</desc>
   <binding>
    <command>nasal</command>
    <script>
@@ -92,7 +92,7 @@ top down before the key bindings are parsed.
 
  <key n="8">
   <name>Ctrl-H</name>
-  <desc>Toggle autopilot heading lock.</desc>
+  <desc>Toggle autopilot heading lock</desc>
   <binding>
    <command>nasal</command>
    <script>
@@ -108,7 +108,7 @@ top down before the key bindings are parsed.
 
  <key n="13">
   <name>Enter</name>
-  <desc>Move rudder right.</desc>
+  <desc>Move rudder right</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
@@ -119,7 +119,7 @@ top down before the key bindings are parsed.
 
  <key n="14">
   <name>Ctrl-N</name>
-  <desc>Toggle autopilot nav1 lock.</desc>
+  <desc>Toggle autopilot nav1 lock</desc>
   <binding>
    <command>nasal</command>
    <script>
@@ -135,7 +135,7 @@ top down before the key bindings are parsed.
 
  <key n="16">
   <name>Ctrl-P</name>
-  <desc>Toggle pitch hold.</desc>
+  <desc>Toggle pitch hold</desc>
   <binding>
    <command>nasal</command>
    <script>
@@ -153,16 +153,15 @@ top down before the key bindings are parsed.
 
  <key n="18">
   <name>Ctrl-R</name>
-  <desc>Show radio setting dialog.</desc>
+  <desc>Activate the instant replay system</desc>
   <binding>
-   <command>dialog-show</command>
-   <dialog-name>radios</dialog-name>
+   <command>replay</command>
   </binding>
  </key>
 
  <key n="19">
   <name>Ctrl-S</name>
-  <desc>Toggle auto-throttle lock.</desc>
+  <desc>Toggle auto-throttle lock</desc>
   <binding>
    <command>nasal</command>
    <script>
@@ -178,7 +177,7 @@ top down before the key bindings are parsed.
 
  <key n="20">
   <name>Ctrl-T</name>
-  <desc>Toggle autopilot terrain lock.</desc>
+  <desc>Toggle autopilot terrain lock</desc>
   <binding>
    <command>nasal</command>
    <script>
@@ -196,7 +195,7 @@ top down before the key bindings are parsed.
 
  <key n="21">
   <name>Ctrl-U</name>
-  <desc>[Cheat] Add 1000ft of emergency altitude.</desc>
+  <desc>[Cheat] Add 1000ft of emergency altitude</desc>
   <binding>
    <command>property-adjust</command>
    <property>/position/altitude-ft</property>
@@ -211,7 +210,7 @@ top down before the key bindings are parsed.
 
  <key n="22">
   <name>Ctrl-V</name>
-  <desc>Select initial view (view 0).</desc>
+  <desc>Select initial view (view 0)</desc>
   <binding>
    <command>property-assign</command>
    <property>/sim/current-view/view-number</property>
@@ -221,7 +220,7 @@ top down before the key bindings are parsed.
 
  <key n="23">
   <name>Ctrl-W</name>
-  <desc>Toggle autopilot wing leveler.</desc>
+  <desc>Toggle autopilot wing leveler</desc>
   <binding>
    <command>nasal</command>
    <script>
@@ -237,7 +236,7 @@ top down before the key bindings are parsed.
 
  <key n="24">
   <name>Ctrl-X</name>
-  <desc>Reset zoom to default.</desc>
+  <desc>Reset zoom to default</desc>
   <binding>
    <command>property-assign</command>
    <property>/sim/current-view/field-of-view</property>
@@ -247,13 +246,13 @@ top down before the key bindings are parsed.
 
  <key n="27">
   <name>ESC</name>
-  <desc>Prompt and quit FlightGear.</desc>
+  <desc>Prompt and quit FlightGear</desc>
   <binding>
     <command>dialog-show</command>
     <dialog-name>exit</dialog-name>
   </binding>
   <mod-shift>
-   <desc>Reset FlightGear.</desc>
+   <desc>Reset FlightGear</desc>
    <binding>
     <command>reset</command>
    </binding>
@@ -324,7 +323,7 @@ top down before the key bindings are parsed.
 
  <key n="43">
   <name>+</name>
-  <desc>Let ATC/instructor repeat last message.</desc>
+  <desc>Let ATC/instructor repeat last message</desc>
   <binding>
     <command>nasal</command>
     <script>screen.msg_repeat()</script>
@@ -394,7 +393,7 @@ top down before the key bindings are parsed.
 
  <key n="48">
   <name>0</name>
-  <desc>Move rudder left.</desc>
+  <desc>Move rudder left</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
@@ -405,7 +404,7 @@ top down before the key bindings are parsed.
 
  <key n="49">
   <name>1</name>
-  <desc>Decrease elevator trim.</desc>
+  <desc>Decrease elevator trim</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
@@ -424,7 +423,7 @@ top down before the key bindings are parsed.
 
  <key n="50">
   <name>2</name>
-  <desc>Increase elevator or autopilot altitude.</desc>
+  <desc>Increase elevator or autopilot altitude</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
@@ -433,7 +432,7 @@ top down before the key bindings are parsed.
    </script>
   </binding>
   <mod-shift>
-   <desc>Look back.</desc>
+   <desc>Look back</desc>
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
@@ -444,7 +443,7 @@ top down before the key bindings are parsed.
 
  <key n="51">
   <name>3</name>
-  <desc>Decrease throttle or autopilot autothrottle.</desc>
+  <desc>Decrease throttle or autopilot autothrottle</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
@@ -453,7 +452,7 @@ top down before the key bindings are parsed.
    </script>
   </binding>
   <mod-shift>
-   <desc>Look back right.</desc>
+   <desc>Look back right</desc>
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
@@ -473,7 +472,7 @@ top down before the key bindings are parsed.
    </script>
   </binding>
   <mod-shift>
-   <desc>Look left.</desc>
+   <desc>Look left</desc>
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
@@ -484,7 +483,7 @@ top down before the key bindings are parsed.
 
  <key n="53">
   <name>5</name>
-  <desc>Center aileron, elevator, and rudder.</desc>
+  <desc>Center aileron, elevator, and rudder</desc>
   <binding>
    <command>nasal</command>
    <script>controls.centerFlightControls()</script>
@@ -502,7 +501,7 @@ top down before the key bindings are parsed.
    </script>
   </binding>
   <mod-shift>
-   <desc>Look right.</desc>
+   <desc>Look right</desc>
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
@@ -513,7 +512,7 @@ top down before the key bindings are parsed.
 
  <key n="55">
   <name>7</name>
-  <desc>Increase elevator trim.</desc>
+  <desc>Increase elevator trim</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
@@ -521,7 +520,7 @@ top down before the key bindings are parsed.
    <step type="double">0.001</step>
   </binding>
   <mod-shift>
-   <desc>Look front left.</desc>
+   <desc>Look front left</desc>
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
@@ -532,7 +531,7 @@ top down before the key bindings are parsed.
 
  <key n="56">
   <name>8</name>
-  <desc>Decrease elevator or autopilot altitude.</desc>
+  <desc>Decrease elevator or autopilot altitude</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
@@ -541,7 +540,7 @@ top down before the key bindings are parsed.
    </script>
   </binding>
   <mod-shift>
-   <desc>Look forward.</desc>
+   <desc>Look forward</desc>
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
@@ -552,7 +551,7 @@ top down before the key bindings are parsed.
 
  <key n="57">
   <name>9</name>
-  <desc>Increase throttle or autopilot autothrottle.</desc>
+  <desc>Increase throttle or autopilot autothrottle</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
   <command>nasal</command>
@@ -561,7 +560,7 @@ top down before the key bindings are parsed.
    </script>
   </binding>
   <mod-shift>
-   <desc>Look front right.</desc>
+   <desc>Look front right</desc>
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
@@ -599,7 +598,7 @@ top down before the key bindings are parsed.
 
  <key n="65">
   <name>A</name>
-  <desc>Decrease speed-up.</desc>
+  <desc>Decrease speed-up</desc>
   <binding>
    <command>property-adjust</command>
    <property>/sim/speed-up</property>
@@ -625,7 +624,7 @@ top down before the key bindings are parsed.
 
  <key n="71">
   <name>G</name>
-  <desc>Gear down.</desc>
+  <desc>Gear down</desc>
   <binding>
    <command>nasal</command>
    <script>controls.gearDown(1)</script>
@@ -658,7 +657,7 @@ top down before the key bindings are parsed.
 
  <key n="77">
   <name>M</name>
-  <desc>Mixture leaner.</desc>
+  <desc>Mixture leaner</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
@@ -668,7 +667,7 @@ top down before the key bindings are parsed.
 
  <key n="78">
   <name>N</name>
-  <desc>Propeller Coarser.</desc>
+  <desc>Propeller Coarser</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
@@ -678,7 +677,7 @@ top down before the key bindings are parsed.
 
  <key n="80">
   <name>P</name>
-  <desc>Toggle panel.</desc>
+  <desc>Toggle panel</desc>
   <binding>
    <command>property-toggle</command>
    <property>/sim/panel/visibility</property>
@@ -687,7 +686,7 @@ top down before the key bindings are parsed.
 
  <key n="83">
   <name>S</name>
-  <desc>Swap panels.</desc>
+  <desc>Swap panels</desc>
   <binding>
    <condition>
      <not>
@@ -710,7 +709,7 @@ top down before the key bindings are parsed.
 
  <key n="84">
   <name>T</name>
-  <desc>Decrease warp delta.</desc>
+  <desc>Decrease warp delta</desc>
   <binding>
    <command>property-adjust</command>
    <property>/sim/time/warp-delta</property>
@@ -720,7 +719,7 @@ top down before the key bindings are parsed.
 
  <key n="86">
   <name>V</name>
-  <desc>Scroll in reverse through views.</desc>
+  <desc>Scroll in reverse through views</desc>
   <binding>
    <command>nasal</command>
    <script>view.stepView(-1)</script>
@@ -729,7 +728,7 @@ top down before the key bindings are parsed.
 
  <key n="87">
   <name>W</name>
-  <desc>Decrease warp.</desc>
+  <desc>Decrease warp</desc>
   <binding>
    <command>property-adjust</command>
    <property>/sim/time/warp</property>
@@ -739,7 +738,7 @@ top down before the key bindings are parsed.
 
  <key n="88">
   <name>X</name>
-  <desc>Increase field of view.</desc>
+  <desc>Increase field of view</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
@@ -758,7 +757,7 @@ top down before the key bindings are parsed.
 
  <key n="91">
   <name>[</name>
-  <desc>Decrease flaps.</desc>
+  <desc>Decrease flaps</desc>
   <binding>
    <command>nasal</command>
    <script>controls.flapsDown(-1)</script>
@@ -773,7 +772,7 @@ top down before the key bindings are parsed.
 
  <key n="93">
   <name>]</name>
-  <desc>Increase flaps.</desc>
+  <desc>Increase flaps</desc>
   <binding>
    <command>nasal</command>
    <script>controls.flapsDown(1)</script>
@@ -798,7 +797,7 @@ top down before the key bindings are parsed.
 
  <key n="97">
   <name>a</name>
-  <desc>Increase speed-up.</desc>
+  <desc>Increase speed-up</desc>
   <binding>
    <command>property-adjust</command>
    <property>/sim/speed-up</property>
@@ -809,7 +808,7 @@ top down before the key bindings are parsed.
 
  <key n="98">
   <name>b</name>
-  <desc>Apply all brakes.</desc>
+  <desc>Apply all brakes</desc>
   <binding>
    <command>nasal</command>
    <script>controls.applyBrakes(1)</script>
@@ -846,7 +845,7 @@ top down before the key bindings are parsed.
 
  <key n="103">
   <name>g</name>
-  <desc>Gear Up.</desc>
+  <desc>Gear Up</desc>
   <binding>
    <command>nasal</command>
    <script>controls.gearDown(-1)</script>
@@ -879,7 +878,7 @@ top down before the key bindings are parsed.
 
  <key n="106">
   <name>j</name>
-  <desc>Decrease spoilers.</desc>
+  <desc>Decrease spoilers</desc>
   <binding>
    <command>nasal</command>
    <script>controls.stepSpoilers(-1)</script>
@@ -888,7 +887,7 @@ top down before the key bindings are parsed.
 
  <key n="107">
   <name>k</name>
-  <desc>Increase spoilers.</desc>
+  <desc>Increase spoilers</desc>
   <binding>
    <command>nasal</command>
    <script>controls.stepSpoilers(1)</script>
@@ -897,7 +896,7 @@ top down before the key bindings are parsed.
 
  <key n="108">
   <name>l</name>
-  <desc>Toggle tail-wheel lock.</desc>
+  <desc>Toggle tail-wheel lock</desc>
   <binding>
    <command>property-toggle</command>
    <property>/controls/gear/tailwheel-lock</property>
@@ -906,7 +905,7 @@ top down before the key bindings are parsed.
 
  <key n="109">
   <name>m</name>
-  <desc>Mixture richer.</desc>
+  <desc>Mixture richer</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
@@ -916,7 +915,7 @@ top down before the key bindings are parsed.
 
  <key n="110">
   <name>n</name>
-  <desc>Propeller Finer.</desc>
+  <desc>Propeller Finer</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
@@ -926,7 +925,7 @@ top down before the key bindings are parsed.
 
  <key n="112">
   <name>p</name>
-  <desc>Toggle the pause state of the sim.</desc>
+  <desc>Toggle the pause state of the sim</desc>
   <binding>
    <command>property-toggle</command>
    <property>/sim/freeze/master</property>
@@ -942,14 +941,6 @@ top down before the key bindings are parsed.
    <command>property-assign</command>
    <property>/sim/freeze/replay-state</property>
    <value type="int">0</value>
-  </binding>
- </key>
-
- <key n="114">
-  <name>r</name>
-  <desc>Activate the instant replay system.</desc>
-  <binding>
-   <command>replay</command>
   </binding>
  </key>
 
@@ -976,7 +967,7 @@ top down before the key bindings are parsed.
 
  <key n="116">
   <name>t</name>
-  <desc>Increase warp delta.</desc>
+  <desc>Increase warp delta</desc>
   <binding>
    <command>property-adjust</command>
    <property>/sim/time/warp-delta</property>
@@ -1004,7 +995,7 @@ top down before the key bindings are parsed.
 
  <key n="118">
   <name>v</name>
-  <desc>Scroll through views.</desc>
+  <desc>Scroll through views</desc>
   <binding>
    <command>nasal</command>
    <script>view.stepView(1)</script>
@@ -1013,7 +1004,7 @@ top down before the key bindings are parsed.
 
  <key n="119">
   <name>w</name>
-  <desc>Increase warp.</desc>
+  <desc>Increase warp</desc>
   <binding>
    <command>property-adjust</command>
    <property>/sim/time/warp</property>
@@ -1023,7 +1014,7 @@ top down before the key bindings are parsed.
 
  <key n="120">
   <name>x</name>
-  <desc>Decrease field of view.</desc>
+  <desc>Decrease field of view</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
@@ -1082,7 +1073,7 @@ top down before the key bindings are parsed.
  <key n="257">
   <name>F1</name>
   <mod-shift>
-   <desc>Load flight.</desc>
+   <desc>Load flight</desc>
    <binding>
     <command>load</command>
    </binding>
@@ -1090,13 +1081,8 @@ top down before the key bindings are parsed.
  </key>
 
  <key n="258">
-  <name>F2</name>
-  <desc>Force tile cache reload.</desc>
-  <binding>
-   <command>tile-cache-reload</command>
-  </binding>
   <mod-shift>
-   <desc>Save flight.</desc>
+   <desc>Save flight</desc>
    <binding>
     <command>save</command>
     <write-all>false</write-all>
@@ -1106,7 +1092,7 @@ top down before the key bindings are parsed.
 
  <key n="259">
   <name>F3</name>
-  <desc>Capture screen.</desc>
+  <desc>Capture screen</desc>
   <binding>
    <command>nasal</command>
    <script>
@@ -1119,23 +1105,9 @@ top down before the key bindings are parsed.
    </script>
   </binding>
   <mod-shift>
-   <desc>Load panel.</desc>
+   <desc>Load panel</desc>
    <binding>
     <command>panel-load</command>
-   </binding>
-  </mod-shift>
- </key>
-
- <key n="260">
-  <name>F4</name>
-  <desc>Force lighting update.</desc>
-  <binding>
-   <command>lighting-update</command>
-  </binding>
-  <mod-shift>
-   <desc>Reload global preferences.</desc>
-   <binding>
-    <command>preferences-load</command>
    </binding>
   </mod-shift>
  </key>
@@ -1191,37 +1163,14 @@ top down before the key bindings are parsed.
 
  <key n="264">
   <name>F8</name>
-  <desc>Cycle fog type</desc>
+  <desc></desc>
   <repeatable type="bool">true</repeatable>
-  <binding>
-   <command>property-cycle</command>
-   <property>/sim/rendering/fog</property>
-   <value>fastest</value>
-   <value>nicest</value>
-   <value>disabled</value>
-  </binding>
   <mod-shift>
    <desc>Scroll panel right</desc>
    <binding>
     <command>property-adjust</command>
     <property>/sim/panel/x-offset</property>
     <step type="int">5</step>
-   </binding>
-  </mod-shift>
- </key>
-
- <key n="265">
-  <name>F9</name>
-  <desc>Toggle textures.</desc>
-  <binding>
-   <command>property-toggle</command>
-   <property>/sim/rendering/textures</property>
-  </binding>
-  <mod-shift>
-   <desc>Toggle FDM data logging.</desc>
-   <binding>
-    <command>property-toggle</command>
-    <property>/sim/temp/fdm-data-logging</property>
    </binding>
   </mod-shift>
  </key>
@@ -1234,7 +1183,7 @@ top down before the key bindings are parsed.
    <property>/sim/menubar/visibility</property>
   </binding>
   <mod-shift>
-   <desc>Switch to next GUI style.</desc>
+   <desc>Switch to next GUI style</desc>
    <binding>
     <command>nasal</command>
     <script>gui.nextStyle()</script>
@@ -1253,7 +1202,7 @@ top down before the key bindings are parsed.
 
  <key n="269">
   <name>Enter</name>
-  <desc>Move rudder right.</desc>
+  <desc>Move rudder right</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
@@ -1264,7 +1213,7 @@ top down before the key bindings are parsed.
 
  <key n="309">
   <name>Keypad 5</name>
-  <desc>Center aileron, elevator, and rudder.</desc>
+  <desc>Center aileron, elevator, and rudder</desc>
   <binding>
    <command>nasal</command>
    <script>controls.centerFlightControls()</script>
@@ -1282,7 +1231,7 @@ top down before the key bindings are parsed.
    </script>
   </binding>
   <mod-shift>
-   <desc>Look left.</desc>
+   <desc>Look left</desc>
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
@@ -1293,7 +1242,7 @@ top down before the key bindings are parsed.
 
  <key n="357">
   <name>Up</name>
-  <desc>Increase elevator or autopilot altitude.</desc>
+  <desc>Increase elevator or autopilot altitude</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
@@ -1302,7 +1251,7 @@ top down before the key bindings are parsed.
    </script>
   </binding>
   <mod-shift>
-   <desc>Look forward.</desc>
+   <desc>Look forward</desc>
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
@@ -1323,7 +1272,7 @@ top down before the key bindings are parsed.
    <step type="double">0.05</step>
   </binding>
   <mod-shift>
-   <desc>Look right.</desc>
+   <desc>Look right</desc>
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
@@ -1334,7 +1283,7 @@ top down before the key bindings are parsed.
 
  <key n="359">
   <name>Down</name>
-  <desc>Decrease elevator or autopilot altitude.</desc>
+  <desc>Decrease elevator or autopilot altitude</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
@@ -1343,7 +1292,7 @@ top down before the key bindings are parsed.
    </script>
   </binding>
   <mod-shift>
-   <desc>Look backwards.</desc>
+   <desc>Look backwards</desc>
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
@@ -1354,7 +1303,7 @@ top down before the key bindings are parsed.
 
  <key n="360">
   <name>PageUp</name>
-  <desc>Increase throttle or autopilot autothrottle.</desc>
+  <desc>Increase throttle or autopilot autothrottle</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
@@ -1363,7 +1312,7 @@ top down before the key bindings are parsed.
    </script>
   </binding>
   <mod-shift>
-   <desc>Look front right.</desc>
+   <desc>Look front right</desc>
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
@@ -1374,7 +1323,7 @@ top down before the key bindings are parsed.
 
  <key n="361">
   <name>PageDown</name>
-  <desc>Decrease throttle or autopilot autothrottle.</desc>
+  <desc>Decrease throttle or autopilot autothrottle</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
@@ -1383,7 +1332,7 @@ top down before the key bindings are parsed.
    </script>
   </binding>
   <mod-shift>
-   <desc>Look back right.</desc>
+   <desc>Look back right</desc>
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
@@ -1394,7 +1343,7 @@ top down before the key bindings are parsed.
 
  <key n="362">
   <name>Home</name>
-  <desc>Increase elevator trim.</desc>
+  <desc>Increase elevator trim</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
@@ -1402,7 +1351,7 @@ top down before the key bindings are parsed.
    <step type="double">0.001</step>
   </binding>
   <mod-shift>
-   <desc>Look front left.</desc>
+   <desc>Look front left</desc>
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
@@ -1413,7 +1362,7 @@ top down before the key bindings are parsed.
 
  <key n="363">
   <name>End</name>
-  <desc>Decrease elevator trim.</desc>
+  <desc>Decrease elevator trim</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
@@ -1421,7 +1370,7 @@ top down before the key bindings are parsed.
    <step type="double">-0.001</step>
   </binding>
   <mod-shift>
-   <desc>Look back left.</desc>
+   <desc>Look back left</desc>
    <binding>
     <command>property-assign</command>
     <property>/sim/current-view/goal-heading-offset-deg</property>
@@ -1432,7 +1381,7 @@ top down before the key bindings are parsed.
 
  <key n="364">
   <name>Insert</name>
-  <desc>Move rudder left.</desc>
+  <desc>Move rudder left</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>

@@ -31,31 +31,19 @@
 					return val;
 				}
 
+				# Usage: setpropf(<format>, <vector or list of args>, <value>);
 				var setpropf = func {
 					var val = pop(arg);
-					setprop(call(sprintf, arg), val);
+					setprop(call(sprintf, size(arg) and typeof(arg[0]) == "vector" ? arg[0] : arg), val);
 				}
 
+				# Usage: getpropf(<format>, <vector or list of args>);
 				var getpropf = func {
-					getprop(call(sprintf, arg));
+					getprop(call(sprintf, size(arg) and typeof(arg[0]) == "vector" ? arg[0] : arg));
 				}
 			]]>
 		</script>
 	</nasal>
-
-	<key n="37">
-		<name>%%</name>
-		<desc>On-screen statistics</desc>
-		<key n="901">
-			<name>%u</name>
-			<desc>Set on-screen statistics level</desc>
-			<exit/>
-			<binding>
-				<command>nasal</command>
-				<script>setprop("/sim/rendering/on-screen-statistics", arg[0])</script>
-			</binding>
-		</key>
-	</key>
 
 	<key n="58">
 		<name>:</name>
@@ -332,6 +320,120 @@
 		</key>
 	</key>
 
+	<key n="89">
+		<name>Y</name>
+		<desc>Development functions</desc>
+
+		<key n="99">
+			<name>c</name>
+			<desc>Reload tile cache</desc>
+			<exit/>
+			<binding>
+				<command>tile-cache-reload</command>
+			</binding>
+		</key>
+
+		<key n="100">
+			<name>d</name>
+			<desc>Toggle FDM data logging</desc>
+			<exit/>
+			<binding>
+				<command>property-toggle</command>
+				<property>/sim/temp/fdm-data-logging</property>
+			</binding>
+		</key>
+
+		<key n="102">
+			<name>f</name>
+			<desc>Set fog ...</desc>
+
+			<key n="47">
+				<name>/</name>
+				<desc>Fog off</desc>
+				<exit/>
+				<binding>
+					<command>property-assign</command>
+					<property>/sim/rendering/fog</property>
+					<value>disabled</value>
+				</binding>
+			</key>
+
+			<key n="102">
+				<name>f</name>
+				<desc>Fog fastest</desc>
+				<exit/>
+				<binding>
+					<command>property-assign</command>
+					<property>/sim/rendering/fog</property>
+					<value>fastest</value>
+				</binding>
+			</key>
+
+			<key n="110">
+				<name>n</name>
+				<desc>Fog nicest</desc>
+				<exit/>
+				<binding>
+					<command>property-assign</command>
+					<property>/sim/rendering/fog</property>
+					<value>nicest</value>
+				</binding>
+			</key>
+		</key>
+
+		<key n="108">
+			<name>l</name>
+			<desc>Force lighting update</desc>
+			<exit/>
+			<binding>
+				<command>lighting-update</command>
+			</binding>
+		</key>
+
+		<key n="112">
+			<name>p</name>
+			<desc>Reload panel</desc>
+			<exit/>
+			<binding>
+				<command>panel-load</command>
+			</binding>
+		</key>
+
+		<key n="115">
+			<name>s</name>
+			<desc>On-screen statistics level (0-4)</desc>
+			<key n="901">
+				<name>%u</name>
+				<desc>Set on-screen statistics level</desc>
+				<exit/>
+				<binding>
+					<command>nasal</command>
+					<script>setprop("/sim/rendering/on-screen-statistics", arg[0])</script>
+				</binding>
+			</key>
+		</key>
+
+		<key n="119">
+			<name>w</name>
+			<desc>Toggle wireframe</desc>
+			<exit/>
+			<binding>
+				<command>property-toggle</command>
+				<property>/sim/rendering/wireframe</property>
+			
+			</binding>
+		</key>
+
+		<key n="121">
+			<name>y</name>
+			<desc>Reload global preferences</desc>
+			<exit/>
+			<binding>
+				<command>preferences-load</command>
+			</binding>
+		</key>
+	</key>
+
 	<!-- Autopilot multikey commands -->
 	<key n="97">
 		<name>a</name>
@@ -545,7 +647,7 @@
 				<binding>
 					<command>property-assign</command>
 					<property>/autopilot/locks/altitude</property>
-					<value/>
+					<value></value>
 				</binding>
 			</key>
 		</key>
@@ -861,7 +963,6 @@
 		</key>
 	</key>
 
-	<!-- Controls -->
 	<!-- Flight Controls -->
 	<key n="102">
 		<name>f</name>
@@ -1073,13 +1174,14 @@
 		</key>
 	</key>
 
+	<!-- Radio -->
 	<nasal>
 		<script>
 			var radio_fmt = "/instrumentation/%s[%u]/frequencies/%s-mhz";
 
 			var setfreq = func(type, index, which, value) {
 				index = (index >= 1) ? index - 1 : 0;
-				setprop(sprintf(radio_fmt, type, index, which), value);
+				setpropf(radio_fmt, type, index, which, value);
 			}
 
 			var togglefreq = func(type, index) {
@@ -1251,7 +1353,7 @@
 			<script>
 				fgcommand("nasal", props.Node.new({
 					module: "__nasal_console",
-					script: getprop("/sim/gui/dialogs/nasal-console/code[" ~ arg[0] ~ "]") or "",
+					script: getpropf("/sim/gui/dialogs/nasal-console/code[%u]", arg[0]) or "",
 				}));
 			</script>
 		</binding>

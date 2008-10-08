@@ -474,7 +474,7 @@ var timer = {
 		if (m.node.getType() == "NONE")
 			m.node.setDoubleValue(0);
 
-		m.systimeN = props.globals.getNode("/sim/time/elapsed-sec", 1);
+		me.systimeN = props.globals.getNode("/sim/time/elapsed-sec", 1);
 		m.last_systime = nil;
 		m.interval = res;
 		m.loopid = 0;
@@ -908,33 +908,65 @@ var autotrim = {
 var tyresmoke = {
 	new : func(number) {
 		var m = { parents: [tyresmoke] };
-		m.vertical_speed = props.globals.getNode("velocities/vertical-speed-fps", 1);
-		m.speed = props.globals.getNode("velocities/groundspeed-kt", 1);
+		me.vertical_speed = props.initNode("velocities/vertical-speed-fps");
+		me.speed = props.initNode("velocities/groundspeed-kt");
+		me.rain = props.initNode("environment/metar/rain-norm");
 
-		var gear = props.globals.getNode("gear", 1).getChild("gear", number, 1);
-		m.wow = props.initNode(gear.getNode("wow", 1));
-		m.tyresmoke = props.initNode(gear.getNode("tyre-smoke", 1), 0, "BOOL");
-		m.friction_factor = props.initNode(gear.getNode("ground-friction-factor", 1), 1);
-		m.rollspeed = props.initNode(gear.getNode("rollspeed-ms", 1));
+		var gear = "gear/gear[" ~ number ~ "]/";
+		m.wow = props.initNode(gear ~ "wow");
+		m.tyresmoke = props.initNode(gear ~ "tyre-smoke", 0, "BOOL");
+		m.friction_factor = props.initNode(gear ~ "ground-friction-factor", 1);
+		m.sprayspeed = props.initNode(gear ~ "sprayspeed-ms");
+		m.spray = props.initNode(gear ~ "spray", 0, "BOOL");
+		m.spraydensity = props.initNode(gear ~ "spray-density", 0, "DOUBLE");
+
+		if (getprop("sim/flight-model") == "jsb") {
+			var wheel_speed = "fdm/jsbsim/gear/unit[" ~ number ~ "]/wheel-speed-fps";
+			m.rollspeed = props.initNode(wheel_speed);
+			m.get_rollspeed = func m.rollspeed.getValue() * 0.3043;
+		} else {
+			m.rollspeed = props.initNode(gear ~ "rollspeed-ms");
+			m.get_rollspeed = func m.rollspeed.getValue();
+		}
+
 		m.lp = lowpass.new(2);
 		return m;
 	},
 	update : func {
-		var rollspeed = me.rollspeed.getValue();
+		var rollspeed = me.get_rollspeed();
 		var vert_speed = me.vertical_speed.getValue();
 		var groundspeed = me.speed.getValue();
 		var friction_factor = me.friction_factor.getValue();
 		var wow = me.wow.getValue();
+		var rain = me.rain.getValue();
 
 		var filtered_rollspeed = me.lp.filter(rollspeed);
 		var diff = math.abs(rollspeed - filtered_rollspeed);
 		var diff_norm = diff > 0 ? diff / rollspeed : 0;
 
+#		print("wow ", wow, " vert_speed ", vert_speed, " diff_norm ",
+#			diff_norm, " friction_factor ", friction_factor,
+#			" groundspeed ", groundspeed,
+#			" rain ", rain);
+
 		if (wow and vert_speed < -0.05 and diff_norm > 0.05
-				and friction_factor > 0.7 and groundspeed > 50)
+				and friction_factor > 0.7 and groundspeed > 50
+				and rain < 0.20) {
 			me.tyresmoke.setValue(1);
-		else
+			me.spray.setValue(0);
+
+		} elsif (wow and groundspeed > 5 and rain >= 0.20) {
 			me.tyresmoke.setValue(0);
+			me.spray.setValue(1);
+			me.sprayspeed.setValue(rollspeed * 6);
+			me.spraydensity.setValue(rain * groundspeed);
+
+		} else {
+			me.tyresmoke.setValue(0);
+			me.spray.setValue(0);
+			me.sprayspeed.setValue(0);
+			me.spraydensity.setValue(0);
+		}
 	},
 };
 

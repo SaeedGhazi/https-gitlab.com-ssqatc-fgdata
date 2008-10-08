@@ -1200,6 +1200,15 @@ top down before the key bindings are parsed.
   </binding>
  </key>
 
+ <key n="268">
+  <name>F12</name>
+  <desc>Pop up radio settings dialog</desc>
+  <binding>
+   <command>dialog-show</command>
+   <dialog-name>radios</dialog-name>
+  </binding>
+ </key>
+
  <key n="269">
   <name>Enter</name>
   <desc>Move rudder right</desc>

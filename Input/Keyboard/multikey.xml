@@ -424,14 +424,15 @@
 			</binding>
 		</key>
 
-		<key n="121">
+		<!--key n="121">
+				this is bad: overwrites userarchive entries, causes errors and a segfault
 			<name>y</name>
 			<desc>Reload global preferences</desc>
 			<exit/>
 			<binding>
 				<command>preferences-load</command>
 			</binding>
-		</key>
+		</key-->
 	</key>
 
 	<!-- Autopilot multikey commands -->

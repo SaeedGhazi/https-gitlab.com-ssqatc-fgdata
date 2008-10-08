@@ -128,10 +128,10 @@ var Dialog = {
 			var g = dlg.addChild("group");
 			g.set("layout", "table");
 			g.set("default-padding", 2);
-			var column_height = numopt / (1 + (numopt > 15) + (numopt > 30));
+			var numrows = numopt / (1 + (numopt > 15) + (numopt > 30));
 			forindex (var i; options) {
-				var col = 3 * int(i / column_height);
-				var row = math.mod(i, column_height);
+				var col = 3 * int(i / numrows);
+				var row = math.mod(i, numrows);
 
 				var desc = (options[i].getNode("desc", 1).getValue() or "") ~ "  ";
 				var name = "  " ~ options[i].getNode("name", 1).getValue();

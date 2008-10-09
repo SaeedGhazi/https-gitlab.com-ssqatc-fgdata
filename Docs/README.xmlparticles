@@ -134,8 +134,8 @@ offset (result = (prop*factor)+offset ) in the usual way
 
 
 <particlesystem>  = the base tag
-  <type>string</type> can be "normal" or "trail", normal is the usual quad particles, trail is a string of connected quads, see note near the end
-  <offsets>  = this places the source of the particles (the emitter) in relation to the perhaps already offsetted model (see model-howto.html for details)
+  <type>string</type> can be "normal" or "trail", normal is the usual quad particles, trail is a string of connected line shapes by default.
+  <offsets>  = this places the source of the particles (the emitter) in relation to the perhaps already offset model (see model-howto.html for details)
     <x-m>float</x-m>
     <y-m>float</y-m>
     <z-m>float</z-m>
@@ -146,12 +146,12 @@ offset (result = (prop*factor)+offset ) in the usual way
   <condition> =a typical condition that if not true stops particles from being emitted (PPS=0)
     ....
   </condition>
-  <name>string</name> = the name of the particle system (so it can then be referenced by animations)
+  <name>string</name> = the name of the particle system (so it can be referenced by normal animations)
   <attach>string</attach> = can be "world" or "local". "world means the particles aren't "physically linked" to the model (necessary for use outside moving models), "local" means the opposite (can be used for static objects or inside moving objects)
   <texture>string</texture> = the texture path relative to the XML file location
   <emissive>bool</emissive> = self-explanatory
   <lighting>bool</lighting> = yet to be tested, but seems obvious
-  <align>string</align> = can be "billboard" or "fixed", still being worked, don't use
+  <align>string</align> = can be "billboard" or "fixed"
   <placer> = where particles are born
     <type>string</type> = can be "sector" (inside a circle), "segments"(user-defined segments) and "point" (default)
     *<radius-min-m>float</radius-min-m> = only for sector, inner radius at which particles appear
@@ -237,5 +237,6 @@ Remarks:
   If you don't use any properties nor conditions, your particle system doesn't need to use a callback a so it's slightly better on the CPU (mostly useful for static models)
   If your particle lifetime is too big you might run out of particles temporarily (still being investigated)
   Use mass and size(radius) to adjust the reaction to gravity and wind (mass/size = density)
-  Although at the moment severe graphical bugs can be seen in the trails, they are usable. Consider your options correctly! You should consider giving them no initial velocity and most important, no spread, otherwise particles will race and the trail will fold. Start simple (no velocities and forces) and work your way up.
+  Although at the moment severe graphical bugs can be seen in the trails, they are usable. 
+  Consider your options correctly! You should consider giving them no initial velocity and most important, no spread, otherwise particles will race and the trail will fold. Start simple (no velocities and forces) and work your way up.
   

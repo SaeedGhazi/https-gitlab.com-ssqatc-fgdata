@@ -1,8 +1,6 @@
 # debug.nas -- debugging helpers
 #------------------------------------------------------------------------------
 #
-# debug.color(<enabled>);              ... turns terminal colors on (1) or off (0)
-#
 # debug.dump(<variable>)               ... dumps contents of variable to terminal;
 #                                          abbreviation for print(debug.string(v))
 #
@@ -283,8 +281,7 @@ var proptrace = func(root = "/", frames = 2) {
 
 
 ##
-# Executes function fn with repeat times prints execution
-# time in seconds. Examples:
+# Executes function fn "repeat" times and prints execution time in seconds. Examples:
 #
 #     var test = func { getprop("/sim/aircraft"); }
 #     debug.benchmark("test()/2", test, 1000);

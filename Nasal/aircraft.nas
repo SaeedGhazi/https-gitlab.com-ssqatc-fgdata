@@ -1,45 +1,8 @@
-# These classes provide basic functions for use in aircraft specific
-# Nasal context. Note that even if a class is called "door" or "light"
-# this doesn't mean that it can't be used for other purposes.
-#
-# Class instances don't have to be assigned to variables. They do also
-# work if they remain anonymous. It's even a good idea to keep them
-# anonymous if you don't need further access to their members. On the
-# other hand, you can assign the class and apply setters at the same time:
-#
-#   aircraft.light.new("sim/model/foo/beacon", [1, 1]);    # anonymous
-#   var strobe = aircraft.light.new("sim/model/foo/strobe", [1, 1]).cont().switch(1);
-#
-#
-# Classes do create properties, but they don't usually overwrite the contents
-# of an existing property. This makes it possible to preset them in
-# a *-set.xml file or on the command line. For example:
-#
-#   $ fgfs --aircraft=bo105 --prop:/controls/doors/door[0]/position-norm=1
-#
-#
-# Wherever a property argument can be given, this can either be a path,
-# or a node (i.e. property node hash). In return, the property node can
-# always be accessed directly as member "node", and turned into a path
-# string with node.getPath():
-#
-#   var beacon = aircraft.light.new("sim/model/foo/beacon", [1, 1]);
-#   print(beacon.node.getPath());
-#
-#   var strobe_node = props.globals.getNode("sim/model/foo/strobe", 1);
-#   var strobe = aircraft.light.new(strobe_node, [0.05, 1.0]);
-#
-#
-# The classes implement only commonly used features, but are easy to
-# extend, as all class members are accessible from outside. For example:
-#
-#   # add custom property to door node:
-#   frontdoor.node.getNode("name", 1).setValue("front door");
-#
-#   # add method to class instance (or base class -> aircraft.door.print)
-#   frontdoor.print = func { print(me.position.getValue()) };
-#
-#
+# This module provide basic functions and classes for use in aircraft specific
+# Nasal context.
+
+
+
 
 # constants
 # ==============================================================================
@@ -96,8 +59,8 @@ var optarg = func {
 #	canopy.open();
 #
 var door = {
-	new : func {
-		m = { parents : [door] };
+	new: func {
+		m = { parents: [door] };
 		m.node = makeNode(arg[0]);
 		m.swingtime = arg[1];
 		m.positionN = m.node.getNode("position-norm", 1);
@@ -113,33 +76,33 @@ var door = {
 		return m;
 	},
 	# door.enable(bool)    ->  set ./enabled
-	enable : func(v) {
+	enable: func(v) {
 		me.enabledN.setBoolValue(v);
 		me;
 	},
 	# door.setpos(double)  ->  set ./position-norm without movement
-	setpos : func(pos) {
+	setpos: func(pos) {
 		me.positionN.setValue(pos);
 		me.target = pos < 0.5;
 		me;
 	},
 	# double door.getpos() ->  return current position as double
-	getpos : func { me.positionN.getValue() },
+	getpos: func { me.positionN.getValue() },
 
 	# door.close()         ->  move to closed state
-	close : func { me.move(me.target = 0) },
+	close: func { me.move(me.target = 0) },
 
 	# door.open()          ->  move to open state
-	open : func { me.move(me.target = 1) },
+	open: func { me.move(me.target = 1) },
 
 	# door.toggle()        ->  move to opposite end position
-	toggle : func { me.move(me.target) },
+	toggle: func { me.move(me.target) },
 
 	# door.stop()          ->  stop movement
-	stop : func { interpolate(me.positionN) },
+	stop: func { interpolate(me.positionN) },
 
 	# door.move(double)    ->  move to arbitrary position
-	move : func(target) {
+	move: func(target) {
 		var pos = me.getpos();
 		if (pos != target) {
 			var time = abs(pos - target) * me.swingtime;
@@ -183,8 +146,8 @@ var door = {
 #	aircraft.light.new("sim/model/foo/strobe-bot", 1.005, pattern, switch);
 #
 var light = {
-	new : func {
-		m = { parents : [light] };
+	new: func {
+		m = { parents: [light] };
 		m.node = makeNode(arg[0]);
 		var stretch = 1.0;
 		var c = 1;
@@ -220,18 +183,18 @@ var light = {
 		return m;
 	},
 	# class destructor
-	del : func {
+	del: func {
 		removelistener(me.switchL);
 	},
 	# light.switch(bool)   ->  set light switch (also affects other lights
 	#                          that use the same switch)
-	switch : func(v) { me.switchN.setBoolValue(v); me },
+	switch: func(v) { me.switchN.setBoolValue(v); me },
 
 	# light.toggle()       ->  toggle light switch
-	toggle : func { me.switchN.setBoolValue(!me.switchN.getValue()); me },
+	toggle: func { me.switchN.setBoolValue(!me.switchN.getValue()); me },
 
 	# light.cont()         ->  continuous light
-	cont : func {
+	cont: func {
 		if (!me.continuous) {
 			me.continuous = 1;
 			me.loopid += 1;
@@ -243,7 +206,7 @@ var light = {
 	# light.blink()        ->  blinking light  (default)
 	# light.blink(3)       ->  when switched on, only run three blink sequences;
 	#                          second optional arg defines state after the sequences
-	blink : func(count = -1, endstate = 0) {
+	blink: func(count = -1, endstate = 0) {
 		me.seqcount = count;
 		me.endstate = endstate;
 		if (me.continuous) {
@@ -255,7 +218,7 @@ var light = {
 		me;
 	},
 
-	_switch_ : func {
+	_switch_: func {
 		var switch = me.switchN.getBoolValue();
 		switch != me.lastswitch or return;
 		me.lastswitch = switch;
@@ -270,7 +233,7 @@ var light = {
 		}
 	},
 
-	_loop_ : func(id) {
+	_loop_: func(id) {
 		id == me.loopid or return;
 		if (!me.count) {
 			me.loopid += 1;
@@ -303,26 +266,26 @@ var light = {
 #	print(lp.filter(0));
 #
 var lowpass = {
-	new : func(coeff) {
-		var m = { parents : [lowpass] };
+	new: func(coeff) {
+		var m = { parents: [lowpass] };
 		m.coeff = coeff >= 0 ? coeff : die("aircraft.lowpass(): coefficient must be >= 0");
 		m.value = nil;
 		return m;
 	},
 	# filter(raw_value)    -> push new value, returns filtered value
-	filter : func(v) {
+	filter: func(v) {
 		me.filter = me._filter_;
 		me.value = v;
 	},
 	# get()                -> returns filtered value
-	get : func {
+	get: func {
 		me.value;
 	},
 	# set()                -> sets new average and returns it
-	set : func(v) {
+	set: func(v) {
 		me.value = v;
 	},
-	_filter_ : func(v) {
+	_filter_: func(v) {
 		var dt = getprop("/sim/time/delta-sec");
 		var c = dt / (me.coeff + dt);
 		me.value = v * c + me.value * (1 - c);
@@ -336,23 +299,23 @@ var lowpass = {
 # angle again from them. This avoids unexpected jumps from 179.99 to -180 degree.
 #
 var angular_lowpass = {
-	new : func(coeff) {
-		var m = { parents : [angular_lowpass] };
+	new: func(coeff) {
+		var m = { parents: [angular_lowpass] };
 		m.sin = lowpass.new(coeff);
 		m.cos = lowpass.new(coeff);
 		m.value = nil;
 		return m;
 	},
-	filter : func(v) {
+	filter: func(v) {
 		v *= D2R;
 		me.value = math.atan2(me.sin.filter(math.sin(v)), me.cos.filter(math.cos(v))) * R2D;
 	},
-	set : func(v) {
+	set: func(v) {
 		v *= D2R;
 		me.sin.set(math.sin(v));
 		me.cos.set(math.cos(v));
 	},
-	get : func {
+	get: func {
 		me.value;
 	},
 };
@@ -395,7 +358,7 @@ var angular_lowpass = {
 #	aircraft.data.save(0.5);
 #
 var data = {
-	init : func {
+	init: func {
 		me.path = getprop("/sim/fg-home") ~ "/aircraft-data/" ~ getprop("/sim/aircraft") ~ ".xml";
 		me.signalN = props.globals.getNode("/sim/signals/save", 1);
 		me.catalog = [];
@@ -405,13 +368,13 @@ var data = {
 		setlistener("/sim/signals/reinit", func(n) { n.getBoolValue() and me._save_() });
 		setlistener("/sim/signals/exit", func me._save_());
 	},
-	load : func {
+	load: func {
 		if (io.stat(me.path) != nil) {
 			printlog("info", "loading aircraft data from ", me.path);
 			io.read_properties(me.path, props.globals);
 		}
 	},
-	save : func(v = nil) {
+	save: func(v = nil) {
 		me.loopid += 1;
 		if (v == nil) {
 			me._save_();
@@ -420,12 +383,12 @@ var data = {
 			me._loop_(me.loopid);
 		}
 	},
-	_loop_ : func(id) {
+	_loop_: func(id) {
 		id == me.loopid or return;
 		me._save_();
 		settimer(func me._loop_(id), me.interval);
 	},
-	_save_ : func {
+	_save_: func {
 		size(me.catalog) or return;
 		printlog("debug", "saving aircraft data to ", me.path);
 		me.signalN.setBoolValue(1);
@@ -438,7 +401,7 @@ var data = {
 		}
 		io.write_properties(me.path, data);
 	},
-	add : func(p...) {
+	add: func(p...) {
 		foreach (var n; props.nodeList(p))
 			append(me.catalog, n.getPath());
 	},
@@ -468,8 +431,8 @@ var data = {
 #	aircraft.timer.new("/sim/time/hobbs/battery", 60).start();  # anonymous timer
 #
 var timer = {
-	new : func(prop, res = 1, save = 1) {
-		var m = { parents : [timer] };
+	new: func(prop, res = 1, save = 1) {
+		var m = { parents: [timer] };
 		m.node = makeNode(prop);
 		if (m.node.getType() == "NONE")
 			m.node.setDoubleValue(0);
@@ -487,39 +450,39 @@ var timer = {
 		}
 		return m;
 	},
-	del : func {
+	del: func {
 		me.stop();
 		if (me.saveL != nil)
 			removelistener(me.saveL);
 	},
-	start : func {
+	start: func {
 		me.running and return;
 		me.last_systime = me.systimeN.getValue();
 		me.interval != nil and me._loop_(me.loopid);
 		me.running = 1;
 		me;
 	},
-	stop : func {
+	stop: func {
 		me.running or return;
 		me.running = 0;
 		me.loopid += 1;
 		me._apply_();
 		me;
 	},
-	reset : func {
+	reset: func {
 		me.node.setDoubleValue(0);
 		me.last_systime = me.systimeN.getValue();
 	},
-	_apply_ : func {
+	_apply_: func {
 		var sys = me.systimeN.getValue();
 		me.node.setDoubleValue(me.node.getValue() + sys - me.last_systime);
 		me.last_systime = sys;
 	},
-	_save_ : func {
+	_save_: func {
 		if (me.running)
 			me._apply_();
 	},
-	_loop_ : func(id) {
+	_loop_: func(id) {
 		id != me.loopid and return;
 		me._apply_();
 		settimer(func me._loop_(id), me.interval);
@@ -554,7 +517,7 @@ var timer = {
 #	aircraft.livery.next();
 #
 var livery = {
-	init : func(livery_dir, name_path = "sim/model/livery/name", sort_path = nil) {
+	init: func(livery_dir, name_path = "sim/model/livery/name", sort_path = nil) {
 		me.dir = livery_dir;
 		if (me.dir[-1] != `/`)
 			me.dir ~= "/";
@@ -564,7 +527,7 @@ var livery = {
 		aircraft.data.add(name_path);
 		me.dialog = gui.Dialog.new("livery-select");
 	},
-	rescan : func {
+	rescan: func {
 		me.data = [];
 		var path = getprop("/sim/fg-root") ~ "/" ~ me.dir;
 		foreach (var file; directory(path)) {
@@ -584,7 +547,7 @@ var livery = {
 		me.select(getprop(me.name_path));
 	},
 	# select by index (out-of-bounds indices are wrapped)
-	set : func(i) {
+	set: func(i) {
 		if (i < 0)
 			i = size(me.data) - 1;
 		if (i >= size(me.data))
@@ -594,15 +557,15 @@ var livery = {
 		setprop("sim/model/livery/file", me.data[i][3]);
 	},
 	# select by name
-	select : func(name) {
+	select: func(name) {
 		forindex (var i; me.data)
 			if (me.data[i][0] == name)
 				me.set(i);
 	},
-	next : func {
+	next: func {
 		me.set(me.current + 1);
 	},
-	previous : func {
+	previous: func {
 		me.set(me.current - 1);
 	},
 };
@@ -639,8 +602,8 @@ var livery = {
 #	</nasal>
 #
 var livery_update = {
-	new : func(liveriesdir, interval = 10, callback = nil) {
-		var m = { parents : [livery_update] };
+	new: func(liveriesdir, interval = 10, callback = nil) {
+		var m = { parents: [livery_update] };
 		var root = cmdarg();
 		m.root = root.getPath();
 		m.fileN = root.getNode("sim/model/livery/file", 1);
@@ -653,10 +616,10 @@ var livery_update = {
 			m._loop_();
 		return m;
 	},
-	stop : func {
+	stop: func {
 		me.running = 0;
 	},
-	_loop_ : func {
+	_loop_: func {
 		me.running or return;
 		var file = me.fileN.getValue();
 		if (file != nil and file != me.last) {
@@ -697,7 +660,7 @@ var livery_update = {
 #	aircraft.formation.next();
 #
 var formation = {
-	init : func(formation_dir, name_path = "sim/model/formation/name", sort_path = nil) {
+	init: func(formation_dir, name_path = "sim/model/formation/name", sort_path = nil) {
 		me.dir = formation_dir;
 		if (me.dir[-1] != `/`)
 			me.dir ~= "/";
@@ -707,7 +670,7 @@ var formation = {
 		aircraft.data.add(name_path);
 		me.dialog = gui.Dialog.new("formation-select");
 	},
-	rescan : func {
+	rescan: func {
 		me.data = [];
 		var path = getprop("/sim/fg-root") ~ "/" ~ me.dir;
 		foreach (var file; directory(path)) {
@@ -726,7 +689,7 @@ var formation = {
 		me.select(getprop(me.name_path));
 	},
 	# select by index (out-of-bounds indices are wrapped)
-	set : func(i) {
+	set: func(i) {
 		if (i < 0)
 			i = size(me.data) - 1;
 		if (i >= size(me.data))
@@ -735,15 +698,15 @@ var formation = {
 		me.current = i;
 	},
 	# select by name
-	select : func(name) {
+	select: func(name) {
 		forindex (var i; me.data)
 			if (me.data[i][0] == name)
 				me.set(i);
 	},
-	next : func {
+	next: func {
 		me.set(me.current + 1);
 	},
-	previous : func {
+	previous: func {
 		me.set(me.current - 1);
 	},
 };
@@ -769,7 +732,7 @@ var formation = {
 #	aircraft.steering.init();
 #
 var steering = {
-	init : func(switch = "/controls/gear/brake-steering", threshold = 0.3) {
+	init: func(switch = "/controls/gear/brake-steering", threshold = 0.3) {
 		me.threshold = threshold;
 		me.switchN = makeNode(switch);
 		me.switchN.setBoolValue(me.switchN.getBoolValue());
@@ -794,7 +757,7 @@ var steering = {
 				me.setbrakes(0, 0);
 		}, 1);
 	},
-	_loop_ : func(id) {
+	_loop_: func(id) {
 		id == me.loopid or return;
 		var rudder = me.rudderN.getValue();
 		if (rudder > me.threshold)
@@ -806,7 +769,7 @@ var steering = {
 
 		settimer(func me._loop_(id), 0);
 	},
-	setbrakes : func(left, right) {
+	setbrakes: func(left, right) {
 		me.leftN.setDoubleValue(left);
 		me.rightN.setDoubleValue(right);
 	},
@@ -834,14 +797,14 @@ var steering = {
 #	(4) release autotrim button
 #
 var autotrim = {
-	init : func {
+	init: func {
 		me.elevator = me.Trim.new("elevator");
 		me.aileron = me.Trim.new("aileron");
 		me.rudder = me.Trim.new("rudder");
 		me.loopid = 0;
 		me.active = 0;
 	},
-	start : func {
+	start: func {
 		me.active and return;
 		me.active = 1;
 		me.elevator.start();
@@ -849,33 +812,33 @@ var autotrim = {
 		me.rudder.start();
 		me._loop_(me.loopid += 1);
 	},
-	stop : func {
+	stop: func {
 		me.active or return;
 		me.active = 0;
 		me.loopid += 1;
 		me.update();
 	},
-	_loop_ : func(id) {
+	_loop_: func(id) {
 		id == me.loopid or return;
 		me.update();
 		settimer(func me._loop_(id), 0);
 	},
-	update : func {
+	update: func {
 		me.elevator.update();
 		me.aileron.update();
 		me.rudder.update();
 	},
-	Trim : {
-		new : func(name) {
-			var m = { parents : [ autotrim.Trim ] };
+	Trim: {
+		new: func(name) {
+			var m = { parents: [autotrim.Trim] };
 			m.trimN = props.globals.getNode("/controls/flight/" ~ name ~ "-trim", 1);
 			m.ctrlN = props.globals.getNode("/controls/flight/" ~ name, 1);
 			return m;
 		},
-		start : func {
+		start: func {
 			me.last = me.ctrlN.getValue();
 		},
-		update : func {
+		update: func {
 			var v = me.ctrlN.getValue();
 			me.trimN.setDoubleValue(me.trimN.getValue() + me.last - v);
 			me.last = v;
@@ -906,7 +869,7 @@ var autotrim = {
 #	tyresmoke_0.update();
 #
 var tyresmoke = {
-	new : func(number) {
+	new: func(number) {
 		var m = { parents: [tyresmoke] };
 		me.vertical_speed = props.initNode("velocities/vertical-speed-fps");
 		me.speed = props.initNode("velocities/groundspeed-kt");
@@ -932,7 +895,7 @@ var tyresmoke = {
 		m.lp = lowpass.new(2);
 		return m;
 	},
-	update : func {
+	update: func {
 		var rollspeed = me.get_rollspeed();
 		var vert_speed = me.vertical_speed.getValue();
 		var groundspeed = me.speed.getValue();
@@ -997,7 +960,7 @@ var teleport = func(airport = "", runway = "", lat = -9999, lon = -9999, alt = 0
 # ==============================================================================
 #
 var HUD = {
-	init : func {
+	init: func {
 		me.vis0N = props.globals.getNode("/sim/hud/visibility[0]", 1);
 		me.vis1N = props.globals.getNode("/sim/hud/visibility[1]", 1);
 		me.currcolN = props.globals.getNode("/sim/hud/current-color", 1);
@@ -1005,7 +968,7 @@ var HUD = {
 		me.brightnessN = props.globals.getNode("/sim/hud/color/brightness", 1);
 		me.currentN = me.vis0N;
 	},
-	cycle_color : func {		# h-key
+	cycle_color: func {		# h-key
 		if (!me.currentN.getBoolValue())		# if off, turn on
 			return me.currentN.setBoolValue(1);
 
@@ -1018,19 +981,19 @@ var HUD = {
 			me.currcolN.setIntValue(i);
 		}
 	},
-	cycle_brightness : func {	# H-key
+	cycle_brightness: func {	# H-key
 		me.is_active() or return;
 		var br = me.brightnessN.getValue() - 0.2;
 		me.brightnessN.setValue(br > 0.01 ? br : 1);
 	},
-	normal_type : func {		# i-key
+	normal_type: func {		# i-key
 		me.is_active() or return;
 		me.oldinit1();
 		me.vis0N.setBoolValue(1);
 		me.vis1N.setBoolValue(0);
 		me.currentN = me.vis0N;
 	},
-	cycle_type : func {		# I-key
+	cycle_type: func {		# I-key
 		me.is_active() or return;
 		if (me.currentN == me.vis0N) {
 			me.vis0N.setBoolValue(0);
@@ -1043,9 +1006,9 @@ var HUD = {
 			me.currentN = me.vis0N;
 		}
 	},
-	oldinit1 : func { fgcommand("hud-init") },
-	oldinit2 : func { fgcommand("hud-init2") },
-	is_active : func { me.vis0N.getValue() or me.vis1N.getValue() },
+	oldinit1: func { fgcommand("hud-init") },
+	oldinit2: func { fgcommand("hud-init2") },
+	is_active: func { me.vis0N.getValue() or me.vis1N.getValue() },
 };
 
 

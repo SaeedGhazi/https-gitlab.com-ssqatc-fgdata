@@ -400,8 +400,7 @@ settimer(func {
 
 ##
 # Overlay selector. Displays a list of overlay XML files and copies the
-# chosen one to the property tree. The given name property is saved to
-# autosave.xml and restored next time. The class allows to select liveries,
+# chosen one to the property tree. The class allows to select liveries,
 # insignia, decals, variants, etc. Usually the overlay properties are
 # fed to "select" and "material" animations.
 #
@@ -417,6 +416,7 @@ settimer(func {
 #                    get changes reported.
 #
 # EXAMPLE:
+#       aircraft.data.add("sim/model/pilot");  # autosave the pilot
 #       var pilots_dialog = gui.OverlaySelector.new("Pilots",
 #               "Aircraft/foo/Models/Pilots",
 #               "sim/model/pilot");
@@ -441,7 +441,6 @@ var OverlaySelector = {
         m.nameprop = nameprop;
         m.result = data.getNode("result", 1);
         m.cblistener = setlistener(m.result, func m.set());
-        aircraft.data.add(nameprop);
 
         m.prop.getNode("group/text/label").setValue(title);
         m.list = m.prop.getNode("list");

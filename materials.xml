@@ -114,7 +114,7 @@ Shared parameters for various materials.
 
 <material>
  <name>grass_rwy</name>
- <texture>Runway/grass_rwy.rgb</texture>
+ <texture>Runway/grass_rwy.png</texture>
  <xsize>75</xsize>
  <ysize>75</ysize>
  <solid>1</solid>
@@ -126,7 +126,7 @@ Shared parameters for various materials.
 
 <material>
  <name>dirt_rwy</name>
- <texture>Runway/dirt_rwy.rgb</texture>
+ <texture>Runway/dirt_rwy.png</texture>
  <friction-factor>0.7</friction-factor>
  <rolling-friction>0.04</rolling-friction>
  <bumpiness>0.1</bumpiness>
@@ -134,278 +134,278 @@ Shared parameters for various materials.
 
 <material>
  <name>lakebed_taxiway</name>
- <texture>Runway/lakebed_taxiway.rgb</texture>
+ <texture>Runway/lakebed_taxiway.png</texture>
  <rolling-friction>0.04</rolling-friction>
  <bumpiness>0.05</bumpiness>
 </material>
 
 <material>
  <name>pa_taxiway</name>
- <texture>Runway/pa_taxiway.rgb</texture>
+ <texture>Runway/pa_taxiway.png</texture>
 </material>
 
 <material>
  <name>pa_tiedown</name>
- <texture>Runway/pa_tiedown.rgb</texture>
+ <texture>Runway/pa_tiedown.png</texture>
 </material>
 
 <material>
  <name>pa_dspl_thresh</name>
- <texture>Runway/pa_dspl_thresh.rgb</texture>
+ <texture>Runway/pa_dspl_thresh.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_dspl_arrows</name>
- <texture>Runway/pa_dspl_arrows.rgb</texture>
+ <texture>Runway/pa_dspl_arrows.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_threshold</name>
- <texture>Runway/pa_threshold.rgb</texture>
+ <texture>Runway/pa_threshold.png</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
 </material>
 
 <material>
  <name>pa_L</name>
- <texture>Runway/pa_L.rgb</texture>
+ <texture>Runway/pa_L.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_R</name>
- <texture>Runway/pa_R.rgb</texture>
+ <texture>Runway/pa_R.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_C</name>
- <texture>Runway/pa_C.rgb</texture>
+ <texture>Runway/pa_C.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_0l</name>
- <texture>Runway/pa_0l.rgb</texture>
+ <texture>Runway/pa_0l.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_0r</name>
- <texture>Runway/pa_0r.rgb</texture>
+ <texture>Runway/pa_0r.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_1c</name>
- <texture>Runway/pa_1c.rgb</texture>
+ <texture>Runway/pa_1c.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_1l</name>
- <texture>Runway/pa_1l.rgb</texture>
+ <texture>Runway/pa_1l.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_1r</name>
- <texture>Runway/pa_1r.rgb</texture>
+ <texture>Runway/pa_1r.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_11</name>
- <texture>Runway/pa_11.rgb</texture>
+ <texture>Runway/pa_11.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_2c</name>
- <texture>Runway/pa_2c.rgb</texture>
+ <texture>Runway/pa_2c.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_2l</name>
- <texture>Runway/pa_2l.rgb</texture>
+ <texture>Runway/pa_2l.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_2r</name>
- <texture>Runway/pa_2r.rgb</texture>
+ <texture>Runway/pa_2r.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_3c</name>
- <texture>Runway/pa_3c.rgb</texture>
+ <texture>Runway/pa_3c.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_3l</name>
- <texture>Runway/pa_3l.rgb</texture>
+ <texture>Runway/pa_3l.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_3r</name>
- <texture>Runway/pa_3r.rgb</texture>
+ <texture>Runway/pa_3r.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_4c</name>
- <texture>Runway/pa_4c.rgb</texture>
+ <texture>Runway/pa_4c.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_4r</name>
- <texture>Runway/pa_4r.rgb</texture>
+ <texture>Runway/pa_4r.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_5c</name>
- <texture>Runway/pa_5c.rgb</texture>
+ <texture>Runway/pa_5c.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_5r</name>
- <texture>Runway/pa_5r.rgb</texture>
+ <texture>Runway/pa_5r.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_6c</name>
- <texture>Runway/pa_6c.rgb</texture>
+ <texture>Runway/pa_6c.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_6r</name>
- <texture>Runway/pa_6r.rgb</texture>
+ <texture>Runway/pa_6r.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_7c</name>
- <texture>Runway/pa_7c.rgb</texture>
+ <texture>Runway/pa_7c.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_7r</name>
- <texture>Runway/pa_7r.rgb</texture>
+ <texture>Runway/pa_7r.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_8c</name>
- <texture>Runway/pa_8c.rgb</texture>
+ <texture>Runway/pa_8c.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_8r</name>
- <texture>Runway/pa_8r.rgb</texture>
+ <texture>Runway/pa_8r.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_9c</name>
- <texture>Runway/pa_9c.rgb</texture>
+ <texture>Runway/pa_9c.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_9r</name>
- <texture>Runway/pa_9r.rgb</texture>
+ <texture>Runway/pa_9r.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_tz_three</name>
- <texture>Runway/pa_tz_three.rgb</texture>
+ <texture>Runway/pa_tz_three.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_aim</name>
- <texture>Runway/pa_aim.rgb</texture>
+ <texture>Runway/pa_aim.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_tz_two_a</name>
- <texture>Runway/pa_tz_two_a.rgb</texture>
+ <texture>Runway/pa_tz_two_a.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_tz_two_b</name>
- <texture>Runway/pa_tz_two_b.rgb</texture>
+ <texture>Runway/pa_tz_two_b.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_tz_one_a</name>
- <texture>Runway/pa_tz_one_a.rgb</texture>
+ <texture>Runway/pa_tz_one_a.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_tz_one_b</name>
- <texture>Runway/pa_tz_one_b.rgb</texture>
+ <texture>Runway/pa_tz_one_b.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_centerline</name>
- <texture>Runway/pa_centerline.rgb</texture>
+ <texture>Runway/pa_centerline.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pa_rest</name>
- <texture>Runway/pa_rest.rgb</texture>
+ <texture>Runway/pa_rest.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_taxiway</name>
  <name>dirt_rwytaxiway</name>
- <texture>Runway/pc_taxiway.rgb</texture>
+ <texture>Runway/pc_taxiway.png</texture>
 </material>
 
 <material>
  <name>pc_tiedown</name>
  <name>dirt_rwytiedown</name>
- <texture>Runway/pc_tiedown.rgb</texture>
+ <texture>Runway/pc_tiedown.png</texture>
 </material>
 
 <material>
  <name>pc_dspl_thresh</name>
- <texture>Runway/pc_dspl_thresh.rgb</texture>
+ <texture>Runway/pc_dspl_thresh.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_dspl_arrows</name>
- <texture>Runway/pc_dspl_arrows.rgb</texture>
+ <texture>Runway/pc_dspl_arrows.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_threshold</name>
  <name>dirt_rwythreshold</name>
- <texture>Runway/pc_threshold.rgb</texture>
+ <texture>Runway/pc_threshold.png</texture>
  <wrapu>false</wrapu>
  <wrapv>false</wrapv>
 </material>
@@ -413,245 +413,245 @@ Shared parameters for various materials.
 <material>
  <name>pc_L</name>
  <name>dirt_rwyL</name>
- <texture>Runway/pc_L.rgb</texture>
+ <texture>Runway/pc_L.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_R</name>
  <name>dirt_rwyR</name>
- <texture>Runway/pc_R.rgb</texture>
+ <texture>Runway/pc_R.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_C</name>
  <name>dirt_rwyC</name>
- <texture>Runway/pc_C.rgb</texture>
+ <texture>Runway/pc_C.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_0l</name>
  <name>dirt_rwy0l</name>
- <texture>Runway/pc_0l.rgb</texture>
+ <texture>Runway/pc_0l.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_0r</name>
  <name>dirt_rwy0r</name>
- <texture>Runway/pc_0r.rgb</texture>
+ <texture>Runway/pc_0r.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_1c</name>
  <name>dirt_rwy1c</name>
- <texture>Runway/pc_1c.rgb</texture>
+ <texture>Runway/pc_1c.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_1l</name>
  <name>dirt_rwy1l</name>
- <texture>Runway/pc_1l.rgb</texture>
+ <texture>Runway/pc_1l.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_1r</name>
  <name>dirt_rwy1r</name>
- <texture>Runway/pc_1r.rgb</texture>
+ <texture>Runway/pc_1r.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_11</name>
  <name>dirt_rwy11</name>
- <texture>Runway/pc_11.rgb</texture>
+ <texture>Runway/pc_11.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_2c</name>
  <name>dirt_rwy2c</name>
- <texture>Runway/pc_2c.rgb</texture>
+ <texture>Runway/pc_2c.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_2l</name>
  <name>dirt_rwy2l</name>
- <texture>Runway/pc_2l.rgb</texture>
+ <texture>Runway/pc_2l.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_2r</name>
  <name>dirt_rwy2r</name>
- <texture>Runway/pc_2r.rgb</texture>
+ <texture>Runway/pc_2r.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_3c</name>
  <name>dirt_rwy3c</name>
- <texture>Runway/pc_3c.rgb</texture>
+ <texture>Runway/pc_3c.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_3l</name>
  <name>dirt_rwy3l</name>
- <texture>Runway/pc_3l.rgb</texture>
+ <texture>Runway/pc_3l.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_3r</name>
  <name>dirt_rwy3r</name>
- <texture>Runway/pc_3r.rgb</texture>
+ <texture>Runway/pc_3r.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_4c</name>
  <name>dirt_rwy4c</name>
- <texture>Runway/pc_4c.rgb</texture>
+ <texture>Runway/pc_4c.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_4r</name>
  <name>dirt_rwy4r</name>
- <texture>Runway/pc_4r.rgb</texture>
+ <texture>Runway/pc_4r.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_5c</name>
  <name>dirt_rwy5c</name>
- <texture>Runway/pc_5c.rgb</texture>
+ <texture>Runway/pc_5c.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_5r</name>
  <name>dirt_rwy5r</name>
- <texture>Runway/pc_5r.rgb</texture>
+ <texture>Runway/pc_5r.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_6c</name>
  <name>dirt_rwy6c</name>
- <texture>Runway/pc_6c.rgb</texture>
+ <texture>Runway/pc_6c.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_6r</name>
  <name>dirt_rwy6r</name>
- <texture>Runway/pc_6r.rgb</texture>
+ <texture>Runway/pc_6r.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_7c</name>
  <name>dirt_rwy7c</name>
- <texture>Runway/pc_7c.rgb</texture>
+ <texture>Runway/pc_7c.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_7r</name>
  <name>dirt_rwy7r</name>
- <texture>Runway/pc_7r.rgb</texture>
+ <texture>Runway/pc_7r.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_8c</name>
  <name>dirt_rwy8c</name>
- <texture>Runway/pc_8c.rgb</texture>
+ <texture>Runway/pc_8c.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_8r</name>
  <name>dirt_rwy8r</name>
- <texture>Runway/pc_8r.rgb</texture>
+ <texture>Runway/pc_8r.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_9c</name>
  <name>dirt_rwy9c</name>
- <texture>Runway/pc_9c.rgb</texture>
+ <texture>Runway/pc_9c.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_9r</name>
  <name>dirt_rwy9r</name>
- <texture>Runway/pc_9r.rgb</texture>
+ <texture>Runway/pc_9r.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_tz_three</name>
  <name>dirt_rwytz_three</name>
- <texture>Runway/pc_tz_three.rgb</texture>
+ <texture>Runway/pc_tz_three.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_aim</name>
  <name>dirt_rwyaim</name>
- <texture>Runway/pc_aim.rgb</texture>
+ <texture>Runway/pc_aim.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_tz_two_a</name>
  <name>dirt_rwytz_two_a</name>
- <texture>Runway/pc_tz_two_a.rgb</texture>
+ <texture>Runway/pc_tz_two_a.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_tz_two_b</name>
  <name>dirt_rwytz_two_b</name>
- <texture>Runway/pc_tz_two_b.rgb</texture>
+ <texture>Runway/pc_tz_two_b.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_tz_one_a</name>
  <name>dirt_rwytz_one_a</name>
- <texture>Runway/pc_tz_one_a.rgb</texture>
+ <texture>Runway/pc_tz_one_a.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_tz_one_b</name>
  <name>dirt_rwytz_one_b</name>
- <texture>Runway/pc_tz_one_b.rgb</texture>
+ <texture>Runway/pc_tz_one_b.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_centerline</name>
  <name>dirt_rwycenterline</name>
- <texture>Runway/pc_centerline.rgb</texture>
+ <texture>Runway/pc_centerline.png</texture>
  <wrapu>false</wrapu>
 </material>
 
 <material>
  <name>pc_rest</name>
  <name>dirt_rwyrest</name>
- <texture>Runway/pc_rest.rgb</texture>
+ <texture>Runway/pc_rest.png</texture>
  <wrapu>false</wrapu>
 </material>
 
@@ -669,14 +669,14 @@ Shared parameters for various materials.
  <name>EvergreenBroadCover</name>
  <name>Island</name>
  <name>Default</name>
- <texture>Terrain/forest1a.rgb</texture>
- <texture>Terrain/forest1b.rgb</texture>
- <texture>Terrain/forest1c.rgb</texture>
+ <texture>Terrain/forest1a.png</texture>
+ <texture>Terrain/forest1b.png</texture>
+ <texture>Terrain/forest1c.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <tree-coverage>4000.0</tree-coverage>
- <tree-texture>Textures/Trees/coniferous-summer.rgb</tree-texture>
+ <tree-texture>Textures/Trees/coniferous-summer.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>25.0</tree-height-m>
@@ -694,14 +694,14 @@ Shared parameters for various materials.
  </condition>
  <name>DeciduousBroadCover</name>
  <name>Bog</name>
- <texture>Terrain/deciduous1.rgb</texture>
- <texture>Terrain/deciduous2.rgb</texture>
- <texture>Terrain/deciduous4.rgb</texture>
+ <texture>Terrain/deciduous1.png</texture>
+ <texture>Terrain/deciduous2.png</texture>
+ <texture>Terrain/deciduous4.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <tree-coverage>4000.0</tree-coverage>
- <tree-texture>Textures/Trees/deciduous-summer.rgb</tree-texture>
+ <tree-texture>Textures/Trees/deciduous-summer.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>25.0</tree-height-m>
@@ -718,14 +718,14 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>MixedForestCover</name>
- <texture>Terrain/mixedforest.rgb</texture>
- <texture>Terrain/mixedforest2.rgb</texture>
- <texture>Terrain/mixedforest3.rgb</texture>
+ <texture>Terrain/mixedforest.png</texture>
+ <texture>Terrain/mixedforest2.png</texture>
+ <texture>Terrain/mixedforest3.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>5000000.0</light-coverage>
  <tree-coverage>4000.0</tree-coverage>
- <tree-texture>Textures/Trees/mixed-summer.rgb</tree-texture>
+ <tree-texture>Textures/Trees/mixed-summer.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>25.0</tree-height-m>
@@ -743,12 +743,12 @@ Shared parameters for various materials.
  </condition>
  <name>EvergreenNeedleCover</name>
  <name>WoodedTundraCover</name>
- <texture>Terrain/evergreen.rgb</texture>
+ <texture>Terrain/evergreen.png</texture>
  <xsize>1000</xsize>
  <ysize>1000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <tree-coverage>4000.0</tree-coverage>
- <tree-texture>Textures/Trees/coniferous-summer.rgb</tree-texture>
+ <tree-texture>Textures/Trees/coniferous-summer.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>20.0</tree-height-m>
@@ -765,12 +765,12 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>DeciduousNeedleCover</name>
- <texture>Terrain/dec_evergreen.rgb</texture>
+ <texture>Terrain/dec_evergreen.png</texture>
  <xsize>1000</xsize>
  <ysize>1000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <tree-coverage>4000.0</tree-coverage>
- <tree-texture>Textures/Trees/coniferous-summer.rgb</tree-texture>
+ <tree-texture>Textures/Trees/coniferous-summer.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>15.0</tree-height-m>
@@ -787,9 +787,9 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>Sand</name>
- <texture>Terrain/sand4.rgb</texture>
- <texture>Terrain/sand5.rgb</texture>
- <texture>Terrain/sand6.rgb</texture>
+ <texture>Terrain/sand4.png</texture>
+ <texture>Terrain/sand5.png</texture>
+ <texture>Terrain/sand6.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>10000000.0</light-coverage>
@@ -809,9 +809,9 @@ Shared parameters for various materials.
  <name>ShrubCover</name>
  <name>ShrubGrassCover</name>
  <name>ScrubCover</name>
- <texture>Terrain/shrub.rgb</texture>
- <texture>Terrain/shrub2.rgb</texture>
- <texture>Terrain/shrub3.rgb</texture>
+ <texture>Terrain/shrub.png</texture>
+ <texture>Terrain/shrub2.png</texture>
+ <texture>Terrain/shrub3.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <diffuse>
@@ -829,7 +829,7 @@ Shared parameters for various materials.
  <shininess>1.2</shininess>
  <light-coverage>20000000.0</light-coverage>
  <tree-coverage>12000.0</tree-coverage>
- <tree-texture>Textures/Trees/mixed-shrub.rgb</tree-texture>
+ <tree-texture>Textures/Trees/mixed-shrub.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>2.0</tree-height-m>
@@ -847,9 +847,9 @@ Shared parameters for various materials.
  </condition>
  <name>BuiltUpCover</name>
  <name>Urban</name>
- <texture>Terrain/city1.rgb</texture>
- <texture>Terrain/city2.rgb</texture>
- <texture>Terrain/city3.rgb</texture>
+ <texture>Terrain/city1.png</texture>
+ <texture>Terrain/city2.png</texture>
+ <texture>Terrain/city3.png</texture>
  <xsize>1024</xsize>
  <ysize>1024</ysize>
  <light-coverage>100000.0</light-coverage>
@@ -912,7 +912,7 @@ Shared parameters for various materials.
   </object>
  </object-group>
  <tree-coverage>250000.0</tree-coverage>
- <tree-texture>Textures/Trees/mixed-summer.rgb</tree-texture>
+ <tree-texture>Textures/Trees/mixed-summer.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>25.0</tree-height-m>
@@ -927,7 +927,7 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>Town</name>
- <texture>Terrain/Town1.rgb</texture>
+ <texture>Terrain/Town1.png</texture>
  <xsize>1024</xsize>
  <ysize>1024</ysize>
  <light-coverage>100000.0</light-coverage>
@@ -976,7 +976,7 @@ Shared parameters for various materials.
   </object>
  </object-group>
  <tree-coverage>500000.0</tree-coverage>
- <tree-texture>Textures/Trees/mixed-summer.rgb</tree-texture>
+ <tree-texture>Textures/Trees/mixed-summer.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>25.0</tree-height-m>
@@ -995,7 +995,7 @@ Shared parameters for various materials.
  <name>Reservoir</name>
  <name>Stream</name>
  <name>Canal</name>
- <texture>Terrain/water-lake.rgb</texture>
+ <texture>Terrain/water-lake.png</texture>
  <xsize>400</xsize>
  <ysize>400</ysize>
  <ambient>
@@ -1032,9 +1032,9 @@ Shared parameters for various materials.
  <name>DryLake</name>
  <name>IntermittentReservoir</name>
  <name>IntermittentLake</name>
- <texture>Terrain/sand1.rgb</texture>
- <texture>Terrain/sand2.rgb</texture>
- <texture>Terrain/sand3.rgb</texture>
+ <texture>Terrain/sand1.png</texture>
+ <texture>Terrain/sand2.png</texture>
+ <texture>Terrain/sand3.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <solid>1</solid>
@@ -1051,7 +1051,7 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>IntermittentStream</name>
- <texture>Terrain/wash.rgb</texture>
+ <texture>Terrain/wash.png</texture>
  <xsize>200</xsize>
  <ysize>200</ysize>
  <shininess>1.5</shininess>
@@ -1071,9 +1071,9 @@ Shared parameters for various materials.
  <name>Littoral</name>
  <name>HerbWetlandCover</name>
  <name>WoodedWetlandCover</name>
- <texture>Terrain/marsh2.rgb</texture>
- <texture>Terrain/marsh3.rgb</texture>
- <texture>Terrain/marsh4.rgb</texture>
+ <texture>Terrain/marsh2.png</texture>
+ <texture>Terrain/marsh3.png</texture>
+ <texture>Terrain/marsh4.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <solid>1</solid>
@@ -1094,9 +1094,9 @@ Shared parameters for various materials.
  <name>GrassCover</name>
  <name>BareTundraCover</name>
  <name>MixedTundraCover</name>
- <texture>Terrain/tundra.rgb</texture>
- <texture>Terrain/tundra2.rgb</texture>
- <texture>Terrain/tundra3.rgb</texture>
+ <texture>Terrain/tundra.png</texture>
+ <texture>Terrain/tundra2.png</texture>
+ <texture>Terrain/tundra3.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>4000000.0</light-coverage>
@@ -1128,9 +1128,9 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>HerbTundraCover</name>
- <texture>Terrain/herbtundra.rgb</texture>
- <texture>Terrain/herbtundra2.rgb</texture>
- <texture>Terrain/herbtundra3.rgb</texture>
+ <texture>Terrain/herbtundra.png</texture>
+ <texture>Terrain/herbtundra2.png</texture>
+ <texture>Terrain/herbtundra3.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>4000000.0</light-coverage>
@@ -1162,7 +1162,7 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>SavannaCover</name>
- <texture>Terrain/savanna.rgb</texture>
+ <texture>Terrain/savanna.png</texture>
  <xsize>1000</xsize>
  <ysize>1000</ysize>
  <light-coverage>4000000.0</light-coverage>
@@ -1183,7 +1183,7 @@ Shared parameters for various materials.
  <name>Grass</name>
  <name>Airport</name>
  <name>AirportKeep</name>
- <texture>Terrain/airport.rgb</texture>
+ <texture>Terrain/airport.png</texture>
  <xsize>125</xsize>
  <ysize>125</ysize>
  <light-coverage>4000000.0</light-coverage>
@@ -1215,9 +1215,9 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>MixedCropPastureCover</name>
- <texture>Terrain/mixedcrop1.rgb</texture>
- <texture>Terrain/mixedcrop4.rgb</texture>
- <texture>Terrain/mixedcrop3.rgb</texture>
+ <texture>Terrain/mixedcrop1.png</texture>
+ <texture>Terrain/mixedcrop4.png</texture>
+ <texture>Terrain/mixedcrop3.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
@@ -1258,7 +1258,7 @@ Shared parameters for various materials.
   </object>
  </object-group>
  <tree-coverage>500000.0</tree-coverage>
- <tree-texture>Textures/Trees/mixed-summer.rgb</tree-texture>
+ <tree-texture>Textures/Trees/mixed-summer.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>20.0</tree-height-m>
@@ -1273,9 +1273,9 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>IrrCropPastureCover</name>
- <texture>Terrain/irrcrop1.rgb</texture>
- <texture>Terrain/irrcrop2.rgb</texture>
- <texture>Terrain/irrcrop3.rgb</texture>
+ <texture>Terrain/irrcrop1.png</texture>
+ <texture>Terrain/irrcrop2.png</texture>
+ <texture>Terrain/irrcrop3.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
@@ -1316,7 +1316,7 @@ Shared parameters for various materials.
   </object>
  </object-group>
  <tree-coverage>500000.0</tree-coverage>
- <tree-texture>Textures/Trees/mixed-summer.rgb</tree-texture>
+ <tree-texture>Textures/Trees/mixed-summer.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>20.0</tree-height-m>
@@ -1331,10 +1331,10 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>DryCropPastureCover</name>
- <texture>Terrain/drycrop1.rgb</texture>
- <texture>Terrain/drycrop2.rgb</texture>
- <texture>Terrain/drycrop3.rgb</texture>
- <texture>Terrain/drycrop4.rgb</texture>
+ <texture>Terrain/drycrop1.png</texture>
+ <texture>Terrain/drycrop2.png</texture>
+ <texture>Terrain/drycrop3.png</texture>
+ <texture>Terrain/drycrop4.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <solid>1</solid>
@@ -1375,7 +1375,7 @@ Shared parameters for various materials.
   </object>
  </object-group>
  <tree-coverage>500000.0</tree-coverage>
- <tree-texture>Textures/Trees/mixed-summer.rgb</tree-texture>
+ <tree-texture>Textures/Trees/mixed-summer.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>20.0</tree-height-m>
@@ -1390,9 +1390,9 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>CropGrassCover</name>
- <texture>Terrain/cropgrass1.rgb</texture>
- <texture>Terrain/cropgrass2.rgb</texture>
- <texture>Terrain/cropgrass3.rgb</texture>
+ <texture>Terrain/cropgrass1.png</texture>
+ <texture>Terrain/cropgrass2.png</texture>
+ <texture>Terrain/cropgrass3.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
@@ -1415,7 +1415,7 @@ Shared parameters for various materials.
  <bumpiness>0.3</bumpiness>
  <load-resistance>1e30</load-resistance>
  <tree-coverage>500000.0</tree-coverage>
- <tree-texture>Textures/Trees/mixed-summer.rgb</tree-texture>
+ <tree-texture>Textures/Trees/mixed-summer.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>20.0</tree-height-m>
@@ -1430,7 +1430,7 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>CropWoodCover</name>
- <texture>Terrain/cropwood.rgb</texture>
+ <texture>Terrain/cropwood.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
@@ -1440,7 +1440,7 @@ Shared parameters for various materials.
  <bumpiness>0.7</bumpiness>
  <load-resistance>10</load-resistance>
  <tree-coverage>200000.0</tree-coverage>
- <tree-texture>Textures/Trees/mixed-summer.rgb</tree-texture>
+ <tree-texture>Textures/Trees/mixed-summer.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>20.0</tree-height-m>
@@ -1463,14 +1463,14 @@ Shared parameters for various materials.
  <name>EvergreenBroadCover</name>
  <name>Island</name>
  <name>Default</name>
-  <texture>Terrain.winter/forest1a.rgb</texture>
-  <texture>Terrain.winter/forest1b.rgb</texture>
-  <texture>Terrain.winter/forest1c.rgb</texture>
+  <texture>Terrain.winter/forest1a.png</texture>
+  <texture>Terrain.winter/forest1b.png</texture>
+  <texture>Terrain.winter/forest1c.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <tree-coverage>4000.0</tree-coverage>
- <tree-texture>Textures/Trees/coniferous-winter.rgb</tree-texture>
+ <tree-texture>Textures/Trees/coniferous-winter.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>25.0</tree-height-m>
@@ -1488,14 +1488,14 @@ Shared parameters for various materials.
  </condition>
  <name>DeciduousBroadCover</name>
  <name>Bog</name>
- <texture>Terrain.winter/deciduous1.rgb</texture>
- <texture>Terrain.winter/deciduous2.rgb</texture>
- <texture>Terrain.winter/deciduous4.rgb</texture>
+ <texture>Terrain.winter/deciduous1.png</texture>
+ <texture>Terrain.winter/deciduous2.png</texture>
+ <texture>Terrain.winter/deciduous4.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <tree-coverage>4000.0</tree-coverage>
- <tree-texture>Textures/Trees/deciduous-winter.rgb</tree-texture>
+ <tree-texture>Textures/Trees/deciduous-winter.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>25.0</tree-height-m>
@@ -1512,14 +1512,14 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>MixedForestCover</name>
- <texture>Terrain.winter/mixedforest.rgb</texture>
- <texture>Terrain.winter/mixedforest2.rgb</texture>
- <texture>Terrain.winter/mixedforest3.rgb</texture>
+ <texture>Terrain.winter/mixedforest.png</texture>
+ <texture>Terrain.winter/mixedforest2.png</texture>
+ <texture>Terrain.winter/mixedforest3.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>5000000.0</light-coverage>
  <tree-coverage>4000.0</tree-coverage>
- <tree-texture>Textures/Trees/mixed-winter.rgb</tree-texture>
+ <tree-texture>Textures/Trees/mixed-winter.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>25.0</tree-height-m>
@@ -1537,12 +1537,12 @@ Shared parameters for various materials.
  </condition>
  <name>EvergreenNeedleCover</name>
  <name>WoodedTundraCover</name>
- <texture>Terrain.winter/evergreen.rgb</texture>
+ <texture>Terrain.winter/evergreen.png</texture>
  <xsize>1000</xsize>
  <ysize>1000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <tree-coverage>4000.0</tree-coverage>
- <tree-texture>Textures/Trees/coniferous-winter.rgb</tree-texture>
+ <tree-texture>Textures/Trees/coniferous-winter.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>20.0</tree-height-m>
@@ -1559,12 +1559,12 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>DeciduousNeedleCover</name>
- <texture>Terrain.winter/dec_evergreen.rgb</texture>
+ <texture>Terrain.winter/dec_evergreen.png</texture>
  <xsize>1000</xsize>
  <ysize>1000</ysize>
  <light-coverage>10000000.0</light-coverage>
  <tree-coverage>4000.0</tree-coverage>
- <tree-texture>Textures/Trees/coniferous-winter.rgb</tree-texture>
+ <tree-texture>Textures/Trees/coniferous-winter.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>15.0</tree-height-m>
@@ -1581,9 +1581,9 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>Sand</name>
- <texture>Terrain.winter/sand4.rgb</texture>
- <texture>Terrain.winter/sand5.rgb</texture>
- <texture>Terrain.winter/sand6.rgb</texture>
+ <texture>Terrain.winter/sand4.png</texture>
+ <texture>Terrain.winter/sand5.png</texture>
+ <texture>Terrain.winter/sand6.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>10000000.0</light-coverage>
@@ -1603,9 +1603,9 @@ Shared parameters for various materials.
  <name>ShrubCover</name>
  <name>ShrubGrassCover</name>
  <name>ScrubCover</name>
- <texture>Terrain.winter/shrub.rgb</texture>
- <texture>Terrain.winter/shrub2.rgb</texture>
- <texture>Terrain.winter/shrub3.rgb</texture>
+ <texture>Terrain.winter/shrub.png</texture>
+ <texture>Terrain.winter/shrub2.png</texture>
+ <texture>Terrain.winter/shrub3.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <diffuse>
@@ -1623,7 +1623,7 @@ Shared parameters for various materials.
  <shininess>1.2</shininess>
  <light-coverage>20000000.0</light-coverage>
  <tree-coverage>8000.0</tree-coverage>
- <tree-texture>Textures/Trees/mixed-shrub-winter.rgb</tree-texture>
+ <tree-texture>Textures/Trees/mixed-shrub-winter.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>2.0</tree-height-m>
@@ -1641,9 +1641,9 @@ Shared parameters for various materials.
  </condition>
  <name>BuiltUpCover</name>
  <name>Urban</name>
- <texture>Terrain/city1.rgb</texture>
- <texture>Terrain/city2.rgb</texture>
- <texture>Terrain/city3.rgb</texture>
+ <texture>Terrain/city1.png</texture>
+ <texture>Terrain/city2.png</texture>
+ <texture>Terrain/city3.png</texture>
  <xsize>1024</xsize>
  <ysize>1024</ysize>
  <light-coverage>100000.0</light-coverage>
@@ -1706,7 +1706,7 @@ Shared parameters for various materials.
   </object>
  </object-group>
  <tree-coverage>250000.0</tree-coverage>
- <tree-texture>Textures/Trees/mixed-winter.rgb</tree-texture>
+ <tree-texture>Textures/Trees/mixed-winter.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>25.0</tree-height-m>
@@ -1721,7 +1721,7 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>Town</name>
- <texture>Terrain.winter/Town1.rgb</texture>
+ <texture>Terrain.winter/Town1.png</texture>
  <xsize>1024</xsize>
  <ysize>1024</ysize>
  <light-coverage>100000.0</light-coverage>
@@ -1770,7 +1770,7 @@ Shared parameters for various materials.
   </object>
  </object-group>
  <tree-coverage>500000.0</tree-coverage>
- <tree-texture>Textures/Trees/mixed-winter.rgb</tree-texture>
+ <tree-texture>Textures/Trees/mixed-winter.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>25.0</tree-height-m>
@@ -1789,7 +1789,7 @@ Shared parameters for various materials.
  <name>Reservoir</name>
  <name>Stream</name>
  <name>Canal</name>
- <texture>Terrain.winter/water-lake.rgb</texture>
+ <texture>Terrain.winter/water-lake.png</texture>
  <xsize>400</xsize>
  <ysize>400</ysize>
  <ambient>
@@ -1826,9 +1826,9 @@ Shared parameters for various materials.
  <name>DryLake</name>
  <name>IntermittentReservoir</name>
  <name>IntermittentLake</name>
- <texture>Terrain.winter/sand1.rgb</texture>
- <texture>Terrain.winter/sand2.rgb</texture>
- <texture>Terrain.winter/sand3.rgb</texture>
+ <texture>Terrain.winter/sand1.png</texture>
+ <texture>Terrain.winter/sand2.png</texture>
+ <texture>Terrain.winter/sand3.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <solid>1</solid>
@@ -1845,7 +1845,7 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>IntermittentStream</name>
- <texture>Terrain.winter/wash.rgb</texture>
+ <texture>Terrain.winter/wash.png</texture>
  <xsize>200</xsize>
  <ysize>200</ysize>
  <shininess>1.5</shininess>
@@ -1865,9 +1865,9 @@ Shared parameters for various materials.
  <name>Littoral</name>
  <name>HerbWetlandCover</name>
  <name>WoodedWetlandCover</name>
- <texture>Terrain.winter/marsh2.rgb</texture>
- <texture>Terrain.winter/marsh3.rgb</texture>
- <texture>Terrain.winter/marsh4.rgb</texture>
+ <texture>Terrain.winter/marsh2.png</texture>
+ <texture>Terrain.winter/marsh3.png</texture>
+ <texture>Terrain.winter/marsh4.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <solid>1</solid>
@@ -1888,9 +1888,9 @@ Shared parameters for various materials.
  <name>GrassCover</name>
  <name>BareTundraCover</name>
  <name>MixedTundraCover</name>
- <texture>Terrain.winter/tundra.rgb</texture>
- <texture>Terrain.winter/tundra2.rgb</texture>
- <texture>Terrain.winter/tundra3.rgb</texture>
+ <texture>Terrain.winter/tundra.png</texture>
+ <texture>Terrain.winter/tundra2.png</texture>
+ <texture>Terrain.winter/tundra3.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>4000000.0</light-coverage>
@@ -1922,9 +1922,9 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>HerbTundraCover</name>
-  <texture>Terrain.winter/herbtundra.rgb</texture>
-  <texture>Terrain.winter/herbtundra2.rgb</texture>
-  <texture>Terrain.winter/herbtundra3.rgb</texture>
+  <texture>Terrain.winter/herbtundra.png</texture>
+  <texture>Terrain.winter/herbtundra2.png</texture>
+  <texture>Terrain.winter/herbtundra3.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>4000000.0</light-coverage>
@@ -1956,7 +1956,7 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>SavannaCover</name>
- <texture>Terrain.winter/savanna.rgb</texture>
+ <texture>Terrain.winter/savanna.png</texture>
  <xsize>1000</xsize>
  <ysize>1000</ysize>
  <light-coverage>4000000.0</light-coverage>
@@ -1977,7 +1977,7 @@ Shared parameters for various materials.
  <name>Grass</name>
  <name>Airport</name>
  <name>AirportKeep</name>
- <texture>Terrain.winter/airport.rgb</texture>
+ <texture>Terrain.winter/airport.png</texture>
  <xsize>125</xsize>
  <ysize>125</ysize>
  <light-coverage>4000000.0</light-coverage>
@@ -2009,9 +2009,9 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>MixedCropPastureCover</name>
- <texture>Terrain.winter/mixedcrop1.rgb</texture>
- <texture>Terrain.winter/mixedcrop4.rgb</texture>
- <texture>Terrain.winter/mixedcrop3.rgb</texture>
+ <texture>Terrain.winter/mixedcrop1.png</texture>
+ <texture>Terrain.winter/mixedcrop4.png</texture>
+ <texture>Terrain.winter/mixedcrop3.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
@@ -2052,7 +2052,7 @@ Shared parameters for various materials.
   </object>
  </object-group>
  <tree-coverage>500000.0</tree-coverage>
- <tree-texture>Textures/Trees/mixed-winter.rgb</tree-texture>
+ <tree-texture>Textures/Trees/mixed-winter.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>20.0</tree-height-m>
@@ -2067,9 +2067,9 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>IrrCropPastureCover</name>
- <texture>Terrain.winter/irrcrop1.rgb</texture>
- <texture>Terrain.winter/irrcrop2.rgb</texture>
- <texture>Terrain.winter/irrcrop3.rgb</texture>
+ <texture>Terrain.winter/irrcrop1.png</texture>
+ <texture>Terrain.winter/irrcrop2.png</texture>
+ <texture>Terrain.winter/irrcrop3.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
@@ -2110,7 +2110,7 @@ Shared parameters for various materials.
   </object>
  </object-group>
  <tree-coverage>500000.0</tree-coverage>
- <tree-texture>Textures/Trees/mixed-winter.rgb</tree-texture>
+ <tree-texture>Textures/Trees/mixed-winter.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>20.0</tree-height-m>
@@ -2125,10 +2125,10 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>DryCropPastureCover</name>
- <texture>Terrain.winter/drycrop1.rgb</texture>
- <texture>Terrain.winter/drycrop2.rgb</texture>
- <texture>Terrain.winter/drycrop3.rgb</texture>
- <texture>Terrain.winter/drycrop4.rgb</texture>
+ <texture>Terrain.winter/drycrop1.png</texture>
+ <texture>Terrain.winter/drycrop2.png</texture>
+ <texture>Terrain.winter/drycrop3.png</texture>
+ <texture>Terrain.winter/drycrop4.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <solid>1</solid>
@@ -2169,7 +2169,7 @@ Shared parameters for various materials.
   </object>
  </object-group>
  <tree-coverage>500000.0</tree-coverage>
- <tree-texture>Textures/Trees/mixed-winter.rgb</tree-texture>
+ <tree-texture>Textures/Trees/mixed-winter.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>20.0</tree-height-m>
@@ -2184,9 +2184,9 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>CropGrassCover</name>
- <texture>Terrain.winter/cropgrass1.rgb</texture>
- <texture>Terrain.winter/cropgrass2.rgb</texture>
- <texture>Terrain.winter/cropgrass3.rgb</texture>
+ <texture>Terrain.winter/cropgrass1.png</texture>
+ <texture>Terrain.winter/cropgrass2.png</texture>
+ <texture>Terrain.winter/cropgrass3.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
@@ -2209,7 +2209,7 @@ Shared parameters for various materials.
  <bumpiness>0.3</bumpiness>
  <load-resistance>1e30</load-resistance>
  <tree-coverage>500000.0</tree-coverage>
- <tree-texture>Textures/Trees/mixed-winter.rgb</tree-texture>
+ <tree-texture>Textures/Trees/mixed-winter.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>20.0</tree-height-m>
@@ -2224,7 +2224,7 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>CropWoodCover</name>
- <texture>Terrain.winter/cropwood.rgb</texture>
+ <texture>Terrain.winter/cropwood.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <light-coverage>2000000.0</light-coverage>
@@ -2234,7 +2234,7 @@ Shared parameters for various materials.
  <bumpiness>0.7</bumpiness>
  <load-resistance>10</load-resistance>
  <tree-coverage>200000.0</tree-coverage>
- <tree-texture>Textures/Trees/mixed-winter.rgb</tree-texture>
+ <tree-texture>Textures/Trees/mixed-winter.png</tree-texture>
  <tree-varieties>8</tree-varieties>
  <tree-range-m alias="/params/forest/tree-range-m"/>
  <tree-height-m>20.0</tree-height-m>
@@ -2247,7 +2247,7 @@ Shared parameters for various materials.
 
 <material>
  <name>Unknown</name>
- <texture>Terrain/unknown.rgb</texture>
+ <texture>Terrain/unknown.png</texture>
  <xsize>1000</xsize>
  <ysize>1000</ysize>
  <rolling-friction>0.1</rolling-friction>
@@ -2256,8 +2256,8 @@ Shared parameters for various materials.
 
 <material>
  <name>PackIce</name>
- <texture>Terrain/packice1.rgb</texture>
- <texture>Terrain/packice2.rgb</texture>
+ <texture>Terrain/packice1.png</texture>
+ <texture>Terrain/packice2.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <shininess>1.5</shininess>
@@ -2269,9 +2269,9 @@ Shared parameters for various materials.
 <material>
  <name>Glacier</name>
  <name>PolarIce</name>
- <texture>Terrain/glacier1.rgb</texture>
- <texture>Terrain/glacier2.rgb</texture>
- <texture>Terrain/glacier3.rgb</texture>
+ <texture>Terrain/glacier1.png</texture>
+ <texture>Terrain/glacier2.png</texture>
+ <texture>Terrain/glacier3.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <shininess>1.5</shininess>
@@ -2282,10 +2282,10 @@ Shared parameters for various materials.
 
 <material>
  <name>SnowCover</name>
- <texture>Terrain/snow1.rgb</texture>
- <texture>Terrain/snow2.rgb</texture>
- <texture>Terrain/snow3.rgb</texture>
- <texture>Terrain/snow4.rgb</texture>
+ <texture>Terrain/snow1.png</texture>
+ <texture>Terrain/snow2.png</texture>
+ <texture>Terrain/snow3.png</texture>
+ <texture>Terrain/snow4.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
  <shininess>1.2</shininess>
@@ -2296,7 +2296,7 @@ Shared parameters for various materials.
 
   <material>
     <name>Ocean</name>
-    <texture>Terrain/water.rgb</texture>
+    <texture>Terrain/water.png</texture>
     <xsize>400</xsize>
     <ysize>400</ysize>
     <object-group>
@@ -2401,7 +2401,7 @@ Shared parameters for various materials.
 	<material>
  <name>BarrenCover</name>
  <name>Lava</name>
- <texture>Terrain/rock.rgb</texture>
+ <texture>Terrain/rock.png</texture>
  <xsize>500</xsize>
  <ysize>500</ysize>
  <solid>1</solid>
@@ -2413,7 +2413,7 @@ Shared parameters for various materials.
 <material>
  <name>Freeway</name>
  <name>Road</name>
- <texture>Terrain/asphalt.rgb</texture>
+ <texture>Terrain/asphalt.png</texture>
  <xsize>400</xsize>
  <ysize>400</ysize>
  <light-coverage>10000.0</light-coverage>
@@ -2426,7 +2426,7 @@ Shared parameters for various materials.
 
 <material>
  <name>Railroad</name>
- <texture>Terrain/gravel.rgb</texture>
+ <texture>Terrain/gravel.png</texture>
  <xsize>400</xsize>
  <ysize>400</ysize>
  <light-coverage>1000000.0</light-coverage>
@@ -2444,7 +2444,7 @@ Shared parameters for various materials.
 
 <material>
  <name>YellowSign.unlighted</name>
- <texture>Signs/yellow.rgb</texture>
+ <texture>Signs/yellow.png</texture>
  <emissive>
   <r>0.4</r>
   <g>0.4</g>
@@ -2455,7 +2455,7 @@ Shared parameters for various materials.
 <material>
  <name>YellowSign</name>
  <name>YellowSign.lighted</name>
- <texture>Signs/yellow.rgb</texture>
+ <texture>Signs/yellow.png</texture>
  <emissive>
   <r>0.9</r>
   <g>0.9</g>
@@ -2527,7 +2527,7 @@ Shared parameters for various materials.
 
 <material>
  <name>RedSign.unlighted</name>
- <texture>Signs/red.rgb</texture>
+ <texture>Signs/red.png</texture>
  <emissive>
   <r>0.4</r>
   <g>0.4</g>
@@ -2538,7 +2538,7 @@ Shared parameters for various materials.
 <material>
  <name>RedSign</name>
  <name>RedSign.lighted</name>
- <texture>Signs/red.rgb</texture>
+ <texture>Signs/red.png</texture>
  <emissive>
   <r>0.9</r>
   <g>0.9</g>
@@ -2611,7 +2611,7 @@ Shared parameters for various materials.
 
 <material>
  <name>BlackSign.unlighted</name>
- <texture>Signs/black.rgb</texture>
+ <texture>Signs/black.png</texture>
  <emissive>
   <r>0.4</r>
   <g>0.4</g>
@@ -2622,7 +2622,7 @@ Shared parameters for various materials.
 <material>
  <name>BlackSign</name>
  <name>BlackSign.lighted</name>
- <texture>Signs/black.rgb</texture>
+ <texture>Signs/black.png</texture>
  <emissive>
   <r>0.9</r>
   <g>0.9</g>
@@ -2694,7 +2694,7 @@ Shared parameters for various materials.
 
 <material>
  <name>FramedSign.unlighted</name>
- <texture>Signs/framed.rgb</texture>
+ <texture>Signs/framed.png</texture>
  <emissive>
   <r>0.4</r>
   <g>0.4</g>
@@ -2705,7 +2705,7 @@ Shared parameters for various materials.
 <material>
  <name>FramedSign</name>
  <name>FramedSign.lighted</name>
- <texture>Signs/framed.rgb</texture>
+ <texture>Signs/framed.png</texture>
  <emissive>
   <r>0.9</r>
   <g>0.9</g>
@@ -2777,7 +2777,7 @@ Shared parameters for various materials.
 
 <material>
  <name>RunwaySign.unlighted</name>
- <texture>Signs/yellow_rwy.rgb</texture>
+ <texture>Signs/yellow_rwy.png</texture>
  <emissive>
   <r>0.4</r>
   <g>0.4</g>
@@ -2788,7 +2788,7 @@ Shared parameters for various materials.
 <material>
  <name>RunwaySign</name>
  <name>RunwaySign.lighted</name>
- <texture>Signs/yellow_rwy.rgb</texture>
+ <texture>Signs/yellow_rwy.png</texture>
  <emissive>
   <r>0.9</r>
   <g>0.9</g>

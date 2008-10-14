@@ -201,8 +201,8 @@ var Widget = {
 #     livery_dialog.toggle();
 #
 var Dialog = {
-    new : func(prop, path = nil, name = nil) {
-        var m = { parents : [Dialog] };
+    new: func(prop, path = nil, name = nil) {
+        var m = { parents: [Dialog] };
         m.state = 0;
         if (path == nil) { # global dialog in $FG_ROOT/gui/dialogs/
             m.name = prop;
@@ -219,7 +219,7 @@ var Dialog = {
         return Dialog.instance[m.name] = m;
     },
     # doesn't need to be called explicitly, but can be used to force a reload
-    load : func {
+    load: func {
         var state = me.state;
         if (state)
             me.close();
@@ -242,25 +242,25 @@ var Dialog = {
             me.open();
     },
     # allows access to dialog-embedded Nasal variables/functions
-    namespace : func {
+    namespace: func {
         var ns = "__dlg:" ~ me.name;
         me.state and contains(globals, ns) ? globals[ns] : nil;
     },
-    open : func {
+    open: func {
         fgcommand("dialog-show", me.prop);
         me.state = 1;
     },
-    close : func {
+    close: func {
         fgcommand("dialog-close", me.prop);
         me.state = 0;
     },
-    toggle : func {
+    toggle: func {
         me.state ? me.close() : me.open();
     },
-    is_open : func {
+    is_open: func {
         me.state;
     },
-    instance : {},
+    instance: {},
 };
 
 
@@ -294,7 +294,7 @@ var Dialog = {
 #     selector.open();
 #
 var FileSelector = {
-    new : func(callback, title, button, pattern = nil, dir = "", file = "", dotfiles = 0) {
+    new: func(callback, title, button, pattern = nil, dir = "", file = "", dotfiles = 0) {
         var name = "file-select-";
         var data = props.globals.getNode("/sim/gui/dialogs/", 1);
         var i = nil;
@@ -316,18 +316,18 @@ var FileSelector = {
         return m;
     },
     # setters only take effect after the next call to open()
-    set_title     : func(title) { me.data.getNode("title", 1).setValue(title) },
-    set_button    : func(button) { me.data.getNode("button", 1).setValue(button) },
-    set_directory : func(dir) { me.data.getNode("directory", 1).setValue(dir) },
-    set_file      : func(file) { me.data.getNode("selection", 1).setValue(file) },
-    set_dotfiles  : func(dot) { me.data.getNode("dotfiles", 1).setBoolValue(dot) },
-    set_pattern   : func(pattern) {
+    set_title: func(title) { me.data.getNode("title", 1).setValue(title) },
+    set_button: func(button) { me.data.getNode("button", 1).setValue(button) },
+    set_directory: func(dir) { me.data.getNode("directory", 1).setValue(dir) },
+    set_file: func(file) { me.data.getNode("selection", 1).setValue(file) },
+    set_dotfiles: func(dot) { me.data.getNode("dotfiles", 1).setBoolValue(dot) },
+    set_pattern: func(pattern) {
         me.data.removeChildren("pattern");
         if (pattern != nil)
             forindex (var i; pattern)
                 me.data.getChild("pattern", i, 1).setValue(pattern[i]);
     },
-    del : func {
+    del: func {
         me.close();
         delete(me.instance, me.name);
         removelistener(me.cblistener);
@@ -399,11 +399,97 @@ settimer(func {
 
 
 ##
+# Overlay selector. Displays a list of overlay XML files and copies the
+# chosen one to the property tree. The given name property is saved to
+# autosave.xml and restored next time. The class allows to select liveries,
+# insignia, decals, variants, etc. Usually the overlay properties are
+# fed to "select" and "material" animations.
+#
+# SYNOPSIS:
+#       OverlaySelector.new(<title>, <dir>, <nameprop>);
+#
+#       title    ... dialog title
+#       dir      ... directory where to find the XML overlay files,
+#                    relative to FG_ROOT
+#       nameprop ... property in an overlay file that contains the name
+#                    The result is written to this property in the
+#                    property tree. You can attach a listener here to
+#                    get changes reported.
+#
+# EXAMPLE:
+#       var pilots_dialog = gui.OverlaySelector.new("Pilots",
+#               "Aircraft/foo/Models/Pilots",
+#               "sim/model/pilot");
+#
+#       pilots_dialog.open();  # or ... close(), or toggle()
+#
+#
+var OverlaySelector = {
+    new: func(title, dir, nameprop) {
+        var name = "overlay-select-";
+        var data = props.globals.getNode("/sim/gui/dialogs/", 1);
+        var i = nil;
+        for (i = 1; 1; i += 1)
+            if (data.getNode(name ~ i, 0) == nil)
+                break;
+        data = data.getNode(name ~= i, 1);
+
+        var m = Dialog.new(data.getNode("dialog", 1), "gui/dialogs/overlay-select.xml", name);
+        m.parents = [OverlaySelector, Dialog];
+
+        m.dir = getprop("/sim/fg-root") ~ "/" ~ dir;
+        m.nameprop = nameprop;
+        m.result = data.getNode("result", 1);
+        m.cblistener = setlistener(m.result, func m.set());
+        aircraft.data.add(nameprop);
+
+        m.prop.getNode("group/text/label").setValue(title);
+        m.list = m.prop.getNode("list");
+        m.list.getNode("property").setValue(m.result.getPath());
+
+        m.rescan();
+        m.set(getprop(m.nameprop));
+        return m;
+    },
+    del: func {
+        removelistener(me.cblistener);
+        me.data.remove();
+    },
+    rescan: func {
+        me.options = [];
+        foreach (var file; directory(me.dir)) {
+            if (substr(file, -4) != ".xml")
+                continue;
+            var n = io.read_properties(me.dir ~ "/" ~ file);
+            var name = n.getNode(me.nameprop, 1).getValue() or "[NO NAME]";
+            append(me.options, [name, n.getValues()]);
+            me.options = sort(me.options, func(a, b) cmp(a[0], b[0]));
+        }
+
+        me.list.removeChildren("value");
+        forindex (var i; me.options)
+            me.list.getChild("value", i, 1).setValue(me.options[i][0]);
+    },
+    set: func(which = nil) {
+        if (!size(me.options))
+            return;
+        var choice = which or me.result.getValue() or me.options[0][0];
+        foreach (var o; me.options) {
+            if (o[0] == choice) {
+                props.globals.setValues(o[1]);
+                setprop(me.nameprop, choice);
+            }
+        }
+    },
+};
+
+
+##
 # Apply whole dialog or list of widgets. This copies the widgets'
 # visible contents to the respective <property>.
 #
 var dialog_apply = func(dialog, objects...) {
-    var n = props.Node.new({ "dialog-name" : dialog });
+    var n = props.Node.new({ "dialog-name": dialog });
     if (!size(objects))
         return fgcommand("dialog-apply", n);
 
@@ -420,7 +506,7 @@ var dialog_apply = func(dialog, objects...) {
 # adopt and display the value of their <property>.
 #
 var dialog_update = func(dialog, objects...) {
-    var n = props.Node.new({ "dialog-name" : dialog });
+    var n = props.Node.new({ "dialog-name": dialog });
     if (!size(objects))
         return fgcommand("dialog-update", n);
 
@@ -521,7 +607,7 @@ var weightChangeHandler = func {
     # isn't dynamic in that way.  The only way to get the changes on
     # screen is to pop it down and recreate it.
     if(tankchanged) {
-        var p = props.Node.new({"dialog-name" : "WeightAndFuel"});
+        var p = props.Node.new({"dialog-name": "WeightAndFuel"});
         fgcommand("dialog-close", p);
         showWeightDialog();
     }
@@ -803,7 +889,7 @@ showHelpDialog = func {
     }
     toggle = size(arg) > 1 and arg[1] != nil and arg[1] > 0;
     if (toggle and contains(dialog, name)) {
-        fgcommand("dialog-close", props.Node.new({ "dialog-name" : name }));
+        fgcommand("dialog-close", props.Node.new({ "dialog-name": name }));
         delete(dialog, name);
         return;
     }
@@ -905,94 +991,94 @@ showHelpDialog = func {
 
 
 var debug_keys = {
-    title : "Development Keys",
-    key : [
-       #{ name : "Ctrl-U",    desc : "add 1000 ft of emergency altitude" },
-        { name : "Shift-F3",  desc : "load panel" },
-        { name : "/",         desc : "open property browser" },
+    title: "Development Keys",
+    key: [
+       #{ name: "Ctrl-U",    desc: "add 1000 ft of emergency altitude" },
+        { name: "Shift-F3",  desc: "load panel" },
+        { name: "/",         desc: "open property browser" },
     ],
 };
 
 var basic_keys = {
-    title : "Basic Keys",
-    key : [
-        { name : "?",         desc : "show/hide aircraft help dialog" },
-       #{ name : "Tab",       desc : "show/hide aircraft config dialog" },
-        { name : "Esc",       desc : "quit FlightGear" },
-        { name : "Shift-Esc", desc : "reset FlightGear" },
-        { name : "a/A",       desc : "increase/decrease speed-up" },
-        { name : "c",         desc : "toggle 3D/2D cockpit" },
-        { name : "Ctrl-C",    desc : "toggle clickable panel hotspots" },
-        { name : "p",         desc : "pause/continue sim" },
-        { name : "Ctrl-R",    desc : "activate instant replay system" },
-        { name : "t/T",       desc : "increase/decrease warp delta" },
-        { name : "v/V",       desc : "cycle views (forward/backward)" },
-        { name : "Ctrl-V",    desc : "select cockpit view" },
-        { name : "w/W",       desc : "increase/decrease warp" },
-        { name : "x/X",       desc : "zoom in/out" },
-        { name : "Ctrl-X",    desc : "reset zoom to default" },
-        { name : "z/Z",       desc : "increase/decrease visibility" },
-        { name : "'",         desc : "display ATC setting dialog" },
-        { name : "+",         desc : "let ATC/instructor repeat last message" },
-        { name : "-",         desc : "open chat dialog" },
-        { name : "_",         desc : "compose chat message" },
-        { name : "F3",        desc : "capture screen" },
-        { name : "F10",       desc : "toggle menubar" },
-        { name : "Shift-F1",  desc : "load flight" },
-        { name : "Shift-F2",  desc : "save flight" },
-        { name : "Shift-F10", desc : "cycle through GUI styles" },
+    title: "Basic Keys",
+    key: [
+        { name: "?",         desc: "show/hide aircraft help dialog" },
+       #{ name: "Tab",       desc: "show/hide aircraft config dialog" },
+        { name: "Esc",       desc: "quit FlightGear" },
+        { name: "Shift-Esc", desc: "reset FlightGear" },
+        { name: "a/A",       desc: "increase/decrease speed-up" },
+        { name: "c",         desc: "toggle 3D/2D cockpit" },
+        { name: "Ctrl-C",    desc: "toggle clickable panel hotspots" },
+        { name: "p",         desc: "pause/continue sim" },
+        { name: "Ctrl-R",    desc: "activate instant replay system" },
+        { name: "t/T",       desc: "increase/decrease warp delta" },
+        { name: "v/V",       desc: "cycle views (forward/backward)" },
+        { name: "Ctrl-V",    desc: "select cockpit view" },
+        { name: "w/W",       desc: "increase/decrease warp" },
+        { name: "x/X",       desc: "zoom in/out" },
+        { name: "Ctrl-X",    desc: "reset zoom to default" },
+        { name: "z/Z",       desc: "increase/decrease visibility" },
+        { name: "'",         desc: "display ATC setting dialog" },
+        { name: "+",         desc: "let ATC/instructor repeat last message" },
+        { name: "-",         desc: "open chat dialog" },
+        { name: "_",         desc: "compose chat message" },
+        { name: "F3",        desc: "capture screen" },
+        { name: "F10",       desc: "toggle menubar" },
+        { name: "Shift-F1",  desc: "load flight" },
+        { name: "Shift-F2",  desc: "save flight" },
+        { name: "Shift-F10", desc: "cycle through GUI styles" },
     ],
 };
 
 var common_aircraft_keys = {
-    title : "Common Aircraft Keys",
-    key : [
-        { name : "Enter",     desc : "move rudder right" },
-        { name : "0/Insert",  desc : "move rudder left" },
-        { name : "1/End",     desc : "decrease elevator trim" },
-        { name : "2/Up",      desc : "increase elevator or AP altitude" },
-        { name : "3/PgDn",    desc : "decr. throttle or AP autothrottle" },
-        { name : "4/Left",    desc : "move aileron left or adj. AP hdg." },
-        { name : "5/KP5",     desc : "center aileron, elev., and rudder" },
-        { name : "6/Right",   desc : "move aileron right or adj. AP hdg." },
-        { name : "7/Home",    desc : "increase elevator trim" },
-        { name : "8/Down",    desc : "decrease elevator or AP altitude" },
-        { name : "9/PgUp",    desc : "incr. throttle or AP autothrottle" },
-        { name : "Space",     desc : "PTT - Push To Talk (via VoIP)" },
-        { name : "!/@/#/$",   desc : "select engine 1/2/3/4" },
-        { name : "b",         desc : "apply all brakes" },
-        { name : "B",         desc : "toggle parking brake" },
-       #{ name : "Ctrl-B",    desc : "toggle speed brake" },
-        { name : "g/G",       desc : "gear up/down" },
-        { name : "h",         desc : "cycle HUD (head up display)" },
-        { name : "H",         desc : "cycle HUD brightness" },
-        { name : "i/Shift-i", desc : "normal/alternative HUD" },
-       #{ name : "j",         desc : "decrease spoilers" },
-       #{ name : "k",         desc : "increase spoilers" },
-        { name : "l",         desc : "toggle tail-wheel lock" },
-        { name : "m/M",       desc : "mixture richer/leaner" },
-        { name : "n/N",       desc : "propeller finer/coarser" },
-        { name : "P",         desc : "toggle 2D panel" },
-        { name : "S",         desc : "swap panels" },
-        { name : "s",         desc : "fire starter on selected eng." },
-        { name : ", .",       desc : "left/right brake (comma, period)" },
-        { name : "~",         desc : "select all engines (tilde)" },
-        { name : "[ ]",       desc : "flaps up/down" },
-        { name : "{ }",       desc : "decr/incr magneto on sel. eng." },
-        { name : "Ctrl-A",    desc : "AP: toggle altitude lock" },
-        { name : "Ctrl-G",    desc : "AP: toggle glide slope lock" },
-        { name : "Ctrl-H",    desc : "AP: toggle heading lock" },
-        { name : "Ctrl-N",    desc : "AP: toggle NAV1 lock" },
-        { name : "Ctrl-P",    desc : "AP: toggle pitch hold" },
-        { name : "Ctrl-S",    desc : "AP: toggle auto-throttle" },
-        { name : "Ctrl-T",    desc : "AP: toggle terrain lock" },
-        { name : "Ctrl-W",    desc : "AP: toggle wing leveler" },
-        { name : "F6",        desc : "AP: toggle heading mode" },
-        { name : "F11",       desc : "open autopilot dialog" },
-        { name : "F12",       desc : "open radio settings dialog" },
-        { name : "Shift-F5",  desc : "scroll 2D panel down" },
-        { name : "Shift-F6",  desc : "scroll 2D panel up" },
-        { name : "Shift-F7",  desc : "scroll 2D panel left" },
-        { name : "Shift-F8",  desc : "scroll 2D panel right" },
+    title: "Common Aircraft Keys",
+    key: [
+        { name: "Enter",     desc: "move rudder right" },
+        { name: "0/Insert",  desc: "move rudder left" },
+        { name: "1/End",     desc: "decrease elevator trim" },
+        { name: "2/Up",      desc: "increase elevator or AP altitude" },
+        { name: "3/PgDn",    desc: "decr. throttle or AP autothrottle" },
+        { name: "4/Left",    desc: "move aileron left or adj. AP hdg." },
+        { name: "5/KP5",     desc: "center aileron, elev., and rudder" },
+        { name: "6/Right",   desc: "move aileron right or adj. AP hdg." },
+        { name: "7/Home",    desc: "increase elevator trim" },
+        { name: "8/Down",    desc: "decrease elevator or AP altitude" },
+        { name: "9/PgUp",    desc: "incr. throttle or AP autothrottle" },
+        { name: "Space",     desc: "PTT - Push To Talk (via VoIP)" },
+        { name: "!/@/#/$",   desc: "select engine 1/2/3/4" },
+        { name: "b",         desc: "apply all brakes" },
+        { name: "B",         desc: "toggle parking brake" },
+       #{ name: "Ctrl-B",    desc: "toggle speed brake" },
+        { name: "g/G",       desc: "gear up/down" },
+        { name: "h",         desc: "cycle HUD (head up display)" },
+        { name: "H",         desc: "cycle HUD brightness" },
+        { name: "i/Shift-i", desc: "normal/alternative HUD" },
+       #{ name: "j",         desc: "decrease spoilers" },
+       #{ name: "k",         desc: "increase spoilers" },
+        { name: "l",         desc: "toggle tail-wheel lock" },
+        { name: "m/M",       desc: "mixture richer/leaner" },
+        { name: "n/N",       desc: "propeller finer/coarser" },
+        { name: "P",         desc: "toggle 2D panel" },
+        { name: "S",         desc: "swap panels" },
+        { name: "s",         desc: "fire starter on selected eng." },
+        { name: ", .",       desc: "left/right brake (comma, period)" },
+        { name: "~",         desc: "select all engines (tilde)" },
+        { name: "[ ]",       desc: "flaps up/down" },
+        { name: "{ }",       desc: "decr/incr magneto on sel. eng." },
+        { name: "Ctrl-A",    desc: "AP: toggle altitude lock" },
+        { name: "Ctrl-G",    desc: "AP: toggle glide slope lock" },
+        { name: "Ctrl-H",    desc: "AP: toggle heading lock" },
+        { name: "Ctrl-N",    desc: "AP: toggle NAV1 lock" },
+        { name: "Ctrl-P",    desc: "AP: toggle pitch hold" },
+        { name: "Ctrl-S",    desc: "AP: toggle auto-throttle" },
+        { name: "Ctrl-T",    desc: "AP: toggle terrain lock" },
+        { name: "Ctrl-W",    desc: "AP: toggle wing leveler" },
+        { name: "F6",        desc: "AP: toggle heading mode" },
+        { name: "F11",       desc: "open autopilot dialog" },
+        { name: "F12",       desc: "open radio settings dialog" },
+        { name: "Shift-F5",  desc: "scroll 2D panel down" },
+        { name: "Shift-F6",  desc: "scroll 2D panel up" },
+        { name: "Shift-F7",  desc: "scroll 2D panel left" },
+        { name: "Shift-F8",  desc: "scroll 2D panel right" },
     ],
 };

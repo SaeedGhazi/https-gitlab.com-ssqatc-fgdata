@@ -308,9 +308,7 @@ var OverlaySelector = {
         var m = Dialog.new(data.getNode("dialog", 1), "gui/dialogs/overlay-select.xml", name);
         m.parents = [OverlaySelector, Dialog];
 
-        m.dir = getprop("/sim/fg-root") ~ dir;
-        if (m.dir[-1] != `/`)
-            m.dir ~= '/';
+        m.dir = string.normpath(getprop("/sim/fg-root") ~ '/' ~ dir) ~ '/';
         m.nameprop = nameprop;
         m.sortprop = sortprop or nameprop;
         m.callback = callback;

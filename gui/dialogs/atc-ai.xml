@@ -113,6 +113,24 @@
       </script>
     </binding>
    </checkbox>
+		
+		<checkbox>
+    <halign>left</halign>
+    <label>Deck Lights</label>
+    <property>/ai/models/carrier/controls/elevators</property>
+    <binding>
+      <command>dialog-apply</command>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>
+        var v = getprop("/ai/models/carrier/controls/elevators");
+        foreach (carrier; props.globals.getNode("/ai/models").getChildren("carrier")) {
+          carrier.getNode("controls/deck-lights",1).setBoolValue(v);
+        }
+      </script>
+    </binding>
+   </checkbox>
 
   </group>
 

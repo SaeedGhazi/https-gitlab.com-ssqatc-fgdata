@@ -209,7 +209,7 @@
 					gui.dialog_update(dlgname, "file-input");
 				}
 				if (new != nil) {
-					var p = string.fixpath(new);
+					var p = string.normpath(new);
 					if (update(p))
 						current.dir = p;
 					selection.setValue("");
@@ -221,7 +221,7 @@
 			}
 
 			var dir_input = func {
-				var p = string.fixpath(dir.getValue());
+				var p = string.normpath(dir.getValue());
 				if (update(p))
 					current.dir = p;
 				gui.dialog_update(dlgname, "list");
@@ -234,7 +234,7 @@
 			var ok = func {
 				dir_input();
 				file_input();
-				var p = string.fixpath(current.dir ~ "/" ~ current.file);
+				var p = string.normpath(current.dir ~ "/" ~ current.file);
 				var stat = io.stat(p);
 				path.setValue(stat != nil and io.isdir(stat[2]) ? p ~ "/" : p);
 				file.setValue(current.file);
@@ -254,7 +254,7 @@
 			current.dir = (var d = dir.getValue()) != nil and d != "" ? d : getprop("/sim/fg-current");
 			current.file = (var d = file.getValue()) != nil and d != "" ? d : "";
 			gui.dialog_update(dlgname, "file-input"); ## dir-input ?
-			update(string.fixpath(current.dir));
+			update(string.normpath(current.dir));
 			dir.setValue(current.dir);
 		</open>
 	</nasal>

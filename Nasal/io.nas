@@ -228,8 +228,8 @@ var writexml = func(path, node, indent = "\t", prefix = "___") {
 #
 _setlistener("/sim/signals/nasal-dir-initialized", func {
     # read IO rules
-    var root = string.fixpath(getprop("/sim/fg-root"));
-    var home = string.fixpath(getprop("/sim/fg-home"));
+    var root = string.normpath(getprop("/sim/fg-root"));
+    var home = string.normpath(getprop("/sim/fg-home"));
     var config = "Nasal/IOrules";
 
     var rules_file = nil;
@@ -284,14 +284,14 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     # make safe, local copies
     var setValue = props._setValue;
     var getValue = props._getValue;
-    var fixpath = string.fixpath;
+    var normpath = string.normpath;
     var match = string.match;
     var caller = caller;
     var die = die;
 
     # validators
     var valid = func(path, rules) {
-        var fpath = fixpath(path);
+        var fpath = normpath(path);
         foreach (var d; rules)
             if (match(fpath, d[0]))
                 return d[1] ? fpath : nil;

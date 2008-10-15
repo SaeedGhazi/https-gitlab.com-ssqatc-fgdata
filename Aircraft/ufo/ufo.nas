@@ -832,7 +832,7 @@ var file_select_model = func {
 
 var fsel_callback = func(n) {
 	var model = n.getValue();
-	var root = string.fixpath(getprop("/sim/fg-root")) ~ "/";
+	var root = string.normpath(getprop("/sim/fg-root")) ~ "/";
 	if (substr(model, 0, size(root)) == root)
 		model = substr(model, size(root));
 

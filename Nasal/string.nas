@@ -78,7 +78,7 @@ var imatch = func(a, b) match(lc(a), lc(b));
 ##
 
 var match = nil;
-var fixpath = nil;
+var normpath = nil;
 var join = nil;
 var replace = nil;
 
@@ -189,7 +189,7 @@ match = func(str, patt) {
 # absolute property or file paths, otherwise ".." elements might
 # be resolved wrongly.
 #
-fixpath = func(path) {
+normpath = func(path) {
 	path = replace(path, "\\", "/");
 	var prefix = size(path) and path[0] == `/` ? "/" : "";
 	var stack = [];

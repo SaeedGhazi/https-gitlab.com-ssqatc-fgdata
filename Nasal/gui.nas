@@ -344,7 +344,6 @@ var OverlaySelector = {
         me.list.removeChildren("value");
         forindex (var i; me.data)
             me.list.getChild("value", i, 1).setValue(me.data[i][0]);
-        settimer(func debug.dump(me.data), 10);
     },
     set: func(index) {
         var last = me.current;

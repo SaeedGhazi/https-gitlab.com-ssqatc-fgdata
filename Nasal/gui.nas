@@ -278,12 +278,13 @@ var Dialog = {
 #                    relative to FG_ROOT
 #       nameprop ... property in an overlay file that contains the name
 #                    The result is written to this property in the
-#                    property tree. Attach a listener to this property
-#                    if you want changes reported.
 #       sortprop ... property in an overlay file that should be used
 #                    as sorting criterion, if alphabetic sorting by
-#                    name is undesirable
-#       callback ... callback function
+#                    name is undesirable. Use nil if you don't need
+#                    this, but want to set a callback function.
+#       callback ... function that's called after a new entry was chosen
+#                    It is called with these arguments:
+#                    callback(<number>, <name>, <sort-criterion>, <path>)
 #
 # EXAMPLE:
 #       aircraft.data.add("sim/model/pilot");  # autosave the pilot
@@ -307,12 +308,12 @@ var OverlaySelector = {
         var m = Dialog.new(data.getNode("dialog", 1), "gui/dialogs/overlay-select.xml", name);
         m.parents = [OverlaySelector, Dialog];
 
-        m.dir = getprop("/sim/fg-root") ~ "/" ~ dir;
+        m.dir = getprop("/sim/fg-root") ~ dir;
         if (m.dir[-1] != `/`)
             m.dir ~= '/';
         m.nameprop = nameprop;
         m.sortprop = sortprop or nameprop;
-        m.callback = callback or func { nil };
+        m.callback = callback;
         m.result = props.initNode(data.getNode("result", 1), "");
         m.listener = setlistener(m.result, func(n) m.select(n.getValue()));
 
@@ -321,6 +322,7 @@ var OverlaySelector = {
         m.list.getNode("property").setValue(m.result.getPath());
 
         m.rescan();
+        m.current = -1;
         m.select(getprop(m.nameprop) or "");
         return m;
     },
@@ -336,7 +338,7 @@ var OverlaySelector = {
             var n = io.read_properties(me.dir ~ file);
             var name = n.getNode(me.nameprop, 1).getValue() or "[NO NAME]";
             var index = n.getNode(me.sortprop, 1).getValue() or 0;
-            append(me.data, [name, index, n.getValues()]);
+            append(me.data, [name, index, me.dir ~ file]);
             me.data = sort(me.data, func(a, b) num(a[1]) == nil or num(b[1]) == nil
                     ? cmp(a[1], b[1]) : a[1] - b[1]);
         }
@@ -344,11 +346,14 @@ var OverlaySelector = {
         me.list.removeChildren("value");
         forindex (var i; me.data)
             me.list.getChild("value", i, 1).setValue(me.data[i][0]);
+        settimer(func debug.dump(me.data), 10);
     },
     set: func(index) {
+        var last = me.current;
         me.current = math.mod(index, size(me.data));
-        props.globals.setValues(me.data[me.current][2]);
-        me.callback(me.data[me.current]);
+        io.read_properties(me.data[me.current][2], props.globals);
+        if (last != me.current and me.callback != nil)
+            call(me.callback, [me.current] ~ me.data[me.current], me);
     },
     select: func(name) {
         forindex (var i; me.data)

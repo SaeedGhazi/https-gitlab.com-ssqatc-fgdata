@@ -214,7 +214,7 @@ var Dialog = {
             if (m.prop.getName() != "dialog")
                 die("Dialog class: node name must end with '/dialog'");
 
-            m.listener = setlistener("/sim/signals/reinit-gui", func { m.load() }, 1);
+            m.listener = setlistener("/sim/signals/reinit-gui", func m.load(), 1);
         }
         return Dialog.instance[m.name] = m;
     },
@@ -261,6 +261,106 @@ var Dialog = {
         me.state;
     },
     instance: {},
+};
+
+
+##
+# Overlay selector. Displays a list of overlay XML files and copies the
+# chosen one to the property tree. The class allows to select liveries,
+# insignia, decals, variants, etc. Usually the overlay properties are
+# fed to "select" and "material" animations.
+#
+# SYNOPSIS:
+#       OverlaySelector.new(<title>, <dir>, <nameprop> [, <sortprop> [, <callback>]]);
+#
+#       title    ... dialog title
+#       dir      ... directory where to find the XML overlay files,
+#                    relative to FG_ROOT
+#       nameprop ... property in an overlay file that contains the name
+#                    The result is written to this property in the
+#                    property tree. Attach a listener to this property
+#                    if you want changes reported.
+#       sortprop ... property in an overlay file that should be used
+#                    as sorting criterion, if alphabetic sorting by
+#                    name is undesirable
+#       callback ... callback function
+#
+# EXAMPLE:
+#       aircraft.data.add("sim/model/pilot");  # autosave the pilot
+#       var pilots_dialog = gui.OverlaySelector.new("Pilots",
+#               "Aircraft/foo/Models/Pilots",
+#               "sim/model/pilot");
+#
+#       pilots_dialog.open();  # or ... close(), or toggle()
+#
+#
+var OverlaySelector = {
+    new: func(title, dir, nameprop, sortprop = nil, callback = nil) {
+        var name = "overlay-select-";
+        var data = props.globals.getNode("/sim/gui/dialogs/", 1);
+        var i = nil;
+        for (i = 1; 1; i += 1)
+            if (data.getNode(name ~ i, 0) == nil)
+                break;
+        data = data.getNode(name ~= i, 1);
+
+        var m = Dialog.new(data.getNode("dialog", 1), "gui/dialogs/overlay-select.xml", name);
+        m.parents = [OverlaySelector, Dialog];
+
+        m.dir = getprop("/sim/fg-root") ~ "/" ~ dir;
+        if (m.dir[-1] != `/`)
+            m.dir ~= '/';
+        m.nameprop = nameprop;
+        m.sortprop = sortprop or nameprop;
+        m.callback = callback or func { nil };
+        m.result = props.initNode(data.getNode("result", 1), "");
+        m.listener = setlistener(m.result, func(n) m.select(n.getValue()));
+
+        m.prop.getNode("group/text/label").setValue(title);
+        m.list = m.prop.getNode("list");
+        m.list.getNode("property").setValue(m.result.getPath());
+
+        m.rescan();
+        m.select(getprop(m.nameprop) or "");
+        return m;
+    },
+    del: func {
+        removelistener(me.listener);
+        me.data.remove();
+    },
+    rescan: func {
+        me.data = [];
+        foreach (var file; directory(me.dir)) {
+            if (substr(file, -4) != ".xml")
+                continue;
+            var n = io.read_properties(me.dir ~ file);
+            var name = n.getNode(me.nameprop, 1).getValue() or "[NO NAME]";
+            var index = n.getNode(me.sortprop, 1).getValue() or 0;
+            append(me.data, [name, index, n.getValues()]);
+            me.data = sort(me.data, func(a, b) num(a[1]) == nil or num(b[1]) == nil
+                    ? cmp(a[1], b[1]) : a[1] - b[1]);
+        }
+
+        me.list.removeChildren("value");
+        forindex (var i; me.data)
+            me.list.getChild("value", i, 1).setValue(me.data[i][0]);
+    },
+    set: func(index) {
+        me.current = math.mod(index, size(me.data));
+        props.globals.setValues(me.data[me.current][2]);
+        me.callback(me.data[me.current]);
+    },
+    select: func(name) {
+        forindex (var i; me.data)
+            if (me.data[i][0] == name)
+                me.set(i);
+    },
+    next: func {
+        me.set(me.current + 1);
+    },
+    previous: func {
+        me.set(me.current - 1);
+    },
 };
 
 
@@ -396,91 +496,6 @@ settimer(func {
 
     props.globals.removeChildren("browser");
 }, 0);
-
-
-##
-# Overlay selector. Displays a list of overlay XML files and copies the
-# chosen one to the property tree. The class allows to select liveries,
-# insignia, decals, variants, etc. Usually the overlay properties are
-# fed to "select" and "material" animations.
-#
-# SYNOPSIS:
-#       OverlaySelector.new(<title>, <dir>, <nameprop>);
-#
-#       title    ... dialog title
-#       dir      ... directory where to find the XML overlay files,
-#                    relative to FG_ROOT
-#       nameprop ... property in an overlay file that contains the name
-#                    The result is written to this property in the
-#                    property tree. You can attach a listener here to
-#                    get changes reported.
-#
-# EXAMPLE:
-#       aircraft.data.add("sim/model/pilot");  # autosave the pilot
-#       var pilots_dialog = gui.OverlaySelector.new("Pilots",
-#               "Aircraft/foo/Models/Pilots",
-#               "sim/model/pilot");
-#
-#       pilots_dialog.open();  # or ... close(), or toggle()
-#
-#
-var OverlaySelector = {
-    new: func(title, dir, nameprop) {
-        var name = "overlay-select-";
-        var data = props.globals.getNode("/sim/gui/dialogs/", 1);
-        var i = nil;
-        for (i = 1; 1; i += 1)
-            if (data.getNode(name ~ i, 0) == nil)
-                break;
-        data = data.getNode(name ~= i, 1);
-
-        var m = Dialog.new(data.getNode("dialog", 1), "gui/dialogs/overlay-select.xml", name);
-        m.parents = [OverlaySelector, Dialog];
-
-        m.dir = getprop("/sim/fg-root") ~ "/" ~ dir;
-        m.nameprop = nameprop;
-        m.result = data.getNode("result", 1);
-        m.cblistener = setlistener(m.result, func m.set());
-
-        m.prop.getNode("group/text/label").setValue(title);
-        m.list = m.prop.getNode("list");
-        m.list.getNode("property").setValue(m.result.getPath());
-
-        m.rescan();
-        m.set(getprop(m.nameprop));
-        return m;
-    },
-    del: func {
-        removelistener(me.cblistener);
-        me.data.remove();
-    },
-    rescan: func {
-        me.options = [];
-        foreach (var file; directory(me.dir)) {
-            if (substr(file, -4) != ".xml")
-                continue;
-            var n = io.read_properties(me.dir ~ "/" ~ file);
-            var name = n.getNode(me.nameprop, 1).getValue() or "[NO NAME]";
-            append(me.options, [name, n.getValues()]);
-            me.options = sort(me.options, func(a, b) cmp(a[0], b[0]));
-        }
-
-        me.list.removeChildren("value");
-        forindex (var i; me.options)
-            me.list.getChild("value", i, 1).setValue(me.options[i][0]);
-    },
-    set: func(which = nil) {
-        if (!size(me.options))
-            return;
-        var choice = which or me.result.getValue() or me.options[0][0];
-        foreach (var o; me.options) {
-            if (o[0] == choice) {
-                props.globals.setValues(o[1]);
-                setprop(me.nameprop, choice);
-            }
-        }
-    },
-};
 
 
 ##

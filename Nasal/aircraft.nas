@@ -3,12 +3,10 @@
 
 
 
-
 # constants
 # ==============================================================================
 var D2R = math.pi / 180;
 var R2D = 180 / math.pi;
-
 
 
 
@@ -26,15 +24,11 @@ var makeNode = func(n) {
 }
 
 
-# returns arg[1]-th optional argument of vector arg[0] or default value arg[2]
+# returns args[index] if available and non-nil, or default otherwise
 #
-var optarg = func {
-	if (size(arg[0]) > arg[1] and arg[0][arg[1]] != nil)
-		arg[0][arg[1]];
-	else
-		arg[2];
+var optarg = func(args, index, default) {
+	size(args) > index and args[index] != nil ? args[index] : default;
 }
-
 
 
 
@@ -189,10 +183,8 @@ var light = {
 	# light.switch(bool)   ->  set light switch (also affects other lights
 	#                          that use the same switch)
 	switch: func(v) { me.switchN.setBoolValue(v); me },
-
 	# light.toggle()       ->  toggle light switch
 	toggle: func { me.switchN.setBoolValue(!me.switchN.getValue()); me },
-
 	# light.cont()         ->  continuous light
 	cont: func {
 		if (!me.continuous) {
@@ -202,7 +194,6 @@ var light = {
 		}
 		me;
 	},
-
 	# light.blink()        ->  blinking light  (default)
 	# light.blink(3)       ->  when switched on, only run three blink sequences;
 	#                          second optional arg defines state after the sequences
@@ -217,7 +208,6 @@ var light = {
 		}
 		me;
 	},
-
 	_switch_: func {
 		var switch = me.switchN.getBoolValue();
 		switch != me.lastswitch or return;
@@ -232,7 +222,6 @@ var light = {
 			me._loop_(me.loopid);
 		}
 	},
-
 	_loop_: func(id) {
 		id == me.loopid or return;
 		if (!me.count) {
@@ -249,6 +238,7 @@ var light = {
 		}
 	},
 };
+
 
 
 # lowpass
@@ -293,6 +283,7 @@ var lowpass = {
 };
 
 
+
 # angular lowpass
 # ==============================================================================
 # same as above, but for angles. Filters sin/cos separately and calculates the
@@ -319,6 +310,7 @@ var angular_lowpass = {
 		me.value;
 	},
 };
+
 
 
 # data
@@ -406,6 +398,7 @@ var data = {
 			append(me.catalog, n.getPath());
 	},
 };
+
 
 
 # timer
@@ -522,7 +515,7 @@ var livery = {
 		if (me.dir[-1] != `/`)
 			me.dir ~= "/";
 		me.name_path = name_path;
-		me.sort_path = sort_path != nil ? sort_path : name_path;
+		me.sort_path = sort_path or name_path;
 		me.rescan();
 		aircraft.data.add(name_path);
 		me.dialog = gui.Dialog.new("livery-select");
@@ -634,7 +627,7 @@ var livery_update = {
 
 
 
-# formation
+# formation        *** DEPRECATED ***
 # =============================================================================
 # A modification of the livery class. This class maintains formation
 # XML files (see Blackburn Buccaneer for an example). Files are regular
@@ -690,6 +683,7 @@ var formation = {
 	},
 	# select by index (out-of-bounds indices are wrapped)
 	set: func(i) {
+		print("***\n*** use of aircraft.formation is deprecated; use gui.OverlaySelector\n***");
 		if (i < 0)
 			i = size(me.data) - 1;
 		if (i >= size(me.data))
@@ -1016,7 +1010,6 @@ var HUD = {
 # module initialization
 # ==============================================================================
 #
-
 _setlistener("/sim/signals/nasal-dir-initialized", func {
 	props.initNode("/sim/time/delta-sec", 0);
 	props.initNode("/sim/time/delta-realtime-sec", 0.00000001);

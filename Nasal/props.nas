@@ -12,7 +12,7 @@
 # "ALIAS" return from getType to detect them (to avoid cycles while
 # walking the tree).
 #
-Node = {
+var Node = {
     getType        : func { wrap(_getType(me._g, arg)) },
     getAttribute   : func { wrap(_getAttribute(me._g, arg)) },
     setAttribute   : func { wrap(_setAttribute(me._g, arg)) },

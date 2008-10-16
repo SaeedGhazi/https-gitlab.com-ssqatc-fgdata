@@ -173,7 +173,6 @@ var Widget = {
 };
 
 
-
 ##
 # Dialog class. Maintains one XML dialog.
 #
@@ -277,14 +276,16 @@ var Dialog = {
 #       dir      ... directory where to find the XML overlay files,
 #                    relative to FG_ROOT
 #       nameprop ... property in an overlay file that contains the name
-#                    The result is written to this property in the
+#                    The result is written to this place in the
+#                    property tree.
 #       sortprop ... property in an overlay file that should be used
 #                    as sorting criterion, if alphabetic sorting by
 #                    name is undesirable. Use nil if you don't need
 #                    this, but want to set a callback function.
-#       callback ... function that's called after a new entry was chosen
-#                    It is called with these arguments:
-#                    callback(<number>, <name>, <sort-criterion>, <path>)
+#       callback ... function that's called after a new entry was chosen,
+#                    with these arguments:
+#
+#                    callback(<number>, <name>, <sort-criterion>, <file>,  <path>)
 #
 # EXAMPLE:
 #       aircraft.data.add("sim/model/pilot");  # autosave the pilot
@@ -299,8 +300,7 @@ var OverlaySelector = {
     new: func(title, dir, nameprop, sortprop = nil, callback = nil) {
         var name = "overlay-select-";
         var data = props.globals.getNode("/sim/gui/dialogs/", 1);
-        var i = nil;
-        for (i = 1; 1; i += 1)
+        for (var i = 1; 1; i += 1)
             if (data.getNode(name ~ i, 0) == nil)
                 break;
         data = data.getNode(name ~= i, 1);
@@ -334,9 +334,11 @@ var OverlaySelector = {
             if (substr(file, -4) != ".xml")
                 continue;
             var n = io.read_properties(me.dir ~ file);
-            var name = n.getNode(me.nameprop, 1).getValue() or "[NO NAME]";
-            var index = n.getNode(me.sortprop, 1).getValue() or 0;
-            append(me.data, [name, index, me.dir ~ file]);
+            var name = n.getNode(me.nameprop, 1).getValue();
+            var index = n.getNode(me.sortprop, 1).getValue();
+            if (name == nil or index == nil)
+                continue;
+            append(me.data, [name, index, substr(file, 0, size(file) - 4), me.dir ~ file]);
             me.data = sort(me.data, func(a, b) num(a[1]) == nil or num(b[1]) == nil
                     ? cmp(a[1], b[1]) : a[1] - b[1]);
         }
@@ -348,7 +350,7 @@ var OverlaySelector = {
     set: func(index) {
         var last = me.current;
         me.current = math.mod(index, size(me.data));
-        io.read_properties(me.data[me.current][2], props.globals);
+        io.read_properties(me.data[me.current][3], props.globals);
         if (last != me.current and me.callback != nil)
             call(me.callback, [me.current] ~ me.data[me.current], me);
     },
@@ -399,8 +401,7 @@ var FileSelector = {
     new: func(callback, title, button, pattern = nil, dir = "", file = "", dotfiles = 0) {
         var name = "file-select-";
         var data = props.globals.getNode("/sim/gui/dialogs/", 1);
-        var i = nil;
-        for (i = 1; 1; i += 1)
+        for (var i = 1; 1; i += 1)
             if (data.getNode(name ~ i, 0) == nil)
                 break;
         data = data.getNode(name ~= i, 1);

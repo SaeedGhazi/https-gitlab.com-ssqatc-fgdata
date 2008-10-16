@@ -510,56 +510,10 @@ var timer = {
 #	aircraft.livery.next();
 #
 var livery = {
-	init: func(livery_dir, name_path = "sim/model/livery/name", sort_path = nil) {
-		me.dir = livery_dir;
-		if (me.dir[-1] != `/`)
-			me.dir ~= "/";
-		me.name_path = name_path;
-		me.sort_path = sort_path or name_path;
-		me.rescan();
-		aircraft.data.add(name_path);
-		me.dialog = gui.Dialog.new("livery-select");
-	},
-	rescan: func {
-		me.data = [];
-		var path = getprop("/sim/fg-root") ~ "/" ~ me.dir;
-		foreach (var file; directory(path)) {
-			if (substr(file, -4) != ".xml")
-				continue;
-			var n = io.read_properties(path ~ file);
-			var name = n.getNode(me.name_path);
-			var index = n.getNode(me.sort_path);
-			if (name == nil or index == nil)
-				continue;
-			append(me.data, [name.getValue(), index.getValue(), n.getValues(),
-					substr(file, 0, size(file) - 4)]);
-		}
-		me.data = sort(me.data, func(a, b) {
-			num(a[1]) == nil or num(b[1]) == nil ? cmp(a[1], b[1]) : a[1] - b[1];
-		});
-		me.select(getprop(me.name_path));
-	},
-	# select by index (out-of-bounds indices are wrapped)
-	set: func(i) {
-		if (i < 0)
-			i = size(me.data) - 1;
-		if (i >= size(me.data))
-			i = 0;
-		me.current = i;
-		props.globals.setValues(me.data[i][2]);
-		setprop("sim/model/livery/file", me.data[i][3]);
-	},
-	# select by name
-	select: func(name) {
-		forindex (var i; me.data)
-			if (me.data[i][0] == name)
-				me.set(i);
-	},
-	next: func {
-		me.set(me.current + 1);
-	},
-	previous: func {
-		me.set(me.current - 1);
+	init: func(dir, nameprop = "/sim/model/livery/name", sortprop = nil) {
+		data.add(nameprop);
+		me.parents = [me.dialog = gui.OverlaySelector.new("Select Livery", dir, nameprop,
+				sortprop, func setprop("sim/model/livery/file", me.data[me.current][2]))];
 	},
 };
 

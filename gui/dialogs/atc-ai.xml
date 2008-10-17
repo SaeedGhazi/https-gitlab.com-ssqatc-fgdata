@@ -93,9 +93,8 @@
 					<command>nasal</command>
 					<script>
 						var v = getprop("/ai/models/carrier/controls/turn-to-launch-hdg");
-						foreach (carrier; props.globals.getNode("/ai/models").getChildren("carrier")) {
-						carrier.getNode("controls/turn-to-launch-hdg").setBoolValue(v);
-						}
+						foreach (carrier; props.globals.getNode("/ai/models").getChildren("carrier"))
+							carrier.getNode("controls/turn-to-launch-hdg").setBoolValue(v);
 					</script>
 				</binding>
 			</checkbox>
@@ -111,9 +110,8 @@
 					<command>nasal</command>
 					<script>
 						var v = getprop("/ai/models/carrier/controls/elevators");
-						foreach (carrier; props.globals.getNode("/ai/models").getChildren("carrier")) {
-						carrier.getNode("controls/elevators").setBoolValue(v);
-						}
+						foreach (carrier; props.globals.getNode("/ai/models").getChildren("carrier"))
+							carrier.getNode("controls/elevators").setBoolValue(v);
 					</script>
 				</binding>
 			</checkbox>
@@ -129,9 +127,8 @@
 					<command>nasal</command>
 					<script>
 						var v = getprop("/ai/models/carrier/controls/deck-lights");
-						foreach (carrier; props.globals.getNode("/ai/models").getChildren("carrier")) {
-						carrier.getNode("controls/deck-lights",1).setBoolValue(v);
-						}
+						foreach (carrier; props.globals.getNode("/ai/models").getChildren("carrier"))
+							carrier.getNode("controls/deck-lights",1).setBoolValue(v);
 					</script>
 				</binding>
 			</checkbox>

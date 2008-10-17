@@ -80,6 +80,15 @@
 
     <checkbox>
       <halign>left</halign>
+      <label>Particles</label>
+      <property>/sim/rendering/particles</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
+
+    <checkbox>
+      <halign>left</halign>
       <label>Precipitation</label>
       <property>/sim/rendering/precipitation-enable</property>
       <binding>

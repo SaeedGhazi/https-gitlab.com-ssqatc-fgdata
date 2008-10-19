@@ -489,14 +489,14 @@ var timer = {
 # Class that maintains livery XML files (see English Electric Lightning for an
 # example). The last used livery is saved on exit and restored next time. Livery
 # files are regular PropertyList XML files whose properties are copied to the
-# main tree (whereby the node types are ignored).
+# main tree.
 #
 # SYNOPSIS:
 #	livery.init(<livery-dir> [, <name-path> [, <sort-path>]]);
 #
 #	<livery-dir> ... directory with livery XML files, relative to $FG_ROOT
 #	<name-path>  ... property path to the livery name in the livery files
-#	                 and the property tree (default: /sim/model/livery/name)
+#	                 and the property tree (default: sim/model/livery/name)
 #	<sort-path>  ... property path to the sort criterion (default: same as
 #	                 <name-path> -- that is: alphabetic sorting)
 #
@@ -511,8 +511,8 @@ var timer = {
 #
 var livery = {
 	init: func(dir, nameprop = "sim/model/livery/name", sortprop = nil) {
-		me.parents = [gui.OverlaySelector.new("Select Livery", dir, nameprop, sortprop,
-				"sim/model/livery/file")];
+		me.parents = [gui.OverlaySelector.new("Select Livery", dir, nameprop,
+				sortprop, "sim/model/livery/file")];
 		me.dialog = me.parents[0];
 	},
 };

@@ -510,7 +510,7 @@ var timer = {
 #	aircraft.livery.next();
 #
 var livery = {
-	init: func(dir, nameprop = "/sim/model/livery/name", sortprop = nil) {
+	init: func(dir, nameprop = "sim/model/livery/name", sortprop = nil) {
 		me.parents = [gui.OverlaySelector.new("Select Livery", dir, nameprop, sortprop,
 				"sim/model/livery/file")];
 		me.dialog = me.parents[0];

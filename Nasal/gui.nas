@@ -270,7 +270,7 @@ var Dialog = {
 # fed to "select" and "material" animations.
 #
 # SYNOPSIS:
-#       OverlaySelector.new(<title>, <dir>, <nameprop> [, <sortprop> [, <callback>]]);
+#       OverlaySelector.new(<title>, <dir>, <nameprop> [, <sortprop> [, <mpprop> [, <callback>]]]);
 #
 #       title    ... dialog title
 #       dir      ... directory where to find the XML overlay files,
@@ -282,6 +282,8 @@ var Dialog = {
 #                    as sorting criterion, if alphabetic sorting by
 #                    name is undesirable. Use nil if you don't need
 #                    this, but want to set a callback function.
+#       mpprop   ... property path of MP node where the file name should
+#                    be written to
 #       callback ... function that's called after a new entry was chosen,
 #                    with these arguments:
 #
@@ -297,7 +299,7 @@ var Dialog = {
 #
 #
 var OverlaySelector = {
-    new: func(title, dir, nameprop, sortprop = nil, callback = nil) {
+    new: func(title, dir, nameprop, sortprop = nil, mpprop = nil, callback = nil) {
         var name = "overlay-select-";
         var data = props.globals.getNode("/sim/gui/dialogs/", 1);
         for (var i = 1; 1; i += 1)
@@ -311,6 +313,7 @@ var OverlaySelector = {
         m.dir = string.normpath(getprop("/sim/fg-root") ~ '/' ~ dir) ~ '/';
         m.nameprop = nameprop;
         m.sortprop = sortprop or nameprop;
+        m.mpprop = mpprop;
         m.callback = callback;
         m.result = props.initNode(data.getNode("result", 1), "");
         m.listener = setlistener(m.result, func(n) m.select(n.getValue()));
@@ -318,6 +321,13 @@ var OverlaySelector = {
         m.prop.getNode("group/text/label").setValue(title);
         m.list = m.prop.getNode("list");
         m.list.getNode("property").setValue(m.result.getPath());
+
+        if (m.nameprop[0] == `/`)
+            m.nameprop = substr(m.nameprop, 1);
+        if (m.sortprop[0] == `/`)
+            m.sortprop = substr(m.sortprop, 1);
+        if (m.mpprop)
+            aircraft.data.add(m.nameprop);
 
         m.rescan();
         m.current = -1;
@@ -353,6 +363,8 @@ var OverlaySelector = {
         io.read_properties(me.data[me.current][3], props.globals);
         if (last != me.current and me.callback != nil)
             call(me.callback, [me.current] ~ me.data[me.current], me);
+        if (me.mpprop)
+            setprop(me.mpprop, me.data[me.current][2]);
     },
     select: func(name) {
         forindex (var i; me.data)

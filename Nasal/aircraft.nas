@@ -251,7 +251,7 @@ var light = {
 #	lowpass.new(<coefficient>);
 #
 # EXAMPLE:
-#	var lp = aircraft.lowpass.new(0.5);
+#	var lp = aircraft.lowpass.new(1.5);
 #	print(lp.filter(10));  # prints 10
 #	print(lp.filter(0));
 #
@@ -511,9 +511,10 @@ var timer = {
 #
 var livery = {
 	init: func(dir, nameprop = "/sim/model/livery/name", sortprop = nil) {
+		me.parents = [gui.OverlaySelector.new("Select Livery", dir, nameprop, sortprop,
+				"sim/model/livery/file")];
+		me.dialog = me.parents[0];
 		data.add(nameprop);
-		me.parents = [me.dialog = gui.OverlaySelector.new("Select Livery", dir, nameprop,
-				sortprop, func setprop("sim/model/livery/file", me.data[me.current][2]))];
 	},
 };
 
@@ -524,7 +525,7 @@ var livery = {
 # Class for maintaining liveries in MP aircraft. It is used in Nasal code that's
 # embedded in aircraft animation XML files, and checks in intervals whether the
 # parent aircraft has changed livery, in which case it changes the livery
-# in the remote aircraft accordingly.
+# in the remote aircraft accordingly. This class is a wrapper for overlay_update.
 #
 # SYNOPSIS:
 #	livery_update.new(<livery-dir> [, <interval:10> [, <func>]]);
@@ -540,7 +541,7 @@ var livery = {
 #		<load>
 #			var livery_update = aircraft.livery_update.new(
 #					"Aircraft/R22/Models/Liveries", 30,
-#					func { print("R22 livery update") });
+#					func print("R22 livery update"));
 #		</load>
 #
 #		<unload>
@@ -549,31 +550,75 @@ var livery = {
 #	</nasal>
 #
 var livery_update = {
-	new: func(liveriesdir, interval = 10, callback = nil) {
-		var m = { parents: [livery_update] };
-		var root = cmdarg();
-		m.root = root.getPath();
-		m.fileN = root.getNode("sim/model/livery/file", 1);
-		m.dir = getprop("/sim/fg-root") ~ "/" ~ liveriesdir ~ "/";
-		m.interval = interval;
-		m.last = "";
-		m.running = 1;
-		m.callback = callback;
-		if (root.getName() == "multiplayer")
-			m._loop_();
+	new: func(liveriesdir, interval = 10.01, callback = nil) {
+		var m = { parents: [livery_update, overlay_update.new()] };
+		m.parents[1].add(liveriesdir, "sim/model/livery/file", callback);
+		m.parents[1].interval = interval;
 		return m;
 	},
 	stop: func {
-		me.running = 0;
+		me.parents[1].stop();
+	},
+};
+
+
+
+# overlay_update
+# =============================================================================
+# Class for maintaining overlays in MP aircraft. It is used in Nasal code that's
+# embedded in aircraft animation XML files, and checks in intervals whether the
+# parent aircraft has changed an overlay, in which case it copies the respective
+# overlay to the aircraft's root directory.
+#
+# SYNOPSIS:
+#	livery_update.new();
+#	livery_update.add(<overlay-dir>, <property> [, <callback>]);
+#
+#	<overlay-dir> ... directory with overlay files, relative to $FG_ROOT
+#	<property>    ... MP property where the overlay file name can be found
+#	                  (usually one of the sim/multiplay/generic/string properties)
+#	<callback>    ... callback function that's called with two arguments:
+#	                  the file name (without extension) and the overlay directory
+#
+# EXAMPLE:
+#	<nasal>
+#		<load>
+#			var update = aircraft.overlay_update.new();
+#			update.add("Aircraft/F4U/Models/Logos", "sim/multiplay/generic/string");
+#		</load>
+#
+#		<unload>
+#			update.stop();
+#		</unload>
+#	</nasal>
+#
+var overlay_update = {
+	new: func {
+		var m = { parents: [overlay_update] };
+		m.root = cmdarg();
+		m.data = {};
+		m.interval = 10.01;
+		if (m.root.getName() == "multiplayer")
+			m._loop_();
+		return m;
+	},
+	add: func(path, prop, callback = nil) {
+		var path = string.normpath(getprop("/sim/fg-root") ~ '/' ~ path) ~ '/';
+		me.data[path] = [props.initNode(me.root.getNode(prop, 1), ""), "",
+				typeof(callback) == "func" ? callback : func nil];
+		return me;
+	},
+	stop: func {
+		me._loop_ = func nil;
 	},
 	_loop_: func {
-		me.running or return;
-		var file = me.fileN.getValue();
-		if (file != nil and file != me.last) {
-			io.read_properties(me.dir ~ file ~ ".xml", me.root);
-			me.last = file;
-			if (me.callback != nil)
-				me.callback(file);
+		foreach (var path; keys(me.data)) {
+			var v = me.data[path];
+			var file = v[0].getValue();
+			if (file != v[1]) {
+				io.read_properties(path ~ file ~ ".xml", me.root);
+				v[2](v[1] = file, path);
+			}
 		}
 		settimer(func me._loop_(), me.interval);
 	},

@@ -514,7 +514,6 @@ var livery = {
 		me.parents = [gui.OverlaySelector.new("Select Livery", dir, nameprop, sortprop,
 				"sim/model/livery/file")];
 		me.dialog = me.parents[0];
-		data.add(nameprop);
 	},
 };
 

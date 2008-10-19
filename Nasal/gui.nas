@@ -311,21 +311,19 @@ var OverlaySelector = {
         m.parents = [OverlaySelector, Dialog];
 
         m.dir = string.normpath(getprop("/sim/fg-root") ~ '/' ~ dir) ~ '/';
-        m.nameprop = nameprop;
-        m.sortprop = sortprop or nameprop;
+        var relpath = func(p) substr(p, p[0] == `/`);
+        m.nameprop = relpath(nameprop);
+        m.sortprop = relpath(sortprop or nameprop);
         m.mpprop = mpprop;
         m.callback = callback;
         m.result = props.initNode(data.getNode("result", 1), "");
         m.listener = setlistener(m.result, func(n) m.select(n.getValue()));
 
         m.prop.getNode("group/text/label").setValue(title);
+        m.prop.getNode("group/button/binding/script").setValue('gui.Dialog.instance["' ~ name ~ '"].close()');
         m.list = m.prop.getNode("list");
         m.list.getNode("property").setValue(m.result.getPath());
 
-        if (m.nameprop[0] == `/`)
-            m.nameprop = substr(m.nameprop, 1);
-        if (m.sortprop[0] == `/`)
-            m.sortprop = substr(m.sortprop, 1);
         if (m.mpprop)
             aircraft.data.add(m.nameprop);
 

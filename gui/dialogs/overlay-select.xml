@@ -11,7 +11,7 @@
 		<empty><stretch>1</stretch></empty>
 
 		<text>
-			<label>set by gui.OverlaySelector</label>
+			<label>$name</label>
 		</text>
 
 		<empty><stretch>1</stretch></empty>
@@ -25,7 +25,8 @@
 			<border>2</border>
 
 			<binding>
-				<command>dialog-close</command>
+				<command>nasal</command>
+				<script>$close</script>
 			</binding>
 		</button>
 	</group>
@@ -35,10 +36,10 @@
 	<list>
 		<halign>fill</halign>
 		<pref-height>200</pref-height>
-		<property>set by gui.OverlaySelector</property>
+		<property>$result</property>
 		<binding>
 			<command>dialog-apply</command>
 		</binding>
-		<value>set by gui.OverlaySelector</value>
+		<value>$value</value>
 	</list>
 </PropertyList>

@@ -80,7 +80,7 @@
 
     <checkbox>
       <halign>left</halign>
-      <label>Particles</label>
+      <label>Particles (Smoke, Dust, Spray)</label>
       <property>/sim/rendering/particles</property>
       <binding>
         <command>dialog-apply</command>

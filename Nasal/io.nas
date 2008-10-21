@@ -15,9 +15,8 @@ var readfile = func(file) {
 # 0xf000.
 var _gen_ifmt_test = func(ifmt) {
     func(stat_mode) {
-        var buf = bits.buf(2);
-        bits.setfld(buf, 0, 16, stat_mode);
-        return ifmt == bits.fld(buf, 12, 4);
+        var i = int(stat_mode / 4096);
+        return ifmt == i - int(i / 16) * 16;
     }
 }
 

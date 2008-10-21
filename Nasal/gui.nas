@@ -334,7 +334,6 @@ var OverlaySelector = {
     },
     del: func {
         removelistener(me.listener);
-        me.data.remove();
     },
     rescan: func {
         me.data = [];
@@ -347,9 +346,9 @@ var OverlaySelector = {
             if (name == nil or index == nil)
                 continue;
             append(me.data, [name, index, substr(file, 0, size(file) - 4), me.dir ~ file]);
-            me.data = sort(me.data, func(a, b) num(a[1]) == nil or num(b[1]) == nil
-                    ? cmp(a[1], b[1]) : a[1] - b[1]);
         }
+        me.data = sort(me.data, func(a, b) num(a[1]) == nil or num(b[1]) == nil
+                ? cmp(a[1], b[1]) : a[1] - b[1]);
 
         me.list.removeChildren("value");
         forindex (var i; me.data)

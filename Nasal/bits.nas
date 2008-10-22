@@ -1,10 +1,9 @@
-var _bits = [var _ = 1];
+var bit = [var _ = 1];
 for (var i = 1; i < 32; i += 1)
-	append(_bits, _ += _);
+	append(bit, _ += _);
 
 
 # returns number <n> as bit string: bits.string(6) -> "110"
-#
 var string = func(n) {
 	if (!n)
 		return '0';
@@ -18,18 +17,15 @@ var string = func(n) {
 
 
 # checks whether bit <b> is set in number <n>
-#
 var test = func(n, b) {
-	n /= _bits[b];
-	int(n) != int(n / 2) * 2;
+	n /= bit[b];
+	return int(n) != int(n / 2) * 2;
 }
 
 
 # returns number <n> with bit <b> set
-#
-var set = func(n, b) test(n, b) ? n : n + _bits[b];
+var set = func(n, b) test(n, b) ? n : n + bit[b];
 
 
 # returns number <n> with bit <b> cleared
-#
-var clear = func(n, b) test(n, b) ? n - _bits[b] : n;
+var clear = func(n, b) test(n, b) ? n - bit[b] : n;

@@ -24,7 +24,7 @@ var test = func(n, b) {
 
 
 # returns number <n> with bit <b> set
-var set = func(n, b) n + test(n, b) * bit[b];
+var set = func(n, b) n + !test(n, b) * bit[b];
 
 
 # returns number <n> with bit <b> cleared

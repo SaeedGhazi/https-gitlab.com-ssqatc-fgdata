@@ -24,11 +24,11 @@ var test = func(n, b) {
 
 
 # returns number <n> with bit <b> set
-var set = func(n, b) test(n, b) ? n : n + bit[b];
+var set = func(n, b) n + test(n, b) * bit[b];
 
 
 # returns number <n> with bit <b> cleared
-var clear = func(n, b) test(n, b) ? n - bit[b] : n;
+var clear = func(n, b) n - test(n, b) * bit[b];
 
 
 # returns number <n> with bit <b> toggled

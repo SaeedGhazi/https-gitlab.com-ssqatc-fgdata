@@ -29,3 +29,12 @@ var set = func(n, b) test(n, b) ? n : n + bit[b];
 
 # returns number <n> with bit <b> cleared
 var clear = func(n, b) test(n, b) ? n - bit[b] : n;
+
+
+# returns number <n> with bit <b> toggled
+var toggle = func(n, b) test(n, b) ? n - bit[b] : n + bit[b];
+
+
+# returns number <n> with bit <b> set to value <v>
+var switch = func(n, b, v) n - (test(n, b) - !!v) * bit[b];
+

@@ -16,13 +16,11 @@ var string = func(n) {
 	return s;
 }
 
+
 # checks whether bit <b> is set in number <n>
 #
 var test = func(n, b) {
-	while (b) {
-		n /= 2;
-		b -= 1;
-	}
+	n /= _bits[b];
 	int(n) != int(n / 2) * 2;
 }
 

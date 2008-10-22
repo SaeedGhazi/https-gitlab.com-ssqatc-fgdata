@@ -112,22 +112,25 @@ ________________________________________________________________________________
 
 	<nasal>
 		<script>
-			var self = cmdarg().getParent();
-			var data = self.getNode("data");
-			var mode = data.getNode("mode");
-			var modifier = data.getNode("modifier");
+			var selfN = cmdarg().getParent();
+			var dataN = selfN.getNode("data");
+			var modeN = dataN.getNode("mode");
+			var modifierN = dataN.getNode("modifier");
 			var f1 = 0;
 			var f2 = 0;
 			var left_brake = 0;
 			var right_brake = 0;
 			var trigger = 0;
 
-			var viewnumber = nil;
-			setlistener("/sim/current-view/view-number", func(n) { viewnumber = n.getValue() }, 1);
+			var modifier = 0;
+
+			var setmodifier = func(bit, val) {
+				modifierN.setValue(modifier = bits.switch(modifier, bit, val));
+			}
 
 			if (props.globals.getNode("/rotors", 0) != nil) {
-				self.getNode("axis[0]/binding/power").setIntValue(1);
-				self.getNode("axis[1]/binding/power").setIntValue(1);
+				selfN.getNode("axis[0]/binding/power").setIntValue(1);
+				selfN.getNode("axis[1]/binding/power").setIntValue(1);
 			}
 
 			var viewdir = props.globals.getNode("/sim").getChildren("view");
@@ -140,11 +143,16 @@ ________________________________________________________________________________
 			var kbdctrl = props.globals.getNode("/devices/status/keyboard/ctrl", 1);
 			var kbdalt = props.globals.getNode("/devices/status/keyboard/alt", 1);
 
-			var get_mode = func { modifier.getValue() + mode.getValue() * 4 }
+			var m = 0;
+			var setmode = func m = modifierN.getValue() + modeN.getValue() * 4;
+			setlistener(modeN, setmode);
+			setlistener(modifierN, setmode, 1);
+
 			var aircraft = getprop("/sim/aircraft");
 
-			var harrier = func {
-				if (aircraft == "harrier") {
+			var thrust_display = func nil;
+			if (aircraft == "harrier") {
+				thrust_display = func {
 					thv = getprop("/controls/engines/engine[0]/mixture");
 					gui.popupTip("Thrust vector " ~ int(thv * 120 - 20 + 0.5));
 				}
@@ -207,7 +215,6 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				m = get_mode();
 				if (m == 0) {
 					if (kbdctrl.getBoolValue()) {
 						controls.trigger(trigger = 1);
@@ -227,13 +234,12 @@ ________________________________________________________________________________
 			<binding>
 				<command>nasal</command>
 				<script>
-					m = get_mode();
 					if (m == 0) {
-						if (trigger) {
+						if (trigger)
 							controls.trigger(trigger = 0);
-						} else {
+						else
 							controls.applyBrakes(0);
-						}
+
 						controls.applyBrakes(0);
 					} elsif (m == 1) {
 						i = controls.applyParkingBrake(1);
@@ -260,13 +266,12 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				m = get_mode();
 				if (m == 0) {
-					if (kbdctrl.getBoolValue()) {
+					if (kbdctrl.getBoolValue())
 						controls.weaponSelect(-1);
-					} else {
+					else
 						controls.flapsDown(-1);
-					}
+
 				} elsif (m == 1) {
 					controls.gearDown(-1);
 				} elsif (m == 2) {
@@ -280,7 +285,6 @@ ________________________________________________________________________________
 			<binding>
 				<command>nasal</command>
 				<script>
-					m = get_mode();
 					if (m == 0) {
 						controls.flapsDown(0);
 					} elsif (m == 1) {
@@ -302,7 +306,6 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				m = get_mode();
 				if (m == 0) {
 					view.resetView();
 				} elsif (m == 1) {
@@ -328,13 +331,12 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				m = get_mode();
 				if (m == 0) {
-					if (kbdctrl.getBoolValue()) {
+					if (kbdctrl.getBoolValue())
 						controls.weaponSelect(1);
-					} else {
+					else
 						controls.flapsDown(1);
-					}
+
 				} elsif (m == 1) {
 					controls.gearDown(1);
 				} elsif (m == 2) {
@@ -348,7 +350,6 @@ ________________________________________________________________________________
 			<binding>
 				<command>nasal</command>
 				<script>
-					m = get_mode();
 					if (m == 0) {
 						controls.flapsDown(0);
 					} elsif (m == 1) {
@@ -371,11 +372,10 @@ ________________________________________________________________________________
 			<command>nasal</command>
 			<script>
 				f1 = 1;
-				m = get_mode();
 				if (m == 0) {
-					if (!left_brake) {
+					if (!left_brake)
 						controls.applyBrakes(left_brake = 1, -1);
-					}
+
 				} elsif (m == 1) {
 					#
 				} elsif (m == 2) {
@@ -390,7 +390,6 @@ ________________________________________________________________________________
 				<command>nasal</command>
 				<script>
 					f1 = 0;
-					m = get_mode();
 					if (m == 0) {
 						controls.applyBrakes(left_brake = 0, -1);
 					} elsif (m == 1) {
@@ -413,11 +412,10 @@ ________________________________________________________________________________
 			<command>nasal</command>
 			<script>
 				f2 = 1;
-				m = get_mode();
 				if (m == 0) {
-					if (!right_brake) {
+					if (!right_brake)
 						controls.applyBrakes(right_brake = 1, 1);
-					}
+
 				} elsif (m == 1) {
 					#
 				} elsif (m == 2) {
@@ -432,7 +430,6 @@ ________________________________________________________________________________
 				<command>nasal</command>
 				<script>
 					f2 = 0;
-					m = get_mode();
 					if (m == 0) {
 						controls.applyBrakes(right_brake = 0, 1);
 					} elsif (m == 1) {
@@ -453,22 +450,12 @@ ________________________________________________________________________________
 		<repeatable type="bool">false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>
-				m = modifier.getValue();
-				if (m == 0 or m == 2) {
-					modifier.setIntValue(m + 1);
-				}
-			</script>
+			<script>setmodifier(0, 1)</script>
 		</binding>
 		<mod-up>
 			<binding>
 				<command>nasal</command>
-				<script>
-					m = modifier.getValue();
-					if (m == 1 or m == 3) {
-						modifier.setIntValue(m - 1);
-					}
-				</script>
+				<script>setmodifier(0, 0)</script>
 			</binding>
 		</mod-up>
 	</button>
@@ -479,22 +466,12 @@ ________________________________________________________________________________
 		<repeatable type="bool">false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>
-				m = modifier.getValue();
-				if (m == 0 or m == 1) {
-					modifier.setIntValue(m + 2);
-				}
-			</script>
+			<script>setmodifier(1, 1)</script>
 		</binding>
 		<mod-up>
 			<binding>
 				<command>nasal</command>
-				<script>
-					m = modifier.getValue();
-					if (m == 2 or m == 3) {
-						modifier.setIntValue(m - 2);
-					}
-				</script>
+				<script>setmodifier(1, 0)</script>
 			</binding>
 		</mod-up>
 	</button>
@@ -538,7 +515,6 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				m = get_mode();
 				if (m == 0) {
 					view.panViewPitch(1);
 				} elsif (m == 1) {
@@ -559,12 +535,11 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				m = get_mode();
 				if (m == 0) {
-					view.panViewDir(-viewdir[viewnumber]);
+					view.panViewDir(-viewdir[view.index]);
 				} elsif (m == 1) {
 					controls.adjMixture(-1);
-					harrier();
+					thrust_display();
 				} elsif (m == 2) {
 					controls.aileronTrim(-0.75);
 				} elsif (m == 3) {
@@ -581,12 +556,11 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				m = get_mode();
 				if (m == 0) {
-					view.panViewDir(viewdir[viewnumber]);
+					view.panViewDir(viewdir[view.index]);
 				} elsif (m == 1) {
 					controls.adjMixture(1);
-					harrier();
+					thrust_display();
 				} elsif (m == 2) {
 					controls.aileronTrim(0.75);
 				} elsif (m == 3) {
@@ -603,7 +577,6 @@ ________________________________________________________________________________
 		<binding>
 			<command>nasal</command>
 			<script>
-				m = get_mode();
 				if (m == 0) {
 					view.panViewPitch(-1);
 				} elsif (m == 1) {

@@ -177,10 +177,10 @@ var _dump_string = func(str) {
 
 # dump hash keys as variables if they are valid variable names, or as string otherwise
 var _dump_key = func(s) {
-	if (!size(s))
-		return _dump_string(s);
 	if (num(s) != nil)
 		return _num(s);
+	if (!size(s))
+		return _dump_string(s);
 	if (!globals.string.isalpha(s[0]) and s[0] != `_`)
 		return _dump_string(s);
 	for (var i = 1; i < size(s); i += 1) {

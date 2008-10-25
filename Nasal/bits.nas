@@ -34,12 +34,23 @@ var string = func(n, len = 0) {
 		return '0';
 	var s = "";
 	while (n) {
-		s = ((var v = int(n / 2)) + v != n) ~ s;
+		var v = int(n / 2);
+		s = (v + v != n) ~ s;
 		n = v;
 	}
 	for (var i = size(s); i < len; i += 1)
 		s = '0' ~ s;
 	return s;
+}
+
+
+# returns bit string <s> as number:  bits.value("110")  ->  6
+var value = func(s) {
+	var n = 0;
+	var len = size(s);
+	for (var i = 0; i < len; i += 1)
+		n += n + (s[i] != `0`);
+	return n;
 }
 
 

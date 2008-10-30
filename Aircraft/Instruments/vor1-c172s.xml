@@ -213,9 +213,9 @@ Jan 26 2003
      <type>rotation</type>
      <offset>0</offset>
      <property alias="../../../../../params/nav-gs-needle-deflection"/>
-     <min>-10.0</min>
-     <max>10.0</max>
-     <scale>-3.2</scale>
+     <min>-3.5</min>
+     <max>3.5</max>
+     <scale>-10.0</scale>
     </transformation>
    </transformations>
   </layer>
@@ -240,9 +240,9 @@ Jan 26 2003
      <type>rotation</type>
      <offset>0</offset>
      <property alias="../../../../../params/nav-gs-needle-deflection"/>
-     <min>-10.0</min>
-     <max>10.0</max>
-     <scale>-3.2</scale>
+     <min>-3.5</min>
+     <max>3.5</max>
+     <scale>-10.0</scale>
     </transformation>
     <transformation>
      <type>x-shift</type>

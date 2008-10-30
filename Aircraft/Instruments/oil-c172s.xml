@@ -55,8 +55,8 @@ Feb 9 2003
     <transformation>
      <condition>
       <greater-than-equals>
-       <property>/systems/electrical/outputs/bus</property>
-       <value>30</value>
+       <property>/systems/electrical/volts</property>
+       <value>12</value>
       </greater-than-equals>
      </condition>
      <type>rotation</type>
@@ -78,8 +78,8 @@ Feb 9 2003
     <transformation>
      <condition>
       <less-than>
-       <property>/systems/electrical/outputs/bus</property>
-       <value>30</value>
+       <property>/systems/electrical/volts</property>
+       <value>12</value>
       </less-than>
      </condition>
      <type>rotation</type>
@@ -111,8 +111,8 @@ Feb 9 2003
     <transformation>
      <condition>
       <greater-than-equals>
-       <property>/systems/electrical/outputs/bus</property>
-       <value>30</value>
+       <property>/systems/electrical/volts</property>
+       <value>12</value>
       </greater-than-equals>
      </condition>
      <type>rotation</type>
@@ -135,8 +135,8 @@ Feb 9 2003
     <transformation>
      <condition>
       <less-than>
-       <property>/systems/electrical/outputs/bus</property>
-       <value>30</value>
+       <property>/systems/electrical/volts</property>
+       <value>12</value>
       </less-than>
      </condition>
      <type>rotation</type>

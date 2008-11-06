@@ -148,26 +148,6 @@
         <blue>0.5</blue>
       </color>
     </text>
-    <group>
-      <layout>hbox</layout>
-      <halign>right</halign>
-      <text><label>Visibility range</label></text>
-      <slider>
-        <min>1000</min>
-        <max>50000</max>
-
-        <property>/sim/rendering/clouds3d-vis-range</property>
-        <binding>
-          <command>dialog-apply</command>
-        </binding>
-      </slider>
-      <text>
-        <label>12345678</label>
-        <format>%.0f m</format>
-        <live>true</live>
-        <property>/sim/rendering/clouds3d-vis-range</property>
-      </text>
-    </group>
 
     <group>
       <layout>hbox</layout>
@@ -190,32 +170,6 @@
       </text>
     </group>
 
-    <group>
-      <layout>hbox</layout>
-      <halign>right</halign>
-      <text><label>Cache size in kBytes</label></text>
-      <input>
-        <property>/sim/rendering/clouds3d-cache-size</property>
-        <binding>
-          <command>dialog-apply</command>
-        </binding>
-      </input>
-    </group>
-
-    <group>
-      <layout>hbox</layout>
-      <halign>right</halign>
-      <text><label>Texture resolution</label></text>
-      <combo>
-        <property>/sim/rendering/clouds3d-cache-resolution</property>
-        <value>64</value>
-        <value>128</value>
-        <value>256</value>
-        <binding>
-          <command>dialog-apply</command>
-        </binding>
-      </combo>
-    </group>
   </group>
 
   <hrule/>

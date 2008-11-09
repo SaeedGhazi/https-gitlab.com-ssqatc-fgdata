@@ -1,0 +1,117 @@
+Configuring 3D Clouds
+=====================
+
+3D clouds are configured using the file data/cloudlayers.xml.
+
+This file has 3 distinct sections: layers, cloud boxes and clouds.
+
+Note that all distances are in m.
+
+Layers
+======
+
+The <layers> section contains definitions for a specific layer type.
+The layer type is derived from the METAR/Weather settings by FG itself.
+
+Each layer type is a named XML tag, i.e.: ns, sc, st, ac, sb, cu.
+If a layer type is not defined, then a 2D layer is used instead.
+
+The layer type contains one or more <cloud> definitions. This 
+defines a type of cloud box, and a weighting for that type (<count>).
+
+For example, the following XML fragment will produce 3 "cb" cloud boxes
+for every 1 "cu":
+
+<cloud>
+    <name>cb</name>
+    <count>3</count>
+</cloud>
+<cloud>
+    <name>cu</name>
+    <count>1</count>
+</cloud>
+
+The layer type contains <grid-x-size> and <grid-y-size> tags. These 
+define the distribution of clouds within the layer in meters, assuming 
+100% cloud cover (i.e. 8 octas, or "overcast). If the cloud coverage is
+less than over-cast, then a proportional number of clouds will be displayed.
+
+<grid-x-rand>, <grid-y-rand>, <grid-z-rand> add a random element to the
+cloud grid.
+
+For example, the following XML fragment will produce a grid of clouds
+every 4500m +/- 500m, varying in height by 150m.
+
+<grid-x-size type="double">4500.0</grid-x-size>
+<grid-y-size type="double">4500.0</grid-y-size>
+<grid-x-rand type="double">500.0</grid-x-rand>
+<grid-y-rand type="double">500.0</grid-y-rand>
+<grid-z-rand type="double">150.0</grid-z-rand>
+
+If the cloud coverage is less than 100%, then a proportion of grid
+points are not used.
+
+
+Cloud Boxes
+===========
+
+The <boxes> section contains definitions of cloud boxes. A cloud box
+defines a structured group of clouds. For example and entire towering
+CB.
+
+The <boxes> section contains a number of named types, as referenced
+by the <cloud> section of <layers>. Therefore, the names used are
+completely user-defined.
+
+Each type consists of one or more clouds, with an x,y,z position
+relative to each other.
+
+For example, the following cloud box defines "sc" as a box containing
+two "ns-large" clouds, one at the defined grid position, and one offset
+by 500m horizontally:
+
+<sc>
+    <box>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+        <type>ns-large</type>
+    </box>
+    <box>
+        <x>500</x>
+        <y>0</y>
+        <z>0</z>
+        <type>ns-large</type>
+    </box>
+</sc>
+
+If the  /sim/rendering/clouds3d-density is less than 1.0 (100%), then a
+proportional number of clouds will be displayed.
+
+Clouds
+======
+
+The <clouds> section contains definitions of clouds themselves, as referenced
+by the <type> tag in the <boxes> section. Therefore, the names used are
+completely user-defined.
+
+Each cloud definition consists of the following tags:
+
+<min-cloud-width-m>  - minimum width of the cloud
+<max-cloud-width-m>  - maximum width of the cloud
+<min-cloud-height-m> - minimum height of the cloud
+<max-cloud-height-m> - maximum height of the cloud
+<texture>            - texture file of sprites to use
+<num-textures-x>     - number of cloud textures defined horizontally in the
+                       texture file 
+<num-textures-y>     - number of cloud textures defined vertically in the 
+                       texture file 
+<num-sprites>        - Number of sprite to generate for the cloud
+<bottom-shade>       - Light multiplier for sprites at the bottom of the cloud.
+<min-sprite-width-m> - minimum width of the sprites used to create the cloud
+<max-sprite-width-m> - maximum width of the sprites used to create the cloud
+<min-sprite-height-m> - minimum height of the spites used to create the cloud
+<max-sprite-height-m> - maximum height of the sprites used to create the cloud
+
+The cloud is generated from a number of sprites, placed on the surface of a squashed sphere. Sprites at the bottom of the sphere can be darker than those
+at the top, to simulate the darker bases of CBs, for example.

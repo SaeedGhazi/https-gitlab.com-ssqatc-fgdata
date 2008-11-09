@@ -1,33 +1,6 @@
 <?xml version="1.0" ?> 
 <!--
-  Cloud shapes and layers.
-
-  A 3-D cloud layer is defined in the <layers> section. It contains of a 
-  number of randomly located <boxes>, containing a set of <clouds>.
-          
-  Each cloud is generate with random size, based on the following tags:
-  
-  <min-cloud-width-m>
-  <max-cloud-width-m>
-  <min-cloud-height-m>
-  <max-cloud-height-m>
-
-  The cloud consists of <num-sprites> individual sprites. 
-      
-  Each sprite is generated with random size, based on the following tags:
-      
-  <min-sprite-width-m>
-  <max-sprite-width-m>
-  <min-sprite-height-m>
-  <max-sprite-height-m>
-      
-  The <texture> defines the texture file to be used for the sprite. The
-  texture file may contain more than one texture in a grid, by setting
-  the <num-textures-x> and <num-textures-y> tags.
- 
-  Cloud are darker towards the bottom. bottom-shade indicates the shading
-  factor of the bottom of the cloud compared with the top.
-
+  Cloud shapes and layers. See Docs/README.3DClouds for details.
 -->
 <PropertyList>
   <clouds>

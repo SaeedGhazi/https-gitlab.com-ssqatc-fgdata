@@ -131,11 +131,11 @@ var printlog = func(level, args...) {
 # Load and execute ~/.fgfs/Nasal/*.nas files in alphabetic order
 # after all $FG_ROOT/Nasal/*.nas files were loaded.
 #
-_setlistener("/sim/signals/nasal-dir-initialized", func {
+settimer(func {
     var path = getprop("/sim/fg-home") ~ "/Nasal";
     if((var dir = directory(path)) == nil) return;
     foreach(var file; sort(dir, cmp))
         if(size(file) > 4 and substr(file, -4) == ".nas")
             io.load_nasal(path ~ "/" ~ file, substr(file, 0, size(file) - 4));
-});
+}, 0);
 

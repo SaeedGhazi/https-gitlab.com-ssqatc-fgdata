@@ -87,7 +87,7 @@ var fdm = getprop("/sim/flight-model");
 var screenHProp = nil;
 var tipArg = nil;
 
-var INIT = func {
+_setlistener("/sim/signals/nasal-dir-initialized", func {
     screenHProp = props.globals.getNode("/sim/startup/ysize");
     tipArg = props.Node.new({ "dialog-name" : "PopTip" });
 
@@ -104,10 +104,13 @@ var INIT = func {
 
     var fps = props.globals.getNode("/sim/rendering/fps-display", 1);
     setlistener(fps, fpsDisplay, 1);
-    setlistener("/sim/startup/xsize",
-        func { if (fps.getValue()) { fpsDisplay(0); fpsDisplay(1) } });
-}
-settimer(INIT, 1);
+    setlistener("/sim/startup/xsize", func {
+        if (fps.getValue()) {
+            fpsDisplay(0);
+            fpsDisplay(1);
+        }
+    });
+});
 
 
 ##

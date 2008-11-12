@@ -13,6 +13,7 @@
 # walking the tree).
 #
 var Node = {
+    getNode        : func { wrap(_getNode(me._g, arg)) },
     getType        : func { wrap(_getType(me._g, arg)) },
     getAttribute   : func { wrap(_getAttribute(me._g, arg)) },
     setAttribute   : func { wrap(_setAttribute(me._g, arg)) },
@@ -28,7 +29,11 @@ var Node = {
     getChildren    : func { wrap(_getChildren(me._g, arg)) },
     removeChild    : func { wrap(_removeChild(me._g, arg)) },
     removeChildren : func { wrap(_removeChildren(me._g, arg)) },
-    getNode        : func { wrap(_getNode(me._g, arg)) },
+    unalias        : func { wrap(_unalias(me._g, arg)) },
+
+    alias : func(n) {
+        wrap(_alias(me._g, [isa(n, props.Node) ? n._g : n]));
+    },
 
     getPath : func {
         var name = me.getName();

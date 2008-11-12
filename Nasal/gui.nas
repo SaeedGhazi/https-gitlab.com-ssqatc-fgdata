@@ -327,7 +327,7 @@ var OverlaySelector = {
         m.list = m.prop.getNode("list");
         m.list.getNode("property").setValue(m.result.getPath());
 
-        if (m.mpprop)
+        if (m.mpprop != nil)
             aircraft.data.add(m.nameprop);
 
         m.rescan();
@@ -363,7 +363,7 @@ var OverlaySelector = {
         io.read_properties(me.data[me.current][3], props.globals);
         if (last != me.current and me.callback != nil)
             call(me.callback, [me.current] ~ me.data[me.current], me);
-        if (me.mpprop)
+        if (me.mpprop != nil)
             setprop(me.mpprop, me.data[me.current][2]);
     },
     select: func(name) {

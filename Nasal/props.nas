@@ -14,26 +14,24 @@
 #
 var Node = {
     getNode        : func { wrap(_getNode(me._g, arg)) },
-    getType        : func { wrap(_getType(me._g, arg)) },
-    getAttribute   : func { wrap(_getAttribute(me._g, arg)) },
-    setAttribute   : func { wrap(_setAttribute(me._g, arg)) },
-    getName        : func { wrap(_getName(me._g, arg)) },
-    getIndex       : func { wrap(_getIndex(me._g, arg)) },
-    getValue       : func { wrap(_getValue(me._g, arg)) },
-    setValue       : func { wrap(_setValue(me._g, arg)) },
-    setIntValue    : func { wrap(_setIntValue(me._g, arg)) },
-    setBoolValue   : func { wrap(_setBoolValue(me._g, arg)) },
-    setDoubleValue : func { wrap(_setDoubleValue(me._g, arg)) },
     getParent      : func { wrap(_getParent(me._g, arg)) },
     getChild       : func { wrap(_getChild(me._g, arg)) },
     getChildren    : func { wrap(_getChildren(me._g, arg)) },
     removeChild    : func { wrap(_removeChild(me._g, arg)) },
     removeChildren : func { wrap(_removeChildren(me._g, arg)) },
-    unalias        : func { wrap(_unalias(me._g, arg)) },
 
-    alias : func(n) {
-        wrap(_alias(me._g, [isa(n, props.Node) ? n._g : n]));
-    },
+    getName        : func { _getName(me._g, arg) },
+    getIndex       : func { _getIndex(me._g, arg) },
+    getType        : func { _getType(me._g, arg) },
+    getAttribute   : func { _getAttribute(me._g, arg) },
+    setAttribute   : func { _setAttribute(me._g, arg) },
+    getValue       : func { _getValue(me._g, arg) },
+    setValue       : func { _setValue(me._g, arg) },
+    setIntValue    : func { _setIntValue(me._g, arg) },
+    setBoolValue   : func { _setBoolValue(me._g, arg) },
+    setDoubleValue : func { _setDoubleValue(me._g, arg) },
+    unalias        : func { _unalias(me._g, arg) },
+    alias          : func(n) { _alias(me._g, [isa(n, props.Node) ? n._g : n]) },
 
     getPath : func {
         var name = me.getName();

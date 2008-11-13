@@ -64,15 +64,13 @@ var _path        = func(s) globals.string.color("36", s);      # /some/property/
 var _internal    = func(s) globals.string.color("35", s);      # me parents
 var _varname     = func(s) s;                                  # variable_name
 
-var ghosttypes = {};
-
 
 ##
 # Turn p into props.Node (if it isn't yet), or return nil.
 #
 var propify = func(p, create = 0) {
 	var type = typeof(p);
-	if (type == "ghost" and ghosttype(p) == ghosttype(props.globals._g))
+	if (type == "ghost" and ghosttype(p) == "prop")
 		return props.wrapNode(p);
 	if (type == "scalar" and num(p) == nil)
 		return props.globals.getNode(p, create);
@@ -217,10 +215,7 @@ var string = func(o) {
 		return _brace("{") ~ " " ~ s ~ " " ~ _brace("}");
 
 	} elsif (t == "ghost") {
-		var gt = ghosttype(o);
-		if (contains(ghosttypes, gt))
-			gt = ghosttypes[gt];
-		return _angle("<") ~ _nil(gt) ~ _angle(">");
+		return _angle("<") ~ _nil(ghosttype(o)) ~ _angle(">");
 
 	} else {
 		return _angle("<") ~ _vartype(t) ~ _angle(">");
@@ -317,11 +312,5 @@ var printerror = func(err) {
 	for (var i = 3; i < size(err); i += 2)
 		printf("  called from %s line %d", err[i], err[i + 1]);
 }
-
-
-_setlistener("/sim/signals/nasal-dir-initialized", func {
-	ghosttypes[ghosttype(props._globals())] = "PropertyNode";
-	ghosttypes[ghosttype(io.stderr)] = "FileHandle";
-});
 
 

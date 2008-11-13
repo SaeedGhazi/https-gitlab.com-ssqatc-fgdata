@@ -237,7 +237,7 @@ var nodeList = func {
                 list ~= nodeList(a[i]);
         elsif(t == "func")
             list ~= nodeList(a());
-        elsif(t == "ghost" and ghosttype(a) == ghosttype(_globals()))
+        elsif(t == "ghost" and ghosttype(a) == "prop")
             append(list, wrapNode(a));
         else
             die("nodeList: invalid nil property");

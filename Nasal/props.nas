@@ -8,9 +8,6 @@
 # from a Nasal context.  The various get/set methods work only on the
 # local node, there is no equivalent of the "relative path" variants
 # available in C++; just use node.getNode(path).whatever() instead.
-# The aliasing feature isn't exposed, except that you can get an
-# "ALIAS" return from getType to detect them (to avoid cycles while
-# walking the tree).
 #
 var Node = {
     getNode        : func { wrap(_getNode(me._g, arg)) },
@@ -35,16 +32,15 @@ var Node = {
 
     getPath : func {
         var name = me.getName();
-        if(me.getIndex() != 0)    { name = name ~ "[" ~ me.getIndex() ~ "]"; }
+        if(me.getIndex() != 0)    { name ~= "[" ~ me.getIndex() ~ "]"; }
         if(me.getParent() != nil) { name = me.getParent().getPath() ~ "/" ~ name; }
         return name;
     },
 
     getBoolValue : func {
         var val = me.getValue();
-        if(me.getType() == "STRING" and val == "false") { 0 }
-        elsif (val == nil) { 0 }
-        else { val != 0 }
+        if(me.getType() == "STRING" and val == "false") return 0;
+        return !!val;
     },
 
     remove : func {
@@ -57,11 +53,10 @@ var Node = {
 # Static constructor for a Node object.  Accepts a Nasal hash
 # expression to initialize the object a-la setValues().
 #
-Node.new = func {
-    result = wrapNode(_new());
-    if(size(arg) > 0 and typeof(arg[0]) == "hash") {
-        result.setValues(arg[0]);
-    }
+Node.new = func(values = nil) {
+    var result = wrapNode(_new());
+    if(values != nil and typeof(values) == "hash")
+        result.setValues(values);
     return result;
 }
 

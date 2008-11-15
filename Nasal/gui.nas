@@ -99,7 +99,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     menuEnable("fuel-and-payload", fdm == "yasim" or fdm == "jsb");
     menuEnable("autopilot", props.globals.getNode("/autopilot/KAP140/locks") == nil);
     menuEnable("multiplayer", getprop("/sim/multiplay/txport") or getprop("/sim/multiplay/rxport"));
-    menuEnable("tutorial-start", size(props.globals.getNode("/sim/tutorials").getChildren("tutorial")));
+    menuEnable("tutorial-start", size(props.globals.getNode("/sim/tutorials", 1).getChildren("tutorial")));
     menuEnable("joystick-info", size(props.globals.getNode("/input/joysticks").getChildren("js")));
 
     var fps = props.globals.getNode("/sim/rendering/fps-display", 1);

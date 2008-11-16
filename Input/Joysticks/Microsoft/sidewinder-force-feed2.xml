@@ -94,6 +94,8 @@ ________________________________________________________________________________
 
 <PropertyList>
 	<name>Microsoft SideWinder Force Feedback 2</name>
+	<name>Microsoft SideWinder Force Feedback 2 Joystick</name>
+
 	<data>
 		<mode type="int">0</mode>
 		<modifier type="int">0</modifier>

@@ -157,7 +157,6 @@ var FT2M = geo.FT2M;
 var M2FT = geo.M2FT;
 
 var normdeg = geo.normdeg;
-var printf = func print(call(sprintf, arg));
 var npow = func(v, w) v == 0 ? 0 : math.exp(math.ln(abs(v)) * w) * (v < 0 ? -1 : 1);
 
 
@@ -706,9 +705,9 @@ var print_ufo_data = func {
 	print();
 
 	var hdg = normdeg(heading + getprop("/sim/current-view/goal-pitch-offset-deg"));
-	var fgfs = sprintf("$ fgfs --aircraft=ufo --lat=%.6f --lon=%.6f --altitude=%.2f --heading=%.1f",
+	printf("http://maps.google.com/maps?ll=%.10f,%.10f&z=12&t=h\n", lat, lon);
+	printf("$ fgfs --aircraft=ufo --lat=%.6f --lon=%.6f --altitude=%.2f --heading=%.1f\n",
 			lat, lon, alt_ft, hdg);
-	print(fgfs);
 }
 
 

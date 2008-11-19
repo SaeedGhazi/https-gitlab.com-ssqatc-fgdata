@@ -390,6 +390,20 @@
 			</binding>
 		</key>
 
+		<key n="109">
+			<name>m</name>
+			<desc>Dump Google Maps link</desc>
+			<exit/>
+			<binding>
+				<command>nasal</command>
+				<script>
+					printf("http://maps.google.com/maps?ll=%.10f,%.10f&amp;z=12&amp;t=h",
+							getprop("/position/latitude-deg"),
+							getprop("/position/longitude-deg"));
+				</script>
+			</binding>
+		</key>
+
 		<key n="112">
 			<name>p</name>
 			<desc>Reload panel</desc>

@@ -596,7 +596,7 @@ var overlay_update = {
 	},
 	add: func(path, prop, callback = nil) {
 		var path = string.normpath(getprop("/sim/fg-root") ~ '/' ~ path) ~ '/';
-		me.data[path] = [props.initNode(me.root.getNode(prop, 1), ""), "",
+		me.data[path] = [me.root.initNode(prop, ""), "",
 				typeof(callback) == "func" ? callback : func nil];
 		return me;
 	},
@@ -922,8 +922,8 @@ var HUD = {
 # ==============================================================================
 #
 _setlistener("/sim/signals/nasal-dir-initialized", func {
-	props.initNode("/sim/time/delta-sec", 0);
-	props.initNode("/sim/time/delta-realtime-sec", 0.00000001);
+	props.globals.initNode("/sim/time/delta-sec", 0);
+	props.globals.initNode("/sim/time/delta-realtime-sec", 0.00000001);
 
 	HUD.init();
 	data.init();

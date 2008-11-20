@@ -51,10 +51,6 @@
 
 var EPSILON = 0.0000000000001;
 var ERAD = 6378138.12;		# Earth radius (m)
-var D2R = math.pi / 180;
-var R2D = 180 / math.pi;
-var FT2M = 0.3048;
-var M2FT = 3.28083989501312335958;
 
 
 var floor = func(v) { v < 0.0 ? -int(-v) - 1 : int(v) }
@@ -194,7 +190,7 @@ var Coord = {
 	},
 	dump : func {
 		if (me._cdirty and me._pdirty)
-			print("Coord.print(): coord undefined");
+			print("Coord.dump(): coord undefined");
 
 		me._cupdate();
 		me._pupdate();
@@ -296,21 +292,11 @@ var _put_model = func(path, lat, lon, elev_m = nil, hdg = 0, pitch = 0, roll = 0
 		elev_m = elevation(lat, lon);
 	if (elev_m == nil)
 		die("geo.put_model(): can't get elevation for " ~ lat ~ "/" ~ lon);
-	var n = props.globals.getNode("/models");
-	for (var i = 0; 1; i += 1)
-		if (n.getChild("model", i, 0) == nil)
-			break;
-	n = n.getChild("model", i, 1);
-	n.getNode("path", 1).setValue(path);
-	n.getNode("latitude-deg", 1).setDoubleValue(lat);
-	n.getNode("longitude-deg", 1).setDoubleValue(lon);
-	n.getNode("elevation-ft", 1).setDoubleValue(elev_m * M2FT);
-	n.getNode("heading-deg", 1).setDoubleValue(hdg);
-	n.getNode("pitch-deg", 1).setDoubleValue(pitch);
-	n.getNode("roll-deg", 1).setDoubleValue(roll);
-	n.getNode("load", 1).setBoolValue(1);
-	n.removeChildren("load");
-	return n;
+	fgcommand("add-model", var n = props.Node.new({ "path": path,
+		"latitude-deg": lat, "longitude-deg": lon, "elevation-m": elev_m,
+		"heading-deg": hdg, "pitch-deg": pitch, "roll-deg": roll,
+	}));
+	return props.globals.getNode(n.getNode("property").getValue());
 }
 
 

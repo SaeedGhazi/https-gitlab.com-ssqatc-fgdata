@@ -285,7 +285,7 @@ var fly_by_view_handler = {
 
 		# apply random deviation
 		var radius = me.chase * (0.5 * rand() + 0.7);
-		var agl = getprop("/position/altitude-agl-ft") * geo.FT2M;
+		var agl = getprop("/position/altitude-agl-ft") * FT2M;
 		if (agl > me.chase)
 			var angle = rand() * 2 * math.pi;
 		else
@@ -313,7 +313,7 @@ var fly_by_view_handler = {
 		# set new view point
 		me.latN.setValue(lat);
 		me.lonN.setValue(lon);
-		me.altN.setValue(alt * geo.M2FT);
+		me.altN.setValue(alt * M2FT);
 		return 7.3;
 	},
 	update : func {

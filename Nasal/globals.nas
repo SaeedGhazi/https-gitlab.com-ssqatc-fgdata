@@ -139,3 +139,11 @@ settimer(func {
             io.load_nasal(path ~ "/" ~ file, substr(file, 0, size(file) - 4));
 }, 0);
 
+
+##
+# Constants.
+#
+var D2R = math.pi / 180;               # degree to radian
+var R2D = 180 / math.pi;               # radian to degree
+var FT2M = 0.3048;                     # feet to meter
+var M2FT = 3.28083989501312335958;     # meter to feet

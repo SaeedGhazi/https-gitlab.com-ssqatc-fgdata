@@ -17,12 +17,12 @@
 #     Coord.lat()
 #     Coord.lon()                 ... functions for getting lat/lon/alt
 #     Coord.alt()                     ... returns altitude in m
-#     Coord.latlon()                  ... returns array  [<lat>, <lon>, <alt>]
+#     Coord.latlon()                  ... returns vector  [<lat>, <lon>, <alt>]
 #
 #     Coord.x()                   ... functions for reading cartesian coords (in m)
 #     Coord.y()
 #     Coord.z()
-#     Coord.xyz()                     ... returns array  [<x>, <y>, <z>]
+#     Coord.xyz()                     ... returns vector  [<x>, <y>, <z>]
 #
 #     Coord.course_to(<coord>)    ... returns course to another geo.Coord instance (degree)
 #     Coord.distance_to(<coord>)  ... returns distance in m along Earth curvature, ignoring altitudes
@@ -211,7 +211,7 @@ var normdeg = func(angle) {
 }
 
 
-var bucket_span = func(lat) {
+var _bucket_span = func(lat) {
 	if (lat >= 89.0)
 		360.0;
 	elsif (lat >= 88.0)
@@ -248,7 +248,7 @@ var bucket_span = func(lat) {
 var tile_index = func(lat, lon) {
 	var lat_floor = floor(lat);
 	var lon_floor = floor(lon);
-	var span = bucket_span(lat);
+	var span = _bucket_span(lat);
 	var x = 0;
 
 	if (span < 0.0000001) {
@@ -291,7 +291,7 @@ var _put_model = func(path, lat, lon, elev_m = nil, hdg = 0, pitch = 0, roll = 0
 	if (elev_m == nil)
 		elev_m = elevation(lat, lon);
 	if (elev_m == nil)
-		die("geo.put_model(): can't get elevation for " ~ lat ~ "/" ~ lon);
+		die("geo.put_model(): cannot get elevation for " ~ lat ~ "/" ~ lon);
 	fgcommand("add-model", var n = props.Node.new({ "path": path,
 		"latitude-deg": lat, "longitude-deg": lon, "elevation-m": elev_m,
 		"heading-deg": hdg, "pitch-deg": pitch, "roll-deg": roll,

@@ -38,8 +38,8 @@ var FREEZE_DURATION = 2;
 var BLEND_TIME = 0.2;
 
 
-var sin = func(a) { math.sin(a * math.pi / 180.0) }
-var cos = func(a) { math.cos(a * math.pi / 180.0) }
+var sin = func(a) math.sin(a * D2R);
+var cos = func(a) math.cos(a * D2R);
 var sigmoid = func(x) { 1 / (1 + math.exp(-x)) }
 var nsigmoid = func(x) { 2 / (1 + math.exp(-x)) - 1 }
 var pow = func(v, w) { v < 0 ? nil : v == 0 ? 0 : math.exp(math.ln(v) * w) }

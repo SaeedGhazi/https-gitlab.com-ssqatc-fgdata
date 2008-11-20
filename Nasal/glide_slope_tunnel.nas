@@ -89,7 +89,7 @@ var loopid = 0;
 
 _setlistener("/sim/signals/fdm-initialized", func {
 	# remove top bar unless otherwise specified
-	var top = props.initNode("/sim/model/geometry/square/top", 1, "BOOL");
+	var top = props.globals.initNode("/sim/model/geometry/square/top", 1, "BOOL");
 
 	setlistener("/sim/rendering/glide-slope-tunnel", func(n) {
 		loopid += 1;

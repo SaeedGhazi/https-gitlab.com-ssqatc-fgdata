@@ -319,7 +319,7 @@ var OverlaySelector = {
         m.sortprop = relpath(sortprop or nameprop);
         m.mpprop = mpprop;
         m.callback = callback;
-        m.result = props.initNode(data.getNode("result", 1), "");
+        m.result = data.initNode("result", "");
         m.listener = setlistener(m.result, func(n) m.select(n.getValue()));
 
         m.prop.getNode("group/text/label").setValue(title);

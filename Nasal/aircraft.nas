@@ -780,20 +780,20 @@ var tyresmoke = {
 		me.speed = props.initNode("velocities/groundspeed-kt");
 		me.rain = props.initNode("environment/metar/rain-norm");
 
-		var gear = "gear/gear[" ~ number ~ "]/";
-		m.wow = props.initNode(gear ~ "wow");
-		m.tyresmoke = props.initNode(gear ~ "tyre-smoke", 0, "BOOL");
-		m.friction_factor = props.initNode(gear ~ "ground-friction-factor", 1);
-		m.sprayspeed = props.initNode(gear ~ "sprayspeed-ms");
-		m.spray = props.initNode(gear ~ "spray", 0, "BOOL");
-		m.spraydensity = props.initNode(gear ~ "spray-density", 0, "DOUBLE");
+		var gear = props.globals.getNode("gear/gear[" ~ number ~ "]/");
+		m.wow = gear.initNode("wow");
+		m.tyresmoke = gear.initNode("tyre-smoke", 0, "BOOL");
+		m.friction_factor = gear.initNode("ground-friction-factor", 1);
+		m.sprayspeed = gear.initNode("sprayspeed-ms");
+		m.spray = gear.initNode("spray", 0, "BOOL");
+		m.spraydensity = gear.initNode("spray-density", 0, "DOUBLE");
 
 		if (getprop("sim/flight-model") == "jsb") {
 			var wheel_speed = "fdm/jsbsim/gear/unit[" ~ number ~ "]/wheel-speed-fps";
-			m.rollspeed = props.initNode(wheel_speed);
+			m.rollspeed = props.globals.initNode(wheel_speed);
 			m.get_rollspeed = func m.rollspeed.getValue() * 0.3043;
 		} else {
-			m.rollspeed = props.initNode(gear ~ "rollspeed-ms");
+			m.rollspeed = gear.initNode("rollspeed-ms");
 			m.get_rollspeed = func m.rollspeed.getValue();
 		}
 

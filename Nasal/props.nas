@@ -10,30 +10,30 @@
 # available in C++; just use node.getNode(path).whatever() instead.
 #
 var Node = {
-    getNode        : func { wrap(_getNode(me._g, arg)) },
-    getParent      : func { wrap(_getParent(me._g, arg)) },
-    getChild       : func { wrap(_getChild(me._g, arg)) },
-    getChildren    : func { wrap(_getChildren(me._g, arg)) },
-    removeChild    : func { wrap(_removeChild(me._g, arg)) },
-    removeChildren : func { wrap(_removeChildren(me._g, arg)) },
+    getNode        : func wrap(_getNode(me._g, arg)),
+    getParent      : func wrap(_getParent(me._g, arg)),
+    getChild       : func wrap(_getChild(me._g, arg)),
+    getChildren    : func wrap(_getChildren(me._g, arg)),
+    removeChild    : func wrap(_removeChild(me._g, arg)),
+    removeChildren : func wrap(_removeChildren(me._g, arg)),
 
-    getName        : func { _getName(me._g, arg) },
-    getIndex       : func { _getIndex(me._g, arg) },
-    getType        : func { _getType(me._g, arg) },
-    getAttribute   : func { _getAttribute(me._g, arg) },
-    setAttribute   : func { _setAttribute(me._g, arg) },
-    getValue       : func { _getValue(me._g, arg) },
-    setValue       : func { _setValue(me._g, arg) },
-    setIntValue    : func { _setIntValue(me._g, arg) },
-    setBoolValue   : func { _setBoolValue(me._g, arg) },
-    setDoubleValue : func { _setDoubleValue(me._g, arg) },
-    unalias        : func { _unalias(me._g, arg) },
-    alias          : func(n) { _alias(me._g, [isa(n, props.Node) ? n._g : n]) },
+    getName        : func _getName(me._g, arg),
+    getIndex       : func _getIndex(me._g, arg),
+    getType        : func _getType(me._g, arg),
+    getAttribute   : func _getAttribute(me._g, arg),
+    setAttribute   : func _setAttribute(me._g, arg),
+    getValue       : func _getValue(me._g, arg),
+    setValue       : func _setValue(me._g, arg),
+    setIntValue    : func _setIntValue(me._g, arg),
+    setBoolValue   : func _setBoolValue(me._g, arg),
+    setDoubleValue : func _setDoubleValue(me._g, arg),
+    unalias        : func _unalias(me._g, arg),
+    alias          : func(n) _alias(me._g, [isa(n, Node) ? n._g : n]),
 
     getPath : func {
-        var name = me.getName();
-        if(me.getIndex() != 0)    { name ~= "[" ~ me.getIndex() ~ "]"; }
-        if(me.getParent() != nil) { name = me.getParent().getPath() ~ "/" ~ name; }
+        var (name, index, parent) = (me.getName(), me.getIndex(), me.getParent());
+        if(index != 0)    { name ~= "[" ~ index ~ "]"; }
+        if(parent != nil) { name = parent.getPath() ~ "/" ~ name; }
         return name;
     },
 
@@ -55,7 +55,7 @@ var Node = {
 #
 Node.new = func(values = nil) {
     var result = wrapNode(_new());
-    if(values != nil and typeof(values) == "hash")
+    if(typeof(values) == "hash")
         result.setValues(values);
     return result;
 }
@@ -111,12 +111,36 @@ Node.getValues = func {
         else {
             var nc = size(me.getChildren(name));
             numchld[name] = nc;
-            if (nc > 1 and !contains(val, name)) val[name] = [];
+            if(nc > 1 and !contains(val, name)) val[name] = [];
         }
         if(nc > 1) append(val[name], c.getValues());
         else val[name] = c.getValues();
     }
     return val;
+}
+
+##
+# Initializes property if it's still undefined.  First argument
+# is a property name/path.  Second argument is the default value.
+# The third, optional argument is a property type (one of
+# "STRING", "DOUBLE", "INT", or "BOOL").  If it is omitted, then
+# "DOUBLE" is used for numbers, and STRING for everything else.
+# Returns the property as props.Node.
+#
+Node.initNode = func(path, value = 0, type = nil) {
+    var prop = me.getNode(path, 1);
+    if(prop.getType() != "NONE") value = prop.getValue();
+    if(type == nil) prop.setValue(value);
+    elsif(type == "DOUBLE") prop.setDoubleValue(value);
+    elsif(type == "INT") prop.setIntValue(value);
+    elsif(type == "BOOL") prop.setBoolValue(value);
+    elsif(type == "STRING") prop.setValue("" ~ value);
+    else die("initNode(): unsupported type '" ~ type ~ "'");
+    return prop;
+}
+# temporary compatibility wrapper  [*** DEPRECATED ***]
+var initNode = func(path, value = 0, type = nil) {
+    return props.globals.initNode(path, value, type);
 }
 
 ##
@@ -225,7 +249,7 @@ var nodeList = func {
     var list = [];
     foreach(var a; arg) {
         var t = typeof(a);
-        if(isa(a, props.Node))
+        if(isa(a, Node))
             append(list, a);
         elsif(t == "scalar")
             append(list, props.globals.getNode(a, 1));
@@ -246,25 +270,6 @@ var nodeList = func {
 }
 
 ##
-# Initializes property if it's still undefined.  First argument is a property
-# path or a props.Node.  Second argument is the default value.  The third,
-# optional argument is a property type (one of "STRING", "DOUBLE", "INT", or
-# "BOOL").  If it is omitted, then "DOUBLE" is used for numbers, and STRING
-# for everything else.  Returns the property as props.Node.
-#
-var initNode = func(prop, value = 0, type = nil) {
-    if(!isa(prop, props.Node)) prop = props.globals.getNode(prop, 1);
-    if(prop.getType() != "NONE") value = prop.getValue();
-    if(type == nil) prop.setValue(value);
-    elsif(type == "DOUBLE") prop.setDoubleValue(value);
-    elsif(type == "INT") prop.setIntValue(value);
-    elsif(type == "BOOL") prop.setBoolValue(value);
-    elsif(type == "STRING") prop.setValue("" ~ value);
-    else die("initNode(): unsupported type '" ~ type ~ "'");
-    return prop;
-}
-
-##
 # Evaluates a <condition> property branch according to the rules
 # set out in $FG_ROOT/Docs/README.conditions. Undefined conditions
 # and a nil argument are "true". The function dumps the condition
@@ -272,7 +277,7 @@ var initNode = func(prop, value = 0, type = nil) {
 #
 var condition = func(p) {
     if(p == nil) return 1;
-    if(!isa(p, props.Node)) p = props.globals.getNode(p);
+    if(!isa(p, Node)) p = props.globals.getNode(p);
     return _cond_and(p)
 }
 

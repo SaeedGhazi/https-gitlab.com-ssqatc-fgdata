@@ -62,7 +62,10 @@ var setCursor = func(x = nil, y = nil, cursor = nil) {
     if (x != nil) args.getNode("x", 1).setIntValue(x);
     if (y != nil) args.getNode("y", 1).setIntValue(y);
     if (cursor != nil) {
-        if (num(cursor) == nil) cursor = cursor_types[cursor];
+        if (num(cursor) == nil)
+            cursor = cursor_types[cursor];
+        if (cursor == nil)
+            die("cursor must be one of: " ~ string.join(", ", keys(cursor_types)));
         setprop("/sim/mouse/hide-cursor", cursor);
         args.getNode("cursor", 1).setIntValue(cursor);
     }

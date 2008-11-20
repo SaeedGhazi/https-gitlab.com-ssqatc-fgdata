@@ -3,8 +3,6 @@
 var CAM = props.globals.getNode("/sim/cam");
 
 var MPS = 0.514444444;
-var D2R = math.pi / 180;
-var R2D = 180 / math.pi;
 var sin = func(v) math.sin(v * D2R);
 var cos = func(v) math.cos(v * D2R);
 var atan2 = func(v, w) math.atan2(v, w) * R2D;
@@ -109,7 +107,7 @@ var update = func {
     target.set_latlon(
         targetN.getNode("position/latitude-deg").getValue(),
         targetN.getNode("position/longitude-deg").getValue(),
-        targetN.getNode("position/altitude-ft").getValue() * geo.FT2M);
+        targetN.getNode("position/altitude-ft").getValue() * FT2M);
 
     self = geo.aircraft_position();
 
@@ -120,7 +118,7 @@ if (0) {
         self.set_alt(target.alt() + rel.alt);
         setprop("/position/latitude-deg", self.lat());
         setprop("/position/longitude-deg", self.lon());
-        setprop("/position/altitude-ft", self.alt() * geo.M2FT);
+        setprop("/position/altitude-ft", self.alt() * M2FT);
     }
 }
 
@@ -135,11 +133,11 @@ if (0) {
         mode.chase.setValue(0);
 
     # calculate own altitude
-    var min_alt_asl = target.alt() - getprop("/position/altitude-agl-ft") * geo.FT2M + min_alt_agl;
+    var min_alt_asl = target.alt() - getprop("/position/altitude-agl-ft") * FT2M + min_alt_agl;
     if (self.alt() <= min_alt_asl)
-        setprop("/position/altitude-ft", lowpass.alt.filter(min_alt_asl) * geo.M2FT);
+        setprop("/position/altitude-ft", lowpass.alt.filter(min_alt_asl) * M2FT);
     elsif (mode.alt.getValue())
-        setprop("/position/altitude-ft", lowpass.alt.filter(target.alt()) * geo.M2FT);
+        setprop("/position/altitude-ft", lowpass.alt.filter(target.alt()) * M2FT);
     else
         lowpass.alt.filter(self.alt());
 
@@ -240,7 +238,7 @@ var goto_target = func {
     self != nil or return;
     var lat = targetN.getNode("position/latitude-deg").getValue();
     var lon = targetN.getNode("position/longitude-deg").getValue();
-    var alt = targetN.getNode("position/altitude-ft").getValue() * geo.FT2M;
+    var alt = targetN.getNode("position/altitude-ft").getValue() * FT2M;
     var speed = targetN.getNode("velocities/true-airspeed-kt").getValue() * MPS * 2;
     var course = targetN.getNode("orientation/true-heading-deg").getValue();
     self.set_latlon(lat, lon, alt).apply_course_distance(course + 180, 100);

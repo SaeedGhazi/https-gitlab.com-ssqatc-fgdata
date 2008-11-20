@@ -153,8 +153,6 @@ mouse.loop();
 # library stuff -----------------------------------------------------------------------------------
 
 var ERAD = geo.ERAD;		# Earth radius (m)
-var FT2M = geo.FT2M;
-var M2FT = geo.M2FT;
 
 var normdeg = geo.normdeg;
 var npow = func(v, w) v == 0 ? 0 : math.exp(math.ln(abs(v)) * w) * (v < 0 ? -1 : 1);

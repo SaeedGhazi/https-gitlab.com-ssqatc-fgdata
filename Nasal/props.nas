@@ -138,10 +138,6 @@ Node.initNode = func(path, value = 0, type = nil) {
     else die("initNode(): unsupported type '" ~ type ~ "'");
     return prop;
 }
-# temporary compatibility wrapper  [*** DEPRECATED ***]
-var initNode = func(path, value = 0, type = nil) {
-    return props.globals.initNode(path, value, type);
-}
 
 ##
 # Useful debugging utility.  Recursively dumps the full state of a

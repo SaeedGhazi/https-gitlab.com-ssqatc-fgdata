@@ -67,7 +67,12 @@ axis 5: 	(hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 	</binding>
 </axis>
 
-<axis n="2">
+<axis>
+	<number>
+		<mac>3</mac>
+		<unix>2</unix>
+		<windows>2</windows> 
+	</number>
 	<desc>Throttle</desc>
 	<binding>
 		<command>nasal</command>
@@ -75,7 +80,12 @@ axis 5: 	(hat up-down)		look u/d		Trim Elevator		Adj Propeller	#
 	</binding>
 </axis>
 
-<axis n="3">
+<axis>
+	<number>
+		<mac>2</mac>
+		<unix>3</unix>
+		<windows>3</windows>
+	</number>
 	<desc>Rudder</desc>
 	<binding>
 		<command>property-scale</command>

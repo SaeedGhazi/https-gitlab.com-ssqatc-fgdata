@@ -776,9 +776,9 @@ var autotrim = {
 var tyresmoke = {
 	new: func(number) {
 		var m = { parents: [tyresmoke] };
-		me.vertical_speed = props.initNode("velocities/vertical-speed-fps");
-		me.speed = props.initNode("velocities/groundspeed-kt");
-		me.rain = props.initNode("environment/metar/rain-norm");
+		me.vertical_speed = props.globals.initNode("velocities/vertical-speed-fps");
+		me.speed = props.globals.initNode("velocities/groundspeed-kt");
+		me.rain = props.globals.initNode("environment/metar/rain-norm");
 
 		var gear = props.globals.getNode("gear/gear[" ~ number ~ "]/");
 		m.wow = gear.initNode("wow");

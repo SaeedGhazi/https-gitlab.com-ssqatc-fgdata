@@ -29,6 +29,7 @@ var Node = {
     setDoubleValue : func _setDoubleValue(me._g, arg),
     unalias        : func _unalias(me._g, arg),
     alias          : func(n) _alias(me._g, [isa(n, Node) ? n._g : n]),
+    clear          : func _alias(me._g, [_globals()]) and _unalias(me._g, []),
 
     getPath : func {
         var (name, index, parent) = (me.getName(), me.getIndex(), me.getParent());

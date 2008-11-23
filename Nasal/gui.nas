@@ -113,6 +113,15 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
             fpsDisplay(1);
         }
     });
+
+    # only enable precipitation if gui *and* aircraft want it
+    var p = "/sim/rendering/precipitation-";
+    var precip_gui = getprop(p ~ "gui-enable");
+    var precip_ac = getprop(p ~ "aircraft-enable");
+    props.globals.getNode(p ~ "enable").setAttribute("userarchive", 0); # TODO remove later
+    var set_precip = func setprop(p ~ "enable", precip_gui and precip_ac);
+    setlistener(p ~ "gui-enable", func(n) set_precip(precip_gui = n.getValue()));
+    setlistener(p ~ "aircraft-enable", func(n) set_precip(precip_ac = n.getValue()));
 });
 
 

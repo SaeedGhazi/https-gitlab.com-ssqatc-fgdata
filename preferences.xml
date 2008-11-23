@@ -68,7 +68,8 @@ Started September 2000 by David Megginson, david@megginson.com
    <enhanced-lighting type="bool" userarchive="y">false</enhanced-lighting>
    <distance-attenuation type="bool" userarchive="y">false</distance-attenuation>
    <particles type="bool" userarchive="y">true</particles>
-   <precipitation-enable type="bool" userarchive="y">false</precipitation-enable>
+   <precipitation-gui-enable type="bool" userarchive="y">false</precipitation-gui-enable>
+   <precipitation-aircraft-enable type="bool">true</precipitation-aircraft-enable>
    <precipitation>
     <!-- streaks coloring and transparency -->
     <min-light type="float">0.35</min-light>

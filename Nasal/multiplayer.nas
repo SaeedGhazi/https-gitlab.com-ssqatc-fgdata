@@ -297,7 +297,7 @@ var dialog = {
             var ploc = me.getloc(c.getNode("position"));
             var ploc_course = loc.course_to(ploc);
             var ploc_dist = loc.distance_to(ploc);
-            var altitude_m = c.getNode("position/altitude-ft").getValue()*geo.FT2M;
+            var altitude_m = c.getNode("position/altitude-ft").getValue()*FT2M;
 
             var pathN = c.getNode("sim/model/path");
             if (pathN != nil)

@@ -90,7 +90,7 @@
     <checkbox>
       <halign>left</halign>
       <label>Precipitation</label>
-      <property>/sim/rendering/precipitation-enable</property>
+      <property>/sim/rendering/precipitation-gui-enable</property>
       <binding>
         <command>dialog-apply</command>
       </binding>

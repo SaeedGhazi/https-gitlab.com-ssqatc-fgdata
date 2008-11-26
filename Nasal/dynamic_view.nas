@@ -392,11 +392,11 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 		enabled[i] = ((var n = enabled[i].getNode("config/dynamic-view")) != nil) and n.getBoolValue();
 
 	# some properties may still be unavailable or nil
-	props.globals.getNode("/accelerations/pilot/x-accel-fps_sec", 1).setDoubleValue(0);
-	props.globals.getNode("/accelerations/pilot/y-accel-fps_sec", 1).setDoubleValue(0);
-	props.globals.getNode("/accelerations/pilot/z-accel-fps_sec", 1).setDoubleValue(-32);
-	props.globals.getNode("/orientation/side-slip-deg", 1).setDoubleValue(0);
-	props.globals.getNode("/gear/gear/wow", 1).setBoolValue(1);
+	props.globals.initNode("/accelerations/pilot/x-accel-fps_sec", 0);
+	props.globals.initNode("/accelerations/pilot/y-accel-fps_sec", 0);
+	props.globals.initNode("/accelerations/pilot/z-accel-fps_sec", -32);
+	props.globals.initNode("/orientation/side-slip-deg", 0);
+	props.globals.initNode("/gear/gear/wow", 1, "BOOL");
 	elapsedN = props.globals.getNode("/sim/time/elapsed-sec", 1);
 
 	# let listeners keep some variables up-to-date, so that they don't have

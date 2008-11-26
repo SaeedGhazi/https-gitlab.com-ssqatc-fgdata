@@ -46,19 +46,12 @@ var optarg = func(args, index, default) {
 #	canopy.open();
 #
 var door = {
-	new: func {
-		m = { parents: [door] };
-		m.node = makeNode(arg[0]);
-		m.swingtime = arg[1];
-		m.positionN = m.node.getNode("position-norm", 1);
-		m.enabledN = m.node.getNode("enabled", 1);
-		if (m.enabledN.getValue() == nil)
-			m.enabledN.setBoolValue(1);
-
-		var pos = optarg(arg, 2, 0);
-		if (m.positionN.getValue() == nil)
-			m.positionN.setDoubleValue(pos);
-
+	new: func(node, swingtime, pos = 0) {
+		var m = { parents: [door] };
+		m.node = makeNode(node);
+		m.swingtime = swingtime;
+		m.enabledN = m.node.initNode("enabled", 1, "BOOL");
+		m.positionN = m.node.initNode("position-norm", pos);
 		m.target = pos < 0.5;
 		return m;
 	},
@@ -74,20 +67,25 @@ var door = {
 		me;
 	},
 	# double door.getpos() ->  return current position as double
-	getpos: func { me.positionN.getValue() },
-
+	getpos: func {
+		me.positionN.getValue();
+	},
 	# door.close()         ->  move to closed state
-	close: func { me.move(me.target = 0) },
-
+	close: func {
+		me.move(me.target = 0);
+	},
 	# door.open()          ->  move to open state
-	open: func { me.move(me.target = 1) },
-
+	open: func {
+		me.move(me.target = 1);
+	},
 	# door.toggle()        ->  move to opposite end position
-	toggle: func { me.move(me.target) },
-
+	toggle: func {
+		me.move(me.target);
+	},
 	# door.stop()          ->  stop movement
-	stop: func { interpolate(me.positionN) },
-
+	stop: func {
+		interpolate(me.positionN);
+	},
 	# door.move(double)    ->  move to arbitrary position
 	move: func(target) {
 		var pos = me.getpos();
@@ -152,9 +150,7 @@ var light = {
 		if (m.switchN.getValue() == nil)
 			m.switchN.setBoolValue(0);
 
-		m.stateN = m.node.getNode("state", 1);
-		if (m.stateN.getValue() == nil)
-			m.stateN.setBoolValue(0);
+		m.stateN = m.node.initNode("state", 0, "BOOL");
 
 		forindex (var i; m.pattern)
 			m.pattern[i] *= stretch;
@@ -175,9 +171,15 @@ var light = {
 	},
 	# light.switch(bool)   ->  set light switch (also affects other lights
 	#                          that use the same switch)
-	switch: func(v) { me.switchN.setBoolValue(v); me },
+	switch: func(v) {
+		me.switchN.setBoolValue(v);
+		me;
+	},
 	# light.toggle()       ->  toggle light switch
-	toggle: func { me.switchN.setBoolValue(!me.switchN.getValue()); me },
+	toggle: func {
+		me.switchN.setBoolValue(!me.switchN.getValue());
+		me;
+	},
 	# light.cont()         ->  continuous light
 	cont: func {
 		if (!me.continuous) {
@@ -911,9 +913,15 @@ var HUD = {
 			me.currentN = me.vis0N;
 		}
 	},
-	oldinit1: func { fgcommand("hud-init") },
-	oldinit2: func { fgcommand("hud-init2") },
-	is_active: func { me.vis0N.getValue() or me.vis1N.getValue() },
+	oldinit1: func {
+		fgcommand("hud-init");
+	},
+	oldinit2: func {
+		fgcommand("hud-init2");
+	},
+	is_active: func {
+		me.vis0N.getValue() or me.vis1N.getValue();
+	},
 };
 
 

@@ -111,6 +111,10 @@ var _tree = func(n, graph = 1, prefix = "", level = 0) {
 	} else {
 		s ~= " = " ~ debug.string(n.getValue()) ~ " " ~ attributes(n);
 	}
+
+	if ((var a = n.getAliasTarget()) != nil)
+		s ~= "  " ~ _title(" alias to ") ~ "  " ~ a.getPath();
+
 	print(s);
 
 	if (n.getType() != "ALIAS")

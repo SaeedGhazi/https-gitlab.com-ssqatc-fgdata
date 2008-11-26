@@ -16,6 +16,7 @@ var Node = {
     getChildren    : func wrap(_getChildren(me._g, arg)),
     removeChild    : func wrap(_removeChild(me._g, arg)),
     removeChildren : func wrap(_removeChildren(me._g, arg)),
+    getAliasTarget : func wrap(_getAliasTarget(me._g, arg)),
 
     getName        : func _getName(me._g, arg),
     getIndex       : func _getIndex(me._g, arg),

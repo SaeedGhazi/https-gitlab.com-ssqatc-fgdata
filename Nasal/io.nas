@@ -15,8 +15,8 @@ var readfile = func(file) {
 # 0xf000.
 var _gen_ifmt_test = func(ifmt) {
     func(stat_mode) {
-        var i = int(stat_mode / 4096);
-        return ifmt == i - int(i / 16) * 16;
+        var i = int(stat_mode / 0x1000);
+        return ifmt == i - int(i / 0x10) * 0x10;
     }
 }
 
@@ -307,28 +307,32 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
 
     # wrap io.open()
-    var _open = io.open;
-    io.open = var io_open = func(path, mode = "rb") {
-        var rules = write_rules;
-        if (mode == "r" or mode == "rb" or mode == "br")
-            rules = read_rules;
+    io.open = var io_open = (func {
+        var _open = io.open;
+        func(path, mode = "rb") {
+            var rules = write_rules;
+            if (mode == "r" or mode == "rb" or mode == "br")
+                rules = read_rules;
 
-        if (var vpath = valid(path, rules))
-            return _open(vpath, mode);
+            if (var vpath = valid(path, rules))
+                return _open(vpath, mode);
 
-        die("io.open(): opening file '" ~ path ~ "' denied (unauthorized access)\n ");
-    }
+            die("io.open(): opening file '" ~ path ~ "' denied (unauthorized access)\n ");
+        }
+    })();
 
     # wrap closure() to prevent tampering with security related functions
     var thislistener = caller(0)[1];
-    var _closure = globals.closure;
-    globals.closure = func(fn, level = 0) {
-        var thisfunction = caller(0)[1];
-        if (fn != thislistener and fn != io_open and fn != thisfunction
-                and fn != read_validator and fn != write_validator)
-            return _closure(fn, level);
+    globals.closure = (func {
+        var _closure = globals.closure;
+        func(fn, level = 0) {
+            var thisfunction = caller(0)[1];
+            if (fn != thislistener and fn != io_open and fn != thisfunction
+                    and fn != read_validator and fn != write_validator)
+                return _closure(fn, level);
 
-        die("closure(): query denied (unauthorized access)\n ");
-    }
+            die("closure(): query denied (unauthorized access)\n ");
+        }
+    })();
 });
 

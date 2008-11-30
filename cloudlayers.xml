@@ -5,46 +5,49 @@
 <PropertyList>
   <clouds>
     <cb-large>
-      <min-cloud-width-m>400</min-cloud-width-m>
-      <max-cloud-width-m>500</max-cloud-width-m>
-      <min-cloud-height-m>300</min-cloud-height-m>
-      <max-cloud-height-m>500</max-cloud-height-m>
-      <num-sprites>10</num-sprites>
-      <texture>cl_cb.png</texture>
-      <num-textures-x>1</num-textures-x>
-      <bottom-shade>0.5</bottom-shade>
-      <min-sprite-width-m>200</min-sprite-width-m>
-      <max-sprite-width-m>300</max-sprite-width-m>
-      <min-sprite-height-m>200</min-sprite-height-m>
-      <max-sprite-height-m>300</max-sprite-height-m>
+      <min-cloud-width-m>1600</min-cloud-width-m>
+      <max-cloud-width-m>2000</max-cloud-width-m>
+      <min-cloud-height-m>4000</min-cloud-height-m>
+      <max-cloud-height-m>3000</max-cloud-height-m>
+      <num-sprites>20</num-sprites>
+      <texture>cl_cumulus.png</texture>
+      <num-textures-x>4</num-textures-x>
+      <num-textures-y>4</num-textures-y>
+      <bottom-shade>0.9</bottom-shade>
+      <min-sprite-width-m>1200</min-sprite-width-m>
+      <max-sprite-width-m>1200</max-sprite-width-m>
+      <min-sprite-height-m>1200</min-sprite-height-m>
+      <max-sprite-height-m>1200</max-sprite-height-m>
     </cb-large>
     <cb-small>
-        <min-cloud-width-m>300</min-cloud-width-m>
-        <max-cloud-width-m>400</max-cloud-width-m>
-        <min-cloud-height-m>150</min-cloud-height-m>
-        <max-cloud-height-m>250</max-cloud-height-m>
+        <min-cloud-width-m>600</min-cloud-width-m>
+        <max-cloud-width-m>800</max-cloud-width-m>
+        <min-cloud-height-m>300</min-cloud-height-m>
+        <max-cloud-height-m>500</max-cloud-height-m>
         <num-sprites>10</num-sprites>
-        <texture>cl_cb.png</texture>
-        <num-textures-x>1</num-textures-x>
-        <bottom-shade>0.5</bottom-shade>
-        <min-sprite-width-m>200</min-sprite-width-m>
-        <max-sprite-width-m>200</max-sprite-width-m>
-        <min-sprite-height-m>200</min-sprite-height-m>
-        <max-sprite-height-m>200</max-sprite-height-m>
+    <texture>cl_cumulus.png</texture>
+      <num-textures-x>4</num-textures-x>
+      <num-textures-y>4</num-textures-y>
+        <bottom-shade>0.9</bottom-shade>
+        <min-sprite-width-m>800</min-sprite-width-m>
+        <max-sprite-width-m>800</max-sprite-width-m>
+        <min-sprite-height-m>800</min-sprite-height-m>
+        <max-sprite-height-m>800</max-sprite-height-m>
     </cb-small>
     <cu-large>
-        <min-cloud-width-m>400</min-cloud-width-m>
-        <max-cloud-width-m>800</max-cloud-width-m>
-        <min-cloud-height-m>200</min-cloud-height-m>
-        <max-cloud-height-m>400</max-cloud-height-m>
+        <min-cloud-width-m>900</min-cloud-width-m>
+        <max-cloud-width-m>1200</max-cloud-width-m>
+        <min-cloud-height-m>600</min-cloud-height-m>
+        <max-cloud-height-m>1800</max-cloud-height-m>
         <num-sprites>10</num-sprites>
-        <texture>cl_cu2.png</texture>
-        <num-textures-x>2</num-textures-x>
-        <bottom-shade>0.1</bottom-shade>
-        <min-sprite-width-m>200</min-sprite-width-m>
-        <max-sprite-width-m>350</max-sprite-width-m>
-        <min-sprite-height-m>200</min-sprite-height-m>
-        <max-sprite-height-m>350</max-sprite-height-m>
+     <texture>cl_cumulus.png</texture>
+      <num-textures-x>4</num-textures-x>
+      <num-textures-y>4</num-textures-y>
+      <bottom-shade>0.1</bottom-shade>
+        <min-sprite-width-m>900</min-sprite-width-m>
+        <max-sprite-width-m>900</max-sprite-width-m>
+        <min-sprite-height-m>900</min-sprite-height-m>
+        <max-sprite-height-m>900</max-sprite-height-m>
     </cu-large>
     <cu-small>
         <min-cloud-width-m>300</min-cloud-width-m>
@@ -52,55 +55,74 @@
         <min-cloud-height-m>200</min-cloud-height-m>
         <max-cloud-height-m>300</max-cloud-height-m>
         <num-sprites>10</num-sprites>
-        <texture>cl_cu2.png</texture>
-        <num-textures-x>2</num-textures-x>
-        <bottom-shade>0.1</bottom-shade>
-        <min-sprite-width-m>200</min-sprite-width-m>
+   <texture>cl_cumulus.png</texture>
+      <num-textures-x>4</num-textures-x>
+      <num-textures-y>4</num-textures-y>
+        <bottom-shade>0.9</bottom-shade>
+        <min-sprite-width-m>350</min-sprite-width-m>
         <max-sprite-width-m>350</max-sprite-width-m>
-        <min-sprite-height-m>200</min-sprite-height-m>
+        <min-sprite-height-m>350</min-sprite-height-m>
         <max-sprite-height-m>350</max-sprite-height-m>
     </cu-small>
     <ns-large>
-        <min-cloud-width-m>500</min-cloud-width-m>
-        <max-cloud-width-m>800</max-cloud-width-m>
+        <min-cloud-width-m>8000</min-cloud-width-m>
+        <max-cloud-width-m>10000</max-cloud-width-m>
         <min-cloud-height-m>500</min-cloud-height-m>
-        <max-cloud-height-m>800</max-cloud-height-m>
-        <num-sprites>10</num-sprites>
-        <texture>cl_st.png</texture>
-        <num-textures-x>2</num-textures-x>
-        <bottom-shade>0.3</bottom-shade>
-        <min-sprite-width-m>200</min-sprite-width-m>
-        <max-sprite-width-m>300</max-sprite-width-m>
-        <min-sprite-height-m>200</min-sprite-height-m>
-        <max-sprite-height-m>300</max-sprite-height-m>
-    </ns-large>
-    <st-large>
-        <min-cloud-width-m>800</min-cloud-width-m>
-        <max-cloud-width-m>1500</max-cloud-width-m>
-        <min-cloud-height-m>500</min-cloud-height-m>
-        <max-cloud-height-m>800</max-cloud-height-m>
-        <num-sprites>20</num-sprites>
-        <texture>cl_st.png</texture>
-        <num-textures-x>2</num-textures-x>
+        <max-cloud-height-m>625</max-cloud-height-m>
+        <num-sprites>4</num-sprites>
+     <texture>cl_ns.png</texture>
+      <num-textures-x>1</num-textures-x>
+      <num-textures-y>4</num-textures-y>
         <bottom-shade>0.9</bottom-shade>
-        <min-sprite-width-m>200</min-sprite-width-m>
-        <max-sprite-width-m>500</max-sprite-width-m>
-        <min-sprite-height-m>300</min-sprite-height-m>
-        <max-sprite-height-m>400</max-sprite-height-m>
+        <min-sprite-width-m>2000</min-sprite-width-m>
+        <max-sprite-width-m>2000</max-sprite-width-m>
+        <min-sprite-height-m>500</min-sprite-height-m>
+        <max-sprite-height-m>500</max-sprite-height-m>
+    </ns-large>
+    <ns-white>
+    <min-cloud-width-m>8000</min-cloud-width-m>
+        <max-cloud-width-m>10000</max-cloud-width-m>
+        <min-cloud-height-m>500</min-cloud-height-m>
+        <max-cloud-height-m>625</max-cloud-height-m>
+        <num-sprites>4</num-sprites>
+      <texture>cl_ns_white.png</texture>
+      <num-textures-x>1</num-textures-x>
+      <num-textures-y>4</num-textures-y>
+        <bottom-shade>0.1</bottom-shade>
+         <min-sprite-width-m>2000</min-sprite-width-m>
+        <max-sprite-width-m>2000</max-sprite-width-m>
+        <min-sprite-height-m>500</min-sprite-height-m>
+        <max-sprite-height-m>500</max-sprite-height-m>
+    </ns-white>
+    <st-large>
+        <min-cloud-width-m>1600</min-cloud-width-m>
+        <max-cloud-width-m>1600</max-cloud-width-m>
+        <min-cloud-height-m>200</min-cloud-height-m>
+        <max-cloud-height-m>200</max-cloud-height-m>
+        <num-sprites>16</num-sprites>
+            <texture>cl_cumulus.png</texture>
+      <num-textures-x>4</num-textures-x>
+      <num-textures-y>4</num-textures-y>
+        <bottom-shade>0.9</bottom-shade>
+        <min-sprite-width-m>800</min-sprite-width-m>
+        <max-sprite-width-m>800</max-sprite-width-m>
+        <min-sprite-height-m>200</min-sprite-height-m>
+        <max-sprite-height-m>200</max-sprite-height-m>
     </st-large>
     <st-small>
-        <min-cloud-width-m>500</min-cloud-width-m>
-        <max-cloud-width-m>1000</max-cloud-width-m>
-        <min-cloud-height-m>300</min-cloud-height-m>
-        <max-cloud-height-m>500</max-cloud-height-m>
-        <num-sprites>15</num-sprites>
-        <texture>cl_st.png</texture>
-        <num-textures-x>2</num-textures-x>
+     <min-cloud-width-m>3200</min-cloud-width-m>
+        <max-cloud-width-m>3200</max-cloud-width-m>
+        <min-cloud-height-m>200</min-cloud-height-m>
+        <max-cloud-height-m>200</max-cloud-height-m>
+        <num-sprites>16</num-sprites>
+          <texture>cl_cumulus.png</texture>
+      <num-textures-x>4</num-textures-x>
+      <num-textures-y>4</num-textures-y>
         <bottom-shade>0.9</bottom-shade>
-        <min-sprite-width-m>200</min-sprite-width-m>
-        <max-sprite-width-m>300</max-sprite-width-m>
+         <min-sprite-width-m>800</min-sprite-width-m>
+        <max-sprite-width-m>800</max-sprite-width-m>
         <min-sprite-height-m>200</min-sprite-height-m>
-        <max-sprite-height-m>300</max-sprite-height-m>
+        <max-sprite-height-m>200</max-sprite-height-m>
     </st-small>
   </clouds>
   <boxes>
@@ -291,141 +313,97 @@
       </box>
     </cu-con>
     <cb-cal>
-      <box>
-        <x>800</x>
-        <y>3500</y>
-        <z>900</z>
+    <box>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+        <type>cb-large</type>
+      </box>
+       <box>
+        <x>500</x>
+        <y>0</y>
+        <z>0</z>
         <type>cb-large</type>
       </box>
       <box>
+        <x>1000</x>
+        <y>0</y>
+        <z>0</z>
+        <type>cb-large</type>
+      </box>
+      <box>
+        <x>1500</x>
+        <y>0</y>
+        <z>0</z>
+        <type>cb-large</type>
+      </box>
+       <box>
         <x>2000</x>
-        <y>3500</y>
-        <z>900</z>
+        <y>0</y>
+        <z>0</z>
         <type>cb-large</type>
       </box>
       <box>
-        <x>800</x>
-        <y>3500</y>
-        <z>2100</z>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+        <type>cb-large</type>
+      </box>
+       <box>
+        <x>0</x>
+        <y>500</y>
+        <z>0</z>
         <type>cb-large</type>
       </box>
       <box>
+        <x>0</x>
+        <y>1000</y>
+        <z>0</z>
+        <type>cb-large</type>
+      </box>
+      <box>
+        <x>0</x>
+        <y>1500</y>
+        <z>0</z>
+        <type>cb-large</type>
+      </box>
+       <box>
+        <x>0</x>
+        <y>2000</y>
+        <z>0</z>
+        <type>cb-large</type>
+      </box>
+       <box>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+        <type>cb-large</type>
+      </box>
+       <box>
+        <x>500</x>
+        <y>500</y>
+        <z>0</z>
+        <type>cb-large</type>
+      </box>
+      <box>
+        <x>1000</x>
+        <y>1000</y>
+        <z>0</z>
+        <type>cb-large</type>
+      </box>
+      <box>
+        <x>1500</x>
+        <y>1500</y>
+        <z>0</z>
+        <type>cb-large</type>
+      </box>
+       <box>
         <x>2000</x>
-        <y>3500</y>
-        <z>2100</z>
-        <type>cb-large</type>
-      </box>
-      
-      <box>
-        <x>0</x>
-        <y>0</y>
+        <y>2000</y>
         <z>0</z>
         <type>cb-large</type>
       </box>
-      <box>
-        <x>1500</x>
-        <y>0</y>
-        <z>0</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>3000</x>
-        <y>0</y>
-        <z>0</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>0</x>
-        <y>0</y>
-        <z>1500</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1500</x>
-        <y>0</y>
-        <z>1500</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>3000</x>
-        <y>0</y>
-        <z>1500</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>0</x>
-        <y>0</y>
-        <z>3000</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1500</x>
-        <y>0</y>
-        <z>3000</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>3000</x>
-        <y>0</y>
-        <z>3000</z>
-        <type>cb-large</type>
-      </box>
       
-      
-      <box>
-        <x>-500</x>
-        <y>2000</y>
-        <z>-500</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1500</x>
-        <y>2000</y>
-        <z>-500</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>3500</x>
-        <y>2000</y>
-        <z>-500</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>-500</x>
-        <y>2000</y>
-        <z>1500</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1500</x>
-        <y>2000</y>
-        <z>1500</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>3500</x>
-        <y>2000</y>
-        <z>1500</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>-500</x>
-        <y>2000</y>
-        <z>3500</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1500</x>
-        <y>2000</y>
-        <z>3500</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>3500</x>
-        <y>2000</y>
-        <z>3500</z>
-        <type>cb-large</type>
-      </box>
     </cb-cal>
     <cb-inc>
       <box>
@@ -832,22 +810,70 @@
         <type>ns-large</type>
       </box>
       <box>
+        <x>0</x>
+        <y>500</y>
+        <z>0</z>
+        <type>ns-white</type>
+      </box>
+      <box>
+        <x>750</x>
+        <y>0</y>
+        <z>0</z>
+        <type>ns-large</type>
+	<box>
+        <x>750</x>
+        <y>500</y>
+        <z>0</z>
+        <type>ns-white</type>
+      </box>
+      </box>
+            <box>
         <x>1500</x>
         <y>0</y>
         <z>0</z>
         <type>ns-large</type>
+	<box>
+        <x>1500</x>
+        <y>500</y>
+        <z>0</z>
+        <type>ns-white</type>
+      </box>
+      </box>
+        <box>
+        <x>1250</x>
+        <y>0</y>
+        <z>0</z>
+        <type>ns-large</type>
+      </box>
+      <box>
+        <x>1250</x>
+        <y>500</y>
+        <z>0</z>
+        <type>ns-white</type>
       </box>
       <box>
         <x>3000</x>
         <y>0</y>
         <z>0</z>
         <type>ns-large</type>
+	<box>
+        <x>3000</x>
+        <y>500</y>
+        <z>0</z>
+        <type>ns-white</type>
+      </box>
       </box>
       <box>
         <x>0</x>
         <y>0</y>
         <z>1500</z>
         <type>ns-large</type>
+      </box>
+      <box>
+        <x>0</x>
+        <y>500</y>
+        <z>1500</z>
+        <type>ns-white</type>
       </box>
       <box>
         <x>1500</x>
@@ -1022,10 +1048,10 @@
     <ns>
       <cloud>
         <name>ns</name>
-        <count>1</count>
+        <count>30</count>
       </cloud>
-      <grid-x-size type="double">4500.0</grid-x-size>
-      <grid-y-size type="double">4500.0</grid-y-size>
+      <grid-x-size type="double">2500.0</grid-x-size>
+      <grid-y-size type="double">2500.0</grid-y-size>
       <grid-x-rand type="double">500.0</grid-x-rand>
       <grid-y-rand type="double">500.0</grid-y-rand>
       <grid-z-rand type="double">150.0</grid-z-rand>

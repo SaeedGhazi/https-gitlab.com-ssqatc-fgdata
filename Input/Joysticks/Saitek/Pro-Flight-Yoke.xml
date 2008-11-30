@@ -6,6 +6,8 @@
 -->
 <PropertyList>
  <name>Saitek Saitek Pro Flight Yoke</name>
+ <name>Saitek Pro Flight Yoke</name>
+
  <axis n="0">
   <desc>Aileron</desc>
   <binding>

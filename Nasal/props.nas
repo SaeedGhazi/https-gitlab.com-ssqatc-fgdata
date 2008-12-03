@@ -129,7 +129,7 @@ Node.getValues = func {
 # "DOUBLE" is used for numbers, and STRING for everything else.
 # Returns the property as props.Node.
 #
-Node.initNode = func(path, value = 0, type = nil) {
+Node.initNode = func(path = "", value = 0, type = nil) {
     var prop = me.getNode(path, 1);
     if(prop.getType() != "NONE") value = prop.getValue();
     if(type == nil) prop.setValue(value);

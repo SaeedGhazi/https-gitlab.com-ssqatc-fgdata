@@ -205,7 +205,7 @@ var string = func(o) {
 		var s = "";
 		forindex (var i; o)
 			s ~= (i == 0 ? "" : ", ") ~ debug.string(o[i]);
-		return _bracket("[") ~ " " ~ s ~ " " ~ _bracket("]");
+		return _bracket("[") ~ s ~ _bracket("]");
 
 	} elsif (t == "hash") {
 		if (contains(o, "parents") and typeof(o.parents) == "vector"

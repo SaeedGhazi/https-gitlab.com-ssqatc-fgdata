@@ -773,10 +773,13 @@ var showWeightDialog = func {
         title.set("label", tname);
         title.set("halign", "right");
 
-        var sel = tcell(fuelTable, "checkbox", i+1, 1);
-        sel.set("property", tankprop ~ "/selected");
-        sel.set("live", 1);
-        sel.setBinding("dialog-apply");
+        var selected = props.globals.initNode(tankprop ~ "/selected", 1, "BOOL");
+        if (selected.getAttribute("writable")) {
+            var sel = tcell(fuelTable, "checkbox", i+1, 1);
+            sel.set("property", tankprop ~ "/selected");
+            sel.set("live", 1);
+            sel.setBinding("dialog-apply");
+        }
 
         var slider = tcell(fuelTable, "slider", i+1, 2);
         slider.set("property", tankprop ~ "/level-gal_us");

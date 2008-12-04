@@ -127,11 +127,13 @@ Node.getValues = func {
 # The third, optional argument is a property type (one of
 # "STRING", "DOUBLE", "INT", or "BOOL").  If it is omitted, then
 # "DOUBLE" is used for numbers, and STRING for everything else.
-# Returns the property as props.Node.
+# Returns the property as props.Node.  The fourth optional argument
+# enforces a type if non-zero.
 #
-Node.initNode = func(path = "", value = 0, type = nil) {
+Node.initNode = func(path = "", value = 0, type = nil, force = 0) {
     var prop = me.getNode(path, 1);
     if(prop.getType() != "NONE") value = prop.getValue();
+    if(force) prop.clearValue();
     if(type == nil) prop.setValue(value);
     elsif(type == "DOUBLE") prop.setDoubleValue(value);
     elsif(type == "INT") prop.setIntValue(value);

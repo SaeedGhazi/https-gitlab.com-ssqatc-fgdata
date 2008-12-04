@@ -19,30 +19,28 @@
 
 <PropertyList>
 	<nasal>
-		<script>
-			<![CDATA[
-				var clamp = func(val, min, max) {
-					return (val > max) ? max : (val < min) ? min : val;
-				}
+		<script><![CDATA[
+			var clamp = func(val, min, max) {
+				return (val > max) ? max : (val < min) ? min : val;
+			}
 
-				var adjustprop = func(path, offset, min = -1, max = 1) {
-					var val = getprop(path) + offset;
-					setprop(path, clamp(val, min, max));
-					return val;
-				}
+			var adjustprop = func(path, offset, min = -1, max = 1) {
+				var val = getprop(path) + offset;
+				setprop(path, clamp(val, min, max));
+				return val;
+			}
 
-				# Usage: setpropf(<format>, <vector or list of args>, <value>);
-				var setpropf = func {
-					var val = pop(arg);
-					setprop(call(sprintf, size(arg) and typeof(arg[0]) == "vector" ? arg[0] : arg), val);
-				}
+			# Usage: setpropf(<format>, <vector or list of args>, <value>);
+			var setpropf = func {
+				var val = pop(arg);
+				setprop(call(sprintf, size(arg) and typeof(arg[0]) == "vector" ? arg[0] : arg), val);
+			}
 
-				# Usage: getpropf(<format>, <vector or list of args>);
-				var getpropf = func {
-					getprop(call(sprintf, size(arg) and typeof(arg[0]) == "vector" ? arg[0] : arg));
-				}
-			]]>
-		</script>
+			# Usage: getpropf(<format>, <vector or list of args>);
+			var getpropf = func {
+				getprop(call(sprintf, size(arg) and typeof(arg[0]) == "vector" ? arg[0] : arg));
+			}
+		]]></script>
 	</nasal>
 
 	<key n="58">
@@ -70,6 +68,17 @@
 	<key n="68">
 		<name>D</name>
 		<desc>Dialogs</desc>
+
+		<key n="89">
+			<name>Y</name>
+			<desc>Nasal Console</desc>
+			<exit/>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>nasal-console</dialog-name>
+			</binding>
+		</key>
+
 		<key n="97">
 			<name>a</name>
 			<desc>Autopilot Settings</desc>

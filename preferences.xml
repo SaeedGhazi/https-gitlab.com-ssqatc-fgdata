@@ -100,10 +100,9 @@ Started September 2000 by David Megginson, david@megginson.com
    <specular-highlight type="bool" userarchive="y">false</specular-highlight>
    <bump-mapping type="bool" userarchive="y">false</bump-mapping>
    <clouds3d-enable type="bool" userarchive="y">false</clouds3d-enable>
-   <clouds3d-vis-range type="float" userarchive="y">25000</clouds3d-vis-range>
-   <clouds3d-density type="float" userarchive="y">100</clouds3d-density>
-   <clouds3d-cache-size type="int" userarchive="y">1024</clouds3d-cache-size>
-   <clouds3d-cache-resolution type="int" userarchive="y">64</clouds3d-cache-resolution>
+   <clouds3d-vis-range type="float" userarchive="y">20000.0</clouds3d-vis-range>
+   <clouds3d-density type="float" userarchive="y">1.0</clouds3d-density>
+   <clouds3d-num-flavours type="int" userarchive="y">10</clouds3d-num-flavours>
    <draw-otw type="bool">true</draw-otw>
    <shadows-ac type="bool" userarchive="y">false</shadows-ac>
    <shadows-ac-transp type="bool" userarchive="y">false</shadows-ac-transp>
@@ -637,7 +636,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <status>true</status>
    <layer n="0">
     <coverage>scattered</coverage>
-    <elevation-ft>5000</elevation-ft>
+    <elevation-ft>4000</elevation-ft>
     <thickness-ft>600</thickness-ft>
     <transition-ft>150</transition-ft>
     <span-m>40000</span-m>

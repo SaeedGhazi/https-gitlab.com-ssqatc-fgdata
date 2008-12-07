@@ -105,9 +105,10 @@ path specification could look like this:
 
 The third path would then be populated by the user with unpacked scenery
 archives downloaded from http://www.flightgear.org/Downloads/scenery.html,
-or by using terrasync (see next section). Additional objects can be
-downloaded from the FlightGear Objects Database (http://fgfsdb.stockill.org/).
-(Note that those objects are regularly merged into the flightgear.org/terrasync
+or by using terrasync (see next section).
+Additional objects can be downloaded from the FlightGear Objects
+Database (http://scenemodels.flightgear.org/download/). (Note that
+those objects are occasionally merged into the flightgear.org/terrasync
 packages, so you may end up with doubled entries!)
 
 Using a private directory for downloaded add-on scenery and adding

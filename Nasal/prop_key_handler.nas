@@ -283,6 +283,8 @@ var print_prop = func(n) {
 var search = func(n, s) {
 	if (find(s, n.getPath()) >= 0)
 		print_prop(n);
+	if (n.getType() != "NONE" and find(s, "" ~ n.getValue()) >= 0)
+		print_prop(n);
 	foreach (var c; n.getChildren())
 		search(c, s);
 }

@@ -133,6 +133,20 @@
     <node>/instrumentation/heading-indicator/indicated-heading-deg</node>
    </chunk>
 
+   <chunk>
+    <name>callsign</name>
+    <type>string</type>
+    <format>CALLSIGN=%s</format>
+    <node>/sim/multiplay/callsign</node>
+   </chunk>
+
+   <chunk>
+    <name>model</name>
+    <type>string</type>
+    <format>MODEL=%s</format>
+    <node>/sim/model/path</node>
+   </chunk>
+
   </output>
 
  </generic>

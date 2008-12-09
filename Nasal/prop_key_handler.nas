@@ -293,14 +293,14 @@ var search = func(n, s) {
 _setlistener("/sim/signals/nasal-dir-initialized", func {
 	foreach (var p; props.globals.getNode("/sim/gui/prop-key-handler/history", 1).getChildren("entry"))
 		append(history, p.getValue());
-	var max = props.globals.initNode("/sim/gui/prop-key-handler/history-max-size", 20).getValue();
+	var max = props.globals.initNode("/sim/gui/prop-key-handler/history-max-size", 30).getValue();
 	if (size(history) > max)
 		history = subvec(history, size(history) - max);
 });
 
 
 _setlistener("/sim/signals/exit", func {
-	var max = props.globals.initNode("/sim/gui/prop-key-handler/history-max-size", 20).getValue();
+	var max = props.globals.initNode("/sim/gui/prop-key-handler/history-max-size", 30).getValue();
 	if (size(history) > max)
 		history = subvec(history, size(history) - max);
 	forindex (var i; history) {

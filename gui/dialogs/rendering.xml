@@ -193,27 +193,6 @@
         </text>
     </group>
     
-    <group>
-        <layout>hbox</layout>
-        <halign>right</halign>
-        <text><label>Cloud types</label></text>
-        <slider>
-            <min>1</min>
-            <max>20</max>
-            
-            <property>/sim/rendering/clouds3d-num-flavours</property>
-            <binding>
-                <command>dialog-apply</command>
-            </binding>
-        </slider>
-        <text>
-            <label>12345678</label>
-            <format>%d</format>
-            <live>true</live>
-            <property>/sim/rendering/clouds3d-num-flavours</property>
-        </text>
-    </group>
-    
   </group>
 
   <hrule/>

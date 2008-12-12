@@ -302,9 +302,19 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
     # validation listeners for load[xml]/save[xml]/parsexml()  (see utils.cxx:fgValidatePath)
     var n = props.globals.getNode("/sim/paths/validate", 1).remove();
-    _setlistener(n.getNode("read", 1)._g, read_validator);
-    _setlistener(n.getNode("write", 1)._g, write_validator);
+    var rval = _setlistener(n.getNode("read", 1)._g, read_validator);
+    var wval = _setlistener(n.getNode("write", 1)._g, write_validator);
 
+    # wrap removelistener
+    globals.removelistener = var remove_listener = (func {
+        var _removelistener = globals.removelistener;
+        func(n) {
+            if (n != rval and n != wval)
+                return _removelistener(n);
+
+            die("removelistener(): removal of protected listener #'" ~ n ~ "' denied (unauthorized access)\n ");
+        }
+    })();
 
     # wrap io.open()
     io.open = var io_open = (func {
@@ -328,7 +338,8 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
         func(fn, level = 0) {
             var thisfunction = caller(0)[1];
             if (fn != thislistener and fn != io_open and fn != thisfunction
-                    and fn != read_validator and fn != write_validator)
+                    and fn != read_validator and fn != write_validator
+                    and fn != remove_listener)
                 return _closure(fn, level);
 
             die("closure(): query denied (unauthorized access)\n ");

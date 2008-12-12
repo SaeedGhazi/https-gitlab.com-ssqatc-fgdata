@@ -35,6 +35,7 @@
           setprop("/sim/presets/glideslope-deg", 0);
           setprop("/sim/presets/heading-deg", 0);
           setprop("/sim/presets/runway", "");
+          setprop("/sim/presets/parkpos", "");
       }
     </open>
   </nasal>

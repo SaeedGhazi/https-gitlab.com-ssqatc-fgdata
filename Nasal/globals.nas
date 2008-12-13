@@ -13,6 +13,9 @@ var KG2LB = 1 / LB2KG;
 var GAL2L = 3.785411784;               # US gallons to liter
 var L2GAL = 1 / GAL2L;
 
+var NM2M = 1852;                       # nautical miles to meter
+var M2NM = 1 / NM2M;
+
 
 ##
 # Returns true if the first object is an instance of the second

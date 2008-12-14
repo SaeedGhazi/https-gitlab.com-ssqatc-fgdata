@@ -147,9 +147,7 @@ var light = {
 		else
 			m.switchN = m.node.getNode("enabled", 1);
 
-		if (m.switchN.getValue() == nil)
-			m.switchN.setBoolValue(0);
-
+		m.switchN.initNode(nil, 0, "BOOL");
 		m.stateN = m.node.initNode("state", 0, "BOOL");
 
 		forindex (var i; m.pattern)
@@ -842,6 +840,61 @@ var tyresmoke = {
 
 
 
+# rain utility
+# =============================================================================
+# Provides a property which can be used to control rain. Can be used to turn
+# off rain in internal views, and or used with a texture on canopies etc.
+# The output is co-ordinated with system precipitation.
+#
+# see Hawker Seahawk for an example.
+#
+# SYNOPSIS:
+#	aircraft.rain.init();
+#	aircraft.rain.update();
+#
+var rain = {
+	init: func {
+		me.elapsed_timeN = props.globals.getNode("sim/time/elapsed-sec");
+		me.dtN = props.globals.getNode("sim/time/delta-sec");
+
+		me.enableN = props.globals.initNode("sim/rendering/precipitation-aircraft-enable", 0, "BOOL");
+		me.altitudeN = props.globals.initNode("position/altitude-ft", 0);
+		me.iasN = props.globals.initNode("velocities/airspeed-kt", 0);
+		me.rainingN = props.globals.initNode("sim/model/rain/raining", 0);
+		me.flowN = props.globals.initNode("sim/model/rain/flow", 0);
+		me.precipitation_levelN = props.globals.initNode("environment/params/precipitation-level-ft", 0);
+
+		props.globals.initNode("sim/model/rain/flow-threshold-kt", 15);
+		props.globals.initNode("gear/canopy/position-norm", 0);
+
+		setlistener("sim/rendering/precipitation-gui-enable", func(n) me.enabled = n.getValue(), 1);
+		setlistener("sim/model/rain/flow-threshold-kt", func(n) me.threshold = n.getValue(), 1);
+		setlistener("environment/metar/rain-norm", func(n) me.rain = n.getValue(), 1);
+		setlistener("sim/current-view/internal", func(n) me.internal = n.getValue(), 1);
+		setlistener("gear/canopy/position-norm", func(n) me.canopy = n.getValue(), 1, 0);
+	},
+	update: func {
+		var altitude = me.altitudeN.getValue();
+		var precipitation_level = me.precipitation_levelN.getValue();
+		var ias = me.iasN.getValue();
+		var elapsed_time = me.elapsed_timeN.getValue();
+		var dt = me.dtN.getValue();
+
+		if (me.enabled and altitude < precipitation_level and me.canopy < 0.001) {
+			me.flowN.setDoubleValue(ias < me.threshold ? 0 : elapsed_time * 0.5 + ias * NM2M * dt / 3600);
+			me.rainingN.setDoubleValue(me.rain);
+			me.enableN.setBoolValue(0);
+		} else {
+			me.flowN.setDoubleValue(0);
+			me.rainingN.setDoubleValue(0);
+			me.enableN.setBoolValue(1);
+			
+		}
+	},
+};
+
+
+
 # teleport
 # =============================================================================
 # Usage:  aircraft.teleport(lat:48.3, lon:32.4, alt:5000);
@@ -930,6 +983,7 @@ var HUD = {
 # ==============================================================================
 #
 _setlistener("/sim/signals/nasal-dir-initialized", func {
+	props.globals.initNode("/sim/time/elapsed-sec", 0);
 	props.globals.initNode("/sim/time/delta-sec", 0);
 	props.globals.initNode("/sim/time/delta-realtime-sec", 0.00000001);
 
@@ -949,4 +1003,6 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 		data._loop_ = func nil;
 	}
 });
+
+
 

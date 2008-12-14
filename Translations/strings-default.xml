@@ -90,11 +90,11 @@
  <enable-mouse-pointer-desc n="1">(i.e. for full screen Voodoo based cards)</enable-mouse-pointer-desc>
  <disable-random-objects-desc>Exclude random scenery objects</disable-random-objects-desc>
  <enable-random-objects-desc>Include random scenery objects</enable-random-objects-desc>
- <disable-real-weather-fetch-desc>Disbale METAR based real weather fetching</disable-real-weather-fetch-desc>
+ <disable-real-weather-fetch-desc>Disable METAR based real weather fetching</disable-real-weather-fetch-desc>
  <enable-real-weather-fetch-desc>Enable METAR based real weather fetching (this requires an open internet connection)</enable-real-weather-fetch-desc>
  <random-objects-desc>(buildings, etc.)</random-objects-desc>
- <disable-ai-models-desc>Disable the artifical traffic subsystem.</disable-ai-models-desc>
- <enable-ai-models-desc>Enable the artifical traffic.</enable-ai-models-desc>
+ <disable-ai-models-desc>Disable the artificial traffic subsystem.</disable-ai-models-desc>
+ <enable-ai-models-desc>Enable the artificial traffic.</enable-ai-models-desc>
  <ai-scenario>Add and enable a new scenario. Multiple options are allowed.</ai-scenario>
  <disable-freeze-desc>Start in a running state</disable-freeze-desc>
  <enable-freeze-desc>Start in a frozen state</enable-freeze-desc>
@@ -227,7 +227,7 @@
  <!-- Network options -->
  <network-options>Network Options</network-options>
  <httpd-desc>Enable http server on the specified port</httpd-desc>
- <proxy-desc>Specify which proxy server (and port) to use. The username and password are optional and should be MD5 encoded already. This option is only useful when used in conjucntion with the real-weather-fetch option.</proxy-desc>
+ <proxy-desc>Specify which proxy server (and port) to use. The username and password are optional and should be MD5 encoded already. This option is only useful when used in conjunction with the real-weather-fetch option.</proxy-desc>
  <telnet-desc>Enable telnet server on the specified port</telnet-desc>
  <jpg-httpd-desc>Enable screen shot http server on the specified port</jpg-httpd-desc>
 
@@ -272,6 +272,6 @@
  <debugging-options>Debugging Options</debugging-options>
  <trace-read-desc>Trace the reads for a property;</trace-read-desc>
  <trace-write-desc>Trace the writes for a property;</trace-write-desc>
- <log-level-desc>Specify which loggin level to use</log-level-desc>
+ <log-level-desc>Specify which logging level to use</log-level-desc>
 
 </PropertyList>

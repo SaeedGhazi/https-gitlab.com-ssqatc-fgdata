@@ -6,16 +6,14 @@ var R2D = 180 / math.pi;               # radian to degree
 
 var FT2M = 0.3048;                     # feet to meter
 var M2FT = 1 / FT2M;
+var NM2M = 1852;                       # nautical miles to meter
+var M2NM = 1 / NM2M;
 
 var LB2KG = 0.45359237;                # pounds to kilogram
 var KG2LB = 1 / LB2KG;
 
 var GAL2L = 3.785411784;               # US gallons to liter
 var L2GAL = 1 / GAL2L;
-
-var NM2M = 1852;                       # nautical miles to meter
-var M2NM = 1 / NM2M;
-
 
 ##
 # Returns true if the first object is an instance of the second

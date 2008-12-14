@@ -123,15 +123,17 @@ Node.getValues = func {
 
 ##
 # Initializes property if it's still undefined.  First argument
-# is a property name/path.  Second argument is the default value.
-# The third, optional argument is a property type (one of
-# "STRING", "DOUBLE", "INT", or "BOOL").  If it is omitted, then
-# "DOUBLE" is used for numbers, and STRING for everything else.
-# Returns the property as props.Node.  The fourth optional argument
-# enforces a type if non-zero.
+# is a property name/path. It can also be nil or an empty string,
+# in which case the node itself gets initialized, rather than one
+# of its children.  Second argument is the default value. The third,
+# optional argument is a property type (one of "STRING", "DOUBLE",
+# "INT", or "BOOL").  If it is omitted, then "DOUBLE" is used for
+# numbers, and STRING for everything else.  Returns the property
+# as props.Node.  The fourth optional argument enforces a type if
+# non-zero.
 #
-Node.initNode = func(path = "", value = 0, type = nil, force = 0) {
-    var prop = me.getNode(path, 1);
+Node.initNode = func(path = nil, value = 0, type = nil, force = 0) {
+    var prop = me.getNode(path or "", 1);
     if(prop.getType() != "NONE") value = prop.getValue();
     if(force) prop.clearValue();
     if(type == nil) prop.setValue(value);

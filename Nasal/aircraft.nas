@@ -753,7 +753,7 @@ var autotrim = {
 
 
 
-# tyre smoke
+# tyresmoke
 # =============================================================================
 # Provides a property which can be used to contol particles used to simulate tyre
 # smoke on landing. Weight on wheels, vertical speed, ground speed, ground friction
@@ -812,11 +812,6 @@ var tyresmoke = {
 		var diff = math.abs(rollspeed - filtered_rollspeed);
 		var diff_norm = diff > 0 ? diff / rollspeed : 0;
 
-#		print("wow ", wow, " vert_speed ", vert_speed, " diff_norm ",
-#			diff_norm, " friction_factor ", friction_factor,
-#			" groundspeed ", groundspeed,
-#			" rain ", rain);
-
 		if (wow and vert_speed < -0.05 and diff_norm > 0.05
 				and friction_factor > 0.7 and groundspeed > 50
 				and rain < 0.20) {
@@ -840,7 +835,7 @@ var tyresmoke = {
 
 
 
-# rain utility
+# rain
 # =============================================================================
 # Provides a property which can be used to control rain. Can be used to turn
 # off rain in internal views, and or used with a texture on canopies etc.
@@ -875,20 +870,19 @@ var rain = {
 	},
 	update: func {
 		var altitude = me.altitudeN.getValue();
-		var precipitation_level = me.precipitation_levelN.getValue();
+		var precip_level = me.precipitation_levelN.getValue();
 		var ias = me.iasN.getValue();
-		var elapsed_time = me.elapsed_timeN.getValue();
+		var elapsed = me.elapsed_timeN.getValue();
 		var dt = me.dtN.getValue();
 
-		if (me.enabled and altitude < precipitation_level and me.canopy < 0.001) {
-			me.flowN.setDoubleValue(ias < me.threshold ? 0 : elapsed_time * 0.5 + ias * NM2M * dt / 3600);
+		if (me.enabled and me.internal and altitude < precip_level and me.canopy < 0.001) {
+			me.flowN.setDoubleValue(ias < me.threshold ? 0 : elapsed * 0.5 + ias * NM2M * dt / 3600);
 			me.rainingN.setDoubleValue(me.rain);
 			me.enableN.setBoolValue(0);
 		} else {
 			me.flowN.setDoubleValue(0);
 			me.rainingN.setDoubleValue(0);
 			me.enableN.setBoolValue(1);
-			
 		}
 	},
 };

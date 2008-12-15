@@ -872,14 +872,15 @@ var rain = {
 		setlistener("sim/current-view/internal", func(n) me.internal = n.getValue(), 1);
 	},
 	update: func {
-		var ias = me.iasN.getValue();
 		var altitude = me.altitudeN.getValue();
 		var precip_level = me.precip_levelN.getValue();
-		var elapsed = me.elapsed_timeN.getValue();
-		var dt = me.dtN.getValue();
 
 		if (me.enabled and me.internal and altitude < precip_level and me.canopy < 0.001) {
-			me.flowN.setDoubleValue(ias < me.threshold ? 0 : elapsed * 0.5 + ias * NM2M * dt / 3600);
+			var time = me.elapsed_timeN.getValue();
+			var ias = me.iasN.getValue();
+			var dt = me.dtN.getValue();
+
+			me.flowN.setDoubleValue(ias < me.threshold ? 0 : time * 0.5 + ias * NM2M * dt / 3600);
 			me.rainingN.setDoubleValue(me.rain);
 			me.enableN.setBoolValue(0);
 		} else {

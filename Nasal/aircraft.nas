@@ -839,9 +839,12 @@ var tyresmoke = {
 # =============================================================================
 # Provides a property which can be used to control rain. Can be used to turn
 # off rain in internal views, and or used with a texture on canopies etc.
-# The output is co-ordinated with system precipitation.
+# The output is co-ordinated with system precipitation:
 #
-# see Hawker Seahawk for an example.
+#	/sim/model/rain/raining-norm  rain intensity
+#	/sim/model/rain/flow-mps      drop flow speed [m/s]
+#
+# See Hawker Seahawk for an example.
 #
 # SYNOPSIS:
 #	aircraft.rain.init();
@@ -853,25 +856,25 @@ var rain = {
 		me.dtN = props.globals.getNode("sim/time/delta-sec");
 
 		me.enableN = props.globals.initNode("sim/rendering/precipitation-aircraft-enable", 0, "BOOL");
+		me.precip_levelN = props.globals.initNode("environment/params/precipitation-level-ft", 0);
 		me.altitudeN = props.globals.initNode("position/altitude-ft", 0);
 		me.iasN = props.globals.initNode("velocities/airspeed-kt", 0);
-		me.rainingN = props.globals.initNode("sim/model/rain/raining", 0);
-		me.flowN = props.globals.initNode("sim/model/rain/flow", 0);
-		me.precipitation_levelN = props.globals.initNode("environment/params/precipitation-level-ft", 0);
+		me.rainingN = props.globals.initNode("sim/model/rain/raining-norm", 0);
+		me.flowN = props.globals.initNode("sim/model/rain/flow-mps", 0);
 
-		props.globals.initNode("sim/model/rain/flow-threshold-kt", 15);
-		props.globals.initNode("gear/canopy/position-norm", 0);
+		var canopyN = props.globals.initNode("gear/canopy/position-norm", 0);
+		var thresholdN = props.globals.initNode("sim/model/rain/flow-threshold-kt", 15);
 
+		setlistener(canopyN, func(n) me.canopy = n.getValue(), 1, 0);
+		setlistener(thresholdN, func(n) me.threshold = n.getValue(), 1);
 		setlistener("sim/rendering/precipitation-gui-enable", func(n) me.enabled = n.getValue(), 1);
-		setlistener("sim/model/rain/flow-threshold-kt", func(n) me.threshold = n.getValue(), 1);
 		setlistener("environment/metar/rain-norm", func(n) me.rain = n.getValue(), 1);
 		setlistener("sim/current-view/internal", func(n) me.internal = n.getValue(), 1);
-		setlistener("gear/canopy/position-norm", func(n) me.canopy = n.getValue(), 1, 0);
 	},
 	update: func {
-		var altitude = me.altitudeN.getValue();
-		var precip_level = me.precipitation_levelN.getValue();
 		var ias = me.iasN.getValue();
+		var altitude = me.altitudeN.getValue();
+		var precip_level = me.precip_levelN.getValue();
 		var elapsed = me.elapsed_timeN.getValue();
 		var dt = me.dtN.getValue();
 

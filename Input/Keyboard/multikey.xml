@@ -226,7 +226,7 @@
 				<desc>Weather Scenario</desc>
 				<key n="115">
 					<name>f</name>
-					<desc>Weather Scenerio = Fair weather</desc>
+					<desc>Weather Scenario = Fair weather</desc>
 					<binding>
 						<command>nasal</command>
 						<script>
@@ -238,7 +238,7 @@
 
 				<key n="109">
 					<name>m</name>
-					<desc>Weather Scenerio = METAR</desc>
+					<desc>Weather Scenario = METAR</desc>
 					<binding>
 						<command>nasal</command>
 						<script>
@@ -250,7 +250,7 @@
 
 				<key n="110">
 					<name>n</name>
-					<desc>Weather Scenerio = none</desc>
+					<desc>Weather Scenario = none</desc>
 					<binding>
 						<command>nasal</command>
 						<script>
@@ -262,7 +262,7 @@
 
 				<key n="116">
 					<name>t</name>
-					<desc>Weather Scenerio = Thunderstorm</desc>
+					<desc>Weather Scenario = Thunderstorm</desc>
 					<binding>
 						<command>nasal</command>
 						<script>

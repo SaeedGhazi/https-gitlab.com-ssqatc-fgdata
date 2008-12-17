@@ -98,6 +98,10 @@ var wingSweep = func(step) {
     setprop("/controls/flight/wing-sweep", val > 1 ? 1 : val < 0 ? 0 : val);
 }
 
+var wingsDown = func(v) {
+    if(v) setprop("/controls/flight/wing-fold", v > 0);
+}
+
 var stepSpoilers = func(step) {
     if(props.globals.getNode("/sim/spoilers") != nil) {
         stepProps("/controls/flight/spoilers", "/sim/spoilers", step);

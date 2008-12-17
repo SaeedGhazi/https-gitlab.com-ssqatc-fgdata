@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<PropertyList> 
+<PropertyList>
  <!-- map keys for catapult launch -->
- <key n="67"> 
+ <key n="67">
    <name>C</name>
    <desc>Catapult Launch Command.</desc>
    <binding>
@@ -17,8 +17,9 @@
      </binding>
    </mod-up>
  </key>
+
  <!-- map keys for launch-bar -->
- <key n="76"> 
+ <key n="76">
    <name>L</name>
    <desc>Launch-bar engage.</desc>
    <binding>
@@ -34,42 +35,56 @@
      </binding>
    </mod-up>
  </key>
+
  <!-- map keys for arrester hook -->
- <key n="79"> 
+ <key n="79">
    <name>O</name>
    <desc>Hook down.</desc>
-   <binding> 
+   <binding>
      <command>property-assign</command>
      <property>controls/gear/tailhook</property>
      <value type="double">1.0</value>
    </binding>
  </key>
- <key n="111"> 
+
+ <key n="111">
    <name>o</name>
    <desc>Hook Up.</desc>
-   <binding> 
+   <binding>
      <command>property-assign</command>
      <property>controls/gear/tailhook</property>
      <value type="double">0.0</value>
    </binding>
  </key>
+
  <!-- map keys for wing fold -->
- <key n="70"> 
+ <key n="70">
    <name>F</name>
    <desc>Wing Fold Down.</desc>
-   <binding> 
-     <command>property-assign</command>
-     <property>controls/flight/wing-fold</property>
-     <value type="double">1.0</value>
+   <binding>
+     <command>nasal</command>
+     <script>controls.wingsDown(1)</script>
    </binding>
+   <mod-up>
+     <binding>
+       <command>nasal</command>
+       <script>controls.wingsDown(0)</script>
+     </binding>
+   </mod-up>
  </key>
- <key n="102"> 
+
+ <key n="102">
    <name>f</name>
    <desc>Wing Fold Up.</desc>
-   <binding> 
-     <command>property-assign</command>
-     <property>controls/flight/wing-fold</property>
-     <value type="double">0.0</value>
-    </binding>
+   <binding>
+     <command>nasal</command>
+     <script>controls.wingsDown(-1)</script>
+   </binding>
+   <mod-up>
+     <binding>
+       <command>nasal</command>
+       <script>controls.wingsDown(0)</script>
+     </binding>
+   </mod-up>
  </key>
 </PropertyList>

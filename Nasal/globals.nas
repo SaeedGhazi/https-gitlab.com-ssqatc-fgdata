@@ -9,6 +9,9 @@ var M2FT = 1 / FT2M;
 var NM2M = 1852;                       # nautical miles to meter
 var M2NM = 1 / NM2M;
 
+var KT2MPS = 0.5144444444;             # knots to m/s
+var MPS2KT = 1 / KT2MPS;
+
 var LB2KG = 0.45359237;                # pounds to kilogram
 var KG2LB = 1 / LB2KG;
 

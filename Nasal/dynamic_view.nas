@@ -376,7 +376,7 @@ var loop_id = 0;
 
 # Initialization.
 #
-_setlistener("/sim/signals/nasal-dir-initialized", func {
+_setlistener("/sim/signals/fdm-initialized", func {
 	# disable menu entry and return for inappropriate FDMs  (see Main/fg_init.cxx)
 	var fdms = {
 		acms:0, ada:0, balloon:0, external:0,
@@ -385,7 +385,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	};
 	var fdm = getprop("/sim/flight-model");
 	if (!contains(fdms, fdm) or !fdms[fdm])
-		return gui.menuEnable("dynamic-view", 0);
+		return;
 
 	enabled = props.globals.getNode("/sim").getChildren("view");
 	forindex (var i; enabled)

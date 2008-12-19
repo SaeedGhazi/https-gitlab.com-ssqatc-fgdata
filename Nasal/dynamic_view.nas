@@ -376,7 +376,7 @@ var loop_id = 0;
 
 # Initialization.
 #
-_setlistener("/sim/signals/fdm-initialized", func {
+_setlistener("/sim/signals/nasal-dir-initialized", func {
 	# disable menu entry and return for inappropriate FDMs  (see Main/fg_init.cxx)
 	var fdms = {
 		acms:0, ada:0, balloon:0, external:0,

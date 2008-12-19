@@ -275,6 +275,12 @@
     <command>dialog-apply</command>
    </binding>
    <binding>
+       <command>nasal</command>
+       <script>
+           setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers")+1);
+       </script>
+   </binding>
+   <binding>
     <command>dialog-close</command>
    </binding>
   </button>
@@ -287,6 +293,13 @@
    <binding>
     <command>dialog-apply</command>
    </binding>
+   <binding>
+       <command>nasal</command>
+       <script>
+           setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers")+1);
+       </script>
+   </binding>
+   
   </button>
 
   <button>

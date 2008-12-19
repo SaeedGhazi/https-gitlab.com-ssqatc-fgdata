@@ -54,13 +54,6 @@ var ERAD = 6378138.12;		# Earth radius (m)
 
 
 var floor = func(v) { v < 0.0 ? -int(-v) - 1 : int(v) }
-var sin = nil;
-var cos = nil;
-var atan2 = nil;
-var sqrt = nil;
-var asin = nil;
-var acos = nil;
-var mod = nil;
 
 
 # class that maintains one set of geographical coordinates
@@ -145,11 +138,13 @@ var Coord = {
 		me._pupdate();
 		course *= D2R;
 		dist /= ERAD;
-		me._lat = asin(sin(me._lat) * cos(dist) + cos(me._lat) * sin(dist) * cos(course));
+		me._lat = math.asin(math.sin(me._lat) * math.cos(dist)
+				+ math.cos(me._lat) * math.sin(dist) * math.cos(course));
 
-		if (cos(me._lat) > EPSILON)
-			me._lon = math.pi - mod(math.pi - me._lon - asin(sin(course) * sin(dist)
-					/ cos(me._lat)), 2 * math.pi);
+		if (math.cos(me._lat) > EPSILON)
+			me._lon = math.pi - math.mod(math.pi - me._lon
+					- math.asin(math.sin(course) * math.sin(dist)
+					/ math.cos(me._lat)), 2 * math.pi);
 
 		me._cdirty = 1;
 		me;
@@ -162,8 +157,10 @@ var Coord = {
 			return 0;
 
 		var dlon = dest._lon - me._lon;
-		return mod(atan2(sin(dlon) * cos(dest._lat), cos(me._lat) * sin(dest._lat)
-				- sin(me._lat) * cos(dest._lat) * cos(dlon)), 2 * math.pi) * R2D;
+		return math.mod(math.atan2(math.sin(dlon) * math.cos(dest._lat),
+				math.cos(me._lat) * math.sin(dest._lat)
+				- math.sin(me._lat) * math.cos(dest._lat)
+				* math.cos(dlon)), 2 * math.pi) * R2D;
 	},
 	# arc distance on an earth sphere; doesn't consider altitude
 	distance_to : func(dest) {
@@ -173,9 +170,10 @@ var Coord = {
 		if (me._lat == dest._lat and me._lon == dest._lon)
 			return 0;
 
-		var a = sin((me._lat - dest._lat) * 0.5);
-		var o = sin((me._lon - dest._lon) * 0.5);
-		return 2.0 * ERAD * asin(sqrt(a * a + cos(me._lat) * cos(dest._lat) * o * o));
+		var a = math.sin((me._lat - dest._lat) * 0.5);
+		var o = math.sin((me._lon - dest._lon) * 0.5);
+		return 2.0 * ERAD * math.asin(math.sqrt(a * a + math.cos(me._lat)
+				* math.cos(dest._lat) * o * o));
 	},
 	direct_distance_to : func(dest) {
 		me._cupdate();
@@ -183,7 +181,7 @@ var Coord = {
 		var dx = dest._x - me._x;
 		var dy = dest._y - me._y;
 		var dz = dest._z - me._z;
-		return sqrt(dx * dx + dy * dy + dz * dz);
+		return math.sqrt(dx * dx + dy * dy + dz * dz);
 	},
 	is_defined : func {
 		return !(me._cdirty and me._pdirty);
@@ -306,27 +304,12 @@ var elevation = func(lat, lon) {
 }
 
 
-var aircraft_lat = nil;
-var aircraft_lon = nil;
-var aircraft_alt = nil;
-
-var aircraft_position = func {
-	var lat = aircraft_lat.getValue();
-	var lon = aircraft_lon.getValue();
-	var alt = aircraft_alt.getValue() * FT2M;
-	return Coord.new().set_latlon(lat, lon, alt);
-}
-
-
-var click_lat = nil;
-var click_lon = nil;
-var click_elev = nil;
 var click_coord = Coord.new();
 
 _setlistener("/sim/signals/click", func {
-	var lat = click_lat.getValue();
-	var lon = click_lon.getValue();
-	var elev = click_elev.getValue();
+	var lat = getprop("/sim/input/click/latitude-deg");
+	var lon = getprop("/sim/input/click/longitude-deg");
+	var elev = getprop("/sim/input/click/elevation-m");
 	click_coord.set_latlon(lat, lon, elev);
 });
 
@@ -335,22 +318,19 @@ var click_position = func {
 }
 
 
+var aircraft_position = func {
+	var lat = getprop("/position/latitude-deg");
+	var lon = getprop("/position/longitude-deg");
+	var alt = getprop("/position/altitude-ft") * FT2M;
+	return Coord.new().set_latlon(lat, lon, alt);
+}
 
-_setlistener("/sim/signals/nasal-dir-initialized", func {
-	sin = math.sin;
-	cos = math.cos;
-	atan2 = math.atan2;
-	sqrt = math.sqrt;
-	asin = math.asin;
-	acos = math.acos;
-	mod = math.mod;
 
-	aircraft_lat = props.globals.getNode("/position/latitude-deg", 1);
-	aircraft_lon = props.globals.getNode("/position/longitude-deg", 1);
-	aircraft_alt = props.globals.getNode("/position/altitude-ft", 1);
+var viewer_position = func {
+	var x = getprop("/sim/current-view/viewer-x-m");
+	var y = getprop("/sim/current-view/viewer-y-m");
+	var z = getprop("/sim/current-view/viewer-z-m");
+	return Coord.new().set_xyz(x, y, z);
+}
 
-	click_lat = props.globals.getNode("/sim/input/click/latitude-deg", 1);
-	click_lon = props.globals.getNode("/sim/input/click/longitude-deg", 1);
-	click_elev = props.globals.getNode("/sim/input/click/elevation-m", 1);
-});
 

@@ -1039,7 +1039,6 @@
       <grid-y-rand type="double">500.0</grid-y-rand>
       <grid-z-rand type="double">100.0</grid-z-rand>
     </st>
--->    
     <sc>
       <cloud>
         <name>sc</name>
@@ -1062,6 +1061,7 @@
       <grid-y-rand type="double">50.0</grid-y-rand>
       <grid-z-rand type="double">15.0</grid-z-rand>
     </ns>
+-->    
   </layers>
 </PropertyList>
 <!-- end of cloudlayers.xml -->

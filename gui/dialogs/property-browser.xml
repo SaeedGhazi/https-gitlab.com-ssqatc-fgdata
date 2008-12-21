@@ -175,8 +175,7 @@
 			var clone = func(startdir) {
 				var base = props.globals.getNode("/sim/gui/dialogs", 1);
 				var name = "property-browser-";
-				var i = nil;
-				for (i = 1; 1; i += 1)
+				for (var i = 1; 1; i += 1)
 					if (base.getNode(name ~ i, 0) == nil)
 						break;
 				base = base.getNode(name ~ i, 1).getPath();

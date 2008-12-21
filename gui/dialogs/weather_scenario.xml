@@ -28,15 +28,6 @@
       <value>Thunderstorm</value>
       <value>METAR</value>
       <value>none</value>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-      <binding>
-        <command>nasal</command>
-        <script>
-          setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers")+1);
-        </script>
-      </binding>
     </combo>
   </group>
 
@@ -58,15 +49,30 @@
 
   <group>
     <layout>hbox</layout>
+
     <empty><stretch>true</stretch></empty>
 
     <button>
+        <legend>OK</legend>
+        <default>true</default>
+        <binding>
+            <command>dialog-apply</command>
+        </binding>
+        <binding>
+            <command>dialog-close</command>
+        </binding>
+    </button>
+
+    <button>
+        <legend>Apply</legend>
+        <binding>
+            <command>dialog-apply</command>
+        </binding>
+    </button>
+
+    <button>
       <legend>Close</legend>
-      <default>true</default>
       <key>Esc</key>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
       <binding>
         <command>dialog-close</command>
       </binding>

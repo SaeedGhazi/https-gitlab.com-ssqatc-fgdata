@@ -116,7 +116,7 @@
 			var no_selection = "[none]";
 
 			var update = func(w) {
-				self.setValues({"dialog-name": dlgname, "object-name": w});
+				self.setValues({ "dialog-name": dlgname, "object-name": w });
 				fgcommand("dialog-update", self);
 			}
 
@@ -136,7 +136,7 @@
 					node = props.globals;
 
 				setprop("/sim/gui/dialogs/property-browser/selected", node.getPath());
-				if (size(node.getChildren())) {
+				if (node.getAttribute("children")) {
 					dir = node.getPath();
 					title.setValue(node.getPath() == "" ? root_title : lst);
 					node = nil;
@@ -153,7 +153,7 @@
 					if (type == "BOOL") {
 						value = node.getBoolValue() ? "true" : "false";
 						title.setValue("Hint: Ctrl-click toggles bool values");
-						settimer(func {title.setValue(dir) }, 5, 1);
+						settimer(func title.setValue(dir), 5, 1);
 					} elsif (type == "STRING") {
 						value = node.getValue();
 					} elsif (type == "NONE") {
@@ -182,12 +182,12 @@
 				base = base.getNode(name ~ i, 1).getPath();
 				setprop(base ~ "/last", startdir);
 				self.setValues({
-						"name": name ~ i,
-						"dialog-name": name ~ i,
-						"group[0]/text/property": base ~ "/title",
-						"property-list/property": base ~ "/list",
-						"group[1]/text/property": base ~ "/label",
-						"group[1]/input/property": base ~ "/input",
+					"name": name ~ i,
+					"dialog-name": name ~ i,
+					"group[0]/text/property": base ~ "/title",
+					"property-list/property": base ~ "/list",
+					"group[1]/text/property": base ~ "/label",
+					"group[1]/input/property": base ~ "/input",
 				});
 				fgcommand("dialog-new", self);
 				fgcommand("dialog-show", self);

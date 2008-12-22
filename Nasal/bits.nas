@@ -29,9 +29,7 @@ var switch = func(n, b, v) n - (test(n, b) - !!v) * bit[b];
 # returns number <n> as bit string, zero-padded to <len> digits:
 #   bits.string(6)     ->       "110"
 #   bits.string(6, 8)  ->  "00000110"
-var string = func(n, len = 0) {
-	if (!n)
-		return '0';
+var string = func(n, len = 1) {
 	var s = "";
 	while (n) {
 		var v = int(n / 2);

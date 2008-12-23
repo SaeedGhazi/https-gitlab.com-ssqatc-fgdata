@@ -369,6 +369,11 @@ var log = nil;
 var property_display = nil;
 var controls = nil;
 
+
+# Shift-click       in the property browser adds the selected property to the property display
+# Shift-Alt-click   adds all children of the selected property to the property display
+# Shift-Ctrl-click  removes all properties from the display
+#
 _setlistener("/sim/signals/nasal-dir-initialized", func {
 	property_display = display.new(5, -25);
 	listener.display = setlistener("/sim/gui/dialogs/property-browser/selected", func(n) {
@@ -404,6 +409,10 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 });
 
 
+
+# --prop:display=/sim/frame-rate    ... adds this property to the property display
+# --prop:display=/position/         ... adds all properties under /position/  (ends with slash!)
+#
 _setlistener("/sim/signals/fdm-initialized", func {
 	foreach (var n; props.globals.getChildren("display")) {
 		var prop = n.getValue();

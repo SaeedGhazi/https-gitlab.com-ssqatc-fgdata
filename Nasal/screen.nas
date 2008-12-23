@@ -410,16 +410,20 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
 
 
-# --prop:display=/sim/frame-rate    ... adds this property to the property display
-# --prop:display=/position/         ... adds all properties under /position/  (ends with slash!)
+# --prop:display=sim/frame-rate         ... adds this property to the property display
+# --prop:display=position/              ... adds all properties under /position/  (ends with slash!)
+# --prop:display=position/,orientation/ ... separate multiple properties with comma
 #
 _setlistener("/sim/signals/fdm-initialized", func {
 	foreach (var n; props.globals.getChildren("display")) {
-		var prop = n.getValue();
-		if (size(prop) and prop[-1] == `/`)
-			property_display.add(props.globals.getNode(prop, 1).getChildren());
-		else
-			property_display.add(prop);
+		foreach (var p; split(",", n.getValue())) {
+			if (!size(p))
+				continue;
+			if (p[-1] == `/`)
+				property_display.add(props.globals.getNode(p, 1).getChildren());
+			else
+				property_display.add(p);
+		}
 	}
 	props.globals.removeChildren("display");
 });

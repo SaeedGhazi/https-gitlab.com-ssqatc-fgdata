@@ -38,6 +38,9 @@
 		<pref-height>200</pref-height>
 		<slider>20</slider>
 		<editable>true</editable>
+		<font>
+			<name>FIXED_8x13</name>
+		</font>
 		<property>/sim/gui/dialogs/nasal-console/edit</property>
 		<binding>
 			<command>dialog-apply</command>

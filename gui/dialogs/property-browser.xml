@@ -3,6 +3,7 @@
 <PropertyList>
 	<name>property-browser</name>
 	<layout>vbox</layout>
+	<resizable>true</resizable>
 	<default-padding>3</default-padding>
 
 	<group>
@@ -53,8 +54,10 @@
 
 	<property-list>
 		<name>property-list</name>
-		<pref-width>450</pref-width>
 		<pref-height>250</pref-height>
+		<halign>fill</halign>
+		<valign>fill</valign>
+		<stretch>true</stretch>
 		<property>/sim/gui/dialogs/property-browser/list</property>
 		<binding>
 			<command>dialog-apply</command>
@@ -75,13 +78,17 @@
 		<text>
 			<label>--</label>
 			<live>true</live>
+			<halign>fill</halign>
+			<stretch>true</stretch>
 			<property>/sim/gui/dialogs/property-browser/label</property>
-			<pref-width>190</pref-width>
+			<pref-width>170</pref-width>
 		</text>
 
 		<input>
 			<name>input</name>
-			<pref-width>190</pref-width>
+			<halign>fill</halign>
+			<stretch>true</stretch>
+			<pref-width>170</pref-width>
 			<property>/sim/gui/dialogs/property-browser/input</property>
 		</input>
 

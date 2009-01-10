@@ -11,6 +11,7 @@
 	<name>file-select</name>
 	<dialog-name>file-select</dialog-name>
 	<layout>vbox</layout>
+	<resizable>true</resizable>
 	<pref-width>450</pref-width>
 
 	<group>
@@ -45,6 +46,7 @@
 	<input>
 		<name>dir-input</name>
 		<pref-width>442</pref-width>
+		<halign>fill</halign>
 		<property>/sim/gui/dialogs/file-select/directory</property>
 		<live>1</live>
 		<binding>
@@ -60,7 +62,9 @@
 	<list>
 		<name>list</name>
 		<halign>fill</halign>
-		<pref-height>350</pref-height>
+		<valign>fill</valign>
+		<stretch>true</stretch>
+		<pref-height>300</pref-height>
 		<property>/sim/gui/dialogs/file-select/selection</property>
 		<binding>
 			<command>dialog-apply</command>
@@ -78,6 +82,8 @@
 		<input>
 			<name>file-input</name>
 			<pref-width>230</pref-width>
+			<halign>fill</halign>
+			<stretch>true</stretch>
 			<property>/sim/gui/dialogs/file-select/selection</property>
 			<live>1</live>
 			<binding>

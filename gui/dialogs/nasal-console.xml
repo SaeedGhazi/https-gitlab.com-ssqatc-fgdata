@@ -4,7 +4,9 @@
 	<x>-20</x>
 	<y>-20</y>
 	<name>nasal-console</name>
+	<dialog-name>nasal-console</dialog-name>
 	<layout>vbox</layout>
+	<resizable>true</resizable>
 
 	<group>
 		<layout>hbox</layout>
@@ -34,6 +36,8 @@
 	<textbox>
 		<name>editfield</name>
 		<halign>fill</halign>
+		<valign>fill</valign>
+		<stretch>true</stretch>
 		<pref-width>450</pref-width>
 		<pref-height>200</pref-height>
 		<slider>20</slider>
@@ -89,7 +93,8 @@
 
 		<button>
 			<legend>?</legend>
-			<pref-width>30</pref-width>
+			<pref-width>20</pref-width>
+			<pref-height>20</pref-height>
 			<binding>
 				<command>nasal</command>
 				<script>help()</script>
@@ -147,12 +152,20 @@
 
 	<nasal>
 		<open>
+			var self = cmdarg();
 			var dlg = props.globals.getNode("/sim/gui/dialogs/nasal-console", 1);
 			var kbdctrl = props.globals.getNode("/devices/status/keyboard/ctrl", 1);
-			var printf = func { print(call(sprintf, arg)) }
 			var edit = dlg.getNode("edit", 1);
 			if (!contains(globals, "__nasal_console"))
 				globals["__nasal_console"] = {};
+
+			var maxwidth = getprop("/sim/startup/xsize") - 50;
+			var maxheight = getprop("/sim/startup/ysize") - 100;
+			var width = dlg.initNode("width", 450, "INT");
+			var height = dlg.initNode("height", 200, "INT");
+			width.setAttribute("userarchive", 1);
+			height.setAttribute("userarchive", 1);
+			self.getNode("textbox").setValues({ "pref-width": width.getValue(), "pref-height": height.getValue() });
 
 			var locals = globals["__nasal_console"];
 			var numtabs = size(dlg.getChildren("code"));
@@ -190,7 +203,7 @@
 				debug.printerror(err);
 			}
 
-			var tabs = cmdarg().getNode("group[1]");
+			var tabs = self.getNode("group[1]");
 			var select = func(which, init = 0) {
 				if (active) { # false in help mode
 					dlg.getNode("active").setIntValue(active);

@@ -784,7 +784,7 @@ var print_data = func {
 
 
 var export_data = func {
-	var path = getprop("/sim/fg-home") ~ "/ufo-model-export.xml";
+	var path = getprop("/sim/fg-home") ~ "/Export/ufo-model-export.xml";
 	var args = props.Node.new({ filename : path });
 	props.copy(modelmgr.get_data(), args.getNode("data/models", 1));
 	fgcommand("savexml", args);
@@ -793,7 +793,7 @@ var export_data = func {
 
 
 var export_flightplan = func {
-	var path = getprop("/sim/fg-home") ~ "/ufo-flightplan-export.xml";
+	var path = getprop("/sim/fg-home") ~ "/Export/ufo-flightplan-export.xml";
 	var args = props.Node.new({ filename : path });
 	var export = args.getNode("data/flightplan", 1);
 	var waypoints = modelmgr.get_data().getChildren("model");

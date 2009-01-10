@@ -3,6 +3,7 @@
 <PropertyList>
   <name>airports</name>
   <layout>vbox</layout>
+  <resizable>true</resizable>
 
   <text>
     <label>Select an Airport</label>
@@ -44,6 +45,9 @@
     <name>airport-list</name>
     <pref-width>440</pref-width>
     <pref-height>360</pref-height>
+    <halign>fill</halign>
+    <valign>fill</valign>
+    <stretch>true</stretch>
     <property>/sim/gui/dialogs/airports/list</property>
     <binding>
       <command>dialog-apply</command>
@@ -67,6 +71,8 @@
     <input>
       <name>input</name>
       <pref-width>280</pref-width>
+      <halign>fill</halign>
+      <stretch>true</stretch>
       <property>/sim/gui/dialogs/airports/list</property>
       <binding>
         <command>dialog-apply</command>

@@ -4,6 +4,7 @@
   <name>chat-full</name>
   <modal>false</modal>
   <layout>vbox</layout>
+  <resizable>true</resizable>
 
   <text>
     <label>Multiplayer Chat</label>
@@ -13,6 +14,8 @@
 
   <textbox>
     <halign>fill</halign>
+    <valign>fill</valign>
+    <stretch>true</stretch>
     <pref-width>550</pref-width>
     <pref-height>120</pref-height>
     <slider>20</slider>
@@ -33,6 +36,7 @@
      <name>compose</name>
      <stretch>true</stretch>
      <halign>fill</halign>
+     <stretch>true</stretch>
      <length>50</length>
      <pref-width>500</pref-width>
      <property>/sim/multiplay/chat-compose</property>

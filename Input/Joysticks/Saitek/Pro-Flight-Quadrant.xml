@@ -6,6 +6,8 @@
 -->
 <PropertyList>
  <name>Saitek Saitek Pro Flight Quadrant</name>
+ <name>Saitek Pro Flight Quadrant</name>
+ <name>Saitek Pro Flight Throttle Quadrant</name>
  <axis n="0">
   <desc>Throttle</desc>
   <binding>

@@ -1011,6 +1011,7 @@ showHelpDialog = func {
 
     # scrollable text area
     if (node.getNode("text") != nil) {
+        dialog[name].set("resizable", 1);
         dialog[name].addChild("empty").set("pref-height", 10);
 
         width = [640, 800, 1152][col];
@@ -1021,6 +1022,8 @@ showHelpDialog = func {
 
         w = dialog[name].addChild("textbox");
         w.set("halign", "fill");
+        w.set("valign", "fill");
+        w.set("stretch", "true");
         w.set("slider", 20);
         w.set("pref-width", width);
         w.set("pref-height", height);

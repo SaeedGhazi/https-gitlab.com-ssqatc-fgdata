@@ -159,14 +159,6 @@
 			if (!contains(globals, "__nasal_console"))
 				globals["__nasal_console"] = {};
 
-			var maxwidth = getprop("/sim/startup/xsize") - 50;
-			var maxheight = getprop("/sim/startup/ysize") - 100;
-			var width = dlg.initNode("width", 450, "INT");
-			var height = dlg.initNode("height", 200, "INT");
-			width.setAttribute("userarchive", 1);
-			height.setAttribute("userarchive", 1);
-			self.getNode("textbox").setValues({ "pref-width": width.getValue(), "pref-height": height.getValue() });
-
 			var locals = globals["__nasal_console"];
 			var numtabs = size(dlg.getChildren("code"));
 			if (!numtabs)

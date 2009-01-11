@@ -4,6 +4,7 @@
   <name>weather_scenario</name>
   <modal>false</modal>
   <layout>vbox</layout>
+  <resizable>true</resizable>
 
   <text>
     <label>Weather Scenario</label>
@@ -22,6 +23,8 @@
       <halign>left</halign>
     </text>
     <combo>
+      <halign>fill</halign>
+      <stretch>true</stretch>
       <pref-width>200</pref-width>
       <property>/environment/weather-scenario</property>
       <value>Fair weather</value>
@@ -34,6 +37,8 @@
   <text><label>Last metar used</label></text>
   <textbox>
     <halign>fill</halign>
+    <valign>fill</valign>
+    <stretch>true</stretch>
     <pref-width>400</pref-width>
     <pref-height>120</pref-height>
     <slider>20</slider>

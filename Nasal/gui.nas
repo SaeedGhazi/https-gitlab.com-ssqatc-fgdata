@@ -352,18 +352,21 @@ var OverlaySelector = {
     },
     rescan: func {
         me.data = [];
-        foreach (var file; directory(me.dir)) {
-            if (substr(file, -4) != ".xml")
-                continue;
-            var n = io.read_properties(me.dir ~ file);
-            var name = n.getNode(me.nameprop, 1).getValue();
-            var index = n.getNode(me.sortprop, 1).getValue();
-            if (name == nil or index == nil)
-                continue;
-            append(me.data, [name, index, substr(file, 0, size(file) - 4), me.dir ~ file]);
+        var files = directory(me.dir);
+        if (size(files)) {
+            foreach (var file; files) {
+                if (substr(file, -4) != ".xml")
+                    continue;
+                var n = io.read_properties(me.dir ~ file);
+                var name = n.getNode(me.nameprop, 1).getValue();
+                var index = n.getNode(me.sortprop, 1).getValue();
+                if (name == nil or index == nil)
+                    continue;
+                append(me.data, [name, index, substr(file, 0, size(file) - 4), me.dir ~ file]);
+            }
+            me.data = sort(me.data, func(a, b) num(a[1]) == nil or num(b[1]) == nil
+                    ? cmp(a[1], b[1]) : a[1] - b[1]);
         }
-        me.data = sort(me.data, func(a, b) num(a[1]) == nil or num(b[1]) == nil
-                ? cmp(a[1], b[1]) : a[1] - b[1]);
 
         me.list.removeChildren("value");
         forindex (var i; me.data)

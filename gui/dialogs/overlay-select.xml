@@ -3,6 +3,7 @@
 <PropertyList>
 	<name>overlay-select</name>
 	<layout>vbox</layout>
+	<resizable>true</resizable>
 	<x>-20</x>
 	<pref-width>200</pref-width>
 
@@ -35,6 +36,8 @@
 
 	<list>
 		<halign>fill</halign>
+		<valign>fill</valign>
+		<stretch>true</stretch>
 		<pref-height>200</pref-height>
 		<property>$result</property>
 		<binding>

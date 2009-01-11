@@ -14,6 +14,7 @@ command interface /autopilot/route-manager/input:
 <PropertyList>
 	<name>route-manager</name>
 	<layout>vbox</layout>
+	<resizable>true</resizable>
 
 	<nasal>
 		<open>
@@ -161,6 +162,8 @@ command interface /autopilot/route-manager/input:
 	<list>
 		<name>list</name>
 		<halign>fill</halign>
+		<valign>fill</valign>
+		<stretch>true</stretch>
 		<pref-height>150</pref-height>
 		<property>/sim/gui/dialogs/route-manager/selection</property>
 		<binding>
@@ -180,6 +183,8 @@ command interface /autopilot/route-manager/input:
 
 		<input>
 			<name>input</name>
+			<halign>fill</halign>
+			<stretch>true</stretch>
 			<pref-width>220</pref-width>
 			<property>/sim/gui/dialogs/route-manager/input</property>
 		</input>

@@ -72,7 +72,10 @@ var setCursor = func(x = nil, y = nil, cursor = nil) {
     fgcommand("set-cursor", args);
     return args.getNode("cursor").getValue();
 }
-var cursor_types = { none: 0, pointer: 1, wait: 2, crosshair: 3, leftright: 4 };
+var cursor_types = { none: 0, pointer: 1, wait: 2, crosshair: 3, leftright: 4,
+    topside: 5, bottomside: 6, leftside: 7, rightside: 8,
+    topleft: 9, topright: 10, bottomleft: 11, bottomright: 12,
+};
 
 
 

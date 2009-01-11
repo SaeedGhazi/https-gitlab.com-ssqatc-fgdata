@@ -75,6 +75,7 @@ a simple, "hello world" dialog:
    <height>100</height>
    <modal>false</modal>
    <draggable>true</draggable>
+   <resizable>true</resizable>
 
    <text>
     <x>10</x>
@@ -182,6 +183,8 @@ file, since the root element is named PropertyList.
     program), false otherwise.  The default is false.
 
   draggable - false if the dialog is not draggable. The default is true.
+
+  resizable - false if the dialog is not resizable. The default is false.
 
   nasal - Nasal definition block
     open - Nasal script to be executed on dialog open
@@ -393,8 +396,8 @@ The flags printed after the node type have the following meaning:
 
   r       ->  read protected
   w       ->  write protected
-  R       ->  trace read operations       (in the terminal window
-  W       ->  trace write operations       with --log-level=info)
+  R       ->  trace read operations    (in the terminal window)
+  W       ->  trace write operations
   A       ->  archive bit set
   U       ->  user archive bit set
   T       ->  property is "tied"

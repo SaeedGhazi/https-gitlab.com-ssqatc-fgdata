@@ -185,7 +185,7 @@ var dialog = {
         me.toggle_unit();          # set to imperial
         #
         # "private"
-        me.header = [" callsign", "model", "hdg", func { dialog.dist_hdr }, func { dialog.alt_hdr ~ " " }];
+        me.header = [" callsign", "model", "brg", func { dialog.dist_hdr }, func { dialog.alt_hdr ~ " " }];
         me.columns = [
             {property:"callsign",    format:" %s",   label: "-----------",   halign:"fill" },
             {property:"model-short", format:"%s",    label: "--------------",halign:"fill" },

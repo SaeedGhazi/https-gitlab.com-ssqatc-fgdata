@@ -1027,6 +1027,7 @@ showHelpDialog = func {
         }
 
         w = dialog[name].addChild("textbox");
+        w.set("padding", 4);
         w.set("halign", "fill");
         w.set("valign", "fill");
         w.set("stretch", "true");

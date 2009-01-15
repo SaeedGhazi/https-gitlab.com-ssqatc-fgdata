@@ -277,7 +277,7 @@ var set_targets = func(node) {
 		if (lon == nil or lat == nil)
 			die("target coords undefined");
 
-		var target = geo.Coord.new().set_lonlat(lon.getValue(), lat.getValue());
+		var target = geo.Coord.new().set_latlon(lat.getValue(), lon.getValue());
 		var dist = aircraft.distance_to(target);
 		var course = aircraft.course_to(target);
 		var angle = geo.normdeg(course - hdg);

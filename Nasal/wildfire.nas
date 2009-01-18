@@ -822,7 +822,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     mp_broadcast.BroadcastChannel.new(msg_channel_mpp, parse_msg);
 
   setlistener("/sim/signals/exit", func {
-    if (getprop(report_score_pp))
+    if (getprop(report_score_pp) and (CAFire.cells_created > 0))
       print_score();
     if (getprop(save_on_exit_pp))
       CAFire.save_event_log(SAVEDIR ~ "fire_log.xml");
@@ -943,7 +943,7 @@ var dialog = {
     show : func {
         if (!CONFIG_DLG) {
             CONFIG_DLG = 1;
-            me.init(100, 100);
+            me.init();
             me.create();
         }
     },

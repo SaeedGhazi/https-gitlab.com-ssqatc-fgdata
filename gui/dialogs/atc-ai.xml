@@ -119,19 +119,43 @@
 			<checkbox>
 				<halign>left</halign>
 				<label>Deck Lights</label>
-				<property>/ai/models/carrier/controls/deck-lights</property>
+				<property>/ai/models/carrier/controls/lighting/deck-lights</property>
 				<binding>
 					<command>dialog-apply</command>
 				</binding>
 				<binding>
 					<command>nasal</command>
 					<script>
-						var v = getprop("/ai/models/carrier/controls/deck-lights");
+						var v = getprop("/ai/models/carrier/controls/lighting/deck-lights");
 						foreach (carrier; props.globals.getNode("/ai/models").getChildren("carrier"))
-							carrier.getNode("controls/deck-lights",1).setBoolValue(v);
+						carrier.getNode("controls/lighting/deck-lights",1).setBoolValue(v);
 					</script>
 				</binding>
 			</checkbox>
+
+			<text>
+				<halign>left</halign>
+				<!--<x>10</x>
+				<y>480</y>-->
+				<label>Discrete Flightdeck Floodlights (Red)</label>
+			</text>
+
+			<slider>
+				<halign>left</halign>
+				<!--<x>330</x>
+				<y>0</y>-->
+				<width>75</width>
+				<height>25</height>
+				<property>/ai/models/carrier/controls/lighting/flood-lights-red-norm</property>
+				<binding>
+					<command>nasal</command>
+					<script>
+						var v = getprop("/ai/models/carrier/controls/lighting/flood-lights-red-norm");
+						foreach (carrier; props.globals.getNode("/ai/models").getChildren("carrier"))
+						carrier.getNode("controls/lighting/flood-lights-red-norm",1).setDoubleValue(v);
+					</script>
+				</binding>
+			</slider>
 
 		</group>
 

@@ -311,6 +311,14 @@
     <dialog-name>rainsnow</dialog-name>
    </binding>
   </item>
+
+  <item>
+   <label>Wildfire Settings</label>
+   <binding>
+    <command>nasal</command>
+    <script>wildfire.dialog.show()</script>
+   </binding>
+  </item>
  </menu>
 
  <menu>

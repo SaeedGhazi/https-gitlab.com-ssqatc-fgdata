@@ -670,6 +670,16 @@ Started September 2000 by David Megginson, david@megginson.com
    <contrail-altitude>30000</contrail-altitude>
   </params>
 
+  <wildfire>
+   <enabled type="bool" userarchive="y">true</enabled>
+   <share-events type="bool" userarchive="y">false</share-events>
+   <save-on-exit type="bool" userarchive="y">false</save-on-exit>
+   <restore-on-startup type="bool" userarchive="y">false</restore-on-startup>
+   <fire-on-crash type="bool" userarchive="y">true</fire-on-crash>
+   <report-score type="bool" userarchive="y">true</report-score>
+   <data type="string"/>
+  </wildfire>
+
  </environment>
 
  <controls>

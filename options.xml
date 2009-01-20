@@ -890,6 +890,18 @@
    </option>
 
    <option>
+    <name>AV400</name>
+    <arg>params</arg>
+    <description>strings/AV400-desc</description>
+   </option>
+
+   <option>
+    <name>AV400Sim</name>
+    <arg>params</arg>
+    <description>strings/AV400Sim-desc</description>
+   </option>
+
+   <option>
     <name>garmin</name>
     <arg>params</arg>
     <description>strings/garmin-desc</description>

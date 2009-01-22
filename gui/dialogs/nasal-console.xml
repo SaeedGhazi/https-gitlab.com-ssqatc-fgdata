@@ -221,13 +221,14 @@
 					c.setBoolValue(0);
 
 				edit.setValue("Keys:\n"
-					~ "  tab ... leave edit mode (visible text cursor)\n"
+					~ "  tab    ... leave edit mode (visible text cursor)\n"
 					~ "  return ... execute active code\n"
 					~ "  ctrl-c ... clear input field\n"
 					~ "  ctrl-d ... dump input field contents to terminal\n"
-					~ "  esc ... close dialog\n\n"
-					~ "Ctrl-click on tab buttons executes code without switching to the tab.\n"
-					~ "Add more &lt;code> properties in ~/.fgfs/autosave.xml for more tab buttons.");
+					~ "  esc    ... close dialog\n\n"
+					~ "Ctrl-click on tab buttons executes code without\n"
+					~ "switching to the tab. Add more &lt;code> properties\n"
+					~ "in ~/.fgfs/autosave.xml for more tab buttons.");
 			}
 
 			# setup tab buttons and properties from the template

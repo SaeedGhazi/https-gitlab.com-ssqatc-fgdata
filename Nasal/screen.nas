@@ -419,7 +419,9 @@ _setlistener("/sim/signals/fdm-initialized", func {
 		foreach (var p; split(",", n.getValue())) {
 			if (!size(p))
 				continue;
-			if (p[-1] == `/`)
+			if (find('%', p) >= 0)
+				property_display.format = p;
+			elsif (p[-1] == `/`)
 				property_display.add(props.globals.getNode(p, 1).getChildren());
 			else
 				property_display.add(p);

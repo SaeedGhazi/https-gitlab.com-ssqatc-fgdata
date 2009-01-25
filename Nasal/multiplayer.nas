@@ -240,7 +240,7 @@ var dialog = {
         titlebar.addChild("empty").set("stretch", 1);
 
         var w = titlebar.addChild("button");
-        w.node.setValues({"pref-width": 16, "pref-height": 16, legend: "", default: 0, key: "Esc"});
+        w.node.setValues({"pref-width": 16, "pref-height": 16, legend: "", default: 0});
         w.setBinding("nasal", "multiplayer.dialog.del()");
 
         me.dialog.addChild("hrule");

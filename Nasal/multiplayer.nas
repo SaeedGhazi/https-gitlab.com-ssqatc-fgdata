@@ -64,16 +64,15 @@ var echo_message = func(msg, callsign)
   }
 
   # Add the chat to the chat history.
-  var lchat = getprop("/sim/multiplay/chat-history");
+  var lchat = getprop("/sim/multiplay/chat-history") or "";
 
-  if (lchat == nil)
+  if (lchat)
   {
-    setprop("/sim/multiplay/chat-history", msg);
+    lchat = string.trim(lchat, 0, string.isxspace);
+    msg = lchat ~ "\n" ~ msg;
   }
-  else
-  {
-    setprop("/sim/multiplay/chat-history", lchat ~ "\n" ~ msg);
-  }
+
+  setprop("/sim/multiplay/chat-history", msg);
 }
 
 settimer(func {

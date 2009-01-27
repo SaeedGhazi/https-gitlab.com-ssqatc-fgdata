@@ -17,14 +17,16 @@ var isprint = func(c) isgraph(c) or c == ` `;
 var toupper = func(c) islower(c) ? c + `A` - `a` : c;
 var tolower = func(c) isupper(c) ? c + `a` - `A` : c;
 
+var isxspace = func(c) isspace(c) or c == `\n`;
+
 
 ##
 # trim spaces at the left (lr < 0), at the right (lr > 0), or both (lr = 0)
 # An optional function argument defines which characters should be trimmed:
 #
-#  string.trim(a);                                            # trim spaces
-#  string.trim(a, 1, string.isdigit);                         # trim digits at the right
-#  string.trim(a, 0, func(c) string.isspace(c) or c == `\n`); # trim spaces & \n
+#  string.trim(a);                                    # trim spaces
+#  string.trim(a, 1, string.isdigit);                 # trim digits at the right
+#  string.trim(a, 0, func(c) c == `\\` or c == `/`);  # trim slashes/backslashes
 #
 var trim = func(s, lr = 0, istrim = nil) {
 	if (istrim == nil)

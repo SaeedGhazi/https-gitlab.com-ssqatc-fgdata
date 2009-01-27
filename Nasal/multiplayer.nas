@@ -8,7 +8,6 @@
 #
 # 3) Allow chat messages to be written by the user.
 
-var messages = {};
 
 var check_messages = func
 {
@@ -16,35 +15,29 @@ var check_messages = func
   var mp = props.globals.getNode("/ai/models").getChildren("multiplayer");
   var lseen = {};
 
-  foreach (i; mp)
+  foreach (var n; mp)
   {
-    var lmsg           = getprop(i.getPath() ~ "/sim/multiplay/chat");
-    var lcallsign      = getprop(i.getPath() ~ "/callsign");
-    var lvalid         = getprop(i.getPath() ~ "/valid");
+    var last           = n.initNode("sim/multiplay/last-message", "");
+    var lmsg           = n.getNode("sim/multiplay/chat", 1).getValue();
+    var lcallsign      = n.getNode("callsign", 1).getValue();
+    var lvalid         = n.getNode("valid", 1).getValue();
 
-    if ((lvalid)           and
-        (lmsg != nil)      and
-        (lmsg != "")       and
-        (lcallsign != nil) and
-        (lcallsign != "")     )
+    if (!lvalid or !lmsg or !lcallsign)
+      continue;
+
+    if (contains(lseen, lcallsign))
+      continue;
+
+    # Indicate that we've seen this callsign. This handles the case
+    # where we have two aircraft with the same callsign in the MP
+    # session.
+    lseen[lcallsign] = 1;
+
+    if (lmsg != last.getValue())
     {
-      if (! contains(lseen, lcallsign))
-      {
-        # Indicate that we've seen this callsign. This handles the case
-        # where we have two aircraft with the same callsign in the MP
-        # session.
-        lseen[lcallsign] = 1;
-
-        if ((! contains(messages, lcallsign)) or
-          (! streq(lmsg, messages[lcallsign])))
-        {
-          # Save the message so we don't repeat it.
-          messages[lcallsign] = lmsg;
-
-          # Display the message.
-          echo_message(lmsg, lcallsign);
-        }
-      }
+      # Display the message.
+      echo_message(lmsg, lcallsign);
+      last.setValue(lmsg);
     }
   }
 
@@ -54,12 +47,13 @@ var check_messages = func
 
 var echo_message = func(msg, callsign)
 {
-  if ((callsign != nil) and
-      (! string.match(msg, "*" ~ callsign ~ "*")))
+  if ((callsign != nil) and (find(callsign, msg) < 0))
   {
     # Only prefix with the callsign if the message doesn't already include it.
     msg = callsign ~ ": " ~ msg;
   }
+
+  msg = string.trim(string.replace(msg, "\n", " "));
 
   var ldisplay = getprop("/sim/multiplay/chat-display");
 
@@ -78,12 +72,7 @@ var echo_message = func(msg, callsign)
   }
   else
   {
-    if (substr(lchat, size(lchat) -1, 1) != "\n")
-    {
-      lchat = lchat ~ "\n";
-    }
-
-    setprop("/sim/multiplay/chat-history", lchat ~ msg);
+    setprop("/sim/multiplay/chat-history", lchat ~ "\n" ~ msg);
   }
 }
 

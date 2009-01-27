@@ -20,17 +20,24 @@ var tolower = func(c) isupper(c) ? c + `a` - `A` : c;
 
 ##
 # trim spaces at the left (lr < 0), at the right (lr > 0), or both (lr = 0)
+# An optional function argument defines which characters should be trimmed:
 #
-var trim = func(s, lr = 0) {
+#  string.trim(a);                                            # trim spaces
+#  string.trim(a, 1, string.isdigit);                         # trim digits at the right
+#  string.trim(a, 0, func(c) string.isspace(c) or c == `\n`); # trim spaces & \n
+#
+var trim = func(s, lr = 0, istrim = nil) {
+	if (istrim == nil)
+		istrim = isspace;
 	var l = 0;
 	if (lr <= 0)
 		for (; l < size(s); l += 1)
-			if (!isspace(s[l]))
+			if (!istrim(s[l]))
 				break;
 	var r = size(s) - 1;
 	if (lr >= 0)
 		for (; r >= 0; r -= 1)
-			if (!isspace(s[r]))
+			if (!istrim(s[r]))
 				break;
 	return r < l ? "" : substr(s, l, r - l + 1);
 }

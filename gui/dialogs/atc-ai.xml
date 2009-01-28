@@ -93,8 +93,8 @@
 					<command>nasal</command>
 					<script>
 						var v = getprop("/ai/models/carrier/controls/turn-to-launch-hdg");
-						foreach (carrier; props.globals.getNode("/ai/models").getChildren("carrier"))
-							carrier.getNode("controls/turn-to-launch-hdg").setBoolValue(v);
+						foreach (var c; props.globals.getNode("/ai/models").getChildren("carrier"))
+							c.getNode("controls/turn-to-launch-hdg").setBoolValue(v);
 					</script>
 				</binding>
 			</checkbox>
@@ -110,8 +110,8 @@
 					<command>nasal</command>
 					<script>
 						var v = getprop("/ai/models/carrier/controls/elevators");
-						foreach (carrier; props.globals.getNode("/ai/models").getChildren("carrier"))
-							carrier.getNode("controls/elevators").setBoolValue(v);
+						foreach (var c; props.globals.getNode("/ai/models").getChildren("carrier"))
+							c.getNode("controls/elevators").setBoolValue(v);
 					</script>
 				</binding>
 			</checkbox>
@@ -127,23 +127,19 @@
 					<command>nasal</command>
 					<script>
 						var v = getprop("/ai/models/carrier/controls/lighting/deck-lights");
-						foreach (carrier; props.globals.getNode("/ai/models").getChildren("carrier"))
-						carrier.getNode("controls/lighting/deck-lights",1).setBoolValue(v);
+						foreach (var c; props.globals.getNode("/ai/models").getChildren("carrier"))
+							c.getNode("controls/lighting/deck-lights",1).setBoolValue(v);
 					</script>
 				</binding>
 			</checkbox>
 
 			<text>
 				<halign>left</halign>
-				<!--<x>10</x>
-				<y>480</y>-->
 				<label>Discrete Flightdeck Floodlights (Red)</label>
 			</text>
 
 			<slider>
 				<halign>left</halign>
-				<!--<x>330</x>
-				<y>0</y>-->
 				<width>75</width>
 				<height>25</height>
 				<property>/ai/models/carrier/controls/lighting/flood-lights-red-norm</property>
@@ -151,8 +147,8 @@
 					<command>nasal</command>
 					<script>
 						var v = getprop("/ai/models/carrier/controls/lighting/flood-lights-red-norm");
-						foreach (carrier; props.globals.getNode("/ai/models").getChildren("carrier"))
-						carrier.getNode("controls/lighting/flood-lights-red-norm",1).setDoubleValue(v);
+						foreach (var c; props.globals.getNode("/ai/models").getChildren("carrier"))
+							c.getNode("controls/lighting/flood-lights-red-norm",1).setDoubleValue(v);
 					</script>
 				</binding>
 			</slider>

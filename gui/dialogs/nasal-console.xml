@@ -40,6 +40,7 @@
 		<stretch>true</stretch>
 		<pref-width>450</pref-width>
 		<pref-height>200</pref-height>
+		<padding>6</padding>
 		<slider>20</slider>
 		<editable>true</editable>
 		<wrap>false</wrap>
@@ -60,11 +61,13 @@
 	<group>
 		<layout>hbox</layout>
 		<halign>fill</halign>
+		<stretch>true</stretch>
 		<default-padding>4</default-padding>
 
 		<button-template>
 			<enabled>false</enabled>
 			<halign>fill</halign>
+			<stretch>true</stretch>
 			<pref-width>20</pref-width>
 			<pref-height>20</pref-height>
 			<one-shot>0</one-shot>

@@ -177,13 +177,14 @@
 	</group>
 
 	<textbox>
+		<padding>5</padding>
 		<halign>fill</halign>
 		<valign>fill</valign>
 		<stretch>true</stretch>
 		<pref-width>640</pref-width>
 		<pref-height>480</pref-height>
 		<slider>20</slider>
-		<wrap>true</wrap>
+		<wrap>false</wrap>
 		<editable>false</editable>
 		<property>/sim/gui/dialogs/joystick-info/text</property>
 	</textbox>

@@ -61,7 +61,6 @@
 	<group>
 		<layout>hbox</layout>
 		<halign>fill</halign>
-		<stretch>true</stretch>
 		<default-padding>4</default-padding>
 
 		<button-template>

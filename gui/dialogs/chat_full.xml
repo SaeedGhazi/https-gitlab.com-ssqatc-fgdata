@@ -50,13 +50,14 @@
     <halign>fill</halign>
     <valign>fill</valign>
     <stretch>true</stretch>
-    <pref-width>550</pref-width>
+    <pref-width>450</pref-width>
     <pref-height>120</pref-height>
     <padding>5</padding>
     <slider>20</slider>
     <live>true</live>
     <wrap>true</wrap>
     <editable>false</editable>
+    <top-line>-1</top-line>
     <property>/sim/multiplay/chat-history</property>
   </textbox>
 
@@ -72,7 +73,6 @@
       <length>50</length>
       <pref-width>500</pref-width>
       <property>/sim/multiplay/chat-compose</property>
-      <binding><command>nasal</command><script>gui.popupTip("WOOHOO!")</script></binding>
     </input>
 
     <button>

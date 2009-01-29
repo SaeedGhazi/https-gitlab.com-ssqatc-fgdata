@@ -322,6 +322,129 @@ var fly_by_view_handler = {
 };
 
 
+var model_view_handler = {
+	init: func(node) {
+		me.viewN = node;
+		me.models = {};
+		me.list = [];
+		me.current = 0;
+		me.active = 0;
+		me.legendN = props.globals.initNode("/sim/current-view/model-view", "");
+	},
+	start: func {
+		me.models = {};
+		var ai = props.globals.getNode("/ai/models", 1);
+		foreach (var m; [props.globals]
+				~ ai.getChildren("aircraft")
+				~ ai.getChildren("carrier")
+				~ ai.getChildren("multiplayer")
+				~ ai.getChildren("tanker"))
+			me.models[m.getPath()] = m;
+
+		me.lnr = [];
+		append(me.lnr, setlistener("/ai/models/model-added", func(n) {
+			var m = props.globals.getNode(n.getValue(), 1);
+			var name = m.getName();
+			if (name != "aircraft" and name != "carrier"
+					and name != "multiplayer" and name != "tanker")
+				return;
+			me.models[m.getPath()] = m;
+		}));
+		append(me.lnr, setlistener("/ai/models/model-removed", func(n) {
+			var m = props.globals.getNode(n.getValue(), 1);
+			delete(me.models, m.getPath());
+		}));
+
+		###
+		append(me.lnr, setlistener("/devices/status/mice/mouse/mode", func(n) {
+			me.mouse_mode = n.getValue();
+		}, 1));
+		append(me.lnr, setlistener("/devices/status/mice/mouse/button[0]", func(n) {
+			me.mouse_button = n.getValue();
+			me.mouse_mode == 2 and me.mouse_button and me.next(-1);
+			if (me.mouse_button == 1)
+				me.mouse_start = me.mouse_y;
+		}, 1));
+		append(me.lnr, setlistener("/devices/status/mice/mouse/button[1]", func(n) {
+			me.mouse_mode == 2 and n.getValue() and me.next(1);
+		}, 1));
+		append(me.lnr, setlistener("/devices/status/mice/mouse/y", func(n) {
+			me.mouse_y = n.getValue();
+		}, 1));
+		me.offs = 0;
+		###
+
+		me.active = 1;
+		me.reset();
+		fgcommand("dialog-show", props.Node.new({ "dialog-name": "model-view" }));
+	},
+	stop: func {
+		fgcommand("dialog-close", props.Node.new({ "dialog-name": "model-view" }));
+		me.active = 0;
+		foreach (var listener; me.lnr)
+			removelistener(listener);
+	},
+	update: func {
+		if (me.mouse_mode == 0 and me.mouse_button) {
+			var curr = getprop("/sim/current-view/z-offset-m") - me.offs;
+			me.offs += me.mouse_y - me.mouse_start;
+			var new = curr + me.offs;
+			if (new < 0.1)
+				new = 0.1;
+			setprop("/sim/current-view/z-offset-m", new);
+			me.mouse_start = me.mouse_y;
+		}
+		return 0;
+	},
+	reset: func {
+		me.next(me.current = 0);
+	},
+	next: func(v) {
+		me.legendN.setValue("");
+		if (!me.active or !size(me.models))
+			return;
+		if (v)
+			me.current += v;
+		else
+			me.current = 0;
+		
+		me.list = sort(keys(me.models), cmp);
+		if (me.current < 0)
+			me.current = size(me.list) - 1;
+		elsif (me.current >= size(me.list))
+			me.current = 0;
+
+		var s = me.viewN.getNode("config");
+		var c = me.list[me.current];
+		s.getNode("eye-lat-deg-path").setValue(c ~ "/position/latitude-deg");
+		s.getNode("eye-lon-deg-path").setValue(c ~ "/position/longitude-deg");
+		s.getNode("eye-alt-ft-path").setValue(c ~ "/position/altitude-ft");
+
+		s.getNode("target-lat-deg-path").setValue(c ~ "/position/latitude-deg");
+		s.getNode("target-lon-deg-path").setValue(c ~ "/position/longitude-deg");
+		s.getNode("target-alt-ft-path").setValue(c ~ "/position/altitude-ft");
+
+		var n = me.models[me.list[me.current]];
+		var type = n.getName();
+		if (type == "") {
+			var z = getprop("/sim/chase-distance-m");
+			var name = getprop("/sim/multiplay/callsign");
+		} else {
+			var z = type == "carrier" ? 350 : 70;
+			var name = n.initNode("name", "").getValue() or n.initNode("callsign", "").getValue();
+		}
+		name = '"' ~ name ~ '"';
+
+		setprop("/sim/current-view/z-offset-m", me.offs = z);
+		var ac = n.getNode("sim/model/path", 1).getValue() or "";
+		if (ac = split(".", split("/", ac)[-1])[0])
+			name ~= " (" ~ ac ~ ")";
+
+		me.legendN.setValue(name);
+	},
+};
+
+
 var pilot_view_limiter = {
 	new : func {
 		return { parents: [pilot_view_limiter] };
@@ -547,7 +670,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 _setlistener("/sim/signals/fdm-initialized", func {
 	foreach (var v; views) {
 		var index = v.getIndex();
-		if (index > 6 and index < 100) {
+		if (index > 7 and index < 100) {
 			globals["view"] = nil;
 			die("\n***\n*\n*  Illegal use of reserved view index "
 					~ index ~ ". Use indices >= 100!\n*\n***");
@@ -564,6 +687,7 @@ _setlistener("/sim/signals/fdm-initialized", func {
 
 	manager.init();
 	manager.register("Fly-By View", fly_by_view_handler);
+	manager.register("Model View", model_view_handler);
 
 	forindex (var i; views) {
 		var limits = views[i].getNode("config/limits/enabled");

@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<name>model-view</name>
+	<x>5</x>
+	<y>5</y>
+	<layout>hbox</layout>
+	<default-padding>0</default-padding>
+
+	<params>
+		<enabled>false</enabled>
+		<width>20</width>
+		<height>20</height>
+	</params>
+
+	<color>
+		<enabled>false</enabled>
+		<red>0</red>
+		<green>0</green>
+		<blue>0</blue>
+		<alpha>0</alpha>
+	</color>
+
+	<button-color>
+		<enabled>false</enabled>
+		<red>0.5</red>
+		<green>0.5</green>
+		<blue>0.5</blue>
+		<alpha>0.3</alpha>
+	</button-color>
+
+	<button>
+		<legend>&lt;</legend>
+		<pref-width alias="../../params/width"/>
+		<pref-height alias="../../params/height"/>
+		<color>
+			<red alias="../../../button-color/red"/>
+			<green alias="../../../button-color/green"/>
+			<blue alias="../../../button-color/blue"/>
+			<alpha alias="../../../button-color/alpha"/>
+		</color>
+		<binding>
+			<command>nasal</command>
+			<script>view.model_view_handler.next(-1)</script>
+		</binding>
+	</button>
+
+	<button>
+		<legend>&gt;</legend>
+		<pref-width alias="../../params/width"/>
+		<pref-height alias="../../params/height"/>
+		<color>
+			<red alias="../../../button-color/red"/>
+			<green alias="../../../button-color/green"/>
+			<blue alias="../../../button-color/blue"/>
+			<alpha alias="../../../button-color/alpha"/>
+		</color>
+		<binding>
+			<command>nasal</command>
+			<script>view.model_view_handler.next(1)</script>
+		</binding>
+	</button>
+
+	<whatever>
+		<pref-width>6</pref-width>
+	</whatever>
+
+	<text>
+		<pref-width>200</pref-width>
+		<live>1</live>
+		<property>/sim/current-view/model-view</property>
+		<color>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+			<alpha>1</alpha>
+		</color>
+		<font>
+			<name>HELVETICA_14</name>
+		</font>
+	</text>
+</PropertyList>

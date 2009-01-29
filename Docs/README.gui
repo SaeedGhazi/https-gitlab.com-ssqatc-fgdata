@@ -437,6 +437,12 @@ A horizontal or vertical slider for setting a value.
 
   max - the maximum value for the slider.  The default is 1.0.
 
+  step - set to non-null if slider should move in steps.  The default is 0.0 (off).
+
+  pagestep - set to non-null to enable page-stepping.  The default is 0.0 (off).
+
+  fraction - size of the slider handle. Range: 0..1.  The default is 0.0 (minimum).
+
 Example:
 
   <slider>
@@ -492,6 +498,7 @@ property tree, like:
 
     <slider>15</slider> <!--width for slider -->
     <wrap>false</wrap> <!-- don't wrap text; default: true -->
+    <top-line>0</top-line <!-- show this line at the top; negative numbers: show last line -->
 
     <editable>true</editable> <!-- whether the puLargeInput is supposed to be editable -->
 </textbox>

@@ -4,6 +4,8 @@
   <name>chat</name>
   <modal>false</modal>
   <resizable>true</resizable>
+  <x>-5</x>
+  <y>5</y>
   <layout>hbox</layout>
   <default-padding>5</default-padding>
 
@@ -44,7 +46,6 @@
     <equal>true</equal>
     <pref-width>45</pref-width>
     <pref-height>30</pref-height>
-    <key>+</key>
     <binding>
      <command>dialog-show</command>
      <dialog-name>chat-full</dialog-name>
@@ -90,7 +91,6 @@
     <pref-width>45</pref-width>
     <pref-height>30</pref-height>
     <equal>true</equal>
-    <key>Enter</key>
     <binding>
       <command>dialog-apply</command>
     </binding>

@@ -106,10 +106,23 @@ top down before the key bindings are parsed.
   </binding>
  </key>
 
- <key n="13">
+ <key n="10"> <!-- OSG -->
   <name>Enter</name>
   <desc>Move rudder right</desc>
   <repeatable type="bool">true</repeatable>
+  <binding><command>nasal</command><script>print("Enter10")</script></binding>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/flight/rudder</property>
+   <step type="double">0.05</step>
+  </binding>
+ </key>
+
+ <key n="13"> <!-- PLIB -->
+  <name>Enter</name>
+  <desc>Move rudder right</desc>
+  <repeatable type="bool">true</repeatable>
+  <binding><command>nasal</command><script>print("Enter13")</script></binding>
   <binding>
    <command>property-adjust</command>
    <property>/controls/flight/rudder</property>

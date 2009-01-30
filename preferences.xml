@@ -452,6 +452,46 @@ Started September 2000 by David Megginson, david@megginson.com
     </config>
   </view>
 
+  <view>
+    <name>Model View</name>
+    <type>lookat</type>
+    <config>
+      <from-model type="bool">false</from-model>
+      <from-model-idx type="int">0</from-model-idx>
+
+      <eye-lat-deg-path>/sim/viewer/eye/latitude-deg</eye-lat-deg-path>
+      <eye-lon-deg-path>/sim/viewer/eye/longitude-deg</eye-lon-deg-path>
+      <eye-alt-ft-path>/sim/viewer/eye/altitude-ft</eye-alt-ft-path>
+      <eye-heading-deg-path>/sim/viewer/eye/heading-deg</eye-heading-deg-path>
+      <eye-pitch-deg-path>/sim/viewer/eye/pitch-deg</eye-pitch-deg-path>
+      <eye-roll-deg-path>/sim/viewer/eye/roll-deg</eye-roll-deg-path>
+
+      <at-model type="bool">false</at-model>
+      <at-model-idx type="int">0</at-model-idx>
+
+      <target-lat-deg-path>/sim/viewer/target/latitude-deg</target-lat-deg-path>
+      <target-lon-deg-path>/sim/viewer/target/longitude-deg</target-lon-deg-path>
+      <target-alt-ft-path>/sim/viewer/target/altitude-ft</target-alt-ft-path>
+      <target-heading-deg-path>/sim/viewer/target/heading-deg</target-heading-deg-path>
+      <target-pitch-deg-path>/sim/viewer/target/pitch-deg</target-pitch-deg-path>
+      <target-roll-deg-path>/sim/viewer/target/roll-deg</target-roll-deg-path>
+
+      <target-x-offset-m type="double">0</target-x-offset-m>
+      <target-y-offset-m type="double">0</target-y-offset-m>
+      <target-z-offset-m type="double">0</target-z-offset-m>
+
+      <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
+      <default-field-of-view-deg type="double">55.0</default-field-of-view-deg>
+
+      <x-offset-m type="double">0</x-offset-m>
+      <y-offset-m type="double">0</y-offset-m>
+      <z-offset-m type="double">100</z-offset-m>
+      <heading-offset-deg>0</heading-offset-deg>
+      <pitch-offset-deg>0</pitch-offset-deg>
+      <roll-offset-deg>0</roll-offset-deg>
+    </config>
+  </view>
+
   <menubar>
    <visibility type="bool" userarchive="y">true</visibility>
    <default include="gui/menubar.xml"/>

@@ -339,7 +339,7 @@ var model_view_handler = {
 				#~ ai.getChildren("carrier")
 				#~ ai.getChildren("tanker")
 				~ ai.getChildren("multiplayer"))
-			me.models[m.getPath()] = m;
+			me.models[m.getPath()] = { node: m, id: me.identity(m) };
 
 		me.lnr = [];
 		append(me.lnr, setlistener("/ai/models/model-added", func(n) {
@@ -348,32 +348,16 @@ var model_view_handler = {
 			if (name != "aircraft" and name != "carrier"
 					and name != "multiplayer" and name != "tanker")
 				return;
-			me.models[m.getPath()] = m;
+			me.models[m.getPath()] = { node: m, id: me.identity(m) };
+			me.list = sort(keys(me.models), cmp);
 		}));
+
 		append(me.lnr, setlistener("/ai/models/model-removed", func(n) {
 			var m = props.globals.getNode(n.getValue(), 1);
 			delete(me.models, m.getPath());
 		}));
 
-		###
-		append(me.lnr, setlistener("/devices/status/mice/mouse/mode", func(n) {
-			me.mouse_mode = n.getValue();
-		}, 1));
-		append(me.lnr, setlistener("/devices/status/mice/mouse/button[0]", func(n) {
-			me.mouse_button = n.getValue();
-			me.mouse_mode == 2 and me.mouse_button and me.next(-1);
-			if (me.mouse_button == 1)
-				me.mouse_start = me.mouse_y;
-		}, 1));
-		append(me.lnr, setlistener("/devices/status/mice/mouse/button[1]", func(n) {
-			me.mouse_mode == 2 and n.getValue() and me.next(1);
-		}, 1));
-		append(me.lnr, setlistener("/devices/status/mice/mouse/y", func(n) {
-			me.mouse_y = n.getValue();
-		}, 1));
-		me.offs = 0;
-		###
-
+		me.list = sort(keys(me.models), cmp);
 		me.active = 1;
 		me.reset();
 		fgcommand("dialog-show", props.Node.new({ "dialog-name": "model-view" }));
@@ -383,18 +367,6 @@ var model_view_handler = {
 		me.active = 0;
 		foreach (var listener; me.lnr)
 			removelistener(listener);
-	},
-	update: func {
-		if (me.mouse_mode == 0 and me.mouse_button) {
-			var curr = getprop("/sim/current-view/z-offset-m") - me.offs;
-			me.offs += me.mouse_y - me.mouse_start;
-			var new = curr + me.offs;
-			if (new < 0.1)
-				new = 0.1;
-			setprop("/sim/current-view/z-offset-m", new);
-			me.mouse_start = me.mouse_y;
-		}
-		return 0;
 	},
 	reset: func {
 		me.next(me.current = 0);
@@ -408,23 +380,23 @@ var model_view_handler = {
 		else
 			me.current = 0;
 		
-		me.list = sort(keys(me.models), cmp);
 		if (me.current < 0)
 			me.current = size(me.list) - 1;
 		elsif (me.current >= size(me.list))
 			me.current = 0;
 
-		var s = me.viewN.getNode("config");
-		var c = me.list[me.current];
-		s.getNode("eye-lat-deg-path").setValue(c ~ "/position/latitude-deg");
-		s.getNode("eye-lon-deg-path").setValue(c ~ "/position/longitude-deg");
-		s.getNode("eye-alt-ft-path").setValue(c ~ "/position/altitude-ft");
+		var conf = me.viewN.getNode("config");
+		var path = me.list[me.current];
+		conf.getNode("eye-lat-deg-path", 1).setValue(path ~ "/position/latitude-deg");
+		conf.getNode("eye-lon-deg-path", 1).setValue(path ~ "/position/longitude-deg");
+		conf.getNode("eye-alt-ft-path", 1).setValue(path ~ "/position/altitude-ft");
 
-		s.getNode("target-lat-deg-path").setValue(c ~ "/position/latitude-deg");
-		s.getNode("target-lon-deg-path").setValue(c ~ "/position/longitude-deg");
-		s.getNode("target-alt-ft-path").setValue(c ~ "/position/altitude-ft");
-
-		var n = me.models[me.list[me.current]];
+		conf.getNode("target-lat-deg-path", 1).setValue(path ~ "/position/latitude-deg");
+		conf.getNode("target-lon-deg-path", 1).setValue(path ~ "/position/longitude-deg");
+		conf.getNode("target-alt-ft-path", 1).setValue(path ~ "/position/altitude-ft");
+		me.legendN.setValue(me.models[path].id);
+	},
+	identity: func(n) {
 		var type = n.getName();
 		if (type == "") {
 			var z = getprop("/sim/chase-distance-m");
@@ -439,8 +411,7 @@ var model_view_handler = {
 		var ac = n.getNode("sim/model/path", 1).getValue() or "";
 		if (ac = split(".", split("/", ac)[-1])[0])
 			name ~= " (" ~ ac ~ ")";
-
-		me.legendN.setValue(name);
+		return name;
 	},
 };
 
@@ -668,6 +639,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
 
 _setlistener("/sim/signals/fdm-initialized", func {
+	var zoffset = nil;
 	foreach (var v; views) {
 		var index = v.getIndex();
 		if (index > 7 and index < 100) {
@@ -682,6 +654,12 @@ _setlistener("/sim/signals/fdm-initialized", func {
 				aircraft.data.add(e);
 				e.setAttribute("userarchive", 0);
 			}
+		}
+
+		if (v.initNode("type", "lookat").getValue() == "lookat") {
+			debug.dump([v.getPath(), v.getNode("config/target-z-offset-m", 1)]);
+			zoffset = v.initNode("config/target-z-offset-m", zoffset or 0).getValue();
+			debug.dump([v.getPath(), zoffset]);
 		}
 	}
 

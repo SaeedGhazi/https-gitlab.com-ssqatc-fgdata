@@ -332,35 +332,48 @@ var model_view_handler = {
 		me.legendN = props.globals.initNode("/sim/current-view/model-view", "");
 	},
 	start: func {
-		me.models = {};
-		var ai = props.globals.getNode("/ai/models", 1);
-		foreach (var m; [props.globals]
-				#~ ai.getChildren("aircraft")
-				#~ ai.getChildren("carrier")
-				#~ ai.getChildren("tanker")
-				~ ai.getChildren("multiplayer"))
-			me.models[m.getPath()] = { node: m, id: me.identity(m) };
-
 		me.lnr = [];
 		append(me.lnr, setlistener("/ai/models/model-added", func(n) {
-			var m = props.globals.getNode(n.getValue(), 1);
-			var name = m.getName();
-			if (name != "aircraft" and name != "carrier"
-					and name != "multiplayer" and name != "tanker")
-				return;
-			me.models[m.getPath()] = { node: m, id: me.identity(m) };
-			me.list = sort(keys(me.models), cmp);
+			n = props.globals.getNode(n.getValue(), 1);
+			var name = n.getName();
+			if (name == "multiplayer"
+					# or name == "aircraft"
+					# or name == "carrier"
+					# or name == "tanker"
+					) {
+				me.models[n.getPath()] = { node: n, id: "" };
+				me.list = sort(keys(me.models), string.icmp);
+				me.scan_ident(n);
+			}
 		}));
 
 		append(me.lnr, setlistener("/ai/models/model-removed", func(n) {
-			var m = props.globals.getNode(n.getValue(), 1);
-			delete(me.models, m.getPath());
+			n = props.globals.getNode(n.getValue(), 1);
+			delete(me.models, n.getPath());
+			me.list = sort(keys(me.models), string.icmp);
 		}));
 
-		me.list = sort(keys(me.models), cmp);
+		me.models = { "": { node: props.globals, id: '[' ~ getprop("/sim/multiplay/callsign") ~ ']' } };
+		var ai = props.globals.getNode("/ai/models", 1);
+		foreach (var n; ai.getChildren("multiplayer")
+				#~ ai.getChildren("aircraft")
+				#~ ai.getChildren("carrier")
+				#~ ai.getChildren("tanker"
+				)
+			setprop("/ai/models/model-added", n.getPath());
+
 		me.active = 1;
 		me.reset();
 		fgcommand("dialog-show", props.Node.new({ "dialog-name": "model-view" }));
+	},
+	scan_ident: func(n) {
+		if ((var cs = n.getNode("callsign")) == nil or !(cs = cs.getValue()))
+			return settimer(func me.scan_ident(n), 2);
+		var path = n.getPath();
+		if (contains(me.models, path)) {
+			me.models[path] = { node: n, id: me.ident(n) };
+			me.list = sort(keys(me.models), string.icmp);
+		}
 	},
 	stop: func {
 		fgcommand("dialog-close", props.Node.new({ "dialog-name": "model-view" }));
@@ -379,7 +392,7 @@ var model_view_handler = {
 			me.current += v;
 		else
 			me.current = 0;
-		
+
 		if (me.current < 0)
 			me.current = size(me.list) - 1;
 		elsif (me.current >= size(me.list))
@@ -396,7 +409,7 @@ var model_view_handler = {
 		conf.getNode("target-alt-ft-path", 1).setValue(path ~ "/position/altitude-ft");
 		me.legendN.setValue(me.models[path].id);
 	},
-	identity: func(n) {
+	ident: func(n) {
 		var type = n.getName();
 		if (type == "") {
 			var z = getprop("/sim/chase-distance-m");
@@ -654,12 +667,6 @@ _setlistener("/sim/signals/fdm-initialized", func {
 				aircraft.data.add(e);
 				e.setAttribute("userarchive", 0);
 			}
-		}
-
-		if (v.initNode("type", "lookat").getValue() == "lookat") {
-			debug.dump([v.getPath(), v.getNode("config/target-z-offset-m", 1)]);
-			zoffset = v.initNode("config/target-z-offset-m", zoffset or 0).getValue();
-			debug.dump([v.getPath(), zoffset]);
 		}
 	}
 

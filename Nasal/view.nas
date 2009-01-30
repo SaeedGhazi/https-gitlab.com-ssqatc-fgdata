@@ -335,10 +335,10 @@ var model_view_handler = {
 		me.models = {};
 		var ai = props.globals.getNode("/ai/models", 1);
 		foreach (var m; [props.globals]
-				~ ai.getChildren("aircraft")
-				~ ai.getChildren("carrier")
-				~ ai.getChildren("multiplayer")
-				~ ai.getChildren("tanker"))
+				#~ ai.getChildren("aircraft")
+				#~ ai.getChildren("carrier")
+				#~ ai.getChildren("tanker")
+				~ ai.getChildren("multiplayer"))
 			me.models[m.getPath()] = m;
 
 		me.lnr = [];

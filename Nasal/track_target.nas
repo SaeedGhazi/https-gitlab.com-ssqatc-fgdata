@@ -55,28 +55,31 @@
 # print("Target Tracking script loading ...");
 
 # script defaults (configurable if you like)
-default_update_period = 0.05;
-default_goal_range_nm = 0.05;
-default_target_root = "/ai/models/aircraft[0]";
-default_min_speed_kt = 120;
+var default_update_period = 0.05;
+var default_goal_range_nm = 0.05;
+var default_target_root = "/ai/models/aircraft[0]";
+var default_min_speed_kt = 120;
 
 # master enable switch
-target_tracking_enable = 0;
+var target_tracking_enable = 0;
 
 # update period
-update_period = default_update_period;
+var update_period = default_update_period;
 
 # goal range to acheive when following target
-goal_range_nm = 0;
+var goal_range_nm = 0;
 
 # minimum speed so we don't drop out of the sky
-min_speed_kt = 0;
+var min_speed_kt = 0;
 
 # Target property tree root
-target_root = "";
+var target_root = "";
 
 # Initialize target tracking
-TrackInit = func {
+var TrackInit = func {
+    if (props.globals.getNode("autopilot") == nil)
+        return;
+
     target_tracking_enable = getprop("/autopilot/target-tracking/enable");
     if ( target_tracking_enable == nil ) {
         target_tracking_enable = 0;
@@ -112,7 +115,10 @@ settimer(TrackInit, 0);
 
 # If enabled, update our AP target values based on the target range,
 # bearing, and speed
-TrackUpdate = func {
+var TrackUpdate = func {
+    if (props.globals.getNode("autopilot") == nil)
+        return;
+
     target_tracking_enable = getprop("/autopilot/target-tracking/enable");
     update_period = getprop("/autopilot/target-tracking/update-period");
 
@@ -131,29 +137,29 @@ TrackUpdate = func {
         my_hdg_true_prop = sprintf("/orientation/heading-deg" );
         my_hdg_true = getprop(my_hdg_true_prop);
 
-        alt_prop = sprintf("%s/position/altitude-ft", target_root );
-        alt = getprop(alt_prop);
+        var alt_prop = sprintf("%s/position/altitude-ft", target_root );
+        var alt = getprop(alt_prop);
         if ( alt == nil ) {
             print("bad property path: ", alt_prop);
             return;
         }
     
-        speed_prop = sprintf("%s/velocities/true-airspeed-kt", target_root );
-        speed = getprop(speed_prop);
+        var speed_prop = sprintf("%s/velocities/true-airspeed-kt", target_root );
+        var speed = getprop(speed_prop);
         if ( speed == nil ) {
             print("bad property path: ", speed_prop);
             return;
         }
     
-        range_prop = sprintf("%s/radar/range-nm", target_root );
-        range = getprop(range_prop);
+        var range_prop = sprintf("%s/radar/range-nm", target_root );
+        var range = getprop(range_prop);
         if ( range == nil ) {
             print("bad property path: ", range_prop);
             return;
         }
     
-        h_offset_prop = sprintf("%s/radar/h-offset", target_root );
-        h_offset = getprop(h_offset_prop);
+        var h_offset_prop = sprintf("%s/radar/h-offset", target_root );
+        var h_offset = getprop(h_offset_prop);
         if ( h_offset == nil ) {
             print("bad property path: ", h_offset_prop);
             return;
@@ -161,12 +167,12 @@ TrackUpdate = func {
 
         if ( h_offset > -90 and h_offset < 90 ) {
             # in front of us
-            range_error = range - goal_range_nm;
+            var range_error = range - goal_range_nm;
         } else {
             # behind us
-            range_error = goal_range_nm - range;
+            var range_error = goal_range_nm - range;
         }
-        target_speed = speed + range_error * 100.0;
+        var target_speed = speed + range_error * 100.0;
         if ( target_speed < min_speed_kt ) {
             target_speed = min_speed_kt;
         }

@@ -183,12 +183,13 @@ var dialog = {
         ];
         me.name = "who-is-online";
         me.dialog = nil;
+        me.loopid = 0;
 
         me.listeners=[];
         append(me.listeners, setlistener("/sim/startup/xsize", func me._redraw_()));
         append(me.listeners, setlistener("/sim/startup/ysize", func me._redraw_()));
         append(me.listeners, setlistener("/sim/signals/reinit-gui", func me._redraw_()));
-        append(me.listeners, setlistener("/sim/signals/multiplayer-updated", func me.update()));
+        append(me.listeners, setlistener("/sim/signals/multiplayer-updated", func me._redraw_()));
     },
     create: func {
         if (me.dialog != nil)
@@ -256,11 +257,12 @@ var dialog = {
             odd = !odd;
             row +=1;
         }
-        me.update();
+        me.update(me.loopid += 1);
         fgcommand("dialog-new", me.dialog.prop());
         fgcommand("dialog-show", me.dialog.prop());
     },
-    update: func {
+    update: func(id) {
+        id == me.loopid or return;
         var self = geo.aircraft_position();
         foreach (var mp; model.list) {
             var n = mp.node;
@@ -279,7 +281,7 @@ var dialog = {
             });
         }
         if (PILOTSDLG_RUNNING)
-            settimer(func me.update(), 1, 1);
+            settimer(func me.update(id), 1, 1);
     },
     _redraw_: func {
         if (me.dialog != nil) {

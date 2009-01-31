@@ -187,6 +187,7 @@ var dialog = {
         me.listeners=[];
         append(me.listeners, setlistener("/sim/startup/xsize", func me._redraw_()));
         append(me.listeners, setlistener("/sim/startup/ysize", func me._redraw_()));
+        append(me.listeners, setlistener("/sim/signals/reinit-gui", func me._redraw_()));
         append(me.listeners, setlistener("/sim/signals/multiplayer-updated", func me.update()));
     },
     create: func {
@@ -261,7 +262,7 @@ var dialog = {
     },
     update: func {
         var self = geo.aircraft_position();
-        foreach(var mp; model.list) {
+        foreach (var mp; model.list) {
             var n = mp.node;
             var ac = geo.Coord.new().set_xyz(
                     n.getNode("position/global-x").getValue(),
@@ -278,7 +279,7 @@ var dialog = {
             });
         }
         if (PILOTSDLG_RUNNING)
-            settimer( func me.update(), 0.4, 1);
+            settimer(func me.update(), 1, 1);
     },
     _redraw_: func {
         if (me.dialog != nil) {
@@ -288,16 +289,13 @@ var dialog = {
     },
     toggle_unit: func {
         me.unit = !me.unit;
-        if(me.unit)
-        {
+        if (me.unit) {
             me.alt_node = "position/altitude-m";
             me.alt_hdr = "alt-m";
             me.dist_hdr = "dist-km";
             me.dist_node = "distance-to-km";
             me.unit_button = "IM";
-        }
-        else
-        {
+        } else {
             me.alt_node = "position/altitude-ft";
             me.dist_node = "distance-to-nm";
             me.alt_hdr = "alt-ft";

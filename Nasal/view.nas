@@ -324,25 +324,19 @@ var fly_by_view_handler = {
 
 var model_view_handler = {
 	init: func(node) {
-		me.lnr = [];
 		me.viewN = node;
 		me.current = nil;
 		me.legendN = props.globals.initNode("/sim/current-view/model-view", "");
 		me.dialog = props.Node.new({ "dialog-name": "model-view" });
 	},
 	start: func {
-		me.lnr = [];
-		append(me.lnr, setlistener("/sim/signals/multiplayer-updated", func me._update_(), 1));
-		append(me.lnr, setlistener("/sim/signals/screenshot", func(n) {
-			n.getValue() ? me.dialog_close() : me.dialog_open();
-		}));
+		me.listener = setlistener("/sim/signals/multiplayer-updated", func me._update_(), 1);
 		me.reset();
-		me.open_dialog();
+		fgcommand("dialog-show", me.dialog);
 	},
 	stop: func {
-		me.close_dialog();
-		foreach (var l; me.lnr)
-			removelistener(l);
+		fgcommand("dialog-close", me.dialog);
+		removelistener(me.listener);
 	},
 	reset: func {
 		me.select(0);
@@ -392,12 +386,6 @@ var model_view_handler = {
 			"target-lon-deg-path": data.path ~ "/position/longitude-deg",
 			"target-alt-ft-path": data.path ~ "/position/altitude-ft",
 		});
-	},
-	open_dialog: func {
-		fgcommand("dialog-show", me.dialog);
-	},
-	close_dialog: func {
-		fgcommand("dialog-close", me.dialog);
 	},
 };
 

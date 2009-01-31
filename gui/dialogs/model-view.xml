@@ -79,6 +79,8 @@
 		<binding>
 			<command>nasal</command>
 			<script>
+				if (size(view.model_view_handler.list) &lt;= 1)
+					return;
 				var isopen = !!getprop("sim/gui/dialogs/model-view-select/open");
 				var toggle = isopen ? "dialog-close" : "dialog-show";
 				fgcommand(toggle, props.Node.new({ "dialog-name": "model-view-select" }));

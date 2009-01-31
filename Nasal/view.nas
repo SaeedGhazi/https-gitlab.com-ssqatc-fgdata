@@ -324,98 +324,80 @@ var fly_by_view_handler = {
 
 var model_view_handler = {
 	init: func(node) {
+		me.lnr = [];
 		me.viewN = node;
-		me.list = [];
-		me.current = 0;
-		me.active = 0;
+		me.current = nil;
 		me.legendN = props.globals.initNode("/sim/current-view/model-view", "");
+		me.dialog = props.Node.new({ "dialog-name": "model-view" });
 	},
 	start: func {
 		me.lnr = [];
-		append(me.lnr, setlistener("/ai/models/model-added", func me.update_list()));
-		append(me.lnr, setlistener("/ai/models/model-removed", func me.update_list()));
-		me.update_list();
-		me.active = 1;
+		append(me.lnr, setlistener("/sim/signals/multiplayer-updated", func me._update_(), 1));
+		append(me.lnr, setlistener("/sim/signals/screenshot", func(n) {
+			n.getValue() ? me.dialog_close() : me.dialog_open();
+		}));
 		me.reset();
-		fgcommand("dialog-show", props.Node.new({ "dialog-name": "model-view" }));
+		me.open_dialog();
 	},
 	stop: func {
-		fgcommand("dialog-close", props.Node.new({ "dialog-name": "model-view" }));
-		me.active = 0;
+		me.close_dialog();
 		foreach (var l; me.lnr)
 			removelistener(l);
 	},
 	reset: func {
-		me.next(me.current = 0);
+		me.select(0);
 	},
-	update_list: func {
-		me.models = { "/": { node: props.globals, id: "[" ~ getprop("/sim/multiplay/callsign")~ "]" } };
-		foreach (var n; props.globals.getNode("/ai/models", 1).getChildren("multiplayer")) {
-			if (!n.getNode("valid", 1).getValue())
-				continue;
-			me.models[n.getPath()] = { node: n, id: "" };
-			me.scan_ident(n);
-		}
-		me.list = sort(keys(me.models), string.icmp);
-	},
-	scan_ident: func(n) {
-		if ((var cs = n.getNode("callsign")) == nil or !(cs = cs.getValue()))
-			return settimer(func me.scan_ident(n, data), 1);
-		var path = n.getPath();
-		if (contains(me.models, path)) {
-			me.models[path] = { node: n, id: me.ident(n) };
-			me.list = sort(keys(me.models), string.icmp);
-		}
-	},
-	next: func(v) {
-		me.legendN.setValue("");
-		if (!me.active or size(me.models) < 1)
-			return;
-		if (v)
-			me.current += v;
-		else
-			me.current = 0;
-
-		if (me.current < 0)
-			me.current = size(me.list) - 1;
-		elsif (me.current >= size(me.list))
-			me.current = 0;
-
-		var conf = me.viewN.getNode("config");
-		var path = me.list[me.current];
-		conf.getNode("eye-lat-deg-path", 1).setValue(path ~ "/position/latitude-deg");
-		conf.getNode("eye-lon-deg-path", 1).setValue(path ~ "/position/longitude-deg");
-		conf.getNode("eye-alt-ft-path", 1).setValue(path ~ "/position/altitude-ft");
-
-		conf.getNode("target-lat-deg-path", 1).setValue(path ~ "/position/latitude-deg");
-		conf.getNode("target-lon-deg-path", 1).setValue(path ~ "/position/longitude-deg");
-		conf.getNode("target-alt-ft-path", 1).setValue(path ~ "/position/altitude-ft");
-		me.legendN.setValue(me.models[path].id);
-	},
-	select: func(id) {
-		debug.dump(["select", id]);
+	find: func(callsign) {
 		forindex (var i; me.list)
-			if (me.models[me.list[i]].id == id)
-				me.current = i;
-		me.next(0);
-		me.next(i);
+			if (me.list[i].callsign == callsign)
+				return i;
+		return nil;
 	},
-	ident: func(n) {
-		var type = n.getName();
-		if (type == "") {
-			var z = getprop("/sim/chase-distance-m");
-			var name = getprop("/sim/multiplay/callsign");
-		} else {
-			var z = type == "carrier" ? 350 : 70;
-			var name = n.initNode("name", "").getValue() or n.initNode("callsign", "").getValue();
-		}
-		name = '"' ~ name ~ '"';
+	select: func(which) {
+		if (num(which) == nil)
+			which = me.find(which) or 0;  # turn callsign into index
 
-		setprop("/sim/current-view/z-offset-m", me.offs = z);
-		var ac = n.getNode("sim/model/path", 1).getValue() or "";
-		if (ac = split(".", split("/", ac)[-1])[0])
-			name ~= " (" ~ ac ~ ")";
-		return name;
+		me.setup(me.list[which]);
+	},
+	next: func(step) {
+		var i = me.find(me.current);
+		i = i == nil ? 0 : math.mod(i + step, size(me.list));
+		me.setup(me.list[i]);
+	},
+	_update_: func {
+		var self = { callsign: getprop("/sim/multiplay/callsign"), model:,
+				node: props.globals, path: '/' };
+		me.list = [self] ~ multiplayer.model.list;
+		if (!me.find(me.current))
+			me.select(0);
+	},
+	setup: func(data) {
+		if (data.path == '/') {
+			var zoffset = getprop("/sim/chase-distance-m");
+			var ident = '[' ~ data.callsign ~ ']';
+		} else {
+			var zoffset = 70;
+			var ident = '"' ~ data.callsign ~ '" (' ~ data.model ~ ')';
+		}
+
+		me.current = data.callsign;
+		me.legendN.setValue(ident);
+		setprop("/sim/current-view/z-offset-m", zoffset);
+
+		me.viewN.getNode("config").setValues({
+			"eye-lat-deg-path": data.path ~ "/position/latitude-deg",
+			"eye-lon-deg-path": data.path ~ "/position/longitude-deg",
+			"eye-alt-ft-path": data.path ~ "/position/altitude-ft",
+			"target-lat-deg-path": data.path ~ "/position/latitude-deg",
+			"target-lon-deg-path": data.path ~ "/position/longitude-deg",
+			"target-alt-ft-path": data.path ~ "/position/altitude-ft",
+		});
+	},
+	open_dialog: func {
+		fgcommand("dialog-show", me.dialog);
+	},
+	close_dialog: func {
+		fgcommand("dialog-close", me.dialog);
 	},
 };
 

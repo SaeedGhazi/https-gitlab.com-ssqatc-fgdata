@@ -3,15 +3,9 @@
 <PropertyList>
 	<name>model-view</name>
 	<x>5</x>
-	<y>5</y>
+	<y>3</y>
 	<layout>hbox</layout>
 	<default-padding>0</default-padding>
-
-	<params>
-		<enabled>false</enabled>
-		<width>20</width>
-		<height>20</height>
-	</params>
 
 	<color>
 		<enabled>false</enabled>
@@ -21,23 +15,15 @@
 		<alpha>0</alpha>
 	</color>
 
-	<button-color>
-		<enabled>false</enabled>
-		<red>0.5</red>
-		<green>0.5</green>
-		<blue>0.5</blue>
-		<alpha>0.3</alpha>
-	</button-color>
-
 	<button>
 		<legend>&lt;</legend>
-		<pref-width alias="../../params/width"/>
-		<pref-height alias="../../params/height"/>
+		<pref-width>20</pref-width>
+		<pref-height>20</pref-height>
 		<color>
-			<red alias="../../../button-color/red"/>
-			<green alias="../../../button-color/green"/>
-			<blue alias="../../../button-color/blue"/>
-			<alpha alias="../../../button-color/alpha"/>
+			<red>0.5</red>
+			<green>0.5</green>
+			<blue>0.5</blue>
+			<alpha>0.3</alpha>
 		</color>
 		<binding>
 			<command>nasal</command>
@@ -47,13 +33,13 @@
 
 	<button>
 		<legend>&gt;</legend>
-		<pref-width alias="../../params/width"/>
-		<pref-height alias="../../params/height"/>
+		<pref-width>20</pref-width>
+		<pref-height>20</pref-height>
 		<color>
-			<red alias="../../../button-color/red"/>
-			<green alias="../../../button-color/green"/>
-			<blue alias="../../../button-color/blue"/>
-			<alpha alias="../../../button-color/alpha"/>
+			<red>0.5</red>
+			<green>0.5</green>
+			<blue>0.5</blue>
+			<alpha>0.3</alpha>
 		</color>
 		<binding>
 			<command>nasal</command>
@@ -66,7 +52,7 @@
 	</whatever>
 
 	<text>
-		<pref-width>200</pref-width>
+		<pref-width>0</pref-width>
 		<live>1</live>
 		<property>/sim/current-view/model-view</property>
 		<color>
@@ -79,4 +65,24 @@
 			<name>HELVETICA_14</name>
 		</font>
 	</text>
+
+	<button>
+		<legend/>
+		<pref-width>200</pref-width>
+		<border>0</border>
+		<color>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+			<alpha>0</alpha>
+		</color>
+		<binding>
+			<command>nasal</command>
+			<script>
+				var isopen = !!getprop("sim/gui/dialogs/model-view-select/open");
+				var toggle = isopen ? "dialog-close" : "dialog-show";
+				fgcommand(toggle, props.Node.new({ "dialog-name": "model-view-select" }));
+			</script>
+		</binding>
+	</button>
 </PropertyList>

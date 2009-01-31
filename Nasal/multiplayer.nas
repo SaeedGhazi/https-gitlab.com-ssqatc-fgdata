@@ -392,6 +392,6 @@ var model = {
 };
 
 
-setlistener("sim/signals/nasal-dir-initialized", func model.init());
+_setlistener("sim/signals/nasal-dir-initialized", func model.init());
 
 

@@ -46,25 +46,11 @@
 		</close>
 	</nasal>
 
-	<color>
-		<enabled>false</enabled>
-		<red>0.5</red>
-		<green>0.5</green>
-		<blue>0.5</blue>
-		<alpha>0.5</alpha>
-	</color>
-
 	<list>
 		<legend/>
 		<pref-height>100</pref-height>
-		<pref-width>200</pref-width>
+		<pref-width>250</pref-width>
 		<border>0</border>
-		<color>
-			<red>1</red>
-			<green>1</green>
-			<blue>1</blue>
-			<alpha>0</alpha>
-		</color>
 		<property>/sim/gui/dialogs/model-view-select/choice</property>
 		<binding>
 			<command>dialog-apply</command>

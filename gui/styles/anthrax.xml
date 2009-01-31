@@ -12,6 +12,7 @@
 	<fonts>
 		<gui>
 			<name type="string">HELVETICA_12</name>
+			<baseline-height type="float">21</baseline-height>
 		</gui>
 
 		<splash>

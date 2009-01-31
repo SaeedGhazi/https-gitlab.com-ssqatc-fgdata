@@ -325,7 +325,6 @@ var fly_by_view_handler = {
 var model_view_handler = {
 	init: func(node) {
 		me.viewN = node;
-		me.models = {};
 		me.list = [];
 		me.current = 0;
 		me.active = 0;
@@ -333,60 +332,44 @@ var model_view_handler = {
 	},
 	start: func {
 		me.lnr = [];
-		append(me.lnr, setlistener("/ai/models/model-added", func(n) {
-			n = props.globals.getNode(n.getValue(), 1);
-			var name = n.getName();
-			if (name == "multiplayer"
-					# or name == "aircraft"
-					# or name == "carrier"
-					# or name == "tanker"
-					) {
-				me.models[n.getPath()] = { node: n, id: "" };
-				me.list = sort(keys(me.models), string.icmp);
-				me.scan_ident(n);
-			}
-		}));
-
-		append(me.lnr, setlistener("/ai/models/model-removed", func(n) {
-			n = props.globals.getNode(n.getValue(), 1);
-			delete(me.models, n.getPath());
-			me.list = sort(keys(me.models), string.icmp);
-		}));
-
-		me.models = { "": { node: props.globals, id: '[' ~ getprop("/sim/multiplay/callsign") ~ ']' } };
-		var ai = props.globals.getNode("/ai/models", 1);
-		foreach (var n; ai.getChildren("multiplayer")
-				#~ ai.getChildren("aircraft")
-				#~ ai.getChildren("carrier")
-				#~ ai.getChildren("tanker"
-				)
-			setprop("/ai/models/model-added", n.getPath());
-
+		append(me.lnr, setlistener("/ai/models/model-added", func me.update_list()));
+		append(me.lnr, setlistener("/ai/models/model-removed", func me.update_list()));
+		me.update_list();
 		me.active = 1;
 		me.reset();
 		fgcommand("dialog-show", props.Node.new({ "dialog-name": "model-view" }));
 	},
+	stop: func {
+		fgcommand("dialog-close", props.Node.new({ "dialog-name": "model-view" }));
+		me.active = 0;
+		foreach (var l; me.lnr)
+			removelistener(l);
+	},
+	reset: func {
+		me.next(me.current = 0);
+	},
+	update_list: func {
+		me.models = { "/": { node: props.globals, id: "[" ~ getprop("/sim/multiplay/callsign")~ "]" } };
+		foreach (var n; props.globals.getNode("/ai/models", 1).getChildren("multiplayer")) {
+			if (!n.getNode("valid", 1).getValue())
+				continue;
+			me.models[n.getPath()] = { node: n, id: "" };
+			me.scan_ident(n);
+		}
+		me.list = sort(keys(me.models), string.icmp);
+	},
 	scan_ident: func(n) {
 		if ((var cs = n.getNode("callsign")) == nil or !(cs = cs.getValue()))
-			return settimer(func me.scan_ident(n), 2);
+			return settimer(func me.scan_ident(n, data), 1);
 		var path = n.getPath();
 		if (contains(me.models, path)) {
 			me.models[path] = { node: n, id: me.ident(n) };
 			me.list = sort(keys(me.models), string.icmp);
 		}
 	},
-	stop: func {
-		fgcommand("dialog-close", props.Node.new({ "dialog-name": "model-view" }));
-		me.active = 0;
-		foreach (var listener; me.lnr)
-			removelistener(listener);
-	},
-	reset: func {
-		me.next(me.current = 0);
-	},
 	next: func(v) {
 		me.legendN.setValue("");
-		if (!me.active or !size(me.models))
+		if (!me.active or size(me.models) < 1)
 			return;
 		if (v)
 			me.current += v;
@@ -408,6 +391,14 @@ var model_view_handler = {
 		conf.getNode("target-lon-deg-path", 1).setValue(path ~ "/position/longitude-deg");
 		conf.getNode("target-alt-ft-path", 1).setValue(path ~ "/position/altitude-ft");
 		me.legendN.setValue(me.models[path].id);
+	},
+	select: func(id) {
+		debug.dump(["select", id]);
+		forindex (var i; me.list)
+			if (me.models[me.list[i]].id == id)
+				me.current = i;
+		me.next(0);
+		me.next(i);
 	},
 	ident: func(n) {
 		var type = n.getName();

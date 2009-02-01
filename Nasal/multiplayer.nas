@@ -320,7 +320,7 @@ var dialog = {
             PILOTSDLG_RUNNING=1;
             me.init(-2, -2);
             me.create();
-            me.update();
+            me.update(me.loopid += 1);
         }
     },
     toggle: func {
@@ -373,10 +373,11 @@ var model = {
             model = me.remove_suffix(model, "-anim");
 
             var path = n.getPath();
-            me.data[path] = { node: n, callsign: callsign, model: model, path: path };
+            me.data[path] = { node: n, callsign: callsign, model: model,
+                    path: path, sort: string.lc(callsign)};
         }
 
-        me.list = sort(keys(me.data), func(a, b) string.icmp(me.data[a].callsign, me.data[b].callsign));
+        me.list = sort(keys(me.data), func(a, b) cmp(me.data[a].sort, me.data[b].sort));
         forindex (var i; me.list)
             me.list[i] = me.data[me.list[i]];
 

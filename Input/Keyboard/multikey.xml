@@ -1163,7 +1163,7 @@
 				<binding>
 					<command>nasal</command>
 					<script>
-						setprop("/controls/flight/airelon-trim", 0);
+						setprop("/controls/flight/aileron-trim", 0);
 						setprop("/controls/flight/elevator-trim", 0);
 						setprop("/controls/flight/rudder-trim", 0);
 					</script>

@@ -382,9 +382,13 @@ var model_view_handler = {
 			"eye-lat-deg-path": data.path ~ "/position/latitude-deg",
 			"eye-lon-deg-path": data.path ~ "/position/longitude-deg",
 			"eye-alt-ft-path": data.path ~ "/position/altitude-ft",
+			"eye-heading-deg-path": data.path ~ "/orientation/heading-deg",
 			"target-lat-deg-path": data.path ~ "/position/latitude-deg",
 			"target-lon-deg-path": data.path ~ "/position/longitude-deg",
 			"target-alt-ft-path": data.path ~ "/position/altitude-ft",
+			"target-heading-deg-path": data.path ~ "/orientation/heading-deg",
+			"target-pitch-deg-path": data.path ~ "/orientation/pitch-deg",
+			"target-roll-deg-path": data.path ~ "/orientation/roll-deg",
 		});
 	},
 };

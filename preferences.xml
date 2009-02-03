@@ -555,6 +555,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <transmission-freq-hz type="string">118500000</transmission-freq-hz>
    <chat-display type="bool" userarchive="y">true</chat-display>
    <chat-menu include="ATC/chat-menu-entries.xml"/>
+   <default-model type="string">Models/Geometry/glider.ac</default-model>
   </multiplay>
 
   <user>

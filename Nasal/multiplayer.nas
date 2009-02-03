@@ -267,13 +267,13 @@ var dialog = {
         foreach (var mp; model.list) {
             var n = mp.node;
             var ac = geo.Coord.new().set_xyz(
-                    n.getNode("position/global-x").getValue(),
-                    n.getNode("position/global-y").getValue(),
-                    n.getNode("position/global-z").getValue());
+                    n.getNode("position/global-x").getValue() or 0,
+                    n.getNode("position/global-y").getValue() or 0,
+                    n.getNode("position/global-z").getValue() or 0);
             var distance = self.distance_to(ac);
 
             n.setValues({
-                "model-short": mp.model,
+                "model-short": mp.available ? mp.model : "??? " ~ mp.model,
                 "bearing-to": self.course_to(ac),
                 "distance-to-km": distance / 1000.0,
                 "distance-to-nm": distance * M2NM,
@@ -360,6 +360,8 @@ var model = {
             return;
 
         me.data = {};
+        me.callsign = {};
+        var root = string.normpath(getprop("/sim/fg-root")) ~ '/';
         foreach (var n; props.globals.getNode("ai/models", 1).getChildren("multiplayer")) {
             if (!n.getNode("valid", 1).getValue())
                 continue;
@@ -368,13 +370,24 @@ var model = {
                 continue;
 
             var model = n.getNode("sim/model/path").getValue();
+            var available = 0;
+            if (io.stat(string.normpath(root ~ "AI/" ~ model)) != nil)
+                available = 1;
+            elsif (io.stat(string.normpath(root ~ model)) != nil)
+                available = 2;
+            else
+                print("Multiplayer model not available: ", model);
+
             model = split(".", split("/", model)[-1])[0];
             model = me.remove_suffix(model, "-model");
             model = me.remove_suffix(model, "-anim");
 
             var path = n.getPath();
-            me.data[path] = { node: n, callsign: callsign, model: model,
-                    path: path, sort: string.lc(callsign)};
+            var data = { node: n, callsign: callsign, model: model, path: path,
+                    sort: string.lc(callsign), available: available };
+
+            me.data[path] = data;
+            me.callsign[callsign] = data;
         }
 
         me.list = sort(keys(me.data), func(a, b) cmp(me.data[a].sort, me.data[b].sort));

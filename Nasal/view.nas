@@ -360,13 +360,13 @@ var model_view_handler = {
 	},
 	_update_: func {
 		var self = { callsign: getprop("/sim/multiplay/callsign"), model:,
-				node: props.globals, path: '/' };
+				node: props.globals, root: '/' };
 		me.list = [self] ~ multiplayer.model.list;
 		if (!me.find(me.current))
 			me.select(0);
 	},
 	setup: func(data) {
-		if (data.path == '/') {
+		if (data.root == '/') {
 			var zoffset = getprop("/sim/chase-distance-m");
 			var ident = '[' ~ data.callsign ~ ']';
 		} else {
@@ -379,16 +379,16 @@ var model_view_handler = {
 		setprop("/sim/current-view/z-offset-m", zoffset);
 
 		me.viewN.getNode("config").setValues({
-			"eye-lat-deg-path": data.path ~ "/position/latitude-deg",
-			"eye-lon-deg-path": data.path ~ "/position/longitude-deg",
-			"eye-alt-ft-path": data.path ~ "/position/altitude-ft",
-			"eye-heading-deg-path": data.path ~ "/orientation/heading-deg",
-			"target-lat-deg-path": data.path ~ "/position/latitude-deg",
-			"target-lon-deg-path": data.path ~ "/position/longitude-deg",
-			"target-alt-ft-path": data.path ~ "/position/altitude-ft",
-			"target-heading-deg-path": data.path ~ "/orientation/heading-deg",
-			"target-pitch-deg-path": data.path ~ "/orientation/pitch-deg",
-			"target-roll-deg-path": data.path ~ "/orientation/roll-deg",
+			"eye-lat-deg-path": data.root ~ "/position/latitude-deg",
+			"eye-lon-deg-path": data.root ~ "/position/longitude-deg",
+			"eye-alt-ft-path": data.root ~ "/position/altitude-ft",
+			"eye-heading-deg-path": data.root ~ "/orientation/heading-deg",
+			"target-lat-deg-path": data.root ~ "/position/latitude-deg",
+			"target-lon-deg-path": data.root ~ "/position/longitude-deg",
+			"target-alt-ft-path": data.root ~ "/position/altitude-ft",
+			"target-heading-deg-path": data.root ~ "/orientation/heading-deg",
+			"target-pitch-deg-path": data.root ~ "/orientation/pitch-deg",
+			"target-roll-deg-path": data.root ~ "/orientation/roll-deg",
 		});
 	},
 };

@@ -250,7 +250,7 @@ var dialog = {
                 var w = content.addChild("text");
                 w.node.setValues(column);
                 var p = typeof(column.property) == "func" ? column.property() : column.property;
-                w.node.setValues({row: row, col: col, live: 1, property: mp.path ~ "/" ~ p});
+                w.node.setValues({row: row, col: col, live: 1, property: mp.root ~ "/" ~ p});
                 w.setColor(me.fg[odd][0], me.fg[odd][1], me.fg[odd][2], me.fg[odd][3]);
                 col += 1;
             }
@@ -267,10 +267,13 @@ var dialog = {
         foreach (var mp; model.list) {
             var n = mp.node;
             var ac = geo.Coord.new().set_xyz(
-                    n.getNode("position/global-x").getValue() or 0,
-                    n.getNode("position/global-y").getValue() or 0,
-                    n.getNode("position/global-z").getValue() or 0);
-            var distance = self.distance_to(ac);
+                    n.getNode("position/global-x").getValue(),
+                    n.getNode("position/global-y").getValue(),
+                    n.getNode("position/global-z").getValue());
+            var distance = nil;
+            call(func distance = self.distance_to(ac), nil, var err = []);
+            if (size(err))
+                debug.dump(self, ac);
 
             n.setValues({
                 "model-short": mp.available ? mp.model : "??? " ~ mp.model,
@@ -334,23 +337,32 @@ var dialog = {
 
 
 # Autonomous singleton class that monitors multiplayer aircraft,
-# maintains a data hash and a list (sorted by callsign), and raises
-# signal "/sim/signals/multiplayer-updated" whenever an aircraft
-# joined or left. Both multiplayer.model.data and multiplayer.model.list
-# contain hash entries of this form:
+# maintains data in various structures, and raises signal
+# "/sim/signals/multiplayer-updated" whenever an aircraft
+# joined or left. Available data containers are:
+#
+#   multiplayer.model.data:        hash, key := /ai/models/* path
+#   multiplayer.model.callsign     hash, key := callsign
+#   multiplayer.model.list         vector, sorted alphabetically (ASCII, case insensitive)
+#   multiplayer.model.available    unsorted list of players with available models
+#   multiplayer.model.unavailable  unsorted list of players with unavailable models
+#
+# All of them contain hash entries of this form:
 #
 # {
-#    callsign: "bimaus",
-#    model: "bo105",     # model name without suffixes (xml, ac, -anim, -model)
-#    node: {...},        # node as props.Node hash
-#    path: "/ai/models/multiplayer[4]",
+#    callsign: "BiMaus",
+#    path: "Aircraft/bo105/Models/bo105.xml",      # relative file path
+#    root: "/ai/models/multiplayer[4]",            # root property
+#    node: {...},        # root property as props.Node hash
+#    model: "bo105",     # model name (extracted from path)
+#    available: 2,       # whether the model is installed (0: not inst, 1: AI, 2: regular)
+#    sort: "bimaus",     # callsign in lower case (for sorting)
 # }
-#
 #
 var model = {
     init: func {
         me.L = [];
-        me.list = [];
+        me.warned = {};
         append(me.L, setlistener("ai/models/model-added", func(n) me.update(n.getValue())));
         append(me.L, setlistener("ai/models/model-removed", func(n) me.update(n.getValue())));
         me.update();
@@ -361,7 +373,10 @@ var model = {
 
         me.data = {};
         me.callsign = {};
-        var root = string.normpath(getprop("/sim/fg-root")) ~ '/';
+        me.available = [];
+        me.unavailable = [];
+
+        var fg_root = string.normpath(getprop("/sim/fg-root")) ~ '/';
         foreach (var n; props.globals.getNode("ai/models", 1).getChildren("multiplayer")) {
             if (!n.getNode("valid", 1).getValue())
                 continue;
@@ -369,25 +384,26 @@ var model = {
             if ((var callsign = n.getNode("callsign")) == nil or !(callsign = callsign.getValue()))
                 continue;
 
-            var model = n.getNode("sim/model/path").getValue();
+            var path = n.getNode("sim/model/path").getValue();
             var available = 0;
-            if (io.stat(string.normpath(root ~ "AI/" ~ model)) != nil)
+            if (io.stat(string.normpath(fg_root ~ "AI/" ~ path)) != nil)
                 available = 1;
-            elsif (io.stat(string.normpath(root ~ model)) != nil)
+            elsif (io.stat(string.normpath(fg_root ~ path)) != nil)
                 available = 2;
-            else
-                print("Multiplayer model not available: ", model);
+            elsif (!contains(me.warned, path))
+                me.warned[path] = print(debug._error("=== MP model not installed: " ~ path));
 
-            model = split(".", split("/", model)[-1])[0];
+            var model = split(".", split("/", path)[-1])[0];
             model = me.remove_suffix(model, "-model");
             model = me.remove_suffix(model, "-anim");
 
-            var path = n.getPath();
-            var data = { node: n, callsign: callsign, model: model, path: path,
+            var root = n.getPath();
+            var data = { node: n, callsign: callsign, model: model, root: root,
                     sort: string.lc(callsign), available: available };
 
-            me.data[path] = data;
+            me.data[root] = data;
             me.callsign[callsign] = data;
+            append(available ? me.available : me.unavailable, data);
         }
 
         me.list = sort(keys(me.data), func(a, b) cmp(me.data[a].sort, me.data[b].sort));

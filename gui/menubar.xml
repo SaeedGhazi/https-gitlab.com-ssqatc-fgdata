@@ -401,7 +401,7 @@
    <label>Chat</label>
    <binding>
     <command>dialog-show</command>
-    <dialog-name>chat</dialog-name>
+    <dialog-name>chat-full</dialog-name>
    </binding>
   </item>
 

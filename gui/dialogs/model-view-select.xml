@@ -28,7 +28,7 @@
 			var entries = {};
 			forindex (var i; data) {
 				if (i == 0) {
-					var ident = '[' ~ data[i].callsign ~ ']';
+					var ident = var myself = '[' ~ data[i].callsign ~ ']';
 					list.getChild("value", size(data), 1).setValue(ident);
 				} else {
 					var ident = '"' ~ data[i].callsign ~ '" (' ~ data[i].model ~ ')';
@@ -39,7 +39,7 @@
 
 			var select = func {
 				var e = dlg.initNode("choice", "").getValue();
-				if (contains(multiplayer.model.callsign, entries[e]))
+				if (e == myself or contains(multiplayer.model.callsign, entries[e]))
 					view.model_view_handler.select(entries[e]);
 				else
 					settimer(func fgcommand("dialog-show", self), 0);

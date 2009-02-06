@@ -21,14 +21,15 @@
 #                                          (similar to props.dump()), otherwise
 #                                          use space indentation
 #
-# debug.exit()                         ... exits fgfs
-#
 # debug.bt()                           ... abbreviation for debug.backtrace()
 #
 # debug.string(<variable>)             ... returns contents of variable as string
 # debug.attributes(<property> [, <verb>]) ... returns attribute string for a given property.
 #                                          <verb>ose is by default 1, and suppressed the
 #                                          node's refcounter if 0.
+#
+# debug.isnan()                            returns 1 if argument is an invalid number (NaN),
+#                                          0 if it's a valid number, and nil in all other cases
 #
 # debug.benchmark(<label:string>, <func> [, <repeat:int>])
 #                                      ... runs function <repeat> times (default: 1)
@@ -185,10 +186,9 @@ var _dump_key = func(s) {
 		return _dump_string(s);
 	if (!globals.string.isalpha(s[0]) and s[0] != `_`)
 		return _dump_string(s);
-	for (var i = 1; i < size(s); i += 1) {
+	for (var i = 1; i < size(s); i += 1)
 		if (!globals.string.isalnum(s[i]) and s[i] != `_`)
 			return _dump_string(s);
-	}
 	_dump_var(s);
 }
 
@@ -296,9 +296,6 @@ var benchmark = func(label, fn, repeat = 1) {
 }
 
 
-var exit = func fgcommand("exit");
-
-
 ##
 # print error vector as set by call(). By using call() one can execute
 # code that catches "exceptions" (by a die() call or errors). The Nasal
@@ -316,5 +313,8 @@ var printerror = func(err) {
 	for (var i = 3; i < size(err); i += 2)
 		printf("  called from %s line %d", err[i], err[i + 1]);
 }
+
+
+var isnan = (func { var nan = 1 / 0; func(d) num(d) == nil ? nil : d == nan; })();
 
 

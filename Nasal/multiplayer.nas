@@ -155,11 +155,8 @@ var handle_key = func(key)
 
 
 
-
-# (l) 2008 by till busch <buti (at) bux (dot) at>
+# multiplayer.dialog.show() -- displays pilot list dialog
 #
-# multiplayer.dialog.show() -- displays the dialog and starts the update loop
-
 var PILOTSDLG_RUNNING = 0;
 
 var dialog = {
@@ -167,19 +164,19 @@ var dialog = {
         me.x = x;
         me.y = y;
         me.bg = [0, 0, 0, 0.3];    # background color
-        me.fg = [[0.9, 0.9, 0.2, 1], [1.0, 1.0, 1.0, 1.0]];   # alternating foreground colors
+        me.fg = [[0.9, 0.9, 0.2, 1], [1, 1, 1, 1], [1, 0.5, 0, 1]]; # alternative active & disabled color
         me.unit = 1;
         me.toggle_unit();          # set to imperial
         #
         # "private"
         var font = { name: "FIXED_8x13" };
-        me.header = [" callsign", "model", "brg", func { dialog.dist_hdr }, func { dialog.alt_hdr ~ " " }];
+        me.header = [" callsign", "model", "brg", func dialog.dist_hdr, func dialog.alt_hdr ~ " "];
         me.columns = [
-            {property:"callsign",    format:" %s",   label: "-----------",   halign:"fill" },
-            {property:"model-short", format:"%s",    label: "--------------",halign:"fill" },
-            {property:"bearing-to",  format:" %3.0f",label: "----",     halign: "right", font: font },
-            {property:func {dialog.dist_node}, format:" %8.2f",label: "---------",halign: "right", font: font },
-            {property:func {dialog.alt_node},  format:" %7.0f",label: "---------",halign: "right", font: font }
+            { property: "callsign",    format: " %s",    label: "-----------",    halign: "fill" },
+            { property: "model-short", format: "%s",     label: "--------------", halign: "fill" },
+            { property: "bearing-to",  format: " %3.0f", label: "----",           halign: "right", font: font },
+            { property: func dialog.dist_node, format:" %8.2f", label: "---------", halign: "right", font: font },
+            { property: func dialog.alt_node,  format:" %7.0f", label: "---------", halign: "right", font: font },
         ];
         me.name = "who-is-online";
         me.dialog = nil;
@@ -195,7 +192,7 @@ var dialog = {
         if (me.dialog != nil)
             me.close();
 
-        me.dialog = gui.Widget.new();
+        me.dialog = gui.dialog[me.name] = gui.Widget.new();
         me.dialog.set("name", me.name);
         me.dialog.set("dialog-name", me.name);
         if (me.x != nil)
@@ -212,18 +209,18 @@ var dialog = {
         titlebar.set("layout", "hbox");
 
         var w = titlebar.addChild("button");
-        w.node.setValues({"pref-width": 16, "pref-height": 16, legend: me.unit_button, default: 0});
+        w.node.setValues({ "pref-width": 16, "pref-height": 16, legend: me.unit_button, default: 0 });
         w.setBinding("nasal", "multiplayer.dialog.toggle_unit(); multiplayer.dialog._redraw_()");
 
         titlebar.addChild("empty").set("stretch", 1);
         titlebar.addChild("text").set("label", "Pilots: ");
 
         var p = titlebar.addChild("text");
-        p.node.setValues({label: "---", live: 1, format: "%d", property: "ai/models/num-players"});
+        p.node.setValues({ label: "---", live: 1, format: "%d", property: "ai/models/num-players" });
         titlebar.addChild("empty").set("stretch", 1);
 
         var w = titlebar.addChild("button");
-        w.node.setValues({"pref-width": 16, "pref-height": 16, legend: "", default: 0});
+        w.node.setValues({ "pref-width": 16, "pref-height": 16, legend: "", default: 0 });
         w.setBinding("nasal", "multiplayer.dialog.del()");
 
         me.dialog.addChild("hrule");
@@ -239,23 +236,23 @@ var dialog = {
             var l = typeof(h) == "func" ? h() : h;
             w.node.setValues({ "label": l, "row": row, "col": col, halign: me.columns[col].halign });
             w = content.addChild("hrule");
-            w.node.setValues({ "row": row + 1,"col": col });
+            w.node.setValues({ "row": row + 1, "col": col });
             col += 1;
         }
         row += 2;
-        var odd = 0;
+        var odd = 1;
         foreach (var mp; model.list) {
             var col = 0;
+            var color = mp.available ? me.fg[odd = !odd] : me.fg[2];
             foreach (var column; me.columns) {
                 var w = content.addChild("text");
                 w.node.setValues(column);
                 var p = typeof(column.property) == "func" ? column.property() : column.property;
-                w.node.setValues({row: row, col: col, live: 1, property: mp.root ~ "/" ~ p});
-                w.setColor(me.fg[odd][0], me.fg[odd][1], me.fg[odd][2], me.fg[odd][3]);
+                w.node.setValues({ row: row, col: col, live: 1, property: mp.root ~ "/" ~ p });
+                w.setColor(color[0], color[1], color[2], color[3]);
                 col += 1;
             }
-            odd = !odd;
-            row +=1;
+            row += 1;
         }
         me.update(me.loopid += 1);
         fgcommand("dialog-new", me.dialog.prop());
@@ -272,11 +269,14 @@ var dialog = {
                     n.getNode("position/global-z").getValue());
             var distance = nil;
             call(func distance = self.distance_to(ac), nil, var err = []);
-            if (size(err))
-                debug.dump(self, ac);
+            if (size(err)) {
+            #    debug.printerror(err);
+            #    debug.dump(self, ac, mp);
+            #    debug.tree(mp.node);
+            }
 
             n.setValues({
-                "model-short": mp.available ? mp.model : "??? " ~ mp.model,
+                "model-short": mp.available ? mp.model : "[" ~ mp.model ~ "]",
                 "bearing-to": self.course_to(ac),
                 "distance-to-km": distance / 1000.0,
                 "distance-to-nm": distance * M2NM,
@@ -312,15 +312,15 @@ var dialog = {
         fgcommand("dialog-close", me.dialog.prop());
     },
     del: func {
-        PILOTSDLG_RUNNING=0;
+        PILOTSDLG_RUNNING = 0;
         me.close();
         foreach (var l; me.listeners)
             removelistener(l);
-        delete(gui.dialog, "\"" ~ me.name ~ "\"");
+        delete(gui.dialog, me.name);
     },
     show: func {
         if (!PILOTSDLG_RUNNING) {
-            PILOTSDLG_RUNNING=1;
+            PILOTSDLG_RUNNING = 1;
             me.init(-2, -2);
             me.create();
             me.update(me.loopid += 1);

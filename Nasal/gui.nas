@@ -705,7 +705,7 @@ var showWeightDialog = func {
         var fdmdata = {
             grosswgt : "/fdm/jsbsim/inertia/weight-lbs",
             payload  : "/payload",
-            level    : "level-lb",
+            level    : "level-lbs",
         };
     }
 

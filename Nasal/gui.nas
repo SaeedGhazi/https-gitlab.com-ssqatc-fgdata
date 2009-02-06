@@ -699,13 +699,11 @@ var showWeightDialog = func {
         var fdmdata = {
             grosswgt : "/yasim/gross-weight-lbs",
             payload  : "/sim",
-            level    : "level-lbs",
         };
     } elsif(fdm == "jsb") {
         var fdmdata = {
             grosswgt : "/fdm/jsbsim/inertia/weight-lbs",
             payload  : "/payload",
-            level    : "level-lbs",
         };
     }
 
@@ -795,7 +793,7 @@ var showWeightDialog = func {
         slider.setBinding("dialog-apply");
 
         var lbs = tcell(fuelTable, "text", i+1, 3);
-        lbs.set("property", tankprop ~ "/" ~ fdmdata.level);
+        lbs.set("property", tankprop ~ "/level-lbs");
         lbs.set("label", "0123456");
         lbs.set("format", "%.3f");
         lbs.set("live", 1);

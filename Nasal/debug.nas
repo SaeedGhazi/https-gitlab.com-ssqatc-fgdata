@@ -337,7 +337,7 @@ _setlistener("sim/signals/nasal-dir-initialized", func {
 	var warn = func(f, p, r) {
 		if (!r) {
 			var hint = "";
-			if ((n = props.globals.getNode(p)) != nil) {
+			if ((var n = props.globals.getNode(p)) != nil) {
 				if (!n.getAttribute("writable"))
 					hint = " (write protected)";
 				elsif (n.getAttribute("tied"))

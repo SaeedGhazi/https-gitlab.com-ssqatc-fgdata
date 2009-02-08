@@ -46,7 +46,7 @@
 #       set property /sim/startup/terminal-ansi-colors=0
 #
 
-# for color codes see  $ man console_codes
+# ANSI color code wrappers  (see  $ man console_codes)
 #
 var _title       = func(s) globals.string.color("33;42;1", s); # backtrace header
 var _section     = func(s) globals.string.color("37;41;1", s); # backtrace frame
@@ -315,6 +315,38 @@ var printerror = func(err) {
 }
 
 
+var error = func(msg, level = 2) {
+	var c = caller(level);
+	print(msg, ":\n  at ", c[2], ", line ", c[3]);
+	while ((c = caller(level += 1)) != nil)
+		print("  called from: ", c[2], ", line ", c[3]);
+}
+
+
 var isnan = (func { var nan = 1 / 0; func(d) num(d) == nil ? nil : d == nan; })();
+
+
+
+# --prop:debug=1 enables debug mode with additional warnings
+#
+_setlistener("sim/signals/nasal-dir-initialized", func {
+	if (!getprop("debug"))
+		return;
+	var warn = func(f, p, r) {
+		if (!r)
+			error("Warning: " ~ f ~ " -> writing to " ~ p ~ " failed", 3);
+		return r;
+	}
+	setprop = (func { var _ = setprop; func warn("setprop",
+			globals.string.join("", arg[:-1]), call(_, arg)) })();
+	props.Node.setDoubleValue = func warn("setDoubleValue",
+			me.getPath(), props._setDoubleValue(me._g, arg));
+	props.Node.setBoolValue = func warn("setBoolValue",
+			me.getPath(), props._setBoolValue(me._g, arg));
+	props.Node.setIntValue = func warn("setIntValue",
+			me.getPath(), props._setIntValue(me._g, arg));
+	props.Node.setValue = func warn("setValue",
+			me.getPath(), props._setValue(me._g, arg));
+});
 
 

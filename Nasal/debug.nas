@@ -37,6 +37,8 @@
 #                                          prefixed with <label>.
 #
 # debug.printerror(<err-vector>)       ... prints error vector as set by call()
+# debug.error(<message>, <level>)      ... generate error message followed by stack trace
+#                                          beginning with <level> (default: 2).
 #
 # debug.propify(<variable>)            ... turn about everything into a props.Node
 #
@@ -333,20 +335,28 @@ _setlistener("sim/signals/nasal-dir-initialized", func {
 	if (!getprop("debug"))
 		return;
 	var warn = func(f, p, r) {
-		if (!r)
-			error("Warning: " ~ f ~ " -> writing to " ~ p ~ " failed", 3);
+		if (!r) {
+			var hint = "";
+			if ((n = props.globals.getNode(p)) != nil) {
+				if (!n.getAttribute("writable"))
+					hint = " (write protected)";
+				elsif (n.getAttribute("tied"))
+					hint = " (tied)";
+			}
+			error("Warning: " ~ f ~ " -> writing to " ~ p ~ " failed" ~ hint, 3);
+		}
 		return r;
 	}
 	setprop = (func { var _ = setprop; func warn("setprop",
 			globals.string.join("", arg[:-1]), call(_, arg)) })();
-	props.Node.setDoubleValue = func warn("setDoubleValue",
-			me.getPath(), props._setDoubleValue(me._g, arg));
-	props.Node.setBoolValue = func warn("setBoolValue",
-			me.getPath(), props._setBoolValue(me._g, arg));
-	props.Node.setIntValue = func warn("setIntValue",
-			me.getPath(), props._setIntValue(me._g, arg));
-	props.Node.setValue = func warn("setValue",
-			me.getPath(), props._setValue(me._g, arg));
+	props.Node.setDoubleValue = func warn("setDoubleValue", me.getPath(),
+			props._setDoubleValue(me._g, arg));
+	props.Node.setBoolValue = func warn("setBoolValue", me.getPath(),
+			props._setBoolValue(me._g, arg));
+	props.Node.setIntValue = func warn("setIntValue", me.getPath(),
+			props._setIntValue(me._g, arg));
+	props.Node.setValue = func warn("setValue", me.getPath(),
+			props._setValue(me._g, arg));
 });
 
 

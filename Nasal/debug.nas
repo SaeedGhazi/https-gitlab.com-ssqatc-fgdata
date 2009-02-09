@@ -348,7 +348,7 @@ _setlistener("sim/signals/nasal-dir-initialized", func {
 		return r;
 	}
 	setprop = (func { var _ = setprop; func warn("setprop",
-			globals.string.join("", arg[:-1]), call(_, arg)) })();
+			globals.string.join("", arg[:-2]), call(_, arg)) })();
 	props.Node.setDoubleValue = func warn("setDoubleValue", me.getPath(),
 			props._setDoubleValue(me._g, arg));
 	props.Node.setBoolValue = func warn("setBoolValue", me.getPath(),

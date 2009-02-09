@@ -37,8 +37,8 @@
 #                                          prefixed with <label>.
 #
 # debug.printerror(<err-vector>)       ... prints error vector as set by call()
-# debug.error(<message>, <level>)      ... generate error message followed by stack trace
-#                                          beginning with <level> (default: 2).
+# debug.warn(<message>, <level>)       ... generate debug message followed by caller stack trace
+#                                          skipping <level> callers levels (default: 0).
 #
 # debug.propify(<variable>)            ... turn about everything into a props.Node
 #
@@ -311,17 +311,24 @@ var printerror = func(err) {
 	if (!size(err))
 		return;
 
-	printf("%s at %s line %d", err[0], err[1], err[2]);
+	printf("%s:\n at %s, line %d", err[0], err[1], err[2]);
 	for (var i = 3; i < size(err); i += 2)
-		printf("  called from %s line %d", err[i], err[i + 1]);
+		printf("  called from: %s, line %d", err[i], err[i + 1]);
 }
 
 
-var error = func(msg, level = 2) {
-	var c = caller(level);
-	print(msg, ":\n  at ", c[2], ", line ", c[3]);
+# like die(), but code execution continues. The level argument defines
+# how many caller() levels to omit. One is automatically omitted, as
+# this would only point to debug.warn(), where the event in question
+# didn't happen.
+#
+var warn = func(msg, level = 0) {
+	var c = caller(level += 1);
+	if (c == nil)
+		die("debug.warn with invalid level argument");
+	printf("%s:\n  at %s, line %d", msg, c[2], c[3]);
 	while ((c = caller(level += 1)) != nil)
-		print("  called from: ", c[2], ", line ", c[3]);
+		printf("  called from: %s, line %d", c[2], c[3]);
 }
 
 
@@ -334,7 +341,7 @@ var isnan = (func { var nan = 1 / 0; func(d) num(d) == nil ? nil : d == nan; })(
 _setlistener("sim/signals/nasal-dir-initialized", func {
 	if (!getprop("debug"))
 		return;
-	var warn = func(f, p, r) {
+	var writewarn = func(f, p, r) {
 		if (!r) {
 			var hint = "";
 			if ((var n = props.globals.getNode(p)) != nil) {
@@ -343,19 +350,19 @@ _setlistener("sim/signals/nasal-dir-initialized", func {
 				elsif (n.getAttribute("tied"))
 					hint = " (tied)";
 			}
-			error("Warning: " ~ f ~ " -> writing to " ~ p ~ " failed" ~ hint, 3);
+			warn("Warning: " ~ f ~ " -> writing to " ~ p ~ " failed" ~ hint, 2);
 		}
 		return r;
 	}
-	setprop = (func { var _ = setprop; func warn("setprop",
+	setprop = (func { var _ = setprop; func writewarn("setprop",
 			globals.string.join("", arg[:-2]), call(_, arg)) })();
-	props.Node.setDoubleValue = func warn("setDoubleValue", me.getPath(),
+	props.Node.setDoubleValue = func writewarn("setDoubleValue", me.getPath(),
 			props._setDoubleValue(me._g, arg));
-	props.Node.setBoolValue = func warn("setBoolValue", me.getPath(),
+	props.Node.setBoolValue = func writewarn("setBoolValue", me.getPath(),
 			props._setBoolValue(me._g, arg));
-	props.Node.setIntValue = func warn("setIntValue", me.getPath(),
+	props.Node.setIntValue = func writewarn("setIntValue", me.getPath(),
 			props._setIntValue(me._g, arg));
-	props.Node.setValue = func warn("setValue", me.getPath(),
+	props.Node.setValue = func writewarn("setValue", me.getPath(),
 			props._setValue(me._g, arg));
 });
 

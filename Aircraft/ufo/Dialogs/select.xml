@@ -2,9 +2,10 @@
 
 <PropertyList>
 	<name>ufo-select</name>
+	<resizable>true</resizable>
 	<layout>vbox</layout>
 	<x>-20</x>
-	<pref-width>600</pref-width>
+	<pref-width>300</pref-width>
 
 	<group>
 		<layout>hbox</layout>
@@ -36,24 +37,26 @@
 	<nasal>
 		<open>
 			var self = cmdarg();
-			var list = self.getNode("list", 1);
+			var list = self.getNode("list");
 			list.removeChildren("value");
-			forindex (var i; ufo.modellist) {
+			forindex (var i; ufo.modellist)
 				list.getChild("value", i, 1).setValue(ufo.modellist[i]);
-			}
 		</open>
 	</nasal>
 
 	<list>
 		<halign>fill</halign>
+		<valign>fill</valign>
+		<stretch>true</stretch>
+		<padding>5</padding>
 		<pref-height>300</pref-height>
-		<property>/cursor</property>
+		<property>cursor</property>
 		<binding>
 			<command>dialog-apply</command>
 		</binding>
 		<binding>
 			<command>nasal</command>
-			<script>ufo.modelmgr.set_modelpath(getprop("/cursor"))</script>
+			<script>ufo.modelmgr.set_modelpath(getprop("cursor"))</script>
 		</binding>
 	</list>
 </PropertyList>

@@ -24,6 +24,7 @@
 # debug.bt()                           ... abbreviation for debug.backtrace()
 #
 # debug.string(<variable>)             ... returns contents of variable as string
+#
 # debug.attributes(<property> [, <verb>]) ... returns attribute string for a given property.
 #                                          <verb>ose is by default 1, and suppressed the
 #                                          node's refcounter if 0.
@@ -37,8 +38,9 @@
 #                                          prefixed with <label>.
 #
 # debug.printerror(<err-vector>)       ... prints error vector as set by call()
+#
 # debug.warn(<message>, <level>)       ... generate debug message followed by caller stack trace
-#                                          skipping <level> callers levels (default: 0).
+#                                          skipping <level> caller levels (default: 0).
 #
 # debug.propify(<variable>)            ... turn about everything into a props.Node
 #
@@ -86,9 +88,8 @@ var propify = func(p, create = 0) {
 var tree = func(n = "", graph = 1) {
 	n = propify(n);
 	if (n == nil)
-		dump(n);
-	else
-		_tree(n, graph);
+		return dump(n);
+	_tree(n, graph);
 }
 
 
@@ -310,7 +311,6 @@ var benchmark = func(label, fn, repeat = 1) {
 var printerror = func(err) {
 	if (!size(err))
 		return;
-
 	printf("%s:\n at %s, line %d", err[0], err[1], err[2]);
 	for (var i = 3; i < size(err); i += 2)
 		printf("  called from: %s, line %d", err[i], err[i + 1]);
@@ -332,7 +332,7 @@ var warn = func(msg, level = 0) {
 }
 
 
-var isnan = (func { var nan = 1 / 0; func(d) num(d) == nil ? nil : d == nan; })();
+# var isnan = (func { var nan = 1 / 0; func(d) num(d) == nil ? nil : d == nan; })();
 
 
 

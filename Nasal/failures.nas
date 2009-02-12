@@ -45,19 +45,6 @@ var breakHash = {
     "/controls/flight/speedbrake"         : { type: type.MCBF, failure: fail.JAM, desc: "Speed Brake" }
 };
 
-# Set a given serviceable property to 1.
-var set1 = func(prop) {
-    n = props.globals.getNode(prop, 1);
-
-    if (n.getValue() == nil) {
-        n.setBoolValue(1);
-    }
-
-    if (n.getType() == "UNSPECIFIED") {
-        n.setBoolValue(n.getValue());
-    }
-}
-
 # Return the failure entry for a given property
 var getFailure = func (prop) {
     var o = breakHash[prop];
@@ -248,3 +235,4 @@ _setlistener("/sim/signals/fdm-initialized", func {
     # Start checking for failures.
     checkMTBF();
 });
+

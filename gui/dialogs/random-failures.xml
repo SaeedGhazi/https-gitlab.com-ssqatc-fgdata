@@ -31,9 +31,11 @@
           setprop("/sim/failure-manager/global-mcbf", m);
         };
 
+        props.globals.initNode("/sim/failure-manager/global-mtbf", 0);
+        props.globals.initNode("/sim/failure-manager/global-mcbf", 0);
+
         set_mtbf(getprop("/sim/failure-manager/global-mtbf"));
         set_mcbf(getprop("/sim/failure-manager/global-mcbf"));
-
       ]]>
     </open>
   </nasal>

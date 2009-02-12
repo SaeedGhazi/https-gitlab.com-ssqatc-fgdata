@@ -200,15 +200,7 @@ _setlistener("/sim/signals/fdm-initialized", func {
 
         # Set up the MTBF/MCFB properties to 0. Note that they are in a separate
         # subtree, as there's no guarantee that the property isn't a leaf.
-        var n = props.globals.getNode(failure_root ~ prop ~ t, 1);
-        
-        if (n.getValue() == nil) {
-            n.setDoubleValue(0);
-        }
-        
-        if (n.getType() == "UNSPECIFIED") {
-            n.setDoubleValue(n.getValue());
-        }
+        props.globals.initNode(failure_root ~ prop ~ t, 0);
 
         if (o.failure == fail.SERVICEABLE) {
             # If the property has a serviceable property, set it if appropriate.

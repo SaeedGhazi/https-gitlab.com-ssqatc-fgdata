@@ -358,6 +358,14 @@
   </item>
 
   <item>
+    <label>Random Failures</label>
+    <binding>
+      <command>dialog-show</command>
+      <dialog-name>random-failures</dialog-name>
+    </binding>
+  </item>
+  
+  <item>
    <label>System Failures</label>
    <binding>
     <command>dialog-show</command>
@@ -372,6 +380,7 @@
     <dialog-name>instrument-failures</dialog-name>
    </binding>
   </item>
+
  </menu>
 
  <menu>
@@ -487,6 +496,17 @@
     <dialog-name>devel-extensions</dialog-name>
    </binding>
   </item>
+  
+  <item>
+    <label>Display Marker</label>
+    <name>display-marker</name>
+    <binding>
+      <command>nasal</command>
+      <script>
+        tutorial.dialog();
+      </script>
+    </binding>
+  </item>
 
   <item>
    <label>Dump Scene Graph</label>
@@ -572,6 +592,15 @@
   <item>
    <label>Start Tutorial</label>
    <name>tutorial-start</name>
+   <binding>
+     <command>nasal</command>
+     <script>
+       props.globals.getNode("/sim/tutorials").remove();
+       io.read_properties(
+       "/home/stuart/FlightGear-0.9/data/Aircraft/c172p/Tutorials/c172-tutorials.xml",
+       "/sim/tutorials");
+     </script>
+   </binding>
    <binding>
     <command>dialog-show</command>
     <dialog-name>tutorial</dialog-name>

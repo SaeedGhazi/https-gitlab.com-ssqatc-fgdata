@@ -380,7 +380,6 @@
     <dialog-name>instrument-failures</dialog-name>
    </binding>
   </item>
-
  </menu>
 
  <menu>
@@ -498,17 +497,6 @@
   </item>
   
   <item>
-    <label>Display Marker</label>
-    <name>display-marker</name>
-    <binding>
-      <command>nasal</command>
-      <script>
-        tutorial.dialog();
-      </script>
-    </binding>
-  </item>
-
-  <item>
    <label>Dump Scene Graph</label>
    <binding>
     <command>dump-scenegraph</command>
@@ -592,15 +580,6 @@
   <item>
    <label>Start Tutorial</label>
    <name>tutorial-start</name>
-   <binding>
-     <command>nasal</command>
-     <script>
-       props.globals.getNode("/sim/tutorials").remove();
-       io.read_properties(
-       "/home/stuart/FlightGear-0.9/data/Aircraft/c172p/Tutorials/c172-tutorials.xml",
-       "/sim/tutorials");
-     </script>
-   </binding>
    <binding>
     <command>dialog-show</command>
     <dialog-name>tutorial</dialog-name>

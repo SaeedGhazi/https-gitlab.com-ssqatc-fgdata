@@ -12,18 +12,14 @@
 var is_active = func getprop("/sim/multiplay/txport") or getprop("/sim/multiplay/rxport");
 
 
+var lastmsg = {};
+
 var check_messages = func {
     foreach (var mp; values(model.callsign)) {
-        var msgN = mp.node.getNode("sim/multiplay/chat", 1);
-        var lastN = mp.node.getNode("sim/multiplay/last-message", 1);
-
-        var msg = msgN.getValue();
-        var last = lastN.getValue();
-        if (msg and msg != last) {
+        var msg = mp.node.getNode("sim/multiplay/chat", 1).getValue();
+        if (msg and msg != lastmsg[mp.callsign])
             echo_message(mp.callsign, msg);
-            lastN.setValue(msg);
-            msgN.setValue("");
-        }
+        lastmsg[mp.callsign] = msg;
     }
     settimer(check_messages, 3);
 }

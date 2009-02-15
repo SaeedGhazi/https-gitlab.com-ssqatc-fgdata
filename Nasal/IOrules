@@ -32,3 +32,4 @@ WRITE ALLOW $FG_HOME/*.sav
 WRITE ALLOW $FG_HOME/Export/*
 WRITE ALLOW $FG_HOME/state/*.xml
 WRITE ALLOW $FG_HOME/aircraft-data/*.xml
+WRITE ALLOW $FG_HOME/mp-message.log

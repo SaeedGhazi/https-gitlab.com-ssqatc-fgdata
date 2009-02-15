@@ -104,7 +104,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     # enable/disable menu entries
     menuEnable("fuel-and-payload", fdm == "yasim" or fdm == "jsb");
     menuEnable("autopilot", props.globals.getNode("/autopilot/KAP140/locks") == nil);
-    menuEnable("multiplayer", getprop("/sim/multiplay/txport") or getprop("/sim/multiplay/rxport"));
+    menuEnable("multiplayer", multiplayer.is_active());
     menuEnable("tutorial-start", size(props.globals.getNode("/sim/tutorials", 1).getChildren("tutorial")));
     menuEnable("joystick-info", size(props.globals.getNode("/input/joysticks").getChildren("js")));
 

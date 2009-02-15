@@ -9,6 +9,8 @@
 # 3) Allow chat messages to be written by the user.
 
 
+var is_active = func getprop("/sim/multiplay/txport") or getprop("/sim/multiplay/rxport");
+
 
 var check_messages = func {
     foreach (var mp; values(model.callsign)) {
@@ -48,13 +50,28 @@ var echo_message = func(callsign, msg) {
 
 
 settimer(func {
-  # Call-back to ensure we see our own messages.
-  setlistener("/sim/multiplay/chat", func(n) {
-    echo_message(getprop("/sim/multiplay/callsign"), n.getValue());
-  });
+    if (is_active()) {
+        if (getprop("/sim/multiplay/write-message-log")) {
+            var ac = getprop("/sim/aircraft");
+            var cs = getprop("/sim/multiplay/callsign");
+            var (date, time) =_= split("T", getprop("/sim/time/gmt"));
+            var apt = airportinfo().id;
+            var file = string.normpath(getprop("/sim/fg-home") ~ "/mp-message.log");
+            var f = io.open(file, "a");
+            io.write(f, sprintf("\n-- %s -- %s -- %s -- %s -- '%s' --\n", date, time, apt, ac, cs));
+            setlistener("/sim/signals/exit", func io.write(f, "--END--\n") and io.close(f));
+            setlistener("/sim/messages/mp-plane", func(n) {
+                io.write(f, sprintf("%s: %s\n", getprop("/sim/time/gmt-string"), n.getValue()));
+                io.flush(f);
+            });
+        }
+        check_messages();
+    }
 
-  # check for new messages
-  check_messages();
+    # Call-back to ensure we see our own messages.
+    setlistener("/sim/multiplay/chat", func(n) {
+        echo_message(getprop("/sim/multiplay/callsign"), n.getValue());
+    });
 }, 1);
 
 

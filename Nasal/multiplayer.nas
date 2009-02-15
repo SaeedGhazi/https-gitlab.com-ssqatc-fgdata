@@ -9,81 +9,55 @@
 # 3) Allow chat messages to be written by the user.
 
 
-var check_messages = func
-{
 
-  var mp = props.globals.getNode("/ai/models").getChildren("multiplayer");
-  var lseen = {};
+var check_messages = func {
+    foreach (var mp; values(model.callsign)) {
+        var msgN = mp.node.getNode("sim/multiplay/chat", 1);
+        var lastN = mp.node.getNode("sim/multiplay/last-message", 1);
 
-  foreach (var n; mp)
-  {
-    var last           = n.initNode("sim/multiplay/last-message", "");
-    var lmsg           = n.getNode("sim/multiplay/chat", 1).getValue();
-    var lcallsign      = n.getNode("callsign", 1).getValue();
-    var lvalid         = n.getNode("valid", 1).getValue();
-
-    if (!lvalid or !lmsg or !lcallsign)
-      continue;
-
-    if (contains(lseen, lcallsign))
-      continue;
-
-    # Indicate that we've seen this callsign. This handles the case
-    # where we have two aircraft with the same callsign in the MP
-    # session.
-    lseen[lcallsign] = 1;
-
-    if (lmsg != last.getValue())
-    {
-      # Display the message.
-      echo_message(lmsg, lcallsign);
-      last.setValue(lmsg);
+        var msg = msgN.getValue();
+        var last = lastN.getValue();
+        if (msg and msg != last) {
+            echo_message(mp.callsign, msg);
+            lastN.setValue(msg);
+            msgN.setValue("");
+        }
     }
-  }
-
-# Check for new messages every couple of seconds.
-  settimer(check_messages, 3);
+    settimer(check_messages, 3);
 }
 
-var echo_message = func(msg, callsign)
-{
-  if ((callsign != nil) and (find(callsign, msg) < 0))
-  {
+
+
+var echo_message = func(callsign, msg) {
     # Only prefix with the callsign if the message doesn't already include it.
-    msg = callsign ~ ": " ~ msg;
-  }
+    if (find(callsign, msg) < 0)
+        msg = callsign ~ ": " ~ msg;
 
-  msg = string.trim(string.replace(msg, "\n", " "));
+    msg = string.trim(string.replace(msg, "\n", " "));
+    setprop("/sim/messages/mp-plane", msg);
 
-  var ldisplay = getprop("/sim/multiplay/chat-display");
+    # Add the chat to the chat history.
+    if (var history = getprop("/sim/multiplay/chat-history")) {
+        history = string.trim(history, 0, string.isxspace);
+        msg = history ~ "\n" ~ msg;
+    }
 
-  if ((ldisplay != nil) and (ldisplay == "1"))
-  {
-    # Only display the message to screen if configured.
-    setprop("/sim/messages/ai-plane", msg);
-  }
-
-  # Add the chat to the chat history.
-  var lchat = getprop("/sim/multiplay/chat-history") or "";
-
-  if (lchat)
-  {
-    lchat = string.trim(lchat, 0, string.isxspace);
-    msg = lchat ~ "\n" ~ msg;
-  }
-
-  setprop("/sim/multiplay/chat-history", msg);
+    setprop("/sim/multiplay/chat-history", msg);
 }
+
+
 
 settimer(func {
   # Call-back to ensure we see our own messages.
   setlistener("/sim/multiplay/chat", func(n) {
-    echo_message(n.getValue(), getprop("/sim/multiplay/callsign"));
+    echo_message(getprop("/sim/multiplay/callsign"), n.getValue());
   });
 
   # check for new messages
   check_messages();
 }, 1);
+
+
 
 # Message composition function, activated using the - key.
 var prefix = "Chat Message:";
@@ -263,10 +237,10 @@ var dialog = {
         var self = geo.aircraft_position();
         foreach (var mp; model.list) {
             var n = mp.node;
-            var ac = geo.Coord.new().set_xyz(
-                    n.getNode("position/global-x").getValue(),
-                    n.getNode("position/global-y").getValue(),
-                    n.getNode("position/global-z").getValue());
+            var x = n.getNode("position/global-x").getValue();
+            var y = n.getNode("position/global-y").getValue();
+            var z = n.getNode("position/global-z").getValue();
+            var ac = geo.Coord.new().set_xyz(x, y, z);
             var distance = nil;
             call(func distance = self.distance_to(ac), nil, var err = []);
             if (size(err)) {

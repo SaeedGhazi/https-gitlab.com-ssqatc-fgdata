@@ -537,7 +537,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	listener.ai_plane = setlistener(m ~ "ai-plane",
 			func(n) map("ai-plane", n.getValue(), 0.9, 0.4, 0.2));
 	listener.mp_plane = setlistener(m ~ "mp-plane",
-			func(n) map("ai-plane", n.getValue(), 1.0, 1.0, 1.0,
+			func(n) map("ai-plane", n.getValue(), 0.5, 0.0, 0.8,
 					func getprop("/sim/multiplay/chat-display")));
 });
 

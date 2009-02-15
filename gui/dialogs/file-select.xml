@@ -175,7 +175,7 @@
 					if (stat == nil)  # dead link
 						continue;
 
-					if (io.isdir(stat[2]))
+					if (stat[11] == "dir")
 						append(dirs, e ~ "/");
 					elsif (!size(pattern) or matches(e))
 						append(files, e);
@@ -242,7 +242,7 @@
 				file_input();
 				var p = string.normpath(current.dir ~ "/" ~ current.file);
 				var stat = io.stat(p);
-				path.setValue(stat != nil and io.isdir(stat[2]) ? p ~ "/" : p);
+				path.setValue(stat != nil and stat[11] == "dir" ? p ~ "/" : p);
 				file.setValue(current.file);
 				close();
 			}

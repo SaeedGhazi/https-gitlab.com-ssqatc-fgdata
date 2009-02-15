@@ -493,10 +493,12 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	}, 0, 0);
 
 	# map ATC messages to the screen log and to the voice subsystem
-	var map = func(type, msg, r, g, b) {
-		setprop("/sim/sound/voices/" ~ type, msg);
-		screen.log.write(msg, r, g, b);
+	var map = func(type, msg, r, g, b, cond = nil) {
 		printlog("info", "{", type, "} ", msg);
+		setprop("/sim/sound/voices/" ~ type, msg);
+
+		if (cond == nil or cond())
+			screen.log.write(msg, r, g, b);
 
 		# save last ATC message for user callsign, unless this was already
 		# a repetition; insert "I say again" appropriately
@@ -534,6 +536,9 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 			func(n) map("copilot",  n.getValue(), 1.0, 1.0, 1.0));
 	listener.ai_plane = setlistener(m ~ "ai-plane",
 			func(n) map("ai-plane", n.getValue(), 0.9, 0.4, 0.2));
+	listener.mp_plane = setlistener(m ~ "mp-plane",
+			func(n) map("ai-plane", n.getValue(), 1.0, 1.0, 1.0,
+					func getprop("/sim/multiplay/chat-display")));
 });
 
 

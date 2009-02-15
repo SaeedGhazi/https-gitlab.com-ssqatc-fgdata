@@ -50,14 +50,21 @@ settimer(func {
         if (getprop("/sim/multiplay/write-message-log")) {
             var ac = getprop("/sim/aircraft");
             var cs = getprop("/sim/multiplay/callsign");
-            var (date, time) =_= split("T", getprop("/sim/time/gmt"));
             var apt = airportinfo().id;
+            var t = props.globals.getNode("/sim/time/real").getValues();
+            var date = sprintf("%04d-%02d-%02d", t.year, t.month, t.day);
+            var time = sprintf("%02d:%02d:%02d", t.hour, t.minute, t.second);
             var file = string.normpath(getprop("/sim/fg-home") ~ "/mp-message.log");
             var f = io.open(file, "a");
+
             io.write(f, sprintf("\n-- %s -- %s -- %s -- %s -- '%s' --\n", date, time, apt, ac, cs));
-            setlistener("/sim/signals/exit", func io.write(f, "--END--\n") and io.close(f));
+            setlistener("/sim/signals/exit", func io.write(f, "-- END --\n") and io.close(f));
             setlistener("/sim/messages/mp-plane", func(n) {
-                io.write(f, sprintf("%s: %s\n", getprop("/sim/time/gmt-string"), n.getValue()));
+                io.write(f, sprintf("%02d:%02d:%02d: %s\n",
+                        getprop("/sim/time/real/hour"),
+                        getprop("/sim/time/real/minute"),
+                        getprop("/sim/time/real/second"),
+                        n.getValue()));
                 io.flush(f);
             });
         }

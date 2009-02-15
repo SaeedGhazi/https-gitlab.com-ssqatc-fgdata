@@ -12,7 +12,7 @@ var M2NM = 1 / NM2M;
 var KT2MPS = 0.5144444444;             # knots to m/s
 var MPS2KT = 1 / KT2MPS;
 
-var LB2KG = 0.45359237;                # pounds to kilogram
+var LB2KG = 0.45359237;                # pounds to kg
 var KG2LB = 1 / LB2KG;
 
 var GAL2L = 3.785411784;               # US gallons to liter
@@ -131,6 +131,16 @@ var thisfunc = func caller(1)[1];
 # Just what it says it is.
 #
 var printf = func print(call(sprintf, arg));
+
+
+##
+# Returns vector of hash values.
+#
+var values = func(hash) {
+    var vec = [];
+    foreach(var key; keys(hash)) append(vec, hash[key]);
+    return vec;
+}
 
 
 ##

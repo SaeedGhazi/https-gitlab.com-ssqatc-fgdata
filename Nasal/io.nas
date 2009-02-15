@@ -13,8 +13,9 @@ var readfile = func(file) {
 # (stat(...)[2]) from a stat() call (index 2), extracts the IFMT
 # subfield and compares it with the given type, assumes S_IFMT ==
 # 0xf000.
-var _gen_ifmt_test = func(ifmt) {
+var _gen_ifmt_test = func(fmt, ifmt) {
     func(stat_mode) {
+        debug.warn("use of deprecated function is" ~ fmt ~ "()");
         var i = int(stat_mode / 0x1000);
         return ifmt == i - int(i / 0x10) * 0x10;
     }
@@ -26,7 +27,7 @@ var _gen_ifmt_test = func(ifmt) {
 #        if (s != nil and io.isdir(s[2])) { ... }
 var ifmts = { dir:4, reg:8, lnk:10, sock:12, fifo:1, blk:6, chr:2 };
 foreach (var fmt; keys(ifmts))
-    caller(0)[0]["is" ~ fmt] = _gen_ifmt_test(ifmts[fmt]);
+    caller(0)[0]["is" ~ fmt] = _gen_ifmt_test(fmt, ifmts[fmt]);
 
 
 # Loads Nasal file into namespace and executes it. The namespace

@@ -205,7 +205,7 @@ var scan_models = func(base) {
 			continue;
 		if ((var stat = io.stat(root ~ "/" ~ base ~ "/" ~ d)) == nil)
 			continue;
-		if (io.isdir(stat[2])) {
+		if (stat[11] == "dir") {
 			foreach (var s; scan_models(base ~ "/" ~ d))
 				append(result, s);
 			continue;

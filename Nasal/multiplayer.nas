@@ -17,9 +17,10 @@ var lastmsg = {};
 var check_messages = func {
     foreach (var mp; values(model.callsign)) {
         var msg = mp.node.getNode("sim/multiplay/chat", 1).getValue();
-        if (msg and msg != lastmsg[mp.callsign])
+        if (msg and msg != lastmsg[mp.callsign]) {
             echo_message(mp.callsign, msg);
-        lastmsg[mp.callsign] = msg;
+            lastmsg[mp.callsign] = msg;
+        }
     }
     settimer(check_messages, 3);
 }
@@ -27,18 +28,17 @@ var check_messages = func {
 
 
 var echo_message = func(callsign, msg) {
+    msg = string.trim(string.replace(msg, "\n", " "));
+
     # Only prefix with the callsign if the message doesn't already include it.
     if (find(callsign, msg) < 0)
         msg = callsign ~ ": " ~ msg;
 
-    msg = string.trim(string.replace(msg, "\n", " "));
     setprop("/sim/messages/mp-plane", msg);
 
     # Add the chat to the chat history.
-    if (var history = getprop("/sim/multiplay/chat-history")) {
-        history = string.trim(history, 0, string.isxspace);
+    if (var history = getprop("/sim/multiplay/chat-history"))
         msg = history ~ "\n" ~ msg;
-    }
 
     setprop("/sim/multiplay/chat-history", msg);
 }
@@ -52,18 +52,18 @@ settimer(func {
             var cs = getprop("/sim/multiplay/callsign");
             var apt = airportinfo().id;
             var t = props.globals.getNode("/sim/time/real").getValues();
-            var date = sprintf("%04d-%02d-%02d", t.year, t.month, t.day);
-            var time = sprintf("%02d:%02d:%02d", t.hour, t.minute, t.second);
             var file = string.normpath(getprop("/sim/fg-home") ~ "/mp-message.log");
-            var f = io.open(file, "a");
 
-            io.write(f, sprintf("\n-- %s -- %s -- %s -- %s -- '%s' --\n", date, time, apt, ac, cs));
-            setlistener("/sim/signals/exit", func io.write(f, "-- END --\n") and io.close(f));
+            var f = io.open(file, "a");
+            io.write(f, sprintf("\n=====  %s %04d/%02d/%02d\t%s\t%s\t%s\n",
+                    ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][t.weekday],
+                    t.year, t.month, t.day, apt, ac, cs));
+
+            setlistener("/sim/signals/exit", func io.write(f, "=====\n") and io.close(f));
             setlistener("/sim/messages/mp-plane", func(n) {
-                io.write(f, sprintf("%02d:%02d:%02d: %s\n",
+                io.write(f, sprintf("%02d:%02d  %s\n",
                         getprop("/sim/time/real/hour"),
                         getprop("/sim/time/real/minute"),
-                        getprop("/sim/time/real/second"),
                         n.getValue()));
                 io.flush(f);
             });
@@ -357,6 +357,7 @@ var model = {
     init: func {
         me.L = [];
         me.warned = {};
+        me.fg_root = string.normpath(getprop("/sim/fg-root")) ~ '/';
         append(me.L, setlistener("ai/models/model-added", func(n) me.update(n.getValue())));
         append(me.L, setlistener("ai/models/model-removed", func(n) me.update(n.getValue())));
         me.update();
@@ -370,19 +371,20 @@ var model = {
         me.available = [];
         me.unavailable = [];
 
-        var fg_root = string.normpath(getprop("/sim/fg-root")) ~ '/';
         foreach (var n; props.globals.getNode("ai/models", 1).getChildren("multiplayer")) {
             if (!n.getNode("valid", 1).getValue())
                 continue;
 
             if ((var callsign = n.getNode("callsign")) == nil or !(callsign = callsign.getValue()))
                 continue;
+            if (!(callsign = string.trim(callsign)))
+                continue;
 
             var path = n.getNode("sim/model/path").getValue();
             var available = 0;
-            if (io.stat(string.normpath(fg_root ~ "AI/" ~ path)) != nil)
+            if (io.stat(string.normpath(me.fg_root ~ "AI/" ~ path)) != nil)
                 available = 1;
-            elsif (io.stat(string.normpath(fg_root ~ path)) != nil)
+            elsif (io.stat(string.normpath(me.fg_root ~ path)) != nil)
                 available = 2;
             elsif (!contains(me.warned, path))
                 me.warned[path] = print(debug._error("=== MP model not installed: " ~ path));

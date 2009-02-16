@@ -402,9 +402,7 @@ var model = {
             append(available ? me.available : me.unavailable, data);
         }
 
-        me.list = sort(keys(me.data), func(a, b) cmp(me.data[a].sort, me.data[b].sort));
-        forindex (var i; me.list)
-            me.list[i] = me.data[me.list[i]];
+        me.list = sort(values(me.data), func(a, b) cmp(a.sort, b.sort));
 
         setprop("ai/models/num-players", size(me.list));
         setprop("sim/signals/multiplayer-updated", 1);

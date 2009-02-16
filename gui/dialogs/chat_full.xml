@@ -79,6 +79,7 @@
       <default>true</default>
       <binding>
         <command>dialog-apply</command>
+        <object-name>compose</object-name>
       </binding>
       <binding>
         <command>nasal</command>

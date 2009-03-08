@@ -42,7 +42,6 @@
 
      var headtracking = props.globals.getNode("/sim/headtracking/enabled", 1);
 
-     var kbdshift = props.globals.getNode("/devices/status/keyboard/shift", 1);
      var kbdctrl  = props.globals.getNode("/devices/status/keyboard/ctrl", 1);
      var kbdalt   = props.globals.getNode("/devices/status/keyboard/alt", 1);
 
@@ -418,15 +417,20 @@
       } else {
         if (!pressed[4]) {
           pressed[4] = 1;
-          if (kbdshift.getBoolValue()) {
-            controls.weaponSelect(1);
-          } else {
-            view.stepView(1);
-          }
+          view.stepView(1);
         }
       }
    </script>
   </binding>
+  <mod-shift>
+   <binding>
+    <command>nasal</command>
+    <script>
+      trace("Button 4 + shift pressed!");
+      controls.weaponSelect(1);
+    </script>
+   </binding>
+  </mod-shift>
   <mod-up>
    <binding>
     <command>nasal</command>
@@ -451,15 +455,20 @@
       } else {
         if (!pressed[5]) {
           pressed[5] = 1;
-          if (kbdshift.getBoolValue()) {
-            controls.weaponSelect(-1);
-          } else {
-            view.stepView(-1);
-          }
+          view.stepView(-1);
         }
       }
    </script>
   </binding>
+  <mod-shift>
+   <binding>
+    <command>nasal</command>
+    <script>
+      trace("Button 5 + shift pressed!");
+      controls.weaponSelect(-1);
+    </script>
+   </binding>
+  </mod-shift>
   <mod-up>
    <binding>
     <command>nasal</command>

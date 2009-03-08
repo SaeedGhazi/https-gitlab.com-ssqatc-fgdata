@@ -1,8 +1,9 @@
 <?xml version="1.0" ?>
+<?xml-stylesheet type="text/xsl" href="joystick.xsl"?>
 <!-- $Id$ -->
 <!-- Saitek AV8R/Aviator
 
-  Copyright (C) 2007 - 2008  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2007 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is released under the GPL license v2 or later.
 -->
 <PropertyList>
@@ -10,22 +11,29 @@
  <name>Saitek AV8R Joystick</name>
  <name>Saitek AV8R Classic Stick</name>
 
- <data>
-  <modifier type="int">0</modifier>
-  <quick-view-active type="int">0</quick-view-active>
-  <throttle-mode type="int">0</throttle-mode>
- </data>
-
  <nasal>
   <script>
    <![CDATA[
      var self = cmdarg().getParent();
      var data = self.getNode("data");
-     var modifier            = data.getNode("modifier");
-     var throttle_mode       = data.getNode("throttle-mode");
-     var quick_view_active   = data.getNode("quick-view-active");
+     var modifier            = 0;
+     var engine_select_mode  = 0;
+     # TM0: All selected; TM1: #1 & #2; TM2: #3 & #4
+     var engine_axis_mode    = 0;
+     # Valid only in TM1 and TM2.
+     #   EA0: throttle,  +mod: propeller
+     #   EA1: propeller, +mod: throttle
+     var quick_view_active   = 0;
      var old_view            = view.point.save();
      var pressed             = [0,0,0,0,0,0,0,0,0,0,0,0];
+     var engine = [0, 1, 2, 3];
+
+     # Do per-aircraft modifications     
+     if (getprop("/sim/model/path") ==
+         "Aircraft/Short_Empire/Models/Short_Empire-model.xml") {
+       engine = [0, 3, 1, 2];
+     }
+
 
      var goal_heading_offset =
        props.globals.getNode("/sim/current-view/goal-heading-offset-deg", 1);
@@ -41,12 +49,12 @@
      var quick_view = func {
        dir = arg[0];
        if (dir == 0) {
-         quick_view_active.setIntValue(0);
+         quick_view_active = 0;
          view.point.move(old_view, 0.1);
          headtracking.setIntValue(1);
        } else {
-         if (quick_view_active.getValue() == 0) {
-           quick_view_active.setIntValue(1);
+         if (quick_view_active == 0) {
+           quick_view_active = 1;
            old_view = view.point.save();
            headtracking.setIntValue(0);
 
@@ -141,21 +149,19 @@
    <mac>3</mac>
    <windows>2</windows>
   </number>
-  <desc>TM0: throttle, TM1: throttle 1, TM2: throttle 3</desc>
+  <desc>TM0: throttle, TM1: throttle/propeller 1, TM2: throttle/propeller 3</desc>
   <binding>
    <command>nasal</command>
    <script>
-     if (throttle_mode.getValue() == 0) {
+     if (engine_select_mode == 0) {
        controls.throttleAxis();
      } else {
        var val = cmdarg().getNode("setting").getValue();
-       if (throttle_mode.getValue() == 1) {
-         setprop("/controls/engines/engine[0]/throttle",
-                 (1 - val)/2);
-       } else {
-         setprop("/controls/engines/engine[2]/throttle",
-                 (1 - val)/2);
-       }
+       var ctrl_pp =
+         "/controls/engines/engine[" ~
+         ((engine_select_mode == 1) ? engine[0] : engine[2]) ~ "]/" ~
+         (engine_axis_mode ? "propeller-pitch" : "throttle");
+       setprop(ctrl_pp, (1 - val)/2);
      }
    </script>
   </binding>
@@ -163,25 +169,23 @@
 
  <!-- Analog axis 4. Throttle 2 -->
  <axis n="4">
-  <desc>TM0: mixture, +mod: propeller pitch, TM1: throttle 2, TM2: throttle 4</desc>
+  <desc>TM0: mixture, +mod: propeller pitch, TM1: throttle/propeller 2, TM2: throttle/propeller 4</desc>
   <binding>
    <command>nasal</command>
    <script>
-     if (throttle_mode.getValue() == 0) {
-       if (!modifier.getValue()) {
+     if (engine_select_mode == 0) {
+       if (!modifier) {
          controls.mixtureAxis();
        } else {
          controls.propellerAxis();
        }
      } else {
        var val = cmdarg().getNode("setting").getValue();
-       if (throttle_mode.getValue() == 1) {
-         setprop("/controls/engines/engine[1]/throttle",
-                 (1 - val)/2);
-       } else {
-         setprop("/controls/engines/engine[3]/throttle",
-                 (1 - val)/2);
-       }
+       var ctrl_pp =
+         "/controls/engines/engine[" ~
+         ((engine_select_mode == 1) ? engine[1] : engine[3]) ~ "]/" ~
+         (engine_axis_mode ? "propeller-pitch" : "throttle");
+       setprop(ctrl_pp, (1 - val)/2);
      }
    </script>
   </binding>
@@ -197,7 +201,7 @@
     <script>
      <![CDATA[
        trace("Axis 5, Hat: low!");
-      if (modifier.getValue()) {
+      if (modifier) {
          view.panViewDir(0.5);
        } else {
          quick_view(1);
@@ -209,7 +213,7 @@
     <binding>
      <command>nasal</command>
      <script>
-        if (!modifier.getValue()) {
+        if (!modifier) {
           quick_view(0);
         }
      </script>
@@ -223,7 +227,7 @@
     <script>
      <![CDATA[
        trace("Axis 5, Hat: high!");
-       if (modifier.getValue()) {
+       if (modifier) {
          view.panViewDir(-0.5);
        } else {
          quick_view(2);
@@ -236,7 +240,7 @@
      <command>nasal</command>
      <script>
         trace("Axis 5, Hat: low released!");
-        if (!modifier.getValue()) {
+        if (!modifier) {
           quick_view(0);
         }
      </script>
@@ -255,7 +259,7 @@
     <script>
      <![CDATA[
        trace("Axis 6, Hat: low!");
-       if (modifier.getValue()) {
+       if (modifier) {
          view.panViewPitch(0.5);
        } else {
          view.resetView();
@@ -267,7 +271,7 @@
     <binding>
      <command>nasal</command>
      <script>
-        if (!modifier.getValue()) {
+        if (!modifier) {
           #quick_view(0);
         }
      </script>
@@ -281,7 +285,7 @@
     <script>
      <![CDATA[
        trace("Axis 6, Hat: high!");
-       if (modifier.getValue()) {
+       if (modifier) {
          view.panViewPitch(-0.5);
        } else {
          quick_view(3);
@@ -293,7 +297,7 @@
     <binding>
      <command>nasal</command>
      <script>
-        if (!modifier.getValue()) {
+        if (!modifier) {
           quick_view(0);
         }
      </script>
@@ -305,24 +309,19 @@
  <!-- Trigger Button -->
  <button n="0">
   <name>Trigger</name>
-  <desc>function modifier (mod), +Shift: trigger</desc>
+  <desc>function modifier (mod)</desc>
   <binding>
    <command>nasal</command>
    <script>
       trace("Button 0 pressed!");
-      if (kbdshift.getBoolValue()) {
-        controls.trigger(1);
-      } else {
-        modifier.setIntValue(1);
-      }
+      modifier = 1;
    </script>
   </binding>
   <mod-up>
    <binding>
     <command>nasal</command>
     <script>
-      modifier.setIntValue(0);
-      controls.trigger(0);
+      modifier = 0;
     </script>
    </binding>
   </mod-up>
@@ -336,7 +335,7 @@
    <command>nasal</command>
    <script>
      trace("Button 2 pressed!");
-     if (modifier.getBoolValue()) {
+     if (modifier) {
        controls.applyParkingBrake(1);
      } else {
        controls.applyBrakes(1);
@@ -361,7 +360,7 @@
    <command>nasal</command>
    <script>
       trace("Button 1 pressed!");
-      if (modifier.getBoolValue()) {
+      if (modifier) {
         controls.ptt(1);
       } else {
         controls.applyBrakes(1, -1);
@@ -382,12 +381,16 @@
  <!-- Right Button -->
  <button n="3">
   <name>Right button</name>
-  <desc>right brake</desc>
+  <desc>right brake, +mod: trigger</desc>
   <binding>
    <command>nasal</command>
    <script>
       trace("Button 3 pressed!");
-      controls.applyBrakes(1, 1);
+      if (modifier) {
+        controls.trigger(1);
+      } else {
+        controls.applyBrakes(1, 1);
+      }
    </script>
   </binding>
   <mod-up>
@@ -395,6 +398,7 @@
     <command>nasal</command>
     <script>
        controls.applyBrakes(0, 1);
+       controls.trigger(0);
     </script>
    </binding>
   </mod-up>
@@ -409,7 +413,7 @@
    <command>nasal</command>
    <script>
       trace("Button 4 pressed!");
-      if (modifier.getBoolValue()) {
+      if (modifier) {
         view.decrease();
       } else {
         if (!pressed[4]) {
@@ -442,7 +446,7 @@
    <command>nasal</command>
    <script>
       trace("Button 5 pressed!");
-      if (modifier.getBoolValue()) {
+      if (modifier) {
         view.increase();
       } else {
         if (!pressed[5]) {
@@ -475,7 +479,7 @@
    <command>nasal</command>
    <script>
       trace("Button 6 pressed!");
-      if (modifier.getValue()) {
+      if (modifier) {
         setprop("/controls/flight/speedbrake", 0.0);
       } else {
         controls.elevatorTrim(1);
@@ -493,7 +497,7 @@
    <command>nasal</command>
    <script>
       trace("Button 7 pressed!");
-      if (modifier.getValue()) {
+      if (modifier) {
         setprop("/controls/flight/speedbrake", 1.0);
       } else {
         controls.elevatorTrim(-1);
@@ -510,7 +514,7 @@
    <command>nasal</command>
    <script>
       trace("Button 8 pressed!");
-      if (!modifier.getValue()) {
+      if (!modifier) {
         controls.flapsDown(-1);
       } else {
         controls.gearDown(-1);
@@ -536,7 +540,7 @@
    <command>nasal</command>
    <script>
       trace("Button 9 pressed!");
-      if (!modifier.getValue()) {
+      if (!modifier) {
         controls.flapsDown(1);
       } else {
         controls.gearDown(1);
@@ -557,12 +561,16 @@
  <!-- Button: T7 -->
  <button n="10">
   <name>T7</name>
-  <desc>Increase magnetos</desc>
+  <desc>Increase magnetos, +mod: Engine throttle/propeller axis swap</desc>
   <binding>
    <command>nasal</command>
    <script>
       trace("Button 10 pressed!");
-      controls.stepMagnetos(1);
+      if (!modifier) {
+        controls.stepMagnetos(1);
+      } else {
+        engine_axis_mode = !engine_axis_mode;
+      }
    </script>
   </binding>
  </button>
@@ -570,12 +578,16 @@
  <!-- Button: T8 -->
  <button n="11">
   <name>T8</name>
-  <desc>Decrease magnetos</desc>
+  <desc>Decrease magnetos, +mod: Engine throttle/propeller axis swap</desc>
   <binding>
    <command>nasal</command>
    <script>
       trace("Button 11 pressed!");
-      controls.stepMagnetos(-1);
+      if (!modifier) {
+        controls.stepMagnetos(-1);
+      } else {
+        engine_axis_mode = !engine_axis_mode;
+      }
    </script>
   </binding>
  </button>
@@ -583,12 +595,12 @@
  <!-- Button: 3-way Mode switch -->
  <button n="12">
   <name>Mode 1</name>
-  <desc>Left/Right throttle mode</desc>
+  <desc>Engine 0/1 throttle mode</desc>
   <binding>
    <command>nasal</command>
    <script>
       trace("Mode 1!");
-      throttle_mode.setIntValue(1);
+      engine_select_mode = 1;
    </script>
   </binding>
   <mod-up>
@@ -596,19 +608,19 @@
     <command>nasal</command>
     <script>
        trace("Mode Off!");
-       throttle_mode.setIntValue(0);
+       engine_select_mode = 0;
     </script>
    </binding>
   </mod-up>
  </button>
  <button n="13">
   <name>Mode 2</name>
-  <desc>Left/Right throttle mode</desc>
+  <desc>Engine 2/3 throttle mode</desc>
   <binding>
    <command>nasal</command>
    <script>
       trace("Mode 2!");
-      throttle_mode.setIntValue(2);
+      engine_select_mode = 2;
    </script>
   </binding>
  </button>

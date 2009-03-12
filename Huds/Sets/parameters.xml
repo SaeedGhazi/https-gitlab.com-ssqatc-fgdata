@@ -3,8 +3,8 @@
 <PropertyList>
 	<import>
 		<path>Huds/Instruments/gload.xml</path>
-		<x-offset>-277</x-offset>
-		<y-offset>105</y-offset>
+		<x-offset>-278</x-offset>
+		<y-offset>101</y-offset>
 	</import>
 
 	<tape>

@@ -32,24 +32,6 @@ current mode for each mouse is held in the
     </binding>
    </button>
 
-   <!-- extra buttons control elevator trim -->
-   <!-- these are often assigned to mouse-wheel motion in Linux -->
-   <button n="3">
-    <binding>
-     <command>property-adjust</command>
-     <property>/controls/flight/elevator-trim</property>
-     <step type="double">0.002</step>
-    </binding>
-   </button>
-
-   <button n="4">
-    <binding>
-     <command>property-adjust</command>
-     <property>/controls/flight/elevator-trim</property>
-     <step type="double">-0.002</step>
-    </binding>
-   </button>
-
   </mode>
 
   <mode n="1">
@@ -193,21 +175,19 @@ current mode for each mouse is held in the
     </binding>
    </button>
 
-   <!-- extra buttons control elevator trim -->
+   <!-- extra buttons control FoV -->
    <!-- these are often assigned to mouse-wheel motion in Linux -->
    <button n="3">
     <binding>
-     <command>property-adjust</command>
-     <property>/controls/flight/elevator-trim</property>
-     <step type="double">0.01</step>
+      <command>nasal</command>
+      <script>view.decrease()</script>
     </binding>
    </button>
 
    <button n="4">
     <binding>
-     <command>property-adjust</command>
-     <property>/controls/flight/elevator-trim</property>
-     <step type="double">-0.01</step>
+      <command>nasal</command>
+      <script>view.increase()</script>
     </binding>
    </button>
 

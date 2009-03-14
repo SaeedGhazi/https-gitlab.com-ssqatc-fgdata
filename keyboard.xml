@@ -960,12 +960,12 @@ top down before the key bindings are parsed.
   <desc>Fire Starter on Selected Engine(s)</desc>
   <binding>
    <command>nasal</command>
-   <script>controls.startEngine()</script>
+   <script>controls.startEngine(1)</script>
   </binding>
   <mod-up>
    <binding>
     <command>nasal</command>
-    <script>props.setAll("/controls/engines/engine", "starter", 0)</script>
+    <script>controls.startEngine(0)</script>
    </binding>
   </mod-up>
  </key>

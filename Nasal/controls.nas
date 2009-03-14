@@ -1,4 +1,6 @@
 var startEngine = func(v = 1) {
+    if (!v)
+        return props.setAll("/controls/engines/engine", "starter", 0);
     foreach(var e; engines)
         if(e.selected.getValue())
             e.controls.getNode("starter").setBoolValue(v);

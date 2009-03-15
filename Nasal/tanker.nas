@@ -79,11 +79,11 @@ var Tanker = {
 		me.ai.setValues({
 			"position/latitude-deg": me.coord.lat(),
 			"position/longitude-deg": me.coord.lon(),
-			"position/altitude-ft": me.coord.alt() * M2FT,
+			"position/altitude-ft": alt * M2FT,
 			"orientation/heading-deg": me.heading,
 			"orientation/pitch-deg": 0,
 			"orientation/roll-deg": 0,
-			"refuel/contact": me.distance < 76 and me.ac.alt() < me.coord.alt(), # 250 ft
+			"refuel/contact": me.distance < 76 and me.ac.alt() < alt, # 250 ft
 		});
 
 		var now = getprop("/sim/time/elapsed-sec");
@@ -119,7 +119,7 @@ var request = func {
 	var tanker = values(Tanker.active);
 	if (size(tanker))
 		return tanker[0].identify();
-	var type = props.globals.getNode("systems/refuel").getChildren("type");
+	var type = props.globals.getNode("systems/refuel", 1).getChildren("type");
 	if (!size(type))
 		return;
 	type = type[rand() * size(type)].getValue();
@@ -141,7 +141,7 @@ var report = func {
 
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
-	var aar_capable = size(props.globals.getNode("systems/refuel").getChildren("type"));
+	var aar_capable = size(props.globals.getNode("systems/refuel", 1).getChildren("type"));
 	gui.menuEnable("tanker", aar_capable);
 	if (!aar_capable)
 		request = func setprop("sim/messages/ai-plane", "no tanker in range");

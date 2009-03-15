@@ -399,6 +399,16 @@
     <dialog-name>atc-ai</dialog-name>
    </binding>
   </item>
+
+  <item>
+   <label>Tanker</label>
+   <name>tanker</name>
+   <enabled>false</enabled>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>tanker</dialog-name>
+   </binding>
+  </item>
  </menu>
 
  <menu>

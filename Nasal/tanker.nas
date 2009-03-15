@@ -17,35 +17,34 @@ var clock = func(bearing) {
 var Tanker = {
 	new: func(callsign, tacan, type, kias, heading, coord) {
 		var m = { parents: [Tanker] };
-		me.callsign = callsign;
-		me.tacan = tacan;
-		me.kias = kias;
-		me.heading = heading;
-		me.coord = geo.Coord.new(coord);
-		me.out_of_range_time = 0;
+		m.callsign = callsign;
+		m.tacan = tacan;
+		m.kias = kias;
+		m.heading = heading;
+		m.coord = geo.Coord.new(coord);
+		m.out_of_range_time = 0;
 
 		var n = props.globals.getNode("models", 1);
 		for (var i = 0; 1; i += 1)
 			if (n.getChild("model", i, 0) == nil)
 				break;
-		me.model = n.getChild("model", i, 1);
+		m.model = n.getChild("model", i, 1);
 
 		var n = props.globals.getNode("ai/models", 1);
 		for (var i = 0; 1; i += 1)
 			if (n.getChild("tanker", i, 0) == nil)
 				break;
-		me.ai = n.getChild("tanker", i, 1);
+		m.ai = n.getChild("tanker", i, 1);
 
-		me.ai.getNode("callsign", 1).setValue(me.callsign);
-		me.ai.getNode("tanker", 1).setBoolValue(1);
-		me.ai.getNode("valid", 1).setBoolValue(1);
-		me.ai.getNode("navaids/tacan/channel-ID", 1).setValue(me.tacan);
-		me.ai.getNode("refuel/type", 1).setValue(type);
+		m.ai.getNode("callsign", 1).setValue(m.callsign);
+		m.ai.getNode("tanker", 1).setBoolValue(1);
+		m.ai.getNode("valid", 1).setBoolValue(1);
+		m.ai.getNode("navaids/tacan/channel-ID", 1).setValue(m.tacan);
+		m.ai.getNode("refuel/type", 1).setValue(type);
+		m.ai.getNode("refuel/contact", 1).setBoolValue(0);
 
-		me.contactN = me.ai.initNode("refuel/contact", 1, "BOOL");
-
-		var ai = me.ai.getPath() ~ "/";
-		me.model.setValues({
+		var ai = m.ai.getPath() ~ "/";
+		m.model.setValues({
 			"path": type == "boom" ? boom_tanker : probe_tanker,
 			"latitude-deg-prop": ai ~ "position/latitude-deg",
 			"longitude-deg-prop": ai ~ "position/longitude-deg",
@@ -55,10 +54,10 @@ var Tanker = {
 			"roll-deg-prop": ai ~ "orientation/roll-deg",
 		});
 
-		me.update();
-		me.model.getNode("load", 1).remove();
-		me.identify();
-		return Tanker.active[me.callsign] = m;
+		m.update();
+		m.model.getNode("load", 1).remove();
+		m.identify();
+		return Tanker.active[m.callsign] = m;
 	},
 	del: func {
 		me.model.remove();
@@ -76,7 +75,6 @@ var Tanker = {
 		me.ac = geo.aircraft_position();
 		me.distance = me.ac.distance_to(me.coord);
 		me.bearing = me.ac.course_to(me.coord);
-		me.contactN.setBoolValue(me.distance < 76 and me.ac.alt() < me.coord.alt());  # 250 ft
 
 		me.ai.setValues({
 			"position/latitude-deg": me.coord.lat(),
@@ -85,6 +83,7 @@ var Tanker = {
 			"orientation/heading-deg": me.heading,
 			"orientation/pitch-deg": 0,
 			"orientation/roll-deg": 0,
+			"refuel/contact": me.distance < 76 and me.ac.alt() < me.coord.alt(), # 250 ft
 		});
 
 		var now = getprop("/sim/time/elapsed-sec");
@@ -123,13 +122,13 @@ var request = func {
 	var type = props.globals.getNode("systems/refuel").getChildren("type");
 	if (!size(type))
 		return;
+	type = type[rand() * size(type)].getValue();
 
 	var hdg = getprop("orientation/heading-deg");
 	var course = hdg + (rand() - 0.5) * 60;
-	var dist = 8000 + rand() * 8000;
+	var dist = 6000 + rand() * 4000;
 	var alt = int(10 + rand() * 15) * 1000;  # FL100--FL250
 	var coord = geo.aircraft_position().apply_course_distance(course, dist).set_alt(alt * FT2M);
-	type = type[rand() * size(type)].getValue();
 	Tanker.new("MOBIL3", "062X", type, 250, hdg, coord);
 }
 

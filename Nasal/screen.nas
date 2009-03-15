@@ -103,7 +103,7 @@ var window = {
 			b = me.fg[2];
 		if (a == nil)
 			a = me.fg[3];
-		foreach (var line; split("\n", string.trim(msg))) {
+		foreach (var line; split("\n", string.trim(msg ~ ""))) {
 			line = sanitize(string.trim(line));
 			append(me.lines, [line, r, g, b, a]);
 			if (size(me.lines) > me.maxlines) {

@@ -25,9 +25,9 @@
 			<path>Aircraft/ufo/Instruments/instrumentation.xml</path>
 		</instrumentation>
 
-		<current-view>
+		<!--current-view>
 			<view-number>-100</view-number>
-		</current-view>
+		</current-view-->
 
 		<view n="0">
 			<config>

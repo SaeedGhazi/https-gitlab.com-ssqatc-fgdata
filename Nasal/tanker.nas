@@ -8,10 +8,19 @@ var wind_speed_from = func(azimuth) {
 }
 
 
-var clock = func(bearing) {
-	var d = sprintf("%.0f", geo.normdeg(bearing) / 30);
-	return d ? d : 12;
-}
+var oclock = func(bearing) int(0.5 + geo.normdeg(bearing) / 30) or 12;
+
+
+var tacan = {
+	getid: func {
+		return ["MOBIL3", "062X"];
+	},
+	data: {
+		ESSO1: "040X", ESSO2: "041X", ESSO3: "042X",
+		TEXACO1: "050X", TEXACO2: "051X", TEXACO3: "052X",
+		MOBIL1: "060X", MOBIL2: "061X", MOBIL3: "062X",
+	},
+};
 
 
 var Tanker = {
@@ -36,6 +45,7 @@ var Tanker = {
 				break;
 		m.ai = n.getChild("tanker", i, 1);
 
+		m.ai.getNode("id", 1).setIntValue(-2);
 		m.ai.getNode("callsign", 1).setValue(m.callsign);
 		m.ai.getNode("tanker", 1).setBoolValue(1);
 		m.ai.getNode("valid", 1).setBoolValue(1);
@@ -49,7 +59,7 @@ var Tanker = {
 			"latitude-deg-prop": ai ~ "position/latitude-deg",
 			"longitude-deg-prop": ai ~ "position/longitude-deg",
 			"elevation-ft-prop": ai ~ "position/altitude-ft",
-			"heading-deg-prop": ai ~ "orientation/heading-deg",
+			"heading-deg-prop": ai ~ "orientation/true-heading-deg",
 			"pitch-deg-prop": ai ~ "orientation/pitch-deg",
 			"roll-deg-prop": ai ~ "orientation/roll-deg",
 		});
@@ -80,16 +90,18 @@ var Tanker = {
 			"position/latitude-deg": me.coord.lat(),
 			"position/longitude-deg": me.coord.lon(),
 			"position/altitude-ft": alt * M2FT,
-			"orientation/heading-deg": me.heading,
+			"orientation/true-heading-deg": me.heading,
 			"orientation/pitch-deg": 0,
 			"orientation/roll-deg": 0,
+			"velocities/true-airspeed-kt": ktas,
+			"velocities/vertical-speed-fps": 0,
 			"refuel/contact": me.distance < 76 and me.ac.alt() < alt, # 250 ft
 		});
 
 		var now = getprop("/sim/time/elapsed-sec");
 		if (me.distance < 100000)
 			me.out_of_range_time = now;
-		if (now - me.out_of_range_time > 600)
+		elsif (now - me.out_of_range_time > 600)
 			return me.del();
 		settimer(func me.update(), 0);
 	},
@@ -106,7 +118,7 @@ var Tanker = {
 		var qual = diff > 3000 ? " well" : abs(diff) > 1000 ? " slightly" : "";
 		var rel = diff > 1000 ? " above" : diff < -1000 ? " below" : "";
 		var msg = sprintf("Tanker %s is at %s o'clock%s",
-				me.callsign, clock(me.ac.course_to(me.coord) - hdg),
+				me.callsign, oclock(me.ac.course_to(me.coord) - hdg),
 				qual ~ rel);
 		setprop("sim/messages/ground", msg);
 	},
@@ -119,17 +131,20 @@ var request = func {
 	var tanker = values(Tanker.active);
 	if (size(tanker))
 		return tanker[0].identify();
+
 	var type = props.globals.getNode("systems/refuel", 1).getChildren("type");
 	if (!size(type))
 		return;
 	type = type[rand() * size(type)].getValue();
+
+	var (callsign, tacanid) =_= tacan.getid();
 
 	var hdg = getprop("orientation/heading-deg");
 	var course = hdg + (rand() - 0.5) * 60;
 	var dist = 6000 + rand() * 4000;
 	var alt = int(10 + rand() * 15) * 1000;  # FL100--FL250
 	var coord = geo.aircraft_position().apply_course_distance(course, dist).set_alt(alt * FT2M);
-	Tanker.new("MOBIL3", "062X", type, 250, hdg, coord);
+	Tanker.new(callsign, tacanid, type, 250, hdg, coord);
 }
 
 

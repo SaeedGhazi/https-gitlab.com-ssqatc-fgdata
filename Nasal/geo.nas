@@ -1,40 +1,63 @@
 # geo functions
 # -------------------------------------------------------------------------------------------------
+#
+#
+# geo.Coord class
+# -------------------------------------------------------------------------------------------------
+#
 # geo.Coord.new([<coord>])        ... class that holds and maintains geographical coordinates
 #                                     can be initialized with another geo.Coord instance
-#     Coord.set(<coord>)          ... sets coordinates from another geo.Coord instance
 #
-#     Coord.set_lat(<num>)        ... functions for setting latitude/longitude/altitude
-#     Coord.set_lon(<num>)
-#     Coord.set_alt(<num>)
-#     Coord.set_latlon(<num>, <num> [, <num>])      (altitude is optional; default=0)
+# SETTER METHODS:
 #
-#     Coord.set_x(<num>)          ... functions for setting cartesian x/y/z coordinates
-#     Coord.set_y(<num>)
-#     Coord.set_z(<num>)
-#     Coord.set_xyz(<num>, <num>, <num>)
+#     .set(<coord>)               ... sets coordinates from another geo.Coord instance
 #
-#     Coord.lat()
-#     Coord.lon()                 ... functions for getting lat/lon/alt
-#     Coord.alt()                     ... returns altitude in m
-#     Coord.latlon()                  ... returns vector  [<lat>, <lon>, <alt>]
+#     .set_lat(<num>)             ... functions for setting latitude/longitude/altitude
+#     .set_lon(<num>)
+#     .set_alt(<num>)
+#     .set_latlon(<num>, <num> [, <num>])      (altitude is optional; default=0)
 #
-#     Coord.x()                   ... functions for reading cartesian coords (in m)
-#     Coord.y()
-#     Coord.z()
-#     Coord.xyz()                     ... returns vector  [<x>, <y>, <z>]
+#     .set_x(<num>)               ... functions for setting cartesian x/y/z coordinates
+#     .set_y(<num>)
+#     .set_z(<num>)
+#     .set_xyz(<num>, <num>, <num>)
 #
-#     Coord.course_to(<coord>)    ... returns course to another geo.Coord instance (degree)
-#     Coord.distance_to(<coord>)  ... returns distance in m along Earth curvature, ignoring altitudes
+#
+# GETTER METHODS:
+#
+#     .lat()
+#     .lon()                      ... functions for getting lat/lon/alt
+#     .alt()                          ... returns altitude in m
+#     .latlon()                       ... returns vector  [<lat>, <lon>, <alt>]
+#
+#     .x()                        ... functions for reading cartesian coords (in m)
+#     .y()
+#     .z()
+#     .xyz()                          ... returns vector  [<x>, <y>, <z>]
+#
+#
+# QUERY METHODS:
+#
+#     .is_defined()               ... returns whether the coords are defined
+#     .dump()                     ... outputs coordinates
+#     .course_to(<coord>)         ... returns course to another geo.Coord instance (degree)
+#     .distance_to(<coord>)       ... returns distance in m along Earth curvature, ignoring altitudes
 #                                     useful for map distance
-#     Coord.direct_distance_to(<coord>) ...   distance in m direct, considers altitude,
+#     .direct_distance_to(<coord>)      ...   distance in m direct, considers altitude,
 #                                             but cuts through Earth surface
 #
-#     Coord.apply_course_distance(<course>, <distance>)       ... guess what
-#     Coord.dump()                ... outputs coordinates
-#     Coord.is_defined()          ... returns whether the coords are defined
+#
+# MANIPULATION METHODS:
+#
+#     .apply_course_distance(<course>, <distance>)       ... guess what
+#
+#
+#
+#
+# -------------------------------------------------------------------------------------------------
 #
 # geo.aircraft_position()         ... returns current aircraft position as geo.Coord
+# geo.viewer_position()           ... returns viewer position as geo.Coord
 # geo.click_position()            ... returns last click coords as geo.Coord or nil before first click
 #
 # geo.tile_path(<lat>, <lon>)     ... returns tile path string (e.g. "w130n30/w123n37/942056.stg")
@@ -49,17 +72,17 @@
 #                                 ... same as above, but lat/lon/elev are taken from a Coord object
 
 
-var EPSILON = 0.0000000000001;
+var EPSILON = 1e-15;
 var ERAD = 6378138.12;		# Earth radius (m)
 
 
-var floor = func(v) { v < 0.0 ? -int(-v) - 1 : int(v) }
+var floor = func(v) v < 0.0 ? -int(-v) - 1 : int(v);
 
 
 # class that maintains one set of geographical coordinates
 #
 var Coord = {
-	new : func(copy = nil) {
+	new: func(copy = nil) {
 		var m = { parents: [Coord] };
 		m._pdirty = 1;  # polar
 		m._cdirty = 1;  # cartesian
@@ -71,10 +94,9 @@ var Coord = {
 		m._z = nil;
 		if (copy != nil)
 			m.set(copy);
-
 		return m;
 	},
-	_cupdate : func {
+	_cupdate: func {
 		me._cdirty or return;
 		var xyz = geodtocart(me._lat * R2D, me._lon * R2D, me._alt);
 		me._x = xyz[0];
@@ -82,7 +104,7 @@ var Coord = {
 		me._z = xyz[2];
 		me._cdirty = 0;
 	},
-	_pupdate : func {
+	_pupdate: func {
 		me._pdirty or return;
 		var lla = carttogeod(me._x, me._y, me._z);
 		me._lat = lla[0] * D2R;
@@ -91,25 +113,25 @@ var Coord = {
 		me._pdirty = 0;
 	},
 
-	x : func { me._cupdate(); me._x },
-	y : func { me._cupdate(); me._y },
-	z : func { me._cupdate(); me._z },
-	xyz : func { me._cupdate(); [me._x, me._y, me._z] },
+	x: func { me._cupdate(); me._x },
+	y: func { me._cupdate(); me._y },
+	z: func { me._cupdate(); me._z },
+	xyz: func { me._cupdate(); [me._x, me._y, me._z] },
 
-	lat : func { me._pupdate(); me._lat * R2D },  # return in degree
-	lon : func { me._pupdate(); me._lon * R2D },
-	alt : func { me._pupdate(); me._alt },
-	latlon : func { me._pupdate(); [me._lat * R2D, me._lon * R2D, me._alt] },
+	lat: func { me._pupdate(); me._lat * R2D },  # return in degree
+	lon: func { me._pupdate(); me._lon * R2D },
+	alt: func { me._pupdate(); me._alt },
+	latlon: func { me._pupdate(); [me._lat * R2D, me._lon * R2D, me._alt] },
 
-	set_x : func(x) { me._pupdate(); me._pdirty = 1; me._x = x; me },
-	set_y : func(y) { me._pupdate(); me._pdirty = 1; me._y = y; me },
-	set_z : func(z) { me._pupdate(); me._pdirty = 1; me._z = z; me },
+	set_x: func(x) { me._pupdate(); me._pdirty = 1; me._x = x; me },
+	set_y: func(y) { me._pupdate(); me._pdirty = 1; me._y = y; me },
+	set_z: func(z) { me._pupdate(); me._pdirty = 1; me._z = z; me },
 
-	set_lat : func(lat) { me._cupdate(); me._cdirty = 1; me._lat = lat * D2R; me },
-	set_lon : func(lon) { me._cupdate(); me._cdirty = 1; me._lon = lon * D2R; me },
-	set_alt : func(alt) { me._cupdate(); me._cdirty = 1; me._alt = alt; me },
+	set_lat: func(lat) { me._cupdate(); me._cdirty = 1; me._lat = lat * D2R; me },
+	set_lon: func(lon) { me._cupdate(); me._cdirty = 1; me._lon = lon * D2R; me },
+	set_alt: func(alt) { me._cupdate(); me._cdirty = 1; me._alt = alt; me },
 
-	set : func(c) {
+	set: func(c) {
 		c._pupdate();
 		me._lat = c._lat;
 		me._lon = c._lon;
@@ -118,7 +140,7 @@ var Coord = {
 		me._pdirty = 0;
 		me;
 	},
-	set_latlon : func(lat, lon, alt = 0) {
+	set_latlon: func(lat, lon, alt = 0) {
 		me._lat = lat * D2R;
 		me._lon = lon * D2R;
 		me._alt = alt;
@@ -126,7 +148,7 @@ var Coord = {
 		me._pdirty = 0;
 		me;
 	},
-	set_xyz : func(x, y, z) {
+	set_xyz: func(x, y, z) {
 		me._x = x;
 		me._y = y;
 		me._z = z;
@@ -134,7 +156,7 @@ var Coord = {
 		me._cdirty = 0;
 		me;
 	},
-	apply_course_distance : func(course, dist) {
+	apply_course_distance: func(course, dist) {
 		me._pupdate();
 		course *= D2R;
 		dist /= ERAD;
@@ -149,7 +171,7 @@ var Coord = {
 		me._cdirty = 1;
 		me;
 	},
-	course_to : func(dest) {
+	course_to: func(dest) {
 		me._pupdate();
 		dest._pupdate();
 
@@ -157,13 +179,19 @@ var Coord = {
 			return 0;
 
 		var dlon = dest._lon - me._lon;
-		return math.mod(math.atan2(math.sin(dlon) * math.cos(dest._lat),
+		var ret = nil;
+		call(func ret = math.mod(math.atan2(math.sin(dlon) * math.cos(dest._lat),
 				math.cos(me._lat) * math.sin(dest._lat)
 				- math.sin(me._lat) * math.cos(dest._lat)
-				* math.cos(dlon)), 2 * math.pi) * R2D;
+				* math.cos(dlon)), 2 * math.pi) * R2D, nil, var err = []);
+		if (size(err)) {
+			debug.printerror(err);
+			debug.dump(me._lat, me._lon, dlon, dest._lat, dest._lon, "--------------------------");
+		}
+		return ret;
 	},
 	# arc distance on an earth sphere; doesn't consider altitude
-	distance_to : func(dest) {
+	distance_to: func(dest) {
 		me._pupdate();
 		dest._pupdate();
 
@@ -175,7 +203,7 @@ var Coord = {
 		return 2.0 * ERAD * math.asin(math.sqrt(a * a + math.cos(me._lat)
 				* math.cos(dest._lat) * o * o));
 	},
-	direct_distance_to : func(dest) {
+	direct_distance_to: func(dest) {
 		me._cupdate();
 		dest._cupdate();
 		var dx = dest._x - me._x;
@@ -183,12 +211,12 @@ var Coord = {
 		var dz = dest._z - me._z;
 		return math.sqrt(dx * dx + dy * dy + dz * dz);
 	},
-	is_defined : func {
+	is_defined: func {
 		return !(me._cdirty and me._pdirty);
 	},
-	dump : func {
+	dump: func {
 		if (me._cdirty and me._pdirty)
-			print("Coord.dump(): coord undefined");
+			print("Coord.dump(): coordinates undefined");
 
 		me._cupdate();
 		me._pupdate();
@@ -298,8 +326,8 @@ var _put_model = func(path, lat, lon, elev_m = nil, hdg = 0, pitch = 0, roll = 0
 }
 
 
-var elevation = func(lat, lon) {
-	var d = geodinfo(lat, lon);
+var elevation = func(lat, lon, maxalt = 10000) {
+	var d = geodinfo(lat, lon, maxalt);
 	return d == nil ? nil : d[0];
 }
 

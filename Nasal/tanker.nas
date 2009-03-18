@@ -2,12 +2,6 @@ var boom_tanker = "Models/Geometry/KC135/KC135.xml";
 var probe_tanker = "Models/Geometry/KA6-D/KA6-D.xml";
 
 
-var wind_speed_from = func(azimuth) {
-	var dir = (getprop("/environment/wind-from-heading-deg") - azimuth) * D2R;
-	return getprop("/environment/wind-speed-kt") * math.cos(dir);
-}
-
-
 var oclock = func(bearing) int(0.5 + geo.normdeg(bearing) / 30) or 12;
 
 
@@ -32,6 +26,7 @@ var Tanker = {
 		m.heading = heading;
 		m.coord = geo.Coord.new(coord);
 		m.out_of_range_time = 0;
+		m.interval = 10;
 
 		var n = props.globals.getNode("models", 1);
 		for (var i = 0; 1; i += 1)
@@ -77,14 +72,21 @@ var Tanker = {
 	update: func {
 		var dt = getprop("sim/time/delta-sec");
 		var alt = me.coord.alt();
-		var wind = wind_speed_from(me.heading);
-		var ktas = me.kias + (me.kias * alt * M2FT / 50000); # +2% per 1000 ft
 
-		me.coord.apply_course_distance(me.heading, dt * (ktas + wind) * NM2M / 3600);
+		if ((me.interval += dt) >= 10) {
+			me.interval -= 10;
+			print("recalc wind");
+			me.headwind = aircraft.wind_speed_from(me.heading);
+			me.ktas = aircraft.kias_to_ktas(me.kias, alt);
+		}
+
+		me.coord.apply_course_distance(me.heading, dt * (me.ktas - me.headwind) * NM2M / 3600);
 
 		me.ac = geo.aircraft_position();
 		me.distance = me.ac.distance_to(me.coord);
 		me.bearing = me.ac.course_to(me.coord);
+		var dalt = alt - me.ac.alt();
+		var ac_hdg = getprop("/orientation/heading-deg");
 
 		me.ai.setValues({
 			"position/latitude-deg": me.coord.lat(),
@@ -93,9 +95,13 @@ var Tanker = {
 			"orientation/true-heading-deg": me.heading,
 			"orientation/pitch-deg": 0,
 			"orientation/roll-deg": 0,
-			"velocities/true-airspeed-kt": ktas,
+			"velocities/true-airspeed-kt": me.ktas,
 			"velocities/vertical-speed-fps": 0,
-			"refuel/contact": me.distance < 76 and me.ac.alt() < alt, # 250 ft
+			"radar/range-nm": me.distance * M2NM,
+			"radar/bearing-deg": me.bearing,
+			"radar/elevation-deg": math.atan2(dalt, me.distance) * R2D,
+			"refuel/contact": me.distance < 76 and dalt > 0
+					and abs(view.normdeg(me.bearing - ac_hdg)) < 20, # 250 ft
 		});
 
 		var now = getprop("/sim/time/elapsed-sec");

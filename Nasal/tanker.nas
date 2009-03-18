@@ -75,7 +75,6 @@ var Tanker = {
 
 		if ((me.interval += dt) >= 10) {
 			me.interval -= 10;
-			print("recalc wind");
 			me.headwind = aircraft.wind_speed_from(me.heading);
 			me.ktas = aircraft.kias_to_ktas(me.kias, alt);
 		}

@@ -914,6 +914,28 @@ var teleport = func(airport = "", runway = "", lat = -9999, lon = -9999, alt = 0
 
 
 
+# returns wind speed [kt] from given direction [deg]; useful for head-wind
+#
+var wind_speed_from = func(azimuth) {
+	var dir = (getprop("/environment/wind-from-heading-deg") - azimuth) * D2R;
+	return getprop("/environment/wind-speed-kt") * math.cos(dir);
+}
+
+
+# returns true airspeed for given indicated airspeed [kt] and altitude [ft]
+#
+var kias_to_ktas = func(kias, altitude) {
+	var seapress = getprop("/environment/pressure-sea-level-inhg");
+	var seatemp = getprop("/environment/temperature-sea-level-degc");
+	var coralt_ft = altitude * M2FT + (29.92 - seapress) * 910;
+	return kias * (1 + 0.00232848233 * (seatemp - 15))
+			* (1.0025 + coralt_ft * (0.0000153
+			- kias * (coralt_ft * 0.0000000000003 + 0.0000000045)
+			+ (0.0000119 * (math.exp(coralt_ft * 0.000016) - 1))));
+}
+
+
+
 # HUD control class to handle both HUD implementations
 # ==============================================================================
 #

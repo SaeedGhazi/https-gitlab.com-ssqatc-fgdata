@@ -922,7 +922,7 @@ var wind_speed_from = func(azimuth) {
 }
 
 
-# returns true airspeed for given indicated airspeed [kt] and altitude [ft]
+# returns true airspeed for given indicated airspeed [kt] and altitude [m]
 #
 var kias_to_ktas = func(kias, altitude) {
 	var seapress = getprop("/environment/pressure-sea-level-inhg");

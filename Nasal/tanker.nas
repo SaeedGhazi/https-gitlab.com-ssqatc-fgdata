@@ -8,16 +8,18 @@ var oclock = func(bearing) int(0.5 + geo.normdeg(bearing) / 30) or 12;
 var identity = {
 	# return free ai id number and least used, free callsign/channel pair
 	get: func {
-		var data = {};
-		foreach (var k; keys(me.pool))
+		var data = {};     # copy of me.pool
+		var revdata = {};  # channel->callsign
+		foreach (var k; keys(me.pool)) {
 			data[k] = me.pool[k];
+			revdata[me.pool[k][0]] = k;
+		}
 		var id_used = {};
 		foreach (var t; props.globals.getNode("ai/models", 1).getChildren()) {
-			var cs = "";
 			if ((var c = t.getNode("callsign")) != nil)
-				delete(data, cs = c.getValue());
+				delete(data, c.getValue() or "");
 			if ((var c = t.getNode("navaids/tacan/channel-ID")) != nil)
-				delete(data, cs);
+				delete(data, revdata[c.getValue() or ""]);
 			if ((var c = t.getNode("id")) != nil)
 				id_used[c.getValue()] = 1;
 		}

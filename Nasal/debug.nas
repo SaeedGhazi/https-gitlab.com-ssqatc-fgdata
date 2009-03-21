@@ -251,8 +251,7 @@ var backtrace = func(desc = nil) {
 	var d = desc == nil ? "" : " '" ~ desc ~ "'";
 	print("\n" ~ _title("\n### backtrace" ~ d ~ " ###"));
 	for (var i = 1; 1; i += 1) {
-		v = caller(i);
-		if (v == nil)
+		if ((var v = caller(i)) == nil)
 			return;
 		print(_section(sprintf("#%-2d called from %s, line %s:", i - 1, v[2], v[3])));
 		dump(v[0]);
@@ -288,7 +287,7 @@ var proptrace = func(root = "/", frames = 2) {
 # Executes function fn "repeat" times and prints execution time in seconds. Examples:
 #
 #     var test = func { getprop("/sim/aircraft"); }
-#     debug.benchmark("test()/2", test, 1000);
+#     debug.benchmark("test()/1", test, 1000);
 #     debug.benchmark("test()/2", func setprop("/sim/aircraft", ""), 1000);
 #
 var benchmark = func(label, fn, repeat = 1) {
@@ -332,8 +331,10 @@ var warn = func(msg, level = 0) {
 }
 
 
-# var isnan = (func { var nan = 1 / 0; func(d) num(d) == nil ? nil : d == nan; })();
-
+var isnan = func(v) {
+	call(func math.sin(v), nil, var err = []);
+	return !!size(err);
+}
 
 
 # --prop:debug=1 enables debug mode with additional warnings

@@ -387,7 +387,7 @@ var model = {
             elsif (io.stat(string.normpath(me.fg_root ~ path)) != nil)
                 available = 2;
             elsif (!contains(me.warned, path))
-                me.warned[path] = print(debug._error("=== MP model not installed: " ~ path));
+                me.warned[path] = print("MP model not installed: " ~ debug._error(path));
 
             var model = split(".", split("/", path)[-1])[0];
             model = me.remove_suffix(model, "-model");

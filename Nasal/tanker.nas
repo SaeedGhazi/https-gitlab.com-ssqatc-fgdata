@@ -1,7 +1,6 @@
 var boom_tanker = "Models/Geometry/KC135/KC135.xml";
 var probe_tanker = "Models/Geometry/KA6-D/KA6-D.xml";
 
-var smooth = func(x) (1 - math.cos(x * math.pi)) * 0.5;
 
 var oclock = func(bearing) int(0.5 + geo.normdeg(bearing) / 30) or 12;
 
@@ -196,7 +195,7 @@ var Tanker = {
 		}
 
 		if (!me.leg_warning and me.leg_remaining < NM2M) {
-			setprop("sim/messages/ai-plane", "turn in one mile");
+			setprop("sim/messages/ai-plane", me.callsign ~ ", turn in one mile");
 			me.leg_warning = 1;
 		}
 

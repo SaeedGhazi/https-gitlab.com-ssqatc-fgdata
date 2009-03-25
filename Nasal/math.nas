@@ -11,5 +11,7 @@ var asin = func(y) { atan2(y, sqrt(1-y*y)) }
 
 var acos = func(x) { atan2(sqrt(1-x*x), x) }
 
+var tan = func(x) sin(x) / (cos(x) or die("tangens infinity"));
+
 var _iln10 = 1/ln(10);
 var log10 = func(x) { ln(x) * _iln10; }

@@ -1,6 +1,7 @@
 var boom_tanker = "Models/Geometry/KC135/KC135.xml";
 var probe_tanker = "Models/Geometry/KA6-D/KA6-D.xml";
 
+var smooth = func(x) (1 - math.cos(x * math.pi)) * 0.5;
 
 var oclock = func(bearing) int(0.5 + geo.normdeg(bearing) / 30) or 12;
 
@@ -46,10 +47,18 @@ var Tanker = {
 		m.callsign = callsign;
 		m.tacan = tacan;
 		m.kias = kias;
-		m.heading = heading;
-		m.coord = geo.Coord.new(coord);
+		m.heading = m.course = heading;
 		m.out_of_range_time = 0;
 		m.interval = 10;
+		m.length = (getprop("tanker/pattern-length-nm") or 50) * NM2M;
+		m.roll = 0;
+		m.coord = geo.Coord.new(coord);
+		m.anchor = geo.Coord.new(coord).apply_course_distance(m.heading, m.length); # ARCP
+		m.goal = [nil, m.anchor];
+		m.lastmode = "turn";
+		m.mode = "leg";
+		m.rollrate = 2; # deg/s
+		m.maxbank = 25;
 
 		var n = props.globals.getNode("models", 1);
 		for (var i = 0; 1; i += 1)
@@ -106,13 +115,53 @@ var Tanker = {
 		var dt = getprop("sim/time/delta-sec");
 		var alt = me.coord.alt();
 
-		if ((me.interval += dt) >= 10) {
-			me.interval -= 10;
+		if ((me.interval += dt) >= 5) {
+			me.interval -= 5;
 			me.headwind = aircraft.wind_speed_from(me.heading);
 			me.ktas = aircraft.kias_to_ktas(me.kias, alt);
 		}
 
-		me.coord.apply_course_distance(me.heading, dt * (me.ktas - me.headwind) * NM2M / 3600);
+		var distance = dt * (me.ktas - me.headwind) * NM2M / 3600;
+		var deviation = me.roll ? dt * 1085.941 * math.tan(me.roll * D2R) / me.ktas : 0;
+
+		if (me.mode == "leg") {
+			if (me.lastmode == "turn") {
+				me.lastmode = "leg";
+				var g = me.goal[0];
+				me.goal[0] = me.goal[1];
+				me.goal[1] = g;
+
+				me.heading = me.coord.course_to(me.goal[0]);
+				me.leg_remaining = me.coord.distance_to(me.goal[0]);
+				me.roll_target = 0;
+				me.leg_warning = 0;
+			}
+			if ((me.leg_remaining -= distance) < 0)
+				me.mode = "turn";
+
+		} else { # if (me.mode == "turn")
+			if (me.lastmode == "leg") {
+				me.lastmode = "turn";
+				me.full_bank_turn_angle = 0;
+				me.turn_remaining = 180;
+				me.roll_target = 25;
+			}
+			if (!me.full_bank_turn_angle and me.roll >= me.roll_target)
+				me.full_bank_turn_angle = geo.normdeg(180 - me.turn_remaining);
+
+			if (me.turn_remaining < me.full_bank_turn_angle)
+				me.roll_target = 0;
+
+			if ((me.turn_remaining -= deviation) < 0) {
+				if (me.goal[1] == nil)
+					# set tanker exit point (opposite of anchor point/ARCP)
+					me.goal[1] = geo.Coord.new(me.coord).apply_course_distance(me.course - 180,
+							me.length);
+				me.mode = "leg";
+			}
+		}
+
+		me.coord.apply_course_distance(me.heading -= deviation, distance);
 
 		me.ac = geo.aircraft_position();
 		me.distance = me.ac.distance_to(me.coord);
@@ -126,7 +175,7 @@ var Tanker = {
 		me.altN.setDoubleValue(alt * M2FT);
 		me.hdgN.setDoubleValue(me.heading);
 		me.pitchN.setDoubleValue(0);
-		me.rollN.setDoubleValue(0);
+		me.rollN.setDoubleValue(-me.roll);
 		me.ktasN.setDoubleValue(me.ktas);
 		me.vertN.setDoubleValue(0);
 		me.rangeN.setDoubleValue(me.distance * M2NM);
@@ -134,6 +183,22 @@ var Tanker = {
 		me.elevN.setDoubleValue(math.atan2(dalt, me.distance) * R2D);
 		me.contactN.setBoolValue(me.distance < 76 and dalt > 0  # 250 ft
 				and abs(view.normdeg(me.bearing - ac_hdg)) < 20);
+
+		var droll = me.roll_target - me.roll;
+		if (droll > 0) {
+			me.roll += me.rollrate * dt;
+			if (me.roll > me.roll_target)
+				me.roll = me.roll_target;
+		} elsif (droll < 0) {
+			me.roll -= me.rollrate * dt;
+			if (me.roll < me.roll_target)
+				me.roll = me.roll_target;
+		}
+
+		if (!me.leg_warning and me.leg_remaining < NM2M) {
+			setprop("sim/messages/ai-plane", "turn in one mile");
+			me.leg_warning = 1;
+		}
 
 		var now = getprop("/sim/time/elapsed-sec");
 		if (me.distance < 90000)

@@ -1,3 +1,13 @@
+if (globals["tanker"] != nil) {
+	# reload with io.load_nasal(getprop("/sim/fg-root") ~ "/Nasal/tanker.nas");
+	print("reloading " ~ caller(0)[2]);
+	var _setlistener = reinit;
+	reinit();
+}
+#--------------------------------------------------------------------------------------------------
+
+
+
 var boom_tanker = "Models/Geometry/KC135/KC135.xml";
 var probe_tanker = "Models/Geometry/KA6-D/KA6-D.xml";
 
@@ -5,8 +15,13 @@ var probe_tanker = "Models/Geometry/KA6-D/KA6-D.xml";
 var oclock = func(bearing) int(0.5 + geo.normdeg(bearing) / 30) or 12;
 
 
+var tanker_msg = func setprop("sim/messages/ai-plane", call(sprintf, arg));
+var pilot_msg = func setprop("/sim/messages/pilot", call(sprintf, arg));
+var atc_msg = func setprop("sim/messages/atc", call(sprintf, arg));
+
+
 var identity = {
-	# return free ai id number and least used, free callsign/channel pair
+	# return free AI id number and least used, free callsign/channel pair
 	get: func {
 		var data = {};     # copy of me.pool
 		var revdata = {};  # channel->callsign
@@ -72,7 +87,7 @@ var Tanker = {
 		m.ai = n.getChild("tanker", i, 1);
 
 		m.ai.getNode("id", 1).setIntValue(aiid);
-		m.ai.getNode("callsign", 1).setValue(m.callsign);
+		m.ai.getNode("callsign", 1).setValue(m.callsign ~ "");
 		m.ai.getNode("tanker", 1).setBoolValue(1);
 		m.ai.getNode("valid", 1).setBoolValue(1);
 		m.ai.getNode("navaids/tacan/channel-ID", 1).setValue(m.tacan);
@@ -105,7 +120,7 @@ var Tanker = {
 		return Tanker.active[m.callsign] = m;
 	},
 	del: func {
-		setprop("sim/messages/ai-plane", me.callsign ~ " returns to base");
+		tanker_msg(me.callsign ~ " returns to base");
 		me.model.remove();
 		me.ai.remove();
 		delete(Tanker.active, me.callsign);
@@ -124,8 +139,9 @@ var Tanker = {
 		var deviation = me.roll ? dt * 1085.941 * math.tan(me.roll * D2R) / me.ktas : 0;
 
 		if (me.mode == "leg") {
-			if (me.lastmode == "turn") {
+			if (me.lastmode != "leg") {
 				me.lastmode = "leg";
+				# swap ARCP anchor and tanker exit point as leg end points
 				var g = me.goal[0];
 				me.goal[0] = me.goal[1];
 				me.goal[1] = g;
@@ -138,8 +154,8 @@ var Tanker = {
 			if ((me.leg_remaining -= distance) < 0)
 				me.mode = "turn";
 
-		} else { # if (me.mode == "turn")
-			if (me.lastmode == "leg") {
+		} else { # me.mode == "turn"
+			if (me.lastmode != "turn") {
 				me.lastmode = "turn";
 				me.full_bank_turn_angle = 0;
 				me.turn_remaining = 180;
@@ -152,8 +168,7 @@ var Tanker = {
 				me.roll_target = 0;
 
 			if ((me.turn_remaining -= deviation) < 0) {
-				if (me.goal[1] == nil)
-					# set tanker exit point (opposite of anchor point/ARCP)
+				if (me.goal[1] == nil)  # define tanker exit point (opposite of anchor point/ARCP)
 					me.goal[1] = geo.Coord.new(me.coord).apply_course_distance(me.course - 180,
 							me.length);
 				me.mode = "leg";
@@ -195,33 +210,33 @@ var Tanker = {
 		}
 
 		if (!me.leg_warning and me.leg_remaining < NM2M) {
-			setprop("sim/messages/ai-plane", me.callsign ~ ", turn in one mile");
+			tanker_msg(me.callsign ~ ", turn in one mile");
 			me.leg_warning = 1;
 		}
 
-		var now = getprop("/sim/time/elapsed-sec");
+		me.now = getprop("/sim/time/elapsed-sec");
 		if (me.distance < 90000)
-			me.out_of_range_time = now;
-		elsif (now - me.out_of_range_time > 600)
+			me.out_of_range_time = me.now;
+		elsif (me.now - me.out_of_range_time > 600)
 			return me.del();
 		settimer(func me.update(), 0);
 	},
 	identify: func {
+		me.out_of_range_time = me.now;
 		var alt = int((me.coord.alt() * M2FT + 50) / 100) * 100;
-		var msg = sprintf("%s at %.0f, heading %.0f with %.0f knots, TACAN %s",
+		tanker_msg("%s at %.0f, heading %.0f with %.0f knots, TACAN %s",
 				me.callsign, alt, me.heading, me.kias, me.tacan);
-		setprop("sim/messages/ai-plane", msg);
 	},
 	report: func {
+		me.out_of_range_time = me.now;
 		var dist = int(me.distance * M2NM);
 		var hdg = getprop("orientation/heading-deg");
 		var diff = (me.coord.alt() - me.ac.alt()) * M2FT;
 		var qual = diff > 3000 ? " well" : abs(diff) > 1000 ? " slightly" : "";
 		var rel = diff > 1000 ? " above" : diff < -1000 ? " below" : "";
-		var msg = sprintf("Tanker %s is at %s o'clock%s",
+		atc_msg("Tanker %s is at %s o'clock%s",
 				me.callsign, oclock(me.ac.course_to(me.coord) - hdg),
 				qual ~ rel);
-		setprop("sim/messages/ground", msg);
 	},
 	active: {},
 };
@@ -255,19 +270,23 @@ var report = func {
 }
 
 
-_setlistener("/sim/signals/nasal-dir-initialized", func {
-	var aar_capable = size(props.globals.getNode("systems/refuel", 1).getChildren("type"));
-	gui.menuEnable("tanker", aar_capable);
-	if (!aar_capable)
-		request = func { setprop("sim/messages/ai-plane", "no tanker in range") };
-
-	setlistener("/sim/signals/reinit", func {
-		foreach (var t; values(Tanker.active))
-			t.del();
-	});
+var reinit = func {
+	foreach (var t; values(Tanker.active))
+		t.del();
 
 	# randomize tacan pool usage counter (0 and -1)
 	foreach (var t; values(identity.pool))
 		t[1] = int(rand() * 2) - 1;
+}
+
+
+_setlistener("/sim/signals/nasal-dir-initialized", func {
+	var aar_capable = size(props.globals.getNode("systems/refuel", 1).getChildren("type"));
+	gui.menuEnable("tanker", aar_capable);
+	if (!aar_capable)
+		request = func { atc_msg("no tanker in range") }; # braces mandatory
+
+	setlistener("/sim/signals/reinit", reinit, 1);
 });
+
 

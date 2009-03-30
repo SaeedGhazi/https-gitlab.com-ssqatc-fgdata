@@ -7,7 +7,6 @@ if (globals["tanker"] != nil) {
 #--------------------------------------------------------------------------------------------------
 
 
-
 var boom_tanker = "Models/Geometry/KC135/KC135.xml";
 var probe_tanker = "Models/Geometry/KA6-D/KA6-D.xml";
 
@@ -20,9 +19,29 @@ var pilot_msg = func setprop("/sim/messages/pilot", call(sprintf, arg));
 var atc_msg = func setprop("sim/messages/atc", call(sprintf, arg));
 
 
+var skip_cloud_layer = func(alt) {
+	var c = [];
+	foreach (var layer; props.globals.getNode("/environment/clouds").getChildren("layer")) {
+		var elev = (layer.getNode("elevation-ft", 1).getValue() or -9999) * FT2M;
+		var thck = (layer.getNode("thickness-ft", 1).getValue() or 0) * FT2M;
+		if (elev > -1000)
+			append(c, { bottom: elev - thck * 0.5 - 100, top: elev + thck * 0.5 + 100 });
+	}
+	while (check; 1) {
+		foreach (var layer; c) {
+			if (alt > layer.bottom and alt < layer.top) {
+				alt += 1000;
+				continue check;
+			}
+		}
+		return alt;
+	}
+}
+
+
 var identity = {
-	# return free AI id number and least used, free callsign/channel pair
 	get: func {
+		# return free AI id number and least used, free callsign/channel pair
 		var data = {};     # copy of me.pool
 		var revdata = {};  # channel->callsign
 		foreach (var k; keys(me.pool)) {
@@ -48,9 +67,9 @@ var identity = {
 		return [aiid, d, data[d][0]];
 	},
 	pool: {
-		ESSO1: ["040X", 0], ESSO2: ["041X", 0], ESSO3: ["042X", 0],
-		TEXACO1: ["050X", 0], TEXACO2: ["051X", 0], TEXACO3: ["052X", 0],
-		MOBIL1: ["060X", 0], MOBIL2: ["061X", 0], MOBIL3: ["062X", 0],
+		ESSO1: ["040X", rand()], ESSO2: ["041X", rand()], ESSO3: ["042X", rand()],
+		TEXACO1: ["050X", rand()], TEXACO2: ["051X", rand()], TEXACO3: ["052X", rand()],
+		MOBIL1: ["060X", rand()], MOBIL2: ["061X", rand()], MOBIL3: ["062X", rand()],
 	},
 };
 
@@ -61,15 +80,15 @@ var Tanker = {
 		m.callsign = callsign;
 		m.tacan = tacan;
 		m.kias = kias;
-		m.heading = m.course = heading;
+		m.heading = m.course = m.track_course = heading;
 		m.out_of_range_time = 0;
 		m.interval = 10;
 		m.length = (getprop("tanker/pattern-length-nm") or 50) * NM2M;
 		m.roll = 0;
 		m.coord = geo.Coord.new(coord);
-		m.anchor = geo.Coord.new(coord).apply_course_distance(m.heading, m.length); # ARCP
+		m.anchor = geo.Coord.new(coord).apply_course_distance(m.track_course, m.length); # ARCP
 		m.goal = [nil, m.anchor];
-		m.lastmode = "turn";
+		m.lastmode = "none";
 		m.mode = "leg";
 		m.rollrate = 2; # deg/s
 		m.maxbank = 25;
@@ -131,12 +150,12 @@ var Tanker = {
 
 		if ((me.interval += dt) >= 5) {
 			me.interval -= 5;
-			me.headwind = aircraft.wind_speed_from(me.heading);
+			me.headwind = aircraft.wind_speed_from(me.course);
 			me.ktas = aircraft.kias_to_ktas(me.kias, alt);
 		}
 
 		var distance = dt * (me.ktas - me.headwind) * NM2M / 3600;
-		var deviation = me.roll ? dt * 1085.941 * math.tan(me.roll * D2R) / me.ktas : 0;
+		var deviation = me.roll ? 0.5 * dt * 1085.941 * math.tan(me.roll * D2R) / me.ktas : 0;
 
 		if (me.mode == "leg") {
 			if (me.lastmode != "leg") {
@@ -146,7 +165,7 @@ var Tanker = {
 				me.goal[0] = me.goal[1];
 				me.goal[1] = g;
 
-				me.heading = me.coord.course_to(me.goal[0]);
+				me.course = me.coord.course_to(me.goal[0]);
 				me.leg_remaining = me.coord.distance_to(me.goal[0]);
 				me.roll_target = 0;
 				me.leg_warning = 0;
@@ -169,13 +188,13 @@ var Tanker = {
 
 			if ((me.turn_remaining -= deviation) < 0) {
 				if (me.goal[1] == nil)  # define tanker exit point (opposite of anchor point/ARCP)
-					me.goal[1] = geo.Coord.new(me.coord).apply_course_distance(me.course - 180,
+					me.goal[1] = geo.Coord.new(me.coord).apply_course_distance(me.track_course - 180,
 							me.length);
 				me.mode = "leg";
 			}
 		}
 
-		me.coord.apply_course_distance(me.heading -= deviation, distance);
+		me.coord.apply_course_distance(me.course -= deviation, distance);
 
 		me.ac = geo.aircraft_position();
 		me.distance = me.ac.distance_to(me.coord);
@@ -187,7 +206,7 @@ var Tanker = {
 		me.latN.setDoubleValue(me.coord.lat());
 		me.lonN.setDoubleValue(me.coord.lon());
 		me.altN.setDoubleValue(alt * M2FT);
-		me.hdgN.setDoubleValue(me.heading);
+		me.hdgN.setDoubleValue(me.heading = me.course);
 		me.pitchN.setDoubleValue(0);
 		me.rollN.setDoubleValue(-me.roll);
 		me.ktasN.setDoubleValue(me.ktas);
@@ -225,7 +244,7 @@ var Tanker = {
 		me.out_of_range_time = me.now;
 		var alt = int((me.coord.alt() * M2FT + 50) / 100) * 100;
 		tanker_msg("%s at %.0f, heading %.0f with %.0f knots, TACAN %s",
-				me.callsign, alt, me.heading, me.kias, me.tacan);
+				me.callsign, alt, me.course, me.kias, me.tacan);
 	},
 	report: func {
 		me.out_of_range_time = me.now;
@@ -258,7 +277,8 @@ var request = func {
 	var course = hdg + (rand() - 0.5) * 60;
 	var dist = 6000 + rand() * 4000;
 	var alt = int(10 + rand() * 15) * 1000;  # FL100--FL250
-	var coord = geo.aircraft_position().apply_course_distance(course, dist).set_alt(alt * FT2M);
+	alt = skip_cloud_layer(alt * FT2M);
+	var coord = geo.aircraft_position().apply_course_distance(course, dist).set_alt(alt);
 	Tanker.new(aiid, callsign, tacanid, type, 250, hdg, coord);
 }
 
@@ -273,10 +293,6 @@ var report = func {
 var reinit = func {
 	foreach (var t; values(Tanker.active))
 		t.del();
-
-	# randomize tacan pool usage counter (0 and -1)
-	foreach (var t; values(identity.pool))
-		t[1] = int(rand() * 2) - 1;
 }
 
 

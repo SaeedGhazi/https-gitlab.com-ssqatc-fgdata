@@ -3,7 +3,7 @@
 ##
 ##  A message based information broadcast for the multiplayer network.
 ##
-##  Copyright (C) 2008  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2008 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
@@ -102,14 +102,12 @@ BroadcastChannel.update = func {
     foreach (var pilot; mpplayers) {
       if ((pilot.getChild("valid") != nil) and
           pilot.getChild("valid").getValue()) {
-        if (me.accept_predicate(pilot) and
-            me.peers[pilot.getIndex()] == nil) {
+        if ((me.peers[pilot.getIndex()] == nil) and
+            me.accept_predicate(pilot)) {
           me.peers[pilot.getIndex()] =
-            MessageChannel.new(pilot.getNode(me.mpp_path),
-                               func(msg) {
-#                                 print("BroadcastChannel: processing " ~ msg);
-                                 process_msg(pilot, msg);
-                               });
+            MessageChannel.
+            new(pilot.getNode(me.mpp_path),
+                MessageChannel.new_message_handler(process_msg, pilot));
         }
       } else {
         delete(me.peers, pilot.getIndex());
@@ -252,3 +250,7 @@ MessageChannel.update = func {
 MessageChannel.send = func (msg) {
   me.node.setValue(msg);
 }
+MessageChannel.new_message_handler = func (handler, arg1) {
+  var local_arg1 = arg1; # Disconnect from future changes to arg1.
+  return func (msg) { handler(local_arg1, msg) };
+};

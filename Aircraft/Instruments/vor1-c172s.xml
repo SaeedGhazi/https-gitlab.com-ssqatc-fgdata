@@ -24,8 +24,8 @@ Jan 26 2003
   <nav-gs-needle-deflection>/instrumentation/nav[0]/gs-needle-deflection</nav-gs-needle-deflection>
   <nav-heading-needle-deflection>/instrumentation/nav[0]/heading-needle-deflection</nav-heading-needle-deflection>
   <!-- when posible change to nav-gs-in-range -->
-  <nav-gs-in-range>/instrumentation/nav[0]/in-range</nav-gs-in-range>
   <nav-in-range>/instrumentation/nav[0]/in-range</nav-in-range>
+  <nav-has-gs>/instrumentation/nav[0]/has-gs</nav-has-gs>
  </params>
  
  <layers>
@@ -109,10 +109,16 @@ Jan 26 2003
   <layer>
    <name>GS ON</name>
    <condition> 
-    <equals>
-     <property alias="../../../../../params/nav-in-range"/>
-     <value>true</value>
-    </equals>
+    <and>
+     <equals>
+      <property alias="../../../../../../params/nav-in-range"/>
+      <value>true</value>
+     </equals>
+     <equals>
+      <property alias="../../../../../../params/nav-has-gs"/>
+      <value>true</value>
+     </equals>
+    </and>
    </condition>
    <w>52</w>
    <h>32</h>

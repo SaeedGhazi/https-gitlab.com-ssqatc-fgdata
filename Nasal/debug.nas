@@ -331,8 +331,8 @@ var warn = func(msg, level = 0) {
 }
 
 
-var isnan = func(v) {
-	call(func math.sin(v), nil, var err = []);
+var isnan = func {
+	call(math.sin, arg, var err = []);
 	return !!size(err);
 }
 

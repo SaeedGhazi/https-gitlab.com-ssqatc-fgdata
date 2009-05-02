@@ -370,7 +370,9 @@ gear:     Defines a landing gear.  Accepts <control> subelements to map
                         are not active on runways. Defaults to "0". You can
                         not exclude all gears in the solving process.
 
-launchbar: Defines a catapult launchbar or strop.
+launchbar: Defines a catapult launchbar or strop. The default acceleration 
+						provided by the catapult is 25m/s^2. This can be
+						modified by the use of the control axis LACCEL.
            x,y,z:      The location of the mount point of the launch bar or
                        strop on the aircraft.
            length:     The length of the launch bar from mount point to tip
@@ -463,7 +465,7 @@ control-input:
                   FLAP0 - The flap0 deflection of a wing.
                   FLAP1 - The flap1 deflection of a wing.
                   FLAP[0/1]EFFECTIVENESS - a multiplier for flap lift, but not drag 
-                                           (useful for blown flaps
+                                           (useful for blown flaps)
                   SLAT - The slat extension of a wing.
                   SPOILER - The spoiler extension for a wing.
                   CYCLICAIL - The "aileron" cyclic input of a rotor
@@ -471,6 +473,7 @@ control-input:
                   COLLECTIVE - The collective input of a rotor
                   ROTORENGINEON - If not equal zero the rotor is rotating
                   WINCHRELSPEED - The relative winch speed
+				  LACCEL - The acceleration provided by the catapult.
                   {... and many more, see FGFDM.cpp ...}
           invert: Negate the value of the property before setting on
                   the object.
@@ -790,7 +793,7 @@ rotor:    A rotor. Used for simulating helicopters. You can have one, two
           head around the y-axis (TILTPITCH), the x-axis (TILTROLL) and the
           z-axis (TILTYAW). ROTORBALANCE is a factor for the balance.
 
-rotorgear: If you are using one ore more rotors you have to define a
+rotorgear: If you are using one or more rotors you have to define a
           rotorgear. It connects all the rotors and adds a simple engine.
           In future it will be possible, to add a YASim-engine.
           max-power-engine: the maximum power of the engine, in kW.
@@ -805,31 +808,31 @@ rotorgear: If you are using one ore more rotors you have to define a
                    maximum acceleration rate of the engine in %/s,
                    default is 5%/s.
           max-power-rotor-brake: the maximum power of the rotor brake, in kW
-                   at normal rpm (most? real rotor breaks would be overheated
+                   at normal rpm (most? real rotor brakes would be overheated
                    if used at normal rpm, but this is not simulated now)
           rotorgear-friction: the power loss due to friction in kW at normal
                    RPM
           yasimdragfactor:
-          yasimliftfactor: the solver is not working with rotor-aircrafts.
+          yasimliftfactor: the solver is not working with rotor-aircraft.
                    Therefore you have to specify the results yourself.
                    10 for drag and 140 for lift seem to be good starting
-                   values. Although the solve is not invoked for aircrafts
+                   values. Although the solve is not invoked for aircraft
                    with at least one rotor, you need to specify the cruise
                    and the approach settings. The approach speed is needed to
                    calculate the gear springs. Use a speed of approx. 50knots.
                    They do not need to match any real value.
 
           The rotorgear needs a <control> subelement for the engine
-          (ROTORGEARENGINEON) and can have furhter <control> subelements:
+          (ROTORGEARENGINEON) and can have further <control> subelements:
                    ROTORBRAKE: rotor brake
                    ROTORRELTARGET: the target rpm of the engine relative to
                                the "normal" value for the governor. Default is
                                1.
                    ROTORENGINEMAXRELTORQUE: the maximum torque of the engine
-                               relativ to the torque defined by the engine-
+                               relative to the torque defined by the engine-
                                power. Default is 1. By setting the rel-target
                                to a large number you get control over the
                                engine by this control.
-                               Alternativ you can use these two values for
+                               Alternatively you can use these two values for
                                individual start-up sequences (see the s58)
 

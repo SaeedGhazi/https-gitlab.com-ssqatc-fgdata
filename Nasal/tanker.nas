@@ -73,33 +73,6 @@ var identity = {
 	},
 };
 
-# functions to indicate the course [deg] (heading/ground) for a given heading [deg] (true heading) and ktas [kt] 
-# just adding wind.
-
-var heading_to_course_dev = func(ktas, heading) {
-	var alpha = (getprop("/environment/wind-from-heading-deg") - heading - 180) * D2R;
-	var wind_speed = getprop("/environment/wind-speed-kt");
-	return math.atan2(math.sin(alpha) * wind_speed, ktas + math.cos(alpha) * wind_speed) * R2D;
-}
-
-var heading_to_course = func(ktas, heading) {
-	return geo.normdeg(heading + heading_to_course_dev(ktas, heading));
-}
-
-# functions to calculate the needed heading [deg] (true heading) to have a desired course on ground [deg] 
-# for a given ktas [kt] the speed is speed on the heading, not on the course.
-# need some improvement to indicate that it's impossible if the wind is too strong, but don't know what to do for this :)
-
-var course_to_heading_dev = func(ktas, course) {
-	var alpha = (getprop("/environment/wind-from-heading-deg") - course) * D2R;
-	var rapport = math.sin(alpha) * getprop("/environment/wind-speed-kt") / ktas;
-	if (rapport > 1) return 1000; # not sure what to return here to indicate wind will be too strong to achieve course
-	else return math.asin(rapport) * R2D;
-}
-
-var course_to_heading = func(ktas, course) {
-	return geo.normdeg(course + course_to_heading_dev(ktas, course));
-}
 
 var Tanker = {
 	new: func(aiid, callsign, tacan, type, kias, heading, coord) {
@@ -119,7 +92,6 @@ var Tanker = {
 		m.mode = "leg";
 		m.rollrate = 2; # deg/s
 		m.maxbank = 25;
-		m.drift_angle = 0;
 
 		var n = props.globals.getNode("models", 1);
 		for (var i = 0; 1; i += 1)
@@ -178,22 +150,13 @@ var Tanker = {
 
 		if ((me.interval += dt) >= 5) {
 			me.interval -= 5;
-			if (me.mode == "leg")
-				 me.headwind = aircraft.wind_speed_from(me.course);
+			me.headwind = aircraft.wind_speed_from(me.course);
 			me.ktas = aircraft.kias_to_ktas(me.kias, alt);
 		}
 
-		if (me.roll) {
-			me.headwind = aircraft.wind_speed_from(me.course);
-			me.heading = me.heading - dt * 1085.941 * math.tan(me.roll * D2R) / me.ktas;
-			me.drift_angle = me.heading - me.course;
-		} else {
-			me.drift_angle = course_to_heading_dev(me.ktas, me.course);
-			me.heading = me.course + me.drift_angle;
-		}
-		var deviation = me.roll ? me.course - heading_to_course(me.ktas, me.heading) : 0;
-		var distance = dt * (me.ktas * math.cos(me.drift_angle * D2R) - me.headwind) * NM2M / 3600;
-		
+		var distance = dt * (me.ktas - me.headwind) * NM2M / 3600;
+		var deviation = me.roll ? 0.5 * dt * 1085.941 * math.tan(me.roll * D2R) / me.ktas : 0;
+
 		if (me.mode == "leg") {
 			if (me.lastmode != "leg") {
 				me.lastmode = "leg";
@@ -207,7 +170,7 @@ var Tanker = {
 				me.roll_target = 0;
 				me.leg_warning = 0;
 			}
-			if ((me.leg_remaining -= distance) > 0)
+			if ((me.leg_remaining -= distance) < 0)
 				me.mode = "turn";
 
 		} else { # me.mode == "turn"
@@ -220,20 +183,17 @@ var Tanker = {
 			if (!me.full_bank_turn_angle and me.roll >= me.roll_target)
 				me.full_bank_turn_angle = geo.normdeg(180 - me.turn_remaining);
 
-			#if (me.turn_remaining < me.full_bank_turn_angle)
-			#	me.roll_target = 0;
+			if (me.turn_remaining < me.full_bank_turn_angle)
+				me.roll_target = 0;
 
-			#if ((me.turn_remaining -= deviation) < 0) {
-			#	if (me.goal[1] == nil)  # define tanker exit point (opposite of anchor point/ARCP)
-			#		me.goal[1] = geo.Coord.new(me.coord).apply_course_distance(me.track_course - 180,
-			#				me.length);
-			#	me.mode = "leg";
-			#}
-			me.headwind = aircraft.wind_speed_from(me.course);
-			
+			if ((me.turn_remaining -= deviation) < 0) {
+				if (me.goal[1] == nil)  # define tanker exit point (opposite of anchor point/ARCP)
+					me.goal[1] = geo.Coord.new(me.coord).apply_course_distance(me.track_course - 180,
+							me.length);
+				me.mode = "leg";
+			}
 		}
 
-		
 		me.coord.apply_course_distance(me.course -= deviation, distance);
 
 		me.ac = geo.aircraft_position();
@@ -246,7 +206,7 @@ var Tanker = {
 		me.latN.setDoubleValue(me.coord.lat());
 		me.lonN.setDoubleValue(me.coord.lon());
 		me.altN.setDoubleValue(alt * M2FT);
-		me.hdgN.setDoubleValue(me.heading);
+		me.hdgN.setDoubleValue(me.heading = me.course);
 		me.pitchN.setDoubleValue(0);
 		me.rollN.setDoubleValue(-me.roll);
 		me.ktasN.setDoubleValue(me.ktas);
@@ -301,6 +261,7 @@ var Tanker = {
 };
 
 
+
 var request = func {
 	var tanker = values(Tanker.active);
 	if (size(tanker))
@@ -315,7 +276,7 @@ var request = func {
 	var hdg = getprop("orientation/heading-deg");
 	var course = hdg + (rand() - 0.5) * 60;
 	var dist = 6000 + rand() * 4000;
-	var alt = int(10 + rand() * 22) * 1000;  # FL100--FL320
+	var alt = int(10 + rand() * 15) * 1000;  # FL100--FL250
 	alt = skip_cloud_layer(alt * FT2M);
 	var coord = geo.aircraft_position().apply_course_distance(course, dist).set_alt(alt);
 	Tanker.new(aiid, callsign, tacanid, type, 250, hdg, coord);
@@ -343,5 +304,4 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
 	setlistener("/sim/signals/reinit", reinit, 1);
 });
-
 

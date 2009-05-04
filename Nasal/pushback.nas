@@ -1,26 +1,20 @@
-# Properties under /sim/model/pushback:
-# + position-norm    - Position of pushback. 1 if connected.
-
-# =====
 # Pushback
-# =====
+# =============================================================================
+# Creates an object to move the pushback to or out of the towing position.
+# Needs  /sim/model/pushback to exist in order to be executed.
 
-Pushback = {};
+var tractor = nil;
 
-Pushback.new = func {
-   obj = { parents : [Pushback],
-           pushback : aircraft.door.new("sim/model/pushback", 10.0),
-         };
-   return obj;
-};
-Pushback.pushbackexport = func {
-   me.pushback.toggle();
+var tractor_init = func() {
+	var pushback_node = props.globals.getNode("sim/model/pushback");
+	if (pushback_node != nil) {
+		tractor = aircraft.door.new("sim/model/pushback", 10.0);
+	}
 }
 
 
-# ==============
-# Initialization
-# ==============
+var tractor_connect = func() {
+	tractor.toggle();
+}
 
-# objects must be here, otherwise local to init()
-pushbacksystem = Pushback.new();
+_setlistener("/sim/signals/nasal-dir-initialized", func { tractor_init() });

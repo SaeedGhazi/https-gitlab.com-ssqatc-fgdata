@@ -48,7 +48,7 @@
       <property>/sim/model/pushback/position-norm</property>
       <binding>
        <command>nasal</command>
-       <script>pushback.pushbacksystem.pushbackexport();</script>
+       <script>pushback.tractor_connect();</script>
       </binding>
     </checkbox>
 

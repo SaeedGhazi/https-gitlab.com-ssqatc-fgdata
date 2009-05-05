@@ -3,6 +3,14 @@
 
    <name>pushback</name>
    <layout>vbox</layout>
+   <nasal>
+     <open>
+       var pushback_position = aircraft.door.new("sim/model/pushback", 10.0);
+       pushback_position.setpos(pushback_position.getpos());
+       props.globals.initNode("/sim/model/pushback/enabled", 0, "BOOL" );
+       props.globals.initNode("/sim/model/pushback/magnitude", 0.0  );
+     </open>
+   </nasal>
 
     <group>
      <layout>hbox</layout>
@@ -48,7 +56,7 @@
       <property>/sim/model/pushback/position-norm</property>
       <binding>
        <command>nasal</command>
-       <script>pushback.tractor_connect();</script>
+       <script>pushback_position.toggle();</script>
       </binding>
     </checkbox>
 

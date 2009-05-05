@@ -18,6 +18,10 @@ var KG2LB = 1 / LB2KG;
 var GAL2L = 3.785411784;               # US gallons to liter
 var L2GAL = 1 / GAL2L;
 
+
+# container for local variables, so as not to clutter the global namespace
+var __ = {};
+
 ##
 # Returns true if the first object is an instance of the second
 # (class) object.  Example: isa(someObject, props.Node)
@@ -115,7 +119,7 @@ var defined = func(sym) {
         if(contains(frame[0], sym)) return 1;
         fn += 1;
     }
-    return 0;
+    return contains(globals, sym);
 }
 
 
@@ -149,11 +153,10 @@ var values = func(hash) {
 # The underscore hash prevents helper functions/variables from
 # needlessly polluting the global namespace.
 #
-__ = {};
 __.dbg_types = { none:0, bulk:1, debug:2, info:3, warn:4, alert:5 };
 __.log_level = __.dbg_types[getprop("/sim/logging/priority")];
-var printlog = func(level, args...) {
-    if(__.dbg_types[level] >= __.log_level) call(print, args);
+var printlog = func(level) {
+    if(__.dbg_types[level] >= __.log_level) call(print, arg);
 }
 
 

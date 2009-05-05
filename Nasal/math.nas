@@ -1,5 +1,7 @@
 var abs = func(n) { n < 0 ? -n : n }
 
+var sgn = func(x) { x < 0 ? -1 : x > 0 }
+
 var pow = func(x, y) { exp(y * ln(x)) }
 
 var mod = func(n, m) {
@@ -11,7 +13,7 @@ var asin = func(y) { atan2(y, sqrt(1-y*y)) }
 
 var acos = func(x) { atan2(sqrt(1-x*x), x) }
 
-var tan = func(x) sin(x) / (cos(x) or die("tangens infinity"));
+var tan = func(x) { sin(x) / (cos(x) or die("tangens infinity")) }
 
 var _iln10 = 1/ln(10);
-var log10 = func(x) { ln(x) * _iln10; }
+var log10 = func(x) { ln(x) * _iln10 }

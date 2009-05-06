@@ -62,6 +62,7 @@ var door = {
 	},
 	# door.setpos(double)  ->  set ./position-norm without movement
 	setpos: func(pos) {
+		me.stop();
 		me.positionN.setValue(pos);
 		me.target = pos < 0.5;
 		me;
@@ -428,6 +429,14 @@ var timer = {
 		m.interval = res;
 		m.loopid = 0;
 		m.running = 0;
+		m.reinitL = setlistener("/sim/signals/reinit", func(n) {
+			if (n.getValue()) {
+				m.stop();
+				m.total = m.node.getValue();
+			} else {
+				m.node.setDoubleValue(m.total);
+			}
+		});
 		if (save) {
 			data.add(m.node);
 			m.saveL = setlistener("/sim/signals/save", func m._save_());
@@ -438,13 +447,15 @@ var timer = {
 	},
 	del: func {
 		me.stop();
+		removelistener(me.reinitL);
 		if (me.saveL != nil)
 			removelistener(me.saveL);
 	},
 	start: func {
 		me.running and return;
 		me.last_systime = me.systimeN.getValue();
-		me.interval != nil and me._loop_(me.loopid);
+		if (me.interval != nil)
+			me._loop_(me.loopid);
 		me.running = 1;
 		me;
 	},
@@ -920,6 +931,7 @@ var wind_speed_from = func(azimuth) {
 	var dir = (getprop("/environment/wind-from-heading-deg") - azimuth) * D2R;
 	return getprop("/environment/wind-speed-kt") * math.cos(dir);
 }
+
 
 
 # returns true airspeed for given indicated airspeed [kt] and altitude [m]

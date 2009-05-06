@@ -81,7 +81,7 @@ $Id$
   <desc>Throttle</desc>
   <binding>
    <command>nasal</command>
-   <property>controls.throttleAxis()</property>
+   <script>controls.throttleAxis()</script>
   </binding>
  </axis>
 

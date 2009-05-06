@@ -14,7 +14,7 @@
 #   <property>*            -> print property and all children to terminal
 #   <property>!            -> add property to display list  (reset list with  /!)
 #   <property>:            -> open property browser in this property's directory
-#   <string>?              -> print all properties whose path contains this string
+#   <string>?              -> print all properties whose path or value contains this string
 #
 #
 # Keys:
@@ -25,7 +25,7 @@
 #   <Shift-TAB>       ... like <TAB> but cycles backwards
 #   <CurUp>/<CurDown> ... switch back/forth in the history
 #   <Escape>          ... cancel the operation
-#   <Shift-Backspace> ... remove last, whole path element
+#   <Shift-Backspace> ... remove last whole path element
 #
 #
 # Colors:
@@ -283,7 +283,7 @@ var print_prop = func(n) {
 var search = func(n, s) {
 	if (find(s, n.getPath()) >= 0)
 		print_prop(n);
-	if (n.getType() != "NONE" and find(s, "" ~ n.getValue()) >= 0)
+	elsif (n.getType() != "NONE" and find(s, "" ~ n.getValue()) >= 0)
 		print_prop(n);
 	foreach (var c; n.getChildren())
 		search(c, s);

@@ -7,9 +7,15 @@
     <open>
        var pushback_position = aircraft.door.new("sim/model/pushback", 10.0);
        pushback_position.setpos(pushback_position.getpos());
-       props.globals.initNode("/sim/model/pushback/enabled", 0, "BOOL" );
+       props.globals.getNode("/sim/model/pushback/enabled", 1 ).setBoolValue(1);
        props.globals.initNode("/sim/model/pushback/target-speed-fps", 0.0  );
      </open>
+
+     <close>
+       pushback_position.stop();
+       pushback_position.setpos(0);
+       setprop("/sim/model/pushback/enabled", 0 );
+     </close>
   </nasal>
 
   <group>

@@ -12,7 +12,6 @@
      </open>
 
      <close>
-       pushback_position.stop();
        pushback_position.setpos(0);
        setprop("/sim/model/pushback/enabled", 0 );
      </close>

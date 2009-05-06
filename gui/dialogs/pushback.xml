@@ -1,52 +1,54 @@
 <?xml version="1.0"?>
 <PropertyList>
 
-   <name>pushback</name>
-   <layout>vbox</layout>
-   <nasal>
-     <open>
+  <name>pushback</name>
+  <layout>vbox</layout>
+  <nasal>
+    <open>
        var pushback_position = aircraft.door.new("sim/model/pushback", 10.0);
        pushback_position.setpos(pushback_position.getpos());
        props.globals.initNode("/sim/model/pushback/enabled", 0, "BOOL" );
-       props.globals.initNode("/sim/model/pushback/magnitude", 0.0  );
+       props.globals.initNode("/sim/model/pushback/target-speed-fps", 0.0  );
      </open>
-   </nasal>
+  </nasal>
 
-    <group>
-     <layout>hbox</layout>
-     <text>
+  <group>
+    <layout>hbox</layout>
+    <text>
       <label>Pushback</label>
-     </text>
+    </text>
 
-     <empty><stretch>true</stretch></empty>
+    <empty>
+      <stretch>true</stretch>
+    </empty>
 
-     <button>
-      <legend></legend>
+    <button>
+      <legend/>
       <key>Esc</key>
       <pref-width>16</pref-width>
       <pref-height>16</pref-height>
       <border>2</border>
       <binding>
-	 <command>dialog-close</command>
-	</binding>
-     </button>
-    </group>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
 
-    <hrule/>
+  <hrule/>
 
-    <group>
-      <stretch>true</stretch>
-      <layout>vbox</layout>
-      <halign>center</halign>
-      <valign>top</valign>
+  <group>
+    <stretch>true</stretch>
+    <layout>vbox</layout>
+    <halign>center</halign>
+    <valign>top</valign>
 
     <checkbox>
       <halign>left</halign>
       <label>Show pushback</label>
       <property>/sim/model/pushback/enabled</property>
       <binding>
-       <command>property-toggle</command>
-       <property>/sim/model/pushback/enabled</property>
+        <command>property-toggle</command>
+        <property>/sim/model/pushback/enabled</property>
       </binding>
     </checkbox>
 
@@ -55,32 +57,75 @@
       <label>Connect pushback</label>
       <property>/sim/model/pushback/position-norm</property>
       <binding>
-       <command>nasal</command>
-       <script>pushback_position.toggle();</script>
+        <command>nasal</command>
+        <script>pushback_position.toggle();</script>
       </binding>
     </checkbox>
 
-  <group>
-    <layout>hbox</layout>
+    <group>
+      <layout>hbox</layout>
+
+      <text>
+        <label>Speed:</label>
+      </text>
+
+      <slider>
+        <row>0</row>
+        <col>2</col>
+        <min>-50</min>
+        <max>50</max>
+        <property>/sim/model/pushback/target-speed-fps</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </slider>
+
+      <text>
+        <pref-width>16</pref-width>
+        <property>/sim/model/pushback/target-speed-fps</property>
+        <format>%2.0f</format>
+        <live>true</live>
+      </text>
+
+      <text>
+        <label>fps</label>
+      </text>
+
+    </group>
+    
+    <hrule/>
 
     <text>
-      <label>Force:</label>
+      <label>Cruise Control configuration</label>
     </text>
+    
+    <group>
+      <layout>hbox</layout>
+      <input>
+        <label>Kp</label>
+        <width>16</width>
+        <property>/sim/model/pushback/kp</property>
+      </input>
+    </group>
 
-    <slider>
-      <row>0</row>
-      <col>2</col>
-      <min>-40000</min>
-      <max>40000</max>
-      <property>/sim/model/pushback/magnitude</property>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-    </slider>
+    <group>
+      <layout>hbox</layout>
+      <input>
+        <label>Ki</label>
+        <width>16</width>
+        <property>/sim/model/pushback/ki</property>
+      </input>
+    </group>
 
-  </group>
+    <group>
+      <layout>hbox</layout>
+      <input>
+        <label>Kd</label>
+        <width>16</width>
+        <property>/sim/model/pushback/kd</property>
+      </input>
+    </group>
 
   </group>
 
 </PropertyList>
-

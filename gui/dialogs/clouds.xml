@@ -64,6 +64,7 @@
    <y>0</y>
    <width>125</width>
    <height>25</height>
+   <live>true</live>
    <property>/environment/clouds/layer[4]/elevation-ft</property>
   </input>
 
@@ -72,6 +73,7 @@
    <y>0</y>
    <width>200</width>
    <height>25</height>
+   <live>true</live>
    <property>/environment/clouds/layer[4]/coverage</property>
    <value>clear</value>
    <value>few</value>
@@ -86,6 +88,7 @@
    <y>0</y>
    <width>125</width>
    <height>25</height>
+   <live>true</live>
    <property>/environment/clouds/layer[4]/thickness-ft</property>
   </input>
 
@@ -106,6 +109,7 @@
    <y>0</y>
    <width>125</width>
    <height>25</height>
+   <live>true</live>
    <property>/environment/clouds/layer[3]/elevation-ft</property>
   </input>
 
@@ -114,6 +118,7 @@
    <y>0</y>
    <width>200</width>
    <height>25</height>
+   <live>true</live>
    <property>/environment/clouds/layer[3]/coverage</property>
    <value>clear</value>
    <value>few</value>
@@ -128,6 +133,7 @@
    <y>0</y>
    <width>125</width>
    <height>25</height>
+   <live>true</live>
    <property>/environment/clouds/layer[3]/thickness-ft</property>
   </input>
 
@@ -148,6 +154,7 @@
    <y>0</y>
    <width>125</width>
    <height>25</height>
+   <live>true</live>
    <property>/environment/clouds/layer[2]/elevation-ft</property>
   </input>
 
@@ -156,6 +163,7 @@
    <y>0</y>
    <width>200</width>
    <height>25</height>
+   <live>true</live>
    <property>/environment/clouds/layer[2]/coverage</property>
    <value>clear</value>
    <value>few</value>
@@ -170,6 +178,7 @@
    <y>0</y>
    <width>125</width>
    <height>25</height>
+   <live>true</live>
    <property>/environment/clouds/layer[2]/thickness-ft</property>
   </input>
 
@@ -190,6 +199,7 @@
    <y>0</y>
    <width>125</width>
    <height>25</height>
+   <live>true</live>
    <property>/environment/clouds/layer[1]/elevation-ft</property>
   </input>
 
@@ -198,6 +208,7 @@
    <y>0</y>
    <width>200</width>
    <height>25</height>
+   <live>true</live>
    <property>/environment/clouds/layer[1]/coverage</property>
    <value>clear</value>
    <value>few</value>
@@ -212,6 +223,7 @@
    <y>0</y>
    <width>125</width>
    <height>25</height>
+   <live>true</live>
    <property>/environment/clouds/layer[1]/thickness-ft</property>
   </input>
 
@@ -232,6 +244,7 @@
    <y>0</y>
    <width>125</width>
    <height>25</height>
+   <live>true</live>
    <property>/environment/clouds/layer[0]/elevation-ft</property>
   </input>
 
@@ -240,6 +253,7 @@
    <y>0</y>
    <width>200</width>
    <height>25</height>
+   <live>true</live>
    <property>/environment/clouds/layer[0]/coverage</property>
    <value>clear</value>
    <value>few</value>
@@ -254,6 +268,7 @@
    <y>0</y>
    <width>125</width>
    <height>25</height>
+   <live>true</live>
    <property>/environment/clouds/layer[0]/thickness-ft</property>
   </input>
 

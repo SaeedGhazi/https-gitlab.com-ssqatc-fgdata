@@ -61,7 +61,10 @@
 # geo.click_position()            ... returns last click coords as geo.Coord or nil before first click
 #
 # geo.tile_path(<lat>, <lon>)     ... returns tile path string (e.g. "w130n30/w123n37/942056.stg")
-# geo.elevation(<lat>, <lon>)     ... returns elevation in meter for given lat/lon, or nil on error
+# geo.elevation(<lat>, <lon> [, <top:10000>])
+#                                 ... returns elevation in meter for given lat/lon, or nil on error;
+#                                     <top> is the altitude at which the intersection test starts
+#
 # geo.normdeg(<angle>)            ... returns angle normalized to  0 <= angle < 360
 #
 # geo.put_model(<path>, <lat>, <lon> [, <elev:nil> [, <hdg:0> [, <pitch:0> [, <roll:0>]]]]);

@@ -48,16 +48,68 @@
   </binding>
  </axis>
 
+ <axis n="5">
+  <desc>View Direction</desc>
+  <low>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
+    <step type="double">1.0</step>
+   </binding>
+  </low>
+  <high>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
+    <step type="double">-1.0</step>
+   </binding>
+  </high>
+ </axis>
+
+ <axis n="6">
+  <desc>View Elevation</desc>
+  <low>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-pitch-offset-deg</property>
+    <step type="double">1.0</step>
+   </binding>
+  </low>
+  <high>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-pitch-offset-deg</property>
+    <step type="double">-1.0</step>
+   </binding>
+  </high>
+ </axis>
  <!-- Buttons on the Yoke -->
- <button n="5"> <!-- Labled as B1 -->
-  <desc>Elevator trim up</desc>
-  <repeatable>true</repeatable>
+ <button n="0"> <!-- Labled as E -->
+  <desc>Change View</desc>
   <binding>
    <command>nasal</command>
-   <script>controls.elevatorTrim(-0.75)</script>
+   <script>
+    v = getprop("/sim/current-view/view-number");
+    v = v + 1;
+    if (v > 4) {
+     v = 0;
+    }
+    setprop("/sim/current-view/view-number", v);
+   </script>
   </binding>
  </button>
- <button n="4"> <!-- Labled as B2 -->
+ <button n="1"> <!-- Labled as D -->
+  <desc>Toggle parking break</desc>
+  <binding>
+   <command>property-toggle</command>
+   <property>/controls/gear/brake-parking</property>
+  </binding>
+ </button>
+ <button n="2"> <!-- Labled as A1 -->
   <desc>Elevator trim down</desc>
   <repeatable>true</repeatable>
   <binding>
@@ -65,7 +117,32 @@
    <script>controls.elevatorTrim(0.75)</script>
   </binding>
  </button>
-
+ <button n="3"> <!-- Labled as A2 -->
+  <desc>Elevator trim up</desc>
+  <repeatable>true</repeatable>
+  <binding>
+   <command>nasal</command>
+   <script>controls.elevatorTrim(-0.75)</script>
+  </binding>
+ </button>
+ <button n="4"> <!-- Labled as B1 -->
+  <desc>Zoom In</desc>
+  <repeatable>true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/sim/current-view/field-of-view</property>
+   <step type="double">-0.5</step>
+  </binding>
+ </button>
+ <button n="5"> <!-- LAbled as B2 -->
+  <desc>Zoom Out</desc>
+  <repeatable>true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/sim/current-view/field-of-view</property>
+   <step type="double">+0.5</step>
+  </binding>
+ </button>
  <button n="6"> <!-- Labled as C1 -->
   <desc>Aileron trim left</desc>
   <repeatable>true</repeatable>

@@ -119,6 +119,16 @@
 			</binding>
 		</key>
 
+		<key n="104">
+			<name>h</name>
+			<desc>Chat History</desc>
+			<exit/>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>chat-full</dialog-name>
+			</binding>
+		</key>
+
 		<key n="105">
 			<name>i</name>
 			<desc>Instrument Settings</desc>

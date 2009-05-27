@@ -422,6 +422,9 @@ var pilot_view_limiter = {
 		me.enable_xoffset = me.right.xoffset_max > 0.001 or me.left.xoffset_max > 0.001;
 	},
 	update : func {
+		if (getprop("/devices/status/keyboard/ctrl"))
+			return;
+
 		var hdg = normdeg(me.hdgN.getValue());
 		if (abs(me.last_hdg - hdg) > 180)  # avoid wrap-around skips
 			me.hdgN.setDoubleValue(hdg = me.last_hdg);
@@ -613,6 +616,11 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	setlistener("/sim/current-view/view-number", func(n) {
 		current = views[index = n.getValue()];
 	}, 1);
+
+	props.globals.initNode("/position/altitude-agl-ft"); # needed by Fly-By View
+	manager.init();
+	manager.register("Fly-By View", fly_by_view_handler);
+	manager.register("Model View", model_view_handler);
 });
 
 
@@ -634,10 +642,6 @@ _setlistener("/sim/signals/fdm-initialized", func {
 			}
 		}
 	}
-
-	manager.init();
-	manager.register("Fly-By View", fly_by_view_handler);
-	manager.register("Model View", model_view_handler);
 
 	forindex (var i; views) {
 		var limits = views[i].getNode("config/limits/enabled");

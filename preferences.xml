@@ -633,7 +633,7 @@ Started September 2000 by David Megginson, david@megginson.com
     <scenario>
       <name>Stormy Monday</name>
       <metar>XXXX 012345Z 28035G50KT 9999 TSRA SCT022CB BKN030 13/09 Q1005</metar>
-      <description>Your are out for an adventure? Gusty winds blowing from the west
+      <description>You're out for an adventure? Gusty winds blowing from the west
                    and isolated thunderstorms should be avoided. Fasten your seatbelt!</description>
     </scenario>
     <scenario>

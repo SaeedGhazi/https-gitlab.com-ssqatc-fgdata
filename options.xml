@@ -765,6 +765,11 @@
    <name>strings/environment-options</name>
 
    <option>
+    <name>metar</name>
+    <description>strings/metar-desc</description>
+   </option>
+
+   <option>
     <name>disable-real-weather-fetch</name>
     <description>strings/disable-real-weather-fetch-desc</description>
    </option>
@@ -818,7 +823,7 @@
 
    <option>
     <name>wind</name>
-    <arg>DIR@SPEED</arg>
+    <arg>DIR[:MAXDIR]@SPEED[:GUST]</arg>
     <description>strings/wind-desc</description>
     <brief/>
    </option>

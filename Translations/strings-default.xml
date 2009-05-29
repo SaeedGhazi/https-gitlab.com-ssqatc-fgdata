@@ -92,6 +92,7 @@
  <enable-random-objects-desc>Include random scenery objects</enable-random-objects-desc>
  <disable-real-weather-fetch-desc>Disable METAR based real weather fetching</disable-real-weather-fetch-desc>
  <enable-real-weather-fetch-desc>Enable METAR based real weather fetching (this requires an open internet connection)</enable-real-weather-fetch-desc>
+ <metar-desc>Pass a METAR to set up static weather</metar-desc>
  <random-objects-desc>(buildings, etc.)</random-objects-desc>
  <disable-ai-models-desc>Disable the artificial traffic subsystem.</disable-ai-models-desc>
  <enable-ai-models-desc>Enable the artificial traffic.</enable-ai-models-desc>

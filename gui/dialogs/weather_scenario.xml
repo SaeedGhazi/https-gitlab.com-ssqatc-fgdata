@@ -156,14 +156,14 @@
 
   <nasal>
     <open><![CDATA[
-      var dlg_root = cmdarg().getNode("/");
+      var dlg_root = cmdarg();
 
       var normalize_string = func(src) {
         if( src == nil ) src = "";
         var dst = "";
         for( var i = 0; i < size(src); i+=1 ) {
-          if( src[i] == 10 or src[i] == 13 )
-            src[i] = 32;
+          if( src[i] == `\n` or src[i] == `\r` )
+            src[i] = ` `;
 
           if( i != 0 and src[i] == 32 and src[i-1] == 32 )
             continue;

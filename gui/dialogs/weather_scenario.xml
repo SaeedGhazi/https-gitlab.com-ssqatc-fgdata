@@ -5,78 +5,146 @@
   <modal>false</modal>
   <layout>vbox</layout>
   <resizable>true</resizable>
+  <default-padding>3</default-padding>
 
-  <text>
-    <label>Weather Scenario</label>
-  </text>
+  <group>
+    <layout>hbox</layout>
+    <default-padding>1</default-padding>
+
+    <empty><stretch>true</stretch></empty>
+
+    <text>
+      <label>Automatic Weather Generation</label>
+    </text>
+
+    <empty><stretch>true</stretch></empty>
+
+    <button>
+      <legend></legend>
+      <key>Esc</key>
+      <pref-width>16</pref-width>
+      <pref-height>16</pref-height>
+      <border>2</border>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
 
   <hrule/>
+  <group>
+    <layout>hbox</layout>
+    <text>
+      <label>METAR Source</label>
+    </text>
+    <empty><stretch>true</stretch></empty>
+  </group>
 
-  <text>
-    <label></label>
-  </text>
+  <combo>
+    <name>source-selection</name>
+    <halign>fill</halign>
+    <stretch>true</stretch>
+    <property>sim/gui/dialogs/weather-scenario/source-selection</property>
+    <binding>
+      <command>dialog-apply</command>
+      <object-name>source-selection</object-name>
+    </binding>
+  </combo>
+
+  <textbox>
+    <name>description</name>
+    <halign>fill</halign>
+    <stretch>true</stretch>
+    <pref-width>180</pref-width>
+    <pref-height>100</pref-height>
+    <slider>20</slider>
+    <editable>false</editable>
+    <wrap>true</wrap>
+    <live>true</live>
+    <property>sim/gui/dialogs/weather-scenario/description</property>
+  </textbox>
 
   <group>
     <layout>hbox</layout>
     <text>
-      <label>Weather source</label>
-      <halign>left</halign>
+      <label>METAR Data</label>
     </text>
-    <combo>
-      <halign>fill</halign>
-      <stretch>true</stretch>
-      <pref-width>200</pref-width>
-      <property>/environment/weather-scenario</property>
-      <value>Fair weather</value>
-      <value>Thunderstorm</value>
-      <value>METAR</value>
-      <value>none</value>
-    </combo>
+    <empty><stretch>true</stretch></empty>
   </group>
 
-  <text><label>Last metar used</label></text>
   <textbox>
+    <name>metar</name>
     <halign>fill</halign>
-    <valign>fill</valign>
     <stretch>true</stretch>
-    <pref-width>400</pref-width>
-    <pref-height>120</pref-height>
+    <pref-width>180</pref-width>
+    <pref-height>50</pref-height>
     <slider>20</slider>
-    <live>true</live>
+    <editable>true</editable>
     <wrap>true</wrap>
-    <editable>false</editable>
-    <property>/environment/metar/last-metar</property>
+    <live>true</live>
+    <property>sim/gui/dialogs/weather-scenario/metar</property>
   </textbox>
 
-  <text>
-    <label></label>
-  </text>
+  <hrule/>
+
+  <group>
+    <layout>hbox</layout>
+    <empty><stretch>true</stretch></empty>
+    <checkbox>
+      <property>/environment/params/metar-updates-winds-aloft</property>
+      <label>Update winds aloft</label>
+      <name>aloft</name>
+    </checkbox>
+    <empty><stretch>true</stretch></empty>
+  </group>
 
   <group>
     <layout>hbox</layout>
 
     <empty><stretch>true</stretch></empty>
-
     <button>
-        <legend>OK</legend>
-        <default>true</default>
-        <binding>
-            <command>dialog-apply</command>
-        </binding>
-        <binding>
-            <command>dialog-close</command>
-        </binding>
+      <legend>OK</legend>
+      <default>true</default>
+      <equal>true</equal>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
     </button>
 
     <button>
-        <legend>Apply</legend>
-        <binding>
-            <command>dialog-apply</command>
-        </binding>
+      <legend>Apply</legend>
+      <equal>true</equal>
+      <binding>
+        <command>nasal</command>
+        <script>apply()</script>
+      </binding>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
     </button>
 
     <button>
-      <legend>Close</legend>
+      <legend>Instant-Apply</legend>
+      <equal>true</equal>
+      <binding>
+        <command>nasal</command>
+        <script>apply()</script>
+      </binding>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>reinit</command>
+        <subsystem>environment</subsystem>
+      </binding>
+    </button>
+
+    <button>
+      <legend>Cancel</legend>
+      <equal>true</equal>
       <key>Esc</key>
       <binding>
         <command>dialog-close</command>
@@ -85,4 +153,108 @@
 
     <empty><stretch>true</stretch></empty>
   </group>
+
+  <nasal>
+    <open><![CDATA[
+      var dlg_root = cmdarg().getNode("/");
+
+      var normalize_string = func(src) {
+        if( src == nil ) src = "";
+        var dst = "";
+        for( var i = 0; i < size(src); i+=1 ) {
+          if( src[i] == 10 or src[i] == 13 )
+            src[i] = 32;
+
+          if( i != 0 and src[i] == 32 and src[i-1] == 32 )
+            continue;
+
+          dst = dst ~ " ";
+          dst[size(dst)-1] = src[i];
+        }
+        return dst;
+      }
+
+      var findScenarioByName = func(name) {
+        var wsn = props.globals.getNode( "/environment/weather-scenarios" );
+        if( wsn != nil ) {
+          var scenarios = wsn.getChildren("scenario");
+          foreach (var scenario; scenarios ) {
+            if( scenario.getNode("name").getValue() == name )
+              return scenario;
+          }
+        }
+        return nil;
+      }
+
+      var propertyChangeListener = setlistener( "sim/gui/dialogs/weather-scenario/source-selection", func(n) {
+        description = "";
+        metar = "nil";
+        var scenario = findScenarioByName( n.getValue() );
+        if( scenario != nil ) {
+          description = normalize_string(scenario.getNode("description", 1 ).getValue());
+          metar = normalize_string(scenario.getNode("metar", 1 ).getValue());
+        }
+        setprop("sim/gui/dialogs/weather-scenario/description", description );
+        setprop("sim/gui/dialogs/weather-scenario/metar", metar );
+      });
+
+      #initialize the METAR source selection
+      if( getprop( "environment/params/metar-updates-environment" ) == 0 ) {
+        setprop("sim/gui/dialogs/weather-scenario/source-selection", "Disabled" );
+      } else if( getprop( "environment/params/real-world-weather-fetch" ) ) {
+        setprop("sim/gui/dialogs/weather-scenario/source-selection", "Live data" );
+      } else {
+        setprop("sim/gui/dialogs/weather-scenario/source-selection", "Manual input" );
+      }
+      setprop( "sim/gui/dialogs/weather-scenario/metar", normalize_string(getprop("environment/metar/data")) );
+
+
+      var findElementByName = func(rootN, name) {
+        foreach( var child; rootN.getChildren() ) {
+          var n = child.getNode( "name" );
+          if( n != nil and n.getValue() == name )
+            return child;
+          var f = findElementByName(child,name);
+          if( f != nil ) return f;
+        }
+        return nil;
+      };
+
+      # fill the METAR source combo box
+      var combo = findElementByName( dlg_root, "source-selection" );
+      var wsn = props.globals.getNode( "/environment/weather-scenarios" );
+      if( wsn != nil ) {
+        var scenarios = wsn.getChildren("scenario");
+        forindex (var i; scenarios )
+          combo.getChild("value", i, 1).setValue(scenarios[i].getNode("name").getValue());
+      }
+
+
+      var apply = func {
+        var scenarioName = getprop("sim/gui/dialogs/weather-scenario/source-selection");
+        var metar = nil;
+        if( scenarioName == "Disabled" ) {
+          setprop( "/environment/params/metar-updates-environment", 0 );
+          setprop( "/environment/params/real-world-weather-fetch", 0 );
+        } else if( scenarioName == "Live data" ) {
+          setprop( "/environment/params/metar-updates-environment", 1 );
+          setprop( "/environment/params/real-world-weather-fetch", 1 );
+        } else if( scenarioName == "Manual input" ) {
+          setprop( "/environment/params/metar-updates-environment", 1 );
+          setprop( "/environment/params/real-world-weather-fetch", 0 );
+          metar = getprop( "sim/gui/dialogs/weather-scenario/metar" );
+        } else {
+          metar = getprop( "sim/gui/dialogs/weather-scenario/metar" );
+        }
+        if( metar != nil )
+          setprop( "environment/metar/data", normalize_string(metar) );
+      }
+
+    ]]></open>
+
+    <close><![CDATA[
+      removelistener( propertyChangeListener );
+    ]]></close>
+
+  </nasal>
 </PropertyList>

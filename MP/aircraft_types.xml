@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
-  AircraftTypes.xml - List of aircraft type identifiers
-  http://virtualair.sourceforge.net
+  aircraft_types.xml - List of aircraft type identifiers
+  http://virtualair.sourceforge.net/
 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
@@ -28,5 +28,7 @@
   <Type ICAO="B733" SISO="1.2.225.57.1.7.0" FlightGear="Aircraft/737-300/Models/737-300.xml"/>
   <Type ICAO="B742" SISO="1.2.225.57.1.1.0" FlightGear="Aircraft/747-200/Models/boeing747-200.xml"/>
   <Type ICAO="C172" SISO="1.2.225.40.1.1.0" FSX="Cessna Skyhawk 172SP" FlightGear="Aircraft/c172p/Models/c172p.xml"/>
+  <Type ICAO="PC7" SISO="1.2.206.40.1.1.0" FlightGear="Aircraft/pc7/Models/pc7.xml"/>
+  <Type ICAO="DH8C" SISO="1.2.39.57.1.1.0" FlightGear="Aircraft/dhc8/Models/dhc8-300Q.xml"/>
   <Type ICAO="UFO" SISO="1.2.0.0.0.0.0" FlightGear="Aircraft/ufo/Models/ufo.xml"/>
 </AircraftTypes>

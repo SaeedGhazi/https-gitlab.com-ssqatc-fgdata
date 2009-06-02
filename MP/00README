@@ -1,0 +1,4 @@
+aircraft_types.xml: List to map aircraft types between different
+    nomenclatures systems (ICAO, SISO, FlightGear, ....) to help different
+    flavours of flight simulation software to communicate in a single
+    simulation enviromnent.

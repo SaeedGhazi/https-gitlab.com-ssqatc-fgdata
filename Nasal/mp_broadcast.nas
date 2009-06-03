@@ -126,9 +126,9 @@ BroadcastChannel.update = func {
   if ((t - me.last_send) > me.SEND_TIME) {
     if (size(me.send_buf) > 0) {
       me.send_node.setValue(me.send_buf[0]);
+      if (me.send_to_self) me.process_msg(props.globals, me.send_buf[0]);
       me.send_buf = subvec(me.send_buf, 1);
       me.last_send = t;
-      if (me.send_to_self) me.process_msg(props.globals, msg);
     } else {
       # Nothing new to send. Reset the send property to save bandwidth.
       me.send_node.setValue("");

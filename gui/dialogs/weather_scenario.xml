@@ -243,11 +243,9 @@
         } else if( scenarioName == "Live data" ) {
           setprop( "/environment/params/metar-updates-environment", 1 );
           setprop( "/environment/params/real-world-weather-fetch", 1 );
-        } else if( scenarioName == "Manual input" ) {
+        } else {
           setprop( "/environment/params/metar-updates-environment", 1 );
           setprop( "/environment/params/real-world-weather-fetch", 0 );
-          metar = getprop( "sim/gui/dialogs/weather-scenario/metar" );
-        } else {
           metar = getprop( "sim/gui/dialogs/weather-scenario/metar" );
         }
         if( metar != nil )

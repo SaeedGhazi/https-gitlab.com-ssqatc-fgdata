@@ -213,6 +213,14 @@
         setprop("sim/gui/dialogs/weather-scenario/metar", metar );
       });
 
+      var metarListener = setlistener( "environment/metar/data", func(n) {
+        var metar = n.getValue();
+        if( metar == nil ) metar = "";
+        metar = normalize_string(metar);
+        setprop("sim/gui/dialogs/weather-scenario/metar", metar );
+        gui.dialog_update( "weather_scenario", "metar" );
+      }, 1, 0);
+
       #initialize the METAR source selection
       if( getprop( "environment/params/metar-updates-environment" ) == 0 ) {
         setprop("sim/gui/dialogs/weather-scenario/source-selection", "Disabled" );
@@ -256,6 +264,7 @@
 
     <close><![CDATA[
       removelistener( propertyChangeListener );
+      removelistener( metarListener );
     ]]></close>
 
   </nasal>

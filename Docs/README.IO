@@ -22,9 +22,9 @@ Generic Communication:
     --generic=params
 
     With this option it is possible to output a pre-configured
-    ASCII string using a predefined separator. The configuration is
-    defined in an XML file located in the Protocol directory of
-    the base package.
+    ASCII string or binary sequence  using a predefined separator.
+    The configuration is defined in an XML file located in the
+    Protocol directory of the base package.
 
     params can be:
     serial port communication:    serial,dir,hz,device,baud,protocol

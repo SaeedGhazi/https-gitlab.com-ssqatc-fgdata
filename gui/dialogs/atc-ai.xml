@@ -164,6 +164,12 @@
 
 			<checkbox>
 				<halign>left</halign>
+				<label>LSO Commentary</label>
+				<property>/sim/current-view/lso-commentary</property>
+			</checkbox>
+
+			<checkbox>
+				<halign>left</halign>
 				<label>Deck Lights</label>
 				<property>/ai/models/carrier/controls/lighting/deck-lights</property>
 				<binding>

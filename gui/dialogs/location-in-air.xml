@@ -187,7 +187,7 @@
     <text>
       <row>0</row><col>0</col>
       <halign>right</halign>
-      <label>Distance (mi):</label>
+      <label>Distance (nm):</label>
     </text>
     <input>
       <row>0</row><col>1</col>

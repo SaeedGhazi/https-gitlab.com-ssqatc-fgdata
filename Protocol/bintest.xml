@@ -34,15 +34,15 @@
 
    <chunk>
     <name>autocoord</name>
-    <type>boolean</type>
+    <type>bool</type>
     <node>/sim/auto-coordination</node>
    </chunk>
 
-   <chunk>
+   <!-- chunk>
     <name>clock</name>
     <type>string</type>
     <node>/instrumentation/clock/indicated-string</node>
-   </chunk>
+   </chunk -->
 
   </output>
 

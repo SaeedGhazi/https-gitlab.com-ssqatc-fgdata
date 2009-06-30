@@ -85,7 +85,7 @@
 
    <chunk>
     <name>Weight on Wheels ("GND"/"AIR")</name>
-    <type>boolean</type>
+    <type>bool</type>
     <node>/fdm/acms/gear/wow</node>
    </chunk>
 

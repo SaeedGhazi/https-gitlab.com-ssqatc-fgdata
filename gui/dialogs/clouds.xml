@@ -11,6 +11,16 @@
  <hrule/>
 
 
+ <nasal>
+  <open>
+    var rebuild = func {
+        var p = "/environment/rebuild-layers";
+        setprop(p, getprop(p) + 1);
+    }
+  </open>
+ </nasal>
+
+
  <!-- Header Row -->
 
  <group>
@@ -76,6 +86,10 @@
    <binding>
     <command>dialog-apply</command>
    </binding>
+   <binding>
+    <command>nasal</command>
+    <script>rebuild()</script>
+   </binding>
   </combo>
 
   <input>
@@ -121,6 +135,10 @@
    <value>cirrus</value>
    <binding>
     <command>dialog-apply</command>
+   </binding>
+   <binding>
+    <command>nasal</command>
+    <script>rebuild()</script>
    </binding>
   </combo>
 
@@ -168,6 +186,10 @@
    <binding>
     <command>dialog-apply</command>
    </binding>
+   <binding>
+    <command>nasal</command>
+    <script>rebuild()</script>
+   </binding>
   </combo>
 
   <input>
@@ -214,6 +236,10 @@
    <binding>
     <command>dialog-apply</command>
    </binding>
+   <binding>
+    <command>nasal</command>
+    <script>rebuild()</script>
+   </binding>
   </combo>
 
   <input>
@@ -250,6 +276,7 @@
    <col>2</col>
    <pref-width>100</pref-width>
    <live>true</live>
+   <editable>false</editable>
    <property>/environment/clouds/layer[0]/coverage</property>
    <value>clear</value>
    <value>few</value>
@@ -259,6 +286,10 @@
    <value>cirrus</value>
    <binding>
     <command>dialog-apply</command>
+   </binding>
+   <binding>
+    <command>nasal</command>
+    <script>rebuild()</script>
    </binding>
   </combo>
 

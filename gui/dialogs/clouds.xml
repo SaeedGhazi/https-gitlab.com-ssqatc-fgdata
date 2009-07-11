@@ -1,78 +1,70 @@
 <?xml version="1.0"?>
 
 <PropertyList>
-
- <!-- Control the weather -->
-
  <name>clouds</name>
- <width>600</width>
- <height>280</height>
- <modal>false</modal>
+ <layout>vbox</layout>
 
  <text>
-  <x>10</x>
-  <y>250</y>
-  <label>Weather: Clouds</label>
+  <label>Weather - Clouds</label>
  </text>
+
+ <hrule/>
+
 
  <!-- Header Row -->
 
  <group>
-  <x>0</x>
-  <y>210</y>
+  <layout>table</layout>
+  <padding>7</padding>
 
   <text>
-   <x>10</x>
-   <y>0</y>
    <label>Layer</label>
+   <row>0</row>
+   <col>0</col>
   </text>
 
   <text>
-   <x>75</x>
-   <y>0</y>
    <label>Elevation (ft)</label>
+   <row>0</row>
+   <col>1</col>
   </text>
 
   <text>
-   <x>225</x>
-   <y>0</y>
    <label>Coverage</label>
+   <row>0</row>
+   <col>2</col>
+   <width>80</width>
   </text>
 
   <text>
-   <x>450</x>
-   <y>0</y>
    <label>Thickness (ft)</label>
+   <row>0</row>
+   <col>3</col>
   </text>
 
- </group>
 
- <!-- Data Rows -->
-
- <group>
-  <x>0</x>
-  <y>180</y>
+  <!-- Layer 4 -->
 
   <text>
-   <x>10</x>
-   <y>0</y>
    <label>4</label>
+   <row>1</row>
+   <col>0</col>
   </text>
 
   <input>
-   <x>75</x>
-   <y>0</y>
-   <width>125</width>
-   <height>25</height>
+   <row>1</row>
+   <col>1</col>
    <live>true</live>
    <property>/environment/clouds/layer[4]/elevation-ft</property>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
   </input>
 
   <combo>
-   <x>225</x>
-   <y>0</y>
-   <width>200</width>
-   <height>25</height>
+   <row>1</row>
+   <col>2</col>
+   <pref-width>100</pref-width>
    <live>true</live>
    <property>/environment/clouds/layer[4]/coverage</property>
    <value>clear</value>
@@ -81,43 +73,44 @@
    <value>broken</value>
    <value>overcast</value>
    <value>cirrus</value>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
   </combo>
 
   <input>
-   <x>450</x>
-   <y>0</y>
-   <width>125</width>
-   <height>25</height>
+   <row>1</row>
+   <col>3</col>
    <live>true</live>
    <property>/environment/clouds/layer[4]/thickness-ft</property>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
   </input>
 
- </group>
 
- <group>
-  <x>0</x>
-  <y>150</y>
+  <!-- Layer 3 -->
 
   <text>
-   <x>10</x>
-   <y>0</y>
    <label>3</label>
+   <row>2</row>
+   <col>0</col>
   </text>
 
   <input>
-   <x>75</x>
-   <y>0</y>
-   <width>125</width>
-   <height>25</height>
+   <row>2</row>
+   <col>1</col>
    <live>true</live>
    <property>/environment/clouds/layer[3]/elevation-ft</property>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
   </input>
 
   <combo>
-   <x>225</x>
-   <y>0</y>
-   <width>200</width>
-   <height>25</height>
+   <row>2</row>
+   <col>2</col>
+   <pref-width>100</pref-width>
    <live>true</live>
    <property>/environment/clouds/layer[3]/coverage</property>
    <value>clear</value>
@@ -126,43 +119,44 @@
    <value>broken</value>
    <value>overcast</value>
    <value>cirrus</value>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
   </combo>
 
   <input>
-   <x>450</x>
-   <y>0</y>
-   <width>125</width>
-   <height>25</height>
+   <row>2</row>
+   <col>3</col>
    <live>true</live>
    <property>/environment/clouds/layer[3]/thickness-ft</property>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
   </input>
 
- </group>
 
- <group>
-  <x>0</x>
-  <y>120</y>
+  <!-- Layer 2 -->
 
   <text>
-   <x>10</x>
-   <y>0</y>
    <label>2</label>
+   <row>3</row>
+   <col>0</col>
   </text>
 
   <input>
-   <x>75</x>
-   <y>0</y>
-   <width>125</width>
-   <height>25</height>
+   <row>3</row>
+   <col>1</col>
    <live>true</live>
    <property>/environment/clouds/layer[2]/elevation-ft</property>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
   </input>
 
   <combo>
-   <x>225</x>
-   <y>0</y>
-   <width>200</width>
-   <height>25</height>
+   <row>3</row>
+   <col>2</col>
+   <pref-width>100</pref-width>
    <live>true</live>
    <property>/environment/clouds/layer[2]/coverage</property>
    <value>clear</value>
@@ -171,43 +165,44 @@
    <value>broken</value>
    <value>overcast</value>
    <value>cirrus</value>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
   </combo>
 
   <input>
-   <x>450</x>
-   <y>0</y>
-   <width>125</width>
-   <height>25</height>
+   <row>3</row>
+   <col>3</col>
    <live>true</live>
    <property>/environment/clouds/layer[2]/thickness-ft</property>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
   </input>
 
- </group>
 
- <group>
-  <x>0</x>
-  <y>90</y>
+  <!-- Layer 1 -->
 
   <text>
-   <x>10</x>
-   <y>0</y>
    <label>1</label>
+   <row>4</row>
+   <col>0</col>
   </text>
 
   <input>
-   <x>75</x>
-   <y>0</y>
-   <width>125</width>
-   <height>25</height>
+   <row>4</row>
+   <col>1</col>
    <live>true</live>
    <property>/environment/clouds/layer[1]/elevation-ft</property>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
   </input>
 
   <combo>
-   <x>225</x>
-   <y>0</y>
-   <width>200</width>
-   <height>25</height>
+   <row>4</row>
+   <col>2</col>
+   <pref-width>100</pref-width>
    <live>true</live>
    <property>/environment/clouds/layer[1]/coverage</property>
    <value>clear</value>
@@ -216,43 +211,44 @@
    <value>broken</value>
    <value>overcast</value>
    <value>cirrus</value>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
   </combo>
 
   <input>
-   <x>450</x>
-   <y>0</y>
-   <width>125</width>
-   <height>25</height>
+   <row>4</row>
+   <col>3</col>
    <live>true</live>
    <property>/environment/clouds/layer[1]/thickness-ft</property>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
   </input>
 
- </group>
 
- <group>
-  <x>0</x>
-  <y>60</y>
+  <!-- Layer 0 -->
 
   <text>
-   <x>10</x>
-   <y>0</y>
    <label>0</label>
+   <row>5</row>
+   <col>0</col>
   </text>
 
   <input>
-   <x>75</x>
-   <y>0</y>
-   <width>125</width>
-   <height>25</height>
+   <row>5</row>
+   <col>1</col>
    <live>true</live>
    <property>/environment/clouds/layer[0]/elevation-ft</property>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
   </input>
 
   <combo>
-   <x>225</x>
-   <y>0</y>
-   <width>200</width>
-   <height>25</height>
+   <row>5</row>
+   <col>2</col>
+   <pref-width>100</pref-width>
    <live>true</live>
    <property>/environment/clouds/layer[0]/coverage</property>
    <value>clear</value>
@@ -261,83 +257,32 @@
    <value>broken</value>
    <value>overcast</value>
    <value>cirrus</value>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
   </combo>
 
   <input>
-   <x>450</x>
-   <y>0</y>
-   <width>125</width>
-   <height>25</height>
+   <row>5</row>
+   <col>3</col>
    <live>true</live>
    <property>/environment/clouds/layer[0]/thickness-ft</property>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
   </input>
 
  </group>
 
- <!-- Button Box -->
 
- <group>
-  <x>105</x>
-  <y>10</y>
+ <!-- Buttons -->
 
-  <button>
-   <x>0</x>
-   <y>0</y>
-   <legend>OK</legend>
-   <default>true</default>
-   <equal>true</equal>
-   <binding>
-    <command>dialog-apply</command>
-   </binding>
-   <binding>
-       <command>nasal</command>
-       <script>
-           setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers")+1);
-       </script>
-   </binding>
-   <binding>
-    <command>dialog-close</command>
-   </binding>
-  </button>
-
-  <button>
-   <x>100</x>
-   <y>0</y>
-   <legend>Apply</legend>
-   <equal>true</equal>
-   <binding>
-    <command>dialog-apply</command>
-   </binding>
-   <binding>
-       <command>nasal</command>
-       <script>
-           setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers")+1);
-       </script>
-   </binding>
-   
-  </button>
-
-  <button>
-   <x>200</x>
-   <y>0</y>
-   <legend>Reset</legend>
-   <equal>true</equal>
-   <binding>
-    <command>dialog-update</command>
-   </binding>
-  </button>
-
-  <button>
-   <x>300</x>
-   <y>0</y>
-   <legend>Cancel</legend>
-   <equal>true</equal>
-   <key>Esc</key>
-   <binding>
-    <command>dialog-close</command>
-   </binding>
-  </button>
-
- </group>
+ <button>
+  <legend>Close</legend>
+  <default>true</default>
+  <binding>
+   <command>dialog-close</command>
+  </binding>
+ </button>
 
 </PropertyList>

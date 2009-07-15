@@ -97,6 +97,12 @@ Properties currently used:
 
   tree-width-m: The average width of the tree cover. Actual tree width
     will vary by +/- 50%.
+
+  effect - The name of an effect to inherit from. The default is
+    Effects/terrain-default.
+
+   ambient, diffuse, specular, emissive, and shininess are copied into the
+   parameter section of the effect created for this material.
 ************************************************************************
 -->
 

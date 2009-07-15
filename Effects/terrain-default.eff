@@ -39,6 +39,51 @@
     </render-bin>
   </parameters>
   <technique>
+    <predicate>
+      <less-equal>
+        <value type="float">2.0</value>
+        <glversion/>
+      </less-equal>
+    </predicate>
+    <pass>
+      <lighting>true</lighting>
+      <material>
+        <ambient><use>material/ambient</use></ambient>
+        <diffuse><use>material/diffuse</use></diffuse>
+        <specular><use>material/specular</use></specular>
+        <color-mode>ambient-and-diffuse</color-mode>
+      </material>
+      <blend><use>transparent</use></blend>
+      <alpha-test><use>transparent</use></alpha-test>
+      <shade-model>smooth</shade-model>
+      <cull-face>back</cull-face>
+      <render-bin>
+        <bin-number><use>render-bin/bin-number</use></bin-number>
+        <bin-name><use>render-bin/bin-name</use></bin-name>
+      </render-bin>
+      <texture-unit>
+        <unit>0</unit>
+        <texture2d><use>texture0/texture2d</use>
+          <image><use>texture0/texture2d/image</use></image>
+          <filter><use>texture0/texture2d/filter</use></filter>
+          <wrap-s><use>texture0/texture2d/wrap-s</use></wrap-s>
+          <wrap-t><use>texture0/texture2d/wrap-t</use></wrap-t>
+          <internal-format>
+            <use>texture0/texture2d/internal-format</use>
+          </internal-format>
+        </texture2d>
+      </texture-unit>
+      <program>
+        <vertex-shader>Shaders/default.vert</vertex-shader>
+        <fragment-shader>Shaders/default.frag</fragment-shader>
+      </program>
+      <uniform>
+      <name>texture</name>
+      <type>sampler-2d</type>
+      <value type="int">0</value></uniform>
+    </pass>
+  </technique>
+  <technique>
     <pass>
       <lighting>true</lighting>
       <material>

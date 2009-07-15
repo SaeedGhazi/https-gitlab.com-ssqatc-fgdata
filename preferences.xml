@@ -112,6 +112,7 @@ Started September 2000 by David Megginson, david@megginson.com
      <enabled type="bool" userarchive="y">true</enabled>
      <debug type="bool" userarchive="y">false</debug>
    </shadows>
+   <shader-effects type="bool" userarchive="y">true</shader-effects>
    <fps-display type="bool" userarchive="y">false</fps-display>
    <on-screen-statistics type="int">0</on-screen-statistics>
    <glide-slope-tunnel type="bool" userarchive="y">false</glide-slope-tunnel>

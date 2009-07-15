@@ -220,46 +220,22 @@
         <layout>hbox</layout>
         <checkbox>
           <halign>left</halign>
-          <label>Aircraft</label>
-          <property>/sim/rendering/shadows-ac</property>
+          <label>Enable</label>
+          <property>/sim/rendering/shadows/enabled</property>
           <binding>
              <command>dialog-apply</command>
           </binding>
         </checkbox>
         <checkbox>
           <halign>left</halign>
-          <label>Transparency</label>
-          <property>/sim/rendering/shadows-ac-transp</property>
+          <label>Debug</label>
+          <property>/sim/rendering/shadows/debug</property>
           <binding>
-            <command>dialog-apply</command>
+             <command>dialog-apply</command>
           </binding>
         </checkbox>
+
       </group>
-      <checkbox>
-        <halign>left</halign>
-        <label>Scenery objects</label>
-        <property>/sim/rendering/shadows-to</property>
-        <binding>
-          <command>dialog-apply</command>
-        </binding>
-      </checkbox>
-      <checkbox>
-        <halign>left</halign>
-        <label>AI objects</label>
-        <property>/sim/rendering/shadows-ai</property>
-        <binding>
-          <command>dialog-apply</command>
-        </binding>
-      </checkbox>
-      <checkbox>
-        <halign>left</halign>
-        <label>Silhouette (debug)</label>
-        <name>shadows-debug</name>
-        <property>/sim/rendering/shadows-debug</property>
-        <binding>
-          <command>dialog-apply</command>
-        </binding>
-      </checkbox>
     </group>
   </group>
 

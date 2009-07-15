@@ -108,6 +108,10 @@ Started September 2000 by David Megginson, david@megginson.com
    <shadows-ai type="bool" userarchive="y">false</shadows-ai>
    <shadows-to type="bool" userarchive="y">false</shadows-to>
    <shadows-debug type="bool" userarchive="y">false</shadows-debug>
+   <shadows>
+     <enabled type="bool" userarchive="y">true</enabled>
+     <debug type="bool" userarchive="y">false</debug>
+   </shadows>
    <fps-display type="bool" userarchive="y">false</fps-display>
    <on-screen-statistics type="int">0</on-screen-statistics>
    <glide-slope-tunnel type="bool" userarchive="y">false</glide-slope-tunnel>

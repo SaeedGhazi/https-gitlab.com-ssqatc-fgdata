@@ -22,5 +22,6 @@ void main()
     halfVector = normalize(gl_LightSource[0].halfVector.xyz);
     diffuse = gl_Color * gl_LightSource[0].diffuse;
     ambient = gl_Color * gl_LightSource[0].ambient;
+    ambient += gl_Color * gl_LightModel.ambient;
     fogCoord = abs(ecPosition.z);
 }

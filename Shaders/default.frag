@@ -10,7 +10,7 @@ void main()
 {
     vec3 n, halfV;
     float NdotL, NdotHV, fogFactor;
-    vec4 color = ambient;
+    vec4 color = ambient + gl_FrontMaterial.emission;
     vec4 texel;
     vec4 fragColor;
 
@@ -20,8 +20,9 @@ void main()
         color += diffuse * NdotL;
         halfV = normalize(halfVector);
         NdotHV = max(dot(n, halfV), 0.0);
-        color += gl_FrontMaterial.specular * gl_LightSource[0].specular
-            * pow(NdotHV, gl_FrontMaterial.shininess);
+        if (gl_FrontMaterial.shininess > 0.0)
+            color += gl_FrontMaterial.specular * gl_LightSource[0].specular
+                * pow(NdotHV, gl_FrontMaterial.shininess);
     }
     texel = texture2D(texture, gl_TexCoord[0].st);
     fragColor = color * texel;

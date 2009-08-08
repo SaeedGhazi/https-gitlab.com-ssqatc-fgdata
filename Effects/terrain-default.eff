@@ -19,7 +19,6 @@
       <shininess>1.2</shininess>
     </material>
     <texture n="0">
-      <texture2d>
         <image>Textures/Terrain/unknown.png</image>
         <filter>linear-mipmap-linear</filter>
         <!-- also repeat -->
@@ -30,7 +29,6 @@
            -->
         <!-- float, signed-integer, integer -->
         <internal-format>normalized</internal-format>
-      </texture2d>
     </texture>
     <transparent>false</transparent>
     <render-bin>
@@ -38,7 +36,9 @@
       <bin-name>RenderBin</bin-name>
     </render-bin>
   </parameters>
-  <technique>
+  <!-- put techniques at a "high" index to allow derived effects to
+       insert their own techniques first. -->
+  <technique n="10">
     <predicate>
       <and>
         <property>/sim/rendering/shader-effects</property>
@@ -74,15 +74,13 @@
       </render-bin>
       <texture-unit>
         <unit>0</unit>
-        <texture2d><use>texture[0]/texture2d</use>
-          <image><use>texture[0]/texture2d/image</use></image>
-          <filter><use>texture[0]/texture2d/filter</use></filter>
-          <wrap-s><use>texture[0]/texture2d/wrap-s</use></wrap-s>
-          <wrap-t><use>texture[0]/texture2d/wrap-t</use></wrap-t>
+          <image><use>texture[0]/image</use></image>
+          <filter><use>texture[0]/filter</use></filter>
+          <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
+          <wrap-t><use>texture[0]/wrap-t</use></wrap-t>
           <internal-format>
-            <use>texture[0]/texture2d/internal-format</use>
+            <use>texture[0]/internal-format</use>
           </internal-format>
-        </texture2d>
       </texture-unit>
       <program>
         <vertex-shader>Shaders/default.vert</vertex-shader>
@@ -94,7 +92,7 @@
       <value type="int">0</value></uniform>
     </pass>
   </technique>
-  <technique>
+  <technique n="11">
     <pass>
       <lighting>true</lighting>
       <material>
@@ -113,15 +111,13 @@
       </render-bin>
       <texture-unit>
         <unit>0</unit>
-        <texture2d><use>texture[0]/texture2d</use>
-          <image><use>texture[0]/texture2d/image</use></image>
-          <filter><use>texture[0]/texture2d/filter</use></filter>
-          <wrap-s><use>texture[0]/texture2d/wrap-s</use></wrap-s>
-          <wrap-t><use>texture[0]/texture2d/wrap-t</use></wrap-t>
+          <image><use>texture[0]/image</use></image>
+          <filter><use>texture[0]/filter</use></filter>
+          <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
+          <wrap-t><use>texture[0]/wrap-t</use></wrap-t>
           <internal-format>
-            <use>texture[0]/texture2d/internal-format</use>
+            <use>texture[0]/internal-format</use>
           </internal-format>
-        </texture2d>
         <environment>
           <mode>modulate</mode>
         </environment>

@@ -675,6 +675,7 @@ Shared parameters for various materials.
  <name>EvergreenBroadCover</name>
  <name>Island</name>
  <name>Default</name>
+ <effect>Effects/landmass</effect>
  <texture>Terrain/forest1a.png</texture>
  <texture>Terrain/forest1b.png</texture>
  <texture>Terrain/forest1c.png</texture>
@@ -698,6 +699,7 @@ Shared parameters for various materials.
    <value>summer</value>
   </equals>
  </condition>
+ <effect>Effects/landmass</effect>
  <name>DeciduousBroadCover</name>
  <name>Bog</name>
  <texture>Terrain/deciduous1.png</texture>
@@ -723,6 +725,7 @@ Shared parameters for various materials.
    <value>summer</value>
   </equals>
  </condition>
+ <effect>Effects/landmass</effect>
  <name>MixedForestCover</name>
  <texture>Terrain/mixedforest.png</texture>
  <texture>Terrain/mixedforest2.png</texture>
@@ -747,6 +750,7 @@ Shared parameters for various materials.
    <value>summer</value>
   </equals>
  </condition>
+ <effect>Effects/landmass</effect>
  <name>EvergreenNeedleCover</name>
  <name>WoodedTundraCover</name>
  <texture>Terrain/evergreen.png</texture>
@@ -770,6 +774,7 @@ Shared parameters for various materials.
    <value>summer</value>
   </equals>
  </condition>
+ <effect>Effects/landmass</effect>
  <name>DeciduousNeedleCover</name>
  <texture>Terrain/dec_evergreen.png</texture>
  <xsize>1000</xsize>
@@ -812,6 +817,7 @@ Shared parameters for various materials.
    <value>summer</value>
   </equals>
  </condition>
+ <effect>Effects/landmass</effect>
  <name>ShrubCover</name>
  <name>ShrubGrassCover</name>
  <name>ScrubCover</name>
@@ -996,6 +1002,7 @@ Shared parameters for various materials.
    <value>summer</value>
   </equals>
  </condition>
+ <effect>Effects/water</effect>
  <name>Lake</name>
  <name>Pond</name>
  <name>Reservoir</name>
@@ -1221,6 +1228,7 @@ Shared parameters for various materials.
    <value>summer</value>
   </equals>
  </condition>
+ <effect>Effects/crop</effect>
  <name>MixedCropPastureCover</name>
  <texture>Terrain/mixedcrop1.png</texture>
  <texture>Terrain/mixedcrop4.png</texture>
@@ -1279,6 +1287,7 @@ Shared parameters for various materials.
    <value>summer</value>
   </equals>
  </condition>
+ <effect>Effects/crop</effect>
  <name>IrrCropPastureCover</name>
  <texture>Terrain/irrcrop1.png</texture>
  <texture>Terrain/irrcrop2.png</texture>
@@ -1337,6 +1346,7 @@ Shared parameters for various materials.
    <value>summer</value>
   </equals>
  </condition>
+ <effect>Effects/crop</effect>
  <name>DryCropPastureCover</name>
  <texture>Terrain/drycrop1.png</texture>
  <texture>Terrain/drycrop2.png</texture>
@@ -1396,6 +1406,7 @@ Shared parameters for various materials.
    <value>summer</value>
   </equals>
  </condition>
+ <effect>Effects/crop</effect>
  <name>CropGrassCover</name>
  <texture>Terrain/cropgrass1.png</texture>
  <texture>Terrain/cropgrass2.png</texture>
@@ -1437,6 +1448,7 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>CropWoodCover</name>
+ <effect>Effects/landmass</effect>
  <texture>Terrain/cropwood.png</texture>
  <xsize>2000</xsize>
  <ysize>2000</ysize>
@@ -2303,6 +2315,7 @@ Shared parameters for various materials.
 
   <material>
     <name>Ocean</name>
+    <effect>Effects/water</effect>
     <texture>Terrain/water.png</texture>
     <xsize>400</xsize>
     <ysize>400</ysize>

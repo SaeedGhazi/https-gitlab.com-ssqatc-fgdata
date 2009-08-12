@@ -1,6 +1,7 @@
 <PropertyList>
 
   <name>3Dconnexion SpaceNavigator</name>
+  <debug-events type="bool">false</debug-events>
 
 <!--
   <event>

@@ -69,10 +69,10 @@ bumped=max(normalize(refract(lightVec, normalize(bump), 0.3)), 0.0);
 vec3 Eye = normalize(-ecPosition.xyz);
 vec3 Reflected = normalize(reflect(-normalize(lightVec), normalize(VNormal+vec3(0.0,0.0,na*0.10-0.24)))); 
 //Reflected = normalize(reflect(-normalize(lightVec), normalize(VNormal)));
-//vec3 bump = normalize(VNormal+vec3(0.0, 0.0, na)-0.9);
-//vec3 bumped;
+vec3 bump = normalize(VNormal+vec3(0.0, 0.0, na)-0.9);
+vec3 bumped;
 // = max(dot(normalize(Normal.xyz), normalize(bump)), vec3(0.0, 0.0, 0.0)); 
-//bumped=max(normalize(refract(lightVec, normalize(bump), 0.16)), 0.0);
+bumped=max(normalize(refract(lightVec, normalize(bump), 0.16)), 0.0);
 
 vec4 ambientColor = gl_LightSource[0].ambient;
 vec4 light = ambientColor;
@@ -90,7 +90,7 @@ c1 *= light;
 
 // HERE IS GOOD
 
-//    c1 += (vec4(0.3, 0.34, 0.4, 1.0)-0.1)*gl_LightSource[0].diffuse * (bumped.r+bumped.g+bumped.b);
+    c1 += (vec4(0.3, 0.34, 0.4, 1.0)-0.1)*gl_LightSource[0].diffuse * (bumped.r+bumped.g+bumped.b);
     float ReflectedEye = max(dot(Reflected, Eye), 0.0);
     c1 += gl_LightSource[0].diffuse*0.4 * pow(ReflectedEye, 20.0);
     c1 += gl_LightSource[0].specular * pow(ReflectedEye, 400.0/*gl_FrontMaterial.shininess*/);

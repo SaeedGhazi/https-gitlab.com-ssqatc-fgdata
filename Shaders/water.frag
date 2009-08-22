@@ -9,11 +9,11 @@ varying vec3 lightVec;
 uniform sampler3D NoiseTex;
 uniform float osg_SimulationTime;
 
-const float scale = 1.0;
+//const float scale = 1.0;
 
 void main (void)
 {
-	const float snowlevel=2000.0;
+//	const float snowlevel=2000.0;
 	vec4 noisevecS   = texture3D(NoiseTex, (rawpos.xyz)*0.0126);
 	vec4 nvLS   = texture3D(NoiseTex, (rawpos.xyz)*-0.0003323417);
 
@@ -24,7 +24,7 @@ void main (void)
 	float fogCoord = ecPosition.z;
 	const float LOG2 = 1.442695;
 	fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
-	float biasFactor = exp2(-0.00000002 * fogCoord * fogCoord * LOG2);
+//	float biasFactor = exp2(-0.00000002 * fogCoord * fogCoord * LOG2);
 	fogFactor = clamp(fogFactor, 0.0, 1.0);
 
 	float a=1.0;
@@ -69,10 +69,10 @@ bumped=max(normalize(refract(lightVec, normalize(bump), 0.3)), 0.0);
 vec3 Eye = normalize(-ecPosition.xyz);
 vec3 Reflected = normalize(reflect(-normalize(lightVec), normalize(VNormal+vec3(0.0,0.0,na*0.10-0.24)))); 
 //Reflected = normalize(reflect(-normalize(lightVec), normalize(VNormal)));
-vec3 bump = normalize(VNormal+vec3(0.0, 0.0, na)-0.9);
-vec3 bumped;
+//vec3 bump = normalize(VNormal+vec3(0.0, 0.0, na)-0.9);
+//vec3 bumped;
 // = max(dot(normalize(Normal.xyz), normalize(bump)), vec3(0.0, 0.0, 0.0)); 
-bumped=max(normalize(refract(lightVec, normalize(bump), 0.16)), 0.0);
+//bumped=max(normalize(refract(lightVec, normalize(bump), 0.16)), 0.0);
 
 vec4 ambientColor = gl_LightSource[0].ambient;
 vec4 light = ambientColor;
@@ -90,13 +90,14 @@ c1 *= light;
 
 // HERE IS GOOD
 
-    c1 += (vec4(0.3, 0.34, 0.4, 1.0)-0.1)*gl_LightSource[0].diffuse * (bumped.r+bumped.g+bumped.b);
-//    c1 = bumped;
-    c1 += gl_LightSource[0].specular*2.0 * pow(max(dot(Reflected, Eye), 0.0), 90.0/*gl_FrontMaterial.shininess*/);
+//    c1 += (vec4(0.3, 0.34, 0.4, 1.0)-0.1)*gl_LightSource[0].diffuse * (bumped.r+bumped.g+bumped.b);
+    float ReflectedEye = max(dot(Reflected, Eye), 0.0);
+    c1 += gl_LightSource[0].diffuse*0.4 * pow(ReflectedEye, 20.0);
+    c1 += gl_LightSource[0].specular * pow(ReflectedEye, 400.0/*gl_FrontMaterial.shininess*/);
 	vec4 finalColor = c1;
 
 	if(gl_Fog.density == 1.0)
 		fogFactor=1.0;
 
-	gl_FragColor = mix(gl_Fog.color ,finalColor, fogFactor);
+	gl_FragColor = mix(gl_Fog.color, finalColor, fogFactor);
 }

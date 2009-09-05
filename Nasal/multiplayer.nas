@@ -363,8 +363,11 @@ var model = {
         me.update();
     },
     update: func(n = nil) {
-        if (n != nil and props.globals.getNode(n, 1).getName() != "multiplayer")
+        var changedNode = props.globals.getNode( n, 1 );
+        if (n != nil and changedNode.getName() != "multiplayer")
             return;
+
+        var changedNodeIndex = changedNode != nil ? changedNode.getIndex() : -1;
 
         me.data = {};
         me.callsign = {};
@@ -372,7 +375,10 @@ var model = {
         me.unavailable = [];
 
         foreach (var n; props.globals.getNode("ai/models", 1).getChildren("multiplayer")) {
-            if (!n.getNode("valid", 1).getValue())
+            # Ignore valid property for the newly added multiplayer aircraft.
+            # It is false when model-added is triggered and will become true after this
+            # listener is finished
+            if (n.getIndex() != changedNodeIndex and !n.getNode("valid", 1).getValue())
                 continue;
 
             if ((var callsign = n.getNode("callsign")) == nil or !(callsign = callsign.getValue()))

@@ -488,6 +488,14 @@
 			</binding>
 		</item>
 
+                <item>
+                        <label>Reload Network</label>
+                        <binding>
+                                <command>reinit</command>
+                                <subsystem>io</subsystem>
+                        </binding>
+                </item>
+
 		<item>
 			<label>Nasal Console</label>
 			<binding>

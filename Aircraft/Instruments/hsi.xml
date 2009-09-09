@@ -12,7 +12,7 @@ Started 24-7-01 by Timothy Gale
     <h-base>128</h-base>
 
  <params>
-  <nav-gs-needle-deflection>/instrumentation/nav[0]/gs-needle-deflection</nav-gs-needle-deflection>
+  <nav-gs-needle-deflection>/instrumentation/nav[0]/gs-needle-deflection-norm</nav-gs-needle-deflection>
   <hsi-has-gs-needle>/sim/instrument-options/hsi[0]/has-gs-needle</hsi-has-gs-needle>
  </params>
 
@@ -132,9 +132,7 @@ Started 24-7-01 by Timothy Gale
    <transformation>
     <type>y-shift</type>
     <property alias="../../../../../params/nav-gs-needle-deflection"/>
-    <min>-3.5</min>
-    <max>3.5</max>
-    <scale>7.0</scale>
+    <scale>24.5</scale>
    </transformation>
    <transformation>
     <type>rotation</type>

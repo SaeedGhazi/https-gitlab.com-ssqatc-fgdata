@@ -21,7 +21,7 @@ Jan 26 2003
   <nav-to-flag>/instrumentation/nav[0]/to-flag</nav-to-flag>
   <nav-from-flag>/instrumentation/nav[0]/from-flag</nav-from-flag>
   <nav-radial-selected>/instrumentation/nav[0]/radials/selected-deg</nav-radial-selected>
-  <nav-gs-needle-deflection>/instrumentation/nav[0]/gs-needle-deflection</nav-gs-needle-deflection>
+  <nav-gs-needle-deflection>/instrumentation/nav[0]/gs-needle-deflection-norm</nav-gs-needle-deflection>
   <nav-heading-needle-deflection>/instrumentation/nav[0]/heading-needle-deflection</nav-heading-needle-deflection>
   <!-- when posible change to nav-gs-in-range -->
   <nav-in-range>/instrumentation/nav[0]/in-range</nav-in-range>
@@ -219,9 +219,9 @@ Jan 26 2003
      <type>rotation</type>
      <offset>0</offset>
      <property alias="../../../../../params/nav-gs-needle-deflection"/>
-     <min>-3.5</min>
-     <max>3.5</max>
-     <scale>-10.0</scale>
+     <min>-1</min>
+     <max>1</max>
+     <scale>-35.0</scale>
     </transformation>
    </transformations>
   </layer>
@@ -246,9 +246,7 @@ Jan 26 2003
      <type>rotation</type>
      <offset>0</offset>
      <property alias="../../../../../params/nav-gs-needle-deflection"/>
-     <min>-3.5</min>
-     <max>3.5</max>
-     <scale>-10.0</scale>
+     <scale>-35.0</scale>
     </transformation>
     <transformation>
      <type>x-shift</type>

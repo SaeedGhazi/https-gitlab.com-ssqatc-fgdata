@@ -18,7 +18,7 @@ Mar 18 2003
  <h-base>512</h-base>
  
  <params>
-  <gs-needle>/instrumentation/nav[0]/gs-needle-deflection</gs-needle>
+  <gs-needle>/instrumentation/nav[0]/gs-needle-deflection-norm</gs-needle>
   <vor-needle>/instrumentation/nav[0]/heading-needle-deflection</vor-needle>
   <radial-selected-deg>/instrumentation/nav[0]/radials/selected-deg</radial-selected-deg>
   <to-flag>/instrumentation/nav[0]/to-flag</to-flag>
@@ -424,10 +424,8 @@ Mar 18 2003
     <transformation>
      <type>y-shift</type>
      <property alias="../../../../../params/gs-needle"/>
-     <min>-3.5</min>
-     <max>3.5</max>
-     <scale>24</scale>
-     <offset>-24</offset>
+     <scale>84</scale>
+     <offset>-84</offset>
     </transformation>
    </transformations>
   </layer>

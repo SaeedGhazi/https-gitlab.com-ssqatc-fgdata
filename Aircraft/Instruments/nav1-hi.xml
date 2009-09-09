@@ -32,7 +32,7 @@ properties' values.
   <nav-to-flag>/instrumentation/nav[0]/to-flag</nav-to-flag>
   <nav-from-flag>/instrumentation/nav[0]/from-flag</nav-from-flag>
   <nav-radial-selected>/instrumentation/nav[0]/radials/selected-deg</nav-radial-selected>
-  <nav-gs-needle-deflection>/instrumentation/nav[0]/gs-needle-deflection</nav-gs-needle-deflection>
+  <nav-gs-needle-deflection>/instrumentation/nav[0]/gs-needle-deflection-norm</nav-gs-needle-deflection>
   <nav-heading-needle-deflection>/instrumentation/nav[0]/heading-needle-deflection</nav-heading-needle-deflection>
   <nav-has-gs-needle>/sim/instrument-options/nav[0]/has-gs-needle</nav-has-gs-needle>
   <nav-needles-pivot>/sim/instrument-options/nav[0]/needles-pivot</nav-needles-pivot>
@@ -214,9 +214,9 @@ properties' values.
     <transformation>
      <type>rotation</type>
      <property alias="../../../../../params/nav-gs-needle-deflection"/>
-     <min>-3.5</min>
-     <max>3.5</max>
-     <scale>-7</scale>
+     <min>-1</min>
+     <max>1</max>
+     <scale>-24.5</scale>
     </transformation>
     <transformation>
      <type>x-shift</type>
@@ -254,8 +254,6 @@ properties' values.
     <transformation>
      <type>y-shift</type>
      <property alias="../../../../../params/nav-gs-needle-deflection"/>
-     <min>-1</min>
-     <max>1</max>
      <scale>25.6</scale>
     </transformation>
     <transformation>

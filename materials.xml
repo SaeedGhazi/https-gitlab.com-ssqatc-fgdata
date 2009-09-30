@@ -2446,12 +2446,22 @@ Shared parameters for various materials.
   </material>
 
 
-	<material>
+<material>
  <name>BarrenCover</name>
- <name>Lava</name>
  <name>Dirt</name>
  <name>OpenMining</name>
  <texture>Terrain/rock.png</texture>
+ <xsize>500</xsize>
+ <ysize>500</ysize>
+ <solid>1</solid>
+ <friction-factor>0.9</friction-factor>
+ <rolling-friction>0.1</rolling-friction>
+ <bumpiness>0.3</bumpiness>
+</material>
+
+<material>
+ <name>Lava</name>
+ <texture>Terrain/lava.png</texture>
  <xsize>500</xsize>
  <ysize>500</ysize>
  <solid>1</solid>

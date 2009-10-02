@@ -7,10 +7,10 @@
       cb-cal = Cumulonimbus Calvus (without amboss)
       cb-inc = Cumulonimbus Incus (with amboss)
   cu = Cumulus
-       cu hum = Cumulus humilis (smallest one, only at fair, nice weather)
-       cu med = Cumulus mediocris (middle)
-       cu con = Cumulus congestus (the largest one, pre-stage of Cumulonimbus)
- ns = Nimbostratus (Rain cloud)
+      cu hum = Cumulus humilis (smallest one, only at fair, nice weather)
+      cu med = Cumulus mediocris (middle)
+      cu con = Cumulus congestus (the largest one, pre-stage of Cumulonimbus)
+ns = Nimbostratus (Rain cloud)
   st = Stratus
   sc = Stratocumulus
   ac = Altocumulus
@@ -26,952 +26,230 @@
       <texture>cl_cumulus.png</texture>
       <num-textures-x>4</num-textures-x>
       <num-textures-y>4</num-textures-y>
-      <bottom-shade>0.9</bottom-shade>
-      <min-sprite-width-m>1200</min-sprite-width-m>
+      <bottom-shade>0.3</bottom-shade>
+      <min-sprite-width-m>800</min-sprite-width-m>
       <max-sprite-width-m>1200</max-sprite-width-m>
-      <min-sprite-height-m>1200</min-sprite-height-m>
+      <min-sprite-height-m>800</min-sprite-height-m>
       <max-sprite-height-m>1200</max-sprite-height-m>
     </cb-large>
     <cb-small>
-        <min-cloud-width-m>800</min-cloud-width-m>
-        <max-cloud-width-m>400</max-cloud-width-m>
-        <min-cloud-height-m>500</min-cloud-height-m>
-        <max-cloud-height-m>200</max-cloud-height-m>
-        <num-sprites>10</num-sprites>
-    <texture>cl_cumulus.png</texture>
+      <min-cloud-width-m>800</min-cloud-width-m>
+      <max-cloud-width-m>400</max-cloud-width-m>
+      <min-cloud-height-m>500</min-cloud-height-m>
+      <max-cloud-height-m>200</max-cloud-height-m>
+      <num-sprites>10</num-sprites>
+      <texture>cl_cumulus.png</texture>
       <num-textures-x>4</num-textures-x>
       <num-textures-y>4</num-textures-y>
-        <bottom-shade>0.9</bottom-shade>
-        <min-sprite-width-m>800</min-sprite-width-m>
-        <max-sprite-width-m>800</max-sprite-width-m>
-        <min-sprite-height-m>800</min-sprite-height-m>
-        <max-sprite-height-m>800</max-sprite-height-m>
+      <bottom-shade>0.3</bottom-shade>
+      <min-sprite-width-m>400</min-sprite-width-m>
+      <max-sprite-width-m>800</max-sprite-width-m>
+      <min-sprite-height-m>400</min-sprite-height-m>
+      <max-sprite-height-m>800</max-sprite-height-m>
     </cb-small>
     <cu-large>
-        <min-cloud-width-m>900</min-cloud-width-m>
-        <max-cloud-width-m>1200</max-cloud-width-m>
-        <min-cloud-height-m>600</min-cloud-height-m>
-        <max-cloud-height-m>1800</max-cloud-height-m>
-        <num-sprites>10</num-sprites>
-     <texture>cl_cumulus.png</texture>
+      <min-cloud-width-m>600</min-cloud-width-m>
+      <max-cloud-width-m>1200</max-cloud-width-m>
+      <min-cloud-height-m>400</min-cloud-height-m>
+      <max-cloud-height-m>800</max-cloud-height-m>
+      <num-sprites>20</num-sprites>
+      <texture>cl_cumulus.png</texture>
       <num-textures-x>4</num-textures-x>
       <num-textures-y>4</num-textures-y>
-      <bottom-shade>0.1</bottom-shade>
-        <min-sprite-width-m>900</min-sprite-width-m>
-        <max-sprite-width-m>900</max-sprite-width-m>
-        <min-sprite-height-m>900</min-sprite-height-m>
-        <max-sprite-height-m>900</max-sprite-height-m>
+      <bottom-shade>0.6</bottom-shade>
+      <min-sprite-width-m>400</min-sprite-width-m>
+      <max-sprite-width-m>700</max-sprite-width-m>
+      <min-sprite-height-m>300</min-sprite-height-m>
+      <max-sprite-height-m>700</max-sprite-height-m>
     </cu-large>
     <cu-small>
-        <min-cloud-width-m>600</min-cloud-width-m>
-        <max-cloud-width-m>300</max-cloud-width-m>
-        <min-cloud-height-m>400</min-cloud-height-m>
-        <max-cloud-height-m>200</max-cloud-height-m>
-        <num-sprites>5</num-sprites>
-   <texture>cl_cumulus.png</texture>
+      <min-cloud-width-m>300</min-cloud-width-m>
+      <max-cloud-width-m>800</max-cloud-width-m>
+      <min-cloud-height-m>200</min-cloud-height-m>
+      <max-cloud-height-m>300</max-cloud-height-m>
+      <num-sprites>10</num-sprites>
+      <texture>cl_cumulus.png</texture>
       <num-textures-x>4</num-textures-x>
       <num-textures-y>4</num-textures-y>
-        <bottom-shade>0.9</bottom-shade>
-        <min-sprite-width-m>350</min-sprite-width-m>
-        <max-sprite-width-m>350</max-sprite-width-m>
-        <min-sprite-height-m>350</min-sprite-height-m>
-        <max-sprite-height-m>350</max-sprite-height-m>
+      <bottom-shade>0.7</bottom-shade>
+      <min-sprite-width-m>200</min-sprite-width-m>
+      <max-sprite-width-m>400</max-sprite-width-m>
+      <min-sprite-height-m>150</min-sprite-height-m>
+      <max-sprite-height-m>300</max-sprite-height-m>
     </cu-small>
     <ns-large>
-       <min-cloud-width-m>500</min-cloud-width-m>
-        <max-cloud-width-m>500</max-cloud-width-m>
-        <min-cloud-height-m>500</min-cloud-height-m>
-        <max-cloud-height-m>500</max-cloud-height-m>
-        <num-sprites>1</num-sprites>
-     <texture>cl_ns.png</texture>
-      <num-textures-x>2</num-textures-x>
-      <num-textures-y>2</num-textures-y>
-        <bottom-shade>0.9</bottom-shade>
-        <min-sprite-width-m>500</min-sprite-width-m>
-        <max-sprite-width-m>500</max-sprite-width-m>
-        <min-sprite-height-m>500</min-sprite-height-m>
-        <max-sprite-height-m>500</max-sprite-height-m>
+      <min-cloud-width-m>1200</min-cloud-width-m>
+      <max-cloud-width-m>3000</max-cloud-width-m>
+      <min-cloud-height-m>200</min-cloud-height-m>
+      <max-cloud-height-m>400</max-cloud-height-m>
+      <num-sprites>40</num-sprites>
+      <texture>cl_st.png</texture>
+      <num-textures-x>1</num-textures-x>
+      <num-textures-y>1</num-textures-y>
+      <bottom-shade>0.2</bottom-shade>
+      <min-sprite-width-m>300</min-sprite-width-m>
+      <max-sprite-width-m>600</max-sprite-width-m>
+      <min-sprite-height-m>100</min-sprite-height-m>
+      <max-sprite-height-m>200</max-sprite-height-m>
     </ns-large>
     <ns-white>
-     <min-cloud-width-m>500</min-cloud-width-m>
-        <max-cloud-width-m>500</max-cloud-width-m>
-        <min-cloud-height-m>500</min-cloud-height-m>
-        <max-cloud-height-m>500</max-cloud-height-m>
-        <num-sprites>1</num-sprites>
-      <texture>cl_ns_white.png</texture>
-      <num-textures-x>2</num-textures-x>
-      <num-textures-y>2</num-textures-y>
-        <bottom-shade>0.1</bottom-shade>
-         <min-sprite-width-m>500</min-sprite-width-m>
-        <max-sprite-width-m>500</max-sprite-width-m>
-        <min-sprite-height-m>500</min-sprite-height-m>
-        <max-sprite-height-m>500</max-sprite-height-m>
+      <min-cloud-width-m>600</min-cloud-width-m>
+      <max-cloud-width-m>2000</max-cloud-width-m>
+      <min-cloud-height-m>200</min-cloud-height-m>
+      <max-cloud-height-m>300</max-cloud-height-m>
+      <num-sprites>40</num-sprites>
+      <texture>cl_st.png</texture>
+      <num-textures-x>1</num-textures-x>
+      <num-textures-y>1</num-textures-y>
+      <bottom-shade>0.3</bottom-shade>
+      <min-sprite-width-m>300</min-sprite-width-m>
+      <max-sprite-width-m>600</max-sprite-width-m>
+      <min-sprite-height-m>100</min-sprite-height-m>
+      <max-sprite-height-m>200</max-sprite-height-m>
     </ns-white>
-    <st-large>
-        <min-cloud-width-m>800</min-cloud-width-m>
-        <max-cloud-width-m>1000</max-cloud-width-m>
-        <min-cloud-height-m>800</min-cloud-height-m>
-        <max-cloud-height-m>1000</max-cloud-height-m>
-        <num-sprites>1</num-sprites>
-            <texture>cl_st.png</texture>
-      <num-textures-x>2</num-textures-x>
-      <num-textures-y>2</num-textures-y>
-        <bottom-shade>0.9</bottom-shade>
-        <min-sprite-width-m>800</min-sprite-width-m>
-        <max-sprite-width-m>800</max-sprite-width-m>
-        <min-sprite-height-m>1000</min-sprite-height-m>
-        <max-sprite-height-m>1000</max-sprite-height-m>
-    </st-large>
     <st-small>
-     <min-cloud-width-m>500</min-cloud-width-m>
-        <max-cloud-width-m>500</max-cloud-width-m>
-        <min-cloud-height-m>500</min-cloud-height-m>
-        <max-cloud-height-m>500</max-cloud-height-m>
-        <num-sprites>1</num-sprites>
-       <texture>cl_st.png</texture>
-      <num-textures-x>2</num-textures-x>
-      <num-textures-y>2</num-textures-y>
-        <bottom-shade>0.9</bottom-shade>
-         <min-sprite-width-m>500</min-sprite-width-m>
-        <max-sprite-width-m>500</max-sprite-width-m>
-        <min-sprite-height-m>500</min-sprite-height-m>
-        <max-sprite-height-m>500</max-sprite-height-m>
+      <min-cloud-width-m>800</min-cloud-width-m>
+      <max-cloud-width-m>1500</max-cloud-width-m>
+      <min-cloud-height-m>100</min-cloud-height-m>
+      <max-cloud-height-m>200</max-cloud-height-m>
+      <num-sprites>40</num-sprites>
+      <texture>cl_st.png</texture>
+      <num-textures-x>1</num-textures-x>
+      <num-textures-y>1</num-textures-y>
+      <bottom-shade>0.9</bottom-shade>
+      <min-sprite-width-m>300</min-sprite-width-m>
+      <max-sprite-width-m>600</max-sprite-width-m>
+      <min-sprite-height-m>200</min-sprite-height-m>
+      <max-sprite-height-m>400</max-sprite-height-m>
     </st-small>
+    <st-large>
+      <min-cloud-width-m>1800</min-cloud-width-m>
+      <max-cloud-width-m>2500</max-cloud-width-m>
+      <min-cloud-height-m>200</min-cloud-height-m>
+      <max-cloud-height-m>400</max-cloud-height-m>
+      <num-sprites>40</num-sprites>
+      <texture>cl_st.png</texture>
+      <num-textures-x>1</num-textures-x>
+      <num-textures-y>1</num-textures-y>
+      <bottom-shade>0.9</bottom-shade>
+      <min-sprite-width-m>400</min-sprite-width-m>
+      <max-sprite-width-m>800</max-sprite-width-m>
+      <min-sprite-height-m>300</min-sprite-height-m>
+      <max-sprite-height-m>500</max-sprite-height-m>
+    </st-large>
   </clouds>
   <boxes>
-   <ac-str>
+    <ac-str>
       <box>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
         <type>st-small</type>
+        <count>5</count>
+        <width>1000</width>
+        <height>200</height>
+        <hdist>1</hdist>
+        <vdist>1</vdist>
       </box>
-      <box>
-        <x>700</x>
-        <y>0</y>
-        <z>0</z>
-        <type>st-small</type>
-      </box>
-      <box>
-        <x>0</x>
-        <y>0</y>
-        <z>650</z>
-        <type>st-small</type>
-      </box>
-      <box>
-        <x>750</x>
-        <y>0</y>
-        <z>700</z>
-        <type>st-small</type>
-      </box>
-      <box>
-        <x>600</x>
-        <y>0</y>
-        <z>650</z>
-        <type>st-small</type>
-      </box>
-       <box>
-        <x>678</x>
-        <y>0</y>
-        <z>0</z>
-        <type>st-small</type>
-      </box>
-       <box>
-        <x>0</x>
-        <y>0</y>
-        <z>680</z>
-        <type>st-small</type>
-      </box>
-</ac-str>
-
+    </ac-str>
+    
     <cu-hum>
       <box>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
         <type>cu-small</type>
-      </box>
-       <box>
-        <x>100</x>
-        <y>0</y>
-        <z>48</z>
-        <type>cu-small</type>
-      </box>
-      <box>
-        <x>-51</x>
-        <y>0</y>
-        <z>173</z>
-        <type>cu-small</type>
-      </box>
-      <box>
-        <x>-249</x>
-        <y>0</y>
-        <z>214</z>
-        <type>cu-small</type>
-      </box>
-      <box>
-        <x>-156</x>
-        <y>0</y>
-        <z>77</z>
-        <type>cu-small</type>
-      </box>
-        <box>
-        <x>-89</x>
-        <y>134</y>
-        <z>-38</z>
-        <type>cu-small</type>
-      </box>
-        <box>
-        <x>-205</x>
-        <y>134</y>
-        <z>101</z>
-        <type>cu-small</type>
-      </box>
-        <box>
-        <x>25</x>
-        <y>134</y>
-        <z>77</z>
-        <type>cu-small</type>
-      </box>
-        <box>
-        <x>-32</x>
-        <y>134</y>
-        <z>196</z>
-        <type>cu-small</type>
-      </box>
-      
-       <box>
-        <x>1306</x>
-        <y>-8</y>
-        <z>981</z>
-        <type>cu-small</type>
-      </box>
-      <box>
-        <x>1100</x>
-        <y>-8</y>
-        <z>885</z>
-        <type>cu-small</type>
-      </box>
-      <box>
-        <x>1004</x>
-        <y>-8</y>
-        <z>1000</z>
-        <type>cu-small</type>
-      </box>
-      <box>
-        <x>1158</x>
-        <y>-8</y>
-        <z>1071</z>
-        <type>cu-small</type>
-      </box>
-      <box>
-        <x>1280</x>
-        <y>-8</y>
-        <z>1155</z>
-        <type>cu-small</type>
+        <count>4</count>
+        <width>800</width>
+        <height>200</height>
+        <hdist>2</hdist>
+        <vdist>2</vdist>
       </box>
     </cu-hum>
     
-    
     <cu-con>
-    <box>
-        <x>0</x>
-        <y>-8</y>
-        <z>3</z>
+      <box>
         <type>cu-large</type>
-      </box>
-       <box>
-        <x>358</x>
-        <y>-8</y>
-        <z>-98</z>
-        <type>cu-large</type>
+        <count>1</count>
+        <width>1500</width>
+        <height>200</height>
+        <hdist>2</hdist>
+        <vdist>1</vdist>
       </box>
       <box>
-        <x>705</x>
-        <y>-8</y>
-        <z>65</z>
-        <type>cu-large</type>
-      </box>
-      <box>
-        <x>347</x>
-        <y>-8</y>
-        <z>255</z>
-        <type>cu-large</type>
-      </box>
-      <box>
-        <x>358</x>
-        <y>328</y>
-        <z>14</z>
-        <type>cu-large</type>
-      </box>
-      <box>
-        <x>202</x>
-        <y>328</y>
-        <z>255</z>
-        <type>cu-large</type>
-      </box>
-      <box>
-        <x>464</x>
-        <y>328</y>
-        <z>221</z>
-        <type>cu-large</type>
-      </box>
-      
-      <box>
-        <x>-2305</x>
-        <y>-8</y>
-        <z>1811</z>
-        <type>cu-large</type>
-      </box>
-       <box>
-        <x>-2305</x>
-        <y>-8</y>
-        <z>2212</z>
-        <type>cu-large</type>
-      </box>
-      <box>
-        <x>-2667</x>
-        <y>-8</y>
-        <z>2214</z>
-        <type>cu-large</type>
-      </box>
-      <box>
-        <x>-3029</x>
-        <y>-8</y>
-        <z>1987</z>
-        <type>cu-large</type>
-      </box>
-      <box>
-        <x>-2794</x>
-        <y>344</y>
-        <z>1987</z>
-        <type>cu-large</type>
-      </box>
-      <box>
-        <x>-2481</x>
-        <y>344</y>
-        <z>2173</z>
-        <type>cu-large</type>
-      </box>
-      <box>
-        <x>-2530</x>
-        <y>344</y>
-        <z>1732</z>
-        <type>cu-large</type>
+        <type>cu-small</type>
+        <count>4</count>
+        <width>1000</width>
+        <height>200</height>
+        <hdist>1</hdist>
+        <vdist>2</vdist>
       </box>
     </cu-con>
     
-    
     <cb-cal>
-    <box>
-        <x>-5</x>
-        <y>344</y>
-        <z>10</z>
-        <type>cb-large</type>
-      </box>
       <box>
-        <x>601</x>
-        <y>344</y>
-        <z>-322</z>
         <type>cb-large</type>
+        <count>1</count>
+        <width>1500</width>
+        <height>1000</height>
+        <hdist>2</hdist>
+        <vdist>2</vdist>
       </box>
-      <box>
-        <x>1198</x>
-        <y>344</y>
-        <z>-185</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1805</x>
-        <y>344</y>
-        <z>-89</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1678</x>
-        <y>344</y>
-        <z>685</z>
-        <type>cb-large</type>
-      </box>
-        <box>
-        <x>1237</x>
-        <y>344</y>
-        <z>822</z>
-        <type>cb-large</type>
-      </box>
-       <box>
-        <x>817</x>
-        <y>344</y>
-        <z>881</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>269</x>
-        <y>344</y>
-        <z>607</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>670</x>
-        <y>344</y>
-        <z>333</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1130</x>
-        <y>344</y>
-        <z>372</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>327</x>
-        <y>853</y>
-        <z>372</z>
-        <type>cb-large</type>
-      </box>
-        <box>
-        <x>719</x>
-        <y>853</y>
-        <z>-107</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1249</x>
-        <y>853</y>
-        <z>-58</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1599</x>
-        <y>853</y>
-        <z>372</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1071</x>
-        <y>853</y>
-        <z>519</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>768</x>
-        <y>1362</y>
-        <z>372</z>
-        <type>cb-large</type>
-      </box>
-       <box>
-        <x>1257</x>
-        <y>1362</y>
-        <z>734</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1247</x>
-        <y>1362</y>
-        <z>167</z>
-        <type>cb-large</type>
-      </box>
-      
-      
-      <box>
-        <x>500</x>
-        <y>0</y>
-        <z>0</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1000</x>
-        <y>0</y>
-        <z>0</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1500</x>
-        <y>0</y>
-        <z>0</z>
-        <type>cb-large</type>
-      </box>
-       <box>
-        <x>2000</x>
-        <y>0</y>
-        <z>0</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-        <type>cb-large</type>
-      </box>
-       <box>
-        <x>0</x>
-        <y>500</y>
-        <z>0</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>0</x>
-        <y>1000</y>
-        <z>0</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>0</x>
-        <y>1500</y>
-        <z>0</z>
-        <type>cb-large</type>
-      </box>
-       <box>
-        <x>0</x>
-        <y>2000</y>
-        <z>0</z>
-        <type>cb-large</type>
-      </box>
-       <box>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-        <type>cb-large</type>
-      </box>
-       <box>
-        <x>500</x>
-        <y>500</y>
-        <z>0</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1000</x>
-        <y>1000</y>
-        <z>0</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1500</x>
-        <y>1500</y>
-        <z>0</z>
-        <type>cb-large</type>
-      </box>
-       <box>
-        <x>2000</x>
-        <y>2000</y>
-        <z>0</z>
-        <type>cb-large</type>
-      </box>     
-</cb-cal>
+    </cb-cal>
     
     
-<cb-inc>
+    <cb-inc>
       <box>
-        <x>-5</x>
-        <y>344</y>
-        <z>10</z>
         <type>cb-large</type>
+        <count>1</count>
+        <width>2500</width>
+        <height>1000</height>
       </box>
-      <box>
-        <x>601</x>
-        <y>344</y>
-        <z>-322</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1198</x>
-        <y>344</y>
-        <z>-185</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1805</x>
-        <y>344</y>
-        <z>-89</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1678</x>
-        <y>344</y>
-        <z>685</z>
-        <type>cb-large</type>
-      </box>
-        <box>
-        <x>1237</x>
-        <y>344</y>
-        <z>822</z>
-        <type>cb-large</type>
-      </box>
-       <box>
-        <x>817</x>
-        <y>344</y>
-        <z>881</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>269</x>
-        <y>344</y>
-        <z>607</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>670</x>
-        <y>344</y>
-        <z>333</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1130</x>
-        <y>344</y>
-        <z>372</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>327</x>
-        <y>853</y>
-        <z>372</z>
-        <type>cb-large</type>
-      </box>
-        <box>
-        <x>719</x>
-        <y>853</y>
-        <z>-107</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1249</x>
-        <y>853</y>
-        <z>-58</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1599</x>
-        <y>853</y>
-        <z>372</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1071</x>
-        <y>853</y>
-        <z>519</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>768</x>
-        <y>1362</y>
-        <z>372</z>
-        <type>cb-large</type>
-      </box>
-       <box>
-        <x>1257</x>
-        <y>1362</y>
-        <z>734</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1247</x>
-        <y>1362</y>
-        <z>167</z>
-        <type>cb-large</type>
-      </box>
-      
-       <box>
-        <x>1995</x>
-        <y>344</y>
-        <z>10</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>2601</x>
-        <y>344</y>
-        <z>-322</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>3198</x>
-        <y>344</y>
-        <z>-185</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>3805</x>
-        <y>344</y>
-        <z>-89</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>3678</x>
-        <y>344</y>
-        <z>685</z>
-        <type>cb-large</type>
-      </box>
-        <box>
-        <x>3237</x>
-        <y>344</y>
-        <z>822</z>
-        <type>cb-large</type>
-      </box>
-       <box>
-        <x>3817</x>
-        <y>344</y>
-        <z>881</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>3269</x>
-        <y>344</y>
-        <z>607</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>3670</x>
-        <y>344</y>
-        <z>333</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>4130</x>
-        <y>344</y>
-        <z>372</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>3327</x>
-        <y>853</y>
-        <z>372</z>
-        <type>cb-large</type>
-      </box>
-        <box>
-        <x>3719</x>
-        <y>853</y>
-        <z>-107</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>4249</x>
-        <y>853</y>
-        <z>-58</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>4599</x>
-        <y>853</y>
-        <z>372</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>4071</x>
-        <y>853</y>
-        <z>519</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>3768</x>
-        <y>1362</y>
-        <z>372</z>
-        <type>cb-large</type>
-      </box>
-       <box>
-        <x>4257</x>
-        <y>1362</y>
-        <z>734</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>4247</x>
-        <y>1362</y>
-        <z>167</z>
-        <type>cb-large</type>
-      </box>
-      
-       <box>
-        <x>995</x>
-        <y>1344</y>
-        <z>10</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1601</x>
-        <y>1344</y>
-        <z>-322</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>2198</x>
-        <y>1344</y>
-        <z>-185</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>2805</x>
-        <y>1344</y>
-        <z>-89</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>2678</x>
-        <y>1344</y>
-        <z>685</z>
-        <type>cb-large</type>
-      </box>
-        <box>
-        <x>2237</x>
-        <y>1344</y>
-        <z>822</z>
-        <type>cb-large</type>
-      </box>
-       <box>
-        <x>1817</x>
-        <y>1344</y>
-        <z>881</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1269</x>
-        <y>1344</y>
-        <z>607</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1670</x>
-        <y>1344</y>
-        <z>333</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>2130</x>
-        <y>1344</y>
-        <z>372</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1327</x>
-        <y>1853</y>
-        <z>372</z>
-        <type>cb-large</type>
-      </box>
-        <box>
-        <x>1719</x>
-        <y>1853</y>
-        <z>-107</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>2249</x>
-        <y>1853</y>
-        <z>-58</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>2599</x>
-        <y>1853</y>
-        <z>372</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>2071</x>
-        <y>1853</y>
-        <z>519</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>1768</x>
-        <y>2362</y>
-        <z>372</z>
-        <type>cb-large</type>
-      </box>
-       <box>
-        <x>2257</x>
-        <y>2362</y>
-        <z>734</z>
-        <type>cb-large</type>
-      </box>
-      <box>
-        <x>2247</x>
-        <y>2362</y>
-        <z>167</z>
-        <type>cb-large</type>
-      </box>
-</cb-inc>
+    </cb-inc>
     
-<st>
-     <box>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
+    <st>
+      <box>
         <type>st-large</type>
+        <count>5</count>
+        <width>2000</width>
+        <height>100</height>
       </box>
       <box>
-        <x>2200</x>
-        <y>0</y>
-        <z>0</z>
-          <type>st-large</type>
+        <type>st-small</type>
+        <count>5</count>
+        <width>2000</width>
+        <height>100</height>
       </box>
-       <box>
-        <x>1900</x>
-        <y>0</y>
-        <z>2100</z>
-          <type>st-large</type>
-      </box>
-      <box>
-        <x>0</x>
-        <y>0</y>
-        <z>1800</z>
-          <type>st-large</type>
-      </box>
-      
-</st>
+    </st>
     
-<ns>
-     <box>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-        <type>ns-large</type>
-      </box>
+    <st-small>
       <box>
-        <x>0</x>
-        <y>0</y>
-        <z>500</z>
-        <type>ns-large</type>
+        <type>st-small</type>
+        <count>10</count>
+        <width>5000</width>
+        <height>200</height>
       </box>
+    </st-small>
+    
+    <ns>
       <box>
-        <x>500</x>
-        <y>0</y>
-        <z>0</z>
         <type>ns-large</type>
-       </box>
-	<box>
-        <x>500</x>
-        <y>0</y>
-        <z>500</z>
-        <type>ns-large</type>
-        </box>
-</ns>
-
-<sc>
-      <box>
-        <x>500</x>
-        <y>0</y>
-        <z>0</z>
-        <type>ns-large</type>
+        <count>5</count>
+        <width>5000</width>
+        <height>300</height>
       </box>
+    </ns>
+    
+    <sc>
       <box>
-        <x>500</x>
-        <y>0</y>
-        <z>500</z>
-        <type>ns-large</type>
+        <type>cu-large</type>
+        <count>5</count>
+        <width>2500</width>
+        <height>300</height>
       </box>
-      <box>
-        <x>1000</x>
-        <y>0</y>
-        <z>1000</z>
-        <type>ns-large</type>
-      </box>
-</sc>
-
+    </sc>
+    
     <xx>
       <box>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-        <size>150</size>
-        <type>0</type>
+        <type>cu-large</type>
+        <count>30</count>
+        <width>2500</width>
+        <height>300</height>
+        <dist>1</dist>
       </box>
     </xx>
   </boxes>
@@ -981,17 +259,12 @@
     <cu>
       <cloud>
         <name>cu-hum</name>
-        <count>5</count>
+        <count>1</count>
       </cloud>
       <cloud>
         <name>cu-con</name>
-        <count>2</count>
+        <count>1</count>
       </cloud>
-      <grid-x-size type="double">2000.0</grid-x-size>
-      <grid-y-size type="double">2000.0</grid-y-size>
-      <grid-x-rand type="double">500.0</grid-x-rand>
-      <grid-y-rand type="double">500.0</grid-y-rand>
-      <grid-z-rand type="double">100.0</grid-z-rand>
     </cu>
     <cb>
       <cloud>
@@ -1010,33 +283,24 @@
         <name>cu-con</name>
         <count>5</count>
       </cloud>
-      <grid-x-size type="double">2000.0</grid-x-size>
-      <grid-y-size type="double">2000.0</grid-y-size>
-      <grid-x-rand type="double">500.0</grid-x-rand>
-      <grid-y-rand type="double">500.0</grid-y-rand>
       <grid-z-rand type="double">200.0</grid-z-rand>
     </cb>
-     <ac>
+    <ac>
       <cloud>
         <name>ac-str</name>
         <count>1</count>
       </cloud>
-      <grid-x-size type="double">1000.0</grid-x-size>
-      <grid-y-size type="double">1000.0</grid-y-size>
-      <grid-x-rand type="double">100.0</grid-x-rand>
-      <grid-y-rand type="double">100.0</grid-y-rand>
       <grid-z-rand type="double">100.0</grid-z-rand>
     </ac>
-<!--    
-   <st>
+    <st>
       <cloud>
         <name>st</name>
         <count>1</count>
       </cloud>
-      <grid-x-size type="double">1200.0</grid-x-size>
-      <grid-y-size type="double">1200.0</grid-y-size>
-      <grid-x-rand type="double">500.0</grid-x-rand>
-      <grid-y-rand type="double">500.0</grid-y-rand>
+      <cloud>
+        <name>st-small</name>
+        <count>1</count>
+      </cloud>
       <grid-z-rand type="double">100.0</grid-z-rand>
     </st>
     <sc>
@@ -1044,24 +308,15 @@
         <name>sc</name>
         <count>1</count>
       </cloud>
-      <grid-x-size type="double">1000.0</grid-x-size>
-      <grid-y-size type="double">1000.0</grid-y-size>
-      <grid-x-rand type="double">100.0</grid-x-rand>
-      <grid-y-rand type="double">100.0</grid-y-rand>
       <grid-z-rand type="double">150.0</grid-z-rand>
     </sc>
-   <ns>
+    <ns>
       <cloud>
         <name>ns</name>
         <count>1</count>
       </cloud>
-      <grid-x-size type="double">700.0</grid-x-size>
-      <grid-y-size type="double">700.0</grid-y-size>
-      <grid-x-rand type="double">50.0</grid-x-rand>
-      <grid-y-rand type="double">50.0</grid-y-rand>
       <grid-z-rand type="double">15.0</grid-z-rand>
     </ns>
--->    
   </layers>
 </PropertyList>
 <!-- end of cloudlayers.xml -->

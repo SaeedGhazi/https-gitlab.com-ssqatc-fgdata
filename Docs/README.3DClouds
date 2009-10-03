@@ -3,99 +3,35 @@ Configuring 3D Clouds
 
 3D clouds are configured using the file data/cloudlayers.xml.
 
-This file has 3 distinct sections: layers, cloud boxes and clouds.
+This file has 3 distinct sections: layers, cloud boxes and clouds,
+described below.
 
-Note that all distances are in m.
-
-Layers
-======
-
-The <layers> section contains definitions for a specific layer type.
-The layer type is derived from the METAR/Weather settings by FG itself.
-
-Each layer type is a named XML tag, i.e.: ns, sc, st, ac, sb, cu.
-If a layer type is not defined, then a 2D layer is used instead.
-
-The layer type contains one or more <cloud> definitions. This 
-defines a type of cloud box, and a weighting for that type (<count>).
-
-For example, the following XML fragment will produce 3 "cb" cloud boxes
-for every 1 "cu":
-
-<cloud>
-    <name>cb</name>
-    <count>3</count>
-</cloud>
-<cloud>
-    <name>cu</name>
-    <count>1</count>
-</cloud>
-
-The layer type contains <grid-x-size> and <grid-y-size> tags. These 
-define the distribution of clouds within the layer in meters, assuming 
-100% cloud cover (i.e. 8 octas, or "overcast). If the cloud coverage is
-less than over-cast, then a proportional number of clouds will be displayed.
-
-<grid-x-rand>, <grid-y-rand>, <grid-z-rand> add a random element to the
-cloud grid.
-
-For example, the following XML fragment will produce a grid of clouds
-every 4500m +/- 500m, varying in height by 150m.
-
-<grid-x-size type="double">4500.0</grid-x-size>
-<grid-y-size type="double">4500.0</grid-y-size>
-<grid-x-rand type="double">500.0</grid-x-rand>
-<grid-y-rand type="double">500.0</grid-y-rand>
-<grid-z-rand type="double">150.0</grid-z-rand>
-
-If the cloud coverage is less than 100%, then a proportion of grid
-points are not used.
-
-
-Cloud Boxes
-===========
-
-The <boxes> section contains definitions of cloud boxes. A cloud box
-defines a structured group of clouds. For example and entire towering
-CB.
-
-The <boxes> section contains a number of named types, as referenced
-by the <cloud> section of <layers>. Therefore, the names used are
-completely user-defined.
-
-Each type consists of one or more clouds, with an x,y,z position
-relative to each other.
-
-For example, the following cloud box defines "sc" as a box containing
-two "ns-large" clouds, one at the defined grid position, and one offset
-by 500m horizontally:
-
-<sc>
-    <box>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-        <type>ns-large</type>
-    </box>
-    <box>
-        <x>500</x>
-        <y>0</y>
-        <z>0</z>
-        <type>ns-large</type>
-    </box>
-</sc>
-
-If the  /sim/rendering/clouds3d-density is less than 1.0 (100%), then a
-proportional number of clouds will be displayed.
+Notes for those editing clouds:
+- All distances are in m. Note that this is in contrast to cloud heights
+  in METAR etc. which are in ft.
+- The XML file is loaded into the properties system, so you can modify
+  the settings in-sim, and see the results by re-generating the cloud
+  layer. The simplest way to do this is to disable METAR, and control
+  the cloud layers using the Clouds dialog, and in particular the coverage.
+- Texture files are in .png format, and have a transparent background.
+  To make the textures easier to edit, create a black layer behind them,
+  so there is some contrast between the background and the white cloud.
+  Having a grid based on the texture dimensions also helps, so you don't
+  bleed over the edges, which causes ugly sharp horizontal and vertical
+  lines.
 
 Clouds
 ======
 
-The <clouds> section contains definitions of clouds themselves, as referenced
-by the <type> tag in the <boxes> section. Therefore, the names used are
-completely user-defined.
+The <clouds> section contains definitions of clouds themselves, built
+ up of a number of "sprites" - simple 2D textures that are always
+rotated to be facing the viewer. These sprites are handled by a OpenGL
+Shader - a small program that is run on your graphics card.
 
-Each cloud definition consists of the following tags:
+Sets of these clouds are be built up into bigger masses, described below.
+
+Each cloud group has a completely user-defined name, and contains the
+following tags.
 
 <min-cloud-width-m>  - minimum width of the cloud
 <max-cloud-width-m>  - maximum width of the cloud
@@ -113,5 +49,89 @@ Each cloud definition consists of the following tags:
 <min-sprite-height-m> - minimum height of the spites used to create the cloud
 <max-sprite-height-m> - maximum height of the sprites used to create the cloud
 
-The cloud is generated from a number of sprites, placed on the surface of a squashed sphere. Sprites at the bottom of the sphere can be darker than those
-at the top, to simulate the darker bases of CBs, for example.
+
+The texture to use for the sprites is defined in the XML <texture> tag.
+To allow some variation, you can create a texture file containing multiple
+sprites in a grid, and define the <num-textures-x/y> tags. The code
+decides which texture to use for a given sprite : randomly in the x-direction
+and based on the altitude of the sprite within the cloud in the y-direction.
+Therefore, you should put sprite textures you want to use for the bottom of
+your cloud at the bottom of the texture file, and those you want to use for
+the top of the cloud at the top of the texture file.
+
+Cloud Boxes
+===========
+
+The <boxes> section contains definitions of groups of cloads,for example
+an entire towering CB mass.
+
+The <boxes> section contains a number of named types, which are referenced
+by the <layers> section, described below. Therefore, the names used are
+completely user-defined.
+
+Each of the named section consists of one or more <box> section,
+defining a particular cloud type
+
+Each <box> section contains the following tags:
+
+<type>   - The cloud to use, defined above
+<count>  - The number of clouds to generate (+/- 50%)
+<width>  - The x and y within which these clouds should be generated
+<height> - The height within which the clouds should be generated
+<hdist>  - The horizontal distribution of the clouds within the area.
+           Equates to a sum of random distributions. Defaults to 1.
+           1 = even distribution, 2 = distributed towards the center.
+           3 = very strongly distributed towards the center. 
+<vdist>  - The vertical distribution of the clouds. As for hdist.
+
+
+If the  /sim/rendering/clouds3d-density is less than 1.0 (100%), then a
+proportional number of clouds will be displayed.
+
+The following example shows a stratus cloud group, which consists of 5
+st-large clouds and 5 st-small clouds, distributed in a box 2000mx2000m,
+and 100m high, evenly distributed.
+
+    <st>
+      <box>
+        <type>st-large</type>
+        <count>5</count>
+        <width>2000</width>
+        <height>100</height>
+      </box>
+      <box>
+        <type>st-small</type>
+        <count>5</count>
+        <width>2000</width>
+        <height>100</height>
+      </box>
+    </st>
+
+
+Layers
+======
+
+The <layers> section contains definitions for a specific layer type.
+The layer type is derived from the METAR/Weather settings by FG itself.
+
+Each layer type is a named XML tag, i.e.: ns, sc, st, ac, cb, cu.
+If a layer type is not defined, then a 2D layer is used instead.
+
+The layer type contains one or more <cloud> definitions. This 
+defines a type of cloud box, and a weighting for that type (<count>).
+
+For example, the following XML fragment will produce 3 "cb" cloud boxes
+for every 1 "cu":
+
+<cloud>
+    <name>cb</name>
+    <count>3</count>
+</cloud>
+<cloud>
+    <name>cu</name>
+    <count>1</count>
+</cloud>
+
+Clouds are randomly distributed across the sky in the x/y plane, but the
+height of them is set by the weather conditions, with a random height range
+applied, defined by <grid-z-rand>

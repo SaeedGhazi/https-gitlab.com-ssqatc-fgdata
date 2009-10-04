@@ -9,6 +9,33 @@
   </text>
   <hrule/>
 
+  <nasal>
+    <open>
+      # Populate the view combo box with a list of the available views
+      var combo = cmdarg().getNode("group").getNode("combo");
+      combo.removeChildren("value");
+
+      var current_view = getprop("/sim/current-view/view-number");
+      var i = 0;
+      foreach (var v; view.views) {
+
+        var name = "Unnamed view " ~ v.getIndex();
+
+        if (v.getNode("name") != nil) {
+          name = v.getNode("name").getValue();
+        }
+
+        # Pre-populate the combo box selected value
+        if (v.getIndex() == current_view) {
+          setprop("/sim/replay/view-name", name);
+        }
+        
+        combo.getNode("value[" ~ i ~ "]", 1).setValue(name);
+        i = i + 1;
+      }
+    </open>
+  </nasal>
+
   <group>
     <layout>table</layout>
     
@@ -33,42 +60,79 @@
     <combo>
       <row>1</row><col>1</col>
       <halign>left</halign>
-      <property>/sim/replay/view</property>
-      <value>0</value>
-      <value>1</value>
-      <value>4</value>
+      <property>/sim/replay/view-name</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
     </combo>
-  </group>
+    
+    
+    <text>
+      <row>2</row><col>0</col>
+      <halign>right</halign>
+      <label>Disable replay:</label>
+    </text>
 
-  <!-- Using GUI layout management for text formatting.  It ain't
-       pretty, but it works... Turn off default-padding to pack the
-       lines together correctly. -->
-  <group>
-    <layout>vbox</layout>
-    <default-padding>0</default-padding>
-    <padding>6</padding> <!-- padding for the box itself -->
-    <text><label></label></text> <!-- empty line -->
-    <text><label>A duration of zero replays the entire flight.</label></text>
-    <text><label>Replay view types:</label></text>
-    <group>
-      <layout>vbox</layout>
-      <halign>center</halign>
-      <text><label>0 - Cockpit view</label><halign>left</halign></text>
-      <text><label>1 - Chase view</label><halign>left</halign></text>
-      <text><label>4 - Tower view</label><halign>left</halign></text>
-    </group>
-    <text><label>Use v/shift-v to change views during replay, and  </label></text>
-    <text><label>ctrl-v to return to cockpit view following replay.</label></text>
     <checkbox>
-      <label>Disable replay</label>
+      <row>2</row><col>1</col>
+      <halign>left</halign>
       <property>/sim/replay/disable</property>
       <binding>
         <command>dialog-apply</command>
       </binding>
     </checkbox>
-    <text><label></label></text> <!-- empty line -->
+    
   </group>
 
+  <hrule/>
+
+  <text>
+    <halign>left</halign>
+    <label>During replay:</label>
+  </text>
+  
+  <group>
+    <layout>table</layout>
+
+    <text>
+      <row>1</row><col>0</col>
+      <halign>center</halign>
+      <label>v/V</label>
+    </text>
+    
+    <text>
+      <row>1</row><col>1</col>
+      <halign>left</halign>
+      <label>Change view</label>
+    </text>
+  
+    <text>
+      <row>2</row><col>0</col>
+      <halign>center</halign>
+      <label>Ctrl-v</label>
+    </text>
+    
+    <text>
+      <row>2</row><col>1</col>
+      <halign>left</halign>
+      <label>Reset view</label>
+    </text>
+    
+    <text>
+      <row>3</row><col>0</col>
+      <halign>center</halign>
+      <label>p p</label>
+    </text>
+    
+    <text>
+      <row>3</row><col>1</col>
+      <halign>left</halign>
+      <label>End replay</label>
+    </text>
+  </group>
+
+  <hrule/>
+  
   <group>
     <layout>hbox</layout>
     <empty><stretch>true</stretch></empty>
@@ -78,6 +142,13 @@
       <equal>true</equal>
       <binding>
 	<command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>
+          var index = view.indexof(getprop("/sim/replay/view-name"));
+          setprop("/sim/current-view/view-number", index);
+        </script>
       </binding>
       <binding>
 	<command>replay</command>

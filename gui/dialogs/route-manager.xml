@@ -23,13 +23,15 @@ command interface /autopilot/route-manager/input:
 			var selection = dlg.getNode("selection", 1);
 			var input = dlg.getNode("input", 1);
 
+			var routem = props.globals.getNode("/autopilot/route-manager", 1);
+
 			selection.setValue("");
 			input.setValue("");
 
 			var list = cmdarg().getNode("list");
-			var cmd = props.globals.getNode("/autopilot/route-manager/input", 1);
-			var route = props.globals.getNode("/autopilot/route-manager/route", 1);
-
+			var cmd = routem.getNode("input", 1);
+			var route = routem.getNode("route", 1);
+			
 			var sel_index = func {
 				var s = selection.getValue();
 				selection.setValue("");
@@ -80,25 +82,17 @@ command interface /autopilot/route-manager/input:
 
 			var lst = setlistener("/autopilot/route-manager/route/num", route_changed, 1);
 
-			var load_wp_file = func(path) {
-				call(func {
-					var file = io.open(path.getValue(), "r");
-					var index = sel_index();
-					while ((var wp = io.readln(file)) != nil) {
-						wp = string.trim(wp);
-						if (wp != "") {
-							cmd.setValue("@insert" ~ index ~ ":" ~ wp);
-							if (index >= 0)
-								index += 1;
-						}
-					}
-					io.close(file);
-				}, [], var err = []);
-				if (size(err))
-					gui.popupTip("can't open file " ~ path.getValue(), 5);
+			var load_route = func(path) {
+				routem.getNode("file-path", 1).setValue(path.getValue());
+				cmd.setValue("@load");
+				gui.dialog_update("route-manager");
 			}
 
-			var file_selector = gui.FileSelector.new(load_wp_file, "Load waypoint list", "Load");
+			var file_selector = gui.FileSelector.new(load_route, "Load flight-plan", "Load");
+			
+			var activate_fp = func {
+				cmd.setValue("@activate");
+			}
 		</open>
 
 		<close>
@@ -130,7 +124,102 @@ command interface /autopilot/route-manager/input:
 			</binding>
 		</button>
 	</group>
-
+	<hrule/>
+	<!-- departure / arrival airport information -->
+	
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<label>Departure:</label>
+			<pref-width>80</pref-width>
+		</text>
+		<input>
+			<name>departure-airport</name>
+			<halign>fill</halign>
+			<stretch>true</stretch>
+			<pref-width>150</pref-width>
+			<property>/autopilot/route-manager/departure/airport</property>
+		</input>
+		<text>
+			<label>Rwy:</label>
+		</text>
+		<input>
+			<name>departure-runway</name>
+			<halign>fill</halign>
+			<stretch>true</stretch>
+			<pref-width>60</pref-width>
+			<property>/autopilot/route-manager/departure/runway</property>
+		</input>
+	</group>
+	
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<label>Arrival:</label>
+			<pref-width>80</pref-width>
+		</text>
+		<input>
+			<name>destination-airport</name>
+			<halign>fill</halign>
+			<stretch>true</stretch>
+			<pref-width>150</pref-width>
+			<property>/autopilot/route-manager/destination/airport</property>
+		</input>
+		<text>
+			<label>Rwy:</label>
+		</text>
+		<input>
+			<name>destination-runway</name>
+			<halign>fill</halign>
+			<stretch>true</stretch>
+			<pref-width>60</pref-width>
+			<property>/autopilot/route-manager/destination/runway</property>
+		</input>
+	</group>
+	
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<label>Alternate:</label>
+			<pref-width>80</pref-width>
+		</text>
+		<input>
+			<name>alt-airport</name>
+			<halign>fill</halign>
+			<stretch>true</stretch>
+			<pref-width>150</pref-width>
+			<property>/autopilot/route-manager/alternate/airport</property>
+		</input>
+		
+	</group>
+	
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<label>Cruise Speed (kts):</label>
+			<pref-width>80</pref-width>
+		</text>
+		<input>
+			<name>cruise-speed</name>
+			<halign>fill</halign>
+			<stretch>true</stretch>
+			<pref-width>150</pref-width>
+			<property>/autopilot/route-manager/cruise/speed</property>
+		</input>
+		
+		<text>
+			<label>Cruise Altitude (ft/FL):</label>
+			<pref-width>80</pref-width>
+		</text>
+		<input>
+			<name>cruise-alt</name>
+			<halign>fill</halign>
+			<stretch>true</stretch>
+			<pref-width>150</pref-width>
+			<property>/sim/gui/dialogs/route-manager/cruise-alt</property>
+		</input>
+	</group>
+	
 	<hrule/>
 
 	<group>
@@ -239,6 +328,15 @@ command interface /autopilot/route-manager/input:
 			</binding>
 		</button>
 
+		<button>
+			<legend>Activate</legend>
+			<equal>true</equal>
+			<binding>
+				<command>nasal</command>
+				<script>activate_fp()</script>
+			</binding>
+		</button>
+		
 		<empty><stretch>true</stretch></empty>
 
 		<button>

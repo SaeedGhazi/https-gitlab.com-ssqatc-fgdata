@@ -2,321 +2,594 @@
 
 <PropertyList>
 
- <name>gps</name>
  <width>620</width>
  <height>430</height>
  <modal>false</modal>
 
- <text>
-  <x>280</x>
-  <y>400</y>
-  <label>GPS</label>
- </text>
+ <nasal>
+    <open>
+		var gps = props.globals.getNode("/instrumentation/gps/", 1);
+		var dlg = props.globals.getNode("/sim/gui/dialogs/gps", 1);
+		var cmd = gps.getNode("command", 1);
+		var scratch = gps.getNode("scratch");
+		
+		scratch.getNode("exact", 1).setBoolValue(0);
+		var searchType = scratch.getNode("type", 1);
+		var searchQuery = scratch.getNode("query", 1);
+		
+		var copySearchArgs = func {
+			searchType.setValue(dlg.getNode("search-type").getValue());
+			searchQuery.setValue(dlg.getNode("search-query").getValue());
+		}
+	</open>
+ </nasal>
+
+ <name>gps</name>
+ <layout>vbox</layout>
+
+ <text><label>GPS</label></text>
+
+ <hrule/>
+
+ <!-- show current state -->
+	<group>
+	<layout>table</layout>
+
+	<text>
+		<row>0</row>
+	    <col>0</col>
+		<label>MMMM</label>
+		<format>Mode: %s</format>
+		<property>/instrumentation/gps/mode</property>
+		<live>true</live>
+	</text>
+
+	<text>
+		<visible>
+			<equals>
+			<property>/instrumentation/gps/mode</property>
+			<value>leg</value>
+			</equals>
+		</visible>
+		
+		<row>0</row>
+	    <col>1</col>
+		<label>MMM</label>
+		<format>Current Route Wp: %03d</format>
+		<property>/autopilot/route-manager/current-wp</property>
+		<live>true</live>
+	</text>
+
+	<text>
+		<visible>
+			<equals>
+			<property>/instrumentation/gps/mode</property>
+			<value>obs</value>
+			</equals>
+		</visible>
+		
+		<row>0</row>
+	    <col>1</col>
+		<label>MMM</label>
+		<format>Selected Course: %5.1f*</format>
+		<property>/instrumentation/gps/selected-course-deg</property>
+		<live>true</live>
+	</text>
+
+	<text>
+		<row>0</row>
+	    <col>2</col>
+		<label>MMM</label>
+		<format>Xtrack: %5.2fnm</format>
+		<property>/instrumentation/gps/wp/wp[1]/course-error-nm</property>
+		<live>true</live>
+	</text>
+
+	<text>
+		<row>1</row>
+	    <col>0</col>
+		<label>MMMMMM</label>
+		<format>Longitude: %6.3f</format>
+		<property>/instrumentation/gps/indicated-longitude-deg</property>
+		<live>true</live>
+	</text>
+	<text>
+		<row>1</row>
+	    <col>1</col>
+		<label>MMMMMM</label>
+		<format>Latitude: %6.3f</format>
+		<property>/instrumentation/gps/indicated-latitude-deg</property>
+		<live>true</live>
+	</text>
+	<text>
+		<row>1</row>
+	    <col>2</col>
+		<label>MMMMMM</label>
+		<format>Altitude: %6.0fft</format>
+		<property>/instrumentation/gps/indicated-altitude-ft</property>
+		<live>true</live>
+	</text>
+	
+	<text>
+		<row>2</row>
+	    <col>0</col>
+		<label>MMMM</label>
+		<format>Groundspeed: %4.0fkts</format>
+		<property>/instrumentation/gps/indicated-ground-speed-kt</property>
+		<live>true</live>
+	</text>
+	<text>
+		<row>2</row>
+	    <col>1</col>
+		<label>MMM</label>
+		<format>Track: %3.0f*</format>
+		<property>/instrumentation/gps/indicated-track-magnetic-deg</property>
+		<live>true</live>
+	</text>
+	<text>
+		<row>2</row>
+	    <col>2</col>
+		<label>MMMMMM</label>
+		<format>VS: %4.0ffpm</format>
+		<property>/instrumentation/gps/indicated-vertical-speed</property>
+		<live>true</live>
+	</text>
+	
+	<text>
+		<row>3</row>
+	    <col>0</col>
+		<label>MMMM</label>
+		<format>Odometer: %4.1fnm</format>
+		<property>/instrumentation/gps/odometer</property>
+		<live>true</live>
+	</text>
+	
+	<text>
+		<row>3</row>
+	    <col>1</col>
+		<label>MMMM</label>
+		<format>RAIM: %3.2f</format>
+		<property>/instrumentation/gps/raim</property>
+		<live>true</live>
+	</text>
+
+	<!-- mode dependent properties -->
+	<text>
+		<row>4</row>
+	    <col>0</col>
+		<label>MMMMMM</label>
+		<format>Ident: %s</format>
+		<property>/instrumentation/gps/wp/wp[1]/ID</property>
+		<live>true</live>
+	</text>
+
+	<text>
+		<row>4</row>
+	    <col>1</col>
+	    <colspan>2</colspan>
+		<label>MMMMMMMMMMM</label>
+		<format>Name: %s</format>
+		<property>/instrumentation/gps/wp/wp[1]/name</property>
+		<live>true</live>
+	</text>
+
+	<text>
+		<row>5</row>
+	    <col>0</col>
+		<label>MMMMMM</label>
+		<format>Longitude: %6.3f</format>
+		<property>/instrumentation/gps/wp/wp[1]/longitude-deg</property>
+		<live>true</live>
+	</text>
+	<text>
+		<row>5</row>
+	    <col>1</col>
+		<label>MMMMMM</label>
+		<format>Latitude: %6.3f</format>
+		<property>/instrumentation/gps/wp/wp[1]/latitude-deg</property>
+		<live>true</live>
+	</text>
+	<text>
+		<row>5</row>
+	    <col>2</col>
+		<label>MMMMMM</label>
+		<format>Altitude: %6.0fft</format>
+		<property>/instrumentation/gps/wp/wp[1]/altitude-ft</property>
+		<live>true</live>
+	</text>
+
+	<!-- distance / bearing info -->
+	<text>
+		<row>6</row>
+	    <col>0</col>
+		<label>MMMMMM</label>
+		<format>Bearing: %3.0f</format>
+		<property>/instrumentation/gps/wp/wp[1]/bearing-mag-deg</property>
+		<live>true</live>
+	</text>
+	<text>
+		<row>6</row>
+	    <col>1</col>
+		<label>MMMMMM</label>
+		<format>Distance: %5.2fnm</format>
+		<property>/instrumentation/gps/wp/wp[1]/distance-nm</property>
+		<live>true</live>
+	</text>
+	<text>
+		<row>6</row>
+	    <col>2</col>
+		<label>MMMMMMMM</label>
+		<format>TTW: %s</format>
+		<property>/instrumentation/gps/wp/wp[1]/TTW</property>
+		<live>true</live>
+	</text>
+	
+	<text>
+		<visible>
+			<equals>
+			<property>/instrumentation/gps/mode</property>
+			<value>leg</value>
+			</equals>
+		</visible>
+		
+		<row>7</row>
+	    <col>0</col>
+		<label>MMMMMM</label>
+		<format>Leg Course: %3.0f</format>
+		<property>/instrumentation/gps/wp/leg-mag-course-deg</property>
+		<live>true</live>
+	</text>
+	
+	<text>
+		<visible>
+			<equals>
+			<property>/instrumentation/gps/mode</property>
+			<value>leg</value>
+			</equals>
+		</visible>
+		
+		<row>7</row>
+	    <col>1</col>
+		<label>MMMMMM</label>
+		<format>Leg Distance: %5.1fnm</format>
+		<property>/instrumentation/gps/wp/leg-distance-nm</property>
+		<live>true</live>
+	</text>
+	
+	<text>
+		<visible>
+			<equals>
+			<property>/instrumentation/gps/mode</property>
+			<value>obs</value>
+			</equals>
+			<property>/instrumentation/gps/to-flag</property>
+		</visible>
+		
+		<row>7</row>
+	    <col>0</col>
+		<label>TO</label>
+	</text>
+	
+	<text>
+		<visible>
+			<equals>
+			<property>/instrumentation/gps/mode</property>
+			<value>obs</value>
+			</equals>
+			<property>/instrumentation/gps/from-flag</property>
+		</visible>
+		
+		<row>7</row>
+	    <col>0</col>
+		<label>FROM</label>
+	</text>
+	
+	</group>
+
+ <hrule/>
+
+	<!--  ident text field, type combo, next/prev paging buttons 
+		nearest and search buttons
+	-->
+	<group>
+		<layout>hbox</layout>
+		<valign>fill</valign>
+		
+		<group>
+		<layout>vbox</layout>
+		
+		<group>
+		<layout>hbox</layout>
+		<valign>fill</valign>
+		<text>
+			<label>Type:</label>
+			<pref-width>80</pref-width>
+		</text>
+		<combo>
+		   <name>searchType</name>
+		   <property>/sim/gui/dialogs/gps/search-type</property>
+		   <value>any</value>
+		   <value>airport</value>
+		   <value>vor</value>
+		   <value>ndb</value>
+		   <value>fix</value>
+		   <value>wpt</value>
+		  <live>true</live>
+		   <binding>
+            <command>dialog-apply</command>
+          </binding>
+		  </combo>
+		</group>
+		
+		
+		<group>
+		<layout>hbox</layout>
+		<valign>fill</valign>
+		<text>
+			<label>Search:</label>
+			<pref-width>80</pref-width>
+		</text>
+		<input>
+			<name>search-query</name>
+			<halign>fill</halign>
+			<stretch>true</stretch>
+			<pref-width>150</pref-width>
+			<live>true</live>
+			<property>/sim/gui/dialogs/gps/search-query</property>
+			<binding>
+	           <command>dialog-apply</command>
+	         </binding>
+		</input>
+		</group>
+		
+		<group>
+		<layout>hbox</layout>
+		<valign>fill</valign>
+		<button>
+			<legend>Search</legend>
+			<binding>
+			<command>nasal</command>
+			<script>
+				copySearchArgs();
+				cmd.setValue("search");
+			</script>
+			</binding>
+		</button>
+
+		<button>
+			<legend>Search Names</legend>
+			<binding>
+			<command>nasal</command>
+			<script>
+				copySearchArgs();
+				cmd.setValue("search-names");
+			</script>
+			</binding>
+		</button>
+
+		<button>
+			<legend>Nrst</legend>
+			<binding>
+			<command>nasal</command>
+			<script>
+				copySearchArgs();
+				scratch.getNode("max-results", 1).setIntValue(10);
+				cmd.setValue("nearest")
+			</script>
+			</binding>
+		</button>
+		
+		<button>
+			<enable>
+			<property>/autopilot/route-manager/active</property>
+			</enable>
+			
+			<legend>Actv RTE WPT</legend>
+			<binding>
+			<command>nasal</command>
+			<script>
+				scratch.getNode("results", 1).clearValue();
+				cmd.setValue("load-route-wpt")
+			</script>
+			</binding>
+		</button>
+		
+		<empty><stretch>true</stretch></empty>
+		
+		
+		
+		</group>
+		
+		
+		</group>
+	
+		<vrule/>
+
+		<group>
+		<visible>
+		<property>/instrumentation/gps/scratch/valid</property>
+		</visible>
+			
+		<layout>table</layout>
+
+		<text>
+			<row>0</row>
+		    <col>0</col>
+			<label>MMMMMM</label>
+			<format>Ident: %s</format>
+			<property>/instrumentation/gps/scratch/ident</property>
+			<live>true</live>
+		</text>
+
+		<text>
+			<row>0</row>
+		    <col>1</col>
+		    <colspan>2</colspan>
+			<label>MMMMMMMMMMM</label>
+			<format>Name: %s</format>
+			<property>/instrumentation/gps/scratch/name</property>
+			<live>true</live>
+		</text>
+
+		<text>
+			<row>1</row>
+		    <col>0</col>
+			<label>MMMMMM</label>
+			<format>Lon: %6.3f</format>
+			<property>/instrumentation/gps/scratch/longitude-deg</property>
+			<live>true</live>
+		</text>
+		<text>
+			<row>1</row>
+		    <col>1</col>
+			<label>MMMMMM</label>
+			<format>Lat: %6.3f</format>
+			<property>/instrumentation/gps/scratch/latitude-deg</property>
+			<live>true</live>
+		</text>
+		<text>
+			<row>1</row>
+		    <col>2</col>
+			<label>MMMMMM</label>
+			<format>Alt: %6.0fft</format>
+			<property>/instrumentation/gps/scratch/altitude-ft</property>
+			<live>true</live>
+		</text>
+
+		<!-- distance / bearing info -->
+		<text>
+			<row>2</row>
+		    <col>0</col>
+			<label>MMMMMM</label>
+			<format>Bearing: %3.0f</format>
+			<property>/instrumentation/gps/scratch/mag-bearing-deg</property>
+			<live>true</live>
+		</text>
+		<text>
+			<row>2</row>
+		    <col>1</col>
+			<label>MMMMMM</label>
+			<format>Distance: %5.1fnm</format>
+			<property>/instrumentation/gps/scratch/distance-nm</property>
+			<live>true</live>
+		</text>
+		
+		<!-- navaid info -->
+		<text>
+			<visible>
+				<equals>
+				<property>/instrumentation/gps/scratch/type</property>
+				<value>vor</value>
+				</equals>
+			</visible>
+			
+			<row>3</row>
+		    <col>0</col>
+			<label>MMMMMM</label>
+			<format>Frequency: %5.1fMhz</format>
+			<property>/instrumentation/gps/scratch/frequency-mhz</property>
+			<live>true</live>
+		</text>
+		
+		<text>
+			<visible>
+				<equals>
+				<property>/instrumentation/gps/scratch/type</property>
+				<value>ndb</value>
+				</equals>
+			</visible>
+			
+			<row>3</row>
+		    <col>0</col>
+			<label>MMMMMM</label>
+			<format>Frequency: %5.1fKhz</format>
+			<property>/instrumentation/gps/scratch/frequency-khz</property>
+			<live>true</live>
+		</text>
+		
+		
+		<!-- prev/next buttons -->
+		<button>
+			<enable>
+				<greater-than>
+				<property>/instrumentation/gps/scratch/index</property>
+				<value>0</value>
+				</greater-than>
+			</enable>
+				
+			<row>5</row>
+		    <col>0</col>
+			<legend>Prev</legend>
+			<key>left</key>
+			<binding>
+			<command>nasal</command>
+			<script>cmd.setValue("previous")</script>
+			</binding>
+		</button>
+		<button>
+			<enable>
+			<property>/instrumentation/gps/scratch/has-next</property>
+			</enable>
+			
+			<row>5</row>
+		    <col>1</col>
+			<legend>Next</legend>
+			<key>right</key>
+			<binding>
+			<command>nasal</command>
+			<script>cmd.setValue("next")</script>
+			</binding>
+		</button>
+
+
+		</group>
+	</group>
+	
+	
+ <hrule/>
 
  <group>
-  <x>10</x>
-  <y>40</y>
+	<layout>hbox</layout>
+	<halign>fill</halign>
+	<default-padding>6</default-padding>
+	
+	<button>
+		<legend>LEG</legend>
+		<equal>true</equal>
+		<binding>
+	    <command>nasal</command>
+	    <script>cmd.setValue("leg")</script>
+		</binding>
+	</button>
 
-  <text>
-   <x>40</x>
-   <y>340</y>
-   <label>WP 0</label>
-  </text>
-
-  <combo>
-   <name>wp0Type</name>
-   <x>0</x>
-   <y>320</y>
-   <width>100</width>
-   <height>25</height>
-   <label>Type</label>
-   <property>/instrumentation/gps/wp/wp[0]/waypoint-type</property>
-   <value>airport</value>
-   <value>nav</value>
-   <value>fix</value>
-   <binding>
-    <command>dialog-apply</command>
-    <object-name>wp0Type</object-name>
-   </binding>
-  </combo>
-
-  <input>
-   <name>wp0ID</name>
-   <x>0</x>
-   <y>290</y>
-   <width>100</width>
-   <height>25</height>
-   <label>ID</label>
-   <property>/instrumentation/gps/wp/wp[0]/ID</property>
-   <binding>
-    <command>dialog-apply</command>
-    <object-name>wp0ID</object-name>
-   </binding>
-   <binding>
-    <command>dialog-update</command>
-   </binding>
-  </input>
-
-  <input>
-   <name>wp0Name</name>
-   <x>0</x>
-   <y>260</y>
-   <width>200</width>
-   <height>25</height>
-   <label>Name</label>
-   <property>/instrumentation/gps/wp/wp[0]/name</property>
-   <binding>
-    <command>dialog-apply</command>
-    <object-name>wp0Name</object-name>
-   </binding>
-   <binding>
-    <command>dialog-update</command>
-   </binding>
-  </input>
-
-  <input>
-   <name>wp0-lat</name>
-   <x>0</x>
-   <y>230</y>
-   <width>150</width>
-   <height>25</height>
-   <label>Latitude</label>
-   <property>/instrumentation/gps/wp/wp[0]/latitude-deg</property>
-   <binding>
-    <command>dialog-apply</command>
-    <object-name>wp0-lat</object-name>
-   </binding>
-   <binding>
-    <command>dialog-update</command>
-   </binding>
-  </input>
-
-  <input>
-   <name>wp0-lon</name>
-   <x>0</x>
-   <y>200</y>
-   <width>150</width>
-   <height>25</height>
-   <label>Longitude</label>
-   <property>/instrumentation/gps/wp/wp[0]/longitude-deg</property>
-   <binding>
-    <command>dialog-apply</command>
-    <object-name>wp0-lon</object-name>
-   </binding>
-   <binding>
-    <command>dialog-update</command>
-   </binding>
-  </input>
-
-  <input>
-   <name>wp0-alt</name>
-   <x>0</x>
-   <y>170</y>
-   <width>150</width>
-   <height>25</height>
-   <label>Altitude</label>
-   <property>/instrumentation/gps/wp/wp[0]/altitude-ft</property>
-   <binding>
-    <command>dialog-apply</command>
-    <object-name>wp0-alt</object-name>
-   </binding>
-   <binding>
-    <command>dialog-update</command>
-   </binding>
-  </input>
-
-  <input>
-   <name>wp0-course</name>
-   <x>0</x>
-   <y>140</y>
-   <width>150</width>
-   <height>25</height>
-   <label>Desired course</label>
-   <property>/instrumentation/gps/wp/wp[0]/desired-course-deg</property>
-   <min>0</min>
-   <max>360</max>
-   <binding>
-    <command>dialog-apply</command>
-    <object-name>wp0-course</object-name>
-   </binding>
-  </input>
-
+	<button>
+		<legend>OBS</legend>
+		<binding>
+		<command>nasal</command>
+		<script>cmd.setValue("obs")</script>
+		</binding>
+	</button>
+	
+	<button>
+		<legend>DTO</legend>
+		<binding>
+		<command>nasal</command>
+		<script>cmd.setValue("direct")</script>
+		</binding>
+	</button>
+	
+	<empty><stretch>true</stretch></empty>
+		
+	<button>
+	  <legend>Close</legend>
+	  <default>true</default>
+	  <key>Esc</key>
+	  <binding>
+	   <command>dialog-close</command>
+	  </binding>
+	 </button>
  </group>
 
 
- <group>
-  <x>320</x>
-  <y>40</y>
-
-  <text>
-   <x>40</x>
-   <y>340</y>
-   <label>WP 1</label>
-  </text>
-
-  <combo>
-   <name>wp1Type</name>
-   <x>0</x>
-   <y>320</y>
-   <width>100</width>
-   <height>25</height>
-   <label>Type</label>
-   <property>/instrumentation/gps/wp/wp[1]/waypoint-type</property>
-   <value>airport</value>
-   <value>nav</value>
-   <value>fix</value>
-   <binding>
-    <command>dialog-apply</command>
-    <object-name>wp1Type</object-name>
-   </binding>
-  </combo>
-
-  <input>
-   <name>wp1ID</name>
-   <x>0</x>
-   <y>290</y>
-   <width>100</width>
-   <height>25</height>
-   <label>ID</label>
-   <property>/instrumentation/gps/wp/wp[1]/ID</property>
-   <binding>
-    <command>dialog-apply</command>
-    <object-name>wp1ID</object-name>
-   </binding>
-   <binding>
-    <command>dialog-update</command>
-   </binding>
-  </input>
-
-  <input>
-   <name>wp1Name</name>
-   <x>0</x>
-   <y>260</y>
-   <width>200</width>
-   <height>25</height>
-   <label>Name</label>
-   <property>/instrumentation/gps/wp/wp[1]/name</property>
-   <binding>
-    <command>dialog-apply</command>
-    <object-name>wp1Name</object-name>
-   </binding>
-   <binding>
-    <command>dialog-update</command>
-   </binding>
-  </input>
-
-  <input>
-   <name>wp1-lat</name>
-   <x>0</x>
-   <y>230</y>
-   <width>150</width>
-   <height>25</height>
-   <label>Latitude</label>
-   <property>/instrumentation/gps/wp/wp[1]/latitude-deg</property>
-   <binding>
-    <command>dialog-apply</command>
-    <object-name>wp1-lat</object-name>
-   </binding>
-   <binding>
-    <command>dialog-update</command>
-   </binding>
-  </input>
-
-  <input>
-   <name>wp1-lon</name>
-   <x>0</x>
-   <y>200</y>
-   <width>150</width>
-   <height>25</height>
-   <label>Longitude</label>
-   <property>/instrumentation/gps/wp/wp[1]/longitude-deg</property>
-   <binding>
-    <command>dialog-apply</command>
-    <object-name>wp1-lon</object-name>
-   </binding>
-   <binding>
-    <command>dialog-update</command>
-   </binding>
-  </input>
-
-  <input>
-   <name>wp1-alt</name>
-   <x>0</x>
-   <y>170</y>
-   <width>150</width>
-   <height>25</height>
-   <label>Altitude</label>
-   <property>/instrumentation/gps/wp/wp[1]/altitude-ft</property>
-   <binding>
-    <command>dialog-apply</command>
-    <object-name>wp1-alt</object-name>
-   </binding>
-   <binding>
-    <command>dialog-update</command>
-   </binding>
-  </input>
-
-  <input>
-   <name>wp1-course</name>
-   <x>0</x>
-   <y>140</y>
-   <width>150</width>
-   <height>25</height>
-   <label>Desired course</label>
-   <property>/instrumentation/gps/wp/wp[1]/desired-course-deg</property>
-   <binding>
-    <command>dialog-apply</command>
-    <object-name>wp1-course</object-name>
-   </binding>
-  </input>
-
-  <button>
-   <x>0</x>
-   <y>110</y>
-   <legend>Get nearest airport</legend>
-   <binding>
-    <command>nasal</command>
-    <script>
-     node = props.globals.getNode("/instrumentation/gps/wp/wp[1]/get-nearest-airport", 1);
-     node.setValue(1);
-    </script>
-   </binding>
-   <binding>
-    <command>dialog-update</command>
-   </binding>
-  </button>
-
- </group>
-
- <input>
-   <name>leg-course</name>
-   <x>10</x>
-   <y>50</y>
-   <width>150</width>
-   <height>25</height>
-   <label>Leg course</label>
-   <property>/instrumentation/gps/wp/leg-true-course-deg</property>
-  </input>
-
-  <input>
-   <name>leg-distance</name>
-   <x>10</x>
-   <y>80</y>
-   <width>150</width>
-   <height>25</height>
-   <label>Leg distance [nm]</label>
-   <property>/instrumentation/gps/wp/leg-distance-nm</property>
-  </input>
-
- <button>
-  <x>120</x>
-  <y>10</y>
-  <legend>Close</legend>
-  <default>true</default>
-  <key>Esc</key>
-  <binding>
-   <command>dialog-close</command>
-  </binding>
- </button>
 
 </PropertyList>

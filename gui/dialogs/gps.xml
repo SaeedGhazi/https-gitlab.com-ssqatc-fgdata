@@ -21,6 +21,8 @@
 			searchType.setValue(dlg.getNode("search-type").getValue());
 			searchQuery.setValue(dlg.getNode("search-query").getValue());
 		}
+		
+		var slaved = props.globals.getNode("/instrumentation/nav[0]/slaved-to-gps", 1);
 	</open>
  </nasal>
 
@@ -577,6 +579,15 @@
 		<script>cmd.setValue("direct")</script>
 		</binding>
 	</button>
+	
+	<checkbox>
+		<halign>left</halign>
+		<label>NAV Slave</label>
+		<property>/instrumentation/nav[0]/slaved-to-gps</property>
+		<binding>
+			<command>dialog-apply</command>
+		</binding>
+	</checkbox>
 	
 	<empty><stretch>true</stretch></empty>
 		

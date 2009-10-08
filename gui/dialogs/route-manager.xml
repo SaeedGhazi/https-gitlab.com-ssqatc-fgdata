@@ -331,6 +331,12 @@ command interface /autopilot/route-manager/input:
 		<button>
 			<legend>Activate</legend>
 			<equal>true</equal>
+			<enable>
+			<not><property>/autopilot/route-manager/active</property></not>
+			</enable>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
 			<binding>
 				<command>nasal</command>
 				<script>activate_fp()</script>
@@ -342,6 +348,9 @@ command interface /autopilot/route-manager/input:
 		<button>
 			<legend>Load List</legend>
 			<equal>true</equal>
+			<enable>
+			<not><property>/autopilot/route-manager/active</property></not>
+			</enable>
 			<binding>
 				<command>nasal</command>
 				<script>load()</script>

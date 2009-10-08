@@ -117,6 +117,14 @@
 		</item>
 
 		<item>
+			<label>Effects</label>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>shader-options</dialog-name>
+			</binding>
+		</item>
+
+		<item>
 			<label>Cockpit View Options</label>
 			<binding>
 				<command>dialog-show</command>

@@ -20,7 +20,7 @@
   <technique n="9">
     <predicate>
       <and>
-        <property>/sim/rendering/shader-experimental</property>
+        <property>/sim/rendering/crop-shader</property>
         <property>/sim/rendering/shader-effects</property>
         <or>
           <less-equal>

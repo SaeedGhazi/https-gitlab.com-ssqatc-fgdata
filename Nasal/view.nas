@@ -6,19 +6,19 @@
 var index = nil;    # current view index
 var views = nil;    # list of all view branches (/sim/view[n]) as props.Node
 var current = nil;  # current view branch (e.g. /sim/view[1]) as props.Node
-var view_popup = props.globals.initNode("/sim/view-name-popup",1,"BOOL");
+
 
 var hasmember = func(class, member) {
-    if (contains(class, member))
-        return 1;
-    if (!contains(class, "parents"))
-        return 0;
-    if (typeof(class.parents) != "vector")
-        return 0;
-    foreach (var parent; class.parents)
-        if (hasmember(parent, member))
-            return 1;
-    return 0;
+	if (contains(class, member))
+		return 1;
+	if (!contains(class, "parents"))
+		return 0;
+	if (typeof(class.parents) != "vector")
+		return 0;
+	foreach (var parent; class.parents)
+		if (hasmember(parent, member))
+			return 1;
+	return 0;
 }
 
 
@@ -104,7 +104,8 @@ var stepView = func(step, force = 0) {
     setprop("/sim/current-view/view-number", n);
 
     # And pop up a nice reminder
-    if (view_popup.getValue()) gui.popupTip(views[n].getNode("name").getValue());
+    var popup=getprop("/sim/view-name-popup");
+    if(popup == 1 or popup==nil) gui.popupTip(views[n].getNode("name").getValue());
 }
 
 ##
@@ -153,7 +154,7 @@ var panViewPitch = func(step) {
 # Reset view to default using current view manager (see default_handler).
 #
 var resetView = func {
-    manager.reset();
+	manager.reset();
 }
 
 
@@ -161,10 +162,10 @@ var resetView = func {
 # Default view handler used by view.manager.
 #
 var default_handler = {
-    reset : func {
-        resetViewDir();
-        resetFOV();
-    },
+	reset : func {
+		resetViewDir();
+		resetFOV();
+	},
 };
 
 
@@ -193,279 +194,279 @@ var default_handler = {
 #
 #
 var manager = {
-    current : { node: nil, handler: default_handler },
-    init : func {
-        me.views = {};
-        me.loopid = 0;
-        var viewnodes = props.globals.getNode("sim").getChildren("view");
-        forindex (var i; viewnodes)
-            me.views[i] = { node: viewnodes[i], handler: default_handler };
-        setlistener("/sim/current-view/view-number", func(n) {
-            manager.set_view(n.getValue());
-        }, 1);
-    },
-    register : func(which, handler = nil) {
-        if (num(which) == nil)
-            which = indexof(which);
-        if (handler == nil)
-            handler = default_handler;
-        me.views[which]["handler"] = handler;
-        if (hasmember(handler, "init"))
-            handler.init(me.views[which].node);
-        me.set_view();
-    },
-    set_view : func(which = nil) {
-        if (which == nil)
-            which = index;
-        elsif (num(which) == nil)
-            which = indexof(which);
+	current : { node: nil, handler: default_handler },
+	init : func {
+		me.views = {};
+		me.loopid = 0;
+		var viewnodes = props.globals.getNode("sim").getChildren("view");
+		forindex (var i; viewnodes)
+			me.views[i] = { node: viewnodes[i], handler: default_handler };
+		setlistener("/sim/current-view/view-number", func(n) {
+			manager.set_view(n.getValue());
+		}, 1);
+	},
+	register : func(which, handler = nil) {
+		if (num(which) == nil)
+			which = indexof(which);
+		if (handler == nil)
+			handler = default_handler;
+		me.views[which]["handler"] = handler;
+		if (hasmember(handler, "init"))
+			handler.init(me.views[which].node);
+		me.set_view();
+	},
+	set_view : func(which = nil) {
+		if (which == nil)
+			which = index;
+		elsif (num(which) == nil)
+			which = indexof(which);
 
-        me.loopid += 1;
-        if (hasmember(me.current.handler, "stop"))
-            me.current.handler.stop();
+		me.loopid += 1;
+		if (hasmember(me.current.handler, "stop"))
+			me.current.handler.stop();
 
-        me.current = me.views[which];
+		me.current = me.views[which];
 
-        if (hasmember(me.current.handler, "start"))
-            me.current.handler.start();
-        if (hasmember(me.current.handler, "update"))
-            me._loop_(me.loopid += 1);
-    },
-    reset : func {
-        if (hasmember(me.current.handler, "reset"))
-            me.current.handler.reset();
-        else
-            default_handler.reset();
-    },
-    _loop_ : func(id) {
-        id == me.loopid or return;
-        settimer(func { me._loop_(id) }, me.current.handler.update() or 0);
-    },
+		if (hasmember(me.current.handler, "start"))
+			me.current.handler.start();
+		if (hasmember(me.current.handler, "update"))
+			me._loop_(me.loopid += 1);
+	},
+	reset : func {
+		if (hasmember(me.current.handler, "reset"))
+			me.current.handler.reset();
+		else
+			default_handler.reset();
+	},
+	_loop_ : func(id) {
+		id == me.loopid or return;
+		settimer(func { me._loop_(id) }, me.current.handler.update() or 0);
+	},
 };
 
 
 var fly_by_view_handler = {
-    init : func {
-        me.latN = props.globals.getNode("/sim/viewer/latitude-deg", 1);
-        me.lonN = props.globals.getNode("/sim/viewer/longitude-deg", 1);
-        me.altN = props.globals.getNode("/sim/viewer/altitude-ft", 1);
-        me.hdgN = props.globals.getNode("/orientation/heading-deg", 1);
+	init : func {
+		me.latN = props.globals.getNode("/sim/viewer/latitude-deg", 1);
+		me.lonN = props.globals.getNode("/sim/viewer/longitude-deg", 1);
+		me.altN = props.globals.getNode("/sim/viewer/altitude-ft", 1);
+		me.hdgN = props.globals.getNode("/orientation/heading-deg", 1);
 
-        setlistener("/sim/signals/reinit", func(n) { n.getValue() or me.reset() });
-        setlistener("/sim/crashed", func(n) { n.getValue() and me.reset() });
-        setlistener("/sim/freeze/replay-state", func {
-            settimer(func { me.reset() }, 1); # time for replay to catch up
-        });
-        me.reset();
-    },
-    start : func {
-        me.reset();
-    },
-    reset: func {
-        me.chase = -getprop("/sim/chase-distance-m");
-        me.course = me.hdgN.getValue();
-        me.last = geo.aircraft_position();
-        me.setpos(1);
-        me.dist = 20;
-    },
-    setpos : func(force = 0) {
-        var pos = geo.aircraft_position();
+		setlistener("/sim/signals/reinit", func(n) { n.getValue() or me.reset() });
+		setlistener("/sim/crashed", func(n) { n.getValue() and me.reset() });
+		setlistener("/sim/freeze/replay-state", func {
+			settimer(func { me.reset() }, 1); # time for replay to catch up
+		});
+		me.reset();
+	},
+	start : func {
+		me.reset();
+	},
+	reset: func {
+		me.chase = -getprop("/sim/chase-distance-m");
+		me.course = me.hdgN.getValue();
+		me.last = geo.aircraft_position();
+		me.setpos(1);
+		me.dist = 20;
+	},
+	setpos : func(force = 0) {
+		var pos = geo.aircraft_position();
 
-        # check if the aircraft has moved enough
-        var dist = me.last.distance_to(pos);
-        if (dist < 1.7 * me.chase and !force)
-            return 1.13;
+		# check if the aircraft has moved enough
+		var dist = me.last.distance_to(pos);
+		if (dist < 1.7 * me.chase and !force)
+			return 1.13;
 
-        # "predict" and remember next aircraft position
-        var course = me.hdgN.getValue();
-        var delta_alt = (pos.alt() - me.last.alt()) * 0.5;
-        pos.apply_course_distance(course, dist * 0.8);
-        pos.set_alt(pos.alt() + delta_alt);
-        me.last.set(pos);
+		# "predict" and remember next aircraft position
+		var course = me.hdgN.getValue();
+		var delta_alt = (pos.alt() - me.last.alt()) * 0.5;
+		pos.apply_course_distance(course, dist * 0.8);
+		pos.set_alt(pos.alt() + delta_alt);
+		me.last.set(pos);
 
-        # apply random deviation
-        var radius = me.chase * (0.5 * rand() + 0.7);
-        var agl = getprop("/position/altitude-agl-ft") * FT2M;
-        if (agl > me.chase)
-            var angle = rand() * 2 * math.pi;
-        else
-            var angle = ((2 * rand() - 1) * 0.15 + 0.5) * (rand() < 0.5 ? -math.pi : math.pi);
+		# apply random deviation
+		var radius = me.chase * (0.5 * rand() + 0.7);
+		var agl = getprop("/position/altitude-agl-ft") * FT2M;
+		if (agl > me.chase)
+			var angle = rand() * 2 * math.pi;
+		else
+			var angle = ((2 * rand() - 1) * 0.15 + 0.5) * (rand() < 0.5 ? -math.pi : math.pi);
 
-        var dev_alt = math.cos(angle) * radius;
-        var dev_side = math.sin(angle) * radius;
-        pos.apply_course_distance(course + 90, dev_side);
+		var dev_alt = math.cos(angle) * radius;
+		var dev_side = math.sin(angle) * radius;
+		pos.apply_course_distance(course + 90, dev_side);
 
-        # and make sure it's not under ground
-        var lat = pos.lat();
-        var lon = pos.lon();
-        var alt = pos.alt();
-        var elev = geo.elevation(lat, lon);
-        if (elev != nil) {
-            elev += 2;   # min elevation
-            if (alt + dev_alt < elev and dev_alt < 0)
-                dev_alt = -dev_alt;
-            if (alt + dev_alt < elev)
-                alt = elev;
-            else
-                alt += dev_alt;
-        }
+		# and make sure it's not under ground
+		var lat = pos.lat();
+		var lon = pos.lon();
+		var alt = pos.alt();
+		var elev = geo.elevation(lat, lon);
+		if (elev != nil) {
+			elev += 2;   # min elevation
+			if (alt + dev_alt < elev and dev_alt < 0)
+				dev_alt = -dev_alt;
+			if (alt + dev_alt < elev)
+				alt = elev;
+			else
+				alt += dev_alt;
+		}
 
-        # set new view point
-        me.latN.setValue(lat);
-        me.lonN.setValue(lon);
-        me.altN.setValue(alt * M2FT);
-        return 7.3;
-    },
-    update : func {
-        return me.setpos();
-    },
+		# set new view point
+		me.latN.setValue(lat);
+		me.lonN.setValue(lon);
+		me.altN.setValue(alt * M2FT);
+		return 7.3;
+	},
+	update : func {
+		return me.setpos();
+	},
 };
 
 
 var model_view_handler = {
-    init: func(node) {
-        me.viewN = node;
-        me.current = nil;
-        me.legendN = props.globals.initNode("/sim/current-view/model-view", "");
-        me.dialog = props.Node.new({ "dialog-name": "model-view" });
-    },
-    start: func {
-        me.listener = setlistener("/sim/signals/multiplayer-updated", func me._update_(), 1);
-        me.reset();
-        fgcommand("dialog-show", me.dialog);
-    },
-    stop: func {
-        fgcommand("dialog-close", me.dialog);
-        removelistener(me.listener);
-    },
-    reset: func {
-        me.select(0);
-    },
-    find: func(callsign) {
-        forindex (var i; me.list)
-            if (me.list[i].callsign == callsign)
-                return i;
-        return nil;
-    },
-    select: func(which) {
-        if (num(which) == nil)
-            which = me.find(which) or 0;  # turn callsign into index
+	init: func(node) {
+		me.viewN = node;
+		me.current = nil;
+		me.legendN = props.globals.initNode("/sim/current-view/model-view", "");
+		me.dialog = props.Node.new({ "dialog-name": "model-view" });
+	},
+	start: func {
+		me.listener = setlistener("/sim/signals/multiplayer-updated", func me._update_(), 1);
+		me.reset();
+		fgcommand("dialog-show", me.dialog);
+	},
+	stop: func {
+		fgcommand("dialog-close", me.dialog);
+		removelistener(me.listener);
+	},
+	reset: func {
+		me.select(0);
+	},
+	find: func(callsign) {
+		forindex (var i; me.list)
+			if (me.list[i].callsign == callsign)
+				return i;
+		return nil;
+	},
+	select: func(which) {
+		if (num(which) == nil)
+			which = me.find(which) or 0;  # turn callsign into index
 
-        me.setup(me.list[which]);
-    },
-    next: func(step) {
-        var i = me.find(me.current);
-        i = i == nil ? 0 : math.mod(i + step, size(me.list));
-        me.setup(me.list[i]);
-    },
-    _update_: func {
-        var self = { callsign: getprop("/sim/multiplay/callsign"), model:,
-                node: props.globals, root: '/' };
-        me.list = [self] ~ multiplayer.model.list;
-        if (!me.find(me.current))
-            me.select(0);
-    },
-    setup: func(data) {
-        if (data.root == '/') {
-            var zoffset = getprop("/sim/chase-distance-m");
-            var ident = '[' ~ data.callsign ~ ']';
-        } else {
-            var zoffset = 70;
-            var ident = '"' ~ data.callsign ~ '" (' ~ data.model ~ ')';
-        }
+		me.setup(me.list[which]);
+	},
+	next: func(step) {
+		var i = me.find(me.current);
+		i = i == nil ? 0 : math.mod(i + step, size(me.list));
+		me.setup(me.list[i]);
+	},
+	_update_: func {
+		var self = { callsign: getprop("/sim/multiplay/callsign"), model:,
+				node: props.globals, root: '/' };
+		me.list = [self] ~ multiplayer.model.list;
+		if (!me.find(me.current))
+			me.select(0);
+	},
+	setup: func(data) {
+		if (data.root == '/') {
+			var zoffset = getprop("/sim/chase-distance-m");
+			var ident = '[' ~ data.callsign ~ ']';
+		} else {
+			var zoffset = 70;
+			var ident = '"' ~ data.callsign ~ '" (' ~ data.model ~ ')';
+		}
 
-        me.current = data.callsign;
-        me.legendN.setValue(ident);
-        setprop("/sim/current-view/z-offset-m", zoffset);
+		me.current = data.callsign;
+		me.legendN.setValue(ident);
+		setprop("/sim/current-view/z-offset-m", zoffset);
 
-        me.viewN.getNode("config").setValues({
-            "eye-lat-deg-path": data.root ~ "/position/latitude-deg",
-            "eye-lon-deg-path": data.root ~ "/position/longitude-deg",
-            "eye-alt-ft-path": data.root ~ "/position/altitude-ft",
-            "eye-heading-deg-path": data.root ~ "/orientation/heading-deg",
-            "target-lat-deg-path": data.root ~ "/position/latitude-deg",
-            "target-lon-deg-path": data.root ~ "/position/longitude-deg",
-            "target-alt-ft-path": data.root ~ "/position/altitude-ft",
-            "target-heading-deg-path": data.root ~ "/orientation/heading-deg",
-            "target-pitch-deg-path": data.root ~ "/orientation/pitch-deg",
-            "target-roll-deg-path": data.root ~ "/orientation/roll-deg",
-        });
-    },
+		me.viewN.getNode("config").setValues({
+			"eye-lat-deg-path": data.root ~ "/position/latitude-deg",
+			"eye-lon-deg-path": data.root ~ "/position/longitude-deg",
+			"eye-alt-ft-path": data.root ~ "/position/altitude-ft",
+			"eye-heading-deg-path": data.root ~ "/orientation/heading-deg",
+			"target-lat-deg-path": data.root ~ "/position/latitude-deg",
+			"target-lon-deg-path": data.root ~ "/position/longitude-deg",
+			"target-alt-ft-path": data.root ~ "/position/altitude-ft",
+			"target-heading-deg-path": data.root ~ "/orientation/heading-deg",
+			"target-pitch-deg-path": data.root ~ "/orientation/pitch-deg",
+			"target-roll-deg-path": data.root ~ "/orientation/roll-deg",
+		});
+	},
 };
 
 
 var pilot_view_limiter = {
-    new : func {
-        return { parents: [pilot_view_limiter] };
-    },
-    init : func {
-        me.hdgN = props.globals.getNode("/sim/current-view/heading-offset-deg");
-        me.xoffsetN = props.globals.getNode("/sim/current-view/x-offset-m");
-        me.xoffset_lowpass = aircraft.lowpass.new(0.1);
-        me.last_offset = 0;
-    },
-    start : func {
-        var limits = current.getNode("config/limits", 1);
-        me.left = {
-            heading_max : abs(limits.getNode("left/heading-max-deg", 1).getValue() or 1000),
-            threshold : abs(limits.getNode("left/x-offset-threshold-deg", 1).getValue() or 0),
-            xoffset_max : abs(limits.getNode("left/x-offset-max-m", 1).getValue() or 0),
-        };
-        me.right = {
-            heading_max : -abs(limits.getNode("right/heading-max-deg", 1).getValue() or 1000),
-            threshold : -abs(limits.getNode("right/x-offset-threshold-deg", 1).getValue() or 0),
-            xoffset_max : -abs(limits.getNode("right/x-offset-max-m", 1).getValue() or 0),
-        };
-        me.left.scale = me.left.xoffset_max / (me.left.heading_max - me.left.threshold);
-        me.right.scale = me.right.xoffset_max / (me.right.heading_max - me.right.threshold);
-        me.last_hdg = normdeg(me.hdgN.getValue());
-        me.enable_xoffset = me.right.xoffset_max > 0.001 or me.left.xoffset_max > 0.001;
-    },
-    update : func {
-        if (getprop("/devices/status/keyboard/ctrl"))
-            return;
+	new : func {
+		return { parents: [pilot_view_limiter] };
+	},
+	init : func {
+		me.hdgN = props.globals.getNode("/sim/current-view/heading-offset-deg");
+		me.xoffsetN = props.globals.getNode("/sim/current-view/x-offset-m");
+		me.xoffset_lowpass = aircraft.lowpass.new(0.1);
+		me.last_offset = 0;
+	},
+	start : func {
+		var limits = current.getNode("config/limits", 1);
+		me.left = {
+			heading_max : abs(limits.getNode("left/heading-max-deg", 1).getValue() or 1000),
+			threshold : abs(limits.getNode("left/x-offset-threshold-deg", 1).getValue() or 0),
+			xoffset_max : abs(limits.getNode("left/x-offset-max-m", 1).getValue() or 0),
+		};
+		me.right = {
+			heading_max : -abs(limits.getNode("right/heading-max-deg", 1).getValue() or 1000),
+			threshold : -abs(limits.getNode("right/x-offset-threshold-deg", 1).getValue() or 0),
+			xoffset_max : -abs(limits.getNode("right/x-offset-max-m", 1).getValue() or 0),
+		};
+		me.left.scale = me.left.xoffset_max / (me.left.heading_max - me.left.threshold);
+		me.right.scale = me.right.xoffset_max / (me.right.heading_max - me.right.threshold);
+		me.last_hdg = normdeg(me.hdgN.getValue());
+		me.enable_xoffset = me.right.xoffset_max > 0.001 or me.left.xoffset_max > 0.001;
+	},
+	update : func {
+		if (getprop("/devices/status/keyboard/ctrl"))
+			return;
 
-        var hdg = normdeg(me.hdgN.getValue());
-        if (abs(me.last_hdg - hdg) > 180)  # avoid wrap-around skips
-            me.hdgN.setDoubleValue(hdg = me.last_hdg);
-        elsif (hdg > me.left.heading_max)
-            me.hdgN.setDoubleValue(hdg = me.left.heading_max);
-        elsif (hdg < me.right.heading_max)
-            me.hdgN.setDoubleValue(hdg = me.right.heading_max);
-        me.last_hdg = hdg;
+		var hdg = normdeg(me.hdgN.getValue());
+		if (abs(me.last_hdg - hdg) > 180)  # avoid wrap-around skips
+			me.hdgN.setDoubleValue(hdg = me.last_hdg);
+		elsif (hdg > me.left.heading_max)
+			me.hdgN.setDoubleValue(hdg = me.left.heading_max);
+		elsif (hdg < me.right.heading_max)
+			me.hdgN.setDoubleValue(hdg = me.right.heading_max);
+		me.last_hdg = hdg;
 
-        # translate view on X axis to look far right or far left
-        if (me.enable_xoffset) {
-            var offset = 0;
-            if (hdg > me.left.threshold)
-                offset = (me.left.threshold - hdg) * me.left.scale;
-            elsif (hdg < me.right.threshold)
-                offset = (me.right.threshold - hdg) * me.right.scale;
+		# translate view on X axis to look far right or far left
+		if (me.enable_xoffset) {
+			var offset = 0;
+			if (hdg > me.left.threshold)
+				offset = (me.left.threshold - hdg) * me.left.scale;
+			elsif (hdg < me.right.threshold)
+				offset = (me.right.threshold - hdg) * me.right.scale;
 
-            var new_offset = me.xoffset_lowpass.filter(offset);
-            me.xoffsetN.setDoubleValue(me.xoffsetN.getValue() - me.last_offset + new_offset);
-            me.last_offset = new_offset;
-        }
-        return 0;
-    },
+			var new_offset = me.xoffset_lowpass.filter(offset);
+			me.xoffsetN.setDoubleValue(me.xoffsetN.getValue() - me.last_offset + new_offset);
+			me.last_offset = new_offset;
+		}
+		return 0;
+	},
 };
 
 
 var panViewDir = func(step) {	# FIXME overrides panViewDir function from above; needs better integration
-    if (getprop("/sim/freeze/master"))
-        var prop = "/sim/current-view/heading-offset-deg";
-    else
-        var prop = "/sim/current-view/goal-heading-offset-deg";
-    var viewVal = getprop(prop);
-    var delta = step * VIEW_PAN_RATE * getprop("/sim/time/delta-realtime-sec");
-    var viewValSlew = normdeg(viewVal + delta);
-    var headingMax = abs(current.getNode("config/limits/left/heading-max-deg", 1).getValue() or 1000);
-    var headingMin = -abs(current.getNode("config/limits/right/heading-max-deg", 1).getValue() or 1000);
-    if (viewValSlew > headingMax)
-        viewValSlew = headingMax;
-    elsif (viewValSlew < headingMin)
-        viewValSlew = headingMin;
-    setprop(prop, viewValSlew);
+	if (getprop("/sim/freeze/master"))
+		var prop = "/sim/current-view/heading-offset-deg";
+	else
+		var prop = "/sim/current-view/goal-heading-offset-deg";
+	var viewVal = getprop(prop);
+	var delta = step * VIEW_PAN_RATE * getprop("/sim/time/delta-realtime-sec");
+	var viewValSlew = normdeg(viewVal + delta);
+	var headingMax = abs(current.getNode("config/limits/left/heading-max-deg", 1).getValue() or 1000);
+	var headingMin = -abs(current.getNode("config/limits/right/heading-max-deg", 1).getValue() or 1000);
+	if (viewValSlew > headingMax)
+		viewValSlew = headingMax;
+	elsif (viewValSlew < headingMin)
+		viewValSlew = headingMin;
+	setprop(prop, viewValSlew);
 }
 
 
@@ -506,11 +507,11 @@ var panViewDir = func(step) {	# FIXME overrides panViewDir function from above; 
 # Normalize angle to  -180 <= angle < 180
 #
 var normdeg = func(a) {
-    while (a >= 180)
-        a -= 360;
-    while (a < -180)
-        a += 360;
-    return a;
+	while (a >= 180)
+		a -= 360;
+	while (a < -180)
+		a += 360;
+	return a;
 }
 
 
@@ -519,24 +520,24 @@ var normdeg = func(a) {
 # field-of-view parameter is also managed by this class.)
 #
 var ViewAxis = {
-    new : func(prop) {
-        var m = { parents : [ViewAxis] };
-        m.prop = props.globals.getNode(prop, 1);
-        if (m.prop.getType() == "NONE")
-            m.prop.setDoubleValue(0);
+	new : func(prop) {
+		var m = { parents : [ViewAxis] };
+		m.prop = props.globals.getNode(prop, 1);
+		if (m.prop.getType() == "NONE")
+			m.prop.setDoubleValue(0);
 
-        m.from = m.to = m.prop.getValue();
-        return m;
-    },
-    reset : func {
-        me.from = me.to = normdeg(me.prop.getValue());
-    },
-    target : func(v) {
-        me.to = normdeg(v);
-    },
-    move : func(blend) {
-        me.prop.setValue(me.from + blend * (me.to - me.from));
-    },
+		m.from = m.to = m.prop.getValue();
+		return m;
+	},
+	reset : func {
+		me.from = me.to = normdeg(me.prop.getValue());
+	},
+	target : func(v) {
+		me.to = normdeg(v);
+	},
+	move : func(blend) {
+		me.prop.setValue(me.from + blend * (me.to - me.from));
+	},
 };
 
 
@@ -545,62 +546,62 @@ var ViewAxis = {
 # view.point: handles smooth view movements
 #
 var point = {
-    init : func {
-        me.axes = {
-            "heading-offset-deg" : ViewAxis.new("/sim/current-view/goal-heading-offset-deg"),
-            "pitch-offset-deg" : ViewAxis.new("/sim/current-view/goal-pitch-offset-deg"),
-            "roll-offset-deg" : ViewAxis.new("/sim/current-view/goal-roll-offset-deg"),
-            "x-offset-m" : ViewAxis.new("/sim/current-view/x-offset-m"),
-            "y-offset-m" : ViewAxis.new("/sim/current-view/y-offset-m"),
-            "z-offset-m" : ViewAxis.new("/sim/current-view/z-offset-m"),
-            "field-of-view" : ViewAxis.new("/sim/current-view/field-of-view"),
-        };
-        me.storeN = props.Node.new();
-        me.dtN = props.globals.getNode("/sim/time/delta-realtime-sec", 1);
-        me.currviewN = props.globals.getNode("/sim/current-view", 1);
-        me.blend = 0;
-        me.loop_id = 0;
-        props.copy(props.globals.getNode("/sim/view/config"), me.storeN);
-    },
-    save : func {
-        me.storeN = props.Node.new();
-        props.copy(me.currviewN, me.storeN);
-        return me.storeN;
-    },
-    restore : func {
-        me.move(me.storeN);
-    },
-    move : func(prop, time = nil) {
-        prop != nil or return;
-        foreach (var a; keys(me.axes)) {
-            var n = prop.getNode(a);
-            me.axes[a].reset();
-            if (n != nil)
-                me.axes[a].target(n.getValue());
-        }
-        var m = prop.getNode("move-time-sec");
-        if (m != nil)
-            time = m.getValue();
+	init : func {
+		me.axes = {
+			"heading-offset-deg" : ViewAxis.new("/sim/current-view/goal-heading-offset-deg"),
+			"pitch-offset-deg" : ViewAxis.new("/sim/current-view/goal-pitch-offset-deg"),
+			"roll-offset-deg" : ViewAxis.new("/sim/current-view/goal-roll-offset-deg"),
+			"x-offset-m" : ViewAxis.new("/sim/current-view/x-offset-m"),
+			"y-offset-m" : ViewAxis.new("/sim/current-view/y-offset-m"),
+			"z-offset-m" : ViewAxis.new("/sim/current-view/z-offset-m"),
+			"field-of-view" : ViewAxis.new("/sim/current-view/field-of-view"),
+		};
+		me.storeN = props.Node.new();
+		me.dtN = props.globals.getNode("/sim/time/delta-realtime-sec", 1);
+		me.currviewN = props.globals.getNode("/sim/current-view", 1);
+		me.blend = 0;
+		me.loop_id = 0;
+		props.copy(props.globals.getNode("/sim/view/config"), me.storeN);
+	},
+	save : func {
+		me.storeN = props.Node.new();
+		props.copy(me.currviewN, me.storeN);
+		return me.storeN;
+	},
+	restore : func {
+		me.move(me.storeN);
+	},
+	move : func(prop, time = nil) {
+		prop != nil or return;
+		foreach (var a; keys(me.axes)) {
+			var n = prop.getNode(a);
+			me.axes[a].reset();
+			if (n != nil)
+				me.axes[a].target(n.getValue());
+		}
+		var m = prop.getNode("move-time-sec");
+		if (m != nil)
+			time = m.getValue();
 
-        if (time == nil)
-            time = 1;
+		if (time == nil)
+			time = 1;
 
-        me.blend = -1;   # range -1 .. 1
-        me._loop_(me.loop_id += 1, time);
-    },
-    _loop_ : func(id, time) {
-        me.loop_id == id or return;
-        me.blend += me.dtN.getValue() / time;
-        if (me.blend > 1)
-            me.blend = 1;
+		me.blend = -1;   # range -1 .. 1
+		me._loop_(me.loop_id += 1, time);
+	},
+	_loop_ : func(id, time) {
+		me.loop_id == id or return;
+		me.blend += me.dtN.getValue() / time;
+		if (me.blend > 1)
+			me.blend = 1;
 
-        var b = (math.sin(me.blend * math.pi / 2) + 1) / 2; # range 0 .. 1
-        foreach (var a; keys(me.axes))
-            me.axes[a].move(b);
+		var b = (math.sin(me.blend * math.pi / 2) + 1) / 2; # range 0 .. 1
+		foreach (var a; keys(me.axes))
+			me.axes[a].move(b);
 
-        if (me.blend < 1)
-            settimer(func { me._loop_(id, time) }, 0);
-    },
+		if (me.blend < 1)
+			settimer(func { me._loop_(id, time) }, 0);
+	},
 };
 
 
@@ -609,52 +610,52 @@ var fovProp = nil;
 
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
-    views = props.globals.getNode("/sim").getChildren("view");
-    fovProp = props.globals.getNode("/sim/current-view/field-of-view");
-    point.init();
+	views = props.globals.getNode("/sim").getChildren("view");
+	fovProp = props.globals.getNode("/sim/current-view/field-of-view");
+	point.init();
 
-    setlistener("/sim/current-view/view-number", func(n) {
-        current = views[index = n.getValue()];
-    }, 1);
+	setlistener("/sim/current-view/view-number", func(n) {
+		current = views[index = n.getValue()];
+	}, 1);
 
-    props.globals.initNode("/position/altitude-agl-ft"); # needed by Fly-By View
-    manager.init();
-    manager.register("Fly-By View", fly_by_view_handler);
-    manager.register("Model View", model_view_handler);
+	props.globals.initNode("/position/altitude-agl-ft"); # needed by Fly-By View
+	manager.init();
+	manager.register("Fly-By View", fly_by_view_handler);
+	manager.register("Model View", model_view_handler);
 });
 
 
 _setlistener("/sim/signals/fdm-initialized", func {
-    var zoffset = nil;
-    foreach (var v; views) {
-        var index = v.getIndex();
-        if (index > 7 and index < 100) {
-            globals["view"] = nil;
-            die("\n***\n*\n*  Illegal use of reserved view index "
-                    ~ index ~ ". Use indices >= 100!\n*\n***");
-        } elsif (index >= 100 and index < 200) {
-            if (v.getNode("name") == nil)
-                continue;
-            var e = v.getNode("enabled");
-            if (e != nil) {
-                aircraft.data.add(e);
-                e.setAttribute("userarchive", 0);
-            }
-        }
-    }
+	var zoffset = nil;
+	foreach (var v; views) {
+		var index = v.getIndex();
+		if (index > 7 and index < 100) {
+			globals["view"] = nil;
+			die("\n***\n*\n*  Illegal use of reserved view index "
+					~ index ~ ". Use indices >= 100!\n*\n***");
+		} elsif (index >= 100 and index < 200) {
+			if (v.getNode("name") == nil)
+				continue;
+			var e = v.getNode("enabled");
+			if (e != nil) {
+				aircraft.data.add(e);
+				e.setAttribute("userarchive", 0);
+			}
+		}
+	}
 
-    forindex (var i; views) {
-        var limits = views[i].getNode("config/limits/enabled");
-        if (limits != nil) {
-            func (i) {
-                var limiter = pilot_view_limiter.new();
-                setlistener(limits, func(n) {
-                    manager.register(i, n.getBoolValue() ? limiter : nil);
-                    manager.set_view();
-                }, 1);
-            }(i);
-        }
-    }
+	forindex (var i; views) {
+		var limits = views[i].getNode("config/limits/enabled");
+		if (limits != nil) {
+			func (i) {
+				var limiter = pilot_view_limiter.new();
+				setlistener(limits, func(n) {
+					manager.register(i, n.getBoolValue() ? limiter : nil);
+					manager.set_view();
+				}, 1);
+			}(i);
+		}
+	}
 });
 
 

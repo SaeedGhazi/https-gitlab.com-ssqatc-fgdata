@@ -281,6 +281,8 @@ Started September 2000 by David Megginson, david@megginson.com
     <heading-deg type="double">0</heading-deg>
   </tower>
 
+  <view-name-popup type="bool" userarchive="y">true</view-name-popup>
+
   <view>
     <name>Cockpit View</name>
     <enabled type="bool" userarchive="y">true</enabled>

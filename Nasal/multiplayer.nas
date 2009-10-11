@@ -13,12 +13,14 @@ var is_active = func getprop("/sim/multiplay/txport") or getprop("/sim/multiplay
 
 
 var lastmsg = {};
+var ignore = {};
 
 var check_messages = func {
     foreach (var mp; values(model.callsign)) {
         var msg = mp.node.getNode("sim/multiplay/chat", 1).getValue();
         if (msg and msg != lastmsg[mp.callsign]) {
-            echo_message(mp.callsign, msg);
+            if (!contains(ignore, mp.callsign))
+                echo_message(mp.callsign, msg);
             lastmsg[mp.callsign] = msg;
         }
     }
@@ -164,13 +166,15 @@ var dialog = {
         #
         # "private"
         var font = { name: "FIXED_8x13" };
-        me.header = [" callsign", "model", "brg", func dialog.dist_hdr, func dialog.alt_hdr ~ " "];
+        me.header = [" callsign", "model", "brg", func dialog.dist_hdr, func dialog.alt_hdr ~ " ", "ignore" ~ " "];
         me.columns = [
-            { property: "callsign",    format: " %s",    label: "-----------",    halign: "fill" },
-            { property: "model-short", format: "%s",     label: "--------------", halign: "fill" },
-            { property: "bearing-to",  format: " %3.0f", label: "----",           halign: "right", font: font },
-            { property: func dialog.dist_node, format:" %8.2f", label: "---------", halign: "right", font: font },
-            { property: func dialog.alt_node,  format:" %7.0f", label: "---------", halign: "right", font: font },
+            { type: "text", property: "callsign",    format: " %s",    label: "-----------",    halign: "fill" },
+            { type: "text", property: "model-short", format: "%s",     label: "--------------", halign: "fill" },
+            { type: "text", property: "bearing-to",  format: " %3.0f", label: "----",           halign: "right", font: font },
+            { type: "text", property: func dialog.dist_node, format:" %8.2f", label: "---------", halign: "right", font: font },
+            { type: "text", property: func dialog.alt_node,  format:" %7.0f", label: "---------", halign: "right", font: font },
+            { type: "checkbox", property: "sim/multiplay/ignore", callback: "multiplayer.dialog.toggle_ignore",
+              argprop: "callsign", label: "---------", halign: "right", font: font },
         ];
         me.name = "who-is-online";
         me.dialog = nil;
@@ -239,11 +243,17 @@ var dialog = {
             var col = 0;
             var color = mp.available ? me.fg[odd = !odd] : me.fg[2];
             foreach (var column; me.columns) {
-                var w = content.addChild("text");
-                w.node.setValues(column);
                 var p = typeof(column.property) == "func" ? column.property() : column.property;
-                w.node.setValues({ row: row, col: col, live: 1, property: mp.root ~ "/" ~ p });
+                var w = nil;
+                if (column.type == "text") {
+                    w = content.addChild("text");
+                    w.node.setValues(column);
+                } elsif (column.type == "checkbox") {
+                    w = content.addChild("checkbox");
+                    w.setBinding("nasal", column.callback ~ "(getprop(\"" ~ mp.root ~ "/" ~ column.argprop ~ "\"))");
+                }
                 w.setColor(color[0], color[1], color[2], color[3]);
+                w.node.setValues({ row: row, col: col, live: 1, property: mp.root ~ "/" ~ p });
                 col += 1;
             }
             row += 1;
@@ -275,6 +285,7 @@ var dialog = {
                 "distance-to-km": distance / 1000.0,
                 "distance-to-nm": distance * M2NM,
                 "position/altitude-m": n.getNode("position/altitude-ft").getValue() * FT2M,
+                "sim/multiplay/ignore": contains(ignore, mp.callsign),
             });
         }
         if (PILOTSDLG_RUNNING)
@@ -300,6 +311,13 @@ var dialog = {
             me.alt_hdr = "alt-ft";
             me.dist_hdr = "dist-nm";
             me.unit_button = "SI";
+        }
+    },
+    toggle_ignore: func (callsign) {
+        if (contains(ignore, callsign)) {
+            delete(ignore, callsign);
+        } else {
+            ignore[callsign] = 1;
         }
     },
     close: func {

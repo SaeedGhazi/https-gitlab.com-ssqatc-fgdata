@@ -358,8 +358,16 @@ var model = {
         me.L = [];
         me.warned = {};
         me.fg_root = string.normpath(getprop("/sim/fg-root")) ~ '/';
-        append(me.L, setlistener("ai/models/model-added", func(n) me.update(n.getValue())));
-        append(me.L, setlistener("ai/models/model-removed", func(n) me.update(n.getValue())));
+        append(me.L, setlistener("ai/models/model-added", func(n) {
+            # Defer update() to the next convenient time to allow the
+            # new MP entry to become fully initialized.
+            settimer(func me.update(n.getValue()), 0);
+        }));
+        append(me.L, setlistener("ai/models/model-removed", func(n) {
+            # Defer update() to the next convenient time to allow the
+            # old MP entry to become fully deactivated.
+            settimer(func me.update(n.getValue()), 0);
+        }));
         me.update();
     },
     update: func(n = nil) {
@@ -367,18 +375,13 @@ var model = {
         if (n != nil and changedNode.getName() != "multiplayer")
             return;
 
-        var changedNodeIndex = changedNode != nil ? changedNode.getIndex() : -1;
-
         me.data = {};
         me.callsign = {};
         me.available = [];
         me.unavailable = [];
 
         foreach (var n; props.globals.getNode("ai/models", 1).getChildren("multiplayer")) {
-            # Ignore valid property for the newly added multiplayer aircraft.
-            # It is false when model-added is triggered and will become true after this
-            # listener is finished
-            if (n.getIndex() != changedNodeIndex and !n.getNode("valid", 1).getValue())
+            if (!n.getNode("valid").getValue())
                 continue;
 
             if ((var callsign = n.getNode("callsign")) == nil or !(callsign = callsign.getValue()))

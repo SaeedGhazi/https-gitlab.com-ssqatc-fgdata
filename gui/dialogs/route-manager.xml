@@ -204,7 +204,7 @@ command interface /autopilot/route-manager/input:
 			<halign>fill</halign>
 			<stretch>true</stretch>
 			<pref-width>150</pref-width>
-			<property>/autopilot/route-manager/cruise/speed</property>
+			<property>/autopilot/route-manager/cruise/speed-kts</property>
 		</input>
 		
 		<text>
@@ -216,7 +216,7 @@ command interface /autopilot/route-manager/input:
 			<halign>fill</halign>
 			<stretch>true</stretch>
 			<pref-width>150</pref-width>
-			<property>/sim/gui/dialogs/route-manager/cruise-alt</property>
+			<property>/autopilot/route-manager/cruise/altitude-ft</property>
 		</input>
 	</group>
 	

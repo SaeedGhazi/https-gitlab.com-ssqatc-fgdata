@@ -93,18 +93,10 @@
 		<label>View</label>
 
 		<item>
-			<label>Toggle 2D Panel</label>
-			<binding>
-				<command>property-toggle</command>
-				<property>/sim/panel/visibility</property>
-			</binding>
-		</item>
-
-		<item>
-			<label>View Options</label>
+			<label>Display Options</label>
 			<binding>
 				<command>dialog-show</command>
-				<dialog-name>view</dialog-name>
+				<dialog-name>display</dialog-name>
 			</binding>
 		</item>
 
@@ -113,14 +105,6 @@
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>rendering</dialog-name>
-			</binding>
-		</item>
-
-		<item>
-			<label>Effects</label>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>shader-options</dialog-name>
 			</binding>
 		</item>
 

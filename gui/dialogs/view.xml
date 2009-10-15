@@ -11,18 +11,7 @@
 
 	<hrule/>
 
-	<checkbox>
-		<halign>left</halign>
-		<label>Enable view name popup</label>
-		<property>/sim/view-name-popup</property>
-		<binding>
-			<command>dialog-apply</command>
-		</binding>
-	</checkbox>
-
-	<hrule/>
-
-	<nasal>
+		<nasal>
 		<open>
 			var group = cmdarg().getNode("group");
 			var ac = getprop("/sim/aircraft");

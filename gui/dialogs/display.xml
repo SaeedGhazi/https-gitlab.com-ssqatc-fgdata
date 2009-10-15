@@ -78,6 +78,20 @@
         </binding>
     </button>
 
+    <button>
+        <halign>center</halign>
+        <legend>Save current FOV</legend>
+        <binding>
+            <command>nasal</command>
+            <script>
+                var nm=getprop("/sim/current-view/view-number");
+                var vw = getprop("/sim/current-view/field-of-view");
+                setprop("/sim/current-view/config/default-field-of-view-deg",vw);
+                setprop("/sim/view["~nm~"]/config/default-field-of-view-deg",vw);
+            </script>
+        </binding>
+    </button>
+
     </group>
 
   <hrule/>

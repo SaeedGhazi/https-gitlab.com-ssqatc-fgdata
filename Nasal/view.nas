@@ -49,7 +49,8 @@ var increase = func {
     if(val == max) { return; }
     if(val > max) { val = max }
     fovProp.setDoubleValue(val);
-    gui.popupTip(sprintf("FOV: %.1f", val));
+    var popup=getprop("/sim/view-name-popup");
+    if(popup == 1 or popup==nil) gui.popupTip(sprintf("FOV: %.1f", val));
 }
 
 ##
@@ -59,7 +60,8 @@ var decrease = func {
     calcMul();
     var val = fovProp.getValue() / mul;
     fovProp.setDoubleValue(val);
-    gui.popupTip(sprintf("FOV: %.1f%s", val, val < min ? " (overzoom)" : ""));
+    var popup=getprop("/sim/view-name-popup");
+    if(popup == 1 or popup==nil) gui.popupTip(sprintf("FOV: %.1f%s", val, val < min ? " (overzoom)" : ""));
 }
 
 ##

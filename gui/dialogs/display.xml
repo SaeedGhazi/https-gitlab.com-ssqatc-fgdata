@@ -35,7 +35,7 @@
 
     <checkbox>
         <halign>left</halign>
-        <label>Enable view name popup</label>
+        <label>Enable view popups</label>
         <property>/sim/view-name-popup</property>
         <binding>
             <command>dialog-apply</command>

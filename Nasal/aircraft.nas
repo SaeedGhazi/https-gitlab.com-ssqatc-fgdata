@@ -823,11 +823,12 @@ var tyresmoke = {
 		var diff = math.abs(rollspeed - filtered_rollspeed);
 		var diff_norm = diff > 0 ? diff / rollspeed : 0;
 
-		if (wow and vert_speed < -0.05 and diff_norm > 0.05
+		if (wow and vert_speed < -1.2 and diff_norm > 0.05
 				and friction_factor > 0.7 and groundspeed > 50
 				and rain < 0.20) {
 			me.tyresmoke.setValue(1);
 			me.spray.setValue(0);
+			me.spraydensity.setValue(0);
 
 		} elsif (wow and groundspeed > 5 and rain >= 0.20) {
 			me.tyresmoke.setValue(0);

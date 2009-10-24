@@ -21,6 +21,7 @@ Started September 2000 by David Megginson, david@megginson.com
   <!-- Limit the time we need to spend in simulation loops to 1 second -->
   <max-simtime-per-frame>1.0</max-simtime-per-frame>
 
+  <session type="int" userarchive="y">0</session>
   <paths>
    <screenshot-dir/> <!-- defaults to current working dir -->
    <validate>
@@ -51,7 +52,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <save-on-exit type="bool" userarchive="y">true</save-on-exit>
    <browser-app write="n">firefox -new-tab "%u"</browser-app><!--  help viewer; only used under Unix -->
    <terminal-ansi-colors type="bool">true</terminal-ansi-colors>
-   <season type="string">summer</season>
+   <season type="string">summer</season
   </startup>
   <rendering>
    <debug type="bool">false</debug>

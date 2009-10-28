@@ -78,19 +78,19 @@ For the anxious reader, here is a complete example of a text node:
 
     <alignment>center-center</alignment> <!-- alignment of the text itself -->
     <!-- possible values are 
-    <alignment>left-top<alignment>
-    <alignment>left-center<alignment>
-    <alignment>left-bottom<alignment>
-    <alignment>center-top<alignment>
-    <alignment>center-center<alignment>
-    <alignment>center-bottom<alignment>
-    <alignment>right-top<alignment>
-    <alignment>right-center<alignment>
-    <alignment>right-bottom<alignment>
-    <alignment>left-baseline<alignment>
-    <alignment>center-baseline<alignment>
-    <alignment>right-baseline<alignment>
-    <alignment>baseline<alignment>
+    <alignment>left-top</alignment>
+    <alignment>left-center</alignment>
+    <alignment>left-bottom</alignment>
+    <alignment>center-top</alignment>
+    <alignment>center-center</alignment>
+    <alignment>center-bottom</alignment>
+    <alignment>right-top</alignment>
+    <alignment>right-center</alignment>
+    <alignment>right-bottom</alignment>
+    <alignment>left-baseline</alignment>
+    <alignment>center-baseline</alignment>
+    <alignment>right-baseline</alignment>
+    <alignment>baseline</alignment>
     -->
 
   </text>

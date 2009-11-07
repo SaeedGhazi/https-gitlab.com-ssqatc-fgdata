@@ -93,6 +93,41 @@ command interface /autopilot/route-manager/input:
 			var activate_fp = func {
 				cmd.setValue("@activate");
 			}
+			
+			var departureRunways = dlg.getNode("departure-runways", 1);
+			var destRunways = dlg.getNode("destination-runways", 1);
+
+			var updateRunways = func {
+				gui.dialog_apply("route-manager", "departure-airport");
+				gui.dialog_apply("route-manager", "destination-airport");
+				
+				var depIcao = routem.getNode("departure").getNode("airport").getValue();
+				departureRunways.removeChildren("value");
+				
+				var apt = airportinfo(depIcao);
+				if (apt != nil) {
+					var i=0;
+					foreach (var rwy; keys(apt.runways)) {
+						departureRunways.getNode("value[" ~ i ~ "]", 1).setValue(rwy);
+						i += 1;
+					}
+				}
+				
+				var destIcao = routem.getNode("destination").getNode("airport").getValue();
+				destRunways.removeChildren("value");
+				
+				var apt = airportinfo(destIcao);
+				if (apt != nil) {
+					var i=0;
+					foreach (var rwy; keys(apt.runways)) {
+						destRunways.getNode("value[" ~ i ~ "]", 1).setValue(rwy);
+						i += 1;
+					}
+				}
+				
+				
+				gui.dialog_update("route-manager");
+			}
 		</open>
 
 		<close>
@@ -135,21 +170,38 @@ command interface /autopilot/route-manager/input:
 		</text>
 		<input>
 			<name>departure-airport</name>
-			<halign>fill</halign>
-			<stretch>true</stretch>
-			<pref-width>150</pref-width>
+			<pref-width>60</pref-width>
 			<property>/autopilot/route-manager/departure/airport</property>
 		</input>
+		
+		<text>
+			<format>%s</format>
+			<property>/autopilot/route-manager/departure/name</property>
+			<live>true</live>
+				<stretch>true</stretch>
+			<halign>fill</halign>
+		</text>
+		
+		<button>
+			<legend>X</legend>
+			<binding>
+			<command>nasal</command>
+			<script>
+				updateRunways();
+			</script>
+			</binding>
+		</button>
+		
 		<text>
 			<label>Rwy:</label>
 		</text>
-		<input>
+		<combo>
 			<name>departure-runway</name>
-			<halign>fill</halign>
-			<stretch>true</stretch>
 			<pref-width>60</pref-width>
 			<property>/autopilot/route-manager/departure/runway</property>
-		</input>
+		   	<editable>false</editable>
+		   	<properties>/sim/gui/dialogs/route-manager/departure-runways</properties>
+		</combo>
 	</group>
 	
 	<group>
@@ -160,21 +212,27 @@ command interface /autopilot/route-manager/input:
 		</text>
 		<input>
 			<name>destination-airport</name>
-			<halign>fill</halign>
-			<stretch>true</stretch>
-			<pref-width>150</pref-width>
+			<pref-width>60</pref-width>
 			<property>/autopilot/route-manager/destination/airport</property>
 		</input>
 		<text>
+			<stretch>true</stretch>
+			<format>%s</format>
+			<property>/autopilot/route-manager/destination/name</property>
+			<live>true</live>
+			<halign>fill</halign>
+		</text>
+		
+		<text>
 			<label>Rwy:</label>
 		</text>
-		<input>
+		<combo>
 			<name>destination-runway</name>
-			<halign>fill</halign>
-			<stretch>true</stretch>
 			<pref-width>60</pref-width>
 			<property>/autopilot/route-manager/destination/runway</property>
-		</input>
+		   	<editable>false</editable>
+		   	<properties>/sim/gui/dialogs/route-manager/destination-runways</properties>
+		</combo>
 	</group>
 	
 	<group>

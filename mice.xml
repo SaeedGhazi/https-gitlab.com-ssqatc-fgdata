@@ -24,6 +24,17 @@ current mode for each mouse is held in the
    <constrained type="bool">false</constrained>
    <pass-through type="bool">true</pass-through>
 
+   <button n="0">
+    <binding>
+     <condition>
+       <property>/sim/menubar/autovisibility/enabled</property>
+     </condition>
+     <command>property-assign</command>
+     <property>//sim/menubar/visibility</property>
+     <value type="bool">false</value>
+    </binding>
+   </button>
+
    <button n="2">
     <binding>
      <command>property-assign</command>

@@ -505,6 +505,10 @@ Started September 2000 by David Megginson, david@megginson.com
   <menubar>
    <visibility type="bool" userarchive="y">true</visibility>
    <default include="gui/menubar.xml"/>
+   <autovisibility>
+    <enabled type="bool" userarchive="y">false</enabled>
+    <edge-size type="int">5</edge-size>
+   </autovisibility>
   </menubar>
 
   <gui>

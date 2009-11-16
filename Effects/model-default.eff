@@ -26,6 +26,8 @@
         <ambient><use>material/ambient</use></ambient>
         <diffuse><use>material/diffuse</use></diffuse>
         <specular><use>material/specular</use></specular>
+        <emissive><use>material/emissive</use></emissive>
+        <shininess><use>material/shininess</use></shininess>
         <color-mode><use>material/color-mode</use></color-mode>
       </material>
       <blend>
@@ -67,6 +69,8 @@
         <ambient><use>material/ambient</use></ambient>
         <diffuse><use>material/diffuse</use></diffuse>
         <specular><use>material/specular</use></specular>
+        <emissive><use>material/emissive</use></emissive>
+        <shininess><use>material/shininess</use></shininess>
         <color-mode><use>material/color-mode</use></color-mode>
       </material>
       <blend>

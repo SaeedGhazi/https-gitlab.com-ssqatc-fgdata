@@ -42,6 +42,7 @@
     <predicate>
       <and>
         <property>/sim/rendering/shader-effects</property>
+
         <or>
           <less-equal>
             <value type="float">2.0</value>
@@ -62,6 +63,8 @@
         <ambient><use>material/ambient</use></ambient>
         <diffuse><use>material/diffuse</use></diffuse>
         <specular><use>material/specular</use></specular>
+        <emissive><use>material/emissive</use></emissive>
+        <shininess><use>material/shininess</use></shininess>
         <color-mode>ambient-and-diffuse</color-mode>
       </material>
       <blend><use>transparent</use></blend>
@@ -99,6 +102,8 @@
         <ambient><use>material/ambient</use></ambient>
         <diffuse><use>material/diffuse</use></diffuse>
         <specular><use>material/specular</use></specular>
+        <emissive><use>material/emissive</use></emissive>
+        <shininess><use>material/shininess</use></shininess>
         <color-mode>ambient-and-diffuse</color-mode>
       </material>
       <blend><use>transparent</use></blend>

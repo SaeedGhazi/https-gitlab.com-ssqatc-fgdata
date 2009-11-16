@@ -30,7 +30,7 @@ current mode for each mouse is held in the
        <property>/sim/menubar/autovisibility/enabled</property>
      </condition>
      <command>property-assign</command>
-     <property>//sim/menubar/visibility</property>
+     <property>/sim/menubar/visibility</property>
      <value type="bool">false</value>
     </binding>
    </button>

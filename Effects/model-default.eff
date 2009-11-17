@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
   <name>Effects/model-default</name>
+  <parameters>
+    <texture n ="0">
+      <type>white</type>
+    </texture>
+  </parameters>
   <technique n="10">
     <predicate>
       <and>
@@ -39,7 +44,11 @@
       <cull-face><use>cull-face</use></cull-face>
       <rendering-hint><use>rendering-hint</use></rendering-hint>
       <texture-unit>
+        <!-- The texture unit is always active because the shaders expect
+             that. -->
         <unit>0</unit>
+        <!-- If there is a texture, the type in the derived effect
+        will be "2d". -->
         <type><use>texture[0]/type</use></type>
         <image><use>texture[0]/image</use></image>
         <filter><use>texture[0]/filter</use></filter>

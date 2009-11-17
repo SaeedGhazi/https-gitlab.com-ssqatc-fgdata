@@ -2,7 +2,7 @@
 
 varying vec4 diffuse, ambient;
 varying vec3 normal, lightDir, halfVector;
-varying float fogCoord;
+varying float fogCoord, alpha;
 
 uniform sampler2D texture;
 
@@ -24,6 +24,7 @@ void main()
             color += gl_FrontMaterial.specular * gl_LightSource[0].specular
                 * pow(NdotHV, gl_FrontMaterial.shininess);
     }
+    color.a = alpha;
     texel = texture2D(texture, gl_TexCoord[0].st);
     fragColor = color * texel;
     fogFactor = exp(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord);

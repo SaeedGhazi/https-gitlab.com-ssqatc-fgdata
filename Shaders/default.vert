@@ -10,7 +10,7 @@
 
 varying vec4 diffuse, ambient;
 varying vec3 normal, lightDir, halfVector;
-varying float fogCoord;
+varying float fogCoord, alpha;
 
 void main()
 {
@@ -21,6 +21,7 @@ void main()
     lightDir = normalize(vec3(gl_LightSource[0].position));
     halfVector = normalize(gl_LightSource[0].halfVector.xyz);
     diffuse = gl_Color * gl_LightSource[0].diffuse;
+    alpha = gl_Color.a;
     ambient = gl_Color * gl_LightSource[0].ambient;
     ambient += gl_Color * gl_LightModel.ambient;
     fogCoord = abs(ecPosition.z);

@@ -10,18 +10,20 @@
 
 varying vec4 diffuse, constantColor;
 varying vec3 normal, lightDir, halfVector;
-varying float fogCoord;
+varying float alpha, fogCoord;
 
 void main()
 {
-    vec3 ecPosition = vec3(gl_ModelViewMatrix * gl_Vertex);
+    vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
+    vec3 ecPosition3 = vec3(gl_ModelViewMatrix * gl_Vertex) / ecPosition.w;
     gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
     normal = gl_NormalMatrix * gl_Normal;
     lightDir = normalize(vec3(gl_LightSource[0].position));
     halfVector = normalize(gl_LightSource[0].halfVector.xyz);
     diffuse = gl_Color * gl_LightSource[0].diffuse;
-    constantColor = gl_FrontLightModelProduct.sceneColor
+    alpha = gl_Color.a;
+    constantColor =  gl_FrontLightModelProduct.sceneColor
         + gl_FrontMaterial.ambient * gl_LightSource[0].ambient;
-    fogCoord = abs(ecPosition.z);
+    fogCoord = abs(ecPosition3.z);
 }

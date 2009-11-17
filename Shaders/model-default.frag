@@ -13,7 +13,7 @@ void main()
     vec4 color = constantColor;
     vec4 texel;
     vec4 fragColor;
-
+    vec4 specular = vec4(0.0);
     n = normalize(normal);
     NdotL = max(dot(n, lightDir), 0.0);
     if (NdotL > 0.0) {
@@ -21,12 +21,17 @@ void main()
         halfV = normalize(halfVector);
         NdotHV = max(dot(n, halfV), 0.0);
         if (gl_FrontMaterial.shininess > 0.0)
-            color += gl_FrontMaterial.specular * gl_LightSource[0].specular
-                * pow(NdotHV, gl_FrontMaterial.shininess);
+            specular.rgb = (gl_FrontMaterial.specular.rgb
+                            * gl_LightSource[0].specular.rgb
+                            * pow(NdotHV, gl_FrontMaterial.shininess));
     }
     color.a = alpha;
+    // This shouldn't be necessary, but our lighting becomes very
+    // saturated. Clamping the color before modulating by the texture
+    // is closer to what the OpenGL fixed function pipeline does.
+    color = clamp(color, 0.0, 1.0);
     texel = texture2D(texture, gl_TexCoord[0].st);
-    fragColor = color * texel;
+    fragColor = color * texel + specular;
     fogFactor = exp(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord);
     gl_FragColor = mix(gl_Fog.color, fragColor, fogFactor);
 }

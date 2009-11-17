@@ -5,8 +5,8 @@
 // The only light used is gl_LightSource[0], which is assumed to be
 // directional.
 //
-// Diffuse and ambient colors come from the gl_Color. This is
-// equivalent to osg::Material::AMBIENT_AND_DIFFUSE.
+// Diffuse colors come from the gl_Color, ambient from the material. This is
+// equivalent to osg::Material::DIFFUSE.
 
 varying vec4 diffuse, constantColor;
 varying vec3 normal, lightDir, halfVector;
@@ -22,7 +22,12 @@ void main()
     lightDir = normalize(vec3(gl_LightSource[0].position));
     halfVector = normalize(gl_LightSource[0].halfVector.xyz);
     diffuse = gl_Color * gl_LightSource[0].diffuse;
-    alpha = gl_Color.a;
+    // Super hack: if diffuse material alpha is less than 1, assume a
+    // transparency animation is at work
+    if (gl_FrontMaterial.diffuse.a < 1.0)
+        alpha = gl_FrontMaterial.diffuse.a;
+    else
+        alpha = gl_Color.a;
     constantColor =  gl_FrontLightModelProduct.sceneColor
         + gl_FrontMaterial.ambient * gl_LightSource[0].ambient;
     fogCoord = abs(ecPosition3.z);

@@ -1,21 +1,27 @@
 // -*-C++-*-
 
-varying vec4 diffuse, ambient;
+varying vec4 diffuse, constantColor;
 varying vec3 normal, lightDir, halfVector;
 varying float fogCoord, alpha;
 
 uniform sampler2D texture;
 
+float luminance(vec3 color)
+{
+    return dot(vec3(0.212671, 0.715160, 0.072169), color);
+}
+
 void main()
 {
     vec3 n, halfV;
     float NdotL, NdotHV, fogFactor;
-    vec4 color = ambient + gl_FrontMaterial.emission;
+    vec4 color = constantColor;
     vec4 texel;
     vec4 fragColor;
     vec4 specular = vec4(0.0);
-    
     n = normalize(normal);
+    if (!gl_FrontFacing)
+        n = -n;
     NdotL = max(dot(n, lightDir), 0.0);
     if (NdotL > 0.0) {
         color += diffuse * NdotL;

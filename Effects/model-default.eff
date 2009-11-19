@@ -62,7 +62,7 @@
       </texture-unit>
       <program>
         <vertex-shader>Shaders/model-default.vert</vertex-shader>
-        <fragment-shader>Shaders/model-default.frag</fragment-shader>
+        <fragment-shader>Shaders/default.frag</fragment-shader>
       </program>
       <uniform>
       <name>texture</name>

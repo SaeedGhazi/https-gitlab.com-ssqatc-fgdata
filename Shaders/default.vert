@@ -8,7 +8,7 @@
 // Diffuse and ambient colors come from the gl_Color. This is
 // equivalent to osg::Material::AMBIENT_AND_DIFFUSE.
 
-varying vec4 diffuse, ambient;
+varying vec4 diffuse, constantColor;
 varying vec3 normal, lightDir, halfVector;
 varying float fogCoord, alpha;
 
@@ -22,7 +22,7 @@ void main()
     halfVector = normalize(gl_LightSource[0].halfVector.xyz);
     diffuse = gl_Color * gl_LightSource[0].diffuse;
     alpha = gl_Color.a;
-    ambient = gl_Color * gl_LightSource[0].ambient;
-    ambient += gl_Color * gl_LightModel.ambient;
+    constantColor =  gl_FrontLightModelProduct.sceneColor
+        + gl_FrontMaterial.ambient * gl_LightSource[0].ambient;
     fogCoord = abs(ecPosition.z);
 }

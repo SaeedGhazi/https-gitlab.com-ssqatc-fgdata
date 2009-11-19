@@ -71,6 +71,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <distance-attenuation type="bool" userarchive="y">false</distance-attenuation>
    <particles type="bool" userarchive="y">true</particles>
    <precipitation-gui-enable type="bool" userarchive="y">false</precipitation-gui-enable>
+   <precipitation-enable type="bool" userarchive="y">false</precipitation-enable>
    <precipitation-aircraft-enable type="bool">true</precipitation-aircraft-enable>
    <precipitation>
     <!-- streaks coloring and transparency -->

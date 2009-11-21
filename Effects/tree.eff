@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Effects files for trees, which are placed by a shader. -->
+
+<PropertyList>
+  <name>Effects/tree</name>
+  <parameters>
+    <texture n ="0">
+    </texture>
+  </parameters>
+  <technique n="10">
+    <predicate>
+      <and>
+        <property>/sim/rendering/shader-effects</property>
+        <less-equal>
+          <value type="float">1.0</value>
+          <shader-language/>
+        </less-equal>
+      </and>
+    </predicate>
+    <pass>
+      <lighting>true</lighting>
+      <material>
+        <ambient type="vec4d">1.0 1.0 1.0 1.0</ambient>
+        <diffuse type="vec4d">1.0 1.0 1.0 1.0</diffuse>
+        <color-mode>off</color-mode>
+      </material>
+      <render-bin>
+        <bin-number>2</bin-number> <!-- RANDOM_OBJECTS_BIN -->
+        <bin-name>DepthSortedBin</bin-name>
+      </render-bin>
+      <alpha-test>
+        <comparison>gequal</comparison>
+        <reference type="float">0.33</reference>
+      </alpha-test>
+      <texture-unit>
+        <unit>0</unit>
+        <type>2d</type>
+        <image><use>texture[0]/image</use></image>
+        <wrap-s>clamp</wrap-s>
+        <wrap-t>clamp</wrap-t>
+      </texture-unit>
+      <program>
+        <vertex-shader>Shaders/tree.vert</vertex-shader>
+        <fragment-shader>Shaders/tree.frag</fragment-shader>
+      </program>
+      <uniform>
+        <name>baseTexture</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <!-- The vertex shader isn't doing two-sided lighting yet, but
+           should be soon. -->
+      <vertex-program-two-side type="bool">true</vertex-program-two-side>
+    </pass>
+  </technique>
+</PropertyList>

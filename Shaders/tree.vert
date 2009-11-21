@@ -1,3 +1,9 @@
+// Tree instance scheme:
+// vertex - local position of quad vertex.
+// normal - x y scaling, z number of varieties
+// fog coord - rotation
+// color - xyz of tree quad origin, replicated 4 times.
+
 varying float fogFactor;
 
 void main(void)

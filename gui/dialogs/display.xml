@@ -34,69 +34,26 @@
     </checkbox>
 
     <checkbox>
-        <halign>left</halign>
-        <label>Enable view popups</label>
-        <property>/sim/view-name-popup</property>
-        <binding>
-            <command>dialog-apply</command>
-        </binding>
+      <halign>left</halign>
+      <label>Show view name popup</label>
+      <property>/sim/view-name-popup</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
     </checkbox>
 
-    <checkbox>
-        <halign>left</halign>
-        <label>Toggle 2D Panel</label>
-        <binding>
-            <command>property-toggle</command>
-            <property>/sim/panel/visibility</property>
-        </binding>
-    </checkbox>
-
-    <checkbox>
-        <halign>left</halign>
-        <label>Allow 3d cockpit toggle</label>
-        <property>/sim/allow-toggle-cockpit</property>
-        <binding>
-            <command>dialog-apply</command>
-        </binding>
-    </checkbox>
-
-    <button>
-        <halign>center</halign>
-        <legend>Cycle HUD</legend>
-        <binding>
-            <command>nasal</command>
-            <script>aircraft.HUD.cycle_color()</script>
-        </binding>
-    </button>
-
-    <button>
-        <halign>center</halign>
-        <legend>Configure views</legend>
-        <binding>
-            <command>dialog-show</command>
-            <dialog-name>view</dialog-name>
-        </binding>
-    </button>
-
-    <button>
-        <halign>center</halign>
-        <legend>Save current FOV</legend>
-        <binding>
-            <command>nasal</command>
-            <script>
-                var nm=getprop("/sim/current-view/view-number");
-                var vw = getprop("/sim/current-view/field-of-view");
-                setprop("/sim/current-view/config/default-field-of-view-deg",vw);
-                setprop("/sim/view["~nm~"]/config/default-field-of-view-deg",vw);
-            </script>
-        </binding>
-    </button>
-
-    </group>
+    <item>
+      <label>Show 2D Panel</label>
+      <property>/sim/panel/visibility</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </item>
+  </group>
 
   <hrule/>
 
-<group>
+  <group>
     <layout>hbox</layout>
     <empty><stretch>true</stretch></empty>
 

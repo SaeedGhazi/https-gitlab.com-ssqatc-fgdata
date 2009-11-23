@@ -29,7 +29,6 @@ void main(void)
   vec3 diffuse = gl_FrontMaterial.diffuse.rgb * max(0.1, n);
   vec4 ambientColor = gl_FrontLightModelProduct.sceneColor + gl_LightSource[0].ambient * gl_FrontMaterial.ambient;
   gl_FrontColor = ambientColor + gl_LightSource[0].diffuse * vec4(diffuse, 1.0);
-  gl_BackColor = gl_FrontColor;
 
   float fogCoord = abs(ecPosition.z);
   fogFactor = exp( -gl_Fog.density * gl_Fog.density * fogCoord * fogCoord);

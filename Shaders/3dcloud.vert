@@ -1,3 +1,4 @@
+// -*-C++-*-
 #version 120
 
 varying float fogFactor;

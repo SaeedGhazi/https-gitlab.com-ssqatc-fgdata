@@ -36,7 +36,7 @@
       </material>
       <alpha-test>
         <comparison>gequal</comparison>
-        <reference type="float">1.0</reference>
+        <reference type="float">0.33</reference>
       </alpha-test>
       <texture-unit>
         <unit>0</unit>
@@ -68,8 +68,7 @@
       </render-bin>
       <alpha-test>
         <comparison>less</comparison>
-        <!-- <reference type="float">0.33</reference>   -->
-        <reference type="float">1.0</reference>
+        <reference type="float">0.33</reference>
       </alpha-test>
       <blend>
         <source>src-alpha</source>

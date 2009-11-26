@@ -25,7 +25,7 @@
       </material>
       <alpha-test>
         <comparison>greater</comparison>
-        <reference type="float">0.05</reference>
+        <reference type="float">0.01</reference>
       </alpha-test>
       <shade-model>smooth</shade-model>
       <blend>

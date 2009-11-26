@@ -29,14 +29,15 @@ void main(void)
   // Do the matrix multiplication by [ u r w pos]. Assume no
   // scaling in the homogeneous component of pos.
   gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
-  gl_Position.xyz = gl_Vertex.x * u * wScale;
-  gl_Position.xyz += gl_Vertex.y * r * hScale;
-  gl_Position.xyz += gl_Vertex.z * w;
+  gl_Position.xyz = gl_Vertex.x * u;
+  gl_Position.xyz += gl_Vertex.y * r * wScale;
+  gl_Position.xyz += gl_Vertex.z * w  * hScale;
   gl_Position.xyz += gl_Color.xyz;
 
   // Determine a lighting normal based on the vertex position from the
   // center of the cloud, so that sprite on the opposite side of the cloud to the sun are darker.
-  float n = clamp(dot(normalize(gl_LightSource[0].position.xyz), normalize(mat3x3(gl_ModelViewMatrix) * gl_Position.xyz)), 0.0, 1.0);
+  float n = dot(normalize(-gl_LightSource[0].position.xyz),
+                normalize(mat3x3(gl_ModelViewMatrix) * (- gl_Position.xyz)));;
 
   // Determine the position - used for fog and shading calculations
   vec3 ecPosition = vec3(gl_ModelViewMatrix * gl_Position);
@@ -46,11 +47,10 @@ void main(void)
   // Final position of the sprite
   gl_Position = gl_ModelViewProjectionMatrix * gl_Position;
 
-  // Limit the normal range from [0,1.0], and apply the shading (vertical factor)
-  n = min(smoothstep(-0.8, 0.8, n), shade * (1.0 - fract) + fract);
-
-  // This lighting normal is then used to mix between almost pure ambient (0) and diffuse (1.0) light
-  vec4 backlight = 0.9 * gl_LightSource[0].ambient + 0.1 * gl_LightSource[0].diffuse;
+// Determine the shading of the sprite based on its vertical position and position relative to the sun.
+  n = min(smoothstep(-0.5, 0.0, n), fract);
+// Determine the shading based on a mixture from the backlight to the front
+  vec4 backlight = gl_LightSource[0].diffuse * shade;
 
   gl_FrontColor = mix(backlight, gl_LightSource[0].diffuse, n);
   gl_FrontColor += gl_FrontLightModelProduct.sceneColor;

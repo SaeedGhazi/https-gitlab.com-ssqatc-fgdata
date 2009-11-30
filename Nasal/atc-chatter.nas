@@ -54,10 +54,10 @@ chatter_update = func {
     if ( substr(chatter_list[chatter_index],
                 size(chatter_list[chatter_index]) - 4) == ".wav" )
     {	
-	var vol =getprop("/sim/sound/atc-chatter-volume");
+	var vol =getprop("/sim/sound/chatter/volume");
 	if(vol == nil){vol = 0.5;}
         tmpl = { path : chatter_dir, file : chatter_list[chatter_index] , volume : vol};
-        if ( getprop("/sim/sound/atc-chatter") ) {
+        if ( getprop("/sim/sound/chatter/enabled") ) {
             # go through the motions, but only schedule the message to play
             # if atc-chatter is enabled.
             printlog("info", "update atc chatter ", chatter_list[chatter_index] );

@@ -143,9 +143,16 @@ Started September 2000 by David Megginson, david@megginson.com
   </navdb>
   <sound>
    <volume type="float" userarchive="y">0.8</volume>
-   <pause type="bool">false</pause>
-   <atc-chatter type="bool" userarchive="y">false</atc-chatter>
-   <atc-chatter-volume type="double" userarchive="y">0.5</atc-chatter-volume>
+   <enabled type="bool">true</enabled>
+   <chatter>
+    <enabled type="bool" userarchive="y">false</enabled>
+    <volume type="double" userarchive="y">0.6</volume>
+   </chatter>
+   <effects>
+    <enabled type="bool" userarchive="y">true</enabled>
+    <volume type="float" userarchive="y">0.6</volume>
+   </effects>
+   <device type="string" userarchive="y"/>
    <voice type="bool">true</voice>
    <voices>
     <host type="string" write="n">localhost</host>

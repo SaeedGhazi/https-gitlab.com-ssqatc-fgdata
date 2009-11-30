@@ -3,77 +3,178 @@
 <!-- Sound control dialog -->
 
 <PropertyList>
-	<name>sound-dialog</name>
-	<layout>vbox</layout>
+  <name>sound-dialog</name>
+  <modal>false</modal>
+  <width>400</width>
+  <layout>vbox</layout>
 
-	<text>
-	<label>Sound Configuration</label>
-	</text>
+  <text>
+    <label>Sound Configuration</label>
+  </text>
 
-	<hrule/>
+  <hrule/>
 
-	<group>
-		<layout>hbox</layout>
-		<empty><dummy/></empty>
+  <combo>
+    <name>source-selection</name>
+    <halign>fill</halign>
+    <stretch>true</stretch>
+    <property>sim/gui/dialogs/sound-dialog/source-selection</property>
+    <binding>
+      <command>dialog-apply</command>
+      <object-name>source-selection</object-name>
+    </binding>
+    <binding>
+      <command>dialog-update</command>
+      <object-name>metar</object-name>
+    </binding>
+  </combo>
 
-		<group>
-			<layout>vbox</layout>
+  <hrule/>
 
-			<checkbox>
-				<label>Mute Sound</label>
-				<halign>left</halign>
-				<property>/sim/sound/pause</property>
-				<binding>
-					<command>dialog-apply</command>
-				</binding>
-			</checkbox>
+  <group>
+    <layout>hbox</layout>
+    <halign>left</halign>
 
-			<group>
-				<layout>hbox</layout>
-				<text><label>Volume:</label></text>
-				<slider>
-					<property>/sim/sound/volume</property>
-					<binding>
-						<command>dialog-apply</command>
-					</binding>
-				</slider>
-			</group>
+    <empty><width>10</width></empty>
 
-			<checkbox>
-				<label>ATC Chatter</label>
-				<halign>left</halign>
-				<property>/sim/sound/atc-chatter</property>
-				<binding>
-					<command>dialog-apply</command>
-				</binding>
-			</checkbox>
-        
-			<group>
-				<layout>hbox</layout>
-				<text><label>ATC Volume:</label></text>
-				<slider>
-					<property>/sim/sound/atc-chatter-volume</property>
-					<binding>
-						<command>dialog-apply</command>
-					</binding>
-				</slider>
-			</group>
-			
-		</group>
-		<empty><dummy/></empty>
-	</group>
+    <text>
+      <label>Enabled</label>
+    </text>
 
-	<group>
-		<layout>hbox</layout>
-		<default-padding>10</default-padding>
-		<button>
-			<legend>Close</legend>
-			<default>true</default>
-			<key>Esc</key>
-			<binding>
-				<command>dialog-close</command>
-			</binding>
-		</button>
-	</group>
+    <text>
+      <label>Volume</label>
+    </text>
+  </group>
+
+  <group>
+    <layout>hbox</layout>
+    <halign>left</halign>
+
+    <empty><width>10</width></empty>
+
+    <checkbox>
+      <property>/sim/sound/enabled</property>
+      <label>Master</label>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
+
+    <slider>
+      <height>25</height>
+      <property>/sim/sound/volume</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </slider>
+  </group>
+
+  <group>
+    <layout>hbox</layout>
+    <halign>left</halign>
+
+    <empty><width>10</width></empty>
+
+    <checkbox>
+      <property>/sim/sound/effects/enabled</property>
+      <label>Effects</label>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
+
+    <slider>
+      <height>25</height>
+      <property>/sim/sound/effects/volume</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </slider>
+  </group>
+
+  <group>
+    <layout>hbox</layout>
+    <halign>left</halign>
+
+    <empty><width>10</width></empty>
+
+    <checkbox>
+      <property>/sim/sound/avionics/enabled</property>
+      <label>Avionics</label>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
+
+    <slider>
+      <height>25</height>
+      <property>/sim/sound/avionics/volume</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </slider>
+  </group>
+
+  <group>
+    <layout>hbox</layout>
+    <halign>left</halign>
+
+    <empty><width>10</width></empty>
+    
+    <checkbox>
+      <property>/sim/sound/chatter/enabled</property>
+      <label>Chatter</label>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
+
+    <slider>
+      <height>25</height>
+      <property>/sim/sound/chatter/volume</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </slider>
+  </group>
+
+  <group>
+    <layout>hbox</layout>
+    <default-padding>10</default-padding>
+    <button>
+      <legend>Close</legend>
+      <default>true</default>
+      <key>Esc</key>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
+
+  <nasal>
+    <open><![CDATA[
+      var dlg_root = cmdarg();
+
+      var findElementByName = func(rootN, name) {
+        foreach( var child; rootN.getChildren() ) {
+          var n = child.getNode( "name" );
+          if( n != nil and n.getValue() == name )
+            return child;
+          var f = findElementByName(child,name);
+          if( f != nil ) return f;
+        }
+        return nil;
+      };
+
+      # fill the sounde device combo box
+      var combo = findElementByName( dlg_root, "source-selection" );
+      var wsn = props.globals.getNode( "/sim/sound/devices" );
+      if( wsn != nil ) {
+        var devices = wsn.getChildren("device");
+        forindex (var i; devices )
+          combo.getChild("value", i, 1).setValue(devices[i].getValue());
+      }
+    ]]></open>
+  </nasal>
 
 </PropertyList>

@@ -14,6 +14,11 @@
 
   <hrule/>
 
+  <text>
+   <halign>fill</halign>
+   <label>Sound Device:</label>
+  </text>
+
   <combo>
     <name>source-selection</name>
     <halign>fill</halign>
@@ -28,8 +33,6 @@
       <object-name>metar</object-name>
     </binding>
   </combo>
-
-  <hrule/>
 
   <group>
     <layout>hbox</layout>
@@ -142,9 +145,13 @@
     <layout>hbox</layout>
     <default-padding>10</default-padding>
     <button>
-      <legend>Close</legend>
+      <legend>Apply</legend>
       <default>true</default>
-      <key>Esc</key>
+      <key>Enter</key>
+      <binding>
+        <command>nasal</command>
+        <script>apply()</script>
+      </binding>
       <binding>
         <command>dialog-close</command>
       </binding>
@@ -174,6 +181,16 @@
         forindex (var i; devices )
           combo.getChild("value", i, 1).setValue(devices[i].getValue());
       }
+
+      var apply = func {
+        var device = getprop("sim/gui/dialogs/sound-dialog/source-selection");
+        setprop( "/sim/sound/device", device);
+      }
+
+      # initialization
+      var default_device = getprop("/sim/sound/device");
+      setprop( "sim/gui/dialogs/sound-dialog/source-selection", default_device);
+
     ]]></open>
   </nasal>
 

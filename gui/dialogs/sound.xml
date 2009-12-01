@@ -144,14 +144,23 @@
   <group>
     <layout>hbox</layout>
     <default-padding>10</default-padding>
+    
     <button>
       <legend>Apply</legend>
-      <default>true</default>
       <key>Enter</key>
       <binding>
         <command>nasal</command>
         <script>apply()</script>
       </binding>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </button>
+
+    <button>
+      <legend>Close</legend>
+      <default>true</default>
+      <key>Esc</key>
       <binding>
         <command>dialog-close</command>
       </binding>
@@ -175,7 +184,7 @@
 
       # fill the sounde device combo box
       var combo = findElementByName( dlg_root, "source-selection" );
-      var wsn = props.globals.getNode( "/sim/sound/devices" );
+      var wsn = props.globals.getNode( "sim/sound/devices" );
       if( wsn != nil ) {
         var devices = wsn.getChildren("device");
         forindex (var i; devices )
@@ -183,12 +192,16 @@
       }
 
       var apply = func {
-        var device = getprop("sim/gui/dialogs/sound-dialog/source-selection");
-        setprop( "/sim/sound/device", device);
+        var new = getprop("sim/gui/dialogs/sound-dialog/source-selection");
+        var current = getprop("sim/sound/device-name");
+        if (cmp(current, new) != 0) {
+          setprop("sim/sound/devices/name", new);
+          setprop("sim/sound/device-name", new);
+        }
       }
 
       # initialization
-      var default_device = getprop("/sim/sound/device");
+      var default_device = getprop("sim/sound/device-name");
       setprop( "sim/gui/dialogs/sound-dialog/source-selection", default_device);
 
     ]]></open>

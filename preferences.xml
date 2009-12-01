@@ -144,6 +144,10 @@ Started September 2000 by David Megginson, david@megginson.com
   <sound>
    <volume type="float" userarchive="y">0.8</volume>
    <enabled type="bool">true</enabled>
+   <avionics>
+    <enabled type="bool" userarchive="y">true</enabled>
+    <volume type="float" userarchive="y">0.6</volume>
+   </avionics>
    <chatter>
     <enabled type="bool" userarchive="y">false</enabled>
     <volume type="double" userarchive="y">0.6</volume>
@@ -152,7 +156,7 @@ Started September 2000 by David Megginson, david@megginson.com
     <enabled type="bool" userarchive="y">true</enabled>
     <volume type="float" userarchive="y">0.6</volume>
    </effects>
-   <device type="string" userarchive="y"/>
+   <device-name type="string" userarchive="y"/>
    <voice type="bool">true</voice>
    <voices>
     <host type="string" write="n">localhost</host>

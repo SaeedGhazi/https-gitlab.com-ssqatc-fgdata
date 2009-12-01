@@ -164,8 +164,20 @@
 
 			<checkbox>
 				<halign>left</halign>
-				<label>LSO Commentary</label>
+				<label>Enable LSO Communications</label>
 				<property>/sim/current-view/lso-commentary</property>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+			</checkbox>
+
+			<checkbox>
+				<halign>left</halign>
+				<label>Enable Deck Park</label>
+				<property>/sim/current-view/deck-park</property>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
 			</checkbox>
 
 			<checkbox>

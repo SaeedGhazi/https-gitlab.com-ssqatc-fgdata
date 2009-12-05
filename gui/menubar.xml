@@ -350,6 +350,14 @@
 		</item>
 
 		<item>
+			<label>Stopwatch</label>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>stopwatch-dialog</dialog-name>
+			</binding>
+		</item>
+
+		<item>
 			<label>Random Failures</label>
 			<binding>
 				<command>dialog-show</command>
@@ -497,14 +505,6 @@
 		</item>
 
 		<item>
-			<label>Stopwatch</label>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>stopwatch-dialog</dialog-name>
-			</binding>
-		</item>
-
-		<item>
 			<label>Development Keys</label>
 			<binding>
 				<command>nasal</command>
@@ -517,6 +517,14 @@
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>devel-extensions</dialog-name>
+			</binding>
+		</item>
+
+		<item>
+			<label>Display Tutorial Marker</label>
+			<binding>
+				<command>nasal</command>
+				<script>tutorial.dialog()</script>
 			</binding>
 		</item>
 

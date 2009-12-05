@@ -109,6 +109,14 @@
 		</item>
 
 		<item>
+			<label>View Options</label>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>view</dialog-name>
+			</binding>
+		</item>
+
+		<item>
 			<label>Cockpit View Options</label>
 			<binding>
 				<command>dialog-show</command>

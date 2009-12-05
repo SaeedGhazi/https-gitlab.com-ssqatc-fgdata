@@ -3,7 +3,10 @@
 <PropertyList>
 	<name>stopwatch-dialog</name>
 	<layout>vbox</layout>
+	<modal>false</modal>
 	<default-padding>8</default-padding>
+	<x>-5</x>
+	<y>5</y>
 
 	<nasal>
 		<open>
@@ -100,7 +103,6 @@
 		<button>
 			<legend>Start</legend>
 			<equal>true</equal>
-			<key>Space</key>
 			<pref-width>47</pref-width>
 			<binding>
 				<command>nasal</command>

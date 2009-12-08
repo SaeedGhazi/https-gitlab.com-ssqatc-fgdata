@@ -40,13 +40,17 @@
 
     <empty><width>10</width></empty>
 
-    <text>
-      <label>Enabled</label>
-    </text>
+    <group>
+      <layout>hbox</layout>
 
-    <text>
-      <label>Volume</label>
-    </text>
+      <text>
+        <label>Enabled</label>
+      </text>
+
+      <text>
+        <label>Volume</label>
+      </text>
+    </group>
   </group>
 
   <group>
@@ -55,21 +59,25 @@
 
     <empty><width>10</width></empty>
 
-    <checkbox>
-      <property>/sim/sound/enabled</property>
-      <label>Master</label>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-    </checkbox>
+    <group>
+      <layout>hbox</layout>
 
-    <slider>
-      <height>25</height>
-      <property>/sim/sound/volume</property>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-    </slider>
+      <checkbox>
+        <property>/sim/sound/enabled</property>
+        <label>Master</label>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+
+      <slider>
+        <height>25</height>
+        <property>/sim/sound/volume</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </slider>
+    </group>
   </group>
 
   <group>
@@ -78,21 +86,25 @@
 
     <empty><width>10</width></empty>
 
-    <checkbox>
-      <property>/sim/sound/effects/enabled</property>
-      <label>Effects</label>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-    </checkbox>
+    <group>
+      <layout>hbox</layout>
 
-    <slider>
-      <height>25</height>
-      <property>/sim/sound/effects/volume</property>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-    </slider>
+      <checkbox>
+        <property>/sim/sound/effects/enabled</property>
+        <label>Effects</label>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+
+      <slider>
+        <height>25</height>
+        <property>/sim/sound/effects/volume</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </slider>
+    </group>
   </group>
 
   <group>
@@ -101,21 +113,25 @@
 
     <empty><width>10</width></empty>
 
-    <checkbox>
-      <property>/sim/sound/avionics/enabled</property>
-      <label>Avionics</label>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-    </checkbox>
+    <group>
+      <layout>hbox</layout>
 
-    <slider>
-      <height>25</height>
-      <property>/sim/sound/avionics/volume</property>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-    </slider>
+      <checkbox>
+        <property>/sim/sound/chatter/enabled</property>
+        <label>Chatter</label>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+
+      <slider>
+        <height>25</height>
+        <property>/sim/sound/chatter/volume</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </slider>
+    </group>
   </group>
 
   <group>
@@ -123,22 +139,70 @@
     <halign>left</halign>
 
     <empty><width>10</width></empty>
-    
-    <checkbox>
-      <property>/sim/sound/chatter/enabled</property>
-      <label>Chatter</label>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-    </checkbox>
 
-    <slider>
-      <height>25</height>
-      <property>/sim/sound/chatter/volume</property>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-    </slider>
+    <group>
+      <layout>hbox</layout>
+
+      <checkbox>
+        <property>/sim/sound/avionics/enabled</property>
+        <label>Avionics</label>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+
+      <slider>
+        <height>25</height>
+        <property>/sim/sound/avionics/volume</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </slider>
+
+      <checkbox>
+        <property>/sim/sound/avionics/external-view</property>
+        <label>External View</label>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+    </group>
+  </group>
+
+  <group>
+    <layout>hbox</layout>
+    <halign>left</halign>
+
+    <empty><width>10</width></empty>
+
+    <group>
+      <layout>hbox</layout>
+
+      <checkbox>
+        <width>300</width>
+        <property>/sim/sound/atc/enabled</property>
+        <label>ATC</label>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+
+      <slider>
+        <height>25</height>
+        <property>/sim/sound/atc/volume</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </slider>
+
+      <checkbox>
+        <property>/sim/sound/atc/external-view</property>
+        <label>External View</label>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+    </group>
   </group>
 
   <group>

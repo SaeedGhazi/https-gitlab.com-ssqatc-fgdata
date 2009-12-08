@@ -144,13 +144,19 @@ Started September 2000 by David Megginson, david@megginson.com
   <sound>
    <volume type="float" userarchive="y">0.8</volume>
    <enabled type="bool">true</enabled>
+   <atc>
+    <enabled type="bool" userarchive="y">true</enabled>
+    <external-view type="bool" userarchive="y">true</external-view>
+    <volume type="float" userarchive="y">0.6</volume>
+   </atc>
    <avionics>
     <enabled type="bool" userarchive="y">true</enabled>
+    <external-view type="bool" userarchive="y">true</external-view>
     <volume type="float" userarchive="y">0.6</volume>
    </avionics>
    <chatter>
     <enabled type="bool" userarchive="y">false</enabled>
-    <volume type="double" userarchive="y">0.6</volume>
+    <volume type="float" userarchive="y">0.6</volume>
    </chatter>
    <effects>
     <enabled type="bool" userarchive="y">true</enabled>

@@ -376,6 +376,11 @@
 			<script>
 				copySearchArgs();
 				scratch.getNode("max-results", 1).setIntValue(10);
+				
+				# ensure scratch pos is invalid, so we use current GPS
+				# position as the search origin
+				scratch.getNode("longitude-deg", 1).setDoubleValue(-9999);
+				scratch.getNode("latitude-deg", 1).setDoubleValue(-9999);
 				cmd.setValue("nearest")
 			</script>
 			</binding>

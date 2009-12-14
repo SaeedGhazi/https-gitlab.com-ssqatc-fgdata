@@ -142,16 +142,6 @@
    <name>strings/features-options</name>
 
    <option>
-    <name>disable-sound</name>
-    <description>strings/disable-sound-desc</description>
-   </option>
-
-   <option>
-    <name>enable-sound</name>
-    <description>strings/enable-sound-desc</description>
-   </option>
-
-   <option>
     <name>disable-panel</name>
     <description>strings/disable-panel-desc</description>
    </option>
@@ -263,6 +253,31 @@
     <name>failure</name>
     <arg>{pitot|static|vacuum|electrical}</arg>
     <description>strings/failure-desc</description>
+   </option>
+
+  </section>
+
+  <section>
+   <name>strings/audio-options</name>
+
+   <option>
+    <name>show-sound-devices</name>
+    <description>strings/show-sound-devices-desc</description>
+   </option>
+
+   <option>
+    <name>sound-device</name>
+    <description>strings/sound-device-desc</description>
+   </option>
+
+   <option>
+    <name>disable-sound</name>
+    <description>strings/disable-sound-desc</description>
+   </option>
+
+   <option>
+    <name>enable-sound</name>
+    <description>strings/enable-sound-desc</description>
    </option>
 
   </section>

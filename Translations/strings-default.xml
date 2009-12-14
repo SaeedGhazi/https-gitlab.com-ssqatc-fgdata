@@ -119,8 +119,6 @@
  <enable-hud-desc>Enable Heads Up Display (HUD)</enable-hud-desc>
  <disable-panel-desc>Disable instrument panel</disable-panel-desc>
  <enable-panel-desc>Enable instrument panel</enable-panel-desc>
- <disable-sound-desc>Disable sound effects</disable-sound-desc>
- <enable-sound-desc>Enable sound effects</enable-sound-desc>
  <disable-anti-alias-hud-desc>Disable anti-aliased HUD</disable-anti-alias-hud-desc>
  <enable-anti-alias-hud-desc>Enable anti-aliased HUD</enable-anti-alias-hud-desc>
  <disable-hud-3d-desc>Disable 3D HUD</disable-hud-3d-desc>
@@ -174,6 +172,13 @@
  <mach-desc>Specify initial mach number</mach-desc>
  <glideslope-desc>Specify flight path angle (can be positive)</glideslope-desc>
  <roc-desc>Specify initial climb rate (can be negative)</roc-desc>
+
+ <!-- sound options -->
+ <audio-options>Audio Options</audio-options>
+ <disable-sound-desc>Disable sound effects</disable-sound-desc>
+ <enable-sound-desc>Enable sound effects</enable-sound-desc>
+ <show-sound-devices-desc>Show a list of available audio device</show-sound-devices-desc>
+ <sound-device-desc>Explicitly specify the audio device to use</sound-device-desc>
 
  <!-- Rendering options -->
  <rendering-options>Rendering Options</rendering-options>

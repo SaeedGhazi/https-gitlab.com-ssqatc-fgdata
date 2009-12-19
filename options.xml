@@ -59,6 +59,11 @@
    </option>
 
    <option>
+     <name>version</name>
+     <description>strings/version-desc</description>
+   </option>
+
+   <option>
     <name>fg-root</name>
     <arg>path</arg>
     <description>strings/fg-root-desc</description>
@@ -82,13 +87,11 @@
    <option>
     <name>disable-save-on-exit</name>
     <description>strings/disable-save-on-exit</description>
-    <brief/>
    </option>
  
    <option>
     <name>enable-save-on-exit</name>
     <description>strings/enable-save-on-exit</description>
-    <brief/>
    </option>
 
    <option>
@@ -105,7 +108,6 @@
     <name>control</name>
     <arg>mode</arg>
     <description>strings/control-desc</description>
-    <brief/>
    </option>
 
    <option>
@@ -347,6 +349,16 @@
    </option>
 
    <option>
+     <name>disable-horizon-effect</name>
+     <description>strings/disable-horizon-effect</description>
+   </option>
+   
+   <option>
+     <name>enable-horizon-effect</name>
+     <description>strings/enable-horizon-effect</description>
+   </option>
+   
+   <option>
     <name>disable-specular-highlight</name>
     <description>strings/disable-specular-highlight</description>
    </option>
@@ -496,6 +508,11 @@
    </option>
 
    <option>
+     <name>trim</name>
+     <description>strings/trim-desc</description>
+   </option>
+
+   <option>
     <name>notrim</name>
     <description>strings/notrim-desc</description>
    </option>
@@ -524,6 +541,18 @@
     <name>aircraft-dir</name>
     <arg>path</arg>
     <description>strings/aircraft-dir-desc</description>
+   </option>
+
+   <option>
+     <name>livery</name>
+     <arg>name</arg>
+     <description>strings/livery-desc</description>
+   </option>
+   
+   <option>
+     <name>vehicle</name>
+     <arg>name</arg>
+     <description>strings/vehicle-desc</description>
    </option>
   </section>
 
@@ -592,6 +621,12 @@
    </option>
 
    <option>
+     <name>parking-id</name>
+     <arg>name</arg>
+     <description>strings/parking-id-desc</description>
+   </option>
+
+   <option>
     <name>runway</name>
     <arg>rwy_no</arg>
     <description>strings/runway-no-desc</description>
@@ -609,28 +644,24 @@
     <name>parkpos</name>
     <arg>name</arg>
     <description>strings/parkpos-desc</description>
-    <brief/>
    </option>
 
    <option>
     <name>vor</name>
     <arg>ID</arg>
     <description>strings/vor-desc</description>
-    <brief/>
    </option>
 
    <option>
     <name>ndb</name>
     <arg>ID</arg>
     <description>strings/ndb-desc</description>
-    <brief/>
    </option>
 
    <option>
     <name>fix</name>
     <arg>ID</arg>
     <description>strings/fix-desc</description>
-    <brief/>
    </option>
 
    <option>
@@ -704,6 +735,27 @@
    </option>
 
    <option>
+     <name>vNorth</name>
+     <arg>units_per_sec</arg>
+     <description>strings/vNorth-desc</description>
+     <description>strings/units-feet</description>
+   </option>
+
+   <option>
+     <name>vEast</name>
+     <arg>units_per_sec</arg>
+     <description>strings/vEast-desc</description>
+     <description>strings/units-feet</description>
+   </option>
+   
+   <option>
+     <name>vDown</name>
+     <arg>units_per_sec</arg>
+     <description>strings/vDown-desc</description>
+     <description>strings/units-feet</description>
+   </option>
+
+   <option>
     <name>vc</name>
     <arg>knots</arg>
     <description>strings/vc-desc</description>
@@ -751,6 +803,18 @@
    <name>strings/avionics-options</name>
 
    <option>
+     <name>com1</name>
+     <arg>frequency</arg>
+     <description>strings/com1-desc</description>
+   </option>
+   
+   <option>
+     <name>com2</name>
+     <arg>frequency</arg>
+     <description>strings/com2-desc</description>
+   </option>
+   
+   <option>
     <name>nav1</name>
     <arg>[radial:]frequency</arg>
     <description>strings/nav1-desc</description>
@@ -795,16 +859,6 @@
    </option>
 
    <option>
-    <name>disable-horizon-effect</name>
-    <description>strings/disable-horizon-effect</description>
-   </option>
-
-   <option>
-    <name>enable-horizon-effect</name>
-    <description>strings/enable-horizon-effect</description>
-   </option>
-
-   <option>
     <name>enable-clouds</name>
     <description>strings/enable-clouds-desc</description>
    </option>
@@ -840,21 +894,23 @@
     <name>wind</name>
     <arg>DIR[:MAXDIR]@SPEED[:GUST]</arg>
     <description>strings/wind-desc</description>
-    <brief/>
+   </option>
+
+   <option>
+     <name>random-wind</name>
+     <description>strings/random-wind-desc</description>
    </option>
 
    <option>
     <name>turbulence</name>
     <arg>0.0 to 1.0</arg>
     <description>strings/turbulence-desc</description>
-    <brief/>
    </option>
 
    <option>
     <name>ceiling</name>
     <arg>FT_ASL[:THICKNESS_FT]</arg>
     <description>strings/ceiling-desc</description>
-    <brief/>
    </option>
 
   </section>
@@ -910,6 +966,18 @@
    </option>
 
    <option>
+     <name>atlas</name>
+     <arg>params</arg>
+     <description>strings/atlas-desc</description>
+   </option>
+
+   <option>
+     <name>atcsim</name>
+     <arg>params</arg>
+     <description>strings/atcsim-desc</description>
+   </option>
+
+   <option>
     <name>AV400</name>
     <arg>params</arg>
     <description>strings/AV400-desc</description>
@@ -945,6 +1013,12 @@
     <description>strings/native-ctrls-desc</description>
    </option>
 
+   <option>
+     <name>native-gui</name>
+     <arg>params</arg>
+     <description>strings/native-gui-desc</description>
+   </option>
+   
    <option>
     <name>native-fdm</name>
     <arg>params</arg>
@@ -993,15 +1067,20 @@
     <description>strings/rul-desc</description>
    </option>
 
-   <option>
-    <name>atc610x</name>
-    <description>strings/atc610x-desc</description>
-   </option>
-
   </section>
 
   <section>
    <name>strings/debugging-options</name>
+   
+   <option>
+     <name>enable-fpe</name>
+     <description>strings/fpe-desc</description>
+   </option>
+   
+   <option>
+     <name>fgviewer</name>
+     <description>strings/fgviewer-desc</description>
+   </option>
 
    <option>
     <name>log-level</name>

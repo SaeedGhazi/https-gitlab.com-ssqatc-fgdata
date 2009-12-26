@@ -681,6 +681,7 @@ Shared parameters for various materials.
  <name>Landmass</name>
  <name>SomeSort</name>
  <name>EvergreenBroadCover</name>
+ <name>EvergreenForest</name>
  <name>Island</name>
  <name>Default</name>
  <effect>Effects/landmass</effect>
@@ -709,6 +710,7 @@ Shared parameters for various materials.
  </condition>
  <effect>Effects/landmass</effect>
  <name>DeciduousBroadCover</name>
+ <name>DeciduousForest</name>
  <name>Bog</name>
  <texture>Terrain/deciduous1.png</texture>
  <texture>Terrain/deciduous2.png</texture>
@@ -735,6 +737,8 @@ Shared parameters for various materials.
  </condition>
  <effect>Effects/landmass</effect>
  <name>MixedForestCover</name>
+ <name>MixedForest</name>
+ <name>RainForest</name>
  <texture>Terrain/mixedforest.png</texture>
  <texture>Terrain/mixedforest2.png</texture>
  <texture>Terrain/mixedforest3.png</texture>
@@ -1020,6 +1024,8 @@ Shared parameters for various materials.
  <name>Reservoir</name>
  <name>Stream</name>
  <name>Canal</name>
+ <name>Lagoon</name>
+ <name>Saline</name>
  <texture>Terrain/water-lake.png</texture>
  <xsize>400</xsize>
  <ysize>400</ysize>
@@ -1094,6 +1100,7 @@ Shared parameters for various materials.
  </condition>
  <name>Marsh</name>
  <name>Littoral</name>
+ <name>FloodLand</name>
  <name>HerbWetlandCover</name>
  <name>WoodedWetlandCover</name>
  <texture>Terrain/marsh2.png</texture>
@@ -1120,6 +1127,7 @@ Shared parameters for various materials.
  <name>BareTundraCover</name>
  <name>MixedTundraCover</name>
  <name>GolfCourse</name>
+ <name>Cemetry</name>
  <texture>Terrain/tundra.png</texture>
  <texture>Terrain/tundra2.png</texture>
  <texture>Terrain/tundra3.png</texture>
@@ -1242,6 +1250,8 @@ Shared parameters for various materials.
  </condition>
  <effect>Effects/crop</effect>
  <name>MixedCropPastureCover</name>
+ <name>MixedCrop</name>
+ <name>ComplexCrop</name>
  <texture>Terrain/mixedcrop1.png</texture>
  <texture>Terrain/mixedcrop4.png</texture>
  <texture>Terrain/mixedcrop3.png</texture>
@@ -1303,6 +1313,8 @@ Shared parameters for various materials.
  </condition>
  <effect>Effects/crop</effect>
  <name>IrrCropPastureCover</name>
+ <name>IrrCrop</name>
+ <name>Orchard</name>
  <texture>Terrain/irrcrop1.png</texture>
  <texture>Terrain/irrcrop2.png</texture>
  <texture>Terrain/irrcrop3.png</texture>
@@ -1362,6 +1374,7 @@ Shared parameters for various materials.
  </condition>
  <effect>Effects/crop</effect>
  <name>DryCropPastureCover</name>
+ <name>DryCrop</name>
  <texture>Terrain/drycrop1.png</texture>
  <texture>Terrain/drycrop2.png</texture>
  <texture>Terrain/drycrop3.png</texture>
@@ -1424,6 +1437,7 @@ Shared parameters for various materials.
  </condition>
  <effect>Effects/crop</effect>
  <name>CropGrassCover</name>
+ <name>CropGrass</name>
  <texture>Terrain/cropgrass1.png</texture>
  <texture>Terrain/cropgrass2.png</texture>
  <texture>Terrain/cropgrass3.png</texture>
@@ -1464,6 +1478,7 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>CropWoodCover</name>
+ <name>CropWood</name>
  <effect>Effects/landmass</effect>
  <texture>Terrain/cropwood.png</texture>
  <xsize>2000</xsize>
@@ -1496,6 +1511,7 @@ Shared parameters for various materials.
  <name>Landmass</name>
  <name>SomeSort</name>
  <name>EvergreenBroadCover</name>
+ <name>EvergreenForest</name>
  <name>Island</name>
  <name>Default</name>
   <texture>Terrain.winter/forest1a.png</texture>
@@ -1522,6 +1538,7 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>DeciduousBroadCover</name>
+ <name>DeciduousForest</name>
  <name>Bog</name>
  <texture>Terrain.winter/deciduous1.png</texture>
  <texture>Terrain.winter/deciduous2.png</texture>
@@ -1547,6 +1564,8 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>MixedForestCover</name>
+ <name>MixedForest</name>
+ <name>RainForest</name>
  <texture>Terrain.winter/mixedforest.png</texture>
  <texture>Terrain.winter/mixedforest2.png</texture>
  <texture>Terrain.winter/mixedforest3.png</texture>
@@ -1828,6 +1847,8 @@ Shared parameters for various materials.
  <name>Reservoir</name>
  <name>Stream</name>
  <name>Canal</name>
+ <name>Lagoon</name>
+ <name>Saline</name>
  <texture>Terrain.winter/water-lake.png</texture>
  <xsize>400</xsize>
  <ysize>400</ysize>
@@ -1902,6 +1923,7 @@ Shared parameters for various materials.
  </condition>
  <name>Marsh</name>
  <name>Littoral</name>
+ <name>FloodLand</name>
  <name>HerbWetlandCover</name>
  <name>WoodedWetlandCover</name>
  <texture>Terrain.winter/marsh2.png</texture>
@@ -2048,6 +2070,8 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>MixedCropPastureCover</name>
+ <name>MixedCrop</name>
+ <name>ComplexCrop</name>
  <texture>Terrain.winter/mixedcrop1.png</texture>
  <texture>Terrain.winter/mixedcrop4.png</texture>
  <texture>Terrain.winter/mixedcrop3.png</texture>
@@ -2108,6 +2132,8 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>IrrCropPastureCover</name>
+ <name>IrrCrop</name>
+ <name>Orchard</name>
  <texture>Terrain.winter/irrcrop1.png</texture>
  <texture>Terrain.winter/irrcrop2.png</texture>
  <texture>Terrain.winter/irrcrop3.png</texture>
@@ -2168,6 +2194,7 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>DryCropPastureCover</name>
+ <name>DryCrop</name>
  <texture>Terrain.winter/drycrop1.png</texture>
  <texture>Terrain.winter/drycrop2.png</texture>
  <texture>Terrain.winter/drycrop3.png</texture>
@@ -2229,6 +2256,7 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>CropGrassCover</name>
+ <name>CropGrass</name>
  <texture>Terrain.winter/cropgrass1.png</texture>
  <texture>Terrain.winter/cropgrass2.png</texture>
  <texture>Terrain.winter/cropgrass3.png</texture>
@@ -2450,6 +2478,7 @@ Shared parameters for various materials.
  <name>BarrenCover</name>
  <name>Dirt</name>
  <name>OpenMining</name>
+ <name>Rock</name>
  <texture>Terrain/rock.png</texture>
  <xsize>500</xsize>
  <ysize>500</ysize>
@@ -2486,6 +2515,7 @@ Shared parameters for various materials.
 
 <material>
  <name>Railroad</name>
+ <name>Transport</name>
  <texture>Terrain/gravel.png</texture>
  <xsize>400</xsize>
  <ysize>400</ysize>

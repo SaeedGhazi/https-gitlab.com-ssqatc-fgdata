@@ -92,6 +92,12 @@ var cursor_types = { none: 0, pointer: 1, wait: 2, crosshair: 3, leftright: 4,
 var fdm = getprop("/sim/flight-model");
 var screenHProp = nil;
 var tipArg = nil;
+var autopilotDisableProps = [
+  "/autopilot/hide-menu",
+  "/autopilot/KAP140/locks",
+  "/autopilot/CENTURYIIB/locks",
+  "/autopilot/CENTURYIII/locks"
+];
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
     screenHProp = props.globals.getNode("/sim/startup/ysize");
@@ -103,7 +109,14 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
     # enable/disable menu entries
     menuEnable("fuel-and-payload", fdm == "yasim" or fdm == "jsb");
-    menuEnable("autopilot", props.globals.getNode("/autopilot/KAP140/locks") == nil);
+    var isAutopilotMenuEnabled = func {
+      foreach( var apdp; autopilotDisableProps ) {
+        if( props.globals.getNode( apdp ) != nil )
+          return 0;
+      }
+      return 1;
+    }
+    menuEnable("autopilot", isAutopilotMenuEnabled() );
     menuEnable("multiplayer", multiplayer.is_active());
     menuEnable("tutorial-start", size(props.globals.getNode("/sim/tutorials", 1).getChildren("tutorial")));
     menuEnable("joystick-info", size(props.globals.getNode("/input/joysticks").getChildren("js")));
@@ -731,11 +744,13 @@ var showWeightDialog = func {
         var fdmdata = {
             grosswgt : "/yasim/gross-weight-lbs",
             payload  : "/sim",
+            cg       : nil,
         };
     } elsif(fdm == "jsb") {
         var fdmdata = {
             grosswgt : "/fdm/jsbsim/inertia/weight-lbs",
             payload  : "/payload",
+            cg       : "/fdm/jsbsim/inertia/cg-x-in",
         };
     }
 
@@ -754,6 +769,34 @@ var showWeightDialog = func {
         txt.set("property", fdmdata.grosswgt);
         txt.set("live", 1);
         gwg.addChild("empty").set("stretch", 1);
+    }
+
+    var massLimits = props.globals.getNode("/limits/mass-and-balance");
+    if(massLimits != nil ) {
+
+        var weightitem = func( group, name, node, format ) {
+          group.set("layout", "hbox");
+          var n = isa( node, props.Node ) ? node : massLimits.getNode( node );
+          if( n == nil ) return;
+          group.addChild("empty").set("stretch", 1);
+          group.addChild("text").set("label", name ~ ":" );
+          var txt = group.addChild("text");
+          txt.set("label", "");
+          txt.set("format", format );
+          txt.set("property", n.getPath() );
+          txt.set("live", 1);
+          group.addChild("empty").set("stretch", 1);
+        }
+        weightitem( dialog[name].addChild("group"), "Max. Ramp Weight", "maximum-ramp-mass-lbs", "%.0f lb" );
+        weightitem( dialog[name].addChild("group"), "Max. Takeoff  Weight", "maximum-takeoff-mass-lbs", "%.0f lb" );
+        weightitem( dialog[name].addChild("group"), "Max. Landing  Weight", "maximum-landing-mass-lbs", "%.0f lb" );
+        weightitem( dialog[name].addChild("group"), "Max. Zero Fuel Weight", "maximum-zero-fuel-mass-lbs", "%.0f lb" );
+
+        if( fdmdata.cg != nil ) {
+          var n = massLimits.getNode("cg/dimension");
+          weightitem( dialog[name].addChild("group"), "CG", fdmdata.cg, "%.1f " ~ (n == nil ? "in" : n.getValue()));
+        }
+        weightitem = nil;
     }
 
     var buttonBar = dialog[name].addChild("group");
@@ -827,13 +870,13 @@ var showWeightDialog = func {
         var lbs = tcell(fuelTable, "text", i+1, 3);
         lbs.set("property", tankprop ~ "/level-lbs");
         lbs.set("label", "0123456");
-        lbs.set("format", "%.3f");
+        lbs.set("format", cap < 1 ? "%.3f" : cap < 10 ? "%.2f" : "%.1f" );
         lbs.set("live", 1);
 
         var gals = tcell(fuelTable, "text", i+1, 4);
         gals.set("property", tankprop ~ "/level-gal_us");
         gals.set("label", "0123456");
-        gals.set("format", "%.3f");
+        gals.set("format", cap < 1 ? "%.3f" : cap < 10 ? "%.2f" : "%.1f" );
         gals.set("live", 1);
     }
 

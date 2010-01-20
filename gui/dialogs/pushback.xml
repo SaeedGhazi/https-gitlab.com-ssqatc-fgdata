@@ -14,6 +14,7 @@
     <close>
        pushback_position.setpos(0);
        setprop("/sim/model/pushback/enabled", 0 );
+       setprop("/sim/model/pushback/target-speed-fps", 0 );
     </close>
   </nasal>
 

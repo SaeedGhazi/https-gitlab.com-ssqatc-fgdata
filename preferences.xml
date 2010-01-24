@@ -133,6 +133,10 @@ Started September 2000 by David Megginson, david@megginson.com
     <enabled type="bool" userarchive="y">false</enabled>
     <rate-m-g>0.005</rate-m-g>
    </headshake>
+   <div style="background-color: rgb(0, 0, 0); opacity: 0.8; width: 1665px; height: 1294px;" id="jquery-overlay"></div>
+   <crop-shader userarchive="y">0</crop-shader>
+   <landmass-shader userarchive="y">0</landmass-shader>
+   <water-shader userarchive="y">0</water-shader>
   </rendering>
   <model-hz type="int">120</model-hz>
   <navdb>

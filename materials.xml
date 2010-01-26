@@ -966,38 +966,37 @@ Shared parameters for various materials.
  <object-group>
   <range-m>10000</range-m>
   <object>
+   <path>Models/Buildings/water-tower.ac</path>
    <path>Models/Buildings/oil-tanks.ac</path>
    <coverage-m2>20000000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
   <object>
    <path>Models/Buildings/big-church.ac</path>
+   <path>Models/Buildings/brick-school.ac</path>
    <coverage-m2>200000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
   <object>
    <path>Models/Buildings/shop.ac</path>
-   <coverage-m2>40000</coverage-m2>
-   <heading-type>random</heading-type>
-  </object>
-  <object>
    <path>Models/Buildings/hosshop.ac</path>
-   <coverage-m2>75000</coverage-m2>
-   <heading-type>random</heading-type>
-  </object>
-  <object>
    <path>Models/Buildings/weapshop.ac</path>
-   <coverage-m2>40000</coverage-m2>
+   <coverage-m2>400000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
   <object>
-   <path>Models/Buildings/brick-school.ac</path>
-   <coverage-m2>285000</coverage-m2>
+   <path>Models/Residential/zone_maisons_carre-ba.ac</path>
+   <path>Models/Residential/zone_maisons_long-ba.ac</path>
+   <path>Models/Residential/zone_maisons_grd-ba.ac</path>
+   <path></path>
+   <coverage-m2>100000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
   <object>
-   <path>Models/Buildings/water-tower.ac</path>
-   <coverage-m2>100000000</coverage-m2>
+   <path>Models/Residential/germanvillagehouse1.ac</path>
+   <path>Models/Residential/MontHse1Grey_White.ac</path>
+   <path>Models/Residential/MontHse1Red_Tile_Yellow.ac</path>
+   <coverage-m2>30000</coverage-m2>
    <heading-type>random</heading-type>
   </object>
  </object-group>

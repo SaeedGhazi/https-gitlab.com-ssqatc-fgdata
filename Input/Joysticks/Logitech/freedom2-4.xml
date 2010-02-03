@@ -82,7 +82,7 @@
 	</axis>
 
 	<axis>
-		<desc>View Direction</desc>
+		<desc>View Direction Ctrl Aileron Trim</desc>
 		<number>
 			<unix>4</unix>
 			<windows>6</windows>
@@ -94,6 +94,13 @@
 				<property>/sim/current-view/goal-heading-offset-deg</property>
 				<step type="double">5.0</step>
 			</binding>
+			<mod-ctrl>
+				<desc>aileron adjustment</desc>
+				<binding>
+					<command>nasal</command>
+					<script>controls.aileronTrim(-1)</script>
+				</binding>
+			</mod-ctrl>
 		</low>
 		<high>
 			<repeatable>true</repeatable>
@@ -102,11 +109,18 @@
 				<property>/sim/current-view/goal-heading-offset-deg</property>
 				<step type="double">-5.0</step>
 			</binding>
+			<mod-ctrl>
+				<desc>aileron adjustment</desc>
+				<binding>
+					<command>nasal</command>
+					<script>controls.aileronTrim(1)</script>
+				</binding>
+			</mod-ctrl>
 		</high>
 	</axis>
 
 	<axis>
-		<desc>View Elevation</desc>
+		<desc>View Elevation Ctrl Elevator Trim</desc>
 		<number>
 			<unix>5</unix>
 			<windows>7</windows>
@@ -118,6 +132,13 @@
 				<property>/sim/current-view/goal-pitch-offset-deg</property>
 				<step type="double">5.0</step>
 			</binding>
+			<mod-ctrl>
+				<desc>Elevator adjustment</desc>
+				<binding>
+					<command>nasal</command>
+					<script>controls.elevatorTrim(-1)</script>
+				</binding>
+			</mod-ctrl>
 		</low>
 		<high>
 			<repeatable>true</repeatable>
@@ -126,6 +147,13 @@
 				<property>/sim/current-view/goal-pitch-offset-deg</property>
 				<step type="double">-5.0</step>
 			</binding>
+			<mod-ctrl>
+				<desc>Elevator adjustment</desc>
+				<binding>
+					<command>nasal</command>
+					<script>controls.elevatorTrim(1)</script>
+				</binding>
+			</mod-ctrl>
 		</high>
 	</axis>
 
@@ -154,15 +182,19 @@
 			<windows>1</windows>
 		</number>
 		<binding>
-			<command>property-assign</command>
+			<!--<command>property-assign</command>
 			<property>ai/submodels/trigger</property>
-			<value type="bool">1</value>
+			<value type="bool">1</value>-->
+			<command>nasal</command>
+			<script>controls.trigger(1)</script>
 		</binding>
 		<mod-up>
 			<binding>
-				<command>property-assign</command>
+				<!--<command>property-assign</command>
 				<property>ai/submodels/trigger</property>
-				<value type="bool">0</value>
+				<value type="bool">0</value>-->
+				<command>nasal</command>
+				<script>controls.trigger(0)</script>
 			</binding>
 		</mod-up>
 	</button>
@@ -278,7 +310,7 @@
 			<command>property-adjust</command>
 			<property>/controls/engines/engine/propeller-pitch</property>
 			<step type="double">0.1</step>
-			<min type="double">-1</min>
+			<min type="double">0</min>
 			<max type="double">1</max>
 		</binding>
 	</button>
@@ -294,7 +326,7 @@
 			<command>property-adjust</command>
 			<property>/controls/engines/engine/propeller-pitch</property>
 			<step type="double">-0.1</step>
-			<min type="double">-1</min>
+			<min type="double">0</min>
 			<max type="double">1</max>
 		</binding>
 	</button>

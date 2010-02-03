@@ -988,7 +988,6 @@ Shared parameters for various materials.
    <path>Models/Residential/zone_maisons_carre-ba.ac</path>
    <path>Models/Residential/zone_maisons_long-ba.ac</path>
    <path>Models/Residential/zone_maisons_grd-ba.ac</path>
-   <path></path>
    <coverage-m2>100000</coverage-m2>
    <heading-type>random</heading-type>
   </object>

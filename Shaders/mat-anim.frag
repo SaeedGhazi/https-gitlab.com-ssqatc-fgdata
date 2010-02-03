@@ -24,7 +24,7 @@ void main()
         halfV = normalize(halfVector);
         NdotHV = max(dot(n, halfV), 0.0);
         if (gl_FrontMaterial.shininess > 0.0)
-            specular.rgb = (matSpecular
+            specular.rgb = (matSpecular.rgb
                             * gl_LightSource[0].specular.rgb
                             * pow(NdotHV, gl_FrontMaterial.shininess));
     }

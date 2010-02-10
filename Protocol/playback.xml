@@ -341,15 +341,15 @@
    <!-- Position -->
    <chunk>
     <name>latitude-deg</name>
-    <type>float</type>
-    <format>%f</format>
+    <type>double</type>
+    <format>%.10lf</format>
     <node>/position/latitude-deg</node>
    </chunk>
 
    <chunk>
     <name>longitude-deg</name>
-    <type>float</type>
-    <format>%f</format>
+    <type>double</type>
+    <format>%.10lf</format>
     <node>/position/longitude-deg</node>
    </chunk>
 
@@ -837,13 +837,13 @@
    <!-- Position -->
    <chunk>
     <name>latitude-deg</name>
-    <type>float</type>
+    <type>double</type>
     <node>/position/latitude-deg</node>
    </chunk>
 
    <chunk>
     <name>longitude-deg</name>
-    <type>float</type>
+    <type>double</type>
     <node>/position/longitude-deg</node>
    </chunk>
 

@@ -41,7 +41,7 @@ $Id$
 -->
 
 <PropertyList>
-	<name type="string">Microsoft-PC-Joysticktreiber</name>
+	<!--<name type="string">Microsoft-PC-Joysticktreiber</name>-->
 	<name type="string">Mega World USB Game Controllers</name>
 	<name type="string">SpeedLink SL-6640 Black Widow Flight Stick</name>
 	<axis>

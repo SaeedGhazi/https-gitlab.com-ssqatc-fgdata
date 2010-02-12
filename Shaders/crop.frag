@@ -59,7 +59,7 @@ void main (void)
 	c1 = mix(c1, clamp(n+nvL[2]*4.1+vec4(0.1, 0.1, nvL[2]*2.2, 1.0), 0.7, 1.0), smoothstep(snowlevel+300.0, snowlevel+360.0, (rawpos.z)+nvL[1]*3000.0));
 
     vec3 diffuse = gl_FrontMaterial.diffuse.rgb * max(0.0, dot(VNormal, gl_LightSource[0].position.xyz));
-    vec4 ambientColor = gl_FrontLightModelProduct.sceneColor + gl_LightSource[0].ambient * gl_FrontMaterial.ambient;
+    vec4 ambientColor = gl_Color;
 //    ambientColor = vec4(0.01);
     vec4 ambient_light = ambientColor + gl_LightSource[0].diffuse * vec4(diffuse, 1.0);
 

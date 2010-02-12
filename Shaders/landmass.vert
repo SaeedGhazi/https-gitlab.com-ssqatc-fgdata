@@ -10,6 +10,8 @@ void main(void)
     VNormal = normalize(gl_NormalMatrix * gl_Normal);
     Normal = normalize(gl_Normal);
 
+    gl_FrontColor = gl_FrontMaterial.emission
+        + gl_Color * (gl_LightModel.ambient + gl_LightSource[0].ambient);  
     gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
 }

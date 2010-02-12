@@ -15,6 +15,7 @@ void main(void)
 	ecPosition = gl_ModelViewMatrix * gl_Vertex;
 	VNormal = normalize(gl_NormalMatrix * gl_Normal);
 	Normal = normalize(gl_Normal);
-
+        gl_FrontColor = gl_FrontMaterial.emission
+            + gl_Color * (gl_LightModel.ambient + gl_LightSource[0].ambient);
 	gl_Position = ftransform();
 }

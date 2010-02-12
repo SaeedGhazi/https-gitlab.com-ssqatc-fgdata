@@ -22,7 +22,7 @@ void main()
     halfVector = normalize(gl_LightSource[0].halfVector.xyz);
     diffuse = gl_Color * gl_LightSource[0].diffuse;
     alpha = gl_Color.a;
-    constantColor =  gl_FrontLightModelProduct.sceneColor
-        + gl_FrontMaterial.ambient * gl_LightSource[0].ambient;
+    constantColor =  gl_FrontMaterial.emission
+        + gl_Color * (gl_LightModel.ambient + gl_LightSource[0].ambient);
     fogCoord = abs(ecPosition.z);
 }

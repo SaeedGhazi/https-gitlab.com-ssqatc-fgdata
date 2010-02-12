@@ -88,12 +88,16 @@ var window = {
 		m.skiptimer = 0;
 		m.dialog = nil;
 		m.namenode = props.Node.new({ "dialog-name": m.name });
+		m.writebuffer = [];
+		m.MAX_BUFFER_SIZE = 50;
 		setlistener("/sim/startup/xsize", func m._redraw_());
 		setlistener("/sim/startup/ysize", func m._redraw_());
 		return m;
 	},
 	write : func(msg, r = nil, g = nil, b = nil, a = nil) {
 		if (me.namenode == nil)
+			return;
+		if (size(me.writebuffer) > me.MAX_BUFFER_SIZE)
 			return;
 		if (r == nil)
 			r = me.fg[0];
@@ -103,18 +107,14 @@ var window = {
 			b = me.fg[2];
 		if (a == nil)
 			a = me.fg[3];
+		var lines = [];
 		foreach (var line; split("\n", string.trim(msg ~ ""))) {
 			line = sanitize(string.trim(line));
-			append(me.lines, [line, r, g, b, a]);
-			if (size(me.lines) > me.maxlines) {
-				me.lines = subvec(me.lines, 1);
-				if (me.autoscroll)
-					me.skiptimer += 1;
-			}
-			if (me.autoscroll)
-				settimer(func me._timeout_(), me.autoscroll, 1);
+			append(lines, [line, r, g, b, a]);
 		}
-		me.show();
+		if (size(me.writebuffer) == 0)
+			settimer(func { me._write_(); } , 0, 1);
+		append(me.writebuffer, lines);
 	},
 	show : func {
 		if (me.dialog != nil)
@@ -151,6 +151,25 @@ var window = {
 			me.x = me.dialog.prop().getNode("lastx").getValue();
 			me.y = me.dialog.prop().getNode("lasty").getValue();
 		}
+	},
+	_write_ : func() {
+		if (size(me.writebuffer) == 0)
+			return;
+		var lines = me.writebuffer[0];
+		me.writebuffer = subvec(me.writebuffer, 1);
+		foreach (var line; lines) {
+			append(me.lines, line);
+			if (size(me.lines) > me.maxlines) {
+				me.lines = subvec(me.lines, 1);
+				if (me.autoscroll)
+					me.skiptimer += 1;
+			}
+			if (me.autoscroll)
+				settimer(func me._timeout_(), me.autoscroll, 1);
+		}
+		if (size(me.writebuffer) > 0)
+			settimer(func { me._write_(); } , 0, 1);
+		me.show();
 	},
 	_timeout_ : func {
 		if (me.skiptimer > 0) {

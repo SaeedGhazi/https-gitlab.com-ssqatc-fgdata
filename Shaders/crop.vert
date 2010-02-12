@@ -4,6 +4,7 @@ varying vec4  rawpos;
 varying vec4  ecPosition;
 varying vec3  VNormal;
 varying vec3  Normal;
+varying vec4 constantColor;
 centroid varying vec4 ipos;
 
 void main(void)
@@ -15,7 +16,8 @@ void main(void)
 	ecPosition = gl_ModelViewMatrix * gl_Vertex;
 	VNormal = normalize(gl_NormalMatrix * gl_Normal);
 	Normal = normalize(gl_Normal);
-        gl_FrontColor = gl_FrontMaterial.emission
+        gl_FrontColor = gl_Color;
+        constantColor =  gl_FrontMaterial.emission
             + gl_Color * (gl_LightModel.ambient + gl_LightSource[0].ambient);
 	gl_Position = ftransform();
 }

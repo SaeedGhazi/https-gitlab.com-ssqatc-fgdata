@@ -155,20 +155,19 @@ var window = {
 	_write_ : func() {
 		if (size(me.writebuffer) == 0)
 			return;
-		var lines = me.writebuffer[0];
-		me.writebuffer = subvec(me.writebuffer, 1);
-		foreach (var line; lines) {
-			append(me.lines, line);
-			if (size(me.lines) > me.maxlines) {
-				me.lines = subvec(me.lines, 1);
+		foreach (var msg; me.writebuffer) {
+			foreach (var line; msg) {
+				append(me.lines, line);
+				if (size(me.lines) > me.maxlines) {
+					me.lines = subvec(me.lines, 1);
+					if (me.autoscroll)
+						me.skiptimer += 1;
+				}
 				if (me.autoscroll)
-					me.skiptimer += 1;
+					settimer(func me._timeout_(), me.autoscroll, 1);
 			}
-			if (me.autoscroll)
-				settimer(func me._timeout_(), me.autoscroll, 1);
 		}
-		if (size(me.writebuffer) > 0)
-			settimer(func { me._write_(); } , 0, 1);
+		me.writebuffer = [];
 		me.show();
 	},
 	_timeout_ : func {

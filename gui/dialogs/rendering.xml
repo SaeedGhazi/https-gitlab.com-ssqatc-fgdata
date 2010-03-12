@@ -261,6 +261,15 @@
             <command>dialog-apply</command>
           </binding>
         </checkbox>
+
+        <checkbox>
+          <halign>left</halign>
+          <label>Urban effects</label>
+          <property>/sim/rendering/urban-shader</property>
+          <binding>
+            <command>dialog-apply</command>
+          </binding>
+        </checkbox>
       </group>
     </group>
   </group>

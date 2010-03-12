@@ -871,9 +871,12 @@ Shared parameters for various materials.
  </condition>
  <name>BuiltUpCover</name>
  <name>Urban</name>
+ <effect>Effects/urban</effect>
  <texture>Terrain/city1.png</texture>
+<!-- 
  <texture>Terrain/city2.png</texture>
  <texture>Terrain/city3.png</texture>
+-->
  <xsize>1024</xsize>
  <ysize>1024</ysize>
  <light-coverage>100000.0</light-coverage>

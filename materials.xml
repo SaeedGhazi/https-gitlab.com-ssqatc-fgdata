@@ -877,8 +877,8 @@ Shared parameters for various materials.
  <texture>Terrain/city2.png</texture>
  <texture>Terrain/city3.png</texture>
 -->
- <xsize>1024</xsize>
- <ysize>1024</ysize>
+ <xsize>2000</xsize>
+ <ysize>2000</ysize>
  <light-coverage>100000.0</light-coverage>
  <emissive>
   <r>0.05</r>

@@ -31,7 +31,6 @@ in Aircraft/A320/Models/Effects/a320_bumpspec.eff ( or whatever, private to the 
   <name>Effects/bumpspec</name>
   <inherits-from>Effects/model-default</inherits-from>
   <generate>
-    <normal type="int">15</normal>
     <tangent type="int">6</tangent>
     <binormal type="int">7</binormal>
   </generate>
@@ -73,21 +72,14 @@ in Aircraft/A320/Models/Effects/a320_bumpspec.eff ( or whatever, private to the 
       <program>
         <vertex-shader n="0">Shaders/bumpspec.vert</vertex-shader>
         <fragment-shader n="0">Shaders/bumpspec.frag</fragment-shader>
-        <uniform>
-          <name>tex_color</name>
-          <type>sampler-2d</type>
-          <value type="int">0</value>
-        </uniform>
-        <uniform>
-          <name>tex_normal</name>
-          <type>sampler-2d</type>
-          <value type="int">1</value>
-        </uniform>
-        <uniform>
-          <name>tex_specular</name>
-          <type>sampler-2d</type>
-          <value type="int">2</value>
-        </uniform>
+        <attribute>
+          <name>tangent</name>
+          <index>6</index>
+        </attribute>
+        <attribute>
+          <name>binormal</name>
+          <index>7</index>
+        </attribute>
       </program>
       <uniform>
         <name>tex_color</name>

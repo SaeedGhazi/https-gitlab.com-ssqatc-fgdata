@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!--
+ This file is part of FlightGear, the free flight simulator
+ http://www.flightgear.org/
+
+ Copyright (C) 2009 Torsten Dreyer, Torsten (at) t3r _dot_ de
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License as
+ published by the Free Software Foundation; either version 2 of the
+ License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful, but
+ WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ General Public License for more details.
+-->
+
+<PropertyList>
+  <name>about</name>
+  <modal>true</modal>
+  <layout>vbox</layout>
+  <resizable>false</resizable>
+  <default-padding>3</default-padding>
+
+  <group>
+    <layout>hbox</layout>
+    <default-padding>1</default-padding>
+
+    <empty><stretch>true</stretch></empty>
+
+    <text>
+      <label>About FlightGear</label>
+    </text>
+
+    <empty><stretch>true</stretch></empty>
+
+    <button>
+      <legend></legend>
+      <key>Esc</key>
+      <pref-width>16</pref-width>
+      <pref-height>16</pref-height>
+      <border>2</border>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
+
+  <hrule/>
+    <text>
+      <label>FlightGear Flight Simulator</label>
+    </text>
+    <text>
+      <label>(c) 1996-2010, the FlightGear contributors</label>
+    </text>
+    <text>
+      <label>http://www.flightgear.org/</label>
+    </text>
+    <text>
+      <label>License: GNU General Public License Version 2</label>
+    </text>
+  <hrule/>
+
+  <group>
+    <layout>hbox</layout>
+      <halign>center</halign>
+
+    <button>
+      <legend>OK</legend>
+      <equal>true</equal>
+      <key>Esc</key>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+
+    <empty><stretch>true</stretch></empty>
+  </group>
+
+  <nasal>
+    <open><![CDATA[
+    ]]></open>
+
+    <close><![CDATA[
+    ]]></close>
+
+  </nasal>
+</PropertyList>
+

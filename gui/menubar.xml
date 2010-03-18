@@ -566,6 +566,13 @@
 		<label>Help</label>
 
 		<item>
+			<label>About</label>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>about</dialog-name>
+			</binding>
+		</item>
+		<item>
 			<label>Help</label>
 			<binding>
 				<command>old-help-dialog</command>

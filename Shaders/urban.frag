@@ -1,3 +1,8 @@
+// -*- mode: C; -*-
+// Licence: GPL v2
+// Author: Frederic Bouvier. 
+//  Adapted from the paper by F. Policarpo et al. : Real-time Relief Mapping on Arbitrary Polygonal Surfaces
+
 #version 120
 
 varying vec4  rawpos;
@@ -11,12 +16,14 @@ varying vec4  constantColor;
 uniform sampler2D BaseTex;
 uniform sampler2D NormalTex;
 uniform float depth_factor;
+uniform float tile_size;
 
-const float scale = 1.0;
+const float zFar = 120000.0;
+const float zNear = 100.0;
 
 float ray_intersect(sampler2D reliefMap, vec2 dp, vec2 ds)
 {
-	const int linear_search_steps = 10;
+	const int linear_search_steps = 20;
 
 	float size = 1.0 / float(linear_search_steps);
 	float depth = 0.0;
@@ -51,35 +58,55 @@ float ray_intersect(sampler2D reliefMap, vec2 dp, vec2 ds)
 
 void main (void)
 {
-	vec3 V = normalize(ecPosition.xyz);
-	vec3 s = vec3(dot(V, VTangent), dot(V, VBinormal), dot(VNormal, V));
+	vec3 ecPos3 = ecPosition.xyz / ecPosition.w;
+	vec3 V = normalize(ecPos3);
+	vec3 s = vec3(dot(V, VTangent), dot(V, VBinormal), dot(VNormal, -V));
 	vec2 ds = s.xy * depth_factor / s.z;
-	vec2 dp = gl_TexCoord[0].st;
+	vec2 dp = gl_TexCoord[0].st - ds;
 	float d = ray_intersect(NormalTex, dp, ds);
 
 	vec2 uv = dp + ds * d;
 	vec3 N = texture2D(NormalTex, uv).xyz * 2.0 - 1.0;
 
 	float fogFactor;
-	float fogCoord = ecPosition.z;
+	float fogCoord = ecPos3.z;
 	const float LOG2 = 1.442695;
 	fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
 	fogFactor = clamp(fogFactor, 0.0, 1.0);
 
-	vec4 c1 = texture2D(BaseTex, uv);
 
+	float emis = N.z;
+	N.z = sqrt(1.0 - min(1.0,dot(N.xy, N.xy)));
 	N = normalize(N.x * VTangent + N.y * VBinormal + N.z * VNormal);
 
 	vec3 l = gl_LightSource[0].position.xyz;
 	vec3 diffuse = gl_Color.rgb * max(0.0, dot(N, l));
 
+// Shadow
+	dp += ds * d;
+	vec3 sl = normalize( vec3( dot( l, VTangent ), dot( l, VBinormal ), dot( -l, VNormal ) ) );
+	ds = sl.xy * depth_factor / sl.z;
+	dp -= ds * d;
+	float dl = ray_intersect(NormalTex, dp, ds);
+	float shadow_factor = 1.0;
+	if ( dl < d - 0.05 )
+		shadow_factor = dot( constantColor.xyz, vec3( 1.0, 1.0, 1.0 ) ) * 0.25;
+// end shadow
+
 	vec4 ambient_light = constantColor + gl_LightSource[0].diffuse * vec4(diffuse, 1.0);
+	float reflectance = ambient_light.r * 0.3 + ambient_light.g * 0.59 + ambient_light.b * 0.11;
+	if ( shadow_factor < 1.0 )
+		ambient_light = constantColor + gl_LightSource[0].diffuse * shadow_factor * vec4(diffuse, 1.0);
+	ambient_light += ((1.0 - smoothstep(0.15, 0.25, reflectance)) * 1.0 * emis * vec4(0.75, 0.59, 0.05, 0.0));
 
-	c1 *= ambient_light;
-	vec4 finalColor = c1;
+	vec4 finalColor = texture2D(BaseTex, uv) * ambient_light;
 
-	if(gl_Fog.density == 1.0)
+	if (gl_Fog.density == 1.0)
 		fogFactor=1.0;
 
+	vec4 p = vec4( ecPos3 + tile_size * V * (d-1.0) * depth_factor / s.z, 1.0 );
+	vec4 iproj = gl_ProjectionMatrix * p;
+	iproj /= iproj.w;
 	gl_FragColor = mix(gl_Fog.color ,finalColor, fogFactor);
+	gl_FragDepth = (iproj.z+1.0)/2.0;
 }

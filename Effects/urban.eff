@@ -105,7 +105,7 @@
       <uniform>
         <name>tile_size</name>
         <type>float</type>
-        <value type="float">1024.0</value>
+        <value type="float">2000.0</value>
       </uniform>
     </pass>
   </technique>

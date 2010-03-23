@@ -68,12 +68,6 @@ void main (void)
 	vec2 uv = dp + ds * d;
 	vec3 N = texture2D(NormalTex, uv).xyz * 2.0 - 1.0;
 
-	float fogFactor;
-	float fogCoord = ecPos3.z;
-	const float LOG2 = 1.442695;
-	fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
-	fogFactor = clamp(fogFactor, 0.0, 1.0);
-
 
 	float emis = N.z;
 	N.z = sqrt(1.0 - min(1.0,dot(N.xy, N.xy)));
@@ -97,9 +91,16 @@ void main (void)
 	float reflectance = ambient_light.r * 0.3 + ambient_light.g * 0.59 + ambient_light.b * 0.11;
 	if ( shadow_factor < 1.0 )
 		ambient_light = constantColor + gl_LightSource[0].diffuse * shadow_factor * vec4(diffuse, 1.0);
-	ambient_light += ((1.0 - smoothstep(0.15, 0.25, reflectance)) * 1.0 * emis * vec4(0.75, 0.59, 0.05, 0.0));
+	float emission_factor = (1.0 - smoothstep(0.15, 0.25, reflectance)) * emis;
+	ambient_light += (emission_factor * vec4(0.75, 0.59, 0.05, 0.0));
 
 	vec4 finalColor = texture2D(BaseTex, uv) * ambient_light;
+
+	float fogFactor;
+	float fogCoord = ecPos3.z / (1.0 + smoothstep(0.3, 0.7, emission_factor));
+	const float LOG2 = 1.442695;
+	fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
+	fogFactor = clamp(fogFactor, 0.0, 1.0);
 
 	if (gl_Fog.density == 1.0)
 		fogFactor=1.0;

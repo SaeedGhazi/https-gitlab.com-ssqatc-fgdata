@@ -1129,6 +1129,7 @@ Shared parameters for various materials.
  <name>MixedTundraCover</name>
  <name>GolfCourse</name>
  <name>Cemetry</name>
+ <effect>Effects/landmass</effect>
  <texture>Terrain/tundra.png</texture>
  <texture>Terrain/tundra2.png</texture>
  <texture>Terrain/tundra3.png</texture>
@@ -1163,6 +1164,7 @@ Shared parameters for various materials.
   </equals>
  </condition>
  <name>HerbTundraCover</name>
+ <effect>Effects/landmass</effect>
  <texture>Terrain/herbtundra.png</texture>
  <texture>Terrain/herbtundra2.png</texture>
  <texture>Terrain/herbtundra3.png</texture>

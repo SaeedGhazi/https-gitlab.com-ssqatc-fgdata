@@ -267,6 +267,14 @@
 				</script>
 			</binding>
 		</item>
+		
+		<item>
+			<label>Map</label>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>map</dialog-name>
+			</binding>
+		</item>
 	</menu>
 
 	<menu>

@@ -21,11 +21,10 @@ command interface /autopilot/route-manager/input:
 			var ft = getprop("/sim/startup/units") == "feet";
 			var dlg = props.globals.getNode("/sim/gui/dialogs/route-manager", 1);
 			var selection = dlg.getNode("selection", 1);
-			var input = dlg.getNode("input", 1);
-
+			var input = dlg.getNode("input", 1);    
 			var routem = props.globals.getNode("/autopilot/route-manager", 1);
 
-			selection.setValue("");
+			selection.setIntValue(-1);
 			input.setValue("");
 
 			var list = cmdarg().getNode("list");
@@ -33,9 +32,7 @@ command interface /autopilot/route-manager/input:
 			var route = routem.getNode("route", 1);
 			
 			var sel_index = func {
-				var s = selection.getValue();
-				selection.setValue("");
-				return s == "" ? -1 : split(':', s)[0] - 1;
+				return int(selection.getValue());
 			}
 
 			var clear = func {
@@ -43,44 +40,36 @@ command interface /autopilot/route-manager/input:
 			}
 
 			var insert = func {
-				cmd.setValue("@insert" ~ sel_index() ~ ":" ~ input.getValue());
+			    var insertIndex = sel_index();
+			    if (insertIndex >= 0) {
+			        # when selection index is valid, insert *after* the waypoint
+			        insertIndex = insertIndex + 1;
+			    }
+			    
+				cmd.setValue("@insert" ~ insertIndex ~ ":" ~ input.getValue());
 				input.setValue("");
+				
+				if (insertIndex >= 0) {
+				    selection.setValue(insertIndex);
+				    gui.dialog_update("route-manager");
+				}
 			}
 
 			var remove = func {
-				var pos = sel_index();
-				cmd.setValue("@delete" ~ (pos > 0 ? pos : 0));
+				cmd.setValue("@delete" ~ sel_index());
 			}
-
+			
+			var auto_route = func {
+			    cmd.setValue();
+			}
+            
+            var jump_to = func {
+                cmd.setValue("@jump" ~ sel_index());
+			}
+			
 			var load = func {
 				file_selector.open();
 			}
-
-			var route_changed = func {
-				list.removeChildren("value");
-				var wp = route.getChildren("wp");
-				forindex (var i; wp) {
-					var id = wp[i].getNode("id").getValue();
-					var lon = wp[i].getNode("longitude-deg").getValue();
-					var lat = wp[i].getNode("latitude-deg").getValue();
-					var alt = wp[i].getNode("altitude-m").getValue();
-					var entry = sprintf("%d:  %-5s   %3.4f lon   %3.4f lat   ",
-							i + 1, id, lon, lat);
-					if (alt > -9990) {
-						if (ft) {
-							entry ~= sprintf("%.0f ft", alt / 0.3048);
-						} else {
-							entry ~= sprintf("%.0f m", alt);
-						}
-					}
-					list.getChild("value", i, 1).setValue(entry);
-				}
-
-				fgcommand("dialog-update", props.Node.new({"object-name": "list",
-						"dialog-name": "route-manager"}));
-			}
-
-			var lst = setlistener("/autopilot/route-manager/route/num", route_changed, 1);
 
 			var load_route = func(path) {
 				routem.getNode("file-path", 1).setValue(path.getValue());
@@ -131,7 +120,6 @@ command interface /autopilot/route-manager/input:
 		</open>
 
 		<close>
-			removelistener(lst);
 			file_selector.del();
 		</close>
 	</nasal>
@@ -234,7 +222,7 @@ command interface /autopilot/route-manager/input:
 		   	<properties>/sim/gui/dialogs/route-manager/destination-runways</properties>
 		</combo>
 	</group>
-	
+	<!--
 	<group>
 		<layout>hbox</layout>
 		<text>
@@ -250,7 +238,7 @@ command interface /autopilot/route-manager/input:
 		</input>
 		
 	</group>
-	
+	-->
 	<group>
 		<layout>hbox</layout>
 		<text>
@@ -306,7 +294,7 @@ command interface /autopilot/route-manager/input:
 		</text>
 	</group>
 
-	<list>
+	<waypointlist>
 		<name>list</name>
 		<halign>fill</halign>
 		<valign>fill</valign>
@@ -317,7 +305,7 @@ command interface /autopilot/route-manager/input:
 			<command>dialog-apply</command>
 			<object-name>list</object-name>
 		</binding>
-	</list>
+	</waypointlist>
 
 	<group>
 		<layout>hbox</layout>
@@ -379,10 +367,38 @@ command interface /autopilot/route-manager/input:
 
 		<button>
 			<legend>Remove</legend>
-			<equal>true</equal>
+			<enable>
+                <greater-than>
+				<property>/sim/gui/dialogs/route-manager/selection</property>
+				<value>-1</value>
+				</greater-than>
+			</enable>
 			<binding>
 				<command>nasal</command>
 				<script>remove()</script>
+			</binding>
+		</button>
+<!--
+        <button>
+			<legend>Auto-route</legend>
+			<equal>true</equal>
+			<binding>
+				<command>nasal</command>
+				<script>auto_route()</script>
+			</binding>
+		</button>
+-->
+        <button>
+			<legend>Jump To</legend>
+			<enable>
+                <greater-than>
+				<property>/sim/gui/dialogs/route-manager/selection</property>
+				<value>-1</value>
+				</greater-than>
+			</enable>
+			<binding>
+				<command>nasal</command>
+				<script>jump_to()</script>
 			</binding>
 		</button>
 
@@ -390,7 +406,7 @@ command interface /autopilot/route-manager/input:
 			<legend>Activate</legend>
 			<equal>true</equal>
 			<enable>
-			<not><property>/autopilot/route-manager/active</property></not>
+			    <not><property>/autopilot/route-manager/active</property></not>
 			</enable>
 			<binding>
 				<command>dialog-apply</command>

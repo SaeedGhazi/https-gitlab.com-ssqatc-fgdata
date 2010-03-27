@@ -241,19 +241,19 @@
 			</binding>
 		</item>
 
-		<item>
-			<label>Pop Waypoint</label>
+        <item>
+			<label>Previous Waypoint</label>
 			<binding>
 				<command>nasal</command>
-				<script>setprop("/autopilot/route-manager/input", "@pop")</script>
+				<script>setprop("/autopilot/route-manager/input", "@previous")</script>
 			</binding>
 		</item>
-
-		<item>
-			<label>Clear Route</label>
+		
+        <item>
+			<label>Next Waypoint</label>
 			<binding>
 				<command>nasal</command>
-				<script>setprop("/autopilot/route-manager/input", "@clear")</script>
+				<script>setprop("/autopilot/route-manager/input", "@next")</script>
 			</binding>
 		</item>
 

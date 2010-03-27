@@ -137,6 +137,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <landmass-shader userarchive="y">0</landmass-shader>
    <water-shader userarchive="y">0</water-shader>
    <urban-shader userarchive="y">0</urban-shader>
+   <snow-level-m type="double">2000.0</snow-level-m>
   </rendering>
   <model-hz type="int">120</model-hz>
   <navdb>

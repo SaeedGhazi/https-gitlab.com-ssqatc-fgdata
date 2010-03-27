@@ -2,6 +2,9 @@
 <PropertyList>
   <name>Effects/landmass</name>
   <inherits-from>Effects/terrain-default</inherits-from>
+  <parameters>
+    <snow-level><use>/sim/rendering/snow-level-m</use></snow-level>
+  </parameters>
   <technique n="9">
     <predicate>
       <and>
@@ -56,13 +59,21 @@
         <fragment-shader>Shaders/landmass.frag</fragment-shader>
       </program>
       <uniform>
-      <name>NoiseTex</name>
-      <type>sampler-3d</type>
-      <value type="int">0</value></uniform>
+        <name>NoiseTex</name>
+        <type>sampler-3d</type>
+        <value type="int">0</value>
+      </uniform>
       <uniform>
         <name>BaseTex</name>
         <type>sampler-2d</type>
         <value type="int">1</value>
+      </uniform>
+      <uniform>
+        <name>snowlevel</name>
+        <type>float</type>
+        <value type="float">
+           <use>snow-level</use>
+        </value>
       </uniform>
     </pass>
   </technique>

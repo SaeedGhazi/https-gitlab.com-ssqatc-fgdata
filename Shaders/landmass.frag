@@ -8,12 +8,13 @@ varying vec4 constantColor;
 
 uniform sampler3D NoiseTex;
 uniform sampler2D BaseTex;
+uniform float snowlevel;
 
+// From /sim/rendering/snow-level-m
 const float scale = 1.0;
 
 void main (void)
 {
-	const float snowlevel=2000.0;
 	vec4 noisevec   = texture3D(NoiseTex, (rawpos.xyz)*0.01*scale);
 	vec4 nvL   = texture3D(NoiseTex, (rawpos.xyz)*0.00066*scale);
 

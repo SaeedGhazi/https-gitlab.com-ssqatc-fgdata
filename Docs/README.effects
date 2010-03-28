@@ -79,14 +79,14 @@ Values are assigned to technique properties in several ways:
 		<uniform>
 			<name>ColorsTex</name>
 			<type>sampler-1d</type>
-		<	value type="int">2</value>
+			<value type="int">2</value>
 		</uniform>
 		* The name of a property in the parameters section can be
 		referenced using a "use" clause. For example, in the technique
 		section:
 		<material>
 			<ambient><use>material/ambient</use></ambient>
-		 </material>
+		</material>
 		Then, in the parameters section of the effect:
 		<parameters>
 			<material>
@@ -151,6 +151,7 @@ polygon-mode - children: front, back
 program
 		vertex-shader
 		fragment-shader
+		attribute
 
 render-bin - (OSG) children: bin-number, bin-name
 
@@ -209,8 +210,49 @@ those parameters in its "techniques" section. The derived effect
 overrides any default values that might be in the base effect's
 parameters section.
 
+Generate
+--------
+
+Often shader effects need tangent vectors to work properly. These 
+tangent vectors, usually called tangent and binormal, are computed 
+on the CPU and given to the shader as vertex attributes. These 
+vectors are computed on demand on the geometry using the effect if 
+the 'generate' clause is present in the effect file. Exemple :
+
+	<generate>
+		<tangent type="int">6</tangent>
+		<binormal type="int">7</binormal>
+		<normal type="int">8</normal>
+	</generate>
+
+Valid subnodes of 'generate' are 'tangent', 'binormal' or 'normal'.
+The integer value of these subnode is the index of the attribute 
+that will hold the value of the vec3 vector.
+
+The generate clause is located under PropertyList in the xml file.
+
+In order to be available for the vertex shader, these data should 
+be bound to an attribute in the program clause, like this :
+
+	<program>
+		<vertex-shader>my_vertex_shader</vertex-shader>
+		<attribute>
+			<name>my_tangent_attribute</name>
+			<index>6</index>
+		</attribute>
+		<attribute>
+			<name>my_binormal_attribute</name>
+			<index>7</index>
+		</attribute>
+	</program>
+
+attribute names are whatever the shader use. The index is the one 
+declared in the 'generate' clause. So because generate/tangent has 
+value 6 and my_tangent_attribute has index 6, my_tangent_attribute 
+holds the tangent value for the vertex.
+
 Default Effects in Terrain Materials and Models
----------------------------------------
+-----------------------------------------------
 
 Effects for terrain work in this way: for each material type in
 materials.xml an effect is created that inherits from a single default

@@ -1,0 +1,86 @@
+﻿#version 120
+
+varying vec4  ecPosition;
+varying vec3  VNormal;
+varying vec3  Normal;
+varying vec4  constantColor;
+varying vec3  vViewVec;
+varying vec3  reflVec;
+
+varying vec3 Diffuse;
+varying vec3 lightDir, halfVector;
+varying float alpha, fogCoord;
+
+uniform samplerCube Environment;
+uniform sampler2D Rainbow;
+uniform sampler2D BaseTex;
+uniform sampler2D Fresnel;
+
+uniform float transparency;
+uniform float rainbowiness;
+uniform float fresneliness;
+uniform float correction;
+
+
+void main (void)
+{
+    if (!gl_FrontFacing) discard;
+
+    vec3 n, halfV;
+    float NdotL, NdotHV;
+    vec4 color = constantColor;
+    vec4 specular = vec4(0.0);
+    n = VNormal;
+    NdotL = max(0.0, dot(n, lightDir));
+
+    //calculate the specular light
+    if (NdotL > 0.0) {
+        color += vec4(Diffuse, 1.0) * NdotL;
+        halfV = normalize(halfVector);
+        NdotHV = max(dot(n, halfV), 0.0);
+        if (gl_FrontMaterial.shininess > 0.0)
+            specular.rgb = (gl_FrontMaterial.specular.rgb
+            * gl_LightSource[0].specular.rgb
+            * pow(NdotHV, gl_FrontMaterial.shininess));
+    }
+
+    color.a = alpha;
+    color = clamp(color, 0.0, 1.0);
+    vec4 texel = texture2D(BaseTex, gl_TexCoord[0].st);
+    vec4 texelcolor = color * texel + specular;
+
+    // calculate the fog factor
+    float fogCoord = ecPosition.z;
+    const float LOG2 = 1.442695;
+    float fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
+    fogFactor = clamp(fogFactor, 0.0, 1.0);
+
+    if(gl_Fog.density == 1.0)
+        fogFactor=1.0;
+
+    vec3 normal = normalize(VNormal);
+    vec3 viewVec = normalize(vViewVec);
+
+    // Map a rainbowish color
+    float v = dot(viewVec, normal);
+    vec4 rainbow = texture2D(Rainbow, vec2(v, 0.0));
+
+    // Map a fresnel effect
+    vec4 fresnel = texture2D(Fresnel, vec2(v, 0.0));
+
+    //map the refection of the environment
+    vec4 reflection = textureCube(Environment, reflVec);
+
+    //add fringing fresnel and rainbow effects and modulate by transparency
+    vec4 reflcolor = mix(reflection, rainbow, rainbowiness * v);
+    vec4 reflfrescolor = mix(reflcolor, fresnel, fresneliness * v);
+    vec4 raincolor = vec4(reflfrescolor.rgb, 1.0) * transparency;
+    vec4 mixedcolor = mix(texel, raincolor, transparency);
+
+    //the final reflection
+    vec4 ambient_correction = mix(gl_LightSource[0].ambient, vec4(1.0, 1.0, 0.9, 1.0), 0.5) * correction;
+    vec4 reflColor = color * mixedcolor + specular + ambient_correction ;
+    reflColor = clamp(reflColor, 0.0, 1.0);
+
+    gl_FragColor = mix(gl_Fog.color, reflColor, fogFactor);
+}

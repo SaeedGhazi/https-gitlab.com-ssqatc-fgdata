@@ -92,6 +92,8 @@ void main (void)
 	if ( shadow_factor < 1.0 )
 		ambient_light = constantColor + gl_LightSource[0].diffuse * shadow_factor * vec4(diffuse, 1.0);
 	float emission_factor = (1.0 - smoothstep(0.15, 0.25, reflectance)) * emis;
+	vec4 tc = texture2D(BaseTex, uv);
+	emission_factor *= 0.5*pow(tc.r+0.8*tc.g+0.2*tc.b, 2) -0.2;
 	ambient_light += (emission_factor * vec4(0.75, 0.59, 0.05, 0.0));
 
 	vec4 finalColor = texture2D(BaseTex, uv) * ambient_light;

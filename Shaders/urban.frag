@@ -17,6 +17,7 @@ uniform sampler2D BaseTex;
 uniform sampler2D NormalTex;
 uniform float depth_factor;
 uniform float tile_size;
+uniform vec3 night_color;
 
 const float zFar = 120000.0;
 const float zNear = 100.0;
@@ -94,7 +95,7 @@ void main (void)
 	float emission_factor = (1.0 - smoothstep(0.15, 0.25, reflectance)) * emis;
 	vec4 tc = texture2D(BaseTex, uv);
 	emission_factor *= 0.5*pow(tc.r+0.8*tc.g+0.2*tc.b, 2) -0.2;
-	ambient_light += (emission_factor * vec4(0.75, 0.59, 0.05, 0.0));
+	ambient_light += (emission_factor * vec4(night_color, 0.0));
 
 	vec4 finalColor = texture2D(BaseTex, uv) * ambient_light;
 

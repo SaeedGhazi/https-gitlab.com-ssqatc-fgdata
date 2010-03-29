@@ -150,8 +150,12 @@ polygon-mode - children: front, back
 
 program
 		vertex-shader
+		geometry-shader
 		fragment-shader
 		attribute
+		geometry-vertices-out: integer, max number of vertices emitted by geometry shader
+		geometry-input-type - points, lines, lines-adjacency, triangles, triangles-advacency
+		geometry-output-type - points, line-strip, triangle-strip
 
 render-bin - (OSG) children: bin-number, bin-name
 

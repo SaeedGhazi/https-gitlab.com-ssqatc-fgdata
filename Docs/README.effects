@@ -154,7 +154,7 @@ program
 		fragment-shader
 		attribute
 		geometry-vertices-out: integer, max number of vertices emitted by geometry shader
-		geometry-input-type - points, lines, lines-adjacency, triangles, triangles-advacency
+		geometry-input-type - points, lines, lines-adjacency, triangles, triangles-adjacency
 		geometry-output-type - points, line-strip, triangle-strip
 
 render-bin - (OSG) children: bin-number, bin-name

@@ -5,7 +5,7 @@ varying vec4  constantColor;
 varying vec3 vViewVec;
 varying vec3 reflVec;
 
-varying vec3 Diffuse;
+varying vec4 Diffuse;
 varying vec3 normal, lightDir, halfVector;
 varying float alpha, fogCoord;
 
@@ -47,7 +47,7 @@ void main(void)
 
     // calculate the reflection vector
     vec4 reflect_eye = vec4(reflect(vertVec, VNormal), 0.0);
-    reflVec = normalize(gl_ModelViewMatrixInverse * reflect_eye);
+    reflVec = normalize(gl_ModelViewMatrixInverse * reflect_eye).xyz;
 
     gl_FrontColor = gl_Color;
     constantColor = gl_FrontMaterial.emission

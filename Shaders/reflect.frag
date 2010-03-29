@@ -7,7 +7,7 @@ varying vec4  constantColor;
 varying vec3  vViewVec;
 varying vec3  reflVec;
 
-varying vec3 Diffuse;
+varying vec4 Diffuse;
 varying vec3 lightDir, halfVector;
 varying float alpha, fogCoord;
 
@@ -35,7 +35,7 @@ void main (void)
 
     //calculate the specular light
     if (NdotL > 0.0) {
-        color += vec4(Diffuse, 1.0) * NdotL;
+        color += Diffuse * NdotL;
         halfV = normalize(halfVector);
         NdotHV = max(dot(n, halfV), 0.0);
         if (gl_FrontMaterial.shininess > 0.0)

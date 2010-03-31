@@ -1,3 +1,7 @@
+// -*- mode: C; -*-
+// Licence: GPL v2
+// Author: Vivian Meazza. 
+
 varying vec4  ecPosition;
 varying vec3  VNormal;
 varying vec3  Normal;

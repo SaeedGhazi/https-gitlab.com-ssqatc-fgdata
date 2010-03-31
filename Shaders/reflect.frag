@@ -1,4 +1,8 @@
-﻿#version 120
+﻿// -*- mode: C; -*-
+// Licence: GPL v2
+// Author: Vivian Meazza. 
+
+#version 120
 
 varying vec4  ecPosition;
 varying vec3  VNormal;
@@ -16,10 +20,10 @@ uniform sampler2D Rainbow;
 uniform sampler2D BaseTex;
 uniform sampler2D Fresnel;
 
-uniform float transparency;
+uniform float refl_correction;
 uniform float rainbowiness;
 uniform float fresneliness;
-uniform float correction;
+uniform float ambient_correction;
 
 
 void main (void)
@@ -33,7 +37,7 @@ void main (void)
     n = VNormal;
     NdotL = max(0.0, dot(n, lightDir));
 
-    //calculate the specular light
+    // calculate the specular light
     if (NdotL > 0.0) {
         color += Diffuse * NdotL;
         halfV = normalize(halfVector);
@@ -68,18 +72,28 @@ void main (void)
     // Map a fresnel effect
     vec4 fresnel = texture2D(Fresnel, vec2(v, 0.0));
 
-    //map the refection of the environment
+    // map the refection of the environment
     vec4 reflection = textureCube(Environment, reflVec);
 
-    //add fringing fresnel and rainbow effects and modulate by transparency
+    // set the reflectivity proportional to shininess with user 
+    // input ambient
+    float transparency_offset = clamp(refl_correction, -1.0, 1.0);
+    float reflFactor = (gl_FrontMaterial.shininess / 128) + transparency_offset;
+    reflFactor = clamp(reflFactor, 0.0, 1.0);
+
+    // set adjust ambient ambient
+    float ambient_offset = clamp(ambient_correction, -1.0, 1.0);
+    vec4 ambient_Correction = mix(gl_LightSource[0].ambient, vec4(1.0, 1.0, 0.9, 1.0), 0.5) 
+        * ambient_offset;
+
+    // add fringing fresnel and rainbow effects and modulate by reflection
     vec4 reflcolor = mix(reflection, rainbow, rainbowiness * v);
     vec4 reflfrescolor = mix(reflcolor, fresnel, fresneliness * v);
-    vec4 raincolor = vec4(reflfrescolor.rgb, 1.0) * transparency;
-    vec4 mixedcolor = mix(texel, raincolor, transparency);
+    vec4 raincolor = vec4(reflfrescolor.rgb, 1.0) * reflFactor;
+    vec4 mixedcolor = mix(texel, raincolor, reflFactor);
 
-    //the final reflection
-    vec4 ambient_correction = mix(gl_LightSource[0].ambient, vec4(1.0, 1.0, 0.9, 1.0), 0.5) * correction;
-    vec4 reflColor = color * mixedcolor + specular + ambient_correction ;
+    // the final reflection
+    vec4 reflColor = color * mixedcolor + specular + ambient_Correction ;
     reflColor = clamp(reflColor, 0.0, 1.0);
 
     gl_FragColor = mix(gl_Fog.color, reflColor, fogFactor);

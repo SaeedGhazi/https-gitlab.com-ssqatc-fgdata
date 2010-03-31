@@ -1,4 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Reflections
+
+PARAMETERS: There are two forms of cube map texture:- vertical cross and 6 images.
+Either can be used - alternative forms are shown in <parameters> and in <texture-unit>
+
+The reflection is set proportional to the shininess of the material. Thus by 
+varying the material shininess value over or between objects the amount of 
+refection can be controlled. The overall amount of reflection may be 
+adjusted by the use of <refl_correction> -1.0 (fully transparent)- 1.0 (fully opaque).
+
+The overall values of the coloured fringing or fresnel effect may be adjusted
+by the use of <rainbowiness> and <fresneliness>.
+
+If your result is too dark/too light the overall ambient light value can be adjusted
+by the use of <ambient_correction>. This correction also takes out some of the blueness
+added as default to compensate for the lack of reflection.
+
+USE: 	To use the default reflection effect (controlled by material shininess values) use 
+	
+	<effect>
+			<inherits-from>Effects/reflect</inherits-from>
+			<object-name>Fuselage</object-name>
+	</<effect>
+	
+			To use your own reflection effectuse
+			
+	<effect>
+		<inherits-from>Aircraft/Lightning/Models/Effects/lightningreflect</inherits-from>
+		<object-name>Fuselage</object-name>
+	</<effect>
+	
+in your model file.
+
+To use your own effect place your efffect file containing something like this:
+
+	<name>Effects/lightningreflect</name>
+	<inherits-from>Effects/reflect</inherits-from>
+	
+	and the the modified tags in the path as above
+
+EXAMPLES: You can find examples of both usages in the Hunter and Lightning models.
+-->
 <PropertyList>
 	<name>Effects/reflect</name>
 	<inherits-from>Effects/model-default</inherits-from>
@@ -6,6 +48,10 @@
 	<parameters>
 		<texture n="5">
 			<type>cubemap</type>
+			<!-- use this form for a cube cross -->
+			<!--<image>Aircraft/Generic/Effects/CubeCrosses/blue_sky.jpg</image>-->
+
+			<!-- use this form for a 6 image cube map -->
 			<images>
 				<positive-x>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_px.png</positive-x>
 				<negative-x>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_nx.png</negative-x>
@@ -14,6 +60,7 @@
 				<positive-z>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_pz.png</positive-z>
 				<negative-z>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_nz.png</negative-z>
 			</images>
+
 		</texture>
 		<texture n="6">
 			<image>Aircraft/Generic/Effects/Rainbow.png</image>
@@ -31,10 +78,14 @@
 		</texture>
 		<rendering-hint>transparent</rendering-hint>
 		<shade-model>smooth</shade-model>
+		<rainbowiness>0.075</rainbowiness>
+		<fresneliness>0.075</fresneliness>
+		<refl_correction>0.0</refl_correction>
+		<ambient_correction>0.1</ambient_correction>
 	</parameters>
 
 	<technique n="9">
-		
+
 		<predicate>
 			<and>
 				<property>/sim/rendering/shader-effects</property>
@@ -52,7 +103,7 @@
 				</or>
 			</and>
 		</predicate>
-		
+
 		<pass>
 			<lighting>true</lighting>
 			<material>
@@ -98,7 +149,7 @@
 			<rendering-hint>
 				<use>rendering-hint</use>
 			</rendering-hint>
-			
+
 			<texture-unit>
 				<unit>0</unit>
 				<image>
@@ -117,12 +168,19 @@
 					<use>texture[0]/internal-format</use>
 				</internal-format>
 			</texture-unit>
-			
+
 			<texture-unit>
 				<unit>5</unit>
 				<type>
 					<use>texture[5]/type</use>
 				</type>
+
+				<!-- use this form for a cube cross -->
+				<!--<image>
+					<use>texture[5]/image</use>
+				</image>-->
+
+				<!-- use this form for a 6 image cube map -->
 				<images>
 					<use>texture[5]/images</use>
 				</images>
@@ -212,29 +270,34 @@
 			<uniform>
 				<name>rainbowiness</name>
 				<type>float</type>
-				<value type="float">0.1</value>
+				<value><use>rainbowiness</use></value>
 			</uniform>
 
 			<!-- set the amount of fresnel effect colour 0.0 - 1.0 -->
 			<uniform>
 				<name>fresneliness</name>
 				<type>float</type>
-				<value type="float">0.1</value>
+				<value><use>fresneliness</use></value>
 			</uniform>
 
-			<!-- set the amount of tranparency 0.0 (fully tranaparent)
-				- 1.0 (fully opaque) -->
+			<!-- The reflection is set proportional to the shininess of the material. 
+			The amount of reflection may be adjusted by the use of this correction
+			-1.0 (fully transparent)- 1.0 (fully opaque) -->
 			<uniform>
-				<name>transparency</name>
+				<name>refl_correction</name>
 				<type>float</type>
-				<value type="float">0.4</value>
+				<value>
+					<use>refl_correction</use>
+				</value>
 			</uniform>
 
-			<!-- set the amount of ambient light correction 0.0 -1.0  -->
+			<!-- set the amount of ambient light correction 0.0 - 1.0  -->
 			<uniform>
-				<name>correction</name>
+				<name>ambient_correction</name>
 				<type>float</type>
-				<value type="float">0.2</value>
+				<value>
+					<use>ambient_correction</use>
+				</value>
 			</uniform>
 		</pass>
 	</technique>

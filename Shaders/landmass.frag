@@ -18,7 +18,7 @@ const float scale = 1.0;
 
 float ray_intersect(sampler2D reliefMap, vec2 dp, vec2 ds)
 {
-	const int linear_search_steps = 20;
+	const int linear_search_steps = 10;
 
 	float size = 1.0 / float(linear_search_steps);
 	float depth = 0.0;
@@ -97,18 +97,18 @@ void main (void)
 	N = normalize(N.x * VTangent + N.y * VBinormal + N.z * VNormal);
 	vec3 l = gl_LightSource[0].position.xyz;
 	vec3 diffuse = gl_Color.rgb * max(0.0, dot(N, l));
-
+	float shadow_factor = 1.0;
+/*
 // Shadow
 	dp += ds * d;
 	vec3 sl = normalize( vec3( dot( l, VTangent ), dot( l, VBinormal ), dot( -l, VNormal ) ) );
 	ds = sl.xy * depth_factor / sl.z;
 	dp -= ds * d;
 	float dl = ray_intersect(NormalTex, dp, ds);
-	float shadow_factor = 1.0;
 	if ( dl < d - 0.05 )
 		shadow_factor = dot( constantColor.xyz, vec3( 1.0, 1.0, 1.0 ) ) * 0.25;
 // end shadow
-
+*/
 	vec4 ambient_light = constantColor + gl_LightSource[0].diffuse * shadow_factor * vec4(diffuse, 1.0);
 
 	c1 *= ambient_light;

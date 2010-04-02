@@ -13,6 +13,7 @@ varying out vec3 VTangent;
 varying out vec3 VBinormal;
 varying out vec3 Normal;
 varying out vec4 constantColor;
+varying out float bump;
 
 uniform float canopy_height;
 
@@ -41,6 +42,7 @@ void createVertex(int i, int j, float offset, float s)
 	VNormal = normalize(gl_NormalMatrix * Normal);
 	VTangent  = VTangentIn[i];
 	VBinormal = VBinormalIn[i];
+	bump = s;
 
 	gl_FrontColor = gl_FrontColorIn[i];
 	constantColor = gl_FrontMaterial.emission
@@ -71,5 +73,9 @@ void main(void)
 	createVertex(0, 1, canopy_height, 1.0);
 	createVertex(1, 2, canopy_height, 1.0);
 	createVertex(2, 0, canopy_height, 1.0);
+	EndPrimitive();
+	createVertex(0, 1, 0.0, 0.0);
+	createVertex(1, 2, 0.0, 0.0);
+	createVertex(2, 0, 0.0, 0.0);
 	EndPrimitive();
 }

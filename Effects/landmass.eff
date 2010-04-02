@@ -80,7 +80,7 @@
         <vertex-shader>Shaders/landmass-g.vert</vertex-shader>
         <geometry-shader>Shaders/landmass.geom</geometry-shader>
         <fragment-shader>Shaders/landmass.frag</fragment-shader>
-        <geometry-vertices-out type="int">16</geometry-vertices-out>
+        <geometry-vertices-out type="int">20</geometry-vertices-out>
         <geometry-input-type>triangles</geometry-input-type>
         <geometry-output-type>triangle-strip</geometry-output-type>
         <attribute>

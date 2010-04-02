@@ -5,6 +5,7 @@ varying vec3  VTangent;
 varying vec3  VBinormal;
 varying vec3  Normal;
 varying vec4  constantColor;
+varying float bump;
 
 attribute vec3 tangent;
 attribute vec3 binormal;
@@ -17,6 +18,7 @@ void main(void)
 	VNormal = gl_NormalMatrix * gl_Normal;
 	VTangent = gl_NormalMatrix * tangent;
 	VBinormal = gl_NormalMatrix * binormal;
+	bump = 1.0;
 
 	gl_FrontColor = gl_Color;
 	constantColor = gl_FrontMaterial.emission

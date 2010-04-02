@@ -1,7 +1,8 @@
 // -*- mode: C; -*-
 // Licence: GPL v2
-// Author: Vivian Meazza. 
+// Author: Vivian Meazza.
 
+varying vec4  rawpos;
 varying vec4  ecPosition;
 varying vec3  VNormal;
 varying vec3  Normal;
@@ -19,6 +20,7 @@ uniform mat4 osg_ViewMatrixInverse;
 
 void main(void)
 {
+    rawpos     = gl_Vertex;
     ecPosition = gl_ModelViewMatrix * gl_Vertex;
     vec3 ecPosition3 = vec3(gl_ModelViewMatrix * gl_Vertex) / ecPosition.w;
 

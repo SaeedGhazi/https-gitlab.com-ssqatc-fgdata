@@ -4,6 +4,7 @@
 
 #version 120
 
+varying vec4  rawpos;
 varying vec4  ecPosition;
 varying vec3  VNormal;
 varying vec3  Normal;
@@ -19,12 +20,15 @@ uniform samplerCube Environment;
 uniform sampler2D Rainbow;
 uniform sampler2D BaseTex;
 uniform sampler2D Fresnel;
+uniform sampler2D Map;
+uniform sampler3D Noise;
 
 uniform float refl_correction;
 uniform float rainbowiness;
 uniform float fresneliness;
+uniform float noisiness;
 uniform float ambient_correction;
-
+uniform float reflect_map;
 
 void main (void)
 {
@@ -75,21 +79,37 @@ void main (void)
     // map the refection of the environment
     vec4 reflection = textureCube(Environment, reflVec);
 
-    // set the reflectivity proportional to shininess with user 
-    // input ambient
+    // set the user shininess offse
     float transparency_offset = clamp(refl_correction, -1.0, 1.0);
-    float reflFactor = (gl_FrontMaterial.shininess / 128) + transparency_offset;
+    float reflFactor = 0.0;
+
+    if(reflect_map > 0){
+        // map the shininess of the object with user input 
+        vec4 map = texture2D(Map, gl_TexCoord[0].st);
+        //float pam = (map.a * -2) + 1; //reverse map
+        reflFactor = map.a + transparency_offset;
+    } else {
+        // set the reflectivity proportional to shininess with user 
+        // input 
+        reflFactor = (gl_FrontMaterial.shininess / 128) + transparency_offset;
+    }
+
     reflFactor = clamp(reflFactor, 0.0, 1.0);
 
-    // set adjust ambient ambient
+    // set adjust ambient 
     float ambient_offset = clamp(ambient_correction, -1.0, 1.0);
-    vec4 ambient_Correction = mix(gl_LightSource[0].ambient, vec4(1.0, 1.0, 0.9, 1.0), 0.5) 
+    vec4 ambient_Correction = mix(gl_LightSource[0].ambient, vec4(1.0, 1.0, 0.6, 1.0), 0.5) 
         * ambient_offset;
+
+    // map noise vectore
+    vec4 noisevec = texture3D(Noise, rawpos.xyz);
 
     // add fringing fresnel and rainbow effects and modulate by reflection
     vec4 reflcolor = mix(reflection, rainbow, rainbowiness * v);
     vec4 reflfrescolor = mix(reflcolor, fresnel, fresneliness * v);
-    vec4 raincolor = vec4(reflfrescolor.rgb, 1.0) * reflFactor;
+    vec4 noisecolor = mix(reflfrescolor, noisevec, noisiness);
+    vec4 raincolor = vec4(noisecolor.rgb, 1.0) * reflFactor;
+
     vec4 mixedcolor = mix(texel, raincolor, reflFactor);
 
     // the final reflection

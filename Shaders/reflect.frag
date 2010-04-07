@@ -1,4 +1,4 @@
-﻿// -*- mode: C; -*-
+// -*- mode: C; -*-
 // Licence: GPL v2
 // Author: Vivian Meazza. 
 

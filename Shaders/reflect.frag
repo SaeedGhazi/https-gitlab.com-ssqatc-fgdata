@@ -96,10 +96,10 @@ void main (void)
 
     reflFactor = clamp(reflFactor, 0.0, 1.0);
 
-    // set adjust ambient 
+    // set ambient adjustment to remove bluiness with user input
     float ambient_offset = clamp(ambient_correction, -1.0, 1.0);
-    vec4 ambient_Correction = mix(gl_LightSource[0].ambient, vec4(1.0, 1.0, 0.6, 1.0), 0.5) 
-        * ambient_offset;
+    vec4 ambient_Correction = vec4(gl_LightSource[0].ambient.rg, gl_LightSource[0].ambient.b * 0.6, 0.5) * ambient_offset ;
+    ambient_Correction = clamp(ambient_Correction, -1.0, 1.0);
 
     // map noise vectore
     vec4 noisevec = texture3D(Noise, rawpos.xyz);

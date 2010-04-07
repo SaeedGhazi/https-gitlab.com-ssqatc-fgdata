@@ -581,6 +581,7 @@ Started September 2000 by David Megginson, david@megginson.com
   <ai>
    <enabled type="bool">true</enabled>
    <scenario>nimitz_demo</scenario>
+   <!-- <scenario>balloon_demo</scenario> -->
    <!-- <scenario>aircraft_demo</scenario> -->
    <!-- <scenario>refueling_demo</scenario> -->
    <!-- <scenario>lead_aircraft</scenario> -->

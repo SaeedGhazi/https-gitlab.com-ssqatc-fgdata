@@ -368,7 +368,7 @@ EXAMPLES: You can find examples of both usages in the Hunter and Lightning model
 				<value>
 					<use>reflect_map</use>
 				</value>
-			</uniform>noisiness
+			</uniform>
 
 		</pass>
 	</technique>

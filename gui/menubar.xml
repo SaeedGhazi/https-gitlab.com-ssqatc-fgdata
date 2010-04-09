@@ -425,6 +425,14 @@
 				<dialog-name>tanker</dialog-name>
 			</binding>
 		</item>
+
+		<item>
+			<label>Scenario</label>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>scenario</dialog-name>
+			</binding>
+		</item>
 	</menu>
 
 	<menu>

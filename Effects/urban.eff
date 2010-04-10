@@ -3,6 +3,7 @@
   <name>Effects/urban</name>
   <inherits-from>Effects/terrain-default</inherits-from>
   <parameters>
+    <snow-level><use>/sim/rendering/snow-level-m</use></snow-level>
     <depth-factor type="float">0.008</depth-factor>
     <night-color type="vec3d">0.75 0.59 0.05</night-color>
     <quality-level><use>/sim/rendering/quality-level</use></quality-level>
@@ -71,6 +72,10 @@
             <use>texture[2]/internal-format</use>
           </internal-format>
       </texture-unit>
+      <texture-unit>
+        <unit>2</unit>
+        <type>noise</type>
+      </texture-unit>
       <program>
         <vertex-shader>Shaders/urban.vert</vertex-shader>
         <fragment-shader>Shaders/urban.frag</fragment-shader>
@@ -98,6 +103,11 @@
         <value type="int">1</value>
       </uniform>
       <uniform>
+        <name>NoiseTex</name>
+        <type>sampler-3d</type>
+        <value type="int">2</value>
+      </uniform>
+      <uniform>
         <name>depth_factor</name>
         <type>float</type>
         <value><use>depth-factor</use></value>
@@ -116,6 +126,11 @@
         <name>quality_level</name>
         <type>float</type>
         <value><use>quality-level</use></value>
+      </uniform>
+      <uniform>
+        <name>snowlevel</name>
+        <type>float</type>
+        <value><use>snow-level</use></value>
       </uniform>
     </pass>
   </technique>

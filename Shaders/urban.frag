@@ -13,13 +13,16 @@ varying vec3  VBinormal;
 varying vec3  Normal;
 varying vec4  constantColor;
 
+uniform sampler3D NoiseTex;
 uniform sampler2D BaseTex;
 uniform sampler2D NormalTex;
 uniform float depth_factor;
 uniform float tile_size;
 uniform float quality_level; // From /sim/rendering/quality-level
+uniform float snowlevel; // From /sim/rendering/snow-level-m
 uniform vec3 night_color;
 
+const float scale = 1.0;
 int linear_search_steps = 10;
 
 float ray_intersect(sampler2D reliefMap, vec2 dp, vec2 ds)
@@ -73,6 +76,7 @@ void main (void)
 
 	float emis = N.z;
 	N.z = sqrt(1.0 - min(1.0,dot(N.xy, N.xy)));
+	float Nz = N.z;
 	N = normalize(N.x * VTangent + N.y * VBinormal + N.z * VNormal);
 
 	vec3 l = gl_LightSource[0].position.xyz;
@@ -100,14 +104,32 @@ void main (void)
 	emission_factor *= 0.5*pow(tc.r+0.8*tc.g+0.2*tc.b, 2) -0.2;
 	ambient_light += (emission_factor * vec4(night_color, 0.0));
 
-	vec4 finalColor = texture2D(BaseTex, uv) * ambient_light;
-
 	float fogFactor;
 	float fogCoord = ecPos3.z / (1.0 + smoothstep(0.3, 0.7, emission_factor));
 	const float LOG2 = 1.442695;
 	fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
 	fogFactor = clamp(fogFactor, 0.0, 1.0);
 
+	vec4 noisevec   = texture3D(NoiseTex, (rawpos.xyz)*0.01*scale);
+	vec4 nvL   = texture3D(NoiseTex, (rawpos.xyz)*0.00066*scale);
+
+	float n=0.06;
+	n += nvL[0]*0.4;
+	n += nvL[1]*0.6;
+	n += nvL[2]*2.0;
+	n += nvL[3]*4.0;
+	n += noisevec[0]*0.1;
+	n += noisevec[1]*0.4;
+
+	n += noisevec[2]*0.8;
+	n += noisevec[3]*2.1;
+	n = mix(0.6, n, fogFactor);
+
+	vec4 finalColor = texture2D(BaseTex, uv);
+	finalColor = mix(finalColor, clamp(n+nvL[2]*4.1+vec4(0.1, 0.1, nvL[2]*2.2, 1.0), 0.7, 1.0),
+			step(0.8,Nz)*smoothstep(snowlevel+300.0, snowlevel+360.0, (rawpos.z)+nvL[1]*3000.0));
+	finalColor *= ambient_light;
+	
 	if (gl_Fog.density == 1.0)
 		fogFactor=1.0;
 

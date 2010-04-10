@@ -11,6 +11,8 @@
       <internal-format>normalized</internal-format>
     </texture>
     <snow-level><use>/sim/rendering/snow-level-m</use></snow-level>
+    <depth-factor type="float">0.01</depth-factor>
+    <canopy-height type="float">15.0</canopy-height>
   </parameters>
   <generate>
     <tangent type="int">6</tangent>
@@ -21,6 +23,10 @@
       <and>
         <property>/sim/rendering/landmass-shader</property>
         <property>/sim/rendering/shader-effects</property>
+	<less-equal>
+	  <value type="float">4.0</value>
+	  <float-property>/sim/rendering/quality-level</float-property>
+	</less-equal>
         <or>
           <less-equal>
             <value type="float">2.0</value>
@@ -110,19 +116,17 @@
       <uniform>
         <name>depth_factor</name>
         <type>float</type>
-        <value type="float">0.01</value>
-      </uniform>
-      <uniform>
-        <name>canopy_height</name>
-        <type>float</type>
-        <value type="float">10.0</value>
+        <value><use>depth-factor</use></value>
       </uniform>
       <uniform>
         <name>snowlevel</name>
         <type>float</type>
-        <value type="float">
-          <use>snow-level</use>
-        </value>
+        <value><use>snow-level</use></value>
+      </uniform>
+      <uniform>
+        <name>canopy_height</name>
+        <type>float</type>
+        <value><use>canopy-height</use></value>
       </uniform>
     </pass>
   </technique>
@@ -131,6 +135,10 @@
       <and>
         <property>/sim/rendering/landmass-shader</property>
         <property>/sim/rendering/shader-effects</property>
+	<less-equal>
+	  <value type="float">2.0</value>
+	  <float-property>/sim/rendering/quality-level</float-property>
+	</less-equal>
         <or>
           <less-equal>
             <value type="float">2.0</value>
@@ -215,14 +223,12 @@
       <uniform>
         <name>depth_factor</name>
         <type>float</type>
-        <value type="float">0.01</value>
+        <value><use>depth-factor</use></value>
       </uniform>
       <uniform>
         <name>snowlevel</name>
         <type>float</type>
-        <value type="float">
-          <use>snow-level</use>
-        </value>
+        <value><use>snow-level</use></value>
       </uniform>
     </pass>
   </technique>

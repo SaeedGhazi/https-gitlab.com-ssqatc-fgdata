@@ -4,7 +4,6 @@
   <inherits-from>Effects/terrain-default</inherits-from>
   <parameters>
     <depth-factor type="float">0.008</depth-factor>
-    <tile-size type="float">2000.0</tile-size>
     <night-color type="vec3d">0.75 0.59 0.05</night-color>
   </parameters>
   <generate>
@@ -101,7 +100,7 @@
       <uniform>
         <name>tile_size</name>
         <type>float</type>
-        <value><use>tile-size</use></value>
+        <value><use>xsize</use></value>
       </uniform>
       <uniform>
         <name>night_color</name>

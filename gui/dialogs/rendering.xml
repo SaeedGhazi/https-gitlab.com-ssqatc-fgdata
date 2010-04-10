@@ -271,7 +271,7 @@
           </binding>
         </checkbox>
       </group>
-	  
+
       <group>
         <layout>hbox</layout>
         <halign>right</halign>
@@ -289,6 +289,26 @@
           <format>%.fm</format>
           <live>true</live>
           <property>/sim/rendering/snow-level-m</property>
+        </text>
+      </group>
+
+      <group>
+        <layout>hbox</layout>
+        <halign>right</halign>
+        <text><label>Performance vs Quality</label></text>
+        <slider>
+          <min>0.0</min>
+          <max>5.0</max>
+          <property>/sim/rendering/quality-level</property>
+          <binding>
+            <command>dialog-apply</command>
+          </binding>
+        </slider>
+        <text>
+          <label>12345678</label>
+          <format>%.1f</format>
+          <live>true</live>
+          <property>/sim/rendering/quality-level</property>
         </text>
       </group>
 	  

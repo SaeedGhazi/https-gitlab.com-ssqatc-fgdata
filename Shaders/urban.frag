@@ -17,15 +17,13 @@ uniform sampler2D BaseTex;
 uniform sampler2D NormalTex;
 uniform float depth_factor;
 uniform float tile_size;
+uniform float quality_level;
 uniform vec3 night_color;
 
-const float zFar = 120000.0;
-const float zNear = 100.0;
+int linear_search_steps = 10;
 
 float ray_intersect(sampler2D reliefMap, vec2 dp, vec2 ds)
 {
-	const int linear_search_steps = 10;
-
 	float size = 1.0 / float(linear_search_steps);
 	float depth = 0.0;
 	float best_depth = 1.0;
@@ -59,6 +57,9 @@ float ray_intersect(sampler2D reliefMap, vec2 dp, vec2 ds)
 
 void main (void)
 {
+	if ( quality_level >= 3.5 ) {
+		linear_search_steps = 20;
+	}
 	vec3 ecPos3 = ecPosition.xyz / ecPosition.w;
 	vec3 V = normalize(ecPos3);
 	vec3 s = vec3(dot(V, VTangent), dot(V, VBinormal), dot(VNormal, -V));
@@ -77,17 +78,19 @@ void main (void)
 	vec3 l = gl_LightSource[0].position.xyz;
 	vec3 diffuse = gl_Color.rgb * max(0.0, dot(N, l));
 	float shadow_factor = 1.0;
-/*
+
 // Shadow
-	dp += ds * d;
-	vec3 sl = normalize( vec3( dot( l, VTangent ), dot( l, VBinormal ), dot( -l, VNormal ) ) );
-	ds = sl.xy * depth_factor / sl.z;
-	dp -= ds * d;
-	float dl = ray_intersect(NormalTex, dp, ds);
-	if ( dl < d - 0.05 )
-		shadow_factor = dot( constantColor.xyz, vec3( 1.0, 1.0, 1.0 ) ) * 0.25;
+	if ( quality_level >= 3.0 ) {
+		dp += ds * d;
+		vec3 sl = normalize( vec3( dot( l, VTangent ), dot( l, VBinormal ), dot( -l, VNormal ) ) );
+		ds = sl.xy * depth_factor / sl.z;
+		dp -= ds * d;
+		float dl = ray_intersect(NormalTex, dp, ds);
+		if ( dl < d - 0.05 )
+			shadow_factor = dot( constantColor.xyz, vec3( 1.0, 1.0, 1.0 ) ) * 0.25;
+	}
 // end shadow
-*/
+
 	vec4 ambient_light = constantColor + gl_LightSource[0].diffuse * vec4(diffuse, 1.0);
 	float reflectance = ambient_light.r * 0.3 + ambient_light.g * 0.59 + ambient_light.b * 0.11;
 	if ( shadow_factor < 1.0 )

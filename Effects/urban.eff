@@ -5,6 +5,7 @@
   <parameters>
     <depth-factor type="float">0.008</depth-factor>
     <night-color type="vec3d">0.75 0.59 0.05</night-color>
+    <quality-level><use>/sim/rendering/quality-level</use></quality-level>
   </parameters>
   <generate>
     <normal type="int">15</normal>
@@ -110,6 +111,11 @@
         <name>night_color</name>
         <type>float-vec3</type>
         <value><use>night-color</use></value>
+      </uniform>
+      <uniform>
+        <name>quality_level</name>
+        <type>float</type>
+        <value><use>quality-level</use></value>
       </uniform>
     </pass>
   </technique>

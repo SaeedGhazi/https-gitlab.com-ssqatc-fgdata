@@ -886,8 +886,8 @@ Shared parameters for various materials.
    <texture n="2">Terrain/city3-relief-light.png</texture>
   </texture-set>
 -->
-  <xsize>2000</xsize>
-  <ysize>2000</ysize>
+  <xsize>1000</xsize>
+  <ysize>1000</ysize>
   <light-coverage>100000.0</light-coverage>
   <emissive>
    <r>0.05</r>

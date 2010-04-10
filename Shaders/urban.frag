@@ -127,7 +127,7 @@ void main (void)
 
 	vec4 finalColor = texture2D(BaseTex, uv);
 	finalColor = mix(finalColor, clamp(n+nvL[2]*4.1+vec4(0.1, 0.1, nvL[2]*2.2, 1.0), 0.7, 1.0),
-			step(0.8,Nz)*smoothstep(snowlevel+300.0, snowlevel+360.0, (rawpos.z)+nvL[1]*3000.0));
+			step(0.8,Nz)*(1.0-emis)*smoothstep(snowlevel+300.0, snowlevel+360.0, (rawpos.z)+nvL[1]*3000.0));
 	finalColor *= ambient_light;
 	
 	if (gl_Fog.density == 1.0)

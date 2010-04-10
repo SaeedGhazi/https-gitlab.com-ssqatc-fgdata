@@ -872,10 +872,19 @@ Shared parameters for various materials.
   <name>BuiltUpCover</name>
   <name>Urban</name>
   <effect>Effects/urban</effect>
-  <texture>Terrain/city1.png</texture>
-  <!-- 
- <texture>Terrain/city2.png</texture>
- <texture>Terrain/city3.png</texture>
+  <texture-set>
+   <texture>Terrain/city1.png</texture>
+   <texture n="2">Terrain/city1-relief-light.png</texture>
+  </texture-set>
+  <texture-set>
+   <texture>Terrain/city2.png</texture>
+   <texture n="2">Terrain/city2-relief-light.png</texture>
+  </texture-set>
+<!-- 
+  <texture-set>
+   <texture>Terrain/city3.png</texture>
+   <texture n="2">Terrain/city3-relief-light.png</texture>
+  </texture-set>
 -->
   <xsize>2000</xsize>
   <ysize>2000</ysize>

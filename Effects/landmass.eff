@@ -13,6 +13,7 @@
     <snow-level><use>/sim/rendering/snow-level-m</use></snow-level>
     <depth-factor type="float">0.01</depth-factor>
     <canopy-height type="float">15.0</canopy-height>
+    <quality-level><use>/sim/rendering/quality-level</use></quality-level>
   </parameters>
   <generate>
     <tangent type="int">6</tangent>
@@ -128,6 +129,11 @@
         <type>float</type>
         <value><use>canopy-height</use></value>
       </uniform>
+      <uniform>
+        <name>quality_level</name>
+        <type>float</type>
+        <value><use>quality-level</use></value>
+      </uniform>
     </pass>
   </technique>
   <technique n="9">
@@ -229,6 +235,11 @@
         <name>snowlevel</name>
         <type>float</type>
         <value><use>snow-level</use></value>
+      </uniform>
+      <uniform>
+        <name>quality_level</name>
+        <type>float</type>
+        <value><use>quality-level</use></value>
       </uniform>
     </pass>
   </technique>

@@ -17,7 +17,7 @@ uniform sampler2D BaseTex;
 uniform sampler2D NormalTex;
 uniform float depth_factor;
 uniform float tile_size;
-uniform float quality_level;
+uniform float quality_level; // From /sim/rendering/quality-level
 uniform vec3 night_color;
 
 int linear_search_steps = 10;
@@ -79,7 +79,7 @@ void main (void)
 	vec3 diffuse = gl_Color.rgb * max(0.0, dot(N, l));
 	float shadow_factor = 1.0;
 
-// Shadow
+	// Shadow
 	if ( quality_level >= 3.0 ) {
 		dp += ds * d;
 		vec3 sl = normalize( vec3( dot( l, VTangent ), dot( l, VBinormal ), dot( -l, VNormal ) ) );
@@ -89,7 +89,7 @@ void main (void)
 		if ( dl < d - 0.05 )
 			shadow_factor = dot( constantColor.xyz, vec3( 1.0, 1.0, 1.0 ) ) * 0.25;
 	}
-// end shadow
+	// end shadow
 
 	vec4 ambient_light = constantColor + gl_LightSource[0].diffuse * vec4(diffuse, 1.0);
 	float reflectance = ambient_light.r * 0.3 + ambient_light.g * 0.59 + ambient_light.b * 0.11;

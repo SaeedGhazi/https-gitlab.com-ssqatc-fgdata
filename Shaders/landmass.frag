@@ -13,13 +13,14 @@ uniform sampler3D NoiseTex;
 uniform sampler2D BaseTex;
 uniform sampler2D NormalTex;
 uniform float depth_factor;
+uniform float quality_level; // From /sim/rendering/quality-level
 uniform float snowlevel; // From /sim/rendering/snow-level-m
 
 const float scale = 1.0;
+int linear_search_steps = 10;
 
 float ray_intersect(sampler2D reliefMap, vec2 dp, vec2 ds)
 {
-	const int linear_search_steps = 10;
 
 	float size = 1.0 / float(linear_search_steps);
 	float depth = 0.0;
@@ -54,17 +55,21 @@ float ray_intersect(sampler2D reliefMap, vec2 dp, vec2 ds)
 
 void main (void)
 {
-	vec2 uv;
+	if ( quality_level >= 3.5 ) {
+		linear_search_steps = 20;
+	}
+	vec2 uv, dp, ds;
 	vec3 N;
-	if ( bump > 0.9 )
+	float d;
+	if ( bump > 0.9 && quality_level >= 2.0 )
 	{
 		vec3 V = normalize(ecPosition.xyz);
 		float a = dot(VNormal, -V);
 		vec2 s = vec2(dot(V, VTangent), dot(V, VBinormal));
 		s *= depth_factor / a;
-		vec2 ds = s;
-		vec2 dp = gl_TexCoord[0].st;
-		float d = ray_intersect(NormalTex, dp, ds);
+		ds = s;
+		dp = gl_TexCoord[0].st;
+		d = ray_intersect(NormalTex, dp, ds);
 
 		uv = dp + ds * d;
 		N = texture2D(NormalTex, uv).xyz * 2.0 - 1.0;
@@ -74,7 +79,6 @@ void main (void)
 		uv = gl_TexCoord[0].st;
 		N = vec3(0.0, 0.0, 1.0);
 	}
-
 
 	vec4 noisevec   = texture3D(NoiseTex, (rawpos.xyz)*0.01*scale);
 	vec4 nvL   = texture3D(NoiseTex, (rawpos.xyz)*0.00066*scale);
@@ -109,17 +113,19 @@ void main (void)
 	vec3 l = gl_LightSource[0].position.xyz;
 	vec3 diffuse = gl_Color.rgb * max(0.0, dot(N, l));
 	float shadow_factor = 1.0;
-/*
-// Shadow
-	dp += ds * d;
-	vec3 sl = normalize( vec3( dot( l, VTangent ), dot( l, VBinormal ), dot( -l, VNormal ) ) );
-	ds = sl.xy * depth_factor / sl.z;
-	dp -= ds * d;
-	float dl = ray_intersect(NormalTex, dp, ds);
-	if ( dl < d - 0.05 )
-		shadow_factor = dot( constantColor.xyz, vec3( 1.0, 1.0, 1.0 ) ) * 0.25;
-// end shadow
-*/
+
+	// Shadow
+	if ( quality_level >= 3.0 ) {
+		dp += ds * d;
+		vec3 sl = normalize( vec3( dot( l, VTangent ), dot( l, VBinormal ), dot( -l, VNormal ) ) );
+		ds = sl.xy * depth_factor / sl.z;
+		dp -= ds * d;
+		float dl = ray_intersect(NormalTex, dp, ds);
+		if ( dl < d - 0.05 )
+			shadow_factor = dot( constantColor.xyz, vec3( 1.0, 1.0, 1.0 ) ) * 0.25;
+	}
+	// end shadow
+
 	vec4 ambient_light = constantColor + gl_LightSource[0].diffuse * shadow_factor * vec4(diffuse, 1.0);
 
 	c1 *= ambient_light;

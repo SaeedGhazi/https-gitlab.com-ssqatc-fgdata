@@ -299,6 +299,7 @@
         <slider>
           <min>0.0</min>
           <max>5.0</max>
+          <step>1.0</step>
           <property>/sim/rendering/quality-level</property>
           <binding>
             <command>dialog-apply</command>

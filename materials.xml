@@ -680,10 +680,34 @@ Shared parameters for various materials.
   </condition>
   <name>Landmass</name>
   <name>SomeSort</name>
-  <name>EvergreenBroadCover</name>
-  <name>EvergreenForest</name>
   <name>Island</name>
   <name>Default</name>
+  <effect>Effects/landmass-nowood</effect>
+  <texture>Terrain/forest1a.png</texture>
+  <texture>Terrain/forest1b.png</texture>
+  <texture>Terrain/forest1c.png</texture>
+  <xsize>2000</xsize>
+  <ysize>2000</ysize>
+  <light-coverage>10000000.0</light-coverage>
+  <wood-coverage>4000.0</wood-coverage>
+  <tree-texture>Textures/Trees/coniferous-summer.png</tree-texture>
+  <tree-varieties>8</tree-varieties>
+  <tree-range-m alias="/params/forest/tree-range-m"/>
+  <tree-height-m>25.0</tree-height-m>
+  <tree-width-m>15.0</tree-width-m>
+  <rolling-friction>1</rolling-friction>
+  <bumpiness>1</bumpiness>
+ </material>
+
+ <material>
+  <condition>
+   <equals>
+    <property>sim/startup/season</property>
+    <value>summer</value>
+   </equals>
+  </condition>
+  <name>EvergreenBroadCover</name>
+  <name>EvergreenForest</name>
   <effect>Effects/landmass</effect>
   <texture>Terrain/forest1a.png</texture>
   <texture>Terrain/forest1b.png</texture>
@@ -829,13 +853,16 @@ Shared parameters for various materials.
     <value>summer</value>
    </equals>
   </condition>
-  <effect>Effects/landmass</effect>
+  <effect>Effects/landmass-scrub</effect>
   <name>ShrubCover</name>
   <name>ShrubGrassCover</name>
   <name>ScrubCover</name>
+  <texture>Terrain/shrub1.png</texture>
+<!--
   <texture>Terrain/shrub.png</texture>
   <texture>Terrain/shrub2.png</texture>
   <texture>Terrain/shrub3.png</texture>
+-->
   <xsize>2000</xsize>
   <ysize>2000</ysize>
   <diffuse>
@@ -1173,7 +1200,7 @@ Shared parameters for various materials.
    </equals>
   </condition>
   <name>HerbTundraCover</name>
-  <effect>Effects/landmass</effect>
+  <effect>Effects/landmass-nowood</effect>
   <texture>Terrain/herbtundra.png</texture>
   <texture>Terrain/herbtundra2.png</texture>
   <texture>Terrain/herbtundra3.png</texture>

@@ -54,28 +54,29 @@ void createVertex(int i, int j, float offset, float s)
 
 void main(void)
 {
-	createVertex(0, 1, canopy_height, 0.0);
-	createVertex(0, 1, 0.0, 0.0);
-	createVertex(1, 0, canopy_height, 0.0);
-	createVertex(1, 0, 0.0, 0.0);
-	EndPrimitive();
-	createVertex(1, 2, canopy_height, 0.0);
-	createVertex(1, 2, 0.0, 0.0);
-	createVertex(2, 1, canopy_height, 0.0);
-	createVertex(2, 1, 0.0, 0.0);
-	EndPrimitive();
-	createVertex(2, 0, canopy_height, 0.0);
-	createVertex(2, 0, 0.0, 0.0);
-	createVertex(0, 2, canopy_height, 0.0);
-	createVertex(0, 2, 0.0, 0.0);
-	EndPrimitive();
-
+	if (canopy_height > 0.01) {
+		createVertex(0, 1, canopy_height, 0.0);
+		createVertex(0, 1, 0.0, 0.0);
+		createVertex(1, 0, canopy_height, 0.0);
+		createVertex(1, 0, 0.0, 0.0);
+		EndPrimitive();
+		createVertex(1, 2, canopy_height, 0.0);
+		createVertex(1, 2, 0.0, 0.0);
+		createVertex(2, 1, canopy_height, 0.0);
+		createVertex(2, 1, 0.0, 0.0);
+		EndPrimitive();
+		createVertex(2, 0, canopy_height, 0.0);
+		createVertex(2, 0, 0.0, 0.0);
+		createVertex(0, 2, canopy_height, 0.0);
+		createVertex(0, 2, 0.0, 0.0);
+		EndPrimitive();
+		createVertex(0, 1, 0.0, 0.0);
+		createVertex(1, 2, 0.0, 0.0);
+		createVertex(2, 0, 0.0, 0.0);
+		EndPrimitive();
+	}
 	createVertex(0, 1, canopy_height, 1.0);
 	createVertex(1, 2, canopy_height, 1.0);
 	createVertex(2, 0, canopy_height, 1.0);
-	EndPrimitive();
-	createVertex(0, 1, 0.0, 0.0);
-	createVertex(1, 2, 0.0, 0.0);
-	createVertex(2, 0, 0.0, 0.0);
 	EndPrimitive();
 }

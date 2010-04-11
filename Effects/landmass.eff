@@ -141,10 +141,6 @@
       <and>
         <property>/sim/rendering/landmass-shader</property>
         <property>/sim/rendering/shader-effects</property>
-	<less-equal>
-	  <value type="float">2.0</value>
-	  <float-property>/sim/rendering/quality-level</float-property>
-	</less-equal>
         <or>
           <less-equal>
             <value type="float">2.0</value>

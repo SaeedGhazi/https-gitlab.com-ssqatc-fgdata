@@ -74,6 +74,9 @@
    <value>Cirrus</value>
    <value>Cumulus</value>
    <value>Cumulonimbus</value>
+   <value>Nimbus</value>
+   <value>Stratus</value>
+   <value>Stratus (structured)</value>
    <binding>
     <command>dialog-apply</command>
    </binding>
@@ -233,7 +236,11 @@
    <value>Altocumulus</value>
    <value>Cirrus</value>
    <value>Cumulus</value>
-   <value>Cumuloniombus</value>
+   <value>Cumulonimbus</value>
+   <value>Cumulonimbus (rain)</value>
+   <value>Nimbus</value>
+   <value>Stratus</value>
+   <value>Stratus (structured)</value>
    <binding>
     <command>dialog-apply</command>
    </binding>
@@ -546,6 +553,203 @@
 
 
 
+
+
+
+
+
+<text>
+  <x>10</x>
+  <y>170</y>
+  <label>Place a cloud layer</label>
+ </text>
+
+<group>
+  <x>0</x>
+  <y>140</y>
+
+  <text>
+   <x>10</x>
+   <y>0</y>
+   <label>Type</label>
+  </text>
+
+  <text>
+   <x>130</x>
+   <y>0</y>
+   <label>rad. x (km)</label>
+  </text>
+
+  <text>
+   <x>203</x>
+   <y>0</y>
+   <label>rad. y (km) </label>
+  </text>
+
+  <text>
+   <x>276</x>
+   <y>0</y>
+   <label>dir (deg)</label>
+  </text>
+
+  <text>
+   <x>349</x>
+   <y>0</y>
+   <label>alt (ft)</label>
+  </text>
+
+  <text>
+   <x>422</x>
+   <y>0</y>
+   <label>thick. (ft)</label>
+  </text>
+
+  <text>
+   <x>495</x>
+   <y>0</y>
+   <label>density</label>
+  </text>
+
+  <text>
+   <x>568</x>
+   <y>0</y>
+   <label>edge</label>
+  </text>
+
+  <text>
+   <x>641</x>
+   <y>0</y>
+   <label>rain flag</label>
+  </text>
+
+<text>
+   <x>714</x>
+   <y>0</y>
+   <label>rain dens.</label>
+  </text>
+
+
+ </group>
+
+
+<group>
+  <x>0</x>
+  <y>110</y>
+
+ 
+<combo>
+   <x>10</x>
+   <y>0</y>
+   <width>117</width>
+   <height>25</height>
+   <live>true</live>
+   <property>/local-weather/tmp/layer-type</property>
+   <value>Altocumulus</value>
+   <value>Cirrus</value>
+   <value>Cumulus</value>
+   <value>Cumulonimbus</value>
+   <value>Nimbus</value>
+   <value>Stratus</value>
+   <value>Stratus (structured)</value>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+  </combo>
+
+
+  <input>
+   <x>130</x>
+   <y>0</y>
+   <width>70</width>
+   <height>25</height>
+   <property>/local-weather/tmp/layer-rx</property>
+  </input>
+
+  <input>
+   <x>203</x>
+   <y>0</y>
+   <width>70</width>
+   <height>25</height>
+   <property>/local-weather/tmp/layer-ry</property>
+  </input>
+
+  <input>
+   <x>276</x>
+   <y>0</y>
+   <width>70</width>
+   <height>25</height>
+   <property>/local-weather/tmp/layer-phi</property>
+  </input>
+
+  <input>
+   <x>349</x>
+   <y>0</y>
+   <width>70</width>
+   <height>25</height>
+   <property>/local-weather/tmp/layer-alt</property>
+  </input>
+
+  <input>
+   <x>422</x>
+   <y>0</y>
+   <width>70</width>
+   <height>25</height>
+   <property>/local-weather/tmp/layer-thickness</property>
+  </input>
+
+  <input>
+   <x>495</x>
+   <y>0</y>
+   <width>70</width>
+   <height>25</height>
+   <property>/local-weather/tmp/layer-density</property>
+  </input>
+
+  <input>
+   <x>568</x>
+   <y>0</y>
+   <width>70</width>
+   <height>25</height>
+   <property>/local-weather/tmp/layer-edge</property>
+  </input>
+
+  <input>
+   <x>641</x>
+   <y>0</y>
+   <width>70</width>
+   <height>25</height>
+   <property>/local-weather/tmp/layer-rain-flag</property>
+  </input>
+
+ <input>
+   <x>714</x>
+   <y>0</y>
+   <width>70</width>
+   <height>25</height>
+   <property>/local-weather/tmp/layer-rain-density</property>
+  </input>
+
+
+ </group>
+
+<button>
+   <x>10</x>
+   <y>70</y>
+   <legend>Create</legend>
+   <default>true</default>
+   <equal>true</equal>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+   <binding>
+     <command>nasal</command>
+     <script>local_weather.layer_wrapper()</script>
+   </binding>
+  </button>
+
+
+
+
  <!-- Button Box -->
 
  <group>
@@ -593,6 +797,17 @@
     <command>dialog-close</command>
    </binding>
   </button>
+
+<!--<button>
+   <x>300</x>
+   <y>0</y>
+   <legend>Test</legend>
+   <equal>true</equal>
+   <binding>
+    <command>nasal</command>
+     <script>local_weather.test()</script>
+   </binding>
+  </button>-->
 
  </group>
 

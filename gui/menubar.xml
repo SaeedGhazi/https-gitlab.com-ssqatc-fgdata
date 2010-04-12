@@ -327,6 +327,22 @@
 				<script>wildfire.dialog.show()</script>
 			</binding>
 		</item>
+
+		<item>
+			<label>Local Weather</label>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>local_weather</dialog-name>
+			</binding>
+		</item>
+		
+		<item>
+			<label>Local Weather Tiles</label>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>local_weather_tiles</dialog-name>
+			</binding>
+		</item>
 	</menu>
 
 	<menu>

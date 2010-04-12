@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <!-- Cloud placement methods -->
+
+ <name>local_weather_tiles</name>
+ <width>300</width>
+ <height>300</height>
+ <modal>false</modal>
+
+
+<text>
+  <x>10</x>
+  <y>270</y>
+  <label>Select a weather scenario tile</label>
+</text>
+
+
+<combo>
+   <x>10</x>
+   <y>220</y>
+   <width>200</width>
+   <height>25</height>
+   <live>true</live>
+   <property>/local-weather/tmp/tile-type</property>
+   <value>Altocumulus sky</value>
+   <value>Cold front</value>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+  </combo>
+
+<group>
+  <x>10</x>
+  <y>10</y>
+
+  <button>
+   <x>0</x>
+   <y>0</y>
+   <legend>OK</legend>
+   <default>true</default>
+   <equal>true</equal>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+   <binding>
+    <command>nasal</command>
+     <script>local_weather.set_tile()</script>
+   </binding>
+   <binding>
+    <command>dialog-close</command>
+   </binding>
+  </button>
+
+
+<button>
+   <x>80</x>
+   <y>0</y>
+   <legend>Clear clouds</legend>
+   <default>true</default>
+   <equal>true</equal>
+   <binding>
+     <command>nasal</command>
+     <script>local_weather.clear_all()</script>
+   </binding>
+  </button>
+
+  <button>
+   <x>200</x>
+   <y>0</y>
+   <legend>Cancel</legend>
+   <equal>true</equal>
+   <key>Esc</key>
+   <binding>
+    <command>dialog-close</command>
+   </binding>
+  </button>
+
+ </group>
+
+
+</PropertyList>

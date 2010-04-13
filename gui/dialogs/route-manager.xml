@@ -67,18 +67,21 @@ command interface /autopilot/route-manager/input:
                 cmd.setValue("@jump" ~ sel_index());
 			}
 			
-			var load = func {
-				file_selector.open();
-			}
-
 			var load_route = func(path) {
 				routem.getNode("file-path", 1).setValue(path.getValue());
 				cmd.setValue("@load");
 				gui.dialog_update("route-manager");
 			}
 
-			var file_selector = gui.FileSelector.new(load_route, "Load flight-plan", "Load");
+            var save_route = func(path) {
+				routem.getNode("file-path", 1).setValue(path.getValue());
+				cmd.setValue("@save");
+				gui.dialog_update("route-manager");
+			}
 			
+			var file_selector = gui.FileSelector.new(load_route, "Load flight-plan", "Load");
+			var save_selector = gui.FileSelector.new(save_route, "Save flight-plan", "Save");
+
 			var activate_fp = func {
 				cmd.setValue("@activate");
 			}
@@ -121,6 +124,7 @@ command interface /autopilot/route-manager/input:
 
 		<close>
 			file_selector.del();
+			save_selector.del();
 		</close>
 	</nasal>
 
@@ -247,6 +251,7 @@ command interface /autopilot/route-manager/input:
 		</text>
 		<input>
 			<name>cruise-speed</name>
+			<live>true</live>
 			<halign>fill</halign>
 			<stretch>true</stretch>
 			<pref-width>150</pref-width>
@@ -259,6 +264,7 @@ command interface /autopilot/route-manager/input:
 		</text>
 		<input>
 			<name>cruise-alt</name>
+			<live>true</live>
 			<halign>fill</halign>
 			<stretch>true</stretch>
 			<pref-width>150</pref-width>
@@ -420,14 +426,22 @@ command interface /autopilot/route-manager/input:
 		<empty><stretch>true</stretch></empty>
 
 		<button>
-			<legend>Load List</legend>
+			<legend>Load...</legend>
 			<equal>true</equal>
 			<enable>
 			<not><property>/autopilot/route-manager/active</property></not>
 			</enable>
 			<binding>
 				<command>nasal</command>
-				<script>load()</script>
+				<script>file_selector.open()</script>
+			</binding>
+		</button>
+		<button>
+			<legend>Save...</legend>
+			<equal>true</equal>
+			<binding>
+				<command>nasal</command>
+				<script>save_selector.open();</script>
 			</binding>
 		</button>
 	</group>

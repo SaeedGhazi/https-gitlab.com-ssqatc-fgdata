@@ -55,4 +55,3 @@ void main()
     gl_FragColor = mix(gl_Fog.color, fragColor, fogFactor);
 
 }
-

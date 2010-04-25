@@ -324,9 +324,9 @@ var incElevator = func {
 ##
 # Joystick axis handlers.  Don't call from other contexts.
 #
-var elevatorTrimAxis = func { elevatorTrim(cmdarg().getNode("value").getValue()); }
-var aileronTrimAxis = func { aileronTrim(cmdarg().getNode("value").getValue()); }
-var rudderTrimAxis = func { rudderTrim(cmdarg().getNode("value").getValue()); }
+var elevatorTrimAxis = func { elevatorTrim(cmdarg().getNode("setting").getValue()); }
+var aileronTrimAxis = func { aileronTrim(cmdarg().getNode("setting").getValue()); }
+var rudderTrimAxis = func { rudderTrim(cmdarg().getNode("setting").getValue()); }
 
 ##
 # Gear handling.

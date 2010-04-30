@@ -15,18 +15,14 @@
 
 // model position of original terrain poly; the bottom of the forest.
 varying vec4 rawposIn;
-// model forest top
-varying vec4 rawTopIn;
 // model normal
 varying vec3 NormalIn;
 varying vec4 ecPosIn;
-varying vec4 ecTopIn;
 varying vec3 ecNormalIn;
 // eye spacce tangent and binormal
 varying vec3 VTangentIn;
 varying vec3 VBinormalIn;
 // screen-space position of top
-varying vec4 positionTopIn;
 // constant color component
 varying vec4 constantColorIn;
 
@@ -40,15 +36,15 @@ void main(void)
         rawposIn = gl_Vertex;
 	ecPosIn = gl_ModelViewMatrix * gl_Vertex;
 	NormalIn = normalize(gl_Normal);
-        rawTopIn = rawposIn + vec4(0.0, 0.0, canopy_height, 0.0);
-        ecTopIn = gl_ModelViewMatrix * rawTopIn;
+        //rawTopIn = rawposIn + vec4(0.0, 0.0, canopy_height, 0.0);
+        //ecTopIn = gl_ModelViewMatrix * rawTopIn;
         ecNormalIn = gl_NormalMatrix * NormalIn;
 	VTangentIn = gl_NormalMatrix * tangent;
 	VBinormalIn = gl_NormalMatrix * binormal;
 
 	gl_FrontColor = gl_Color;
 	gl_Position = ftransform();
-        positionTopIn = gl_ModelViewProjectionMatrix * rawTopIn;
+        //positionTopIn = gl_ModelViewProjectionMatrix * rawTopIn;
 	gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
         constantColorIn = gl_FrontMaterial.emission
 		+ gl_Color * (gl_LightModel.ambient + gl_LightSource[0].ambient);  

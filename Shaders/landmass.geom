@@ -9,13 +9,10 @@
 // See landmass-g.vert for a description of the inputs.
 varying in vec4 rawposIn[];
 varying in vec3 NormalIn[];
-varying in vec4 rawTopIn[];
 varying in vec4 ecPosIn[];
-varying in vec4 ecTopIn[];
 varying in vec3 ecNormalIn[];
 varying in vec3 VTangentIn[];
 varying in vec3 VBinormalIn[];
-varying in vec4 positionTopIn[];
 varying in vec4 constantColorIn[];
 
 uniform float canopy_height;
@@ -67,14 +64,25 @@ void doSideVertex(in int vertIdx, in int sideIdx, vec4 pos, in vec4 ecpos,
 
 void main(void)
 {
+        vec4 rawTopDisp = vec4(0.0, 0.0, canopy_height, 0.0);
+        vec4 ecTopDisp = gl_ModelViewMatrix * rawTopDisp;
+        vec4 mvpTopDisp = gl_ModelViewProjectionMatrix * rawTopDisp;
+        // model forest top        
+        vec4 rawTopIn[3];
+        vec4 ecTopIn[3];
+        vec4 positionTopIn[3];
         rawSideNormal[0] = normalize(cross((rawposIn[1] - rawposIn[0]).xyz,
                                            NormalIn[0]));
         rawSideNormal[1] = normalize(cross((rawposIn[2] - rawposIn[1]).xyz,
                                            NormalIn[1]));
         rawSideNormal[2] = normalize(cross((rawposIn[0] - rawposIn[2]).xyz, 
                                            NormalIn[2]));
-        for (int i = 0; i < 3; ++i)
+        for (int i = 0; i < 3; ++i) {
                 sideNormal[i] = gl_NormalMatrix * rawSideNormal[i];
+                rawTopIn[i] = rawposIn[i] + rawTopDisp;
+                ecTopIn[i] = ecPosIn[i] + ecTopDisp;
+                positionTopIn[i] = gl_PositionIn[i] + mvpTopDisp;
+        }
         if (canopy_height > 0.01) {
                 // Sides
                 doSideVertex(0, 0, rawTopIn[0], ecTopIn[0], positionTopIn[0]);

@@ -173,7 +173,7 @@ var dialog = {
             { type: "text", property: "bearing-to",  format: " %3.0f", label: "----",           halign: "right", font: font },
             { type: "text", property: func dialog.dist_node, format:" %8.2f", label: "---------", halign: "right", font: font },
             { type: "text", property: func dialog.alt_node,  format:" %7.0f", label: "---------", halign: "right", font: font },
-            { type: "checkbox", property: "sim/multiplay/ignore", callback: "multiplayer.dialog.toggle_ignore",
+            { type: "checkbox", property: "controls/invisible", callback: "multiplayer.dialog.toggle_ignore",
               argprop: "callsign", label: "---------", halign: "right", font: font },
         ];
         me.name = "who-is-online";
@@ -285,7 +285,7 @@ var dialog = {
                 "distance-to-km": distance / 1000.0,
                 "distance-to-nm": distance * M2NM,
                 "position/altitude-m": n.getNode("position/altitude-ft").getValue() * FT2M,
-                "sim/multiplay/ignore": contains(ignore, mp.callsign),
+                "controls/invisible": contains(ignore, mp.callsign),
             });
         }
         if (PILOTSDLG_RUNNING)

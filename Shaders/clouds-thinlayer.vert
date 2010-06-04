@@ -3,7 +3,7 @@
 
 varying float fogFactor;
 
-float shade = 0.4;
+float shade = 0.7;
 float cloud_height = 1000.0;
 
 void main(void)
@@ -30,7 +30,7 @@ void main(void)
   //gl_Position.xyz += gl_Vertex.z * w  * hScale;
   gl_Position.xyz += gl_Color.xyz;
 
-  gl_Position.z = gl_Position.z * 0.4;
+  gl_Position.z = gl_Position.z * 0.2;
 
   // Determine a lighting normal based on the vertex position from the
   // center of the cloud, so that sprite on the opposite side of the cloud to the sun are darker.
@@ -58,6 +58,6 @@ void main(void)
   gl_BackColor = gl_FrontColor;
 
   // Fog doesn't affect clouds as much as other objects.
-  fogFactor = exp( -gl_Fog.density * fogCoord * 0.5);
+  fogFactor = exp( -gl_Fog.density * fogCoord * 0.2);
   fogFactor = clamp(fogFactor, 0.0, 1.0);
 }

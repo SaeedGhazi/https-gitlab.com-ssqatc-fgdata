@@ -32,8 +32,6 @@ uniform float reflect_map;
 
 void main (void)
 {
-    if (!gl_FrontFacing) discard;
-
     vec3 n, halfV;
     float NdotL, NdotHV;
     vec4 color = constantColor;

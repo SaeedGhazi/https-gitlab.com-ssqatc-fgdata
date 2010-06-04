@@ -24,14 +24,23 @@
    <height>25</height>
    <live>true</live>
    <property>/local-weather/tmp/tile-type</property>
-   <value>Altocumulus sky</value>
-   <value>Broken layers</value>
-   <value>Cirrus sky</value>
-   <value>Fair weather</value>
+   <value>High-pressure-core</value>
+   <value>High-pressure</value>
+   <value>High-pressure-border</value>
+   <value>Low-pressure-border</value>
+   <value>Low-pressure</value>
+   <value>Low-pressure-core</value>
+   <value>---</value>
+   <!--<value>Altocumulus sky</value>-->
+   <!--<value>Broken layers</value>-->
+   <!--<value>Cirrus sky</value>-->
+   <!--<value>Fair weather</value>-->
    <value>Glider's sky</value>
-   <value>Incoming rainfront</value>
-   <value>Overcast stratus sky</value>
-   <value>Summer rain</value>
+   <value>Blue thermals</value>
+   <!--<value>Incoming rainfront</value>-->
+   <!--<value>8/8 stratus sky</value>-->
+   <!--<value>Test tile</value>-->
+   <!--<value>Summer rain</value>-->
    <binding>
     <command>dialog-apply</command>
    </binding>
@@ -44,26 +53,95 @@
   </text>
 
  <input>
-   <x>120</x>
+   <x>115</x>
    <y>170</y>
-   <width>50</width>
+   <width>40</width>
    <height>25</height>
    <property>/local-weather/tmp/tile-orientation-deg</property>
   </input>
 
  <text>
-   <x>170</x>
+   <x>155</x>
    <y>170</y>
    <label>alt. offset (ft)</label>
   </text>
 
 <input>
-   <x>250</x>
+   <x>240</x>
    <y>170</y>
-   <width>40</width>
+   <width>50</width>
    <height>25</height>
    <property>/local-weather/tmp/tile-alt-offset-ft</property>
   </input>
+
+<text>
+   <x>10</x>
+   <y>130</y>
+   <label>tile selection mode</label>
+  </text>
+
+<combo>
+   <x>150</x>
+   <y>130</y>
+   <width>140</width>
+   <height>25</height>
+   <live>true</live>
+   <property>/local-weather/tmp/tile-management</property>
+   <value>single tile</value>
+   <value>repeat tile</value>
+   <value>realistic weather</value>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+  </combo>
+
+<checkbox>
+   <x>10</x>
+   <y>90</y>
+   <width>15</width>
+   <height>15</height>
+   <label>Terrain presampling</label>
+   <property>/local-weather/tmp/presampling-flag</property>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+</checkbox>
+
+<checkbox>
+   <x>150</x>
+   <y>90</y>
+   <width>15</width>
+   <height>15</height>
+   <label>Worker threads</label>
+   <property>/local-weather/tmp/thread-flag</property>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+</checkbox>
+
+<checkbox>
+   <x>10</x>
+   <y>60</y>
+   <width>15</width>
+   <height>15</height>
+   <label>asymmetric range</label>
+   <property>/local-weather/tmp/asymmetric-tile-loading-flag</property>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+</checkbox>
+
+<checkbox>
+   <x>150</x>
+   <y>60</y>
+   <width>15</width>
+   <height>15</height>
+   <label>detailed clouds</label>
+   <property>/local-weather/config/detailed-clouds-flag</property>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+</checkbox>
 
 <group>
   <x>10</x>

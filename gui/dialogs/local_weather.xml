@@ -74,9 +74,12 @@
    <value>Cirrus</value>
    <value>Cumulus</value>
    <value>Cumulonimbus</value>
+   <value>Fog (thin)</value>
+   <value>Fog (thick)</value>
    <value>Nimbus</value>
    <value>Stratus</value>
    <value>Stratus (structured)</value>
+   <value>Stratus (thin)</value>
    <binding>
     <command>dialog-apply</command>
    </binding>
@@ -236,11 +239,15 @@
    <value>Altocumulus</value>
    <value>Cirrus</value>
    <value>Cumulus</value>
+   <value>Cumulus (cloudlet)</value>
    <value>Cumulonimbus</value>
    <value>Cumulonimbus (rain)</value>
+   <value>Fog (thin)</value>
+   <value>Fog (thick)</value>
    <value>Nimbus</value>
    <value>Stratus</value>
    <value>Stratus (structured)</value>
+   <value>Stratus (thin)</value>
    <binding>
     <command>dialog-apply</command>
    </binding>
@@ -647,10 +654,14 @@
    <value>Altocumulus</value>
    <value>Cirrus</value>
    <value>Cumulus</value>
+   <value>Cumulus (cloudlet)</value>
    <value>Cumulonimbus</value>
+   <value>Fog (thin)</value>
+   <value>Fog (thick)</value>
    <value>Nimbus</value>
    <value>Stratus</value>
    <value>Stratus (structured)</value>
+   <value>Stratus (thin)</value>
    <binding>
     <command>dialog-apply</command>
    </binding>

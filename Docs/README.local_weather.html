@@ -7,7 +7,7 @@
 
 <body>
 
-<h1>Local Weather Package - v0.5</h1>
+<h1>Local Weather Package - v0.61</h1>
 
 <h2>1. Introduction</h2>
 
@@ -15,13 +15,13 @@ The aim of a local weather system is to simulate weather phenomena tied to speci
 
 This is in contrast to the current (v.2.0.0) weather system of Flightgear where weather changes affect the weather everywhere in the simulated world and are (with few exceptions) not tied to specific locations. In such a system, it is impossible to observe e.g. the approach of a rainfront while flying in sunshine.<p>
 
-The local weather package ultimately aims to provide the functionality to simulate such local phenomena. In version 0.5, the package supplies various cloud placement algorithms, as well as local control over most major weather parameters (visibility, pressure, temperature, rain, snow, thermal lift...) through interpolation routines and event volumes. However, basically all features currently present can and will eventually be improved.<p>
+The local weather package ultimately aims to provide the functionality to simulate such local phenomena. In version 0.61, the package supplies various cloud placement algorithms, as well as local control over most major weather parameters (visibility, pressure, temperature, rain, snow, thermal lift...) through interpolation routines and event volumes. For long-range flights, it automatically provides transitions between different weather patterns. However, basically all features currently present can and will eventually be improved.<p>
 
-As of version 0.5, the system does not contain dynamics (development of convective clouds, wind displacement of clouds...). Since wind and dynamics are closely related, any wind parameters can currently <i>not</i> be controlled from the local weather algorithms.<p>
+As of version 0.61, the system does not contain dynamics (development of convective clouds, wind displacement of clouds...). Since wind and dynamics are closely related, any wind parameters can currently <i>not</i> be controlled from the local weather algorithms.<p>
 
 <h2>2. Installation</h2>
 
-The package needs to be unpacked in the Flightgear root directory. It writes content into the <i>Nasal/, gui/, gui/dialogs/, Shaders, Effects/</i>, and <i>Models/Weather/</i> subdirectories. The installation does not overwrite any of the default Flightgear files, but to be accessible from the menu, one must copy <i>gui/menubar.xml.alt</i> to the default <i>menubar.xml</i> or copy the last two lines of the environemnt menu calling <i>local_weather</i> and <i>local_weather_tiles</i> into the default file.<p>
+The package needs to be unpacked in the Flightgear root directory. It writes content into the <i>Nasal/, gui/, gui/dialogs/, Shaders, Effects/, Docs/</i>, and <i>Models/Weather/</i> subdirectories. The installation does not overwrite any of the default Flightgear files, but to be accessible from the menu, one must copy <i>gui/menubar.xml.alt</i> to the default <i>menubar.xml</i> or copy the last two lines of the environemnt menu calling <i>local_weather</i> and <i>local_weather_tiles</i> into the default file.<p>
 
 This adds the items <i>Local Weather</i> and <i>Local weather tiles</i> to the <i>Environment</i> menu when Flightgear is up. The central functionality is contained in <i>local_weather.nas</i> which is loaded at startup and identifies itself with a message, but does not start any functions unless called from the GUI.<p>
 
@@ -29,7 +29,7 @@ This adds the items <i>Local Weather</i> and <i>Local weather tiles</i> to the <
 
 The general rule is that the gui is not hardened against problematic user input, for example it will not reject meaningless input. It is recommended to watch the console, because some level of warnings and errors are passed to the console. Placement calls may sometimes take a significant time to execute especially for large numbers of clouds tied in a complicated way to the terrain. Placing 500 barrier clouds against a small barrier may take a minute to compute.<p>
 
-The first menu contains the low level cloud placement functions. Currently four options are supported: <i>Place a single cloud</i>, <i>Place a cloud streak</i>, <i>Start the convective system</i>, <i>Create barrier clouds</i> and <i>Place a cloud layer</i>.<p>
+The first menu contains the low level cloud placement functions. Its purpose is mainly for developing cloud patterns without having to resort to re-type the underlying Nasal code every time. Currently four options are supported: <i>Place a single cloud</i>, <i>Place a cloud streak</i>, <i>Start the convective system</i>, <i>Create barrier clouds</i> and <i>Place a cloud layer</i>.<p>
 
 <center>
 <img src="menu1.jpg">
@@ -83,31 +83,47 @@ The picture illustrates the result of a layer generation call for Nimbostratus c
 
 <h3>Tile placement</h3>
 
-The second menu is used to place complete weather tiles based on low-level calls. Currently it contains several demo tiles indicating what can be done. <p>
+The second menu is used to place complete weather tiles based on low-level calls. It is intended for the user to automatically create the various weather patterns during flight. <p>
 
 <center>
 <img src="menu2.jpg">
 </center><p>
 
-The dropdown menu is used to select the type of weather tile to build. In addition, two parameters can be entered. The first is the tile orientation. Some tiles, most notably incoming fronts, have a direction along which the weather changes. The tiles are set up in such a way that fronts come from north, changing orientation rotates the whole tile to the specified direction. As soon as wind is implemented in the local weather system, the tile orientation will essentially also govern the wind direction (clearly, there is a relation between from where a front comes and the wind direction).<p>
+The dropdown menu is used to select the type of weather tile to build. The menu contains two groups of tiles - the first six are classified by airmass, whereas the last two are scenarios intended for soaring. In addition, two parameters can be entered. The first is the tile orientation. Some tiles, most notably incoming fronts, have a direction along which the weather changes. The tiles are set up in such a way that fronts come from north, changing orientation rotates the whole tile to the specified direction. As soon as wind is implemented in the local weather system, the tile orientation will essentially also govern the wind direction (clearly, there is a relation between from where a front comes and the wind direction). Currently, the functionality of tile orientation is there, but mostly untested and at the moment not particularly useful.<p>
 
 The second parameter, the altitude offset, is as of now a provisorium. Cloud layer placement calls are specified for absolute altitudes and calibrated at sea level. As a result, layers are placed too low in mountainous terrain. Eventually, the system is to receive a terrain presampling function to determine just where exactly low cloud layers should be placed when a weather tile is set up. Until this is in place, the user must manually specify a suitable altitude offset for all cloud layers.<p>
 
-The following pictures show the results of tile setups 'Incoming rainfront' and 'Summer rain':<p>
+The dropdown menu for the tile selection mode controls the long-range behaviour of weather. It specifies according to what rules tiles are automatically generated once the aircraft reaches the border of the original tile. The option 'single tile' creates a single weather tile as specified without automatic generation of further tiles. The option 'repeat tile' creates new tiles of the same type as the originally selected tile. This does not mean that weather will be unchanged during flight, as both parameters like pressure, temperature and visibility as well as the positioning of cloud banks are randomized to some degree. In addition, each tile typically contains 2-5 different cloud scenarios, so five repeated generations of 'low-pressure-border' tiles may never result in the same arrangement of cloud layers. Necertheless, the option will keep weather conditions roughly the same. This is different with the (somewhat optimistically named) 'realistic weather'. This option allows transitions between different airmasses, thus one may select 'low-pressure-core' initially, but as the flight goes on, eventually a region of high pressure and clear skies may be reached. Currently this change between airmasses does not include transitions across fronts. Moreover, it does not cover arctic or tropical weather conditions - those will be covered in a future release. Note that 'realistic weather' does not work for the two soaring scenarios.<p>
+
+The menu then contains four options. 'Terrain presampling' is currently not yet functional. 'Worker threads' is an option to distribute the work flow. Usually, the local weather package will compute a task till it is done before starting the next. Thus, creating a new weather tile may lead to a few seconds freeze, before Flightgear continues normally. With 'worker threads' selected, computations will be split across several frames. The advantage is that Flightgear stays responsive during loading and unloading of weather tiles, and in general the flight continues smoothly, albeit with reduced framerate. However, selecting this option does not guarantee that an operation is finished by the time another is beginning - thus there may be situations in which the loading of a new tile blocks unloading of an old one and so on, in essence leading to processes competing for access to the weather array, resulting in an extended period of very low framerates. Dependent on system performance, this may or may not be acceptable to the user. 'asymmetric range' is an experimental performance-improving option (see below). Finally, 'detailed clouds' will change the technique for generating Cumulus clouds from a multilayer model to multiple cloudlets filling a box. This improves the visual appearance of the clouds significantly, albeit at the expense of a (significant) loss of framerate. Rendering multiple tiles of dense Cumulus development with detailed clouds will quite possibly freeze even a powerful system. <p>
+
+
+
+The following pictures show the results of tile setups 'Low-pressure-border' and 'High-pressure-border':<p>
 
 <center>
-<img src="clouds-incoming-rainfront1.jpg">
+<img src="carrier-ops08.jpg">
 </center><p>
 
 <center>
-<img src="clouds-summer-rain.jpg">
+<img src="clouds-lpb01.jpg">
 </center><p>
 
 <h2>4. Cloud models</h2>
 
-The package contains a number of different cloud models, both static ones for Cirrus and Cirrocumulus clouds as well as rotated ones for Altocumulus, Cumulus, Cumulonimbus, Stratus and Nimbostratus cloudlet models. Neither the cloud textures, nor the models nor the transformations are perfected, and any aspect can be improved. Currently the clouds cannot reach the sophistication of the shader-based standard 3-d clouds of Flightgear, but there is no reason in principle why they should not eventually reach that level. The problem is finding a good balance between spending a lot of CPU time to make a single cloud model appear perfect, and the performance degradation that occurs if hundreds of clouds are placed in the sky. The basic aim is to provide realistic appearance for clouds from a standard view position (in cockpit looking forward), to retain acceptable appearance from other positions and to allow large cloud layers.<p>
+The package contains a number of different cloud models, both static ones for Cirrus and Cirrocumulus clouds as well as rotated ones for Altocumulus, Cirrostratus, Cumulus, Cumulonimbus, Stratus and Nimbostratus cloudlet models. Neither the cloud textures, nor the models nor the transformations are perfected, and any aspect can be improved. Currently the standard clouds cannot quite reach the sophistication of the shader-based standard 3-d clouds of Flightgear, but the detailed Cumulus clouds are on the verge of catching up. <p>
 
-Currently all clouds which need to be rotated are treated in the Shaders using a view-axis based rotation by two angles. This generally looks okay from a normal flight position, but rapid change of the view axis (looking around), especially straight up or down, causes unrealistic cloud movement. Any static picture of clouds however is (almost) guaranteed to look fine.<p>
+<center>
+<img src="clouds-detailed01.jpg">
+</center><p>
+
+These are rendered by a different technique: While the default Cumulus models consist of multiple layers rotated around the center of the model, the detailed Cumulus clouds consist of multiple (up to 24) individual cloudlets, rotating each around its own center, randomly distributed into a box. This not only improves the visual appearance, but also leads to a more realistic distribution of cloud sizes and shapes in the sky. In addition, when circling below the cloud (as done when soaring) the effect of the cloudlet rotation is less pronounced. The price to pay is that rendering detailed clouds costs about a factor 4 more performance, so they may not be suitable for all systems.<p>
+
+The general problem is finding a good balance between spending a lot of CPU time to make a single cloud model appear perfect, and the performance degradation that occurs if hundreds of clouds are placed in the sky. The basic aim is to provide realistic appearance for clouds from a standard view position (in cockpit looking forward), to retain acceptable appearance from other positions and to allow large cloud layers.<p>
+
+
+
+Currently all clouds which need to be rotated are treated in the Shaders using a view-axis based rotation by two angles. This generally looks okay from a normal flight position, but rapid change of the view axis (looking around), especially straight up or down, causes unrealistic cloud movement. Any static picture of clouds however is (almost) guaranteed to look fine. This means that shader effects need to be 'on' in order to see most of the clouds.<p>
 
 <h2>5. Local weather parameters</h2>
 
@@ -141,15 +157,19 @@ Effect volumes are always specified between a minimum and a maximum altitude, an
 
  where <i>geometry</i> is a flag (1: circular, 2: elliptical and 3: rectangular), <i>lat</i> and <i>lon</i> are the latitude and longitude, <i>r1</i> and <i>r2</i> are the two size parameters for the elliptic or rectangular shape (for the circular shape, only the first is used), <i>phi</i> is the rotation angle of the shape (not used for circular shape), <i>alt_low</i> and <i>alt_high</i> are the altitude boundaries, <i>vis, rain, snow, turb</i> and <i>lift</i> are weather parameters which are either set to the value they should assume, or to -1 if they are not to be used, or to -2 if a function instead of a parameter is to be used. Since thermal lift can be set to negative values in a sink, a separate flag is provided in this case.<p>
 
+In version 0.61, thermal lift is implemented by function. There is no easy way to implement any weather parameter by function in an effect volume, as this requires some amount of Nasal coding.
+
 <h2>6. Property tree structure</h2>
 
 The internal state of the local weather system is found in the property tree under <i>local-weather/</i>. In this directory, various loop flags are found. They indicate the state of the main monitoring loops - they are set to 1 if a loop is running, setting them to zero terminates the loop.<p>
 
-The <i>local-weather</i> folder contains various subdirectories. <i>clouds/</i> contains the record of all visible weather phenomena (clouds, precipitation layers, lightning...) in a subdirectory <i>cloud[i]/</i>. The total number of all models placed is accessible as <i>local-weather/clouds/cloud-number</i>. Inside each <i>cloud/</i> subdirectory, there is a string <i>type</i> specifying the type of object and subdirectories <i>position/</i> and <i>orientation</i> which contain the position and spatial orientation of the model inside the scenery. Note that the orientation property is obsolete for clouds which are rotated by the shader.<p> 
+The <i>local-weather</i> folder contains various subdirectories. <i>clouds/</i> contains the record of all visible weather phenomena (clouds, precipitation layers, lightning...) in a subdirectory <i>tile[j]/cloud[i]/</i>. The total number of all models placed is accessible as <i>local-weather/clouds/cloud-number</i>. Inside each <i>cloud/</i> subdirectory, there is a string <i>type</i> specifying the type of object and subdirectories <i>position/</i> and <i>orientation</i> which contain the position and spatial orientation of the model inside the scenery. Note that the orientation property is obsolete for clouds which are rotated by the shader.<p> 
 
 The <i>local-weather/effect-volumes/</i> subfolder contains the management of the effect volumes. It has the total count of specified effect volumes, along with the count of currently active volumes for each property. If volumes are defined, their properties are stored under <i>local-weather/effect-volumes/effect-volume[i]/</i>. In each folder, there are <i>position/</i> and <i>volume/</i> storing the spatial position and extent of the volume, as well as the <i>active-flag</i> which is set to 1 if the airplane is in the volume and the <i>geometry</i> flag which determines if the volume has circular, elliptical or rectangular shape. Finally, the <i>effects/</i> subfolder holds flags determining of a property is to be set when the volume is active and the corresponding values. On entry, the effect volumes also create a subfolder <i>restore/</i> in which the conditions as they were when the volume was entered are saved.<p>
 
 <i>local-weather/interpolation/</i> holds all properties which are set by the interpolation system, as well as subfolders <i>station[i]/</i> in which the weather station information for the interpolation are found. Basically, here is the state of the weather as it is outside of effect volumes. Since parameters may be set to different values in effect volumes, the folder <i>local-weather/current/</i> contains the weather as the local weather system currently thinks it should be. Currently, weather is actually passed to the Flightgear environment system through several workarounds. In a clean C++ supported version, the parameters should be read from here.<p>
+
+<i>local-weather/tiles</i> stores the information of the 9 managed weather tiles (the one the airplane is currently in, and the 8 surrounding it). By default each directory contains the tile center coordinates and a flag if it has been generated. Tiles are not generated unless a minimum distance to the tile center has been reached. Once this happens, the tile type is written as a code, and the cloud, interpolation and effect volume information corresponding to the tile is generated. <p>
 
 <h2>7. Weather tile setup</h2>
 
@@ -165,8 +185,23 @@ If the cloud layer has an orientation, then all placement coordinates should be 
 
 To make your own tile visible, an entry in the menu <i>gui/dialogs/local_weather_tiles.xml</i> needs to be created and the name needs to be added with a tile setup call to the function <i>set_tile</i> in <i>Nasal/local_weather.nas</i>.
 
+<h2>8. Performance tuning</h2>
 
-<h2>8. Known issues</h2>
+With default settings, the local weather package generates a 40x40 km weather tile when the aircraft is closer than 35 km to the tile center and unloads it when the aircraft is more than 37 km away. This means that the system can generate at most 4 tiles at once and clouds are visible for at least 15 km and up to 30 km (the latter number determined by fading in the shaders). However, rendering and managing multiple overcast cloud layers in a region of 80x80 km is a significant drain on performance. For older systems, a few things can be tried:<p>
+
+* the menu option 'asymmetric range' decreases loading and unloading ranges in a 45 degree sector behind the aircraft. This means that in straight flight, less tiles will be loaded at the same time, as tiles in the rear are unloaded more quickly. The option is currently experimental.<p>
+
+* a further reduction in the amount of simultaneously generated tiles can be achieved by changing the ranges. These are exposed in the property tree as <i>local-weather/config/distance-to-load-tile-m</i> and <i>local-weather/config/distance-to-remove-tile-m</i>. Note that the removal range <b>must</b> be larger than the loading range - otherwise just generated tiles will be immediately unloaded! Ranges below 20 km will guarantee that only one tile is loaded at a time, but will create empty spots when no tile is loaded. A range above 28 km will guarantee that the aircraft never flies in an empty tile, but empty sky in front will be visible. Finally, ranges above 56 km guarantee that all 9 tiles (a region of 120x120 km) are managed at all times - but will most likely cause a severe drop in framerate for most scenarios.<p>
+
+* if this does not help, try avoiding scenarios with large cloud count. As a rule, low pressure areas have high cloud count, high pressure areas have a low cloud count. <p>
+
+* a drastic solution is to set the visual ranges lower. Currently, cloud models are set to be visible up to 30 km. Changing the visibility range in the range animation of all cloud model xml wrappers will improve performance accordingly. To achieve a nice fading into the background instead of a sudden disappearance, it is recommended to adjust the visibility range in the shaders accordingly. It would probably be good to expose the visual range as a property, but currently it's not yet done, as passing a property to the shader requires Flightgear CVS and cannot be done in 2.0.0.<p>
+
+Performance for overcast layers currently is a limiting issue and there are a few ideas around how to improve it - dependent if these work or not, future releases may work better.<p>
+
+* a different issue is a characteristic small pause every 3 seconds. This is caused by the interpolation loop resetting the weather parameters. Currently, a computationally expensive workaround is needed to do so, causing the problem. Work on a better environment controller is on the way, however until that modification to the core Flightgear code is implemented, the best solution is to set the loop time in <i>Nasal/local-weather.nas</i> to a larger value.  <p>
+
+<h2>9. Known issues</h2>
 
 * The local weather system does not mix well with the standard weather system. 3d cloud layers can be placed in the absence of effect volumes, but any effect volume causing precipitation will let the layer behave in a strange way. Likewise, 2d cloud layers can be placed, but may or may not lead to strange rendering artefacts. Local weather, as long as interpolation and effect volumes are running, will in general overwrite all other settings - bother real weather METAR and user-specified settings from the menu. The results of mixing standard and local weather settings are unpredictable, and may not lead to the desired results.<p>
 
@@ -174,8 +209,18 @@ To make your own tile visible, an entry in the menu <i>gui/dialogs/local_weather
 
 * Rain and snow may not start properly. For me, rain is only generated when I switch 'Shader effects' on and off in the menu on startup, otherwise neither moving the menu slider nor entering an effect volume generate rain. This seems to be a bug of some Flightgear versions, not of the local weather system.<p>
 
+* Especially with multiple overcast layers, loading and unloading weather tiles may take a long time / cause severe drops in framerate. Please refer to performance tuning to solve such problems. In general, overcast layers do require a system on the high end of the performance scale to render properly.<p>
 
-Thorsten Renk, April 2010
+* The local weather package is able to occasionally trigger errors like 'Warning:: Picked up error in TriangleIntersect'. These seem to be a problem in the core Flightgear code - the package does nothing but placing normal (rather simple) AC3D models into the scenery.<p>
+
+* The thermals in the soaring scenarios need a CVS patch to work.<p>
+
+<h2>10. Credits</h2>
+
+The model of a thermal has been developed by Patrice Poly. The shader code used to transform clouds is heavily based on prior work by Stuart Buchanan.<p>
+
+
+Thorsten Renk, May 2010
 
 </body>
 

@@ -3,7 +3,7 @@
 
 varying float fogFactor;
 
-float shade = 0.5;
+float shade = 0.6;
 float cloud_height = 1000.0;
 
 void main(void)

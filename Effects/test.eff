@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
-  <name>Effects/clouds-thin</name>
+  <name>Effects/test</name>
   <parameters>
     <texture n ="0">
     </texture>
@@ -49,10 +49,14 @@
         <!--<wrap-s>clamp</wrap-s>
         <wrap-t>clamp</wrap-t>-->
       </texture-unit>
+      <!--<attribute>
+        <mypars type="vec3">0 0 0</mypars>
+        <value type="int">10</value>
+      </attribute>-->
       <program>
-        <vertex-shader>Shaders/clouds-thin.vert</vertex-shader>
-        <fragment-shader>Shaders/clouds-thin.frag</fragment-shader>
-        <!--<attribute>
+        <vertex-shader>Shaders/test.vert</vertex-shader>
+        <fragment-shader>Shaders/test.frag</fragment-shader>
+         <!--<attribute>
           <name>usrAttr3</name>
           <index>10</index>
         </attribute>
@@ -65,6 +69,11 @@
         <name>baseTexture</name>
         <type>sampler-2d</type>
         <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>shading</name>
+        <type>float</type>
+        <value type="float">0.5</value>
       </uniform>
       <vertex-program-two-side>true</vertex-program-two-side>
     </pass>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
-  <name>Effects/clouds-thin</name>
+  <name>Effects/clouds-layered</name>
   <parameters>
     <texture n ="0">
     </texture>
@@ -50,16 +50,8 @@
         <wrap-t>clamp</wrap-t>-->
       </texture-unit>
       <program>
-        <vertex-shader>Shaders/clouds-thin.vert</vertex-shader>
-        <fragment-shader>Shaders/clouds-thin.frag</fragment-shader>
-        <!--<attribute>
-          <name>usrAttr3</name>
-          <index>10</index>
-        </attribute>
-        <attribute>
-          <name>usrAttr4</name>
-          <index>11</index>
-        </attribute>-->
+        <vertex-shader>Shaders/clouds-thinlayer.vert</vertex-shader>
+        <fragment-shader>Shaders/clouds-thinlayer.frag</fragment-shader>
       </program>
       <uniform>
         <name>baseTexture</name>

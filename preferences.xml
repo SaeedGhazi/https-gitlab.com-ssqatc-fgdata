@@ -269,6 +269,12 @@ Started September 2000 by David Megginson, david@megginson.com
    <autopilot>
     <path>Aircraft/Generic/generic-autopilot.xml</path>
    </autopilot>
+   <!-- 
+   to be enabled when the hard coded helpers are gone
+   <autopilot>
+    <path>Aircraft/Generic/generic-autopilot-helper.xml</path>
+   </autopilot>
+   -->
   </systems>
   <instrumentation>
    <path>Aircraft/Generic/generic-instrumentation.xml</path>

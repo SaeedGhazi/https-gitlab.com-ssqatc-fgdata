@@ -12,7 +12,7 @@ var tile_management_loop = func {
 
 var tNode = props.globals.getNode(lw~"tiles", 1).getChildren("tile");
 var viewpos = geo.aircraft_position(); # using viewpos here triggers massive tile ops for tower view...
-var code = getprop(lw~"tiles/code");
+var code = getprop(lw~"tiles/tile[4]/code");
 var i = 0;
 var d_min = 100000.0;
 var i_min = 0;
@@ -46,8 +46,9 @@ foreach (var t; tNode) {
 		{
 		setprop(lw~"tiles/tile-counter",getprop(lw~"tiles/tile-counter")+1);
 		print("Building tile unique index ",getprop(lw~"tiles/tile-counter"));
-		generate_tile(code, tpos.lat(), tpos.lon(),0);
+		generate_tile(code, tpos.lat(), tpos.lon(),i);
 		t.getNode("generated-flag").setValue(1);
+		t.getNode("code",1).setValue(getprop(lw~"tiles/code"));
 		t.getNode("tile-index",1).setValue(getprop(lw~"tiles/tile-counter"));
 		} 
 
@@ -68,6 +69,8 @@ foreach (var t; tNode) {
 		change_active_tile(i_min);
 		}    
 
+	
+
 if (getprop(lw~"tile-loop-flag") ==1) {settimer(tile_management_loop, 5.0);}
 
 }
@@ -77,10 +80,31 @@ if (getprop(lw~"tile-loop-flag") ==1) {settimer(tile_management_loop, 5.0);}
 # tile generation call
 ###################################
 
-var generate_tile = func (code, lat, lon, index) {
+var generate_tile = func (code, lat, lon, dir_index) {
 
 setprop(lw~"tiles/tmp/latitude-deg", lat);
 setprop(lw~"tiles/tmp/longitude-deg",lon);
+setprop(lw~"tiles/tmp/code",code);
+
+# now see if we need to presample the terrain
+
+if ((getprop(lw~"tmp/presampling-flag") == 1) and (getprop(lw~"tmp/presampling-status") == "idle")) 
+	{
+	local_weather.terrain_presampling_start(lat, lon, 1000, 40000, getprop(lw~"tmp/tile-orientation-deg")); 
+	return;
+	}
+
+# now allow for some change in tile orientation
+
+var alpha = getprop(lw~"tmp/tile-orientation-deg");
+alpha = alpha + 2.0 * (rand()-0.5) * 10.0;
+
+# account for the systematic spin of weather systems around a low pressure core dependent on hemisphere
+if (lat >0.0) {alpha = alpha -3.0;}
+else {alpha = alpha +3.0;} 
+
+
+setprop(lw~"tmp/tile-orientation-deg",alpha);
 
 if (getprop(lw~"tmp/tile-management") == "repeat tile")
 	{
@@ -97,6 +121,9 @@ if (getprop(lw~"tmp/tile-management") == "repeat tile")
 	else if (code == "low_pressure_border") {weather_tiles.set_low_pressure_border_tile();}
 	else if (code == "low_pressure") {weather_tiles.set_low_pressure_tile();}
 	else if (code == "low_pressure_core") {weather_tiles.set_low_pressure_core_tile();}
+	else if (code == "cold_sector") {weather_tiles.set_cold_sector_tile();}
+	else if (code == "warm_sector") {weather_tiles.set_warm_sector_tile();}
+	else if (code == "tropical_weather") {weather_tiles.set_tropical_weather_tile();}
 	}
 else if (getprop(lw~"tmp/tile-management") == "realistic weather")
 	{
@@ -104,37 +131,107 @@ else if (getprop(lw~"tmp/tile-management") == "realistic weather")
 	
 	if (code == "low_pressure_core") 
 		{
-		if (rn > 0.3) {weather_tiles.set_low_pressure_core_tile();}
+		if (rn > 0.2) {weather_tiles.set_low_pressure_core_tile();}
 		else {weather_tiles.set_low_pressure_tile();}
 		}
 	else if (code == "low_pressure") 
 		{
-		if (rn > 0.3) {weather_tiles.set_low_pressure_tile();}
-		else if (rn > 0.15) {weather_tiles.set_low_pressure_core_tile();}
+		if (rn > 0.2) {weather_tiles.set_low_pressure_tile();}
+		else if (rn > 0.1) {weather_tiles.set_low_pressure_core_tile();}
 		else {weather_tiles.set_low_pressure_border_tile();}
 		}
 	else if (code == "low_pressure_border") 
 		{
-		if (rn > 0.3) {weather_tiles.set_low_pressure_border_tile();}
-		else if (rn > 0.15) {weather_tiles.set_low_pressure_tile();}
+		if (rn > 0.4) {weather_tiles.set_low_pressure_border_tile();}
+		else if (rn > 0.3) {weather_tiles.set_cold_sector_tile();}
+		else if (rn > 0.2) {weather_tiles.set_warm_sector_tile();}
+		else if (rn > 0.1) {weather_tiles.set_low_pressure_tile();}
 		else {weather_tiles.set_high_pressure_border_tile();}
 		}
 	else if (code == "high_pressure_border") 
 		{
-		if (rn > 0.3) {weather_tiles.set_high_pressure_border_tile();}
-		else if (rn > 0.15) {weather_tiles.set_high_pressure_tile();}
+		if (rn > 0.4) {weather_tiles.set_high_pressure_border_tile();}
+		else if (rn > 0.3) {weather_tiles.set_cold_sector_tile();}
+		else if (rn > 0.2) {weather_tiles.set_warm_sector_tile();}
+		else if (rn > 0.1) {weather_tiles.set_high_pressure_tile();}
 		else {weather_tiles.set_low_pressure_border_tile();}
 		}
 	else if (code == "high_pressure") 
 		{
-		if (rn > 0.3) {weather_tiles.set_high_pressure_tile();}
-		else if (rn > 0.15) {weather_tiles.set_high_pressure_border_tile();}
+		if (rn > 0.2) {weather_tiles.set_high_pressure_tile();}
+		else if (rn > 0.1) {weather_tiles.set_high_pressure_border_tile();}
 		else {weather_tiles.set_high_pressure_core_tile();}
 		}
 	else if (code == "high_pressure_core") 
 		{
-		if (rn > 0.3) {weather_tiles.set_high_pressure_core_tile();}
+		if (rn > 0.2) {weather_tiles.set_high_pressure_core_tile();}
 		else {weather_tiles.set_high_pressure_tile();}
+		}
+	else if (code == "cold_sector") 
+		{
+		if (rn > 0.3) {weather_tiles.set_cold_sector_tile();}
+		else if (rn > 0.2) 
+			{
+			if ((dir_index ==0) or (dir_index ==1) or (dir_index==2))
+				{weather_tiles.set_warmfront1_tile();}
+			else if ((dir_index ==3) or (dir_index ==5))
+				{weather_tiles.set_cold_sector_tile();}
+			else if ((dir_index ==6) or (dir_index ==7) or (dir_index==8))
+				{weather_tiles.set_coldfront_tile();}
+			}
+		else if (rn > 0.1) {weather_tiles.set_low_pressure_border_tile();}
+		else {weather_tiles.set_high_pressure_border_tile();}
+		}
+	else if (code == "warm_sector") 
+		{
+		if (rn > 0.3) {weather_tiles.set_warm_sector_tile();}
+		else if (rn > 0.2) 
+			{
+			if ((dir_index ==0) or (dir_index ==1) or (dir_index==2))
+				{weather_tiles.set_coldfront_tile();}
+			else if ((dir_index ==3) or (dir_index ==5))
+				{weather_tiles.set_warm_sector_tile();}
+			else if ((dir_index ==6) or (dir_index ==7) or (dir_index==8))
+				{weather_tiles.set_warmfront4_tile();}
+			}
+		else if (rn > 0.1) {weather_tiles.set_low_pressure_border_tile();}
+		else {weather_tiles.set_high_pressure_border_tile();}
+		}
+	else if (code == "warmfront1")
+		{
+		if ((dir_index ==0) or (dir_index ==1) or (dir_index==2))
+			{weather_tiles.set_warmfront2_tile();}
+		else if ((dir_index ==3) or (dir_index ==5))
+			{weather_tiles.set_warmfront1_tile();}
+		else if ((dir_index ==6) or (dir_index ==7) or (dir_index==8))
+			{weather_tiles.set_cold_sector_tile();}
+		}
+	else if (code == "warmfront2")
+		{
+		if ((dir_index ==0) or (dir_index ==1) or (dir_index==2))
+			{weather_tiles.set_warmfront3_tile();}
+		if ((dir_index ==3) or (dir_index ==5))
+			{weather_tiles.set_warmfront2_tile();}
+		if ((dir_index ==6) or (dir_index ==7) or (dir_index==8))
+			{weather_tiles.set_warmfront1_tile();}
+		}
+	else if (code == "warmfront3")
+		{
+		if ((dir_index ==0) or (dir_index ==1) or (dir_index==2))
+			{weather_tiles.set_warmfront4_tile();}
+		if ((dir_index ==3) or (dir_index ==5))
+			{weather_tiles.set_warmfront3_tile();}
+		if ((dir_index ==6) or (dir_index ==7) or (dir_index==8))
+			{weather_tiles.set_warmfront2_tile();}
+		}
+	else if (code == "warmfront4")
+		{
+		if ((dir_index ==0) or (dir_index ==1) or (dir_index==2))
+			{weather_tiles.set_warm_sector_tile();}
+		if ((dir_index ==3) or (dir_index ==5))
+			{weather_tiles.set_warmfront4_tile();}
+		if ((dir_index ==6) or (dir_index ==7) or (dir_index==8))
+			{weather_tiles.set_warmfront3_tile();}
 		}
 
 	} # end if mode == realistic weather
@@ -152,8 +249,6 @@ var n = 100;
 
 var flag_mod = 0;
 
-#var mvec = props.globals.getNode("models", 1).getChildren("model");
-#var msize = size(mvec);
 
 var status = getprop(lw~"tmp/thread-status");
 
@@ -286,6 +381,7 @@ var lat = t.getNode("latitude-deg").getValue();
 var lon = t.getNode("longitude-deg").getValue();
 var alpha = getprop(lw~"tmp/tile-orientation-deg");
 
+
 if (index == 0)
 	{
 	copy_entry(4,8);
@@ -383,6 +479,7 @@ else if (index == 8)
 	create_neighbour(lat,lon,8,alpha);
 	}
 
+
 }
 
 #####################################
@@ -400,6 +497,7 @@ t.getNode("latitude-deg").setValue(f.getNode("latitude-deg").getValue());
 t.getNode("longitude-deg").setValue(f.getNode("longitude-deg").getValue());
 t.getNode("generated-flag").setValue(f.getNode("generated-flag").getValue());
 t.getNode("tile-index").setValue(f.getNode("tile-index").getValue());
+t.getNode("code").setValue(f.getNode("code").getValue());
 }
 
 #####################################
@@ -426,6 +524,7 @@ t.getNode("latitude-deg",1).setValue(blat + get_lat(x,y,phi));
 t.getNode("longitude-deg",1).setValue(blon + get_lon(x,y,phi));
 t.getNode("generated-flag",1).setValue(0);
 t.getNode("tile-index",1).setValue(-1);
+t.getNode("code",1).setValue("");
 }
 
 #####################################
@@ -446,24 +545,28 @@ setprop(lw~"tiles/tile[0]/latitude-deg",blat + get_lat(x,y,phi));
 setprop(lw~"tiles/tile[0]/longitude-deg",blon + get_lon(x,y,phi));
 setprop(lw~"tiles/tile[0]/generated-flag",0);
 setprop(lw~"tiles/tile[0]/tile-index",-1);
+setprop(lw~"tiles/tile[0]/code","");
 
 x = 0.0; y = 40000.0; 
 setprop(lw~"tiles/tile[1]/latitude-deg",blat + get_lat(x,y,phi));
 setprop(lw~"tiles/tile[1]/longitude-deg",blon + get_lon(x,y,phi));
 setprop(lw~"tiles/tile[1]/generated-flag",0);
 setprop(lw~"tiles/tile[1]/tile-index",-1);
+setprop(lw~"tiles/tile[1]/code","");
 
 x = 40000.0; y = 40000.0; 
 setprop(lw~"tiles/tile[2]/latitude-deg",blat + get_lat(x,y,phi));
 setprop(lw~"tiles/tile[2]/longitude-deg",blon + get_lon(x,y,phi));
 setprop(lw~"tiles/tile[2]/generated-flag",0);
 setprop(lw~"tiles/tile[2]/tile-index",-1);
+setprop(lw~"tiles/tile[2]/code","");
 
 x = -40000.0; y = 0.0; 
 setprop(lw~"tiles/tile[3]/latitude-deg",blat + get_lat(x,y,phi));
 setprop(lw~"tiles/tile[3]/longitude-deg",blon + get_lon(x,y,phi));
 setprop(lw~"tiles/tile[3]/generated-flag",0);
 setprop(lw~"tiles/tile[3]/tile-index",-1);
+setprop(lw~"tiles/tile[3]/code","");
 
 # this is the current tile
 x = 0.0; y = 0.0; 
@@ -471,30 +574,36 @@ setprop(lw~"tiles/tile[4]/latitude-deg",blat + get_lat(x,y,phi));
 setprop(lw~"tiles/tile[4]/longitude-deg",blon + get_lon(x,y,phi));
 setprop(lw~"tiles/tile[4]/generated-flag",1);
 setprop(lw~"tiles/tile[4]/tile-index",1);
+setprop(lw~"tiles/tile[4]/code","");
+
 
 x = 40000.0; y = 0.0; 
 setprop(lw~"tiles/tile[5]/latitude-deg",blat + get_lat(x,y,phi));
 setprop(lw~"tiles/tile[5]/longitude-deg",blon + get_lon(x,y,phi));
 setprop(lw~"tiles/tile[5]/generated-flag",0);
 setprop(lw~"tiles/tile[5]/tile-index",-1);
+setprop(lw~"tiles/tile[5]/code","");
 
 x = -40000.0; y = -40000.0; 
 setprop(lw~"tiles/tile[6]/latitude-deg",blat + get_lat(x,y,phi));
 setprop(lw~"tiles/tile[6]/longitude-deg",blon + get_lon(x,y,phi));
 setprop(lw~"tiles/tile[6]/generated-flag",0);
 setprop(lw~"tiles/tile[6]/tile-index",-1);
+setprop(lw~"tiles/tile[6]/code","");
 
 x = 0.0; y = -40000.0; 
 setprop(lw~"tiles/tile[7]/latitude-deg",blat + get_lat(x,y,phi));
 setprop(lw~"tiles/tile[7]/longitude-deg",blon + get_lon(x,y,phi));
 setprop(lw~"tiles/tile[7]/generated-flag",0);
 setprop(lw~"tiles/tile[7]/tile-index",-1);
+setprop(lw~"tiles/tile[7]/code","");
 
 x = 40000.0; y = -40000.0; 
 setprop(lw~"tiles/tile[8]/latitude-deg",blat + get_lat(x,y,phi));
 setprop(lw~"tiles/tile[8]/longitude-deg",blon + get_lon(x,y,phi));
 setprop(lw~"tiles/tile[8]/generated-flag",0);
 setprop(lw~"tiles/tile[8]/tile-index",-1);
+setprop(lw~"tiles/tile[8]/code","");
 }
 
 ###################

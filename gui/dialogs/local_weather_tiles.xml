@@ -6,7 +6,7 @@
 
  <name>local_weather_tiles</name>
  <width>300</width>
- <height>300</height>
+ <height>330</height>
  <modal>false</modal>
 
 
@@ -19,7 +19,7 @@
 
 <combo>
    <x>10</x>
-   <y>220</y>
+   <y>270</y>
    <width>280</width>
    <height>25</height>
    <live>true</live>
@@ -30,6 +30,13 @@
    <value>Low-pressure-border</value>
    <value>Low-pressure</value>
    <value>Low-pressure-core</value>
+   <value>Cold-sector</value>
+   <value>Coldfront</value>
+   <value>Warmfront-1</value>
+   <value>Warmfront-2</value>
+   <value>Warmfront-3</value>
+   <value>Warmfront-4</value>
+   <value>Tropical</value>
    <value>---</value>
    <!--<value>Altocumulus sky</value>-->
    <!--<value>Broken layers</value>-->
@@ -39,7 +46,7 @@
    <value>Blue thermals</value>
    <!--<value>Incoming rainfront</value>-->
    <!--<value>8/8 stratus sky</value>-->
-   <!--<value>Test tile</value>-->
+   <value>Test tile</value>
    <!--<value>Summer rain</value>-->
    <binding>
     <command>dialog-apply</command>
@@ -48,13 +55,13 @@
 
  <text>
    <x>10</x>
-   <y>170</y>
+   <y>220</y>
    <label>orientation (deg)</label>
   </text>
 
  <input>
    <x>115</x>
-   <y>170</y>
+   <y>220</y>
    <width>40</width>
    <height>25</height>
    <property>/local-weather/tmp/tile-orientation-deg</property>
@@ -62,13 +69,13 @@
 
  <text>
    <x>155</x>
-   <y>170</y>
+   <y>220</y>
    <label>alt. offset (ft)</label>
   </text>
 
 <input>
    <x>240</x>
-   <y>170</y>
+   <y>220</y>
    <width>50</width>
    <height>25</height>
    <property>/local-weather/tmp/tile-alt-offset-ft</property>
@@ -76,13 +83,13 @@
 
 <text>
    <x>10</x>
-   <y>130</y>
+   <y>180</y>
    <label>tile selection mode</label>
-  </text>
+</text>
 
 <combo>
    <x>150</x>
-   <y>130</y>
+   <y>180</y>
    <width>140</width>
    <height>25</height>
    <live>true</live>
@@ -90,6 +97,7 @@
    <value>single tile</value>
    <value>repeat tile</value>
    <value>realistic weather</value>
+   <value>METAR</value>
    <binding>
     <command>dialog-apply</command>
    </binding>
@@ -97,7 +105,7 @@
 
 <checkbox>
    <x>10</x>
-   <y>90</y>
+   <y>140</y>
    <width>15</width>
    <height>15</height>
    <label>Terrain presampling</label>
@@ -109,7 +117,7 @@
 
 <checkbox>
    <x>150</x>
-   <y>90</y>
+   <y>140</y>
    <width>15</width>
    <height>15</height>
    <label>Worker threads</label>
@@ -121,7 +129,7 @@
 
 <checkbox>
    <x>10</x>
-   <y>60</y>
+   <y>110</y>
    <width>15</width>
    <height>15</height>
    <label>asymmetric range</label>
@@ -133,7 +141,7 @@
 
 <checkbox>
    <x>150</x>
-   <y>60</y>
+   <y>110</y>
    <width>15</width>
    <height>15</height>
    <label>detailed clouds</label>
@@ -142,6 +150,37 @@
     <command>dialog-apply</command>
    </binding>
 </checkbox>
+
+<text>
+   <x>10</x>
+   <y>75</y>
+   <label>Thermal properties:</label>
+</text>
+
+<text>
+   <x>10</x>
+   <y>50</y>
+   <label>rough day</label>
+</text>
+
+<slider>
+   <x>80</x>
+   <y>50</y>
+   <width>90</width>
+   <height>20</height>
+   <min>0.3</min>
+   <max>1.5</max>
+   <property>/local-weather/config/thermal-properties</property>
+   <binding>
+     <command>dialog-apply</command>
+   </binding>
+</slider>
+
+<text>
+   <x>180</x>
+   <y>50</y>
+   <label>low convection</label>
+</text>
 
 <group>
   <x>10</x>

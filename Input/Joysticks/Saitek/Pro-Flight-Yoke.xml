@@ -88,19 +88,13 @@
   </high>
  </axis>
  <!-- Buttons on the Yoke -->
- <button n="0"> <!-- Labled as E -->
-  <desc>Change View</desc>
-  <binding>
-   <command>nasal</command>
-   <script>
-    v = getprop("/sim/current-view/view-number");
-    v = v + 1;
-    if (v > 4) {
-     v = 0;
-    }
-    setprop("/sim/current-view/view-number", v);
-   </script>
-  </binding>
+ <button n="0">
+     <desc>Cycle View</desc>
+     <repeatable>false</repeatable>
+     <binding>
+         <command>nasal</command>
+         <script>view.stepView(1)</script>
+     </binding>
  </button>
  <button n="1"> <!-- Labled as D -->
   <desc>Toggle parking break</desc>
@@ -217,4 +211,26 @@
    </binding>
   </mod-up>
  </button>
+ <button n="20">
+   <desc>thrust reverse</desc>
+     <repeatable type="bool">false</repeatable>
+     <binding>
+       <command>nasal</command>
+       <script>
+           props.setAll("/controls/engines/engine", "reverser", 1);
+           props.setAll("/controls/engines/engine", "throttle", 1);
+           gui.popupTip("Thrust reverse on!");
+       </script>
+     </binding>
+     <mod-up>
+       <binding>
+         <command>nasal</command>
+         <script>
+             props.setAll("/controls/engines/engine", "reverser", 0);
+             props.setAll("/controls/engines/engine", "throttle", 0);
+             gui.popupTip("Thrust reverse off!");
+         </script>
+       </binding>
+     </mod-up>
+        </button>
 </PropertyList>

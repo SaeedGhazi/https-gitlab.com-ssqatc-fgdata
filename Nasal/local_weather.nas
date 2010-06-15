@@ -31,6 +31,8 @@
 # create_cloud			to place a single cloud into the scenery
 # create_cloud_vec		to place a single cloud into an array to be written later
 # clear_all			to remove all clouds, effect volumes and weather stations and stop loops
+# create_detailed_cumulus_cloud	to place multiple cloudlets into a box based on a size parameter
+# create_cumulonimbus_cloud	to place multiple cloudlets into a box 
 # create_cumosys		wrapper to place a convective cloud system based on terrain coverage
 # cumulus_loop			to place 25 Cumulus clouds each frame
 # create_cumulus		to place a convective cloud system based on terrain coverage
@@ -183,6 +185,7 @@ if (i == esize) # we check the number of actives and reset all counters
 		vNode.getChild("number-active-snow").setValue(0);
 		vNode.getChild("number-active-rain").setValue(0);
 		vNode.getChild("number-active-lift").setValue(0);
+		vNode.getChild("number-active-turb").setValue(0);
 		}
 	#print("n_active: ", active_counter);
 	active_counter = 0; i = 0;
@@ -246,12 +249,13 @@ var T = sum_T/sum_norm;
 
 # a simple altitude model for visibility - increase it with increasing altitude
 
-vis = vis + 0.3 * getprop("position/altitude-ft");
+vis = vis + 0.5 * getprop("position/altitude-ft");
 
 if (vis > 0.0) {iNode.getNode("visibility-m",1).setValue(vis);} # a redundancy check
 iNode.getNode("temperature-degc",1).setValue(T);
 iNode.getNode("dewpoint-degc",1).setValue(D);
 if (p>0.0) {iNode.getNode("pressure-sea-level-inhg",1).setValue(p);} # a redundancy check
+iNode.getNode("turbulence",1).setValue(0.0);
 
 # now check if an effect volume writes the property and set only if not
 
@@ -261,6 +265,14 @@ if ((flag ==0) and (vis > 0.0))
 	cNode.getNode("visibility-m").setValue(vis);
 	setVisibility(vis);
 	}
+
+flag = props.globals.getNode("local-weather/effect-volumes/number-active-turb").getValue();
+if ((flag ==0))
+	{
+	cNode.getNode("turbulence").setValue(0.0);
+	setTurbulence(0.0);
+	}
+
 
 flag = props.globals.getNode("local-weather/effect-volumes/number-active-lift").getValue();
 if (flag ==0) 
@@ -403,6 +415,16 @@ if (ev.getNode("effects/snow-flag", 1).getValue()==1)
 	setprop(lw~"effect-volumes/number-active-snow",getprop(lw~"effect-volumes/number-active-snow")+1);
 	}
 
+if (ev.getNode("effects/turbulence-flag", 1).getValue()==1)
+	{
+	var turbulence = ev.getNode("effects/turbulence").getValue();
+	ev.getNode("restore/turbulence",1).setValue(cNode.getNode("turbulence").getValue());
+	cNode.getNode("turbulence").setValue(turbulence);
+	setTurbulence(turbulence);
+	ev.getNode("restore/number-entry-turb",1).setValue(getprop(lw~"effect-volumes/number-active-turb"));
+	setprop(lw~"effect-volumes/number-active-turb",getprop(lw~"effect-volumes/number-active-turb")+1);
+	}
+
 if (ev.getNode("effects/thermal-lift-flag", 1).getValue()==1)
 	{
 	var lift = ev.getNode("effects/thermal-lift").getValue();
@@ -475,6 +497,18 @@ if (ev.getNode("effects/snow-flag", 1).getValue()==1)
 	setprop(lw~"effect-volumes/number-active-snow",getprop(lw~"effect-volumes/number-active-snow")-1);
 	}
 
+if (ev.getNode("effects/turbulence-flag", 1).getValue()==1)
+	{
+	var n_active = getprop(lw~"effect-volumes/number-active-turb");
+	var n_entry = ev.getNode("restore/number-entry-turb").getValue();	
+	if (n_active ==1){var turbulence = props.globals.getNode(lw~"interpolation/turbulence").getValue();}
+	else if ((n_active -1) == n_entry) {var turbulence = ev.getNode("restore/turbulence").getValue();}
+	else {var turbulence = cNode.getNode("turbulence").getValue();}
+	cNode.getNode("turbulence").setValue(turbulence);
+	setTurbulence(turbulence);
+	setprop(lw~"effect-volumes/number-active-turb",getprop(lw~"effect-volumes/number-active-turb")-1);
+	}
+
 if (ev.getNode("effects/thermal-lift-flag", 1).getValue()==1)
 	{
 	var n_active = getprop(lw~"effect-volumes/number-active-lift");
@@ -544,6 +578,34 @@ var setSnow = func (snow) {
 setprop("environment/clouds/layer[0]/elevation-ft", 30000.0);
 setprop("environment/metar/snow-norm",snow);
 }
+
+
+####################################
+# set turbulence to given value
+####################################
+
+var setTurbulence = func (turbulence) {
+
+# this is a rather dirty workaround till a better solution becomes available
+# essentially we update all entries in config and reinit environment
+
+var entries_aloft = props.globals.getNode("environment/config/aloft", 1).getChildren("entry");
+foreach (var e; entries_aloft) {
+		e.getNode("turbulence/magnitude-norm",1).setValue(turbulence);
+		}
+
+# turbulence is slightly reduced in boundary layers
+
+var entries_boundary = props.globals.getNode("environment/config/boundary", 1).getChildren("entry");
+var i = 1;
+foreach (var e; entries_boundary) {
+		e.getNode("turbulence/magnitude-norm",1).setValue(turbulence * 0.25*i);
+		i = i + 1;
+		}
+fgcommand("reinit", props.Node.new({subsystem:"environment"}));
+
+}
+
 
 ####################################
 # set temperature to given value
@@ -813,7 +875,14 @@ else if (type == "Cumulus (cloudlet)"){
 		else if (rn > 0.6) {path = "Models/Weather/cumulus_sl8.xml";}
 		else if (rn > 0.4) {path = "Models/Weather/cumulus_sl9.xml";}
 		else if (rn > 0.2) {path = "Models/Weather/cumulus_sl10.xml";}
+		#else if (rn > 0.1) {path = "Models/Weather/cumulus_hires_small1.xml";}
 		else  {path = "Models/Weather/cumulus_sl11.xml";}
+		#if (rn > 0.83) {path = "Models/Weather/cumulus_hires_small1.xml";}
+		#else if (rn > 0.664) {path = "Models/Weather/cumulus_hires_small2.xml";}
+		#else if (rn > 0.5) {path = "Models/Weather/cumulus_hires_small3.xml";}
+		#else if (rn > 0.332) {path = "Models/Weather/cumulus_hires_small4.xml";}
+		#else if (rn > 0.166) {path = "Models/Weather/cumulus_hires_small5.xml";}
+		#else if (rn > 0.0) {path = "Models/Weather/cumulus_hires_small6.xml";}
 		}
 	else if (subtype == "large") {
 		if (rn > 0.8) {path = "Models/Weather/cumulus_sl1.xml";}
@@ -821,6 +890,28 @@ else if (type == "Cumulus (cloudlet)"){
 		else if (rn > 0.4) {path = "Models/Weather/cumulus_sl3.xml";}
 		else if (rn > 0.2) {path = "Models/Weather/cumulus_sl4.xml";}
 		else  {path = "Models/Weather/cumulus_sl5.xml";}
+		#if (rn > 0.75) {path = "Models/Weather/cumulus_hires1.xml";}
+		#else if (rn > 0.5) {path = "Models/Weather/cumulus_hires2.xml";}
+		#if (rn > 0.0) {path = "Models/Weather/cumulus_hires3a.xml";}
+		#else if (rn > 0.0) {path = "Models/Weather/cumulus_hires4.xml";}
+		#else if (rn > 0.0) {path = "Models/Weather/cumulus_hires5.xml";}
+		}
+	
+	}
+else if (type == "Cumulonimbus (cloudlet)"){
+	if (subtype == "small") {
+		if (rn > 0.8) {path = "Models/Weather/cumulonimbus_sl1.xml";}
+		else if (rn > 0.6) {path = "Models/Weather/cumulonimbus_sl2.xml";}
+		else if (rn > 0.4) {path = "Models/Weather/cumulonimbus_sl3.xml";}
+		else if (rn > 0.2) {path = "Models/Weather/cumulonimbus_sl4.xml";}
+		else  {path = "Models/Weather/cumulonimbus_sl5.xml";}
+		}
+	else if (subtype == "large") {
+		if (rn > 0.8) {path = "Models/Weather/cumulonimbus_sl1.xml";}
+		else if (rn > 0.6) {path = "Models/Weather/cumulonimbus_sl2.xml";}
+		else if (rn > 0.4) {path = "Models/Weather/cumulonimbus_sl3.xml";}
+		else if (rn > 0.2) {path = "Models/Weather/cumulonimbus_sl4.xml";}
+		else  {path = "Models/Weather/cumulonimbus_sl5.xml";}
 		}
 	
 	}
@@ -886,6 +977,20 @@ else if (type == "Cirrocumulus") {
 	else if (subtype == "large") {
 		if (rn > 0.5) {path = "Models/Weather/cirrocumulus1.xml";}
 		else  {path = "Models/Weather/cirrocumulus4.xml";}
+		}	
+	}
+else if (type == "Cirrocumulus (cloudlet)") {
+	if (subtype == "small") {
+		if (rn > 0.75) {path = "Models/Weather/cirrocumulus_hires1.xml";}
+		else if (rn > 0.5) {path = "Models/Weather/cirrocumulus_hires2.xml";}
+		else if (rn > 0.25) {path = "Models/Weather/cirrocumulus_hires3.xml";}
+		else  {path = "Models/Weather/cirrocumulus_hires4.xml";}
+		}	
+	else if (subtype == "large") {
+		if (rn > 0.75) {path = "Models/Weather/cirrocumulus_hires1.xml";}
+		else if (rn > 0.5) {path = "Models/Weather/cirrocumulus_hires2.xml";}
+		else if (rn > 0.25) {path = "Models/Weather/cirrocumulus_hires3.xml";}
+		else  {path = "Models/Weather/cirrocumulus_hires4.xml";}
 		}	
 	}
 else if (type == "Nimbus") {
@@ -982,6 +1087,16 @@ else if (type == "Fog (thick)") {
 		else  {path = "Models/Weather/stratus_thick5.xml";}
 		}	
 	}
+else if (type == "Test") {path="Models/Weather/test.xml";}
+else if (type == "Box_test") {
+		if (rn > 0.8) {path = "Models/Weather/test1.xml";}
+		else if (rn > 0.6) {path = "Models/Weather/test2.xml";}
+		else if (rn > 0.4) {path = "Models/Weather/test3.xml";}
+		else if (rn > 0.2) {path = "Models/Weather/test4.xml";}
+		else  {path = "Models/Weather/test5.xml";}
+			
+	}
+
 
 else {print("Cloud type ", type, " subtype ",subtype, " not available!");}
 
@@ -1087,6 +1202,14 @@ cloudNode.getNode("cloud-number",1).setValue(0);
 
 props.globals.getNode("local-weather/effect-volumes", 1).removeChildren("effect-volume");
 
+# clear weather stations
+
+props.globals.getNode("local-weather/interpolation", 1).removeChildren("station");
+
+# reset pressure continuity
+
+weather_tiles.last_pressure = 0.0;
+
 # stop the effect loop and the interpolation loop, make sure thermal generation is off
 
 setprop(lw~"effect-loop-flag",0);
@@ -1108,22 +1231,26 @@ setprop(lw~"effect-volumes/effect-placement-index",0);
 setprop(lw~"tiles/tile-counter",0);
 
 
+
 }
 
 
 ###########################################################
-# detailed Cumulus clouds created from multiple sprites
+# detailed Cumulus clouds created from multiple cloudlets
 ###########################################################
 
 var create_detailed_cumulus_cloud = func (lat, lon, alt, size) {
 
 #print(size);
 
-if (size>2.0)
+if (size > 2.0)
+	{create_cumulonimbus_cloud(lat, lon, alt, size); return;}
+
+else if (size>1.5)
 	{
-	var height = 1200;
-	var n = 24;
-	var x = 800.0;
+	var height = 1000;
+	var n = 30;
+	var x = 700.0;
 	var y = 300.0;
 	var edge = 0.3;
 	}
@@ -1155,6 +1282,20 @@ randomize_pos("Cumulus (cloudlet)",height,x,y,alpha);
 } 
 
 ###########################################################
+# detailed small Cumulonimbus clouds created from multiple cloudlets
+###########################################################
+
+var create_cumulonimbus_cloud = func(lat, lon, alt, size) {
+
+var height = 3000.0;
+var alpha = rand() * 180.0;
+
+create_streak("Cumulonimbus",lat,lon, alt+ 0.5* height,8,0.0,0.0,1,0.0,0.0,alpha,1.0);
+randomize_pos("Cumulonimbus",height,1600.0,800.0,alpha);
+
+}
+
+###########################################################
 # wrappers for convective cloud system to distribute
 # call across several frames if needed
 ###########################################################
@@ -1163,7 +1304,7 @@ var create_cumosys = func (blat, blon, balt, nc, size) {
 
 # realistic Cumulus has somewhat larger models, so compensate to get the same coverage
 if (getprop(lw~"config/detailed-clouds-flag") == 1) 
-	{nc = int(0.5 * nc);}
+	{nc = int(0.7 * nc);}
 
 if (getprop(lw~"tmp/thread-flag") ==  1)
 	{setprop(lw~"tmp/convective-status", "computing");
@@ -1204,7 +1345,9 @@ var place_lift_flag = 0;
 var strength = 0.0;
 var detail_flag = getprop(lw~"config/detailed-clouds-flag");
 
-var sec_to_rad = 2.0 * math.pi/86400; 
+var alpha = getprop(lw~"tmp/tile-orientation-deg") * math.pi/180.0; # the tile orientation
+
+var sec_to_rad = 2.0 * math.pi/86400; # conversion factor for sinusoidal dependence on daytime
 
 calc_geo(blat);
 
@@ -1217,12 +1360,20 @@ t = t + getprop("sim/time/local-offset");
 
 # and make a simple sinusoidal model of thermal strength
 
-var t_factor1 = 0.5 * 1.0-math.cos((t * sec_to_rad));
-var t_factor2 = 0.5 * 1.0-math.cos((t * sec_to_rad)-0.52);
+# daily variation in number of thermals, peaks at noon
+var t_factor1 = 0.5 * (1.0-math.cos((t * sec_to_rad))); 
 
-# print("t-factor is now: ",t_factor);
+# daily variation in strength of thermals, peaks around 15:30
+var t_factor2 = 0.5 * (1.0-math.cos((t * sec_to_rad)-0.9)); 
 
-nc = t_factor1 * nc * math.cos(blat/180.0*math.pi);
+#print("t-factor1 is now: ",t_factor1, " ",t_factor2);
+
+# number of possible thermals equals overall strength times daily variation times geographic variation
+# this is a proxy for solar thermal energy
+
+nc = t_factor1 * nc * math.cos(blat/180.0*math.pi); 
+
+var thermal_conditions = getprop(lw~"config/thermal-properties");
 
 
 while (i < nc) {
@@ -1231,62 +1382,84 @@ while (i < nc) {
 	place_lift_flag = 0;
 	strength = 0.0;
 
+	# pick a trial position inside the tile and rotate by tile orientation angle
 	var x = (2.0 * rand() - 1.0) * size;
 	var y = (2.0 * rand() - 1.0) * size; 
 
-	var lat = blat + y * m_to_lat;
-	var lon = blon + x * m_to_lon;
+	var lat = blat + (y * math.cos(alpha) - x * math.sin(alpha)) * m_to_lat;
+	var lon = blon + (x * math.cos(alpha) + y * math.sin(alpha)) * m_to_lon;
+
+	# now check ground cover type on chosen spot
 	var info = geodinfo(lat, lon);
 
 	if (info != nil) {
+	var elevation = info[0] * m_to_ft;
 	if (info[1] != nil){
          var landcover = info[1].names[0];
 	 if (contains(landcover_map,landcover)) {p = p + landcover_map[landcover];}
 	 else {print(p, " ", info[1].names[0]);}
 	}}
 
+	# then decide if the thermal energy at the spot generates an updraft and a cloud
 
-	if (rand() < p)
+	if (rand() < p) # we decide to place a cloud at this spot
 		{
-		if (rand() + (2.0 * p) > 1.0) 
+		strength = (1.5 * rand() + (2.0 * p)) * t_factor2; # the strength of thermal activity at the spot
+		if (strength > 1.0)  
 			{
-			path = select_cloud_model("Cumulus","large"); place_lift_flag = 1; strength=1.0;
+			# we place a large cloud, and we generate lift
+			path = select_cloud_model("Cumulus","large"); place_lift_flag = 1;
 			}
 		else {path = select_cloud_model("Cumulus","small");}
 
-		if (getprop(lw~"tmp/generate-thermal-lift-flag") != 3) # see if we produce blue thermals
+		# check if we have a terrain elevation analysis available and can use a 
+		# detailed placement altitude correction
+
+		if (getprop(lw~"tmp/presampling-flag") == 1) 
+			{
+			var place_alt = get_convective_altitude(balt, elevation);
+			}
+		else {var place_alt = balt;}
+
+
+		if (getprop(lw~"tmp/generate-thermal-lift-flag") != 3) # no clouds if we produce blue thermals
 			{		
 			if (getprop(lw~"tmp/thread-flag") == 1)
 				{
-				if (detail_flag == 0){create_cloud_vec("Cumulus",path,lat,lon, balt, 0.0, 0);}
-				else {create_detailed_cumulus_cloud(lat, lon, balt, p + strength+rand());}
+				if (detail_flag == 0){create_cloud_vec("Cumulus",path,lat,lon, place_alt, 0.0, 0);}
+				else {create_detailed_cumulus_cloud(lat, lon, place_alt, strength);}
 				}
 			else
 				{
-				if (detail_flag == 0){create_cloud("Cumulus", path, lat, lon, balt, 0.0, 0);}
-				else {create_detailed_cumulus_cloud(lat, lon, balt, p + strength+rand());}
+				if (detail_flag == 0){create_cloud("Cumulus", path, lat, lon, place_alt, 0.0, 0);}
+				else {create_detailed_cumulus_cloud(lat, lon, place_alt, strength);}
 				}
 			}	
 
 		# now see if we need to create a thermal - first check the flag
-		if (getprop(lw~"tmp/generate-thermal-lift-flag") == 1)
+		if (getprop(lw~"tmp/generate-thermal-lift-flag") == 1) # thermal by constant
 			{
 			# now check if convection is strong
 			if (place_lift_flag == 1)
 				{
-				var lift = 3.0 + 20.0 * p *  rand();
+				var lift = 3.0 + 10.0 * (strength -1.0);
 				var radius = 500 + 500 * rand();
-				create_effect_volume(1, lat, lon, radius, radius, 0.0, 0.0, balt+500.0, -1, -1, -1, -1, lift, 1);
+				#print("Lift: ", lift * ft_to_m - 1.0);
+				create_effect_volume(1, lat, lon, radius, radius, 0.0, 0.0, place_alt+500.0, -1, -1, -1, -1, lift, 1);
 				} # end if place_lift_flag		
 			} # end if generate-thermal-lift-flag	
-		else if ((getprop(lw~"tmp/generate-thermal-lift-flag") == 2) or (getprop(lw~"tmp/generate-thermal-lift-flag") == 3))
+		else if ((getprop(lw~"tmp/generate-thermal-lift-flag") == 2) or (getprop(lw~"tmp/generate-thermal-lift-flag") == 3)) # thermal by function
 			{
 
 			if (place_lift_flag == 1)
 				{
-				var lift = 3.0 + 20.0 * p *  rand();
-				var radius = 500 + 500 * rand();
-				create_effect_volume(1, lat, lon, 1.2*radius, 1.2*radius, 0.0, 0.0, balt+500.0, -1, -1, -1, -1, lift, -2);
+				#var lift = 3.0 + 20.0 * p *  rand();
+				#var radius = 500 + 500 * rand();
+				var lift = (3.0 + 10.0 * (strength -1.0))/thermal_conditions;
+				var radius = (500 + 500 * rand())*thermal_conditions;
+				#print("Lift: ", lift * ft_to_m - 1.0, " strength: ",strength);
+
+				create_effect_volume(1, lat, lon, 1.1*radius, 1.1*radius, 0.0, 0.0, place_alt+500.0, -1, -1, -1, lift*0.02, lift, -2);
 				} # end if place_lift_flag
 
 			} # end if generate-thermal-lift-flag
@@ -1299,40 +1472,61 @@ while (i < nc) {
 }
 
 ###########################################################
-# terrain sampling 
+# place a Cumulus layer with excluded regions
+# to avoid placing cumulus underneath a thunderstorm
 ###########################################################
 
-var terrain_presampling = func {
+var cumulus_exclusion_layer = func (blat, blon, balt, n, size_x, size_y, alpha, s_min, s_max, n_ex, exlat, exlon, exrad) {
 
-var size = 20000.0;
-var blat = getprop("position/latitude-deg");
-var blon = getprop("position/longitude-deg");
-var elevation = 0.0;
-var n=[];
-setsize(n,20);
 
-calc_geo(blat);
+var strength = 0;
+var flag = 1;
+var phi = alpha * math.pi/180.0;
 
-for(j=0;j<20;j=j+1){n[j]=0;}
+var detail_flag = getprop(lw~"config/detailed-clouds-flag");
 
-for (i=0; i<1000; i=i+1)
+if (detail_flag == 1) {var i_max = int(0.25*n);} else {var i_max = int(1.0*n);}
+
+
+
+for (var i =0; i< i_max; i=i+1)
 	{
-	var x = (2.0 * rand() - 1.0) * size;
-	var y = (2.0 * rand() - 1.0) * size; 
+	var x = (2.0 * rand() - 1.0) * size_x;
+	var y = (2.0 * rand() - 1.0) * size_y; 
 
-	var lat = blat + y * m_to_lat;
-	var lon = blon + x * m_to_lon;
+	var lat = blat + (y * math.cos(phi) - x * math.sin(phi)) * m_to_lat;
+	var lon = blon + (x * math.cos(phi) + y * math.sin(phi)) * m_to_lon;
 
-	var info = geodinfo(lat, lon);
-	if (info != nil) {elevation = info[0] * m_to_ft;}
-	for(j=0;j<20;j=j+1){if (elevation < 500.0 * (j+1)) 
-		{n[j] = n[j]+1;  break;}}
+	flag = 1;
+
+	for (var j=0; j<n_ex; j=j+1)
+		{
+		if (calc_d_sq(lat, lon, exlat[j], exlon[j]) < (exrad[j] * exrad[j])) {flag = 0;}
+		}
+	if (flag == 1)
+		{
+		
+		strength = s_min + rand() * (s_max - s_min);		
 	
-	}
+		if (strength > 1.0)  {var path = select_cloud_model("Cumulus","large"); }
+		else {var path = select_cloud_model("Cumulus","small");}
 
-for (i=0;i<20;i=i+1){print(500.0*i," ",n[i]);}
+		if (getprop(lw~"tmp/thread-flag") == 1)
+			{
+			if (detail_flag == 0){create_cloud_vec("Cumulus",path,lat,lon, balt, 0.0, 0);}
+			else {create_detailed_cumulus_cloud(lat, lon, balt, strength);}
+			}
+		else
+			{
+			if (detail_flag == 0){create_cloud("Cumulus", path, lat, lon, balt, 0.0, 0);}
+			else {create_detailed_cumulus_cloud(lat, lon, balt, strength);}
+			}
+
+		} # end if flag
+
+	} # end for i
+
 }
-
 
 
 ###########################################################
@@ -1542,6 +1736,37 @@ if (rainflag ==1){
 	} # end if (rainflag ==1)
 }
 
+
+###########################################################
+# place a cloud box
+###########################################################
+
+
+var create_cloudbox = func (type,subtype, blat, blon, balt, dx,dy,dz,n) {
+
+var phi = 0;
+
+for (var i=0; i<n; i=i+1)
+	{
+
+	var x = 0.5 * dx * (2.0 * rand() - 1.0); 
+	var y = 0.5 * dy * (2.0 * rand() - 1.0); 
+	var alt = balt + dz * rand();
+	
+	var lat = blat + m_to_lat * (y * math.cos(phi) - x * math.sin(phi));
+	var lon = blon + m_to_lon * (x * math.cos(phi) + y * math.sin(phi));
+
+	var path = select_cloud_model(type,subtype);
+
+	if (getprop(lw~"tmp/thread-flag") == 1)
+			{create_cloud_vec(type, path, lat, lon, alt, 0.0, 0);}
+		else
+			{create_cloud(type, path, lat, lon, alt, 0.0, 0);}
+
+	}
+
+}
+
 ###########################################################
 # place a cloud layer from arrays, only 20 clouds/frame 
 ###########################################################
@@ -1578,6 +1803,235 @@ setsize(clouds_orientation,s-k_max);
 
 settimer( func {cloud_placement_loop(i - k ) }, 0 );
 };
+
+
+###########################################################
+# terrain presampling initialization
+###########################################################
+
+var terrain_presampling_start = func (blat, blon, nc, size, alpha) {
+
+var thread_flag = getprop(lw~"tmp/thread-flag");
+
+# initialize the result vector
+
+setsize(terrain_n,20);
+for(var j=0;j<20;j=j+1){terrain_n[j]=0;}
+
+if (thread_flag == 1)
+	{
+	var status = getprop(lw~"tmp/presampling-status");
+	if (status != "idle") # we try a second later
+		{
+		settimer( func {terrain_presampling_start(blat, blon, nc, size, alpha);},1.00);
+		return;
+		}
+	else	
+		{
+		setprop(lw~"tmp/presampling-status", "sampling");
+		terrain_presampling_loop (blat, blon, nc, size, alpha);
+		}
+	}
+else
+	{
+	terrain_presampling(blat, blon, nc, size, alpha);
+	terrain_presampling_analysis();
+	setprop(lw~"tmp/presampling-status", "finished");
+	}
+}
+
+###########################################################
+# terrain presampling loop
+###########################################################
+
+var terrain_presampling_loop = func (blat, blon, nc, size, alpha) {
+
+var n = 25; # number of geoinfo calls per frame
+
+if (nc <= 0) # we're done and may analyze the result
+	{
+	terrain_presampling_analysis();
+	print("Presampling done!");
+	setprop(lw~"tmp/presampling-status", "finished");
+	return;
+	}
+
+terrain_presampling(blat, blon, n, size, alpha);
+
+settimer( func {terrain_presampling_loop(blat, blon, nc-n, size, alpha) },0);
+}
+
+
+###########################################################
+# terrain presampling routine
+###########################################################
+
+var terrain_presampling = func (blat, blon, ntries, size, alpha) {
+
+var phi = alpha * math.pi/180.0;
+var elevation = 0.0;
+
+
+
+for (var i=0; i<ntries; i=i+1)
+	{
+	var x = (2.0 * rand() - 1.0) * size;
+	var y = (2.0 * rand() - 1.0) * size; 
+
+	var lat = blat + (y * math.cos(phi) - x * math.sin(phi)) * m_to_lat;
+	var lon = blon + (x * math.cos(phi) + y * math.sin(phi)) * m_to_lon;
+
+
+	var info = geodinfo(lat, lon);
+	if (info != nil) {elevation = info[0] * m_to_ft;}
+	for(j=0;j<20;j=j+1)
+		{
+		if (elevation < 500.0 * (j+1)) 
+			{terrain_n[j] = terrain_n[j]+1;  break;}
+		}
+	}
+
+
+}
+
+###########################################################
+# terrain presampling analysis
+###########################################################
+
+var terrain_presampling_analysis = func {
+
+var sum = 0;
+var alt_mean = 0;
+var alt_med = 0;
+var alt_20 = 0;
+var alt_min = 0;
+var alt_low_min = 0;
+var alt_offset = 0;
+
+# for (var i=0;i<20;i=i+1){print(500.0*i," ",terrain_n[i]);}
+
+for (var i=0; i<20;i=i+1)
+	{sum = sum + terrain_n[i];}
+
+var n_tot = sum;
+
+sum = 0;
+for (var i=0; i<20;i=i+1)
+	{
+	sum = sum + terrain_n[i];
+	if (sum > int(0.5 *n_tot)) {alt_med = i * 500.0; break;}		
+	}
+
+sum = 0;
+for (var i=0; i<20;i=i+1)
+	{
+	sum = sum + terrain_n[i];
+	if (sum > int(0.3 *n_tot)) {alt_20 = i * 500.0; break;}		
+	}
+
+
+for (var i=0; i<20;i=i+1) {alt_mean = alt_mean + terrain_n[i] * i * 500.0;}
+alt_mean = alt_mean/n_tot;
+
+for (var i=0; i<20;i=i+1) {if (terrain_n[i] > 0) {alt_min = i * 500.0; break;}}
+
+var n_max = 0;
+sum = 0;
+
+for (var i=0; i<19;i=i+1) 
+	{
+	sum = sum + terrain_n[i];
+	if (terrain_n[i] > n_max) {n_max = terrain_n[i];}
+	if ((n_max > terrain_n[i+1]) and (sum > int(0.3*n_tot)))
+ 		{alt_low_min = i * 500; break;}
+	}
+
+print("Terrain presampling analysis results:");
+print("total: ",n_tot," mean: ",alt_mean," median: ",alt_med," min: ",alt_min, " alt_20: ", alt_20);
+
+#if (alt_low_min < alt_med) {alt_offset = alt_low_min;}
+#else {alt_offset = alt_med;}
+
+setprop(lw~"tmp/tile-alt-offset-ft",alt_20);
+setprop(lw~"tmp/tile-alt-median-ft",alt_med);
+setprop(lw~"tmp/tile-alt-min-ft",alt_min);
+setprop(lw~"tmp/tile-alt-layered-ft",0.5 * (alt_min + alt_offset));
+
+}
+
+###########################################################
+# detailed altitude determination for convective calls
+# clouds follow the terrain to some degree, but not excessively so
+###########################################################
+
+var get_convective_altitude = func (balt, elevation) {
+
+
+var alt_offset = getprop(lw~"tmp/tile-alt-offset-ft");
+var alt_median = getprop(lw~"tmp/tile-alt-median-ft");
+
+# get the maximal shift
+var alt_variation = alt_median - alt_offset;
+
+# get the difference between offset and foot point
+var alt_diff = elevation - alt_offset;
+
+# now get the elevation-induced shift
+
+var fraction = alt_diff / alt_variation;
+
+if (fraction > 1.0) {fraction = 1.0;} # no placement above maximum shift
+if (fraction < 0.0) {fraction = 0.0;} # no downward shift
+
+# get the cloud base
+
+var cloudbase = balt - alt_offset;
+
+var alt_above_terrain = balt - elevation;
+
+# the shift strength is weakened if the layer is high above base elevation
+# the reference altitude is 1000 ft, anything higher has less sensitivity to terrain
+
+var shift_strength = 1000.0/alt_above_terrain; 
+
+if (shift_strength > 1.0) {shift_strength = 1.0;} # no enhancement for very low layers 
+if (shift_strength < 0.0) {shift_strength = 0.0;} # this shouldn't happen, but just in case...
+
+return balt + shift_strength * alt_diff * fraction;
+
+}
+
+###########################################################
+# terrain presampling listener dispatcher
+###########################################################
+
+var manage_presampling = func {
+
+var status = getprop(lw~"tmp/presampling-status");
+
+# we only take action when the analysis is done
+if (status != "finished") {return;} 
+
+if (getprop(lw~"tiles/tile-counter") == 0) # we deal with a tile setup call from the menu
+	{
+	set_tile();
+	}
+else	# the tile setup call came from weather_tile_management
+	{
+	var lat = getprop(lw~"tiles/tmp/latitude-deg");
+	var lon = getprop(lw~"tiles/tmp/longitude-deg");
+	var code = getprop(lw~"tiles/tmp/code");
+	
+	weather_tile_management.generate_tile(code, lat, lon, 0);
+	}
+
+
+# set status to idle again
+
+setprop(lw~"tmp/presampling-status", "idle");
+
+}
+
 
 
 
@@ -1758,6 +2212,8 @@ s.getNode("pressure-sea-level-inhg",1).setValue(p);
 
 var streak_wrapper = func {
 
+setprop(lw~"tmp/thread-flag", 0);
+
 var lat = getprop("position/latitude-deg");
 var lon = getprop("position/longitude-deg");
 var type = getprop("/local-weather/tmp/cloud-type");
@@ -1783,6 +2239,8 @@ randomize_pos(type,rnd_alt,rnd_pos_x, rnd_pos_y, dir);
 
 var convection_wrapper = func {
 
+setprop(lw~"tmp/thread-flag", 0);
+
 var lat = getprop("position/latitude-deg");
 var lon = getprop("position/longitude-deg");
 var alt = getprop("/local-weather/tmp/conv-alt");
@@ -1795,6 +2253,8 @@ create_cumosys(lat,lon,alt,n, size*1000.0);
 }
 
 var barrier_wrapper = func {
+
+setprop(lw~"tmp/thread-flag", 0);
 
 var lat = getprop("position/latitude-deg");
 var lon = getprop("position/longitude-deg");
@@ -1825,6 +2285,8 @@ create_cloud(type, path, lat, lon, alt, heading, 0);
 
 var layer_wrapper = func {
 
+setprop(lw~"tmp/thread-flag", 0);
+
 var lat = getprop("position/latitude-deg");
 var lon = getprop("position/longitude-deg");
 var type = getprop(lw~"tmp/layer-type");
@@ -1839,6 +2301,25 @@ var rain_flag = getprop(lw~"tmp/layer-rain-flag");
 var rain_density = getprop(lw~"tmp/layer-rain-density");
 
 create_layer(type, lat, lon, alt, thick, rx, ry, phi, density, edge, rain_flag, rain_density);
+
+}
+
+var box_wrapper = func {
+
+setprop(lw~"tmp/thread-flag", 0);
+
+var lat = getprop("position/latitude-deg");
+var lon = getprop("position/longitude-deg");
+var alt = getprop("position/altitude-ft");
+var x = getprop(lw~"tmp/box-x-m");
+var y = getprop(lw~"tmp/box-y-m");
+var z = getprop(lw~"tmp/box-alt-ft");
+var n = getprop(lw~"tmp/box-n");
+
+var type = "Box_test";
+var subtype = "unspecified";
+
+create_cloudbox(type,subtype,lat, lon, alt, x,y,z,n);
 
 }
 
@@ -1858,6 +2339,19 @@ setprop(lw~"tiles/tmp/longitude-deg",getprop("position/longitude-deg"));
 
 weather_tile_management.create_neighbours(getprop("position/latitude-deg"),getprop("position/longitude-deg"),getprop(lw~"tmp/tile-orientation-deg"));
 
+# now see if we need to presample the terrain
+
+if ((getprop(lw~"tmp/presampling-flag") == 1) and (getprop(lw~"tmp/presampling-status") == "idle")) 
+	{
+	terrain_presampling_start(getprop("position/latitude-deg"), getprop("position/longitude-deg"), 1000, 40000, getprop(lw~"tmp/tile-orientation-deg")); 
+	return;
+	}
+
+# see if we use METAR for weather setup
+
+if ((getprop(lw~"METAR/available-flag") == 1) and (getprop(lw~"tmp/tile-management") == "METAR"))
+	{type = "METAR";}
+
 setprop(lw~"tiles/tile-counter",getprop(lw~"tiles/tile-counter")+1);
 
 if (type == "High-pressure-core")
@@ -1872,6 +2366,22 @@ else if (type == "Low-pressure")
 	{weather_tiles.set_low_pressure_tile();}
 else if (type == "Low-pressure-core")
 	{weather_tiles.set_low_pressure_core_tile();}
+else if (type == "Cold-sector")
+	{weather_tiles.set_cold_sector_tile();}
+else if (type == "Tropical")
+	{weather_tiles.set_tropical_weather_tile();}
+else if (type == "Coldfront")
+	{weather_tiles.set_coldfront_tile();}
+else if (type == "Warmfront-1")
+	{weather_tiles.set_warmfront1_tile();}
+else if (type == "Warmfront-2")
+	{weather_tiles.set_warmfront2_tile();}
+else if (type == "Warmfront-3")
+	{weather_tiles.set_warmfront3_tile();}
+else if (type == "Warmfront-4")
+	{weather_tiles.set_warmfront4_tile();}
+else if (type == "METAR")
+	{weather_tiles.set_METAR_tile();}
 else if (type == "Altocumulus sky")
 	{weather_tiles.set_altocumulus_tile();setprop(lw~"tiles/code","altocumulus_sky");}
 else if (type == "Broken layers") 
@@ -1902,7 +2412,10 @@ else
 
 if (getprop(lw~"tmp/tile-management") != "single tile") {
 	if (getprop(lw~"tile-loop-flag") == 0) 
-	{setprop(lw~"tile-loop-flag",1); weather_tile_management.tile_management_loop();}
+	{
+	setprop(lw~"tiles/tile[4]/code",getprop(lw~"tiles/code"));
+	setprop(lw~"tile-loop-flag",1); 
+	weather_tile_management.tile_management_loop();}
 	}
 
 # start the interpolation loop
@@ -1925,9 +2438,12 @@ if (getprop(lw~"effect-loop-flag") == 0)
 var startup = func {
 print("Loading local weather routines...");
 
+# get local Cartesian geometry
+
 var lat = getprop("position/latitude-deg");
 var lon = getprop("position/longitude-deg");
 calc_geo(lat);
+
 
 # copy weather properties at startup to local weather
 
@@ -1936,10 +2452,12 @@ setprop(lw~"interpolation/pressure-sea-level-inhg",getprop(ec~"boundary/entry[0]
 setprop(lw~"interpolation/temperature-degc",getprop(ec~"boundary/entry[0]/temperature-degc"));
 setprop(lw~"interpolation/wind-from-heading-deg",getprop(ec~"boundary/entry[0]/wind-from-heading-deg"));
 setprop(lw~"interpolation/wind-speed-kt",getprop(ec~"boundary/entry[0]/wind-speed-kt"));
+setprop(lw~"interpolation/turbulence",getprop(ec~"boundary/entry[0]/turbulence/magnitude-norm"));
 
 setprop(lw~"interpolation/rain-norm",0.0);
 setprop(lw~"interpolation/snow-norm",0.0);
 setprop(lw~"interpolation/thermal-lift",0.0);
+
 
 # before interpolation starts, these are also initially current
 
@@ -1948,18 +2466,34 @@ setprop(lw~"current/pressure-sea-level-inhg",getprop(lw~"interpolation/pressure-
 setprop(lw~"current/temperature-degc",getprop(lw~"interpolation/temperature-degc"));
 setprop(lw~"current/wind-from-heading-deg",getprop(lw~"interpolation/wind-from-heading-deg"));
 setprop(lw~"current/wind-speed-kt",getprop(lw~"interpolation/wind-speed-kt"));
-
 setprop(lw~"current/rain-norm",getprop(lw~"interpolation/rain-norm"));
 setprop(lw~"current/snow-norm",getprop(lw~"interpolation/snow-norm"));
 setprop(lw~"current/thermal-lift",getprop(lw~"interpolation/thermal-lift"));
+setprop(lw~"current/turbulence",getprop(lwi~"turbulence"));
 
-# try to set up a menu from Nasal
+# create default properties for METAR system, should be overwritten by real-weather-fetch
 
-#setprop("/sim/menubar/default/menu[4]/item[8]/label","Test");
-#setprop("/sim/menubar/default/menu[4]/item[8]/binding/command","dialog-show");
-#setprop("/sim/menubar/default/menu[4]/item[8]/binding/dialog-name","local_weather_tiles");
-#setprop("/sim/menubar/default/menu[4]/item[8]/enabled","true");
-
+setprop(lw~"METAR/latitude-deg",lat); 
+setprop(lw~"METAR/longitude-deg",lon);
+setprop(lw~"METAR/altitude-ft",0.0);
+setprop(lw~"METAR/wind-direction-deg",0.0);
+setprop(lw~"METAR/wind-strength-kt",10.0);
+setprop(lw~"METAR/visibility-m",17000.0);
+setprop(lw~"METAR/rain-norm",0.0);
+setprop(lw~"METAR/snow-norm",0.0);
+setprop(lw~"METAR/temperature-degc",10.0);
+setprop(lw~"METAR/dewpoint-degc",7.0);
+setprop(lw~"METAR/pressure-inhg",29.92);
+setprop(lw~"METAR/thunderstorm-flag",0);
+setprop(lw~"METAR/layer[0]/cover-oct",4);
+setprop(lw~"METAR/layer[0]/alt-agl-ft", 3000.0);
+setprop(lw~"METAR/layer[1]/cover-oct",0);
+setprop(lw~"METAR/layer[1]/alt-agl-ft", 20000.0);
+setprop(lw~"METAR/layer[2]/cover-oct",0);
+setprop(lw~"METAR/layer[2]/alt-agl-ft", 20000.0);
+setprop(lw~"METAR/layer[3]/cover-oct",0);
+setprop(lw~"METAR/layer[3]/alt-agl-ft", 20000.0);
+setprop(lw~"METAR/available-flag",1);
 
 # set listener for worker threads
 
@@ -1967,6 +2501,7 @@ setlistener(lw~"tmp/thread-status", func {var s = size(clouds_type);  cloud_plac
 setlistener(lw~"tmp/convective-status", func {var s = size(clouds_type);  cloud_placement_loop(s); });
 setlistener(lw~"tmp/effect-thread-status", func {var s = size(effects_geo);  effect_placement_loop(s); });
 setlistener(lw~"tmp/convective-status", func {var s = size(effects_geo);  effect_placement_loop(s); });
+setlistener(lw~"tmp/presampling-status", func {manage_presampling(); });
 }
 
 
@@ -1976,19 +2511,26 @@ setlistener(lw~"tmp/convective-status", func {var s = size(effects_geo);  effect
 
 var test = func {
 
-#var lat = getprop("position/latitude-deg");
-#var lon = getprop("position/longitude-deg");
-
-#create_layer("Nimbus", lat, lon, 3000.0, 500.0, 10000.0, 5000.0, 45.0, 1.0, 0.2,1,1.0);
-#create_layer(type, lat, lon, alt, thick, rx, ry, phi, density, edge, rain_flag, rain_density);
-
-thread.newthread(terrain_presampling);
-
-#create_effect_volume(2, lat, lon, 9000.0, 4000.0, 45.0, 0.0, 3500.0, 1500, 0.4, -1, -1, -1, 0);
+var lat = getprop("position/latitude-deg");
+var lon = getprop("position/longitude-deg");
 
 
-#if (getprop(lw~"effect-loop-flag") == 0) 
-#{setprop(lw~"effect-loop-flag",1); effect_volume_loop();}
+# terrain_presampling_start(lat, lon, 1000, 20000, 0.0);
+
+# test: 8 identical position tuples for KSFO
+var p=[ 37.6189722, -122.3748889,   37.6189722, -122.3748889,
+        37.6289722, -122.3748889,   37.6189722, -122.3648889,
+        37.6389722, -122.3748889,   37.6189722, -122.3548889,
+        37.6489722, -122.3748889,   37.6189722, -122.3448889 ];
+
+var x=geodinfo(p, 10000); # passing in vector with position tuples
+
+foreach(var e;x) {
+  print("Elevation:",e);  # showing results
+}
+
+
+
 
 }
 
@@ -2013,7 +2555,7 @@ var ec = "/environment/config/";
 
 # a hash map of the strength for convection associated with terrain types
 
-var landcover_map = {BuiltUpCover: 0.35, Town: 0.35, Freeway:0.35, BarrenCover:0.3, HerbTundraCover: 0.25, GrassCover: 0.2, CropGrassCover: 0.2, Sand: 0.25, Grass: 0.2, Ocean: 0.01, Marsh: 0.05, Lake: 0.01, ShrubCover: 0.15, Landmass: 0.2, CropWoodCover: 0.15, MixedForestCover: 0.1, DryCropPastureCover: 0.25, MixedCropPastureCover: 0.2, IrrCropPastureCover: 0.15, DeciduousBroadCover: 0.1, pa_taxiway : 0.35, pa_tiedown: 0.35, pc_taxiway: 0.35, pc_tiedown: 0.35, Glacier: 0.01, DryLake: 0.25, IntermittentStream: 0.2};
+var landcover_map = {BuiltUpCover: 0.35, Town: 0.35, Freeway:0.35, BarrenCover:0.3, HerbTundraCover: 0.25, GrassCover: 0.2, CropGrassCover: 0.2, Sand: 0.25, Grass: 0.2, Ocean: 0.01, Marsh: 0.05, Lake: 0.01, ShrubCover: 0.15, Landmass: 0.2, CropWoodCover: 0.15, MixedForestCover: 0.1, DryCropPastureCover: 0.25, MixedCropPastureCover: 0.2, IrrCropPastureCover: 0.15, DeciduousBroadCover: 0.1, pa_taxiway : 0.35, pa_tiedown: 0.35, pc_taxiway: 0.35, pc_tiedown: 0.35, Glacier: 0.01, DryLake: 0.3, IntermittentStream: 0.2};
 
 # a hash map of average vertical cloud model sizes
 
@@ -2021,31 +2563,33 @@ var cloud_vertical_size_map = {Altocumulus: 700.0, Cumulus: 600.0, Nimbus: 1000.
 
 # storage arrays for cloud generation
 
-clouds_type = [];
-clouds_path = [];
-clouds_lat = [];
-clouds_lon = [];
-clouds_alt = [];
-clouds_orientation = [];
+var clouds_type = [];
+var clouds_path = [];
+var clouds_lat = [];
+var clouds_lon = [];
+var clouds_alt = [];
+var clouds_orientation = [];
 
 # storage arrays for effect volume generation
 
-effects_geo = [];
-effects_lat = [];
-effects_lon = [];
-effects_r1 = [];
-effects_r2 = [];
-effects_phi = [];
-effects_alt_low = [];
-effects_alt_high = [];
-effects_vis = [];
-effects_rain = [];
-effects_snow = [];
-effects_turb = [];
-effects_lift = [];
-effects_lift_flag = [];
+var effects_geo = [];
+var effects_lat = [];
+var effects_lon = [];
+var effects_r1 = [];
+var effects_r2 = [];
+var effects_phi = [];
+var effects_alt_low = [];
+var effects_alt_high = [];
+var effects_vis = [];
+var effects_rain = [];
+var effects_snow = [];
+var effects_turb = [];
+var effects_lift = [];
+var effects_lift_flag = [];
 
+# storage array for terrain presampling
 
+var terrain_n = [];
 
 # set all sorts of default properties for the menu
 
@@ -2086,24 +2630,32 @@ setprop(lw~"tmp/layer-density",1.0);
 setprop(lw~"tmp/layer-edge",0.2);
 setprop(lw~"tmp/layer-rain-flag",1);
 setprop(lw~"tmp/layer-rain-density",1.0);
+setprop(lw~"tmp/box-x-m",300.0);
+setprop(lw~"tmp/box-y-m",300.0);
+setprop(lw~"tmp/box-alt-ft",300.0);
+setprop(lw~"tmp/box-n",4);
 setprop(lw~"tmp/tile-type", "High-pressure");
 setprop(lw~"tmp/tile-orientation-deg", 0.0);
 setprop(lw~"tmp/tile-alt-offset-ft", 0.0);
+setprop(lw~"tmp/tile-alt-median-ft",0.0);
+setprop(lw~"tmp/tile-alt-min-ft",0.0);
 setprop(lw~"tmp/tile-management", "single tile");
 setprop(lw~"tmp/generate-thermal-lift-flag", 0);
-setprop(lw~"tmp/presampling-flag", 0);
+setprop(lw~"tmp/presampling-flag", 1);
 setprop(lw~"tmp/asymmetric-tile-loading-flag", 0);
-setprop(lw~"tmp/thread-flag", 0);
+setprop(lw~"tmp/thread-flag", 1);
 setprop(lw~"tmp/last-reading-pos-del",0);
 setprop(lw~"tmp/last-reading-pos-mod",0);
 setprop(lw~"tmp/thread-status", "idle");
 setprop(lw~"tmp/convective-status", "idle");
+setprop(lw~"tmp/presampling-status", "idle");
 
 # set config values
 
 setprop(lw~"config/distance-to-load-tile-m",35000.0);
 setprop(lw~"config/distance-to-remove-tile-m",37000.0);
-setprop(lw~"config/detailed-clouds-flag",0);
+setprop(lw~"config/detailed-clouds-flag",1);
+setprop(lw~"config/thermal-properties",1.0);
 
 
 # set the default loop flags to loops inactive
@@ -2129,6 +2681,8 @@ setprop(lw~"effect-volumes/number-active-rain",0);
 setprop(lw~"effect-volumes/number-active-snow",0);
 setprop(lw~"effect-volumes/number-active-turb",0);
 setprop(lw~"effect-volumes/number-active-lift",0);
+
+
 
 # create properties for tile management
 

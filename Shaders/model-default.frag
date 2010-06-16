@@ -4,8 +4,9 @@ varying vec4 diffuse, constantColor;
 varying vec3 normal, lightDir, halfVector;
 varying float fogCoord, alpha;
 
+uniform bool twoSideHack;
+
 uniform sampler2D texture;
-uniform sampler3D noise;
 
 float luminance(vec3 color)
 {
@@ -20,8 +21,9 @@ void main()
     vec4 texel;
     vec4 fragColor;
     vec4 specular = vec4(0.0);
-
     n = normalize(normal);
+    if (twoSideHack && gl_Color.a == 0.0)
+        n = -n;
     NdotL = max(dot(n, lightDir), 0.0);
     if (NdotL > 0.0) {
         color += diffuse * NdotL;
@@ -33,23 +35,12 @@ void main()
                             * pow(NdotHV, gl_FrontMaterial.shininess));
     }
     color.a = alpha;
-
-
     // This shouldn't be necessary, but our lighting becomes very
     // saturated. Clamping the color before modulating by the texture
     // is closer to what the OpenGL fixed function pipeline does.
     color = clamp(color, 0.0, 1.0);
     texel = texture2D(texture, gl_TexCoord[0].st);
     fragColor = color * texel + specular;
-
-    // Store pixel's luminance in the alpha value
-    if(alpha > 0.95) {
-      float lum = 1.0 - (luminance(fragColor.rgb) * 3.0);
-      float tex_lum = luminance(texel.rgb);
-      fragColor.a = tex_lum * clamp(lum, 0.01, 1.0);
-    }
-
     fogFactor = exp(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord);
     gl_FragColor = mix(gl_Fog.color, fragColor, fogFactor);
-
 }

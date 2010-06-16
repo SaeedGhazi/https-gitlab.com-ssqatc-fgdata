@@ -5,6 +5,7 @@
     <texture n ="0">
       <type>white</type>
     </texture>
+    <vertex-program-two-side type="bool">false</vertex-program-two-side>
   </parameters>
   <technique n="10">
     <predicate>
@@ -60,14 +61,23 @@
         </internal-format>
         -->
       </texture-unit>
+      <vertex-program-two-side>
+        <use>vertex-program-two-side</use>
+      </vertex-program-two-side>
       <program>
         <vertex-shader>Shaders/model-default.vert</vertex-shader>
-        <fragment-shader>Shaders/default.frag</fragment-shader>
+        <fragment-shader>Shaders/model-default.frag</fragment-shader>
       </program>
       <uniform>
-      <name>texture</name>
-      <type>sampler-2d</type>
-      <value type="int">0</value></uniform>
+        <name>texture</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>twoSideHack</name>
+        <type>bool</type>
+        <value><use>vertex-program-two-side</use></value>
+      </uniform>
     </pass>
   </technique>
   <technique n="11">
@@ -106,6 +116,10 @@
           <mode>modulate</mode>
         </environment>
       </texture-unit>
+      <!-- A two-sided lighting model is set by default near the root
+           of the scene graph. Perhaps that ought to be set in this
+           effect?
+        -->
     </pass>
   </technique>
 </PropertyList>

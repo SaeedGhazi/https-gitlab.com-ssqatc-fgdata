@@ -1,0 +1,250 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+  <name>mp-display</name>
+  <modal>false</modal>
+  <layout>vbox</layout>
+
+  <nasal>
+   <open>
+    var dlg_root = cmdarg();
+
+    var update = func() {
+        print("Updating");
+        #fgcommand("dialog-update", dlg_root);
+        fgcommand("dialog-new", dlg_root);
+		#fgcommand("dialog-show", dlg_root);
+    }
+
+    var findElementByName = func(rootN, name) {
+        foreach( var child; rootN.getChildren() ) {
+            var n = child.getNode( "name" );
+            if( n != nil and n.getValue() == name )
+            return child;
+            var f = findElementByName(child,name);
+            if( f != nil ) return f;
+        }
+        return nil;
+    };
+
+    var resetDialog = func(root) {
+
+        print("resetDialog called " ~ root.getPath());
+
+        var classes = props.globals.getNode("/sim/multiplay/display").getChildren("usage-class");
+        var combo = findElementByName( root, "usage-class-selection" );
+        forindex (var i; classes) {
+              combo.getChild("value", i, 1).setValue(classes[i].getNode("name").getValue());
+        }
+
+        var display = findElementByName( root, "usage-class-display" );
+        forindex (var i; classes) {
+
+            # We don't allow users to display the "Ignore" class.
+            if (classes[i].getNode("name").getValue() != "Ignore") {
+                var check = display.getChild("checkbox", i, 1);
+                check.getNode("row", 1).setValue(i + 1);
+                check.getNode("col", 1).setValue(1);
+                check.getNode("property", 1).setValue(classes[i].getNode("visible").getPath());
+                #check.getNode("value", 1).setValue(classes[i].
+                #check.getNode("live", 1).setValue(1);
+
+                var text = display.getChild("text", i, 1);
+                text.getNode("row", 1).setValue(i + 1);
+                text.getNode("col", 1).setValue(2);
+                text.getNode("halign", 1).setValue("left");
+                text.getNode("label", 1).setValue(classes[i].getNode("name").getValue());
+            }
+        }
+    }
+
+    resetDialog(dlg_root);
+   </open>
+  </nasal>
+
+  <group>
+    <layout>hbox</layout>
+    <text>
+      <label>Multiplayer Display Options</label>
+    </text>
+  </group>
+
+  <group>
+    <layout>hbox</layout>
+    <hrule/>
+  </group>
+
+  <group>
+    <layout>hbox</layout>
+    <halign>left</halign>
+    <text>
+      <label>Current MP group:</label>
+    </text>
+
+    <combo>
+      <name>usage-class-selection</name>
+      <halign>fill</halign>
+      <stretch>true</stretch>
+      <property>sim/multiplay/usage-class</property>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>usage-class-selection</object-name>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>setprop("/sim/multiplay/usage-class-hash", string.hash(getprop("/sim/multiplay/usage-class")));</script>
+      </binding>
+    </combo>
+  </group>
+
+  <group>
+    <layout>hbox</layout>
+    <hrule/>
+  </group>
+
+  <group>
+    <layout>hbox</layout>
+    <halign>left</halign>
+    <text>
+      <label>Displayed MP Groups:</label>
+    </text>
+  </group>
+
+  <group>
+    <layout>table</layout>
+    <halign>center</halign>
+    <name>usage-class-display</name>
+    <valign>top</valign>
+  </group>
+
+  <group>
+    <layout>hbox</layout>
+    <halign>left</halign>
+    <text>
+      <label>Add MP Group:</label>
+    </text>
+
+    <input>
+      <name>add</name>
+      <stretch>true</stretch>
+      <halign>fill</halign>
+      <stretch>true</stretch>
+      <length>20</length>
+      <property>/sim/multiplay/new-usage-class</property>
+    </input>
+    <button>
+      <legend>Add</legend>
+      <default>true</default>
+      <equal>true</equal>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>
+          var new_name = getprop("/sim/multiplay/new-usage-class");
+          var classes = props.globals.getNode("/sim/multiplay/display").getChildren("usage-class");
+
+          # Check if this is a duplicate hash.
+          var new_hash = string.hash(getprop("/sim/multiplay/new-usage-class"));
+          var clash = 0;
+
+          forindex (var i; classes) {
+            if (new_hash == string.hash(classes[i].getNode("name", 1).getValue())) {
+                # This is a duplicate hash. Set an error message
+                clash = 1;
+                var error = findElementByName( dlg_root, "errormsg" );
+                error.getNode("label", 1).setValue("Error: Cannot create duplicate MP Group hash");
+            }
+          }
+
+          if (clash == 0) {
+
+            var newclass = props.globals.getNode("/sim/multiplay/display/usage-class[" ~ size(classes) ~ "]", 1);
+            newclass.getNode("name",1).setValue(new_name);
+            newclass.getNode("hash",1).setValue(new_hash);
+
+            # Assume user wants this new class to be visible
+            newclass.getNode("visible",1).setValue(1);
+
+            # Reset the dialog to pick up the changes.
+            resetDialog();
+          }
+
+          update();
+
+
+        </script>
+      </binding>
+         <binding>
+     <command>dialog-show</command>
+     <dialog-name>mp-display</dialog-name>
+    </binding>
+    <binding>
+      <command>dialog-close</command>
+    </binding>
+    </button>
+  </group>
+
+
+  <group>
+    <layout>hbox</layout>
+    <halign>left</halign>
+    <text>
+      <name>errormsg</name>
+      <label/>
+    </text>
+  </group>
+
+  <group>
+    <layout>hbox</layout>
+
+    <button>
+      <legend>OK</legend>
+      <default>true</default>
+      <equal>true</equal>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>multiplayer.resetVisibility();</script>
+      </binding>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+
+    <button>
+      <legend>Apply</legend>
+      <equal>true</equal>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>multiplayer.resetVisibility();</script>
+      </binding>
+    </button>
+
+    <button>
+      <legend>Reset</legend>
+      <equal>true</equal>
+      <binding>
+        <command>dialog-update</command>
+      </binding>
+    </button>
+
+    <button>
+      <legend>Cancel</legend>
+      <equal>true</equal>
+      <key>Esc</key>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+
+  </group>
+
+</PropertyList>

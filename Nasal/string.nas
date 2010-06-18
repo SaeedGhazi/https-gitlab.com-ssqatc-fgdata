@@ -75,7 +75,18 @@ var uc = func(str) {
 var icmp = func(a, b) cmp(lc(a), lc(b));
 var imatch = func(a, b) match(lc(a), lc(b));
 
-
+##
+# Very simple hash function
+#
+var hash = func(str) {
+    var hash_val = 0;
+    if (str != nil) {
+        for (var i = 0; i < size(str); i += 1) {
+            hash_val += math.mod(str[i], 2*(i+1));
+        }
+    }
+	return int(hash_val);
+}
 
 
 ##

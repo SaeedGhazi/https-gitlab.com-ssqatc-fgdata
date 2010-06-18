@@ -248,7 +248,7 @@
 				<script>setprop("/autopilot/route-manager/input", "@previous")</script>
 			</binding>
 		</item>
-		
+
         <item>
 			<label>Next Waypoint</label>
 			<binding>
@@ -267,7 +267,7 @@
 				</script>
 			</binding>
 		</item>
-		
+
 		<item>
 			<label>Map</label>
 			<binding>
@@ -335,7 +335,7 @@
 				<dialog-name>local_weather</dialog-name>
 			</binding>
 		</item>
-		
+
 		<item>
 			<label>Local Weather Tiles</label>
 			<binding>
@@ -442,6 +442,7 @@
 			</binding>
 		</item>
 
+
 		<item>
 			<label>Scenario</label>
 			<binding>
@@ -478,6 +479,15 @@
 				<script>multiplayer.dialog.show()</script>
 			</binding>
 		</item>
+
+		<item>
+			<label>Usage Class</label>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>mp-display</dialog-name>
+			</binding>
+		</item>
+
 
 		<item>
 			<label>MPCarrier selection</label>

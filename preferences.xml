@@ -595,6 +595,33 @@ Started September 2000 by David Megginson, david@megginson.com
    <chat-menu include="ATC/chat-menu-entries.xml"/>
    <write-message-log type="bool">false</write-message-log>
    <default-model type="string">Models/Geometry/glider.ac</default-model>
+   <usage-class type="string">Default</usage-class>
+   <display>
+    <usage-class>
+     <name type="string">Default</name>
+     <visible type="bool">true</visible>
+    </usage-class>
+    <usage-class>
+     <name type="string">Newbie</name>
+     <visible type="bool">true</visible>
+    </usage-class>
+    <usage-class>
+     <name type="string">Student</name>
+     <visible type="bool">true</visible>
+    </usage-class>
+    <usage-class>
+     <name type="string">FGCom</name>
+     <visible type="bool">true</visible>
+    </usage-class>
+    <usage-class>
+     <name type="string">Dogfight</name>
+     <visible type="bool">false</visible>
+    </usage-class>
+    <usage-class>
+     <name type="string">Ignore</name>
+     <visible type="bool">false</visible>
+    </usage-class>
+   </display>
   </multiplay>
 
   <user>
@@ -677,7 +704,7 @@ Started September 2000 by David Megginson, david@megginson.com
     <scenario>
       <name>Marginal VFR</name>
       <metar>XXXX 012345Z 23010KT 5000 SHRA SCT012 BKN018 OVC060 15/11 Q1010</metar>
-      <description>After the storm - limited visibility and some showers. 
+      <description>After the storm - limited visibility and some showers.
                    Go or No-Go?</description>
     </scenario>
     <scenario>

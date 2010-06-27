@@ -270,11 +270,11 @@ Started September 2000 by David Megginson, david@megginson.com
     <path>Aircraft/Generic/generic-autopilot.xml</path>
    </autopilot>
    <!-- 
-   to be enabled when the hard coded helpers are gone
+   replace the hard coded helpers, which are gone now
+   -->
    <autopilot>
     <path>Aircraft/Generic/generic-autopilot-helper.xml</path>
    </autopilot>
-   -->
   </systems>
   <instrumentation>
    <path>Aircraft/Generic/generic-instrumentation.xml</path>

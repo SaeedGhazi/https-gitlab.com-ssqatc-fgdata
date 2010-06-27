@@ -7,24 +7,19 @@
 # 2) Display a complete history of chat via dialog.
 #
 # 3) Allow chat messages to be written by the user.
-#
-# 4) Pilot list dialog, including ability to hide aircraft
+
 
 var is_active = func getprop("/sim/multiplay/txport") or getprop("/sim/multiplay/rxport");
 
-# Hashes of last message and aircraft visibility.
-var lastmsg = {};
-var visibility = {};
 
-# Constants for the visibility hash
-var HIDDEN = 0;
-var VISIBLE = 1;
+var lastmsg = {};
+var ignore = {};
 
 var check_messages = func {
     foreach (var mp; values(model.callsign)) {
         var msg = mp.node.getNode("sim/multiplay/chat", 1).getValue();
         if (msg and msg != lastmsg[mp.callsign]) {
-            if (visibility[mp.callsign] == VISIBLE)
+            if (!contains(ignore, mp.callsign))
                 echo_message(mp.callsign, msg);
             lastmsg[mp.callsign] = msg;
         }
@@ -154,80 +149,6 @@ var handle_key = func(key)
   }
 }
 
-# Determine the visibility of an MP aircraft
-# based on previous ignore/show settings and the
-# class of the aircraft
-determineVisibility = func(callsign, ai_node) {
-
-    if (! contains(visibility, callsign)) {
-        # Not previously seen. Look at class
-
-        var class = ai_node.getNode("sim/multiplay/usage-class-hash", 1).getValue();
-
-        if ((class == nil) or (class == "")) {
-            # Default to "Default"
-            class = string.hash("Default");
-        }
-
-
-        foreach (var n; props.globals.getNode("/sim/multiplay/display").getChildren("usage-class")) {
-            var h = n.getNode("hash", 1);
-            var visible = n.getNode("visible", 1).getBoolValue();
-
-            if ((h == nil) or (h.getValue() == nil) or (h.getValue() == 0)) {
-                # No hash found, generate one.
-                var name = n.getNode("name", 1).getValue();
-                h.setValue(string.hash(name));
-            }
-
-            if (h.getValue() == class) {
-                # Class found. Determine whether visible or not
-                if (visible) {
-                    ai_node.getNode("controls/invisible", 1).setValue(0);
-                    visibility[callsign] = VISIBLE;
-                } else {
-                    ai_node.getNode("controls/invisible", 1).setValue(1);
-                    visibility[callsign] = HIDDEN;
-                }
-
-                found_usage = 1;
-                continue;
-            }
-        }
-
-        if (!found_usage) {
-            # If we don't recognize the class, don't display.
-            ai_node.getNode("controls/invisible", 1).setValue(1);
-            visibility[callsign] = HIDDEN;
-        }
-
-    } else if (visibility[callsign] == HIDDEN) {
-        # Previously seen and set to invisible.
-        ai_node.getNode("controls/invisible", 1).setValue(1);
-    } else if (visibility[callsign] == VISIBLE) {
-        # Previously seen and shown
-        ai_node.getNode("controls/invisible", 1).setValue(0);
-    }
-}
-
-# Check all aircraft visibility based on class. To be used when
-# the set of visible classes change.
-resetVisibility = func() {
-
-    visibility = {};
-
-    foreach (var n; props.globals.getNode("ai/models", 1).getChildren("multiplayer")) {
-        if (!n.getNode("valid").getValue())
-            continue;
-
-        if ((var callsign = n.getNode("callsign")) == nil or !(callsign = callsign.getValue()))
-            continue;
-        if (!(callsign = string.trim(callsign)))
-            continue;
-
-        determineVisibility(callsign, n);
-    }
-}
 
 
 # multiplayer.dialog.show() -- displays pilot list dialog
@@ -364,7 +285,7 @@ var dialog = {
                 "distance-to-km": distance / 1000.0,
                 "distance-to-nm": distance * M2NM,
                 "position/altitude-m": n.getNode("position/altitude-ft").getValue() * FT2M,
-                "controls/invisible": (visibility[mp.callsign] == HIDDEN),
+                "controls/invisible": contains(ignore, mp.callsign),
             });
         }
         if (PILOTSDLG_RUNNING)
@@ -393,10 +314,10 @@ var dialog = {
         }
     },
     toggle_ignore: func (callsign) {
-        if (visibility[callsign] == VISIBLE) {
-            visibility[callsign] = HIDDEN;
+        if (contains(ignore, callsign)) {
+            delete(ignore, callsign);
         } else {
-            visibility[callsign] = VISIBLE;
+            ignore[callsign] = 1;
         }
     },
     close: func {
@@ -502,9 +423,6 @@ var model = {
             var root = n.getPath();
             var data = { node: n, callsign: callsign, model: model, root: root,
                     sort: string.lc(callsign), available: available };
-
-            # Control visibility
-            determineVisibility(callsign, n);
 
             me.data[root] = data;
             me.callsign[callsign] = data;

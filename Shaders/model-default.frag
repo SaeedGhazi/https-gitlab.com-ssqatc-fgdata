@@ -1,6 +1,6 @@
 // -*-C++-*-
 
-varying vec4 diffuse, constantColor;
+varying vec4 diffuse;
 varying vec3 normal, lightDir, halfVector;
 varying float fogCoord, alpha;
 
@@ -17,7 +17,8 @@ void main()
 {
     vec3 n, halfV;
     float NdotL, NdotHV, fogFactor;
-    vec4 color = constantColor;
+    vec4 color = gl_FrontLightModelProduct.sceneColor
+        + gl_FrontMaterial.ambient * gl_LightSource[0].ambient;
     vec4 texel;
     vec4 fragColor;
     vec4 specular = vec4(0.0);

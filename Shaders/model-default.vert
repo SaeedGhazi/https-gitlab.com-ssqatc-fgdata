@@ -8,7 +8,7 @@
 // Diffuse colors come from the gl_Color, ambient from the material. This is
 // equivalent to osg::Material::DIFFUSE.
 
-varying vec4 diffuse, constantColor;
+varying vec4 diffuse;
 varying vec3 normal, lightDir, halfVector;
 varying float alpha, fogCoord;
 
@@ -17,7 +17,6 @@ uniform bool twoSideHack;
 void main()
 {
     vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
-    vec3 ecPosition3 = vec3(gl_ModelViewMatrix * gl_Vertex) / ecPosition.w;
     gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
     normal = gl_NormalMatrix * gl_Normal;
@@ -36,7 +35,5 @@ void main()
         gl_FrontColor = vec4(0.0, 0.0, 0.0, 1.0);
         gl_BackColor = vec4(0.0, 0.0, 0.0, 0.0);
     }
-    constantColor =  gl_FrontLightModelProduct.sceneColor
-        + gl_FrontMaterial.ambient * gl_LightSource[0].ambient;
-    fogCoord = abs(ecPosition3.z);
+    fogCoord = abs(ecPosition.z / ecPosition.w);
 }

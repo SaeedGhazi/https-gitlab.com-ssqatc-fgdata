@@ -36,8 +36,8 @@
         <write-mask>false</write-mask>
       </depth>
       <render-bin>
-        <bin-number>10</bin-number>
-        <bin-name>DepthSortedBin</bin-name>
+        <bin-number>9</bin-number>
+        <bin-name>CLOUDS_BIN</bin-name>
       </render-bin>
       <texture-unit>
         <unit>0</unit>

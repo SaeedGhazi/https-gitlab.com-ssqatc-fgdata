@@ -1,15 +1,15 @@
 ###############################################################################
-## $Id$
 ##
 ##  A message based information broadcast for the multiplayer network.
 ##
-##  Copyright (C) 2008 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2008 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
 
 ###############################################################################
 # Broadcast primitive using a MP enabled string property.
+# Broadcasts from users in multiplayer.ignore are ignored.
 #
 # BroadcastChannel.new(mpp_path, process)
 #   Create a new broadcast primitive. Any MP user with the same
@@ -101,7 +101,9 @@ BroadcastChannel.update = func {
       props.globals.getNode("/ai/models").getChildren("multiplayer");
     foreach (var pilot; mpplayers) {
       if ((pilot.getChild("valid") != nil) and
-          pilot.getChild("valid").getValue()) {
+          pilot.getChild("valid").getValue() and
+          !contains(multiplayer.ignore,
+                    pilot.getChild("callsign").getValue())) {
         if ((me.peers[pilot.getIndex()] == nil) and
             me.accept_predicate(pilot)) {
           me.peers[pilot.getIndex()] =
@@ -110,8 +112,10 @@ BroadcastChannel.update = func {
                 MessageChannel.new_message_handler(process_msg, pilot));
         }
       } else {
-        delete(me.peers, pilot.getIndex());
-        me.on_disconnect(pilot);
+        if (contains(me.peers, pilot.getIndex())) {
+          delete(me.peers, pilot.getIndex());
+          me.on_disconnect(pilot);
+        }
       }
     }
     me.last_time = t;

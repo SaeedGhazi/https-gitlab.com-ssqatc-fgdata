@@ -1,10 +1,9 @@
 ###############################################################################
-## $Id$
 ##
 ##  A cellular automaton forest fire model with the ability to
 ##  spread over the multiplayer network.
 ##
-##  Copyright (C) 2007 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2007 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
@@ -20,6 +19,9 @@ var trace = func {}
 
 # Where to save fire event logs.
 var SAVEDIR = getprop("/sim/fg-home") ~ "/Wildfire/";
+
+# Maximum number of ignite events a single user can send per second.
+var MAX_IGNITE_RATE = 0.25;
 
 ###############################################################################
 ## External API
@@ -132,6 +134,7 @@ var fire_LOD_pp           = "environment/wildfire/models/fire-lod";
 var smoke_LOD_pp          = "environment/wildfire/models/smoke-lod";
 var LOD_High = 20;
 var LOD_Low  = 80;
+var mp_last_limited_event = {}; # source : time
 
 var score = { extinguished : 0, protected : 0, waste : 0 };
 var old_score = { extinguished : 0, protected : 0, waste : 0 };
@@ -189,10 +192,19 @@ var foam_drop_msg = func (pos, radius, volume) {
 
 var parse_msg = func (source, msg) {
   if (!getprop(MP_share_pp)) return;
+  var cur_time = systime();
   var type = Binary.decodeByte(substr(msg, 5));
   if (type == 1) {
-    var pos = Binary.decodeCoord(substr(msg, 6));
-    ignite(pos, 0);
+    var i = source.getIndex();
+    if (!contains(mp_last_limited_event, i) or
+        (cur_time - mp_last_limited_event[i]) > 1/MAX_IGNITE_RATE) {
+      var pos = Binary.decodeCoord(substr(msg, 6));
+      ignite(pos, 0);
+    } else {
+      printlog("warn", "wildfire.nas: Ignored ignite event from " ~
+               source.getNode("callsign").getValue());
+    }
+    mp_last_limited_event[i] = cur_time;
   }
   if (type == 2) {
     var pos    = Binary.decodeCoord(substr(msg, 6));

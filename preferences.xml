@@ -58,6 +58,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <debug type="bool">false</debug>
    <realism>5</realism>
    <filtering>8</filtering>
+   <multithreading-mode>AutomaticSelection</multithreading-mode>
    <static-lod>
     <detailed userarchive="y">1500</detailed>
     <rough userarchive="y">9000</rough>

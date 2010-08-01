@@ -138,9 +138,11 @@ Started September 2000 by David Megginson, david@megginson.com
    <landmass-shader userarchive="y">0</landmass-shader>
    <water-shader userarchive="y">0</water-shader>
    <urban-shader userarchive="y">0</urban-shader>
+   <contrail-shader userarchive="y">0</contrail-shader>
    <snow-level-m type="double">2000.0</snow-level-m>
    <quality-level type="double" userarchive="y">0.0</quality-level>
-  </rendering>
+  
+</rendering>
   <model-hz type="int">120</model-hz>
   <navdb>
    <localizers>
@@ -784,6 +786,22 @@ Started September 2000 by David Megginson, david@megginson.com
      <wind-speed-change-rel>1.3</wind-speed-change-rel>
     </entry>
 
+     <entry>
+       <elevation-ft>30000</elevation-ft>
+       <wind-from-heading-deg>330</wind-from-heading-deg>
+       <wind-speed-kt>50</wind-speed-kt>
+       <wind-heading-change-deg>35</wind-heading-change-deg>
+       <wind-speed-change-rel>1.3</wind-speed-change-rel>
+     </entry>
+
+     <entry>
+       <elevation-ft>40000</elevation-ft>
+       <wind-from-heading-deg>340</wind-from-heading-deg>
+       <wind-speed-kt>70</wind-speed-kt>
+       <wind-heading-change-deg>35</wind-heading-change-deg>
+       <wind-speed-change-rel>1.3</wind-speed-change-rel>
+     </entry>
+
    </aloft>
 
   </config>
@@ -791,14 +809,14 @@ Started September 2000 by David Megginson, david@megginson.com
   <clouds>
    <status>true</status>
    <layer n="0">
-    <coverage>scattered</coverage>
+    <coverage>clear</coverage>
     <elevation-ft>4000</elevation-ft>
     <thickness-ft>600</thickness-ft>
     <transition-ft>150</transition-ft>
     <span-m>40000</span-m>
    </layer>
    <layer n="1">
-    <coverage>cirrus</coverage>
+    <coverage>clear</coverage>
     <elevation-ft>19500</elevation-ft>
     <thickness-ft>65</thickness-ft>
     <transition-ft>25</transition-ft>

@@ -2935,7 +2935,7 @@ Shared parameters for various materials.
    <r>0.92157</r>
    <g>0.92157</g>
    <b>0.76471</b>
-   <a>1</a>
+   <a>1.0</a>
   </emissive>
  </material>
 
@@ -2945,7 +2945,7 @@ Shared parameters for various materials.
    <r>0.92157</r>
    <g>0.92157</g>
    <b>0.76471</b>
-   <a>1</a>
+   <a>1.0</a>
   </emissive>
  </material>
 
@@ -2955,7 +2955,7 @@ Shared parameters for various materials.
    <r>0.92157</r>
    <g>0.92157</g>
    <b>0.76471</b>
-   <a>1</a>
+   <a>1.0</a>
   </emissive>
  </material>
 
@@ -2985,7 +2985,7 @@ Shared parameters for various materials.
    <r>0.92157</r>
    <g>0.92157</g>
    <b>0.76471</b>
-   <a>1</a>
+   <a>1.0</a>
   </emissive>
  </material>
 
@@ -2995,7 +2995,7 @@ Shared parameters for various materials.
    <r>0.92157</r>
    <g>0.92157</g>
    <b>0.76471</b>
-   <a>1</a>
+   <a>1.0</a>
   </emissive>
  </material>
 
@@ -3005,7 +3005,7 @@ Shared parameters for various materials.
    <r>0.92157</r>
    <g>0.84314</g>
    <b>0.078431</b>
-   <a>1</a>
+   <a>1.0</a>
   </emissive>
  </material>
 
@@ -3035,7 +3035,7 @@ Shared parameters for various materials.
    <r>0.92157</r>
    <g>0.35294</g>
    <b>0.35294</b>
-   <a>1</a>
+   <a>1.0</a>
   </emissive>
  </material>
 
@@ -3065,7 +3065,7 @@ Shared parameters for various materials.
    <r>0.078431</r>
    <g>0.92157</g>
    <b>0.078431</b>
-   <a>1</a>
+   <a>1.0</a>
   </emissive>
  </material>
 

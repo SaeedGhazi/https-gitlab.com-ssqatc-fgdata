@@ -1,3 +1,20 @@
+
+########################################################
+# routines to set up weather tiles
+# Thorsten Renk, July 2010
+########################################################
+
+# function			purpose
+#
+# tile_start			to execute jobs common for all tiles on startup
+# tile_finished			to execute jobs common for all tiles when tile creation is done
+# set_NN_tile			to set a weather tile of type NN
+# create_NN			to create the cloud configuration NN
+# adjust_p			to make sure pressure variation cannot exceed limits between tiles
+# calc_geo			to get local Cartesian geometry for latitude conversion
+# get_lat			to get latitude from Cartesian coordinates
+# get_lon			to get longitude from Cartesian coordinates
+
 ####################################
 # tile setup calls
 ####################################
@@ -6,14 +23,30 @@ var tile_start = func {
 
 if (getprop(lw~"tmp/thread-flag") == 1){setprop(lw~"tmp/thread-status","computing");}
 
+# generate a handling array for models
+
+var array = [];
+append(weather_tile_management.modelArrays,array);
+
+
 }
 
 var tile_finished = func {
 
+var current_code = getprop(lw~"tiles/code");
+
 setprop(lw~"clouds/placement-index",0);
 setsize(elat,0); setsize(elon,0); setsize(erad,0);
 
+var dir_index = getprop(lw~"tiles/tmp/dir-index");	
+props.globals.getNode(lw~"tiles").getChild("tile",dir_index).getNode("code").setValue(current_code);
+
+local_weather.assemble_effect_array();
+
+print("Finished setting up tile type ",current_code, " in direction ",dir_index);
+
 if (getprop(lw~"tmp/thread-flag") == 1){setprop(lw~"tmp/thread-status","placing");}
+else {local_weather.assemble_effect_array();} # otherwise this is done at the end of the placement loop
 }
 
 
@@ -27,6 +60,8 @@ if (getprop(lw~"tmp/thread-flag") == 1){setprop(lw~"tmp/thread-status","placing"
 var set_4_8_stratus_tile = func {
 
 tile_start();
+
+setprop(lw~"tiles/code","test");
 
 var x = 0.0;
 var y = 0.0;
@@ -48,28 +83,10 @@ calc_geo(blat);
 local_weather.set_weather_station(blat, blon, 20000.0, 14.0, 12.0, 29.78);
 
 
-create_2_8_cirrocumulus(blat, blon, 12000.0, alpha); 
+#create_2_8_sstratus_streak(blat, blon,5000.0,0.0);
 
-#x = 2.0 * (rand()-0.5) * 12000;
-#y = 2.0 * (rand()-0.5) * 12000;
-#create_medium_thunderstorm(blat +get_lat(x,y,phi), blon + get_lon(x,y,phi), 3000.0+alt_offset, alpha);
+create_4_8_cirrocumulus_bank(blat, blon, 6000.0, 0.0);
 
-#x = 2.0 * (rand()-0.5) * 12000;
-#y = 2.0 * (rand()-0.5) * 12000;
-#create_medium_thunderstorm(blat +get_lat(x,y,phi), blon + get_lon(x,y,phi), 3000.0+alt_offset, alpha);
-
-# create_big_thunderstorm(blat, blon, 3000.0+alt_offset, alpha);
-
-
-
-
-#var strength = 1.0;
-#var n = int(4000 * strength) * 0.2;
-#local_weather.cumulus_exclusion_layer(blat, blon, 3000.0+alt_offset, n, 20000.0, 20000.0, alpha, 0.0, 2.5, size(elat), elat, elon, erad);
-
-# some turbulence below the convection layer
-
-#local_weather.create_effect_volume(3, blat, blon, 20000.0, 20000.0, alpha, 0.0, 3500.0+alt_offset, -1, -1, -1, 0.4, -1,0 );
 
 tile_finished();
 
@@ -186,7 +203,7 @@ if (rn > 0.5)
 		y = 2.0 * (rand()-0.5) * 18000;
 		alt = 25000.0 + rand() * 5000.0;
 		var path = local_weather.select_cloud_model("Cirrus", "small");
-		local_weather.create_cloud("Cirrus", path, blat + get_lat(x,y,phi), blon+get_lon(x,y,phi),  alt + alt_offset,alpha, 0);
+		compat_layer.create_cloud(path, blat + get_lat(x,y,phi), blon+get_lon(x,y,phi),  alt + alt_offset,alpha);
 		}
 
 	if (rand() > 2.0 * strength)
@@ -195,7 +212,7 @@ if (rn > 0.5)
 		y = 2.0 * (rand()-0.5) * 18000;
 		alt = 25000.0 + rand() * 5000.0;
 		var path = local_weather.select_cloud_model("Cirrus", "small");
-		local_weather.create_cloud("Cirrus", path, blat + get_lat(x,y,phi), blon+get_lon(x,y,phi),  alt + alt_offset,alpha, 0);
+		compat_layer.create_cloud(path, blat + get_lat(x,y,phi), blon+get_lon(x,y,phi),  alt + alt_offset,alpha);
 		}
 	}
 else if (rn > 0.0)
@@ -265,8 +282,8 @@ if (rn > 0.833)
 
 	x = 2.0 * (rand()-0.5) * 5000;
 	y = 2.0 * (rand()-0.5) * 5000;
-	local_weather.create_streak("Altocumulus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 12000.0+alt+alt_offset,30,1000.0,0.2, 30,1000.0,0.2,alpha ,1.0);
-	local_weather.randomize_pos("Altocumulus",1500.0,800.0,800.0,alpha);
+	local_weather.create_streak("Altocumulus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 12000.0+alt+alt_offset,1500.0,30,1000.0,0.2,800.0,30,1000.0,0.2,800.0,alpha ,1.0);
+
 	}
 else if (rn > 0.666)
 	{
@@ -276,11 +293,11 @@ else if (rn > 0.666)
 
 	x = 2.0 * (rand()-0.5) * 10000;
 	y = 2.0 * (rand()-0.5) * 10000;
-	local_weather.create_streak("Altocumulus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 12000.0+alt+alt_offset,25,700.0,0.2, 10,700.0,0.2,alpha ,1.4);
+	local_weather.create_streak("Altocumulus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 12000.0+alt+alt_offset,1500.0,25,700.0,0.2,800.0,10,700.0,0.2,800.0,alpha ,1.4);
 	x = 2.0 * (rand()-0.5) * 10000;
 	y = 2.0 * (rand()-0.5) * 10000;
-	local_weather.create_streak("Altocumulus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 12000.0+alt+alt_offset,22,750.0,0.2, 8,750.0,0.2,alpha ,1.1);
-	local_weather.randomize_pos("Altocumulus",1500.0,800.0,800.0,alpha);
+	local_weather.create_streak("Altocumulus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 12000.0+alt+alt_offset,1500.0,22,750.0,0.2,800.0,8,750.0,0.2,800.0,alpha ,1.1);
+
 	}
 else if (rn > 0.5)
 	{
@@ -291,8 +308,8 @@ else if (rn > 0.5)
 
 	x = 2.0 * (rand()-0.5) * 3000;
 	y = 2.0 * (rand()-0.5) * 3000;
-	local_weather.create_streak("Cirrus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 22000.0+alt+alt_offset,3,9000.0,0.0, 1,8000.0,0.0,alpha ,1.0);
-	local_weather.randomize_pos("Cirrus",1500.0,800.0,800.0,alpha);
+	local_weather.create_streak("Cirrus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 22000.0+alt+alt_offset,1500.0,3,9000.0,0.0, 800.0, 1,8000.0,0.0,800,0,alpha ,1.0);
+
 	}
 else if (rn > 0.333)
 	{
@@ -318,8 +335,8 @@ else if (rn > 0.166)
 
 	var size_offset = 0.5 * m_to_ft * local_weather.cloud_vertical_size_map["Stratus_structured"];
 
-	local_weather.create_streak("Stratus (structured)",blat, blon, alt+6000.0+alt_offset+size_offset,18,0.0,0.3,18,0.0,0.3,0.0,1.0);
-	local_weather.randomize_pos("Stratus (structured)",1000.0,20000.0,20000.0,0.0);
+	local_weather.create_streak("Stratus (structured)",blat, blon, alt+6000.0+alt_offset+size_offset,1000.0,18,0.0,0.3,20000.0,18,0.0,0.3,20000.0,0.0,1.0);
+
 	}
 else if (rn > 0.0)
 	{
@@ -333,7 +350,7 @@ else if (rn > 0.0)
 
 
 	var path = local_weather.select_cloud_model("Cirrocumulus", "large");
-	local_weather.create_cloud("Cirrocumulus", path, blat + get_lat(x,y,phi), blon+get_lon(x,y,phi),  alt + alt_offset +22000,alpha, 0);
+	compat_layer.create_cloud(path, blat + get_lat(x,y,phi), blon+get_lon(x,y,phi),  alt + alt_offset +22000,alpha);
 
 	}
 
@@ -691,7 +708,7 @@ calc_geo(blat);
 
 # get probabilistic values for the weather parameters
 
-var vis = 15000.0 + rand() * 10000.0;
+var vis = 10000.0 + rand() * 8000.0;
 var T = 16.0 + rand() * 10.0;
 var spread = 2.0 + 2.0 * rand();
 var D = T - spread;
@@ -706,13 +723,59 @@ var alt = spread * 1000.0;
 var rn = rand();
 
 
-if (rn > 0.0)
+if (rn > 0.8)
 	{
 	# cloud scenario 1: weak Cumulus development, some Cirrostratus
 	var strength = 0.3 + rand() * 0.2;
 	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
 	create_4_8_cirrostratus_patches(blat, blon, alt+alt_offset+25000.0, alpha);
 	}
+else if (rn > 0.6)	
+	{
+	# cloud scenario 2: weak Cumulus development under Altostratus streaks
+	var strength = 0.1 + rand() * 0.1;
+	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
+
+	var size_offset = 0.5 * m_to_ft * local_weather.cloud_vertical_size_map["Stratus_structured"];
+
+	create_2_8_sstratus_streak(blat, blon, alt+alt_offset + size_offset + 2000.0, alpha);
+	create_2_8_sstratus_streak(blat, blon, alt+alt_offset + size_offset + 4000.0, alpha);
+	}
+else if (rn > 0.4)	
+	{
+	# cloud scenario 3: Cirrocumulus bank
+	var strength = 0.05 + rand() * 0.05;
+	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
+
+	var size_offset = 0.5 * m_to_ft * local_weather.cloud_vertical_size_map["Cirrocumulus"];
+
+	create_4_8_cirrocumulus_bank(blat, blon, alt+alt_offset + size_offset + 7000.0, alpha);
+
+	}
+else if (rn > 0.2)	
+	{
+	# cloud scenario 4: Cirrocumulus undulatus
+	var strength = 0.05 + rand() * 0.05;
+	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
+
+	var size_offset = 0.5 * m_to_ft * local_weather.cloud_vertical_size_map["Cirrocumulus"];
+
+	create_4_8_cirrocumulus_undulatus(blat, blon, alt+alt_offset + size_offset + 6000.0, alpha);
+	}
+
+else if (rn > 0.0)
+	{
+	# cloud scenario 5: weak Cumulus development under scattered Altostratus 
+
+	var strength = 0.15 + rand() * 0.15;
+	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);	
+
+	var size_offset = 0.5 * m_to_ft * local_weather.cloud_vertical_size_map["Stratus_structured"];
+	
+	local_weather.create_streak("Stratus (structured)",blat, blon, alt+4000.0+alt_offset+size_offset,1000.0,14,0.0,0.3,20000.0,14,0.0,0.3,20000.0,0.0,1.0);
+
+	}
+
 
 tile_finished();
 
@@ -810,7 +873,7 @@ if (rn > 0.2)
 	}
 else if (rn > 0.0)
 	{
-	# cloud scenario 1: Single big storm
+	# cloud scenario 2: Single big storm
 
 	x = 2.0 * (rand()-0.5) * 12000;
 	y = 2.0 * (rand()-0.5) * 12000;
@@ -935,13 +998,13 @@ local_weather.cumulus_exclusion_layer(blat+get_lat(x,y,phi), blon+ get_lon(x,y,p
 
 x = 0.0;
 y = 13000.0;
-local_weather.create_streak("Stratus (thin)",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), alt+alt_offset,20,2000.0,0.2,3,1500.0,0.2,alpha,1.0);
-local_weather.randomize_pos("Stratus (thin)",0.0,1200.0,1200.0,0.0);
+local_weather.create_streak("Stratus (thin)",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), alt+alt_offset,0.0,20,2000.0,0.2,1200.0,3,1500.0,0.2,1200.0,alpha,1.0);
+
 
 x = 0.0;
 y = -3000.0;
-local_weather.create_streak("Stratus (thin)",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), alt+alt_offset,20,2000.0,0.2,3,1500.0,0.2,alpha,1.0);
-local_weather.randomize_pos("Stratus (thin)",0.0,1200.0,1200.0,0.0);
+local_weather.create_streak("Stratus (thin)",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), alt+alt_offset,0.0,20,2000.0,0.2,1200.0,3,1500.0,0.2,1200.0,alpha,1.0);
+
 
 # some turbulence in the convection layer
 
@@ -1025,8 +1088,8 @@ x = 2.0 * (rand()-0.5) * 3000;
 y = 2.0 * (rand()-0.5) * 3000 - 12000.0; 
 	
 
-local_weather.create_streak("Cirrus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 25000.0+alt+alt_offset,3,11000.0,0.0, 1,8000.0,0.0,alpha ,1.0);
-local_weather.randomize_pos("Cirrus",1500.0,800.0,10000.0,alpha);
+local_weather.create_streak("Cirrus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 25000.0+alt+alt_offset,1500.0,3,11000.0,0.0, 800.0, 1,8000.0,0.0,10000.0,alpha ,1.0);
+
 
 # followed by random patches of Cirrostratus
 
@@ -1035,8 +1098,8 @@ for (var i=0; i<6; i=i+1)
 	var x = 2.0 * (rand()-0.5) * 15000;
 	var y = 2.0 * (rand()-0.5) * 10000 + 10000;
 	var beta = (rand() -0.5) * 180.0;
-	local_weather.create_streak("Cirrostratus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 18000 + alt + alt_offset,4,2300.0,0.2,4,2300.0,0.2,alpha+beta,1.0);
-local_weather.randomize_pos("Cirrostratus",300.0,600.0,600.0,alpha+beta);
+	local_weather.create_streak("Cirrostratus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 18000 + alt + alt_offset,300.0,4,2300.0,0.2,600.0,4,2300.0,0.2,600.0,alpha+beta,1.0);
+
 	}
 
 tile_finished();
@@ -1080,7 +1143,7 @@ calc_geo(blat);
 
 var vis = 15000.0 + rand() * 5000.0;
 var T = 13.0 + rand() * 8.0;
-var spread = 2.0 + 2.0 * rand();
+var spread = 2.5 + 2.5 * rand();
 var D = T - spread;
 var p = 1005 + rand() * 10.0; p = adjust_p(p);
 
@@ -1113,8 +1176,8 @@ for (var i=0; i<3; i=i+1)
 	var x = 2.0 * (rand()-0.5) * 18000;
 	var y = 2.0 * (rand()-0.5) * 5000 - 15000;
 	var beta = (rand() -0.5) * 180.0;
-	local_weather.create_streak("Cirrostratus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 15000 + alt + alt_offset,4,2300.0,0.2,4,2300.0,0.2,alpha+beta,1.0);
-local_weather.randomize_pos("Cirrostratus",300.0,600.0,600.0,alpha+beta);
+	local_weather.create_streak("Cirrostratus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 15000 + alt + alt_offset,300.0,4,2300.0,0.2,600.0,4,2300.0,0.2,600.0,alpha+beta,1.0);
+
 	}
 
 # patches of thin Altostratus
@@ -1124,8 +1187,8 @@ for (var i=0; i<14; i=i+1)
 	var x = 2.0 * (rand()-0.5) * 18000;
 	var y = 2.0 * (rand()-0.5) * 9000 - 10000.0;
 	var beta = (rand() -0.5) * 180.0;
-	local_weather.create_streak("Stratus (thin)",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), alt+alt_offset +12000.0,4,950.0,0.2,6,950.0,0.2,alpha+beta,1.0);
-local_weather.randomize_pos("Stratus (thin)",300.0,500.0,500.0,alpha+beta);
+	local_weather.create_streak("Stratus (thin)",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), alt+alt_offset +12000.0,300.0,4,950.0,0.2,500.0,6,950.0,0.2,500.0,alpha+beta,1.0);
+
 	}
 
 # patches of structured Stratus
@@ -1135,8 +1198,8 @@ for (var i=0; i<10; i=i+1)
 	var x = 2.0 * (rand()-0.5) * 9000;
 	var y = 2.0 * (rand()-0.5) * 9000 + 2000;
 	var beta = (rand() -0.5) * 180.0;
-	local_weather.create_streak("Stratus (structured)",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), alt+alt_offset+9000.0,5,900.0,0.2,7,900.0,0.2,alpha+beta,1.0);
-local_weather.randomize_pos("Stratus (structured)",300.0,500.0,500.0,alpha+beta);
+	local_weather.create_streak("Stratus (structured)",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), alt+alt_offset+9000.0,300.0,5,900.0,0.2,500.0,7,900.0,0.2,500.0,alpha+beta,1.0);
+
 	}
 
 
@@ -1145,8 +1208,8 @@ local_weather.randomize_pos("Stratus (structured)",300.0,500.0,500.0,alpha+beta)
 var x = 0.0;
 var y = 8000.0;
 
-local_weather.create_streak("Stratus",blat +get_lat(x,y,phi), blon+get_lon(x,y,phi), alt+alt_offset +5000.0,30,0.0,0.2,10,0.0,0.2,alpha,1.0);
-local_weather.randomize_pos("Stratus",1000.0,20000.0,12000.0,alpha);
+local_weather.create_streak("Stratus",blat +get_lat(x,y,phi), blon+get_lon(x,y,phi), alt+alt_offset +5000.0,1000.0,30,0.0,0.2,20000.0,10,0.0,0.2,12000.0,alpha,1.0);
+
 
 tile_finished();
 
@@ -1189,7 +1252,7 @@ calc_geo(blat);
 
 var vis = 12000.0 + rand() * 3000.0;
 var T = 15.0 + rand() * 7.0;
-var spread = 2.0 + 1.0 * rand();
+var spread = 2.5 + 1.5 * rand();
 var D = T - spread;
 var p = 1005 + rand() * 10.0; p = adjust_p(p);
 
@@ -1212,7 +1275,7 @@ x = -15000.0; y = -15000.0;
 local_weather.set_weather_station(blat +get_lat(x,y,phi), blon + get_lon(x,y,phi), vis, T, D, p * hp_to_inhg);
 
 # altitude for the lowest layer
-var alt = spread * 1000.0;
+var alt = spread * 1000.0 + local_weather.cloud_vertical_size_map["Nimbus"] * 0.5 * m_to_ft;
 
 
 # closed Stratus layer
@@ -1220,8 +1283,8 @@ var alt = spread * 1000.0;
 var x = 0.0;
 var y = -8000.0;
 
-local_weather.create_streak("Stratus",blat +get_lat(x,y,phi), blon+get_lon(x,y,phi), alt+alt_offset +1000.0,32,1250.0,0.2,20,1250.0,0.2,alpha,1.0);
-local_weather.randomize_pos("Stratus",500.0,400.0,400.0,alpha);
+local_weather.create_streak("Stratus",blat +get_lat(x,y,phi), blon+get_lon(x,y,phi), alt+alt_offset +1000.0,500.0,32,1250.0,0.2,400.0,20,1250.0,0.2,400.0,alpha,1.0);
+
 
 
 
@@ -1231,8 +1294,8 @@ local_weather.randomize_pos("Stratus",500.0,400.0,400.0,alpha);
 var x = 0.0;
 var y = 8000.0;
 
-local_weather.create_streak("Nimbus",blat +get_lat(x,y,phi), blon+get_lon(x,y,phi), alt+alt_offset,32,1250.0,0.0,20,1250.0,0.0,alpha,1.0);
-local_weather.randomize_pos("Nimbus",500.0,200.0,200.0,alpha);
+local_weather.create_streak("Nimbus",blat +get_lat(x,y,phi), blon+get_lon(x,y,phi), alt+alt_offset,500.0,32,1250.0,0.0,200.0,20,1250.0,0.0,200.0,alpha,1.0);
+
 
 
 # some rain beneath the stratus
@@ -1286,7 +1349,7 @@ calc_geo(blat);
 
 var vis = 12000.0 + rand() * 3000.0;
 var T = 17.0 + rand() * 6.0;
-var spread = 1.0 + 1.0 * rand();
+var spread = 2.0 + 1.0 * rand();
 var D = T - spread;
 var p = 1005 + rand() * 10.0; p = adjust_p(p);
 
@@ -1309,15 +1372,15 @@ x = -15000.0; y = -15000.0;
 local_weather.set_weather_station(blat +get_lat(x,y,phi), blon + get_lon(x,y,phi), vis, T, D, p * hp_to_inhg);
 
 # altitude for the lowest layer
-var alt = spread * 1000.0;
+var alt = spread * 1000.0 + local_weather.cloud_vertical_size_map["Nimbus"] * 0.5 * m_to_ft;
 
 # low Nimbostratus layer
 
 var x = 0.0;
 var y = -5000.0;
 
-local_weather.create_streak("Nimbus",blat +get_lat(x,y,phi), blon+get_lon(x,y,phi), alt+alt_offset,32,1250.0,0.0,24,1250.0,0.0,alpha,1.0);
-local_weather.randomize_pos("Nimbus",500.0,200.0,200.0,alpha);
+local_weather.create_streak("Nimbus",blat +get_lat(x,y,phi), blon+get_lon(x,y,phi), alt+alt_offset,500.0,32,1250.0,0.0,200.0,24,1250.0,0.0,200.0,alpha,1.0);
+
 
 # a little patchy structured Stratus above for effect
 
@@ -1328,8 +1391,8 @@ create_2_8_sstratus(blat, blon, alt+alt_offset+3000.0, alpha);
 var x = 0.0;
 var y = 14000.0;
 
-local_weather.create_streak("Nimbus",blat +get_lat(x,y,phi), blon+get_lon(x,y,phi), alt+alt_offset,25,1600.0,0.2,9,1400.0,0.3,alpha,1.0);
-local_weather.randomize_pos("Nimbus",500.0,200.0,200.0,alpha);
+local_weather.create_streak("Nimbus",blat +get_lat(x,y,phi), blon+get_lon(x,y,phi), alt+alt_offset,500.0,25,1600.0,0.2,200.0,9,1400.0,0.3,200.0,alpha,1.0);
+
 
 
 # rain beneath the Nimbostratus
@@ -1367,9 +1430,9 @@ local_weather.set_weather_station(blat, blon, 35000.0, 22.0, 14.0, 30.02);
 
 # then draw the Altocumulus streaks, dense at 15.000 ft, sparse at 17.000 ft
 
-local_weather.create_streak("Altocumulus",blat, blon, 15000.0+alt_offset,40,1000.0,0.2, 40,1000.0,0.2,alpha ,1.0);
-local_weather.create_streak("Altocumulus",blat, blon, 17000.0+alt_offset,18,2000.0,0.35,18,2000.0,0.35,alpha,1.0);
-local_weather.randomize_pos("Altocumulus",1500.0,800.0,800.0,alpha);
+local_weather.create_streak("Altocumulus",blat, blon, 15000.0+alt_offset,1500.0,40,1000.0,0.2,800.0, 40,1000.0,0.2,800.0,alpha ,1.0);
+local_weather.create_streak("Altocumulus",blat, blon, 17000.0+alt_offset,1500.0,18,2000.0,0.35,800.0,18,2000.0,0.35,800.0,alpha,1.0);
+
 
 tile_finished();
 
@@ -1409,12 +1472,12 @@ local_weather.set_weather_station(blat, blon, 10000.0, 14.0, 12.0, 29.78);
 # then draw the Stratus layers
 
 var size_offset = 0.5 * m_to_ft * local_weather.cloud_vertical_size_map["Stratus"];
-local_weather.create_streak("Stratus",blat, blon, 1500.0+alt_offset+size_offset,32,1250.0,0.2, 32,1250.0,0.2,0.0 ,1.0);
-local_weather.randomize_pos("Stratus",0.0,600.0,600.0,0.0);
+local_weather.create_streak("Stratus",blat, blon, 1500.0+alt_offset+size_offset,0.0,32,1250.0,0.2,600.0, 32,1250.0,0.2,600.0,0.0 ,1.0);
+
 
 size_offset = 0.5 * m_to_ft * local_weather.cloud_vertical_size_map["Stratus_structured"];
-local_weather.create_streak("Stratus (structured)",blat, blon, 5000.0+alt_offset+size_offset,16,2500.0,0.3,16,2500.0,0.3,0.0,1.0);
-local_weather.randomize_pos("Stratus (structured)",0.0,1200.0,1200.0,0.0);
+local_weather.create_streak("Stratus (structured)",blat, blon, 5000.0+alt_offset+size_offset,0.0,16,2500.0,0.3,1200.0,16,2500.0,0.3,1200.0,0.0,1.0);
+
 
 
 # reduce visibility even more below lowest layer
@@ -1466,13 +1529,13 @@ local_weather.set_weather_station(blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 
 
 x = 0.0; y = -15000.0;
 var size_offset = 0.5 * m_to_ft * local_weather.cloud_vertical_size_map["Stratus"];
-local_weather.create_streak("Stratus",blat, blon, 3000.0+alt_offset+size_offset,17,2500.0,0.2, 6,2000.0,0.2,alpha ,1.0);
-local_weather.randomize_pos("Stratus",500.0,1100.0,1100.0,alpha);
+local_weather.create_streak("Stratus",blat, blon, 3000.0+alt_offset+size_offset,500.0,17,2500.0,0.2,1100.0, 6,2000.0,0.2,1100.0,alpha ,1.0);
+
 
 x = 0.0; y = 0.0;
 var size_offset = 0.5 * m_to_ft * local_weather.cloud_vertical_size_map["Stratus"];
-local_weather.create_streak("Stratus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 2000.0+alt_offset+size_offset,40,1000.0,0.2, 10,1000.0,0.2,alpha ,1.0);
-local_weather.randomize_pos("Stratus",300.0,600.0,600.0,alpha);
+local_weather.create_streak("Stratus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 2000.0+alt_offset+size_offset,300.0,40,1000.0,0.2,600.0, 10,1000.0,0.2,600.0,alpha ,1.0);
+
 
 #  and a Nimbus layer with precipitation
 
@@ -1523,14 +1586,14 @@ local_weather.set_weather_station(blat, blon, 20000.0, 14.0, 12.0, 1005 * hp_to_
 
 size_offset = 0.5 * m_to_ft * local_weather.cloud_vertical_size_map["Stratus_structured"];
 
-local_weather.create_streak("Stratus (structured)",blat, blon, 4000.0+alt_offset+size_offset,22,0.0,0.3,22,0.0,0.3,0.0,1.0);
-local_weather.randomize_pos("Stratus (structured)",1000.0,20000.0,20000.0,0.0);
+local_weather.create_streak("Stratus (structured)",blat, blon, 4000.0+alt_offset+size_offset,1000.0,22,0.0,0.3,20000.0,22,0.0,0.3,20000.0,0.0,1.0);
 
-local_weather.create_streak("Stratus (structured)",blat, blon, 6000.0+alt_offset+size_offset,16,0.0,0.4,16,0.0,0.4,0.0,1.0);
-local_weather.randomize_pos("Stratus (structured)",1000.0,20000.0,20000.0,0.0);
 
-local_weather.create_streak("Stratus (structured)",blat, blon, 7000.0+alt_offset+size_offset,11,0.0,0.5,11,0.0,0.5,0.0,1.0);
-local_weather.randomize_pos("Stratus (structured)",1000.0,20000.0,20000.0,0.0);
+local_weather.create_streak("Stratus (structured)",blat, blon, 6000.0+alt_offset+size_offset,1000.0,16,0.0,0.4,20000.0,16,0.0,0.4,20000.0,0.0,1.0);
+
+
+local_weather.create_streak("Stratus (structured)",blat, blon, 7000.0+alt_offset+size_offset,1000.0,11,0.0,0.5,20000.0,11,0.0,0.5,20000.0,0.0,1.0);
+
 
 tile_finished();
 
@@ -1693,8 +1756,8 @@ calc_geo(blat);
 local_weather.set_weather_station(blat, blon, 25000.0, 25.0, 22.0, 1013 * hp_to_inhg);
 
 # then add some developing thunderstorms
-local_weather.create_streak("Cumulonimbus (rain)",blat, blon, 3000.0+alt_offset,3,0.0,1.0,3,0.0,1.0,0.0,1.0);
-local_weather.randomize_pos("Cumulonimbus (rain)",0.0,20000.0,20000.0,0.0);
+local_weather.create_streak("Cumulonimbus (rain)",blat, blon, 3000.0+alt_offset,0.0,3,0.0,1.0,20000.0,3,0.0,1.0,20000.0,0.0,1.0);
+
 
 
 # add overdeveloped convective clouds
@@ -1752,25 +1815,25 @@ local_weather.set_weather_station(lat, lon, 18000.0, 20.0, 16.0, 29.75);
 # now set up the clouds
 
 x = 0.0; y = 0.0; 
-local_weather.create_cloud("Cirrus", "Models/Weather/cirrus1.xml", blat + get_lat(x,y,phi), blon+get_lon(x,y,phi), 28000.0 + alt_offset,alpha, 0);
+compat_layer.create_cloud("Models/Weather/cirrus1.xml", blat + get_lat(x,y,phi), blon+get_lon(x,y,phi), 28000.0 + alt_offset,alpha);
 
 x = 7500.0; y = 1000.0; 
-local_weather.create_cloud("Cirrus", "Models/Weather/cirrus2.xml", blat + get_lat(x,y,phi), blon+get_lon(x,y,phi), 28500.0 + alt_offset,alpha, 0);
+compat_layer.create_cloud("Models/Weather/cirrus2.xml", blat + get_lat(x,y,phi), blon+get_lon(x,y,phi), 28500.0 + alt_offset,alpha);
 
 x = 16000.0; y = -1000.0; 
-local_weather.create_cloud("Cirrus", "Models/Weather/cirrus1.xml", blat + get_lat(x,y,phi), blon+get_lon(x,y,phi), 29500.0 + alt_offset,alpha, 0);
+compat_layer.create_cloud("Models/Weather/cirrus1.xml", blat + get_lat(x,y,phi), blon+get_lon(x,y,phi), 29500.0 + alt_offset,alpha);
 
 x = -16000.0; y = 2500.0; 
-local_weather.create_cloud("Cirrus", "Models/Weather/cirrus1.xml",blat + get_lat(x,y,phi), blon+get_lon(x,y,phi), 30000.0 + alt_offset,alpha, 0);
+compat_layer.create_cloud("Models/Weather/cirrus1.xml",blat + get_lat(x,y,phi), blon+get_lon(x,y,phi), 30000.0 + alt_offset,alpha);
 
 x = 7000.0; y = 8000.0; 
-local_weather.create_cloud("Cirrocumulus", "Models/Weather/cirrocumulus1.xml", blat + get_lat(x,y,phi), blon+get_lon(x,y,phi), 22000.0 + alt_offset,alpha, 0);
+compat_layer.create_cloud("Models/Weather/cirrocumulus1.xml", blat + get_lat(x,y,phi), blon+get_lon(x,y,phi), 22000.0 + alt_offset,alpha);
 
 x = -3000.0; y = 9000.0; 
-local_weather.create_cloud("Cirrocumulus", "Models/Weather/cirrocumulus1.xml", blat + get_lat(x,y,phi), blon+get_lon(x,y,phi), 21000.0 + alt_offset,alpha, 0);
+compat_layer.create_cloud("Models/Weather/cirrocumulus1.xml", blat + get_lat(x,y,phi), blon+get_lon(x,y,phi), 21000.0 + alt_offset,alpha);
 
 x = -1000.0; y = 14000.0; 
-local_weather.create_cloud("Cirrocumulus", "Models/Weather/cirrocumulus2.xml", blat + get_lat(x,y,phi), blon+get_lon(x,y,phi), 20000.0 + alt_offset,alpha, 0);
+compat_layer.create_cloud("Models/Weather/cirrocumulus2.xml", blat + get_lat(x,y,phi), blon+get_lon(x,y,phi), 20000.0 + alt_offset,alpha);
 
 # add moderately strong convective clouds
 
@@ -1945,27 +2008,24 @@ tile_finished();
 
 var create_8_8_stratus = func (lat, lon, alt, alpha) {
 
-local_weather.create_streak("Stratus",lat, lon, alt,32,1250.0,0.0,32,1250.0,0.0,alpha,1.0);
-local_weather.randomize_pos("Stratus",500.0,400.0,400.0,alpha);
+local_weather.create_streak("Stratus",lat, lon, alt,500.0,32,1250.0,0.0,400.0,32,1250.0,0.0,400.0,alpha,1.0);
+
 }
 
 var create_8_8_cirrostratus = func (lat, lon, alt, alpha) {
 
-local_weather.create_streak("Cirrostratus",lat, lon, alt,30,1250.0,0.0,30,1250.0,0.0,alpha,1.0);
-local_weather.randomize_pos("Cirrostratus",500.0,400.0,400.0,alpha);
+local_weather.create_streak("Cirrostratus",lat,lon,alt,500.0,30,1250.0,0.0,400.0,30,1250.0,0.0,400.0,alpha,1.0);
 }
 
 var create_8_8_nimbus = func (lat, lon, alt, alpha) {
 
-local_weather.create_streak("Nimbus",lat, lon, alt,32,1250.0,0.0,32,1250.0,0.0,alpha,1.0);
-local_weather.randomize_pos("Nimbus",500.0,200.0,200.0,alpha);
+local_weather.create_streak("Nimbus",lat, lon, alt,500.0,32,1250.0,0.0,200.0,32,1250.0,0.0,200.0,alpha,1.0);
 }
 
 
 var create_6_8_stratus = func (lat, lon, alt, alpha) {
 
-local_weather.create_streak("Stratus",lat, lon, alt,20,0.0,0.2,20,0.0,0.2,alpha,1.0);
-local_weather.randomize_pos("Stratus",500.0,20000.0,20000.0,alpha);
+local_weather.create_streak("Stratus",lat, lon, alt,500.0,20,0.0,0.2,20000.0,20,0.0,0.2,20000.0,alpha,1.0);
 }
 
 
@@ -1976,22 +2036,22 @@ var x = 2.0 * (rand()-0.5) * 15000;
 var y = 2.0 * (rand()-0.5) * 15000;
 var beta = rand() * 360.0;
 
-local_weather.create_streak("Stratus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,20,1200.0,0.3,12,1200.0,0.3,beta,1.2);
-local_weather.randomize_pos("Stratus",500.0,400.0,400.0,beta);
+local_weather.create_streak("Stratus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,500.0,20,1200.0,0.3,400.0,12,1200.0,0.3,400.0,beta,1.2);
+
 
 var x = 2.0 * (rand()-0.5) * 15000;
 var y = 2.0 * (rand()-0.5) * 15000;
 var beta = rand() * 360.0;
 
-local_weather.create_streak("Stratus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,18,1000.0,0.3,10,1000.0,0.3,beta,1.5);
-local_weather.randomize_pos("Stratus",500.0,400.0,400.0,beta);
+local_weather.create_streak("Stratus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,500.0,18,1000.0,0.3,400.0,10,1000.0,0.3,400.0,beta,1.5);
+
 
 var x = 2.0 * (rand()-0.5) * 15000;
 var y = 2.0 * (rand()-0.5) * 15000;
 var beta = rand() * 360.0;
 
-local_weather.create_streak("Stratus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,15,1000.0,0.3,18,1000.0,0.3,beta,2.0);
-local_weather.randomize_pos("Stratus",500.0,400.0,400.0,beta);
+local_weather.create_streak("Stratus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,500.0,15,1000.0,0.3,400.0,18,1000.0,0.3,400.0,beta,2.0);
+
 }
 
 var create_4_8_stratus_patches = func (lat, lon, alt, alpha) {
@@ -2003,8 +2063,8 @@ for (var i=0; i<16; i=i+1)
 	var x = 2.0 * (rand()-0.5) * 18000;
 	var y = 2.0 * (rand()-0.5) * 18000;
 	var beta = (rand() -0.5) * 180.0;
-	local_weather.create_streak("Stratus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,4,950.0,0.2,6,950.0,0.2,alpha+beta,1.0);
-local_weather.randomize_pos("Stratus",300.0,500.0,500.0,alpha+beta);
+	local_weather.create_streak("Stratus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,300.0,4,950.0,0.2,500.0,6,950.0,0.2,500.0,alpha+beta,1.0);
+
 	}
 
 }
@@ -2018,8 +2078,8 @@ for (var i=0; i<16; i=i+1)
 	var x = 2.0 * (rand()-0.5) * 18000;
 	var y = 2.0 * (rand()-0.5) * 18000;
 	var beta = (rand() -0.5) * 180.0;
-	local_weather.create_streak("Stratus (thin)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,4,950.0,0.2,6,950.0,0.2,alpha+beta,1.0);
-local_weather.randomize_pos("Stratus (thin)",300.0,500.0,500.0,alpha+beta);
+	local_weather.create_streak("Stratus (thin)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,300.0,4,950.0,0.2,500.0,6,950.0,0.2,500.0,alpha+beta,1.0);
+
 	}
 
 }
@@ -2034,8 +2094,8 @@ for (var i=0; i<16; i=i+1)
 	var x = 2.0 * (rand()-0.5) * 18000;
 	var y = 2.0 * (rand()-0.5) * 18000;
 	var beta = (rand() -0.5) * 180.0;
-	local_weather.create_streak("Stratus (structured)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,4,950.0,0.2,6,950.0,0.2,alpha+beta,1.0);
-local_weather.randomize_pos("Stratus (structured)",300.0,500.0,500.0,alpha+beta);
+	local_weather.create_streak("Stratus (structured)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,300.0,4,950.0,0.2,500.0,6,950.0,0.2,500.0,alpha+beta,1.0);
+
 	}
 
 }
@@ -2050,8 +2110,8 @@ for (var i=0; i<6; i=i+1)
 	var x = 2.0 * (rand()-0.5) * 12000;
 	var y = 2.0 * (rand()-0.5) * 12000;
 	var beta = (rand() -0.5) * 180.0;
-	local_weather.create_streak("Cirrostratus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,4,2500.0,0.2,4,2500.0,0.2,alpha+beta,1.0);
-local_weather.randomize_pos("Cirrostratus",300.0,600.0,600.0,alpha+beta);
+	local_weather.create_streak("Cirrostratus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,300.0,4,2500.0,0.2,600.0,4,2500.0,0.2,600.0,alpha+beta,1.0);
+
 	}
 
 }
@@ -2065,10 +2125,10 @@ var y = 2.0 * (rand()-0.5) * 5000;
 var tri = 1.5 + 1.5*rand();
 var beta = (rand() -0.5) * 60.0;
 
-local_weather.create_streak("Stratus",lat+get_lat(x,y+4000,phi), lon+get_lon(x,y+4000,phi), alt,10,800.0,0.25,12,2800.0,0.15,alpha+90.0+beta,tri);
-local_weather.randomize_pos("Stratus",500.0,400.0,600.0,alpha+90.0+beta);
-local_weather.create_streak("Stratus",lat+get_lat(x,y-4000,phi), lon+get_lon(x,y-4000,phi), alt,10,800.0,0.25,12,2800.0,0.15,alpha+270.0+beta,tri);
-local_weather.randomize_pos("Stratus",500.0,400.0,600.0,alpha+270.0+beta);
+local_weather.create_streak("Stratus",lat+get_lat(x,y+4000,phi), lon+get_lon(x,y+4000,phi), alt,500.0,10,800.0,0.25,400.0,12,2800.0,0.15,600.0,alpha+90.0+beta,tri);
+
+local_weather.create_streak("Stratus",lat+get_lat(x,y-4000,phi), lon+get_lon(x,y-4000,phi), alt,500.0,10,800.0,0.25,400.0,12,2800.0,0.15,600.0,alpha+270.0+beta,tri);
+
 }
 
 var create_4_8_tstratus_undulatus = func (lat, lon, alt, alpha) {
@@ -2079,10 +2139,10 @@ var y = 2.0 * (rand()-0.5) * 5000;
 var tri = 1.5 + 1.5*rand();
 var beta = (rand() -0.5) * 60.0;
 
-local_weather.create_streak("Stratus (thin)",lat+get_lat(x,y+4000,phi), lon+get_lon(x,y+4000,phi), alt,10,800.0,0.25,12,2800.0,0.15,alpha+90.0+beta,tri);
-local_weather.randomize_pos("Stratus (thin)",500.0,400.0,600.0,alpha+90.0+beta);
-local_weather.create_streak("Stratus (thin)",lat+get_lat(x,y-4000,phi), lon+get_lon(x,y-4000,phi), alt,10,800.0,0.25,12,2800.0,0.15,alpha+270.0+beta,tri);
-local_weather.randomize_pos("Stratus (thin)",500.0,400.0,600.0,alpha+270.0+beta);
+local_weather.create_streak("Stratus (thin)",lat+get_lat(x,y+4000,phi), lon+get_lon(x,y+4000,phi), alt,500.0,10,800.0,0.25,400.0,12,2800.0,0.15,600.0,alpha+90.0+beta,tri);
+
+local_weather.create_streak("Stratus (thin)",lat+get_lat(x,y-4000,phi), lon+get_lon(x,y-4000,phi), alt,500.0,10,800.0,0.25,400.0,12,2800.0,0.15,600.0,alpha+270.0+beta,tri);
+
 }
 
 var create_4_8_sstratus_undulatus = func (lat, lon, alt, alpha) {
@@ -2093,8 +2153,34 @@ var y = 2.0 * (rand()-0.5) * 5000;
 var tri = 1 + 1.5*rand();
 var beta = (rand() -0.5) * 60.0;
 
-local_weather.create_streak("Stratus (structured)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,20,900.0,0.25,12,2800.0,0.15,alpha+90.0+beta,tri);
-local_weather.randomize_pos("Stratus (structured)",500.0,400.0,600.0,alpha+90.0+beta);
+local_weather.create_streak("Stratus (structured)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,500.0,20,900.0,0.25,400.0,12,2800.0,0.15,600.0,alpha+90.0+beta,tri);
+
+}
+
+
+var create_4_8_cirrocumulus_bank = func (lat, lon, alt, alpha) {
+
+var phi = alpha * math.pi/180.0;
+var x = 2.0 * (rand()-0.5) * 5000;
+var y = 2.0 * (rand()-0.5) * 5000;
+var tri = 1.4 + 0.6 *rand();
+var beta = (rand() -0.5) * 60.0;
+
+local_weather.create_streak("Cirrocumulus (cloudlet)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,900.0,15,750.0,0.2,400.0,24,750.0,0.2,400.0,alpha+90.0+beta,tri);
+
+}
+
+
+var create_4_8_cirrocumulus_undulatus = func (lat, lon, alt, alpha) {
+
+var phi = alpha * math.pi/180.0;
+var x = 2.0 * (rand()-0.5) * 5000;
+var y = 2.0 * (rand()-0.5) * 5000;
+var tri = 1.4 + 0.6 *rand();
+var beta = (rand() -0.5) * 60.0;
+
+local_weather.create_streak("Cirrocumulus (cloudlet)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,900.0,25,300.0,0.0,900.0,15,1400.0,0.0,300.0,alpha+90.0+beta,tri);
+
 }
 
 
@@ -2107,8 +2193,8 @@ for (var i=0; i<8; i=i+1)
 	var x = 2.0 * (rand()-0.5) * 18000;
 	var y = 2.0 * (rand()-0.5) * 18000;
 	var beta = (rand() -0.5) * 180.0;
-	local_weather.create_streak("Stratus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,5,900.0,0.2,7,900.0,0.2,alpha+beta,1.0);
-local_weather.randomize_pos("Stratus",300.0,500.0,500.0,alpha+beta);
+	local_weather.create_streak("Stratus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,300.0,5,900.0,0.2,500.0,7,900.0,0.2,500.0,alpha+beta,1.0);
+
 	}
 
 }
@@ -2122,11 +2208,12 @@ for (var i=0; i<8; i=i+1)
 	var x = 2.0 * (rand()-0.5) * 18000;
 	var y = 2.0 * (rand()-0.5) * 18000;
 	var beta = (rand() -0.5) * 180.0;
-	local_weather.create_streak("Stratus (thin)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,5,900.0,0.2,7,900.0,0.2,alpha+beta,1.0);
-local_weather.randomize_pos("Stratus (thin)",300.0,500.0,500.0,alpha+beta);
+	local_weather.create_streak("Stratus (thin)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,300.0,5,900.0,0.2,500.0,7,900.0,0.2,500.0,alpha+beta,1.0);
+
 	}
 
 }
+
 
 var create_2_8_sstratus = func (lat, lon, alt, alpha) {
 
@@ -2137,9 +2224,27 @@ for (var i=0; i<8; i=i+1)
 	var x = 2.0 * (rand()-0.5) * 18000;
 	var y = 2.0 * (rand()-0.5) * 18000;
 	var beta = (rand() -0.5) * 180.0;
-	local_weather.create_streak("Stratus (structured)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,5,900.0,0.2,7,900.0,0.2,alpha+beta,1.0);
-local_weather.randomize_pos("Stratus (structured)",300.0,500.0,500.0,alpha+beta);
+	local_weather.create_streak("Stratus (structured)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,300.0,5,900.0,0.2,500.0,7,900.0,0.2,500.0,alpha+beta,1.0);
+
 	}
+
+}
+
+
+
+
+
+
+
+var create_2_8_sstratus_streak = func (lat, lon, alt, alpha) {
+
+var phi = alpha * math.pi/180.0;
+
+var x = 2.0 * (rand()-0.5) * 6000;
+var y = 2.0 * (rand()-0.5) * 6000;
+var beta = (rand() -0.5) * 180.0;
+
+local_weather.create_streak("Stratus (structured)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,100.0,20,1800.0,0.1,500.0,5,1700.0,0.0,500.0,alpha+beta,1.2);
 
 }
 
@@ -2152,8 +2257,8 @@ for (var i=0; i<3; i=i+1)
 	var x = 2.0 * (rand()-0.5) * 12000;
 	var y = 2.0 * (rand()-0.5) * 12000;
 	var beta = (rand() -0.5) * 180.0;
-	local_weather.create_streak("Cirrostratus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,4,2300.0,0.2,4,2300.0,0.2,alpha+beta,1.0);
-local_weather.randomize_pos("Cirrostratus",300.0,600.0,600.0,alpha+beta);
+	local_weather.create_streak("Cirrostratus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,300.0,4,2300.0,0.2,600.0,4,2300.0,0.2,600.0,alpha+beta,1.0);
+
 	}
 
 }
@@ -2167,8 +2272,8 @@ for (var i=0; i<3; i=i+1)
 	var x = 2.0 * (rand()-0.5) * 12000;
 	var y = 2.0 * (rand()-0.5) * 12000;
 	var beta = (rand() -0.5) * 180.0;
-	local_weather.create_streak("Cirrocumulus (cloudlet)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,3,4000.0,0.2,3,4000.0,0.2,alpha+beta,1.0);
-local_weather.randomize_pos("Cirrocumulus (cloudlet)",300.0,1000.0,1000.0,alpha+beta);
+	local_weather.create_streak("Cirrocumulus (cloudlet)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,300.0,3,4000.0,0.2,1000.0,3,4000.0,0.2,1000.0,alpha+beta,1.0);
+
 	}
 
 }
@@ -2182,16 +2287,16 @@ var y = 2.0 * (rand()-0.5) * 10000;
 var tri = 1.5 + 1.5*rand();
 var beta = (rand() -0.5) * 60.0;
 
-local_weather.create_streak("Cumulus",lat+get_lat(x,y+6000,phi), lon+get_lon(x,y+6000,phi), alt,15,600.0,0.2,20,600.0,0.2,alpha+90.0+beta,tri);
-local_weather.randomize_pos("Cumulus",500.0,400.0,400.0,alpha+90.0+beta);
-local_weather.create_streak("Cumulus",lat+get_lat(x,y-6000,phi), lon+get_lon(x,y-6000,phi), alt,15,600.0,0.2,20,600.0,0.2,alpha+270.0+beta,tri);
-local_weather.randomize_pos("Cumulus",500.0,400.0,400.0,alpha+270.0+beta);
+local_weather.create_streak("Cumulus",lat+get_lat(x,y+6000,phi), lon+get_lon(x,y+6000,phi), alt,500.0,15,600.0,0.2,400.0,20,600.0,0.2,400.0,alpha+90.0+beta,tri);
+
+local_weather.create_streak("Cumulus",lat+get_lat(x,y-6000,phi), lon+get_lon(x,y-6000,phi), alt,500.0,15,600.0,0.2,400.0,20,600.0,0.2,400.0,alpha+270.0+beta,tri);
+
 }
 
 var create_cloud_bank = func (type, lat, lon, alt, x1, x2, height, n, alpha) {
 
-local_weather.create_streak(type,lat,lon, alt+ 0.5* height,n,0.0,0.0,1,0.0,0.0,alpha,1.0);
-local_weather.randomize_pos(type,height,x1,x2,alpha);
+local_weather.create_streak(type,lat,lon, alt+ 0.5* height,height,n,0.0,0.0,x1,1,0.0,0.0,x2,alpha,1.0);
+
 
 }
 
@@ -2217,8 +2322,13 @@ var create_medium_thunderstorm = func(lat, lon, alt, alpha) {
 var scale = 0.7 + rand() * 0.3;
 
 local_weather.create_layer("Nimbus", lat, lon, alt, 500.0, 6000.0 * scale, 6000.0 * scale, 0.0, 1.0, 0.3, 1, 1.5);
-local_weather.create_layer("Stratus", lat, lon, alt+1500, 1000.0, 5500.0 * scale, 5500.0 * scale, 0.0, 1.0, 0.3, 0, 0.0);
+
+#local_weather.create_layer("Stratus", lat, lon, alt+1500, 1000.0, 5500.0 * scale, 5500.0 * scale, 0.0, 1.0, 0.3, 0, 0.0);
+local_weather.create_hollow_layer("Stratus", lat, lon, alt+1500, 1000.0, 5500.0 * scale, 5500.0 * scale, 0.0, 1.0, 0.3, 0.5);
+
 local_weather.create_layer("Fog (thick)", lat, lon, alt+4000, 6000.0, 3400.0 * scale, 3400.0 * scale, 0.0, 1.5, 0.3, 0, 0.0);
+
+
 local_weather.create_layer("Cumulonimbus (cloudlet)", lat, lon, alt+10000, 10000.0, 3600.0 * scale, 3600.0 * scale, 0.0, 1.2, 0.0, 0, 0.0);
 
 # set the exclusion region for the Cumulus layer
@@ -2232,17 +2342,26 @@ local_weather.create_effect_volume(1, lat, lon, 6000.0 * 0.7 * scale, 6000.0 * 0
 
 var create_big_thunderstorm = func(lat, lon, alt, alpha) {
 
-# var radius = 4000 + rand() * 4000;
 var phi = alpha * math.pi/180.0;
 
 var scale = 0.8;
 
 local_weather.create_layer("Nimbus", lat, lon, alt, 500.0, 7500.0 * scale, 7500.0 * scale, 0.0, 1.0, 0.25, 1, 1.5);
-local_weather.create_layer("Stratus", lat, lon, alt+1500, 1000.0, 7200.0 * scale, 7200.0 * scale, 0.0, 1.0, 0.3, 0, 0.0);
+
+#local_weather.create_layer("Stratus", lat, lon, alt+1500, 1000.0, 7200.0 * scale, 7200.0 * scale, 0.0, 1.0, 0.3, 0, 0.0);
+local_weather.create_hollow_layer("Stratus", lat, lon, alt+1500, 1000.0, 7200.0 * scale, 7200.0 * scale, 0.0, 1.0, 0.3, 0.7);
+
 local_weather.create_layer("Fog (thick)", lat, lon, alt+5000, 3000.0, 5500.0 * scale, 5500.0 * scale, 0.0, 0.7, 0.3, 0, 0.0);
+
+
 local_weather.create_layer("Fog (thick)", lat+get_lat(0,-1000,phi), lon+get_lon(0,-1000,phi), alt+12000, 4000.0, 6300.0 * scale, 6300.0 * scale, 0.0, 0.7, 0.3, 0, 0.0);
-local_weather.create_layer("Stratus", lat+get_lat(0,-2000,phi), lon+get_lon(0,-2000,phi), alt+17000, 1000.0, 7500.0 * scale, 7500.0 * scale, 0.0, 1.0, 0.3, 0, 0.0);
-local_weather.create_layer("Stratus", lat+get_lat(0,-3000,phi), lon+get_lon(0,-3000,phi), alt+20000, 1000.0, 9500.0 * scale, 9500.0 * scale, 0.0, 1.0, 0.3, 0, 0.0);
+
+#local_weather.create_layer("Stratus", lat+get_lat(0,-2000,phi), lon+get_lon(0,-2000,phi), alt+17000, 1000.0, 7500.0 * scale, 7500.0 * scale, 0.0, 1.0, 0.3, 0, 0.0);
+local_weather.create_hollow_layer("Stratus", lat+get_lat(0,-2000,phi), lon+get_lon(0,-2000,phi), alt+17000, 1000.0, 7500.0 * scale, 7500.0 * scale, 0.0, 1.0, 0.3, 0.5);
+
+#local_weather.create_layer("Stratus", lat+get_lat(0,-3000,phi), lon+get_lon(0,-3000,phi), alt+20000, 1000.0, 9500.0 * scale, 9500.0 * scale, 0.0, 1.0, 0.3, 0, 0.0);
+local_weather.create_hollow_layer("Stratus", lat+get_lat(0,-3000,phi), lon+get_lon(0,-3000,phi), alt+20000, 1000.0, 9500.0 * scale, 9500.0 * scale, 0.0, 1.0, 0.3, 0.5);
+
 local_weather.create_layer("Stratus (thin)", lat+get_lat(0,-4000,phi), lon+get_lon(0,-4000,phi), alt+24000, 1000.0, 11500.0 * scale, 11500.0 * scale, 0.0, 2.0, 0.3, 0, 0.0);
 
 # set the exclusion region for the Cumulus layer

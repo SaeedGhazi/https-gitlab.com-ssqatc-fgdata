@@ -1,7 +1,20 @@
 ########################################################
 # routines to set up, transform and manage weather tiles
-# Thorsten Renk, April 2010
+# Thorsten Renk, July 2010
 ########################################################
+
+# function			purpose
+#
+# tile_management_loop		to decide if a tile is created, removed or considered current
+# generate_tile			to decide on orientation and type and set up all information for tile creation
+# remove_tile			to delete a tile by index
+# change_active_tile		to change the tile the aircraft is currently in and to generate neighbour info
+# copy_entry			to copy tile information from one node to another
+# create_neighbour		to set up information for a new neighbouring tile
+# create_neighbours		to initialize the 8 neighbours of the initial tile
+# calc_geo			to get local Cartesian geometry for latitude conversion
+# get_lat			to get latitude from Cartesian coordinates
+# get_lon			to get longitude from Cartesian coordinates
 
 
 ###################################
@@ -20,6 +33,7 @@ var distance_to_load = getprop(lw~"config/distance-to-load-tile-m");
 var distance_to_remove = getprop(lw~"config/distance-to-remove-tile-m");
 var current_heading = getprop("orientation/heading-deg");
 var loading_flag = getprop(lw~"tmp/asymmetric-tile-loading-flag");
+var this_frame_generated_flag = 0; # use this flag to avoid overlapping tile generation calls
 
 foreach (var t; tNode) {
 
@@ -41,15 +55,28 @@ foreach (var t; tNode) {
 			} 
 		}
 
-	#print(d);
-	if ((d < distance_to_load) and (flag==0)) # the tile needs to be generated, unless it already has been
+	# the tile needs to be generated, unless it already has been
+	# and if no other tile has been generated in this loop cycle
+	# and the thread and convective system are idle
+	# (we want to avoid overlapping tile generation)
+	if ((d < distance_to_load) and (flag==0) and (this_frame_generated_flag == 0) and (getprop(lw~"tmp/thread-status") == "idle") and (getprop(lw~"tmp/convective-status") == "idle")) 
 		{
 		setprop(lw~"tiles/tile-counter",getprop(lw~"tiles/tile-counter")+1);
-		print("Building tile unique index ",getprop(lw~"tiles/tile-counter"));
+		print("Building tile unique index ",getprop(lw~"tiles/tile-counter"), " in direction ",i);
 		generate_tile(code, tpos.lat(), tpos.lon(),i);
+
+		if (getprop(lw~"config/dynamics-flag") == 1)
+			{
+			var quadtree = [];
+			weather_dynamics.generate_quadtree_structure(0, quadtree);
+			append(weather_dynamics.cloudQuadtrees,quadtree);
+			}
+
 		t.getNode("generated-flag").setValue(1);
-		t.getNode("code",1).setValue(getprop(lw~"tiles/code"));
+		t.getNode("timestamp-sec").setValue(weather_dynamics.time_lw);
 		t.getNode("tile-index",1).setValue(getprop(lw~"tiles/tile-counter"));
+		
+		this_frame_generated_flag = 1;
 		} 
 
 	if ((d > distance_to_remove) and (flag==1)) # the tile needs to be deleted if it exists
@@ -82,29 +109,82 @@ if (getprop(lw~"tile-loop-flag") ==1) {settimer(tile_management_loop, 5.0);}
 
 var generate_tile = func (code, lat, lon, dir_index) {
 
+# make sure the last tile call has finished, otherwise put on hold
+
+#if ((getprop(lw~"tmp/thread-status") != "idle") or (getprop(lw~"tmp/convective-status") != "idle"))
+#	{
+#	print("Tile generation overlap, delaying...");
+#	settimer( func {generate_tile(code, lat, lon, dir_index);}, 1);
+#	}
+
 setprop(lw~"tiles/tmp/latitude-deg", lat);
 setprop(lw~"tiles/tmp/longitude-deg",lon);
 setprop(lw~"tiles/tmp/code",code);
+
+
+# do windspeed and orientation before presampling check, but test not to do it again
+
+if (((getprop(lw~"tmp/presampling-flag") == 1) and (getprop(lw~"tmp/presampling-status") == "idle")) or (getprop(lw~"tmp/presampling-flag") == 0))
+	{
+
+	var alpha = getprop(lw~"tmp/tile-orientation-deg");
+
+	if ((local_weather.wind_model_flag == 2) or (local_weather.wind_model_flag ==4))
+		{
+		alpha = alpha + 2.0 * (rand()-0.5) * 10.0;
+
+		# account for the systematic spin of weather systems around a low pressure 
+		# core dependent on hemisphere
+		if (lat >0.0) {alpha = alpha -3.0;}
+		else {alpha = alpha +3.0;} 
+
+		setprop(lw~"tmp/tile-orientation-deg",alpha);
+	
+		# compute the new windspeed
+
+		var windspeed = getprop(lw~"tmp/windspeed-kt");
+		windspeed = windspeed + 2.0 * (rand()-0.5) * 2.0;
+		if (windspeed < 0) {windspeed = rand();}
+		setprop(lw~"tmp/windspeed-kt");
+
+		# store the tile orientation and wind strength in an array for fast processing
+
+		append(weather_dynamics.tile_wind_direction, alpha);
+		append(weather_dynamics.tile_wind_speed, windspeed);
+
+		}
+	else if (local_weather.wind_model_flag ==5) # alpha and windspeed are calculated
+		{
+		var res = local_weather.wind_interpolation(lat,lon,0.0);
+		
+		alpha = res[0];
+		setprop(lw~"tmp/tile-orientation-deg",alpha);				
+
+		var windspeed = res[1];
+		setprop(lw~"tmp/windspeed-kt",windspeed);
+
+		append(weather_dynamics.tile_wind_direction,res[0]);
+		append(weather_dynamics.tile_wind_speed,res[1]);
+
+		}
+
+
+	props.globals.getNode(lw~"tiles").getChild("tile",dir_index).getNode("orientation-deg").setValue(alpha);
+	}
+
+
+
 
 # now see if we need to presample the terrain
 
 if ((getprop(lw~"tmp/presampling-flag") == 1) and (getprop(lw~"tmp/presampling-status") == "idle")) 
 	{
 	local_weather.terrain_presampling_start(lat, lon, 1000, 40000, getprop(lw~"tmp/tile-orientation-deg")); 
+	setprop(lw~"tiles/tmp/dir-index",dir_index);
 	return;
 	}
 
-# now allow for some change in tile orientation
-
-var alpha = getprop(lw~"tmp/tile-orientation-deg");
-alpha = alpha + 2.0 * (rand()-0.5) * 10.0;
-
-# account for the systematic spin of weather systems around a low pressure core dependent on hemisphere
-if (lat >0.0) {alpha = alpha -3.0;}
-else {alpha = alpha +3.0;} 
-
-
-setprop(lw~"tmp/tile-orientation-deg",alpha);
+print("Current tile type: ", code);
 
 if (getprop(lw~"tmp/tile-management") == "repeat tile")
 	{
@@ -124,6 +204,7 @@ if (getprop(lw~"tmp/tile-management") == "repeat tile")
 	else if (code == "cold_sector") {weather_tiles.set_cold_sector_tile();}
 	else if (code == "warm_sector") {weather_tiles.set_warm_sector_tile();}
 	else if (code == "tropical_weather") {weather_tiles.set_tropical_weather_tile();}
+	else {print("Repeat tile not implemented with this tile type!");}
 	}
 else if (getprop(lw~"tmp/tile-management") == "realistic weather")
 	{
@@ -233,6 +314,19 @@ else if (getprop(lw~"tmp/tile-management") == "realistic weather")
 		if ((dir_index ==6) or (dir_index ==7) or (dir_index==8))
 			{weather_tiles.set_warmfront3_tile();}
 		}
+	else if (code == "coldfront")
+		{
+		if ((dir_index ==0) or (dir_index ==1) or (dir_index==2))
+			{weather_tiles.set_cold_sector_tile();}
+		else if ((dir_index ==3) or (dir_index ==5))
+			{weather_tiles.set_coldfront_tile();}
+		else if ((dir_index ==6) or (dir_index ==7) or (dir_index==8))
+			{weather_tiles.set_warm_sector_tile();}
+		}
+	else
+		{
+		print("Realistic weather not implemented with this tile type!");
+		}
 
 	} # end if mode == realistic weather
 }
@@ -242,127 +336,41 @@ else if (getprop(lw~"tmp/tile-management") == "realistic weather")
 # tile removal call
 ###################################
 
-
-var remove_tile_loop = func (index) {
-
-var n = 100;
-
-var flag_mod = 0;
-
-
-var status = getprop(lw~"tmp/thread-status");
-
-if ((status == "computing") or (status == "placing")) # the array is blocked
-	{
-	settimer( func {remove_tile_loop(index); },0); # try again next frame
-	return;
-	}
-else if (status == "idle") # we initialize the loop
-	{
-	mvec = props.globals.getNode("models", 1).getChildren("model");
-	msize = size(mvec);
-	setprop(lw~"tmp/last-reading-pos-mod", msize);
-	setprop(lw~"tmp/thread-status", "removing"); 
-	}
-
-var lastpos = getprop(lw~"tmp/last-reading-pos-mod"); 
-
-# print("msize: ", msize, "lastpos ", lastpos);
-
-if (lastpos < (msize-1)) {var istart = lastpos;} else {var istart = (msize-1);}
-
-if (istart<0) {istart=0;}
-
-var i_min = istart - n;
-if (i_min < -1) {i_min =-1;}
-
-for (var i = istart; i > i_min; i = i- 1)
-		{
-		m = mvec[i];
-		if (m.getNode("legend",1).getValue() == "Cloud")
-			{
-			if (m.getNode("tile-index").getValue() == index) 
-				{
-				m.remove();
-				}
-			}
-		}
-
-if (i<0) {flag_mod = 1;}
-
-
-if (flag_mod == 0) {setprop(lw~"tmp/last-reading-pos-mod",i); }
-
-if (flag_mod == 0) # we still have work to do
-	{settimer( func {remove_tile_loop(index); },0);}
-else 
-	{
-	print("Tile deletion loop finished!");
-	setprop(lw~"tmp/thread-status", "idle"); 
-	setprop(lw~"clouds/placement-index",0);
-	setprop(lw~"clouds/model-placement-index",0);
-	}
-
-}
-
-# this is to avoid two tile removal loops starting at the same time
-
-var waiting_loop = func (index) {
-
-var status = getprop(lw~"tmp/thread-status");
-
-if (status == "idle") {remove_tile_loop(index);}
-
-else 	{
-	print("Removal of ",index, " waiting for idle thread...");
-	settimer( func {waiting_loop(index); },1.0);
-	}
-}
-
 var remove_tile = func (index) {
 
-var n = size(props.globals.getNode("local-weather/clouds").getChild("tile",index,1).getChildren("cloud"));
-props.globals.getNode("local-weather/clouds", 1).removeChild("tile",index);
-setprop(lw~"clouds/cloud-number",getprop(lw~"clouds/cloud-number")-n);
-
-if (getprop(lw~"tmp/thread-flag") ==  1)
-	#{remove_tile_loop(index);}
-	#{waiting_loop(index);}
-	# call the model removal in the next frame, because its initialization takes time 
-	# and we do a lot in this frame
-	{settimer( func {waiting_loop(index); },0);} 
-else 
-	{
-	var modelNode = props.globals.getNode("models", 1).getChildren("model");
-	foreach (var m; modelNode)
-		{
-		if (m.getNode("legend").getValue() == "Cloud")
-			{
-			if (m.getNode("tile-index").getValue() == index) 
-				{
-				m.remove();
-				}
-			}
-		}
-	}
-
+compat_layer.remove_clouds(index);
 
 var effectNode = props.globals.getNode("local-weather/effect-volumes").getChildren("effect-volume");
+
+var ecount = 0;
 
 foreach (var e; effectNode)
 	{
 	if (e.getNode("tile-index").getValue() == index) 
 		{
 		e.remove();
-		setprop(lw~"effect-volumes/number",getprop(lw~"effect-volumes/number")-1);
+		ecount = ecount + 1;
 		}
 	}
+
+setprop(lw~"effect-volumes/number",getprop(lw~"effect-volumes/number")- ecount);
 
 # set placement indices to zero to reinitiate search for free positions
 
 setprop(lw~"clouds/placement-index",0);
 setprop(lw~"clouds/model-placement-index",0);
 setprop(lw~"effect-volumes/effect-placement-index",0);
+
+# remove quadtree structures 
+
+if (getprop(lw~"config/dynamics-flag") ==1)
+	{
+	setsize(weather_dynamics.cloudQuadtrees[index-1],0);
+	}
+
+# rebuild effect volume vector
+
+local_weather.assemble_effect_array(); 
 
 }
 
@@ -498,6 +506,8 @@ t.getNode("longitude-deg").setValue(f.getNode("longitude-deg").getValue());
 t.getNode("generated-flag").setValue(f.getNode("generated-flag").getValue());
 t.getNode("tile-index").setValue(f.getNode("tile-index").getValue());
 t.getNode("code").setValue(f.getNode("code").getValue());
+t.getNode("timestamp-sec").setValue(f.getNode("timestamp-sec").getValue());
+t.getNode("orientation-deg").setValue(f.getNode("orientation-deg").getValue());
 }
 
 #####################################
@@ -525,6 +535,8 @@ t.getNode("longitude-deg",1).setValue(blon + get_lon(x,y,phi));
 t.getNode("generated-flag",1).setValue(0);
 t.getNode("tile-index",1).setValue(-1);
 t.getNode("code",1).setValue("");
+t.getNode("timestamp-sec",1).setValue(weather_dynamics.time_lw);
+t.getNode("orientation-deg",1).setValue(0.0);
 }
 
 #####################################
@@ -546,6 +558,8 @@ setprop(lw~"tiles/tile[0]/longitude-deg",blon + get_lon(x,y,phi));
 setprop(lw~"tiles/tile[0]/generated-flag",0);
 setprop(lw~"tiles/tile[0]/tile-index",-1);
 setprop(lw~"tiles/tile[0]/code","");
+setprop(lw~"tiles/tile[0]/timestamp-sec",weather_dynamics.time_lw);
+setprop(lw~"tiles/tile[0]/orientation-deg",0.0);
 
 x = 0.0; y = 40000.0; 
 setprop(lw~"tiles/tile[1]/latitude-deg",blat + get_lat(x,y,phi));
@@ -553,6 +567,8 @@ setprop(lw~"tiles/tile[1]/longitude-deg",blon + get_lon(x,y,phi));
 setprop(lw~"tiles/tile[1]/generated-flag",0);
 setprop(lw~"tiles/tile[1]/tile-index",-1);
 setprop(lw~"tiles/tile[1]/code","");
+setprop(lw~"tiles/tile[1]/timestamp-sec",weather_dynamics.time_lw);
+setprop(lw~"tiles/tile[1]/orientation-deg",0.0);
 
 x = 40000.0; y = 40000.0; 
 setprop(lw~"tiles/tile[2]/latitude-deg",blat + get_lat(x,y,phi));
@@ -560,6 +576,8 @@ setprop(lw~"tiles/tile[2]/longitude-deg",blon + get_lon(x,y,phi));
 setprop(lw~"tiles/tile[2]/generated-flag",0);
 setprop(lw~"tiles/tile[2]/tile-index",-1);
 setprop(lw~"tiles/tile[2]/code","");
+setprop(lw~"tiles/tile[2]/timestamp-sec",weather_dynamics.time_lw);
+setprop(lw~"tiles/tile[2]/orientation-deg",0.0);
 
 x = -40000.0; y = 0.0; 
 setprop(lw~"tiles/tile[3]/latitude-deg",blat + get_lat(x,y,phi));
@@ -567,6 +585,8 @@ setprop(lw~"tiles/tile[3]/longitude-deg",blon + get_lon(x,y,phi));
 setprop(lw~"tiles/tile[3]/generated-flag",0);
 setprop(lw~"tiles/tile[3]/tile-index",-1);
 setprop(lw~"tiles/tile[3]/code","");
+setprop(lw~"tiles/tile[3]/timestamp-sec",weather_dynamics.time_lw);
+setprop(lw~"tiles/tile[3]/orientation-deg",0.0);
 
 # this is the current tile
 x = 0.0; y = 0.0; 
@@ -575,6 +595,8 @@ setprop(lw~"tiles/tile[4]/longitude-deg",blon + get_lon(x,y,phi));
 setprop(lw~"tiles/tile[4]/generated-flag",1);
 setprop(lw~"tiles/tile[4]/tile-index",1);
 setprop(lw~"tiles/tile[4]/code","");
+setprop(lw~"tiles/tile[4]/timestamp-sec",weather_dynamics.time_lw);
+setprop(lw~"tiles/tile[4]/orientation-deg",getprop(lw~"tmp/tile-orientation-deg"));
 
 
 x = 40000.0; y = 0.0; 
@@ -583,6 +605,8 @@ setprop(lw~"tiles/tile[5]/longitude-deg",blon + get_lon(x,y,phi));
 setprop(lw~"tiles/tile[5]/generated-flag",0);
 setprop(lw~"tiles/tile[5]/tile-index",-1);
 setprop(lw~"tiles/tile[5]/code","");
+setprop(lw~"tiles/tile[5]/timestamp-sec",weather_dynamics.time_lw);
+setprop(lw~"tiles/tile[5]/orientation-deg",0.0);
 
 x = -40000.0; y = -40000.0; 
 setprop(lw~"tiles/tile[6]/latitude-deg",blat + get_lat(x,y,phi));
@@ -590,6 +614,8 @@ setprop(lw~"tiles/tile[6]/longitude-deg",blon + get_lon(x,y,phi));
 setprop(lw~"tiles/tile[6]/generated-flag",0);
 setprop(lw~"tiles/tile[6]/tile-index",-1);
 setprop(lw~"tiles/tile[6]/code","");
+setprop(lw~"tiles/tile[6]/timestamp-sec",weather_dynamics.time_lw);
+setprop(lw~"tiles/tile[6]/orientation-deg",0.0);
 
 x = 0.0; y = -40000.0; 
 setprop(lw~"tiles/tile[7]/latitude-deg",blat + get_lat(x,y,phi));
@@ -597,6 +623,8 @@ setprop(lw~"tiles/tile[7]/longitude-deg",blon + get_lon(x,y,phi));
 setprop(lw~"tiles/tile[7]/generated-flag",0);
 setprop(lw~"tiles/tile[7]/tile-index",-1);
 setprop(lw~"tiles/tile[7]/code","");
+setprop(lw~"tiles/tile[7]/timestamp-sec",weather_dynamics.time_lw);
+setprop(lw~"tiles/tile[7]/orientation-deg",0.0);
 
 x = 40000.0; y = -40000.0; 
 setprop(lw~"tiles/tile[8]/latitude-deg",blat + get_lat(x,y,phi));
@@ -604,6 +632,8 @@ setprop(lw~"tiles/tile[8]/longitude-deg",blon + get_lon(x,y,phi));
 setprop(lw~"tiles/tile[8]/generated-flag",0);
 setprop(lw~"tiles/tile[8]/tile-index",-1);
 setprop(lw~"tiles/tile[8]/code","");
+setprop(lw~"tiles/tile[8]/timestamp-sec",weather_dynamics.time_lw);
+setprop(lw~"tiles/tile[8]/orientation-deg",0.0);
 }
 
 ###################
@@ -622,10 +652,9 @@ var lon_to_m = 0.0; #local_weather.lon_to_m;
 var m_to_lon = 0.0; # local_weather.m_to_lon;
 var lw = "/local-weather/";
 
-# storage array for model vector
 
-var mvec = [];
-var msize = 0;
+
+var modelArrays = [];
 
 ###################
 # helper functions

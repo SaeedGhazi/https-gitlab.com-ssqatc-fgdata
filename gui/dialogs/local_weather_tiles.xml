@@ -2,24 +2,24 @@
 
 <PropertyList>
 
- <!-- Cloud placement methods -->
+ <!-- Weather tiles -->
 
  <name>local_weather_tiles</name>
- <width>300</width>
+ <width>310</width>
  <height>330</height>
  <modal>false</modal>
 
 
 <text>
-  <x>10</x>
-  <y>270</y>
-  <label>Select a weather scenario tile</label>
+  <x>5</x>
+  <y>300</y>
+  <label>Select initial weather scenario tile</label>
 </text>
 
 
 <combo>
    <x>10</x>
-   <y>270</y>
+   <y>275</y>
    <width>280</width>
    <height>25</height>
    <live>true</live>
@@ -31,58 +31,88 @@
    <value>Low-pressure</value>
    <value>Low-pressure-core</value>
    <value>Cold-sector</value>
+   <value>Warm-sector</value>
    <value>Coldfront</value>
-   <value>Warmfront-1</value>
-   <value>Warmfront-2</value>
-   <value>Warmfront-3</value>
-   <value>Warmfront-4</value>
+   <value>Warmfront</value>
    <value>Tropical</value>
    <value>---</value>
-   <!--<value>Altocumulus sky</value>-->
-   <!--<value>Broken layers</value>-->
-   <!--<value>Cirrus sky</value>-->
-   <!--<value>Fair weather</value>-->
    <value>Glider's sky</value>
    <value>Blue thermals</value>
-   <!--<value>Incoming rainfront</value>-->
-   <!--<value>8/8 stratus sky</value>-->
-   <value>Test tile</value>
-   <!--<value>Summer rain</value>-->
+   <!--<value>Test tile</value>-->
    <binding>
     <command>dialog-apply</command>
    </binding>
   </combo>
 
  <text>
-   <x>10</x>
-   <y>220</y>
-   <label>orientation (deg)</label>
+   <x>5</x>
+   <y>240</y>
+   <label>wind deg</label>
   </text>
 
  <input>
-   <x>115</x>
-   <y>220</y>
+   <x>67</x>
+   <y>240</y>
    <width>40</width>
    <height>25</height>
    <property>/local-weather/tmp/tile-orientation-deg</property>
   </input>
 
  <text>
+   <x>105</x>
+   <y>240</y>
+   <label>kt</label>
+  </text>
+
+<input>
+   <x>125</x>
+   <y>240</y>
+   <width>30</width>
+   <height>25</height>
+   <property>/local-weather/tmp/windspeed-kt</property>
+  </input>
+
+ <text>
    <x>155</x>
-   <y>220</y>
+   <y>240</y>
    <label>alt. offset (ft)</label>
   </text>
 
 <input>
    <x>240</x>
-   <y>220</y>
+   <y>240</y>
    <width>50</width>
    <height>25</height>
    <property>/local-weather/tmp/tile-alt-offset-ft</property>
   </input>
 
 <text>
-   <x>10</x>
+   <x>5</x>
+   <y>210</y>
+   <label>wind model</label>
+  </text>
+
+
+<combo>
+   <x>150</x>
+   <y>210</y>
+   <width>140</width>
+   <height>25</height>
+   <live>true</live>
+   <property>/local-weather/config/wind-model</property>
+   <value>constant</value>
+   <value>constant in tile</value>
+   <value>aloft interpolated</value>
+   <value>aloft waypoints</value>
+   <!--<value>airmass interpolated</value>-->
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+  </combo>
+
+
+<text>
+   <x>5</x>
    <y>180</y>
    <label>tile selection mode</label>
 </text>
@@ -105,10 +135,10 @@
 
 <checkbox>
    <x>10</x>
-   <y>140</y>
+   <y>150</y>
    <width>15</width>
    <height>15</height>
-   <label>Terrain presampling</label>
+   <label>terrain presampling</label>
    <property>/local-weather/tmp/presampling-flag</property>
    <binding>
     <command>dialog-apply</command>
@@ -117,10 +147,10 @@
 
 <checkbox>
    <x>150</x>
-   <y>140</y>
+   <y>150</y>
    <width>15</width>
    <height>15</height>
-   <label>Worker threads</label>
+   <label>worker threads</label>
    <property>/local-weather/tmp/thread-flag</property>
    <binding>
     <command>dialog-apply</command>
@@ -129,7 +159,7 @@
 
 <checkbox>
    <x>10</x>
-   <y>110</y>
+   <y>125</y>
    <width>15</width>
    <height>15</height>
    <label>asymmetric range</label>
@@ -141,11 +171,23 @@
 
 <checkbox>
    <x>150</x>
-   <y>110</y>
+   <y>125</y>
    <width>15</width>
    <height>15</height>
    <label>detailed clouds</label>
    <property>/local-weather/config/detailed-clouds-flag</property>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+</checkbox>
+
+<checkbox>
+   <x>10</x>
+   <y>100</y>
+   <width>15</width>
+   <height>15</height>
+   <label>dynamical weather</label>
+   <property>/local-weather/config/dynamics-flag</property>
    <binding>
     <command>dialog-apply</command>
    </binding>
@@ -190,7 +232,7 @@
    <x>0</x>
    <y>0</y>
    <legend>OK</legend>
-   <default>true</default>
+   <!--<default>true</default>-->
    <equal>true</equal>
    <binding>
     <command>dialog-apply</command>
@@ -206,10 +248,10 @@
 
 
 <button>
-   <x>80</x>
+   <x>45</x>
    <y>0</y>
    <legend>Clear clouds</legend>
-   <default>true</default>
+   <!--<default>true</default>-->
    <equal>true</equal>
    <binding>
      <command>nasal</command>
@@ -218,13 +260,27 @@
   </button>
 
   <button>
-   <x>200</x>
+   <x>135</x>
    <y>0</y>
    <legend>Cancel</legend>
    <equal>true</equal>
    <key>Esc</key>
    <binding>
     <command>dialog-close</command>
+   </binding>
+  </button>
+
+<button>
+   <x>200</x>
+   <y>0</y>
+   <legend>Show winds</legend>
+   <equal>true</equal>
+   <binding>
+    <command>dialog-show</command>
+   <dialog-name>local_weather_winds</dialog-name>
+   </binding>
+   <binding>
+     <command>dialog-apply</command>
    </binding>
   </button>
 

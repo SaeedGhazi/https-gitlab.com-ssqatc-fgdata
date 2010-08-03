@@ -1280,7 +1280,7 @@ var create_detailed_cumulus_cloud = func (lat, lon, alt, size) {
 
 #print(size);
 
-var edge_bias = 0.2;
+var edge_bias = 0.0;
 var size_bias = 0.0;
 
 if (size > 2.0)

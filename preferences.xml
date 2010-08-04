@@ -58,7 +58,19 @@ Started September 2000 by David Megginson, david@megginson.com
    <debug type="bool">false</debug>
    <realism>5</realism>
    <filtering>8</filtering>
-   <multithreading-mode>AutomaticSelection</multithreading-mode>
+   <!-- multithreading-mode>AutomaticSelection</multithreading-mode -->
+   <!--
+     Uncomment the above element to select OSG multi-threading mode.
+     This may improve performance on multi-core, multi-CPU
+     and/or multi-GPU systems. The recommended setting is AutomaticSelection.
+     The alternatives are
+       AutomaticSelection
+       DrawThreadPerContext
+       CullDrawThreadPerContext
+       CullThreadPerCameraDrawThreadPerContext
+ 
+     NOTE: Enabling this option currently breaks the screenshot function.
+   -->
    <static-lod>
     <detailed userarchive="y">1500</detailed>
     <rough userarchive="y">9000</rough>

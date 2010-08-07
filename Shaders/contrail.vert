@@ -90,7 +90,7 @@ void main(void)
     gl_FrontColor += gl_FrontLightModelProduct.sceneColor;
 
     // As we get within 100m of the sprite, it is faded out. Equally at large distances it also fades out.
-    gl_FrontColor.a = min(smoothstep(10.0, 100.0, fogCoord), 1 - smoothstep(30000.0, 40000.0, fogCoord));
+    gl_FrontColor.a = min(smoothstep(10.0, 100.0, fogCoord), 1 - smoothstep(60000.0, 80000.0, fogCoord));
     gl_BackColor = gl_FrontColor;
 
     // Fog doesn't affect clouds as much as other objects.

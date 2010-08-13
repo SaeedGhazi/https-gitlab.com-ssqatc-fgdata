@@ -65,8 +65,8 @@
         <use>vertex-program-two-side</use>
       </vertex-program-two-side>
       <program>
-        <vertex-shader>Shaders/model-default.vert</vertex-shader>
-        <fragment-shader>Shaders/model-default.frag</fragment-shader>
+        <vertex-shader>Shaders/default.vert</vertex-shader>
+        <fragment-shader>Shaders/default.frag</fragment-shader>
       </program>
       <uniform>
         <name>texture</name>
@@ -74,9 +74,9 @@
         <value type="int">0</value>
       </uniform>
       <uniform>
-        <name>twoSideHack</name>
-        <type>bool</type>
-        <value><use>vertex-program-two-side</use></value>
+        <name>colorMode</name>
+        <type>int</type>
+        <value>1</value> <!-- DIFFUSE -->
       </uniform>
     </pass>
   </technique>

@@ -8,11 +8,19 @@
 // Diffuse colors come from the gl_Color, ambient from the material. This is
 // equivalent to osg::Material::DIFFUSE.
 
-varying vec4 diffuse;
-varying vec3 normal, lightDir, halfVector;
-varying float alpha, fogCoord;
+#define MODE_OFF 0
+#define MODE_DIFFUSE 1
+#define MODE_AMBIENT_AND_DIFFUSE 2
 
-uniform bool twoSideHack;
+// The ambient term of the lighting equation that doesn't depend on
+// the surface normal is passed in gl_{Front,Back}Color. The alpha
+// component is set to 1 for front, 0 for back in order to work around
+// bugs with gl_FrontFacing in the fragment shader.
+varying vec4 diffuse_term;
+varying vec3 normal;
+varying float fogCoord;
+
+uniform int colorMode;
 
 void main()
 {
@@ -20,20 +28,28 @@ void main()
     gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
     normal = gl_NormalMatrix * gl_Normal;
-    lightDir = normalize(vec3(gl_LightSource[0].position));
-    halfVector = normalize(gl_LightSource[0].halfVector.xyz);
-    diffuse = gl_Color * gl_LightSource[0].diffuse;
+    vec4 ambient_color, diffuse_color;
+    if (colorMode == MODE_DIFFUSE) {
+        diffuse_color = gl_Color;
+        ambient_color = gl_FrontMaterial.ambient;
+    } else if (colorMode == MODE_AMBIENT_AND_DIFFUSE) {
+        diffuse_color = gl_Color;
+        ambient_color = gl_Color;
+    } else {
+        diffuse_color = gl_FrontMaterial.diffuse;
+        ambient_color = gl_FrontMaterial.ambient;
+    }
+    diffuse_term = diffuse_color * gl_LightSource[0].diffuse;
+    vec4 ambient_term = ambient_color * gl_LightSource[0].ambient;
     // Super hack: if diffuse material alpha is less than 1, assume a
     // transparency animation is at work
     if (gl_FrontMaterial.diffuse.a < 1.0)
-        alpha = gl_FrontMaterial.diffuse.a;
+        diffuse_term.a = gl_FrontMaterial.diffuse.a;
     else
-        alpha = gl_Color.a;
+        diffuse_term.a = gl_Color.a;
     // Another hack for supporting two-sided lighting without using
     // gl_FrontFacing in the fragment shader.
-    if (twoSideHack) {
-        gl_FrontColor = vec4(0.0, 0.0, 0.0, 1.0);
-        gl_BackColor = vec4(0.0, 0.0, 0.0, 0.0);
-    }
+    gl_FrontColor.rgb = ambient_term.rgb;  gl_FrontColor.a = 1.0;
+    gl_BackColor.rgb = ambient_term.rgb; gl_FrontColor.a = 0.0;
     fogCoord = abs(ecPosition.z / ecPosition.w);
 }

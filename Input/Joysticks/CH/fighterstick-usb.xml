@@ -19,10 +19,10 @@
 ************************************************************************
 -->
 <PropertyList>
-  
+
   <name>CH FIGHTERSTICK USB </name>
   <name>CH PRODUCTS CH FIGHTERSTICK USB </name>
-  
+
   <axis n="0">
     <desc>Aileron</desc>
     <binding>
@@ -33,7 +33,7 @@
       <factor type="double">1.0</factor>
     </binding>
   </axis>
-  
+
   <axis n="1">
     <desc>Elevator</desc>
     <binding>
@@ -44,7 +44,7 @@
       <factor type="double">-1.0</factor>
     </binding>
   </axis>
-  
+
   <axis n="2">
     <desc>Throttle</desc>
     <binding>
@@ -52,7 +52,7 @@
       <script>controls.throttleAxis()</script>
     </binding>
   </axis>
-  
+
   <axis>
     <desc>Rudder Trim</desc>
     <number>
@@ -74,7 +74,7 @@
       </binding>
     </high>
   </axis>
-  
+
   <axis>
     <desc>Elevator Trim</desc>
     <number>
@@ -96,7 +96,7 @@
       </binding>
     </high>
   </axis>
-  
+
   <button n="0">
     <name>trigger</name>
     <desc>Trigger</desc>
@@ -135,7 +135,7 @@
       <script>controls.applyParkingBrake(1)</script>
     </binding>
   </button>
-  
+
   <button n="3">
     <desc>Reset view</desc>
     <repeatable>false</repeatable>
@@ -149,10 +149,10 @@
       </script>
     </binding>
   </button>
-  
+
   <button n="4">
     <desc>Flaps Up</desc>
-    <repeatable>false</repeatable>
+    <repeatable>true</repeatable>
     <binding>
       <command>nasal</command>
       <script>controls.flapsDown(-1)</script>
@@ -164,10 +164,10 @@
       </binding>
     </mod-up>
   </button>
-  
+
   <button n="6">
     <desc>Flaps Down</desc>
-    <repeatable>false</repeatable>
+    <repeatable>true</repeatable>
     <binding>
       <command>nasal</command>
       <script>controls.flapsDown(1)</script>
@@ -179,7 +179,7 @@
       </binding>
     </mod-up>
   </button>
-  
+
   <button n="8">
     <desc>View Decrease</desc>
     <repeatable>true</repeatable>
@@ -188,7 +188,7 @@
       <script>view.decrease(0.75)</script>
     </binding>
   </button>
-  
+
   <button n="9">
     <desc>View Cycle Forwards</desc>
     <repeatable>false</repeatable>
@@ -197,7 +197,7 @@
       <script>view.stepView(1)</script>
     </binding>
   </button>
-  
+
   <button n="10">
     <desc>View Increase</desc>
     <repeatable>true</repeatable>
@@ -206,7 +206,7 @@
       <script>view.increase(0.75)</script>
     </binding>
   </button>
-  
+
   <button n="11">
     <desc>View Cycle Backwards</desc>
     <repeatable>false</repeatable>
@@ -215,7 +215,7 @@
       <script>view.stepView(-1)</script>
     </binding>
   </button>
-  
+
   <button n="12">
     <desc>View Up</desc>
     <repeatable>false</repeatable>
@@ -225,7 +225,7 @@
       <step>20.0</step>
     </binding>
   </button>
-  
+
   <button n="13">
     <desc>View Right</desc>
     <repeatable>false</repeatable>
@@ -235,7 +235,7 @@
       <step>-30.0</step>
     </binding>
   </button>
-  
+
   <button n="14">
     <desc>View Down</desc>
     <repeatable>false</repeatable>
@@ -245,7 +245,7 @@
       <step>-20.0</step>
     </binding>
   </button>
-  
+
   <button n="15">
     <desc>View Left</desc>
     <repeatable>false</repeatable>
@@ -255,5 +255,5 @@
       <step>30.0</step>
     </binding>
   </button>
-  
+
 </PropertyList>

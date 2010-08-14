@@ -1,8 +1,9 @@
 // -*-C++-*-
 
-varying vec4 diffuse, constantColor;
-varying vec3 normal, lightDir, halfVector;
-varying float fogCoord, alpha;
+// Ambient term comes in gl_Color.rgb.
+varying vec4 diffuse_term;
+varying vec3 normal;
+varying float fogCoord;
 
 uniform sampler2D texture;
 
@@ -15,24 +16,28 @@ void main()
 {
     vec3 n, halfV;
     float NdotL, NdotHV, fogFactor;
-    vec4 color = constantColor;
+    vec4 color = gl_Color;
+    vec3 lightDir = gl_LightSource[0].position.xyz;
+    vec3 halfVector = gl_LightSource[0].halfVector.xyz;
     vec4 texel;
     vec4 fragColor;
     vec4 specular = vec4(0.0);
     n = normalize(normal);
-    if (!gl_FrontFacing)
-        n = -n;
+    // If gl_Color.a == 0, this is a back-facing polygon and the
+    // normal should be reversed.
+
+    n = (2.0 * gl_Color.a - 1.0) * n;
     NdotL = max(dot(n, lightDir), 0.0);
     if (NdotL > 0.0) {
-        color += diffuse * NdotL;
-        halfV = normalize(halfVector);
+        color += diffuse_term * NdotL;
+        halfV = halfVector;
         NdotHV = max(dot(n, halfV), 0.0);
         if (gl_FrontMaterial.shininess > 0.0)
             specular.rgb = (gl_FrontMaterial.specular.rgb
                             * gl_LightSource[0].specular.rgb
                             * pow(NdotHV, gl_FrontMaterial.shininess));
     }
-    color.a = alpha;
+    color.a = diffuse_term.a;
     // This shouldn't be necessary, but our lighting becomes very
     // saturated. Clamping the color before modulating by the texture
     // is closer to what the OpenGL fixed function pipeline does.

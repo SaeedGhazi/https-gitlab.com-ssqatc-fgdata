@@ -4,11 +4,11 @@
   <inherits-from>Effects/model-default</inherits-from>
   <technique n="10">
     <pass>
-      <program>
-        <vertex-shader n="0">Shaders/mode-off.vert</vertex-shader>
-        <vertex-shader n="1">Shaders/mat-anim.vert</vertex-shader>
-        <fragment-shader n="0">Shaders/mat-anim.frag</fragment-shader>
-      </program>
+      <uniform>
+        <name>colorMode</name>
+        <type>int</type>
+        <value>0</value> <!-- OFF -->
+      </uniform>
     </pass>
   </technique>
 </PropertyList>

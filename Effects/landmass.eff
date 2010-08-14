@@ -51,6 +51,59 @@
         <specular><use>material/specular</use></specular>
         <color-mode>ambient-and-diffuse</color-mode>
       </material>
+      <alpha-test><use>transparent</use></alpha-test>
+      <shade-model>smooth</shade-model>
+      <cull-face>back</cull-face>
+      <render-bin>
+        <bin-number>-1</bin-number>
+        <bin-name>RenderBin</bin-name>
+      </render-bin>
+      <texture-unit>
+        <unit>1</unit>
+        <image><use>texture[0]/image</use></image>
+        <filter><use>texture[0]/filter</use></filter>
+        <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[0]/wrap-t</use></wrap-t>
+        <internal-format>
+          <use>texture[0]/internal-format</use>
+        </internal-format>
+      </texture-unit>
+      <program>
+        <vertex-shader>Shaders/landmass-g.vert</vertex-shader>
+        <geometry-shader>Shaders/landmass.geom</geometry-shader>
+        <fragment-shader>Shaders/terrain-nocolor.frag</fragment-shader>
+        <geometry-vertices-out type="int">18</geometry-vertices-out>
+        <geometry-input-type>triangles</geometry-input-type>
+        <geometry-output-type>triangle-strip</geometry-output-type>
+        <attribute>
+          <name>tangent</name>
+          <index>6</index>
+        </attribute>
+        <attribute>
+          <name>binormal</name>
+          <index>7</index>
+        </attribute>
+      </program>
+      <uniform>
+        <name>texture</name>
+        <type>sampler-2d</type>
+        <value type="int">1</value>
+      </uniform>
+      <uniform>
+        <name>canopy_height</name>
+        <type>float</type>
+        <value><use>canopy-height</use></value>
+      </uniform>
+      <color-mask type="vec4d">0 0 0 0</color-mask>
+    </pass>
+    <pass>
+      <lighting>true</lighting>
+      <material>
+        <ambient><use>material/ambient</use></ambient>
+        <diffuse><use>material/diffuse</use></diffuse>
+        <specular><use>material/specular</use></specular>
+        <color-mode>ambient-and-diffuse</color-mode>
+      </material>
       <blend><use>transparent</use></blend>
       <alpha-test><use>transparent</use></alpha-test>
       <shade-model>smooth</shade-model>
@@ -134,6 +187,10 @@
         <type>float</type>
         <value><use>quality-level</use></value>
       </uniform>
+      <depth>
+        <function>lequal</function>
+        <write-mask type="bool">false</write-mask>
+      </depth>
     </pass>
   </technique>
   <technique n="9">

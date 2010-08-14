@@ -13,7 +13,7 @@ vec4 specularColor();
 vec4 emissionColor();
 
 varying vec4 diffuse, constantColor, matSpecular;
-varying vec3 normal, lightDir, halfVector;
+varying vec3 normal;
 varying float alpha, fogCoord;
 
 void main()
@@ -23,8 +23,6 @@ void main()
     gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
     normal = gl_NormalMatrix * gl_Normal;
-    lightDir = normalize(vec3(gl_LightSource[0].position));
-    halfVector = normalize(gl_LightSource[0].halfVector.xyz);
     diffuse = diffuseColor() * gl_LightSource[0].diffuse;
     // Super hack: if diffuse material alpha is less than 1, assume a
     // transparency animation is at work

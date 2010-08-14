@@ -5,7 +5,6 @@ varying vec3 normal, lightDir, halfVector;
 varying float fogCoord, alpha;
 
 uniform sampler2D texture;
-uniform sampler3D noise;
 
 float luminance(vec3 color)
 {
@@ -16,7 +15,10 @@ void main()
 {
     vec3 n, halfV;
     float NdotL, NdotHV, fogFactor;
-    vec4 color = constantColor;
+    vec4 color = gl_FrontMaterial.emission
+        + gl_Color * (gl_LightModel.ambient + gl_LightSource[0].ambient);
+    vec3 lightDir = gl_LightSource[0].position.xyz;
+    vec3 halfVector = gl_LightSource[0].halfVector.xyz;
     vec4 texel;
     vec4 fragColor;
     vec4 specular = vec4(0.0);

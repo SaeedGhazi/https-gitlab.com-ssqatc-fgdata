@@ -30,6 +30,7 @@ $Id$
  <name>Logitech Extreme 3D Pro</name>
  <name>Logitech Extreme 3D Pro USB</name>
  <name>Logitech  Extreme  3D  Pro USB</name>
+ <name>Logitech Extreme 3D</name>
 
  <axis n="0">
   <desc>Aileron</desc>
@@ -55,6 +56,7 @@ $Id$
   <number>
    <unix>2</unix>
    <windows>3</windows>
+   <mac>2</mac>
   </number>
   <binding>
    <command>property-scale</command>
@@ -68,6 +70,7 @@ $Id$
   <number>
    <unix>3</unix>
    <windows>2</windows>
+   <mac>3</mac>
   </number>
   <binding>
    <command>nasal</command>
@@ -80,6 +83,7 @@ $Id$
   <number>
    <unix>4</unix>
    <windows>6</windows>
+   <mac>4</mac>
   </number>
   <low>
    <repeatable>true</repeatable>
@@ -104,6 +108,7 @@ $Id$
   <number>
    <unix>5</unix>
    <windows>7</windows>
+   <mac>5</mac>
   </number>
   <low>
    <repeatable>true</repeatable>

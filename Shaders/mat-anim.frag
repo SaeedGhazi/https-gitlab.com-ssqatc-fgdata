@@ -2,7 +2,7 @@
 
 // Shader for use with material animations
 varying vec4 diffuse, constantColor, matSpecular;
-varying vec3 normal, lightDir, halfVector;
+varying vec3 normal;
 varying float fogCoord, alpha;
 
 uniform sampler2D texture;
@@ -12,6 +12,8 @@ void main()
     vec3 n, halfV;
     float NdotL, NdotHV, fogFactor;
     vec4 color = constantColor;
+    vec3 lightDir = gl_LightSource[0].position.xyz;
+    vec3 halfVector = gl_LightSource[0].halfVector.xyz;
     vec4 texel;
     vec4 fragColor;
     vec4 specular = vec4(0.0);

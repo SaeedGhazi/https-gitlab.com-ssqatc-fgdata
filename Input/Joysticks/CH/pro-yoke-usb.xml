@@ -57,7 +57,7 @@
   <desc>Propeller</desc>
   <number>
     <unix>4</unix>
-    <mac>3</mac>
+    <mac>4</mac>
     <windows>3</windows>
   </number>
   <binding>
@@ -125,17 +125,11 @@
  </axis>
 
  <button n="0">
-  <desc>Fire Starter on Selected Engine(s)</desc>
+  <desc>Reset View</desc>
   <binding>
    <command>nasal</command>
-   <script>controls.startEngine()</script>
+   <script>view.resetView()</script>
   </binding>
-  <mod-up>
-   <binding>
-    <command>nasal</command>
-    <script>props.setAll("/controls/engines/engine", "starter", 0)</script>
-   </binding>
-  </mod-up> 
  </button>
 
  <button n="1">
@@ -148,22 +142,22 @@
  </button>
 
  <button n="2">
-  <desc>Rudder Trim Right</desc>
-  <repeatable>true</repeatable>
-  <binding>
-   <command>property-adjust</command>
-   <property>/controls/flight/rudder-trim</property>
-   <step>0.001</step>
-  </binding>
- </button>
-
- <button n="3">
   <desc>Rudder Trim Left</desc>
   <repeatable>true</repeatable>
   <binding>
    <command>property-adjust</command>
    <property>/controls/flight/rudder-trim</property>
    <step>-0.001</step>
+  </binding>
+ </button>
+
+ <button n="3">
+  <desc>Rudder Trim Right</desc>
+  <repeatable>true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>/controls/flight/rudder-trim</property>
+   <step>0.001</step>
   </binding>
  </button>
 

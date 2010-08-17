@@ -67,6 +67,44 @@
         <shininess><use>material/shininess</use></shininess>
         <color-mode>ambient-and-diffuse</color-mode>
       </material>
+      <alpha-test><use>transparent</use></alpha-test>
+      <shade-model>smooth</shade-model>
+      <cull-face>back</cull-face>
+      <render-bin>
+        <bin-number>-1</bin-number>
+        <bin-name>RenderBin</bin-name>
+      </render-bin>
+      <texture-unit>
+        <unit>0</unit>
+          <image><use>texture[0]/image</use></image>
+          <filter><use>texture[0]/filter</use></filter>
+          <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
+          <wrap-t><use>texture[0]/wrap-t</use></wrap-t>
+          <internal-format>
+            <use>texture[0]/internal-format</use>
+          </internal-format>
+      </texture-unit>
+      <program>
+        <vertex-shader>Shaders/default.vert</vertex-shader>
+        <fragment-shader>Shaders/terrain-nocolor.frag</fragment-shader>
+      </program>
+      <uniform>
+        <name>texture</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <color-mask type="vec4d">0 0 0 0</color-mask>
+    </pass>
+    <pass>
+      <lighting>true</lighting>
+      <material>
+        <ambient><use>material/ambient</use></ambient>
+        <diffuse><use>material/diffuse</use></diffuse>
+        <specular><use>material/specular</use></specular>
+        <emissive><use>material/emissive</use></emissive>
+        <shininess><use>material/shininess</use></shininess>
+        <color-mode>ambient-and-diffuse</color-mode>
+      </material>
       <blend><use>transparent</use></blend>
       <alpha-test><use>transparent</use></alpha-test>
       <shade-model>smooth</shade-model>
@@ -87,12 +125,22 @@
       </texture-unit>
       <program>
         <vertex-shader>Shaders/default.vert</vertex-shader>
-        <fragment-shader>Shaders/terrain-default.frag</fragment-shader>
+        <fragment-shader>Shaders/default.frag</fragment-shader>
       </program>
       <uniform>
-      <name>texture</name>
-      <type>sampler-2d</type>
-      <value type="int">0</value></uniform>
+        <name>texture</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>colorMode</name>
+        <type>int</type>
+        <value>2</value> <!-- AMBIENT_AND_DIFFUSE -->
+      </uniform>
+      <depth>
+        <function>lequal</function>
+        <write-mask type="bool">false</write-mask>
+      </depth>
     </pass>
   </technique>
   <technique n="11">

@@ -14,6 +14,7 @@ uniform float snowlevel; // From /sim/rendering/snow-level-m
 
 const float scale = 1.0;
 
+
 void main (void)
 {
 
@@ -47,7 +48,7 @@ void main (void)
 	vec4 c1;
 	c1 = basecolor * vec4(smoothstep(-1.3, 0.5, n), smoothstep(-1.3, 0.5, n), smoothstep(-2.0, 0.9, n), 0.0);
 	
-	vec4 c2;	
+	vec4 c2;
 	c2 = basecolor2 * vec4(smoothstep(-1.3, 0.5, n), smoothstep(-1.3, 0.5, n), smoothstep(-2.0, 0.9, n), 0.0);
 	
 	//draw floor where !steep, and another blurb for smoothing transitions
@@ -56,8 +57,17 @@ void main (void)
 	c4 = mix(vec4(n-0.88, n-0.74, -n, 0.0), c1, smoothstep(0.990, 0.890, abs(normalize(Normal).z)+nvL[2]*0.9));
 	c5 = mix(c3, c4, 1.0);
 	
-	//mix floor with texture right way
+	//brings vegetation 'floor', added vegetationlevel
+
+	float vegetationlevel = (rawpos.z)+nvL[2]*3000.0;
+	
+	if (vegetationlevel < 2200) {
 	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.4));
+	}
+	
+	else {
+	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.1));
+	}
 	
 	//snow
 	c1 = mix(c1, clamp(n+nvL[2]*4.1+vec4(0.1, 0.1, nvL[2]*2.2, 1.0), 0.7, 1.0), smoothstep(snowlevel+300.0, snowlevel+360.0, (rawpos.z)+nvL[1]*3000.0));

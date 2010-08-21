@@ -10,11 +10,12 @@ uniform sampler2D SampleTex;
 uniform sampler1D ColorsTex;
 uniform sampler2D SampleTex2;
 
+uniform float snowlevel; // From /sim/rendering/snow-level-m
+
 const float scale = 1.0;
 
 void main (void)
 {
-	const float snowlevel=2000.0;
 
 	vec4 basecolor = texture2D(SampleTex, rawpos.xy*0.000144);
 	vec4 basecolor2 = texture2D(SampleTex2, rawpos.xy*0.000144);
@@ -55,9 +56,11 @@ void main (void)
 	c4 = mix(vec4(n-0.88, n-0.74, -n, 0.0), c1, smoothstep(0.990, 0.890, abs(normalize(Normal).z)+nvL[2]*0.9));
 	c5 = mix(c3, c4, 1.0);
 	
-	
 	//mix floor with texture right way
 	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.4));
+	
+	//snow
+	c1 = mix(c1, clamp(n+nvL[2]*4.1+vec4(0.1, 0.1, nvL[2]*2.2, 1.0), 0.7, 1.0), smoothstep(snowlevel+300.0, snowlevel+360.0, (rawpos.z)+nvL[1]*3000.0));
 
     vec3 diffuse = gl_Color.rgb * max(0.4, dot(VNormal, gl_LightSource[0].position.xyz));
     vec4 ambient_light = gl_LightSource[0].diffuse * vec4(diffuse, 1.0);

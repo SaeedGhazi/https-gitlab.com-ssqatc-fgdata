@@ -23,6 +23,7 @@
         <wrap-t>repeat</wrap-t>
         <internal-format>normalized</internal-format>
     </texture>
+    <snow-level><use>/sim/rendering/snow-level-m</use></snow-level>
   </parameters>
   <technique n="9">
     <predicate>
@@ -120,6 +121,11 @@
         <name>ColorsTex</name>
         <type>sampler-1d</type>
         <value type="int">3</value>
+      </uniform>
+      <uniform>
+        <name>snowlevel</name>
+        <type>float</type>
+        <value><use>snow-level</use></value>
       </uniform>
     </pass>
   </technique>

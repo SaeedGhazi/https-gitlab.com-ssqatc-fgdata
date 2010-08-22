@@ -2383,6 +2383,7 @@ Shared parameters for various materials.
  <material>
   <name>Glacier</name>
   <name>PolarIce</name>
+  <effect>Effects/glacier</effect>
   <texture>Terrain/glacier1.png</texture>
   <texture>Terrain/glacier2.png</texture>
   <texture>Terrain/glacier3.png</texture>

@@ -26,6 +26,8 @@ void main (void)
 	vec4 noisevec   = texture3D(NoiseTex, (rawpos.xyz)*0.01*scale);
 
 	vec4 nvL   = texture3D(NoiseTex, (rawpos.xyz)*0.00066*scale);
+	
+	float vegetationlevel = (rawpos.z)+nvL[2]*3000.0;
 
 	float fogFactor;
 	float fogCoord = ecPosition.z;
@@ -57,20 +59,27 @@ void main (void)
 	c4 = mix(vec4(n-0.88, n-0.74, -n, 0.0), c1, smoothstep(0.990, 0.890, abs(normalize(Normal).z)+nvL[2]*0.9));
 	c5 = mix(c3, c4, 1.0);
 	
-	//brings vegetation 'floor', added vegetationlevel
-
-	float vegetationlevel = (rawpos.z)+nvL[2]*3000.0;
+	//brings vegetation 'floor' only at vegetationlevel
 	
 	if (vegetationlevel < 2200) {
 	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.4));
 	}
 	
+	//draw (almost) bare peaks
 	else {
 	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.1));
 	}
 	
-	//snow
-	c1 = mix(c1, clamp(n+nvL[2]*4.1+vec4(0.1, 0.1, nvL[2]*2.2, 1.0), 0.7, 1.0), smoothstep(snowlevel+300.0, snowlevel+360.0, (rawpos.z)+nvL[1]*3000.0));
+	//adding snow and permanent snow/glacier
+	if (vegetationlevel > snowlevel || vegetationlevel > 3300) {
+	c3 = mix(vec4(n+0.94, n+0.94, n+1.0, 0.7), c1, smoothstep(0.990, 0.965, abs(normalize(Normal).z)+nvL[2]*1.3));
+	c4 = mix(vec4(n+0.94, n+0.94, n+1.0, 0.7), c1, smoothstep(0.990, 0.965, abs(normalize(Normal).z)+nvL[2]*1.2));
+	c5 = mix(c3, c4, 1.0);
+	c1 = mix(c1, c5, clamp(0.65, -n, 0.6));
+	}
+	
+	//snow (just white color at the moment)
+	//c1 = mix(c1, clamp(n+nvL[2]*4.1+vec4(0.1, 0.1, nvL[2]*2.2, 1.0), 0.7, 1.0), smoothstep(snowlevel+300.0, snowlevel+360.0, (rawpos.z)+nvL[1]*3000.0));
 
     vec3 diffuse = gl_Color.rgb * max(0.4, dot(VNormal, gl_LightSource[0].position.xyz));
     vec4 ambient_light = gl_LightSource[0].diffuse * vec4(diffuse, 1.0);

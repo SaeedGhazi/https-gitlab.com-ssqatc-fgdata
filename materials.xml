@@ -708,7 +708,7 @@ Shared parameters for various materials.
   </condition>
   <name>EvergreenBroadCover</name>
   <name>EvergreenForest</name>
-  <effect>Effects/landmass</effect>
+  <effect>Effects/forest</effect>
   <texture>Terrain/forest1a.png</texture>
   <texture>Terrain/forest1b.png</texture>
   <texture>Terrain/forest1c.png</texture>
@@ -732,7 +732,7 @@ Shared parameters for various materials.
     <value>summer</value>
    </equals>
   </condition>
-  <effect>Effects/landmass</effect>
+  <effect>Effects/forest</effect>
   <name>DeciduousBroadCover</name>
   <name>DeciduousForest</name>
   <name>Bog</name>
@@ -759,7 +759,7 @@ Shared parameters for various materials.
     <value>summer</value>
    </equals>
   </condition>
-  <effect>Effects/landmass</effect>
+  <effect>Effects/forest</effect>
   <name>MixedForestCover</name>
   <name>MixedForest</name>
   <name>RainForest</name>
@@ -786,7 +786,7 @@ Shared parameters for various materials.
     <value>summer</value>
    </equals>
   </condition>
-  <effect>Effects/landmass</effect>
+  <effect>Effects/forest</effect>
   <name>EvergreenNeedleCover</name>
   <name>WoodedTundraCover</name>
   <texture>Terrain/evergreen.png</texture>
@@ -810,7 +810,7 @@ Shared parameters for various materials.
     <value>summer</value>
    </equals>
   </condition>
-  <effect>Effects/landmass</effect>
+  <effect>Effects/forest</effect>
   <name>DeciduousNeedleCover</name>
   <texture>Terrain/dec_evergreen.png</texture>
   <xsize>1000</xsize>

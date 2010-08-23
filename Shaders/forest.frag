@@ -59,26 +59,39 @@ void main (void)
 	c4 = mix(vec4(n-0.88, n-0.74, -n, 0.0), c1, smoothstep(0.990, 0.890, abs(normalize(Normal).z)+nvL[2]*0.9));
 	c5 = mix(c3, c4, 1.0);
 	
-	//brings vegetation 'floor' only at vegetationlevel
 	
-	if (vegetationlevel < 2200) {
+	if (vegetationlevel <= 2200) {
 	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.4));
 	}
 	
-	//draw (almost) bare peaks
-	else {
+	if (vegetationlevel > 2200 && vegetationlevel < 2300) {
+	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.2));
+	}
+	
+	if (vegetationlevel >= 2300 || vegetationlevel < 2530) {
+	c1 = mix(c1, c5, clamp(0.65, n*0.5, 0.4));
+	}
+	
+	if (vegetationlevel >= 2530 && vegetationlevel < 2670) {
 	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.1));
 	}
 	
+	if (vegetationlevel >= 2670) {
+	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.1));
+	}
+	
+	
 	//adding snow and permanent snow/glacier
-	if (vegetationlevel > snowlevel || vegetationlevel > 3300) {
+	if (vegetationlevel > snowlevel || vegetationlevel > 3100) {
 	c3 = mix(vec4(n+0.94, n+0.94, n+1.0, 0.7), c1, smoothstep(0.990, 0.965, abs(normalize(Normal).z)+nvL[2]*1.3));
 	c4 = mix(vec4(n+0.94, n+0.94, n+1.0, 0.7), c1, smoothstep(0.990, 0.965, abs(normalize(Normal).z)+nvL[2]*1.2));
 	c5 = mix(c3, c4, 1.0);
 	c1 = mix(c1, c5, clamp(0.65, -n, 0.6));
 	}
 	
-	//snow (just white color at the moment)
+	
+	
+	//old snow
 	//c1 = mix(c1, clamp(n+nvL[2]*4.1+vec4(0.1, 0.1, nvL[2]*2.2, 1.0), 0.7, 1.0), smoothstep(snowlevel+300.0, snowlevel+360.0, (rawpos.z)+nvL[1]*3000.0));
 
     vec3 diffuse = gl_Color.rgb * max(0.4, dot(VNormal, gl_LightSource[0].position.xyz));

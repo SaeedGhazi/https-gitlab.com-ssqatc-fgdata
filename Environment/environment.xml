@@ -1,3 +1,4 @@
+<?xml version="1.0" ?> 
 <!--
  This file is part of FlightGear, the free flight simulator
  http://www.flightgear.org/
@@ -14,7 +15,6 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  General Public License for more details.
 -->
-<?xml version="1.0" ?> 
  <PropertyList>
   <weather-scenarios>
     <scenario>

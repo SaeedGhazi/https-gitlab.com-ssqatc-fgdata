@@ -23,8 +23,22 @@
         <wrap-t>repeat</wrap-t>
         <internal-format>normalized</internal-format>
     </texture>
+    <texture n="5">
+      <image>Textures.high/Terrain/forest-relief.png</image>
+      <filter>linear-mipmap-linear</filter>
+      <wrap-s>repeat</wrap-s>
+      <wrap-t>repeat</wrap-t>
+      <internal-format>normalized</internal-format>
+    </texture>
     <snow-level><use>/sim/rendering/snow-level-m</use></snow-level>
+    <depth-factor type="float">0.01</depth-factor>
+    <canopy-height type="float">15.0</canopy-height>
+    <quality-level><use>/sim/rendering/quality-level</use></quality-level>
   </parameters>
+  <generate>
+    <tangent type="int">6</tangent>
+    <binormal type="int">7</binormal>
+  </generate>
   <technique n="9">
     <predicate>
       <and>
@@ -97,10 +111,27 @@
             <use>texture[4]/internal-format</use>
           </internal-format>
       </texture-unit>
-      
+      <texture-unit>
+        <unit>5</unit>
+        <image><use>texture[5]/image</use></image>
+        <filter><use>texture[5]/filter</use></filter>
+        <wrap-s><use>texture[5]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[5]/wrap-t</use></wrap-t>
+        <internal-format>
+          <use>texture[5]/internal-format</use>
+        </internal-format>
+      </texture-unit>
       <program>
         <vertex-shader>Shaders/forest.vert</vertex-shader>
         <fragment-shader>Shaders/forest.frag</fragment-shader>
+        <attribute>
+          <name>tangent</name>
+          <index>6</index>
+        </attribute>
+        <attribute>
+          <name>binormal</name>
+          <index>7</index>
+        </attribute>
       </program>
       <uniform>
         <name>NoiseTex</name>
@@ -123,9 +154,24 @@
         <value type="int">3</value>
       </uniform>
       <uniform>
+        <name>NormalTex</name>
+        <type>sampler-2d</type>
+        <value type="int">5</value>
+      </uniform>
+      <uniform>
+        <name>depth_factor</name>
+        <type>float</type>
+        <value><use>depth-factor</use></value>
+      </uniform>
+      <uniform>
         <name>snowlevel</name>
         <type>float</type>
         <value><use>snow-level</use></value>
+      </uniform>
+      <uniform>
+        <name>quality_level</name>
+        <type>float</type>
+        <value><use>quality-level</use></value>
       </uniform>
     </pass>
   </technique>

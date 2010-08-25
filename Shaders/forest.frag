@@ -132,22 +132,22 @@ void main (void)
 	
 	
 	if (vegetationlevel <= 2200) {
-	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.4));
+	c1 = mix(c2, c5, clamp(0.65, n*0.1, 0.5));
 	diffuse = gl_Color.rgb * max(0.7, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
 	
 	if (vegetationlevel > 2200 && vegetationlevel < 2300) {
-	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.4));
+	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.35));
 	diffuse = gl_Color.rgb * max(0.7, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
 	
 	if (vegetationlevel >= 2300 && vegetationlevel < 2530) {
-	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.4));
+	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.20));
 	diffuse = gl_Color.rgb * max(0.85, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
 	
 	if (vegetationlevel >= 2530 && vegetationlevel < 2670) {
-	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.4));
+	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.05));
 	diffuse = gl_Color.rgb * max(0.85, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
 	

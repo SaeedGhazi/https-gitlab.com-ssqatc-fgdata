@@ -102,7 +102,7 @@ void main (void)
 	fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
 	float biasFactor = exp2(-0.00000002 * fogCoord * fogCoord * LOG2);
 
-	float n=0.12;
+	float n=0.02;
 	n += nvL[0]*0.4;
 	n += nvL[1]*0.6;
 	n += nvL[2]*2.0;
@@ -123,7 +123,6 @@ void main (void)
 	N = normalize(N.x * VTangent + N.y * VBinormal + N.z * VNormal);
 	vec3 l = gl_LightSource[0].position.xyz;
 	vec3 diffuse;
-	//vec3 diffuse = gl_Color.rgb * max(0.6, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	
 	//draw floor where !steep, and another blurb for smoothing transitions
 	vec4 c3, c4, c5;
@@ -134,27 +133,27 @@ void main (void)
 	
 	if (vegetationlevel <= 2200) {
 	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.4));
-	diffuse = gl_Color.rgb * max(0.3, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
+	diffuse = gl_Color.rgb * max(0.7, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
 	
 	if (vegetationlevel > 2200 && vegetationlevel < 2300) {
-	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.2));
-	diffuse = gl_Color.rgb * max(0.6, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
+	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.4));
+	diffuse = gl_Color.rgb * max(0.7, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
 	
 	if (vegetationlevel >= 2300 && vegetationlevel < 2530) {
 	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.4));
-	diffuse = gl_Color.rgb * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
+	diffuse = gl_Color.rgb * max(0.85, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
 	
 	if (vegetationlevel >= 2530 && vegetationlevel < 2670) {
-	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.1));
-	diffuse = gl_Color.rgb * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
+	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.4));
+	diffuse = gl_Color.rgb * max(0.85, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
 	
 	if (vegetationlevel >= 2670) {
-	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.1));
-	diffuse = gl_Color.rgb * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
+	c1 = mix(c2, c5, clamp(0.0, n*0.1, 0.4));
+	diffuse = gl_Color.rgb * max(0.85, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
 	
 	
@@ -163,8 +162,8 @@ void main (void)
 	c3 = mix(vec4(n+1.0, n+1.0, n+1.0, 0.0), c1, smoothstep(0.990, 0.965, abs(normalize(Normal).z)+nvL[2]*1.3));
 	c4 = mix(vec4(n+1.0, n+1.0, n+1.0, 0.0), c1, smoothstep(0.990, 0.965, abs(normalize(Normal).z)+nvL[2]*0.9));
 	c5 = mix(c3, c4, 1.0);
-	c1 = mix(c1, c5, clamp(0.65, -n, 0.6));
-	diffuse = gl_Color.rgb * max(0.3, dot(VNormal, gl_LightSource[0].position.xyz));
+	c1 = mix(c1, c5, clamp(0.65, n*0.5, 0.6));
+	diffuse = gl_Color.rgb * max(0.8, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
 	
 	//should come as varying!

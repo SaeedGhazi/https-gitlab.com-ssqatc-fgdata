@@ -85,7 +85,7 @@ void main (void)
 	}
 
 
-	vec4 basecolor = texture2D(SampleTex, rawpos.xy*0.000144);
+	vec4 basecolor = texture2D(SampleTex, rawpos.xy*0.000344);
 	vec4 basecolor2 = texture2D(SampleTex2, rawpos.xy*0.000144);
 	
 	basecolor = texture1D(ColorsTex, basecolor.r+0.0);
@@ -120,6 +120,11 @@ void main (void)
 	vec4 c2;
 	c2 = basecolor2 * vec4(smoothstep(-1.3, 0.5, n), smoothstep(-1.3, 0.5, n), smoothstep(-2.0, 0.9, n), 0.0);
 	
+	N = normalize(N.x * VTangent + N.y * VBinormal + N.z * VNormal);
+	vec3 l = gl_LightSource[0].position.xyz;
+	vec3 diffuse;
+	//vec3 diffuse = gl_Color.rgb * max(0.6, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
+	
 	//draw floor where !steep, and another blurb for smoothing transitions
 	vec4 c3, c4, c5;
 	c3 = mix(vec4(n-0.88, n-0.14, -n, 0.0), c1, smoothstep(0.990, 0.970, abs(normalize(Normal).z)+nvL[2]*1.3));
@@ -129,59 +134,43 @@ void main (void)
 	
 	if (vegetationlevel <= 2200) {
 	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.4));
+	diffuse = gl_Color.rgb * max(0.3, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
 	
 	if (vegetationlevel > 2200 && vegetationlevel < 2300) {
 	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.2));
+	diffuse = gl_Color.rgb * max(0.6, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
 	
-	if (vegetationlevel >= 2300 || vegetationlevel < 2530) {
-	c1 = mix(c1, c5, clamp(0.65, n*0.5, 0.4));
+	if (vegetationlevel >= 2300 && vegetationlevel < 2530) {
+	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.4));
+	diffuse = gl_Color.rgb * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
 	
 	if (vegetationlevel >= 2530 && vegetationlevel < 2670) {
 	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.1));
+	diffuse = gl_Color.rgb * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
 	
 	if (vegetationlevel >= 2670) {
 	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.1));
+	diffuse = gl_Color.rgb * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
 	
 	
 	//adding snow and permanent snow/glacier
 	if (vegetationlevel > snowlevel || vegetationlevel > 3100) {
-	c3 = mix(vec4(n+0.94, n+0.94, n+1.0, 0.7), c1, smoothstep(0.990, 0.965, abs(normalize(Normal).z)+nvL[2]*1.3));
-	c4 = mix(vec4(n+0.94, n+0.94, n+1.0, 0.7), c1, smoothstep(0.990, 0.965, abs(normalize(Normal).z)+nvL[2]*1.2));
+	c3 = mix(vec4(n+1.0, n+1.0, n+1.0, 0.0), c1, smoothstep(0.990, 0.965, abs(normalize(Normal).z)+nvL[2]*1.3));
+	c4 = mix(vec4(n+1.0, n+1.0, n+1.0, 0.0), c1, smoothstep(0.990, 0.965, abs(normalize(Normal).z)+nvL[2]*0.9));
 	c5 = mix(c3, c4, 1.0);
 	c1 = mix(c1, c5, clamp(0.65, -n, 0.6));
+	diffuse = gl_Color.rgb * max(0.3, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
 	
-	N = normalize(N.x * VTangent + N.y * VBinormal + N.z * VNormal);
-	vec3 l = gl_LightSource[0].position.xyz;
-	vec3 diffuse = gl_Color.rgb * max(0.0, dot(N, l));
-	float shadow_factor = 1.0;
-	
-	vec4 constantColor = vec4(1.0, 1.0, 1.0, 1.0);
-	
-	// Shadow
-	if ( quality_level >= 3.0 ) {
-		dp += ds * d;
-		vec3 sl = normalize( vec3( dot( l, VTangent ), dot( l, VBinormal ), dot( -l, VNormal ) ) );
-		ds = sl.xy * depth_factor / sl.z;
-		dp -= ds * d;
-		float dl = ray_intersect(NormalTex, dp, ds);
-		if ( dl < d - 0.05 )
-			shadow_factor = dot( constantColor.xyz, vec3( 1.0, 1.0, 1.0 ) ) * 0.25;
-	}
-	// end shadow
-	
-	
-	
-	//old snow
-	//c1 = mix(c1, clamp(n+nvL[2]*4.1+vec4(0.1, 0.1, nvL[2]*2.2, 1.0), 0.7, 1.0), smoothstep(snowlevel+300.0, snowlevel+360.0, (rawpos.z)+nvL[1]*3000.0));
+	//should come as varying!
+	vec4 constantColor = vec4(1.0, 1.0, 1.0, 0.0);
 
-    //diffuse = gl_Color.rgb * max(0.4, dot(VNormal, gl_LightSource[0].position.xyz));
-    vec4 ambient_light = gl_LightSource[0].diffuse * shadow_factor * vec4(diffuse, 1.0);
+    vec4 ambient_light = gl_LightSource[0].diffuse * constantColor * vec4(diffuse, 1.0);
 
 	c1 *= ambient_light;
 	vec4 finalColor = c1;

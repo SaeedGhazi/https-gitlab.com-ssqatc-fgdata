@@ -125,29 +125,36 @@ void main (void)
 	vec3 diffuse;
 	
 	//draw floor where !steep, and another blurb for smoothing transitions
-	vec4 c3, c4, c5;
+	vec4 c3, c4, c5, c3a, c4a, c5a;
 	c3 = mix(vec4(n-0.88, n-0.14, -n, 0.0), c1, smoothstep(0.990, 0.970, abs(normalize(Normal).z)+nvL[2]*1.3));
 	c4 = mix(vec4(n-0.88, n-0.74, -n, 0.0), c1, smoothstep(0.990, 0.890, abs(normalize(Normal).z)+nvL[2]*0.9));
+	c4a = mix(vec4(n-0.76, n-0.66, -n, 0.3), c1, smoothstep(0.990, 0.970, abs(normalize(Normal).z)+nvL[2]*1.32));
 	c5 = mix(c3, c4, 1.0);
+	c5a = mix(c3, c4a, 1.0);
 	
 	
 	if (vegetationlevel <= 2200) {
-	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.4));
+	c1 = mix(c2, c5, clamp(0.65, n*0.1, 0.5));
 	diffuse = gl_Color.rgb * max(0.7, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
 	
 	if (vegetationlevel > 2200 && vegetationlevel < 2300) {
-	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.4));
+	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.35));
 	diffuse = gl_Color.rgb * max(0.7, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
 	
-	if (vegetationlevel >= 2300 && vegetationlevel < 2530) {
-	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.4));
+	if (vegetationlevel >= 2300 && vegetationlevel < 2480) {
+	c1 = mix(c2, c5a, clamp(0.65, n*0.5, 0.30));
+	diffuse = gl_Color.rgb * max(0.85, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
+	}
+	
+	if (vegetationlevel >= 2480 && vegetationlevel < 2530) {
+	c1 = mix(c2, c5a, clamp(0.65, n*0.5, 0.20));
 	diffuse = gl_Color.rgb * max(0.85, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
 	
 	if (vegetationlevel >= 2530 && vegetationlevel < 2670) {
-	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.4));
+	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.10));
 	diffuse = gl_Color.rgb * max(0.85, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
 	

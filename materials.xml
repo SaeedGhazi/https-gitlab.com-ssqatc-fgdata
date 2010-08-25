@@ -1200,7 +1200,7 @@ Shared parameters for various materials.
    </equals>
   </condition>
   <name>HerbTundraCover</name>
-  <effect>Effects/landmass-nowood</effect>
+  <effect>Effects/herbtundra</effect>
   <texture>Terrain/herbtundra.png</texture>
   <texture>Terrain/herbtundra2.png</texture>
   <texture>Terrain/herbtundra3.png</texture>
@@ -2383,6 +2383,7 @@ Shared parameters for various materials.
  <material>
   <name>Glacier</name>
   <name>PolarIce</name>
+  <effect>Effects/glacier</effect>
   <texture>Terrain/glacier1.png</texture>
   <texture>Terrain/glacier2.png</texture>
   <texture>Terrain/glacier3.png</texture>

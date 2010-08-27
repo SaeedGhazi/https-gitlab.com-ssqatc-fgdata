@@ -34,6 +34,13 @@
     <depth-factor type="float">0.04</depth-factor>
     <canopy-height type="float">15.0</canopy-height>
     <quality-level><use>/sim/rendering/quality-level</use></quality-level>
+    
+    <!-- sets the season color -->
+    <season-red type="float">0.12</season-red>
+    <season-green type="float">0.86</season-green>
+    <season-blue type="float">0.0</season-blue>
+    <!-- end season color -->
+    
   </parameters>
   <generate>
     <tangent type="int">6</tangent>
@@ -172,6 +179,26 @@
         <name>quality_level</name>
         <type>float</type>
         <value><use>quality-level</use></value>
+      </uniform>
+      <uniform>
+      	<name>red</name>
+      	<type>float</type>
+      	<value><use>season-red</use></value>
+      </uniform>
+      <uniform>
+      	<name>green</name>
+      	<type>float</type>
+      	<value><use>season-green</use></value>
+      </uniform>
+      <uniform>
+      	<name>blue</name>
+      	<type>float</type>
+		<value><use>season-blue</use></value>
+      </uniform>
+      <uniform>
+      	<name>alpha</name>
+      	<type>float</type>
+      	<value>0.0</value>
       </uniform>
     </pass>
   </technique>

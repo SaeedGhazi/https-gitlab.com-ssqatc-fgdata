@@ -187,5 +187,5 @@ void main (void)
 	if(gl_Fog.density == 1.0)
 		fogFactor=1.0;
 
-	gl_FragColor = mix(gl_Fog.color ,finalColor, fogFactor);
+	gl_FragColor = mix(gl_Fog.color,finalColor, fogFactor);
 }

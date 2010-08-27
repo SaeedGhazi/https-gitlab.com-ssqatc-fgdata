@@ -129,9 +129,9 @@ void main (void)
 	//draw floor where !steep, and another blurb for smoothing transitions
 	vec4 c3, c4, c5, c3a, c4a, c5a;
 	float subred = 1.0 - red; float subgreen = 1.0 - green; float subblue = 1.0 - blue;
-	c3 = mix(vec4(n-subred, n-subgreen, -n, alpha), c1, smoothstep(0.990, 0.970, abs(normalize(Normal).z)+nvL[2]*1.3));
-	c4 = mix(vec4(n-subred, n-subgreen-0.6, -n, alpha), c1, smoothstep(0.990, 0.890, abs(normalize(Normal).z)+nvL[2]*0.9));
-	c4a = mix(vec4(n-subred+0.12, n-subgreen-0.52, -n, 0.0), c1, smoothstep(0.990, 0.970, abs(normalize(Normal).z)+nvL[2]*1.32));
+	c3 = mix(vec4(n-subred, n-subgreen, -n-subblue, 0.0), c1, smoothstep(0.990, 0.970, abs(normalize(Normal).z)+nvL[2]*1.3));
+	c4 = mix(vec4(n-subred, n-subgreen-0.6, -n-subblue, 0.0), c1, smoothstep(0.990, 0.890, abs(normalize(Normal).z)+nvL[2]*0.9));
+	c4a = mix(vec4(n-subred+0.12, n-subgreen-0.52, -n-subblue, 0.3), c1, smoothstep(0.990, 0.970, abs(normalize(Normal).z)+nvL[2]*1.32));
 	c5 = mix(c3, c4, 1.0);
 	c5a = mix(c3, c4a, 1.0);
 	
@@ -175,9 +175,6 @@ void main (void)
 	c1 = mix(c1, c5, clamp(0.65, n*0.5, 0.6));
 	diffuse = gl_Color.rgb * max(0.8, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
-	
-
-	//vec4 constantColor = vec4(1.0, 1.0, 1.0, 0.0);
 
     vec4 ambient_light = gl_LightSource[0].diffuse * vec4(diffuse, 0.0);
 

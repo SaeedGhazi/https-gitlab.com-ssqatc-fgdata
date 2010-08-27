@@ -38,7 +38,7 @@
     <!-- sets the season color -->
     <season-red type="float">0.12</season-red>
     <season-green type="float">0.86</season-green>
-    <season-blue type="float">0.0</season-blue>
+    <season-blue type="float">0.22</season-blue>
     <!-- end season color -->
     
   </parameters>

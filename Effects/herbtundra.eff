@@ -11,7 +11,7 @@
         <internal-format>normalized</internal-format>
     </texture>
     <texture n="3">
-        <image>Textures/Terrain/herbtundra-colors.png</image>
+        <image>Textures/Terrain/forest-colors.png</image>
         <filter>linear-mipmap-linear</filter>
         <wrap-s>mirror</wrap-s>
         <internal-format>normalized</internal-format>
@@ -33,6 +33,13 @@
     <snow-level><use>/sim/rendering/snow-level-m</use></snow-level>
     <depth-factor type="float">0.01</depth-factor>
     <canopy-height type="float">15.0</canopy-height>
+    
+    <!-- sets the season color -->
+    <season-red type="float">0.12</season-red>
+    <season-green type="float">0.86</season-green>
+    <season-blue type="float">0.22</season-blue>
+    <!-- end season color -->
+    
     <quality-level><use>/sim/rendering/quality-level</use></quality-level>
   </parameters>
   <generate>
@@ -172,6 +179,26 @@
         <name>quality_level</name>
         <type>float</type>
         <value><use>quality-level</use></value>
+      </uniform>
+      <uniform>
+      	<name>red</name>
+      	<type>float</type>
+      	<value><use>season-red</use></value>
+      </uniform>
+      <uniform>
+      	<name>green</name>
+      	<type>float</type>
+      	<value><use>season-green</use></value>
+      </uniform>
+      <uniform>
+      	<name>blue</name>
+      	<type>float</type>
+		<value><use>season-blue</use></value>
+      </uniform>
+      <uniform>
+      	<name>alpha</name>
+      	<type>float</type>
+      	<value>0.0</value>
       </uniform>
     </pass>
   </technique>

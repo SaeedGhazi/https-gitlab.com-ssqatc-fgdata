@@ -1,0 +1,375 @@
+<?xml version="1.0" ?>
+<!--
+ This file is part of FlightGear, the free flight simulator
+ http://www.flightgear.org/
+
+ Copyright (C) 2009 Torsten Dreyer, Torsten (at) t3r _dot_ de
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License as
+ published by the Free Software Foundation; either version 2 of the
+ License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful, but
+ WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ General Public License for more details.
+-->
+<!--
+  Interpolate the METAR weather values over time and write
+  the environment values in /environment/config/*
+  All filters are enabled if /environment/metar/valid=true
+  -->
+<PropertyList> 
+  <filter>
+    <!-- 
+      transfer the METAR QNH to the interpolation controller
+      limit the rate of change to approx 0.01hpa/sec
+    -->
+    <name>MetarController:pressure-sea-level-inhg</name>
+    <type>noise-spike</type>
+    <max-rate-of-change>0.0003</max-rate-of-change>
+    <enable>
+      <condition>
+        <property>/environment/metar/valid</property>
+      </condition>
+    </enable>
+    <input>/environment/metar/pressure-sea-level-inhg</input>
+    <output>/environment/config/boundary/entry/pressure-sea-level-inhg</output>
+    <output>/environment/config/aloft/entry/pressure-sea-level-inhg</output>
+  </filter>
+
+  <filter>
+    <!-- 
+      transfer the sea-level temperature to each layer of
+      interpolation controller. We have no idea here about
+      the temperature gradient, so just assume ISA.
+    -->
+    <name>MetarController:temperature-sea-level-degc</name>
+    <type>noise-spike</type>
+    <max-rate-of-change>0.01667</max-rate-of-change>
+    <enable>
+      <condition>
+        <property>/environment/metar/valid</property>
+      </condition>
+    </enable>
+    <input>/environment/metar/temperature-sea-level-degc</input>
+    <output>/environment/config/boundary/entry[0]/temperature-sea-level-degc</output>
+    <output>/environment/config/boundary/entry[1]/temperature-sea-level-degc</output>
+    <output>/environment/config/aloft/entry[0]/temperature-sea-level-degc</output>
+    <output>/environment/config/aloft/entry[1]/temperature-sea-level-degc</output>
+    <output>/environment/config/aloft/entry[2]/temperature-sea-level-degc</output>
+    <output>/environment/config/aloft/entry[3]/temperature-sea-level-degc</output>
+    <output>/environment/config/aloft/entry[4]/temperature-sea-level-degc</output>
+  </filter>
+
+  <filter>
+    <!--
+      transfer the sea-level temperature to each layer of
+      interpolation controller. 
+    -->
+    <name>MetarController:dewpoint-sea-level-degc</name>
+    <type>noise-spike</type>
+    <max-rate-of-change>0.01667</max-rate-of-change>
+    <enable>
+      <condition>
+        <property>/environment/metar/valid</property>
+      </condition>
+    </enable>
+    <input>/environment/metar/dewpoint-sea-level-degc</input>
+    <output>/environment/config/boundary/entry[0]/dewpoint-sea-level-degc</output>
+    <output>/environment/config/boundary/entry[1]/dewpoint-sea-level-degc</output>
+    <output>/environment/config/aloft/entry[0]/dewpoint-sea-level-degc</output>
+    <output>/environment/config/aloft/entry[1]/dewpoint-sea-level-degc</output>
+    <output>/environment/config/aloft/entry[2]/dewpoint-sea-level-degc</output>
+    <output>/environment/config/aloft/entry[3]/dewpoint-sea-level-degc</output>
+    <output>/environment/config/aloft/entry[4]/dewpoint-sea-level-degc</output>
+  </filter>
+
+  <filter>
+    <!--
+      transfer the sea-level temperature to each layer of
+      interpolation controller. We are not very creative here and 
+      use the same visibility for all layers but top three which
+      are left untouched.
+    -->
+    <name>MetarController:visibility-m</name>
+    <type>exponential</type>
+    <filter-time>30</filter-time>
+    <enable>
+      <condition>
+        <property>/environment/metar/valid</property>
+      </condition>
+    </enable>
+    <input>/environment/metar/min-visibility-m</input>
+    <output>/environment/config/boundary/entry[0]/visibility-m</output>
+    <output>/environment/config/boundary/entry[1]/visibility-m</output>
+    <output>/environment/config/aloft/entry[0]/visibility-m</output>
+    <output>/environment/config/aloft/entry[1]/visibility-m</output>
+  </filter>
+
+  <!-- split the wind vector into it's components -->
+
+  <filter>
+    <name>MetarController:wind-from-north-kt</name>
+    <type>exponential</type>
+    <filter-time>30</filter-time>
+    <enable>
+      <condition>
+        <property>/environment/metar/valid</property>
+      </condition>
+    </enable>
+    <input>
+      <expression>
+        <cos>
+          <product>
+            <property>/environment/metar/base-wind-dir-deg</property>
+            <value>0.0174533</value>
+          </product>
+        </cos>
+      </expression>
+      <scale>/environment/metar/base-wind-speed-kt</scale>
+    </input>
+    <output>/environment/metar/base-wind-from-north-kt</output>
+  </filter>
+
+  <filter>
+    <name>MetarController:wind-from-east-kt</name>
+    <type>exponential</type>
+    <filter-time>30</filter-time>
+    <enable>
+      <condition>
+        <property>/environment/metar/valid</property>
+      </condition>
+    </enable>
+    <input>
+      <expression>
+        <sin>
+          <product>
+            <property>/environment/metar/base-wind-dir-deg</property>
+            <value>0.0174533</value>
+          </product>
+        </sin>
+      </expression>
+      <scale>/environment/metar/base-wind-speed-kt</scale>
+    </input>
+    <output>/environment/metar/base-wind-from-east-kt</output>
+  </filter>
+
+  <filter>
+    <name>MetarController::wind-speed-kt</name>
+    <enable>
+      <condition>
+        <property>/environment/metar/valid</property>
+      </condition>
+    </enable>
+    <input>
+      <expression>
+        <!-- pythagoras in markup language -->
+        <sqrt>
+          <sum>
+            <product>
+              <property>/environment/metar/base-wind-from-east-kt</property>
+              <property>/environment/metar/base-wind-from-east-kt</property>
+            </product>
+            <product>
+              <property>/environment/metar/base-wind-from-north-kt</property>
+              <property>/environment/metar/base-wind-from-north-kt</property>
+            </product>
+          </sum>
+        </sqrt>
+      </expression>
+    </input>
+    <output>/environment/config/boundary/entry[0]/wind-speed-kt</output>
+    <type>gain</type>
+    <gain>1.0</gain>
+  </filter>
+
+  <filter>
+    <name>MetarController:wind-from-heading-deg</name>
+    <enable>
+      <condition>
+        <property>/environment/metar/valid</property>
+      </condition>
+    </enable>
+    <input>
+      <expression>
+        <atan2>
+          <property>/environment/metar/base-wind-from-east-kt</property>
+          <property>/environment/metar/base-wind-from-north-kt</property>
+        </atan2>
+      </expression>
+    </input>
+    <output>/environment/config/boundary/entry[0]/wind-from-heading-deg</output>
+    <type>gain</type>
+    <gain>57.3</gain> <!-- radians to degree -->
+    <period>
+      <min>0</min>
+      <max>360</max>
+    </period>
+  </filter>
+
+  <!-- Adjust the wind-vector for the layers -->
+  <!-- TODO: handle variable winds -->
+  <filter include="layer-heading-offset.xml"/>
+  <filter include="layer-heading-offset.xml">
+    <input>
+      <offset>/environment/config/aloft/entry[0]/wind-heading-change-deg</offset>
+    </input>
+    <output>/environment/config/aloft/entry[0]/wind-from-heading-deg</output>
+  </filter>
+  <filter include="layer-heading-offset.xml">
+    <input>
+      <offset>/environment/config/aloft/entry[1]/wind-heading-change-deg</offset>
+    </input>
+    <output>/environment/config/aloft/entry[1]/wind-from-heading-deg</output>
+  </filter>
+  <filter include="layer-heading-offset.xml">
+    <input>
+      <offset>/environment/config/aloft/entry[2]/wind-heading-change-deg</offset>
+    </input>
+    <output>/environment/config/aloft/entry[2]/wind-from-heading-deg</output>
+  </filter>
+  <filter include="layer-heading-offset.xml">
+    <input>
+      <offset>/environment/config/aloft/entry[3]/wind-heading-change-deg</offset>
+    </input>
+    <output>/environment/config/aloft/entry[3]/wind-from-heading-deg</output>
+  </filter>
+  <filter include="layer-heading-offset.xml">
+    <input>
+      <offset>/environment/config/aloft/entry[4]/wind-heading-change-deg</offset>
+    </input>
+    <output>/environment/config/aloft/entry[4]/wind-from-heading-deg</output>
+  </filter>
+
+  <filter include="layer-speed-change.xml"/>
+  <filter include="layer-speed-change.xml">
+    <input>
+      <offset>/environment/config/aloft/entry[0]/wind-speed-change-rel</offset>
+    </input>
+    <output>/environment/config/aloft/entry[0]/wind-speed-kt</output>
+  </filter>
+  <filter include="layer-speed-change.xml">
+    <input>
+      <offset>/environment/config/aloft/entry[1]/wind-speed-change-rel</offset>
+    </input>
+    <output>/environment/config/aloft/entry[1]/wind-speed-kt</output>
+  </filter>
+  <filter include="layer-speed-change.xml">
+    <input>
+      <offset>/environment/config/aloft/entry[2]/wind-speed-change-rel</offset>
+    </input>
+    <output>/environment/config/aloft/entry[2]/wind-speed-kt</output>
+  </filter>
+  <filter include="layer-speed-change.xml">
+    <input>
+      <offset>/environment/config/aloft/entry[3]/wind-speed-change-rel</offset>
+    </input>
+    <output>/environment/config/aloft/entry[3]/wind-speed-kt</output>
+  </filter>
+  <filter include="layer-speed-change.xml">
+    <input>
+      <offset>/environment/config/aloft/entry[4]/wind-speed-change-rel</offset>
+    </input>
+    <output>/environment/config/aloft/entry[4]/wind-speed-kt</output>
+  </filter>
+
+  <!-- Clouds -->
+  <!-- don't interpolate to/from altitude -9999 -->
+  <filter include="clouds-altitude-set.xml"/>
+  <filter include="clouds-altitude-set.xml">
+    <params>
+      <from>/environment/metar/clouds/layer[1]/elevation-ft</from>
+      <to>/environment/clouds/layer[1]/elevation-ft</to>
+    </params>
+  </filter>
+  <filter include="clouds-altitude-set.xml">
+    <params>
+      <from>/environment/metar/clouds/layer[2]/elevation-ft</from>
+      <to>/environment/clouds/layer[2]/elevation-ft</to>
+    </params>
+  </filter>
+  <filter include="clouds-altitude-set.xml">
+    <params>
+      <from>/environment/metar/clouds/layer[3]/elevation-ft</from>
+      <to>/environment/clouds/layer[3]/elevation-ft</to>
+    </params>
+  </filter>
+  <filter include="clouds-altitude-set.xml">
+    <params>
+      <from>/environment/metar/clouds/layer[4]/elevation-ft</from>
+      <to>/environment/clouds/layer[4]/elevation-ft</to>
+    </params>
+  </filter>
+
+  <filter include="clouds-altitude-interpolate.xml"/>
+  <filter include="clouds-altitude-interpolate.xml">
+    <params>
+      <from>/environment/metar/clouds/layer[1]/elevation-ft</from>
+      <to>/environment/clouds/layer[1]/elevation-ft</to>
+    </params>
+  </filter>
+  <filter include="clouds-altitude-interpolate.xml">
+    <params>
+      <from>/environment/metar/clouds/layer[2]/elevation-ft</from>
+      <to>/environment/clouds/layer[2]/elevation-ft</to>
+    </params>
+  </filter>
+  <filter include="clouds-altitude-interpolate.xml">
+    <params>
+      <from>/environment/metar/clouds/layer[3]/elevation-ft</from>
+      <to>/environment/clouds/layer[3]/elevation-ft</to>
+    </params>
+  </filter>
+  <filter include="clouds-altitude-interpolate.xml">
+    <params>
+      <from>/environment/metar/clouds/layer[4]/elevation-ft</from>
+      <to>/environment/clouds/layer[4]/elevation-ft</to>
+    </params>
+  </filter>
+
+  <filter include="clouds-thickness.xml"/>
+  <filter include="clouds-thickness.xml">
+    <input>/environment/metar/clouds/layer[1]/thickness-ft</input>
+    <output>/environment/clouds/layer[1]/thickness-ft</output>
+  </filter>
+  <filter include="clouds-thickness.xml">
+    <input>/environment/metar/clouds/layer[2]/thickness-ft</input>
+    <output>/environment/clouds/layer[2]/thickness-ft</output>
+  </filter>
+  <filter include="clouds-thickness.xml">
+    <input>/environment/metar/clouds/layer[3]/thickness-ft</input>
+    <output>/environment/clouds/layer[3]/thickness-ft</output>
+  </filter>
+  <filter include="clouds-thickness.xml">
+    <input>/environment/metar/clouds/layer[4]/thickness-ft</input>
+    <output>/environment/clouds/layer[4]/thickness-ft</output>
+  </filter>
+
+  <filter include="clouds-coverage.xml"/>
+  <filter include="clouds-coverage.xml">
+    <params>
+      <from>/environment/metar/clouds/layer[1]/coverage-type</from>
+      <to>environment/clouds/layer[1]/coverage-type</to>
+    </params>
+  </filter>
+  <filter include="clouds-coverage.xml">
+    <params>
+      <from>/environment/metar/clouds/layer[2]/coverage-type</from>
+      <to>environment/clouds/layer[2]/coverage-type</to>
+    </params>
+  </filter>
+  <filter include="clouds-coverage.xml">
+    <params>
+      <from>/environment/metar/clouds/layer[3]/coverage-type</from>
+      <to>environment/clouds/layer[3]/coverage-type</to>
+    </params>
+  </filter>
+  <filter include="clouds-coverage.xml">
+    <params>
+      <from>/environment/metar/clouds/layer[4]/coverage-type</from>
+      <to>environment/clouds/layer[4]/coverage-type</to>
+    </params>
+  </filter>
+</PropertyList> 

@@ -235,11 +235,26 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
             var pattern = f[2];
             foreach (var p; subvec(f, 3))
                 pattern ~= " " ~ p;
-            if (substr(pattern, 0, 9) == "$FG_ROOT/")
-                pattern = root ~ "/" ~ substr(pattern, 9);
-            elsif (substr(pattern, 0, 9) == "$FG_HOME/")
-                pattern = home ~ "/" ~ substr(pattern, 9);
-            append(f[0] == "READ" ? read_rules : write_rules, [pattern, f[1] == "ALLOW"]);
+            var rules = f[0] == "READ" ? read_rules : write_rules;
+            var allow = (f[1] == "ALLOW");
+            
+            if (substr(pattern, 0, 13) == "$FG_AIRCRAFT/") {
+                var p = substr(pattern, 13);
+                var sim = props.globals.getNode("/sim");
+                foreach (var c; sim.getChildren("fg-aircraft")) {
+                    pattern = c.getValue() ~ "/" ~ p;
+                    append(rules, [pattern, allow]);
+                    printlog("info", "IORules: appending ", pattern);
+                }        
+            } else {
+                if (substr(pattern, 0, 9) == "$FG_ROOT/")
+                    pattern = root ~ "/" ~ substr(pattern, 9);
+                elsif (substr(pattern, 0, 9) == "$FG_HOME/")
+                    pattern = home ~ "/" ~ substr(pattern, 9);
+                
+                append(rules, [pattern, allow]);
+                printlog("info", "IORules: appending ", pattern);
+            }
         }
         close(file);
         return path;

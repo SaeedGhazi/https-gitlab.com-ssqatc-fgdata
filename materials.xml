@@ -708,7 +708,7 @@ Shared parameters for various materials.
   </condition>
   <name>EvergreenBroadCover</name>
   <name>EvergreenForest</name>
-  <effect>Effects/landmass</effect>
+  <effect>Effects/forest</effect>
   <texture>Terrain/forest1a.png</texture>
   <texture>Terrain/forest1b.png</texture>
   <texture>Terrain/forest1c.png</texture>
@@ -720,7 +720,7 @@ Shared parameters for various materials.
   <tree-varieties>8</tree-varieties>
   <tree-range-m alias="/params/forest/tree-range-m"/>
   <tree-height-m>25.0</tree-height-m>
-  <tree-width-m>15.0</tree-width-m>
+  <tree-width-m>18.0</tree-width-m>
   <rolling-friction>1</rolling-friction>
   <bumpiness>1</bumpiness>
  </material>
@@ -732,7 +732,7 @@ Shared parameters for various materials.
     <value>summer</value>
    </equals>
   </condition>
-  <effect>Effects/landmass</effect>
+  <effect>Effects/forest</effect>
   <name>DeciduousBroadCover</name>
   <name>DeciduousForest</name>
   <name>Bog</name>
@@ -759,7 +759,7 @@ Shared parameters for various materials.
     <value>summer</value>
    </equals>
   </condition>
-  <effect>Effects/landmass</effect>
+  <effect>Effects/forest</effect>
   <name>MixedForestCover</name>
   <name>MixedForest</name>
   <name>RainForest</name>
@@ -786,7 +786,7 @@ Shared parameters for various materials.
     <value>summer</value>
    </equals>
   </condition>
-  <effect>Effects/landmass</effect>
+  <effect>Effects/forest</effect>
   <name>EvergreenNeedleCover</name>
   <name>WoodedTundraCover</name>
   <texture>Terrain/evergreen.png</texture>
@@ -810,7 +810,7 @@ Shared parameters for various materials.
     <value>summer</value>
    </equals>
   </condition>
-  <effect>Effects/landmass</effect>
+  <effect>Effects/forest</effect>
   <name>DeciduousNeedleCover</name>
   <texture>Terrain/dec_evergreen.png</texture>
   <xsize>1000</xsize>
@@ -1200,7 +1200,7 @@ Shared parameters for various materials.
    </equals>
   </condition>
   <name>HerbTundraCover</name>
-  <effect>Effects/landmass-nowood</effect>
+  <effect>Effects/herbtundra</effect>
   <texture>Terrain/herbtundra.png</texture>
   <texture>Terrain/herbtundra2.png</texture>
   <texture>Terrain/herbtundra3.png</texture>
@@ -1474,7 +1474,7 @@ Shared parameters for various materials.
     <value>summer</value>
    </equals>
   </condition>
-  <effect>Effects/crop</effect>
+  <effect>Effects/cropgrass</effect>
   <name>CropGrassCover</name>
   <name>CropGrass</name>
   <texture>Terrain/cropgrass1.png</texture>
@@ -2383,6 +2383,7 @@ Shared parameters for various materials.
  <material>
   <name>Glacier</name>
   <name>PolarIce</name>
+  <effect>Effects/glacier</effect>
   <texture>Terrain/glacier1.png</texture>
   <texture>Terrain/glacier2.png</texture>
   <texture>Terrain/glacier3.png</texture>

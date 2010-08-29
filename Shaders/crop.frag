@@ -4,25 +4,20 @@ varying vec4  rawpos;
 varying vec4  ecPosition;
 varying vec3  VNormal;
 varying vec3  Normal;
-varying vec4 constantColor;
 
 uniform sampler3D NoiseTex;
 uniform sampler2D SampleTex;
 uniform sampler1D ColorsTex;
 
-const float scale = 1.0;
+uniform float snowlevel; // From /sim/rendering/snow-level-m
 
-const vec4 red = vec4(1.0, 0.0, 0.0, 1.0);
-const vec4 green = vec4(0.0, 1.0, 0.0, 1.0);
-const vec4 blue = vec4(0.0, 0.0, 1.0, 1.0);
-const vec4 yellow = vec4(1.0, 1.0, 0.0, 1.0);
+const float scale = 1.0;
 
 #define BLA 1
 #define BLA2 0
 
 void main (void)
 {
-	const float snowlevel=2000.0;
 
 	vec4 basecolor = texture2D(SampleTex, rawpos.xy*0.000144);
 	basecolor = texture1D(ColorsTex, basecolor.r+0.00);
@@ -54,13 +49,15 @@ void main (void)
 	// good
 	vec4 c1;
 	c1 = basecolor * vec4(smoothstep(0.0, 1.15, n), smoothstep(0.0, 1.2, n), smoothstep(0.1, 1.3, n), 1.0);
+	
 	//"steep = gray"
 	c1 = mix(vec4(n-0.42, n-0.44, n-0.51, 1.0), c1, smoothstep(0.970, 0.990, abs(normalize(Normal).z)+nvL[2]*1.3));
+	
 	//"snow"
 	c1 = mix(c1, clamp(n+nvL[2]*4.1+vec4(0.1, 0.1, nvL[2]*2.2, 1.0), 0.7, 1.0), smoothstep(snowlevel+300.0, snowlevel+360.0, (rawpos.z)+nvL[1]*3000.0));
 
     vec3 diffuse = gl_Color.rgb * max(0.0, dot(VNormal, gl_LightSource[0].position.xyz));
-    vec4 ambient_light = constantColor + gl_LightSource[0].diffuse * vec4(diffuse, 1.0);
+    vec4 ambient_light = gl_LightSource[0].diffuse * vec4(diffuse, 1.0);
 
 	c1 *= ambient_light;
 	vec4 finalColor = c1;

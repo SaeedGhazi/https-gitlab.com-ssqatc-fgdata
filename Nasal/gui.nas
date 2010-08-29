@@ -287,7 +287,7 @@ var Dialog = {
             me.close();
 
         me.prop.removeChildren();
-        io.read_properties(getprop("/sim/fg-root") ~ "/" ~ me.path, me.prop);
+        io.read_properties(me.path, me.prop);
 
         var n = me.prop.getNode("name");
         if (n == nil)
@@ -372,8 +372,10 @@ var OverlaySelector = {
 
         var m = Dialog.new(data.getNode("dialog", 1), "gui/dialogs/overlay-select.xml", name);
         m.parents = [OverlaySelector, Dialog];
-
-        m.dir = string.normpath(getprop("/sim/fg-root") ~ '/' ~ dir) ~ '/';
+        
+        # resolve the path in FG_ROOT, and --fg-aircraft dir, etc
+        m.dir = resolvepath(dir) ~ "/";
+        
         var relpath = func(p) substr(p, p[0] == `/`);
         m.nameprop = relpath(nameprop);
         m.sortprop = relpath(sortprop or nameprop);

@@ -606,7 +606,7 @@ var overlay_update = {
 		return m;
 	},
 	add: func(path, prop, callback = nil) {
-		var path = string.normpath(getprop("/sim/fg-root") ~ '/' ~ path) ~ '/';
+		var path = path ~ '/';
 		me.data[path] = [me.root.initNode(prop, ""), "",
 				typeof(callback) == "func" ? callback : func nil];
 		return me;

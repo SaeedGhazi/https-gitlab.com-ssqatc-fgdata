@@ -49,7 +49,7 @@
   <technique n="9">
     <predicate>
       <and>
-        <property>/sim/rendering/crop-shader</property>
+        <property>/sim/rendering/transition-shader</property>
         <property>/sim/rendering/shader-effects</property>
         <or>
           <less-equal>

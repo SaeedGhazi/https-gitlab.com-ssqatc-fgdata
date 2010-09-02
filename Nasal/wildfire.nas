@@ -127,6 +127,7 @@ var MP_share_pp           = "environment/wildfire/share-events";
 var save_on_exit_pp       = "environment/wildfire/save-on-exit";
 var restore_on_startup_pp = "environment/wildfire/restore-on-startup";
 var crash_fire_pp         = "environment/wildfire/fire-on-crash";
+var impact_fire_pp        = "environment/wildfire/fire-on-impact";
 var report_score_pp       = "environment/wildfire/report-score";
 # Internal properties to control the models
 var models_enabled_pp     = "environment/wildfire/models/enabled";
@@ -820,6 +821,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
   });
   props.globals.initNode(MP_share_pp, 1, "BOOL");
   props.globals.initNode(crash_fire_pp, 1, "BOOL");
+  props.globals.initNode(impact_fire_pp, 1, "BOOL");
   props.globals.initNode(save_on_exit_pp, 0, "BOOL");
   props.globals.initNode(restore_on_startup_pp, 0, "BOOL");
   props.globals.initNode(models_enabled_pp, 1, "BOOL");
@@ -853,6 +855,22 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
   setlistener("sim/crashed", func(n) {
     if (getprop(crash_fire_pp) and n.getBoolValue())
       wildfire.ignite(geo.aircraft_position());
+  });
+
+# Detect impact
+  var impact_node = props.globals.getNode("sim/ai/aircraft/impact/bomb", 1);
+  setlistener("sim/ai/aircraft/impact/bomb", func(n) {
+
+      if (getprop(impact_fire_pp) and n.getBoolValue()){
+          var node = props.globals.getNode(n.getValue(), 1);
+          var impactpos = geo.Coord.new();
+          impactpos.set_latlon(
+              node.getNode("impact/latitude-deg").getValue(),
+              node.getNode("impact/longitude-deg").getValue()
+              );
+          wildfire.ignite(impactpos);
+      }
+
   });
 
   printlog("info", "Wildfire ... initialized.");
@@ -917,6 +935,7 @@ var dialog = {
                          ["Share over MP", MP_share_pp],
                          ["Show 3d models", models_enabled_pp],
                          ["Crash starts fire", crash_fire_pp],
+                         ["Impact starts fire", impact_fire_pp],
                          ["Report score", report_score_pp],
                          ["Save on exit", save_on_exit_pp]]) {
             var w = content.addChild("checkbox");

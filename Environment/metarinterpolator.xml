@@ -111,7 +111,7 @@
   <!-- split the wind vector into it's components -->
 
   <filter>
-    <name>MetarController:wind-from-north-kt</name>
+    <name>MetarController:wind-from-north-fps</name>
     <type>exponential</type>
     <filter-time>30</filter-time>
     <enable>
@@ -119,22 +119,12 @@
         <property>/environment/metar/valid</property>
       </condition>
     </enable>
-    <input>
-      <expression>
-        <cos>
-          <product>
-            <property>/environment/metar/base-wind-dir-deg</property>
-            <value>0.0174533</value>
-          </product>
-        </cos>
-      </expression>
-      <scale>/environment/metar/base-wind-speed-kt</scale>
-    </input>
-    <output>/environment/metar/base-wind-from-north-kt</output>
+    <input>/environment/metar/base-wind-from-north-fps</input>
+    <output>/environment/config/boundary/entry[0]/wind-from-north-fps</output>
   </filter>
 
   <filter>
-    <name>MetarController:wind-from-east-kt</name>
+    <name>MetarController:wind-from-east-fps</name>
     <type>exponential</type>
     <filter-time>30</filter-time>
     <enable>
@@ -142,71 +132,8 @@
         <property>/environment/metar/valid</property>
       </condition>
     </enable>
-    <input>
-      <expression>
-        <sin>
-          <product>
-            <property>/environment/metar/base-wind-dir-deg</property>
-            <value>0.0174533</value>
-          </product>
-        </sin>
-      </expression>
-      <scale>/environment/metar/base-wind-speed-kt</scale>
-    </input>
-    <output>/environment/metar/base-wind-from-east-kt</output>
-  </filter>
-
-  <filter>
-    <name>MetarController::wind-speed-kt</name>
-    <enable>
-      <condition>
-        <property>/environment/metar/valid</property>
-      </condition>
-    </enable>
-    <input>
-      <expression>
-        <!-- pythagoras in markup language -->
-        <sqrt>
-          <sum>
-            <product>
-              <property>/environment/metar/base-wind-from-east-kt</property>
-              <property>/environment/metar/base-wind-from-east-kt</property>
-            </product>
-            <product>
-              <property>/environment/metar/base-wind-from-north-kt</property>
-              <property>/environment/metar/base-wind-from-north-kt</property>
-            </product>
-          </sum>
-        </sqrt>
-      </expression>
-    </input>
-    <output>/environment/config/boundary/entry[0]/wind-speed-kt</output>
-    <type>gain</type>
-    <gain>1.0</gain>
-  </filter>
-
-  <filter>
-    <name>MetarController:wind-from-heading-deg</name>
-    <enable>
-      <condition>
-        <property>/environment/metar/valid</property>
-      </condition>
-    </enable>
-    <input>
-      <expression>
-        <atan2>
-          <property>/environment/metar/base-wind-from-east-kt</property>
-          <property>/environment/metar/base-wind-from-north-kt</property>
-        </atan2>
-      </expression>
-    </input>
-    <output>/environment/config/boundary/entry[0]/wind-from-heading-deg</output>
-    <type>gain</type>
-    <gain>57.3</gain> <!-- radians to degree -->
-    <period>
-      <min>0</min>
-      <max>360</max>
-    </period>
+    <input>/environment/metar/base-wind-from-east-fps</input>
+    <output>/environment/config/boundary/entry[0]/wind-from-east-fps</output>
   </filter>
 
   <!-- Adjust the wind-vector for the layers -->

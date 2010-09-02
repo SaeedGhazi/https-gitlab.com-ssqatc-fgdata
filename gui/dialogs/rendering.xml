@@ -270,6 +270,15 @@
             <command>dialog-apply</command>
           </binding>
         </checkbox>
+        
+        <checkbox>
+          <halign>left</halign>
+          <label>Transition effects</label>
+          <property>/sim/rendering/transition-shader</property>
+          <binding>
+            <command>dialog-apply</command>
+          </binding>
+        </checkbox>
 
         <checkbox>
           <halign>left</halign>

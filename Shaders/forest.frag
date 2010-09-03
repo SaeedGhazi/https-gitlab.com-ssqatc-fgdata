@@ -7,6 +7,7 @@ varying vec3 VBinormal;
 varying vec3 VNormal;
 varying vec3 Normal;
 varying float bump;
+varying float fogCoord;
 
 uniform sampler3D NoiseTex;
 uniform sampler2D SampleTex;
@@ -98,13 +99,11 @@ void main (void)
 	
 	float vegetationlevel = (rawpos.z)+nvL[2]*3000.0;
 
-	float fogFactor;
-	float fogCoord = ecPosition.z;
 	const float LOG2 = 1.442695;
-	fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
+	float fogFactor = exp(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord);
 	float biasFactor = exp2(-0.00000002 * fogCoord * fogCoord * LOG2);
 
-	float n=0.06;
+	float n = 0.06;
 	n += nvL[0]*0.4;
 	n += nvL[1]*0.6;
 	n += nvL[2]*2.0;
@@ -114,7 +113,9 @@ void main (void)
 
 	n += noisevec[2]*0.8;
 	n += noisevec[3]*2.1;
-	n = mix(0.6, n, biasFactor);
+	
+	//very low n/biasFactor mix, to keep forest color
+	n = mix(0.05, n, biasFactor);
 	
 	vec4 c1;
 	c1 = basecolor * vec4(smoothstep(-1.3, 0.5, n), smoothstep(-1.3, 0.5, n), smoothstep(-2.0, 0.9, n), 0.0);

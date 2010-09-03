@@ -6,6 +6,7 @@ varying vec3  VBinormal;
 varying vec3  Normal;
 varying vec4  constantColor;
 varying float bump;
+varying float fogCoord;
 
 attribute vec3 tangent;
 attribute vec3 binormal;
@@ -25,4 +26,7 @@ void main(void)
 		+ gl_FrontColor * (gl_LightModel.ambient + gl_LightSource[0].ambient);  
 	gl_Position = ftransform();
 	gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
+	
+    fogCoord = abs(ecPosition.z / ecPosition.w);
+	
 }

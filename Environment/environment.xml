@@ -113,7 +113,7 @@
    <aloft>
 
     <entry>
-     <elevation-ft>3000</elevation-ft>
+     <elevation-ft>5000</elevation-ft>
      <wind-from-heading-deg>300</wind-from-heading-deg>
      <wind-speed-kt>10</wind-speed-kt>
      <visibility-m>16093.44</visibility-m>
@@ -128,7 +128,7 @@
     </entry>
 
     <entry>
-     <elevation-ft>6000</elevation-ft>
+     <elevation-ft>10000</elevation-ft>
      <wind-from-heading-deg>310</wind-from-heading-deg>
      <wind-speed-kt>20</wind-speed-kt>
      <turbulence>
@@ -141,7 +141,7 @@
     </entry>
 
     <entry>
-     <elevation-ft>9000</elevation-ft>
+     <elevation-ft>18000</elevation-ft>
      <wind-from-heading-deg>320</wind-from-heading-deg>
      <wind-speed-kt>30</wind-speed-kt>
      <wind-heading-change-deg>35</wind-heading-change-deg>
@@ -149,7 +149,7 @@
     </entry>
 
      <entry>
-       <elevation-ft>30000</elevation-ft>
+       <elevation-ft>24000</elevation-ft>
        <wind-from-heading-deg>330</wind-from-heading-deg>
        <wind-speed-kt>50</wind-speed-kt>
        <wind-heading-change-deg>35</wind-heading-change-deg>
@@ -157,7 +157,7 @@
      </entry>
 
      <entry>
-       <elevation-ft>40000</elevation-ft>
+       <elevation-ft>30000</elevation-ft>
        <wind-from-heading-deg>340</wind-from-heading-deg>
        <wind-speed-kt>70</wind-speed-kt>
        <wind-heading-change-deg>35</wind-heading-change-deg>

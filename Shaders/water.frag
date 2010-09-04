@@ -1,10 +1,8 @@
-
 uniform sampler2D water_normalmap;
 uniform sampler2D water_reflection;
 uniform sampler2D water_refraction;
 uniform sampler2D water_dudvmap;
 uniform sampler2D water_depthmap;
-//uniform vec4 waterColor, waterDepth;
 
 vec4 waterColor = vec4(0.0,0.2,1.0,1.0);
 vec4 waterDepth = vec4(0.0,0.2,1.0,1.0);
@@ -14,6 +12,7 @@ varying vec4 waterTex1; //moving texcoords
 varying vec4 waterTex2; //moving texcoords
 varying vec4 waterTex3; //for projection
 varying vec4 waterTex4; //viewts
+varying float fogCoord;
 
 //unit 0 = water_reflection
 //unit 1 = water_refraction
@@ -32,6 +31,8 @@ const vec4 mone = vec4(-1.0, -1.0, -1.0, 1.0);
 const vec4 ofive = vec4(0.5,0.5,0.5,1.0);
 
 const float exponent = 64.0;
+
+float fogFactor = exp(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord);
 
 vec4 lightTS = normalize(waterTex0);
 vec4 viewt = normalize(waterTex4);
@@ -68,7 +69,7 @@ wdepth = vec4(pow(wdepth.x, 4.0));
 vec4 invdepth = 1.0 - wdepth;
 
 //calculate specular highlight
-vec4 vRef = normalize(reflect(-lightTS, vNorm));
+vec4 vRef = normalize(reflect(lightTS, vNorm));
 float stemp =max(0.0, dot(viewt, vRef) );
 stemp = pow(stemp, exponent);
 vec4 specular = vec4(stemp);
@@ -87,5 +88,10 @@ refl *= fres;
 //add reflection and refraction
 tmp = refr + refl;
 
-gl_FragColor = tmp + specular;
+if(gl_Fog.density == 1.0)
+	fogFactor=1.0;
+
+vec4 finalColor = tmp + specular;
+
+gl_FragColor = mix(gl_Fog.color,finalColor, fogFactor);
 }

@@ -70,7 +70,7 @@ vec4 invdepth = 1.0 - wdepth;
 
 //calculate specular highlight
 vec4 vRef = normalize(reflect(lightTS, vNorm));
-float stemp =max(0.0, dot(viewt, vRef) );
+float stemp =max(0.0, dot(viewt, vRef)*tan(0.79));
 stemp = pow(stemp, exponent);
 vec4 specular = vec4(stemp);
 

@@ -126,7 +126,7 @@ void main (void)
 	}
 	// end shadow
 
-	vec4 ambient_light = constantColor + gl_LightSource[0].diffuse * shadow_factor * vec4(diffuse, 1.0);
+	vec4 ambient_light = constantColor + gl_LightSource[0].diffuse * shadow_factor * vec4(diffuse, -1.0);
 
 	c1 *= ambient_light;
 	vec4 finalColor = c1;

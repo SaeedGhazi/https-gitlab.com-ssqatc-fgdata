@@ -93,5 +93,14 @@ if(gl_Fog.density == 1.0)
 
 vec4 finalColor = tmp + specular;
 
+vec4 constantColor = vec4(1.0,1.0,1.0,1.0);
+
+vec4 ambient_light = gl_LightSource[0].diffuse * constantColor + constantColor;
+
+	finalColor *= ambient_light;
+
+	if(gl_Fog.density == 1.0)
+		fogFactor=1.0;
+
 gl_FragColor = mix(gl_Fog.color,finalColor, fogFactor);
 }

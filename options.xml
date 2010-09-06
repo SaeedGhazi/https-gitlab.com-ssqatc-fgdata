@@ -78,6 +78,13 @@
    </option>
 
    <option>
+       <name>fg-aircraft</name>
+       <arg>path</arg>
+       <description>strings/fg-aircraft-desc</description>
+       <brief/>
+      </option>
+
+   <option>
     <name>language</name>
     <arg>code</arg>
     <description>strings/language-desc</description>
@@ -537,11 +544,12 @@
     <description>strings/disable-auto-coordination-desc</description>
    </option>
 
+<!--
    <option>
     <name>aircraft-dir</name>
     <arg>path</arg>
     <description>strings/aircraft-dir-desc</description>
-   </option>
+   </option> -->
 
    <option>
      <name>livery</name>

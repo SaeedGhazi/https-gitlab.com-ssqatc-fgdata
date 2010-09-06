@@ -75,8 +75,9 @@
  <verbose-desc>Show all command line options when combined with --help or -h</verbose-desc>
  <version-desc>Display the current FlightGear version</version-desc>
  <fg-root-desc>Specify the root data path</fg-root-desc>
- <fg-scenery-desc n="0">Specify the base scenery path;</fg-scenery-desc>
+ <fg-scenery-desc n="0">Specify the scenery path(s);</fg-scenery-desc>
  <fg-scenery-desc n="1">Defaults to $FG_ROOT/Scenery</fg-scenery-desc>
+ <fg-aircraft-desc>Specify additional aircraft directory path(s)</fg-aircraft-desc>
  <language-desc>Select the language for this session</language-desc>
  <disable-game-mode-desc>Disable full-screen game mode</disable-game-mode-desc>
  <enable-game-mode-desc>Enable full-screen game mode</enable-game-mode-desc>

@@ -460,7 +460,7 @@
 	</menu>
 
 	<menu>
-		<label>Network</label>
+		<label>Multiplayer</label>
 		<name>multiplayer</name>
 
 		<item>
@@ -486,7 +486,10 @@
 				<script>multiplayer.dialog.show()</script>
 			</binding>
 		</item>
-
+		
+        <item>
+            <label> ------------- </label>
+        </item>
 		<item>
 			<label>MPCarrier selection</label>
 			<binding>

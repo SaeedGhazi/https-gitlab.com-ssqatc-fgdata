@@ -115,7 +115,7 @@
 		</item>
 
 		<item>
-			<label>Configure Views </label>
+			<label>View Options</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>view</dialog-name>

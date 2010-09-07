@@ -159,9 +159,7 @@
         </item>
 
 		<item>
-			<label>Instant Replay   (Ctrl-R)</label> <item>
-            <label> ------------- </label>
-        </item>
+			<label>Instant Replay   (Ctrl-R)</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>replay</dialog-name>

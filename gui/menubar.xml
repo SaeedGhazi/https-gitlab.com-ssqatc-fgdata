@@ -1,7 +1,7 @@
 <PropertyList>
 
 	<menu>
-		<label>File</label>
+		<label>General</label>
 
 		<item>
 			<label>Load Flight    (Shift-F1)</label>
@@ -28,7 +28,7 @@
         </item>
 -->
 		<item>
-			<label>Reset         (Shift-Esc)</label>
+			<label>Reset           (Shift-Esc)</label>
 			<binding>
 				<command>reset</command>
 			</binding>
@@ -52,7 +52,7 @@
 		</item>
 -->		
 		<item>
-			<label>Snapshot</label>
+			<label>Screenshot             (F3)</label>
 			<binding>
 				<command>nasal</command>
 				<script>
@@ -79,14 +79,14 @@
                 </script>
             </binding>
         </item>
--->
+
 		<item>
 			<label>Print Screen         (F3)</label>
 			<binding>
 				<command>old-print-dialog</command>
 			</binding>
 		</item>
-
+-->
 		<item>
 			<label>Sound Configuration</label>
 			<binding>
@@ -96,7 +96,7 @@
 		</item>
 
 		<item>
-			<label>Quit                (Esc)</label>
+			<label>Quit                    (Esc)</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>exit</dialog-name>
@@ -133,7 +133,7 @@
                 </script>
             </binding>
         </item>   -->
-			<label>Configure Views </label>
+			<label>View Options</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>view</dialog-name>
@@ -148,6 +148,14 @@
 			</binding>
 		</item>
 
+        <item>
+            <label>Adjust LOD Ranges</label>
+            <binding>
+                <command>dialog-show</command>
+                <dialog-name>static-lod</dialog-name>
+            </binding>
+        </item>
+        
 		<item>
 			<label>Adjust View Position</label>
 			<binding>
@@ -633,11 +641,6 @@
 		</item>
 
         <item>
-            <label> ------------- </label>
-        </item>
-        
-
-        <item>
             <label>Browse Internal Properties</label>
             <binding>
                 <command>nasal</command>
@@ -655,13 +658,6 @@
 
 
 
-        <item>
-            <label>Adjust LOD Ranges</label>
-            <binding>
-                <command>dialog-show</command>
-                <dialog-name>static-lod</dialog-name>
-            </binding>
-        </item>
 
         <item>
             <label>OSG Display Settings</label>

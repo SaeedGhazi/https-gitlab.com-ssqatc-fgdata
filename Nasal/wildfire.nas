@@ -8,7 +8,7 @@
 ##
 ###############################################################################
 
-# The cellular automata model used here is based on
+# The cellular automata model used here is loosely based on
 #  A. Hernandez Encinas, L. Hernandez Encinas, S. Hoya White,
 #  A. Martin del Rey, G. Rodriguez Sanchez,
 #  "Simulation of forest fire fronts using cellular automata",
@@ -127,13 +127,14 @@ var MP_share_pp           = "environment/wildfire/share-events";
 var save_on_exit_pp       = "environment/wildfire/save-on-exit";
 var restore_on_startup_pp = "environment/wildfire/restore-on-startup";
 var crash_fire_pp         = "environment/wildfire/fire-on-crash";
+var impact_fire_pp        = "environment/wildfire/fire-on-impact";
 var report_score_pp       = "environment/wildfire/report-score";
 # Internal properties to control the models
 var models_enabled_pp     = "environment/wildfire/models/enabled";
 var fire_LOD_pp           = "environment/wildfire/models/fire-lod";
 var smoke_LOD_pp          = "environment/wildfire/models/smoke-lod";
 var LOD_High = 20;
-var LOD_Low  = 80;
+var LOD_Low  = 50;
 var mp_last_limited_event = {}; # source : time
 
 var score = { extinguished : 0, protected : 0, waste : 0 };
@@ -201,7 +202,7 @@ var parse_msg = func (source, msg) {
       var pos = Binary.decodeCoord(substr(msg, 6));
       ignite(pos, 0);
     } else {
-      printlog("warn", "wildfire.nas: Ignored ignite event from " ~
+      printlog("alert", "wildfire.nas: Ignored ignite event flood from " ~
                source.getNode("callsign").getValue());
     }
     mp_last_limited_event[i] = cur_time;
@@ -239,13 +240,13 @@ var SimTime = {
   }
 };
 
-###############################################################################
-#  Class that maintains one fire cell.
 
+###############################################################################
+#  Class that maintains the state of one fire cell.
 var FireCell = {
 ############################################################
   new : func (x, y) {
-#    print("Creating FireCell[" ~ x ~ "," ~ y ~ "]");
+    trace("Creating FireCell[" ~ x ~ "," ~ y ~ "]");
     var m = { parents: [FireCell] };
     m.lat = y * CAFire.CELL_SIZE/60.0 + 0.5 * CAFire.CELL_SIZE / 60.0;
     m.lon = x * CAFire.CELL_SIZE/60.0 + 0.5 * CAFire.CELL_SIZE / 60.0;
@@ -268,7 +269,7 @@ var FireCell = {
           m.burn_rate = CAFire.BURN_RATE[mat];
       }
     }
-    m.model = CellModel.new(x, y, m.alt);
+    CAFireModels.add(x, y, m.alt);
     append(CAFire.active, m);
     CAFire.cells_created += 1;
     return m;
@@ -279,7 +280,7 @@ var FireCell = {
       trace("FireCell[" ~ me.x ~ "," ~me.y ~ "] Ignited!");
       me.burning[CAFire.next] = 1;
       me.burning[CAFire.old]  = 1;
-      me.model.set_type("fire");
+      CAFireModels.set_type(me.x, me.y, "fire");
       # Prevent update() on this cell in this generation.
       me.last = CAFire.generation;
     } else {
@@ -299,16 +300,16 @@ var FireCell = {
     # Prevent update() on this cell in this generation.
     me.last = CAFire.generation;
     if ((me.state[CAFire.old] > 0.0) and (me.burning[CAFire.old] > 0)) {
-      me.model.set_type("soot");
+      CAFireModels.set_type(me.x, me.y, "soot");
     } else {
       # Use a model representing contamination here.
-      me.model.set_type(type);
+      CAFireModels.set_type(me.x, me.y, type);
     }
     return result;
   },
 ############################################################
   update : func () {
-#    print("FireCell[" ~ me.x ~ "," ~me.y ~ "] " ~ me.state[CAFire.old]);
+    trace("FireCell[" ~ me.x ~ "," ~me.y ~ "] " ~ me.state[CAFire.old]);
     if ((me.state[CAFire.old] == 1) and (me.burning[CAFire.old] == 0))
       return 0;
     if ((me.burn_rate == 0) and (me.burning[CAFire.old] == 0))
@@ -336,7 +337,7 @@ var FireCell = {
       return 0;
     }
     me.burning[CAFire.next] = me.burning[CAFire.old];
-    me.model.set_type(me.burning[CAFire.old] ? "fire" : "soot");
+    CAFireModels.set_type(me.x, me.y, me.burning[CAFire.old] ? "fire" : "soot");
     return 1;
   },
 ############################################################
@@ -401,13 +402,13 @@ var CellModel = {
             me.model = nil;
         }
         me.type = type;
-        if (CAFire.MODEL[type] == "") return;
+        if (CAFireModels.MODEL[type] == "") return;
 
         # Always put "cheap" models for now.
-        if (CAFire.models_enabled or (type != "fire")) {
+        if (CAFireModels.models_enabled or (type != "fire")) {
             me.model =
-                geo.put_model(CAFire.MODEL[type], me.lat, me.lon, me.alt);
-#            print("Created 3d model " ~ type ~ " " ~ CAFire.MODEL[type]);
+                geo.put_model(CAFireModels.MODEL[type], me.lat, me.lon, me.alt);
+            trace("Created 3d model " ~ type ~ " " ~ CAFireModels.MODEL[type]);
         }
     },
 ############################################################
@@ -419,7 +420,95 @@ var CellModel = {
 };
 
 ###############################################################################
-#  Singleton that maintains the fire CA grid.
+#  Singleton that maintains the CA models.
+var CAFireModels = {};
+# Constants
+CAFireModels.MODEL = {         # Model paths
+    "fire"                   : "Models/Effects/Wildfire/wildfire.xml",
+    "soot"                   : "Models/Effects/Wildfire/soot.xml",
+    "foam"                   : "Models/Effects/Wildfire/foam.xml",
+    "water"                  : "",
+    "protected"              : "",
+    "none"                   : "",
+};
+# State
+CAFireModels.grid = {};        # Sparse cell model grid storage.
+CAFireModels.pending = [];     # List of pending model changes.
+CAFireModels.models_enabled = 1;
+CAFireModels.loopid = 0;
+######################################################################
+# Public operations
+############################################################
+CAFireModels.init = func {
+  # Initialization.
+  setlistener(models_enabled_pp, func (n) {
+    me.set_models_enabled(n.getValue());
+  }, 1);
+  me.reset(1);
+}
+############################################################
+# Reset the model grid to the empty state.
+CAFireModels.reset = func (enabled) {
+  # Clear the model grid.
+  foreach (var x; keys(me.grid)) {
+    foreach (var y; keys(me.grid[x])) {
+      if (me.grid[x][y] != nil) me.grid[x][y].remove();
+    }
+  }
+  # Reset state.
+  me.grid = {};
+  me.pending = [];
+
+  me.loopid += 1;
+  me._loop_(me.loopid);
+}
+############################################################
+# Add a new cell model.
+CAFireModels.add = func(x, y, alt) {
+  append(me.pending, { x: x, y: y, alt: alt });
+}
+############################################################
+# Update a cell model.
+CAFireModels.set_type = func(x, y, type) {
+  append(me.pending, { x: x, y: y, type: type });
+}
+############################################################
+CAFireModels.set_models_enabled = func(on=1) {
+  me.models_enabled = on;
+  # We should do a pass over all cells here to add/remove models.
+  # For now I don't so only active cells will actually remove the
+  # models. All models will be hidden by their select animations, though.
+}
+######################################################################
+# Private operations
+############################################################
+CAFireModels.update = func {
+  var work =  size(me.pending)/10;
+  while (size(me.pending) > 0 and work > 0) {
+    var c = me.pending[0];
+    me.pending = subvec(me.pending, 1);
+    work -= 1;
+    if (contains(c, "alt")) { 
+      if (me.grid[c.x] == nil) {
+        me.grid[c.x] = {};
+      }
+      me.grid[c.x][c.y] = CellModel.new(c.x, c.y, c.alt);
+    }
+    if (contains(c, "type")) {
+      me.grid[c.x][c.y].set_type(c.type);
+    }
+  }
+}
+############################################################
+CAFireModels._loop_ = func(id) {
+  id == me.loopid or return;
+  me.update();
+  settimer(func { me._loop_(id); }, 0);
+}
+###############################################################################
+
+###############################################################################
+#  Singleton that maintains the fire cell CA grid.
 var CAFire = {};
 # State
 CAFire.CELL_SIZE = 0.03; # "nm" (or rather minutes)
@@ -465,14 +554,6 @@ CAFire.BURN_RATE = {     # Burn rate DB. grid widths per second
 # ?
     "Landmass"              : 0.0005
 };
-CAFire.MODEL = {         # Model paths
-    "fire"                   : "Models/Effects/Wildfire/wildfire.xml",
-    "soot"                   : "Models/Effects/Wildfire/soot.xml",
-    "foam"                   : "Models/Effects/Wildfire/foam.xml",
-    "water"                  : "",
-    "protected"              : "",
-    "none"                   : "",
-};
 CAFire.NEIGHBOURS =      # Neighbour index offsets. First row and column
                          # and then diagonal.
     [[[-1, 0], [0, 1], [1, 0], [0, -1]],
@@ -482,21 +563,13 @@ CAFire.NEIGHBOURS =      # Neighbour index offsets. First row and column
 ############################################################
 CAFire.init = func {
   # Initialization.
-  setlistener(models_enabled_pp, func (n) {
-    me.set_models_enabled(n.getValue());
-  }, 1);
   me.reset(1, SimTime.current_time());
 }
 ############################################################
 # Reset the CA to the empty state and set its current time to sim_time.
 CAFire.reset = func (enabled, sim_time) {
-  # Clear the grid.
-  foreach (var x; keys(me.grid)) {
-    foreach (var y; keys(me.grid[x])) {
-      if (me.grid[x][y].model != nil) me.grid[x][y].model.remove();
-      me.grid[x][y] = nil;
-    }
-  }
+  # Clear the model grid.
+  CAFireModels.reset(enabled);
   # Reset state.
   me.grid = {};
   me.generation = int(sim_time/CAFire.GENERATION_DURATION);
@@ -517,7 +590,7 @@ CAFire.reset = func (enabled, sim_time) {
 ############################################################
 # Start a fire in the cell at pos.
 CAFire.ignite = func (lat, lon) {
-#  print("Fire at " ~ lat ~", " ~ lon ~ ".");
+  trace("CAFire.ignite: Fire at " ~ lat ~", " ~ lon ~ ".");
   var x = int(lon*60/me.CELL_SIZE);
   var y = int(lat*60/me.CELL_SIZE);
   var cell = me.get_cell(x, y);
@@ -536,17 +609,16 @@ CAFire.ignite = func (lat, lon) {
 #   radius - meter : double 
 # Note: volume is unused ATM.
 CAFire.resolve_water_drop = func (lat, lon, radius, volume=0) {
+  trace("CAFire.resolve_water_drop: Dumping water at " ~ lat ~", " ~ lon ~
+        " radius " ~ radius ~".");
   var x = int(lon*60/me.CELL_SIZE);
   var y = int(lat*60/me.CELL_SIZE);
   var r = int(2*radius/(me.CELL_SIZE*1852.0));
-#  print("Dumping water at " ~ lat ~", " ~ lon ~
-#        ". Center (" ~ x ~ "," ~ y ~ ") radius " ~ r ~".");
   var result = { extinguished : 0, protected : 0, waste : 0 };
   for (var dx = -r; dx <= r; dx += 1) {
     for (var dy = -r; dy <= r; dy += 1) {
       var cell = me.get_cell(x + dx, y + dy);
       if (cell == nil) {
-#        print("  (" ~ (x + dx) ~ ", " ~ (y + dy) ~ ")");
         cell = FireCell.new(x + dx, y + dy);
         me.set_cell(x + dx, y + dy,
                     cell);
@@ -583,17 +655,16 @@ CAFire.resolve_retardant_drop = func (lat, lon, radius, volume=0) {
 #   radius - meter : double 
 # Note: volume is unused ATM.
 CAFire.resolve_foam_drop = func (lat, lon, radius, volume=0) {
+  trace("CAFire.resolve_foam_drop: Dumping foam at " ~ lat ~", " ~ lon ~
+        " radius " ~ radius ~".");
   var x = int(lon*60/me.CELL_SIZE);
   var y = int(lat*60/me.CELL_SIZE);
   var r = int(2*radius/(me.CELL_SIZE*1852.0));
-#  print("Dumping foam at " ~ lat ~", " ~ lon ~
-#        ". Center (" ~ x ~ "," ~ y ~ ") radius " ~ r ~".");
   var result = { extinguished : 0, protected : 0, waste : 0 };
   for (var dx = -r; dx <= r; dx += 1) {
     for (var dy = -r; dy <= r; dy += 1) {
       var cell = me.get_cell(x + dx, y + dy);
       if (cell == nil) {
-#        print("  (" ~ (x + dx) ~ ", " ~ (y + dy) ~ ")");
         cell = FireCell.new(x + dx, y + dy);
         me.set_cell(x + dx, y + dy,
                     cell);
@@ -660,12 +731,12 @@ CAFire.load_event_log = func (filename, skip_ahead_until=-1) {
   if (!fgcommand("loadxml",
                  props.Node.new({ filename   : filename,
                                   targetnode : logbase }))) {
-    printlog("warn", "Wildfire ... failed loading '" ~ filename ~ "'");
+    printlog("alert", "Wildfire ... failed loading '" ~ filename ~ "'");
     return;
   }
 
   # Fast forward the automaton from the first logged event to the current time.
-  me.set_models_enabled(0);
+  CAFireModels.set_models_enabled(0);
   var first = 1;
   var events = props.globals.getNode(logbase).getChildren("event");
   foreach (var event; events) {
@@ -719,14 +790,7 @@ CAFire.load_event_log = func (filename, skip_ahead_until=-1) {
     while (me.generation * me.GENERATION_DURATION < now)
       me.update();
   }
-  me.set_models_enabled(getprop(models_enabled_pp));
-}
-############################################################
-CAFire.set_models_enabled = func(on=1) {
-  me.models_enabled = on;
-  # We should do a pass over all cells here to add/remove models.
-  # For now I don't so only active cells will actually remove the
-  # models. All models will be hidden by there select animations, though.
+  CAFireModels.set_models_enabled(getprop(models_enabled_pp));
 }
 ######################################################################
 # Internal operations
@@ -820,6 +884,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
   });
   props.globals.initNode(MP_share_pp, 1, "BOOL");
   props.globals.initNode(crash_fire_pp, 1, "BOOL");
+  props.globals.initNode(impact_fire_pp, 1, "BOOL");
   props.globals.initNode(save_on_exit_pp, 0, "BOOL");
   props.globals.initNode(restore_on_startup_pp, 0, "BOOL");
   props.globals.initNode(models_enabled_pp, 1, "BOOL");
@@ -853,6 +918,22 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
   setlistener("sim/crashed", func(n) {
     if (getprop(crash_fire_pp) and n.getBoolValue())
       wildfire.ignite(geo.aircraft_position());
+  });
+
+# Detect impact
+  var impact_node = props.globals.getNode("sim/ai/aircraft/impact/bomb", 1);
+  setlistener("sim/ai/aircraft/impact/bomb", func(n) {
+
+      if (getprop(impact_fire_pp) and n.getBoolValue()){
+          var node = props.globals.getNode(n.getValue(), 1);
+          var impactpos = geo.Coord.new();
+          impactpos.set_latlon(
+              node.getNode("impact/latitude-deg").getValue(),
+              node.getNode("impact/longitude-deg").getValue()
+              );
+          wildfire.ignite(impactpos);
+      }
+
   });
 
   printlog("info", "Wildfire ... initialized.");
@@ -917,6 +998,7 @@ var dialog = {
                          ["Share over MP", MP_share_pp],
                          ["Show 3d models", models_enabled_pp],
                          ["Crash starts fire", crash_fire_pp],
+                         ["Impact starts fire", impact_fire_pp],
                          ["Report score", report_score_pp],
                          ["Save on exit", save_on_exit_pp]]) {
             var w = content.addChild("checkbox");

@@ -9,6 +9,8 @@ uniform sampler3D NoiseTex;
 uniform sampler2D SampleTex;
 uniform sampler1D ColorsTex;
 
+varying vec4 constantColor;
+
 uniform float snowlevel; // From /sim/rendering/snow-level-m
 
 const float scale = 1.0;
@@ -57,7 +59,7 @@ void main (void)
 	c1 = mix(c1, clamp(n+nvL[2]*4.1+vec4(0.1, 0.1, nvL[2]*2.2, 1.0), 0.7, 1.0), smoothstep(snowlevel+300.0, snowlevel+360.0, (rawpos.z)+nvL[1]*3000.0));
 
     vec3 diffuse = gl_Color.rgb * max(0.0, dot(VNormal, gl_LightSource[0].position.xyz));
-    vec4 ambient_light = gl_LightSource[0].diffuse * vec4(diffuse, 1.0);
+    vec4 ambient_light = constantColor + gl_LightSource[0].diffuse * vec4(diffuse, 1.0);
 
 	c1 *= ambient_light;
 	vec4 finalColor = c1;

@@ -155,6 +155,14 @@
 				<dialog-name>static-lod</dialog-name>
 			</binding>
 		</item>
+
+		<item>
+			<label>OSG Display Settings</label>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>osg-display-settings</dialog-name>
+			</binding>
+		</item>
 	</menu>
 
 	<menu>

@@ -1,0 +1,182 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+  <!-- Control the weather -->
+  <name>osg-display-settings</name>
+  <modal>false</modal>
+  <resizable>false</resizable>
+  <layout>vbox</layout>
+  <default-padding>3</default-padding>
+
+  <group>
+    <layout>hbox</layout>
+    <default-padding>1</default-padding>
+
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+
+    <text>
+      <label>OSG Display Settings (experimental)</label>
+    </text>
+
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+
+    <button>
+      <legend></legend>
+      <key>Esc</key>
+      <pref-width>16</pref-width>
+      <pref-height>16</pref-height>
+      <border>2</border>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
+  <hrule/>
+
+  <group>
+    <layout>hbox</layout>
+    <default-padding>1</default-padding>
+    <text><label>Stereo Mode</label></text>
+    <empty><stretch>true</stretch></empty>
+    <combo>
+      <width>250</width>
+      <height>25</height>
+      <live>true</live>
+      <property>/sim/rendering/osg-displaysettings/stereo-mode</property>
+      <value>OFF</value>
+      <value>QUAD_BUFFER</value>
+      <value>ANAGLYPHIC</value>
+      <value>HORIZONTAL_SPLIT</value>
+      <value>VERTICAL_SPLIT</value>
+      <value>LEFT_EYE</value>
+      <value>RIGHT_EYE</value>
+      <value>HORIZONTAL_INTERLACE</value>
+      <value>VERTICAL_INTERLACE</value>
+      <value>CHECKERBOARD</value>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </combo>
+  </group>
+
+  <group>
+    <layout>hbox</layout>
+    <default-padding>1</default-padding>
+    <text><label>Screen Distance</label></text>
+    <empty><stretch>true</stretch></empty>
+    <slider>
+      <min>0</min>
+      <max>1.0</max>
+      <property>/sim/rendering/osg-displaysettings/screen-distance</property>
+      <binding>
+        <command>dialog-apply</command>
+        </binding>
+      </slider>
+      <text>
+        <label>12345678</label>
+        <format>%.2f</format>
+        <live>true</live>
+        <property>/sim/rendering/osg-displaysettings/screen-distance</property>
+      </text>
+  </group>
+
+  <group>
+    <layout>hbox</layout>
+    <default-padding>1</default-padding>
+    <text><label>Eye Separation</label></text>
+    <empty><stretch>true</stretch></empty>
+    <slider>
+      <min>0</min>
+      <max>0.2</max>
+      <property>/sim/rendering/osg-displaysettings/eye-separation</property>
+      <binding>
+        <command>dialog-apply</command>
+        </binding>
+      </slider>
+      <text>
+        <label>12345678</label>
+        <format>%.2f</format>
+        <live>true</live>
+        <property>/sim/rendering/osg-displaysettings/eye-separation</property>
+      </text>
+  </group>
+
+  <group>
+    <layout>hbox</layout>
+    <default-padding>1</default-padding>
+    <text><label>Double Buffer</label></text>
+    <empty><stretch>true</stretch></empty>
+    <checkbox>
+      <live>true</live>
+      <property>/sim/rendering/osg-displaysettings/double-buffer</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
+  </group>
+
+  <group>
+    <layout>hbox</layout>
+    <default-padding>1</default-padding>
+    <text><label>Depth Buffer</label></text>
+    <empty><stretch>true</stretch></empty>
+    <checkbox>
+      <live>true</live>
+      <property>/sim/rendering/osg-displaysettings/depth-buffer</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
+  </group>
+
+  <group>
+    <layout>hbox</layout>
+    <default-padding>1</default-padding>
+    <text><label>RGB</label></text>
+    <empty><stretch>true</stretch></empty>
+    <checkbox>
+      <live>true</live>
+      <property>/sim/rendering/osg-displaysettings/rgb</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
+  </group>
+
+  <group>
+    <layout>hbox</layout>
+    <default-padding>1</default-padding>
+    <text><label>Screen Width</label></text>
+    <empty><stretch>true</stretch></empty>
+    <input>
+      <width>100</width>
+      <height>25</height>
+      <live>true</live>
+      <property>/sim/rendering/osg-displaysettings/screen-width</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </input>
+  </group>
+
+  <group>
+    <layout>hbox</layout>
+    <default-padding>1</default-padding>
+    <text><label>Screen Height</label></text>
+    <empty><stretch>true</stretch></empty>
+    <input>
+      <width>100</width>
+      <height>25</height>
+      <live>true</live>
+      <property>/sim/rendering/osg-displaysettings/screen-height</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </input>
+  </group>
+</PropertyList>

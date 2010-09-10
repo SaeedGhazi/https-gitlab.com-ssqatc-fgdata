@@ -241,6 +241,7 @@
    <property>/local-weather/tmp/cloud-type</property>
    <value>Altocumulus</value>
    <value>Cirrus</value>
+   <value>Cirrocumulus (cloudlet)</value>
    <value>Cirrostratus</value>
    <value>Cumulus</value>
    <value>Cumulus (cloudlet)</value>

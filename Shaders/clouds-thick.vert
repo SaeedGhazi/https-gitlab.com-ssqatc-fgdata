@@ -3,7 +3,7 @@
 
 varying float fogFactor;
 
-float shade = 0.6;
+float shade = 0.4;
 float cloud_height = 1000.0;
 
 void main(void)
@@ -39,6 +39,7 @@ void main(void)
   // Determine the position - used for fog and shading calculations
   vec3 ecPosition = vec3(gl_ModelViewMatrix * gl_Position);
   float fogCoord = abs(ecPosition.z);
+  //float fract = smoothstep(0.0, cloud_height, gl_Position.z + cloud_height);
   float fract = smoothstep(0.0, cloud_height, gl_Position.z + cloud_height);
 
   // Final position of the sprite
@@ -53,7 +54,7 @@ void main(void)
   gl_FrontColor += gl_FrontLightModelProduct.sceneColor;
 
   // As we get within 100m of the sprite, it is faded out. Equally at large distances it also fades out.
-  gl_FrontColor.a = min(smoothstep(10.0, 100.0, fogCoord), 1 - smoothstep(15000.0, 20000.0, fogCoord));
+  gl_FrontColor.a = min(smoothstep(10.0, 100.0, fogCoord), 1 - smoothstep(40000.0, 45000.0, fogCoord));
   gl_BackColor = gl_FrontColor;
 
   // Fog doesn't affect clouds as much as other objects.

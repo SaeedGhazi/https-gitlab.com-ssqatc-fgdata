@@ -19,11 +19,13 @@
   <weather-scenarios>
     <scenario>
       <name>Disabled</name>
-      <description>METAR weather generation is disabled. Use 'Weather Conditions' and 'Clouds' dialogs to setup your weather.</description>
+      <description>METAR weather generation is disabled. Use the above controls to setup your weather.</description>
     </scenario>
     <scenario>
       <name>Live data</name>
-      <description>Fetch live weather data for your nearest airport from noaa.gov. You need a working internet connection.</description>
+      <description>Fetch live weather data for your nearest airport from noaa.gov. You need a working internet connection.
+                   All the controls in this dialog are computed automatically, once a valid METAR is received.
+      </description>
     </scenario>
     <scenario>
       <name>Manual input</name>

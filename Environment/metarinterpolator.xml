@@ -32,6 +32,7 @@
     <enable>
       <condition>
         <property>/environment/metar/valid</property>
+        <property>/environment/params/metar-updates-environment</property>
       </condition>
     </enable>
     <input>/environment/metar/pressure-sea-level-inhg</input>
@@ -51,6 +52,7 @@
     <enable>
       <condition>
         <property>/environment/metar/valid</property>
+        <property>/environment/params/metar-updates-environment</property>
       </condition>
     </enable>
     <input>/environment/metar/temperature-sea-level-degc</input>
@@ -74,6 +76,7 @@
     <enable>
       <condition>
         <property>/environment/metar/valid</property>
+        <property>/environment/params/metar-updates-environment</property>
       </condition>
     </enable>
     <input>/environment/metar/dewpoint-sea-level-degc</input>
@@ -88,7 +91,7 @@
 
   <filter>
     <!--
-      transfer the sea-level temperature to each layer of
+      transfer the visibility to each layer of
       interpolation controller. We are not very creative here and 
       use the same visibility for all layers but top three which
       are left untouched.
@@ -99,6 +102,7 @@
     <enable>
       <condition>
         <property>/environment/metar/valid</property>
+        <property>/environment/params/metar-updates-environment</property>
       </condition>
     </enable>
     <input>/environment/metar/min-visibility-m</input>
@@ -106,6 +110,9 @@
     <output>/environment/config/boundary/entry[1]/visibility-m</output>
     <output>/environment/config/aloft/entry[0]/visibility-m</output>
     <output>/environment/config/aloft/entry[1]/visibility-m</output>
+    <output>/environment/config/aloft/entry[2]/visibility-m</output>
+    <output>/environment/config/aloft/entry[3]/visibility-m</output>
+    <output>/environment/config/aloft/entry[4]/visibility-m</output>
   </filter>
 
   <!-- split the wind vector into it's components -->
@@ -117,6 +124,7 @@
     <enable>
       <condition>
         <property>/environment/metar/valid</property>
+        <property>/environment/params/metar-updates-environment</property>
       </condition>
     </enable>
     <input>/environment/metar/base-wind-from-north-fps</input>
@@ -130,6 +138,7 @@
     <enable>
       <condition>
         <property>/environment/metar/valid</property>
+        <property>/environment/params/metar-updates-environment</property>
       </condition>
     </enable>
     <input>/environment/metar/base-wind-from-east-fps</input>
@@ -140,30 +149,65 @@
   <!-- TODO: handle variable winds -->
   <filter include="layer-heading-offset.xml"/>
   <filter include="layer-heading-offset.xml">
+    <enable>
+      <condition>
+        <property>/environment/metar/valid</property>
+        <property>/environment/params/metar-updates-environment</property>
+        <property>/environment/params/metar-updates-winds-aloft</property>
+      </condition>
+    </enable>
     <input>
       <offset>/environment/config/aloft/entry[0]/wind-heading-change-deg</offset>
     </input>
     <output>/environment/config/aloft/entry[0]/wind-from-heading-deg</output>
   </filter>
   <filter include="layer-heading-offset.xml">
+    <enable>
+      <condition>
+        <property>/environment/metar/valid</property>
+        <property>/environment/params/metar-updates-environment</property>
+        <property>/environment/params/metar-updates-winds-aloft</property>
+      </condition>
+    </enable>
     <input>
       <offset>/environment/config/aloft/entry[1]/wind-heading-change-deg</offset>
     </input>
     <output>/environment/config/aloft/entry[1]/wind-from-heading-deg</output>
   </filter>
   <filter include="layer-heading-offset.xml">
+    <enable>
+      <condition>
+        <property>/environment/metar/valid</property>
+        <property>/environment/params/metar-updates-environment</property>
+        <property>/environment/params/metar-updates-winds-aloft</property>
+      </condition>
+    </enable>
     <input>
       <offset>/environment/config/aloft/entry[2]/wind-heading-change-deg</offset>
     </input>
     <output>/environment/config/aloft/entry[2]/wind-from-heading-deg</output>
   </filter>
   <filter include="layer-heading-offset.xml">
+    <enable>
+      <condition>
+        <property>/environment/metar/valid</property>
+        <property>/environment/params/metar-updates-environment</property>
+        <property>/environment/params/metar-updates-winds-aloft</property>
+      </condition>
+    </enable>
     <input>
       <offset>/environment/config/aloft/entry[3]/wind-heading-change-deg</offset>
     </input>
     <output>/environment/config/aloft/entry[3]/wind-from-heading-deg</output>
   </filter>
   <filter include="layer-heading-offset.xml">
+    <enable>
+      <condition>
+        <property>/environment/metar/valid</property>
+        <property>/environment/params/metar-updates-environment</property>
+        <property>/environment/params/metar-updates-winds-aloft</property>
+      </condition>
+    </enable>
     <input>
       <offset>/environment/config/aloft/entry[4]/wind-heading-change-deg</offset>
     </input>
@@ -172,30 +216,65 @@
 
   <filter include="layer-speed-change.xml"/>
   <filter include="layer-speed-change.xml">
+    <enable>
+      <condition>
+        <property>/environment/metar/valid</property>
+        <property>/environment/params/metar-updates-environment</property>
+        <property>/environment/params/metar-updates-winds-aloft</property>
+      </condition>
+    </enable>
     <input>
       <offset>/environment/config/aloft/entry[0]/wind-speed-change-rel</offset>
     </input>
     <output>/environment/config/aloft/entry[0]/wind-speed-kt</output>
   </filter>
   <filter include="layer-speed-change.xml">
+    <enable>
+      <condition>
+        <property>/environment/metar/valid</property>
+        <property>/environment/params/metar-updates-environment</property>
+        <property>/environment/params/metar-updates-winds-aloft</property>
+      </condition>
+    </enable>
     <input>
       <offset>/environment/config/aloft/entry[1]/wind-speed-change-rel</offset>
     </input>
     <output>/environment/config/aloft/entry[1]/wind-speed-kt</output>
   </filter>
   <filter include="layer-speed-change.xml">
+    <enable>
+      <condition>
+        <property>/environment/metar/valid</property>
+        <property>/environment/params/metar-updates-environment</property>
+        <property>/environment/params/metar-updates-winds-aloft</property>
+      </condition>
+    </enable>
     <input>
       <offset>/environment/config/aloft/entry[2]/wind-speed-change-rel</offset>
     </input>
     <output>/environment/config/aloft/entry[2]/wind-speed-kt</output>
   </filter>
   <filter include="layer-speed-change.xml">
+    <enable>
+      <condition>
+        <property>/environment/metar/valid</property>
+        <property>/environment/params/metar-updates-environment</property>
+        <property>/environment/params/metar-updates-winds-aloft</property>
+      </condition>
+    </enable>
     <input>
       <offset>/environment/config/aloft/entry[3]/wind-speed-change-rel</offset>
     </input>
     <output>/environment/config/aloft/entry[3]/wind-speed-kt</output>
   </filter>
   <filter include="layer-speed-change.xml">
+    <enable>
+      <condition>
+        <property>/environment/metar/valid</property>
+        <property>/environment/params/metar-updates-environment</property>
+        <property>/environment/params/metar-updates-winds-aloft</property>
+      </condition>
+    </enable>
     <input>
       <offset>/environment/config/aloft/entry[4]/wind-speed-change-rel</offset>
     </input>

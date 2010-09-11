@@ -113,10 +113,6 @@
               <binding>
                 <command>dialog-apply</command>
               </binding>
-              <binding>
-                <command>nasal</command>
-                <script>rebuild()</script>
-              </binding>
             </combo>
 
             <input>
@@ -156,10 +152,6 @@
               <value>cirrus</value>
               <binding>
                 <command>dialog-apply</command>
-              </binding>
-              <binding>
-                <command>nasal</command>
-                <script>rebuild()</script>
               </binding>
             </combo>
 
@@ -201,10 +193,6 @@
               <binding>
                 <command>dialog-apply</command>
               </binding>
-              <binding>
-                <command>nasal</command>
-                <script>rebuild()</script>
-              </binding>
             </combo>
 
             <input>
@@ -244,10 +232,6 @@
               <value>cirrus</value>
               <binding>
                 <command>dialog-apply</command>
-              </binding>
-              <binding>
-                <command>nasal</command>
-                <script>rebuild()</script>
               </binding>
             </combo>
 
@@ -289,10 +273,6 @@
               <value>cirrus</value>
               <binding>
                 <command>dialog-apply</command>
-              </binding>
-              <binding>
-                <command>nasal</command>
-                <script>rebuild()</script>
               </binding>
             </combo>
 

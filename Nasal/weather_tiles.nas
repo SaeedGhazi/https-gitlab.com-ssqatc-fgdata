@@ -21,7 +21,15 @@
 
 var tile_start = func {
 
+# set thread lock
 if (getprop(lw~"tmp/thread-flag") == 1){setprop(lw~"tmp/thread-status","computing");}
+
+# set the tile code
+var current_code = getprop(lw~"tiles/code");
+var dir_index = getprop(lw~"tiles/tmp/dir-index");	
+props.globals.getNode(lw~"tiles").getChild("tile",dir_index).getNode("code").setValue(current_code);
+
+
 
 # generate a handling array for models
 
@@ -39,14 +47,18 @@ setprop(lw~"clouds/placement-index",0);
 setsize(elat,0); setsize(elon,0); setsize(erad,0);
 
 var dir_index = getprop(lw~"tiles/tmp/dir-index");	
-props.globals.getNode(lw~"tiles").getChild("tile",dir_index).getNode("code").setValue(current_code);
+#props.globals.getNode(lw~"tiles").getChild("tile",dir_index).getNode("code").setValue(current_code);
 
 local_weather.assemble_effect_array();
 
 print("Finished setting up tile type ",current_code, " in direction ",dir_index);
 
-if (getprop(lw~"tmp/thread-flag") == 1){setprop(lw~"tmp/thread-status","placing");}
-else {local_weather.assemble_effect_array();} # otherwise this is done at the end of the placement loop
+if (getprop(lw~"tmp/thread-flag") == 1)
+	{setprop(lw~"tmp/thread-status","placing");}
+else 	# without worker threads, tile generation is complete at this point
+	{props.globals.getNode(lw~"tiles").getChild("tile",dir_index).getNode("generated-flag").setValue(2);}
+
+
 }
 
 
@@ -59,9 +71,9 @@ else {local_weather.assemble_effect_array();} # otherwise this is done at the en
 
 var set_4_8_stratus_tile = func {
 
-tile_start();
-
 setprop(lw~"tiles/code","test");
+
+tile_start();
 
 var x = 0.0;
 var y = 0.0;
@@ -87,6 +99,8 @@ local_weather.set_weather_station(blat, blon, 20000.0, 14.0, 12.0, 29.78);
 
 create_4_8_cirrocumulus_bank(blat, blon, 6000.0, 0.0);
 
+#create_detailed_stratocumulus_bank(blat, blon,5000.0+alt_offset,0.0);
+
 
 tile_finished();
 
@@ -99,9 +113,9 @@ tile_finished();
 
 var set_high_pressure_core_tile = func {
 
-tile_start();
-
 setprop(lw~"tiles/code","high_pressure_core");
+
+tile_start();
 
 var x = 0.0;
 var y = 0.0;
@@ -148,9 +162,9 @@ tile_finished();
 
 var set_high_pressure_tile = func {
 
-tile_start();
-
 setprop(lw~"tiles/code","high_pressure");
+
+tile_start();
 
 var x = 0.0;
 var y = 0.0;
@@ -186,36 +200,32 @@ var alt = spread * 1000;
 
 var rn = rand();
 
-if (rn > 0.5)
+
+if (rn > 0.66)
 	{
 	# cloud scenario 1: possible Cirrus over Cumulus
 	var strength = 0.2 + rand() * 0.4;
 	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
 
-	# if cumulus are weak, increase likelihood of Cirrus (the logic is the other way round
-	# but this makes no difference and is easier to implement)
+	# one or two Cirrus clouds
 
-	# try to place two spatially separated Cirrus clouds
-
-	if (rand() > 2.0 * strength)
-		{
-		x = 2000.0 + rand() * 16000.0;
-		y = 2.0 * (rand()-0.5) * 18000;
-		alt = 25000.0 + rand() * 5000.0;
-		var path = local_weather.select_cloud_model("Cirrus", "small");
-		compat_layer.create_cloud(path, blat + get_lat(x,y,phi), blon+get_lon(x,y,phi),  alt + alt_offset,alpha);
-		}
-
-	if (rand() > 2.0 * strength)
+	x = 2000.0 + rand() * 16000.0;
+	y = 2.0 * (rand()-0.5) * 18000;
+	alt = 25000.0 + rand() * 5000.0;
+	var path = local_weather.select_cloud_model("Cirrus", "small");
+	compat_layer.create_cloud(path, blat + get_lat(x,y,phi), blon+get_lon(x,y,phi),  alt + alt_offset,alpha);
+	
+	if (rand() > 0.5)
 		{
 		x = -2000.0 - rand() * 16000.0;
 		y = 2.0 * (rand()-0.5) * 18000;
 		alt = 25000.0 + rand() * 5000.0;
 		var path = local_weather.select_cloud_model("Cirrus", "small");
 		compat_layer.create_cloud(path, blat + get_lat(x,y,phi), blon+get_lon(x,y,phi),  alt + alt_offset,alpha);
-		}
+		}	
+
 	}
-else if (rn > 0.0)
+else if (rn > 0.33)
 	{
 	# cloud scenario 2: Cirrostratus over weak Cumulus
 
@@ -223,6 +233,22 @@ else if (rn > 0.0)
 	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
 
 	create_2_8_cirrostratus(blat, blon, alt+alt_offset+25000.0, alpha);
+	}
+
+else if (rn > 0.0)
+	{
+	# cloud scenario 3: Cirrocumulus sheet over Cumulus
+
+	var strength = 0.2 + rand() * 0.2;
+	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
+	
+	x = 2.0 * (rand()-0.5) * 5000;
+	y = 2.0 * (rand()-0.5) * 5000;
+
+
+	var path = local_weather.select_cloud_model("Cirrocumulus", "large");
+	compat_layer.create_cloud(path, blat + get_lat(x,y,phi), blon+get_lon(x,y,phi),  alt + alt_offset +24000,alpha);
+
 	}
 
 tile_finished();
@@ -236,9 +262,9 @@ tile_finished();
 
 var set_high_pressure_border_tile = func {
 
-tile_start();
-
 setprop(lw~"tiles/code","high_pressure_border");
+
+tile_start();
 
 var x = 0.0;
 var y = 0.0;
@@ -340,17 +366,23 @@ else if (rn > 0.166)
 	}
 else if (rn > 0.0)
 	{
-	# cloud scenario 6: Cirrocumulus
+	# cloud scenario 6: Cirrocumulus sheets
 
 	var strength = 0.2 + rand() * 0.2;
 	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
 	
-	x = 2.0 * (rand()-0.5) * 5000;
-	y = 2.0 * (rand()-0.5) * 5000;
 
+	for (var i = 0; i < 2; i = i + 1)
+		{
+		x = 2.0 * (rand()-0.5) * 10000;
+		y = -6000 + i * 12000 + 2.0 * (rand()-0.5) * 1000;
 
-	var path = local_weather.select_cloud_model("Cirrocumulus", "large");
-	compat_layer.create_cloud(path, blat + get_lat(x,y,phi), blon+get_lon(x,y,phi),  alt + alt_offset +22000,alpha);
+		var beta = rand() * 90;
+		var alt_variation = rand() * 2000;
+
+		var path = local_weather.select_cloud_model("Cirrocumulus", "large");
+		compat_layer.create_cloud(path, blat + get_lat(x,y,phi), blon+get_lon(x,y,phi),  alt + alt_offset +20000+ alt_variation,alpha+ beta);
+		}
 
 	}
 
@@ -366,9 +398,9 @@ tile_finished();
 
 var set_low_pressure_border_tile = func {
 
-tile_start();
-
 setprop(lw~"tiles/code","low_pressure_border");
+
+tile_start();
 
 var x = 0.0;
 var y = 0.0;
@@ -408,7 +440,7 @@ var alt = spread * 1000.0;
 
 var rn = rand();
 
-if (rn > 0.75)
+if (rn > 0.8)
 	{
 	# cloud scenario 1: a low 4/8 stratus patches, thin patches above
 
@@ -416,7 +448,7 @@ if (rn > 0.75)
 	create_4_8_stratus_patches(blat, blon, alt+alt_offset,alpha);
 	create_4_8_tstratus_patches(blat, blon, alt+alt_offset+6000,alpha);
 	}
-else if (rn > 0.5)
+else if (rn > 0.6)
 	{
 	# cloud scenario 2: a low 4/8 undulatus, thin patches above
 
@@ -424,25 +456,33 @@ else if (rn > 0.5)
 	create_4_8_sstratus_undulatus(blat, blon, alt+alt_offset,alpha);
 	create_2_8_tstratus(blat, blon, alt+alt_offset+7000,alpha);
 	}
-else if (rn > 0.25)
+else if (rn > 0.4)
 	{
 	# cloud scenario 3: low Stratocumulus
 
-	alt = alt + local_weather.cloud_vertical_size_map["Stratus"] * 0.5 * m_to_ft;
-	create_stratocumulus_bank(blat, blon, alt+alt_offset,alpha);
-	create_2_8_sstratus(blat, blon, alt+alt_offset+3000,alpha);
+	# alt = alt + local_weather.cloud_vertical_size_map["Cumulus"] * 0.5 * m_to_ft;
+	create_detailed_stratocumulus_bank(blat, blon, alt+alt_offset,alpha);
+	create_2_8_sstratus(blat, blon, alt+alt_offset+6000,alpha);
 	create_2_8_tstratus(blat, blon, alt+alt_offset+9000,alpha);
 	}
-else if (rn > 0.0)
+else if (rn > 0.2)
 	{
 	# cloud scenario 4: dense low Stratocumulus
 
-	alt = alt + local_weather.cloud_vertical_size_map["Stratus"] * 0.5 * m_to_ft;
-	create_stratocumulus_bank(blat, blon, alt+alt_offset,alpha);
-	create_stratocumulus_bank(blat, blon, alt+alt_offset,alpha);
+	# alt = alt + local_weather.cloud_vertical_size_map["Cumulus"] * 0.5 * m_to_ft;
+	create_detailed_stratocumulus_bank(blat, blon, alt+alt_offset,alpha);
+	create_detailed_stratocumulus_bank(blat, blon, alt+alt_offset,alpha);
 	create_2_8_sstratus(blat, blon, alt+alt_offset+8000,alpha);
 	}
+else if (rn > 0.0)
+	{
+	# cloud scenario 5: Cirrocumulus over 4/8 Stratus
 
+	alt = alt + local_weather.cloud_vertical_size_map["Stratus"] * 0.5 * m_to_ft;
+	create_4_8_sstratus_patches(blat, blon, alt+alt_offset,alpha);
+
+	create_4_8_cirrocumulus_bank(blat, blon, alt+alt_offset + 12000.0, alpha);
+	}
 
 tile_finished();
 
@@ -454,9 +494,9 @@ tile_finished();
 
 var set_low_pressure_tile = func {
 
-tile_start();
-
 setprop(lw~"tiles/code","low_pressure");
+
+tile_start();
 
 var x = 0.0;
 var y = 0.0;
@@ -565,9 +605,9 @@ tile_finished();
 
 var set_low_pressure_core_tile = func {
 
-tile_start();
-
 setprop(lw~"tiles/code","low_pressure_core");
+
+tile_start();
 
 var x = 0.0;
 var y = 0.0;
@@ -633,9 +673,9 @@ tile_finished();
 
 var set_cold_sector_tile = func {
 
-tile_start();
-
 setprop(lw~"tiles/code","cold_sector");
+
+tile_start();
 
 var x = 0.0;
 var y = 0.0;
@@ -668,13 +708,36 @@ var alt = spread * 1000.0;
 
 var rn = rand();
 
+#rn = 0.1;
 
-if (rn > 0.0)
+if (rn > 0.5)
 	{
 	# cloud scenario 1: strong Cumulus development
 	var strength = 0.8 + rand() * 0.2;
 	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
 	}
+
+else if (rn > 0.0)
+	{
+	# cloud scenario 2: Cirrocumulus sheets over Cumulus
+
+	var strength = 0.6 + rand() * 0.2;
+	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
+	
+	for (var i = 0; i < 2; i = i + 1)
+		{
+		x = 2.0 * (rand()-0.5) * 10000;
+		y = -6000 + i * 12000 + 2.0 * (rand()-0.5) * 1000;
+
+		var beta = rand() * 90;
+		var alt_variation = rand() * 2000;
+
+		var path = local_weather.select_cloud_model("Cirrocumulus", "large");
+		compat_layer.create_cloud(path, blat + get_lat(x,y,phi), blon+get_lon(x,y,phi),  alt + alt_offset +20000+ alt_variation,alpha+ beta);
+		}
+
+	}
+
 
 tile_finished();
 
@@ -687,9 +750,9 @@ tile_finished();
 
 var set_warm_sector_tile = func {
 
-tile_start();
-
 setprop(lw~"tiles/code","warm_sector");
+
+tile_start();
 
 var x = 0.0;
 var y = 0.0;
@@ -789,9 +852,9 @@ tile_finished();
 
 var set_tropical_weather_tile = func {
 
-tile_start();
-
 setprop(lw~"tiles/code","tropical_weather");
+
+tile_start();
 
 var x = 0.0;
 var y = 0.0;
@@ -907,9 +970,9 @@ tile_finished();
 
 var set_coldfront_tile = func {
 
-tile_start();
-
 setprop(lw~"tiles/code","coldfront");
+
+tile_start();
 
 var x = 0.0;
 var y = 0.0;
@@ -976,7 +1039,7 @@ y = 5000.0;
 
 var strength = 0.3;
 var n = int(4000 * strength) * 0.2;
-local_weather.cumulus_exclusion_layer(blat+get_lat(x,y,phi), blon+ get_lon(x,y,phi), alt+alt_offset, n, 20000.0, 10000.0, alpha, 2.1,2.5 , size(elat), elat, elon, erad);
+local_weather.cumulus_exclusion_layer(blat+get_lat(x,y,phi), blon+ get_lon(x,y,phi), alt+alt_offset, n, 20000.0, 10000.0, alpha, 1.5,2.5 , size(elat), elat, elon, erad);
 
 # then leading and traling Cumulus
 
@@ -985,14 +1048,14 @@ y = 15500.0;
 
 strength = 1.0;
 n = int(4000 * strength) * 0.15;
-local_weather.cumulus_exclusion_layer(blat+get_lat(x,y,phi), blon+ get_lon(x,y,phi), alt+alt_offset, n, 20000.0, 2000.0, alpha, 0.5,1.4 , size(elat), elat, elon, erad);
+local_weather.cumulus_exclusion_layer(blat+get_lat(x,y,phi), blon+ get_lon(x,y,phi), alt+alt_offset, n, 20000.0, 2000.0, alpha, 0.5,1.8 , size(elat), elat, elon, erad);
 
 x = 0.0;
 y = -5500.0;
 
 strength = 1.0;
 n = int(4000 * strength) * 0.15;
-local_weather.cumulus_exclusion_layer(blat+get_lat(x,y,phi), blon+ get_lon(x,y,phi), alt+alt_offset, n, 20000.0, 2000.0, alpha, 0.5,1.4 , size(elat), elat, elon, erad);
+local_weather.cumulus_exclusion_layer(blat+get_lat(x,y,phi), blon+ get_lon(x,y,phi), alt+alt_offset, n, 20000.0, 2000.0, alpha, 0.5,1.8 , size(elat), elat, elon, erad);
 
 # finally some thin stratus underneath the Cumulus
 
@@ -1028,9 +1091,9 @@ tile_finished();
 
 var set_warmfront1_tile = func {
 
-tile_start();
-
 setprop(lw~"tiles/code","warmfront1");
+
+tile_start();
 
 var x = 0.0;
 var y = 0.0;
@@ -1084,11 +1147,11 @@ var alt = spread * 1000.0;
 
 # high Cirrus leading
 
-x = 2.0 * (rand()-0.5) * 3000;
-y = 2.0 * (rand()-0.5) * 3000 - 12000.0; 
+x = 2.0 * (rand()-0.5) * 1000;
+y = 2.0 * (rand()-0.5) * 1000 - 9000.0; 
 	
 
-local_weather.create_streak("Cirrus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 25000.0+alt+alt_offset,1500.0,3,11000.0,0.0, 800.0, 1,8000.0,0.0,10000.0,alpha ,1.0);
+local_weather.create_streak("Cirrus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 25000.0+alt+alt_offset,1500.0,3,11000.0,0.0, 3000.0, 2,11000.0,0.0,3000.0,alpha ,1.0);
 
 
 # followed by random patches of Cirrostratus
@@ -1114,9 +1177,9 @@ tile_finished();
 
 var set_warmfront2_tile = func {
 
-tile_start();
-
 setprop(lw~"tiles/code","warmfront2");
+
+tile_start();
 
 var x = 0.0;
 var y = 0.0;
@@ -1223,9 +1286,9 @@ tile_finished();
 
 var set_warmfront3_tile = func {
 
-tile_start();
-
 setprop(lw~"tiles/code","warmfront3");
+
+tile_start();
 
 var x = 0.0;
 var y = 0.0;
@@ -1320,9 +1383,9 @@ tile_finished();
 
 var set_warmfront4_tile = func {
 
-tile_start();
-
 setprop(lw~"tiles/code","warmfront4");
+
+tile_start();
 
 var x = 0.0;
 var y = 0.0;
@@ -1405,242 +1468,11 @@ tile_finished();
 }
 
 
-####################################
-# Altocumulus sky
-# cloud count 1400/tile
-####################################
 
-var set_altocumulus_tile = func {
 
-tile_start();
 
-var alpha = getprop(lw~"tmp/tile-orientation-deg");
-var phi = alpha * math.pi/180.0;
-var alt_offset = getprop(lw~"tmp/tile-alt-offset-ft");
 
-# get tile center coordinates
 
-var blat = getprop(lw~"tiles/tmp/latitude-deg");
-var blon = getprop(lw~"tiles/tmp/longitude-deg");
-calc_geo(blat);
-
-# first weather info for tile center (lat, lon, visibility, temperature, dew point, pressure)
-
-local_weather.set_weather_station(blat, blon, 35000.0, 22.0, 14.0, 30.02);
-
-# then draw the Altocumulus streaks, dense at 15.000 ft, sparse at 17.000 ft
-
-local_weather.create_streak("Altocumulus",blat, blon, 15000.0+alt_offset,1500.0,40,1000.0,0.2,800.0, 40,1000.0,0.2,800.0,alpha ,1.0);
-local_weather.create_streak("Altocumulus",blat, blon, 17000.0+alt_offset,1500.0,18,2000.0,0.35,800.0,18,2000.0,0.35,800.0,alpha,1.0);
-
-
-tile_finished();
-
-}
-
-
-
-
-####################################
-# Overcast stratus sky
-# cloud count 1000/tile
-####################################
-
-var set_overcast_stratus_tile = func {
-
-tile_start();
-
-var x = 0.0;
-var y = 0.0;
-var lat = 0.0;
-var lon = 0.0;
-
-var alpha = getprop(lw~"tmp/tile-orientation-deg");
-var phi = alpha * math.pi/180.0;
-var alt_offset = getprop(lw~"tmp/tile-alt-offset-ft");
-
-# get tile center coordinates
-
-var blat = getprop(lw~"tiles/tmp/latitude-deg");
-var blon = getprop(lw~"tiles/tmp/longitude-deg");
-calc_geo(blat);
-
-# first weather info for tile center (lat, lon, visibility, temperature, dew point, pressure)
-
-local_weather.set_weather_station(blat, blon, 10000.0, 14.0, 12.0, 29.78);
-
-# then draw the Stratus layers
-
-var size_offset = 0.5 * m_to_ft * local_weather.cloud_vertical_size_map["Stratus"];
-local_weather.create_streak("Stratus",blat, blon, 1500.0+alt_offset+size_offset,0.0,32,1250.0,0.2,600.0, 32,1250.0,0.2,600.0,0.0 ,1.0);
-
-
-size_offset = 0.5 * m_to_ft * local_weather.cloud_vertical_size_map["Stratus_structured"];
-local_weather.create_streak("Stratus (structured)",blat, blon, 5000.0+alt_offset+size_offset,0.0,16,2500.0,0.3,1200.0,16,2500.0,0.3,1200.0,0.0,1.0);
-
-
-
-# reduce visibility even more below lowest layer
-# and add a slight drizzle by a nested effect volume
-
-local_weather.create_effect_volume(3, blat, blon, 18000.0, 18000.0, 0.0, 0.0, 1800.0, 8000.0, -1, -1, -1, -1, 0);
-local_weather.create_effect_volume(3, blat, blon, 14000.0, 14000.0, 0.0, 0.0, 1500.0, 6000.0, 0.1, -1, -1, -1,0 );
-
-
-tile_finished();
-
-}
-
-
-####################################
-# Incoming rainfront
-# cloud count 1500/tile
-####################################
-
-var set_rainfront_tile = func {
-
-tile_start();
-
-var x = 0.0;
-var y = 0.0;
-var lat = 0.0;
-var lon = 0.0;
-
-var alpha = getprop(lw~"tmp/tile-orientation-deg");
-var phi = alpha * math.pi/180.0;
-var alt_offset = getprop(lw~"tmp/tile-alt-offset-ft");
-
-# get tile center coordinates
-
-var blat = getprop(lw~"tiles/tmp/latitude-deg");
-var blon = getprop(lw~"tiles/tmp/longitude-deg");
-calc_geo(blat);
-
-# first weather info for tile center (lat, lon, visibility, temperature, dew point, pressure)
-local_weather.set_weather_station(blat, blon, 9000.0, 14.0, 12.0, 990 * hp_to_inhg);
-
-x = 15000.0; y = 20000.0;
-local_weather.set_weather_station(blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 6000.0, 12.0, 10.0, 985 * hp_to_inhg);
-
-x = -15000.0; y = 20000.0;
-local_weather.set_weather_station(blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 6000.0, 12.0, 10.0, 990 * hp_to_inhg);
-
-#  draw two Stratus layers
-
-x = 0.0; y = -15000.0;
-var size_offset = 0.5 * m_to_ft * local_weather.cloud_vertical_size_map["Stratus"];
-local_weather.create_streak("Stratus",blat, blon, 3000.0+alt_offset+size_offset,500.0,17,2500.0,0.2,1100.0, 6,2000.0,0.2,1100.0,alpha ,1.0);
-
-
-x = 0.0; y = 0.0;
-var size_offset = 0.5 * m_to_ft * local_weather.cloud_vertical_size_map["Stratus"];
-local_weather.create_streak("Stratus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 2000.0+alt_offset+size_offset,300.0,40,1000.0,0.2,600.0, 10,1000.0,0.2,600.0,alpha ,1.0);
-
-
-#  and a Nimbus layer with precipitation
-
-x = 0.0; y = 15000.0;
-var size_offset = 0.5 * m_to_ft * local_weather.cloud_vertical_size_map["Nimbus"];
-local_weather.create_layer("Nimbus", blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 1000.0+alt_offset, 500.0, 22000.0, 13000.0, alpha, 1.0, 0.2, 1, 1.0);
-
-# set visibility and rain inside the precipitation area
-
-local_weather.create_effect_volume(2, blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 19000.0, 10000.0, alpha, 0.0, 2000.0, 5000.0, 0.1, -1, -1, -1,0 );
-local_weather.create_effect_volume(2, blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 16000.0, 7000.0, alpha, 0.0, 1500.0, 1500.0, 0.5, -1, -1, -1,0 );
-
-# set visibility good above the clouds
-
-local_weather.create_effect_volume(3, blat, blon, 20000.0, 20000.0, 0.0, 2100.0, 85000.0, 18000.0, -1, -1, -1, -1,0 );
-
-tile_finished();
-
-
-
-}
-
-
-####################################
-# Broken layers 
-# cloud count 550/tile
-####################################
-
-var set_broken_layers_tile = func {
-
-tile_start();
-
-
-var alpha = getprop(lw~"tmp/tile-orientation-deg");
-var phi = alpha * math.pi/180.0;
-var alt_offset = getprop(lw~"tmp/tile-alt-offset-ft");
-
-# get tile center coordinates
-
-var blat = getprop(lw~"tiles/tmp/latitude-deg");
-var blon = getprop(lw~"tiles/tmp/longitude-deg");
-calc_geo(blat);
-
-# first weather info for tile center (lat, lon, visibility, temperature, dew point, pressure)
-local_weather.set_weather_station(blat, blon, 20000.0, 14.0, 12.0, 1005 * hp_to_inhg);
-
-# set the broken stratus layers
-
-size_offset = 0.5 * m_to_ft * local_weather.cloud_vertical_size_map["Stratus_structured"];
-
-local_weather.create_streak("Stratus (structured)",blat, blon, 4000.0+alt_offset+size_offset,1000.0,22,0.0,0.3,20000.0,22,0.0,0.3,20000.0,0.0,1.0);
-
-
-local_weather.create_streak("Stratus (structured)",blat, blon, 6000.0+alt_offset+size_offset,1000.0,16,0.0,0.4,20000.0,16,0.0,0.4,20000.0,0.0,1.0);
-
-
-local_weather.create_streak("Stratus (structured)",blat, blon, 7000.0+alt_offset+size_offset,1000.0,11,0.0,0.5,20000.0,11,0.0,0.5,20000.0,0.0,1.0);
-
-
-tile_finished();
-
-
-}
-
-
-####################################
-# Fair weather and Cumulus
-# cloud count max. 800/tile
-####################################
-
-var set_fair_weather_tile = func {
-
-tile_start();
-
-var x = 0.0;
-var y = 0.0;
-var lat = 0.0;
-var lon = 0.0;
-
-var alpha = getprop(lw~"tmp/tile-orientation-deg");
-var phi = alpha * math.pi/180.0;
-var alt_offset = getprop(lw~"tmp/tile-alt-offset-ft");
-
-# get tile center coordinates
-
-
-var blat = getprop(lw~"tiles/tmp/latitude-deg");
-var blon = getprop(lw~"tiles/tmp/longitude-deg");
-calc_geo(blat);
-
-# first weather info for tile center (lat, lon, visibility, temperature, dew point, pressure)
-local_weather.set_weather_station(blat, blon, 35000.0, 20.0, 16.0, 1018 * hp_to_inhg);
-
-
-# add convective clouds
-
-
-var strength = 1.0;
-var n = int(4000 * strength); # calculate the number of placement tries from tile size 20x20km and strength
-local_weather.create_cumosys(blat,blon, 3000.0 + alt_offset, n, 20000.0);
-
-tile_finished();
-
-
-}
 
 
 ####################################
@@ -1648,6 +1480,8 @@ tile_finished();
 ####################################
 
 var set_gliders_sky_tile = func {
+
+setprop(lw~"tiles/code","glides_sky");
 
 tile_start();
 
@@ -1691,6 +1525,8 @@ tile_finished();
 
 var set_blue_thermals_tile = func {
 
+setprop(lw~"tiles/code","blue_thermals");
+
 tile_start();
 
 var x = 0.0;
@@ -1728,121 +1564,7 @@ tile_finished();
 }
 
 
-####################################
-# Summer rain
-# cloud count max. 1200/tile
-####################################
 
-var set_summer_rain_tile = func {
-
-tile_start();
-
-var x = 0.0;
-var y = 0.0;
-var lat = 0.0;
-var lon = 0.0;
-
-var alpha = getprop(lw~"tmp/tile-orientation-deg");
-var phi = alpha * math.pi/180.0;
-var alt_offset = getprop(lw~"tmp/tile-alt-offset-ft");
-
-# get tile center coordinates
-
-var blat = getprop(lw~"tiles/tmp/latitude-deg");
-var blon = getprop(lw~"tiles/tmp/longitude-deg");
-calc_geo(blat);
-
-# first weather info for tile center (lat, lon, visibility, temperature, dew point, pressure)
-local_weather.set_weather_station(blat, blon, 25000.0, 25.0, 22.0, 1013 * hp_to_inhg);
-
-# then add some developing thunderstorms
-local_weather.create_streak("Cumulonimbus (rain)",blat, blon, 3000.0+alt_offset,0.0,3,0.0,1.0,20000.0,3,0.0,1.0,20000.0,0.0,1.0);
-
-
-
-# add overdeveloped convective clouds
-
-var strength = 1.5;
-var n = int(4000 * strength); # calculate the number of placement tries from tile size 20x20km and strength
-local_weather.create_cumosys(blat,blon, 3000.0+alt_offset,n, 20000.0);
-
-tile_finished();
-
-
-}
-
-
-
-####################################
-# Cirrus sky
-####################################
-
-var set_cirrus_sky_tile = func {
-
-tile_start();
-
-var x = 0.0;
-var y = 0.0;
-var lat = 0.0;
-var lon = 0.0;
-
-var alpha = getprop(lw~"tmp/tile-orientation-deg");
-var phi = alpha * math.pi/180.0;
-var alt_offset = getprop(lw~"tmp/tile-alt-offset-ft");
-
-# get tile center coordinates
-
-var blat = getprop(lw~"tiles/tmp/latitude-deg");
-var blon = getprop(lw~"tiles/tmp/longitude-deg");
-calc_geo(blat);
-
-# first weather info for tile center (lat, lon, visibility, temperature, dew point, pressure)
-
-local_weather.set_weather_station(blat, blon, 20000.0, 20.0, 16.0, 29.80);
-
-# visibility is slightly worse north, pressure is lower, so set additional stations
-
-x = -10000.0; y = 18000.0; 
-lat = blat + (y * math.cos(phi) - x * math.sin(phi)) * m_to_lat;
-lon = blon + (x * math.cos(phi) + y * math.sin(phi)) * m_to_lon;
-local_weather.set_weather_station(lat, lon, 18000.0, 20.0, 16.0, 29.75);
-
-x = 10000.0; y = 18000.0; 
-lat = blat + (y * math.cos(phi) - x * math.sin(phi)) * m_to_lat;
-lon = blon + (x * math.cos(phi) + y * math.sin(phi)) * m_to_lon;
-local_weather.set_weather_station(lat, lon, 18000.0, 20.0, 16.0, 29.75);
-
-# now set up the clouds
-
-x = 0.0; y = 0.0; 
-compat_layer.create_cloud("Models/Weather/cirrus1.xml", blat + get_lat(x,y,phi), blon+get_lon(x,y,phi), 28000.0 + alt_offset,alpha);
-
-x = 7500.0; y = 1000.0; 
-compat_layer.create_cloud("Models/Weather/cirrus2.xml", blat + get_lat(x,y,phi), blon+get_lon(x,y,phi), 28500.0 + alt_offset,alpha);
-
-x = 16000.0; y = -1000.0; 
-compat_layer.create_cloud("Models/Weather/cirrus1.xml", blat + get_lat(x,y,phi), blon+get_lon(x,y,phi), 29500.0 + alt_offset,alpha);
-
-x = -16000.0; y = 2500.0; 
-compat_layer.create_cloud("Models/Weather/cirrus1.xml",blat + get_lat(x,y,phi), blon+get_lon(x,y,phi), 30000.0 + alt_offset,alpha);
-
-x = 7000.0; y = 8000.0; 
-compat_layer.create_cloud("Models/Weather/cirrocumulus1.xml", blat + get_lat(x,y,phi), blon+get_lon(x,y,phi), 22000.0 + alt_offset,alpha);
-
-x = -3000.0; y = 9000.0; 
-compat_layer.create_cloud("Models/Weather/cirrocumulus1.xml", blat + get_lat(x,y,phi), blon+get_lon(x,y,phi), 21000.0 + alt_offset,alpha);
-
-x = -1000.0; y = 14000.0; 
-compat_layer.create_cloud("Models/Weather/cirrocumulus2.xml", blat + get_lat(x,y,phi), blon+get_lon(x,y,phi), 20000.0 + alt_offset,alpha);
-
-# add moderately strong convective clouds
-
-var strength = 0.4;
-var n = int(4000 * strength); # calculate the number of placement tries from tile size 20x20km and strength
-local_weather.create_cumosys(blat,blon, 4000.0+alt_offset,n, 20000.0);
-
-tile_finished();
-}
 
 
 ####################################
@@ -1851,6 +1573,9 @@ tile_finished();
 
 var set_METAR_tile = func {
 
+
+setprop(lw~"tiles/code","METAR"); # to be replaced
+
 tile_start();
 
 var x = 0.0;
@@ -1858,7 +1583,7 @@ var y = 0.0;
 var lat = 0.0;
 var lon = 0.0;
 
-setprop(lw~"tiles/code","METAR"); # to be replaced
+
 
 var alpha = getprop(lw~"METAR/wind-direction-deg");
 var phi = alpha * math.pi/180.0;
@@ -2163,10 +1888,10 @@ var create_4_8_cirrocumulus_bank = func (lat, lon, alt, alpha) {
 var phi = alpha * math.pi/180.0;
 var x = 2.0 * (rand()-0.5) * 5000;
 var y = 2.0 * (rand()-0.5) * 5000;
-var tri = 1.4 + 0.6 *rand();
+var tri = 1.5 + 1.5 *rand();
 var beta = (rand() -0.5) * 60.0;
 
-local_weather.create_streak("Cirrocumulus (cloudlet)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,900.0,15,750.0,0.2,400.0,24,750.0,0.2,400.0,alpha+90.0+beta,tri);
+local_weather.create_streak("Cirrocumulus (cloudlet)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,400.0,12,750.0,0.25,400.0,24,750.0,0.2,400.0,alpha+90.0+beta,tri);
 
 }
 
@@ -2179,7 +1904,7 @@ var y = 2.0 * (rand()-0.5) * 5000;
 var tri = 1.4 + 0.6 *rand();
 var beta = (rand() -0.5) * 60.0;
 
-local_weather.create_streak("Cirrocumulus (cloudlet)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,900.0,25,300.0,0.0,900.0,15,1400.0,0.0,300.0,alpha+90.0+beta,tri);
+local_weather.create_streak("Cirrocumulus (cloudlet)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,400.0,25,300.0,0.0,900.0,15,1400.0,0.0,300.0,alpha+90.0+beta,tri);
 
 }
 
@@ -2292,6 +2017,28 @@ local_weather.create_streak("Cumulus",lat+get_lat(x,y+6000,phi), lon+get_lon(x,y
 local_weather.create_streak("Cumulus",lat+get_lat(x,y-6000,phi), lon+get_lon(x,y-6000,phi), alt,500.0,15,600.0,0.2,400.0,20,600.0,0.2,400.0,alpha+270.0+beta,tri);
 
 }
+
+var create_detailed_stratocumulus_bank = func (lat, lon, alt, alpha) {
+
+var phi = alpha * math.pi/180.0;
+var x = 2.0 * (rand()-0.5) * 6000;
+var y = 2.0 * (rand()-0.5) * 6000;
+var tri = 1.5 + 1.5*rand();
+var beta = (rand() -0.5) * 60.0;
+
+var alt_offset = 0.5 * local_weather.cloud_vertical_size_map["Cumulus"] * ft_to_m;
+
+local_weather.create_streak("Congestus",lat+get_lat(x,y+7500,phi), lon+get_lon(x,y+7500,phi), alt + alt_offset,500.0,12,1000.0,0.1,400.0,15,1000.0,0.1,400.0,alpha+90.0+beta,tri);
+
+local_weather.create_streak("Congestus",lat+get_lat(x,y-7500,phi), lon+get_lon(x,y-7500,phi), alt + alt_offset,500.0,12,1000.0,0.1,400.0,15,1000.0,0.1,400.0,alpha+270.0+beta,tri);
+
+
+local_weather.create_streak("Congestus bottom",lat+get_lat(x,y+5250,phi), lon+get_lon(x,y+5250,phi), alt,0.0,10,700.0,0.2,400.0,15,700.0,0.0,400.0,alpha+90.0+beta,tri);
+
+local_weather.create_streak("Congestus bottom",lat+get_lat(x,y-5250,phi), lon+get_lon(x,y-5250,phi), alt,0.0,10,700.0,0.2,400.0,15,700.0,0.0,400.0,alpha+270.0+beta,tri);
+
+}
+
 
 var create_cloud_bank = func (type, lat, lon, alt, x1, x2, height, n, alpha) {
 

@@ -445,18 +445,18 @@ else if (wind_model_flag == 5) # aloft waypoint interpolated
 
 var altitude_agl = getprop("/position/altitude-agl-ft");
 
-if (getprop("tmp/presampling-flag") == 0)
+
+if (getprop(lw~"tmp/presampling-flag") == 0)
 	{
 	var boundary_alt = 600.0;
-
 	var windspeed_ground = windspeed/3.0;
 
 	if (altitude_agl < boundary_alt)
-	{var windspeed_current = windspeed_ground + 2.0 * windspeed_ground * (altitude_agl/boundary_alt);}
+		{var windspeed_current = windspeed_ground + 2.0 * windspeed_ground * (altitude_agl/boundary_alt);}
 	else 
 		{var windspeed_current = windspeed;}
 	}
-else
+else 
 	{
 	var alt_median = alt_50_array[tile_index - 1];
 	var alt_difference = alt_median - (altitude - altitude_agl);
@@ -1022,13 +1022,18 @@ else if ((type == "Cumulonimbus") or (type == "Cumulonimbus (rain)")) {
 	}	
 else if (type == "Cirrus") {
 	if (subtype == "large") {
-		if (rn > 0.66) {path = "Models/Weather/cirrus1.xml";}
-		else if (rn > 0.33) {path = "Models/Weather/cirrus2.xml";}
-		else  {path = "Models/Weather/cirrus3.xml";}
+		if (rn > 0.833) {path = "Models/Weather/cirrus1.xml";}
+		else if (rn > 0.666) {path = "Models/Weather/cirrus2.xml";}
+		else if (rn > 0.5) {path = "Models/Weather/cirrus3.xml";}
+		else if (rn > 0.333) {path = "Models/Weather/cirrus4.xml";}
+		else if (rn > 0.166) {path = "Models/Weather/cirrus5.xml";}
+		else  {path = "Models/Weather/cirrus6.xml";}
 		}	
 	else if (subtype == "small") {
-		if (rn > 0.5) {path = "Models/Weather/cirrus_amorphous1.xml";}
-		else  {path = "Models/Weather/cirrus_amorphous2.xml";}
+		if (rn > 0.75) {path = "Models/Weather/cirrus_amorphous1.xml";}
+		else if (rn > 0.5) {path = "Models/Weather/cirrus_amorphous2.xml";}
+		else if (rn > 0.25) {path = "Models/Weather/cirrus_amorphous3.xml";}
+		else  {path = "Models/Weather/cirrus_amorphous4.xml";}
 		}	
 	}
 else if (type == "Cirrocumulus") {
@@ -1037,8 +1042,14 @@ else if (type == "Cirrocumulus") {
 		else  {path = "Models/Weather/cirrocumulus2.xml";}
 		}	
 	else if (subtype == "large") {
-		if (rn > 0.5) {path = "Models/Weather/cirrocumulus1.xml";}
-		else  {path = "Models/Weather/cirrocumulus4.xml";}
+		if (rn > 0.875) {path = "Models/Weather/cirrocumulus1.xml";}
+		else if (rn > 0.750){path = "Models/Weather/cirrocumulus4.xml";}
+		else if (rn > 0.625){path = "Models/Weather/cirrocumulus5.xml";}
+		else if (rn > 0.500){path = "Models/Weather/cirrocumulus6.xml";}
+		else if (rn > 0.385){path = "Models/Weather/cirrocumulus7.xml";}
+		else if (rn > 0.250){path = "Models/Weather/cirrocumulus8.xml";}
+		else if (rn > 0.125){path = "Models/Weather/cirrocumulus9.xml";}
+		else {path = "Models/Weather/cirrocumulus10.xml";}
 		}	
 	}
 else if (type == "Cirrocumulus (cloudlet)") {
@@ -1238,7 +1249,7 @@ setprop(lwi~"ipoint-number",0);
 
 weather_tiles.last_pressure = 0.0;
 
-# stop the effect loop and the interpolation loop, make sure thermal generation is off
+# stop all loops make sure thermal generation is off
 
 setprop(lw~"effect-loop-flag",0);
 setprop(lw~"interpolation-loop-flag",0);
@@ -1246,6 +1257,8 @@ setprop(lw~"tile-loop-flag",0);
 setprop(lw~"lift-loop-flag",0);
 setprop(lw~"dynamics-loop-flag",0);
 setprop(lw~"timing-loop-flag",0);
+setprop(lw~"buffer-loop-flag",0);
+setprop(lw~"housekeeping-loop-flag",0);
 setprop(lw~"tmp/generate-thermal-lift-flag",0); 
 
 # also remove rain and snow effects
@@ -1261,13 +1274,22 @@ setprop(lw~"effect-volumes/effect-placement-index",0);
 setprop(lw~"effect-volumes/number",0);
 setprop(lw~"tiles/tile-counter",0);
 
+
 # remove any quadtrees and arrays
 
 settimer ( func { setsize(weather_dynamics.cloudQuadtrees,0);},0.1); # to avoid error generation in this frame
 setsize(effectVolumeArray,0);
 n_effectVolumeArray = 0;
 
-setsize(weather_tile_management.modelArrays,0);
+settimer ( func {
+	setsize(weather_tile_management.modelArrays,0);
+	setsize(weather_dynamics.tile_wind_direction,0);
+	setsize(weather_dynamics.tile_wind_speed,0);
+	setsize(weather_tile_management.cloudBufferArray,0);
+	setsize(weather_tile_management.cloudSceneryArray,0);
+	setprop(lw~"clouds/buffer-count",0);
+	setprop(lw~"clouds/cloud-scenery-count",0);
+	},1.1);
 
 }
 
@@ -1280,7 +1302,10 @@ var create_detailed_cumulus_cloud = func (lat, lon, alt, size) {
 
 #print(size);
 
-var edge_bias = 0.0;
+var edge_bias = convective_texture_mix;
+
+#print("edge_bias: ",edge_bias);
+
 var size_bias = 0.0;
 
 if (size > 2.0)
@@ -2015,7 +2040,24 @@ else
 
 var terrain_presampling_loop = func (blat, blon, nc, size, alpha) {
 
-var n = 25; # number of geoinfo calls per frame
+if (compat_layer.features.geodinfo_supports_vectors == 0)
+	{var n = 25;} # number of geoinfo calls per frame
+else
+	{var n = 25;} # vector call
+
+var n_out = 25;
+
+# dynamically drop accuracy if framerate is low
+
+var dt = getprop("/sim/time/delta-sec");
+
+if (dt > 0.2) # we have below 20 fps
+	{n = 5;}
+else if (dt > 0.1) # we have below 10 fps
+	{n = 10;}
+else if (dt > 0.05) # we have below 5 fps
+	{n = 15;}
+
 
 if (nc <= 0) # we're done and may analyze the result
 	{
@@ -2027,7 +2069,7 @@ if (nc <= 0) # we're done and may analyze the result
 
 terrain_presampling(blat, blon, n, size, alpha);
 
-settimer( func {terrain_presampling_loop(blat, blon, nc-n, size, alpha) },0);
+settimer( func {terrain_presampling_loop(blat, blon, nc-n_out, size, alpha) },0);
 }
 
 
@@ -2042,21 +2084,34 @@ var elevation = 0.0;
 
 var lat_vec = [];
 var lon_vec = [];
+var lat_lon_vec = [];
 
 
 for (var i=0; i<ntries; i=i+1)
 	{
 	var x = (2.0 * rand() - 1.0) * size;
 	var y = (2.0 * rand() - 1.0) * size; 
-
-	#var lat = blat + (y * math.cos(phi) - x * math.sin(phi)) * m_to_lat;
-	#var lon = blon + (x * math.cos(phi) + y * math.sin(phi)) * m_to_lon;
-
-	append(lat_vec, blat + (y * math.cos(phi) - x * math.sin(phi)) * m_to_lat);
-	append(lon_vec, blon + (x * math.cos(phi) + y * math.sin(phi)) * m_to_lon);
+	
+	if (compat_layer.features.geodinfo_supports_vectors == 0)
+		{
+		append(lat_vec, blat + (y * math.cos(phi) - x * math.sin(phi)) * m_to_lat);
+		append(lon_vec, blon + (x * math.cos(phi) + y * math.sin(phi)) * m_to_lon);
+		}
+	else
+		{
+		append(lat_lon_vec, blat + (y * math.cos(phi) - x * math.sin(phi)) * m_to_lat);
+		append(lat_lon_vec, blon + (x * math.cos(phi) + y * math.sin(phi)) * m_to_lon);
+		}
 	}
 	
-var elevation_vec = compat_layer.get_elevation_array(lat_vec, lon_vec);
+if (compat_layer.features.geodinfo_supports_vectors == 0)
+	{
+	var elevation_vec = compat_layer.get_elevation_array(lat_vec, lon_vec);
+	}
+else	
+	{
+	var elevation_vec = compat_layer.get_elevation_array(lat_lon_vec, lat_lon_vec);
+	}
 
 	#var info = geodinfo(lat, lon);
 	#if (info != nil) {elevation = info[0] * m_to_ft;}
@@ -2139,7 +2194,7 @@ setprop(lw~"tmp/tile-alt-min-ft",alt_min);
 setprop(lw~"tmp/tile-alt-layered-ft",0.5 * (alt_min + alt_offset));
 
 append(alt_50_array, alt_med);
-
+append(alt_20_array, alt_20);
 }
 
 ###########################################################
@@ -2234,6 +2289,21 @@ else {print("Wind model not implemented!"); wind_model_flag =1;}
 
 }
 
+
+###########################################################
+# set texture mix for convective clouds
+###########################################################
+
+var set_texture_mix = func {
+
+var thermal_properties = getprop(lw~"config/thermal-properties");
+
+
+convective_texture_mix = -(thermal_properties - 1.0) * 0.4;
+
+if (convective_texture_mix < -0.2) {convective_texture_mix = -0.2;}
+if (convective_texture_mix > 0.2) {convective_texture_mix = 0.2;}
+}
 
 ###########################################################
 # create an effect volume
@@ -2618,7 +2688,7 @@ var lon = getprop("position/longitude-deg");
 
 setprop(lw~"tiles/tmp/latitude-deg",lat);
 setprop(lw~"tiles/tmp/longitude-deg",lon);
-
+setprop(lw~"tiles/tmp/dir-index",4);
 
 # now see if we need to presample the terrain
 
@@ -2792,6 +2862,19 @@ if (getprop(lw~"config/dynamics-flag") ==1)
 
 	}
 
+# and start the buffer loop and housekeeping loop if needed
+
+if (getprop(lw~"config/buffer-flag") ==1)
+	{
+	if (getprop(lw~"buffer-loop-flag") == 0) 
+		{
+		setprop(lw~"buffer-loop-flag",1); weather_tile_management.buffer_loop(0);
+		setprop(lw~"housekeeping-loop-flag",1); weather_tile_management.housekeeping_loop(0);
+		}
+	}
+
+#weather_tile_management.watchdog_loop();
+
 }
 
 
@@ -2868,7 +2951,12 @@ setlistener(lw~"tmp/effect-thread-status", func {var s = size(effects_geo);  eff
 setlistener(lw~"tmp/presampling-status", func {manage_presampling(); });
 
 setlistener(lw~"config/wind-model", func {set_wind_model_flag();});
+setlistener(lw~"config/thermal-properties", func {set_texture_mix();});
 
+setlistener(lw~"config/clouds-in-dynamics-loop", func {weather_dynamics.max_clouds_in_loop = int(getprop(lw~"config/clouds-in-dynamics-loop"));});
+
+setlistener(lw~"config/clouds-visible-range-m", func {weather_tile_management.cloud_view_distance = getprop(lw~"config/clouds-visible-range-m");});
+setlistener(lw~"config/distance-to-load-tile-m", func {setprop(lw~"config/distance-to-remove-tile-m",getprop(lw~"config/distance-to-load-tile-m") + 500.0);});
 }
 
 
@@ -2881,7 +2969,18 @@ var test = func {
 var lat = getprop("position/latitude-deg");
 var lon = getprop("position/longitude-deg");
 
-showDialog("local_weather_winds");
+
+
+var v = [1,2,3,4,5,6,7];
+
+print(v[2]);
+v = weather_tile_management.delete_from_vector(v, 2);
+v = weather_tile_management.delete_from_vector(v, 2);
+
+for (var i = 0; i < size(v); i = i + 1)
+	{
+	print(v[i]);
+	}
 
 #weather_dynamics.cos_beta = 1;
 #weather_dynamics.sin_beta = 0;
@@ -2912,9 +3011,9 @@ showDialog("local_weather_winds");
 
 
 
-# terrain_presampling_start(lat, lon, 1000, 20000, 0.0);
+#terrain_presampling_start(lat, lon, 10000, 20000, 0.0);
 
-# test: 8 identical position tuples for KSFO
+#test: 8 identical position tuples for KSFO
 #var p=[ 37.6189722, -122.3748889,   37.6189722, -122.3748889,
 #        37.6289722, -122.3748889,   37.6189722, -122.3648889,
 #        37.6389722, -122.3748889,   37.6189722, -122.3548889,
@@ -2975,7 +3074,7 @@ var clouds_orientation = [];
 
 var terrain_n = [];
 var alt_50_array = [];
-
+var alt_20_array = [];
 
 # array of currently existing effect volumes
 
@@ -2986,6 +3085,10 @@ var n_effectVolumeArray = 0;
 # 1: constant 2: constant in tile 3: aloft interpolated 4: airmass interpolated
 
 var wind_model_flag = 1;
+
+# a global determining the relative amount of different textures in detailed convective clouds
+
+var convective_texture_mix = 0.0;
 
 
 # set all sorts of default properties for the menu
@@ -3054,6 +3157,8 @@ setprop(lw~"tmp/last-reading-pos-mod",0);
 setprop(lw~"tmp/thread-status", "idle");
 setprop(lw~"tmp/convective-status", "idle");
 setprop(lw~"tmp/presampling-status", "idle");
+setprop(lw~"tmp/buffer-status", "idle");
+setprop(lw~"tmp/buffer-tile-index", 0);
 setprop(lw~"tmp/FL0-wind-from-heading-deg",0.0);
 setprop(lw~"tmp/FL0-windspeed-kt",8.0);
 setprop(lw~"tmp/FL50-wind-from-heading-deg",2.0);
@@ -3078,12 +3183,21 @@ setprop(lw~"tmp/ipoint-longitude-deg",getprop("position/longitude-deg"));
 
 # set config values
 
-setprop(lw~"config/distance-to-load-tile-m",35000.0);
-setprop(lw~"config/distance-to-remove-tile-m",37000.0);
+#setprop(lw~"config/distance-to-load-tile-m",35000.0);
+#setprop(lw~"config/distance-to-remove-tile-m",37000.0);
+setprop(lw~"config/distance-to-load-tile-m",39000.0);
+setprop(lw~"config/distance-to-remove-tile-m",39500.0);
 setprop(lw~"config/detailed-clouds-flag",1);
 setprop(lw~"config/dynamics-flag",1);
 setprop(lw~"config/thermal-properties",1.0);
 setprop(lw~"config/wind-model","constant");
+setprop(lw~"config/buffer-flag",1);
+setprop(lw~"config/asymmetric-reduction",0.7);
+setprop(lw~"config/clouds-visible-range-m",30000.0);
+setprop(lw~"config/asymmetric-buffering-flag",0);
+setprop(lw~"config/asymmetric-buffering-reduction",0.3);
+setprop(lw~"config/asymmetric-buffering-angle-deg",90.0);
+setprop(lw~"config/clouds-in-dynamics-loop",250);
 
 # set the default loop flags to loops inactive
 
@@ -3092,6 +3206,8 @@ setprop(lw~"effect-loop-flag",0);
 setprop(lw~"interpolation-loop-flag",0);
 setprop(lw~"tile-loop-flag",0);
 setprop(lw~"lift-loop-flag",0);
+setprop(lw~"buffer-loop-flag",0);
+setprop(lw~"housekeeping-loop-flag",0);
 
 # create other management properties
 

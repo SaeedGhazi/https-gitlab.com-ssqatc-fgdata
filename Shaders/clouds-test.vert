@@ -3,11 +3,21 @@
 
 varying float fogFactor;
 
-float shade = 0.4;
-float cloud_height = 1000.0;
+//attribute vec3 usrAttr3;
+//attribute vec3 usrAttr4;
+
+//float textureIndexX = usrAttr3.r;
+//float textureIndexY = usrAttr3.g;
+//float wScale = usrAttr3.b;
+//float hScale = usrAttr4.r;
+//float shade = usrAttr4.g;
+//float cloud_height = usrAttr4.b;
 
 void main(void)
-{	
+{
+
+  float shade = 0.9;
+  float cloud_height = 1000.0;	
 
   gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
   //gl_TexCoord[0] = gl_MultiTexCoord0 + vec4(textureIndexX, textureIndexY, 0.0, 0.0);
@@ -25,8 +35,8 @@ void main(void)
   // scaling in the homogeneous component of pos.
   gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
   gl_Position.xyz = gl_Vertex.x * u;
-  gl_Position.xyz += gl_Vertex.y * r;
-  gl_Position.xyz += gl_Vertex.z * w;
+  gl_Position.xyz += gl_Vertex.y * r * 1.0;
+  gl_Position.xyz += gl_Vertex.z * w * 1.0;
   //gl_Position.xyz += gl_Vertex.y * r * wScale;
   //gl_Position.xyz += gl_Vertex.z * w  * hScale;
   gl_Position.xyz += gl_Color.xyz;
@@ -39,7 +49,6 @@ void main(void)
   // Determine the position - used for fog and shading calculations
   vec3 ecPosition = vec3(gl_ModelViewMatrix * gl_Position);
   float fogCoord = abs(ecPosition.z);
-  //float fract = smoothstep(0.0, cloud_height, gl_Position.z + cloud_height);
   float fract = smoothstep(0.0, cloud_height, gl_Position.z + cloud_height);
 
   // Final position of the sprite
@@ -54,7 +63,7 @@ void main(void)
   gl_FrontColor += gl_FrontLightModelProduct.sceneColor;
 
   // As we get within 100m of the sprite, it is faded out. Equally at large distances it also fades out.
-  gl_FrontColor.a = min(smoothstep(10.0, 100.0, fogCoord), 1 - smoothstep(40000.0, 45000.0, fogCoord));
+  gl_FrontColor.a = min(smoothstep(10.0, 100.0, fogCoord), 1 - smoothstep(25000.0, 30000.0, fogCoord));
   gl_BackColor = gl_FrontColor;
 
   // Fog doesn't affect clouds as much as other objects.

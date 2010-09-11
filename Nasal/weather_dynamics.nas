@@ -102,7 +102,7 @@ foreach (t; tiles)
 	{
 	var generated_flag = t.getNode("generated-flag").getValue();
 	
-	if (generated_flag == 1)
+	if ((generated_flag == 1) or (generated_flag ==2))
 		{
 		var index = t.getNode("tile-index").getValue();
 		current_tile_index_wd = index;
@@ -127,9 +127,9 @@ foreach (t; tiles)
 # if there are plenty of moving clouds nearby, no one pays attention to the small motion of distant clouds
 # price to pay is that some clouds appear to jump once they get into range
 
-if (cloud_counter < 150) {view_distance = view_distance * 1.1;}
-else if (cloud_counter > 250) {view_distance = view_distance * 0.9;}
-if (view_distance > 30000.0) {view_distance = 30000.0;}
+if (cloud_counter < 0.5 * max_clouds_in_loop) {view_distance = view_distance * 1.1;}
+else if (cloud_counter > max_clouds_in_loop) {view_distance = view_distance * 0.9;}
+if (view_distance > weather_tile_management.cloud_view_distance) {view_distance = weather_tile_management.cloud_view_distance;}
 
 #print(cloud_counter, " ", view_distance/1000.0);
 
@@ -477,7 +477,6 @@ return xy_vec;
 }
 
 
-
 ################################
 # globals, constants, properties
 ################################
@@ -505,6 +504,7 @@ var lw = "/local-weather/";
 # globals
 
 var time_lw = 0.0;
+var max_clouds_in_loop = 250;
 
 # the quadtree structure
 

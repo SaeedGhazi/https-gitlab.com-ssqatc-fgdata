@@ -333,6 +333,13 @@
 				<dialog-name>local_weather_tiles</dialog-name>
 			</binding>
 		</item>
+		<item>
+			<label>Local Weather Settings</label>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>local_weather_config</dialog-name>
+			</binding>
+		</item>
 	</menu>
 
 	<menu>

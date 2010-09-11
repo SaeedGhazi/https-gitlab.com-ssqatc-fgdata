@@ -26,6 +26,117 @@
 # get_elevation_vector		to get terrain elevation at given coordinate vector
 
 
+
+# This file contains portability wrappers for the local weather system: 
+#   http://wiki.flightgear.org/index.php/A_local_weather_system
+#   
+# This module is intended to provide a certain degree of backward compatibility for past 
+# FlightGear releases, while sketching out the low level APIs used and required by the 
+# local weather system, as these
+# are being added to FlightGear.
+#
+# This file contains various workarounds for doing things that are currently not yet directly 
+# supported by the core FlightGear/Nasal APIs (fgfs 2.0).
+#
+# Some of these workarounds are purely implemented in Nasal space, and may thus not provide sufficient
+# performance in some situations.
+#
+# The goal is to move all such workarounds eventually  into this module, so that the high level weather modules
+# only refer to this "compatibility layer" (using an "ideal API"), while this module handles 
+# implementation details 
+# and differences among different versions of FlightGear, so that key APIs can be ported to C++ space 
+# for the sake
+# of improving runtime performance and efficiency.
+#
+# This provides an abstraction layer that isolates the rest of the local weather system from low 
+# level implementation details.
+# 
+# C++ developers who want to help improve the local weather system (or the FlightGear/Nasal 
+# interface in general) should 
+# check out this file (as well as the wiki page) for APIs or features that shall eventually be 
+# re/implemented in C++ space for
+# improving the local weather system.
+#
+# 
+# This module provides a handful of helpers for dynamically querying the Nasal API of the running fgfs binary,
+# so that it can make use of new APIs (where available), while still working with older fgfs versions.
+#
+# Note: The point of these helpers is that they should really only be used 
+# by this module, and not in other parts/files of the 
+# local weather system. Any hard coded special cases should be moved into this module.
+#
+# The compatibility layer is currently work in progress and will be extended as new Nasal 
+# APIs are being added to FlightGear.
+
+###########################################
+# header checking availability of functions
+###########################################
+
+
+var has_symbol = func(s) contains(globals,s);
+var is_function = func(s) typeof(globals[s])=='func';
+var has_function = func(f) has_symbol(f) and is_function(f);
+
+# try to call a function with given parameters
+# save exceptions to err vector
+# returns 0 for no exceptions (exceptions vector is empty)
+# returns >=1 for exception occurred (i.e. unsupported API call)
+
+
+var try_call = func(f, params) {
+var err=[]; 
+call(globals[f], params, nil,nil,err); # see http://plausible.org/nasal/lib.html
+return size(err); 
+};
+
+
+var query = func(api,params) {
+  if ( has_function(api) ) {
+   return try_call(api, params ); 
+  }
+  return 1; # fail
+}
+
+var patches = { geodinfo: "http://flightgear.org/forums/viewtopic.php?f=5&t=7358&st=0&sk=t&sd=a&start=90#p82805", };
+
+# query fgfs binary for required APIs and set values in this hash
+var features = {};
+
+
+#fixme: compare results from new and old API
+var check_geodinfo_vec = func {
+  var err=[];
+
+  if ( query('geodinfo',[ [37.618,-122.374],1000])==0 ) {
+    printf("geodinfo found"); # now try to use it
+    var ksfo=[37.618, -122.374];
+    var alt=10000;
+    # see if it returns a vector or not
+    call( func { print (alt); (typeof(geodinfo(ksfo,alt))=='vector')?return:die(); }, [], caller()[0],nil,err);
+    print('-','geodinfo:', (size(err) >=1) ? "Vector support unavailable" : "Vector support available");
+    if(size(err) and contains(patches,'geodinfo')) print('---> A patch is available at ', patches['geodinfo']);
+
+    return size(err)?0:1;
+  } 
+  return 0;
+}
+
+_setlistener("/sim/signals/nasal-dir-initialized", func { 
+   print ("Compatibility layer: Checking available Nasal APIs:");
+   print ("(this may cause harmless error messages when hard-coded support is lacking)");
+   print ("##########################################");
+   features.geodinfo_supports_vectors= check_geodinfo_vec ();
+   print("features.geodinfo_supports_vectors=", features.geodinfo_supports_vectors);
+   print ("##########################################");
+   print("Compatibility checks done.");
+});
+
+# this is now where we can simply refer to features.geodinfo_supports_vectors 
+# for checking if vector support is available or not - to use the most appropriate 
+# APIs
+
+
+
 ####################################
 # set visibility to given value
 ####################################
@@ -223,9 +334,46 @@ settimer( func {smooth_wind_loop(vx,vy,vx_old,vy_old,counter-1, count_max); },ti
 var create_cloud = func(path, lat, long, alt, heading) {
 
 var tile_counter = getprop(lw~"tiles/tile-counter");
+var buffer_flag = getprop(lw~"config/buffer-flag");
+var dynamics_flag = getprop(lw~"config/dynamics-flag");
+var d_max = weather_tile_management.cloud_view_distance + 1000.0;
+
+
+# first check if the cloud should be stored in the buffer
+# we keep it if it is in visual range or at high altitude (where visual range is different)
+
+if (buffer_flag == 1)
+	{
+	# calculate the distance to the aircraft
+	var pos = geo.aircraft_position();
+	var cpos = geo.Coord.new();
+	cpos.set_latlon(lat,long,0.0);
+	var d = pos.distance_to(cpos);
+	
+	if ((d > d_max) and (alt < 20000.0)) # we buffer the cloud
+		{
+		var b = weather_tile_management.cloudBuffer.new(lat, long, alt, path, heading, tile_counter);
+		if (dynamics_flag ==1) {b.timestamp = weather_dynamics.time_lw;}
+		append(weather_tile_management.cloudBufferArray,b);
+		return;
+		}
+	}
+
+# now check if we are writing from the buffer, in this case change tile index
+# to buffered one
+
+if (getprop(lw~"tmp/buffer-status") == "placing")
+	{
+	tile_counter = getprop(lw~"tmp/buffer-tile-index");
+	}
+
+
+# if the cloud is not buffered, get property tree nodes and write it 
+# into the scenery
 
 var n = props.globals.getNode("local-weather/clouds", 1);
 var c = n.getChild("tile",tile_counter,1);
+
 
 var cloud_number = n.getNode("placement-index").getValue();
 		for (var i = cloud_number; 1; i += 1)
@@ -266,20 +414,27 @@ model.getNode("load", 1).remove();
 
 n.getNode("cloud-number").setValue(n.getNode("cloud-number").getValue()+1);
 
-# sort the model nodes into a vector
+# sort the model node into a vector for easy deletion
 
-append(weather_tile_management.modelArrays[tile_counter-1],model);
+# append(weather_tile_management.modelArrays[tile_counter-1],model);
 
+# sort the cloud into the cloud hash array
 
-# if weather dynamics is on, also create a timestamp property and sort into quadtree
+if ((buffer_flag == 1) and (getprop(lw~"tmp/tile-management") != "single tile"))
+	{
+	var cs = weather_tile_management.cloudScenery.new(tile_counter, cl, model);
+	append(weather_tile_management.cloudSceneryArray,cs);
+	}
 
-if (getprop(lw~"config/dynamics-flag") == 1)
+# if weather dynamics is on, also create a timestamp property and sort the cloud node into quadtree
+
+#if (getprop(lw~"config/dynamics-flag") == 1)
+if (dynamics_flag == 1)
 	{
 	cl.getNode("timestamp-sec",1).setValue(weather_dynamics.time_lw);
 	var blat = getprop(lw~"tiles/tmp/latitude-deg");
 	var blon = getprop(lw~"tiles/tmp/longitude-deg");
 	var alpha = getprop(lw~"tmp/tile-orientation-deg");
-	#weather_dynamics.sort_into_quadtree(blat, blon, alpha, lat, long, weather_dynamics.cloudQuadtree, cl); 
 	weather_dynamics.sort_into_quadtree(blat, blon, alpha, lat, long, weather_dynamics.cloudQuadtrees[tile_counter-1], cl); 
 	}
 
@@ -298,6 +453,12 @@ if ((i < 0) or (i==0))
 	{
 	print("Cloud placement from array finished!"); 
 	setprop(lw~"tmp/thread-status", "idle");
+
+	# now set flag that tile has been completely processed
+	var dir_index = props.globals.getNode(lw~"tiles/tmp/dir-index").getValue();
+	# print("dir_index: ",dir_index);
+	props.globals.getNode(lw~"tiles").getChild("tile",dir_index).getNode("generated-flag").setValue(2);
+	
 	return;
 	}
 
@@ -309,8 +470,6 @@ if (s < k_max) {k_max = s;}
 
 for (var k = 0; k < k_max; k = k+1)
 	{
-	#print(s, " ", k, " ", s-k-1, " ", clouds_path[s-k-1]);
-	#create_cloud(clouds_type[s-k-1], clouds_path[s-k-1], clouds_lat[s-k-1], clouds_lon[s-k-1], clouds_alt[s-k-1], 0.0, 0);
 	create_cloud(clouds_path[s-k-1], clouds_lat[s-k-1], clouds_lon[s-k-1], clouds_alt[s-k-1], clouds_orientation[s-k-1]);
 	}
 
@@ -412,6 +571,15 @@ else if (status == "idle") # we initialize the loop
 	{
 	mvec = weather_tile_management.modelArrays[index-1];
 	msize = size(mvec);
+	if (msize == 0) 
+		{
+		print("Tile deletion loop finished!");
+		setprop(lw~"tmp/thread-status", "idle"); 
+		setprop(lw~"clouds/placement-index",0);
+		setprop(lw~"clouds/model-placement-index",0);
+		setsize(weather_tile_management.modelArrays[index-1],0);
+		return;
+		}
 	setprop(lw~"tmp/last-reading-pos-mod", msize);
 	setprop(lw~"tmp/thread-status", "removing"); 
 	}
@@ -475,9 +643,16 @@ var get_elevation_array = func (lat, lon) {
 var elevation = [];
 var n = size(lat);
 
-for(var i = 0; i < n; i=i+1)
+if (features.geodinfo_supports_vectors == 0)
 	{
-	append(elevation, get_elevation(lat[i], lon[i]));
+	for(var i = 0; i < n; i=i+1)
+		{
+		append(elevation, get_elevation(lat[i], lon[i]));
+		}
+	}
+else 
+	{
+	elevation = geodinfo(lat,10000);
 	}
 
 return elevation;

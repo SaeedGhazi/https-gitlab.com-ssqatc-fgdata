@@ -282,14 +282,21 @@ Started September 2000 by David Megginson, david@megginson.com
   <systems>
    <path>Aircraft/Generic/generic-systems.xml</path>
    <autopilot>
+    <name>generic autopilot</name>
     <path>Aircraft/Generic/generic-autopilot.xml</path>
    </autopilot>
-   <!-- 
-   replace the hard coded helpers, which are gone now
-   -->
    <autopilot>
+    <name>autopilot helpers</name>
     <path>Aircraft/Generic/generic-autopilot-helper.xml</path>
    </autopilot>
+   <property-rule>
+     <name>Environment Interpolation Rule</name>
+     <path>Environment/interpolator.xml</path>
+   </property-rule>
+   <property-rule>
+     <name>Environment METAR Interpolation Rule</name>
+     <path>Environment/metarinterpolator.xml</path>
+   </property-rule>
   </systems>
   <instrumentation>
    <path>Aircraft/Generic/generic-instrumentation.xml</path>

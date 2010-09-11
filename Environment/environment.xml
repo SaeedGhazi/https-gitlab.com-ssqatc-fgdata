@@ -66,7 +66,7 @@
     </scenario>
     <scenario>
       <name>CAT IIIb minimum</name>
-      <metar>XXXX 012345Z VRB01KT 0100 FG OVC001 OVC002 02/02 Q0990</metar>
+      <metar>XXXX 012345Z VRB01KT 0100 -RA FG OVC001 OVC002 02/02 Q0990</metar>
       <description>This is expert level. You will barely see the taxiway from the cockpit, even if you are
                    on ground. Fog and light drizzle, freezing level at 1000ft.</description>
     </scenario>
@@ -202,9 +202,18 @@
 
   <cloudlayers include="cloudlayers.xml"/>
 
+  <realwx>
+    <metar>/environment/metar</metar>
+    <!-- user NOAA for METAR (no aloft data) -->
+    <data-source>noaa</data-source>
+
+    <!-- use http://www.navlost.eu/ for METAR and aloft data -->
+    <!-- data-source>nwx<data-source -->
+    <enabled>true</enabled>
+  </realwx>
+
   <params>
-   <real-world-weather-fetch type="bool">false</real-world-weather-fetch>
-   <metar-max-age-min type="long">240</metar-max-age-min>
+   <metar-max-age-min type="long">240</metar-max-age-min> <!-- deprecated -->
    <metar-updates-environment type="bool">true</metar-updates-environment>
    <control-fdm-atmosphere type="bool">true</control-fdm-atmosphere>
    <contrail-altitude>30000</contrail-altitude>

@@ -994,9 +994,9 @@
         setprop("sim/gui/dialogs/weather-scenario/metar", metar );
       });
 
-      var metarListener = setlistener( "environment/metar/data", func(n) {
-        var metar = n.getValue();
-        if( metar == nil ) metar = "";
+      var metarListener = setlistener( "environment/metar/valid", func(n) {
+        var metar = getprop("environment/metar/data");
+        if( metar == nil or metar == "" ) metar = "NIL";
         metar = normalize_string(metar);
         setprop("sim/gui/dialogs/weather-scenario/metar", metar );
         gui.dialog_update( "weather", "metar" );

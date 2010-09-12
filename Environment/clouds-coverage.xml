@@ -26,6 +26,7 @@
   <enable>
     <condition>
       <property>/environment/metar/valid</property>
+      <property>/environment/params/metar-updates-environment</property>
       <not-equals>
         <property alias="../../../../params/from"/>
         <property alias="../../../../params/to"/>

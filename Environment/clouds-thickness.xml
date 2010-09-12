@@ -20,6 +20,7 @@
   <enable>
     <condition>
       <property>/environment/metar/valid</property>
+      <property>/environment/params/metar-updates-environment</property>
     </condition>
   </enable>
   <input>/environment/metar/clouds/layer[0]/thickness-ft</input>

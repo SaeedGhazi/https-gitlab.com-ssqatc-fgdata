@@ -999,7 +999,7 @@
         if( metar == nil ) metar = "";
         metar = normalize_string(metar);
         setprop("sim/gui/dialogs/weather-scenario/metar", metar );
-        gui.dialog_update( "weather_scenario", "metar" );
+        gui.dialog_update( "weather", "metar" );
       }, 1, 0);
 
       #initialize the METAR source selection

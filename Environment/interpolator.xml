@@ -76,7 +76,7 @@
     <input>/environment/config/interpolated/visibility-m</input>
     <output>/environment/visibility-m</output>
     <type>exponential</type>
-    <filter-time>10</filter-time>
+    <filter-time>2</filter-time>
   </filter>
 
   <!-- 

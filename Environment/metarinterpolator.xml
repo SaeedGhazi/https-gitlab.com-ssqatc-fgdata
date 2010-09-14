@@ -98,7 +98,7 @@
     -->
     <name>MetarController:visibility-m</name>
     <type>exponential</type>
-    <filter-time>30</filter-time>
+    <filter-time>5</filter-time>
     <enable>
       <condition>
         <property>/environment/metar/valid</property>

@@ -1,10 +1,10 @@
 <PropertyList>
 
 	<menu>
-		<label>File</label>
+		<label>General</label>
 
 		<item>
-			<label>Load</label>
+			<label>Load Flight    (Shift-F1)</label>
 			<binding>
 				<command>nasal</command>
 				<script>gui.load_flight()</script>
@@ -12,33 +12,51 @@
 		</item>
 
 		<item>
-			<label>Save</label>
+			<label>Save Flight    (Shift-F2)</label>
 			<binding>
 				<command>nasal</command>
 				<script>gui.save_flight()</script>
 			</binding>
 		</item>
-
+<!--
+        <item>
+            <label>Scenario</label>
+            <binding>
+                <command>dialog-show</command>
+                <dialog-name>scenario</dialog-name>
+            </binding>
+        </item>
+-->
 		<item>
-			<label>Reset</label>
+			<label>Reset           (Shift-Esc)</label>
 			<binding>
 				<command>reset</command>
 			</binding>
 		</item>
 
-		<item>
+<!--		<item>
+            <label>Set Lat/Lon Format</label>
+            <binding>
+                <command>nasal</command>
+                <script>
+                    var f = getprop(var d = "/sim/lon-lat-format") + 1;
+                    setprop(d, f &lt; 0 ? 0 : f > 2 ? 0 : f);
+                </script>
+            </binding>
+        </item>  
 			<label>High-Res Snapshot</label>
 			<enabled>false</enabled>
 			<binding>
 				<command>hires-screen-capture</command>
 			</binding>
 		</item>
-
+-->		
 		<item>
-			<label>Snapshot</label>
+			<label>Screenshot             (F3)</label>
 			<binding>
 				<command>nasal</command>
 				<script>
+				    gui.popdown();
 					var success = fgcommand("screen-capture");
 					var path = getprop("/sim/paths/screenshot-last");
 					if (success)
@@ -48,14 +66,27 @@
 				</script>
 			</binding>
 		</item>
+<!--
+        <item>
+        <label>Last snapshot</label>
+            <binding>
+                <command>nasal</command>
+                <script>
+                    var path = getprop("/sim/paths/screenshot-last");
+                    if (path != nil) gui.popupTip(...) else gui.popupTip("no screenshots yet in this session")
+
+                    gui.popupTip("Screenshot written to '" ~ path ~ "'");
+                </script>
+            </binding>
+        </item>
 
 		<item>
-			<label>Print Screen</label>
+			<label>Print Screen         (F3)</label>
 			<binding>
 				<command>old-print-dialog</command>
 			</binding>
 		</item>
-
+-->
 		<item>
 			<label>Sound Configuration</label>
 			<binding>
@@ -65,23 +96,7 @@
 		</item>
 
 		<item>
-			<label>Browse Internal Properties</label>
-			<binding>
-				<command>nasal</command>
-				<script>gui.property_browser()</script>
-			</binding>
-		</item>
-
-		<item>
-			<label>Logging</label>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>logging</dialog-name>
-			</binding>
-		</item>
-
-		<item>
-			<label>Quit</label>
+			<label>Quit                    (Esc)</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>exit</dialog-name>
@@ -108,7 +123,16 @@
 			</binding>
 		</item>
 
-		<item>
+		<item><!--      <item>
+            <label>Set Lat/Lon Format</label>
+            <binding>
+                <command>nasal</command>
+                <script>
+                    var f = getprop(var d = "/sim/lon-lat-format") + 1;
+                    setprop(d, f &lt; 0 ? 0 : f > 2 ? 0 : f);
+                </script>
+            </binding>
+        </item>   -->
 			<label>View Options</label>
 			<binding>
 				<command>dialog-show</command>
@@ -124,6 +148,14 @@
 			</binding>
 		</item>
 
+        <item>
+            <label>Adjust LOD Ranges</label>
+            <binding>
+                <command>dialog-show</command>
+                <dialog-name>static-lod</dialog-name>
+            </binding>
+        </item>
+        
 		<item>
 			<label>Adjust View Position</label>
 			<binding>
@@ -140,30 +172,26 @@
 			</binding>
 		</item>
 
+        <item>
+            <label>Toggle Glide Slope Tunnel</label>
+            <binding>
+                <command>nasal</command>
+                <script>
+                    var p = "/sim/rendering/glide-slope-tunnel";
+                    setprop(p, var i = !getprop(p));
+                    gui.popupTip("Glide slope tunnel " ~ (i ? "enabled" : "disabled"));
+                </script>
+            </binding>
+        </item>
+
 		<item>
-			<label>Instant Replay</label>
+			<label>Instant Replay   (Ctrl-R)</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>replay</dialog-name>
 			</binding>
 		</item>
-
-		<item>
-			<label>Adjust LOD Ranges</label>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>static-lod</dialog-name>
-			</binding>
-		</item>
-
-		<item>
-			<label>OSG Display Settings</label>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>osg-display-settings</dialog-name>
-			</binding>
-		</item>
-	</menu>
+	</menu>	
 
 	<menu>
 		<label>Location</label>
@@ -193,7 +221,7 @@
 		</item>
 
 		<item>
-			<label>Random Attitude</label>
+			<label>Random Attitude</label>H
 			<binding>
 				<command>property-assign</command>
 				<property>/sim/presets/trim</property>
@@ -234,7 +262,7 @@
 		<name>autopilot</name>
 
 		<item>
-			<label>Autopilot Settings</label>
+			<label>Autopilot Settings (F11)</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>autopilot</dialog-name>
@@ -262,25 +290,6 @@
 			<binding>
 				<command>nasal</command>
 				<script>setprop("/autopilot/route-manager/input", "@next")</script>
-			</binding>
-		</item>
-
-		<item>
-			<label>Set Lat/Lon Format</label>
-			<binding>
-				<command>nasal</command>
-				<script>
-					var f = getprop(var d = "/sim/lon-lat-format") + 1;
-					setprop(d, f &lt; 0 ? 0 : f > 2 ? 0 : f);
-				</script>
-			</binding>
-		</item>
-		
-		<item>
-			<label>Map</label>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>map</dialog-name>
 			</binding>
 		</item>
 	</menu>
@@ -313,26 +322,10 @@
 		</item>
 
 		<item>
-			<label>Time Settings</label>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>timeofday</dialog-name>
-			</binding>
-		</item>
-
-		<item>
 			<label>Rain/Snow Settings</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>rainsnow</dialog-name>
-			</binding>
-		</item>
-
-		<item>
-			<label>Wildfire Settings</label>
-			<binding>
-				<command>nasal</command>
-				<script>wildfire.dialog.show()</script>
 			</binding>
 		</item>
 
@@ -351,11 +344,45 @@
 				<dialog-name>local_weather_tiles</dialog-name>
 			</binding>
 		</item>
+
+
+        <item>
+            <label>Time Settings</label>
+            <binding>
+                <command>dialog-show</command>
+                <dialog-name>timeofday</dialog-name>
+            </binding>
+        </item>
+
+        <item>
+            <label>Wildfire Settings</label>
+            <binding>
+                <command>nasal</command>
+                <script>wildfire.dialog.show()</script>
+            </binding>
+        </item>
+
 	</menu>
 
 	<menu>
 		<label>Equipment</label>
+		
+        <item>
+            <label>Map</label>
+            <binding>
+                <command>dialog-show</command>
+                <dialog-name>map</dialog-name>
+            </binding>
+        </item>
 
+        <item>
+            <label>Stopwatch</label>
+            <binding>
+                <command>dialog-show</command>
+                <dialog-name>stopwatch-dialog</dialog-name>
+            </binding>
+        </item>
+        
 		<item>
 			<label>Fuel and Payload</label>
 			<name>fuel-and-payload</name>
@@ -366,7 +393,7 @@
 		</item>
 
 		<item>
-			<label>Radio Settings</label>
+			<label>Radio Settings (F12)</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>radios</dialog-name>
@@ -389,14 +416,12 @@
 			</binding>
 		</item>
 
-		<item>
-			<label>Stopwatch</label>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>stopwatch-dialog</dialog-name>
-			</binding>
-		</item>
 
+
+        <item>
+            <label> --- Failures ---</label>
+        </item>
+            
 		<item>
 			<label>Random Failures</label>
 			<binding>
@@ -424,24 +449,25 @@
 
 	<menu>
 		<label>ATC/AI</label>
-
+        <item>
+            <label>ATC Options</label>
+            <binding>
+                <command>dialog-show</command>
+                <dialog-name>ai</dialog-name>
+            </binding>
+        </item>
+<!--  Not working at present        
 		<item>
-			<label>Frequencies</label>
+			<label>ATC Services in range</label>
 			<binding>
 				<command>ATC-freq-search</command>
 			</binding>
 		</item>
 
-		<item>
-			<label>Options</label>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>atc-ai</dialog-name>
-			</binding>
-		</item>
+		-->
 
 		<item>
-			<label>Tanker</label>
+			<label>AI Tanker</label>
 			<name>tanker</name>
 			<enabled>false</enabled>
 			<binding>
@@ -450,21 +476,32 @@
 			</binding>
 		</item>
 
-		<item>
-			<label>Scenario</label>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>scenario</dialog-name>
-			</binding>
-		</item>
+        <item>
+            <label>AI Carrier Options</label>
+            <binding>
+                <command>dialog-show</command>
+                <dialog-name>AIcarrier</dialog-name>
+            </binding>
+        </item>
+
+        <item>
+            <label>AI Scenario Select - takes effect on next run </label>
+            <binding>
+                <command>dialog-show</command>
+                <dialog-name>scenario</dialog-name>
+            </binding>
+          </item>
+
+
+
 	</menu>
 
 	<menu>
-		<label>Network</label>
+		<label>Multiplayer</label>
 		<name>multiplayer</name>
 
 		<item>
-			<label>Chat</label>
+			<label>Chat Dialog</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>chat-full</dialog-name>
@@ -486,9 +523,9 @@
 				<script>multiplayer.dialog.show()</script>
 			</binding>
 		</item>
-
+		
 		<item>
-			<label>MPCarrier selection</label>
+			<label>MP Carrier selection</label>
 			<binding>
 				<command>nasal</command>
 				<script>
@@ -500,6 +537,8 @@
 				</script>
 			</binding>
 		</item>
+
+
 	</menu>
 
 	<menu>
@@ -536,13 +575,13 @@
 			</binding>
 		</item>
 
-                <item>
-                        <label>Reload Network</label>
-                        <binding>
-                                <command>reinit</command>
-                                <subsystem>io</subsystem>
-                        </binding>
-                </item>
+        <item>
+                <label>Reload Network</label>
+                <binding>
+                        <command>reinit</command>
+                        <subsystem>io</subsystem>
+                </binding>
+        </item>
 
 		<item>
 			<label>Nasal Console</label>
@@ -600,20 +639,42 @@
 				<step type="int">1</step>
 			</binding>
 		</item>
-	</menu>
+
+        <item>
+            <label>Browse Internal Properties</label>
+            <binding>
+                <command>nasal</command>
+                <script>gui.property_browser()</script>
+            </binding>
+        </item>
+
+        <item>
+            <label>Logging</label>
+            <binding>
+                <command>dialog-show</command>
+                <dialog-name>logging</dialog-name>
+            </binding>
+        </item>
+
+
+
+
+        <item>
+            <label>OSG Display Settings</label>
+            <binding>
+                <command>dialog-show</command>
+                <dialog-name>osg-display-settings</dialog-name>
+            </binding>
+        </item>
+    </menu>
+	
 
 	<menu>
 		<label>Help</label>
 
+
 		<item>
-			<label>About</label>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>about</dialog-name>
-			</binding>
-		</item>
-		<item>
-			<label>Help</label>
+			<label>Help (opens in browser)</label>
 			<binding>
 				<command>old-help-dialog</command>
 			</binding>
@@ -629,7 +690,11 @@
 		</item>
 
 		<item>
-			<label>Basic Keys</label>
+		    <label> --- Key Reference ---</label>
+        </item>
+
+		<item>
+			<label>Basic Simulator Keys</label>
 			<binding>
 				<command>nasal</command>
 				<script>gui.showHelpDialog("/sim/help/basic")</script>
@@ -645,24 +710,16 @@
 		</item>
 
 		<item>
-			<label>Aircraft Help</label>
+			<label> Current Aircraft Keys           (?)</label>
 			<binding>
 				<command>nasal</command>
 				<script>gui.showHelpDialog("/sim/help")</script>
 			</binding>
 		</item>
 
-		<item>
-			<label>Toggle Glide Slope Tunnel</label>
-			<binding>
-				<command>nasal</command>
-				<script>
-					var p = "/sim/rendering/glide-slope-tunnel";
-					setprop(p, var i = !getprop(p));
-					gui.popupTip("Glide slope tunnel " ~ (i ? "enabled" : "disabled"));
-				</script>
-			</binding>
-		</item>
+        <item>
+            <label> ---------------------</label>
+        </item>
 
 		<item>
 			<label>Start Tutorial</label>
@@ -682,6 +739,14 @@
 				<script>tutorial.stopTutorial()</script>
 			</binding>
 		</item>
+
+		<item>
+            <label>About</label>
+            <binding>
+                <command>dialog-show</command>
+                <dialog-name>about</dialog-name>
+            </binding>
+        </item>
 	</menu>
 
 </PropertyList>

@@ -339,6 +339,13 @@
 			</binding>
 		</item>
 
+		<item>
+			<label>Time Settings</label>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>timeofday</dialog-name>
+			</binding>
+		</item>
 
 		<item>
 			<label>Wildfire Settings</label>

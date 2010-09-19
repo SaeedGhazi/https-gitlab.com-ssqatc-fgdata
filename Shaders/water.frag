@@ -1,106 +1,86 @@
-uniform sampler2D water_normalmap;
-uniform sampler2D water_reflection;
-uniform sampler2D water_refraction;
-uniform sampler2D water_dudvmap;
-uniform sampler2D water_depthmap;
+#version 120
 
-vec4 waterColor = vec4(0.0,0.2,1.0,1.0);
-vec4 waterDepth = vec4(0.0,0.2,1.0,1.0);
+varying vec4 rawpos;
+varying vec4 ecPosition;
+varying vec3 VNormal;
+varying vec3 Normal;
+varying vec3 lightVec;
 
-varying vec4 waterTex0; //lightpos
-varying vec4 waterTex1; //moving texcoords
-varying vec4 waterTex2; //moving texcoords
-varying vec4 waterTex3; //for projection
-varying vec4 waterTex4; //viewts
-varying float fogCoord;
+uniform sampler3D NoiseTex;
+uniform float osg_SimulationTime;
 
-//unit 0 = water_reflection
-//unit 1 = water_refraction
-//unit 2 = water_normalmap
-//unit 3 = water_dudvmap
-//unit 4 = water_depthmap
+//const float scale = 1.0;
 
-void main(void)
+void main (void)
 {
-const vec4 sca = vec4(0.005, 0.005, 0.005, 0.005);
-const vec4 sca2 = vec4(0.02, 0.02, 0.02, 0.02);
-const vec4 tscale = vec4(0.25, 0.25, 0.25, 0.25);
-const vec4 two = vec4(2.0, 2.0, 2.0, 1.0);
-const vec4 mone = vec4(-1.0, -1.0, -1.0, 1.0);
+    vec4 noisevecS   = texture3D(NoiseTex, (rawpos.xyz)*0.0126);
+    vec4 nvLS   = texture3D(NoiseTex, (rawpos.xyz)*-0.0003323417);
 
-const vec4 ofive = vec4(0.5,0.5,0.5,1.0);
+    vec4 noisevec   = texture3D(NoiseTex, (rawpos.xyz)*0.00423+vec3(0.0,0.0,osg_SimulationTime*0.035217));
+    vec4 nvL   = texture3D(NoiseTex, (rawpos.xyz)*0.001223417+(0.0,0.0,osg_SimulationTime*-0.0212));
 
-const float exponent = 64.0;
+    float fogFactor;
+    if (gl_Fog.density == 1.0)
+    {
+       fogFactor=1.0;
+    }
+    else
+    {
+        float fogCoord = ecPosition.z;
+        const float LOG2 = 1.442695;
+        fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
+        fogFactor = clamp(fogFactor, 0.0, 1.0);
+    }
 
-float fogFactor = exp(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord);
+    float a=1.0;
+    float n=0.00;
+    n += nvLS[0]*a;
+    a/=2.0;
+    n += nvLS[1]*a;
+    a/=2.0;
+    n += nvLS[2]*a;
+    a/=2.0;
+    n += nvLS[3]*a;
 
-vec4 lightTS = normalize(waterTex0);
-vec4 viewt = normalize(waterTex4);
-vec4 disdis = texture2D(water_dudvmap, vec2(waterTex2 * tscale));
-vec4 dist = texture2D(water_dudvmap, vec2(waterTex1 + disdis*sca2));
-vec4 fdist = dist;
-fdist = fdist * two + mone;
-fdist = normalize(fdist);
-fdist *= sca;
+    a=4.0;
+    float na=n;
+    na += nvL[0]*1.1;
+    a*=1.2;
+    na += nvL[1]*a;
+    a*=1.2;
+    na += nvL[2]*a;
+    a*=1.2;
+    na += nvL[3]*a;
+    a=2.0;
+    na += noisevec[0]*a*0.2;
+    a*=1.2;
+    na += noisevec[1]*a;
+    a*=1.2;
+    na += noisevec[2]*a;
+    a*=1.2;
+    na += noisevec[3]*a;
 
-//load normalmap
-vec4 nmap = texture2D(water_normalmap, vec2(waterTex1 + disdis*sca2));
-nmap = (nmap-ofive) * two;
-vec4 vNorm = nmap;
-vNorm = normalize(nmap);
+    vec4 c1;
+    c1 = asin(vec4(smoothstep(0.0, 2.2, n), smoothstep(-0.1, 2.10, n), smoothstep(-0.2, 2.0, n), 1.0));
 
-//get projective texcoords
-vec4 tmp = vec4(1.0 / waterTex3.w);
-vec4 temp = tmp;
+    vec3 Eye = normalize(-ecPosition.xyz);
+    vec3 Reflected = normalize(reflect(-normalize(lightVec), normalize(VNormal+vec3(0.0,0.0,na*0.10-0.24)))); 
 
-vec4 projCoord = waterTex3 * tmp;
-projCoord += vec4(1.0);
-projCoord *= vec4(0.5);
-tmp = projCoord + fdist;
-tmp = clamp(tmp, 0.001, 0.999);
+    vec3 bump = normalize(VNormal+vec3(0.0, 0.0, na)-0.9);
+    vec3 bumped = max(normalize(refract(lightVec, normalize(bump), 0.16)), 0.0);
 
-//load reflection,refraction and depth texture
-vec4 refTex = texture2D(water_reflection, vec2(tmp));
-vec4 refl = refTex;
-vec4 refr = texture2D(water_refraction, vec2(tmp));
-vec4 wdepth = texture2D(water_depthmap, vec2(tmp));
+    vec4 ambientColor = gl_LightSource[0].ambient;
+    vec4 light = ambientColor;
+    c1 *= light;
 
-wdepth = vec4(pow(wdepth.x, 4.0));
-vec4 invdepth = 1.0 - wdepth;
+    float bumpFact = (bumped.r+bumped.g+bumped.b);
+    float ReflectedEye = max(dot(Reflected, Eye), 0.0);
+    float eyeFact = pow(ReflectedEye, 20.0);
+    c1 += 0.3 * gl_LightSource[0].diffuse * (1.0-eyeFact) * bumpFact*bumpFact;
+    c1 += 0.4 * gl_LightSource[0].diffuse * eyeFact * 3*bumpFact;
+    eyeFact = pow(eyeFact, 20.0);
+    c1 += gl_LightSource[0].specular * eyeFact * 4*bumpFact;
 
-//calculate specular highlight
-vec4 vRef = normalize(reflect(lightTS, vNorm));
-float stemp =max(0.0, dot(viewt, vRef)*tan(0.788));
-stemp = pow(stemp, exponent);
-vec4 specular = vec4(stemp);
-
-//calculate fresnel and inverted fresnel
-vec4 invfres = vec4( dot(vNorm, viewt) );
-vec4 fres = vec4(1.0) -invfres ;
-
-//calculate reflection and refraction
-refr *= invfres;
-refr *= invdepth;
-temp = waterColor * wdepth * invfres;
-refr += temp;
-refl *= fres;
-
-//add reflection and refraction
-tmp = refr + refl;
-
-if(gl_Fog.density == 1.0)
-	fogFactor=1.0;
-
-vec4 finalColor = tmp + specular;
-
-vec4 constantColor = vec4(1.0,1.0,1.0,1.0);
-
-vec4 ambient_light = gl_LightSource[0].diffuse * constantColor + constantColor;
-
-	finalColor *= ambient_light;
-
-	if(gl_Fog.density == 1.0)
-		fogFactor=1.0;
-
-gl_FragColor = mix(gl_Fog.color,finalColor, fogFactor);
+    vec4 finalColor = c1;
+    gl_FragColor = mix(gl_Fog.color, finalColor, fogFactor);
 }

@@ -281,7 +281,7 @@
 
 		<item>
 			<label>Previous Waypoint</label>
-			<binding>3
+			<binding>
 				<command>nasal</command>
 				<script>setprop("/autopilot/route-manager/input", "@previous")</script>
 			</binding>
@@ -307,7 +307,7 @@
 			</binding>
 		</item>
 
-		<!-- <item>
+		<item>
 			<label>Weather Conditions</label>
 			<binding>
 				<command>dialog-show</command>
@@ -449,8 +449,15 @@
 				<dialog-name>ai</dialog-name>
 			</binding>
 		</item>
+		<!--  Not working at present        
+		<item>
+			<label>ATC Services in range</label>
+			<binding>
+				<command>ATC-freq-search</command>
+			</binding>
+		</item>
 
-	
+		-->
 
 		<item>
 			<label>AI Tanker</label>
@@ -627,7 +634,7 @@
 		</item>
 
 		<item>
-			<label>Browse Internal Properties    (/)</label>
+			<label>Browse Internal Properties</label>
 			<binding>
 				<command>nasal</command>
 				<script>gui.property_browser()</script>

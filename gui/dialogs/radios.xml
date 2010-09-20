@@ -4,7 +4,7 @@
 
  <name>radios</name>
  <width>600</width>
- <height>330</height>
+ <height>370</height>
  <modal>false</modal>
 
  <text>
@@ -479,7 +479,7 @@
    <legend>Apply</legend>
    <equal>true</equal>
    <binding>
-    <command>dialog-apply</command>
+    <command>dialog-appl8y</command>
    </binding>
   </button>
 
@@ -505,5 +505,15 @@
   </button>
 
  </group>
+	<group>
+		<x>400</x>
+		<y>60</y>
+			<button>
+			<legend>ATC Services in range</legend>
+				<binding>
+					<command>ATC-freq-search</command>
+				</binding> 
+			</button>
+	</group>
 
 </PropertyList>

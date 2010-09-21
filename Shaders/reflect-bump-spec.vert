@@ -5,8 +5,8 @@
 varying vec4  rawpos;
 varying vec4  ecPosition;
 varying vec3  VNormal;
-varying vec3 			VTangent;//////////////
-varying vec3 			VBinormal;/////////////
+varying vec3  VTangent;
+varying vec3  VBinormal;
 varying vec3  Normal;
 varying vec4  constantColor;
 varying vec3 vViewVec;

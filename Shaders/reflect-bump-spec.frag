@@ -39,9 +39,9 @@ void main (void)
     float NdotL, NdotHV;
     vec4 color = constantColor;
     vec4 specular = vec4(0.0);
-	vec4 ns = texture2D(NormalTex, gl_TexCoord[0].st);
-	vec3 n = ns.rgb * 2.0 - 1.0;
-	n = normalize(n.x * VTangent + n.y * VBinormal + n.z * VNormal);
+    vec4 ns = texture2D(NormalTex, gl_TexCoord[0].st);
+    vec3 n = ns.rgb * 2.0 - 1.0;
+    n = normalize(n.x * VTangent + n.y * VBinormal + n.z * VNormal);
     NdotL = max(0.0, dot(n, lightDir));
 
     // calculate the specular light
@@ -97,7 +97,7 @@ void main (void)
         reflFactor = (gl_FrontMaterial.shininess / 128) + transparency_offset;
     }
 
-    reflFactor = clamp(reflFactor, 0.0, 1.0);
+    reflFactor = clamp(reflFactor, 0.0, 1.0) * ns.a;
 
     // set ambient adjustment to remove bluiness with user input
     float ambient_offset = clamp(ambient_correction, -1.0, 1.0);

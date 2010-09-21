@@ -97,7 +97,7 @@ void main (void)
         reflFactor = (gl_FrontMaterial.shininess / 128) + transparency_offset;
     }
 
-    reflFactor = clamp(reflFactor, 0.0, 1.0) * ns.a;
+    reflFactor = clamp(reflFactor * ns.a, 0.0, 1.0);
 
     // set ambient adjustment to remove bluiness with user input
     float ambient_offset = clamp(ambient_correction, -1.0, 1.0);

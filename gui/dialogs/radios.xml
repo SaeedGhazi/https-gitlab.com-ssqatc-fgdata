@@ -479,7 +479,7 @@
    <legend>Apply</legend>
    <equal>true</equal>
    <binding>
-    <command>dialog-appl8y</command>
+    <command>dialog-apply</command>
    </binding>
   </button>
 

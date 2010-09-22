@@ -2,8 +2,8 @@
 <PropertyList>
 
 	<menu>
-		<label>General</label>
-
+		<label>File</label>
+<!--
 		<item>
 			<label>Load Flight    (Shift-F1)</label>
 			<binding>
@@ -19,7 +19,7 @@
 				<script>gui.save_flight()</script>
 			</binding>
 		</item>
-		<!--
+		
 		<item>
             <label>Scenario</label>
 			<binding>

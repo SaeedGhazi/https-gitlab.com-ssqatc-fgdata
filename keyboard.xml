@@ -272,7 +272,7 @@ top down before the key bindings are parsed.
 
  <key n="32">
   <name>SPACE</name>
-  <desc>PTT - Push To Talk (via VoIP)</desc>
+  <desc>PTT - Push To Talk (via FGCom)</desc>
   <binding>
    <command>nasal</command>
    <script>space(1, modifiers.getValue())</script>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Reflections
+<!-- Reflections + Bumpmapping + specular
 
 PARAMETERS: There are two forms of cube map texture:- vertical cross and 6 images.
 Either can be used - alternative forms are shown in <parameters> and in <texture-unit>
@@ -25,7 +25,7 @@ define <texture n="4"> in the derived effect file
 USE: 	To use the default reflection effect (controlled by material shininess values) use 
 	
 	<effect>
-			<inherits-from>Effects/reflect</inherits-from>
+			<inherits-from>Effects/reflect-bump-spec</inherits-from>
 			<object-name>Fuselage</object-name>
 	</effect>
 	
@@ -41,14 +41,14 @@ in your model file.
 To use your own effect place your efffect file containing something like this:
 
 	<name>Effects/lightningreflect</name>
-	<inherits-from>Effects/reflect</inherits-from>
+	<inherits-from>Effects/reflect-bump-spec</inherits-from>
 	
 	and the the modified tags in the path as above
 
 EXAMPLES: You can find examples of both usages in the Hunter and Lightning models.
 -->
 <PropertyList>
-	<name>Effects/reflect</name>
+	<name>Effects/reflect-bump-spec</name>
 	<inherits-from>Effects/model-default</inherits-from>
 
 	<parameters>

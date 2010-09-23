@@ -193,6 +193,14 @@
 				<dialog-name>replay</dialog-name>
 			</binding>
 		</item>
+
+		<item>
+			<label>Stereoscopic View Options</label>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>stereoscopic-view-options</dialog-name>
+			</binding>
+		</item>
 	</menu>
 
 	<menu>
@@ -649,16 +657,6 @@
 			</binding>
 		</item>
 
-
-
-
-		<item>
-			<label>OSG Display Settings</label>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>osg-display-settings</dialog-name>
-			</binding>
-		</item>
 	</menu>
 
 

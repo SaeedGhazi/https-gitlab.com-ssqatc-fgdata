@@ -111,7 +111,7 @@ void main (void)
     vec4 reflcolor = mix(reflection, rainbow, rainbowiness * v);
     vec4 reflfrescolor = mix(reflcolor, fresnel, fresneliness * v);
     vec4 noisecolor = mix(reflfrescolor, noisevec, noisiness);
-    vec4 raincolor = vec4(noisecolor.rgb, 1.0) * reflFactor;
+    vec4 raincolor = vec4(noisecolor.rgb * reflFactor, 1.0);
 
     vec4 mixedcolor = mix(texel, raincolor, reflFactor);
 

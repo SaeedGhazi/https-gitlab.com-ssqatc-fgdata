@@ -148,6 +148,7 @@ Started September 2000 by David Megginson, david@megginson.com
    </headshake>
    <crop-shader userarchive="y">0</crop-shader>
    <landmass-shader userarchive="y">0</landmass-shader>
+   <transition-shader userarchive="y">0</transition-shader>
    <water-shader userarchive="y">0</water-shader>
    <urban-shader userarchive="y">0</urban-shader>
    <contrail-shader userarchive="y">0</contrail-shader>

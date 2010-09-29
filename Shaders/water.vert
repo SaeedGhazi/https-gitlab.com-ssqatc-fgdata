@@ -18,15 +18,13 @@ ecPosition = gl_ModelViewMatrix * gl_Vertex;
 viewerdir = vec3(gl_ModelViewMatrixInverse[3]) - vec3(gl_Vertex);
 lightdir = normalize(vec3(gl_ModelViewMatrixInverse * gl_LightSource[0].position));
 
-vec4 temp;
 vec4 tangent = vec4(1.0, 0.0, 0.0, 0.0);
 vec4 norm = vec4(0.0, 1.0, 0.0, 0.0);
 vec4 binormal = vec4(0.0, 0.0, 1.0, 0.0);
 
-temp = ecPosition;
-waterTex4.x = dot(temp, tangent);
-waterTex4.y = dot(temp, binormal);
-waterTex4.z = dot(temp, norm);
+waterTex4.x = dot(ecPosition, tangent);
+waterTex4.y = dot(ecPosition, binormal);
+waterTex4.z = dot(ecPosition, norm);
 waterTex4.w = 0.0;
 
 vec4 t1 = vec4(0.0, osg_SimulationTime*0.005217, 0.0,0.0);
@@ -34,7 +32,6 @@ vec4 t2 = vec4(0.0, osg_SimulationTime*-0.0012, 0.0,0.0);
 
 waterTex1 = gl_MultiTexCoord0 + t1;
 waterTex2 = gl_MultiTexCoord0 + t2;
-
 
 gl_Position = ftransform();
 }

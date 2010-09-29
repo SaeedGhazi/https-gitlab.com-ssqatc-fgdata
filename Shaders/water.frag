@@ -32,7 +32,6 @@ vec4 viewt = normalize(waterTex4);
 
 vec4 disdis = texture2D(water_dudvmap, vec2(waterTex2 * tscale)) * 2.0 - 1.0;
 vec4 dist = texture2D(water_dudvmap, vec2(waterTex1 + disdis*sca2)) * 2.0 - 1.0;
-//vec4 fdist = dist;
 vec4 fdist = normalize(dist);
 fdist *= sca;
 

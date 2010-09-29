@@ -1,6 +1,6 @@
 // -*- mode: C; -*-
 // Licence: GPL v2
-// Author: Frederic Bouvier. 
+// Author: Frederic Bouvier.
 //  Adapted from the paper by F. Policarpo et al. : Real-time Relief Mapping on Arbitrary Polygonal Surfaces
 
 #version 120
@@ -34,7 +34,7 @@ float ray_intersect(sampler2D reliefMap, vec2 dp, vec2 ds)
 	for(int i = 0; i < linear_search_steps - 1; ++i)
 	{
 		depth += size;
-		float t = texture2D(reliefMap, dp + ds * depth).a;
+		float t = step(0.95, texture2D(reliefMap, dp + ds * depth).a);
 		if(best_depth > 0.996)
 			if(depth >= t)
 				best_depth = depth;
@@ -46,7 +46,7 @@ float ray_intersect(sampler2D reliefMap, vec2 dp, vec2 ds)
 	for(int i = 0; i < binary_search_steps; ++i)
 	{
 		size *= 0.5;
-		float t = texture2D(reliefMap, dp + ds * depth).a;
+		float t = step(0.95, texture2D(reliefMap, dp + ds * depth).a);
 		if(depth >= t)
 		{
 			best_depth = depth;
@@ -129,7 +129,7 @@ void main (void)
 	finalColor = mix(finalColor, clamp(n+nvL[2]*4.1+vec4(0.1, 0.1, nvL[2]*2.2, 1.0), 0.7, 1.0),
 			step(0.8,Nz)*(1.0-emis)*smoothstep(snowlevel+300.0, snowlevel+360.0, (rawpos.z)+nvL[1]*3000.0));
 	finalColor *= ambient_light;
-	
+
 	if (gl_Fog.density == 1.0)
 		fogFactor=1.0;
 

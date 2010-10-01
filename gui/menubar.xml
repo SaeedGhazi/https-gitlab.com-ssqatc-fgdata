@@ -348,6 +348,14 @@
 		</item>
 
 		<item>
+			<label>Local Weather Config</label>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>local_weather_config</dialog-name>
+			</binding>
+		</item>
+
+		<item>
 			<label>Time Settings</label>
 			<binding>
 				<command>dialog-show</command>

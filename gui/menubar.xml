@@ -466,6 +466,13 @@
 		</item>
 
 		-->
+		<item>
+			<label>AI Formation</label>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>formation</dialog-name>
+			</binding>
+		</item>
 
 		<item>
 			<label>AI Tanker</label>

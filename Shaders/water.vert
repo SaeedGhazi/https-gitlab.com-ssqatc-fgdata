@@ -1,15 +1,29 @@
-varying vec4 rawpos;
+varying vec4 waterTex1;
+varying vec4 waterTex2;
+varying vec4 waterTex4;
 varying vec4 ecPosition;
-varying vec3 VNormal;
-varying vec3 Normal;
-varying vec3 lightVec;
+uniform float osg_SimulationTime;
+varying vec3 viewerdir;
+varying vec3 lightdir;
+varying vec3 normal;
 
 void main(void)
 {
-	rawpos     = gl_Vertex;
-	ecPosition = gl_ModelViewMatrix * gl_Vertex;
-	VNormal = normalize(gl_NormalMatrix * gl_Normal);
-	Normal = normalize(gl_Normal);
-	lightVec = normalize(gl_LightSource[0].position.xyz/* - ecPosition*/);
-	gl_Position = ftransform();
+vec3 N = normalize(gl_Normal);
+normal = N;
+
+ecPosition = gl_ModelViewMatrix * gl_Vertex;
+
+viewerdir = vec3(gl_ModelViewMatrixInverse[3]) - vec3(gl_Vertex);
+lightdir = normalize(vec3(gl_ModelViewMatrixInverse * gl_LightSource[0].position));
+
+waterTex4 = vec4( ecPosition.xzy, 0.0 );
+
+vec4 t1 = vec4(0.0, osg_SimulationTime*0.005217, 0.0,0.0);
+vec4 t2 = vec4(0.0, osg_SimulationTime*-0.0012, 0.0,0.0);
+
+waterTex1 = gl_MultiTexCoord0 + t1;
+waterTex2 = gl_MultiTexCoord0 + t2;
+
+gl_Position = ftransform();
 }

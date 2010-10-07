@@ -89,16 +89,6 @@
 			</binding>
 		</key>
 
-		<key n="99">
-			<name>c</name>
-			<desc>Clouds</desc>
-			<exit/>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>clouds</dialog-name>
-			</binding>
-		</key>
-
 		<key n="102">
 			<name>f</name>
 			<desc>Fuel and Payload</desc>
@@ -241,7 +231,6 @@
 						<command>nasal</command>
 						<script>
 							setprop("/environment/weather-scenario", "Fair weather");
-							setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers") + 1);
 						</script>
 					</binding>
 				</key>
@@ -253,7 +242,6 @@
 						<command>nasal</command>
 						<script>
 							setprop("/environment/weather-scenario", "METAR");
-							setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers") + 1);
 						</script>
 					</binding>
 				</key>
@@ -265,7 +253,6 @@
 						<command>nasal</command>
 						<script>
 							setprop("/environment/weather-scenario", "none");
-							setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers") + 1);
 						</script>
 					</binding>
 				</key>
@@ -277,7 +264,6 @@
 						<command>nasal</command>
 						<script>
 							setprop("/environment/weather-scenario", "Thunderstorm");
-							setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers") + 1);
 						</script>
 					</binding>
 				</key>

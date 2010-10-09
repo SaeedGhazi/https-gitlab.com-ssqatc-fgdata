@@ -148,6 +148,7 @@ Started September 2000 by David Megginson, david@megginson.com
    </headshake>
    <crop-shader userarchive="y">0</crop-shader>
    <landmass-shader userarchive="y">0</landmass-shader>
+   <transition-shader userarchive="y">0</transition-shader>
    <water-shader userarchive="y">0</water-shader>
    <urban-shader userarchive="y">0</urban-shader>
    <contrail-shader userarchive="y">0</contrail-shader>
@@ -290,6 +291,14 @@ Started September 2000 by David Megginson, david@megginson.com
    <autopilot>
     <path>Aircraft/Generic/generic-autopilot-helper.xml</path>
    </autopilot>
+   <property-rule>
+     <name>Environment METAR Interpolation Rule</name>
+     <path>Environment/metarinterpolator.xml</path>
+   </property-rule>
+   <property-rule>
+     <name>Environment Interpolation Rule</name>
+     <path>Environment/interpolator.xml</path>
+   </property-rule>
   </systems>
   <instrumentation>
    <path>Aircraft/Generic/generic-instrumentation.xml</path>

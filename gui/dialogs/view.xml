@@ -6,7 +6,7 @@
 	<layout>vbox</layout>
 
 	<text>
-		<label>Configure Active Views</label>
+		<label>Choose Active Views</label>
 	</text>
 
 	<hrule/>

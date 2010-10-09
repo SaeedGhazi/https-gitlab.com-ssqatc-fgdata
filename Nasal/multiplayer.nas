@@ -125,8 +125,10 @@ var handle_key = func(key)
     {
       input = substr(input, 0, size(input) - 1);
       gui.popupTip(input, 1000000);
-      return 1;
     }
+
+    # Always handle key so excessive backspacing doesn't toggle the heading autopilot
+    return 1;
   }
   elsif (key == 27)
   {

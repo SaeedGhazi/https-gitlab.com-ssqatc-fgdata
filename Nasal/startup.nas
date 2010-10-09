@@ -1,6 +1,6 @@
 var set_runway_from_metar_wind = func {
-	if (!getprop("/environment/params/real-world-weather-fetch"))
-		return printlog("info", "metar-rwy: no live weather");
+	if (!getprop("/environment/metar/valid"))
+		return printlog("info", "metar-rwy: no valid metar");
 	if (!getprop("/sim/startup/options/airport"))
 		return printlog("info", "metar-rwy: no airport requested");
 	if (getprop("/sim/startup/options/runway"))

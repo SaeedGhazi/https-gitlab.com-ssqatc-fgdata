@@ -233,10 +233,10 @@ Binary.decodeCoord = func (str) {
 #       The same object is seldom used for both sending and receiving.
 var MessageChannel = {};
 MessageChannel.new = func (n = nil, process = nil) {
-  obj = { parents     : [MessageChannel],
-          node        : n, 
-          process_msg : process,
-          old         : "" };
+  var obj = { parents     : [MessageChannel],
+              node        : n, 
+              process_msg : process,
+              old         : "" };
   return obj;
 }
 MessageChannel.update = func {

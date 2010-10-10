@@ -28,7 +28,7 @@
     -->
     <name>MetarController:pressure-sea-level-inhg</name>
     <type>noise-spike</type>
-    <max-rate-of-change>0.0003</max-rate-of-change>
+    <max-rate-of-change>0.006</max-rate-of-change>
     <enable>
       <condition>
         <property>/environment/metar/valid</property>

@@ -26,7 +26,7 @@ updateContrail = func{
 
 ### Contrail
 
-print ("init contrail");
+printlog ("debug", "init contrail");
 _setlistener("/sim/signals/nasal-dir-initialized", func {
     props.globals.initNode("environment/pressure-inhg", 1, "DOUBLE");
     props.globals.initNode("environment/temperature-degc", 1, "DOUBLE");

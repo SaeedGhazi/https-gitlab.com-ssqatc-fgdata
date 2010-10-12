@@ -1,5 +1,5 @@
 _setlistener("/sim/presets/latitude-deg", func {
-	print("*** NEW LOCATION ***");
+	printlog("info", "*** NEW LOCATION ***");
 	settimer(func {
 		var typ = getprop("/sim/type");
 		var lat = getprop("/position/latitude-deg");

@@ -45,24 +45,25 @@ BroadcastChannel.new = func (mpp_path, process,
                              accept_predicate = nil,
                              on_disconnect = nil,
                              enable_send=1) {
-  obj = { parents      : [BroadcastChannel],
-          mpp_path     : mpp_path,
-          send_node    : enable_send ? props.globals.getNode(mpp_path, 1) 
-                                     : nil,
-          process_msg  : process,
-          send_to_self : send_to_self,
-          accept_predicate : (accept_predicate != nil) ? accept_predicate :
-                                                         func (p) { return 1; },
-          on_disconnect    : (on_disconnect != nil) ? on_disconnect :
-                                                      func (p) { return; },
-          # Internal state.
-          send_buf     : [],
-          peers        : {},
-          loopid       : 0,
-          PERIOD       : 1.3,
-          last_time    : 0.0,  # For join handling.
-          last_send    : 0.0,  # For the send queue 
-          SEND_TIME    : 0.5 };
+  var obj = { parents      : [BroadcastChannel],
+              mpp_path     : mpp_path,
+              send_node    : enable_send ? props.globals.getNode(mpp_path, 1) 
+                                         : nil,
+              process_msg  : process,
+              send_to_self : send_to_self,
+              accept_predicate :
+                (accept_predicate != nil) ? accept_predicate
+                                          : func (p) { return 1; },
+              on_disconnect : (on_disconnect != nil) ? on_disconnect
+                                                     : func (p) { return; },
+              # Internal state.
+              send_buf     : [],
+              peers        : {},
+              loopid       : 0,
+              PERIOD       : 1.3,
+              last_time    : 0.0,  # For join handling.
+              last_send    : 0.0,  # For the send queue 
+              SEND_TIME    : 0.5 };
   if (enable_send and (obj.send_node == nil)) {
     printlog("warn",
              "BroadcastChannel invalid send node.");
@@ -232,10 +233,10 @@ Binary.decodeCoord = func (str) {
 #       The same object is seldom used for both sending and receiving.
 var MessageChannel = {};
 MessageChannel.new = func (n = nil, process = nil) {
-  obj = { parents     : [MessageChannel],
-          node        : n, 
-          process_msg : process,
-          old         : "" };
+  var obj = { parents     : [MessageChannel],
+              node        : n, 
+              process_msg : process,
+              old         : "" };
   return obj;
 }
 MessageChannel.update = func {

@@ -119,32 +119,32 @@
 					<halign>left</halign>
 					<label>-180</label>
 				</text>
-			<slider>
-				<width>75</width>
-				<height>25</height>
-				<min>-180</min>
-				<max>180</max>
-				<property>/ai/models/wingman/controls/break-deg-rel</property>
-				<binding>
-					<command>dialog-apply</command>
-				</binding>
-				<binding>
-					<command>nasal</command>
-					<script>
-						var v = getprop("/ai/models/wingman/controls/break-deg-rel");
-						foreach (var c; props.globals.getNode("/ai/models").getChildren("wingman")){
-						print("FFF ", v, " ", c.getNode("name").getValue());
-						c.getNode("controls/break-deg-rel",1).setDoubleValue(v);
-						}
-					</script>
-				</binding>
-			</slider>
+				<slider>
+					<width>75</width>
+					<height>25</height>
+					<min>-180</min>
+					<max>180</max>
+					<property>/ai/models/wingman/controls/break-deg-rel</property>
+					<binding>
+						<command>dialog-apply</command>
+					</binding>
+					<binding>
+						<command>nasal</command>
+						<script>
+							var v = getprop("/ai/models/wingman/controls/break-deg-rel");
+							foreach (var c; props.globals.getNode("/ai/models").getChildren("wingman")){
+							print("FFF ", v, " ", c.getNode("name").getValue());
+							c.getNode("controls/break-deg-rel",1).setDoubleValue(v);
+							}
+						</script>
+					</binding>
+				</slider>
 				<text>
 					<halign>left</halign>
 
-				<label>180</label>
+					<label>180</label>
 
-			</text>
+				</text>
 			</group>
 
 			<text>
@@ -156,14 +156,7 @@
 
 		</group>
 
-
-
-
 	</group>
-
-
-
-
 
 	<group>
 		<layout>hbox</layout>
@@ -181,6 +174,26 @@
 			<property>/ai/models/wingman/controls/tgt-heading-deg</property>
 		</text>
 	</group>
+
+	<group>
+		<layout>hbox</layout>
+
+		<text>
+			<halign>left</halign>
+			<label>Set Formation</label>
+		</text>
+		
+		<button>
+			<x>40</x>
+			<y>10</y>
+			<legend>Open/Close</legend>
+			<binding>
+				<command>nasal</command>
+				<script>formation.formation_dialog.toggle()</script>
+			</binding>
+		</button>
+
+		</group>
 
 	<empty>
 		<stretch>true</stretch>

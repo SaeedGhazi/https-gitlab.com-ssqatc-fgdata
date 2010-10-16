@@ -178,6 +178,7 @@ var dialog = {
             { type: "checkbox", property: "controls/invisible", callback: "multiplayer.dialog.toggle_ignore",
               argprop: "callsign", label: "---------", halign: "right", font: font },
         ];
+        me.cs_warnings = {};
         me.name = "who-is-online";
         me.dialog = nil;
         me.loopid = 0;
@@ -275,20 +276,29 @@ var dialog = {
             var ac = geo.Coord.new().set_xyz(x, y, z);
             var distance = nil;
             call(func distance = self.distance_to(ac), nil, var err = []);
-            if (size(err)) {
-            #    debug.printerror(err);
-            #    debug.dump(self, ac, mp);
-            #    debug.tree(mp.node);
+            if ((size(err))or(distance==nil)) {
+                # Oops, have errors. Bogus position data (and distance==nil).
+                if (me.cs_warnings[mp.callsign]!=1) {
+                    # report each callsign once only (avoid cluttering)
+                    me.cs_warnings[mp.callsign] = 1;
+                    print("Received invalid position data: " ~ debug._error(mp.callsign));
+                }
+                #    debug.printerror(err);
+                #    debug.dump(self, ac, mp);
+                #    debug.tree(mp.node);
             }
-
-            n.setValues({
-                "model-short": mp.available ? mp.model : "[" ~ mp.model ~ "]",
-                "bearing-to": self.course_to(ac),
-                "distance-to-km": distance / 1000.0,
-                "distance-to-nm": distance * M2NM,
-                "position/altitude-m": n.getNode("position/altitude-ft").getValue() * FT2M,
-                "controls/invisible": contains(ignore, mp.callsign),
-            });
+            else
+            {
+                # Node with valid position data (and "distance!=nil").
+                n.setValues({
+                    "model-short": mp.available ? mp.model : "[" ~ mp.model ~ "]",
+                    "bearing-to": self.course_to(ac),
+                    "distance-to-km": distance / 1000.0,
+                    "distance-to-nm": distance * M2NM,
+                    "position/altitude-m": n.getNode("position/altitude-ft").getValue() * FT2M,
+                    "controls/invisible": contains(ignore, mp.callsign),
+                });
+            }
         }
         if (PILOTSDLG_RUNNING)
             settimer(func me.update(id), 1, 1);

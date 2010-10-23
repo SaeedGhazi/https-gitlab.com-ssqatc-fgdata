@@ -30,6 +30,8 @@ command interface /autopilot/route-manager/input:
             var list = cmdarg().getNode("list");
             var cmd = routem.getNode("input", 1);
             var route = routem.getNode("route", 1);
+            var dep = routem.getNode("departure", 1);
+            var dest = routem.getNode("destination", 1);
             
             var sel_index = func {
                 return int(selection.getValue());
@@ -59,8 +61,8 @@ command interface /autopilot/route-manager/input:
                 cmd.setValue("@delete" ~ sel_index());
             }
             
-            var auto_route = func {
-                cmd.setValue();
+            var route = func {
+                cmd.setValue("@route" ~ sel_index());
             }
             
             var jump_to = func {
@@ -88,10 +90,15 @@ command interface /autopilot/route-manager/input:
             
             var departureRunways = dlg.getNode("departure-runways", 1);
             var destRunways = dlg.getNode("destination-runways", 1);
-
+            var sids = dlg.getNode("sids", 1);
+            var stars = dlg.getNode("stars", 1);
+            
             var updateRunways = func {         
-                var depIcao = routem.getNode("departure").getNode("airport").getValue();
+                var depIcao = dep.getNode("airport").getValue();
                 departureRunways.removeChildren("value");
+
+                var currentRunway = dep.getNode("runway").getValue();
+                var foundCurrent = 0;
                 
                 var apt = airportinfo(depIcao);
                 if (apt != nil) {
@@ -99,11 +106,20 @@ command interface /autopilot/route-manager/input:
                     foreach (var rwy; keys(apt.runways)) {
                         departureRunways.getNode("value[" ~ i ~ "]", 1).setValue(rwy);
                         i += 1;
+                        if (rwy == currentRunway) {
+                            foundCurrent = 1;
+                        }
                     }
                 }
                 
-                var destIcao = routem.getNode("destination").getNode("airport").getValue();
+                if (!foundCurrent) {
+                    dep.getNode("runway").clearValue();
+                }
+                
+                var destIcao = dest.getNode("airport").getValue();
                 destRunways.removeChildren("value");
+                currentRunway = dest.getNode("runway").getValue();
+                foundCurrent = 0;
                 
                 var apt = airportinfo(destIcao);
                 if (apt != nil) {
@@ -111,11 +127,68 @@ command interface /autopilot/route-manager/input:
                     foreach (var rwy; keys(apt.runways)) {
                         destRunways.getNode("value[" ~ i ~ "]", 1).setValue(rwy);
                         i += 1;
+                        if (rwy == currentRunway) {
+                            foundCurrent = 1;
+                        }
                     }
                 }
                 
+                if (!foundCurrent) {
+                    dest.getNode("runway").clearValue();
+                }
+                
+                print("updated runways");
                 gui.dialog_update("route-manager");
             }
+            
+            var updateSIDs = func {
+                sids.removeChildren("value");
+                var depIcao = dep.getNode("airport").getValue();
+                var rwy = dep.getNode("runway").getValue();
+                var apt = airportinfo(depIcao);
+                if (apt == nil or apt.runways[rwy] == nil) {
+                    dep.getNode("sid").clearValue();
+                    gui.dialog_update("route-manager", "sid");
+                    return;
+                }
+                
+                sids.getNode("value[0]", 1).setValue("(none)");
+                var i=1;
+                foreach (var s; apt.runways[rwy].sids) {
+                    sids.getNode("value[" ~ i ~ "]", 1).setValue(s);
+                    i += 1;
+                }
+                
+                gui.dialog_update("route-manager", "sid");
+            }
+            
+            var updateSTARs = func {
+                stars.removeChildren("value");
+                var icao = dest.getNode("airport").getValue();
+                var rwy = dest.getNode("runway").getValue();
+                var apt = airportinfo(icao);
+                if (apt == nil or apt.runways[rwy] == nil) {
+                    dest.getNode("star").clearValue();
+                    gui.dialog_update("route-manager", "star");
+                    return;
+                }
+                
+                var i=1;
+                stars.getNode("value[0]", 1).setValue("(none)");
+                foreach (var s; apt.runways[rwy].stars) {
+                    stars.getNode("value[" ~ i ~ "]", 1).setValue(s);
+                    i += 1;
+                }
+                
+                gui.dialog_update("route-manager", "star");
+            }
+            
+        # initialise departure values based on current position
+            cmd.setValue("@posinit");
+            
+            updateRunways();
+            updateSIDs();
+            updateSTARs();
         </open>
 
         <close>
@@ -189,6 +262,31 @@ command interface /autopilot/route-manager/input:
             <property>/autopilot/route-manager/departure/runway</property>
             <editable>false</editable>
             <properties>/sim/gui/dialogs/route-manager/departure-runways</properties>
+            
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>departure-runway</object-name>
+            </binding>
+            <binding>
+                <command>nasal</command>
+                <script>updateSIDs();</script>
+            </binding>
+        </combo>
+        
+        <text>
+            <label>SID:</label>
+        </text>
+        <combo>
+            <name>sid</name>
+            <pref-width>100</pref-width>
+            <property>/autopilot/route-manager/departure/sid</property>
+            <editable>false</editable>
+            <properties>/sim/gui/dialogs/route-manager/sids</properties>
+            
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>sid</object-name>
+            </binding>
         </combo>
     </group>
     
@@ -229,6 +327,32 @@ command interface /autopilot/route-manager/input:
             <property>/autopilot/route-manager/destination/runway</property>
             <editable>false</editable>
             <properties>/sim/gui/dialogs/route-manager/destination-runways</properties>
+            
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>destination-runway</object-name>
+            </binding>
+            
+            <binding>
+                <command>nasal</command>
+                <script>updateSTARs();</script>
+            </binding>
+        </combo>
+        
+        <text>
+            <label>STAR:</label>
+        </text>
+        <combo>
+            <name>star</name>
+            <pref-width>100</pref-width>
+            <property>/autopilot/route-manager/destination/star</property>
+            <editable>false</editable>
+            <properties>/sim/gui/dialogs/route-manager/stars</properties>
+            
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>star</object-name>
+            </binding>
         </combo>
     </group>
     <!--
@@ -341,6 +465,7 @@ command interface /autopilot/route-manager/input:
             <pref-width>70</pref-width>
             <binding>
                 <command>dialog-apply</command>
+				<object-name>input</object-name>
             </binding>
             <binding>
                 <command>nasal</command>
@@ -389,6 +514,14 @@ command interface /autopilot/route-manager/input:
                 <script>remove()</script>
             </binding>
         </button>
+
+		<button>
+			<legend>Route</legend>
+			<binding>
+				<command>nasal</command>
+				<script>route()</script>
+			</binding>
+		</button>
 <!--
         <button>
             <legend>Auto-route</legend>

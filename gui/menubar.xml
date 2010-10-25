@@ -576,6 +576,15 @@
 			</binding>
 		</item>
 
+        <item>
+			<label>Reload HUD</label>
+			<binding>
+				<command>reinit</command>
+				<subsystem>hud</subsystem>
+			</binding>
+		</item>
+
+
 		<item>
 			<label>Reload Panel</label>
 			<binding>

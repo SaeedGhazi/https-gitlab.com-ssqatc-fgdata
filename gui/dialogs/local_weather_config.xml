@@ -33,7 +33,7 @@
    <y>320</y>
    <width>100</width>
    <height>20</height>
-   <min>25000.0</min>
+   <min>29000.0</min>
    <max>55000.0</max>
    <property>/local-weather/config/distance-to-load-tile-m</property>
    <binding>

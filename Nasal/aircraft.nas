@@ -954,12 +954,11 @@ var kias_to_ktas = func(kias, altitude) {
 #
 var HUD = {
 	init: func {
-		me.vis0N = props.globals.getNode("/sim/hud/visibility[0]", 1);
 		me.vis1N = props.globals.getNode("/sim/hud/visibility[1]", 1);
 		me.currcolN = props.globals.getNode("/sim/hud/current-color", 1);
 		me.paletteN = props.globals.getNode("/sim/hud/palette", 1);
 		me.brightnessN = props.globals.getNode("/sim/hud/color/brightness", 1);
-		me.currentN = me.vis0N;
+		me.currentN = me.vis1N;
 	},
 	cycle_color: func {		# h-key
 		if (!me.currentN.getBoolValue())		# if off, turn on
@@ -979,34 +978,14 @@ var HUD = {
 		var br = me.brightnessN.getValue() - 0.2;
 		me.brightnessN.setValue(br > 0.01 ? br : 1);
 	},
-	normal_type: func {		# i-key
-		me.is_active() or return;
-		me.oldinit1();
-		me.vis0N.setBoolValue(1);
-		me.vis1N.setBoolValue(0);
-		me.currentN = me.vis0N;
-	},
-	cycle_type: func {		# I-key
-		me.is_active() or return;
-		if (me.currentN == me.vis0N) {
-			me.vis0N.setBoolValue(0);
-			me.vis1N.setBoolValue(1);
-			me.currentN = me.vis1N;
-		} elsif (me.currentN == me.vis1N) {
-			me.vis0N.setBoolValue(1);
-			me.vis1N.setBoolValue(0);
-			me.oldinit2();
-			me.currentN = me.vis0N;
-		}
-	},
-	oldinit1: func {
-		fgcommand("hud-init");
-	},
-	oldinit2: func {
-		fgcommand("hud-init2");
-	},
+    normal_type: func {		# i-key
+	
+    },
+    cycle_type: func {		# I-key
+	
+    },
 	is_active: func {
-		me.vis0N.getValue() or me.vis1N.getValue();
+		me.vis1N.getValue();
 	},
 };
 

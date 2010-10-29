@@ -20,5 +20,4 @@
 
 	<js n="0" include="Input/Joysticks/Local/joystick_0.xml"/>
 -->
-	<js-named include="Input/Joysticks/ThrustMaster/joystick-hotas.xml"/>
 </PropertyList>

@@ -4,10 +4,26 @@
 
 	<!-- heading -->
 
+    <label>
+		<width>60</width>
+		<height>10</height>
+		<box>true</box>
+		<format>ROLL</format>
+		<halign>left</halign>
+		<condition>
+			<equals>
+				<property>/autopilot/locks/heading</property>
+				<value>wing-leveler</value>
+			</equals>
+		</condition>
+	</label>
+    
+
 	<label>
-		<width>2</width>
-		<height>2</height>
-		<format>hdg = %.1f</format>
+		<width>60</width>
+		<height>10</height>
+		<box>true</box>
+		<format>HDG %03d</format>
 		<halign>left</halign>
 		<input>
 			<property>/autopilot/settings/heading-bug-deg</property>
@@ -21,9 +37,10 @@
 	</label>
 
 	<label>
-		<width>2</width>
-		<height>2</height>
-		<format>hdg = %.1f</format>
+		<width>60</width>
+		<height>10</height>
+		<box>true</box>
+		<format>HDG %03d</format>
 		<halign>left</halign>
 		<input>
 			<property>/autopilot/settings/true-heading-deg</property>
@@ -36,217 +53,15 @@
 		</condition>
 	</label>
 
-	<!-- wp[0] -->
-
-	<label>
-		<x>0</x>
-		<y>-15</y>
-		<width>2</width>
-		<height>2</height>
-		<format>%5s</format>
-		<halign>left</halign>
-		<input>
-			<property>/autopilot/route-manager/wp[0]/id</property>
-		</input>
-		<condition>
-			<equals>
-				<property>/autopilot/locks/heading</property>
-				<value>true-heading-hold</value>
-			</equals>
-		</condition>
-	</label>
-
-	<label>
-		<x>35</x>
-		<y>-15</y>
-		<width>2</width>
-		<height>2</height>
-		<format>%6.1fnm</format>
-		<halign>left</halign>
-		<input>
-			<property>/autopilot/route-manager/wp[0]/dist</property>
-		</input>
-		<condition>
-			<equals>
-				<property>/autopilot/locks/heading</property>
-				<value>true-heading-hold</value>
-			</equals>
-			<not>
-				<equals>
-					<property>/autopilot/route-manager/wp[0]/id</property>
-					<value></value>
-				</equals>
-			</not>
-		</condition>
-	</label>
-
-	<label>
-		<x>82</x>
-		<y>-15</y>
-		<width>2</width>
-		<height>2</height>
-		<format>%s</format>
-		<halign>left</halign>
-		<input>
-			<property>/autopilot/route-manager/wp[0]/eta</property>
-		</input>
-		<condition>
-			<equals>
-				<property>/autopilot/locks/heading</property>
-				<value>true-heading-hold</value>
-			</equals>
-			<not>
-				<equals>
-					<property>/autopilot/route-manager/wp[0]/id</property>
-					<value></value>
-				</equals>
-			</not>
-		</condition>
-	</label>
-
-	<!-- wp[1] -->
-
-	<label>
-		<x>0</x>
-		<y>-30</y>
-		<width>2</width>
-		<height>2</height>
-		<format>%5s</format>
-		<halign>left</halign>
-		<input>
-			<property>/autopilot/route-manager/wp[1]/id</property>
-		</input>
-		<condition>
-			<equals>
-				<property>/autopilot/locks/heading</property>
-				<value>true-heading-hold</value>
-			</equals>
-		</condition>
-	</label>
-
-	<label>
-		<x>35</x>
-		<y>-30</y>
-		<width>2</width>
-		<height>2</height>
-		<format>%6.1fnm</format>
-		<halign>left</halign>
-		<input>
-			<property>/autopilot/route-manager/wp[1]/dist</property>
-		</input>
-		<condition>
-			<equals>
-				<property>/autopilot/locks/heading</property>
-				<value>true-heading-hold</value>
-			</equals>
-			<not>
-				<equals>
-					<property>/autopilot/route-manager/wp[1]/id</property>
-					<value></value>
-				</equals>
-			</not>
-		</condition>
-	</label>
-
-	<label>
-		<x>82</x>
-		<y>-30</y>
-		<width>2</width>
-		<height>2</height>
-		<format>%s</format>
-		<halign>left</halign>
-		<input>
-			<property>/autopilot/route-manager/wp[1]/eta</property>
-		</input>
-		<condition>
-			<equals>
-				<property>/autopilot/locks/heading</property>
-				<value>true-heading-hold</value>
-			</equals>
-			<not>
-				<equals>
-					<property>/autopilot/route-manager/wp[1]/id</property>
-					<value></value>
-				</equals>
-			</not>
-		</condition>
-	</label>
-
-	<!-- wp[2] -->
-
-	<label>
-		<x>0</x>
-		<y>-45</y>
-		<width>2</width>
-		<height>2</height>
-		<format>%5s</format>
-		<halign>left</halign>
-		<input>
-			<property>/autopilot/route-manager/wp[2]/id</property>
-		</input>
-		<condition>
-			<equals>
-				<property>/autopilot/locks/heading</property>
-				<value>true-heading-hold</value>
-			</equals>
-		</condition>
-	</label>
-
-	<label>
-		<x>35</x>
-		<y>-45</y>
-		<width>2</width>
-		<height>2</height>
-		<format>%6.1fnm</format>
-		<halign>left</halign>
-		<input>
-			<property>/autopilot/route-manager/wp[2]/dist</property>
-		</input>
-		<condition>
-			<equals>
-				<property>/autopilot/locks/heading</property>
-				<value>true-heading-hold</value>
-			</equals>
-			<not>
-				<equals>
-					<property>/autopilot/route-manager/wp[2]/id</property>
-					<value></value>
-				</equals>
-			</not>
-		</condition>
-	</label>
-
-	<label>
-		<x>82</x>
-		<y>-45</y>
-		<width>2</width>
-		<height>2</height>
-		<format>%s</format>
-		<halign>left</halign>
-		<input>
-			<property>/autopilot/route-manager/wp[2]/eta</property>
-		</input>
-		<condition>
-			<equals>
-				<property>/autopilot/locks/heading</property>
-				<value>true-heading-hold</value>
-			</equals>
-			<not>
-				<equals>
-					<property>/autopilot/route-manager/wp[2]/id</property>
-					<value></value>
-				</equals>
-			</not>
-		</condition>
-	</label>
 
 	<!-- altitude -->
 
 	<label>
-		<y>-60</y>
-		<width>2</width>
-		<height>2</height>
-		<format>alt = %.0f</format>
+		<x>60</x>
+		<width>60</width>
+		<height>10</height>
+		<box>true</box>
+		<format>ALT %04d</format>
 		<halign>left</halign>
 		<input>
 			<property>/autopilot/settings/target-altitude-ft</property>
@@ -259,12 +74,47 @@
 		</condition>
 	</label>
 
-	<label>
-		<y>-60</y>
-		<width>2</width>
-		<height>2</height>
-		<format>agl = %.0f</format>
+    <label>
+		<x>60</x>
+		<width>60</width>
+		<height>10</height>
+		<box>true</box>
+		<format>PTCH</format>
 		<halign>left</halign>
+		<condition>
+			<equals>
+				<property>/autopilot/locks/altitude</property>
+				<value>pitch-hold</value>
+			</equals>
+		</condition>
+	</label>
+    
+
+    <label>
+		<x>60</x>
+		<width>60</width>
+		<height>10</height>
+		<box>true</box>
+		<format>V/S %d</format>
+		<halign>left</halign>
+		<input>
+			<property>/autopilot/settings/vertical-speed-fpm</property>
+		</input>
+		<condition>
+			<equals>
+				<property>/autopilot/locks/altitude</property>
+				<value>vertical-speed-hold</value>
+			</equals>
+		</condition>
+	</label>
+
+	<label>
+		<x>60</x>
+		<width>60</width>
+		<height>10</height>
+		<format>AGL %04d</format>
+		<halign>left</halign>
+		<box>true</box>
 		<input>
 			<property>/autopilot/settings/target-agl-ft</property>
 		</input>
@@ -276,4 +126,59 @@
 		</condition>
 	</label>
 
+    <!-- speed -->
+    <label>
+		<x>120</x>
+		<width>60</width>
+		<height>10</height>
+		<format>IAS %3dkt</format>
+		<halign>left</halign>
+		<box>true</box>
+		<input>
+			<property>/autopilot/settings/target-speed-kt</property>
+		</input>
+		<condition>
+			<equals>
+				<property>/autopilot/locks/speed</property>
+				<value>speed-with-throttle</value>
+			</equals>
+		</condition>
+	</label>
+	
+	<label>
+		<x>120</x>
+		<width>60</width>
+		<height>10</height>
+		<format>MACH %1.2f</format>
+		<halign>left</halign>
+		<box>true</box>
+		<input>
+			<property>/autopilot/settings/target-speed-mach</property>
+		</input>
+		<condition>
+			<equals>
+				<property>/autopilot/locks/speed</property>
+				<value>mach-with-throttle</value>
+			</equals>
+		</condition>
+	</label>
+	
+	<label>
+		<x>120</x>
+		<width>60</width>
+		<height>10</height>
+		<format>PITCH %3dkt</format>
+		<halign>left</halign>
+		<box>true</box>
+		<input>
+			<property>/autopilot/settings/target-speed-mach</property>
+		</input>
+		<condition>
+			<equals>
+				<property>/autopilot/locks/speed</property>
+				<value>speed-with-pitch-trim</value>
+			</equals>
+		</condition>
+	</label>
+	
 </PropertyList>

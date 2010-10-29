@@ -54,7 +54,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <terminal-ansi-colors type="bool">true</terminal-ansi-colors>
 		<season type="string">summer</season>
   </startup>
-  <rendering> <multithreading-mode>AutomaticSelection</multithreading-mode>
+  <rendering>
    <debug type="bool">false</debug>
    <realism>5</realism>
    <filtering>8</filtering>
@@ -281,12 +281,11 @@ Started September 2000 by David Megginson, david@megginson.com
   <systems>
    <path>Aircraft/Generic/generic-systems.xml</path>
    <autopilot>
+    <name>generic autopilot</name>
     <path>Aircraft/Generic/generic-autopilot.xml</path>
    </autopilot>
-   <!-- 
-   replace the hard coded helpers, which are gone now
-   -->
    <autopilot>
+    <name>autopilot helpers</name>
     <path>Aircraft/Generic/generic-autopilot-helper.xml</path>
    </autopilot>
    <property-rule>
@@ -593,7 +592,7 @@ Started September 2000 by David Megginson, david@megginson.com
   </airport>
 
   <atc>
-   <enabled type="bool">false</enabled>
+   <enabled type="bool">true</enabled>
   </atc>
 
   <ai-traffic>
@@ -602,7 +601,7 @@ Started September 2000 by David Megginson, david@megginson.com
   </ai-traffic>
 
   <traffic-manager>
-     <enabled type="bool">false</enabled>
+     <enabled type="bool">true</enabled>
      <heuristics type="bool">true</heuristics>
      <datafile type="string"></datafile>
      <instantaneous-action type="bool">false</instantaneous-action>
@@ -612,13 +611,12 @@ Started September 2000 by David Megginson, david@megginson.com
 
   <ai>
    <enabled type="bool">true</enabled>
-   <!-- <scenario>nimitz_demo</scenario> -->
+   <scenario>nimitz_demo</scenario>
    <!-- <scenario>balloon_demo</scenario> -->
    <!-- <scenario>aircraft_demo</scenario> -->
    <!-- <scenario>refueling_demo</scenario> -->
    <!-- <scenario>lead_aircraft</scenario> -->
    <!-- <scenario>vinson_demo</scenario> -->
-   <!-- <scenario>mp-carriers</scenario> -->
   </ai>
 
   <multiplay>

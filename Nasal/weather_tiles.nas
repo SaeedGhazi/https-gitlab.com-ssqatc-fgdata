@@ -1,7 +1,7 @@
 
 ########################################################
 # routines to set up weather tiles
-# Thorsten Renk, July 2010
+# Thorsten Renk, October 2010
 ########################################################
 
 # function			purpose
@@ -22,7 +22,7 @@
 var tile_start = func {
 
 # set thread lock
-if (getprop(lw~"tmp/thread-flag") == 1){setprop(lw~"tmp/thread-status","computing");}
+if (local_weather.thread_flag == 1){setprop(lw~"tmp/thread-status","computing");}
 
 # set the tile code
 var current_code = getprop(lw~"tiles/code");
@@ -51,9 +51,10 @@ var dir_index = getprop(lw~"tiles/tmp/dir-index");
 
 local_weather.assemble_effect_array();
 
-print("Finished setting up tile type ",current_code, " in direction ",dir_index);
+if (local_weather.debug_output_flag == 1) 
+	{print("Finished setting up tile type ",current_code, " in direction ",dir_index);}
 
-if (getprop(lw~"tmp/thread-flag") == 1)
+if (local_weather.thread_flag == 1)
 	{setprop(lw~"tmp/thread-status","placing");}
 else 	# without worker threads, tile generation is complete at this point
 	{props.globals.getNode(lw~"tiles").getChild("tile",dir_index).getNode("generated-flag").setValue(2);}
@@ -97,10 +98,17 @@ local_weather.set_weather_station(blat, blon, 20000.0, 14.0, 12.0, 29.78);
 
 #create_2_8_sstratus_streak(blat, blon,5000.0,0.0);
 
-create_4_8_cirrocumulus_bank(blat, blon, 6000.0, 0.0);
+#create_4_8_cirrocumulus_bank(blat, blon, 6000.0, 0.0);
+
+#create_4_8_cirrocumulus_streaks(blat, blon, 6000.0, 0.0);
+
+# create_2_8_cirrocumulus(blat, blon, 6000.0, 0.0);
 
 #create_detailed_stratocumulus_bank(blat, blon,5000.0+alt_offset,0.0);
 
+create_4_8_altocumulus_perlucidus(blat, blon, 10000.0, 0.0);
+
+local_weather.create_effect_volume(3, blat, blon, 20000.0, 7000.0, alpha, 0.0, 80000.0, -1, -1, -1, -1, 15.0, -3,-1);
 
 tile_finished();
 
@@ -143,12 +151,43 @@ var p = 1025.0 + rand() * 6.0; p = adjust_p(p);
 # and set them at the tile center
 local_weather.set_weather_station(blat, blon, vis, T, D, p * hp_to_inhg);
 
-# weak cumulus development
 
 var alt = spread * 1000;
-var strength = rand() * 0.05;
+var strength = 0.0;
 
-local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
+var rn = rand();
+
+
+if (rn > 0.5)
+	{
+	# cloud scenario 1: weak cumulus development and blue thermals
+
+	strength = rand() * 0.05;
+	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
+
+	# generate a few blue thermals
+
+	if (local_weather.generate_thermal_lift_flag !=0)
+		{
+		local_weather.generate_thermal_lift_flag = 3;
+		strength = rand() * 0.4;
+		local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
+		local_weather.generate_thermal_lift_flag = 2;
+		}
+	
+	}
+else if (rn > 0.0)
+	{
+	# cloud scenario 2: some Cirrocumulus patches
+	
+	create_2_8_cirrocumulus(blat, blon, alt + alt_offset + 5000.0, alpha);
+	}
+
+
+# store convective altitude and strength
+
+append(weather_dynamics.tile_convective_altitude,alt);
+append(weather_dynamics.tile_convective_strength,strength);
 
 
 tile_finished();
@@ -192,36 +231,35 @@ var p = 1019.0 + rand() * 6.0; p = adjust_p(p);
 # and set them at the tile center
 local_weather.set_weather_station(blat, blon, vis, T, D, p * hp_to_inhg);
 
-# moderate cumulus development
 
 var alt = spread * 1000;
+var strength = 0.0;
 
 
 
 var rn = rand();
 
 
+
 if (rn > 0.66)
 	{
 	# cloud scenario 1: possible Cirrus over Cumulus
-	var strength = 0.2 + rand() * 0.4;
+	strength = 0.2 + rand() * 0.4;
 	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
 
 	# one or two Cirrus clouds
 
 	x = 2000.0 + rand() * 16000.0;
 	y = 2.0 * (rand()-0.5) * 18000;
-	alt = 25000.0 + rand() * 5000.0;
 	var path = local_weather.select_cloud_model("Cirrus", "small");
-	compat_layer.create_cloud(path, blat + get_lat(x,y,phi), blon+get_lon(x,y,phi),  alt + alt_offset,alpha);
+	compat_layer.create_cloud(path, blat + get_lat(x,y,phi), blon+get_lon(x,y,phi),  alt + alt_offset + 25000.0 + rand() * 5000.0,alpha);
 	
 	if (rand() > 0.5)
 		{
 		x = -2000.0 - rand() * 16000.0;
 		y = 2.0 * (rand()-0.5) * 18000;
-		alt = 25000.0 + rand() * 5000.0;
 		var path = local_weather.select_cloud_model("Cirrus", "small");
-		compat_layer.create_cloud(path, blat + get_lat(x,y,phi), blon+get_lon(x,y,phi),  alt + alt_offset,alpha);
+		compat_layer.create_cloud(path, blat + get_lat(x,y,phi), blon+get_lon(x,y,phi),  alt + alt_offset +25000.0 + rand() * 5000.0,alpha);
 		}	
 
 	}
@@ -229,7 +267,7 @@ else if (rn > 0.33)
 	{
 	# cloud scenario 2: Cirrostratus over weak Cumulus
 
-	var strength = 0.2 + rand() * 0.2;
+	strength = 0.2 + rand() * 0.2;
 	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
 
 	create_2_8_cirrostratus(blat, blon, alt+alt_offset+25000.0, alpha);
@@ -239,7 +277,7 @@ else if (rn > 0.0)
 	{
 	# cloud scenario 3: Cirrocumulus sheet over Cumulus
 
-	var strength = 0.2 + rand() * 0.2;
+	strength = 0.2 + rand() * 0.2;
 	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
 	
 	x = 2.0 * (rand()-0.5) * 5000;
@@ -250,6 +288,12 @@ else if (rn > 0.0)
 	compat_layer.create_cloud(path, blat + get_lat(x,y,phi), blon+get_lon(x,y,phi),  alt + alt_offset +24000,alpha);
 
 	}
+
+# store convective altitude and strength
+
+append(weather_dynamics.tile_convective_altitude,alt);
+append(weather_dynamics.tile_convective_strength,strength);
+
 
 tile_finished();
 
@@ -296,25 +340,26 @@ local_weather.set_weather_station(blat, blon, vis, T, D, p * hp_to_inhg);
 # now a random selection of different possible cloud configuration scenarios
 
 var alt = spread * 1000;
+var strength = 0.0;
 
 var rn = rand();
 
 
-if (rn > 0.833)
+if (rn > 0.875)
 	{
 	# cloud scenario 1: Altocumulus patch over weak Cumulus
-	var strength = 0.1 + rand() * 0.1;
+	strength = 0.1 + rand() * 0.1;
 	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
 
 	x = 2.0 * (rand()-0.5) * 5000;
 	y = 2.0 * (rand()-0.5) * 5000;
-	local_weather.create_streak("Altocumulus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 12000.0+alt+alt_offset,1500.0,30,1000.0,0.2,800.0,30,1000.0,0.2,800.0,alpha ,1.0);
+	local_weather.create_streak("Altocumulus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 12000.0+alt+alt_offset,1500.0,30,1000.0,0.2,1200.0,30,1000.0,0.2,1200.0,alpha ,1.0);
 
 	}
-else if (rn > 0.666)
+else if (rn > 0.750)
 	{
 	# cloud scenario 2: Altocumulus streaks
-	var strength = 0.15 + rand() * 0.2;
+	strength = 0.15 + rand() * 0.2;
 	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
 
 	x = 2.0 * (rand()-0.5) * 10000;
@@ -322,14 +367,14 @@ else if (rn > 0.666)
 	local_weather.create_streak("Altocumulus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 12000.0+alt+alt_offset,1500.0,25,700.0,0.2,800.0,10,700.0,0.2,800.0,alpha ,1.4);
 	x = 2.0 * (rand()-0.5) * 10000;
 	y = 2.0 * (rand()-0.5) * 10000;
-	local_weather.create_streak("Altocumulus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 12000.0+alt+alt_offset,1500.0,22,750.0,0.2,800.0,8,750.0,0.2,800.0,alpha ,1.1);
+	local_weather.create_streak("Altocumulus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 12000.0+alt+alt_offset,1500.0,22,750.0,0.2,1000.0,8,750.0,0.2,1000.0,alpha ,1.1);
 
 	}
-else if (rn > 0.5)
+else if (rn > 0.625)
 	{
 	# cloud scenario 3: Cirrus
 
-	var strength = 0.1 + rand() * 0.1;
+	strength = 0.1 + rand() * 0.1;
 	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
 
 	x = 2.0 * (rand()-0.5) * 3000;
@@ -337,11 +382,11 @@ else if (rn > 0.5)
 	local_weather.create_streak("Cirrus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 22000.0+alt+alt_offset,1500.0,3,9000.0,0.0, 800.0, 1,8000.0,0.0,800,0,alpha ,1.0);
 
 	}
-else if (rn > 0.333)
+else if (rn > 0.5)
 	{
 	# cloud scenario 4: Cumulonimbus banks
 
-	var strength = 0.7 + rand() * 0.3;
+	strength = 0.7 + rand() * 0.3;
 	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
 
 	for (var i = 0; i < 3; i = i + 1)
@@ -352,11 +397,11 @@ else if (rn > 0.333)
 		create_cloud_bank("Cumulonimbus", blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), alt+alt_offset, 1600.0, 800.0, 3000.0, 9, alpha);
 		}
 	}
-else if (rn > 0.166)
+else if (rn > 0.375)
 	{
 	# cloud scenario 5: scattered Stratus
 
-	var strength = 0.4 + rand() * 0.2;
+	strength = 0.4 + rand() * 0.2;
 	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
 
 	var size_offset = 0.5 * m_to_ft * local_weather.cloud_vertical_size_map["Stratus_structured"];
@@ -364,11 +409,11 @@ else if (rn > 0.166)
 	local_weather.create_streak("Stratus (structured)",blat, blon, alt+6000.0+alt_offset+size_offset,1000.0,18,0.0,0.3,20000.0,18,0.0,0.3,20000.0,0.0,1.0);
 
 	}
-else if (rn > 0.0)
+else if (rn > 0.250)
 	{
 	# cloud scenario 6: Cirrocumulus sheets
 
-	var strength = 0.2 + rand() * 0.2;
+	strength = 0.2 + rand() * 0.2;
 	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
 	
 
@@ -383,9 +428,30 @@ else if (rn > 0.0)
 		var path = local_weather.select_cloud_model("Cirrocumulus", "large");
 		compat_layer.create_cloud(path, blat + get_lat(x,y,phi), blon+get_lon(x,y,phi),  alt + alt_offset +20000+ alt_variation,alpha+ beta);
 		}
+	}
+else if (rn > 0.125)
+	{
+	# cloud scenario 7: Thin Cirrocumulus sheets over weak Cumulus
+
+	strength = 0.05 + rand() * 0.1;
+	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
+	
+	create_4_8_cirrocumulus_streaks(blat, blon, alt + 6000.0 + alt_offset, alpha);
+
+	}
+else if (rn > 0.0)
+	{
+	# cloud scenario 8: Altocumulus perlucidus
+	
+	create_4_8_altocumulus_perlucidus(blat, blon, alt + 10000.0 + alt_offset, alpha);
 
 	}
 
+
+# store convective altitude and strength
+
+append(weather_dynamics.tile_convective_altitude,alt);
+append(weather_dynamics.tile_convective_strength,strength);
 
 
 tile_finished();
@@ -435,6 +501,7 @@ local_weather.set_weather_station(blat, blon, vis, T, D, p * hp_to_inhg);
 
 # altitude for the lowest layer
 var alt = spread * 1000.0;
+var strength = 0.0;
 
 # now a random selection of different possible cloud configuration scenarios
 
@@ -484,6 +551,11 @@ else if (rn > 0.0)
 	create_4_8_cirrocumulus_bank(blat, blon, alt+alt_offset + 12000.0, alpha);
 	}
 
+# store convective altitude and strength
+
+append(weather_dynamics.tile_convective_altitude,alt);
+append(weather_dynamics.tile_convective_strength,strength);
+
 tile_finished();
 
 }
@@ -531,6 +603,7 @@ local_weather.set_weather_station(blat, blon, vis, T, D, p * hp_to_inhg);
 
 # altitude for the lowest layer
 var alt = spread * 1000.0;
+var strength = 0.0;
 
 var rn = rand();
 
@@ -547,16 +620,16 @@ if (rn > 0.75)
 	var beta = rand() * 360.0;
 
 	local_weather.create_layer("Nimbus", blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), alt+alt_offset, 500.0, 12000.0, 7000.0, beta, 1.0, 0.2, 1, 1.0);
-	local_weather.create_effect_volume(2, blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 10000.0, 6000.0, beta, 0.0, alt + alt_offset, 5000.0, 0.3, -1, -1, -1,0 );
-	local_weather.create_effect_volume(2, blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 9000.0, 5000.0, beta, 0.0, alt+alt_offset-300.0, 1500.0, 0.5, -1, -1, -1,0 );
+	local_weather.create_effect_volume(2, blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 10000.0, 6000.0, beta, 0.0, alt + alt_offset, 5000.0, 0.3, -1, -1, -1,0,-1 );
+	local_weather.create_effect_volume(2, blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 9000.0, 5000.0, beta, 0.0, alt+alt_offset-300.0, 1500.0, 0.5, -1, -1, -1,0,-1 );
 
 	x = 2.0 * (rand()-0.5) * 11000.0;
 	y = 2.0 * (rand()-0.5) * 11000.0;
 	var beta = rand() * 360.0;
 
 	local_weather.create_layer("Nimbus", blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), alt+alt_offset, 500.0, 10000.0, 6000.0, beta, 1.0, 0.2, 1, 1.0);
-	local_weather.create_effect_volume(2, blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 9000.0, 5000.0, beta, 0.0, alt + alt_offset, 5000.0, 0.3, -1, -1, -1,0 );
-	local_weather.create_effect_volume(2, blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 8000.0, 4000.0, beta, 0.0, alt+alt_offset-300.0, 1500.0, 0.5, -1, -1, -1,0 );
+	local_weather.create_effect_volume(2, blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 9000.0, 5000.0, beta, 0.0, alt + alt_offset, 5000.0, 0.3, -1, -1, -1,0 ,-1);
+	local_weather.create_effect_volume(2, blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 8000.0, 4000.0, beta, 0.0, alt+alt_offset-300.0, 1500.0, 0.5, -1, -1, -1,0,-1 );
 
 	create_4_8_sstratus_undulatus(blat, blon, alt+alt_offset +3000.0, alpha);
 	create_2_8_tstratus(blat, blon, alt+alt_offset +6000.0, alpha);
@@ -569,8 +642,8 @@ else if (rn >0.5)
 
 	alt = alt + local_weather.cloud_vertical_size_map["Stratus"] * 0.5 * m_to_ft;
 	create_8_8_stratus(blat, blon, alt+alt_offset,alpha);
-	local_weather.create_effect_volume(3, blat, blon, 18000.0, 18000.0, 0.0, 0.0, 1800.0, 8000.0, -1, -1, -1, -1, 0);
-	local_weather.create_effect_volume(3, blat, blon, 14000.0, 14000.0, 0.0, 0.0, 1500.0, 6000.0, 0.1, -1, -1, -1,0 );
+	local_weather.create_effect_volume(3, blat, blon, 18000.0, 18000.0, 0.0, 0.0, 1800.0, 8000.0, -1, -1, -1, -1, 0,-1);
+	local_weather.create_effect_volume(3, blat, blon, 14000.0, 14000.0, 0.0, 0.0, 1500.0, 6000.0, 0.1, -1, -1, -1,0,-1 );
 	create_2_8_sstratus(blat, blon, alt+alt_offset+3000,alpha);
 	}
 else if (rn >0.25)
@@ -594,6 +667,11 @@ else if (rn >0.0)
 	create_2_8_sstratus(blat, blon, alt+alt_offset+6000,alpha);
 	}
 	
+# store convective altitude and strength
+
+append(weather_dynamics.tile_convective_altitude,alt);
+append(weather_dynamics.tile_convective_strength,strength);
+
 tile_finished();
 
 }
@@ -643,15 +721,15 @@ local_weather.set_weather_station(blat, blon, vis, T, D, p * hp_to_inhg);
 # set a closed Nimbostratus layer
 
 var alt = spread * 1000.0 + local_weather.cloud_vertical_size_map["Nimbus"] * 0.5 * m_to_ft;
+var strength = 0.0;
 
-#print("alt: ",spread*1000);
 
 create_8_8_nimbus(blat, blon, alt+alt_offset, alpha);
 
 # and a precipitation layer below, more rain in the center of the tile
 
-local_weather.create_effect_volume(3, blat, blon, 20000.0, 20000.0, alpha, 0.0, alt + alt_offset, 3000.0, 0.3, -1, -1, -1,0 );
-local_weather.create_effect_volume(3, blat , blon, 16000.0, 16000.0, alpha, 0.0, alt + alt_offset - 300.0, 1500.0, 0.5, -1, -1, -1,0 );
+local_weather.create_effect_volume(3, blat, blon, 20000.0, 20000.0, alpha, 0.0, alt + alt_offset, 3000.0, 0.3, -1, -1, -1,0 ,0.95);
+local_weather.create_effect_volume(3, blat , blon, 16000.0, 16000.0, alpha, 0.0, alt + alt_offset - 300.0, 1500.0, 0.5, -1, -1, -1,0 ,0.8);
 
 
 # and some broken Stratus cover above
@@ -661,6 +739,10 @@ var rn = rand();
 if (rn > 0.5){create_4_8_stratus_patches(blat, blon, alt+alt_offset+3000.0, alpha);}
 else {create_4_8_stratus(blat, blon, alt+alt_offset+3000.0, alpha);}
 
+# store convective altitude and strength
+
+append(weather_dynamics.tile_convective_altitude,alt);
+append(weather_dynamics.tile_convective_strength,strength);
 
 tile_finished();
 
@@ -705,6 +787,7 @@ local_weather.set_weather_station(blat, blon, vis, T, D, p * hp_to_inhg);
 
 # altitude for the lowest layer
 var alt = spread * 1000.0;
+var strength = 0.0;
 
 var rn = rand();
 
@@ -713,7 +796,7 @@ var rn = rand();
 if (rn > 0.5)
 	{
 	# cloud scenario 1: strong Cumulus development
-	var strength = 0.8 + rand() * 0.2;
+	strength = 0.8 + rand() * 0.2;
 	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
 	}
 
@@ -721,7 +804,7 @@ else if (rn > 0.0)
 	{
 	# cloud scenario 2: Cirrocumulus sheets over Cumulus
 
-	var strength = 0.6 + rand() * 0.2;
+	strength = 0.6 + rand() * 0.2;
 	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
 	
 	for (var i = 0; i < 2; i = i + 1)
@@ -738,6 +821,12 @@ else if (rn > 0.0)
 
 	}
 
+#local_weather.create_effect_volume(3, blat, blon, 20000.0, 7000.0, alpha, 0.0, 80000.0, -1, -1, -1, -1, 15.0, -3,-1);
+
+# store convective altitude and strength
+
+append(weather_dynamics.tile_convective_altitude,alt);
+append(weather_dynamics.tile_convective_strength,strength);
 
 tile_finished();
 
@@ -782,6 +871,7 @@ local_weather.set_weather_station(blat, blon, vis, T, D, p * hp_to_inhg);
 
 # altitude for the lowest layer
 var alt = spread * 1000.0;
+var strength = 0.0;
 
 var rn = rand();
 
@@ -789,14 +879,14 @@ var rn = rand();
 if (rn > 0.8)
 	{
 	# cloud scenario 1: weak Cumulus development, some Cirrostratus
-	var strength = 0.3 + rand() * 0.2;
+	strength = 0.3 + rand() * 0.2;
 	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
 	create_4_8_cirrostratus_patches(blat, blon, alt+alt_offset+25000.0, alpha);
 	}
 else if (rn > 0.6)	
 	{
 	# cloud scenario 2: weak Cumulus development under Altostratus streaks
-	var strength = 0.1 + rand() * 0.1;
+	strength = 0.1 + rand() * 0.1;
 	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
 
 	var size_offset = 0.5 * m_to_ft * local_weather.cloud_vertical_size_map["Stratus_structured"];
@@ -807,7 +897,7 @@ else if (rn > 0.6)
 else if (rn > 0.4)	
 	{
 	# cloud scenario 3: Cirrocumulus bank
-	var strength = 0.05 + rand() * 0.05;
+	strength = 0.05 + rand() * 0.05;
 	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
 
 	var size_offset = 0.5 * m_to_ft * local_weather.cloud_vertical_size_map["Cirrocumulus"];
@@ -818,7 +908,7 @@ else if (rn > 0.4)
 else if (rn > 0.2)	
 	{
 	# cloud scenario 4: Cirrocumulus undulatus
-	var strength = 0.05 + rand() * 0.05;
+	strength = 0.05 + rand() * 0.05;
 	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
 
 	var size_offset = 0.5 * m_to_ft * local_weather.cloud_vertical_size_map["Cirrocumulus"];
@@ -830,7 +920,7 @@ else if (rn > 0.0)
 	{
 	# cloud scenario 5: weak Cumulus development under scattered Altostratus 
 
-	var strength = 0.15 + rand() * 0.15;
+	strength = 0.15 + rand() * 0.15;
 	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);	
 
 	var size_offset = 0.5 * m_to_ft * local_weather.cloud_vertical_size_map["Stratus_structured"];
@@ -839,6 +929,10 @@ else if (rn > 0.0)
 
 	}
 
+# store convective altitude and strength
+
+append(weather_dynamics.tile_convective_altitude,alt);
+append(weather_dynamics.tile_convective_strength,strength);
 
 tile_finished();
 
@@ -892,6 +986,7 @@ local_weather.set_weather_station(blat, blon, vis, T, D, p * hp_to_inhg);
 
 # altitude for the lowest layer
 var alt = spread * 1000.0;
+var strength = 0.0;
 
 # tropical weather has a strong daily variation, call thunderstorm only in the correct afternoon time window
 
@@ -901,7 +996,7 @@ var rn = rand();
 
 if (rn > (t_factor * t_factor * t_factor * t_factor)) # call a normal convective cloud system
 {
-var strength = 1.0 + rand() * 0.2;
+strength = 1.0 + rand() * 0.2;
 local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
 }
 
@@ -954,9 +1049,14 @@ local_weather.cumulus_exclusion_layer(blat, blon, alt+alt_offset, n, 20000.0, 20
 
 # some turbulence in the convection layer
 
-local_weather.create_effect_volume(3, blat, blon, 20000.0, 20000.0, alpha, 0.0, alt+3000.0+alt_offset, -1, -1, -1, 0.4, -1,0 );
+local_weather.create_effect_volume(3, blat, blon, 20000.0, 20000.0, alpha, 0.0, alt+3000.0+alt_offset, -1, -1, -1, 0.4, -1,0 ,-1);
 
 } # end thundercloud placement
+
+# store convective altitude and strength
+
+append(weather_dynamics.tile_convective_altitude,alt);
+append(weather_dynamics.tile_convective_strength,strength);
 
 tile_finished();
 
@@ -1019,6 +1119,7 @@ local_weather.set_weather_station(blat +get_lat(x,y,phi), blon + get_lon(x,y,phi
 
 # altitude for the lowest layer
 var alt = spread * 1000.0;
+var strength = 0.0;
 
 # thunderstorms first
 
@@ -1072,12 +1173,17 @@ local_weather.create_streak("Stratus (thin)",blat+get_lat(x,y,phi), blon+get_lon
 # some turbulence in the convection layer
 
 x=0.0; y = 5000.0;
-local_weather.create_effect_volume(3, blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 20000.0, 11000.0, alpha, 0.0, alt+3000.0+alt_offset, -1, -1, -1, 0.4, -1,0 );
+local_weather.create_effect_volume(3, blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 20000.0, 11000.0, alpha, 0.0, alt+3000.0+alt_offset, -1, -1, -1, 0.4, -1,0 ,-1);
 
 # some rain and reduced visibility in its core 
 
 x=0.0; y = 5000.0;
-local_weather.create_effect_volume(3, blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 20000.0, 8000.0, alpha, 0.0, alt+alt_offset, 10000.0, 0.1, -1, -1, -1,0 );
+local_weather.create_effect_volume(3, blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 20000.0, 8000.0, alpha, 0.0, alt+alt_offset, 10000.0, 0.1, -1, -1, -1,0,-1 );
+
+# store convective altitude and strength
+
+append(weather_dynamics.tile_convective_altitude,alt);
+append(weather_dynamics.tile_convective_strength,strength);
 
 tile_finished();
 
@@ -1145,6 +1251,12 @@ local_weather.set_weather_station(blat +get_lat(x,y,phi), blon + get_lon(x,y,phi
 # altitude for the lowest layer
 var alt = spread * 1000.0;
 
+# some weak Cumulus development
+
+var strength = 0.1 + rand() * 0.1;
+local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
+
+
 # high Cirrus leading
 
 x = 2.0 * (rand()-0.5) * 1000;
@@ -1164,6 +1276,11 @@ for (var i=0; i<6; i=i+1)
 	local_weather.create_streak("Cirrostratus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 18000 + alt + alt_offset,300.0,4,2300.0,0.2,600.0,4,2300.0,0.2,600.0,alpha+beta,1.0);
 
 	}
+
+# store convective altitude and strength
+
+append(weather_dynamics.tile_convective_altitude,alt);
+append(weather_dynamics.tile_convective_strength,strength);
 
 tile_finished();
 
@@ -1230,7 +1347,7 @@ local_weather.set_weather_station(blat +get_lat(x,y,phi), blon + get_lon(x,y,phi
 
 # altitude for the lowest layer
 var alt = spread * 1000.0;
-
+var strength = 0.0;
 
 # followed by random patches of Cirrostratus
 
@@ -1273,6 +1390,10 @@ var y = 8000.0;
 
 local_weather.create_streak("Stratus",blat +get_lat(x,y,phi), blon+get_lon(x,y,phi), alt+alt_offset +5000.0,1000.0,30,0.0,0.2,20000.0,10,0.0,0.2,12000.0,alpha,1.0);
 
+# store convective altitude and strength
+
+append(weather_dynamics.tile_convective_altitude,alt);
+append(weather_dynamics.tile_convective_strength,strength);
 
 tile_finished();
 
@@ -1339,7 +1460,7 @@ local_weather.set_weather_station(blat +get_lat(x,y,phi), blon + get_lon(x,y,phi
 
 # altitude for the lowest layer
 var alt = spread * 1000.0 + local_weather.cloud_vertical_size_map["Nimbus"] * 0.5 * m_to_ft;
-
+var strength = 0.0;
 
 # closed Stratus layer
 
@@ -1364,12 +1485,18 @@ local_weather.create_streak("Nimbus",blat +get_lat(x,y,phi), blon+get_lon(x,y,ph
 # some rain beneath the stratus
 
 x=0.0; y = -10000.0;
-local_weather.create_effect_volume(3, blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 20000.0, 10000.0, alpha, 0.0, alt+alt_offset+1000, vis * 0.7, 0.1, -1, -1, -1,0 );
+local_weather.create_effect_volume(3, blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 20000.0, 10000.0, alpha, 0.0, alt+alt_offset+1000, vis * 0.7, 0.1, -1, -1, -1,0 ,-1);
 
 # heavier rain beneath the Nimbostratus
 
 x=0.0; y = 10000.0;
-local_weather.create_effect_volume(3, blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 20000.0, 10000.0, alpha, 0.0, alt+alt_offset, vis * 0.5, 0.3, -1, -1, -1,0 );
+local_weather.create_effect_volume(3, blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 20000.0, 10000.0, alpha, 0.0, alt+alt_offset, vis * 0.5, 0.3, -1, -1, -1,0,-1 );
+
+
+# store convective altitude and strength
+
+append(weather_dynamics.tile_convective_altitude,alt);
+append(weather_dynamics.tile_convective_strength,strength);
 
 tile_finished();
 
@@ -1436,6 +1563,7 @@ local_weather.set_weather_station(blat +get_lat(x,y,phi), blon + get_lon(x,y,phi
 
 # altitude for the lowest layer
 var alt = spread * 1000.0 + local_weather.cloud_vertical_size_map["Nimbus"] * 0.5 * m_to_ft;
+var strength = 0.0;
 
 # low Nimbostratus layer
 
@@ -1461,7 +1589,13 @@ local_weather.create_streak("Nimbus",blat +get_lat(x,y,phi), blon+get_lon(x,y,ph
 # rain beneath the Nimbostratus
 
 x=0.0; y = -5000.0;
-local_weather.create_effect_volume(3, blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 20000.0, 15000.0, alpha, 0.0, alt+alt_offset, vis * 0.5, 0.3, -1, -1, -1,0 );
+local_weather.create_effect_volume(3, blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 20000.0, 15000.0, alpha, 0.0, alt+alt_offset, vis * 0.5, 0.3, -1, -1, -1,0 ,-1);
+
+
+# store convective altitude and strength
+
+append(weather_dynamics.tile_convective_altitude,alt);
+append(weather_dynamics.tile_convective_strength,strength);
 
 tile_finished();
 
@@ -1481,7 +1615,7 @@ tile_finished();
 
 var set_gliders_sky_tile = func {
 
-setprop(lw~"tiles/code","glides_sky");
+setprop(lw~"tiles/code","gliders_sky");
 
 tile_start();
 
@@ -1503,16 +1637,20 @@ calc_geo(blat);
 # first weather info for tile center (lat, lon, visibility, temperature, dew point, pressure)
 local_weather.set_weather_station(blat, blon, 35000.0, 20.0, 16.0, 1018 * hp_to_inhg);
 
-# switch the placement of thermal effect volumes on: 1: constant lift 2: by function
-setprop(lw~"tmp/generate-thermal-lift-flag",2); 
 
+
+var alt = 3000.0;
 
 # add convective clouds
 
 var strength = 0.5;
 var n = int(4000 * strength); # calculate the number of placement tries from tile size 20x20km and strength
-local_weather.create_cumosys(blat,blon, 3000.0+alt_offset,n, 20000.0);
+local_weather.create_cumosys(blat,blon, alt+alt_offset,n, 20000.0);
 
+# store convective altitude and strength
+
+append(weather_dynamics.tile_convective_altitude,alt);
+append(weather_dynamics.tile_convective_strength,strength);
 
 tile_finished();
 
@@ -1547,16 +1685,28 @@ calc_geo(blat);
 # first weather info for tile center (lat, lon, visibility, temperature, dew point, pressure)
 local_weather.set_weather_station(blat, blon, 45000.0, 20.0, 15.0, 1018 * hp_to_inhg);
 
-# switch the placement of thermal effect volumes on: 1: constant lift 2: by function 3: blue
-setprop(lw~"tmp/generate-thermal-lift-flag",3); 
+local_weather.generate_thermal_lift_flag = 3;
 
+var alt = 5000.0;
 
 # add convective clouds
+
+# set flag to blue thermal generation
+if (local_weather.generate_thermal_lift_flag !=0)
+	{local_weather.generate_thermal_lift_flag = 3;}
 
 var strength = 0.9;
 var n = int(4000 * strength); # calculate the number of placement tries from tile size 20x20km and strength
 local_weather.create_cumosys(blat,blon, 5000.0+alt_offset,n, 20000.0);
 
+# set flag back to normal thermal generation
+if (local_weather.generate_thermal_lift_flag !=0)
+	{local_weather.generate_thermal_lift_flag = 0;}
+
+# store convective altitude and strength
+
+append(weather_dynamics.tile_convective_altitude,alt);
+append(weather_dynamics.tile_convective_strength,strength);
 
 tile_finished();
 
@@ -1723,6 +1873,10 @@ for (var i = n; i <n_layers; i=i+1)
 
 setprop(lw~"METAR/available-flag",0);
 
+# store convective altitude and strength
+
+append(weather_dynamics.tile_convective_altitude,alt_low);
+append(weather_dynamics.tile_convective_strength,strength);
 
 tile_finished();
 }
@@ -1909,6 +2063,41 @@ local_weather.create_streak("Cirrocumulus (cloudlet)",lat+get_lat(x,y,phi), lon+
 }
 
 
+var create_4_8_cirrocumulus_streaks = func (lat, lon, alt, alpha) {
+
+var phi = alpha * math.pi/180.0;
+
+var beta = 90.0 + (rand() -0.5) * 30.0;
+
+for (var i=0; i<2; i=i+1)
+	{
+	var x = 2.0 * (rand()-0.5) * 12000;
+	var y = 2.0 * (rand()-0.5) * 12000;
+	var tri = 1.5 + rand() * 1.5;
+	local_weather.create_streak("Cirrocumulus (cloudlet)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,300.0,10,700.0,0.1,400.0,30,700.0,0.1,400.0,alpha+beta,tri);
+
+	}
+
+}
+
+
+var create_4_8_altocumulus_perlucidus = func (lat, lon, alt, alpha) {
+
+var phi = alpha * math.pi/180.0;
+
+for (var i=0; i<20; i=i+1)
+	{
+	var x = 2.0 * (rand()-0.5) * 18000;
+	var y = 2.0 * (rand()-0.5) * 18000;
+	var beta = (rand() -0.5) * 180.0;
+	local_weather.create_streak("Altocumulus perlucidus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,300.0,4,1400.0,0.1,900.0,4,1400.0,0.1,900.0,alpha+beta,1.0);
+
+	}
+
+}
+
+
+
 var create_2_8_stratus = func (lat, lon, alt, alpha) {
 
 var phi = alpha * math.pi/180.0;
@@ -1992,12 +2181,12 @@ var create_2_8_cirrocumulus = func (lat, lon, alt, alpha) {
 
 var phi = alpha * math.pi/180.0;
 
-for (var i=0; i<3; i=i+1)
+for (var i=0; i<25; i=i+1)
 	{
-	var x = 2.0 * (rand()-0.5) * 12000;
-	var y = 2.0 * (rand()-0.5) * 12000;
+	var x = 2.0 * (rand()-0.5) * 18000;
+	var y = 2.0 * (rand()-0.5) * 18000;
 	var beta = (rand() -0.5) * 180.0;
-	local_weather.create_streak("Cirrocumulus (cloudlet)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,300.0,3,4000.0,0.2,1000.0,3,4000.0,0.2,1000.0,alpha+beta,1.0);
+	local_weather.create_streak("Cirrocumulus (cloudlet)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,300.0,3,600.0,0.1,500.0,3,600.0,0.1,500.0,alpha+beta,1.0);
 
 	}
 
@@ -2028,14 +2217,14 @@ var beta = (rand() -0.5) * 60.0;
 
 var alt_offset = 0.5 * local_weather.cloud_vertical_size_map["Cumulus"] * ft_to_m;
 
-local_weather.create_streak("Congestus",lat+get_lat(x,y+7500,phi), lon+get_lon(x,y+7500,phi), alt + alt_offset,500.0,12,1000.0,0.1,400.0,15,1000.0,0.1,400.0,alpha+90.0+beta,tri);
+local_weather.create_streak("Stratocumulus",lat+get_lat(x,y+7500,phi), lon+get_lon(x,y+7500,phi), alt + alt_offset,500.0,12,1000.0,0.1,400.0,15,1000.0,0.1,400.0,alpha+90.0+beta,tri);
 
-local_weather.create_streak("Congestus",lat+get_lat(x,y-7500,phi), lon+get_lon(x,y-7500,phi), alt + alt_offset,500.0,12,1000.0,0.1,400.0,15,1000.0,0.1,400.0,alpha+270.0+beta,tri);
+local_weather.create_streak("Stratocumulus",lat+get_lat(x,y-7500,phi), lon+get_lon(x,y-7500,phi), alt + alt_offset,500.0,12,1000.0,0.1,400.0,15,1000.0,0.1,400.0,alpha+270.0+beta,tri);
 
 
-local_weather.create_streak("Congestus bottom",lat+get_lat(x,y+5250,phi), lon+get_lon(x,y+5250,phi), alt,0.0,10,700.0,0.2,400.0,15,700.0,0.0,400.0,alpha+90.0+beta,tri);
+local_weather.create_streak("Stratocumulus bottom",lat+get_lat(x,y+5250,phi), lon+get_lon(x,y+5250,phi), alt,0.0,10,700.0,0.2,400.0,15,700.0,0.0,400.0,alpha+90.0+beta,tri);
 
-local_weather.create_streak("Congestus bottom",lat+get_lat(x,y-5250,phi), lon+get_lon(x,y-5250,phi), alt,0.0,10,700.0,0.2,400.0,15,700.0,0.0,400.0,alpha+270.0+beta,tri);
+local_weather.create_streak("Stratocumulus bottom",lat+get_lat(x,y-5250,phi), lon+get_lon(x,y-5250,phi), alt,0.0,10,700.0,0.2,400.0,15,700.0,0.0,400.0,alpha+270.0+beta,tri);
 
 }
 
@@ -2060,7 +2249,7 @@ append(elat, lat); append(elon, lon); append(erad, 4000.0 * scale * 1.2);
 
 # set precipitation, visibility, updraft and turbulence in the cloud
 
-local_weather.create_effect_volume(1, lat, lon, 4000.0 * 0.7 * scale, 4000.0 * 0.7 * scale , 0.0, 0.0, 20000.0, 600.0, 0.8, -1, 0.6, 15.0,1 );
+local_weather.create_effect_volume(1, lat, lon, 4000.0 * 0.7 * scale, 4000.0 * 0.7 * scale , 0.0, 0.0, 20000.0, 600.0, 0.8, -1, 0.6, 15.0,1 ,-1);
 
 }
 
@@ -2083,7 +2272,7 @@ append(elat, lat); append(elon, lon); append(erad, 6000.0 * scale * 1.2);
 
 # set precipitation, visibility, updraft and turbulence in the cloud
 
-local_weather.create_effect_volume(1, lat, lon, 6000.0 * 0.7 * scale, 6000.0 * 0.7 * scale , 0.0, 0.0, 20000.0, 500.0, 1.0, -1, 0.8, 20.0,1 );
+local_weather.create_effect_volume(1, lat, lon, 6000.0 * 0.7 * scale, 6000.0 * 0.7 * scale , 0.0, 0.0, 20000.0, 500.0, 1.0, -1, 0.8, 20.0,1,-1 );
 
 }
 
@@ -2114,7 +2303,7 @@ local_weather.create_layer("Stratus (thin)", lat+get_lat(0,-4000,phi), lon+get_l
 # set the exclusion region for the Cumulus layer
 append(elat, lat); append(elon, lon); append(erad, 7500.0 * scale * 1.2);
 
-local_weather.create_effect_volume(1, lat, lon, 7500.0 * 0.7 * scale, 7500.0 * 0.7 * scale , 0.0, 0.0, 20000.0, 500.0, 1.0, -1, 1.0, 25.0,1 );
+local_weather.create_effect_volume(1, lat, lon, 7500.0 * 0.7 * scale, 7500.0 * 0.7 * scale , 0.0, 0.0, 20000.0, 500.0, 1.0, -1, 1.0, 25.0,1,-1 );
 
 }
 

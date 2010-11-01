@@ -261,7 +261,7 @@
         <command>nasal</command>
         <script>
           setprop("/sim/presets/parkpos", "");
-            
+
           if (!mode.airport.getBoolValue()) {
             setprop("/sim/presets/airport-id", "");
             setprop("/sim/presets/runway", "");

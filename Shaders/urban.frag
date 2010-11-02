@@ -45,9 +45,9 @@ void QDM(inout vec3 p, inout vec3 v)
 	float level = MAX_LEVEL;
     vec2 dirSign = (sign(v.xy) + 1.0) * 0.5;
     GlobalIterationCount = 0;
-    float d = 0.0;
+    float d = 0;
 
-	while (level >= 0.0 && GlobalIterationCount < gIterationCap)
+	while (level >= 0 && GlobalIterationCount < gIterationCap)
 	{
 		vec4 uv = vec4(p2.xyz, level);
 		d = texture2DLod(QDMTex, uv.xy, uv.w).w;
@@ -98,8 +98,8 @@ void QDM(inout vec3 p, inout vec3 v)
 	float dA = p2.z * (rayLength - BILINEAR_SMOOTH_FACTOR * TEXEL_SPAN_HALF) / rayLength;
 	float dB = p2.z * (rayLength + BILINEAR_SMOOTH_FACTOR * TEXEL_SPAN_HALF) / rayLength;
 
-	vec4 p2a = vec4(p + v * dA, 0.0);
-	vec4 p2b = vec4(p + v * dB, 0.0);
+	vec4 p2a = vec4(p + v * dA, 0);
+	vec4 p2b = vec4(p + v * dB, 0);
 	dA = texture2DLod(NormalTex, p2a.xy, p2a.w).w;
 	dB = texture2DLod(NormalTex, p2b.xy, p2b.w).w;
 

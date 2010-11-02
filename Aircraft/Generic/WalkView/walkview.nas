@@ -83,7 +83,8 @@ var active_walker = func {
 #         speed  ... speed in m/sec : double
 #
 #       set_pos(pos)
-#       get_pos() : position
+#         pos ... position in meter : [double, double, double]
+#       get_pos() : position ([meter, meter, meter])
 #
 #       set_eye_height(h)
 #       get_eye_height() : int (meter)
@@ -97,13 +98,15 @@ var active_walker = func {
 #                                             [19.5,  0.3, -8.85]);
 #       var walker = walkview.walker.new("Passenger View", constraint);
 #
+#       See Aircraft/Nordstern, Aircraft/Short_Empire and Aircraft/ZLT-NT
+#       for working examples of walk views.
+#
 # NOTES:
 #       Currently there can only be one view manager per view so the
 #       walk view should not have any other view manager.
-#
-var walker = {
+var Walker = {
     new : func (view_name, constraints = nil, managers = nil) {
-        var obj = { parents : [walker] };
+        var obj = { parents : [Walker] };
         obj.view        = view.views[view.indexof(view_name)];
         obj.constraints = constraints;
         obj.managers    = managers;
@@ -124,7 +127,7 @@ var walker = {
         view.manager.register(view_name, obj);
         walkers[obj.view.getPath()] = obj;
 
-        debug.dump(obj);
+        #debug.dump(obj);
         return obj;
     },
     active : func {
@@ -216,13 +219,52 @@ var walker = {
 
 ###############################################################################
 # Constraint classes. Determines where the view can walk.
+#
+
+# Convenience functions.
+
+# Build a UnionConstraint hierarchy from a list of constraints.
+#   cs - list of constraints : [constraint]
+var makeUnionConstraint = func (cs) {
+    if (size(cs) < 2) return cs[0];
+    
+    var ret = cs[0];
+    for (var i = 1; i < size(cs); i += 1) {
+        ret = UnionConstraint.new(ret, cs[i]);
+    }
+    return ret;
+}
+
+# Build a UnionConstraint hierachy that represents a polyline path
+# with a certain width. Each internal point gets a circular surface.
+#   points     - list of points    : [position] ([[meter, meter, meter]])
+#   width      - width of the path : length   (meter)
+#   round_ends - put a circle also on the first and last points : bool
+var makePolylinePath = func (points, width, round_ends = 0) {
+    if (size(points) < 2) return nil;
+    var ret = LinePlane.new(points[0], points[1], width);
+    if (round_ends) {
+        ret = UnionConstraint.new(line,
+                                  CircularXYSurface.new(points[0], width/2));
+    }
+    for (var i = 2; i < size(points); i += 1) {
+        var line = LinePlane.new(points[i-1], points[i], width);
+        if (i + 1 < size(points) or round_ends) {
+            line = UnionConstraint.new
+                       (line,
+                        CircularXYSurface.new(points[i], width/2));
+        }
+        ret = UnionConstraint.new(line, ret);
+    }
+    return ret;
+}
 
 # The union of two constraints.
 #   c1, c2 - the constraints : constraint
 # NOTE: Assumes that the constraints are convex.
-var unionConstraint = {
+var UnionConstraint = {
     new : func (c1, c2) {
-        var obj = { parents : [unionConstraint] };
+        var obj = { parents : [UnionConstraint] };
         obj.c1 = c1;
         obj.c2 = c2;
         return obj;
@@ -244,38 +286,80 @@ var unionConstraint = {
     }
 };
 
-# Build a unionConstraint hierarchy from a list of constraints.
-#   cs - list of constraints : [constraint]
-var makeUnionConstraint = func (cs) {
-    if (size(cs) < 2) return cs[0];
-    
-    var ret = cs[0];
-    for (var i = 1; i < size(cs); i += 1) {
-        ret = unionConstraint.new(ret, cs[i]);
-    }
-    return ret;
-}
+# Rectangular plane defined by a straight line and a width.
+# The line is extruded horizontally on each side by width/2 into a
+# planar surface.
+#   p1, p2 - the line endpoints.       : position ([meter, meter, meter])
+#   width  - total width of the plane. : length   (meter)
+var LinePlane = {
+    new : func (p1, p2, width) {
+        var obj = { parents : [LinePlane] };
+        obj.p1         = p1;
+        obj.p2         = p2;
+        obj.halfwidth  = width/2;
+        obj.length     = vec2.length(vec2.sub(p2, p1));
+        obj.e1         = vec2.normalize(vec2.sub(p2, p1));
+        obj.e2         = [obj.e1[1], -obj.e1[0]];
+        obj.k          = (p2[2] - p1[2]) / obj.length;
 
-# Mostly aligned plane sloping along the X axis.
-#   minp - the X,Y minimum point : position (meter)
-#   maxp - the X,Y maximum point : position (meter)
-var slopingYAlignedPlane = {
-    new : func (minp, maxp) {
-        var obj = { parents : [slopingYAlignedPlane] };
-        obj.minp = minp;
-        obj.maxp = maxp;
-        obj.kxz  = (maxp[2] - minp[2])/(maxp[0] - minp[0]);
         return obj;
     },
     constrain : func (pos) {
-        var p = [pos[0], pos[1], pos[2]];
-        if (pos[0] < me.minp[0]) p[0] = me.minp[0];
-        if (pos[0] > me.maxp[0]) p[0] = me.maxp[0];
-        if (pos[1] < me.minp[1]) p[1] = me.minp[1];
-        if (pos[1] > me.maxp[1]) p[1] = me.maxp[1];
-        p[2] = me.minp[2] + me.kxz * (pos[0] - me.minp[0]);
+        var p      = [pos[0], pos[1], pos[2]];
+        var pXY    = vec2.sub(pos, me.p1);
+        var along  = vec2.dot(pXY, me.e1);
+        var across = vec2.dot(pXY, me.e2);
+
+        var along2  = max(0, min(along, me.length));
+        var across2 = max(-me.halfwidth, min(across, me.halfwidth));
+        if (along2 != along or across2 != across) {
+            # Compute new XY position.
+            var t = vec2.add(vec2.mul(along2, me.e1), vec2.mul(across2, me.e2));
+            p[0] = me.p1[0] + t[0];
+            p[1] = me.p1[1] + t[1];
+        }
+
+        # Compute Z positition.
+        p[2] = me.p1[2] + me.k * along2;
+        return p;
+    }
+};
+
+# Circular surface aligned with the XY plane
+#   center - the center point       : position ([meter, meter, meter])
+#   radius - radius in the XY plane : length   (meter)
+var CircularXYSurface = {
+    new : func (center, radius) {
+        var obj = { parents : [CircularXYSurface] };
+        obj.center     = center;
+        obj.radius     = radius;
+
+        return obj;
+    },
+    constrain : func (pos) {
+        var p   = [pos[0], pos[1], me.center[2]];
+        var pXY = vec2.sub(pos, me.center);
+        var lXY = vec2.length(pXY);
+
+        if (lXY > me.radius) {
+            var t = vec2.add(me.center, vec2.mul(me.radius/lXY, pXY));
+            p[0] = t[0];
+            p[1] = t[1];
+        }
         return p;
     },
+};
+
+# Mostly aligned plane sloping along the X axis.
+# NOTE: Obsolete. Use linePlane instead.
+#   minp - the X,Y minimum point : position ([meter, meter, meter])
+#   maxp - the X,Y maximum point : position ([meter, meter, meter])
+var SlopingYAlignedPlane = {
+    new : func (minp, maxp) {
+        return LinePlane.new([minp[0], (minp[1] + maxp[1])/2, minp[2]],
+                             [maxp[0], (minp[1] + maxp[1])/2, maxp[2]],
+                             (maxp[1] - minp[1]));
+    }
 };
 
 # Action constraint
@@ -285,9 +369,9 @@ var slopingYAlignedPlane = {
 #   on_exit(x, y)   - function that is called when the walker leaves the area.
 #                     x and y are <0, 0 or >0 depending on in which direction(s)
 #                     the walker left the constraint.
-var actionConstraint = {
+var ActionConstraint = {
     new : func (constraint, on_enter = nil, on_exit = nil) {
-        var obj = { parents : [actionConstraint] };
+        var obj = { parents : [ActionConstraint] };
         obj.constraint = constraint;
         obj.on_enter   = on_enter;
         obj.on_exit    = on_exit;
@@ -365,4 +449,34 @@ var closerXY = func (pos, p1, p2) {
     var l1 = [p1[0] - pos[0], p1[1] - pos[1]];
     var l2 = [p2[0] - pos[0], p2[1] - pos[1]];
     return (l1[0]*l1[0] + l1[1]*l1[1]) - (l2[0]*l2[0] + l2[1]*l2[1]);
+}
+
+var max = func (a, b) {
+    return b > a ? b : a;
+}
+var min = func (a, b) {
+    return a > b ? b : a;
+}
+
+# 2D vector math.
+var vec2 = {
+    add : func (a, b) {
+        return [a[0] + b[0], a[1] + b[1]];
+    },
+    sub : func (a, b) {
+        return [a[0] - b[0], a[1] - b[1]];
+    },
+    mul : func (k, a) {
+        return [k * a[0], k * a[1]];
+    },
+    length : func (a) {
+        return math.sqrt(a[0]*a[0] + a[1]*a[1]);
+    },
+    dot : func (a, b) {
+        return a[0]*b[0] + a[1]*b[1];
+    },
+    normalize : func (a) {
+        var s = 1/vec2.length(a);
+        return [s * a[0], s * a[1]];
+    }
 }

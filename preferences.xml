@@ -249,10 +249,8 @@ Started September 2000 by David Megginson, david@megginson.com
    <path>Aircraft/Generic/Panels/generic-trans-mini-panel.xml</path>
   </panel_2>
   <hud>
-   <path>Huds/Default/default.xml</path>
-   <path>Huds/NTPS.xml</path>                 <!-- new HUD -->
-   <visibility type="bool">false</visibility>
-   <visibility type="bool">false</visibility> <!-- new HUD -->
+   <path n="1">Huds/default.xml</path>                 <!-- new HUD -->
+   <visibility n="1" type="bool">false</visibility> <!-- new HUD -->
    <font>
     <name type="string">Helvetica.txf</name>
     <size type="float">8</size>
@@ -598,7 +596,7 @@ Started September 2000 by David Megginson, david@megginson.com
   </atc>
 
   <ai-traffic>
-   <enabled type="bool" userarchive="y">true</enabled>
+   <enabled type="bool" userarchive="y">false</enabled>
    <level type="int" userarchive="y">1</level>
   </ai-traffic>
 
@@ -618,6 +616,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <!-- <scenario>aircraft_demo</scenario> -->
    <!-- <scenario>refueling_demo</scenario> -->
    <!-- <scenario>lead_aircraft</scenario> -->
+   <!-- <scenario>vinson_demo</scenario> -->
   </ai>
 
   <multiplay>

@@ -457,9 +457,9 @@
 	</menu>
 
 	<menu>
-		<label>ATC/AI</label>
+		<label>AI</label>
 		<item>
-			<label>ATC Options</label>
+			<label>AI Options</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>ai</dialog-name>
@@ -575,6 +575,15 @@
 				<subsystem>input</subsystem>
 			</binding>
 		</item>
+
+        <item>
+			<label>Reload HUD</label>
+			<binding>
+				<command>reinit</command>
+				<subsystem>hud</subsystem>
+			</binding>
+		</item>
+
 
 		<item>
 			<label>Reload Panel</label>

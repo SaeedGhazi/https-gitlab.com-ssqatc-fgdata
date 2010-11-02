@@ -16,7 +16,7 @@ varying float fogFactor;
 void main(void)
 {
 
-  float shade = 0.9;
+  float shade = 0.8;
   float cloud_height = 1000.0;	
 
   gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
@@ -35,8 +35,8 @@ void main(void)
   // scaling in the homogeneous component of pos.
   gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
   gl_Position.xyz = gl_Vertex.x * u;
-  gl_Position.xyz += gl_Vertex.y * r * 0.25;
-  gl_Position.xyz += gl_Vertex.z * w * 0.25;
+  gl_Position.xyz += gl_Vertex.y * r * 0.35;
+  gl_Position.xyz += gl_Vertex.z * w * 0.35;
   //gl_Position.xyz += gl_Vertex.y * r * wScale;
   //gl_Position.xyz += gl_Vertex.z * w  * hScale;
   gl_Position.xyz += gl_Color.xyz;

@@ -74,6 +74,51 @@ var mixtureAxis = axisHandler("/controls/engines/engine[", "]/mixture");
 var propellerAxis = axisHandler("/controls/engines/engine[", "]/propeller-pitch");
 var carbHeatAxis = axisHandler("/controls/anti-ice/engine[", "]/carb-heat");
 
+# Joystick axis handler for controlling subsets of similar properties.
+# Shouldn't be called from other contexts.
+# The argument engine can be either an index number or a list of
+# index numbers.
+# Use only when perEngineSelectedAxisHandler() below will not do.
+var perIndexAxisHandler = func(pre, post) {
+    return
+        func(index, invert = 0) {
+            var val = cmdarg().getNode("setting").getValue();
+            if(invert) val = -val;
+            if (typeof(index) == "scalar") {
+                setprop(pre ~ index ~ post, (1 - val) / 2);
+            } else {
+                foreach (var e; index) {
+                    setprop(pre ~ e ~ post, (1 - val) / 2);
+                }
+            }
+        };
+}
+
+# Joystick axis handler for controlling a selected axis on specific engines.
+# Shouldn't be called from other contexts.
+# The argument mode can be
+#   0  - throttle
+#   1  - mixture
+#   2  - propeller-pitch
+# The argument engine to the returned function can be either an
+# engine number or a list of engine numbers.
+# Usage example (controlling the mixture of engines 1 and 2):
+#   <script>
+#     controls.perEngineSelectedAxisHandler(1)([1,2]);
+#   </script>
+var _axisMode = {
+  0: perIndexAxisHandler("/controls/engines/engine[",
+                         "]/throttle"),
+  1: perIndexAxisHandler("/controls/engines/engine[",
+                         "]/mixture"),
+  2: perIndexAxisHandler("/controls/engines/engine[",
+                         "]/propeller-pitch")
+};
+var perEngineSelectedAxisHandler = func(mode) {
+    return _axisMode[mode];
+}
+
+
 ##
 # Wrapper around stepProps() which emulates the "old" flap behavior for
 # configurations that aren't using the new mechanism.

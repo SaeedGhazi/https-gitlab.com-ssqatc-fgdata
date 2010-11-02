@@ -457,9 +457,9 @@
 	</menu>
 
 	<menu>
-		<label>ATC/AI</label>
+		<label>AI</label>
 		<item>
-			<label>ATC Options</label>
+			<label>AI Options</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>ai</dialog-name>

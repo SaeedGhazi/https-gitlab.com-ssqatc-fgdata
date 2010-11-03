@@ -2,7 +2,6 @@
 // Licence: GPL v2
 // Author: Frederic Bouvier.
 //  Adapted from the paper by F. Policarpo et al. : Real-time Relief Mapping on Arbitrary Polygonal Surfaces
-//  Adapted from the paper and sources by M. Drobot in GPU Pro : Quadtree Displacement Mapping with Height Blending
 
 #version 120
 
@@ -30,6 +29,7 @@ uniform float snowlevel; // From /sim/rendering/snow-level-m
 uniform vec3 night_color;
 
 const float scale = 1.0;
+int linear_search_steps = 10;
 int GlobalIterationCount = 0;
 int gIterationCap = 64;
 
@@ -111,7 +111,7 @@ void QDM(inout vec3 p, inout vec3 v)
 	p = p2;
 }
 
-float ray_intersect(vec2 dp, vec2 ds)
+float ray_intersect_QDM(vec2 dp, vec2 ds)
 {
     vec3 p = vec3( dp, 0.0 );
     vec3 v = vec3( ds, 1.0 );
@@ -119,8 +119,52 @@ float ray_intersect(vec2 dp, vec2 ds)
     return p.z;
 }
 
+float ray_intersect_relief(vec2 dp, vec2 ds)
+{
+	float size = 1.0 / float(linear_search_steps);
+	float depth = 0.0;
+	float best_depth = 1.0;
+
+	for(int i = 0; i < linear_search_steps - 1; ++i)
+	{
+		depth += size;
+		float t = step(0.95, texture2D(NormalTex, dp + ds * depth).a);
+		if(best_depth > 0.996)
+			if(depth >= t)
+				best_depth = depth;
+	}
+	depth = best_depth;
+
+	const int binary_search_steps = 5;
+
+	for(int i = 0; i < binary_search_steps; ++i)
+	{
+		size *= 0.5;
+		float t = step(0.95, texture2D(NormalTex, dp + ds * depth).a);
+		if(depth >= t)
+		{
+			best_depth = depth;
+			depth -= 2.0 * size;
+		}
+		depth += size;
+	}
+
+	return(best_depth);
+}
+
+float ray_intersect(vec2 dp, vec2 ds)
+{
+    if ( quality_level >= 4.0 )
+        return ray_intersect_QDM( dp, ds );
+    else
+        return ray_intersect_relief( dp, ds );
+}
+
 void main (void)
 {
+	if ( quality_level >= 3.5 ) {
+		linear_search_steps = 20;
+	}
 	vec3 ecPos3 = ecPosition.xyz / ecPosition.w;
 	vec3 V = normalize(ecPos3);
 	vec3 s = vec3(dot(V, VTangent), dot(V, VBinormal), dot(VNormal, -V));

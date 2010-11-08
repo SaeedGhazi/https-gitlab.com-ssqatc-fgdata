@@ -154,8 +154,12 @@ Started September 2000 by David Megginson, david@megginson.com
    <contrail-shader userarchive="y">0</contrail-shader>
    <snow-level-m type="double">2000.0</snow-level-m>
    <quality-level type="double" userarchive="y">0.0</quality-level>
-  
-</rendering>
+   <osg-displaysettings>
+    <eye-separation type="double" userarchive="y">0.05</eye-separation>
+    <screen-distance type="double" userarchive="y">0.5</screen-distance>
+    <stereo-mode type="string" userarchive="y">OFF</stereo-mode>
+   </osg-displaysettings>
+  </rendering>
   <model-hz type="int">120</model-hz>
   <navdb>
    <localizers>

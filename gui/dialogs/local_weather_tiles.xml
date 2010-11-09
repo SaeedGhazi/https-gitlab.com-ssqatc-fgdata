@@ -35,9 +35,6 @@
    <value>Coldfront</value>
    <value>Warmfront</value>
    <value>Tropical</value>
-   <value>---</value>
-   <value>Glider's sky</value>
-   <value>Blue thermals</value>
    <!--<value>Test tile</value>-->
    <binding>
     <command>dialog-apply</command>
@@ -104,7 +101,7 @@
    <value>constant in tile</value>
    <value>aloft interpolated</value>
    <value>aloft waypoints</value>
-   <!--<value>airmass interpolated</value>-->
+   <!-- <value>airmass interpolated</value> -->
    <binding>
     <command>dialog-apply</command>
    </binding>
@@ -150,8 +147,8 @@
    <y>150</y>
    <width>15</width>
    <height>15</height>
-   <label>worker threads</label>
-   <property>/local-weather/tmp/thread-flag</property>
+   <label>generate thermals</label>
+   <property>/local-weather/config/generate-thermal-lift-flag</property>
    <binding>
     <command>dialog-apply</command>
    </binding>
@@ -162,8 +159,8 @@
    <y>125</y>
    <width>15</width>
    <height>15</height>
-   <label>asymmetric range</label>
-   <property>/local-weather/tmp/asymmetric-tile-loading-flag</property>
+   <label>debug output</label>
+   <property>/local-weather/config/debug-output-flag</property>
    <binding>
     <command>dialog-apply</command>
    </binding>
@@ -188,6 +185,18 @@
    <height>15</height>
    <label>dynamical weather</label>
    <property>/local-weather/config/dynamics-flag</property>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+</checkbox>
+
+<checkbox>
+   <x>150</x>
+   <y>100</y>
+   <width>15</width>
+   <height>15</height>
+   <label>dynamical convection</label>
+   <property>/local-weather/config/dynamical-convection-flag</property>
    <binding>
     <command>dialog-apply</command>
    </binding>
@@ -250,7 +259,7 @@
 <button>
    <x>45</x>
    <y>0</y>
-   <legend>Clear clouds</legend>
+   <legend>Clear / End</legend>
    <!--<default>true</default>-->
    <equal>true</equal>
    <binding>
@@ -262,7 +271,7 @@
   <button>
    <x>135</x>
    <y>0</y>
-   <legend>Cancel</legend>
+   <legend>Close</legend>
    <equal>true</equal>
    <key>Esc</key>
    <binding>

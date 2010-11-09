@@ -7,21 +7,19 @@
 # function			purpose
 #
 # setVisibility			to set the visibility to a given value
+# setLift			to set lift to given value
 # setRain			to set rain to a given value
 # setSnow			to set snow to a given value
 # setTurbulence			to set turbulence to a given value
 # setTemperature		to set temperature to a given value
 # setPressure			to set pressure to a given value
 # setDewpoint			to set the dewpoint to a given value
+# setLight			to set light saturation to given value
 # setWind			to set wind
 # setWindSmoothly 		to set the wind gradually across a second
-# smooth_wind_loop		helper function for setWindSmoothly
+# smooth_wind_loop		(helper function for setWindSmoothly)
 # create_cloud			to place a single cloud into the scenery
 # create_cloud_array		to place clouds from storage arrays into the scenery
-# move_cloud			to move the cloud position
-# remove_clouds			to remove clouds by tile index
-# waiting_loop			to ensure tile removal calls do not overlap
-# remove_tile_loop		to remove a fixed number of clouds per frame
 # get_elevation			to get the terrain elevation at given coordinates
 # get_elevation_vector		to get terrain elevation at given coordinate vector
 
@@ -68,72 +66,35 @@
 # The compatibility layer is currently work in progress and will be extended as new Nasal 
 # APIs are being added to FlightGear.
 
-###########################################
-# header checking availability of functions
-###########################################
-
-
-var has_symbol = func(s) contains(globals,s);
-var is_function = func(s) typeof(globals[s])=='func';
-var has_function = func(f) has_symbol(f) and is_function(f);
-
-# try to call a function with given parameters
-# save exceptions to err vector
-# returns 0 for no exceptions (exceptions vector is empty)
-# returns >=1 for exception occurred (i.e. unsupported API call)
-
-
-var try_call = func(f, params) {
-var err=[]; 
-call(globals[f], params, nil,nil,err); # see http://plausible.org/nasal/lib.html
-return size(err); 
-};
-
-
-var query = func(api,params) {
-  if ( has_function(api) ) {
-   return try_call(api, params ); 
-  }
-  return 1; # fail
-}
-
-var patches = { geodinfo: "http://flightgear.org/forums/viewtopic.php?f=5&t=7358&st=0&sk=t&sd=a&start=90#p82805", };
-
-# query fgfs binary for required APIs and set values in this hash
-var features = {};
-
-
-#fixme: compare results from new and old API
-var check_geodinfo_vec = func {
-  var err=[];
-
-  if ( query('geodinfo',[ [37.618,-122.374],1000])==0 ) {
-    printf("geodinfo found"); # now try to use it
-    var ksfo=[37.618, -122.374];
-    var alt=10000;
-    # see if it returns a vector or not
-    call( func { print (alt); (typeof(geodinfo(ksfo,alt))=='vector')?return:die(); }, [], caller()[0],nil,err);
-    print('-','geodinfo:', (size(err) >=1) ? "Vector support unavailable" : "Vector support available");
-    if(size(err) and contains(patches,'geodinfo')) print('---> A patch is available at ', patches['geodinfo']);
-
-    return size(err)?0:1;
-  } 
-  return 0;
-}
 
 _setlistener("/sim/signals/nasal-dir-initialized", func { 
-   print ("Compatibility layer: Checking available Nasal APIs:");
-   print ("(this may cause harmless error messages when hard-coded support is lacking)");
-   print ("##########################################");
-   features.geodinfo_supports_vectors= check_geodinfo_vec ();
-   print("features.geodinfo_supports_vectors=", features.geodinfo_supports_vectors);
-   print ("##########################################");
-   print("Compatibility checks done.");
+
+var result = "yes";
+
+print("Compatibility layer: testing for hard coded support");
+
+if (props.globals.getNode("/rendering/scene/saturation", 0) == nil)
+	{result = "no"; features.can_set_light = 0;}
+else
+	{result = "yes"; features.can_set_light = 1;}
+print("* can set light saturation:        "~result);
+
+
+if (props.globals.getNode("/environment/terrain", 0) == nil)
+	{result = "no"; features.terrain_presampling = 0;}
+else
+	{result = "yes"; features.terrain_presampling = 1;}
+print("* hard coded terrain presampling:  "~result);
+
+if (props.globals.getNode("/environment/config/enabled", 0) == nil)
+	{result = "no"; features.can_disable_environment = 0;}
+else
+	{result = "yes"; features.can_disable_environment = 1;}
+print("* can disable global weather:      "~result);
+
+print("Compatibility layer: tests done.");
 });
 
-# this is now where we can simply refer to features.geodinfo_supports_vectors 
-# for checking if vector support is available or not - to use the most appropriate 
-# APIs
 
 
 
@@ -143,20 +104,38 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
 var setVisibility = func (vis) {
 
-# this is a rather dirty workaround till a better solution becomes available
-# essentially we update all entries in config and reinit environment
+if (features.can_disable_environment == 1)
+	{
+	setprop("/environment/visibility-m",vis);
+	}
+else
+	{
+	# this is a workaround for systems which lack hard-coded support
+	# essentially we update all entries in config and reinit environment
 
-var entries_aloft = props.globals.getNode("environment/config/aloft", 1).getChildren("entry");
-foreach (var e; entries_aloft) {
-		e.getNode("visibility-m",1).setValue(vis);
-		}
+	var entries_aloft = props.globals.getNode("environment/config/aloft", 1).getChildren("entry");
+	foreach (var e; entries_aloft) {
+			e.getNode("visibility-m",1).setValue(vis);
+			}
 
-var entries_boundary = props.globals.getNode("environment/config/boundary", 1).getChildren("entry");
-foreach (var e; entries_boundary) {
-		e.getNode("visibility-m",1).setValue(vis);
-		}
-fgcommand("reinit", props.Node.new({subsystem:"environment"}));
+	var entries_boundary = props.globals.getNode("environment/config/boundary", 1).getChildren("entry");
+	foreach (var e; entries_boundary) {
+			e.getNode("visibility-m",1).setValue(vis);
+			}
+	fgcommand("reinit", props.Node.new({subsystem:"environment"}));
+	}
+}
 
+####################################
+# set thermal lift to given value
+####################################
+
+var setLift = func (lift) {
+
+if (features.can_disable_environment == 1)
+	{
+	setprop("/environment/wind-from-down-fps",lift);
+	}
 }
 
 ####################################
@@ -193,24 +172,36 @@ setprop("environment/metar/snow-norm",snow);
 
 var setTurbulence = func (turbulence) {
 
-# this is a rather dirty workaround till a better solution becomes available
-# essentially we update all entries in config and reinit environment
+if (features.can_disable_environment == 1)
+	{
+	setprop("/environment/turbulence/magnitude-norm",turbulence);
+	setprop("/environment/turbulence/rate-hz",3.0);
+	}
 
-var entries_aloft = props.globals.getNode("environment/config/aloft", 1).getChildren("entry");
-foreach (var e; entries_aloft) {
-		e.getNode("turbulence/magnitude-norm",1).setValue(turbulence);
-		}
+else
+	{
+	# this is a workaround for systems which lack hard-coded support
+	# essentially we update all entries in config and reinit environment
 
-# turbulence is slightly reduced in boundary layers
+	var entries_aloft = props.globals.getNode("environment/config/aloft", 1).getChildren("entry");
+	foreach (var e; entries_aloft) {
+			e.getNode("turbulence/magnitude-norm",1).setValue(turbulence);
+			e.getNode("turbulence/rate-hz",1).setValue(3.0);
+			e.getNode("turbulence/factor",1).setValue(1.0);
+			}
 
-var entries_boundary = props.globals.getNode("environment/config/boundary", 1).getChildren("entry");
-var i = 1;
-foreach (var e; entries_boundary) {
-		e.getNode("turbulence/magnitude-norm",1).setValue(turbulence * 0.25*i);
-		i = i + 1;
-		}
-fgcommand("reinit", props.Node.new({subsystem:"environment"}));
+	# turbulence is slightly reduced in boundary layers
 
+	var entries_boundary = props.globals.getNode("environment/config/boundary", 1).getChildren("entry");
+	var i = 1;
+	foreach (var e; entries_boundary) {
+			e.getNode("turbulence/magnitude-norm",1).setValue(turbulence * 0.25*i);
+			e.getNode("turbulence/rate-hz",1).setValue(5.0);
+			e.getNode("turbulence/factor",1).setValue(1.0);
+			i = i + 1;
+			}
+	fgcommand("reinit", props.Node.new({subsystem:"environment"}));
+	}
 }
 
 
@@ -220,11 +211,18 @@ fgcommand("reinit", props.Node.new({subsystem:"environment"}));
 
 var setTemperature = func (T) {
 
-# this is a rather dirty workaround till a better solution becomes available
-# essentially we update the entry in config and reinit environment
-
-setprop(ec~"boundary/entry[0]/temperature-degc",T);
-fgcommand("reinit", props.Node.new({subsystem:"environment"}));
+if (features.can_disable_environment == 1)
+	{
+	setprop("/environment/temperature-sea-level-degc",T);
+	}
+else
+	{
+	# this is a workaround for systems which lack hard-coded support
+	# essentially we update the entry in config and reinit environment
+	
+	setprop(ec~"boundary/entry[0]/temperature-degc",T);
+	fgcommand("reinit", props.Node.new({subsystem:"environment"}));
+	}
 }
 
 ####################################
@@ -233,12 +231,19 @@ fgcommand("reinit", props.Node.new({subsystem:"environment"}));
 
 var setPressure = func (p) {
 
-# this is a rather dirty workaround till a better solution becomes available
-# essentially we update the entry in config and reinit environment
+if (features.can_disable_environment == 1)
+	{
+	setprop("/environment/pressure-sea-level-inhg",p);
+	}
+else
+	{
+	# this is a workaround for systems which lack hard-coded support
+	# essentially we update the entry in config and reinit environment
 
-setprop(ec~"boundary/entry[0]/pressure-sea-level-inhg",p);
-setprop(ec~"aloft/entry[0]/pressure-sea-level-inhg",p);
-fgcommand("reinit", props.Node.new({subsystem:"environment"}));
+	setprop(ec~"boundary/entry[0]/pressure-sea-level-inhg",p);
+	setprop(ec~"aloft/entry[0]/pressure-sea-level-inhg",p);
+	fgcommand("reinit", props.Node.new({subsystem:"environment"}));
+	}
 }
 
 ####################################
@@ -247,11 +252,30 @@ fgcommand("reinit", props.Node.new({subsystem:"environment"}));
 
 var setDewpoint = func (D) {
 
-# this is a rather dirty workaround till a better solution becomes available
-# essentially we update the entry in config and reinit environment
+if (features.can_disable_environment == 1)
+	{
+	setprop("/environment/dewpoint-sea-level-degc",D);
+	}
+else
+	{
+	# this is a workaround for systems which lack hard-coded support
+	# essentially we update the entry in config and reinit environment
 
-setprop(ec~"boundary/entry[0]/dewpoint-degc",D);
-fgcommand("reinit", props.Node.new({subsystem:"environment"}));
+	setprop(ec~"boundary/entry[0]/dewpoint-degc",D);
+	fgcommand("reinit", props.Node.new({subsystem:"environment"}));
+	}
+}
+
+####################################
+# set light saturation to given value
+####################################
+
+var setLight = func (s) {
+
+if (features.can_set_light == 1)
+	{	
+	setprop("/rendering/scene/saturation",s);
+	}
 }
 
 ###########################################################
@@ -261,23 +285,30 @@ fgcommand("reinit", props.Node.new({subsystem:"environment"}));
 
 var setWind = func (dir, speed) {
 
-# this is a rather dirty workaround till a better solution becomes available
-# essentially we update all entries in config and reinit environment
+if (features.can_disable_environment == 1)
+	{
+	setprop("/environment/wind-from-heading-deg",dir);
+	setprop("/environment/wind-speed-kt",speed);
+	}
+else
+	{
+	# this is a workaround for systems which lack hard-coded support
+	# essentially we update all entries in config and reinit environment
+	
+	var entries_aloft = props.globals.getNode("environment/config/aloft", 1).getChildren("entry");
+	foreach (var e; entries_aloft) {
+			e.getNode("wind-from-heading-deg",1).setValue(dir);
+			e.getNode("wind-speed-kt",1).setValue(speed);
+			}
 
-var entries_aloft = props.globals.getNode("environment/config/aloft", 1).getChildren("entry");
-foreach (var e; entries_aloft) {
-		e.getNode("wind-from-heading-deg",1).setValue(dir);
-		e.getNode("wind-speed-kt",1).setValue(speed);
-		}
+	var entries_boundary = props.globals.getNode("environment/config/boundary", 1).getChildren("entry");
+	foreach (var e; entries_boundary) {
+			e.getNode("wind-from-heading-deg",1).setValue(dir);
+			e.getNode("wind-speed-kt",1).setValue(speed);
+			}
 
-var entries_boundary = props.globals.getNode("environment/config/boundary", 1).getChildren("entry");
-foreach (var e; entries_boundary) {
-		e.getNode("wind-from-heading-deg",1).setValue(dir);
-		e.getNode("wind-speed-kt",1).setValue(speed);
-		}
-
-fgcommand("reinit", props.Node.new({subsystem:"environment"}));
-
+	fgcommand("reinit", props.Node.new({subsystem:"environment"}));
+	}
 }
 
 ###########################################################
@@ -288,21 +319,29 @@ fgcommand("reinit", props.Node.new({subsystem:"environment"}));
 
 var setWindSmoothly = func (dir, speed) {
 
-var entries_aloft = props.globals.getNode("environment/config/aloft", 1).getChildren("entry");
+if (features.can_disable_environment == 1)
+	{
+	setWind(dir, speed);
+	}
+else
+	{
 
-var dir_old = entries_aloft[0].getNode("wind-from-heading-deg",1).getValue();
-var speed_old = entries_aloft[0].getNode("wind-speed-kt",1).getValue();
+	var entries_aloft = props.globals.getNode("environment/config/aloft", 1).getChildren("entry");
 
-var dir = dir * math.pi/180.0;
-var dir_old = dir_old * math.pi/180.0;
+	var dir_old = entries_aloft[0].getNode("wind-from-heading-deg",1).getValue();
+	var speed_old = entries_aloft[0].getNode("wind-speed-kt",1).getValue();
 
-var vx = speed * math.sin(dir);
-var vx_old = speed_old * math.sin(dir_old);
+	var dir = dir * math.pi/180.0;
+	var dir_old = dir_old * math.pi/180.0;
 
-var vy = speed * math.cos(dir);
-var vy_old = speed_old * math.cos(dir_old);
+	var vx = speed * math.sin(dir);
+	var vx_old = speed_old * math.sin(dir_old);
 
-smooth_wind_loop(vx,vy,vx_old, vy_old, 4, 4);
+	var vy = speed * math.cos(dir);
+	var vy_old = speed_old * math.cos(dir_old);
+
+	smooth_wind_loop(vx,vy,vx_old, vy_old, 4, 4);
+	}
 
 }
 
@@ -335,9 +374,34 @@ var create_cloud = func(path, lat, long, alt, heading) {
 
 var tile_counter = getprop(lw~"tiles/tile-counter");
 var buffer_flag = getprop(lw~"config/buffer-flag");
-var dynamics_flag = getprop(lw~"config/dynamics-flag");
 var d_max = weather_tile_management.cloud_view_distance + 1000.0;
 
+
+# check if we deal with a convective cloud
+
+var convective_flag = 0;
+
+if (find("cumulus",path) != -1)
+	{
+	if ((find("alto",path) != -1) or (find("cirro", path) != -1) or (find("strato", path) != -1))
+		{convective_flag = 0;}
+	else if ((find("small",path) != -1) or (find("whisp",path) != -1)) 
+		{convective_flag = 1;}
+	else if (find("bottom",path) != -1) 
+		{convective_flag = 4;}
+	else	
+		{convective_flag = 2;}
+	
+	}
+else if (find("congestus",path) != -1)
+	{
+	if (find("bottom",path) != -1) 
+		{convective_flag = 5;}
+	else
+		{convective_flag = 3;}
+	} 
+
+#print("path: ", path, " flag: ", convective_flag);
 
 # first check if the cloud should be stored in the buffer
 # we keep it if it is in visual range or at high altitude (where visual range is different)
@@ -352,8 +416,17 @@ if (buffer_flag == 1)
 	
 	if ((d > d_max) and (alt < 20000.0)) # we buffer the cloud
 		{
-		var b = weather_tile_management.cloudBuffer.new(lat, long, alt, path, heading, tile_counter);
-		if (dynamics_flag ==1) {b.timestamp = weather_dynamics.time_lw;}
+		var b = weather_tile_management.cloudBuffer.new(lat, long, alt, path, heading, tile_counter, convective_flag);
+		if (local_weather.dynamics_flag ==1) 
+			{
+			b.timestamp = weather_dynamics.time_lw;
+			if (convective_flag !=0) # Cumulus clouds get some extra info
+				{
+				b.evolution_timestamp = cloud_evolution_timestamp;
+				b.flt = cloud_flt;
+				b.rel_alt = alt - cloud_mean_altitude;
+				}
+			}
 		append(weather_tile_management.cloudBufferArray,b);
 		return;
 		}
@@ -364,8 +437,10 @@ if (buffer_flag == 1)
 
 if (getprop(lw~"tmp/buffer-status") == "placing")
 	{
-	tile_counter = getprop(lw~"tmp/buffer-tile-index");
+	#tile_counter = getprop(lw~"tmp/buffer-tile-index");
+	tile_counter = buffered_tile_index;
 	}
+
 
 
 # if the cloud is not buffered, get property tree nodes and write it 
@@ -382,6 +457,7 @@ var cloud_number = n.getNode("placement-index").getValue();
 	cl = c.getChild("cloud", i, 1);
 	n.getNode("placement-index").setValue(i);
 
+	var placement_index = i;
 
 var model_number = n.getNode("model-placement-index").getValue();
 var m = props.globals.getNode("models", 1);
@@ -397,8 +473,6 @@ var latN = cl.getNode("position/latitude-deg", 1); latN.setValue(lat);
 var lonN = cl.getNode("position/longitude-deg", 1); lonN.setValue(long);
 var altN = cl.getNode("position/altitude-ft", 1); altN.setValue(alt);
 var hdgN = cl.getNode("orientation/true-heading-deg", 1); hdgN.setValue(heading);
-#var pitchN = cl.getNode("orientation/pitch-deg", 1); pitchN.setValue(0.0);
-#var rollN = cl.getNode("orientation/roll-deg", 1);rollN.setValue(0.0);
 
 cl.getNode("tile-index",1).setValue(tile_counter);
 
@@ -407,35 +481,57 @@ model.getNode("latitude-deg-prop", 1).setValue(latN.getPath());
 model.getNode("longitude-deg-prop", 1).setValue(lonN.getPath());
 model.getNode("elevation-ft-prop", 1).setValue(altN.getPath());
 model.getNode("heading-deg-prop", 1).setValue(hdgN.getPath());
-#model.getNode("pitch-deg-prop", 1).setValue(pitchN.getPath());
-#model.getNode("roll-deg-prop", 1).setValue(rollN.getPath());
 model.getNode("tile-index",1).setValue(tile_counter);
 model.getNode("load", 1).remove();
 
-n.getNode("cloud-number").setValue(n.getNode("cloud-number").getValue()+1);
 
 # sort the model node into a vector for easy deletion
-
 # append(weather_tile_management.modelArrays[tile_counter-1],model);
 
 # sort the cloud into the cloud hash array
 
-if ((buffer_flag == 1) and (getprop(lw~"tmp/tile-management") != "single tile"))
+if (buffer_flag == 1)
 	{
-	var cs = weather_tile_management.cloudScenery.new(tile_counter, cl, model);
+	var cs = weather_tile_management.cloudScenery.new(tile_counter, convective_flag, cl, model);
 	append(weather_tile_management.cloudSceneryArray,cs);
 	}
 
-# if weather dynamics is on, also create a timestamp property and sort the cloud node into quadtree
+# if weather dynamics is on, also create a timestamp property and sort the cloud hash into quadtree
 
-#if (getprop(lw~"config/dynamics-flag") == 1)
-if (dynamics_flag == 1)
+if (local_weather.dynamics_flag == 1)
 	{
-	cl.getNode("timestamp-sec",1).setValue(weather_dynamics.time_lw);
-	var blat = getprop(lw~"tiles/tmp/latitude-deg");
-	var blon = getprop(lw~"tiles/tmp/longitude-deg");
-	var alpha = getprop(lw~"tmp/tile-orientation-deg");
-	weather_dynamics.sort_into_quadtree(blat, blon, alpha, lat, long, weather_dynamics.cloudQuadtrees[tile_counter-1], cl); 
+	cs.timestamp = weather_dynamics.time_lw;
+	cs.write_index = placement_index;
+
+	if (convective_flag !=0) # Cumulus clouds get some extra info
+			{
+			cs.evolution_timestamp = cloud_evolution_timestamp;
+			cs.flt = cloud_flt;
+			cs.rel_alt = alt - cloud_mean_altitude;
+			cs.target_alt = alt;
+			}
+
+	if (getprop(lw~"tmp/buffer-status") == "placing")
+		{
+		var blat = buffered_tile_latitude;
+		var blon = buffered_tile_longitude;
+		var alpha = buffered_tile_alpha;
+		#var blat1 = getprop(lw~"tiles/tmp/latitude-deg");
+		#var blon1 = getprop(lw~"tiles/tmp/longitude-deg");
+		#var alpha1 = getprop(lw~"tmp/tile-orientation-deg");
+
+		#print("Lat: ", blat1, " ", blat);
+		#print("Lon: ", blon1, " ", blon);
+		#print("Alp: ", alpha1, " ", alpha);
+		
+		}
+	else
+		{
+		var blat = getprop(lw~"tiles/tmp/latitude-deg");
+		var blon = getprop(lw~"tiles/tmp/longitude-deg");
+		var alpha = getprop(lw~"tmp/tile-orientation-deg");
+		}
+	weather_dynamics.sort_into_quadtree(blat, blon, alpha, lat, long, weather_dynamics.cloudQuadtrees[tile_counter-1], cs); 
 	}
 
 }
@@ -451,12 +547,13 @@ if (getprop(lw~"tmp/thread-status") != "placing") {return;}
 if (getprop(lw~"tmp/convective-status") != "idle") {return;}
 if ((i < 0) or (i==0)) 
 	{
-	print("Cloud placement from array finished!"); 
+	if (local_weather.debug_output_flag == 1) 
+		{print("Cloud placement from array finished!"); }
 	setprop(lw~"tmp/thread-status", "idle");
 
 	# now set flag that tile has been completely processed
 	var dir_index = props.globals.getNode(lw~"tiles/tmp/dir-index").getValue();
-	# print("dir_index: ",dir_index);
+
 	props.globals.getNode(lw~"tiles").getChild("tile",dir_index).getNode("generated-flag").setValue(2);
 	
 	return;
@@ -470,6 +567,12 @@ if (s < k_max) {k_max = s;}
 
 for (var k = 0; k < k_max; k = k+1)
 	{
+	if (getprop(lw~"config/dynamics-flag") ==1)
+		{
+		cloud_mean_altitude = local_weather.clouds_mean_alt[s-k-1];
+		cloud_flt = local_weather.clouds_flt[s-k-1];
+		cloud_evolution_timestamp = local_weather.clouds_evolution_timestamp[s-k-1];
+		}
 	create_cloud(clouds_path[s-k-1], clouds_lat[s-k-1], clouds_lon[s-k-1], clouds_alt[s-k-1], clouds_orientation[s-k-1]);
 	}
 
@@ -479,144 +582,19 @@ setsize(clouds_lon,s-k_max);
 setsize(clouds_alt,s-k_max);
 setsize(clouds_orientation,s-k_max);
 
+if (getprop(lw~"config/dynamics-flag") ==1)
+		{
+		setsize(local_weather.clouds_mean_alt,s-k_max);
+		setsize(local_weather.clouds_flt,s-k_max);
+		setsize(local_weather.clouds_evolution_timestamp,s-k_max);
+		}
+
 settimer( func {create_cloud_array(i - k, clouds_path, clouds_lat, clouds_lon, clouds_alt, clouds_orientation ) }, 0 );
 };
 
 
-####################################################
-# move a cloud
-####################################################
-
-var move_cloud = func (c, tile_index) {
-
-# get the old spacetime position of the cloud
-
-var lat_old = c.getNode("position/latitude-deg").getValue();
-var lon_old = c.getNode("position/longitude-deg").getValue();
-var alt = c.getNode("position/altitude-ft").getValue();
-var timestamp = c.getNode("timestamp-sec").getValue();
-
-# get windfield and time since last update
-
-var windfield = weather_dynamics.get_windfield(tile_index);
-var dt = weather_dynamics.time_lw - timestamp;
-
-#print(dt * windfield[1]);
-
-# update the spacetime position of the cloud
-
-c.getNode("position/latitude-deg",1).setValue(lat_old + windfield[1] * dt * local_weather.m_to_lat);
-c.getNode("position/longitude-deg",1).setValue(lon_old + windfield[0] * dt * local_weather.m_to_lon);
-c.getNode("timestamp-sec",1).setValue(weather_dynamics.time_lw);
-
-}
 
 
-####################################################
-# remove clouds by tile index
-####################################################
-
-var remove_clouds = func (index) {
-
-var n = size(props.globals.getNode("local-weather/clouds").getChild("tile",index,1).getChildren("cloud"));
-props.globals.getNode("local-weather/clouds", 1).removeChild("tile",index);
-setprop(lw~"clouds/cloud-number",getprop(lw~"clouds/cloud-number")-n);
-
-if (getprop(lw~"tmp/thread-flag") ==  1)
-	{settimer( func {waiting_loop(index); },0);} 
-else 
-	{
-	var modelNode = props.globals.getNode("models", 1).getChildren("model");
-	foreach (var m; modelNode)
-		{
-		if (m.getNode("tile-index",1).getValue() == index) {m.remove();} 		
-		}
-	}
-
-
-}
-
-
-
-# this is to avoid two tile removal loops starting at the same time
-
-var waiting_loop = func (index) {
-
-var status = getprop(lw~"tmp/thread-status");
-
-if (status == "idle") {remove_tile_loop(index);}
-
-else 	{
-	print("Removal of ",index, " waiting for idle thread...");
-	settimer( func {waiting_loop(index); },1.0);
-	}
-}
-
-
-var remove_tile_loop = func (index) {
-
-var n = 100;
-
-var flag_mod = 0;
-
-
-var status = getprop(lw~"tmp/thread-status");
-
-if ((status == "computing") or (status == "placing")) # the array is blocked
-	{
-	settimer( func {remove_tile_loop(index); },0); # try again next frame
-	return;
-	}
-else if (status == "idle") # we initialize the loop
-	{
-	mvec = weather_tile_management.modelArrays[index-1];
-	msize = size(mvec);
-	if (msize == 0) 
-		{
-		print("Tile deletion loop finished!");
-		setprop(lw~"tmp/thread-status", "idle"); 
-		setprop(lw~"clouds/placement-index",0);
-		setprop(lw~"clouds/model-placement-index",0);
-		setsize(weather_tile_management.modelArrays[index-1],0);
-		return;
-		}
-	setprop(lw~"tmp/last-reading-pos-mod", msize);
-	setprop(lw~"tmp/thread-status", "removing"); 
-	}
-
-var lastpos = getprop(lw~"tmp/last-reading-pos-mod"); 
-
-
-if (lastpos < (msize-1)) {var istart = lastpos;} else {var istart = (msize-1);}
-
-if (istart<0) {istart=0;}
-
-var i_min = istart - n;
-if (i_min < -1) {i_min =-1;}
-
-for (var i = istart; i > i_min; i = i- 1)
-		{
-		m = mvec[i];
-		m.remove();
-		}
-
-if (i<0) {flag_mod = 1;}
-
-
-if (flag_mod == 0) {setprop(lw~"tmp/last-reading-pos-mod",i); }
-
-if (flag_mod == 0) # we still have work to do
-	{settimer( func {remove_tile_loop(index); },0);}
-else 
-	{
-	print("Tile deletion loop finished!");
-	setprop(lw~"tmp/thread-status", "idle"); 
-	setprop(lw~"clouds/placement-index",0);
-	setprop(lw~"clouds/model-placement-index",0);
-	setsize(weather_tile_management.modelArrays[index-1],0);
-	}
-
-}
 
 
 
@@ -629,7 +607,8 @@ var get_elevation = func (lat, lon) {
 
 var info = geodinfo(lat, lon);
 	if (info != nil) {var elevation = info[0] * local_weather.m_to_ft;}
-	else {var elevation = -1.0;}
+	else {var elevation = -1.0; }
+
 
 return elevation;
 }
@@ -643,17 +622,12 @@ var get_elevation_array = func (lat, lon) {
 var elevation = [];
 var n = size(lat);
 
-if (features.geodinfo_supports_vectors == 0)
+
+for(var i = 0; i < n; i=i+1)
 	{
-	for(var i = 0; i < n; i=i+1)
-		{
-		append(elevation, get_elevation(lat[i], lon[i]));
-		}
+	append(elevation, get_elevation(lat[i], lon[i]));
 	}
-else 
-	{
-	elevation = geodinfo(lat,10000);
-	}
+	
 
 return elevation;
 }
@@ -673,3 +647,20 @@ var ec = "/environment/config/";
 
 var mvec = [];
 var msize = 0;
+
+# available hard-coded support
+
+var features = {};
+
+# globals to transmit info if clouds are written from buffer
+
+var buffered_tile_latitude = 0.0;
+var buffered_tile_longitude = 0.0;
+var buffered_tile_alpha = 0.0;
+var buffered_tile_index = 0;
+
+# globals to handle additional info for Cumulus cloud dynamics
+
+var cloud_mean_altitude = 0.0;
+var cloud_flt = 0.0;
+var cloud_evolution_timestamp = 0.0;

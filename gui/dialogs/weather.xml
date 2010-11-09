@@ -1467,7 +1467,6 @@
           <command>dialog-apply</command>
           <object-name>metar-updates-winds-aloft</object-name>
         </binding>
-        <name>aloft</name>
       </checkbox>
 
     </group>
@@ -1493,6 +1492,12 @@
       <empty>
         <stretch>true</stretch>
       </empty>
+      <checkbox>
+        <property>/environment/metar/valid</property>
+        <label>valid</label>
+        <live>true</live>
+        <editable>false</editable>
+      </checkbox>
     </group>
 
     <textbox>

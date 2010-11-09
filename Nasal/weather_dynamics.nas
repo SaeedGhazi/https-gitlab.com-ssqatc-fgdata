@@ -1,6 +1,6 @@
 ########################################################
 # routines to simulate cloud wind drift and evolution
-# Thorsten Renk, July 2010
+# Thorsten Renk, October 2010
 ########################################################
 
 # function			purpose
@@ -9,18 +9,18 @@
 # timing_loop			to provide accurate timing information for wind drift calculations
 # quadtree_loop			to manage drift of clouds in the field of view
 # weather_dynamics_loop		to manage drift of weather effects, tile centers and interpolation points
+# convective_loop		to regularly recreate convective clouds
 # generate_quadtree_structure	to generate a quadtree data structure used for managing the visual field
 # sort_into_quadtree		to sort objects into a quadtree structure
+# sorting_recursion		to recursively sort into a quadree (helper)
 # quadtree_recursion		to search the quadtree for objects in the visual field
 # check_visibility		to check if a quadrant is currently visible
 # move_tile			to move tile coordinates in the wind
-# move_effect_volume		to move an effect volume in the wind
-# move_weather_station		to move a weather station in the wind
 # get_cartesian			to get local Cartesian coordinates out of coordinates
 
 
 ####################################################
-# get the windfield for a given locatio and altitude
+# get the windfield for a given location and altitude
 # (currently constant, but supposed to be local later)
 ####################################################
 
@@ -63,7 +63,8 @@ return windfield;
 
 var timing_loop = func {
 
-time_lw = time_lw + getprop("/sim/time/delta-sec");
+dt_lw = getprop("/sim/time/delta-sec");
+time_lw = time_lw + dt_lw;
 
 if (getprop(lw~"timing-loop-flag") ==1) {settimer(timing_loop, 0);}
 
@@ -116,6 +117,8 @@ foreach (t; tiles)
 		cos_beta = math.cos(beta * math.pi/180.0);
 		sin_beta = math.sin(beta * math.pi/180.0);
 		plane_x = xy_vec[0]; plane_y = xy_vec[1];
+		
+		windfield = get_windfield(index);
 
 		quadtree_recursion(cloudQuadtrees[index-1],0,1,0.0,0.0);
 		}
@@ -156,33 +159,171 @@ if (getprop(lw~"dynamics-loop-flag") ==1) {settimer(quadtree_loop, 0);}
 
 
 
-var weather_dynamics_loop = func (index) {
+var weather_dynamics_loop = func (index, cindex) {
 
 var n = 20;
+var nc = 1;
 
+var csize = weather_tile_management.n_cloudSceneryArray;
 
 var i_max = index + n;
 if (i_max > local_weather.n_effectVolumeArray) {i_max = local_weather.n_effectVolumeArray;}
 
+var ecount = 0;
+
 for (var i = index; i < i_max; i = i+1)
 	{
-	move_effect_volume(local_weather.effectVolumeArray[i]);
+	var ev = local_weather.effectVolumeArray[i];
+	if (ev.index !=0)
+		{ev.move();}
+	if ((ev.lift_flag == 2) and (rand() < 0.05) and (local_weather.presampling_flag == 1))
+		{
+		if (local_weather.dynamical_convection_flag ==1)
+			{
+			ev.correct_altitude_and_age();
+			
+			if (ev.flt > 1.2) # beyond 1.0, sink is still active
+				{		
+				local_weather.effectVolumeArray = weather_tile_management.delete_from_vector(local_weather.effectVolumeArray,i);
+				local_weather.n_effectVolumeArray = local_weather.n_effectVolumeArray - 1;
+				i = i-1; i_max = i_max -1; ecount = ecount + 1;
+				}
+
+			}
+		else
+			{ev.correct_altitude();}
+		}
 	}
+setprop(lw~"effect-volumes/number",getprop(lw~"effect-volumes/number")- ecount);
 
 index = index + n;
 if (i >= local_weather.n_effectVolumeArray)  {index = 0;} 
 
-var stations = props.globals.getNode(lw~"interpolation").getChildren("station");
 
-foreach (s; stations)
+var ccount = 0;
+
+if (csize > 0)
 	{
-	move_weather_station(s);
+
+	var j_max = cindex + nc;
+	if (j_max > csize -1) {j_max = csize-1;}
+
+
+	for (var j = cindex; j < j_max; j = j+1)
+		{
+		var cs = weather_tile_management.cloudSceneryArray[j];
+		#cs.move();
+		if (cs.type !=0) 
+			{
+			if ((rand() < 0.1) and (local_weather.presampling_flag == 1))
+				{
+				if (local_weather.dynamical_convection_flag ==1)
+					{					
+					cs.correct_altitude_and_age();
+					if (cs.flt > 1.0) # the cloud has reached its maximum age and decays
+						{
+						cs.removeNodes();
+						weather_tile_management.cloudSceneryArray = weather_tile_management.delete_from_vector(weather_tile_management.cloudSceneryArray,j);
+						ccount = ccount + 1;
+						}
+					}
+				else
+					{
+					cs.correct_altitude();
+					}				
+				}	
+			}
+		}
+
+cindex = cindex + nc;
+if (j >= csize)  {cindex = 0;} 
 	}
 
-if (getprop(lw~"dynamics-loop-flag") ==1) {settimer( func {weather_dynamics_loop(index); },0);}
+
+
+foreach (s; local_weather.weatherStationArray)
+	{
+	s.move();
+	}
+
+if (getprop(lw~"dynamics-loop-flag") ==1) {settimer( func {weather_dynamics_loop(index, cindex); },0);}
 
 }
 
+
+###########################################################
+# convective evolution loop
+###########################################################
+
+var convective_loop = func {
+
+# a 30 second loop needs a different strategy to end, otherwise there is trouble if it is restarted while still running
+
+if (convective_loop_kill_flag == 1)
+	{convective_loop_kill_flag = 0; return;}
+
+var cloud_respawning_interval_s = 30.0;
+
+
+if (getprop(lw~"tmp/thread-status") == "placing") 
+	{if (getprop(lw~"convective-loop-flag") ==1) {settimer( func {convective_loop()}, 5.0);} return;}
+
+# open the system for write status
+setprop(lw~"tmp/buffer-status","placing");
+
+if (local_weather.debug_output_flag == 1) 
+		{print("Respawning convective clouds...");}
+
+for(var i = 0; i < 9; i = i + 1)
+	{
+	var index = getprop(lw~"tiles/tile["~i~"]/tile-index");
+	if ((index == -1) or (index == 0)) {continue;}
+	if (getprop(lw~"tiles/tile["~i~"]/generated-flag") != 2)
+		{continue;}
+	
+	var strength = tile_convective_strength[index-1];
+	var alt = tile_convective_altitude[index-1];
+	var n = weather_tiles.get_n(strength);
+	if (local_weather.detailed_clouds_flag == 1) 
+		{n = int(0.7 * n);}
+
+	n = n/cloud_convective_lifetime_s * cloud_respawning_interval_s * math.sqrt(0.35);
+
+	n_res = n - int(n);
+	n = int(n);
+	if (rand() < n_res) {n=n+1;}
+
+	if (local_weather.debug_output_flag == 1) 
+		{print("Tile: ", index, " n: ", n);}	
+
+	var lat = getprop(lw~"tiles/tile["~i~"]/latitude-deg");
+	var lon = getprop(lw~"tiles/tile["~i~"]/longitude-deg");
+	var alpha = getprop(lw~"tiles/tile["~i~"]/orientation-deg");	
+
+	compat_layer.buffered_tile_latitude = lat;
+	compat_layer.buffered_tile_longitude = lon;
+	compat_layer.buffered_tile_alpha = alpha;
+	compat_layer.buffered_tile_index = index;
+
+	setprop(lw~"tmp/buffer-tile-index", index);
+
+	if (local_weather.presampling_flag == 1)
+		{var alt_offset = local_weather.alt_20_array[index -1];}
+	else 
+		{var alt_offset = getprop(lw~"tmp/tile-alt-offset-ft");}
+
+	local_weather.recreate_cumulus(lat,lon, alt + alt_offset, alpha, n, 20000.0, index);
+
+	} 
+
+# close the write process
+setprop(lw~"tmp/buffer-status","idle");
+
+
+
+if (getprop(lw~"convective-loop-flag") ==1) {settimer(convective_loop, cloud_respawning_interval_s);}
+
+}
 
 ###########################################################
 # generate quadtree structure
@@ -266,7 +407,8 @@ if (depth == quadtree_depth +1)
 	{
 	foreach (var c; tree)
 		{
-		compat_layer.move_cloud(c, current_tile_index_wd);
+		c.move();
+		c.to_target_alt();
 		cloud_counter = cloud_counter + 1;
 		}
 	return;
@@ -396,59 +538,6 @@ t.getNode("timestamp-sec",1).setValue(weather_dynamics.time_lw);
 }
 
 
-####################################################
-# move an effect volume
-####################################################
-
-var move_effect_volume = func (e) {
-
-# get the old spacetime position of the effect
-
-var lat_old = e.getNode("position/latitude-deg").getValue();
-var lon_old = e.getNode("position/longitude-deg").getValue();
-var tile_index = e.getNode("tile-index").getValue();
-var timestamp = e.getNode("timestamp-sec").getValue();
-
-# get windfield and time since last update
-
-var windfield = weather_dynamics.get_windfield(tile_index);
-var dt = weather_dynamics.time_lw - timestamp;
-
-
-# update the spacetime position of the effect
-
-e.getNode("position/latitude-deg",1).setValue(lat_old + windfield[1] * dt * local_weather.m_to_lat);
-e.getNode("position/longitude-deg",1).setValue(lon_old + windfield[0] * dt * local_weather.m_to_lon);
-e.getNode("timestamp-sec",1).setValue(weather_dynamics.time_lw);
-}
-
-
-####################################################
-# move a weather station
-####################################################
-
-var move_weather_station = func (s) {
-
-# get the old spacetime position of the station
-
-var lat_old = s.getNode("latitude-deg").getValue();
-var lon_old = s.getNode("longitude-deg").getValue();
-var tile_index = s.getNode("tile-index").getValue();
-var timestamp = s.getNode("timestamp-sec").getValue();
-
-# get windfield and time since last update
-
-var windfield = weather_dynamics.get_windfield(tile_index);
-var dt = weather_dynamics.time_lw - timestamp;
-
-
-# update the spacetime position of the effect
-
-s.getNode("latitude-deg",1).setValue(lat_old + windfield[1] * dt * local_weather.m_to_lat);
-s.getNode("longitude-deg",1).setValue(lon_old + windfield[0] * dt * local_weather.m_to_lon);
-s.getNode("timestamp-sec",1).setValue(weather_dynamics.time_lw);
-}
-
 
 ###########################################################
 # get local Cartesian coordinates
@@ -504,7 +593,12 @@ var lw = "/local-weather/";
 # globals
 
 var time_lw = 0.0;
+var dt_lw = 0.0;
 var max_clouds_in_loop = 250;
+var cloud_max_vertical_speed_fts = 30.0;
+var cloud_convective_lifetime_s = 1800.0; # max. lifetime of convective clouds 
+
+var convective_loop_kill_flag = 0;
 
 # the quadtree structure
 
@@ -516,6 +610,8 @@ var quadtree_depth = 3;
 
 var tile_wind_direction = [];
 var tile_wind_speed = [];
+var tile_convective_altitude = [];
+var tile_convective_strength = [];
 
 # define these as global, as we need to evaluate them only once per frame
 # but use them over and over
@@ -525,6 +621,7 @@ var cos_beta = 0;
 var sin_beta = 0;
 var plane_x = 0;
 var plane_y = 0;
+var windfield = [];
 
 var current_tile_index_wd = 0;
 

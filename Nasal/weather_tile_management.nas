@@ -1,6 +1,6 @@
 ########################################################
 # routines to set up, transform and manage weather tiles
-# Thorsten Renk, July 2010
+# Thorsten Renk, October 2010
 ########################################################
 
 # function			purpose
@@ -13,9 +13,17 @@
 # create_neighbour		to set up information for a new neighbouring tile
 # create_neighbours		to initialize the 8 neighbours of the initial tile
 # buffer_loop			to manage the buffering of faraway clouds in an array
+# housekeeping_loop		to shift clouds from the scenery into the buffer
+# wathcdog loop			(debug helping structure)
 # calc_geo			to get local Cartesian geometry for latitude conversion
 # get_lat			to get latitude from Cartesian coordinates
 # get_lon			to get longitude from Cartesian coordinates
+# delete_from_vector		to delete an element 'n' from a vector
+
+# object			purpose
+#
+# cloudBuffer			to store a cloud in a Nasal buffer, to provide methods to move it
+# cloudScenery			to store info for clouds in scenery, to provide methods to move and evolve them
 
 
 ###################################
@@ -38,11 +46,12 @@ var loading_flag = getprop(lw~"tmp/asymmetric-tile-loading-flag");
 var this_frame_action_flag = 0; # use this flag to avoid overlapping tile operations
 
 setsize(active_tile_list,0);
+#append(active_tile_list,0); # tile zero formally containing static objects is always active 
 
 if (distance_to_load > 3.0 * current_visibility)
 	{distance_to_load = 3.0 * current_visibility;}
-if (distance_to_load < 25000.0)
-	{distance_to_load = 25000.0;}
+if (distance_to_load < 29000.0)
+	{distance_to_load = 29000.0;}
 
 foreach (var t; tNode) {
 
@@ -77,10 +86,11 @@ foreach (var t; tNode) {
 		{
 		this_frame_action_flag = 1;
 		setprop(lw~"tiles/tile-counter",getprop(lw~"tiles/tile-counter")+1);
-		print("Building tile unique index ",getprop(lw~"tiles/tile-counter"), " in direction ",i);
+		if (local_weather.debug_output_flag == 1) 
+			{print("Building tile unique index ",getprop(lw~"tiles/tile-counter"), " in direction ",i);}
 		append(active_tile_list,getprop(lw~"tiles/tile-counter"));
 
-		if (getprop(lw~"config/dynamics-flag") == 1) 
+		if (local_weather.dynamics_flag == 1) 
 			{
 			var quadtree = [];
 			weather_dynamics.generate_quadtree_structure(0, quadtree);
@@ -97,7 +107,8 @@ foreach (var t; tNode) {
 
 	if ((d > d_remove) and (flag == 2) and (this_frame_action_flag == 0)) # the tile needs to be deleted if it exists
 		{
-		print("Removing tile, unique index ", t.getNode("tile-index").getValue()," direction ",i);
+		if (local_weather.debug_output_flag == 1) 
+			{print("Removing tile, unique index ", t.getNode("tile-index").getValue()," direction ",i);}
 		remove_tile(t.getNode("tile-index").getValue());
 		t.getNode("generated-flag").setValue(0);
 		this_frame_action_flag = 1;
@@ -132,7 +143,8 @@ foreach (var t; tNode) {
 			print("Flag: ",gen_flag);
 			}
 
-		print("Changing active tile to direction ", i_min);
+		if (local_weather.debug_output_flag == 1) 
+			{print("Changing active tile to direction ", i_min);}
 		change_active_tile(i_min);
 			
 		}    
@@ -169,28 +181,30 @@ setprop(lw~"tiles/tmp/dir-index",dir_index);
 
 # do windspeed and orientation before presampling check, but test not to do it again
 
-if (((getprop(lw~"tmp/presampling-flag") == 1) and (getprop(lw~"tmp/presampling-status") == "idle")) or (getprop(lw~"tmp/presampling-flag") == 0))
+if (((local_weather.presampling_flag == 1) and (getprop(lw~"tmp/presampling-status") == "idle")) or (local_weather.presampling_flag == 0))
 	{
 
 	var alpha = getprop(lw~"tmp/tile-orientation-deg");
+
 
 	if ((local_weather.wind_model_flag == 2) or (local_weather.wind_model_flag ==4))
 		{
 		alpha = alpha + 2.0 * (rand()-0.5) * 10.0;
 
+	
 		# account for the systematic spin of weather systems around a low pressure 
 		# core dependent on hemisphere
 		if (lat >0.0) {alpha = alpha -3.0;}
 		else {alpha = alpha +3.0;} 
 
 		setprop(lw~"tmp/tile-orientation-deg",alpha);
-	
+		
 		# compute the new windspeed
 
 		var windspeed = getprop(lw~"tmp/windspeed-kt");
 		windspeed = windspeed + 2.0 * (rand()-0.5) * 2.0;
 		if (windspeed < 0) {windspeed = rand();}
-		setprop(lw~"tmp/windspeed-kt", windspeed);
+		setprop(lw~"tmp/windspeed-kt",windspeed);
 
 		# store the tile orientation and wind strength in an array for fast processing
 
@@ -204,7 +218,6 @@ if (((getprop(lw~"tmp/presampling-flag") == 1) and (getprop(lw~"tmp/presampling-
 		
 		alpha = res[0];
 		setprop(lw~"tmp/tile-orientation-deg",alpha);				
-
 		var windspeed = res[1];
 		setprop(lw~"tmp/windspeed-kt",windspeed);
 
@@ -219,16 +232,17 @@ if (((getprop(lw~"tmp/presampling-flag") == 1) and (getprop(lw~"tmp/presampling-
 
 
 
-
 # now see if we need to presample the terrain
 
-if ((getprop(lw~"tmp/presampling-flag") == 1) and (getprop(lw~"tmp/presampling-status") == "idle")) 
+if ((local_weather.presampling_flag == 1) and (getprop(lw~"tmp/presampling-status") == "idle")) 
 	{
 	local_weather.terrain_presampling_start(lat, lon, 1000, 40000, getprop(lw~"tmp/tile-orientation-deg")); 
 	return;
 	}
 
-print("Current tile type: ", code);
+
+if (local_weather.debug_output_flag == 1) 
+	{print("Current tile type: ", code);}
 
 if (getprop(lw~"tmp/tile-management") == "repeat tile")
 	{
@@ -248,7 +262,11 @@ if (getprop(lw~"tmp/tile-management") == "repeat tile")
 	else if (code == "cold_sector") {weather_tiles.set_cold_sector_tile();}
 	else if (code == "warm_sector") {weather_tiles.set_warm_sector_tile();}
 	else if (code == "tropical_weather") {weather_tiles.set_tropical_weather_tile();}
-	else {print("Repeat tile not implemented with this tile type!");}
+	else 
+		{
+		print("Repeat tile not implemented with this tile type!");
+		setprop("/sim/messages/pilot", "Local weather: Repeat tile not implemented with this tile type!");
+		}
 	}
 else if (getprop(lw~"tmp/tile-management") == "realistic weather")
 	{
@@ -370,6 +388,7 @@ else if (getprop(lw~"tmp/tile-management") == "realistic weather")
 	else
 		{
 		print("Realistic weather not implemented with this tile type!");
+		setprop("/sim/messages/pilot", "Local weather: Realistic weather not implemented with this tile type!");
 		}
 
 	} # end if mode == realistic weather
@@ -397,20 +416,33 @@ for (var j = 0; j < s; j=j+1)
 
 settimer( func { props.globals.getNode("local-weather/clouds", 1).removeChild("tile",index) },100);
 
-#compat_layer.remove_clouds(index);
 
 var effectNode = props.globals.getNode("local-weather/effect-volumes").getChildren("effect-volume");
 
 var ecount = 0;
 
-foreach (var e; effectNode)
+for (var i = 0; i < local_weather.n_effectVolumeArray; i = i + 1)
 	{
-	if (e.getNode("tile-index").getValue() == index) 
-		{
-		e.remove();
+	ev = local_weather.effectVolumeArray[i];
+	if (ev.index == index)
+		{	
+		local_weather.effectVolumeArray = delete_from_vector(local_weather.effectVolumeArray,i);
+		local_weather.n_effectVolumeArray = local_weather.n_effectVolumeArray - 1;
+		i = i - 1;
 		ecount = ecount + 1;
 		}
+	else if (ev.index == 0) # use the opportunity to check if static effects should also be removed
+		{
+		if (ev.get_distance() > 80000.0)
+			{
+			local_weather.effectVolumeArray = delete_from_vector(local_weather.effectVolumeArray,i);
+			local_weather.n_effectVolumeArray = local_weather.n_effectVolumeArray - 1;
+			i = i - 1;
+			ecount = ecount + 1;
+			}
+		}
 	}
+
 
 setprop(lw~"effect-volumes/number",getprop(lw~"effect-volumes/number")- ecount);
 
@@ -422,7 +454,7 @@ setprop(lw~"effect-volumes/effect-placement-index",0);
 
 # remove quadtree structures 
 
-if (getprop(lw~"config/dynamics-flag") ==1)
+if (local_weather.dynamics_flag ==1)
 	{
 	settimer( func {setsize(weather_dynamics.cloudQuadtrees[index-1],0);},1.0);
 	}
@@ -568,11 +600,6 @@ t.getNode("timestamp-sec").setValue(f.getNode("timestamp-sec").getValue());
 t.getNode("orientation-deg").setValue(f.getNode("orientation-deg").getValue());
 t.getNode("code").setValue(f.getNode("code").getValue());
 
-#if (f.getNode("code").getValue() == "")
-#	{print("Empty tile code copying from ", from_index," to ", to_index, "!");}
-
-#if (f.getNode("code").getValue() != "") # we don't copy an empty code, that can trigger errors
-#	{t.getNode("code").setValue(f.getNode("code").getValue());}
 
 }
 
@@ -630,7 +657,7 @@ setprop(lw~"tiles/tile[0]/generated-flag",0);
 setprop(lw~"tiles/tile[0]/tile-index",-1);
 setprop(lw~"tiles/tile[0]/code","");
 setprop(lw~"tiles/tile[0]/timestamp-sec",weather_dynamics.time_lw);
-setprop(lw~"tiles/tile[0]/orientation-deg",0.0);
+setprop(lw~"tiles/tile[0]/orientation-deg",alpha);
 
 x = 0.0; y = 40000.0; 
 setprop(lw~"tiles/tile[1]/latitude-deg",blat + get_lat(x,y,phi));
@@ -639,7 +666,7 @@ setprop(lw~"tiles/tile[1]/generated-flag",0);
 setprop(lw~"tiles/tile[1]/tile-index",-1);
 setprop(lw~"tiles/tile[1]/code","");
 setprop(lw~"tiles/tile[1]/timestamp-sec",weather_dynamics.time_lw);
-setprop(lw~"tiles/tile[1]/orientation-deg",0.0);
+setprop(lw~"tiles/tile[1]/orientation-deg",alpha);
 
 x = 40000.0; y = 40000.0; 
 setprop(lw~"tiles/tile[2]/latitude-deg",blat + get_lat(x,y,phi));
@@ -648,7 +675,7 @@ setprop(lw~"tiles/tile[2]/generated-flag",0);
 setprop(lw~"tiles/tile[2]/tile-index",-1);
 setprop(lw~"tiles/tile[2]/code","");
 setprop(lw~"tiles/tile[2]/timestamp-sec",weather_dynamics.time_lw);
-setprop(lw~"tiles/tile[2]/orientation-deg",0.0);
+setprop(lw~"tiles/tile[2]/orientation-deg",alpha);
 
 x = -40000.0; y = 0.0; 
 setprop(lw~"tiles/tile[3]/latitude-deg",blat + get_lat(x,y,phi));
@@ -657,7 +684,7 @@ setprop(lw~"tiles/tile[3]/generated-flag",0);
 setprop(lw~"tiles/tile[3]/tile-index",-1);
 setprop(lw~"tiles/tile[3]/code","");
 setprop(lw~"tiles/tile[3]/timestamp-sec",weather_dynamics.time_lw);
-setprop(lw~"tiles/tile[3]/orientation-deg",0.0);
+setprop(lw~"tiles/tile[3]/orientation-deg",alpha);
 
 # this is the current tile
 x = 0.0; y = 0.0; 
@@ -677,7 +704,7 @@ setprop(lw~"tiles/tile[5]/generated-flag",0);
 setprop(lw~"tiles/tile[5]/tile-index",-1);
 setprop(lw~"tiles/tile[5]/code","");
 setprop(lw~"tiles/tile[5]/timestamp-sec",weather_dynamics.time_lw);
-setprop(lw~"tiles/tile[5]/orientation-deg",0.0);
+setprop(lw~"tiles/tile[5]/orientation-deg",alpha);
 
 x = -40000.0; y = -40000.0; 
 setprop(lw~"tiles/tile[6]/latitude-deg",blat + get_lat(x,y,phi));
@@ -686,7 +713,7 @@ setprop(lw~"tiles/tile[6]/generated-flag",0);
 setprop(lw~"tiles/tile[6]/tile-index",-1);
 setprop(lw~"tiles/tile[6]/code","");
 setprop(lw~"tiles/tile[6]/timestamp-sec",weather_dynamics.time_lw);
-setprop(lw~"tiles/tile[6]/orientation-deg",0.0);
+setprop(lw~"tiles/tile[6]/orientation-deg",alpha);
 
 x = 0.0; y = -40000.0; 
 setprop(lw~"tiles/tile[7]/latitude-deg",blat + get_lat(x,y,phi));
@@ -695,7 +722,7 @@ setprop(lw~"tiles/tile[7]/generated-flag",0);
 setprop(lw~"tiles/tile[7]/tile-index",-1);
 setprop(lw~"tiles/tile[7]/code","");
 setprop(lw~"tiles/tile[7]/timestamp-sec",weather_dynamics.time_lw);
-setprop(lw~"tiles/tile[7]/orientation-deg",0.0);
+setprop(lw~"tiles/tile[7]/orientation-deg",alpha);
 
 x = 40000.0; y = -40000.0; 
 setprop(lw~"tiles/tile[8]/latitude-deg",blat + get_lat(x,y,phi));
@@ -704,7 +731,7 @@ setprop(lw~"tiles/tile[8]/generated-flag",0);
 setprop(lw~"tiles/tile[8]/tile-index",-1);
 setprop(lw~"tiles/tile[8]/code","");
 setprop(lw~"tiles/tile[8]/timestamp-sec",weather_dynamics.time_lw);
-setprop(lw~"tiles/tile[8]/orientation-deg",0.0);
+setprop(lw~"tiles/tile[8]/orientation-deg",alpha);
 }
 
 
@@ -772,7 +799,7 @@ for (var i = index; i < i_max; i = i+1)
 
 	# if wind drift is on, move the cloud
 
-	if (getprop(lw~"config/dynamics-flag") == 1)
+	if (local_weather.dynamics_flag == 1)
 		{
 		c.move();
 		}	
@@ -797,8 +824,30 @@ for (var i = index; i < i_max; i = i+1)
 
 	if (d < d_comp) # insert the cloud into scenery and delete from buffer
 		{
-		setprop(lw~"tmp/buffer-tile-index",c.index);
+		compat_layer.buffered_tile_index = c.index;
+		
+		if (local_weather.dynamics_flag == 1) # assemble the current tile coordinates for insertion into quadtree
+			{
+			for (var j = 0; j < 9; j=j+1)
+				{
+				if (getprop(lw~"tiles/tile["~j~"]/tile-index") == c.index)
+					{
+					compat_layer.buffered_tile_latitude = getprop(lw~"tiles/tile["~j~"]/latitude-deg");
+					compat_layer.buffered_tile_longitude = getprop(lw~"tiles/tile["~j~"]/longitude-deg");
+					compat_layer.buffered_tile_alpha=getprop(lw~"tiles/tile["~j~"]/orientation-deg");
+					break;
+					}
+				} 
+			}
+
+		if ((c.type !=0) and (local_weather.dynamics_flag == 1)) # set additional info for Cumulus clouds
+			{
+			compat_layer.cloud_mean_altitude = c.alt - c.rel_alt;
+			compat_layer.cloud_flt = c.flt;
+			compat_layer.cloud_evolution_timestamp = c.evolution_timestamp;
+			}
 		compat_layer.create_cloud(c.path, c.lat, c.lon, c.alt, c.orientation);
+		n_cloudSceneryArray = n_cloudSceneryArray +1;
 		cloudBufferArray = delete_from_vector(cloudBufferArray,i);
 		i = i -1; i_max = i_max - 1; n_max = n_max - 1;
 		deleted_flag = 1;
@@ -826,6 +875,7 @@ var housekeeping_loop = func (index) {
 
 var n = 5;
 var n_max = size(cloudSceneryArray);
+n_cloudSceneryArray = n_max;
 var s = size(active_tile_list);
 
 setprop(lw~"clouds/cloud-scenery-count",n_max);
@@ -869,6 +919,7 @@ for (var i = index; i < i_max; i = i+1)
 		c.removeNodes();
 		cloudSceneryArray = delete_from_vector(cloudSceneryArray,i);
 		i = i -1; i_max = i_max - 1; n_max = n_max - 1;
+		n_cloudSceneryArray = n_cloudSceneryArray -1;
 		continue;
 		}
 	
@@ -893,6 +944,7 @@ for (var i = index; i < i_max; i = i+1)
 		append(cloudBufferArray,c.to_buffer());
 		cloudSceneryArray = delete_from_vector(cloudSceneryArray,i);
 		i = i -1; i_max = i_max - 1; n_max = n_max - 1;
+		n_cloudSceneryArray = n_cloudSceneryArray -1;
 		continue;
 		}
 
@@ -921,11 +973,13 @@ foreach(t; tNode)
 	var code = t.getNode("code").getValue();
 	var index = t.getNode("tile-index").getValue();
 	var flag = t.getNode("generated-flag").getValue();
+	var alpha = t.getNode("orientation-deg").getValue();
 
-	print(i,": code: ", code, " unique id: ", index, " flag: ", flag); 
+	print(i,": code: ", code, " unique id: ", index, " flag: ", flag, " alpha: ",alpha); 
 	
 	i = i + 1;
 	}
+print("alpha: ",getprop(lw~"tmp/tile-orientation-deg"));
 
 print("====================");
 
@@ -963,8 +1017,9 @@ var active_tile_list = [];
 
 var cloudBufferArray = [];
 
+
 var cloudBuffer = {
-	new: func(lat, lon, alt, path, orientation, index) {
+	new: func(lat, lon, alt, path, orientation, index, type) {
 	        var c = { parents: [cloudBuffer] };
 	        c.lat = lat;
 		c.lon = lon;
@@ -972,6 +1027,7 @@ var cloudBuffer = {
 		c.path = path;
 		c.orientation = orientation;
 		c.index = index;
+		c.type = type;
 	        return c;
 	},
 	get_distance: func {
@@ -1003,13 +1059,21 @@ var cloudBuffer = {
 
 
 var cloudSceneryArray = [];
+var n_cloudSceneryArray = 0;
 
 var cloudScenery = {
-	new: func(index, cloudNode, modelNode) {
+	new: func(index, type, cloudNode, modelNode) {
 	        var c = { parents: [cloudScenery] };
 		c.index = index;
+		c.type = type;
 		c.cloudNode = cloudNode;
 		c.modelNode = modelNode;
+		c.calt = cloudNode.getNode("position/altitude-ft");
+		c.clat = cloudNode.getNode("position/latitude-deg");
+		c.clon = cloudNode.getNode("position/longitude-deg");
+		c.alt = c.calt.getValue();
+		c.lat = c.clat.getValue();
+		c.lon = c.clon.getValue();
 	        return c;
 	},
 	removeNodes: func {
@@ -1017,17 +1081,20 @@ var cloudScenery = {
 		me.cloudNode.remove();
 	},
 	to_buffer: func {
-		var lat = me.cloudNode.getNode("position/latitude-deg").getValue();
-		var lon = me.cloudNode.getNode("position/longitude-deg").getValue();
-		var alt = me.cloudNode.getNode("position/altitude-ft").getValue();
 		var path = me.modelNode.getNode("path").getValue();
 		var orientation = me.cloudNode.getNode("orientation/true-heading-deg").getValue();
-		var b = cloudBuffer.new(lat, lon, alt, path, orientation, me.index);
+		var b = cloudBuffer.new(me.lat, me.lon, me.alt, path, orientation, me.index, me.type);
 
-		if (getprop(lw~"config/dynamics-flag") == 1)
+		if (local_weather.dynamics_flag == 1)
 			{
-			var timestamp = me.cloudNode.getNode("timestamp-sec").getValue();
-			b.timestamp = timestamp;
+			b.timestamp = me.timestamp;
+
+			if (me.type !=0) # Cumulus clouds get some extra info
+				{
+				b.flt = me.flt;
+				b.rel_alt = me.rel_alt;
+				b.evolution_timestamp = me.evolution_timestamp;
+				}
 			}
 
 		me.removeNodes();
@@ -1036,21 +1103,106 @@ var cloudScenery = {
 	get_distance: func {
 		var pos = geo.aircraft_position();
 		var cpos = geo.Coord.new();
-		var lat = me.cloudNode.getNode("position/latitude-deg").getValue();
-		var lon = me.cloudNode.getNode("position/longitude-deg").getValue();
+		var lat = me.clat.getValue();
+		var lon = me.clon.getValue();
 		cpos.set_latlon(lat,lon,0.0);
 		return pos.distance_to(cpos);
 	},
 	get_course: func {
 		var pos = geo.aircraft_position();
 		var cpos = geo.Coord.new();
-		var lat = me.cloudNode.getNode("position/latitude-deg").getValue();
-		var lon = me.cloudNode.getNode("position/longitude-deg").getValue();
+		var lat = me.clat.getValue();
+		var lon = me.clon.getValue();
 		cpos.set_latlon(lat,lon,0.0);
 		return pos.course_to(cpos);
 	},
 	get_altitude: func {
-		return me.cloudNode.getNode("position/altitude-ft").getValue();
+		return me.calt.getValue();
+	},
+	correct_altitude: func {	
+		var lat = me.clat.getValue();
+		var lon = me.clon.getValue();
+		var convective_alt = weather_dynamics.tile_convective_altitude[me.index-1] + local_weather.alt_20_array[me.index-1];
+		var elevation = compat_layer.get_elevation(lat, lon);
+		var alt_new = local_weather.get_convective_altitude(convective_alt, elevation, me.index);
+		me.target_alt = alt_new + me.rel_alt;
+	},
+	correct_altitude_and_age: func {	
+		var lat = me.lat;
+		var lon = me.lon;
+		var convective_alt = weather_dynamics.tile_convective_altitude[me.index-1] + local_weather.alt_20_array[me.index-1];
+		
+		# get terrain elevation and landcover	
+
+		var elevation = -1.0; var p_cover = 0.2;# defaults if there is no info
+		var info = geodinfo(lat, lon);
+		if (info != nil) 
+			{
+			elevation = info[0] * local_weather.m_to_ft;
+			if (info[1] != nil)
+				{
+         			var landcover = info[1].names[0];
+	 			if (contains(local_weather.landcover_map,landcover)) {p_cover = local_weather.landcover_map[landcover];}
+				else {p_cover = 0.2;}
+				}	
+			}
+
+		
+		# correct the altitude
+		var alt_new = local_weather.get_convective_altitude(convective_alt, elevation, me.index);
+		me.target_alt = alt_new + me.rel_alt;
+
+		# correct fractional lifetime based on terrain below
+		var current_lifetime = math.sqrt(p_cover)/math.sqrt(0.35) * weather_dynamics.cloud_convective_lifetime_s;
+		var fractional_increase = (weather_dynamics.time_lw - me.evolution_timestamp)/current_lifetime;
+		me.flt = me.flt + fractional_increase;
+		me.evolution_timestamp = weather_dynamics.time_lw;
+	},
+	to_target_alt: func {	
+		if (me.type ==0) {return;}
+		var alt_diff = me.target_alt - me.alt;
+		if (alt_diff == 0.0) {return;}
+		var max_vertical_movement_ft = weather_dynamics.dt_lw * weather_dynamics.cloud_max_vertical_speed_fts;
+		if (abs(alt_diff) < max_vertical_movement_ft)
+			{
+			me.alt = me.target_alt; 
+			}
+		else if (alt_diff < 0)
+			{
+			me.alt = me.alt -max_vertical_movement_ft;
+			}
+		else
+			{
+			me.alt = me.alt + max_vertical_movement_ft;
+			}
+		setprop(lw~"clouds/tile["~me.index~"]/cloud["~me.write_index~"]/position/altitude-ft", me.alt);
+	},
+	move: func {
+		
+		
+		var windfield = weather_dynamics.windfield;
+		var dt = weather_dynamics.time_lw - me.timestamp;
+
+		me.lat = me.lat + windfield[1] * dt * local_weather.m_to_lat;
+		me.lon = me.lon + windfield[0] * dt * local_weather.m_to_lon;
+		
+		setprop(lw~"clouds/tile["~me.index~"]/cloud["~me.write_index~"]/position/latitude-deg", me.lat);
+		setprop(lw~"clouds/tile["~me.index~"]/cloud["~me.write_index~"]/position/longitude-deg", me.lon);
+		
+		me.timestamp = weather_dynamics.time_lw;
+		
+	},
+	show: func {
+		var lat = me.clat.getValue();
+		var lon = me.clon.getValue();
+		var alt = me.calt.getValue();		
+		
+		var convective_alt = weather_dynamics.tile_convective_altitude[me.index-1] + local_weather.alt_20_array[me.index-1];
+		var elevation = compat_layer.get_elevation(lat, lon);
+		print("lat :", lat, " lon: ", lon, " alt: ", alt);
+		print("path: ", me.modelNode.getNode("path").getValue());
+		print("elevation: ", compat_layer.get_elevation(lat, lon), " cloudbase: ", convective_alt);
+		if (me.type !=0) {print("relative: ", me.rel_alt, "target: ", me.target_alt);}
 	},
 };
 

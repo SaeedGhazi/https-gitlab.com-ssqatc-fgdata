@@ -42,13 +42,23 @@
       </binding>
     </checkbox>
 
-    <item>
+    <checkbox>
+      <halign>left</halign>
       <label>Show 2D Panel</label>
       <property>/sim/panel/visibility</property>
       <binding>
         <command>dialog-apply</command>
       </binding>
-    </item>
+    </checkbox>
+
+    <checkbox>
+      <halign>left</halign>
+      <label>Autohide Menubar</label>
+      <property>/sim/menubar/autovisibility/enabled</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
   </group>
 
   <hrule/>

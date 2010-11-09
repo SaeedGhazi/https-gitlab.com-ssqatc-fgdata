@@ -154,8 +154,12 @@ Started September 2000 by David Megginson, david@megginson.com
    <contrail-shader userarchive="y">0</contrail-shader>
    <snow-level-m type="double">2000.0</snow-level-m>
    <quality-level type="double" userarchive="y">0.0</quality-level>
-  
-</rendering>
+   <osg-displaysettings>
+    <eye-separation type="double" userarchive="y">0.05</eye-separation>
+    <screen-distance type="double" userarchive="y">0.5</screen-distance>
+    <stereo-mode type="string" userarchive="y">OFF</stereo-mode>
+   </osg-displaysettings>
+  </rendering>
   <model-hz type="int">120</model-hz>
   <navdb>
    <localizers>
@@ -249,10 +253,8 @@ Started September 2000 by David Megginson, david@megginson.com
    <path>Aircraft/Generic/Panels/generic-trans-mini-panel.xml</path>
   </panel_2>
   <hud>
-   <path>Huds/Default/default.xml</path>
-   <path>Huds/NTPS.xml</path>                 <!-- new HUD -->
-   <visibility type="bool">false</visibility>
-   <visibility type="bool">false</visibility> <!-- new HUD -->
+   <path n="1">Huds/default.xml</path>                 <!-- new HUD -->
+   <visibility n="1" type="bool">false</visibility> <!-- new HUD -->
    <font>
     <name type="string">Helvetica.txf</name>
     <size type="float">8</size>
@@ -291,12 +293,12 @@ Started September 2000 by David Megginson, david@megginson.com
     <path>Aircraft/Generic/generic-autopilot-helper.xml</path>
    </autopilot>
    <property-rule>
-     <name>Environment Interpolation Rule</name>
-     <path>Environment/interpolator.xml</path>
-   </property-rule>
-   <property-rule>
      <name>Environment METAR Interpolation Rule</name>
      <path>Environment/metarinterpolator.xml</path>
+   </property-rule>
+   <property-rule>
+     <name>Environment Interpolation Rule</name>
+     <path>Environment/interpolator.xml</path>
    </property-rule>
   </systems>
   <instrumentation>
@@ -598,7 +600,7 @@ Started September 2000 by David Megginson, david@megginson.com
   </atc>
 
   <ai-traffic>
-   <enabled type="bool" userarchive="y">true</enabled>
+   <enabled type="bool" userarchive="y">false</enabled>
    <level type="int" userarchive="y">1</level>
   </ai-traffic>
 
@@ -618,6 +620,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <!-- <scenario>aircraft_demo</scenario> -->
    <!-- <scenario>refueling_demo</scenario> -->
    <!-- <scenario>lead_aircraft</scenario> -->
+   <!-- <scenario>vinson_demo</scenario> -->
   </ai>
 
   <multiplay>

@@ -244,7 +244,7 @@ var dialog = {
         var odd = 1;
         foreach (var mp; model.list) {
             var col = 0;
-            var color = mp.available ? me.fg[odd = !odd] : me.fg[2];
+            var color = mp.node.getNode("model-installed").getValue() ? me.fg[odd = !odd] : me.fg[2];
             foreach (var column; me.columns) {
                 var p = typeof(column.property) == "func" ? column.property() : column.property;
                 var w = nil;
@@ -261,6 +261,10 @@ var dialog = {
             }
             row += 1;
         }
+        if (me.x != nil)
+            me.dialog.set("x", me.x);
+        if (me.y != nil)
+            me.dialog.set("y", me.y);
         me.update(me.loopid += 1);
         fgcommand("dialog-new", me.dialog.prop());
         fgcommand("dialog-show", me.dialog.prop());
@@ -291,7 +295,7 @@ var dialog = {
             {
                 # Node with valid position data (and "distance!=nil").
                 n.setValues({
-                    "model-short": mp.available ? mp.model : "[" ~ mp.model ~ "]",
+                    "model-short": n.getNode("model-installed").getValue() ? mp.model : "[" ~ mp.model ~ "]",
                     "bearing-to": self.course_to(ac),
                     "distance-to-km": distance / 1000.0,
                     "distance-to-nm": distance * M2NM,
@@ -333,6 +337,10 @@ var dialog = {
         }
     },
     close: func {
+        if (me.dialog != nil) {
+            me.x = me.dialog.prop().getNode("x").getValue();
+            me.y = me.dialog.prop().getNode("y").getValue();
+        }
         fgcommand("dialog-close", me.dialog.prop());
     },
     del: func {
@@ -368,8 +376,6 @@ var dialog = {
 #   multiplayer.model.data:        hash, key := /ai/models/* path
 #   multiplayer.model.callsign     hash, key := callsign
 #   multiplayer.model.list         vector, sorted alphabetically (ASCII, case insensitive)
-#   multiplayer.model.available    unsorted list of players with available models
-#   multiplayer.model.unavailable  unsorted list of players with unavailable models
 #
 # All of them contain hash entries of this form:
 #
@@ -379,7 +385,6 @@ var dialog = {
 #    root: "/ai/models/multiplayer[4]",            # root property
 #    node: {...},        # root property as props.Node hash
 #    model: "bo105",     # model name (extracted from path)
-#    available: 2,       # whether the model is installed (0: not inst, 1: AI, 2: regular)
 #    sort: "bimaus",     # callsign in lower case (for sorting)
 # }
 #
@@ -407,8 +412,6 @@ var model = {
 
         me.data = {};
         me.callsign = {};
-        me.available = [];
-        me.unavailable = [];
 
         foreach (var n; props.globals.getNode("ai/models", 1).getChildren("multiplayer")) {
             if (!n.getNode("valid").getValue())
@@ -420,25 +423,16 @@ var model = {
                 continue;
 
             var path = n.getNode("sim/model/path").getValue();
-            var available = 0;
-            if (io.stat(string.normpath(me.fg_root ~ "AI/" ~ path)) != nil)
-                available = 1;
-            elsif (io.stat(string.normpath(me.fg_root ~ path)) != nil)
-                available = 2;
-            elsif (!contains(me.warned, path))
-                me.warned[path] = print("MP model not installed: " ~ debug._error(path));
-
             var model = split(".", split("/", path)[-1])[0];
             model = me.remove_suffix(model, "-model");
             model = me.remove_suffix(model, "-anim");
 
             var root = n.getPath();
             var data = { node: n, callsign: callsign, model: model, root: root,
-                    sort: string.lc(callsign), available: available };
+                    sort: string.lc(callsign) };
 
             me.data[root] = data;
             me.callsign[callsign] = data;
-            append(available ? me.available : me.unavailable, data);
         }
 
         me.list = sort(values(me.data), func(a, b) cmp(a.sort, b.sort));

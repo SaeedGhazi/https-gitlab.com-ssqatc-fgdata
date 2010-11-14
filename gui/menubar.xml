@@ -681,6 +681,13 @@
 			</binding>
 		</item>
 
+		<item>
+			<label>Print Visible Scene Info</label>
+			<binding>
+				<command>print-visible-scene</command>
+			</binding>
+		</item>
+
 	</menu>
 
 

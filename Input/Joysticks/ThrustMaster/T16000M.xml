@@ -37,6 +37,7 @@
 
 <PropertyList>
   <name type="string">Thrustmaster T.16000M</name>
+  <name type="string">T.16000M</name>
 
  <axis>
   <number>

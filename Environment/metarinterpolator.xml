@@ -282,33 +282,6 @@
   </filter>
 
   <!-- Clouds -->
-  <!-- don't interpolate to/from altitude -9999 -->
-  <filter include="clouds-altitude-set.xml"/>
-  <filter include="clouds-altitude-set.xml">
-    <params>
-      <from>/environment/metar/clouds/layer[1]/elevation-ft</from>
-      <to>/environment/clouds/layer[1]/elevation-ft</to>
-    </params>
-  </filter>
-  <filter include="clouds-altitude-set.xml">
-    <params>
-      <from>/environment/metar/clouds/layer[2]/elevation-ft</from>
-      <to>/environment/clouds/layer[2]/elevation-ft</to>
-    </params>
-  </filter>
-  <filter include="clouds-altitude-set.xml">
-    <params>
-      <from>/environment/metar/clouds/layer[3]/elevation-ft</from>
-      <to>/environment/clouds/layer[3]/elevation-ft</to>
-    </params>
-  </filter>
-  <filter include="clouds-altitude-set.xml">
-    <params>
-      <from>/environment/metar/clouds/layer[4]/elevation-ft</from>
-      <to>/environment/clouds/layer[4]/elevation-ft</to>
-    </params>
-  </filter>
-
   <filter include="clouds-altitude-interpolate.xml"/>
   <filter include="clouds-altitude-interpolate.xml">
     <params>

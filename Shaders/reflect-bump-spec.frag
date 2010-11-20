@@ -92,9 +92,8 @@ void main (void)
         //float pam = (map.a * -2) + 1; //reverse map
         reflFactor = map.a + transparency_offset;
     } else {
-        // set the reflectivity proportional to shininess with user 
-        // input 
-        reflFactor = (gl_FrontMaterial.shininess / 128) + transparency_offset;
+        // set the reflectivity proportional to shininess with user input 
+        reflFactor = (gl_FrontMaterial.shininess / 128) * ns.a + transparency_offset;
     }
 
     reflFactor = clamp(reflFactor, 0.0, 1.0);

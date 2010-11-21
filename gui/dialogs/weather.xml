@@ -1574,7 +1574,7 @@
           }
 
           me.scenarioListenerId = setlistener( me.base ~ "/source-selection", func(n) { me.scenarioListener(n); } );
-          me.metarListenerId = setlistener( "environment/metar/valid", func(n) { me.metarListener(n); }, 1, 0 );
+          me.metarListenerId = setlistener( "environment/metar/valid", func(n) { me.metarListener(n); }, 1, 1 );
         },
 
         close : func {
@@ -1652,6 +1652,7 @@
           var metar = getprop("environment/metar/data");
           if( metar == nil or metar == "" ) metar = "NIL";
           metar = normalize_string(metar);
+          printlog( "info", "new METAR: " ~ metar );
           setprop( me.base ~ "/metar", metar );
           gui.dialog_update( "weather", "metar" );
         },

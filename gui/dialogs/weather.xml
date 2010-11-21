@@ -1512,10 +1512,10 @@
       <live>false</live>
       <property>sim/gui/dialogs/weather-scenario/metar</property>
       <enable>
-	<equals>
-	  <property>/sim/gui/dialogs/weather-scenario/state</property>
-	  <value type="int">1</value>
-	</equals>
+        <greater-than>
+          <property>/sim/gui/dialogs/weather-scenario/state</property>
+          <value type="int">1</value>
+        </greater-than>>
       </enable>
     </textbox>
 
@@ -1574,7 +1574,7 @@
           }
 
           me.scenarioListenerId = setlistener( me.base ~ "/source-selection", func(n) { me.scenarioListener(n); } );
-          me.metarListenerId = setlistener( "environment/metar/valid", func(n) { me.metarListener(n); }, 1, 0 );
+          me.metarListenerId = setlistener( "environment/metar/valid", func(n) { me.metarListener(n); }, 1, 1 );
         },
 
         close : func {
@@ -1596,6 +1596,11 @@
             setprop( "/environment/realwx/enabled", 1 );
             setprop( "/environment/config/enabled", 1 );
             me.baseN.getNode("state",1).setIntValue( 0 );
+          } else if( scenarioName == "Manual input" ) {
+            setprop( "/environment/params/metar-updates-environment", 1 );
+            setprop( "/environment/realwx/enabled", 0 );
+            setprop( "/environment/config/enabled", 1 );
+            me.baseN.getNode("state",1).setIntValue( 2 );
           } else {
             setprop( "/environment/params/metar-updates-environment", 1 );
             setprop( "/environment/realwx/enabled", 0 );
@@ -1647,6 +1652,7 @@
           var metar = getprop("environment/metar/data");
           if( metar == nil or metar == "" ) metar = "NIL";
           metar = normalize_string(metar);
+          printlog( "info", "new METAR: " ~ metar );
           setprop( me.base ~ "/metar", metar );
           gui.dialog_update( "weather", "metar" );
         },

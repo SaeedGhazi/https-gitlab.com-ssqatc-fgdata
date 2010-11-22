@@ -1517,6 +1517,16 @@
           <value type="int">1</value>
         </greater-than>>
       </enable>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>metar</object-name>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>
+          setprop( "/environment/metar/data", getprop( "sim/gui/dialogs/weather-scenario/metar") );
+        </script>
+      </binding>
     </textbox>
 
     <!-- Automatic Weather -->
@@ -1574,7 +1584,7 @@
           }
 
           me.scenarioListenerId = setlistener( me.base ~ "/source-selection", func(n) { me.scenarioListener(n); } );
-          me.metarListenerId = setlistener( "environment/metar/valid", func(n) { me.metarListener(n); }, 1, 0 );
+          me.metarListenerId = setlistener( "environment/metar/valid", func(n) { me.metarListener(n); }, 1, 1 );
         },
 
         close : func {
@@ -1584,7 +1594,7 @@
 
         stateChange : func {
           var scenarioName = getprop( me.base ~ "/source-selection");
-          var metar = nil;
+          var metar = getprop( "environment/metar/data" );
           if( scenarioName == "Disabled" ) {
             setprop( "/environment/params/metar-updates-environment", 0 );
             setprop( "/environment/realwx/enabled", 0 );
@@ -1652,6 +1662,7 @@
           var metar = getprop("environment/metar/data");
           if( metar == nil or metar == "" ) metar = "NIL";
           metar = normalize_string(metar);
+          printlog( "info", "new METAR: " ~ metar );
           setprop( me.base ~ "/metar", metar );
           gui.dialog_update( "weather", "metar" );
         },

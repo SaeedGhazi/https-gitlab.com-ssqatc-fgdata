@@ -615,12 +615,6 @@
               <row>1</row>
               <col>3</col>
               <pref-width>55</pref-width>
-              <enable>
-                <equals>
-                  <property>/sim/gui/dialogs/weather-scenario/state</property>
-                  <value type="int">1</value>
-                </equals>
-              </enable>
               <property>/environment/config/aloft/entry[4]/visibility-m</property>
               <live>true</live>
               <binding>
@@ -729,12 +723,6 @@
               <row>2</row>
               <col>3</col>
               <pref-width>55</pref-width>
-              <enable>
-                <equals>
-                  <property>/sim/gui/dialogs/weather-scenario/state</property>
-                  <value type="int">1</value>
-                </equals>
-              </enable>
               <property>/environment/config/aloft/entry[3]/visibility-m</property>
               <live>true</live>
               <binding>
@@ -843,12 +831,6 @@
               <row>3</row>
               <col>3</col>
               <pref-width>55</pref-width>
-              <enable>
-                <equals>
-                  <property>/sim/gui/dialogs/weather-scenario/state</property>
-                  <value type="int">1</value>
-                </equals>
-              </enable>
               <property>/environment/config/aloft/entry[2]/visibility-m</property>
               <live>true</live>
               <binding>
@@ -957,12 +939,6 @@
               <row>4</row>
               <col>3</col>
               <pref-width>55</pref-width>
-              <enable>
-                <equals>
-                  <property>/sim/gui/dialogs/weather-scenario/state</property>
-                  <value type="int">1</value>
-                </equals>
-              </enable>
               <property>/environment/config/aloft/entry[1]/visibility-m</property>
               <live>true</live>
               <binding>

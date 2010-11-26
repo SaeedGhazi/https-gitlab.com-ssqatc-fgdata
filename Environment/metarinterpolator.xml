@@ -93,7 +93,7 @@
     <!--
       transfer the visibility to each layer of
       interpolation controller. We are not very creative here and 
-      use the same visibility for all layers but top three which
+      use the same visibility for all layers but top four which
       are left untouched.
     -->
     <name>MetarController:visibility-m</name>
@@ -109,10 +109,6 @@
     <output>/environment/config/boundary/entry[0]/visibility-m</output>
     <output>/environment/config/boundary/entry[1]/visibility-m</output>
     <output>/environment/config/aloft/entry[0]/visibility-m</output>
-    <output>/environment/config/aloft/entry[1]/visibility-m</output>
-    <output>/environment/config/aloft/entry[2]/visibility-m</output>
-    <output>/environment/config/aloft/entry[3]/visibility-m</output>
-    <output>/environment/config/aloft/entry[4]/visibility-m</output>
   </filter>
 
   <!-- split the wind vector into it's components -->

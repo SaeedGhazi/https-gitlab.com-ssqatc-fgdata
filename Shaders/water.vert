@@ -1,3 +1,8 @@
+// This shader is mostly an adaptation of the shader found at
+//  http://www.bonzaisoftware.com/water_tut.html and its glsl conversion
+//  available at http://forum.bonzaisoftware.com/viewthread.php?tid=10
+//  © Michael Horsch - 2005
+
 varying vec4 waterTex1;
 varying vec4 waterTex2;
 varying vec4 waterTex4;

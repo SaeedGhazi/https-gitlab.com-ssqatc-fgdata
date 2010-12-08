@@ -234,6 +234,29 @@ properties' values.
     <property>/instrumentation/kln89/scan-pull</property>
    </binding>
   </action>
+  
+  <action>
+   <name>Photocell Obscure</name>
+   <!--This action represents the user obscuring the light-sensitive photocell
+       in order to test the night-time brightness level of the display-->
+   <button>0</button>
+   <x>-408</x>
+   <y>64</y>
+   <w>40</w>
+   <h>40</h>
+   <binding>
+    <command>property-assign</command>
+    <property>/instrumentation/kln89/photocell-obscured</property>
+    <value >1</value>
+   </binding>
+   <mod-up>
+    <binding>
+     <command>property-assign</command>
+     <property>/instrumentation/kln89/photocell-obscured</property>
+     <value>0</value>
+    </binding>
+   </mod-up>
+  </action>
 
  </actions>
 

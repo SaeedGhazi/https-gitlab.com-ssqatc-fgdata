@@ -360,5 +360,17 @@
     <input>/environment/metar/clouds/layer[0]/visibility-m</input>
     <output>/environment/clouds/layer[0]/visibility-m</output>
   </filter>
-
+  <filter>
+    <name>MetarController:cloud-alpha</name>
+    <type>exponential</type>
+    <filter-time>5</filter-time>
+    <enable>
+      <condition>
+        <property>/environment/metar/valid</property>
+        <property>/environment/params/metar-updates-environment</property>
+      </condition>
+    </enable>
+    <input>/environment/metar/clouds/layer[0]/alpha</input>
+    <output>/environment/clouds/layer[0]/alpha</output>
+  </filter>
 </PropertyList> 

@@ -615,12 +615,6 @@
               <row>1</row>
               <col>3</col>
               <pref-width>55</pref-width>
-              <enable>
-                <equals>
-                  <property>/sim/gui/dialogs/weather-scenario/state</property>
-                  <value type="int">1</value>
-                </equals>
-              </enable>
               <property>/environment/config/aloft/entry[4]/visibility-m</property>
               <live>true</live>
               <binding>
@@ -729,12 +723,6 @@
               <row>2</row>
               <col>3</col>
               <pref-width>55</pref-width>
-              <enable>
-                <equals>
-                  <property>/sim/gui/dialogs/weather-scenario/state</property>
-                  <value type="int">1</value>
-                </equals>
-              </enable>
               <property>/environment/config/aloft/entry[3]/visibility-m</property>
               <live>true</live>
               <binding>
@@ -843,12 +831,6 @@
               <row>3</row>
               <col>3</col>
               <pref-width>55</pref-width>
-              <enable>
-                <equals>
-                  <property>/sim/gui/dialogs/weather-scenario/state</property>
-                  <value type="int">1</value>
-                </equals>
-              </enable>
               <property>/environment/config/aloft/entry[2]/visibility-m</property>
               <live>true</live>
               <binding>
@@ -957,12 +939,6 @@
               <row>4</row>
               <col>3</col>
               <pref-width>55</pref-width>
-              <enable>
-                <equals>
-                  <property>/sim/gui/dialogs/weather-scenario/state</property>
-                  <value type="int">1</value>
-                </equals>
-              </enable>
               <property>/environment/config/aloft/entry[1]/visibility-m</property>
               <live>true</live>
               <binding>
@@ -1512,11 +1488,21 @@
       <live>false</live>
       <property>sim/gui/dialogs/weather-scenario/metar</property>
       <enable>
-	<equals>
-	  <property>/sim/gui/dialogs/weather-scenario/state</property>
-	  <value type="int">1</value>
-	</equals>
+        <greater-than>
+          <property>/sim/gui/dialogs/weather-scenario/state</property>
+          <value type="int">1</value>
+        </greater-than>>
       </enable>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>metar</object-name>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>
+          setprop( "/environment/metar/data", getprop( "sim/gui/dialogs/weather-scenario/metar") );
+        </script>
+      </binding>
     </textbox>
 
     <!-- Automatic Weather -->
@@ -1574,7 +1560,7 @@
           }
 
           me.scenarioListenerId = setlistener( me.base ~ "/source-selection", func(n) { me.scenarioListener(n); } );
-          me.metarListenerId = setlistener( "environment/metar/valid", func(n) { me.metarListener(n); }, 1, 0 );
+          me.metarListenerId = setlistener( "environment/metar/valid", func(n) { me.metarListener(n); }, 1, 1 );
         },
 
         close : func {
@@ -1584,7 +1570,7 @@
 
         stateChange : func {
           var scenarioName = getprop( me.base ~ "/source-selection");
-          var metar = nil;
+          var metar = getprop( "environment/metar/data" );
           if( scenarioName == "Disabled" ) {
             setprop( "/environment/params/metar-updates-environment", 0 );
             setprop( "/environment/realwx/enabled", 0 );
@@ -1596,6 +1582,11 @@
             setprop( "/environment/realwx/enabled", 1 );
             setprop( "/environment/config/enabled", 1 );
             me.baseN.getNode("state",1).setIntValue( 0 );
+          } else if( scenarioName == "Manual input" ) {
+            setprop( "/environment/params/metar-updates-environment", 1 );
+            setprop( "/environment/realwx/enabled", 0 );
+            setprop( "/environment/config/enabled", 1 );
+            me.baseN.getNode("state",1).setIntValue( 2 );
           } else {
             setprop( "/environment/params/metar-updates-environment", 1 );
             setprop( "/environment/realwx/enabled", 0 );
@@ -1647,6 +1638,7 @@
           var metar = getprop("environment/metar/data");
           if( metar == nil or metar == "" ) metar = "NIL";
           metar = normalize_string(metar);
+          printlog( "info", "new METAR: " ~ metar );
           setprop( me.base ~ "/metar", metar );
           gui.dialog_update( "weather", "metar" );
         },

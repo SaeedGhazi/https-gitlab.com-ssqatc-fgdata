@@ -67,8 +67,9 @@
 
   <filter>
     <!--
-      transfer the sea-level temperature to each layer of
-      interpolation controller. 
+      transfer the sea-level dewpoint to each layer of
+      interpolation controller. This is most certainly
+      wrong in most cases.
     -->
     <name>MetarController:dewpoint-sea-level-degc</name>
     <type>noise-spike</type>
@@ -93,7 +94,7 @@
     <!--
       transfer the visibility to each layer of
       interpolation controller. We are not very creative here and 
-      use the same visibility for all layers but top three which
+      use the same visibility for all layers but top four which
       are left untouched.
     -->
     <name>MetarController:visibility-m</name>
@@ -109,14 +110,9 @@
     <output>/environment/config/boundary/entry[0]/visibility-m</output>
     <output>/environment/config/boundary/entry[1]/visibility-m</output>
     <output>/environment/config/aloft/entry[0]/visibility-m</output>
-    <output>/environment/config/aloft/entry[1]/visibility-m</output>
-    <output>/environment/config/aloft/entry[2]/visibility-m</output>
-    <output>/environment/config/aloft/entry[3]/visibility-m</output>
-    <output>/environment/config/aloft/entry[4]/visibility-m</output>
   </filter>
 
-  <!-- split the wind vector into it's components -->
-
+  <!-- interpolate the wind vector's components -->
   <filter>
     <name>MetarController:wind-from-north-fps</name>
     <type>exponential</type>
@@ -282,33 +278,6 @@
   </filter>
 
   <!-- Clouds -->
-  <!-- don't interpolate to/from altitude -9999 -->
-  <filter include="clouds-altitude-set.xml"/>
-  <filter include="clouds-altitude-set.xml">
-    <params>
-      <from>/environment/metar/clouds/layer[1]/elevation-ft</from>
-      <to>/environment/clouds/layer[1]/elevation-ft</to>
-    </params>
-  </filter>
-  <filter include="clouds-altitude-set.xml">
-    <params>
-      <from>/environment/metar/clouds/layer[2]/elevation-ft</from>
-      <to>/environment/clouds/layer[2]/elevation-ft</to>
-    </params>
-  </filter>
-  <filter include="clouds-altitude-set.xml">
-    <params>
-      <from>/environment/metar/clouds/layer[3]/elevation-ft</from>
-      <to>/environment/clouds/layer[3]/elevation-ft</to>
-    </params>
-  </filter>
-  <filter include="clouds-altitude-set.xml">
-    <params>
-      <from>/environment/metar/clouds/layer[4]/elevation-ft</from>
-      <to>/environment/clouds/layer[4]/elevation-ft</to>
-    </params>
-  </filter>
-
   <filter include="clouds-altitude-interpolate.xml"/>
   <filter include="clouds-altitude-interpolate.xml">
     <params>
@@ -378,4 +347,18 @@
       <to>environment/clouds/layer[4]/coverage-type</to>
     </params>
   </filter>
+  <filter>
+    <name>MetarController:cloud-visibility-m</name>
+    <type>exponential</type>
+    <filter-time>5</filter-time>
+    <enable>
+      <condition>
+        <property>/environment/metar/valid</property>
+        <property>/environment/params/metar-updates-environment</property>
+      </condition>
+    </enable>
+    <input>/environment/metar/clouds/layer[0]/visibility-m</input>
+    <output>/environment/clouds/layer[0]/visibility-m</output>
+  </filter>
+
 </PropertyList> 

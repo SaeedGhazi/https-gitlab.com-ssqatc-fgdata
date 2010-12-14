@@ -28,7 +28,7 @@ Started September 2000 by David Megginson, david@megginson.com
     <read type="string"/>
     <write type="string"/>
    </validate>
-   <use-custom-scenery-data type="bool">false</use-custom-scenery-data>
+   <use-custom-scenery-data type="bool">true</use-custom-scenery-data>
   </paths>
 
   <intl include="Translations/locale.xml"/>

@@ -21,6 +21,7 @@
     <predicate>
       <and>
         <property>/sim/rendering/shader-effects</property>
+		<property>/sim/rendering/random-vegetation</property>
         <less-equal>
           <value type="float">1.0</value>
           <shader-language/>

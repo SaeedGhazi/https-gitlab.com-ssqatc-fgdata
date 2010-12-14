@@ -146,6 +146,8 @@
           <command>dialog-apply</command>
         </binding>
       </checkbox>
+	  
+	  -->
 
       <checkbox>
         <halign>left</halign>
@@ -155,8 +157,6 @@
           <command>dialog-apply</command>
         </binding>
       </checkbox>
-	  
-	  -->
 	  
 	  <group>
         <layout>hbox</layout>

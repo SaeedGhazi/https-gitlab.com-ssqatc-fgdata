@@ -55,6 +55,9 @@
           <layout>hbox</layout>
           <text>
             <label>Cloud Layers (All Altitudes ft-AMSL)</label>
+		    <enable> 
+              <property>/sim/gui/dialogs/weather-scenario/state</property>
+            </enable>
           </text>
           <hrule>
             <stretch>true</stretch>
@@ -70,6 +73,9 @@
               <label>Altitude (ft)</label>
               <row>0</row>
               <col>1</col>
+		      <enable> 
+                <property>/sim/gui/dialogs/weather-scenario/state</property>
+              </enable>
             </text>
 
             <text>
@@ -77,12 +83,18 @@
               <row>0</row>
               <col>2</col>
               <width>80</width>
+		      <enable> 
+                <property>/sim/gui/dialogs/weather-scenario/state</property>
+              </enable>
             </text>
 
             <text>
               <label>Thickness (ft)</label>
               <row>0</row>
               <col>3</col>
+		      <enable> 
+                <property>/sim/gui/dialogs/weather-scenario/state</property>
+              </enable>
             </text>
 
 
@@ -393,6 +405,9 @@
           <layout>hbox</layout>
           <text>
             <label>Precipitation</label>
+		    <enable> 
+              <property>/sim/gui/dialogs/weather-scenario/state</property>
+            </enable>
           </text>
           <hrule>
             <stretch>true</stretch>
@@ -408,12 +423,18 @@
               <row>0</row>
               <col>0</col>
               <label>Rain</label>
+		      <enable> 
+                <property>/sim/gui/dialogs/weather-scenario/state</property>
+              </enable>
             </text>
 
             <text>
               <row>0</row>
               <col>1</col>
               <label>Snow</label>
+		      <enable> 
+                <property>/sim/gui/dialogs/weather-scenario/state</property>
+              </enable>
             </text>
 
             <slider>
@@ -456,6 +477,9 @@
               <row>0</row>
               <col>3</col>
               <label>QNH (inHg)</label>
+		      <enable> 
+                <property>/sim/gui/dialogs/weather-scenario/state</property>
+              </enable>
             </text>
 
             <input>
@@ -1116,6 +1140,9 @@
           <layout>hbox</layout>
           <text>
             <label>Boundary (All Elevations ft-AGL)</label>
+		    <enable> 
+              <property>/sim/gui/dialogs/weather-scenario/state</property>
+            </enable>
           </text>
           <hrule>
             <stretch>true</stretch>
@@ -1132,6 +1159,9 @@
               <row>0</row>
               <col>0</col>
               <label>Elevation</label>
+		      <enable> 
+                <property>/sim/gui/dialogs/weather-scenario/state</property>
+              </enable>
             </text>
 
             <text>
@@ -1139,24 +1169,36 @@
               <col>1</col>
               <colspan>2</colspan>
               <label>Wind (dir/kt)</label>
+		      <enable> 
+                <property>/sim/gui/dialogs/weather-scenario/state</property>
+              </enable>
             </text>
 
             <text>
               <row>0</row>
               <col>3</col>
               <label>Vis (m)</label>
+		      <enable> 
+                <property>/sim/gui/dialogs/weather-scenario/state</property>
+              </enable>
             </text>
 
             <text>
               <row>0</row>
               <col>4</col>
               <label>Temp (C)</label>
+		      <enable> 
+                <property>/sim/gui/dialogs/weather-scenario/state</property>
+              </enable>
             </text>
 
             <text>
               <row>0</row>
               <col>5</col>
               <label>Dewpt (C)</label>
+		      <enable> 
+                <property>/sim/gui/dialogs/weather-scenario/state</property>
+              </enable>
             </text>
 
             <input>

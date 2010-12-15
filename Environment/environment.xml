@@ -76,26 +76,6 @@
   <weather-scenario>Fair weather</weather-scenario>
   <config>
 
-   <!-- definitions for the metar generated fog/mist/haze layer -->
-   <fog-mist-haze-layer>
-     <offset-from-station-elevation-ft>-200</offset-from-station-elevation-ft>
-     <visibility-above-layer-m>20000</visibility-above-layer-m>
-
-     <fog-thickness-ft>500</fog-thickness-ft>
-     <fog-2dlayer-alpha>0.6</fog-2dlayer-alpha>
-     <fog-2dlayer-coverage>broken</fog-2dlayer-coverage>
-     <fog-bc-2dlayer-coverage>scattered</fog-bc-2dlayer-coverage>
-     <fog-shallow-thickness-ft>30</fog-shallow-thickness-ft>
-
-     <mist-thickness-ft>2000</mist-thickness-ft>
-     <mist-2dlayer-alpha>0.8</mist-2dlayer-alpha>
-     <mist-2dlayer-coverage>overcast</mist-2dlayer-coverage>
-
-     <haze-thickness-ft>2000</haze-thickness-ft>
-     <haze-2dlayer-alpha>0.6</haze-2dlayer-alpha>
-     <haze-2dlayer-coverage>overcast</haze-2dlayer-coverage>
-   </fog-mist-haze-layer>
-
    <boundary-transition-ft>500</boundary-transition-ft>
 
    <boundary>
@@ -235,11 +215,31 @@
   </realwx>
 
   <params>
-   <metar-max-age-min type="long">240</metar-max-age-min> <!-- deprecated -->
+   <metar-max-age-min type="long">240</metar-max-age-min>
    <metar-updates-environment type="bool">true</metar-updates-environment>
    <metar-updates-winds-aloft type="bool">true</metar-updates-winds-aloft>
    <control-fdm-atmosphere type="bool">true</control-fdm-atmosphere>
    <contrail-altitude>30000</contrail-altitude>
+   <!-- definitions for the metar generated fog/mist/haze layer -->
+   <fog-mist-haze-layer>
+    <offset-from-station-elevation-ft>-200</offset-from-station-elevation-ft>
+    <visibility-above-layer-m>20000</visibility-above-layer-m>
+
+    <fog-thickness-ft>500</fog-thickness-ft>
+    <fog-2dlayer-alpha>1.0</fog-2dlayer-alpha>
+    <fog-2dlayer-coverage>overcast</fog-2dlayer-coverage>
+    <fog-bc-2dlayer-coverage>broken</fog-bc-2dlayer-coverage>
+    <fog-shallow-thickness-ft>30</fog-shallow-thickness-ft>
+
+    <mist-thickness-ft>2000</mist-thickness-ft>
+    <mist-2dlayer-alpha>0.8</mist-2dlayer-alpha>
+    <mist-2dlayer-coverage>overcast</mist-2dlayer-coverage>
+
+    <haze-thickness-ft>2000</haze-thickness-ft>
+    <haze-2dlayer-alpha>0.6</haze-2dlayer-alpha>
+    <haze-2dlayer-coverage>overcast</haze-2dlayer-coverage>
+   </fog-mist-haze-layer>
+
   </params>
 
   <wildfire>

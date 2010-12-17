@@ -42,20 +42,45 @@
       if (!initialized) {
         set_radio("runway");
       }
+	  
+	  var runways = dlg.getNode("available-runways", 1);
+	  var updateRunways = func {         
+        var icao = dlg.getNode("airport").getValue();
+		runways.removeChildren("value");
+        
+        var apt = airportinfo(icao);
+        if (apt != nil) {
+          var i=0;
+          foreach (var rwy; keys(apt.runways)) {
+            runways.getNode("value[" ~ i ~ "]", 1).setValue(rwy);
+            i += 1;
+          }
+        }
+		gui.dialog_update("location-on-ground");
+      }
     </open>
   </nasal>
 
   <group>
     <layout>table</layout>
     <halign>center</halign>
+	
     <text>
       <row>0</row><col>1</col>
       <halign>right</halign>
       <label>Airport:</label>
     </text>
+	
     <input>
       <row>0</row><col>2</col>
       <property>/sim/gui/dialogs/location-on-ground/airport</property>
+	  <binding>
+        <command>dialog-apply</command>
+      </binding>
+	  <binding>
+        <command>nasal</command>
+        <script>updateRunways();</script>
+      </binding>
     </input>
 
     <radio>
@@ -67,15 +92,29 @@
         <script>set_radio("runway")</script>
       </binding>
     </radio>
+	
     <text>
       <row>1</row><col>1</col>
       <halign>right</halign>
       <label>Runway:</label>
     </text>
-    <input>
-      <row>1</row><col>2</col>
-      <property>/sim/gui/dialogs/location-on-ground/runway</property>
-    </input>
+	
+	<combo>
+      <name>runway</name>
+	  <row>1</row><col>2</col>
+      <pref-width>85</pref-width>
+	  <enable>
+        <property>/sim/gui/dialogs/location-on-ground/use_runway</property>
+      </enable>
+      <property>sim/gui/dialogs/location-on-ground/runway</property>
+      <editable>false</editable>
+      <properties>sim/gui/dialogs/location-on-ground/available-runways</properties>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>runway</object-name>
+      </binding>
+    </combo>
+	
     <radio>
       <row>2</row><col>0</col>
       <property>/sim/gui/dialogs/location-on-ground/use_parkpos</property>
@@ -85,13 +124,18 @@
         <script>set_radio("parkpos")</script>
       </binding>
     </radio>
+	
     <text>
       <row>2</row><col>1</col>
       <halign>right</halign>
       <label>Parking:</label>
     </text>
+	
     <input>
       <row>2</row><col>2</col>
+	  <enable>
+        <property>/sim/gui/dialogs/location-on-ground/use_parkpos</property>
+      </enable>
       <property>/sim/gui/dialogs/location-on-ground/parkpos</property>
     </input>
   </group>

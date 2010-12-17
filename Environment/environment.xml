@@ -72,29 +72,17 @@
       <description>This is expert level. You will barely see the taxiway from the cockpit, even if you are
                    on ground. Fog and light drizzle, freezing level at 1000ft.</description>
     </scenario>
+
+    <scenario>
+      <name>Early morning fog</name>
+      <metar>XXXX 012345Z 00000KT 0800 FG NCD 08/08 A3030</metar>
+      <description>Fog developed this autumn's morning. Expect good visibility above the layer. 
+                   However - getting through it can be a challenge. Stay alive for a 500' climb
+                   and you'll see the sun!</description>
+    </scenario>
   </weather-scenarios>
   <weather-scenario>Fair weather</weather-scenario>
   <config>
-
-   <!-- definitions for the metar generated fog/mist/haze layer -->
-   <fog-mist-haze-layer>
-     <offset-from-station-elevation-ft>-200</offset-from-station-elevation-ft>
-     <visibility-above-layer-m>20000</visibility-above-layer-m>
-
-     <fog-thickness-ft>500</fog-thickness-ft>
-     <fog-2dlayer-alpha>0.6</fog-2dlayer-alpha>
-     <fog-2dlayer-coverage>broken</fog-2dlayer-coverage>
-     <fog-bc-2dlayer-coverage>scattered</fog-bc-2dlayer-coverage>
-     <fog-shallow-thickness-ft>30</fog-shallow-thickness-ft>
-
-     <mist-thickness-ft>2000</mist-thickness-ft>
-     <mist-2dlayer-alpha>0.8</mist-2dlayer-alpha>
-     <mist-2dlayer-coverage>overcast</mist-2dlayer-coverage>
-
-     <haze-thickness-ft>2000</haze-thickness-ft>
-     <haze-2dlayer-alpha>0.6</haze-2dlayer-alpha>
-     <haze-2dlayer-coverage>overcast</haze-2dlayer-coverage>
-   </fog-mist-haze-layer>
 
    <boundary-transition-ft>500</boundary-transition-ft>
 
@@ -226,7 +214,7 @@
 
   <realwx>
     <metar>/environment/metar</metar>
-    <!-- user NOAA for METAR (no aloft data) -->
+    <!-- use NOAA for METAR (no aloft data) -->
     <data-source>noaa</data-source>
 
     <!-- use http://www.navlost.eu/ for METAR and aloft data -->
@@ -234,12 +222,37 @@
     <enabled>true</enabled>
   </realwx>
 
+  <metar>
+   <!-- create a low-level cloud layer for fog/mist/haze from metar -->
+   <set-ground-cloud-layer type="bool">true</set-ground-cloud-layer>
+  </metar>
+
   <params>
-   <metar-max-age-min type="long">240</metar-max-age-min> <!-- deprecated -->
+   <metar-max-age-min type="long">240</metar-max-age-min>
    <metar-updates-environment type="bool">true</metar-updates-environment>
    <metar-updates-winds-aloft type="bool">true</metar-updates-winds-aloft>
    <control-fdm-atmosphere type="bool">true</control-fdm-atmosphere>
    <contrail-altitude>30000</contrail-altitude>
+   <!-- definitions for the metar generated fog/mist/haze layer -->
+   <fog-mist-haze-layer>
+    <offset-from-station-elevation-ft>-200</offset-from-station-elevation-ft>
+    <visibility-above-layer-m>20000</visibility-above-layer-m>
+
+    <fog-thickness-ft>500</fog-thickness-ft>
+    <fog-2dlayer-alpha>1.0</fog-2dlayer-alpha>
+    <fog-2dlayer-coverage>overcast</fog-2dlayer-coverage>
+    <fog-bc-2dlayer-coverage>broken</fog-bc-2dlayer-coverage>
+    <fog-shallow-thickness-ft>30</fog-shallow-thickness-ft>
+
+    <mist-thickness-ft>2000</mist-thickness-ft>
+    <mist-2dlayer-alpha>0.8</mist-2dlayer-alpha>
+    <mist-2dlayer-coverage>overcast</mist-2dlayer-coverage>
+
+    <haze-thickness-ft>2000</haze-thickness-ft>
+    <haze-2dlayer-alpha>0.6</haze-2dlayer-alpha>
+    <haze-2dlayer-coverage>overcast</haze-2dlayer-coverage>
+   </fog-mist-haze-layer>
+
   </params>
 
   <wildfire>

@@ -152,7 +152,7 @@
 
   <button n="4">
     <desc>Flaps Up</desc>
-    <repeatable>true</repeatable>
+    <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
       <script>controls.flapsDown(-1)</script>
@@ -167,7 +167,7 @@
 
   <button n="6">
     <desc>Flaps Down</desc>
-    <repeatable>true</repeatable>
+    <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
       <script>controls.flapsDown(1)</script>

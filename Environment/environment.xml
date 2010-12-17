@@ -72,6 +72,14 @@
       <description>This is expert level. You will barely see the taxiway from the cockpit, even if you are
                    on ground. Fog and light drizzle, freezing level at 1000ft.</description>
     </scenario>
+
+    <scenario>
+      <name>Early morning fog</name>
+      <metar>XXXX 012345Z 00000KT 0800 FG NCD 08/08 A3030</metar>
+      <description>Fog developed this autumn's morning. Expect good visibility above the layer. 
+                   However - getting through it can be a challenge. Stay alive for a 500' climb
+                   and you'll see the sun!</description>
+    </scenario>
   </weather-scenarios>
   <weather-scenario>Fair weather</weather-scenario>
   <config>
@@ -206,13 +214,18 @@
 
   <realwx>
     <metar>/environment/metar</metar>
-    <!-- user NOAA for METAR (no aloft data) -->
+    <!-- use NOAA for METAR (no aloft data) -->
     <data-source>noaa</data-source>
 
     <!-- use http://www.navlost.eu/ for METAR and aloft data -->
     <!-- data-source>nwx<data-source -->
     <enabled>true</enabled>
   </realwx>
+
+  <metar>
+   <!-- create a low-level cloud layer for fog/mist/haze from metar -->
+   <set-ground-cloud-layer type="bool">true</set-ground-cloud-layer>
+  </metar>
 
   <params>
    <metar-max-age-min type="long">240</metar-max-age-min>

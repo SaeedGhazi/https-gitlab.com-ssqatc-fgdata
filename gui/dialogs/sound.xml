@@ -101,6 +101,9 @@
       <col>0</col>
       <label>Effects</label>
       <halign>left</halign>
+	  <enable>
+        <property>/sim/sound/enabled</property>
+      </enable>
     </text>
 
     <checkbox>
@@ -110,6 +113,9 @@
       <binding>
         <command>dialog-apply</command>
       </binding>
+	  <enable>
+        <property>/sim/sound/enabled</property>
+      </enable>
     </checkbox>
 
     <slider>
@@ -119,6 +125,9 @@
       <binding>
         <command>dialog-apply</command>
       </binding>
+	  <enable>
+        <property>/sim/sound/enabled</property>
+      </enable>
     </slider>
 
     <text>
@@ -126,6 +135,9 @@
       <col>0</col>
       <label>Chatter</label>
       <halign>left</halign>
+	  <enable>
+        <property>/sim/sound/enabled</property>
+      </enable>
     </text>
     
     <checkbox>
@@ -135,6 +147,9 @@
       <binding>
         <command>dialog-apply</command>
       </binding>
+	  <enable>
+        <property>/sim/sound/enabled</property>
+      </enable>
     </checkbox>
 
     <slider>
@@ -144,6 +159,9 @@
       <binding>
         <command>dialog-apply</command>
       </binding>
+	  <enable>
+        <property>/sim/sound/enabled</property>
+      </enable>
     </slider>
 
     <text>
@@ -151,6 +169,9 @@
       <col>0</col>
       <label>Avionics</label>
       <halign>left</halign>
+	  <enable>
+        <property>/sim/sound/enabled</property>
+      </enable>
     </text>
     
     <checkbox>
@@ -160,6 +181,9 @@
       <binding>
         <command>dialog-apply</command>
       </binding>
+	  <enable>
+        <property>/sim/sound/enabled</property>
+      </enable>
     </checkbox>
 
     <slider>
@@ -169,6 +193,9 @@
       <binding>
         <command>dialog-apply</command>
       </binding>
+	  <enable>
+        <property>/sim/sound/enabled</property>
+      </enable>
     </slider>
 
     <checkbox>
@@ -178,6 +205,9 @@
       <binding>
         <command>dialog-apply</command>
       </binding>
+	  <enable>
+        <property>/sim/sound/enabled</property>
+      </enable>
     </checkbox>
 
     <text>
@@ -185,6 +215,9 @@
       <col>0</col>
       <label>ATC</label>
       <halign>left</halign>
+	  <enable>
+        <property>/sim/sound/enabled</property>
+      </enable>
     </text>
     
     <checkbox>
@@ -194,6 +227,9 @@
       <binding>
         <command>dialog-apply</command>
       </binding>
+	  <enable>
+        <property>/sim/sound/enabled</property>
+      </enable>
     </checkbox>
 
     <slider>
@@ -203,6 +239,9 @@
       <binding>
         <command>dialog-apply</command>
       </binding>
+	  <enable>
+        <property>/sim/sound/enabled</property>
+      </enable>
     </slider>
 
     <checkbox>
@@ -212,6 +251,9 @@
       <binding>
         <command>dialog-apply</command>
       </binding>
+	  <enable>
+        <property>/sim/sound/enabled</property>
+      </enable>
     </checkbox>
   </group>
 

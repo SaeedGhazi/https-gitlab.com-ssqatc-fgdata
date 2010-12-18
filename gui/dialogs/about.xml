@@ -92,23 +92,6 @@
       <format>Revision: %s</format>
       <property>/sim/version/revision</property>
     </text>
-  <hrule/>
-  
-  <group>
-    <layout>hbox</layout>
-      <halign>center</halign>
-
-    <button>
-      <legend>OK</legend>
-      <equal>true</equal>
-      <key>Esc</key>
-      <binding>
-        <command>dialog-close</command>
-      </binding>
-    </button>
-
-    <empty><stretch>true</stretch></empty>
-  </group>
 
   <nasal>
     <open><![CDATA[

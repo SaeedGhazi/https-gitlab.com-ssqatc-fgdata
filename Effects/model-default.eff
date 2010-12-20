@@ -6,6 +6,9 @@
       <type>white</type>
     </texture>
     <vertex-program-two-side type="bool">false</vertex-program-two-side>
+    <material>
+      <color-mode-uniform>1</color-mode-uniform> <!-- DIFFUSE -->
+    </material>
   </parameters>
   <technique n="10">
     <predicate>
@@ -76,7 +79,7 @@
       <uniform>
         <name>colorMode</name>
         <type>int</type>
-        <value>1</value> <!-- DIFFUSE -->
+        <value><use>material/color-mode-uniform</use></value>
       </uniform>
     </pass>
   </technique>

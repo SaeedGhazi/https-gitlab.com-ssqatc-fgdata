@@ -112,6 +112,40 @@
     <output>/environment/config/aloft/entry[0]/visibility-m</output>
   </filter>
 
+  <filter>
+    <!-- 
+      transfer the rain intensity to the target environment
+    -->
+    <name>MetarController:rain-norm</name>
+    <type>noise-spike</type>
+    <max-rate-of-change>1.0</max-rate-of-change>
+    <enable>
+      <condition>
+        <property>/environment/metar/valid</property>
+        <property>/environment/params/metar-updates-environment</property>
+      </condition>
+    </enable>
+    <input>/environment/metar/rain-norm</input>
+    <output>/environment/rain-norm</output>
+  </filter>
+
+  <filter>
+    <!-- 
+      transfer the snow intensity to the target environment
+    -->
+    <name>MetarController:snow-norm</name>
+    <type>noise-spike</type>
+    <max-rate-of-change>1.0</max-rate-of-change>
+    <enable>
+      <condition>
+        <property>/environment/metar/valid</property>
+        <property>/environment/params/metar-updates-environment</property>
+      </condition>
+    </enable>
+    <input>/environment/metar/snow-norm</input>
+    <output>/environment/snow-norm</output>
+  </filter>
+
   <!-- interpolate the wind vector's components -->
   <filter>
     <name>MetarController:wind-from-north-fps</name>

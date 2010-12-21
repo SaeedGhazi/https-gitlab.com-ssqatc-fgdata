@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
   <name>Effects/material-diffuse</name>
+  <parameters>
+    <material>
+      <color-mode-uniform>1</color-mode-uniform> <!-- DIFFUSE -->
+    </material>
+  </parameters>
   <inherits-from>Effects/model-default</inherits-from>
-  <technique n="10">
-    <pass>
-      <program>
-        <vertex-shader>Shaders/default.vert</vertex-shader>
-        <fragment-shader>Shaders/default.frag</fragment-shader>
-      </program>
-      <uniform>
-        <name>colorMode</name>
-        <type>int</type>
-        <value>1</value> <!-- DIFFUSE -->
-      </uniform>
-    </pass>
-  </technique>
 </PropertyList>

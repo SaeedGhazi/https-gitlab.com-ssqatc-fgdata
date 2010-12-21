@@ -442,7 +442,7 @@
               <col>0</col>
               <live>true</live>
               <halign>fill</halign>
-              <property>/environment/metar/rain-norm</property>
+              <property>/environment/rain-norm</property>
               <binding>
                 <command>dialog-apply</command>
               </binding>
@@ -459,7 +459,7 @@
               <row>1</row>
               <col>1</col>
               <halign>fill</halign>
-              <property>/environment/metar/snow-norm</property>
+              <property>/environment/snow-norm</property>
               <live>true</live>
               <pref-height>30</pref-height>
               <binding>

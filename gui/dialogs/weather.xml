@@ -1601,7 +1601,7 @@
               combo.getChild("value", i, 1).setValue(scenarios[i].getNode("name").getValue());
           }
 
-          me.scenarioListenerId = setlistener( me.base ~ "/source-selection", func(n) { me.scenarioListener(n); } );
+          me.scenarioListenerId = setlistener( me.base ~ "/source-selection", func(n) { me.scenarioListener(n); }, 1, 1 );
           me.metarListenerId = setlistener( "environment/metar/valid", func(n) { me.metarListener(n); }, 1, 1 );
         },
 

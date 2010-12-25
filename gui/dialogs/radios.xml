@@ -4,7 +4,7 @@
 
  <name>radios</name>
  <width>600</width>
- <height>330</height>
+ <height>370</height>
  <modal>false</modal>
 
  <text>
@@ -382,40 +382,6 @@
  </group>
 
  <group>
-  <x>350</x>
-  <y>90</y>
-
-  <text>
-   <label>Transponder</label>
-  </text>
-
-  <input>
-   <name>transponder</name>
-   <x>100</x>
-   <y>0</y>
-   <width>75</width>
-   <height>25</height>
-   <property>/instrumentation/transponder/id-code</property>
-  </input>
-
-  <button>
-    <x>175</x>
-    <y>0</y>
-    <legend>Standby</legend>
-    <border>1</border>
-    <binding>
-      <command>property-assign</command>
-      <property>/instrumentation/transponder/id-code</property>
-      <value>0000</value>
-    </binding>
-    <binding>
-     <command>dialog-update</command>
-     <object-name>transponder</object-name>
-    </binding>
-  </button>
- </group>
-
- <group>
   <x>0</x>
   <y>60</y>
 
@@ -539,5 +505,15 @@
   </button>
 
  </group>
+	<group>
+		<x>400</x>
+		<y>60</y>
+			<button>
+			<legend>ATC Services in range</legend>
+				<binding>
+					<command>ATC-freq-search</command>
+				</binding> 
+			</button>
+	</group>
 
 </PropertyList>

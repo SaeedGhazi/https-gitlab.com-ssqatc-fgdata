@@ -550,18 +550,6 @@
 
 	</menu>
 
-<menu>
- <label>SquawkGear</label>
- <item>
-   <label>Direct Comms</label>
-   <binding>
-     <command>dialog-show</command>
-     <dialog-name>sq_comm</dialog-name>
-   </binding>
- </item>
-</menu>
-
-
 	<menu>
 		<label>Debug</label>
 

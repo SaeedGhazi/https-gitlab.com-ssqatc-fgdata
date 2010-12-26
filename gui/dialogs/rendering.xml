@@ -377,13 +377,14 @@
         <layout>hbox</layout>
         <halign>right</halign>
         <text>
-		  <label>Snow Level</label>
-		  <enable>
+          <label>Snow Level</label>
+          <enable>
             <property>/sim/rendering/shader-effects</property>
           </enable>
-		</text>
+        </text>
         <slider>
-		  <enable>
+          <name>snow-level</name>
+          <enable>
             <property>/sim/rendering/shader-effects</property>
           </enable>
           <min>0.0</min>
@@ -391,10 +392,11 @@
           <property>/sim/rendering/snow-level-m</property>
           <binding>
             <command>dialog-apply</command>
+            <object-name>snow-level</object-name>
           </binding>
         </slider>
         <text>
-		  <enable>
+          <enable>
             <property>/sim/rendering/shader-effects</property>
           </enable>
           <label>12345678</label>

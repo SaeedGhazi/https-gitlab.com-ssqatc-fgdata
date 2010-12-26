@@ -19,7 +19,7 @@
 				<script>gui.save_flight()</script>
 			</binding>
 		</item>
-		
+
 		<item>
             <label>Scenario</label>
 			<binding>
@@ -44,7 +44,7 @@
                     setprop(d, f &lt; 0 ? 0 : f > 2 ? 0 : f);
                 </script>
             </binding>
-        </item>  
+        </item>
 			<label>High-Res Snapshot</label>
 			<enabled>false</enabled>
 			<binding>
@@ -207,7 +207,7 @@
 		<label>Location</label>
 
 		<item>
-			<label>Position Aircraft (on ground)</label>
+			<label>Position Aircraft On Ground</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>location-on-ground</dialog-name>
@@ -215,7 +215,7 @@
 		</item>
 
 		<item>
-			<label>Position Aircraft (in air)</label>
+			<label>Position Aircraft In Air</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>location-in-air</dialog-name>
@@ -223,7 +223,7 @@
 		</item>
 
 		<item>
-			<label>Select Airport from List</label>
+			<label>Select Airport From List</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>airports</dialog-name>
@@ -231,7 +231,7 @@
 		</item>
 
 		<item>
-			<label>Random Attitude</label>H
+			<label>Random Attitude</label>
 			<binding>
 				<command>property-assign</command>
 				<property>/sim/presets/trim</property>
@@ -258,7 +258,7 @@
 		</item>
 
 		<item>
-			<label>Tower position</label>
+			<label>Tower Position</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>location-of-tower</dialog-name>
@@ -393,7 +393,7 @@
 		</item>
 
 		<item>
-			<label>Fuel and Payload</label>
+			<label>Fuel And Payload</label>
 			<name>fuel-and-payload</name>
 			<binding>
 				<command>nasal</command>
@@ -459,13 +459,13 @@
 	<menu>
 		<label>AI</label>
 		<item>
-			<label>AI Options</label>
+			<label>Traffic Options</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>ai</dialog-name>
 			</binding>
 		</item>
-		<!--  Not working at present        
+		<!--  Not working at present
 		<item>
 			<label>ATC Services in range</label>
 			<binding>
@@ -475,7 +475,7 @@
 
 		-->
 		<item>
-			<label>AI Formation</label>
+			<label>Wingman Controls</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>formation</dialog-name>
@@ -483,7 +483,7 @@
 		</item>
 
 		<item>
-			<label>AI Tanker</label>
+			<label>Tanker Controls</label>
 			<name>tanker</name>
 			<enabled>false</enabled>
 			<binding>
@@ -493,7 +493,7 @@
 		</item>
 
 		<item>
-			<label>AI Carrier Options</label>
+			<label>Carrier Controls</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>AIcarrier</dialog-name>
@@ -501,7 +501,7 @@
 		</item>
 
 		<item>
-			<label>AI Scenario Select - takes effect on next run </label>
+			<label>Scenario Select (requires restart)</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>scenario</dialog-name>
@@ -525,7 +525,7 @@
 		</item>
 
 		<item>
-			<label>Chat Menu</label>
+			<label>Chat Menu         (-)</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>chat-menu</dialog-name>
@@ -541,7 +541,7 @@
 		</item>
 
 		<item>
-			<label>MPCarrier selection</label>
+			<label>MPCarrier Selection</label>
 			<binding>
 				<command>nasal</command>
 				<script>
@@ -696,9 +696,17 @@
 
 
 		<item>
-			<label>Help (opens in browser)</label>
+			<label>Help  (opens in browser)</label>
 			<binding>
 				<command>old-help-dialog</command>
+			</binding>
+		</item>
+
+		<item>
+			<label>Aircraft Help              (?)</label>
+			<binding>
+				<command>nasal</command>
+				<script>gui.showHelpDialog("/sim/help")</script>
 			</binding>
 		</item>
 
@@ -712,10 +720,6 @@
 		</item>
 
 		<item>
-			<label> --- Key Reference ---</label>
-		</item>
-
-		<item>
 			<label>Basic Simulator Keys</label>
 			<binding>
 				<command>nasal</command>
@@ -724,23 +728,7 @@
 		</item>
 
 		<item>
-			<label>Common Aircraft Keys</label>
-			<binding>
-				<command>nasal</command>
-				<script>gui.showHelpDialog("/sim/help/common")</script>
-			</binding>
-		</item>
-
-		<item>
-			<label> Current Aircraft Keys           (?)</label>
-			<binding>
-				<command>nasal</command>
-				<script>gui.showHelpDialog("/sim/help")</script>
-			</binding>
-		</item>
-
-		<item>
-			<label> ---------------------</label>
+			<label>------------------</label>
 		</item>
 
 		<item>

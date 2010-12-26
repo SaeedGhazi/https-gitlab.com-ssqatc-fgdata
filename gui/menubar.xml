@@ -727,6 +727,14 @@
 			</binding>
 		</item>
 
+    <item>
+      <label>Common Aircraft Keys</label>
+      <binding>
+        <command>nasal</command>
+        <script>gui.showHelpDialog("/sim/help/common")</script>
+      </binding>
+    </item>
+
 		<item>
 			<label>------------------</label>
 		</item>

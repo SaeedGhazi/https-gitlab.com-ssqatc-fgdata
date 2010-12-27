@@ -9,24 +9,42 @@
 		var dlg = props.globals.getNode("/sim/gui/dialogs/gps", 1);
 		var cmd = gps.getNode("command", 1);
 		var scratch = gps.getNode("scratch");
-		
+
 		scratch.getNode("exact", 1).setBoolValue(0);
 		var searchType = scratch.getNode("type", 1);
 		var searchQuery = scratch.getNode("query", 1);
-		
+
 		var copySearchArgs = func {
 			searchType.setValue(dlg.getNode("search-type").getValue());
 			searchQuery.setValue(dlg.getNode("search-query").getValue());
 		}
-		
+
 		var slaved = props.globals.getNode("/instrumentation/nav[0]/slaved-to-gps", 1);
 	</open>
     </nasal>
     <name>gps</name>
     <layout>vbox</layout>
-    <text>
+    <group>
+      <layout>hbox</layout>
+      <empty><stretch>1</stretch></empty>
+
+      <text>
         <label>GPS</label>
-    </text>
+      </text>
+
+      <empty><stretch>1</stretch></empty>
+
+      <button>
+        <pref-width>16</pref-width>
+        <pref-height>16</pref-height>
+        <legend></legend>
+        <keynum>27</keynum>
+        <border>2</border>
+        <binding>
+          <command>dialog-close</command>
+        </binding>
+      </button>
+    </group>
     <hrule/>
     <!-- show current state -->
     <group>
@@ -262,7 +280,7 @@
         </text>
     </group>
     <hrule/>
-    <!--  ident text field, type combo, next/prev paging buttons 
+    <!--  ident text field, type combo, next/prev paging buttons
 		nearest and search buttons
 	-->
     <group>
@@ -341,7 +359,7 @@
                         <script>
 				copySearchArgs();
 				scratch.getNode("max-results", 1).setIntValue(10);
-				
+
 				# ensure scratch pos is invalid, so we use current GPS
 				# position as the search origin
 				scratch.getNode("longitude-deg", 1).setDoubleValue(-9999);

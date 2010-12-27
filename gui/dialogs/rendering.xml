@@ -47,9 +47,26 @@
       </text>
 
 	  <group>
-	    <layout>vbox</layout>
-		<stretch>1</stretch>
+        <layout>hbox</layout>
+	    <text>
+          <label>General</label>
+          <halign>left</halign>
+        </text>
+	    <hrule>
+          <stretch>true</stretch>
+        </hrule>
 	  </group>
+	  
+	  <checkbox>
+        <halign>left</halign>
+        <label>Wireframe</label>
+		<name>wireframe</name>
+        <property>/sim/rendering/wireframe</property>
+        <binding>
+          <command>dialog-apply</command>
+		  <object-name>wireframe</object-name>
+        </binding>
+      </checkbox>
 
 	  <!--
 

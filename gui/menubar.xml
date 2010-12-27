@@ -207,7 +207,7 @@
 		<label>Location</label>
 
 		<item>
-			<label>Position Aircraft (on ground)</label>
+			<label>Position Aircraft On Ground</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>location-on-ground</dialog-name>
@@ -215,7 +215,7 @@
 		</item>
 
 		<item>
-			<label>Position Aircraft (in air)</label>
+			<label>Position Aircraft In Air</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>location-in-air</dialog-name>
@@ -223,7 +223,7 @@
 		</item>
 
 		<item>
-			<label>Select Airport from List</label>
+			<label>Select Airport From List</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>airports</dialog-name>
@@ -231,7 +231,7 @@
 		</item>
 
 		<item>
-			<label>Random Attitude</label>H
+			<label>Random Attitude</label>
 			<binding>
 				<command>property-assign</command>
 				<property>/sim/presets/trim</property>
@@ -258,7 +258,7 @@
 		</item>
 
 		<item>
-			<label>Tower position</label>
+			<label>Tower Position</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>location-of-tower</dialog-name>
@@ -393,7 +393,7 @@
 		</item>
 
 		<item>
-			<label>Fuel and Payload</label>
+			<label>Fuel And Payload</label>
 			<name>fuel-and-payload</name>
 			<binding>
 				<command>nasal</command>
@@ -501,7 +501,7 @@
 		</item>
 
 		<item>
-			<label>Scenario Select - takes effect on next run</label>
+			<label>Scenario Select (requires restart)</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>scenario</dialog-name>
@@ -525,7 +525,7 @@
 		</item>
 
 		<item>
-			<label>Chat Menu</label>
+			<label>Chat Menu         (-)</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>chat-menu</dialog-name>
@@ -541,7 +541,7 @@
 		</item>
 
 		<item>
-			<label>MPCarrier selection</label>
+			<label>MPCarrier Selection</label>
 			<binding>
 				<command>nasal</command>
 				<script>
@@ -696,7 +696,7 @@
 
 
 		<item>
-			<label>Help (opens in browser)</label>
+			<label>Help  (opens in browser)</label>
 			<binding>
 				<command>old-help-dialog</command>
 			</binding>
@@ -720,10 +720,6 @@
 		</item>
 
 		<item>
-			<label> --- Key Reference ---</label>
-		</item>
-
-		<item>
 			<label>Basic Simulator Keys</label>
 			<binding>
 				<command>nasal</command>
@@ -731,8 +727,16 @@
 			</binding>
 		</item>
 
+    <item>
+      <label>Common Aircraft Keys</label>
+      <binding>
+        <command>nasal</command>
+        <script>gui.showHelpDialog("/sim/help/common")</script>
+      </binding>
+    </item>
+
 		<item>
-			<label> ------------------</label>
+			<label>------------------</label>
 		</item>
 
 		<item>

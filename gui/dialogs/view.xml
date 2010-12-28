@@ -5,15 +5,37 @@
 	<modal>false</modal>
 	<layout>vbox</layout>
 
+  <group>
+    <layout>hbox</layout>
+	  <empty><stretch>1</stretch></empty>
+
+    <text>
+      <label>View Options</label>
+    </text>
+
+	  <empty><stretch>1</stretch></empty>
+
+    <button>
+      <pref-width>16</pref-width>
+      <pref-height>16</pref-height>
+      <legend></legend>
+      <keynum>27</keynum>
+      <border>2</border>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
+
+  <hrule/>
+
 	<text>
 		<label>Choose Active Views</label>
 	</text>
 
-	<hrule/>
-
-		<nasal>
+  <nasal>
 		<open>
-			var group = cmdarg().getNode("group");
+			var group = cmdarg().getChildren("group")[1];
 			var ac = getprop("/sim/aircraft");
 			group.removeChildren("checkbox");
 			group.removeChildren("hrule");
@@ -63,6 +85,8 @@
 			</binding>
 		</checkbox-template>
 	</group>
+
+	<hrule/>
 
 	<button>
 		<legend>Close</legend>

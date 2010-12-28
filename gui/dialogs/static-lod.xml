@@ -4,9 +4,27 @@
   <name>static-lod</name>
   <layout>vbox</layout>
 
-  <text>
-    <label>Static Scenery Level Of Detail</label>
-  </text>
+  <group>
+    <layout>hbox</layout>
+	  <empty><stretch>1</stretch></empty>
+
+    <text>
+      <label>Static Scenery Level Of Detail</label>
+    </text>
+
+	  <empty><stretch>1</stretch></empty>
+
+    <button>
+      <pref-width>16</pref-width>
+      <pref-height>16</pref-height>
+      <legend></legend>
+      <keynum>27</keynum>
+      <border>2</border>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
 
   <hrule/>
 
@@ -57,6 +75,8 @@
 
   </group>
 
+  <hrule/>
+
   <group>
     <layout>hbox</layout>
     <default-padding>10</default-padding>
@@ -66,10 +86,10 @@
       <default>true</default>
       <equal>true</equal>
       <binding>
-	<command>dialog-apply</command>
+        <command>dialog-apply</command>
       </binding>
       <binding>
-	<command>dialog-close</command>
+        <command>dialog-close</command>
       </binding>
     </button>
     <empty><stretch>true</stretch></empty>
@@ -77,7 +97,7 @@
       <legend>Apply</legend>
       <equal>true</equal>
       <binding>
-	<command>dialog-apply</command>
+        <command>dialog-apply</command>
       </binding>
     </button>
     <empty><stretch>true</stretch></empty>
@@ -85,7 +105,7 @@
       <legend>Reset</legend>
       <equal>true</equal>
       <binding>
-	<command>dialog-update</command>
+        <command>dialog-update</command>
       </binding>
     </button>
     <empty><stretch>true</stretch></empty>
@@ -93,7 +113,7 @@
       <legend>Cancel</legend>
       <key>Esc</key>
       <binding>
-	<command>dialog-close</command>
+        <command>dialog-close</command>
       </binding>
     </button>
   </group>

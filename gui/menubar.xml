@@ -458,13 +458,6 @@
 
 	<menu>
 		<label>AI</label>
-		<item>
-			<label>Traffic Options</label>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>ai</dialog-name>
-			</binding>
-		</item>
 		<!--  Not working at present
 		<item>
 			<label>ATC Services in range</label>
@@ -726,6 +719,14 @@
 				<script>gui.showHelpDialog("/sim/help/basic")</script>
 			</binding>
 		</item>
+
+    <item>
+      <label>Common Aircraft Keys</label>
+      <binding>
+        <command>nasal</command>
+        <script>gui.showHelpDialog("/sim/help/common")</script>
+      </binding>
+    </item>
 
 		<item>
 			<label>------------------</label>

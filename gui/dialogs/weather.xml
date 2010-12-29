@@ -37,6 +37,7 @@
       </binding>
     </button>
   </group>
+
   <hrule/>
 
   <group>
@@ -55,7 +56,7 @@
           <layout>hbox</layout>
           <text>
             <label>Cloud Layers (All Altitudes ft-AMSL)</label>
-		    <enable> 
+		    <enable>
               <property>/sim/gui/dialogs/weather-scenario/state</property>
             </enable>
           </text>
@@ -73,7 +74,7 @@
               <label>Altitude (ft)</label>
               <row>0</row>
               <col>1</col>
-		      <enable> 
+		      <enable>
                 <property>/sim/gui/dialogs/weather-scenario/state</property>
               </enable>
             </text>
@@ -83,7 +84,7 @@
               <row>0</row>
               <col>2</col>
               <width>80</width>
-		      <enable> 
+		      <enable>
                 <property>/sim/gui/dialogs/weather-scenario/state</property>
               </enable>
             </text>
@@ -92,7 +93,7 @@
               <label>Thickness (ft)</label>
               <row>0</row>
               <col>3</col>
-		      <enable> 
+		      <enable>
                 <property>/sim/gui/dialogs/weather-scenario/state</property>
               </enable>
             </text>
@@ -405,7 +406,7 @@
           <layout>hbox</layout>
           <text>
             <label>Precipitation</label>
-		    <enable> 
+		    <enable>
               <property>/sim/gui/dialogs/weather-scenario/state</property>
             </enable>
           </text>
@@ -423,7 +424,7 @@
               <row>0</row>
               <col>0</col>
               <label>Rain</label>
-		      <enable> 
+		      <enable>
                 <property>/sim/gui/dialogs/weather-scenario/state</property>
               </enable>
             </text>
@@ -432,7 +433,7 @@
               <row>0</row>
               <col>1</col>
               <label>Snow</label>
-		      <enable> 
+		      <enable>
                 <property>/sim/gui/dialogs/weather-scenario/state</property>
               </enable>
             </text>
@@ -477,7 +478,7 @@
               <row>0</row>
               <col>3</col>
               <label>QNH (inHg)</label>
-		      <enable> 
+		      <enable>
                 <property>/sim/gui/dialogs/weather-scenario/state</property>
               </enable>
             </text>
@@ -526,7 +527,7 @@
     <!-- Right Column -->
     <group>
       <layout>vbox</layout>
-    
+
       <!-- Aloft -->
       <group>
         <layout>vbox</layout>
@@ -1140,7 +1141,7 @@
           <layout>hbox</layout>
           <text>
             <label>Boundary (All Elevations ft-AGL)</label>
-		    <enable> 
+		    <enable>
               <property>/sim/gui/dialogs/weather-scenario/state</property>
             </enable>
           </text>
@@ -1159,7 +1160,7 @@
               <row>0</row>
               <col>0</col>
               <label>Elevation</label>
-		      <enable> 
+		      <enable>
                 <property>/sim/gui/dialogs/weather-scenario/state</property>
               </enable>
             </text>
@@ -1169,7 +1170,7 @@
               <col>1</col>
               <colspan>2</colspan>
               <label>Wind (dir/kt)</label>
-		      <enable> 
+		      <enable>
                 <property>/sim/gui/dialogs/weather-scenario/state</property>
               </enable>
             </text>
@@ -1178,7 +1179,7 @@
               <row>0</row>
               <col>3</col>
               <label>Vis (m)</label>
-		      <enable> 
+		      <enable>
                 <property>/sim/gui/dialogs/weather-scenario/state</property>
               </enable>
             </text>
@@ -1187,7 +1188,7 @@
               <row>0</row>
               <col>4</col>
               <label>Temp (C)</label>
-		      <enable> 
+		      <enable>
                 <property>/sim/gui/dialogs/weather-scenario/state</property>
               </enable>
             </text>
@@ -1196,7 +1197,7 @@
               <row>0</row>
               <col>5</col>
               <label>Dewpt (C)</label>
-		      <enable> 
+		      <enable>
                 <property>/sim/gui/dialogs/weather-scenario/state</property>
               </enable>
             </text>
@@ -1436,7 +1437,7 @@
 
       </group>
       <!-- Boundary  End -->
-    
+
     </group>
     <!-- Right Column -->
 
@@ -1548,8 +1549,19 @@
     </textbox>
 
     <!-- Automatic Weather -->
-    
+
   </group>
+
+  <hrule/>
+
+  <button>
+    <legend>Close</legend>
+    <default>true</default>
+    <key>Esc</key>
+    <binding>
+      <command>dialog-close</command>
+    </binding>
+  </button>
 
   <nasal>
     <open><![CDATA[

@@ -8,9 +8,27 @@
   <width>400</width>
   <layout>vbox</layout>
 
-  <text>
-    <label>Sound Configuration</label>
-  </text>
+  <group>
+    <layout>hbox</layout>
+	  <empty><stretch>1</stretch></empty>
+
+    <text>
+      <label>Sound Configuration</label>
+    </text>
+
+	  <empty><stretch>1</stretch></empty>
+
+    <button>
+      <pref-width>16</pref-width>
+      <pref-height>16</pref-height>
+      <legend></legend>
+      <keynum>27</keynum>
+      <border>2</border>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
 
   <hrule/>
 
@@ -49,7 +67,7 @@
       <label>Channel</label>
       <padding>10</padding>
     </text>
-    
+
     <text>
       <row>0</row>
       <col>1</col>
@@ -139,7 +157,7 @@
         <property>/sim/sound/enabled</property>
       </enable>
     </text>
-    
+
     <checkbox>
       <row>3</row>
       <col>1</col>
@@ -173,7 +191,7 @@
         <property>/sim/sound/enabled</property>
       </enable>
     </text>
-    
+
     <checkbox>
       <row>4</row>
       <col>1</col>
@@ -219,7 +237,7 @@
         <property>/sim/sound/enabled</property>
       </enable>
     </text>
-    
+
     <checkbox>
       <row>5</row>
       <col>1</col>
@@ -262,7 +280,7 @@
   <group>
     <layout>hbox</layout>
     <default-padding>10</default-padding>
-    
+
     <button>
       <legend>Apply</legend>
       <key>Enter</key>

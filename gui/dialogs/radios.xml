@@ -465,7 +465,6 @@
     <stretch>true</stretch>
   </empty>
 
-  <!-- Disabled for v2.2.0, as ATC Frequency Search broken
   <button>
     <legend>ATC Services in range</legend>
     <binding>
@@ -473,7 +472,6 @@
     </binding>
   </button>
 
-  -->
  </group>
  <hrule/>
 

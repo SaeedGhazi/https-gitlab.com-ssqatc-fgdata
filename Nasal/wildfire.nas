@@ -216,12 +216,12 @@ var parse_msg = func (source, msg) {
     var pos    = Binary.decodeCoord(substr(msg, 6));
     var radius = Binary.decodeDouble(substr(msg, 36));
     resolve_retardant_drop(pos, radius, 0, 0);
-  }  
+  }
   if (type == 4) {
     var pos    = Binary.decodeCoord(substr(msg, 6));
     var radius = Binary.decodeDouble(substr(msg, 36));
     resolve_foam_drop(pos, radius, 0, 0);
-  }  
+  }
 }
 
 ###############################################################################
@@ -356,7 +356,7 @@ var FireCell = {
           CAFire.set_cell(me.x + d[0], me.y + d[1],
                           FireCell.new(me.x + d[0],
                                        me.y + d[1]));
-        }      
+        }
       }
     }
     foreach (var d; CAFire.NEIGHBOURS[1]) {
@@ -385,7 +385,7 @@ var CellModel = {
 ############################################################
     new : func (x, y, alt) {
         var m = { parents: [CellModel] };
-        m.type  = "none"; 
+        m.type  = "none";
         m.model = nil;
         m.lat = y * CAFire.CELL_SIZE/60.0 + 0.5 * CAFire.CELL_SIZE / 60.0;
         m.lon = x * CAFire.CELL_SIZE/60.0 + 0.5 * CAFire.CELL_SIZE / 60.0;
@@ -488,7 +488,7 @@ CAFireModels.update = func {
     var c = me.pending[0];
     me.pending = subvec(me.pending, 1);
     work -= 1;
-    if (contains(c, "alt")) { 
+    if (contains(c, "alt")) {
       if (me.grid[c.x] == nil) {
         me.grid[c.x] = {};
       }
@@ -606,7 +606,7 @@ CAFire.ignite = func (lat, lon) {
 # Resolve a water drop.
 # For now: Assume that water makes the affected cell nonflammable forever
 #          and extinguishes it if burning.
-#   radius - meter : double 
+#   radius - meter : double
 # Note: volume is unused ATM.
 CAFire.resolve_water_drop = func (lat, lon, radius, volume=0) {
   trace("CAFire.resolve_water_drop: Dumping water at " ~ lat ~", " ~ lon ~
@@ -652,7 +652,7 @@ CAFire.resolve_retardant_drop = func (lat, lon, radius, volume=0) {
 # Resolve a foam drop.
 # For now: Assume that water makes the affected cell nonflammable forever
 #          and extinguishes it if burning.
-#   radius - meter : double 
+#   radius - meter : double
 # Note: volume is unused ATM.
 CAFire.resolve_foam_drop = func (lat, lon, radius, volume=0) {
   trace("CAFire.resolve_foam_drop: Dumping foam at " ~ lat ~", " ~ lon ~
@@ -904,7 +904,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     if (getprop(save_on_exit_pp))
       CAFire.save_event_log(SAVEDIR ~ "fire_log.xml");
   });
-  
+
   if (getprop(restore_on_startup_pp)) {
     settimer(func {
       # Delay loading the log until the terrain is there. Note: hack.
@@ -952,7 +952,7 @@ var dialog = {
         me.x = x;
         me.y = y;
         me.bg = [0, 0, 0, 0.3];    # background color
-        me.fg = [[1.0, 1.0, 1.0, 1.0]]; 
+        me.fg = [[1.0, 1.0, 1.0, 1.0]];
         #
         # "private"
         me.title = "Wildfire";
@@ -979,12 +979,12 @@ var dialog = {
         titlebar.set("layout", "hbox");
         titlebar.addChild("empty").set("stretch", 1);
         titlebar.addChild("text").set("label", "Wildfire settings");
+        titlebar.addChild("empty").set("stretch", 1);
         var w = titlebar.addChild("button");
         w.set("pref-width", 16);
         w.set("pref-height", 16);
         w.set("legend", "");
         w.set("default", 0);
-        w.set("key", "esc");
         w.setBinding("nasal", "wildfire.dialog.destroy(); ");
         w.setBinding("dialog-close");
         me.dialog.addChild("hrule");
@@ -1011,12 +1011,24 @@ var dialog = {
         }
         me.dialog.addChild("hrule");
 
+        # Buttons
+        var buttons = me.dialog.addChild("group");
+        buttons.node.setValues({"layout"  : "hbox"});
+
         # Load button.
-        var load = me.dialog.addChild("button");
+        var load = buttons.addChild("button");
         load.node.setValues({"legend"    : "Load Wildfire log",
                               "halign"   : "center"});
         load.setBinding("nasal",
                         "wildfire.dialog.select_and_load()");
+
+        # Close button
+        var close = buttons.addChild("button");
+        close.node.setValues({"legend"    : "Close",
+                             "default"   : "true",
+                             "key"       : "Esc"});
+        close.setBinding("nasal", "wildfire.dialog.destroy();");
+        close.setBinding("dialog-close");
 
         fgcommand("dialog-new", me.dialog.prop());
         fgcommand("dialog-show", me.namenode);

@@ -21,7 +21,7 @@ command interface /autopilot/route-manager/input:
             var ft = getprop("/sim/startup/units") == "feet";
             var dlg = props.globals.getNode("/sim/gui/dialogs/route-manager", 1);
             var selection = dlg.getNode("selection", 1);
-            var input = dlg.getNode("input", 1);    
+            var input = dlg.getNode("input", 1);
             var routem = props.globals.getNode("/autopilot/route-manager", 1);
 
             selection.setIntValue(-1);
@@ -32,7 +32,7 @@ command interface /autopilot/route-manager/input:
             var route = routem.getNode("route", 1);
             var dep = routem.getNode("departure", 1);
             var dest = routem.getNode("destination", 1);
-            
+
             var sel_index = func {
                 return int(selection.getValue());
             }
@@ -47,10 +47,10 @@ command interface /autopilot/route-manager/input:
                     # when selection index is valid, insert *after* the waypoint
                     insertIndex = insertIndex + 1;
                 }
-                
+
                 cmd.setValue("@insert" ~ insertIndex ~ ":" ~ input.getValue());
                 input.setValue("");
-                
+
                 if (insertIndex >= 0) {
                     selection.setValue(insertIndex);
                     gui.dialog_update("route-manager");
@@ -60,15 +60,15 @@ command interface /autopilot/route-manager/input:
             var remove = func {
                 cmd.setValue("@delete" ~ sel_index());
             }
-            
+
             var route = func {
                 cmd.setValue("@route" ~ sel_index());
             }
-            
+
             var jump_to = func {
                 cmd.setValue("@jump" ~ sel_index());
             }
-            
+
             var load_route = func(path) {
                 routem.getNode("file-path", 1).setValue(path.getValue());
                 cmd.setValue("@load");
@@ -80,26 +80,26 @@ command interface /autopilot/route-manager/input:
                 cmd.setValue("@save");
                 gui.dialog_update("route-manager");
             }
-            
+
             var file_selector = gui.FileSelector.new(load_route, "Load flight-plan", "Load");
             var save_selector = gui.FileSelector.new(save_route, "Save flight-plan", "Save");
 
             var activate_fp = func {
                 cmd.setValue("@activate");
             }
-            
+
             var departureRunways = dlg.getNode("departure-runways", 1);
             var destRunways = dlg.getNode("destination-runways", 1);
             var sids = dlg.getNode("sids", 1);
             var stars = dlg.getNode("stars", 1);
-            
-            var updateRunways = func {         
+
+            var updateRunways = func {
                 var depIcao = dep.getNode("airport").getValue();
                 departureRunways.removeChildren("value");
 
                 var currentRunway = dep.getNode("runway").getValue();
                 var foundCurrent = 0;
-                
+
                 var apt = airportinfo(depIcao);
                 if (apt != nil) {
                     var i=0;
@@ -111,16 +111,16 @@ command interface /autopilot/route-manager/input:
                         }
                     }
                 }
-                
+
                 if (!foundCurrent) {
                     dep.getNode("runway").clearValue();
                 }
-                
+
                 var destIcao = dest.getNode("airport").getValue();
                 destRunways.removeChildren("value");
                 currentRunway = dest.getNode("runway").getValue();
                 foundCurrent = 0;
-                
+
                 var apt = airportinfo(destIcao);
                 if (apt != nil) {
                     var i=0;
@@ -132,15 +132,15 @@ command interface /autopilot/route-manager/input:
                         }
                     }
                 }
-                
+
                 if (!foundCurrent) {
                     dest.getNode("runway").clearValue();
                 }
-                
+
                 print("updated runways");
                 gui.dialog_update("route-manager");
             }
-            
+
             var updateSIDs = func {
                 sids.removeChildren("value");
                 var depIcao = dep.getNode("airport").getValue();
@@ -151,17 +151,17 @@ command interface /autopilot/route-manager/input:
                     gui.dialog_update("route-manager", "sid");
                     return;
                 }
-                
+
                 sids.getNode("value[0]", 1).setValue("(none)");
                 var i=1;
                 foreach (var s; apt.runways[rwy].sids) {
                     sids.getNode("value[" ~ i ~ "]", 1).setValue(s);
                     i += 1;
                 }
-                
+
                 gui.dialog_update("route-manager", "sid");
             }
-            
+
             var updateSTARs = func {
                 stars.removeChildren("value");
                 var icao = dest.getNode("airport").getValue();
@@ -172,20 +172,20 @@ command interface /autopilot/route-manager/input:
                     gui.dialog_update("route-manager", "star");
                     return;
                 }
-                
+
                 var i=1;
                 stars.getNode("value[0]", 1).setValue("(none)");
                 foreach (var s; apt.runways[rwy].stars) {
                     stars.getNode("value[" ~ i ~ "]", 1).setValue(s);
                     i += 1;
                 }
-                
+
                 gui.dialog_update("route-manager", "star");
             }
-            
+
         # initialise departure values based on current position
             cmd.setValue("@posinit");
-            
+
             updateRunways();
             updateSIDs();
             updateSTARs();
@@ -222,14 +222,19 @@ command interface /autopilot/route-manager/input:
     </group>
     <hrule/>
     <!-- departure / arrival airport information -->
-    
+
     <group>
-        <layout>hbox</layout>
+        <layout>table</layout>
         <text>
+            <row>0</row>
+            <col>0</col>
+            <halign>right</halign>
             <label>Departure:</label>
-            <pref-width>80</pref-width>
         </text>
         <input>
+            <row>0</row>
+            <col>1</col>
+            <halign>left</halign>
             <name>departure-airport</name>
             <pref-width>60</pref-width>
             <property>/autopilot/route-manager/departure/airport</property>
@@ -238,31 +243,38 @@ command interface /autopilot/route-manager/input:
                 <command>dialog-apply</command>
                 <object-name>departure-airport</object-name>
             </binding>
-            
+
             <binding>
                 <command>nasal</command>
                 <script>updateRunways();</script>
             </binding>
         </input>
-        
+
         <text>
+            <row>0</row>
+            <col>2</col>
             <format>%s</format>
             <property>/autopilot/route-manager/departure/name</property>
             <live>true</live>
             <stretch>true</stretch>
             <halign>fill</halign>
         </text>
-                
+
         <text>
+            <row>0</row>
+            <col>3</col>
+            <halign>right</halign>
             <label>Rwy:</label>
         </text>
         <combo>
+            <row>0</row>
+            <col>4</col>
+            <halign>left</halign>
             <name>departure-runway</name>
-            <pref-width>60</pref-width>
             <property>/autopilot/route-manager/departure/runway</property>
             <editable>false</editable>
             <properties>/sim/gui/dialogs/route-manager/departure-runways</properties>
-            
+
             <binding>
                 <command>dialog-apply</command>
                 <object-name>departure-runway</object-name>
@@ -272,33 +284,40 @@ command interface /autopilot/route-manager/input:
                 <script>updateSIDs();</script>
             </binding>
         </combo>
-        
+
         <text>
+            <row>0</row>
+            <col>5</col>
+            <halign>right</halign>
             <label>SID:</label>
         </text>
         <combo>
+            <row>0</row>
+            <col>6</col>
+            <halign>left</halign>
             <name>sid</name>
-            <pref-width>100</pref-width>
             <property>/autopilot/route-manager/departure/sid</property>
             <editable>false</editable>
             <properties>/sim/gui/dialogs/route-manager/sids</properties>
-            
+
             <binding>
                 <command>dialog-apply</command>
                 <object-name>sid</object-name>
             </binding>
         </combo>
-    </group>
-    
-    <group>
-        <layout>hbox</layout>
+
         <text>
+            <row>1</row>
+            <col>0</col>
+            <halign>right</halign>
             <label>Arrival:</label>
-            <pref-width>80</pref-width>
         </text>
         <input>
-            <name>destination-airport</name>
+            <row>1</row>
+            <col>1</col>
+            <halign>left</halign>
             <pref-width>60</pref-width>
+            <name>destination-airport</name>
             <property>/autopilot/route-manager/destination/airport</property>
             <live>true</live>
             <binding>
@@ -311,44 +330,57 @@ command interface /autopilot/route-manager/input:
             </binding>
         </input>
         <text>
+            <row>1</row>
+            <col>2</col>
             <stretch>true</stretch>
+            <pref-width>200</pref-width>
             <format>%s</format>
             <property>/autopilot/route-manager/destination/name</property>
             <live>true</live>
             <halign>fill</halign>
         </text>
-        
+
         <text>
+            <row>1</row>
+            <col>3</col>
+            <halign>right</halign>
             <label>Rwy:</label>
         </text>
         <combo>
+            <row>1</row>
+            <col>4</col>
+            <halign>left</halign>
             <name>destination-runway</name>
-            <pref-width>60</pref-width>
             <property>/autopilot/route-manager/destination/runway</property>
             <editable>false</editable>
             <properties>/sim/gui/dialogs/route-manager/destination-runways</properties>
-            
+
             <binding>
                 <command>dialog-apply</command>
                 <object-name>destination-runway</object-name>
             </binding>
-            
+
             <binding>
                 <command>nasal</command>
                 <script>updateSTARs();</script>
             </binding>
         </combo>
-        
+
         <text>
+            <row>1</row>
+            <col>5</col>
+            <halign>right</halign>
             <label>STAR:</label>
         </text>
         <combo>
+            <row>1</row>
+            <col>6</col>
+            <halign>left</halign>
             <name>star</name>
-            <pref-width>100</pref-width>
             <property>/autopilot/route-manager/destination/star</property>
             <editable>false</editable>
             <properties>/sim/gui/dialogs/route-manager/stars</properties>
-            
+
             <binding>
                 <command>dialog-apply</command>
                 <object-name>star</object-name>
@@ -369,38 +401,38 @@ command interface /autopilot/route-manager/input:
             <pref-width>150</pref-width>
             <property>/autopilot/route-manager/alternate/airport</property>
         </input>
-        
+
     </group>
     -->
     <group>
         <layout>hbox</layout>
         <text>
+            <halign>right</halign>
             <label>Cruise Speed (kts):</label>
-            <pref-width>80</pref-width>
         </text>
         <input>
             <name>cruise-speed</name>
             <live>true</live>
-            <halign>fill</halign>
+            <halign>left</halign>
             <stretch>true</stretch>
-            <pref-width>150</pref-width>
+            <pref-width>100</pref-width>
             <property>/autopilot/route-manager/cruise/speed-kts</property>
         </input>
-        
+
         <text>
             <label>Cruise Altitude (ft/FL):</label>
-            <pref-width>80</pref-width>
+            <halign>right</halign>
         </text>
         <input>
             <name>cruise-alt</name>
             <live>true</live>
-            <halign>fill</halign>
+            <halign>left</halign>
             <stretch>true</stretch>
-            <pref-width>150</pref-width>
+            <pref-width>100</pref-width>
             <property>/autopilot/route-manager/cruise/altitude-ft</property>
         </input>
     </group>
-    
+
     <hrule/>
 
     <group>
@@ -560,7 +592,7 @@ command interface /autopilot/route-manager/input:
                 <script>activate_fp()</script>
             </binding>
         </button>
-        
+
         <empty><stretch>true</stretch></empty>
 
         <button>
@@ -580,6 +612,13 @@ command interface /autopilot/route-manager/input:
             <binding>
                 <command>nasal</command>
                 <script>save_selector.open();</script>
+            </binding>
+        </button>
+        <button>
+            <legend>Close</legend>
+            <key>Esc</key>
+            <binding>
+                <command>dialog-close</command>
             </binding>
         </button>
     </group>

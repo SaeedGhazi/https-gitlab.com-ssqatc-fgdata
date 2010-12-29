@@ -155,7 +155,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
         menubarAutoVisibilityListener = setlistener( "/devices/status/mice/mouse/y", func(n) {
           if( n.getValue() == nil ) return;
           if( mouseMode.getValue() != 0 ) return;
-  
+
           if(  n.getValue() <= menubarAutoVisibilityEdge.getValue() )
             menubarVisibility.setBoolValue( 1 );
 
@@ -372,10 +372,10 @@ var OverlaySelector = {
 
         var m = Dialog.new(data.getNode("dialog", 1), "gui/dialogs/overlay-select.xml", name);
         m.parents = [OverlaySelector, Dialog];
-        
+
         # resolve the path in FG_ROOT, and --fg-aircraft dir, etc
         m.dir = resolvepath(dir) ~ "/";
-        
+
         var relpath = func(p) substr(p, p[0] == `/`);
         m.nameprop = relpath(nameprop);
         m.sortprop = relpath(sortprop or nameprop);
@@ -724,8 +724,17 @@ var showWeightDialog = func {
     dialog[name].set("name", name);
     dialog[name].set("layout", "vbox");
 
-    var header = dialog[name].addChild("text");
-    header.set("label", title);
+    var header = dialog[name].addChild("group");
+    header.set("layout", "hbox");
+    header.addChild("empty").set("stretch", "1");
+    header.addChild("text").set("label", title);
+    header.addChild("empty").set("stretch", "1");
+    var w = header.addChild("button");
+    w.set("pref-width", 16);
+    w.set("pref-height", 16);
+    w.set("legend", "");
+    w.set("default", 0);
+    w.setBinding("dialog-close");
 
     dialog[name].addChild("hrule");
 
@@ -801,15 +810,17 @@ var showWeightDialog = func {
         weightitem = nil;
     }
 
+    dialog[name].addChild("hrule");
+
     var buttonBar = dialog[name].addChild("group");
     buttonBar.set("layout", "hbox");
     buttonBar.set("default-padding", 10);
 
-    var ok = buttonBar.addChild("button");
-    ok.set("legend", "OK");
-    ok.set("key", "esc");
-    ok.setBinding("dialog-apply");
-    ok.setBinding("dialog-close");
+    var close = buttonBar.addChild("button");
+    close.set("legend", "Close");
+    close.set("default", "true");
+    close.set("key", "Enter");
+    close.setBinding("dialog-close");
 
     # Temporary helper function
     var tcell = func(parent, type, row, col) {

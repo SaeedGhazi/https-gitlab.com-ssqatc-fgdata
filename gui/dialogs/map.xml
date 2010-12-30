@@ -40,7 +40,6 @@ command interface /autopilot/route-manager/input:
                 <pref-width>16</pref-width>
                 <pref-height>16</pref-height>
                 <legend></legend>
-                <default>1</default>
                 <keynum>27</keynum>
                 <border>2</border>
 
@@ -50,17 +49,17 @@ command interface /autopilot/route-manager/input:
             </button>
         </group>
         <hrule/>
-        
+
         <group>
             <layout>hbox</layout>
             <stretch>true</stretch>
-            
+
             <!-- sidebar -->
             <group>
                 <layout>vbox</layout>
                 <button>
                     <legend>Fixes</legend>
-                    <pref-width>80</pref-width>
+                    <pref-width>100</pref-width>
                     <property>/gui/map/draw-fixes</property>
                     <live>true</live>
                     <binding>
@@ -70,10 +69,10 @@ command interface /autopilot/route-manager/input:
                       <command>property-toggle</command>
                     </binding>
                 </button>
-                
+
                 <button>
                     <legend>Navaids</legend>
-                    <pref-width>80</pref-width>
+                    <pref-width>100</pref-width>
                     <property>/gui/map/draw-navaids</property>
                     <live>true</live>
                     <binding>
@@ -83,15 +82,16 @@ command interface /autopilot/route-manager/input:
                       <command>property-toggle</command>
                     </binding>
                 </button>
-                
+<!--
                 <button>
                     <legend>Airways</legend>
-                    <pref-width>80</pref-width>
+                    <pref-width>100</pref-width>
                 </button>
-                
+-->
+
                 <button>
                     <legend>Traffic</legend>
-                    <pref-width>80</pref-width>
+                    <pref-width>100</pref-width>
                     <property>/gui/map/draw-traffic</property>
                     <live>true</live>
                     <binding>
@@ -101,15 +101,17 @@ command interface /autopilot/route-manager/input:
                       <command>property-toggle</command>
                     </binding>
                 </button>
-                
+
+<!--
                 <button>
                     <legend>Obstacles</legend>
-                    <pref-width>80</pref-width>
+                    <pref-width>100</pref-width>
                 </button>
-                
+-->
+
                 <button>
                     <legend>Data</legend>
-                    <pref-width>80</pref-width>
+                    <pref-width>100</pref-width>
                     <property>/gui/map/draw-data</property>
                     <live>true</live>
                     <binding>
@@ -119,12 +121,12 @@ command interface /autopilot/route-manager/input:
                       <command>property-toggle</command>
                     </binding>
                 </button>
-                
+
                 <empty><stretch>true</stretch></empty>
-                
+
                 <button>
                     <legend>Center on Acft</legend>
-                    <pref-width>80</pref-width>
+                    <pref-width>100</pref-width>
                     <property>/gui/map/centre-on-aircraft</property>
                     <live>true</live>
                     <binding>
@@ -134,10 +136,10 @@ command interface /autopilot/route-manager/input:
                       <command>property-toggle</command>
                     </binding>
                 </button>
-                
+
                 <button>
                     <legend>Acft Hdg Up</legend>
-                    <pref-width>80</pref-width>
+                    <pref-width>100</pref-width>
                     <property>/gui/map/aircraft-heading-up</property>
                     <live>true</live>
                     <binding>
@@ -147,10 +149,10 @@ command interface /autopilot/route-manager/input:
                       <command>property-toggle</command>
                     </binding>
                 </button>
-                
+
                 <button>
                     <legend>Magnetic Hdgs</legend>
-                    <pref-width>80</pref-width>
+                    <pref-width>100</pref-width>
                     <property>/gui/map/magnetic-headings</property>
                     <live>true</live>
                     <binding>
@@ -160,8 +162,22 @@ command interface /autopilot/route-manager/input:
                       <command>property-toggle</command>
                     </binding>
                 </button>
+
+                <empty><stretch>true</stretch></empty>
+
+                <button>
+                    <legend>Close</legend>
+                    <pref-width>100</pref-width>
+                    <default>true</default>
+                    <binding>
+                      <command>dialog-close</command>
+                    </binding>
+                </button>
+
             </group>
-            
+
+            <vrule/>
+
             <map>
                 <!-- <halign>fill</halign> -->
                 <valign>fill</valign>
@@ -171,7 +187,7 @@ command interface /autopilot/route-manager/input:
                 <pref-width>600</pref-width>
                 <property>/gui/map</property>
             </map>
-        
+
         </group>
 </PropertyList>
 

@@ -1,9 +1,16 @@
-var startEngine = func(v = 1) {
-    if (!v)
+var startEngine = func(v = 1, which...) {
+    if (!v and !size(which))
         return props.setAll("/controls/engines/engine", "starter", 0);
-    foreach(var e; engines)
-        if(e.selected.getValue())
-            e.controls.getNode("starter").setBoolValue(v);
+    if(size(which)) {
+        foreach(var i; which)
+            foreach(var e; engines)
+                if(e.index == i)
+                    e.controls.getNode("starter").setBoolValue(v);
+    } else {
+        foreach(var e; engines)
+            if(e.selected.getValue())
+                e.controls.getNode("starter").setBoolValue(v);
+    }
 }
 
 var selectEngine = func(which) {

@@ -235,31 +235,55 @@
         </binding>
       </checkbox>
 
-	  <!--
-
       <group>
         <layout>hbox</layout>
         <halign>right</halign>
         <text>
 		  <label>Cloud density</label>
+		  <enable>
+            <and>
+              <property>/sim/rendering/shader-effects</property>
+			  <property>/sim/rendering/clouds3d-enable</property>
+			</and>
+          </enable>
 		</text>
         <slider>
+		  <name>cloud-density</name>
+		  <enable>
+            <and>
+              <property>/sim/rendering/shader-effects</property>
+			  <property>/sim/rendering/clouds3d-enable</property>
+			</and>
+          </enable>
           <min>0</min>
           <max>1.0</max>
           <property>/sim/rendering/clouds3d-density</property>
           <binding>
             <command>dialog-apply</command>
+			<object-name>cloud-density</object-name>
+          </binding>
+		  <binding>
+            <command>property-toggle</command>
+			<property>/sim/rendering/clouds3d-enable</property>
+          </binding>
+		  <binding>
+            <command>property-toggle</command>
+			<property>/sim/rendering/clouds3d-enable</property>
           </binding>
         </slider>
         <text>
+		  <enable>
+            <and>
+              <property>/sim/rendering/shader-effects</property>
+			  <property>/sim/rendering/clouds3d-enable</property>
+			</and>
+          </enable>
           <label>12345678</label>
           <format>%.2f</format>
           <live>true</live>
           <property>/sim/rendering/clouds3d-density</property>
         </text>
       </group>
-
-	  -->
 
       <group>
         <layout>hbox</layout>

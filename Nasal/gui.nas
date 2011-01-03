@@ -49,6 +49,23 @@ var menuEnable = func(searchname, state) {
     }
 }
 
+##
+# Set the binding for a menu item to a Nasal script,
+# typically a dialog open() command.
+#
+var menuBind = func(searchname, command) {
+    foreach (var menu; props.globals.getNode("/sim/menubar/default").getChildren("menu")) {
+        foreach (item; menu.getChildren("item")) {
+            foreach (name; item.getChildren("name")) {
+                if (name.getValue() == searchname) {
+                    item.getNode("binding", 1).getNode("command", 1).setValue("nasal");
+                    item.getNode("binding", 1).getNode("script", 1).setValue(command);
+                    fgcommand("gui-redraw");
+                }
+            }
+        }
+    }
+}
 
 ##
 # Set mouse cursor coordinates and shape (number or name), and return

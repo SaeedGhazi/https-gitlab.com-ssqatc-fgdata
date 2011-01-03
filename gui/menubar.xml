@@ -273,6 +273,7 @@
 
 		<item>
 			<label>Autopilot Settings (F11)</label>
+			<name>autopilot-settings</name>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>autopilot</dialog-name>
@@ -378,6 +379,7 @@
 
 		<item>
 			<label>Map</label>
+			<name>map</name>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>map</dialog-name>
@@ -403,6 +405,7 @@
 
 		<item>
 			<label>Radio Settings (F12)</label>
+			<name>radio</name>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>radios</dialog-name>
@@ -411,6 +414,7 @@
 
 		<item>
 			<label>GPS Settings</label>
+			<name>gps</name>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>gps</dialog-name>

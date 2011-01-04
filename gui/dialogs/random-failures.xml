@@ -9,7 +9,7 @@
   <nasal>
     <open>
       <![CDATA[
-        var groups = cmdarg().getChildren("group")[0].getChildren("group");
+        var groups = cmdarg().getChildren("group")[1].getChildren("group");
         var mtbfNodes = groups[0].getChildren("radio");
         var mcbfNodes = groups[1].getChildren("radio");
 
@@ -40,13 +40,32 @@
     </open>
   </nasal>
 
-  <text>
-    <label>Random Failures</label>
-  </text>
+  <group>
+    <layout>hbox</layout>
+    <empty><stretch>1</stretch></empty>
 
-  <hrule></hrule>
+    <text>
+      <label>Random Failures</label>
+    </text>
+
+    <empty><stretch>1</stretch></empty>
+
+    <button>
+      <pref-width>16</pref-width>
+      <pref-height>16</pref-height>
+      <legend></legend>
+      <keynum>27</keynum>
+      <border>2</border>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
+
+  <hrule/>
 
   <text>
+    <halign>left</halign>
     <label>Configure MTBF/MCBF for all systems and instruments.</label>
   </text>
 
@@ -166,17 +185,17 @@
     </group>
 
     <empty><stretch>true</stretch></empty>
-    
+
     <vrule/>
 
     <empty><stretch>true</stretch></empty>
-    
+
     <group>
       <layout>vbox</layout>
       <halign>left</halign>
       <valign>top</valign>
       <stretch>true</stretch>
- 
+
       <text>
         <halign>center</halign>
         <label>Mean Cycles Between Failures</label>
@@ -332,7 +351,7 @@
     </button>
 
     <button>
-    <legend>Close</legend>
+    <legend>Cancel</legend>
     <equal>true</equal>
     <key>Esc</key>
     <binding>

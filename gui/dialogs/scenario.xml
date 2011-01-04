@@ -30,7 +30,7 @@
     <empty><stretch>true</stretch></empty>
 
     <text>
-      <label>Choose active scenario(s) for the next program start</label>
+      <label>AI Scenario Select</label>
     </text>
 
     <empty><stretch>true</stretch></empty>
@@ -49,6 +49,13 @@
 
   <hrule/>
 
+  <text>
+    <label>Choose active scenario(s) for the next program start</label>
+  </text>
+
+  <hrule/>
+
+
   <group>
     <layout>hbox</layout>
 
@@ -64,6 +71,7 @@
 
   </group>
 
+  <hrule/>
 
   <group>
     <layout>hbox</layout>
@@ -172,7 +180,7 @@
             scnNode.setValue( src.getNode("name",1).getValue() );
             i+=1;
           }
-        } 
+        }
       }
 
       var path = getprop("/sim/fg-root") ~ "/AI";

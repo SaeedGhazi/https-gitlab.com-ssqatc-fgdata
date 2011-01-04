@@ -3,46 +3,74 @@
 <PropertyList>
 
  <name>radios</name>
- <width>600</width>
- <height>370</height>
+ <width>550</width>
  <modal>false</modal>
+ <layout>vbox</layout>
 
- <text>
-  <x>10</x>
-  <y>300</y>
-  <label>Radio Frequencies</label>
- </text>
+  <group>
+    <layout>hbox</layout>
+	  <empty><stretch>1</stretch></empty>
+
+    <text>
+      <label>Radio Frequencies</label>
+    </text>
+
+	  <empty><stretch>1</stretch></empty>
+
+    <button>
+      <pref-width>16</pref-width>
+      <pref-height>16</pref-height>
+      <legend></legend>
+      <keynum>27</keynum>
+      <border>2</border>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
+
+  <hrule/>
+
+<group>
+  <layout>table</layout>
 
  <!-- headers -->
- <group>
-  <x>0</x>
-  <y>280</y>
   <text>
-   <x>75</x>
+   <row>0</row>
+   <col>1</col>
    <label>Selected</label>
   </text>
+
   <text>
-   <x>300</x>
+   <row>0</row>
+   <col>4</col>
    <label>Standby</label>
   </text>
+
   <text>
-   <x>450</x>
+   <row>0</row>
+   <col>6</col>
    <label>Radial</label>
   </text>
- </group>
 
- <group>
-  <x>0</x>
-  <y>240</y>
+  <!-- Dummy label to stretch table, as layout manager doesn't handle labels well -->
+  <text>
+   <row>0</row>
+   <col>7</col>
+   <label></label>
+  </text>
 
   <text>
+   <row>1</row>
+   <col>0</col>
+   <halign>right</halign>
    <label>COM1</label>
   </text>
 
   <input>
    <name>com1-selected</name>
-   <x>75</x>
-   <y>0</y>
+   <row>1</row>
+   <col>1</col>
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
@@ -50,8 +78,8 @@
   </input>
 
   <button>
-   <x>220</x>
-   <y>2</y>
+   <row>1</row>
+   <col>3</col>
    <width>35</width>
    <height>26</height>
    <border>1</border>
@@ -81,28 +109,25 @@
 
   <input>
    <name>com1-standby</name>
-   <x>300</x>
-   <y>0</y>
+   <row>1</row>
+   <col>4</col>
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
    <property>/instrumentation/comm[0]/frequencies/standby-mhz</property>
   </input>
 
- </group>
-
- <group>
-  <x>0</x>
-  <y>210</y>
-
   <text>
+   <row>2</row>
+   <col>0</col>
+   <halign>right</halign>
    <label>COM2</label>
   </text>
 
   <input>
    <name>com2-selected</name>
-   <x>75</x>
-   <y>0</y>
+   <row>2</row>
+   <col>1</col>
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
@@ -110,8 +135,8 @@
   </input>
 
   <button>
-   <x>220</x>
-   <y>2</y>
+   <row>2</row>
+   <col>3</col>
    <width>35</width>
    <height>26</height>
    <border>1</border>
@@ -141,28 +166,25 @@
 
   <input>
    <name>com2-standby</name>
-   <x>300</x>
-   <y>0</y>
+   <row>2</row>
+   <col>4</col>
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
    <property>/instrumentation/comm[1]/frequencies/standby-mhz</property>
   </input>
 
- </group>
-
- <group>
-  <x>0</x>
-  <y>180</y>
-
   <text>
+   <row>3</row>
+   <col>0</col>
+   <halign>right</halign>
    <label>NAV1</label>
   </text>
 
   <input>
    <name>nav1-selected</name>
-   <x>75</x>
-   <y>0</y>
+   <row>3</row>
+   <col>1</col>
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
@@ -170,8 +192,8 @@
   </input>
 
   <button>
-   <x>220</x>
-   <y>2</y>
+   <row>3</row>
+   <col>3</col>
    <width>35</width>
    <height>26</height>
    <border>1</border>
@@ -201,8 +223,8 @@
 
   <input>
    <name>nav1-standby</name>
-   <x>300</x>
-   <y>0</y>
+   <row>3</row>
+   <col>4</col>
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
@@ -211,28 +233,25 @@
 
   <input>
    <name>nav1-radial</name>
-   <x>450</x>
-   <y>0</y>
+   <row>3</row>
+   <col>6</col>
    <width>75</width>
    <height>25</height>
    <label>deg</label>
    <property>/instrumentation/nav[0]/radials/selected-deg</property>
   </input>
 
- </group>
-
- <group>
-  <x>0</x>
-  <y>150</y>
-
   <text>
+   <row>4</row>
+   <col>0</col>
+   <halign>right</halign>
    <label>NAV2</label>
   </text>
 
   <input>
    <name>nav2-selected</name>
-   <x>75</x>
-   <y>0</y>
+   <row>4</row>
+   <col>1</col>
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
@@ -240,8 +259,8 @@
   </input>
 
   <button>
-   <x>220</x>
-   <y>2</y>
+   <row>4</row>
+   <col>3</col>
    <width>35</width>
    <height>26</height>
    <border>1</border>
@@ -271,8 +290,8 @@
 
   <input>
    <name>nav2-standby</name>
-   <x>300</x>
-   <y>0</y>
+   <row>4</row>
+   <col>4</col>
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
@@ -281,28 +300,25 @@
 
   <input>
    <name>nav2-radial</name>
-   <x>450</x>
-   <y>0</y>
+   <row>4</row>
+   <col>6</col>
    <width>75</width>
    <height>25</height>
    <label>deg</label>
    <property>/instrumentation/nav[1]/radials/selected-deg</property>
   </input>
 
- </group>
-
- <group>
-  <x>0</x>
-  <y>120</y>
-
   <text>
+   <row>5</row>
+   <col>0</col>
+   <halign>right</halign>
    <label>ADF</label>
   </text>
 
   <input>
    <name>adf-selected</name>
-   <x>75</x>
-   <y>0</y>
+   <row>5</row>
+   <col>1</col>
    <width>75</width>
    <height>25</height>
    <label>kHz</label>
@@ -310,8 +326,8 @@
   </input>
 
   <button>
-   <x>220</x>
-   <y>2</y>
+   <row>5</row>
+   <col>3</col>
    <width>35</width>
    <height>26</height>
    <border>1</border>
@@ -341,8 +357,8 @@
 
   <input>
    <name>adf-standby</name>
-   <x>300</x>
-   <y>0</y>
+   <row>5</row>
+   <col>4</col>
    <width>75</width>
    <height>25</height>
    <label>kHz</label>
@@ -350,50 +366,48 @@
   </input>
 
   <input>
-   <name>nav2-radial</name>
-   <x>450</x>
-   <y>0</y>
+   <name>adf-radial</name>
+   <row>5</row>
+   <col>6</col>
    <width>75</width>
    <height>25</height>
    <label>deg</label>
    <property>/instrumentation/adf/rotation-deg</property>
   </input>
 
- </group>
-
- <group>
-  <x>0</x>
-  <y>90</y>
-
   <text>
+   <row>6</row>
+   <col>0</col>
+   <halign>right</halign>
    <label>DME</label>
   </text>
 
   <input>
    <name>dme-selected</name>
-   <x>75</x>
-   <y>0</y>
+   <row>6</row>
+   <col>1</col>
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
    <property>/instrumentation/dme/frequencies/selected-mhz</property>
   </input>
 
- </group>
 
- <group>
-  <x>0</x>
-  <y>60</y>
+</group>
 
-  <text>
+<hrule/>
+  <group>
+
+   <layout>hbox</layout>
+
+     <text>
    <label>TACAN</label>
   </text>
 
+
   <combo>
-   <x>75</x>
-   <y>0</y>
-   <width>45</width>
-   <height>25</height>
+   <pref-width>45</pref-width>
+   <pref-height>25</pref-height>
    <property>/instrumentation/tacan/frequencies/selected-channel[1]</property>
    <value>0</value>
    <value>1</value>
@@ -408,10 +422,8 @@
   </combo>
 <!---->
   <combo>
-   <x>120</x>
-   <y>0</y>
-   <width>45</width>
-   <height>25</height>
+   <pref-width>45</pref-width>
+   <pref-height>25</pref-height>
    <property>/instrumentation/tacan/frequencies/selected-channel[2]</property>
    <value>0</value>
    <value>1</value>
@@ -426,10 +438,8 @@
   </combo>
 
   <combo>
-   <x>165</x>
-   <y>0</y>
-   <width>45</width>
-   <height>25</height>
+   <pref-width>45</pref-width>
+   <pref-height>25</pref-height>
    <property>/instrumentation/tacan/frequencies/selected-channel[3]</property>
    <value>0</value>
    <value>1</value>
@@ -444,76 +454,75 @@
   </combo>
 
   <combo>
-   <x>210</x>
-   <y>0</y>
-   <width>47</width>
-   <height>25</height>
+   <pref-width>45</pref-width>
+   <pref-height>25</pref-height>
    <property>/instrumentation/tacan/frequencies/selected-channel[4]</property>
    <value>X</value>
    <value>Y</value>
   </combo>
 
-  
- </group>
- 
-
- <group>
+  <empty>
+    <stretch>true</stretch>
+  </empty>
 
   <button>
-   <x>105</x>
-   <y>10</y>
-   <legend>OK</legend>
-   <default>true</default>
-   <equal>true</equal>
-   <binding>
-    <command>dialog-apply</command>
-   </binding>
-   <binding>
-    <command>dialog-close</command>
-   </binding>
-  </button>
-
-  <button>
-   <x>205</x>
-   <y>10</y>
-   <legend>Apply</legend>
-   <equal>true</equal>
-   <binding>
-    <command>dialog-apply</command>
-   </binding>
-  </button>
-
-  <button>
-   <x>305</x>
-   <y>10</y>
-   <legend>Reset</legend>
-   <equal>true</equal>
-   <binding>
-    <command>dialog-update</command>
-   </binding>
-  </button>
-
-  <button>
-   <x>405</x>
-   <y>10</y>
-   <legend>Cancel</legend>
-   <equal>true</equal>
-   <key>Esc</key>
-   <binding>
-    <command>dialog-close</command>
-   </binding>
+    <legend>ATC Services in range</legend>
+    <binding>
+      <command>ATC-freq-search</command>
+    </binding>
   </button>
 
  </group>
-	<group>
-		<x>400</x>
-		<y>60</y>
-			<button>
-			<legend>ATC Services in range</legend>
-				<binding>
-					<command>ATC-freq-search</command>
-				</binding> 
-			</button>
+ <hrule/>
+
+ 	<group>
+		<layout>hbox</layout>
+		<default-padding>6</default-padding>
+		<empty>
+			<stretch>true</stretch>
+		</empty>
+
+		<button>
+			<legend>OK</legend>
+			<default>true</default>
+			<equal>true</equal>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+
+		<button>
+			<legend>Apply</legend>
+			<equal>true</equal>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</button>
+
+		<button>
+			<legend>Reset</legend>
+			<equal>true</equal>
+			<binding>
+				<command>dialog-update</command>
+			</binding>
+		</button>
+
+		<button>
+			<legend>Cancel</legend>
+			<equal>true</equal>
+			<key>Esc</key>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+
+		<empty>
+			<stretch>true</stretch>
+		</empty>
 	</group>
+
 
 </PropertyList>

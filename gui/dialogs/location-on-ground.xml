@@ -93,6 +93,7 @@
 
     <input>
       <row>0</row><col>2</col>
+	  <live>true</live>
       <property>/sim/gui/dialogs/location-on-ground/airport</property>
       <binding>
         <command>dialog-apply</command>

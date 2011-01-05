@@ -83,6 +83,7 @@
       <col>3</col>
       <width>75</width>
       <height>25</height>
+	  <live>true</live>
       <property>/instrumentation/altimeter/setting-inhg</property>
       <binding>
         <command>dialog-apply</command>
@@ -185,6 +186,7 @@
       <col>3</col>
       <width>75</width>
       <height>25</height>
+	  <live>true</live>
       <property>/instrumentation/heading-indicator/offset-deg</property>
       <binding>
         <command>dialog-apply</command>

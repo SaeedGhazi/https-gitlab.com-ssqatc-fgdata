@@ -189,21 +189,60 @@ if (((local_weather.presampling_flag == 1) and (getprop(lw~"tmp/presampling-stat
 
 	if ((local_weather.wind_model_flag == 2) or (local_weather.wind_model_flag ==4))
 		{
-		alpha = alpha + 2.0 * (rand()-0.5) * 10.0;
+
+		if (local_weather.metar_flag == 0)
+			{
+			alpha = alpha + 2.0 * (rand()-0.5) * 10.0;
+			# account for the systematic spin of weather systems around a low pressure 
+			# core dependent on hemisphere
+			if (lat >0.0) {alpha = alpha -3.0;}
+			else {alpha = alpha +3.0;} 
+			}
+		else
+			{
+			var step = 20.0;
+			
+			var alpha_test = getprop("/environment/metar/base-wind-dir-deg");
+
+			print("alpha: ", alpha, " alpha_test: ", alpha_test, " relangle: ", relangle(alpha, alpha_test));
+
+			if (relangle(alpha, alpha_test) > step)
+				{
+				print("Coordinate rotation by more than ",step," deg... compensating");
+				if (relangle(alpha + step, alpha_test) < relangle(alpha-step, alpha_test))
+					{
+					alpha = alpha + step;
+					}
+				else 
+					{
+					alpha = alpha - step;
+					}
+				}
+			else
+				{
+				alpha = alpha_test;
+				}
+			}
 
 	
-		# account for the systematic spin of weather systems around a low pressure 
-		# core dependent on hemisphere
-		if (lat >0.0) {alpha = alpha -3.0;}
-		else {alpha = alpha +3.0;} 
+		
 
 		setprop(lw~"tmp/tile-orientation-deg",alpha);
 		
 		# compute the new windspeed
 
-		var windspeed = getprop(lw~"tmp/windspeed-kt");
-		windspeed = windspeed + 2.0 * (rand()-0.5) * 2.0;
-		if (windspeed < 0) {windspeed = rand();}
+		if (local_weather.metar_flag == 0)
+			{
+			var windspeed = getprop(lw~"tmp/windspeed-kt");
+			windspeed = windspeed + 2.0 * (rand()-0.5) * 2.0;
+			if (windspeed < 0) {windspeed = rand();}
+			}
+		else
+			{
+			var boundary_correction = 1.0/local_weather.get_slowdown_fraction();
+			windspeed = boundary_correction * getprop("/environment/metar/base-wind-speed-kt");
+			}
+	
 		setprop(lw~"tmp/windspeed-kt",windspeed);
 
 		# store the tile orientation and wind strength in an array for fast processing
@@ -392,6 +431,10 @@ else if (getprop(lw~"tmp/tile-management") == "realistic weather")
 		}
 
 	} # end if mode == realistic weather
+else if (getprop(lw~"tmp/tile-management") == "METAR")
+	{
+	weather_tiles.set_METAR_tile();
+	}
 }
 	
 
@@ -1224,6 +1267,17 @@ return (y * math.cos(phi) - x * math.sin(phi)) * m_to_lat;
 var get_lon = func (x,y,phi) {
 
 return (x * math.cos(phi) + y * math.sin(phi)) * m_to_lon;
+}
+
+
+var relangle = func (alpha, beta) {
+
+var angdiff = abs (alpha - beta);
+
+if ((360.0 - angdiff) < angdiff)
+	{angdiff = 360.0 - angdiff};
+
+return angdiff;
 }
 
 

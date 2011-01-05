@@ -252,7 +252,8 @@ var fly_by_view_handler = {
 		me.latN = props.globals.getNode("/sim/viewer/latitude-deg", 1);
 		me.lonN = props.globals.getNode("/sim/viewer/longitude-deg", 1);
 		me.altN = props.globals.getNode("/sim/viewer/altitude-ft", 1);
-		me.hdgN = props.globals.getNode("/orientation/heading-deg", 1);
+		# me.hdgN = props.globals.getNode("/orientation/heading-deg", 1);
+		me.hdgN = props.globals.getNode("/instrumentation/gps/indicated-track-true-deg", 1);
 
 		setlistener("/sim/signals/reinit", func(n) { n.getValue() or me.reset() });
 		setlistener("/sim/crashed", func(n) { n.getValue() and me.reset() });

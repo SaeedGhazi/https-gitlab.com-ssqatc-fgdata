@@ -30,6 +30,7 @@ $Id$
  <name>Logitech Extreme 3D Pro USB</name>
  <name>Logitech  Extreme  3D  Pro USB</name>
  <name>Logitech Extreme 3D</name>
+ <name>Logitech Logitech Extreme 3D</name>
 
  <axis n="0">
   <desc>Aileron</desc>

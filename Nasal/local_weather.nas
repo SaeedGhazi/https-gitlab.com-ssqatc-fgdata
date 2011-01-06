@@ -14,6 +14,7 @@
 # add_vectors			to add two vectors in polar coordinates
 # wind_altitude_interpolation 	to interpolate aloft winds in altitude
 # wind_interpolation		to interpolate aloft winds in altitude and position
+# get_slowdown_fraction		to compute the effect of boundary layer wind slowdown
 # interpolation_loop		to continuously interpolate weather parameters between stations 
 # thermal_lift_start		to start the detailed thermal model
 # thermal_lift_loop		to manage the detailed thermal lift model
@@ -341,6 +342,52 @@ return sum_wind;
 
 
 ###################################
+# boundary layer computations
+###################################
+
+
+var get_slowdown_fraction = func {
+
+var tile_index = getprop(lw~"tiles/tile[4]/tile-index");
+var altitude_agl = getprop("/position/altitude-agl-ft");
+var altitude = getprop("/position/altitude-ft");
+
+
+
+if (presampling_flag == 0)
+	{
+	var base_layer_thickness = 600.0;	
+	var f_slow = 1.0/3.0;
+	}
+else 
+	{
+	var alt_median = alt_50_array[tile_index - 1];
+	var alt_difference = alt_median - (altitude - altitude_agl);
+	var base_layer_thickness = 150.0;	
+
+	# get the boundary layer size dependent on terrain altitude above terrain median
+
+	if (alt_difference > 0.0) # we're low and the boundary layer grows
+		{var boundary_alt = base_layer_thickness + 0.3 * alt_difference;}
+	else # the boundary layer shrinks
+		{var boundary_alt = base_layer_thickness + 0.1 * alt_difference;}
+
+	if (boundary_alt < 50.0){boundary_alt = 50.0;}
+	if (boundary_alt > 3000.0) {boundary_alt = 3000.0;}
+
+	# get the boundary effect as a function of bounday layer size
+	
+	var f_slow = 1.0 - (0.2 + 0.17 * math.ln(boundary_alt/base_layer_thickness));
+	}
+
+print("Boundary layer thickness: ",base_layer_thickness);
+print("Boundary layer slowdown: ", f_slow);
+
+return f_slow;
+}
+
+
+###################################
 # interpolation management loop
 ###################################
 
@@ -365,6 +412,7 @@ var n_stations = size(weatherStationArray);
 for (var i = 0; i < n_stations; i=i+1) {
 	
 	s = weatherStationArray[i];
+	
 
 	var stpos = geo.Coord.new();
 	stpos.set_latlon(s.lat,s.lon,0.0);
@@ -387,7 +435,8 @@ for (var i = 0; i < n_stations; i=i+1) {
 
 	# automatically delete stations out of range
 	# take care not to unload if weird values appear for a moment
-	if ((d > 80000.0) and (d<100000.0)) 
+	# never unload if only one station left
+	if ((d > 120000.0) and (d<140000.0) and (n_stations > 1)) 
 		{
 		if (debug_output_flag == 1) 
 			{print("Distance to weather station ", d, " m, unloading ...", i);}
@@ -3169,11 +3218,12 @@ if (dynamical_convection_flag == 1)
 	}
 
 
-# if we can do so, we switch global weather off at this point
+# if we can do so, we switch global weather and METAR parsing in environment off at this point
 
 if (compat_layer.features.can_disable_environment ==1)
 	{
 	props.globals.getNode("/environment/config/enabled").setBoolValue(0);
+	props.globals.getNode("/environment/params/metar-updates-environment").setBoolValue(0);
 	}
 
 
@@ -3187,7 +3237,31 @@ if ((presampling_flag == 1) and (getprop(lw~"tmp/presampling-status") == "idle")
 	}
 
 
+# see if we use METAR for weather setup
 
+if ((getprop("/environment/metar/valid") == 1) and (getprop(lw~"tmp/tile-management") == "METAR"))
+	{
+	type = "METAR";
+	metar_flag = 1;	
+	
+	setprop(lw~"METAR/station-id","METAR");
+
+	# switch off normal 3d clouds
+
+	var layers = props.globals.getNode("/environment/clouds").getChildren("layer");
+
+	foreach (l; layers)
+		{
+		l.getNode("coverage-type").setValue(5);
+		}
+	
+	}
+else if ((getprop("/environment/metar/valid") == 0) and (getprop(lw~"tmp/tile-management") == "METAR"))
+	{
+	print("No METAR available, aborting...");
+	setprop("/sim/messages/pilot", "Local weather: No METAR available! Aborting...");
+	return;
+	}
 
 
 # see if we need to create an aloft wind interpolation structure
@@ -3198,49 +3272,69 @@ if ((wind_model_flag == 3) or ((wind_model_flag ==5) and (getprop(lwi~"ipoint-nu
 
 # prepare the first tile wind field
 
-if (wind_model_flag == 5) # it needs to be interpolated
+if (metar_flag == 1) # the winds from current METAR are used
 	{
-	var res = wind_interpolation(lat,lon,0.0);
+	if ((wind_model_flag == 1) or (wind_model_flag == 2))
+		{
+		# METAR reports ground winds, we want to set aloft, so we need to compute the local boundary layer
+		# need to set the tile index for this
+		setprop(lw~"tiles/tile[4]/tile-index",1);
 
-	append(weather_dynamics.tile_wind_direction,res[0]);
-	append(weather_dynamics.tile_wind_speed,res[1]);
+		var boundary_correction = 1.0/get_slowdown_fraction();
 
+		append(weather_dynamics.tile_wind_direction, getprop("environment/metar/base-wind-dir-deg"));
+		append(weather_dynamics.tile_wind_speed, boundary_correction * getprop("environment/metar/base-wind-speed-kt"));
+		setprop(lw~"tmp/tile-orientation-deg",getprop("environment/metar/base-wind-dir-deg"));
+		}
+	else
+		{
+		print("Wind model currently not supported with live data!");
+		setprop("/sim/messages/pilot", "Local weather: Wind model currently not supported with live data! Aborting...");
+		return;
+		}
 	}
-else if (wind_model_flag == 3) # it comes from a different menu
+else
 	{
-	append(weather_dynamics.tile_wind_direction, getprop(lw~"tmp/FL0-wind-from-heading-deg"));
-	append(weather_dynamics.tile_wind_speed, getprop(lw~"tmp/FL0-windspeed-kt"));
-	}
-else # it comes from the standard menu
-	{
-	append(weather_dynamics.tile_wind_direction, getprop(lw~"tmp/tile-orientation-deg"));
-	append(weather_dynamics.tile_wind_speed, getprop(lw~"tmp/windspeed-kt"));
-	}
 
-# when the aloft wind menu is used, the lowest winds should be taken from there
-# so we need to overwrite the setting from the tile generating menu in this case
-# otherwise the wrong orientation is built
+	if (wind_model_flag == 5) # it needs to be interpolated
+		{
+		var res = wind_interpolation(lat,lon,0.0);
+
+		append(weather_dynamics.tile_wind_direction,res[0]);
+		append(weather_dynamics.tile_wind_speed,res[1]);
+		}
+	else if (wind_model_flag == 3) # it comes from a different menu
+		{
+		append(weather_dynamics.tile_wind_direction, getprop(lw~"tmp/FL0-wind-from-heading-deg"));
+		append(weather_dynamics.tile_wind_speed, getprop(lw~"tmp/FL0-windspeed-kt"));
+		}
+	else # it comes from the standard menu
+		{
+		append(weather_dynamics.tile_wind_direction, getprop(lw~"tmp/tile-orientation-deg"));
+		append(weather_dynamics.tile_wind_speed, getprop(lw~"tmp/windspeed-kt"));
+		}
+
+	# when the aloft wind menu is used, the lowest winds should be taken from there
+	# so we need to overwrite the setting from the tile generating menu in this case
+	# otherwise the wrong orientation is built
 
 
-if (wind_model_flag ==3)
-	{
-	setprop(lw~"tmp/tile-orientation-deg", getprop(lw~"tmp/FL0-wind-from-heading-deg"));
-	}
-else if (wind_model_flag == 5) 
-	{
-	setprop(lw~"tmp/tile-orientation-deg", weather_dynamics.tile_wind_direction[0]);
-	}
-
+	if (wind_model_flag ==3)
+		{
+		setprop(lw~"tmp/tile-orientation-deg", getprop(lw~"tmp/FL0-wind-from-heading-deg"));
+		}
+	else if (wind_model_flag == 5) 
+		{
+		setprop(lw~"tmp/tile-orientation-deg", weather_dynamics.tile_wind_direction[0]);
+		}
+}
 
 # create all the neighbouring tile coordinate sets
 
 weather_tile_management.create_neighbours(lat,lon,getprop(lw~"tmp/tile-orientation-deg"));
 
 
-# see if we use METAR for weather setup
 
-if ((getprop(lw~"METAR/available-flag") == 1) and (getprop(lw~"tmp/tile-management") == "METAR"))
-	{type = "METAR";}
 
 setprop(lw~"tiles/tile-counter",getprop(lw~"tiles/tile-counter")+1);
 
@@ -3743,6 +3837,7 @@ var presampling_flag = 1;
 var detailed_clouds_flag = 1;
 var dynamical_convection_flag = 1;
 var debug_output_flag = 1;
+var metar_flag = 0;
 
 
 # set all sorts of default properties for the menu

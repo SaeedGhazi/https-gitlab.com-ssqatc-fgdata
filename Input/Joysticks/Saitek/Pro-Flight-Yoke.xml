@@ -211,6 +211,35 @@
    </binding>
   </mod-up>
  </button>
+ <button n="18"> <!-- Labled as T5 -->
+     <desc>Retract Spoilers</desc>
+     <repeatable>false</repeatable>
+     <binding>
+         <command>nasal</command>
+         <script>controls.stepSpoilers(-1)</script>
+     </binding>
+     <mod-up>
+         <binding>
+             <command>nasal</command>
+             <script>controls.stepSpoilers(0)</script>
+         </binding>
+     </mod-up>
+ </button>
+ 
+ <button n="19"> <!-- Labled as T6 -->
+     <desc>Deploy Spoilers</desc>
+     <repeatable>false</repeatable>
+     <binding>
+         <command>nasal</command>
+         <script>controls.stepSpoilers(1)</script>
+     </binding>
+     <mod-up>
+         <binding>
+             <command>nasal</command>
+             <script>controls.stepSpoilers(0)</script>
+         </binding>
+     </mod-up>
+ </button>
  <button n="20">
    <desc>thrust reverse</desc>
      <repeatable type="bool">false</repeatable>

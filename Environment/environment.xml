@@ -213,7 +213,30 @@
   <cloudlayers include="cloudlayers.xml"/>
 
   <realwx>
-    <metar>/environment/metar</metar>
+    <!-- Spawn a metar loader for each metar node 
+         index 0..9 are reserved for internal (hardcoded) loaders
+         and will be set from FlightGear's subsystems.
+         Index 10..n may be used by user defined systems
+         
+         To retrieve a METAR in /environment/metar[10], write
+         the station id (e.g. KSFO) to 
+         /enviornment/metar[10]/station-id and set 
+         /environment/metar[10]/time-to-live to zero
+         Wait for 
+         /environment/metar[10]/valid to become true.
+    -->
+    <metar n="0">/environment/metar[0]</metar> <!-- nearest airport -->
+    <metar n="1">/environment/metar[1]</metar> <!-- NAV1 -->
+    <metar n="2">/environment/metar[2]</metar> <!-- NAV2 -->
+    <metar n="3">/environment/metar[3]</metar> <!-- VHF-COMM1 -->
+    <metar n="4">/environment/metar[4]</metar> <!-- VHF-COMM2 -->
+    <metar n="5">/environment/metar[5]</metar> <!-- UHF-COMM1 -->
+    <metar n="6">/environment/metar[6]</metar> <!-- UHF-COMM2 -->
+    
+    <!-- User defined queries -->
+    <metar n="10">/environment/metar[10]</metar> 
+    <metar n="11">/environment/metar[11]</metar>
+    
     <!-- use NOAA for METAR (no aloft data) -->
     <data-source>noaa</data-source>
 

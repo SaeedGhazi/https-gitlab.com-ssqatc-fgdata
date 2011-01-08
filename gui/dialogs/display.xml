@@ -4,6 +4,7 @@
   <name>display</name>
   <modal>false</modal>
   <layout>vbox</layout>
+  <padding>20</padding>
 
   <group>
     <layout>hbox</layout>
@@ -62,7 +63,7 @@
 
     <checkbox>
       <halign>left</halign>
-      <label>Show 2D Panel</label>
+      <label>Show 2D panel</label>
       <property>/sim/panel/visibility</property>
       <binding>
         <command>dialog-apply</command>
@@ -71,12 +72,43 @@
 
     <checkbox>
       <halign>left</halign>
-      <label>Autohide Menubar</label>
+      <label>Autohide menubar</label>
       <property>/sim/menubar/autovisibility/enabled</property>
       <binding>
         <command>dialog-apply</command>
       </binding>
     </checkbox>
+
+	<group>
+	  <layout>hbox</layout>
+
+	  <checkbox>
+        <label>Autohide cursor in</label>
+        <property>/sim/mouse/hide-cursor</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+
+	  <input>
+		<live>true</live>
+		<pref-width>40</pref-width>
+		<pref-height>10</pref-height>
+		<enable>
+          <property>/sim/mouse/hide-cursor</property>
+        </enable>
+        <property>/sim/mouse/cursor-timeout-sec</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </input>
+	  
+	  <text>
+		<label>sec.</label>
+	  </text>
+
+	</group>
+
   </group>
 
   <hrule/>

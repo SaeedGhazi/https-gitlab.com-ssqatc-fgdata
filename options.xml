@@ -223,6 +223,16 @@
    </option>
 
    <option>
+    <name>disable-ai-traffic</name>
+    <description>strings/disable-ai-traffic-desc</description>
+   </option>
+
+   <option>
+    <name>enable-ai-traffic</name>
+    <description>strings/enable-ai-traffic-desc</description>
+   </option>
+
+   <option>
     <name>ai-scenario</name>
     <arg>scenario</arg>
     <description>strings/ai-scenario</description>

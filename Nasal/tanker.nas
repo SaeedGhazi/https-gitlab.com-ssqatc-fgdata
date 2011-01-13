@@ -283,6 +283,27 @@ var request = func {
 }
 
 
+var request_random = func {
+        var tanker = values(Tanker.active);
+        if (size(tanker))
+                return tanker[0].identify();
+
+        var type = props.globals.getNode("systems/refuel", 1).getChildren("type");
+        if (!size(type))
+                return;
+        type = type[rand() * size(type)].getValue();
+
+        var (aiid, callsign, tacanid) =_= identity.get();
+        var hdg = rand() * 360;
+        var course = rand() * 360;
+        var dist = 6000 + rand() * 4000;
+        var alt = int(10 + rand() * 15) * 1000;  # FL100--FL250
+        alt = skip_cloud_layer(alt * FT2M);
+        var coord = geo.aircraft_position().apply_course_distance(course, dist).set_alt(alt);
+        Tanker.new(aiid, callsign, tacanid, type, 250, hdg, coord);
+}
+
+
 var report = func {
 	var tanker = values(Tanker.active);
 	if (size(tanker))

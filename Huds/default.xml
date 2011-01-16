@@ -2,8 +2,7 @@
 
 <PropertyList>
 	<name>Default Aircraft Hud</name>
-	<enable3d>true</enable3d>
-
+	
 	<import>
 		<path>Huds/Instruments/turn-bank-indicator.xml</path>
 		<y-offset>-195</y-offset>

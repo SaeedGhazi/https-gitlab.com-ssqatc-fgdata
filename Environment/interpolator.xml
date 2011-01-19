@@ -73,6 +73,12 @@
         <property>/environment/config/enabled</property>
       </condition>
     </enable>
+    <input>
+      <condition>
+        <property>/environment/config/presets/visibility-m-override</property>
+      </condition>
+      <property>/environment/config/presets/visibility-m</property>
+    </input>
     <input>/environment/config/interpolated/visibility-m</input>
     <output>/environment/visibility-m</output>
     <type>exponential</type>
@@ -89,6 +95,12 @@
         <property>/environment/config/enabled</property>
       </condition>
     </enable>
+    <input>
+      <condition>
+        <property>/environment/config/presets/wind-override</property>
+      </condition>
+      <property>/environment/config/presets/wind-from-north-fps</property>
+    </input>
     <input>/environment/config/interpolated/wind-from-north-fps</input>
     <output>/environment/wind-from-north-fps</output>
     <type>exponential</type>
@@ -102,6 +114,12 @@
         <property>/environment/config/enabled</property>
       </condition>
     </enable>
+    <input>
+      <condition>
+        <property>/environment/config/presets/wind-override</property>
+      </condition>
+      <property>/environment/config/presets/wind-from-east-fps</property>
+    </input>
     <input>/environment/config/interpolated/wind-from-east-fps</input>
     <output>/environment/wind-from-east-fps</output>
     <type>exponential</type>

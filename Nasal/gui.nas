@@ -1249,6 +1249,7 @@ var basic_keys = {
         { name: "x/X",       desc: "zoom in/out" },
         { name: "Ctrl-X",    desc: "reset zoom to default" },
         { name: "z/Z",       desc: "increase/decrease visibility" },
+        { name: "Ctrl-Z",    desc: "reset visibility to default" },
         { name: "'",         desc: "display ATC setting dialog" },
         { name: "+",         desc: "let ATC/instructor repeat last message" },
         { name: "-",         desc: "open chat dialog" },

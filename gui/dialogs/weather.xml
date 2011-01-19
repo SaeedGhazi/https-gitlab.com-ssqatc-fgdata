@@ -1599,7 +1599,23 @@
           } else if( getprop( "environment/realwx/enabled" ) ) {
             setprop( me.base ~ "/source-selection", "Live data" );
           } else {
-            setprop( me.base ~ "/source-selection", "Manual input" );
+            # preset configured scenario
+            var wsn = props.globals.getNode( "/environment/weather-scenarios" );
+            var found = 0;
+            if( wsn != nil ) {
+              var scenarios = wsn.getChildren("scenario");
+              forindex (var i; scenarios ) {
+                var metarN = scenarios[i].getNode("metar");
+                metarN == nil and continue;
+                if( metarN.getValue() == getprop("/environment/metar/data","") ) {
+                  setprop( me.base ~ "/source-selection", scenarios[i].getNode("name").getValue() );
+                  found = 1;
+                  break;
+                }
+              }
+            }
+            if( found == 0 )
+              setprop( me.base ~ "/source-selection", "Manual input" );
           }
           setprop( me.base ~ "/metar", normalize_string(getprop("environment/metar/data")) );
 

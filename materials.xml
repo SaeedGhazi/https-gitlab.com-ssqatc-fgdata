@@ -181,6 +181,12 @@ Shared parameters for various materials.
   <wrapu>false</wrapu>
   <wrapv>false</wrapv>
  </material>
+ 
+ <material>
+  <name>pa_stopway</name>
+  <texture>Runway/pa_stopway.png</texture>
+  <wrapu>false</wrapu>
+ </material>
 
  <material>
   <name>pa_L</name>
@@ -422,6 +428,12 @@ Shared parameters for various materials.
   <texture>Runway/pc_threshold.png</texture>
   <wrapu>false</wrapu>
   <wrapv>false</wrapv>
+ </material>
+ 
+ <material>
+  <name>pc_stopway</name>
+  <texture>Runway/pc_stopway.png</texture>
+  <wrapu>false</wrapu>
  </material>
 
  <material>

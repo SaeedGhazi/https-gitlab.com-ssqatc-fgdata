@@ -1362,6 +1362,7 @@ Shared parameters for various materials.
   <name>IrrCropPastureCover</name>
   <name>IrrCrop</name>
   <name>Orchard</name>
+  <name>Rice</name>
   <texture>Terrain/irrcrop1.png</texture>
   <texture>Terrain/irrcrop2.png</texture>
   <texture>Terrain/irrcrop3.png</texture>

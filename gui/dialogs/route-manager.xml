@@ -39,6 +39,7 @@ command interface /autopilot/route-manager/input:
 
             var clear = func {
                 cmd.setValue("@clear");
+                selection.setIntValue(-1);
             }
 
             var insert = func {

@@ -126,4 +126,36 @@
     <filter-time>5</filter-time>
   </filter>
 
+  <filter>
+    <name>EnvironmentInterpolator:turbulence-magnitude</name>
+    <enable>
+      <condition>
+        <property>/environment/config/enabled</property>
+      </condition>
+    </enable>
+    <input>
+      <condition>
+        <property>/environment/config/presets/turbulence-magnitude-norm-override</property>
+      </condition>
+      <property>/environment/config/presets/turbulence-magnitude-norm-override</property>
+    </input>
+    <input>/environment/config/interpolated/turbulence/magnitude-norm</input>
+    <output>/environment/turbulence/magnitude-norm</output>
+    <type>exponential</type>
+    <filter-time>1</filter-time>
+  </filter>
+
+  <filter>
+    <name>EnvironmentInterpolator:turbulence-rate</name>
+    <enable>
+      <condition>
+        <property>/environment/config/enabled</property>
+      </condition>
+    </enable>
+    <input>/environment/config/interpolated/turbulence/rate-hz</input>
+    <output>/environment/turbulence/rate-hz</output>
+    <type>exponential</type>
+    <filter-time>1</filter-time>
+  </filter>
+
 </PropertyList>

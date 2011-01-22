@@ -532,6 +532,54 @@ var FileSelector = {
     },
 };
 
+##
+# ScreenshotSelector class (derived from Dialog class).
+#
+# SYNOPSIS: DirectorySelector.new(<callback>, <title>, <button> [, <pattern> [, <dir>]])
+#
+#         callback ... callback function that gets return value as first argument
+#         title    ... dialog title
+#         button   ... button text (should say "Save", "Load", etc. and not just "OK")
+#         pattern  ... array with shell pattern or nil (which is equivalent to "*")
+#         dir      ... starting dir ($FG_ROOT if unset)
+
+var ScreenshotSelector = {
+    new: func(callback, title, button, pattern = nil, dir = "") {
+        var name = "screenshot";
+        ## var data = props.globals.getNode("/sim/gui/dialogs/", 1);
+        # for (var i = 1; 1; i += 1)
+        #    if (data.getNode(name ~ i, 0) == nil)
+        #        break;
+        data = props.globals.getNode("sim/gui/dialogs/screenshot", 1);
+
+        var m = Dialog.new(data.getNode("dialog", 1), "gui/dialogs/screenshot.xml", name);
+        m.parents = [ScreenshotSelector, Dialog];
+        m.data = data;
+        m.set_title(title);
+        m.set_button(button);
+        m.set_directory(dir);
+        m.set_pattern(pattern);
+        m.cblistener = setlistener(data.getNode("path", 1), callback);
+        return m;
+    },
+    # setters only take effect after the next call to open()
+    set_title: func(title) { me.data.getNode("title", 1).setValue(title) },
+    set_button: func(button) { me.data.getNode("button", 1).setValue(button) },
+    set_directory: func(dir) { me.data.getNode("directory", 1).setValue(dir) },
+    set_pattern: func(pattern) {
+        me.data.removeChildren("pattern");
+        if (pattern != nil)
+            forindex (var i; pattern)
+                me.data.getChild("pattern", i, 1).setValue(pattern[i]);
+    },
+    del: func {
+        me.close();
+        delete(me.instance, me.name);
+        removelistener(me.cblistener);
+        me.data.remove();
+    },
+};
+
 
 ##
 # Save/load flight menu functions.
@@ -560,6 +608,32 @@ var load_flight = func {
     load_flight_sel.open();
 }
 
+
+##
+# Save screenshot menu function.
+#
+var save_screenshot_sel = nil;
+var save_screenshot = func {
+    foreach (var n; props.globals.getNode("/sim/presets").getChildren())
+        n.setAttribute("archive", 1);
+    var save = func(n) {
+		save_screenshot_sel.close();
+		setprop("/sim/paths/screenshot-dir", n.getValue());
+		var hide_menubar = getprop("sim/gui/dialogs/screenshot/hide-menubar");
+		if (hide_menubar == 1){
+			menu_visibility = getprop("/sim/menubar/visibility");
+			setprop("/sim/menubar/visibility",0);
+			}
+		settimer(func { fgcommand("screen-capture") },0);
+		if (hide_menubar == 1){
+			settimer(func { setprop("/sim/menubar/visibility",menu_visibility) },0);
+			}
+		}
+    if (save_screenshot_sel == nil)
+        save_screenshot_sel = ScreenshotSelector.new(save, "Save Screenshot", "Take screenshot",
+                , getprop("/sim/paths/screenshot-dir"),);
+    save_screenshot_sel.open();
+}
 
 
 ##
@@ -1175,6 +1249,7 @@ var basic_keys = {
         { name: "x/X",       desc: "zoom in/out" },
         { name: "Ctrl-X",    desc: "reset zoom to default" },
         { name: "z/Z",       desc: "increase/decrease visibility" },
+        { name: "Ctrl-Z",    desc: "reset visibility to default" },
         { name: "'",         desc: "display ATC setting dialog" },
         { name: "+",         desc: "let ATC/instructor repeat last message" },
         { name: "-",         desc: "open chat dialog" },

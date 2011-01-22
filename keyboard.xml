@@ -255,7 +255,16 @@ top down before the key bindings are parsed.
   </binding>
  </key>
 
- <key n="27">
+  <key n="26">
+    <name>Ctrl-Z</name>
+    <desc>Reset visibility to default</desc>
+    <binding>
+      <command>nasal</command>
+      <script>environment.resetVisibility()</script>
+    </binding>
+  </key>
+
+  <key n="27">
   <name>ESC</name>
   <desc>Prompt and quit FlightGear</desc>
   <binding>
@@ -765,7 +774,8 @@ top down before the key bindings are parsed.
   <desc>Decrease Visibility</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
-   <command>decrease-visibility</command>
+   <command>nasal</command>
+   <script>environment.decreaseVisibility()</script>
   </binding>
  </key>
 
@@ -1040,8 +1050,9 @@ top down before the key bindings are parsed.
   <name>z</name>
   <desc>Increase Visibility</desc>
   <repeatable type="bool">true</repeatable>
-  <binding>
-   <command>increase-visibility</command>
+   <binding>
+   <command>nasal</command>
+   <script>environment.increaseVisibility()</script>
   </binding>
  </key>
 

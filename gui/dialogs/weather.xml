@@ -578,6 +578,12 @@
               <label>Dewpt (C)</label>
             </text>
 
+            <text>
+              <row>0</row>
+              <col>6</col>
+              <label>Turbulence</label>
+            </text>
+
             <input>
               <name>aloft-4-elevation-ft</name>
               <row>1</row>
@@ -685,6 +691,33 @@
                 <object-name>aloft-4-dewpoint-degc</object-name>
               </binding>
             </input>
+
+            <combo>
+              <name>aloft-4-turbulence</name>
+              <row>1</row>
+              <col>6</col>
+              <pref-width>90</pref-width>
+              <live>true</live>
+              <property>/environment/config/aloft/entry[4]/turbulence-name</property>
+              <value>none</value>
+              <value>light</value>
+              <value>moderate</value>
+              <value>severe</value>
+              <binding>
+                <command>dialog-apply</command>
+                <object-name>aloft-4-turbulence</object-name>
+              </binding>
+              <binding>
+                <command>nasal</command>
+                <script>controller.setTurbulence("aloft",4);</script>
+              </binding>
+              <!--enable>
+                <equals>
+                  <property>/sim/gui/dialogs/weather-scenario/state</property>
+                  <value type="int">1</value>
+                </equals>
+              </enable-->
+            </combo>
 
             <input>
               <name>aloft-3-elevation-ft</name>
@@ -794,6 +827,33 @@
               </binding>
             </input>
 
+            <combo>
+              <name>aloft-3-turbulence</name>
+              <row>2</row>
+              <col>6</col>
+              <pref-width>90</pref-width>
+              <live>true</live>
+              <property>/environment/config/aloft/entry[3]/turbulence-name</property>
+              <value>none</value>
+              <value>light</value>
+              <value>moderate</value>
+              <value>severe</value>
+              <binding>
+                <command>dialog-apply</command>
+                <object-name>aloft-3-turbulence</object-name>
+              </binding>
+              <binding>
+                <command>nasal</command>
+                <script>controller.setTurbulence("aloft",3);</script>
+              </binding>
+              <!--enable>
+                <equals>
+                  <property>/sim/gui/dialogs/weather-scenario/state</property>
+                  <value type="int">1</value>
+                </equals>
+              </enable-->
+            </combo>
+
             <input>
               <name>aloft-2-elevation-ft</name>
               <row>3</row>
@@ -902,6 +962,34 @@
               </binding>
             </input>
 
+            <combo>
+              <name>aloft-2-turbulence</name>
+              <row>3</row>
+              <col>6</col>
+              <pref-width>90</pref-width>
+              <live>true</live>
+              <property>/environment/config/aloft/entry[2]/turbulence-name</property>
+              <value>none</value>
+              <value>light</value>
+              <value>moderate</value>
+              <value>severe</value>
+              <binding>
+                <command>dialog-apply</command>
+                <object-name>aloft-2-turbulence</object-name>
+              </binding>
+              <binding>
+                <command>nasal</command>
+                <script>controller.setTurbulence("aloft",2);</script>
+              </binding>
+              <!--enable>
+                <equals>
+                  <property>/sim/gui/dialogs/weather-scenario/state</property>
+                  <value type="int">1</value>
+                </equals>
+              </enable-->
+            </combo>
+
+
             <input>
               <name>aloft-1-elevation-ft</name>
               <row>4</row>
@@ -1009,6 +1097,33 @@
                 <object-name>aloft-1-dewpoint-degc</object-name>
               </binding>
             </input>
+
+            <combo>
+              <name>aloft-1-turbulence</name>
+              <row>4</row>
+              <col>6</col>
+              <pref-width>90</pref-width>
+              <live>true</live>
+              <property>/environment/config/aloft/entry[1]/turbulence-name</property>
+              <value>none</value>
+              <value>light</value>
+              <value>moderate</value>
+              <value>severe</value>
+              <binding>
+                <command>dialog-apply</command>
+                <object-name>aloft-1-turbulence</object-name>
+              </binding>
+              <binding>
+                <command>nasal</command>
+                <script>controller.setTurbulence("aloft",1);</script>
+              </binding>
+              <!--enable>
+                <equals>
+                  <property>/sim/gui/dialogs/weather-scenario/state</property>
+                  <value type="int">1</value>
+                </equals>
+              </enable-->
+            </combo>
 
             <input>
               <name>aloft-0-elevation-ft</name>
@@ -1123,6 +1238,34 @@
                 <object-name>aloft-0-dewpoint-degc</object-name>
               </binding>
             </input>
+
+            <combo>
+              <name>aloft-0-turbulence</name>
+              <row>5</row>
+              <col>6</col>
+              <pref-width>90</pref-width>
+              <live>true</live>
+              <property>/environment/config/aloft/entry[0]/turbulence-name</property>
+              <value>none</value>
+              <value>light</value>
+              <value>moderate</value>
+              <value>severe</value>
+              <binding>
+                <command>dialog-apply</command>
+                <object-name>aloft-0-turbulence</object-name>
+              </binding>
+              <binding>
+                <command>nasal</command>
+                <script>controller.setTurbulence("aloft",0);</script>
+              </binding>
+              <!--enable>
+                <equals>
+                  <property>/sim/gui/dialogs/weather-scenario/state</property>
+                  <value type="int">1</value>
+                </equals>
+              </enable-->
+            </combo>
+
           </group>
           <empty>
             <stretch>true</stretch>
@@ -1316,6 +1459,33 @@
               </binding>
             </input>
 
+            <combo>
+              <name>boundary-1-turbulence</name>
+              <row>1</row>
+              <col>6</col>
+              <pref-width>90</pref-width>
+              <live>true</live>
+              <property>/environment/config/boundary/entry[1]/turbulence-name</property>
+              <value>none</value>
+              <value>light</value>
+              <value>moderate</value>
+              <value>severe</value>
+              <binding>
+                <command>dialog-apply</command>
+                <object-name>boundary-1-turbulence</object-name>
+              </binding>
+              <binding>
+                <command>nasal</command>
+                <script>controller.setTurbulence("boundary",1);</script>
+              </binding>
+              <!--enable>
+                <equals>
+                  <property>/sim/gui/dialogs/weather-scenario/state</property>
+                  <value type="int">1</value>
+                </equals>
+              </enable-->
+            </combo>
+
             <input>
               <name>boundary-0-elevation-ft</name>
               <row>2</row>
@@ -1429,6 +1599,34 @@
                 <object-name>boundary-0-dewpoint-degc</object-name>
               </binding>
             </input>
+
+            <combo>
+              <name>boundary-0-turbulence</name>
+              <row>2</row>
+              <col>6</col>
+              <pref-width>90</pref-width>
+              <live>true</live>
+              <property>/environment/config/boundary/entry[0]/turbulence-name</property>
+              <value>none</value>
+              <value>light</value>
+              <value>moderate</value>
+              <value>severe</value>
+              <binding>
+                <command>dialog-apply</command>
+                <object-name>boundary-0-turbulence</object-name>
+              </binding>
+              <binding>
+                <command>nasal</command>
+                <script>controller.setTurbulence("boundary",0);</script>
+              </binding>
+              <!--enable>
+                <equals>
+                  <property>/sim/gui/dialogs/weather-scenario/state</property>
+                  <value type="int">1</value>
+                </equals>
+              </enable-->
+            </combo>
+
           </group>
           <empty>
             <stretch>true</stretch>
@@ -1593,13 +1791,35 @@
         },
 
         open : func {
+          for( var i = 0; i < 5; i+=1 )
+            me.initTurbulence("aloft", i );
+
+          for( var i = 0; i < 2; i+=1 )
+            me.initTurbulence("boundary", i );
+           
           #initialize the METAR source selection
           if( getprop( "environment/params/metar-updates-environment" ) == 0 ) {
             setprop( me.base ~ "/source-selection", "Disabled" );
           } else if( getprop( "environment/realwx/enabled" ) ) {
             setprop( me.base ~ "/source-selection", "Live data" );
           } else {
-            setprop( me.base ~ "/source-selection", "Manual input" );
+            # preset configured scenario
+            var wsn = props.globals.getNode( "/environment/weather-scenarios" );
+            var found = 0;
+            if( wsn != nil ) {
+              var scenarios = wsn.getChildren("scenario");
+              forindex (var i; scenarios ) {
+                var metarN = scenarios[i].getNode("metar");
+                metarN == nil and continue;
+                if( metarN.getValue() == getprop("/environment/metar/data","") ) {
+                  setprop( me.base ~ "/source-selection", scenarios[i].getNode("name").getValue() );
+                  found = 1;
+                  break;
+                }
+              }
+            }
+            if( found == 0 )
+              setprop( me.base ~ "/source-selection", "Manual input" );
           }
           setprop( me.base ~ "/metar", normalize_string(getprop("environment/metar/data")) );
 
@@ -1696,6 +1916,26 @@
           setprop( me.base ~ "/metar", metar );
           gui.dialog_update( "weather", "metar" );
         },
+
+        setTurbulence : func( where, idx ) {
+          var propPath = "/environment/config/" ~ where ~ "/entry[" ~ idx ~ "]/";
+          setprop( propPath ~ "turbulence/magnitude-norm", 
+            me.turbulenceNames[getprop(propPath ~ "turbulence-name")]/(size(me.turbulenceNames)-1) );
+        },
+
+        initTurbulence : func( where, idx ) {
+          var propPath = "/environment/config/" ~ where ~ "/entry[" ~ idx ~ "]/";
+          var turb = getprop( propPath ~ "turbulence/magnitude-norm" ) * (size(me.turbulenceNames)-1);
+          turb = int(int(10*turb+5)/10); # round to nearest integer
+          foreach( var t; keys(me.turbulenceNames) ) {
+            if( me.turbulenceNames[t] == turb ) {
+              setprop( propPath ~ "turbulence-name", t );
+              break;
+            }
+          }
+        },
+
+        turbulenceNames : { "none" : 0, "light" : 1, "moderate" : 2, "severe" : 3 },
 
       };
 

@@ -246,7 +246,7 @@ Started September 2000 by David Megginson, david@megginson.com
   </current-view>
   <panel>
    <path>Aircraft/Generic/Panels/generic-vfr-panel.xml</path>
-   <visibility type="bool">false</visibility>
+   <visibility type="bool" userarchive="y">false</visibility>
    <jitter type="bool">false</jitter>
   </panel>
   <panel_2>
@@ -574,8 +574,8 @@ Started September 2000 by David Megginson, david@megginson.com
   </gui>
 
   <mouse>
-    <hide-cursor>true</hide-cursor>
-    <cursor-timeout-sec>10.0</cursor-timeout-sec>
+    <hide-cursor type="bool" userarchive="y">true</hide-cursor>
+    <cursor-timeout-sec type="int" userarchive="y">10.0</cursor-timeout-sec>
   </mouse>
 
   <replay>

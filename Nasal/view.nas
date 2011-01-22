@@ -252,8 +252,9 @@ var fly_by_view_handler = {
 		me.latN = props.globals.getNode("/sim/viewer/latitude-deg", 1);
 		me.lonN = props.globals.getNode("/sim/viewer/longitude-deg", 1);
 		me.altN = props.globals.getNode("/sim/viewer/altitude-ft", 1);
-		# me.hdgN = props.globals.getNode("/orientation/heading-deg", 1);
-		me.hdgN = props.globals.getNode("/instrumentation/gps/indicated-track-true-deg", 1);
+		me.vnN = props.globals.getNode("/velocities/speed-north-fps", 1);
+		me.veN = props.globals.getNode("/velocities/speed-east-fps", 1);
+		me.hdgN = props.globals.getNode("/orientation/heading-deg", 1);
 
 		setlistener("/sim/signals/reinit", func(n) { n.getValue() or me.reset() });
 		setlistener("/sim/crashed", func(n) { n.getValue() and me.reset() });
@@ -267,21 +268,37 @@ var fly_by_view_handler = {
 	},
 	reset: func {
 		me.chase = -getprop("/sim/chase-distance-m");
-		me.course = me.hdgN.getValue();
+		# me.course = me.hdgN.getValue();
+		var vn = me.vnN.getValue();
+		var ve = me.veN.getValue();
+		me.course = (0.5*math.pi - math.atan2(vn, ve))*R2D;
+		
 		me.last = geo.aircraft_position();
 		me.setpos(1);
-		me.dist = 20;
+		# me.dist = 20;
 	},
 	setpos : func(force = 0) {
 		var pos = geo.aircraft_position();
+		var vn = me.vnN.getValue();
+		var ve = me.veN.getValue();
+
+		var dist = 0.0;
+		if ( force ) {
+		    # predict distance based on speed
+		    var mps = math.sqrt( vn*vn + ve*ve ) * FT2M;
+		    dist = mps * 3.5; # 3.5 seconds worth of travel
+		} else {
+		    # use actual distance
+		    dist = me.last.distance_to(pos);
+		}
 
 		# check if the aircraft has moved enough
-		var dist = me.last.distance_to(pos);
 		if (dist < 1.7 * me.chase and !force)
 			return 1.13;
 
 		# "predict" and remember next aircraft position
-		var course = me.hdgN.getValue();
+		# var course = me.hdgN.getValue();
+		var course = (0.5*math.pi - math.atan2(vn, ve))*R2D;
 		var delta_alt = (pos.alt() - me.last.alt()) * 0.5;
 		pos.apply_course_distance(course, dist * 0.8);
 		pos.set_alt(pos.alt() + delta_alt);

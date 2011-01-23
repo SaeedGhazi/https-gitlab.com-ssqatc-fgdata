@@ -56,7 +56,7 @@
           <layout>hbox</layout>
           <text>
             <label>Cloud Layers (All Altitudes ft-AMSL)</label>
-		    <enable>
+            <enable>
               <property>/sim/gui/dialogs/weather-scenario/state</property>
             </enable>
           </text>
@@ -74,7 +74,7 @@
               <label>Altitude (ft)</label>
               <row>0</row>
               <col>1</col>
-		      <enable>
+              <enable>
                 <property>/sim/gui/dialogs/weather-scenario/state</property>
               </enable>
             </text>
@@ -84,7 +84,7 @@
               <row>0</row>
               <col>2</col>
               <width>80</width>
-		      <enable>
+              <enable>
                 <property>/sim/gui/dialogs/weather-scenario/state</property>
               </enable>
             </text>
@@ -93,7 +93,7 @@
               <label>Thickness (ft)</label>
               <row>0</row>
               <col>3</col>
-		      <enable>
+              <enable>
                 <property>/sim/gui/dialogs/weather-scenario/state</property>
               </enable>
             </text>
@@ -406,7 +406,7 @@
           <layout>hbox</layout>
           <text>
             <label>Precipitation</label>
-		    <enable>
+        <enable>
               <property>/sim/gui/dialogs/weather-scenario/state</property>
             </enable>
           </text>
@@ -424,7 +424,7 @@
               <row>0</row>
               <col>0</col>
               <label>Rain</label>
-		      <enable>
+          <enable>
                 <property>/sim/gui/dialogs/weather-scenario/state</property>
               </enable>
             </text>
@@ -433,7 +433,7 @@
               <row>0</row>
               <col>1</col>
               <label>Snow</label>
-		      <enable>
+          <enable>
                 <property>/sim/gui/dialogs/weather-scenario/state</property>
               </enable>
             </text>
@@ -478,7 +478,7 @@
               <row>0</row>
               <col>3</col>
               <label>QNH (inHg)</label>
-		      <enable>
+          <enable>
                 <property>/sim/gui/dialogs/weather-scenario/state</property>
               </enable>
             </text>
@@ -1284,7 +1284,7 @@
           <layout>hbox</layout>
           <text>
             <label>Boundary (All Elevations ft-AGL)</label>
-		    <enable>
+        <enable>
               <property>/sim/gui/dialogs/weather-scenario/state</property>
             </enable>
           </text>
@@ -1303,7 +1303,7 @@
               <row>0</row>
               <col>0</col>
               <label>Elevation</label>
-		      <enable>
+          <enable>
                 <property>/sim/gui/dialogs/weather-scenario/state</property>
               </enable>
             </text>
@@ -1313,7 +1313,7 @@
               <col>1</col>
               <colspan>2</colspan>
               <label>Wind (dir/kt)</label>
-		      <enable>
+          <enable>
                 <property>/sim/gui/dialogs/weather-scenario/state</property>
               </enable>
             </text>
@@ -1322,7 +1322,7 @@
               <row>0</row>
               <col>3</col>
               <label>Vis (m)</label>
-		      <enable>
+          <enable>
                 <property>/sim/gui/dialogs/weather-scenario/state</property>
               </enable>
             </text>
@@ -1331,7 +1331,7 @@
               <row>0</row>
               <col>4</col>
               <label>Temp (C)</label>
-		      <enable>
+          <enable>
                 <property>/sim/gui/dialogs/weather-scenario/state</property>
               </enable>
             </text>
@@ -1340,7 +1340,7 @@
               <row>0</row>
               <col>5</col>
               <label>Dewpt (C)</label>
-		      <enable>
+              <enable>
                 <property>/sim/gui/dialogs/weather-scenario/state</property>
               </enable>
             </text>
@@ -1709,42 +1709,65 @@
       <empty>
         <stretch>true</stretch>
       </empty>
+      <text>
+        <label>Data is valid</label>
+      </text>
       <checkbox>
         <property>/environment/metar/valid</property>
-        <label>valid</label>
+        <label/>
         <live>true</live>
-        <editable>false</editable>
+        <enable><false/></enable>
       </checkbox>
     </group>
 
-    <textbox>
-      <name>metar</name>
-      <halign>fill</halign>
-      <stretch>true</stretch>
-      <pref-width>180</pref-width>
-      <pref-height>50</pref-height>
-      <slider>20</slider>
-      <editable>true</editable>
-      <wrap>true</wrap>
-      <live>false</live>
-      <property>sim/gui/dialogs/weather-scenario/metar</property>
-      <enable>
-        <greater-than>
-          <property>/sim/gui/dialogs/weather-scenario/state</property>
-          <value type="int">1</value>
-        </greater-than>>
-      </enable>
-      <binding>
-        <command>dialog-apply</command>
-        <object-name>metar</object-name>
-      </binding>
-      <binding>
-        <command>nasal</command>
-        <script>
-          setprop( "/environment/metar/data", getprop( "sim/gui/dialogs/weather-scenario/metar") );
-        </script>
-      </binding>
-    </textbox>
+    <group>
+      <layout>hbox</layout>
+      <textbox>
+        <name>metar</name>
+        <halign>fill</halign>
+        <stretch>true</stretch>
+        <pref-width>180</pref-width>
+        <pref-height>50</pref-height>
+        <slider>20</slider>
+        <editable>true</editable>
+        <wrap>true</wrap>
+        <live>false</live>
+        <property>sim/gui/dialogs/weather-scenario/metar</property>
+        <enable>
+          <greater-than>
+            <property>/sim/gui/dialogs/weather-scenario/state</property>
+            <value type="int">1</value>
+          </greater-than>>
+        </enable>
+        <binding>
+          <command>dialog-apply</command>
+          <object-name>metar</object-name>
+        </binding>
+        <binding>
+          <command>nasal</command>
+          <script>
+            setprop( "/environment/metar/data", getprop( "sim/gui/dialogs/weather-scenario/metar") );
+          </script>
+        </binding>
+      </textbox>
+      <button>
+        <legend>Apply</legend>
+        <key>Esc</key>
+        <pref-width>50</pref-width>
+        <pref-height>50</pref-height>
+        <border>2</border>
+        <binding>
+          <command>dialog-apply</command>
+          <object-name>metar</object-name>
+        </binding>
+        <binding>
+          <command>nasal</command>
+          <script>
+            setprop( "/environment/metar/data", getprop( "sim/gui/dialogs/weather-scenario/metar") );
+          </script>
+        </binding>
+      </button>
+    </group>
 
     <!-- Automatic Weather -->
 

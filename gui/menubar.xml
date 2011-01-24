@@ -67,13 +67,6 @@
 				</script>
 			</binding>
 		</item>
-		<item>
-			<label>Screesnhot (set directory)</label>
-			<binding>
-				<command>nasal</command>
-				<script>gui.save_screenshot()</script>
-			</binding>
-		</item>
 		<!--
 		<item>
         <label>Last snapshot</label>

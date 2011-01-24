@@ -748,6 +748,7 @@ Shared parameters for various materials.
   <name>DeciduousBroadCover</name>
   <name>DeciduousForest</name>
   <name>Bog</name>
+  <name>Heath</name>
   <texture>Terrain/deciduous1.png</texture>
   <texture>Terrain/deciduous2.png</texture>
   <texture>Terrain/deciduous4.png</texture>
@@ -869,6 +870,7 @@ Shared parameters for various materials.
   <name>ShrubCover</name>
   <name>ShrubGrassCover</name>
   <name>ScrubCover</name>
+  <name>Sclerophyllous</name>
   <texture>Terrain/shrub1.png</texture>
 <!--
   <texture>Terrain/shrub.png</texture>
@@ -910,6 +912,10 @@ Shared parameters for various materials.
   </condition>
   <name>BuiltUpCover</name>
   <name>Urban</name>
+  <name>Construction</name>
+  <name>Construction</name>
+  <name>Industrial</name>
+  <name>Port</name>
   <effect>Effects/urban</effect>
   <texture-set>
    <texture>Terrain/city1.png</texture>
@@ -1004,6 +1010,7 @@ Shared parameters for various materials.
    </equals>
   </condition>
   <name>Town</name>
+  <name>SubUrban</name>
   <texture>Terrain/Town1.png</texture>
   <xsize>1024</xsize>
   <ysize>1024</ysize>
@@ -1067,6 +1074,8 @@ Shared parameters for various materials.
   <name>Stream</name>
   <name>Canal</name>
   <name>Lagoon</name>
+  <name>Estuary</name>
+  <name>Watercourse</name>
   <name>Saline</name>
   <texture>Terrain/water-lake.png</texture>
   <xsize>400</xsize>
@@ -1143,6 +1152,7 @@ Shared parameters for various materials.
   <name>Marsh</name>
   <name>Littoral</name>
   <name>FloodLand</name>
+  <name>SaltMarsh</name>
   <name>HerbWetlandCover</name>
   <name>WoodedWetlandCover</name>
   <texture>Terrain/marsh2.png</texture>
@@ -1261,6 +1271,7 @@ Shared parameters for various materials.
   <name>Grass</name>
   <name>Airport</name>
   <name>AirportKeep</name>
+  <name>Greenspace</name>
   <texture>Terrain/airport.png</texture>
   <xsize>125</xsize>
   <ysize>125</ysize>
@@ -1362,6 +1373,8 @@ Shared parameters for various materials.
   <name>IrrCropPastureCover</name>
   <name>IrrCrop</name>
   <name>Orchard</name>
+  <name>Olives</name>
+  <name>Vineyard</name>
   <name>Rice</name>
   <texture>Terrain/irrcrop1.png</texture>
   <texture>Terrain/irrcrop2.png</texture>
@@ -1426,6 +1439,7 @@ Shared parameters for various materials.
   <effect>Effects/crop</effect>
   <name>DryCropPastureCover</name>
   <name>DryCrop</name>
+  <name>NaturalCrop</name>
   <texture>Terrain/drycrop1.png</texture>
   <texture>Terrain/drycrop2.png</texture>
   <texture>Terrain/drycrop3.png</texture>
@@ -1492,6 +1506,7 @@ Shared parameters for various materials.
   <effect>Effects/cropgrass</effect>
   <name>CropGrassCover</name>
   <name>CropGrass</name>
+  <name>Grassland</name>
   <texture>Terrain/cropgrass1.png</texture>
   <texture>Terrain/cropgrass2.png</texture>
   <texture>Terrain/cropgrass3.png</texture>
@@ -1533,6 +1548,7 @@ Shared parameters for various materials.
   </condition>
   <name>CropWoodCover</name>
   <name>CropWood</name>
+  <name>AgroForest</name>
   <effect>Effects/landmass</effect>
   <texture>Terrain/cropwood.png</texture>
   <xsize>2000</xsize>
@@ -1594,6 +1610,7 @@ Shared parameters for various materials.
   <name>DeciduousBroadCover</name>
   <name>DeciduousForest</name>
   <name>Bog</name>
+  <name>Heath</name>
   <texture>Terrain.winter/deciduous1.png</texture>
   <texture>Terrain.winter/deciduous2.png</texture>
   <texture>Terrain.winter/deciduous4.png</texture>
@@ -1711,6 +1728,7 @@ Shared parameters for various materials.
   <name>ShrubCover</name>
   <name>ShrubGrassCover</name>
   <name>ScrubCover</name>
+  <name>Sclerophyllous</name>
   <texture>Terrain.winter/shrub.png</texture>
   <texture>Terrain.winter/shrub2.png</texture>
   <texture>Terrain.winter/shrub3.png</texture>
@@ -1749,6 +1767,9 @@ Shared parameters for various materials.
   </condition>
   <name>BuiltUpCover</name>
   <name>Urban</name>
+  <name>Construction</name>
+  <name>Industrial</name>
+  <name>Port</name>
   <effect>Effects/urban</effect>
   <texture-set>
    <texture>Terrain/city1.png</texture>
@@ -1843,6 +1864,7 @@ Shared parameters for various materials.
    </equals>
   </condition>
   <name>Town</name>
+  <name>SubUrban</name>
   <texture>Terrain.winter/Town1.png</texture>
   <xsize>1024</xsize>
   <ysize>1024</ysize>
@@ -1914,6 +1936,8 @@ Shared parameters for various materials.
   <name>Stream</name>
   <name>Canal</name>
   <name>Lagoon</name>
+  <name>Estuary</name>
+  <name>Watercourse</name>
   <name>Saline</name>
   <texture>Terrain.winter/water-lake.png</texture>
   <xsize>400</xsize>
@@ -1990,6 +2014,7 @@ Shared parameters for various materials.
   <name>Marsh</name>
   <name>Littoral</name>
   <name>FloodLand</name>
+  <name>SaltMarsh</name>
   <name>HerbWetlandCover</name>
   <name>WoodedWetlandCover</name>
   <texture>Terrain.winter/marsh2.png</texture>
@@ -2104,6 +2129,7 @@ Shared parameters for various materials.
   <name>Grass</name>
   <name>Airport</name>
   <name>AirportKeep</name>
+  <name>Greenspace</name>
   <texture>Terrain.winter/airport.png</texture>
   <xsize>125</xsize>
   <ysize>125</ysize>
@@ -2203,6 +2229,9 @@ Shared parameters for various materials.
   <name>IrrCropPastureCover</name>
   <name>IrrCrop</name>
   <name>Orchard</name>
+  <name>Olives</name>
+  <name>Vineyard</name>
+  <name>Rice</name>
   <texture>Terrain.winter/irrcrop1.png</texture>
   <texture>Terrain.winter/irrcrop2.png</texture>
   <texture>Terrain.winter/irrcrop3.png</texture>
@@ -2267,6 +2296,7 @@ Shared parameters for various materials.
   </condition>
   <name>DryCropPastureCover</name>
   <name>DryCrop</name>
+  <name>NaturalCrop</name>
   <texture>Terrain.winter/drycrop1.png</texture>
   <texture>Terrain.winter/drycrop2.png</texture>
   <texture>Terrain.winter/drycrop3.png</texture>
@@ -2332,6 +2362,7 @@ Shared parameters for various materials.
   </condition>
   <name>CropGrassCover</name>
   <name>CropGrass</name>
+  <name>Grassland</name>
   <texture>Terrain.winter/cropgrass1.png</texture>
   <texture>Terrain.winter/cropgrass2.png</texture>
   <texture>Terrain.winter/cropgrass3.png</texture>
@@ -2374,6 +2405,7 @@ Shared parameters for various materials.
    </equals>
   </condition>
   <name>CropWoodCover</name>
+  <name>AgroForest</name>
   <texture>Terrain.winter/cropwood.png</texture>
   <xsize>2000</xsize>
   <ysize>2000</ysize>
@@ -2555,6 +2587,7 @@ Shared parameters for various materials.
   <name>Dirt</name>
   <name>OpenMining</name>
   <name>Rock</name>
+  <name>Dump</name>
   <texture>Terrain/rock.png</texture>
   <xsize>500</xsize>
   <ysize>500</ysize>
@@ -2566,6 +2599,7 @@ Shared parameters for various materials.
 
  <material>
   <name>Lava</name>
+  <name>Burnt</name>
   <texture>Terrain/lava.png</texture>
   <xsize>500</xsize>
   <ysize>500</ysize>
@@ -2573,6 +2607,18 @@ Shared parameters for various materials.
   <friction-factor>0.9</friction-factor>
   <rolling-friction>0.1</rolling-friction>
   <bumpiness>0.3</bumpiness>
+ </material>
+
+ <material>
+  <name>Asphalt</name>
+  <texture>Terrain/asphalt.png</texture>
+  <xsize>400</xsize>
+  <ysize>400</ysize>
+  <solid>1</solid>
+  <friction-factor>1.0</friction-factor>
+  <rolling-friction>0.02</rolling-friction>
+  <bumpiness>0.01</bumpiness>
+  <load-resistance>1e10</load-resistance>
  </material>
 
  <material>

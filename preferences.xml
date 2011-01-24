@@ -575,7 +575,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
   <mouse>
     <hide-cursor type="bool" userarchive="y">true</hide-cursor>
-    <cursor-timeout-sec type="int" userarchive="y">10.0</cursor-timeout-sec>
+    <cursor-timeout-sec type="double" userarchive="y">10.0</cursor-timeout-sec>
   </mouse>
 
   <replay>

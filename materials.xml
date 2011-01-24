@@ -913,7 +913,6 @@ Shared parameters for various materials.
   <name>BuiltUpCover</name>
   <name>Urban</name>
   <name>Construction</name>
-  <name>Construction</name>
   <name>Industrial</name>
   <name>Port</name>
   <effect>Effects/urban</effect>

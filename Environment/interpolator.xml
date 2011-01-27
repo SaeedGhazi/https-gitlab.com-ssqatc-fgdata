@@ -22,7 +22,7 @@
   All filters are enabled on /environment/config/enabled=true
 -->
 <PropertyList>
-  
+
   <filter>
     <name>EnvironmentInterpolator:temperature-sea-level-degc</name>
     <enable>
@@ -35,7 +35,7 @@
     <type>noise-spike</type>
     <max-rate-of-change>0.1667</max-rate-of-change>
   </filter>
-  
+
   <filter>
     <name>EnvironmentInterpolator:dewpoint-sea-level-degc</name>
     <enable>
@@ -48,7 +48,7 @@
     <type>noise-spike</type>
     <max-rate-of-change>0.1667</max-rate-of-change>
   </filter>
-  
+
   <filter>
     <!--
       transfer the interpolated QNH to the global environment
@@ -127,7 +127,7 @@
   </filter>
 
   <filter>
-    <name>EnvironmentInterpolator:turbulence-magnitude</name>
+    <name>EnvironmentInterpolator:turbulence-raw-magnitude</name>
     <enable>
       <condition>
         <property>/environment/config/enabled</property>
@@ -139,10 +139,32 @@
       </condition>
       <property>/environment/config/presets/turbulence-magnitude-norm-override</property>
     </input>
-    <input>/environment/config/interpolated/turbulence/magnitude-norm</input>
-    <output>/environment/turbulence/magnitude-norm</output>
+    <input>
+      <property>/environment/config/interpolated/turbulence/magnitude-norm</property>
+    </input>
+    <output>/environment/turbulence/raw-magnitude-norm</output>
     <type>exponential</type>
     <filter-time>1</filter-time>
+  </filter>
+
+  <filter>
+    <name>EnvironmentInterpolator:turbulence-magnitude</name>
+    <enable>
+      <condition>
+        <property>/environment/config/enabled</property>
+      </condition>
+    </enable>
+    <input>
+      <expression>
+        <pow>
+          <property>/environment/turbulence/raw-magnitude-norm</property>
+          <property>/environment/turbulence/sensitivity</property>
+        </pow>
+      </expression>
+    </input>
+    <output>/environment/turbulence/magnitude-norm</output>
+    <type>gain</type>
+    <gain>1</gain>
   </filter>
 
   <filter>

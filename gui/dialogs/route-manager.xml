@@ -138,7 +138,6 @@ command interface /autopilot/route-manager/input:
                     dest.getNode("runway").clearValue();
                 }
 
-                print("updated runways");
                 gui.dialog_update("route-manager");
             }
 

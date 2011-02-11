@@ -7,6 +7,9 @@
 //
 // Diffuse colors come from the gl_Color, ambient from the material. This is
 // equivalent to osg::Material::DIFFUSE.
+//
+// See http://wiki.flightgear.org/index.php/Howto:_Lightmap for details on 
+// how to use it.
 
 #define MODE_OFF 0
 #define MODE_DIFFUSE 1

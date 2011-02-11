@@ -1,6 +1,10 @@
 // -*-C++-*-
 
 // Ambient term comes in gl_Color.rgb.
+//
+// See http://wiki.flightgear.org/index.php/Howto:_Lightmap for details on 
+// how to use it.
+
 varying vec4 diffuse_term;
 varying vec3 normal;
 varying float fogCoord;
@@ -46,7 +50,7 @@ void main()
     texel = texture2D(texture, gl_TexCoord[0].st);
     fragColor = color * texel + specular;
 	vec3 lightmapTexel = texture2D(lightmap_texture, gl_TexCoord[0].st).rgb;
-	fragColor.rgb = max(fragColor.rgb, lightmapTexel*gl_FrontMaterial.diffuse*texel);
+	fragColor.rgb = max(fragColor.rgb, lightmapTexel * gl_FrontMaterial.diffuse.rgb * texel.rgb);
     fogFactor = exp(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord);
     gl_FragColor = mix(gl_Fog.color, fragColor, fogFactor);
 }

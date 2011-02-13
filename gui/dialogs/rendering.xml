@@ -172,6 +172,8 @@
         </binding>
       </checkbox>
 
+	  -->
+
       <checkbox>
         <halign>left</halign>
         <label>Random objects</label>
@@ -180,8 +182,6 @@
           <command>dialog-apply</command>
         </binding>
       </checkbox>
-
-	  -->
 
       <checkbox>
         <halign>left</halign>

@@ -776,16 +776,20 @@ var autotrim = {
 # (see Hawker Seahawk for an example).
 #
 # SYNOPSIS:
-#	aircraft.tyresmoke.new(<gear index>)
-#	<gear index> - the index of the gear to which the tyre smoke is attached
+#	aircraft.tyresmoke.new(gear index [, auto = 0])
+#		gear index - the index of the gear to which the tyre smoke is attached
+#		auto - enable automatic update (recommended). defaults to 0 for backward compatibility.
+#	aircraft.tyresmoke.del()
+#		destructor.
 #	aircraft.tyresmoke.update()
+#		Runs the update. Not required if automatic updates are enabled.
 #
 # EXAMPLE:
 #	var tyresmoke_0 = aircraft.tyresmoke.new(0);
 #	tyresmoke_0.update();
 #
 var tyresmoke = {
-	new: func(number) {
+	new: func(number, auto = 0) {
 		var m = { parents: [tyresmoke] };
 		me.vertical_speed = props.globals.initNode("velocities/vertical-speed-fps");
 		me.speed = props.globals.initNode("velocities/groundspeed-kt");
@@ -798,6 +802,8 @@ var tyresmoke = {
 		m.sprayspeed = gear.initNode("sprayspeed-ms");
 		m.spray = gear.initNode("spray", 0, "BOOL");
 		m.spraydensity = gear.initNode("spray-density", 0, "DOUBLE");
+		m.auto = auto;
+		m.listener = nil;
 
 		if (getprop("sim/flight-model") == "jsb") {
 			var wheel_speed = "fdm/jsbsim/gear/unit[" ~ number ~ "]/wheel-speed-fps";
@@ -809,7 +815,15 @@ var tyresmoke = {
 		}
 
 		m.lp = lowpass.new(2);
+		auto and m.update();
 		return m;
+	},
+	del: func {
+		if (me.listener != nil) {
+			removelistener(me.listener);
+			me.listener = nil;
+		}
+		me.auto = 0;
 	},
 	update: func {
 		var rollspeed = me.get_rollspeed();
@@ -829,23 +843,67 @@ var tyresmoke = {
 			me.tyresmoke.setValue(1);
 			me.spray.setValue(0);
 			me.spraydensity.setValue(0);
-
 		} elsif (wow and groundspeed > 5 and rain >= 0.20) {
 			me.tyresmoke.setValue(0);
 			me.spray.setValue(1);
 			me.sprayspeed.setValue(rollspeed * 6);
 			me.spraydensity.setValue(rain * groundspeed);
-
 		} else {
 			me.tyresmoke.setValue(0);
 			me.spray.setValue(0);
 			me.sprayspeed.setValue(0);
 			me.spraydensity.setValue(0);
 		}
+		if (me.auto) {
+			if (wow) {
+				settimer(func me.update(), 0);
+				if (me.listener != nil) {
+					removelistener(me.listener);
+					me.listener = nil;
+				}
+			} elsif (me.listener == nil) {
+				me.listener = setlistener(me.wow, func me._wowchanged_(), 0, 0);
+			}
+		}
+	},
+	_wowchanged_: func() {
+		if (me.wow.getValue()) {
+			me.lp.set(0);
+			me.update();
+		}
 	},
 };
 
+# tyresmoke_system
+# =============================================================================
+# Helper class to contain the tyresmoke objects for all the gears.
+# Will update automatically, nothing else needs to be done by the caller.
+#
+# SYNOPSIS:
+#	aircraft.tyresmoke_system.new(<gear index 1>, <gear index 2>, ...)
+#		<gear index> - the index of the gear to which the tyre smoke is attached
+#	aircraft.tyresmoke_system.del()
+#		destructor
+# EXAMPLE:
+#	var tyresmoke_system = aircraft.tyresmoke_system.new(0, 1, 2, 3, 4);
 
+var tyresmoke_system = {
+	new: func {
+		var m = { parents: [tyresmoke_system] };
+		# preset array to proper size
+		m.gears = [];
+		setsize(m.gears, size(arg));
+		for(var i = size(arg) - 1; i >= 0; i -= 1) {
+			m.gears[i] = tyresmoke.new(arg[i], 1);
+		}
+		return m;
+	},
+	del: func {
+		foreach(var gear; me.gears) {
+			gear.del();
+		}
+	}
+};
 
 # rain
 # =============================================================================

@@ -2,19 +2,17 @@
 // Licence: GPL v2
 // Author: Vivian Meazza.
 
-varying vec4  rawpos;
-varying vec4  ecPosition;
+varying vec3  rawpos;
+varying float fogCoord;
 varying vec3  VNormal;
 varying vec3  VTangent;
 varying vec3  VBinormal;
 varying vec3  Normal;
-varying vec4  constantColor;
 varying vec3 vViewVec;
 varying vec3 reflVec;
 
 varying vec4 Diffuse;
-varying vec3 normal, lightDir, halfVector;
-varying float alpha, fogCoord;
+varying float alpha;
 
 uniform mat4 osg_ViewMatrixInverse;
 
@@ -23,31 +21,29 @@ attribute vec3 binormal;
 
 void main(void)
 {
-    rawpos     = gl_Vertex;
-    ecPosition = gl_ModelViewMatrix * gl_Vertex;
-    vec3 ecPosition3 = vec3(gl_ModelViewMatrix * gl_Vertex) / ecPosition.w;
+    rawpos     = gl_Vertex.xyz / gl_Vertex.w;
+    vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
+    ecPosition.xyz = ecPosition.xyz / ecPosition.w;
+    fogCoord = ecPosition.z;
 
-    vec3 t = normalize(cross(gl_Normal, vec3(1.0,0.0,0.0)));
-    vec3 b = normalize(cross(gl_Normal,t));
     vec3 n = normalize(gl_Normal);
+    vec3 t = cross(gl_Normal, vec3(1.0,0.0,0.0));
+    vec3 b = cross(n,t);
 
     VNormal = normalize(gl_NormalMatrix * gl_Normal);
-	VTangent = normalize(gl_NormalMatrix * tangent);
-	VBinormal = normalize(gl_NormalMatrix * binormal);
+    VTangent = normalize(gl_NormalMatrix * tangent);
+    VBinormal = normalize(gl_NormalMatrix * binormal);
     Normal = normalize(gl_Normal);
 
-    lightDir = normalize(vec3(gl_LightSource[0].position));
-    halfVector = normalize(gl_LightSource[0].halfVector.xyz);
     Diffuse = gl_Color * gl_LightSource[0].diffuse;
     //Diffuse= gl_Color.rgb * max(0.0, dot(normalize(VNormal), gl_LightSource[0].position.xyz));
+
     // Super hack: if diffuse material alpha is less than 1, assume a
     // transparency animation is at work
     if (gl_FrontMaterial.diffuse.a < 1.0)
         alpha = gl_FrontMaterial.diffuse.a;
     else
         alpha = gl_Color.a;
-
-    fogCoord = abs(ecPosition3.z);
 
     // Vertex in eye coordinates
     vec3 vertVec = ecPosition.xyz;
@@ -60,9 +56,7 @@ void main(void)
     vec4 reflect_eye = vec4(reflect(vertVec, VNormal), 0.0);
     reflVec = normalize(gl_ModelViewMatrixInverse * reflect_eye).xyz;
 
-    gl_FrontColor = gl_Color;
-    constantColor = gl_FrontMaterial.emission
-        + gl_Color * (gl_LightModel.ambient + gl_LightSource[0].ambient);
+    gl_FrontColor = gl_FrontMaterial.emission + gl_Color * (gl_LightModel.ambient + gl_LightSource[0].ambient);
 
     gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;

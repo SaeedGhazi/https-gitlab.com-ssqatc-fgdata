@@ -2,11 +2,11 @@
 // Licence: GPL v2
 // Author: Frederic Bouvier
 
-varying vec4 ecPosition;
+varying float fogCoord;
+
 varying vec3 VNormal;
 varying vec3 VTangent;
 varying vec3 VBinormal;
-varying vec4 constantColor;
 
 uniform sampler2D tex_color;
 uniform sampler2D tex_normal;
@@ -29,7 +29,7 @@ void main (void)
 	vec4 Diffuse  = gl_LightSource[0].diffuse * nDotVP;
 	vec4 Specular = gl_LightSource[0].specular * pf;
 
-	vec4 color = constantColor + Diffuse * gl_FrontMaterial.diffuse;
+	vec4 color = gl_Color + Diffuse * gl_FrontMaterial.diffuse;
 	color *= texture2D(tex_color, gl_TexCoord[0].xy);
 
 	color += Specular * gl_FrontMaterial.specular * ns.a;
@@ -37,7 +37,6 @@ void main (void)
 
 
 	float fogFactor;
-	float fogCoord = ecPosition.z;
 	const float LOG2 = 1.442695;
 	fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
 	fogFactor = clamp(fogFactor, 0.0, 1.0);

@@ -22,11 +22,11 @@ void main()
     vec4 texel;
     vec4 fragColor;
     vec4 specular = vec4(0.0);
-    n = normalize(normal);
     // If gl_Color.a == 0, this is a back-facing polygon and the
     // normal should be reversed.
-    n = (2.0 * gl_Color.a - 1.0) * n;
-    NdotL = max(dot(n, lightDir), 0.0);
+    n = (2.0 * gl_Color.a - 1.0) * normal;
+    n = normalize(n);
+    NdotL = dot(n, lightDir);
     if (NdotL > 0.0) {
         color += diffuse_term * NdotL;
         halfV = normalize(halfVector);

@@ -4,19 +4,17 @@
 
 #version 120
 
-varying vec4  rawpos;
-varying vec4  ecPosition;
+varying vec3  rawpos;
 varying vec3  VNormal;
 varying vec3  VTangent;
 varying vec3  VBinormal;
 varying vec3  Normal;
-varying vec4  constantColor;
 varying vec3  vViewVec;
 varying vec3  reflVec;
 
 varying vec4 Diffuse;
-varying vec3 lightDir, halfVector;
-varying float alpha, fogCoord;
+varying float alpha;
+varying float fogCoord;
 
 uniform samplerCube Environment;
 uniform sampler2D Rainbow;
@@ -37,7 +35,12 @@ void main (void)
 {
     vec3 halfV;
     float NdotL, NdotHV;
-    vec4 color = constantColor;
+
+    vec3 lightDir = gl_LightSource[0].position.xyz;
+    vec3 halfVector = gl_LightSource[0].halfVector.xyz;
+
+
+    vec4 color = gl_Color;
     vec4 specular = vec4(0.0);
     vec4 ns = texture2D(NormalTex, gl_TexCoord[0].st);
     vec3 n = ns.rgb * 2.0 - 1.0;
@@ -61,7 +64,6 @@ void main (void)
     vec4 texelcolor = color * texel + specular;
 
     // calculate the fog factor
-    float fogCoord = ecPosition.z;
     const float LOG2 = 1.442695;
     float fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
     fogFactor = clamp(fogFactor, 0.0, 1.0);

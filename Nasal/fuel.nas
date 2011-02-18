@@ -1,8 +1,6 @@
 # Properties under /consumables/fuel/tank[n]:
-# + level-gal_us    - Current fuel load.  Can be set by user code.
-# + level-lbs       - OUTPUT ONLY property, do not try to set
+# + level-lbs       - Current fuel load.  Can be set by user code.
 # + selected        - boolean indicating tank selection.
-# + density-ppg     - Fuel density, in lbs/gallon.
 # + capacity-gal_us - Tank capacity
 #
 # Properties under /engines/engine[n]:
@@ -42,11 +40,10 @@ var update = func {
 	} else {
 		var fuel_per_tank = consumed_fuel / size(selected_tanks);
 		foreach (var t; selected_tanks) {
-			var ppg = t.getNode("density-ppg").getValue();
-			var lbs = t.getNode("level-gal_us").getValue() * ppg;
+			var lbs = t.getNode("level-lbs").getValue();
 			lbs = lbs - fuel_per_tank;
-			if (lbs < 0) {
-				lbs = 0;
+			t.getNode("level-lbs").setDoubleValue(lbs);
+			if( t.getNode("empty").getBoolValue() ) {
 				# Kill the engines if we're told to, otherwise simply
 				# deselect the tank.
 				if (t.getNode("kill-when-empty", 1).getBoolValue())
@@ -54,26 +51,8 @@ var update = func {
 				else
 					t.getNode("selected").setBoolValue(0);
 			}
-			var gals = lbs / ppg;
-			t.getNode("level-gal_us").setDoubleValue(gals);
-			t.getNode("level-lbs").setDoubleValue(lbs);
 		}
 	}
-
-	# Total fuel properties
-	var lbs = 0;
-	var gals = 0;
-	var cap = 0;
-
-	foreach (var t; tanks) {
-		lbs += t.getNode("level-lbs").getValue();
-		gals += t.getNode("level-gal_us").getValue();
-		cap += t.getNode("capacity-gal_us").getValue();
-	}
-
-	total_lbs.setDoubleValue(lbs);
-	total_gals.setDoubleValue(gals);
-	total_norm.setDoubleValue(gals / cap);
 
 	foreach (var e; engines)
 		e.getNode("out-of-fuel").setBoolValue(out_of_fuel);
@@ -85,21 +64,12 @@ var loop = func {
 	settimer(loop, UPDATE_PERIOD);
 }
 
-
 var tanks = [];
 var engines = [];
 var fuel_freeze = nil;
-var total_gals = nil;
-var total_lbs = nil;
-var total_norm = nil;
-
 
 _setlistener("/sim/signals/fdm-initialized", func {
 	setlistener("/sim/freeze/fuel", func(n) { fuel_freeze = n.getBoolValue() }, 1);
-
-	total_gals = props.globals.getNode("/consumables/fuel/total-fuel-gals", 1);
-	total_lbs = props.globals.getNode("/consumables/fuel/total-fuel-lbs", 1);
-	total_norm = props.globals.getNode("/consumables/fuel/total-fuel-norm", 1);
 
 	engines = props.globals.getNode("engines", 1).getChildren("engine");
 	foreach (var e; engines) {
@@ -112,10 +82,6 @@ _setlistener("/sim/signals/fdm-initialized", func {
 			continue;           # skip native_fdm.cxx generated zombie tanks
 
 		append(tanks, t);
-		t.initNode("level-gal_us", 0.0);
-		t.initNode("level-lbs", 0.0);
-		t.initNode("capacity-gal_us", 0.01); # not zero (div/zero issue)
-		t.initNode("density-ppg", 6.0);      # gasoline
 		t.initNode("selected", 1, "BOOL");
 	}
 

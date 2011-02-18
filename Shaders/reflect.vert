@@ -2,17 +2,15 @@
 // Licence: GPL v2
 // Author: Vivian Meazza.
 
-varying vec4  rawpos;
-varying vec4  ecPosition;
+varying vec3  rawpos;
 varying vec3  VNormal;
-varying vec3  Normal;
 varying vec4  constantColor;
 varying vec3 vViewVec;
 varying vec3 reflVec;
 
 varying vec4 Diffuse;
-varying vec3 normal, lightDir, halfVector;
-varying float alpha, fogCoord;
+varying float alpha;
+varying float fogCoord;
 
 uniform mat4 osg_ViewMatrixInverse;
 
@@ -20,19 +18,16 @@ uniform mat4 osg_ViewMatrixInverse;
 
 void main(void)
 {
-    rawpos     = gl_Vertex;
-    ecPosition = gl_ModelViewMatrix * gl_Vertex;
-    vec3 ecPosition3 = vec3(gl_ModelViewMatrix * gl_Vertex) / ecPosition.w;
+    rawpos     = gl_Vertex.xyz / gl_Vertex.w;
+    vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
+    ecPosition.xyz = ecPosition.xyz / ecPosition.w;
 
     vec3 t = normalize(cross(gl_Normal, vec3(1.0,0.0,0.0)));
     vec3 b = normalize(cross(gl_Normal,t));
     vec3 n = normalize(gl_Normal);
 
     VNormal = normalize(gl_NormalMatrix * gl_Normal);
-    Normal = normalize(gl_Normal);
 
-    lightDir = normalize(vec3(gl_LightSource[0].position));
-    halfVector = normalize(gl_LightSource[0].halfVector.xyz);
     Diffuse = gl_Color * gl_LightSource[0].diffuse;
     //Diffuse= gl_Color.rgb * max(0.0, dot(normalize(VNormal), gl_LightSource[0].position.xyz));
     // Super hack: if diffuse material alpha is less than 1, assume a
@@ -42,7 +37,7 @@ void main(void)
     else
         alpha = gl_Color.a;
 
-    fogCoord = abs(ecPosition3.z);
+    fogCoord = abs(ecPosition.z);
 
     // Vertex in eye coordinates
     vec3 vertVec = ecPosition.xyz;

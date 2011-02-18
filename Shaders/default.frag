@@ -14,7 +14,7 @@ float luminance(vec3 color)
 
 void main()
 {
-    vec3 n, halfV;
+    vec3 n;
     float NdotL, NdotHV, fogFactor;
     vec4 color = gl_Color;
     vec3 lightDir = gl_LightSource[0].position.xyz;
@@ -22,16 +22,16 @@ void main()
     vec4 texel;
     vec4 fragColor;
     vec4 specular = vec4(0.0);
-    n = normalize(normal);
+
     // If gl_Color.a == 0, this is a back-facing polygon and the
     // normal should be reversed.
+    n = (2.0 * gl_Color.a - 1.0) * normal;
+    n = normalize(n);
 
-    n = (2.0 * gl_Color.a - 1.0) * n;
-    NdotL = max(dot(n, lightDir), 0.0);
+    NdotL = dot(n, lightDir);
     if (NdotL > 0.0) {
         color += diffuse_term * NdotL;
-        halfV = halfVector;
-        NdotHV = max(dot(n, halfV), 0.0);
+        NdotHV = max(dot(n, halfVector), 0.0);
         if (gl_FrontMaterial.shininess > 0.0)
             specular.rgb = (gl_FrontMaterial.specular.rgb
                             * gl_LightSource[0].specular.rgb

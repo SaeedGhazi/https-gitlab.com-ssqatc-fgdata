@@ -176,10 +176,16 @@
 
       <checkbox>
         <halign>left</halign>
-        <label>Random objects</label>
+        <label>Random objects (triggers scenery reload)</label>
+        <name>random-objects</name>
         <property>/sim/rendering/random-objects</property>
         <binding>
           <command>dialog-apply</command>
+          <object-name>random-objects</object-name>
+        </binding>
+        <binding>
+          <command>reinit</command>
+          <subsystem>tile-manager</subsystem>
         </binding>
       </checkbox>
 

@@ -9,6 +9,9 @@ varying vec4 diffuse_term;
 varying vec3 normal;
 varying float fogCoord;
 
+// The conditional, to enable lightmapping
+uniform float condition;
+
 uniform sampler2D texture;
 uniform sampler2D lightmap_texture;
 
@@ -49,8 +52,10 @@ void main()
     color = clamp(color, 0.0, 1.0);
     texel = texture2D(texture, gl_TexCoord[0].st);
     fragColor = color * texel + specular;
-	vec3 lightmapTexel = texture2D(lightmap_texture, gl_TexCoord[0].st).rgb;
-	fragColor.rgb = max(fragColor.rgb, lightmapTexel * gl_FrontMaterial.diffuse.rgb * texel.rgb);
+	if ( condition >= 1 ) {
+		vec3 lightmapTexel = texture2D(lightmap_texture, gl_TexCoord[0].st).rgb;
+		fragColor.rgb = max(fragColor.rgb, lightmapTexel * gl_FrontMaterial.diffuse.rgb * texel.rgb);
+		}
     fogFactor = exp(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord);
     gl_FragColor = mix(gl_Fog.color, fragColor, fogFactor);
 }

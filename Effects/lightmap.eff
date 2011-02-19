@@ -9,6 +9,7 @@
     <material>
       <color-mode-uniform>1</color-mode-uniform> <!-- DIFFUSE -->
     </material>
+	<condition><use>/sim/rendering/shader-effects</use></condition>
   </parameters>
   <technique n="10">
     <predicate>
@@ -97,6 +98,11 @@
         <name>colorMode</name>
         <type>int</type>
         <value><use>material/color-mode-uniform</use></value>
+      </uniform>
+	  <uniform>
+        <name>condition</name>
+        <type>float</type>
+        <value><use>condition</use></value>
       </uniform>
     </pass>
   </technique>

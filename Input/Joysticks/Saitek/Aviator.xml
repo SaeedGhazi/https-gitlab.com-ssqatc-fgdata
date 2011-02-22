@@ -2,7 +2,7 @@
 <?xml-stylesheet type="text/xsl" href="joystick.xsl"?>
 <!-- Saitek AV8R/Aviator
 
-  Copyright (C) 2007 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2007 - 2011  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is released under the GPL license v2 or later.
 -->
 <PropertyList>
@@ -115,10 +115,10 @@
    <windows>0</windows>
   </number>
   <desc>aileron</desc>
+  <dead-band type="double">0.05</dead-band>
   <binding>
    <command>property-scale</command>
    <property>/controls/flight/aileron</property>
-   <dead-band type="double">0.01</dead-band>
    <offset type="double">0.0</offset>
    <squared type="bool">1</squared>
   </binding>
@@ -133,10 +133,10 @@
    <windows>1</windows>
   </number>
   <desc>elevator</desc>
+  <dead-band type="double">0.05</dead-band>
   <binding>
    <command>property-scale</command>
    <property>/controls/flight/elevator</property>
-   <dead-band type="double">0.01</dead-band>
    <offset type="double">0.0</offset>
    <factor type="double">-1.0</factor>
    <squared type="bool">1</squared>
@@ -152,10 +152,10 @@
    <windows>3</windows>
   </number>
   <desc>rudder</desc>
+  <dead-band type="double">0.05</dead-band>
   <binding>
    <command>property-scale</command>
    <property>/controls/flight/rudder</property>
-   <dead-band type="double">0.01</dead-band>
    <offset type="double">0.0</offset>
    <factor type="double">1.0</factor>
    <squared type="bool">1</squared>

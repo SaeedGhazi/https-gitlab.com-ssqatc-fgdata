@@ -606,6 +606,14 @@
 		</item>
 
 		<item>
+			<label>Reload Scenery</label>
+			<binding>
+				<command>reinit</command>
+				<subsystem>tile-manager</subsystem>
+			</binding>
+		</item>
+
+		<item>
 			<label>Nasal Console</label>
 			<binding>
 				<command>dialog-show</command>

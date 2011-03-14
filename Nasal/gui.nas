@@ -153,8 +153,8 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     var precip_ac = getprop(p ~ "aircraft-enable");
     props.globals.getNode(p ~ "enable").setAttribute("userarchive", 0); # TODO remove later
     var set_precip = func setprop(p ~ "enable", precip_gui and precip_ac);
-    setlistener(p ~ "gui-enable", func(n) set_precip(precip_gui = n.getValue()));
-    setlistener(p ~ "aircraft-enable", func(n) set_precip(precip_ac = n.getValue()));
+    setlistener(p ~ "gui-enable", func(n) set_precip(precip_gui = n.getValue()),1);
+    setlistener(p ~ "aircraft-enable", func(n) set_precip(precip_ac = n.getValue()),1);
 
     # the autovisibility feature of the menubar
     # automatically show the menubar if the mouse is at the upper edge of the window

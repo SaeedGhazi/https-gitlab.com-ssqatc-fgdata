@@ -6,20 +6,20 @@
 
  <name>local_weather_tiles</name>
  <width>310</width>
- <height>330</height>
+ <height>360</height>
  <modal>false</modal>
 
 
 <text>
   <x>5</x>
-  <y>300</y>
+  <y>330</y>
   <label>Select initial weather scenario tile</label>
 </text>
 
 
 <combo>
    <x>10</x>
-   <y>275</y>
+   <y>305</y>
    <width>280</width>
    <height>25</height>
    <live>true</live>
@@ -43,13 +43,13 @@
 
  <text>
    <x>5</x>
-   <y>240</y>
+   <y>270</y>
    <label>wind deg</label>
   </text>
 
  <input>
    <x>67</x>
-   <y>240</y>
+   <y>270</y>
    <width>40</width>
    <height>25</height>
    <property>/local-weather/tmp/tile-orientation-deg</property>
@@ -57,13 +57,13 @@
 
  <text>
    <x>105</x>
-   <y>240</y>
+   <y>270</y>
    <label>kt</label>
   </text>
 
 <input>
    <x>125</x>
-   <y>240</y>
+   <y>270</y>
    <width>30</width>
    <height>25</height>
    <property>/local-weather/tmp/windspeed-kt</property>
@@ -71,17 +71,86 @@
 
  <text>
    <x>155</x>
-   <y>240</y>
+   <y>270</y>
    <label>alt. offset (ft)</label>
   </text>
 
+
+
 <input>
    <x>240</x>
-   <y>240</y>
+   <y>270</y>
    <width>50</width>
    <height>25</height>
    <property>/local-weather/tmp/tile-alt-offset-ft</property>
   </input>
+  
+
+<text>
+   <x>5</x>
+   <y>240</y>
+   <label>gust freq.</label>
+  </text>
+
+
+
+<slider>
+   <x>65</x>
+   <y>240</y>
+   <width>50</width>
+   <height>20</height>
+   <min>0.0</min>
+   <max>1.0</max>
+   <property>/local-weather/tmp/gust-frequency-hz</property>
+   <binding>
+     <command>dialog-apply</command>
+   </binding>
+</slider>
+
+
+
+<text>
+   <x>112</x>
+   <y>240</y>
+   <label>strength</label>
+  </text>
+
+
+<slider>
+   <x>167</x>
+   <y>240</y>
+   <width>50</width>
+   <height>20</height>
+   <min>0.0</min>
+   <max>1.5</max>
+   <property>/local-weather/tmp/gust-relative-strength</property>
+   <binding>
+     <command>dialog-apply</command>
+   </binding>
+</slider>
+
+<text>
+   <x>215</x>
+   <y>240</y>
+   <label>dir.</label>
+  </text>
+
+
+<slider>
+   <x>240</x>
+   <y>240</y>
+   <width>50</width>
+   <height>20</height>
+   <min>0.0</min>
+   <max>45.0</max>
+   <property>/local-weather/tmp/gust-angular-variation-deg</property>
+   <binding>
+     <command>dialog-apply</command>
+   </binding>
+</slider>
+
+
+
 
 <text>
    <x>5</x>

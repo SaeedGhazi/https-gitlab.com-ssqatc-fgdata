@@ -1,6 +1,6 @@
 ########################################################
 # routines to set up, transform and manage weather tiles
-# Thorsten Renk, October 2010
+# Thorsten Renk, March 2011
 ########################################################
 
 # function			purpose
@@ -18,6 +18,8 @@
 # calc_geo			to get local Cartesian geometry for latitude conversion
 # get_lat			to get latitude from Cartesian coordinates
 # get_lon			to get longitude from Cartesian coordinates
+# relangle			to compute the relative angle between two directions, normalized to [0:180]
+# norm_relangle			to compute the relative angle between two directions, normalized to [0:360]
 # delete_from_vector		to delete an element 'n' from a vector
 
 # object			purpose
@@ -52,6 +54,15 @@ if (distance_to_load > 3.0 * current_visibility)
 	{distance_to_load = 3.0 * current_visibility;}
 if (distance_to_load < 29000.0)
 	{distance_to_load = 29000.0;}
+
+# check here if we have a new weather station if METAR is running
+
+if ((local_weather.metar_flag == 1) and (getprop(lw~"METAR/station-id") != getprop("/environment/metar/station-id"))) 
+	{
+	weather_tiles.set_METAR_weather_station();
+	}
+
+
 
 foreach (var t; tNode) {
 
@@ -200,32 +211,81 @@ if (((local_weather.presampling_flag == 1) and (getprop(lw~"tmp/presampling-stat
 			}
 		else
 			{
+			
 			var step = 20.0;
 			
 			var alpha_test = getprop("/environment/metar/base-wind-dir-deg");
 
-			print("alpha: ", alpha, " alpha_test: ", alpha_test, " relangle: ", relangle(alpha, alpha_test));
 
-			if (relangle(alpha, alpha_test) > step)
+			if (local_weather.debug_output_flag == 1)
+				{print("alpha: ", alpha, " alpha_test: ", alpha_test, " relangle: ", relangle(alpha, alpha_test));}
+
+
+			var coordinate_rotation_angle = norm_relangle(alpha, alpha_test);
+
+		
+			if (coordinate_rotation_angle < 45.0)
 				{
-				print("Coordinate rotation by more than ",step," deg... compensating");
-				if (relangle(alpha + step, alpha_test) < relangle(alpha-step, alpha_test))
-					{
-					alpha = alpha + step;
-					}
-				else 
-					{
-					alpha = alpha - step;
-					}
+				var system_rotation_angle = 0;
+				var displacement_angle = coordinate_rotation_angle;
+				}
+			else if (coordinate_rotation_angle < 135.0)
+				{
+				var system_rotation_angle = 90.0;
+				var displacement_angle = coordinate_rotation_angle - 90.0;
+				}
+			else if (coordinate_rotation_angle < 225.0)
+				{
+				var system_rotation_angle = 180.0;
+				var displacement_angle = coordinate_rotation_angle - 180.0;
+				}
+			else if (coordinate_rotation_angle < 315.0)
+				{
+				var system_rotation_angle = 270.0;
+				var displacement_angle = coordinate_rotation_angle - 270.0;
 				}
 			else
 				{
-				alpha = alpha_test;
+				var system_rotation_angle = 0;
+				var displacement_angle = coordinate_rotation_angle - 360.0;
 				}
+
+		
+			if (displacement_angle < -step)
+				{
+				print("Coordinate rotation by more than ",step," deg... compensating");
+				displacement_angle = -step;
+				}
+			else if (displacement_angle > step)
+				{
+				print("Coordinate rotation by more than ",step," deg... compensating");
+				displacement_angle = step;
+				}
+
+			alpha = alpha + system_rotation_angle + displacement_angle;
+				
+
+
+			#if (relangle(alpha, alpha_test) > step)
+			#	{
+			#	print("Coordinate rotation by more than ",step," deg... compensating");
+			#	if (relangle(alpha + step, alpha_test) < relangle(alpha-step, alpha_test))
+			#		{
+			#		alpha = alpha + step;
+			#		}
+			#	else 
+			#		{
+			#		alpha = alpha - step;
+			#		}
+			#	}
+			#else
+			#	{
+			#	alpha = alpha_test;
+			#	}
 			}
 
 	
-		
+			
 
 		setprop(lw~"tmp/tile-orientation-deg",alpha);
 		
@@ -255,7 +315,85 @@ if (((local_weather.presampling_flag == 1) and (getprop(lw~"tmp/presampling-stat
 		{
 		var res = local_weather.wind_interpolation(lat,lon,0.0);
 		
-		alpha = res[0];
+		var step = 20.0;		
+		var alpha_test = res[0];
+
+
+		if (local_weather.debug_output_flag == 1)
+				{print("alpha: ", alpha, " alpha_test: ", alpha_test, " relangle: ", relangle(alpha, alpha_test));}
+
+
+		var coordinate_rotation_angle = norm_relangle(alpha, alpha_test);
+
+		#print("Norm_relangle : ", norm_relangle(alpha, alpha_test));
+
+		
+		if (coordinate_rotation_angle < 45.0)
+			{
+			var system_rotation_angle = 0;
+			var displacement_angle = coordinate_rotation_angle;
+			}
+		else if (coordinate_rotation_angle < 135.0)
+			{
+			var system_rotation_angle = 90.0;
+			var displacement_angle = coordinate_rotation_angle - 90.0;
+			}
+		else if (coordinate_rotation_angle < 225.0)
+			{
+			var system_rotation_angle = 180.0;
+			var displacement_angle = coordinate_rotation_angle - 180.0;
+			}
+		else if (coordinate_rotation_angle < 315.0)
+			{
+			var system_rotation_angle = 270.0;
+			var displacement_angle = coordinate_rotation_angle - 270.0;
+			}
+		else
+			{
+			var system_rotation_angle = 0;
+			var displacement_angle = coordinate_rotation_angle - 360.0;
+			}
+
+		#print("Displacement angle: ", displacement_angle);
+		
+		if (displacement_angle < -step)
+			{
+			print("Coordinate rotation by more than ",step," deg... compensating");
+			displacement_angle = -step;
+			}
+		else if (displacement_angle > step)
+			{
+			print("Coordinate rotation by more than ",step," deg... compensating");
+			displacement_angle = step;
+			}
+		
+		#print("Normalized displacement angle: ", displacement_angle);
+		
+		alpha = alpha + system_rotation_angle + displacement_angle;
+		
+		#print("alpha_out: ", alpha);
+
+		#if (relangle(alpha, alpha_test) > step)
+		#	{
+		#	print("Coordinate rotation by more than ",step," deg... compensating");
+		#	if (relangle(alpha + step, alpha_test) < relangle(alpha-step, alpha_test))
+		#		{
+		#		alpha = alpha + step;
+		#		}
+		#	else 
+		#		{
+		#		alpha = alpha - step;
+		#		}
+		#	}
+		#else
+		#	{
+		#	alpha = alpha_test;
+		#	}
+			
+		#alpha = alpha_test;
+
+
+
 		setprop(lw~"tmp/tile-orientation-deg",alpha);				
 		var windspeed = res[1];
 		setprop(lw~"tmp/windspeed-kt",windspeed);
@@ -521,8 +659,40 @@ var t = props.globals.getNode(lw~"tiles").getChild("tile",index,0);
 
 var lat = t.getNode("latitude-deg").getValue();
 var lon = t.getNode("longitude-deg").getValue();
-var alpha = getprop(lw~"tmp/tile-orientation-deg");
+# var alpha = getprop(lw~"tmp/tile-orientation-deg");
 
+var alpha_old = getprop(lw~"tiles/tile[4]/orientation-deg");
+var alpha = t.getNode("orientation-deg").getValue();
+
+var coordinate_rotation_angle = norm_relangle(alpha_old, alpha);
+
+if (coordinate_rotation_angle < 45.0)
+	{
+	var system_rotation_angle = 0;
+	var displacement_angle = coordinate_rotation_angle;
+	}
+else if (coordinate_rotation_angle < 135.0)
+	{
+	var system_rotation_angle = 90.0;
+	var displacement_angle = coordinate_rotation_angle - 90.0;
+	}
+else if (coordinate_rotation_angle < 225.0)
+	{
+	var system_rotation_angle = 180.0;
+	var displacement_angle = coordinate_rotation_angle - 180.0;
+	}
+else if (coordinate_rotation_angle < 315.0)
+	{
+	var system_rotation_angle = 270.0;
+	var displacement_angle = coordinate_rotation_angle - 270.0;
+	}
+else
+	{
+	var system_rotation_angle = 0;
+	var displacement_angle = coordinate_rotation_angle - 360.0;
+	}
+
+alpha = alpha_old + displacement_angle;
 
 if (index == 0)
 	{
@@ -622,7 +792,89 @@ else if (index == 8)
 	}
 
 
+
+
+if (system_rotation_angle > 0.0)
+	{
+	if (local_weather.debug_output_flag == 1)
+		{print("Rotating coordinate system by ", system_rotation_angle, " degrees");}
+	
+	# create a buffer entry for rotation, this is deleted in the rotation routine
+
+	create_neighbour(lat, lon, 9, alpha);
+	rotate_tile_scheme(system_rotation_angle);
+	}
 }
+
+
+###################################
+# rotate tile scheme  
+###################################
+
+var rotate_tile_scheme = func (angle) {
+
+if (angle < 45.0)
+	{
+	return;
+	}
+else if (angle < 135)
+	{
+
+
+	copy_entry(2,9);
+	copy_entry(8,2);
+	copy_entry(6,8);
+	copy_entry(0,6);
+	copy_entry(9,0);
+	copy_entry(5,9);
+	copy_entry(7,5);
+	copy_entry(3,7);
+	copy_entry(1,3);
+	copy_entry(9,1);
+
+	props.globals.getNode(lw~"tiles").removeChild("tile",9);
+	}
+else if (angle < 225)
+	{
+	copy_entry(8,9);
+	copy_entry(0,8);
+	copy_entry(9,0);
+
+	copy_entry(7,9);
+	copy_entry(1,7);
+	copy_entry(9,1);
+
+	copy_entry(6,9);
+	copy_entry(2,6);
+	copy_entry(9,2);
+
+	copy_entry(5,9);
+	copy_entry(3,5);
+	copy_entry(9,3);
+	
+	props.globals.getNode(lw~"tiles").removeChild("tile",9);
+	}
+else if (angle < 315)
+	{
+	copy_entry(0,9);
+	copy_entry(6,0);	
+	copy_entry(8,6);
+	copy_entry(2,8);
+	copy_entry(9,2);
+	copy_entry(3,9);
+	copy_entry(7,3);
+	copy_entry(5,7);
+	copy_entry(1,5);
+	copy_entry(9,1);
+
+	props.globals.getNode(lw~"tiles").removeChild("tile",9);
+	}
+else 
+	{
+	return;
+	}
+}
+
 
 #####################################
 # copy tile info in neighbour matrix
@@ -1024,6 +1276,14 @@ foreach(t; tNode)
 	}
 print("alpha: ",getprop(lw~"tmp/tile-orientation-deg"));
 
+var lat = getprop("/position/latitude-deg");
+var lon = getprop("/position/longitude-deg");
+
+var res = local_weather.wind_interpolation(lat,lon,0.0);
+
+print("Wind: ", res[0], " tile alpha: ", getprop(lw~"tiles/tile[4]/orientation-deg"));
+print("Mismatch: ", relangle(res[0], getprop(lw~"tiles/tile[4]/orientation-deg")));
+
 print("====================");
 
 settimer(watchdog_loop, 10.0);
@@ -1276,6 +1536,23 @@ var angdiff = abs (alpha - beta);
 
 if ((360.0 - angdiff) < angdiff)
 	{angdiff = 360.0 - angdiff};
+
+return angdiff;
+}
+
+
+var norm_relangle = func (alpha, beta) {
+
+var angdiff = beta - alpha;
+
+while (angdiff < 0.0) 
+	{angdiff = angdiff + 360.0;}
+
+while (angdiff > 360.0)
+	{angdiff = angdiff - 360.0;}
+
+if (angdiff == 360.0) 
+	{angdiff = 0.0;}
 
 return angdiff;
 }

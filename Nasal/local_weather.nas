@@ -1,7 +1,7 @@
 
 ########################################################
 # routines to set up, transform and manage local weather
-# Thorsten Renk, October 2010
+# Thorsten Renk, March 2011
 # thermal model by Patrice Poly, April 2010
 ########################################################
 
@@ -41,6 +41,7 @@
 # cumulus_exclusion_layer	to create a layer with 'holes' left for thunderstorm placement
 # create_rise_clouds		to create a barrier cloud system
 # create_streak			to create a cloud streak
+# create_undulatus		to create an undulating cloud pattern
 # create_layer			to create a cloud layer with optional precipitation
 # create_hollow_layer		to create a cloud layer in a hollow cylinder (better for performance)
 # create_cloudbox		to create a sophisticated cumulus cloud with different textures (experimental)
@@ -56,6 +57,7 @@
 # create_effect_volume		to create an effect volume
 # set_weather_station		to specify a weather station for interpolation
 # set_wind_ipoint		to set an aloft wind interpolation point
+# set_wind_ipoint_metar		to set a wind interpolation point from available ground METAR info where aloft is modelled
 # showDialog			to pop up a dialog window
 # readFlags			to read configuration flags from the property tree into Nasal variables at startup
 # streak_wrapper		wrapper to execute streak from menu
@@ -72,6 +74,7 @@
 # object			purpose
 
 # weatherStation		to store info about weather conditions
+# windIpoint			to store an interpolation point of the windfield
 # effectVolume			to store effect volume info and provide methods to move and time-evolve effect volumes
 # thermalLift			to store thermal info and provide methods to move and time-evolve a thermal
 # waveLift 			to store wave info 
@@ -285,20 +288,26 @@ var wind_altitude_interpolation = func (altitude, w) {
 
 if (altitude < wind_altitude_array[0]) {var alt_wind = wind_altitude_array[0];}
 else if (altitude > wind_altitude_array[8]) {var alt_wind = 0.99* wind_altitude_array[8];}
-else {alt_wind = altitude;}
+else {var alt_wind = altitude;}
 
 for (var i = 0; i<9; i=i+1)
 	{if (alt_wind < wind_altitude_array[i]) {break;}}
 	
 
-var altNodeMin = w.getChild("altitude",i-1);
-var altNodeMax = w.getChild("altitude",i);	
+#var altNodeMin = w.getChild("altitude",i-1);
+#var altNodeMax = w.getChild("altitude",i);	
 
-var vmin = altNodeMin.getNode("windspeed-kt").getValue();
-var vmax = altNodeMax.getNode("windspeed-kt").getValue();
+#var vmin = altNodeMin.getNode("windspeed-kt").getValue();
+#var vmax = altNodeMax.getNode("windspeed-kt").getValue();
 
-var dir_min = altNodeMin.getNode("wind-from-heading-deg").getValue();
-var dir_max = altNodeMax.getNode("wind-from-heading-deg").getValue();
+var vmin = w.alt[i-1].v;
+var vmax = w.alt[i].v;
+
+#var dir_min = altNodeMin.getNode("wind-from-heading-deg").getValue();
+#var dir_max = altNodeMax.getNode("wind-from-heading-deg").getValue();
+
+var dir_min = w.alt[i-1].d;
+var dir_max = w.alt[i].d;
 
 var f = (alt_wind - wind_altitude_array[i-1])/(wind_altitude_array[i] - wind_altitude_array[i-1]);
 
@@ -307,20 +316,28 @@ var res = add_vectors(dir_min, (1-f) * vmin, dir_max, f * vmax);
 return res;
 }
 
+
+###################################
+# windfield spatial interpolation
+###################################
+
 var wind_interpolation = func (lat, lon, alt) {
 
-var windNodes = props.globals.getNode(lw~"interpolation").getChildren("wind");
+# var windNodes = props.globals.getNode(lw~"interpolation").getChildren("wind");
 var sum_norm = 0;
 var sum_wind = [0,0];
 
+var wsize = size(windIpointArray);
 	
-foreach (var w; windNodes) {
+for (var i = 0; i < wsize; i=i+1) {
 	
-	var wlat = w.getNode("latitude-deg").getValue();
-	var wlon = w.getNode("longitude-deg").getValue();
+	#var wlat = w.getNode("latitude-deg").getValue();
+	#var wlon = w.getNode("longitude-deg").getValue();
+	
+	var w = windIpointArray[i];
 
 	var wpos = geo.Coord.new();
-	wpos.set_latlon(wlat,wlon,1000.0);
+	wpos.set_latlon(w.lat,w.lon,1000.0);
 
 	var ppos = geo.Coord.new();
 	ppos.set_latlon(lat,lon,1000.0);
@@ -328,10 +345,16 @@ foreach (var w; windNodes) {
 	var d = ppos.distance_to(wpos);
 	if (d <100.0) {d = 100.0;} # to prevent singularity at zero
 
-	sum_norm = sum_norm + 1./d;
+	sum_norm = sum_norm + (1./d) * w.weight;
 
 	var res = wind_altitude_interpolation(alt,w);
-	sum_wind = add_vectors(sum_wind[0], sum_wind[1], res[0], res[1]/d);	
+	
+	sum_wind = add_vectors(sum_wind[0], sum_wind[1], res[0], (res[1]/d) * w.weight);	
+
+	# gradually fade in the interpolation weight of newly added points to
+	# avoid sudden jumps
+
+	if (w.weight < 1.0) {w.weight = w.weight + 0.02;}
 
 	}
 
@@ -397,11 +420,29 @@ var iNode = props.globals.getNode(lw~"interpolation", 1);
 var cNode = props.globals.getNode(lw~"current", 1);
 var viewpos = geo.aircraft_position();
 
+var sum_alt = 0.0;
 var sum_vis = 0.0;
 var sum_T = 0.0;
 var sum_p = 0.0;
 var sum_D = 0.0;
 var sum_norm = 0.0;
+
+var vis_before = getprop(lwi~"visibility-m");
+
+# determine at which distance we no longer keep an interpolation point, needs to be larger for METAR since points are more scarce
+
+if (metar_flag == 1)
+	{var distance_to_unload = 250000.0;}
+else 	
+	{var distance_to_unload = 120000.0;}	
+
+# if we can set environment without a reset, the loop can run a bit faster for smoother interpolation
+# so determine the suitable timing
+
+if (compat_layer.features.can_disable_environment == 1)
+	{var interpolation_loop_time = 0.2; var vlimit = 1.01;}
+else
+	{var interpolation_loop_time = 1.0; var vlimit = 1.05;} 
 
 
 # get an inverse distance weighted average from all defined weather stations
@@ -422,7 +463,7 @@ for (var i = 0; i < n_stations; i=i+1) {
 
 	sum_norm = sum_norm + 1./d * s.weight;
 	
-
+	sum_alt = sum_alt + (s.alt/d) * s.weight;
 	sum_vis = sum_vis + (s.vis/d) * s.weight;
 	sum_T = sum_T + (s.T/d) * s.weight;
 	sum_D = sum_D + (s.D/d) * s.weight;
@@ -431,12 +472,12 @@ for (var i = 0; i < n_stations; i=i+1) {
 	# gradually fade in the interpolation weight of newly added stations to
 	# avoid sudden jumps
 
-	if (s.weight < 1.0) {s.weight = s.weight + 0.1;}
+	if (s.weight < 1.0) {s.weight = s.weight + 0.02;}
 
 	# automatically delete stations out of range
 	# take care not to unload if weird values appear for a moment
 	# never unload if only one station left
-	if ((d > 120000.0) and (d<140000.0) and (n_stations > 1)) 
+	if ((d > distance_to_unload) and (d < (distance_to_unload + 20000.0)) and (n_stations > 1)) 
 		{
 		if (debug_output_flag == 1) 
 			{print("Distance to weather station ", d, " m, unloading ...", i);}
@@ -448,24 +489,62 @@ for (var i = 0; i < n_stations; i=i+1) {
 setprop(lwi~"station-number", i);
 
 
-
+var ialt = sum_alt/sum_norm;
 var vis = sum_vis/sum_norm;
 var p = sum_p/sum_norm;
 var D = sum_D/sum_norm;
 var T = sum_T/sum_norm;
 
 
-# a simple altitude model for visibility - increase it with increasing altitude
+# altitude model for visibility - increase above the lowest inversion layer to simulate ground haze
 
 var altitude = getprop("position/altitude-ft");
 
-vis = vis + 0.5 * altitude;
+var current_tile_index = getprop(lw~"tiles/tile[4]/tile-index");
 
-if (vis > 0.0) {iNode.getNode("visibility-m",1).setValue(vis);} # a redundancy check
-iNode.getNode("temperature-degc",1).setValue(T);
-iNode.getNode("dewpoint-degc",1).setValue(D);
-if (p>0.0) {iNode.getNode("pressure-sea-level-inhg",1).setValue(p);} # a redundancy check
-iNode.getNode("turbulence",1).setValue(0.0);
+#if (presampling_flag == 1)
+#	{var current_mean_terrain_elevation = alt_20_array[current_tile_index -1];}
+#else
+#	{var current_mean_terrain_elevation = getprop(lw~"tmp/tile-alt-offset-ft");}
+
+current_mean_terrain_elevation = ialt;
+
+var alt1 = weather_dynamics.tile_convective_altitude[current_tile_index -1];
+var alt2 = alt1 + 1500.0;
+
+
+var inc1 = 0.2;
+var inc2 = 5.0;
+var inc3 = 1.0;
+
+var alt_above_mean = altitude - current_mean_terrain_elevation;
+
+if (alt_above_mean < alt1)
+	{vis = vis + inc1 * alt_above_mean;}
+else if (alt_above_mean < alt2)
+	{vis = vis + inc1 * alt1 + inc2 * (alt_above_mean - alt1);}
+else if	(alt_above_mean > alt2)
+	{vis = vis + inc1 * alt1 + inc2 * (alt2-alt1)  + inc3 * (alt_above_mean - alt2);}
+	
+
+# limit relative changes of the visibility, will make for gradual transitions
+
+
+if (vis/vis_before > vlimit)
+	{vis = vlimit * vis_before;}
+else if (vis/vis_before < (2.0-vlimit))
+	{vis = (2.0-vlimit) * vis_before;}
+
+
+
+# write all properties into the weather interpolation record in the property tree
+
+setprop(lwi~"mean-terrain-altitude-ft",ialt);
+if (vis > 0.0) {setprop(lwi~"visibility-m",vis);} # a redundancy check
+setprop(lwi~"temperature-degc",T);
+setprop(lwi~"dewpoint-degc",D);
+if (p > 10.0) {setprop(lwi~"pressure-sea-level-inhg",p);}
+setprop(lwi~"turbulence",0.0);
 
 # now check if an effect volume writes the property and set only if not
 
@@ -517,15 +596,15 @@ else if (wind_model_flag ==2) # constant in tile
 	}	
 else if (wind_model_flag ==3) # aloft interpolated, constant in tiles
 	{
-	var w = props.globals.getNode(lw~"interpolation").getChild("wind",0);
+	var w = windIpointArray[0];
 	var res = wind_altitude_interpolation(altitude,w);
 	var winddir = res[0];
 	var windspeed = res[1];
 	}
 else if (wind_model_flag == 5) # aloft waypoint interpolated
 	{
-	var res = wind_interpolation(viewpos.lat(), viewpos.lon(), viewpos.alt());
-	
+	var res = wind_interpolation(viewpos.lat(), viewpos.lon(), altitude);	
+
 	var winddir = res[0];
 	var windspeed = res[1];
 	}
@@ -540,6 +619,8 @@ if (presampling_flag == 0)
 	{
 	var boundary_alt = 600.0;
 	var windspeed_ground = windspeed/3.0;
+	
+	var f_min = 2.0/3.0;
 
 	if (altitude_agl < boundary_alt)
 		{var windspeed_current = windspeed_ground + 2.0 * windspeed_ground * (altitude_agl/boundary_alt);}
@@ -577,6 +658,37 @@ else
 	}
 
 
+# determine gusts and turbulence in the bounday layer
+
+var gust_frequency = getprop(lw~"tmp/gust-frequency-hz");
+
+
+
+
+if (gust_frequency > 0.0)
+	{
+	var gust_relative_strength = getprop(lw~"tmp/gust-relative-strength");
+	var gust_angvar = getprop(lw~"tmp/gust-angular-variation-deg");
+	
+	var alt_scaling_factor = 1.2 * windspeed / 10.0;
+	if (alt_scaling_factor < 1.0) {alt_scaling_factor = 1.0;}
+
+	# expected mean number of gusts in time interval (should be < 1)
+	var p_gust = gust_frequency * interpolation_loop_time;
+
+	if (rand() < p_gust) # we change the offsets for windspeed and direction
+		{
+		var alt_fact = 1.0 - altitude_agl/(boundary_alt * alt_scaling_factor);
+		if (alt_fact < 0.0) {alt_fact = 0.0};
+		windspeed_multiplier =  (1.0 + ((rand()) * gust_relative_strength * alt_fact));
+		winddir_change = alt_fact * (1.0 - 2.0 * rand() * gust_angvar);
+		}
+	windspeed_current = windspeed_current *  windspeed_multiplier;
+	winddir = winddir + winddir_change;
+	}
+
+	
+
 
 
 compat_layer.setWindSmoothly(winddir, windspeed_current);
@@ -588,7 +700,9 @@ cNode.getNode("wind-from-heading-deg").setValue(winddir);
 cNode.getNode("wind-speed-kt").setValue(windspeed_current);
 
 
-if (getprop(lw~"interpolation-loop-flag") ==1) {settimer(interpolation_loop, 1.0);}
+
+
+if (getprop(lw~"interpolation-loop-flag") ==1) {settimer(interpolation_loop, interpolation_loop_time);}
 
 }
 
@@ -1572,10 +1686,11 @@ setprop(lw~"convective-loop-flag",0);
 
 weather_dynamics.convective_loop_kill_flag = 1; # long-running loop needs a different scheme to end
 
-# also remove rain and snow effects
+# also remove rain snow and saturation effects
 
 compat_layer.setRain(0.0);
 compat_layer.setSnow(0.0);
+compat_layer.setLight(1.0);
 
 # set placement indices to zero
 
@@ -1592,6 +1707,10 @@ settimer ( func { setsize(weather_dynamics.cloudQuadtrees,0);},0.1); # to avoid 
 setsize(effectVolumeArray,0);
 n_effectVolumeArray = 0;
 
+# if we have used METAR, we may no longer want to do so
+
+metar_flag = 0;
+
 
 settimer ( func {
 	setsize(weather_tile_management.modelArrays,0);
@@ -1604,14 +1723,19 @@ settimer ( func {
 	setsize(weather_dynamics.tile_convective_altitude,0);
 	setsize(weather_dynamics.tile_convective_strength,0);
 	setsize(weatherStationArray,0);
+	setsize(windIpointArray,0);
 	setprop(lw~"clouds/buffer-count",0);
 	setprop(lw~"clouds/cloud-scenery-count",0);
 	weather_tile_management.n_cloudSceneryArray = 0;
-	props.globals.getNode("local-weather/interpolation", 1).removeChildren("wind");
+	#props.globals.getNode("local-weather/interpolation", 1).removeChildren("wind");
 	setprop(lwi~"ipoint-number",0);
 	},1.1);
 
 setprop(lw~"tmp/presampling-status", "idle");
+
+# indicate that we are no longer running
+
+local_weather_running_flag = 0;
 
 }
 
@@ -2211,6 +2335,76 @@ for (var i=0; i<ny; i=i+1)
 		{
 		var y0 = y + y_var * 2.0 * (rand() -0.5);
 		var x = xmin + j * (xoffset + i * xinc) + x_var * 2.0 * (rand() -0.5);
+		var lat = blat + m_to_lat * (y0 * math.cos(dir) - x * math.sin(dir));
+		var long = blong + m_to_lon * (x * math.cos(dir) + y0 * math.sin(dir));
+
+		var alt = balt + alt_var * 2 * (rand() - 0.5);
+		
+		flag = 0;
+		var rn = 6.0 * rand();
+
+		if (((j<jlow) or (j>(nx-jlow-1))) and ((i<ilow) or (i>(ny-ilow-1)))) # select a small or no cloud		
+			{
+			if (rn > 2.0) {flag = 1;} else {path = select_cloud_model(type,"small");}
+			}
+		if ((j<jlow) or (j>(nx-jlow-1)) or (i<ilow) or (i>(ny-ilow-1))) 	
+			{
+			if (rn > 5.0) {flag = 1;} else {path = select_cloud_model(type,"small");}
+			}
+		else	{ # select a large cloud
+			if (rn > 5.0) {flag = 1;} else {path = select_cloud_model(type,"large");}
+			}
+
+
+		if (flag==0){
+			if (thread_flag == 1)
+				{create_cloud_vec(path, lat, long, alt, 0.0);}
+			else
+				{compat_layer.create_cloud(path, lat, long, alt, 0.0);}
+			
+
+				}
+		}
+
+	} 
+
+}
+
+###########################################################
+# place an undulatus pattern 
+###########################################################
+
+var create_undulatus = func (type, blat, blong, balt, alt_var, nx, xoffset, edgex, x_var, ny, yoffset, edgey, y_var, und_strength, direction, tri) {
+
+var flag = 0;
+var path = "Models/Weather/blank.ac";
+calc_geo(blat);
+var dir = direction * math.pi/180.0;
+
+var ymin = -0.5 * ny * yoffset;
+var xmin = -0.5 * nx * xoffset;
+var xinc = xoffset * (tri-1.0) /ny;
+ 
+var jlow = int(nx*edgex);
+var ilow = int(ny*edgey);
+
+var und = 0.0;
+var und_array = [];
+
+for (var i=0; i<ny; i=i+1)
+	{
+	und = und + 2.0 * (rand() -0.5) * und_strength;
+	append(und_array,und);
+	}
+
+for (var i=0; i<ny; i=i+1)
+	{
+	var y = ymin + i * yoffset; 
+	
+	for (var j=0; j<nx; j=j+1)
+		{
+		var y0 = y + y_var * 2.0 * (rand() -0.5);
+		var x = xmin + j * (xoffset + i * xinc) + x_var * 2.0 * (rand() -0.5) + und_array[i];
 		var lat = blat + m_to_lat * (y0 * math.cos(dir) - x * math.sin(dir));
 		var long = blong + m_to_lon * (x * math.cos(dir) + y0 * math.sin(dir));
 
@@ -2876,11 +3070,11 @@ append(effectVolumeArray,ev);
 # set a weather station for interpolation
 ###########################################################
 
-var set_weather_station = func (lat, lon, vis, T, D, p) {
+var set_weather_station = func (lat, lon, alt, vis, T, D, p) {
 
-var s = weatherStation.new (lat, lon, vis, T, D, p);
+var s = weatherStation.new (lat, lon, alt, vis, T, D, p);
 s.index = getprop(lw~"tiles/tile-counter");
-s.weight = 0.1;
+s.weight = 0.02;
 
 # set a timestamp if needed
 
@@ -2899,42 +3093,56 @@ append(weatherStationArray,s);
 
 var set_wind_ipoint = func (lat, lon, d0, v0, d1, v1, d2, v2, d3, v3, d4, v4, d5, v5, d6, v6, d7, v7, d8, v8) {
 
-var n = props.globals.getNode(lwi, 1);
-		for (var i = 0; 1; i += 1)
-			if (n.getChild("wind", i, 0) == nil)
-				break;
+var w = windIpoint.new(lat, lon, d0, v0, d1, v1, d2, v2, d3, v3, d4, v4, d5, v5, d6, v6, d7, v7, d8, v8);
 
-s = n.getChild("wind", i, 1);
+append(windIpointArray, w);
 
-s.getNode("latitude-deg",1).setValue(lat);
-s.getNode("longitude-deg",1).setValue(lon);
 
-s.getChild("altitude",0,1).getNode("wind-from-heading-deg",1).setValue(d0);
-s.getChild("altitude",0,1).getNode("windspeed-kt",1).setValue(v0);
+}
 
-s.getChild("altitude",1,1).getNode("wind-from-heading-deg",1).setValue(d1);
-s.getChild("altitude",1,1).getNode("windspeed-kt",1).setValue(v1);
 
-s.getChild("altitude",2,1).getNode("wind-from-heading-deg",1).setValue(d2);
-s.getChild("altitude",2,1).getNode("windspeed-kt",1).setValue(v2);
+###########################################################
+# set a wind interpolation point from ground METAR data
+###########################################################
 
-s.getChild("altitude",3,1).getNode("wind-from-heading-deg",1).setValue(d3);
-s.getChild("altitude",3,1).getNode("windspeed-kt",1).setValue(v3);
+var set_wind_ipoint_metar = func (lat, lon, d0, v0) {
 
-s.getChild("altitude",4,1).getNode("wind-from-heading-deg",1).setValue(d4);
-s.getChild("altitude",4,1).getNode("windspeed-kt",1).setValue(v4);
+# insert a plausible pattern of aloft winds based on ground info
 
-s.getChild("altitude",5,1).getNode("wind-from-heading-deg",1).setValue(d5);
-s.getChild("altitude",5,1).getNode("windspeed-kt",1).setValue(v5);
 
-s.getChild("altitude",6,1).getNode("wind-from-heading-deg",1).setValue(d6);
-s.getChild("altitude",6,1).getNode("windspeed-kt",1).setValue(v6);
+# direction of Coriolis deflection depends on hemisphere
+if (lat >0.0) {var dsign = -1.0;} else {var dsign = 1.0;} 
 
-s.getChild("altitude",7,1).getNode("wind-from-heading-deg",1).setValue(d7);
-s.getChild("altitude",7,1).getNode("windspeed-kt",1).setValue(v7);
 
-s.getChild("altitude",8,1).getNode("wind-from-heading-deg",1).setValue(d8);
-s.getChild("altitude",8,1).getNode("windspeed-kt",1).setValue(v8);
+var v1 = v0 * (1.0 + rand() * 0.2);
+var d1 = d0 + dsign * 3.0 * rand();
+
+var v2 = v0 * (1.2 + rand() * 0.2);
+var d2 = d0 + dsign * (3.0 * rand() + 2.0);
+
+var v3 = v0 * (1.3 + rand() * 0.4) + 5.0;
+var d3 = d0 + dsign * (3.0 * rand() + dsign * 4.0);
+
+var v4 = v0 * (1.7 + rand() * 0.5) + 10.0;
+var d4 = d0 + dsign * (4.0 * rand() + dsign * 8.0);
+
+var v5 = v0 * (1.7 + rand() * 0.5) + 20.0;
+var d5 = d0 + dsign * (4.0 * rand() + dsign * 10.0);
+
+var v6 = v0 * (1.7 + rand() * 0.5) + 40.0;
+var d6 = d0 + dsign * (4.0 * rand() + dsign * 12.0);
+
+var v7 = v0 * (2.0 + rand() * 0.7) + 50.0;
+var d7 = d0 + dsign * (4.0 * rand() + dsign * 13.0);
+
+var v8 = v0 * (2.0 + rand() * 0.7) + 55.0;;
+var d8 = d0 + dsign * (5.0 * rand() + dsign * 14.0);
+
+var w = windIpoint.new(lat, lon, d0, v0, d1, v1, d2, v2, d3, v3, d4, v4, d5, v5, d6, v6, d7, v7, d8, v8);
+
+append(windIpointArray, w);
+
+
 
 }
 
@@ -3185,6 +3393,14 @@ if (wind_model_flag == 5)
 
 var set_tile = func {
 
+# check if another instance of local weather is running already
+
+if (local_weather_running_flag == 1)
+	{
+	setprop("/sim/messages/pilot", "Local weather: Local weather is already running, use Clear/End before restarting. Aborting...");
+	return;
+	}
+
 
 var type = getprop("/local-weather/tmp/tile-type");
 
@@ -3227,6 +3443,9 @@ if (compat_layer.features.can_disable_environment ==1)
 	}
 
 
+# switch off normal 3d clouds
+
+compat_layer.setDefaultCloudsOff();
 
 # now see if we need to presample the terrain
 
@@ -3246,14 +3465,7 @@ if ((getprop("/environment/metar/valid") == 1) and (getprop(lw~"tmp/tile-managem
 	
 	setprop(lw~"METAR/station-id","METAR");
 
-	# switch off normal 3d clouds
-
-	var layers = props.globals.getNode("/environment/clouds").getChildren("layer");
-
-	foreach (l; layers)
-		{
-		l.getNode("coverage-type").setValue(5);
-		}
+	
 	
 	}
 else if ((getprop("/environment/metar/valid") == 0) and (getprop(lw~"tmp/tile-management") == "METAR"))
@@ -3267,24 +3479,44 @@ else if ((getprop("/environment/metar/valid") == 0) and (getprop(lw~"tmp/tile-ma
 # see if we need to create an aloft wind interpolation structure
 
 if ((wind_model_flag == 3) or ((wind_model_flag ==5) and (getprop(lwi~"ipoint-number") == 0))) 
-	{set_aloft_wrapper();}
+	{
+	if (metar_flag != 1)
+		{set_aloft_wrapper();}
+	}
 
 
 # prepare the first tile wind field
 
 if (metar_flag == 1) # the winds from current METAR are used
 	{
+
+	# METAR reports ground winds, we want to set aloft, so we need to compute the local boundary layer
+	# need to set the tile index for this
+	setprop(lw~"tiles/tile[4]/tile-index",1);
+
+	var boundary_correction = 1.0/get_slowdown_fraction();
+	var metar_base_wind_deg = getprop("environment/metar/base-wind-dir-deg");
+	var metar_base_wind_speed = boundary_correction * getprop("environment/metar/base-wind-speed-kt");
+
+
 	if ((wind_model_flag == 1) or (wind_model_flag == 2))
 		{
-		# METAR reports ground winds, we want to set aloft, so we need to compute the local boundary layer
-		# need to set the tile index for this
-		setprop(lw~"tiles/tile[4]/tile-index",1);
+		append(weather_dynamics.tile_wind_direction, metar_base_wind_deg);
+		append(weather_dynamics.tile_wind_speed, metar_base_wind_speed);
+		setprop(lw~"tmp/tile-orientation-deg",metar_base_wind_deg);
+		}
+	else if (wind_model_flag == 5) 
+		{
+		var station_lat = getprop("/environment/metar/station-latitude-deg");
+		var station_lon = getprop("/environment/metar/station-longitude-deg");
 
-		var boundary_correction = 1.0/get_slowdown_fraction();
+		set_wind_ipoint_metar(station_lat, station_lon, metar_base_wind_deg, metar_base_wind_speed);
 
-		append(weather_dynamics.tile_wind_direction, getprop("environment/metar/base-wind-dir-deg"));
-		append(weather_dynamics.tile_wind_speed, boundary_correction * getprop("environment/metar/base-wind-speed-kt"));
-		setprop(lw~"tmp/tile-orientation-deg",getprop("environment/metar/base-wind-dir-deg"));
+		var res = wind_interpolation(lat,lon,0.0);
+
+		append(weather_dynamics.tile_wind_direction,res[0]);
+		append(weather_dynamics.tile_wind_speed,res[1]);
+		setprop(lw~"tmp/tile-orientation-deg", weather_dynamics.tile_wind_direction[0]);
 		}
 	else
 		{
@@ -3466,6 +3698,10 @@ if (getprop(lw~"config/buffer-flag") ==1)
 		}
 	}
 
+# and indicate that we're up and running
+
+local_weather_running_flag = 1;
+
 # weather_tile_management.watchdog_loop();
 
 }
@@ -3594,10 +3830,11 @@ fgcommand("reinit", props.Node.new({subsystem:"environment"}));
 #################################################################
 
 var weatherStation = {
-	new: func (lat, lon, vis, T, D, p) {
+	new: func (lat, lon, alt, vis, T, D, p) {
 	        var s = { parents: [weatherStation] };
 		s.lat = lat;
 		s.lon = lon;
+		s.alt = alt;
 		s.vis = vis;
 		s.T = T;
 		s.D = D;
@@ -3612,6 +3849,63 @@ var weatherStation = {
 		me.timestamp = weather_dynamics.time_lw;
 	},
 };
+
+
+var windIpoint = {
+	new: func (lat, lon, d0, v0, d1, v1, d2, v2, d3, v3, d4, v4, d5, v5, d6, v6, d7, v7, d8, v8) {
+	        var w = { parents: [windIpoint] };
+		w.lat = lat;
+		w.lon = lon;
+		
+		altvec = [];
+		
+		var wv = windVec.new(d0, v0);
+		append(altvec,wv);
+
+		wv = windVec.new(d1, v1);
+		append(altvec, wv);
+
+		wv = windVec.new(d2, v2);
+		append(altvec, wv);
+
+		wv = windVec.new(d3, v3);
+		append(altvec, wv);
+
+		wv = windVec.new(d4, v4);
+		append(altvec, wv);
+
+		wv = windVec.new(d5, v5);
+		append(altvec, wv);
+
+		wv = windVec.new(d6, v6);
+		append(altvec, wv);
+
+		wv = windVec.new(d7, v7);
+		append(altvec, wv);
+
+		wv = windVec.new(d8, v8);
+		append(altvec, wv);
+		
+		w.alt = altvec;
+		
+		w.weight = 0.02;
+	        return w;
+	},
+};
+
+var windVec = {
+	new: func (d, v) {
+	var wv = { parents: [windVec] };
+	wv.d = d;
+	wv.v = v;
+	return wv;
+	},
+
+};
+
+
+
+
 
 var effectVolume = {
 	new: func (geometry, lat, lon, r1, r2, phi, alt_low, alt_high, vis, rain, snow, turb, lift, lift_flag, sat) {
@@ -3763,7 +4057,7 @@ var ec = "/environment/config/";
 
 # a hash map of the strength for convection associated with terrain types
 
-var landcover_map = {BuiltUpCover: 0.35, Town: 0.35, Freeway:0.35, BarrenCover:0.3, HerbTundraCover: 0.25, GrassCover: 0.2, CropGrassCover: 0.2, EvergreenBroadCover: 0.2, Sand: 0.25, Grass: 0.2, Ocean: 0.01, Marsh: 0.05, Lake: 0.01, ShrubCover: 0.15, Landmass: 0.2, CropWoodCover: 0.15, MixedForestCover: 0.1, DryCropPastureCover: 0.25, MixedCropPastureCover: 0.2, IrrCropPastureCover: 0.15, DeciduousBroadCover: 0.1, pa_taxiway : 0.35, pa_tiedown: 0.35, pc_taxiway: 0.35, pc_tiedown: 0.35, Glacier: 0.01, DryLake: 0.3, IntermittentStream: 0.2};
+var landcover_map = {BuiltUpCover: 0.35, Town: 0.35, Freeway:0.35, BarrenCover:0.3, HerbTundraCover: 0.25, GrassCover: 0.2, CropGrassCover: 0.2, EvergreenBroadCover: 0.2, EvergreenNeedleCover: 0.2, Sand: 0.25, Grass: 0.2, Ocean: 0.01, Marsh: 0.05, Lake: 0.01, ShrubCover: 0.15, Landmass: 0.2, CropWoodCover: 0.15, MixedForestCover: 0.1, DryCropPastureCover: 0.25, MixedCropPastureCover: 0.2, IrrCropPastureCover: 0.15, DeciduousBroadCover: 0.1, Bog: 0.05, pa_taxiway : 0.35, pa_tiedown: 0.35, pc_taxiway: 0.35, pc_tiedown: 0.35, Glacier: 0.01, DryLake: 0.3, IntermittentStream: 0.2};
 
 # a hash map of average vertical cloud model sizes
 
@@ -3806,9 +4100,11 @@ var thermal = {};
 var wave = {};
 
 
-# array of currently existing weather stations
+# arrays of currently existing weather stations and wind interpolation points
 
 var weatherStationArray = [];
+var windIpointArray = [];
+
 
 # a flag for the wind model (so we don't have to do string comparisons all the time)
 # 1: constant 2: constant in tile 3: aloft interpolated 4: airmass interpolated
@@ -3828,6 +4124,11 @@ var cloud_mean_altitude = 0.0;
 var cloud_fractional_lifetime = 0.0;
 var cloud_evolution_timestamp = 0.0;
 
+# globals propagating gust information inside the interpolation loop
+
+var windspeed_multiplier = 1.0;
+var winddir_change = 0.0;
+
 # global flags mirroring property tree menu settings
 
 var generate_thermal_lift_flag = 0;
@@ -3838,7 +4139,7 @@ var detailed_clouds_flag = 1;
 var dynamical_convection_flag = 1;
 var debug_output_flag = 1;
 var metar_flag = 0;
-
+var local_weather_running_flag = 0;
 
 # set all sorts of default properties for the menu
 
@@ -3893,10 +4194,13 @@ setprop(lw~"tmp/box-bottom-n",12);
 setprop(lw~"tmp/tile-type", "High-pressure");
 setprop(lw~"tmp/tile-orientation-deg", 260.0);
 setprop(lw~"tmp/windspeed-kt", 8.0);
+setprop(lw~"tmp/gust-frequency-hz", 0.0);
+setprop(lw~"tmp/gust-relative-strength",0.0);
+setprop(lw~"tmp/gust-angular-variation-deg",0.0);
 setprop(lw~"tmp/tile-alt-offset-ft", 0.0);
 setprop(lw~"tmp/tile-alt-median-ft",0.0);
 setprop(lw~"tmp/tile-alt-min-ft",0.0);
-setprop(lw~"tmp/tile-management", "single tile");
+setprop(lw~"tmp/tile-management", "realistic weather");
 setprop(lw~"tmp/presampling-flag", 1);
 setprop(lw~"tmp/asymmetric-tile-loading-flag", 0);
 setprop(lw~"tmp/last-reading-pos-del",0);
@@ -3933,7 +4237,7 @@ setprop(lw~"tmp/ipoint-longitude-deg",getprop("position/longitude-deg"));
 setprop(lw~"config/distance-to-load-tile-m",39000.0);
 setprop(lw~"config/distance-to-remove-tile-m",39500.0);
 setprop(lw~"config/detailed-clouds-flag",1);
-setprop(lw~"config/dynamics-flag",1);
+setprop(lw~"config/dynamics-flag",0);
 setprop(lw~"config/thermal-properties",1.0);
 setprop(lw~"config/wind-model","constant");
 setprop(lw~"config/buffer-flag",1);
@@ -3943,9 +4247,9 @@ setprop(lw~"config/asymmetric-buffering-flag",0);
 setprop(lw~"config/asymmetric-buffering-reduction",0.3);
 setprop(lw~"config/asymmetric-buffering-angle-deg",90.0);
 setprop(lw~"config/clouds-in-dynamics-loop",250);
-setprop(lw~"config/debug-output-flag",1);
+setprop(lw~"config/debug-output-flag",0);
 setprop(lw~"config/generate-thermal-lift-flag", 0);
-setprop(lw~"config/dynamical-convection-flag", 1);
+setprop(lw~"config/dynamical-convection-flag", 0);
 setprop(lw~"config/thread-flag", 1);
 
 # set the default loop flags to loops inactive

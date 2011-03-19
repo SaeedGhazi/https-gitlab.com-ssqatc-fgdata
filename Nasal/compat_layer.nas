@@ -1,11 +1,12 @@
 
 ########################################################
 # compatibility layer for local weather package
-# Thorsten Renk, July 2010
+# Thorsten Renk, March 2011
 ########################################################
 
 # function			purpose
 #
+# setDefaultCloudsOff		to remove the standard Flightgear 3d clouds
 # setVisibility			to set the visibility to a given value
 # setLift			to set lift to given value
 # setRain			to set rain to a given value
@@ -97,6 +98,29 @@ print("Compatibility layer: tests done.");
 
 
 
+var setDefaultCloudsOff = func {
+
+if (features.can_disable_environment == 1)
+	{
+	var layers = props.globals.getNode("/environment/clouds").getChildren("layer");
+	
+	foreach (l; layers)
+		{
+		l.getNode("coverage-type").setValue(5);
+		}
+	}
+else
+	{
+	var layers = props.globals.getNode("/environment/clouds").getChildren("layer");
+
+	foreach (l; layers)
+		{
+		l.getNode("coverage").setValue("clear");
+		}
+	}
+
+}
+
 
 ####################################
 # set visibility to given value
@@ -144,11 +168,18 @@ if (features.can_disable_environment == 1)
 
 var setRain = func (rain) {
 
-# setting the lowest cloud layer to 30.000 ft is a workaround
-# as rain is only created below that layer in default
+if (features.can_disable_environment == 1)
+	{
+	setprop("/environment/rain-norm", rain);
+	}
+else
+	{
+	# setting the lowest cloud layer to 30.000 ft is a workaround
+	# as rain is only created below that layer in default
 
-setprop("environment/clouds/layer[0]/elevation-ft", 30000.0);
-setprop("environment/metar/rain-norm",rain);
+	setprop("/environment/clouds/layer[0]/elevation-ft", 30000.0);
+	setprop("/environment/metar/rain-norm",rain);
+	}
 
 }
 
@@ -158,11 +189,18 @@ setprop("environment/metar/rain-norm",rain);
 
 var setSnow = func (snow) {
 
-# setting the lowest cloud layer to 30.000 ft is a workaround
-# as snow is only created below that layer in default
+if (features.can_disable_environment == 1)
+	{
+	setprop("/environment/snow-norm", snow);
+	}
+else
+	{
+	# setting the lowest cloud layer to 30.000 ft is a workaround
+	# as snow is only created below that layer in default
 
-setprop("environment/clouds/layer[0]/elevation-ft", 30000.0);
-setprop("environment/metar/snow-norm",snow);
+	setprop("environment/clouds/layer[0]/elevation-ft", 30000.0);
+	setprop("environment/metar/snow-norm",snow);
+	}
 }
 
 

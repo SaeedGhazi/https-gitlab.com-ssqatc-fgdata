@@ -66,6 +66,7 @@
 
     <input>
       <row>0</row><col>1</col>
+      <pref-width>40</pref-width>
       <halign>left</halign>
       <property>/sim/replay/duration</property>
     </input>
@@ -79,27 +80,12 @@
     <combo>
       <row>1</row><col>1</col>
       <halign>left</halign>
+      <pref-width>200</pref-width>
       <property>/sim/replay/view-name</property>
       <binding>
         <command>dialog-apply</command>
       </binding>
     </combo>
-
-
-    <text>
-      <row>2</row><col>0</col>
-      <halign>right</halign>
-      <label>Disable replay:</label>
-    </text>
-
-    <checkbox>
-      <row>2</row><col>1</col>
-      <halign>left</halign>
-      <property>/sim/replay/disable</property>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-    </checkbox>
 
   </group>
 
@@ -156,7 +142,7 @@
     <layout>hbox</layout>
     <empty><stretch>true</stretch></empty>
     <button>
-      <legend>Replay</legend>
+      <legend>Start</legend>
       <default>true</default>
       <equal>true</equal>
       <binding>
@@ -171,6 +157,25 @@
       </binding>
       <binding>
         <command>replay</command>
+      </binding>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+    <empty><stretch>true</stretch></empty>
+    <button>
+      <legend>Stop</legend>
+      <equal>true</equal>
+      <enable>
+         <greater-than>
+           <property>/sim/freeze/replay-state</property>
+           <value>0</value>
+         </greater-than>
+      </enable>
+      <binding>
+        <property>/sim/replay/disable</property>
+        <command>property-assign</command>
+        <value type="bool">true</value>
       </binding>
       <binding>
         <command>dialog-close</command>

@@ -30,6 +30,15 @@
 	<hrule/>
 
 	<checkbox>
+		<label>Enable 3D</label>
+		<halign>left</halign>
+		<property>/sim/hud/enable3d[1]</property>
+		<binding>
+			<command>dialog-apply</command>
+		</binding>
+	</checkbox>
+
+	<checkbox>
 		<label>Transparent</label>
 		<halign>left</halign>
 		<property>/sim/hud/color/transparent</property>

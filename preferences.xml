@@ -131,6 +131,7 @@ Started September 2000 by David Megginson, david@megginson.com
    <shader-experimental type="bool" userarchive="y">false</shader-experimental>
    <shader-effects type="bool" userarchive="y">true</shader-effects>
    <fps-display type="bool" userarchive="y">false</fps-display>
+   <frame-latency-display type="bool" userarchive="y">false</frame-latency-display>
    <on-screen-statistics type="int">0</on-screen-statistics>
    <glide-slope-tunnel type="bool" userarchive="y">false</glide-slope-tunnel>
    <redout>

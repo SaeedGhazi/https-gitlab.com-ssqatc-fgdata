@@ -23,7 +23,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
   <session type="int" userarchive="y">0</session>
   <paths>
-   <screenshot-dir type="string"/> <!-- defaults to current working dir -->
+   <screenshot-dir type="string" userarchive="y"/> <!-- defaults to current working dir -->
    <validate>
     <read type="string"/>
     <write type="string"/>

@@ -138,12 +138,23 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     menuEnable("tutorial-start", size(props.globals.getNode("/sim/tutorials", 1).getChildren("tutorial")));
     menuEnable("joystick-info", size(props.globals.getNode("/input/joysticks").getChildren("js")));
 
+    # frame-per-second display
     var fps = props.globals.getNode("/sim/rendering/fps-display", 1);
     setlistener(fps, fpsDisplay, 1);
     setlistener("/sim/startup/xsize", func {
         if (fps.getValue()) {
             fpsDisplay(0);
             fpsDisplay(1);
+        }
+    });
+
+    # frame-latency display
+    var latency = props.globals.getNode("/sim/rendering/frame-latency-display", 1);
+    setlistener(latency, latencyDisplay, 1);
+    setlistener("/sim/startup/xsize", func {
+        if (latency.getValue()) {
+            latencyDisplay(0);
+            latencyDisplay(1);
         }
     });
 
@@ -197,7 +208,10 @@ var fpsDisplay = func(n) {
     var w = isa(n, props.Node) ? n.getValue() : n;
     fgcommand(w ? "dialog-show" : "dialog-close", props.Node.new({"dialog-name": "fps"}));
 }
-
+var latencyDisplay = func(n) {
+    var w = isa(n, props.Node) ? n.getValue() : n;
+    fgcommand(w ? "dialog-show" : "dialog-close", props.Node.new({"dialog-name": "frame-latency"}));
+}
 
 ##
 # How many seconds do we show the tip?

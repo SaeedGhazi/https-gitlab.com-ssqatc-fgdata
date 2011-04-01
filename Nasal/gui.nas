@@ -138,6 +138,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     menuEnable("tutorial-start", size(props.globals.getNode("/sim/tutorials", 1).getChildren("tutorial")));
     menuEnable("joystick-info", size(props.globals.getNode("/input/joysticks").getChildren("js")));
 
+    # frame-per-second display
     var fps = props.globals.getNode("/sim/rendering/fps-display", 1);
     setlistener(fps, fpsDisplay, 1);
     setlistener("/sim/startup/xsize", func {
@@ -147,14 +148,24 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
         }
     });
 
+    # frame-latency display
+    var latency = props.globals.getNode("/sim/rendering/frame-latency-display", 1);
+    setlistener(latency, latencyDisplay, 1);
+    setlistener("/sim/startup/xsize", func {
+        if (latency.getValue()) {
+            latencyDisplay(0);
+            latencyDisplay(1);
+        }
+    });
+
     # only enable precipitation if gui *and* aircraft want it
     var p = "/sim/rendering/precipitation-";
     var precip_gui = getprop(p ~ "gui-enable");
     var precip_ac = getprop(p ~ "aircraft-enable");
     props.globals.getNode(p ~ "enable").setAttribute("userarchive", 0); # TODO remove later
     var set_precip = func setprop(p ~ "enable", precip_gui and precip_ac);
-    setlistener(p ~ "gui-enable", func(n) set_precip(precip_gui = n.getValue()));
-    setlistener(p ~ "aircraft-enable", func(n) set_precip(precip_ac = n.getValue()));
+    setlistener(p ~ "gui-enable", func(n) set_precip(precip_gui = n.getValue()),1);
+    setlistener(p ~ "aircraft-enable", func(n) set_precip(precip_ac = n.getValue()),1);
 
     # the autovisibility feature of the menubar
     # automatically show the menubar if the mouse is at the upper edge of the window
@@ -197,7 +208,10 @@ var fpsDisplay = func(n) {
     var w = isa(n, props.Node) ? n.getValue() : n;
     fgcommand(w ? "dialog-show" : "dialog-close", props.Node.new({"dialog-name": "fps"}));
 }
-
+var latencyDisplay = func(n) {
+    var w = isa(n, props.Node) ? n.getValue() : n;
+    fgcommand(w ? "dialog-show" : "dialog-close", props.Node.new({"dialog-name": "frame-latency"}));
+}
 
 ##
 # How many seconds do we show the tip?

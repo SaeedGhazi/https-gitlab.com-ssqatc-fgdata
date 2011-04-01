@@ -653,7 +653,7 @@
 		</item>
 
 		<item>
-			<label>Print Statistics</label>
+			<label>Print Rendering Statistics</label>
 			<binding>
 				<command>property-assign</command>
 				<property>/sim/rendering/print-statistics</property>
@@ -667,6 +667,14 @@
 				<command>property-adjust</command>
 				<property>/sim/rendering/on-screen-statistics</property>
 				<step type="int">1</step>
+			</binding>
+		</item>
+
+		<item>
+			<label>Toggle Subsystem Statistics</label>
+			<binding>
+				<command>property-toggle</command>
+				<property>/sim/timing-statistics/enabled</property>
 			</binding>
 		</item>
 

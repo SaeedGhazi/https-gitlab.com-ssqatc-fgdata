@@ -7,33 +7,33 @@
 
 <body>
 
-<h1>Local Weather Package - v0.9</h1>
+<h1>Local Weather Package - v1.0</h1>
 
 <h2>1. Introduction</h2>
 
 The aim of a local weather system is to simulate weather phenomena tied to specific locations. Examples for this are a thunderstorm, a rainfront or thermal development. In the case of the thunderstorm, severe rain and turbulence occur in a location a few kilometers in scale, i.e. one can easily view it 'from outside' or fly in and out of this region. Similarly, the development of thermal convection clouds is strongly tied to features of the terrain - thermal development does not occur easily over open water or snow, but it is strong over rock or similar surfaces which heat in the sun. Finally, a rainfront is a phenomenon like a thunderstorm that divides the sky into two regions - one with essentially good visibility and clear sky, the other with severe clouds and rain, and both are visible at the same time.<p>
 
-This is in contrast to the current (v.2.0.0) weather system of Flightgear where weather changes affect the weather everywhere in the simulated world and are (with few exceptions) not tied to specific locations. In such a system, it is impossible to observe e.g. the approach of a rainfront while flying in sunshine.<p>
+This is in contrast to the current (v.2.0.0) global weather system of Flightgear where weather changes affect the weather everywhere in the simulated world and are (with few exceptions) not tied to specific locations. In such a system, it is impossible to observe e.g. the approach of a rainfront while flying in sunshine.<p>
 
-The local weather package ultimately aims to provide the functionality to simulate such local phenomena. In version 0.9, the package supplies various cloud placement algorithms, as well as local control over most major weather parameters (wind, visibility, pressure, temperature, rain, snow, thermal lift, turbulence...) through interpolation routines and effect volumes. The dynamics of the different systems is tied together - clouds and weather effects drift in the specified wind field. The package also contains a fairly detailed algorithm to generate convective clouds and thermals with a realistic distribution. In addition, there is a simulation of realistic interaction of the convective cloud system with the terrain as a function of time. Clouds drifting in the wind flow over obstacles, i.e. they change their altitude dynamically. Convection is implemented with a life cycle model of clouds - they are generated, evolve for a given lifetime dependent on the underlying terrain and decay at the end of their life cycle. Thermals associated with the clouds follow the same pattern. In particular, in the presence of wind favourable spots for convection generate 'alleys' of dense cloud cover downwind, or thermals and clouds generated over land decay rapidly once they reach open water.<p>
+The local weather package aims to provide the functionality to simulate such local phenomena. In version 1.0, the package supplies various cloud placement algorithms, as well as local control over most major weather parameters (wind, visibility, pressure, temperature, rain, snow, thermal lift, turbulence...) through interpolation routines and effect volumes. The dynamics of the different systems is tied together - for instance clouds and weather effects drift in the specified wind field. The package also contains a fairly detailed algorithm to generate convective clouds and thermals with a realistic distribution over the various terrain types. There is a simulation of the interaction of the convective cloud system with the terrain as a function of time. Clouds drifting in the wind flow over obstacles, i.e. they change their altitude dynamically. Convection is implemented with a life cycle model of Cumulus clouds - they are generated, evolve for a given lifetime dependent on the underlying terrain and decay at the end of their life cycle. Thermals associated with the clouds follow the same pattern. In particular, in the presence of wind favourable spots for convection generate 'alleys' of dense cloud cover downwind, or thermals and clouds generated over land decay rapidly once they reach open water.<p>
 
-For long-range flights, the system automatically provides transitions between different weather patterns like fronts and low and high pressure areas. However, basically all features currently present can and will eventually be improved.<p>
+For long-range flights, the system provides an offline weather system with plausible transitions between different large-scale weather patterns like fronts and low and high pressure areas, as well as the optional use of live METAR data. <p>
 
 
 <h2>2. Installation</h2>
 
-The package needs to be unpacked in the Flightgear root directory. It writes content into the <i>Nasal/, gui/, gui/dialogs/, Shaders, Effects/, Docs/</i>, and <i>Models/Weather/</i> subdirectories. The installation does not overwrite any of the default Flightgear files, but to be accessible from the menu, one must copy <i>gui/menubar.xml.alt</i> to the default <i>menubar.xml</i> or copy the last two lines of the environemnt menu calling <i>local_weather</i> and <i>local_weather_tiles</i> into the default file.<p>
+The package needs to be unpacked in the Flightgear root directory. It writes content into the <i>Nasal/, gui/, gui/dialogs/, Shaders, Effects/, Docs/</i>, and <i>Models/Weather/</i> subdirectories. The installation does not overwrite any of the default Flightgear files, but to be accessible from the menu for Flightgear 2.0.0, one must copy <i>gui/menubar.xml.alt</i> to the default <i>menubar.xml</i> or copy the three lines of the environemnt menu calling <i>local_weather</i>, <i>local_weather_tiles</i> and <i>local_weather_config</i> into the default file. More recent versions of Flightgear already provide the necessary menu items.<p>
 
-This adds the items <i>Local Weather</i>, <i>Local Weather Tiles</i> and <i>Local Weather Settings</i>  to the <i>Environment</i> menu when Flightgear is up. Most of the basic functionality is contained in <i>local_weather.nas</i> which is loaded at startup and identifies itself with a message.<p>
+This adds the items <i>Local Weather</i>, <i>Local Weather Tiles</i> and <i>Local Weather Config</i>  to the <i>Environment</i> menu when Flightgear is up. Most of the basic functionality is contained in <i>local_weather.nas</i> which is loaded at startup and identifies itself with a message.<p>
 
-Unless asked to do so from the menu, local weather does <b>not</b> run any process in the background. Upon loading, the package does not set any properties already existing, but only generates properties necessary for the menu entries in its own subdirectory <i>/local-weather/</i> in the tree. The package also does a features check on startup if particular functions are available in hard-coded form. If the features are not present, the package will still function properly using slower Nasal fallbacks.<p>
+Unless asked to do so from the menu, local weather does <b>not</b> run any process in the background. Upon loading, the package does not set any properties already existing, but only generates properties necessary for the menu entries in its own subdirectory <i>/local-weather/</i> in the tree. The package also does a features check on startup if particular functions are available in hard-coded form. If the features are not present, the package will largely still function properly using slower Nasal fallback code.<p>
 
 
 <h2>3. Functionality</h2>
 
-The general rule is that the gui is not hardened against problematic user input, for example it will not reject meaningless input like negative windspeeds or unphysical windshear. It is recommended to watch the console, because some level of warnings and errors are passed to the console if the log options is on. Crucial warnings are also printed on-screen.<p>
+The general rule is that the gui is not hardened against problematic user input, for example it will not reject meaningless input like negative windspeeds or unphysical windshear. It is recommended to watch the console, because some level of warnings and errors are passed to the console if the log option is on. Crucial warnings are also printed on-screen.<p>
 
-Placement calls may sometimes take a significant time to execute especially for large numbers of clouds tied in a complicated way to the terrain. Placing 500 barrier clouds against a small barrier may take a minute to compute. During this time, a reduced framerate is to be expected<p>
+Cloud placement calls may sometimes take a significant time to execute especially for large numbers of clouds tied in a complicated way to the terrain. Placing 500 barrier clouds against a small barrier may take a minute to compute. During this time, a reduced framerate is to be expected<p>
 
 The first menu <b>Local Weather</b> contains the low level cloud placement functions. Its purpose is mainly for developing cloud patterns without having to resort to re-type the underlying Nasal code every time. Currently five options are supported: <i>Place a single cloud</i>, <i>Place a cloud streak</i>, <i>Start the convective system</i>, <i>Create barrier clouds</i> , <i>Place a cloud layer</i> and <i>Make a cloudbox</i>.<p>
 
@@ -43,7 +43,7 @@ The first menu <b>Local Weather</b> contains the low level cloud placement funct
 
 <h3>Single cloud placement</h3>
 
-Single cloud placement is straightforward, it places a (randomly chosen) cloud model of specified type and subtype to a set location. The last parameter, direction of placement, is only relevant for static cloud models (Cirrus) as it sets their orientation, it is overwritten for any rotated cloud models (Altocumulus, Cumulus, Cumulonimbus).<p>
+Single cloud placement is straightforward, it places a (randomly chosen) cloud model of specified type and subtype to a set location. The last parameter, direction of placement, is only relevant for static cloud models (Cirrus, Cirrocumulus) as it sets their orientation, it is overwritten for any rotated cloud models (Altocumulus, Cumulus, Cumulonimbus, Stratus, Nimbostratus).<p>
 
 <h3>Streak placement</h3>
 
@@ -55,29 +55,29 @@ The pattern can then be randomized in x, y and altitude. Basically, specifying n
 
 <h3>The convective system</h3>
 
-The convective system places Cumulus clouds centered on the current position based on the underlying terrain. Currently it models daily variation of convective strength and the latitude variation based on a simple sinusoidal model (i.e. it produces different results when called in the morning than at noon), but it does not take into account seasonal variation (i.e. it assumes the date to be the equinox). This will be significantly improved in the future. The actual placement is chosen based on the type of the underlying terrain, with Cumulus development more likely over city areas than on water. Details of the algorithm are described in the appendix. The parameters for this need fine-tuning and are currently rather rough, but they lead for example to pronounced differences between land and sea in coastal regions. The following picture shows the result of a call of the system in the afternoon over TNCM.<p>
+The convective system places Cumulus clouds centered on the current position based on the underlying terrain. Currently it models daily variation of convective strength and the latitude variation based on a simple sinusoidal model (i.e. it produces different results when called in the morning than at noon), but it does not take into account seasonal variation (i.e. it assumes the date to be the equinox). The actual placement is chosen based on the type of the underlying terrain, with Cumulus development more likely over city areas than on water. Details of the algorithm are described in the appendix. The parameters for this need some fine-tuning and are currently rather rough, but they lead for example to pronounced differences between land and sea in coastal regions. The following picture shows the result of a call of the system in the afternoon over TNCM.<p>
 
 <center>
 <img src="clouds-cumulus_afternoon.jpg">
 </center><p>
 
-Unless 'Terrain presampling' is active, clouds are placed in a constant altitude <i>alt</i>  in a tile with given <i>size</i> where the size measures the distance to the tile border, i.e. a size parameter of 15 km corresponds to a 30x30 km region. When 'Terrain presampling' is selected, the distribution of clouds in altitude is determined by a more complicated algorithm described in the appendix. Clouds are placed with constant density for given terrain type, so be careful with large area placements! <i>strength</i> is an overall multiplicative factor to fine-tune. 
+Unless 'Terrain presampling' is active, clouds are placed in a constant altitude <i>alt</i>  in a tile with given <i>size</i> where the size measures the distance to the tile border, i.e. a size parameter of 15 km corresponds to a 30x30 km region. When 'Terrain presampling' is selected, the distribution of clouds in altitude is determined by a more complicated algorithm described in the appendix. Clouds are placed with constant density for given terrain type, so be careful with large area placements! <i>strength</i> is an overall multiplicative factor to fine-tune the amount of cloud generation. 
 
 <h3>The barrier cloud system</h3>
 
-The barrier cloud system places a cloud at a random point within the region centered around the current position given by <i>size</i> with some probability if there is a terrain barrier downwind with the elevation <i>alt</i> within a distance <i>dist</i> or less. Cloud placement probability is larger for small distances to the barrier. The system tries to place <i>number</i> clouds and assumes that the wind comes from direction <i>wind</i>. If clouds cannot be placed (because there is no barrier within the specified altitude) the algorithm exits with a warning. The picture illustrates the result for the mountains above Geneva.<p>
+The barrier cloud system places a cloud at a random point within the region centered around the current position given by <i>size</i> with some probability if there is a terrain barrier downwind with the elevation <i>alt</i> within a distance <i>dist</i> or less. Cloud placement probability is larger for small distances to the barrier. The system tries to place <i>number</i> clouds and assumes that the wind comes from direction <i>wind</i>. If clouds cannot be placed (because there is no barrier within the specified altitude) the algorithm exits with a warning. The picture illustrates the result for the mountains above Las Vegas.<p>
 
 <center>
 <img src="barrier.jpg">
 </center><p>
 
-Currently, the algorithm does not check for a barrier upstream - this will change in future versions. The ufo is a good way to explore the results of the algorithm by simply flying to a suitable location and calling it there for a relatively small region.
+Currently, the algorithm does not check for a barrier upstream - this may change in future versions. The ufo is a good way to explore the results of the algorithm by simply flying to a suitable location and calling it there for a relatively small region. Due to its large performance use, the barrier cloud system is currently not part of the large-scale weather generating system.
 
 <h3>The layer cloud system</h3>
 
 The layer cloud placement is not drastically different from the streak placement in terms of what one can do with it - just its application philosophy is different. It randomly places cloudlets into an ellipsoid region given by the radii <i>rad x</i> and <i>rad y</i> which is rotated by <i>dir</i>, beginning at altitude <i>alt</i> up to thickness <i>thick</i> with a density controlled by <i>density</i>. The parameter <i>edge</i> specifies a boundary region in which smaller clouds are placed less densely. <p>
 
-If <i>rainflag</i> is set to 1, the system will also place external precipitation models (i.e. visible rain layers), roughly at the transition between edge and core of the cloud placement region with a density given by <i>rain dens.</i>. The system will however not place an effect volume which would lead to the actual simulation of rain below the layer - this must be done separately by the user.<p>
+If <i>rainflag</i> is set to 1, the system will also place external precipitation models (i.e. visible rain layers), roughly at the transition between edge and core of the cloud placement region with a density given by <i>rain dens</i>. The system will however not place an effect volume which would lead to the actual simulation of rain below the layer - this must be done separately by the user.<p>
 
 The picture illustrates the result of a layer generation call for Nimbostratus clouds with precipitation models. <p>
 
@@ -92,36 +92,38 @@ The cloudbox placement is an experimental routine allowing to define a cloud cor
 
 <h3>Tile placement</h3>
 
-The second menu is used to place complete weather tiles based on low-level calls. It is intended for the user to automatically create the various weather patterns during flight. <p>
+The second menu is used to place complete weather patterns based on low-level calls. It is intended for the user to automatically create the various weather development during flight. Unless stated otherwise, all parameters in this menu are parsed at startup time of local weather only (i.e. when the user selects the <i>OK</i> button, but not while the system runs.<p>
 
 <center>
 <img src="menu2.jpg">
 </center><p>
 
-Weather is created in a series of 40x40 km squares, called tiles. Tiles are classified by airmass, such that the sequence of tiles can describe for example the transition from a high pressure area to a low pressure area. The dropdown menu is used to select the type of weather tile to build initially. <p>
+Weather is created in a series of 40x40 km squares, called tiles. Tiles are classified by airmass, such that the sequence of tiles can describe for example the transition from a high pressure area to a low pressure area. The dropdown menu is used to select the type of weather tile to build initially and to determine the rules according to which subsequent tiles are generated. <p>
 
-Below are entries for three parameters. The first two are the simplified version of wind direction and speed for the user who is not interested in specifying many different wind interpolation points. 
-The third parameter, the altitude offset, is to manually adjust the altitude level of clouds in the absence of terrain presampling. Cloud layer placement calls are then specified for absolute altitudes and calibrated at sea level. As a result, layers are placed too low in mountainous terrain, hence the need for an offset.  <p>
+Below are entries for three parameters. The first two are the simplified version of wind direction and speed for the user who is not interested in specifying many different wind interpolation points or an altitude structure. 
+The third parameter, the altitude offset, is to manually adjust the altitude level of clouds in the absence of terrain presampling. Cloud layer placement calls are then specified for absolute altitudes and calibrated at sea level. As a result, layers are placed too low in mountainous terrain, hence the need for an offset. If <i>aloft interpolated</i> or <i>aloft waypoints</i> are chosen as wind models or if tile selection mode is set to <i>METAR</i>, the first two fields are not parsed, if the option <i>terrain presampling</i> is selected the offset is not used.<p>
+
+The three sliders below are used to control gusty winds. They are parsed at runtime and changes do not require a restart of local weather to be effective. The first slider controls how frequent gusts are, the second slider determines the strength relative to the base wind and the third slider their variation in direction. Gusts are, regardless of the wind model, only created in the atmospheric boundary layer close to the terrain surface. The rules for the gust model are described in the appendix in more detail. If the tile selection mode is set to <i>METAR</i>, user-specified values may be overwritten.<p>
 
 The dropdown menu for the wind contains various models for how the windfield is specified which require a different amount of user-specified input. The options are described further down when the windfield modelling is described in more detail.<p>
 
-The dropdown menu for the tile selection mode controls the long-range behaviour of weather. It specifies according to what rules tiles are automatically generated once the aircraft reaches the border of the original tile. The option 'single tile' creates a single weather tile as specified without automatic generation of further tiles. The option 'repeat tile' creates new tiles of the same type as the originally selected tile. This does not mean that weather will be unchanged during flight, as both parameters like pressure, temperature and visibility as well as the positioning of cloud banks are randomized to some degree. In addition, each tile typically contains 2-5 different cloud scenarios, so five repeated generations of 'low-pressure-border' tiles may never result in the same arrangement of cloud layers. Necertheless, the option will keep weather conditions roughly the same. This is different with the (somewhat optimistically named) 'realistic weather'. This option allows transitions between different airmasses, thus one may select 'low-pressure-core' initially, but as the flight goes on, eventually a region of high pressure and clear skies may be reached.  Moreover, it does not cover transitions to arctic or tropical weather conditions - those will be covered in a future release. 'repeat tile' does not work for any tile which is part of a front.<p>
+The dropdown menu for the tile selection mode controls the long-range behaviour of weather. It specifies according to what rules tiles are automatically generated once the aircraft reaches the border of the original tile. The option <i>single tile</i> creates a single weather tile as specified without automatic generation of further tiles. The option <i>repeat tile</i> creates new tiles of the same type as the originally selected tile. This does not mean that weather will be unchanged during flight, as both parameters like pressure, temperature and visibility as well as the positioning of cloud banks are randomized to some degree. In addition, each tile typically contains typically 6-8 different cloud scenarios, so five repeated generations of <i>low-pressure-border</i> tiles may never result in the same arrangement of cloud layers. Nevertheless, the option will keep weather conditions roughly the same. This is different with the (somewhat optimistically named) <i>realistic weather</i>. This option allows transitions between different airmasses, thus one may select <i>low-pressure-core</i> initially, but as the flight goes on, eventually a region of high pressure and clear skies may be reached.  Currently, it does not cover transitions to arctic or tropical weather conditions - those will be covered in a future release. Note also that <i>repeat tile</i> does not work for any tile which is part of a weather front.<p>
 
-The final option, 'METAR', generates weather according to parsed METAR information. This information must be made available in the property tree. Currently this is <b>not</b> done automatically and the METAR system does <b>not</b> work with real-weather-fetch, this needs some work on the Flightgear core. Future versions will be able to use parsed METAR to generate weather tiles.<p>
+The final option, <i>METAR</i>, generates weather according to parsed METAR information. This means that user-specified information for tile type and winds is overwritten by live data. The <i>METAR</i> mode is described in more detail below.<p>
 
-Below the menu are six tickboxes. 'Terrain presampling' finds the distribution of altitude in the terrain before placing a cloud layer. As a result, the layers or clouds are automatically placed at the correct altitude above ground in level terrain. In mountain regions, cloud placement is fairly tricky, and the algorithm analyzes quantities like the median altitude to determine what to do. The appendix contains a detailed description of the algorithm. If the box is ticked, the altitude offset specified above is not parsed.<p> 
+Below the menu are six tickboxes. <i>Terrain presampling</i> finds the distribution of altitude in the terrain before placing a cloud layer. As a result, the layers or clouds are automatically placed at the correct altitude above ground in level terrain. In mountain regions, cloud placement is fairly tricky, and the algorithm analyzes quantities like the median altitude to determine what to do. The appendix contains a detailed description of the algorithm. If the box is ticked, the altitude offset specified above is not parsed.<p> 
 
-'generate thermals' is an option intended primarily for soaring. It determines if thermals will be placed whenever a convective clouds is generated. Since managing a large number of thermals costs some amount of resources, it is recommended to generate thermals only if they are needed, i.e. definitely for soaring, possibly for added realism in small aircraft.<p>
+<i>generate thermals</i> is an option intended primarily for soaring. It determines if thermals will be placed whenever a convective clouds is generated. Since managing a large number of thermals costs some amount of resources, it is recommended to generate thermals only if they are needed, i.e. definitely for soaring, possibly for added realism in small aircraft.<p>
 
-'debug output' determines if the system writes status messages to the console. Unselecting the option suppresses normal status messages (warnings and errors will still be written). However, in many cases the log of status messages is needed to trace bugs, so if you switch it off and experience a problem, it is likely that the problem cannot be traced.<p>
+<i>debug output</i> determines if the system writes status messages to the console. Unselecting the option suppresses normal status messages (warnings and errors will still be written). However, in many cases the log of status messages is needed to trace bugs, so if you switch it off and experience a problem, it is likely that the problem cannot be traced.<p>
 
-'detailed clouds' will change the technique for generating Cumulus clouds from a multilayer model to multiple cloudlets filling a box. This improves the visual appearance of the clouds significantly, albeit at the expense of some loss of framerate. Rendering multiple tiles of dense Cumulus development with detailed clouds will quite possibly slow down even a powerful system. <p>
+<i>detailed clouds</i> will change the technique for generating Cumulus clouds from a multilayer model to multiple cloudlets filling a box. This improves the visual appearance of the clouds significantly, albeit at the expense of some loss of framerate. Rendering multiple tiles of dense Cumulus development with detailed clouds will quite possibly slow down even a powerful system. <p>
 
-The option 'dynamical weather' ties all clouds and weather effects to the windfield. If that option is not chosen, the wind is still generated according to the chosen model, but only felt by the aircraft. This makes e.g. soaring unrealistic, as the aircraft continuously drifts out of a static thermal below a static cap cloud. When 'dynamical weather' is selected, aircraft, cloud and thermal are all displaced by the wind and follow elevation changes to some degree.<p>
+The option <i>dynamical weather</i> ties all clouds and weather effects to the windfield. If that option is not chosen, the wind is still generated according to the chosen model, but only felt by the aircraft. This makes e.g. soaring unrealistic, as the aircraft continuously drifts out of a static thermal below a static cap cloud. When <i>dynamical weather</i> is selected, aircraft, cloud and thermal are all displaced by the wind and follow elevation changes to some degree.<p>
 
-The final option 'dynamical convection' requires both 'terrain presamling' and 'dynamical weather' to be on (if not, a warning is given and the system aborts). If this option is chosen, all convective clouds and thermals have a life cycle - clouds are continually spawned and decay after a while. This preserves realistic cloud configurations over islands even with wind drift on and improves the realism of the soaring experience as the thermals change over time, but again uses somewhat more performance - switch it on if you need it, for fast planes the visual gain is almost non-existent.<p>
+The final option <i>dynamical convection</i> requires both <i>terrain presamling</i> and <i>dynamical weather</i> to be selected (if not, a warning is given and the system aborts). If this option is chosen, all convective clouds and thermals have a life cycle - clouds are continually spawned and decay after a while. This preserves realistic cloud configurations over islands even with wind drift on and improves the realism of the soaring experience as the properties of thermals change over time, but again uses somewhat more performance - switch it on if you need it, for fast planes the visual gain is almost non-existent.<p>
 
-The slider 'Thermal properties' is mainly relevant for soaring scenarios. It governs the rato of maximum lift to radius of a thermal. A setting close to 'low convection' creates large thermals with relatively small lift and virtually no turbulence, a setting close to 'rough day' creates very narrow, turbulent thermals with large lift. However, it also affects the Cumulus textures to be used. 'low convection' creates well-formed, smooth Cumuli whereas 'rough day' biases the texture selection towards more rugged and diffuse clouds.<p>
+The slider <i>Thermal properties</i> is mainly relevant for soaring scenarios. It governs the rato of maximum lift to radius of a thermal. A setting close to <i>low convection</i> creates large thermals with relatively small lift and virtually no turbulence, a setting close to <i>rough day</i> creates very narrow, turbulent thermals with large lift. However, it also affects the Cumulus textures to be used. <i>low convection</i> creates well-formed, smooth Cumuli whereas <i>rough day</i> biases the texture selection towards more rugged and diffuse clouds.<p>
 
 The difference is apparent from the following pictures: Smooth and well-formed clouds characteristic of a calm day:<p>
 
@@ -135,17 +137,16 @@ Rough clouds characteristic of windshear and more turbulent conditions:<p>
 <img src="detailed_clouds05.jpg">
 </center><p>
 
-As for the buttons, 'Ok' starts the local weather system with the selected options (note that all options in this menu are startup-time options, they are read once and changing them without restarting the system will not affect the behaviour of the system). 'Clear/End' clears all clouds and ends all local weather functionality - the button brings the system back into the state before it was started. No loops or other subroutines are executed after the button is pressed. 'Close' closes the dialog without starting the system.<p>
+As for the buttons, <i>OK</i> starts the local weather system with the selected options (note that almost all options in this menu are startup-time options, they are read once and changing them without restarting the system will not affect the behaviour of the system). <i>Clear/End</i> clears all clouds and ends all local weather functionality - the button brings the system back into the state before it was started. No loops or other subroutines are executed after the button is pressed. <i>Close</i> closes the dialog without starting the system.<p>
 
-The button 'Show winds' brings up the detailed wind menu which is needed for the wind models 'aloft interpolated' and 'aloft waypoints':<p>
+The button <i>Show winds</i> brings up the detailed wind menu which is needed for the wind models <i>aloft interpolated</i> and <i>aloft waypoints</i> when not in <i>METAR</i> mode:<p>
 
 <center>
 <img src="menu3.jpg">
 </center><p>
 
-For 'aloft interpolated', the menu is used by inserting wind direction and speed for all given altitudes. After 'Okay', the specified values are used. For 'aloft waypoints', the same info must be supplied for a series of waypoints. First, the latitude and longitude has to be inserted, afterwards the aloft winds for that point below. The button 'Set waypoint' commits the windfield as specified in the menu for this position into memory. For orientation, the number of points inserted is counted on the lower right. 'Clear Waypoints' removes all information entered so far. Note that 'Okay' does not commit the data for a waypoint. <p>
+For <i>aloft interpolated</i>, the menu is used by inserting wind direction and speed for all given altitudes. After <i>OK</i>, the specified values are used. For <i>aloft waypoints</i>, the same info must be supplied for a series of waypoints. First, the latitude and longitude has to be inserted, afterwards the aloft winds for that point below. The button <i>Set waypoint</i> commits the windfield as specified in the menu for this position into memory. For orientation, the number of points inserted is counted on the lower right. <i>Clear Waypoints</i> removes all information entered so far. Note that <i>OK</i> does not commit the data for a waypoint. Entering a windfield in this way by hand is rather cumbersome, but may be useful occasionally - the main purpose of the wind model however is to work with live weather data.<p>
 
-In principle, the waypoint information inserted so far can be seen using the property browser. It is stored under <i>/local-weather/interpolation/wind[n]/</i>.<p>
 
 
 
@@ -184,7 +185,7 @@ All performance setting menu-options work at runtime, but are processed over tim
 
 <h2>4. Cloud models</h2>
 
-The package contains a number of different cloud models, both static ones for Cirrus and Cirrocumulus clouds as well as rotated ones for Altocumulus, Cirrostratus, Cumulus, Cumulonimbus, Stratus and Nimbostratus cloudlet models. Neither the cloud textures, nor the models nor the transformations are perfected, and any aspect can be improved.<p>
+The package contains a number of different cloud models, both static ones for Cirrus and Cirrocumulus clouds as well as rotated ones for Altocumulus, Cirrostratus, Cumulus, Cumulonimbus, Stratus and Nimbostratus cloudlet models. Neither the cloud textures, nor the models nor the transformations are perfected, and any aspect can be improved, albeit at the cost of performance consumption.<p>
 
 Static clouds project textures onto curved sheets into the sky. The advantage of the technique is that cloud layers consisting of thousands of cloudlets with different sizes can be modelled. However, the sheets do not look equally well from all perspectives and somewhat unrealistic from close up.<p>
 
@@ -215,17 +216,17 @@ Currently all clouds which need to be rotated are treated in the shaders using a
 
 <h2>5. Local weather parameters</h2>
 
-The local weather package provides three different ways to control the position dependence of weather parameters: 1) by interpolation between stations 2) by constant inside an effect volume and 3) by function inside an effect volume. This in principle allows to represent any 3-dim distribution of a parameter in a tile volume - but the user-input required to actually do that kind of micromanagement is substantial. However, the system is designed to run with good results and minimum user input.<p> 
+The local weather package provides three different ways to control the position dependence of weather parameters: 1) by interpolation between stations 2) by constant inside an effect volume and 3) by function inside an effect volume. This in principle allows to represent any 3-dim distribution of a parameter in a tile volume - but the user-input required to actually do that kind of micromanagement is substantial. However, the system is designed to run with good results and minimal user input.<p> 
 
 The idea is that the interpolation system takes care of slow, large-distance scale changes of weather whereas the effect volume system models rapid, small-scale changes. Thus, the gradual drop in visibility when flying into a more humid air mass is dealt with by the interpolation system whereas the sudden drop in visibility when entering a cloud is modeled as an effect volume. It doesn't make sense to have both systems available for all weather parameters, for example pressure can't change suddenly and discontinuously. Consequently the effect volume system does not support pressure.
 
 <h3>Determining weather parameters by interpolation</h3>
 
-The interpolation system determines the weather parameters outside of special regions, i.e. possibly in the larger part of the tile volume. The weather is specified for an arbitrary number of stations. Each station is characterized by its position (latitude and longitude) and a set of surface weather observations (visibility, pressure, temperature, dew point, rain, snow). In Flight, the interpolation system computes the distance to each station every 3 seconds, computes an average of the parameters weighted by the inverse distance to the station and sets this average as the current weather. This procedure makes the weather exactly as specified whenever the plane is above a station and changes smoothly as the plane is between stations. It may not yield the desired results when the plane is outside a grid of stations.<p>
+The interpolation system determines the weather parameters outside of special regions, i.e. possibly in the larger part of the tile volume. The weather is specified for an arbitrary number of stations. Each station is characterized by its position (latitude and longitude) and a set of surface weather observations (visibility, pressure, temperature, dew point, rain, snow). In flight, the interpolation system computes the distance to each station regularly, computes an average of the parameters weighted by the inverse distance to the station and sets this average as the current weather. This procedure makes the weather exactly as specified whenever the plane is above a station and changes smoothly as the plane is between stations. It may not yield the desired results when the plane is outside a grid of stations.<p>
 
 While the station concept is designed to support easy connection with weather updates from real METAR stations, stations do not need to be real stations, and each weather tile creation call by default writes its own station at the center of the tile, so weather tiles can be different and the weather will change smoothly between them.<p>
 
-Technically, the structure of the interpolation system means that while it is running, neither setting weather parameters in the standard menu nor changing visibility using the <i>z</i>-key will have an effect - any setting made there will be overwritten periodically. Only changing the relevant properties (see below) will have the desired effect.<p>
+Technically, the structure of the interpolation system means that while it is running, neither setting weather parameters in the GUI menu nor changing visibility using the <i>z</i>-key will have an effect - any setting made there will be overwritten by the interpolation loop periodically, and local weather needs to be stopped before such changes have an effect. <p>
 
 <h3>Weather parameters in effect volumes</h3>
 
@@ -243,9 +244,11 @@ Effect volumes are always specified between a minimum and a maximum altitude, an
 
 <i>create_effect_volume(geometry, lat, lon, r1, r2, phi, alt_low, alt_high, vis, rain, snow, turb, lift, lift_flag, sat);</i><p>
 
- where <i>geometry</i> is a flag (1: circular, 2: elliptical and 3: rectangular), <i>lat</i> and <i>lon</i> are the latitude and longitude, <i>r1</i> and <i>r2</i> are the two size parameters for the elliptic or rectangular shape (for the circular shape, only the first is used), <i>phi</i> is the rotation angle of the shape (not used for circular shape), <i>alt_low</i> and <i>alt_high</i> are the altitude boundaries, <i>vis, rain, snow, turb</i> and <i>lift</i> are weather parameters which are either set to the value they should assume, or to -1 if they are not to be used, or to -2 if a function instead of a parameter is to be used and -3 if a function for wave lift is used. Since thermal lift can be set to negative values in a sink, a separate flag is provided in this case. <i>sat</i> finally determines the light saturation - it can be used to dim the light beneath cloud layers (which is not done automatically as objects don't cast shades in Flightgear, and given that most cloud models are rotated, their shade would look rather odd on any case).<p>
+ where <i>geometry</i> is a flag (1: circular, 2: elliptical and 3: rectangular), <i>lat</i> and <i>lon</i> are the latitude and longitude, <i>r1</i> and <i>r2</i> are the two size parameters for the elliptic or rectangular shape (for the circular shape, only the first is used), <i>phi</i> is the rotation angle of the shape (not used for circular shape), <i>alt_low</i> and <i>alt_high</i> are the altitude boundaries, <i>vis, rain, snow, turb</i> and <i>lift</i> are weather parameters which are either set to the value they should assume, or to -1 if they are not to be used, or to -2 if a function instead of a parameter is to be used and -3 if a function for wave lift is used. Since thermal lift can be set to negative values in a sink, a separate flag is provided in this case. <i>sat</i> finally determines the light saturation, a parameter between 0 (dark) and 1 (normal light) - it can be used to dim the light beneath cloud layers (which is not done automatically as objects don't cast shades in Flightgear, and given that most cloud models are rotated, their shade would look rather odd on any case).<p>
 
-In version 0.9, thermal lift and wave lift are implemented by function (wave lift is not yet automatically placed, but can be easily from Nasal). There is no easy way to implement any weather parameter by function in an effect volume, as this requires some amount of Nasal coding.
+In version 1.0, thermal lift and wave lift are implemented by function (wave lift is not yet automatically placed, but can be easily from Nasal). There is no easy way to implement any weather parameter by function in an effect volume, as this requires some amount of Nasal coding.<p>
+
+Both thermal lift and saturation require a more recent version of Flightgear than 2.0.0 in order to take effect.<p>
 
 <h2>6. Wind models and dynamical weather</h2>
 
@@ -257,7 +260,7 @@ In the horizontal windfield, aloft and bounday layers need to be distinguished. 
 
 When the option 'dynamical weather' is active, clouds and effect volumes move with the wind. Due to performance reasons, only clouds in the field of view are processed in each frame. As an efficient way to do this, a quadtree structure is used. However, this has the side effect that all clouds inside a tile need to be moved with the same windspeed (otherwise they would over time drift out of the position where the quadtree expects to find them). Since thermals and their cap clouds should not drift apart, also weather effects are moved with the same windspeed inside each tile. In the following, this is referred to as 'tile wind speed'. The tile wind speed always corresponds to the lowest aloft layer windspeed. The reason why this is considered acceptable is that at the same altitude for different positions inside a tile, the correct windspeed is at most a few kt different from the tile windspeed, and this is impossible to see visually. At high altitudes, the true wind is very different from the speed at which clouds are moved, but without reference and from fast-moving planes, the error is again very hard to see. However, with e.g. a hot air balloon, the fact that at high altitudes clouds are not moved with the high-altitude windspeed would be quite apparent.<p>
 
-Dependent on how detailed the wind field should be specified, what the pilot aims to do and how much user control is desired, there are several options to model the wind.
+Dependent on how detailed the wind field should be specified, what the pilot aims to do and how much user control is desired, there are several options to model the wind outside the boundary layer:
 
 <ul>
 <li> <b>constant</b> sets the aloft wind to the same speed and direction as specified in the weather tile menu everywhere - at every spatial position and at every altitude. This is for the casual pilot who just wants some simple wind setting, or when it is mandatory that clouds, plane and weather effects all move with the same speed, such as for lighter-than-air aviation. Note that the wind set in the menu is not the wind seen on the runway, as the option sets the aloft wind, from which the boundary layer wind is computed using terrain information.<p>
@@ -269,10 +272,38 @@ Dependent on how detailed the wind field should be specified, what the pilot aim
 
 In all cases, the boundary layer is computed separately. Since the boundary layer effect depends on terrain, there is no direct way to set the wind as experienced on the runway (but of course changing the lowest aloft layer will lead to the desired result).
 
+<h2>7. The METAR mode</h2>
 
+The METAR mode allows to use live weather data together with the local weather package, which means that all user-defined weather parameters in the menu will not be parsed if this mode is selected. Some weather parameters (pressure, temperature, dewpoint) are straightforwardly passed on to the interpolation subsystem. For other parameters, the problem is more tricky.<p>
 
+METAR information usually specifies cloud cover and altitude only, but does not mention the type of cloud to be placed. The purpose of the METAR heuristics subroutine is to decide what cloud patterns to place based on the available information. This routine for instance checks if there is an overcast layer above the lowest layer (which makes Cumulus development unlikely) or if the cloud cover is too strong for convective clouds given the time of the day. Once the heuristics has some idea of what the weather pattern indicated in the METAR string looks like, it starts to select cloud types to place into the individual layers. The heuristics is usually good, but certainly not perfect, it may occasionally go wrong and create implausible cloud configurations.<p>
 
-<h2>7. Property tree structure</h2>
+The behaviour of winds depends on the selected wind model. In all cases, the wind in a METAR string is assumed to be the wind on the runway, i.e. the lowest aloft wind will be increased relative to the METAR info because the wind on the runway is subject to the boundary layer effect.<p>
+
+<ul>
+<li> <b>constant</b> uses the winds of the first METAR everywhere at all times
+<li> <b>constant in tile</b> uses the winds of the first METAR in all tiles until the next METAR becomes available, then uses the new value for all tiles till yet another report becomes available. To maintain the internal coordinate system, intermediate tiles may be generated which do not immediately show the new wind
+<li> <b>aloft interpolated</b> is not supported by the METAR mode - this makes no sense, as METAR does not report aloft winds
+<li> <b>aloft waypoints</b> uses a plausible guess for the aloft winds based on the surface winds. In general, higher aloft winds become stronger and turn somewhat dependent on the Coriolis effect. Based on the interpolation points generated in this way, the windfield at each tile center determines the tile wind direction for the visual cloud movement.
+</ul>
+
+The METAR mode currently does not support all types of reported weather. The weather is not changed when the same station makes a different report, only if a new station comes in range. Note that the METAR mode cannot be used for Flightgear 2.0.0!<p>
+
+<h2>8. Program and property tree structure</h2>
+
+The program runs in a number of loops which operate at different timescales - some tasks require attention in every frame, others may wait for a number of seconds. The main loops are:<p>
+
+<ul>
+<li><b>Effect volume loop:</b> Determines if the plane is inside an effect volume and executes its action
+<li><b>Interpolation loop:</b> Interpolates the weather parameters in space, takes care of the altitude model of the visibility and of the wind boundary layer effects (see Appendix for details)
+<li><b>Tile management loop:</b> Controls the generation of new tiles and the removal of old ones.
+<li><b>Buffer loop and housekeeping loop:</b> Move clouds out of the buffer into the scenery and back.
+<li><b>Quadtree loop:</b> Determines which clouds are inside the field of view and moves them with the tile windspeed.
+<li><b>Dynamics loop:</b> Moves effect volumes, tile centers and interpolation points with the windfield, ages convective clouds in their lifecycle.
+<li><b>Convective loop:</b> Periodically re-creates convective clouds to compensate for the decaying clouds.
+</ul>
+
+All other subroutines are called by one of these loops. <p>
 
 The internal state of the local weather system is found in the property tree under <i>local-weather/</i>. In this directory, various loop flags are found. They indicate the state of the main monitoring loops - they are set to 1 if a loop is running, setting them to zero terminates the loop.<p>
 
@@ -284,9 +315,9 @@ The <i>local-weather/effect-volumes/</i> subfolder contains the management of th
 
 <i>local-weather/tiles</i> stores the information of the 9 managed weather tiles (the one the airplane is currently in, and the 8 surrounding it). By default each directory contains the tile center coordinates and a flag if it has been generated. Tiles are not generated unless a minimum distance to the tile center has been reached. Once this happens, the tile type is written as a code, and the cloud, interpolation and effect volume information corresponding to the tile is generated. <p>
 
-<i>local-weather/METAR</i> is used to store the METAR information for the METAR based tile setup. This must include latitude, longitude and altitude of a weather station, temperature, dewpoint, pressure, wind direction and speed, rain, snow and thunderstorm information as well as cloud layer altitude and coverage in oktas. Any properties set here will be executed when 'METAR' is selected as tile selection mode as long as <i>local-weather/METAR/available-flag</i> is set to 1 (this flag is set to zero whenever a tile has been created from METAR info to indicate that the information has been used, so if the user wants to reuse the information, then the flag must be reset).<p>
 
-<h2>8. Weather tile setup</h2>
+
+<h2>9. Weather tile setup</h2>
 
 Examples for weather tile setup can be found in <i>Nasal/weather-tiles.nas</i>. Each tile is generated by a sequence of Nasal function calls to first set weather stations, then to draw the cloud layers, and effect volumes. It is a bit awkward to have to write in Nasal to customize the system, but I can't think of a reasonable GUI for the task, except marking every placement on a map which exceeds my coding skills a bit. The problem is that there is no real standard solution - every weather tile needs different calls, sometimes a large one generating many clouds, sometimes several smaller ones.<p>
 
@@ -300,7 +331,7 @@ If the cloud layer has an orientation, then all placement coordinates should be 
 
 To make your own tile visible, an entry in the menu <i>gui/dialogs/local_weather_tiles.xml</i> needs to be created and the name needs to be added with a tile setup call to the function <i>set_tile</i> in <i>Nasal/local_weather.nas</i>.
 
-<h2>9. Performance tuning</h2>
+<h2>10. Performance tuning</h2>
 
 With default settings, the local weather package generates a 40x40 km weather tile when the aircraft is closer than 39 km to the tile center and unloads it when the aircraft is more than 39.5 km away. This means that the system can generate at most 4 tiles at once and clouds are visible for at least 19 km and up to 45 km (the latter number determined by fading in the shaders). However, rendering and managing multiple overcast cloud layers in a region of 80x80 km is a significant drain on performance. For older systems, a few things can be done:<p>
 
@@ -321,29 +352,33 @@ With default settings, the local weather package generates a 40x40 km weather ti
 
 </ul>
 
-<h2>10. Known issues</h2>
+<h2>11. Known issues</h2>
 
 <ul>
 
-<li> The local weather system does not mix well with the standard weather system. 3d cloud layers can be placed in the absence of effect volumes, but any effect volume causing precipitation will let the layer behave in a strange way. Likewise, 2d cloud layers can be placed, but may or may not lead to strange rendering artefacts. Local weather, as long as interpolation and effect volumes are running, will in general overwrite all other settings - bother real weather METAR and user-specified settings from the menu. The results of mixing standard and local weather settings are unpredictable, and may not lead to the desired results.<p>
+<li> [2.0.0] The local weather system does not mix well with the standard weather system. 3d cloud layers can be placed in the absence of effect volumes, but any effect volume causing precipitation will let the layer behave in a strange way. Likewise, 2d cloud layers can be placed, but may or may not lead to strange rendering artefacts. Local weather, as long as interpolation and effect volumes are running, will in general overwrite all other settings - bother real weather METAR and user-specified settings from the menu. The results of mixing standard and local weather settings are unpredictable, and may not lead to the desired results.<p>
 
 <li> Some cloud textures have artefacts, rain textures have too sharp boundaries and in general some things could look better. Please don't complain, but rather get me good photographs of the sky, cloud texture files or create better AC3D cloud models. I will eventually improve texture quality, but it's not high up in the to-do list, and the cloud model files are openly accessible for anyone with an editor.<p>
 
 <li> Rain and snow may not start properly. For me, rain is only generated when I switch 'Shader effects' on and off in the menu on startup, otherwise neither moving the menu slider nor entering an effect volume generate rain. This seems to be a bug of some Flightgear versions, not of the local weather system.<p>
 
-<li> Especially with multiple overcast layers and weather fronts, loading and unloading weather tiles may take a long time / cause severe drops in framerate. The problem is much worse in GIT than in 2.0.0. Please refer to performance tuning to solve such problems. In general, overcast layers and tropical weather tiles do require a system on the high end of the performance scale to render properly.<p>
+<li> Especially with multiple overcast layers and weather fronts, loading and unloading weather tiles may take a long time / cause severe drops in framerate. It seems that a dual core processor is very valuable with this particular issue - try switching multiprocessor support on if needed, otherwise please refer to performance tuning to solve such problems. In general, overcast layers and tropical weather tiles do require a system on the high end of the performance scale to render properly.<p>
 
 <li> The local weather package is able to occasionally trigger errors like 'Warning:: Picked up error in TriangleIntersect'. These seem to be a problem in the core Flightgear code - the package does nothing but placing normal (rather simple) AC3D models into the scenery.<p>
 
 <li> For dynamical weather, clouds sometimes appear to 'jump' to a position. The reason is that the control loop of cloud drift accepts for performance reasons only a limited number of clouds. If there are more in the field of view, the most distant clouds are not processed. As nearby clouds drift out of the visual field, more distant clouds move into the loop, at which point their position is suddenly updated, resulting in a jump. Short of committing potentially vast computational resources (if there is a large number of clouds in the visual field), there is no easy fix to the problem.<p>
 
-<li> To smooth out changes in wind settings, rather than producing a sudden gust, the wind is changed over about 1 second. In sharp wind gradients, this produces a series of ripples like turbulence. This is actually a realistic behaviour in this situation and hence left as it is. Some systems seem to take an unreasonable effort to reinit the environment (as must be done to set wind) - here the function call <i>setWindSmoothly()</i> in <i>local_weather.nas</i> should perhaps be replace by <i>setWind</i> to ease the load.<p>
+<li> [2.0.0] To smooth out changes in wind settings, rather than producing a sudden gust, the wind is changed over about 1 second. In sharp wind gradients, this produces a series of ripples like turbulence. This is actually a realistic behaviour in this situation and hence left as it is. Some systems seem to take an unreasonable effort to reinit the environment (as must be done to set wind) - here the function call <i>setWindSmoothly()</i> in <i>local_weather.nas</i> should perhaps be replace by <i>setWind</i> to ease the load.<p>
 
 <li> Large tile creation distances can cause problems in low visibility weather, because Flightgear loads terrain only if it is within visual range. Thus, trying to sample the terrain for a tile 55 km away in 8 km visibility doesn't work because the terrain elevation and altitude is not known. This may cause improper placement of clouds - chiefly convective clouds, but also layered clouds may not appear on the proper altitude. Currently, there is a limit which restricts tile loading range to 3 times the visibility, but presumably a better solution can be found.<p>
 
-<li> Using the 'aloft interpolated' wind option, it is possible to turn the wind direction sharply over a small distance (for example, one may turn the wind by 90 degrees from one tile to the next). Such sharp wind changes are (in most situations) unphysical, and they may cause problems for local weather because they rotate the coordinate system to a degree that the neighbouring tile may not be identified correctly. In essence, the system may not generate new tiles because the nearest tile is still the last generated one. There will be a future fix to address the problem, for the moment just avoid rotating the wind strongly.<p>
+<li> Using the 'aloft interpolated' wind option, it is possible to turn the wind direction sharply over a small distance (for example, one may turn the wind by 90 degrees from one tile to the next). Such sharp wind changes are (in most situations) unphysical, and they may cause problems for local weather because they rotate the coordinate system to a degree that the neighbouring tile may not be identified correctly. In essence, the system may not generate new tiles because the nearest tile is still the last generated one. The system largely tries to detect the problem and compensate, but occasionally this may be an issue.<p>
 
-<li> The thermals in the soaring scenarios need GIT to work.<p>
+<li> [2.0.0] The thermals in the soaring scenarios need GIT to work.<p>
+
+<li> [2.0.0] No support for live weather data.<p>
+
+<li> [2.0.0] No change of light saturation. <p>
 </ul>
 
 <h2><a name="appendix_A">Appendix A: An introduction to the algorithms</a></h2>
@@ -492,14 +527,20 @@ The boundary layer effectiveness, i.e. the amount of windspeed reduction at the 
 
 Realistically, the boundary layer should also depend on terrain coverage. Due to the need for performance to sample terrain coverage in the vicinity of the aircraft frequently, this is currently not implemented.<p>
 
+Gusty winds are assumed to be a bounday layer phenomenon and faded out to zero at a multiple of the boundary layer thickness which is given by <i>base wind speed [kt]/10</i>, i.e. for 25 kt winds the gusts are absent for 2.5 times the bounday layer thickness.<p>
 
+<h3>The altitude model of visibility</h3>
+
+Relatively low visibility (as reported by METAR) is usually confined to low altitudes, due to the lower density of the upper atmosphere and the reduced level of dust and water the visibility at airliner cruise altitude is frequently in excess of 100 km. This means that an altitude model of the visibility is needed.<p>
+
+Local weather assumes that haze and dust are confined to the lowest air layer. As a proxy for the transition to a higher layer, the altitude of the lowest cloud layer (or for 9000 ft for clear skies) is used. The visibility always increases with altitude, but below the first layer transition it increases slowly at a rate of 0.2 m / ft in altitude gain. During the layer transition where the transition occurs during 1500 ft, the visibility increases rather rapidly at a rate of 5 m / ft, which means that above the lowest air layer the visibility is almost 10 km more than on the ground. The visibility then continues to grow at a rate of 1 m / ft towards the Stratosphere. In all likelihood, this dramatically underestimates the true visibility at high altitudes, but has been chosen to limit the impact on performance.<p>
 
 <h2>Credits</h2>
 
 The model of a thermal has been developed by Patrice Poly. The shader code used to transform clouds is heavily based on prior work by Stuart Buchanan. Hard-coding of some features by Torsten Dreyer is greatly appreciated.<p>
 
 
-Thorsten Renk, October 2010
+Thorsten Renk, March 2011
 
 </body>
 

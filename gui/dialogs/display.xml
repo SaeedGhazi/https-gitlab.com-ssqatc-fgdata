@@ -8,13 +8,13 @@
 
   <group>
     <layout>hbox</layout>
-	  <empty><stretch>1</stretch></empty>
+    <empty><stretch>1</stretch></empty>
 
     <text>
       <label>Display Options</label>
     </text>
 
-	  <empty><stretch>1</stretch></empty>
+    <empty><stretch>1</stretch></empty>
 
     <button>
       <pref-width>16</pref-width>
@@ -38,6 +38,15 @@
       <halign>left</halign>
       <label>Show frame rate</label>
       <property>/sim/rendering/fps-display</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
+
+    <checkbox>
+      <halign>left</halign>
+      <label>Show worst-case frame latency</label>
+      <property>/sim/rendering/frame-latency-display</property>
       <binding>
         <command>dialog-apply</command>
       </binding>
@@ -79,10 +88,10 @@
       </binding>
     </checkbox>
 
-	<group>
-	  <layout>hbox</layout>
+    <group>
+      <layout>hbox</layout>
 
-	  <checkbox>
+      <checkbox>
         <label>Autohide cursor in</label>
         <property>/sim/mouse/hide-cursor</property>
         <binding>
@@ -90,11 +99,11 @@
         </binding>
       </checkbox>
 
-	  <input>
-		<live>true</live>
-		<pref-width>40</pref-width>
-		<pref-height>10</pref-height>
-		<enable>
+      <input>
+        <live>true</live>
+        <pref-width>40</pref-width>
+        <pref-height>10</pref-height>
+        <enable>
           <property>/sim/mouse/hide-cursor</property>
         </enable>
         <property>/sim/mouse/cursor-timeout-sec</property>
@@ -102,12 +111,11 @@
           <command>dialog-apply</command>
         </binding>
       </input>
-	  
-	  <text>
-		<label>sec.</label>
-	  </text>
 
-	</group>
+      <text>
+        <label>sec.</label>
+      </text>
+    </group>
 
   </group>
 

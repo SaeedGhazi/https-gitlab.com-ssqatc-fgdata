@@ -10,8 +10,6 @@
  <modal>false</modal>
 
 
-
-
 <text>
   <x>10</x>
   <y>570</y>
@@ -64,7 +62,7 @@
   <x>0</x>
   <y>525</y>
 
-
+ 
 <combo>
    <x>10</x>
    <y>0</y>
@@ -103,7 +101,7 @@
     <command>dialog-apply</command>
    </binding>
   </combo>
-
+ 
 
   <input>
    <x>203</x>
@@ -233,7 +231,7 @@
   <x>0</x>
   <y>440</y>
 
-
+ 
 <combo>
    <x>10</x>
    <y>0</y>
@@ -428,7 +426,7 @@
   <x>165</x>
   <y>0</y>
   <label>alt (ft)</label>
- </text>
+ </text> 
 
 <input>
    <x>245</x>
@@ -442,7 +440,7 @@
   <x>320</x>
   <y>0</y>
   <label>size (km)</label>
- </text>
+ </text> 
 
 <input>
    <x>410</x>
@@ -651,7 +649,7 @@
   <x>0</x>
   <y>195</y>
 
-
+ 
 <combo>
    <x>10</x>
    <y>0</y>

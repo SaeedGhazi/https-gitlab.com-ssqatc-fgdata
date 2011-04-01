@@ -75,6 +75,9 @@ var min_speed_kt = 0;
 # Target property tree root
 var target_root = "";
 
+# Loop identifier
+var tracker_loop_id = 0;
+
 # Initialize target tracking
 var TrackInit = func {
     if (props.globals.getNode("autopilot") == nil)
@@ -109,20 +112,25 @@ var TrackInit = func {
         target_root = default_target_root;
         setprop("/autopilot/target-tracking/target-root", target_root);
     }
+   
+    setlistener("/autopilot/target-tracking/enable", func { startTimer();} );
 }
-settimer(TrackInit, 0);
-
 
 # If enabled, update our AP target values based on the target range,
 # bearing, and speed
-var TrackUpdate = func {
+var TrackUpdate = func(loop_id) {
+    # avoid running multiple concurrent timers
+    if (tracker_loop_id != loop_id)
+        return;
+
     if (props.globals.getNode("autopilot") == nil)
         return;
 
     target_tracking_enable = getprop("/autopilot/target-tracking/enable");
-    update_period = getprop("/autopilot/target-tracking/update-period");
 
     if ( target_tracking_enable == 1 ) {
+        update_period = getprop("/autopilot/target-tracking/update-period");
+
         # refresh user configurable values
         goal_range_nm = getprop("/autopilot/target-tracking/goal-range-nm");
         target_root = getprop("/autopilot/target-tracking/target-root");
@@ -182,16 +190,17 @@ var TrackUpdate = func {
         setprop( "/autopilot/settings/true-heading-deg",
                  my_hdg_true + h_offset );
         setprop( "/autopilot/settings/target-speed-kt", target_speed );
+
+        # only keep the timer running when the feature is really enabled
+        settimer(func() { TrackUpdate(loop_id); }, update_period );
     }
-
-    # last thing to do before we return from this function
-    registerTimer();
 }
 
+# create and start a new timer to cause our update function to be called periodially
+startTimer = func {
+    tracker_loop_id += 1;
+    TrackUpdate(tracker_loop_id);
+ }
 
-# timer handling to cause our update function to be called periodially
-registerTimer = func {
-    settimer(TrackUpdate, update_period );
-}
-registerTimer();
+settimer(TrackInit, 0);
 

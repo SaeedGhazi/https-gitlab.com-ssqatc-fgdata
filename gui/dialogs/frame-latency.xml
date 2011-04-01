@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 
 <PropertyList>
-	<name>fps</name>
-	<x>-2</x>
+	<name>frame-latency</name>
+	<x>2</x>
 	<y>2</y>
 	<layout>hbox</layout>
-	<default-padding>2</default-padding>
+	<default-padding>0</default-padding>
 	<font>
 		<name>HELVETICA_12</name>
 	</font>
@@ -16,9 +16,9 @@
 		<alpha>0</alpha>
 	</color>
 	<text>
-		<label>000</label>
-		<property>/sim/frame-rate</property>
-                <format>%3.0f</format>
+		<label>0000 ms</label>
+		<property>/sim/frame-latency-max-ms</property>
+                <format>%4.0f ms</format>
 		<live>true</live>
 		<color>
 			<red>0.9</red>

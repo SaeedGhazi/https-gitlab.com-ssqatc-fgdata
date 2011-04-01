@@ -185,8 +185,8 @@
 			<legend>aft/fore</legend>
 			<pref-width>250</pref-width>
 			<live>1</live>
-			<min>1</min>
-			<max>-1</max>
+			<min>-1</min>
+			<max>1</max>
 
 			<color>
 				<red>1.0</red>

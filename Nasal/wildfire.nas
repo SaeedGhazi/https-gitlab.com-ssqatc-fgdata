@@ -3,7 +3,7 @@
 ##  A cellular automaton forest fire model with the ability to
 ##  spread over the multiplayer network.
 ##
-##  Copyright (C) 2007 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2007 - 2011  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
@@ -192,7 +192,7 @@ var foam_drop_msg = func (pos, radius, volume) {
 }
 
 var parse_msg = func (source, msg) {
-  if (!getprop(MP_share_pp)) return;
+  if (!getprop(MP_share_pp) or !getprop(CA_enabled_pp)) return;
   var cur_time = systime();
   var type = Binary.decodeByte(substr(msg, 5));
   if (type == 1) {
@@ -459,8 +459,21 @@ CAFireModels.reset = func (enabled) {
   me.grid = {};
   me.pending = [];
 
+  if (enabled) {
+    me.start();
+  }
+}
+############################################################
+# Start the CA model grid.
+CAFireModels.start = func {
   me.loopid += 1;
   me._loop_(me.loopid);
+}
+############################################################
+# Stop the CA model grid.
+# Note that it will catch up lost time when started again.
+CAFireModels.stop = func {
+  me.loopid += 1;
 }
 ############################################################
 # Add a new cell model.
@@ -584,8 +597,26 @@ CAFire.reset = func (enabled, sim_time) {
   me.event_log = [];
 
   me.enabled = enabled;
+  if (me.enabled) {
+    me.start();
+  } else {
+    me.stop();
+  }
+}
+############################################################
+# Start the CA.
+CAFire.start = func {
+  CAFireModels.start();
+  broadcast.start();
   me.loopid += 1;
   me._loop_(me.loopid);
+}
+############################################################
+# Stop the CA. Note that it will catch up lost time when started again.
+CAFire.stop = func {
+  CAFireModels.stop();
+  broadcast.stop();
+  me.loopid += 1;
 }
 ############################################################
 # Start a fire in the cell at pos.
@@ -894,9 +925,12 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
   props.globals.initNode(smoke_LOD_pp, 10, "INT");
 
   SimTime.init();
-  CAFire.init();
   broadcast =
     mp_broadcast.BroadcastChannel.new(msg_channel_mpp, parse_msg);
+  CAFire.init();
+
+  # Start the score reporting.
+  settimer(score_report_loop, CAFire.GENERATION_DURATION);
 
   setlistener("/sim/signals/exit", func {
     if (getprop(report_score_pp) and (CAFire.cells_created > 0))
@@ -911,8 +945,6 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
       CAFire.load_event_log(SAVEDIR ~ "fire_log.xml", 1);
     }, 3);
   }
-  # Start the score reporting.
-  settimer(score_report_loop, CAFire.GENERATION_DURATION);
 
   # Detect aircraft crash.
   setlistener("sim/crashed", func(n) {
@@ -920,7 +952,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
       wildfire.ignite(geo.aircraft_position());
   });
 
-# Detect impact
+  # Detect impact
   var impact_node = props.globals.getNode("sim/ai/aircraft/impact/bomb", 1);
   setlistener("sim/ai/aircraft/impact/bomb", func(n) {
 

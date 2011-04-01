@@ -2,7 +2,7 @@
 ##
 ##  A message based information broadcast for the multiplayer network.
 ##
-##  Copyright (C) 2008 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2008 - 2011  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
@@ -69,7 +69,7 @@ BroadcastChannel.new = func (mpp_path, process,
              "BroadcastChannel invalid send node.");
     return nil;
   }
-  settimer(func { obj._loop_(obj.loopid); }, 0, 1);
+  obj.start();
 
   return obj;
 }
@@ -89,6 +89,13 @@ BroadcastChannel.die = func {
   me.loopid += 1;
 #  print("BroadcastChannel[" ~ me.mpp_path ~ "] ...  destroyed.");
 }
+BroadcastChannel.start = func {
+  me.loopid += 1;
+  settimer(func { me._loop_(me.loopid); }, 0, 1);
+}
+BroadcastChannel.stop = func {
+  me.loopid += 1;
+}
 
 ############################################################
 # Internals.
@@ -101,8 +108,8 @@ BroadcastChannel.update = func {
     var mpplayers =
       props.globals.getNode("/ai/models").getChildren("multiplayer");
     foreach (var pilot; mpplayers) {
-      if ((pilot.getChild("valid") != nil) and
-          pilot.getChild("valid").getValue() and
+      var valid = pilot.getChild("valid");
+      if ((valid != nil) and valid.getValue() and
           !contains(multiplayer.ignore,
                     pilot.getChild("callsign").getValue())) {
         if ((me.peers[pilot.getIndex()] == nil) and

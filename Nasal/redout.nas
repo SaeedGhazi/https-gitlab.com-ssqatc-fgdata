@@ -137,9 +137,10 @@ _setlistener("/sim/signals/fdm-initialized",
     }, 1);
 
     setlistener("/sim/rendering/headshake/enabled", func(n) {
-      if ((running_compression == 0) and n.getBoolValue())
+      if ((running_compression == 0) and (running_redout == 0) and n.getBoolValue())
       {
         running_compression = 1;
+        # start new timer now
         run();
       }
       else
@@ -149,9 +150,10 @@ _setlistener("/sim/signals/fdm-initialized",
     }, 1);
 
     setlistener("/sim/rendering/redout/enabled", func(n) {
-      if ((running_redout == 0) and n.getBoolValue())
+      if ((running_compression == 0) and (running_redout == 0) and n.getBoolValue())
       {
         running_redout = 1;
+        # start new timer now
         run();
       }
       else

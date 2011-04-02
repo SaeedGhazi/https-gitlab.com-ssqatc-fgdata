@@ -11,24 +11,25 @@
 # Global shared variables
 #############################################################################
 
-fg_root = "";
-chatter = "UK";
-chatter_dir = "";
+var fg_root = nil;
+var chatter = "UK";
+var chatter_dir = "";
 
-chatter_min_interval = 20.0;
-chatter_max_interval = 40.0;
+var chatter_min_interval = 20.0;
+var chatter_max_interval = 40.0;
+var next_interval = nil;
 
-chatter_index = 0;
-chatter_size = 0;
-chatter_list = 0;
+var chatter_index = 0;
+var chatter_size = 0;
+var chatter_list = 0;
 
 
 #############################################################################
-# Use tha nasal timer to call the initialization function once the sim is
-# up and running
+# Chatter is initialized only when actually enabled. See listener connected
+# to /sim/sound/chatter/enabled.
 #############################################################################
 
-CHATTER_INIT = func {
+var chatter_init = func {
     # default values
     fg_root = getprop("/sim/fg-root");
     chatter_dir = sprintf("%s/ATC/Chatter/%s", fg_root, chatter);
@@ -39,14 +40,13 @@ CHATTER_INIT = func {
     srand();
     chatter_index = int( chatter_size * rand() );
 }
-settimer(CHATTER_INIT, 0);
 
 
 #############################################################################
 # main update function to be called each frame
 #############################################################################
 
-chatter_update = func {
+var chatter_update = func {
     if ( chatter_index >= chatter_size ) {
         chatter_index = 0;
     }
@@ -73,15 +73,43 @@ chatter_update = func {
 
 
 #############################################################################
-# Use tha nasal timer to update every 10 seconds
+# Use the nasal timer to update every 10 seconds
 #############################################################################
 
-nextChatter = func {
+var nextChatter = func {
+    if (!getprop("/sim/sound/chatter/enabled"))
+    {
+      next_interval = nil;
+      return;
+    }
+
     # schedule next message in next min-max interval seconds so we have a bit
     # of a random pacing
     next_interval = chatter_min_interval
        + int(rand() * (chatter_max_interval - chatter_min_interval));
+
     # printlog("info", "next chatter in ", next_interval, " seconds");
+
     settimer(chatter_update, next_interval );
 }
-nextChatter();
+
+#############################################################################
+# Start chatter processing. Also connected to chatter/enabled property as a
+# listener.
+#############################################################################
+
+var startChatter = func {
+  if ( getprop("/sim/sound/chatter/enabled") ) {
+    if (fg_root == nil)
+      chatter_init();
+    if (next_interval == nil)
+      nextChatter();
+  }
+}
+
+# connect listener
+setlistener("/sim/sound/chatter/enabled", startChatter);
+
+# start chatter immediately, if enable is already set.
+settimer(startChatter, 0);
+

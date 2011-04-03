@@ -685,7 +685,7 @@ var setWeight = func(wgt, opt) {
     # Weights can have "tank" indices which set the capacity of the
     # corresponding tank.  This code should probably be moved to
     # something like fuel.setTankCap(tank, gals)...
-    if(wgt.getNode("tank") == nil) { return 0; }
+    if(wgt.getNode("tank",0) == nil) { return 0; }
     var ti = wgt.getNode("tank").getValue();
     var gn = opt.getNode("gals");
     var gals = gn == nil ? 0 : gn.getValue();
@@ -886,10 +886,11 @@ var showWeightDialog = func {
 
         var tankprop = "/consumables/fuel/tank["~i~"]";
 
-        var cap = t.getNode("capacity-gal_us", 1).getValue();
+        var cap = t.getNode("capacity-gal_us", 0);
 
         # Hack, to ignore the "ghost" tanks created by the C++ code.
-        if(cap == nil or cap < 1) { continue; }
+        if(cap == nil ) { continue; }
+        cap = cap.getValue();
 
         var title = tcell(fuelTable, "text", i+1, 0);
         title.set("label", tname);

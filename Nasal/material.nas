@@ -48,13 +48,13 @@
 #  </animation>
 #
 
-dialog = nil;
+var dialog = nil;
 
-colorgroup = func {
-	parent = arg[0];  # pui parent
-	name = arg[1];    # "diffuse"
-	base = arg[2];
-	undef = func { props.globals.getNode(base ~ name ~ "/" ~ arg[0]) == nil };
+var colorgroup = func {
+	var parent = arg[0];  # pui parent
+	var name = arg[1];    # "diffuse"
+	var base = arg[2];
+	var undef = func { props.globals.getNode(base ~ name ~ "/" ~ arg[0]) == nil };
 
 	if (undef("red") and undef("green") and undef("blue")) {
 		return 0;
@@ -64,11 +64,11 @@ colorgroup = func {
 		parent.addChild("hrule").setColor(1, 1, 1, 0.5);
 	}
 
-	grp = parent.addChild("group");
+	var grp = parent.addChild("group");
 	grp.set("layout", "vbox");
 	grp.addChild("text").set("label", name);
 
-	foreach (color; ["red", "green", "blue", "factor"]) {
+	foreach (var color; ["red", "green", "blue", "factor"]) {
 		mat(parent, color, base ~ name ~ "/" ~ color, "%.3f");
 	}
 	mat(parent, "offset", base ~ name ~ "/" ~ "offset", "%.3f", -1.0, 1.0);
@@ -76,19 +76,19 @@ colorgroup = func {
 }
 
 
-mat = func {
-	parent = arg[0];
-	name = arg[1];
-	path = arg[2];
-	format = arg[3];
+var mat = func {
+	var parent = arg[0];
+	var name = arg[1];
+	var path = arg[2];
+	var format = arg[3];
 	if (props.globals.getNode(path) != nil) {
-		grp = parent.addChild("group");
+		var grp = parent.addChild("group");
 		grp.set("layout", "hbox");
 
 		grp.addChild("empty").set("stretch", 1);
 		grp.addChild("text").set("label", name);
 
-		slider = grp.addChild("slider");
+		var slider = grp.addChild("slider");
 		slider.set("property", path);
 		slider.set("live", 1);
 		if (size(arg) == 6) {
@@ -97,7 +97,7 @@ mat = func {
 		}
 		slider.setBinding("dialog-apply");
 
-		number = grp.addChild("text");
+		var number = grp.addChild("text");
 		number.set("label", "-0.123");
 		number.set("format", format);
 		number.set("property", path);
@@ -107,13 +107,13 @@ mat = func {
 }
 
 
-showDialog = func {
-	base = arg[0];
+var showDialog = func {
+	var base = arg[0];
 	while (size(base) and substr(base, size(base) - 1, 1) == "/") {
 		base = substr(base, 0, size(base) - 1);
 	}
-	parentdir = "";
-	b = base;
+	var parentdir = "";
+	var b = base;
 	while (size(b)) {
 		c = substr(b, size(b) - 1, 1);
 		if (c == "/") { break }
@@ -121,8 +121,8 @@ showDialog = func {
 		parentdir = c ~ parentdir;
 	}
 
-	title = if (size(arg) > 1 and arg[1] != nil) { arg[1] } else { parentdir };
-	name = "material-" ~ parentdir;
+	var title = if (size(arg) > 1 and arg[1] != nil) { arg[1] } else { parentdir };
+	var name = "material-" ~ parentdir;
 	base = base ~ "/";
 
 	dialog = gui.Widget.new();
@@ -131,9 +131,9 @@ showDialog = func {
 	if (size(arg) > 3 and arg[3] != nil) { dialog.set("y", arg[3]) }
 	dialog.set("layout", "vbox");
 
-	titlebar = dialog.addChild("group");
+	var titlebar = dialog.addChild("group");
 	titlebar.set("layout", "hbox");
-	w = titlebar.addChild("text");
+	var w = titlebar.addChild("text");
 	w.set("label", "object \"" ~ title ~ "\"");
 	titlebar.addChild("empty").set("stretch", 1);
 
@@ -146,13 +146,13 @@ showDialog = func {
 	w.set("border", 1);
 	w.setBinding("dialog-close");
 
-	h = 0;
+	var h = 0;
 	h += colorgroup(dialog, "diffuse", base, h);
 	h += colorgroup(dialog, "ambient", base, h);
 	h += colorgroup(dialog, "emission", base, h);
 	h += colorgroup(dialog, "specular", base, h);
 
-	undef = func { props.globals.getNode(base ~ arg[0]) == nil };
+	var undef = func { props.globals.getNode(base ~ arg[0]) == nil };
 	if (!(undef("shininess") and undef("transparency/alpha") and undef("threshold"))) {
 		if (h) {
 			dialog.addChild("hrule").setColor(1, 1, 1, 0.5);

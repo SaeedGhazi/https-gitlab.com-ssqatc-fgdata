@@ -14,8 +14,11 @@ var is_active = func getprop("/sim/multiplay/txport") or getprop("/sim/multiplay
 
 var lastmsg = {};
 var ignore = {};
+var msg_loop_id = 0;
+var msg_timeout = 0;
 
-var check_messages = func {
+var check_messages = func(loop_id) {
+    if (loop_id != msg_loop_id) return;
     foreach (var mp; values(model.callsign)) {
         var msg = mp.node.getNode("sim/multiplay/chat", 1).getValue();
         if (msg and msg != lastmsg[mp.callsign]) {
@@ -24,10 +27,8 @@ var check_messages = func {
             lastmsg[mp.callsign] = msg;
         }
     }
-    settimer(check_messages, 3);
+    settimer(func check_messages(loop_id), 1);
 }
-
-
 
 var echo_message = func(callsign, msg) {
     msg = string.trim(string.replace(msg, "\n", " "));
@@ -45,7 +46,32 @@ var echo_message = func(callsign, msg) {
     setprop("/sim/multiplay/chat-history", msg);
 }
 
+var timeout_handler = func()
+{
+    var t = props.globals.getNode("/sim/time/elapsed-sec").getValue();
+    if (t >= msg_timeout)
+    {
+        msg_timeout = 0;
+        setprop("/sim/multiplay/chat", "");
+    }
+    else
+        settimer(timeout_handler, msg_timeout - t);
+}
 
+var chat_listener = func(n)
+{
+    var msg = n.getValue();
+    if (msg)
+    {
+        # ensure we see our own messages.
+        echo_message(getprop("/sim/multiplay/callsign"), msg);
+
+        # set expiry time
+        if (msg_timeout == 0)
+            settimer(timeout_handler, 10); # need new timer
+        msg_timeout = 10 + props.globals.getNode("/sim/time/elapsed-sec").getValue();
+    }
+}
 
 settimer(func {
     if (is_active()) {
@@ -70,15 +96,12 @@ settimer(func {
                 io.flush(f);
             });
         }
-        check_messages();
+        check_messages(msg_loop_id += 1);
     }
 
     # Call-back to ensure we see our own messages.
-    setlistener("/sim/multiplay/chat", func(n) {
-        echo_message(getprop("/sim/multiplay/callsign"), n.getValue());
-    });
+    setlistener("/sim/multiplay/chat", chat_listener);
 }, 1);
-
 
 
 # Message composition function, activated using the - key.
@@ -391,8 +414,6 @@ var dialog = {
 var model = {
     init: func {
         me.L = [];
-        me.warned = {};
-        me.fg_root = string.normpath(getprop("/sim/fg-root")) ~ '/';
         append(me.L, setlistener("ai/models/model-added", func(n) {
             # Defer update() to the next convenient time to allow the
             # new MP entry to become fully initialized.

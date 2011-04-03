@@ -1214,6 +1214,7 @@ Shared parameters for various materials.
    </equals>
   </condition>
   <name>HerbTundraCover</name>
+  <name>HerbTundra</name>
   <effect>Effects/herbtundra</effect>
   <texture>Terrain/herbtundra.png</texture>
   <texture>Terrain/herbtundra2.png</texture>
@@ -2073,6 +2074,7 @@ Shared parameters for various materials.
    </equals>
   </condition>
   <name>HerbTundraCover</name>
+  <name>HerbTundra</name>
   <texture>Terrain.winter/herbtundra.png</texture>
   <texture>Terrain.winter/herbtundra2.png</texture>
   <texture>Terrain.winter/herbtundra3.png</texture>

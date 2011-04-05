@@ -108,7 +108,7 @@ var startChatter = func {
 }
 
 # connect listener
-setlistener("/sim/sound/chatter/enabled", startChatter);
+_setlistener("/sim/sound/chatter/enabled", startChatter);
 
 # start chatter immediately, if enable is already set.
 settimer(startChatter, 0);

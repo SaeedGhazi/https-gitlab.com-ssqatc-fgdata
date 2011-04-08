@@ -137,7 +137,7 @@
       <condition>
         <property>/environment/config/presets/turbulence-magnitude-norm-override</property>
       </condition>
-      <property>/environment/config/presets/turbulence-magnitude-norm-override</property>
+      <property>/environment/config/presets/turbulence-magnitude-norm</property>
     </input>
     <input>
       <property>/environment/config/interpolated/turbulence/magnitude-norm</property>

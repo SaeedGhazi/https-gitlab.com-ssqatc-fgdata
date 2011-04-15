@@ -65,10 +65,14 @@ Started September 2000 by David Megginson, david@megginson.com
 			<debug type="bool">false</debug>
 			<realism>5</realism>
 			<filtering>8</filtering>
-			<mie type="float">0.003</mie>
-			<rayleigh type="float">0.0003</rayleigh>
-			<dome-density type="float">0.5</dome-density>
-			<scattering-shader type="float">0</scattering-shader>
+			<mie type="float"
+					 userarchive="y">0.003</mie>
+			<rayleigh type="float"
+								userarchive="y">0.0003</rayleigh>
+			<dome-density type="float"
+										userarchive="y">0.5</dome-density>
+			<scattering-shader type="bool"
+												 userarchive="y">0</scattering-shader>
 			<!-- multithreading-mode>AutomaticSelection</multithreading-mode -->
 			<!--
      Uncomment the above element to select OSG multi-threading mode.

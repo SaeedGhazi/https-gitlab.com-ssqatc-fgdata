@@ -43,8 +43,7 @@
     <text><label>Stereo Mode</label></text>
     <empty><stretch>true</stretch></empty>
     <combo>
-      <width>250</width>
-      <height>25</height>
+      <pref-width>250</pref-width>
       <live>true</live>
       <property>/sim/rendering/osg-displaysettings/stereo-mode</property>
       <value>OFF</value>

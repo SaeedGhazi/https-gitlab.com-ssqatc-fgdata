@@ -288,7 +288,8 @@
  <com2-desc>Set the COM2 radio frequency</com2-desc>
  <nav1-desc>Set the NAV1 radio frequency, optionally preceded by a radial.</nav1-desc>
  <nav2-desc>Set the NAV2 radio frequency, optionally preceded by a radial.</nav2-desc>
- <adf-desc>Set the ADF radio frequency, optionally preceded by a card rotation.</adf-desc>
+ <adf1-desc>Set the ADF1 radio frequency, optionally preceded by a card rotation.</adf1-desc>
+ <adf2-desc>Set the ADF2 radio frequency, optionally preceded by a card rotation.</adf2-desc>
  <dme-desc>Slave the ADF to one of the NAV radios, or set its internal frequency.</dme-desc>
 
  <situation-options>Situation Options</situation-options>

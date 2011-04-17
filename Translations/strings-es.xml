@@ -270,7 +270,8 @@
 	<com2-desc>Establece la radio frecuencia de COM2</com2-desc>
 	<nav1-desc>Establece la radio frecuencia de NAV1, opcionalmente precedida por un radial.</nav1-desc>
 	<nav2-desc>Establece la radio frecuencia de NAV2, opcionalmente precedida por un radial.</nav2-desc>
-	<adf-desc>Establece la radio frecuencia de ADF, opcionalmente precedida por una rotacionde carta.</adf-desc>
+	<adf1-desc>Establece la radio frecuencia de ADF1, opcionalmente precedida por una rotacionde carta.</adf1-desc>
+	<adf2-desc>Establece la radio frecuencia de ADF2, opcionalmente precedida por una rotacionde carta.</adf2-desc>
 	<dme-desc>Esclaviza la ADF a una de las radios NAV, o establece su frecuencia interna.</dme-desc>
 
 	<situation-options>Opciones de emergencias</situation-options>

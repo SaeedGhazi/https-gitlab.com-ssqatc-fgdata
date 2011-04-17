@@ -1080,7 +1080,21 @@ Started September 2000 by David Megginson, david@megginson.com
 									archive="y">0</offset-sec>
 		</clock>
 
-		<adf>
+		<adf n="0">
+			<frequencies>
+				<selected-khz type="int">379</selected-khz>
+				<standby-khz type="int">341</standby-khz>
+			</frequencies>
+			<serviceable type="bool"
+									 archive="y">true</serviceable>
+			<indicated-bearing-deg type="double">90</indicated-bearing-deg>
+			<error-deg type="double">2</error-deg>
+			<mode>adf</mode>
+			<rotation-deg type="double">0</rotation-deg>
+			<volume-norm type="double">0.5</volume-norm>
+		</adf>
+
+		<adf n="1">
 			<frequencies>
 				<selected-khz type="int">379</selected-khz>
 				<standby-khz type="int">341</standby-khz>

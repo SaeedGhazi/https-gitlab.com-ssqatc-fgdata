@@ -845,9 +845,15 @@
    </option>
 
    <option>
-    <name>adf</name>
+    <name>adf1</name>
     <arg>[rotation:]frequency</arg>
-    <description>strings/adf-desc</description>
+    <description>strings/adf1-desc</description>
+   </option>
+
+   <option>
+    <name>adf2</name>
+    <arg>[rotation:]frequency</arg>
+    <description>strings/adf2-desc</description>
    </option>
 
    <option>

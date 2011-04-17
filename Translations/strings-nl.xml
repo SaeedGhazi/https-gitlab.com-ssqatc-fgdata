@@ -235,7 +235,8 @@
  <avionics-options>Avionica Opties</avionics-options>
  <nav1-desc>Zet de NAV1 radio frequentie, eventueel voorafgegaand door een radial</nav1-desc>
  <nav2-desc>Zet de NAV2 radio frequentie, eventueel voorafgegaand door een radial</nav2-desc>
- <adf-desc>Zet de ADF radio frequentie, eventueel voorafgegaand door een kaart verdraaing</adf-desc>
+ <adf1-desc>Zet de ADF1 radio frequentie, eventueel voorafgegaand door een kaart verdraaing</adf1-desc>
+ <adf2-desc>Zet de ADF2 radio frequentie, eventueel voorafgegaand door een kaart verdraaing</adf2-desc>
  <dme-desc>Maak de ADF afhankelijk van een van de radio's, of zet zijn interne frequentie</dme-desc>
 
   <situation-options>Situatie opties</situation-options>

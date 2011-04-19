@@ -411,11 +411,13 @@ if (((local_weather.presampling_flag == 1) and (getprop(lw~"tmp/presampling-stat
 
 # now see if we need to presample the terrain
 
-if ((local_weather.presampling_flag == 1) and (getprop(lw~"tmp/presampling-status") == "idle")) 
+if ((local_weather.presampling_flag == 1) and (getprop(lw~"tmp/presampling-status") == "idle") and (compat_layer.features.terrain_presampling_active == 0)) 
 	{
 	local_weather.terrain_presampling_start(lat, lon, 1000, 40000, getprop(lw~"tmp/tile-orientation-deg")); 
 	return;
 	}
+else if (compat_layer.features.terrain_presampling_active == 1)# we have hard-coded values available and use those
+	{local_weather.terrain_presampling_analysis();}
 
 
 if (local_weather.debug_output_flag == 1) 
@@ -439,6 +441,7 @@ if (getprop(lw~"tmp/tile-management") == "repeat tile")
 	else if (code == "cold_sector") {weather_tiles.set_cold_sector_tile();}
 	else if (code == "warm_sector") {weather_tiles.set_warm_sector_tile();}
 	else if (code == "tropical_weather") {weather_tiles.set_tropical_weather_tile();}
+	#else if (code == "test") {weather_tiles.set_4_8_stratus_tile;}
 	else 
 		{
 		print("Repeat tile not implemented with this tile type!");
@@ -916,7 +919,7 @@ if ((index == 2) or (index == 5) or (index == 8)) {x = 40000.0;}
 if ((index == 0) or (index == 1) or (index == 2)) {y = 40000.0;}
 if ((index == 6) or (index == 7) or (index == 8)) {y = -40000.0;}
 
-var t = props.globals.getNode(lw~"tiles").getChild("tile",index,0);
+var t = props.globals.getNode(lw~"tiles").getChild("tile",index,1);
 
 # use the last built tile code as default, in case a tile isn't formed when reached,
 # the code is not empty but has a plausible value
@@ -1263,6 +1266,73 @@ var i = 0;
 
 print("====================");
 
+var viewpos = geo.aircraft_position();
+var n_stations = size(local_weather.weatherStationArray);
+
+var sum_T = 0.0;
+var sum_p = 0.0;
+var sum_D = 0.0;
+var sum_norm = 0.0;
+
+var sum_wind = [0,0];
+
+var wsize = size(local_weather.windIpointArray);
+
+var alt = getprop("position/altitude-ft");	
+
+for (var i = 0; i < wsize; i=i+1) {
+	
+
+	var w = local_weather.windIpointArray[i];
+
+	var wpos = geo.Coord.new();
+	wpos.set_latlon(w.lat,w.lon,1000.0);
+
+
+
+	var d = viewpos.distance_to(wpos);
+	if (d <100.0) {d = 100.0;} # to prevent singularity at zero
+
+	sum_norm = sum_norm + (1./d);
+
+	var res = local_weather.wind_altitude_interpolation(alt,w);
+	
+	sum_wind = local_weather.add_vectors(sum_wind[0], sum_wind[1], res[0], (res[1]/d));	
+	
+	print(i, " dir: ", res[0], " speed: ", res[1], " d: ",d);
+	}
+
+print("dir_int: ", sum_wind[0], " speed_int: ", sum_wind[1]/sum_norm);
+
+if (0==1)
+{
+for (var i = 0; i < n_stations; i=i+1) {
+	
+	s = local_weather.weatherStationArray[i];
+	
+
+	var stpos = geo.Coord.new();
+	stpos.set_latlon(s.lat,s.lon,0.0);
+
+	var d = viewpos.distance_to(stpos);
+	if (d <100.0) {d = 100.0;} # to prevent singularity at zero
+
+	sum_norm = sum_norm + 1./d * s.weight;
+
+	sum_T = sum_T + (s.T/d) * s.weight;
+	sum_D = sum_D + (s.D/d) * s.weight;
+	sum_p = sum_p + (s.p/d) * s.weight;
+	
+	print(i, " p: ", s.p, " T: ", s.T, " D: ", s.D, " d: ",d);
+	
+	}
+
+print("p_int: ", sum_p/sum_norm, " T_int: ", sum_T/sum_norm, " D_int: ", sum_D/sum_norm);
+}
+
+if (0==1)
+{
+
 foreach(t; tNode)
 	{
 	var code = t.getNode("code").getValue();
@@ -1283,6 +1353,8 @@ var res = local_weather.wind_interpolation(lat,lon,0.0);
 
 print("Wind: ", res[0], " tile alpha: ", getprop(lw~"tiles/tile[4]/orientation-deg"));
 print("Mismatch: ", relangle(res[0], getprop(lw~"tiles/tile[4]/orientation-deg")));
+}
+
 
 print("====================");
 

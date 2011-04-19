@@ -95,6 +95,7 @@ calc_geo(blat);
 
 local_weather.set_weather_station(blat, blon, alt_offset, 20000.0, 14.0, 12.0, 29.78);
 
+create_8_8_nimbus_var3(blat, blon, 2000.0 + alt_offset+local_weather.cloud_vertical_size_map["Nimbus"] * 0.5 * m_to_ft, 0.0);
 
 #create_2_8_sstratus_streak(blat, blon,5000.0,0.0);
 
@@ -106,10 +107,11 @@ local_weather.set_weather_station(blat, blon, alt_offset, 20000.0, 14.0, 12.0, 2
 
 #create_detailed_stratocumulus_bank(blat, blon,5000.0+alt_offset,0.0);
 
-create_4_8_altocumulus_perlucidus(blat, blon, 10000.0, 0.0);
+#create_4_8_altocumulus_perlucidus(blat, blon, 10000.0, 0.0);
 
-local_weather.create_effect_volume(3, blat, blon, 20000.0, 7000.0, alpha, 0.0, 80000.0, -1, -1, -1, -1, 15.0, -3,-1);
+#local_weather.create_effect_volume(3, blat, blon, 20000.0, 7000.0, alpha, 0.0, 80000.0, -1, -1, -1, -1, 15.0, -3,-1);
 
+create_1_8_contrails(blat, blon, 30000.0, 0.0);
 
 # store convective altitude and strength
 
@@ -2121,7 +2123,7 @@ var set_METAR_weather_station = func {
 
 	# if we use aloft interpolated winds with METAR, also set a new wind interpolation point
 	
-	if (local_weather.wind_model_flag == 5)
+	if ((local_weather.wind_model_flag == 5) and (getprop(lw~"tiles/tile-counter") !=1))
 		{
 		# if zero winds are reported, we do not rotate the tile to face north but use the last value
 	
@@ -2187,19 +2189,84 @@ local_weather.create_streak("Cirrostratus",lat,lon,alt,500.0,30,1250.0,0.0,400.0
 var create_8_8_nimbus = func (lat, lon, alt, alpha) {
 
 local_weather.create_streak("Nimbus",lat, lon, alt,500.0,32,1250.0,0.0,200.0,32,1250.0,0.0,200.0,alpha,1.0);
+
+
+}
+
+var create_8_8_nimbus_var1 = func (lat, lon, alt, alpha) {
+
+var phi = alpha * math.pi/180.0;
+
+local_weather.create_streak("Nimbus",lat, lon, alt,500.0,35,1111.0,0.0,200.0,35,1111.0,0.0,200.0,alpha,1.0);
+
+for (var i = 0; i < 3; i=i+1)
+	{
+	var x = -15000.0 + 30000.0 * rand();
+	var y = -15000.0 + 30000.0 * rand();
+	local_weather.create_streak("Stratocumulus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt+600.0,200.0,11,1100.0,0.1,800.0,8,1100.0,0.1,800.0,alpha,1.4);
+
+	}
+}
+
+var create_8_8_nimbus_var2 = func (lat, lon, alt, alpha) {
+
+var phi = alpha * math.pi/180.0;
+
+local_weather.create_streak("Nimbus",lat, lon, alt,500.0,35,1111.0,0.0,200.0,35,1111.0,0.0,200.0,alpha,1.0);
+
+for (var i=0; i<8; i=i+1)
+	{
+	var x = 2.0 * (rand()-0.5) * 18000;
+	var y = 2.0 * (rand()-0.5) * 18000;
+	var beta = (rand() -0.5) * 180.0;
+	local_weather.create_streak("Stratus (structured)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt+1200.0,300.0,5,900.0,0.2,500.0,7,900.0,0.2,500.0,alpha+beta,1.0);
+
+	}
+
+}
+
+
+var create_8_8_nimbus_var3 = func (lat, lon, alt, alpha) {
+
+var phi = alpha * math.pi/180.0;
+
+local_weather.create_streak("Nimbus",lat, lon, alt,500.0,35,1111.0,0.0,200.0,35,1111.0,0.0,200.0,alpha,1.0);
+
+for (var i=0; i<6; i=i+1)
+	{
+	var x = 2.0 * (rand()-0.5) * 18000;
+	var y = 2.0 * (rand()-0.5) * 18000;
+	var beta = (rand() -0.5) * 180.0;
+	local_weather.create_streak("Stratus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt+1600.0,300.0,6,1200.0,0.2,700.0,6,1200.0,0.2,700.0,alpha+beta,1.0);
+	}
+
+# reduced visibility in layer
+#local_weather.create_effect_volume(3, lat, lon, 20000.0, 20000.0, alpha, alt-1500.0, alt+900.0, 2000.0, -1 , -1, -1, -1,0 ,-1);
+# cloud shade
+#local_weather.create_effect_volume(3, lat, lon, 20000.0, 20000.0, alpha, 0.0, alt, -1, -1 , -1, -1, -1,0 ,0.8);
+
 }
 
 var create_8_8_nimbus_rain = func (lat, lon, alt, alpha, rain) {
 
-local_weather.create_streak("Nimbus",lat, lon, alt,500.0,32,1250.0,0.0,200.0,32,1250.0,0.0,200.0,alpha,1.0);
+if (local_weather.detailed_clouds_flag == 0)
+	{local_weather.create_streak("Nimbus",lat, lon, alt,500.0,32,1250.0,0.0,200.0,32,1250.0,0.0,200.0,alpha,1.0);}
+else
+	{
+	var rn = rand();
+	if (rn > 0.66) {create_8_8_nimbus_var1(lat, lon, alt, alpha);}
+	else if (rn > 0.33) {create_8_8_nimbus_var2(lat, lon, alt, alpha);}
+	else {create_8_8_nimbus_var3(lat, lon, alt, alpha);}
+	}
 
 if (rain > 0.1)
 	{
-	local_weather.create_effect_volume(3, lat, lon, 20000.0, 20000.0, alpha, 0.0, alt, 500.0 + (1.0 - 0.5 * rain) * 5500.0, 0.5 * rain , -1, -1, -1,0 ,0.95);
+	local_weather.create_effect_volume(3, lat, lon, 20000.0, 20000.0, alpha, 0.0, alt+900.0, 500.0 + (1.0 - 0.5 * rain) * 5500.0, 0.5 * rain , -1, -1, -1,0 ,0.95);
 	local_weather.create_effect_volume(3, lat , lon, 16000.0, 16000.0, alpha, 0.0, alt - 300.0, 500.0 + (1.0-rain) * 5500.0, rain, -1, -1, -1,0 ,0.8);
 	}
 else
 	{
+	local_weather.create_effect_volume(3, lat, lon, 20000.0, 20000.0, alpha, alt-1500.0, alt+900.0, 2000.0, -1 , -1, -1, -1,0 ,-1);
 	local_weather.create_effect_volume(3, lat, lon, 20000.0, 20000.0, alpha, 0.0, alt, -1, rain , -1, -1, -1,0 ,0.8);
 	}
 
@@ -2245,12 +2312,13 @@ for (var i = 0; i < 3; i = i + 1)
 
 	if (rain > 0.1)
 		{
-		local_weather.create_effect_volume(2, lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), 10000.0, 6000.0, beta, 0.0, alt, 500.0 + (1.0-0.5*rain) * 5500.0, 0.5 * rain, -1, -1, -1,0,0.95 );
+		local_weather.create_effect_volume(2, lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), 10000.0, 6000.0, beta, 0.0, alt+900, 500.0 + (1.0-0.5*rain) * 5500.0, 0.5 * rain, -1, -1, -1,0,0.95 );
 		local_weather.create_effect_volume(2, lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), 9000.0, 5000.0, beta, 0.0, alt-300.0, 500.0 + (1.0-rain) * 5500.0, rain, -1, -1, -1,0,0.8);
 		}
 	else
 		{
 		local_weather.create_effect_volume(2, lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), 10000.0, 6000.0, beta, 0.0, alt, -1, rain, -1, -1, -1,0, 0.8 );
+		local_weather.create_effect_volume(2, lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), 10000.0, 6000.0, beta, alt-1500.0, alt+900.0, 2000.0, -1, -1, -1, -1,0, 0.8 );
 		}
 	}
 
@@ -2705,6 +2773,27 @@ for (var i = 0; i < 2; i = i + 1)
 		compat_layer.create_cloud(path, lat + get_lat(x,y,phi), lon+get_lon(x,y,phi),  alt + alt_variation,alpha+ beta);
 		}
 
+
+}
+
+
+var create_1_8_contrails = func (lat, lon, alt, alpha) {
+
+
+var phi = alpha * math.pi/180.0;
+
+var n_contrails = int(rand() * 3.0) + 1;
+
+for (var i=0; i<n_contrails; i=i+1)
+	{
+	var x = 2.0 * (rand()-0.5) * 5000;
+	var y = 2.0 * (rand()-0.5) * 5000;
+	var alt_variation = 2.0 * (rand()-0.5) * 4000.0;
+	var beta = rand() * 180;
+	var contrail_length = 20 + int(rand() * 30);
+
+	local_weather.create_streak("Cirrocumulus (cloudlet)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt+alt_variation,100.0,contrail_length,500.0,0.2,50.0,2,100.0,0.0,300.0,alpha+beta,1.0);
+	}
 
 }
 

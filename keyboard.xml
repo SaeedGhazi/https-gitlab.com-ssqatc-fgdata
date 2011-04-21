@@ -338,9 +338,8 @@ top down before the key bindings are parsed.
   <desc>Display a dialog relevant to the tuned in ATC service (if any)</desc>
   <binding>
     <!-- At the moment, we have no working interactive ATC, so this is
-         disabled for v2.2.0.
+         disabled for v2.2.0. -->
     <command>ATC-dialog</command>
-    -->
   </binding>
  </key>
 

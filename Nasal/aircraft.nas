@@ -1047,6 +1047,93 @@ var HUD = {
 	},
 };
 
+# crossfeed_valve
+# =============================================================================
+# class that creates a fuel tank cross-feed valve. Designed for YASim aircraft;
+# JSBSim aircraft can simply use systems code within the FDM (see 747-400 for
+# an example).
+#
+# WARNING: this class requires the tank properties to be ready, so call new()
+# after the FDM is initialized.
+#
+# SYNOPSIS:
+#	crossfeed_valve.new(<max_flow_rate>, <property>, <tank>, <tank>, ... );
+#	crossfeed_valve.open(<update>);
+#	crossfeed_valve.close(<update>);
+#
+#	<max_flow_rate>	... maximum transfer rate between the tanks in lbs/sec
+#	<property>	... property path to use as switch - pass nil to use no such switch
+#	<tank>		... number of a tank to connect - can have unlimited number of tanks connected
+#	<update>	... update switch property when opening/closing valve via Nasal - 0 or 1; by default, 1
+#
+#
+# EXAMPLES:
+#	aircraft.crossfeed_valve.new(0.5, "/controls/fuel/x-feed", 0, 1, 2);
+#-------
+#	var xfeed = aircraft.crossfeed_valve.new(1, nil, 0, 1);
+#	xfeed.open();
+#
+var crossfeed_valve = {
+	new: func(flow_rate, path) {
+		var m = { parents: [crossfeed_valve] };
+		m.valve_open = 0;
+		m.interval = 0.5;
+		m.loopid = -1;
+		m.flow_rate = flow_rate;
+		if (path != nil) {
+			m.switch_node = props.globals.initNode(path, 0, "BOOL");
+			setlistener(path, func(node) {
+				if (node.getBoolValue()) m.open(0);
+				else m.close(0);
+			}, 1, 0);
+		}
+		m.tanks = [];
+		for (var i = 0; i < size(arg); i += 1) {
+			var tank = props.globals.getNode("consumables/fuel/tank[" ~ arg[i] ~ "]");
+			if (tank.getChild("level-lbs") != nil) append(m.tanks, tank);
+		}
+		return m;
+	},
+	open: func(update_prop = 1) {
+		if (me.valve_open == 1) return;
+		if (update_prop and contains(me, "switch_node")) me.switch_node.setBoolValue(1);
+		me.valve_open = 1;
+		me.loopid += 1;
+		settimer(func me._loop_(me.loopid), me.interval);
+	},
+	close: func(update_prop = 1) {
+		if (update_prop and contains(me, "switch_node")) me.switch_node.setBoolValue(0);
+		me.valve_open = 0;
+	},
+	_loop_: func(id) {
+		if (id != me.loopid) return;
+		var average_level = 0;
+		var count = size(me.tanks);
+		for (var i = 0; i < count; i += 1) {
+			var level_node = me.tanks[i].getChild("level-lbs");
+			average_level += level_node.getValue();
+		}
+		average_level /= size(me.tanks);
+		var highest_diff = 0;
+		for (var i = 0; i < count; i += 1) {
+			var level = me.tanks[i].getChild("level-lbs").getValue();
+			var diff = math.abs(average_level - level);
+			if (diff > highest_diff) highest_diff = diff;
+		}
+		for (var i = 0; i < count; i += 1) {
+			var level_node = me.tanks[i].getChild("level-lbs");
+			var capacity = me.tanks[i].getChild("capacity-gal_us").getValue() * me.tanks[i].getChild("density-ppg").getValue();
+			var diff = math.abs(average_level - level_node.getValue());
+			var min_level = math.max(0, level_node.getValue() - me.flow_rate * diff / highest_diff);
+			var max_level = math.min(capacity, level_node.getValue() + me.flow_rate * diff / highest_diff);
+			var level = level_node.getValue() > average_level ? math.max(min_level, average_level) : math.min(max_level, average_level);
+			level_node.setValue(level);
+		}
+		if (me.valve_open) settimer(func me._loop_(id), me.interval);
+	}
+};
+
+
 
 
 # module initialization

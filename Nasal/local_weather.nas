@@ -323,7 +323,6 @@ return res;
 
 var wind_interpolation = func (lat, lon, alt) {
 
-# var windNodes = props.globals.getNode(lw~"interpolation").getChildren("wind");
 var sum_norm = 0;
 var sum_wind = [0,0];
 
@@ -331,8 +330,6 @@ var wsize = size(windIpointArray);
 	
 for (var i = 0; i < wsize; i=i+1) {
 	
-	#var wlat = w.getNode("latitude-deg").getValue();
-	#var wlon = w.getNode("longitude-deg").getValue();
 	
 	var w = windIpointArray[i];
 
@@ -403,9 +400,11 @@ else
 	var f_slow = 1.0 - (0.2 + 0.17 * math.ln(boundary_alt/base_layer_thickness));
 	}
 
-print("Boundary layer thickness: ",base_layer_thickness);
-print("Boundary layer slowdown: ", f_slow);
-
+if (debug_output_flag == 1)
+	{
+	print("Boundary layer thickness: ",base_layer_thickness);
+	print("Boundary layer slowdown: ", f_slow);
+	}
 return f_slow;
 }
 
@@ -486,7 +485,7 @@ for (var i = 0; i < n_stations; i=i+1) {
 		}
 	}
 
-setprop(lwi~"station-number", i);
+setprop(lwi~"station-number", i+1);
 
 
 var ialt = sum_alt/sum_norm;
@@ -2690,7 +2689,10 @@ for (var i=0; i<n_bottom; i=i+1)
 
 var terrain_presampling_start = func (blat, blon, nc, size, alpha) {
 
-
+# terrain presampling start is always used the first time, and initializes
+# the hard-coded routine if that is available since the hard-coded routine cannot
+# be yet read out on startup
+	
 # initialize the result vector
 
 setsize(terrain_n,20);
@@ -2715,6 +2717,20 @@ else
 	terrain_presampling(blat, blon, nc, size, alpha);
 	terrain_presampling_analysis();
 	setprop(lw~"tmp/presampling-status", "finished");
+	}
+	
+if (compat_layer.features.terrain_presampling_active == 1)
+	{
+	print("Starting hard-coded terrain presampling");
+
+	setprop(lw~"tmp/presampling-status", "sampling");
+	setprop("/environment/terrain/area[0]/input/latitude-deg", blat );
+	setprop("/environment/terrain/area[0]/input/longitude-deg", blon );
+	setprop("/environment/terrain/area[0]/input/use-aircraft-position",1);
+	setprop("/environment/terrain/area[0]/input/radius-m",45000.0);
+
+	setprop("/environment/terrain/area[0]/output/valid", 0 );
+
 	}
 }
 
@@ -2803,63 +2819,72 @@ for (i=0; i<ntries;i=i+1)
 
 var terrain_presampling_analysis = func {
 
-var sum = 0;
-var alt_mean = 0;
-var alt_med = 0;
-var alt_20 = 0;
-var alt_min = 0;
-var alt_low_min = 0;
-var alt_offset = 0;
-
-# for (var i=0;i<20;i=i+1){print(500.0*i," ",terrain_n[i]);}
-
-for (var i=0; i<20;i=i+1)
-	{sum = sum + terrain_n[i];}
-
-var n_tot = sum;
-
-sum = 0;
-for (var i=0; i<20;i=i+1)
+if ((compat_layer.features.terrain_presampling_active == 0) or (getprop(lw~"tiles/tile-counter") == 0))
 	{
-	sum = sum + terrain_n[i];
-	if (sum > int(0.5 *n_tot)) {alt_med = i * 500.0; break;}		
+	var sum = 0;
+	var alt_mean = 0;
+	var alt_med = 0;
+	var alt_20 = 0;
+	var alt_min = 0;
+	var alt_low_min = 0;
+
+
+	for (var i=0; i<20;i=i+1)
+		{sum = sum + terrain_n[i];}
+
+	var n_tot = sum;
+
+	sum = 0;
+	for (var i=0; i<20;i=i+1)
+		{
+		sum = sum + terrain_n[i];
+		if (sum > int(0.5 *n_tot)) {alt_med = i * 500.0; break;}		
+		}
+
+	sum = 0;
+	for (var i=0; i<20;i=i+1)
+		{
+		sum = sum + terrain_n[i];
+		if (sum > int(0.3 *n_tot)) {alt_20 = i * 500.0; break;}		
+		}
+
+
+	for (var i=0; i<20;i=i+1) {alt_mean = alt_mean + terrain_n[i] * i * 500.0;}
+	alt_mean = alt_mean/n_tot;
+
+	for (var i=0; i<20;i=i+1) {if (terrain_n[i] > 0) {alt_min = i * 500.0; break;}}
+
+	var n_max = 0;
+	sum = 0;
+
+	for (var i=0; i<19;i=i+1) 
+		{
+		sum = sum + terrain_n[i];
+		if (terrain_n[i] > n_max) {n_max = terrain_n[i];}
+		if ((n_max > terrain_n[i+1]) and (sum > int(0.3*n_tot)))
+ 			{alt_low_min = i * 500; break;}
+		}
 	}
-
-sum = 0;
-for (var i=0; i<20;i=i+1)
+else
 	{
-	sum = sum + terrain_n[i];
-	if (sum > int(0.3 *n_tot)) {alt_20 = i * 500.0; break;}		
-	}
-
-
-for (var i=0; i<20;i=i+1) {alt_mean = alt_mean + terrain_n[i] * i * 500.0;}
-alt_mean = alt_mean/n_tot;
-
-for (var i=0; i<20;i=i+1) {if (terrain_n[i] > 0) {alt_min = i * 500.0; break;}}
-
-var n_max = 0;
-sum = 0;
-
-for (var i=0; i<19;i=i+1) 
-	{
-	sum = sum + terrain_n[i];
-	if (terrain_n[i] > n_max) {n_max = terrain_n[i];}
-	if ((n_max > terrain_n[i+1]) and (sum > int(0.3*n_tot)))
- 		{alt_low_min = i * 500; break;}
+	#print("Hard-coded sampling...");
+	var n_tot = getprop("/environment/terrain/area[0]/input/max-samples");
+	var alt_mean = getprop("/environment/terrain/area[0]/output/alt-mean-ft");
+	var alt_med = getprop("/environment/terrain/area[0]/output/alt-median-ft");
+	var alt_min = getprop("/environment/terrain/area[0]/output/alt-min-ft");
+	var alt_20 = getprop("/environment/terrain/area[0]/output/alt-offset-ft");
 	}
 
 if (debug_output_flag == 1) 
 	{print("Terrain presampling analysis results:");
 	print("total: ",n_tot," mean: ",alt_mean," median: ",alt_med," min: ",alt_min, " alt_20: ", alt_20);}
 
-#if (alt_low_min < alt_med) {alt_offset = alt_low_min;}
-#else {alt_offset = alt_med;}
+
 
 setprop(lw~"tmp/tile-alt-offset-ft",alt_20);
 setprop(lw~"tmp/tile-alt-median-ft",alt_med);
 setprop(lw~"tmp/tile-alt-min-ft",alt_min);
-setprop(lw~"tmp/tile-alt-layered-ft",0.5 * (alt_min + alt_offset));
+setprop(lw~"tmp/tile-alt-layered-ft",0.5 * (alt_min + alt_20));
 
 append(alt_50_array, alt_med);
 append(alt_20_array, alt_20);
@@ -2945,7 +2970,10 @@ return balt + shift_strength * alt_diff * fraction;
 
 var manage_presampling = func {
 
+
+
 var status = getprop(lw~"tmp/presampling-status");
+
 
 # we only take action when the analysis is done
 if (status != "finished") {return;} 
@@ -2968,6 +2996,32 @@ else	# the tile setup call came from weather_tile_management
 # set status to idle again
 
 setprop(lw~"tmp/presampling-status", "idle");
+
+}
+
+
+###########################################################
+# hardcoded terrain presampling listener dispatcher
+###########################################################
+
+var manage_hardcoded_presampling = func {
+
+var status = getprop("/environment/terrain/area[0]/enabled");
+
+print("Hard-coded terrain presampling status: ", status);
+
+# no action unless the sampler has finished
+if (status ==0) {return;}
+
+# no action if the sampler hasn't been started
+
+if (getprop(lw~"tmp/presampling-status") != "sampling") {return;}
+
+terrain_presampling_analysis();
+if (debug_output_flag == 1) 
+		{print("Presampling done!");}
+setprop(lw~"tmp/presampling-status", "finished");
+
 
 }
 
@@ -3800,25 +3854,12 @@ var lon = getprop("position/longitude-deg");
 
 var pos = geo.aircraft_position();
 
-props.globals.getNode("/environment/terrain/area/enabled",1).setBoolValue(1);
 
-setprop("/environment/terrain/area/input/analyse-every",200);
-setprop("/environment/terrain/area/input/elevation-histogram-count",20);
-setprop("/environment/terrain/area/input/elevation-histogram-max-ft",10000);
-setprop("/environment/terrain/area/input/elevation-histogram-step-ft",500);
-setprop("/environment/terrain/area/input/heading-deg",0.0);
-setprop("/environment/terrain/area/input/speed-kt",-.0);
-setprop("/environment/terrain/area/input/latitude-deg",lat);
-setprop("/environment/terrain/area/input/longitude-deg",lon);
-setprop("/environment/terrain/area/input/max-samples",1000);
-setprop("/environment/terrain/area/input/max-samples-per-frame",20);
-setprop("/environment/terrain/area/input/orientation-deg",0);
-setprop("/environment/terrain/area/input/radius-m",40000);
+setprop("/environment/terrain/area[0]/input/latitude-deg", lat );
+setprop("/environment/terrain/area[0]/input/longitude-deg", lon );
 
-props.globals.getNode("/environment/terrain/area/input/use-aircraft-position",1).setBoolValue(0);
+setprop("/environment/terrain/area[0]/output/valid", 0 );
 
-
-fgcommand("reinit", props.Node.new({subsystem:"environment"}));
 }
 
 
@@ -4057,7 +4098,7 @@ var ec = "/environment/config/";
 
 # a hash map of the strength for convection associated with terrain types
 
-var landcover_map = {BuiltUpCover: 0.35, Town: 0.35, Freeway:0.35, BarrenCover:0.3, HerbTundraCover: 0.25, GrassCover: 0.2, CropGrassCover: 0.2, EvergreenBroadCover: 0.2, EvergreenNeedleCover: 0.2, Sand: 0.25, Grass: 0.2, Ocean: 0.01, Marsh: 0.05, Lake: 0.01, ShrubCover: 0.15, Landmass: 0.2, CropWoodCover: 0.15, MixedForestCover: 0.1, DryCropPastureCover: 0.25, MixedCropPastureCover: 0.2, IrrCropPastureCover: 0.15, DeciduousBroadCover: 0.1, Bog: 0.05, pa_taxiway : 0.35, pa_tiedown: 0.35, pc_taxiway: 0.35, pc_tiedown: 0.35, Glacier: 0.01, DryLake: 0.3, IntermittentStream: 0.2};
+var landcover_map = {BuiltUpCover: 0.35, Town: 0.35, Freeway:0.35, BarrenCover:0.3, HerbTundraCover: 0.25, GrassCover: 0.2, CropGrassCover: 0.2, EvergreenBroadCover: 0.2, EvergreenNeedleCover: 0.2, Sand: 0.25, Grass: 0.2, Ocean: 0.01, Marsh: 0.05, Lake: 0.01, ShrubCover: 0.15, Landmass: 0.2, CropWoodCover: 0.15, MixedForestCover: 0.1, DryCropPastureCover: 0.25, MixedCropPastureCover: 0.2, IrrCropPastureCover: 0.15, DeciduousBroadCover: 0.1, DeciduousNeedleCover: 0.1, Bog: 0.05, pa_taxiway : 0.35, pa_tiedown: 0.35, pc_taxiway: 0.35, pc_tiedown: 0.35, Glacier: 0.01, DryLake: 0.3, IntermittentStream: 0.2};
 
 # a hash map of average vertical cloud model sizes
 

@@ -35,15 +35,34 @@
   <group>
     <layout>table</layout>
 
+    <checkbox>
+      <name>auto-tower</name>
+      <row>0</row>
+      <col>0</col>
+      <colspan>2</colspan>
+      <label>Always use nearest tower</label>
+      <property>/sim/tower/auto-position</property>
+      <live>true</live>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>auto-tower</object-name>
+      </binding>
+    </checkbox>
+
     <text>
-      <row>0</row><col>0</col>
+      <row>1</row><col>0</col>
       <halign>right</halign>
       <label>Airport ID:</label>
     </text>
     <input>
       <name>airport-id</name>
-      <row>0</row><col>1</col>
+      <row>1</row><col>1</col>
       <property>/sim/tower/airport-id</property>
+	  <enable>
+        <not>
+          <property>/sim/tower/auto-position</property>
+        </not>
+      </enable>
     </input>
     <empty>
       <row>0</row><col>3</col>
@@ -54,7 +73,7 @@
       are not filled in on the COM radio retuning...
       I'm working on that part now.
     <button>
-      <row>1</row><col>0</col>
+      <row>2</row><col>0</col>
       <legend>COM1</legend>
       <binding>
        <command>property-assign</command>
@@ -67,22 +86,22 @@
       </binding>
     </button>
     <text>
-      <row>1</row><col>2</col>
+      <row>2</row><col>2</col>
       <property>/instrumentation/comm[0]/frequencies/selected-mhz</property>
       <label>MHz</label>
       <format>%-0.2f</format>
     </text>
     <text>
-      <row>1</row><col>1</col>
+      <row>2</row><col>1</col>
       <property>/instrumentation/comm[0]/airport-id</property>
     </text>
     <empty>
-      <row>1</row><col>3</col>
+      <row>2</row><col>3</col>
       <stretch>true</stretch>
     </empty>
 
     <button>
-      <row>2</row><col>0</col>
+      <row>3</row><col>0</col>
       <legend>COM2</legend>
       <binding>
        <command>property-assign</command>
@@ -95,24 +114,24 @@
       </binding>
     </button>
     <text>
-      <row>2</row><col>2</col>
+      <row>3</row><col>2</col>
       <property>/instrumentation/comm[1]/frequencies/selected-mhz</property>
       <label>MHz</label>
       <format>%-0.2f</format>
     </text>
     <text>
-      <row>2</row><col>1</col>
+      <row>3</row><col>1</col>
       <property>/instrumentation/comm[1]/airport-id</property>
     </text>
     <empty>
-      <row>2</row><col>3</col>
+      <row>3</row><col>3</col>
       <stretch>true</stretch>
     </empty>
     -->
 
     <button>
       <legend>Preset</legend>
-      <row>3</row><col>0</col>
+      <row>4</row><col>0</col>
       <!--
         Is there a way in the GUI (other than via a dynamic
 	NASAL dialog) to assign text to the widget rather
@@ -120,6 +139,9 @@
 
         The way it is now CANCEL doesn't undo PRESET  :-(
       -->
+      <enable>
+       <not><property>sim/tower/auto-position</property></not>
+      </enable>
       <binding>
        <command>property-assign</command>
        <property>/sim/tower/airport-id</property>
@@ -131,11 +153,11 @@
       </binding>
     </button>
     <text>
-      <row>3</row><col>1</col>
+      <row>4</row><col>1</col>
       <property>/sim/presets/airport-id</property>
     </text>
     <empty>
-      <row>3</row><col>3</col>
+      <row>4</row><col>3</col>
       <stretch>true</stretch>
     </empty>
   </group>

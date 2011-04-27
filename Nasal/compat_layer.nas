@@ -87,11 +87,23 @@ else
 	{result = "yes"; features.terrain_presampling = 1;}
 print("* hard coded terrain presampling:  "~result);
 
+if ((props.globals.getNode("/environment/terrain/area[0]/enabled",1).getBoolValue() == 1) and (features.terrain_presampling ==1))
+	{result = "yes"; features.terrain_presampling_active = 1;}
+else
+	{result = "no"; features.terrain_presampling_active = 0;}
+print("* terrain presampling initialized: "~result);
+
+
 if (props.globals.getNode("/environment/config/enabled", 0) == nil)
 	{result = "no"; features.can_disable_environment = 0;}
 else
 	{result = "yes"; features.can_disable_environment = 1;}
 print("* can disable global weather:      "~result);
+
+#if (features.terrain_presampling_active == 1)
+#	{
+#	setlistener("/environment/terrain/area[0]/output/valid", func {local_weather.manage_hardcoded_presampling(); });
+#	}
 
 print("Compatibility layer: tests done.");
 });

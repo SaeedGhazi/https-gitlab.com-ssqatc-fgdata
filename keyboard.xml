@@ -1125,19 +1125,20 @@ top down before the key bindings are parsed.
      var path = getprop("/sim/paths/screenshot-last");
      var threading = getprop("/sim/rendering/multithreading-mode");
      var message = "";
-     var delay = 3;
-     if (success) {
-         message = "Screenshot written to '" ~ path ~ "'";
-         delay = 2;
-     } else {
-         message = "Error writing screenshot '" ~ path ~ "'";
-         delay = 5;
-     }
-     if ( threading != nil and threading != "" and threading != "SingleThreaded" ) {
+     if ( threading != nil and threading != "" and
+          threading != "SingleThreaded" )
+    {
          message = "Threading model must be SingleThreaded (or not defined) for snapshots to work.";
-         delay = 7;
+         gui.popupTip(message, 600, { button: { legend: "Ok", default: 1, binding: { command: "dialog-close" }}});
+     } else {
+         if (success) {
+             message = "Screenshot written to '" ~ path ~ "'";
+             gui.popupTip(message, 2);
+         } else {
+             message = "Error writing screenshot '" ~ path ~ "'";
+             gui.popupTip(message, 600, { button: { legend: "Ok", default: 1, binding: { command: "dialog-close" }}});
+         }
      }
-     gui.popupTip(message, delay);
    </script>
   </binding>
   <mod-shift>

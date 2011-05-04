@@ -1124,20 +1124,13 @@ top down before the key bindings are parsed.
      var success = fgcommand("screen-capture");
      var path = getprop("/sim/paths/screenshot-last");
      var threading = getprop("/sim/rendering/multithreading-mode");
-     var message = "";
-     if ( threading != nil and threading != "" and
-          threading != "SingleThreaded" )
-    {
-         message = "Threading model must be SingleThreaded (or not defined) for snapshots to work.";
-         gui.popupTip(message, 600, { button: { legend: "Ok", default: 1, binding: { command: "dialog-close" }}});
+     var button = { button: { legend: "Ok", default: 1, binding: { command: "dialog-close" }}};
+     if (threading and threading != "SingleThreaded") {
+         gui.popupTip("Threading model must be SingleThreaded (or not defined) for snapshots to work.", 600, button);
+     } elsif (success) {
+         gui.popupTip("Screenshot written to '" ~ path ~ "'", 2);
      } else {
-         if (success) {
-             message = "Screenshot written to '" ~ path ~ "'";
-             gui.popupTip(message, 2);
-         } else {
-             message = "Error writing screenshot '" ~ path ~ "'";
-             gui.popupTip(message, 600, { button: { legend: "Ok", default: 1, binding: { command: "dialog-close" }}});
-         }
+         gui.popupTip("Error writing screenshot '" ~ path ~ "'", 600, button);
      }
    </script>
   </binding>

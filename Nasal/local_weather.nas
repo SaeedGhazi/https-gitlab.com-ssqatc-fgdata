@@ -415,8 +415,6 @@ return f_slow;
 
 var interpolation_loop = func {
 
-var iNode = props.globals.getNode(lw~"interpolation", 1);
-var cNode = props.globals.getNode(lw~"current", 1);
 var viewpos = geo.aircraft_position();
 
 var sum_alt = 0.0;
@@ -427,6 +425,15 @@ var sum_D = 0.0;
 var sum_norm = 0.0;
 
 var vis_before = getprop(lwi~"visibility-m");
+
+# if applicable, do some work for fps sampling
+
+if (fps_control_flag == 1)
+	{
+	fps_samples = fps_samples +1;
+	fps_sum = fps_sum + getprop("/sim/frame-rate");
+	}
+
 
 # determine at which distance we no longer keep an interpolation point, needs to be larger for METAR since points are more scarce
 
@@ -512,9 +519,9 @@ var alt1 = weather_dynamics.tile_convective_altitude[current_tile_index -1];
 var alt2 = alt1 + 1500.0;
 
 
-var inc1 = 0.2;
+var inc1 = 0.1;
 var inc2 = 5.0;
-var inc3 = 1.0;
+var inc3 = 0.5;
 
 var alt_above_mean = altitude - current_mean_terrain_elevation;
 
@@ -547,41 +554,58 @@ setprop(lwi~"turbulence",0.0);
 
 # now check if an effect volume writes the property and set only if not
 
-flag = props.globals.getNode("local-weather/effect-volumes/number-active-vis").getValue();
-if ((flag ==0) and (vis > 0.0))
+#flag = props.globals.getNode("local-weather/effect-volumes/number-active-vis").getValue();
+flag = getprop("local-weather/effect-volumes/number-active-vis");
+
+if ((flag ==0) and (vis > 0.0) and (getprop(lw~"lift-loop-flag") == 0))
 	{
-	cNode.getNode("visibility-m").setValue(vis);
+	#cNode.getNode("visibility-m").setValue(vis);
+	setprop(lw~"current/visibility-m",vis);
 	compat_layer.setVisibility(vis);
 	}
 
-flag = props.globals.getNode("local-weather/effect-volumes/number-active-turb").getValue();
+#flag = props.globals.getNode("local-weather/effect-volumes/number-active-turb").getValue();
+flag = getprop("local-weather/effect-volumes/number-active-turb");
+
 if ((flag ==0))
 	{
-	cNode.getNode("turbulence").setValue(0.0);
+	#cNode.getNode("turbulence").setValue(0.0);
+	setprop(lw~"current/turbulence",0.0);		
 	compat_layer.setTurbulence(0.0);
 	}
 
 
-flag = props.globals.getNode("local-weather/effect-volumes/number-active-lift").getValue();
+#flag = props.globals.getNode("local-weather/effect-volumes/number-active-lift").getValue();
+flag = getprop("local-weather/effect-volumes/number-active-lift");
+
 if (flag ==0) 
 	{
-	cNode.getNode("thermal-lift").setValue(0.0);
+	#cNode.getNode("thermal-lift").setValue(0.0);
+	setprop(lw~"current/thermal-lift",0.0);
 	}
 
 # no need to check for these, as they are not modelled in effect volumes
 
-cNode.getNode("temperature-degc",1).setValue(T);
+#cNode.getNode("temperature-degc",1).setValue(T);
+setprop(lw~"current/temperature-degc",T);
 compat_layer.setTemperature(T);
 
-cNode.getNode("dewpoint-degc",1).setValue(D);
+#cNode.getNode("dewpoint-degc",1).setValue(D);
+setprop(lw~"current/dewpoint-degc", D);
 compat_layer.setDewpoint(D);
 
-if (p>0.0) {cNode.getNode("pressure-sea-level-inhg",1).setValue(p); compat_layer.setPressure(p);}
+if (p>0.0) 
+	{
+	#cNode.getNode("pressure-sea-level-inhg",1).setValue(p); 
+	setprop(lw~"current/pressure-sea-level-inhg",p);
+	compat_layer.setPressure(p);
+	}
 
 
 # now determine the local wind 
 
-var tile_index = props.globals.getNode(lw~"tiles").getChild("tile",4).getNode("tile-index").getValue();
+#var tile_index = props.globals.getNode(lw~"tiles").getChild("tile",4).getNode("tile-index").getValue();
+var tile_index = getprop(lw~"tiles/tile[4]/tile-index");
 
 if (wind_model_flag ==1) # constant
 	{
@@ -669,21 +693,33 @@ if (gust_frequency > 0.0)
 	var gust_relative_strength = getprop(lw~"tmp/gust-relative-strength");
 	var gust_angvar = getprop(lw~"tmp/gust-angular-variation-deg");
 	
+	var winddir_last = getprop(lwi~"wind-from-heading-deg");
+
 	var alt_scaling_factor = 1.2 * windspeed / 10.0;
 	if (alt_scaling_factor < 1.0) {alt_scaling_factor = 1.0;}
 
 	# expected mean number of gusts in time interval (should be < 1)
 	var p_gust = gust_frequency * interpolation_loop_time;
 
+	winddir_change = 0.0;
+
 	if (rand() < p_gust) # we change the offsets for windspeed and direction
 		{
 		var alt_fact = 1.0 - altitude_agl/(boundary_alt * alt_scaling_factor);
 		if (alt_fact < 0.0) {alt_fact = 0.0};
 		windspeed_multiplier =  (1.0 + ((rand()) * gust_relative_strength * alt_fact));
-		winddir_change = alt_fact * (1.0 - 2.0 * rand() * gust_angvar);
+		winddir_change = alt_fact * (1.0 - 2.0 * rand()) * gust_angvar;
+		winddir_change = winddir_change * 0.2; # Markov chain parameter, max. change per frame is 1/5 
+		
+		# if the Markov chain reaches the boundary, reflect
+
+		#print("Winddir: ", winddir, " winddir_last: ", winddir_last, " winddir_change: ", winddir_change);
+		if (weather_tile_management.relangle(winddir_last + winddir_change, winddir) > gust_angvar)
+			{winddir_change = -winddir_change;}
+		
 		}
 	windspeed_current = windspeed_current *  windspeed_multiplier;
-	winddir = winddir + winddir_change;
+	winddir = winddir_last + winddir_change;
 	}
 
 	
@@ -692,13 +728,17 @@ if (gust_frequency > 0.0)
 
 compat_layer.setWindSmoothly(winddir, windspeed_current);
 
-iNode.getNode("wind-from-heading-deg").setValue(winddir);
-iNode.getNode("wind-speed-kt").setValue(windspeed_current);
+setprop(lwi~"wind-from-heading-deg", winddir);
+setprop(lwi~"wind-speed-kt",windspeed_current);
 
-cNode.getNode("wind-from-heading-deg").setValue(winddir);
-cNode.getNode("wind-speed-kt").setValue(windspeed_current);
+setprop(lw~"current/wind-from-heading-deg",winddir);
+setprop(lw~"current/wind-speed-kt",windspeed_current);
 
+#iNode.getNode("wind-from-heading-deg").setValue(winddir);
+#iNode.getNode("wind-speed-kt").setValue(windspeed_current);
 
+#cNode.getNode("wind-from-heading-deg").setValue(winddir);
+#cNode.getNode("wind-speed-kt").setValue(windspeed_current);
 
 
 if (getprop(lw~"interpolation-loop-flag") ==1) {settimer(interpolation_loop, interpolation_loop_time);}
@@ -776,6 +816,26 @@ if (getprop(lw~"wave-loop-flag") ==1)
 	{
 	lift = lift + getprop(lw~"current/wave-lift");
 	}
+
+# compute a reduction in visibility when entering the cloudbase
+
+var vis = getprop(lw~"interpolation/visibility-m");
+
+if (alt > 0.9 * thermal.height)
+	{
+	var visibility_reduction = math.pow((alt - 0.9 * thermal.height)/(0.2 * thermal.height),0.1);
+	visibility_reduction = visibility_reduction * (1.0 - math.pow(d/(0.8*thermal.radius),14));
+
+	if (visibility_reduction > 1.0) {visibility_reduction = 1.0;} # this shouldn't ever happen
+	if (visibility_reduction < 0.0) {visibility_reduction = 0.0;} 
+	vis = vis * (1.0 - 0.98 * visibility_reduction);
+
+	}
+
+setprop(lw~"current/visibility-m",vis);
+compat_layer.setVisibility(vis);
+
+
 
 
 setprop(lw~"current/thermal-lift",lift);
@@ -1732,7 +1792,12 @@ settimer ( func {
 
 setprop(lw~"tmp/presampling-status", "idle");
 
+# reset the random store
+
+weather_tiles.rnd_store = rand();
+
 # indicate that we are no longer running
+
 
 local_weather_running_flag = 0;
 
@@ -1846,6 +1911,8 @@ var create_cumosys = func (blat, blon, balt, nc, size) {
 if (detailed_clouds_flag == 1) 
 	{nc = int(0.7 * nc);}
 
+nc = int(nc / cumulus_efficiency_factor);
+
 if (thread_flag ==  1)
 	{setprop(lw~"tmp/convective-status", "computing");
 	cumulus_loop(blat, blon, balt, nc, size);}
@@ -1861,7 +1928,7 @@ else
 
 var cumulus_loop = func (blat, blon, balt, nc, size) {
 
-var n = 25;
+var n = int(25/cumulus_efficiency_factor);
 
 if (nc < 0) 
 	{
@@ -1951,7 +2018,7 @@ while (i < nc) {
 
 	# then decide if the thermal energy at the spot generates an updraft and a cloud
 
-	if (rand() < p) # we decide to place a cloud at this spot
+	if (rand() < (p * cumulus_efficiency_factor)) # we decide to place a cloud at this spot
 		{
 		strength = (1.5 * rand() + (2.0 * p)) * t_factor2; # the strength of thermal activity at the spot
 		if (strength > 1.0)  
@@ -2105,7 +2172,7 @@ while (i < nc) {
 
 	# check if to place a cloud with weight sqrt(p), the lifetime gets another sqrt(p) factor
 	
-	if (rand() > math.sqrt(p))
+	if (rand() > math.sqrt(p * cumulus_efficiency_factor))
 		{i=i+1; continue;}
 
 
@@ -3168,8 +3235,8 @@ var set_wind_ipoint_metar = func (lat, lon, d0, v0) {
 if (lat >0.0) {var dsign = -1.0;} else {var dsign = 1.0;} 
 
 
-var v1 = v0 * (1.0 + rand() * 0.2);
-var d1 = d0 + dsign * 3.0 * rand();
+var v1 = v0 * (1.0 + rand() * 0.1);
+var d1 = d0 + dsign * 2.0 * rand();
 
 var v2 = v0 * (1.2 + rand() * 0.2);
 var d2 = d0 + dsign * (3.0 * rand() + 2.0);
@@ -3225,11 +3292,11 @@ if (getprop(lw~"config/generate-thermal-lift-flag") ==1) {generate_thermal_lift_
 
 thread_flag = getprop(lw~"config/thread-flag");
 dynamics_flag = getprop(lw~"config/dynamics-flag");
-presampling_flag = getprop(lw~"tmp/presampling-flag");
+presampling_flag = getprop(lw~"config/presampling-flag");
 detailed_clouds_flag = getprop(lw~"config/detailed-clouds-flag");
 dynamical_convection_flag = getprop(lw~"config/dynamical-convection-flag");
 debug_output_flag = getprop(lw~"config/debug-output-flag");
-
+fps_control_flag = getprop(lw~"config/fps-control-flag");
 
 }
 
@@ -3825,8 +3892,12 @@ setprop(lw~"METAR/layer[3]/cover-oct",0);
 setprop(lw~"METAR/layer[3]/alt-agl-ft", 20000.0);
 setprop(lw~"METAR/available-flag",1);
 
+# set initial value for stored random number for small-scale cloud patterns
 
-# set listener for worker threads
+weather_tiles.rnd_store = rand();
+
+
+# set listeners
 
 setlistener(lw~"tmp/thread-status", func {var s = size(clouds_path); compat_layer.create_cloud_array(s, clouds_path, clouds_lat, clouds_lon, clouds_alt, clouds_orientation); });
 setlistener(lw~"tmp/convective-status", func {var s = size(clouds_path); compat_layer.create_cloud_array(s, clouds_path, clouds_lat, clouds_lon, clouds_alt, clouds_orientation); });
@@ -3840,6 +3911,12 @@ setlistener(lw~"config/clouds-in-dynamics-loop", func {weather_dynamics.max_clou
 
 setlistener(lw~"config/clouds-visible-range-m", func {weather_tile_management.cloud_view_distance = getprop(lw~"config/clouds-visible-range-m");});
 setlistener(lw~"config/distance-to-load-tile-m", func {setprop(lw~"config/distance-to-remove-tile-m",getprop(lw~"config/distance-to-load-tile-m") + 500.0);});
+
+setlistener(lw~"config/fps-control-flag", func {fps_control_flag = getprop(lw~"config/fps-control-flag");});
+setlistener(lw~"config/target-framerate", func {target_framerate = getprop(lw~"config/target-framerate");});
+
+setlistener(lw~"config/small-scale-persistence", func {weather_tiles.small_scale_persistence = getprop(lw~"config/small-scale-persistence");});
+
 }
 
 
@@ -4152,12 +4229,10 @@ var windIpointArray = [];
 
 var wind_model_flag = 1;
 
-# a global determining the relative amount of different textures in detailed convective clouds
+# globals governing properties of the Cumulus system
 
 var convective_texture_mix = 0.0;
-
-# a global keeping track of the mean cloud altitude when building a Cumulus from individual cloudlets
-
+var cumulus_efficiency_factor = 1.0;
 var cloud_mean_altitude = 0.0;
 
 # globals keeping track of the lifetime when building a Cumulus from individual cloudlets
@@ -4181,69 +4256,76 @@ var dynamical_convection_flag = 1;
 var debug_output_flag = 1;
 var metar_flag = 0;
 var local_weather_running_flag = 0;
+var fps_control_flag = 1;
+
+# globals for framerate controlled cloud management
+
+var fps_average = 0.0;
+var fps_samples = 0;
+var fps_sum = 0.0;
+var target_framerate = 25.0;
 
 # set all sorts of default properties for the menu
 
-setprop(lw~"tmp/cloud-type", "Altocumulus");
-setprop(lw~"tmp/alt", 12000.0);
-setprop(lw~"tmp/nx",5);
-setprop(lw~"tmp/xoffset",800.0);
-setprop(lw~"tmp/xedge", 0.2);
-setprop(lw~"tmp/ny",15);
-setprop(lw~"tmp/yoffset",800.0);
-setprop(lw~"tmp/yedge", 0.2);
-setprop(lw~"tmp/dir",0.0);
-setprop(lw~"tmp/tri", 1.0);
-setprop(lw~"tmp/rnd-pos-x",400.0);
-setprop(lw~"tmp/rnd-pos-y",400.0);
-setprop(lw~"tmp/rnd-alt", 300.0);
-setprop(lw~"tmp/conv-strength", 1);
-setprop(lw~"tmp/conv-size", 15.0);
-setprop(lw~"tmp/conv-alt", 2000.0);
-setprop(lw~"tmp/bar-alt", 3500.0);
-setprop(lw~"tmp/bar-n", 150.0);
-setprop(lw~"tmp/bar-dir", 0.0);
-setprop(lw~"tmp/bar-dist", 5.0);
-setprop(lw~"tmp/bar-size", 10.0);
-setprop(lw~"tmp/scloud-type", "Altocumulus");
-setprop(lw~"tmp/scloud-subtype", "small");
+# setprop(lw~"tmp/cloud-type", "Altocumulus");
+# setprop(lw~"tmp/alt", 12000.0);
+# setprop(lw~"tmp/nx",5);
+# setprop(lw~"tmp/xoffset",800.0);
+# setprop(lw~"tmp/xedge", 0.2);
+# setprop(lw~"tmp/ny",15);
+# setprop(lw~"tmp/yoffset",800.0);
+# setprop(lw~"tmp/yedge", 0.2);
+# setprop(lw~"tmp/dir",0.0);
+# setprop(lw~"tmp/tri", 1.0);
+# setprop(lw~"tmp/rnd-pos-x",400.0);
+# setprop(lw~"tmp/rnd-pos-y",400.0);
+# setprop(lw~"tmp/rnd-alt", 300.0);
+# setprop(lw~"tmp/conv-strength", 1);
+# setprop(lw~"tmp/conv-size", 15.0);
+# setprop(lw~"tmp/conv-alt", 2000.0);
+# setprop(lw~"tmp/bar-alt", 3500.0);
+# setprop(lw~"tmp/bar-n", 150.0);
+# setprop(lw~"tmp/bar-dir", 0.0);
+# setprop(lw~"tmp/bar-dist", 5.0);
+# setprop(lw~"tmp/bar-size", 10.0);
+# setprop(lw~"tmp/scloud-type", "Altocumulus");
+# setprop(lw~"tmp/scloud-subtype", "small");
 setprop(lw~"tmp/scloud-lat",getprop("position/latitude-deg"));
 setprop(lw~"tmp/scloud-lon",getprop("position/longitude-deg"));
-setprop(lw~"tmp/scloud-alt", 5000.0);
-setprop(lw~"tmp/scloud-dir", 0.0);
-setprop(lw~"tmp/layer-type","Nimbus");
-setprop(lw~"tmp/layer-rx",10.0);
-setprop(lw~"tmp/layer-ry",10.0);
-setprop(lw~"tmp/layer-phi",0.0);
-setprop(lw~"tmp/layer-alt",3000.0);
-setprop(lw~"tmp/layer-thickness",500.0);
-setprop(lw~"tmp/layer-density",1.0);
-setprop(lw~"tmp/layer-edge",0.2);
-setprop(lw~"tmp/layer-rain-flag",1);
-setprop(lw~"tmp/layer-rain-density",1.0);
-setprop(lw~"tmp/box-x-m",600.0);
-setprop(lw~"tmp/box-y-m",600.0);
-setprop(lw~"tmp/box-alt-ft",300.0);
-setprop(lw~"tmp/box-n",10);
-setprop(lw~"tmp/box-core-fraction",0.4);
-setprop(lw~"tmp/box-core-offset",0.2);
-setprop(lw~"tmp/box-core-height",1.4);
-setprop(lw~"tmp/box-core-n",3);
-setprop(lw~"tmp/box-bottom-fraction",0.9);
-setprop(lw~"tmp/box-bottom-thickness",0.5);
-setprop(lw~"tmp/box-bottom-n",12);
-setprop(lw~"tmp/tile-type", "High-pressure");
-setprop(lw~"tmp/tile-orientation-deg", 260.0);
-setprop(lw~"tmp/windspeed-kt", 8.0);
-setprop(lw~"tmp/gust-frequency-hz", 0.0);
-setprop(lw~"tmp/gust-relative-strength",0.0);
-setprop(lw~"tmp/gust-angular-variation-deg",0.0);
-setprop(lw~"tmp/tile-alt-offset-ft", 0.0);
+# setprop(lw~"tmp/scloud-alt", 5000.0);
+# setprop(lw~"tmp/scloud-dir", 0.0);
+# setprop(lw~"tmp/layer-type","Nimbus");
+# setprop(lw~"tmp/layer-rx",10.0);
+# setprop(lw~"tmp/layer-ry",10.0);
+# setprop(lw~"tmp/layer-phi",0.0);
+# setprop(lw~"tmp/layer-alt",3000.0);
+# setprop(lw~"tmp/layer-thickness",500.0);
+# setprop(lw~"tmp/layer-density",1.0);
+# setprop(lw~"tmp/layer-edge",0.2);
+# setprop(lw~"tmp/layer-rain-flag",1);
+# setprop(lw~"tmp/layer-rain-density",1.0);
+# setprop(lw~"tmp/box-x-m",600.0);
+# setprop(lw~"tmp/box-y-m",600.0);
+# setprop(lw~"tmp/box-alt-ft",300.0);
+# setprop(lw~"tmp/box-n",10);
+# setprop(lw~"tmp/box-core-fraction",0.4);
+# setprop(lw~"tmp/box-core-offset",0.2);
+# setprop(lw~"tmp/box-core-height",1.4);
+# setprop(lw~"tmp/box-core-n",3);
+# setprop(lw~"tmp/box-bottom-fraction",0.9);
+# setprop(lw~"tmp/box-bottom-thickness",0.5);
+# setprop(lw~"tmp/box-bottom-n",12);
+# setprop(lw~"tmp/tile-type", "High-pressure");
+# setprop(lw~"tmp/tile-orientation-deg", 260.0);
+# setprop(lw~"tmp/windspeed-kt", 8.0);
+# setprop(lw~"tmp/gust-frequency-hz", 0.0);
+# setprop(lw~"tmp/gust-relative-strength",0.0);
+# setprop(lw~"tmp/gust-angular-variation-deg",0.0);
+# setprop(lw~"tmp/tile-alt-offset-ft", 0.0);
 setprop(lw~"tmp/tile-alt-median-ft",0.0);
 setprop(lw~"tmp/tile-alt-min-ft",0.0);
-setprop(lw~"tmp/tile-management", "realistic weather");
-setprop(lw~"tmp/presampling-flag", 1);
-setprop(lw~"tmp/asymmetric-tile-loading-flag", 0);
+# setprop(lw~"tmp/tile-management", "realistic weather");
+# setprop(lw~"tmp/asymmetric-tile-loading-flag", 0);
 setprop(lw~"tmp/last-reading-pos-del",0);
 setprop(lw~"tmp/last-reading-pos-mod",0);
 setprop(lw~"tmp/thread-status", "idle");
@@ -4251,47 +4333,48 @@ setprop(lw~"tmp/convective-status", "idle");
 setprop(lw~"tmp/presampling-status", "idle");
 setprop(lw~"tmp/buffer-status", "idle");
 setprop(lw~"tmp/buffer-tile-index", 0);
-setprop(lw~"tmp/FL0-wind-from-heading-deg",260.0);
-setprop(lw~"tmp/FL0-windspeed-kt",8.0);
-setprop(lw~"tmp/FL50-wind-from-heading-deg",262.0);
-setprop(lw~"tmp/FL50-windspeed-kt",11.0);
-setprop(lw~"tmp/FL100-wind-from-heading-deg",264.0);
-setprop(lw~"tmp/FL100-windspeed-kt",16.0);
-setprop(lw~"tmp/FL180-wind-from-heading-deg",265.0);
-setprop(lw~"tmp/FL180-windspeed-kt",24.0);
-setprop(lw~"tmp/FL240-wind-from-heading-deg",269.0);
-setprop(lw~"tmp/FL240-windspeed-kt",35.0);
-setprop(lw~"tmp/FL300-wind-from-heading-deg",273.0);
-setprop(lw~"tmp/FL300-windspeed-kt",45.0);
-setprop(lw~"tmp/FL340-wind-from-heading-deg",274.0);
-setprop(lw~"tmp/FL340-windspeed-kt",50.0);
-setprop(lw~"tmp/FL390-wind-from-heading-deg",273.0);
-setprop(lw~"tmp/FL390-windspeed-kt",56.0);
-setprop(lw~"tmp/FL450-wind-from-heading-deg",272.0);
-setprop(lw~"tmp/FL450-windspeed-kt",65.0);
+#setprop(lw~"tmp/FL0-wind-from-heading-deg",260.0);
+#setprop(lw~"tmp/FL0-windspeed-kt",8.0);
+#setprop(lw~"tmp/FL50-wind-from-heading-deg",262.0);
+#setprop(lw~"tmp/FL50-windspeed-kt",11.0);
+#setprop(lw~"tmp/FL100-wind-from-heading-deg",264.0);
+#setprop(lw~"tmp/FL100-windspeed-kt",16.0);
+#setprop(lw~"tmp/FL180-wind-from-heading-deg",265.0);
+#setprop(lw~"tmp/FL180-windspeed-kt",24.0);
+#setprop(lw~"tmp/FL240-wind-from-heading-deg",269.0);
+#setprop(lw~"tmp/FL240-windspeed-kt",35.0);
+#setprop(lw~"tmp/FL300-wind-from-heading-deg",273.0);
+#setprop(lw~"tmp/FL300-windspeed-kt",45.0);
+#setprop(lw~"tmp/FL340-wind-from-heading-deg",274.0);
+#setprop(lw~"tmp/FL340-windspeed-kt",50.0);
+#setprop(lw~"tmp/FL390-wind-from-heading-deg",273.0);
+#setprop(lw~"tmp/FL390-windspeed-kt",56.0);
+#setprop(lw~"tmp/FL450-wind-from-heading-deg",272.0);
+#setprop(lw~"tmp/FL450-windspeed-kt",65.0);
 setprop(lw~"tmp/ipoint-latitude-deg",getprop("position/latitude-deg"));
 setprop(lw~"tmp/ipoint-longitude-deg",getprop("position/longitude-deg"));
 
 
 # set config values
 
-setprop(lw~"config/distance-to-load-tile-m",39000.0);
-setprop(lw~"config/distance-to-remove-tile-m",39500.0);
-setprop(lw~"config/detailed-clouds-flag",1);
-setprop(lw~"config/dynamics-flag",0);
-setprop(lw~"config/thermal-properties",1.0);
-setprop(lw~"config/wind-model","constant");
-setprop(lw~"config/buffer-flag",1);
-setprop(lw~"config/asymmetric-reduction",0.7);
-setprop(lw~"config/clouds-visible-range-m",30000.0);
-setprop(lw~"config/asymmetric-buffering-flag",0);
-setprop(lw~"config/asymmetric-buffering-reduction",0.3);
-setprop(lw~"config/asymmetric-buffering-angle-deg",90.0);
-setprop(lw~"config/clouds-in-dynamics-loop",250);
-setprop(lw~"config/debug-output-flag",0);
-setprop(lw~"config/generate-thermal-lift-flag", 0);
-setprop(lw~"config/dynamical-convection-flag", 0);
-setprop(lw~"config/thread-flag", 1);
+# setprop(lw~"config/distance-to-load-tile-m",39000.0);
+# setprop(lw~"config/distance-to-remove-tile-m",39500.0);
+# setprop(lw~"config/detailed-clouds-flag",1);
+# setprop(lw~"config/dynamics-flag",0);
+# setprop(lw~"config/thermal-properties",1.0);
+# setprop(lw~"config/wind-model","constant");
+# setprop(lw~"config/buffer-flag",1);
+# setprop(lw~"config/asymmetric-reduction",0.7);
+# setprop(lw~"config/clouds-visible-range-m",30000.0);
+# setprop(lw~"config/asymmetric-buffering-flag",0);
+# setprop(lw~"config/asymmetric-buffering-reduction",0.3);
+# setprop(lw~"config/asymmetric-buffering-angle-deg",90.0);
+# setprop(lw~"config/clouds-in-dynamics-loop",250);
+# setprop(lw~"config/debug-output-flag",0);
+# setprop(lw~"config/generate-thermal-lift-flag", 0);
+# setprop(lw~"config/dynamical-convection-flag", 0);
+# setprop(lw~"config/thread-flag", 1);
+# setprop(lw~"config/presampling-flag", 1);
 
 # set the default loop flags to loops inactive
 

@@ -83,8 +83,8 @@ property arguments.
 <lat-deg>    - Latitude t place the cloud, in degrees (default 0)
 <alt-ft>     - Altitude to place the cloud, relative to the layer (!) in ft
                (default 0)
-
-TODO: Add offset arguments for consistency with add-cloud.
+<x-offset-m> - Offset in m from the lon-deg. +ve is south (default 0)
+<y-offset-m> - Offset in m from the lat-deg. +ve is east (default 0)
 
 Deleting Individual Clouds
 ===========================

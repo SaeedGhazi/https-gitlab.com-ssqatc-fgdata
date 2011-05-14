@@ -87,6 +87,15 @@
       </binding>
     </combo>
 
+    <checkbox>
+      <row>2</row><col>1</col>
+      <halign>left</halign>
+      <property>/sim/replay/looped</property>
+      <label>Looped replay</label>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
   </group>
 
   <hrule/>

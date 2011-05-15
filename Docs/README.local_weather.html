@@ -7,7 +7,7 @@
 
 <body>
 
-<h1>Local Weather Package - v1.0</h1>
+<h1>Local Weather Package - v1.1</h1>
 
 <h2>1. Introduction</h2>
 
@@ -15,19 +15,20 @@ The aim of a local weather system is to simulate weather phenomena tied to speci
 
 This is in contrast to the current (v.2.0.0) global weather system of Flightgear where weather changes affect the weather everywhere in the simulated world and are (with few exceptions) not tied to specific locations. In such a system, it is impossible to observe e.g. the approach of a rainfront while flying in sunshine.<p>
 
-The local weather package aims to provide the functionality to simulate such local phenomena. In version 1.0, the package supplies various cloud placement algorithms, as well as local control over most major weather parameters (wind, visibility, pressure, temperature, rain, snow, thermal lift, turbulence...) through interpolation routines and effect volumes. The dynamics of the different systems is tied together - for instance clouds and weather effects drift in the specified wind field. The package also contains a fairly detailed algorithm to generate convective clouds and thermals with a realistic distribution over the various terrain types. There is a simulation of the interaction of the convective cloud system with the terrain as a function of time. Clouds drifting in the wind flow over obstacles, i.e. they change their altitude dynamically. Convection is implemented with a life cycle model of Cumulus clouds - they are generated, evolve for a given lifetime dependent on the underlying terrain and decay at the end of their life cycle. Thermals associated with the clouds follow the same pattern. In particular, in the presence of wind favourable spots for convection generate 'alleys' of dense cloud cover downwind, or thermals and clouds generated over land decay rapidly once they reach open water.<p>
+The local weather package aims to provide the functionality to simulate such local phenomena. In version 1.1, the package supplies various cloud placement algorithms, as well as local control over most major weather parameters (wind, visibility, pressure, temperature, rain, snow, thermal lift, turbulence...) through interpolation routines and effect volumes. The dynamics of the different systems is tied together - for instance clouds and weather effects drift in the specified wind field. The package also contains a fairly detailed algorithm to generate convective clouds and thermals with a realistic distribution over the various terrain types. There is a simulation of the interaction of the convective cloud system with the terrain as a function of time. Clouds drifting in the wind flow over obstacles, i.e. they change their altitude dynamically. Convection is implemented with a life cycle model of Cumulus clouds - they are generated, evolve for a given lifetime dependent on the underlying terrain and decay at the end of their life cycle. Thermals associated with the clouds follow the same pattern. In particular, in the presence of wind favourable spots for convection generate 'alleys' of dense cloud cover downwind, or thermals and clouds generated over land decay rapidly once they reach open water.<p>
 
 For long-range flights, the system provides an offline weather system with plausible transitions between different large-scale weather patterns like fronts and low and high pressure areas, as well as the optional use of live METAR data. <p>
 
 
 <h2>2. Installation</h2>
 
-The package needs to be unpacked in the Flightgear root directory. It writes content into the <i>Nasal/, gui/, gui/dialogs/, Shaders, Effects/, Docs/</i>, and <i>Models/Weather/</i> subdirectories. The installation does not overwrite any of the default Flightgear files, but to be accessible from the menu for Flightgear 2.0.0, one must copy <i>gui/menubar.xml.alt</i> to the default <i>menubar.xml</i> or copy the three lines of the environemnt menu calling <i>local_weather</i>, <i>local_weather_tiles</i> and <i>local_weather_config</i> into the default file. More recent versions of Flightgear already provide the necessary menu items.<p>
+The package needs to be unpacked in the Flightgear root directory. It writes content into the <i>Nasal/, gui/, gui/dialogs/, Shaders, Effects/, Docs/</i>, <i>Environment/</i> and <i>Models/Weather/</i> subdirectories. The installation does not overwrite any of the default Flightgear files, but to be accessible from the menu for Flightgear 2.0.0, one must copy <i>gui/menubar.xml.alt</i> to the default <i>menubar.xml</i> or copy the three lines of the environemnt menu calling <i>local_weather</i>, <i>local_weather_tiles</i> and <i>local_weather_config</i> into the default file. More recent versions of Flightgear already provide the necessary menu items. In order to read in the default menu entries, the line  <b>&#60;local-weather include="Environment/local-weather-defaults.xml"/&#62;</b> needs to be added to the file <i>preferences.xml</i>.<p>
 
-This adds the items <i>Local Weather</i>, <i>Local Weather Tiles</i> and <i>Local Weather Config</i>  to the <i>Environment</i> menu when Flightgear is up. Most of the basic functionality is contained in <i>local_weather.nas</i> which is loaded at startup and identifies itself with a message.<p>
+This adds the items <i>Local Weather</i>, <i>Local Weather Tiles</i> and <i>Local Weather Config</i>  to the <i>Environment</i> menu when Flightgear is up. Most of the basic functionality is contained in <i>local_weather.nas</i> which is loaded at startup and identifies itself with a message. A compatibility layer (<i>compat_layer.nas</i>) tests for hard-coded support and ensures that, dependent on the version, hard-coded or Nasal-coded fallback functions are used.<p>
 
 Unless asked to do so from the menu, local weather does <b>not</b> run any process in the background. Upon loading, the package does not set any properties already existing, but only generates properties necessary for the menu entries in its own subdirectory <i>/local-weather/</i> in the tree. The package also does a features check on startup if particular functions are available in hard-coded form. If the features are not present, the package will largely still function properly using slower Nasal fallback code.<p>
 
+In order to use the hard-coded terrain presampling routines, it is currently necessary to add the line <b> --prop:/environment/terrain/area[0]/enabled=1</b> to the Flightgear commandline. If this is not done, the system will use the slower fallback routines.<p>
 
 <h2>3. Functionality</h2>
 
@@ -163,7 +164,7 @@ The following pictures show possible results of tile setups 'High-pressure-borde
 <h3>Performance settings</h3>
 
 
-The performance setting menu is available from the main menubar. It controls the allocation of system resources to the various tasks.<p>
+The performance setting menu is available from the main menubar. It controls the allocation of system resources to the various tasks, as well as the behaviour of the offline weather system.<p>
 
 <center>
 <img src="menu4.jpg">
@@ -179,9 +180,15 @@ From this, it is apparent that the two ranges should not be drastically differen
 
 There are additional options to do asymmetric buffering, i.e. to 'cut' out a wedge in the rear of the aircraft in which the tile creation radius or the cloud visibility radius are lower.  For example, setting the buffering ratio to 0.2 and the angle to 180 degrees corresponds to a very agressive buffering in which clouds in the rear hemisphere of the aircraft are almost absent and shown only to 20% of the set distance. This may increase performance by 20-30%, but only in straight flight - in fast turns, lots of clouds have to be shuffled from the buffer into the scenery and back, which is actually slower than never trying to cut a wedge at all. Also, agressive asymmetric buffering is not nice in external views as the reference is always the aircraft course.<p>
 
-The last option controls the amout of resources allocated to making clouds drift in the wind if dynamical weather is on. In order to avoid freezes, the weather dynamics system processes only a fixed number of clouds per frame inside the field of view. That means that faraway clouds do not necessarily move even with dynamical weather on. The slider indirectly controls the distance out to which clouds are being processed.<p>
+The buffering control can also optionally be tied to a target framerate. In this case, the visible range set with the slider is ignored and a control loop tries to adjust the visible range instead such that a 5-second average of the framerate is within 10% of a specified target framerate. Currently, the subsystem <i>only</i> adjusts the visible range of buffering - asymmetric buffering and/or tile loading range still needs to be specified manually. Also, the system cannot respond to unsolvable problems - if the framerate in the absence of clouds falls below 30, then no setting for the cloud range will bring it to 35. <p>
+
+The next option controls the amout of resources allocated to making clouds drift in the wind if dynamical weather is on. In order to avoid freezes, the weather dynamics system processes only a fixed number of clouds per frame inside the field of view. That means that faraway clouds do not necessarily move even with dynamical weather on. The slider indirectly controls the distance out to which clouds are being processed.<p>
 
 All performance setting menu-options work at runtime, but are processed over time rather than instantaneously, i.e. it takes 10-20 seconds till the new balance between buffered clouds and active clouds is reached after the slider is moved.<p>
+
+The final options, weather pattern scales, deal with the long-range behaviour of the offline weather system. They are not parsed when the tile selection mode is set to <i>METAR</i>. The first slider controls the transition between different airmasses. In the default setting, the typical distance to encounter a different airmass when one flies in a 'High-pressure-core' tile is 200 km. The airmass slider allows to vary this distance between 200 and 800 km. <p>
+
+Inside each tile, there are typically 4-8 different basic cloud patterns (distribution of layers) modelled, with a random pattern selected for each new tile of the given airmass classification. The <i>cloud patterns</i> slider adjusts the probability that the same cloud configuration is kept as long as a tile of the same airmass type is generated. Selecting a large scale in essence means that the theme of clouds will remain similar within each airmass, a small scale allows for more variation.<p>
 
 <h2>4. Cloud models</h2>
 
@@ -246,7 +253,7 @@ Effect volumes are always specified between a minimum and a maximum altitude, an
 
  where <i>geometry</i> is a flag (1: circular, 2: elliptical and 3: rectangular), <i>lat</i> and <i>lon</i> are the latitude and longitude, <i>r1</i> and <i>r2</i> are the two size parameters for the elliptic or rectangular shape (for the circular shape, only the first is used), <i>phi</i> is the rotation angle of the shape (not used for circular shape), <i>alt_low</i> and <i>alt_high</i> are the altitude boundaries, <i>vis, rain, snow, turb</i> and <i>lift</i> are weather parameters which are either set to the value they should assume, or to -1 if they are not to be used, or to -2 if a function instead of a parameter is to be used and -3 if a function for wave lift is used. Since thermal lift can be set to negative values in a sink, a separate flag is provided in this case. <i>sat</i> finally determines the light saturation, a parameter between 0 (dark) and 1 (normal light) - it can be used to dim the light beneath cloud layers (which is not done automatically as objects don't cast shades in Flightgear, and given that most cloud models are rotated, their shade would look rather odd on any case).<p>
 
-In version 1.0, thermal lift and wave lift are implemented by function (wave lift is not yet automatically placed, but can be easily from Nasal). There is no easy way to implement any weather parameter by function in an effect volume, as this requires some amount of Nasal coding.<p>
+In version 1.1, thermal lift and wave lift are implemented by function (wave lift is not yet automatically placed, but can be easily from Nasal). There is no easy way to implement any weather parameter by function in an effect volume, as this requires some amount of Nasal coding.<p>
 
 Both thermal lift and saturation require a more recent version of Flightgear than 2.0.0 in order to take effect.<p>
 
@@ -362,7 +369,7 @@ With default settings, the local weather package generates a 40x40 km weather ti
 
 <li> Rain and snow may not start properly. For me, rain is only generated when I switch 'Shader effects' on and off in the menu on startup, otherwise neither moving the menu slider nor entering an effect volume generate rain. This seems to be a bug of some Flightgear versions, not of the local weather system.<p>
 
-<li> Especially with multiple overcast layers and weather fronts, loading and unloading weather tiles may take a long time / cause severe drops in framerate. It seems that a dual core processor is very valuable with this particular issue - try switching multiprocessor support on if needed, otherwise please refer to performance tuning to solve such problems. In general, overcast layers and tropical weather tiles do require a system on the high end of the performance scale to render properly.<p>
+<li> Especially with multiple overcast layers and weather fronts, loading and unloading weather tiles may take a long time / cause severe drops in framerate. It seems that a dual core processor is very valuable with this particular issue - try switching multiprocessor support on if needed, otherwise please refer to performance tuning to solve such problems. In more recent versions of Flightgear, an activated texture cache improves performance dramatically. In general, overcast layers and tropical weather tiles do require a system on the high end of the performance scale to render properly.<p>
 
 <li> The local weather package is able to occasionally trigger errors like 'Warning:: Picked up error in TriangleIntersect'. These seem to be a problem in the core Flightgear code - the package does nothing but placing normal (rather simple) AC3D models into the scenery.<p>
 

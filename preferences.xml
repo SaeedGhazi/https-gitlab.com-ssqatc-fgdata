@@ -10,6 +10,8 @@ Started September 2000 by David Megginson, david@megginson.com
 
 <PropertyList>
 
+	<local-weather include="Environment/local-weather-defaults.xml"/>
+
 	<!-- General simulation preferences -->
 	<sim>
 		<!-- show-aircraft option: show ALL aircraft regardless by default -->
@@ -674,6 +676,7 @@ Started September 2000 by David Megginson, david@megginson.com
 		<replay>
 			<duration type="double">90</duration>
 			<view type="int">1</view>
+			<looped type="bool">true</looped>
 		</replay>
 
 		<airport>

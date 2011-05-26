@@ -951,20 +951,7 @@ top down before the key bindings are parsed.
   <name>p</name>
   <desc>Toggle the pause state of the sim</desc>
   <binding>
-   <command>property-toggle</command>
-   <property>/sim/freeze/master</property>
-  </binding>
-  <binding>
-   <command>property-toggle</command>
-   <property>/sim/freeze/clock</property>
-  </binding>
-  <binding>
-   <condition>
-     <property>/sim/freeze/replay-state</property>
-   </condition>
-   <command>property-assign</command>
-   <property>/sim/replay/disable</property>
-   <value type="bool">true</value>
+   <command>pause</command>
   </binding>
  </key>
 

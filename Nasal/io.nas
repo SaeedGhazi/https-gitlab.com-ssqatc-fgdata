@@ -81,6 +81,33 @@ var read_properties = func(path, target = nil) {
     return fgcommand("loadxml", args) ? ret : nil;
 }
 
+# Load XML file in FlightGear's native <PropertyList> format.
+# file will be located in the airport-scenery directories according to
+# ICAO and filename, i,e in Airports/I/C/A/ICAO.filename.xml
+# If the second, optional target parameter is set, then the properties
+# are loaded to this node in the global property tree. Otherwise they
+# are returned as a separate props.Node tree. Returns the data as a
+# props.Node on success or nil on error.
+#
+# Usage:   io.read_airport_properties(<icao>, <filename> [, <props.Node or property-path>]);
+#
+# Examples:
+#
+#     var data = io.read_properties("KSFO", "rwyuse");
+#
+var read_airport_properties = func(icao, fname, target = nil) {
+    var args = props.Node.new({ filename: fname, icao:icao });
+    if (target == nil) {
+        var ret = args.getNode("data", 1);
+    } elsif (isa(target, props.Node)) {
+        args.getNode("targetnode", 1).setValue(target.getPath());
+        var ret = target;
+    } else {
+        args.getNode("targetnode", 1).setValue(target);
+        var ret = props.globals.getNode(target, 1);
+    }
+    return fgcommand("loadxml", args) ? ret : nil;
+}
 
 # Write XML file in FlightGear's native <PropertyList> format.
 # Returns the filename on success or nil on error. If the source
@@ -242,6 +269,14 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
                 var p = substr(pattern, 13);
                 var sim = props.globals.getNode("/sim");
                 foreach (var c; sim.getChildren("fg-aircraft")) {
+                    pattern = c.getValue() ~ "/" ~ p;
+                    append(rules, [pattern, allow]);
+                    printlog("info", "IORules: appending ", pattern);
+                }
+            } elsif (substr(pattern, 0, 12) == "$FG_SCENERY/") {
+                var p = substr(pattern, 12);
+                var sim = props.globals.getNode("/sim");
+                foreach (var c; sim.getChildren("fg-scenery")) {
                     pattern = c.getValue() ~ "/" ~ p;
                     append(rules, [pattern, allow]);
                     printlog("info", "IORules: appending ", pattern);

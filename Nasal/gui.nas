@@ -1254,3 +1254,15 @@ var common_aircraft_keys = {
         { name: "Shift-F8",  desc: "scroll 2D panel right" },
     ],
 };
+
+_setlistener("/sim/signals/screenshot", func {
+     var path = getprop("/sim/paths/screenshot-last");
+     var button = { button: { legend: "Ok", default: 1, binding: { command: "dialog-close" }}};
+     var success= getprop("/sim/signals/screenshot");
+     if (success) {
+         popupTip("Screenshot written to '" ~ path ~ "'", 3);
+     } else {
+         popupTip("Error writing screenshot '" ~ path ~ "'", 600, button);
+     }
+});
+

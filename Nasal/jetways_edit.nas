@@ -395,7 +395,6 @@ var export = func
   fgcommand("savexml", args);
   print("jetway definitions for airport " ~ airport ~ " exported to " ~ file);
   }
- print("move exported files to " ~ getprop("/sim/fg-root") ~ "/Airports/Jetways/");
  };
 var convert_stg = func
  {

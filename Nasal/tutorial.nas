@@ -15,7 +15,7 @@ var step_start_time = nil;
 var step_iter_count = 0;    # number or step loop iterations
 var last_step_time = nil;   # for set_targets() eta calculation
 var audio_dir = nil;
-
+var do_welcome = 1;
 
 # property nodes (to be initialized with listener)
 var markerN = nil;
@@ -37,7 +37,13 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	setlistener("/sim/crashed", stopTutorial);
 });
 
-
+_setlistener("/sim/signals/fdm-initialized", func {
+    var haveTutorials = size(props.globals.getNode("/sim/tutorials", 1).getChildren("tutorial"));
+    gui.menuEnable("tutorial-start", haveTutorials);
+    if (do_welcome and haveTutorials)
+        settimer(func { setprop("/sim/messages/copilot", "Welcome aboard! Need help? Use 'Help -> Tutorials'.");}, 5.0);
+    do_welcome = 0;
+});
 
 var startTutorial = func {
 	var name = getprop("/sim/tutorials/current-tutorial");
@@ -192,7 +198,15 @@ var step_tutorial = func(id) {
 	var exit = step.getNode("exit");
 	if (exit != nil) {
 		if (!props.condition(exit.getNode("condition")))
+		{
+			if (time_elapsedN.getValue() - step_start_time > 15.0)
+			{
+				# What's going on? Repeat last message.
+				last_messageN.setValue("");
+				is_first_step = 1;
+			}
 			return continue_after(exit, step_interval);
+		}
 
 		do_group(exit);
 	}
@@ -363,7 +377,6 @@ var is_running = func(which = nil) {
 	var prop = "/sim/tutorials/running";
 	if (which != nil) {
 		setprop(prop, which);
-		gui.menuEnable("tutorial-stop", which);
 	}
 	return getprop(prop);
 }

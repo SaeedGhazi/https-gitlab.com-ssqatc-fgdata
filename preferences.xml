@@ -746,6 +746,14 @@ Started September 2000 by David Megginson, david@megginson.com
 									 archive="n">100.0</min-time-ms>
 		</timing-statistics>
 
+		<!-- animated jetway options -->
+		<jetways>
+			<enabled type="bool" archive="y">false</enabled> <!-- disabled due to FPS impact -->
+			<enable-editor type="bool" archive="y">false</enable-editor>
+			<interact-with-multiplay type="bool" archive="y">true</interact-with-multiplay>
+			<debug type="bool" archive="y">false</debug>
+		</jetways>
+
 	</sim>
 
 

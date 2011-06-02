@@ -367,6 +367,14 @@
 			</binding>
 		</item>
 
+		<item>
+			<label>Jetway Settings</label>
+			<binding>
+                                <command>nasal</command>
+                                <script>jetways.dialog()</script>
+			</binding>
+		</item>
+
 	</menu>
 
 	<menu>

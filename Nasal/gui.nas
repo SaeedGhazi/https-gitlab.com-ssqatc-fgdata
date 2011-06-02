@@ -135,7 +135,6 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     }
     menuEnable("autopilot", isAutopilotMenuEnabled() );
     menuEnable("multiplayer", multiplayer.is_active());
-    menuEnable("tutorial-start", size(props.globals.getNode("/sim/tutorials", 1).getChildren("tutorial")));
     menuEnable("joystick-info", size(props.globals.getNode("/input/joysticks").getChildren("js")));
 
     # frame-per-second display

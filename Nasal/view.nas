@@ -593,6 +593,9 @@ var point = {
 	},
 	move : func(prop, time = nil) {
 		prop != nil or return;
+		var n = prop.getNode("view-number");
+		if (n != nil)
+			setprop("/sim/current-view/view-number",n.getValue());
 		foreach (var a; keys(me.axes)) {
 			var n = prop.getNode(a);
 			me.axes[a].reset();

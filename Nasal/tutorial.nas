@@ -345,6 +345,9 @@ var set_view = func(node = nil) {
 	node != nil or return;
 	var v = node.getChild("view");
 	if (v != nil) {
+		# when changing view direction, switch to view 0 (captain's view),
+		# unless another view is explicitly specified
+		v.initNode("view-number", 0, "INT", 0);
 		view.point.move(v);
 		return 1;
 	}

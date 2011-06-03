@@ -341,8 +341,11 @@ view to a new view position/direction. All parameters are optional. If, for
 example, only <field-of-view> is set, then the view will only zoom in -- the
 direction and position will remain the same. This feature is meant for cockpit
 tutorials, where the pilot's view is directed to some switch or instrument.
+view-number can be used to switch between different views, i.e. to tower-view,
+copilot view etc. Default view-number is 0 (captain's view).
 
   <view>
+      <view-number>0</view-number>                 0=captain's view, 1=copilot,...
       <heading-offset-deg>20</heading-offset-deg>  positive is left
       <pitch-offset-deg>-4</pitch-offset-deg>      positive is up
       <roll-offset-deg>0</roll-offset-deg>         positive is roll right

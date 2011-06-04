@@ -203,7 +203,8 @@ var step_tutorial = func(id) {
 			{
 				# What's going on? Repeat last message.
 				last_messageN.setValue("");
-				is_first_step = 1;
+				step_start_time = time_elapsedN.getValue();
+				do_group(step, "Tutorial step " ~ current_step);
 			}
 			return continue_after(exit, step_interval);
 		}

@@ -72,7 +72,7 @@ in detail below:
           <nasal>
               ...                     optional; Nasal code
           </nasal>
-          <interval>10</inteval>      optional; run loop next in this many seconds
+          <interval>10</interval>     optional; run loop next in this many seconds
       </init>                                   (default: 5); doesn't change global
                                                 interval
 
@@ -100,7 +100,7 @@ in detail below:
               ...                     optional; Nasal code that is executed when the
           </nasal>                              step is entered
 
-          <interval>10</inteval>      optional; run loop next in this many seconds
+          <interval>10</interval>     optional; run loop next in this many seconds
 
           <error>                     optional; allowed several times
               <message>..</message>       optional; text displayed/spoken
@@ -114,7 +114,7 @@ in detail below:
                   ...                     optional; Nasal code that is executed when the
               </nasal>                              error condition was fulfilled
 
-              <interval>10</inteval>      optional; run loop next in this many seconds
+              <interval>10</interval>     optional; run loop next in this many seconds
           </error>
 
           <exit>                      optional; defines when to leave this <step>

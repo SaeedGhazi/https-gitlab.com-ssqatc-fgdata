@@ -319,4 +319,11 @@
     <data type="string"/>
   </wildfire>
 
+  <!-- create on instance of the terrains-sampler but start disabled -->
+  <terrain>
+    <area>
+      <enabled type="bool">false</enabled>
+    </area>
+  </terrain>
+
 </PropertyList>

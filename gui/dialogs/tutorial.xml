@@ -131,7 +131,10 @@
 				<default>true</default>
 				<binding>
 					<command>nasal</command>
-					<script>tutorial.startTutorial()</script>
+					<script>
+						setprop("/nasal/tutorial/enabled",1); # load module on demand
+						tutorial.startTutorial();
+					</script>
 				</binding>
 				<binding>
 					<command>dialog-close</command>

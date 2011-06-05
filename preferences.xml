@@ -1189,42 +1189,48 @@ Started September 2000 by David Megginson, david@megginson.com
 
 	<logging>
 		<log n="0">
-			<enabled>false</enabled>
+			<enabled type="bool">false</enabled>
 			<interval-ms>1000</interval-ms>
 			<filename>fg_log.csv</filename>
 			<delimiter>,</delimiter>
 			<entry n="0">
-				<enabled>false</enabled>
+				<enabled type="bool">false</enabled>
 				<title>Longitude</title>
 				<property>/position/longitude-deg</property>
 			</entry>
 			<entry n="1">
-				<enabled>false</enabled>
+				<enabled type="bool">false</enabled>
 				<title>Latitude</title>
 				<property>/position/latitude-deg</property>
 			</entry>
 			<entry n="2">
-				<enabled>false</enabled>
+				<enabled type="bool">false</enabled>
 				<title>Altitude</title>
 				<property>/position/altitude-ft</property>
 			</entry>
 			<entry n="3">
-				<enabled>false</enabled>
+				<enabled type="bool">false</enabled>
 				<title>Roll</title>
 				<property>/orientation/roll-deg</property>
 			</entry>
 			<entry n="4">
-				<enabled>false</enabled>
+				<enabled type="bool">false</enabled>
 				<title>Pitch</title>
 				<property>/orientation/pitch-deg</property>
 			</entry>
 			<entry n="5">
-				<enabled>false</enabled>
+				<enabled type="bool">false</enabled>
 				<title>Heading</title>
 				<property>/orientation/heading-deg</property>
 			</entry>
 		</log>
 	</logging>
+
+	<nasal>
+		<tutorial>
+			<enabled type="bool">false</enabled>
+		</tutorial>
+	</nasal>
 
 </PropertyList>
 

@@ -1265,3 +1265,12 @@ _setlistener("/sim/signals/screenshot", func {
      }
 });
 
+var do_welcome = 1;
+_setlistener("/sim/signals/fdm-initialized", func {
+    var haveTutorials = size(props.globals.getNode("/sim/tutorials", 1).getChildren("tutorial"));
+    gui.menuEnable("tutorial-start", haveTutorials);
+    if (do_welcome and haveTutorials)
+        settimer(func { setprop("/sim/messages/copilot", "Welcome aboard! Need help? Use 'Help -> Tutorials'.");}, 5.0);
+    do_welcome = 0;
+});
+

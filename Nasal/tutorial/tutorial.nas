@@ -15,7 +15,6 @@ var step_start_time = nil;
 var step_iter_count = 0;    # number or step loop iterations
 var last_step_time = nil;   # for set_targets() eta calculation
 var audio_dir = nil;
-var do_welcome = 1;
 
 # property nodes (to be initialized with listener)
 var markerN = nil;
@@ -26,7 +25,7 @@ var last_messageN = nil;
 var step_countN = nil;
 var step_timeN = nil;
 
-_setlistener("/sim/signals/nasal-dir-initialized", func {
+_setlistener("/nasal/tutorial/loaded", func {
 	markerN = props.globals.getNode("/sim/model/marker", 1);
 	headingN = props.globals.getNode("/orientation/heading-deg", 1);
 	slipN = props.globals.getNode("/orientation/side-slip-deg", 1);
@@ -35,14 +34,6 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	step_countN = props.globals.getNode("/sim/tutorials/step-count", 1);
 	step_timeN = props.globals.getNode("/sim/tutorials/step-time", 1);
 	setlistener("/sim/crashed", stopTutorial);
-});
-
-_setlistener("/sim/signals/fdm-initialized", func {
-    var haveTutorials = size(props.globals.getNode("/sim/tutorials", 1).getChildren("tutorial"));
-    gui.menuEnable("tutorial-start", haveTutorials);
-    if (do_welcome and haveTutorials)
-        settimer(func { setprop("/sim/messages/copilot", "Welcome aboard! Need help? Use 'Help -> Tutorials'.");}, 5.0);
-    do_welcome = 0;
 });
 
 var startTutorial = func {

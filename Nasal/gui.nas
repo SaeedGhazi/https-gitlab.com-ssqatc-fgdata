@@ -1274,3 +1274,9 @@ _setlistener("/sim/signals/fdm-initialized", func {
     do_welcome = 0;
 });
 
+# load ATC chatter module on demand
+setprop("/nasal/atc-chatter/enabled", getprop("/sim/sound/chatter/enabled"));
+_setlistener("/sim/sound/chatter/enabled", func {
+    setprop("/nasal/atc-chatter/enabled", getprop("/sim/sound/chatter/enabled"));
+});
+

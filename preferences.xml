@@ -1228,8 +1228,11 @@ Started September 2000 by David Megginson, david@megginson.com
 
 	<nasal>
 		<tutorial>
-			<enabled type="bool">false</enabled>
+			<enabled type="bool" userarchive="n">false</enabled>
 		</tutorial>
+		<atc-chatter>
+			<enabled type="bool" userarchive="n">false</enabled>
+		</atc-chatter>
 	</nasal>
 
 </PropertyList>

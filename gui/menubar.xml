@@ -329,14 +329,7 @@
 
 		<item>
 			<label>Local Weather</label>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>local_weather</dialog-name>
-			</binding>
-		</item>
-
-		<item>
-			<label>Local Weather Tiles</label>
+			<name>local_weather</name>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>local_weather_tiles</dialog-name>
@@ -344,7 +337,8 @@
 		</item>
 
 		<item>
-			<label>Local Weather Config</label>
+			<label>Local Weather Settings</label>
+			<name>local_weather_config</name>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>local_weather_config</dialog-name>
@@ -687,6 +681,15 @@
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>logging</dialog-name>
+			</binding>
+		</item>
+
+		<item>
+			<label>Local Weather (Test)</label>
+			<name>local_weather</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>local_weather</dialog-name>
 			</binding>
 		</item>
 

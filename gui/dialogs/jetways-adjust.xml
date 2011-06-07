@@ -18,7 +18,8 @@
 		  {
 		  if (substr(file, -3) == "xml")
 		   {
-		   append(models, substr(file, 0, size(file) - 4));
+		   var is_airline = string.match(file, "*.airline.*");
+		   if (!is_airline) append(models, substr(file, 0, size(file) - 4));
 		   }
 		  }
 		 for (var i = 0; i < size(models); i += 1)

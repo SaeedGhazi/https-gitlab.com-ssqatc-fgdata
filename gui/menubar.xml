@@ -504,6 +504,17 @@
 			</binding>
 		</item>
 
+                <item>
+                        <label>Jetway Settings</label>
+<!--                        <binding>
+                                <command>nasal</command>
+                                <script>jetways.jetways.dialog()</script>
+                        </binding>-->
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>jetways</dialog-name>
+			</binding>
+                </item>
 
 
 	</menu>

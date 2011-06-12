@@ -58,7 +58,12 @@
 				<command>nasal</command>
 				<script>
 					gui.popdown();
-					fgcommand("screen-capture");
+					var success = fgcommand("screen-capture");
+					var path = getprop("/sim/paths/screenshot-last");
+					if (success)
+					gui.popupTip("Screenshot written to '" ~ path ~ "'");
+					else
+					gui.popupTip("Error writing screenshot '" ~ path ~ "'");
 				</script>
 			</binding>
 		</item>
@@ -563,7 +568,7 @@
 			</binding>
 		</item>
 
-		<item>
+        <item>
 			<label>Reload HUD</label>
 			<binding>
 				<command>reinit</command>

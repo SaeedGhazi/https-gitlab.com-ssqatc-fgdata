@@ -754,9 +754,16 @@ Started September 2000 by David Megginson, david@megginson.com
 			<debug type="bool" archive="y">false</debug>
 		</jetways>
 
+		<terrasync preserve="y">
+			<enabled type="bool" userarchive="y">false</enabled>
+			<use-built-in-svn type="bool" userarchive="y">true</use-built-in-svn>
+			<refresh-display type="bool" userarchive="y">false</refresh-display>
+			<use-svn type="bool" userarchive="y">true</use-svn>
+			<svn-server userarchive="y">http://terrascenery.googlecode.com/svn/trunk/data/Scenery</svn-server>
+			<rsync-server userarchive="y">scenery.flightgear.org::Scenery</rsync-server>
+			<scenery-dir userarchive="y"></scenery-dir>
+		</terrasync>
 	</sim>
-
-
 	<!-- mouse mode -->
 	<devices>
 		<status>

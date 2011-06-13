@@ -361,6 +361,14 @@
 			</binding>
 		</item>
 
+		<item>
+			<label>Scenery Download</label>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>terrasync</dialog-name>
+			</binding>
+		</item>
+
 	</menu>
 
 	<menu>
@@ -592,14 +600,6 @@
 			<binding>
 				<command>reinit</command>
 				<subsystem>io</subsystem>
-			</binding>
-		</item>
-
-		<item>
-			<label>Reload Scenery</label>
-			<binding>
-				<command>reinit</command>
-				<subsystem>tile-manager</subsystem>
 			</binding>
 		</item>
 

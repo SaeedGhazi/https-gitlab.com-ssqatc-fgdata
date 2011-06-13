@@ -636,7 +636,10 @@
 			<label>Display Tutorial Marker</label>
 			<binding>
 				<command>nasal</command>
-				<script>tutorial.dialog()</script>
+				<script>
+					setprop("/nasal/tutorial/enabled",1); # load module on demand
+					tutorial.dialog();
+				</script>
 			</binding>
 		</item>
 

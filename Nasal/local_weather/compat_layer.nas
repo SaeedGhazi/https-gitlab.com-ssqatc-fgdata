@@ -67,8 +67,19 @@
 # The compatibility layer is currently work in progress and will be extended as new Nasal 
 # APIs are being added to FlightGear.
 
+var weather_dynamics = nil;
+var weather_tile_management = nil;
+var compat_layer = nil;
+var weather_tiles = nil;
 
-_setlistener("/sim/signals/nasal-dir-initialized", func { 
+
+_setlistener("/nasal/local_weather/loaded", func { 
+
+compat_layer = local_weather;
+weather_dynamics = local_weather;
+weather_tile_management = local_weather;
+weather_tiles = local_weather;
+
 
 var result = "yes";
 

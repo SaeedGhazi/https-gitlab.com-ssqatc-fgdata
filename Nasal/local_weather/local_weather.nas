@@ -4613,10 +4613,18 @@ setprop(lw~"tiles/tile-counter",0);
 
 setprop(lwi~"ipoint-number",0);
 
+var updateMenu = func {
+	var isEnabled = getprop("/nasal/local_weather/enabled");
+	gui.menuEnable("local_weather", isEnabled);
+	gui.menuEnable("local_weather_tiles", isEnabled);
+}
+
+_setlistener("/nasal/local_weather/enabled", updateMenu);
 
 # wait for Nasal to be available and do what is in startup()
 
-_setlistener("/sim/signals/nasal-dir-initialized", func {
+_setlistener("/nasal/local_weather/loaded", func {
+	updateMenu();
 	startup();
 });
 

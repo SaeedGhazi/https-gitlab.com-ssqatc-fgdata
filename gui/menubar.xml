@@ -329,7 +329,8 @@
 
 		<item>
 			<label>Local Weather</label>
-			<name>local_weather</name>
+			<name>local_weather_tiles</name>
+			<enabled>false</enabled>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>local_weather_tiles</dialog-name>
@@ -690,6 +691,7 @@
 		<item>
 			<label>Local Weather (Test)</label>
 			<name>local_weather</name>
+			<enabled>false</enabled>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>local_weather</dialog-name>

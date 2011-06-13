@@ -81,10 +81,16 @@ else
 print("* can set light saturation:        "~result);
 
 
+if (props.globals.getNode("/rendering/scene/scattering", 0) == nil)
+	{result = "no"; features.can_set_scattering = 0;}
+else
+	{result = "yes"; features.can_set_scattering = 1;}
+print("* can set horizon scattering:      "~result);
+
 if (props.globals.getNode("/environment/terrain", 0) == nil)
 	{result = "no"; features.terrain_presampling = 0;}
 else
-	{result = "yes"; features.terrain_presampling = 1;}
+	{result = "yes"; features.terrain_presampling = 1;setprop("/environment/terrain/area[0]/enabled",1);}
 print("* hard coded terrain presampling:  "~result);
 
 if ((props.globals.getNode("/environment/terrain/area[0]/enabled",1).getBoolValue() == 1) and (features.terrain_presampling ==1))
@@ -100,10 +106,6 @@ else
 	{result = "yes"; features.can_disable_environment = 1;}
 print("* can disable global weather:      "~result);
 
-#if (features.terrain_presampling_active == 1)
-#	{
-#	setlistener("/environment/terrain/area[0]/output/valid", func {local_weather.manage_hardcoded_presampling(); });
-#	}
 
 print("Compatibility layer: tests done.");
 });
@@ -327,6 +329,32 @@ if (features.can_set_light == 1)
 	setprop("/rendering/scene/saturation",s);
 	}
 }
+
+
+####################################
+# set horizon scattering
+####################################
+
+var setScattering = func (s) {
+
+if (features.can_set_scattering == 1)
+	{	
+	setprop("/rendering/scene/scattering",s);
+	}
+}
+
+####################################
+# set overcast haze
+####################################
+
+var setOvercast = func (o) {
+
+if (features.can_set_scattering == 1)
+	{	
+	setprop("/rendering/scene/overcast",o);
+	}
+}
+
 
 ###########################################################
 # set wind to given direction and speed

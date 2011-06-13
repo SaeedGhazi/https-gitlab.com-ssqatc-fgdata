@@ -63,6 +63,8 @@ return windfield;
 
 var timing_loop = func {
 
+if (local_weather.local_weather_running_flag == 0) {return;}
+
 dt_lw = getprop("/sim/time/delta-sec");
 time_lw = time_lw + dt_lw;
 
@@ -79,6 +81,7 @@ if (getprop(lw~"timing-loop-flag") ==1) {settimer(timing_loop, 0);}
 
 var quadtree_loop = func {
 
+if (local_weather.local_weather_running_flag == 0) {return;}
 
 var vangle = 0.55 * getprop("/sim/current-view/field-of-view");
 var viewdir = getprop("/sim/current-view/goal-heading-offset-deg");
@@ -161,6 +164,8 @@ if (getprop(lw~"dynamics-loop-flag") ==1) {settimer(quadtree_loop, 0);}
 
 var weather_dynamics_loop = func (index, cindex) {
 
+if (local_weather.local_weather_running_flag == 0) {return;}
+
 var n = 20;
 var nc = 1;
 
@@ -241,9 +246,14 @@ if (j >= csize)  {cindex = 0;}
 
 
 
-foreach (s; local_weather.weatherStationArray)
+foreach (var s; local_weather.weatherStationArray)
 	{
 	s.move();
+	}
+
+foreach (var a; local_weather.atmosphereIpointArray)
+	{
+	a.move();
 	}
 
 if (getprop(lw~"dynamics-loop-flag") ==1) {settimer( func {weather_dynamics_loop(index, cindex); },0);}
@@ -256,6 +266,8 @@ if (getprop(lw~"dynamics-loop-flag") ==1) {settimer( func {weather_dynamics_loop
 ###########################################################
 
 var convective_loop = func {
+
+if (local_weather.local_weather_running_flag == 0) {return;}
 
 # a 30 second loop needs a different strategy to end, otherwise there is trouble if it is restarted while still running
 

@@ -1240,11 +1240,8 @@ Started September 2000 by David Megginson, david@megginson.com
 		<atc-chatter>
 			<enabled type="bool" userarchive="n">false</enabled>
 		</atc-chatter>
-	</nasal>
-
-	<nasal>
 	    <local_weather>
-  		<enabled type="bool" userarchive="y">false</enabled>
+  			<enabled type="bool" userarchive="y">false</enabled>
 	    </local_weather>
 	</nasal>
 

@@ -1254,6 +1254,17 @@ var common_aircraft_keys = {
     ],
 };
 
+_setlistener("/sim/signals/screenshot", func {
+     var path = getprop("/sim/paths/screenshot-last");
+     var button = { button: { legend: "Ok", default: 1, binding: { command: "dialog-close" }}};
+     var success= getprop("/sim/signals/screenshot");
+     if (success) {
+         popupTip("Screenshot written to '" ~ path ~ "'", 3);
+     } else {
+         popupTip("Error writing screenshot '" ~ path ~ "'", 600, button);
+     }
+});
+
 var do_welcome = 1;
 _setlistener("/sim/signals/fdm-initialized", func {
     var haveTutorials = size(props.globals.getNode("/sim/tutorials", 1).getChildren("tutorial"));

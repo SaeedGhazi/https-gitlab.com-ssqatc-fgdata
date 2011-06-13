@@ -2360,7 +2360,6 @@ Shared parameters for various materials.
   </condition>
   <name>DryCropPastureCover</name>
   <name>DryCrop</name>
-  <name>NaturalCrop</name>
   <texture>Terrain.winter/drycrop1.png</texture>
   <texture>Terrain.winter/drycrop2.png</texture>
   <texture>Terrain.winter/drycrop3.png</texture>

@@ -39,29 +39,29 @@ Started September 2000 by David Megginson, david@megginson.com
 		<intl include="Translations/locale.xml"/>
 		<aircraft>c172p</aircraft>
 		<virtual-cockpit type="bool">false</virtual-cockpit>
-		<presets>
+		<presets preserve="y">
 			<airport-id>KSFO</airport-id>
 			<runway></runway>
 			<trim type="bool">true</trim>
 		</presets>
 		<startup>
-			<xsize type="int">800</xsize>
-			<ysize type="int">600</ysize>
+			<xsize type="int" preserve="y">800</xsize>
+			<ysize type="int" preserve="y">600</ysize>
 			<splash-screen type="bool">true</splash-screen>
 			<splash-progress type="bool">true</splash-progress>
 			<splash-title>
 				<!-- -->
 			</splash-title>
 			<intro-music type="bool">false</intro-music>
-			<game-mode type="bool">false</game-mode>
-			<fullscreen type="bool">false</fullscreen>
+			<game-mode type="bool" preserve="y">false</game-mode>
+			<fullscreen type="bool" preserve="y">false</fullscreen>
 			<units>feet</units>
 			<save-on-exit type="bool"
 										userarchive="y">true</save-on-exit>
 			<browser-app write="n">firefox -new-tab "%u"</browser-app>
 			<!--  help viewer; only used under Unix -->
 			<terminal-ansi-colors type="bool">true</terminal-ansi-colors>
-			<season type="string">summer</season>
+			<season type="string" preserve="y">summer</season>
 		</startup>
 		<rendering>
 			<debug type="bool">false</debug>
@@ -655,7 +655,7 @@ Started September 2000 by David Megginson, david@megginson.com
 			</autovisibility>
 		</menubar>
 
-		<gui>
+		<gui preserve="y">
 			<current-style type="int"
 										 userarchive="y">1</current-style>
 			<style n="0"
@@ -722,7 +722,7 @@ Started September 2000 by David Megginson, david@megginson.com
 		</ai>
 
 		<multiplay>
-			<chat type="string">Hello</chat>
+			<chat type="string" preserve="y">Hello</chat>
 			<transmission-freq-hz type="string">118500000</transmission-freq-hz>
 			<chat-display type="bool"
 										userarchive="y">true</chat-display>
@@ -732,7 +732,7 @@ Started September 2000 by David Megginson, david@megginson.com
 		</multiplay>
 
 		<user>
-			<callsign type="string">Golf Foxtrot Sierra</callsign>
+			<callsign type="string" preserve="y">Golf Foxtrot Sierra</callsign>
 		</user>
 
 		<timing-statistics>
@@ -754,9 +754,16 @@ Started September 2000 by David Megginson, david@megginson.com
 			<debug type="bool" archive="y">false</debug>
 		</jetways>
 
+		<terrasync preserve="y">
+			<enabled type="bool" userarchive="y">false</enabled>
+			<use-built-in-svn type="bool" userarchive="y">true</use-built-in-svn>
+			<refresh-display type="bool" userarchive="y">false</refresh-display>
+			<use-svn type="bool" userarchive="y">true</use-svn>
+			<svn-server userarchive="y">http://terrascenery.googlecode.com/svn/trunk/data/Scenery</svn-server>
+			<rsync-server userarchive="y">scenery.flightgear.org::Scenery</rsync-server>
+			<scenery-dir userarchive="y"></scenery-dir>
+		</terrasync>
 	</sim>
-
-
 	<!-- mouse mode -->
 	<devices>
 		<status>
@@ -1233,6 +1240,9 @@ Started September 2000 by David Megginson, david@megginson.com
 		<atc-chatter>
 			<enabled type="bool" userarchive="n">false</enabled>
 		</atc-chatter>
+	    <local_weather>
+  			<enabled type="bool" userarchive="y">false</enabled>
+	    </local_weather>
 	</nasal>
 
 </PropertyList>

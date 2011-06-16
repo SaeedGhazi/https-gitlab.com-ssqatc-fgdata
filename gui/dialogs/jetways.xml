@@ -13,12 +13,15 @@
 		 var UPDATE_PERIOD = 5;
 		 var update = func
 		  {
-		  var list = "";
-		  foreach (var apt; jetways.loaded_airports)
+		  if (jetways != nil)
 		   {
+		   var list = "";
+		   foreach (var apt; jetways.loaded_airports)
+		    {
 		   list ~= apt ~ " ";
+		    }
+		   aptlist.setValue(list == "" ? "No airports loaded" : "Loaded airports: " ~ list);
 		   }
-		  aptlist.setValue(list == "" ? "No airports loaded" : "Loaded airports: " ~ list);
 		  settimer(update, UPDATE_PERIOD);
 		  };
 		 settimer(update, 0);

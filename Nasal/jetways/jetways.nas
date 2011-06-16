@@ -147,9 +147,9 @@
 # unload_airport_jetways(<airport>)		- unloads jetways at an airport
 #	<airport>				- ICAO of airport
 #
-# update_jetways()				- interpolates model animation values and keeps the system tidy
+# update_jetways()				- interpolates model animation values
 #
-# load_jetways()				- loads new jetway models and unloads out-of-range models every 30 seconds
+# load_jetways()				- loads new jetway models and unloads out-of-range models every 10 seconds; also connects AI and MP aircraft
 #
 
 ## Utility functions
@@ -285,11 +285,11 @@ var root = nil;
 var home = nil;
 var scenery = [];
 
-var UPDATE_PERIOD = 1 / 30;
-var LOAD_PERIOD = 30;
+var UPDATE_PERIOD = 0;
+var LOAD_PERIOD = 10;
 var LOAD_DISTANCE = 50;				# in nautical miles
 var LOAD_JETWAY_PERIOD = 0.05;
-var NUMBER_OF_JETWAYS = 2000;			# approx max number of jetways loadable in FG
+var NUMBER_OF_JETWAYS = 1000;			# approx max number of jetways loadable in FG
 var runtime_files = NUMBER_OF_JETWAYS / LOAD_PERIOD * LOAD_JETWAY_PERIOD;
 runtime_files = int(runtime_files) == runtime_files ? runtime_files : int(runtime_files) + 1;
 var runtime_file = 0;
@@ -459,10 +459,11 @@ var Jetway =
   model_tree.getNode("entrance-heading-deg").setValue(props.globals.initNode(node_path ~ "/jetway-position/entrance-heading-deg", 0, "DOUBLE").getPath());
   model_tree.getNode("hood-deg").setValue(props.globals.initNode(node_path ~ "/jetway-position/hood-deg", 0, "DOUBLE").getPath());
   # airline texture
+  var airline_tex = model_tree.getNode("airline-texture-path", 1).getValue();
   var airline_node = model_tree.getNode(model_tree.getNode("airline-prop-path", 1).getValue());
-  if (airline_node != nil)
+  if (airline_tex != nil and airline_node != nil)
    {
-   airline_node.setValue(get_relative_filepath(home ~ "/runtime-jetways", model_dir ~ "/Airlines/" ~ airline ~ ".png"));
+   airline_node.setValue(get_relative_filepath(home ~ "/runtime-jetways", model_dir ~ "/" ~ airline_tex));
    }
   # write the model tree
   io.write_properties(runtime_file_path, model_tree);
@@ -773,7 +774,7 @@ var restart = func()
   }, 2);
  print("Animated jetways ... initialized");
  };
-# main update loop (runs when jetways are enabled)
+# main update loop (runs when jetways are enable and actived)
 var update_jetways = func(loopid)
  {
  # terminate if loopid does not match
@@ -788,53 +789,6 @@ var update_jetways = func(loopid)
   setsize(jetways, 0);
   setsize(loaded_airports, 0);
   return;
-  }
-
- var nearest_airport = airportinfo();
- nearest_airport = nearest_airport == nil ? nil : nearest_airport.id;
- if (isin(loaded_airports, nearest_airport))
-  {
-  # loop through the AI aircraft and extend/retract jetways
-  var ai_aircraft = props.globals.getNode("ai/models").getChildren("aircraft");
-  foreach (var aircraft; ai_aircraft)
-   {
-   if (!aircraft.getNode("valid", 1).getBoolValue()) continue;
-   var connected = aircraft.getNode("connected-to-jetways", 1);
-   var velocity = aircraft.getNode("velocities/true-airspeed-kt").getValue();
-   # TODO: Find a better way to know when the aircraft is "parked"
-   if (velocity > -1 and velocity < 1)
-    {
-    if (!connected.getBoolValue()) toggle_jetway_from_model(aircraft);
-    connected.setBoolValue(1);
-    }
-   else
-    {
-    if (connected.getBoolValue()) toggle_jetway_from_model(aircraft);
-    connected.setBoolValue(0);
-    }
-   }
-  # loop through the multiplayer aircraft and extend/retract jetways
-  # TODO: In the future, broadcast jetway properties over MP, making this part obselete
-  if (mp_switch.getBoolValue())
-   {
-   var multiplayers = props.globals.getNode("ai/models").getChildren("multiplayer");
-   foreach (var aircraft; multiplayers)
-    {
-    if (!aircraft.getNode("valid", 1).getBoolValue()) continue;
-    var connected = aircraft.getNode("connected-to-jetways", 1);
-    var velocity = aircraft.getNode("velocities/true-airspeed-kt").getValue();
-    if (velocity > -1 and velocity < 1)
-     {
-     if (!connected.getBoolValue()) toggle_jetway_from_model(aircraft);
-     connected.setBoolValue(1);
-     }
-    else
-     {
-     if (connected.getBoolValue()) toggle_jetway_from_model(aircraft);
-     connected.setBoolValue(0);
-     }
-    }
-   }
   }
  # interpolate jetway values
  for (var i = 0; i < size(jetways); i += 1)
@@ -872,6 +826,53 @@ var load_jetways = func(loopid)
  foreach (var airport; airports)
   {
   load_airport_jetways(airport);
+  }
+
+ var nearest_airport = airportinfo();
+ nearest_airport = nearest_airport == nil ? nil : nearest_airport.id;
+ if (isin(loaded_airports, nearest_airport))
+  {
+  # loop through the AI aircraft and extend/retract jetways
+  var ai_aircraft = props.globals.getNode("ai/models").getChildren("aircraft");
+  foreach (var aircraft; ai_aircraft)
+   {
+   if (!aircraft.getNode("valid", 1).getBoolValue()) continue;
+   var connected = aircraft.getNode("connected-to-jetways", 1);
+   var velocity = aircraft.getNode("velocities/true-airspeed-kt").getValue();
+   # TODO: Find a better way to know when the aircraft is "parked"
+   if (velocity > -1 and velocity < 1)
+    {
+    if (!connected.getBoolValue()) toggle_jetway_from_model(aircraft);
+    connected.setBoolValue(1);
+    }
+   else
+    {
+    if (connected.getBoolValue()) toggle_jetway_from_model(aircraft);
+    connected.setBoolValue(0);
+    }
+   }
+  # loop through the multiplayer aircraft and extend/retract jetways
+  # TODO: In the future, broadcast jetway properties over MP, making this part obselete
+  if (mp_switch.getBoolValue())
+   {
+   var multiplayers = props.globals.getNode("ai/models").getChildren("multiplayer");
+   foreach (var aircraft; multiplayers)
+    {
+    if (!aircraft.getNode("valid", 1).getBoolValue()) continue;
+    var connected = aircraft.getNode("connected-to-jetways", 1);
+    var velocity = aircraft.getNode("velocities/true-airspeed-kt", 1).getValue();
+    if (velocity != nil and velocity > -1 and velocity < 1)
+     {
+     if (!connected.getBoolValue()) toggle_jetway_from_model(aircraft);
+     connected.setBoolValue(1);
+     }
+    else
+     {
+     if (connected.getBoolValue()) toggle_jetway_from_model(aircraft);
+     connected.setBoolValue(0);
+     }
+    }
+   }
   }
  settimer(func load_jetways(loopid), LOAD_PERIOD);
  };

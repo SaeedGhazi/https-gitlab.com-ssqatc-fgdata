@@ -838,9 +838,9 @@ var load_jetways = func(loopid)
    {
    if (!aircraft.getNode("valid", 1).getBoolValue()) continue;
    var connected = aircraft.getNode("connected-to-jetways", 1);
-   var velocity = aircraft.getNode("velocities/true-airspeed-kt").getValue();
+   var velocity = aircraft.getNode("velocities/true-airspeed-kt", 1).getValue();
    # TODO: Find a better way to know when the aircraft is "parked"
-   if (velocity > -1 and velocity < 1)
+   if (velocity != nil and velocity > -1 and velocity < 1)
     {
     if (!connected.getBoolValue()) toggle_jetway_from_model(aircraft);
     connected.setBoolValue(1);

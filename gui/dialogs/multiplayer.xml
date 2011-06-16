@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+
+
+<PropertyList>
+    <name>multiplayer</name>
+    <layout>vbox</layout>
+    <resizable>true</resizable>
+
+    <nasal>
+        <open>
+        </open>
+        
+        <close>
+        </close>
+    </nasal>
+    
+    <!-- titlebar -->
+    <group>
+        <layout>hbox</layout>
+        <empty><stretch>1</stretch></empty>
+
+        <text>
+            <label>Multiplayer Settings</label>
+        </text>
+
+        <empty><stretch>1</stretch></empty>
+
+        <button>
+            <pref-width>16</pref-width>
+            <pref-height>16</pref-height>
+            <legend></legend>
+            <default>1</default>
+            <keynum>27</keynum>
+            <border>2</border>
+
+            <binding>
+                <command>dialog-close</command>
+            </binding>
+        </button>
+    </group>
+    <hrule/>
+
+    <group>
+        <layout>table</layout>
+        <halign>center</halign>
+        <text>
+          <row>0</row><col>0</col>
+          <halign>right</halign>
+          <label>Callsign:</label>
+        </text>
+        <input>
+          <row>0</row><col>1</col>
+          <property>/sim/multiplay/callsign</property>
+        </input>
+        <text>
+          <row>1</row><col>0</col>
+          <halign>right</halign>
+          <label>Server:</label>
+        </text>
+        <combo>
+            <name>host</name>
+            <row>1</row><col>1</col>
+            <pref-width>120</pref-width>
+            <property>/sim/multiplay/txhost</property>
+            <editable>true</editable>
+            <properties>/sim/multiplay/servers</properties>
+        </combo>
+        <input>
+          <row>1</row><col>2</col>
+          <property>/sim/multiplay/txport</property>
+        </input>
+        
+    <!-- status area -->
+        <text>
+            <visible>
+                <not><property>/sim/multiplay/online</property></not>
+            </visible>
+            <row>2</row>
+            <col>1</col>
+            <label>Not connected</label>
+        </text>
+        
+        <text>
+            <visible>
+                <property>/sim/multiplay/online</property>
+            </visible>
+            <row>2</row>
+            <col>1</col>
+            
+            <label>MMMMMMMMMMMMMMMMM</label>
+            <format>Connected to %s</format>
+            <property>/sim/multiplay/txhost</property>
+            <live>true</live>
+        </text>
+    </group>
+    
+    <group>
+        <layout>hbox</layout>
+        <default-padding>10</default-padding>
+        <empty><stretch>true</stretch></empty>
+
+        <button>
+          <legend>Apply</legend>
+          <default>true</default>
+          <equal>true</equal>
+          <binding>
+            <command>dialog-apply</command>
+          </binding>
+          <binding>
+            <command>reinit</command>
+            <subsystem>mp</subsystem>
+          </binding>
+        </button>
+    </group>
+    
+</PropertyList>

@@ -512,6 +512,14 @@
 		<label>Multiplayer</label>
 		<name>multiplayer</name>
 
+        <item>
+			<label>Multiplayer settings</label>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>multiplayer</dialog-name>
+			</binding>
+		</item>
+		
 		<item>
 			<label>Chat Dialog</label>
 			<binding>

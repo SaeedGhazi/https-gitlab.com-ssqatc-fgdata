@@ -10,10 +10,11 @@
 		<open><![CDATA[
 		 var self = cmdarg();
 		 var aptlist = props.globals.getNode(self.getNode("text/property").getValue(), 1);
+		 var loadedN = props.globals.getNode("/nasal/jetways/loaded", 1);
 		 var UPDATE_PERIOD = 5;
 		 var update = func
 		  {
-		  if (jetways != nil)
+		  if (loadedN.getBoolValue())
 		   {
 		   var list = "";
 		   foreach (var apt; jetways.loaded_airports)

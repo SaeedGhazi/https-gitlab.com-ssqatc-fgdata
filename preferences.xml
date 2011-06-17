@@ -748,10 +748,9 @@ Started September 2000 by David Megginson, david@megginson.com
 
 		<!-- animated jetway options -->
 		<jetways>
-			<enabled type="bool" archive="y">false</enabled> <!-- disabled due to FPS impact -->
-			<enable-editor type="bool" archive="y">false</enable-editor>
-			<interact-with-multiplay type="bool" archive="y">true</interact-with-multiplay>
-			<debug type="bool" archive="y">false</debug>
+			<enable-editor type="bool">false</enable-editor>
+			<interact-with-multiplay type="bool" userarchive="y">true</interact-with-multiplay>
+			<debug type="bool">false</debug>
 		</jetways>
 
 		<terrasync preserve="y">
@@ -1243,6 +1242,12 @@ Started September 2000 by David Megginson, david@megginson.com
 	    <local_weather>
   			<enabled type="bool" userarchive="y">false</enabled>
 	    </local_weather>
+		<jetways>
+			<enabled type="bool" userarchive="y">false</enabled>
+		</jetways>
+		<jetways_edit>
+			<enabled type="bool" userarchive="n">false</enabled>
+		</jetways_edit>
 	</nasal>
 
 </PropertyList>

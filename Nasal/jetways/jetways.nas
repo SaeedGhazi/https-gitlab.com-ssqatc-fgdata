@@ -302,9 +302,9 @@ var loaded_airports = [];
 var jetways = [];
 
 # properties
-var on_switch = "/nasal/jetways/enabled";
-var debug_switch = "/sim/jetways/debug";
-var mp_switch = "/sim/jetways/interact-with-multiplay";
+var on_switch = nil;
+var debug_switch = nil;
+var mp_switch = nil;
 var jetway_id_prop = "/sim/jetways/last-loaded-jetway";
 
 # interpolation tables
@@ -408,6 +408,7 @@ var Jetway =
    parents: [Jetway]
    };
   m._active = 1; # set this to 'true' on the first run so that the offsets can take effect
+  m._edit = 0;
   m.airport = airport;
   m.gate = gate;
   m.airline = airline;
@@ -794,14 +795,17 @@ var update_jetways = func(loopid)
  for (var i = 0; i < size(jetways); i += 1)
   {
   var jetway = jetways[i];
-  if (jetway == nil or !jetway._active) continue;
-  var position = jetway.door_object.getpos();
-  if (position == 0 or position == 1) jetway._active = 0;
-  jetway.node.getNode("jetway-position/extend-m").setValue(interpolate_table(extend_table, position) * jetway.target_extend + jetway.init_extend);
-  jetway.node.getNode("jetway-position/pitch-deg").setValue(interpolate_table(pitch_table, position) * jetway.target_pitch + jetway.init_pitch);
-  jetway.node.getNode("jetway-position/heading-deg").setValue(interpolate_table(heading_table, position) * jetway.target_heading + jetway.init_heading);
-  jetway.node.getNode("jetway-position/entrance-heading-deg").setValue(interpolate_table(heading_entrance_table, position) * jetway.target_ent_heading + jetway.init_ent_heading);
-  jetway.node.getNode("jetway-position/hood-deg").setValue(interpolate_table(hood_table, position) * jetway.target_hood);
+  if (jetway == nil) continue;
+  if (jetway._active or jetway._edit)
+   {
+   var position = jetway.door_object.getpos();
+   if (position == 0 or position == 1) jetway._active = 0;
+   jetway.node.getNode("jetway-position/extend-m").setValue(interpolate_table(extend_table, position) * jetway.target_extend + jetway.init_extend);
+   jetway.node.getNode("jetway-position/pitch-deg").setValue(interpolate_table(pitch_table, position) * jetway.target_pitch + jetway.init_pitch);
+   jetway.node.getNode("jetway-position/heading-deg").setValue(interpolate_table(heading_table, position) * jetway.target_heading + jetway.init_heading);
+   jetway.node.getNode("jetway-position/entrance-heading-deg").setValue(interpolate_table(heading_entrance_table, position) * jetway.target_ent_heading + jetway.init_ent_heading);
+   jetway.node.getNode("jetway-position/hood-deg").setValue(interpolate_table(hood_table, position) * jetway.target_hood);
+   }
   }
  settimer(func update_jetways(loopid), UPDATE_PERIOD);
  };
@@ -889,9 +893,9 @@ _setlistener("/nasal/jetways/loaded", func
  if (size(scenery) == 0) append(scenery, root ~ "/Scenery");
 
  # properties
- on_switch = props.globals.getNode(on_switch, 1);
- debug_switch = props.globals.getNode(debug_switch, 1);
- mp_switch = props.globals.getNode(mp_switch, 1);
+ on_switch = props.globals.getNode("/nasal/jetways/enabled", 1);
+ debug_switch = props.globals.getNode("/sim/jetways/debug", 1);
+ mp_switch = props.globals.getNode("/sim/jetways/interact-with-multiplay", 1);
 
  jetway_id_prop = props.globals.getNode(jetway_id_prop, 1);
  restart();

@@ -18,37 +18,8 @@
 		  {
 		  if (substr(file, -3) == "xml")
 		   {
-		   var model = "";
-		   var isamodel = 0;
-		   for (var i = 0; i < size(file); i += 1)
-		    {
-		     model ~= substr(file, i, 1);
-		    if (substr(model, -9) == ".airline.")
-		     {
-		     model = substr(model, 0, size(model) - 9);
-		     isamodel = 1;
-		     break;
-		     }
-		    }
-		   if (!isamodel) continue;
-		   if (size(models) == 0)
-		    {
-		    models = [model];
-		    }
-		   else
-		    {
-		    for (var i = 0; i < size(models); i += 1)
-		     {
-		     if (models[i] == model)
-		      {
-		      break;
-		      }
-		     elsif (i == size(models) - 1)
-		      {
-		      append(models, model)
-		      }
-		     }
-		    }
+		   var tree = io.read_properties("Models/Airport/Jetway/" ~ file);
+		   if (tree.getNode("is-animated-jetway", 1).getBoolValue()) append(models, substr(file, 0, size(file) - 4));
 		   }
 		  }
 		 for (var i = 0; i < size(models); i += 1)

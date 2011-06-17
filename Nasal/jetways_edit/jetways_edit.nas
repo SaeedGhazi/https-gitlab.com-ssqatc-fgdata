@@ -243,11 +243,13 @@ var click = func(pos)
    }
   if (nearest_jetway != nil)
    {
+   if (selected_jetway != nil) selected_jetway._edit = 0;
    selected_jetway = nearest_jetway;
    setprop("/sim/jetways/adjust/model", selected_jetway.model);
    setprop("/sim/jetways/adjust/door", selected_jetway.door);
    setprop("/sim/jetways/adjust/airline", selected_jetway.airline);
    setprop("/sim/jetways/adjust/gate", selected_jetway.gate);
+   selected_jetway._edit = 1;
    flash(nearest_jetway);
    }
   }
@@ -256,6 +258,7 @@ var click = func(pos)
   var airport = getprop("/sim/airport/closest-airport-id");
   if (airport == "") return;
   selected_jetway = jetways.Jetway.new(airport, "generic", "FG", 0, "FGFS", pos.lat(), pos.lon(), pos.alt(), 0);
+  selected_jetway._edit = 1;
   if (!jetways.isin(jetways.loaded_airports, airport)) append(jetways.loaded_airports, airport);
   setprop("/sim/jetways/adjust/model", selected_jetway.model);
   setprop("/sim/jetways/adjust/door", selected_jetway.door);
@@ -367,7 +370,10 @@ var export = func
   node.getNode("airline", 1).setValue(jetway.airline);
   node.getNode("latitude-deg", 1).setDoubleValue(jetway.lat);
   node.getNode("longitude-deg", 1).setDoubleValue(jetway.lon);
-  node.getNode("elevation-m", 1).setDoubleValue(jetway.alt - geo.elevation(jetway.lat, jetway.lon));
+  var alt = jetway.alt;
+  jetway.setpos(jetway.lat, jetway.lon, jetway.heading, -geo.ERAD);
+  node.getNode("elevation-m", 1).setDoubleValue(alt - geo.elevation(jetway.lat, jetway.lon));
+  jetway.setpos(jetway.lat, jetway.lon, jetway.heading, alt);
   node.getNode("heading-deg", 1).setDoubleValue(geo.normdeg(180 - jetway.heading));
   node.getNode("initial-position/jetway-extension-m", 1).setDoubleValue(jetway.init_extend);
   node.getNode("initial-position/jetway-heading-deg", 1).setDoubleValue(jetway.init_heading);

@@ -391,6 +391,9 @@
       <border>2</border>
       <equal>true</equal>
       <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
         <command>reinit</command>
         <subsystem>terrasync</subsystem>
       </binding>
@@ -403,6 +406,9 @@
       <legend>Apply</legend>
       <equal>true</equal>
       <border>2</border>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
       <binding>
         <command>reinit</command>
         <subsystem>terrasync</subsystem>

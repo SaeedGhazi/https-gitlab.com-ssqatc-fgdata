@@ -504,6 +504,17 @@
 			</binding>
 		</item>
 
+                <item>
+                        <label>Jetway Settings</label>
+<!--                        <binding>
+                                <command>nasal</command>
+                                <script>jetways.jetways.dialog()</script>
+                        </binding>-->
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>jetways</dialog-name>
+			</binding>
+                </item>
 
 
 	</menu>
@@ -512,6 +523,14 @@
 		<label>Multiplayer</label>
 		<name>multiplayer</name>
 
+        <item>
+			<label>Multiplayer settings</label>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>multiplayer</dialog-name>
+			</binding>
+		</item>
+		
 		<item>
 			<label>Chat Dialog</label>
 			<binding>

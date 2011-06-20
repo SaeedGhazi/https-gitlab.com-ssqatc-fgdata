@@ -757,10 +757,15 @@ Started September 2000 by David Megginson, david@megginson.com
 			<enabled type="bool" userarchive="y">false</enabled>
 			<use-built-in-svn type="bool" userarchive="y">true</use-built-in-svn>
 			<refresh-display type="bool" userarchive="y">false</refresh-display>
-			<use-svn type="bool" userarchive="y">true</use-svn>
+			<use-svn type="bool" userarchive="n">true</use-svn>
 			<svn-server userarchive="y">http://terrascenery.googlecode.com/svn/trunk/data/Scenery</svn-server>
-			<rsync-server userarchive="y">scenery.flightgear.org::Scenery</rsync-server>
-			<scenery-dir userarchive="y"></scenery-dir>
+			<rsync-server userarchive="n">scenery.flightgear.org::Scenery</rsync-server>
+			<scenery-dir userarchive="y"><!-- INTENTIONALLY LEFT BLANK! Do NOT edit.
+				This (empty) value is the initial/default value only. Actual data is stored/read from
+				$HOME/.fgfs/autosave.xml. Use command-line option "terrasync-dir", GUI-dialog, or
+				property browser to configure actual directory. --></scenery-dir>
+			<ext-svn-utility type="string">svn</ext-svn-utility> <!-- use absolute path if "svn"
+				 isn't on system PATH (external SVN only)-->
 		</terrasync>
 	</sim>
 	<!-- mouse mode -->
@@ -1239,9 +1244,9 @@ Started September 2000 by David Megginson, david@megginson.com
 		<atc-chatter>
 			<enabled type="bool" userarchive="n">false</enabled>
 		</atc-chatter>
-	    <local_weather>
+		<local_weather>
   			<enabled type="bool" userarchive="y">false</enabled>
-	    </local_weather>
+		</local_weather>
 		<jetways>
 			<enabled type="bool" userarchive="y">false</enabled>
 		</jetways>

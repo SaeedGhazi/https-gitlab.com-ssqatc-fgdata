@@ -15,21 +15,21 @@
 ### This class specifies the offsets used when converting static jetways using the STG converter ###
 var Static_jetway =
  [
-  # Models/Airport/jetway-movable.ac
-  # Models/Airport/jetway-movable.xml
-  # Models/Airport/jetway-movable-2.ac
-  # Models/Airport/jetway-movable-2.xml
-  # Models/Airport/jetway-movable-3.ac
-  # Models/Airport/jetway-movable-3.xml
+  # Models/Airport/Jetway/jetway-movable.ac
+  # Models/Airport/Jetway/jetway-movable.xml
+  # Models/Airport/Jetway/jetway-movable-2.ac
+  # Models/Airport/Jetway/jetway-movable-2.xml
+  # Models/Airport/Jetway/jetway-movable-3.ac
+  # Models/Airport/Jetway/jetway-movable-3.xml
   {
   models:
    [
-   "Models/Airport/jetway-movable.ac",
-   "Models/Airport/jetway-movable.xml",
-   "Models/Airport/jetway-movable-2.ac",
-   "Models/Airport/jetway-movable-2.xml",
-   "Models/Airport/jetway-movable-3.ac",
-   "Models/Airport/jetway-movable-3.xml"
+   "Models/Airport/Jetway/jetway-movable.ac",
+   "Models/Airport/Jetway/jetway-movable.xml",
+   "Models/Airport/Jetway/jetway-movable-2.ac",
+   "Models/Airport/Jetway/jetway-movable-2.xml",
+   "Models/Airport/Jetway/jetway-movable-3.ac",
+   "Models/Airport/Jetway/jetway-movable-3.xml"
    ],
   offsets:
    {
@@ -48,15 +48,15 @@ var Static_jetway =
   model: "generic",
   airline: "None"
   },
-  # Models/Airport/jetway.xml
-  # Models/Airport/jetway-ba.ac
-  # Models/Airport/jetway-ba.xml
+  # Models/Airport/Jetway/jetway.xml
+  # Models/Airport/Jetway/jetway-ba.ac
+  # Models/Airport/Jetway/jetway-ba.xml
   {
   models:
    [
-   "Models/Airport/jetway.xml",
-   "Models/Airport/jetway-ba.ac",
-   "Models/Airport/jetway-ba.xml"
+   "Models/Airport/Jetway/jetway.xml",
+   "Models/Airport/Jetway/jetway-ba.ac",
+   "Models/Airport/Jetway/jetway-ba.xml"
    ],
   offsets:
    {
@@ -75,13 +75,13 @@ var Static_jetway =
   model: "generic",
   airline: "None"
   },
-  # Models/Airport/jetway-737-ba.ac
-  # Models/Airport/jetway-737-ba.xml
+  # Models/Airport/Jetway/jetway-737-ba.ac
+  # Models/Airport/Jetway/jetway-737-ba.xml
   {
   models:
    [
-   "Models/Airport/jetway-737-ba.ac",
-   "Models/Airport/jetway-737-ba.xml"
+   "Models/Airport/Jetway/jetway-737-ba.ac",
+   "Models/Airport/Jetway/jetway-737-ba.xml"
    ],
   offsets:
    {
@@ -100,13 +100,13 @@ var Static_jetway =
   model: "generic",
   airline: "None"
   },
-  # Models/Airport/jetway-747-ba.ac
-  # Models/Airport/jetway-747-ba.xml
+  # Models/Airport/Jetway/jetway-747-ba.ac
+  # Models/Airport/Jetway/jetway-747-ba.xml
   {
   models:
    [
-   "Models/Airport/jetway-747-ba.ac",
-   "Models/Airport/jetway-747-ba.xml"
+   "Models/Airport/Jetway/jetway-747-ba.ac",
+   "Models/Airport/Jetway/jetway-747-ba.xml"
    ],
   offsets:
    {
@@ -125,13 +125,13 @@ var Static_jetway =
   model: "generic",
   airline: "None"
   },
-  # Models/Airport/jetway-a320-ba.ac
-  # Models/Airport/jetway-a320-ba.xml
+  # Models/Airport/Jetway/jetway-a320-ba.ac
+  # Models/Airport/Jetway/jetway-a320-ba.xml
   {
   models:
    [
-   "Models/Airport/jetway-a320-ba.ac",
-   "Models/Airport/jetway-a320-ba.xml"
+   "Models/Airport/Jetway/jetway-a320-ba.ac",
+   "Models/Airport/Jetway/jetway-a320-ba.xml"
    ],
   offsets:
    {
@@ -150,13 +150,13 @@ var Static_jetway =
   model: "generic",
   airline: "None"
   },
-  # Models/Airport/AutoGate-ba.ac
-  # Models/Airport/AutoGate.xml
+  # Models/Airport/Jetway/AutoGate-ba.ac
+  # Models/Airport/Jetway/AutoGate.xml
   {
   models:
    [
-   "Models/Airport/AutoGate-ba.ac",
-   "Models/Airport/AutoGate.xml"
+   "Models/Airport/Jetway/AutoGate-ba.ac",
+   "Models/Airport/Jetway/AutoGate.xml"
    ],
   offsets:
    {
@@ -175,13 +175,13 @@ var Static_jetway =
   model: "generic",
   airline: "None"
   },
-  # Models/Airport/DockingGate-ba.ac
-  # Models/Airport/DockingGate.xml
+  # Models/Airport/Jetway/DockingGate-ba.ac
+  # Models/Airport/Jetway/DockingGate.xml
   {
   models:
    [
-   "Models/Airport/DockingGate-ba.ac",
-   "Models/Airport/DockingGate.xml"
+   "Models/Airport/Jetway/DockingGate-ba.ac",
+   "Models/Airport/Jetway/DockingGate.xml"
    ],
   offsets:
    {

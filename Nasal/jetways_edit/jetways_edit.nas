@@ -466,7 +466,7 @@ var convert_stg = func
    append(jetway_array, hash);
    }
 
-  var airport = getprop("/sim/jetways/closest-airport-id");
+  var airport = getprop("/sim/airport/closest-airport-id");
   if (airport == "") return;
   var i = 0;
   var loop = func

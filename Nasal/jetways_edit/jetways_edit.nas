@@ -224,6 +224,7 @@ var click = func(pos)
   }
  elsif (kbd_shift.getBoolValue())
   {
+  if (selected_jetway != nil) selected_jetway._edit = 0;
   selected_jetway = nil;
   }
  elsif (kbd_ctrl.getBoolValue())

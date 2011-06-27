@@ -119,6 +119,11 @@ print("* can disable global weather:      "~result);
 
 
 print("Compatibility layer: tests done.");
+
+# do actual startup()
+local_weather.updateMenu();
+local_weather.startup();
+
 });
 
 

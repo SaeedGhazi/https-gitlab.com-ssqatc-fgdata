@@ -41,7 +41,8 @@ void main(void)
 // http://code.google.com/p/flightgear-bugs/issues/detail?id=123
 //  float n = dot(normalize(-gl_LightSource[0].position.xyz),
 //                normalize(mat3x3(gl_ModelViewMatrix) * (- gl_Position.xyz)));;
-  float n = dot(normalize(-gl_LightSource[0].position.xyz), vec3(0.0,0.0,-1.0));
+  float n = dot(normalize(-gl_LightSource[0].position.xyz),
+                normalize(vec3(gl_ModelViewMatrix * vec4(- gl_Position.xyz,0.0))));
 
   // Determine the position - used for fog and shading calculations
   vec3 ecPosition = vec3(gl_ModelViewMatrix * gl_Position);

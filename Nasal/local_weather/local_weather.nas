@@ -56,6 +56,7 @@
 # set_texture_mix		to determine the texture mix between smooth and rough cloud appearance
 # create_effect_volume		to create an effect volume
 # set_weather_station		to specify a weather station for interpolation
+# set_atmosphere_ipoint		to specify an interpolation point for visibility, haze and shading in the atmosphere
 # set_wind_ipoint		to set an aloft wind interpolation point
 # set_wind_ipoint_metar		to set a wind interpolation point from available ground METAR info where aloft is modelled
 # showDialog			to pop up a dialog window
@@ -74,6 +75,7 @@
 # object			purpose
 
 # weatherStation		to store info about weather conditions
+# atmopshereIpoint		to store info about haze and light propagation in the atmosphere
 # windIpoint			to store an interpolation point of the windfield
 # effectVolume			to store effect volume info and provide methods to move and time-evolve effect volumes
 # thermalLift			to store thermal info and provide methods to move and time-evolve a thermal
@@ -108,6 +110,9 @@ return (x*x + y*y);
 ###################################
 
 var effect_volume_loop = func (index, n_active) {
+
+
+if (local_weather_running_flag == 0) {return;}
 
 var n = 25;
 
@@ -415,14 +420,11 @@ return f_slow;
 
 var interpolation_loop = func {
 
+if (local_weather_running_flag == 0) {return;}
+
 var viewpos = geo.aircraft_position();
 
-var sum_alt = 0.0;
-var sum_vis = 0.0;
-var sum_T = 0.0;
-var sum_p = 0.0;
-var sum_D = 0.0;
-var sum_norm = 0.0;
+
 
 var vis_before = getprop(lwi~"visibility-m");
 
@@ -453,6 +455,12 @@ else
 
 # get an inverse distance weighted average from all defined weather stations
 
+var sum_alt = 0.0;
+var sum_vis = 0.0;
+var sum_T = 0.0;
+var sum_p = 0.0;
+var sum_D = 0.0;
+var sum_norm = 0.0;
 
 var n_stations = size(weatherStationArray);
 
@@ -502,44 +510,150 @@ var D = sum_D/sum_norm;
 var T = sum_T/sum_norm;
 
 
+# get an inverse distance weighted average from all defined atmospheric condition points
+
+sum_norm = 0.0;
+var sum_vis_aloft = 0.0;
+var sum_vis_alt1 = 0.0;
+var sum_vis_ovcst = 0.0;
+var sum_ovcst = 0.0;
+var sum_ovcst_alt_low = 0.0;
+var sum_ovcst_alt_high = 0.0;
+var sum_scatt = 0.0;
+var sum_scatt_alt_low = 0.0;
+var sum_scatt_alt_high = 0.0;
+
+var n_iPoints = size(atmosphereIpointArray);
+
+for (var i = 0; i < n_iPoints; i=i+1) {
+	
+	a = atmosphereIpointArray[i];
+	
+
+	var apos = geo.Coord.new();
+	apos.set_latlon(a.lat,a.lon,0.0);
+
+	var d = viewpos.distance_to(apos);
+	if (d <100.0) {d = 100.0;} # to prevent singularity at zero
+
+	sum_norm = sum_norm + 1./d * a.weight;
+	sum_vis_aloft = sum_vis_aloft + (a.vis_aloft/d) * a.weight;
+	sum_vis_alt1 = sum_vis_alt1 + (a.vis_alt1/d) * a.weight;
+	sum_vis_ovcst = sum_vis_ovcst + (a.vis_ovcst/d) * a.weight;	
+	sum_ovcst = sum_ovcst + (a.ovcst/d) * a.weight;
+	sum_ovcst_alt_low = sum_ovcst_alt_low + (a.ovcst_alt_low/d) * a.weight;
+	sum_ovcst_alt_high = sum_ovcst_alt_high + (a.ovcst_alt_high/d) * a.weight;
+	sum_scatt = sum_scatt + (a.scatt/d) * a.weight;
+	sum_scatt_alt_low = sum_scatt_alt_low + (a.scatt_alt_low/d) * a.weight;
+	sum_scatt_alt_high = sum_scatt_alt_high + (a.scatt_alt_high/d) * a.weight;
+
+	# gradually fade in the interpolation weight of newly added stations to
+	# avoid sudden jumps
+
+	if (a.weight < 1.0) {a.weight = a.weight + 0.02;}
+
+	# automatically delete stations out of range
+	# take care not to unload if weird values appear for a moment
+	# never unload if only one station left
+	if ((d > distance_to_unload) and (d < (distance_to_unload + 20000.0)) and (n_iPoints > 1)) 
+		{
+		if (debug_output_flag == 1) 
+			{print("Distance to atmosphere interpolation point ", d, " m, unloading ...", i);}
+		atmosphereIpointArray = weather_tile_management.delete_from_vector(atmosphereIpointArray,i);
+		i = i-1; n_iPoints = n_iPoints -1;
+		}
+	}
+
+setprop(lwi~"atmosphere-ipoint-number", i+1);
+
+
+
+var vis_aloft = sum_vis_aloft/sum_norm;
+var vis_alt1 = sum_vis_alt1/sum_norm;
+var vis_ovcst = sum_vis_ovcst/sum_norm;
+var ovcst_max = sum_ovcst/sum_norm;
+var ovcst_alt_low = sum_ovcst_alt_low/sum_norm;
+var ovcst_alt_high = sum_ovcst_alt_high/sum_norm;
+var scatt_max = sum_scatt/sum_norm;
+var scatt_alt_low = sum_scatt_alt_low/sum_norm;
+var scatt_alt_high = sum_scatt_alt_high/sum_norm;
+
+
+
+
 # altitude model for visibility - increase above the lowest inversion layer to simulate ground haze
 
+
 var altitude = getprop("position/altitude-ft");
-
-var current_tile_index = getprop(lw~"tiles/tile[4]/tile-index");
-
-#if (presampling_flag == 1)
-#	{var current_mean_terrain_elevation = alt_20_array[current_tile_index -1];}
-#else
-#	{var current_mean_terrain_elevation = getprop(lw~"tmp/tile-alt-offset-ft");}
-
 current_mean_terrain_elevation = ialt;
 
-var alt1 = weather_dynamics.tile_convective_altitude[current_tile_index -1];
+var alt1 = vis_alt1;
 var alt2 = alt1 + 1500.0;
 
 
-var inc1 = 0.1;
-var inc2 = 5.0;
-var inc3 = 0.5;
+#var inc1 = 0.15;
+#var inc2 = 5.0;
+#var inc3 = 0.7;
 
-var alt_above_mean = altitude - current_mean_terrain_elevation;
+# compute the visibility gradients
 
-if (alt_above_mean < alt1)
-	{vis = vis + inc1 * alt_above_mean;}
-else if (alt_above_mean < alt2)
-	{vis = vis + inc1 * alt1 + inc2 * (alt_above_mean - alt1);}
-else if	(alt_above_mean > alt2)
-	{vis = vis + inc1 * alt1 + inc2 * (alt2-alt1)  + inc3 * (alt_above_mean - alt2);}
-	
+var inc1 = 0.1 * (vis_aloft - vis)/(vis_alt1 - ialt);
+var inc2 = 0.9 * (vis_aloft - vis)/1500.0;
+var inc3 = (vis_ovcst - vis_aloft)/(ovcst_alt_high - vis_alt1+1500);
+var inc4 = 0.5;
+
+# compute the visibility
+
+if (altitude < alt1)
+	{vis = vis + inc1 * altitude;}
+else if (altitude < alt2)
+	{
+	vis = vis + inc1 * alt1 + inc2 * (altitude - alt1); 
+	}
+else if	(altitude < ovcst_alt_high)
+	{
+	vis = vis + inc1 * alt1 + inc2 * (alt2-alt1)  + inc3 * (altitude - alt2);
+	}
+else if (altitude > ovcst_alt_high)
+	{
+	vis = vis + inc1 * alt1 + inc2 * (alt2-alt1)  + inc3 * (ovcst_alt_high - alt2) + inc4 * (altitude - ovcst_alt_high);
+	}
+
+# compute the horizon shading
+
+if (altitude < scatt_alt_low)
+	{
+	var scatt = scatt_max;
+	}
+else if (altitude < scatt_alt_high)
+	{
+	var scatt = scatt_max + (0.95 - scatt_max) * (altitude - scatt_alt_low)/(scatt_alt_high-scatt_alt_low);
+	}
+else
+	{var scatt = 0.95;}
+
+
+# compute the overcast haze
+
+if (altitude < ovcst_alt_low)
+	{
+	var ovcst = ovcst_max;
+	}
+else if (altitude < ovcst_alt_high)
+	{
+	var ovcst = ovcst_max - ovcst_max * (altitude - ovcst_alt_low)/(ovcst_alt_high-ovcst_alt_low);
+	}
+else
+	{var ovcst = 0.0;}
+
 
 # limit relative changes of the visibility, will make for gradual transitions
-
 
 if (vis/vis_before > vlimit)
 	{vis = vlimit * vis_before;}
 else if (vis/vis_before < (2.0-vlimit))
 	{vis = (2.0-vlimit) * vis_before;}
+
 
 
 
@@ -552,9 +666,11 @@ setprop(lwi~"dewpoint-degc",D);
 if (p > 10.0) {setprop(lwi~"pressure-sea-level-inhg",p);}
 setprop(lwi~"turbulence",0.0);
 
+compat_layer.setScattering(scatt);
+compat_layer.setOvercast(ovcst);
+
 # now check if an effect volume writes the property and set only if not
 
-#flag = props.globals.getNode("local-weather/effect-volumes/number-active-vis").getValue();
 flag = getprop("local-weather/effect-volumes/number-active-vis");
 
 if ((flag ==0) and (vis > 0.0) and (getprop(lw~"lift-loop-flag") == 0))
@@ -564,39 +680,32 @@ if ((flag ==0) and (vis > 0.0) and (getprop(lw~"lift-loop-flag") == 0))
 	compat_layer.setVisibility(vis);
 	}
 
-#flag = props.globals.getNode("local-weather/effect-volumes/number-active-turb").getValue();
 flag = getprop("local-weather/effect-volumes/number-active-turb");
 
 if ((flag ==0))
 	{
-	#cNode.getNode("turbulence").setValue(0.0);
 	setprop(lw~"current/turbulence",0.0);		
 	compat_layer.setTurbulence(0.0);
 	}
 
 
-#flag = props.globals.getNode("local-weather/effect-volumes/number-active-lift").getValue();
 flag = getprop("local-weather/effect-volumes/number-active-lift");
 
 if (flag ==0) 
 	{
-	#cNode.getNode("thermal-lift").setValue(0.0);
 	setprop(lw~"current/thermal-lift",0.0);
 	}
 
 # no need to check for these, as they are not modelled in effect volumes
 
-#cNode.getNode("temperature-degc",1).setValue(T);
 setprop(lw~"current/temperature-degc",T);
 compat_layer.setTemperature(T);
 
-#cNode.getNode("dewpoint-degc",1).setValue(D);
 setprop(lw~"current/dewpoint-degc", D);
 compat_layer.setDewpoint(D);
 
 if (p>0.0) 
 	{
-	#cNode.getNode("pressure-sea-level-inhg",1).setValue(p); 
 	setprop(lw~"current/pressure-sea-level-inhg",p);
 	compat_layer.setPressure(p);
 	}
@@ -794,6 +903,8 @@ if (getprop(lw~"lift-loop-flag") == 0)
 
 var thermal_lift_loop = func {
 
+if (local_weather_running_flag == 0) {return;}
+
 var apos = geo.aircraft_position();
 
 var tlat = thermal.lat;
@@ -914,6 +1025,8 @@ if (getprop(lw~"wave-loop-flag") == 0)
 ###################################
 
 var wave_lift_loop = func {
+
+if (local_weather_running_flag == 0) {return;}
 
 var lat = getprop("position/latitude-deg");
 var lon = getprop("position/longitude-deg");
@@ -1719,13 +1832,6 @@ foreach (var m; modelNode)
 	}
 
 
-
-# clear effect volumes
-
-#props.globals.getNode("local-weather/effect-volumes", 1).removeChildren("effect-volume");
-
-
-
 # reset pressure continuity
 
 weather_tiles.last_pressure = 0.0;
@@ -1745,11 +1851,12 @@ setprop(lw~"convective-loop-flag",0);
 
 weather_dynamics.convective_loop_kill_flag = 1; # long-running loop needs a different scheme to end
 
-# also remove rain snow and saturation effects
+# also remove rain, snow, haze and light effects
 
 compat_layer.setRain(0.0);
 compat_layer.setSnow(0.0);
 compat_layer.setLight(1.0);
+
 
 # set placement indices to zero
 
@@ -1783,11 +1890,14 @@ settimer ( func {
 	setsize(weather_dynamics.tile_convective_strength,0);
 	setsize(weatherStationArray,0);
 	setsize(windIpointArray,0);
+	setsize(atmosphereIpointArray,0);
 	setprop(lw~"clouds/buffer-count",0);
 	setprop(lw~"clouds/cloud-scenery-count",0);
 	weather_tile_management.n_cloudSceneryArray = 0;
-	#props.globals.getNode("local-weather/interpolation", 1).removeChildren("wind");
+	compat_layer.setScattering(0.8);
+	compat_layer.setOvercast(0.0);
 	setprop(lwi~"ipoint-number",0);
+	setprop(lwi~"atmosphere-ipoint-number", 0);
 	},1.1);
 
 setprop(lw~"tmp/presampling-status", "idle");
@@ -1928,6 +2038,8 @@ else
 
 var cumulus_loop = func (blat, blon, balt, nc, size) {
 
+if (local_weather_running_flag == 0) {return;}
+
 var n = int(25/cumulus_efficiency_factor);
 
 if (nc < 0) 
@@ -1939,7 +2051,6 @@ if (nc < 0)
 	return;
 	}
 
-#print("nc is now: ",nc);
 create_cumulus(blat, blon, balt, n, size);
 
 settimer( func {cumulus_loop(blat, blon, balt, nc-n, size) },0);
@@ -1962,6 +2073,13 @@ var strength = 0.0;
 var detail_flag = detailed_clouds_flag;
 
 var alpha = getprop(lw~"tmp/tile-orientation-deg") * math.pi/180.0; # the tile orientation
+
+if (detailed_terrain_interaction_flag == 1)
+	{
+	var alt_min = getprop(lw~"tmp/tile-alt-min-ft");
+	var alt_mean = getprop(lw~"tmp/tile-alt-mean-ft");
+	var alt_var = alt_mean - alt_min;
+	}
 
 var sec_to_rad = 2.0 * math.pi/86400; # conversion factor for sinusoidal dependence on daytime
 
@@ -2016,9 +2134,26 @@ while (i < nc) {
 	}}
 	else {continue;}
 
+
+	# apply some optional corrections, biases clouds towards higher elevations
+
+	var terrain_altitude_factor = 1.0;
+
+	if (detailed_terrain_interaction_flag == 1)
+		{
+		var elevation_enhancement = (elevation - alt_mean) / 1000.0;
+
+		if (elevation_enhancement > 0.7) {elevation_enhancement = 0.7;}
+		if (elevation_enhancement < -0.7) {elevation_enhancement = -0.7;}
+
+		terrain_altitude_factor = 1.0 + elevation_enhancement;
+
+		}
+
+
 	# then decide if the thermal energy at the spot generates an updraft and a cloud
 
-	if (rand() < (p * cumulus_efficiency_factor)) # we decide to place a cloud at this spot
+	if (rand() < (p * cumulus_efficiency_factor * terrain_altitude_factor)) # we decide to place a cloud at this spot
 		{
 		strength = (1.5 * rand() + (2.0 * p)) * t_factor2; # the strength of thermal activity at the spot
 		if (strength > 1.0)  
@@ -2807,6 +2942,7 @@ if (compat_layer.features.terrain_presampling_active == 1)
 
 var terrain_presampling_loop = func (blat, blon, nc, size, alpha) {
 
+if ((local_weather_running_flag == 0) and (local_weather_startup_flag == 0)) {return;}
 
 var n = 25;
 
@@ -2951,6 +3087,7 @@ if (debug_output_flag == 1)
 setprop(lw~"tmp/tile-alt-offset-ft",alt_20);
 setprop(lw~"tmp/tile-alt-median-ft",alt_med);
 setprop(lw~"tmp/tile-alt-min-ft",alt_min);
+setprop(lw~"tmp/tile-alt-mean-ft",alt_mean);
 setprop(lw~"tmp/tile-alt-layered-ft",0.5 * (alt_min + alt_20));
 
 append(alt_50_array, alt_med);
@@ -2964,6 +3101,8 @@ append(alt_20_array, alt_20);
 ###########################################################
 
 var wave_detection_loop = func (blat, blon, nx, alpha) {
+
+if (local_weather_running_flag == 0) {return;}
 
 var phi = alpha * math.pi/180.0;
 var elevation = 0.0;
@@ -3204,6 +3343,27 @@ if (dynamics_flag == 1)
 	s.timestamp = weather_dynamics.time_lw;
 	}
 append(weatherStationArray,s);
+
+}
+
+
+###########################################################
+# set an atmosphere condition point for interpolation
+###########################################################
+
+var set_atmosphere_ipoint = func (lat, lon, vis_aloft, vis_alt1, vis_ovcst, ovcst,ovcst_alt_low, ovcst_alt_high, scatt, scatt_alt_low, scatt_alt_high) {
+
+var a = atmosphereIpoint.new (lat, lon, vis_aloft, vis_alt1, vis_ovcst, ovcst, ovcst_alt_low, ovcst_alt_high, scatt, scatt_alt_low, scatt_alt_high);
+a.index = getprop(lw~"tiles/tile-counter");
+a.weight = 0.02;
+
+# set a timestamp if needed
+
+if (dynamics_flag == 1)
+	{
+	a.timestamp = weather_dynamics.time_lw;
+	}
+append(atmosphereIpointArray,a);
 
 }
 
@@ -3516,11 +3676,14 @@ var set_tile = func {
 
 # check if another instance of local weather is running already
 
+
 if (local_weather_running_flag == 1)
 	{
 	setprop("/sim/messages/pilot", "Local weather: Local weather is already running, use Clear/End before restarting. Aborting...");
 	return;
 	}
+
+local_weather_startup_flag = 1;
 
 
 var type = getprop("/local-weather/tmp/tile-type");
@@ -3576,6 +3739,11 @@ if ((presampling_flag == 1) and (getprop(lw~"tmp/presampling-status") == "idle")
 	return;
 	}
 
+
+# indicate that we're up and running
+
+local_weather_startup_flag = 0;
+local_weather_running_flag = 1;
 
 # see if we use METAR for weather setup
 
@@ -3819,9 +3987,7 @@ if (getprop(lw~"config/buffer-flag") ==1)
 		}
 	}
 
-# and indicate that we're up and running
 
-local_weather_running_flag = 1;
 
 # weather_tile_management.watchdog_loop();
 
@@ -3929,13 +4095,16 @@ var test = func {
 var lat = getprop("position/latitude-deg");
 var lon = getprop("position/longitude-deg");
 
-var pos = geo.aircraft_position();
+#var pos = geo.aircraft_position();
 
+debug.dump(geodinfo(lat, lon));
 
-setprop("/environment/terrain/area[0]/input/latitude-deg", lat );
-setprop("/environment/terrain/area[0]/input/longitude-deg", lon );
+# geo.put_model("Models/Astro/Earth.ac",lat, lon);
 
-setprop("/environment/terrain/area[0]/output/valid", 0 );
+#setprop("/environment/terrain/area[0]/input/latitude-deg", lat );
+#setprop("/environment/terrain/area[0]/input/longitude-deg", lon );
+
+#setprop("/environment/terrain/area[0]/output/valid", 0 );
 
 }
 
@@ -3957,7 +4126,34 @@ var weatherStation = {
 		s.T = T;
 		s.D = D;
 		s.p = p;
+		s.scattering = 0.8;
 	        return s;
+	},
+	move: func {
+		var windfield = weather_dynamics.get_windfield(me.index);
+		var dt = weather_dynamics.time_lw - me.timestamp;
+		me.lat = me.lat + windfield[1] * dt * local_weather.m_to_lat;
+		me.lon = me.lon + windfield[0] * dt * local_weather.m_to_lon;
+		me.timestamp = weather_dynamics.time_lw;
+	},
+};
+
+
+var atmosphereIpoint = {
+	new: func (lat, lon, vis_aloft, vis_alt1, vis_ovcst, ovcst, ovcst_alt_low, ovcst_alt_high, scatt, scatt_alt_low, scatt_alt_high){
+		var a = { parents: [atmosphereIpoint] };
+		a.lat = lat;
+		a.lon = lon;
+		a.vis_aloft = vis_aloft;
+		a.vis_alt1 = vis_alt1;
+		a.vis_ovcst = vis_ovcst;
+		a.ovcst = ovcst;
+		a.ovcst_alt_low = ovcst_alt_low;
+		a.ovcst_alt_high = ovcst_alt_high;
+		a.scatt = scatt;
+		a.scatt_alt_low = scatt_alt_low;
+		a.scatt_alt_high = scatt_alt_high;
+		return a;
 	},
 	move: func {
 		var windfield = weather_dynamics.get_windfield(me.index);
@@ -4175,7 +4371,7 @@ var ec = "/environment/config/";
 
 # a hash map of the strength for convection associated with terrain types
 
-var landcover_map = {BuiltUpCover: 0.35, Town: 0.35, Freeway:0.35, BarrenCover:0.3, HerbTundraCover: 0.25, GrassCover: 0.2, CropGrassCover: 0.2, EvergreenBroadCover: 0.2, EvergreenNeedleCover: 0.2, Sand: 0.25, Grass: 0.2, Ocean: 0.01, Marsh: 0.05, Lake: 0.01, ShrubCover: 0.15, Landmass: 0.2, CropWoodCover: 0.15, MixedForestCover: 0.1, DryCropPastureCover: 0.25, MixedCropPastureCover: 0.2, IrrCropPastureCover: 0.15, DeciduousBroadCover: 0.1, DeciduousNeedleCover: 0.1, Bog: 0.05, pa_taxiway : 0.35, pa_tiedown: 0.35, pc_taxiway: 0.35, pc_tiedown: 0.35, Glacier: 0.01, DryLake: 0.3, IntermittentStream: 0.2};
+var landcover_map = {BuiltUpCover: 0.35, Town: 0.35, Freeway:0.35, BarrenCover:0.3, HerbTundraCover: 0.25, GrassCover: 0.2, CropGrassCover: 0.2, EvergreenBroadCover: 0.2, EvergreenNeedleCover: 0.2, Sand: 0.25, Grass: 0.2, Ocean: 0.01, Marsh: 0.05, Lake: 0.01, ShrubCover: 0.15, Landmass: 0.2, CropWoodCover: 0.15, MixedForestCover: 0.1, DryCropPastureCover: 0.25, MixedCropPastureCover: 0.2, IrrCropPastureCover: 0.15, DeciduousBroadCover: 0.1, DeciduousNeedleCover: 0.1, Bog: 0.05, pa_taxiway : 0.35, pa_tiedown: 0.35, pc_taxiway: 0.35, pc_tiedown: 0.35, Glacier: 0.01, DryLake: 0.3, IntermittentStream: 0.2, DryCrop: 0.2, Lava: 0.3};
 
 # a hash map of average vertical cloud model sizes
 
@@ -4218,10 +4414,11 @@ var thermal = {};
 var wave = {};
 
 
-# arrays of currently existing weather stations and wind interpolation points
+# arrays of currently existing weather stations, wind interpolation and atmospheric condition points
 
 var weatherStationArray = [];
 var windIpointArray = [];
+var atmosphereIpointArray = [];
 
 
 # a flag for the wind model (so we don't have to do string comparisons all the time)
@@ -4256,7 +4453,9 @@ var dynamical_convection_flag = 1;
 var debug_output_flag = 1;
 var metar_flag = 0;
 var local_weather_running_flag = 0;
-var fps_control_flag = 1;
+var local_weather_startup_flag = 0;
+var fps_control_flag = 0;
+var detailed_terrain_interaction_flag = 1;
 
 # globals for framerate controlled cloud management
 
@@ -4414,10 +4613,12 @@ setprop(lw~"tiles/tile-counter",0);
 
 setprop(lwi~"ipoint-number",0);
 
+var updateMenu = func {
+	var isEnabled = getprop("/nasal/local_weather/enabled");
+	gui.menuEnable("local_weather", isEnabled);
+	gui.menuEnable("local_weather_tiles", isEnabled);
+}
 
-# wait for Nasal to be available and do what is in startup()
+_setlistener("/nasal/local_weather/enabled", updateMenu);
 
-_setlistener("/sim/signals/nasal-dir-initialized", func {
-	startup();
-});
 

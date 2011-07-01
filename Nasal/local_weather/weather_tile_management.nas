@@ -34,6 +34,9 @@
 
 var tile_management_loop = func {
 
+
+if (local_weather.local_weather_running_flag == 0) {return;}
+
 var tNode = props.globals.getNode(lw~"tiles", 1).getChildren("tile");
 var viewpos = geo.aircraft_position(); # using viewpos here triggers massive tile ops for tower view...
 var code = getprop(lw~"tiles/tile[4]/code");
@@ -1093,6 +1096,8 @@ setprop(lw~"tiles/tile[8]/orientation-deg",alpha);
 
 var buffer_loop = func (index) {
 
+if (local_weather.local_weather_running_flag == 0) {return;}
+
 var n = 5;
 var n_max = size(cloudBufferArray);
 var s = size(active_tile_list);
@@ -1224,6 +1229,8 @@ if (getprop(lw~"buffer-loop-flag") ==1) {settimer( func {buffer_loop(i)}, 0);}
 ###############################
 
 var housekeeping_loop = func (index) {
+
+if (local_weather.local_weather_running_flag == 0) {return;}
 
 var n = 5;
 var n_max = size(cloudSceneryArray);

@@ -78,11 +78,11 @@
    </option>
 
    <option>
-       <name>fg-aircraft</name>
-       <arg>path</arg>
-       <description>strings/fg-aircraft-desc</description>
-       <brief/>
-      </option>
+    <name>fg-aircraft</name>
+    <arg>path</arg>
+    <description>strings/fg-aircraft-desc</description>
+    <brief/>
+   </option>
 
    <option>
     <name>language</name>
@@ -230,6 +230,11 @@
    <option>
     <name>enable-ai-traffic</name>
     <description>strings/enable-ai-traffic-desc</description>
+   </option>
+
+   <option>
+    <name>disable-ai-scenarios</name>
+    <description>strings/disable-ai-scenarios</description>
    </option>
 
    <option>
@@ -976,6 +981,21 @@
     <name>jpg-httpd</name>
     <arg>port</arg>
     <description>strings/jpg-httpd-desc</description>
+   </option>
+
+   <option>
+    <name>disable-terrasync</name>
+    <description>strings/disable-terrasync-desc</description>
+   </option>
+
+   <option>
+    <name>enable-terrasync</name>
+    <description>strings/enable-terrasync-desc</description>
+   </option>
+
+   <option>
+    <name>terrasync-dir</name>
+    <description>strings/terrasync-dir-desc</description>
    </option>
 
   </section>

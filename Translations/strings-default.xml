@@ -100,6 +100,7 @@
  <enable-ai-models-desc>Enable AI subsystem (required for multi-player, AI traffic and many other animations)</enable-ai-models-desc>
  <disable-ai-traffic-desc>Disable artificial traffic.</disable-ai-traffic-desc>
  <enable-ai-traffic-desc>Enable artificial traffic.</enable-ai-traffic-desc>
+ <disable-ai-scenarios>Disable all AI scenarios.</disable-ai-scenarios>
  <ai-scenario>Add and enable a new scenario. Multiple options are allowed.</ai-scenario>
  <disable-freeze-desc>Start in a running state</disable-freeze-desc>
  <enable-freeze-desc>Start in a frozen state</enable-freeze-desc>
@@ -250,6 +251,9 @@
  <proxy-desc>Specify which proxy server (and port) to use. The username and password are optional and should be MD5 encoded already. This option is only useful when used in conjunction with the real-weather-fetch option.</proxy-desc>
  <telnet-desc>Enable telnet server on the specified port</telnet-desc>
  <jpg-httpd-desc>Enable screen shot http server on the specified port</jpg-httpd-desc>
+ <disable-terrasync-desc>Disable automatic scenery downloads/updates</disable-terrasync-desc>
+ <enable-terrasync-desc>Enable automatic scenery downloads/updates</enable-terrasync-desc>
+ <terrasync-dir-desc>Set target directory for scenery downloads</terrasync-dir-desc>
 
  <!-- MultiPlayer options -->
  <multiplayer-options>MultiPlayer Options</multiplayer-options>

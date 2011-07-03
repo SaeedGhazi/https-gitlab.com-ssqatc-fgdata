@@ -180,6 +180,47 @@ else
 	}
 }
 
+
+var setVisibilitySmoothly = func (vis) {
+
+if (features.can_disable_environment == 0)
+	{setVisibility(vis); return;}
+
+visibility_target = vis;
+visibility_current = getprop("/environment/visibility-m");
+
+if (smooth_visibility_loop_flag == 0)
+	{
+	smooth_visibility_loop_flag = 1;
+	visibility_loop();
+	}
+}
+
+var visibility_loop = func {
+
+if (local_weather.local_weather_running_flag == 0) {return;}
+
+if (visibility_target == visibility_current)
+	{smooth_visibility_loop_flag = 0; return;}
+
+if (visibility_target < visibility_current)
+	{
+	var vis_goal = visibility_target;
+	if (vis_goal < 0.97 * visibility_current) {vis_goal = 0.97 * visibility_current;}
+	}
+else
+	{
+	var vis_goal = visibility_target;
+	if (vis_goal > 1.03 * visibility_current) {vis_goal = 1.03 * visibility_current;}
+	}
+	
+setprop("/environment/visibility-m",vis_goal);
+visibility_current = vis_goal;	
+
+settimer( func {visibility_loop(); },0);
+}
+
+
 ####################################
 # set thermal lift to given value
 ####################################
@@ -344,6 +385,45 @@ if (features.can_set_light == 1)
 	{	
 	setprop("/rendering/scene/saturation",s);
 	}
+}
+
+var setLightSmoothly = func (s) {
+
+if (features.can_set_light == 0)
+	{return;}
+
+light_target = s;
+light_current = getprop("/rendering/scene/saturation");
+
+if (smooth_light_loop_flag == 0)
+	{
+	smooth_light_loop_flag = 1;
+	light_loop();
+	}
+}
+
+var light_loop = func {
+
+if (local_weather.local_weather_running_flag == 0) {return;}
+
+if (light_target == light_current)
+	{smooth_light_loop_flag = 0; return;}
+
+if (light_target < light_current)
+	{
+	var light_goal = light_target;
+	if (light_goal < 0.97 * light_current) {light_goal = 0.97 * light_current;}
+	}
+else
+	{
+	var light_goal = light_target;
+	if (light_goal > 1.03 * light_current) {light_goal = 1.03 * light_current;}
+	}
+	
+setprop("/rendering/scene/saturation",light_goal);
+light_current = light_goal;	
+
+settimer( func {light_loop(); },0);
 }
 
 
@@ -610,14 +690,6 @@ if (local_weather.dynamics_flag == 1)
 		var blat = buffered_tile_latitude;
 		var blon = buffered_tile_longitude;
 		var alpha = buffered_tile_alpha;
-		#var blat1 = getprop(lw~"tiles/tmp/latitude-deg");
-		#var blon1 = getprop(lw~"tiles/tmp/longitude-deg");
-		#var alpha1 = getprop(lw~"tmp/tile-orientation-deg");
-
-		#print("Lat: ", blat1, " ", blat);
-		#print("Lon: ", blon1, " ", blon);
-		#print("Alp: ", alpha1, " ", alpha);
-		
 		}
 	else
 		{
@@ -741,6 +813,18 @@ var ec = "/environment/config/";
 
 var mvec = [];
 var msize = 0;
+
+# loop flags and variables
+
+var smooth_visibility_loop_flag = 0;
+
+var visibility_target = 0.0;
+var visibility_current = 0.0;
+
+var smooth_light_loop_flag = 0;
+
+var light_target = 0.0;
+var light_current = 0.0;
 
 # available hard-coded support
 

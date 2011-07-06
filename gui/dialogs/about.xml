@@ -100,7 +100,7 @@
     <text>
       <halign>left</halign>
       <label>MMMMMMMMMM</label>
-      <format>SimGear Version: %s</format>
+      <format>FlightGear Version: %s</format>
       <property>/sim/version/flightgear</property>
     </text>
     

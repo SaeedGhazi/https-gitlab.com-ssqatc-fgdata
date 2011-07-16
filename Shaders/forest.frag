@@ -6,8 +6,6 @@ varying vec3 VTangent;
 varying vec3 VBinormal;
 varying vec3 VNormal;
 varying vec3 Normal;
-varying float bump;
-varying float fogCoord;
 
 uniform sampler3D NoiseTex;
 uniform sampler2D SampleTex;
@@ -61,6 +59,7 @@ float ray_intersect(sampler2D reliefMap, vec2 dp, vec2 ds)
 
 void main (void)
 {
+	float bump = 1.0;
 
 	if ( quality_level >= 3.5 ) {
 		linear_search_steps = 20;
@@ -100,6 +99,7 @@ void main (void)
 	float vegetationlevel = (rawpos.z)+nvL[2]*3000.0;
 
 	const float LOG2 = 1.442695;
+        float fogCoord = abs(ecPosition.z / ecPosition.w);
 	float fogFactor = exp(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord);
 	float biasFactor = exp2(-0.00000002 * fogCoord * fogCoord * LOG2);
 

@@ -150,13 +150,13 @@ var Static_jetway =
   model: "generic",
   airline: "None"
   },
-  # Models/Airport/AutoGate-ba.ac
-  # Models/Airport/AutoGate.xml
+  # Models/Airport/Jetway/AutoGate-ba.ac
+  # Models/Airport/Jetway/AutoGate.xml
   {
   models:
    [
-   "Models/Airport/AutoGate-ba.ac",
-   "Models/Airport/AutoGate.xml"
+   "Models/Airport/Jetway/AutoGate-ba.ac",
+   "Models/Airport/Jetway/AutoGate.xml"
    ],
   offsets:
    {
@@ -175,13 +175,13 @@ var Static_jetway =
   model: "generic",
   airline: "None"
   },
-  # Models/Airport/DockingGate-ba.ac
-  # Models/Airport/DockingGate.xml
+  # Models/Airport/Jetway/DockingGate-ba.ac
+  # Models/Airport/Jetway/DockingGate.xml
   {
   models:
    [
-   "Models/Airport/DockingGate-ba.ac",
-   "Models/Airport/DockingGate.xml"
+   "Models/Airport/Jetway/DockingGate-ba.ac",
+   "Models/Airport/Jetway/DockingGate.xml"
    ],
   offsets:
    {

@@ -7,7 +7,6 @@ varying vec3  VTangent;
 varying vec3  VBinormal;
 varying vec3  Normal;
 varying vec4  constantColor;
-varying float bump;
 
 uniform sampler3D NoiseTex;
 uniform sampler2D BaseTex;

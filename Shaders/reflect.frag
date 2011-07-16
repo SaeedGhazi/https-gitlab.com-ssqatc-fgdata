@@ -12,7 +12,6 @@ varying vec3  reflVec;
 
 varying vec4 Diffuse;
 varying float alpha;
-varying float fogCoord;
 
 uniform samplerCube Environment;
 uniform sampler2D Rainbow;
@@ -58,6 +57,8 @@ void main (void)
 
     // calculate the fog factor
     const float LOG2 = 1.442695;
+    float fogCoord = abs(ecPosition.z);
+    // float fogCoord = abs(ecPosition.z / ecPosition.w);
     float fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
     fogFactor = clamp(fogFactor, 0.0, 1.0);
 

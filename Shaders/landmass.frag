@@ -68,6 +68,9 @@ void main (void)
 		vec3 V = normalize(ecPosition.xyz);
 		float a = dot(VNormal, -V);
 		vec2 s = vec2(dot(V, VTangent), dot(V, VBinormal));
+
+                // prevent a device by zero
+                if (a > -1e-3 && a < 1e-3) a = 1e3;
 		s *= depth_factor / a;
 		ds = s;
 		dp = gl_TexCoord[0].st;

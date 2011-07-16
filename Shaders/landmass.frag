@@ -55,12 +55,15 @@ float ray_intersect(sampler2D reliefMap, vec2 dp, vec2 ds)
 
 void main (void)
 {
+	float bump = 1.0;
+
 	if ( quality_level >= 3.5 ) {
 		linear_search_steps = 20;
 	}
-	vec2 uv, dp, ds;
+
+	vec2 uv, dp = vec2(0, 0), ds = vec2(0, 0);
 	vec3 N;
-	float d;
+	float d = 0;
 	if ( bump > 0.9 && quality_level >= 2.0 )
 	{
 		vec3 V = normalize(ecPosition.xyz);

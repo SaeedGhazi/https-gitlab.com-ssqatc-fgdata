@@ -10,6 +10,7 @@ varying vec3 reflVec;
 
 varying vec4 Diffuse;
 varying float alpha;
+varying float fogCoord;
 
 uniform mat4 osg_ViewMatrixInverse;
 
@@ -35,6 +36,8 @@ void main(void)
         alpha = gl_FrontMaterial.diffuse.a;
     else
         alpha = gl_Color.a;
+
+    fogCoord = abs(ecPosition.z);
 
     // Vertex in eye coordinates
     vec3 vertVec = ecPosition.xyz;

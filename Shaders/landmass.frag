@@ -70,7 +70,7 @@ void main (void)
 		vec2 s = vec2(dot(V, VTangent), dot(V, VBinormal));
 
                 // prevent a divide by zero
-                if (a > -1e-3 && a < 1e-3) a = 1e3;
+                if (a > -1e-3 && a < 1e-3) a = 1e-3;
 		s *= depth_factor / a;
 		ds = s;
 		dp = gl_TexCoord[0].st;

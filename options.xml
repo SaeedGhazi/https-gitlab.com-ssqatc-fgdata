@@ -676,9 +676,21 @@
    </option>
 
    <option>
+    <name>vor-frequency</name>
+    <arg>frequency</arg>
+    <description>strings/vor-freq-desc</description>
+   </option>
+
+   <option>
     <name>ndb</name>
     <arg>ID</arg>
     <description>strings/ndb-desc</description>
+   </option>
+
+   <option>
+    <name>ndb-frequency</name>
+    <arg>frequency</arg>
+    <description>strings/ndb-freq-desc</description>
    </option>
 
    <option>

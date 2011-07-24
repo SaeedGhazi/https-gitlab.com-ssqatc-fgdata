@@ -207,6 +207,17 @@
 				</binding>
 			</checkbox>
 
+                        <checkbox>
+                                <halign>left</halign>
+                                <label>Animated jetways</label>
+                                <name>jetways</name>
+                                <property>/sim/jetways/enabled</property>
+                                <binding>
+                                        <command>dialog-apply</command>
+                                        <object-name>jetways</object-name>
+                                </binding>
+                        </checkbox>
+
 			<group>
 				<layout>hbox</layout>
 				<text>

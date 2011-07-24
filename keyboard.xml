@@ -668,6 +668,7 @@ top down before the key bindings are parsed.
   </binding>
  </key>
 
+ <!-- no longer used 
  <key n="73">
   <name>I</name>
   <desc>Switch to and toggle alternative HUD types</desc>
@@ -675,7 +676,7 @@ top down before the key bindings are parsed.
    <command>nasal</command>
    <script>aircraft.HUD.cycle_type()</script>
   </binding>
- </key>
+ </key> -->
 
  <key n="77">
   <name>M</name>
@@ -890,6 +891,7 @@ top down before the key bindings are parsed.
   </binding>
  </key>
 
+ <!-- no longer used 
  <key n="105">
   <name>i</name>
   <desc>Normal HUD</desc>
@@ -898,6 +900,7 @@ top down before the key bindings are parsed.
    <script>aircraft.HUD.normal_type()</script>
   </binding>
  </key>
+ -->
 
  <key n="106">
   <name>j</name>
@@ -950,20 +953,7 @@ top down before the key bindings are parsed.
   <name>p</name>
   <desc>Toggle the pause state of the sim</desc>
   <binding>
-   <command>property-toggle</command>
-   <property>/sim/freeze/master</property>
-  </binding>
-  <binding>
-   <command>property-toggle</command>
-   <property>/sim/freeze/clock</property>
-  </binding>
-  <binding>
-   <condition>
-     <property>/sim/freeze/replay-state</property>
-   </condition>
-   <command>property-assign</command>
-   <property>/sim/replay/disable</property>
-   <value type="bool">true</value>
+   <command>pause</command>
   </binding>
  </key>
 
@@ -1118,15 +1108,7 @@ top down before the key bindings are parsed.
   <name>F3</name>
   <desc>Capture screen</desc>
   <binding>
-   <command>nasal</command>
-   <script>
-     var success = fgcommand("screen-capture");
-     var path = getprop("/sim/paths/screenshot-last");
-     if (success)
-         gui.popupTip("Screenshot written to '" ~ path ~ "'");
-     else
-         gui.popupTip("Error writing screenshot '" ~ path ~ "'");
-   </script>
+   <command>screen-capture</command>
   </binding>
   <mod-shift>
    <desc>Load panel</desc>

@@ -16,7 +16,6 @@ var step_iter_count = 0;    # number or step loop iterations
 var last_step_time = nil;   # for set_targets() eta calculation
 var audio_dir = nil;
 
-
 # property nodes (to be initialized with listener)
 var markerN = nil;
 var headingN = nil;
@@ -26,7 +25,7 @@ var last_messageN = nil;
 var step_countN = nil;
 var step_timeN = nil;
 
-_setlistener("/sim/signals/nasal-dir-initialized", func {
+_setlistener("/nasal/tutorial/loaded", func {
 	markerN = props.globals.getNode("/sim/model/marker", 1);
 	headingN = props.globals.getNode("/orientation/heading-deg", 1);
 	slipN = props.globals.getNode("/orientation/side-slip-deg", 1);
@@ -36,8 +35,6 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	step_timeN = props.globals.getNode("/sim/tutorials/step-time", 1);
 	setlistener("/sim/crashed", stopTutorial);
 });
-
-
 
 var startTutorial = func {
 	var name = getprop("/sim/tutorials/current-tutorial");
@@ -192,7 +189,16 @@ var step_tutorial = func(id) {
 	var exit = step.getNode("exit");
 	if (exit != nil) {
 		if (!props.condition(exit.getNode("condition")))
+		{
+			if (time_elapsedN.getValue() - step_start_time > 15.0)
+			{
+				# What's going on? Repeat last message.
+				last_messageN.setValue("");
+				step_start_time = time_elapsedN.getValue();
+				do_group(step, "Tutorial step " ~ current_step);
+			}
 			return continue_after(exit, step_interval);
+		}
 
 		do_group(exit);
 	}
@@ -331,6 +337,9 @@ var set_view = func(node = nil) {
 	node != nil or return;
 	var v = node.getChild("view");
 	if (v != nil) {
+		# when changing view direction, switch to view 0 (captain's view),
+		# unless another view is explicitly specified
+		v.initNode("view-number", 0, "INT", 0);
 		view.point.move(v);
 		return 1;
 	}
@@ -363,7 +372,6 @@ var is_running = func(which = nil) {
 	var prop = "/sim/tutorials/running";
 	if (which != nil) {
 		setprop(prop, which);
-		gui.menuEnable("tutorial-stop", which);
 	}
 	return getprop(prop);
 }

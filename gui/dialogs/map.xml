@@ -57,8 +57,12 @@ command interface /autopilot/route-manager/input:
             <!-- sidebar -->
             <group>
                 <layout>vbox</layout>
-                <button>
-                    <legend>Fixes</legend>
+                <text>
+                    <label>Display:</label>
+                </text>
+
+                <checkbox>
+                    <label>Fixes</label>
                     <pref-width>100</pref-width>
                     <property>/gui/map/draw-fixes</property>
                     <live>true</live>
@@ -68,10 +72,10 @@ command interface /autopilot/route-manager/input:
                     <binding>
                       <command>property-toggle</command>
                     </binding>
-                </button>
+                </checkbox>
 
-                <button>
-                    <legend>Navaids</legend>
+                <checkbox>
+                    <label>Navaids</label>
                     <pref-width>100</pref-width>
                     <property>/gui/map/draw-navaids</property>
                     <live>true</live>
@@ -81,7 +85,7 @@ command interface /autopilot/route-manager/input:
                     <binding>
                       <command>property-toggle</command>
                     </binding>
-                </button>
+                </checkbox>
 <!--
                 <button>
                     <legend>Airways</legend>
@@ -89,8 +93,8 @@ command interface /autopilot/route-manager/input:
                 </button>
 -->
 
-                <button>
-                    <legend>Traffic</legend>
+                <checkbox>
+                    <label>Traffic</label>
                     <pref-width>100</pref-width>
                     <property>/gui/map/draw-traffic</property>
                     <live>true</live>
@@ -100,7 +104,7 @@ command interface /autopilot/route-manager/input:
                     <binding>
                       <command>property-toggle</command>
                     </binding>
-                </button>
+                </checkbox>
 
 <!--
                 <button>
@@ -109,8 +113,8 @@ command interface /autopilot/route-manager/input:
                 </button>
 -->
 
-                <button>
-                    <legend>Data</legend>
+                <checkbox>
+                    <label>Data</label>
                     <pref-width>100</pref-width>
                     <property>/gui/map/draw-data</property>
                     <live>true</live>
@@ -120,12 +124,12 @@ command interface /autopilot/route-manager/input:
                     <binding>
                       <command>property-toggle</command>
                     </binding>
-                </button>
+                </checkbox>
 
                 <empty><stretch>true</stretch></empty>
 
-                <button>
-                    <legend>Center on Acft</legend>
+                <checkbox>
+                    <label>Center on Acft</label>
                     <pref-width>100</pref-width>
                     <property>/gui/map/centre-on-aircraft</property>
                     <live>true</live>
@@ -135,10 +139,10 @@ command interface /autopilot/route-manager/input:
                     <binding>
                       <command>property-toggle</command>
                     </binding>
-                </button>
+                </checkbox>
 
-                <button>
-                    <legend>Acft Hdg Up</legend>
+                <checkbox>
+                    <label>Aircraft Hdg Up</label>
                     <pref-width>100</pref-width>
                     <property>/gui/map/aircraft-heading-up</property>
                     <live>true</live>
@@ -148,10 +152,10 @@ command interface /autopilot/route-manager/input:
                     <binding>
                       <command>property-toggle</command>
                     </binding>
-                </button>
+                </checkbox>
 
-                <button>
-                    <legend>Magnetic Hdgs</legend>
+                <checkbox>
+                    <label>Magnetic Hdgs</label>
                     <pref-width>100</pref-width>
                     <property>/gui/map/magnetic-headings</property>
                     <live>true</live>
@@ -161,7 +165,7 @@ command interface /autopilot/route-manager/input:
                     <binding>
                       <command>property-toggle</command>
                     </binding>
-                </button>
+                </checkbox>
 
                 <empty><stretch>true</stretch></empty>
 

@@ -4,17 +4,37 @@
 	<name>tutorial</name>
 	<layout>vbox</layout>
 	<resizable>true</resizable>
-	<default-padding>4</default-padding>
+	<default-padding>3</default-padding>
 
-	<text>
-		<label>Select Tutorial</label>
-	</text>
+	<group>
+		<layout>hbox</layout>
+		<default-padding>1</default-padding>
+
+		<empty><stretch>true</stretch></empty>
+
+		<text>
+			<label>Select Tutorial</label>
+		</text>
+
+		<empty><stretch>true</stretch></empty>
+
+		<button>
+			<legend></legend>
+			<key>Esc</key>
+			<pref-width>16</pref-width>
+			<pref-height>16</pref-height>
+			<border>2</border>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+	</group>
 
 	<hrule/>
 
 	<nasal>
 		<open>
-			var list = cmdarg().getNode("group[1]/group/list");
+			var list = cmdarg().getNode("group[2]/group/list");
 			var node = props.globals.getNode("/sim/tutorials", 1);
 			var tut = node.getChildren("tutorial");
 			var current = node.getNode("current-tutorial", 1);
@@ -106,26 +126,41 @@
 			</list>
 
 			<button>
-				<legend>Cancel</legend>
+				<legend>Start Tutorial</legend>
 				<equal>true</equal>
-				<key>Esc</key>
+				<default>true</default>
+				<binding>
+					<command>nasal</command>
+					<script>
+						setprop("/nasal/tutorial/enabled",1); # load module on demand
+						tutorial.startTutorial();
+					</script>
+				</binding>
 				<binding>
 					<command>dialog-close</command>
 				</binding>
 			</button>
 
 			<button>
-				<legend>Start Tutorial</legend>
+				<legend>Stop Tutorial</legend>
 				<equal>true</equal>
-				<default>true</default>
 				<binding>
 					<command>nasal</command>
-					<script>tutorial.startTutorial()</script>
+					<script>tutorial.stopTutorial()</script>
 				</binding>
+				<enable>
+					<property>/sim/tutorials/running</property>
+				</enable>
+			</button>
+
+			<button>
+				<legend>Cancel</legend>
+				<equal>true</equal>
 				<binding>
 					<command>dialog-close</command>
 				</binding>
 			</button>
+
 		</group>
 	</group>
 </PropertyList>

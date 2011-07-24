@@ -1,0 +1,431 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+  <name>terrasync</name>
+  <layout>vbox</layout>
+
+  <group>
+    <layout>hbox</layout>
+    <empty><stretch>1</stretch></empty>
+
+    <text>
+      <label>Automatic Scenery Download</label>
+    </text>
+
+	<empty><stretch>1</stretch></empty>
+
+    <button>
+      <pref-width>16</pref-width>
+      <pref-height>16</pref-height>
+      <legend></legend>
+      <keynum>27</keynum>
+      <border>2</border>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
+
+  <hrule/>
+
+  <text>       
+    <color>
+      <red>1.0</red>
+      <green>0.4</green>
+      <blue>0.4</blue>
+    </color>
+    <halign>center</halign>
+    <label>Monitor your bandwidth or use a flat-rate when using automatic download.</label>
+  </text>
+
+  <group>
+    <layout>table</layout>
+    <halign>left</halign>
+    <equal>false</equal>
+
+    <checkbox>
+      <name>terrasync-enabled</name>
+      <halign>left</halign>
+      <row>1</row><col>1</col><colspan>3</colspan>
+      <property>/sim/terrasync/enabled</property>
+      <label>Enable automatic scenery download/update</label>
+      <live>true</live>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>terrasync-enabled</object-name>
+      </binding>
+    </checkbox>
+
+    <text>
+      <halign>right</halign>
+      <row>3</row><col>1</col>
+      <label>Target directory:</label>
+    </text>
+    <input>
+      <name>scenery-dir</name>
+      <halign>left</halign>
+      <row>3</row>
+      <col>2</col><colspan>2</colspan>
+      <pref-width>400</pref-width>
+      <property>/sim/terrasync/scenery-dir</property>
+      <enable>
+        <property>/sim/terrasync/enabled</property>
+      </enable>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>scenery-dir</object-name>
+      </binding>
+    </input>
+
+    <text>
+      <row>4</row>
+      <col>2</col><colspan>3</colspan>
+      <color>
+        <red>0.7</red>
+        <green>0.7</green>
+        <blue>0.7</blue>
+        <alpha>1</alpha>
+      </color>
+      <halign>left</halign>
+      <label>Remember to add target directory to your 'fg-scenery' path list.</label>
+    </text>
+
+    <text>
+      <halign>right</halign>
+      <row>5</row><col>1</col>
+      <label>Remote scenery server:</label>
+    </text>
+    <input>
+      <name>svn-server</name>
+      <halign>left</halign>
+      <row>5</row>
+      <col>2</col><colspan>2</colspan>
+      <pref-width>400</pref-width>
+      <property>/sim/terrasync/svn-server</property>
+      <enable>
+        <!-- display only, editing disabled for now, since there is no reason
+             to change/switch between servers for now -->
+        <false/>
+        <!--property>/sim/terrasync/enabled</property-->
+      </enable>
+      <!--binding>
+        <command>dialog-apply</command>
+        <object-name>svn-server</object-name>
+      </binding-->
+    </input>
+
+    <checkbox>
+      <name>scenery-refresh</name>
+      <halign>left</halign>
+      <row>6</row><col>1</col><colspan>2</colspan>
+      <property>/sim/terrasync/refresh-display</property>
+      <enable>
+        <property>/sim/terrasync/enabled</property>
+      </enable>
+      <label>Automatic display refresh (EXPERIMENTAL!)</label>
+      <live>true</live>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>scenery-refresh</object-name>
+      </binding>
+    </checkbox>
+    <button>
+      <legend>Manual Refresh</legend>
+      <border>2</border>
+      <row>6</row><col>3</col>
+      <binding>
+        <command>reinit</command>
+        <subsystem>tile-manager</subsystem>
+      </binding>
+    </button>
+
+<!--
+    <checkbox>
+      <name>internal-svn</name>
+      <halign>left</halign>
+      <row>7</row><col>1</col><colspan>3</colspan>
+      <property>/sim/terrasync/use-built-in-svn</property>
+      <label>Download using built-in SVN client</label>
+      <live>true</live>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>internal-svn</object-name>
+      </binding>
+      <enable>
+        <and>
+          <property>/sim/terrasync/built-in-svn-available</property>
+          <property>/sim/terrasync/enabled</property>
+        </and>
+      </enable>
+    </checkbox>
+-->
+
+  </group>
+
+  <hrule/>
+
+  <group>
+    <layout>table</layout>
+    <halign>left</halign>
+    <equal>false</equal>
+
+    <text>
+      <row>0</row>
+      <col>1</col>
+      <halign>left</halign>
+      <pref-width>90</pref-width>
+      <label>Status:</label>
+      <color>
+        <red>0.7</red>
+        <green>0.7</green>
+        <blue>0.7</blue>
+        <alpha>1</alpha>
+      </color>
+    </text>
+
+    <text>
+      <halign>left</halign>
+      <row>0</row>
+      <col>2</col>
+      <label>Active:</label>
+      <color>
+        <red>0.7</red>
+        <green>0.7</green>
+        <blue>0.7</blue>
+        <alpha>1</alpha>
+      </color>
+    </text>
+    <text>
+      <row>0</row>
+      <col>3</col>
+      <pref-width>90</pref-width>
+      <halign>left</halign>
+      <stretch>true</stretch>
+      <format>%s</format>
+      <property>/sim/terrasync/active</property>
+      <live>true</live>
+      <color>
+        <red>0.7</red>
+        <green>0.7</green>
+        <blue>0.7</blue>
+        <alpha>1</alpha>
+      </color>
+    </text>
+
+    <text>
+      <halign>left</halign>
+      <row>0</row>
+      <col>4</col>
+      <label>Errors:</label>
+      <color>
+        <red>0.7</red>
+        <green>0.7</green>
+        <blue>0.7</blue>
+        <alpha>1</alpha>
+      </color>
+    </text>
+    <text>
+      <row>0</row>
+      <col>5</col>
+      <format>%s</format>
+      <property>/sim/terrasync/error-count</property>
+      <live>true</live>
+      <color>
+        <red>0.7</red>
+        <green>0.7</green>
+        <blue>0.7</blue>
+        <alpha>1</alpha>
+      </color>
+    </text>
+
+    <text>
+      <halign>left</halign>
+      <row>1</row>
+      <col>2</col>
+      <label>Sync in progress:</label>
+      <color>
+        <red>0.7</red>
+        <green>0.7</green>
+        <blue>0.7</blue>
+        <alpha>1</alpha>
+      </color>
+    </text>
+    <text>
+      <row>1</row>
+      <col>3</col>
+      <halign>left</halign>
+      <stretch>true</stretch>
+      <format>%s</format>
+      <property>/sim/terrasync/busy</property>
+      <live>true</live>
+      <color>
+        <red>0.7</red>
+        <green>0.7</green>
+        <blue>0.7</blue>
+        <alpha>1</alpha>
+      </color>
+    </text>
+
+    <text>
+      <halign>left</halign>
+      <row>2</row>
+      <col>2</col>
+      <label>Stalled:</label>
+      <color>
+        <red>0.7</red>
+        <green>0.7</green>
+        <blue>0.7</blue>
+        <alpha>1</alpha>
+      </color>
+    </text>
+    <text>
+      <row>2</row>
+      <col>3</col>
+      <halign>left</halign>
+      <stretch>true</stretch>
+      <format>%s</format>
+      <property>/sim/terrasync/stalled</property>
+      <live>true</live>
+      <color>
+        <red>0.7</red>
+        <green>0.7</green>
+        <blue>0.7</blue>
+        <alpha>1</alpha>
+      </color>
+    </text>
+
+    <text>
+      <halign>left</halign>
+      <row>3</row>
+      <col>2</col>
+      <label>Built-in SVN available:</label>
+      <color>
+        <red>0.7</red>
+        <green>0.7</green>
+        <blue>0.7</blue>
+        <alpha>1</alpha>
+      </color>
+    </text>
+    <text>
+      <row>3</row>
+      <col>3</col>
+      <halign>left</halign>
+      <stretch>true</stretch>
+      <format>%s</format>
+      <property>/sim/terrasync/built-in-svn-available</property>
+      <live>true</live>
+      <color>
+        <red>0.7</red>
+        <green>0.7</green>
+        <blue>0.7</blue>
+        <alpha>1</alpha>
+      </color>
+    </text>
+
+    <text>
+      <halign>left</halign>
+      <row>1</row>
+      <col>4</col>
+      <label>Processed elements:</label>
+      <color>
+        <red>0.7</red>
+        <green>0.7</green>
+        <blue>0.7</blue>
+        <alpha>1</alpha>
+      </color>
+    </text>
+    <text>
+      <row>1</row>
+      <col>5</col>
+      <format>%s</format>
+      <property>/sim/terrasync/update-count</property>
+      <live>true</live>
+      <stretch>true</stretch>
+      <halign>fill</halign>
+      <color>
+        <red>0.7</red>
+        <green>0.7</green>
+        <blue>0.7</blue>
+        <alpha>1</alpha>
+      </color>
+    </text>
+
+    <text>
+      <halign>left</halign>
+      <row>2</row>
+      <col>4</col>
+      <label>Processed scenery tiles:</label>
+      <color>
+        <red>0.7</red>
+        <green>0.7</green>
+        <blue>0.7</blue>
+        <alpha>1</alpha>
+      </color>
+    </text>
+    <text>
+      <row>2</row>
+      <col>5</col>
+      <format>%s</format>
+      <property>/sim/terrasync/tile-count</property>
+      <live>true</live>
+      <stretch>true</stretch>
+      <halign>fill</halign>
+      <color>
+        <red>0.7</red>
+        <green>0.7</green>
+        <blue>0.7</blue>
+        <alpha>1</alpha>
+      </color>
+    </text>
+  </group>
+
+  <hrule/>
+
+  <group>
+    <layout>hbox</layout>
+    <default-padding>10</default-padding>
+    <empty><stretch>true</stretch></empty>
+
+    <button>
+      <legend>OK</legend>
+      <border>2</border>
+      <equal>true</equal>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>reinit</command>
+        <subsystem>terrasync</subsystem>
+      </binding>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+
+    <button>
+      <legend>Apply</legend>
+      <equal>true</equal>
+      <border>2</border>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>reinit</command>
+        <subsystem>terrasync</subsystem>
+      </binding>
+    </button>
+
+    <button>
+      <legend>Cancel</legend>
+      <border>2</border>
+      <equal>true</equal>
+      <key>Esc</key>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+
+    <empty><stretch>true</stretch></empty>
+  </group>
+
+</PropertyList>

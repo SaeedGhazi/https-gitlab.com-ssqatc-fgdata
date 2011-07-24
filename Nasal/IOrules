@@ -28,6 +28,7 @@
 READ ALLOW $FG_ROOT/*
 READ ALLOW $FG_HOME/*
 READ ALLOW $FG_AIRCRAFT/*
+READ ALLOW $FG_SCENERY/*
 
 WRITE ALLOW /tmp/*.xml
 WRITE ALLOW $FG_HOME/*.sav
@@ -36,3 +37,4 @@ WRITE ALLOW $FG_HOME/Export/*
 WRITE ALLOW $FG_HOME/state/*.xml
 WRITE ALLOW $FG_HOME/aircraft-data/*.xml
 WRITE ALLOW $FG_HOME/Wildfire/*.xml
+WRITE ALLOW $FG_HOME/runtime-jetways/*.xml

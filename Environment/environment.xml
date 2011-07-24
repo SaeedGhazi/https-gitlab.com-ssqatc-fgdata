@@ -277,6 +277,11 @@
   </turbulence>
 
   <params>
+    <!-- 
+      valid values for jsbsim-turbulence-model:
+      ttNone, ttStandard, ttBerndt, ttCulp, ttMilspec, ttTustin
+    -->
+    <jsbsim-turbulence-model type="string" userarchive="y">ttMilspec</jsbsim-turbulence-model>
     <metar-max-age-min type="long">240</metar-max-age-min>
     <metar-updates-environment type="bool">true</metar-updates-environment>
     <metar-updates-winds-aloft type="bool">true</metar-updates-winds-aloft>
@@ -313,5 +318,12 @@
     <report-score type="bool" userarchive="y">false</report-score>
     <data type="string"/>
   </wildfire>
+
+  <!-- create on instance of the terrains-sampler but start disabled -->
+  <terrain>
+    <area>
+      <enabled type="bool">false</enabled>
+    </area>
+  </terrain>
 
 </PropertyList>

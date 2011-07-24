@@ -9,7 +9,8 @@
     <material>
       <color-mode-uniform>1</color-mode-uniform> <!-- DIFFUSE -->
     </material>
-	<condition><use>/sim/rendering/shader-effects</use></condition>
+    <condition><use>/sim/rendering/shader-effects</use></condition>
+    <factor>1</factor>
   </parameters>
   <technique n="10">
     <predicate>
@@ -103,6 +104,11 @@
         <name>condition</name>
         <type>float</type>
         <value><use>condition</use></value>
+      </uniform>
+      <uniform>
+        <name>lightmap_factor</name>
+        <type>float</type>
+        <value><use>factor</use></value>
       </uniform>
     </pass>
   </technique>

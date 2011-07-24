@@ -34,6 +34,9 @@
 
 var tile_management_loop = func {
 
+
+if (local_weather.local_weather_running_flag == 0) {return;}
+
 var tNode = props.globals.getNode(lw~"tiles", 1).getChildren("tile");
 var viewpos = geo.aircraft_position(); # using viewpos here triggers massive tile ops for tower view...
 var code = getprop(lw~"tiles/tile[4]/code");
@@ -61,6 +64,35 @@ if ((local_weather.metar_flag == 1) and (getprop(lw~"METAR/station-id") != getpr
 	{
 	weather_tiles.set_METAR_weather_station();
 	}
+
+# compute the averaged framerate and see if cloud visibility needs to be adjusted
+
+if (local_weather.fps_control_flag == 1) 
+	{
+	local_weather.fps_average = local_weather.fps_sum/local_weather.fps_samples;
+
+	# print("Average framerate: ", local_weather.fps_average);
+	
+	local_weather.fps_sum = 0.0;
+	local_weather.fps_samples = 0;
+
+	if (local_weather.fps_average > 1.1 * local_weather.target_framerate)
+		{
+		var target_cloud_view_distance = cloud_view_distance * 1.1;
+		if (target_cloud_view_distance > 45000.0)
+			{target_cloud_view_distance = 45000.0;}	
+		setprop(lw~"config/clouds-visible-range-m", target_cloud_view_distance);	
+		}
+	if (local_weather.fps_average < 0.9 * local_weather.target_framerate)
+		{
+		var target_cloud_view_distance = cloud_view_distance * 0.9;
+		if (target_cloud_view_distance < 15000.0)
+			{target_cloud_view_distance = 15000.0;}	
+		setprop(lw~"config/clouds-visible-range-m", target_cloud_view_distance);	
+		}
+
+	}
+
 
 
 
@@ -441,7 +473,7 @@ if (getprop(lw~"tmp/tile-management") == "repeat tile")
 	else if (code == "cold_sector") {weather_tiles.set_cold_sector_tile();}
 	else if (code == "warm_sector") {weather_tiles.set_warm_sector_tile();}
 	else if (code == "tropical_weather") {weather_tiles.set_tropical_weather_tile();}
-	#else if (code == "test") {weather_tiles.set_4_8_stratus_tile;}
+	else if (code == "test") {weather_tiles.set_4_8_stratus_tile();}
 	else 
 		{
 		print("Repeat tile not implemented with this tile type!");
@@ -450,50 +482,50 @@ if (getprop(lw~"tmp/tile-management") == "repeat tile")
 	}
 else if (getprop(lw~"tmp/tile-management") == "realistic weather")
 	{
-	var rn = rand();
+	var rn = rand() * getprop(lw~"config/large-scale-persistence");
 	
 	if (code == "low_pressure_core") 
 		{
-		if (rn > 0.2) {weather_tiles.set_low_pressure_core_tile();}
+		if (rn > 0.1) {weather_tiles.set_low_pressure_core_tile();}
 		else {weather_tiles.set_low_pressure_tile();}
 		}
 	else if (code == "low_pressure") 
 		{
-		if (rn > 0.2) {weather_tiles.set_low_pressure_tile();}
-		else if (rn > 0.1) {weather_tiles.set_low_pressure_core_tile();}
+		if (rn > 0.1) {weather_tiles.set_low_pressure_tile();}
+		else if (rn > 0.05) {weather_tiles.set_low_pressure_core_tile();}
 		else {weather_tiles.set_low_pressure_border_tile();}
 		}
 	else if (code == "low_pressure_border") 
 		{
-		if (rn > 0.4) {weather_tiles.set_low_pressure_border_tile();}
-		else if (rn > 0.3) {weather_tiles.set_cold_sector_tile();}
-		else if (rn > 0.2) {weather_tiles.set_warm_sector_tile();}
-		else if (rn > 0.1) {weather_tiles.set_low_pressure_tile();}
+		if (rn > 0.2) {weather_tiles.set_low_pressure_border_tile();}
+		else if (rn > 0.15) {weather_tiles.set_cold_sector_tile();}
+		else if (rn > 0.1) {weather_tiles.set_warm_sector_tile();}
+		else if (rn > 0.05) {weather_tiles.set_low_pressure_tile();}
 		else {weather_tiles.set_high_pressure_border_tile();}
 		}
 	else if (code == "high_pressure_border") 
 		{
-		if (rn > 0.4) {weather_tiles.set_high_pressure_border_tile();}
-		else if (rn > 0.3) {weather_tiles.set_cold_sector_tile();}
-		else if (rn > 0.2) {weather_tiles.set_warm_sector_tile();}
-		else if (rn > 0.1) {weather_tiles.set_high_pressure_tile();}
+		if (rn > 0.2) {weather_tiles.set_high_pressure_border_tile();}
+		else if (rn > 0.15) {weather_tiles.set_cold_sector_tile();}
+		else if (rn > 0.1) {weather_tiles.set_warm_sector_tile();}
+		else if (rn > 0.05) {weather_tiles.set_high_pressure_tile();}
 		else {weather_tiles.set_low_pressure_border_tile();}
 		}
 	else if (code == "high_pressure") 
 		{
-		if (rn > 0.2) {weather_tiles.set_high_pressure_tile();}
-		else if (rn > 0.1) {weather_tiles.set_high_pressure_border_tile();}
+		if (rn > 0.1) {weather_tiles.set_high_pressure_tile();}
+		else if (rn > 0.05) {weather_tiles.set_high_pressure_border_tile();}
 		else {weather_tiles.set_high_pressure_core_tile();}
 		}
 	else if (code == "high_pressure_core") 
 		{
-		if (rn > 0.2) {weather_tiles.set_high_pressure_core_tile();}
+		if (rn > 0.1) {weather_tiles.set_high_pressure_core_tile();}
 		else {weather_tiles.set_high_pressure_tile();}
 		}
 	else if (code == "cold_sector") 
 		{
-		if (rn > 0.3) {weather_tiles.set_cold_sector_tile();}
-		else if (rn > 0.2) 
+		if (rn > 0.15) {weather_tiles.set_cold_sector_tile();}
+		else if (rn > 0.1) 
 			{
 			if ((dir_index ==0) or (dir_index ==1) or (dir_index==2))
 				{weather_tiles.set_warmfront1_tile();}
@@ -502,13 +534,13 @@ else if (getprop(lw~"tmp/tile-management") == "realistic weather")
 			else if ((dir_index ==6) or (dir_index ==7) or (dir_index==8))
 				{weather_tiles.set_coldfront_tile();}
 			}
-		else if (rn > 0.1) {weather_tiles.set_low_pressure_border_tile();}
+		else if (rn > 0.05) {weather_tiles.set_low_pressure_border_tile();}
 		else {weather_tiles.set_high_pressure_border_tile();}
 		}
 	else if (code == "warm_sector") 
 		{
-		if (rn > 0.3) {weather_tiles.set_warm_sector_tile();}
-		else if (rn > 0.2) 
+		if (rn > 0.15) {weather_tiles.set_warm_sector_tile();}
+		else if (rn > 0.1) 
 			{
 			if ((dir_index ==0) or (dir_index ==1) or (dir_index==2))
 				{weather_tiles.set_coldfront_tile();}
@@ -517,7 +549,7 @@ else if (getprop(lw~"tmp/tile-management") == "realistic weather")
 			else if ((dir_index ==6) or (dir_index ==7) or (dir_index==8))
 				{weather_tiles.set_warmfront4_tile();}
 			}
-		else if (rn > 0.1) {weather_tiles.set_low_pressure_border_tile();}
+		else if (rn > 0.05) {weather_tiles.set_low_pressure_border_tile();}
 		else {weather_tiles.set_high_pressure_border_tile();}
 		}
 	else if (code == "warmfront1")
@@ -525,7 +557,12 @@ else if (getprop(lw~"tmp/tile-management") == "realistic weather")
 		if ((dir_index ==0) or (dir_index ==1) or (dir_index==2))
 			{weather_tiles.set_warmfront2_tile();}
 		else if ((dir_index ==3) or (dir_index ==5))
-			{weather_tiles.set_warmfront1_tile();}
+			{
+			if (rand() > 0.15)
+				{weather_tiles.set_warmfront1_tile();}
+			else
+				{weather_tiles.set_high_pressure_border_tile();}
+			}
 		else if ((dir_index ==6) or (dir_index ==7) or (dir_index==8))
 			{weather_tiles.set_cold_sector_tile();}
 		}
@@ -534,7 +571,12 @@ else if (getprop(lw~"tmp/tile-management") == "realistic weather")
 		if ((dir_index ==0) or (dir_index ==1) or (dir_index==2))
 			{weather_tiles.set_warmfront3_tile();}
 		if ((dir_index ==3) or (dir_index ==5))
-			{weather_tiles.set_warmfront2_tile();}
+			{
+			if (rand() > 0.15)			
+				{weather_tiles.set_warmfront2_tile();}
+			else
+				{weather_tiles.set_high_pressure_border_tile();}
+			}
 		if ((dir_index ==6) or (dir_index ==7) or (dir_index==8))
 			{weather_tiles.set_warmfront1_tile();}
 		}
@@ -543,7 +585,12 @@ else if (getprop(lw~"tmp/tile-management") == "realistic weather")
 		if ((dir_index ==0) or (dir_index ==1) or (dir_index==2))
 			{weather_tiles.set_warmfront4_tile();}
 		if ((dir_index ==3) or (dir_index ==5))
-			{weather_tiles.set_warmfront3_tile();}
+			{
+			if (rand() > 0.15)
+				{weather_tiles.set_warmfront3_tile();}
+			else
+				{weather_tiles.set_low_pressure_border_tile();}
+			}
 		if ((dir_index ==6) or (dir_index ==7) or (dir_index==8))
 			{weather_tiles.set_warmfront2_tile();}
 		}
@@ -552,7 +599,12 @@ else if (getprop(lw~"tmp/tile-management") == "realistic weather")
 		if ((dir_index ==0) or (dir_index ==1) or (dir_index==2))
 			{weather_tiles.set_warm_sector_tile();}
 		if ((dir_index ==3) or (dir_index ==5))
-			{weather_tiles.set_warmfront4_tile();}
+			{
+			if (rand() > 0.15)			
+				{weather_tiles.set_warmfront4_tile();}
+			else
+				{weather_tiles.set_low_pressure_tile();}
+			}
 		if ((dir_index ==6) or (dir_index ==7) or (dir_index==8))
 			{weather_tiles.set_warmfront3_tile();}
 		}
@@ -561,7 +613,12 @@ else if (getprop(lw~"tmp/tile-management") == "realistic weather")
 		if ((dir_index ==0) or (dir_index ==1) or (dir_index==2))
 			{weather_tiles.set_cold_sector_tile();}
 		else if ((dir_index ==3) or (dir_index ==5))
-			{weather_tiles.set_coldfront_tile();}
+			{	
+			if (rand() > 0.15)
+				{weather_tiles.set_coldfront_tile();}
+			else
+				{weather_tiles.set_high_pressure_border_tile();}
+			}
 		else if ((dir_index ==6) or (dir_index ==7) or (dir_index==8))
 			{weather_tiles.set_warm_sector_tile();}
 		}
@@ -1039,6 +1096,8 @@ setprop(lw~"tiles/tile[8]/orientation-deg",alpha);
 
 var buffer_loop = func (index) {
 
+if (local_weather.local_weather_running_flag == 0) {return;}
+
 var n = 5;
 var n_max = size(cloudBufferArray);
 var s = size(active_tile_list);
@@ -1170,6 +1229,8 @@ if (getprop(lw~"buffer-loop-flag") ==1) {settimer( func {buffer_loop(i)}, 0);}
 ###############################
 
 var housekeeping_loop = func (index) {
+
+if (local_weather.local_weather_running_flag == 0) {return;}
 
 var n = 5;
 var n_max = size(cloudSceneryArray);
@@ -1379,8 +1440,7 @@ var lon_to_m = 0.0; #local_weather.lon_to_m;
 var m_to_lon = 0.0; # local_weather.m_to_lon;
 var lw = "/local-weather/";
 
-var cloud_view_distance = 20000.0;
-
+var cloud_view_distance = getprop(lw~"config/clouds-visible-range-m");
 
 var modelArrays = [];
 var active_tile_list = [];

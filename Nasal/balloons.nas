@@ -17,8 +17,8 @@ _setlistener("/sim/signals/fdm-initialized", func {
       var callsign = tanker.getNode("callsign").getValue();
       if( callsign == nil ) continue;
       if( string.match(callsign,"ballon*") ) {
-        tanker.getNode("position/latitude-deg",1).setDoubleValue( position.lat() );
-        tanker.getNode("position/longitude-deg",1).setDoubleValue( position.lon() );
+        tanker.getNode("position/latitude-deg",1).setDoubleValue( position.lat() - 0.002 );
+        tanker.getNode("position/longitude-deg",1).setDoubleValue( position.lon() - 0.002 );
         tanker.getNode("position/altitude-ft", 1 ).setDoubleValue( position.alt() );
       }
     }

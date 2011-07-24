@@ -135,7 +135,6 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     }
     menuEnable("autopilot", isAutopilotMenuEnabled() );
     menuEnable("multiplayer", multiplayer.is_active());
-    menuEnable("tutorial-start", size(props.globals.getNode("/sim/tutorials", 1).getChildren("tutorial")));
     menuEnable("joystick-info", size(props.globals.getNode("/input/joysticks").getChildren("js")));
 
     # frame-per-second display
@@ -1224,7 +1223,7 @@ var common_aircraft_keys = {
         { name: "g/G",       desc: "gear up/down" },
         { name: "h",         desc: "cycle HUD (head up display)" },
         { name: "H",         desc: "cycle HUD brightness" },
-        { name: "i/Shift-i", desc: "normal/alternative HUD" },
+       #{ name: "i/Shift-i", desc: "normal/alternative HUD" },
        #{ name: "j",         desc: "decrease spoilers" },
        #{ name: "k",         desc: "increase spoilers" },
         { name: "l",         desc: "toggle tail-wheel lock" },
@@ -1254,3 +1253,41 @@ var common_aircraft_keys = {
         { name: "Shift-F8",  desc: "scroll 2D panel right" },
     ],
 };
+
+_setlistener("/sim/signals/screenshot", func {
+     var path = getprop("/sim/paths/screenshot-last");
+     var button = { button: { legend: "Ok", default: 1, binding: { command: "dialog-close" }}};
+     var success= getprop("/sim/signals/screenshot");
+     if (success) {
+         popupTip("Screenshot written to '" ~ path ~ "'", 3);
+     } else {
+         popupTip("Error writing screenshot '" ~ path ~ "'", 600, button);
+     }
+});
+
+var terrasync_stalled = 0;
+_setlistener("/sim/terrasync/stalled", func {
+     var stalled = getprop("/sim/terrasync/stalled");
+     if (stalled and !terrasync_stalled)
+     {
+         var button = { button: { legend: "Ok", default: 1, binding: { command: "dialog-close" }}};
+         popupTip("Scenery download stalled. Too many errors reported. See log output.", 600, button);
+     }
+     terrasync_stalled = stalled;
+});
+
+var do_welcome = 1;
+_setlistener("/sim/signals/fdm-initialized", func {
+    var haveTutorials = size(props.globals.getNode("/sim/tutorials", 1).getChildren("tutorial"));
+    gui.menuEnable("tutorial-start", haveTutorials);
+    if (do_welcome and haveTutorials)
+        settimer(func { setprop("/sim/messages/copilot", "Welcome aboard! Need help? Use 'Help -> Tutorials'.");}, 5.0);
+    do_welcome = 0;
+});
+
+# load ATC chatter module on demand
+setprop("/nasal/atc-chatter/enabled", getprop("/sim/sound/chatter/enabled"));
+_setlistener("/sim/sound/chatter/enabled", func {
+    setprop("/nasal/atc-chatter/enabled", getprop("/sim/sound/chatter/enabled"));
+});
+

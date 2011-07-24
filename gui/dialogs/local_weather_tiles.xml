@@ -39,6 +39,14 @@
    <binding>
     <command>dialog-apply</command>
    </binding>
+   <!--<enable>
+    <not>
+     <equals>
+      <property>/local-weather/tmp/tile-management</property>
+      <value type="string">METAR</value>
+     </equals>
+    </not>
+   </enable>-->
   </combo>
 
  <text>
@@ -100,7 +108,7 @@
    <width>50</width>
    <height>20</height>
    <min>0.0</min>
-   <max>1.0</max>
+   <max>2.0</max>
    <property>/local-weather/tmp/gust-frequency-hz</property>
    <binding>
      <command>dialog-apply</command>
@@ -205,7 +213,7 @@
    <width>15</width>
    <height>15</height>
    <label>terrain presampling</label>
-   <property>/local-weather/tmp/presampling-flag</property>
+   <property>/local-weather/config/presampling-flag</property>
    <binding>
     <command>dialog-apply</command>
    </binding>
@@ -330,7 +338,7 @@
    <y>0</y>
    <legend>Clear / End</legend>
    <!--<default>true</default>-->
-   <equal>true</equal>
+   <!--<equal>true</equal>-->
    <binding>
      <command>nasal</command>
      <script>local_weather.clear_all()</script>
@@ -341,7 +349,7 @@
    <x>135</x>
    <y>0</y>
    <legend>Close</legend>
-   <equal>true</equal>
+   <!--<equal>true</equal>-->
    <key>Esc</key>
    <binding>
     <command>dialog-close</command>
@@ -352,7 +360,7 @@
    <x>200</x>
    <y>0</y>
    <legend>Show winds</legend>
-   <equal>true</equal>
+   <!--<equal>true</equal>-->
    <binding>
     <command>dialog-show</command>
    <dialog-name>local_weather_winds</dialog-name>

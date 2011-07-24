@@ -100,7 +100,9 @@ var stepView = func(step, force = 0) {
             n = size(views) - 1;
         elsif (n >= size(views))
             n = 0;
-        if (force or (var e = views[n].getNode("enabled")) == nil or e.getBoolValue())
+        var e = views[n].getNode("enabled");
+        if (force or (e == nil or e.getBoolValue()) and
+            (views[n].getNode("name")!=nil))
             break;
     }
     setprop("/sim/current-view/view-number", n);
@@ -593,6 +595,9 @@ var point = {
 	},
 	move : func(prop, time = nil) {
 		prop != nil or return;
+		var n = prop.getNode("view-number");
+		if (n != nil)
+			setprop("/sim/current-view/view-number",n.getValue());
 		foreach (var a; keys(me.axes)) {
 			var n = prop.getNode(a);
 			me.axes[a].reset();

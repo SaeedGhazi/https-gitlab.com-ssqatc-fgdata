@@ -72,7 +72,7 @@ in detail below:
           <nasal>
               ...                     optional; Nasal code
           </nasal>
-          <interval>10</inteval>      optional; run loop next in this many seconds
+          <interval>10</interval>     optional; run loop next in this many seconds
       </init>                                   (default: 5); doesn't change global
                                                 interval
 
@@ -100,7 +100,7 @@ in detail below:
               ...                     optional; Nasal code that is executed when the
           </nasal>                              step is entered
 
-          <interval>10</inteval>      optional; run loop next in this many seconds
+          <interval>10</interval>     optional; run loop next in this many seconds
 
           <error>                     optional; allowed several times
               <message>..</message>       optional; text displayed/spoken
@@ -114,7 +114,7 @@ in detail below:
                   ...                     optional; Nasal code that is executed when the
               </nasal>                              error condition was fulfilled
 
-              <interval>10</inteval>      optional; run loop next in this many seconds
+              <interval>10</interval>     optional; run loop next in this many seconds
           </error>
 
           <exit>                      optional; defines when to leave this <step>
@@ -341,8 +341,11 @@ view to a new view position/direction. All parameters are optional. If, for
 example, only <field-of-view> is set, then the view will only zoom in -- the
 direction and position will remain the same. This feature is meant for cockpit
 tutorials, where the pilot's view is directed to some switch or instrument.
+view-number can be used to switch between different views, i.e. to tower-view,
+copilot view etc. Default view-number is 0 (captain's view).
 
   <view>
+      <view-number>0</view-number>                 0=captain's view, 1=copilot,...
       <heading-offset-deg>20</heading-offset-deg>  positive is left
       <pitch-offset-deg>-4</pitch-offset-deg>      positive is up
       <roll-offset-deg>0</roll-offset-deg>         positive is roll right

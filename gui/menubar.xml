@@ -21,12 +21,12 @@
 		</item>
 
 		<item>
-            <label>Scenario</label>
+			<label>Scenario</label>
 			<binding>
-                <command>dialog-show</command>
-                <dialog-name>scenario</dialog-name>
-            </binding>
-        </item>
+				<command>dialog-show</command>
+				<dialog-name>scenario</dialog-name>
+			</binding>
+		</item>
 -->
 		<item>
 			<label>Reset           (Shift-Esc)</label>
@@ -36,15 +36,15 @@
 		</item>
 
 		<!--		<item>
-            <label>Set Lat/Lon Format</label>
-            <binding>
-                <command>nasal</command>
-                <script>
-                    var f = getprop(var d = "/sim/lon-lat-format") + 1;
-                    setprop(d, f &lt; 0 ? 0 : f > 2 ? 0 : f);
-                </script>
-            </binding>
-        </item>
+			<label>Set Lat/Lon Format</label>
+			<binding>
+				<command>nasal</command>
+				<script>
+					var f = getprop(var d = "/sim/lon-lat-format") + 1;
+					setprop(d, f &lt; 0 ? 0 : f > 2 ? 0 : f);
+				</script>
+			</binding>
+		</item>
 			<label>High-Res Snapshot</label>
 			<enabled>false</enabled>
 			<binding>
@@ -58,26 +58,21 @@
 				<command>nasal</command>
 				<script>
 					gui.popdown();
-					var success = fgcommand("screen-capture");
-					var path = getprop("/sim/paths/screenshot-last");
-					if (success)
-					gui.popupTip("Screenshot written to '" ~ path ~ "'");
-					else
-					gui.popupTip("Error writing screenshot '" ~ path ~ "'");
+					fgcommand("screen-capture");
 				</script>
 			</binding>
 		</item>
 		<!--
 		<item>
-        <label>Last snapshot</label>
+		<label>Last snapshot</label>
 			<binding>
-                <command>nasal</command>
-                <script>
-                    var path = getprop("/sim/paths/screenshot-last");
-                    if (path != nil) gui.popupTip(...) else gui.popupTip("no screenshots yet in this session")
+				<command>nasal</command>
+				<script>
+					var path = getprop("/sim/paths/screenshot-last");
+					if (path != nil) gui.popupTip(...) else gui.popupTip("no screenshots yet in this session")
 
-                    gui.popupTip("Screenshot written to '" ~ path ~ "'");
-                </script>
+					gui.popupTip("Screenshot written to '" ~ path ~ "'");
+				</script>
 			</binding>
 		</item>
 
@@ -125,16 +120,16 @@
 		</item>
 
 		<item>
-			<!--      <item>
-            <label>Set Lat/Lon Format</label>
-            <binding>
-                <command>nasal</command>
-                <script>
-                    var f = getprop(var d = "/sim/lon-lat-format") + 1;
-                    setprop(d, f &lt; 0 ? 0 : f > 2 ? 0 : f);
-                </script>
-            </binding>
-        </item>   -->
+			<!--		<item>
+			<label>Set Lat/Lon Format</label>
+			<binding>
+				<command>nasal</command>
+				<script>
+					var f = getprop(var d = "/sim/lon-lat-format") + 1;
+					setprop(d, f &lt; 0 ? 0 : f > 2 ? 0 : f);
+				</script>
+			</binding>
+		</item>   -->
 			<label>View Options</label>
 			<binding>
 				<command>dialog-show</command>
@@ -282,6 +277,7 @@
 
 		<item>
 			<label>Route Manager</label>
+			<name>route-manager</name>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>route-manager</dialog-name>
@@ -290,6 +286,7 @@
 
 		<item>
 			<label>Previous Waypoint</label>
+			<name>previous-waypoint</name>
 			<binding>
 				<command>nasal</command>
 				<script>setprop("/autopilot/route-manager/input", "@previous")</script>
@@ -298,6 +295,7 @@
 
 		<item>
 			<label>Next Waypoint</label>
+			<name>next-waypoint</name>
 			<binding>
 				<command>nasal</command>
 				<script>setprop("/autopilot/route-manager/input", "@next")</script>
@@ -307,6 +305,7 @@
 
 	<menu>
 		<label>Environment</label>
+		<name>environment</name>
 
 		<!--<item>
 			<label>Weather Scenario</label>
@@ -326,6 +325,7 @@
 
 		<item>
 			<label>Global Weather</label>
+			<name>global-weather</name>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>weather</dialog-name>
@@ -334,14 +334,8 @@
 
 		<item>
 			<label>Local Weather</label>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>local_weather</dialog-name>
-			</binding>
-		</item>
-
-		<item>
-			<label>Local Weather Tiles</label>
+			<name>local_weather_tiles</name>
+			<enabled>false</enabled>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>local_weather_tiles</dialog-name>
@@ -349,7 +343,8 @@
 		</item>
 
 		<item>
-			<label>Local Weather Config</label>
+			<label>Local Weather Settings</label>
+			<name>local_weather_config</name>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>local_weather_config</dialog-name>
@@ -358,6 +353,7 @@
 
 		<item>
 			<label>Time Settings</label>
+			<name>time-settings</name>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>timeofday</dialog-name>
@@ -366,9 +362,19 @@
 
 		<item>
 			<label>Wildfire Settings</label>
+			<name>wildfire-settings</name>
 			<binding>
 				<command>nasal</command>
 				<script>wildfire.dialog.show()</script>
+			</binding>
+		</item>
+
+		<item>
+			<label>Scenery Download</label>
+			<name>terrasync</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>terrasync</dialog-name>
 			</binding>
 		</item>
 
@@ -376,6 +382,7 @@
 
 	<menu>
 		<label>Equipment</label>
+		<name>equipment</name>
 
 		<item>
 			<label>Map</label>
@@ -388,6 +395,7 @@
 
 		<item>
 			<label>Stopwatch</label>
+			<name>stopwatch</name>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>stopwatch-dialog</dialog-name>
@@ -423,13 +431,12 @@
 
 		<item>
 			<label>Instrument Settings</label>
+			<name>instrument-settings</name>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>instruments</dialog-name>
 			</binding>
 		</item>
-
-
 
 		<item>
 			<label> --- Failures ---</label>
@@ -438,6 +445,7 @@
 
 		<item>
 			<label>Random Failures</label>
+			<name>random-failures</name>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>random-failures</dialog-name>
@@ -446,6 +454,7 @@
 
 		<item>
 			<label>System Failures</label>
+			<name>system-failures</name>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>system-failures</dialog-name>
@@ -454,6 +463,7 @@
 
 		<item>
 			<label>Instrument Failures</label>
+			<name>instrument-failures</name>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>instrument-failures</dialog-name>
@@ -470,10 +480,11 @@
 				<command>ATC-freq-search</command>
 			</binding>
 		</item>
-
 		-->
+
 		<item>
 			<label>Wingman Controls</label>
+			<name>wingman</name>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>formation</dialog-name>
@@ -492,6 +503,7 @@
 
 		<item>
 			<label>Carrier Controls</label>
+			<name>carrier</name>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>AIcarrier</dialog-name>
@@ -500,13 +512,21 @@
 
 		<item>
 			<label>Scenario Select (requires restart)</label>
+			<name>scenario</name>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>scenario</dialog-name>
 			</binding>
 		</item>
 
-
+		<item>
+			<label>Jetway Settings</label>
+			<name>jetway</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>jetways</dialog-name>
+			</binding>
+		</item>
 
 	</menu>
 
@@ -515,7 +535,17 @@
 		<name>multiplayer</name>
 
 		<item>
+			<label>Multiplayer settings</label>
+			<name>mp-settings</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>multiplayer</dialog-name>
+			</binding>
+		</item>
+		
+		<item>
 			<label>Chat Dialog</label>
+			<name>mp-chat</name>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>chat-full</dialog-name>
@@ -524,6 +554,7 @@
 
 		<item>
 			<label>Chat Menu         (-)</label>
+			<name>mp-chat-menu</name>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>chat-menu</dialog-name>
@@ -532,6 +563,7 @@
 
 		<item>
 			<label>Pilot List</label>
+			<name>mp-list</name>
 			<binding>
 				<command>nasal</command>
 				<script>multiplayer.dialog.show()</script>
@@ -540,6 +572,7 @@
 
 		<item>
 			<label>MPCarrier Selection</label>
+			<name>mp-carrier</name>
 			<binding>
 				<command>nasal</command>
 				<script>
@@ -551,7 +584,6 @@
 				</script>
 			</binding>
 		</item>
-
 
 	</menu>
 
@@ -574,7 +606,7 @@
 			</binding>
 		</item>
 
-        <item>
+		<item>
 			<label>Reload HUD</label>
 			<binding>
 				<command>reinit</command>
@@ -607,14 +639,6 @@
 		</item>
 
 		<item>
-			<label>Reload Scenery</label>
-			<binding>
-				<command>reinit</command>
-				<subsystem>tile-manager</subsystem>
-			</binding>
-		</item>
-
-		<item>
 			<label>Nasal Console</label>
 			<binding>
 				<command>dialog-show</command>
@@ -642,7 +666,10 @@
 			<label>Display Tutorial Marker</label>
 			<binding>
 				<command>nasal</command>
-				<script>tutorial.dialog()</script>
+				<script>
+					setprop("/nasal/tutorial/enabled",1); # load module on demand
+					tutorial.dialog();
+				</script>
 			</binding>
 		</item>
 
@@ -696,6 +723,16 @@
 		</item>
 
 		<item>
+			<label>Local Weather (Test)</label>
+			<name>local_weather</name>
+			<enabled>false</enabled>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>local_weather</dialog-name>
+			</binding>
+		</item>
+
+		<item>
 			<label>Print Visible Scene Info</label>
 			<binding>
 				<command>print-visible-scene</command>
@@ -704,13 +741,13 @@
 
 	</menu>
 
-
 	<menu>
 		<label>Help</label>
-
+		<name>help</name>
 
 		<item>
 			<label>Help  (opens in browser)</label>
+			<name>help-browser</name>
 			<binding>
 				<command>old-help-dialog</command>
 			</binding>
@@ -718,6 +755,7 @@
 
 		<item>
 			<label>Aircraft Help              (?)</label>
+			<name>aircraft-keys</name>
 			<binding>
 				<command>nasal</command>
 				<script>gui.showHelpDialog("/sim/help")</script>
@@ -735,19 +773,21 @@
 
 		<item>
 			<label>Basic Simulator Keys</label>
+			<name>basic-keys</name>
 			<binding>
 				<command>nasal</command>
 				<script>gui.showHelpDialog("/sim/help/basic")</script>
 			</binding>
 		</item>
 
-    <item>
-      <label>Common Aircraft Keys</label>
-      <binding>
-        <command>nasal</command>
-        <script>gui.showHelpDialog("/sim/help/common")</script>
-      </binding>
-    </item>
+		<item>
+			<label>Common Aircraft Keys</label>
+			<name>common-keys</name>
+			<binding>
+				<command>nasal</command>
+				<script>gui.showHelpDialog("/sim/help/common")</script>
+			</binding>
+		</item>
 
 		<item>
 			<label>------------------</label>
@@ -755,21 +795,11 @@
 		</item>
 
 		<item>
-			<label>Start Tutorial</label>
+			<label>Tutorials</label>
 			<name>tutorial-start</name>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>tutorial</dialog-name>
-			</binding>
-		</item>
-
-		<item>
-			<label>End Tutorial</label>
-			<name>tutorial-stop</name>
-			<enabled>false</enabled>
-			<binding>
-				<command>nasal</command>
-				<script>tutorial.stopTutorial()</script>
 			</binding>
 		</item>
 

@@ -226,11 +226,7 @@ settimer( func {visibility_loop(); },0);
 ####################################
 
 var setLift = func (lift) {
-
-if (features.can_disable_environment == 1)
-	{
-	setprop("/environment/wind-from-down-fps",lift);
-	}
+	setprop("/environment/local-weather-lift-fps",lift);
 }
 
 ####################################

@@ -133,7 +133,7 @@
         <sum>
           <property>/environment/thermal-lift-fps</property>
           <property>/environment/ridge-lift-fps</property>
-          <property>/environment/local-weather-lift</property>
+          <property>/environment/local-weather-lift-fps</property>
         </sum>
       </expression>
     </input>

@@ -77,7 +77,7 @@
       </slider>
       <text>
         <label>12345678</label>
-        <format>%.2f</format>
+        <format>%.2f m</format>
         <live>true</live>
         <property>/sim/rendering/osg-displaysettings/screen-distance</property>
       </text>
@@ -98,7 +98,7 @@
       </slider>
       <text>
         <label>12345678</label>
-        <format>%.2f</format>
+        <format>%.2f m</format>
         <live>true</live>
         <property>/sim/rendering/osg-displaysettings/eye-separation</property>
       </text>

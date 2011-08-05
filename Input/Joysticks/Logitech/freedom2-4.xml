@@ -32,6 +32,7 @@
 	<axis>
 		<desc>Aileron</desc>
 		<number>
+			<mac>0</mac>
 			<unix>0</unix>
 			<windows>0</windows>
 		</number>
@@ -45,6 +46,7 @@
 	<axis>
 		<desc>Elevator</desc>
 		<number>
+			<mac>1</mac>
 			<unix>1</unix>
 			<windows>1</windows>
 		</number>
@@ -59,6 +61,7 @@
 	<axis>
 		<desc>Throttle</desc>
 		<number>
+			<mac>3</mac>
 			<unix>3</unix>
 			<windows>2</windows>
 		</number>
@@ -71,6 +74,7 @@
 	<axis>
 		<desc>Rudder</desc>
 		<number>
+			<mac>2</mac>
 			<unix>2</unix>
 			<windows>3</windows>
 		</number>
@@ -84,6 +88,7 @@
 	<axis>
 		<desc>View Direction Ctrl Aileron Trim</desc>
 		<number>
+			<mac>4</mac>
 			<unix>4</unix>
 			<windows>6</windows>
 		</number>
@@ -122,6 +127,7 @@
 	<axis>
 		<desc>View Elevation Ctrl Elevator Trim</desc>
 		<number>
+			<mac>5</mac>
 			<unix>5</unix>
 			<windows>7</windows>
 		</number>
@@ -160,6 +166,7 @@
 	<button>
 		<desc>Brakes</desc>
 		<number>
+			<mac>0</mac>
 			<unix>0</unix>
 			<windows>0</windows>
 		</number>
@@ -178,6 +185,7 @@
 	<button>
 		<desc>Trigger</desc>
 		<number>
+			<mac>1</mac>
 			<unix>1</unix>
 			<windows>1</windows>
 		</number>
@@ -202,6 +210,7 @@
 	<button>
 		<desc>Elevator trim up</desc>
 		<number>
+			<mac>2</mac>
 			<unix>2</unix>
 			<windows>2</windows>
 		</number>
@@ -215,6 +224,7 @@
 	<button>
 		<desc>Elevator trim down</desc>
 		<number>
+			<mac>4</mac>
 			<unix>4</unix>
 			<windows>4</windows>
 		</number>
@@ -228,6 +238,7 @@
 	<button>
 		<desc>Flaps down</desc>
 		<number>
+			<mac>3</mac>
 			<unix>3</unix>
 			<windows>3</windows>
 		</number>
@@ -247,6 +258,7 @@
 	<button>
 		<desc>Flaps up</desc>
 		<number>
+			<mac>5</mac>
 			<unix>5</unix>
 			<windows>5</windows>
 		</number>
@@ -266,6 +278,7 @@
 	<button>
 		<desc>Left brake</desc>
 		<number>
+			<mac>6</mac>
 			<unix>6</unix>
 			<windows>6</windows>
 		</number>
@@ -284,6 +297,7 @@
 	<button>
 		<desc>Right brake</desc>
 		<number>
+			<mac>7</mac>
 			<unix>7</unix>
 			<windows>7</windows>
 		</number>
@@ -302,6 +316,7 @@
 	<button>
 		<desc>Propeller Coarse</desc>
 		<number>
+			<mac>8</mac>
 			<unix>8</unix>
 			<windows>8</windows>
 		</number>
@@ -318,6 +333,7 @@
 	<button>
 		<desc>Propeller Fine</desc>
 		<number>
+			<mac>9</mac>
 			<unix>9</unix>
 			<windows>9</windows>
 		</number>

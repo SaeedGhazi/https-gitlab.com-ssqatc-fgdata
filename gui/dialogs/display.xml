@@ -45,7 +45,7 @@
 
     <checkbox>
       <halign>left</halign>
-      <label>Show worst-case frame latency</label>
+      <label>Show frame spacing</label>
       <property>/sim/rendering/frame-latency-display</property>
       <binding>
         <command>dialog-apply</command>

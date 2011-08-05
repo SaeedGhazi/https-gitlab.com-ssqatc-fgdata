@@ -166,7 +166,9 @@
  <carrier-desc>Specify starting position on an AI carrier</carrier-desc>
  <parkpos-desc>Specify which starting position on an AI carrier (must also specify a carrier)</parkpos-desc>
  <vor-desc>Specify starting position relative to a VOR</vor-desc>
+ <vor-freq-desc>Specify the frequency of the VOR. Use with --vor=ID</vor-freq-desc>
  <ndb-desc>Specify starting position relative to an NDB</ndb-desc>
+ <ndb-freq-desc>Specify the frequency of the NDB. Use with --ndb=ID</ndb-freq-desc>
  <fix-desc>Specify starting position relative to a fix</fix-desc>
  <runway-no-desc>Specify starting runway (must also specify an airport)</runway-no-desc>
  <offset-distance-desc>Specify distance to reference point (statute miles)</offset-distance-desc>

@@ -326,8 +326,8 @@
 							<property>/sim/rendering/clouds3d-enable</property>
 						</and>
 					</enable>
-					<min>100.0</min>
-					<max>20000.0</max>
+					<min>1000.0</min>
+					<max>45000.0</max>
 					<property>/sim/rendering/clouds3d-vis-range</property>
 					<binding>
 						<command>dialog-apply</command>

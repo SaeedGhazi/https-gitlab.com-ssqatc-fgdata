@@ -58,7 +58,7 @@
         <type>sampler-2d</type>
         <value type="int">0</value>
       </uniform>
-      <vertex-program-two-side>true</vertex-program-two-side>
+      <vertex-program-two-side>false</vertex-program-two-side>
     </pass>
   </technique>
 </PropertyList>

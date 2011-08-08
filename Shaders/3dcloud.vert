@@ -33,14 +33,12 @@ void main(void)
   gl_Position.xyz += gl_Vertex.y * r * wScale;
   gl_Position.xyz += gl_Vertex.z * w  * hScale;
   gl_Position.xyz += gl_Color.xyz;
+  
+  // Apply Z scaling to allow sprites to be squashed in the z-axis
+  gl_Position.z = gl_Position.z * gl_Color.w;
 
   // Determine a lighting normal based on the vertex position from the
   // center of the cloud, so that sprite on the opposite side of the cloud to the sun are darker.
-
-// fix flickering of 3d clouds on some macs
-// http://code.google.com/p/flightgear-bugs/issues/detail?id=123
-//  float n = dot(normalize(-gl_LightSource[0].position.xyz),
-//                normalize(mat3x3(gl_ModelViewMatrix) * (- gl_Position.xyz)));;
   float n = dot(normalize(-gl_LightSource[0].position.xyz),
                 normalize(vec3(gl_ModelViewMatrix * vec4(- gl_Position.xyz,0.0))));
 

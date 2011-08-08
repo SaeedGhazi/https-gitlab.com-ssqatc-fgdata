@@ -46,6 +46,7 @@ $Id$
    <command>property-scale</command>
    <property>/controls/flight/rudder</property>
    <factor>1.0</factor>
+   <power>2</power>
    <offset>0.0</offset>
   </binding>
  </axis>

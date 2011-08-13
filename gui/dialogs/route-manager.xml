@@ -417,6 +417,10 @@ command interface /autopilot/route-manager/input:
             <stretch>true</stretch>
             <pref-width>100</pref-width>
             <property>/autopilot/route-manager/cruise/speed-kts</property>
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>cruise-speed</object-name>
+            </binding>
         </input>
 
         <text>
@@ -430,6 +434,10 @@ command interface /autopilot/route-manager/input:
             <stretch>true</stretch>
             <pref-width>100</pref-width>
             <property>/autopilot/route-manager/cruise/altitude-ft</property>
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>cruise-alt</object-name>
+            </binding>
         </input>
     </group>
 

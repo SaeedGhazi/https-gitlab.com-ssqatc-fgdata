@@ -564,6 +564,12 @@
 				<text>
 					<label>Experimental effects</label>
 					<halign>left</halign>
+					<color>
+						<red>1.0</red>
+						<green>0.6</green>
+						<blue>0.6</blue>
+						<alpha>1</alpha>
+					</color>
 				</text>
 				<hrule>
 					<stretch>true</stretch>

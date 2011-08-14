@@ -211,7 +211,7 @@
 				<halign>left</halign>
 				<label>Animated jetways</label>
 				<name>jetways</name>
-				<property>/sim/jetways/enabled</property>
+				<property>/nasal/jetways/enabled</property>
 				<binding>
 					<command>dialog-apply</command>
 					<object-name>jetways</object-name>

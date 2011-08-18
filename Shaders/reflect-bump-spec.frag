@@ -117,7 +117,8 @@ void main (void)
     vec4 mixedcolor = mix(texel, raincolor, reflFactor);
 
     // the final reflection
-    vec4 reflColor = color * mixedcolor + specular + ambient_Correction ;
+    vec4 reflColor = vec4(color.rgb * mixedcolor.rgb + specular.rgb + ambient_Correction.rgb, alpha);
+
     reflColor = clamp(reflColor, 0.0, 1.0);
 
     gl_FragColor = mix(gl_Fog.color, reflColor, fogFactor);

@@ -97,6 +97,7 @@ void main (void)
     // set ambient adjustment to remove bluiness with user input
     float ambient_offset = clamp(ambient_correction, -1.0, 1.0);
     vec4 ambient_Correction = vec4(gl_LightSource[0].ambient.rg, gl_LightSource[0].ambient.b * 0.6, 0.5) * ambient_offset ;
+    // vec4 ambient_Correction = vec4(ambient_Correction.rgb, 0.5);
     ambient_Correction = clamp(ambient_Correction, -1.0, 1.0);
 
     // map noise vectore
@@ -111,7 +112,7 @@ void main (void)
     vec4 mixedcolor = mix(texel, raincolor, reflFactor);
 
     // the final reflection
-    vec4 reflColor = color * mixedcolor + specular + ambient_Correction ;
+    vec4 reflColor = vec4(color.rgb * mixedcolor.rgb + specular.rgb + ambient_Correction.rgb, alpha);
     reflColor = clamp(reflColor, 0.0, 1.0);
 
     gl_FragColor = mix(gl_Fog.color, reflColor, fogFactor);

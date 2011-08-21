@@ -62,6 +62,13 @@
 				</script>
 			</binding>
 		</item>
+		<item>
+			<label>Screenshot Directory</label>
+			<binding>
+				<command>nasal</command>
+				<script>gui.set_screenshotdir()</script>
+			</binding>
+		</item>
 		<!--
 		<item>
 		<label>Last snapshot</label>

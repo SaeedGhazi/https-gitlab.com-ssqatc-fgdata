@@ -583,6 +583,17 @@ var load_flight = func {
     load_flight_sel.open();
 }
 
+##
+# Screen-shot directory menu function
+#
+var set_screenshotdir_sel = nil;
+var set_screenshotdir = func {
+    if (set_screenshotdir_sel == nil)
+        set_screenshotdir_sel = gui.DirSelector.new(
+            func(result) { setprop("/sim/paths/screenshot-dir", result.getValue()); },
+            "Select Screenshot Directory", "Ok", getprop("/sim/paths/screenshot-dir"));
+    set_screenshotdir_sel.open();
+}
 
 ##
 # Open property browser with given target path.

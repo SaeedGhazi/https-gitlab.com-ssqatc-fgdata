@@ -4,6 +4,9 @@
   <parameters>
     <texture n ="0">
     </texture>
+    <range>
+		  <use>/sim/rendering/clouds3d-vis-range</use>
+    </range>    
   </parameters>
   <technique n="10">
     <predicate>
@@ -62,6 +65,11 @@
         <name>baseTexture</name>
         <type>sampler-2d</type>
         <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>range</name>
+        <type>float</type>
+        <value><use>range</use></value>
       </uniform>
       <vertex-program-two-side>true</vertex-program-two-side>
     </pass>

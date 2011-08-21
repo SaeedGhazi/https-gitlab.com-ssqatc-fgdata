@@ -3,6 +3,8 @@
 
 varying float fogFactor;
 
+uniform float range; // From /sim/rendering/clouds3d-vis-range
+
 attribute vec3 usrAttr1;
 attribute vec3 usrAttr2;
 
@@ -40,26 +42,30 @@ void main(void)
   // Determine a lighting normal based on the vertex position from the
   // center of the cloud, so that sprite on the opposite side of the cloud to the sun are darker.
   float n = dot(normalize(-gl_LightSource[0].position.xyz),
-                normalize(vec3(gl_ModelViewMatrix * vec4(- gl_Position.xyz,0.0))));
+                normalize(vec3(gl_ModelViewMatrix * vec4(- gl_Position.x, - gl_Position.y, - gl_Position.z,0.0))));
 
   // Determine the position - used for fog and shading calculations
   vec3 ecPosition = vec3(gl_ModelViewMatrix * gl_Position);
   float fogCoord = abs(ecPosition.z);
+  
+  // Determine fractional height of vertex from 0 at the bottom, and 1 at mid-height.
+  // Used to determine shading.
   float fract = smoothstep(0.0, cloud_height, gl_Position.z + cloud_height);
 
   // Final position of the sprite
   gl_Position = gl_ModelViewProjectionMatrix * gl_Position;
 
-// Determine the shading of the sprite based on its vertical position and position relative to the sun.
+  // Determine the shading of the sprite based on its vertical position and position relative to the sun.
   n = min(smoothstep(-0.5, 0.0, n), fract);
-// Determine the shading based on a mixture from the backlight to the front
+  
+  // Determine the shading based on a mixture from the backlight to the front
   vec4 backlight = gl_LightSource[0].diffuse * shade;
 
   gl_FrontColor = mix(backlight, gl_LightSource[0].diffuse, n);
   gl_FrontColor += gl_FrontLightModelProduct.sceneColor;
 
   // As we get within 100m of the sprite, it is faded out. Equally at large distances it also fades out.
-  gl_FrontColor.a = min(smoothstep(10.0, 100.0, fogCoord), 1.0 - smoothstep(15000.0, 20000.0, fogCoord));
+  gl_FrontColor.a = min(smoothstep(10.0, 100.0, fogCoord), 1.0 - smoothstep(range*0.8, range, fogCoord));
   gl_BackColor = gl_FrontColor;
 
   // Fog doesn't affect clouds as much as other objects.

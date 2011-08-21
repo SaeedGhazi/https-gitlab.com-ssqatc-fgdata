@@ -67,15 +67,22 @@
       <row>3</row>
       <col>2</col><colspan>2</colspan>
       <pref-width>400</pref-width>
+      <live>true</live>
       <property>/sim/terrasync/scenery-dir</property>
-      <enable>
-        <property>/sim/terrasync/enabled</property>
-      </enable>
-      <binding>
-        <command>dialog-apply</command>
-        <object-name>scenery-dir</object-name>
-      </binding>
+      <enable><false/></enable>
     </input>
+
+    <button>
+      <legend>Change</legend>
+      <equal>true</equal>
+      <border>2</border>
+      <row>3</row>
+      <col>4</col>
+      <binding>
+        <command>nasal</command>
+        <script>controller.open()</script>
+      </binding>
+    </button>
 
     <text>
       <row>4</row>
@@ -427,5 +434,17 @@
 
     <empty><stretch>true</stretch></empty>
   </group>
+
+  <nasal>
+    <open><![CDATA[
+        var controller = gui.DirSelector.new(
+            func(result) { setprop("/sim/terrasync/scenery-dir", result.getValue()); },
+            "Select Target Directory for Downloads", "Ok", getprop("/sim/terrasync/scenery-dir"));
+    ]]></open>
+
+    <close><![CDATA[
+      controller.close();
+    ]]></close>
+  </nasal>
 
 </PropertyList>

@@ -94,6 +94,13 @@
 				<command>nasal</command>
 				<script>file_input()</script>
 			</binding>
+			<visible>
+				<equals>  <!-- yes, odd condition. easier ways somehow fail,
+				               since we're changing the values with Nasal below... -->
+					<value>1</value>
+					<value>1</value>
+				</equals>
+			</visible>
 		</input>
 
 		<button>
@@ -134,6 +141,9 @@
 			var path = dlg.getNode("path", 1);
 			var dotfiles = dlg.getNode("dotfiles", 1);
 			dotfiles.setBoolValue(dotfiles.getValue());
+			# disable files to show a directory dialog only
+			self.show_files = dlg.getNode("show-files",1).getValue();
+			self.getNode("group[1]/input/visible/equals/value").setValue(self.show_files);
 
 			var kbdctrl = props.globals.getNode("/devices/status/keyboard/ctrl", 1);
 			var kbdshift = props.globals.getNode("/devices/status/keyboard/shift", 1);
@@ -177,7 +187,7 @@
 
 					if (stat[11] == "dir")
 						append(dirs, e ~ "/");
-					elsif (!size(pattern) or matches(e))
+					elsif (self.show_files and (!size(pattern) or matches(e)))
 						append(files, e);
 				}
 
@@ -239,7 +249,10 @@
 
 			var ok = func {
 				dir_input();
-				file_input();
+				if (self.show_files)
+					file_input();
+				else
+					current.file = "";
 				var p = string.normpath(current.dir ~ "/" ~ current.file);
 				var stat = io.stat(p);
 				path.setValue(stat != nil and stat[11] == "dir" ? p ~ "/" : p);
@@ -254,7 +267,12 @@
 
 			var t = title.getValue();
 			if (t == nil or t == "")
-				t = "Select File";
+			{
+				if (self.show_files)
+					t = "Select Directory";
+				else
+					t = "Select File";
+			}
 			self.getNode("group[0]/text/label").setValue(t);
 
 			current.dir = (var d = dir.getValue()) != nil and d != "" ? d : getprop("/sim/fg-current");

@@ -505,7 +505,7 @@ var OverlaySelector = {
 #     selector.open();
 #
 var FileSelector = {
-    new: func(callback, title, button, pattern = nil, dir = "", file = "", dotfiles = 0) {
+    new: func(callback, title, button, pattern = nil, dir = "", file = "", dotfiles = 0, show_files=1) {
         var name = "file-select-";
         var data = props.globals.getNode("/sim/gui/dialogs/", 1);
         for (var i = 1; 1; i += 1)
@@ -520,6 +520,7 @@ var FileSelector = {
         m.set_button(button);
         m.set_directory(dir);
         m.set_file(file);
+        m.set_show_files(show_files);
         m.set_dotfiles(dotfiles);
         m.set_pattern(pattern);
         m.cblistener = setlistener(data.getNode("path", 1), callback);
@@ -530,6 +531,7 @@ var FileSelector = {
     set_button: func(button) { me.data.getNode("button", 1).setValue(button) },
     set_directory: func(dir) { me.data.getNode("directory", 1).setValue(dir) },
     set_file: func(file) { me.data.getNode("selection", 1).setValue(file) },
+    set_show_files: func(show) { me.data.getNode("show-files", 1).setValue(show) },
     set_dotfiles: func(dot) { me.data.getNode("dotfiles", 1).setBoolValue(dot) },
     set_pattern: func(pattern) {
         me.data.removeChildren("pattern");
@@ -545,6 +547,14 @@ var FileSelector = {
     },
 };
 
+##
+# DirSelector - convenience "class" (indeed using a reconfigured FileSelector)
+#
+var DirSelector = {
+  new: func(callback, title, button, dir = "") {
+     return FileSelector.new(callback, title, button, nil, dir, "", 0, show_files=0);
+  }
+};
 
 ##
 # Save/load flight menu functions.
@@ -573,6 +583,17 @@ var load_flight = func {
     load_flight_sel.open();
 }
 
+##
+# Screen-shot directory menu function
+#
+var set_screenshotdir_sel = nil;
+var set_screenshotdir = func {
+    if (set_screenshotdir_sel == nil)
+        set_screenshotdir_sel = gui.DirSelector.new(
+            func(result) { setprop("/sim/paths/screenshot-dir", result.getValue()); },
+            "Select Screenshot Directory", "Ok", getprop("/sim/paths/screenshot-dir"));
+    set_screenshotdir_sel.open();
+}
 
 ##
 # Open property browser with given target path.

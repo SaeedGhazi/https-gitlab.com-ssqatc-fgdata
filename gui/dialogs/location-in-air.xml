@@ -6,8 +6,8 @@
 
   <nasal>
     <open>
-      p = props.globals.getNode("/sim/gui/dialogs/location-in-air/", 1);
-      mode = {
+      var p = props.globals.getNode("/sim/gui/dialogs/location-in-air/", 1);
+      var mode = {
         airport: p.getNode("airport", 1),
         lonlat:  p.getNode("lonlat", 1),
         vor:     p.getNode("vor", 1),
@@ -15,14 +15,14 @@
         fix:     p.getNode("fix", 1),
       };
 
-      set_radio = func(m) {
-        foreach (k; keys(mode)) {
+      var set_radio = func(m) {
+        foreach (var k; keys(mode)) {
           mode[k].setBoolValue(m == k);
         }
       }
 
-      initialized = 0;
-      foreach (k; keys(mode)) {
+      var initialized = 0;
+      foreach (var k; keys(mode)) {
         if (mode[k].getType() == "NONE") {
           mode[k].setBoolValue(0);
         }
@@ -30,6 +30,19 @@
       }
       if (!initialized) {
         set_radio("airport");
+      }
+      var pickNearest = func(type,propname,freqpropname) {
+
+        var found = navinfo(type,getprop(propname));
+        if( found == nil or size(found) == 0 ) {
+          print(type, " ", getprop(propname), " NOT found");
+          setprop(propname, "");
+          setprop(freqpropname, "");
+          return;
+        }
+        setprop(propname, found[0].id);
+        setprop(freqpropname, found[0].frequency / 100.0);
+       
       }
     </open>
 
@@ -300,10 +313,14 @@
 
           if (!mode.vor.getBoolValue()) {
             setprop("/sim/presets/vor-id", "");
+          } else {
+            pickNearest("vor","/sim/presets/vor-id","/sim/presets/vor-freq");
           }
 
           if (!mode.ndb.getBoolValue()) {
             setprop("/sim/presets/ndb-id", "");
+          } else {
+            pickNearest("ndb","/sim/presets/ndb-id","/sim/presets/ndb-freq");
           }
 
           if (!mode.fix.getBoolValue()) {

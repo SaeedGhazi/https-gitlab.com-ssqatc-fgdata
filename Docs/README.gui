@@ -160,9 +160,9 @@ properties, though they will ignore any that are not relevant:
  default - true if this is the default object for when the user
    presses the [RETURN] key.
 
- hide - if set to true, hides the whole widget that it is used
+ visible - if set to false, hides the whole widget that it is used
    in, along with its children. There's no empty space reserved
-   for such widgets. The "hide" property can also be used to hide
+   for such widgets. The "visible" property can also be used to hide
    other XML groups from the layouter.
 
 Objects may appear nested within the top-level dialog or a "group"

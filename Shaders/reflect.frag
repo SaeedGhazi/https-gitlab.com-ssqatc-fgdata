@@ -51,10 +51,10 @@ void main (void)
             * pow(NdotHV, gl_FrontMaterial.shininess));
     }
 
-    color.a = alpha;
-    color = clamp(color, 0.0, 1.0);
     vec4 texel = texture2D(BaseTex, gl_TexCoord[0].st);
-    vec4 texelcolor = color * texel + specular;
+//  vec4 texelcolor = color * texel + specular;
+    color.a = texel.a * alpha;
+    color = clamp(color, 0.0, 1.0);
 
     // calculate the fog factor
     const float LOG2 = 1.442695;
@@ -77,7 +77,7 @@ void main (void)
     // map the refection of the environment
     vec4 reflection = textureCube(Environment, reflVec);
 
-    // set the user shininess offse
+    // set the user shininess offset
     float transparency_offset = clamp(refl_correction, -1.0, 1.0);
     float reflFactor = 0.0;
 
@@ -100,7 +100,7 @@ void main (void)
     // vec4 ambient_Correction = vec4(ambient_Correction.rgb, 0.5);
     ambient_Correction = clamp(ambient_Correction, -1.0, 1.0);
 
-    // map noise vectore
+    // map noise vector
     vec4 noisevec = texture3D(Noise, rawpos.xyz);
 
     // add fringing fresnel and rainbow effects and modulate by reflection
@@ -112,7 +112,7 @@ void main (void)
     vec4 mixedcolor = mix(texel, raincolor, reflFactor);
 
     // the final reflection
-    vec4 reflColor = vec4(color.rgb * mixedcolor.rgb + specular.rgb + ambient_Correction.rgb, alpha);
+    vec4 reflColor = vec4(color.rgb * mixedcolor.rgb + specular.rgb + ambient_Correction.rgb, color.a);
     reflColor = clamp(reflColor, 0.0, 1.0);
 
     gl_FragColor = mix(gl_Fog.color, reflColor, fogFactor);

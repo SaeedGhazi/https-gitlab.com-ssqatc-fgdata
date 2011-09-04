@@ -788,12 +788,31 @@ var autotrim = {
 #	var tyresmoke_0 = aircraft.tyresmoke.new(0);
 #	tyresmoke_0.update();
 #
+# PARAMETERS:
+#
+#    number: index of gear to be animated, i.e. "2" for /gear/gear[2]/...
+#
+#    auto: 1 when tyresmoke should start on update loop. 0 when you're going
+#      to call the update method from one of your own loops.
+#
+#    diff_norm: value adjusting the necessary percental change of roll-speed
+#      to trigger tyre smoke. Default value is 0.05. More realistic results can
+#      be achieved with significantly higher values (i.e. use 0.8).
+#
+#    check_vspeed: 1 when tyre smoke should only be triggered when vspeed is negative
+#      (usually doesn't work for all gear, since vspeed=0.0 after the first gear touches
+#      ground). Use 0 to make tyre smoke independent of vspeed.
+#      Note: in reality, tyre smoke doesn't depend on vspeed, but only on acceleration
+#      and friction.
+#
+
 var tyresmoke = {
-	new: func(number, auto = 0) {
+	new: func(number, auto = 0, diff_norm = 0.05, check_vspeed=1) {
 		var m = { parents: [tyresmoke] };
-		me.vertical_speed = props.globals.initNode("velocities/vertical-speed-fps");
-		me.speed = props.globals.initNode("velocities/groundspeed-kt");
-		me.rain = props.globals.initNode("environment/metar/rain-norm");
+		m.vertical_speed = (!check_vspeed) ? nil : props.globals.initNode("velocities/vertical-speed-fps");
+		m.diff_norm = diff_norm;
+		m.speed = props.globals.initNode("velocities/groundspeed-kt");
+		m.rain = props.globals.initNode("environment/metar/rain-norm");
 
 		var gear = props.globals.getNode("gear/gear[" ~ number ~ "]/");
 		m.wow = gear.initNode("wow");
@@ -827,7 +846,7 @@ var tyresmoke = {
 	},
 	update: func {
 		var rollspeed = me.get_rollspeed();
-		var vert_speed = me.vertical_speed.getValue();
+		var vert_speed = (me.vertical_speed) ? me.vertical_speed.getValue() : -999;
 		var groundspeed = me.speed.getValue();
 		var friction_factor = me.friction_factor.getValue();
 		var wow = me.wow.getValue();
@@ -837,7 +856,8 @@ var tyresmoke = {
 		var diff = math.abs(rollspeed - filtered_rollspeed);
 		var diff_norm = diff > 0 ? diff / rollspeed : 0;
 
-		if (wow and vert_speed < -1.2 and diff_norm > 0.05
+		if (wow and vert_speed < -1.2
+				and diff_norm > me.diff_norm
 				and friction_factor > 0.7 and groundspeed > 50
 				and rain < 0.20) {
 			me.tyresmoke.setValue(1);

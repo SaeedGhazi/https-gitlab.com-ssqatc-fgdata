@@ -270,7 +270,7 @@ var lowpass = {
 		me.value = v;
 	},
 	_filter_: func(v) {
-		var dt = getprop("/sim/time/delta-sec");
+		var dt = getprop("/sim/time/delta-sec")*getprop("/sim/speed-up");
 		var c = dt / (me.coeff + dt);
 		me.value = v * c + me.value * (1 - c);
 	},

@@ -2,8 +2,8 @@
 # ---------------------------------------------------------------------------------------
 
 
-var step_interval = 5;   # time between tutorial steps
-var exit_interval = 1;   # time between fulfillment of a step and the start of the next step
+var step_interval = 0.0;   # time between tutorial steps (default is set below)
+var exit_interval = 0.0;   # time between fulfillment of a step and the start of the next step (default is set below)
 
 var loop_id = 0;
 var tutorialN = nil;
@@ -67,8 +67,8 @@ var startTutorial = func {
 	last_step_time = time_elapsedN.getValue();
 	steps = tutorialN.getChildren("step");
 
-	step_interval = read_double(tutorialN, "step-time", step_interval);
-	exit_interval = read_double(tutorialN, "exit-time", exit_interval);
+	step_interval = read_double(tutorialN, "step-time", 5.0); # time between tutorial steps
+	exit_interval = read_double(tutorialN, "exit-time", 1.0); # time between fulfillment of steps
 	run_nasal(tutorialN);
 	set_models(tutorialN.getNode("models"));
 

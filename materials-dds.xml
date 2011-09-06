@@ -994,7 +994,7 @@ Shared parameters for various materials.
   </material>
 
   <material>
-    <and>
+    <condition>
       <equals>
         <property>sim/startup/season</property>
         <value>summer</value>
@@ -1002,7 +1002,7 @@ Shared parameters for various materials.
       <not>
         <property>sim/rendering/urban-shader</property>
       </not>
-    </and>
+    </condition>
     <name>BuiltUpCover</name>
     <name>Urban</name>
     <name>Construction</name>

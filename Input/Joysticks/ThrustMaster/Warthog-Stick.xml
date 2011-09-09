@@ -1,0 +1,182 @@
+<?xml version="1.0"?>
+<!--
+	Copyright (c) 2011   Melchior FRANZ   mfranz # aon : at
+	Work In Progress
+-->
+
+<PropertyList>
+	<name>Thustmaster Joystick - HOTAS Warthog</name>
+
+	<nasal>
+		<script>
+			var this = cmdarg().getParent();
+			var popup = func gui.popupTip(call(sprintf, arg));
+
+			var trimstep = 0.75;
+
+			foreach (var b; this.getChildren("button")) {
+				if (b.getAttribute("children") == 1) {
+					var name = b.getNode("name", 1).getValue() or "??";
+					b.setValues({binding: {command: "nasal", script: 'popup("' ~ name ~ '")'}});
+				}
+			}
+		</script>
+	</nasal>
+
+	<axis n="0">
+		<name>X-axis</name>
+		<desc>aileron</desc>
+		<tolerance>0.0001</tolerance>
+		<binding>
+			<command>property-scale</command>
+			<property>/controls/flight/aileron</property>
+		</binding>
+	</axis>
+
+	<axis n="1">
+		<name>Y-axis</name>
+		<desc>elevator</desc>
+		<tolerance>0.0001</tolerance>
+		<binding>
+			<command>property-scale</command>
+			<property>/controls/flight/elevator</property>
+			<factor type="double">-1.0</factor>
+		</binding>
+	</axis>
+
+	<axis n="2">
+		<name>Trim Coolie Left/Right</name>
+		<desc>aileron trim</desc>
+		<low>
+			<repeatable>true</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>controls.aileronTrim(-trimstep)</script>
+			</binding>
+		</low>
+		<high>
+			<repeatable>true</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>controls.aileronTrim(trimstep)</script>
+			</binding>
+		</high>
+	</axis>
+
+	<axis n="3">
+		<name>Trim Coolie Down/Up</name>
+		<desc>elevator trim</desc>
+		<low>
+			<repeatable>true</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>controls.elevatorTrim(trimstep)</script>
+			</binding>
+		</low>
+		<high>
+			<repeatable>true</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>controls.elevatorTrim(-trimstep)</script>
+			</binding>
+		</high>
+	</axis>
+
+	<button n="0">
+		<name>Trigger Button 1</name>
+		<desc>gun trigger stage 1</desc>
+		<binding>
+			<command>nasal</command>
+			<script>controls.trigger(1)</script>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>controls.trigger(0)</script>
+			</binding>
+		</mod-up>
+	</button>
+
+	<button n="1">
+		<name>Weapons Release</name>
+	</button>
+
+	<button n="2">
+		<name>Nosewheel Steering Button</name>
+	</button>
+
+	<button n="3">
+		<name>Paddle Switch</name>
+	</button>
+
+	<button n="4">
+		<name>Master Mode Control Button</name>
+	</button>
+
+	<button n="5">
+		<name>Trigger Button 2</name>
+		<desc>gun trigger stage 2</desc>
+		<binding>
+			<command>nasal</command>
+			<script>controls.trigger(2)</script>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>controls.trigger(0)</script>
+			</binding>
+		</mod-up>
+	</button>
+
+	<button n="6">
+		<name>Target Management Switch (TMS) up</name>
+	</button>
+
+	<button n="7">
+		<name>Target Management Switch (TMS) right</name>
+	</button>
+
+	<button n="8">
+		<name>Target Management Switch (TMS) down</name>
+	</button>
+
+	<button n="9">
+		<name>Target Management Switch (TMS) left</name>
+	</button>
+
+	<button n="10">
+		<name>Data Management Switch (DMS) up</name>
+	</button>
+
+	<button n="11">
+		<name>Data Management Switch (DMS) right</name>
+	</button>
+
+	<button n="12">
+		<name>Data Management Switch (DMS) down</name>
+	</button>
+
+	<button n="13">
+		<name>Data Management Switch (DMS) left</name>
+	</button>
+
+	<button n="14">
+		<name>Countermeasures Management Switch (CMS) up</name>
+	</button>
+
+	<button n="15">
+		<name>Countermeasures Management Switch (CMS) right</name>
+	</button>
+
+	<button n="16">
+		<name>Countermeasures Management Switch (CMS) down</name>
+	</button>
+
+	<button n="17">
+		<name>Countermeasures Management Switch (CMS) left</name>
+	</button>
+
+	<button n="18">
+		<name>Countermeasures Management Switch (CMS) push</name>
+	</button>
+</PropertyList>

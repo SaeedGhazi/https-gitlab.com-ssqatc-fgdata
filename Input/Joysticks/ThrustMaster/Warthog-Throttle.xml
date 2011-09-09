@@ -8,9 +8,42 @@
 	<name>Thrustmaster Throttle - HOTAS Warthog</name>
 
 	<nasal>
+		<command>nasal</command>
 		<script>
 			var this = cmdarg().getParent();
 			var popup = func gui.popupTip(call(sprintf, arg));
+			var is_dir = func(path) {(var stat = io.stat(path)) != nil and stat[11] == "dir"}
+			var is_helicopter = (var _ = props.globals.getNode("rotors", 0)) != nil and _.getAttribute("children");
+			var dir = "/Input/Joysticks/ThrustMaster/Warthog/Throttle/";
+
+			var overlay = {};
+			foreach (var base; [getprop("/sim/fg-root"), getprop("/sim/fg-home")])
+				if (is_dir(base ~ dir))
+					foreach (var file; directory(base ~ dir))
+						overlay[file] = base ~ dir ~ file;
+
+			var load_overlay = func(name) {
+				var file = name ~ ".xml";
+				if (contains(overlay, file)) {
+					printlog("info", "WARTHOG: loading overlay " ~ overlay[file]);
+					cmdarg().getNode("script").setValue("");
+					io.read_properties(overlay[file], this);
+					props.runBinding(cmdarg());
+				}
+			}
+
+			load_overlay("generic");
+			if (is_helicopter)
+				load_overlay("helicopter");
+			load_overlay(getprop("/sim/aircraft"));
+			overlay = nil;
+
+			foreach (var b; this.getChildren("button")) {
+				if (b.getAttribute("children") == 1) {
+					var name = b.getNode("name", 1).getValue() or "??";
+					b.setValues({binding: {command: "nasal", script: 'popup("' ~ name ~ '")'}});
+				}
+			}
 
 			var even_engines = [0, 2, 4, 6, 8, 10];
 			var odd_engines = [1, 3, 5, 7, 9, 11];
@@ -19,13 +52,6 @@
 			forindex (var i; viewdir) {
 				var t = viewdir[i].getNode("type");
 				viewdir[i] = t != nil and t.getValue() == "lookat" ? 1 : -1;
-			}
-
-			foreach (var b; this.getChildren("button")) {
-				if (b.getAttribute("children") == 1) {
-					var name = b.getNode("name", 1).getValue() or "??";
-					b.setValues({binding: {command: "nasal", script: 'popup("' ~ name ~ '")'}});
-				}
 			}
 		</script>
 	</nasal>

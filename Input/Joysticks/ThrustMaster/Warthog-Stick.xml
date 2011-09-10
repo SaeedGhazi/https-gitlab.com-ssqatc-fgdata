@@ -12,31 +12,25 @@
 		<script>
 			var this = cmdarg().getParent();
 			var popup = func gui.popupTip(call(sprintf, arg));
-			var is_dir = func(path) {(var stat = io.stat(path)) != nil and stat[11] == "dir"};
 			var is_helicopter = (var _ = props.globals.getNode("rotors", 0)) != nil and _.getAttribute("children");
-			var dir = "/Input/Joysticks/ThrustMaster/Warthog/Joystick/";
-
-			var overlay = {};
-			foreach (var base; [getprop("/sim/fg-root"), getprop("/sim/fg-home")])
-				if (is_dir(base ~ dir))
-					foreach (var file; directory(base ~ dir))
-						overlay[file] = base ~ dir ~ file;
 
 			var load_overlay = func(name) {
-				var file = name ~ ".xml";
-				if (contains(overlay, file)) {
-					printlog("info", "WARTHOG: loading overlay " ~ overlay[file]);
-					cmdarg().getNode("script").setValue("");
-					io.read_properties(overlay[file], this);
-					props.runBinding(cmdarg());
+				foreach (var dir; [getprop("/sim/fg-home"), getprop("/sim/fg-root")]) {
+					var file = dir ~ "/Input/Joysticks/ThrustMaster/Warthog/Joystick/" ~ name;
+					if (io.stat(file) != nil) {
+						printlog("info", "WARTHOG: loading overlay " ~ file);
+						cmdarg().getNode("script").setValue("");
+						io.read_properties(file, this);
+						props.runBinding(cmdarg());
+						break;
+					}
 				}
 			}
 
-			load_overlay("generic");
+			load_overlay("generic.xml");
 			if (is_helicopter)
-				load_overlay("helicopter");
-			load_overlay(getprop("/sim/aircraft"));
-			overlay = nil;
+				load_overlay("helicopter.xml");
+			load_overlay(getprop("/sim/aircraft") ~ ".xml");
 
 			foreach (var b; this.getChildren("button")) {
 				if (b.getAttribute("children") == 1) {
@@ -44,6 +38,10 @@
 					b.setValues({binding: {command: "nasal", script: 'popup("' ~ name ~ '")'}});
 				}
 			}
+
+			var mod = 0;
+			var _ = props.globals.initNode("/devices/status/joysticks/warthog/modifier", mod, "INT");
+			setlistener(_, func(n) mod = n.getValue());
 
 			var trimstep = 0.75;
 		</script>
@@ -72,38 +70,58 @@
 
 	<axis n="2">
 		<name>Trim Coolie Left/Right</name>
-		<desc>aileron trim</desc>
+		<desc>adjust aileron trim,  +mod: reset aileron trim</desc>
 		<low>
 			<repeatable>true</repeatable>
 			<binding>
 				<command>nasal</command>
-				<script>controls.aileronTrim(-trimstep)</script>
+				<script>
+					if (mod)
+						controls.aileronTrim(-trimstep);
+					else
+						setprop("/controls/flight/aileron-trim", 0);
+				</script>
 			</binding>
 		</low>
 		<high>
 			<repeatable>true</repeatable>
 			<binding>
 				<command>nasal</command>
-				<script>controls.aileronTrim(trimstep)</script>
+				<script>
+					if (mod)
+						controls.aileronTrim(trimstep);
+					else
+						setprop("/controls/flight/aileron-trim", 0);
+				</script>
 			</binding>
 		</high>
 	</axis>
 
 	<axis n="3">
 		<name>Trim Coolie Down/Up</name>
-		<desc>elevator trim</desc>
+		<desc>adjust elevator trim,  +mod: reset elevator trim</desc>
 		<low>
 			<repeatable>true</repeatable>
 			<binding>
 				<command>nasal</command>
-				<script>controls.elevatorTrim(trimstep)</script>
+				<script>
+					if (mod)
+						controls.elevatorTrim(trimstep);
+					else
+						setprop("/controls/flight/elevator-trim", 0);
+				</script>
 			</binding>
 		</low>
 		<high>
 			<repeatable>true</repeatable>
 			<binding>
 				<command>nasal</command>
-				<script>controls.elevatorTrim(-trimstep)</script>
+				<script>
+					if (mod)
+						controls.elevatorTrim(-trimstep);
+					else
+						setprop("/controls/flight/elevator-trim", 0);
+				</script>
 			</binding>
 		</high>
 	</axis>
@@ -133,6 +151,19 @@
 
 	<button n="3">
 		<name>Paddle Switch</name>
+		<desc>modifier button</desc>
+		<binding>
+			<command>property-assign</command>
+			<property>/devices/status/joysticks/warthog/modifier</property>
+			<value>1</value>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>property-assign</command>
+				<property>/devices/status/joysticks/warthog/modifier</property>
+				<value>0</value>
+			</binding>
+		</mod-up>
 	</button>
 
 	<button n="4">

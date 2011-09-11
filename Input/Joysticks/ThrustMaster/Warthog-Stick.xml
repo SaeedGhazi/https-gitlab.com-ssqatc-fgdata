@@ -27,11 +27,6 @@
 				}
 			}
 
-			load_overlay("generic.xml");
-			if (is_helicopter)
-				load_overlay("helicopter.xml");
-			load_overlay(getprop("/sim/aircraft") ~ ".xml");
-
 			foreach (var b; this.getChildren("button")) {
 				if (b.getAttribute("children") == 1) {
 					var name = b.getNode("name", 1).getValue() or "??";
@@ -44,13 +39,18 @@
 			setlistener(_, func(n) mod = n.getValue());
 
 			var trimstep = 0.75;
+
+			load_overlay("generic.xml");
+			if (is_helicopter)
+				load_overlay("helicopter.xml");
+			load_overlay(getprop("/sim/aircraft") ~ ".xml");
 		</script>
 	</nasal>
 
 	<axis n="0">
 		<name>X-axis</name>
 		<desc>aileron</desc>
-		<tolerance>0.0001</tolerance>
+		<tolerance>0.00001</tolerance>
 		<binding>
 			<command>property-scale</command>
 			<property>/controls/flight/aileron</property>
@@ -60,7 +60,7 @@
 	<axis n="1">
 		<name>Y-axis</name>
 		<desc>elevator</desc>
-		<tolerance>0.0001</tolerance>
+		<tolerance>0.00001</tolerance>
 		<binding>
 			<command>property-scale</command>
 			<property>/controls/flight/elevator</property>
@@ -127,7 +127,7 @@
 	</axis>
 
 	<button n="0">
-		<name>Trigger Button 1</name>
+		<name>Trigger Button/Half Pushed</name>
 		<desc>gun trigger stage 1</desc>
 		<binding>
 			<command>nasal</command>
@@ -171,7 +171,7 @@
 	</button>
 
 	<button n="5">
-		<name>Trigger Button 2</name>
+		<name>Trigger Button/Fully Pushed</name>
 		<desc>gun trigger stage 2</desc>
 		<binding>
 			<command>nasal</command>

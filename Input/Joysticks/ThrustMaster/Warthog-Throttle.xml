@@ -27,11 +27,6 @@
 				}
 			}
 
-			load_overlay("generic");
-			if (is_helicopter)
-				load_overlay("helicopter");
-			load_overlay(getprop("/sim/aircraft"));
-
 			foreach (var b; this.getChildren("button")) {
 				if (b.getAttribute("children") == 1) {
 					var name = b.getNode("name", 1).getValue() or "??";
@@ -51,6 +46,11 @@
 				var t = viewdir[i].getNode("type");
 				viewdir[i] = t != nil and t.getValue() == "lookat" ? 1 : -1;
 			}
+
+			load_overlay("generic.xml");
+			if (is_helicopter)
+				load_overlay("helicopter.xml");
+			load_overlay(getprop("/sim/aircraft") ~ ".xml");
 		</script>
 	</nasal>
 
@@ -94,8 +94,8 @@
 
 	<axis n="2">
 		<name>Right Throttle</name>
-		<desc>right throttle (odd engines)</desc>
-		<tolerance>0.0001</tolerance>
+		<desc>right throttle</desc>
+		<tolerance>0.00001</tolerance>
 		<binding>
 			<command>nasal</command>
 			<script>controls.perEngineSelectedAxisHandler(0)(right_engines)</script>
@@ -104,13 +104,13 @@
 
 	<axis n="3">
 		<name>Left Throttle</name>
-		<desc>left throttle (even engines)</desc>
+		<desc>left throttle</desc>
 		<number>
 			<unix>3</unix>
 			<mac>3</mac>
 			<windows>5</windows>
 		</number>
-		<tolerance>0.0001</tolerance>
+		<tolerance>0.00001</tolerance>
 		<binding>
 			<command>nasal</command>
 			<script>controls.perEngineSelectedAxisHandler(0)(left_engines)</script>

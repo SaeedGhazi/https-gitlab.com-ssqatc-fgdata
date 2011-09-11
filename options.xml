@@ -453,6 +453,12 @@
    </option>
 
    <option>
+    <name>materials-file</name>
+    <arg>file</arg>
+    <description>strings/materials-file-desc</description>
+   </option>
+
+   <option>
     <name>texture-filtering</name>
     <arg>value</arg>
     <description>strings/texture-filtering-desc</description>

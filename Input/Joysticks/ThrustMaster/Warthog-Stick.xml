@@ -39,6 +39,14 @@
 			setlistener(_, func(n) mod = n.getValue());
 
 			var trimstep = 0.75;
+			var viewstep = 0.5;
+
+			var reset_zoom = func setprop("/sim/current-view/field-of-view", 55);
+			var viewdir = props.globals.getNode("/sim").getChildren("view");
+			forindex (var i; viewdir) {
+				var t = viewdir[i].getNode("type");
+				viewdir[i] = t != nil and t.getValue() == "lookat" ? 1 : -1;
+			}
 
 			load_overlay("generic.xml");
 			if (is_helicopter)
@@ -77,9 +85,9 @@
 				<command>nasal</command>
 				<script>
 					if (mod)
-						controls.aileronTrim(-trimstep);
-					else
 						setprop("/controls/flight/aileron-trim", 0);
+					else
+						controls.aileronTrim(-trimstep);
 				</script>
 			</binding>
 		</low>
@@ -89,9 +97,9 @@
 				<command>nasal</command>
 				<script>
 					if (mod)
-						controls.aileronTrim(trimstep);
-					else
 						setprop("/controls/flight/aileron-trim", 0);
+					else
+						controls.aileronTrim(trimstep);
 				</script>
 			</binding>
 		</high>
@@ -106,9 +114,9 @@
 				<command>nasal</command>
 				<script>
 					if (mod)
-						controls.elevatorTrim(trimstep);
-					else
 						setprop("/controls/flight/elevator-trim", 0);
+					else
+						controls.elevatorTrim(trimstep);
 				</script>
 			</binding>
 		</low>
@@ -118,9 +126,9 @@
 				<command>nasal</command>
 				<script>
 					if (mod)
-						controls.elevatorTrim(-trimstep);
-					else
 						setprop("/controls/flight/elevator-trim", 0);
+					else
+						controls.elevatorTrim(-trimstep);
 				</script>
 			</binding>
 		</high>
@@ -187,53 +195,166 @@
 
 	<button n="6">
 		<name>Target Management Switch (TMS) up</name>
+		<desc>zoom in,  +mod: reset zoom</desc>
+		<repeatable>true</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>
+				if (mod)
+					reset_zoom();
+				else
+					view.decrease(1);
+			</script>
+		</binding>
 	</button>
 
 	<button n="7">
 		<name>Target Management Switch (TMS) right</name>
+		<desc>next active view,  +mod: next view</desc>
+		<binding>
+			<command>nasal</command>
+			<script>view.stepView(1, mod)</script>
+		</binding>
 	</button>
 
 	<button n="8">
 		<name>Target Management Switch (TMS) down</name>
+		<desc>zoom out,  +mod: reset zoom</desc>
+		<repeatable>true</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>
+				if (mod)
+					reset_zoom();
+				else
+					view.increase(1);
+			</script>
+		</binding>
 	</button>
 
 	<button n="9">
 		<name>Target Management Switch (TMS) left</name>
+		<desc>previous active view,  +mod: previous view</desc>
+		<binding>
+			<command>nasal</command>
+			<script>view.stepView(-1, mod)</script>
+		</binding>
 	</button>
 
 	<button n="10">
 		<name>Data Management Switch (DMS) up</name>
+		<desc>brakes</desc>
+		<binding>
+			<command>nasal</command>
+			<script>controls.applyBrakes(1)</script>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>controls.applyBrakes(0)</script>
+			</binding>
+		</mod-up>
 	</button>
 
 	<button n="11">
 		<name>Data Management Switch (DMS) right</name>
+		<desc>brakes right</desc>
+		<binding>
+			<command>nasal</command>
+			<script>controls.applyBrakes(1, 1)</script>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>controls.applyBrakes(0, 1)</script>
+			</binding>
+		</mod-up>
 	</button>
 
 	<button n="12">
 		<name>Data Management Switch (DMS) down</name>
+		<desc>toggle parking brake</desc>
+		<binding>
+			<command>nasal</command>
+			<script>controls.applyBrakes(1)</script>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>
+					var i = controls.applyParkingBrake(1);
+					popup("Parking Brake %s", i ? "ON" : "OFF");
+					controls.applyBrakes(0);
+				</script>
+			</binding>
+		</mod-up>
 	</button>
 
 	<button n="13">
 		<name>Data Management Switch (DMS) left</name>
+		<desc>brakes left</desc>
+		<binding>
+			<command>nasal</command>
+			<script>controls.applyBrakes(1, -1)</script>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>controls.applyBrakes(0, -1)</script>
+			</binding>
+		</mod-up>
 	</button>
 
 	<button n="14">
 		<name>Countermeasures Management Switch (CMS) up</name>
+		<desc>view up</desc>
+		<repeatable>true</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>view.panViewPitch(viewstep)</script>
+		</binding>
 	</button>
 
 	<button n="15">
 		<name>Countermeasures Management Switch (CMS) right</name>
+		<desc>view right</desc>
+		<repeatable>true</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>view.panViewDir(viewdir[view.index] * viewstep)</script>
+		</binding>
 	</button>
 
 	<button n="16">
 		<name>Countermeasures Management Switch (CMS) down</name>
+		<desc>view down</desc>
+		<repeatable>true</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>view.panViewPitch(-viewstep)</script>
+		</binding>
 	</button>
 
 	<button n="17">
 		<name>Countermeasures Management Switch (CMS) left</name>
+		<desc>view left</desc>
+		<repeatable>true</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>view.panViewDir(-viewdir[view.index] * viewstep)</script>
+		</binding>
 	</button>
 
 	<button n="18">
 		<name>Countermeasures Management Switch (CMS) push</name>
+		<desc>center view,  +mod: centered cockpit view</desc>
+		<binding>
+			<command>nasal</command>
+			<script>
+				if (mod)
+					setprop("/sim/current-view/view-number", 0);
+				view.resetView();
+			</script>
+		</binding>
 	</button>
 </PropertyList>

@@ -6,8 +6,8 @@
 	<nasal>
 		<script>
 			var thrust_display = func {
-				var thv = getprop("/controls/engines/engine[0]/mixture");
-				popup("Thrust vector " ~ int(thv * 120 - 20 + 0.5));
+				var thv = getprop("/controls/engines/engine/mixture");
+				popup("Thrust vector %d", thv * 120 - 20 + 0.5);
 			}
 		</script>
 	</nasal>

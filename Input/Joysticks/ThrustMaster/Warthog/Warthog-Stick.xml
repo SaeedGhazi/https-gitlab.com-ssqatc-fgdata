@@ -1,7 +1,12 @@
 <?xml version="1.0"?>
 <!--
 	Copyright (c) 2011   Melchior FRANZ   mfranz # aon : at
-	Work In Progress
+
+	This driver supports joystick overlay files (see ./Warthog/README).
+
+	TMS ... Target Management Switch (black, rippled cursor switch, left side)
+	DMS ... Data Management Switch (black cursor switch with flat cross on top, right side)
+	CMS ... Countermeasures Management Switch  (grey)
 -->
 
 <PropertyList>
@@ -13,10 +18,12 @@
 			var this = cmdarg().getParent();
 			var popup = func gui.popupTip(call(sprintf, arg));
 			var is_helicopter = (var _ = props.globals.getNode("rotors", 0)) != nil and _.getAttribute("children");
+			var aircraft_type = getprop("/sim/type");
+			var overlay = getprop("/input/joysticks/overlay");
 
 			var load_overlay = func(name) {
 				foreach (var dir; [getprop("/sim/fg-home"), getprop("/sim/fg-root")]) {
-					var file = dir ~ "/Input/Joysticks/ThrustMaster/Warthog/Joystick/" ~ name;
+					var file = dir ~ "/Input/Joysticks/ThrustMaster/Warthog/Joystick/" ~ name ~ ".xml";
 					if (io.stat(file) != nil) {
 						printlog("info", "WARTHOG: loading overlay " ~ file);
 						cmdarg().getNode("script").setValue("");
@@ -48,10 +55,14 @@
 				viewdir[i] = t != nil and t.getValue() == "lookat" ? 1 : -1;
 			}
 
-			load_overlay("generic.xml");
+			load_overlay("generic");
 			if (is_helicopter)
-				load_overlay("helicopter.xml");
-			load_overlay(getprop("/sim/aircraft") ~ ".xml");
+				load_overlay("helicopter");
+			if (aircraft_type)
+				load_overlay(aircraft_type);
+			if (overlay)
+				load_overlay(overlay);
+			load_overlay(getprop("/sim/aircraft"));
 		</script>
 	</nasal>
 
@@ -77,7 +88,7 @@
 	</axis>
 
 	<axis n="2">
-		<name>Trim Coolie Left/Right</name>
+		<name>Trim Hat Switch Left/Right</name>
 		<desc>adjust aileron trim,  +mod: reset aileron trim</desc>
 		<low>
 			<repeatable>true</repeatable>
@@ -106,7 +117,7 @@
 	</axis>
 
 	<axis n="3">
-		<name>Trim Coolie Down/Up</name>
+		<name>Trim Hat Switch Down/Up</name>
 		<desc>adjust elevator trim,  +mod: reset elevator trim</desc>
 		<low>
 			<repeatable>true</repeatable>
@@ -136,17 +147,7 @@
 
 	<button n="0">
 		<name>Trigger Button/Half Pushed</name>
-		<desc>gun trigger stage 1</desc>
-		<binding>
-			<command>nasal</command>
-			<script>controls.trigger(1)</script>
-		</binding>
-		<mod-up>
-			<binding>
-				<command>nasal</command>
-				<script>controls.trigger(0)</script>
-			</binding>
-		</mod-up>
+		<desc>camera oper</desc>
 	</button>
 
 	<button n="1">
@@ -180,10 +181,10 @@
 
 	<button n="5">
 		<name>Trigger Button/Fully Pushed</name>
-		<desc>gun trigger stage 2</desc>
+		<desc>gun trigger</desc>
 		<binding>
 			<command>nasal</command>
-			<script>controls.trigger(2)</script>
+			<script>controls.trigger(1)</script>
 		</binding>
 		<mod-up>
 			<binding>
@@ -194,7 +195,7 @@
 	</button>
 
 	<button n="6">
-		<name>Target Management Switch (TMS) up</name>
+		<name>left black curosr (TMS) up</name>
 		<desc>zoom in,  +mod: reset zoom</desc>
 		<repeatable>true</repeatable>
 		<binding>
@@ -209,7 +210,7 @@
 	</button>
 
 	<button n="7">
-		<name>Target Management Switch (TMS) right</name>
+		<name>left black cursor (TMS) right</name>
 		<desc>next active view,  +mod: next view</desc>
 		<binding>
 			<command>nasal</command>
@@ -218,7 +219,7 @@
 	</button>
 
 	<button n="8">
-		<name>Target Management Switch (TMS) down</name>
+		<name>left black cursor (TMS) down</name>
 		<desc>zoom out,  +mod: reset zoom</desc>
 		<repeatable>true</repeatable>
 		<binding>
@@ -233,7 +234,7 @@
 	</button>
 
 	<button n="9">
-		<name>Target Management Switch (TMS) left</name>
+		<name>left black cursor (TMS) left</name>
 		<desc>previous active view,  +mod: previous view</desc>
 		<binding>
 			<command>nasal</command>
@@ -242,7 +243,7 @@
 	</button>
 
 	<button n="10">
-		<name>Data Management Switch (DMS) up</name>
+		<name>right black cursor (DMS) up</name>
 		<desc>brakes</desc>
 		<binding>
 			<command>nasal</command>
@@ -257,7 +258,7 @@
 	</button>
 
 	<button n="11">
-		<name>Data Management Switch (DMS) right</name>
+		<name>right black cursor (DMS) right</name>
 		<desc>brakes right</desc>
 		<binding>
 			<command>nasal</command>
@@ -272,7 +273,7 @@
 	</button>
 
 	<button n="12">
-		<name>Data Management Switch (DMS) down</name>
+		<name>right black cursor (DMS) down</name>
 		<desc>toggle parking brake</desc>
 		<binding>
 			<command>nasal</command>
@@ -291,7 +292,7 @@
 	</button>
 
 	<button n="13">
-		<name>Data Management Switch (DMS) left</name>
+		<name>right black cursor (DMS) left</name>
 		<desc>brakes left</desc>
 		<binding>
 			<command>nasal</command>
@@ -306,7 +307,7 @@
 	</button>
 
 	<button n="14">
-		<name>Countermeasures Management Switch (CMS) up</name>
+		<name>grey cursor (CMS) up</name>
 		<desc>view up</desc>
 		<repeatable>true</repeatable>
 		<binding>
@@ -316,7 +317,7 @@
 	</button>
 
 	<button n="15">
-		<name>Countermeasures Management Switch (CMS) right</name>
+		<name>grey cursor (CMS) right</name>
 		<desc>view right</desc>
 		<repeatable>true</repeatable>
 		<binding>
@@ -326,7 +327,7 @@
 	</button>
 
 	<button n="16">
-		<name>Countermeasures Management Switch (CMS) down</name>
+		<name>grey cursor (CMS) down</name>
 		<desc>view down</desc>
 		<repeatable>true</repeatable>
 		<binding>
@@ -336,7 +337,7 @@
 	</button>
 
 	<button n="17">
-		<name>Countermeasures Management Switch (CMS) left</name>
+		<name>grey cursor (CMS) left</name>
 		<desc>view left</desc>
 		<repeatable>true</repeatable>
 		<binding>
@@ -346,7 +347,7 @@
 	</button>
 
 	<button n="18">
-		<name>Countermeasures Management Switch (CMS) push</name>
+		<name>grey cursor (CMS) push</name>
 		<desc>center view,  +mod: centered cockpit view</desc>
 		<binding>
 			<command>nasal</command>

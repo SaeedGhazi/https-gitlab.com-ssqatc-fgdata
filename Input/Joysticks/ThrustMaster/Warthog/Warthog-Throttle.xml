@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <!--
 	Copyright (c) 2011   Melchior FRANZ   mfranz # aon : at
-	Work In Progress
+
+	This driver supports joystick overlay files (see ./Warthog/README).
 -->
 
 <PropertyList>
@@ -13,10 +14,12 @@
 			var this = cmdarg().getParent();
 			var popup = func gui.popupTip(call(sprintf, arg));
 			var is_helicopter = (var _ = props.globals.getNode("rotors", 0)) != nil and _.getAttribute("children");
+			var aircraft_type = getprop("/sim/type");
+			var overlay = getprop("/input/joysticks/overlay");
 
 			var load_overlay = func(name) {
 				foreach (var dir; [getprop("/sim/fg-home"), getprop("/sim/fg-root")]) {
-					var file = dir ~ "/Input/Joysticks/ThrustMaster/Warthog/Throttle/" ~ name;
+					var file = dir ~ "/Input/Joysticks/ThrustMaster/Warthog/Throttle/" ~ name ~ ".xml";
 					if (io.stat(file) != nil) {
 						printlog("info", "WARTHOG: loading overlay " ~ file);
 						cmdarg().getNode("script").setValue("");
@@ -41,10 +44,14 @@
 			var left_engines = [0, 2, 4, 6, 8, 10];
 			var right_engines = [1, 3, 5, 7, 9, 11];
 
-			load_overlay("generic.xml");
+			load_overlay("generic");
 			if (is_helicopter)
-				load_overlay("helicopter.xml");
-			load_overlay(getprop("/sim/aircraft") ~ ".xml");
+				load_overlay("helicopter");
+			if (aircraft_type)
+				load_overlay(aircraft_type);
+			if (overlay)
+				load_overlay(overlay);
+			load_overlay(getprop("/sim/aircraft"));
 		</script>
 	</nasal>
 
@@ -98,7 +105,7 @@
 	</axis>
 
 	<axis n="5">
-		<name>Coolie Switch Horizontal</name>
+		<name>Hat Switch Horizontal</name>
 		<desc>adjust mixture: left = leaner, right = fatter</desc>
 		<number>
 			<unix>5</unix>
@@ -122,7 +129,7 @@
 	</axis>
 
 	<axis n="6">
-		<name>Coolie Switch Vertical</name>
+		<name>Hat Switch Vertical</name>
 		<desc>adjust propeller pitch: forward = increase, backward = decrease</desc>
 		<number>
 			<unix>6</unix>

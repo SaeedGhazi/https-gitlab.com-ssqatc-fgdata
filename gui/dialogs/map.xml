@@ -182,16 +182,60 @@ command interface /autopilot/route-manager/input:
 
             <vrule/>
 
-            <map>
-                <!-- <halign>fill</halign> -->
-                <valign>fill</valign>
-                <halign>fill</halign>
+            <group>
+                <layout>vbox</layout>
                 <stretch>true</stretch>
-                <pref-height>400</pref-height>
-                <pref-width>600</pref-width>
-                <property>/gui/map</property>
-            </map>
+                
+                <map>
+                    <!-- <halign>fill</halign> -->
+                    <valign>fill</valign>
+                    <halign>fill</halign>
+                    <stretch>true</stretch>
+                    <pref-height>400</pref-height>
+                    <pref-width>600</pref-width>
+                    <property>/gui/map</property>
+                </map>
+            
+                <hrule/>
+                
+                <group>
+                    <layout>hbox</layout>
+                    
+                    <button>
+            			<legend>-</legend>
+            			<pref-width>22</pref-width>
+            			<pref-height>22</pref-height>
 
+            			<binding>
+            				<command>property-adjust</command>
+            				<property>/gui/map/zoom</property>
+            				<min>0</min>
+            				<step>-1</step>
+            			</binding>
+            		</button>
+            		
+                    <text>
+                        <label>MMM</label>
+                        <format>Zoom %d</format>
+                        <property>/gui/map/zoom</property>
+                        <live>true</live>
+                    </text>
+                    
+                    <button>
+            			<legend>+</legend>
+            			<pref-width>22</pref-width>
+            			<pref-height>22</pref-height>
+
+            			<binding>
+            				<command>property-adjust</command>
+            				<property>/gui/map/zoom</property>
+            				<step>1</step>
+            				<max>12</max>
+            			</binding>
+            		</button>
+                </group>
+            </group>
+            
         </group>
 </PropertyList>
 

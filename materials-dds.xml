@@ -1337,7 +1337,8 @@ Shared parameters for various materials.
     </condition>
     <effect>Effects/water</effect>
     <name>Lagoon</name>
-    <texture>Terrain/water-lake.png</texture>
+		<name>Lake</name>
+		<texture>Terrain/water-lake.png</texture>
     <xsize>400</xsize>
     <ysize>400</ysize>
     <ambient>
@@ -1372,7 +1373,6 @@ Shared parameters for various materials.
       </equals>
     </condition>
     <effect>Effects/water-inland</effect>
-    <name>Lake</name>
     <name>Pond</name>
     <name>Reservoir</name>
     <name>Stream</name>

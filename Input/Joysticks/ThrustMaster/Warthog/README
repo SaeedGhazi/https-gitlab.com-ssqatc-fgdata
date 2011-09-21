@@ -1,0 +1,35 @@
+("Master files") Warthog-Stick.xml and Warthog-Throttle.xml support
+configuration overlay files. These are optional and can be used to
+modify the default configuration. Warthog-Stick.xml searches for
+overlay files in
+
+  {$FG_HOME,$FG_ROOT}/Input/Joysticks/ThrustMaster/Warthog/Stick/
+
+and Warthog-Throttle.xml in
+
+  {$FG_HOME,$FG_ROOT}/Input/Joysticks/ThrustMaster/Warthog/Throttle/
+
+
+Available files are loaded in the following order, where <x> is replaced
+by the contents of property "x":
+
+  - generic.xml
+  - helicopter.xml  (only helicopters)
+  - </sim/type>.xml  (some aircraft set this property to "seaplane")
+  - </input/joysticks/overlay>.xml  (not used by the system; meant to
+               be set on the command line or in wrapper scripts,
+               for example: --prop:input/joysticks/overlay=modern_jet)
+  - </sim/aircraft>.xml  (aircraft name, for example "harrier.xml")
+
+
+If a file is found under $FG_HOME, then an equally named file under
+$FG_ROOT will be ignored.
+
+Overlay files are like stripped down joystick driver files, but shall
+not have a <name> entry. They only need to define what should differ
+from the already loaded joystick configuration. Make sure that an
+axis definition uses the same index as the master file. The n-th
+<axis> in an XML config file usually has index n, even if the axis
+uses <number><unix> etc. Nasal blocks are properly executed in the
+namespace of the master file, so you can access all its functions
+and variables.

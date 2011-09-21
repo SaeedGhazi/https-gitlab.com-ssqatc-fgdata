@@ -846,7 +846,7 @@ var tyresmoke = {
 	},
 	update: func {
 		var rollspeed = me.get_rollspeed();
-		var vert_speed = (me.vertical_speed) ? me.vertical_speed.getValue() : -999;
+		var vert_speed = (me.vertical_speed) != nil ? me.vertical_speed.getValue() : -999;
 		var groundspeed = me.speed.getValue();
 		var friction_factor = me.friction_factor.getValue();
 		var wow = me.wow.getValue();

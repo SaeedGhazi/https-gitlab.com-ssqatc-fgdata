@@ -411,24 +411,29 @@ var OverlaySelector = {
         m.sortprop = relpath(sortprop or nameprop);
         m.mpprop = mpprop;
         m.callback = callback;
+        m.title = title;
+        m.dialog_name = name;
         m.result = data.initNode("result", "");
         m.listener = setlistener(m.result, func(n) m.select(n.getValue()));
-
-        m.prop.getNode("group/text/label").setValue(title);
-        m.prop.getNode("group/button/binding/script").setValue('gui.Dialog.instance["' ~ name ~ '"].close()');
-        m.list = m.prop.getNode("list");
-        m.list.getNode("property").setValue(m.result.getPath());
-
         if (m.mpprop != nil)
             aircraft.data.add(m.nameprop);
-
-        m.rescan();
-        m.current = -1;
-        m.select(getprop(m.nameprop) or "");
+        m.reinit();
+        # need to reinit again, whenever the GUI is reloaded
+        m.reinit_listener = setlistener("/sim/signals/reinit-gui", func(n) m.reinit());
         return m;
+    },
+    reinit: func {
+        me.prop.getNode("group/text/label").setValue(me.title);
+        me.prop.getNode("group/button/binding/script").setValue('gui.Dialog.instance["' ~ me.dialog_name ~ '"].close()');
+        me.list = me.prop.getNode("list");
+        me.list.getNode("property").setValue(me.result.getPath());
+        me.rescan();
+        me.current = -1;
+        me.select(getprop(me.nameprop) or "");
     },
     del: func {
         removelistener(me.listener);
+        removelistener(me.reinit_listener);
     },
     rescan: func {
         me.data = [];

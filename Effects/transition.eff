@@ -43,6 +43,23 @@ parameters :
 	<snow-level>
 	    <use>/sim/rendering/snow-level-m</use>
 	</snow-level>
+
+	<cloud-cover0>
+	    <use>/environment/clouds/layer[0]/coverage-type</use>
+	</cloud-cover0>
+	<cloud-cover1>
+	    <use>/environment/clouds/layer[1]/coverage-type</use>
+	</cloud-cover1>
+	<cloud-cover2>
+	    <use>/environment/clouds/layer[2]/coverage-type</use>
+	</cloud-cover2>
+	<cloud-cover3>
+	    <use>/environment/clouds/layer[3]/coverage-type</use>
+	</cloud-cover3>
+	<cloud-cover4>
+	    <use>/environment/clouds/layer[4]/coverage-type</use>
+	</cloud-cover4>
+
 	<transitions type="float">2.0</transitions>
 	<inverse type="float">0.0</inverse>
     </parameters>
@@ -255,6 +272,46 @@ parameters :
 		<type>float</type>
 		<value>
 		    <use>inverse</use>
+		</value>
+	    </uniform>
+
+	    <uniform>
+		<name>CloudCover0</name>
+		<type>float</type>
+		<value>
+		    <use>cloud-cover0</use>
+		</value>
+	    </uniform>
+
+	    <uniform>
+		<name>CloudCover1</name>
+		<type>float</type>
+		<value>
+		    <use>cloud-cover1</use>
+		</value>
+	    </uniform>
+
+	    <uniform>
+		<name>CloudCover2</name>
+		<type>float</type>
+		<value>
+		    <use>cloud-cover2</use>
+		</value>
+	    </uniform>
+
+	    <uniform>
+		<name>CloudCover3</name>
+		<type>float</type>
+		<value>
+		    <use>cloud-cover3</use>
+		</value>
+	    </uniform>
+
+	    <uniform>
+		<name>CloudCover4</name>
+		<type>float</type>
+		<value>
+		    <use>cloud-cover4</use>
 		</value>
 	    </uniform>
 	</pass>

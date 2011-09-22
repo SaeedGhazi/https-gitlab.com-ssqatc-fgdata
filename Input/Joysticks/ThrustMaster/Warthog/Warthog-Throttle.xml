@@ -12,6 +12,7 @@
 		<command>nasal</command>
 		<script>
 			var this = cmdarg().getParent();
+			var init = !contains(caller(0)[0], "init");
 			var popup = func gui.popupTip(call(sprintf, arg));
 			var is_helicopter = (var _ = props.globals.getNode("rotors", 0)) != nil and _.getAttribute("children");
 			var aircraft_type = getprop("/sim/type");
@@ -38,8 +39,10 @@
 			}
 
 			var mod = 0;
-			var _ = props.globals.initNode("/devices/status/joysticks/warthog/modifier", mod, "INT");
-			setlistener(_, func(n) mod = n.getValue());
+			if (init) {
+				var _ = props.globals.initNode("/devices/status/joysticks/warthog/modifier", mod, "INT");
+				setlistener(_, func(n) mod = n.getValue());
+			}
 
 			var left_engines = [0, 2, 4, 6, 8, 10];
 			var right_engines = [1, 3, 5, 7, 9, 11];

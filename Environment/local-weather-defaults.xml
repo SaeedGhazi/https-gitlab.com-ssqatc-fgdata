@@ -16,6 +16,8 @@
     <debug-output-flag type="bool" userarchive="y">0</debug-output-flag>
     <generate-thermal-lift-flag type="bool" userarchive="y">0</generate-thermal-lift-flag>
     <dynamical-convection-flag type="bool" userarchive="y">0</dynamical-convection-flag>
+    <detailed-terrain-interaction-flag type="bool" userarchive="y">0</detailed-terrain-interaction-flag>
+    <realistic-visibility-flag type="bool" userarchive="y">0</realistic-visibility-flag>
     <thread-flag type="bool" userarchive="n">1</thread-flag>
     <presampling-flag type="bool" userarchive="y">1</presampling-flag>
     <fps-control-flag type="bool" userarchive="y">0</fps-control-flag>

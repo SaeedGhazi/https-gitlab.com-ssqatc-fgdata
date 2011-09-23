@@ -54,6 +54,32 @@ return windfield;
 }
 
 
+var get_wind_direction = func (tile_index) {
+
+if ((local_weather.wind_model_flag == 1) or (local_weather.wind_model_flag == 3))
+	{
+	return tile_wind_direction[0];
+	}
+else if ((local_weather.wind_model_flag ==2) or (local_weather.wind_model_flag == 4) or (local_weather.wind_model_flag == 5))
+	{
+	return tile_wind_direction[tile_index-1];
+	}
+
+}
+
+var get_wind_speed = func (tile_index) {
+
+if ((local_weather.wind_model_flag == 1) or (local_weather.wind_model_flag == 3))
+	{
+	return tile_wind_speed[0];
+	}
+else if ((local_weather.wind_model_flag ==2) or (local_weather.wind_model_flag == 4) or (local_weather.wind_model_flag == 5))
+	{
+	return tile_wind_speed[tile_index-1];
+	}
+
+}
+
 ########################################################
 # timing loop
 # this gets the accurate time since the start of weather dynamics

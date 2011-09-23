@@ -29,7 +29,6 @@
 # calcLift_max			to calculate the maximal available thermal lift for given altitude
 # calcLift			to calculate the thermal lift at aircraft position
 # calcWaveLift			to calculate wave lift at aircraft position
-# select_cloud_model		to select a path to the cloud model, given the cloud type and subtype
 # create_cloud_vec		to place a single cloud into an array to be written later
 # clear_all			to remove all clouds, effect volumes and weather stations and stop loops
 # create_detailed_cumulus_cloud	to place multiple cloudlets into a box based on a size parameter
@@ -81,6 +80,9 @@
 # effectVolume			to store effect volume info and provide methods to move and time-evolve effect volumes
 # thermalLift			to store thermal info and provide methods to move and time-evolve a thermal
 # waveLift 			to store wave info 
+
+
+
 
 ###################################
 # geospatial helper functions
@@ -603,6 +605,10 @@ var inc2 = 0.9 * (vis_aloft - vis)/1500.0;
 var inc3 = (vis_ovcst - vis_aloft)/(ovcst_alt_high - vis_alt1+1500);
 var inc4 = 0.5;
 
+
+if (realistic_visibility_flag == 1)
+	{inc4 = inc4 * 8.0;}
+
 # compute the visibility
 
 if (altitude < alt1)
@@ -619,6 +625,11 @@ else if (altitude > ovcst_alt_high)
 	{
 	vis = vis + inc1 * alt1 + inc2 * (alt2-alt1)  + inc3 * (ovcst_alt_high - alt2) + inc4 * (altitude - ovcst_alt_high);
 	}
+
+# limit visibility (otherwise memory consumption is very bad...)
+
+if (vis > 140000.0)
+	{vis = 140000.0;}
 
 # compute the horizon shading
 
@@ -855,6 +866,10 @@ if (getprop(lw~"interpolation-loop-flag") ==1) {settimer(interpolation_loop, int
 
 var thermal_lift_start = func (ev) {
 
+
+# if another lift loop is already running, do nothing
+if (getprop(lw~"lift-loop-flag") == 1) {return;} 
+
 # copy the properties from effect volume to the lift object
 
 l = thermalLift.new(ev.lat, ev.lon, ev.radius, ev.height, ev.cn, ev.sh, ev.max_lift, ev.f_lift_radius);
@@ -887,8 +902,9 @@ if (debug_output_flag == 1)
 # and start the lift loop, unless another one is already running
 # so we block overlapping calls
 
-if (getprop(lw~"lift-loop-flag") == 0) 
-{setprop(lw~"lift-loop-flag",1); settimer(thermal_lift_loop,0);}
+
+setprop(lw~"lift-loop-flag",1); 
+settimer(thermal_lift_loop,0);
 
 }
 
@@ -1397,390 +1413,6 @@ return lift;
 }
 	
 
-###########################################################
-# select a cloud model 
-###########################################################
-
-var select_cloud_model = func(type, subtype) {
-
-var rn = rand();
-var path="Models/Weather/blank.ac";
-
-if (type == "Cumulus"){
-	if (subtype == "small") {
-		if (rn > 0.8) {path = "Models/Weather/cumulus_small_shader1.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/cumulus_small_shader2.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/cumulus_small_shader3.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/cumulus_small_shader4.xml";}
-		else  {path = "Models/Weather/cumulus_small_shader5.xml";}
-		}
-	else if (subtype == "large") {
-		if (rn > 0.83) {path = "Models/Weather/cumulus_shader1.xml";}
-		else if (rn > 0.664) {path = "Models/Weather/cumulus_shader2.xml";}
-		else if (rn > 0.498) {path = "Models/Weather/cumulus_shader3.xml";}
-		else if (rn > 0.332) {path = "Models/Weather/cumulus_shader4.xml";}
-		else if (rn > 0.166) {path = "Models/Weather/cumulus_shader5.xml";}
-		else  {path = "Models/Weather/cumulus_shader6.xml";}
-		}
-	}
-else if (type == "Cumulus (cloudlet)"){
-	if (subtype == "small") {
-		if (rn > 0.875) {path = "Models/Weather/cumulus_small_sl1.xml";}
-		else if (rn > 0.750) {path = "Models/Weather/cumulus_small_sl2.xml";}
-		else if (rn > 0.625) {path = "Models/Weather/cumulus_small_sl3.xml";}
-		else if (rn > 0.500) {path = "Models/Weather/cumulus_small_sl4.xml";}
-		else if (rn > 0.375) {path = "Models/Weather/cumulus_small_sl5.xml";}
-		else if (rn > 0.250) {path = "Models/Weather/cumulus_small_sl6.xml";}
-		else if (rn > 0.125) {path = "Models/Weather/cumulus_small_sl7.xml";}
-		else  {path = "Models/Weather/cumulus_small_sl8.xml";}
-		}
-	else if (subtype == "large") {
-		if (rn > 0.9) {path = "Models/Weather/cumulus_sl1.xml";}
-		else if (rn > 0.8) {path = "Models/Weather/cumulus_sl2.xml";}
-		else if (rn > 0.7) {path = "Models/Weather/cumulus_sl3.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/cumulus_sl4.xml";}
-		else if (rn > 0.5) {path = "Models/Weather/cumulus_sl5.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/cumulus_sl6.xml";}
-		else if (rn > 0.3) {path = "Models/Weather/cumulus_sl7.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/cumulus_sl8.xml";}
-		else if (rn > 0.1) {path = "Models/Weather/cumulus_sl9.xml";}
-		else  {path = "Models/Weather/cumulus_sl10.xml";}
-		}
-	
-	}
-else if (type == "Congestus"){
-	if (subtype == "small") {
-		if (rn > 0.9) {path = "Models/Weather/cumulus_sl1.xml";}
-		else if (rn > 0.8) {path = "Models/Weather/cumulus_sl2.xml";}
-		else if (rn > 0.7) {path = "Models/Weather/cumulus_sl3.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/cumulus_sl4.xml";}
-		else if (rn > 0.5) {path = "Models/Weather/cumulus_sl5.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/cumulus_small_sl4.xml";}
-		else if (rn > 0.3) {path = "Models/Weather/cumulus_small_sl5.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/cumulus_small_sl6.xml";}
-		else if (rn > 0.1) {path = "Models/Weather/cumulus_small_sl7.xml";}
-		else  {path = "Models/Weather/cumulus_small_sl8.xml";}
-		}
-	else if (subtype == "large") {
-		if (rn > 0.8) {path = "Models/Weather/congestus_sl1.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/congestus_sl2.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/congestus_sl3.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/congestus_sl4.xml";}
-		else  {path = "Models/Weather/congestus_sl5.xml";}
-		}
-	
-	}
-else if (type == "Stratocumulus"){
-	if (subtype == "small") {
-		if (rn > 0.8) {path = "Models/Weather/stratocumulus_small1.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/stratocumulus_small2.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/stratocumulus_small3.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/stratocumulus_small4.xml";}
-		else  {path = "Models/Weather/stratocumulus_small5.xml";}
-		}
-	else if (subtype == "large") {
-		if (rn > 0.8) {path = "Models/Weather/stratocumulus_sl1.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/stratocumulus_sl2.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/stratocumulus_sl3.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/stratocumulus_sl4.xml";}
-		else  {path = "Models/Weather/stratocumulus_sl5.xml";}
-		}
-	
-	}
-else if (type == "Cumulus (whisp)"){
-	if (subtype == "small") {
-		if (rn > 0.8) {path = "Models/Weather/cumulus_whisp1.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/cumulus_whisp2.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/cumulus_whisp3.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/cumulus_whisp4.xml";}
-		else  {path = "Models/Weather/cumulus_whisp5.xml";}
-		}
-	else if (subtype == "large") {
-		if (rn > 0.8) {path = "Models/Weather/cumulus_whisp1.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/cumulus_whisp2.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/cumulus_whisp3.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/cumulus_whisp4.xml";}
-		else  {path = "Models/Weather/cumulus_whisp5.xml";}
-		}
-	
-	}
-else if (type == "Cumulus bottom"){
-	if (subtype == "small") {
-		if (rn > 0.0) {path = "Models/Weather/cumulus_bottom1.xml";}
-		}
-	else if (subtype == "large") {
-		if (rn > 0.0) {path = "Models/Weather/cumulus_bottom1.xml";}
-		}
-	
-	}
-else if (type == "Congestus bottom"){
-	if (subtype == "small") {
-		if (rn > 0.0) {path = "Models/Weather/congestus_bottom1.xml";}
-		}
-	else if (subtype == "large") {
-		if (rn > 0.0) {path = "Models/Weather/congestus_bottom1.xml";}
-		}
-	
-	}
-else if (type == "Stratocumulus bottom"){
-	if (subtype == "small") {
-		if (rn > 0.0) {path = "Models/Weather/stratocumulus_bottom1.xml";}
-		}
-	else if (subtype == "large") {
-		if (rn > 0.0) {path = "Models/Weather/stratocumulus_bottom1.xml";}
-		}
-	
-	}
-else if (type == "Cumulonimbus (cloudlet)"){
-	if (subtype == "small") {
-		if (rn > 0.8) {path = "Models/Weather/cumulonimbus_sl1.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/cumulonimbus_sl2.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/cumulonimbus_sl3.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/cumulonimbus_sl4.xml";}
-		else  {path = "Models/Weather/cumulonimbus_sl5.xml";}
-		}
-	else if (subtype == "large") {
-		if (rn > 0.8) {path = "Models/Weather/cumulonimbus_sl1.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/cumulonimbus_sl2.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/cumulonimbus_sl3.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/cumulonimbus_sl4.xml";}
-		else  {path = "Models/Weather/cumulonimbus_sl5.xml";}
-		}
-	
-	}
-
-else if (type == "Altocumulus"){
-	if (subtype == "small") {
-		if (rn > 0.8) {path = "Models/Weather/altocumulus_shader6.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/altocumulus_shader7.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/altocumulus_shader8.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/altocumulus_shader9.xml";}
-		else  {path = "Models/Weather/altocumulus_shader10.xml";}
-		}
-	else if (subtype == "large") {
-		if (rn > 0.8) {path = "Models/Weather/altocumulus_shader1.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/altocumulus_shader2.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/altocumulus_shader3.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/altocumulus_shader4.xml";}
-		else  {path = "Models/Weather/altocumulus_shader5.xml";}
-		}
-	}
-
-else if (type == "Stratus (structured)"){
-	if (subtype == "small") {
-		if (rn > 0.8) {path = "Models/Weather/altocumulus_layer6.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/altocumulus_layer7.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/altocumulus_layer8.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/altocumulus_layer9.xml";}
-		else  {path = "Models/Weather/altocumulus_layer10.xml";}
-		}
-	else if (subtype == "large") {
-		if (rn > 0.8) {path = "Models/Weather/altocumulus_layer1.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/altocumulus_layer2.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/altocumulus_layer3.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/altocumulus_layer4.xml";}
-		else  {path = "Models/Weather/altocumulus_layer5.xml";}
-		}
-	}
-else if (type == "Altocumulus perlucidus"){
-	if (subtype == "small") {
-		if (rn > 0.8) {path = "Models/Weather/altocumulus_thinlayer6.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/altocumulus_thinlayer7.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/altocumulus_thinlayer8.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/altocumulus_thinlayer9.xml";}
-		else  {path = "Models/Weather/altocumulus_thinlayer10.xml";}
-		}
-	else if (subtype == "large") {
-		if (rn > 0.8) {path = "Models/Weather/altocumulus_thinlayer1.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/altocumulus_thinlayer2.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/altocumulus_thinlayer3.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/altocumulus_thinlayer4.xml";}
-		else  {path = "Models/Weather/altocumulus_thinlayer5.xml";}
-		}
-	}
-else if ((type == "Cumulonimbus") or (type == "Cumulonimbus (rain)")) {
-	if (subtype == "small") {
-		if (rn > 0.5) {path = "Models/Weather/cumulonimbus_small1.xml";}
-		else  {path = "Models/Weather/cumulonimbus_small2.xml";}
-		}	
-	else if (subtype == "large") {
-		if (rn > 0.5) {path = "Models/Weather/cumulonimbus_small1.xml";}
-		else  {path = "Models/Weather/cumulonimbus_small2.xml";}
-		}
-	}	
-else if (type == "Cirrus") {
-	if (subtype == "large") {
-		if (rn > 0.888) {path = "Models/Weather/cirrus1.xml";}
-		else if (rn > 0.777) {path = "Models/Weather/cirrus2.xml";}
-		else if (rn > 0.666) {path = "Models/Weather/cirrus3.xml";}
-		else if (rn > 0.555) {path = "Models/Weather/cirrus4.xml";}
-		else if (rn > 0.444) {path = "Models/Weather/cirrus5.xml";}
-		else if (rn > 0.333) {path = "Models/Weather/cirrus6.xml";}
-		else if (rn > 0.222) {path = "Models/Weather/cirrus7.xml";}
-		else if (rn > 0.111) {path = "Models/Weather/cirrus8.xml";}
-		else  {path = "Models/Weather/cirrus9.xml";}
-		}	
-	else if (subtype == "small") {
-		if (rn > 0.75) {path = "Models/Weather/cirrus_amorphous1.xml";}
-		else if (rn > 0.5) {path = "Models/Weather/cirrus_amorphous2.xml";}
-		else if (rn > 0.25) {path = "Models/Weather/cirrus_amorphous3.xml";}
-		else  {path = "Models/Weather/cirrus_amorphous4.xml";}
-		}	
-	}
-else if (type == "Cirrocumulus") {
-	if (subtype == "small") {
-		if (rn > 0.5) {path = "Models/Weather/cirrocumulus1.xml";}
-		else  {path = "Models/Weather/cirrocumulus2.xml";}
-		}	
-	else if (subtype == "large") {
-		if (rn > 0.875) {path = "Models/Weather/cirrocumulus1.xml";}
-		else if (rn > 0.750){path = "Models/Weather/cirrocumulus4.xml";}
-		else if (rn > 0.625){path = "Models/Weather/cirrocumulus5.xml";}
-		else if (rn > 0.500){path = "Models/Weather/cirrocumulus6.xml";}
-		else if (rn > 0.385){path = "Models/Weather/cirrocumulus7.xml";}
-		else if (rn > 0.250){path = "Models/Weather/cirrocumulus8.xml";}
-		else if (rn > 0.125){path = "Models/Weather/cirrocumulus9.xml";}
-		else {path = "Models/Weather/cirrocumulus10.xml";}
-		}	
-	}
-else if (type == "Cirrocumulus (cloudlet)") {
-	if (subtype == "small") {
-		if (rn > 0.8) {path = "Models/Weather/cirrocumulus_cloudlet6.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/cirrocumulus_cloudlet7.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/cirrocumulus_cloudlet8.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/cirrocumulus_cloudlet9.xml";}
-		else  {path = "Models/Weather/cirrocumulus_cloudlet10.xml";}
-		}	
-	else if (subtype == "large") {
-		if (rn > 0.8) {path = "Models/Weather/cirrocumulus_cloudlet1.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/cirrocumulus_cloudlet2.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/cirrocumulus_cloudlet3.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/cirrocumulus_cloudlet4.xml";}
-		else  {path = "Models/Weather/cirrocumulus_cloudlet5.xml";}
-		}	
-	}
-else if (type == "Nimbus") {
-	if (subtype == "small") {
-		if (rn > 0.8) {path = "Models/Weather/nimbus_sls1.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/nimbus_sls2.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/nimbus_sls3.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/nimbus_sls4.xml";}
-		else  {path = "Models/Weather/nimbus_sls5.xml";}
-		}	
-	else if (subtype == "large") {
-		if (rn > 0.8) {path = "Models/Weather/nimbus_sl1.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/nimbus_sl2.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/nimbus_sl3.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/nimbus_sl4.xml";}
-		else  {path = "Models/Weather/nimbus_sl5.xml";}
-		}	
-	}
-else if (type == "Stratus") {
-	if (subtype == "small") {
-		if (rn > 0.8) {path = "Models/Weather/stratus_layer1.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/stratus_layer2.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/stratus_layer3.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/stratus_layer4.xml";}
-		else  {path = "Models/Weather/stratus_layer5.xml";}
-		}	
-	else if (subtype == "large") {
-		if (rn > 0.8) {path = "Models/Weather/stratus_layer1.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/stratus_layer2.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/stratus_layer3.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/stratus_layer4.xml";}
-		else  {path = "Models/Weather/stratus_layer5.xml";}
-		}	
-	}
-else if (type == "Stratus (thin)") {
-	if (subtype == "small") {
-		if (rn > 0.8) {path = "Models/Weather/stratus_tlayer1.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/stratus_tlayer2.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/stratus_tlayer3.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/stratus_tlayer4.xml";}
-		else  {path = "Models/Weather/stratus_tlayer5.xml";}
-		}	
-	else if (subtype == "large") {
-		if (rn > 0.8) {path = "Models/Weather/stratus_tlayer1.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/stratus_tlayer2.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/stratus_tlayer3.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/stratus_tlayer4.xml";}
-		else  {path = "Models/Weather/stratus_tlayer5.xml";}
-		}	
-	}
-else if (type == "Cirrostratus") {
-	if (subtype == "small") {
-		if (rn > 0.75) {path = "Models/Weather/cirrostratus1.xml";}
-		else if (rn > 0.5) {path = "Models/Weather/cirrostratus2.xml";}
-		else if (rn > 0.25) {path = "Models/Weather/cirrostratus3.xml";}
-		else  {path = "Models/Weather/cirrostratus4.xml";}
-		}	
-	else if (subtype == "large") {
-		if (rn > 0.75) {path = "Models/Weather/cirrostratus1.xml";}
-		else if (rn > 0.5) {path = "Models/Weather/cirrostratus2.xml";}
-		else if (rn > 0.25) {path = "Models/Weather/cirrostratus3.xml";}
-		else  {path = "Models/Weather/cirrostratus4.xml";}
-		}	
-	}
-else if (type == "Fog (thin)") {
-	if (subtype == "small") {
-		if (rn > 0.8) {path = "Models/Weather/stratus_thin1.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/stratus_thin2.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/stratus_thin3.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/stratus_thin4.xml";}
-		else  {path = "Models/Weather/stratus_thin5.xml";}
-		}	
-	else if (subtype == "large") {
-		if (rn > 0.8) {path = "Models/Weather/stratus_thin1.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/stratus_thin2.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/stratus_thin3.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/stratus_thin4.xml";}
-		else  {path = "Models/Weather/stratus_thin5.xml";}
-		}	
-	}
-else if (type == "Fog (thick)") {
-	if (subtype == "small") {
-		if (rn > 0.8) {path = "Models/Weather/stratus_thick1.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/stratus_thick2.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/stratus_thick3.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/stratus_thick4.xml";}
-		else  {path = "Models/Weather/stratus_thick5.xml";}
-		}	
-	else if (subtype == "large") {
-		if (rn > 0.8) {path = "Models/Weather/stratus_thick1.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/stratus_thick2.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/stratus_thick3.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/stratus_thick4.xml";}
-		else  {path = "Models/Weather/stratus_thick5.xml";}
-		}	
-	}
-else if (type == "Test") {path="Models/Weather/single_cloud.xml";}
-else if (type == "Box_test") {
-	if (subtype == "standard") {
-		if (rn > 0.8) {path = "Models/Weather/cloudbox1.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/cloudbox2.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/cloudbox3.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/cloudbox4.xml";}
-		else  {path = "Models/Weather/cloudbox5.xml";}		
-		}
-	else if (subtype == "core") {
-		if (rn > 0.8) {path = "Models/Weather/cloudbox_core1.xml";}
-		else if (rn > 0.6) {path = "Models/Weather/cloudbox_core2.xml";}
-		else if (rn > 0.4) {path = "Models/Weather/cloudbox_core3.xml";}
-		else if (rn > 0.2) {path = "Models/Weather/cloudbox_core4.xml";}
-		else  {path = "Models/Weather/cloudbox_core5.xml";}		
-		}
-	else if (subtype == "bottom") {
-		if (rn > 0.66) {path = "Models/Weather/cloudbox_bottom1.xml";}
-		else if (rn > 0.33) {path = "Models/Weather/cloudbox_bottom2.xml";}
-		else if (rn > 0.0) {path = "Models/Weather/cloudbox_bottom3.xml";}	
-		}
-	}
-
-
-else {print("Cloud type ", type, " subtype ",subtype, " not available!");}
-
-return path;
-}
 
 
 
@@ -1791,6 +1423,24 @@ return path;
 ###########################################################
 
 var create_cloud_vec = func(path, lat, long, alt, heading) {
+
+if (path == "new") # we have to switch to new cloud generating routines
+	{
+	local_weather.cloudAssembly.lat = lat;
+	local_weather.cloudAssembly.lon = long;
+	local_weather.cloudAssembly.alt = alt;	
+
+	if (dynamics_flag == 1)
+		{
+		local_weather.cloudAssembly.mean_alt = cloud_mean_altitude;
+		local_weather.cloudAssembly.flt = cloud_fractional_lifetime;
+		local_weather.cloudAssembly.evolution_timestamp = cloud_evolution_timestamp;
+		local_weather.cloudAssembly.rel_alt = c.alt - c.mean_alt;
+		}
+	compat_layer.create_cloud_new(local_weather.cloudAssembly);	
+
+	return;
+	}
 
 append(clouds_path,path);
 append(clouds_lat,lat);
@@ -1830,6 +1480,14 @@ foreach (var m; modelNode)
 		}
 	}
 
+
+# remove the hard-coded clouds
+
+foreach (c; weather_tile_management.cloudArray)
+	{
+	c.remove();
+	}
+setsize(weather_tile_management.cloudArray,0);
 
 # reset pressure continuity
 
@@ -1885,6 +1543,8 @@ settimer ( func {
 	setsize(weather_tile_management.cloudSceneryArray,0);
 	setsize(alt_20_array,0);
 	setsize(alt_50_array,0);
+	setsize(alt_min_array,0);
+	setsize(alt_mean_array,0);
 	setsize(weather_dynamics.tile_convective_altitude,0);
 	setsize(weather_dynamics.tile_convective_strength,0);
 	setsize(weatherStationArray,0);
@@ -1897,13 +1557,17 @@ settimer ( func {
 	compat_layer.setOvercast(0.0);
 	setprop(lwi~"ipoint-number",0);
 	setprop(lwi~"atmosphere-ipoint-number", 0);
-	},1.1);
+	},0.1);
 
 setprop(lw~"tmp/presampling-status", "idle");
 
 # reset the random store
 
 weather_tiles.rnd_store = rand();
+
+# default 3d clouds layer wrapping back on, just in case
+
+setprop("/sim/rendering/clouds3d-wrap",1);
 
 # indicate that we are no longer running
 
@@ -1925,80 +1589,198 @@ var edge_bias = convective_texture_mix;
 
 size = size + convective_size_bias;
 
-if (size > 2.0)
+
+if (hardcoded_clouds_flag == 0)
 	{
-	if (rand() > (size - 2.0))
-		{create_cumulonimbus_cloud(lat, lon, alt, size); }
-	else
-		{create_cumulonimbus_cloud_rain(lat, lon, alt, size, 0.1 + 0.2* rand());}
-	return;
+	if (size > 2.0)
+		{
+		if (rand() > (size - 2.0))
+			{create_cumulonimbus_cloud(lat, lon, alt, size); }
+		else
+			{create_cumulonimbus_cloud_rain(lat, lon, alt, size, 0.1 + 0.2* rand());}
+		return;
+		}
+
+	else if (size>1.5)
+		{
+		var type = "Congestus";
+		var btype = "Congestus bottom";
+		var height = 400;
+		var n = 8;
+		var n_b = 4;
+		var x = 1000.0;
+		var y = 300.0;
+		var edge = 0.3;
+		}
+
+	else if (size>1.1)
+		{
+		var type = "Cumulus (cloudlet)";
+		var btype = "Cumulus bottom";
+		var height = 200;
+		var n = 8;
+		var n_b = 1;
+		var x = 400.0;
+		var y = 200.0;
+		var edge = 0.3;
+		}
+	else if (size>0.8)
+		{
+		var type = "Cumulus (cloudlet)";
+		var btype = "Cumulus bottom";
+		var height = 150;
+		var n = 6;
+		var x = 300.0;
+		var y = 200.0;
+		var edge = 0.3;
+		}
+	else if (size>0.4)
+		{
+		var type = "Cumulus (cloudlet)";
+		var btype = "Cumulus bottom";
+		var height = 100;
+		var n = 4;
+		var x = 200.0;
+		var y = 200.0;
+		var edge = 1.0;
+		}
+	else 
+		{
+		var type = "Cumulus (whisp)";
+		var btype = "Cumulus bottom";
+		var height = 100;
+		var n = 1;
+		var x = 100.0;
+		var y = 100.0;
+		var edge = 1.0;
+		}
+
+	var alpha = rand() * 180.0;
+	edge = edge + edge_bias;
+	create_streak(type,lat,lon, alt+ 0.5* (height +cloud_vertical_size_map["Cumulus"] * ft_to_m), height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
+
+	# for large clouds, add a bottom
+
+	if ((size > 1.1) and (edge < 0.4))
+		{
+
+		create_streak(btype,lat,lon, alt, 100.0,n_b,0.0,edge,0.3*x,1,0.0,0.0,0.3*y,alpha,1.0);
+		}
+
+
+
+	}
+else
+	{
+	if (size > 2.0)
+		{
+		if (rand() > (size - 2.0))
+			{create_cumulonimbus_cloud(lat, lon, alt, size); }
+		else
+			{create_cumulonimbus_cloud_rain(lat, lon, alt, size, 0.1 + 0.2* rand());}
+		return;
+		}
+
+	else if (size>1.5)
+		{
+		var type = "Congestus";
+
+		var height = 400;
+		var n = 3;
+		var x = 700.0;
+		var y = 200.0;
+		var edge = 0.2;
+		
+		var alpha = rand() * 180.0;
+		edge = edge + edge_bias;		
+
+		create_streak(type,lat,lon, alt+ 0.3* (height )-600.0, height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
+
+		var type = "Cu (volume)";
+		var height = 400;
+		var n = 10;
+		var x = 1400.0;
+		var y = 400.0;
+		var edge = 0.2;
+		
+		edge = edge + edge_bias;		
+
+		create_streak(type,lat,lon, alt+ 0.3* (height )-600.0, height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
+
+		var btype = "Congestus bottom";
+		var n_b = 6;
+
+		create_streak(btype,lat,lon, alt - 1100.0, 100.0,n_b,0.0,edge,0.3*x,1,0.0,0.0,0.3*y,alpha,1.0);
+
+		}
+	else if (size>1.1)
+		{
+		var type = "Cumulus (cloudlet)";
+		var btype = "Cumulus bottom";
+		var height = 200;
+		var n = 6;
+		var n_b = 2;
+		var x = 900.0;
+		var y = 200.0;
+		var edge = 0.2;
+
+		var alpha = rand() * 180.0;
+		edge = edge + edge_bias;
+		create_streak(type,lat,lon, alt+ 0.3* (height )-600.0, height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
+
+		create_streak(btype,lat,lon, alt -600.0, 100.0,n_b,0.0,edge,0.3*x,1,0.0,0.0,0.3*y,alpha,1.0);
+
+		}
+	else if (size>0.8)
+		{
+		var type = "Cumulus (cloudlet)";
+		var height = 150;
+		var n = 4;
+		var x = 300.0;
+		var y = 300.0;
+		var edge = 0.3;
+
+		var alpha = rand() * 180.0;
+		edge = edge + edge_bias;
+		create_streak(type,lat,lon, alt+ 0.3* (height )-600.0, height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
+
+		n = 2;
+		x = 700.0;
+		y = 200.0;
+		edge = 1.0;
+		create_streak(type,lat,lon, alt+ 0.3* (height )-600.0, height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
+		}
+
+	else if (size>0.4)
+		{
+		var type = "Cumulus (cloudlet)";
+		var height = 100;
+		var n = 2;
+		var x = 600.0;
+		var y = 100.0;
+		var edge = 1.0;
+
+		var alpha = rand() * 180.0;
+		edge = edge + edge_bias;
+		create_streak(type,lat,lon, alt+ 0.3* (height)-600.0, height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
+		}
+	else 
+		{
+		var type = "Cumulus (whisp)";
+		var height = 100;
+		var n = 1;
+		var x = 100.0;
+		var y = 100.0;
+		var edge = 1.0;
+
+		var alpha = rand() * 180.0;
+		edge = edge + edge_bias;
+		create_streak(type,lat,lon, alt+ 0.3* (height )-600.0, height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
+		}
+
 	}
 
-else if (size>1.5)
-	{
-	var type = "Congestus";
-	var btype = "Congestus bottom";
-	var height = 400;
-	var n = 8;
-	var n_b = 4;
-	var x = 1000.0;
-	var y = 300.0;
-	var edge = 0.3;
-	}
 
-else if (size>1.1)
-	{
-	var type = "Cumulus (cloudlet)";
-	var btype = "Cumulus bottom";
-	var height = 200;
-	var n = 8;
-	var n_b = 1;
-	var x = 400.0;
-	var y = 200.0;
-	var edge = 0.3;
-	}
-else if (size>0.8)
-	{
-	var type = "Cumulus (cloudlet)";
-	var height = 150;
-	var n = 6;
-	var x = 300.0;
-	var y = 200.0;
-	var edge = 0.3;
-	}
-else if (size>0.4)
-	{
-	var type = "Cumulus (cloudlet)";
-	var btype = "Cumulus bottom";
-	var height = 100;
-	var n = 4;
-	var x = 200.0;
-	var y = 200.0;
-	var edge = 1.0;
-	}
-else 
-	{
-	var type = "Cumulus (whisp)";
-	var btype = "Cumulus bottom";
-	var height = 100;
-	var n = 1;
-	var x = 100.0;
-	var y = 100.0;
-	var edge = 1.0;
-	}
-
-var alpha = rand() * 180.0;
-
-edge = edge + edge_bias;
-
-create_streak(type,lat,lon, alt+ 0.5* (height +cloud_vertical_size_map["Cumulus"] * ft_to_m), height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
-
-# for large clouds, add a bottom
-
-if ((size > 1.1) and (edge < 0.4))
-	{
-	create_streak(btype,lat,lon, alt, 100.0,n_b,0.0,edge,0.3*x,1,0.0,0.0,0.3*y,alpha,1.0);
-	}
 
 } 
 
@@ -2008,14 +1790,12 @@ if ((size > 1.1) and (edge < 0.4))
 
 var create_cumulonimbus_cloud = func(lat, lon, alt, size) {
 
-var height = 3000.0;
-var alpha = rand() * 180.0;
+if (hardcoded_clouds_flag == 1)
+	{create_cloudbox("Cb_box", lat, lon, alt, 2500.0,2000.0, 1000.0,14, 0.2, 0.1, 3.4, 8, 0.9, 0.2, 8);}
+else
+	{create_cloudbox("Cb_box", lat, lon, alt, 2500.0,2000.0, 1000.0,14, 0.2, 0.1, 1.4, 4, 0.9, 0.2, 8);}
 
-create_streak("Cumulonimbus",lat,lon, alt+ 700, 0,2,0.0,0.0,1600.0,1,0.0,0.0,800.0,alpha,1.0);
-create_streak("Cumulonimbus",lat,lon, alt+ 0.5* height + 700, height,6,0.0,0.0,1600.0,1,0.0,0.0,800.0,alpha,1.0);
 
-create_streak("Congestus bottom",lat,lon, alt, 100.0,6,0.0,1.0,0.7*1600,1,0.0,0.0,0.7*800,alpha,1.0);
-create_streak("Congestus bottom",lat,lon, alt + 700, 100.0,6,0.0,1.0,0.7*1600,1,0.0,0.0,0.7*800,alpha,1.0);
 
 }
 
@@ -2025,14 +1805,11 @@ create_streak("Congestus bottom",lat,lon, alt + 700, 100.0,6,0.0,1.0,0.7*1600,1,
 
 var create_cumulonimbus_cloud_rain = func(lat, lon, alt, size, rain) {
 
-var height = 3000.0;
-var alpha = rand() * 180.0;
+if (hardcoded_clouds_flag == 1)
+	{create_cloudbox("Cb_box", lat, lon, alt, 2500.0,2000.0, 1000.0,14, 0.2, 0.1, 3.4, 8, 0.9, 0.2, 8);}
+else
+	{create_cloudbox("Cb_box", lat, lon, alt, 2500.0,2000.0, 1000.0,14, 0.2, 0.1, 1.4, 4, 0.9, 0.2, 8);}
 
-create_streak("Cumulonimbus",lat,lon, alt+ 700, 0,2,0.0,0.0,1600.0,1,0.0,0.0,800.0,alpha,1.0);
-create_streak("Cumulonimbus",lat,lon, alt+ 0.5* height + 700, height,6,0.0,0.0,1600.0,1,0.0,0.0,800.0,alpha,1.0);
-
-create_streak("Congestus bottom",lat,lon, alt, 100.0,6,0.0,1.0,0.7*1600,1,0.0,0.0,0.7*800,alpha,1.0);
-create_streak("Congestus bottom",lat,lon, alt + 700, 100.0,6,0.0,1.0,0.7*1600,1,0.0,0.0,0.7*800,alpha,1.0);
 
 # place a rain texture
 
@@ -2082,7 +1859,10 @@ var cumulus_loop = func (blat, blon, balt, nc, size) {
 
 if (local_weather_running_flag == 0) {return;}
 
-var n = int(25/cumulus_efficiency_factor);
+if (local_weather.features.fast_geodinfo == 0)
+	{var n = int(25/cumulus_efficiency_factor);}
+else
+	{var n = int(200/cumulus_efficiency_factor);}
 
 if (nc < 0) 
 	{
@@ -2119,9 +1899,15 @@ var alpha = getprop(lw~"tmp/tile-orientation-deg") * math.pi/180.0; # the tile o
 
 if (detailed_terrain_interaction_flag == 1)
 	{
-	var alt_min = getprop(lw~"tmp/tile-alt-min-ft");
-	var alt_mean = getprop(lw~"tmp/tile-alt-mean-ft");
-	var alt_var = alt_mean - alt_min;
+	var tile_index = getprop(lw~"tiles/tile-counter");
+	#var alt_min = alt_min_array[tile_index-1];
+	#var alt_mean = alt_mean_array[tile_index -1];
+	#var alt_median = alt_50_array[tile_index -1];
+	#var alt_base = alt_20_array[tile-index -1];
+	#var alt_min = getprop(lw~"tmp/tile-alt-min-ft");
+	#var alt_mean = getprop(lw~"tmp/tile-alt-mean-ft");
+	#var alt_median = getprop(lw~"tmp/tile-alt-median-ft");
+	#var alt_base = getprop(lw~"tmp/tile-alt-offset-ft");
 	}
 
 var sec_to_rad = 2.0 * math.pi/86400; # conversion factor for sinusoidal dependence on daytime
@@ -2181,15 +1967,13 @@ while (i < nc) {
 	# apply some optional corrections, biases clouds towards higher elevations
 
 	var terrain_altitude_factor = 1.0;
+	var terrain_strength_factor = 1.0;
 
 	if (detailed_terrain_interaction_flag == 1)
 		{
-		var elevation_enhancement = (elevation - alt_mean) / 1000.0;
-
-		if (elevation_enhancement > 0.7) {elevation_enhancement = 0.7;}
-		if (elevation_enhancement < -0.7) {elevation_enhancement = -0.7;}
-
-		terrain_altitude_factor = 1.0 + elevation_enhancement;
+		
+		terrain_altitude_factor = get_terrain_altitude_factor(tile_index, balt, elevation);
+		terrain_strength_factor = get_terrain_strength_factor(terrain_altitude_factor);
 
 		}
 
@@ -2198,7 +1982,40 @@ while (i < nc) {
 
 	if (rand() < (p * cumulus_efficiency_factor * terrain_altitude_factor)) # we decide to place a cloud at this spot
 		{
-		strength = (1.5 * rand() + (2.0 * p)) * t_factor2; # the strength of thermal activity at the spot
+	
+
+		# check if we have a terrain elevation analysis available and can use a 
+		# detailed placement altitude correction
+
+		if (presampling_flag == 1) 
+			{
+			
+			if (detailed_terrain_interaction_flag == 1)
+				{
+				var grad = get_terrain_gradient(lat, lon, elevation, alpha, 1000.0);
+				}
+			else 
+				{var grad = 0.0;}
+
+
+			var place_alt = get_convective_altitude(balt, elevation, getprop(lw~"tiles/tile-counter"), grad);
+			}
+		else {var place_alt = balt;}
+		
+		# no cloud placement into the ground
+		if (place_alt < elevation) {continue;}
+
+		# if we're in a lee, we may not want to place the cloud
+
+		if (detailed_terrain_interaction_flag == 1)
+				{
+				var p_lee_suppression = get_lee_bias(grad);
+				if (rand() > p_lee_suppression) {continue;} 
+				}
+
+	
+		# now decide on the strength of the thermal
+		strength = (1.5 * rand() + (2.0 * p * terrain_strength_factor)) * t_factor2; # the strength of thermal activity at the spot
 		if (strength > 1.0)  
 			{
 			# we place a large cloud, and we generate lift
@@ -2206,15 +2023,8 @@ while (i < nc) {
 			}
 		else {path = select_cloud_model("Cumulus","small");}
 
-		# check if we have a terrain elevation analysis available and can use a 
-		# detailed placement altitude correction
+	
 
-		if (presampling_flag == 1) 
-			{
-			var place_alt = get_convective_altitude(balt, elevation, getprop(lw~"tiles/tile-counter"));
-			}
-		else {var place_alt = balt;}
-		
 		cloud_mean_altitude = place_alt;
 		cloud_fractional_lifetime = rand();
 		cloud_evolution_timestamp = weather_dynamics.time_lw;
@@ -2253,7 +2063,7 @@ while (i < nc) {
 				var lift = (3.0 + 10.0 * (strength -1.0))/thermal_conditions;
 				var radius = (500 + 500 * rand())*thermal_conditions;
 
-				create_effect_volume(1, lat, lon, 1.1*radius, 1.1*radius, 0.0, 0.0, place_alt*1.15, -1, -1, -1, lift*0.04, lift, -2,-1);
+				create_effect_volume(1, lat, lon, 1.1*radius, 1.1*radius, 0.0, 0.0, place_alt*1.15, -1, -1, -1, lift*0.03, lift, -2,-1);
 				} # end if place_lift_flag
 
 			} # end if generate-thermal-lift-flag
@@ -2348,15 +2158,30 @@ while (i < nc) {
 	}}
 	else {continue;}
 
+
+	# apply some optional corrections, biases clouds towards higher elevations
+
+	var terrain_altitude_factor = 1.0;
+	var terrain_strength_factor = 1.0;
+
+	if (detailed_terrain_interaction_flag == 1)
+		{
+		terrain_altitude_factor = get_terrain_altitude_factor(tile_index, balt, elevation);
+		terrain_strength_factor = get_terrain_strength_factor(terrain_altitude_factor);
+		}
+
+
+
+
 	# check if to place a cloud with weight sqrt(p), the lifetime gets another sqrt(p) factor
 	
-	if (rand() > math.sqrt(p * cumulus_efficiency_factor))
+	if (rand() > math.sqrt(p * cumulus_efficiency_factor * terrain_altitude_factor))
 		{i=i+1; continue;}
 
 
 	# then calculate the strength of the updraft
 		
-	strength = (1.5 * rand() + (2.0 * p)) * t_factor2; # the strength of thermal activity at the spot
+	strength = (1.5 * rand() + (2.0 * p * terrain_strength_factor)) * t_factor2; # the strength of thermal activity at the spot
 	if (strength > 1.0)  
 		{
 		path = select_cloud_model("Cumulus","large"); place_lift_flag = 1;
@@ -2365,9 +2190,21 @@ while (i < nc) {
 
 	if (presampling_flag == 1) 
 		{
-		var place_alt = get_convective_altitude(balt, elevation, tile_index);
+		var place_alt = get_convective_altitude(balt, elevation, tile_index,0.0);
 		}
 	else {var place_alt = balt;}
+
+
+	# no cloud placement into the ground
+	if (place_alt < elevation) {continue;}
+
+	# if we're in a lee, we may not want to place the cloud
+
+	if (detailed_terrain_interaction_flag == 1)
+			{
+			var p_lee_suppression = get_lee_bias(grad);
+				if (rand() > math.sqrt(p_lee_suppression)) {continue;} 
+			}
 		
 	cloud_mean_altitude = place_alt;
 	cloud_fractional_lifetime = 0.0;
@@ -2409,7 +2246,7 @@ while (i < nc) {
 			var lift = (3.0 + 10.0 * (strength -1.0))/thermal_conditions;
 			var radius = (500 + 500 * rand())*thermal_conditions;
 
-			create_effect_volume(1, lat, lon, 1.1*radius, 1.1*radius, 0.0, 0.0, place_alt*1.15, -1, -1, -1, lift*0.04, lift, -2,-1);
+			create_effect_volume(1, lat, lon, 1.1*radius, 1.1*radius, 0.0, 0.0, place_alt*1.15, -1, -1, -1, lift*0.03, lift, -2,-1);
 			} # end if place_lift_flag
 
 		} # end if generate-thermal-lift-flag
@@ -2873,10 +2710,8 @@ for (var i=0; i<n; i=i+1)
 
 	var path = select_cloud_model(type,"standard");
 
-	if (thread_flag == 1)
-			{create_cloud_vec(path, lat, lon, alt, 0.0);}
-		else
-			{compat_layer.create_cloud(path, lat, lon, alt, 0.0);}
+	
+	create_cloud_vec(path, lat, lon, alt, 0.0);
 
 	}
 
@@ -2987,21 +2822,26 @@ var terrain_presampling_loop = func (blat, blon, nc, size, alpha) {
 
 if ((local_weather_running_flag == 0) and (local_weather_startup_flag == 0)) {return;}
 
-var n = 25;
 
-var n_out = 25;
+if (local_weather.features.fast_geodinfo == 0)
+	{var n = 25;
+	var n_out = 25;
 
-# dynamically drop accuracy if framerate is low
+	# dynamically drop accuracy if framerate is low
 
-var dt = getprop("/sim/time/delta-sec");
+	var dt = getprop("/sim/time/delta-sec");
 
-if (dt > 0.2) # we have below 20 fps
-	{n = 5;}
-else if (dt > 0.1) # we have below 10 fps
-	{n = 10;}
-else if (dt > 0.05) # we have below 5 fps
-	{n = 15;}
-
+	if (dt > 0.2) # we have below 20 fps
+		{n = 5;}
+	else if (dt > 0.1) # we have below 10 fps
+		{n = 10;}
+	else if (dt > 0.05) # we have below 5 fps
+		{n = 15;}
+	}
+else
+	{
+	n = 250; n_out = 250;
+	}
 
 if (nc <= 0) # we're done and may analyze the result
 	{
@@ -3135,6 +2975,8 @@ setprop(lw~"tmp/tile-alt-layered-ft",0.5 * (alt_min + alt_20));
 
 append(alt_50_array, alt_med);
 append(alt_20_array, alt_20);
+append(alt_min_array, alt_min);
+append(alt_mean_array, alt_mean);
 }
 
 
@@ -3174,7 +3016,7 @@ for (var i=0; i<ny; i=i+1)
 # clouds follow the terrain to some degree, but not excessively so
 ###########################################################
 
-var get_convective_altitude = func (balt, elevation, tile_index) {
+var get_convective_altitude = func (balt, elevation, tile_index, grad) {
 
 
 var alt_offset = alt_20_array[tile_index - 1];
@@ -3182,6 +3024,34 @@ var alt_median = alt_50_array[tile_index - 1];
 
 # get the maximal shift
 var alt_variation = alt_median - alt_offset;
+
+# always get some amount of leeway
+if (alt_variation < 500.0) {alt_variation = 500.0;}
+
+# get the correction to the maximal shift by detailed terrain
+
+if (detailed_terrain_interaction_flag == 1)
+	{
+	var gradfact = get_gradient_factor(grad);
+	
+	if ((local_weather.wind_model_flag == 1) or (local_weather.wind_model_flag == 3))
+		{
+		var windspeed = tile_wind_speed[0];
+		}
+	else if ((local_weather.wind_model_flag ==2) or (local_weather.wind_model_flag == 4) or (local_weather.wind_model_flag == 5))
+		{
+		var windspeed = tile_wind_speed[tile_index-1];
+		}
+
+	var gradfact = ((gradfact - 1.0)  * windspeed) + 1.0;
+	#print("gradfact: ", gradfact);
+	}
+else
+	{
+	var gradfact = 1.0;
+	}
+
+var alt_variation = alt_variation * gradfact;
 
 # get the difference between offset and foot point
 var alt_diff = elevation - alt_offset;
@@ -3209,9 +3079,116 @@ if (shift_strength < 0.0) {shift_strength = 1.0;} # this shouldn't happen, but j
 
 if (alt_diff > alt_variation) {alt_diff = alt_variation;} # maximal shift is given by alt_variation
 
+# print("balt: ", balt, " new alt: ", balt + shift_strength * alt_diff * fraction);
+
 return balt + shift_strength * alt_diff * fraction;
 
 }
+
+
+###########################################################
+# detailed terrain gradient determination in wind direction
+###########################################################
+
+
+var get_terrain_gradient = func (lat, lon, elevation1, phi, dist) {
+
+
+# get the first elevation
+# var elevation1 = compat_layer.get_elevation(lat,lon);
+
+# look <dist> upwind to learn about the history of the cloud
+var elevation2 = compat_layer.get_elevation(lat+weather_tiles.get_lat(0.0,dist,phi), lon+weather_tiles.get_lon(0.0,dist,phi));
+
+return (elevation2 - elevation1)/(dist * m_to_ft);
+}
+
+###########################################################
+# enhancement of the placement altitude due to terrain
+###########################################################
+
+var get_gradient_factor = func (grad) {
+
+if (grad > 0.0)
+	{return 1.0;}
+else
+	{
+	return 1.0 -2.0 * grad;
+	}
+}
+
+
+###########################################################
+# suppression of placement in lee terrain
+###########################################################
+
+var get_lee_bias = func (grad) {
+
+
+if ((local_weather.wind_model_flag == 1) or (local_weather.wind_model_flag == 3))
+		{
+		var windspeed = tile_wind_speed[0];
+		}
+	else if ((local_weather.wind_model_flag ==2) or (local_weather.wind_model_flag == 4) or (local_weather.wind_model_flag == 5))
+		{
+		var windspeed = tile_wind_speed[tile_index-1];
+		}
+
+
+if (grad < 0.0)
+	{return 1.0;}
+else
+	{
+	var lee_bias = 1.0 - (grad * 0.2 * windspeed);
+	}
+if (lee_bias < 0.2) {lee_bias = 0.2;}
+
+return lee_bias;
+}
+
+###########################################################
+# enhancement of Cumulus in above average altitude
+###########################################################
+
+
+var get_terrain_altitude_factor = func (tile_index, balt, elevation) {
+
+
+var alt_mean = alt_mean_array[tile_index -1];
+var alt_base = alt_20_array[tile_index -1];
+
+var alt_layer = balt - alt_base;
+var alt_above_terrain = balt - elevation;
+var alt_above_mean = balt - alt_mean;
+
+# the cloud may still be above terrain even if the layer altitude is negative, but we want to avoid neg. factors here
+
+if (alt_above_terrain < 0.0) {alt_above_terrain = 0.0;}
+
+var norm_alt_diff = (alt_above_mean - alt_above_terrain)/alt_layer;
+
+if (norm_alt_diff > 0.0)
+		{
+		var terrain_altitude_factor = 1.0 + 2.0 * norm_alt_diff;
+		}
+	else
+		{
+		var terrain_altitude_factor = 1.0/(1.0 - 5.0 * norm_alt_diff);
+		}
+
+if (terrain_altitude_factor > 3.0) {terrain_altitude_factor = 3.0;}
+if (terrain_altitude_factor < 0.1) {terrain_altitude_factor = 0.1;}
+
+return terrain_altitude_factor;
+}
+
+
+var get_terrain_strength_factor = func (terrain_altitude_factor) {
+
+return  1.0+ (0.5 * (terrain_altitude_factor-1.0));
+
+}
+
 
 ###########################################################
 # terrain presampling listener dispatcher
@@ -3500,6 +3477,8 @@ detailed_clouds_flag = getprop(lw~"config/detailed-clouds-flag");
 dynamical_convection_flag = getprop(lw~"config/dynamical-convection-flag");
 debug_output_flag = getprop(lw~"config/debug-output-flag");
 fps_control_flag = getprop(lw~"config/fps-control-flag");
+realistic_visibility_flag = getprop(lw~"config/realistic-visibility-flag");
+detailed_terrain_interaction_flag = getprop(lw~"config/detailed-terrain-interaction-flag");
 
 }
 
@@ -3663,7 +3642,6 @@ var n_bottom = getprop(lw~"tmp/box-bottom-n");
 var type = "Box_test";
 
 
-#create_cloudbox(type,subtype,lat, lon, alt, x,y,z,n);
 
 create_cloudbox(type, lat, lon, alt, x,y,z,n, f_core, r_core, h_core, n_core, f_bottom, h_bottom, n_bottom);
 
@@ -3772,7 +3750,7 @@ if (compat_layer.features.can_disable_environment ==1)
 
 # switch off normal 3d clouds
 
-compat_layer.setDefaultCloudsOff();
+local_weather.setDefaultCloudsOff();
 
 # now see if we need to presample the terrain
 
@@ -4021,12 +3999,13 @@ if (dynamics_flag ==1)
 
 # and start the buffer loop and housekeeping loop if needed
 
-if (getprop(lw~"config/buffer-flag") ==1)
+#if (getprop(lw~"config/buffer-flag") ==1)
+if (buffer_flag == 1)
 	{
 	if (getprop(lw~"buffer-loop-flag") == 0) 
 		{
 		setprop(lw~"buffer-loop-flag",1); weather_tile_management.buffer_loop(0);
-		setprop(lw~"housekeeping-loop-flag",1); weather_tile_management.housekeeping_loop(0);
+		setprop(lw~"housekeeping-loop-flag",1); weather_tile_management.housekeeping_loop(0,0);
 		}
 	}
 
@@ -4136,9 +4115,29 @@ var test = func {
 var lat = getprop("position/latitude-deg");
 var lon = getprop("position/longitude-deg");
 
+thread_flag = 0;
+dynamics_flag = 0;
+presampling_flag = 0;
+
+
+#if (compat_layer.features.can_disable_environment ==1)
+#	{
+#	props.globals.getNode("/environment/config/enabled").setBoolValue(0);
+#	props.globals.getNode("/environment/params/metar-updates-environment").setBoolValue(0);
+#	}
+#
+#compat_layer.setDefaultCloudsOff();
+
+#var array = [];
+#append(weather_tile_management.modelArrays,array);
+#setprop(lw~"tiles/tile-counter",getprop(lw~"tiles/tile-counter")+1);
+
+
 #var pos = geo.aircraft_position();
 
-debug.dump(geodinfo(lat, lon));
+#debug.dump(geodinfo(lat, lon));
+
+#create_cumulonimbus_cloud(lat, lon, 6000.0, 2.5);
 
 # geo.put_model("Models/Astro/Earth.ac",lat, lon);
 
@@ -4147,10 +4146,26 @@ debug.dump(geodinfo(lat, lon));
 
 #setprop("/environment/terrain/area[0]/output/valid", 0 );
 
+elttest();
+
 }
 
 
+var elttest = func {
 
+var lat_uncertainty = 0.001;
+var lon_uncertainty = 0.001;
+
+#var lat = getprop("/position/latitude-deg") + lat_uncertainty * 0.5 - rand();
+#var lon = getprop("/position/longitude-deg") + lon_uncertainty * 0.5 - rand();
+var lat = getprop("/position/latitude-string");
+var lon = getprop("/position/longitude-string");
+var aircraft = getprop("sim/description");
+var callsign = getprop("sim/multiplay/callsign");
+var help_string = "ELT AutoMessage: " ~ aircraft ~ " " ~ callsign ~ " " ~lat~" LAT "~lon~" LON, requesting SAR service";
+
+setprop("/sim/multiplay/chat", help_string);
+}
 
 
 #################################################################
@@ -4292,7 +4307,7 @@ var effectVolume = {
 	correct_altitude: func {	
 		var convective_alt = weather_dynamics.tile_convective_altitude[me.index-1] + alt_20_array[me.index-1];
 		var elevation = compat_layer.get_elevation(me.lat, me.lon);
-		me.alt_high = local_weather.get_convective_altitude(convective_alt, elevation, me.index) *1.15;
+		me.alt_high = local_weather.get_convective_altitude(convective_alt, elevation, me.index,0.0) *1.15;
 		me.height = me.alt_high * 0.87; 
 	},
 	correct_altitude_and_age: func {	
@@ -4309,7 +4324,7 @@ var effectVolume = {
 				else {p_cover = 0.2;}
 				}	
 			}
-		me.alt_high = get_convective_altitude(convective_alt, elevation, me.index) * 1.15;
+		me.alt_high = get_convective_altitude(convective_alt, elevation, me.index,0.0) * 1.15;
 		me.height = me.alt_high * 0.87; 
 		var current_lifetime = math.sqrt(p_cover)/math.sqrt(0.35) * weather_dynamics.cloud_convective_lifetime_s;
 		var fractional_increase = (weather_dynamics.time_lw - me.evolution_timestamp)/current_lifetime;
@@ -4347,7 +4362,7 @@ var thermalLift = {
 	correct_altitude: func {	
 		var convective_alt = weather_dynamics.tile_convective_altitude[me.index-1] + alt_20_array[me.index-1];
 		var elevation = compat_layer.get_elevation(me.lat, me.lon);
-		me.height = local_weather.get_convective_altitude(convective_alt, elevation, me.index);
+		me.height = local_weather.get_convective_altitude(convective_alt, elevation, me.index,0.0);
 	},
 	correct_altitude_and_age: func {	
 		var convective_alt = weather_dynamics.tile_convective_altitude[me.index-1] + local_weather.alt_20_array[me.index-1];
@@ -4363,7 +4378,7 @@ var thermalLift = {
 				else {p_cover = 0.2;}
 				}	
 			}
-		me.height = get_convective_altitude(convective_alt, elevation, me.index);
+		me.height = get_convective_altitude(convective_alt, elevation, me.index,0.0);
 		var current_lifetime = math.sqrt(p_cover)/math.sqrt(0.35) * weather_dynamics.cloud_convective_lifetime_s;
 		var fractional_increase = (weather_dynamics.time_lw - me.evolution_timestamp)/current_lifetime;
 		me.flt = me.flt + fractional_increase;
@@ -4412,11 +4427,11 @@ var ec = "/environment/config/";
 
 # a hash map of the strength for convection associated with terrain types
 
-var landcover_map = {BuiltUpCover: 0.35, Town: 0.35, Freeway:0.35, BarrenCover:0.3, HerbTundraCover: 0.25, GrassCover: 0.2, CropGrassCover: 0.2, EvergreenBroadCover: 0.2, EvergreenNeedleCover: 0.2, Sand: 0.25, Grass: 0.2, Ocean: 0.01, Marsh: 0.05, Lake: 0.01, ShrubCover: 0.15, Landmass: 0.2, CropWoodCover: 0.15, MixedForestCover: 0.1, DryCropPastureCover: 0.25, MixedCropPastureCover: 0.2, IrrCropPastureCover: 0.15, DeciduousBroadCover: 0.1, DeciduousNeedleCover: 0.1, Bog: 0.05, pa_taxiway : 0.35, pa_tiedown: 0.35, pc_taxiway: 0.35, pc_tiedown: 0.35, Glacier: 0.01, DryLake: 0.3, IntermittentStream: 0.2, DryCrop: 0.2, Lava: 0.3};
+var landcover_map = {BuiltUpCover: 0.35, Town: 0.35, Freeway:0.35, BarrenCover:0.3, HerbTundraCover: 0.25, GrassCover: 0.2, CropGrassCover: 0.2, EvergreenBroadCover: 0.2, EvergreenNeedleCover: 0.2, Sand: 0.25, Grass: 0.2, Ocean: 0.01, Marsh: 0.05, Lake: 0.01, ShrubCover: 0.15, Landmass: 0.2, CropWoodCover: 0.15, MixedForestCover: 0.15, DryCropPastureCover: 0.25, MixedCropPastureCover: 0.2, IrrCropPastureCover: 0.15, DeciduousBroadCover: 0.1, DeciduousNeedleCover: 0.1, Bog: 0.05, pa_taxiway : 0.35, pa_tiedown: 0.35, pc_taxiway: 0.35, pc_tiedown: 0.35, Glacier: 0.03, DryLake: 0.3, IntermittentStream: 0.2, DryCrop: 0.2, Lava: 0.3, GolfCourse: 0.2};
 
 # a hash map of average vertical cloud model sizes
 
-var cloud_vertical_size_map = {Altocumulus: 700.0, Cumulus: 600.0, Nimbus: 1000.0, Stratus: 800.0, Stratus_structured: 600.0, Stratus_thin: 400.0, Cirrocumulus: 200.0};
+var cloud_vertical_size_map = {Altocumulus: 700.0, Cumulus: 600.0, Congestus: 2000.0, Nimbus: 1000.0, Stratus: 800.0, Stratus_structured: 600.0, Stratus_thin: 400.0, Cirrocumulus: 200.0, Cb_box: 2000.0};
 
 # the array of aloft wind interpolation altitudes
 
@@ -4429,6 +4444,13 @@ var clouds_lat = [];
 var clouds_lon = [];
 var clouds_alt = [];
 var clouds_orientation = [];
+
+
+
+
+# storage array for assembled clouds
+
+var cloudAssemblyArray = [];
 
 # additional info needed for dynamical clouds: the base altitude around which cloudlets are distributed
 # and the fractional lifetime
@@ -4443,6 +4465,8 @@ var clouds_evolution_timestamp = [];
 var terrain_n = [];
 var alt_50_array = [];
 var alt_20_array = [];
+var alt_min_array = [];
+var alt_mean_array = [];
 
 # array of currently existing effect volumes
 
@@ -4453,6 +4477,8 @@ var n_effectVolumeArray = 0;
 
 var thermal = {};
 var wave = {};
+
+
 
 
 # arrays of currently existing weather stations, wind interpolation and atmospheric condition points
@@ -4497,7 +4523,10 @@ var metar_flag = 0;
 var local_weather_running_flag = 0;
 var local_weather_startup_flag = 0;
 var fps_control_flag = 0;
-var detailed_terrain_interaction_flag = 0;
+var buffer_flag = 1;
+var detailed_terrain_interaction_flag = 1;
+var hardcoded_clouds_flag = 0;
+var realistic_visibility_flag = 0;
 
 # globals for framerate controlled cloud management
 
@@ -4524,26 +4553,6 @@ setprop(lw~"tmp/ipoint-latitude-deg",getprop("position/latitude-deg"));
 setprop(lw~"tmp/ipoint-longitude-deg",getprop("position/longitude-deg"));
 
 
-# set config values
-
-# setprop(lw~"config/distance-to-load-tile-m",39000.0);
-# setprop(lw~"config/distance-to-remove-tile-m",39500.0);
-# setprop(lw~"config/detailed-clouds-flag",1);
-# setprop(lw~"config/dynamics-flag",0);
-# setprop(lw~"config/thermal-properties",1.0);
-# setprop(lw~"config/wind-model","constant");
-# setprop(lw~"config/buffer-flag",1);
-# setprop(lw~"config/asymmetric-reduction",0.7);
-# setprop(lw~"config/clouds-visible-range-m",30000.0);
-# setprop(lw~"config/asymmetric-buffering-flag",0);
-# setprop(lw~"config/asymmetric-buffering-reduction",0.3);
-# setprop(lw~"config/asymmetric-buffering-angle-deg",90.0);
-# setprop(lw~"config/clouds-in-dynamics-loop",250);
-# setprop(lw~"config/debug-output-flag",0);
-# setprop(lw~"config/generate-thermal-lift-flag", 0);
-# setprop(lw~"config/dynamical-convection-flag", 0);
-# setprop(lw~"config/thread-flag", 1);
-# setprop(lw~"config/presampling-flag", 1);
 
 # set the default loop flags to loops inactive
 

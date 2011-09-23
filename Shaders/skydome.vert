@@ -11,6 +11,7 @@ uniform mat4 osg_ViewMatrixInverse;
 varying vec3 rayleigh;
 varying vec3 mie;
 varying vec3 eye;
+varying float ct;
  
 // Dome parameters from FG and screen
 const float domeSize = 80000.0;
@@ -49,6 +50,9 @@ float intersection (in float cheight, in vec3 ray, in float rad2)
 // Return the scale function at height = 0 for different thetas
 float outscatterscale(in float costheta)
 {
+
+  if (costheta < -0.12) costheta = -0.12 - 4.0* (costheta+0.12) ;
+
   float x = 1.0 - costheta;
  
   float a = 1.16941;
@@ -99,6 +103,7 @@ void main()
       relativePosition -= space * normalize(relativePosition);
     }
  
+
     vec3 positionDelta = relativePosition / fSamples;
     float deltaLength = length(positionDelta); // Should multiply by something?
  
@@ -112,6 +117,8 @@ void main()
     if(positionDelta.z < 0.0) cameraCosTheta = -positionDelta.z / deltaLength;
     else cameraCosTheta = positionDelta.z / deltaLength;
  
+    float cameraCosTheta1 = -positionDelta.z / deltaLength;
+
     // Total attenuation from camera to skydome
     float totalCameraScatter = outscatter(cameraCosTheta, scaledAltitude);
  
@@ -136,6 +143,7 @@ void main()
       float cameraScatter;
       if(relativePosition.z < 0.0) {  // Vertex is over the camera
         cameraCosTheta = -dot(normalize(positionDelta), normalize(sample));
+
         cameraScatter = totalCameraScatter - outscatter(cameraCosTheta, sampleAltitude);
       } else {  // Vertex is below camera
         cameraCosTheta = dot(normalize(positionDelta), normalize(sample));
@@ -152,11 +160,12 @@ void main()
     }
  
     color *= sunIntensity;
- 
+    ct = cameraCosTheta1;
     rayleigh = rayleighK * color;
     mie = mieK * color;
     eye = gl_NormalMatrix * positionDelta;
  
+   
  
  
     // We need to move the camera so that the dome appears to be centered around earth

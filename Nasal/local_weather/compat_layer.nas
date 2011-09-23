@@ -479,6 +479,18 @@ if (features.can_set_scattering == 1)
 }
 
 
+####################################
+# set skydome scattering parameters
+####################################
+
+var setSkydomeShader = func (r, m, d) {
+
+setprop("/sim/rendering/rayleigh", r);
+setprop("/sim/rendering/mie", m);
+setprop("/sim/rendering/dome-density",d);
+
+}
+
 ###########################################################
 # set wind to given direction and speed
 ###########################################################

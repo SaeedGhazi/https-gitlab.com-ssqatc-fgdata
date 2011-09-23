@@ -594,11 +594,13 @@ var alt1 = vis_alt1;
 var alt2 = alt1 + 1500.0;
 
 
-#var inc1 = 0.15;
-#var inc2 = 5.0;
-#var inc3 = 0.7;
-
 # compute the visibility gradients
+
+if (realistic_visibility_flag == 1)
+	{
+	vis_aloft = vis_aloft * 2.0;
+	vis_ovcst = vis_ovcst * 3.0;
+	}
 
 var inc1 = 0.1 * (vis_aloft - vis)/(vis_alt1 - ialt);
 var inc2 = 0.9 * (vis_aloft - vis)/1500.0;
@@ -607,7 +609,7 @@ var inc4 = 0.5;
 
 
 if (realistic_visibility_flag == 1)
-	{inc4 = inc4 * 8.0;}
+	{inc4 = inc4 * 3.0;}
 
 # compute the visibility
 
@@ -628,35 +630,67 @@ else if (altitude > ovcst_alt_high)
 
 # limit visibility (otherwise memory consumption is very bad...)
 
-if (vis > 140000.0)
-	{vis = 140000.0;}
+if (vis > 120000.0)
+	{vis = 120000.0;}
 
-# compute the horizon shading
+# determine scattering shader parameters if scattering shader is on
 
-if (altitude < scatt_alt_low)
+if (scattering_shader_flag == 1) 
 	{
-	var scatt = scatt_max;
+	var rayleigh = 0.0003 ;
+	var mie = 0.003;
+	var density = 0.3;
+
+	if (altitude < 30000.0) 
+		{
+		rayleigh = 0.0004 - altitude/30000.0 * 0.0001;
+		mie = 0.004 - altitude/30000.0 * 0.001; 
+		}
+	else if (altitude < 60000.0)
+		{
+		rayleigh = 0.0003 - (altitude-30000.0)/30000.0 * 0.0001;
+		mie = 0.003 - (altitude-30000.0)/30000.0 * 0.001; 
+		}
+	else if (altitude < 85000.0)
+		{
+		rayleigh = 0.0002 - (altitude-60000.0)/25000.0 * 0.0001;
+		mie = 0.002;
+		}
+	else 
+		{rayleigh = 0.0001; mie = 0.002;}
 	}
-else if (altitude < scatt_alt_high)
-	{
-	var scatt = scatt_max + (0.95 - scatt_max) * (altitude - scatt_alt_low)/(scatt_alt_high-scatt_alt_low);
-	}
+# otherwise compute normal skydome shader parameters
 else
-	{var scatt = 0.95;}
+	{
+
+	# compute the horizon shading
+
+	if (altitude < scatt_alt_low)
+		{
+		var scatt = scatt_max;
+		}
+	else if (altitude < scatt_alt_high)
+		{
+		var scatt = scatt_max + (0.95 - scatt_max) * (altitude - scatt_alt_low)/(scatt_alt_high-scatt_alt_low);
+		}
+	else
+		{var scatt = 0.95;}
 
 
 # compute the overcast haze
 
-if (altitude < ovcst_alt_low)
-	{
-	var ovcst = ovcst_max;
+	if (altitude < ovcst_alt_low)
+		{
+		var ovcst = ovcst_max;
+		}
+	else if (altitude < ovcst_alt_high)
+		{
+		var ovcst = ovcst_max - ovcst_max * (altitude - ovcst_alt_low)/(ovcst_alt_high-ovcst_alt_low);
+		}
+	else
+		{var ovcst = 0.0;}
+
 	}
-else if (altitude < ovcst_alt_high)
-	{
-	var ovcst = ovcst_max - ovcst_max * (altitude - ovcst_alt_low)/(ovcst_alt_high-ovcst_alt_low);
-	}
-else
-	{var ovcst = 0.0;}
 
 
 # limit relative changes of the visibility, will make for gradual transitions
@@ -678,8 +712,16 @@ setprop(lwi~"dewpoint-degc",D);
 if (p > 10.0) {setprop(lwi~"pressure-sea-level-inhg",p);}
 setprop(lwi~"turbulence",0.0);
 
-compat_layer.setScattering(scatt);
-compat_layer.setOvercast(ovcst);
+
+if (scattering_shader_flag == 1)
+	{
+	local_weather.setSkydomeShader(rayleigh, mie, density);
+	}
+else
+	{
+	local_weather.setScattering(scatt);
+	local_weather.setOvercast(ovcst);
+	}
 
 # now check if an effect volume writes the property and set only if not
 
@@ -3479,6 +3521,7 @@ debug_output_flag = getprop(lw~"config/debug-output-flag");
 fps_control_flag = getprop(lw~"config/fps-control-flag");
 realistic_visibility_flag = getprop(lw~"config/realistic-visibility-flag");
 detailed_terrain_interaction_flag = getprop(lw~"config/detailed-terrain-interaction-flag");
+scattering_shader_flag = getprop("/sim/rendering/scattering-shader");
 
 }
 
@@ -4103,6 +4146,7 @@ setlistener(lw~"config/target-framerate", func {target_framerate = getprop(lw~"c
 
 setlistener(lw~"config/small-scale-persistence", func {weather_tiles.small_scale_persistence = getprop(lw~"config/small-scale-persistence");});
 
+setlistener("/sim/rendering/scattering-shader", func {scattering_shader_flag = getprop("/sim/rendering/scattering-shader"); });
 }
 
 
@@ -4525,8 +4569,9 @@ var local_weather_startup_flag = 0;
 var fps_control_flag = 0;
 var buffer_flag = 1;
 var detailed_terrain_interaction_flag = 1;
-var hardcoded_clouds_flag = 0;
+var hardcoded_clouds_flag = 1;
 var realistic_visibility_flag = 0;
+var scattering_shader_flag = 0;
 
 # globals for framerate controlled cloud management
 

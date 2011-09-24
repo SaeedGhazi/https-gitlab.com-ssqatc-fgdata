@@ -9,7 +9,6 @@
 	<name>Thrustmaster Throttle - HOTAS Warthog</name>
 
 	<nasal>
-		<command>nasal</command>
 		<script>
 			var this = cmdarg().getParent();
 			var init = !contains(caller(0)[0], "init");
@@ -23,7 +22,7 @@
 					var file = dir ~ "/Input/Joysticks/ThrustMaster/Warthog/Throttle/" ~ name ~ ".xml";
 					if (io.stat(file) != nil) {
 						printlog("info", "WARTHOG: loading overlay " ~ file);
-						cmdarg().getNode("script").setValue("");
+						cmdarg().setValues({command: "nasal", script: ""});
 						io.read_properties(file, this);
 						props.runBinding(cmdarg());
 						break;
@@ -40,8 +39,8 @@
 
 			var mod = 0;
 			if (init) {
-				var n = props.globals.initNode("/devices/status/joysticks/warthog/modifier", mod, "INT");
-				setlistener(n, func(n) mod = n.getValue());
+				var m = props.globals.initNode("/devices/status/joysticks/warthog/modifier", mod, "INT");
+				setlistener(m, func(n) mod = n.getValue());
 			}
 
 			var left_engines = [0, 2, 4, 6, 8, 10];
@@ -191,7 +190,20 @@
 	</button>
 
 	<button n="6">
-		<name>Speedbrake Forward</name>
+		<name>Speedbrake Forward (right throttle, top grey)</name>
+		<desc>apply speed brake</desc>
+		<binding>
+			<command>property-assign</command>
+			<property>/controls/flight/speedbrake</property>
+			<value>1</value>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>property-assign</command>
+				<property>/controls/flight/speedbrake</property>
+				<value>0</value>
+			</binding>
+		</mod-up>
 	</button>
 
 	<button n="7">
@@ -204,6 +216,17 @@
 
 	<button n="9">
 		<name>Boat Switch Aft</name>
+		<desc>apply thrust reverser</desc>
+		<binding>
+			<command>nasal</command>
+			<script>props.setAll("/controls/engines/engine", "reverser", 1)</script>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>props.setAll("/controls/engines/engine", "reverser", 0)</script>
+			</binding>
+		</mod-up>
 	</button>
 
 	<button n="10">

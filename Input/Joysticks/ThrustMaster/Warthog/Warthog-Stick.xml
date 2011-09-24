@@ -11,9 +11,9 @@
 
 <PropertyList>
 	<name>Thustmaster Joystick - HOTAS Warthog</name>
+	<name>Thrustmaster Joystick - HOTAS Warthog</name> <!-- in case they ever manage to fix their name -->
 
 	<nasal>
-		<command>nasal</command>
 		<script>
 			var this = cmdarg().getParent();
 			var init = !contains(caller(0)[0], "init");
@@ -27,7 +27,7 @@
 					var file = dir ~ "/Input/Joysticks/ThrustMaster/Warthog/Stick/" ~ name ~ ".xml";
 					if (io.stat(file) != nil) {
 						printlog("info", "WARTHOG: loading overlay " ~ file);
-						cmdarg().getNode("script").setValue("");
+						cmdarg().setValues({command: "nasal", script: ""});
 						io.read_properties(file, this);
 						props.runBinding(cmdarg());
 						break;
@@ -44,13 +44,13 @@
 
 			var mod = 0;
 			if (init) {
-				var n = props.globals.initNode("/devices/status/joysticks/warthog/modifier", mod, "INT");
-				setlistener(n, func(n) mod = n.getValue());
+				var m = props.globals.initNode("/devices/status/joysticks/warthog/modifier", mod, "INT");
+				setlistener(m, func(n) mod = n.getValue());
 			}
 
 			var trimstep = 0.75;
 			var viewstep = 0.5;
-			var button = { 18: { id: 0 }};
+			var button = {18: {id: 0}};
 
 			var reset_zoom = func setprop("/sim/current-view/field-of-view", 55);
 			var viewdir = props.globals.getNode("/sim").getChildren("view");
@@ -160,6 +160,16 @@
 
 	<button n="2">
 		<name>Nosewheel Steering Button</name>
+		<desc>toggle nosewheel steering/tailwheel lock</desc>
+		<binding>
+			<command>nasal</command>
+			<script>
+				var i = !(getprop("/controls/gear/nose-wheel-steering") or 0);
+				setprop("/controls/gear/nose-wheel-steering", i);
+				setprop("/controls/gear/tailwheel-lock", !i);
+				popup("Tail Wheel %sLOCKED!", i ? "UN" : "");
+			</script>
+		</binding>
 	</button>
 
 	<button n="3">
@@ -212,7 +222,6 @@
 					if (mod) {
 						var i = controls.applyParkingBrake(1);
 						popup("Parking Brake %s", i ? "ON" : "OFF");
-						controls.applyBrakes(0);
 					}
 					controls.applyBrakes(0)
 				</script>
@@ -249,7 +258,6 @@
 					if (mod) {
 						var i = controls.applyParkingBrake(1);
 						popup("Parking Brake %s", i ? "ON" : "OFF");
-						controls.applyBrakes(0);
 					}
 					controls.applyBrakes(0)
 				</script>
@@ -380,8 +388,8 @@
 			<binding>
 				<command>nasal</command>
 				<script>
-					view.resetView();
 					button[18].id += 1;
+					view.resetView();
 				</script>
 			</binding>
 		</mod-up>

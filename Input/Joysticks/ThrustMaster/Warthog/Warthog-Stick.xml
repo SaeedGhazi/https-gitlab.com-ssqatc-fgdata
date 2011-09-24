@@ -16,6 +16,7 @@
 		<command>nasal</command>
 		<script>
 			var this = cmdarg().getParent();
+			var init = !contains(caller(0)[0], "init");
 			var popup = func gui.popupTip(call(sprintf, arg));
 			var is_helicopter = (var _ = props.globals.getNode("rotors", 0)) != nil and _.getAttribute("children");
 			var aircraft_type = getprop("/sim/type");
@@ -23,7 +24,7 @@
 
 			var load_overlay = func(name) {
 				foreach (var dir; [getprop("/sim/fg-home"), getprop("/sim/fg-root")]) {
-					var file = dir ~ "/Input/Joysticks/ThrustMaster/Warthog/Joystick/" ~ name ~ ".xml";
+					var file = dir ~ "/Input/Joysticks/ThrustMaster/Warthog/Stick/" ~ name ~ ".xml";
 					if (io.stat(file) != nil) {
 						printlog("info", "WARTHOG: loading overlay " ~ file);
 						cmdarg().getNode("script").setValue("");
@@ -42,8 +43,10 @@
 			}
 
 			var mod = 0;
-			var _ = props.globals.initNode("/devices/status/joysticks/warthog/modifier", mod, "INT");
-			setlistener(_, func(n) mod = n.getValue());
+			if (init) {
+				var _ = props.globals.initNode("/devices/status/joysticks/warthog/modifier", mod, "INT");
+				setlistener(_, func(n) mod = n.getValue());
+			}
 
 			var trimstep = 0.75;
 			var viewstep = 0.5;

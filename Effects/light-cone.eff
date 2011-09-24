@@ -116,6 +116,7 @@ Uses stencil buffer.
            have ambient & diffuse AND alpha should be around 0.2 or something -->
       <blend>
         <active>true</active>
+        <source-rgb>dst-color</source-rgb>
         <source>dst-alpha</source>
         <destination>one</destination>
       </blend>

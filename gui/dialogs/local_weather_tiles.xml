@@ -6,20 +6,20 @@
 
  <name>local_weather_tiles</name>
  <width>310</width>
- <height>360</height>
+ <height>385</height>
  <modal>false</modal>
 
 
 <text>
   <x>5</x>
-  <y>330</y>
+  <y>355</y>
   <label>Select initial weather scenario tile</label>
 </text>
 
 
 <combo>
    <x>10</x>
-   <y>305</y>
+   <y>330</y>
    <width>280</width>
    <height>25</height>
    <live>true</live>
@@ -35,7 +35,7 @@
    <value>Coldfront</value>
    <value>Warmfront</value>
    <value>Tropical</value>
-   <!--<value>Test tile</value>-->
+   <value>Test tile</value>
    <binding>
     <command>dialog-apply</command>
    </binding>
@@ -51,13 +51,13 @@
 
  <text>
    <x>5</x>
-   <y>270</y>
+   <y>295</y>
    <label>wind deg</label>
   </text>
 
  <input>
    <x>67</x>
-   <y>270</y>
+   <y>295</y>
    <width>40</width>
    <height>25</height>
    <property>/local-weather/tmp/tile-orientation-deg</property>
@@ -65,13 +65,13 @@
 
  <text>
    <x>105</x>
-   <y>270</y>
+   <y>295</y>
    <label>kt</label>
   </text>
 
 <input>
    <x>125</x>
-   <y>270</y>
+   <y>295</y>
    <width>30</width>
    <height>25</height>
    <property>/local-weather/tmp/windspeed-kt</property>
@@ -79,7 +79,7 @@
 
  <text>
    <x>155</x>
-   <y>270</y>
+   <y>295</y>
    <label>alt. offset (ft)</label>
   </text>
 
@@ -87,7 +87,7 @@
 
 <input>
    <x>240</x>
-   <y>270</y>
+   <y>295</y>
    <width>50</width>
    <height>25</height>
    <property>/local-weather/tmp/tile-alt-offset-ft</property>
@@ -96,7 +96,7 @@
 
 <text>
    <x>5</x>
-   <y>240</y>
+   <y>265</y>
    <label>gust freq.</label>
   </text>
 
@@ -104,7 +104,7 @@
 
 <slider>
    <x>65</x>
-   <y>240</y>
+   <y>265</y>
    <width>50</width>
    <height>20</height>
    <min>0.0</min>
@@ -119,14 +119,14 @@
 
 <text>
    <x>112</x>
-   <y>240</y>
+   <y>265</y>
    <label>strength</label>
   </text>
 
 
 <slider>
    <x>167</x>
-   <y>240</y>
+   <y>265</y>
    <width>50</width>
    <height>20</height>
    <min>0.0</min>
@@ -139,14 +139,14 @@
 
 <text>
    <x>215</x>
-   <y>240</y>
+   <y>265</y>
    <label>dir.</label>
   </text>
 
 
 <slider>
    <x>240</x>
-   <y>240</y>
+   <y>265</y>
    <width>50</width>
    <height>20</height>
    <min>0.0</min>
@@ -162,14 +162,14 @@
 
 <text>
    <x>5</x>
-   <y>210</y>
+   <y>235</y>
    <label>wind model</label>
   </text>
 
 
 <combo>
    <x>150</x>
-   <y>210</y>
+   <y>235</y>
    <width>140</width>
    <height>25</height>
    <live>true</live>
@@ -187,13 +187,13 @@
 
 <text>
    <x>5</x>
-   <y>180</y>
+   <y>205</y>
    <label>tile selection mode</label>
 </text>
 
 <combo>
    <x>150</x>
-   <y>180</y>
+   <y>205</y>
    <width>140</width>
    <height>25</height>
    <live>true</live>
@@ -209,7 +209,7 @@
 
 <checkbox>
    <x>10</x>
-   <y>150</y>
+   <y>175</y>
    <width>15</width>
    <height>15</height>
    <label>terrain presampling</label>
@@ -221,7 +221,7 @@
 
 <checkbox>
    <x>150</x>
-   <y>150</y>
+   <y>175</y>
    <width>15</width>
    <height>15</height>
    <label>generate thermals</label>
@@ -233,7 +233,7 @@
 
 <checkbox>
    <x>10</x>
-   <y>125</y>
+   <y>150</y>
    <width>15</width>
    <height>15</height>
    <label>debug output</label>
@@ -245,7 +245,7 @@
 
 <checkbox>
    <x>150</x>
-   <y>125</y>
+   <y>150</y>
    <width>15</width>
    <height>15</height>
    <label>detailed clouds</label>
@@ -257,7 +257,7 @@
 
 <checkbox>
    <x>10</x>
-   <y>100</y>
+   <y>125</y>
    <width>15</width>
    <height>15</height>
    <label>dynamical weather</label>
@@ -269,11 +269,35 @@
 
 <checkbox>
    <x>150</x>
-   <y>100</y>
+   <y>125</y>
    <width>15</width>
    <height>15</height>
    <label>dynamical convection</label>
    <property>/local-weather/config/dynamical-convection-flag</property>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+</checkbox>
+
+<checkbox>
+   <x>10</x>
+   <y>100</y>
+   <width>15</width>
+   <height>15</height>
+   <label>terrain effects</label>
+   <property>/local-weather/config/detailed-terrain-interaction-flag</property>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+</checkbox>
+
+<checkbox>
+   <x>150</x>
+   <y>100</y>
+   <width>15</width>
+   <height>15</height>
+   <label>realistic visibility</label>
+   <property>/local-weather/config/realistic-visibility-flag</property>
    <binding>
     <command>dialog-apply</command>
    </binding>

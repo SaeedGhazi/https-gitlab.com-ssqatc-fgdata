@@ -1228,7 +1228,7 @@ if (getprop(lw~"buffer-loop-flag") ==1) {settimer( func {buffer_loop(i)}, 0);}
 # housekeeping loop
 ###############################
 
-var housekeeping_loop = func (index) {
+var housekeeping_loop = func (index, index1) {
 
 if (local_weather.local_weather_running_flag == 0) {return;}
 
@@ -1237,12 +1237,14 @@ var n_max = size(cloudSceneryArray);
 n_cloudSceneryArray = n_max;
 var s = size(active_tile_list);
 
-setprop(lw~"clouds/cloud-scenery-count",n_max);
+var m_max = size(cloudArray);
+
+setprop(lw~"clouds/cloud-scenery-count",n_max+m_max);
 
 # don't do anything as long as the array is empty
 
-if (n_max == 0) # nothing to do, loop over
-	{if (getprop(lw~"housekeeping-loop-flag") ==1) {settimer( func {housekeeping_loop(index)}, 0);} return;}
+if ((n_max == 0) and (m_max == 0)) # nothing to do, loop over
+	{if (getprop(lw~"housekeeping-loop-flag") ==1) {settimer( func {housekeeping_loop(index, index1)}, 0);} return;}
 
 # parse the flags
 
@@ -1255,7 +1257,7 @@ if (asymmetric_buffering_flag ==1)
 	var current_heading = getprop("orientation/heading-deg");
 	}
 
-# now process the array
+# now process the Scenery array
 
 if (index > n_max-1) {index = 0;}
 
@@ -1310,7 +1312,34 @@ for (var i = index; i < i_max; i = i+1)
 	}
 
 
-if (getprop(lw~"housekeeping-loop-flag") ==1) {settimer( func {housekeeping_loop(i)}, 0);}
+# now process the hard coded cloud array and see a tile has been removed
+
+if (index1 > m_max-1) {index1 = 0;}
+
+var j_max = index1 + n;
+if (j_max > m_max) {j_max = m_max;}
+
+for (var j = index1; j < j_max; j = j+1)
+	{
+	var c = cloudArray[j];
+
+	var flag = 0;
+	
+	for (var k = 0; k < s; k = k+1)
+		{
+		if (active_tile_list[k] == c.index) {flag = 1; break;}
+		}
+
+	if (flag == 0)
+		{
+		c.remove();
+		cloudArray = delete_from_vector(cloudArray,j);
+		j = j -1; j_max = j_max - 1; m_max = m_max - 1;
+		continue;
+		}
+	}
+
+if (getprop(lw~"housekeeping-loop-flag") ==1) {settimer( func {housekeeping_loop(i,j)}, 0);}
 }
 
 
@@ -1555,11 +1584,20 @@ var cloudScenery = {
 		return me.calt.getValue();
 	},
 	correct_altitude: func {	
-		var lat = me.clat.getValue();
-		var lon = me.clon.getValue();
+		var lat = me.lat;
+		var lon = me.lon;
 		var convective_alt = weather_dynamics.tile_convective_altitude[me.index-1] + local_weather.alt_20_array[me.index-1];
 		var elevation = compat_layer.get_elevation(lat, lon);
-		var alt_new = local_weather.get_convective_altitude(convective_alt, elevation, me.index);
+		
+		if (local_weather.detailed_terrain_interaction_flag == 1)
+			{
+			var phi = local_weather.get_wind_direction(me.index) * math.pi/180.0;
+			var grad = local_weather.get_terrain_gradient(lat, lon, elevation, phi, 1000.0);
+			}
+		else 
+			{var grad = 0.0;}
+
+		var alt_new = local_weather.get_convective_altitude(convective_alt, elevation, me.index, grad);
 		me.target_alt = alt_new + me.rel_alt;
 	},
 	correct_altitude_and_age: func {	
@@ -1582,13 +1620,25 @@ var cloudScenery = {
 				}	
 			}
 
-		
+		if (local_weather.detailed_terrain_interaction_flag == 1)
+			{
+			var phi = local_weather.get_wind_direction(me.index) * math.pi/180.0;
+			var grad = local_weather.get_terrain_gradient(lat, lon, elevation, phi, 1000.0);
+			var lee_bias = local_weather.get_lee_bias(grad);
+			}
+		else 
+			{	
+			var grad = 0.0;
+			var lee_bias = 1.0;
+			}
+
 		# correct the altitude
-		var alt_new = local_weather.get_convective_altitude(convective_alt, elevation, me.index);
+		var alt_new = local_weather.get_convective_altitude(convective_alt, elevation, me.index, grad);
 		me.target_alt = alt_new + me.rel_alt;
 
 		# correct fractional lifetime based on terrain below
-		var current_lifetime = math.sqrt(p_cover)/math.sqrt(0.35) * weather_dynamics.cloud_convective_lifetime_s;
+
+		var current_lifetime = math.sqrt(p_cover * lee_bias)/math.sqrt(0.35) * weather_dynamics.cloud_convective_lifetime_s;
 		var fractional_increase = (weather_dynamics.time_lw - me.evolution_timestamp)/current_lifetime;
 		me.flt = me.flt + fractional_increase;
 		me.evolution_timestamp = weather_dynamics.time_lw;
@@ -1640,6 +1690,59 @@ var cloudScenery = {
 		if (me.type !=0) {print("relative: ", me.rel_alt, "target: ", me.target_alt);}
 	},
 };
+
+var cloudArray = [];
+
+var cloud = {
+	new: func(type, subtype) {
+	        var c = { parents: [cloud] };
+		c.type = type;
+		c.subtype = subtype;		
+
+	        return c;
+	},
+	remove: func {
+		var p = props.Node.new({ "layer" : 0,
+                         "index": me.cloud_index });
+		fgcommand("del-cloud", p);
+	},
+	move: func {	
+		# this doesn't move a cloud in the scenery, but updates its position in internal space	
+		var windfield = local_weather.windfield;
+		var dt = local_weather.time_lw - me.timestamp;
+
+		me.lat = me.lat + windfield[1] * dt * local_weather.m_to_lat;
+		me.lon = me.lon + windfield[0] * dt * local_weather.m_to_lon;
+		me.timestamp = weather_dynamics.time_lw;
+		
+	},
+	correct_altitude: func {	
+		var convective_alt = weather_dynamics.tile_convective_altitude[me.index-1] + local_weather.alt_20_array[me.index-1];
+		var elevation = compat_layer.get_elevation(me.lat, me.lon);
+		
+		if (local_weather.detailed_terrain_interaction_flag == 1)
+			{
+			var phi = local_weather.get_wind_direction(me.index) * math.pi/180.0;
+			var grad = local_weather.get_terrain_gradient(me.lat, me.lon, elevation, phi, 1000.0);
+			}
+		else 
+			{var grad = 0.0;}
+
+		var alt_new = local_weather.get_convective_altitude(convective_alt, elevation, me.index, grad);
+		var target_alt = alt_new + me.rel_alt;
+
+		var p = props.Node.new({ "layer" : 0,
+                         "index": me.cloud_index,
+ 			 "lat-deg": me.lat,
+                         "lon-deg": me.lon,
+			 "alt-ft": target_alt
+			 });
+		fgcommand("move-cloud",p);
+
+		me.alt = target_alt;
+	},
+};
+
 
 ###################
 # helper functions

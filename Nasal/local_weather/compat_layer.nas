@@ -83,6 +83,8 @@ weather_tiles = local_weather;
 
 var result = "yes";
 
+if (1==0) # no compatibility tests for 2.4 binary, it has the required features
+	{
 print("Compatibility layer: testing for hard coded support");
 
 if (props.globals.getNode("/rendering/scene/saturation", 0) == nil)
@@ -119,12 +121,29 @@ print("* can disable global weather:      "~result);
 
 
 print("Compatibility layer: tests done.");
+	}
+
+
+# features of a 2.4 binary
+
+features.can_set_light = 1;
+features.can_set_scattering = 1;
+features.terrain_presampling = 1;
+features.terrain_presampling_active = 1;
+features.can_disable_environment = 1;
+
+# features of a current GIT binary
+
+features.fast_geodinfo = 1;
+
 
 # do actual startup()
 local_weather.updateMenu();
 local_weather.startup();
 
 });
+
+
 
 
 
@@ -147,6 +166,16 @@ else
 		{
 		l.getNode("coverage").setValue("clear");
 		}
+	}
+
+if (local_weather.hardcoded_clouds_flag == 1) 
+	{
+	# we store that information ourselves, so this should be zero
+	setprop("/environment/clouds/layer[0]/elevation-ft",0.0);
+		
+	# layer wrapping off
+	setprop("/sim/rendering/clouds3d-wrap",0);
+
 	}
 
 }
@@ -226,7 +255,9 @@ settimer( func {visibility_loop(); },0);
 ####################################
 
 var setLift = func (lift) {
-	setprop("/environment/local-weather-lift-fps",lift);
+
+setprop("/environment/local-weather-lift-fps",lift);
+	
 }
 
 ####################################
@@ -448,6 +479,18 @@ if (features.can_set_scattering == 1)
 }
 
 
+####################################
+# set skydome scattering parameters
+####################################
+
+var setSkydomeShader = func (r, m, d) {
+
+setprop("/sim/rendering/rayleigh", r);
+setprop("/sim/rendering/mie", m);
+setprop("/sim/rendering/dome-density",d);
+
+}
+
 ###########################################################
 # set wind to given direction and speed
 ###########################################################
@@ -655,8 +698,7 @@ model.getNode("tile-index",1).setValue(tile_counter);
 model.getNode("load", 1).remove();
 
 
-# sort the model node into a vector for easy deletion
-# append(weather_tile_management.modelArrays[tile_counter-1],model);
+
 
 # sort the cloud into the cloud hash array
 
@@ -700,6 +742,64 @@ if (local_weather.dynamics_flag == 1)
 
 
 ###########################################################
+# place a single cloud using hard-coded system
+###########################################################
+
+var create_cloud_new = func(c) {
+
+
+
+var tile_counter = getprop(lw~"tiles/tile-counter");
+cloud_index = cloud_index + 1;
+
+c.index = tile_counter;
+c.cloud_index = cloud_index;
+
+# write the actual cloud into the scenery
+
+
+var p = props.Node.new({ "layer" : 0,
+                         "index": cloud_index,
+                         "lat-deg": c.lat,
+                         "lon-deg": c.lon,
+			 "min-sprite-width-m": c.min_width,
+			 "max-sprite-width-m": c.max_width,
+			 "min-sprite-height-m": c.min_height,
+			 "max-sprite-height-m": c.max_height,
+			 "num-sprites": c.n_sprites,
+			 "bottom-shade": c.bottom_shade,
+			 "texture": c.texture_sheet,
+			 "num-textures-x": c.num_tex_x,
+			 "num-textures-y": c.num_tex_y,
+			 "min-cloud-width-m": c.min_cloud_width,
+			 "max-cloud-width-m": c.min_cloud_width,
+			 "min-cloud-height-m": c.min_cloud_height,	
+			 "max-cloud-height-m": c.min_cloud_height,	
+			 "z-scale": c.z_scale,
+			 "height-map-texture": 0,
+                         "alt-ft" :  c.alt});
+fgcommand("add-cloud", p);
+
+# print("alt: ", c.alt);
+
+# add other management properties to the hash if dynamics is on
+
+if (local_weather.dynamics_flag == 1)
+	{
+	c.timestamp = weather_dynamics.time_lw;
+	}
+
+
+# add cloud to array
+
+append(weather_tile_management.cloudArray,c);
+	
+
+}
+
+
+
+###########################################################
 # place a cloud layer from arrays, split across frames 
 ###########################################################
 
@@ -736,6 +836,7 @@ for (var k = 0; k < k_max; k = k+1)
 		cloud_evolution_timestamp = local_weather.clouds_evolution_timestamp[s-k-1];
 		}
 	create_cloud(clouds_path[s-k-1], clouds_lat[s-k-1], clouds_lon[s-k-1], clouds_alt[s-k-1], clouds_orientation[s-k-1]);
+	#create_cloud_new(clouds_path[s-k-1], clouds_lat[s-k-1], clouds_lon[s-k-1], clouds_alt[s-k-1], clouds_orientation[s-k-1]);
 	}
 
 setsize(clouds_path,s-k_max);
@@ -838,3 +939,7 @@ var buffered_tile_index = 0;
 var cloud_mean_altitude = 0.0;
 var cloud_flt = 0.0;
 var cloud_evolution_timestamp = 0.0;
+
+# globals to handle new cloud indexing
+
+var cloud_index = 0;

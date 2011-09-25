@@ -27,8 +27,8 @@ var update = func {
 
 	var selected_tanks = [];
 	foreach (var t; tanks) {
-		var cap = t.getNode("capacity-gal_us",0).getValue();
-		if (cap > 0.01 and t.getNode("selected").getBoolValue())
+		var cap = t.getNode("capacity-gal_us",0);
+		if ((cap!=nil) and (cap.getValue() > 0.01) and t.getNode("selected").getBoolValue())
 			append(selected_tanks, t);
 	}
 

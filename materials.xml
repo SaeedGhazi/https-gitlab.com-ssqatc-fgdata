@@ -363,6 +363,12 @@ Shared parameters for various materials.
  </material>
 
  <material>
+  <name>pa_aim_uk</name>
+  <texture>Runway/pa_aim_uk.png</texture>
+  <wrapu>false</wrapu>
+ </material>
+
+ <material>
   <name>pa_tz_two_a</name>
   <texture>Runway/pa_tz_two_a.png</texture>
   <wrapu>false</wrapu>
@@ -636,6 +642,13 @@ Shared parameters for various materials.
   <name>pc_aim</name>
   <name>dirt_rwyaim</name>
   <texture>Runway/pc_aim.png</texture>
+  <wrapu>false</wrapu>
+ </material>
+
+ <material>
+  <name>pc_aim_uk</name>
+  <name>dirt_rwyaim_uk</name>
+  <texture>Runway/pc_aim_uk.png</texture>
   <wrapu>false</wrapu>
  </material>
 

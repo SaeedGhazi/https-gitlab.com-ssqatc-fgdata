@@ -1,6 +1,6 @@
 // -*- mode: C; -*-
 // Licence: GPL v2
-// Author: Vivian Meazza. 
+// Author: Vivian Meazza.
 
 #version 120
 
@@ -20,13 +20,17 @@ uniform sampler2D BaseTex;
 uniform sampler2D Fresnel;
 uniform sampler2D Map;
 uniform sampler3D Noise;
+uniform sampler2D Lightmap;
 
 uniform float refl_correction;
 uniform float rainbowiness;
 uniform float fresneliness;
 uniform float noisiness;
 uniform float ambient_correction;
-uniform float reflect_map;
+uniform float lightmap_factor;
+
+uniform int light_map;
+uniform int reflect_map;
 
 void main (void)
 {
@@ -52,7 +56,7 @@ void main (void)
     }
 
     vec4 texel = texture2D(BaseTex, gl_TexCoord[0].st);
-//  vec4 texelcolor = color * texel + specular;
+    //  vec4 texelcolor = color * texel + specular;
     color.a = texel.a * alpha;
     color = clamp(color, 0.0, 1.0);
 
@@ -81,14 +85,14 @@ void main (void)
     float transparency_offset = clamp(refl_correction, -1.0, 1.0);
     float reflFactor = 0.0;
 
-    if(reflect_map > 0.0){
-        // map the shininess of the object with user input 
+    if(reflect_map > 0){
+        // map the shininess of the object with user input
         vec4 map = texture2D(Map, gl_TexCoord[0].st);
         //float pam = (map.a * -2) + 1; //reverse map
         reflFactor = map.a + transparency_offset;
     } else {
-        // set the reflectivity proportional to shininess with user 
-        // input 
+        // set the reflectivity proportional to shininess with user
+        // input
         reflFactor = (gl_FrontMaterial.shininess / 128.0) + transparency_offset;
     }
 
@@ -114,6 +118,13 @@ void main (void)
     // the final reflection
     vec4 reflColor = vec4(color.rgb * mixedcolor.rgb + specular.rgb + ambient_Correction.rgb, color.a);
     reflColor = clamp(reflColor, 0.0, 1.0);
+
+    // add a lightmap
+
+    if ( light_map >= 1 ) {
+        vec3 lightmapTexel = texture2D(Lightmap, gl_TexCoord[0].st).rgb * lightmap_factor;
+        reflColor.rgb = max(reflColor.rgb, lightmapTexel * gl_FrontMaterial.diffuse.rgb * mixedcolor.rgb);
+    }
 
     gl_FragColor = mix(gl_Fog.color, reflColor, fogFactor);
 }

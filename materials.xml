@@ -181,6 +181,13 @@ Shared parameters for various materials.
   <wrapu>false</wrapu>
   <wrapv>false</wrapv>
  </material>
+
+ <material>
+  <name>pa_no_threshold</name>
+  <texture>Runway/pa_no_threshold.png</texture>
+  <wrapu>false</wrapu>
+  <wrapv>false</wrapv>
+ </material>
  
  <material>
   <name>pa_stopway</name>
@@ -438,6 +445,13 @@ Shared parameters for various materials.
   <name>pc_threshold</name>
   <name>dirt_rwythreshold</name>
   <texture>Runway/pc_threshold.png</texture>
+  <wrapu>false</wrapu>
+  <wrapv>false</wrapv>
+ </material>
+
+ <material>
+  <name>pc_no_threshold</name>
+  <texture>Runway/pc_no_threshold.png</texture>
   <wrapu>false</wrapu>
   <wrapv>false</wrapv>
  </material>

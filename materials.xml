@@ -404,6 +404,12 @@ Shared parameters for various materials.
   <wrapu>false</wrapu>
  </material>
 
+  <material>
+  <name>pa_heli</name>
+  <texture>Runway/pa_helipad.png</texture>
+  <wrapu>false</wrapu>
+ </material>
+
  <material>
   <name>pc_taxiway</name>
   <name>dirt_rwytaxiway</name>
@@ -691,6 +697,12 @@ Shared parameters for various materials.
   <name>pc_rest</name>
   <name>dirt_rwyrest</name>
   <texture>Runway/pc_rest.png</texture>
+  <wrapu>false</wrapu>
+ </material>
+
+ <material>
+  <name>pc_heli</name>
+  <texture>Runway/pc_helipad.png</texture>
   <wrapu>false</wrapu>
  </material>
 

@@ -18,7 +18,7 @@
 			var this = cmdarg().getParent();
 			var init = !contains(caller(0)[0], "init");
 			var popup = func gui.popupTip(call(sprintf, arg));
-			var is_helicopter = (var _ = props.globals.getNode("rotors", 0)) != nil and _.getAttribute("children");
+			var is_helicopter = (func {(var n = props.globals.getNode("rotors", 0)) != nil and n.getAttribute("children")})();
 			var aircraft_type = getprop("/sim/type");
 			var overlay = getprop("/input/joysticks/overlay");
 
@@ -44,12 +44,13 @@
 
 			var mod = 0;
 			if (init) {
-				var _ = props.globals.initNode("/devices/status/joysticks/warthog/modifier", mod, "INT");
-				setlistener(_, func(n) mod = n.getValue());
+				var n = props.globals.initNode("/devices/status/joysticks/warthog/modifier", mod, "INT");
+				setlistener(n, func(n) mod = n.getValue());
 			}
 
 			var trimstep = 0.75;
 			var viewstep = 0.5;
+			var button = { 18: { id: 0 }};
 
 			var reset_zoom = func setprop("/sim/current-view/field-of-view", 55);
 			var viewdir = props.globals.getNode("/sim").getChildren("view");
@@ -199,55 +200,7 @@
 
 	<button n="6">
 		<name>left black curosr (TMS) up</name>
-		<desc>zoom in,  +mod: reset zoom</desc>
-		<repeatable>true</repeatable>
-		<binding>
-			<command>nasal</command>
-			<script>
-				if (mod)
-					reset_zoom();
-				else
-					view.decrease(1);
-			</script>
-		</binding>
-	</button>
-
-	<button n="7">
-		<name>left black cursor (TMS) right</name>
-		<desc>next active view,  +mod: next view</desc>
-		<binding>
-			<command>nasal</command>
-			<script>view.stepView(1, mod)</script>
-		</binding>
-	</button>
-
-	<button n="8">
-		<name>left black cursor (TMS) down</name>
-		<desc>zoom out,  +mod: reset zoom</desc>
-		<repeatable>true</repeatable>
-		<binding>
-			<command>nasal</command>
-			<script>
-				if (mod)
-					reset_zoom();
-				else
-					view.increase(1);
-			</script>
-		</binding>
-	</button>
-
-	<button n="9">
-		<name>left black cursor (TMS) left</name>
-		<desc>previous active view,  +mod: previous view</desc>
-		<binding>
-			<command>nasal</command>
-			<script>view.stepView(-1, mod)</script>
-		</binding>
-	</button>
-
-	<button n="10">
-		<name>right black cursor (DMS) up</name>
-		<desc>brakes</desc>
+		<desc>brakes,  +mod: toggle parking brake</desc>
 		<binding>
 			<command>nasal</command>
 			<script>controls.applyBrakes(1)</script>
@@ -255,13 +208,20 @@
 		<mod-up>
 			<binding>
 				<command>nasal</command>
-				<script>controls.applyBrakes(0)</script>
+				<script>
+					if (mod) {
+						var i = controls.applyParkingBrake(1);
+						popup("Parking Brake %s", i ? "ON" : "OFF");
+						controls.applyBrakes(0);
+					}
+					controls.applyBrakes(0)
+				</script>
 			</binding>
 		</mod-up>
 	</button>
 
-	<button n="11">
-		<name>right black cursor (DMS) right</name>
+	<button n="7">
+		<name>left black cursor (TMS) right</name>
 		<desc>brakes right</desc>
 		<binding>
 			<command>nasal</command>
@@ -275,9 +235,9 @@
 		</mod-up>
 	</button>
 
-	<button n="12">
-		<name>right black cursor (DMS) down</name>
-		<desc>toggle parking brake</desc>
+	<button n="8">
+		<name>left black cursor (TMS) down</name>
+		<desc>brakes,  +mod: toggle parking brake</desc>
 		<binding>
 			<command>nasal</command>
 			<script>controls.applyBrakes(1)</script>
@@ -286,16 +246,19 @@
 			<binding>
 				<command>nasal</command>
 				<script>
-					var i = controls.applyParkingBrake(1);
-					popup("Parking Brake %s", i ? "ON" : "OFF");
-					controls.applyBrakes(0);
+					if (mod) {
+						var i = controls.applyParkingBrake(1);
+						popup("Parking Brake %s", i ? "ON" : "OFF");
+						controls.applyBrakes(0);
+					}
+					controls.applyBrakes(0)
 				</script>
 			</binding>
 		</mod-up>
 	</button>
 
-	<button n="13">
-		<name>right black cursor (DMS) left</name>
+	<button n="9">
+		<name>left black cursor (TMS) left</name>
 		<desc>brakes left</desc>
 		<binding>
 			<command>nasal</command>
@@ -307,6 +270,54 @@
 				<script>controls.applyBrakes(0, -1)</script>
 			</binding>
 		</mod-up>
+	</button>
+
+	<button n="10">
+		<name>right black cursor (DMS) up</name>
+		<desc>zoom in,  +mod: reset zoom</desc>
+		<repeatable>true</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>
+				if (mod)
+					reset_zoom();
+				else
+					view.decrease(1);
+			</script>
+		</binding>
+	</button>
+
+	<button n="11">
+		<name>right black cursor (DMS) right</name>
+		<desc>next active view,  +mod: next view</desc>
+		<binding>
+			<command>nasal</command>
+			<script>view.stepView(1, mod)</script>
+		</binding>
+	</button>
+
+	<button n="12">
+		<name>right black cursor (DMS) down</name>
+		<desc>zoom out,  +mod: reset zoom</desc>
+		<repeatable>true</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>
+				if (mod)
+					reset_zoom();
+				else
+					view.increase(1);
+			</script>
+		</binding>
+	</button>
+
+	<button n="13">
+		<name>right black cursor (DMS) left</name>
+		<desc>previous active view,  +mod: previous view</desc>
+		<binding>
+			<command>nasal</command>
+			<script>view.stepView(-1, mod)</script>
+		</binding>
 	</button>
 
 	<button n="14">
@@ -351,14 +362,28 @@
 
 	<button n="18">
 		<name>grey cursor (CMS) push</name>
-		<desc>center view,  +mod: centered cockpit view</desc>
+		<desc>short: center view,  long (&gt;0.5 sec): centered cockpit view</desc>
 		<binding>
 			<command>nasal</command>
 			<script>
-				if (mod)
-					setprop("/sim/current-view/view-number", 0);
-				view.resetView();
+				(func(id) {
+					settimer(func {
+						if (id == button[18].id) {
+							setprop("/sim/current-view/view-number", 0);
+							view.resetView();
+						}
+					}, 0.5, 1);
+				})(button[18].id += 1);
 			</script>
 		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>
+					view.resetView();
+					button[18].id += 1;
+				</script>
+			</binding>
+		</mod-up>
 	</button>
 </PropertyList>

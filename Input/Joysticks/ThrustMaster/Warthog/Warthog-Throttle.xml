@@ -14,7 +14,7 @@
 			var this = cmdarg().getParent();
 			var init = !contains(caller(0)[0], "init");
 			var popup = func gui.popupTip(call(sprintf, arg));
-			var is_helicopter = (var _ = props.globals.getNode("rotors", 0)) != nil and _.getAttribute("children");
+			var is_helicopter = (func {(var n = props.globals.getNode("rotors", 0)) != nil and n.getAttribute("children")})();
 			var aircraft_type = getprop("/sim/type");
 			var overlay = getprop("/input/joysticks/overlay");
 
@@ -40,8 +40,8 @@
 
 			var mod = 0;
 			if (init) {
-				var _ = props.globals.initNode("/devices/status/joysticks/warthog/modifier", mod, "INT");
-				setlistener(_, func(n) mod = n.getValue());
+				var n = props.globals.initNode("/devices/status/joysticks/warthog/modifier", mod, "INT");
+				setlistener(n, func(n) mod = n.getValue());
 			}
 
 			var left_engines = [0, 2, 4, 6, 8, 10];
@@ -328,7 +328,18 @@
 	</button>
 
 	<button n="20">
-		<name>Landing Gear Horn Silence Button</name>
+		<name>Landing Gear Horn Silence</name>
+		<desc>gear up,  +mod: gear down</desc>
+		<binding>
+			<command>nasal</command>
+			<script>controls.gearDown(mod ? 1 : -1)</script>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>controls.gearDown(0)</script>
+			</binding>
+		</mod-up>
 	</button>
 
 	<button n="21">

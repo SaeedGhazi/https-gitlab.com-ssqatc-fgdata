@@ -181,6 +181,13 @@ Shared parameters for various materials.
   <wrapu>false</wrapu>
   <wrapv>false</wrapv>
  </material>
+
+ <material>
+  <name>pa_no_threshold</name>
+  <texture>Runway/pa_no_threshold.png</texture>
+  <wrapu>false</wrapu>
+  <wrapv>false</wrapv>
+ </material>
  
  <material>
   <name>pa_stopway</name>
@@ -363,6 +370,12 @@ Shared parameters for various materials.
  </material>
 
  <material>
+  <name>pa_aim_uk</name>
+  <texture>Runway/pa_aim_uk.png</texture>
+  <wrapu>false</wrapu>
+ </material>
+
+ <material>
   <name>pa_tz_two_a</name>
   <texture>Runway/pa_tz_two_a.png</texture>
   <wrapu>false</wrapu>
@@ -398,6 +411,12 @@ Shared parameters for various materials.
   <wrapu>false</wrapu>
  </material>
 
+  <material>
+  <name>pa_heli</name>
+  <texture>Runway/pa_helipad.png</texture>
+  <wrapu>false</wrapu>
+ </material>
+
  <material>
   <name>pc_taxiway</name>
   <name>dirt_rwytaxiway</name>
@@ -426,6 +445,13 @@ Shared parameters for various materials.
   <name>pc_threshold</name>
   <name>dirt_rwythreshold</name>
   <texture>Runway/pc_threshold.png</texture>
+  <wrapu>false</wrapu>
+  <wrapv>false</wrapv>
+ </material>
+
+ <material>
+  <name>pc_no_threshold</name>
+  <texture>Runway/pc_no_threshold.png</texture>
   <wrapu>false</wrapu>
   <wrapv>false</wrapv>
  </material>
@@ -640,6 +666,13 @@ Shared parameters for various materials.
  </material>
 
  <material>
+  <name>pc_aim_uk</name>
+  <name>dirt_rwyaim_uk</name>
+  <texture>Runway/pc_aim_uk.png</texture>
+  <wrapu>false</wrapu>
+ </material>
+
+ <material>
   <name>pc_tz_two_a</name>
   <name>dirt_rwytz_two_a</name>
   <texture>Runway/pc_tz_two_a.png</texture>
@@ -678,6 +711,12 @@ Shared parameters for various materials.
   <name>pc_rest</name>
   <name>dirt_rwyrest</name>
   <texture>Runway/pc_rest.png</texture>
+  <wrapu>false</wrapu>
+ </material>
+
+ <material>
+  <name>pc_heli</name>
+  <texture>Runway/pc_helipad.png</texture>
   <wrapu>false</wrapu>
  </material>
 

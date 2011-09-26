@@ -3,11 +3,14 @@
 //  available at http://forum.bonzaisoftware.com/viewthread.php?tid=10
 //  © Michael Horsch - 2005
 
+#version 120
+
 varying vec4 waterTex1;
 varying vec4 waterTex2;
 varying vec4 waterTex4;
 varying vec4 ecPosition;
 uniform float osg_SimulationTime;
+uniform float WindE, WindN;
 varying vec3 viewerdir;
 varying vec3 lightdir;
 varying vec3 normal;
@@ -24,11 +27,18 @@ lightdir = normalize(vec3(gl_ModelViewMatrixInverse * gl_LightSource[0].position
 
 waterTex4 = vec4( ecPosition.xzy, 0.0 );
 
-vec4 t1 = vec4(0.0, osg_SimulationTime*0.005217, 0.0,0.0);
-vec4 t2 = vec4(0.0, osg_SimulationTime*-0.0012, 0.0,0.0);
+vec4 t1 = vec4(0.0, osg_SimulationTime * 0.005217, 0.0, 0.0);
+vec4 t2 = vec4(0.0, osg_SimulationTime * -0.0012, 0.0, 0.0);
+
+//float windFactor = sqrt(pow(abs(WindE),2)+pow(abs(WindN),2)) * 0.3;
+float windFactor = 0.001;
 
 waterTex1 = gl_MultiTexCoord0 + t1;
+waterTex1.x += WindE * windFactor;
+waterTex1.y += WindN * windFactor;
 waterTex2 = gl_MultiTexCoord0 + t2;
+waterTex2.x += WindE * windFactor;
+waterTex2.y += WindN * windFactor;
 
 gl_Position = ftransform();
 }

@@ -11,14 +11,16 @@
 			<internal-format>normalized</internal-format>
 		</texture>
 		<texture n="2">
-			<image>Textures/Water/water-normalmap.png</image>
+			<!--<image>Textures/Water/water-normalmap.png</image>-->
+			<image>Textures/Water/normalmap2.png</image>
 			<filter>linear-mipmap-linear</filter>
 			<wrap-s>repeat</wrap-s>
 			<wrap-t>repeat</wrap-t>
 			<internal-format>normalized</internal-format>
 		</texture>
 		<texture n="3">
-			<image>Textures/Water/water-dudv.png</image>
+			<!--<image>Textures/Water/water-dudv.png</image>-->
+			<image>Textures/Water/dudvmap2.png</image>
 			<filter>linear-mipmap-linear</filter>
 			<wrap-s>repeat</wrap-s>
 			<wrap-t>repeat</wrap-t>
@@ -31,9 +33,22 @@
 			<wrap-t>repeat</wrap-t>
 			<internal-format>normalized</internal-format>
 		</texture>
+		<texture n="5">
+			<image>Textures/Water/sea_foam.png</image>
+			<filter>linear-mipmap-linear</filter>
+			<wrap-s>repeat</wrap-s>
+			<wrap-t>repeat</wrap-t>
+			<internal-format>normalized</internal-format>
+		</texture>
 		<saturation>
 			<use>/rendering/scene/saturation</use>
 		</saturation>
+		<status>
+			<use>/environment/config/enabled</use>
+		</status>
+		<overcast>
+			<use>/rendering/scene/overcast</use>
+		</overcast>
 		<cloud-cover0>
 			<use>/environment/clouds/layer[0]/coverage-type</use>
 		</cloud-cover0>
@@ -49,6 +64,16 @@
 		<cloud-cover4>
 			<use>/environment/clouds/layer[4]/coverage-type</use>
 		</cloud-cover4>
+		<!--<wind>
+			<use>/environment/wind-speed-kt</use>
+		</wind>-->
+		<windE>
+			<use>/environment/config/boundary/entry[0]/wind-from-east-fps</use>
+		</windE>
+		<windN>
+			<use>/environment/config/boundary/entry[0]/wind-from-north-fps</use>
+		</windN>
+
 	</parameters>
 	<technique n="8">
 		<predicate>
@@ -175,6 +200,24 @@
 					<use>texture[4]/internal-format</use>
 				</internal-format>
 			</texture-unit>
+			<texture-unit>
+				<unit>5</unit>
+				<image>
+					<use>texture[5]/image</use>
+				</image>
+				<filter>
+					<use>texture[5]/filter</use>
+				</filter>
+				<wrap-s>
+					<use>texture[5]/wrap-s</use>
+				</wrap-s>
+				<wrap-t>
+					<use>texture[5]/wrap-t</use>
+				</wrap-t>
+				<internal-format>
+					<use>texture[5]/internal-format</use>
+				</internal-format>
+			</texture-unit>
 			<program>
 				<vertex-shader>Shaders/water.vert</vertex-shader>
 				<fragment-shader>Shaders/water.frag</fragment-shader>
@@ -200,10 +243,15 @@
 				<value type="int">4</value>
 			</uniform>
 			<uniform>
+				<name>sea_foam</name>
+				<type>sampler-2d</type>
+				<value type="int">5</value>
+			</uniform>
+			<uniform>
 				<name>saturation</name>
 				<type>float</type>
-				<value>0.4</value>
-				<!--<value><use>saturation</use></value>-->
+				<!--<value>0.4</value>-->
+				<value><use>saturation</use></value>
 			</uniform>
 			<uniform>
 				<name>CloudCover0</name>
@@ -238,6 +286,35 @@
 				<type>float</type>
 				<value>
 					<use>cloud-cover4</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>Status</name>
+				<type>int</type>
+				<value>
+					<use>status</use>
+				</value>
+				<!--<value type="int">0</value> -->
+			</uniform>
+			<uniform>
+				<name>Overcast</name>
+				<type>float</type>
+				<value>
+					<use>overcast</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>WindE</name>
+				<type>float</type>
+				<value>
+					<use>windE</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>WindN</name>
+				<type>float</type>
+				<value>
+					<use>windN</use>
 				</value>
 			</uniform>
 		</pass>

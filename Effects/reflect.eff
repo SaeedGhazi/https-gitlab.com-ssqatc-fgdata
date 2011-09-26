@@ -19,7 +19,7 @@
 	<texture n="8">
 	
 	To use a light map set <light_map> to 1,and the path to the map texture in
-	<texture n="2">>
+	<texture n="2">
 
 	USE: 	To use the default reflection effect (controlled by material shininess values) use
 

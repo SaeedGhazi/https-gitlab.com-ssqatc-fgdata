@@ -1,6 +1,7 @@
 // -*- mode: C; -*-
 // Licence: GPL v2
 // Author: Vivian Meazza.
+// additions by Emilian Huminuc
 
 #version 120
 

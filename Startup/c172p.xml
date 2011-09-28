@@ -9,10 +9,10 @@ Durk Talsma Sept-17, 2011.
 
 <PropertyList>
     <sim>
-        <atc>
-            <acradius type="double">5</acradius>
-            <flight-type type="string">ga</flight-type>
-            <airline type="string">NONE</airline>
-        </atc>
+        <dimensions>
+            <radius-m type="double">5</radius-m>
+	</dimensions>
+        <aircraft-class type="string">ga</aircraft-class>
+        <aircraft-operator type="string">NONE</aircraft-operator>
     </sim>
 </PropertyList>

@@ -1273,6 +1273,11 @@ Started September 2000 by David Megginson, david@megginson.com
 		</jetways_edit>
 	</nasal>
 
+	<scenery>
+		<share-events type="bool" userarchive="y">false</share-events>
+		<events type="string"/>
+	</scenery>
+
 </PropertyList>
 
 <!-- end of preferences.xml -->

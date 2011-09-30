@@ -8,6 +8,65 @@
 ###############################################################################
 
 ###############################################################################
+# Event broadcast channel using a MP enabled string property.
+# Events from users in multiplayer.ignore are ignored.
+#
+# EventChannel.new(mpp_path)
+#   Create a new event broadcast channel. Any MP user with the same
+#   primitive will receive all messages sent to the channel from the point
+#   she/he joined (barring severe MP packet loss).
+#   NOTE: Message delivery is not guaranteed.
+#     mpp_path - MP property path                        : string
+#
+# EventChannel.register(event_hash, handler)
+#   Register a handler for the event identified by the hash event_hash.
+#     event_hash - hash value for the event : a unique 4 character string
+#     handler    - a handler function for the event : func (msg)
+#
+# EventChannel.deregister(event_hash)
+#   Deregister the handler for the event identified by the hash event_hash.
+#     event_hash - hash value for the event : a unique 4 character string
+#
+# EventChannel.send(event_hash, msg)
+#   Sends the event event_hash with the message msg to the channel.
+#     event_hash - hash value for the event : a unique 4 character string
+#     msg        - text string with Binary data encoded data : string
+#
+# EventChannel.die()
+#   Destroy this EventChannel instance.
+#
+var EventChannel = {};
+EventChannel.new = func (mpp_path) {
+  var obj = BroadcastChannel.new(mpp_path,
+                                 func (n, msg) { obj._process(n, msg) });
+  # Save send from being overriden.
+  obj.parent_send = obj.send;
+  # Put EventChannel methods before BroadcastChannel methods.
+  obj.parents = [EventChannel] ~ obj.parents;
+  obj.events  = {};
+  return obj;
+}
+EventChannel.register = func (event_hash,
+                              handler) {
+  me.events[event_hash] = handler;
+}
+EventChannel.deregister = func (event_hash) {
+  delete(me.events, event_hash);
+}
+EventChannel.send = func (event_hash,
+                          msg) {
+  me.parent_send(event_hash ~ msg);
+}
+############################################################
+# Internals.
+EventChannel._process = func (n, msg) {
+  var event_hash = Binary.readHash(msg);
+  if (contains(me.events, event_hash)) {
+    me.events[event_hash](substr(msg, Binary.sizeOf["Hash"]));
+  }
+}
+
+###############################################################################
 # Broadcast primitive using a MP enabled string property.
 # Broadcasts from users in multiplayer.ignore are ignored.
 #
@@ -60,6 +119,7 @@ BroadcastChannel.new = func (mpp_path, process,
               send_buf     : [],
               peers        : {},
               loopid       : 0,
+              running      : 0,
               PERIOD       : 1.3,
               last_time    : 0.0,  # For join handling.
               last_send    : 0.0,  # For the send queue 
@@ -74,7 +134,8 @@ BroadcastChannel.new = func (mpp_path, process,
   return obj;
 }
 BroadcastChannel.send = func (msg) {
-  if (me.send_node == nil) return;
+  if (!me.running or me.send_node == nil)
+    return;
 
   var t = getprop("/sim/time/elapsed-sec");
   if (((t - me.last_send) > me.SEND_TIME) and (size(me.send_buf) == 0)) {
@@ -83,17 +144,25 @@ BroadcastChannel.send = func (msg) {
     if (me.send_to_self) me.process_msg(props.globals, msg);
   } else {
     append(me.send_buf, msg);
-  }  
+  }
 }
 BroadcastChannel.die = func {
   me.loopid += 1;
+  me.running = 0;
 #  print("BroadcastChannel[" ~ me.mpp_path ~ "] ...  destroyed.");
 }
 BroadcastChannel.start = func {
-  me.loopid += 1;
-  settimer(func { me._loop_(me.loopid); }, 0, 1);
+  if (!getprop("/sim/multiplay/online")) {
+    me.stop();
+  } else {
+    #print("mp_broadcast.nas: starting channel " ~ me.send_node.getPath() ~ ".");
+    me.running = 1;
+    me._loop_(me.loopid += 1);
+  }
 }
 BroadcastChannel.stop = func {
+  #print("mp_broadcast.nas: stopping channel " ~ me.send_node.getPath() ~ ".");
+  me.running = 0;
   me.loopid += 1;
 }
 
@@ -147,8 +216,11 @@ BroadcastChannel.update = func {
     }
   }
 }
-BroadcastChannel._loop_ = func(id) {
+BroadcastChannel._loop_ = func (id) {
+  me.running or return;
   id == me.loopid or return;
+
+  #print("mp_broadcast.nas: " ~ me.send_node.getPath() ~ ":" ~ id ~ ".");
   me.update();
   settimer(func { me._loop_(id); }, 0, 1);
 }
@@ -159,6 +231,7 @@ BroadcastChannel._loop_ = func(id) {
 # NOTE: MP is picky about what it sends in a string propery.
 #       Encode 7 bits as a printable 8 bit character.
 var Binary = {};
+Binary.TWOTO28 =  268435456;
 Binary.TWOTO31 = 2147483648;
 Binary.TWOTO32 = 4294967296;
 Binary.sizeOf = {};
@@ -229,6 +302,21 @@ Binary.decodeCoord = func (str) {
                    Binary.decodeDouble(substr(str, 10)),
                    Binary.decodeDouble(substr(str, 20)));
   return coord;
+}
+############################################################
+# Encodes a string as a hash value.
+Binary.sizeOf["Hash"] = 4;
+Binary.stringHash = func (str) {
+  var hash = 0;
+  for(var i=0; i<size(str); i+=1) {
+      hash += math.mod(32*hash + str[i], Binary.TWOTO28-3);
+  }
+  return substr(Binary.encodeInt(hash), 1, 4);
+}
+############################################################
+# Decodes an encoded geo.Coord object.
+Binary.readHash = func (str) {
+  return substr(str, 0, Binary.sizeOf["Hash"]);
 }
 ######################################################################
 

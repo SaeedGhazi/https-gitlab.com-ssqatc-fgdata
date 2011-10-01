@@ -17,6 +17,10 @@
 		<script>
 			var this = cmdarg().getParent();
 			var init = !contains(caller(0)[0], "init");
+			if (!contains(globals, "warthog"))
+				io.load_nasal(getprop("/sim/fg-root") ~ "/Input/Joysticks/ThrustMaster/Warthog/warthog.nas");
+
+			var jslistener = func init and call(setlistener, arg);
 			var popup = func gui.popupTip(call(sprintf, arg));
 			var is_helicopter = (func {(var n = props.globals.getNode("rotors", 0)) != nil and n.getAttribute("children")})();
 			var aircraft_type = getprop("/sim/type");
@@ -43,10 +47,8 @@
 			}
 
 			var mod = 0;
-			if (init) {
-				var m = props.globals.initNode("/devices/status/joysticks/warthog/modifier", mod, "INT");
-				setlistener(m, func(n) mod = n.getValue());
-			}
+			var m = props.globals.initNode("/devices/status/joysticks/warthog/modifier", mod, "INT");
+			jslistener(m, func(n) mod = n.getValue());
 
 			var trimstep = 0.75;
 			var viewstep = 0.5;

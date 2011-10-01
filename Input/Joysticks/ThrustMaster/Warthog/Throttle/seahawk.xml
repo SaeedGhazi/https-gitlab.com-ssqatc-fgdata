@@ -4,11 +4,11 @@
 <PropertyList>
 	<nasal>
 		<script>
-			if (init)
-				setlistener("/controls/flight/speedbrake", func(n) {
-					setprop("/controls/flight/speedbrake-lever", n.getValue());
-					seahawk.adjustFlaps();
-				});
+			jslistener("/controls/flight/speedbrake", func(n) {
+				print(n.getValue());
+				setprop("/controls/flight/speedbrake-lever", n.getValue());
+				seahawk.adjustFlaps();
+			});
 		</script>
 	</nasal>
 </PropertyList>

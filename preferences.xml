@@ -677,6 +677,17 @@ Started September 2000 by David Megginson, david@megginson.com
 			<duration type="double">90</duration>
 			<view type="int">1</view>
 			<looped type="bool" userarchive="y">true</looped>
+			<buffer> <!-- replay buffer configuration -->
+				<!-- 1st buffer level: short term -->
+				<high-res-time type="double">60.0</high-res-time> <!-- 60 seconds -->
+				<!-- short term sample rate is as every frame (fixed) -->
+				<!-- 2nd buffer level: medium term -->
+				<medium-res-sample-dt type="double">0.5</medium-res-sample-dt>
+				<medium-res-time type="double">600.0</medium-res-time><!-- 10 mins -->
+				<!-- 3rd buffer level: long term -->
+				<low-res-sample-dt type="double">5.0</low-res-sample-dt>
+				<low-res-time type="double">3600.0</low-res-time><!-- 1 h -->
+			</buffer>
 		</replay>
 
 		<airport>
@@ -768,6 +779,11 @@ Started September 2000 by David Megginson, david@megginson.com
 			<ext-svn-utility type="string">svn</ext-svn-utility> <!-- use absolute path if "svn"
 				 isn't on system PATH (external SVN only)-->
 		</terrasync>
+
+		<flight-recorder>
+			<default-config type="string">/Aircraft/Generic/flightrecorder/generic-piston-propeller-4.xml</default-config>
+		</flight-recorder>
+
 	</sim>
 	<!-- mouse mode -->
 	<devices>

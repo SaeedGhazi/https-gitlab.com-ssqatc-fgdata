@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- fix broken seahawk speedbrake -->
+
+<PropertyList>
+	<nasal>
+		<script>
+			if (init)
+				setlistener("/controls/flight/speedbrake", func(n) {
+					setprop("/controls/flight/speedbrake-lever", n.getValue());
+					seahawk.adjustFlaps();
+				});
+		</script>
+	</nasal>
+</PropertyList>

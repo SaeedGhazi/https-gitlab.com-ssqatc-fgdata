@@ -191,6 +191,9 @@
 		<item>
 			<label>Instant Replay   (Ctrl-R)</label>
 			<binding>
+				<command>replay</command>
+			</binding>
+			<binding>
 				<command>dialog-show</command>
 				<dialog-name>replay</dialog-name>
 			</binding>

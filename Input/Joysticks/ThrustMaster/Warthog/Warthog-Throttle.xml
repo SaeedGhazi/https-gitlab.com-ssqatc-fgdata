@@ -9,10 +9,13 @@
 	<name>Thrustmaster Throttle - HOTAS Warthog</name>
 
 	<nasal>
-		<command>nasal</command>
 		<script>
 			var this = cmdarg().getParent();
 			var init = !contains(caller(0)[0], "init");
+			if (!contains(globals, "warthog"))
+				io.load_nasal(getprop("/sim/fg-root") ~ "/Input/Joysticks/ThrustMaster/Warthog/warthog.nas");
+
+			var jslistener = func init and call(setlistener, arg);
 			var popup = func gui.popupTip(call(sprintf, arg));
 			var is_helicopter = (func {(var n = props.globals.getNode("rotors", 0)) != nil and n.getAttribute("children")})();
 			var aircraft_type = getprop("/sim/type");
@@ -23,7 +26,7 @@
 					var file = dir ~ "/Input/Joysticks/ThrustMaster/Warthog/Throttle/" ~ name ~ ".xml";
 					if (io.stat(file) != nil) {
 						printlog("info", "WARTHOG: loading overlay " ~ file);
-						cmdarg().getNode("script").setValue("");
+						cmdarg().setValues({command: "nasal", script: ""});
 						io.read_properties(file, this);
 						props.runBinding(cmdarg());
 						break;
@@ -38,11 +41,20 @@
 				}
 			}
 
+			var gearcheck = func {
+				var agl = getprop("/position/altitude-agl-ft");
+				var geardown = getprop("/controls/gear/gear-down");
+				if (agl &lt; 500 and !geardown)
+					warthog.throttle.toggle_leds(1, 2, 3, 4, 5);
+				else
+					warthog.throttle.set_leds(0, 1, 2, 3, 4, 5);
+				settimer(gearcheck, 0.5);
+			};
+			init and gearcheck();
+
 			var mod = 0;
-			if (init) {
-				var n = props.globals.initNode("/devices/status/joysticks/warthog/modifier", mod, "INT");
-				setlistener(n, func(n) mod = n.getValue());
-			}
+			var m = props.globals.initNode("/devices/status/joysticks/warthog/modifier", mod, "INT");
+			jslistener(m, func(n) mod = n.getValue());
 
 			var left_engines = [0, 2, 4, 6, 8, 10];
 			var right_engines = [1, 3, 5, 7, 9, 11];
@@ -191,7 +203,20 @@
 	</button>
 
 	<button n="6">
-		<name>Speedbrake Forward</name>
+		<name>Speedbrake Forward (right throttle, top grey)</name>
+		<desc>apply speed brake</desc>
+		<binding>
+			<command>property-assign</command>
+			<property>/controls/flight/speedbrake</property>
+			<value>1</value>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>property-assign</command>
+				<property>/controls/flight/speedbrake</property>
+				<value>0</value>
+			</binding>
+		</mod-up>
 	</button>
 
 	<button n="7">
@@ -204,14 +229,41 @@
 
 	<button n="9">
 		<name>Boat Switch Aft</name>
+		<desc>apply thrust reverser</desc>
+		<binding>
+			<command>nasal</command>
+			<script>props.setAll("/controls/engines/engine", "reverser", 1)</script>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>nasal</command>
+				<script>props.setAll("/controls/engines/engine", "reverser", 0)</script>
+			</binding>
+		</mod-up>
 	</button>
 
 	<button n="10">
 		<name>China Hat Forward</name>
+		<desc>+mod: increase LED brightness (see README)</desc>
+		<binding>
+			<command>nasal</command>
+			<script>
+				if (mod)
+					warthog.throttle.brighter();
+			</script>
+		</binding>
 	</button>
 
 	<button n="11">
 		<name>China Hat Aft</name>
+		<desc>+mod: decrease LED brightness (see README)</desc>
+		<binding>
+			<command>nasal</command>
+			<script>
+				if (mod)
+					warthog.throttle.darker();
+			</script>
+		</binding>
 	</button>
 
 	<button n="12">

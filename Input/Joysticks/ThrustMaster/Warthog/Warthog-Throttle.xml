@@ -50,7 +50,8 @@
 					warthog.throttle.set_leds(0, 1, 2, 3, 4, 5);
 				settimer(gearcheck, 0.5);
 			};
-			init and gearcheck();
+			if (init)
+				gearcheck();
 
 			var mod = 0;
 			var m = props.globals.initNode("/devices/status/joysticks/warthog/modifier", mod, "INT");

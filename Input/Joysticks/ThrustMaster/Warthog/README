@@ -69,7 +69,7 @@ via raw HID support.
     If you don't have a user group "js" (for joystick hardware access) either
     create one or, in the fourth line, use a group instead where all joystick
     users are member, e.g. GROUP:="users". Then plug your Warthog devices out
-    and in again and check if this created two device files under /dev/hid/:
+    and in again and check if this created two device links:
 
         $ ls -l /dev/input/hidraw/*
         lrwxrwxrwx 1 root root 10 Oct  2 14:23 Thrustmaster_Throttle_-_HOTAS_Warthog -> ../hidraw1
@@ -80,7 +80,7 @@ via raw HID support.
         $ ls -l /dev/hidraw*
         crw-rw---- 1 root js 251, 0 Oct  2 09:11 /dev/hidraw0
         crw-rw---- 1 root js 251, 1 Oct  2 14:23 /dev/hidraw1
-
+            ^^            ^^
 
 
 (3) Allow FlightGear to write to the two devices. The best way to do this is

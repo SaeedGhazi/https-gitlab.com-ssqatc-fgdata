@@ -1,4 +1,4 @@
-# HIDRAW Interface (currently Linux-only; see README)
+# Hardware Interface (currently Linux/HIDRAW-only; see README)
 
 var device = {
 	new: func(path, bufsize) {
@@ -21,9 +21,19 @@ var device = {
 		io.write(file, buf);
 		io.close(file);
 	},
-	set_leds: func(on, which...) { # on/off, list of leds (0: background, 1-5)
+};
+
+
+var joystick = {
+	parents: [device.new("/dev/input/hidraw/Thustmaster_Joystick_-_HOTAS_Warthog", 12)],
+};
+
+
+var throttle = {
+	parents: [device.new("/dev/input/hidraw/Thrustmaster_Throttle_-_HOTAS_Warthog", 36)],
+	set_leds: func(state, which...) { # on/off, list of leds (0: background, 1-5)
 		foreach (var w; which)
-			me.leds = bits.switch(me.leds, me._ledmap[w], on);
+			me.leds = bits.switch(me.leds, me._ledmap[w], state);
 		me.send(6, me.leds, me.bright);
 	},
 	toggle_leds: func(which...) {
@@ -31,7 +41,7 @@ var device = {
 			me.leds = bits.toggle(me.leds, me._ledmap[w]);
 		me.send(6, me.leds, me.bright);
 	},
-	set_brightness: func(v) {
+	set_brightness: func(v) { # clamped to [0,5], where 0 is off and 5 is bright
 		me.send(6, me.leds, me.bright = v < 0 ? 0 : v > 5 ? 5 : v);
 	},
 	brighter: func {
@@ -46,9 +56,6 @@ var device = {
 };
 
 
-var joystick = device.new("/dev/input/hidraw/Thustmaster_Joystick_-_HOTAS_Warthog", 12);
-var throttle = device.new("/dev/input/hidraw/Thrustmaster_Throttle_-_HOTAS_Warthog", 36);
-
-throttle.set_brightness(1);
+throttle.set_brightness(1);           # LEDs dark (but on)
 throttle.set_leds(1, 0);              # backlight on
-throttle.set_leds(0, 1, 2, 3, 4, 5);  # other LEDs off
+setlistener("/sim/signals/exit", func throttle.set_leds(0, 1, 2, 3, 4, 5), 1); # other LEDs off (now and at exit)

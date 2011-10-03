@@ -85,13 +85,13 @@ Started September 2000 by David Megginson, david@megginson.com
        DrawThreadPerContext
        CullDrawThreadPerContext
        CullThreadPerCameraDrawThreadPerContext
- 
-     NOTE: Enabling this option currently breaks the screenshot function.
    -->
 			<static-lod>
 				<detailed userarchive="y">1500</detailed>
 				<rough userarchive="y">9000</rough>
 				<bare userarchive="y">30000</bare>
+				<ai-detailed userarchive="y">10000</ai-detailed>
+				<!-- ai-bare userarchive="y">10000</ai-bare -->
 			</static-lod>
 			<random-objects type="bool"
 											userarchive="y">true</random-objects>

@@ -183,17 +183,9 @@
 				<blue type="float">0.3</blue>
 				<alpha type="float">0.8</alpha>
 			</color>
-			<keynum>359</keynum>
 			<binding>
 			  <command>nasal</command>
-			  <script><![CDATA[
-				var t = getprop("/sim/speed-up");
-				if (t > 1/32)
-					t=t/2;
-				else
-					t=1/32;
-				setprop("/sim/speed-up", t);
-			  ]]></script>
+			  <script>controls.speedup(-1);</script>
 			</binding>
 		</button>
 		<text>
@@ -219,17 +211,9 @@
 				<blue type="float">0.3</blue>
 				<alpha type="float">0.8</alpha>
 			</color>
-			<keynum>357</keynum>
 			<binding>
 			  <command>nasal</command>
-			  <script><![CDATA[
-				var t = getprop("/sim/speed-up");
-				if (t < 32)
-					t=t*2;
-				else
-					t=32;
-				setprop("/sim/speed-up", t);
-			  ]]></script>
+			  <script>controls.speedup(1);</script>
 			</binding>
 		</button>
 
@@ -290,15 +274,7 @@
 			</color>
 			<binding>
 			  <command>nasal</command>
-			  <script><![CDATA[
-				var t = getprop("/sim/replay/time");
-				if (t != "")
-				{
-					t-=30;
-					if (t<0) t=0;
-					setprop("/sim/replay/time", t);
-				}
-			  ]]></script>
+			  <script>controls.replaySkip(-30);</script>
 			</binding>
 		</button>
 
@@ -312,18 +288,9 @@
 				<blue type="float">0.3</blue>
 				<alpha type="float">0.8</alpha>
 			</color>
-			<keynum>356</keynum>
 			<binding>
 			  <command>nasal</command>
-			  <script><![CDATA[
-				var t = getprop("/sim/replay/time");
-				if (t != "")
-				{
-					t-=5;
-					if (t<0) t=0;
-					setprop("/sim/replay/time", t);
-				}
-			  ]]></script>
+			  <script>controls.replaySkip(-5);</script>
 			</binding>
 		</button>
 
@@ -386,20 +353,9 @@
 				<blue type="float">0.3</blue>
 				<alpha type="float">0.8</alpha>
 			</color>
-			<keynum>358</keynum>
 			<binding>
 			  <command>nasal</command>
-			  <script><![CDATA[
-				var t = getprop("/sim/replay/time");
-				if (t != "")
-				{
-					t+=5;
-					if (t>getprop("/sim/replay/end-time"))
-						t = getprop("/sim/replay/end-time")-0.1;
-					if (t<0) t=0;
-					setprop("/sim/replay/time", t);
-				}
-			  ]]></script>
+			  <script>controls.replaySkip(5);</script>
 			</binding>
 		</button>
 
@@ -415,17 +371,7 @@
 			</color>
 			<binding>
 			  <command>nasal</command>
-			  <script><![CDATA[
-				var t = getprop("/sim/replay/time");
-				if (t != "")
-				{
-					t+=30;
-					if (t>getprop("/sim/replay/end-time"))
-						t = getprop("/sim/replay/end-time")-0.1;
-					if (t<0) t=0;
-					setprop("/sim/replay/time", t);
-				}
-			  ]]></script>
+			  <script>controls.replaySkip(30);</script>
 			</binding>
 		</button>
 	</group>

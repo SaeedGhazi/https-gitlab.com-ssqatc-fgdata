@@ -740,6 +740,7 @@ Started September 2000 by David Megginson, david@megginson.com
 										userarchive="y">true</chat-display>
 			<chat-menu include="ATC/chat-menu-entries.xml"/>
 			<write-message-log type="bool">false</write-message-log>
+			<freeze-on-replay type="bool">true</freeze-on-replay>
 			<default-model type="string">Models/Geometry/glider.ac</default-model>
 		</multiplay>
 

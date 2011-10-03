@@ -3381,6 +3381,29 @@ Shared parameters for various materials.
          <a>1.0</a>
      </emissive>
  </material>
+ 
+  <material>
+     <name>UnidirectionalTaperRed</name>
+     <texture>Symbols/unidirectionalred.png</texture>
+     <emissive>
+         <r>0.92157</r>
+         <g>0.92157</g>
+         <b>0.76471</b>
+         <a>1.0</a>
+     </emissive>
+ </material>
+
+<material>
+     <name>UnidirectionalTaperGreen</name>
+     <texture>Symbols/unidirectionalgreen.png</texture>
+     <emissive>
+         <r>0.92157</r>
+         <g>0.92157</g>
+         <b>0.76471</b>
+         <a>1.0</a>
+     </emissive>
+ </material>
+
 
  <material>
      <name>BidirectionalTaper</name>

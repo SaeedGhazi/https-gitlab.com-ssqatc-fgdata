@@ -1259,7 +1259,10 @@ top down before the key bindings are parsed.
   <binding>
    <command>nasal</command>
    <script>
-     controls.incAileron(-0.05, -1.0)
+     if (getprop("/sim/freeze/replay-state"))
+       controls.replaySkip(-5);
+     else
+       controls.incAileron(-0.05, -1.0)
    </script>
   </binding>
   <mod-shift>
@@ -1279,7 +1282,10 @@ top down before the key bindings are parsed.
   <binding>
    <command>nasal</command>
    <script>
-     controls.incElevator(0.05, -100)
+     if (getprop("/sim/freeze/replay-state"))
+       controls.speedup(1);
+     else
+       controls.incElevator(0.05, -100)
    </script>
   </binding>
   <mod-shift>
@@ -1299,7 +1305,10 @@ top down before the key bindings are parsed.
   <binding>
    <command>nasal</command>
    <script>
-     controls.incAileron(0.05, 1.0)
+     if (getprop("/sim/freeze/replay-state"))
+       controls.replaySkip(5);
+     else
+       controls.incAileron(0.05, 1.0)
    </script>
    <step type="double">0.05</step>
   </binding>
@@ -1320,7 +1329,10 @@ top down before the key bindings are parsed.
   <binding>
    <command>nasal</command>
    <script>
-     controls.incElevator(-0.05, 100)
+     if (getprop("/sim/freeze/replay-state"))
+       controls.speedup(-1);
+     else
+       controls.incElevator(-0.05, 100)
    </script>
   </binding>
   <mod-shift>

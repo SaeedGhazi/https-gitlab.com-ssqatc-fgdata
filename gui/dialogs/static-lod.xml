@@ -33,45 +33,66 @@
     <halign>center</halign>
 
     <text>
-      <row>0</row><col>1</col>
-      <label>Max. Range (m)</label>
+      <row>0</row><col>1</col><colspan>3</colspan>
+      <label>Max. Ranges (m)</label>
     </text>
 
     <text>
-      <row>1</row><col>0</col>
-      <halign>right</halign>
+      <row>1</row><col>1</col>
       <label>Detailed</label>
     </text>
-
-    <input>
-      <row>1</row><col>1</col>
-      <halign>fill</halign>
-      <property>/sim/rendering/static-lod/detailed</property>
-    </input>
+    <text>
+      <row>1</row><col>2</col>
+      <label>Rough</label>
+    </text>
+    <text>
+      <row>1</row><col>3</col>
+      <label>Bare</label>
+    </text>
 
     <text>
       <row>2</row><col>0</col>
       <halign>right</halign>
-      <label>Rough</label>
+      <label>Scenery</label>
     </text>
 
     <input>
       <row>2</row><col>1</col>
       <halign>fill</halign>
+      <property>/sim/rendering/static-lod/detailed</property>
+    </input>
+
+    <input>
+      <row>2</row><col>2</col>
+      <halign>fill</halign>
       <property>/sim/rendering/static-lod/rough</property>
+    </input>
+
+    <input>
+      <row>2</row><col>3</col>
+      <halign>fill</halign>
+      <property>/sim/rendering/static-lod/bare</property>
     </input>
 
     <text>
       <row>3</row><col>0</col>
       <halign>right</halign>
-      <label>Bare</label>
+      <label>AI/MP Aircraft</label>
     </text>
 
     <input>
       <row>3</row><col>1</col>
       <halign>fill</halign>
-      <property>/sim/rendering/static-lod/bare</property>
+      <property>/sim/rendering/static-lod/ai-detailed</property>
     </input>
+
+<!-- // meaningless for now...
+    <input>
+      <row>3</row><col>3</col>
+      <halign>fill</halign>
+      <property>/sim/rendering/static-lod/ai-bare</property>
+    </input>
+-->
 
   </group>
 

@@ -85,13 +85,13 @@ Started September 2000 by David Megginson, david@megginson.com
        DrawThreadPerContext
        CullDrawThreadPerContext
        CullThreadPerCameraDrawThreadPerContext
- 
-     NOTE: Enabling this option currently breaks the screenshot function.
    -->
 			<static-lod>
 				<detailed userarchive="y">1500</detailed>
 				<rough userarchive="y">9000</rough>
 				<bare userarchive="y">30000</bare>
+				<ai-detailed userarchive="y">10000</ai-detailed>
+				<!-- ai-bare userarchive="y">10000</ai-bare -->
 			</static-lod>
 			<random-objects type="bool"
 											userarchive="y">true</random-objects>
@@ -740,6 +740,7 @@ Started September 2000 by David Megginson, david@megginson.com
 										userarchive="y">true</chat-display>
 			<chat-menu include="ATC/chat-menu-entries.xml"/>
 			<write-message-log type="bool">false</write-message-log>
+			<freeze-on-replay type="bool">true</freeze-on-replay>
 			<default-model type="string">Models/Geometry/glider.ac</default-model>
 		</multiplay>
 

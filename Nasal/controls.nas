@@ -470,3 +470,33 @@ _setlistener("/sim/signals/fdm-initialized", func {
     }
 });
 
+var replaySkip = func(skip_time)
+{
+    var t = getprop("/sim/replay/time");
+    if (t != "")
+    {
+        t+=skip_time;
+        if (t>getprop("/sim/replay/end-time"))
+            t = getprop("/sim/replay/end-time");
+        if (t<0)
+            t=0;
+        setprop("/sim/replay/time", t);
+    }
+}
+
+var speedup = func(speed_up)
+{
+    var t = getprop("/sim/speed-up");
+    if (speed_up < 0)
+    {
+        t = (t > 1/32) ? t/2 : 1/32;
+        if ((t<1)and(0==getprop("/sim/freeze/replay-state")))
+            t=1;
+    }
+    else
+    {
+        t = (t < 32) ? t*2 : 32;
+    }
+    setprop("/sim/speed-up", t);
+}
+

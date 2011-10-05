@@ -86,10 +86,8 @@
 				<button>
 					<legend>-</legend>
 					<binding>
-						<command>property-adjust</command>
-						<property>/sim/speed-up</property>
-						<min>1</min>
-						<step type="double">-1</step>
+						<command>nasal</command>
+						<script>controls.speedup(-1);</script>
 					</binding>
 				</button>
 				<button>
@@ -104,10 +102,8 @@
 				<button>
 					<legend>+</legend>
 					<binding>
-						<command>property-adjust</command>
-						<property>/sim/speed-up</property>
-						<min>1</min>
-						<step type="double">1</step>
+						<command>nasal</command>
+						<script>controls.speedup(1);</script>
 					</binding>
 				</button>
 			</group>

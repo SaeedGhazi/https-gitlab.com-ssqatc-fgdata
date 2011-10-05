@@ -1,205 +1,487 @@
 <?xml version="1.0"?>
+
 <PropertyList>
-  <name>replay</name>
-  <modal>false</modal>
-  <layout>vbox</layout>
+	<name>replay</name>
+	<layout>vbox</layout>
+	<modal>false</modal>
+	<default-padding>1</default-padding>
+	<y>5</y>
+	<color>
+		<red>0.2</red>
+		<green>0.2</green>
+		<blue>0.2</blue>
+		<alpha>0.7</alpha>
+	</color>
 
-  <group>
-    <layout>hbox</layout>
-	  <empty><stretch>1</stretch></empty>
+	<nasal>
+		<open><![CDATA[
+			var ReplayDialogController = {
 
-    <text>
-      <label>Instant Replay</label>
-    </text>
+			new : func( dlgRoot ) {
+				var obj = { parents: [ReplayDialogController] };
+				obj.dlgRoot = dlgRoot;
+				return obj;
+			},
 
-	  <empty><stretch>1</stretch></empty>
+			open : func {
+				var replaySlider = me.findElementByName( me.dlgRoot, "replay-time-slider" );
+				me.maxProp = replaySlider.getChild("max");
+				me.minProp = replaySlider.getChild("min");
+				me.maxListenerId = setlistener( "/sim/speed-up", func(n) { me.updateListener(n); }, 1, 1 );
+				if (getprop("/sim/replay/end-time")!=nil)
+				{
+					# update max/min range of replay-time slider
+					me.maxProp.setValue(getprop("/sim/replay/end-time"));
+					me.minProp.setValue(getprop("/sim/replay/start-time"));
+				}
+				me.updateListener(1);
+			},
 
-    <button>
-      <pref-width>16</pref-width>
-      <pref-height>16</pref-height>
-      <legend></legend>
-      <keynum>27</keynum>
-      <border>2</border>
-      <binding>
-        <command>dialog-close</command>
-      </binding>
-    </button>
-  </group>
+			updateListener : func( n ) {
+				var SpeedUp = getprop("/sim/speed-up");
+				if (SpeedUp<0.9)
+				{
+					SpeedUp=1/SpeedUp;
+					SpeedUp = "1/" ~ SpeedUp;
+				}
+				setprop("/sim/gui/dialogs/replay/time-factor","" ~ SpeedUp ~ "x");
+		    },
 
-  <hrule/>
+			close : func {
+				#removelistener( me.maxListenerId );
+			},
 
-  <nasal>
-    <open>
-      # Populate the view combo box with a list of the available views
-      var combo = cmdarg().getChildren("group")[1].getNode("combo");
-      combo.removeChildren("value");
+		    findElementByName : func(base,name) {
+		      foreach( var child; base.getChildren() ) {
+		        var n = child.getNode( "name" );
+		        if( n != nil and n.getValue() == name )
+		          return child;
+		        var f = me.findElementByName(child,name);
+		        if( f != nil ) return f;
+		      }
+		      return nil;
+		    },
 
-      var current_view = getprop("/sim/current-view/view-number");
-      var i = 0;
-      foreach (var v; view.views) {
+		};
 
-        var name = "Unnamed view " ~ v.getIndex();
+		var controller = ReplayDialogController.new( cmdarg() );
+		controller.open();
+		]]></open>
 
-        if (v.getNode("name") != nil) {
-          name = v.getNode("name").getValue();
-        }
+		<close><![CDATA[
+		controller.close();
+		]]></close>
+	</nasal>
 
-        # Pre-populate the combo box selected value
-        if (v.getIndex() == current_view) {
-          setprop("/sim/replay/view-name", name);
-        }
+	<group>
+		<layout>hbox</layout>
+		<halign>fill</halign>
+		<pref-height>28</pref-height>
 
-        combo.getNode("value[" ~ i ~ "]", 1).setValue(name);
-        i = i + 1;
-      }
-    </open>
-  </nasal>
+		<text>
+			<font>
+				<name>SANS_12B</name>
+			</font>
+			<label>REPLAY</label>
+			<color>
+				<red>0.9</red>
+				<green>0.9</green>
+				<blue>0.9</blue>
+				<alpha>1</alpha>
+			</color>
+			<pref-width>70</pref-width>
+		</text>
 
-  <group>
-    <layout>table</layout>
+		<text>
+			<label>Loop:</label>
+			<color>
+				<red>0.7</red>
+				<green>0.7</green>
+				<blue>0.7</blue>
+				<alpha>1</alpha>
+			</color>
+		</text>
 
-    <text>
-      <row>0</row><col>0</col>
-      <halign>right</halign>
-      <label>Duration:</label>
-    </text>
+		<checkbox>
+			<name>replay-looped</name>
+			<halign>left</halign>
+			<color-highlight>
+				<red type="float">0.6</red>
+				<green type="float">0.6</green>
+				<blue type="float">0.6</blue>
+				<alpha type="float">0.8</alpha>
+			</color-highlight>
+			<property>/sim/replay/looped</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>replay-looped</object-name>
+			</binding>
+		</checkbox>
+        <input>
+			<name>replay-duration</name>
+			<pref-width>40</pref-width>
+			<color>
+				<red>0.5</red>
+				<green>0.5</green>
+				<blue>0.5</blue>
+				<alpha type="float">0.8</alpha>
+			</color>
+			<property>/sim/replay/duration</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>replay-duration</object-name>
+			</binding>
+        </input>
 
-    <input>
-      <row>0</row><col>1</col>
-      <pref-width>40</pref-width>
-      <halign>left</halign>
-      <property>/sim/replay/duration</property>
-    </input>
+		<empty><pref-width>40</pref-width></empty>
 
-    <text>
-      <row>1</row><col>0</col>
-      <halign>right</halign>
-      <label>View:</label>
-    </text>
+		<text>
+			<label>Time: 99:99:99.9</label>
+			<format>Time: %s</format>
+			<color>
+				<red>0.7</red>
+				<green>0.7</green>
+				<blue>0.7</blue>
+				<alpha>1</alpha>
+			</color>
+			<live>true</live>
+			<property>/sim/replay/time-str</property>
+		</text>
 
-    <combo>
-      <row>1</row><col>1</col>
-      <halign>left</halign>
-      <pref-width>200</pref-width>
-      <property>/sim/replay/view-name</property>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-    </combo>
+		<empty><pref-width>10</pref-width></empty>
 
-    <checkbox>
-      <row>2</row><col>1</col>
-      <halign>left</halign>
-      <property>/sim/replay/looped</property>
-      <label>Looped replay</label>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-    </checkbox>
-  </group>
+		<text>
+			<label>Size: 999.9MB</label>
+			<format>Size: %.1fMB</format>
+			<color>
+				<red>0.7</red>
+				<green>0.7</green>
+				<blue>0.7</blue>
+				<alpha>1</alpha>
+			</color>
+			<property>/sim/replay/buffer-size-mbyte</property>
+		</text>
 
-  <hrule/>
+		<empty><pref-width>40</pref-width></empty>
 
-  <text>
-    <halign>left</halign>
-    <label>During replay:</label>
-  </text>
+		<text>
+			<label>Speed:</label>
+			<color>
+				<red>0.7</red>
+				<green>0.7</green>
+				<blue>0.7</blue>
+				<alpha>1</alpha>
+			</color>
+		</text>
+		<button>
+			<legend><![CDATA[-]]></legend>
+			<pref-width>20</pref-width>
+			<border>1</border>
+			<color>
+				<red type="float">0.3</red>
+				<green type="float">0.3</green>
+				<blue type="float">0.3</blue>
+				<alpha type="float">0.8</alpha>
+			</color>
+			<binding>
+			  <command>nasal</command>
+			  <script>controls.speedup(-1);</script>
+			</binding>
+		</button>
+		<text>
+			<label>1/16x</label>
+			<pref-width>28</pref-width>
+			<format>%s</format>
+			<color>
+				<red>0.7</red>
+				<green>0.7</green>
+				<blue>0.7</blue>
+				<alpha>1</alpha>
+			</color>
+			<live>true</live>
+			<property>/sim/gui/dialogs/replay/time-factor</property>
+		</text>
+		<button>
+			<legend><![CDATA[+]]></legend>
+			<pref-width>20</pref-width>
+			<border>1</border>
+			<color>
+				<red type="float">0.3</red>
+				<green type="float">0.3</green>
+				<blue type="float">0.3</blue>
+				<alpha type="float">0.8</alpha>
+			</color>
+			<binding>
+			  <command>nasal</command>
+			  <script>controls.speedup(1);</script>
+			</binding>
+		</button>
 
-  <group>
-    <layout>table</layout>
+        <empty><stretch>1</stretch></empty>
+<!--
+        <button>
+            <pref-width>16</pref-width>
+            <pref-height>16</pref-height>
+			<color>
+				<red type="float">0.3</red>
+				<green type="float">0.3</green>
+				<blue type="float">0.3</blue>
+				<alpha type="float">0.8</alpha>
+			</color>
+            <legend></legend>
+            <keynum>27</keynum>
+            <border>2</border>
+            <binding>
+                <command>dialog-close</command>
+            </binding>
+        </button>
+-->
+		<button>
+			<legend>Hide</legend>
+			<border>1</border>
+			<color>
+				<red type="float">0.3</red>
+				<green type="float">0.3</green>
+				<blue type="float">0.3</blue>
+				<alpha type="float">0.8</alpha>
+			</color>
+			<pref-width>40</pref-width>
+			<binding>
+			  <command>nasal</command>
+			  <script><![CDATA[
+				setprop("/sim/messages/copilot", "Replay active. 'Esc' to stop. 'Ctrl-R' to show replay controls.");
+			  ]]></script>
+			</binding>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+	</group>
 
-    <text>
-      <row>1</row><col>0</col>
-      <halign>center</halign>
-      <label>v/V</label>
-    </text>
+	<group>
+		<layout>hbox</layout>
+		<halign>center</halign>
 
-    <text>
-      <row>1</row><col>1</col>
-      <halign>left</halign>
-      <label>Change view</label>
-    </text>
+		<button>
+			<legend><![CDATA[<<]]></legend>
+			<pref-width>30</pref-width>
+			<border>1</border>
+			<color>
+				<red type="float">0.3</red>
+				<green type="float">0.3</green>
+				<blue type="float">0.3</blue>
+				<alpha type="float">0.8</alpha>
+			</color>
+			<binding>
+			  <command>nasal</command>
+			  <script>controls.replaySkip(-30);</script>
+			</binding>
+		</button>
 
-    <text>
-      <row>2</row><col>0</col>
-      <halign>center</halign>
-      <label>Ctrl-v</label>
-    </text>
+		<button>
+			<legend><![CDATA[<]]></legend>
+			<pref-width>30</pref-width>
+			<border>1</border>
+			<color>
+				<red type="float">0.3</red>
+				<green type="float">0.3</green>
+				<blue type="float">0.3</blue>
+				<alpha type="float">0.8</alpha>
+			</color>
+			<binding>
+			  <command>nasal</command>
+			  <script>controls.replaySkip(-5);</script>
+			</binding>
+		</button>
 
-    <text>
-      <row>2</row><col>1</col>
-      <halign>left</halign>
-      <label>Reset view</label>
-    </text>
+		<text>
+			<label>9:99:99</label>
+			<color>
+				<red>0.7</red>
+				<green>0.7</green>
+				<blue>0.7</blue>
+				<alpha>1</alpha>
+			</color>
+			<format>%8s</format>
+			<halign>right</halign>
+			<live>true</live>
+			<property>/sim/replay/start-time-str</property>
+		</text>
 
-    <text>
-      <row>3</row><col>0</col>
-      <halign>center</halign>
-      <label>p p</label>
-    </text>
+		<slider>
+			<name>replay-time-slider</name>
+			<border>0</border>
+			<color>
+				<red>0.4</red>
+				<green>0.4</green>
+				<blue>0.4</blue>
+				<alpha>1</alpha>
+			</color>
+			<halign>left</halign>
+			<pref-width>350</pref-width>
+			<min>0</min><!-- property is updated on "dialog open" -->
+			<max>1.0</max><!-- property is updated on "dialog open" -->
+			<property>/sim/replay/time</property>
+			<live>true</live>				
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>replay-time-slider</object-name>
+			</binding>
+		</slider>
 
-    <text>
-      <row>3</row><col>1</col>
-      <halign>left</halign>
-      <label>End replay</label>
-    </text>
-  </group>
+		<text>
+			<label>9:99:99</label>
+			<color>
+				<red>0.7</red>
+				<green>0.7</green>
+				<blue>0.7</blue>
+				<alpha>1</alpha>
+			</color>
+			<format>%s</format>
+			<halign>left</halign>
+			<live>true</live>
+			<property>/sim/replay/end-time-str</property>
+		</text>
 
-  <hrule/>
+		<button>
+			<legend><![CDATA[>]]></legend>
+			<pref-width>30</pref-width>
+			<border>1</border>
+			<color>
+				<red type="float">0.3</red>
+				<green type="float">0.3</green>
+				<blue type="float">0.3</blue>
+				<alpha type="float">0.8</alpha>
+			</color>
+			<binding>
+			  <command>nasal</command>
+			  <script>controls.replaySkip(5);</script>
+			</binding>
+		</button>
 
-  <group>
-    <layout>hbox</layout>
-    <empty><stretch>true</stretch></empty>
-    <button>
-      <legend>Start</legend>
-      <default>true</default>
-      <equal>true</equal>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-      <binding>
-        <command>nasal</command>
-        <script>
-          var index = view.indexof(getprop("/sim/replay/view-name"));
-          setprop("/sim/current-view/view-number", index);
-        </script>
-      </binding>
-      <binding>
-        <command>replay</command>
-      </binding>
-      <binding>
-        <command>dialog-close</command>
-      </binding>
-    </button>
-    <empty><stretch>true</stretch></empty>
-    <button>
-      <legend>Stop</legend>
-      <equal>true</equal>
-      <enable>
-         <greater-than>
-           <property>/sim/freeze/replay-state</property>
-           <value>0</value>
-         </greater-than>
-      </enable>
-      <binding>
-        <property>/sim/replay/disable</property>
-        <command>property-assign</command>
-        <value type="bool">true</value>
-      </binding>
-      <binding>
-        <command>dialog-close</command>
-      </binding>
-    </button>
-    <empty><stretch>true</stretch></empty>
-    <button>
-      <legend>Cancel</legend>
-      <equal>true</equal>
-      <key>Esc</key>
-      <binding>
-        <command>dialog-close</command>
-      </binding>
-    </button>
-    <empty><stretch>true</stretch></empty>
-  </group>
+		<button>
+			<legend><![CDATA[>>]]></legend>
+			<pref-width>30</pref-width>
+			<border>1</border>
+			<color>
+				<red type="float">0.3</red>
+				<green type="float">0.3</green>
+				<blue type="float">0.3</blue>
+				<alpha type="float">0.8</alpha>
+			</color>
+			<binding>
+			  <command>nasal</command>
+			  <script>controls.replaySkip(30);</script>
+			</binding>
+		</button>
+	</group>
 
+	<group>
+		<layout>hbox</layout>
+		<halign>center</halign>
+		<stretch>false</stretch>
+		<default-padding>3</default-padding>
+
+		<button>
+			<legend>Pause</legend>
+			<default>true</default>
+			<border>2</border>
+			<color>
+				<red type="float">0.3</red>
+				<green type="float">0.3</green>
+				<blue type="float">0.3</blue>
+				<alpha type="float">0.8</alpha>
+			</color>
+			<property>/sim/freeze/master</property>
+			<live>true</live>
+			<pref-width>47</pref-width>
+			<binding>
+				<command>property-toggle</command>
+				<property>/sim/freeze/clock</property>
+			</binding>
+			<binding>
+				<command>property-toggle</command>
+				<property>/sim/freeze/master</property>
+			</binding>
+		</button>
+
+		<button>
+			<legend>End Replay</legend>
+			<key>Esc</key>
+			<border>1</border>
+			<color>
+				<red type="float">0.3</red>
+				<green type="float">0.3</green>
+				<blue type="float">0.3</blue>
+				<alpha type="float">0.8</alpha>
+			</color>
+			<!--<pref-width>47</pref-width>-->			
+			<binding>
+				<command>property-assign</command>
+				<property>/sim/replay/disable</property>
+				<value type="bool">true</value>
+			</binding>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+
+<!-- Future features...
+		<button>
+			<legend>My controls!</legend>
+			<border>1</border>
+			<color>
+				<red>1</red>
+				<green>0.3</green>
+				<blue>0.3</blue>
+				<alpha>0.8</alpha>
+			</color>
+			<pref-width>80</pref-width>
+			<binding>
+				<command>property-assign</command>
+				<property>/sim/freeze/replay-state</property>
+				<value type="int">3</value>
+			</binding>
+			<binding>
+				<command>property-assign</command>
+				<property>/sim/replay/disable</property>
+				<value type="bool">true</value>
+			</binding>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+		<button>
+			<legend>Save</legend>
+			<border>1</border>
+			<color>
+				<red type="float">0.3</red>
+				<green type="float">0.3</green>
+				<blue type="float">0.3</blue>
+				<alpha type="float">0.8</alpha>
+			</color>
+			<pref-width>43</pref-width>
+			<binding>
+			  <command>nasal</command>
+			  <script>gui.popupTip("Not implemented yet. Comming soon.");</script>
+			</binding>
+		</button>
+		<button>
+			<legend>Load</legend>
+			<border>1</border>
+			<enable>0</enable>
+			<color>
+				<red type="float">0.3</red>
+				<green type="float">0.3</green>
+				<blue type="float">0.3</blue>
+				<alpha type="float">0.8</alpha>
+			</color>
+			<pref-width>40</pref-width>
+			<binding>
+			  <command>nasal</command>
+			  <script>gui.popupTip("Not implemented yet. Comming soon.");</script>
+			</binding>
+		</button>
+-->
+	</group>
 </PropertyList>

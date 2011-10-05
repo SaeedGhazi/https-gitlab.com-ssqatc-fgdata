@@ -168,6 +168,10 @@ top down before the key bindings are parsed.
   <binding>
    <command>replay</command>
   </binding>
+  <binding>
+	<command>dialog-show</command>
+	<dialog-name>replay</dialog-name>
+  </binding>
  </key>
 
  <key n="19">
@@ -268,8 +272,21 @@ top down before the key bindings are parsed.
   <name>ESC</name>
   <desc>Prompt and quit FlightGear</desc>
   <binding>
+    <condition>
+     <not>
+      <property>/sim/freeze/replay-state</property>
+     </not>
+    </condition>
     <command>dialog-show</command>
     <dialog-name>exit</dialog-name>
+  </binding>
+  <binding>
+    <condition>
+      <property>/sim/freeze/replay-state</property>
+    </condition>
+    <command>property-assign</command>
+    <property>/sim/replay/disable</property>
+    <value type="bool">true</value>
   </binding>
   <mod-shift>
    <desc>Reset FlightGear</desc>
@@ -1242,7 +1259,10 @@ top down before the key bindings are parsed.
   <binding>
    <command>nasal</command>
    <script>
-     controls.incAileron(-0.05, -1.0)
+     if (getprop("/sim/freeze/replay-state"))
+       controls.replaySkip(-5);
+     else
+       controls.incAileron(-0.05, -1.0)
    </script>
   </binding>
   <mod-shift>
@@ -1262,7 +1282,10 @@ top down before the key bindings are parsed.
   <binding>
    <command>nasal</command>
    <script>
-     controls.incElevator(0.05, -100)
+     if (getprop("/sim/freeze/replay-state"))
+       controls.speedup(1);
+     else
+       controls.incElevator(0.05, -100)
    </script>
   </binding>
   <mod-shift>
@@ -1282,7 +1305,10 @@ top down before the key bindings are parsed.
   <binding>
    <command>nasal</command>
    <script>
-     controls.incAileron(0.05, 1.0)
+     if (getprop("/sim/freeze/replay-state"))
+       controls.replaySkip(5);
+     else
+       controls.incAileron(0.05, 1.0)
    </script>
    <step type="double">0.05</step>
   </binding>
@@ -1303,7 +1329,10 @@ top down before the key bindings are parsed.
   <binding>
    <command>nasal</command>
    <script>
-     controls.incElevator(-0.05, 100)
+     if (getprop("/sim/freeze/replay-state"))
+       controls.speedup(-1);
+     else
+       controls.incElevator(-0.05, 100)
    </script>
   </binding>
   <mod-shift>

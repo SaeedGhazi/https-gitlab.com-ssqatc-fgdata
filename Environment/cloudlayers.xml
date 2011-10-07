@@ -35,33 +35,29 @@ ns = Nimbostratus (Rain cloud)
   <clouds>
     <cb-large>
       <min-cloud-width-m>1600</min-cloud-width-m>
-      <max-cloud-width-m>2000</max-cloud-width-m>
       <min-cloud-height-m>4000</min-cloud-height-m>
-      <max-cloud-height-m>3000</max-cloud-height-m>
       <num-sprites>10</num-sprites>
       <texture>cl_cumulus.png</texture>
       <num-textures-x>4</num-textures-x>
       <num-textures-y>4</num-textures-y>
-      <bottom-shade>0.3</bottom-shade>
+      <min-bottom-lighting-factor>0.3</min-bottom-lighting-factor>
+      <min-shade-lighting-factor>0.4</min-shade-lighting-factor>
       <min-sprite-width-m>800</min-sprite-width-m>
-      <max-sprite-width-m>1200</max-sprite-width-m>
       <min-sprite-height-m>800</min-sprite-height-m>
-      <max-sprite-height-m>1200</max-sprite-height-m>
+      <height-map-texture>true</height-map-texture>
     </cb-large>
     <cb-small>
       <min-cloud-width-m>800</min-cloud-width-m>
-      <max-cloud-width-m>400</max-cloud-width-m>
-      <min-cloud-height-m>500</min-cloud-height-m>
-      <max-cloud-height-m>200</max-cloud-height-m>
+      <min-cloud-height-m>800</min-cloud-height-m>
       <num-sprites>10</num-sprites>
       <texture>cl_cumulus.png</texture>
       <num-textures-x>4</num-textures-x>
       <num-textures-y>4</num-textures-y>
-      <bottom-shade>0.3</bottom-shade>
+      <min-bottom-lighting-factor>0.3</min-bottom-lighting-factor>
+      <min-shade-lighting-factor>0.4</min-shade-lighting-factor>
       <min-sprite-width-m>400</min-sprite-width-m>
-      <max-sprite-width-m>800</max-sprite-width-m>
       <min-sprite-height-m>400</min-sprite-height-m>
-      <max-sprite-height-m>800</max-sprite-height-m>
+      <height-map-texture>true</height-map-texture>
     </cb-small>
     <cu-large>
       <min-cloud-width-m>600</min-cloud-width-m>
@@ -69,89 +65,95 @@ ns = Nimbostratus (Rain cloud)
       <min-cloud-height-m>400</min-cloud-height-m>
       <max-cloud-height-m>800</max-cloud-height-m>
       <num-sprites>20</num-sprites>
-      <texture>cl_cumulus.png</texture>
+      <texture>cl_cumulus2.png</texture>
       <num-textures-x>4</num-textures-x>
       <num-textures-y>4</num-textures-y>
-      <bottom-shade>0.6</bottom-shade>
+      <min-bottom-lighting-factor>0.2</min-bottom-lighting-factor>
+      <min-shade-lighting-factor>0.3</min-shade-lighting-factor>
       <min-sprite-width-m>400</min-sprite-width-m>
       <max-sprite-width-m>700</max-sprite-width-m>
       <min-sprite-height-m>300</min-sprite-height-m>
       <max-sprite-height-m>700</max-sprite-height-m>
+      <height-map-texture>true</height-map-texture>
     </cu-large>
     <cu-small>
-      <min-cloud-width-m>300</min-cloud-width-m>
-      <max-cloud-width-m>800</max-cloud-width-m>
-      <min-cloud-height-m>200</min-cloud-height-m>
-      <max-cloud-height-m>300</max-cloud-height-m>
-      <num-sprites>10</num-sprites>
-      <texture>cl_cumulus.png</texture>
+      <min-cloud-width-m>600</min-cloud-width-m>
+      <max-cloud-width-m>900</max-cloud-width-m>
+      <min-cloud-height-m>400</min-cloud-height-m>
+      <max-cloud-height-m>600</max-cloud-height-m>
+      <num-sprites>20</num-sprites>
+      <texture>cl_cumulus2.png</texture>
       <num-textures-x>4</num-textures-x>
       <num-textures-y>4</num-textures-y>
-      <bottom-shade>0.7</bottom-shade>
-      <min-sprite-width-m>200</min-sprite-width-m>
+      <min-bottom-lighting-factor>0.4</min-bottom-lighting-factor>
+      <min-shade-lighting-factor>0.5</min-shade-lighting-factor>
+      <min-sprite-width-m>300</min-sprite-width-m>
       <max-sprite-width-m>400</max-sprite-width-m>
-      <min-sprite-height-m>150</min-sprite-height-m>
+      <min-sprite-height-m>200</min-sprite-height-m>
       <max-sprite-height-m>300</max-sprite-height-m>
+      <height-map-texture>true</height-map-texture>
     </cu-small>
     <ns-large>
       <min-cloud-width-m>1200</min-cloud-width-m>
       <max-cloud-width-m>3000</max-cloud-width-m>
-      <min-cloud-height-m>200</min-cloud-height-m>
-      <max-cloud-height-m>400</max-cloud-height-m>
+      <min-cloud-height-m>400</min-cloud-height-m>
+      <max-cloud-height-m>800</max-cloud-height-m>
       <num-sprites>40</num-sprites>
       <texture>cl_st.png</texture>
       <num-textures-x>1</num-textures-x>
       <num-textures-y>1</num-textures-y>
-      <bottom-shade>0.2</bottom-shade>
+      <min-bottom-lighting-factor>0.2</min-bottom-lighting-factor>
       <min-sprite-width-m>300</min-sprite-width-m>
       <max-sprite-width-m>600</max-sprite-width-m>
       <min-sprite-height-m>100</min-sprite-height-m>
       <max-sprite-height-m>200</max-sprite-height-m>
+      <height-map-texture>false</height-map-texture>
+      <z-scale>0.5</z-scale>
     </ns-large>
     <ns-white>
       <min-cloud-width-m>600</min-cloud-width-m>
       <max-cloud-width-m>2000</max-cloud-width-m>
-      <min-cloud-height-m>200</min-cloud-height-m>
-      <max-cloud-height-m>300</max-cloud-height-m>
+      <min-cloud-height-m>400</min-cloud-height-m>
+      <max-cloud-height-m>600</max-cloud-height-m>
       <num-sprites>40</num-sprites>
       <texture>cl_st.png</texture>
       <num-textures-x>1</num-textures-x>
       <num-textures-y>1</num-textures-y>
-      <bottom-shade>0.3</bottom-shade>
+      <min-bottom-lighting-factor>0.3</min-bottom-lighting-factor>
       <min-sprite-width-m>300</min-sprite-width-m>
       <max-sprite-width-m>600</max-sprite-width-m>
       <min-sprite-height-m>100</min-sprite-height-m>
       <max-sprite-height-m>200</max-sprite-height-m>
+      <height-map-texture>false</height-map-texture>
+      <z-scale>0.5</z-scale>
     </ns-white>
     <st-small>
-      <min-cloud-width-m>800</min-cloud-width-m>
-      <max-cloud-width-m>1500</max-cloud-width-m>
-      <min-cloud-height-m>100</min-cloud-height-m>
-      <max-cloud-height-m>200</max-cloud-height-m>
-      <num-sprites>40</num-sprites>
-      <texture>cl_st.png</texture>
-      <num-textures-x>1</num-textures-x>
-      <num-textures-y>1</num-textures-y>
-      <bottom-shade>0.9</bottom-shade>
-      <min-sprite-width-m>300</min-sprite-width-m>
-      <max-sprite-width-m>600</max-sprite-width-m>
-      <min-sprite-height-m>200</min-sprite-height-m>
-      <max-sprite-height-m>400</max-sprite-height-m>
-    </st-small>
-    <st-large>
-      <min-cloud-width-m>1800</min-cloud-width-m>
-      <max-cloud-width-m>2500</max-cloud-width-m>
+      <min-cloud-width-m>1000</min-cloud-width-m>
       <min-cloud-height-m>200</min-cloud-height-m>
-      <max-cloud-height-m>400</max-cloud-height-m>
       <num-sprites>40</num-sprites>
-      <texture>cl_st.png</texture>
-      <num-textures-x>1</num-textures-x>
-      <num-textures-y>1</num-textures-y>
-      <bottom-shade>0.9</bottom-shade>
+      <texture>cl_cumulus.png</texture>
+      <num-textures-x>4</num-textures-x>
+      <num-textures-y>4</num-textures-y>
+      <min-bottom-lighting-factor>0.9</min-bottom-lighting-factor>
       <min-sprite-width-m>400</min-sprite-width-m>
       <max-sprite-width-m>800</max-sprite-width-m>
-      <min-sprite-height-m>300</min-sprite-height-m>
-      <max-sprite-height-m>500</max-sprite-height-m>
+      <min-sprite-height-m>400</min-sprite-height-m>
+      <max-sprite-height-m>800</max-sprite-height-m>
+      <height-map-texture>false</height-map-texture>
+      <z-scale>0.3</z-scale>
+    </st-small>
+    <st-large>
+      <min-cloud-width-m>2000</min-cloud-width-m>
+      <min-cloud-height-m>1000</min-cloud-height-m>
+      <num-sprites>40</num-sprites>
+      <texture>cl_st.png</texture>
+      <num-textures-x>1</num-textures-x>
+      <num-textures-y>1</num-textures-y>
+      <min-bottom-lighting-factor>0.9</min-bottom-lighting-factor>
+      <min-sprite-width-m>600</min-sprite-width-m>
+      <min-sprite-height-m>600</min-sprite-height-m>
+      <height-map-texture>false</height-map-texture>
+      <z-scale>0.4</z-scale>
     </st-large>
   </clouds>
   <boxes>

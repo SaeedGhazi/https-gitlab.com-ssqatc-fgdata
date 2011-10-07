@@ -2,6 +2,8 @@
 //  http://www.bonzaisoftware.com/water_tut.html and its glsl conversion
 //  available at http://forum.bonzaisoftware.com/viewthread.php?tid=10
 //  © Michael Horsch - 2005
+//  Major update and revisions - 2011-10-07
+//  © Emilian Huminiuc and Vivian Meazza
 
 #version 120
 
@@ -9,36 +11,48 @@ varying vec4 waterTex1;
 varying vec4 waterTex2;
 varying vec4 waterTex4;
 varying vec4 ecPosition;
-uniform float osg_SimulationTime;
-uniform float WindE, WindN;
+
 varying vec3 viewerdir;
 varying vec3 lightdir;
 varying vec3 normal;
 
+uniform float osg_SimulationTime;
+uniform float WindE, WindN;
+
+/////// functions /////////
+
+void rotationmatrix(in float angle, out mat4 rotmat)
+{
+    rotmat = mat4( cos( angle ), -sin( angle ), 0.0, 0.0,
+        sin( angle ),  cos( angle ), 0.0, 0.0,
+        0.0         ,  0.0         , 1.0, 0.0,
+        0.0         ,  0.0         , 0.0, 1.0 );
+}
+
 void main(void)
 {
-vec3 N = normalize(gl_Normal);
-normal = N;
+    mat4 RotationMatrix;
+    vec3 N = normalize(gl_Normal);
+    normal = N;
 
-ecPosition = gl_ModelViewMatrix * gl_Vertex;
+    ecPosition = gl_ModelViewMatrix * gl_Vertex;
 
-viewerdir = vec3(gl_ModelViewMatrixInverse[3]) - vec3(gl_Vertex);
-lightdir = normalize(vec3(gl_ModelViewMatrixInverse * gl_LightSource[0].position));
+    viewerdir = vec3(gl_ModelViewMatrixInverse[3]) - vec3(gl_Vertex);
+    lightdir = normalize(vec3(gl_ModelViewMatrixInverse * gl_LightSource[0].position));
 
-waterTex4 = vec4( ecPosition.xzy, 0.0 );
+    waterTex4 = vec4( ecPosition.xzy, 0.0 );
 
-vec4 t1 = vec4(0.0, osg_SimulationTime * 0.005217, 0.0, 0.0);
-vec4 t2 = vec4(0.0, osg_SimulationTime * -0.0012, 0.0, 0.0);
+    vec4 t1 = vec4(0.0, osg_SimulationTime * 0.005217, 0.0, 0.0);
+    vec4 t2 = vec4(0.0, osg_SimulationTime * -0.0012, 0.0, 0.0);
 
-//float windFactor = sqrt(pow(abs(WindE),2)+pow(abs(WindN),2)) * 0.3;
-float windFactor = 0.001;
+    float windFactor = sqrt(pow(abs(WindE),2)+pow(abs(WindN),2)) * 0.01;
+    float Angle = atan(-WindN + 0.001, WindE + 0.001) - atan(1.0);
 
-waterTex1 = gl_MultiTexCoord0 + t1;
-waterTex1.x += WindE * windFactor;
-waterTex1.y += WindN * windFactor;
-waterTex2 = gl_MultiTexCoord0 + t2;
-waterTex2.x += WindE * windFactor;
-waterTex2.y += WindN * windFactor;
+    rotationmatrix(Angle, RotationMatrix);
+    waterTex1 = gl_MultiTexCoord0 * RotationMatrix - t1 * windFactor;
 
-gl_Position = ftransform();
+    rotationmatrix(Angle, RotationMatrix);
+    waterTex2 = gl_MultiTexCoord0 * RotationMatrix - t2 * windFactor;
+
+    gl_Position = ftransform();
 }

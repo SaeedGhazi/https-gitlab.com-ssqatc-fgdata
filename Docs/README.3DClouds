@@ -43,8 +43,6 @@ The cloud is defined by the following properties:
 <height-map-texture>  - whether to choose the vertical texture index based on
                         sprite height within the clouds (default false)
 <num-sprites>         - Number of sprite to generate for the cloud (default 20)
-<bottom-shade>        - Light multiplier for sprites at the bottom of the cloud
-                        (default 1.0)
 <min-sprite-width-m>  - minimum width of the sprites used to create the cloud
                         (default 200)
 <max-sprite-width-m>  - maximum width of the sprites used to create the cloud
@@ -56,7 +54,39 @@ The cloud is defined by the following properties:
 <z-scale>             - vertical scaling factor to apply to to the sprite after
                         billboarding. A small value would create a sprite that
                         looks squashed when viewed from the side. (default 1.0)
-                        
+<min-bottom-lighting-factor> - See Shading below (default 1.0)
+<max-bottom-lighting-factor> - See Shading below (default min-...-factor + 0.1)
+<min-middle-lighting-factor> - See Shading below (default 1.0)
+<max-middle-lighting-factor> - See Shading below (default min-...-factor + 0.1)
+<min-top-lighting-factor>    - See Shading below (default 1.0)
+<max-top-lighting-factor>    - See Shading below (default min-...-factor + 0.1)
+<min-shade-lighting-factor>  - See Shading below (default 0.5)
+<max-shade-lighting-factor>  - See Shading below (default min-...-factor + 0.1)
+                                                
+Shading
+-------
+
+the [min|max]-...-lighting-factor properties allow you to define diffuse lighting 
+multipliers to the bottom, middle, top, sunny and shaded parts of the cloud. In 
+each case, individual clouds will have a random multiplier between the min and 
+max values used to allow for some variation between individual clouds.
+
+The top, middle and bottom lighting factors are applied based on the pixels vertical 
+positon in the cloud. A linear interpolation is used either between top/middle (if
+the pixel is above the middle of the cloud) or middle/bottom (if the pixel is below
+the middle of the cloud). 
+
+The top factor is also applied to _all_ pixels on the sunny side of the cloud. The
+shade factor is applied based on the pixel position away from the sun, linearly
+interpolated from top to shade. E.g this is not a straight linear interpolation
+from top to shade across the entire cloud.
+
+The final lighting factor is determined by the minimum of the vertical factor and
+the sunny/shade factor. Note that this is applied to the individual pixels, not
+sprites.
+
+Textures
+--------
 
 The texture to use for the sprites is defined in the <texture> tag.
 To allow some variation, you can create a texture file containing multiple

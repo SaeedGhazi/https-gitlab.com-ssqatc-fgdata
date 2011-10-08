@@ -15,9 +15,9 @@ float wScale = usrAttr1.b;
 float hScale = usrAttr2.r;
 float shade_factor = usrAttr2.g;
 float cloud_height = usrAttr2.b;
-float bottom_factor = usrAttr3.r;
-float middle_factor = usrAttr3.g;
-float top_factor = usrAttr3.b;
+float bottom_factor = shade_factor;
+float middle_factor = 1.0;
+float top_factor = 1.0;
 
 void main(void)
 {

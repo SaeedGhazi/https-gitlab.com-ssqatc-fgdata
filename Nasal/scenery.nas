@@ -23,19 +23,41 @@ var sharedDoor = {
         obj.parents    = [sharedDoor] ~ obj.parents;
         obj.event_hash = mp_broadcast.Binary.stringHash
             (isa(node, props.Node) ? node.getPath() : node);
-        events.register(obj.event_hash, func (msg) { obj._process(msg) });
+        obj.clock      = mp_broadcast.LamportClock.new();
+        obj.loopid     = 0;
+        events.register(obj.event_hash,
+                        func (sender, msg) { obj._process(sender, msg) });
         return obj;
     },
     toggle: func {
-        events.send(me.event_hash, mp_broadcast.Binary.encodeByte(me.target));
+        # Send current time, current position and target position.
+        me.clock.advance();
         me.move(me.target);
+        me._loop(me.loopid += 1);
     },
     destroy : func {
+        me.loopid += 1;
         events.deregister(me.event_hash);
     },
-    _process : func (msg) {
-        me.target = mp_broadcast.Binary.decodeByte(msg);
-        me.move(me.target);
+    _process : func (sender, msg) {
+        if (me.clock.merge(sender, msg)) {
+            me.setpos(mp_broadcast.Binary.decodeDouble
+                      (substr(msg, mp_broadcast.Binary.sizeOf["LamportTS"])));
+            me.target = mp_broadcast.Binary.decodeByte
+                (substr(msg,
+                        mp_broadcast.Binary.sizeOf["LamportTS"] +
+                        mp_broadcast.Binary.sizeOf["double"]));
+            me.move(me.target);
+        }
+    },
+    _loop : func (id) {
+        id == me.loopid or return;
+        # Send current time, current position and target position.
+        events.send(me.event_hash,
+                    me.clock.timestamp() ~
+                    mp_broadcast.Binary.encodeDouble(me.positionN.getValue()) ~
+                    mp_broadcast.Binary.encodeByte(!me.target));
+        settimer(func { me._loop(id); }, 17, 1);
     }
 };
 

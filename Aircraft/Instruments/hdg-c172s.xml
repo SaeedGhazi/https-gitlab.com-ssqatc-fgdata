@@ -83,6 +83,12 @@ Jan 30 2003
 
   <layer>
    <name>HDG Knob</name>
+   <condition>
+    <equals>
+     <property>/sim/instrument-options/omit-knobs</property>
+     <value></value>
+    </equals>
+   </condition>
    <w>88</w>
    <h>88</h>
    <texture>

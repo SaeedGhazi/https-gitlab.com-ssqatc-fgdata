@@ -759,7 +759,8 @@
 			<label>Help  (opens in browser)</label>
 			<name>help-browser</name>
 			<binding>
-				<command>old-help-dialog</command>
+				<command>open-browser</command>
+				<path>Docs/index.html</path>
 			</binding>
 		</item>
 

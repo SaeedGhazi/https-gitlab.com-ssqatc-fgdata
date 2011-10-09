@@ -120,6 +120,8 @@ script - execute a PSL script
 
 exit - prompt and quit FlightGear
 
+pause - pause/resume the simulation
+
 load - load properties from an XML file
   file: the name of the file to load, relative to the current
     directory (defaults to "fgfs.sav")
@@ -234,6 +236,9 @@ dialog-apply - copy values from the active dialog box to FlightGear
 
 presets-commit - commit preset values from /sim/presets
 
+open-browser - open the web browser and show given file
+   path: name of the local file to be opened.
+   url: URL to be opened (http://..., ftp://...).
 
 The following commands are temporary, and will soon disappear or be
 renamed; do NOT rely on them:
@@ -279,8 +284,6 @@ old-ap-clear-dialog - clear the current route
 old-ap-adjust-dialog - adjust the autopilot settings
 
 old-lat-lon-format-dialog - toggle the lat/lon format in the HUD
-
-old-help-dialog - offer online help
 
 
 Adding New Commands in C++

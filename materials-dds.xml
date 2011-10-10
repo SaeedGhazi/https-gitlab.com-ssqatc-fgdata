@@ -1337,8 +1337,7 @@ Shared parameters for various materials.
     </condition>
     <effect>Effects/water</effect>
     <name>Lagoon</name>
-		<name>Lake</name>
-		<texture>Terrain/water-lake.png</texture>
+    <texture>Terrain/water-lake.png</texture>
     <xsize>400</xsize>
     <ysize>400</ysize>
     <ambient>
@@ -1373,6 +1372,7 @@ Shared parameters for various materials.
       </equals>
     </condition>
     <effect>Effects/water-inland</effect>
+    <name>Lake</name>
     <name>Pond</name>
     <name>Reservoir</name>
     <name>Stream</name>
@@ -4776,6 +4776,29 @@ Shared parameters for various materials.
       <a>1.0</a>
     </emissive>
   </material>
+
+  <material>
+    <name>UnidirectionalTaperRed</name>
+    <texture>Symbols/unidirectionalred.dds</texture>
+    <emissive>
+      <r>0.92157</r>
+      <g>0.92157</g>
+      <b>0.76471</b>
+      <a>1.0</a>
+    </emissive>
+  </material>
+
+  <material>
+    <name>UnidirectionalTaperGreen</name>
+    <texture>Symbols/unidirectionalgreen.dds</texture>
+    <emissive>
+      <r>0.92157</r>
+      <g>0.92157</g>
+      <b>0.76471</b>
+      <a>1.0</a>
+    </emissive>
+  </material>
+
 
   <material>
     <name>BidirectionalTaper</name>

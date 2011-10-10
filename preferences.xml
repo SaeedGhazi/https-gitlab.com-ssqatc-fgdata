@@ -785,6 +785,9 @@ Started September 2000 by David Megginson, david@megginson.com
 			<default-config type="string">/Aircraft/Generic/flightrecorder/generic-piston-propeller-4.xml</default-config>
 		</flight-recorder>
 
+		<realism>
+			<dme-fallback-to-loc type="bool">false</dme-fallback-to-loc>
+		</realism>
 	</sim>
 	<!-- mouse mode -->
 	<devices>

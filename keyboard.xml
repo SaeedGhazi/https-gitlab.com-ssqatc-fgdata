@@ -1101,7 +1101,7 @@ top down before the key bindings are parsed.
   </binding>
  </key>
 
- <key n="257">
+ <!--<key n="257">
   <name>F1</name>
   <mod-shift>
    <desc>Load flight</desc>
@@ -1119,7 +1119,7 @@ top down before the key bindings are parsed.
     <write-all>false</write-all>
    </binding>
   </mod-shift>
- </key>
+ </key>-->
 
  <key n="259">
   <name>F3</name>

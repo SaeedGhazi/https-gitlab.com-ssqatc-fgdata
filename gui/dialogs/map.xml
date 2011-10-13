@@ -16,9 +16,31 @@ command interface /autopilot/route-manager/input:
     <layout>vbox</layout>
     <resizable>true</resizable>
 
+    <color>
+        <red type="float">0.41</red>
+        <green type="float">0.4</green>
+        <blue type="float">0.42</blue>
+        <alpha type="float">1.0</alpha>
+        <alpha type="float">1.0</alpha>
+    </color>
+
     <nasal>
         <open>
-
+            var mapDialog = cmdarg();
+            var setTransparency = func(updateDialog){
+                var alpha = (getprop("/gui/map/transparent") or 0);
+                mapDialog.getNode("color/alpha").setValue(1-alpha*0.3);
+                mapDialog.getNode("color/red").setValue(0.41-alpha*0.2);
+                mapDialog.getNode("color/green").setValue(0.4-alpha*0.2);
+                mapDialog.getNode("color/blue").setValue(0.42-alpha*0.2);
+                var n = props.Node.new({ "dialog-name": "map" });
+                if (updateDialog)
+                {
+                    fgcommand("dialog-close", n);
+                    fgcommand("dialog-show", n);
+                }
+            }
+            setTransparency(0);
         </open>
 
         <close>
@@ -129,6 +151,19 @@ command interface /autopilot/route-manager/input:
                 <empty><stretch>true</stretch></empty>
 
                 <checkbox>
+                    <label>Magnetic Hdgs</label>
+                    <pref-width>100</pref-width>
+                    <property>/gui/map/magnetic-headings</property>
+                    <live>true</live>
+                    <binding>
+                      <command>dialog-apply</command>
+                    </binding>
+                    <binding>
+                      <command>property-toggle</command>
+                    </binding>
+                </checkbox>
+
+                <checkbox>
                     <label>Center on Acft</label>
                     <pref-width>100</pref-width>
                     <property>/gui/map/centre-on-aircraft</property>
@@ -155,9 +190,9 @@ command interface /autopilot/route-manager/input:
                 </checkbox>
 
                 <checkbox>
-                    <label>Magnetic Hdgs</label>
+                    <label>Transparent</label>
                     <pref-width>100</pref-width>
-                    <property>/gui/map/magnetic-headings</property>
+                    <property>/gui/map/transparent</property>
                     <live>true</live>
                     <binding>
                       <command>dialog-apply</command>
@@ -165,11 +200,16 @@ command interface /autopilot/route-manager/input:
                     <binding>
                       <command>property-toggle</command>
                     </binding>
+                    <binding>
+                        <command>nasal</command>
+                        <script>setTransparency(1);</script>
+                    </binding>
                 </checkbox>
 
                 <empty><stretch>true</stretch></empty>
 
                 <button>
+                    <name>close</name>
                     <legend>Close</legend>
                     <pref-width>100</pref-width>
                     <default>true</default>
@@ -202,18 +242,19 @@ command interface /autopilot/route-manager/input:
                     <layout>hbox</layout>
                     
                     <button>
-            			<legend>-</legend>
-            			<pref-width>22</pref-width>
-            			<pref-height>22</pref-height>
+                        <name>zoomout</name>
+                        <legend>-</legend>
+                        <pref-width>22</pref-width>
+                        <pref-height>22</pref-height>
 
-            			<binding>
-            				<command>property-adjust</command>
-            				<property>/gui/map/zoom</property>
-            				<min>0</min>
-            				<step>-1</step>
-            			</binding>
-            		</button>
-            		
+                        <binding>
+                            <command>property-adjust</command>
+                            <property>/gui/map/zoom</property>
+                            <min>0</min>
+                            <step>-1</step>
+                        </binding>
+                    </button>
+                    
                     <text>
                         <label>MMM</label>
                         <format>Zoom %d</format>
@@ -222,17 +263,18 @@ command interface /autopilot/route-manager/input:
                     </text>
                     
                     <button>
-            			<legend>+</legend>
-            			<pref-width>22</pref-width>
-            			<pref-height>22</pref-height>
+                        <name>zoomin</name>
+                        <legend>+</legend>
+                        <pref-width>22</pref-width>
+                        <pref-height>22</pref-height>
 
-            			<binding>
-            				<command>property-adjust</command>
-            				<property>/gui/map/zoom</property>
-            				<step>1</step>
-            				<max>12</max>
-            			</binding>
-            		</button>
+                        <binding>
+                            <command>property-adjust</command>
+                            <property>/gui/map/zoom</property>
+                            <step>1</step>
+                            <max>12</max>
+                        </binding>
+                    </button>
                 </group>
             </group>
             

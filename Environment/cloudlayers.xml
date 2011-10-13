@@ -34,63 +34,80 @@ ns = Nimbostratus (Rain cloud)
 <PropertyList>
   <clouds>
     <cb-large>
-      <min-cloud-width-m>1600</min-cloud-width-m>
-      <min-cloud-height-m>4000</min-cloud-height-m>
-      <num-sprites>10</num-sprites>
-      <texture>cl_cumulus.png</texture>
-      <num-textures-x>4</num-textures-x>
-      <num-textures-y>4</num-textures-y>
-      <min-bottom-lighting-factor>0.3</min-bottom-lighting-factor>
+      <min-cloud-width-m>2200</min-cloud-width-m>
+      <min-cloud-height-m>1200</min-cloud-height-m>
+      <num-sprites>3</num-sprites>
+      <texture>/Models/Weather/congestus_sheet1.rgb</texture>
+      <num-textures-x>1</num-textures-x>
+      <num-textures-y>3</num-textures-y>
+      <min-bottom-lighting-factor>0.2</min-bottom-lighting-factor>
+      <min-middle-lighting-factor>0.3</min-middle-lighting-factor>
       <min-shade-lighting-factor>0.4</min-shade-lighting-factor>
-      <min-sprite-width-m>800</min-sprite-width-m>
-      <min-sprite-height-m>800</min-sprite-height-m>
+      <min-sprite-width-m>1300</min-sprite-width-m>
+      <min-sprite-height-m>600</min-sprite-height-m>
       <height-map-texture>true</height-map-texture>
     </cb-large>
     <cb-small>
-      <min-cloud-width-m>800</min-cloud-width-m>
-      <min-cloud-height-m>800</min-cloud-height-m>
+      <min-cloud-width-m>2200</min-cloud-width-m>
+      <min-cloud-height-m>1200</min-cloud-height-m>
+      <num-sprites>3</num-sprites>
+      <texture>/Models/Weather/congestus_sheet1.rgb</texture>
+      <num-textures-x>1</num-textures-x>
+      <num-textures-y>3</num-textures-y>
+      <min-bottom-lighting-factor>0.3</min-bottom-lighting-factor>
+      <min-middle-lighting-factor>0.3</min-middle-lighting-factor>
+      <min-shade-lighting-factor>0.4</min-shade-lighting-factor>
+      <min-sprite-width-m>1300</min-sprite-width-m>
+      <min-sprite-height-m>600</min-sprite-height-m>
+      <height-map-texture>true</height-map-texture>
+    </cb-small>
+    <cu-con>
+      <min-cloud-width-m>900</min-cloud-width-m>
+      <min-cloud-height-m>500</min-cloud-height-m>
       <num-sprites>10</num-sprites>
-      <texture>cl_cumulus.png</texture>
+      <texture>/Models/Weather/cumulus_sheet1.rgb</texture>
+      <num-textures-x>3</num-textures-x>
+      <num-textures-y>3</num-textures-y>
+      <min-bottom-lighting-factor>0.3</min-bottom-lighting-factor>
+      <min-shade-lighting-factor>0.4</min-shade-lighting-factor>
+      <min-sprite-width-m>600</min-sprite-width-m>
+      <max-sprite-width-m>900</max-sprite-width-m>
+      <min-sprite-height-m>600</min-sprite-height-m>
+      <max-sprite-height-m>900</max-sprite-height-m>
+      <height-map-texture>true</height-map-texture>
+    </cu-con>
+    <cu-large>
+      <min-cloud-width-m>1300</min-cloud-width-m>
+      <min-cloud-height-m>700</min-cloud-height-m>
+      <num-sprites>10</num-sprites>
+      <texture>/Textures/Sky/cl_cumulus2.png</texture>
       <num-textures-x>4</num-textures-x>
       <num-textures-y>4</num-textures-y>
       <min-bottom-lighting-factor>0.3</min-bottom-lighting-factor>
+      <min-middle-lighting-factor>0.6</min-middle-lighting-factor>
+      <min-top-lighting-factor>1.0</min-top-lighting-factor>
       <min-shade-lighting-factor>0.4</min-shade-lighting-factor>
-      <min-sprite-width-m>400</min-sprite-width-m>
-      <min-sprite-height-m>400</min-sprite-height-m>
-      <height-map-texture>true</height-map-texture>
-    </cb-small>
-    <cu-large>
-      <min-cloud-width-m>600</min-cloud-width-m>
-      <max-cloud-width-m>1200</max-cloud-width-m>
-      <min-cloud-height-m>400</min-cloud-height-m>
-      <max-cloud-height-m>800</max-cloud-height-m>
-      <num-sprites>20</num-sprites>
-      <texture>cl_cumulus2.png</texture>
-      <num-textures-x>4</num-textures-x>
-      <num-textures-y>4</num-textures-y>
-      <min-bottom-lighting-factor>0.2</min-bottom-lighting-factor>
-      <min-shade-lighting-factor>0.3</min-shade-lighting-factor>
-      <min-sprite-width-m>400</min-sprite-width-m>
-      <max-sprite-width-m>700</max-sprite-width-m>
-      <min-sprite-height-m>300</min-sprite-height-m>
-      <max-sprite-height-m>700</max-sprite-height-m>
+      <min-sprite-width-m>600</min-sprite-width-m>
+      <max-sprite-width-m>900</max-sprite-width-m>
+      <min-sprite-height-m>600</min-sprite-height-m>
+      <max-sprite-height-m>900</max-sprite-height-m>
       <height-map-texture>true</height-map-texture>
     </cu-large>
     <cu-small>
-      <min-cloud-width-m>600</min-cloud-width-m>
-      <max-cloud-width-m>900</max-cloud-width-m>
-      <min-cloud-height-m>400</min-cloud-height-m>
-      <max-cloud-height-m>600</max-cloud-height-m>
-      <num-sprites>20</num-sprites>
-      <texture>cl_cumulus2.png</texture>
+      <min-cloud-width-m>900</min-cloud-width-m>
+      <min-cloud-height-m>500</min-cloud-height-m>
+      <num-sprites>10</num-sprites>
+      <texture>/Textures/Sky/cl_cumulus2.png</texture>
       <num-textures-x>4</num-textures-x>
       <num-textures-y>4</num-textures-y>
-      <min-bottom-lighting-factor>0.4</min-bottom-lighting-factor>
+      <min-bottom-lighting-factor>0.5</min-bottom-lighting-factor>
+      <min-middle-lighting-factor>0.7</min-middle-lighting-factor>
+      <min-top-lighting-factor>1.0</min-top-lighting-factor>
       <min-shade-lighting-factor>0.5</min-shade-lighting-factor>
-      <min-sprite-width-m>300</min-sprite-width-m>
-      <max-sprite-width-m>400</max-sprite-width-m>
-      <min-sprite-height-m>200</min-sprite-height-m>
-      <max-sprite-height-m>300</max-sprite-height-m>
+      <min-sprite-width-m>600</min-sprite-width-m>
+      <max-sprite-width-m>700</max-sprite-width-m>
+      <min-sprite-height-m>500</min-sprite-height-m>
+      <max-sprite-height-m>700</max-sprite-height-m>
       <height-map-texture>true</height-map-texture>
     </cu-small>
     <ns-large>
@@ -102,11 +119,13 @@ ns = Nimbostratus (Rain cloud)
       <texture>cl_st.png</texture>
       <num-textures-x>1</num-textures-x>
       <num-textures-y>1</num-textures-y>
+      <min-shade-lighting-factor>0.2</min-shade-lighting-factor>
+      <min-middle-lighting-factor>0.2</min-middle-lighting-factor>
       <min-bottom-lighting-factor>0.2</min-bottom-lighting-factor>
       <min-sprite-width-m>300</min-sprite-width-m>
       <max-sprite-width-m>600</max-sprite-width-m>
-      <min-sprite-height-m>100</min-sprite-height-m>
-      <max-sprite-height-m>200</max-sprite-height-m>
+      <min-sprite-height-m>300</min-sprite-height-m>
+      <max-sprite-height-m>600</max-sprite-height-m>
       <height-map-texture>false</height-map-texture>
       <z-scale>0.5</z-scale>
     </ns-large>
@@ -127,31 +146,44 @@ ns = Nimbostratus (Rain cloud)
       <height-map-texture>false</height-map-texture>
       <z-scale>0.5</z-scale>
     </ns-white>
-    <st-small>
-      <min-cloud-width-m>1000</min-cloud-width-m>
-      <min-cloud-height-m>200</min-cloud-height-m>
-      <num-sprites>40</num-sprites>
-      <texture>cl_cumulus.png</texture>
-      <num-textures-x>4</num-textures-x>
-      <num-textures-y>4</num-textures-y>
-      <min-bottom-lighting-factor>0.9</min-bottom-lighting-factor>
-      <min-sprite-width-m>400</min-sprite-width-m>
-      <max-sprite-width-m>800</max-sprite-width-m>
-      <min-sprite-height-m>400</min-sprite-height-m>
-      <max-sprite-height-m>800</max-sprite-height-m>
+    <sc>
+      <min-cloud-width-m>3500</min-cloud-width-m>
+      <min-cloud-height-m>1600</min-cloud-height-m>
+      <num-sprites>4</num-sprites>
+      <texture>/Models/Weather/congestus_sheet1.rgb</texture>
+      <num-textures-x>1</num-textures-x>
+      <num-textures-y>3</num-textures-y>
+      <min-bottom-lighting-factor>0.5</min-bottom-lighting-factor>
+      <min-sprite-width-m>1900</min-sprite-width-m>
+      <max-sprite-width-m>2100</max-sprite-width-m>
+      <min-sprite-height-m>1000</min-sprite-height-m>
+      <max-sprite-height-m>1000</max-sprite-height-m>
       <height-map-texture>false</height-map-texture>
       <z-scale>0.3</z-scale>
+    </sc>
+    <st-small>
+      <min-cloud-width-m>4000</min-cloud-width-m>
+      <min-cloud-height-m>4000</min-cloud-height-m>
+      <num-sprites>20</num-sprites>
+      <texture>/Models/Weather/stratus_sheet1.rgb</texture>
+      <num-textures-x>3</num-textures-x>
+      <num-textures-y>2</num-textures-y>
+      <min-bottom-lighting-factor>0.4</min-bottom-lighting-factor>
+      <min-sprite-width-m>1500</min-sprite-width-m>
+      <min-sprite-height-m>1500</min-sprite-height-m>
+      <height-map-texture>false</height-map-texture>
+      <z-scale>0.4</z-scale>
     </st-small>
     <st-large>
-      <min-cloud-width-m>2000</min-cloud-width-m>
-      <min-cloud-height-m>1000</min-cloud-height-m>
-      <num-sprites>40</num-sprites>
-      <texture>cl_st.png</texture>
-      <num-textures-x>1</num-textures-x>
-      <num-textures-y>1</num-textures-y>
-      <min-bottom-lighting-factor>0.9</min-bottom-lighting-factor>
-      <min-sprite-width-m>600</min-sprite-width-m>
-      <min-sprite-height-m>600</min-sprite-height-m>
+      <min-cloud-width-m>5000</min-cloud-width-m>
+      <min-cloud-height-m>5000</min-cloud-height-m>
+      <num-sprites>20</num-sprites>
+      <texture>/Models/Weather/stratus_sheet1.rgb</texture>
+      <num-textures-x>3</num-textures-x>
+      <num-textures-y>2</num-textures-y>
+      <min-bottom-lighting-factor>0.4</min-bottom-lighting-factor>
+      <min-sprite-width-m>1900</min-sprite-width-m>
+      <min-sprite-height-m>1900</min-sprite-height-m>
       <height-map-texture>false</height-map-texture>
       <z-scale>0.4</z-scale>
     </st-large>
@@ -162,7 +194,7 @@ ns = Nimbostratus (Rain cloud)
         <type>st-small</type>
         <count>5</count>
         <width>1000</width>
-        <height>200</height>
+        <height>0</height>
         <hdist>1</hdist>
         <vdist>1</vdist>
       </box>
@@ -173,7 +205,7 @@ ns = Nimbostratus (Rain cloud)
         <type>cu-small</type>
         <count>4</count>
         <width>800</width>
-        <height>200</height>
+        <height>0</height>
         <hdist>2</hdist>
         <vdist>2</vdist>
       </box>
@@ -181,18 +213,18 @@ ns = Nimbostratus (Rain cloud)
     
     <cu-con>
       <box>
-        <type>cu-large</type>
-        <count>1</count>
+        <type>cu-con</type>
+        <count>2</count>
         <width>1500</width>
-        <height>200</height>
+        <height>0</height>
         <hdist>2</hdist>
         <vdist>1</vdist>
       </box>
       <box>
         <type>cu-small</type>
-        <count>4</count>
+        <count>1</count>
         <width>1000</width>
-        <height>200</height>
+        <height>0</height>
         <hdist>1</hdist>
         <vdist>2</vdist>
       </box>
@@ -254,8 +286,8 @@ ns = Nimbostratus (Rain cloud)
     
     <sc>
       <box>
-        <type>cu-large</type>
-        <count>5</count>
+        <type>sc</type>
+        <count>1</count>
         <width>2500</width>
         <height>300</height>
       </box>

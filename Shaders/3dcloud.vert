@@ -15,9 +15,9 @@ float wScale = usrAttr1.b;
 float hScale = usrAttr2.r;
 float shade_factor = usrAttr2.g;
 float cloud_height = usrAttr2.b;
-float bottom_factor = shade_factor;
-float middle_factor = 1.0;
-float top_factor = 1.0;
+float bottom_factor = usrAttr3.r;
+float middle_factor = usrAttr3.g;
+float top_factor = usrAttr3.b;
 
 void main(void)
 {
@@ -55,15 +55,16 @@ void main(void)
   
   // Determine the shading of the vertex. We shade it based on it's position
   // in the cloud relative to the sun, and it's vertical position in the cloud.
-  float shade = mix(shade_factor, top_factor,  smoothstep(-0.3, 0.0, n));
+  float shade = mix(shade_factor, top_factor,  smoothstep(-0.3, 0.3, n));
   //if (n < 0) {
   //  shade = mix(top_factor, shade_factor, abs(n));
   //} 
   
-  float h = gl_Position.z;
-  shade = min(shade,
-              min(mix(bottom_factor, middle_factor, smoothstep(0.0, 0.5 * h, h)),
-                  mix(middle_factor, top_factor, smoothstep(0.5 * h, h, h))      ) );
+  if (gl_Position.z < 0.5 * cloud_height) {
+    shade = min(shade, mix(bottom_factor, middle_factor, gl_Position.z * 2.0 / cloud_height));
+  } else {
+    shade = min(shade, mix(middle_factor, top_factor, gl_Position.z * 2.0 / cloud_height - 1.0));
+  }
                 
   //float h = gl_Position.z / cloud_height;
   //if (h < 0.5) {
@@ -78,7 +79,7 @@ void main(void)
   gl_FrontColor = gl_LightSource[0].diffuse * shade + gl_FrontLightModelProduct.sceneColor;
 
   // As we get within 100m of the sprite, it is faded out. Equally at large distances it also fades out.
-  gl_FrontColor.a = min(smoothstep(10.0, 100.0, fogCoord), 1.0 - smoothstep(range*0.8, range, fogCoord));
+  gl_FrontColor.a = min(smoothstep(10.0, 100.0, fogCoord), 1.0 - smoothstep(range*0.9, range, fogCoord));
   gl_BackColor = gl_FrontColor;
 
   // Fog doesn't affect clouds as much as other objects.

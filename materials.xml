@@ -336,6 +336,18 @@ Shared parameters for various materials.
  </material>
 
  <material>
+  <name>pa_shoulder</name>
+  <texture>Runway/pa_shoulder.dds</texture>
+  <ysize>5</ysize>
+ </material>
+
+ <material>
+  <name>pa_shoulder_f</name>
+  <texture>Runway/pa_shoulder_f.dds</texture>
+  <ysize>5</ysize>
+ </material>
+
+ <material>
   <name>pa_threshold</name>
   <texture>Runway/pa_threshold.png</texture>
   <wrapu>false</wrapu>
@@ -598,6 +610,18 @@ Shared parameters for various materials.
   <name>pc_dspl_arrows</name>
   <texture>Runway/pc_dspl_arrows.png</texture>
   <wrapu>false</wrapu>
+ </material>
+
+ <material>
+  <name>pc_shoulder</name>
+  <texture>Runway/pc_shoulder.dds</texture>
+  <ysize>5</ysize>
+ </material>
+
+ <material>
+  <name>pc_shoulder_f</name>
+  <texture>Runway/pc_shoulder_f.dds</texture>
+  <ysize>5</ysize>
  </material>
 
  <material>

@@ -19,7 +19,6 @@
 			var popup = func gui.popupTip(call(sprintf, arg));
 			var is_helicopter = (func {(var n = props.globals.getNode("rotors", 0)) != nil and n.getAttribute("children")})();
 			var aircraft_type = getprop("/sim/type");
-			var overlay = getprop("/input/joysticks/overlay");
 
 			var load_overlay = func(name) {
 				foreach (var dir; [getprop("/sim/fg-home"), getprop("/sim/fg-root")]) {
@@ -65,8 +64,8 @@
 				load_overlay("helicopter");
 			if (aircraft_type)
 				load_overlay(aircraft_type);
-			if (overlay)
-				load_overlay(overlay);
+			foreach (var o; split(":", getprop("/input/joysticks/overlays") or ""))
+				load_overlay(o);
 			load_overlay(getprop("/sim/aircraft"));
 		</script>
 	</nasal>

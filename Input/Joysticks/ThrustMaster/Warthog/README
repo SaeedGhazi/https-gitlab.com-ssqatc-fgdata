@@ -16,9 +16,11 @@ by the contents of property "x":
   - generic.xml
   - helicopter.xml  (only helicopters)
   - </sim/type>.xml  (some aircraft set this property to "seaplane")
-  - </input/joysticks/overlay>.xml  (not used by the system; meant to
+  - </input/joysticks/overlays>.xml  (not used by the system; meant to
                be set on the command line or in wrapper scripts,
-               for example: --prop:input/joysticks/overlay=modern_jet)
+               for example: --prop:input/joysticks/overlays=modern_jet;
+               accepts a single overlay file name -- withtout extension --
+               or a list of names separated by colon ":")
   - </sim/aircraft>.xml  (aircraft name, for example "harrier.xml")
 
 
@@ -34,6 +36,15 @@ uses <number><unix> etc. Nasal blocks are properly executed in the
 namespace of the master file, so you can access all its functions
 and variables.
 
+
+
+
+Standard overlay files:
+- stick_rotate: rotates stick X/Y axis by given angle. Apparently desired
+  by some users who have the stick between their knees and want to move it
+  in a more natural fashion. Usage:
+
+  fgfs --prop:input/joysticks/overlays=stick_rotate --prop:d:input/joysticks/stick-angle=15
 
 
 

@@ -3,6 +3,7 @@
 //  available at http://forum.bonzaisoftware.com/viewthread.php?tid=10
 //  © Michael Horsch - 2005
 
+#version 120
 uniform sampler2D water_normalmap;
 uniform sampler2D water_reflection;
 uniform sampler2D water_dudvmap;
@@ -37,7 +38,7 @@ void main(void)
     const float water_shininess = 240.0;
 
     // approximate cloud cover
-    float cover = 0;
+    float cover = 0.0;
     cover = min(min(min(min(CloudCover0, CloudCover1),CloudCover2),CloudCover3),CloudCover4);
 
     vec4 viewt = normalize(waterTex4);

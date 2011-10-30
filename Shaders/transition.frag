@@ -1,7 +1,7 @@
 // -*-C++-*-
-// Texture switching based on face slope and snow level
-// default.frag (c) 2010 ??
-// (c)2011 - Emilian Huminiuc, with ideas from crop.frag, forest.frag
+// Texture switching based on face slope and snow level,with ideas from crop.frag, forest.frag
+// © 2011 - Frederic Bouvier, Emilian Huminiuc, Tim Moore, Yves Sablonier
+
 // Ambient term comes in gl_Color.rgb.
 #version 120
 varying vec4	diffuse_term, RawPos;
@@ -45,8 +45,8 @@ void main()
         NdotHV = max(dot(n, halfVector), 0.0);
         if (gl_FrontMaterial.shininess > 0.0)
             specular.rgb = (gl_FrontMaterial.specular.rgb
-                            * gl_LightSource[0].specular.rgb
-                            * pow(NdotHV, gl_FrontMaterial.shininess));
+            * gl_LightSource[0].specular.rgb
+            * pow(NdotHV, gl_FrontMaterial.shininess));
     }
 
     color.a = diffuse_term.a;
@@ -59,78 +59,78 @@ void main()
     //Select texture based on slope
     slope = normalize(normal).z;
 
-		//pull the texture fetch outside flow control to fix aliasing artefacts :(
-		vec4 baseTexel = texture2D(BaseTex, gl_TexCoord[0].st);
-		vec4 secondTexel = texture2D(SecondTex, gl_TexCoord[0].st);
-		vec4 thirdTexel = texture2D(ThirdTex, gl_TexCoord[0].st);
-		vec4 snowTexel = texture2D(SnowTex, gl_TexCoord[0].st * 2.0);
-		//Normal transition. For more abrupt faces apply another texture (or 2).
-		if (InverseSlope == 0.0) {
-			//Do we do an intermediate transition
-			if (Transitions >= 1.5) {
-				if (slope >= L1) {
-					//texel = mix(texture2D(SecondTex, gl_TexCoord[0].st), texture2D(BaseTex, gl_TexCoord[0].st), smoothstep(L1, L1 + 0.03 * MixFactor, slope));
-					texel = baseTexel;
-				}
-				if (slope >= L2  && slope < L1){
-					texel = mix(secondTexel, baseTexel, smoothstep(L2, L1 - 0.06 * MixFactor, slope));
-				}
-				if (slope < L2){
-					texel = mix(thirdTexel, secondTexel, smoothstep(L2 - 0.13 * MixFactor, L2, slope));
-				}
-				// Just one transition
-			} else 	if (Transitions < 1.5) {
-				if (slope >= L1) {
-					texel = baseTexel;
-				}
-				if (slope < L1) {
-					texel = mix(thirdTexel, baseTexel, smoothstep(L2 - 0.13 * MixFactor, L1, slope));
-				}
-			}
+    //pull the texture fetch outside flow control to fix aliasing artefacts :(
+    vec4 baseTexel = texture2D(BaseTex, gl_TexCoord[0].st);
+    vec4 secondTexel = texture2D(SecondTex, gl_TexCoord[0].st);
+    vec4 thirdTexel = texture2D(ThirdTex, gl_TexCoord[0].st);
+    vec4 snowTexel = texture2D(SnowTex, gl_TexCoord[0].st * 2.0);
+    //Normal transition. For more abrupt faces apply another texture (or 2).
+    if (InverseSlope == 0.0) {
+        //Do we do an intermediate transition
+        if (Transitions >= 1.5) {
+            if (slope >= L1) {
+                //texel = mix(texture2D(SecondTex, gl_TexCoord[0].st), texture2D(BaseTex, gl_TexCoord[0].st), smoothstep(L1, L1 + 0.03 * MixFactor, slope));
+                texel = baseTexel;
+            }
+            if (slope >= L2  && slope < L1){
+                texel = mix(secondTexel, baseTexel, smoothstep(L2, L1 - 0.06 * MixFactor, slope));
+            }
+            if (slope < L2){
+                texel = mix(thirdTexel, secondTexel, smoothstep(L2 - 0.13 * MixFactor, L2, slope));
+            }
+            // Just one transition
+        } else 	if (Transitions < 1.5) {
+            if (slope >= L1) {
+                texel = baseTexel;
+            }
+            if (slope < L1) {
+                texel = mix(thirdTexel, baseTexel, smoothstep(L2 - 0.13 * MixFactor, L1, slope));
+            }
+        }
 
-			//Invert the transition: keep original texture on abrupt slopes and switch to another on flatter terrain
-		} else  if (InverseSlope > 0.0) {
-			//Interemdiate transition ?
-			if (Transitions >= 1.5) {
-				if (slope >= L1 + 0.1) {
-					texel = thirdTexel;
-				}
-				if (slope >= L2 && slope < L1 + 0.1){
-					texel = mix(secondTexel, thirdTexel, smoothstep(L2 + 0.06 * MixFactor, L1 + 0.1, slope));
-				}
-				if (slope <= L2){
-					texel = mix(baseTexel, secondTexel, smoothstep(L2 - 0.06 * MixFactor, L2, slope));
-				}
-				//just one
-			} else if (Transitions < 1.5) {
-				if (slope > L1 + 0.1) {
-					texel = thirdTexel;
-				}
-				if (slope <= L1 + 0.1){
-					texel = mix(baseTexel, thirdTexel, smoothstep(L2 - 0.06 * MixFactor, L1 + 0.1, slope));
-				}
-			}
-		}
+        //Invert the transition: keep original texture on abrupt slopes and switch to another on flatter terrain
+    } else  if (InverseSlope > 0.0) {
+        //Interemdiate transition ?
+        if (Transitions >= 1.5) {
+            if (slope >= L1 + 0.1) {
+                texel = thirdTexel;
+            }
+            if (slope >= L2 && slope < L1 + 0.1){
+                texel = mix(secondTexel, thirdTexel, smoothstep(L2 + 0.06 * MixFactor, L1 + 0.1, slope));
+            }
+            if (slope <= L2){
+                texel = mix(baseTexel, secondTexel, smoothstep(L2 - 0.06 * MixFactor, L2, slope));
+            }
+            //just one
+        } else if (Transitions < 1.5) {
+            if (slope > L1 + 0.1) {
+                texel = thirdTexel;
+            }
+            if (slope <= L1 + 0.1){
+                texel = mix(baseTexel, thirdTexel, smoothstep(L2 - 0.06 * MixFactor, L1 + 0.1, slope));
+            }
+        }
+    }
 
-		//darken textures with wetness
-		wetness = 1.0 - 0.3 * RainNorm;
-		texel.rgb = texel.rgb * wetness;
+    //darken textures with wetness
+    wetness = 1.0 - 0.3 * RainNorm;
+    texel.rgb = texel.rgb * wetness;
 
 
 
-		//Snow texture for areas higher than SnowLevel
-		if (RawPos.z >= SnowLevel - (1000.0 * slope + 300 * MixFactor) && slope > L2 - 0.12) {
-			texel = mix(texel, mix(texel, snowTexel, smoothstep(L2 - 0.09 * MixFactor, L2, slope)), smoothstep(SnowLevel - (1000.0 * slope + 300 * MixFactor), SnowLevel - (1000 * slope - 150 * MixFactor), RawPos.z));
-		}
+    //Snow texture for areas higher than SnowLevel
+    if (RawPos.z >= SnowLevel - (1000.0 * slope + 300 * MixFactor) && slope > L2 - 0.12) {
+        texel = mix(texel, mix(texel, snowTexel, smoothstep(L2 - 0.09 * MixFactor, L2, slope)), smoothstep(SnowLevel - (1000.0 * slope + 300 * MixFactor), SnowLevel - (1000 * slope - 150 * MixFactor), RawPos.z));
+    }
 
-		fragColor = color * texel + specular;
+    fragColor = color * texel + specular;
 
-		if(cover >= 2.5){
-			fragColor.rgb = fragColor.rgb * 1.2;
-		} else {
-			fragColor.rg = fragColor.rg * (0.6 + 0.2 * cover);
-			fragColor.b = fragColor.b * (0.5 + 0.25 * cover);
-		}
+    if(cover >= 2.5){
+        fragColor.rgb = fragColor.rgb * 1.2;
+    } else {
+        fragColor.rg = fragColor.rg * (0.6 + 0.2 * cover);
+        fragColor.b = fragColor.b * (0.5 + 0.25 * cover);
+    }
 
     fogFactor = exp(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord);
     gl_FragColor = mix(gl_Fog.color, fragColor, fogFactor);

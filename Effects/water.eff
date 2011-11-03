@@ -251,10 +251,6 @@
 					<use>texture[6]/internal-format</use>
 				</internal-format>
 			</texture-unit>
-			<texture-unit>
-				<unit>9</unit>
-				<type>noise</type>
-			</texture-unit>
 			<program>
 				<vertex-shader>Shaders/water.vert</vertex-shader>
 				<fragment-shader>Shaders/water.frag</fragment-shader>
@@ -365,11 +361,6 @@
 				<value>
 					<use>wind-from</use>
 				</value>
-			</uniform>
-			<uniform>
-				<name>Noise</name>
-				<type>sampler-3d</type>
-				<value type="int">9</value>
 			</uniform>
 		</pass>
 	</technique>

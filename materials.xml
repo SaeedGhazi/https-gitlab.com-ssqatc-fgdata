@@ -165,91 +165,109 @@ Shared parameters for various materials.
 
  <material>
   <name>lf_sng_solid_yellow</name>
+  <effect>Effects/lfeat</effect>
   <texture>Runway/lf_sng_solid_yellow.png</texture>
  </material>
 
  <material>
   <name>lf_sng_broken_yellow</name>
+  <effect>Effects/lfeat</effect>
   <texture>Runway/lf_sng_broken_yellow.png</texture>
  </material>
 
  <material>
   <name>lf_dbl_solid_yellow</name>
+  <effect>Effects/lfeat</effect>
   <texture>Runway/lf_dbl_solid_yellow.png</texture>
  </material>
 
  <material>
   <name>lf_runway_hold</name>
+  <effect>Effects/lfeat</effect>
   <texture>Runway/lf_runway_hold.png</texture>
  </material>
 
  <material>
   <name>lf_sng_broken_yellow</name>
+  <effect>Effects/lfeat</effect>
   <texture>Runway/lf_sng_broken_yellow.png</texture>
  </material>
 
  <material>
   <name>lf_ils_hold</name>
+  <effect>Effects/lfeat</effect>
   <texture>Runway/lf_ils_hold.png</texture>
  </material>
 
  <material>
   <name>lf_safetyzone_centerline</name>
+  <effect>Effects/lfeat</effect>
   <texture>Runway/lf_safetyzone_centerline.png</texture>
  </material>
 
  <material>
   <name>lf_sng_lane_queue</name>
+  <effect>Effects/lfeat</effect>
   <texture>Runway/lf_sng_lane_queue.png</texture>
  </material>
 
  <material>
   <name>lf_dbl_lane_queue</name>
+  <effect>Effects/lfeat</effect>
   <texture>Runway/lf_dbl_lane_queue.png</texture>
  </material>
 
  <material>
   <name>lf_sng_solid_yellow_border</name>
+  <effect>Effects/lfeat</effect>
   <texture>Runway/lf_sng_solid_yellow_border.png</texture>
  </material>
 
  <material>
   <name>lf_sng_broken_yellow_border</name>
+  <effect>Effects/lfeat</effect>
   <texture>Runway/lf_sng_broken_yellow_borde.png</texture>
  </material>
 
  <material>
   <name>lf_dbl_solid_yellow_border</name>
+  <effect>Effects/lfeat</effect>
   <texture>Runway/lf_dbl_solid_yellow_border.png</texture>
  </material>
 
  <material>
   <name>lf_runway_hold_border</name>
+  <effect>Effects/lfeat</effect>
   <texture>Runway/lf_runway_hold_border.png</texture>
  </material>
 
  <material>
   <name>lf_other_hold_border</name>
+  <effect>Effects/lfeat</effect>
   <texture>Runway/lf_other_hold_border.png</texture>
  </material>
 
  <material>
   <name>lf_ils_hold_border</name>
+  <effect>Effects/lfeat</effect>
   <texture>Runway/lf_ils_hold_border.png</texture>
  </material>
 
  <material>
   <name>lf_safetyzone_centerline_border</name>
+  <effect>Effects/lfeat</effect>
   <texture>Runway/lf_safetyzone_centerline_border.png</texture>
  </material>
 
  <material>
   <name>lf_sng_lane_queue_border</name>
+  <effect>Effects/lfeat</effect>
   <texture>Runway/lf_sng_lane_queue_border.png</texture>
  </material>
 
  <material>
   <name>lf_dbl_lane_queue_border</name>
+  <effect>Effects/lfeat</effect>
   <texture>Runway/lf_dbl_lane_queue_border.png</texture>
  </material>
 

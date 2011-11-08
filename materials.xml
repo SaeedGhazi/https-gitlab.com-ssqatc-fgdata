@@ -226,7 +226,7 @@ Shared parameters for various materials.
  <material>
   <name>lf_sng_broken_yellow_border</name>
   <effect>Effects/lfeat</effect>
-  <texture>Runway/lf_sng_broken_yellow_borde.png</texture>
+  <texture>Runway/lf_sng_broken_yellow_border.png</texture>
  </material>
 
  <material>
@@ -245,6 +245,12 @@ Shared parameters for various materials.
   <name>lf_other_hold_border</name>
   <effect>Effects/lfeat</effect>
   <texture>Runway/lf_other_hold_border.png</texture>
+ </material>
+
+ <material>
+  <name>lf_other_hold</name>
+  <effect>Effects/lfeat</effect>
+  <texture>Runway/lf_other_hold.png</texture>
  </material>
 
  <material>
@@ -269,6 +275,24 @@ Shared parameters for various materials.
   <name>lf_dbl_lane_queue_border</name>
   <effect>Effects/lfeat</effect>
   <texture>Runway/lf_dbl_lane_queue_border.png</texture>
+ </material>
+
+ <material>
+  <name>lf_sng_solid_white</name>
+  <effect>Effects/lfeat</effect>
+  <texture>Runway/lf_sng_solid_white.png</texture>
+ </material>
+
+ <material>
+  <name>lf_checkerboard_white</name>
+  <effect>Effects/lfeat</effect>
+  <texture>Runway/lf_checkerboard_white.png</texture>
+ </material>
+
+ <material>
+  <name>lf_broken_white</name>
+  <effect>Effects/lfeat</effect>
+  <texture>Runway/lf_broken_white.png</texture>
  </material>
 
  <material>

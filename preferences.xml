@@ -1042,8 +1042,8 @@ Started September 2000 by David Megginson, david@megginson.com
 				<tumble-flag type="bool"
 										 archive="y">false</tumble-flag>
 			</config>
-			<caged type="bool"
-						 archive="y">false</caged>
+			<caged-flag type="bool"
+						 archive="y">false</caged-flag>
 			<serviceable type="bool"
 									 archive="y">true</serviceable>
 			<spin type="double"

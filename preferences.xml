@@ -748,16 +748,16 @@ Started September 2000 by David Megginson, david@megginson.com
 			<callsign type="string" preserve="y">Golf Foxtrot Sierra</callsign>
 		</user>
 
-		<timing-statistics>
+		<performance-monitor>
 			<enabled type="bool"
 							 archive="n">false</enabled>
 			<interval-s type="double"
-									archive="n">20.0</interval-s>
+									archive="n">4.0</interval-s>
 			<min-jitter-ms type="double"
 										 archive="n">0.0</min-jitter-ms>
 			<min-time-ms type="double"
 									 archive="n">100.0</min-time-ms>
-		</timing-statistics>
+		</performance-monitor>
 
 		<!-- animated jetway options -->
 		<jetways>
@@ -779,6 +779,7 @@ Started September 2000 by David Megginson, david@megginson.com
 				property browser to configure actual directory. --></scenery-dir>
 			<ext-svn-utility type="string">svn</ext-svn-utility> <!-- use absolute path if "svn"
 				 isn't on system PATH (external SVN only)-->
+			<max-errors type="int">10</max-errors> <!-- abort when too many errors occurred, or -1=don't abort -->
 		</terrasync>
 
 		<flight-recorder>
@@ -1274,6 +1275,9 @@ Started September 2000 by David Megginson, david@megginson.com
 		<jetways_edit>
 			<enabled type="bool" userarchive="n">false</enabled>
 		</jetways_edit>
+		<performance_monitor>
+			<enabled type="bool" userarchive="n">false</enabled>
+		</performance_monitor>
 	</nasal>
 
 	<scenery>

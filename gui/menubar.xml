@@ -709,10 +709,15 @@
 		</item>
 
 		<item>
-			<label>Toggle Subsystem Statistics</label>
+			<label>Monitor System Performance</label>
 			<binding>
-				<command>property-toggle</command>
-				<property>/sim/timing-statistics/enabled</property>
+				<command>property-assign</command>
+				<property>/nasal/performance_monitor/enabled</property>
+				<value>true</value>
+			</binding>
+			<binding>
+				<command>nasal</command>
+				<script>performance_monitor.dialog.show()</script>
 			</binding>
 		</item>
 

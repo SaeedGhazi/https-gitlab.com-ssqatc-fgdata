@@ -11,7 +11,6 @@
   <technique n="10">
     <predicate>
       <and>
-        <property>/sim/rendering/shader-effects</property>
         <less-equal>
           <value type="float">1.0</value>
           <shader-language/>

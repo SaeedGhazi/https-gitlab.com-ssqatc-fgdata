@@ -5,17 +5,15 @@
     <texture n ="0">
     </texture>
     <range>
-		  <use>/sim/rendering/clouds3d-vis-range</use>
+      <use>/sim/rendering/clouds3d-vis-range</use>
     </range>    
   </parameters>
   <technique n="10">
     <predicate>
-      <and>
-        <less-equal>
-          <value type="float">1.0</value>
-          <shader-language/>
-        </less-equal>
-      </and>
+      <less-equal>
+        <value type="float">1.0</value>
+        <shader-language/>
+      </less-equal>
     </predicate>
     <pass n="0">
       <!-- This is apparently not used, so maybe we'll blow it way soon. -->

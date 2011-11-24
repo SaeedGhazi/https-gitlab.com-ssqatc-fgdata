@@ -197,13 +197,14 @@
 				<halign>left</halign>
 				<label>Random vegetation</label>
 				<name>random-vegetation</name>
-				<enable>
-					<property>/sim/rendering/shader-effects</property>
-				</enable>
 				<property>/sim/rendering/random-vegetation</property>
 				<binding>
 					<command>dialog-apply</command>
 					<object-name>random-vegetation</object-name>
+				</binding>
+				<binding>
+					<command>reinit</command>
+					<subsystem>tile-manager</subsystem>
 				</binding>
 			</checkbox>
 

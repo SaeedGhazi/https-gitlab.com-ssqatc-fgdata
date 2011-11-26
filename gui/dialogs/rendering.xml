@@ -197,13 +197,14 @@
 				<halign>left</halign>
 				<label>Random vegetation</label>
 				<name>random-vegetation</name>
-				<enable>
-					<property>/sim/rendering/shader-effects</property>
-				</enable>
 				<property>/sim/rendering/random-vegetation</property>
 				<binding>
 					<command>dialog-apply</command>
 					<object-name>random-vegetation</object-name>
+				</binding>
+				<binding>
+					<command>reinit</command>
+					<subsystem>tile-manager</subsystem>
 				</binding>
 			</checkbox>
 
@@ -246,9 +247,6 @@
 				<halign>left</halign>
 				<label>3D clouds</label>
 				<name>3d-clouds</name>
-				<enable>
-					<property>/sim/rendering/shader-effects</property>
-				</enable>
 				<property>/sim/rendering/clouds3d-enable</property>
 				<binding>
 					<command>dialog-apply</command>
@@ -262,19 +260,13 @@
 				<text>
 					<label>Cloud density</label>
 					<enable>
-						<and>
-							<property>/sim/rendering/shader-effects</property>
-							<property>/sim/rendering/clouds3d-enable</property>
-						</and>
+						<property>/sim/rendering/clouds3d-enable</property>
 					</enable>
 				</text>
 				<slider>
 					<name>cloud-density</name>
 					<enable>
-						<and>
-							<property>/sim/rendering/shader-effects</property>
-							<property>/sim/rendering/clouds3d-enable</property>
-						</and>
+						<property>/sim/rendering/clouds3d-enable</property>
 					</enable>
 					<min>0</min>
 					<max>1.0</max>
@@ -294,10 +286,7 @@
 				</slider>
 				<text>
 					<enable>
-						<and>
-							<property>/sim/rendering/shader-effects</property>
-							<property>/sim/rendering/clouds3d-enable</property>
-						</and>
+						<property>/sim/rendering/clouds3d-enable</property>
 					</enable>
 					<label>12345678</label>
 					<format>%.2f</format>
@@ -312,19 +301,13 @@
 				<text>
 					<label>Cloud visibility range</label>
 					<enable>
-						<and>
-							<property>/sim/rendering/shader-effects</property>
-							<property>/sim/rendering/clouds3d-enable</property>
-						</and>
+						<property>/sim/rendering/clouds3d-enable</property>
 					</enable>
 				</text>
 				<slider>
 					<name>cloud-vis-range</name>
 					<enable>
-						<and>
-							<property>/sim/rendering/shader-effects</property>
-							<property>/sim/rendering/clouds3d-enable</property>
-						</and>
+						<property>/sim/rendering/clouds3d-enable</property>
 					</enable>
 					<min>1000.0</min>
 					<max>45000.0</max>
@@ -336,10 +319,7 @@
 				</slider>
 				<text>
 					<enable>
-						<and>
-							<property>/sim/rendering/shader-effects</property>
-							<property>/sim/rendering/clouds3d-enable</property>
-						</and>
+						<property>/sim/rendering/clouds3d-enable</property>
 					</enable>
 					<label>12345678</label>
 					<format>%.fm</format>

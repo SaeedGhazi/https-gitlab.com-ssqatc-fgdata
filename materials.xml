@@ -1065,6 +1065,7 @@ Shared parameters for various materials.
   <name>ShrubCover</name>
   <name>ShrubGrassCover</name>
   <name>ScrubCover</name>
+  <name>Scrub</name>
   <name>Sclerophyllous</name>
   <texture>Terrain/shrub1.png</texture>
 <!--
@@ -1986,6 +1987,7 @@ Shared parameters for various materials.
   <name>ShrubCover</name>
   <name>ShrubGrassCover</name>
   <name>ScrubCover</name>
+  <name>Scrub</name>
   <name>Sclerophyllous</name>
   <texture>Terrain.winter/shrub.png</texture>
   <texture>Terrain.winter/shrub2.png</texture>

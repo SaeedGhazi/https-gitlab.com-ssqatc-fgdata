@@ -21,7 +21,7 @@ Started September 2000 by David Megginson, david@megginson.com
 		<reset-on-crash type="bool">false</reset-on-crash>
 
 		<!-- Limit the time we need to spend in simulation loops to 1 second -->
-		<max-simtime-per-frame>1.0</max-simtime-per-frame>
+		<max-simtime-per-frame type="double">1.0</max-simtime-per-frame>
 
 		<session type="int"
 						 userarchive="y">0</session>
@@ -65,8 +65,8 @@ Started September 2000 by David Megginson, david@megginson.com
 		</startup>
 		<rendering>
 			<debug type="bool">false</debug>
-			<realism>5</realism>
-			<filtering>8</filtering>
+			<realism type="int">5</realism>
+			<filtering type="int">8</filtering>
 			<mie type="float"
 					 userarchive="y">0.003</mie>
 			<rayleigh type="float"
@@ -87,11 +87,11 @@ Started September 2000 by David Megginson, david@megginson.com
        CullThreadPerCameraDrawThreadPerContext
    -->
 			<static-lod>
-				<detailed userarchive="y">1500</detailed>
-				<rough userarchive="y">9000</rough>
-				<bare userarchive="y">30000</bare>
-				<ai-detailed userarchive="y">10000</ai-detailed>
-				<!-- ai-bare userarchive="y">10000</ai-bare -->
+				<detailed type="double" userarchive="y">1500</detailed>
+				<rough type="double" userarchive="y">9000</rough>
+				<bare type="double" userarchive="y">30000</bare>
+				<ai-detailed type="double" userarchive="y">10000</ai-detailed>
+				<!-- ai-bare type="double" userarchive="y">10000</ai-bare -->
 			</static-lod>
 			<random-objects type="bool"
 											userarchive="y">true</random-objects>
@@ -184,23 +184,23 @@ Started September 2000 by David Megginson, david@megginson.com
 				<enabled type="bool"
 								 userarchive="y">true</enabled>
 				<parameters>
-					<blackout-onset-g>3.5</blackout-onset-g>
-					<blackout-complete-g>5</blackout-complete-g>
-					<redout-onset-g>-2</redout-onset-g>
-					<redout-complete-g>-4</redout-complete-g>
+					<blackout-onset-g type="double">3.5</blackout-onset-g>
+					<blackout-complete-g type="double">5</blackout-complete-g>
+					<redout-onset-g type="double">-2</redout-onset-g>
+					<redout-complete-g type="double">-4</redout-complete-g>
 				</parameters>
 			</redout>
 			<headshake>
 				<enabled type="bool"
 								 userarchive="y">false</enabled>
-				<rate-m-g>0.005</rate-m-g>
+				<rate-m-g type="double">0.005</rate-m-g>
 			</headshake>
-			<crop-shader userarchive="y">0</crop-shader>
-			<landmass-shader userarchive="y">0</landmass-shader>
-			<transition-shader userarchive="y">0</transition-shader>
-			<water-shader userarchive="y">0</water-shader>
-			<urban-shader userarchive="y">0</urban-shader>
-			<contrail-shader userarchive="y">0</contrail-shader>
+			<crop-shader type="bool" userarchive="y">false</crop-shader>
+			<landmass-shader type="bool" userarchive="y">false</landmass-shader>
+			<transition-shader type="bool" userarchive="y">false</transition-shader>
+			<water-shader type="bool" userarchive="y">false</water-shader>
+			<urban-shader type="bool" userarchive="y">false</urban-shader>
+			<contrail-shader type="bool" userarchive="y">false</contrail-shader>
 			<snow-level-m type="double">2000.0</snow-level-m>
 			<quality-level type="double"
 										 userarchive="y">0.0</quality-level>
@@ -217,8 +217,8 @@ Started September 2000 by David Megginson, david@megginson.com
 		<model-hz type="int">120</model-hz>
 		<navdb>
 			<localizers>
-				<auto-align>true</auto-align>
-				<auto-align-threshold-deg>5.0</auto-align-threshold-deg>
+				<auto-align type="bool">true</auto-align>
+				<auto-align-threshold-deg type="double">5.0</auto-align-threshold-deg>
 			</localizers>
 		</navdb>
 		<sound>
@@ -356,8 +356,7 @@ Started September 2000 by David Megginson, david@megginson.com
 				</color>
 			</palette>
 		</hud>
-		<lon-lat-format type="int"
-										userarchive="y">2</lon-lat-format>
+		<lon-lat-format type="int" userarchive="y">2</lon-lat-format>
 		<systems>
 			<path>Aircraft/Generic/generic-systems.xml</path>
 			<autopilot>
@@ -638,9 +637,9 @@ Started September 2000 by David Megginson, david@megginson.com
 				<x-offset-m type="double">0</x-offset-m>
 				<y-offset-m type="double">0</y-offset-m>
 				<z-offset-m type="double">100</z-offset-m>
-				<heading-offset-deg>0</heading-offset-deg>
-				<pitch-offset-deg>0</pitch-offset-deg>
-				<roll-offset-deg>0</roll-offset-deg>
+				<heading-offset-deg type="double">0</heading-offset-deg>
+				<pitch-offset-deg type="double">0</pitch-offset-deg>
+				<roll-offset-deg type="double">0</roll-offset-deg>
 			</config>
 		</view>
 
@@ -692,12 +691,12 @@ Started September 2000 by David Megginson, david@megginson.com
 
 		<airport>
 			<runways>
-				<start-offset-m>5.0</start-offset-m>
+				<start-offset-m type="double">5.0</start-offset-m>
 				<search>
-					<length-weight>0.01</length-weight>
-					<width-weight>0.01</width-weight>
-					<surface-weight>10</surface-weight>
-					<deviation-weight>1</deviation-weight>
+					<length-weight type="double">0.01</length-weight>
+					<width-weight type="double">0.01</width-weight>
+					<surface-weight type="double">10</surface-weight>
+					<deviation-weight type="double">1</deviation-weight>
 				</search>
 			</runways>
 		</airport>
@@ -719,7 +718,7 @@ Started September 2000 by David Megginson, david@megginson.com
 			<datafile type="string"></datafile>
 			<instantaneous-action type="bool">false</instantaneous-action>
 			<dumpdata type="bool">false</dumpdata>
-			<proportion>1.0</proportion>
+			<proportion type="double">1.0</proportion>
 		</traffic-manager>
 
 		<ai>
@@ -795,7 +794,7 @@ Started September 2000 by David Megginson, david@megginson.com
 		<status>
 			<mice>
 				<mouse n="0">
-					<mode>0</mode>
+					<mode type="int">0</mode>
 				</mouse>
 			</mice>
 		</status>
@@ -852,12 +851,12 @@ Started September 2000 by David Megginson, david@megginson.com
 				<condition type="double">1.0</condition>
 				<propeller-pitch type="double">1.0</propeller-pitch>
 				<faults>
-					<serviceable>true</serviceable>
-					<left-magneto-serviceable>true</left-magneto-serviceable>
-					<right-magneto-serviceable>true</right-magneto-serviceable>
-					<spark-plugs-serviceable>true</spark-plugs-serviceable>
-					<oil-pressure-status>0</oil-pressure-status>
-					<fuel-pump-serviceable>true</fuel-pump-serviceable>
+					<serviceable type="bool">true</serviceable>
+					<left-magneto-serviceable type="bool">true</left-magneto-serviceable>
+					<right-magneto-serviceable type="bool">true</right-magneto-serviceable>
+					<spark-plugs-serviceable type="bool">true</spark-plugs-serviceable>
+					<oil-pressure-status type="bool">false</oil-pressure-status>
+					<fuel-pump-serviceable type="bool">true</fuel-pump-serviceable>
 				</faults>
 			</engine>
 			<engine n="1">
@@ -868,12 +867,12 @@ Started September 2000 by David Megginson, david@megginson.com
 				<condition type="double">1.0</condition>
 				<propeller-pitch type="double">1.0</propeller-pitch>
 				<faults>
-					<serviceable>true</serviceable>
-					<left-magneto-serviceable>true</left-magneto-serviceable>
-					<right-magneto-serviceable>true</right-magneto-serviceable>
-					<spark-plugs-serviceable>true</spark-plugs-serviceable>
-					<oil-pressure-status>0</oil-pressure-status>
-					<fuel-pump-serviceable>true</fuel-pump-serviceable>
+					<serviceable type="bool">true</serviceable>
+					<left-magneto-serviceable type="bool">true</left-magneto-serviceable>
+					<right-magneto-serviceable type="bool">true</right-magneto-serviceable>
+					<spark-plugs-serviceable type="bool">true</spark-plugs-serviceable>
+					<oil-pressure-status type="bool">false</oil-pressure-status>
+					<fuel-pump-serviceable type="bool">true</fuel-pump-serviceable>
 				</faults>
 			</engine>
 			<engine n="2">
@@ -884,12 +883,12 @@ Started September 2000 by David Megginson, david@megginson.com
 				<condition type="double">1.0</condition>
 				<propeller-pitch type="double">1.0</propeller-pitch>
 				<faults>
-					<serviceable>true</serviceable>
-					<left-magneto-serviceable>true</left-magneto-serviceable>
-					<right-magneto-serviceable>true</right-magneto-serviceable>
-					<spark-plugs-serviceable>true</spark-plugs-serviceable>
-					<oil-pressure-status>0</oil-pressure-status>
-					<fuel-pump-serviceable>true</fuel-pump-serviceable>
+					<serviceable type="bool">true</serviceable>
+					<left-magneto-serviceable type="bool">true</left-magneto-serviceable>
+					<right-magneto-serviceable type="bool">true</right-magneto-serviceable>
+					<spark-plugs-serviceable type="bool">true</spark-plugs-serviceable>
+					<oil-pressure-status type="bool">false</oil-pressure-status>
+					<fuel-pump-serviceable type="bool">true</fuel-pump-serviceable>
 				</faults>
 			</engine>
 			<engine n="3">
@@ -900,12 +899,12 @@ Started September 2000 by David Megginson, david@megginson.com
 				<condition type="double">1.0</condition>
 				<propeller-pitch type="double">1.0</propeller-pitch>
 				<faults>
-					<serviceable>true</serviceable>
-					<left-magneto-serviceable>true</left-magneto-serviceable>
-					<right-magneto-serviceable>true</right-magneto-serviceable>
-					<spark-plugs-serviceable>true</spark-plugs-serviceable>
-					<oil-pressure-status>0</oil-pressure-status>
-					<fuel-pump-serviceable>true</fuel-pump-serviceable>
+					<serviceable type="bool">true</serviceable>
+					<left-magneto-serviceable type="bool">true</left-magneto-serviceable>
+					<right-magneto-serviceable type="bool">true</right-magneto-serviceable>
+					<spark-plugs-serviceable type="bool">true</spark-plugs-serviceable>
+					<oil-pressure-status type="bool">false</oil-pressure-status>
+					<fuel-pump-serviceable type="bool">true</fuel-pump-serviceable>
 				</faults>
 			</engine>
 		</engines>
@@ -965,7 +964,7 @@ Started September 2000 by David Megginson, david@megginson.com
 				<standby-mhz type="double">118.850</standby-mhz>
 			</frequencies>
 			<volume type="double">0.6</volume>
-			<serviceable>true</serviceable>
+			<serviceable type="bool">true</serviceable>
 			<ptt type="int">0</ptt>
 		</comm>
 
@@ -975,7 +974,7 @@ Started September 2000 by David Megginson, david@megginson.com
 				<standby-mhz type="double">133.775</standby-mhz>
 			</frequencies>
 			<volume type="double">0.6</volume>
-			<serviceable>true</serviceable>
+			<serviceable type="bool">true</serviceable>
 			<ptt type="int">0</ptt>
 		</comm>
 
@@ -987,15 +986,15 @@ Started September 2000 by David Megginson, david@megginson.com
 			<radials>
 				<selected-deg type="double">280.0</selected-deg>
 			</radials>
-			<serviceable>true</serviceable>
+			<serviceable type="bool">true</serviceable>
 			<cdi>
-				<serviceable>true</serviceable>
+				<serviceable type="bool">true</serviceable>
 			</cdi>
 			<gs>
-				<serviceable>true</serviceable>
+				<serviceable type="bool">true</serviceable>
 			</gs>
 			<to-from>
-				<serviceable>true</serviceable>
+				<serviceable type="bool">true</serviceable>
 			</to-from>
 			<slaved-to-gps type="bool">false</slaved-to-gps>
 		</nav>
@@ -1008,22 +1007,22 @@ Started September 2000 by David Megginson, david@megginson.com
 			<radials>
 				<selected-deg type="double">029.0</selected-deg>
 			</radials>
-			<serviceable>true</serviceable>
+			<serviceable type="bool">true</serviceable>
 			<cdi>
-				<serviceable>true</serviceable>
+				<serviceable type="bool">true</serviceable>
 			</cdi>
 			<gs>
-				<serviceable>true</serviceable>
+				<serviceable type="bool">true</serviceable>
 			</gs>
 			<to-from>
-				<serviceable>true</serviceable>
+				<serviceable type="bool">true</serviceable>
 			</to-from>
 			<slaved-to-gps type="bool">false</slaved-to-gps>
 		</nav>
 
 		<transponder>
 			<inputs>
-				<serviceable>true</serviceable>
+				<serviceable type="bool">true</serviceable>
 			</inputs>
 		</transponder>
 
@@ -1223,7 +1222,7 @@ Started September 2000 by David Megginson, david@megginson.com
 	<logging>
 		<log n="0">
 			<enabled type="bool">false</enabled>
-			<interval-ms>1000</interval-ms>
+			<interval-ms type="long">1000</interval-ms>
 			<filename>fg_log.csv</filename>
 			<delimiter>,</delimiter>
 			<entry n="0">

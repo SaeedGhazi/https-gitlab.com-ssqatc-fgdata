@@ -107,6 +107,24 @@ EXAMPLES: You can find examples of both usages in the Hunter and Lightning model
 		<ambient_correction>0.05</ambient_correction>
 		<reflect_map>0</reflect_map>
 		<normalmap_dds>0</normalmap_dds>
+		<visibility>
+			<use>/environment/ground-visibility-m</use>
+		</visibility>
+		<avisibility>
+			<use>/environment/visibility-m</use>
+		</avisibility>
+		<lthickness>
+			<use>/environment/ground-haze-thickness-m</use>
+		</lthickness>
+		<scattering>
+			<use>/rendering/scene/scattering</use>
+		</scattering>
+		<terminator>
+			<use>/environment/terminator-relative-position-m</use>
+		</terminator>
+		<fogtype>
+			<use>/sim/rendering/scattering-shader</use>
+		</fogtype>
 	</parameters>
 
 	<generate>
@@ -296,7 +314,9 @@ EXAMPLES: You can find examples of both usages in the Hunter and Lightning model
 
 
 			<program>
+				<vertex-shader>Shaders/include_fog.vert</vertex-shader>
 				<vertex-shader>Shaders/reflect-bump-spec.vert</vertex-shader>
+				<fragment-shader>Shaders/include_fog.frag</fragment-shader>
 				<fragment-shader>Shaders/reflect-bump-spec.frag</fragment-shader>
 				<attribute>
 					<name>tangent</name>
@@ -415,6 +435,48 @@ EXAMPLES: You can find examples of both usages in the Hunter and Lightning model
 				</value>
 			</uniform>
 
+			<uniform>
+				<name>visibility</name>
+				<type>float</type>
+				<value>
+					<use>visibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>avisibility</name>
+				<type>float</type>
+				<value>
+					<use>avisibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>hazeLayerAltitude</name>
+				<type>float</type>
+				<value>
+					<use>lthickness</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>scattering</name>
+				<type>float</type>
+				<value>
+					<use>scattering</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>terminator</name>
+				<type>float</type>
+				<value>
+					<use>terminator</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>fogType</name>
+				<type>int</type>
+				<value>
+					<use>fogtype</use>
+				</value>
+			</uniform>
 		</pass>
 	</technique>
 </PropertyList>

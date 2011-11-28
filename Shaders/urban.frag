@@ -33,6 +33,12 @@ int linear_search_steps = 10;
 int GlobalIterationCount = 0;
 int gIterationCap = 64;
 
+////fog "include" /////
+uniform int fogType;
+
+vec3 fog_Func(vec3 color, int type);
+//////////////////////
+
 void QDM(inout vec3 p, inout vec3 v)
 {
 	const int MAX_LEVEL = TEXTURE_MIP_LEVELS;
@@ -43,9 +49,9 @@ void QDM(inout vec3 p, inout vec3 v)
 
 	vec3 p2 = p;
 	float level = MAX_LEVEL;
-    vec2 dirSign = (sign(v.xy) + 1.0) * 0.5;
-    GlobalIterationCount = 0;
-    float d = 0.0;
+	vec2 dirSign = (sign(v.xy) + 1.0) * 0.5;
+	GlobalIterationCount = 0;
+	float d = 0.0;
 
 	while (level >= 0.0 && GlobalIterationCount < gIterationCap)
 	{
@@ -77,8 +83,8 @@ void QDM(inout vec3 p, inout vec3 v)
 				level++;
 
 				//use additional convergence speed-up
-	            #ifdef USE_QDM_ASCEND_INTERVAL
-			    if(frac(level*0.5) > EPSILON)
+				#ifdef USE_QDM_ASCEND_INTERVAL
+				if(frac(level*0.5) > EPSILON)
 				  level++;
 				#elseif USE_QDM_ASCEND_CONST
 				 level++;
@@ -113,10 +119,10 @@ void QDM(inout vec3 p, inout vec3 v)
 
 float ray_intersect_QDM(vec2 dp, vec2 ds)
 {
-    vec3 p = vec3( dp, 0.0 );
-    vec3 v = vec3( ds, 1.0 );
-    QDM( p, v );
-    return p.z;
+	vec3 p = vec3( dp, 0.0 );
+	vec3 v = vec3( ds, 1.0 );
+	QDM( p, v );
+	return p.z;
 }
 
 float ray_intersect_relief(vec2 dp, vec2 ds)
@@ -154,10 +160,10 @@ float ray_intersect_relief(vec2 dp, vec2 ds)
 
 float ray_intersect(vec2 dp, vec2 ds)
 {
-    if ( quality_level >= 4.0 )
-        return ray_intersect_QDM( dp, ds );
-    else
-        return ray_intersect_relief( dp, ds );
+	if ( quality_level >= 4.0 )
+		return ray_intersect_QDM( dp, ds );
+	else
+		return ray_intersect_relief( dp, ds );
 }
 
 void main (void)
@@ -206,12 +212,6 @@ void main (void)
 	emission_factor *= 0.5*pow(tc.r+0.8*tc.g+0.2*tc.b, 2.0) -0.2;
 	ambient_light += (emission_factor * vec4(night_color, 0.0));
 
-	float fogFactor;
-	float fogCoord = ecPos3.z / (1.0 + smoothstep(0.3, 0.7, emission_factor));
-	const float LOG2 = 1.442695;
-	fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
-	fogFactor = clamp(fogFactor, 0.0, 1.0);
-
 	vec4 noisevec   = texture3D(NoiseTex, (rawpos.xyz)*0.01*scale);
 	vec4 nvL   = texture3D(NoiseTex, (rawpos.xyz)*0.00066*scale);
 
@@ -225,19 +225,19 @@ void main (void)
 
 	n += noisevec[2]*0.8;
 	n += noisevec[3]*2.1;
-	n = mix(0.6, n, fogFactor);
+	n = mix(0.6, n, length(ecPosition.xyz) );
 
 	vec4 finalColor = texture2D(BaseTex, uv);
 	finalColor = mix(finalColor, clamp(n+nvL[2]*4.1+vec4(0.1, 0.1, nvL[2]*2.2, 1.0), 0.7, 1.0),
 			step(0.8,Nz)*(1.0-emis)*smoothstep(snowlevel+300.0, snowlevel+360.0, (rawpos.z)+nvL[1]*3000.0));
 	finalColor *= ambient_light;
 
-	if (gl_Fog.density == 1.0)
-		fogFactor=1.0;
-
 	vec4 p = vec4( ecPos3 + tile_size * V * (d-1.0) * depth_factor / s.z, 1.0 );
 	vec4 iproj = gl_ProjectionMatrix * p;
 	iproj /= iproj.w;
-	gl_FragColor = mix(gl_Fog.color ,finalColor, fogFactor);
+
+	finalColor.rgb = fog_Func(finalColor.rgb, fogType);
+	gl_FragColor = finalColor;
+
 	gl_FragDepth = (iproj.z+1.0)/2.0;
 }

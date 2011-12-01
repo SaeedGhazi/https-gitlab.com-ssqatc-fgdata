@@ -215,7 +215,7 @@ void main(void)
 
         finalColor *= ambient_light;
 
-        gl_FragColor = mix(gl_Fog.color, finalColor, fogFactor);
-        //finalColor.rgb = fog_Func(finalColor.rgb, fogType);
-       //gl_FragColor = finalColor;
+        //gl_FragColor = mix(gl_Fog.color, finalColor, fogFactor);
+        finalColor.rgb = fog_Func(finalColor.rgb, fogType);
+        gl_FragColor = finalColor;
     }

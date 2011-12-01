@@ -15,7 +15,7 @@ attribute vec3 tangent, binormal;
 ////fog "include"////////
 uniform int fogType;
 
-void fog_func(int type);
+void fog_Func(int type);
 /////////////////////////
 
 void main(void)
@@ -31,5 +31,5 @@ void main(void)
         + gl_Color * (gl_LightModel.ambient + gl_LightSource[0].ambient);  
     gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
-    fog_func(fogType);
+    fog_Func(fogType);
 }

@@ -59,7 +59,7 @@ in Aircraft/A320/Models/Effects/a320_bumpspec.eff ( or whatever, private to the 
         <filter><use>texture[0]/filter</use></filter>
         <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
         <wrap-t><use>texture[0]/wrap-t</use></wrap-t>
-        <internal-format><use>texture[1]/internal-format</use></internal-format>
+        <internal-format><use>texture[0]/internal-format</use></internal-format>
       </texture-unit>
       <texture-unit>
         <unit>1</unit>
@@ -70,8 +70,8 @@ in Aircraft/A320/Models/Effects/a320_bumpspec.eff ( or whatever, private to the 
         <internal-format><use>texture[2]/internal-format</use></internal-format>
       </texture-unit>
       <program>
-        <vertex-shader n="0">Shaders/bumpspec.vert</vertex-shader>
-        <fragment-shader n="0">Shaders/bumpspec.frag</fragment-shader>
+        <vertex-shader n="1">Shaders/bumpspec.vert</vertex-shader>
+        <fragment-shader n="1">Shaders/bumpspec.frag</fragment-shader>
         <attribute>
           <name>tangent</name>
           <index>6</index>

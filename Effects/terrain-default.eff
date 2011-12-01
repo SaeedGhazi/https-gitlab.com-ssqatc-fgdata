@@ -35,6 +35,24 @@
       <bin-number>0</bin-number>
       <bin-name>RenderBin</bin-name>
     </render-bin>
+		<visibility>
+			<use>/environment/ground-visibility-m</use>
+		</visibility>
+		<avisibility>
+			<use>/environment/visibility-m</use>
+		</avisibility>
+		<lthickness>
+			<use>/environment/ground-haze-thickness-m</use>
+		</lthickness>
+		<scattering>
+			<use>/rendering/scene/scattering</use>
+		</scattering>
+		<terminator>
+			<use>/environment/terminator-relative-position-m</use>
+		</terminator>
+		<fogtype>
+			<use>/sim/rendering/scattering-shader</use>
+		</fogtype>
   </parameters>
   <!-- put techniques at a "high" index to allow derived effects to
        insert their own techniques first. -->
@@ -85,6 +103,7 @@
           </internal-format>
       </texture-unit>
       <program>
+				<vertex-shader>Shaders/include_fog.vert</vertex-shader>
         <vertex-shader>Shaders/default.vert</vertex-shader>
         <fragment-shader>Shaders/terrain-nocolor.frag</fragment-shader>
       </program>
@@ -124,9 +143,53 @@
           </internal-format>
       </texture-unit>
       <program>
+				<vertex-shader>Shaders/include_fog.vert</vertex-shader>
         <vertex-shader>Shaders/default.vert</vertex-shader>
         <fragment-shader>Shaders/default.frag</fragment-shader>
+				<fragment-shader>Shaders/include_fog.frag</fragment-shader>
       </program>
+			<uniform>
+				<name>visibility</name>
+				<type>float</type>
+				<value>
+					<use>visibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>avisibility</name>
+				<type>float</type>
+				<value>
+					<use>avisibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>hazeLayerAltitude</name>
+				<type>float</type>
+				<value>
+					<use>lthickness</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>scattering</name>
+				<type>float</type>
+				<value>
+					<use>scattering</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>terminator</name>
+				<type>float</type>
+				<value>
+					<use>terminator</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>fogType</name>
+				<type>int</type>
+				<value>
+					<use>fogtype</use>
+        </value>
+      </uniform>
       <uniform>
         <name>texture</name>
         <type>sampler-2d</type>

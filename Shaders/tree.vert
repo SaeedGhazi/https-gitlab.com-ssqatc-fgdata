@@ -3,8 +3,15 @@
 // normal - x y scaling, z number of varieties
 // fog coord - rotation
 // color - xyz of tree quad origin, replicated 4 times.
+#version 120
+//varying float fogCoord;
+varying vec3 PointPos;
+//varying vec4 EyePos;
+////fog "include"////////
+uniform int fogType;
 
-varying float fogFactor;
+void fog_Func(int type);
+/////////////////////////
 
 void main(void)
 {
@@ -30,7 +37,10 @@ void main(void)
   vec4 ambientColor = gl_FrontLightModelProduct.sceneColor + gl_LightSource[0].ambient * gl_FrontMaterial.ambient;
   gl_FrontColor = ambientColor + gl_LightSource[0].diffuse * vec4(diffuse, 1.0);
 
-  float fogCoord = abs(ecPosition.z);
-  fogFactor = exp( -gl_Fog.density * gl_Fog.density * fogCoord * fogCoord);
-  fogFactor = clamp(fogFactor, 0.0, 1.0);
+  //fogCoord = abs(ecPosition.z);
+  //fogFactor = exp( -gl_Fog.density * gl_Fog.density * fogCoord * fogCoord);
+  //fogFactor = clamp(fogFactor, 0.0, 1.0);
+//	fog_Func(fogType);
+	PointPos = ecPosition;
+	//EyePos = gl_ModelViewMatrixInverse * vec4(0.0,0.0,0.0,1.0);
 }

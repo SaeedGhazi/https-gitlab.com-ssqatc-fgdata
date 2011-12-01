@@ -19,6 +19,12 @@ varying vec3 normal;
 uniform float osg_SimulationTime;
 uniform float WindE, WindN;
 
+////fog "include"////////
+uniform int fogType;
+
+void fog_Func(int type);
+/////////////////////////
+
 /////// functions /////////
 
 void rotationmatrix(in float angle, out mat4 rotmat)
@@ -45,8 +51,14 @@ void main(void)
     vec4 t1 = vec4(0.0, osg_SimulationTime * 0.005217, 0.0, 0.0);
     vec4 t2 = vec4(0.0, osg_SimulationTime * -0.0012, 0.0, 0.0);
 
-    float windFactor = sqrt(pow(abs(WindE),2)+pow(abs(WindN),2)) * 0.01;
-    float Angle = atan(-WindN + 0.001, WindE + 0.001) - atan(1.0);
+    float Angle;
+
+    float windFactor = sqrt(pow(abs(WindE),2)+pow(abs(WindN),2)) * 0.05;
+    if (WindN == 0.0 && WindE == 0.0) {
+        Angle = 0.0;
+    }else{
+        Angle = atan(-WindN, WindE) - atan(1.0);
+    }
 
     rotationmatrix(Angle, RotationMatrix);
     waterTex1 = gl_MultiTexCoord0 * RotationMatrix - t1 * windFactor;
@@ -54,5 +66,6 @@ void main(void)
     rotationmatrix(Angle, RotationMatrix);
     waterTex2 = gl_MultiTexCoord0 * RotationMatrix - t2 * windFactor;
 
+    fog_Func(fogType);
     gl_Position = ftransform();
 }

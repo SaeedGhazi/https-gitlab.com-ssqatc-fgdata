@@ -67,6 +67,24 @@ Started September 2000 by David Megginson, david@megginson.com
 			<debug type="bool">false</debug>
 			<realism type="int">5</realism>
 			<filtering type="int">8</filtering>
+			<shaders>
+				<model type="float"
+							 userarchive="y">1.0</model>
+				<crop type="float"
+							userarchive="y">1.0</crop>
+				<landmass type="float"
+									userarchive="y">1.0</landmass>
+				<contrails type="float"
+									 userarchive="y">1.0</contrails>
+				<transition type="float"
+										userarchive="y">1.0</transition>
+				<urban type="float"
+							 userarchive="y">1.0</urban>
+				<water type="float"
+							 userarchive="y">1.0</water>
+				<quality-level type="float"
+											 userarchive="y">3.0</quality-level>
+			</shaders>
 			<mie type="float"
 					 userarchive="y">0.003</mie>
 			<rayleigh type="float"

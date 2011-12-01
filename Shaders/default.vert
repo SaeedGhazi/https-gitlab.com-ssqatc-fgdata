@@ -7,7 +7,7 @@
 //
 // Diffuse colors come from the gl_Color, ambient from the material. This is
 // equivalent to osg::Material::DIFFUSE.
-
+#version 120
 #define MODE_OFF 0
 #define MODE_DIFFUSE 1
 #define MODE_AMBIENT_AND_DIFFUSE 2
@@ -18,12 +18,17 @@
 // bugs with gl_FrontFacing in the fragment shader.
 varying vec4 diffuse_term;
 varying vec3 normal;
-varying float fogCoord;
+
 uniform int colorMode;
+
+////fog "include"////////
+uniform int fogType;
+
+void fog_Func(int type);
+/////////////////////////
 
 void main()
 {
-    vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
     gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
     normal = gl_NormalMatrix * gl_Normal;
@@ -51,5 +56,6 @@ void main()
     // gl_FrontFacing in the fragment shader.
     gl_FrontColor.rgb = constant_term.rgb;  gl_FrontColor.a = 1.0;
     gl_BackColor.rgb = constant_term.rgb; gl_BackColor.a = 0.0;
-    fogCoord = abs(ecPosition.z / ecPosition.w);
+    //fogCoord = abs(ecPosition.z / ecPosition.w);
+		fog_Func(fogType);
 }

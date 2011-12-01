@@ -352,7 +352,7 @@
 					<name>quality-level</name>
 					<min>0.0</min>
 					<max>5.0</max>
-					<step>0.5</step>
+					<step>1.0</step>
 					<property>/sim/rendering/shaders/quality-level</property>
 					<binding>
 						<command>dialog-apply</command>
@@ -364,7 +364,7 @@
 				</text>
 				<text>
 					<label>12345678</label>
-					<format>(%.1f)</format>
+					<format>(%1.0f)</format>
 					<live>true</live>
 					<property>/sim/rendering/shaders/quality-level</property>
 				</text>

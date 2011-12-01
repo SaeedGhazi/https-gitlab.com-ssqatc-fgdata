@@ -31,7 +31,7 @@
 			</binding>
 		</button>
 	</group>
-	
+
 	<hrule/>
 
 	<group>
@@ -51,7 +51,7 @@
 		<group>
 			<layout>vbox</layout>
 			<halign>left</halign>
-			
+
 			<text>
 				<halign>left</halign>
 				<label>Crop</label>
@@ -67,7 +67,7 @@
 					<property>/sim/rendering/shaders/landmass</property>
 				</enable>
 			</text>
-			
+
 			<text>
 				<halign>left</halign>
 				<label>Persistent contrails</label>
@@ -86,6 +86,14 @@
 			
 			<text>
 				<halign>left</halign>
+				<label>Model</label>
+				<enable>
+					<property>/sim/rendering/shaders/model</property>
+				</enable>
+			</text>
+
+			<text>
+				<halign>left</halign>
 				<label>Urban</label>
 				<enable>
 					<property>/sim/rendering/shaders/urban</property>
@@ -99,11 +107,13 @@
 					<property>/sim/rendering/shaders/water</property>
 				</enable>
 			</text>
+
+
 		</group>
-		
+
 		<group>
 			<layout>vbox</layout>
-			
+
 			<slider>
 				<name>crop</name>
 				<min>0.0</min>
@@ -116,7 +126,7 @@
 					<object-name>crop</object-name>
 				</binding>
 			</slider>
-			
+
 			<slider>
 				<name>landmass</name>
 				<min>0.0</min>
@@ -129,7 +139,7 @@
 					<object-name>landmass</object-name>
 				</binding>
 			</slider>
-			
+
 			<slider>
 				<name>contrails</name>
 				<min>0.0</min>
@@ -142,7 +152,7 @@
 					<object-name>contrails</object-name>
 				</binding>
 			</slider>
-			
+
 			<slider>
 				<name>transition</name>
 				<min>0.0</min>
@@ -155,34 +165,48 @@
 					<object-name>transition</object-name>
 				</binding>
 			</slider>
-			
+
+			<slider>
+				<name>model</name>
+				<min>0.0</min>
+				<max>1.0</max>
+				<step>1.0</step>
+				<fraction>0.5</fraction>
+				<property>/sim/rendering/shaders/model</property>
+				<binding>
+					<command>dialog-apply</command>
+					<object-name>model</object-name>
+				</binding>
+			</slider>
+
 			<slider>
 				<name>urban</name>
 				<min>0.0</min>
 				<max>5.0</max>
-				<step>0.5</step>
+				<step>1.0</step>
 				<property>/sim/rendering/shaders/urban</property>
 				<binding>
 					<command>dialog-apply</command>
 					<object-name>urban</object-name>
 				</binding>
 			</slider>
-			
+
 			<slider>
 				<name>water</name>
 				<min>0.0</min>
 				<max>5.0</max>
-				<step>0.5</step>
+				<step>1.0</step>
 				<property>/sim/rendering/shaders/water</property>
 				<binding>
 					<command>dialog-apply</command>
 					<object-name>water</object-name>
 				</binding>
 			</slider>
+
 		</group>
-		
+
 	</group>
-	
+
 	<group>
 		<layout>hbox</layout>
 		<text>
@@ -193,51 +217,51 @@
 			<stretch>true</stretch>
 		</hrule>
 	</group>
-	
+
 	<nasal>
 		<open>
 			if (props.globals.getNode("/sim/rendering/shaders/aircraft") != nil) {
-				var group = cmdarg().getChildren("group")[4];
-				group.removeChildren("slider");
-				group.removeChildren("hrule");
-				group.removeChildren("text");
-				var shaders = props.globals.getNode("/sim/rendering/shaders/aircraft").getChildren();
-				for(i=0; size(shaders) > i; i+=1) {
-					
-					var fraction 	= 0.5;
-					var min 		= 0;
-					var max 		= 1;
-					var step 		= 1;
-					
-					var name 	= shaders[i].getNode("name");
-					
-					if (shaders[i].getNode("step") != nil){
-						step	= shaders[i].getNode("step");
-					}
-					if (shaders[i].getNode("min") != nil){
-						min 	= shaders[i].getNode("min");
-					}
-					if (shaders[i].getNode("max") != nil){
-						max 	= shaders[i].getNode("max");
-					}
-					
-					if (min != nil and max != nil and step != nil){
-						fraction = step/(max+step);				
-					}
-					
-					var target = group.getChild("slider", i, 1);
-					props.copy(group.getNode("slider-template"), target);
-					target.getNode("label").setValue(name != nil ? name.getValue() : (shaders[i].getName()));
-					target.getNode("name").setValue("aircraftshader"~i);
-					target.getNode("binding").getNode("object-name").setValue("aircraftshader"~i);
-					target.getNode("min").setValue(min);
-					target.getNode("max").setValue(max);
-					target.getNode("step").setValue(step);
-					target.getNode("fraction").setValue(fraction);
-					target.getNode("property").setValue(shaders[i].getPath()~"/quality-level");
-				}
+			var group = cmdarg().getChildren("group")[4];
+			group.removeChildren("slider");
+			group.removeChildren("hrule");
+			group.removeChildren("text");
+			var shaders = props.globals.getNode("/sim/rendering/shaders/aircraft").getChildren();
+			for(i=0; size(shaders) > i; i+=1) {
+
+			var fraction 	= 0.5;
+			var min 		= 0;
+			var max 		= 1;
+			var step 		= 1;
+
+			var name 	= shaders[i].getNode("name");
+
+			if (shaders[i].getNode("step") != nil){
+			step	= shaders[i].getNode("step");
 			}
-			
+			if (shaders[i].getNode("min") != nil){
+			min 	= shaders[i].getNode("min");
+			}
+			if (shaders[i].getNode("max") != nil){
+			max 	= shaders[i].getNode("max");
+			}
+
+			if (min != nil and max != nil and step != nil){
+			fraction = step/(max+step);
+			}
+
+			var target = group.getChild("slider", i, 1);
+			props.copy(group.getNode("slider-template"), target);
+			target.getNode("label").setValue(name != nil ? name.getValue() : (shaders[i].getName()));
+			target.getNode("name").setValue("aircraftshader"~i);
+			target.getNode("binding").getNode("object-name").setValue("aircraftshader"~i);
+			target.getNode("min").setValue(min);
+			target.getNode("max").setValue(max);
+			target.getNode("step").setValue(step);
+			target.getNode("fraction").setValue(fraction);
+			target.getNode("property").setValue(shaders[i].getPath()~"/quality-level");
+			}
+			}
+
 		</open>
 	</nasal>
 
@@ -246,20 +270,36 @@
 		<halign>left</halign>
 
 		<slider-template>
-			<name><!----></name>
-			<label><!----></label>
-			<min><!----></min>
-			<max><!----></max>
-			<step><!----></step>
-			<fraction><!----></fraction>
-			<property><!----></property>
+			<name>
+				<!---->
+			</name>
+			<label>
+				<!---->
+			</label>
+			<min>
+				<!---->
+			</min>
+			<max>
+				<!---->
+			</max>
+			<step>
+				<!---->
+			</step>
+			<fraction>
+				<!---->
+			</fraction>
+			<property>
+				<!---->
+			</property>
 			<binding>
 				<command>dialog-apply</command>
-				<object-name><!----></object-name>
+				<object-name>
+					<!---->
+				</object-name>
 			</binding>
 		</slider-template>
 	</group>
-	
+
 	<hrule/>
 
 	<button>
@@ -270,5 +310,5 @@
 			<command>dialog-close</command>
 		</binding>
 	</button>
-	
+
 </PropertyList>

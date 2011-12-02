@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
-	<name>Effects/water-inland</name>
+	<name>Effects/water</name>
 	<inherits-from>Effects/terrain-default</inherits-from>
 	<parameters>
 		<texture n="0">
@@ -49,6 +49,26 @@
 		<cloud-cover4>
 			<use>/environment/clouds/layer[4]/coverage-type</use>
 		</cloud-cover4>
+		<!-- 	fog include -->
+		<visibility>
+			<use>/environment/ground-visibility-m</use>
+		</visibility>
+		<avisibility>
+			<use>/environment/visibility-m</use>
+		</avisibility>
+		<lthickness>
+			<use>/environment/ground-haze-thickness-m</use>
+		</lthickness>
+		<scattering>
+			<use>/rendering/scene/scattering</use>
+		</scattering>
+		<terminator>
+			<use>/environment/terminator-relative-position-m</use>
+		</terminator>
+		<fogtype>
+			<use>/sim/rendering/scattering-shader</use>
+		</fogtype>
+		<!-- 	END fog include -->
 	</parameters>
 	<technique n="8">
 		<predicate>
@@ -176,6 +196,7 @@
 				</internal-format>
 			</texture-unit>
 			<program>
+				<vertex-shader>Shaders/include_fog.vert</vertex-shader>
 				<vertex-shader>Shaders/water.vert</vertex-shader>
 				<fragment-shader>Shaders/water-inland.frag</fragment-shader>
 			</program>
@@ -240,6 +261,50 @@
 					<use>cloud-cover4</use>
 				</value>
 			</uniform>
+			<!-- 	    BEGIN fog include -->
+			<uniform>
+				<name>visibility</name>
+				<type>float</type>
+				<value>
+					<use>visibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>avisibility</name>
+				<type>float</type>
+				<value>
+					<use>avisibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>hazeLayerAltitude</name>
+				<type>float</type>
+				<value>
+					<use>lthickness</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>scattering</name>
+				<type>float</type>
+				<value>
+					<use>scattering</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>terminator</name>
+				<type>float</type>
+				<value>
+					<use>terminator</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>fogType</name>
+				<type>int</type>
+				<value>
+					<use>fogtype</use>
+				</value>
+			</uniform>
+			<!-- 			END fog include -->
 		</pass>
 	</technique>
 	<technique n="9">

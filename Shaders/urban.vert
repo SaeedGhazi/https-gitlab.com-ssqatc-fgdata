@@ -12,6 +12,12 @@ varying vec4  constantColor;
 
 attribute vec3 tangent, binormal;
 
+////fog "include"////////
+uniform int fogType;
+
+void fog_Func(int type);
+/////////////////////////
+
 void main(void)
 {
     rawpos     = gl_Vertex;
@@ -25,4 +31,5 @@ void main(void)
         + gl_Color * (gl_LightModel.ambient + gl_LightSource[0].ambient);  
     gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
+    fog_Func(fogType);
 }

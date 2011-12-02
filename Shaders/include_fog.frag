@@ -1,4 +1,4 @@
-//#define FOG_FUNCTION
+//#define fog_FuncTION
 //default fog
 //varying float fogCoord;
 varying vec3 PointPos;

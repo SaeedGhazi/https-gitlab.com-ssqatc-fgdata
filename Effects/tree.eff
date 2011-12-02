@@ -12,87 +12,205 @@
 
      Note: no sorting needed! -->
 <PropertyList>
-  <name>Effects/tree</name>
-  <parameters>
-    <texture n ="0">
-    </texture>
-  </parameters>
-  <technique n="10">
-    <predicate>
-      <and>
-	<property>/sim/rendering/random-vegetation</property>
-        <less-equal>
-          <value type="float">1.0</value>
-          <shader-language/>
-        </less-equal>
-      </and>
-    </predicate>
-    <pass n="0">
-      <lighting>true</lighting>
-      <material>
-        <ambient type="vec4d">1.0 1.0 1.0 1.0</ambient>
-        <diffuse type="vec4d">1.0 1.0 1.0 1.0</diffuse>
-        <color-mode>off</color-mode>
-      </material>
-      <alpha-test>
-        <comparison>gequal</comparison>
-        <reference type="float">0.33</reference>
-      </alpha-test>
-      <texture-unit>
-        <unit>0</unit>
-        <type>2d</type>
-        <image><use>texture[0]/image</use></image>
-        <wrap-s>clamp</wrap-s>
-        <wrap-t>clamp</wrap-t>
-      </texture-unit>
-      <program>
-        <vertex-shader>Shaders/tree.vert</vertex-shader>
-        <fragment-shader>Shaders/tree.frag</fragment-shader>
-      </program>
-      <uniform>
-        <name>baseTexture</name>
-        <type>sampler-2d</type>
-        <value type="int">0</value>
-      </uniform>
-    </pass>
-    <pass n="1">
-      <lighting>true</lighting>
-      <material>
-        <ambient type="vec4d">1.0 1.0 1.0 1.0</ambient>
-        <diffuse type="vec4d">1.0 1.0 1.0 1.0</diffuse>
-        <color-mode>off</color-mode>
-      </material>
-      <render-bin>
-        <bin-number>2</bin-number> <!-- RANDOM_OBJECTS_BIN -->
-        <bin-name>RenderBin</bin-name>
-      </render-bin>
-      <alpha-test>
-        <comparison>less</comparison>
-        <reference type="float">0.33</reference>
-      </alpha-test>
-      <blend>
-        <source>src-alpha</source>
-        <destination>one-minus-src-alpha</destination>
-      </blend>
-      <depth>
-        <write-mask>false</write-mask>
-      </depth>
-      <texture-unit>
-        <unit>0</unit>
-        <type>2d</type>
-        <image><use>texture[0]/image</use></image>
-        <wrap-s>clamp</wrap-s>
-        <wrap-t>clamp</wrap-t>
-      </texture-unit>
-      <program>
-        <vertex-shader>Shaders/tree.vert</vertex-shader>
-        <fragment-shader>Shaders/tree.frag</fragment-shader>
-      </program>
-      <uniform>
-        <name>baseTexture</name>
-        <type>sampler-2d</type>
-        <value type="int">0</value>
-      </uniform>
-    </pass>
-  </technique>
+	<name>Effects/tree</name>
+	<parameters>
+		<texture n ="0">
+		</texture>
+		<!-- 	fog include -->
+		<visibility>
+			<use>/environment/ground-visibility-m</use>
+		</visibility>
+		<avisibility>
+			<use>/environment/visibility-m</use>
+		</avisibility>
+		<lthickness>
+			<use>/environment/ground-haze-thickness-m</use>
+		</lthickness>
+		<scattering>
+			<use>/rendering/scene/scattering</use>
+		</scattering>
+		<terminator>
+			<use>/environment/terminator-relative-position-m</use>
+		</terminator>
+		<fogtype>
+			<use>/sim/rendering/scattering-shader</use>
+		</fogtype>
+		<!-- 	END fog include -->
+	</parameters>
+	<technique n="10">
+		<predicate>
+			<and>
+				<!--<property>/sim/rendering/shader-effects</property>-->
+				<property>/sim/rendering/random-vegetation</property>
+				<less-equal>
+					<value type="float">1.0</value>
+					<shader-language/>
+				</less-equal>
+			</and>
+		</predicate>
+		<pass n="0">
+			<lighting>true</lighting>
+			<material>
+				<ambient type="vec4d">1.0 1.0 1.0 1.0</ambient>
+				<diffuse type="vec4d">1.0 1.0 1.0 1.0</diffuse>
+				<color-mode>off</color-mode>
+			</material>
+			<alpha-test>
+				<comparison>gequal</comparison>
+				<reference type="float">0.33</reference>
+			</alpha-test>
+			<texture-unit>
+				<unit>0</unit>
+				<type>2d</type>
+				<image>
+					<use>texture[0]/image</use>
+				</image>
+				<wrap-s>clamp</wrap-s>
+				<wrap-t>clamp</wrap-t>
+			</texture-unit>
+			<program>
+				<!-- 				<vertex-shader>Shaders/include_fog.vert</vertex-shader> -->
+				<vertex-shader>Shaders/tree.vert</vertex-shader>
+				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
+				<fragment-shader n="1">Shaders/tree.frag</fragment-shader>
+			</program>
+			<uniform>
+				<name>baseTexture</name>
+				<type>sampler-2d</type>
+				<value type="int">0</value>
+			</uniform>
+			<!-- 	    BEGIN fog include -->
+			<uniform>
+				<name>visibility</name>
+				<type>float</type>
+				<value>
+					<use>visibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>avisibility</name>
+				<type>float</type>
+				<value>
+					<use>avisibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>hazeLayerAltitude</name>
+				<type>float</type>
+				<value>
+					<use>lthickness</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>scattering</name>
+				<type>float</type>
+				<value>
+					<use>scattering</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>terminator</name>
+				<type>float</type>
+				<value>
+					<use>terminator</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>fogType</name>
+				<type>int</type>
+				<value>
+					<use>fogtype</use>
+				</value>
+			</uniform>
+			<!-- 			END fog include -->
+		</pass>
+		<pass n="1">
+			<lighting>true</lighting>
+			<material>
+				<ambient type="vec4d">1.0 1.0 1.0 1.0</ambient>
+				<diffuse type="vec4d">1.0 1.0 1.0 1.0</diffuse>
+				<color-mode>off</color-mode>
+			</material>
+			<render-bin>
+				<bin-number>2</bin-number>
+				<!-- RANDOM_OBJECTS_BIN -->
+				<bin-name>RenderBin</bin-name>
+			</render-bin>
+			<alpha-test>
+				<comparison>less</comparison>
+				<reference type="float">0.33</reference>
+			</alpha-test>
+			<blend>
+				<source>src-alpha</source>
+				<destination>one-minus-src-alpha</destination>
+			</blend>
+			<depth>
+				<write-mask>false</write-mask>
+			</depth>
+			<texture-unit>
+				<unit>0</unit>
+				<type>2d</type>
+				<image>
+					<use>texture[0]/image</use>
+				</image>
+				<wrap-s>clamp</wrap-s>
+				<wrap-t>clamp</wrap-t>
+			</texture-unit>
+			<program>
+				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader>
+				<vertex-shader n="1">Shaders/tree.vert</vertex-shader>
+				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
+				<fragment-shader n="1">Shaders/tree.frag</fragment-shader>
+			</program>
+			<uniform>
+				<name>baseTexture</name>
+				<type>sampler-2d</type>
+				<value type="int">0</value>
+			</uniform>
+			<!-- 	    BEGIN fog include -->
+			<uniform>
+				<name>visibility</name>
+				<type>float</type>
+				<value>
+					<use>visibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>avisibility</name>
+				<type>float</type>
+				<value>
+					<use>avisibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>hazeLayerAltitude</name>
+				<type>float</type>
+				<value>
+					<use>lthickness</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>scattering</name>
+				<type>float</type>
+				<value>
+					<use>scattering</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>terminator</name>
+				<type>float</type>
+				<value>
+					<use>terminator</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>fogType</name>
+				<type>int</type>
+				<value>
+					<use>fogtype</use>
+				</value>
+			</uniform>
+			<!-- 			END fog include -->
+		</pass>
+	</technique>
 </PropertyList>

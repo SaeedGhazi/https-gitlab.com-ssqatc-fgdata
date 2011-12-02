@@ -31,21 +31,29 @@ attribute vec3 binormal;
 
 uniform float canopy_height;
 
-void main(void)
-{
-        rawposIn = gl_Vertex;
-	ecPosIn = gl_ModelViewMatrix * gl_Vertex;
-	NormalIn = normalize(gl_Normal);
-        //rawTopIn = rawposIn + vec4(0.0, 0.0, canopy_height, 0.0);
-        //ecTopIn = gl_ModelViewMatrix * rawTopIn;
-        ecNormalIn = gl_NormalMatrix * NormalIn;
-	VTangentIn = gl_NormalMatrix * tangent;
-	VBinormalIn = gl_NormalMatrix * binormal;
+////fog "include"////////
+uniform int fogType;
 
-	gl_FrontColor = gl_Color;
-	gl_Position = ftransform();
-        //positionTopIn = gl_ModelViewProjectionMatrix * rawTopIn;
-	gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
-        constantColorIn = gl_FrontMaterial.emission
-		+ gl_Color * (gl_LightModel.ambient + gl_LightSource[0].ambient);  
-}
+void fog_Func(int type);
+/////////////////////////
+
+void main(void)
+    {
+    rawposIn = gl_Vertex;
+    ecPosIn = gl_ModelViewMatrix * gl_Vertex;
+    NormalIn = normalize(gl_Normal);
+    //rawTopIn = rawposIn + vec4(0.0, 0.0, canopy_height, 0.0);
+    //ecTopIn = gl_ModelViewMatrix * rawTopIn;
+    ecNormalIn = gl_NormalMatrix * NormalIn;
+    VTangentIn = gl_NormalMatrix * tangent;
+    VBinormalIn = gl_NormalMatrix * binormal;
+
+    gl_FrontColor = gl_Color;
+    gl_Position = ftransform();
+    //positionTopIn = gl_ModelViewProjectionMatrix * rawTopIn;
+    gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
+    constantColorIn = gl_FrontMaterial.emission
+        + gl_Color * (gl_LightModel.ambient + gl_LightSource[0].ambient);
+
+    fog_Func(fogType);
+    }

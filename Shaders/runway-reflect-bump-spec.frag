@@ -1,6 +1,6 @@
 // -*- mode: C; -*-
 // Licence: GPL v2
-// Author: Vivian Meazza.
+// © Emilian Huminiuc and Vivian Meazza 2011
 
 #version 120
 
@@ -32,7 +32,13 @@ uniform float ambient_correction;
 uniform float reflect_map;
 uniform float normalmap_dds;
 
+//uniform int fogType;
+
+////fog "include" /////
 uniform int fogType;
+
+vec3 fog_Func(vec3 color, int type);
+//////////////////////
 
 vec3 fog_Func(vec3 color, int type);
 

@@ -14,6 +14,8 @@ uniform sampler2D water_reflection_grey;
 uniform sampler2D sea_foam;
 uniform sampler2D perlin_normalmap;
 
+uniform sampler3D Noise;
+
 uniform float saturation, Overcast, WindE, WindN;
 uniform float CloudCover0, CloudCover1, CloudCover2, CloudCover3, CloudCover4;
 uniform float osg_SimulationTime;
@@ -27,18 +29,28 @@ varying vec3 viewerdir;
 varying vec3 lightdir;
 varying vec3 normal;
 
+uniform    float WaveFreq ;
+uniform    float WaveAmp ;
+uniform    float WaveSharp ;
+
+////fog "include" /////
+uniform int fogType;
+
+vec3 fog_Func(vec3 color, int type);
+//////////////////////
+
 /////// functions /////////
 
 void rotationmatrix(in float angle, out mat4 rotmat)
-{
+    {
     rotmat = mat4( cos( angle ), -sin( angle ), 0.0, 0.0,
         sin( angle ),  cos( angle ), 0.0, 0.0,
         0.0         ,  0.0         , 1.0, 0.0,
         0.0         ,  0.0         , 0.0, 1.0 );
-}
+    }
 
 void main(void)
-{
+    {
     const vec4 sca = vec4(0.005, 0.005, 0.005, 0.005);
     const vec4 sca2 = vec4(0.02, 0.02, 0.02, 0.02);
     const vec4 tscale = vec4(0.25, 0.25, 0.25, 0.25);
@@ -61,23 +73,25 @@ void main(void)
     float cover = 0.0;
     //bool Status = true;
 
+
     float windEffect = sqrt(pow(abs(WindE),2)+pow(abs(WindN),2)) * 0.6; 				//wind speed in kt
     float windScale = 15.0/(3.0 + windEffect);											//wave scale
-    float windEffect_low = 0.4 + 0.6 * smoothstep(0.0, 5.0, windEffect);				//low windspeed wave filter
-    float waveRoughness = 0.15 + smoothstep(0.0, 15.0, windEffect);						//wave roughness filter
+    float windEffect_low = 0.3 + 0.7 * smoothstep(0.0, 5.0, windEffect);				//low windspeed wave filter
+    float waveRoughness = 0.05 + smoothstep(0.0, 20.0, windEffect);						//wave roughness filter
 
-    //float noise_factor = 0.2 + 0.15 * smoothstep(0.0, 40.0, windEffect);
+    float mixFactor = 0.75 - 0.15 * smoothstep(0.0, 40.0, windEffect);
+    mixFactor = clamp(mixFactor, 0.3, 0.8);
 
     if (Status == 1){
         cover = min(min(min(min(CloudCover0, CloudCover1),CloudCover2),CloudCover3),CloudCover4);
-    } else {
-        // hack to allow for Overcast not to be set by Local Weather
-        if (Overcast == 0){
-            cover = 5;
         } else {
-            cover = Overcast * 5;
+            // hack to allow for Overcast not to be set by Local Weather
+            if (Overcast == 0){
+                cover = 5;
+                } else {
+                    cover = Overcast * 5;
+                }
         }
-    }
 
     vec4 viewt = normalize(waterTex4);
 
@@ -90,17 +104,27 @@ void main(void)
     fdist *= sca;
 
     //normalmaps
-    vec4 nmap   = texture2D(water_normalmap, vec2(waterTex1 + disdis * sca2) * windScale) * 2.0 - 1.0;
-    vec4 nmap1  = texture2D(perlin_normalmap, vec2(waterTex1 + disdis * sca2) * windScale) * 2.0 - 1.0;
+    rotationmatrix(radians(3.0 * windScale + 0.6 * sin(waterTex1.s * 0.2)), RotationMatrix);
+    vec4 nmap   = texture2D(water_normalmap, vec2(waterTex1* RotationMatrix + disdis * sca2) * windScale) * 2.0 - 1.0;
+    vec4 nmap1  = texture2D(perlin_normalmap, vec2(waterTex1/** RotationMatrix*/ + disdis * sca2) * windScale) * 2.0 - 1.0;
 
-    rotationmatrix(radians(3.0 * sin(osg_SimulationTime * 0.0075)), RotationMatrix);
-    nmap  += texture2D(water_normalmap, vec2(waterTex2 * RotationMatrix * tscale) * windScale) * 2.0 - 1.0;
-    nmap1 += texture2D(perlin_normalmap, vec2(waterTex2 * RotationMatrix * tscale) * windScale) * 2.0 - 1.0;
+    rotationmatrix(radians(-2.0 * windScale -0.4 * sin(waterTex1.s * 0.32)), RotationMatrix);
+    nmap  += texture2D(water_normalmap, vec2(waterTex1* RotationMatrix + disdis * sca2) * windScale * 1.5) * 2.0 - 1.0;
+    //nmap1 += texture2D(perlin_normalmap, vec2(waterTex1* RotationMatrix + disdis * sca2) * windScale) * 2.0 - 1.0;
+    rotationmatrix(radians(1.5 * windScale + 0.3 * sin(waterTex1.s * 0.16)), RotationMatrix);
+    nmap  += texture2D(water_normalmap, vec2(waterTex1* RotationMatrix + disdis * sca2) * windScale * 2.1) * 2.0 - 1.0;
+    rotationmatrix(radians(-0.5 * windScale - 0.45 * sin(waterTex1.s * 0.28)), RotationMatrix);
+    nmap  += texture2D(water_normalmap, vec2(waterTex1* RotationMatrix + disdis * sca2) * windScale * 0.8) * 2.0 - 1.0;
+
+    rotationmatrix(radians(-1.2 * windScale - 0.35 * sin(waterTex1.s * 0.28)), RotationMatrix);
+    nmap  += texture2D(water_normalmap, vec2(waterTex2 * RotationMatrix* tscale) * windScale * 1.7) * 2.0 - 1.0;
+    nmap1 += texture2D(perlin_normalmap, vec2(waterTex2/** RotationMatrix*/ * tscale) * windScale) * 2.0 - 1.0;
 
     nmap  *= windEffect_low;
     nmap1 *= windEffect_low;
     // mix water and noise, modulated by factor
-    vec4 vNorm = normalize(mix(nmap, nmap1, 0.3) * waveRoughness);
+    vec4 vNorm = normalize(mix(nmap, nmap1, mixFactor) * waveRoughness);
+    //vNorm.r += ddx;
     vNorm = -vNorm;		//dds fix
 
     //load reflection
@@ -112,33 +136,38 @@ void main(void)
     if(cover >= 1.5){
         refTex = texture2D(water_reflection, vec2(tmp));
         refl= normalize(refTex);
-    } else {
-        refTex = texture2D(water_reflection_grey, vec2(tmp));
-        refl = normalize(refTex);
-        refl.r *= (0.75 + 0.15 * cover);
-        refl.g *= (0.80 + 0.15 * cover);
-        refl.b *= (0.875 + 0.125 * cover);
-        refl.a  *= 1.0;
-    }
+        } else {
+            refTex = texture2D(water_reflection_grey, vec2(tmp));
+            refl = normalize(refTex);
+            refl.r *= (0.75 + 0.15 * cover);
+            refl.g *= (0.80 + 0.15 * cover);
+            refl.b *= (0.875 + 0.125 * cover);
+            refl.a  *= 1.0;
+        }
 
-    vec3 N0 = vec3(texture2D(water_normalmap, vec2(waterTex1 + disdis * sca2) * windScale) * 2.0 - 1.0);
-    vec3 N1 = vec3(texture2D(perlin_normalmap, vec2(waterTex1 + disdis * sca) * windScale) * 2.0 - 1.0);
+    rotationmatrix(radians(2.1* windScale + 0.25 * sin(waterTex1.s *0.14)), RotationMatrix);
+    vec3 N0 = vec3(texture2D(water_normalmap, vec2(waterTex1* RotationMatrix + disdis * sca2) * windScale * 1.15) * 2.0 - 1.0);
+    vec3 N1 = vec3(texture2D(perlin_normalmap, vec2(waterTex1/** RotationMatrix*/ + disdis * sca) * windScale) * 2.0 - 1.0);
 
-    N0 += vec3(texture2D(water_normalmap, vec2(waterTex2  * tscale) * windScale) * 2.0 - 1.0);
-    N1 += vec3(texture2D(perlin_normalmap, vec2(waterTex2 * tscale) * windScale) * 2.0 - 1.0);
+    rotationmatrix(radians(-1.5 * windScale -0.32 * sin(waterTex1.s *0.24)), RotationMatrix);
+    N0 += vec3(texture2D(water_normalmap, vec2(waterTex2* RotationMatrix  * tscale) * windScale * 1.8) * 2.0 - 1.0);
+    N1 += vec3(texture2D(perlin_normalmap, vec2(waterTex2/** RotationMatrix*/ * tscale) * windScale) * 2.0 - 1.0);
 
-    rotationmatrix(radians(2.0 * sin(osg_SimulationTime * 0.005)), RotationMatrix);
-    N0 += vec3(texture2D(water_normalmap, vec2(waterTex2 * RotationMatrix * (tscale + sca2)) * windScale) * 2.0 - 1.0);
-    N1 += vec3(texture2D(perlin_normalmap, vec2(waterTex2 * RotationMatrix * (tscale + sca2)) * windScale) * 2.0 - 1.0);
+    rotationmatrix(radians(3.8 * windScale + 0.45 * sin(waterTex1.s *0.32)), RotationMatrix);
+    N0 += vec3(texture2D(water_normalmap, vec2(waterTex2 * RotationMatrix * (tscale + sca2)) * windScale * 0.85) * 2.0 - 1.0);
+    N1 += vec3(texture2D(perlin_normalmap, vec2(waterTex2/** RotationMatrix*/ * (tscale + sca2))  * windScale) * 2.0 - 1.0);
 
-    rotationmatrix(radians(-4.0 * sin(osg_SimulationTime * 0.003)), RotationMatrix);
-    N0 += vec3(texture2D(water_normalmap, vec2(waterTex1 * RotationMatrix + disdis * sca2) * windScale) * 2.0 - 1.0);
-    N1 += vec3(texture2D(perlin_normalmap, vec2(waterTex1 * RotationMatrix + disdis * sca) * windScale) * 2.0 - 1.0);
+    rotationmatrix(radians(-2.8 * windScale - 0.38 * sin(waterTex1.s * 0.26)), RotationMatrix);
+    N0 += vec3(texture2D(water_normalmap, vec2(waterTex1 * RotationMatrix + disdis * sca2) * windScale * 2.1) * 2.0 - 1.0);
+    N1 += vec3(texture2D(perlin_normalmap, vec2(waterTex1 /** RotationMatrix*/ + disdis * sca) * windScale) * 2.0 - 1.0);
 
     N0 *= windEffect_low;
     N1 *= windEffect_low;
 
-    vec3 N = normalize(mix(Normal + N0 , Normal + N1, 0.3) * waveRoughness);
+    vec3 N = normalize(mix(Normal + N0, Normal + N1, mixFactor) * waveRoughness);
+    //N.r += ddx;
+    //N.g += ddy;
+
     N = -N; //dds fix
 
     // specular
@@ -154,13 +183,13 @@ void main(void)
     refl *= fres;
 
     //calculate the fog factor
-    float fogFactor;
-    float fogCoord = ecPosition.z;
-    const float LOG2 = 1.442695;
-    fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
-
-    if(gl_Fog.density == 1.0)
-        fogFactor=1.0;
+         float fogFactor;
+         float fogCoord = ecPosition.z;
+         const float LOG2 = 1.442695;
+         fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
+    
+         if(gl_Fog.density == 1.0)
+             fogFactor=1.0;
 
     //calculate final colour
     vec4 ambient_light = gl_LightSource[0].diffuse;
@@ -168,18 +197,25 @@ void main(void)
 
     if(cover >= 1.5){
         finalColor = refl + specular;
-    } else {
-        finalColor = refl;
-    }
-
-    float foamSlope = 0.1 + 0.1 * windScale;
-    if (windEffect >= 10.0)
-        if (N.g >= foamSlope){
-            vec4 foam_texel = texture2D(sea_foam, vec2(waterTex2 * tscale) * 30.0);
-            finalColor = mix(finalColor, max(finalColor,  finalColor + foam_texel), smoothstep(foamSlope, 0.25, N.g));
+        } else {
+            finalColor = refl;
         }
+
+    float foamSlope = 0.10 + 0.1 * windScale;
+    //float waveSlope = mix(N0.g, N1.g, 0.25);
+
+    vec4 foam_texel = texture2D(sea_foam, vec2(waterTex2 * tscale) * 25.0);
+    float waveSlope = N.g; 
+
+    if (windEffect >= 8.0)
+        if (waveSlope >= foamSlope){
+            finalColor = mix(finalColor, max(finalColor, finalColor + foam_texel), smoothstep(0.01, 0.50, N.g));
+            }
+
 
         finalColor *= ambient_light;
 
-        gl_FragColor = mix(gl_Fog.color, finalColor, fogFactor);
-}
+        //gl_FragColor = mix(gl_Fog.color, finalColor, fogFactor);
+        finalColor.rgb = fog_Func(finalColor.rgb, fogType);
+        gl_FragColor = finalColor;
+    }

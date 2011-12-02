@@ -5,6 +5,8 @@
 
 #version 120
 
+#extension GL_ATI_shader_texture_lod : enable
+
 #define TEXTURE_MIP_LEVELS 10
 #define TEXTURE_PIX_COUNT  1024 //pow(2,TEXTURE_MIP_LEVELS)
 #define BINARY_SEARCH_COUNT 10
@@ -33,82 +35,88 @@ int linear_search_steps = 10;
 int GlobalIterationCount = 0;
 int gIterationCap = 64;
 
+////fog "include" /////
+uniform int fogType;
+
+vec3 fog_Func(vec3 color, int type);
+//////////////////////
+
 void QDM(inout vec3 p, inout vec3 v)
 {
-	const int MAX_LEVEL = TEXTURE_MIP_LEVELS;
-	const float NODE_COUNT = TEXTURE_PIX_COUNT;
-	const float TEXEL_SPAN_HALF = 1.0 / NODE_COUNT / 2.0;
+    const int MAX_LEVEL = TEXTURE_MIP_LEVELS;
+    const float NODE_COUNT = TEXTURE_PIX_COUNT;
+    const float TEXEL_SPAN_HALF = 1.0 / NODE_COUNT / 2.0;
 
-	float fDeltaNC = TEXEL_SPAN_HALF * depth_factor;
+    float fDeltaNC = TEXEL_SPAN_HALF * depth_factor;
 
-	vec3 p2 = p;
-	float level = MAX_LEVEL;
+    vec3 p2 = p;
+    float level = MAX_LEVEL;
     vec2 dirSign = (sign(v.xy) + 1.0) * 0.5;
     GlobalIterationCount = 0;
     float d = 0.0;
 
-	while (level >= 0.0 && GlobalIterationCount < gIterationCap)
-	{
-		vec4 uv = vec4(p2.xyz, level);
-		d = texture2DLod(QDMTex, uv.xy, uv.w).w;
+    while (level >= 0.0 && GlobalIterationCount < gIterationCap)
+    {
+        vec4 uv = vec4(p2.xyz, level);
+        d = texture2DLod(QDMTex, uv.xy, uv.w).w;
 
-		if (d > p2.z)
-		{
-			//predictive point of ray traversal
-			vec3 tmpP2 = p + v * d;
+        if (d > p2.z)
+        {
+            //predictive point of ray traversal
+            vec3 tmpP2 = p + v * d;
 
-			//current node count
-			float nodeCount = pow(2.0, (MAX_LEVEL - level));
-			//current and predictive node ID
-			vec4 nodeID = floor(vec4(p2.xy, tmpP2.xy)*nodeCount);
+            //current node count
+            float nodeCount = pow(2.0, (MAX_LEVEL - level));
+            //current and predictive node ID
+            vec4 nodeID = floor(vec4(p2.xy, tmpP2.xy)*nodeCount);
 
-			//check if we are crossing the current cell
-			if (nodeID.x != nodeID.z || nodeID.y != nodeID.w)
-			{
-				//calculate distance to nearest bound
-				vec2 a = p2.xy - p.xy;
-				vec2 p3 = (nodeID.xy + dirSign) / nodeCount;
-				vec2 b = p3.xy - p.xy;
+            //check if we are crossing the current cell
+            if (nodeID.x != nodeID.z || nodeID.y != nodeID.w)
+            {
+                //calculate distance to nearest bound
+                vec2 a = p2.xy - p.xy;
+                vec2 p3 = (nodeID.xy + dirSign) / nodeCount;
+                vec2 b = p3.xy - p.xy;
 
-				vec2 dNC = (b.xy * p2.z) / a.xy;
-				//take the nearest cell
-				d = min(d,min(dNC.x, dNC.y))+fDeltaNC;
+                vec2 dNC = (b.xy * p2.z) / a.xy;
+                //take the nearest cell
+                d = min(d,min(dNC.x, dNC.y))+fDeltaNC;
 
-				level++;
+                level++;
 
-				//use additional convergence speed-up
-	            #ifdef USE_QDM_ASCEND_INTERVAL
-			    if(frac(level*0.5) > EPSILON)
-				  level++;
-				#elseif USE_QDM_ASCEND_CONST
-				 level++;
-				#endif
-			}
-			p2 = p + v * d;
-		}
-		level--;
-		GlobalIterationCount++;
-	}
+                //use additional convergence speed-up
+                #ifdef USE_QDM_ASCEND_INTERVAL
+                if(frac(level*0.5) > EPSILON)
+                  level++;
+                #elseif USE_QDM_ASCEND_CONST
+                 level++;
+                #endif
+            }
+            p2 = p + v * d;
+        }
+        level--;
+        GlobalIterationCount++;
+    }
 
-	//
-	// Manual Bilinear filtering
-	//
-	float rayLength =  length(p2.xy - p.xy) + fDeltaNC;
+    //
+    // Manual Bilinear filtering
+    //
+    float rayLength =  length(p2.xy - p.xy) + fDeltaNC;
 
-	float dA = p2.z * (rayLength - BILINEAR_SMOOTH_FACTOR * TEXEL_SPAN_HALF) / rayLength;
-	float dB = p2.z * (rayLength + BILINEAR_SMOOTH_FACTOR * TEXEL_SPAN_HALF) / rayLength;
+    float dA = p2.z * (rayLength - BILINEAR_SMOOTH_FACTOR * TEXEL_SPAN_HALF) / rayLength;
+    float dB = p2.z * (rayLength + BILINEAR_SMOOTH_FACTOR * TEXEL_SPAN_HALF) / rayLength;
 
-	vec4 p2a = vec4(p + v * dA, 0.0);
-	vec4 p2b = vec4(p + v * dB, 0.0);
-	dA = texture2DLod(NormalTex, p2a.xy, p2a.w).w;
-	dB = texture2DLod(NormalTex, p2b.xy, p2b.w).w;
+    vec4 p2a = vec4(p + v * dA, 0.0);
+    vec4 p2b = vec4(p + v * dB, 0.0);
+    dA = texture2DLod(NormalTex, p2a.xy, p2a.w).w;
+    dB = texture2DLod(NormalTex, p2b.xy, p2b.w).w;
 
-	dA = abs(p2a.z - dA);
-	dB = abs(p2b.z - dB);
+    dA = abs(p2a.z - dA);
+    dB = abs(p2b.z - dB);
 
-	p2 = mix(p2a.xyz, p2b.xyz, dA / (dA + dB));
+    p2 = mix(p2a.xyz, p2b.xyz, dA / (dA + dB));
 
-	p = p2;
+    p = p2;
 }
 
 float ray_intersect_QDM(vec2 dp, vec2 ds)
@@ -121,35 +129,35 @@ float ray_intersect_QDM(vec2 dp, vec2 ds)
 
 float ray_intersect_relief(vec2 dp, vec2 ds)
 {
-	float size = 1.0 / float(linear_search_steps);
-	float depth = 0.0;
-	float best_depth = 1.0;
+    float size = 1.0 / float(linear_search_steps);
+    float depth = 0.0;
+    float best_depth = 1.0;
 
-	for(int i = 0; i < linear_search_steps - 1; ++i)
-	{
-		depth += size;
-		float t = step(0.95, texture2D(NormalTex, dp + ds * depth).a);
-		if(best_depth > 0.996)
-			if(depth >= t)
-				best_depth = depth;
-	}
-	depth = best_depth;
+    for(int i = 0; i < linear_search_steps - 1; ++i)
+    {
+        depth += size;
+        float t = step(0.95, texture2D(NormalTex, dp + ds * depth).a);
+        if(best_depth > 0.996)
+            if(depth >= t)
+                best_depth = depth;
+    }
+    depth = best_depth;
 
-	const int binary_search_steps = 5;
+    const int binary_search_steps = 5;
 
-	for(int i = 0; i < binary_search_steps; ++i)
-	{
-		size *= 0.5;
-		float t = step(0.95, texture2D(NormalTex, dp + ds * depth).a);
-		if(depth >= t)
-		{
-			best_depth = depth;
-			depth -= 2.0 * size;
-		}
-		depth += size;
-	}
+    for(int i = 0; i < binary_search_steps; ++i)
+    {
+        size *= 0.5;
+        float t = step(0.95, texture2D(NormalTex, dp + ds * depth).a);
+        if(depth >= t)
+        {
+            best_depth = depth;
+            depth -= 2.0 * size;
+        }
+        depth += size;
+    }
 
-	return(best_depth);
+    return(best_depth);
 }
 
 float ray_intersect(vec2 dp, vec2 ds)
@@ -162,82 +170,76 @@ float ray_intersect(vec2 dp, vec2 ds)
 
 void main (void)
 {
-	if ( quality_level >= 3.5 ) {
-		linear_search_steps = 20;
-	}
-	vec3 ecPos3 = ecPosition.xyz / ecPosition.w;
-	vec3 V = normalize(ecPos3);
-	vec3 s = vec3(dot(V, VTangent), dot(V, VBinormal), dot(VNormal, -V));
-	vec2 ds = s.xy * depth_factor / s.z;
-	vec2 dp = gl_TexCoord[0].st - ds;
-	float d = ray_intersect(dp, ds);
+    if ( quality_level >= 3.5 ) {
+        linear_search_steps = 20;
+    }
+    vec3 ecPos3 = ecPosition.xyz / ecPosition.w;
+    vec3 V = normalize(ecPos3);
+    vec3 s = vec3(dot(V, VTangent), dot(V, VBinormal), dot(VNormal, -V));
+    vec2 ds = s.xy * depth_factor / s.z;
+    vec2 dp = gl_TexCoord[0].st - ds;
+    float d = ray_intersect(dp, ds);
 
-	vec2 uv = dp + ds * d;
-	vec3 N = texture2D(NormalTex, uv).xyz * 2.0 - 1.0;
+    vec2 uv = dp + ds * d;
+    vec3 N = texture2D(NormalTex, uv).xyz * 2.0 - 1.0;
 
 
-	float emis = N.z;
-	N.z = sqrt(1.0 - min(1.0,dot(N.xy, N.xy)));
-	float Nz = N.z;
-	N = normalize(N.x * VTangent + N.y * VBinormal + N.z * VNormal);
+    float emis = N.z;
+    N.z = sqrt(1.0 - min(1.0,dot(N.xy, N.xy)));
+    float Nz = N.z;
+    N = normalize(N.x * VTangent + N.y * VBinormal + N.z * VNormal);
 
-	vec3 l = gl_LightSource[0].position.xyz;
-	vec3 diffuse = gl_Color.rgb * max(0.0, dot(N, l));
-	float shadow_factor = 1.0;
+    vec3 l = gl_LightSource[0].position.xyz;
+    vec3 diffuse = gl_Color.rgb * max(0.0, dot(N, l));
+    float shadow_factor = 1.0;
 
-	// Shadow
-	if ( quality_level >= 3.0 ) {
-		dp += ds * d;
-		vec3 sl = normalize( vec3( dot( l, VTangent ), dot( l, VBinormal ), dot( -l, VNormal ) ) );
-		ds = sl.xy * depth_factor / sl.z;
-		dp -= ds * d;
-		float dl = ray_intersect(dp, ds);
-		if ( dl < d - 0.05 )
-			shadow_factor = dot( constantColor.xyz, vec3( 1.0, 1.0, 1.0 ) ) * 0.25;
-	}
-	// end shadow
+    // Shadow
+    if ( quality_level >= 3.0 ) {
+        dp += ds * d;
+        vec3 sl = normalize( vec3( dot( l, VTangent ), dot( l, VBinormal ), dot( -l, VNormal ) ) );
+        ds = sl.xy * depth_factor / sl.z;
+        dp -= ds * d;
+        float dl = ray_intersect(dp, ds);
+        if ( dl < d - 0.05 )
+            shadow_factor = dot( constantColor.xyz, vec3( 1.0, 1.0, 1.0 ) ) * 0.25;
+    }
+    // end shadow
 
-	vec4 ambient_light = constantColor + gl_LightSource[0].diffuse * vec4(diffuse, 1.0);
-	float reflectance = ambient_light.r * 0.3 + ambient_light.g * 0.59 + ambient_light.b * 0.11;
-	if ( shadow_factor < 1.0 )
-		ambient_light = constantColor + gl_LightSource[0].diffuse * shadow_factor * vec4(diffuse, 1.0);
-	float emission_factor = (1.0 - smoothstep(0.15, 0.25, reflectance)) * emis;
-	vec4 tc = texture2D(BaseTex, uv);
-	emission_factor *= 0.5*pow(tc.r+0.8*tc.g+0.2*tc.b, 2.0) -0.2;
-	ambient_light += (emission_factor * vec4(night_color, 0.0));
+    vec4 ambient_light = constantColor + gl_LightSource[0].diffuse * vec4(diffuse, 1.0);
+    float reflectance = ambient_light.r * 0.3 + ambient_light.g * 0.59 + ambient_light.b * 0.11;
+    if ( shadow_factor < 1.0 )
+        ambient_light = constantColor + gl_LightSource[0].diffuse * shadow_factor * vec4(diffuse, 1.0);
+    float emission_factor = (1.0 - smoothstep(0.15, 0.25, reflectance)) * emis;
+    vec4 tc = texture2D(BaseTex, uv);
+    emission_factor *= 0.5*pow(tc.r+0.8*tc.g+0.2*tc.b, 2.0) -0.2;
+    ambient_light += (emission_factor * vec4(night_color, 0.0));
 
-	float fogFactor;
-	float fogCoord = ecPos3.z / (1.0 + smoothstep(0.3, 0.7, emission_factor));
-	const float LOG2 = 1.442695;
-	fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
-	fogFactor = clamp(fogFactor, 0.0, 1.0);
+    vec4 noisevec   = texture3D(NoiseTex, (rawpos.xyz)*0.01*scale);
+    vec4 nvL   = texture3D(NoiseTex, (rawpos.xyz)*0.00066*scale);
 
-	vec4 noisevec   = texture3D(NoiseTex, (rawpos.xyz)*0.01*scale);
-	vec4 nvL   = texture3D(NoiseTex, (rawpos.xyz)*0.00066*scale);
+    float n=0.06;
+    n += nvL[0]*0.4;
+    n += nvL[1]*0.6;
+    n += nvL[2]*2.0;
+    n += nvL[3]*4.0;
+    n += noisevec[0]*0.1;
+    n += noisevec[1]*0.4;
 
-	float n=0.06;
-	n += nvL[0]*0.4;
-	n += nvL[1]*0.6;
-	n += nvL[2]*2.0;
-	n += nvL[3]*4.0;
-	n += noisevec[0]*0.1;
-	n += noisevec[1]*0.4;
+    n += noisevec[2]*0.8;
+    n += noisevec[3]*2.1;
+    n = mix(0.6, n, length(ecPosition.xyz) );
 
-	n += noisevec[2]*0.8;
-	n += noisevec[3]*2.1;
-	n = mix(0.6, n, fogFactor);
+    vec4 finalColor = texture2D(BaseTex, uv);
+    finalColor = mix(finalColor, clamp(n+nvL[2]*4.1+vec4(0.1, 0.1, nvL[2]*2.2, 1.0), 0.7, 1.0),
+            step(0.8,Nz)*(1.0-emis)*smoothstep(snowlevel+300.0, snowlevel+360.0, (rawpos.z)+nvL[1]*3000.0));
+    finalColor *= ambient_light;
 
-	vec4 finalColor = texture2D(BaseTex, uv);
-	finalColor = mix(finalColor, clamp(n+nvL[2]*4.1+vec4(0.1, 0.1, nvL[2]*2.2, 1.0), 0.7, 1.0),
-			step(0.8,Nz)*(1.0-emis)*smoothstep(snowlevel+300.0, snowlevel+360.0, (rawpos.z)+nvL[1]*3000.0));
-	finalColor *= ambient_light;
+    vec4 p = vec4( ecPos3 + tile_size * V * (d-1.0) * depth_factor / s.z, 1.0 );
+    vec4 iproj = gl_ProjectionMatrix * p;
+    iproj /= iproj.w;
 
-	if (gl_Fog.density == 1.0)
-		fogFactor=1.0;
+    finalColor.rgb = fog_Func(finalColor.rgb, fogType);
+    gl_FragColor = finalColor;
 
-	vec4 p = vec4( ecPos3 + tile_size * V * (d-1.0) * depth_factor / s.z, 1.0 );
-	vec4 iproj = gl_ProjectionMatrix * p;
-	iproj /= iproj.w;
-	gl_FragColor = mix(gl_Fog.color ,finalColor, fogFactor);
-	gl_FragDepth = (iproj.z+1.0)/2.0;
+    gl_FragDepth = (iproj.z+1.0)/2.0;
 }

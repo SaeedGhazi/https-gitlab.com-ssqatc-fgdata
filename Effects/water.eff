@@ -13,8 +13,8 @@
 		<texture n="2">
 			<!--<image>Textures/Water/water-normalmap.png</image>-->
 			<!--<image>Textures/Water/water-normalmap2.dds</image>-->
+				<!--<image>Textures/Water/water_sine_nmap.dds</image>-->
 			<image>Textures/Water/waves-ver10-nm.dds</image>
-			<!--<image>Textures/Water/caustic-nm.png</image>-->
 			<filter>linear-mipmap-linear</filter>
 			<wrap-s>repeat</wrap-s>
 			<wrap-t>repeat</wrap-t>
@@ -23,8 +23,9 @@
 		<texture n="3">
 			<!--<image>Textures/Water/water-dudv.png</image>-->
 			<!--<image>Textures/Water/dudvmap2.png</image>-->
-			<image>Textures/Water/waves-ver10-dudv.dds</image>
+			<!--<image>Textures/Water/waves-ver10-dudv.dds</image>-->
 			<!--<image>Textures/Water/water-reflection-grey.png</image>-->
+				<image>Textures/Water/water_sine_nmap.dds</image>
 			<filter>linear-mipmap-linear</filter>
 			<wrap-s>repeat</wrap-s>
 			<wrap-t>repeat</wrap-t>
@@ -46,6 +47,7 @@
 		</texture>
 		<texture n="6">
 			<image>Textures/Water/perlin-noise-nm.dds</image>
+<!-- 			<image>Textures/Water/water_sine_nmap.dds</image> -->
 			<filter>linear-mipmap-linear</filter>
 			<wrap-s>repeat</wrap-s>
 			<wrap-t>repeat</wrap-t>
@@ -60,44 +62,80 @@
 		<overcast>
 			<use>/rendering/scene/overcast</use>
 		</overcast>
-		<cloud-cover0>
+		<cloud-cover n="0">
 			<use>/environment/clouds/layer[0]/coverage-type</use>
-		</cloud-cover0>
-		<cloud-cover1>
+		</cloud-cover>
+		<cloud-cover n="1">
 			<use>/environment/clouds/layer[1]/coverage-type</use>
-		</cloud-cover1>
-		<cloud-cover2>
+		</cloud-cover>
+		<cloud-cover n="2" >
 			<use>/environment/clouds/layer[2]/coverage-type</use>
-		</cloud-cover2>
-		<cloud-cover3>
+		</cloud-cover>
+		<cloud-cover n="3">
 			<use>/environment/clouds/layer[3]/coverage-type</use>
-		</cloud-cover3>
-		<cloud-cover4>
+		</cloud-cover>
+		<cloud-cover n="4">
 			<use>/environment/clouds/layer[4]/coverage-type</use>
-		</cloud-cover4>
+		</cloud-cover>
 		<!--<wind>
 			<use>/environment/wind-speed-kt</use>
 		</wind>-->
 		<windE>
-			<use>/environment/config/boundary/entry[0]/wind-from-east-fps</use>
+			<use>/environment/sea/surface/wind-from-east-fps</use>
 		</windE>
 		<windN>
-			<use>/environment/config/boundary/entry[0]/wind-from-north-fps</use>
+			<use>/environment/sea/surface/wind-from-north-fps</use>
 		</windN>
 		<wind-from>
 			<use>/environment/config/boundary/entry[0]/wind-from-heading-deg</use>
 		</wind-from>
+		<WaveFreq>
+			<use>/environment/wave/freq</use>
+		</WaveFreq>
+		<WaveAmp>
+			<use>/environment/wave/amp</use>
+		</WaveAmp>
+		<WaveSharp>
+			<use>/environment/wave/sharp</use>
+		</WaveSharp>
+		<WaveAngle>
+			<use>/environment/wave/angle</use>
+		</WaveAngle>
+		<WaveFactor>
+			<use>/environment/wave/factor</use>
+		</WaveFactor>
+		<WaveDAngle>
+			<use>/environment/wave/dangle</use>
+		</WaveDAngle>
 
-
+		<!-- 	fog include -->
+		<visibility>
+			<use>/environment/ground-visibility-m</use>
+		</visibility>
+		<avisibility>
+			<use>/environment/visibility-m</use>
+		</avisibility>
+		<lthickness>
+			<use>/environment/ground-haze-thickness-m</use>
+		</lthickness>
+		<scattering>
+			<use>/rendering/scene/scattering</use>
+		</scattering>
+		<terminator>
+			<use>/environment/terminator-relative-position-m</use>
+		</terminator>
+		<fogtype>
+			<use>/sim/rendering/scattering-shader</use>
+		</fogtype>
+		<!-- 	END fog include -->
 	</parameters>
 	<technique n="8">
 		<predicate>
 			<and>
-				<property>/sim/rendering/water-shader</property>
-				<property>/sim/rendering/shader-effects</property>
+				<property>/sim/rendering/shaders/water</property>
 				<less-equal>
-					<value type="float">2.0</value>
-					<float-property>/sim/rendering/quality-level</float-property>
+					<value type="float">4.0</value>
+					<float-property>/sim/rendering/shaders/water</float-property>
 				</less-equal>
 				<or>
 					<less-equal>
@@ -251,9 +289,15 @@
 					<use>texture[6]/internal-format</use>
 				</internal-format>
 			</texture-unit>
+			<texture-unit>
+				<unit>9</unit>
+				<type>noise</type>
+			</texture-unit>
 			<program>
+				<vertex-shader>Shaders/include_fog.vert</vertex-shader>
 				<vertex-shader>Shaders/water.vert</vertex-shader>
-				<fragment-shader>Shaders/water.frag</fragment-shader>
+				<fragment-shader>Shaders/include_fog.frag</fragment-shader>
+				<fragment-shader>Shaders/water_sine.frag</fragment-shader>
 			</program>
 			<uniform>
 				<name>water_reflection</name>
@@ -295,35 +339,35 @@
 				<name>CloudCover0</name>
 				<type>float</type>
 				<value>
-					<use>cloud-cover0</use>
+					<use>cloud-cover[0]</use>
 				</value>
 			</uniform>
 			<uniform>
 				<name>CloudCover1</name>
 				<type>float</type>
 				<value>
-					<use>cloud-cover1</use>
+					<use>cloud-cover[1]</use>
 				</value>
 			</uniform>
 			<uniform>
 				<name>CloudCover2</name>
 				<type>float</type>
 				<value>
-					<use>cloud-cover2</use>
+					<use>cloud-cover[2]</use>
 				</value>
 			</uniform>
 			<uniform>
 				<name>CloudCover3</name>
 				<type>float</type>
 				<value>
-					<use>cloud-cover3</use>
+					<use>cloud-cover[3]</use>
 				</value>
 			</uniform>
 			<uniform>
 				<name>CloudCover4</name>
 				<type>float</type>
 				<value>
-					<use>cloud-cover4</use>
+					<use>cloud-cover[4]</use>
 				</value>
 			</uniform>
 			<uniform>
@@ -362,13 +406,109 @@
 					<use>wind-from</use>
 				</value>
 			</uniform>
+			<uniform>
+				<name>WaveFreq</name>
+				<type>float</type>
+				<value>
+					<use>WaveFreq</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>WaveAmp</name>
+				<type>float</type>
+				<value>
+					<use>WaveAmp</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>WaveSharp</name>
+				<type>float</type>
+				<value>
+					<use>WaveSharp</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>WaveAngle</name>
+				<type>float</type>
+				<value>
+					<use>WaveAngle</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>WaveFactor</name>
+				<type>float</type>
+				<value>
+					<use>WaveFactor</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>WaveDAngle</name>
+				<type>float</type>
+				<value>
+					<use>WaveDAngle</use>
+				</value>
+			</uniform>
+
+			<uniform>
+				<name>Noise</name>
+				<type>sampler-3d</type>
+				<value type="int">9</value>
+			</uniform>
+			
+			<!-- 	    BEGIN fog include -->
+			<uniform>
+				<name>visibility</name>
+				<type>float</type>
+				<value>
+					<use>visibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>avisibility</name>
+				<type>float</type>
+				<value>
+					<use>avisibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>hazeLayerAltitude</name>
+				<type>float</type>
+				<value>
+					<use>lthickness</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>scattering</name>
+				<type>float</type>
+				<value>
+					<use>scattering</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>terminator</name>
+				<type>float</type>
+				<value>
+					<use>terminator</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>fogType</name>
+				<type>int</type>
+				<value>
+					<use>fogtype</use>
+				</value>
+			</uniform>
+			<!-- 			END fog include -->
 		</pass>
 	</technique>
 	<technique n="9">
 		<predicate>
 			<and>
-				<property>/sim/rendering/water-shader</property>
-				<property>/sim/rendering/shader-effects</property>
+				<property>/sim/rendering/shaders/water</property>
+				<less-equal>
+					<value type="float">2.0</value>
+					<float-property>/sim/rendering/shaders/water</float-property>
+				</less-equal>
 				<or>
 					<less-equal>
 						<value type="float">2.0</value>
@@ -415,17 +555,323 @@
 			</render-bin>
 			<texture-unit>
 				<unit>0</unit>
+				<image>
+					<use>texture[0]/image</use>
+				</image>
+				<filter>
+					<use>texture[0]/filter</use>
+				</filter>
+				<wrap-s>
+					<use>texture[0]/wrap-s</use>
+				</wrap-s>
+				<wrap-t>
+					<use>texture[0]/wrap-t</use>
+				</wrap-t>
+				<internal-format>
+					<use>texture[0]/internal-format</use>
+				</internal-format>
+			</texture-unit>
+			<texture-unit>
+				<unit>2</unit>
+				<image>
+					<use>texture[2]/image</use>
+				</image>
+				<filter>
+					<use>texture[2]/filter</use>
+				</filter>
+				<wrap-s>
+					<use>texture[2]/wrap-s</use>
+				</wrap-s>
+				<wrap-t>
+					<use>texture[2]/wrap-t</use>
+				</wrap-t>
+				<internal-format>
+					<use>texture[2]/internal-format</use>
+				</internal-format>
+			</texture-unit>
+			<texture-unit>
+				<unit>3</unit>
+				<image>
+					<use>texture[3]/image</use>
+				</image>
+				<filter>
+					<use>texture[3]/filter</use>
+				</filter>
+				<wrap-s>
+					<use>texture[3]/wrap-s</use>
+				</wrap-s>
+				<wrap-t>
+					<use>texture[3]/wrap-t</use>
+				</wrap-t>
+				<internal-format>
+					<use>texture[3]/internal-format</use>
+				</internal-format>
+			</texture-unit>
+			<texture-unit>
+				<unit>4</unit>
+				<image>
+					<use>texture[4]/image</use>
+				</image>
+				<filter>
+					<use>texture[4]/filter</use>
+				</filter>
+				<wrap-s>
+					<use>texture[4]/wrap-s</use>
+				</wrap-s>
+				<wrap-t>
+					<use>texture[4]/wrap-t</use>
+				</wrap-t>
+				<internal-format>
+					<use>texture[4]/internal-format</use>
+				</internal-format>
+			</texture-unit>
+			<texture-unit>
+				<unit>5</unit>
+				<image>
+					<use>texture[5]/image</use>
+				</image>
+				<filter>
+					<use>texture[5]/filter</use>
+				</filter>
+				<wrap-s>
+					<use>texture[5]/wrap-s</use>
+				</wrap-s>
+				<wrap-t>
+					<use>texture[5]/wrap-t</use>
+				</wrap-t>
+				<internal-format>
+					<use>texture[5]/internal-format</use>
+				</internal-format>
+			</texture-unit>
+			<texture-unit>
+				<unit>6</unit>
+				<image>
+					<use>texture[6]/image</use>
+				</image>
+				<filter>
+					<use>texture[6]/filter</use>
+				</filter>
+				<wrap-s>
+					<use>texture[6]/wrap-s</use>
+				</wrap-s>
+				<wrap-t>
+					<use>texture[6]/wrap-t</use>
+				</wrap-t>
+				<internal-format>
+					<use>texture[6]/internal-format</use>
+				</internal-format>
+			</texture-unit>
+			<texture-unit>
+				<unit>9</unit>
 				<type>noise</type>
 			</texture-unit>
 			<program>
-				<vertex-shader>Shaders/water-orig.vert</vertex-shader>
-				<fragment-shader>Shaders/water-orig.frag</fragment-shader>
+				<vertex-shader>Shaders/include_fog.vert</vertex-shader>
+				<vertex-shader>Shaders/water.vert</vertex-shader>
+				<fragment-shader>Shaders/include_fog.frag</fragment-shader>
+				<fragment-shader>Shaders/water.frag</fragment-shader>
 			</program>
 			<uniform>
-				<name>texture</name>
-				<type>sampler-3d</type>
+				<name>water_reflection</name>
+				<type>sampler-2d</type>
 				<value type="int">0</value>
 			</uniform>
+			<uniform>
+				<name>water_normalmap</name>
+				<type>sampler-2d</type>
+				<value type="int">2</value>
+			</uniform>
+			<uniform>
+				<name>water_dudvmap</name>
+				<type>sampler-2d</type>
+				<value type="int">3</value>
+			</uniform>
+			<uniform>
+				<name>water_reflection_grey</name>
+				<type>sampler-2d</type>
+				<value type="int">4</value>
+			</uniform>
+			<uniform>
+				<name>sea_foam</name>
+				<type>sampler-2d</type>
+				<value type="int">5</value>
+			</uniform>
+			<uniform>
+				<name>perlin_normalmap</name>
+				<type>sampler-2d</type>
+				<value type="int">6</value>
+			</uniform>
+			<uniform>
+				<name>saturation</name>
+				<type>float</type>
+				<!--<value>0.4</value>-->
+				<value>
+					<use>saturation</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>CloudCover0</name>
+				<type>float</type>
+				<value>
+					<use>cloud-cover[0]</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>CloudCover1</name>
+				<type>float</type>
+				<value>
+					<use>cloud-cover[1]</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>CloudCover2</name>
+				<type>float</type>
+				<value>
+					<use>cloud-cover[2]</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>CloudCover3</name>
+				<type>float</type>
+				<value>
+					<use>cloud-cover[3]</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>CloudCover4</name>
+				<type>float</type>
+				<value>
+					<use>cloud-cover[4]</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>Status</name>
+				<type>int</type>
+				<value>
+					<use>status</use>
+				</value>
+				<!--<value type="int">0</value> -->
+			</uniform>
+			<uniform>
+				<name>Overcast</name>
+				<type>float</type>
+				<value>
+					<use>overcast</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>WindE</name>
+				<type>float</type>
+				<value>
+					<use>windE</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>WindN</name>
+				<type>float</type>
+				<value>
+					<use>windN</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>WindFrom</name>
+				<type>float</type>
+				<value>
+					<use>wind-from</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>WaveFreq</name>
+				<type>float</type>
+				<value>
+					<use>WaveFreq</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>WaveAmp</name>
+				<type>float</type>
+				<value>
+					<use>WaveAmp</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>WaveSharp</name>
+				<type>float</type>
+				<value>
+					<use>WaveSharp</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>WaveAngle</name>
+				<type>float</type>
+				<value>
+					<use>WaveAngle</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>WaveFactor</name>
+				<type>float</type>
+				<value>
+					<use>WaveFactor</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>WaveDAngle</name>
+				<type>float</type>
+				<value>
+					<use>WaveDAngle</use>
+				</value>
+			</uniform>
+
+			<uniform>
+				<name>Noise</name>
+				<type>sampler-3d</type>
+				<value type="int">9</value>
+			</uniform>
+			<!-- 	    BEGIN fog include -->
+			<uniform>
+				<name>visibility</name>
+				<type>float</type>
+				<value>
+					<use>visibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>avisibility</name>
+				<type>float</type>
+				<value>
+					<use>avisibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>hazeLayerAltitude</name>
+				<type>float</type>
+				<value>
+					<use>lthickness</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>scattering</name>
+				<type>float</type>
+				<value>
+					<use>scattering</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>terminator</name>
+				<type>float</type>
+				<value>
+					<use>terminator</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>fogType</name>
+				<type>int</type>
+				<value>
+					<use>fogtype</use>
+				</value>
+			</uniform>
+			<!-- 			END fog include -->
 		</pass>
 	</technique>
 </PropertyList>

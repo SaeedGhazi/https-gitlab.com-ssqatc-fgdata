@@ -41,15 +41,6 @@
 		<group>
 			<layout>vbox</layout>
 
-			<text>
-				<halign>left</halign>
-				<label>"Material shaders" must be enabled for most options.</label>
-			</text>
-			<text>
-				<halign>left</halign>
-				<label>Snow is dependant on crop, landmass and urban shaders.</label>
-			</text>
-
 			<group>
 				<layout>hbox</layout>
 				<text>
@@ -351,131 +342,125 @@
 				</hrule>
 			</group>
 
-			<checkbox>
-				<halign>left</halign>
-				<label>Material shaders</label>
-				<name>material-shaders</name>
-				<property>/sim/rendering/shader-effects</property>
-				<binding>
-					<command>dialog-apply</command>
-					<object-name>material-shaders</object-name>
-				</binding>
-			</checkbox>
+			<group>
+				<layout>hbox</layout>
+
+				<text>
+					<label>Performance</label>
+				</text>
+				<slider>
+					<name>quality-level</name>
+					<min>0.0</min>
+					<max>5.0</max>
+					<step>1.0</step>
+					<fraction>0.17</fraction>
+					<property>/sim/rendering/shaders/quality-level</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>quality-level</object-name>
+					</binding>
+				</slider>
+				<text>
+					<label>Quality</label>
+				</text>
+				<text>
+					<label>12345678</label>
+					<format>(%1.0f)</format>
+					<live>true</live>
+					<property>/sim/rendering/shaders/quality-level</property>
+				</text>
+			</group>
 
 			<group>
-				<layout>vbox</layout>
-				<padding>10</padding>
-
-				<checkbox>
-					<halign>left</halign>
-					<label>Crop texture</label>
-					<name>crop-texture</name>
+				<layout>hbox</layout>
+				<button>
+					<legend>Shader Options</legend>
 					<enable>
-						<property>/sim/rendering/shader-effects</property>
+						<property>/sim/rendering/shaders/quality-level</property>
 					</enable>
-					<property>/sim/rendering/crop-shader</property>
 					<binding>
-						<command>dialog-apply</command>
-						<object-name>crop-texture</object-name>
+						<command>dialog-show</command>
+						<dialog-name>shaders</dialog-name>
 					</binding>
-				</checkbox>
+				</button>
 
-				<checkbox>
-					<halign>left</halign>
-					<label>Landmass effects</label>
-					<name>landmass-effects</name>
-					<enable>
-						<property>/sim/rendering/shader-effects</property>
-					</enable>
-					<property>/sim/rendering/landmass-shader</property>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>landmass-effects</object-name>
-					</binding>
-				</checkbox>
+				<group>
+					<layout>vbox</layout>
+					<text>
+						<visible>
+							<not>
+								<property>/sim/rendering/shaders/quality-level</property>
+							</not>
+						</visible>
+						<label>Adjust the slider </label>
+						<halign>left</halign>
+						<color>
+							<red>1.0</red>
+							<green>0.6</green>
+							<blue>0.6</blue>
+						</color>
 
-				<checkbox>
-					<halign>left</halign>
-					<label>Water reflection</label>
-					<name>water-reflection</name>
-					<enable>
-						<property>/sim/rendering/shader-effects</property>
-					</enable>
-					<property>/sim/rendering/water-shader</property>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>water-reflection</object-name>
-					</binding>
-				</checkbox>
+					</text>
+					<text>
+						<visible>
+							<not>
+								<property>/sim/rendering/shaders/quality-level</property>
+							</not>
+						</visible>
+						<label>to enable shaders.</label>
+						<halign>left</halign>
+						<color>
+							<red>1.0</red>
+							<green>0.6</green>
+							<blue>0.6</blue>
+						</color>
+					</text>
+				</group>
+			</group>
 
-				<checkbox>
+			<group>
+				<layout>hbox</layout>
+				<text>
+					<label>Other</label>
 					<halign>left</halign>
-					<label>Urban effects</label>
-					<name>urban-effects</name>
 					<enable>
-						<property>/sim/rendering/shader-effects</property>
+						<property>/sim/rendering/shaders/quality-level</property>
 					</enable>
-					<property>/sim/rendering/urban-shader</property>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>urban-effects</object-name>
-					</binding>
-				</checkbox>
-
-				<checkbox>
-					<halign>left</halign>
-					<label>Transition effects</label>
-					<name>transition-effects</name>
-					<enable>
-						<property>/sim/rendering/shader-effects</property>
-					</enable>
-					<property>/sim/rendering/transition-shader</property>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>transition-effects</object-name>
-					</binding>
-				</checkbox>
-
-				<checkbox>
-					<halign>left</halign>
-					<label>Persistent contrails</label>
-					<name>persistent-contrails</name>
-					<enable>
-						<property>/sim/rendering/shader-effects</property>
-					</enable>
-					<property>/sim/rendering/contrail-shader</property>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>persistent-contrails</object-name>
-					</binding>
-				</checkbox>
+				</text>
+				<hrule>
+					<stretch>true</stretch>
+				</hrule>
 			</group>
 
 			<group>
 				<layout>hbox</layout>
 				<halign>right</halign>
+
 				<text>
 					<label>Snow line</label>
 					<enable>
 						<and>
-							<property>/sim/rendering/shader-effects</property>
+							<property>/sim/rendering/shaders/quality-level</property>
 							<or>
-								<property>/sim/rendering/crop-shader</property>
-								<property>/sim/rendering/landmass-shader</property>
-								<property>/sim/rendering/urban-shader</property>
+								<property>/sim/rendering/shaders/crop</property>
+								<property>/sim/rendering/shaders/landmass</property>
+								<property>/sim/rendering/shaders/transition</property>
+								<property>/sim/rendering/shaders/urban</property>
 							</or>
 						</and>
 					</enable>
 				</text>
+
 				<slider>
 					<name>snow-level</name>
 					<enable>
 						<and>
-							<property>/sim/rendering/shader-effects</property>
+							<property>/sim/rendering/shaders/quality-level</property>
 							<or>
-								<property>/sim/rendering/crop-shader</property>
-								<property>/sim/rendering/landmass-shader</property>
-								<property>/sim/rendering/urban-shader</property>
+								<property>/sim/rendering/shaders/crop</property>
+								<property>/sim/rendering/shaders/landmass</property>
+								<property>/sim/rendering/shaders/transition</property>
+								<property>/sim/rendering/shaders/urban</property>
 							</or>
 						</and>
 					</enable>
@@ -487,14 +472,17 @@
 						<object-name>snow-level</object-name>
 					</binding>
 				</slider>
+
 				<text>
+					<halign>left</halign>
 					<enable>
 						<and>
-							<property>/sim/rendering/shader-effects</property>
+							<property>/sim/rendering/shaders/quality-level</property>
 							<or>
-								<property>/sim/rendering/crop-shader</property>
-								<property>/sim/rendering/landmass-shader</property>
-								<property>/sim/rendering/urban-shader</property>
+								<property>/sim/rendering/shaders/crop</property>
+								<property>/sim/rendering/shaders/landmass</property>
+								<property>/sim/rendering/shaders/transition</property>
+								<property>/sim/rendering/shaders/urban</property>
 							</or>
 						</and>
 					</enable>
@@ -507,66 +495,33 @@
 
 			<group>
 				<layout>hbox</layout>
-				<halign>right</halign>
-				<text>
-					<label>Performance vs Quality</label>
-					<enable>
-						<property>/sim/rendering/shader-effects</property>
-					</enable>
-				</text>
-				<slider>
-					<name>quality-level</name>
-					<enable>
-						<property>/sim/rendering/shader-effects</property>
-					</enable>
-					<min>0.0</min>
-					<max>5.0</max>
-					<step>0.5</step>
-					<property>/sim/rendering/quality-level</property>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>quality-level</object-name>
-					</binding>
-				</slider>
 				<text>
 					<enable>
-						<property>/sim/rendering/shader-effects</property>
+						<property>/sim/rendering/shaders/quality-level</property>
 					</enable>
-					<label>12345678</label>
-					<format>%.1f</format>
-					<live>true</live>
-					<property>/sim/rendering/quality-level</property>
-				</text>
-			</group>
-
-			<group>
-				<layout>hbox</layout>
-				<text>
 					<label>Experimental effects</label>
 					<halign>left</halign>
 					<color>
 						<red>1.0</red>
 						<green>0.6</green>
 						<blue>0.6</blue>
-						<alpha>1</alpha>
 					</color>
 				</text>
 				<hrule>
 					<stretch>true</stretch>
 				</hrule>
 			</group>
-			
+
 			<group>
 				<layout>vbox</layout>
-				<padding>10</padding>
 				<checkbox>
 					<halign>left</halign>
+					<enable>
+						<property>/sim/rendering/shaders/quality-level</property>
+					</enable>
 					<label>Skydome scattering</label>
 					<name>skydome-scattering</name>
-					<enable>
-						<property>/sim/rendering/shader-effects</property>
-					</enable>
-					<property>/sim/rendering/scattering-shader</property>
+					<property>/sim/rendering/shaders/skydome</property>
 					<binding>
 						<command>dialog-apply</command>
 						<object-name>skydome-scattering</object-name>
@@ -580,13 +535,19 @@
 				<text>
 					<label>Mie factor</label>
 					<enable>
-						<property>/sim/rendering/shader-effects</property>
+						<and>
+							<property>/sim/rendering/shaders/quality-level</property>
+							<property>/sim/rendering/shaders/skydome</property>
+						</and>
 					</enable>
 				</text>
 				<slider>
 					<name>mie-factor</name>
 					<enable>
-						<property>/sim/rendering/shader-effects</property>
+						<and>
+							<property>/sim/rendering/shaders/quality-level</property>
+							<property>/sim/rendering/shaders/skydome</property>
+						</and>
 					</enable>
 					<min>0.0</min>
 					<max>0.01</max>
@@ -599,7 +560,10 @@
 				</slider>
 				<text>
 					<enable>
-						<property>/sim/rendering/shader-effects</property>
+						<and>
+							<property>/sim/rendering/shaders/quality-level</property>
+							<property>/sim/rendering/shaders/skydome</property>
+						</and>
 					</enable>
 					<label>12345678</label>
 					<format>%.3f</format>
@@ -607,20 +571,26 @@
 					<property>/sim/rendering/mie</property>
 				</text>
 			</group>
-			
+
 			<group>
 				<layout>hbox</layout>
 				<halign>right</halign>
 				<text>
 					<label>Rayleigh factor</label>
 					<enable>
-						<property>/sim/rendering/shader-effects</property>
+						<and>
+							<property>/sim/rendering/shaders/quality-level</property>
+							<property>/sim/rendering/shaders/skydome</property>
+						</and>
 					</enable>
 				</text>
 				<slider>
 					<name>rayleigh-factor</name>
 					<enable>
-						<property>/sim/rendering/shader-effects</property>
+						<and>
+							<property>/sim/rendering/shaders/quality-level</property>
+							<property>/sim/rendering/shaders/skydome</property>
+						</and>
 					</enable>
 					<min>0.0</min>
 					<max>0.001</max>
@@ -633,7 +603,10 @@
 				</slider>
 				<text>
 					<enable>
-						<property>/sim/rendering/shader-effects</property>
+						<and>
+							<property>/sim/rendering/shaders/quality-level</property>
+							<property>/sim/rendering/shaders/skydome</property>
+						</and>
 					</enable>
 					<label>12345678</label>
 					<format>%.4f</format>
@@ -648,13 +621,19 @@
 				<text>
 					<label>Density factor</label>
 					<enable>
-						<property>/sim/rendering/shader-effects</property>
+						<and>
+							<property>/sim/rendering/shaders/quality-level</property>
+							<property>/sim/rendering/shaders/skydome</property>
+						</and>
 					</enable>
 				</text>
 				<slider>
 					<name>density-factor</name>
 					<enable>
-						<property>/sim/rendering/shader-effects</property>
+						<and>
+							<property>/sim/rendering/shaders/quality-level</property>
+							<property>/sim/rendering/shaders/skydome</property>
+						</and>
 					</enable>
 					<min>0.0</min>
 					<max>1.0</max>
@@ -667,7 +646,10 @@
 				</slider>
 				<text>
 					<enable>
-						<property>/sim/rendering/shader-effects</property>
+						<and>
+							<property>/sim/rendering/shaders/quality-level</property>
+							<property>/sim/rendering/shaders/skydome</property>
+						</and>
 					</enable>
 					<label>12345678</label>
 					<format>%.1f</format>
@@ -675,6 +657,10 @@
 					<property>/sim/rendering/dome-density</property>
 				</text>
 			</group>
+
+			<empty>
+				<stretch>1</stretch>
+			</empty>
 
 		</group>
 	</group>

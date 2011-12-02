@@ -5,6 +5,8 @@
 
 #version 120
 
+#extension GL_ATI_shader_texture_lod : enable
+
 #define TEXTURE_MIP_LEVELS 10
 #define TEXTURE_PIX_COUNT  1024 //pow(2,TEXTURE_MIP_LEVELS)
 #define BINARY_SEARCH_COUNT 10

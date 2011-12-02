@@ -15,11 +15,45 @@
 		</wind-speed>
 		<offset>0.0</offset>
 		<amplitude-factor>0.08</amplitude-factor>
+		<windE>
+			<use>/environment/sea/surface/wind-from-east-fps</use>
+		</windE>
+		<windN>
+			<use>/environment/sea/surface/wind-from-north-fps</use>
+		</windN>
+		<speed-kt>0.0</speed-kt>
+		<heading-deg>0.0</heading-deg>
+
+		<!--  fog include -->
+		<visibility>
+			<use>/environment/ground-visibility-m</use>
+		</visibility>
+		<avisibility>
+			<use>/environment/visibility-m</use>
+		</avisibility>
+		<lthickness>
+			<use>/environment/ground-haze-thickness-m</use>
+		</lthickness>
+		<scattering>
+			<use>/rendering/scene/scattering</use>
+		</scattering>
+		<terminator>
+			<use>/environment/terminator-relative-position-m</use>
+		</terminator>
+		<fogtype>
+			<use>/sim/rendering/scattering-shader</use>
+		</fogtype>
+		<!-- 	END fog include -->
+
 	</parameters>
 	<technique n="9">
 		<predicate>
 			<and>
-				<property>/sim/rendering/shader-effects</property>
+				<!--<property>/sim/rendering/shader-effects</property>-->
+				<less-equal>
+					<value type="float">3.0</value>
+					<float-property>/sim/rendering/shaders/quality-level</float-property>
+				</less-equal>
 				<or>
 					<less-equal>
 						<value type="float">2.0</value>
@@ -114,7 +148,9 @@
 				<use>vertex-program-two-side</use>
 			</vertex-program-two-side>
 			<program>
+				<vertex-shader>Shaders/include_fog.vert</vertex-shader>
 				<vertex-shader>Shaders/flutter.vert</vertex-shader>
+				<fragment-shader>Shaders/include_fog.frag</fragment-shader>
 				<fragment-shader>Shaders/default.frag</fragment-shader>
 			</program>
 			<!--<uniform>
@@ -155,6 +191,79 @@
 				<type>sampler-3d</type>
 				<value type="int">9</value>
 			</uniform>
+			<uniform>
+				<name>WindE</name>
+				<type>float</type>
+				<value>
+					<use>windE</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>WindN</name>
+				<type>float</type>
+				<value>
+					<use>windN</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>spd</name>
+				<type>float</type>
+				<value>
+					<use>speed-kt</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>hdg</name>
+				<type>float</type>
+				<value>
+					<use>heading-deg</use>
+				</value>
+			</uniform>
+			
+			<!-- 	    BEGIN fog include -->
+			<uniform>
+				<name>visibility</name>
+				<type>float</type>
+				<value>
+					<use>visibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>avisibility</name>
+				<type>float</type>
+				<value>
+					<use>avisibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>hazeLayerAltitude</name>
+				<type>float</type>
+				<value>
+					<use>lthickness</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>scattering</name>
+				<type>float</type>
+				<value>
+					<use>scattering</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>terminator</name>
+				<type>float</type>
+				<value>
+					<use>terminator</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>fogType</name>
+				<type>int</type>
+				<value>
+					<use>fogtype</use>
+				</value>
+			</uniform>
+			<!-- 			END fog include -->
 		</pass>
 	</technique>
 

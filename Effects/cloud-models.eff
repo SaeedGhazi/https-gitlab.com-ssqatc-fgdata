@@ -10,7 +10,7 @@
   <technique n="10">
     <predicate>
       <and>
-        <property>/sim/rendering/shader-effects</property>
+        <property>/sim/rendering/shaders/quality-level</property>
         <or>
           <less-equal>
             <value type="float">2.0</value>

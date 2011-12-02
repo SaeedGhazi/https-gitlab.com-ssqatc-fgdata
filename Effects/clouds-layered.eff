@@ -8,7 +8,7 @@
   <technique n="10">
     <predicate>
       <and>
-        <property>/sim/rendering/shader-effects</property>
+        <property>/sim/rendering/shaders/quality-level</property>
         <less-equal>
           <value type="float">1.0</value>
           <shader-language/>

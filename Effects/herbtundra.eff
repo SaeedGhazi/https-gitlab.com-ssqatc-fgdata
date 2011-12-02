@@ -30,7 +30,7 @@
       <wrap-t>repeat</wrap-t>
       <internal-format>normalized</internal-format>
     </texture>
-    <snow-level><use>/sim/rendering/snow-level-m</use></snow-level>
+    <snow-level><use>/environment/snow-level-m</use></snow-level>
     <depth-factor type="float">0.01</depth-factor>
     <canopy-height type="float">15.0</canopy-height>
     
@@ -40,7 +40,7 @@
     <season-blue type="float">0.22</season-blue>
     <!-- end season color -->
     
-    <quality-level><use>/sim/rendering/quality-level</use></quality-level>
+    <quality-level><use>/sim/rendering/shaders/transition</use></quality-level>
   </parameters>
   <generate>
     <tangent type="int">6</tangent>
@@ -49,8 +49,7 @@
   <technique n="9">
     <predicate>
       <and>
-        <property>/sim/rendering/transition-shader</property>
-        <property>/sim/rendering/shader-effects</property>
+        <property>/sim/rendering/shaders/transition</property>
         <or>
           <less-equal>
             <value type="float">2.0</value>

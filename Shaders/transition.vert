@@ -19,13 +19,19 @@
 // bugs with gl_FrontFacing in the fragment shader.
 varying vec4 diffuse_term, RawPos;
 varying vec3 normal, Vnormal;
-varying float fogCoord;
+//varying float fogCoord;
 uniform int colorMode;
 
+////fog "include"////////
+uniform int fogType;
+
+void fog_Func(int type);
+/////////////////////////
+
 void main()
-{
+    {
     RawPos = gl_Vertex;
-    vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
+    //vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
     gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
     normal = normalize(gl_Normal);
@@ -34,25 +40,26 @@ void main()
     if (colorMode == MODE_DIFFUSE) {
         diffuse_color = gl_Color;
         ambient_color = gl_FrontMaterial.ambient;
-    } else if (colorMode == MODE_AMBIENT_AND_DIFFUSE) {
-        diffuse_color = gl_Color;
-        ambient_color = gl_Color;
-    } else {
-        diffuse_color = gl_FrontMaterial.diffuse;
-        ambient_color = gl_FrontMaterial.ambient;
+        } else if (colorMode == MODE_AMBIENT_AND_DIFFUSE) {
+            diffuse_color = gl_Color;
+            ambient_color = gl_Color;
+        } else {
+            diffuse_color = gl_FrontMaterial.diffuse;
+            ambient_color = gl_FrontMaterial.ambient;
+            }
+        diffuse_term = diffuse_color * gl_LightSource[0].diffuse;
+        vec4 constant_term = gl_FrontMaterial.emission + ambient_color *
+            (gl_LightModel.ambient +  gl_LightSource[0].ambient);
+        // Super hack: if diffuse material alpha is less than 1, assume a
+        // transparency animation is at work
+        if (gl_FrontMaterial.diffuse.a < 1.0)
+            diffuse_term.a = gl_FrontMaterial.diffuse.a;
+        else
+            diffuse_term.a = gl_Color.a;
+        // Another hack for supporting two-sided lighting without using
+        // gl_FrontFacing in the fragment shader.
+        gl_FrontColor.rgb = constant_term.rgb;  gl_FrontColor.a = 1.0;
+        gl_BackColor.rgb = constant_term.rgb; gl_BackColor.a = 0.0;
+        //fogCoord = abs(ecPosition.z / ecPosition.w);
+        fog_Func(fogType);
     }
-    diffuse_term = diffuse_color * gl_LightSource[0].diffuse;
-    vec4 constant_term = gl_FrontMaterial.emission + ambient_color *
-        (gl_LightModel.ambient +  gl_LightSource[0].ambient);
-    // Super hack: if diffuse material alpha is less than 1, assume a
-    // transparency animation is at work
-    if (gl_FrontMaterial.diffuse.a < 1.0)
-        diffuse_term.a = gl_FrontMaterial.diffuse.a;
-    else
-        diffuse_term.a = gl_Color.a;
-    // Another hack for supporting two-sided lighting without using
-    // gl_FrontFacing in the fragment shader.
-    gl_FrontColor.rgb = constant_term.rgb;  gl_FrontColor.a = 1.0;
-    gl_BackColor.rgb = constant_term.rgb; gl_BackColor.a = 0.0;
-    fogCoord = abs(ecPosition.z / ecPosition.w);
-}

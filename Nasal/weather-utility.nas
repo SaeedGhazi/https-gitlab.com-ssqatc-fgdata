@@ -15,22 +15,22 @@ var Factor = 0.0004;
 var Sharp = 1.0;
 
 #add control properies for waves
-wave_amp_Node = props.globals.getNode("/environment/wave/amp" , 1);
+var wave_amp_Node = props.globals.getNode("/environment/wave/amp" , 1);
 wave_amp_Node.setDoubleValue(Amp);
 
-wave_freq_Node = props.globals.getNode("/environment/wave/freq" , 1);
+var wave_freq_Node = props.globals.getNode("/environment/wave/freq" , 1);
 wave_freq_Node.setDoubleValue(Freq);
 
-wave_sharp_Node = props.globals.getNode("/environment/wave/sharp" , 1);
+var wave_sharp_Node = props.globals.getNode("/environment/wave/sharp" , 1);
 wave_sharp_Node.setDoubleValue(Sharp);
 
-wave_angle_Node = props.globals.getNode("/environment/wave/angle" , 1);
+var wave_angle_Node = props.globals.getNode("/environment/wave/angle" , 1);
 wave_angle_Node.setDoubleValue(Angle);
 
-wave_factor_Node = props.globals.getNode("/environment/wave/factor" , 1);
+var wave_factor_Node = props.globals.getNode("/environment/wave/factor" , 1);
 wave_factor_Node.setDoubleValue(Factor);
 
-wave_factor_Node = props.globals.getNode("/environment/wave/dangle" , 1);
+var wave_factor_Node = props.globals.getNode("/environment/wave/dangle" , 1);
 wave_factor_Node.setDoubleValue(DAngle);
 
 props.globals.initNode("/environment/sea/surface/wind-speed-kt", 0, "DOUBLE");
@@ -46,28 +46,28 @@ props.globals.initNode("/orientation/model/roll-deg", 0, "DOUBLE");
 
 var initialize = func {
 
-	wind_from_east_Node = props.globals.getNode("/environment/config/boundary/entry[0]/wind-from-east-fps", 1);
+	var wind_from_east_Node = props.globals.getNode("/environment/config/boundary/entry[0]/wind-from-east-fps", 1);
 	wind_from_east_Node.setDoubleValue(0);
 
-	wind_from_north_Node = props.globals.getNode("/environment/config/boundary/entry[0]/wind-from-north-fps", 1);
+	var wind_from_north_Node = props.globals.getNode("/environment/config/boundary/entry[0]/wind-from-north-fps", 1);
 	wind_from_north_Node.setDoubleValue(0);
 
-	wind_from_Node = props.globals.getNode("/environment/config/boundary/entry[0]/wind-from-heading-deg", 1);
+	var wind_from_Node = props.globals.getNode("/environment/config/boundary/entry[0]/wind-from-heading-deg", 1);
 	wind_from_Node.setDoubleValue(0);
 
-	wind_speed_Node = props.globals.getNode("/environment/config/boundary/entry[0]/wind-speed-kt", 1);
+	var wind_speed_Node = props.globals.getNode("/environment/config/boundary/entry[0]/wind-speed-kt", 1);
 	wind_speed_Node.setDoubleValue(0);
 
-	wind_status_Node = props.globals.getNode("/environment/config/enabled", 1);
+	var wind_status_Node = props.globals.getNode("/environment/config/enabled", 1);
 	wind_status_Node.setBoolValue(1);
 
-	ground_vis_Node = props.globals.getNode("/environment/ground-visibility-m", 1);
+	var ground_vis_Node = props.globals.getNode("/environment/ground-visibility-m", 1);
 	ground_vis_Node.setDoubleValue(500);
 
-	ground_thick_Node = props.globals.getNode("/environment/ground-haze-thickness-m" , 1);
+	var ground_thick_Node = props.globals.getNode("/environment/ground-haze-thickness-m" , 1);
 	ground_thick_Node.setDoubleValue(300);
 
-	ground_term_Node = props.globals.getNode("/environment/terminator-relative-position-m" , 1);
+	var ground_term_Node = props.globals.getNode("/environment/terminator-relative-position-m" , 1);
 	ground_term_Node.setDoubleValue(60000);
 
 

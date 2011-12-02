@@ -184,6 +184,7 @@
 				<min>0.0</min>
 				<max>5.0</max>
 				<step>1.0</step>
+				<fraction>0.17</fraction>
 				<property>/sim/rendering/shaders/urban</property>
 				<binding>
 					<command>dialog-apply</command>
@@ -196,6 +197,7 @@
 				<min>0.0</min>
 				<max>5.0</max>
 				<step>1.0</step>
+				<fraction>0.17</fraction>
 				<property>/sim/rendering/shaders/water</property>
 				<binding>
 					<command>dialog-apply</command>

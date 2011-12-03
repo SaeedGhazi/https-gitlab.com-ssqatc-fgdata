@@ -2,6 +2,7 @@
 // Licence: GPL v2
 // Author: Frederic Bouvier.
 //  Adapted from the paper by F. Policarpo et al. : Real-time Relief Mapping on Arbitrary Polygonal Surfaces
+//  Adapted from the paper and sources by M. Drobot in GPU Pro : Quadtree Displacement Mapping with Height Blending
 
 #version 120
 

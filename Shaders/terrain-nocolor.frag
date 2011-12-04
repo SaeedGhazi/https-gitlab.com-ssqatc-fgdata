@@ -18,8 +18,6 @@ void main()
     texel = texture2D(texture, gl_TexCoord[0].st);
     fragColor = color * texel;
 
-    gl_FragColor = fragColor;
-
     finalColor.rgb = fog_Func(fragColor.rgb, fogType);
     gl_FragColor = finalColor;
 

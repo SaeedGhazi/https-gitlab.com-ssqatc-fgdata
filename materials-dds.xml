@@ -2575,7 +2575,7 @@ Shared parameters for various materials.
     <shininess>1.2</shininess>
     <light-coverage>20000000.0</light-coverage>
     <wood-coverage>8000.0</wood-coverage>
-    <tree-texture>Textures.high/Trees/mixed-shrub-winter.png</tree-texture>
+    <tree-texture>Textures/Trees/mixed-shrub-winter.png</tree-texture>
     <tree-varieties>8</tree-varieties>
     <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>2.0</tree-height-m>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Reflections + Bumpmapping + specular + Lightmap
+<!-- Reflections + Bumpmapping + specular+Lightmap
 please see Docs/README.model-combined.eff for documentation
 -->
 <PropertyList>
@@ -92,13 +92,16 @@ please see Docs/README.model-combined.eff for documentation
 		<ambient_correction type="float">0.05</ambient_correction>
 <!-- 		quality slider -->
 		<shader_quality type="int">2</shader_quality>
-			<!--<use>/sim/rendering/shaders/model/quality</use>
-		</shader_quality>-->
-		<vertex-program-two-side type="bool">false</vertex-program-two-side>
-		<cull-face>back</cull-face>
+			<!--<use>/sim/rendering/shaders/model</use>
+		</quality>-->
+		<rendering-hint>opaque</rendering-hint>
+		<transparent>false</transparent>
+		<render-bin>
+			<bin-number>1</bin-number>
+			<bin-name>RenderBin</bin-name>
+		</render-bin>
 <!-- 		INTERNAL USE -->
-		<rendering-hint>transparent</rendering-hint>
-		<shade-model>smooth</shade-model>
+ 		<shade-model>smooth</shade-model>
 		<model_hdg>
 			<use>orientation/model/heading-deg</use>
 		</model_hdg>
@@ -128,7 +131,6 @@ please see Docs/README.model-combined.eff for documentation
 			<use>/sim/rendering/scattering-shader</use>
 		</fogtype>
 <!-- 		END fog include -->
-
 	</parameters>
 
 	<!--<generate>
@@ -194,15 +196,26 @@ please see Docs/README.model-combined.eff for documentation
 			<shade-model>
 				<use>shade-model</use>
 			</shade-model>
-			<vertex-program-two-side>
-				<use>vertex-program-two-side</use>
-			</vertex-program-two-side>
 			<cull-face>
 				<use>cull-face</use>
 			</cull-face>
 			<rendering-hint>
 				<use>rendering-hint</use>
 			</rendering-hint>
+			<blend>
+				<use>transparent</use>
+			</blend>
+			<alpha-test>
+				<use>transparent</use>
+			</alpha-test>
+			<render-bin>
+			<bin-number>
+				<use>render-bin/bin-number</use>
+			</bin-number>
+			<bin-name>
+				<use>render-bin/bin-name</use>
+			</bin-name>
+      </render-bin>
 			<!-- Diffuse texture unit-->
 			<texture-unit>
 				<unit>0</unit>
@@ -337,6 +350,10 @@ please see Docs/README.model-combined.eff for documentation
 				<unit>9</unit>
 				<type>noise</type>
 			</texture-unit>
+
+			<vertex-program-two-side>
+				<use>vertex-program-two-side</use>
+			</vertex-program-two-side>
 
 			<program>
 				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader>

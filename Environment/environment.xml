@@ -318,6 +318,8 @@
     <report-score type="bool" userarchive="y">false</report-score>
     <data type="string"/>
   </wildfire>
+  
+  <snow-level-m type="double">2000.0</snow-level-m>
 
   <!-- create on instance of the terrains-sampler but start disabled -->
   <terrain>

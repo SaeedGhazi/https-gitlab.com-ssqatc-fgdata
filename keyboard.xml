@@ -462,7 +462,7 @@ top down before the key bindings are parsed.
 
  <key n="50">
   <name>2</name>
-  <desc>Increase elevator or autopilot altitude</desc>
+  <desc>Elevator up or increase autopilot altitude</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
@@ -570,7 +570,7 @@ top down before the key bindings are parsed.
 
  <key n="56">
   <name>8</name>
-  <desc>Decrease elevator or autopilot altitude</desc>
+  <desc>Elevator down or decrease autopilot altitude</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
@@ -1277,7 +1277,7 @@ top down before the key bindings are parsed.
 
  <key n="357">
   <name>Up</name>
-  <desc>Increase elevator or autopilot altitude</desc>
+  <desc>Elevator down or decrease autopilot altitude</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>
@@ -1324,7 +1324,7 @@ top down before the key bindings are parsed.
 
  <key n="359">
   <name>Down</name>
-  <desc>Decrease elevator or autopilot altitude</desc>
+  <desc>Elevator up or increase autopilot altitude</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>nasal</command>

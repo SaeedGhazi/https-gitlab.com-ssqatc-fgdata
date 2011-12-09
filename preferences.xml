@@ -305,6 +305,9 @@ Started September 2000 by David Megginson, david@megginson.com
 					<festival type="bool">true</festival>
 				</voice>
 			</voices>
+			<aimodels>
+				<enabled type="bool" userarchive="y">false</enabled>
+			</aimodels>
 		</sound>
 		<speed-up type="double">1.0</speed-up>
 		<current-view>

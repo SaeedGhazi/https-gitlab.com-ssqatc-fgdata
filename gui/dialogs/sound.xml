@@ -273,6 +273,28 @@
         <property>/sim/sound/enabled</property>
       </enable>
     </checkbox>
+
+    <text>
+      <row>6</row>
+      <col>0</col>
+      <label>AI/MP</label>
+      <halign>left</halign>
+	  <enable>
+        <property>/sim/sound/enabled</property>
+      </enable>
+    </text>
+
+    <checkbox>
+      <row>6</row>
+      <col>1</col>
+      <property>/sim/sound/aimodels/enabled</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+	  <enable>
+        <property>/sim/sound/enabled</property>
+      </enable>
+    </checkbox>
   </group>
 
   <hrule/>

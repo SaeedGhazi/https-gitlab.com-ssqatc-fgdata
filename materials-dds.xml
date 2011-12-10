@@ -1319,7 +1319,7 @@ Shared parameters for various materials.
           <property>sim/startup/season</property>
           <value>summer</value>
         </equals>
-        <property>sim/rendering/urban-shader</property>
+        <property>sim/rendering/shaders/urban</property>
       </and>
     </condition>
     <name>BuiltUpCover</name>
@@ -1420,7 +1420,7 @@ Shared parameters for various materials.
           <property>sim/startup/season</property>
           <value>summer</value>
         </equals>
-        <property>sim/rendering/urban-shader</property>
+        <property>sim/rendering/shaders/urban</property>
       </and>
     </condition>
     <!--<name>BuiltUpCover</name>
@@ -1513,7 +1513,7 @@ Shared parameters for various materials.
         <value>summer</value>
       </equals>
       <not>
-        <property>sim/rendering/urban-shader</property>
+        <property>sim/rendering/shaders/urban</property>
       </not>
     </condition>
     <name>BuiltUpCover</name>
@@ -1606,7 +1606,7 @@ Shared parameters for various materials.
         <value>summer</value>
       </equals>
       <not>
-        <property>sim/rendering/urban-shader</property>
+        <property>sim/rendering/shaders/urban</property>
       </not>
     </condition>
     <name>Construction</name>

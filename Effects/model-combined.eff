@@ -12,8 +12,9 @@ please see Docs/README.model-combined.eff for documentation
 			<type>white</type>
 		</texture>
 	<!-- Normal Map -->
-		<normalmap_enabled type="int">0</normalmap_enabled>
-		<normalmap_dds type="int">0</normalmap_dds>
+		<normalmap-enabled type="int">0</normalmap-enabled>
+		<normalmap-dds type="int">0</normalmap-dds>
+		<normalmap-tiling type="float">1.0</normalmap-tiling>
 		<texture n="2">
 			<image>Aircraft/Generic/Effects/null_bumpspec.png</image>
 			<filter>linear-mipmap-linear</filter>
@@ -22,16 +23,16 @@ please see Docs/README.model-combined.eff for documentation
 			<internal-format>normalized</internal-format>
 		</texture>
 	<!-- Light Map -->
-		<lightmap_enabled type="int">0</lightmap_enabled>
-		<lightmap_multi type="int">0</lightmap_multi>
-		<lightmap_factor type="float" n="0">1.0</lightmap_factor>
-		<lightmap_color type="vec3d" n="0"> 1.0 1.0 1.0 </lightmap_color>
-		<lightmap_factor type="float" n="1">1.0</lightmap_factor>
-		<lightmap_color type="vec3d" n="1"> 1.0 1.0 1.0 </lightmap_color>
-		<lightmap_factor type="float" n="2">1.0</lightmap_factor>
-		<lightmap_color type="vec3d" n="2"> 1.0 1.0 1.0 </lightmap_color>
-		<lightmap_factor type="float" n="3">1.0</lightmap_factor>
-		<lightmap_color type="vec3d" n="3"> 1.0 1.0 1.0 </lightmap_color>
+		<lightmap-enabled type="int">0</lightmap-enabled>
+		<lightmap-multi type="int">0</lightmap-multi>
+		<lightmap-factor type="float" n="0">1.0</lightmap-factor>
+		<lightmap-color type="vec3d" n="0"> 1.0 1.0 1.0 </lightmap-color>
+		<lightmap-factor type="float" n="1">1.0</lightmap-factor>
+		<lightmap-color type="vec3d" n="1"> 1.0 1.0 1.0 </lightmap-color>
+		<lightmap-factor type="float" n="2">1.0</lightmap-factor>
+		<lightmap-color type="vec3d" n="2"> 1.0 1.0 1.0 </lightmap-color>
+		<lightmap-factor type="float" n="3">1.0</lightmap-factor>
+		<lightmap-color type="vec3d" n="3"> 1.0 1.0 1.0 </lightmap-color>
 		<texture n="3">
 			<image>Aircraft/Generic/Effects/greymap.png</image>
 			<filter>linear-mipmap-linear</filter>
@@ -40,10 +41,10 @@ please see Docs/README.model-combined.eff for documentation
 			<internal-format>normalized</internal-format>
 		</texture>
 	<!-- Reflection -->
-		<reflection_enabled type="int">0</reflection_enabled>
-		<reflection_correction type="float">0.0</reflection_correction>
-		<reflect_map_enabled type="int">0</reflect_map_enabled>
-		<reflection_dynamic type="int">0</reflection_dynamic>
+		<reflection-enabled type="int">0</reflection-enabled>
+		<reflection-correction type="float">0.0</reflection-correction>
+		<reflect-map-enabled type="int">0</reflect-map-enabled>
+		<reflection-dynamic type="int">0</reflection-dynamic>
 		<texture n="4">
 			<image>Aircraft/Generic/Effects/ReflectMaps/reflectmap.png</image>
 			<filter>linear-mipmap-linear</filter>
@@ -69,7 +70,7 @@ please see Docs/README.model-combined.eff for documentation
 			<!-- END 6 image cube map -->
 		</texture>
 		<!-- Reflection fresnel -->
-		<reflection_fresnel type="float">0.1</reflection_fresnel>
+		<reflection-fresnel type="float">0.1</reflection-fresnel>
 		<texture n="6">
 			<image>Aircraft/Generic/Effects/FresnelLookUp.png</image>
 			<filter>linear-mipmap-linear</filter>
@@ -78,7 +79,7 @@ please see Docs/README.model-combined.eff for documentation
 			<internal-format>normalized</internal-format>
 		</texture>
 		<!-- Reflection rainbow -->
-		<reflection_rainbow type="float">0.01</reflection_rainbow>
+		<reflection-rainbow type="float">0.01</reflection-rainbow>
 		<texture n="7">
 			<image>Aircraft/Generic/Effects/Rainbow.png</image>
 			<filter>linear-mipmap-linear</filter>
@@ -86,12 +87,16 @@ please see Docs/README.model-combined.eff for documentation
 			<wrap-t>repeat</wrap-t>
 			<internal-format>normalized</internal-format>
 		</texture>
-		<reflection_noise type="float">0.25</reflection_noise>
+		<reflection-noise type="float">0.25</reflection-noise>
 <!-- END Reflection -->
+		<!-- 		Dirt -->
+		<dirt-enabled type="int">0</dirt-enabled>
+		<dirt-color type="vec3d">0.0 0.0 0.0</dirt-color>
+		<dirt-factor type="float">0.0</dirt-factor>
 		<!-- ambient correction -->
-		<ambient_correction type="float">0.05</ambient_correction>
+		<ambient-correction type="float">0.05</ambient-correction>
 <!-- 		quality slider -->
-		<shader_quality type="int">2</shader_quality>
+		<shader-quality type="int">2</shader-quality>
 			<!--<use>/sim/rendering/shaders/model</use>
 		</quality>-->
 		<rendering-hint>opaque</rendering-hint>
@@ -102,15 +107,15 @@ please see Docs/README.model-combined.eff for documentation
 		</render-bin>
 <!-- 		INTERNAL USE -->
  		<shade-model>smooth</shade-model>
-		<model_hdg>
+		<model-hdg>
 			<use>orientation/model/heading-deg</use>
-		</model_hdg>
-		<model_pitch>
+		</model-hdg>
+		<model-pitch>
 			<use>orientation/model/pitch-deg</use>
-		</model_pitch>
-		<model_roll>
+		</model-pitch>
+		<model-roll>
 			<use>orientation/model/roll-deg</use>
-		</model_roll>
+		</model-roll>
 <!-- 	fog include	 -->
 		<visibility>
 			<use>/environment/ground-visibility-m</use>
@@ -424,7 +429,7 @@ please see Docs/README.model-combined.eff for documentation
 				<name>nmap_enabled</name>
 				<type>int</type>
 				<value>
-					<use>normalmap_enabled</use>
+					<use>normalmap-enabled</use>
 				</value>
 			</uniform>
 
@@ -433,7 +438,15 @@ please see Docs/README.model-combined.eff for documentation
 				<name>nmap_dds</name>
 				<type>int</type>
 				<value>
-					<use>normalmap_dds</use>
+					<use>normalmap-dds</use>
+				</value>
+			</uniform>
+
+			<uniform>
+				<name>nmap_tile</name>
+				<type>int</type>
+				<value>
+					<use>normalmap-tiling</use>
 				</value>
 			</uniform>
 
@@ -443,7 +456,7 @@ please see Docs/README.model-combined.eff for documentation
 				<name>lightmap_enabled</name>
 				<type>int</type>
 				<value>
-					<use>lightmap_enabled</use>
+					<use>lightmap-enabled</use>
 				</value>
 			</uniform>
 <!-- lightmap is multichannel -->
@@ -451,7 +464,7 @@ please see Docs/README.model-combined.eff for documentation
 				<name>lightmap_multi</name>
 				<type>int</type>
 				<value>
-					<use>lightmap_multi</use>
+					<use>lightmap-multi</use>
 				</value>
 			</uniform>
 
@@ -459,7 +472,7 @@ please see Docs/README.model-combined.eff for documentation
 				<name>lightmap_r_factor</name>
 				<type>float</type>
 				<value>
-					<use>lightmap_factor[0]</use>
+					<use>lightmap-factor[0]</use>
 				</value>
 			</uniform>
 
@@ -467,7 +480,7 @@ please see Docs/README.model-combined.eff for documentation
 				<name>lightmap_r_color</name>
 				<type>float-vec3</type>
 				<value>
-					<use>lightmap_color[0]</use>
+					<use>lightmap-color[0]</use>
 				</value>
 			</uniform>
 
@@ -475,7 +488,7 @@ please see Docs/README.model-combined.eff for documentation
 				<name>lightmap_g_factor</name>
 				<type>float</type>
 				<value>
-					<use>lightmap_factor[1]</use>
+					<use>lightmap-factor[1]</use>
 				</value>
 			</uniform>
 
@@ -483,7 +496,7 @@ please see Docs/README.model-combined.eff for documentation
 				<name>lightmap_g_color</name>
     <type>float-vec3</type>
 				<value>
-					<use>lightmap_color[1]</use>
+					<use>lightmap-color[1]</use>
 				</value>
 			</uniform>
 
@@ -491,7 +504,7 @@ please see Docs/README.model-combined.eff for documentation
 				<name>lightmap_b_factor</name>
 				<type>float</type>
 				<value>
-					<use>lightmap_factor[2]</use>
+					<use>lightmap-factor[2]</use>
 				</value>
 			</uniform>
 
@@ -499,7 +512,7 @@ please see Docs/README.model-combined.eff for documentation
 				<name>lightmap_b_color</name>
     <type>float-vec3</type>
 				<value>
-					<use>lightmap_color[2]</use>
+					<use>lightmap-color[2]</use>
 				</value>
 			</uniform>
 
@@ -507,15 +520,15 @@ please see Docs/README.model-combined.eff for documentation
 				<name>lightmap_a_factor</name>
 				<type>float</type>
 				<value>
-					<use>lightmap_factor[3]</use>
+					<use>lightmap-factor[3]</use>
 				</value>
 			</uniform>
 
 			<uniform>
 				<name>lightmap_a_color</name>
-    <type>float-vec3</type>
+				<type>float-vec3</type>
 				<value>
-					<use>lightmap_color[3]</use>
+					<use>lightmap-color[3]</use>
 				</value>
 			</uniform>
 
@@ -524,7 +537,7 @@ please see Docs/README.model-combined.eff for documentation
 				<name>refl_enabled</name>
 				<type>int</type>
 				<value>
-					<use>reflection_enabled</use>
+					<use>reflection-enabled</use>
 				</value>
 			</uniform>
 <!-- reflection correction -->
@@ -532,7 +545,7 @@ please see Docs/README.model-combined.eff for documentation
 				<name>refl_correction</name>
 				<type>float</type>
 				<value>
-					<use>reflection_correction</use>
+					<use>reflection-correction</use>
 				</value>
 			</uniform>
 
@@ -541,7 +554,7 @@ please see Docs/README.model-combined.eff for documentation
 				<name>refl_map</name>
 				<type>int</type>
 				<value>
-					<use>reflect_map_enabled</use>
+					<use>reflect-map-enabled</use>
 				</value>
 			</uniform>
 <!-- reflection is dynamic -->
@@ -549,7 +562,7 @@ please see Docs/README.model-combined.eff for documentation
 				<name>refl_dynamic</name>
 				<type>int</type>
 				<value>
-					<use>reflection_dynamic</use>
+					<use>reflection-dynamic</use>
 				</value>
 			</uniform>
 
@@ -558,7 +571,7 @@ please see Docs/README.model-combined.eff for documentation
 				<name>refl_rainbow</name>
 				<type>float</type>
 				<value>
-					<use>reflection_rainbow</use>
+					<use>reflection-rainbow</use>
 				</value>
 			</uniform>
 
@@ -567,7 +580,7 @@ please see Docs/README.model-combined.eff for documentation
 				<name>refl_fresnel</name>
 				<type>float</type>
 				<value>
-					<use>reflection_fresnel</use>
+					<use>reflection-fresnel</use>
 				</value>
 			</uniform>
 
@@ -576,16 +589,40 @@ please see Docs/README.model-combined.eff for documentation
 				<name>refl_noise</name>
 				<type>float</type>
 				<value>
-					<use>reflection_noise</use>
+					<use>reflection-noise</use>
 				</value>
 			</uniform>
 
+			<!-- dirt -->
+			<uniform>
+				<name>dirt_enabled</name>
+				<type>int</type>
+				<value>
+					<use>dirt-enabled</use>
+				</value>
+			</uniform>
+
+			<uniform>
+				<name>dirt_color</name>
+				<type>float-vec3</type>
+				<value>
+					<use>dirt-color</use>
+				</value>
+			</uniform>
+
+			<uniform>
+				<name>dirt_factor</name>
+				<type>float</type>
+				<value>
+					<use>dirt-factor</use>
+				</value>
+			</uniform>
 			<!-- set the amount of ambient light correction 0.0 - 1.0  -->
 			<uniform>
 				<name>amb_correction</name>
 				<type>float</type>
 				<value>
-					<use>ambient_correction</use>
+					<use>ambient-correction</use>
 				</value>
 			</uniform>
 <!-- shader quality -->
@@ -593,7 +630,7 @@ please see Docs/README.model-combined.eff for documentation
 				<name>shader_qual</name>
 				<type>int</type>
 				<value>
-					<use>shader_quality</use>
+					<use>shader-quality</use>
 				</value>
 			</uniform>
 
@@ -601,7 +638,7 @@ please see Docs/README.model-combined.eff for documentation
 				<name>hdg</name>
 				<type>float</type>
 				<value>
-					<use>model_hdg</use>
+					<use>model-hdg</use>
 				</value>
 			</uniform>
 
@@ -609,7 +646,7 @@ please see Docs/README.model-combined.eff for documentation
 				<name>pitch</name>
 				<type>float</type>
 				<value>
-					<use>model_pitch</use>
+					<use>model-pitch</use>
 				</value>
 			</uniform>
 
@@ -617,7 +654,7 @@ please see Docs/README.model-combined.eff for documentation
 				<name>roll</name>
 				<type>float</type>
 				<value>
-					<use>model_roll</use>
+					<use>model-roll</use>
 				</value>
 			</uniform>
 

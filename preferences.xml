@@ -68,22 +68,15 @@ Started September 2000 by David Megginson, david@megginson.com
 			<realism type="int">5</realism>
 			<filtering type="int">8</filtering>
 			<shaders>
-				<model type="float"
-							 userarchive="y">1.0</model>
-				<crop type="float"
-							userarchive="y">1.0</crop>
-				<landmass type="float"
-									userarchive="y">1.0</landmass>
-				<contrails type="float"
-									 userarchive="y">1.0</contrails>
-				<transition type="float"
-										userarchive="y">1.0</transition>
-				<urban type="float"
-							 userarchive="y">1.0</urban>
-				<water type="float"
-							 userarchive="y">1.0</water>
-				<quality-level type="float"
-											 userarchive="y">3.0</quality-level>
+				<model type="float" userarchive="y">1.0</model>
+				<crop type="float" userarchive="y">1.0</crop>
+				<landmass type="float" userarchive="y">1.0</landmass>
+				<contrails type="float" userarchive="y">1.0</contrails>
+				<skydome type="bool" userarchive="y">false</skydome>
+				<transition type="float" userarchive="y">1.0</transition>
+				<urban type="float" userarchive="y">1.0</urban>
+				<water type="float" userarchive="y">1.0</water>
+				<quality-level type="float" userarchive="y">3.0</quality-level>
 			</shaders>
 			<mie type="float"
 					 userarchive="y">0.003</mie>
@@ -91,8 +84,6 @@ Started September 2000 by David Megginson, david@megginson.com
 								userarchive="y">0.0003</rayleigh>
 			<dome-density type="float"
 										userarchive="y">0.5</dome-density>
-			<scattering-shader type="bool"
-												 userarchive="y">0</scattering-shader>
 			<!-- multithreading-mode>AutomaticSelection</multithreading-mode -->
 			<!--
      Uncomment the above element to select OSG multi-threading mode.
@@ -213,15 +204,6 @@ Started September 2000 by David Megginson, david@megginson.com
 								 userarchive="y">false</enabled>
 				<rate-m-g type="double">0.005</rate-m-g>
 			</headshake>
-			<crop-shader type="bool" userarchive="y">false</crop-shader>
-			<landmass-shader type="bool" userarchive="y">false</landmass-shader>
-			<transition-shader type="bool" userarchive="y">false</transition-shader>
-			<water-shader type="bool" userarchive="y">false</water-shader>
-			<urban-shader type="bool" userarchive="y">false</urban-shader>
-			<contrail-shader type="bool" userarchive="y">false</contrail-shader>
-			<snow-level-m type="double">2000.0</snow-level-m>
-			<quality-level type="double"
-										 userarchive="y">0.0</quality-level>
 			<osg-displaysettings>
 				<eye-separation type="double"
 												userarchive="y">0.05</eye-separation>
@@ -323,6 +305,9 @@ Started September 2000 by David Megginson, david@megginson.com
 					<festival type="bool">true</festival>
 				</voice>
 			</voices>
+			<aimodels>
+				<enabled type="bool" userarchive="y">false</enabled>
+			</aimodels>
 		</sound>
 		<speed-up type="double">1.0</speed-up>
 		<current-view>

@@ -1280,6 +1280,7 @@ Shared parameters for various materials.
     <name>ShrubCover</name>
     <name>ShrubGrassCover</name>
     <name>ScrubCover</name>
+    <name>Scrub</name>
     <name>Sclerophyllous</name>
     <name>Heath</name>
     <texture>Terrain/shrub.dds</texture>
@@ -2553,6 +2554,7 @@ Shared parameters for various materials.
     <name>ShrubCover</name>
     <name>ShrubGrassCover</name>
     <name>ScrubCover</name>
+    <name>Scrub</name>
     <name>Sclerophyllous</name>
     <name>Heath</name>
     <texture>Terrain.winter/shrub.png</texture>

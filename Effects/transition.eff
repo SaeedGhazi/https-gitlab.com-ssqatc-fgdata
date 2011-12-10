@@ -41,7 +41,7 @@ parameters :
 			<use>/environment/rain-norm</use>
 		</rain-norm>
 		<snow-level>
-			<use>/sim/rendering/snow-level-m</use>
+			<use>/environment/snow-level-m</use>
 		</snow-level>
 
 		<cloud-cover0>

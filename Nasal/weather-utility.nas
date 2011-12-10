@@ -70,7 +70,6 @@ var initialize = func {
 	var ground_term_Node = props.globals.getNode("/environment/terminator-relative-position-m" , 1);
 	ground_term_Node.setDoubleValue(60000);
 
-
 # ##################  listeners ####################
 #
 	setlistener("/environment/sea/surface/wind-speed-kt", func (n) {
@@ -111,7 +110,7 @@ var initialize = func {
 	},
 		1,
 		0);# end listener
-
+		
 		print("weather util initialized ...");
 	loop();
 
@@ -157,3 +156,26 @@ setlistener("sim/signals/fdm-initialized", initialize);
 
 # end
 
+###
+# Adjust snow line to match METAR
+#
+
+var snowLineDefault = 3200;
+
+_setlistener("/environment/metar/valid", func {
+	var snowCover = getprop("/environment/metar/snow-cover");
+	var snowLine = getprop("/environment/snow-level-m");
+	
+	# Put the snow line slightly below the station's elevation, 
+	# so the station is completely covered with snow
+	var stationElev = getprop("/environment/metar/station-elevation-ft") * globals.FT2M - 50;
+
+	if (snowCover == 1){
+		if (stationElev > snowLineDefault) { snowLine = snowLineDefault; }
+		if ((stationElev <= snowLineDefault) and (snowLine > stationElev)) { snowLine = stationElev; }
+	}
+	setprop("/environment/snow-level-m",snowLine);
+});
+
+#
+###

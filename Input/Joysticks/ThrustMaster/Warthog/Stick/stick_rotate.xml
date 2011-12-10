@@ -9,10 +9,13 @@
 <PropertyList>
 	<nasal>
 		<script>
+			contains(caller(0)[0], "stick") and removelistener(stick.listener);
+
 			var stick = {
 				init: func {
 					me.x = me.y = 0;
-					jslistener("/input/joysticks/stick-angle", func(n) {
+					var a = props.globals.initNode("/input/joysticks/stick-angle");
+					me.listener = setlistener(a, func(n) {
 						me.angle = n.getValue() * D2R;
 						me.sin = math.sin(me.angle);
 						me.cos = math.cos(me.angle);
@@ -32,6 +35,7 @@
 					setprop("/controls/flight/elevator", me.y * me.cos - me.x * me.sin);
 				},
 			};
+
 			stick.init();
 		</script>
 	</nasal>

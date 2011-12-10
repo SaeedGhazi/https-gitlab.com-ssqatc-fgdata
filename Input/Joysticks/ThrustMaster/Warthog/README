@@ -101,8 +101,10 @@ via raw HID support.
         $ mkdir -p ~/.fgfs/Nasal
         $ cp $FG_ROOT/Nasal/IOrules ~/.fgfs/Nasal
 
-    Now add these two lines there:
+    Now add these four lines there:
 
+        READ ALLOW /dev/input/hidraw/Thustmaster_Joystick_-_HOTAS_Warthog
+        READ ALLOW /dev/input/hidraw/Thrustmaster_Throttle_-_HOTAS_Warthog
         WRITE ALLOW /dev/input/hidraw/Thustmaster_Joystick_-_HOTAS_Warthog
         WRITE ALLOW /dev/input/hidraw/Thrustmaster_Throttle_-_HOTAS_Warthog
 

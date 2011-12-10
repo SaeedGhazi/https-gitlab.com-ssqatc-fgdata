@@ -15,15 +15,15 @@
 			<!-- use this form for a cube cross -->
 			<!--<image>Aircraft/Generic/Effects/CubeCrosses/blue_sky_big.jpg</image>-->
 
-			<!-- use this form for a 6 image cube map -->
-			<images>
-				<positive-x>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_px.png</positive-x>
-				<negative-x>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_nx.png</negative-x>
-				<positive-y>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_py.png</positive-y>
-				<negative-y>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_ny.png</negative-y>
-				<positive-z>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_pz.png</positive-z>
-				<negative-z>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_nz.png</negative-z>
-			</images>
+				<!-- use this form for a 6 image cube map -->
+				<images>
+					<positive-x>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_px.png</positive-x>
+					<negative-x>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_nx.png</negative-x>
+					<positive-y>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_py.png</positive-y>
+					<negative-y>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_ny.png</negative-y>
+					<positive-z>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_pz.png</positive-z>
+					<negative-z>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_nz.png</negative-z>
+				</images>
 
 		</texture>
 		<texture n="6">
@@ -51,10 +51,9 @@
 		<shade-model>smooth</shade-model>
 		<rainbowiness type="float">0.01</rainbowiness>
 		<fresneliness>0.01</fresneliness>
-		<noisiness>0.01</noisiness>
+		<noisiness>0.15</noisiness>
 		<!-- 			<refl_correction>0.0</refl_correction> -->
-		<ambient_correction>0.01</ambient_correction>
-		<reflect_map>1</reflect_map>
+		<ambient_correction>-0.15</ambient_correction>
 		<normalmap_dds>1</normalmap_dds>
 		<vertex-program-two-side type="bool">false</vertex-program-two-side>
 		<cull-face>back</cull-face>
@@ -227,7 +226,7 @@
 			<cull-face>
 				<use>cull-face</use>
 			</cull-face>
-			
+
 			<program>
 				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader>
 				<vertex-shader n="1">Shaders/reflect-bump-spec.vert</vertex-shader>

@@ -1034,9 +1034,15 @@ var HUD = {
 	init: func {
 		me.vis1N = props.globals.getNode("/sim/hud/visibility[1]", 1);
 		me.currcolN = props.globals.getNode("/sim/hud/current-color", 1);
+		me.currentPathN = props.globals.getNode("/sim/hud/current-path", 1);
+		me.hudN = props.globals.getNode("/sim/hud", 1);
 		me.paletteN = props.globals.getNode("/sim/hud/palette", 1);
 		me.brightnessN = props.globals.getNode("/sim/hud/color/brightness", 1);
 		me.currentN = me.vis1N;
+		
+		# keep compatibility with earlier version of FG - hud/path[1] is
+		# the default Hud
+		me.currentPathN.setIntValue(1);
 	},
 	cycle_color: func {		# h-key
 		if (!me.currentN.getBoolValue())		# if off, turn on
@@ -1057,10 +1063,16 @@ var HUD = {
 		me.brightnessN.setValue(br > 0.01 ? br : 1);
 	},
     normal_type: func {		# i-key
-	
+	    me.currentPathN.setIntValue(1);
     },
     cycle_type: func {		# I-key
-	
+	    var i = me.currentPathN.getValue() + 1;	
+		if (i < 1 or i > size(me.hudN.getChildren("path"))) {
+		    # back to the start
+			me.currentPathN.setIntValue(1);
+		} else {	
+			me.currentPathN.setIntValue(i);
+		}
     },
 	is_active: func {
 		me.vis1N.getValue();

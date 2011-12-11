@@ -309,5 +309,6 @@
  <trace-read-desc>Trace the reads for a property;</trace-read-desc>
  <trace-write-desc>Trace the writes for a property;</trace-write-desc>
  <log-level-desc>Specify which logging level to use</log-level-desc>
+ <log-class-desc>Specify which logging class(es) to use</log-class-desc>
 
 </PropertyList>

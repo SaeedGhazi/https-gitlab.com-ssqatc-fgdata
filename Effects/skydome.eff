@@ -36,7 +36,6 @@
 	<technique n="8">
 		<predicate>
 			<and>
-				<property>/sim/rendering/shaders/quality-level</property>
 				<property>/sim/rendering/shaders/skydome</property>
 				<or>
 					<less-equal>

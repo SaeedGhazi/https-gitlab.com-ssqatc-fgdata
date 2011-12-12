@@ -37,7 +37,7 @@ in Aircraft/A320/Models/Effects/a320_bumpspec.eff ( or whatever, private to the 
   <technique n="10">
     <predicate>
       <and>
-        <property>/sim/rendering/shader-effects</property>
+        <property>/sim/rendering/shaders/model</property>
         <or>
           <less-equal>
             <value type="float">2.0</value>

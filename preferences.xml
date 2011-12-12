@@ -327,6 +327,9 @@ Started September 2000 by David Megginson, david@megginson.com
 		</panel_2>
 		<hud>
 			<path n="1">Huds/default.xml</path>
+			<path n="2">Huds/NTPS.xml</path>
+			<path n="3">Huds/minimal.xml</path>
+			
 			<!-- new HUD -->
 			<visibility n="1"
 									type="bool">false</visibility>

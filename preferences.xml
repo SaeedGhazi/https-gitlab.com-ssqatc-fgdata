@@ -68,10 +68,11 @@ Started September 2000 by David Megginson, david@megginson.com
 			<realism type="int">5</realism>
 			<filtering type="int">8</filtering>
 			<shaders>
-				<model type="float" userarchive="y">1.0</model>
-				<crop type="float" userarchive="y">1.0</crop>
+				<generic type="float" userarchive="y">1.0</generic>
 				<landmass type="float" userarchive="y">1.0</landmass>
+				<model type="float" userarchive="y">1.0</model>
 				<contrails type="float" userarchive="y">1.0</contrails>
+				<crop type="float" userarchive="y">1.0</crop>
 				<skydome type="bool" userarchive="y">false</skydome>
 				<transition type="float" userarchive="y">1.0</transition>
 				<urban type="float" userarchive="y">1.0</urban>

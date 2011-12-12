@@ -9,13 +9,13 @@
     <material>
       <color-mode-uniform>1</color-mode-uniform> <!-- DIFFUSE -->
     </material>
-    <condition><use>/sim/rendering/shader-effects</use></condition>
+    <condition><use>/sim/rendering/shader/generic</use></condition>
     <factor>1</factor>
   </parameters>
   <technique n="10">
     <predicate>
       <and>
-        <property>/sim/rendering/shader-effects</property>
+        <property>/sim/rendering/shaders/generic</property>
         <or>
           <less-equal>
             <value type="float">2.0</value>

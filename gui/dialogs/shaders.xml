@@ -54,6 +54,14 @@
 
 			<text>
 				<halign>left</halign>
+				<label>Generic</label>
+				<enable>
+					<property>/sim/rendering/shaders/generic</property>
+				</enable>
+			</text>
+			
+			<text>
+				<halign>left</halign>
 				<label>Crop</label>
 				<enable>
 					<property>/sim/rendering/shaders/crop</property>
@@ -108,18 +116,32 @@
 				</enable>
 			</text>
 
-
 		</group>
 
 		<group>
 			<layout>vbox</layout>
 
 			<slider>
+				<name>generic</name>
+				<min>0.0</min>
+				<max>1.0</max>
+				<step>1.0</step>
+				<fraction>0.5</fraction>
+				<live>true</live>
+				<property>/sim/rendering/shaders/generic</property>
+				<binding>
+					<command>dialog-apply</command>
+					<object-name>generic</object-name>
+				</binding>
+			</slider>
+			
+			<slider>
 				<name>crop</name>
 				<min>0.0</min>
 				<max>1.0</max>
 				<step>1.0</step>
 				<fraction>0.5</fraction>
+				<live>true</live>
 				<property>/sim/rendering/shaders/crop</property>
 				<binding>
 					<command>dialog-apply</command>
@@ -130,9 +152,10 @@
 			<slider>
 				<name>landmass</name>
 				<min>0.0</min>
-				<max>1.0</max>
+				<max>5.0</max>
 				<step>1.0</step>
-				<fraction>0.5</fraction>
+				<fraction>0.17</fraction>
+				<live>true</live>
 				<property>/sim/rendering/shaders/landmass</property>
 				<binding>
 					<command>dialog-apply</command>
@@ -146,6 +169,7 @@
 				<max>1.0</max>
 				<step>1.0</step>
 				<fraction>0.5</fraction>
+				<live>true</live>
 				<property>/sim/rendering/shaders/contrails</property>
 				<binding>
 					<command>dialog-apply</command>
@@ -159,6 +183,7 @@
 				<max>1.0</max>
 				<step>1.0</step>
 				<fraction>0.5</fraction>
+				<live>true</live>
 				<property>/sim/rendering/shaders/transition</property>
 				<binding>
 					<command>dialog-apply</command>
@@ -169,9 +194,10 @@
 			<slider>
 				<name>model</name>
 				<min>0.0</min>
-				<max>1.0</max>
+				<max>3.0</max>
 				<step>1.0</step>
-				<fraction>0.5</fraction>
+				<fraction>0.25</fraction>
+				<live>true</live>
 				<property>/sim/rendering/shaders/model</property>
 				<binding>
 					<command>dialog-apply</command>
@@ -185,6 +211,7 @@
 				<max>5.0</max>
 				<step>1.0</step>
 				<fraction>0.17</fraction>
+				<live>true</live>
 				<property>/sim/rendering/shaders/urban</property>
 				<binding>
 					<command>dialog-apply</command>
@@ -198,6 +225,7 @@
 				<max>5.0</max>
 				<step>1.0</step>
 				<fraction>0.17</fraction>
+				<live>true</live>
 				<property>/sim/rendering/shaders/water</property>
 				<binding>
 					<command>dialog-apply</command>

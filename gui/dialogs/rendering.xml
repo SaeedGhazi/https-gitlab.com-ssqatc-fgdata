@@ -171,7 +171,7 @@
 
 			<checkbox>
 				<halign>left</halign>
-				<label>Random objects (triggers scenery reload)</label>
+				<label>Random objects</label>
 				<name>random-objects</name>
 				<property>/sim/rendering/random-objects</property>
 				<binding>
@@ -341,7 +341,22 @@
 					<stretch>true</stretch>
 				</hrule>
 			</group>
-
+			
+			<group>
+				<layout>vbox</layout>
+				<padding>4</padding>
+				<text>
+					<padding>0</padding>
+					<label>This slider overrides custom settings as set in</label>
+					<halign>left</halign>
+				</text>
+				<text>
+					<padding>0</padding>
+					<label>the (advanced) Shader Options dialog.</label>
+					<halign>left</halign>
+				</text>
+			</group>
+			
 			<group>
 				<layout>hbox</layout>
 
@@ -375,9 +390,6 @@
 				<layout>hbox</layout>
 				<button>
 					<legend>Shader Options</legend>
-					<enable>
-						<property>/sim/rendering/shaders/quality-level</property>
-					</enable>
 					<binding>
 						<command>dialog-show</command>
 						<dialog-name>shaders</dialog-name>
@@ -399,7 +411,6 @@
 							<green>0.6</green>
 							<blue>0.6</blue>
 						</color>
-
 					</text>
 					<text>
 						<visible>
@@ -604,6 +615,25 @@
 	<nasal>
 		<open>
 			gui.enable_widgets(cmdarg(), "shadows-debug", getprop("/sim/gui/devel-widgets"));
+			
+			# overwrite custom shader settings on quality-slider input
+			_setlistener("/sim/rendering/shaders/quality-level", func {
+				var qualityLevel = getprop("/sim/rendering/shaders/quality-level");
+				setprop("/sim/rendering/shaders/landmass",qualityLevel);
+				setprop("/sim/rendering/shaders/urban",qualityLevel);
+				setprop("/sim/rendering/shaders/water",qualityLevel);
+				if (qualityLevel >= 1.0){
+					qualityLevel = 1.0;
+				}
+				else {
+					qualityLevel = 0.0;
+				}
+				setprop("/sim/rendering/shaders/contrails",qualityLevel);
+				setprop("/sim/rendering/shaders/crop",qualityLevel);
+				setprop("/sim/rendering/shaders/generic",qualityLevel);
+				setprop("/sim/rendering/shaders/model",qualityLevel);
+				setprop("/sim/rendering/shaders/transition",qualityLevel);
+			});
 		</open>
 	</nasal>
 </PropertyList>

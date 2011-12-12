@@ -41,7 +41,7 @@
 			<use>/environment/terminator-relative-position-m</use>
 		</terminator>
 		<fogtype>
-			<use>/sim/rendering/scattering-shader</use>
+			<use>/sim/rendering/shaders/skydome</use>
 		</fogtype>
 		<!-- 	END fog include -->
 
@@ -49,11 +49,7 @@
 	<technique n="9">
 		<predicate>
 			<and>
-				<!--<property>/sim/rendering/shader-effects</property>-->
-				<less-equal>
-					<value type="float">3.0</value>
-					<float-property>/sim/rendering/shaders/quality-level</float-property>
-				</less-equal>
+				<property>/sim/rendering/shaders/generic</property>
 				<or>
 					<less-equal>
 						<value type="float">2.0</value>

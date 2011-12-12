@@ -133,7 +133,7 @@ please see Docs/README.model-combined.eff for documentation
 			<use>/environment/terminator-relative-position-m</use>
 		</terminator>
 		<fogtype>
-			<use>/sim/rendering/scattering-shader</use>
+			<use>/sim/rendering/shaders/skydome</use>
 		</fogtype>
 <!-- 		END fog include -->
 	</parameters>
@@ -147,7 +147,6 @@ please see Docs/README.model-combined.eff for documentation
 		<predicate>
 			<and>
 				<property>/sim/rendering/shaders/model</property>
-				<property>/sim/rendering/shaders/quality-level</property>
 				<or>
 					<less-equal>
 						<value type="float">2.0</value>

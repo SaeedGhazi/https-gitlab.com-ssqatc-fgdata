@@ -109,7 +109,7 @@
 			<use>/environment/terminator-relative-position-m</use>
 		</terminator>
 		<fogtype>
-			<use>/sim/rendering/scattering-shader</use>
+			<use>/sim/rendering/shaders/skydome</use>
 		</fogtype>
 		<!-- 	END fog include -->
 	</parameters>
@@ -117,10 +117,9 @@
 		<predicate>
 			<and>
 				<property>/sim/rendering/shaders/water</property>
-				<!--<property>/sim/rendering/shader-effects</property>-->
 				<less-equal>
 					<value type="float">2.0</value>
-					<float-property>/sim/rendering/shaders/quality-level</float-property>
+					<float-property>/sim/rendering/shaders/water</float-property>
 				</less-equal>
 				<or>
 					<less-equal>
@@ -492,7 +491,6 @@
 		<predicate>
 			<and>
 				<property>/sim/rendering/shaders/water</property>
-				<property>/sim/rendering/shaders/quality-level</property>
 				<or>
 					<less-equal>
 						<value type="float">2.0</value>

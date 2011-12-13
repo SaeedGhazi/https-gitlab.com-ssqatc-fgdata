@@ -16,7 +16,7 @@
 		<depth-factor type="float">0.01</depth-factor>
 		<canopy-height type="float">15.0</canopy-height>
 		<quality-level>
-			<use>/sim/rendering/shaders/quality-level</use>
+			<use>/sim/rendering/shaders/landmass</use>
 		</quality-level>
 	</parameters>
 
@@ -37,7 +37,7 @@
 		<use>/environment/terminator-relative-position-m</use>
 	</terminator>
 	<fogtype>
-		<use>/sim/rendering/scattering-shader</use>
+		<use>/sim/rendering/shaders/skydome</use>
 	</fogtype>
 	<!-- 	END fog include -->
 
@@ -50,8 +50,8 @@
 			<and>
 				<property>/sim/rendering/shaders/landmass</property>
 				<less-equal>
-					<value type="float">4.5</value>
-					<float-property>/sim/rendering/shaders/quality-level</float-property>
+					<value type="float">4.0</value>
+					<float-property>/sim/rendering/shaders/landmass</float-property>
 				</less-equal>
 				<or>
 					<less-equal>

@@ -1,7 +1,7 @@
 // -*-C++-*-
 // Texture switching based on face slope and snow level
 // based on earlier work by Frederic Bouvier, Tim Moore, and Yves Sablonier.
-// © Emilian Huminiuc 2011
+// ï¿½ Emilian Huminiuc 2011
 
 // Ambient term comes in gl_Color.rgb.
 varying vec4	diffuse_term, RawPos;
@@ -35,7 +35,7 @@ void main()
 
     Noise =  texture3D(NoiseTex, RawPos.xyz*0.0011);
     MixFactor = Noise.r * Noise.g * Noise.b;	//Mixing Factor to create a more organic looking boundary
-    MixFactor *= 300;
+    MixFactor *= 300.0;
     MixFactor = clamp(MixFactor, 0.0, 1.0);
     L1 = 0.90 - 0.02 * MixFactor;			//first transition slope
     L2 = 0.78 + 0.04 * MixFactor;			//Second transition slope
@@ -67,9 +67,9 @@ void main()
 
     //pull the texture fetch outside flow control to fix aliasing artefacts :(
     vec4 baseTexel = texture2D(BaseTex, gl_TexCoord[0].st);
-    vec4 secondTexel = texture2D(SecondTex, gl_TexCoord[0].st);
-    vec4 thirdTexel = texture2D(ThirdTex, gl_TexCoord[0].st);
-    vec4 snowTexel = texture2D(SnowTex, gl_TexCoord[0].st * 2);
+		vec4 secondTexel = texture2D(SecondTex, gl_TexCoord[0].st);
+		vec4 thirdTexel = texture2D(ThirdTex, gl_TexCoord[0].st);
+		vec4 snowTexel = texture2D(SnowTex, gl_TexCoord[0].st);
     //Normal transition. For more abrupt faces apply another texture (or 2).
     if (InverseSlope == 0.0) {
         //Do we do an intermediate transition
@@ -123,10 +123,10 @@ void main()
     texel.rgb = texel.rgb * wetness;
 
 
-
+		float altitude = RawPos.z;
     //Snow texture for areas higher than SnowLevel
-    if (RawPos.z >= SnowLevel - (1000.0 * slope + 300 * MixFactor) && slope > L2 - 0.12) {
-        texel = mix(texel, mix(texel, snowTexel, smoothstep(L2 - 0.09 * MixFactor, L2, slope)), smoothstep(SnowLevel - (1000.0 * slope + 300 * MixFactor), SnowLevel - (1000 * slope - 150 * MixFactor), RawPos.z));
+    if (altitude >= SnowLevel - (1000.0 * slope + 300.0 * MixFactor) && slope > L2 - 0.12) {
+        texel = mix(texel, mix(texel, snowTexel, smoothstep(L2 - 0.09 * MixFactor, L2, slope)), smoothstep(SnowLevel - (1000.0 * slope + 300.0 * MixFactor), SnowLevel - (1000.0 * slope - 150.0 * MixFactor), altitude));
         }
 
     fragColor = color * texel + specular;
@@ -139,6 +139,7 @@ void main()
         }
 
     //fogFactor = exp(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord);
+    fragColor.rgb *= 1.2 - 0.4 * MixFactor;
     fragColor.rgb = fog_Func(fragColor.rgb, fogType);
     //gl_FragColor = mix(gl_Fog.color, fragColor, fogFactor);
     gl_FragColor = fragColor;

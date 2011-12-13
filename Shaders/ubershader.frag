@@ -69,7 +69,7 @@ void main (void)
 	float pf;
 
 ///BEGIN bump
- 	if (nmap_enabled > 0 && shader_qual > 1){
+ 	if (nmap_enabled > 0 && shader_qual > 2){
 		N = nmap.rgb * 2.0 - 1.0;
 		N = normalize(N.x * VTangent + N.y * VBinormal + N.z * VNormal);
 		if (nmap_dds > 0)
@@ -107,7 +107,7 @@ void main (void)
 ////////////////////////////////////////////////////////////////////
 //BEGIN reflect
 ////////////////////////////////////////////////////////////////////
-	if (refl_enabled > 0 && shader_qual > 0){
+	if (refl_enabled > 0 && shader_qual > 1){
 		float reflFactor;
 		float transparency_offset = clamp(refl_correction, -1.0, 1.0);// set the user shininess offset
 
@@ -115,7 +115,7 @@ void main (void)
 			// map the shininess of the object with user input
 			//float pam = (map.a * -2) + 1; //reverse map
 			reflFactor = reflmap.a + transparency_offset;
-		} else if (nmap_enabled > 0 && shader_qual > 1) {
+		} else if (nmap_enabled > 0 && shader_qual > 2) {
 			// set the reflectivity proportional to shininess with user input
 			reflFactor = (gl_FrontMaterial.shininess / 128.0) * nmap.a + transparency_offset;
 		} else {

@@ -51,7 +51,7 @@
 			<use>/environment/terminator-relative-position-m</use>
 		</terminator>
 		<fogtype>
-			<use>/sim/rendering/scattering-shader</use>
+			<use>/sim/rendering/shaders/skydome</use>
 		</fogtype>
 	</parameters>
 	<!-- put techniques at a "high" index to allow derived effects to
@@ -59,7 +59,7 @@
 	<technique n="10">
 		<predicate>
 			<and>
-				<property>/sim/rendering/shader-effects</property>
+				<property>/sim/rendering/shaders/generic</property>
 
 				<or>
 					<less-equal>

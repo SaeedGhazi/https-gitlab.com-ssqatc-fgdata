@@ -33,14 +33,13 @@
 			<use>/environment/terminator-relative-position-m</use>
 		</terminator>
 		<fogtype>
-			<use>/sim/rendering/scattering-shader</use>
+			<use>/sim/rendering/shaders/skydome</use>
 		</fogtype>
 		<!-- 	END fog include -->
 	</parameters>
 	<technique n="10">
 		<predicate>
 			<and>
-				<!--<property>/sim/rendering/shader-effects</property>-->
 				<property>/sim/rendering/random-vegetation</property>
 				<less-equal>
 					<value type="float">1.0</value>

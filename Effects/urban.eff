@@ -29,7 +29,7 @@
 			<use>/environment/terminator-relative-position-m</use>
 		</terminator>
 		<fogtype>
-			<use>/sim/rendering/scattering-shader</use>
+			<use>/sim/rendering/shaders/skydome</use>
 		</fogtype>
 		<!-- 	END fog include -->
 
@@ -43,29 +43,26 @@
 		<predicate>
 			<and>
 				<property>/sim/rendering/shaders/urban</property>
-				<property>/sim/rendering/shaders/quality-level</property>
 				<less-equal>
 					<value type="float">4.0</value>
 					<float-property>/sim/rendering/shaders/urban</float-property>
 				</less-equal>
-				<and>
-					<or>
-						<less-equal>
-							<value type="float">2.0</value>
-							<glversion/>
-						</less-equal>
-						<and>
-							<extension-supported>GL_ARB_shader_objects</extension-supported>
-							<extension-supported>GL_ARB_shading_language_100</extension-supported>
-							<extension-supported>GL_ARB_vertex_shader</extension-supported>
-							<extension-supported>GL_ARB_fragment_shader</extension-supported>
-						</and>
-					</or>
-					<or>
-						<extension-supported>GL_ATI_shader_texture_lod</extension-supported>
-						<extension-supported>GL_ARB_shader_texture_lod</extension-supported>
-					</or>
-				</and>
+				<or>
+					<less-equal>
+						<value type="float">2.0</value>
+						<glversion/>
+					</less-equal>
+					<and>
+						<extension-supported>GL_ARB_shader_objects</extension-supported>
+						<extension-supported>GL_ARB_shading_language_100</extension-supported>
+						<extension-supported>GL_ARB_vertex_shader</extension-supported>
+						<extension-supported>GL_ARB_fragment_shader</extension-supported>
+					</and>
+				</or>
+				<or>
+					<extension-supported>GL_ATI_shader_texture_lod</extension-supported>
+					<extension-supported>GL_ARB_shader_texture_lod</extension-supported>
+				</or>
 			</and>
 		</predicate>
 		<pass>
@@ -290,29 +287,23 @@
 		<predicate>
 			<and>
 				<property>/sim/rendering/shaders/urban</property>
-				<!--<property>/sim/rendering/shader-effects</property>-->
 				<less-equal>
 					<value type="float">2.0</value>
-					<float-property>/sim/rendering/shaders/quality-level</float-property>
+					<float-property>/sim/rendering/shaders/urban</float-property>
 				</less-equal>
-				<and>
-					<or>
-						<less-equal>
-							<value type="float">2.0</value>
-							<glversion/>
-						</less-equal>
-						<and>
-							<extension-supported>GL_ARB_shader_objects</extension-supported>
-							<extension-supported>GL_ARB_shading_language_100</extension-supported>
-							<extension-supported>GL_ARB_vertex_shader</extension-supported>
-							<extension-supported>GL_ARB_fragment_shader</extension-supported>
-						</and>
-					</or>
-					<or>
-						<extension-supported>GL_ATI_shader_texture_lod</extension-supported>
-						<extension-supported>GL_ARB_shader_texture_lod</extension-supported>
-					</or>
-				</and>
+				<or>
+					<less-equal>
+						<value type="float">2.0</value>
+						<glversion/>
+					</less-equal>
+					<and>
+						<extension-supported>GL_ARB_shader_objects</extension-supported>
+						<extension-supported>GL_ARB_shading_language_100</extension-supported>
+						<extension-supported>GL_ARB_vertex_shader</extension-supported>
+						<extension-supported>GL_ARB_fragment_shader</extension-supported>
+					</and>
+				</or>
+				<!-- quality level below 4.0 doesn't require GL_ATI_shader_texture_lod or GL_ARB_shader_texture_lod -->
 			</and>
 		</predicate>
 		<pass>

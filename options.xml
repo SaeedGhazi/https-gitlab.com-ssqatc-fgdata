@@ -1151,6 +1151,12 @@
    </option>
 
    <option>
+    <name>log-class</name>
+    <arg>[ai,environment,flight,general,io,network,sound,terrain,...]</arg>
+    <description>strings/log-class-desc</description>
+   </option>
+
+   <option>
     <name>trace-read</name>
     <arg>property</arg>
     <description>strings/trace-read-desc</description>

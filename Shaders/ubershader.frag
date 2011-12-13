@@ -25,11 +25,13 @@ uniform sampler3D ReflNoiseTex;
 
 uniform int nmap_enabled;
 uniform int nmap_dds;
+uniform int nmap_tile;
 uniform int refl_enabled;
 uniform int refl_map;
 uniform int lightmap_enabled;
 uniform int lightmap_multi;
 uniform int shader_qual;
+uniform int dirt_enabled;
 
 uniform float lightmap_r_factor;
 uniform float lightmap_g_factor;
@@ -40,11 +42,14 @@ uniform float refl_fresnel;
 uniform float refl_rainbow;
 uniform float refl_noise;
 uniform float amb_correction;
+uniform float dirt_factor;
 
 uniform vec3 lightmap_r_color;
 uniform vec3 lightmap_g_color;
 uniform vec3 lightmap_b_color;
 uniform vec3 lightmap_a_color;
+
+uniform vec3 dirt_color;
 
 ///fog include//////////////////////
 uniform int fogType;
@@ -54,10 +59,9 @@ vec3 fog_Func(vec3 color, int type);
 void main (void)
 {
 	vec4 texel      = texture2D(BaseTex, gl_TexCoord[0].st);
-	vec4 nmap       = texture2D(NormalTex, gl_TexCoord[0].st);
+	vec4 nmap       = texture2D(NormalTex, gl_TexCoord[0].st * nmap_tile);
 	vec4 reflmap    = texture2D(ReflMapTex, gl_TexCoord[0].st);
 	vec4 noisevec   = texture3D(ReflNoiseTex, rawpos.xyz);
-	vec4 reflection = textureCube(Environment, reflVec);
 	vec4 lightmapTexel = texture2D(LightMapTex, gl_TexCoord[0].st);
 
 	vec3 mixedcolor;
@@ -74,6 +78,7 @@ void main (void)
  		N = normalize(VNormal);
  	}
 ///END bump
+	vec4 reflection = textureCube(Environment, reflVec * dot(N,VNormal));
 	vec3 viewVec = normalize(vViewVec);
 	float v      = dot(viewVec, normalize(VNormal));// Map a rainbowish color
 	vec4 fresnel = texture2D(ReflFresnelTex, vec2(v, 0.0));
@@ -81,6 +86,11 @@ void main (void)
 
 	float nDotVP = max(0.0, dot(N, normalize(gl_LightSource[0].position.xyz)));
 	float nDotHV = max(0.0, dot(N, normalize(gl_LightSource[0].halfVector.xyz)));
+	//glare on the backside of tranparent objects
+	if ((gl_FrontMaterial.diffuse.a < 1.0 || texel.a < 1.0) && dot(N, normalize(gl_LightSource[0].position.xyz)) < 0.0) {
+		nDotVP = max(0.0, dot(-N, normalize(gl_LightSource[0].position.xyz)));
+		nDotHV = max(0.0, dot(-N, normalize(gl_LightSource[0].halfVector.xyz)));
+	}
 
 	if (nDotVP == 0.0)
 		pf = 0.0;
@@ -93,9 +103,10 @@ void main (void)
 	vec4 color = gl_Color + Diffuse * gl_FrontMaterial.diffuse;
 	color += Specular * gl_FrontMaterial.specular * nmap.a;
 	color = clamp( color, 0.0, 1.0 );
-//////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////
 //BEGIN reflect
-//////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
 	if (refl_enabled > 0 && shader_qual > 0){
 		float reflFactor;
 		float transparency_offset = clamp(refl_correction, -1.0, 1.0);// set the user shininess offset
@@ -124,9 +135,9 @@ void main (void)
  	} else {
  		mixedcolor = texel.rgb;
  	}
-///////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 //END reflect
-///////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 
 	// set ambient adjustment to remove bluiness with user input
 	float ambient_offset = clamp(amb_correction, -1.0, 1.0);
@@ -135,6 +146,20 @@ void main (void)
 
 	color.a = texel.a * alpha;
 	vec4 fragColor = vec4(color.rgb * mixedcolor + ambient_Correction.rgb, color.a);
+
+//////////////////////////////////////////////////////////////////////
+//begin DIRT
+//////////////////////////////////////////////////////////////////////
+	if (dirt_enabled > 0.0){
+		vec3  dirtColor = dirt_color * noisevec.rgb;
+		float dirtFactor = reflmap.r * dirt_factor;
+		      dirtFactor = smoothstep(0.0, 1.0, dirtFactor);
+		fragColor.rgb = mix(fragColor.rgb, dirtColor, dirtFactor);
+	}
+//////////////////////////////////////////////////////////////////////
+//END Dirt
+//////////////////////////////////////////////////////////////////////
+
 	fragColor += Specular * nmap.a;
 
 //////////////////////////////////////////////////////////////////////

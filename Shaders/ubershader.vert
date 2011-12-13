@@ -50,7 +50,7 @@ void	main(void)
 		fog_Func(fogType);
 
 		VNormal = normalize(gl_NormalMatrix * gl_Normal);
-		if (nmap_enabled > 0 && shader_qual > 1){
+		if (nmap_enabled > 0 && shader_qual > 2){
 		VTangent = normalize(gl_NormalMatrix * tangent);
 		VBinormal = normalize(gl_NormalMatrix * binormal);
 		} else {

@@ -96,9 +96,9 @@ please see Docs/README.model-combined.eff for documentation
 		<!-- ambient correction -->
 		<ambient-correction type="float">0.05</ambient-correction>
 <!-- 		quality slider -->
-		<shader-quality type="int">2</shader-quality>
-			<!--<use>/sim/rendering/shaders/model</use>
-		</quality>-->
+		<shader-quality type="int">
+			<use>/sim/rendering/shaders/model</use>
+		</shader-quality>
 		<rendering-hint>opaque</rendering-hint>
 		<transparent>false</transparent>
 		<render-bin>

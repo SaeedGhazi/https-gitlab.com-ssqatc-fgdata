@@ -88,10 +88,14 @@
 		<heading-deg>
 			<use>/environment/Vinson/hdg-deg</use>
 		</heading-deg>
-
-		<rendering-hint>transparent</rendering-hint>
 		<shade-model>smooth</shade-model>
-		
+		<rendering-hint>transparent</rendering-hint>
+		<transparent>true</transparent>
+		<render-bin>
+			<bin-number type="int">6</bin-number>
+			<bin-name>DepthSortedBin</bin-name>
+		</render-bin>
+
 		<!-- 	fog include -->
 		<visibility>
 			<use>/environment/ground-visibility-m</use>
@@ -527,14 +531,14 @@
 			</alpha-test>
 			<shade-model>smooth</shade-model>
 			<cull-face>back</cull-face>
-			<!--<render-bin>
+			<render-bin>
 				<bin-number>
 					<use>render-bin/bin-number</use>
 				</bin-number>
 				<bin-name>
 					<use>render-bin/bin-name</use>
 				</bin-name>
-			</render-bin>-->
+			</render-bin>
 			<texture-unit>
 				<unit>0</unit>
 				<type>noise</type>

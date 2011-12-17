@@ -57,10 +57,6 @@
           <name>usrAttr2</name>
           <index>11</index>
         </attribute>
-        <attribute>
-          <name>usrAttr3</name>
-          <index>12</index>
-        </attribute>
       </program>
       <uniform>
         <name>baseTexture</name>

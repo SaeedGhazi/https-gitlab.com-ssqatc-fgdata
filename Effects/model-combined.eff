@@ -91,8 +91,13 @@ please see Docs/README.model-combined.eff for documentation
 <!-- END Reflection -->
 		<!-- 		Dirt -->
 		<dirt-enabled type="int">0</dirt-enabled>
-		<dirt-color type="vec3d">0.0 0.0 0.0</dirt-color>
-		<dirt-factor type="float">0.0</dirt-factor>
+		<dirt-multi type="int">0</dirt-multi>
+		<dirt-color type="vec3d" n="0">0.0 0.0 0.0</dirt-color>
+		<dirt-factor type="float" n="0">0.0</dirt-factor>
+		<dirt-color type="vec3d" n="1">0.0 0.0 0.0</dirt-color>
+		<dirt-factor type="float" n="1">0.0</dirt-factor>
+		<dirt-color type="vec3d" n="2">0.0 0.0 0.0</dirt-color>
+		<dirt-factor type="float" n="2">0.0</dirt-factor>
 		<!-- ambient correction -->
 		<ambient-correction type="float">0.05</ambient-correction>
 <!-- 		quality slider -->
@@ -602,20 +607,61 @@ please see Docs/README.model-combined.eff for documentation
 			</uniform>
 
 			<uniform>
-				<name>dirt_color</name>
-				<type>float-vec3</type>
+				<name>dirt_multi</name>
+				<type>int</type>
 				<value>
-					<use>dirt-color</use>
+					<use>dirt-multi</use>
 				</value>
 			</uniform>
 
 			<uniform>
-				<name>dirt_factor</name>
-				<type>float</type>
+				<name>dirt_r_color</name>
+				<type>float-vec3</type>
 				<value>
-					<use>dirt-factor</use>
+					<use>dirt-color[0]</use>
 				</value>
 			</uniform>
+
+			<uniform>
+				<name>dirt_r_factor</name>
+				<type>float</type>
+				<value>
+					<use>dirt-factor[0]</use>
+				</value>
+			</uniform>
+
+			<uniform>
+				<name>dirt_g_color</name>
+				<type>float-vec3</type>
+				<value>
+					<use>dirt-color[1]</use>
+				</value>
+			</uniform>
+
+			<uniform>
+				<name>dirt_g_factor</name>
+				<type>float</type>
+				<value>
+					<use>dirt-factor[1]</use>
+				</value>
+			</uniform>
+
+			<uniform>
+				<name>dirt_b_color</name>
+				<type>float-vec3</type>
+				<value>
+					<use>dirt-color[2]</use>
+				</value>
+			</uniform>
+
+			<uniform>
+				<name>dirt_b_factor</name>
+				<type>float</type>
+				<value>
+					<use>dirt-factor[2]</use>
+				</value>
+			</uniform>
+
 			<!-- set the amount of ambient light correction 0.0 - 1.0  -->
 			<uniform>
 				<name>amb_correction</name>

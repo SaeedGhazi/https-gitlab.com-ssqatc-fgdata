@@ -32,6 +32,7 @@ uniform int lightmap_enabled;
 uniform int lightmap_multi;
 uniform int shader_qual;
 uniform int dirt_enabled;
+uniform int dirt_multi;
 
 uniform float lightmap_r_factor;
 uniform float lightmap_g_factor;
@@ -42,14 +43,18 @@ uniform float refl_fresnel;
 uniform float refl_rainbow;
 uniform float refl_noise;
 uniform float amb_correction;
-uniform float dirt_factor;
+uniform float dirt_r_factor;
+uniform float dirt_g_factor;
+uniform float dirt_b_factor;
 
 uniform vec3 lightmap_r_color;
 uniform vec3 lightmap_g_color;
 uniform vec3 lightmap_b_color;
 uniform vec3 lightmap_a_color;
 
-uniform vec3 dirt_color;
+uniform vec3 dirt_r_color;
+uniform vec3 dirt_g_color;
+uniform vec3 dirt_b_color;
 
 ///fog include//////////////////////
 uniform int fogType;
@@ -151,10 +156,17 @@ void main (void)
 //begin DIRT
 //////////////////////////////////////////////////////////////////////
 	if (dirt_enabled > 0.0){
-		vec3  dirtColor = dirt_color * noisevec.rgb;
-		float dirtFactor = reflmap.r * dirt_factor;
-		      dirtFactor = smoothstep(0.0, 1.0, dirtFactor);
-		fragColor.rgb = mix(fragColor.rgb, dirtColor, dirtFactor);
+		float dirtFactorR = reflmap.r * dirt_r_factor;
+		      dirtFactorR = smoothstep(0.0, 1.0, dirtFactorR);
+		fragColor.rgb = mix(fragColor.rgb, dirt_r_color, dirtFactorR);
+		if (dirt_multi > 0) {
+			float dirtFactorG = reflmap.g * dirt_g_factor;
+			float dirtFactorB = reflmap.b * dirt_b_factor;
+			dirtFactorG = smoothstep(0.0, 1.0, dirtFactorG);
+			dirtFactorB = smoothstep(0.0, 1.0, dirtFactorB);
+			fragColor.rgb = mix(fragColor.rgb, dirt_g_color, dirtFactorG);
+			fragColor.rgb = mix(fragColor.rgb, dirt_b_color, dirtFactorB);
+		}
 	}
 //////////////////////////////////////////////////////////////////////
 //END Dirt

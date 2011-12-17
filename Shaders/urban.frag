@@ -28,8 +28,8 @@ uniform sampler2D NormalTex;
 uniform sampler2D QDMTex;
 uniform float depth_factor;
 uniform float tile_size;
-uniform float quality_level; // From /sim/rendering/quality-level
-uniform float snowlevel; // From /sim/rendering/snow-level-m
+uniform float quality_level;
+uniform float snowlevel;
 uniform vec3 night_color;
 
 const float scale = 1.0;
@@ -172,7 +172,7 @@ float ray_intersect(vec2 dp, vec2 ds)
 
 void main (void)
 {
-    if ( quality_level >= 3.5 ) {
+    if ( quality_level >= 3.0 ) {
         linear_search_steps = 20;
     }
     vec3 ecPos3 = ecPosition.xyz / ecPosition.w;
@@ -196,7 +196,7 @@ void main (void)
     float shadow_factor = 1.0;
 
     // Shadow
-    if ( quality_level >= 3.0 ) {
+    if ( quality_level >= 2.0 ) {
         dp += ds * d;
         vec3 sl = normalize( vec3( dot( l, VTangent ), dot( l, VBinormal ), dot( -l, VNormal ) ) );
         ds = sl.xy * depth_factor / sl.z;

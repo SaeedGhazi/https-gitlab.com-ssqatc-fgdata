@@ -29,7 +29,7 @@
 			<use>/environment/terminator-relative-position-m</use>
 		</terminator>
 		<fogtype>
-			<use>/sim/rendering/shaders/skydome</use>
+			<use>/sim/rendering/scattering-shader</use>
 		</fogtype>
 		<!-- 	END fog include -->
 
@@ -60,8 +60,9 @@
 					</and>
 				</or>
 				<or>
-					<extension-supported>GL_ATI_shader_texture_lod</extension-supported>
-					<extension-supported>GL_ARB_shader_texture_lod</extension-supported>
+					<extension-supported>GL_ATI_shader_texture_lod</extension-supported> <!-- not available in NVidia driver -->
+					<extension-supported>GL_ARB_shader_texture_lod</extension-supported> <!-- not available in NVidia driver -->
+					<extension-supported>GL_EXT_gpu_shader4</extension-supported>
 				</or>
 			</and>
 		</predicate>
@@ -288,7 +289,7 @@
 			<and>
 				<property>/sim/rendering/shaders/urban</property>
 				<less-equal>
-					<value type="float">2.0</value>
+					<value type="float">1.0</value>
 					<float-property>/sim/rendering/shaders/urban</float-property>
 				</less-equal>
 				<or>

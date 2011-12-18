@@ -61,10 +61,10 @@ Jan 26 2003
      </condition>
      <type>rotation</type>
      <property alias="../../../../../params/engine-egt-select"/>
-     <min>0</min>
-     <max>600</max>
-     <scale>-0.4</scale>
-     <offset>55</offset>
+     <min>50.0</min>
+     <max>1600.0</max>
+     <scale>0.075</scale>
+     <offset>230</offset>
     </transformation>
     <transformation>
      <condition>

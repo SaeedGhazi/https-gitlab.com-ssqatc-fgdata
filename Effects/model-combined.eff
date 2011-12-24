@@ -7,11 +7,11 @@ please see Docs/README.model-combined.eff for documentation
 	<inherits-from>Effects/model-default</inherits-from>
 
 	<parameters>
-	<!-- 		Diffuse Texture -->
+		<!-- 		Diffuse Texture -->
 		<texture n ="0">
 			<type>white</type>
 		</texture>
-	<!-- Normal Map -->
+		<!-- Normal Map -->
 		<normalmap-enabled type="int">0</normalmap-enabled>
 		<normalmap-dds type="int">0</normalmap-dds>
 		<normalmap-tiling type="float">1.0</normalmap-tiling>
@@ -22,7 +22,7 @@ please see Docs/README.model-combined.eff for documentation
 			<wrap-t>clamp</wrap-t>
 			<internal-format>normalized</internal-format>
 		</texture>
-	<!-- Light Map -->
+		<!-- Light Map -->
 		<lightmap-enabled type="int">0</lightmap-enabled>
 		<lightmap-multi type="int">0</lightmap-multi>
 		<lightmap-factor type="float" n="0">1.0</lightmap-factor>
@@ -40,7 +40,7 @@ please see Docs/README.model-combined.eff for documentation
 			<wrap-t>clamp</wrap-t>
 			<internal-format>normalized</internal-format>
 		</texture>
-	<!-- Reflection -->
+		<!-- Reflection -->
 		<reflection-enabled type="int">0</reflection-enabled>
 		<reflection-correction type="float">0.0</reflection-correction>
 		<reflect-map-enabled type="int">0</reflect-map-enabled>
@@ -52,7 +52,7 @@ please see Docs/README.model-combined.eff for documentation
 			<wrap-t>clamp</wrap-t>
 			<internal-format>normalized</internal-format>
 		</texture>
-	<!-- Reflection environment -->
+		<!-- Reflection environment -->
 		<texture n="5">
 			<type>cubemap</type>
 			<!-- use this form for a cube cross -->
@@ -88,7 +88,7 @@ please see Docs/README.model-combined.eff for documentation
 			<internal-format>normalized</internal-format>
 		</texture>
 		<reflection-noise type="float">0.25</reflection-noise>
-<!-- END Reflection -->
+		<!-- END Reflection -->
 		<!-- 		Dirt -->
 		<dirt-enabled type="int">0</dirt-enabled>
 		<dirt-multi type="int">0</dirt-multi>
@@ -100,7 +100,7 @@ please see Docs/README.model-combined.eff for documentation
 		<dirt-factor type="float" n="2">0.0</dirt-factor>
 		<!-- ambient correction -->
 		<ambient-correction type="float">0.05</ambient-correction>
-<!-- 		quality slider -->
+		<!-- 		quality slider -->
 		<shader-quality type="int">
 			<use>/sim/rendering/shaders/model</use>
 		</shader-quality>
@@ -110,8 +110,8 @@ please see Docs/README.model-combined.eff for documentation
 			<bin-number>1</bin-number>
 			<bin-name>RenderBin</bin-name>
 		</render-bin>
-<!-- 		INTERNAL USE -->
- 		<shade-model>smooth</shade-model>
+		<!-- 		INTERNAL USE -->
+		<shade-model>smooth</shade-model>
 		<model-hdg>
 			<use>orientation/model/heading-deg</use>
 		</model-hdg>
@@ -121,7 +121,7 @@ please see Docs/README.model-combined.eff for documentation
 		<model-roll>
 			<use>orientation/model/roll-deg</use>
 		</model-roll>
-<!-- 	fog include	 -->
+		<!-- 	fog include	 -->
 		<visibility>
 			<use>/environment/ground-visibility-m</use>
 		</visibility>
@@ -140,7 +140,7 @@ please see Docs/README.model-combined.eff for documentation
 		<fogtype>
 			<use>/sim/rendering/shaders/skydome</use>
 		</fogtype>
-<!-- 		END fog include -->
+		<!-- 		END fog include -->
 	</parameters>
 
 	<!--<generate>
@@ -218,13 +218,13 @@ please see Docs/README.model-combined.eff for documentation
 				<use>transparent</use>
 			</alpha-test>
 			<render-bin>
-			<bin-number>
-				<use>render-bin/bin-number</use>
-			</bin-number>
-			<bin-name>
-				<use>render-bin/bin-name</use>
-			</bin-name>
-      </render-bin>
+				<bin-number>
+					<use>render-bin/bin-number</use>
+				</bin-number>
+				<bin-name>
+					<use>render-bin/bin-name</use>
+				</bin-name>
+			</render-bin>
 			<!-- Diffuse texture unit-->
 			<texture-unit>
 				<unit>0</unit>
@@ -355,7 +355,7 @@ please see Docs/README.model-combined.eff for documentation
 				</internal-format>
 			</texture-unit>
 			<!-- Reflection Noise texture unit-->
-      <texture-unit>
+			<texture-unit>
 				<unit>9</unit>
 				<type>noise</type>
 			</texture-unit>
@@ -427,7 +427,7 @@ please see Docs/README.model-combined.eff for documentation
 				<value type="int">9</value>
 			</uniform>
 
-<!-- 			NORMAL MAP -->
+			<!-- 			NORMAL MAP -->
 			<!-- normalmap is used-->
 			<uniform>
 				<name>nmap_enabled</name>
@@ -454,8 +454,8 @@ please see Docs/README.model-combined.eff for documentation
 				</value>
 			</uniform>
 
-<!-- 			LIGHTMAP -->
-<!-- lightmap is used -->
+			<!-- 			LIGHTMAP -->
+			<!-- lightmap is used -->
 			<uniform>
 				<name>lightmap_enabled</name>
 				<type>int</type>
@@ -463,7 +463,7 @@ please see Docs/README.model-combined.eff for documentation
 					<use>lightmap-enabled</use>
 				</value>
 			</uniform>
-<!-- lightmap is multichannel -->
+			<!-- lightmap is multichannel -->
 			<uniform>
 				<name>lightmap_multi</name>
 				<type>int</type>
@@ -498,7 +498,7 @@ please see Docs/README.model-combined.eff for documentation
 
 			<uniform>
 				<name>lightmap_g_color</name>
-    <type>float-vec3</type>
+				<type>float-vec3</type>
 				<value>
 					<use>lightmap-color[1]</use>
 				</value>
@@ -514,7 +514,7 @@ please see Docs/README.model-combined.eff for documentation
 
 			<uniform>
 				<name>lightmap_b_color</name>
-    <type>float-vec3</type>
+				<type>float-vec3</type>
 				<value>
 					<use>lightmap-color[2]</use>
 				</value>
@@ -536,7 +536,7 @@ please see Docs/README.model-combined.eff for documentation
 				</value>
 			</uniform>
 
-<!-- 			reflection is used -->
+			<!-- 			reflection is used -->
 			<uniform>
 				<name>refl_enabled</name>
 				<type>int</type>
@@ -544,7 +544,7 @@ please see Docs/README.model-combined.eff for documentation
 					<use>reflection-enabled</use>
 				</value>
 			</uniform>
-<!-- reflection correction -->
+			<!-- reflection correction -->
 			<uniform>
 				<name>refl_correction</name>
 				<type>float</type>
@@ -561,7 +561,7 @@ please see Docs/README.model-combined.eff for documentation
 					<use>reflect-map-enabled</use>
 				</value>
 			</uniform>
-<!-- reflection is dynamic -->
+			<!-- reflection is dynamic -->
 			<uniform>
 				<name>refl_dynamic</name>
 				<type>int</type>
@@ -670,7 +670,7 @@ please see Docs/README.model-combined.eff for documentation
 					<use>ambient-correction</use>
 				</value>
 			</uniform>
-<!-- shader quality -->
+			<!-- shader quality -->
 			<uniform>
 				<name>shader_qual</name>
 				<type>int</type>
@@ -703,7 +703,7 @@ please see Docs/README.model-combined.eff for documentation
 				</value>
 			</uniform>
 
- <!-- 	    BEGIN fog include -->
+			<!-- 	    BEGIN fog include -->
 			<uniform>
 				<name>visibility</name>
 				<type>float</type>
@@ -746,7 +746,7 @@ please see Docs/README.model-combined.eff for documentation
 					<use>fogtype</use>
 				</value>
 			</uniform>
- <!-- 			END fog include -->
+			<!-- 			END fog include -->
 
 		</pass>
 	</technique>

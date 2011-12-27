@@ -7,16 +7,21 @@ uniform float range; // From /sim/rendering/clouds3d-vis-range
 
 attribute vec3 usrAttr1;
 attribute vec3 usrAttr2;
+attribute vec3 usrAttr3;
 
-float shade_factor = usrAttr1.g;
-float cloud_height = usrAttr1.b;
-float bottom_factor = usrAttr2.r;
-float middle_factor = usrAttr2.g;
-float top_factor = usrAttr2.b;
+float textureIndexX = usrAttr1.r;
+float textureIndexY = usrAttr1.g;
+float wScale = usrAttr1.b;
+float hScale = usrAttr2.r;
+float shade_factor = usrAttr2.g;
+float cloud_height = usrAttr2.b;
+float bottom_factor = usrAttr3.r;
+float middle_factor = usrAttr3.g;
+float top_factor = usrAttr3.b;
 
 void main(void)
 {
-  gl_TexCoord[0] = gl_MultiTexCoord0;
+  gl_TexCoord[0] = gl_MultiTexCoord0 + vec4(textureIndexX, textureIndexY, 0.0, 0.0);
   vec4 ep = gl_ModelViewMatrixInverse * vec4(0.0,0.0,0.0,1.0);
   vec4 l  = gl_ModelViewMatrixInverse * vec4(0.0,0.0,1.0,1.0);
   vec3 u = normalize(ep.xyz - l.xyz);
@@ -31,8 +36,8 @@ void main(void)
   // scaling in the homogeneous component of pos.
   gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
   gl_Position.xyz = gl_Vertex.x * u;
-  gl_Position.xyz += gl_Vertex.y * r;
-  gl_Position.xyz += gl_Vertex.z * w;
+  gl_Position.xyz += gl_Vertex.y * r * wScale;
+  gl_Position.xyz += gl_Vertex.z * w  * hScale;
   // Apply Z scaling to allow sprites to be squashed in the z-axis
   gl_Position.z = gl_Position.z * gl_Color.w;
 

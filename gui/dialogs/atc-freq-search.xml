@@ -17,9 +17,8 @@
 			<enabled>false</enabled>
 			<legend>ICAO</legend>
 			<binding>
-				<command>property-assign</command>
-				<property>/sim/atc/freq-airport</property>
-				<value type="string">ICAO</value>
+				<command>ATC-freq-display</command>
+				<icao type="string">ICAO</icao>
 			</binding>
 			<binding>
 				<command>dialog-close</command>
@@ -59,6 +58,9 @@
 			<equal>true</equal>
 			<binding>
 				<command>dialog-apply</command>
+			</binding>
+			<binding>
+				<command>ATC-freq-display</command>
 			</binding>
 			<binding>
 				<command>dialog-close</command>

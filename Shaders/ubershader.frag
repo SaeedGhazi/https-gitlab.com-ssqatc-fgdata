@@ -140,9 +140,30 @@ void main (void)
  	} else {
  		mixedcolor = texel.rgb;
  	}
-/////////////////////////////////////////////////////////////////////
-//END reflect
-/////////////////////////////////////////////////////////////////////
+ 	/////////////////////////////////////////////////////////////////////
+ 	//END reflect
+ 	/////////////////////////////////////////////////////////////////////
+
+ 	//////////////////////////////////////////////////////////////////////
+ 	//begin DIRT
+ 	//////////////////////////////////////////////////////////////////////
+ 	if (dirt_enabled > 0.0){
+		float dirtFactorR = reflmap.r * dirt_r_factor;
+		dirtFactorR = smoothstep(0.0, 1.0, dirtFactorR);
+		mixedcolor.rgb = mix(mixedcolor.rgb, dirt_r_color, dirtFactorR);
+		if (dirt_multi > 0) {
+			float dirtFactorG = reflmap.g * dirt_g_factor;
+			float dirtFactorB = reflmap.b * dirt_b_factor;
+			dirtFactorG = smoothstep(0.0, 1.0, dirtFactorG);
+			dirtFactorB = smoothstep(0.0, 1.0, dirtFactorB);
+			mixedcolor.rgb = mix(mixedcolor.rgb, dirt_g_color, dirtFactorG);
+			mixedcolor.rgb = mix(mixedcolor.rgb, dirt_b_color, dirtFactorB);
+		}
+	}
+	//////////////////////////////////////////////////////////////////////
+	//END Dirt
+	//////////////////////////////////////////////////////////////////////
+
 
 	// set ambient adjustment to remove bluiness with user input
 	float ambient_offset = clamp(amb_correction, -1.0, 1.0);
@@ -152,25 +173,7 @@ void main (void)
 	color.a = texel.a * alpha;
 	vec4 fragColor = vec4(color.rgb * mixedcolor + ambient_Correction.rgb, color.a);
 
-//////////////////////////////////////////////////////////////////////
-//begin DIRT
-//////////////////////////////////////////////////////////////////////
-	if (dirt_enabled > 0.0){
-		float dirtFactorR = reflmap.r * dirt_r_factor;
-		      dirtFactorR = smoothstep(0.0, 1.0, dirtFactorR);
-		fragColor.rgb = mix(fragColor.rgb, dirt_r_color, dirtFactorR);
-		if (dirt_multi > 0) {
-			float dirtFactorG = reflmap.g * dirt_g_factor;
-			float dirtFactorB = reflmap.b * dirt_b_factor;
-			dirtFactorG = smoothstep(0.0, 1.0, dirtFactorG);
-			dirtFactorB = smoothstep(0.0, 1.0, dirtFactorB);
-			fragColor.rgb = mix(fragColor.rgb, dirt_g_color, dirtFactorG);
-			fragColor.rgb = mix(fragColor.rgb, dirt_b_color, dirtFactorB);
-		}
-	}
-//////////////////////////////////////////////////////////////////////
-//END Dirt
-//////////////////////////////////////////////////////////////////////
+
 
 	fragColor += Specular * nmap.a;
 

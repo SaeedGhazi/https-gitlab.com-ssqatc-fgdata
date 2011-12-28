@@ -44,6 +44,7 @@ $Id$
 	<!--<name type="string">Microsoft-PC-Joysticktreiber</name>-->
 	<name type="string">Mega World USB Game Controllers</name>
 	<name type="string">SpeedLink SL-6640 Black Widow Flight Stick</name>
+	<name type="string">SL-6640 Black Widow Flightstick</name>
 	<axis>
 		<desc type="string">Aileron</desc>
 		<number>

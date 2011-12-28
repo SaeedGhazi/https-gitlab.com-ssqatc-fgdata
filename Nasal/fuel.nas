@@ -1,3 +1,6 @@
+# Fuel handling for the YASim FDM. Note that other FDMs (e.g. JSBSim)
+# handle fuel within the FDM itself.
+#
 # Properties under /consumables/fuel/tank[n]:
 # + level-lbs       - Current fuel load.  Can be set by user code.
 # + selected        - boolean indicating tank selection.
@@ -21,9 +24,6 @@ var update = func {
 		consumed_fuel += fuel.getValue();
 		fuel.setDoubleValue(0);
 	}
-
-	if (!consumed_fuel)
-		return;
 
 	var selected_tanks = [];
 	foreach (var t; tanks) {
@@ -70,6 +70,10 @@ var fuel_freeze = nil;
 
 _setlistener("/sim/signals/fdm-initialized", func {
 	setlistener("/sim/freeze/fuel", func(n) { fuel_freeze = n.getBoolValue() }, 1);
+
+	# Fuel sub-system is only used by YASim. Other FDMs (e.g. JSBSim)
+	# handle fuel themselves.
+	if (getprop("/sim/flight-model") != "yasim") { return; }
 
 	engines = props.globals.getNode("engines", 1).getChildren("engine");
 	foreach (var e; engines) {

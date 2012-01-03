@@ -74,17 +74,17 @@
         <combo>
             <name>host</name>
             <row>1</row><col>1</col>
-            <pref-width>300</pref-width>
+            <pref-width>350</pref-width>
             <property>/sim/multiplay/selected-server</property>
             <editable>false</editable>
-            <value>mpserver01.flightgear.org (Frankfurt/Germany)</value>
-            <value>mpserver02.flightgear.org (Kansas/USA)</value>
+            <value>mpserver01.flightgear.org (Frankfurt, Germany)</value>
+            <value>mpserver02.flightgear.org (Kansas, USA)</value>
             <value>mpserver03.flightgear.org (Germany)</value>
             <value>mpserver04.flightgear.org (United Kingdom)</value>
-            <value>mpserver05.flightgear.org (Chicago/USA)</value>
+            <value>mpserver05.flightgear.org (Chicago, USA)</value>
             <value>mpserver07.flightgear.org (Wisconsin, USA)</value>
-            <value>mpserver08.flightgear.org (Germany)</value>
-            <value>mpserver09.flightgear.org (Germany)</value>
+            <value>mpserver08.flightgear.org (Frankfurt am Main, Germany)</value>
+            <value>mpserver09.flightgear.org (Koln, Germany)</value>
             <value>mpserver10.flightgear.org (Montpellier, France)</value>
             <value>mpserver11.flightgear.org (Vilnius, Lithuania)</value>
             <value>mpserver12.flightgear.org (Amsterdam, Netherlands)</value>

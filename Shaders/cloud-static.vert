@@ -3,7 +3,6 @@
 
 varying float fogFactor;
 
-uniform float range; // From /sim/rendering/clouds3d-vis-range
 
 float shade = 0.8;
 float cloud_height = 1000.0;
@@ -47,7 +46,7 @@ void main(void)
   gl_FrontColor += gl_FrontLightModelProduct.sceneColor;
 
   // As we get within 100m of the sprite, it is faded out. Equally at large distances it also fades out.
-  gl_FrontColor.a = min(smoothstep(100.0, 250.0, fogCoord), 1.0 - smoothstep(range*0.9, range, fogCoord));
+  gl_FrontColor.a = min(smoothstep(100.0, 250.0, fogCoord), 1.0 - smoothstep(70000.0, 75000.0, fogCoord));
   gl_BackColor = gl_FrontColor;
 
   // Fog doesn't affect rain as much as other objects.

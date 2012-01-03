@@ -43,8 +43,8 @@ var code = getprop(lw~"tiles/tile[4]/code");
 var i = 0;
 var d_min = 100000.0;
 var i_min = 0;
-var distance_to_load = getprop(lw~"config/distance-to-load-tile-m");
-var distance_to_remove = getprop(lw~"config/distance-to-remove-tile-m");
+# var distance_to_load = getprop(lw~"config/distance-to-load-tile-m");
+# var distance_to_remove = getprop(lw~"config/distance-to-remove-tile-m");
 var current_visibility = getprop(lw~"interpolation/visibility-m");
 var current_heading = getprop("orientation/heading-deg");
 var loading_flag = getprop(lw~"tmp/asymmetric-tile-loading-flag");
@@ -53,10 +53,18 @@ var this_frame_action_flag = 0; # use this flag to avoid overlapping tile operat
 setsize(active_tile_list,0);
 #append(active_tile_list,0); # tile zero formally containing static objects is always active 
 
-if (distance_to_load > 3.0 * current_visibility)
-	{distance_to_load = 3.0 * current_visibility;}
-if (distance_to_load < 29000.0)
-	{distance_to_load = 29000.0;}
+var distance_to_load = current_visibility;
+
+if (distance_to_load > 65000.0) {distance_to_load = 65000.0;}
+if (distance_to_load < 29000.0) {distance_to_load = 29000.0;}
+
+
+#if (distance_to_load > 3.0 * current_visibility)
+#	{distance_to_load = 3.0 * current_visibility;}
+#if (distance_to_load < 29000.0)
+#	{distance_to_load = 29000.0;}
+
+var distance_to_remove = distance_to_load + 500.0;
 
 # check here if we have a new weather station if METAR is running
 
@@ -473,6 +481,7 @@ if (getprop(lw~"tmp/tile-management") == "repeat tile")
 	else if (code == "cold_sector") {weather_tiles.set_cold_sector_tile();}
 	else if (code == "warm_sector") {weather_tiles.set_warm_sector_tile();}
 	else if (code == "tropical_weather") {weather_tiles.set_tropical_weather_tile();}
+	else if (code == "thunderstorms") {weather_tiles.set_thunderstorms_tile();}
 	else if (code == "test") {weather_tiles.set_4_8_stratus_tile();}
 	else 
 		{

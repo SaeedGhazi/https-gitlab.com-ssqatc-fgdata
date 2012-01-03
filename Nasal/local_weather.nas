@@ -1976,21 +1976,18 @@ var detail_flag = detailed_clouds_flag;
 
 var alpha = getprop(lw~"tmp/tile-orientation-deg") * math.pi/180.0; # the tile orientation
 
-var tile_index = getprop(lw~"tiles/tile-counter");
-var alt_base = alt_20_array[tile_index -1];
-
-#if (detailed_terrain_interaction_flag == 1)
-#	{
-	#var tile_index = getprop(lw~"tiles/tile-counter");
+if (detailed_terrain_interaction_flag == 1)
+	{
+	var tile_index = getprop(lw~"tiles/tile-counter");
 	#var alt_min = alt_min_array[tile_index-1];
 	#var alt_mean = alt_mean_array[tile_index -1];
 	#var alt_median = alt_50_array[tile_index -1];
-	#var alt_base = alt_20_array[tile_index -1];
+	#var alt_base = alt_20_array[tile-index -1];
 	#var alt_min = getprop(lw~"tmp/tile-alt-min-ft");
 	#var alt_mean = getprop(lw~"tmp/tile-alt-mean-ft");
 	#var alt_median = getprop(lw~"tmp/tile-alt-median-ft");
 	#var alt_base = getprop(lw~"tmp/tile-alt-offset-ft");
-#	}
+	}
 
 var sec_to_rad = 2.0 * math.pi/86400; # conversion factor for sinusoidal dependence on daytime
 
@@ -2044,11 +2041,8 @@ while (i < nc) {
 	 else {print(p, " ", info[1].names[0]);}
 	}}
 	else {
-		# to avoid gaps, we create default clouds
-
-		p = p + 0.1;		
-		var elevation = alt_base;
-		# continue;
+		print("No terrain loaded!");
+		continue;
 		}
 
 
@@ -2224,7 +2218,6 @@ nc = t_factor1 * nc * math.cos(blat/180.0*math.pi);
 
 var thermal_conditions = getprop(lw~"config/thermal-properties");
 
-var alt_base = alt_20_array[tile_index -1];
 
 while (i < nc) {
 
@@ -2255,13 +2248,7 @@ while (i < nc) {
 	 if (contains(landcover_map,landcover)) {p = p + landcover_map[landcover];}
 	 else {print(p, " ", info[1].names[0]);}
 	}}
-	else {
-		# to avoid gaps, we create default clouds
-
-		p = p + 0.1;		
-		var elevation = alt_base;
-		# continue;
-		}
+	else {continue;}
 
 
 	# apply some optional corrections, biases clouds towards higher elevations
@@ -4072,8 +4059,6 @@ else if (type == "Warmfront-3")
 	{weather_tiles.set_warmfront3_tile();}
 else if (type == "Warmfront-4")
 	{weather_tiles.set_warmfront4_tile();}
-else if (type == "Thunderstorms")
-	{weather_tiles.set_thunderstorms_tile();}
 else if (type == "METAR")
 	{weather_tiles.set_METAR_tile();}
 else if (type == "Altocumulus sky")
@@ -4293,7 +4278,7 @@ presampling_flag = 0;
 
 #var pos = geo.aircraft_position();
 
-debug.dump(geodinfo(lat, lon));
+#debug.dump(geodinfo(lat, lon));
 
 #create_cumulonimbus_cloud(lat, lon, 6000.0, 2.5);
 
@@ -4304,7 +4289,7 @@ debug.dump(geodinfo(lat, lon));
 
 #setprop("/environment/terrain/area[0]/output/valid", 0 );
 
-# elttest();
+elttest();
 
 }
 

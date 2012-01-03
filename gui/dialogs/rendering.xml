@@ -622,16 +622,16 @@
 				setprop("/sim/rendering/shaders/landmass",qualityLevel);
 				setprop("/sim/rendering/shaders/urban",qualityLevel);
 				setprop("/sim/rendering/shaders/water",qualityLevel);
+				if (qualityLevel >= 3.0){
+					qualityLevel = 3.0;
+				}
+				setprop("/sim/rendering/shaders/model",qualityLevel);
 				if (qualityLevel >= 1.0){
 					qualityLevel = 1.0;
-				}
-				else {
-					qualityLevel = 0.0;
 				}
 				setprop("/sim/rendering/shaders/contrails",qualityLevel);
 				setprop("/sim/rendering/shaders/crop",qualityLevel);
 				setprop("/sim/rendering/shaders/generic",qualityLevel);
-				setprop("/sim/rendering/shaders/model",qualityLevel);
 				setprop("/sim/rendering/shaders/transition",qualityLevel);
 			});
 		</open>

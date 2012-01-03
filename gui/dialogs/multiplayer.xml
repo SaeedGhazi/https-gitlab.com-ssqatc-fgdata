@@ -4,10 +4,23 @@
 <PropertyList>
     <name>multiplayer</name>
     <layout>vbox</layout>
-    <resizable>true</resizable>
+    <resizable>false</resizable>
 
     <nasal>
         <open>
+            if ((getprop("/sim/multiplay/selected-server") == nil) or 
+                (getprop("/sim/multiplay/selected-server") == "" )   ){
+                var tx = getprop("/sim/multiplay/txhost");
+                var dlg = cmdarg();
+                var servers = cmdarg().getChildren("group")[1].getChildren("combo")[0].getChildren("value");
+                foreach (var s; servers) {
+                    var server = s.getValue();
+                    var host = split(" ", server)[0];
+                    if (host == tx) {
+                        setprop("/sim/multiplay/selected-server", server);
+                    }
+                }
+            }
         </open>
         
         <close>
@@ -50,6 +63,7 @@
         </text>
         <input>
           <row>0</row><col>1</col>
+          <halign>left</halign>
           <property>/sim/multiplay/callsign</property>
         </input>
         <text>
@@ -60,23 +74,31 @@
         <combo>
             <name>host</name>
             <row>1</row><col>1</col>
-            <pref-width>120</pref-width>
-            <property>/sim/multiplay/txhost</property>
-            <editable>true</editable>
-            <properties>/sim/multiplay/servers</properties>
+            <pref-width>300</pref-width>
+            <property>/sim/multiplay/selected-server</property>
+            <editable>false</editable>
+            <value>mpserver01.flightgear.org (Frankfurt/Germany)</value>
+            <value>mpserver02.flightgear.org (Kansas/USA)</value>
+            <value>mpserver03.flightgear.org (Germany)</value>
+            <value>mpserver04.flightgear.org (United Kingdom)</value>
+            <value>mpserver05.flightgear.org (Chicago/USA)</value>
+            <value>mpserver07.flightgear.org (Wisconsin, USA)</value>
+            <value>mpserver08.flightgear.org (Germany)</value>
+            <value>mpserver09.flightgear.org (Germany)</value>
+            <value>mpserver10.flightgear.org (Montpellier, France)</value>
+            <value>mpserver11.flightgear.org (Vilnius, Lithuania)</value>
+            <value>mpserver12.flightgear.org (Amsterdam, Netherlands)</value>
+            <value>mpserver13.flightgear.org (Grenoble, France)</value>
         </combo>
-        <input>
-          <row>1</row><col>2</col>
-          <property>/sim/multiplay/txport</property>
-        </input>
         
     <!-- status area -->
         <text>
             <visible>
                 <not><property>/sim/multiplay/online</property></not>
             </visible>
-            <row>2</row>
+            <row>3</row>
             <col>1</col>
+            <halign>left</halign>
             <label>Not connected</label>
         </text>
         
@@ -84,9 +106,9 @@
             <visible>
                 <property>/sim/multiplay/online</property>
             </visible>
-            <row>2</row>
+            <row>3</row>
             <col>1</col>
-            
+            <halign>left</halign>
             <label>MMMMMMMMMMMMMMMMM</label>
             <format>Connected to %s</format>
             <property>/sim/multiplay/txhost</property>
@@ -94,23 +116,65 @@
         </text>
     </group>
     
+    <hrule/>
     <group>
         <layout>hbox</layout>
         <default-padding>10</default-padding>
         <empty><stretch>true</stretch></empty>
 
         <button>
-          <legend>Apply</legend>
-          <default>true</default>
-          <equal>true</equal>
+          <legend>Connect</legend>
+          <enable>
+            <not>
+              <property>/sim/multiplay/online</property>
+            </not>
+          </enable>
           <binding>
             <command>dialog-apply</command>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>
+              var server = getprop("/sim/multiplay/selected-server");
+              # Get the server name by splitting on the space between
+              # the hostname and the comment.
+              server = split(" ", server)[0];
+              setprop("/sim/multiplay/txhost", server);
+            </script> 
           </binding>
           <binding>
             <command>reinit</command>
             <subsystem>mp</subsystem>
           </binding>
         </button>
+        <button>
+          <legend>Disconnect</legend>
+          <enable>
+            <property>/sim/multiplay/online</property>
+          </enable>
+          <binding>
+            <command>dialog-apply</command>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>
+              setprop("/sim/multiplay/txhost", "0.0.0.0");
+            </script> 
+          </binding>
+          <binding>
+            <command>reinit</command>
+            <subsystem>mp</subsystem>
+          </binding>
+        </button>
+        <button>
+          <legend>Close</legend>
+          <equal>true</equal>
+          <binding>
+            <command>dialog-close</command>
+          </binding>
+        </button>
+
+        <empty><stretch>true</stretch></empty>
     </group>
     
 </PropertyList>

@@ -32,15 +32,16 @@
     <open>
       var dlg = props.globals.getNode("/sim/gui/dialogs/location-on-ground", 1);
       var apt = dlg.getNode("airport", 1);
-      apt.setValue("");
+      apt.setValue(getprop("/sim/presets/airport-id"));
       var rwy = dlg.getNode("runway", 1);
       rwy.setValue("");
       var parkpos = dlg.getNode("parkpos", 1);
       parkpos.setValue("");
 
       var mode = {
-        runway:  dlg.getNode("use_runway", 1),
-        parkpos: dlg.getNode("use_parkpos", 1)
+        runway:     dlg.getNode("use_runway", 1),
+        bestrunway: dlg.getNode("use_best_runway", 1),
+        parkpos:    dlg.getNode("use_parkpos", 1)
       };
 
       var set_radio = func(m) {
@@ -78,6 +79,8 @@
 
         gui.dialog_update("location-on-ground");
       }
+      
+      updateRunways();
     </open>
   </nasal>
 
@@ -106,6 +109,33 @@
 
     <radio>
       <row>1</row><col>0</col>
+      <property>/sim/gui/dialogs/location-on-ground/use_best_runway</property>
+      <live>true</live>
+      <binding>
+        <command>nasal</command>
+        <script>set_radio("bestrunway")</script>
+      </binding>
+    </radio>
+
+    <text>
+      <row>1</row><col>1</col>
+      <halign>right</halign>
+      <label>Best runway</label>
+      <enable>
+        <property>/sim/gui/dialogs/location-on-ground/use_best_runway</property>
+      </enable>
+    </text>
+    <text>
+      <row>1</row><col>2</col>
+      <halign>right</halign>
+      <label>(based on wind)</label>
+      <enable>
+        <property>/sim/gui/dialogs/location-on-ground/use_best_runway</property>
+      </enable>
+    </text>
+
+    <radio>
+      <row>2</row><col>0</col>
       <property>/sim/gui/dialogs/location-on-ground/use_runway</property>
       <live>true</live>
       <binding>
@@ -115,14 +145,17 @@
     </radio>
 
     <text>
-      <row>1</row><col>1</col>
+      <row>2</row><col>1</col>
       <halign>right</halign>
       <label>Runway:</label>
+      <enable>
+        <property>/sim/gui/dialogs/location-on-ground/use_runway</property>
+      </enable>
     </text>
 
-	<combo>
+    <combo>
       <name>runway</name>
-      <row>1</row><col>2</col>
+      <row>2</row><col>2</col>
       <pref-width>85</pref-width>
       <enable>
         <property>/sim/gui/dialogs/location-on-ground/use_runway</property>
@@ -137,7 +170,7 @@
     </combo>
 
     <radio>
-      <row>2</row><col>0</col>
+      <row>3</row><col>0</col>
       <property>/sim/gui/dialogs/location-on-ground/use_parkpos</property>
       <live>true</live>
       <binding>
@@ -147,13 +180,16 @@
     </radio>
 
     <text>
-      <row>2</row><col>1</col>
+      <row>3</row><col>1</col>
       <halign>right</halign>
       <label>Parking:</label>
+      <enable>
+        <property>/sim/gui/dialogs/location-on-ground/use_parkpos</property>
+      </enable>
     </text>
 
     <input>
-      <row>2</row><col>2</col>
+      <row>3</row><col>2</col>
       <enable>
         <property>/sim/gui/dialogs/location-on-ground/use_parkpos</property>
       </enable>
@@ -179,7 +215,10 @@
         <command>nasal</command>
         <script>
           setprop("/sim/presets/airport-id", apt.getValue());
-          if (mode["runway"].getBoolValue()) {
+          if (mode["bestrunway"].getBoolValue()) {
+            setprop("/sim/presets/runway", "");
+            setprop("/sim/presets/parkpos", "");
+          } else if (mode["runway"].getBoolValue()) {
             setprop("/sim/presets/runway", rwy.getValue());
             setprop("/sim/presets/parkpos", "");
           } else {

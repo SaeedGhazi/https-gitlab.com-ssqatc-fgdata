@@ -96,22 +96,29 @@ calc_geo(blat);
 
 # first weather info for tile center (lat, lon, visibility, temperature, dew point, pressure)
 
-local_weather.set_weather_station(blat, blon, alt_offset, 20000.0, 14.0, 12.0, 29.78);
+local_weather.set_weather_station(blat, blon, alt_offset, 30000.0, 14.0, 12.0, 29.78);
 
-#strength = 0.5;
+alt_offset = 0.0;
+
+#var strength = 0.5;
 #local_weather.create_cumosys(blat,blon, 3000.0, get_n(strength), 20000.0);
 
 #create_2_8_altocumulus_streaks(blat, blon, 12000+alt_offset, alpha) ;
 #create_2_8_altocumulus_streaks(blat, blon, 12000+alt_offset, alpha) ;
 #create_6_8_stratus(blat, blon, 3000+alt_offset, alpha) ;
 #create_4_8_tstratus_patches(blat, blon, 5000+alt_offset, alpha) ;
-#create_4_8_sstratus_patches(blat, blon, 12000+alt_offset, alpha) ;
-#create_4_8_cirrostratus_patches(blat, blon, 20000+alt_offset, alpha) ;
+#create_4_8_sstratus_patches(blat, blon, 5000+alt_offset, alpha) ;
+#create_4_8_cirrostratus_patches(blat, blon, 5000+alt_offset, alpha) ;
 
 #create_4_8_cirrocumulus_streaks(blat, blon, 10000.0 + alt_offset, alpha);
-create_4_8_alttstratus_streaks(blat, blon, 5000+alt_offset, alpha) ;
+#create_4_8_alttstratus_streaks(blat, blon, 5000+alt_offset, alpha) ;
 #create_2_8_cirrocumulus_patches(blat, blon, 13000+alt_offset, alpha) ;
-#create_8_8_nimbus_rain(blat, blon, 5000+alt_offset, alpha, 0.3) ;
+
+#create_8_8_nimbus_rain(blat, blon, 3000+alt_offset, alpha, 0.3) ;
+#create_8_8_tstratus(blat, blon, 5000+alt_offset, alpha);
+#create_8_8_cirrostratus(blat, blon, 5000+alt_offset, alpha);
+create_thunderstorm_scenario (blat, blon, 3000.0, alpha);
+#create_big_thunderstorm (blat, blon, 3000.0, alpha);
 
 #create_4_8_altocumulus_perlucidus(blat, blon, 5000+alt_offset, alpha) ;
 
@@ -121,7 +128,7 @@ create_4_8_alttstratus_streaks(blat, blon, 5000+alt_offset, alpha) ;
 
 
 
-local_weather.set_atmosphere_ipoint(blat, blon, 45000.0, 10000.0, 45000.0, 0.0, 25000.0, 30000.0, 0.9, 10000.0, 11000.0); 
+local_weather.set_atmosphere_ipoint(blat, blon, 45000.0, 15000.0, 45000.0, 0.0, 15000.0, 17000.0, 0.8, 12000.0, 17000.0); 
 
 
 append(weather_dynamics.tile_convective_altitude,3000.0);
@@ -160,11 +167,13 @@ calc_geo(blat);
 
 # get probabilistic values for the weather parameters
 
-var vis = 30000.0 + rand() * 15000.0;
+var vis = 25000.0 + rand() * 10000.0;
 var T = 20.0 + rand() * 10.0;
 var spread = 14.0 + 8.0 * rand();
 var D = T - spread;
 var p = 1025.0 + rand() * 6.0; p = adjust_p(p);
+
+if (realistic_visibility_flag == 1) {vis = vis * realistic_visibility_multiplyer;}
 
 # and set them at the tile center
 local_weather.set_weather_station(blat, blon, alt_offset, vis, T, D, p * hp_to_inhg);
@@ -298,11 +307,13 @@ calc_geo(blat);
 
 # get probabilistic values for the weather parameters
 
-var vis = 25000.0 + rand() * 15000.0;
+var vis = 20000.0 + rand() * 10000.0;
 var T = 15.0 + rand() * 10.0;
 var spread = 10.0 + 4.0 * rand();
 var D = T - spread;
 var p = 1019.0 + rand() * 6.0; p = adjust_p(p);
+
+if (realistic_visibility_flag == 1) {vis = vis * realistic_visibility_multiplyer;}
 
 # and set them at the tile center
 local_weather.set_weather_station(blat, blon, alt_offset, vis, T, D, p * hp_to_inhg);
@@ -445,11 +456,13 @@ calc_geo(blat);
 
 # get probabilistic values for the weather parameters
 
-var vis = 20000.0 + rand() * 12000.0;
+var vis = 15000.0 + rand() * 7000.0;
 var T = 12.0 + rand() * 10.0;
 var spread = 7.0 + 4.0 * rand();
 var D = T - spread;
 var p = 1013.0 + rand() * 6.0; p = adjust_p(p);
+
+if (realistic_visibility_flag == 1) {vis = vis * realistic_visibility_multiplyer;}
 
 # and set them at the tile center
 local_weather.set_weather_station(blat, blon, alt_offset, vis, T, D, p * hp_to_inhg);
@@ -653,11 +666,13 @@ calc_geo(blat);
 
 # get probabilistic values for the weather parameters
 
-var vis = 12000.0 + rand() * 9000.0;
+var vis = 8000.0 + rand() * 8000.0;
 var T = 10.0 + rand() * 10.0;
 var spread = 6.0 + 2.0 * rand();
 var D = T - spread;
 var p = 1007.0 + rand() * 6.0; p = adjust_p(p);
+
+if (realistic_visibility_flag == 1) {vis = vis * realistic_visibility_multiplyer;}
 
 # and set them at the tile center
 local_weather.set_weather_station(blat, blon, alt_offset, vis, T, D, p * hp_to_inhg);
@@ -802,7 +817,7 @@ var alpha = getprop(lw~"tmp/tile-orientation-deg");
 var phi = alpha * math.pi/180.0;
 
 
-if (getprop(lw~"tmp/presampling-flag") == 0)
+if (local_weather.presampling_flag == 0)
 	{var alt_offset = getprop(lw~"tmp/tile-alt-offset-ft");}
 else
 	{var alt_offset = getprop(lw~"tmp/tile-alt-layered-ft");}
@@ -815,13 +830,13 @@ calc_geo(blat);
 
 # get probabilistic values for the weather parameters
 
-var vis = 9000.0 + rand() * 10000.0;
+var vis = 8000.0 + rand() * 5000.0;
 var T = 5.0 + rand() * 10.0;
 var spread = 5.0 + 2.0 * rand();
 var D = T - spread;
 var p = 1001.0 + rand() * 6.0; p = adjust_p(p);
 
-
+if (realistic_visibility_flag == 1) {vis = vis * realistic_visibility_multiplyer;}
 
 # and set them at the tile center
 local_weather.set_weather_station(blat, blon, alt_offset, vis, T, D, p * hp_to_inhg);
@@ -832,10 +847,14 @@ var strength = 0.0;
 
 var rn = rand();
 
+
+
 if (rand() < small_scale_persistence)
 	{rn = rnd_store;}
 else
 	{rnd_store = rn;}
+
+rn = 0.1;
 
 
 if (rn > 0.8)
@@ -849,7 +868,10 @@ if (rn > 0.8)
 	y = 2.0 * (rand()-0.5) * 11000.0;
 	var beta = rand() * 360.0;
 
-	local_weather.create_layer("Nimbus", blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), alt+alt_offset, 500.0, 12000.0, 7000.0, beta, 1.0, 0.2, 1, 1.0);
+	var alt_eff = alt;
+	if (local_weather.hardcoded_clouds_flag == 1) {alt_eff = alt_eff - 3000.0;}
+
+	local_weather.create_layer("Nimbus", blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), alt_eff+alt_offset, 500.0, 12000.0, 7000.0, beta, 1.0, 0.2, 1, 1.0);
 	local_weather.create_effect_volume(2, blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 10000.0, 6000.0, beta, 0.0, alt + alt_offset, 5000.0, 0.3, -1, -1, -1,0,-1 );
 	local_weather.create_effect_volume(2, blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 9000.0, 5000.0, beta, 0.0, alt+alt_offset-300.0, 1500.0, 0.5, -1, -1, -1,0,-1 );
 
@@ -857,7 +879,7 @@ if (rn > 0.8)
 	y = 2.0 * (rand()-0.5) * 11000.0;
 	var beta = rand() * 360.0;
 
-	local_weather.create_layer("Nimbus", blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), alt+alt_offset, 500.0, 10000.0, 6000.0, beta, 1.0, 0.2, 1, 1.0);
+	local_weather.create_layer("Nimbus", blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), alt_eff+alt_offset, 500.0, 10000.0, 6000.0, beta, 1.0, 0.2, 1, 1.0);
 	local_weather.create_effect_volume(2, blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 9000.0, 5000.0, beta, 0.0, alt + alt_offset, 5000.0, 0.3, -1, -1, -1,0 ,-1);
 	local_weather.create_effect_volume(2, blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 8000.0, 4000.0, beta, 0.0, alt+alt_offset-300.0, 1500.0, 0.5, -1, -1, -1,0,-1 );
 
@@ -952,7 +974,7 @@ var lon = 0.0;
 var alpha = getprop(lw~"tmp/tile-orientation-deg");
 var phi = alpha * math.pi/180.0;
 
-if (getprop(lw~"tmp/presampling-flag") == 0)
+if (local_weather.presampling_flag == 0)
 	{var alt_offset = getprop(lw~"tmp/tile-alt-offset-ft");}
 else
 	{var alt_offset = getprop(lw~"tmp/tile-alt-layered-ft");}
@@ -971,6 +993,8 @@ var spread = 4.5 + 1.0 * rand();
 var D = T - spread;
 var p = 995.0 + rand() * 6.0; p = adjust_p(p);
 
+if (realistic_visibility_flag == 1) {vis = vis * realistic_visibility_multiplyer;}
+
 # and set them at the tile center
 local_weather.set_weather_station(blat, blon, alt_offset, vis, T, D, p * hp_to_inhg);
 
@@ -980,6 +1004,7 @@ local_weather.set_weather_station(blat, blon, alt_offset, vis, T, D, p * hp_to_i
 var alt = spread * 400.0 + local_weather.cloud_vertical_size_map["Nimbus"] * 0.5 * m_to_ft;
 var strength = 0.0;
 
+#var alt = 3000.0;
 
 create_8_8_nimbus_rain(blat, blon, alt+alt_offset, alpha,0.4 + rand()*0.2);
 
@@ -1036,11 +1061,13 @@ calc_geo(blat);
 
 # get probabilistic values for the weather parameters
 
-var vis = 45000.0 + rand() * 20000.0;
+var vis = 40000.0 + rand() * 15000.0;
 var T = 8.0 + rand() * 8.0;
 var spread = 7.0 + 3.0 * rand();
 var D = T - spread;
 var p = 1005.0 + rand() * 10.0; p = adjust_p(p);
+
+if (realistic_visibility_flag == 1) {vis = vis * realistic_visibility_multiplyer;}
 
 # and set them at the tile center
 local_weather.set_weather_station(blat, blon, alt_offset, vis, T, D, p * hp_to_inhg);
@@ -1131,11 +1158,13 @@ calc_geo(blat);
 
 # get probabilistic values for the weather parameters
 
-var vis = 12000.0 + rand() * 10000.0;
+var vis = 8000.0 + rand() * 5000.0;
 var T = 16.0 + rand() * 10.0;
 var spread = 6.0 + 3.0 * rand();
 var D = T - spread;
 var p = 1005.0 + rand() * 10.0; p = adjust_p(p);
+
+if (realistic_visibility_flag == 1) {vis = vis * realistic_visibility_multiplyer;}
 
 # and set them at the tile center
 local_weather.set_weather_station(blat, blon, alt_offset, vis, T, D, p * hp_to_inhg);
@@ -1273,6 +1302,8 @@ var spread = 8.0 + 2.0 * rand();
 var D = T - spread;
 var p = 970 + rand() * 10.0; p = adjust_p(p);
 
+if (realistic_visibility_flag == 1) {vis = vis * realistic_visibility_multiplyer;}
+
 # first weather info for tile center (lat, lon, visibility, temperature, dew point, pressure)
 
 local_weather.set_weather_station(blat, blon, alt_offset, vis, T, D, p * hp_to_inhg);
@@ -1374,6 +1405,82 @@ tile_finished();
 }
 
 
+
+
+####################################
+# Thunderstorms
+####################################
+
+var set_thunderstorms_tile = func {
+
+setprop(lw~"tiles/code","thunderstorms");
+
+tile_start();
+
+var x = 0.0;
+var y = 0.0;
+var lat = 0.0;
+var lon = 0.0;
+
+
+var alpha = getprop(lw~"tmp/tile-orientation-deg");
+var phi = alpha * math.pi/180.0;
+var alt_offset = getprop(lw~"tmp/tile-alt-offset-ft");
+
+# get tile center coordinates
+
+var blat = getprop(lw~"tiles/tmp/latitude-deg");
+var blon = getprop(lw~"tiles/tmp/longitude-deg");
+calc_geo(blat);
+
+# get probabilistic values for the weather parameters
+
+var vis = 9000.0 + rand() * 10000.0;
+var T = 10.0 + rand() * 15.0;
+var spread = 8.0 + 2.0 * rand();
+var D = T - spread;
+var p = 1000 + rand() * 10.0; p = adjust_p(p);
+
+if (realistic_visibility_flag == 1) {vis = vis * realistic_visibility_multiplyer;}
+
+# first weather info for tile center (lat, lon, visibility, temperature, dew point, pressure)
+
+local_weather.set_weather_station(blat, blon, alt_offset, vis, T, D, p * hp_to_inhg);
+
+# altitude for the lowest layer
+var alt = spread * 400.0;
+var strength = 0.0;
+
+# bias Cumulus clouds towards larger sizes due to lots of water vapour
+local_weather.convective_size_bias = 0.3 + rand() * 0.3;
+
+
+# and specify the atmosphere
+	local_weather.set_atmosphere_ipoint(blat, blon, vis + 12000.0, alt+alt_offset, vis + 20000.0, 0.0, alt+alt_offset +20000.0, alt+alt_offset + 25000.0, 0.65, alt+alt_offset, alt+alt_offset + 2500.0); 
+
+var rn = rand();
+
+
+if (rand() < small_scale_persistence)
+	{rn = rnd_store;}
+else
+	{rnd_store = rn;}
+
+create_thunderstorm_scenario (blat, blon, alt + alt_offset, alpha);
+
+# store convective altitude and strength
+
+append(weather_dynamics.tile_convective_altitude,alt);
+append(weather_dynamics.tile_convective_strength,strength);
+
+tile_finished();
+
+}
+
+
+
+
+
 ####################################
 # Coldfront
 ####################################
@@ -1409,6 +1516,8 @@ var T = 20.0 + rand() * 8.0;
 var spread = 8.0 + 2.0 * rand();
 var D = T - spread;
 var p = 1005 + rand() * 10.0; p = adjust_p(p);
+
+if (realistic_visibility_flag == 1) {vis = vis * realistic_visibility_multiplyer;}
 
 # first weather info for tile  (lat, lon, visibility, temperature, dew point, pressure)
 
@@ -1525,7 +1634,7 @@ var lon = 0.0;
 var alpha = getprop(lw~"tmp/tile-orientation-deg");
 var phi = alpha * math.pi/180.0;
 
-if (getprop(lw~"tmp/presampling-flag") == 0)
+if (local_weather.presampling_flag == 0)
 	{var alt_offset = getprop(lw~"tmp/tile-alt-offset-ft");}
 else
 	{var alt_offset = getprop(lw~"tmp/tile-alt-layered-ft");}
@@ -1543,6 +1652,8 @@ var T = 10.0 + rand() * 8.0;
 var spread = 9.0 + 4.0 * rand();
 var D = T - spread;
 var p = 1005 + rand() * 10.0; p = adjust_p(p);
+
+if (realistic_visibility_flag == 1) {vis = vis * realistic_visibility_multiplyer;}
 
 # first weather info for tile  (lat, lon, visibility, temperature, dew point, pressure)
 
@@ -1587,7 +1698,10 @@ for (var i=0; i<6; i=i+1)
 	var x = 2.0 * (rand()-0.5) * 15000;
 	var y = 2.0 * (rand()-0.5) * 10000 + 10000;
 	var beta = (rand() -0.5) * 180.0;
-	local_weather.create_streak("Cirrostratus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 18000 + alt + alt_offset,300.0,4,2300.0,0.2,600.0,4,2300.0,0.2,600.0,alpha+beta,1.0);
+	var alt_shift = 0.0;
+	if (local_weather.hardcoded_clouds_flag == 1) {alt_shift = local_weather.offset_map["Cirrostratus"];}
+
+	local_weather.create_streak("Cirrostratus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 18000 + alt + alt_offset - alt_shift,300.0,4,2300.0,0.2,600.0,4,2300.0,0.2,600.0,alpha+beta,1.0);
 
 	}
 
@@ -1625,7 +1739,7 @@ var lon = 0.0;
 var alpha = getprop(lw~"tmp/tile-orientation-deg");
 var phi = alpha * math.pi/180.0;
 
-if (getprop(lw~"tmp/presampling-flag") == 0)
+if (local_weather.presampling_flag == 0)
 	{var alt_offset = getprop(lw~"tmp/tile-alt-offset-ft");}
 else
 	{var alt_offset = getprop(lw~"tmp/tile-alt-layered-ft");}
@@ -1643,6 +1757,8 @@ var T = 13.0 + rand() * 8.0;
 var spread = 8.0 + 2.0 * rand();
 var D = T - spread;
 var p = 1005 + rand() * 10.0; p = adjust_p(p);
+
+if (realistic_visibility_flag == 1) {vis = vis * realistic_visibility_multiplyer;}
 
 # first weather info for tile  (lat, lon, visibility, temperature, dew point, pressure)
 
@@ -1668,12 +1784,15 @@ var strength = 0.0;
 
 # followed by random patches of Cirrostratus
 
+var alt_shift = 0.0;
+if (local_weather.hardcoded_clouds_flag == 1) {alt_shift = local_weather.offset_map["Cirrostratus"];}
+
 for (var i=0; i<3; i=i+1)
 	{
 	var x = 2.0 * (rand()-0.5) * 18000;
 	var y = 2.0 * (rand()-0.5) * 5000 - 15000;
 	var beta = (rand() -0.5) * 180.0;
-	local_weather.create_streak("Cirrostratus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 15000 + alt + alt_offset,300.0,4,2300.0,0.2,600.0,4,2300.0,0.2,600.0,alpha+beta,1.0);
+	local_weather.create_streak("Cirrostratus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 15000 + alt + alt_offset - alt_shift,300.0,4,2300.0,0.2,600.0,4,2300.0,0.2,600.0,alpha+beta,1.0);
 
 	}
 
@@ -1742,7 +1861,7 @@ var lon = 0.0;
 var alpha = getprop(lw~"tmp/tile-orientation-deg");
 var phi = alpha * math.pi/180.0;
 
-if (getprop(lw~"tmp/presampling-flag") == 0)
+if (local_weather.presampling_flag == 0)
 	{var alt_offset = getprop(lw~"tmp/tile-alt-offset-ft");}
 else
 	{var alt_offset = getprop(lw~"tmp/tile-alt-layered-ft");}
@@ -1760,6 +1879,8 @@ var T = 15.0 + rand() * 7.0;
 var spread = 7.0 + 2.0 * rand();
 var D = T - spread;
 var p = 1005 + rand() * 10.0; p = adjust_p(p);
+
+if (realistic_visibility_flag == 1) {vis = vis * realistic_visibility_multiplyer;}
 
 # first weather info for tile  (lat, lon, visibility, temperature, dew point, pressure)
 
@@ -1849,7 +1970,7 @@ var lon = 0.0;
 var alpha = getprop(lw~"tmp/tile-orientation-deg");
 var phi = alpha * math.pi/180.0;
 
-if (getprop(lw~"tmp/presampling-flag") == 0)
+if (local_weather.presampling_flag == 0)
 	{var alt_offset = getprop(lw~"tmp/tile-alt-offset-ft");}
 else
 	{var alt_offset = getprop(lw~"tmp/tile-alt-layered-ft");}
@@ -1867,6 +1988,8 @@ var T = 17.0 + rand() * 6.0;
 var spread = 5.0 + 2.0 * rand();
 var D = T - spread;
 var p = 1005 + rand() * 10.0; p = adjust_p(p);
+
+if (realistic_visibility_flag == 1) {vis = vis * realistic_visibility_multiplyer;}
 
 # first weather info for tile  (lat, lon, visibility, temperature, dew point, pressure)
 
@@ -1951,7 +2074,10 @@ var lon = 0.0;
 
 var alpha = getprop("/environment/metar/base-wind-dir-deg");
 var phi = alpha * math.pi/180.0;
-var metar_alt_offset = 700.0 + getprop("/environment/metar/station-elevation-ft");
+
+# it seems more recent Flightgear versions have absolute altitude
+# var metar_alt_offset = 700.0 + getprop("/environment/metar/station-elevation-ft");
+var metar_alt_offset = 700.0;
 
 # print("metar_alt_offset", metar_alt_offset);
 
@@ -2263,11 +2389,13 @@ var set_METAR_weather_station = func {
 
 	if (is_visibility_max == 1) 
 			{
-		if (p * inhg_to_hp < 1000.0) {vis = 10000.0 + 5000 * rand();}	
-		else if (p * inhg_to_hp < 1010.0) {vis = 15000.0 + 7000 * rand();}
-		else if (p * inhg_to_hp < 1020.0) {vis = 22000.0 + 14000.0 * rand();}
-		else {vis = 30000.0 + 15000.0 * rand();}
-		}
+			if (p * inhg_to_hp < 1000.0) {vis = 10000.0 + 5000 * rand();}	
+			else if (p * inhg_to_hp < 1010.0) {vis = 15000.0 + 7000 * rand();}
+			else if (p * inhg_to_hp < 1020.0) {vis = 22000.0 + 14000.0 * rand();}
+			else {vis = 30000.0 + 15000.0 * rand();}
+
+			if (realistic_visibility_flag == 1) {vis = vis * realistic_visibility_multiplyer;}
+			}
 
 
 
@@ -2385,32 +2513,31 @@ var set_METAR_weather_station = func {
 # mid-level cloud setup calls
 ####################################
 
-var create_8_8_stratus = func (lat, lon, alt, alpha) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 1500.0;}
-
-local_weather.create_streak("Stratus",lat, lon, alt,500.0,32,1250.0,0.0,400.0,32,1250.0,0.0,400.0,alpha,1.0);
-
-}
 
 var create_8_8_tstratus = func (lat, lon, alt, alpha) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 650.0;}
-
-local_weather.create_streak("Stratus (thin)",lat, lon, alt,500.0,32,1250.0,0.0,400.0,32,1250.0,0.0,400.0,alpha,1.0);
-
+if (local_weather.hardcoded_clouds_flag == 1) 
+	{
+	alt = alt - local_weather.offset_map["Stratus_thin"];
+	
+local_weather.create_streak("Stratus (thin)",lat, lon, alt,500.0,40,1000.0,0.0,400.0,40,1000.0,0.0,400.0,alpha,1.0);
+	}
+else
+	{
+	local_weather.create_streak("Stratus (thin)",lat, lon, alt,500.0,32,1250.0,0.0,400.0,32,1250.0,0.0,400.0,alpha,1.0);
+	}
 }
 
 var create_8_8_cirrostratus = func (lat, lon, alt, alpha) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 1800.0;}
+if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - local_weather.offset_map["Cirrostratus"];}
 
 local_weather.create_streak("Cirrostratus",lat,lon,alt,500.0,30,1250.0,0.0,400.0,30,1250.0,0.0,400.0,alpha,1.0);
 }
 
 var create_8_8_nimbus = func (lat, lon, alt, alpha) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 1500.0;}
 
 local_weather.create_streak("Nimbus",lat, lon, alt,500.0,32,1250.0,0.0,200.0,32,1250.0,0.0,200.0,alpha,1.0);
 
@@ -2419,9 +2546,11 @@ local_weather.create_streak("Nimbus",lat, lon, alt,500.0,32,1250.0,0.0,200.0,32,
 
 var create_8_8_nimbus_var1 = func (lat, lon, alt, alpha) {
 
+if (local_weather.hardcoded_clouds_flag == 1) {var alt_eff = alt - local_weather.offset_map["Nimbus"]; }
+
 var phi = alpha * math.pi/180.0;
 
-local_weather.create_streak("Nimbus",lat, lon, alt,500.0,35,1111.0,0.0,200.0,35,1111.0,0.0,200.0,alpha,1.0);
+local_weather.create_streak("Nimbus",lat, lon, alt_eff,500.0,35,1150.0,0.0,200.0,35,1150.0,0.0,200.0,alpha,1.0);
 
 for (var i = 0; i < 3; i=i+1)
 	{
@@ -2434,9 +2563,11 @@ for (var i = 0; i < 3; i=i+1)
 
 var create_8_8_nimbus_var2 = func (lat, lon, alt, alpha) {
 
+if (local_weather.hardcoded_clouds_flag == 1) {var alt_eff = alt - local_weather.offset_map["Nimbus"]; }
+
 var phi = alpha * math.pi/180.0;
 
-local_weather.create_streak("Nimbus",lat, lon, alt,500.0,35,1111.0,0.0,200.0,35,1111.0,0.0,200.0,alpha,1.0);
+local_weather.create_streak("Nimbus",lat, lon, alt_eff,500.0,35,1150.0,0.0,200.0,35,1150.0,0.0,200.0,alpha,1.0);
 
 for (var i=0; i<8; i=i+1)
 	{
@@ -2452,10 +2583,12 @@ for (var i=0; i<8; i=i+1)
 
 var create_8_8_nimbus_var3 = func (lat, lon, alt, alpha) {
 
+if (local_weather.hardcoded_clouds_flag == 1) {var alt_eff = alt - local_weather.offset_map["Nimbus"]; }
+
 var phi = alpha * math.pi/180.0;
 
 
-local_weather.create_streak("Nimbus",lat, lon, alt,500.0,35,1111.0,0.0,200.0,35,1111.0,0.0,200.0,alpha,1.0);
+local_weather.create_streak("Nimbus",lat, lon, alt_eff,500.0,35,1150.0,0.0,200.0,35,1150.0,0.0,200.0,alpha,1.0);
 
 for (var i=0; i<6; i=i+1)
 	{
@@ -2465,21 +2598,17 @@ for (var i=0; i<6; i=i+1)
 	local_weather.create_streak("Stratus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt+1600.0,300.0,6,1200.0,0.2,700.0,6,1200.0,0.2,700.0,alpha+beta,1.0);
 	}
 
-# reduced visibility in layer
-#local_weather.create_effect_volume(3, lat, lon, 20000.0, 20000.0, alpha, alt-1500.0, alt+900.0, 2000.0, -1 , -1, -1, -1,0 ,-1);
-# cloud shade
-#local_weather.create_effect_volume(3, lat, lon, 20000.0, 20000.0, alpha, 0.0, alt, -1, -1 , -1, -1, -1,0 ,0.8);
-
 }
 
 var create_8_8_nimbus_rain = func (lat, lon, alt, alpha, rain) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 3000.0;}
+
 
 if (local_weather.detailed_clouds_flag == 0)
 	{local_weather.create_streak("Nimbus",lat, lon, alt,500.0,32,1250.0,0.0,200.0,32,1250.0,0.0,200.0,alpha,1.0);}
 else
 	{
+	#print(local_weather.offset_map["Nimbus"]);
 	var rn = rand();
 	if (rn > 0.66) {create_8_8_nimbus_var1(lat, lon, alt, alpha);}
 	else if (rn > 0.33) {create_8_8_nimbus_var2(lat, lon, alt, alpha);}
@@ -2499,12 +2628,19 @@ else
 
 }
 
+var create_8_8_stratus = func (lat, lon, alt, alpha) {
+
+if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - local_weather.offset_map["Stratus"];}
+
+local_weather.create_streak("Stratus",lat, lon, alt,500.0,32,1250.0,0.0,400.0,32,1250.0,0.0,400.0,alpha,1.0);
+}
+
 
 var create_8_8_stratus_rain = func (lat, lon, alt, alpha, rain) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 1500.0;}
 
-local_weather.create_streak("Stratus",lat, lon, alt,500.0,32,1250.0,0.0,400.0,32,1250.0,0.0,400.0,alpha,1.0);
+create_8_8_stratus(lat, lon, alt, alpha);
+
 
 if (rain > 0.1)	
 	{
@@ -2520,9 +2656,22 @@ else
 
 var create_6_8_stratus = func (lat, lon, alt, alpha) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 1500.0;}
+if (local_weather.hardcoded_clouds_flag == 1) 
+	{
+	alt = alt - local_weather.offset_map["Stratus"];
+	
+	for (var i = 0; i < 20; i = i + 1)
+		{
+		var phi = alpha * math.pi/180.0;
+		var x = 2.0 * (rand()-0.5) * 18000;
+		var y = 2.0 * (rand()-0.5) * 18000;
 
-local_weather.create_streak("Stratus",lat, lon, alt,500.0,20,0.0,0.2,20000.0,20,0.0,0.2,20000.0,alpha,1.0);
+		local_weather.create_streak("Stratus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,500.0,5,2300.0,0.2,500.0,5,2300.0,0.2,500.0,alpha,1.0);
+		}
+
+	}
+else
+	{local_weather.create_streak("Stratus",lat, lon, alt,500.0,20,0.0,0.2,20000.0,20,0.0,0.2,20000.0,alpha,1.0);}
 }
 
 
@@ -2532,7 +2681,9 @@ var create_6_8_nimbus_rain = func (lat, lon, alt, alpha, rain) {
 
 var phi = alpha * math.pi/180.0;
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 3000.0;}
+var alt_cloud = alt;
+
+if (local_weather.hardcoded_clouds_flag == 1) {alt_cloud = alt_cloud - 3000.0;}
 
 for (var i = 0; i < 3; i = i + 1)
 	{
@@ -2540,7 +2691,7 @@ for (var i = 0; i < 3; i = i + 1)
 	var y = 2.0 * (rand()-0.5) * 12000.0;
 	var beta = rand() * 360.0;
 
-	local_weather.create_layer("Nimbus", lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt, 500.0, 12000.0, 7000.0, beta, 1.0, 0.2, 1, 1.0);
+	local_weather.create_layer("Nimbus", lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt_cloud, 500.0, 12000.0, 7000.0, beta, 1.0, 0.2, 1, 1.0);
 
 	if (rain > 0.1)
 		{
@@ -2562,7 +2713,9 @@ var create_6_8_stratus_rain = func (lat, lon, alt, alpha, rain) {
 
 var phi = alpha * math.pi/180.0;
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 1500.0;}
+var alt_cloud = alt;
+
+if (local_weather.hardcoded_clouds_flag == 1) {alt_cloud = alt_cloud - local_weather.offset_map["Stratus"];}
 
 for (var i = 0; i < 3; i = i + 1)
 	{
@@ -2570,7 +2723,7 @@ for (var i = 0; i < 3; i = i + 1)
 	var y = 2.0 * (rand()-0.5) * 12000.0;
 	var beta = rand() * 360.0;
 
-	local_weather.create_layer("Stratus", lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt, 500.0, 12000.0, 7000.0, beta, 1.0, 0.2, 0, 0.0);
+	local_weather.create_layer("Stratus", lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt_cloud, 500.0, 12000.0, 7000.0, beta, 1.0, 0.2, 0, 0.0);
 
 	if (rain > 0.1)
 		{
@@ -2589,21 +2742,21 @@ for (var i = 0; i < 3; i = i + 1)
 
 var create_6_8_stratus_undulatus = func (lat, lon, alt, alpha) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 1500.0;}
+if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - local_weather.offset_map["Stratus"];}
 
 local_weather.create_undulatus("Stratus",lat, lon, alt,300.0,10,4000.0,0.1,400.0,50,800.0,0.1,100.0, 1000.0, alpha,1.0);
 }
 
 var create_6_8_tstratus_undulatus = func (lat, lon, alt, alpha) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 650.0;}
+if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - local_weather.offset_map["Stratus_thin"];}
 
 local_weather.create_undulatus("Stratus (thin)",lat, lon, alt,300.0,10,4000.0,0.1,400.0,50,800.0,0.1,100.0, 1000.0, alpha,1.0);
 }
 
 var create_6_8_cirrostratus = func (lat, lon, alt, alpha) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 1800.0;}
+if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - local_weather.offset_map["Cirrostratus"];}
 
 local_weather.create_streak("Cirrostratus",lat,lon,alt,500.0,24,1500.0,0.0,900.0,24,1500.0,0.0,900.0,alpha,1.0);
 }
@@ -2633,7 +2786,7 @@ else
 
 var create_4_8_stratus = func (lat, lon, alt, alpha) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 1500.0;}
+if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - local_weather.offset_map["Stratus"];}
 
 var phi = alpha * math.pi/180.0;
 var x = 2.0 * (rand()-0.5) * 15000;
@@ -2662,7 +2815,7 @@ var create_4_8_stratus_patches = func (lat, lon, alt, alpha) {
 
 var phi = alpha * math.pi/180.0;
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 1500.0;}
+if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - local_weather.offset_map["Stratus"];}
 
 for (var i=0; i<16; i=i+1)
 	{
@@ -2679,7 +2832,7 @@ var create_4_8_tstratus_patches = func (lat, lon, alt, alpha) {
 
 var phi = alpha * math.pi/180.0;
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 650.0;}
+if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - local_weather.offset_map["Stratus_thin"];}
 
 for (var i=0; i<22; i=i+1)
 	{
@@ -2701,7 +2854,7 @@ var create_4_8_sstratus_patches = func (lat, lon, alt, alpha) {
 
 var phi = alpha * math.pi/180.0;
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 800.0;}
+if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - local_weather.offset_map["Stratus_structured"];}
 
 for (var i=0; i<22; i=i+1)
 	{
@@ -2719,7 +2872,7 @@ for (var i=0; i<22; i=i+1)
 
 var create_4_8_cirrostratus_patches = func (lat, lon, alt, alpha) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 1800.0;}
+if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - local_weather.offset_map["Cirrostratus"];}
 
 var phi = alpha * math.pi/180.0;
 
@@ -2736,7 +2889,7 @@ for (var i=0; i<6; i=i+1)
 
 var create_4_8_cirrostratus_undulatus = func (lat, lon, alt, alpha) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 1800.0;}
+if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - local_weather.offset_map["Cirrostratus"];}
 
 local_weather.create_undulatus("Cirrostratus",lat, lon, alt,300.0,5,8000.0,0.1,400.0,40,1000.0,0.1,100.0, 1500.0, alpha,1.0);
 }
@@ -2744,7 +2897,7 @@ local_weather.create_undulatus("Cirrostratus",lat, lon, alt,300.0,5,8000.0,0.1,4
 
 var create_4_8_stratus_undulatus = func (lat, lon, alt, alpha) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 1500.0;}
+if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - local_weather.offset_map["Stratus"];}
 
 var phi = alpha * math.pi/180.0;
 var x = 2.0 * (rand()-0.5) * 5000;
@@ -2760,7 +2913,7 @@ local_weather.create_streak("Stratus",lat+get_lat(x,y-4000,phi), lon+get_lon(x,y
 
 var create_4_8_tstratus_undulatus = func (lat, lon, alt, alpha) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 650.0;}
+if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - local_weather.offset_map["Stratus_thin"];}
 
 var phi = alpha * math.pi/180.0;
 var x = 2.0 * (rand()-0.5) * 5000;
@@ -2776,7 +2929,7 @@ local_weather.create_streak("Stratus (thin)",lat+get_lat(x,y-4000,phi), lon+get_
 
 var create_4_8_sstratus_undulatus = func (lat, lon, alt, alpha) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 800.0;}
+if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - local_weather.offset_map["Stratus_structured"];}
 
 var phi = alpha * math.pi/180.0;
 var x = 2.0 * (rand()-0.5) * 5000;
@@ -2858,7 +3011,7 @@ for (var i=0; i<20; i=i+1)
 
 var create_4_8_alttstratus_streaks = func (lat, lon, alt, alpha) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 300.0;}
+if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - local_weather.offset_map["Stratus_alt"];}
 
 var phi = alpha * math.pi/180.0;
 
@@ -2878,7 +3031,7 @@ for (var i=0; i<10; i=i+1)
 
 var create_4_8_alttstratus_patches = func (lat, lon, alt, alpha) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 300.0;}
+if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - local_weather.offset_map["Stratus_alt"];}
 
 var phi = alpha * math.pi/180.0;
 
@@ -2909,7 +3062,7 @@ else
 
 var create_2_8_stratus = func (lat, lon, alt, alpha) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 1500.0;}
+if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - local_weather.offset_map["Stratus"];}
 
 var phi = alpha * math.pi/180.0;
 
@@ -2926,7 +3079,7 @@ for (var i=0; i<8; i=i+1)
 
 var create_2_8_tstratus = func (lat, lon, alt, alpha) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 650.0;}
+if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - local_weather.offset_map["Stratus_thin"];}
 
 var phi = alpha * math.pi/180.0;
 
@@ -2944,7 +3097,7 @@ for (var i=0; i<8; i=i+1)
 
 var create_2_8_sstratus = func (lat, lon, alt, alpha) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 800.0;}
+if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - local_weather.offset_map["Stratus_structured"];}
 
 var phi = alpha * math.pi/180.0;
 
@@ -2967,7 +3120,7 @@ for (var i=0; i<8; i=i+1)
 
 var create_2_8_sstratus_streak = func (lat, lon, alt, alpha) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 800.0;}
+if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - local_weather.offset_map["Stratus_structured"];}
 
 var phi = alpha * math.pi/180.0;
 
@@ -2981,7 +3134,7 @@ local_weather.create_streak("Stratus (structured)",lat+get_lat(x,y,phi), lon+get
 
 var create_2_8_cirrostratus = func (lat, lon, alt, alpha) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 1800.0;}
+if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - local_weather.offset_map["Cirrostratus"];}
 
 var phi = alpha * math.pi/180.0;
 
@@ -3027,7 +3180,7 @@ local_weather.create_streak("Cirrus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi),
 
 var create_2_8_alttstratus = func (lat, lon, alt, alpha) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 300.0;}
+if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - local_weather.offset_map["Stratus_alt"];}
 
 var phi = alpha * math.pi/180.0;
 
@@ -3113,7 +3266,7 @@ local_weather.create_streak("Cirrus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi),
 
 var create_1_8_cirrostratus_undulatus = func (lat, lon, alt, alpha) {
 
-if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 1800.0;}
+if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - local_weather.offset_map["Cirrostratus"];}
 
 local_weather.create_undulatus("Cirrostratus",lat, lon, alt,300.0,1,8000.0,0.0,400.0,40,1000.0,0.1,100.0, 1500.0, alpha,1.0);
 }
@@ -3265,9 +3418,12 @@ var create_small_thunderstorm = func(lat, lon, alt, alpha) {
 
 var scale = 0.7 + rand() * 0.3;
 
-local_weather.create_layer("Stratus", lat, lon, alt, 1000.0, 4000.0 * scale, 4000.0 * scale, 0.0, 1.0, 0.3, 1, 1.0);
+var alt_eff = alt;
+if (local_weather.hardcoded_clouds_flag == 1) {alt_eff = alt - local_weather.offset_map["Stratus"] - 2000.0; }
 
-local_weather.create_layer("Cumulonimbus (cloudlet)", lat, lon, alt+2000, 15000.0, 3000.0 * scale, 3000.0 * scale, 0.0, 2.0, 0.0, 0, 0.0);
+local_weather.create_layer("Stratus", lat, lon, alt_eff, 1000.0, 4000.0 * scale, 4000.0 * scale, 0.0, 1.0, 0.3, 1, 1.0);
+
+local_weather.create_layer("Cumulonimbus (cloudlet)", lat, lon, alt_eff+3000.0, 12000.0, 3000.0 * scale, 3000.0 * scale, 0.0, 2.0, 0.0, 0, 0.0);
 
 # set the exclusion region for the Cumulus layer
 append(elat, lat); append(elon, lon); append(erad, 4000.0 * scale * 1.2);
@@ -3282,15 +3438,20 @@ var create_medium_thunderstorm = func(lat, lon, alt, alpha) {
 
 var scale = 0.7 + rand() * 0.3;
 
-local_weather.create_layer("Nimbus", lat, lon, alt, 500.0, 6000.0 * scale, 6000.0 * scale, 0.0, 1.0, 0.3, 1, 1.5);
+var alt_eff = alt;
+if (local_weather.hardcoded_clouds_flag == 1) {alt_eff = alt - local_weather.offset_map["Nimbus"] - 2000.0; }
 
-#local_weather.create_layer("Stratus", lat, lon, alt+1500, 1000.0, 5500.0 * scale, 5500.0 * scale, 0.0, 1.0, 0.3, 0, 0.0);
-local_weather.create_hollow_layer("Stratus", lat, lon, alt+1500, 1000.0, 5500.0 * scale, 5500.0 * scale, 0.0, 1.0, 0.3, 0.5);
+local_weather.create_layer("Nimbus", lat, lon, alt_eff, 500.0, 6000.0 * scale, 6000.0 * scale, 0.0, 1.0, 0.3, 1, 1.5);
 
-local_weather.create_layer("Fog (thick)", lat, lon, alt+4000, 6000.0, 3400.0 * scale, 3400.0 * scale, 0.0, 1.5, 0.3, 0, 0.0);
+#local_weather.create_layer("Stratus", lat, lon, alt_eff+1500, 1000.0, 5500.0 * scale, 5500.0 * scale, 0.0, 1.0, 0.3, 0, 0.0);
 
 
-local_weather.create_layer("Cumulonimbus (cloudlet)", lat, lon, alt+10000, 10000.0, 3600.0 * scale, 3600.0 * scale, 0.0, 1.2, 0.0, 0, 0.0);
+local_weather.create_hollow_layer("Stratus", lat, lon, alt_eff+1500, 1000.0, 5500.0 * scale, 5500.0 * scale, 0.0, 1.0, 0.3, 0.5);
+
+local_weather.create_layer("Fog (thick)", lat, lon, alt_eff+4000, 6000.0, 3400.0 * scale, 3400.0 * scale, 0.0, 1.5, 0.3, 0, 0.0);
+
+
+local_weather.create_layer("Cumulonimbus (cloudlet)", lat, lon, alt_eff+10000, 10000.0, 3600.0 * scale, 3600.0 * scale, 0.0, 1.2, 0.0, 0, 0.0);
 
 # set the exclusion region for the Cumulus layer
 append(elat, lat); append(elon, lon); append(erad, 6000.0 * scale * 1.2);
@@ -3307,23 +3468,26 @@ var phi = alpha * math.pi/180.0;
 
 var scale = 0.8;
 
-local_weather.create_layer("Nimbus", lat, lon, alt, 500.0, 7500.0 * scale, 7500.0 * scale, 0.0, 1.0, 0.25, 1, 1.5);
+var alt_eff = alt;
+if (local_weather.hardcoded_clouds_flag == 1) {alt_eff = alt - local_weather.offset_map["Nimbus"]; }
+
+local_weather.create_layer("Nimbus", lat, lon, alt_eff, 500.0, 7500.0 * scale, 7500.0 * scale, 0.0, 1.0, 0.25, 1, 1.5);
 
 #local_weather.create_layer("Stratus", lat, lon, alt+1500, 1000.0, 7200.0 * scale, 7200.0 * scale, 0.0, 1.0, 0.3, 0, 0.0);
-local_weather.create_hollow_layer("Stratus", lat, lon, alt+1500, 1000.0, 7200.0 * scale, 7200.0 * scale, 0.0, 1.0, 0.3, 0.7);
+local_weather.create_hollow_layer("Stratus", lat, lon, alt_eff+1500, 1000.0, 7200.0 * scale, 7200.0 * scale, 0.0, 1.0, 0.3, 0.7);
 
-local_weather.create_layer("Fog (thick)", lat, lon, alt+5000, 3000.0, 5500.0 * scale, 5500.0 * scale, 0.0, 0.7, 0.3, 0, 0.0);
+local_weather.create_layer("Fog (thick)", lat, lon, alt_eff+5000, 3000.0, 5500.0 * scale, 5500.0 * scale, 0.0, 0.7, 0.3, 0, 0.0);
 
 
-local_weather.create_layer("Fog (thick)", lat+get_lat(0,-1000,phi), lon+get_lon(0,-1000,phi), alt+12000, 4000.0, 6300.0 * scale, 6300.0 * scale, 0.0, 0.7, 0.3, 0, 0.0);
+local_weather.create_layer("Fog (thick)", lat+get_lat(0,-1000,phi), lon+get_lon(0,-1000,phi), alt_eff+12000, 4000.0, 6300.0 * scale, 6300.0 * scale, 0.0, 0.7, 0.3, 0, 0.0);
 
 #local_weather.create_layer("Stratus", lat+get_lat(0,-2000,phi), lon+get_lon(0,-2000,phi), alt+17000, 1000.0, 7500.0 * scale, 7500.0 * scale, 0.0, 1.0, 0.3, 0, 0.0);
-local_weather.create_hollow_layer("Stratus", lat+get_lat(0,-2000,phi), lon+get_lon(0,-2000,phi), alt+17000, 1000.0, 7500.0 * scale, 7500.0 * scale, 0.0, 1.0, 0.3, 0.5);
+local_weather.create_hollow_layer("Stratus", lat+get_lat(0,-2000,phi), lon+get_lon(0,-2000,phi), alt_eff+17000, 1000.0, 7500.0 * scale, 7500.0 * scale, 0.0, 1.0, 0.3, 0.5);
 
-#local_weather.create_layer("Stratus", lat+get_lat(0,-3000,phi), lon+get_lon(0,-3000,phi), alt+20000, 1000.0, 9500.0 * scale, 9500.0 * scale, 0.0, 1.0, 0.3, 0, 0.0);
-local_weather.create_hollow_layer("Stratus", lat+get_lat(0,-3000,phi), lon+get_lon(0,-3000,phi), alt+20000, 1000.0, 9500.0 * scale, 9500.0 * scale, 0.0, 1.0, 0.3, 0.5);
+#local_weather.create_layer("Stratus", lat+get_lat(0,-3000,phi), lon+get_lon(0,-3000,phi), alt_eff+20000, 1000.0, 9500.0 * scale, 9500.0 * scale, 0.0, 1.0, 0.3, 0, 0.0);
+local_weather.create_hollow_layer("Stratus", lat+get_lat(0,-3000,phi), lon+get_lon(0,-3000,phi), alt_eff+20000, 1000.0, 9500.0 * scale, 9500.0 * scale, 0.0, 1.0, 0.3, 0.5);
 
-local_weather.create_layer("Stratus (thin)", lat+get_lat(0,-4000,phi), lon+get_lon(0,-4000,phi), alt+24000, 1000.0, 11500.0 * scale, 11500.0 * scale, 0.0, 2.0, 0.3, 0, 0.0);
+local_weather.create_layer("Stratus (thin)", lat+get_lat(0,-4000,phi), lon+get_lon(0,-4000,phi), alt_eff+24000, 1000.0, 11500.0 * scale, 11500.0 * scale, 0.0, 2.0, 0.0, 0, 0.0);
 
 # set the exclusion region for the Cumulus layer
 append(elat, lat); append(elon, lon); append(erad, 7500.0 * scale * 1.2);
@@ -3419,6 +3583,8 @@ var last_pressure = 0.0;
 var lon_to_m = 0.0; # needs to be calculated dynamically
 var m_to_lon = 0.0; # we do this on startup
 var lw = "/local-weather/";
+
+var realistic_visibility_multiplyer = 1.5;
 
 var small_scale_persistence = getprop(lw~"config/small-scale-persistence");
 var rnd_store = rand();

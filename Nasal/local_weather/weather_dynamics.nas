@@ -27,7 +27,19 @@
 
 var get_windfield = func (tile_index) {
 
-var windfield = [];
+
+if (hardcoded_clouds_flag == 1)
+	{
+	var wind_direction = local_weather.wind.current[0];
+	var windspeed = local_weather.wind.current[1] * kt_to_ms;
+
+	var windfield_x = -windspeed * math.sin(wind_direction * math.pi/180.0);
+	var windfield_y = -windspeed * math.cos(wind_direction * math.pi/180.0);
+
+	return [windfield_x,windfield_y];
+	}
+
+
 
 
 
@@ -47,14 +59,16 @@ else if ((local_weather.wind_model_flag ==2) or (local_weather.wind_model_flag =
 var windfield_x = -windspeed * math.sin(wind_direction * math.pi/180.0);
 var windfield_y = -windspeed * math.cos(wind_direction * math.pi/180.0);
 
-append(windfield,windfield_x);
-append(windfield,windfield_y);
-
-return windfield;
+return [windfield_x,windfield_y];
 }
 
 
 var get_wind_direction = func (tile_index) {
+
+if (hardcoded_clouds_flag == 1)
+	{
+	return local_weather.wind.current[0];
+	}
 
 if ((local_weather.wind_model_flag == 1) or (local_weather.wind_model_flag == 3))
 	{
@@ -68,6 +82,11 @@ else if ((local_weather.wind_model_flag ==2) or (local_weather.wind_model_flag =
 }
 
 var get_wind_speed = func (tile_index) {
+
+if (hardcoded_clouds_flag == 1)
+	{
+	return local_weather.wind.current[1];
+	}
 
 if ((local_weather.wind_model_flag == 1) or (local_weather.wind_model_flag == 3))
 	{
@@ -93,6 +112,15 @@ if (local_weather.local_weather_running_flag == 0) {return;}
 
 dt_lw = getprop("/sim/time/delta-sec");
 time_lw = time_lw + dt_lw;
+
+# this is a really ugly hack to get the sun angle information to the shaders
+# directly referencing /sim/time/sun-angle-rad as uniform doesn't
+# work since that is a tied property
+
+var sun_angle = 1.57079632675 - getprop("/sim/time/sun-angle-rad");
+
+var terminator_offset = sun_angle /  0.017451 * 110000.0 + 250000.0;
+setprop("/environment/terminator-relative-position-m",terminator_offset);
 
 if (getprop(lw~"timing-loop-flag") ==1) {settimer(timing_loop, 0);}
 

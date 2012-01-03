@@ -4,9 +4,6 @@
   <parameters>
     <texture n ="0">
     </texture>
-    <range>
-      <use>/sim/rendering/clouds3d-vis-range</use>
-    </range>   
   </parameters>
   <technique n="10">
     <predicate>
@@ -53,20 +50,14 @@
         <wrap-t>clamp</wrap-t>-->
       </texture-unit>
       <program>
-        <vertex-shader>Shaders/rain-layer.vert</vertex-shader>
-        <fragment-shader>Shaders/rain-layer.frag</fragment-shader>
+        <vertex-shader>Shaders/cloud-static.vert</vertex-shader>
+        <fragment-shader>Shaders/cloud-static.frag</fragment-shader>
       </program>
       <uniform>
         <name>baseTexture</name>
         <type>sampler-2d</type>
         <value type="int">0</value>
       </uniform>
-      <uniform>
-        <name>range</name>
-        <type>float</type>
-        <value><use>range</use></value>
-      </uniform>
-
       <vertex-program-two-side>true</vertex-program-two-side>
     </pass>
   </technique>

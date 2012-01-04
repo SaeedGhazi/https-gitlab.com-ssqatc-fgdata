@@ -8,14 +8,11 @@
 #
 # 3) Allow chat messages to be written by the user.
 
-
-var is_active = func getprop("/sim/multiplay/txport") or getprop("/sim/multiplay/rxport");
-
-
 var lastmsg = {};
 var ignore = {};
 var msg_loop_id = 0;
 var msg_timeout = 0;
+var log_file = nil;
 
 var check_messages = func(loop_id) {
     if (loop_id != msg_loop_id) return;
@@ -73,35 +70,6 @@ var chat_listener = func(n)
     }
 }
 
-settimer(func {
-    if (is_active()) {
-        if (getprop("/sim/multiplay/write-message-log")) {
-            var ac = getprop("/sim/aircraft");
-            var cs = getprop("/sim/multiplay/callsign");
-            var apt = airportinfo().id;
-            var t = props.globals.getNode("/sim/time/real").getValues();
-            var file = string.normpath(getprop("/sim/fg-home") ~ "/mp-message.log");
-
-            var f = io.open(file, "a");
-            io.write(f, sprintf("\n=====  %s %04d/%02d/%02d\t%s\t%s\t%s\n",
-                    ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][t.weekday],
-                    t.year, t.month, t.day, apt, ac, cs));
-
-            setlistener("/sim/signals/exit", func io.write(f, "=====\n") and io.close(f));
-            setlistener("/sim/messages/mp-plane", func(n) {
-                io.write(f, sprintf("%02d:%02d  %s\n",
-                        getprop("/sim/time/real/hour"),
-                        getprop("/sim/time/real/minute"),
-                        n.getValue()));
-                io.flush(f);
-            });
-        }
-        check_messages(msg_loop_id += 1);
-    }
-
-    # Call-back to ensure we see our own messages.
-    setlistener("/sim/multiplay/chat", chat_listener);
-}, 1);
 
 
 # Message composition function, activated using the - key.
@@ -469,7 +437,40 @@ var model = {
     },
 };
 
+_setlistener("/sim/signals/nasal-dir-initialized", func {
 
-_setlistener("sim/signals/nasal-dir-initialized", func model.init());
+  model.init();
 
+  setlistener("/sim/multiplay/online", func(n) {
+    if (n.getBoolValue()) {
+        if (getprop("/sim/multiplay/write-message-log")) {
+            var ac = getprop("/sim/aircraft");
+            var cs = getprop("/sim/multiplay/callsign");
+            var apt = airportinfo().id;
+            var t = props.globals.getNode("/sim/time/real").getValues();
+            if (log_file == nil) {
+                var file = string.normpath(getprop("/sim/fg-home") ~ "/mp-message.log");
+
+                log_file = io.open(file, "a");
+                io.write(log_file, sprintf("\n=====  %s %04d/%02d/%02d\t%s\t%s\t%s\n",
+                    ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][t.weekday],
+                    t.year, t.month, t.day, apt, ac, cs));
+
+                setlistener("/sim/signals/exit", func io.write(log_file, "=====\n") and io.close(log_file));
+                setlistener("/sim/messages/mp-plane", func(n) {
+                    io.write(log_file, sprintf("%02d:%02d  %s\n",
+                        getprop("/sim/time/real/hour"),
+                        getprop("/sim/time/real/minute"),
+                        n.getValue()));
+                    io.flush(log_file);
+                });
+            }
+        }
+        check_messages(msg_loop_id += 1);
+    }
+  }, 1, 0);
+
+  # Call-back to ensure we see our own messages.
+  setlistener("/sim/multiplay/chat", chat_listener);
+});
 

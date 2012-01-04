@@ -5,7 +5,7 @@
  <!-- Weather tiles -->
 
  <name>local_weather_tiles</name>
- <width>310</width>
+ <width>470</width>
  <height>385</height>
  <modal>false</modal>
 
@@ -35,6 +35,7 @@
    <value>Coldfront</value>
    <value>Warmfront</value>
    <value>Tropical</value>
+   <value>Thunderstorms</value>
    <value>Test tile</value>
    <binding>
     <command>dialog-apply</command>
@@ -48,6 +49,24 @@
     </not>
    </enable>-->
   </combo>
+
+
+<text>
+   <x>300</x>
+   <y>330</y>
+   <label>alt. offset (ft)</label>
+  </text>
+
+
+
+<input>
+   <x>390</x>
+   <y>330</y>
+   <width>50</width>
+   <height>25</height>
+   <property>/local-weather/tmp/tile-alt-offset-ft</property>
+  </input>
+
 
  <text>
    <x>5</x>
@@ -77,34 +96,19 @@
    <property>/local-weather/tmp/windspeed-kt</property>
   </input>
 
- <text>
-   <x>155</x>
-   <y>295</y>
-   <label>alt. offset (ft)</label>
-  </text>
-
-
-
-<input>
-   <x>240</x>
-   <y>295</y>
-   <width>50</width>
-   <height>25</height>
-   <property>/local-weather/tmp/tile-alt-offset-ft</property>
-  </input>
+ 
   
-
 <text>
-   <x>5</x>
-   <y>265</y>
+   <x>157</x>
+   <y>295</y>
    <label>gust freq.</label>
   </text>
 
 
 
 <slider>
-   <x>65</x>
-   <y>265</y>
+   <x>225</x>
+   <y>295</y>
    <width>50</width>
    <height>20</height>
    <min>0.0</min>
@@ -118,15 +122,15 @@
 
 
 <text>
-   <x>112</x>
-   <y>265</y>
+   <x>275</x>
+   <y>295</y>
    <label>strength</label>
   </text>
 
 
 <slider>
-   <x>167</x>
-   <y>265</y>
+   <x>333</x>
+   <y>295</y>
    <width>50</width>
    <height>20</height>
    <min>0.0</min>
@@ -138,15 +142,15 @@
 </slider>
 
 <text>
-   <x>215</x>
-   <y>265</y>
+   <x>380</x>
+   <y>295</y>
    <label>dir.</label>
   </text>
 
 
 <slider>
-   <x>240</x>
-   <y>265</y>
+   <x>410</x>
+   <y>295</y>
    <width>50</width>
    <height>20</height>
    <min>0.0</min>
@@ -162,14 +166,14 @@
 
 <text>
    <x>5</x>
-   <y>235</y>
+   <y>265</y>
    <label>wind model</label>
   </text>
 
 
 <combo>
    <x>150</x>
-   <y>235</y>
+   <y>265</y>
    <width>140</width>
    <height>25</height>
    <live>true</live>
@@ -186,14 +190,31 @@
 
 
 <text>
+   <x>300</x>
+   <y>265</y>
+   <label>T offset (C)</label>
+  </text>
+
+
+
+<input>
+   <x>390</x>
+   <y>265</y>
+   <width>50</width>
+   <height>25</height>
+   <property>/local-weather/config/temperature-offset-degc</property>
+  </input>
+
+
+<text>
    <x>5</x>
-   <y>205</y>
+   <y>235</y>
    <label>tile selection mode</label>
 </text>
 
 <combo>
    <x>150</x>
-   <y>205</y>
+   <y>235</y>
    <width>140</width>
    <height>25</height>
    <live>true</live>
@@ -207,33 +228,10 @@
    </binding>
   </combo>
 
-<checkbox>
-   <x>10</x>
-   <y>175</y>
-   <width>15</width>
-   <height>15</height>
-   <label>terrain presampling</label>
-   <property>/local-weather/config/presampling-flag</property>
-   <binding>
-    <command>dialog-apply</command>
-   </binding>
-</checkbox>
-
-<checkbox>
-   <x>150</x>
-   <y>175</y>
-   <width>15</width>
-   <height>15</height>
-   <label>generate thermals</label>
-   <property>/local-weather/config/generate-thermal-lift-flag</property>
-   <binding>
-    <command>dialog-apply</command>
-   </binding>
-</checkbox>
 
 <checkbox>
    <x>10</x>
-   <y>150</y>
+   <y>205</y>
    <width>15</width>
    <height>15</height>
    <label>debug output</label>
@@ -243,7 +241,7 @@
    </binding>
 </checkbox>
 
-<checkbox>
+<!--<checkbox>
    <x>150</x>
    <y>150</y>
    <width>15</width>
@@ -253,9 +251,9 @@
    <binding>
     <command>dialog-apply</command>
    </binding>
-</checkbox>
+</checkbox>-->
 
-<checkbox>
+<!--<checkbox>
    <x>10</x>
    <y>125</y>
    <width>15</width>
@@ -265,9 +263,9 @@
    <binding>
     <command>dialog-apply</command>
    </binding>
-</checkbox>
+</checkbox>-->
 
-<checkbox>
+<!--<checkbox>
    <x>150</x>
    <y>125</y>
    <width>15</width>
@@ -277,11 +275,11 @@
    <binding>
     <command>dialog-apply</command>
    </binding>
-</checkbox>
+</checkbox>-->
 
 <checkbox>
-   <x>10</x>
-   <y>100</y>
+   <x>150</x>
+   <y>205</y>
    <width>15</width>
    <height>15</height>
    <label>terrain effects</label>
@@ -292,8 +290,8 @@
 </checkbox>
 
 <checkbox>
-   <x>150</x>
-   <y>100</y>
+   <x>290</x>
+   <y>205</y>
    <width>15</width>
    <height>15</height>
    <label>realistic visibility</label>
@@ -303,21 +301,46 @@
    </binding>
 </checkbox>
 
-<text>
+<checkbox>
    <x>10</x>
-   <y>75</y>
+   <y>180</y>
+   <width>15</width>
+   <height>15</height>
+   <label>generate thermals</label>
+   <property>/local-weather/config/generate-thermal-lift-flag</property>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+</checkbox>
+
+<checkbox>
+   <x>150</x>
+   <y>180</y>
+   <width>15</width>
+   <height>15</height>
+   <label>terrain presampling</label>
+   <property>/local-weather/config/presampling-flag</property>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+</checkbox>
+
+
+<text>
+   <x>5</x>
+   <y>150</y>
    <label>Thermal properties:</label>
 </text>
 
 <text>
-   <x>10</x>
-   <y>50</y>
+   <x>160</x>
+   <y>150</y>
    <label>rough day</label>
 </text>
 
 <slider>
-   <x>80</x>
-   <y>50</y>
+   <x>230</x>
+   <y>150</y>
    <width>90</width>
    <height>20</height>
    <min>0.3</min>
@@ -329,10 +352,146 @@
 </slider>
 
 <text>
-   <x>180</x>
-   <y>50</y>
+   <x>330</x>
+   <y>150</y>
    <label>low convection</label>
 </text>
+
+
+<text>
+   <x>5</x>
+   <y>125</y>
+   <label>Ground haze:</label>
+</text>
+
+<text>
+   <x>160</x>
+   <y>125</y>
+   <label>thick</label>
+</text>
+
+<slider>
+   <x>230</x>
+   <y>125</y>
+   <width>90</width>
+   <height>20</height>
+   <min>0.1</min>
+   <max>1.0</max>
+   <property>/local-weather/config/ground-haze-factor</property>
+   <binding>
+     <command>dialog-apply</command>
+   </binding>
+</slider>
+
+<text>
+   <x>330</x>
+   <y>125</y>
+   <label>thin</label>
+</text>
+
+
+<text>
+   <x>5</x>
+   <y>100</y>
+   <label>Max. visibility:</label>
+</text>
+
+<text>
+   <x>160</x>
+   <y>100</y>
+   <label>30 km</label>
+</text>
+
+<slider>
+   <x>230</x>
+   <y>100</y>
+   <width>90</width>
+   <height>20</height>
+   <min>30000.0</min>
+   <max>140000.0</max>
+   <property>/local-weather/config/max-vis-range-m</property>
+   <binding>
+     <command>dialog-apply</command>
+   </binding>
+</slider>
+
+<text>
+   <x>330</x>
+   <y>100</y>
+   <label>140 km</label>
+</text>
+
+
+<text>
+  <x>5</x>
+  <y>75</y>
+  <label>Weather pattern scales</label>
+</text>
+
+
+<text>
+   <x>15</x>
+   <y>45</y>
+   <label>small</label>
+</text>
+
+<text>
+   <x>78</x>
+   <y>60</y>
+   <label>airmass</label>
+</text>
+
+<slider>
+   <x>60</x>
+   <y>45</y>
+   <width>100</width>
+   <height>20</height>
+   <min>0.5</min>
+   <max>2.0</max>
+   <property>/local-weather/config/large-scale-persistence</property>
+   <binding>
+     <command>dialog-apply</command>
+   </binding>
+</slider>
+
+<text>
+   <x>165</x>
+   <y>45</y>
+   <label>large</label>
+</text>
+
+
+<text>
+   <x>205</x>
+   <y>45</y>
+   <label>small</label>
+</text>
+
+<text>
+   <x>257</x>
+   <y>60</y>
+   <label>cloud patterns</label>
+</text>
+
+<slider>
+   <x>250</x>
+   <y>45</y>
+   <width>100</width>
+   <height>20</height>
+   <min>0.0</min>
+   <max>1.0</max>
+   <property>/local-weather/config/small-scale-persistence</property>
+   <binding>
+     <command>dialog-apply</command>
+   </binding>
+</slider>
+
+<text>
+   <x>355</x>
+   <y>45</y>
+   <label>large</label>
+</text>
+
 
 <group>
   <x>10</x>

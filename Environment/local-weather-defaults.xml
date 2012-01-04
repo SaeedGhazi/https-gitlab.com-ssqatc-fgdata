@@ -24,6 +24,7 @@
     <target-framerate type="double" userarchive="y">25.0</target-framerate>
     <large-scale-persistence type="double" userarchive="y">1.0</large-scale-persistence>
     <small-scale-persistence type="double" userarchive="y">0.0</small-scale-persistence>
+    <ground-haze-factor type="double" userarchive="y">1.0</ground-haze-factor>
   </config>
  <tmp>
     <tile-management type="string" userarchive="y">realistic weather</tile-management>

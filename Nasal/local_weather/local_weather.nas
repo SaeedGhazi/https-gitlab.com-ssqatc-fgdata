@@ -4754,7 +4754,7 @@ setprop(lw~"effect-volumes/number-active-turb",0);
 setprop(lw~"effect-volumes/number-active-lift",0);
 setprop(lw~"effect-volumes/number-active-sat",0);
 
-setprop(lw~"config/max-vis-range-m", 120000.0);
+# setprop(lw~"config/max-vis-range-m", 120000.0);
 setprop(lw~"config/temperature-offset-degc", 0.0);
 
 # create properties for tile management

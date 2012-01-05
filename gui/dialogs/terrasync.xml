@@ -54,6 +54,12 @@
         <command>dialog-apply</command>
         <object-name>terrasync-enabled</object-name>
       </binding>
+      <enable>
+        <not-equals>
+          <property>/sim/terrasync/scenery-dir</property>
+          <value></value>
+        </not-equals>
+      </enable>
     </checkbox>
 
     <text>
@@ -61,40 +67,31 @@
       <row>3</row><col>1</col>
       <label>Target directory:</label>
     </text>
-    <input>
+    <combo>
       <name>scenery-dir</name>
       <halign>left</halign>
       <row>3</row>
       <col>2</col><colspan>2</colspan>
       <pref-width>400</pref-width>
-      <live>true</live>
       <property>/sim/terrasync/scenery-dir</property>
-      <enable><false/></enable>
-    </input>
-
-    <button>
-      <legend>Change</legend>
-      <equal>true</equal>
-      <border>2</border>
-      <row>3</row>
-      <col>4</col>
-      <binding>
-        <command>nasal</command>
-        <script>controller.open()</script>
+       <binding>
+        <command>dialog-apply</command>
+        <object-name>scenery-dir</object-name>
       </binding>
-    </button>
+    </combo>
 
     <text>
+      <name>warning_text</name>
       <row>4</row>
-      <col>2</col><colspan>3</colspan>
+      <col>0</col><colspan>4</colspan>
       <color>
-        <red>0.7</red>
-        <green>0.7</green>
-        <blue>0.7</blue>
+        <red>1.0</red>
+        <green>0.4</green>
+        <blue>0.4</blue>
         <alpha>1</alpha>
       </color>
-      <halign>left</halign>
-      <label>Remember to add target directory to your 'fg-scenery' path list.</label>
+      <halign>center</halign>
+      <label/>
     </text>
 
     <text>
@@ -431,20 +428,33 @@
         <command>dialog-close</command>
       </binding>
     </button>
-
     <empty><stretch>true</stretch></empty>
   </group>
 
   <nasal>
     <open><![CDATA[
-        var controller = gui.DirSelector.new(
-            func(result) { setprop("/sim/terrasync/scenery-dir", result.getValue()); },
-            "Select Target Directory for Downloads", "Ok", getprop("/sim/terrasync/scenery-dir"));
+      var fg_scenery = props.globals.getNode("sim").getChildren("fg-scenery");
+      var fg_data = props.globals.getNode("sim").getChild("fg-root").getValue();
+      var combo = cmdarg().getChildren("group")[1].getChildren("combo")[0];
+      var valid = 0;
+
+      for (var i = 0; i < size(fg_scenery); i = i + 1) {
+        var s = fg_scenery[i].getValue();
+        if ((s != fg_data ~ "/Scenery") and (s != fg_data ~ "\\Scenery")) {
+          # Do not allow Terrasync to run in the default directory.
+          combo.getNode("value[" ~ i ~ "]", 1).setValue(fg_scenery[i].getValue());
+          valid = 1;
+        }
+      }
+
+      # Add error text if the user only has fg-data/Scenery available and disable controls.
+      if (! valid) {
+        var warning = cmdarg().getChildren("group")[1].getChildren("text")[1];
+        var txt = "You must configure a separate FG_SCENERY directory for automatic scenery download";
+        warning.getNode("label").setValue(txt);
+      }
     ]]></open>
 
-    <close><![CDATA[
-      controller.close();
-    ]]></close>
   </nasal>
 
 </PropertyList>

@@ -36,15 +36,6 @@
 		</item>
 
 		<!--		<item>
-			<label>Set Lat/Lon Format</label>
-			<binding>
-				<command>nasal</command>
-				<script>
-					var f = getprop(var d = "/sim/lon-lat-format") + 1;
-					setprop(d, f &lt; 0 ? 0 : f > 2 ? 0 : f);
-				</script>
-			</binding>
-		</item>
 			<label>High-Res Snapshot</label>
 			<enabled>false</enabled>
 			<binding>
@@ -127,16 +118,6 @@
 		</item>
 
 		<item>
-			<!--		<item>
-			<label>Set Lat/Lon Format</label>
-			<binding>
-				<command>nasal</command>
-				<script>
-					var f = getprop(var d = "/sim/lon-lat-format") + 1;
-					setprop(d, f &lt; 0 ? 0 : f > 2 ? 0 : f);
-				</script>
-			</binding>
-		</item>   -->
 			<label>View Options</label>
 			<binding>
 				<command>dialog-show</command>

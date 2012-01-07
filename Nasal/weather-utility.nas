@@ -3,6 +3,9 @@
 # be used with a tied property
 #
 
+# TODO: Make this optional (when shaders disabled etc), or move computation
+# away from Nasal.
+
 #does what it says on the tin
 var clamp = func(v, min, max) { v < min ? min : v > max ? max : v }
 
@@ -44,7 +47,44 @@ props.globals.initNode("/orientation/model/pitch-deg", 0, "DOUBLE");
 props.globals.initNode("/orientation/model/roll-deg", 0, "DOUBLE");
 
 
+var update_waves = func (wind) {
+	var wind = 0;
+	var amp = 0;
+	var angle = 0;
+	var dangle = 0;
+	var freq = 0;
+	var factor = 0;
+	var sharp = 0;
+
+	amp = Amp + 0.02 * wind;
+	amp = clamp(amp, 1.0, 2.0);
+
+	setprop("/environment/wave/amp", amp);
+
+	angle = Angle + 0.2 * wind;
+	setprop("/environment/wave/angle", angle);
+
+	dangle = DAngle - 0.4 * wind;
+	setprop("/environment/wave/dangle", dangle);
+
+	freq = Freq + 0.0008 * wind;
+	freq = clamp(freq, 0.01, 0.015);
+	setprop("/environment/wave/freq", freq);
+
+	factor = Factor - 0.00001 * wind;
+	factor = clamp(factor, 0.0001, 0.0004);
+	setprop("/environment/wave/factor", factor);
+
+	sharp = Sharp + 0.02 * wind;
+	sharp = clamp(sharp, 1.0, 2.0);
+	setprop("/environment/wave/sharp", sharp);
+};
+
+var is_initialized = 0;
 var initialize = func {
+	if (is_initialized)
+		return; # only install listeners once
+	is_initialized = 1;
 
 	var wind_from_east_Node = props.globals.getNode("/environment/config/boundary/entry[0]/wind-from-east-fps", 1);
 	wind_from_east_Node.setDoubleValue(0);
@@ -72,48 +112,14 @@ var initialize = func {
 
 # ##################  listeners ####################
 #
-	setlistener("/environment/sea/surface/wind-speed-kt", func (n) {
-		var wind = 0;
-		var amp = 0;
-		var angle = 0;
-		var dangle = 0;
-		var freq = 0;
-		var factor = 0;
-		var sharp = 0;
-
-		wind = n.getValue();
-
-		amp = Amp + 0.02 * wind;
-		amp = clamp(amp, 1.0, 2.0);
-
-		setprop("/environment/wave/amp", amp);
-
-		angle = Angle + 0.2 * wind;
-		setprop("/environment/wave/angle", angle);
-
-		dangle = DAngle - 0.4 * wind;
-		setprop("/environment/wave/dangle", dangle);
-
-		freq = Freq + 0.0008 * wind;
-		freq = clamp(freq, 0.01, 0.015);
-		setprop("/environment/wave/freq", freq);
-
-		factor = Factor - 0.00001 * wind;
-		factor = clamp(factor, 0.0001, 0.0004);
-		setprop("/environment/wave/factor", factor);
-
-		sharp = Sharp + 0.02 * wind;
-		sharp = clamp(sharp, 1.0, 2.0);
-		setprop("/environment/wave/sharp", sharp);
-
-
-	},
-		1,
-		0);# end listener
+# installing a listener to /environment/sea/surface/wind-speed-kt does not make sense,
+# since it's currently being written in _every_ update loop anyway).
+#	setlistener("/environment/sea/surface/wind-speed-kt", func(n) {update_waves(n.getValue())},
+#		1,
+#		0);# end listener
 		
-		print("weather util initialized ...");
+	print("weather util initialized ...");
 	loop();
-
 }# end init
 
 var loop = func {
@@ -132,6 +138,9 @@ var loop = func {
 	value = getprop("/environment/config/boundary/entry[0]/wind-speed-kt");
 	setprop("/environment/sea/surface/wind-speed-kt", value);
 #        print("wind-speed-kt ", getprop("/environment/sea/surface/wind-speed-kt"));
+	# Direct call to update wave settings (much more effective than using a listener,
+	# since it's written in every loop anyway.
+	update_waves(value);
 
 	value = getprop("/environment/config/enabled");
 	setprop("/environment/sea/config/enabled", value);

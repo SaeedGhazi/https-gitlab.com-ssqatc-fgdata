@@ -410,8 +410,8 @@ else
 
 if (debug_output_flag == 1)
 	{
-	print("Boundary layer thickness: ",base_layer_thickness);
-	print("Boundary layer slowdown: ", f_slow);
+	#print("Boundary layer thickness: ",base_layer_thickness);
+	#print("Boundary layer slowdown: ", f_slow);
 	}
 return f_slow;
 }
@@ -509,8 +509,8 @@ setprop(lwi~"station-number", i+1);
 var ialt = sum_alt/sum_norm;
 var vis = sum_vis/sum_norm;
 var p = sum_p/sum_norm;
-var D = sum_D/sum_norm;
-var T = sum_T/sum_norm;
+var D = sum_D/sum_norm + temperature_offset;
+var T = sum_T/sum_norm + temperature_offset;
 
 
 # get an inverse distance weighted average from all defined atmospheric condition points
@@ -586,6 +586,7 @@ var scatt_alt_high = sum_scatt_alt_high/sum_norm;
 
 # altitude model for visibility - increase above the lowest inversion layer to simulate ground haze
 
+vis = vis * ground_haze_factor;
 
 var altitude = getprop("position/altitude-ft");
 current_mean_terrain_elevation = ialt;
@@ -593,6 +594,8 @@ current_mean_terrain_elevation = ialt;
 var alt1 = vis_alt1;
 var alt2 = alt1 + 1500.0;
 
+setprop("/environment/ground-visibility-m",vis);
+setprop("/environment/ground-haze-thickness-m",alt2 * ft_to_m);
 
 # compute the visibility gradients
 
@@ -628,10 +631,10 @@ else if (altitude > ovcst_alt_high)
 	vis = vis + inc1 * alt1 + inc2 * (alt2-alt1)  + inc3 * (ovcst_alt_high - alt2) + inc4 * (altitude - ovcst_alt_high);
 	}
 
-# limit visibility (otherwise memory consumption is very bad...)
+# limit visibility (otherwise memory consumption may be very bad...)
 
-if (vis > 120000.0)
-	{vis = 120000.0;}
+if (vis > max_vis_range)
+	{vis = max_vis_range;}
 
 # determine scattering shader parameters if scattering shader is on
 
@@ -641,6 +644,8 @@ if (scattering_shader_flag == 1)
 	var mie = 0.003;
 	var density = 0.3;
 
+
+	
 	if (altitude < 30000.0) 
 		{
 		rayleigh = 0.0004 - altitude/30000.0 * 0.0001;
@@ -660,37 +665,37 @@ if (scattering_shader_flag == 1)
 		{rayleigh = 0.0001; mie = 0.002;}
 	}
 # otherwise compute normal skydome shader parameters
-else
+
+	
+
+# compute the horizon shading
+
+if (altitude < scatt_alt_low)
 	{
-
-	# compute the horizon shading
-
-	if (altitude < scatt_alt_low)
-		{
-		var scatt = scatt_max;
-		}
-	else if (altitude < scatt_alt_high)
-		{
-		var scatt = scatt_max + (0.95 - scatt_max) * (altitude - scatt_alt_low)/(scatt_alt_high-scatt_alt_low);
-		}
-	else
-		{var scatt = 0.95;}
+	var scatt = scatt_max;
+	}
+else if (altitude < scatt_alt_high)
+	{
+	var scatt = scatt_max + (0.95 - scatt_max) * (altitude - scatt_alt_low)/(scatt_alt_high-scatt_alt_low);
+	}
+else
+	{var scatt = 0.95;}
 
 
 # compute the overcast haze
 
-	if (altitude < ovcst_alt_low)
-		{
-		var ovcst = ovcst_max;
-		}
-	else if (altitude < ovcst_alt_high)
-		{
-		var ovcst = ovcst_max - ovcst_max * (altitude - ovcst_alt_low)/(ovcst_alt_high-ovcst_alt_low);
-		}
-	else
-		{var ovcst = 0.0;}
-
+if (altitude < ovcst_alt_low)
+	{
+	var ovcst = ovcst_max;
+	}	
+else if (altitude < ovcst_alt_high)
+	{
+	var ovcst = ovcst_max - ovcst_max * (altitude - ovcst_alt_low)/(ovcst_alt_high-ovcst_alt_low);
 	}
+else
+	{var ovcst = 0.0;}
+
+
 
 
 # limit relative changes of the visibility, will make for gradual transitions
@@ -717,11 +722,10 @@ if (scattering_shader_flag == 1)
 	{
 	local_weather.setSkydomeShader(rayleigh, mie, density);
 	}
-else
-	{
-	local_weather.setScattering(scatt);
-	local_weather.setOvercast(ovcst);
-	}
+
+local_weather.setScattering(scatt);
+local_weather.setOvercast(ovcst);
+	
 
 # now check if an effect volume writes the property and set only if not
 
@@ -766,18 +770,24 @@ if (p>0.0)
 
 # now determine the local wind 
 
-#var tile_index = props.globals.getNode(lw~"tiles").getChild("tile",4).getNode("tile-index").getValue();
+
 var tile_index = getprop(lw~"tiles/tile[4]/tile-index");
 
 if (wind_model_flag ==1) # constant
 	{
 	var winddir = weather_dynamics.tile_wind_direction[0];
 	var windspeed = weather_dynamics.tile_wind_speed[0];
+
+	wind.cloudlayer = [winddir,windspeed];
+
 	}
 else if (wind_model_flag ==2) # constant in tile
 	{
 	var winddir = weather_dynamics.tile_wind_direction[tile_index-1];
 	var windspeed = weather_dynamics.tile_wind_speed[tile_index-1];
+
+	wind.cloudlayer = [winddir, windspeed];
+
 	}	
 else if (wind_model_flag ==3) # aloft interpolated, constant in tiles
 	{
@@ -785,6 +795,9 @@ else if (wind_model_flag ==3) # aloft interpolated, constant in tiles
 	var res = wind_altitude_interpolation(altitude,w);
 	var winddir = res[0];
 	var windspeed = res[1];
+
+	wind.cloudlayer = wind_altitude_interpolation(0.0,w);
+
 	}
 else if (wind_model_flag == 5) # aloft waypoint interpolated
 	{
@@ -792,8 +805,12 @@ else if (wind_model_flag == 5) # aloft waypoint interpolated
 
 	var winddir = res[0];
 	var windspeed = res[1];
+
+	wind.cloudlayer = wind_interpolation(viewpos.lat(), viewpos.lon(), 0.0);	
 	}
 
+
+wind.surface = [wind.cloudlayer[0], wind.cloudlayer[1] * get_slowdown_fraction()];
 
 # now do the boundary layer computations
 
@@ -841,6 +858,15 @@ else
 		{var windspeed_current = windspeed;}
 
 	}
+
+
+var windspeed_ground = (1.0-f_min) * windspeed;
+
+
+# set the wind hash before gusts, it represents mean wind
+
+wind.current = [winddir,windspeed_current];
+
 
 
 # determine gusts and turbulence in the bounday layer
@@ -896,6 +922,13 @@ setprop(lwi~"wind-speed-kt",windspeed_current);
 setprop(lw~"current/wind-from-heading-deg",winddir);
 setprop(lw~"current/wind-speed-kt",windspeed_current);
 
+
+# hack to get access to the water shader
+
+setprop("/environment/config/boundary/entry[0]/wind-from-heading-deg",winddir);
+setprop("/environment/config/boundary/entry[0]/wind-speed-kt",windspeed_ground);
+
+# end hack
 
 
 if (getprop(lw~"interpolation-loop-flag") ==1) {settimer(interpolation_loop, interpolation_loop_time);}
@@ -1472,14 +1505,18 @@ if (path == "new") # we have to switch to new cloud generating routines
 	local_weather.cloudAssembly.lon = long;
 	local_weather.cloudAssembly.alt = alt;	
 
+	#print(lat," ",long, " ", alt);
+
 	if (dynamics_flag == 1)
 		{
 		local_weather.cloudAssembly.mean_alt = cloud_mean_altitude;
 		local_weather.cloudAssembly.flt = cloud_fractional_lifetime;
 		local_weather.cloudAssembly.evolution_timestamp = cloud_evolution_timestamp;
-		local_weather.cloudAssembly.rel_alt = c.alt - c.mean_alt;
+		local_weather.cloudAssembly.rel_alt = cloudAssembly.alt - cloud_mean_altitude;
 		}
-	compat_layer.create_cloud_new(local_weather.cloudAssembly);	
+	#compat_layer.create_cloud_new(local_weather.cloudAssembly);	
+
+	append(cloudAssemblyArray,cloudAssembly);
 
 	return;
 	}
@@ -1736,7 +1773,7 @@ else
 		var alpha = rand() * 180.0;
 		edge = edge + edge_bias;		
 
-		create_streak(type,lat,lon, alt+ 0.3* (height )-600.0, height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
+		create_streak(type,lat,lon, alt+ 0.3* (height )-offset_map["Congestus"], height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
 
 		var type = "Cu (volume)";
 		var height = 400;
@@ -1747,12 +1784,12 @@ else
 		
 		edge = edge + edge_bias;		
 
-		create_streak(type,lat,lon, alt+ 0.3* (height )-600.0, height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
+		create_streak(type,lat,lon, alt+ 0.3* (height )-offset_map["Congestus"], height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
 
 		var btype = "Congestus bottom";
 		var n_b = 6;
 
-		create_streak(btype,lat,lon, alt - 1100.0, 100.0,n_b,0.0,edge,0.3*x,1,0.0,0.0,0.3*y,alpha,1.0);
+		create_streak(btype,lat,lon, alt -offset_map["Congestus"] -200.0, 100.0,n_b,0.0,edge,0.3*x,1,0.0,0.0,0.3*y,alpha,1.0);
 
 		}
 	else if (size>1.1)
@@ -1768,9 +1805,9 @@ else
 
 		var alpha = rand() * 180.0;
 		edge = edge + edge_bias;
-		create_streak(type,lat,lon, alt+ 0.3* (height )-600.0, height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
+		create_streak(type,lat,lon, alt+ 0.3* (height )-offset_map["Cumulus"], height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
 
-		create_streak(btype,lat,lon, alt -600.0, 100.0,n_b,0.0,edge,0.3*x,1,0.0,0.0,0.3*y,alpha,1.0);
+		create_streak(btype,lat,lon, alt -offset_map["Cumulus"] - 200.0, 100.0,n_b,0.0,edge,0.3*x,1,0.0,0.0,0.3*y,alpha,1.0);
 
 		}
 	else if (size>0.8)
@@ -1784,13 +1821,13 @@ else
 
 		var alpha = rand() * 180.0;
 		edge = edge + edge_bias;
-		create_streak(type,lat,lon, alt+ 0.3* (height )-600.0, height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
+		create_streak(type,lat,lon, alt+ 0.3* (height )-offset_map["Cumulus"], height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
 
 		n = 2;
 		x = 700.0;
 		y = 200.0;
 		edge = 1.0;
-		create_streak(type,lat,lon, alt+ 0.3* (height )-600.0, height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
+		create_streak(type,lat,lon, alt+ 0.3* (height )-offset_map["Cumulus"], height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
 		}
 
 	else if (size>0.4)
@@ -1804,7 +1841,7 @@ else
 
 		var alpha = rand() * 180.0;
 		edge = edge + edge_bias;
-		create_streak(type,lat,lon, alt+ 0.3* (height)-600.0, height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
+		create_streak(type,lat,lon, alt+ 0.3* (height)-offset_map["Cumulus"], height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
 		}
 	else 
 		{
@@ -1817,7 +1854,7 @@ else
 
 		var alpha = rand() * 180.0;
 		edge = edge + edge_bias;
-		create_streak(type,lat,lon, alt+ 0.3* (height )-600.0, height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
+		create_streak(type,lat,lon, alt+ 0.3* (height )-offset_map["Cumulus"], height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
 		}
 
 	}
@@ -1833,7 +1870,7 @@ else
 var create_cumulonimbus_cloud = func(lat, lon, alt, size) {
 
 if (hardcoded_clouds_flag == 1)
-	{create_cloudbox("Cb_box", lat, lon, alt, 2500.0,2000.0, 1000.0,14, 0.2, 0.1, 3.4, 8, 0.9, 0.2, 8);}
+	{create_cloudbox("Cb_box", lat, lon, alt, 2500.0,2000.0, 1000.0,14, 0.2, 0.1, 3.4, 8, 0.8, 0.1, 8);}
 else
 	{create_cloudbox("Cb_box", lat, lon, alt, 2500.0,2000.0, 1000.0,14, 0.2, 0.1, 1.4, 4, 0.9, 0.2, 8);}
 
@@ -1848,7 +1885,7 @@ else
 var create_cumulonimbus_cloud_rain = func(lat, lon, alt, size, rain) {
 
 if (hardcoded_clouds_flag == 1)
-	{create_cloudbox("Cb_box", lat, lon, alt, 2500.0,2000.0, 1000.0,14, 0.2, 0.1, 3.4, 8, 0.9, 0.2, 8);}
+	{create_cloudbox("Cb_box", lat, lon, alt, 2500.0,2000.0, 1000.0,14, 0.2, 0.1, 3.4, 8, 0.8, 0.1, 8);}
 else
 	{create_cloudbox("Cb_box", lat, lon, alt, 2500.0,2000.0, 1000.0,14, 0.2, 0.1, 1.4, 4, 0.9, 0.2, 8);}
 
@@ -1939,18 +1976,21 @@ var detail_flag = detailed_clouds_flag;
 
 var alpha = getprop(lw~"tmp/tile-orientation-deg") * math.pi/180.0; # the tile orientation
 
-if (detailed_terrain_interaction_flag == 1)
-	{
-	var tile_index = getprop(lw~"tiles/tile-counter");
+var tile_index = getprop(lw~"tiles/tile-counter");
+var alt_base = alt_20_array[tile_index -1];
+
+#if (detailed_terrain_interaction_flag == 1)
+#	{
+	#var tile_index = getprop(lw~"tiles/tile-counter");
 	#var alt_min = alt_min_array[tile_index-1];
 	#var alt_mean = alt_mean_array[tile_index -1];
 	#var alt_median = alt_50_array[tile_index -1];
-	#var alt_base = alt_20_array[tile-index -1];
+	#var alt_base = alt_20_array[tile_index -1];
 	#var alt_min = getprop(lw~"tmp/tile-alt-min-ft");
 	#var alt_mean = getprop(lw~"tmp/tile-alt-mean-ft");
 	#var alt_median = getprop(lw~"tmp/tile-alt-median-ft");
 	#var alt_base = getprop(lw~"tmp/tile-alt-offset-ft");
-	}
+#	}
 
 var sec_to_rad = 2.0 * math.pi/86400; # conversion factor for sinusoidal dependence on daytime
 
@@ -2003,7 +2043,13 @@ while (i < nc) {
 	 if (contains(landcover_map,landcover)) {p = p + landcover_map[landcover];}
 	 else {print(p, " ", info[1].names[0]);}
 	}}
-	else {continue;}
+	else {
+		# to avoid gaps, we create default clouds
+
+		p = p + 0.1;		
+		var elevation = alt_base;
+		# continue;
+		}
 
 
 	# apply some optional corrections, biases clouds towards higher elevations
@@ -2056,8 +2102,10 @@ while (i < nc) {
 				}
 
 	
-		# now decide on the strength of the thermal
-		strength = (1.5 * rand() + (2.0 * p * terrain_strength_factor)) * t_factor2; # the strength of thermal activity at the spot
+		# now decide on the strength of the thermal at the spot and on cloud size
+
+		var rn = rand();
+		strength = (1.5 * rn + (2.0 * p * terrain_strength_factor)) * t_factor2;  
 		if (strength > 1.0)  
 			{
 			# we place a large cloud, and we generate lift
@@ -2065,7 +2113,15 @@ while (i < nc) {
 			}
 		else {path = select_cloud_model("Cumulus","small");}
 
-	
+		# the terrain effect cannot create Cb development, so we have to curb
+		# the strength if it would not have been Cb otherwise
+
+		if (strength > 2.0)
+			{
+			if (((1.5 * rn + (2.0 * p)) * t_factor2) < 2.0)
+				{strength = 1.7 + rand() * 0.2;}
+			}
+
 
 		cloud_mean_altitude = place_alt;
 		cloud_fractional_lifetime = rand();
@@ -2168,6 +2224,7 @@ nc = t_factor1 * nc * math.cos(blat/180.0*math.pi);
 
 var thermal_conditions = getprop(lw~"config/thermal-properties");
 
+var alt_base = alt_20_array[tile_index -1];
 
 while (i < nc) {
 
@@ -2198,7 +2255,13 @@ while (i < nc) {
 	 if (contains(landcover_map,landcover)) {p = p + landcover_map[landcover];}
 	 else {print(p, " ", info[1].names[0]);}
 	}}
-	else {continue;}
+	else {
+		# to avoid gaps, we create default clouds
+
+		p = p + 0.1;		
+		var elevation = alt_base;
+		# continue;
+		}
 
 
 	# apply some optional corrections, biases clouds towards higher elevations
@@ -2578,6 +2641,8 @@ var n = int(area/80000000.0 * 100 * density);
 var m = int(circ/63000.0 * 40 * rain_density);
 var path = "Models/Weather/blank.ac";
 
+#print("density: ",n);
+
 phi = phi * math.pi/180.0;
 
 if (contains(cloud_vertical_size_map, type)) 
@@ -2599,7 +2664,10 @@ while(i<n)
 			{
 			if (rand() > 0.4) {
 				path = select_cloud_model(type,"small");
-				compat_layer.create_cloud(path, lat, lon, alt, 0.0);
+			if (thread_flag == 1)
+				{create_cloud_vec(path, lat, lon, alt, 0.0);}
+			else
+				{compat_layer.create_cloud(path, lat, lon, alt, 0.0);}
 				}
 			}
 		else {
@@ -2616,6 +2684,8 @@ while(i<n)
 i = 0;
 
 if (rainflag ==1){
+
+if (local_weather.hardcoded_clouds_flag == 1) {balt = balt + local_weather.offset_map[type]; }
 
 	while(i<m)
 		{
@@ -3513,7 +3583,7 @@ if (getprop(lw~"config/generate-thermal-lift-flag") ==1) {generate_thermal_lift_
 	else {generate_thermal_lift_flag = 0};
 
 thread_flag = getprop(lw~"config/thread-flag");
-dynamics_flag = getprop(lw~"config/dynamics-flag");
+# dynamics_flag = getprop(lw~"config/dynamics-flag");
 presampling_flag = getprop(lw~"config/presampling-flag");
 detailed_clouds_flag = getprop(lw~"config/detailed-clouds-flag");
 dynamical_convection_flag = getprop(lw~"config/dynamical-convection-flag");
@@ -3781,6 +3851,16 @@ if (dynamical_convection_flag == 1)
 		}
 	}
 
+if (detailed_terrain_interaction_flag == 1)
+	{
+	if (presampling_flag == 0)
+		{
+		print("Terrain effect needs terrain presampling to run! Aborting..."); 
+		setprop("/sim/messages/pilot", "Local weather: terrain effect needs terrain presampling to run! Aborting...");
+		return;
+		}
+	}
+
 
 # if we can do so, we switch global weather and METAR parsing in environment off at this point
 
@@ -3851,6 +3931,12 @@ if (metar_flag == 1) # the winds from current METAR are used
 	var metar_base_wind_deg = getprop("environment/metar/base-wind-dir-deg");
 	var metar_base_wind_speed = boundary_correction * getprop("environment/metar/base-wind-speed-kt");
 
+	# set the wind hash for the new scheme
+	
+	wind.cloudlayer = [metar_base_wind_deg,metar_base_wind_speed];
+	wind.surface = [metar_base_wind_deg,metar_base_wind_speed/boundary_correction];
+	wind.current = wind.surface;
+
 
 	if ((wind_model_flag == 1) or (wind_model_flag == 2))
 		{
@@ -3880,6 +3966,8 @@ if (metar_flag == 1) # the winds from current METAR are used
 	}
 else
 	{
+	setprop(lw~"tiles/tile[4]/tile-index",1);
+	var boundary_correction = get_slowdown_fraction();
 
 	if (wind_model_flag == 5) # it needs to be interpolated
 		{
@@ -3887,16 +3975,36 @@ else
 
 		append(weather_dynamics.tile_wind_direction,res[0]);
 		append(weather_dynamics.tile_wind_speed,res[1]);
+
+		# set the wind hash for the new scheme
+	
+		wind.surface = [res[0],res[1] * boundary_correction];
+		wind.cloudlayer = res;
+		wind.current = wind.surface;
+
+
 		}
 	else if (wind_model_flag == 3) # it comes from a different menu
 		{
 		append(weather_dynamics.tile_wind_direction, getprop(lw~"tmp/FL0-wind-from-heading-deg"));
 		append(weather_dynamics.tile_wind_speed, getprop(lw~"tmp/FL0-windspeed-kt"));
+		
+		# set the wind hash for the new scheme
+		wind.cloudlayer = [getprop(lw~"tmp/FL0-wind-from-heading-deg"),getprop(lw~"tmp/FL0-windspeed-kt") ];
+		wind.surface = [wind.cloudlayer[0],wind.cloudlayer[1] * boundary_correction];
+		wind.current = wind.surface;
+
 		}
 	else # it comes from the standard menu
 		{
 		append(weather_dynamics.tile_wind_direction, getprop(lw~"tmp/tile-orientation-deg"));
 		append(weather_dynamics.tile_wind_speed, getprop(lw~"tmp/windspeed-kt"));
+
+		# set the wind hash for the new scheme
+		wind.cloudlayer = [getprop(lw~"tmp/tile-orientation-deg"),getprop(lw~"tmp/windspeed-kt")];
+		wind.surface = [wind.cloudlayer[0],wind.cloudlayer[1] * boundary_correction];
+		wind.current = wind.surface;
+
 		}
 
 	# when the aloft wind menu is used, the lowest winds should be taken from there
@@ -3964,6 +4072,8 @@ else if (type == "Warmfront-3")
 	{weather_tiles.set_warmfront3_tile();}
 else if (type == "Warmfront-4")
 	{weather_tiles.set_warmfront4_tile();}
+else if (type == "Thunderstorms")
+	{weather_tiles.set_thunderstorms_tile();}
 else if (type == "METAR")
 	{weather_tiles.set_METAR_tile();}
 else if (type == "Altocumulus sky")
@@ -4018,11 +4128,12 @@ if (getprop(lw~"effect-loop-flag") == 0)
 
 # start weather dynamics loops if needed
 
+if (getprop(lw~"timing-loop-flag") == 0) 
+	{setprop(lw~"timing-loop-flag",1); local_weather.timing_loop();}
 
 if (dynamics_flag ==1)
 	{
-	if (getprop(lw~"timing-loop-flag") == 0) 
-	{setprop(lw~"timing-loop-flag",1); weather_dynamics.timing_loop();}
+	
 
 	if (getprop(lw~"dynamics-loop-flag") == 0) 
 		{
@@ -4042,7 +4153,6 @@ if (dynamics_flag ==1)
 
 # and start the buffer loop and housekeeping loop if needed
 
-#if (getprop(lw~"config/buffer-flag") ==1)
 if (buffer_flag == 1)
 	{
 	if (getprop(lw~"buffer-loop-flag") == 0) 
@@ -4128,8 +4238,8 @@ setprop(lw~"METAR/available-flag",1);
 
 # set listeners
 
-setlistener(lw~"tmp/thread-status", func {var s = size(clouds_path); compat_layer.create_cloud_array(s, clouds_path, clouds_lat, clouds_lon, clouds_alt, clouds_orientation); });
-setlistener(lw~"tmp/convective-status", func {var s = size(clouds_path); compat_layer.create_cloud_array(s, clouds_path, clouds_lat, clouds_lon, clouds_alt, clouds_orientation); });
+setlistener(lw~"tmp/thread-status", func {var s = size(clouds_path); compat_layer.create_cloud_array(s, clouds_path, clouds_lat, clouds_lon, clouds_alt, clouds_orientation);  });
+setlistener(lw~"tmp/convective-status", func {var s = size(clouds_path); compat_layer.create_cloud_array(s, clouds_path, clouds_lat, clouds_lon, clouds_alt, clouds_orientation);  });
 setlistener(lw~"tmp/effect-thread-status", func {var s = size(effects_geo);  effect_placement_loop(s); });
 setlistener(lw~"tmp/presampling-status", func {manage_presampling(); });
 
@@ -4145,6 +4255,10 @@ setlistener(lw~"config/fps-control-flag", func {fps_control_flag = getprop(lw~"c
 setlistener(lw~"config/target-framerate", func {target_framerate = getprop(lw~"config/target-framerate");});
 
 setlistener(lw~"config/small-scale-persistence", func {weather_tiles.small_scale_persistence = getprop(lw~"config/small-scale-persistence");});
+setlistener(lw~"config/ground-haze-factor", func {ground_haze_factor = getprop(lw~"config/ground-haze-factor");});
+setlistener(lw~"config/max-vis-range-m", func {max_vis_range = getprop(lw~"config/max-vis-range-m");});
+
+setlistener(lw~"config/temperature-offset-degc", func {temperature_offset = getprop(lw~"config/temperature-offset-degc");});
 
 setlistener("/sim/rendering/scattering-shader", func {scattering_shader_flag = getprop("/sim/rendering/scattering-shader"); });
 }
@@ -4179,7 +4293,7 @@ presampling_flag = 0;
 
 #var pos = geo.aircraft_position();
 
-#debug.dump(geodinfo(lat, lon));
+debug.dump(geodinfo(lat, lon));
 
 #create_cumulonimbus_cloud(lat, lon, 6000.0, 2.5);
 
@@ -4190,7 +4304,7 @@ presampling_flag = 0;
 
 #setprop("/environment/terrain/area[0]/output/valid", 0 );
 
-elttest();
+# elttest();
 
 }
 
@@ -4471,11 +4585,15 @@ var ec = "/environment/config/";
 
 # a hash map of the strength for convection associated with terrain types
 
-var landcover_map = {BuiltUpCover: 0.35, Town: 0.35, Freeway:0.35, BarrenCover:0.3, HerbTundraCover: 0.25, GrassCover: 0.2, CropGrassCover: 0.2, EvergreenBroadCover: 0.2, EvergreenNeedleCover: 0.2, Sand: 0.25, Grass: 0.2, Ocean: 0.01, Marsh: 0.05, Lake: 0.01, ShrubCover: 0.15, Landmass: 0.2, CropWoodCover: 0.15, MixedForestCover: 0.15, DryCropPastureCover: 0.25, MixedCropPastureCover: 0.2, IrrCropPastureCover: 0.15, DeciduousBroadCover: 0.1, DeciduousNeedleCover: 0.1, Bog: 0.05, pa_taxiway : 0.35, pa_tiedown: 0.35, pc_taxiway: 0.35, pc_tiedown: 0.35, Glacier: 0.03, DryLake: 0.3, IntermittentStream: 0.2, DryCrop: 0.2, Lava: 0.3, GolfCourse: 0.2};
+var landcover_map = {BuiltUpCover: 0.35, Town: 0.35, Freeway:0.35, BarrenCover:0.3, HerbTundraCover: 0.25, GrassCover: 0.2, CropGrassCover: 0.2, EvergreenBroadCover: 0.2, EvergreenNeedleCover: 0.2, Sand: 0.25, Grass: 0.2, Ocean: 0.01, Marsh: 0.05, Lake: 0.01, ShrubCover: 0.15, Landmass: 0.2, CropWoodCover: 0.15, MixedForestCover: 0.15, DryCropPastureCover: 0.25, MixedCropPastureCover: 0.2, IrrCropPastureCover: 0.15, DeciduousBroadCover: 0.1, DeciduousNeedleCover: 0.1, Bog: 0.05, pa_taxiway : 0.35, pa_tiedown: 0.35, pc_taxiway: 0.35, pc_tiedown: 0.35, Glacier: 0.03, SnowCover: 0.04, DryLake: 0.3, IntermittentStream: 0.2, DryCrop: 0.2, Lava: 0.3, GolfCourse: 0.2, Rock: 0.3, Construction: 0.35};
 
 # a hash map of average vertical cloud model sizes
 
 var cloud_vertical_size_map = {Altocumulus: 700.0, Cumulus: 600.0, Congestus: 2000.0, Nimbus: 1000.0, Stratus: 800.0, Stratus_structured: 600.0, Stratus_thin: 400.0, Cirrocumulus: 200.0, Cb_box: 2000.0};
+
+# a hash map of offsets for the new cloud rendering system
+
+var offset_map = {Nimbus: 2800.0, Stratus: 2000.0, Stratus_thin: 2500.0, Cirrostratus: 4500.0, Stratus_structured: 1800.0, Stratus_alt: 600.0, Cumulus: 200.0, Congestus: 600.0 };
 
 # the array of aloft wind interpolation altitudes
 
@@ -4522,6 +4640,9 @@ var n_effectVolumeArray = 0;
 var thermal = {};
 var wave = {};
 
+# the wind hash stores the current winds
+
+var wind = {surface: [0.0,0.0] , cloudlayer: [0.0,0.0], current: [0.0,0.0]};
 
 
 
@@ -4572,6 +4693,11 @@ var detailed_terrain_interaction_flag = 1;
 var hardcoded_clouds_flag = 1;
 var realistic_visibility_flag = 0;
 var scattering_shader_flag = 0;
+
+var ground_haze_factor = 1.0;
+var max_vis_range = 120000.0;
+var temperature_offset = 0.0;
+
 
 # globals for framerate controlled cloud management
 
@@ -4628,6 +4754,8 @@ setprop(lw~"effect-volumes/number-active-turb",0);
 setprop(lw~"effect-volumes/number-active-lift",0);
 setprop(lw~"effect-volumes/number-active-sat",0);
 
+# setprop(lw~"config/max-vis-range-m", 120000.0);
+setprop(lw~"config/temperature-offset-degc", 0.0);
 
 # create properties for tile management
 

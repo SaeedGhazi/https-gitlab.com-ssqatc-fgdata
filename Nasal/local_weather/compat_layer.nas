@@ -170,7 +170,7 @@ else
 
 if (local_weather.hardcoded_clouds_flag == 1) 
 	{
-	# we store that information ourselves, so this should be zero
+	# we store that information ourselves, so this should be zero, but rain forces us to go for an offset
 	setprop("/environment/clouds/layer[0]/elevation-ft",0.0);
 		
 	# layer wrapping off
@@ -347,6 +347,7 @@ else
 
 var setTemperature = func (T) {
 
+
 if (features.can_disable_environment == 1)
 	{
 	setprop("/environment/temperature-sea-level-degc",T);
@@ -503,6 +504,14 @@ if (features.can_disable_environment == 1)
 	setprop("/environment/wind-from-heading-deg",dir);
 	setprop("/environment/wind-speed-kt",speed);
 	}
+
+# this is needed to trigger the cloud drift to pick up the new wind setting
+if (local_weather.hardcoded_clouds_flag == 1)
+	{
+	setprop("/environment/clouds/layer[0]/elevation-ft",0.0);
+	}
+
+
 else
 	{
 	# this is a workaround for systems which lack hard-coded support
@@ -767,7 +776,10 @@ var p = props.Node.new({ "layer" : 0,
 			 "min-sprite-height-m": c.min_height,
 			 "max-sprite-height-m": c.max_height,
 			 "num-sprites": c.n_sprites,
-			 "bottom-shade": c.bottom_shade,
+			 "min-bottom-lighting-factor": c.bottom_shade,
+			 "min-middle-lighting-factor": 0.9,
+			 "min-top-lighting-factor": 1.0,
+			 "min-shade-lighting-factor": c.bottom_shade,
 			 "texture": c.texture_sheet,
 			 "num-textures-x": c.num_tex_x,
 			 "num-textures-y": c.num_tex_y,
@@ -777,10 +789,10 @@ var p = props.Node.new({ "layer" : 0,
 			 "max-cloud-height-m": c.min_cloud_height,	
 			 "z-scale": c.z_scale,
 			 "height-map-texture": 0,
-                         "alt-ft" :  c.alt});
+                         "alt-ft" :  c.alt });
 fgcommand("add-cloud", p);
 
-# print("alt: ", c.alt);
+#print("alt: ", c.alt);
 
 # add other management properties to the hash if dynamics is on
 
@@ -799,6 +811,10 @@ append(weather_tile_management.cloudArray,c);
 
 
 
+
+
+
+
 ###########################################################
 # place a cloud layer from arrays, split across frames 
 ###########################################################
@@ -811,13 +827,22 @@ if ((i < 0) or (i==0))
 	{
 	if (local_weather.debug_output_flag == 1) 
 		{print("Cloud placement from array finished!"); }
+
+	# then place all clouds using the new rendering system
+	if (local_weather.hardcoded_clouds_flag == 1)
+		{
+		var s = size(local_weather.cloudAssemblyArray);
+		create_new_cloud_array(s,cloudAssemblyArray);
+		}
+	
 	setprop(lw~"tmp/thread-status", "idle");
 
 	# now set flag that tile has been completely processed
 	var dir_index = props.globals.getNode(lw~"tiles/tmp/dir-index").getValue();
 
-	props.globals.getNode(lw~"tiles").getChild("tile",dir_index).getNode("generated-flag").setValue(2);
-	
+	#props.globals.getNode(lw~"tiles").getChild("tile",dir_index).getNode("generated-flag").setValue(2);
+	setprop(lw~"tiles/tile["~dir_index~"]/generated-flag",2);	
+
 	return;
 	}
 
@@ -856,7 +881,40 @@ settimer( func {create_cloud_array(i - k, clouds_path, clouds_lat, clouds_lon, c
 };
 
 
+var create_new_cloud_array = func (i, cloudArray)
+{
 
+
+
+#if (getprop(lw~"tmp/thread-status") != "placing") {return;}
+#if (getprop(lw~"tmp/convective-status") != "idle") {return;}
+
+if ((i < 0) or (i==0)) 
+	{
+	if (local_weather.debug_output_flag == 1) 
+		{print("Processing add-cloud calls finished!"); }
+	return;
+	}
+
+#print("Hello world! i is now: ",i);
+
+var k_max = 20;
+var s = size(cloudArray);  
+
+if (s < k_max) {k_max = s;}
+
+for (var k = 0; k < k_max; k = k+1)
+	{
+	local_weather.create_cloud_new(cloudArray[s-k-1]);
+	#print(cloudArray[s-k-1].alt);
+	}
+
+setsize(cloudArray,s-k_max);
+
+
+
+settimer( func {create_new_cloud_array(i - k, cloudArray) }, 0 );
+}
 
 
 

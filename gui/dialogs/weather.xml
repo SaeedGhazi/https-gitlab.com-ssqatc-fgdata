@@ -1755,6 +1755,12 @@
           <command>dialog-update</command>
           <object-name>metar</object-name>
         </binding>
+        <!-- Hack: disable local-weather when the users selects a predefined scenario
+             Fix for #567 -->
+        <binding>
+          <command>nasal</command>
+          <script>if (getprop("/nasal/local_weather/loaded",0)) local_weather.clear_all()</script>
+        </binding>
       </combo>
 
       <checkbox>

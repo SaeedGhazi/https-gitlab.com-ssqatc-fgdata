@@ -56,6 +56,52 @@
 		</binding>
 	</checkbox>
 
+	<hrule/>
+
+	<text>
+		<label>Lat/Lon Format</label>
+		<halign>center</halign>
+	</text>
+
+	<group>
+		<layout>vbox</layout>
+		<radio>
+			<halign>left</halign>
+			<property>/sim/gui/dialogs/hud/lon-lat-format-0</property>
+			<value>0</value>
+			<live>true</live>
+			<label>Decimal degrees</label>
+			<binding>
+				<command>nasal</command>
+				<script>set_radio(0);</script>
+			</binding>
+		</radio>
+		<radio>
+			<halign>left</halign>
+			<property>/sim/gui/dialogs/hud/lon-lat-format-1</property>
+			<value>1</value>
+			<label>Degrees, minutes</label>
+			<live>true</live>
+			<binding>
+				<command>nasal</command>
+				<script>set_radio(1);</script>
+			</binding>
+		</radio>
+		<radio>
+			<halign>left</halign>
+			<property>/sim/gui/dialogs/hud/lon-lat-format-2</property>
+			<value>2</value>
+			<live>true</live>
+			<label>Degrees, minutes, seconds</label>
+			<binding>
+				<command>nasal</command>
+				<script>set_radio(2);</script>
+			</binding>
+		</radio>
+	</group>
+
+	<hrule/>
+
 	<group>
 		<layout>hbox</layout>
 		<text>
@@ -192,8 +238,20 @@
   </button>
 
 	<nasal>
-		<open>
+		<open><![CDATA[
 			gui.enable_widgets(cmdarg(), "devel-stuff", getprop("/sim/gui/devel-widgets"));
+			var radios = cmdarg().getChildren("group")[1].getChildren("radio");
+			var set_radio = func(n) {
+				for (var i = 0; i < size(radios); i +=1) {
+					var prop = radios[i].getChild("property").getValue();
+					setprop(prop, (n == radios[i].getChild("value").getValue()));
+				}
+
+				setprop("/sim/lon-lat-format", n);
+			}
+
+			set_radio(getprop("/sim/lon-lat-format"));
+			]]>
 		</open>
 	</nasal>
 </PropertyList>

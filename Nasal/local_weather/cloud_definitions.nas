@@ -485,7 +485,7 @@ else if (type == "Stratocumulus bottom"){
 		{
 		cloudAssembly = local_weather.cloud.new(type, subtype);
 
-		mult = 1.0;
+
 
 		# characterize the basic texture sheet
 		cloudAssembly.texture_sheet = "/Models/Weather/cumulus_bottom_sheet1.rgb";
@@ -520,6 +520,46 @@ else if (type == "Stratocumulus bottom"){
 	
 	}
 else if (type == "Cumulonimbus (cloudlet)"){
+
+# new code
+	
+	if (local_weather.hardcoded_clouds_flag == 1)
+		{
+		cloudAssembly = local_weather.cloud.new(type, subtype);
+
+	# characterize the basic texture sheet
+				
+
+		cloudAssembly.num_tex_x = 2;
+		cloudAssembly.num_tex_y = 2;
+		
+		if (rand() < 0.5)
+			{cloudAssembly.texture_sheet = "/Models/Weather/cumulonimbus_sheet2.rgb";}			
+		else
+			{cloudAssembly.texture_sheet = "/Models/Weather/cumulonimbus_sheet1.rgb";}
+		
+		var mult = 1.0;
+		if (subtype == "small") {mult = 0.7;}
+
+		#characterize the cloud
+		cloudAssembly.bottom_shade = 0.6;
+		cloudAssembly.n_sprites = 5;			
+		cloudAssembly.min_width = 1700.0 * mult;
+		cloudAssembly.max_width = 2200.0 * mult;
+		cloudAssembly.min_height = 1700.0 * mult;
+		cloudAssembly.max_height = 2200.0 * mult;
+		cloudAssembly.min_cloud_width = 3500.0 * mult;
+		cloudAssembly.min_cloud_height = 3500.0 * mult;
+		cloudAssembly.z_scale = 1.0;
+
+		#signal that new routines are used
+		path = "new";
+
+		}
+	else
+		{
+
+
 	if (subtype == "small") {
 		if (rn > 0.875) {path = "Models/Weather/cumulonimbus_sl1.xml";}
 		else if (rn > 0.75) {path = "Models/Weather/cumulonimbus_sl2.xml";}
@@ -539,6 +579,7 @@ else if (type == "Cumulonimbus (cloudlet)"){
 		else if (rn > 0.25) {path = "Models/Weather/cumulonimbus_sl6.xml";}
 		else if (rn > 0.125) {path = "Models/Weather/cumulonimbus_sl7.xml";}
 		else  {path = "Models/Weather/cumulonimbus_sl8.xml";}
+		}
 		}
 	
 	}
@@ -885,24 +926,34 @@ else if (type == "Stratus") {
 		{
 		cloudAssembly = local_weather.cloud.new(type, subtype);
 
-		if (subtype == "small") {var mult = 0.8;}
-		else {var mult = 1.0;}
-
-		# characterize the basic texture sheet
-		cloudAssembly.texture_sheet = "/Models/Weather/stratus_sheet1.rgb";
-		cloudAssembly.num_tex_x = 3;
-		cloudAssembly.num_tex_y = 2;
+		if (subtype == "small") 
+			{
+			var mult = 0.8;
+			cloudAssembly.texture_sheet = "/Models/Weather/cirrocumulus_sheet1.rgb";
+			cloudAssembly.num_tex_x = 3;
+			cloudAssembly.num_tex_y = 3;
+			cloudAssembly.n_sprites = 10;
+			cloudAssembly.z_scale = 0.6;
+			}
+		else 	
+			{
+			var mult = 1.0;
+			cloudAssembly.texture_sheet = "/Models/Weather/stratus_sheet1.rgb";
+			cloudAssembly.num_tex_x = 3;
+			cloudAssembly.num_tex_y = 2;
+			cloudAssembly.n_sprites = 10;
+			cloudAssembly.z_scale = 0.4;
+			}
 	
 		#characterize the cloud
 		cloudAssembly.bottom_shade = 0.4;
-		cloudAssembly.n_sprites = 20;
-		cloudAssembly.min_width = 1900.0 * mult;
-		cloudAssembly.max_width = 2400.0 * mult;
-		cloudAssembly.min_height = 1900.0 * mult;
-		cloudAssembly.max_height = 2400.0 * mult;
-		cloudAssembly.min_cloud_width = 5000.0 * mult;
+		cloudAssembly.min_width = 2000.0 * mult;
+		cloudAssembly.max_width = 2500.0 * mult;
+		cloudAssembly.min_height = 2000.0 * mult;
+		cloudAssembly.max_height = 2500.0 * mult;
+		cloudAssembly.min_cloud_width = 5000.0;
 		cloudAssembly.min_cloud_height = 1.1 *  cloudAssembly.max_height;
-		cloudAssembly.z_scale = 0.4;
+
 
 		#signal that new routines are used
 		path = "new";
@@ -957,11 +1008,11 @@ else if (type == "Stratus (thin)") {
 	
 		#characterize the cloud
 		cloudAssembly.bottom_shade = 0.8;
-		cloudAssembly.min_width = 1500.0 * mult;
-		cloudAssembly.max_width = 2000.0 * mult;
-		cloudAssembly.min_height = 1500.0 * mult;
-		cloudAssembly.max_height = 2000.0 * mult;
-		cloudAssembly.min_cloud_width = 2500.0;
+		cloudAssembly.min_width = 1900.0 * mult;
+		cloudAssembly.max_width = 2400.0 * mult;
+		cloudAssembly.min_height = 1900.0 * mult;
+		cloudAssembly.max_height = 2400.0 * mult;
+		cloudAssembly.min_cloud_width = 4200.0;
 		cloudAssembly.min_cloud_height = 50.0;
 
 
@@ -1055,6 +1106,49 @@ else if (type == "Fog (thin)") {
 		}	
 	}
 else if (type == "Fog (thick)") {
+
+	# new code
+
+	if (local_weather.hardcoded_clouds_flag ==1)
+		{
+		cloudAssembly = local_weather.cloud.new(type, subtype);
+
+		if (subtype == "small") 
+			{
+			var mult = 0.8;
+			cloudAssembly.texture_sheet = "/Models/Weather/stratus_sheet1.rgb";
+			cloudAssembly.num_tex_x = 3;
+			cloudAssembly.num_tex_y = 2;
+			cloudAssembly.n_sprites = 5;
+			cloudAssembly.z_scale = 1.0;
+			}
+		else 	
+			{
+			var mult = 1.0;
+			cloudAssembly.texture_sheet = "/Models/Weather/stratus_sheet1.rgb";
+			cloudAssembly.num_tex_x = 3;
+			cloudAssembly.num_tex_y = 2;
+			cloudAssembly.n_sprites = 5;
+			cloudAssembly.z_scale = 1.0;
+			}
+	
+		#characterize the cloud
+		cloudAssembly.bottom_shade = 0.4;
+		cloudAssembly.min_width = 2000.0 * mult;
+		cloudAssembly.max_width = 2500.0 * mult;
+		cloudAssembly.min_height = 2000.0 * mult;
+		cloudAssembly.max_height = 2500.0 * mult;
+		cloudAssembly.min_cloud_width = 5000.0;
+		cloudAssembly.min_cloud_height = 1.1 *  cloudAssembly.max_height;
+
+
+		#signal that new routines are used
+		path = "new";
+		}
+
+	else # old code
+		{
+
 	if (subtype == "small") {
 		if (rn > 0.8) {path = "Models/Weather/stratus_thick1.xml";}
 		else if (rn > 0.6) {path = "Models/Weather/stratus_thick2.xml";}
@@ -1068,6 +1162,7 @@ else if (type == "Fog (thick)") {
 		else if (rn > 0.4) {path = "Models/Weather/stratus_thick3.xml";}
 		else if (rn > 0.2) {path = "Models/Weather/stratus_thick4.xml";}
 		else  {path = "Models/Weather/stratus_thick5.xml";}
+		}
 		}	
 	}
 else if (type == "Test") {path="Models/Weather/single_cloud.xml";}

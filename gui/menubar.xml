@@ -568,9 +568,9 @@
 				<command>nasal</command>
 				<script>
 					if (contains(globals, "MPCarriers")) {
-					MPCarriers.carrier_dialog.show();
+						MPCarriers.carrier_dialog.show();
 					} else {
-					gui.popupTip("No MPCarriers around at the moment.");
+						gui.popupTip("Found no MPCarriers for activated carrier AI scenarios within range.", 5.0);
 					}
 				</script>
 			</binding>

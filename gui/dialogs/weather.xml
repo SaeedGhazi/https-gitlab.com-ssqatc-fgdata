@@ -1759,7 +1759,7 @@
              Fix for #567 -->
         <binding>
           <command>nasal</command>
-          <script>local_weather.clear_all()</script>
+          <script>if (getprop("/nasal/local_weather/loaded",0)) local_weather.clear_all()</script>
         </binding>
       </combo>
 

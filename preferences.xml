@@ -710,6 +710,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
 		<atc>
 			<enabled type="bool">true</enabled>
+			<runway type="string" preserve="y"/>
 		</atc>
 
 		<ai-traffic>

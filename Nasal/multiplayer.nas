@@ -437,12 +437,14 @@ var model = {
     },
 };
 
-_setlistener("/sim/signals/nasal-dir-initialized", func {
+var mp_mode_changed = func(n) {
+    var is_online = n.getBoolValue();
+    foreach (var menuitem;["mp-chat","mp-chat-menu","mp-list","mp-carrier"])
+    {
+        gui.menuEnable(menuitem, is_online);
+    }
 
-  model.init();
-
-  setlistener("/sim/multiplay/online", func(n) {
-    if (n.getBoolValue()) {
+    if (is_online) {
         if (getprop("/sim/multiplay/write-message-log")) {
             var ac = getprop("/sim/aircraft");
             var cs = getprop("/sim/multiplay/callsign");
@@ -468,7 +470,18 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
         }
         check_messages(msg_loop_id += 1);
     }
-  }, 1, 0);
+    else
+    {
+        # stop message loop
+        msg_loop_id += 1;
+    }
+}
+
+_setlistener("/sim/signals/nasal-dir-initialized", func {
+
+  model.init();
+
+  setlistener("/sim/multiplay/online", mp_mode_changed, 1, 0);
 
   # Call-back to ensure we see our own messages.
   setlistener("/sim/multiplay/chat", chat_listener);

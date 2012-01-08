@@ -63,6 +63,11 @@
           <row>0</row><col>1</col>
           <halign>left</halign>
           <property>/sim/multiplay/callsign</property>
+          <enable>
+            <not>
+              <property>/sim/multiplay/online</property>
+            </not>
+          </enable>
         </input>
         <text>
           <row>0</row><col>2</col>

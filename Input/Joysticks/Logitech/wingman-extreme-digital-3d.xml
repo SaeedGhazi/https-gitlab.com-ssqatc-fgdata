@@ -181,7 +181,7 @@ $Id$
  </button>
 
  <button>
-  <desc>Flaps down</desc>
+  <desc>Mixture richer</desc>
   <number>
    <unix>3</unix>
    <mac>3</mac>
@@ -201,7 +201,7 @@ $Id$
  </button>
 
  <button>
-  <desc>Flaps up</desc>
+  <desc>Mixture leaner</desc>
   <number>
    <unix>4</unix>
    <mac>4</mac>

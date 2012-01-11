@@ -199,6 +199,7 @@
 					<use>texture[0]/internal-format</use>
 				</internal-format>
 			</texture-unit>
+
 			<texture-unit>
 				<unit>2</unit>
 				<image>
@@ -289,10 +290,7 @@
 					<use>texture[6]/internal-format</use>
 				</internal-format>
 			</texture-unit>
-			<texture-unit>
-				<unit>9</unit>
-				<type>noise</type>
-			</texture-unit>
+
 			<program>
 				<vertex-shader>Shaders/include_fog.vert</vertex-shader>
 				<vertex-shader>Shaders/water.vert</vertex-shader>
@@ -304,6 +302,7 @@
 				<type>sampler-2d</type>
 				<value type="int">0</value>
 			</uniform>
+
 			<uniform>
 				<name>water_normalmap</name>
 				<type>sampler-2d</type>
@@ -449,11 +448,7 @@
 				</value>
 			</uniform>
 
-			<uniform>
-				<name>Noise</name>
-				<type>sampler-3d</type>
-				<value type="int">9</value>
-			</uniform>
+
 			
 			<!-- 	    BEGIN fog include -->
 			<uniform>
@@ -661,10 +656,7 @@
 					<use>texture[6]/internal-format</use>
 				</internal-format>
 			</texture-unit>
-			<texture-unit>
-				<unit>9</unit>
-				<type>noise</type>
-			</texture-unit>
+
 			<program>
 				<vertex-shader>Shaders/include_fog.vert</vertex-shader>
 				<vertex-shader>Shaders/water.vert</vertex-shader>
@@ -823,11 +815,6 @@
 				</value>
 			</uniform>
 
-			<uniform>
-				<name>Noise</name>
-				<type>sampler-3d</type>
-				<value type="int">9</value>
-			</uniform>
 			<!-- 	    BEGIN fog include -->
 			<uniform>
 				<name>visibility</name>

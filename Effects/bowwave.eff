@@ -203,6 +203,10 @@
 				</internal-format>
 			</texture-unit>
 			<texture-unit>
+				<unit>1</unit>
+				<type>noise</type>
+			</texture-unit>
+			<texture-unit>
 				<unit>2</unit>
 				<image>
 					<use>texture[2]/image</use>
@@ -310,10 +314,7 @@
 					<use>texture[7]/internal-format</use>
 				</internal-format>
 			</texture-unit>
-			<texture-unit>
-				<unit>9</unit>
-				<type>noise</type>
-			</texture-unit>
+
 			<program>
 				<vertex-shader>Shaders/include_fog.vert</vertex-shader>
 				<vertex-shader>Shaders/wake.vert</vertex-shader>
@@ -442,7 +443,7 @@
 			<uniform>
 				<name>Noise</name>
 				<type>sampler-3d</type>
-				<value type="int">9</value>
+				<value type="int">1</value>
 			</uniform>
 			
 			<!-- 	    BEGIN fog include -->

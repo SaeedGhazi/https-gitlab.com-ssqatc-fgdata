@@ -137,7 +137,7 @@
         -->
 			</texture-unit>
 			<texture-unit>
-				<unit>9</unit>
+				<unit>1</unit>
 				<type>noise</type>
 			</texture-unit>
 			<vertex-program-two-side>
@@ -185,7 +185,7 @@
 			<uniform>
 				<name>Noise</name>
 				<type>sampler-3d</type>
-				<value type="int">9</value>
+				<value type="int">1</value>
 			</uniform>
 			<uniform>
 				<name>WindE</name>

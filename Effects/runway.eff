@@ -123,6 +123,31 @@
 					<use>texture[1]/internal-format</use>
 				</internal-format>
 			</texture-unit>
+			
+			<texture-unit>
+				<unit>1</unit>
+				<image>
+					<use>texture[8]/image</use>
+				</image>
+				<filter>
+					<use>texture[8]/filter</use>
+				</filter>
+				<wrap-s>
+					<use>texture[8]/wrap-s</use>
+				</wrap-s>
+				<wrap-t>
+					<use>texture[8]/wrap-t</use>
+				</wrap-t>
+				<internal-format>
+					<use>texture[0]/internal-format</use>
+				</internal-format>
+			</texture-unit>
+
+			<texture-unit>
+				<unit>2</unit>
+				<type>noise</type>
+			</texture-unit>
+			
 			<texture-unit>
 				<unit>4</unit>
 				<image>
@@ -197,29 +222,6 @@
 				</wrap-t>
 			</texture-unit>
 
-			<texture-unit>
-				<unit>8</unit>
-				<image>
-					<use>texture[8]/image</use>
-				</image>
-				<filter>
-					<use>texture[8]/filter</use>
-				</filter>
-				<wrap-s>
-					<use>texture[8]/wrap-s</use>
-				</wrap-s>
-				<wrap-t>
-					<use>texture[8]/wrap-t</use>
-				</wrap-t>
-				<internal-format>
-					<use>texture[0]/internal-format</use>
-				</internal-format>
-			</texture-unit>
-
-			<texture-unit>
-				<unit>9</unit>
-				<type>noise</type>
-			</texture-unit>
 			<vertex-program-two-side>
 				<use>vertex-program-two-side</use>
 			</vertex-program-two-side>
@@ -248,6 +250,18 @@
 				<value type="int">0</value>
 			</uniform>
 
+            <uniform>
+				<name>Map</name>
+				<type>sampler-2d</type>
+				<value type="int">1</value>
+			</uniform>
+
+			<uniform>
+				<name>Noise</name>
+				<type>sampler-3d</type>
+				<value type="int">2</value>
+			</uniform>
+			
 			<uniform>
 				<name>NormalTex</name>
 				<type>sampler-2d</type>
@@ -270,18 +284,6 @@
 				<name>Fresnel</name>
 				<type>sampler-2d</type>
 				<value type="int">7</value>
-			</uniform>
-
-			<uniform>
-				<name>Map</name>
-				<type>sampler-2d</type>
-				<value type="int">8</value>
-			</uniform>
-
-			<uniform>
-				<name>Noise</name>
-				<type>sampler-3d</type>
-				<value type="int">9</value>
 			</uniform>
 
 			<!-- set the amount of fringing colour 0.0 - 1.0 -->

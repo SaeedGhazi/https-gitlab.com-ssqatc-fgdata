@@ -244,6 +244,11 @@ please see Docs/README.model-combined.eff for documentation
 					<use>texture[0]/internal-format</use>
 				</internal-format>
 			</texture-unit>
+			<!-- Reflection Noise texture unit-->
+			<texture-unit>
+				<unit>1</unit>
+				<type>noise</type>
+			</texture-unit>
 			<!-- NormalMap texture unit-->
 			<texture-unit>
 				<unit>2</unit>
@@ -354,11 +359,7 @@ please see Docs/README.model-combined.eff for documentation
 					<use>texture[7]/internal-format</use>
 				</internal-format>
 			</texture-unit>
-			<!-- Reflection Noise texture unit-->
-			<texture-unit>
-				<unit>9</unit>
-				<type>noise</type>
-			</texture-unit>
+
 
 			<vertex-program-two-side>
 				<use>vertex-program-two-side</use>
@@ -385,6 +386,12 @@ please see Docs/README.model-combined.eff for documentation
 				<value type="int">0</value>
 			</uniform>
 
+            <uniform>
+				<name>ReflNoiseTex</name>
+				<type>sampler-3d</type>
+				<value type="int">1</value>
+			</uniform>
+			
 			<uniform>
 				<name>NormalTex</name>
 				<type>sampler-2d</type>
@@ -421,11 +428,7 @@ please see Docs/README.model-combined.eff for documentation
 				<value type="int">7</value>
 			</uniform>
 
-			<uniform>
-				<name>ReflNoiseTex</name>
-				<type>sampler-3d</type>
-				<value type="int">9</value>
-			</uniform>
+
 
 			<!-- 			NORMAL MAP -->
 			<!-- normalmap is used-->

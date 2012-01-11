@@ -14,8 +14,6 @@ uniform sampler2D water_reflection_grey;
 uniform sampler2D sea_foam;
 uniform sampler2D perlin_normalmap;
 
-uniform sampler3D Noise;
-
 uniform float saturation, Overcast, WindE, WindN;
 uniform float CloudCover0, CloudCover1, CloudCover2, CloudCover3, CloudCover4;
 uniform float osg_SimulationTime;

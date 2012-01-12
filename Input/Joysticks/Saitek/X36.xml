@@ -16,6 +16,7 @@
 
  <!-- NOTE: The X36 is a game port device so it may get a generic name. -->
  <name>Saitek X36</name>
+ <name>Saitek Saitek X36</name>
  <name>Analog 4-axis 6-button 2-hat CHF joystick</name>
 
  <data>

@@ -526,7 +526,7 @@
 		<name>multiplayer</name>
 
 		<item>
-			<label>Multiplayer settings</label>
+			<label>Multiplayer Settings</label>
 			<name>mp-settings</name>
 			<binding>
 				<command>dialog-show</command>

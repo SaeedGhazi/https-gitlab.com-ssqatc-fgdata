@@ -854,7 +854,7 @@ if (rand() < small_scale_persistence)
 else
 	{rnd_store = rn;}
 
-rn = 0.1;
+#rn = 0.1;
 
 
 if (rn > 0.8)
@@ -1001,7 +1001,7 @@ local_weather.set_weather_station(blat, blon, alt_offset, vis, T, D, p * hp_to_i
 
 # set a closed Nimbostratus layer
 
-var alt = spread * 400.0 + local_weather.cloud_vertical_size_map["Nimbus"] * 0.5 * m_to_ft;
+var alt = spread * 400.0;
 var strength = 0.0;
 
 #var alt = 3000.0;

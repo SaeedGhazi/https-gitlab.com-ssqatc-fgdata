@@ -2916,6 +2916,7 @@ if (compat_layer.features.terrain_presampling_active == 1)
 	print("Starting hard-coded terrain presampling");
 
 	setprop(lw~"tmp/presampling-status", "sampling");
+	setprop("/environment/terrain/area[0]/enabled", 1 );
 	setprop("/environment/terrain/area[0]/input/latitude-deg", blat );
 	setprop("/environment/terrain/area[0]/input/longitude-deg", blon );
 	setprop("/environment/terrain/area[0]/input/use-aircraft-position",1);

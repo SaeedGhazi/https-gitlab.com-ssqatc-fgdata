@@ -1220,8 +1220,8 @@ var basic_keys = {
         { name: "_",         desc: "compose chat message" },
         { name: "F3",        desc: "capture screen" },
         { name: "F10",       desc: "toggle menubar" },
-        { name: "Shift-F1",  desc: "load flight" },
-        { name: "Shift-F2",  desc: "save flight" },
+       #{ name: "Shift-F1",  desc: "load flight" },
+       #{ name: "Shift-F2",  desc: "save flight" },
         { name: "Shift-F10", desc: "cycle through GUI styles" },
     ],
 };

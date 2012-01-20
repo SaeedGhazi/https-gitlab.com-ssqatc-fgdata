@@ -86,9 +86,9 @@
 		<windN>
 			<use>/environment/sea/surface/wind-from-north-fps</use>
 		</windN>
-		<wind-from>
+		<!--wind-from> unused?
 			<use>/environment/config/boundary/entry[0]/wind-from-heading-deg</use>
-		</wind-from>
+		</wind-from-->
 		<WaveFreq>
 			<use>/environment/wave/freq</use>
 		</WaveFreq>
@@ -398,13 +398,13 @@
 					<use>windN</use>
 				</value>
 			</uniform>
-			<uniform>
+			<!-- uniform> unused?
 				<name>WindFrom</name>
 				<type>float</type>
 				<value>
 					<use>wind-from</use>
 				</value>
-			</uniform>
+			</uniform-->
 			<uniform>
 				<name>WaveFreq</name>
 				<type>float</type>
@@ -765,13 +765,13 @@
 					<use>windN</use>
 				</value>
 			</uniform>
-			<uniform>
+			<!--uniform> unused?
 				<name>WindFrom</name>
 				<type>float</type>
 				<value>
 					<use>wind-from</use>
 				</value>
-			</uniform>
+			</uniform-->
 			<uniform>
 				<name>WaveFreq</name>
 				<type>float</type>

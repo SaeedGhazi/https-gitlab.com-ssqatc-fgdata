@@ -328,4 +328,10 @@
     </area>
   </terrain>
 
+  <sea>
+    <config>
+      <wind-filter-time type="double">60.0</wind-filter-time>
+    </config>
+  </sea>
+
 </PropertyList>

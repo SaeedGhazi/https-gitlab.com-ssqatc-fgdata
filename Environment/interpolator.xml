@@ -205,33 +205,33 @@
     <name>EnvironmentInterpolator:wave:wind-from-east-fps</name>
     <input>/environment/config/boundary/entry[0]/wind-from-east-fps</input>
     <output>/environment/sea/surface/wind-from-east-fps</output>
-    <type>gain</type>
-    <gain>1</gain>
+    <type>exponential</type>
+    <filter-time>/environment/sea/config/wind-filter-time</filter-time>
   </filter>
 
   <filter>
     <name>EnvironmentInterpolator:wave:wind-from-north-fps</name>
     <input>/environment/config/boundary/entry[0]/wind-from-north-fps</input>
     <output>/environment/sea/surface/wind-from-north-fps</output>
-    <type>gain</type>
-    <gain>1</gain>
+    <type>exponential</type>
+    <filter-time>/environment/sea/config/wind-filter-time</filter-time>
   </filter>
 
-  <filter>
+  <!--filter> unused?
     <name>EnvironmentInterpolator:wave:wind-from-heading-deg</name>
     <input>/environment/config/boundary/entry[0]/wind-from-heading-deg</input>
     <output>/environment/sea/surface/wind-from-deg</output>
     <type>gain</type>
     <gain>1</gain>
-  </filter>
+  </filter-->
 
-  <filter>
+  <!--filter> unused?
     <name>EnvironmentInterpolator:wave:wind-speed-kt</name>
     <input>/environment/config/boundary/entry[0]/wind-speed-kt</input>
     <output>/environment/sea/surface/wind-speed-kt</output>
     <type>gain</type>
     <gain>1</gain>
-  </filter>
+  </filter-->
 
   <logic>
     <name>EnvironmentInterpolator:wave:enabled</name>
@@ -273,7 +273,7 @@
           <value>1.0</value>
           <product>
             <value>0.02</value>
-            <property>/environment/sea/surface/wind-speed-kt</property>
+            <property>/environment/config/boundary/entry[0]/wind-speed-kt</property>
           </product>
         </sum>
       </expression>
@@ -293,7 +293,7 @@
           <value>35.0</value>
           <product>
             <value>0.2</value>
-            <property>/environment/sea/surface/wind-speed-kt</property>
+            <property>/environment/config/boundary/entry[0]/wind-speed-kt</property>
           </product>
         </sum>
       </expression>
@@ -311,7 +311,7 @@
           <value>20.0</value>
           <product>
             <value>0.4</value>
-            <property>/environment/sea/surface/wind-speed-kt</property>
+            <property>/environment/config/boundary/entry[0]/wind-speed-kt</property>
           </product>
         </difference>
       </expression>
@@ -329,7 +329,7 @@
           <value>0.01</value>
           <product>
             <value>0.0008</value>
-            <property>/environment/sea/surface/wind-speed-kt</property>
+            <property>/environment/config/boundary/entry[0]/wind-speed-kt</property>
           </product>
         </sum>
       </expression>
@@ -349,7 +349,7 @@
           <value>0.0004</value>
           <product>
             <value>0.00001</value>
-            <property>/environment/sea/surface/wind-speed-kt</property>
+            <property>/environment/config/boundary/entry[0]/wind-speed-kt</property>
           </product>
         </difference>
       </expression>
@@ -369,7 +369,7 @@
           <value>1.0</value>
           <product>
             <value>0.02</value>
-            <property>/environment/sea/surface/wind-speed-kt</property>
+            <property>/environment/config/boundary/entry[0]/wind-speed-kt</property>
           </product>
         </sum>
       </expression>

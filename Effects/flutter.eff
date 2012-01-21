@@ -9,10 +9,12 @@
 			<!-- DIFFUSE -->
 		</material>
 		<shade-model>smooth</shade-model>
+                <!-- unused ?
 		<wind-speed>
-			<!--<use>/environment/Vinson/rel-wind-speed-kts</use>-->
+			<!- -<use>/environment/Vinson/rel-wind-speed-kts</use>- ->
 			<use>/environment/config/boundary/entry[0]/wind-speed-kt</use>
 		</wind-speed>
+                -->
 		<offset>0.0</offset>
 		<amplitude-factor>0.08</amplitude-factor>
 		<windE>
@@ -161,13 +163,13 @@
 					<use>material/color-mode-uniform</use>
 				</value>
 			</uniform>
-			<uniform>
+			<!-- uniform> unused?
 				<name>WindSpeed</name>
 				<type>float</type>
 				<value>
 					<use>wind-speed</use>
 				</value>
-			</uniform>
+			</uniform-->
 			<uniform>
 				<name>Offset</name>
 				<type>float</type>

@@ -328,4 +328,16 @@
     </area>
   </terrain>
 
+  <sea>
+    <config>
+      <wind-filter-time type="double">60.0</wind-filter-time>
+    </config>
+  </sea>
+
+  <!-- definitions for the scattering skydome shader -->
+  <ground-visibility-m type="double" userarchive="n">16000.0</ground-visibility-m>
+  <ground-haze-thickness-m type="double" userarchive="n">2000.0</ground-haze-thickness-m>
+  <terminator-relative-position-m type="double" userarchive="n">1000000.0</terminator-relative-position-m>
+  <mean-terrain-elevation-m type="double" userarchive="n">0.0</mean-terrain-elevation-m>
+
 </PropertyList>

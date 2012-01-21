@@ -407,4 +407,31 @@
     <input>/environment/metar/clouds/layer[0]/alpha</input>
     <output>/environment/clouds/layer[0]/alpha</output>
   </filter>
+<!-- replace weather-utility.nas 
+    # Put the snow line slightly below the station's elevation, 
+    # so the station is completely covered with snow
+-->
+  <filter>
+    <name>MetarController:snow-level</name>
+    <type>gain</type>
+    <gain>1.0</gain>
+    <input>
+      <condition>
+        <property>/environment/metar/valid</property>
+        <property>/environment/metar/snow-cover</property>
+      </condition>
+      <expression>
+        <sum>
+          <product>
+            <property>/environment/metar/station-elevation-ft</property>
+            <value>0.3048</value>
+          </product>
+          <value>-50.0</value>
+        </sum>
+      </expression>
+    </input>
+    <input>3200</input>
+    <output>/environment/snow-level-m</output>
+    <max>3200</max>
+  </filter>
 </PropertyList> 

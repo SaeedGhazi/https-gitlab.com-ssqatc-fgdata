@@ -382,6 +382,10 @@ Started September 2000 by David Megginson, david@megginson.com
 				<name>Environment Interpolation Rule</name>
 				<path>Environment/interpolator.xml</path>
 			</property-rule>
+			<property-rule>
+				<name>Local Weather Rules </name>
+				<path>Environment/local-weather-rules.xml</path>
+			</property-rule>
 		</systems>
 		<instrumentation>
 			<path>Aircraft/Generic/generic-instrumentation.xml</path>

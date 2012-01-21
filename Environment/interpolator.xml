@@ -196,4 +196,187 @@
     <filter-time>1</filter-time>
   </filter>
 
+  <!-- replace weather-utility.nas -->
+  <!--
+    #this utility is a workaround for the fact that a shader uses listeners which cannot
+    # be used with a tied property
+  -->
+  <filter>
+    <name>EnvironmentInterpolator:wave:wind-from-east-fps</name>
+    <input>/environment/config/boundary/entry[0]/wind-from-east-fps</input>
+    <output>/environment/sea/surface/wind-from-east-fps</output>
+    <type>exponential</type>
+    <filter-time>/environment/sea/config/wind-filter-time</filter-time>
+  </filter>
+
+  <filter>
+    <name>EnvironmentInterpolator:wave:wind-from-north-fps</name>
+    <input>/environment/config/boundary/entry[0]/wind-from-north-fps</input>
+    <output>/environment/sea/surface/wind-from-north-fps</output>
+    <type>exponential</type>
+    <filter-time>/environment/sea/config/wind-filter-time</filter-time>
+  </filter>
+
+  <!--filter> unused?
+    <name>EnvironmentInterpolator:wave:wind-from-heading-deg</name>
+    <input>/environment/config/boundary/entry[0]/wind-from-heading-deg</input>
+    <output>/environment/sea/surface/wind-from-deg</output>
+    <type>gain</type>
+    <gain>1</gain>
+  </filter-->
+
+  <!--filter> unused?
+    <name>EnvironmentInterpolator:wave:wind-speed-kt</name>
+    <input>/environment/config/boundary/entry[0]/wind-speed-kt</input>
+    <output>/environment/sea/surface/wind-speed-kt</output>
+    <type>gain</type>
+    <gain>1</gain>
+  </filter-->
+
+  <logic>
+    <name>EnvironmentInterpolator:wave:enabled</name>
+    <input>/environment/config/enabled</input>
+    <output>/environment/sea/config/enabled</output>
+  </logic>
+
+  <filter>
+    <name>EnvironmentInterpolator:model:heading</name>
+    <input>/orientation/heading-deg</input>
+    <output>/orientation/model/heading-deg</output>
+    <type>gain</type>
+    <gain>1</gain>
+  </filter>
+
+  <filter>
+    <name>EnvironmentInterpolator:model:pitch</name>
+    <input>/orientation/pitch-deg</input>
+    <output>/orientation/model/pitch-deg</output>
+    <type>gain</type>
+    <gain>1</gain>
+  </filter>
+
+  <filter>
+    <name>EnvironmentInterpolator:model:roll</name>
+    <type>gain</type>
+    <gain>1</gain>
+    <input>/orientation/roll-deg</input>
+    <output>/orientation/model/roll-deg</output>
+  </filter>
+
+  <filter>
+    <name>EnvironmentInterpolator:wave:amp</name>
+    <type>gain</type>
+    <gain>1</gain>
+    <input>
+      <expression>
+        <sum>
+          <value>1.0</value>
+          <product>
+            <value>0.02</value>
+            <property>/environment/config/boundary/entry[0]/wind-speed-kt</property>
+          </product>
+        </sum>
+      </expression>
+    </input>
+    <output>/environment/wave/amp</output>
+    <min>1.0</min>
+    <max>2.0</max>
+  </filter>
+
+  <filter>
+    <name>EnvironmentInterpolator:wave:angle</name>
+    <type>gain</type>
+    <gain>1</gain>
+    <input>
+      <expression>
+        <sum>
+          <value>35.0</value>
+          <product>
+            <value>0.2</value>
+            <property>/environment/config/boundary/entry[0]/wind-speed-kt</property>
+          </product>
+        </sum>
+      </expression>
+    </input>
+    <output>/environment/wave/angle</output>
+  </filter>
+
+  <filter>
+    <name>EnvironmentInterpolator:wave:dangle</name>
+    <type>gain</type>
+    <gain>1</gain>
+    <input>
+      <expression>
+        <difference>
+          <value>20.0</value>
+          <product>
+            <value>0.4</value>
+            <property>/environment/config/boundary/entry[0]/wind-speed-kt</property>
+          </product>
+        </difference>
+      </expression>
+    </input>
+    <output>/environment/wave/dangle</output>
+  </filter>
+
+  <filter>
+    <name>EnvironmentInterpolator:wave:freq</name>
+    <type>gain</type>
+    <gain>1</gain>
+    <input>
+      <expression>
+        <sum>
+          <value>0.01</value>
+          <product>
+            <value>0.0008</value>
+            <property>/environment/config/boundary/entry[0]/wind-speed-kt</property>
+          </product>
+        </sum>
+      </expression>
+    </input>
+    <output>/environment/wave/freq</output>
+    <min>0.01</min>
+    <max>0.015</max>
+  </filter>
+
+  <filter>
+    <name>EnvironmentInterpolator:wave:factor</name>
+    <type>gain</type>
+    <gain>1</gain>
+    <input>
+      <expression>
+        <difference>
+          <value>0.0004</value>
+          <product>
+            <value>0.00001</value>
+            <property>/environment/config/boundary/entry[0]/wind-speed-kt</property>
+          </product>
+        </difference>
+      </expression>
+    </input>
+    <output>/environment/wave/factor</output>
+    <min>0.0001</min>
+    <max>0.0004</max>
+  </filter>
+
+  <filter>
+    <name>EnvironmentInterpolator:wave:sharp</name>
+    <type>gain</type>
+    <gain>1</gain>
+    <input>
+      <expression>
+        <sum>
+          <value>1.0</value>
+          <product>
+            <value>0.02</value>
+            <property>/environment/config/boundary/entry[0]/wind-speed-kt</property>
+          </product>
+        </sum>
+      </expression>
+    </input>
+    <output>/environment/wave/sharp</output>
+    <min>1.0</min>
+    <max>2.0</max>
+  </filter>
+
 </PropertyList>

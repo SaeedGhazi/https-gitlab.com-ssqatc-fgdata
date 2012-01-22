@@ -459,6 +459,38 @@ var fdm_init_listener = _setlistener("/sim/signals/fdm-initialized", func {
 # functions that make use of the window class (and don't belong anywhere else)
 ##############################################################################
 
+# highlights messages with the multiplayer callsign in the text
+var msg_mp = func (n) {
+	if (!getprop("/sim/multiplay/chat-display"))
+		return;
+	var msg = string.uc(n.getValue());
+	var call = string.uc(getprop("/sim/multiplay/callsign"));
+	var matching = 0;
+	var found = 0;
+	for(var i = 0; i < size(msg); i = i + 1) {
+		if (msg[i] == ` ` or msg[i] == `,` or msg[i] == `.` or msg[i] == `;` or msg[i] == `:` or msg[i] == `>`) {
+			if (matching == size(call)) {
+				found = 1;
+				break;
+			}
+			matching = 0;
+			continue;
+		}
+		if (matching >= size(call)) {
+			matching = matching + 1;
+			continue;
+		}
+		if (call[matching] == msg[i]) {
+			matching = matching + 1;
+		} else {
+			matching = 0;
+		}
+	}
+	if (found == 1 or matching == size(call))
+		screen.log.write(n.getValue(), 1.0, 0.5, 0.5);
+	else
+		screen.log.write(n.getValue(), 0.5, 0.0, 0.8);
+}
 
 var msg_repeat = func {
 	if (getprop("/sim/tutorials/running")) {
@@ -558,9 +590,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 			func(n) map("copilot",  n.getValue(), 1.0, 1.0, 1.0));
 	listener.ai_plane = setlistener(m ~ "ai-plane",
 			func(n) map("ai-plane", n.getValue(), 0.9, 0.4, 0.2));
-	listener.mp_plane = setlistener(m ~ "mp-plane",
-			func(n) map("ai-plane", n.getValue(), 0.5, 0.0, 0.8,
-					func getprop("/sim/multiplay/chat-display")));
+	listener.mp_plane = setlistener(m ~ "mp-plane", msg_mp);
 });
 
 

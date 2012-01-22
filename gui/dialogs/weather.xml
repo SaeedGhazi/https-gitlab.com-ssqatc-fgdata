@@ -19,7 +19,7 @@
     </empty>
 
     <text>
-      <label>Global Troposphere Weather Conditions</label>
+      <label>Basic Troposphere Weather Conditions</label>
     </text>
 
     <empty>
@@ -1862,14 +1862,40 @@
 
   <hrule/>
 
-  <button>
-    <legend>Close</legend>
-    <default>true</default>
-    <key>Esc</key>
-    <binding>
-      <command>dialog-close</command>
-    </binding>
-  </button>
+  <group>
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+    <layout>hbox</layout>
+    <button>
+      <legend>Close</legend>
+      <default>true</default>
+      <key>Esc</key>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+
+    <button>
+      <legend>Advanced Weather --></legend>
+      <default>false</default>
+      <binding>
+        <command>property-assign</command>
+        <property>/nasal/local_weather/enabled</property>
+        <value type="bool">true</value>
+      </binding>
+      <binding>
+        <command>dialog-show</command>
+        <dialog-name>local_weather_tiles</dialog-name>
+      </binding>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+  </group>
 
   <nasal>
     <open><![CDATA[

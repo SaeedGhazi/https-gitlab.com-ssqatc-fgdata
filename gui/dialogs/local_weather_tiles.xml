@@ -539,7 +539,7 @@
    </binding>
   </button>
 
-<button>
+  <button>
    <x>200</x>
    <y>0</y>
    <legend>Show winds</legend>
@@ -553,6 +553,28 @@
    </binding>
   </button>
 
+  <button>
+   <x>290</x>
+   <y>0</y>
+    <legend>Basic Weather --></legend>
+    <default>false</default>
+    <binding>
+      <command>nasal</command>
+      <script>if (getprop("/nasal/local_weather/loaded",0)) local_weather.clear_all()</script>
+    </binding>
+    <binding>
+      <command>property-assign</command>
+      <property>/nasal/local_weather/enabled</property>
+      <value type="bool">false</value>
+    </binding>
+    <binding>
+      <command>dialog-show</command>
+      <dialog-name>weather</dialog-name>
+    </binding>
+    <binding>
+      <command>dialog-close</command>
+    </binding>
+  </button>
  </group>
 
 

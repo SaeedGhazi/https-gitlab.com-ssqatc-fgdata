@@ -298,47 +298,22 @@
 		<label>Environment</label>
 		<name>environment</name>
 
-		<!--<item>
-			<label>Weather Scenario</label>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>weather_scenario</dialog-name>
-			</binding>
-		</item>
-
 		<item>
-			<label>Weather Conditions</label>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>weather</dialog-name>
-			</binding>
-		</item>-->
-
-		<item>
-			<label>Global Weather</label>
+			<label>Weather</label>
 			<name>global-weather</name>
 			<binding>
+				<condition>
+					<not><property>/nasal/local_weather/enabled</property></not>
+				</condition>
 				<command>dialog-show</command>
 				<dialog-name>weather</dialog-name>
 			</binding>
-		</item>
-
-		<item>
-			<label>Local Weather</label>
-			<name>local_weather_tiles</name>
-			<enabled>false</enabled>
 			<binding>
+				<condition>
+					<property>/nasal/local_weather/enabled</property>
+				</condition>
 				<command>dialog-show</command>
 				<dialog-name>local_weather_tiles</dialog-name>
-			</binding>
-		</item>
-
-		<item>
-			<label>Local Weather Settings</label>
-			<name>local_weather_config</name>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>local_weather_config</dialog-name>
 			</binding>
 		</item>
 

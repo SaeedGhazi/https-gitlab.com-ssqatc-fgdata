@@ -13,6 +13,7 @@ var ignore = {};
 var msg_loop_id = 0;
 var msg_timeout = 0;
 var log_file = nil;
+var log_listeners = [];
 
 var check_messages = func(loop_id) {
     if (loop_id != msg_loop_id) return;
@@ -445,27 +446,35 @@ var mp_mode_changed = func(n) {
     }
 
     if (is_online) {
-        if (getprop("/sim/multiplay/write-message-log")) {
-            var ac = getprop("/sim/aircraft");
-            var cs = getprop("/sim/multiplay/callsign");
-            var apt = airportinfo().id;
-            var t = props.globals.getNode("/sim/time/real").getValues();
-            if (log_file == nil) {
+        if (getprop("/sim/multiplay/write-message-log") and (log_file == nil)) {
+            var t = props.globals.getNode("/sim/time/real");
+            if (t == nil)
+            {
+                # not ready yet, delay...
+                settimer(func mp_mode_changed(n), 0.1);
+            }
+            else
+            {
+                t = t.getValues();
+                var ac = getprop("/sim/aircraft");
+                var cs = getprop("/sim/multiplay/callsign");
+                var apt = airportinfo().id;
                 var file = string.normpath(getprop("/sim/fg-home") ~ "/mp-message.log");
 
                 log_file = io.open(file, "a");
                 io.write(log_file, sprintf("\n=====  %s %04d/%02d/%02d\t%s\t%s\t%s\n",
                     ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][t.weekday],
                     t.year, t.month, t.day, apt, ac, cs));
+                io.flush(log_file);
 
-                setlistener("/sim/signals/exit", func io.write(log_file, "=====\n") and io.close(log_file));
-                setlistener("/sim/messages/mp-plane", func(n) {
+                append(log_listeners, setlistener("/sim/signals/exit", func io.write(log_file, "=====  EXIT\n") and io.close(log_file)));
+                append(log_listeners, setlistener("/sim/messages/mp-plane", func(n) {
                     io.write(log_file, sprintf("%02d:%02d  %s\n",
                         getprop("/sim/time/real/hour"),
                         getprop("/sim/time/real/minute"),
                         n.getValue()));
                     io.flush(log_file);
-                });
+                }));
             }
         }
         check_messages(msg_loop_id += 1);
@@ -474,6 +483,16 @@ var mp_mode_changed = func(n) {
     {
         # stop message loop
         msg_loop_id += 1;
+        if (log_file != nil)
+        {
+            io.write(log_file, "=====  DISCONNECT\n");
+            io.flush(log_file);
+            io.close(log_file);
+            foreach (var l; log_listeners)
+                removelistener(l);
+            log_listeners = [];
+            log_file = nil;
+        }
     }
 }
 
@@ -481,7 +500,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
   model.init();
 
-  setlistener("/sim/multiplay/online", mp_mode_changed, 1, 0);
+  setlistener("/sim/multiplay/online", mp_mode_changed, 1, 1);
 
   # Call-back to ensure we see our own messages.
   setlistener("/sim/multiplay/chat", chat_listener);

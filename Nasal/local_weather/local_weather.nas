@@ -4769,7 +4769,6 @@ setprop(lwi~"ipoint-number",0);
 var updateMenu = func {
 	var isEnabled = getprop("/nasal/local_weather/enabled");
 	gui.menuEnable("local_weather", isEnabled);
-	gui.menuEnable("local_weather_tiles", isEnabled);
 }
 
 _setlistener("/nasal/local_weather/enabled", updateMenu);

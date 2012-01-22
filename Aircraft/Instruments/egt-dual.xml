@@ -91,8 +91,8 @@ properties' values.
      <type>rotation</type>
      <property alias="../../../../../params/engine-egt0-select"/>
      <min>50.0</min>
-     <max>600.0</max>
-     <scale>-0.13</scale>
+     <max>1600.0</max>
+     <scale>-0.052</scale>
      <offset>-230</offset>
     </transformation>
     <transformation>
@@ -122,8 +122,8 @@ properties' values.
      <type>rotation</type>
      <property alias="../../../../../params/engine-egt1-select"/>
      <min>50.0</min>
-     <max>600.0</max>
-     <scale>0.13</scale>
+     <max>1600.0</max>
+     <scale>0.052</scale>
      <offset>230</offset>
     </transformation>
     <transformation>

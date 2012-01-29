@@ -149,7 +149,8 @@
   <binding>
    <command>property-adjust</command>
    <property>/sim/current-view/field-of-view</property>
-   <step type="double">0.5</step>
+   <step type="double">0.3</step>
+   <max>179</max>
   </binding>
  </button>
  
@@ -170,7 +171,8 @@
   <binding>
    <command>property-adjust</command>
    <property>/sim/current-view/field-of-view</property>
-   <step type="double">-0.5</step>
+   <step type="double">-0.3</step>
+   <min>1</min>
   </binding>
  </button>
 

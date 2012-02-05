@@ -175,9 +175,12 @@ void main (void)
     if ( quality_level >= 3.0 ) {
         linear_search_steps = 20;
     }
+    vec3 normal = normalize(VNormal);
+    vec3 tangent = normalize(VTangent);
+    vec3 binormal = normalize(VBinormal);
     vec3 ecPos3 = ecPosition.xyz / ecPosition.w;
     vec3 V = normalize(ecPos3);
-    vec3 s = vec3(dot(V, VTangent), dot(V, VBinormal), dot(VNormal, -V));
+    vec3 s = vec3(dot(V, tangent), dot(V, binormal), dot(normal, -V));
     vec2 ds = s.xy * depth_factor / s.z;
     vec2 dp = gl_TexCoord[0].st - ds;
     float d = ray_intersect(dp, ds);
@@ -189,7 +192,7 @@ void main (void)
     float emis = N.z;
     N.z = sqrt(1.0 - min(1.0,dot(N.xy, N.xy)));
     float Nz = N.z;
-    N = normalize(N.x * VTangent + N.y * VBinormal + N.z * VNormal);
+    N = normalize(N.x * tangent + N.y * binormal + N.z * normal);
 
     vec3 l = gl_LightSource[0].position.xyz;
     vec3 diffuse = gl_Color.rgb * max(0.0, dot(N, l));
@@ -198,7 +201,7 @@ void main (void)
     // Shadow
     if ( quality_level >= 2.0 ) {
         dp += ds * d;
-        vec3 sl = normalize( vec3( dot( l, VTangent ), dot( l, VBinormal ), dot( -l, VNormal ) ) );
+        vec3 sl = normalize( vec3( dot( l, tangent ), dot( l, binormal ), dot( -l, normal ) ) );
         ds = sl.xy * depth_factor / sl.z;
         dp -= ds * d;
         float dl = ray_intersect(dp, ds);
@@ -237,11 +240,15 @@ void main (void)
     finalColor *= ambient_light;
 
     vec4 p = vec4( ecPos3 + tile_size * V * (d-1.0) * depth_factor / s.z, 1.0 );
-    vec4 iproj = gl_ProjectionMatrix * p;
-    iproj /= iproj.w;
 
     finalColor.rgb = fog_Func(finalColor.rgb, fogType);
     gl_FragColor = finalColor;
 
-    gl_FragDepth = (iproj.z+1.0)/2.0;
+    if (dot(normal,-V) > 0.017) {
+        vec4 iproj = gl_ProjectionMatrix * p;
+        iproj /= iproj.w;
+        gl_FragDepth = (iproj.z+1.0)/2.0;
+    } else {
+        gl_FragDepth = gl_FragCoord.z;
+    }
 }

@@ -109,6 +109,18 @@ Properties currently used:
   effect - The name of an effect to inherit from. The default is
     Effects/terrain-default.
 
+  object-mask: png file used as a mask for trees (green channel), buildings
+    (blue channel) and building rotation (red channel). Note that this is
+    used as a mask on the coverage-m2 and wood-coverage values. I.e. the
+    wood-coverage value is used to determine the placement of a number of
+    trees, which are then masked by the object-mask texture.  Partial values
+    are randomly checked against, so a green value of 128 (0.5) means that 
+    if the wood-coverage indicates that a tree is located at that point,
+    it only has a 50% chance of being added. Finally, note that if an
+    object-mask is defined, the tree-density and wood-size values are ignored,
+    and trees are placed evenly using theh wood-coverage value and
+    masked. 
+
    ambient, diffuse, specular, emissive, and shininess are copied into the
    parameter section of the effect created for this material.
 ************************************************************************
@@ -123,7 +135,7 @@ Shared parameters for various materials.
 	<forest>
 	    <!-- Maximum distance from which a tree is visible -->
       <tree-range-m>8000</tree-range-m>
-	</forest>
+	</forest>  
     </params>
 
     <material>
@@ -1339,6 +1351,8 @@ Shared parameters for various materials.
 	<texture>Terrain/city2.png</texture>
 	<texture n="2">Terrain/city2-relief-light.png</texture>
 	</texture-set>
+	<object-mask>Terrain/city1.mask.png</object-mask>
+	<object-mask>Terrain/city2.mask.png</object-mask>
     <!--
   <texture-set>
    <texture>Terrain/city3.png</texture>
@@ -1354,61 +1368,54 @@ Shared parameters for various materials.
 	    <b>0.02</b>
 	    <a>1.0</a>
 	</emissive>
-	<object-group>
-      <range-m>10000</range-m>
-	    <object>
-		<path>Models/Buildings/oil-tanks.ac</path>
-		<coverage-m2>10000000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	    <object>
-        <path>Models/Buildings/big-apartment.ac</path>
-        <coverage-m2>10000000</coverage-m2>
-        <heading-type>random</heading-type>
-      </object>
-      <object>
-		<path>Models/Buildings/factory.ac</path>
-		<coverage-m2>4000000</coverage-m2>
-        <heading-type>random</heading-type>
-	    </object>
+	<object-group>	
+    <range-m>10000</range-m>
+    <object>
+      <path>Models/Buildings/factory.ac</path>
+      <coverage-m2>40000000</coverage-m2>
+      <heading-type>mask</heading-type>
+    </object>
+    <object>
+      <path>Models/Buildings/big-apartment.ac</path>
+      <coverage-m2>1000000</coverage-m2>
+      <heading-type>mask</heading-type>
+    </object>
 	</object-group>
-	<object-group>
+    <object-group>
       <range-m>5000</range-m>
-	    <object>
+      <object>
         <path>Models/Residential/cube-apartment.ac</path>
         <path>Models/Residential/medium-apartment.ac</path>
-		<path>Models/Buildings/renovated-apartment.ac</path>
+        <path>Models/Buildings/renovated-apartment.ac</path>
+        <coverage-m2>100000</coverage-m2>
+        <heading-type>mask</heading-type>
+      </object>
+      <object>
+        <path>Models/Commercial/small-glass-office-building.ac</path>
+        <path>Models/Buildings/medium-glass-office-building.ac</path>
+        <path>Models/Buildings/small-modern-office.ac</path>
+        <path>Models/Buildings/small-office.ac</path>
+        <coverage-m2>100000</coverage-m2>
+        <heading-type>mask</heading-type>
+      </object>
+      <object>
+        <path>Models/Buildings/big-church.ac</path>
+        <coverage-m2>500000</coverage-m2>
+        <heading-type>mask</heading-type>
+      </object>
+      <object>
+        <path>Models/Buildings/brick-school.ac</path>
+        <path>Models/Buildings/bank-building.ac</path>
+        <coverage-m2>100000</coverage-m2>
+        <heading-type>mask</heading-type>
+      </object>
+      <object>
+        <path>Models/Buildings/water-tower.ac</path>
         <coverage-m2>1000000</coverage-m2>
         <heading-type>random</heading-type>
-	    </object>
-	    <object>
-        <path>Models/Commercial/small-glass-office-building.ac</path>
-		<path>Models/Buildings/medium-glass-office-building.ac</path>
-		<path>Models/Buildings/small-modern-office.ac</path>
-		<path>Models/Buildings/small-office.ac</path>
-        <coverage-m2>500000</coverage-m2>
-        <heading-type>random</heading-type>
-	    </object>
-	    <object>
-		<path>Models/Buildings/big-church.ac</path>
-		<coverage-m2>5000000</coverage-m2>
-        <heading-type>random</heading-type>
-	    </object>
-	    <object>
-		<path>Models/Buildings/brick-school.ac</path>
-		<path>Models/Buildings/bank-building.ac</path>
-		<coverage-m2>4000000</coverage-m2>
-        <heading-type>random</heading-type>
-	    </object>
-	    <object>
-		<path>Models/Buildings/water-tower.ac</path>
-		<coverage-m2>100000000</coverage-m2>
-        <heading-type>random</heading-type>
-	    </object>
-	</object-group>
-    <wood-coverage>250000.0</wood-coverage>
-    <wood-size>5000.0</wood-size>
-	<tree-density>2000.0</tree-density>
+      </object>
+    </object-group>
+    <wood-coverage>10000.0</wood-coverage>
     <tree-texture>Textures/Trees/mixed-summer.png</tree-texture>
 	<tree-varieties>8</tree-varieties>
 	<tree-range-m alias="/params/forest/tree-range-m"/>
@@ -1441,6 +1448,8 @@ Shared parameters for various materials.
       <texture>Terrain/city2.png</texture>
       <texture n="2">Terrain/city2-relief-light.png</texture>
 	</texture-set>
+	<object-mask>Terrain/city1.mask.png</object-mask>
+	<object-mask>Terrain/city2.mask.png</object-mask>
     <!--
   <texture-set>
    <texture>Terrain/city3.png</texture>
@@ -1460,23 +1469,23 @@ Shared parameters for various materials.
       <range-m>10000</range-m>
 	    <object>
 		<path>Models/Buildings/oil-tanks.ac</path>
-		<coverage-m2>10000000</coverage-m2>
+		<coverage-m2>1000000</coverage-m2>
 		<heading-type>random</heading-type>
 	    </object>
 	    <object>
 		<path>Models/Buildings/factory.ac</path>
-		<coverage-m2>4000000</coverage-m2>
-        <heading-type>random</heading-type>
+		<coverage-m2>1000000</coverage-m2>
+        <heading-type>mask</heading-type>
 	    </object>
 	    <object>
         <path>Models/Industrial/Zone-Indus-long-ba.ac</path>
         <coverage-m2>4000000</coverage-m2>
-        <heading-type>random</heading-type>
+        <heading-type>mask</heading-type>
 	    </object>
 	    <object>
         <path>Models/Industrial/Zone-Indus-ba.ac</path>
         <coverage-m2>4000000</coverage-m2>
-        <heading-type>random</heading-type>
+        <heading-type>mask</heading-type>
 	    </object>
     </object-group>
     <object-group>
@@ -1485,23 +1494,21 @@ Shared parameters for various materials.
 		<path>Models/Buildings/medium-glass-office-building.ac</path>
 		<path>Models/Buildings/small-modern-office.ac</path>
 		<path>Models/Buildings/small-office.ac</path>
-        <coverage-m2>500000</coverage-m2>
-        <heading-type>random</heading-type>
+        <coverage-m2>20000</coverage-m2>
+        <heading-type>mask</heading-type>
 	    </object>
 	    <object>
 		<path>Models/Buildings/water-tower.ac</path>
-		<coverage-m2>100000000</coverage-m2>
+		<coverage-m2>10000000</coverage-m2>
         <heading-type>random</heading-type>
 	    </object>
 	    <object>
         <path>Models/Commercial/Petrolstation1.ac</path>
-        <coverage-m2>10000000</coverage-m2>
-        <heading-type>random</heading-type>
+        <coverage-m2>100000</coverage-m2>
+        <heading-type>mask</heading-type>
 	    </object>
 	</object-group>
-    <wood-coverage>250000.0</wood-coverage>
-    <wood-size>5000.0</wood-size>
-	<tree-density>2000.0</tree-density>
+  <wood-coverage>50000.0</wood-coverage>
 	<tree-texture>Textures.high/Trees/mixed-summer.dds</tree-texture>
 	<tree-varieties>8</tree-varieties>
 	<tree-range-m alias="/params/forest/tree-range-m"/>
@@ -1530,6 +1537,8 @@ Shared parameters for various materials.
 	<texture>Terrain/city2.png</texture>
       <texture n="4">Terrain.winter/builtup.png</texture>
 	</texture-set>
+	<object-mask>Terrain/city1.mask.png</object-mask>
+	<object-mask>Terrain/city2.mask.png</object-mask>
     <!--
   <texture-set>
    <texture>Terrain/city3.png</texture>
@@ -1547,15 +1556,15 @@ Shared parameters for various materials.
 	</emissive>
 	<object-group>
       <range-m>10000</range-m>
-	    <object>
-        <path>Models/Buildings/big-apartment.ac</path>
-        <coverage-m2>10000000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	    <object>
-		<path>Models/Buildings/factory.ac</path>
+      <object>
+        <path>Models/Buildings/factory.ac</path>
         <coverage-m2>4000000</coverage-m2>
-        <heading-type>random</heading-type>
+        <heading-type>mask</heading-type>
+	    </object>
+      <object>
+        <path>Models/Buildings/big-apartment.ac</path>
+        <coverage-m2>400000</coverage-m2>
+        <heading-type>mask</heading-type>
 	    </object>
 	</object-group>
     <object-group>
@@ -1564,37 +1573,35 @@ Shared parameters for various materials.
         <path>Models/Residential/cube-apartment.ac</path>
         <path>Models/Residential/medium-apartment.ac</path>
         <path>Models/Buildings/renovated-apartment.ac</path>
-        <coverage-m2>1000000</coverage-m2>
-        <heading-type>random</heading-type>
+        <coverage-m2>100000</coverage-m2>
+        <heading-type>mask</heading-type>
       </object>
       <object>
         <path>Models/Commercial/small-glass-office-building.ac</path>
         <path>Models/Buildings/medium-glass-office-building.ac</path>
         <path>Models/Buildings/small-modern-office.ac</path>
         <path>Models/Buildings/small-office.ac</path>
-        <coverage-m2>500000</coverage-m2>
-        <heading-type>random</heading-type>
+        <coverage-m2>100000</coverage-m2>
+        <heading-type>mask</heading-type>
       </object>
       <object>
         <path>Models/Buildings/big-church.ac</path>
-        <coverage-m2>5000000</coverage-m2>
-        <heading-type>random</heading-type>
+        <coverage-m2>500000</coverage-m2>
+        <heading-type>mask</heading-type>
       </object>
       <object>
         <path>Models/Buildings/brick-school.ac</path>
         <path>Models/Buildings/bank-building.ac</path>
-        <coverage-m2>4000000</coverage-m2>
-        <heading-type>random</heading-type>
+        <coverage-m2>100000</coverage-m2>
+        <heading-type>mask</heading-type>
       </object>
       <object>
         <path>Models/Buildings/water-tower.ac</path>
-        <coverage-m2>100000000</coverage-m2>
+        <coverage-m2>1000000</coverage-m2>
         <heading-type>random</heading-type>
       </object>
     </object-group>
-    <wood-coverage>250000.0</wood-coverage>
-    <wood-size>5000.0</wood-size>
-	<tree-density>2000.0</tree-density>
+    <wood-coverage>25000.0</wood-coverage>
 	<tree-texture>Textures.high/Trees/mixed-summer.dds</tree-texture>
 	<tree-varieties>8</tree-varieties>
 	<tree-range-m alias="/params/forest/tree-range-m"/>
@@ -1625,6 +1632,8 @@ Shared parameters for various materials.
       <texture>Terrain/city2.png</texture>
       <texture n="4">Terrain.winter/builtup.png</texture>
 	</texture-set>
+	<object-mask>Terrain/city1.mask.png</object-mask>
+	<object-mask>Terrain/city2.mask.png</object-mask>
     <!--
   <texture-set>
    <texture>Terrain/city3.png</texture>
@@ -1644,23 +1653,23 @@ Shared parameters for various materials.
       <range-m>10000</range-m>
 	    <object>
 		<path>Models/Buildings/oil-tanks.ac</path>
-        <coverage-m2>10000000</coverage-m2>
+        <coverage-m2>1000000</coverage-m2>
 		<heading-type>random</heading-type>
 	    </object>
 	    <object>
 		<path>Models/Buildings/factory.ac</path>
-        <coverage-m2>4000000</coverage-m2>
-        <heading-type>random</heading-type>
+        <coverage-m2>1000000</coverage-m2>
+        <heading-type>mask</heading-type>
       </object>
       <object>
         <path>Models/Industrial/Zone-Indus-long-ba.ac</path>
         <coverage-m2>4000000</coverage-m2>
-        <heading-type>random</heading-type>
+        <heading-type>mask</heading-type>
       </object>
       <object>
         <path>Models/Industrial/Zone-Indus-ba.ac</path>
         <coverage-m2>4000000</coverage-m2>
-        <heading-type>random</heading-type>
+        <heading-type>mask</heading-type>
 	    </object>
 	</object-group>
     <object-group>
@@ -1669,23 +1678,21 @@ Shared parameters for various materials.
         <path>Models/Buildings/medium-glass-office-building.ac</path>
         <path>Models/Buildings/small-modern-office.ac</path>
         <path>Models/Buildings/small-office.ac</path>
-        <coverage-m2>500000</coverage-m2>
-        <heading-type>random</heading-type>
+        <coverage-m2>20000</coverage-m2>
+        <heading-type>mask</heading-type>
       </object>
       <object>
         <path>Models/Buildings/water-tower.ac</path>
-        <coverage-m2>100000000</coverage-m2>
-        <heading-type>random</heading-type>
+        <coverage-m2>1000000</coverage-m2>
+        <heading-type>mask</heading-type>
       </object>
       <object>
         <path>Models/Commercial/Petrolstation1.ac</path>
-        <coverage-m2>10000000</coverage-m2>
-        <heading-type>random</heading-type>
+        <coverage-m2>100000</coverage-m2>
+        <heading-type>mask</heading-type>
       </object>
     </object-group>
-    <wood-coverage>250000.0</wood-coverage>
-    <wood-size>5000.0</wood-size>
-	<tree-density>2000.0</tree-density>
+    <wood-coverage>25000.0</wood-coverage>
 	<tree-texture>Textures.high/Trees/mixed-summer.dds</tree-texture>
 	<tree-varieties>8</tree-varieties>
 	<tree-range-m alias="/params/forest/tree-range-m"/>
@@ -1693,7 +1700,7 @@ Shared parameters for various materials.
 	<tree-width-m>15.0</tree-width-m>
     </material>
 
-    <material>
+  <material>
 	<condition>
 	    <equals>
 		<property>sim/startup/season</property>
@@ -1703,6 +1710,7 @@ Shared parameters for various materials.
 	<name>Town</name>
 	<name>SubUrban</name>
     <texture>Terrain/Town1.png</texture>
+    <object-mask>Terrain/Town1.mask.png</object-mask>    
 	<xsize>1024</xsize>
 	<ysize>1024</ysize>
 	<light-coverage>100000.0</light-coverage>
@@ -1713,43 +1721,41 @@ Shared parameters for various materials.
 	    <a>1.0</a>
 	</emissive>
 	<object-group>
-      <range-m>10000</range-m>
-	    <object>
-		<path>Models/Buildings/water-tower.ac</path>
-		<path>Models/Buildings/oil-tanks.ac</path>
-        <coverage-m2>20000000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	    <object>
-		<path>Models/Buildings/big-church.ac</path>
-		<path>Models/Buildings/brick-school.ac</path>
-        <coverage-m2>200000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	    <object>
-		<path>Models/Buildings/shop.ac</path>
-		<path>Models/Buildings/hosshop.ac</path>
-		<path>Models/Buildings/weapshop.ac</path>
-        <coverage-m2>400000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	    <object>
-		<path>Models/Residential/germanvillagehouse1.ac</path>
-		<path>Models/Residential/MontHse1Grey_White.ac</path>
-		<path>Models/Residential/MontHse1Red_Tile_Yellow.ac</path>
-        <coverage-m2>30000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	</object-group>
-    <wood-coverage>250000.0</wood-coverage>
-    <wood-size>5000.0</wood-size>
-    <tree-density>2000.0</tree-density>
+	  <range-m>10000</range-m>
+    <object>
+		  <path>Models/Buildings/water-tower.ac</path>
+		  <path>Models/Buildings/oil-tanks.ac</path>
+      <coverage-m2>2000000</coverage-m2>
+      <heading-type>random</heading-type>
+    </object>
+    <object>
+      <path>Models/Buildings/big-church.ac</path>
+      <path>Models/Buildings/brick-school.ac</path>
+      <coverage-m2>100000</coverage-m2>
+      <heading-type>mask</heading-type>
+    </object>
+    <object>
+      <path>Models/Buildings/shop.ac</path>
+      <path>Models/Buildings/hosshop.ac</path>
+      <path>Models/Buildings/weapshop.ac</path>
+      <coverage-m2>20000</coverage-m2>
+      <heading-type>mask</heading-type>
+    </object>
+    <object>
+      <path>Models/Residential/germanvillagehouse1.ac</path>
+      <path>Models/Residential/MontHse1Grey_White.ac</path>
+      <path>Models/Residential/MontHse1Red_Tile_Yellow.ac</path>
+      <coverage-m2>5000</coverage-m2>
+      <heading-type>mask</heading-type>
+    </object>
+  </object-group>
+  <wood-coverage>5000.0</wood-coverage>
 	<tree-texture>Textures.high/Trees/mixed-summer.dds</tree-texture>
 	<tree-varieties>8</tree-varieties>
 	<tree-range-m alias="/params/forest/tree-range-m"/>
-    <tree-height-m>25.0</tree-height-m>
+  <tree-height-m>25.0</tree-height-m>
 	<tree-width-m>15.0</tree-width-m>
-    </material>
+  </material>
 
     <material>
 	<condition>
@@ -2043,6 +2049,9 @@ Shared parameters for various materials.
     <texture>Terrain/mixedcrop1.dds</texture>
     <texture>Terrain/mixedcrop4.dds</texture>
     <texture>Terrain/mixedcrop3.dds</texture>
+    <object-mask>Terrain/mixedcrop1.mask.png</object-mask>
+    <object-mask>Terrain/mixedcrop4.mask.png</object-mask>
+    <object-mask>Terrain/mixedcrop3.mask.png</object-mask>
     <xsize>2000</xsize>
     <ysize>2000</ysize>
 	<light-coverage>2000000.0</light-coverage>
@@ -2051,24 +2060,20 @@ Shared parameters for various materials.
 	<rolling-friction>0.1</rolling-friction>
 	<bumpiness>0.7</bumpiness>
 	<load-resistance>1e30</load-resistance>
-	<object-group>
-	    <range-m>5000</range-m>
-	    <object>
-		<path>Models/Buildings/silo.ac</path>
-		<coverage-m2>5000000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	    <object>
-		<path>Models/Buildings/red-barn.ac</path>
-		<path>Models/Buildings/horse-stable.ac</path>
-		<path>Models/Buildings/cow-stable.ac</path>
-		<path>Models/Agriculture/farmhouse1.ac</path>
-		<path>Models/Agriculture/farmhouse2.ac</path>
-		<path>Models/Agriculture/farmhouse3.ac</path>
-		<coverage-m2>750000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	</object-group>
+  <object-group>
+    <range-m>5000</range-m>
+    <object>
+		  <path>Models/Buildings/silo.ac</path>
+		  <path>Models/Buildings/red-barn.ac</path>
+		  <path>Models/Buildings/horse-stable.ac</path>
+		  <path>Models/Buildings/cow-stable.ac</path>
+		  <path>Models/Agriculture/farmhouse1.ac</path>
+		  <path>Models/Agriculture/farmhouse2.ac</path>
+		  <path>Models/Agriculture/farmhouse3.ac</path>
+		  <coverage-m2>10000</coverage-m2>
+		  <heading-type>mask</heading-type>
+    </object>
+  </object-group>
 	<!--Disabled to avoid a tremendous osg performance penalty when
 	deleting scenery tiles, caused by tens of thousands of shared
        horse/cow objects. Need a better implementation!
@@ -2085,9 +2090,7 @@ Shared parameters for various materials.
 		<heading-type>random</heading-type>
 	    </object>
 	</object-group>-->
-	<wood-coverage>1000000.0</wood-coverage>
-	<wood-size>20000.0</wood-size>
-	<tree-density>4000.0</tree-density>
+	<wood-coverage>10000.0</wood-coverage>
 	<tree-texture>Textures.high/Trees/mixed-summer.dds</tree-texture>
 	<tree-varieties>8</tree-varieties>
 	<tree-range-m alias="/params/forest/tree-range-m"/>
@@ -2110,8 +2113,11 @@ Shared parameters for various materials.
 	<name>Vineyard</name>
 	<name>Rice</name>
     <texture>Terrain/irrcrop1.dds</texture>
-	<texture>Terrain/irrcrop2.dds</texture>
+    <texture>Terrain/irrcrop2.dds</texture>
     <texture>Terrain/irrcrop3.dds</texture>
+    <object-mask>Terrain/irrcrop1.mask.png</object-mask>
+    <object-mask>Terrain/irrcrop2.mask.png</object-mask>
+    <object-mask>Terrain/irrcrop3.mask.png</object-mask>
     <xsize>2000</xsize>
     <ysize>2000</ysize>
 	<light-coverage>2000000.0</light-coverage>
@@ -2120,24 +2126,20 @@ Shared parameters for various materials.
 	<rolling-friction>0.3</rolling-friction>
 	<bumpiness>0.6</bumpiness>
 	<load-resistance>1e30</load-resistance>
-	<object-group>
-	    <range-m>5000</range-m>
-	    <object>
-		<path>Models/Buildings/silo.ac</path>
-		<coverage-m2>5000000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	    <object>
-		<path>Models/Buildings/red-barn.ac</path>
-		<path>Models/Buildings/horse-stable.ac</path>
-		<path>Models/Buildings/cow-stable.ac</path>
-		<path>Models/Agriculture/farmhouse1.ac</path>
-		<path>Models/Agriculture/farmhouse2.ac</path>
-		<path>Models/Agriculture/farmhouse3.ac</path>
-		<coverage-m2>750000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	</object-group>
+  <object-group>
+    <range-m>5000</range-m>
+    <object>
+		  <path>Models/Buildings/silo.ac</path>
+		  <path>Models/Buildings/red-barn.ac</path>
+		  <path>Models/Buildings/horse-stable.ac</path>
+		  <path>Models/Buildings/cow-stable.ac</path>
+		  <path>Models/Agriculture/farmhouse1.ac</path>
+		  <path>Models/Agriculture/farmhouse2.ac</path>
+		  <path>Models/Agriculture/farmhouse3.ac</path>
+		  <coverage-m2>10000</coverage-m2>
+		  <heading-type>mask</heading-type>
+    </object>
+  </object-group>
 	<!-- Disabled to avoid a tremendous osg performance penalty when
 	deleting scenery tiles, caused by tens of thousands of shared
        horse/cow objects. Need a better implementation!
@@ -2154,7 +2156,7 @@ Shared parameters for various materials.
 		<heading-type>random</heading-type>
 	    </object>
 	</object-group>-->
-    <wood-coverage>500000.0</wood-coverage>
+    <wood-coverage>10000.0</wood-coverage>
     <tree-texture>Textures.high/Trees/mixed-summer.dds</tree-texture>
 	<tree-varieties>8</tree-varieties>
 	<tree-range-m alias="/params/forest/tree-range-m"/>
@@ -2188,6 +2190,10 @@ Shared parameters for various materials.
       <texture>Terrain/countryside4.green.dds</texture>
 	    <texture n="4">Terrain.winter/countryside4.winter.dds</texture>
 	</texture-set>
+	<object-mask>Terrain/countryside1.green.mask.png</object-mask>
+	<object-mask>Terrain/countryside2.green.mask.png</object-mask>
+	<object-mask>Terrain/countryside3.green.mask.png</object-mask>
+	<object-mask>Terrain/countryside4.green.mask.png</object-mask>
 	<xsize>1800</xsize>
 	<ysize>1800</ysize>
 	<solid>1</solid>
@@ -2196,24 +2202,20 @@ Shared parameters for various materials.
 	<bumpiness>0.6</bumpiness>
 	<load-resistance>1e30</load-resistance>
 	<light-coverage>2000000.0</light-coverage>
-	<object-group>
-	    <range-m>5000</range-m>
-	    <object>
-		<path>Models/Buildings/silo.ac</path>
-		<coverage-m2>5000000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	    <object>
-		<path>Models/Buildings/red-barn.ac</path>
-		<path>Models/Buildings/horse-stable.ac</path>
-		<path>Models/Buildings/cow-stable.ac</path>
-		<path>Models/Agriculture/farmhouse1.ac</path>
-		<path>Models/Agriculture/farmhouse2.ac</path>
-		<path>Models/Agriculture/farmhouse3.ac</path>
-		<coverage-m2>750000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	</object-group>
+  <object-group>
+    <range-m>5000</range-m>
+    <object>
+		  <path>Models/Buildings/silo.ac</path>
+		  <path>Models/Buildings/red-barn.ac</path>
+		  <path>Models/Buildings/horse-stable.ac</path>
+		  <path>Models/Buildings/cow-stable.ac</path>
+		  <path>Models/Agriculture/farmhouse1.ac</path>
+		  <path>Models/Agriculture/farmhouse2.ac</path>
+		  <path>Models/Agriculture/farmhouse3.ac</path>
+		  <coverage-m2>10000</coverage-m2>
+		  <heading-type>mask</heading-type>
+    </object>
+  </object-group>
 	<!--Disabled to avoid a tremendous osg performance penalty when
 	deleting scenery tiles, caused by tens of thousands of shared
        horse/cow objects. Need a better implementation!
@@ -2230,9 +2232,7 @@ Shared parameters for various materials.
 		<heading-type>random</heading-type>
 	    </object>
 	</object-group>-->
-    <wood-coverage>500000.0</wood-coverage>
-	<wood-size>20000.0</wood-size>
-	<tree-density>5000.0</tree-density>
+    <wood-coverage>10000.0</wood-coverage>
 	<tree-texture>Textures.high/Trees/mixed-summer.dds</tree-texture>
 	<tree-varieties>8</tree-varieties>
 	<tree-range-m alias="/params/forest/tree-range-m"/>
@@ -2250,6 +2250,7 @@ Shared parameters for various materials.
 	<name>NaturalCrop</name>
     <effect>Effects/transition-base-rock</effect>
     <texture>Terrain/naturalcrop1.png</texture>
+    <object-mask>Terrain/naturalcrop1.mask.png</object-mask>
     <xsize>2000</xsize>
     <ysize>2000</ysize>
 	<solid>1</solid>
@@ -2258,9 +2259,21 @@ Shared parameters for various materials.
 	<bumpiness>0.6</bumpiness>
 	<load-resistance>1e30</load-resistance>
 	<light-coverage>2000000.0</light-coverage>
+  <object-group>
+    <range-m>5000</range-m>
+    <object>
+		  <path>Models/Buildings/silo.ac</path>
+		  <path>Models/Buildings/red-barn.ac</path>
+		  <path>Models/Buildings/horse-stable.ac</path>
+		  <path>Models/Buildings/cow-stable.ac</path>
+		  <path>Models/Agriculture/farmhouse1.ac</path>
+		  <path>Models/Agriculture/farmhouse2.ac</path>
+		  <path>Models/Agriculture/farmhouse3.ac</path>
+		  <coverage-m2>10000</coverage-m2>
+		  <heading-type>mask</heading-type>
+    </object>
+  </object-group>
 	<wood-coverage>500000.0</wood-coverage>
-	<wood-size>20000.0</wood-size>
-	<tree-density>5000.0</tree-density>
 	<tree-texture>Textures.high/Trees/mixed-summer.dds</tree-texture>
 	<tree-varieties>8</tree-varieties>
 	<tree-range-m alias="/params/forest/tree-range-m"/>
@@ -2280,7 +2293,7 @@ Shared parameters for various materials.
 	<name>CropGrass</name>
 	<name>Grassland</name>
 	<texture>Terrain/cropgrass1.dds</texture>
-    <texture>Terrain/cropgrass2.dds</texture>
+  <texture>Terrain/cropgrass2.dds</texture>
 	<xsize>1500</xsize>
 	<ysize>1500</ysize>
 	<light-coverage>2000000.0</light-coverage>
@@ -2320,8 +2333,9 @@ Shared parameters for various materials.
 	<name>GolfCourse</name>
 	<effect>Effects/transition-base-dirt</effect>
     <texture>Terrain/golfcourse1.png</texture>
-	<xsize>400</xsize>
-	<ysize>400</ysize>
+    <object-mask>Terrain/golfcourse1.mask.png</object-mask>
+	<xsize>800</xsize>
+	<ysize>800</ysize>
 	<light-coverage>2000000.0</light-coverage>
 	<diffuse>
 	    <r>0.93</r>
@@ -2341,7 +2355,7 @@ Shared parameters for various materials.
 	<rolling-friction>0.1</rolling-friction>
 	<bumpiness>0.3</bumpiness>
 	<load-resistance>1e30</load-resistance>
-	<wood-coverage>500000.0</wood-coverage>
+	<wood-coverage>5000.0</wood-coverage>
 	<tree-texture>Textures.high/Trees/mixed-summer.dds</tree-texture>
 	<tree-varieties>8</tree-varieties>
 	<tree-range-m alias="/params/forest/tree-range-m"/>
@@ -2361,6 +2375,7 @@ Shared parameters for various materials.
 	<name>AgroForest</name>
     <effect>Effects/transition-base-dirt</effect>
 	<texture>Terrain/cropwood.dds</texture>
+	<object-mask>Terrain/cropwood.mask.png</object-mask>
 	<xsize>1500</xsize>
 	<ysize>1500</ysize>
 	<light-coverage>2000000.0</light-coverage>
@@ -2369,7 +2384,7 @@ Shared parameters for various materials.
 	<rolling-friction>0.6</rolling-friction>
 	<bumpiness>0.7</bumpiness>
 	<load-resistance>10</load-resistance>
-    <wood-coverage>4000.0</wood-coverage>
+  <wood-coverage>4000.0</wood-coverage>
 	<tree-texture>Textures.high/Trees/mixed-summer.dds</tree-texture>
 	<tree-varieties>8</tree-varieties>
 	<tree-range-m alias="/params/forest/tree-range-m"/>
@@ -2608,12 +2623,16 @@ Shared parameters for various materials.
       <texture>Terrain/city2.png</texture>
       <texture n="2">Terrain/city2-relief-light.png</texture>
 	</texture-set>
+	<object-mask>Terrain/city1.mask.png</object-mask>
+	<object-mask>Terrain/city2.mask.png</object-mask>	
     <!--
   <texture-set>
    <texture>Terrain/city3.png</texture>
    <texture n="2">Terrain/city3-relief-light.png</texture>
   </texture-set>
 -->
+	<object-mask>Terrain/city1.mask.png</object-mask>
+	<object-mask>Terrain/city2.mask.png</object-mask>
     <xsize>1000</xsize>
     <ysize>1000</ysize>
 	<light-coverage>100000.0</light-coverage>
@@ -2633,12 +2652,12 @@ Shared parameters for various materials.
 	    <object>
         <path>Models/Buildings/big-apartment.ac</path>
         <coverage-m2>10000000</coverage-m2>
-        <heading-type>random</heading-type>
+        <heading-type>mask</heading-type>
       </object>
       <object>
 		<path>Models/Buildings/factory.ac</path>
 		<coverage-m2>4000000</coverage-m2>
-        <heading-type>random</heading-type>
+        <heading-type>mask</heading-type>
 	    </object>
 	</object-group>
 	<object-group>
@@ -2648,7 +2667,7 @@ Shared parameters for various materials.
         <path>Models/Residential/medium-apartment.ac</path>
         <path>Models/Buildings/renovated-apartment.ac</path>
         <coverage-m2>1000000</coverage-m2>
-        <heading-type>random</heading-type>
+        <heading-type>mask</heading-type>
 	    </object>
 	    <object>
         <path>Models/Commercial/small-glass-office-building.ac</path>
@@ -2656,18 +2675,18 @@ Shared parameters for various materials.
         <path>Models/Buildings/small-modern-office.ac</path>
         <path>Models/Buildings/small-office.ac</path>
         <coverage-m2>500000</coverage-m2>
-        <heading-type>random</heading-type>
+        <heading-type>mask</heading-type>
 	    </object>
 	    <object>
         <path>Models/Buildings/big-church.ac</path>
         <coverage-m2>5000000</coverage-m2>
-        <heading-type>random</heading-type>
+        <heading-type>mask</heading-type>
 	    </object>
 	    <object>
         <path>Models/Buildings/brick-school.ac</path>
         <path>Models/Buildings/bank-building.ac</path>
         <coverage-m2>4000000</coverage-m2>
-        <heading-type>random</heading-type>
+        <heading-type>mask</heading-type>
 	    </object>
 	    <object>
         <path>Models/Buildings/water-tower.ac</path>
@@ -2676,8 +2695,6 @@ Shared parameters for various materials.
 	    </object>
     </object-group>
     <wood-coverage>250000.0</wood-coverage>
-    <wood-size>5000.0</wood-size>
-    <tree-density>2000.0</tree-density>
     <tree-texture>Textures.high/Trees/mixed-winter.png</tree-texture>
     <tree-varieties>8</tree-varieties>
     <tree-range-m alias="/params/forest/tree-range-m"/>
@@ -2707,6 +2724,8 @@ Shared parameters for various materials.
       <texture>Terrain/city2.png</texture>
       <texture n="2">Terrain/city2-relief-light.png</texture>
     </texture-set>
+	<object-mask>Terrain/city1.mask.png</object-mask>
+	<object-mask>Terrain/city2.mask.png</object-mask>
     <!--
   <texture-set>
    <texture>Terrain/city3.png</texture>
@@ -2726,23 +2745,23 @@ Shared parameters for various materials.
       <range-m>10000</range-m>
 	    <object>
         <path>Models/Buildings/oil-tanks.ac</path>
-        <coverage-m2>10000000</coverage-m2>
+        <coverage-m2>1000000</coverage-m2>
         <heading-type>random</heading-type>
 	    </object>
 	    <object>
         <path>Models/Buildings/factory.ac</path>
-        <coverage-m2>4000000</coverage-m2>
-        <heading-type>random</heading-type>
+        <coverage-m2>1000000</coverage-m2>
+        <heading-type>mask</heading-type>
 	    </object>
 	    <object>
         <path>Models/Industrial/Zone-Indus-long-ba.ac</path>
         <coverage-m2>4000000</coverage-m2>
-        <heading-type>random</heading-type>
+        <heading-type>mask</heading-type>
 	    </object>
 	    <object>
         <path>Models/Industrial/Zone-Indus-ba.ac</path>
         <coverage-m2>4000000</coverage-m2>
-        <heading-type>random</heading-type>
+        <heading-type>mask</heading-type>
 	    </object>
     </object-group>
     <object-group>
@@ -2752,7 +2771,7 @@ Shared parameters for various materials.
 		<path>Models/Buildings/small-modern-office.ac</path>
 		<path>Models/Buildings/small-office.ac</path>
         <coverage-m2>500000</coverage-m2>
-        <heading-type>random</heading-type>
+        <heading-type>mask</heading-type>
 	    </object>
 	    <object>
 		<path>Models/Buildings/water-tower.ac</path>
@@ -2762,13 +2781,11 @@ Shared parameters for various materials.
 	    <object>
         <path>Models/Commercial/Petrolstation1.ac</path>
         <coverage-m2>10000000</coverage-m2>
-        <heading-type>random</heading-type>
+        <heading-type>mask</heading-type>
 	    </object>
 	</object-group>
 	<wood-coverage>250000.0</wood-coverage>
-	<wood-size>5000.0</wood-size>
-    <tree-density>2000.0</tree-density>
-    <tree-texture>Textures.high/Trees/mixed-winter.png</tree-texture>
+  <tree-texture>Textures.high/Trees/mixed-winter.png</tree-texture>
 	<tree-varieties>8</tree-varieties>
 	<tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>25.0</tree-height-m>
@@ -2785,6 +2802,7 @@ Shared parameters for various materials.
 	<name>Town</name>
 	<name>SubUrban</name>
     <texture>Terrain.winter/Town1.png</texture>
+    <object-mask>Terrain/Town1.mask.png</object-mask>    
 	<xsize>1024</xsize>
 	<ysize>1024</ysize>
 	<light-coverage>100000.0</light-coverage>
@@ -2795,47 +2813,37 @@ Shared parameters for various materials.
 	    <a>1.0</a>
 	</emissive>
 	<object-group>
-	    <range-m>10000</range-m>
-	    <object>
-		<path>Models/Buildings/oil-tanks.ac</path>
-        <coverage-m2>20000000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	    <object>
-		<path>Models/Buildings/big-church.ac</path>
-		<coverage-m2>900000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	    <object>
-		<path>Models/Buildings/shop.ac</path>
-		<coverage-m2>400000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	    <object>
-		<path>Models/Buildings/hosshop.ac</path>
-		<coverage-m2>750000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	    <object>
-		<path>Models/Buildings/weapshop.ac</path>
-		<coverage-m2>400000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	    <object>
-		<path>Models/Buildings/brick-school.ac</path>
-		<coverage-m2>2850000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	    <object>
-		<path>Models/Buildings/water-tower.ac</path>
-		<coverage-m2>100000000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	</object-group>
-	<wood-coverage>250000.0</wood-coverage>
-	<wood-size>5000.0</wood-size>
-	<tree-density>2000.0</tree-density>
-    <tree-texture>Textures.high/Trees/mixed-winter.png</tree-texture>
+	  <range-m>10000</range-m>
+    <object>
+		  <path>Models/Buildings/water-tower.ac</path>
+		  <path>Models/Buildings/oil-tanks.ac</path>
+      <coverage-m2>2000000</coverage-m2>
+      <heading-type>random</heading-type>
+    </object>
+    <object>
+      <path>Models/Buildings/big-church.ac</path>
+      <path>Models/Buildings/brick-school.ac</path>
+      <coverage-m2>100000</coverage-m2>
+      <heading-type>mask</heading-type>
+    </object>
+    <object>
+      <path>Models/Buildings/shop.ac</path>
+      <path>Models/Buildings/hosshop.ac</path>
+      <path>Models/Buildings/weapshop.ac</path>
+      <coverage-m2>20000</coverage-m2>
+      <heading-type>mask</heading-type>
+    </object>
+    <object>
+      <path>Models/Residential/germanvillagehouse1.ac</path>
+      <path>Models/Residential/MontHse1Grey_White.ac</path>
+      <path>Models/Residential/MontHse1Red_Tile_Yellow.ac</path>
+      <coverage-m2>5000</coverage-m2>
+      <heading-type>mask</heading-type>
+    </object>
+  </object-group>
+
+	<wood-coverage>5000.0</wood-coverage>
+  <tree-texture>Textures.high/Trees/mixed-winter.png</tree-texture>
 	<tree-varieties>8</tree-varieties>
 	<tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>25.0</tree-height-m>
@@ -3089,6 +3097,9 @@ Shared parameters for various materials.
     <texture>Terrain.winter/mixedcrop1.png</texture>
     <texture>Terrain.winter/mixedcrop4.png</texture>
     <texture>Terrain.winter/mixedcrop3.png</texture>
+    <object-mask>Terrain/mixedcrop1.mask.png</object-mask>
+    <object-mask>Terrain/mixedcrop4.mask.png</object-mask>
+    <object-mask>Terrain/mixedcrop3.mask.png</object-mask>
 	<xsize>2000</xsize>
 	<ysize>2000</ysize>
 	<light-coverage>2000000.0</light-coverage>
@@ -3097,24 +3108,20 @@ Shared parameters for various materials.
 	<rolling-friction>0.1</rolling-friction>
 	<bumpiness>0.7</bumpiness>
 	<load-resistance>1e30</load-resistance>
-	<object-group>
-	    <range-m>5000</range-m>
-	    <object>
-		<path>Models/Buildings/silo.ac</path>
-		<coverage-m2>5000000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	    <object>
-		<path>Models/Buildings/red-barn.ac</path>
-		<path>Models/Buildings/horse-stable.ac</path>
-		<path>Models/Buildings/cow-stable.ac</path>
-		<path>Models/Agriculture/farmhouse1.ac</path>
-		<path>Models/Agriculture/farmhouse2.ac</path>
-		<path>Models/Agriculture/farmhouse3.ac</path>
-		<coverage-m2>750000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	</object-group>
+  <object-group>
+    <range-m>5000</range-m>
+    <object>
+		  <path>Models/Buildings/silo.ac</path>
+		  <path>Models/Buildings/red-barn.ac</path>
+		  <path>Models/Buildings/horse-stable.ac</path>
+		  <path>Models/Buildings/cow-stable.ac</path>
+		  <path>Models/Agriculture/farmhouse1.ac</path>
+		  <path>Models/Agriculture/farmhouse2.ac</path>
+		  <path>Models/Agriculture/farmhouse3.ac</path>
+		  <coverage-m2>10000</coverage-m2>
+		  <heading-type>mask</heading-type>
+    </object>
+  </object-group>
 	<!-- Disabled to avoid a tremendous osg performance penalty when
 	deleting scenery tiles, caused by tens of thousands of shared
        horse/cow objects. Need a better implementation!
@@ -3157,6 +3164,9 @@ Shared parameters for various materials.
     <texture>Terrain.winter/irrcrop1.png</texture>
     <texture>Terrain.winter/irrcrop2.png</texture>
     <texture>Terrain.winter/irrcrop3.png</texture>
+    <object-mask>Terrain/irrcrop1.mask.png</object-mask>
+    <object-mask>Terrain/irrcrop2.mask.png</object-mask>
+    <object-mask>Terrain/irrcrop3.mask.png</object-mask>
 	<xsize>2000</xsize>
 	<ysize>2000</ysize>
 	<light-coverage>2000000.0</light-coverage>
@@ -3165,24 +3175,20 @@ Shared parameters for various materials.
 	<rolling-friction>0.3</rolling-friction>
 	<bumpiness>0.6</bumpiness>
 	<load-resistance>1e30</load-resistance>
-	<object-group>
-	    <range-m>5000</range-m>
-	    <object>
-		<path>Models/Buildings/silo.ac</path>
-		<coverage-m2>5000000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	    <object>
-		<path>Models/Buildings/red-barn.ac</path>
-		<path>Models/Buildings/horse-stable.ac</path>
-		<path>Models/Buildings/cow-stable.ac</path>
-		<path>Models/Agriculture/farmhouse1.ac</path>
-		<path>Models/Agriculture/farmhouse2.ac</path>
-		<path>Models/Agriculture/farmhouse3.ac</path>
-		<coverage-m2>750000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	</object-group>
+  <object-group>
+    <range-m>5000</range-m>
+    <object>
+		  <path>Models/Buildings/silo.ac</path>
+		  <path>Models/Buildings/red-barn.ac</path>
+		  <path>Models/Buildings/horse-stable.ac</path>
+		  <path>Models/Buildings/cow-stable.ac</path>
+		  <path>Models/Agriculture/farmhouse1.ac</path>
+		  <path>Models/Agriculture/farmhouse2.ac</path>
+		  <path>Models/Agriculture/farmhouse3.ac</path>
+		  <coverage-m2>10000</coverage-m2>
+		  <heading-type>mask</heading-type>
+    </object>
+  </object-group>
 	<!-- Disabled to avoid a tremendous osg performance penalty when
 	deleting scenery tiles, caused by tens of thousands of shared
        horse/cow objects. Need a better implementation!
@@ -3223,13 +3229,10 @@ Shared parameters for various materials.
     <texture >Terrain.winter/countryside2.winter.dds</texture>
     <texture >Terrain.winter/countryside3.winter.dds</texture>
     <texture >Terrain.winter/countryside3.winter.dds</texture>
-
-    <!--<texture>Terrain.winter/countryside1.winter.dds</texture>
-    <texture>Terrain.winter/countryside2.winter.dds</texture>
-    <texture>Terrain.winter/drycrop1.png</texture>
-    <texture>Terrain.winter/drycrop2.png</texture>
-    <texture>Terrain.winter/drycrop3.png</texture>
-    <texture>Terrain.winter/drycrop4.png</texture>-->
+    <object-mask>Terrain/countryside1.green.mask.png</object-mask>
+    <object-mask>Terrain/countryside2.green.mask.png</object-mask>
+    <object-mask>Terrain/countryside3.green.mask.png</object-mask>
+    <object-mask>Terrain/countryside4.green.mask.png</object-mask>
     <xsize>1800</xsize>
     <ysize>1800</ysize>
 	<solid>1</solid>
@@ -3238,24 +3241,20 @@ Shared parameters for various materials.
 	<bumpiness>0.6</bumpiness>
 	<load-resistance>1e30</load-resistance>
 	<light-coverage>2000000.0</light-coverage>
-	<object-group>
-	    <range-m>5000</range-m>
-	    <object>
-		<path>Models/Buildings/silo.ac</path>
-		<coverage-m2>5000000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	    <object>
-		<path>Models/Buildings/red-barn.ac</path>
-		<path>Models/Buildings/horse-stable.ac</path>
-		<path>Models/Buildings/cow-stable.ac</path>
-		<path>Models/Agriculture/farmhouse1.ac</path>
-		<path>Models/Agriculture/farmhouse2.ac</path>
-		<path>Models/Agriculture/farmhouse3.ac</path>
-		<coverage-m2>750000</coverage-m2>
-		<heading-type>random</heading-type>
-	    </object>
-	</object-group>
+  <object-group>
+    <range-m>5000</range-m>
+    <object>
+		  <path>Models/Buildings/silo.ac</path>
+		  <path>Models/Buildings/red-barn.ac</path>
+		  <path>Models/Buildings/horse-stable.ac</path>
+		  <path>Models/Buildings/cow-stable.ac</path>
+		  <path>Models/Agriculture/farmhouse1.ac</path>
+		  <path>Models/Agriculture/farmhouse2.ac</path>
+		  <path>Models/Agriculture/farmhouse3.ac</path>
+		  <coverage-m2>10000</coverage-m2>
+		  <heading-type>mask</heading-type>
+    </object>
+  </object-group>
 	<!-- Disabled to avoid a tremendous osg performance penalty when
 	deleting scenery tiles, caused by tens of thousands of shared
        horse/cow objects. Need a better implementation!
@@ -3291,6 +3290,7 @@ Shared parameters for various materials.
 	</condition>
 	<name>NaturalCrop</name>
     <texture>Terrain.winter/naturalcrop1.png</texture>
+    <object-mask>Terrain/naturalcrop1.mask.png</object-mask>
 	<xsize>2000</xsize>
 	<ysize>2000</ysize>
 	<solid>1</solid>
@@ -3299,9 +3299,21 @@ Shared parameters for various materials.
 	<bumpiness>0.6</bumpiness>
 	<load-resistance>1e30</load-resistance>
 	<light-coverage>2000000.0</light-coverage>
+  <object-group>
+    <range-m>5000</range-m>
+    <object>
+		  <path>Models/Buildings/silo.ac</path>
+		  <path>Models/Buildings/red-barn.ac</path>
+		  <path>Models/Buildings/horse-stable.ac</path>
+		  <path>Models/Buildings/cow-stable.ac</path>
+		  <path>Models/Agriculture/farmhouse1.ac</path>
+		  <path>Models/Agriculture/farmhouse2.ac</path>
+		  <path>Models/Agriculture/farmhouse3.ac</path>
+		  <coverage-m2>10000</coverage-m2>
+		  <heading-type>mask</heading-type>
+    </object>
+  </object-group>
 	<wood-coverage>150000.0</wood-coverage>
-	<wood-size>10000.0</wood-size>
-	<tree-density>5000.0</tree-density>
     <tree-texture>Textures.high/Trees/mixed-winter.png</tree-texture>
 	<tree-varieties>8</tree-varieties>
 	<tree-range-m alias="/params/forest/tree-range-m"/>
@@ -3362,8 +3374,9 @@ Shared parameters for various materials.
 	</condition>
 	<name>GolfCourse</name>
     <texture>Terrain.winter/golfcourse.png</texture>
-    <xsize>400</xsize>
-    <ysize>400</ysize>
+    <object-mask>Terrain/golfcourse1.mask.png</object-mask>
+    <xsize>800</xsize>
+    <ysize>800</ysize>
 	<light-coverage>2000000.0</light-coverage>
 	<diffuse>
 	    <r>0.93</r>
@@ -3383,9 +3396,7 @@ Shared parameters for various materials.
 	<rolling-friction>0.1</rolling-friction>
 	<bumpiness>0.3</bumpiness>
 	<load-resistance>1e30</load-resistance>
-	<wood-coverage>150000.0</wood-coverage>
-	<wood-size>10000.0</wood-size>
-	<tree-density>5000.0</tree-density>
+	<wood-coverage>5000.0</wood-coverage>
     <tree-texture>Textures.high/Trees/mixed-winter.png</tree-texture>
 	<tree-varieties>8</tree-varieties>
 	<tree-range-m alias="/params/forest/tree-range-m"/>
@@ -3403,6 +3414,7 @@ Shared parameters for various materials.
 	<name>CropWoodCover</name>
 	<name>AgroForest</name>
     <texture>Terrain.winter/cropwood.png</texture>
+	<object-mask>Terrain/cropwood.mask.png</object-mask>
 	<xsize>2000</xsize>
 	<ysize>2000</ysize>
 	<light-coverage>2000000.0</light-coverage>

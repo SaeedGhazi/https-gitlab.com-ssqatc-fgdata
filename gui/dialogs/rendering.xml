@@ -456,9 +456,6 @@
 			<group>
 				<layout>hbox</layout>
 				<text>
-					<enable>
-						<property>/sim/rendering/shaders/quality-level</property>
-					</enable>
 					<label>Experimental effects</label>
 					<halign>left</halign>
 					<color>
@@ -476,9 +473,6 @@
 				<layout>vbox</layout>
 				<checkbox>
 					<halign>left</halign>
-					<enable>
-						<property>/sim/rendering/shaders/quality-level</property>
-					</enable>
 					<label>Skydome scattering</label>
 					<name>skydome-scattering</name>
 					<property>/sim/rendering/shaders/skydome</property>
@@ -495,19 +489,13 @@
 				<text>
 					<label>Mie factor</label>
 					<enable>
-						<and>
-							<property>/sim/rendering/shaders/quality-level</property>
-							<property>/sim/rendering/shaders/skydome</property>
-						</and>
+						<property>/sim/rendering/shaders/skydome</property>
 					</enable>
 				</text>
 				<slider>
 					<name>mie-factor</name>
 					<enable>
-						<and>
-							<property>/sim/rendering/shaders/quality-level</property>
-							<property>/sim/rendering/shaders/skydome</property>
-						</and>
+						<property>/sim/rendering/shaders/skydome</property>
 					</enable>
 					<min>0.0</min>
 					<max>0.01</max>
@@ -520,10 +508,7 @@
 				</slider>
 				<text>
 					<enable>
-						<and>
-							<property>/sim/rendering/shaders/quality-level</property>
-							<property>/sim/rendering/shaders/skydome</property>
-						</and>
+						<property>/sim/rendering/shaders/skydome</property>
 					</enable>
 					<label>12345678</label>
 					<format>%.3f</format>
@@ -538,19 +523,13 @@
 				<text>
 					<label>Rayleigh factor</label>
 					<enable>
-						<and>
-							<property>/sim/rendering/shaders/quality-level</property>
-							<property>/sim/rendering/shaders/skydome</property>
-						</and>
+						<property>/sim/rendering/shaders/skydome</property>
 					</enable>
 				</text>
 				<slider>
 					<name>rayleigh-factor</name>
 					<enable>
-						<and>
-							<property>/sim/rendering/shaders/quality-level</property>
-							<property>/sim/rendering/shaders/skydome</property>
-						</and>
+						<property>/sim/rendering/shaders/skydome</property>
 					</enable>
 					<min>0.0</min>
 					<max>0.001</max>
@@ -563,10 +542,7 @@
 				</slider>
 				<text>
 					<enable>
-						<and>
-							<property>/sim/rendering/shaders/quality-level</property>
-							<property>/sim/rendering/shaders/skydome</property>
-						</and>
+						<property>/sim/rendering/shaders/skydome</property>
 					</enable>
 					<label>12345678</label>
 					<format>%.4f</format>
@@ -581,19 +557,13 @@
 				<text>
 					<label>Density factor</label>
 					<enable>
-						<and>
-							<property>/sim/rendering/shaders/quality-level</property>
-							<property>/sim/rendering/shaders/skydome</property>
-						</and>
+						<property>/sim/rendering/shaders/skydome</property>
 					</enable>
 				</text>
 				<slider>
 					<name>density-factor</name>
 					<enable>
-						<and>
-							<property>/sim/rendering/shaders/quality-level</property>
-							<property>/sim/rendering/shaders/skydome</property>
-						</and>
+						<property>/sim/rendering/shaders/skydome</property>
 					</enable>
 					<min>0.0</min>
 					<max>1.0</max>
@@ -606,10 +576,7 @@
 				</slider>
 				<text>
 					<enable>
-						<and>
-							<property>/sim/rendering/shaders/quality-level</property>
-							<property>/sim/rendering/shaders/skydome</property>
-						</and>
+						<property>/sim/rendering/shaders/skydome</property>
 					</enable>
 					<label>12345678</label>
 					<format>%.1f</format>

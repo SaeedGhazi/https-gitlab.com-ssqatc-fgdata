@@ -103,10 +103,9 @@ Started September 2000 by David Megginson, david@megginson.com
 				<ai-detailed type="double" userarchive="y">10000</ai-detailed>
 				<!-- ai-bare type="double" userarchive="y">10000</ai-bare -->
 			</static-lod>
-			<random-objects type="bool"
-											userarchive="y">true</random-objects>
-			<random-vegetation type="bool"
-												 userarchive="y">true</random-vegetation>
+			<random-objects type="bool" userarchive="y">true</random-objects>
+			<random-vegetation type="bool" userarchive="y">true</random-vegetation>
+			<vegetation-density type="double" userarchive="y">1.0</vegetation-density>
 			<horizon-effect type="bool"
 											userarchive="y">false</horizon-effect>
 			<point-sprites type="bool"

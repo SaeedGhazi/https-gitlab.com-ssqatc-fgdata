@@ -105,6 +105,7 @@ $Id$
 <PropertyList>
 
 	<name>Saitek X52 Pro Flight Control System</name>
+	<name>Saitek X52 Pro Flight Controller</name>
 	<name>Saitek Saitek X52 Pro Flight Control System</name>
 
 	<!-- Custom section for storing some properties, based on Aviator.xml -->

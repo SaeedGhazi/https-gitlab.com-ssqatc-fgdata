@@ -80,17 +80,10 @@ Properties currently used:
     sub-entries: name, left (default: 0.0), right (default: 1.0)
     (left and right describe the horizontal position in the texture.)
 
-  wood-coverage: The coverage of woods in m^2. A lower number means a
-    higher density of woods. A value of 0 indicates no woods.
+  wood-coverage: The coverage of trees in areas marked as woodland in 
+    m^2. A lower number means a higher density of trees. A value of 
+    0 indicates no woods.
 
-  wood-size: The average size of each wood in m^2. A lower number
-    means smaller individual woods. If not set, each wood is considered
-    to contain a single tree, causing even distribution.
-
-  tree-density: The area covered by each tree in the wood in m^2. A
-    lower number means denser individual woods. Ignored if wood-size
-    is not set.
-    
   tree-range-m: The range at which trees become visible. Note that this
     is not absolute, as trees are loaded in blocks. A lower number means
     trees will not become visible until you are closer.
@@ -116,10 +109,7 @@ Properties currently used:
     trees, which are then masked by the object-mask texture.  Partial values
     are randomly checked against, so a green value of 128 (0.5) means that 
     if the wood-coverage indicates that a tree is located at that point,
-    it only has a 50% chance of being added. Finally, note that if an
-    object-mask is defined, the tree-density and wood-size values are ignored,
-    and trees are placed evenly using theh wood-coverage value and
-    masked. 
+    it only has a 50% chance of being added. 
 
    ambient, diffuse, specular, emissive, and shininess are copied into the
    parameter section of the effect created for this material.
@@ -1197,7 +1187,6 @@ Shared parameters for various materials.
     </object>
   </object-group>
   <wood-coverage>10000.0</wood-coverage>
-  <tree-density>2000.0</tree-density>
   <tree-texture>Textures/Trees/mixed-summer.png</tree-texture>
   <tree-varieties>8</tree-varieties>
   <tree-range-m alias="/params/forest/tree-range-m"/>
@@ -1700,6 +1689,7 @@ Shared parameters for various materials.
   </condition>
   <name>NaturalCrop</name>
   <texture>Terrain/naturalcrop1.png</texture>
+  <object-mask>Terrain/naturalcrop1.mask.png</object-mask> 
   <xsize>2000</xsize>
   <ysize>2000</ysize>
   <solid>1</solid>
@@ -1708,9 +1698,21 @@ Shared parameters for various materials.
   <bumpiness>0.6</bumpiness>
   <load-resistance>1e30</load-resistance>
   <light-coverage>2000000.0</light-coverage>
-  <wood-coverage>500000.0</wood-coverage>
-  <wood-size>20000.0</wood-size>
-  <tree-density>5000.0</tree-density>
+  <object-group>
+    <range-m>5000</range-m>
+    <object>
+      <path>Models/Buildings/silo.ac</path>
+      <path>Models/Buildings/red-barn.ac</path>
+      <path>Models/Buildings/horse-stable.ac</path>
+      <path>Models/Buildings/cow-stable.ac</path>
+      <path>Models/Agriculture/farmhouse1.ac</path>
+      <path>Models/Agriculture/farmhouse2.ac</path>
+      <path>Models/Agriculture/farmhouse3.ac</path>
+      <coverage-m2>10000</coverage-m2>
+      <heading-type>mask</heading-type>
+    </object>
+  </object-group>
+  <wood-coverage>10000.0</wood-coverage>
   <tree-texture>Textures/Trees/mixed-summer.png</tree-texture>
   <tree-varieties>8</tree-varieties>
   <tree-range-m alias="/params/forest/tree-range-m"/>
@@ -1753,7 +1755,7 @@ Shared parameters for various materials.
   <rolling-friction>0.1</rolling-friction>
   <bumpiness>0.3</bumpiness>
   <load-resistance>1e30</load-resistance>
-  <wood-coverage>500000.0</wood-coverage>
+  <wood-coverage>150000.0</wood-coverage>
   <tree-texture>Textures/Trees/mixed-summer.png</tree-texture>
   <tree-varieties>8</tree-varieties>
   <tree-range-m alias="/params/forest/tree-range-m"/>
@@ -2607,6 +2609,7 @@ Shared parameters for various materials.
   </condition>
   <name>NaturalCrop</name>
   <texture>Terrain.winter/naturalcrop1.png</texture>
+  <object-mask>Terrain/naturalcrop1.mask.png</object-mask>
   <xsize>2000</xsize>
   <ysize>2000</ysize>
   <solid>1</solid>
@@ -2615,9 +2618,21 @@ Shared parameters for various materials.
   <bumpiness>0.6</bumpiness>
   <load-resistance>1e30</load-resistance>
   <light-coverage>2000000.0</light-coverage>
-  <wood-coverage>150000.0</wood-coverage>
-  <wood-size>10000.0</wood-size>
-  <tree-density>5000.0</tree-density>
+  <object-group>
+    <range-m>5000</range-m>
+    <object>
+      <path>Models/Buildings/silo.ac</path>
+      <path>Models/Buildings/red-barn.ac</path>
+      <path>Models/Buildings/horse-stable.ac</path>
+      <path>Models/Buildings/cow-stable.ac</path>
+      <path>Models/Agriculture/farmhouse1.ac</path>
+      <path>Models/Agriculture/farmhouse2.ac</path>
+      <path>Models/Agriculture/farmhouse3.ac</path>
+      <coverage-m2>10000</coverage-m2>
+      <heading-type>mask</heading-type>
+    </object>
+  </object-group>
+  <wood-coverage>10000.0</wood-coverage>
   <tree-texture>Textures/Trees/mixed-winter.png</tree-texture>
   <tree-varieties>8</tree-varieties>
   <tree-range-m alias="/params/forest/tree-range-m"/>
@@ -2660,8 +2675,6 @@ Shared parameters for various materials.
   <bumpiness>0.3</bumpiness>
   <load-resistance>1e30</load-resistance>
   <wood-coverage>150000.0</wood-coverage>
-  <wood-size>10000.0</wood-size>
-  <tree-density>5000.0</tree-density>
   <tree-texture>Textures/Trees/mixed-winter.png</tree-texture>
   <tree-varieties>8</tree-varieties>
   <tree-range-m alias="/params/forest/tree-range-m"/>

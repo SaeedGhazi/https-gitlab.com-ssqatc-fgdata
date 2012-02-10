@@ -2,13 +2,14 @@
 <?xml-stylesheet type="text/xsl" href="joystick.xsl"?>
 <!-- Saitek AV8R/Aviator
 
-  Copyright (C) 2007 - 2011  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2007 - 2012  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is released under the GPL license v2 or later.
 -->
 <PropertyList>
 
- <name>Saitek AV8R Joystick</name>
- <name>Saitek AV8R Classic Stick</name>
+ <name type="string">Saitek AV8R Joystick</name>
+ <name type="string">Saitek AV8R Classic Stick</name>
+ <name type="string">Saitek Aviator Stick</name>
 
  <nasal>
   <script>

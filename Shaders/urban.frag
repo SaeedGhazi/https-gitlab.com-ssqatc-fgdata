@@ -244,7 +244,7 @@ void main (void)
     finalColor.rgb = fog_Func(finalColor.rgb, fogType);
     gl_FragColor = finalColor;
 
-    if (dot(normal,-V) > 0.017) {
+    if (dot(normal,-V) > 0.1) {
         vec4 iproj = gl_ProjectionMatrix * p;
         iproj /= iproj.w;
         gl_FragDepth = (iproj.z+1.0)/2.0;

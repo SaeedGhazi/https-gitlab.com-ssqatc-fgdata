@@ -22,6 +22,12 @@ uniform float snowlevel; // From /sim/rendering/snow-level-m
 const float scale = 1.0;
 int linear_search_steps = 10;
 
+////fog "include" /////
+uniform int fogType;
+
+vec3 fog_Func(vec3 color, int type);
+//////////////////////
+
 float ray_intersect(sampler2D reliefMap, vec2 dp, vec2 ds)
 {
 
@@ -89,13 +95,13 @@ void main (void)
 
 	vec4 basecolor = texture2D(SampleTex, rawpos.xy*0.000344);
 	vec4 basecolor2 = texture2D(SampleTex2, rawpos.xy*0.000144);
-	
+
 	basecolor = texture1D(ColorsTex, basecolor.r+0.0);
-	
+
 	vec4 noisevec   = texture3D(NoiseTex, (rawpos.xyz)*0.01*scale);
 
 	vec4 nvL   = texture3D(NoiseTex, (rawpos.xyz)*0.00066*scale);
-	
+
 	float vegetationlevel = (rawpos.z)+nvL[2]*3000.0;
 
 	const float LOG2 = 1.442695;
@@ -113,20 +119,20 @@ void main (void)
 
 	n += noisevec[2]*0.8;
 	n += noisevec[3]*2.1;
-	
+
 	//very low n/biasFactor mix, to keep forest color
 	n = mix(0.05, n, biasFactor);
-	
+
 	vec4 c1;
 	c1 = basecolor * vec4(smoothstep(-1.3, 0.5, n), smoothstep(-1.3, 0.5, n), smoothstep(-2.0, 0.9, n), 0.0);
-	
+
 	vec4 c2;
 	c2 = basecolor2 * vec4(smoothstep(-1.3, 0.5, n), smoothstep(-1.3, 0.5, n), smoothstep(-2.0, 0.9, n), 0.0);
-	
+
 	N = normalize(N.x * VTangent + N.y * VBinormal + N.z * VNormal);
 	vec3 l = gl_LightSource[0].position.xyz;
 	vec3 diffuse;
-	
+
 	//draw floor where !steep, and another blurb for smoothing transitions
 	vec4 c3, c4, c5, c3a, c4a, c5a;
 	float subred = 1.0 - red; float subgreen = 1.0 - green; float subblue = 1.0 - blue;
@@ -135,39 +141,39 @@ void main (void)
 	c4a = mix(vec4(n-subred+0.12, n-subgreen-0.52, -n-subblue, 0.3), c1, smoothstep(0.990, 0.970, abs(normalize(Normal).z)+nvL[2]*1.32));
 	c5 = mix(c3, c4, 1.0);
 	c5a = mix(c3, c4a, 1.0);
-	
-	
+
+
 	if (vegetationlevel <= 2200.0) {
 	c1 = mix(c2, c5, clamp(0.65, n*0.1, 0.5));
 	diffuse = gl_Color.rgb * max(0.7, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
-	
+
 	if (vegetationlevel > 2200.0 && vegetationlevel < 2300.0) {
 	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.35));
 	diffuse = gl_Color.rgb * max(0.7, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
-	
+
 	if (vegetationlevel >= 2300.0 && vegetationlevel < 2480.0) {
 	c1 = mix(c2, c5a, clamp(0.65, n*0.5, 0.30));
 	diffuse = gl_Color.rgb * max(0.85, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
-	
+
 	if (vegetationlevel >= 2480.0 && vegetationlevel < 2530.0) {
 	c1 = mix(c2, c5a, clamp(0.65, n*0.5, 0.20));
 	diffuse = gl_Color.rgb * max(0.85, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
-	
+
 	if (vegetationlevel >= 2530.0 && vegetationlevel < 2670.0) {
 	c1 = mix(c2, c5, clamp(0.65, n*0.5, 0.10));
 	diffuse = gl_Color.rgb * max(0.85, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
-	
+
 	if (vegetationlevel >= 2670.0) {
 	c1 = mix(c2, c5, clamp(0.0, n*0.1, 0.4));
 	diffuse = gl_Color.rgb * max(0.85, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
-	
-	
+
+
 	//adding snow and permanent snow/glacier
 	if (vegetationlevel > snowlevel || vegetationlevel > 3100.0) {
 	c3 = mix(vec4(n+1.0, n+1.0, n+1.0, 0.0), c1, smoothstep(0.990, 0.965, abs(normalize(Normal).z)+nvL[2]*1.3));
@@ -182,8 +188,6 @@ void main (void)
 	c1 *= ambient_light;
 	vec4 finalColor = c1;
 
-	if(gl_Fog.density == 1.0)
-		fogFactor=1.0;
-
-	gl_FragColor = mix(gl_Fog.color,finalColor, fogFactor);
+	finalColor.rgb = fog_Func(finalColor.rgb, fogType);
+	gl_FragColor = finalColor;
 }

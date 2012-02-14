@@ -29,7 +29,7 @@ void main(void)
   position.xy = vec2(dot(position.xy, vec2(cr, sr)), dot(position.xy, vec2(-sr, cr)));
   position = position + gl_Color.xyz;
   gl_Position   = gl_ModelViewProjectionMatrix * vec4(position,1.0);
-//   vec3 ecPosition = vec3(gl_ModelViewMatrix * vec4(position, 1.0));
+  vec3 ecPosition = vec3(gl_ModelViewMatrix * vec4(position, 1.0));
 
   float n = dot(normalize(gl_LightSource[0].position.xyz), normalize(-ecPosition));
 

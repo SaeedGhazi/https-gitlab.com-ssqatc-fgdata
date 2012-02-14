@@ -229,10 +229,10 @@ parameters :
 			</texture-unit>
 
 			<program>
-				<vertex-shader>Shaders/include_fog.vert</vertex-shader>
-				<vertex-shader>Shaders/transition.vert</vertex-shader>
-				<fragment-shader>Shaders/include_fog.frag</fragment-shader>
-				<fragment-shader>Shaders/transition.frag</fragment-shader>
+<!-- 				<vertex-shader>Shaders/include_fog.vert</vertex-shader> -->
+				<vertex-shader n="1">Shaders/transition.vert</vertex-shader>
+				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
+				<fragment-shader n="1">Shaders/transition.frag</fragment-shader>
 			</program>
 
 			<uniform>

@@ -2,12 +2,12 @@
 
 // Ambient term comes in gl_Color.rgb.
 //
-// See http://wiki.flightgear.org/index.php/Howto:_Lightmap for details on 
+// See http://wiki.flightgear.org/index.php/Howto:_Lightmap for details on
 // how to use it.
 
 varying vec4 diffuse_term;
 varying vec3 normal;
-varying float fogCoord;
+//varying float fogCoord;
 
 uniform sampler2D texture;
 
@@ -15,6 +15,13 @@ uniform sampler2D texture;
 uniform float condition;
 uniform float lightmap_factor;
 uniform sampler2D lightmap_texture;
+
+////fog "include" /////
+uniform int fogType;
+
+vec3 fog_Func(vec3 color, int type);
+//////////////////////
+
 
 float luminance(vec3 color)
 {
@@ -53,13 +60,15 @@ void main()
     color = clamp(color, 0.0, 1.0);
     texel = texture2D(texture, gl_TexCoord[0].st);
     fragColor = color * texel + specular;
-	
+
 	// The lightmap function
 	if ( condition >= 1.0 ) {
 		vec3 lightmapTexel = texture2D(lightmap_texture, gl_TexCoord[0].st).rgb * lightmap_factor;
 		fragColor.rgb = max(fragColor.rgb, lightmapTexel * gl_FrontMaterial.diffuse.rgb * texel.rgb);
 		}
-		
-    fogFactor = exp(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord);
-    gl_FragColor = mix(gl_Fog.color, fragColor, fogFactor);
+
+   // fogFactor = exp(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord);
+   // gl_FragColor = mix(gl_Fog.color, fragColor, fogFactor);
+   fragColor.rgb = fog_Func(fragColor.rgb, fogType);
+	 gl_FragColor = fragColor;
 }

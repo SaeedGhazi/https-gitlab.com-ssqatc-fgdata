@@ -195,10 +195,12 @@
 				</internal-format>
 			</texture-unit>
 			<program>
-				<vertex-shader>Shaders/include_fog.vert</vertex-shader>
+<!-- 				<vertex-shader>Shaders/include_fog.vert</vertex-shader> -->
 				<vertex-shader>Shaders/water.vert</vertex-shader>
+				<fragment-shader>Shaders/include_fog.frag</fragment-shader>
 				<fragment-shader>Shaders/water-inland.frag</fragment-shader>
 			</program>
+
 			<uniform>
 				<name>water_reflection</name>
 				<type>sampler-2d</type>
@@ -360,6 +362,7 @@
 			</texture-unit>
 			<program>
 				<vertex-shader>Shaders/water-orig.vert</vertex-shader>
+				<fragment-shader>Shaders/include_fog.frag</fragment-shader>
 				<fragment-shader>Shaders/water-orig.frag</fragment-shader>
 			</program>
 			<uniform>
@@ -367,6 +370,50 @@
 				<type>sampler-3d</type>
 				<value type="int">0</value>
 			</uniform>
+			<!-- 			BEGIN fog include -->
+			<uniform>
+				<name>visibility</name>
+				<type>float</type>
+				<value>
+					<use>visibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>avisibility</name>
+				<type>float</type>
+				<value>
+					<use>avisibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>hazeLayerAltitude</name>
+				<type>float</type>
+				<value>
+					<use>lthickness</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>scattering</name>
+				<type>float</type>
+				<value>
+					<use>scattering</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>terminator</name>
+				<type>float</type>
+				<value>
+					<use>terminator</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>fogType</name>
+				<type>int</type>
+				<value>
+					<use>fogtype</use>
+				</value>
+			</uniform>
+			<!-- 			END fog include -->
 		</pass>
 	</technique>
 </PropertyList>

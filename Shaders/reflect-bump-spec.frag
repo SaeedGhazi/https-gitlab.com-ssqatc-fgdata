@@ -14,7 +14,7 @@ varying vec3  reflVec;
 
 varying vec4 Diffuse;
 varying float alpha;
-varying float fogCoord;
+//varying float fogCoord;
 
 uniform samplerCube Environment;
 uniform sampler2D Rainbow;
@@ -31,6 +31,12 @@ uniform float noisiness;
 uniform float ambient_correction;
 uniform float reflect_map;
 uniform float normalmap_dds;
+
+////fog "include" /////
+uniform int fogType;
+
+vec3 fog_Func(vec3 color, int type);
+//////////////////////
 
 void main (void)
 {
@@ -72,12 +78,12 @@ void main (void)
     color = clamp(color, 0.0, 1.0);
 
     // calculate the fog factor
-    const float LOG2 = 1.442695;
-    float fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
-    fogFactor = clamp(fogFactor, 0.0, 1.0);
-
-    if(gl_Fog.density == 1.0)
-        fogFactor=1.0;
+//     const float LOG2 = 1.442695;
+//     float fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
+//     fogFactor = clamp(fogFactor, 0.0, 1.0);
+//
+//     if(gl_Fog.density == 1.0)
+//         fogFactor=1.0;
 
     vec3 normal = normalize(VNormal);
     vec3 viewVec = normalize(vViewVec);
@@ -129,5 +135,7 @@ void main (void)
 
     reflColor = clamp(reflColor, 0.0, 1.0);
 
-    gl_FragColor = mix(gl_Fog.color, reflColor, fogFactor);
+//     gl_FragColor = mix(gl_Fog.color, reflColor, fogFactor);
+		reflColor.rgb = fog_Func(reflColor.rgb, fogType);
+		gl_FragColor = reflColor;
 }

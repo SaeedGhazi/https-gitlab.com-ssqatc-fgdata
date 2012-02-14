@@ -5,13 +5,13 @@
 // color - xyz of tree quad origin, replicated 4 times.
 #version 120
 //varying float fogCoord;
-varying vec3 PointPos;
+// varying vec3 PointPos;
 //varying vec4 EyePos;
-////fog "include"////////
-uniform int fogType;
-
-void fog_Func(int type);
-/////////////////////////
+// ////fog "include"////////
+// uniform int fogType;
+//
+// void fog_Func(int type);
+// /////////////////////////
 
 void main(void)
 {
@@ -29,7 +29,7 @@ void main(void)
   position.xy = vec2(dot(position.xy, vec2(cr, sr)), dot(position.xy, vec2(-sr, cr)));
   position = position + gl_Color.xyz;
   gl_Position   = gl_ModelViewProjectionMatrix * vec4(position,1.0);
-  vec3 ecPosition = vec3(gl_ModelViewMatrix * vec4(position, 1.0));
+//   vec3 ecPosition = vec3(gl_ModelViewMatrix * vec4(position, 1.0));
 
   float n = dot(normalize(gl_LightSource[0].position.xyz), normalize(-ecPosition));
 
@@ -41,6 +41,6 @@ void main(void)
   //fogFactor = exp( -gl_Fog.density * gl_Fog.density * fogCoord * fogCoord);
   //fogFactor = clamp(fogFactor, 0.0, 1.0);
 //	fog_Func(fogType);
-	PointPos = ecPosition;
+// 	PointPos = ecPosition;
 	//EyePos = gl_ModelViewMatrixInverse * vec4(0.0,0.0,0.0,1.0);
 }

@@ -146,10 +146,10 @@
 				<use>vertex-program-two-side</use>
 			</vertex-program-two-side>
 			<program>
-				<vertex-shader>Shaders/include_fog.vert</vertex-shader>
-				<vertex-shader>Shaders/flutter.vert</vertex-shader>
-				<fragment-shader>Shaders/include_fog.frag</fragment-shader>
-				<fragment-shader>Shaders/default.frag</fragment-shader>
+<!-- 				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader> -->
+				<vertex-shader n="1">Shaders/flutter.vert</vertex-shader>
+				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
+				<fragment-shader n="1">Shaders/default.frag</fragment-shader>
 			</program>
 			<!--<uniform>
 				<name>texture</name>
@@ -217,7 +217,7 @@
 					<use>heading-deg</use>
 				</value>
 			</uniform>
-			
+
 			<!-- 	    BEGIN fog include -->
 			<uniform>
 				<name>visibility</name>

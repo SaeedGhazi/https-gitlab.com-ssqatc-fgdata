@@ -13,7 +13,7 @@ varying vec3  reflVec;
 
 varying vec4 Diffuse;
 varying float alpha;
-varying float fogCoord;
+//varying float fogCoord;
 
 uniform samplerCube Environment;
 uniform sampler2D Rainbow;

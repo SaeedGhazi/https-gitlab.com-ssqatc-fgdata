@@ -292,7 +292,7 @@
 			</texture-unit>
 
 			<program>
-				<vertex-shader>Shaders/include_fog.vert</vertex-shader>
+<!-- 				<vertex-shader>Shaders/include_fog.vert</vertex-shader> -->
 				<vertex-shader>Shaders/water.vert</vertex-shader>
 				<fragment-shader>Shaders/include_fog.frag</fragment-shader>
 				<fragment-shader>Shaders/water_sine.frag</fragment-shader>
@@ -449,7 +449,7 @@
 			</uniform>
 
 
-			
+
 			<!-- 	    BEGIN fog include -->
 			<uniform>
 				<name>visibility</name>
@@ -658,7 +658,7 @@
 			</texture-unit>
 
 			<program>
-				<vertex-shader>Shaders/include_fog.vert</vertex-shader>
+<!-- 				<vertex-shader>Shaders/include_fog.vert</vertex-shader> -->
 				<vertex-shader>Shaders/water.vert</vertex-shader>
 				<fragment-shader>Shaders/include_fog.frag</fragment-shader>
 				<fragment-shader>Shaders/water.frag</fragment-shader>

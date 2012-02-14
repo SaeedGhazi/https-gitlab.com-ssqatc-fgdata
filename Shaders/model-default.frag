@@ -3,9 +3,15 @@
 // Ambient term comes in gl_Color.rgb.
 varying vec4 diffuse_term;
 varying vec3 normal;
-varying float fogCoord;
+//varying float fogCoord;
 
 uniform sampler2D texture;
+
+////fog "include" /////
+uniform int fogType;
+
+vec3 fog_Func(vec3 color, int type);
+//////////////////////
 
 float luminance(vec3 color)
 {
@@ -43,6 +49,8 @@ void main()
     color = clamp(color, 0.0, 1.0);
     texel = texture2D(texture, gl_TexCoord[0].st);
     fragColor = color * texel + specular;
-    fogFactor = exp(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord);
-    gl_FragColor = mix(gl_Fog.color, fragColor, fogFactor);
+    //fogFactor = exp(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord);
+    //gl_FragColor = mix(gl_Fog.color, fragColor, fogFactor);
+		fragColor.rgb = fog_Func(fragColor.rgb, fogType);
+		gl_FragColor = fragColor;
 }

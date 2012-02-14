@@ -20,9 +20,9 @@ attribute vec3 tangent;
 attribute vec3 binormal;
 
 ////fog "include"////////
-uniform int fogType;
-
-void fog_Func(int type);
+// uniform int fogType;
+//
+// void fog_Func(int type);
 /////////////////////////
 
 void main(void)
@@ -30,8 +30,8 @@ void main(void)
     rawpos     = gl_Vertex.xyz / gl_Vertex.w;
     vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
     ecPosition.xyz = ecPosition.xyz / ecPosition.w;
-    fogCoord = ecPosition.z;
-    fog_Func(fogType);
+    //fogCoord = ecPosition.z;
+    //fog_Func(fogType);
 
     vec3 n = normalize(gl_Normal);
     vec3 t = cross(gl_Normal, vec3(1.0,0.0,0.0));

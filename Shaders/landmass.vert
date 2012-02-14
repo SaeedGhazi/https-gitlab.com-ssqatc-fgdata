@@ -9,12 +9,12 @@ varying vec4  constantColor;
 attribute vec3 tangent;
 attribute vec3 binormal;
 
-////fog "include" /////
-uniform int fogType;
-
-void fog_Func(int type);
-
-//////////////////////
+// ////fog "include" /////
+// uniform int fogType;
+//
+// void fog_Func(int type);
+//
+// //////////////////////
 
 void main(void)
     {
@@ -27,9 +27,9 @@ void main(void)
 
     gl_FrontColor = gl_Color;
     constantColor = gl_FrontMaterial.emission
-        + gl_FrontColor * (gl_LightModel.ambient + gl_LightSource[0].ambient);  
+        + gl_FrontColor * (gl_LightModel.ambient + gl_LightSource[0].ambient);
     gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
 
-    fog_Func(fogType);
+//     fog_Func(fogType);
     }

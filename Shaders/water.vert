@@ -20,9 +20,9 @@ uniform float osg_SimulationTime;
 uniform float WindE, WindN;
 
 ////fog "include"////////
-uniform int fogType;
-
-void fog_Func(int type);
+// uniform int fogType;
+//
+// void fog_Func(int type);
 /////////////////////////
 
 /////// functions /////////
@@ -66,6 +66,6 @@ void main(void)
     rotationmatrix(Angle, RotationMatrix);
     waterTex2 = gl_MultiTexCoord0 * RotationMatrix - t2 * windFactor;
 
-    fog_Func(fogType);
+//     fog_Func(fogType);
     gl_Position = ftransform();
 }

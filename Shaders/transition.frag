@@ -8,7 +8,8 @@ varying vec4	diffuse_term, RawPos;
 varying vec3	Vnormal, normal;
 //varying float	fogCoord;
 
-uniform float	SnowLevel, Transitions, InverseSlope, RainNorm, CloudCover0, CloudCover1, CloudCover2, CloudCover3, CloudCover4;
+uniform float	SnowLevel, Transitions, InverseSlope, RainNorm;
+uniform float CloudCover0, CloudCover1, CloudCover2, CloudCover3, CloudCover4;
 uniform sampler2D BaseTex, SecondTex, ThirdTex, SnowTex;
 uniform sampler3D NoiseTex;
 
@@ -143,4 +144,4 @@ void main()
     fragColor.rgb = fog_Func(fragColor.rgb, fogType);
     //gl_FragColor = mix(gl_Fog.color, fragColor, fogFactor);
     gl_FragColor = fragColor;
-    }
+		}

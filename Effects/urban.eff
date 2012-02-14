@@ -12,7 +12,7 @@
 			<use>/sim/rendering/shaders/urban</use>
 		</quality-level>
 
-		<!--fog include--> 
+		<!--fog include-->
 		<visibility>
 			<use>/environment/ground-visibility-m</use>
 		</visibility>
@@ -159,7 +159,7 @@
 				<type>noise</type>
 			</texture-unit>
 			<program>
-				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader>
+<!-- 				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader> -->
 				<vertex-shader n="1">Shaders/urban.vert</vertex-shader>
 				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
 				<fragment-shader n="1">Shaders/urban.frag</fragment-shader>
@@ -489,7 +489,7 @@
 					<use>snow-level</use>
 				</value>
 			</uniform>
-			
+
 
 		</pass>
 	</technique>

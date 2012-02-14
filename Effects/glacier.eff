@@ -34,13 +34,34 @@
     <depth-factor type="float">0.01</depth-factor>
     <canopy-height type="float">15.0</canopy-height>
     <quality-level><use>/sim/rendering/shaders/transition</use></quality-level>
-    
+
     <!-- sets the season color -->
     <season-red type="float">0.12</season-red>
     <season-green type="float">0.86</season-green>
     <season-blue type="float">0.22</season-blue>
     <!-- end season color -->
-    
+
+		<!--fog include-->
+		<visibility>
+			<use>/environment/ground-visibility-m</use>
+		</visibility>
+		<avisibility>
+			<use>/environment/visibility-m</use>
+		</avisibility>
+		<lthickness>
+			<use>/environment/ground-haze-thickness-m</use>
+		</lthickness>
+		<scattering>
+			<use>/rendering/scene/scattering</use>
+		</scattering>
+		<terminator>
+			<use>/environment/terminator-relative-position-m</use>
+		</terminator>
+		<fogtype>
+			<use>/sim/rendering/shaders/skydome</use>
+		</fogtype>
+		<!-- 	END fog include -->
+
   </parameters>
   <generate>
     <tangent type="int">6</tangent>
@@ -128,8 +149,10 @@
         </internal-format>
       </texture-unit>
       <program>
-        <vertex-shader>Shaders/forest.vert</vertex-shader>
-        <fragment-shader>Shaders/forest.frag</fragment-shader>
+<!-- 				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader> -->
+				<vertex-shader n="1">Shaders/forest.vert</vertex-shader>
+				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
+				<fragment-shader n="1">Shaders/forest.frag</fragment-shader>
         <attribute>
           <name>tangent</name>
           <index>6</index>
@@ -192,13 +215,57 @@
       <uniform>
       	<name>blue</name>
       	<type>float</type>
-		<value><use>season-blue</use></value>
+				<value><use>season-blue</use></value>
       </uniform>
       <uniform>
       	<name>alpha</name>
       	<type>float</type>
       	<value>0.0</value>
       </uniform>
+			<!-- 			BEGIN fog include -->
+			<uniform>
+				<name>visibility</name>
+				<type>float</type>
+				<value>
+					<use>visibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>avisibility</name>
+				<type>float</type>
+				<value>
+					<use>avisibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>hazeLayerAltitude</name>
+				<type>float</type>
+				<value>
+					<use>lthickness</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>scattering</name>
+				<type>float</type>
+				<value>
+					<use>scattering</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>terminator</name>
+				<type>float</type>
+				<value>
+					<use>terminator</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>fogType</name>
+				<type>int</type>
+				<value>
+					<use>fogtype</use>
+				</value>
+			</uniform>
+			<!-- 			END fog include -->
     </pass>
   </technique>
 </PropertyList>

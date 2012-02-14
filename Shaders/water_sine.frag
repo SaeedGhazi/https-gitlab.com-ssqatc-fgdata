@@ -24,7 +24,7 @@ uniform int Status;
 varying vec4 waterTex1; //moving texcoords
 varying vec4 waterTex2; //moving texcoords
 varying vec4 waterTex4; //viewts
-varying vec4 ecPosition;
+//varying vec4 ecPosition;
 varying vec3 viewerdir;
 varying vec3 lightdir;
 varying vec3 normal;
@@ -263,7 +263,7 @@ void main(void)
 
 	if(cover >= 1.5){
 		refl= normalize(refTex);
-		} 
+		}
 	else
 		{
 		refl = normalize(refTexGrey);
@@ -291,7 +291,7 @@ void main(void)
 	N0 *= windEffect_low;
 	N1 *= windEffect_low;
 
-	N0.r += (ddx + ddx1 + ddx2 + ddx3); 
+	N0.r += (ddx + ddx1 + ddx2 + ddx3);
 	N0.g += (ddy + ddy1 + ddy2 + ddy3);
 
 	vec3 N = normalize(mix(Normal + N0, Normal + N1, mixFactor) * waveRoughness);
@@ -335,7 +335,7 @@ void main(void)
 	//float waveSlope = mix(N0.g, N1.g, 0.25);
 
 	vec4 foam_texel = texture2D(sea_foam, vec2(waterTex2 * tscale) * 25.0);
-	float waveSlope = N.g; 
+	float waveSlope = N.g;
 
 	if (windEffect >= 8.0)
 		if (waveSlope >= foamSlope){

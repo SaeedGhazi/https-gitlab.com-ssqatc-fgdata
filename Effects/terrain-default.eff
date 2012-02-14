@@ -123,7 +123,7 @@
 				</internal-format>
 			</texture-unit>
 			<program>
-				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader>
+<!-- 				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader> -->
 				<vertex-shader n="1">Shaders/default.vert</vertex-shader>
 				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
 				<fragment-shader n="1">Shaders/terrain-nocolor.frag</fragment-shader>

@@ -1,4 +1,5 @@
 // -*-C++-*-
+#version 120
 
 vec4 ambientColor()
 {

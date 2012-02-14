@@ -215,7 +215,7 @@ EXAMPLES: You can find examples of both usages in the Hunter and Lightning model
 					<use>texture[0]/internal-format</use>
 				</internal-format>
 			</texture-unit>
-            
+
             <texture-unit>
 				<unit>1</unit>
 				<image>
@@ -314,10 +314,10 @@ EXAMPLES: You can find examples of both usages in the Hunter and Lightning model
 
 
 			<program>
-				<vertex-shader>Shaders/include_fog.vert</vertex-shader>
-				<vertex-shader>Shaders/reflect-bump-spec.vert</vertex-shader>
-				<fragment-shader>Shaders/include_fog.frag</fragment-shader>
-				<fragment-shader>Shaders/reflect-bump-spec.frag</fragment-shader>
+<!-- 				<vertex-shader>Shaders/include_fog.vert</vertex-shader> -->
+				<vertex-shader n="1">Shaders/reflect-bump-spec.vert</vertex-shader>
+				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
+				<fragment-shader n="1">Shaders/reflect-bump-spec.frag</fragment-shader>
 				<attribute>
 					<name>tangent</name>
 					<index>6</index>

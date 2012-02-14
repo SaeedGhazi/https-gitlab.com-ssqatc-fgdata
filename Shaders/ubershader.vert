@@ -23,8 +23,8 @@ uniform int  		nmap_enabled;
 uniform int  		shader_qual;
 
 //////Fog Include///////////
-uniform	int 	fogType;
-void	fog_Func(int type);
+// uniform	int 	fogType;
+// void	fog_Func(int type);
 ////////////////////////////
 
 void	rotationMatrixPR(in float sinRx, in float cosRx, in float sinRy, in float cosRy, out mat4 rotmat)
@@ -47,7 +47,7 @@ void	main(void)
 {
 		rawpos = gl_Vertex.xyz;
 		vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
-		fog_Func(fogType);
+		//fog_Func(fogType);
 
 		VNormal = normalize(gl_NormalMatrix * gl_Normal);
 		if (nmap_enabled > 0 && shader_qual > 2){

@@ -8,7 +8,7 @@
 // Diffuse colors come from the gl_Color, ambient from the material. This is
 // equivalent to osg::Material::DIFFUSE.
 //
-// See http://wiki.flightgear.org/index.php/Howto:_Lightmap for details on 
+// See http://wiki.flightgear.org/index.php/Howto:_Lightmap for details on
 // how to use it.
 
 #define MODE_OFF 0
@@ -21,7 +21,7 @@
 // bugs with gl_FrontFacing in the fragment shader.
 varying vec4 diffuse_term;
 varying vec3 normal;
-varying float fogCoord;
+//varying float fogCoord;
 uniform int colorMode;
 
 void main()
@@ -54,5 +54,5 @@ void main()
     // gl_FrontFacing in the fragment shader.
     gl_FrontColor.rgb = constant_term.rgb;  gl_FrontColor.a = 1.0;
     gl_BackColor.rgb = constant_term.rgb; gl_BackColor.a = 0.0;
-    fogCoord = abs(ecPosition.z / ecPosition.w);
+    //fogCoord = abs(ecPosition.z / ecPosition.w);
 }

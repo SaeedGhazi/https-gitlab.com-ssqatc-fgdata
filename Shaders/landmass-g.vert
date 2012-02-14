@@ -32,9 +32,9 @@ attribute vec3 binormal;
 uniform float canopy_height;
 
 ////fog "include"////////
-uniform int fogType;
-
-void fog_Func(int type);
+// uniform int fogType;
+//
+// void fog_Func(int type);
 /////////////////////////
 
 void main(void)
@@ -55,5 +55,5 @@ void main(void)
     constantColorIn = gl_FrontMaterial.emission
         + gl_Color * (gl_LightModel.ambient + gl_LightSource[0].ambient);
 
-    fog_Func(fogType);
+//     fog_Func(fogType);
     }

@@ -1,10 +1,17 @@
 // -*-C++-*-
-
+#version 120
 varying vec4 diffuse, constantColor;
 varying vec3 normal, lightDir, halfVector;
-varying float fogCoord, alpha;
+//varying float fogCoord, alpha;
+varying float alpha;
 
 uniform sampler2D texture;
+
+////fog "include" /////
+uniform int fogType;
+
+vec3 fog_Func(vec3 color, int type);
+//////////////////////
 
 float luminance(vec3 color)
 {
@@ -51,7 +58,8 @@ void main()
       fragColor.a = tex_lum * clamp(lum, 0.01, 1.0);
     }
 
-    fogFactor = exp(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord);
-    gl_FragColor = mix(gl_Fog.color, fragColor, fogFactor);
-
+//     fogFactor = exp(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord);
+//     gl_FragColor = mix(gl_Fog.color, fragColor, fogFactor);
+		fragColor.rgb = fog_Func(fragColor.rgb, fogType);
+		gl_FragColor = fragColor;
 }

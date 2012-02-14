@@ -110,7 +110,7 @@
 				</internal-format>
 			</texture-unit>
 			<program>
-				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader>
+<!-- 				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader> -->
 				<vertex-shader n="1">Shaders/landmass-g.vert</vertex-shader>
 				<geometry-shader>Shaders/landmass.geom</geometry-shader>
 				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
@@ -140,7 +140,7 @@
 				</value>
 			</uniform>
 			<color-mask type="vec4d">0 0 0 0</color-mask>
-			
+
 			<!-- 	    BEGIN fog include -->
 			<uniform>
 				<name>visibility</name>
@@ -185,7 +185,7 @@
 				</value>
 			</uniform>
 			<!-- 			END fog include -->
-			
+
 		</pass>
 		<pass>
 			<lighting>true</lighting>

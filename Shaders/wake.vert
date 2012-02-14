@@ -18,9 +18,9 @@ uniform float osg_SimulationTime;
 uniform float WindE, WindN, spd, hdg;
 
 ////fog "include"////////
-uniform int fogType;
-
-void fog_Func(int type);
+// uniform int fogType;
+//
+// void fog_Func(int type);
 /////////////////////////
 
 
@@ -72,6 +72,6 @@ void main(void)
 
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
     gl_Position = ftransform();
-    
-    fog_Func(fogType);
+
+//     fog_Func(fogType);
 }

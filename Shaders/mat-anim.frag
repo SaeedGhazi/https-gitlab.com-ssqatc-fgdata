@@ -3,9 +3,16 @@
 // Shader for use with material animations
 varying vec4 diffuse, constantColor, matSpecular;
 varying vec3 normal;
-varying float fogCoord, alpha;
+//varying float fogCoord, alpha;
+varying float alpha;
 
 uniform sampler2D texture;
+
+////fog "include" /////
+uniform int fogType;
+
+vec3 fog_Func(vec3 color, int type);
+//////////////////////
 
 void main()
 {
@@ -37,6 +44,8 @@ void main()
     color = clamp(color, 0.0, 1.0);
     texel = texture2D(texture, gl_TexCoord[0].st);
     fragColor = color * texel + specular;
-    fogFactor = exp(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord);
-    gl_FragColor = mix(gl_Fog.color, fragColor, fogFactor);
+    //fogFactor = exp(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord);
+    //gl_FragColor = mix(gl_Fog.color, fragColor, fogFactor);
+		fragColor.rgb = fog_Func(fragColor.rgb, fogType);
+		gl_FragColor = fragColor;
 }

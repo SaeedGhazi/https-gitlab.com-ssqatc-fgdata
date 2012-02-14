@@ -15,10 +15,16 @@ uniform float CloudCover0, CloudCover1, CloudCover2, CloudCover3, CloudCover4;
 varying vec4 waterTex1; //moving texcoords
 varying vec4 waterTex2; //moving texcoords
 varying vec4 waterTex4; //viewts
-varying vec4 ecPosition;
+//varying vec4 ecPosition;
 varying vec3 viewerdir;
 varying vec3 lightdir;
 varying vec3 normal;
+
+////fog "include" /////
+uniform int fogType;
+
+vec3 fog_Func(vec3 color, int type);
+//////////////////////
 
 void main(void)
 {
@@ -96,19 +102,19 @@ void main(void)
 
     //calculate fresnel
     vec4 invfres = vec4( dot(vNorm, viewt) );
-    vec4 fres = vec4(1.0) + invfres; 
+    vec4 fres = vec4(1.0) + invfres;
     refl *= fres;
 
     //calculate the fog factor
-    float fogFactor;
-    float fogCoord = ecPosition.z;
-    const float LOG2 = 1.442695;
-    fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
+//     float fogFactor;
+//     float fogCoord = ecPosition.z;
+//     const float LOG2 = 1.442695;
+//     fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
+//
+//     if(gl_Fog.density == 1.0)
+//         fogFactor=1.0;
 
-    if(gl_Fog.density == 1.0)
-        fogFactor=1.0;
-
-    //calculate final colour 
+    //calculate final colour
     vec4 ambient_light = gl_LightSource[0].diffuse;
     vec4 finalColor;
 
@@ -122,5 +128,7 @@ void main(void)
 
     finalColor *= ambient_light;
 
-    gl_FragColor = mix(gl_Fog.color, finalColor, fogFactor);
+//     gl_FragColor = mix(gl_Fog.color, finalColor, fogFactor);
+		finalColor.rgb = fog_Func(finalColor.rgb, fogType);
+		gl_FragColor = finalColor;
 }

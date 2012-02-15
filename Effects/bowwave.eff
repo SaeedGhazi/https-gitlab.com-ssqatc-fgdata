@@ -316,7 +316,7 @@
 			</texture-unit>
 
 			<program>
-				<vertex-shader>Shaders/include_fog.vert</vertex-shader>
+<!-- 				<vertex-shader>Shaders/include_fog.vert</vertex-shader> -->
 				<vertex-shader>Shaders/wake.vert</vertex-shader>
 				<fragment-shader>Shaders/include_fog.frag</fragment-shader>
 				<fragment-shader>Shaders/bowwave.frag</fragment-shader>
@@ -445,7 +445,7 @@
 				<type>sampler-3d</type>
 				<value type="int">1</value>
 			</uniform>
-			
+
 			<!-- 	    BEGIN fog include -->
 			<uniform>
 				<name>visibility</name>

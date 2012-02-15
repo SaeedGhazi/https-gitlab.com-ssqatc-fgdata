@@ -1,4 +1,10 @@
-varying float fogCoord;
+#version 120
+//varying float fogCoord;
+////fog "include" /////
+uniform int fogType;
+
+vec3 fog_Func(vec3 color, int type);
+//////////////////////
 
 void main()
 {

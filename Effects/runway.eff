@@ -123,7 +123,7 @@
 					<use>texture[1]/internal-format</use>
 				</internal-format>
 			</texture-unit>
-			
+
 			<texture-unit>
 				<unit>1</unit>
 				<image>
@@ -147,7 +147,7 @@
 				<unit>2</unit>
 				<type>noise</type>
 			</texture-unit>
-			
+
 			<texture-unit>
 				<unit>4</unit>
 				<image>
@@ -230,7 +230,7 @@
 			</cull-face>
 
 			<program>
-				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader>
+<!-- 				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader> -->
 				<vertex-shader n="1">Shaders/reflect-bump-spec.vert</vertex-shader>
 				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
 				<fragment-shader n="1">Shaders/runway-reflect-bump-spec.frag</fragment-shader>
@@ -261,7 +261,7 @@
 				<type>sampler-3d</type>
 				<value type="int">2</value>
 			</uniform>
-			
+
 			<uniform>
 				<name>NormalTex</name>
 				<type>sampler-2d</type>

@@ -2,7 +2,7 @@
 // Licence: GPL v2
 // Author: Frederic Bouvier
 
-varying float fogCoord;
+//varying float fogCoord;
 varying vec3 VNormal;
 varying vec3 VTangent;
 varying vec3 VBinormal;
@@ -12,8 +12,8 @@ attribute vec3 binormal;
 
 void main (void)
 {
-	vec4 pos = gl_ModelViewMatrix * gl_Vertex;
-        fogCoord = pos.z / pos.w;
+//	vec4 pos = gl_ModelViewMatrix * gl_Vertex;
+//        fogCoord = pos.z / pos.w;
 
 	VNormal = normalize(gl_NormalMatrix * gl_Normal);
 	VTangent = normalize(gl_NormalMatrix * tangent);

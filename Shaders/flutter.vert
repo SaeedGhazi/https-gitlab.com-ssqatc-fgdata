@@ -30,9 +30,9 @@ uniform float Offset, AmpFactor, WindE, WindN, spd, hdg;
 uniform sampler3D Noise;
 
 ////fog "include"////////
-uniform int fogType;
-
-void fog_Func(int type);
+//uniform int fogType;
+//
+//void fog_Func(int type);
 /////////////////////////
 
 /////// functions /////////
@@ -56,7 +56,7 @@ void relWind(out float rel_wind_speed_kts, out float rel_wind_from_rad)
     float rel_wind_speed_from_north_kts = WindN*fps2kts + speed_north_kts;
 
     //combine relative speeds north and east to get relative windspeed in kts
-    rel_wind_speed_kts = sqrt(pow(abs(rel_wind_speed_from_east_kts), 2) 
+    rel_wind_speed_kts = sqrt(pow(abs(rel_wind_speed_from_east_kts), 2)
         + pow(abs(rel_wind_speed_from_north_kts), 2));
 
     //calculate the relative wind direction
@@ -138,6 +138,6 @@ void main()
         gl_BackColor.rgb = ambient_term.rgb; gl_FrontColor.a = 1.0;
 //        fogCoord = abs(ecPosition.z / ecPosition.w);
 
-        fog_Func(fogType);
+        //fog_Func(fogType);
 
     }

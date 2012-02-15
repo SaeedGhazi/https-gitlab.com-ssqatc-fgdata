@@ -22,11 +22,11 @@ varying vec3 normal, Vnormal;
 //varying float fogCoord;
 uniform int colorMode;
 
-////fog "include"////////
-uniform int fogType;
-
-void fog_Func(int type);
-/////////////////////////
+// ////fog "include"////////
+// uniform int fogType;
+//
+// void fog_Func(int type);
+// /////////////////////////
 
 void main()
     {
@@ -61,5 +61,5 @@ void main()
         gl_FrontColor.rgb = constant_term.rgb;  gl_FrontColor.a = 1.0;
         gl_BackColor.rgb = constant_term.rgb; gl_BackColor.a = 0.0;
         //fogCoord = abs(ecPosition.z / ecPosition.w);
-        fog_Func(fogType);
+        //fog_Func(fogType);
     }

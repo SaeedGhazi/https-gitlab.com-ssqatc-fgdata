@@ -366,7 +366,7 @@ please see Docs/README.model-combined.eff for documentation
 			</vertex-program-two-side>
 
 			<program>
-				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader>
+<!-- 				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader> -->
 				<vertex-shader n="1">Shaders/ubershader.vert</vertex-shader>
 				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
 				<fragment-shader n="1">Shaders/ubershader.frag</fragment-shader>
@@ -391,7 +391,7 @@ please see Docs/README.model-combined.eff for documentation
 				<type>sampler-3d</type>
 				<value type="int">1</value>
 			</uniform>
-			
+
 			<uniform>
 				<name>NormalTex</name>
 				<type>sampler-2d</type>

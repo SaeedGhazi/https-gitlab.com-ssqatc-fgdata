@@ -9,7 +9,7 @@ float shade = 0.8;
 float cloud_height = 1000.0;
 
 void main(void)
-{	
+{
 
   gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
   //gl_TexCoord[0] = gl_MultiTexCoord0 + vec4(textureIndexX, textureIndexY, 0.0, 0.0);

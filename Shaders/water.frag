@@ -181,13 +181,13 @@ void main(void)
     refl *= fres;
 
     //calculate the fog factor
-         float fogFactor;
-         float fogCoord = ecPosition.z;
-         const float LOG2 = 1.442695;
-         fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
-    
-         if(gl_Fog.density == 1.0)
-             fogFactor=1.0;
+//          float fogFactor;
+//          float fogCoord = ecPosition.z;
+//          const float LOG2 = 1.442695;
+//          fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
+//
+//          if(gl_Fog.density == 1.0)
+//              fogFactor=1.0;
 
     //calculate final colour
     vec4 ambient_light = gl_LightSource[0].diffuse;
@@ -203,7 +203,7 @@ void main(void)
     //float waveSlope = mix(N0.g, N1.g, 0.25);
 
     vec4 foam_texel = texture2D(sea_foam, vec2(waterTex2 * tscale) * 25.0);
-    float waveSlope = N.g; 
+    float waveSlope = N.g;
 
     if (windEffect >= 8.0)
         if (waveSlope >= foamSlope){

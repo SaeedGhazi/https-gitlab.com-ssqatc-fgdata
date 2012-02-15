@@ -17,7 +17,7 @@
 
 	To use a reflection map set <reflect_map> to 1,and the path to the map texture in
 	<texture n="8">
-	
+
 	To use a light map set <light_map> to 1,and the path to the map texture in
 	<texture n="2">
 
@@ -213,7 +213,7 @@
 					<use>texture[8]/internal-format</use>
 				</internal-format>
 			</texture-unit>
-			
+
 			<texture-unit>
 				<unit>2</unit>
 				<type>
@@ -226,12 +226,12 @@
 				<wrap-s>repeat</wrap-s>
 				<wrap-t>repeat</wrap-t>
 			</texture-unit>
-            
+
             <texture-unit>
 				<unit>3</unit>
 				<type>noise</type>
 			</texture-unit>
-			
+
 			<texture-unit>
 				<unit>5</unit>
 				<type>
@@ -288,7 +288,7 @@
 			</texture-unit>
 
 			<program>
-				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader>
+<!-- 				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader> -->
 				<vertex-shader n="1">Shaders/reflect.vert</vertex-shader>
 				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
 				<fragment-shader n="1">Shaders/reflect.frag</fragment-shader>
@@ -317,7 +317,7 @@
 				<type>sampler-2d</type>
 				<value type="int">1</value>
 			</uniform>
-			
+
 			<uniform>
 				<name>Lightmap</name>
 				<type>sampler-2d</type>
@@ -329,7 +329,7 @@
 				<type>sampler-3d</type>
 				<value type="int">3</value>
 			</uniform>
-			
+
 			<uniform>
 				<name>Environment</name>
 				<type>sampler-cube</type>
@@ -402,7 +402,7 @@
 					<use>reflect_map</use>
 				</value>
 			</uniform>
-			
+
 			<!-- use a light map-->
 			<uniform>
 				<name>light_map</name>

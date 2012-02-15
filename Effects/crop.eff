@@ -80,8 +80,9 @@
           </internal-format>
       </texture-unit>
       <program>
-        <vertex-shader>Shaders/crop.vert</vertex-shader>
-        <fragment-shader>Shaders/crop.frag</fragment-shader>
+        <vertex-shader n="1">Shaders/crop.vert</vertex-shader>
+				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
+        <fragment-shader n="1">Shaders/crop.frag</fragment-shader>
       </program>
       <uniform>
         <name>NoiseTex</name>

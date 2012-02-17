@@ -1,7 +1,7 @@
 // -*- mode: C; -*-
 // Licence: GPL v2
 // Author: Frederic Bouvier
-
+#version 120
 //varying float fogCoord;
 
 varying vec3 VNormal;
@@ -48,6 +48,6 @@ void main (void)
 // 	fogFactor = clamp(fogFactor, 0.0, 1.0);
 // 	gl_FragColor = mix(gl_Fog.color, color, fogFactor);
 
-	color.rgb = fog_Func(fragColor.rgb, fogType);
+	color.rgb = fog_Func(color.rgb, fogType);
 	gl_FragColor = color;
 }

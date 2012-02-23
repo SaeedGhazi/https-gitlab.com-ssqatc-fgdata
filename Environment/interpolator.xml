@@ -26,9 +26,7 @@
   <filter>
     <name>EnvironmentInterpolator:temperature-sea-level-degc</name>
     <enable>
-      <condition>
-        <property>/environment/config/enabled</property>
-      </condition>
+      <property>/environment/config/enabled</property>
     </enable>
     <input>/environment/config/interpolated/temperature-sea-level-degc</input>
     <output>/environment/temperature-sea-level-degc</output>
@@ -39,9 +37,7 @@
   <filter>
     <name>EnvironmentInterpolator:dewpoint-sea-level-degc</name>
     <enable>
-      <condition>
-        <property>/environment/config/enabled</property>
-      </condition>
+      <property>/environment/config/enabled</property>
     </enable>
     <input>/environment/config/interpolated/dewpoint-sea-level-degc</input>
     <output>/environment/dewpoint-sea-level-degc</output>
@@ -58,9 +54,7 @@
     <type>noise-spike</type>
     <max-rate-of-change>0.03</max-rate-of-change>
     <enable>
-      <condition>
-        <property>/environment/config/enabled</property>
-      </condition>
+      <property>/environment/config/enabled</property>
     </enable>
     <input>/environment/config/interpolated/pressure-sea-level-inhg</input>
     <output>/environment/pressure-sea-level-inhg</output>
@@ -69,9 +63,7 @@
   <filter>
     <name>EnvironmentInterpolator:visibility-m</name>
     <enable>
-      <condition>
-        <property>/environment/config/enabled</property>
-      </condition>
+      <property>/environment/config/enabled</property>
     </enable>
     <input>
       <condition>
@@ -91,9 +83,7 @@
   <filter>
     <name>EnvironmentInterpolator:wind-from-north</name>
     <enable>
-      <condition>
-        <property>/environment/config/enabled</property>
-      </condition>
+      <property>/environment/config/enabled</property>
     </enable>
     <input>
       <condition>
@@ -103,16 +93,14 @@
     </input>
     <input>/environment/config/interpolated/wind-from-north-fps</input>
     <output>/environment/wind-from-north-fps</output>
-    <type>exponential</type>
-    <filter-time>5</filter-time>
+    <type>noise-spike</type>
+    <max-rate-of-change>0.5</max-rate-of-change>
   </filter>
 
   <filter>
     <name>EnvironmentInterpolator:wind-from-east</name>
     <enable>
-      <condition>
-        <property>/environment/config/enabled</property>
-      </condition>
+      <property>/environment/config/enabled</property>
     </enable>
     <input>
       <condition>
@@ -122,8 +110,8 @@
     </input>
     <input>/environment/config/interpolated/wind-from-east-fps</input>
     <output>/environment/wind-from-east-fps</output>
-    <type>exponential</type>
-    <filter-time>5</filter-time>
+    <type>noise-spike</type>
+    <max-rate-of-change>0.5</max-rate-of-change>
   </filter>
 
   <filter>
@@ -138,16 +126,14 @@
       </expression>
     </input>
     <output>/environment/wind-from-down-fps</output>
-    <type>exponential</type>
-    <filter-time>0.5</filter-time>
+    <type>noise-spike</type>
+    <max-rate-of-change>2.0</max-rate-of-change>
   </filter>
 
   <filter>
     <name>EnvironmentInterpolator:turbulence-raw-magnitude</name>
     <enable>
-      <condition>
-        <property>/environment/config/enabled</property>
-      </condition>
+      <property>/environment/config/enabled</property>
     </enable>
     <input>
       <condition>
@@ -159,16 +145,14 @@
       <property>/environment/config/interpolated/turbulence/magnitude-norm</property>
     </input>
     <output>/environment/turbulence/raw-magnitude-norm</output>
-    <type>exponential</type>
-    <filter-time>1</filter-time>
+    <type>noise-spike</type>
+    <max-rate-of-change>0.2</max-rate-of-change>
   </filter>
 
   <filter>
     <name>EnvironmentInterpolator:turbulence-magnitude</name>
     <enable>
-      <condition>
-        <property>/environment/config/enabled</property>
-      </condition>
+      <property>/environment/config/enabled</property>
     </enable>
     <input>
       <expression>
@@ -186,9 +170,7 @@
   <filter>
     <name>EnvironmentInterpolator:turbulence-rate</name>
     <enable>
-      <condition>
-        <property>/environment/config/enabled</property>
-      </condition>
+      <property>/environment/config/enabled</property>
     </enable>
     <input>/environment/config/interpolated/turbulence/rate-hz</input>
     <output>/environment/turbulence/rate-hz</output>
@@ -205,16 +187,16 @@
     <name>EnvironmentInterpolator:wave:wind-from-east-fps</name>
     <input>/environment/config/boundary/entry[0]/wind-from-east-fps</input>
     <output>/environment/sea/surface/wind-from-east-fps</output>
-    <type>exponential</type>
-    <filter-time>/environment/sea/config/wind-filter-time</filter-time>
+    <type>noise-spike</type>
+    <max-rate-of-change>/environment/sea/config/wind-filter-time</max-rate-of-change>
   </filter>
 
   <filter>
     <name>EnvironmentInterpolator:wave:wind-from-north-fps</name>
     <input>/environment/config/boundary/entry[0]/wind-from-north-fps</input>
     <output>/environment/sea/surface/wind-from-north-fps</output>
-    <type>exponential</type>
-    <filter-time>/environment/sea/config/wind-filter-time</filter-time>
+    <type>noise-spike</type>
+    <max-rate-of-change>/environment/sea/config/wind-filter-time</max-rate-of-change>
   </filter>
 
   <!--filter> unused?

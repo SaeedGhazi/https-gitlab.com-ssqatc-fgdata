@@ -149,8 +149,8 @@
   <!-- interpolate the wind vector's components -->
   <filter>
     <name>MetarController:wind-from-north-fps</name>
-    <type>exponential</type>
-    <filter-time>30</filter-time>
+    <type>noise-spike</type>
+    <max-rate-of-change>1.0</max-rate-of-change>
     <enable>
       <condition>
         <property>/environment/metar/valid</property>
@@ -163,8 +163,8 @@
 
   <filter>
     <name>MetarController:wind-from-east-fps</name>
-    <type>exponential</type>
-    <filter-time>30</filter-time>
+    <type>noise-spike</type>
+    <max-rate-of-change>1.0</max-rate-of-change>
     <enable>
       <condition>
         <property>/environment/metar/valid</property>
@@ -396,8 +396,8 @@
   </filter>
   <filter>
     <name>MetarController:cloud-alpha</name>
-    <type>exponential</type>
-    <filter-time>5</filter-time>
+    <type>noise-spike</type>
+    <max-rate-of-change>0.2</max-rate-of-change>
     <enable>
       <condition>
         <property>/environment/metar/valid</property>

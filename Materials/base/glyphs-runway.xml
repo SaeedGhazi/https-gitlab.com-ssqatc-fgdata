@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<!-- Glyph locations in bitmap, for inclusion by materials file -->
+<PropertyList>
+  <glyph> <name>critical</name>   <left>0.00000</left> <right>0.23633</right> </glyph>
+  <glyph> <name>safety</name>     <left>0.24512</left> <right>0.73340</right> </glyph>
+</PropertyList>

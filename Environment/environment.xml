@@ -330,7 +330,7 @@
 
   <sea>
     <config>
-      <wind-filter-time type="double">60.0</wind-filter-time>
+      <wind-filter-time type="double">0.05</wind-filter-time>
     </config>
   </sea>
 

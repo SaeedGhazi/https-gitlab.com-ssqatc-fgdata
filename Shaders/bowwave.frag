@@ -54,8 +54,8 @@ void relWind(out float rel_wind_speed_kts, out float rel_wind_from_rad)
     float rel_wind_speed_from_north_kts = WindN*fps2kts + speed_north_kts;
 
     //combine relative speeds north and east to get relative windspeed in kts
-    rel_wind_speed_kts = sqrt(pow(abs(rel_wind_speed_from_east_kts), 2) 
-        + pow(abs(rel_wind_speed_from_north_kts), 2));
+    rel_wind_speed_kts = sqrt(rel_wind_speed_from_east_kts*rel_wind_speed_from_east_kts
+        + rel_wind_speed_from_north_kts*rel_wind_speed_from_north_kts);
 
     //calculate the relative wind direction
     float rel_wind_from_deg = degrees(atan(rel_wind_speed_from_east_kts, rel_wind_speed_from_north_kts));

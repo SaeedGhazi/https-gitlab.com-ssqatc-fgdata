@@ -72,7 +72,7 @@ void main(void)
     //bool Status = true;
 
 
-    float windEffect = sqrt(pow(abs(WindE),2)+pow(abs(WindN),2)) * 0.6; 				//wind speed in kt
+    float windEffect = sqrt( WindE*WindE + WindN*WindN ) * 0.6; 				//wind speed in kt
     float windScale = 15.0/(3.0 + windEffect);											//wave scale
     float windEffect_low = 0.3 + 0.7 * smoothstep(0.0, 5.0, windEffect);				//low windspeed wave filter
     float waveRoughness = 0.05 + smoothstep(0.0, 20.0, windEffect);						//wave roughness filter

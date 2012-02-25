@@ -93,7 +93,7 @@
                 <desc>Show dialog</desc>
                 <binding>
                     <command>nasal</command>
-                    <script>cam.panel.toggle()</script>
+                    <script>cam.panel_dialog.toggle()</script>
                 </binding>
             </key>
         </keyboard>

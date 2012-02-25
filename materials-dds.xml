@@ -10,7 +10,7 @@ Shared parameters for various materials.
 	<forest>
 	    <!-- Maximum distance from which a tree is visible -->
       <tree-range-m>8000</tree-range-m>
-	</forest>  
+	</forest>
     </params>
 
     <material>
@@ -1243,7 +1243,7 @@ Shared parameters for various materials.
 	    <b>0.02</b>
 	    <a>1.0</a>
 	</emissive>
-	<object-group>	
+	<object-group>
     <range-m>10000</range-m>
     <object>
       <path>Models/Buildings/factory.ac</path>
@@ -1585,7 +1585,7 @@ Shared parameters for various materials.
 	<name>Town</name>
 	<name>SubUrban</name>
     <texture>Terrain/Town1.png</texture>
-    <object-mask>Terrain/Town1.mask.png</object-mask>    
+    <object-mask>Terrain/Town1.mask.png</object-mask>
 	<xsize>1024</xsize>
 	<ysize>1024</ysize>
 	<light-coverage>100000.0</light-coverage>
@@ -2065,10 +2065,10 @@ Shared parameters for various materials.
       <texture>Terrain/countryside4.green.dds</texture>
 	    <texture n="4">Terrain.winter/countryside4.winter.dds</texture>
 	</texture-set>
-	<object-mask>Terrain/countryside1.green.mask.png</object-mask>
-	<object-mask>Terrain/countryside2.green.mask.png</object-mask>
-	<object-mask>Terrain/countryside3.green.mask.png</object-mask>
-	<object-mask>Terrain/countryside4.green.mask.png</object-mask>
+	<object-mask>Terrain/countryside1.green.mask.dds</object-mask>
+	<object-mask>Terrain/countryside2.green.mask.dds</object-mask>
+	<object-mask>Terrain/countryside3.green.mask.dds</object-mask>
+	<object-mask>Terrain/countryside4.green.mask.dds</object-mask>
 	<xsize>1800</xsize>
 	<ysize>1800</ysize>
 	<solid>1</solid>
@@ -2499,7 +2499,7 @@ Shared parameters for various materials.
       <texture n="2">Terrain/city2-relief-light.png</texture>
 	</texture-set>
 	<object-mask>Terrain/city1.mask.png</object-mask>
-	<object-mask>Terrain/city2.mask.png</object-mask>	
+	<object-mask>Terrain/city2.mask.png</object-mask>
     <!--
   <texture-set>
    <texture>Terrain/city3.png</texture>
@@ -2677,7 +2677,7 @@ Shared parameters for various materials.
 	<name>Town</name>
 	<name>SubUrban</name>
     <texture>Terrain.winter/Town1.png</texture>
-    <object-mask>Terrain/Town1.mask.png</object-mask>    
+    <object-mask>Terrain/Town1.mask.png</object-mask>
 	<xsize>1024</xsize>
 	<ysize>1024</ysize>
 	<light-coverage>100000.0</light-coverage>
@@ -3100,10 +3100,10 @@ Shared parameters for various materials.
     <texture >Terrain.winter/countryside2.winter.dds</texture>
     <texture >Terrain.winter/countryside3.winter.dds</texture>
     <texture >Terrain.winter/countryside3.winter.dds</texture>
-    <object-mask>Terrain/countryside1.green.mask.png</object-mask>
-    <object-mask>Terrain/countryside2.green.mask.png</object-mask>
-    <object-mask>Terrain/countryside3.green.mask.png</object-mask>
-    <object-mask>Terrain/countryside4.green.mask.png</object-mask>
+    <object-mask>Terrain/countryside1.green.mask.dds</object-mask>
+    <object-mask>Terrain/countryside2.green.mask.dds</object-mask>
+    <object-mask>Terrain/countryside3.green.mask.dds</object-mask>
+    <object-mask>Terrain/countryside4.green.mask.dds</object-mask>
     <xsize>1800</xsize>
     <ysize>1800</ysize>
 	<solid>1</solid>

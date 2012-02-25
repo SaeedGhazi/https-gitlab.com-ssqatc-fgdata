@@ -351,6 +351,7 @@ var model_view_handler = {
 		me.current = nil;
 		me.legendN = props.globals.initNode("/sim/current-view/model-view", "");
 		me.dialog = props.Node.new({ "dialog-name": "model-view" });
+		me.listener = nil;
 	},
 	start: func {
 		me.listener = setlistener("/sim/signals/multiplayer-updated", func me._update_(), 1);
@@ -359,7 +360,11 @@ var model_view_handler = {
 	},
 	stop: func {
 		fgcommand("dialog-close", me.dialog);
-		removelistener(me.listener);
+		if (me.listener!=nil)
+		{
+			removelistener(me.listener);
+			me.listener=nil;
+		}
 	},
 	reset: func {
 		me.select(0);
@@ -682,5 +687,3 @@ _setlistener("/sim/signals/fdm-initialized", func {
 		}
 	}
 });
-
-

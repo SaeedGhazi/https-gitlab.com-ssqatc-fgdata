@@ -901,7 +901,7 @@
     <b>0.02</b>
     <a>1.0</a>
   </emissive>
-  <object-group include="Materials/base/urban-buildings.xml"/>
+  <object-group include="Materials/base/urban-buildings.xml"/>  
   <wood-coverage>10000.0</wood-coverage>
   <tree-texture>Trees/mixed-summer.png</tree-texture>
   <tree-varieties>8</tree-varieties>
@@ -941,7 +941,7 @@
     <b>0.02</b>
     <a>1.0</a>
   </emissive>
-	<object-group include="Materials/base/industrial-buildings.xml"/>
+	<object-group include="Materials/base/industrial-buildings.xml"/>	
 </material>
 
 <material>
@@ -976,7 +976,7 @@
     <b>0.02</b>
     <a>1.0</a>
   </emissive>
-  <object-group include="Materials/base/urban-buildings.xml"/>
+  <object-group include="Materials/base/urban-buildings.xml"/>  
   <wood-coverage>25000.0</wood-coverage>
   <tree-texture>Trees/mixed-summer.dds</tree-texture>
   <tree-varieties>8</tree-varieties>
@@ -996,7 +996,7 @@
   <name>Town</name>
   <name>SubUrban</name>
   <texture>Terrain/Town1.png</texture>
-  <object-mask>Terrain/Town1.mask.png</object-mask>
+  <object-mask>Terrain/Town1.mask.png</object-mask>    
   <xsize>1024</xsize>
   <ysize>1024</ysize>
   <light-coverage>100000.0</light-coverage>
@@ -1389,10 +1389,10 @@
     <texture>Terrain/countryside4.green.dds</texture>
     <texture n="4">Terrain.winter/countryside4.winter.dds</texture>
   </texture-set>
-  <object-mask>Terrain/countryside1.green.mask.dds</object-mask>
-  <object-mask>Terrain/countryside2.green.mask.dds</object-mask>
-  <object-mask>Terrain/countryside3.green.mask.dds</object-mask>
-  <object-mask>Terrain/countryside4.green.mask.dds</object-mask>
+  <object-mask>Terrain/countryside1.green.mask.png</object-mask>
+  <object-mask>Terrain/countryside2.green.mask.png</object-mask>
+  <object-mask>Terrain/countryside3.green.mask.png</object-mask>
+  <object-mask>Terrain/countryside4.green.mask.png</object-mask>
   <xsize>1800</xsize>
   <ysize>1800</ysize>
   <solid>1</solid>
@@ -1778,7 +1778,7 @@
       <texture n="2">Terrain/city2-relief-light.png</texture>
   </texture-set>
   <object-mask>Terrain/city1.mask.png</object-mask>
-  <object-mask>Terrain/city2.mask.png</object-mask>
+  <object-mask>Terrain/city2.mask.png</object-mask>  
   <object-mask>Terrain/city1.mask.png</object-mask>
   <object-mask>Terrain/city2.mask.png</object-mask>
     <xsize>1000</xsize>
@@ -1790,7 +1790,7 @@
     <b>0.02</b>
     <a>1.0</a>
   </emissive>
-  <object-group include="Materials/base/urban-buildings.xml"/>
+  <object-group include="Materials/base/urban-buildings.xml"/>  
   <wood-coverage>250000.0</wood-coverage>
   <tree-texture>Trees/mixed-winter.png</tree-texture>
   <tree-varieties>8</tree-varieties>
@@ -1823,7 +1823,7 @@
     <b>0.02</b>
     <a>1.0</a>
   </emissive>
-	<object-group include="Materials/base/industrial-buildings.xml"/>
+	<object-group include="Materials/base/industrial-buildings.xml"/>	
 </material>
 
 <material>
@@ -1836,7 +1836,7 @@
   <name>Town</name>
   <name>SubUrban</name>
   <texture>Terrain.winter/Town1.png</texture>
-  <object-mask>Terrain/Town1.mask.png</object-mask>
+  <object-mask>Terrain/Town1.mask.png</object-mask>    
   <xsize>1024</xsize>
   <ysize>1024</ysize>
   <light-coverage>100000.0</light-coverage>
@@ -2172,10 +2172,10 @@
   <texture >Terrain.winter/countryside2.winter.dds</texture>
   <texture >Terrain.winter/countryside3.winter.dds</texture>
   <texture >Terrain.winter/countryside3.winter.dds</texture>
-  <object-mask>Terrain/countryside1.green.mask.dds</object-mask>
-  <object-mask>Terrain/countryside2.green.mask.dds</object-mask>
-  <object-mask>Terrain/countryside3.green.mask.dds</object-mask>
-  <object-mask>Terrain/countryside4.green.mask.dds</object-mask>
+  <object-mask>Terrain/countryside1.green.mask.png</object-mask>
+  <object-mask>Terrain/countryside2.green.mask.png</object-mask>
+  <object-mask>Terrain/countryside3.green.mask.png</object-mask>
+  <object-mask>Terrain/countryside4.green.mask.png</object-mask>
   <xsize>1800</xsize>
   <ysize>1800</ysize>
   <solid>1</solid>

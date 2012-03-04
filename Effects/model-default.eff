@@ -35,6 +35,9 @@
 	<technique n="10">
 		<predicate>
 			<and>
+				<not>
+					<property>/sim/rendering/rembrandt</property>
+				</not>
 				<property>/sim/rendering/shaders/generic</property>
 				<or>
 					<less-equal>
@@ -192,6 +195,11 @@
 		</pass>
 	</technique>
 	<technique n="11">
+		<predicate>
+			<not>
+				<property>/sim/rendering/rembrandt</property>
+			</not>
+		</predicate>
 		<pass>
 			<lighting>true</lighting>
 			<material>

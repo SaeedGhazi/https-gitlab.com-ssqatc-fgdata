@@ -64,6 +64,7 @@ Started September 2000 by David Megginson, david@megginson.com
 			<season type="string" preserve="y">summer</season>
 		</startup>
 		<rendering>
+			<rembrandt type="bool">false</rembrandt>
 			<debug type="bool">false</debug>
 			<realism type="int">5</realism>
 			<filtering type="int">8</filtering>

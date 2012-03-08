@@ -23,7 +23,7 @@
 # create_cloud_array		to place clouds from storage arrays into the scenery
 # get_elevation			to get the terrain elevation at given coordinates
 # get_elevation_vector		to get terrain elevation at given coordinate vector
-
+# set_wxradarecho_storm		to provide info about a storm to the wxradar
 
 
 # This file contains portability wrappers for the local weather system: 
@@ -126,11 +126,16 @@ print("Compatibility layer: tests done.");
 
 # features of a 2.4 binary
 
+# switch terrainsampler to active, should be initialized
+
+
 features.can_set_light = 1;
 features.can_set_scattering = 1;
 features.terrain_presampling = 1;
 features.terrain_presampling_active = 1;
 features.can_disable_environment = 1;
+
+
 
 # features of a current GIT binary
 
@@ -750,6 +755,36 @@ if (local_weather.dynamics_flag == 1)
 }
 
 
+
+###########################################################
+# place a model
+###########################################################
+
+var place_model = func(path, lat, lon, alt, heading) {
+
+
+
+var m = props.globals.getNode("models", 1);
+		for (var i = 0; 1; i += 1)
+			if (m.getChild("model", i, 0) == nil)
+				break;
+var model = m.getChild("model", i, 1);
+
+
+model.getNode("path", 1).setValue(path);
+model.getNode("latitude-deg", 1).setValue(lat);
+model.getNode("longitude-deg", 1).setValue(lon);
+model.getNode("elevation-ft", 1).setValue(alt);
+model.getNode("heading-deg", 1).setValue(heading);
+model.getNode("load", 1).remove();
+
+
+}
+
+
+
+
+
 ###########################################################
 # place a single cloud using hard-coded system
 ###########################################################
@@ -953,11 +988,64 @@ for(var i = 0; i < n; i=i+1)
 return elevation;
 }
 
+###########################################################
+# set the wxradar echo of a storm
+###########################################################
 
+var set_wxradarecho_storm = func (lat, lon, base, top, radius, ref, turb, type) {
+
+# look for the next free index in the wxradar property tree entries
+
+var n = props.globals.getNode("/instrumentation/wxradar", 1);
+		for (var i = 0; 1; i += 1)
+			if (n.getChild("storm", i, 0) == nil)
+				break;
+var s = n.getChild("storm", i, 1);
+
+
+s.getNode("latitude-deg",1).setValue(lat);
+s.getNode("longitude-deg",1).setValue(lon);
+s.getNode("heading-deg",1).setValue(0.0);
+s.getNode("base-altitude-ft",1).setValue(base);
+s.getNode("top-altitude-ft",1).setValue(top);
+s.getNode("radius-nm",1).setValue(radius * m_to_nm);
+s.getNode("reflectivity-norm",1).setValue(ref);
+s.getNode("turbulence-norm",1).setValue(turb);
+s.getNode("type",1).setValue(type);
+s.getNode("show",1).setValue(1);
+}
+
+###########################################################
+# remove unused echos
+###########################################################
+
+var remove_wxradar_echos = func { 
+
+var distance_to_remove = 70000.0;
+
+var storms = props.globals.getNode("/instrumentation/wxradar", 1).getChildren("storm");
+
+var pos = geo.aircraft_position();
+
+foreach (s; storms)
+	{
+	var d_sq = local_weather.calc_d_sq(pos.lat(), pos.lon(), s.getNode("latitude-deg").getValue(), s.getNode("longitude-deg").getValue());
+	if (d_sq > distance_to_remove * distance_to_remove)
+		{
+		s.remove();
+		}
+	}
+
+}
 
 ############################################################
 # global variables
 ############################################################
+
+# conversions
+
+var nm_to_m = 1852.00;
+var m_to_nm = 1.0/nm_to_m; 
 
 # some common abbreviations
 

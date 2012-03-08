@@ -53,7 +53,7 @@ else if (type == "Cumulus (cloudlet)"){
 			cloudAssembly.min_height = 500.0;
 			cloudAssembly.max_height = 700.0;
 			cloudAssembly.min_cloud_width = 1300;
-			cloudAssembly.min_cloud_height = 700;
+			cloudAssembly.min_cloud_height = 750;
 			cloudAssembly.bottom_shade = 0.7;
 			}
 		else
@@ -65,7 +65,7 @@ else if (type == "Cumulus (cloudlet)"){
 			cloudAssembly.min_height = 600.0;
 			cloudAssembly.max_height = 900.0;
 			cloudAssembly.min_cloud_width = 1300;
-			cloudAssembly.min_cloud_height = 700;
+			cloudAssembly.min_cloud_height = 950;
 			cloudAssembly.bottom_shade = 0.4;
 			}
 			
@@ -139,7 +139,7 @@ else if (type == "Cu (volume)"){
 		cloudAssembly.min_height = 800.0;
 		cloudAssembly.max_height = 1100.0;
 		cloudAssembly.min_cloud_width = 1500;
-		cloudAssembly.min_cloud_height = 1000;
+		cloudAssembly.min_cloud_height = 1150;
 		cloudAssembly.bottom_shade = 0.4;
 		}
 			
@@ -365,8 +365,8 @@ else if (type == "Cumulus (whisp)"){
 		cloudAssembly.max_width = 600.0 * mult;
 		cloudAssembly.min_height = 400.0 * mult;
 		cloudAssembly.max_height = 600.0 * mult;
-		cloudAssembly.min_cloud_width = 800 * mult * mult;
-		cloudAssembly.min_cloud_height = 800 * mult * mult;
+		cloudAssembly.min_cloud_width = 800;
+		cloudAssembly.min_cloud_height = 800;
 		cloudAssembly.z_scale = 1.0;
 
 		#signal that new routines are used
@@ -952,7 +952,7 @@ else if (type == "Stratus") {
 		cloudAssembly.min_height = 2000.0 * mult;
 		cloudAssembly.max_height = 2500.0 * mult;
 		cloudAssembly.min_cloud_width = 5000.0;
-		cloudAssembly.min_cloud_height = 1.1 *  cloudAssembly.max_height;
+		cloudAssembly.min_cloud_height = 50; #1.1 *  cloudAssembly.max_height;
 
 
 		#signal that new routines are used

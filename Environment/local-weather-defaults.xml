@@ -25,6 +25,7 @@
     <large-scale-persistence type="double" userarchive="y">1.0</large-scale-persistence>
     <small-scale-persistence type="double" userarchive="y">0.0</small-scale-persistence>
     <ground-haze-factor type="double" userarchive="y">1.0</ground-haze-factor>
+    <aux-max-vis-range-m type="double" userarchive="y">11.69524</aux-max-vis-range-m>
     <max-vis-range-m type="double" userarchive="y">120000.0</max-vis-range-m>
   </config>
  <tmp>

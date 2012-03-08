@@ -928,6 +928,8 @@ setprop(lw~"current/wind-speed-kt",windspeed_current);
 setprop("/environment/config/boundary/entry[0]/wind-from-heading-deg",winddir);
 setprop("/environment/config/boundary/entry[0]/wind-speed-kt",windspeed_ground);
 
+#setprop("/environment/sea/surface/wind-from-east-fps",windspeed_ground * math.sin(winddir * math.pi/180.0));
+#setprop("/environment/sea/surface/wind-from-east-fps",windspeed_ground * math.cos(winddir * math.pi/180.0));
 # end hack
 
 
@@ -1608,6 +1610,12 @@ setprop(lw~"tiles/tile-counter",0);
 settimer ( func { setsize(weather_dynamics.cloudQuadtrees,0);},0.1); # to avoid error generation in this frame
 setsize(effectVolumeArray,0);
 n_effectVolumeArray = 0;
+
+
+# clear any wxradar echos
+
+if (wxradar_support_flag ==1)
+	{props.globals.getNode("/instrumentation/wxradar", 1).removeChildren("storm");}
 
 # if we have used METAR, we may no longer want to do so
 
@@ -2887,8 +2895,8 @@ var terrain_presampling_start = func (blat, blon, nc, size, alpha) {
 	
 # initialize the result vector
 
-setsize(terrain_n,20);
-for(var j=0;j<20;j=j+1){terrain_n[j]=0;}
+setsize(terrain_n,40);
+for(var j=0;j<40;j=j+1){terrain_n[j]=0;}
 
 if (thread_flag == 1)
 	{
@@ -2911,10 +2919,10 @@ else
 	setprop(lw~"tmp/presampling-status", "finished");
 	}
 	
-if (compat_layer.features.terrain_presampling_active == 1)
+if (compat_layer.features.terrain_presampling == 1)
 	{
 	print("Starting hard-coded terrain presampling");
-
+	setprop("/environment/terrain/area[0]/enabled",1);
 	setprop(lw~"tmp/presampling-status", "sampling");
 	setprop("/environment/terrain/area[0]/enabled", 1 );
 	setprop("/environment/terrain/area[0]/input/latitude-deg", blat );
@@ -3000,7 +3008,7 @@ var elevation_vec = compat_layer.get_elevation_array(lat_vec, lon_vec);
 	
 for (i=0; i<ntries;i=i+1)
 	{
-	for(j=0;j<20;j=j+1)
+	for(j=0;j<30;j=j+1)
 		{
 		if ((elevation_vec[i] != -1.0) and (elevation_vec[i] < 500.0 * (j+1))) 
 			{terrain_n[j] = terrain_n[j]+1;  break;}
@@ -3028,35 +3036,35 @@ if ((compat_layer.features.terrain_presampling_active == 0) or (getprop(lw~"tile
 	var alt_low_min = 0;
 
 
-	for (var i=0; i<20;i=i+1)
+	for (var i=0; i<40;i=i+1)
 		{sum = sum + terrain_n[i];}
 
 	var n_tot = sum;
 
 	sum = 0;
-	for (var i=0; i<20;i=i+1)
+	for (var i=0; i<40;i=i+1)
 		{
 		sum = sum + terrain_n[i];
 		if (sum > int(0.5 *n_tot)) {alt_med = i * 500.0; break;}		
 		}
 
 	sum = 0;
-	for (var i=0; i<20;i=i+1)
+	for (var i=0; i<40;i=i+1)
 		{
 		sum = sum + terrain_n[i];
 		if (sum > int(0.3 *n_tot)) {alt_20 = i * 500.0; break;}		
 		}
 
 
-	for (var i=0; i<20;i=i+1) {alt_mean = alt_mean + terrain_n[i] * i * 500.0;}
+	for (var i=0; i<40;i=i+1) {alt_mean = alt_mean + terrain_n[i] * i * 500.0;}
 	alt_mean = alt_mean/n_tot;
 
-	for (var i=0; i<20;i=i+1) {if (terrain_n[i] > 0) {alt_min = i * 500.0; break;}}
+	for (var i=0; i<40;i=i+1) {if (terrain_n[i] > 0) {alt_min = i * 500.0; break;}}
 
 	var n_max = 0;
 	sum = 0;
 
-	for (var i=0; i<19;i=i+1) 
+	for (var i=0; i<39;i=i+1) 
 		{
 		sum = sum + terrain_n[i];
 		if (terrain_n[i] > n_max) {n_max = terrain_n[i];}
@@ -3090,6 +3098,11 @@ append(alt_50_array, alt_med);
 append(alt_20_array, alt_20);
 append(alt_min_array, alt_min);
 append(alt_mean_array, alt_mean);
+
+
+current_mean_alt = 0.5 * (current_mean_alt + alt_20);
+
+
 }
 
 
@@ -3592,7 +3605,7 @@ debug_output_flag = getprop(lw~"config/debug-output-flag");
 fps_control_flag = getprop(lw~"config/fps-control-flag");
 realistic_visibility_flag = getprop(lw~"config/realistic-visibility-flag");
 detailed_terrain_interaction_flag = getprop(lw~"config/detailed-terrain-interaction-flag");
-scattering_shader_flag = getprop("/sim/rendering/scattering-shader");
+scattering_shader_flag = getprop("/sim/rendering/shaders/skydome");
 
 }
 
@@ -4257,11 +4270,11 @@ setlistener(lw~"config/target-framerate", func {target_framerate = getprop(lw~"c
 
 setlistener(lw~"config/small-scale-persistence", func {weather_tiles.small_scale_persistence = getprop(lw~"config/small-scale-persistence");});
 setlistener(lw~"config/ground-haze-factor", func {ground_haze_factor = getprop(lw~"config/ground-haze-factor");});
-setlistener(lw~"config/max-vis-range-m", func {max_vis_range = getprop(lw~"config/max-vis-range-m");});
+setlistener(lw~"config/aux-max-vis-range-m", func {max_vis_range = math.exp(getprop(lw~"config/aux-max-vis-range-m")); setprop(lw~"config/max-vis-range-m",max_vis_range);});
 
 setlistener(lw~"config/temperature-offset-degc", func {temperature_offset = getprop(lw~"config/temperature-offset-degc");});
 
-setlistener("/sim/rendering/scattering-shader", func {scattering_shader_flag = getprop("/sim/rendering/scattering-shader"); });
+setlistener("/sim/rendering/shaders/skydome", func {scattering_shader_flag = getprop("/sim/rendering/shaders/skydome"); });
 }
 
 
@@ -4273,6 +4286,7 @@ var test = func {
 
 var lat = getprop("position/latitude-deg");
 var lon = getprop("position/longitude-deg");
+var alt = getprop("position/altitude-ft");
 
 thread_flag = 0;
 dynamics_flag = 0;
@@ -4294,11 +4308,11 @@ presampling_flag = 0;
 
 #var pos = geo.aircraft_position();
 
-debug.dump(geodinfo(lat, lon));
+# debug.dump(geodinfo(lat, lon));
 
 #create_cumulonimbus_cloud(lat, lon, 6000.0, 2.5);
 
-# geo.put_model("Models/Astro/Earth.ac",lat, lon);
+local_weather.place_model("Models/Weather/cloudsphere.ac",lat, lon, alt-10000.0, 0.0);
 
 #setprop("/environment/terrain/area[0]/input/latitude-deg", lat );
 #setprop("/environment/terrain/area[0]/input/longitude-deg", lon );
@@ -4586,7 +4600,7 @@ var ec = "/environment/config/";
 
 # a hash map of the strength for convection associated with terrain types
 
-var landcover_map = {BuiltUpCover: 0.35, Town: 0.35, Freeway:0.35, BarrenCover:0.3, HerbTundraCover: 0.25, GrassCover: 0.2, CropGrassCover: 0.2, EvergreenBroadCover: 0.2, EvergreenNeedleCover: 0.2, Sand: 0.25, Grass: 0.2, Ocean: 0.01, Marsh: 0.05, Lake: 0.01, ShrubCover: 0.15, Landmass: 0.2, CropWoodCover: 0.15, MixedForestCover: 0.15, DryCropPastureCover: 0.25, MixedCropPastureCover: 0.2, IrrCropPastureCover: 0.15, DeciduousBroadCover: 0.1, DeciduousNeedleCover: 0.1, Bog: 0.05, pa_taxiway : 0.35, pa_tiedown: 0.35, pc_taxiway: 0.35, pc_tiedown: 0.35, Glacier: 0.03, SnowCover: 0.04, DryLake: 0.3, IntermittentStream: 0.2, DryCrop: 0.2, Lava: 0.3, GolfCourse: 0.2, Rock: 0.3, Construction: 0.35};
+var landcover_map = {BuiltUpCover: 0.35, Town: 0.35, Freeway:0.35, BarrenCover:0.3, HerbTundraCover: 0.25, GrassCover: 0.2, CropGrassCover: 0.2, EvergreenBroadCover: 0.2, EvergreenNeedleCover: 0.2, Sand: 0.25, Grass: 0.2, Ocean: 0.01, Marsh: 0.05, Lake: 0.01, ShrubCover: 0.15, Landmass: 0.2, CropWoodCover: 0.15, MixedForestCover: 0.15, DryCropPastureCover: 0.25, MixedCropPastureCover: 0.2, IrrCropPastureCover: 0.15, DeciduousBroadCover: 0.1, DeciduousNeedleCover: 0.1, Bog: 0.05, pa_taxiway : 0.35, pa_tiedown: 0.35, pc_taxiway: 0.35, pc_tiedown: 0.35, Glacier: 0.03, SnowCover: 0.04, DryLake: 0.3, IntermittentStream: 0.2, DryCrop: 0.2, Lava: 0.3, GolfCourse: 0.2, Rock: 0.3, Construction: 0.35, PackIce: 0.04, NaturalCrop: 0.2};
 
 # a hash map of average vertical cloud model sizes
 
@@ -4694,11 +4708,12 @@ var detailed_terrain_interaction_flag = 1;
 var hardcoded_clouds_flag = 1;
 var realistic_visibility_flag = 0;
 var scattering_shader_flag = 0;
+var wxradar_support_flag = 1;
 
 var ground_haze_factor = 1.0;
 var max_vis_range = 120000.0;
 var temperature_offset = 0.0;
-
+var current_mean_alt = 0.0;
 
 # globals for framerate controlled cloud management
 
@@ -4757,6 +4772,8 @@ setprop(lw~"effect-volumes/number-active-sat",0);
 
 # setprop(lw~"config/max-vis-range-m", 120000.0);
 setprop(lw~"config/temperature-offset-degc", 0.0);
+
+setprop("/sim/rendering/eye-altitude-m", getprop("/position/altitude-ft") * ft_to_m);
 
 # create properties for tile management
 

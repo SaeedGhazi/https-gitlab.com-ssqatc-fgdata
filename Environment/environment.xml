@@ -309,6 +309,7 @@
 
   </params>
 
+
   <wildfire>
     <enabled type="bool" userarchive="y">false</enabled>
     <share-events type="bool" userarchive="y">false</share-events>
@@ -330,7 +331,7 @@
 
   <sea>
     <config>
-      <wind-filter-time type="double">0.05</wind-filter-time>
+      <wind-filter-time type="double">60.0</wind-filter-time>
     </config>
   </sea>
 

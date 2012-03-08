@@ -399,7 +399,7 @@
 <text>
    <x>160</x>
    <y>100</y>
-   <label>30 km</label>
+   <label>20 km</label>
 </text>
 
 <slider>
@@ -407,9 +407,9 @@
    <y>100</y>
    <width>90</width>
    <height>20</height>
-   <min>30000.0</min>
-   <max>140000.0</max>
-   <property>/local-weather/config/max-vis-range-m</property>
+   <min>9.90348</min>
+   <max>12.429216196</max>
+   <property>/local-weather/config/aux-max-vis-range-m</property>
    <binding>
      <command>dialog-apply</command>
    </binding>
@@ -418,7 +418,17 @@
 <text>
    <x>330</x>
    <y>100</y>
-   <label>140 km</label>
+   <label>250 km</label>
+</text>
+
+
+<text>
+   <x>380</x>
+   <y>100</y>
+   <label>12345678</label>
+   <format>%.fm</format>
+   <live>true</live>
+   <property>/local-weather/config/max-vis-range-m</property>
 </text>
 
 

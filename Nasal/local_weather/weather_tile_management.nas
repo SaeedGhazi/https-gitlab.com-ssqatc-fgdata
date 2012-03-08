@@ -53,7 +53,7 @@ var this_frame_action_flag = 0; # use this flag to avoid overlapping tile operat
 setsize(active_tile_list,0);
 #append(active_tile_list,0); # tile zero formally containing static objects is always active 
 
-var distance_to_load = current_visibility;
+var distance_to_load = current_visibility + 10000.0;
 
 if (distance_to_load > 65000.0) {distance_to_load = 65000.0;}
 if (distance_to_load < 29000.0) {distance_to_load = 29000.0;}
@@ -64,7 +64,9 @@ if (distance_to_load < 29000.0) {distance_to_load = 29000.0;}
 #if (distance_to_load < 29000.0)
 #	{distance_to_load = 29000.0;}
 
-var distance_to_remove = distance_to_load + 500.0;
+var distance_to_remove = distance_to_load + 20000.0;
+if (distance_to_remove > 65500.0) {distance_to_remove = 65500.0;}
+
 
 # check here if we have a new weather station if METAR is running
 
@@ -202,7 +204,7 @@ foreach (var t; tNode) {
 
 	
 
-if (getprop(lw~"tile-loop-flag") ==1) {settimer(tile_management_loop, 5.0);}
+if (getprop(lw~"tile-loop-flag") ==1) {settimer(tile_management_loop, 4.0);}
 
 }
 
@@ -712,6 +714,11 @@ if (local_weather.dynamics_flag ==1)
 # rebuild effect volume vector
 
 local_weather.assemble_effect_array(); 
+
+if (local_weather.wxradar_support_flag == 1)
+	{
+	local_weather.remove_wxradar_echos();
+	}
 
 }
 

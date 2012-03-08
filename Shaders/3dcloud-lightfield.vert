@@ -1,0 +1,169 @@
+// -*-C++-*-
+#version 120
+
+varying float fogFactor;
+varying vec3 hazeColor;
+
+uniform float range; // From /sim/rendering/clouds3d-vis-range
+uniform float scattering;
+uniform float terminator;
+uniform float altitude;
+
+attribute vec3 usrAttr1;
+attribute vec3 usrAttr2;
+
+float shade_factor = usrAttr1.g;
+float cloud_height = usrAttr1.b;
+float bottom_factor = usrAttr2.r;
+float middle_factor = usrAttr2.g;
+float top_factor = usrAttr2.b;
+
+const float EarthRadius = 5800000.0;
+
+// light_func is a generalized logistic function fit to the light intensity as a function
+// of scaled terminator position obtained from Flightgear core
+
+float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
+{
+x = x-0.5;
+
+// use the asymptotics to shorten computations
+if (x > 30.0) {return e;}
+if (x < -15.0) {return 0.0;}
+
+
+return e / pow((1.0 + a * exp(-b * (x-c)) ),(1.0/d));
+}
+
+void main(void)
+{
+
+  float intensity;
+  gl_TexCoord[0] = gl_MultiTexCoord0;
+  vec4 ep = gl_ModelViewMatrixInverse * vec4(0.0,0.0,0.0,1.0);
+  vec4 l  = gl_ModelViewMatrixInverse * vec4(0.0,0.0,1.0,1.0);
+  vec3 u = normalize(ep.xyz - l.xyz);
+
+  // Find a rotation matrix that rotates 1,0,0 into u. u, r and w are
+  // the columns of that matrix.
+  vec3 absu = abs(u);
+  vec3 r = normalize(vec3(-u.y, u.x, 0.0));
+  vec3 w = cross(u, r);
+
+  // Do the matrix multiplication by [ u r w pos]. Assume no
+  // scaling in the homogeneous component of pos.
+  gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
+  gl_Position.xyz = gl_Vertex.x * u;
+  gl_Position.xyz += gl_Vertex.y * r;
+  gl_Position.xyz += gl_Vertex.z * w;
+  // Apply Z scaling to allow sprites to be squashed in the z-axis
+  gl_Position.z = gl_Position.z * gl_Color.w;
+
+  // Now shift the sprite to the correct position in the cloud.
+  gl_Position.xyz += gl_Color.xyz;
+
+  // Determine a lighting normal based on the vertex position from the
+  // center of the cloud, so that sprite on the opposite side of the cloud to the sun are darker.
+  float n = dot(normalize(-gl_LightSource[0].position.xyz),
+                normalize(vec3(gl_ModelViewMatrix * vec4(- gl_Position.x, - gl_Position.y, - gl_Position.z, 0.0))));
+
+  // Determine the position - used for fog and shading calculations
+  vec3 ecPosition = vec3(gl_ModelViewMatrix * gl_Position);
+  float fogCoord = abs(ecPosition.z);
+  
+  // Determine the shading of the vertex. We shade it based on it's position
+  // in the cloud relative to the sun, and it's vertical position in the cloud.
+  float shade = mix(shade_factor, top_factor,  smoothstep(-0.3, 0.3, n));
+  //if (n < 0) {
+  //  shade = mix(top_factor, shade_factor, abs(n));
+  //} 
+  
+  if (gl_Position.z < 0.5 * cloud_height) {
+    shade = min(shade, mix(bottom_factor, middle_factor, gl_Position.z * 2.0 / cloud_height));
+  } else {
+    shade = min(shade, mix(middle_factor, top_factor, gl_Position.z * 2.0 / cloud_height - 1.0));
+  }
+                
+  //float h = gl_Position.z / cloud_height;
+  //if (h < 0.5) {
+  //  shade = min(shade, mix(bottom_factor, middle_factor, smoothstep(0.0, 0.5, h)));
+  //} else {
+  //  shade = min(shade, mix(middle_factor, top_factor, smoothstep(2.0 * (h - 0.5)));    
+ // }
+  
+  // Final position of the sprite
+  vec3 relVector = gl_Position.xyz - ep.xyz;
+  gl_Position = gl_ModelViewProjectionMatrix * gl_Position;
+
+
+
+ // Light at the final position
+
+ // first obtain normal to sun position
+
+  vec3 lightFull = (gl_ModelViewMatrixInverse * gl_LightSource[0].position).xyz;
+  vec3 lightHorizon = normalize(vec3(lightFull.x,lightFull.y, 0.0));
+
+ // yprime is the distance of the vertex into sun direction, corrected for altitude
+ // the altitude correction is clamped to reasonable values, sometimes altitude isn't parsed correctly, leading
+ // to overbright or overdark clouds
+ // float vertex_alt = clamp(altitude * 0.30480 + relVector.z,1000.0,10000.0); 
+  float vertex_alt = clamp(altitude + relVector.z, 300.0, 10000.0); 
+  float yprime = -dot(relVector, lightHorizon);
+  float yprime_alt = yprime -sqrt(2.0 * EarthRadius * vertex_alt);
+
+  // compute the light at the position
+  vec4 light_diffuse;
+  
+  float lightArg = (terminator-yprime_alt)/100000.0;
+
+  light_diffuse.b = light_func(lightArg, 1.330e-05, 0.264, 2.227, 1.08e-05, 1.0);
+  light_diffuse.g = light_func(lightArg, 3.931e-06, 0.264, 3.827, 7.93e-06, 1.0);
+  light_diffuse.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
+  light_diffuse.a = 0.0;
+
+   intensity = length(light_diffuse);
+  light_diffuse = intensity * normalize(mix(light_diffuse, 2.0*vec4 (0.55, 0.6, 0.8, 1.0), (1.0 - smoothstep(0.3,0.8, scattering))));   
+
+
+
+
+  //gl_FrontColor = gl_LightSource[0].diffuse * shade + gl_FrontLightModelProduct.sceneColor;
+  gl_FrontColor = light_diffuse * shade + gl_FrontLightModelProduct.sceneColor;
+
+  // As we get within 100m of the sprite, it is faded out. Equally at large distances it also fades out.
+  gl_FrontColor.a = min(smoothstep(10.0, 100.0, fogCoord), 1.0 - smoothstep(range*0.9, range, fogCoord));
+  //gl_BackColor = gl_FrontColor;
+
+ // Fog doesn't affect clouds as much as other objects.
+  float fadeScale = 0.05 + 0.2 * log(fogCoord/1000.0);
+  if (fadeScale < 0.05) fadeScale = 0.05;
+  fogFactor = exp( -gl_Fog.density * fogCoord * fadeScale);
+
+
+  // Fog doesn't affect clouds as much as other objects.
+  //fogFactor = exp( -gl_Fog.density * fogCoord * 0.5);
+  //fogFactor = clamp(fogFactor, 0.0, 1.0);
+
+// haze of ground haze shader is slightly bluish
+  //hazeColor = vec3 (gl_LightSource[0].diffuse.x, gl_LightSource[0].diffuse.y, gl_LightSource[0].diffuse.z);
+  hazeColor = light_diffuse.xyz;
+  hazeColor.x = hazeColor.x * 0.83;
+  hazeColor.y = hazeColor.y * 0.9; 
+  hazeColor = hazeColor * scattering;
+
+  // in sunset or sunrise conditions, do extra shading of clouds
+  
+  // two times terminator width governs how quickly light fades into shadow
+  float terminator_width = 200000.0;
+  float earthShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt) + 0.1;
+
+  // change haze color to blue hue for strong fogging
+  intensity = length(hazeColor);
+  hazeColor = intensity * normalize(mix(hazeColor,  2.0* vec3 (0.55, 0.6, 0.8), (1.0 - smoothstep(0.3,0.8,scattering)))); 	
+  
+
+  	hazeColor = hazeColor * earthShade;
+  	gl_FrontColor.xyz = gl_FrontColor.xyz * earthShade;
+  	gl_BackColor = gl_FrontColor;
+}

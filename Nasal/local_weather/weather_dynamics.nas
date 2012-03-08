@@ -117,10 +117,24 @@ time_lw = time_lw + dt_lw;
 # directly referencing /sim/time/sun-angle-rad as uniform doesn't
 # work since that is a tied property
 
-var sun_angle = 1.57079632675 - getprop("/sim/time/sun-angle-rad");
+#var sun_angle = 1.57079632675 - getprop("/sim/time/sun-angle-rad");
 
-var terminator_offset = sun_angle /  0.017451 * 110000.0 + 250000.0;
-setprop("/environment/terminator-relative-position-m",terminator_offset);
+#var terminator_offset = sun_angle /  0.017451 * 110000.0;# + 250000.0;
+#setprop("/environment/terminator-relative-position-m",terminator_offset);
+
+var viewpos = geo.viewer_position();
+
+# setprop("/environment/alt-in-haze-m", getprop("/environment/ground-haze-thickness-m")-viewpos.alt());
+
+setprop("/sim/rendering/eye-altitude-m", viewpos.alt());
+
+if (local_weather.presampling_flag == 1)
+	{
+	var mean_terrain_elevation_m = ft_to_m * local_weather.current_mean_alt ; }
+else	
+	{var mean_terrain_elevation_m = 0.0;}
+
+setprop("/environment/mean-terrain-elevation-m", mean_terrain_elevation_m);
 
 if (getprop(lw~"timing-loop-flag") ==1) {settimer(timing_loop, 0);}
 

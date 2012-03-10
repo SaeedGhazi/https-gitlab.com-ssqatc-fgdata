@@ -204,6 +204,9 @@
 				<halign>right</halign>
 				<text>
 					<label>Vegetation density</label>
+					<enable>
+						<property>/sim/rendering/random-vegetation</property>
+					</enable>
 				</text>
 				<slider>
 					<name>vegetation-density</name>
@@ -220,6 +223,9 @@
 					<format>%.2f</format>
 					<live>true</live>
 					<property>/sim/rendering/vegetation-density</property>
+					<enable>
+						<property>/sim/rendering/random-vegetation</property>
+					</enable>
 				</text>
 			</group>
 
@@ -280,9 +286,6 @@
 				</text>
 				<slider>
 					<name>cloud-density</name>
-					<enable>
-						<property>/sim/rendering/clouds3d-enable</property>
-					</enable>
 					<min>0</min>
 					<max>1.0</max>
 					<property>/sim/rendering/clouds3d-density</property>
@@ -321,9 +324,6 @@
 				</text>
 				<slider>
 					<name>cloud-vis-range</name>
-					<enable>
-						<property>/sim/rendering/clouds3d-enable</property>
-					</enable>
 					<min>1000.0</min>
 					<max>45000.0</max>
 					<property>/sim/rendering/clouds3d-vis-range</property>
@@ -367,90 +367,84 @@
 			</group>
 			
 			<group>
-				<layout>vbox</layout>
-				<padding>4</padding>
-				<text>
-					<padding>0</padding>
-					<label>This slider overrides custom settings as set in</label>
+				<layout>table</layout>
+				
+				<checkbox>
 					<halign>left</halign>
-				</text>
-				<text>
-					<padding>0</padding>
-					<label>the (advanced) Shader Options dialog.</label>
-					<halign>left</halign>
-				</text>
-			</group>
-			
-			<group>
-				<layout>hbox</layout>
-
-				<text>
-					<label>Performance</label>
-				</text>
-				<slider>
-					<name>quality-level</name>
-					<min>0.0</min>
-					<max>5.0</max>
-					<step>1.0</step>
-					<fraction>0.17</fraction>
-					<property>/sim/rendering/shaders/quality-level</property>
+					<row>0</row>
+					<col>0</col>
+					<label>Custom settings (fine-tuning)</label>
+					<name>custom-settings</name>
+					<property>/sim/rendering/shaders/custom-settings</property>
 					<binding>
 						<command>dialog-apply</command>
-						<object-name>quality-level</object-name>
+						<object-name>custom-settings</object-name>
 					</binding>
-				</slider>
-				<text>
-					<label>Quality</label>
-				</text>
-				<text>
-					<label>12345678</label>
-					<format>(%1.0f)</format>
-					<live>true</live>
-					<property>/sim/rendering/shaders/quality-level</property>
-				</text>
-			</group>
-
-			<group>
-				<layout>hbox</layout>
-				<button>
-					<legend>Shader Options</legend>
-					<binding>
-						<command>dialog-show</command>
-						<dialog-name>shaders</dialog-name>
-					</binding>
-				</button>
-
+				</checkbox>
+				
 				<group>
-					<layout>vbox</layout>
+					<layout>hbox</layout>
+					<row>1</row>
+					<col>0</col>
+					<visible>
+						<not>
+							<property>/sim/rendering/shaders/custom-settings</property>
+						</not>
+					</visible>
+					
+					<layout>hbox</layout>
+
 					<text>
-						<visible>
-							<not>
-								<property>/sim/rendering/shaders/quality-level</property>
-							</not>
-						</visible>
-						<label>Adjust the slider </label>
-						<halign>left</halign>
-						<color>
-							<red>1.0</red>
-							<green>0.6</green>
-							<blue>0.6</blue>
-						</color>
+						<label>Performance</label>
+					</text>
+					<slider>
+						<name>quality-level</name>
+						<min>0.0</min>
+						<max>5.0</max>
+						<step>1.0</step>
+						<fraction>0.17</fraction>
+						<property>/sim/rendering/shaders/quality-level-internal</property>
+						<binding>
+							<command>dialog-apply</command>
+							<object-name>quality-level</object-name>
+						</binding>
+					</slider>
+					<text>
+						<label>Quality</label>
 					</text>
 					<text>
-						<visible>
-							<not>
-								<property>/sim/rendering/shaders/quality-level</property>
-							</not>
-						</visible>
-						<label>to enable shaders.</label>
-						<halign>left</halign>
-						<color>
-							<red>1.0</red>
-							<green>0.6</green>
-							<blue>0.6</blue>
-						</color>
+						<label>12345678</label>
+						<format>(%1.0f)</format>
+						<live>true</live>
+						<property>/sim/rendering/shaders/quality-level-internal</property>
 					</text>
+					
 				</group>
+				
+				<group>
+					<layout>hbox</layout>
+					<row>1</row>
+					<col>0</col>
+					<visible>
+						<property>/sim/rendering/shaders/custom-settings</property>
+					</visible>
+					
+					<button>
+						<legend>Shader Options</legend>
+						<halign>left</halign>
+						<binding>
+							<command>dialog-show</command>
+							<dialog-name>shaders</dialog-name>
+						</binding>
+						<binding>
+							<command>dialog-close</command>
+							<dialog-name>rendering</dialog-name>
+						</binding>
+						<pref-width>200</pref-width>
+					</button>
+
+				</group>
+			
 			</group>
 
 			<group>
@@ -606,25 +600,6 @@
 	<nasal>
 		<open>
 			gui.enable_widgets(cmdarg(), "shadows-debug", getprop("/sim/gui/devel-widgets"));
-			
-			# overwrite custom shader settings on quality-slider input
-			_setlistener("/sim/rendering/shaders/quality-level", func {
-				var qualityLevel = getprop("/sim/rendering/shaders/quality-level");
-				setprop("/sim/rendering/shaders/landmass",qualityLevel);
-				setprop("/sim/rendering/shaders/urban",qualityLevel);
-				setprop("/sim/rendering/shaders/water",qualityLevel);
-				if (qualityLevel >= 3.0){
-					qualityLevel = 3.0;
-				}
-				setprop("/sim/rendering/shaders/model",qualityLevel);
-				if (qualityLevel >= 1.0){
-					qualityLevel = 1.0;
-				}
-				setprop("/sim/rendering/shaders/contrails",qualityLevel);
-				setprop("/sim/rendering/shaders/crop",qualityLevel);
-				setprop("/sim/rendering/shaders/generic",qualityLevel);
-				setprop("/sim/rendering/shaders/transition",qualityLevel);
-			});
 		</open>
 	</nasal>
 </PropertyList>

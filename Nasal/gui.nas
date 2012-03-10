@@ -1316,3 +1316,37 @@ _setlistener("/sim/sound/chatter/enabled", func {
     setprop("/nasal/atc-chatter/enabled", getprop("/sim/sound/chatter/enabled"));
 });
 
+##
+# overwrite custom shader settings when quality-level is set on startup
+var qualityLevel = getprop("/sim/rendering/shaders/quality-level");
+if (qualityLevel == -1) {
+    setprop("/sim/rendering/shaders/custom-settings",1); 
+}
+elsif (qualityLevel != nil) {
+    setprop("/sim/rendering/shaders/custom-settings",0);
+    setprop("/sim/rendering/shaders/quality-level-internal",qualityLevel);
+}
+# overwrite custom shader settings when quality-level is set through the slider 
+# in the Rendering Options dialog
+var update_shader_settings = func() {
+    if (!getprop("/sim/rendering/shaders/custom-settings")){ 
+        var qualityLvl = getprop("/sim/rendering/shaders/quality-level-internal");
+        setprop("/sim/rendering/shaders/landmass",qualityLvl);
+        setprop("/sim/rendering/shaders/urban",qualityLvl);
+        setprop("/sim/rendering/shaders/water",qualityLvl);
+        if (qualityLvl >= 3.0){
+	        qualityLvl = 3.0;
+        }
+        setprop("/sim/rendering/shaders/model",qualityLvl);
+        if (qualityLvl >= 1.0){
+            qualityLvl = 1.0;
+        }
+        setprop("/sim/rendering/shaders/contrails",qualityLvl);
+        setprop("/sim/rendering/shaders/crop",qualityLvl);
+        setprop("/sim/rendering/shaders/generic",qualityLvl);
+        setprop("/sim/rendering/shaders/transition",qualityLvl);
+    }
+};
+_setlistener("/sim/rendering/shaders/custom-settings", func { update_shader_settings() } );
+_setlistener("/sim/rendering/shaders/quality-level-internal",   func { update_shader_settings() } );
+update_shader_settings();

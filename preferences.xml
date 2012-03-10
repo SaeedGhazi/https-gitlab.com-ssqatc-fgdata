@@ -69,6 +69,7 @@ Started September 2000 by David Megginson, david@megginson.com
 			<realism type="int">5</realism>
 			<filtering type="int">8</filtering>
 			<shaders>
+				<custom-settings type="bool" userarchive="y">false</custom-settings>
 				<generic type="float" userarchive="y">1.0</generic>
 				<landmass type="float" userarchive="y">1.0</landmass>
 				<model type="float" userarchive="y">1.0</model>
@@ -78,7 +79,7 @@ Started September 2000 by David Megginson, david@megginson.com
 				<transition type="float" userarchive="y">1.0</transition>
 				<urban type="float" userarchive="y">1.0</urban>
 				<water type="float" userarchive="y">1.0</water>
-				<quality-level type="float" userarchive="y">3.0</quality-level>
+				<quality-level-internal type="float" userarchive="y">3.0</quality-level-internal>
 			</shaders>
 			<mie type="float"
 					 userarchive="y">0.003</mie>

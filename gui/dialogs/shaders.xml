@@ -331,14 +331,25 @@
 	</group>
 
 	<hrule/>
+	
+	<group>
+		<layout>hbox</layout>
 
-	<button>
-		<legend>Close</legend>
-		<default>true</default>
-		<key>Esc</key>
-		<binding>
-			<command>dialog-close</command>
-		</binding>
-	</button>
+		<button>
+			<legend>Back</legend>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>rendering</dialog-name>
+			</binding>
+		</button>
+		<button>
+			<legend>Close</legend>
+			<default>true</default>
+			<key>Esc</key>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+	</group>
 
 </PropertyList>

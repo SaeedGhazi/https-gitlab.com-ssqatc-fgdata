@@ -1180,6 +1180,16 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	data.init();
 	autotrim.init();
 
+##### temporary hack to provide backward compatibility for /sim/auto-coordination
+##### remove this code when all references to /sim/auto-coordination are gone
+	var ac = props.globals.getNode("/sim/auto-coordination");
+	if(ac != nil ) {
+		printlog("alert", 
+			"WARNING: using deprecated property /sim/auto-coordination. Please change to /controls/flight/auto-coordination" );
+		ac.alias(props.globals.getNode("/controls/flight/auto-coordination", 1));
+	}
+#### end of temporary hack for /sim/auto-coordination
+
 	if (getprop("/sim/startup/save-on-exit")) {
 		data.load();
 		var n = props.globals.getNode("/sim/aircraft-data");

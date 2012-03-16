@@ -463,8 +463,8 @@ var fdm_init_listener = _setlistener("/sim/signals/fdm-initialized", func {
 var msg_mp = func (n) {
 	if (!getprop("/sim/multiplay/chat-display"))
 		return;
-	var msg = string.uc(n.getValue());
-	var call = string.uc(getprop("/sim/multiplay/callsign"));
+	var msg = string.lc(n.getValue());
+	var call = string.lc(getprop("/sim/multiplay/callsign"));
 	var matching = 0;
 	var found = 0;
 	for(var i = 0; i < size(msg); i = i + 1) {

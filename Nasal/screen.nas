@@ -454,17 +454,7 @@ var fdm_init_listener = _setlistener("/sim/signals/fdm-initialized", func {
 
 
 
-
-##############################################################################
-# functions that make use of the window class (and don't belong anywhere else)
-##############################################################################
-
-# highlights messages with the multiplayer callsign in the text
-var msg_mp = func (n) {
-	if (!getprop("/sim/multiplay/chat-display"))
-		return;
-	var msg = string.lc(n.getValue());
-	var call = string.lc(getprop("/sim/multiplay/callsign"));
+var search_name_in_msg = func(msg, call) {
 	var matching = 0;
 	var found = 0;
 	for(var i = 0; i < size(msg); i = i + 1) {
@@ -487,6 +477,22 @@ var msg_mp = func (n) {
 		}
 	}
 	if (found == 1 or matching == size(call))
+		return 1;
+	else
+		return 0;
+}
+##############################################################################
+# functions that make use of the window class (and don't belong anywhere else)
+##############################################################################
+
+# highlights messages with the multiplayer callsign in the text
+var msg_mp = func (n) {
+	if (!getprop("/sim/multiplay/chat-display"))
+		return;
+	var msg = string.lc(n.getValue());
+	var call = string.lc(getprop("/sim/multiplay/callsign"));
+	var highlight = getprop("/sim/multiplay/chat_highlight");
+	if (search_name_in_msg(msg, call) or (highlight != nil and search_name_in_msg(msg, string.lc(highlight))))
 		screen.log.write(n.getValue(), 1.0, 0.5, 0.5);
 	else
 		screen.log.write(n.getValue(), 0.5, 0.0, 0.8);

@@ -462,6 +462,9 @@ _setlistener("/sim/signals/fdm-initialized", func {
     var sel = props.globals.getNode("/sim/input/selected", 1);
     var engs = props.globals.getNode("/controls/engines").getChildren("engine");
 
+    # need to reset engine list on every FDM reset
+    engines = [];
+    # process all engines
     foreach(var e; engs) {
         var index = e.getIndex();
         var s = sel.getChild("engine", index, 1);

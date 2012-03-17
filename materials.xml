@@ -1855,10 +1855,8 @@ Shared parameters for various materials.
    </equals>
   </condition>
   <name>Sand</name>
-  <texture>Terrain.winter/sand4.png</texture>
-  <texture>Terrain.winter/sand5.png</texture>
-  <texture>Terrain.winter/sand6.png</texture>
-  <xsize>2000</xsize>
+  <texture>Terrain.winter/sand.png</texture>
+    <xsize>2000</xsize>
   <ysize>2000</ysize>
   <light-coverage>10000000.0</light-coverage>
   <shininess>2.5</shininess>
@@ -2116,9 +2114,7 @@ Shared parameters for various materials.
   <name>DryLake</name>
   <name>IntermittentReservoir</name>
   <name>IntermittentLake</name>
-  <texture>Terrain.winter/sand1.png</texture>
-  <texture>Terrain.winter/sand2.png</texture>
-  <texture>Terrain.winter/sand3.png</texture>
+  <texture>Terrain.winter/sand.png</texture>
   <xsize>2000</xsize>
   <ysize>2000</ysize>
   <solid>1</solid>
@@ -2575,7 +2571,7 @@ Shared parameters for various materials.
    </equals>
   </condition>
   <name>GolfCourse</name>
-  <texture>Terrain.winter/golfcourse.png</texture>
+  <texture>Terrain.winter/golfcourse1.png</texture>
   <object-mask>Terrain/golfcourse1.mask.png</object-mask>
   <xsize>2000</xsize>
   <ysize>2000</ysize>

@@ -177,12 +177,12 @@ var setAllMCBF = func(mcbf) {
     }
 }
 
-
 # Initialization, called once Nasal and the FDM are loaded properly.
-_setlistener("/sim/signals/fdm-initialized", func {
+var fdm_init_listener = _setlistener("/sim/signals/fdm-initialized-once", func {
+    removelistener(fdm_init_listener); # uninstall, so we're only called once
     srand();
 
-    # Engines are added dynamically because there may be an arbritary number
+    # Engines are added dynamically because there may be an arbitrary number
     var i = 1;
     foreach (var e; props.globals.getNode("/engines").getChildren("engine")) {
         breakHash[e.getPath()] = { type: type.MTBF, failure: fail.ENGINE, desc : "Engine " ~ i };

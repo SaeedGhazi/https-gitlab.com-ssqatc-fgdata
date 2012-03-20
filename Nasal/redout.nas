@@ -114,8 +114,9 @@ var check_params = func() {
   }
 }
 
-_setlistener("/sim/signals/fdm-initialized",
+var fdm_init_listener = _setlistener("/sim/signals/fdm-initialized",
   func {
+    removelistener(fdm_init_listener); # uninstall, so we're only called once
     fdm = getprop("/sim/flight-model");
     running_redout = getprop("/sim/rendering/redout/enabled");
     running_compression = getprop("/sim/rendering/headshake/enabled");

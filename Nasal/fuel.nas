@@ -68,8 +68,14 @@ var tanks = [];
 var engines = [];
 var fuel_freeze = nil;
 
+var freeze_fuel_listener = nil;
+var initialized = 0;
+
 _setlistener("/sim/signals/fdm-initialized", func {
-	setlistener("/sim/freeze/fuel", func(n) { fuel_freeze = n.getBoolValue() }, 1);
+	if (freeze_fuel_listener == nil)
+	{
+		freeze_fuel_listener = setlistener("/sim/freeze/fuel", func(n) { fuel_freeze = n.getBoolValue() }, 1);
+	}
 
 	# Fuel sub-system is only used by YASim. Other FDMs (e.g. JSBSim)
 	# handle fuel themselves.
@@ -80,6 +86,11 @@ _setlistener("/sim/signals/fdm-initialized", func {
 		e.getNode("fuel-consumed-lbs", 1).setDoubleValue(0);
 		e.getNode("out-of-fuel", 1).setBoolValue(0);
 	}
+
+	# do the following stuff once only
+	if (initialized)
+		return;
+	initialized = 1;
 
 	foreach (var t; props.globals.getNode("/consumables/fuel", 1).getChildren("tank")) {
 		if (!t.getAttribute("children"))

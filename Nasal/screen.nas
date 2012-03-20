@@ -435,7 +435,8 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 # --prop:display=position/              ... adds all properties under /position/  (ends with slash!)
 # --prop:display=position/,orientation/ ... separate multiple properties with comma
 #
-_setlistener("/sim/signals/fdm-initialized", func {
+var fdm_init_listener = _setlistener("/sim/signals/fdm-initialized", func {
+	removelistener(fdm_init_listener); # uninstall, so we're only called once
 	foreach (var n; props.globals.getChildren("display")) {
 		foreach (var p; split(",", n.getValue())) {
 			if (!size(p))

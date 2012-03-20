@@ -655,7 +655,8 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 });
 
 
-_setlistener("/sim/signals/fdm-initialized", func {
+var fdm_init_listener = _setlistener("/sim/signals/fdm-initialized", func {
+	removelistener(fdm_init_listener); # uninstall, so we're only called once
 	var zoffset = nil;
 	foreach (var v; views) {
 		var index = v.getIndex();

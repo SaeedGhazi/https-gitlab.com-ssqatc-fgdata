@@ -87,7 +87,8 @@ var loop = func(id) {
 
 var loopid = 0;
 
-_setlistener("/sim/signals/fdm-initialized", func {
+var fdm_init_listener = _setlistener("/sim/signals/fdm-initialized", func {
+	removelistener(fdm_init_listener); # uninstall, so we're only called once
 	# remove top bar unless otherwise specified
 	var top = props.globals.initNode("/sim/model/geometry/square/top", 1, "BOOL");
 

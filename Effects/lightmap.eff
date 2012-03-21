@@ -9,7 +9,7 @@
     <material>
       <color-mode-uniform>1</color-mode-uniform> <!-- DIFFUSE -->
     </material>
-    <condition><use>/sim/rendering/shader/generic</use></condition>
+    <condition><use>/sim/rendering/shaders/generic</use></condition>
     <factor>1</factor>
 		<!-- 		BEGIN fog include -->
 		<visibility>

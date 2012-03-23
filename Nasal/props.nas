@@ -202,7 +202,7 @@ var wrap = func(node) {
     } elsif(argtype == "vector") {
         var v = node;
         var n = size(v);
-        for(i=0; i<n; i+=1) { v[i] = wrapNode(v[i]); }
+        for(var i=0; i<n; i+=1) { v[i] = wrapNode(v[i]); }
         return v;
     }
     return node;
@@ -235,7 +235,7 @@ var setAll = func(base, child, value) {
     node = node.getParent();
     if(node == nil) return;
     var children = node.getChildren();
-    foreach(c; children)
+    foreach(var c; children)
         if(c.getName() == name)
             c.getNode(child, 1).setValue(value);
 }

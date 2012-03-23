@@ -133,7 +133,7 @@ var door = {
 #
 var light = {
 	new: func {
-		m = { parents: [light] };
+		var m = { parents: [light] };
 		m.node = makeNode(arg[0]);
 		var stretch = 1.0;
 		var c = 1;

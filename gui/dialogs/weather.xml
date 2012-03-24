@@ -1961,7 +1961,7 @@
 
 
           # fill the METAR source combo box
-          var combo = me.findElementByName( me.dlgRoot, "source-selection" );
+          var combo = gui.findElementByName( me.dlgRoot, "source-selection" );
           var wsn = props.globals.getNode( "/environment/weather-scenarios" );
           if( wsn != nil ) {
             var scenarios = wsn.getChildren("scenario");
@@ -2016,17 +2016,6 @@
               if( scenario.getNode("name").getValue() == name )
                 return scenario;
             }
-          }
-          return nil;
-        },
-
-        findElementByName : func(base,name) {
-          foreach( var child; base.getChildren() ) {
-            var n = child.getNode( "name" );
-            if( n != nil and n.getValue() == name )
-              return child;
-            var f = me.findElementByName(child,name);
-            if( f != nil ) return f;
           }
           return nil;
         },

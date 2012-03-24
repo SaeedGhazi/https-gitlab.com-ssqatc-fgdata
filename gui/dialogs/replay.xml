@@ -26,7 +26,7 @@
 
 			# Populate the view combo box with a list of the available views
 			initViews : func(update) {
-				var combo = me.findElementByName( me.dlgRoot, "view-selector" );
+				var combo = gui.findElementByName( me.dlgRoot, "view-selector" );
 				if (update)
 					combo.removeChildren("value");
 
@@ -35,21 +35,21 @@
 				foreach (var v; view.views) {
 					var name = "Unnamed view " ~ v.getIndex();
 					if (v.getNode("name") != nil) {
-					  name = v.getNode("name").getValue();
+						name = v.getNode("name").getValue();
 					}
 
 					# Pre-populate the combo box selected value
 					if (i == current_view) {
-					  setprop("/sim/replay/view-name", name);
+						setprop("/sim/replay/view-name", name);
 					}
 					if (update)
 						combo.getNode("value[" ~ i ~ "]", 1).setValue(name);
-					i = i + 1;
+					i += 1;
 				}
 			},
 
 			open : func {
-				var replaySlider = me.findElementByName( me.dlgRoot, "replay-time-slider" );
+				var replaySlider = gui.findElementByName( me.dlgRoot, "replay-time-slider" );
 				me.maxProp = replaySlider.getChild("max");
 				me.minProp = replaySlider.getChild("min");
 				me.speedUpListenerId = setlistener( "/sim/speed-up", func(n) { me.updateListener(n); }, 1, 1 );
@@ -72,23 +72,12 @@
 				}
 				setprop("/sim/gui/dialogs/replay/time-factor","" ~ SpeedUp ~ "x");
 				me.initViews(0);
-		    },
+			},
 
 			close : func {
 				removelistener( me.speedUpListenerId );
 				removelistener( me.viewListenerId );
 			},
-
-		    findElementByName : func(base,name) {
-		      foreach( var child; base.getChildren() ) {
-		        var n = child.getNode( "name" );
-		        if( n != nil and n.getValue() == name )
-		          return child;
-		        var f = me.findElementByName(child,name);
-		        if( f != nil ) return f;
-		      }
-		      return nil;
-		    },
 
 		};
 
@@ -147,7 +136,7 @@
 				<object-name>replay-looped</object-name>
 			</binding>
 		</checkbox>
-        <input>
+		<input>
 			<name>replay-duration</name>
 			<pref-width>40</pref-width>
 			<color>
@@ -161,7 +150,7 @@
 				<command>dialog-apply</command>
 				<object-name>replay-duration</object-name>
 			</binding>
-        </input>
+		</input>
 
 		<empty><pref-width>40</pref-width></empty>
 
@@ -214,8 +203,8 @@
 				<alpha type="float">0.8</alpha>
 			</color>
 			<binding>
-			  <command>nasal</command>
-			  <script>controls.speedup(-1);</script>
+				<command>nasal</command>
+				<script>controls.speedup(-1);</script>
 			</binding>
 		</button>
 		<text>
@@ -242,12 +231,12 @@
 				<alpha type="float">0.8</alpha>
 			</color>
 			<binding>
-			  <command>nasal</command>
-			  <script>controls.speedup(1);</script>
+				<command>nasal</command>
+				<script>controls.speedup(1);</script>
 			</binding>
 		</button>
 
-        <empty><stretch>1</stretch></empty>
+		<empty><stretch>1</stretch></empty>
 
 		<button>
 			<legend>Hide</legend>
@@ -260,10 +249,10 @@
 			</color>
 			<pref-width>40</pref-width>
 			<binding>
-			  <command>nasal</command>
-			  <script><![CDATA[
+				<command>nasal</command>
+				<script><![CDATA[
 				setprop("/sim/messages/copilot", "Replay active. 'Esc' to stop. 'Ctrl-R' to show replay controls.");
-			  ]]></script>
+				]]></script>
 			</binding>
 			<binding>
 				<command>dialog-close</command>
@@ -286,8 +275,8 @@
 				<alpha type="float">0.8</alpha>
 			</color>
 			<binding>
-			  <command>nasal</command>
-			  <script>controls.replaySkip(-30);</script>
+				<command>nasal</command>
+				<script>controls.replaySkip(-30);</script>
 			</binding>
 		</button>
 
@@ -302,8 +291,8 @@
 				<alpha type="float">0.8</alpha>
 			</color>
 			<binding>
-			  <command>nasal</command>
-			  <script>controls.replaySkip(-5);</script>
+				<command>nasal</command>
+				<script>controls.replaySkip(-5);</script>
 			</binding>
 		</button>
 
@@ -335,7 +324,7 @@
 			<min>0</min><!-- property is updated on "dialog open" -->
 			<max>1.0</max><!-- property is updated on "dialog open" -->
 			<property>/sim/replay/time</property>
-			<live>true</live>				
+			<live>true</live>
 			<binding>
 				<command>dialog-apply</command>
 				<object-name>replay-time-slider</object-name>
@@ -367,8 +356,8 @@
 				<alpha type="float">0.8</alpha>
 			</color>
 			<binding>
-			  <command>nasal</command>
-			  <script>controls.replaySkip(5);</script>
+				<command>nasal</command>
+				<script>controls.replaySkip(5);</script>
 			</binding>
 		</button>
 

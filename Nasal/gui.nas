@@ -89,11 +89,31 @@ var setCursor = func(x = nil, y = nil, cursor = nil) {
     fgcommand("set-cursor", args);
     return args.getNode("cursor").getValue();
 }
+
+##
+# Supported mouse cursor types.
+#
 var cursor_types = { none: 0, pointer: 1, wait: 2, crosshair: 3, leftright: 4,
     topside: 5, bottomside: 6, leftside: 7, rightside: 8,
     topleft: 9, topright: 10, bottomleft: 11, bottomright: 12,
 };
 
+##
+# Find a GUI element by given name.
+# dialog: dialog root property.
+# name: name of GUI element to be searched.
+# Returns GUI element when found, nil otherwise.
+#
+var findElementByName = func(dialog,name) {
+	foreach( var child; dialog.getChildren() ) {
+		var n = child.getNode( "name" );
+		if( n != nil and n.getValue() == name )
+			return child;
+		var f = findElementByName(child, name);
+		if( f != nil ) return f;
+	}
+	return nil;
+};
 
 
 ########################################################################

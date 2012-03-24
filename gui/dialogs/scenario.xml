@@ -108,17 +108,6 @@
     <open><![CDATA[
       var dlg_root = cmdarg();
 
-      var findElementByName = func(rootN, name) {
-        foreach( var child; rootN.getChildren() ) {
-          var n = child.getNode( "name" );
-          if( n != nil and n.getValue() == name )
-            return child;
-          var f = findElementByName(child,name);
-          if( f != nil ) return f;
-        }
-        return nil;
-      };
-
       var isEnabledScenario = func(scenario) {
         foreach( var n; props.globals.getNode("sim/ai",1).getChildren("scenario") )
           if( n.getValue() == scenario )
@@ -138,7 +127,7 @@
         propertyRoot.getNode("selected",1).setBoolValue(isEnabledScenario(file));
         propertyRoot.getNode("name",1).setValue(file);
 
-        var group = findElementByName( dlg_root, columns[math.mod(nr,2)] ).getChild("group", nr, 1 );
+        var group = gui.findElementByName( dlg_root, columns[math.mod(nr,2)] ).getChild("group", nr, 1 );
         group.getNode("layout",1).setValue("hbox");
         var cb = group.getNode("checkbox",1);
         cb.getNode("property",1).setValue(propertyRoot.getNode("selected").getPath());

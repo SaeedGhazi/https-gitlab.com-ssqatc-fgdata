@@ -39,8 +39,8 @@ var menuEnable = func(searchname, state) {
                 menu.getNode("enabled").setBoolValue(state);
             }
         }
-        foreach (item; menu.getChildren("item")) {
-            foreach (name; item.getChildren("name")) {
+        foreach (var item; menu.getChildren("item")) {
+            foreach (var name; item.getChildren("name")) {
                 if (name.getValue() == searchname) {
                     item.getNode("enabled").setBoolValue(state);
                 }
@@ -55,8 +55,8 @@ var menuEnable = func(searchname, state) {
 #
 var menuBind = func(searchname, command) {
     foreach (var menu; props.globals.getNode("/sim/menubar/default").getChildren("menu")) {
-        foreach (item; menu.getChildren("item")) {
-            foreach (name; item.getChildren("name")) {
+        foreach (var item; menu.getChildren("item")) {
+            foreach (var name; item.getChildren("name")) {
                 if (name.getValue() == searchname) {
                     item.getNode("binding", 1).getNode("command", 1).setValue("nasal");
                     item.getNode("binding", 1).getNode("script", 1).setValue(command);
@@ -89,11 +89,31 @@ var setCursor = func(x = nil, y = nil, cursor = nil) {
     fgcommand("set-cursor", args);
     return args.getNode("cursor").getValue();
 }
+
+##
+# Supported mouse cursor types.
+#
 var cursor_types = { none: 0, pointer: 1, wait: 2, crosshair: 3, leftright: 4,
     topside: 5, bottomside: 6, leftside: 7, rightside: 8,
     topleft: 9, topright: 10, bottomleft: 11, bottomright: 12,
 };
 
+##
+# Find a GUI element by given name.
+# dialog: dialog root property.
+# name: name of GUI element to be searched.
+# Returns GUI element when found, nil otherwise.
+#
+var findElementByName = func(dialog,name) {
+	foreach( var child; dialog.getChildren() ) {
+		var n = child.getNode( "name" );
+		if( n != nil and n.getValue() == name )
+			return child;
+		var f = findElementByName(child, name);
+		if( f != nil ) return f;
+	}
+	return nil;
+};
 
 
 ########################################################################
@@ -240,10 +260,10 @@ var Widget = {
     prop : func { return me.node; },
     new : func { return { parents : [Widget], node : props.Node.new() } },
     addChild : func {
-        type = arg[0];
-        idx = size(me.node.getChildren(type));
-        name = type ~ "[" ~ idx ~ "]";
-        newnode = me.node.getNode(name, 1);
+        var type = arg[0];
+        var idx = size(me.node.getChildren(type));
+        var name = type ~ "[" ~ idx ~ "]";
+        var newnode = me.node.getNode(name, 1);
         return { parents : [Widget], node : newnode };
     },
     setColor : func(r, g, b, a = 1) {
@@ -295,6 +315,7 @@ var Dialog = {
     new: func(prop, path = nil, name = nil) {
         var m = { parents: [Dialog] };
         m.state = 0;
+        m.listener = nil;
         if (path == nil) { # global dialog in $FG_ROOT/gui/dialogs/
             m.name = prop;
             m.prop = props.Node.new({ "dialog-name" : prop });
@@ -308,6 +329,11 @@ var Dialog = {
             m.listener = setlistener("/sim/signals/reinit-gui", func m.load(), 1);
         }
         return Dialog.instance[m.name] = m;
+    },
+    del: func
+    {
+        if (me.listener != nil)
+            removelistener(me.listener);
     },
     # doesn't need to be called explicitly, but can be used to force a reload
     load: func {
@@ -433,6 +459,9 @@ var OverlaySelector = {
     del: func {
         removelistener(me.listener);
         removelistener(me.reinit_listener);
+        # call inherited 'del'
+        me.parents = subvec(me.parents,1);
+        me.del();
     },
     rescan: func {
         me.data = [];
@@ -548,6 +577,9 @@ var FileSelector = {
         delete(me.instance, me.name);
         removelistener(me.cblistener);
         me.data.remove();
+        # call inherited 'del'
+        me.parents = subvec(me.parents,1);
+        me.del();
     },
 };
 
@@ -556,7 +588,7 @@ var FileSelector = {
 #
 var DirSelector = {
   new: func(callback, title, button, dir = "") {
-     return FileSelector.new(callback, title, button, nil, dir, "", 0, show_files=0);
+     return FileSelector.new(callback, title, button, nil, dir, "", 0, 0);
   }
 };
 
@@ -728,10 +760,10 @@ var setWeight = func(wgt, opt) {
 # appropriate weights therefrom.
 var setWeightOpts = func {
     var tankchange = 0;
-    foreach(w; props.globals.getNode("sim").getChildren("weight")) {
+    foreach(var w; props.globals.getNode("sim").getChildren("weight")) {
         var selected = w.getNode("selected");
         if(selected != nil) {
-            foreach(opt; w.getChildren("opt")) {
+            foreach(var opt; w.getChildren("opt")) {
                 if(opt.getNode("name", 1).getValue() == selected.getValue()) {
                     if(setWeight(w, opt)) { tankchange = 1; }
                     break;
@@ -901,7 +933,7 @@ var showWeightDialog = func {
     tcell(fuelTable, "text", 0, 4).set("label", "Gallons");
 
     var tanks = props.globals.getNode("/consumables/fuel").getChildren("tank");
-    for(i=0; i<size(tanks); i+=1) {
+    for(var i=0; i<size(tanks); i+=1) {
         var t = tanks[i];
 
         var tname = i ~ "";
@@ -965,7 +997,7 @@ var showWeightDialog = func {
         var wgts = payload_base.getChildren("weight");
     else
         var wgts = [];
-    for(i=0; i<size(wgts); i+=1) {
+    for(var i=0; i<size(wgts); i+=1) {
         var w = wgts[i];
         var wname = w.getNode("name", 1).getValue();
         var wprop = fdmdata.payload ~ "/weight[" ~ i ~ "]";
@@ -981,8 +1013,8 @@ var showWeightDialog = func {
 
             # Simple code we'd like to use:
             #foreach(opt; w.getChildren("opt")) {
-            #	var ent = combo.addChild("value");
-            #	ent.prop().setValue(opt.getNode("name", 1).getValue());
+            #    var ent = combo.addChild("value");
+            #    ent.prop().setValue(opt.getNode("name", 1).getValue());
             #}
 
             # More complicated workaround to move the "current" item
@@ -1065,20 +1097,20 @@ var showWeightDialog = func {
 #     </text>
 # </help>
 #
-showHelpDialog = func {
-    node = props.globals.getNode(arg[0]);
+var showHelpDialog = func {
+    var node = props.globals.getNode(arg[0]);
     if (arg[0] == "/sim/help" and size(node.getChildren()) < 4) {
         node = node.getChild("common");
     }
 
-    name = node.getNode("title", 1).getValue();
+    var name = node.getNode("title", 1).getValue();
     if (name == nil) {
         name = getprop("/sim/description");
         if (name == nil) {
             name = getprop("/sim/aircraft");
         }
     }
-    toggle = size(arg) > 1 and arg[1] != nil and arg[1] > 0;
+    var toggle = size(arg) > 1 and arg[1] != nil and arg[1] > 0;
     if (toggle and contains(dialog, name)) {
         fgcommand("dialog-close", props.Node.new({ "dialog-name": name }));
         delete(dialog, name);
@@ -1091,13 +1123,13 @@ showHelpDialog = func {
     dialog[name].set("name", name);
 
     # title bar
-    titlebar = dialog[name].addChild("group");
+    var titlebar = dialog[name].addChild("group");
     titlebar.set("layout", "hbox");
     titlebar.addChild("empty").set("stretch", 1);
     titlebar.addChild("text").set("label", name);
     titlebar.addChild("empty").set("stretch", 1);
 
-    w = titlebar.addChild("button");
+    var w = titlebar.addChild("button");
     w.set("pref-width", 16);
     w.set("pref-height", 16);
     w.set("legend", "");
@@ -1109,19 +1141,19 @@ showHelpDialog = func {
     dialog[name].addChild("hrule");
 
     # key list
-    keylist = dialog[name].addChild("group");
+    var keylist = dialog[name].addChild("group");
     keylist.set("layout", "table");
     keylist.set("default-padding", 2);
-    keydefs = node.getChildren("key");
-    n = size(keydefs);
-    row = col = 0;
-    foreach (key; keydefs) {
+    var keydefs = node.getChildren("key");
+    var n = size(keydefs);
+    var row = var col = 0;
+    foreach (var key; keydefs) {
         if (n >= 60 and row >= n / 3 or n >= 16 and row >= n / 2) {
             col += 1;
             row = 0;
         }
 
-        w = keylist.addChild("text");
+        var w = keylist.addChild("text");
         w.set("row", row);
         w.set("col", 2 * col);
         w.set("halign", "right");
@@ -1136,7 +1168,7 @@ showHelpDialog = func {
     }
 
     # separate lines
-    lines = node.getChildren("line");
+    var lines = node.getChildren("line");
     if (size(lines)) {
         if (size(keydefs)) {
             dialog[name].addChild("empty").set("pref-height", 4);
@@ -1144,12 +1176,12 @@ showHelpDialog = func {
             dialog[name].addChild("empty").set("pref-height", 4);
         }
 
-        g = dialog[name].addChild("group");
+        var g = dialog[name].addChild("group");
         g.set("layout", "vbox");
         g.set("default-padding", 1);
         foreach (var lin; lines) {
             foreach (var l; split("\n", lin.getValue())) {
-                w = g.addChild("text");
+                var w = g.addChild("text");
                 w.set("halign", "left");
                 w.set("label", " " ~ l ~ " ");
             }
@@ -1161,13 +1193,13 @@ showHelpDialog = func {
         dialog[name].set("resizable", 1);
         dialog[name].addChild("empty").set("pref-height", 10);
 
-        width = [640, 800, 1152][col];
-        height = screenHProp.getValue() - (100 + (size(keydefs) / (col + 1) + size(lines)) * 28);
+        var width = [640, 800, 1152][col];
+        var height = screenHProp.getValue() - (100 + (size(keydefs) / (col + 1) + size(lines)) * 28);
         if (height < 200) {
             height = 200;
         }
 
-        w = dialog[name].addChild("textbox");
+        var w = dialog[name].addChild("textbox");
         w.set("padding", 4);
         w.set("halign", "fill");
         w.set("valign", "fill");
@@ -1335,7 +1367,7 @@ var update_shader_settings = func() {
         setprop("/sim/rendering/shaders/urban",qualityLvl);
         setprop("/sim/rendering/shaders/water",qualityLvl);
         if (qualityLvl >= 3.0){
-	        qualityLvl = 3.0;
+            qualityLvl = 3.0;
         }
         setprop("/sim/rendering/shaders/model",qualityLvl);
         if (qualityLvl >= 1.0){

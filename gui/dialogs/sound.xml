@@ -329,19 +329,8 @@
     <open><![CDATA[
       var dlg_root = cmdarg();
 
-      var findElementByName = func(rootN, name) {
-        foreach( var child; rootN.getChildren() ) {
-          var n = child.getNode( "name" );
-          if( n != nil and n.getValue() == name )
-            return child;
-          var f = findElementByName(child,name);
-          if( f != nil ) return f;
-        }
-        return nil;
-      };
-
       # Fill the sound device combo box
-      var combo = findElementByName( dlg_root, "source-selection" );
+      var combo = gui.findElementByName( dlg_root, "source-selection" );
       var wsn = props.globals.getNode( "sim/sound/devices" );
       if( wsn != nil ) {
         var devices = wsn.getChildren("device");

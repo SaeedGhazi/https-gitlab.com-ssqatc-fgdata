@@ -295,6 +295,7 @@ var Dialog = {
     new: func(prop, path = nil, name = nil) {
         var m = { parents: [Dialog] };
         m.state = 0;
+        m.listener = nil;
         if (path == nil) { # global dialog in $FG_ROOT/gui/dialogs/
             m.name = prop;
             m.prop = props.Node.new({ "dialog-name" : prop });
@@ -308,6 +309,11 @@ var Dialog = {
             m.listener = setlistener("/sim/signals/reinit-gui", func m.load(), 1);
         }
         return Dialog.instance[m.name] = m;
+    },
+    del: func
+    {
+        if (me.listener != nil)
+            removelistener(me.listener);
     },
     # doesn't need to be called explicitly, but can be used to force a reload
     load: func {
@@ -433,6 +439,9 @@ var OverlaySelector = {
     del: func {
         removelistener(me.listener);
         removelistener(me.reinit_listener);
+        # call inherited 'del'
+        me.parents = subvec(me.parents,1);
+        me.del();
     },
     rescan: func {
         me.data = [];
@@ -548,6 +557,9 @@ var FileSelector = {
         delete(me.instance, me.name);
         removelistener(me.cblistener);
         me.data.remove();
+        # call inherited 'del'
+        me.parents = subvec(me.parents,1);
+        me.del();
     },
 };
 
@@ -981,8 +993,8 @@ var showWeightDialog = func {
 
             # Simple code we'd like to use:
             #foreach(opt; w.getChildren("opt")) {
-            #	var ent = combo.addChild("value");
-            #	ent.prop().setValue(opt.getNode("name", 1).getValue());
+            #    var ent = combo.addChild("value");
+            #    ent.prop().setValue(opt.getNode("name", 1).getValue());
             #}
 
             # More complicated workaround to move the "current" item
@@ -1335,7 +1347,7 @@ var update_shader_settings = func() {
         setprop("/sim/rendering/shaders/urban",qualityLvl);
         setprop("/sim/rendering/shaders/water",qualityLvl);
         if (qualityLvl >= 3.0){
-	        qualityLvl = 3.0;
+            qualityLvl = 3.0;
         }
         setprop("/sim/rendering/shaders/model",qualityLvl);
         if (qualityLvl >= 1.0){

@@ -492,7 +492,7 @@
 			<!-- 			END fog include -->
 		</pass>
 	</technique>
-	<technique n="10">
+	<technique n="11"> <!-- FIXME: this technique number overlaps the one in model-default -->
 		<predicate>
 			<and>
 				<property>/sim/rendering/shaders/water</property>

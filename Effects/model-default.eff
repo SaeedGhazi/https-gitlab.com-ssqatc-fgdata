@@ -11,6 +11,7 @@
 			<color-mode-uniform>1</color-mode-uniform>
 			<!-- DIFFUSE -->
 		</material>
+		<material-id>0</material-id>
 		<!-- 		BEGIN fog include -->
 		<visibility>
 			<use>/environment/ground-visibility-m</use>
@@ -131,7 +132,75 @@
     </pass>
   </technique>
 
-	<technique n="10">
+<technique n="10">
+	<predicate>
+		<and>
+			<property>/sim/rendering/rembrandt</property>
+			<or>
+				<less-equal>
+					<value type="float">2.0</value>
+					<glversion/>
+				</less-equal>
+				<and>
+					<extension-supported>GL_ARB_shader_objects</extension-supported>
+					<extension-supported>GL_ARB_shading_language_100</extension-supported>
+					<extension-supported>GL_ARB_vertex_shader</extension-supported>
+					<extension-supported>GL_ARB_fragment_shader</extension-supported>
+				</and>
+			</or>
+			<extension-supported>GL_EXT_gpu_shader4</extension-supported>
+			<extension-supported>GL_ARB_texture_rg</extension-supported>
+		</and>
+	</predicate>
+	<pass>
+		<lighting>false</lighting>
+		<material>
+			<ambient><use>material/ambient</use></ambient>
+			<diffuse><use>material/diffuse</use></diffuse>
+			<specular><use>material/specular</use></specular>
+			<emissive><use>material/emissive</use></emissive>
+			<shininess><use>material/shininess</use></shininess>
+			<color-mode>ambient-and-diffuse</color-mode>
+		</material>
+		<blend>false</blend>
+		<alpha-test>true</alpha-test>
+		<shade-model>smooth</shade-model>
+		<cull-face>back</cull-face>
+		<render-bin>
+			<bin-number>1</bin-number>
+			<bin-name>RenderBin</bin-name>
+		</render-bin>
+		<texture-unit>
+			<unit>0</unit>
+			<image><use>texture[0]/image</use></image>
+			<filter><use>texture[0]/filter</use></filter>
+			<wrap-s><use>texture[0]/wrap-s</use></wrap-s>
+			<wrap-t><use>texture[0]/wrap-t</use></wrap-t>
+			<internal-format>
+				<use>texture[0]/internal-format</use>
+			</internal-format>
+			<environment>
+				<mode>modulate</mode>
+			</environment>
+		</texture-unit>
+		<program>
+			<vertex-shader>Shaders/deferred-gbuffer.vert</vertex-shader>
+			<fragment-shader>Shaders/deferred-gbuffer.frag</fragment-shader>
+		</program>
+		<uniform>
+			<name>texture</name>
+			<type>sampler-2d</type>
+			<value type="int">0</value>
+		</uniform>
+		<!-- uniform>
+			<name>materialID</name>
+			<type>int</type>
+			<value><use>material-id</use></value>
+		</uniform -->
+	</pass>
+</technique>
+
+	<technique n="11">
 		<predicate>
 			<and>
 				<property>/sim/rendering/shaders/generic</property>
@@ -290,7 +359,7 @@
 			</uniform>
 		</pass>
 	</technique>
-	<technique n="11">
+	<technique n="12">
 		<pass>
 			<lighting>true</lighting>
 			<material>

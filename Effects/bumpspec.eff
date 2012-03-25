@@ -34,7 +34,7 @@ in Aircraft/A320/Models/Effects/a320_bumpspec.eff ( or whatever, private to the 
     <tangent type="int">6</tangent>
     <binormal type="int">7</binormal>
   </generate>
-  <technique n="10">
+  <technique n="11"> <!-- This number should be the same than the second technique in model-default -->
     <predicate>
       <and>
         <property>/sim/rendering/shaders/model</property>

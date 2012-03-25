@@ -148,7 +148,7 @@ please see Docs/README.model-combined.eff for documentation
 		<binormal type="int">7</binormal>
 	</generate>-->
 
-	<technique n="10">
+	<technique n="11"> <!-- FIXME: this technique number overlaps the one in model-default -->
 		<predicate>
 			<and>
 				<property>/sim/rendering/shaders/model</property>

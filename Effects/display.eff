@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+	<name>Effects/display</name>
+	<parameters>
+		<exposure type="float"><use>/sim/rendering/exposure</use></exposure>
+		<show-buffers type="bool"><use>/sim/rendering/show-buffers</use></show-buffers>
+	</parameters>
+	<technique n="11">
+		<pass>
+			<render-bin>
+				<bin-number>99999</bin-number>
+				<bin-name>RenderBin</bin-name>
+			</render-bin>
+			<texture-unit>
+				<unit>0</unit>
+				<type>depth-buffer</type>
+			</texture-unit>
+			<texture-unit>
+				<unit>1</unit>
+				<type>normal-buffer</type>
+			</texture-unit>
+			<texture-unit>
+				<unit>2</unit>
+				<type>diffuse-buffer</type>
+			</texture-unit>
+			<texture-unit>
+				<unit>3</unit>
+				<type>spec-emis-buffer</type>
+			</texture-unit>
+			<texture-unit>
+				<unit>4</unit>
+				<type>lighting-buffer</type>
+			</texture-unit>
+			<program>
+				<vertex-shader>Shaders/display.vert</vertex-shader>
+				<fragment-shader>Shaders/display.frag</fragment-shader>
+			</program>
+			<uniform>
+				<name>depth_tex</name>
+				<type>sampler-2d</type>
+				<value type="int">0</value>
+			</uniform>
+			<uniform>
+				<name>normal_tex</name>
+				<type>sampler-2d</type>
+				<value type="int">1</value>
+			</uniform>
+			<uniform>
+				<name>color_tex</name>
+				<type>sampler-2d</type>
+				<value type="int">2</value>
+			</uniform>
+			<uniform>
+				<name>specular_tex</name>
+				<type>sampler-2d</type>
+				<value type="int">3</value>
+			</uniform>
+			<uniform>
+				<name>lighting_tex</name>
+				<type>sampler-2d</type>
+				<value type="int">4</value>
+			</uniform>
+			<uniform>
+				<name>exposure</name>
+				<type>float</type>
+				<value type="float"><use>exposure</use></value>
+			</uniform>
+			<uniform>
+				<name>showBuffers</name>
+				<type>bool</type>
+				<value type="bool"><use>show-buffers</use></value>
+			</uniform>
+		</pass>
+	</technique>
+</PropertyList>

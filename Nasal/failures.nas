@@ -178,7 +178,7 @@ var setAllMCBF = func(mcbf) {
 }
 
 # Initialization, called once Nasal and the FDM are loaded properly.
-var fdm_init_listener = _setlistener("/sim/signals/fdm-initialized-once", func {
+var fdm_init_listener = _setlistener("/sim/signals/fdm-initialized", func {
     removelistener(fdm_init_listener); # uninstall, so we're only called once
     srand();
 

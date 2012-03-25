@@ -710,6 +710,14 @@
 			</binding>
 		</item>
 
+		<item>
+			<label>Hide/Show Rendering Buffers</label>
+			<binding>
+				<command>property-toggle</command>
+				<property>/sim/rendering/show-buffers</property>
+			</binding>
+		</item>
+
 	</menu>
 
 	<menu>

@@ -15,7 +15,7 @@ void main() {
     vec4 texel = texture2D(texture, gl_TexCoord[0].st);
 	if (texel.a * color.a < 0.1)
 		discard;
-    gl_FragData[0] = vec4( ecNormal.xy, 0.0, 1.0 );
+    gl_FragData[0] = vec4( (ecNormal.xy + vec2(1.0,1.0)) * 0.5, 0.0, 1.0 );
     gl_FragData[1] = vec4( color.rgb * texel.rgb, float( materialID ) / 255.0 );
     gl_FragData[2] = vec4( specular, shininess / 255.0, emission, 1.0 );
 }

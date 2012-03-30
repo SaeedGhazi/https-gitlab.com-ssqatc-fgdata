@@ -3291,6 +3291,7 @@ Shared parameters for various materials.
 
  <material>
   <name>RWY_YELLOW_LIGHTS</name>
+  <name>RWY_YELLOW_PULSE_LIGHTS</name>
   <emissive>
    <r>0.92157</r>
    <g>0.84314</g>

@@ -181,6 +181,7 @@ Started September 2000 by David Megginson, david@megginson.com
 								 userarchive="y">true</enabled>
 				<debug type="bool"
 							 userarchive="y">false</debug>
+				<map-size type="int">4096</map-size>
 			</shadows>
 			<shader-experimental type="bool"
 													 userarchive="y">false</shader-experimental>

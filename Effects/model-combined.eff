@@ -152,6 +152,7 @@ please see Docs/README.model-combined.eff for documentation
 	<technique n="8">
 	<predicate>
 	  <and>
+		<property>/sim/rendering/shaders/model</property>
 		<property>/sim/rendering/rembrandt</property>
 		<or>
 		  <less-equal>
@@ -371,8 +372,8 @@ please see Docs/README.model-combined.eff for documentation
 			<program>
 <!-- 				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader> -->
 				<vertex-shader n="1">Shaders/ubershader.vert</vertex-shader>
-				<fragment-shader n="1">Shaders/include_fog.frag</fragment-shader>
-				<fragment-shader n="0">Shaders/ubershader.frag</fragment-shader>
+				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
+				<fragment-shader n="1">Shaders/ubershader.frag</fragment-shader>
 				<!--<attribute>
 					<name>tangent</name>
 					<index>6</index>
@@ -756,7 +757,6 @@ please see Docs/README.model-combined.eff for documentation
 
 <!-- Default rendering -->
 	<technique n="9">
-	  <!-- FIXME: this technique number overlaps the one in model-default -->
 	  <predicate>
 		<and>
 		  <property>/sim/rendering/shaders/model</property>
@@ -976,7 +976,7 @@ please see Docs/README.model-combined.eff for documentation
 		  </vertex-program-two-side>
 
 		  <program>
-			<!-- 				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader> -->
+			<!-- <vertex-shader n="0">Shaders/include_fog.vert</vertex-shader> -->
 			  <vertex-shader n="1">Shaders/ubershader.vert</vertex-shader>
 			  <fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
 			  <fragment-shader n="1">Shaders/ubershader.frag</fragment-shader>

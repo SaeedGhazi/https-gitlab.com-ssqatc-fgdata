@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Stub effect file for Rembrandt ported model-combined,
+as that one is explicitly made active under Rembrandt to
+provide glass/transparent surfaces with the ubershader.
+For now it only disables the ubershader under Rembrandt for
+the objects that use it, and replaces it with the default shader.
+-->
+<PropertyList>
+  <name>Effects/model-combined-deferred</name>
+  <inherits-from>Effects/model-combined</inherits-from>
+
+  <technique n="8">
+	<predicate>
+	  <and>
+		<property>/sim/rendering/rembrandt</property>
+		<or>
+		  <less-equal>
+			<value type="float">2.0</value>
+			<glversion/>
+		  </less-equal>
+		  <and>
+			<extension-supported>GL_ARB_shader_objects</extension-supported>
+			<extension-supported>GL_ARB_shading_language_100</extension-supported>
+			<extension-supported>GL_ARB_vertex_shader</extension-supported>
+			<extension-supported>GL_ARB_fragment_shader</extension-supported>
+		  </and>
+		</or>
+		<extension-supported>GL_EXT_gpu_shader4</extension-supported>
+		<extension-supported>GL_ARB_texture_rg</extension-supported>
+	  </and>
+	</predicate>
+	<pass>
+	  <lighting>false</lighting>
+	  <material>
+		<ambient>
+		  <use>material/ambient</use>
+		</ambient>
+		<diffuse>
+		  <use>material/diffuse</use>
+		</diffuse>
+		<specular>
+		  <use>material/specular</use>
+		</specular>
+		<emissive>
+		  <use>material/emissive</use>
+		</emissive>
+		<shininess>
+		  <use>material/shininess</use>
+		</shininess>
+		<color-mode>ambient-and-diffuse</color-mode>
+	  </material>
+	  <program>
+		<vertex-shader n="1">Shaders/deferred-gbuffer.vert</vertex-shader>
+		<fragment-shader n="1">Shaders/deferred-gbuffer.frag</fragment-shader>
+	  </program>
+	</pass>
+  </technique>
+</PropertyList>

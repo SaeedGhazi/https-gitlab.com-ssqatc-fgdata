@@ -34,7 +34,7 @@
 		<!-- 		END fog include -->
 	</parameters>
 
-  <technique n="7">
+  <technique n="5">
     <predicate>
       <and>
         <property>/sim/rendering/shaders/skydome</property>

@@ -49,9 +49,12 @@ the objects that use it, and replaces it with the default shader.
 		</shininess>
 		<color-mode>ambient-and-diffuse</color-mode>
 	  </material>
+	  <cull-face>back</cull-face>
 	  <program>
-		<vertex-shader n="1">Shaders/deferred-gbuffer.vert</vertex-shader>
-		<fragment-shader n="1">Shaders/deferred-gbuffer.frag</fragment-shader>
+		<vertex-shader n="1">Shaders/ubershader.vert</vertex-shader>
+		<fragment-shader n="1">Shaders/ubershader-gbuffer.frag</fragment-shader>
+<!--		<vertex-shader n="1">Shaders/deferred-gbuffer.vert</vertex-shader>
+		<fragment-shader n="1">Shaders/deferred-gbuffer.frag</fragment-shader>-->
 	  </program>
 	</pass>
   </technique>

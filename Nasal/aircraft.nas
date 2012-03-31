@@ -991,6 +991,7 @@ var teleport = func(airport = "", runway = "", lat = -9999, lon = -9999, alt = 0
 		speed = 0, distance = 0, azimuth = 0, glideslope = 0, heading = 9999) {
 	setprop("/sim/presets/airport-id", airport);
 	setprop("/sim/presets/runway", runway);
+	setprop("/sim/presets/parkpos", "");
 	setprop("/sim/presets/latitude-deg", lat);
 	setprop("/sim/presets/longitude-deg", lon);
 	setprop("/sim/presets/altitude-ft", alt);

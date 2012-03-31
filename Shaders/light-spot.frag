@@ -28,7 +28,7 @@ void main() {
     float depth = texture2D( depth_tex, coords ).r;
 	vec3 normal;
 	normal.xy = texture2D( normal_tex, coords ).rg * 2.0 - vec2(1.0,1.0);
-	normal.z = sqrt( 1 - dot( normal.xy, normal.xy ) );
+	normal.z = sqrt( 1.0 - dot( normal.xy, normal.xy ) );
 	vec4 spec_emis = texture2D( spec_emis_tex, coords );
 	
     vec3 pos;
@@ -64,7 +64,6 @@ void main() {
 	vec4 Iamb = Ambient * color * att;
 	vec4 Idiff = Diffuse * color * att * nDotVP;
 	vec3 Ispec = pow( nDotHV, spec_emis.y ) * spec_emis.x * att * Specular.rgb;
-	vec3 Ispec = 0.0;
 	
 	gl_FragColor = vec4(Iamb.rgb + Idiff.rgb + Ispec, 1.0);
 }

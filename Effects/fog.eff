@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
-	<name>Effects/sunlight</name>
+	<name>Effects/fog</name>
 	<technique n="11">
 		<pass>
 			<lighting>false</lighting>

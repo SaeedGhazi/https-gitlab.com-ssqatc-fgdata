@@ -600,6 +600,7 @@
 	<nasal>
 		<open>
 			gui.enable_widgets(cmdarg(), "shadows-debug", getprop("/sim/gui/devel-widgets"));
+			props.globals.getNode("/sim/rendering/shaders/quality-level", 1).setAttribute("userarchive", 0);
 		</open>
 	</nasal>
 </PropertyList>

@@ -972,12 +972,12 @@ var rain = {
 
 			me.flowN.setDoubleValue(ias < me.threshold ? 0 : time * 0.5 + ias * NM2M * dt / 3600);
 			me.rainingN.setDoubleValue(me.rain);
-			if (enableN.getBoolValue())
+			if (me.enableN.getBoolValue())
 				me.enableN.setBoolValue(0);
 		} else {
 			me.flowN.setDoubleValue(0);
 			me.rainingN.setDoubleValue(0);
-			if (enableN.getBoolValue() != 1)
+			if (me.enableN.getBoolValue() != 1)
 				me.enableN.setBoolValue(1);
 		}
 	},

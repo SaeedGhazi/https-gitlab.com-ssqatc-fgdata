@@ -140,6 +140,9 @@ please see Docs/README.model-combined.eff for documentation
 		<fogtype>
 			<use>/sim/rendering/shaders/skydome</use>
 		</fogtype>
+		<rembrandt>
+		  <use>/sim/rendering/rembrandt</use>
+		</rembrandt>
 		<!-- 		END fog include -->
 	</parameters>
 
@@ -752,6 +755,13 @@ please see Docs/README.model-combined.eff for documentation
 				</value>
 			</uniform>
 			<!-- 			END fog include -->
+			<uniform>
+			  <name>rembrandt_enabled</name>
+			  <type>int</type>
+			  <value>
+				<use>rembrandt</use>
+			  </value>
+			</uniform>
 		</pass>
 	</technique>
 
@@ -1360,7 +1370,13 @@ please see Docs/README.model-combined.eff for documentation
 			</value>
 		  </uniform>
 		  <!-- 			END fog include -->
-
+		  <uniform>
+			<name>rembrandt_enabled</name>
+			<type>int</type>
+			<value>
+			  <use>rembrandt</use>
+			</value>
+		  </uniform>
 		  </pass>
 		</technique>
 </PropertyList>

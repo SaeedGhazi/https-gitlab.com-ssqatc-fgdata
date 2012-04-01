@@ -21,6 +21,7 @@ uniform	float		hdg;
 uniform	int  		refl_dynamic;
 uniform int  		nmap_enabled;
 uniform int  		shader_qual;
+uniform int			rembrandt_enabled;
 
 //////Fog Include///////////
 // uniform	int 	fogType;
@@ -101,8 +102,11 @@ void	main(void)
 			reflVec = reflVec_stat;
 		}
 
+		if(rembrandt_enabled < 1){
 		gl_FrontColor = gl_FrontMaterial.emission + gl_Color * (gl_LightModel.ambient + gl_LightSource[0].ambient);
-
+		} else {
+		  gl_FrontColor = gl_Color;
+		}
 		gl_Position = ftransform();
 		gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
 }

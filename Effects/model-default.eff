@@ -165,7 +165,7 @@
 		<blend>false</blend>
 		<alpha-test>true</alpha-test>
 		<shade-model>smooth</shade-model>
-		<cull-face>back</cull-face>
+		<cull-face><use>cull-face</use></cull-face>
 		<render-bin>
 			<bin-number>1</bin-number>
 			<bin-name>RenderBin</bin-name>
@@ -183,6 +183,9 @@
 				<mode>modulate</mode>
 			</environment>
 		</texture-unit>
+		<vertex-program-two-side>
+			<use>vertex-program-two-side</use>
+		</vertex-program-two-side>
 		<program>
 			<vertex-shader>Shaders/deferred-gbuffer.vert</vertex-shader>
 			<fragment-shader>Shaders/deferred-gbuffer.frag</fragment-shader>

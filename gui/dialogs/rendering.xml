@@ -444,9 +444,72 @@
 					</button>
 
 				</group>
-			
 			</group>
-
+			
+			<group>
+				<layout>hbox</layout>
+				
+				<text>
+					<label>Rembrandt</label>
+					<halign>left</halign>
+					<visible>
+						<property>/sim/rendering/rembrandt</property>
+					</visible>
+				</text>
+				<hrule>
+					<stretch>true</stretch>
+					<visible>
+						<property>/sim/rendering/rembrandt</property>
+					</visible>
+				</hrule>
+			</group>
+			
+			<checkbox>
+				<halign>left</halign>
+				<label>Shadows</label>
+				<name>shadow</name>
+				<property>/sim/rendering/shadows/enabled</property>
+				<binding>
+					<command>dialog-apply</command>
+					<object-name>shadow</object-name>
+				</binding>
+				<visible>
+					<property>/sim/rendering/rembrandt</property>
+				</visible>
+			</checkbox>
+			
+			<group>
+				<layout>hbox</layout>
+				<halign>right</halign>
+				<visible>
+					<property>/sim/rendering/rembrandt</property>
+				</visible>
+				
+				<text>
+					<label>Map size</label>
+					<enable>
+						<property>/sim/rendering/shadows/enabled</property>
+					</enable>
+				</text>
+				<combo>
+					<halign>left</halign>
+					<name>shadow-map-size</name>
+					<property>/sim/rendering/shadows/map-size</property>
+					<value>1024</value>
+					<value>2048</value>
+					<value>4096</value>
+					<value>8192</value>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>shadow-map-size</object-name>
+					</binding>
+				</combo>
+				<empty>
+					<!-- align it nicely with the quality slider -->
+					<pref-width>105</pref-width>
+				</empty>
+			</group>
+			
 			<group>
 				<layout>hbox</layout>
 				<text>

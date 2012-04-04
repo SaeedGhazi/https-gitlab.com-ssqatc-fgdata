@@ -1357,6 +1357,9 @@ if (qualityLevel == -1) {
 elsif (qualityLevel != nil) {
     setprop("/sim/rendering/shaders/custom-settings",0);
     setprop("/sim/rendering/shaders/quality-level-internal",qualityLevel);
+    if (qualityLevel == 0) {
+        setprop("/sim/rendering/shaders/skydome",0);
+    }
 }
 # overwrite custom shader settings when quality-level is set through the slider 
 # in the Rendering Options dialog

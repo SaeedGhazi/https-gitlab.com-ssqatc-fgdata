@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
 	<name>Effects/sunlight</name>
-	<technique n="11">
+	<technique n="10">
+		<predicate>
+			<property>/sim/rendering/shadows/enabled</property>
+		</predicate>
 		<pass>
 			<lighting>false</lighting>
 			<depth>
@@ -63,6 +66,72 @@
 				<name>shadow_tex</name>
 				<type>sampler-2d</type>
 				<value type="int">4</value>
+			</uniform>
+			<!-- The following uniforms are automatically defined and initialized :
+				- fg_SunAmbientColor
+				- fg_SunDiffuseColor
+				- fg_SunSpecularColor
+				- fg_SunDirection
+				- fg_ProjectionMatrixInverse
+				- fg_ViewMatrixInverse
+				- fg_ViewMatrix
+				- fg_Planes
+			-->
+		</pass>
+	</technique>
+	<technique n="11">
+		<pass>
+			<lighting>false</lighting>
+			<depth>
+				<enabled>false</enabled>
+			</depth>
+			<blend>
+				<source>one</source>
+				<destination>one</destination>
+			</blend>
+			<render-bin>
+				<bin-number>1</bin-number>
+				<bin-name>RenderBin</bin-name>
+			</render-bin>
+			<texture-unit>
+				<unit>0</unit>
+				<type>depth-buffer</type>
+			</texture-unit>
+			<texture-unit>
+				<unit>1</unit>
+				<type>normal-buffer</type>
+			</texture-unit>
+			<texture-unit>
+				<unit>2</unit>
+				<type>diffuse-buffer</type>
+			</texture-unit>
+			<texture-unit>
+				<unit>3</unit>
+				<type>spec-emis-buffer</type>
+			</texture-unit>
+			<program>
+				<vertex-shader>Shaders/sunlight.vert</vertex-shader>
+				<fragment-shader>Shaders/sunlight-noshadow.frag</fragment-shader>
+			</program>
+			<uniform>
+				<name>depth_tex</name>
+				<type>sampler-2d</type>
+				<value type="int">0</value>
+			</uniform>
+			<uniform>
+				<name>normal_tex</name>
+				<type>sampler-2d</type>
+				<value type="int">1</value>
+			</uniform>
+			<uniform>
+				<name>color_tex</name>
+				<type>sampler-2d</type>
+				<value type="int">2</value>
+			</uniform>
+			<uniform>
+				<name>spec_emis_tex</name>
+				<type>sampler-2d</type>
+				<value type="int">3</value>
 			</uniform>
 			<!-- The following uniforms are automatically defined and initialized :
 				- fg_SunAmbientColor

@@ -37,7 +37,7 @@
 		</fogtype>
 		<!-- 	END fog include -->
 	</parameters>
-	<technique n="10">
+	<technique n="9">
 		<predicate>
 			<and>
         <property>/sim/rendering/rembrandt</property>
@@ -162,7 +162,6 @@
 			<!-- 			END fog include -->
 		</pass>
 		
-<!--
     <pass n="1">
 			<lighting>true</lighting>
 			<material>
@@ -248,6 +247,5 @@
 				</value>
 			</uniform>
 		</pass>
-		-->
 	</technique>
 </PropertyList>

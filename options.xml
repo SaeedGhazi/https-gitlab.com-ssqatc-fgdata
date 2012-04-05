@@ -330,6 +330,12 @@
    </option>
 
    <option>
+    <name>max-fps</name>
+    <arg>Hz</arg>
+    <description>strings/max-fps-desc</description>
+   </option>
+
+   <option>
     <name>bpp</name>
     <arg>depth</arg>
     <description>strings/bpp-desc</description>

@@ -233,6 +233,7 @@
  <view-offset-desc>Specify the default forward view direction as an offset from straight ahead. Allowable values are LEFT, RIGHT, CENTER, or a specific number in degrees</view-offset-desc>
  <visibility-desc>Specify initial visibility</visibility-desc>
  <visibility-miles-desc>Specify initial visibility in miles</visibility-miles-desc>
+ <max-fps-desc>Maximum frame rate in Hz.</max-fps-desc>
 
  <!-- Hud options -->
  <hud-options>Hud Options</hud-options>

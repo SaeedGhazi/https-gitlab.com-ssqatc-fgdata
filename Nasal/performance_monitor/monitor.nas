@@ -12,15 +12,16 @@ var dialog = {
 
         # "private"
         var font = { name: "FIXED_8x13" };
-        me.header = ["  submodule", "min/ms", "max/ms", "mean/ms", "stddev/ms", "total/ms", "iterations" ];
+        me.header = ["  submodule", "cumulative/ms", "total/ms", "min/ms", "max/ms", "mean/ms", "stddev/ms", "iterations" ];
         me.columns = [
-            { type: "text", property: "name",      format: " %s",   label: "------------------", halign: "fill", font: font },
-            { type: "text", property: "min-ms",    format: "%5.2f", label: "---------", halign: "fill", font: font },
-            { type: "text", property: "max-ms",    format: "%5.2f", label: "---------", halign: "fill", font: font },
-            { type: "text", property: "mean-ms",   format:" %5.2f", label: "---------", halign: "fill", font: font },
-            { type: "text", property: "stddev-ms", format:" %5.2f", label: "---------", halign: "fill", font: font },
-            { type: "text", property: "total-ms",  format:" %8.2f", label: "------------", halign: "fill", font: font },
-            { type: "text", property: "count",     format:" %3d",   label: "------", halign: "fill", font: font },
+            { type: "text", property: "name",          format: " %s",   label: "------------------", halign: "fill", font: font },
+            { type: "text", property: "cumulative-ms", format:" %8.2f", label: "------------",       halign: "fill", font: font },
+            { type: "text", property: "total-ms",      format:" %8.2f", label: "------------",       halign: "fill", font: font },
+            { type: "text", property: "min-ms",        format: "%5.2f", label: "---------",          halign: "fill", font: font },
+            { type: "text", property: "max-ms",        format: "%5.2f", label: "---------",          halign: "fill", font: font },
+            { type: "text", property: "mean-ms",       format:" %5.2f", label: "---------",          halign: "fill", font: font },
+            { type: "text", property: "stddev-ms",     format:" %5.2f", label: "---------",          halign: "fill", font: font },
+            { type: "text", property: "count",         format:" %3d",   label: "------",             halign: "fill", font: font },
         ];
         me.name = "performance-monitor";
         me.dialog = nil;
@@ -96,7 +97,7 @@ var dialog = {
             }
             row += 2;
             var odd = 1;
-            modulelist = sort (modulelist, func (a,b) a.getChild("total-ms",0,1).getValue() < b.getChild("total-ms",0,1).getValue());
+            modulelist = sort (modulelist, func (a,b) a.getChild("cumulative-ms",0,1).getValue() < b.getChild("cumulative-ms",0,1).getValue());
             foreach (var mp; modulelist) {
                 var col = 0;
                 var color = me.fg[odd = !odd];

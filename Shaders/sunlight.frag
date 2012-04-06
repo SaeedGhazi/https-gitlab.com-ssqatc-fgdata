@@ -60,6 +60,13 @@ void main() {
     float shadow = 1.0;
 #elif 1
     float shadow = shadow2DProj( shadow_tex, DynamicShadow( vec4( pos, 1.0 ), tint ) ).r;
+#elif 0
+	float shadow = 0.0;
+    shadow += 0.333 * shadow2DProj( shadow_tex, DynamicShadow( vec4(pos, 1.0), tint ) ).r;
+    shadow += 0.166 * shadow2DProj( shadow_tex, DynamicShadow( vec4(pos + vec3(-0.003 * pos.z, -0.003 * pos.z, 0), 1.0), tint ) ).r;
+    shadow += 0.166 * shadow2DProj( shadow_tex, DynamicShadow( vec4(pos + vec3( 0.003 * pos.z,  0.003 * pos.z, 0), 1.0), tint ) ).r;
+    shadow += 0.166 * shadow2DProj( shadow_tex, DynamicShadow( vec4(pos + vec3(-0.003 * pos.z,  0.003 * pos.z, 0), 1.0), tint ) ).r;
+    shadow += 0.166 * shadow2DProj( shadow_tex, DynamicShadow( vec4(pos + vec3( 0.003 * pos.z, -0.003 * pos.z, 0), 1.0), tint ) ).r;
 #else
     float kernel[9] = float[]( 36/256.0, 24/256.0, 6/256.0,
                            24/256.0, 16/256.0, 4/256.0,
@@ -67,7 +74,7 @@ void main() {
     float shadow = 0;
     for( int x = -2; x <= 2; ++x )
       for( int y = -2; y <= 2; ++y )
-        shadow += kernel[abs(x)*3 + abs(y)] * shadow2DProj( shadow_tex, DynamicShadow( vec4(pos + vec3(0.05 * x, 0.05 * y, 0), 1.0), tint ) ).r;
+        shadow += kernel[abs(x)*3 + abs(y)] * shadow2DProj( shadow_tex, DynamicShadow( vec4(pos + vec3(-0.005 * x * pos.z, -0.005 * y * pos.z, 0), 1.0), tint ) ).r;
 #endif
     vec3 lightDir = (fg_ViewMatrix * vec4( fg_SunDirection, 0.0 )).xyz;
     lightDir = normalize( lightDir );

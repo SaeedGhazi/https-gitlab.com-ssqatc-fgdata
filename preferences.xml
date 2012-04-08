@@ -766,14 +766,8 @@ Started September 2000 by David Megginson, david@megginson.com
 		</user>
 
 		<performance-monitor>
-			<enabled type="bool"
-							 archive="n">false</enabled>
-			<interval-s type="double"
-									archive="n">4.0</interval-s>
-			<min-jitter-ms type="double"
-										 archive="n">0.0</min-jitter-ms>
-			<min-time-ms type="double"
-									 archive="n">100.0</min-time-ms>
+			<enabled type="bool" userarchive="n" preserve="y">false</enabled>
+			<interval-s type="double" userarchive="n" preserve="y">1.0</interval-s>
 		</performance-monitor>
 
 		<!-- animated jetway options -->

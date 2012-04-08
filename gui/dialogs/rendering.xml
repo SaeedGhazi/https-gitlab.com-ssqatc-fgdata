@@ -122,6 +122,61 @@
 				</binding>
 			</checkbox>
 			-->
+				<group>
+					<layout>hbox</layout>
+					<row>1</row>
+					<col>0</col>
+
+					<checkbox>
+						<halign>left</halign>
+						<label>Throttle frame rate</label>
+						<name>frame-rate-throttle</name>
+						<property>/sim/gui/frame-rate-throttled</property>
+						<binding>
+							<command>dialog-apply</command>
+							<object-name>frame-rate-throttle</object-name>
+						</binding>
+						<binding>
+							<command>nasal</command>
+							<script>
+								var throttled = getprop("/sim/gui/frame-rate-throttled");
+								if (throttled)
+									setprop("/sim/frame-rate-throttle-hz", 50);
+								else
+									setprop("/sim/frame-rate-throttle-hz", 0);
+							</script>
+						</binding>
+					</checkbox>
+
+					<group>
+						<layout>hbox</layout>
+						<visible>
+							<greater-than>
+								<property>/sim/frame-rate-throttle-hz</property>
+								<value>0</value>
+							</greater-than>
+						</visible>
+
+						<slider>
+							<name>frame-rate</name>
+							<min>15.0</min>
+							<max>70.0</max>
+							<step>1.0</step>
+							<property>/sim/frame-rate-throttle-hz</property>
+							<binding>
+								<command>dialog-apply</command>
+								<object-name>frame-rate</object-name>
+							</binding>
+						</slider>
+						<text>
+							<halign>left</halign>
+							<label>99 Hz</label>
+							<format>%2.0f Hz</format>
+							<live>true</live>
+							<property>/sim/frame-rate-throttle-hz</property>
+						</text>
+					</group>
+				</group>
 
 			<group>
 				<layout>hbox</layout>
@@ -391,8 +446,6 @@
 							<property>/sim/rendering/shaders/custom-settings</property>
 						</not>
 					</visible>
-					
-					<layout>hbox</layout>
 
 					<text>
 						<label>Performance</label>
@@ -664,6 +717,7 @@
 		<open>
 			gui.enable_widgets(cmdarg(), "shadows-debug", getprop("/sim/gui/devel-widgets"));
 			props.globals.getNode("/sim/rendering/shaders/quality-level", 1).setAttribute("userarchive", 0);
+			setprop("/sim/gui/frame-rate-throttled", (getprop("/sim/frame-rate-throttle-hz") > 0));
 		</open>
 	</nasal>
 </PropertyList>

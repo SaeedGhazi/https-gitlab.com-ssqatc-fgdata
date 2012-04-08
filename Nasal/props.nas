@@ -41,7 +41,8 @@ var Node = {
 
     getBoolValue : func {
         var val = me.getValue();
-        if(me.getType() == "STRING" and val == "false") return 0;
+        var mytype = me.getType();
+        if((mytype == "STRING" or mytype == "UNSPECIFIED") and val == "false") return 0;
         return !!val;
     },
 

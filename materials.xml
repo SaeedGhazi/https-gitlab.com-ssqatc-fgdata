@@ -196,14 +196,12 @@ Shared parameters for various materials.
 
  <material>
   <name>pa_shoulder</name>
-  <texture>Runway/pa_shoulder.dds</texture>
-  <ysize>5</ysize>
+  <texture>Runway/pa_shoulder.png</texture>
  </material>
 
  <material>
   <name>pa_shoulder_f</name>
-  <texture>Runway/pa_shoulder_f.dds</texture>
-  <ysize>5</ysize>
+  <texture>Runway/pa_shoulder_f.png</texture>
  </material>
 
  <material>
@@ -474,14 +472,12 @@ Shared parameters for various materials.
 
  <material>
   <name>pc_shoulder</name>
-  <texture>Runway/pc_shoulder.dds</texture>
-  <ysize>5</ysize>
+  <texture>Runway/pc_shoulder.png</texture>
  </material>
 
  <material>
   <name>pc_shoulder_f</name>
-  <texture>Runway/pc_shoulder_f.dds</texture>
-  <ysize>5</ysize>
+  <texture>Runway/pc_shoulder_f.png</texture>
  </material>
 
  <material>

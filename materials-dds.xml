@@ -917,7 +917,6 @@ Shared parameters for various materials.
 		 <a>1.0</a>
 	 </specular>
 	 <texture>Runway/pa_shoulder.dds</texture>
-	 <ysize>5</ysize>
 	 <wrapu>false</wrapu>
  </material>
 
@@ -940,7 +939,6 @@ Shared parameters for various materials.
 		 <a>1.0</a>
 	 </specular>
 	 <texture>Runway/pc_shoulder.dds</texture>
-	 <ysize>5</ysize>
 	 <wrapu>false</wrapu>
  </material>
 
@@ -963,7 +961,6 @@ Shared parameters for various materials.
 		 <a>1.0</a>
 	 </specular>
 	 <texture>Runway/pa_shoulder_f.dds</texture>
-	 <ysize>5</ysize>
 	 <wrapu>false</wrapu>
  </material>
 
@@ -986,7 +983,6 @@ Shared parameters for various materials.
 		 <a>1.0</a>
 	 </specular>
 	 <texture>Runway/pc_shoulder_f.dds</texture>
-	 <ysize>5</ysize>
 	 <wrapu>false</wrapu>
  </material>
 

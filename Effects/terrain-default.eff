@@ -48,7 +48,7 @@
 	</parameters>
 	<!-- put techniques at a "high" index to allow derived effects to
        insert their own techniques first. -->
-<technique n="7">
+<technique n="5">
     <predicate>
       <and>
         <property>/sim/rendering/shaders/skydome</property>

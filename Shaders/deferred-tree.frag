@@ -15,7 +15,7 @@ void main() {
     float emission = 0.0;
         
 	  // Normal is straight towards the viewer.
-	  vec3 normal2 = (0.0, 0.0, 0.0);
+	  vec3 normal2 = vec3(0.0, 0.0, 0.0);
     gl_FragData[0] = vec4( 0.5, 0.5, 0.0, 1.0 );
     gl_FragData[1] = vec4( gl_Color.rgb * texel.rgb, float( materialID ) / 255.0 );
     gl_FragData[2] = vec4( specular, shininess / 255.0, emission, 1.0 );

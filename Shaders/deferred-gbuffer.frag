@@ -8,6 +8,9 @@ varying vec3 ecNormal;
 varying float alpha;
 uniform int materialID;
 uniform sampler2D texture;
+
+vec2 normal_encode(vec3 n);
+
 void main() {
     vec4 texel = texture2D(texture, gl_TexCoord[0].st);
     if (texel.a * alpha < 0.1)
@@ -17,7 +20,7 @@ void main() {
     float emission = dot( gl_FrontLightModelProduct.sceneColor.rgb, vec3( 0.3, 0.59, 0.11 ) );
     
 	vec3 normal2 = normalize( (2.0 * gl_Color.a - 1.0) * ecNormal );
-    gl_FragData[0] = vec4( (normal2.xy + vec2(1.0,1.0)) * 0.5, 0.0, 1.0 );
+    gl_FragData[0] = vec4( normal_encode(normal2), 0.0, 1.0 );
     gl_FragData[1] = vec4( gl_Color.rgb * texel.rgb, float( materialID ) / 255.0 );
-    gl_FragData[2] = vec4( specular, shininess / 255.0, emission, 1.0 );
+    gl_FragData[2] = vec4( specular, shininess / 128.0, emission, 1.0 );
 }

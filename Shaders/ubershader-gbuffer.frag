@@ -56,6 +56,7 @@ uniform vec3 dirt_g_color;
 uniform vec3 dirt_b_color;
 
 //uniform vec4 fg_SunAmbientColor;
+vec2 normal_encode(vec3 n);
 
 ///fog include//////////////////////
 uniform int fogType;
@@ -87,7 +88,6 @@ void main (void)
 	} else {
  		N = normalize(VNormal);
  	}
- 	vec2 eyeN = (N.xy + vec2(1.0,1.0))*0.5;
 ///END bump
 	vec4 reflection = textureCube(Environment, reflVec * N);
 	vec3 viewVec = normalize(vViewVec);
@@ -180,7 +180,7 @@ void main (void)
 // END lightmap
 /////////////////////////////////////////////////////////////////////
 
-	gl_FragData[0]=vec4(eyeN, 0.0, 1.0);
+	gl_FragData[0]=vec4(normal_encode(N), 0.0, 1.0);
 	gl_FragData[1]=vec4(fragColor.rgb,1.0/255.0);
-	gl_FragData[2]=vec4(specular, gl_FrontMaterial.shininess/255.0, emission, 1.0);
+	gl_FragData[2]=vec4(specular, gl_FrontMaterial.shininess/128.0, emission, 1.0);
 }

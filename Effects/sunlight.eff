@@ -41,6 +41,7 @@
 			<program>
 				<vertex-shader>Shaders/sunlight.vert</vertex-shader>
 				<fragment-shader>Shaders/sunlight.frag</fragment-shader>
+				<fragment-shader>Shaders/gbuffer-functions.frag</fragment-shader>
 			</program>
 			<uniform>
 				<name>depth_tex</name>

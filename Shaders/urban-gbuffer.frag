@@ -37,6 +37,8 @@ int linear_search_steps = 10;
 int GlobalIterationCount = 0;
 int gIterationCap = 64;
 
+vec2 normal_encode(vec3 n);
+
 void QDM(inout vec3 p, inout vec3 v)
 {
     const int MAX_LEVEL = TEXTURE_MIP_LEVELS;
@@ -184,7 +186,7 @@ void main (void)
     N.z = sqrt(1.0 - min(1.0,dot(N.xy, N.xy)));
     float Nz = N.z;
     N = normalize(N.x * VTangent + N.y * VBinormal + N.z * VNormal);
-	gl_FragData[0] = vec4( (N.xy + vec2(1.0,1.0)) * 0.5, 0.0, 1.0 );
+	gl_FragData[0] = vec4( normal_encode(N), 0.0, 1.0 );
 
     vec4 ambient_light = constantColor + vec4(gl_Color.rgb, 1.0);
 

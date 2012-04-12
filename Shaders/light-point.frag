@@ -15,21 +15,19 @@ uniform float Far;
 
 varying vec4 ecPosition;
 
+vec3 position( vec3 viewdir, float depth );
+vec3 normal_decode(vec2 enc);
+
 void main() {
 	vec3 ray = ecPosition.xyz / ecPosition.w;
 	vec3 ecPos3 = ray;
     vec3 viewDir = normalize(ray);
 	vec2 coords = gl_FragCoord.xy / fg_BufferSize;
 	
-    float depth = texture2D( depth_tex, coords ).r;
-	vec3 normal;
-	normal.xy = texture2D( normal_tex, coords ).rg * 2.0 - vec2(1.0,1.0);
-	normal.z = sqrt( 1.0 - dot( normal.xy, normal.xy ) );
+	vec3 normal = normal_decode(texture2D( normal_tex, coords ).rg);
 	vec4 spec_emis = texture2D( spec_emis_tex, coords );
 	
-    vec3 pos;
-    pos.z = - fg_Planes.y / (fg_Planes.x + depth * fg_Planes.z);
-    pos.xy = viewDir.xy * pos.z / viewDir.z;
+    vec3 pos = position(viewDir, texture2D( depth_tex, coords ).r);
 	
 	if ( pos.z < ecPos3.z ) // Negative direction in z
 		discard; // Don't light surface outside the light volume

@@ -36,6 +36,7 @@
 			<program>
 				<vertex-shader>Shaders/light-spot.vert</vertex-shader>
 				<fragment-shader>Shaders/light-spot.frag</fragment-shader>
+				<fragment-shader>Shaders/gbuffer-functions.frag</fragment-shader>
 				<attribute>
 					<name>attenuation</name>
 					<index>12</index>

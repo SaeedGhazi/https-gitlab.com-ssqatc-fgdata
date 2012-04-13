@@ -152,8 +152,9 @@
 				<type>noise</type>
 			</texture-unit>
 			<program>
-				<vertex-shader n="1">Shaders/urban-gbuffer.vert</vertex-shader>
-				<fragment-shader n="1">Shaders/urban-gbuffer.frag</fragment-shader>
+				<vertex-shader>Shaders/urban-gbuffer.vert</vertex-shader>
+				<fragment-shader>Shaders/urban-gbuffer.frag</fragment-shader>
+				<fragment-shader>Shaders/gbuffer-functions.frag</fragment-shader>
 				<attribute>
 					<name>tangent</name>
 					<index>6</index>
@@ -313,6 +314,7 @@
 			<program>
 				<vertex-shader>Shaders/urban-gbuffer.vert</vertex-shader>
 				<fragment-shader>Shaders/urban-gbuffer.frag</fragment-shader>
+				<fragment-shader>Shaders/gbuffer-functions.frag</fragment-shader>
 				<attribute>
 					<name>tangent</name>
 					<index>6</index>

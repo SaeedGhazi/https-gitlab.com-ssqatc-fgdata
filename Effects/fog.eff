@@ -34,6 +34,7 @@
 			<program>
 				<vertex-shader>Shaders/fog.vert</vertex-shader>
 				<fragment-shader>Shaders/fog.frag</fragment-shader>
+				<fragment-shader>Shaders/gbuffer-functions.frag</fragment-shader>
 			</program>
 			<uniform>
 				<name>depth_tex</name>

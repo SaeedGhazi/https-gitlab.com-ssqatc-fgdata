@@ -9,6 +9,10 @@ uniform vec4 fg_SunSpecularColor;
 uniform vec3 fg_SunDirection;
 uniform vec3 fg_Planes;
 varying vec3 ray;
+
+vec3 position( vec3 viewdir, float depth );
+vec3 normal_decode(vec2 enc);
+
 vec4 DynamicShadow( in vec4 ecPosition, out vec4 tint )
 {
     vec4 coords;
@@ -44,16 +48,11 @@ void main() {
     vec4 spec_emis = texture2D( spec_emis_tex, coords );
     if ( spec_emis.a < 0.1 )
         discard;
-    vec3 normal;
-    normal.xy = texture2D( normal_tex, coords ).rg * 2.0 - vec2(1.0,1.0);
-    normal.z = sqrt( 1.0 - dot( normal.xy, normal.xy ) );
+    vec3 normal = normal_decode(texture2D( normal_tex, coords ).rg);
     float len = length(normal);
     normal /= len;
     vec3 viewDir = normalize(ray);
-    float depth = texture2D( depth_tex, coords ).r;
-    vec3 pos;
-    pos.z = - fg_Planes.y / (fg_Planes.x + depth * fg_Planes.z);
-    pos.xy = viewDir.xy / viewDir.z * pos.z;
+    vec3 pos = position( viewDir, texture2D( depth_tex, coords ).r );
 
     vec4 tint;
 #if 0
@@ -86,7 +85,7 @@ void main() {
     vec3 Iemis = spec_emis.z * color;
     if (len > 0.0001) {
         halfDir /= len;
-        Ispec = pow( clamp( dot( halfDir, normal ), 0.0, 1.0 ), spec_emis.y * 255.0 ) * spec_emis.x * fg_SunSpecularColor.rgb;
+        Ispec = pow( clamp( dot( halfDir, normal ), 0.0, 1.0 ), spec_emis.y * 128.0 ) * spec_emis.x * fg_SunSpecularColor.rgb;
     }
     gl_FragColor = vec4(mix(vec3(0.0), Idiff + Ispec, shadow) + Iemis, 1.0);
 //    gl_FragColor = mix(tint, vec4(mix(vec3(0.0), Idiff + Ispec, shadow) + Iemis, 1.0), 0.92);

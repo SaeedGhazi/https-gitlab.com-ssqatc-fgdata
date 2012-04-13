@@ -26,7 +26,6 @@ the objects that use it, and replaces it with the default shader.
 		  </and>
 		</or>
 		<extension-supported>GL_EXT_gpu_shader4</extension-supported>
-		<extension-supported>GL_ARB_texture_rg</extension-supported>
 	  </and>
 	</predicate>
 	<pass>
@@ -51,8 +50,9 @@ the objects that use it, and replaces it with the default shader.
 	  </material>
 	  <cull-face>back</cull-face>
 	  <program>
-		<vertex-shader n="1">Shaders/ubershader.vert</vertex-shader>
-		<fragment-shader n="1">Shaders/ubershader-gbuffer.frag</fragment-shader>
+		<vertex-shader>Shaders/ubershader.vert</vertex-shader>
+		<fragment-shader>Shaders/ubershader-gbuffer.frag</fragment-shader>
+		<fragment-shader>Shaders/gbuffer-functions.frag</fragment-shader>
 <!--		<vertex-shader n="1">Shaders/deferred-gbuffer.vert</vertex-shader>
 		<fragment-shader n="1">Shaders/deferred-gbuffer.frag</fragment-shader>-->
 	  </program>

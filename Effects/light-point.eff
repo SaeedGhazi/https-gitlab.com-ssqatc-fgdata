@@ -65,38 +65,38 @@
 			<uniform>
 				<name>LightPosition</name>
 				<type>float-vec4</type>
-				<value type="vec4d"><use>light-spot/position</use></value>
+				<value type="vec4d"><use>position</use></value>
 				<positioned type="bool">true</positioned>
 			</uniform>
 			<uniform>
 				<name>Ambient</name>
 				<type>float-vec4</type>
-				<value type="vec4d"><use>light-spot/ambient</use></value>
+				<value type="vec4d"><use>ambient</use></value>
 			</uniform>
 			<uniform>
 				<name>Diffuse</name>
 				<type>float-vec4</type>
-				<value type="vec4d"><use>light-spot/diffuse</use></value>
+				<value type="vec4d"><use>diffuse</use></value>
 			</uniform>
 			<uniform>
 				<name>Specular</name>
 				<type>float-vec4</type>
-				<value type="vec4d"><use>light-spot/specular</use></value>
+				<value type="vec4d"><use>specular</use></value>
 			</uniform>
 			<uniform>
 				<name>Attenuation</name>
 				<type>float-vec3</type>
-				<value type="vec3d"><use>light-spot/attenuation</use></value>
+				<value type="vec3d"><use>attenuation</use></value>
 			</uniform>
 			<uniform>
 				<name>Near</name>
 				<type>float</type>
-				<value type="float"><use>light-spot/near</use></value>
+				<value type="float"><use>near</use></value>
 			</uniform>
 			<uniform>
 				<name>Far</name>
 				<type>float</type>
-				<value type="float"><use>light-spot/far</use></value>
+				<value type="float"><use>far</use></value>
 			</uniform>
 		</pass>
 	</technique>

@@ -65,59 +65,59 @@
 			<uniform>
 				<name>LightPosition</name>
 				<type>float-vec4</type>
-				<value type="vec4d"><use>light-spot/position</use></value>
+				<value type="vec4d"><use>position</use></value>
 				<positioned type="bool">true</positioned>
 			</uniform>
 			<uniform>
 				<name>LightDirection</name>
 				<type>float-vec4</type>
-				<value type="vec4d"><use>light-spot/direction</use></value>
+				<value type="vec4d"><use>direction</use></value>
 				<positioned type="bool">true</positioned>
 			</uniform>
 			<uniform>
 				<name>Ambient</name>
 				<type>float-vec4</type>
-				<value type="vec4d"><use>light-spot/ambient</use></value>
+				<value type="vec4d"><use>ambient</use></value>
 			</uniform>
 			<uniform>
 				<name>Diffuse</name>
 				<type>float-vec4</type>
-				<value type="vec4d"><use>light-spot/diffuse</use></value>
+				<value type="vec4d"><use>diffuse</use></value>
 			</uniform>
 			<uniform>
 				<name>Specular</name>
 				<type>float-vec4</type>
-				<value type="vec4d"><use>light-spot/specular</use></value>
+				<value type="vec4d"><use>specular</use></value>
 			</uniform>
 			<uniform>
 				<name>Attenuation</name>
 				<type>float-vec3</type>
-				<value type="vec3d"><use>light-spot/attenuation</use></value>
+				<value type="vec3d"><use>attenuation</use></value>
 			</uniform>
 			<uniform>
 				<name>Exponent</name>
 				<type>float</type>
-				<value type="float"><use>light-spot/exponent</use></value>
+				<value type="float"><use>exponent</use></value>
 			</uniform>
 			<uniform>
 				<name>Cutoff</name>
 				<type>float</type>
-				<value type="float"><use>light-spot/cutoff</use></value>
+				<value type="float"><use>cutoff</use></value>
 			</uniform>
 			<uniform>
 				<name>CosCutoff</name>
 				<type>float</type>
-				<value type="float"><use>light-spot/cosCutoff</use></value>
+				<value type="float"><use>cosCutoff</use></value>
 			</uniform>
 			<uniform>
 				<name>Near</name>
 				<type>float</type>
-				<value type="float"><use>light-spot/near</use></value>
+				<value type="float"><use>near</use></value>
 			</uniform>
 			<uniform>
 				<name>Far</name>
 				<type>float</type>
-				<value type="float"><use>light-spot/far</use></value>
+				<value type="float"><use>far</use></value>
 			</uniform>
 		</pass>
 	</technique>

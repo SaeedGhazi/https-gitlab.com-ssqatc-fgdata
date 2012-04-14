@@ -27,7 +27,7 @@ void main (void)
 	float nDotHV = max(0.0, dot(N, gl_LightSource[0].halfVector.xyz));
 
 	float pf;
-	if (nDotVP == 0.0)
+	if (nDotHV == 0.0)
 		pf = 0.0;
 	else
 		pf = pow(nDotHV, gl_FrontMaterial.shininess);

@@ -179,10 +179,11 @@ void main (void)
     float d = ray_intersect(dp, ds);
 
     vec2 uv = dp + ds * d;
-    vec3 N = texture2D(NormalTex, uv).xyz * 2.0 - 1.0;
-
-
+    vec3 N = texture2D(NormalTex, uv).xyz;
     float emis = N.z;
+    N = N * 2.0 - 1.0;
+
+
     N.z = sqrt(1.0 - min(1.0,dot(N.xy, N.xy)));
     float Nz = N.z;
     N = normalize(N.x * VTangent + N.y * VBinormal + N.z * VNormal);
@@ -190,32 +191,32 @@ void main (void)
 
     vec4 ambient_light = constantColor + vec4(gl_Color.rgb, 1.0);
 
-    vec4 noisevec   = texture3D(NoiseTex, (rawpos.xyz)*0.01*scale);
-    vec4 nvL   = texture3D(NoiseTex, (rawpos.xyz)*0.00066*scale);
+    // vec4 noisevec   = texture3D(NoiseTex, (rawpos.xyz)*0.01*scale);
+    // vec4 nvL   = texture3D(NoiseTex, (rawpos.xyz)*0.00066*scale);
 
-    float n=0.06;
-    n += nvL[0]*0.4;
-    n += nvL[1]*0.6;
-    n += nvL[2]*2.0;
-    n += nvL[3]*4.0;
-    n += noisevec[0]*0.1;
-    n += noisevec[1]*0.4;
+    // float n=0.06;
+    // n += nvL[0]*0.4;
+    // n += nvL[1]*0.6;
+    // n += nvL[2]*2.0;
+    // n += nvL[3]*4.0;
+    // n += noisevec[0]*0.1;
+    // n += noisevec[1]*0.4;
 
-    n += noisevec[2]*0.8;
-    n += noisevec[3]*2.1;
-    n = mix(0.6, n, length(ecPosition.xyz) );
+    // n += noisevec[2]*0.8;
+    // n += noisevec[3]*2.1;
+    // n = mix(0.6, n, length(ecPosition.xyz) );
 
     vec4 finalColor = texture2D(BaseTex, uv);
-    finalColor = mix(finalColor, clamp(n+nvL[2]*4.1+vec4(0.1, 0.1, nvL[2]*2.2, 1.0), 0.7, 1.0),
-            step(0.8,Nz)*(1.0-emis)*smoothstep(snowlevel+300.0, snowlevel+360.0, (rawpos.z)+nvL[1]*3000.0));
-    finalColor *= ambient_light;
+    // finalColor = mix(finalColor, clamp(n+nvL[2]*4.1+vec4(0.1, 0.1, nvL[2]*2.2, 1.0), 0.7, 1.0),
+            // step(0.8,Nz)*(1.0-emis)*smoothstep(snowlevel+300.0, snowlevel+360.0, (rawpos.z)+nvL[1]*3000.0));
+    // finalColor *= ambient_light;
 
     vec4 p = vec4( ecPos3 + tile_size * V * (d-1.0) * depth_factor / s.z, 1.0 );
     vec4 iproj = gl_ProjectionMatrix * p;
     iproj /= iproj.w;
 
     gl_FragData[1] = vec4( finalColor.rgb, 1.0 / 255.0 );
-    gl_FragData[2] = vec4( dot(specular.xyz,vec3(0.3, 0.59, 0.11 )), specular.w, 0.0, 1.0 );
+    gl_FragData[2] = vec4( dot(specular.xyz,vec3(0.3, 0.59, 0.11 )), specular.w/128.0, 0.0, 1.0 );
 
     gl_FragDepth = (iproj.z + 1.0) / 2.0;
 }

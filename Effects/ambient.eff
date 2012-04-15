@@ -13,19 +13,23 @@
 			</render-bin>
 			<texture-unit>
 				<unit>0</unit>
-				<type>depth-buffer</type>
+				<type>buffer</type>
+				<name>depth</name>
 			</texture-unit>
 			<texture-unit>
 				<unit>1</unit>
-				<type>normal-buffer</type>
+				<type>buffer</type>
+				<name>normal</name>
 			</texture-unit>
 			<texture-unit>
 				<unit>2</unit>
-				<type>diffuse-buffer</type>
+				<type>buffer</type>
+				<name>diffuse</name>
 			</texture-unit>
 			<texture-unit>
 				<unit>3</unit>
-				<type>spec-emis-buffer</type>
+				<type>buffer</type>
+				<name>spec-emis</name>
 			</texture-unit>
 			<program>
 				<vertex-shader>Shaders/ambient.vert</vertex-shader>

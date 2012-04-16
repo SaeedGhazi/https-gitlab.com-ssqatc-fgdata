@@ -75,11 +75,6 @@
 				<positioned type="bool">true</positioned>
 			</uniform>
 			<uniform>
-				<name>Ambient</name>
-				<type>float-vec4</type>
-				<value type="vec4d"><use>ambient</use></value>
-			</uniform>
-			<uniform>
 				<name>Diffuse</name>
 				<type>float-vec4</type>
 				<value type="vec4d"><use>diffuse</use></value>

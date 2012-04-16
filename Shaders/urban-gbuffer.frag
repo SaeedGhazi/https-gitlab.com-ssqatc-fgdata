@@ -171,9 +171,12 @@ void main (void)
     if ( quality_level >= 3.0 ) {
         linear_search_steps = 20;
     }
+    vec3 normal = normalize(VNormal);
+    vec3 tangent = normalize(VTangent);
+    vec3 binormal = normalize(VBinormal);
     vec3 ecPos3 = ecPosition.xyz / ecPosition.w;
     vec3 V = normalize(ecPos3);
-    vec3 s = vec3(dot(V, VTangent), dot(V, VBinormal), dot(VNormal, -V));
+    vec3 s = vec3(dot(V, tangent), dot(V, binormal), dot(normal, -V));
     vec2 ds = s.xy * depth_factor / s.z;
     vec2 dp = gl_TexCoord[0].st - ds;
     float d = ray_intersect(dp, ds);
@@ -186,7 +189,7 @@ void main (void)
 
     N.z = sqrt(1.0 - min(1.0,dot(N.xy, N.xy)));
     float Nz = N.z;
-    N = normalize(N.x * VTangent + N.y * VBinormal + N.z * VNormal);
+    N = normalize(N.x * tangent + N.y * binormal + N.z * normal);
 	gl_FragData[0] = vec4( normal_encode(N), 0.0, 1.0 );
 
     vec4 ambient_light = constantColor + vec4(gl_Color.rgb, 1.0);

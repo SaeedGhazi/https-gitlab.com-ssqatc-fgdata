@@ -7,13 +7,13 @@
 // A geometry shader should do as little computation as possible.
 
 // See landmass-g.vert for a description of the inputs.
-varying in vec4 rawposIn[];
-varying in vec3 NormalIn[];
-varying in vec4 ecPosIn[];
-varying in vec3 ecNormalIn[];
-varying in vec3 VTangentIn[];
-varying in vec3 VBinormalIn[];
-varying in vec4 constantColorIn[];
+varying in vec4 rawposIn[3];
+varying in vec3 NormalIn[3];
+varying in vec4 ecPosIn[3];
+varying in vec3 ecNormalIn[3];
+varying in vec3 VTangentIn[3];
+varying in vec3 VBinormalIn[3];
+varying in vec4 constantColorIn[3];
 
 uniform float canopy_height;
 

@@ -212,11 +212,15 @@ void main (void)
     // finalColor *= ambient_light;
 
     vec4 p = vec4( ecPos3 + tile_size * V * (d-1.0) * depth_factor / s.z, 1.0 );
-    vec4 iproj = gl_ProjectionMatrix * p;
-    iproj /= iproj.w;
 
     gl_FragData[1] = vec4( finalColor.rgb, 1.0 / 255.0 );
     gl_FragData[2] = vec4( dot(specular.xyz,vec3(0.3, 0.59, 0.11 )), specular.w/128.0, 0.0, 1.0 );
 
-    gl_FragDepth = (iproj.z + 1.0) / 2.0;
+    if (dot(normal,-V) > 0.1) {
+        vec4 iproj = gl_ProjectionMatrix * p;
+        iproj /= iproj.w;
+        gl_FragDepth = (iproj.z+1.0)/2.0;
+    } else {
+        gl_FragDepth = gl_FragCoord.z;
+    }
 }

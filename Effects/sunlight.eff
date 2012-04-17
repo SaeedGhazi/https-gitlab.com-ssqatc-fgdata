@@ -77,6 +77,8 @@
 				- fg_ViewMatrixInverse
 				- fg_ViewMatrix
 				- fg_Planes
+				- fg_ShadowNumber
+				- fg_ShadowDistances
 			-->
 		</pass>
 	</technique>

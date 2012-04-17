@@ -8,6 +8,8 @@ uniform vec4 fg_SunDiffuseColor;
 uniform vec4 fg_SunSpecularColor;
 uniform vec3 fg_SunDirection;
 uniform vec3 fg_Planes;
+uniform int fg_ShadowNumber;
+uniform vec4 fg_ShadowDistances;
 varying vec3 ray;
 
 vec3 position( vec3 viewdir, float depth );
@@ -18,18 +20,20 @@ vec4 DynamicShadow( in vec4 ecPosition, out vec4 tint )
     vec4 coords;
     vec2 shift = vec2( 0.0 );
     int index = 4;
-    if (ecPosition.z > -5.0) {
+	float factor = 0.5;
+    if (ecPosition.z > -fg_ShadowDistances.x) {
         index = 1;
+		factor = 1.0;
         tint = vec4(0.0,1.0,0.0,1.0);
-    } else if (ecPosition.z > -50.0) {
+    } else if (ecPosition.z > -fg_ShadowDistances.y && fg_ShadowNumber > 1) {
         index = 2;
         shift = vec2( 0.0, 0.5 );
         tint = vec4(0.0,0.0,1.0,1.0);
-    } else if (ecPosition.z > -512.0) {
+    } else if (ecPosition.z > -fg_ShadowDistances.z && fg_ShadowNumber > 2) {
         index = 3;
         shift = vec2( 0.5, 0.0 );
         tint = vec4(1.0,1.0,0.0,1.0);
-    } else if (ecPosition.z > -10000.0) {
+    } else if (ecPosition.z > -fg_ShadowDistances.w && fg_ShadowNumber > 3) {
         shift = vec2( 0.5, 0.5 );
         tint = vec4(1.0,0.0,0.0,1.0);
     } else {
@@ -39,7 +43,7 @@ vec4 DynamicShadow( in vec4 ecPosition, out vec4 tint )
     coords.t = dot( ecPosition, gl_EyePlaneT[index] );
     coords.p = dot( ecPosition, gl_EyePlaneR[index] );
     coords.q = dot( ecPosition, gl_EyePlaneQ[index] );
-    coords.st *= .5;
+    coords.st *= factor;
     coords.st += shift;
     return coords;
 }

@@ -115,28 +115,23 @@
 			</render-bin>
 			<texture-unit>
 				<unit>0</unit>
-				<type>buffer</type>
-				<name>depth</name>
+				<type>depth-buffer</type>
 			</texture-unit>
 			<texture-unit>
 				<unit>1</unit>
-				<type>buffer</type>
-				<name>normal</name>
+				<type>normal-buffer</type>
 			</texture-unit>
 			<texture-unit>
 				<unit>2</unit>
-				<type>buffer</type>
-				<name>diffuse</name>
+				<type>diffuse-buffer</type>
 			</texture-unit>
 			<texture-unit>
 				<unit>3</unit>
-				<type>buffer</type>
-				<name>spec-emis</name>
+				<type>spec-emis-buffer</type>
 			</texture-unit>
 			<texture-unit>
 				<unit>4</unit>
-				<type>buffer</type>
-				<name>shadow</name>
+				<type>shadow-buffer</type>
 			</texture-unit>
 			<program>
 				<vertex-shader>Shaders/sunlight.vert</vertex-shader>

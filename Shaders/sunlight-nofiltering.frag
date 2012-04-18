@@ -1,4 +1,3 @@
-#version 120
 uniform mat4 fg_ViewMatrix;
 uniform sampler2D depth_tex;
 uniform sampler2D normal_tex;
@@ -11,7 +10,6 @@ uniform vec3 fg_SunDirection;
 uniform vec3 fg_Planes;
 uniform int fg_ShadowNumber;
 uniform vec4 fg_ShadowDistances;
-uniform int filtering;
 varying vec3 ray;
 
 vec3 position( vec3 viewdir, float depth );
@@ -62,23 +60,7 @@ void main() {
     vec3 pos = position( viewDir, texture2D( depth_tex, coords ).r );
 
     vec4 tint;
-    float shadow = 0.0;
-    if (filtering == 1) {
-        shadow = shadow2DProj( shadow_tex, DynamicShadow( vec4( pos, 1.0 ), tint ) ).r;
-    } else if (filtering == 2) {
-        shadow += 0.333 * shadow2DProj( shadow_tex, DynamicShadow( vec4(pos, 1.0), tint ) ).r;
-        shadow += 0.166 * shadow2DProj( shadow_tex, DynamicShadow( vec4(pos + vec3(-0.003 * pos.z, -0.002 * pos.z, 0), 1.0), tint ) ).r;
-        shadow += 0.166 * shadow2DProj( shadow_tex, DynamicShadow( vec4(pos + vec3( 0.003 * pos.z,  0.002 * pos.z, 0), 1.0), tint ) ).r;
-        shadow += 0.166 * shadow2DProj( shadow_tex, DynamicShadow( vec4(pos + vec3(-0.003 * pos.z,  0.002 * pos.z, 0), 1.0), tint ) ).r;
-        shadow += 0.166 * shadow2DProj( shadow_tex, DynamicShadow( vec4(pos + vec3( 0.003 * pos.z, -0.002 * pos.z, 0), 1.0), tint ) ).r;
-    } else {
-        float kernel[9] = float[9]( 36/256.0, 24/256.0, 6/256.0,
-                               24/256.0, 16/256.0, 4/256.0,
-                               6/256.0,  4/256.0, 1/256.0 );
-        for( int x = -2; x <= 2; ++x )
-          for( int y = -2; y <= 2; ++y )
-            shadow += kernel[int(abs(float(x))*3 + abs(float(y)))] * shadow2DProj( shadow_tex, DynamicShadow( vec4(pos + vec3(-0.0025 * x * pos.z, -0.0025 * y * pos.z, 0), 1.0), tint ) ).r;
-    }
+    float shadow = shadow2DProj( shadow_tex, DynamicShadow( vec4( pos, 1.0 ), tint ) ).r;
     vec3 lightDir = (fg_ViewMatrix * vec4( fg_SunDirection, 0.0 )).xyz;
     lightDir = normalize( lightDir );
     vec3 color = texture2D( color_tex, coords ).rgb;

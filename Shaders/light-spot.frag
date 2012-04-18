@@ -7,6 +7,7 @@ uniform sampler2D color_tex;
 uniform sampler2D spec_emis_tex;
 uniform vec4 LightPosition;
 uniform vec4 LightDirection;
+uniform vec4 Ambient;
 uniform vec4 Diffuse;
 uniform vec4 Specular;
 uniform vec3 Attenuation;
@@ -58,8 +59,9 @@ void main() {
 	float nDotHV = max(0.0, dot(normal, halfVector));
 	
 	vec4 color = texture2D( color_tex, coords );
+	vec4 Iamb = Ambient * color * att;
 	vec4 Idiff = Diffuse * color * att * nDotVP;
 	vec3 Ispec = pow( nDotHV, spec_emis.y ) * spec_emis.x * att * Specular.rgb;
 	
-	gl_FragColor = vec4(Idiff.rgb + Ispec, 1.0);
+	gl_FragColor = vec4(Iamb.rgb + Idiff.rgb + Ispec, 1.0);
 }

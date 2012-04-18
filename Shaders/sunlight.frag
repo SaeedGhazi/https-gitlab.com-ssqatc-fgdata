@@ -20,10 +20,11 @@ vec4 DynamicShadow( in vec4 ecPosition, out vec4 tint )
     vec4 coords;
     vec2 shift = vec2( 0.0 );
     int index = 4;
-	float factor = 0.5;
+    float factor = 0.5;
     if (ecPosition.z > -fg_ShadowDistances.x) {
         index = 1;
-		factor = 1.0;
+        if (fg_ShadowNumber == 1)
+            factor = 1.0;
         tint = vec4(0.0,1.0,0.0,1.0);
     } else if (ecPosition.z > -fg_ShadowDistances.y && fg_ShadowNumber > 1) {
         index = 2;
@@ -64,7 +65,7 @@ void main() {
 #elif 1
     float shadow = shadow2DProj( shadow_tex, DynamicShadow( vec4( pos, 1.0 ), tint ) ).r;
 #elif 0
-	float shadow = 0.0;
+    float shadow = 0.0;
     shadow += 0.333 * shadow2DProj( shadow_tex, DynamicShadow( vec4(pos, 1.0), tint ) ).r;
     shadow += 0.166 * shadow2DProj( shadow_tex, DynamicShadow( vec4(pos + vec3(-0.003 * pos.z, -0.003 * pos.z, 0), 1.0), tint ) ).r;
     shadow += 0.166 * shadow2DProj( shadow_tex, DynamicShadow( vec4(pos + vec3( 0.003 * pos.z,  0.003 * pos.z, 0), 1.0), tint ) ).r;

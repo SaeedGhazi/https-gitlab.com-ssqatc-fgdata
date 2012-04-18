@@ -51,7 +51,7 @@
 	<!--              -->
 	<!-- options file -->
 	<!--              -->
-	<usage>fgfs [ opción ... ]</usage>
+	<usage>Usage: fgfs [ opción ... ]</usage>
 	<verbose-help>Para una lista completa de opciones use --help --verbose</verbose-help>
 
 	<!-- General options -->

@@ -155,6 +155,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     }
     menuEnable("autopilot", isAutopilotMenuEnabled() );
     menuEnable("joystick-info", size(props.globals.getNode("/input/joysticks").getChildren("js")));
+    menuEnable("rendering-buffers", getprop("/sim/rendering/rembrandt"));
 
     # frame-per-second display
     var fps = props.globals.getNode("/sim/rendering/fps-display", 1);

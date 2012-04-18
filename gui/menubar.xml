@@ -2,6 +2,7 @@
 <PropertyList>
 
 	<menu>
+		<name>file</name>
 		<label>File</label>
 <!--
 		<item>
@@ -29,6 +30,7 @@
 		</item>
 -->
 		<item>
+			<name>reset</name>
 			<label>Reset           (Shift-Esc)</label>
 			<binding>
 				<command>reset</command>
@@ -44,6 +46,7 @@
 		</item>
 -->
 		<item>
+			<name>snap-shot</name>
 			<label>Screenshot             (F3)</label>
 			<binding>
 				<command>nasal</command>
@@ -54,34 +57,16 @@
 			</binding>
 		</item>
 		<item>
+			<name>snap-shot-dir</name>
 			<label>Screenshot Directory</label>
 			<binding>
 				<command>nasal</command>
 				<script>gui.set_screenshotdir()</script>
 			</binding>
 		</item>
-		<!--
-		<item>
-		<label>Last snapshot</label>
-			<binding>
-				<command>nasal</command>
-				<script>
-					var path = getprop("/sim/paths/screenshot-last");
-					if (path != nil) gui.popupTip(...) else gui.popupTip("no screenshots yet in this session")
-
-					gui.popupTip("Screenshot written to '" ~ path ~ "'");
-				</script>
-			</binding>
-		</item>
 
 		<item>
-			<label>Print Screen         (F3)</label>
-			<binding>
-				<command>old-print-dialog</command>
-			</binding>
-		</item>
--->
-		<item>
+			<name>sound-config</name>
 			<label>Sound Configuration</label>
 			<binding>
 				<command>dialog-show</command>
@@ -90,6 +75,7 @@
 		</item>
 
 		<item>
+			<name>exit</name>
 			<label>Quit                    (Esc)</label>
 			<binding>
 				<command>dialog-show</command>
@@ -99,9 +85,11 @@
 	</menu>
 
 	<menu>
+		<name>view</name>
 		<label>View</label>
 
 		<item>
+			<name>display-options</name>
 			<label>Display Options</label>
 			<binding>
 				<command>dialog-show</command>
@@ -110,6 +98,7 @@
 		</item>
 
 		<item>
+			<name>rendering-options</name>
 			<label>Rendering Options</label>
 			<binding>
 				<command>dialog-show</command>
@@ -118,6 +107,7 @@
 		</item>
 
 		<item>
+			<name>view-options</name>
 			<label>View Options</label>
 			<binding>
 				<command>dialog-show</command>
@@ -126,6 +116,7 @@
 		</item>
 
 		<item>
+			<name>cockpit-view-options</name>
 			<label>Cockpit View Options</label>
 			<binding>
 				<command>dialog-show</command>
@@ -134,6 +125,7 @@
 		</item>
 
 		<item>
+			<name>adjust-lod</name>
 			<label>Adjust LOD Ranges</label>
 			<binding>
 				<command>dialog-show</command>
@@ -142,6 +134,7 @@
 		</item>
 
 		<item>
+			<name>adjust-view-position</name>
 			<label>Adjust View Position</label>
 			<binding>
 				<command>dialog-show</command>
@@ -150,6 +143,7 @@
 		</item>
 
 		<item>
+			<name>adjust-hud</name>
 			<label>Adjust HUD Properties</label>
 			<binding>
 				<command>dialog-show</command>
@@ -158,6 +152,7 @@
 		</item>
 
 		<item>
+			<name>toggle-glide-slope</name>
 			<label>Toggle Glide Slope Tunnel</label>
 			<binding>
 				<command>nasal</command>
@@ -170,6 +165,7 @@
 		</item>
 
 		<item>
+			<name>replay</name>
 			<label>Instant Replay   (Ctrl-R)</label>
 			<binding>
 				<command>replay</command>
@@ -181,6 +177,7 @@
 		</item>
 
 		<item>
+			<name>stereoscopic-options</name>
 			<label>Stereoscopic View Options</label>
 			<binding>
 				<command>dialog-show</command>
@@ -190,9 +187,11 @@
 	</menu>
 
 	<menu>
+		<name>location</name>
 		<label>Location</label>
 
 		<item>
+			<name>position-on-ground</name>
 			<label>Position Aircraft On Ground</label>
 			<binding>
 				<command>dialog-show</command>
@@ -201,6 +200,7 @@
 		</item>
 
 		<item>
+			<name>position-in-air</name>
 			<label>Position Aircraft In Air</label>
 			<binding>
 				<command>dialog-show</command>
@@ -210,6 +210,7 @@
 
 		<item>
 			<label>Select Airport From List</label>
+			<name>goto-airport</name>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>airports</dialog-name>
@@ -218,6 +219,7 @@
 
 		<item>
 			<label>Random Attitude</label>
+			<name>random-attitude</name>
 			<binding>
 				<command>property-assign</command>
 				<property>/sim/presets/trim</property>
@@ -244,6 +246,7 @@
 		</item>
 
 		<item>
+			<name>tower-position</name>
 			<label>Tower Position</label>
 			<binding>
 				<command>dialog-show</command>
@@ -405,6 +408,7 @@
 		</item>
 
 		<item>
+			<name>failure-submenu</name>
 			<label> --- Failures ---</label>
 			<enabled>false</enabled>
 		</item>
@@ -438,6 +442,7 @@
 	</menu>
 
 	<menu>
+		<name>ai</name>
 		<label>AI</label>
 		<!--  Not working at present
 		<item>
@@ -554,9 +559,11 @@
 	</menu>
 
 	<menu>
+		<name>debug</name>
 		<label>Debug</label>
 
 		<item>
+			<name>reload-gui</name>
 			<label>Reload GUI</label>
 			<binding>
 				<command>reinit</command>
@@ -565,6 +572,7 @@
 		</item>
 
 		<item>
+			<name>reload-input</name>
 			<label>Reload Input</label>
 			<binding>
 				<command>reinit</command>
@@ -573,6 +581,7 @@
 		</item>
 
 		<item>
+			<name>reload-hud</name>
 			<label>Reload HUD</label>
 			<binding>
 				<command>reinit</command>
@@ -582,6 +591,7 @@
 
 
 		<item>
+			<name>reload-panel</name>
 			<label>Reload Panel</label>
 			<binding>
 				<command>panel-load</command>
@@ -589,6 +599,7 @@
 		</item>
 
 		<item>
+			<name>reload-autopilot</name>
 			<label>Reload Autopilot</label>
 			<binding>
 				<command>reinit</command>
@@ -597,6 +608,7 @@
 		</item>
 
 		<item>
+			<name>reload-network</name>
 			<label>Reload Network</label>
 			<binding>
 				<command>reinit</command>
@@ -605,6 +617,7 @@
 		</item>
 
 		<item>
+			<name>nasal-console</name>
 			<label>Nasal Console</label>
 			<binding>
 				<command>dialog-show</command>
@@ -613,6 +626,7 @@
 		</item>
 
 		<item>
+			<name>development-keys</name>
 			<label>Development Keys</label>
 			<binding>
 				<command>nasal</command>
@@ -621,6 +635,7 @@
 		</item>
 
 		<item>
+			<name>configure-dev-extension</name>
 			<label>Configure Development Extensions</label>
 			<binding>
 				<command>dialog-show</command>
@@ -629,6 +644,7 @@
 		</item>
 
 		<item>
+			<name>display-marker</name>
 			<label>Display Tutorial Marker</label>
 			<binding>
 				<command>nasal</command>
@@ -640,6 +656,7 @@
 		</item>
 
 		<item>
+			<name>dump-scene-graph</name>
 			<label>Dump Scene Graph</label>
 			<binding>
 				<command>dump-scenegraph</command>
@@ -647,6 +664,7 @@
 		</item>
 
 		<item>
+			<name>print-rendering-statistics</name>
 			<label>Print Rendering Statistics</label>
 			<binding>
 				<command>property-assign</command>
@@ -656,6 +674,7 @@
 		</item>
 
 		<item>
+			<name>statistics-display</name>
 			<label>Cycle On-Screen Statistics</label>
 			<binding>
 				<command>property-adjust</command>
@@ -665,6 +684,7 @@
 		</item>
 
 		<item>
+			<name>performance-monitor</name>
 			<label>Monitor System Performance</label>
 			<binding>
 				<command>property-assign</command>
@@ -678,6 +698,7 @@
 		</item>
 
 		<item>
+			<name>property-browser</name>
 			<label>Browse Internal Properties</label>
 			<binding>
 				<command>nasal</command>
@@ -686,6 +707,7 @@
 		</item>
 
 		<item>
+			<name>logging</name>
 			<label>Logging</label>
 			<binding>
 				<command>dialog-show</command>
@@ -704,6 +726,7 @@
 		</item>
 
 		<item>
+			<name>print-scene-info</name>
 			<label>Print Visible Scene Info</label>
 			<binding>
 				<command>print-visible-scene</command>
@@ -712,10 +735,12 @@
 
 		<item>
 			<label>Hide/Show Rendering Buffers</label>
+			<name>rendering-buffers</name>
 			<binding>
 				<command>property-toggle</command>
 				<property>/sim/rendering/show-buffers</property>
 			</binding>
+			<enabled>false</enabled>
 		</item>
 
 	</menu>
@@ -743,11 +768,11 @@
 		</item>
 
 		<item>
-			<label>Joystick Information</label>
-			<name>joystick-info</name>
+			<label>Common Aircraft Keys</label>
+			<name>common-keys</name>
 			<binding>
-				<command>dialog-show</command>
-				<dialog-name>joystick-info</dialog-name>
+				<command>nasal</command>
+				<script>gui.showHelpDialog("/sim/help/common")</script>
 			</binding>
 		</item>
 
@@ -761,11 +786,11 @@
 		</item>
 
 		<item>
-			<label>Common Aircraft Keys</label>
-			<name>common-keys</name>
+			<label>Joystick Information</label>
+			<name>joystick-info</name>
 			<binding>
-				<command>nasal</command>
-				<script>gui.showHelpDialog("/sim/help/common")</script>
+				<command>dialog-show</command>
+				<dialog-name>joystick-info</dialog-name>
 			</binding>
 		</item>
 
@@ -785,6 +810,7 @@
 
 		<item>
 			<label>About</label>
+			<name>menu-about</name>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>about</dialog-name>

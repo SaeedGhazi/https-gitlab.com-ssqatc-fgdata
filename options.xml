@@ -40,6 +40,7 @@
 
  <options>
   <usage>strings/usage</usage>
+  <verbose-help>strings/verbose-help</verbose-help>
 
   <section>
    <name>strings/general-options</name>

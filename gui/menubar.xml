@@ -134,7 +134,7 @@
 		</item>
 
 		<item>
-			<name>adjust-view-position</name>
+			<name>pilot-offset</name>
 			<label>Adjust View Position</label>
 			<binding>
 				<command>dialog-show</command>

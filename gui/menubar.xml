@@ -6,7 +6,8 @@
 		<label>File</label>
 <!--
 		<item>
-			<label>Load Flight    (Shift-F1)</label>
+			<label>Load Flight</label>
+			<key>Shift-F1</key>
 			<binding>
 				<command>nasal</command>
 				<script>gui.load_flight()</script>
@@ -14,7 +15,8 @@
 		</item>
 
 		<item>
-			<label>Save Flight    (Shift-F2)</label>
+			<label>Save Flight</label>
+			<key>Shift-F2</key>
 			<binding>
 				<command>nasal</command>
 				<script>gui.save_flight()</script>
@@ -31,7 +33,8 @@
 -->
 		<item>
 			<name>reset</name>
-			<label>Reset           (Shift-Esc)</label>
+			<label>Reset</label>
+			<key>Shift-Esc</key>
 			<binding>
 				<command>reset</command>
 			</binding>
@@ -47,7 +50,8 @@
 -->
 		<item>
 			<name>snap-shot</name>
-			<label>Screenshot             (F3)</label>
+			<label>Screenshot  </label>
+			<key>F3</key>
 			<binding>
 				<command>nasal</command>
 				<script>
@@ -76,7 +80,8 @@
 
 		<item>
 			<name>exit</name>
-			<label>Quit                    (Esc)</label>
+			<label>Quit          </label>
+			<key>Esc</key>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>exit</dialog-name>
@@ -166,7 +171,8 @@
 
 		<item>
 			<name>replay</name>
-			<label>Instant Replay   (Ctrl-R)</label>
+			<label>Instant Replay</label>
+			<key>Ctrl-R</key>
 			<binding>
 				<command>replay</command>
 			</binding>
@@ -261,7 +267,8 @@
 		<name>autopilot</name>
 
 		<item>
-			<label>Autopilot Settings (F11)</label>
+			<label>Autopilot Settings</label>
+			<key>F11</key>
 			<name>autopilot-settings</name>
 			<binding>
 				<command>dialog-show</command>
@@ -381,7 +388,8 @@
 		</item>
 
 		<item>
-			<label>Radio Settings (F12)</label>
+			<label>Radio Settings</label>
+			<key>F12</key>
 			<name>radio</name>
 			<binding>
 				<command>dialog-show</command>
@@ -524,7 +532,8 @@
 		</item>
 
 		<item>
-			<label>Chat Menu         (-)</label>
+			<label>Chat Menu</label>
+			<key>-</key>
 			<name>mp-chat-menu</name>
 			<binding>
 				<command>dialog-show</command>
@@ -759,7 +768,8 @@
 		</item>
 
 		<item>
-			<label>Aircraft Help              (?)</label>
+			<label>Aircraft Help</label>
+			<key>?</key>
 			<name>aircraft-keys</name>
 			<binding>
 				<command>nasal</command>

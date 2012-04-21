@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="Windows-1250" ?>
 
-<!-- (c)2003 Peter Michael Jaworski                   		     v.1.4PL  -->
-<!-- <pjawor@et.put.poznan.pl>                       		    Poznań, POLAND  -->
-<!-- Tłumaczenia opcji i menu dla FlightGeara na język polski 			  -->
-<!-- FlightGear menu and options tranlations for Polish       			  -->
-<!-- GNU GPL Licence                                        			  -->
-<!-- Special thanks to Wojciech Jóźwiak, Maciej Obarski and Krzysztof Nowak	  -->	
-<!-- When there will be some new texts, simply add them at the end of file, 
-     I will translate them later.     			         			  -->
+<!-- FlightGear options: Polish language resource -->
+
+<!-- (c)2003 Peter Michael Jaworski                                 v.1.4PL  -->
+<!-- <pjawor@et.put.poznan.pl>                               Poznań, POLAND  -->
+<!-- Tłumaczenia opcji i menu dla FlightGeara na język polski                -->
+<!-- FlightGear menu and options tranlations for Polish                      -->
+<!-- GNU GPL Licence                                                         -->
+<!-- Special thanks to Wojciech Jóźwiak, Maciej Obarski and Krzysztof Nowak  -->
+<!-- When there will be some new texts, simply add them at the end of file,
+     I will translate them later.                                            -->
 
 <PropertyList>
   <!-- Fall back -->
@@ -16,54 +18,11 @@
  <!--         -->
  <!-- General -->
  <!--         -->
-
  <system-time>Czas systemowy</system-time>
  <gmt>Czas uniwersalny GMT</gmt>
  <locale-aircraft-time>Lokalny czas samolotu</locale-aircraft-time>
  <units-feet>(w stopach gdy brak parametru: --units-meters)</units-feet>
  <multiple-instance>Zezwól na kilka instancji programu</multiple-instance>
-
-  <!-- File menu -->
-  <file>Plik</file>
-  <save-flight>Zapisz lot</save-flight>
-  <load-flight>Załaduj lot</load-flight>
-  <reset>Reset</reset>
-  <hi-res-snap-shot>Zrzut (wys. roz.)</hi-res-snap-shot>
-  <snap-shot>Zrzut ekranu</snap-shot>
-  <print>Drukuj</print>
-  <exit>Zamknij</exit>
-
-  <!-- View menu -->
-  <view>Widok</view>
-  <toggle-panel>Przełącz panel (2D/3D)</toggle-panel>
-  <pilot-offset>Położenie pilota</pilot-offset>
-  <hud-alpha>Antyaliasing wyświetlacza przeziernego wł./wy.</hud-alpha>
-  <properties>Właściwości</properties>
-
-  <!-- Environment menu -->
-  <environment>Środowisko</environment>
-  <goto-airport>Wybierz lotnisko</goto-airport>
- <presets>Ustawienia</presets>
- <preset-airport>Nowe lotnisko</preset-airport>
- <preset-runway>Nowy pas startowy</preset-runway>
- <preset-offset-distance>Ustaw odległość przesunięcia</preset-offset-distance>
- <preset-altitude>Ustaw wysokość</preset-altitude>
- <preset-glideslope>Ustaw opadanie [stopnie]</preset-glideslope>
- <preset-airspeed>Ustaw prędkość [kts]</preset-airspeed>
- <preset-commit>Zatwierdź zmiany</preset-commit>
-
-  <!-- Autopilot menu -->
-  <autopilot>Autopilot</autopilot>
-  <set-heading>Ustaw kierunek </set-heading>
-  <set-altitude>Ustaw wysokość</set-altitude>
-  <add-waypoint>Dodaj punkt przelotowy</add-waypoint>
-  <skip-current-waypoint>Przeskocz obecny punkt</skip-current-waypoint>
-  <clear-route>Wyczyść trasę</clear-route>
-  <adjust-ap-settings>Dostosuj ustawienia AP</adjust-ap-settings>
-  <toggle-hud-format>Przełącz format wyświetlacza przeziernego</toggle-hud-format>
-
-  <!-- Help menu -->
-  <help>Pomoc</help>
 
  <!--              -->
  <!-- options file -->

@@ -1,53 +1,12 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 
-<!-- FlightGear menu and options translations for Spanish -->
+<!-- FlightGear options: Spanish language resource -->
 
 <PropertyList>
 
-   	<!-- Fall back -->
-   	<null>Ninguna traducción</null>
+	<!-- Fall back -->
+	<null>Ninguna traducción</null>
 
-   	<!-- Menu -->
-	<!-- File menu -->
-	<file>Archivo</file>
-	<save-flight>Guardar vuelo</save-flight>
-	<load-flight>Cargar vuelo</load-flight>
-	<reset>Reset</reset>
-	<hi-res-snap-shot>Fotografía Hi-res</hi-res-snap-shot>
-	<snap-shot>Fotografía</snap-shot>
-	<print>Imprimir</print>
-	<exit>Salir</exit>
-
-	<!-- View menu -->
-	<view>Visualizar</view>
-	<toggle-panel>Panel de instrumentos ON/OFF</toggle-panel>
-	<pilot-offset>Posición del piloto</pilot-offset>
-	<hud-alpha>Alpha HUD</hud-alpha>
-	<properties>Propriedades</properties>
-
-	<!-- Environment menu -->
-	<presets>Entorno</presets>
-	<preset-airport>Nuevo aeropuerto</preset-airport>
-	<preset-runway>Nueva pista</preset-runway>
-	<preset-offset-distance>Nueva distancia</preset-offset-distance>
-	<preset-altitude>Nueva altitud</preset-altitude>
-	<preset-glideslope>Nueva dirección (grados)</preset-glideslope>
-	<preset-airspeed>Nueva velocidad (nudos)</preset-airspeed>
-	<preset-commit>Activar modificaciones</preset-commit>
-
-	<!-- Autopilot menu -->
-	<autopilot>Autopiloto</autopilot>
-	<set-heading>Nueva dirección</set-heading>
-	<set-altitude>Nueva altitud</set-altitude>
-	<add-waypoint>Añadir waypoint</add-waypoint>
-	<skip-current-waypoint>Evitar waypoint</skip-current-waypoint>
-	<clear-route>Cancelar ruta</clear-route>
-	<adjust-ap-settings>Cambiar ajustes AP</adjust-ap-settings>
-	<toggle-hud-format>Cambiar formato HUD</toggle-hud-format>
-
-	<!-- Help menu -->
-	<help>Ayuda</help>
-	
 	<!--              -->
 	<!-- options file -->
 	<!--              -->

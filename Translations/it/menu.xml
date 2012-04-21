@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 
-<!-- FlightGear menu and options translations for Italian -->
+<!-- FlightGear menu: Italian language resource -->
 
 <PropertyList>
 
-    <!-- Fall back -->
-    <null>Nessuna traduzione</null>
-
-    <!-- Menu -->
+	<!-- Menu -->
 	<!-- File menu -->
 	<file>File</file>
 	<save-flight>Salva volo</save-flight>

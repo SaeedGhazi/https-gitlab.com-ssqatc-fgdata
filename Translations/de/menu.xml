@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!-- FlightGear menu: German language resource -->
+
+<PropertyList>
+
+	<!-- File menu -->
+	<file>Datei</file>
+	<reset>Flug zurücksetzen</reset>
+	<snap-shot>Bildschirmfoto                </snap-shot>
+	<snap-shot-dir>Fotoverzeichnis festlegen</snap-shot-dir>
+	<sound-config>Sound-Konfiguration</sound-config>
+	<exit>Beenden                      </exit>
+
+	<!-- View menu -->
+	<view>Ansicht</view>
+	<display-options>Anzeigeoptionen</display-options>
+	<rendering-options>Grafikoptionen</rendering-options>
+	<toggle-panel>Instrumentenbrett umschalten</toggle-panel>
+	<pilot-offset>Betrachtungspunkt</pilot-offset>
+	<hud-alpha>HUD-Antialiasing an/aus</hud-alpha>
+	<properties>Eigenschaften</properties>
+	<replay>Sofortwiederholung</replay>
+	<view-options>Sichtoptionen</view-options>
+	<cockpit-view-options>Cockpitoptionen</cockpit-view-options>
+	<adjust-lod>Szeneriekomplexität</adjust-lod>
+	<adjust-hud>HUD Optionen</adjust-hud>
+	<toggle-glide-slope>Anzeige des Gleitpfades (an/aus)</toggle-glide-slope>
+	<stereoscopic-options>Stereoskopie (3D Anzeige)</stereoscopic-options>
+
+	<!-- Location menu -->
+	<location>Ort</location>
+	<position-on-ground>Flugzeug positionieren (am Boden)</position-on-ground>
+	<position-in-air>Flugzeug positionieren (in der Luft)</position-in-air>
+	<goto-airport>Flughafenauswahl</goto-airport>
+	<random-attitude>Zufällige Fluglage</random-attitude>
+	<tower-position>Kontrollturmposition festlegen</tower-position>
+
+	<!-- Autopilot menu -->
+	<autopilot>Autopilot</autopilot>
+	<autopilot-settings>Autopilot einstellen</autopilot-settings>
+	<set-heading>Richtungseinstellung</set-heading>
+	<set-altitude>Höheneinstellung</set-altitude>
+	<add-waypoint>Wegpunkt hinzufügen</add-waypoint>
+	<skip-current-waypoint>Momentanen Wegpunkt auslassen</skip-current-waypoint>
+	<clear-route>Route löschen</clear-route>
+	<adjust-ap-settings>AP einstellen</adjust-ap-settings>
+	<toggle-hud-format>HUD-Format umschalten</toggle-hud-format>
+	<route-manager>Routenplaner</route-manager>
+	<next-waypoint>Nächster Wegepunkt</next-waypoint>
+	<previous-waypoint>Vorheriger Wegepunkt</previous-waypoint>
+
+	<!-- Environment menu -->
+	<environment>Umgebung</environment>
+	<global-weather>Wetter</global-weather>
+	<time-settings>Zeit</time-settings>
+	<wildfire-settings>Flächenbrand</wildfire-settings>
+	<terrasync>Download von Szenerie</terrasync>
+
+	<!-- AI menu -->
+	<ai>KI</ai>
+	<wingman>Steuerung Flügelmann</wingman>
+	<tanker>Steuerung Tanker</tanker>
+	<carrier>Steuerung Flugzeugträger</carrier>
+	<scenario>Auswahl der KI Szenarien (Neustart notwendig)</scenario>
+	<jetway>Steuerung Fluggastbrücke</jetway>
+
+	<!-- Equipment -->
+	<equipment>Ausrüstung</equipment>
+	<map>Karte</map>
+	<stopwatch>Stoppuhr</stopwatch>
+	<fuel-and-payload>Treibstoff und Ladung</fuel-and-payload>
+	<instrument-settings>Instrumente</instrument-settings>
+	<failure-submenu> --- Fehler ---</failure-submenu>
+	<random-failures>Zufällige Fehler</random-failures>
+	<system-failures>Systemfehler</system-failures>
+	<instrument-failures>Instrumentenfehler</instrument-failures>
+	<gps>GPS Konfiguration</gps>
+	<radio>Funkfrequenzen</radio>
+
+	<!-- Multiplayer -->
+	<multiplayer>Multiplayer</multiplayer>
+	<mp-settings>Multiplayer Konfiguration</mp-settings>
+	<mp-chat>MP Chat</mp-chat>
+	<mp-chat-menu>MP Chat Menü</mp-chat-menu>
+	<mp-list>Pilotenliste</mp-list>
+	<mp-carrier>Auswahl MP Flugzeugträger</mp-carrier>
+
+	<!-- Debug menu -->
+	<debug>Entwickler</debug>
+	<!-- Not translated since options are not useful for end users -->
+
+	<!-- Help menu -->
+	<help>Hilfe</help>
+	<help-browser>Hilfe (öffnet sich im Browser)</help-browser>
+	<aircraft-keys>Spezielle Hilfe zum aktuellen Flugzeug</aircraft-keys>
+	<joystick-info>Joystick Informationen</joystick-info>
+	<common-keys>Allgemeine Hilfe zur Flugzeugsteuerung</common-keys>
+	<basic-keys>Hilfe zur Simulatorsteuerung</basic-keys>
+	<tutorial-start>Übungen und Anleitungen</tutorial-start>
+	<menu-about>Über FlightGear</menu-about>
+
+</PropertyList>

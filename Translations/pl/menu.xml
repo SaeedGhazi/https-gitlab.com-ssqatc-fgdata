@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- FlightGear menu: Polish language resource -->
+
+<!--
+     (c)2003 Peter Michael Jaworski                                  v.1.4PLX
+     <pjawor@et.put.poznan.pl>                                       Poznan, POLAND
+
+     Tlumaczenia menu dla FlightGeara na jezyk polski (bez polskich znakow)
+     FlightGear menu and options tranlations for Polish (without Polish letters)
+     GNU GPL Licence
+
+     Special thanks to Wojciech Jozwiak, Maciej Obarski and Krzysztof Nowak
+-->
+
+<PropertyList>
+
+	<!-- File menu -->
+	<file>Plik</file>
+	<save-flight>Zapisz lot</save-flight>
+	<load-flight>Załaduj lot</load-flight>
+	<reset>Reset</reset>
+	<hi-res-snap-shot>Zrzut (wys. roz.)</hi-res-snap-shot>
+	<snap-shot>Zrzut ekranu</snap-shot>
+	<print>Drukuj</print>
+	<exit>Zamknij</exit>
+
+	<!-- View menu -->
+	<view>Widok</view>
+	<toggle-panel>Przełącz panel (2D/3D)</toggle-panel>
+	<pilot-offset>Położenie pilota</pilot-offset>
+	<hud-alpha>Antyaliasing wyświetlacza przeziernego wł./wy.</hud-alpha>
+	<properties>Właściwości</properties>
+
+	<!-- Environment menu -->
+	<environment>Środowisko</environment>
+	<goto-airport>Wybierz lotnisko</goto-airport>
+	<presets>Ustawienia</presets>
+	<preset-airport>Nowe lotnisko</preset-airport>
+	<preset-runway>Nowy pas startowy</preset-runway>
+	<preset-offset-distance>Ustaw odległość przesunięcia</preset-offset-distance>
+	<preset-altitude>Ustaw wysokość</preset-altitude>
+	<preset-glideslope>Ustaw opadanie [stopnie]</preset-glideslope>
+	<preset-airspeed>Ustaw prędkość [kts]</preset-airspeed>
+	<preset-commit>Zatwierdź zmiany</preset-commit>
+
+	<!-- Autopilot menu -->
+	<autopilot>Autopilot</autopilot>
+	<set-heading>Ustaw kierunek </set-heading>
+	<set-altitude>Ustaw wysokość</set-altitude>
+	<add-waypoint>Dodaj punkt przelotowy</add-waypoint>
+	<skip-current-waypoint>Przeskocz obecny punkt</skip-current-waypoint>
+	<clear-route>Wyczyść trasę</clear-route>
+	<adjust-ap-settings>Dostosuj ustawienia AP</adjust-ap-settings>
+	<toggle-hud-format>Przełącz format wyświetlacza przeziernego</toggle-hud-format>
+
+	<!-- Help menu -->
+	<help>Pomoc</help>
+
+</PropertyList>

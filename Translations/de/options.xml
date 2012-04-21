@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!-- FlightGear options translations for German -->
+
+<PropertyList>
+	<!-- Fall back -->
+	<null>No translation available for this text</null>
+
+	<!--              -->
+	<!-- options file -->
+	<!--              -->
+	<usage>Aufruf: fgfs [ Optionen ... ]</usage>
+	<verbose-help>Anzeigen der vollständige Liste aller Optionen mit --help --verbose</verbose-help>
+
+	<!-- General options -->
+	<general-options>Generelle Optionen</general-options>
+	<help-desc>Die wichtigsten Kommandozeilenoptionen zeigen.</help-desc>
+	<verbose-desc>Zeigt die vollständige Lister aller Kommandozeilenoptionen (mit --help oder -h kombinieren)</verbose-desc>
+	<version-desc>Zeigt die aktuelle FlightGear Version</version-desc>
+	<fg-root-desc>Konfiguration des FlightGear Datenverzeichnisses</fg-root-desc>
+	<fg-scenery-desc n="0">Konfiguriert den Pfad zu den Szeneriedaten;</fg-scenery-desc>
+	<fg-scenery-desc n="1">Voreinstellung ist $FG_ROOT/Scenery</fg-scenery-desc>
+	<fg-aircraft-desc>Konfiguriert Verzeichnisse mit zusätzlichen Flugzeugen</fg-aircraft-desc>
+	<language-desc>Auswahl der Sprache</language-desc>
+
+	<!-- Aircraft options -->
+	<aircraft-options>Flugzeug Optionen</aircraft-options>
+	<aircraft-desc>Auswahl eines Flugzeugs (wählt ein &lt;name&gt;-set.xml Profil aus)</aircraft-desc>
+	<show-aircraft-desc>Zeigt eine Liste der verfügbaren Flugzeugtypen</show-aircraft-desc>
+	<min-aircraft-status>Schränkt die Anzeige auf Flugzeuge mit diesem minimalem Status ein</min-aircraft-status>
+
+	<!-- Position and Orientation options -->
+	<position-options>Position und Orientierung</position-options>
+	<airport-desc>Auswahl des Flughafens (bzw. relative Position zu diesem)</airport-desc>
+	<carrier-desc>Auswahl einer Startposition auf einem Flugzeugträger</carrier-desc>
+	<parking-id-desc>Auswahl einer Parkposition am ausgewählten Flughafen</parking-id-desc>
+	<runway-no-desc>Auswahl einer Startbahn am ausgewählten Flughafen</runway-no-desc>
+
+</PropertyList>

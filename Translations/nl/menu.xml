@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!-- FlightGear menu: Dutch language resource -->
+
+<PropertyList>
+
+	<!--      -->
+	<!-- Menu -->
+	<!--      -->
+	<!-- File menu -->
+	<file>Bestand</file>
+	<save-flight>Huidige situatie bewaren</save-flight>
+	<load-flight>Oude situatie opvragen</load-flight>
+	<reset>Begin situatie herstellen</reset>
+	<hi-res-snap-shot>Hoge resolutie opname</hi-res-snap-shot>
+	<snap-shot>Moment opname                     </snap-shot>
+	<print>Afdrukken</print>
+	<exit>Beëindigen                           </exit>
+
+	<!-- View menu -->
+	<view>Visueel</view>
+	<toggle-panel>Paneel zichtbaarheid</toggle-panel>
+	<pilot-offset>Piloot verplaatsen</pilot-offset>
+	<hud-alpha>HUD intensiteit</hud-alpha>
+	<properties>Instellingen</properties>
+
+	<!-- Environment menu -->
+	<environment>Omgeving</environment>
+	<goto-airport>Ander vliegveld</goto-airport>
+
+	<!-- Autopilot menu -->
+	<autopilot>Automatische piloot</autopilot>
+	<set-heading>Verander richting</set-heading>
+	<set-altitude>Verander hoogte</set-altitude>
+	<add-waypoint>Tussenstation toevoegen</add-waypoint>
+	<skip-current-waypoint>Tussenstation orverslaan</skip-current-waypoint>
+	<clear-route>Route opschonen</clear-route>
+	<adjust-ap-settings>Verander AP instellingen</adjust-ap-settings>
+	<toggle-hud-format>Verander HUD indeling</toggle-hud-format>
+
+	<!-- Help menu -->
+	<help>Hulp</help>
+
+</PropertyList>

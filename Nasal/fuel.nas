@@ -28,11 +28,13 @@ var update = func {
 	var selected_tanks = [];
 	foreach (var t; tanks) {
 		var cap = t.getNode("capacity-gal_us",0);
-		if ((cap!=nil) and (cap.getValue() > 0.01) and t.getNode("selected").getBoolValue())
+		var selected = t.getNode("selected");
+		if ((cap!=nil) and (cap.getValue() > 0.01) and (t.getNode("level-lbs") != nil) and
+			(selected != nil) and selected.getBoolValue())
 			append(selected_tanks, t);
 	}
 
-	# Subtract fuel from tanks, set auxilliary properties.  Set out-of-fuel
+	# Subtract fuel from tanks, set auxiliary properties.  Set out-of-fuel
 	# when any one tank is dry.
 	var out_of_fuel = 0;
 	if (size(selected_tanks) == 0) {
@@ -40,10 +42,14 @@ var update = func {
 	} else {
 		var fuel_per_tank = consumed_fuel / size(selected_tanks);
 		foreach (var t; selected_tanks) {
-			var lbs = t.getNode("level-lbs").getValue();
-			lbs = lbs - fuel_per_tank;
-			t.getNode("level-lbs").setDoubleValue(lbs);
-			if( t.getNode("empty").getBoolValue() ) {
+			var lbs = t.getNode("level-lbs");
+			lbs.setDoubleValue(lbs.getValue() - fuel_per_tank);
+			var empty = t.getNode("empty");
+			if (empty == nil)
+				empty = (lbs.getValue() <= 0);
+			else
+				empty = empty.getBoolValue();
+			if( empty ) {
 				# Kill the engines if we're told to, otherwise simply
 				# deselect the tank.
 				if (t.getNode("kill-when-empty", 1).getBoolValue())

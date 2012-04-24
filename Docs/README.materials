@@ -149,3 +149,68 @@ heading-type : Indicator of how the heading of the random objects should be
            mask      - Rotation is taken from the red channel of the object-mask
            billboard - Object is always rotated to face camera - expensive
            
+           
+Random Buildings
+================
+
+Random Buildings come in three sizes, with individual constraints. 
+
+Small buildings, which may have pitched roofs.  They have different front, back and
+side textures.  Small buildings are never deeper than they are wide.
+
+Medium buildings, which have flat roofs. They have different front and side textures.
+They are never taller than they are wide.
+
+Large buildings, which have flat roofs. They have different front and size textures. There
+are no constraints on their width, depth or height.
+           
+building-coverage : The coverage of random buildings in areas marked for random objects in 
+         m^2. A lower number means a higher density of buildings. A value of 
+         0 indicates no buildings. May be masked by the blue channel of an
+         object-mask. (default: 0)            
+           
+building-spacing-m : The minimum spacing between random buildings and other buildings
+         or random objects. This helps avoid objects being placed on top of each other. 
+         (default: 5)
+         
+building-small-ratio: Ratio of small buildings. These buildings are 1-3 stories
+         in height, and may have a pitched roof. Fraction of small buildings is
+         (<building-ratio-small> / (<building-ratio-small> + <building-ratio-medium>
+         + <building-ratio-large>). (default: 0.8)
+         
+building-medium-ratio : Ratio of medium buildings. These buildings are 3-6 stories in
+         height, and have a flat roof. (default: 0.15)
+         
+building-large-ratio : Ratio of large buildings. These buildings are 5-10 stories in 
+         height, and have a flat roof. (default 0.05)
+         
+building-small-pitch : Fraction of small buildings with pitched roofs. (default 0.8)
+building-medium-pitch : Fraction of small buildings with pitched roofs. (default 0.2)
+building-large-pitch : Fraction of small buildings with pitched roofs. (default 0.1)
+
+building-small-min-floors : Minimum number of floors for a small building. (default 1)
+building-small-max-floors : Maximum number of floors for a small building. (default 3)         
+
+building-medium-min-floors  : Minimum number of floors for a medium building. (default 3)
+building-medium-max-floors  : Maximum number of floors for a medium building. (default 8)
+
+building-large-min-floors  : Minimum number of floors for a medium building. (default 5)
+building-large-max-floors  : Maximum number of floors for a medium building. (default 20)
+
+building-small-min-width-m : Minimum width of small buildings. (default 15)
+building-small-max-width-m : Maximum width of small buildings. (default 60)
+building-small-min-depth-m : Minimum depth of small buildings. (default 10)
+building-small-max-depth-m : Maximum depty of small buildings. (default 20)
+
+building-medium-min-width-m : Minimum width of medium buildings. (default 25)
+building-medium-max-width-m : Maximum width of medium buildings. (default 50)
+building-medium-min-depth-m : Minimum depth of medium buildings. (default 20)
+building-medium-max-depth-m : Maximum depty of medium buildings. (default 50)
+
+building-large-min-width-m : Minimum width of large buildings. (default 50)
+building-large-max-width-m : Maximum width of large buildings. (default 75)
+building-large-min-depth-m : Minimum depth of large buildings. (default 50)
+building-large-max-depth-m : Maximum depty of large buildings. (default 75)
+
+texture : The texture used for all buildings. See Texture/buildings.xcf for details. 
+(default Texture/buildings.png)

@@ -48,6 +48,10 @@
 					<value type="float">4.0</value>
 					<float-property>/sim/rendering/shaders/urban</float-property>
 				</less-equal>
+				<equal>
+					<property>/sim/rendering/random-buildings</property>
+					<value type="bool">false</value>
+				</equal>
 				<or>
 					<less-equal>
 						<value type="float">2.0</value>
@@ -234,6 +238,10 @@
 					<value type="float">1.0</value>
 					<float-property>/sim/rendering/shaders/urban</float-property>
 				</less-equal>
+				<equal>
+					<property>/sim/rendering/random-buildings</property>
+					<value type="bool">false</value>
+				</equal>
 				<or>
 					<less-equal>
 						<value type="float">2.0</value>
@@ -388,6 +396,10 @@
 					<value type="float">4.0</value>
 					<float-property>/sim/rendering/shaders/urban</float-property>
 				</less-equal>
+				<equal>
+					<property>/sim/rendering/random-buildings</property>
+					<value type="bool">false</value>
+				</equal>
 				<or>
 					<less-equal>
 						<value type="float">2.0</value>
@@ -633,6 +645,10 @@
 					<value type="float">1.0</value>
 					<float-property>/sim/rendering/shaders/urban</float-property>
 				</less-equal>
+				<equal>
+					<property>/sim/rendering/random-buildings</property>
+					<value type="bool">false</value>
+				</equal>
 				<or>
 					<less-equal>
 						<value type="float">2.0</value>

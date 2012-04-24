@@ -110,6 +110,8 @@ Started September 2000 by David Megginson, david@megginson.com
 			<random-objects type="bool" userarchive="y">true</random-objects>
 			<random-vegetation type="bool" userarchive="y">true</random-vegetation>
 			<vegetation-density type="double" userarchive="y">1.0</vegetation-density>
+			<random-buildings type="bool" userarchive="y">false</random-buildings>
+			<building-density type="double" userarchive="y">1.0</building-density>
 			<horizon-effect type="bool"
 											userarchive="y">false</horizon-effect>
 			<point-sprites type="bool"

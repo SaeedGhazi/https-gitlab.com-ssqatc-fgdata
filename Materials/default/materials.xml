@@ -874,6 +874,14 @@
    <a>1.0</a>
   </emissive>
   <object-group include="Materials/base/urban-buildings.xml"/>  
+  <building-coverage>500.0</building-coverage>
+  <building-small-ratio>0.4</building-small-ratio>
+  <building-small-min-floors>3</building-small-min-floors>
+  <building-small-max-width-m>30.0</building-small-max-width-m>
+  <building-small-min-depth-m>10.0</building-small-min-depth-m>
+  <building-small-max-depth-m>30.0</building-small-max-depth-m>
+  <building-medium-ratio>0.6</building-medium-ratio>
+  <building-large-ratio>0.2</building-large-ratio>
   <wood-coverage>250000.0</wood-coverage>
   <tree-texture>Trees/mixed-summer.png</tree-texture>
   <tree-varieties>8</tree-varieties>
@@ -929,6 +937,11 @@
    <a>1.0</a>
   </emissive>
   <object-group include="Materials/base/town-buildings.xml"/>
+  <building-coverage>500.0</building-coverage>
+  <building-small-ratio>0.9</building-small-ratio>
+  <building-medium-ratio>0.1</building-medium-ratio>
+  <building-large-ratio>0.0</building-large-ratio>
+  <building-medium-max-floors>4</building-medium-max-floors>
   <wood-coverage>5000.0</wood-coverage>
   <tree-texture>Trees/mixed-summer.png</tree-texture>
   <tree-varieties>8</tree-varieties>
@@ -1629,12 +1642,6 @@
   </texture-set>
 	<object-mask>Terrain/city1.mask.png</object-mask>
 	<object-mask>Terrain/city2.mask.png</object-mask>	  
-<!-- 
-  <texture-set>
-   <texture>Terrain/city3.png</texture>
-   <texture n="2">Terrain/city3-relief-light.png</texture>
-  </texture-set>
--->
   <xsize>1000</xsize>
   <ysize>1000</ysize>
   <light-coverage>100000.0</light-coverage>
@@ -1645,6 +1652,14 @@
    <a>1.0</a>
   </emissive>
   <object-group include="Materials/base/urban-buildings.xml"/>  
+  <building-coverage>500.0</building-coverage>
+  <building-small-ratio>0.4</building-small-ratio>
+  <building-small-min-floors>3</building-small-min-floors>
+  <building-small-max-width-m>30.0</building-small-max-width-m>
+  <building-small-min-depth-m>10.0</building-small-min-depth-m>
+  <building-small-max-depth-m>30.0</building-small-max-depth-m>
+  <building-medium-ratio>0.6</building-medium-ratio>
+  <building-large-ratio>0.2</building-large-ratio>
   <wood-coverage>250000.0</wood-coverage>
   <tree-texture>Trees/mixed-winter.png</tree-texture>
   <tree-varieties>8</tree-varieties>
@@ -1700,6 +1715,11 @@
    <a>1.0</a>
   </emissive>
   <object-group include="Materials/base/town-buildings.xml"/>
+  <building-coverage>500.0</building-coverage>
+  <building-small-ratio>0.9</building-small-ratio>
+  <building-medium-ratio>0.1</building-medium-ratio>
+  <building-large-ratio>0.0</building-large-ratio>
+  <building-medium-max-floors>4</building-medium-max-floors>
   <wood-coverage>5000.0</wood-coverage>
   <tree-texture>Trees/mixed-winter.png</tree-texture>
   <tree-varieties>8</tree-varieties>

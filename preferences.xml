@@ -63,6 +63,7 @@ Started September 2000 by David Megginson, david@megginson.com
 			<season type="string" preserve="y">summer</season>
 		</startup>
 		<rendering>
+		  <materials-file>Materials/default/materials.xml</materials-file>
 			<rembrandt type="bool">false</rembrandt>
 			<show-buffers type="bool" userarchive="y">true</show-buffers>
 			<ambient-occlusion type="bool" userarchive="y">false</ambient-occlusion>

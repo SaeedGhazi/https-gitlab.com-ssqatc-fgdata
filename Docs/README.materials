@@ -212,5 +212,5 @@ building-large-max-width-m : Maximum width of large buildings. (default 75)
 building-large-min-depth-m : Minimum depth of large buildings. (default 50)
 building-large-max-depth-m : Maximum depty of large buildings. (default 75)
 
-texture : The texture used for all buildings. See Texture/buildings.xcf for details. 
+texture : The texture used for all buildings. See Docs/buildings.png for details. 
 (default Texture/buildings.png)

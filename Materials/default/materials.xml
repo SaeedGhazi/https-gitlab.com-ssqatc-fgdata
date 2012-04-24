@@ -331,13 +331,11 @@
 <material include="Materials/base/runway_effect.xml">
   <name>pc_shoulder</name>
   <texture>Runway/pc_shoulder.png</texture>
-  <ysize>5</ysize>
 </material>
 
 <material include="Materials/base/runway_effect.xml">
   <name>pc_shoulder_f</name>
   <texture>Runway/pc_shoulder_f.png</texture>
-  <ysize>5</ysize>
 </material>
 
 <material include="Materials/base/runway_effect.xml">

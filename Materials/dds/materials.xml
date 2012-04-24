@@ -67,7 +67,6 @@
      <a>1.0</a>
    </specular>
    <texture>Runway/pa_shoulder.dds</texture>
-   <ysize>5</ysize>
    <wrapu>false</wrapu>
 </material>
 
@@ -86,7 +85,6 @@
      <a>1.0</a>
    </specular>
    <texture>Runway/pa_shoulder_f.dds</texture>
-   <ysize>5</ysize>
    <wrapu>false</wrapu>
 </material>
 
@@ -361,7 +359,6 @@
      <a>1.0</a>
    </specular>
    <texture>Runway/pc_shoulder.dds</texture>
-   <ysize>5</ysize>
    <wrapu>false</wrapu>
 </material>
 
@@ -380,7 +377,6 @@
      <a>1.0</a>
    </specular>
    <texture>Runway/pc_shoulder_f.dds</texture>
-   <ysize>5</ysize>
    <wrapu>false</wrapu>
 </material>
 
@@ -1722,9 +1718,7 @@
       </equals>
   </condition>
   <name>Sand</name>
-    <texture>Terrain.winter/sand4.png</texture>
-    <texture>Terrain.winter/sand5.png</texture>
-    <texture>Terrain.winter/sand6.png</texture>
+  <texture>Terrain.winter/sand.png</texture>
   <xsize>2000</xsize>
   <ysize>2000</ysize>
   <light-coverage>10000000.0</light-coverage>
@@ -1938,9 +1932,7 @@
   <name>DryLake</name>
   <name>IntermittentReservoir</name>
   <name>IntermittentLake</name>
-  <texture>Terrain.winter/sand1.png</texture>
-  <texture>Terrain.winter/sand2.png</texture>
-  <texture>Terrain.winter/sand3.png</texture>
+  <texture>Terrain.winter/sand.png</texture>
   <xsize>2000</xsize>
   <ysize>2000</ysize>
   <solid>1</solid>
@@ -2300,7 +2292,7 @@
     </equals>
   </condition>
   <name>GolfCourse</name>
-  <texture>Terrain.winter/golfcourse.png</texture>
+  <texture>Terrain.winter/golfcourse1.png</texture>
   <object-mask>Terrain/golfcourse1.mask.png</object-mask>
   <xsize>800</xsize>
   <ysize>800</ysize>

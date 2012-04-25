@@ -63,24 +63,33 @@
       }
 
       var runways = dlg.getNode("available-runways", 1);
-
-      var updateRunways = func {
+      var parking = dlg.getNode("available-parking", 1);
+      
+      var updateAirport = func {
         var icao = dlg.getNode("airport").getValue();
         runways.removeChildren("value");
-
+        parking.removeChildren("value");
+        
         var apt = airportinfo(icao);
-        if (apt != nil) {
-          var i=0;
-          foreach (var rwy; keys(apt.runways)) {
-            runways.getNode("value[" ~ i ~ "]", 1).setValue(rwy);
-            i += 1;
-          }
+        if (apt == nil) {
+            return;
+        }
+        
+        var i=0;
+        foreach (var rwy; keys(apt.runways)) {
+          runways.getNode("value[" ~ i ~ "]", 1).setValue(rwy);
+          i += 1;
         }
 
+        foreach (var park; apt.parking()) {
+          parking.getNode("value[" ~ i ~ "]", 1).setValue(park);
+          i += 1;
+        }
+        
         gui.dialog_update("location-on-ground");
       }
       
-      updateRunways();
+      updateAirport();
     </open>
   </nasal>
 
@@ -103,7 +112,9 @@
       </binding>
       <binding>
         <command>nasal</command>
-        <script>updateRunways();</script>
+        <script>
+            updateAirport();
+        </script>
       </binding>
     </input>
 
@@ -187,14 +198,22 @@
         <property>/sim/gui/dialogs/location-on-ground/use_parkpos</property>
       </enable>
     </text>
-
-    <input>
+    
+    <combo>
+      <name>parking</name>
       <row>3</row><col>2</col>
+      <pref-width>85</pref-width>
       <enable>
         <property>/sim/gui/dialogs/location-on-ground/use_parkpos</property>
       </enable>
       <property>/sim/gui/dialogs/location-on-ground/parkpos</property>
-    </input>
+      <editable>false</editable>
+      <properties>sim/gui/dialogs/location-on-ground/available-parking</properties>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>parking</object-name>
+      </binding>
+    </combo>
   </group>
 
   <hrule/>

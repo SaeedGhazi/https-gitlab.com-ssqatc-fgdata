@@ -146,7 +146,7 @@ command interface /autopilot/route-manager/input:
                 var depIcao = dep.getNode("airport").getValue();
                 var rwy = dep.getNode("runway").getValue();
                 var apt = airportinfo(depIcao);
-                if (apt == nil or apt.runways[rwy] == nil) {
+                if (apt == nil or apt.sids(rwy) == nil) {
                     dep.getNode("sid").clearValue();
                     gui.dialog_update("route-manager", "sid");
                     return;
@@ -154,7 +154,7 @@ command interface /autopilot/route-manager/input:
 
                 sids.getNode("value[0]", 1).setValue("(none)");
                 var i=1;
-                foreach (var s; apt.runways[rwy].sids) {
+                foreach (var s; apt.sids(rwy)) {
                     sids.getNode("value[" ~ i ~ "]", 1).setValue(s);
                     i += 1;
                 }
@@ -167,7 +167,7 @@ command interface /autopilot/route-manager/input:
                 var icao = dest.getNode("airport").getValue();
                 var rwy = dest.getNode("runway").getValue();
                 var apt = airportinfo(icao);
-                if (apt == nil or apt.runways[rwy] == nil) {
+                if (apt == nil or apt.stars(rwy) == nil) {
                     dest.getNode("star").clearValue();
                     gui.dialog_update("route-manager", "star");
                     return;
@@ -175,7 +175,7 @@ command interface /autopilot/route-manager/input:
 
                 var i=1;
                 stars.getNode("value[0]", 1).setValue("(none)");
-                foreach (var s; apt.runways[rwy].stars) {
+                foreach (var s; apt.stars(rwy)) {
                     stars.getNode("value[" ~ i ~ "]", 1).setValue(s);
                     i += 1;
                 }

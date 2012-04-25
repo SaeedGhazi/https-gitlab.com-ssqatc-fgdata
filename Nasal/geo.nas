@@ -240,62 +240,8 @@ var normdeg = func(angle) {
 }
 
 
-var _bucket_span = func(lat) {
-	if (lat >= 89.0)
-		360.0;
-	elsif (lat >= 88.0)
-		8.0;
-	elsif (lat >= 86.0)
-		4.0;
-	elsif (lat >= 83.0)
-		2.0;
-	elsif (lat >= 76.0)
-		1.0;
-	elsif (lat >= 62.0)
-		0.5;
-	elsif (lat >= 22.0)
-		0.25;
-	elsif (lat >= -22.0)
-		0.125;
-	elsif (lat >= -62.0)
-		0.25;
-	elsif (lat >= -76.0)
-		0.5;
-	elsif (lat >= -83.0)
-		1.0;
-	elsif (lat >= -86.0)
-		2.0;
-	elsif (lat >= -88.0)
-		4.0;
-	elsif (lat >= -89.0)
-		8.0;
-	else
-		360.0;
-}
-
-
 var tile_index = func(lat, lon) {
-	var lat_floor = floor(lat);
-	var lon_floor = floor(lon);
-	var span = _bucket_span(lat);
-	var x = 0;
-
-	if (span < 0.0000001) {
-		lon = 0;
-	} elsif (span <= 1.0) {
-		x = int((lon - lon_floor) / span);
-	} else {
-		if (lon >= 0) {
-			lon = int(int(lon / span) * span);
-		} else {
-			lon = int(int((lon + 1) / span) * span - span);
-			if (lon < -180)
-				lon = -180;
-		}
-	}
-
-	var y = int((lat - lat_floor) * 8);
-	return (lon_floor + 180) * 16384 + (lat_floor + 90) * 64 + y * 8 + x;
+    return tileIndex(lat, lon);
 }
 
 
@@ -305,9 +251,7 @@ var format = func(lat, lon) {
 
 
 var tile_path = func(lat, lon) {
-	var p = format(floor(lat / 10.0) * 10, floor(lon / 10.0) * 10);
-	p ~= "/" ~ format(floor(lat), floor(lon));
-	p ~= "/" ~ tile_index(lat, lon) ~ ".stg";
+	var p = tilePath(lat, lon) ~ "/" ~ tileIndex(lat, lon) ~ ".stg";
 }
 
 

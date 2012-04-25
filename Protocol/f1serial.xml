@@ -22,9 +22,9 @@
    </chunk>
 
    <chunk>
-    <name>altitiude</name>
+    <name>altitude</name>
     <format>A=%02d</format>
-    <node>/position/altitiude-ft</node>
+    <node>/position/altitude-ft</node>
    </chunk>
 
    <chunk>

@@ -43,7 +43,8 @@ const float fSamples = float(nSamples);
 uniform float rK = 0.0003; //0.00015;
 uniform float mK = 0.003; //0.0025;
 uniform float density = 0.5; //1.0
-vec3 rayleighK = rK * vec3(5.602, 7.222, 19.644);
+//vec3 rayleighK = rK * vec3(5.602, 7.222, 19.644);
+vec3 rayleighK = rK * vec3(4.5, 8.62, 17.3);
 vec3 mieK = vec3(mK);
 vec3 sunIntensity = 10.0*vec3(120.0, 125.0, 130.0);
  
@@ -235,7 +236,7 @@ void main()
 	{
     	if (ct < 0.0)
     		{
-		yprime = -dot(relVector,lightHorizon) * altitude/-(ct-0.001);
+		yprime = -dot(relVector,lightHorizon) * altitude/-ct;//(ct-0.001);
 		yprime = yprime -sqrt(2.0 * EarthRadius * hazeLayerAltitude);
 		}
    	 else  // the only haze we see looking up is overcast, assume its altitude

@@ -21,12 +21,14 @@
 varying vec4 diffuse_term;
 varying vec3 normal;
 varying vec3 relPos;
+varying vec4 rawPos;
 
 varying float earthShade;
 //varying float yprime;
 //varying float vertex_alt;
 varying float yprime_alt;
 varying float mie_angle;
+varying float steepness;
 
 
 
@@ -69,6 +71,9 @@ void main()
   float intensity;
   float vertex_alt;
   float scattering;
+
+    rawPos = gl_Vertex;
+    steepness = dot(normalize(gl_Normal), vec3 (0.0, 0.0, 1.0));
 
 // this code is copied from default.vert
 
@@ -134,7 +139,7 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
     lightArg = (terminator-yprime_alt)/100000.0;
 
     // directional scattering for low sun
-    if (lightArg < 10.0)
+    if (lightArg < 5.0)
     	{mie_angle = (0.5 *  dot(normalize(relPos), normalize(lightFull)) ) + 0.5;}
     else 
 	{mie_angle = 1.0;}

@@ -17,6 +17,7 @@
   <technique n="8">
     <predicate>
       <and>
+        <property>/sim/rendering/shader-effects</property>
         <property>/sim/rendering/shaders/skydome</property>
         <or>
           <less-equal>

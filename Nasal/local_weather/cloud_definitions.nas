@@ -410,7 +410,7 @@ else if (type == "Cumulus bottom"){
 		cloudAssembly.num_tex_y = 1;
 	
 		#characterize the cloud
-		cloudAssembly.bottom_shade = 1.0;
+		cloudAssembly.bottom_shade = 0.5;
 		cloudAssembly.n_sprites = 4;
 		cloudAssembly.min_width = 600.0 * mult;
 		cloudAssembly.max_width = 800.0 * mult;
@@ -452,7 +452,7 @@ else if (type == "Congestus bottom"){
 		cloudAssembly.num_tex_y = 1;
 	
 		#characterize the cloud
-		cloudAssembly.bottom_shade = 0.7;
+		cloudAssembly.bottom_shade = 0.5;
 		cloudAssembly.n_sprites = 4;
 		cloudAssembly.min_width = 1100.0 * mult;
 		cloudAssembly.max_width = 1400.0 * mult;

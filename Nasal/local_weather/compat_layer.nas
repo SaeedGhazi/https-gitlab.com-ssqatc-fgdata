@@ -183,6 +183,8 @@ if (local_weather.hardcoded_clouds_flag == 1)
 
 	}
 
+
+
 }
 
 
@@ -756,11 +758,13 @@ if (local_weather.dynamics_flag == 1)
 
 
 
+
+
 ###########################################################
-# place a model
+# place a  model
 ###########################################################
 
-var place_model = func(path, lat, lon, alt, heading) {
+var place_model = func(path, lat, lon, alt, heading, pitch, yaw) {
 
 
 
@@ -776,11 +780,12 @@ model.getNode("latitude-deg", 1).setValue(lat);
 model.getNode("longitude-deg", 1).setValue(lon);
 model.getNode("elevation-ft", 1).setValue(alt);
 model.getNode("heading-deg", 1).setValue(heading);
+model.getNode("pitch-deg", 1).setValue(pitch);
+model.getNode("roll-deg", 1).setValue(yaw);
 model.getNode("load", 1).remove();
 
 
 }
-
 
 
 
@@ -799,6 +804,11 @@ cloud_index = cloud_index + 1;
 c.index = tile_counter;
 c.cloud_index = cloud_index;
 
+# light must be such that the top of a cloud cannot be darker than the bottom
+
+if (c.bottom_shade > c.top_shade) {c.bottom_shade = c.top_shade;}
+c.middle_shade = c.top_shade;
+
 # write the actual cloud into the scenery
 
 
@@ -812,8 +822,8 @@ var p = props.Node.new({ "layer" : 0,
 			 "max-sprite-height-m": c.max_height,
 			 "num-sprites": c.n_sprites,
 			 "min-bottom-lighting-factor": c.bottom_shade,
-			 "min-middle-lighting-factor": 0.9,
-			 "min-top-lighting-factor": 1.0,
+			 "min-middle-lighting-factor": c.middle_shade,
+			 "min-top-lighting-factor": c.top_shade,
 			 "min-shade-lighting-factor": c.bottom_shade,
 			 "texture": c.texture_sheet,
 			 "num-textures-x": c.num_tex_x,

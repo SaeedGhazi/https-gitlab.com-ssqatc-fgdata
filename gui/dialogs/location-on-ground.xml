@@ -32,6 +32,7 @@
     <open>
       var dlg = props.globals.getNode("/sim/gui/dialogs/location-on-ground", 1);
       var apt = dlg.getNode("airport", 1);
+      var aptname = dlg.getNode("airport-name", 1);
       apt.setValue(getprop("/sim/presets/airport-id"));
       var rwy = dlg.getNode("runway", 1);
       rwy.setValue("");
@@ -66,22 +67,25 @@
       var parking = dlg.getNode("available-parking", 1);
       
       var updateAirport = func {
-        var icao = dlg.getNode("airport").getValue();
+        var icao = apt.getValue();
         runways.removeChildren("value");
         parking.removeChildren("value");
         
-        var apt = airportinfo(icao);
-        if (apt == nil) {
+        var a = airportinfo(icao);
+        if (a == nil) {
+            aptname.setValue("");
             return;
         }
         
+        aptname.setValue(a.name);
         var i=0;
-        foreach (var rwy; keys(apt.runways)) {
+        foreach (var rwy; keys(a.runways)) {
           runways.getNode("value[" ~ i ~ "]", 1).setValue(rwy);
           i += 1;
         }
 
-        foreach (var park; apt.parking()) {
+        i = 0;
+        foreach (var park; a.parking()) {
           parking.getNode("value[" ~ i ~ "]", 1).setValue(park);
           i += 1;
         }
@@ -118,8 +122,18 @@
       </binding>
     </input>
 
+    <text>
+        <row>1</row>
+        <col>1</col>
+        <format>%s</format>
+        <property>/sim/gui/dialogs/location-on-ground/airport-name</property>
+        <live>true</live>
+        <stretch>true</stretch>
+        <halign>fill</halign>
+    </text>
+    
     <radio>
-      <row>1</row><col>0</col>
+      <row>2</row><col>0</col>
       <property>/sim/gui/dialogs/location-on-ground/use_best_runway</property>
       <live>true</live>
       <binding>
@@ -129,7 +143,7 @@
     </radio>
 
     <text>
-      <row>1</row><col>1</col>
+      <row>2</row><col>1</col>
       <halign>right</halign>
       <label>Best runway</label>
       <enable>
@@ -137,7 +151,7 @@
       </enable>
     </text>
     <text>
-      <row>1</row><col>2</col>
+      <row>2</row><col>2</col>
       <halign>right</halign>
       <label>(based on wind)</label>
       <enable>
@@ -146,7 +160,7 @@
     </text>
 
     <radio>
-      <row>2</row><col>0</col>
+      <row>3</row><col>0</col>
       <property>/sim/gui/dialogs/location-on-ground/use_runway</property>
       <live>true</live>
       <binding>
@@ -156,7 +170,7 @@
     </radio>
 
     <text>
-      <row>2</row><col>1</col>
+      <row>3</row><col>1</col>
       <halign>right</halign>
       <label>Runway:</label>
       <enable>
@@ -166,7 +180,7 @@
 
     <combo>
       <name>runway</name>
-      <row>2</row><col>2</col>
+      <row>3</row><col>2</col>
       <pref-width>85</pref-width>
       <enable>
         <property>/sim/gui/dialogs/location-on-ground/use_runway</property>
@@ -181,7 +195,7 @@
     </combo>
 
     <radio>
-      <row>3</row><col>0</col>
+      <row>4</row><col>0</col>
       <property>/sim/gui/dialogs/location-on-ground/use_parkpos</property>
       <live>true</live>
       <binding>
@@ -191,7 +205,7 @@
     </radio>
 
     <text>
-      <row>3</row><col>1</col>
+      <row>4</row><col>1</col>
       <halign>right</halign>
       <label>Parking:</label>
       <enable>
@@ -201,7 +215,7 @@
     
     <combo>
       <name>parking</name>
-      <row>3</row><col>2</col>
+      <row>4</row><col>2</col>
       <pref-width>85</pref-width>
       <enable>
         <property>/sim/gui/dialogs/location-on-ground/use_parkpos</property>

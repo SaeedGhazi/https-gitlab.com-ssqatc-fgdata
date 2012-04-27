@@ -2,6 +2,7 @@
 #version 120
 
 varying float fogFactor;
+//varying float MieFactor;
 varying vec3 hazeColor;
 
 uniform float range; // From /sim/rendering/clouds3d-vis-range
@@ -33,6 +34,12 @@ if (x < -15.0) {return 0.0;}
 
 
 return e / pow((1.0 + a * exp(-b * (x-c)) ),(1.0/d));
+}
+
+
+float mie_func (in float x, in float Mie)
+{
+return x + 2.0 * x * Mie * (1.0 -0.8*x) * (1.0 -0.8*x);
 }
 
 void main(void)
@@ -104,6 +111,8 @@ void main(void)
   vec3 lightFull = (gl_ModelViewMatrixInverse * gl_LightSource[0].position).xyz;
   vec3 lightHorizon = normalize(vec3(lightFull.x,lightFull.y, 0.0));
 
+
+
  // yprime is the distance of the vertex into sun direction, corrected for altitude
  // the altitude correction is clamped to reasonable values, sometimes altitude isn't parsed correctly, leading
  // to overbright or overdark clouds
@@ -146,7 +155,6 @@ void main(void)
   //fogFactor = clamp(fogFactor, 0.0, 1.0);
 
 // haze of ground haze shader is slightly bluish
-  //hazeColor = vec3 (gl_LightSource[0].diffuse.x, gl_LightSource[0].diffuse.y, gl_LightSource[0].diffuse.z);
   hazeColor = light_diffuse.xyz;
   hazeColor.x = hazeColor.x * 0.83;
   hazeColor.y = hazeColor.y * 0.9; 
@@ -163,7 +171,30 @@ void main(void)
   hazeColor = intensity * normalize(mix(hazeColor,  2.0* vec3 (0.55, 0.6, 0.8), (1.0 - smoothstep(0.3,0.8,scattering)))); 	
   
 
-  	hazeColor = hazeColor * earthShade;
-  	gl_FrontColor.xyz = gl_FrontColor.xyz * earthShade;
-  	gl_BackColor = gl_FrontColor;
+  hazeColor = hazeColor * earthShade;
+  gl_FrontColor.xyz = gl_FrontColor.xyz * earthShade;
+  	
+  // Mie correction
+  float Mie;
+  float MieFactor;
+
+   if (shade_factor > 0.6) 
+	{
+	MieFactor =   dot(normalize(lightFull), normalize(relVector));
+	Mie = 1.5 * smoothstep(0.9,1.0, MieFactor) * smoothstep(0.6, 0.8, shade_factor);  
+	}
+   else {Mie = 0.0;}
+
+   if (Mie > 0.0)
+   	{
+	hazeColor.r = mie_func(hazeColor.r, Mie);
+	hazeColor.g = mie_func(hazeColor.g, 0.8* Mie);
+	hazeColor.b = mie_func(hazeColor.b, 0.5* Mie);
+
+	gl_FrontColor.r = mie_func(gl_FrontColor.r, Mie);
+	gl_FrontColor.g = mie_func(gl_FrontColor.g, 0.8* Mie);
+	gl_FrontColor.b = mie_func(gl_FrontColor.b, 0.5*Mie);
+	}
+ 
+   gl_BackColor = gl_FrontColor;
 }

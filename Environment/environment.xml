@@ -333,12 +333,22 @@
     <config>
       <wind-filter-time type="double">0.05</wind-filter-time>
     </config>
+    <color_r type="double" userarchive="n">0.148</color_r>
+    <color_g type="double" userarchive="n">0.27</color_g>
+    <color_b type="double" userarchive="n">0.3</color_b>
   </sea>
 
   <!-- definitions for the scattering skydome shader -->
   <ground-visibility-m type="double" userarchive="n">16000.0</ground-visibility-m>
+  <air-pollution-norm type="double" userarchive="n">0.0</air-pollution-norm>
   <ground-haze-thickness-m type="double" userarchive="n">2000.0</ground-haze-thickness-m>
   <terminator-relative-position-m type="double" userarchive="n">1000000.0</terminator-relative-position-m>
   <mean-terrain-elevation-m type="double" userarchive="n">0.0</mean-terrain-elevation-m>
-
+  <mysnow-level-m type="double" userarchive="n">3200.0</mysnow-level-m>
+  <fog-structure type="double" userarchive="n">0.0</fog-structure>
+  <!-- definitions for the environment at surface interface -->
+  <surface>
+    <scattering type="double" userarchive="n">0.7</scattering>
+    <dust-cover-factor type="double" userarchive="n">0.0</dust-cover-factor>
+  </surface>
 </PropertyList>

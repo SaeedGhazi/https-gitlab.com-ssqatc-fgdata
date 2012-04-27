@@ -54,6 +54,10 @@ var dir_index = getprop(lw~"tiles/tmp/dir-index");
 
 local_weather.assemble_effect_array();
 
+# reset lighting
+
+local_weather.top_shade = 1.0;
+
 if (local_weather.debug_output_flag == 1) 
 	{print("Finished setting up tile type ",current_code, " in direction ",dir_index);}
 
@@ -104,16 +108,16 @@ alt_offset = 0.0;
 #local_weather.create_cumosys(blat,blon, 3000.0, get_n(strength), 20000.0);
 
 #create_2_8_altocumulus_streaks(blat, blon, 12000+alt_offset, alpha) ;
-#create_2_8_altocumulus_streaks(blat, blon, 12000+alt_offset, alpha) ;
+# create_2_8_altocumulus_streaks(blat, blon, 12000+alt_offset, alpha) ;
 #create_6_8_stratus(blat, blon, 3000+alt_offset, alpha) ;
 #create_4_8_tstratus_patches(blat, blon, 5000+alt_offset, alpha) ;
 #create_4_8_sstratus_patches(blat, blon, 5000+alt_offset, alpha) ;
 #create_4_8_cirrostratus_patches(blat, blon, 5000+alt_offset, alpha) ;
 
 #create_4_8_cirrocumulus_streaks(blat, blon, 10000.0 + alt_offset, alpha);
-#create_4_8_alttstratus_streaks(blat, blon, 5000+alt_offset, alpha) ;
 # create_4_8_alttstratus_streaks(blat, blon, 5000+alt_offset, alpha) ;
-#create_2_8_cirrocumulus_patches(blat, blon, 13000+alt_offset, alpha) ;
+# create_4_8_alttstratus_streaks(blat, blon, 5000+alt_offset, alpha) ;
+# create_2_8_cirrocumulus_patches(blat, blon, 13000+alt_offset, alpha) ;
 
 # create_8_8_nimbus_rain(blat, blon, 3000.0, alpha, 0.3) ;
 #create_8_8_tstratus(blat, blon, 5000+alt_offset, alpha);
@@ -125,11 +129,16 @@ alt_offset = 0.0;
 
 #create_2_8_cirrus(blat, blon, 30000.0, alpha);
 #create_2_8_cirrus(blat, blon, 20000.0, alpha);
-create_4_8_cirrus(blat, blon, 30000.0, alpha);
+# create_4_8_cirrus(blat, blon, 30000.0, alpha);
 
-#create_4_8_altocumulus_perlucidus(blat, blon, 5000+alt_offset, alpha) ;
+#create_2_8_altocumulus_perlucidus(blat, blon, 12000+alt_offset, alpha) ;
 
-#create_detailed_stratocumulus_bank(blat, blon, 4000+alt_offset,alpha);
+# create_detailed_stratocumulus_bank(blat, blon, 4000,alpha);
+
+local_weather.top_shade = 0.6;
+
+create_4_8_cumulus_alleys(blat, blon, 3000.0, alpha);
+# create_4_8_cirrostratus_undulatus(blat, blon, 25000.0, alpha);
 
 #store convective altitude and strength
 
@@ -191,6 +200,9 @@ var alt = spread * 400;
 var strength = 0.0;
 
 
+# bias Cumulus clouds towards smaller sizes due to lack of water vapour and convection
+local_weather.convective_size_bias = -0.2 - rand() * 0.1;
+
 var rn = rand();
 
 if (rand() < small_scale_persistence)
@@ -198,9 +210,9 @@ if (rand() < small_scale_persistence)
 else
 	{rnd_store = rn;}
 
-#rn = 0.1;
+# rn = 0.1;
 
-if (rn > 0.833)
+if (rn > 0.875)
 	{
 	# cloud scenario 1: weak cumulus development and blue thermals
 
@@ -220,7 +232,7 @@ if (rn > 0.833)
 	# and specify the atmosphere
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.0, 25000.0, 30000.0, 0.9, alt+alt_offset, alt+alt_offset + 2500.0); 
 	}
-else if (rn > 0.666)
+else if (rn > 0.75)
 	{
 	# cloud scenario 2: some Cirrocumulus patches
 	
@@ -234,7 +246,7 @@ else if (rn > 0.666)
 	# and specify the atmosphere
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.1, alt+alt_offset +30000.0, alt+alt_offset + 35000.0, 0.9, alt+alt_offset, alt+alt_offset + 2500.0); 
 	}
-else if (rn > 0.5)
+else if (rn > 0.625)
 	{
 	# cloud scenario 3: Cirrostratus undulatus over weak cumulus
 		
@@ -247,7 +259,7 @@ else if (rn > 0.5)
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.15, alt+alt_offset +28000.0, alt+alt_offset + 32000.0, 0.9, alt+alt_offset, alt+alt_offset + 2500.0); 
 
 	}
-else if (rn > 0.333)
+else if (rn > 0.5)
 	{
 	# cloud scenario 4: Cirrostratus undulatus streak
 
@@ -259,7 +271,7 @@ else if (rn > 0.333)
 	# and specify the atmosphere
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.15, alt+alt_offset +28000.0, alt+alt_offset + 32000.0, 0.9, alt+alt_offset, alt+alt_offset + 2500.0); 
 	}
-else if (rn > 0.166)
+else if (rn > 0.375)
 	{
 	# cloud scenario 5: Cirrus
 
@@ -274,13 +286,33 @@ else if (rn > 0.166)
 	# and specify the atmosphere
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.0, alt+alt_offset +28000.0, alt+alt_offset + 33000.0, 0.9, alt+alt_offset, alt+alt_offset + 2500.0); 
 	}
-else if (rn > 0.0)
+else if (rn > 0.25)
 	{
 	# cloud scenario 6: strong Cirrus cover
 
 	create_4_8_cirrus(blat, blon, alt + alt_offset + 35000.0, alpha);
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.0, alt+alt_offset +28000.0, alt+alt_offset + 33000.0, 0.9, alt+alt_offset, alt+alt_offset + 2500.0); 
 	}
+else if (rn > 0.125)
+	{
+	# cloud scenario 7: clear
+
+	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.0, alt+alt_offset +28000.0, alt+alt_offset + 33000.0, 1.0, alt+alt_offset, alt+alt_offset + 2500.0); 
+	}
+else if (rn > 0.0)
+	{
+	# cloud scenario 8: Cirrocumulus
+
+	if (rand() > 0.7) # this is very expensive, so don't do it for every tile
+		{create_2_8_cirrocumulus_patches(blat, blon, alt + alt_offset + 26000.0, alpha);}
+	else
+		{create_2_8_cirrocumulus(blat, blon, alt + alt_offset + 26000.0, alpha);}
+
+	# and specify the atmosphere
+	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.2, alt+alt_offset +24000.0, alt+alt_offset + 26000.0, 0.9, alt+alt_offset, alt+alt_offset + 2500.0); 
+	
+	}
+
 
 # store convective altitude and strength
 
@@ -347,7 +379,7 @@ else
 
 # rn = 0.1;
 
-if (rn > 0.8)
+if (rn > 0.875)
 	{
 	# cloud scenario 1: possible Cirrus over Cumulus
 	strength = 0.2 + rand() * 0.4;
@@ -372,7 +404,7 @@ if (rn > 0.8)
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.0, alt+alt_offset +28000.0, alt+alt_offset + 30000.0, 0.8, alt+alt_offset, alt+alt_offset + 2500.0); 
 
 	}
-else if (rn > 0.6)
+else if (rn > 0.75)
 	{
 	# cloud scenario 2: Cirrostratus over weak Cumulus
 
@@ -385,7 +417,7 @@ else if (rn > 0.6)
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.2, alt+alt_offset +20000.0, alt+alt_offset + 25000.0, 0.8, alt+alt_offset, alt+alt_offset + 2500.0); 
 	}
 
-else if (rn > 0.4)
+else if (rn > 0.625)
 	{
 	# cloud scenario 3: Cirrocumulus sheet over Cumulus
 
@@ -404,7 +436,7 @@ else if (rn > 0.4)
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.0, alt+alt_offset +20000.0, alt+alt_offset + 24000.0, 0.8, alt+alt_offset, alt+alt_offset + 2500.0); 
 
 	}
-else if (rn > 0.2)
+else if (rn > 0.5)
 	{
 	# cloud scenario 4: Cirrostratus undulatus over weak Cumulus
 
@@ -416,7 +448,7 @@ else if (rn > 0.2)
 	# and specify the atmosphere
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.15, alt+alt_offset +20000.0, alt+alt_offset + 25000.0, 0.8, alt+alt_offset, alt+alt_offset + 2500.0); 
 	}
-else if (rn > 0.0)
+else if (rn > 0.375)
 	{
 	# cloud scenario 5: some scattered Altocumuli over Cumulus
 
@@ -430,6 +462,43 @@ else if (rn > 0.0)
 	# and specify the atmosphere
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.0, alt+alt_offset +20000.0, alt+alt_offset + 25000.0, 0.8, alt+alt_offset, alt+alt_offset + 2500.0); 
 	}
+else if (rn > 0.25)
+	{
+	# cloud scenario 6: Cirrocumulus over Cumulus	
+	strength = 0.2 + rand() * 0.1;
+	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
+	
+	if (rand() > 0.8) # this is very expensive, so don't do it for every tile
+		{create_2_8_cirrocumulus_patches(blat, blon, alt + alt_offset + 26000.0, alpha);}
+	else
+		{create_2_8_cirrocumulus(blat, blon, alt + alt_offset + 26000.0, alpha);}
+
+	# and specify the atmosphere
+	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.3, alt+alt_offset +24000.0, alt+alt_offset + 26000.0, 0.8, alt+alt_offset, alt+alt_offset + 2500.0); 
+	}
+else if (rn > 0.125)
+	{
+	# cloud scenario 7: just Cumulus
+
+	strength = 0.3 + rand() * 0.1;
+	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
+
+	# and specify the atmosphere
+	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.0, alt+alt_offset +20000.0, alt+alt_offset + 25000.0, 0.8, alt+alt_offset, alt+alt_offset + 2500.0); 
+	}
+else if (rn > 0.0)
+	{
+	# cloud scenario 8: Altocumulus Perlucidus over Cumulus
+
+	strength = 0.2 + rand() * 0.1;
+	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
+	
+	create_2_8_altocumulus_perlucidus(blat, blon, alt + alt_offset + 12000.0, alpha);
+
+	# and specify the atmosphere
+	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.0, alt+alt_offset +20000.0, alt+alt_offset + 25000.0, 0.8, alt+alt_offset, alt+alt_offset + 2500.0); 
+	}
+
 
 # store convective altitude and strength
 
@@ -488,13 +557,17 @@ var strength = 0.0;
 
 var rn = rand();
 
+
+
 if (rand() < small_scale_persistence)
 	{rn = rnd_store;}
 else
 	{rnd_store = rn;}
 
 
-if (rn > 0.888)
+# rn = 0.05;
+
+if (rn > 0.9)
 	{
 	# cloud scenario 1: Altocumulus patch over weak Cumulus
 	strength = 0.1 + rand() * 0.1;
@@ -509,7 +582,7 @@ if (rn > 0.888)
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.0, alt+alt_offset +20000.0, alt+alt_offset + 25000.0, 0.8, alt+alt_offset, alt+alt_offset + 2500.0); 
 
 	}
-else if (rn > 0.777)
+else if (rn > 0.8)
 	{
 	# cloud scenario 2: Altocumulus streaks
 	strength = 0.15 + rand() * 0.2;
@@ -526,7 +599,7 @@ else if (rn > 0.777)
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.0, alt+alt_offset +20000.0, alt+alt_offset + 25000.0, 0.8, alt+alt_offset, alt+alt_offset + 2500.0); 
 
 	}
-else if (rn > 0.666)
+else if (rn > 0.7)
 	{
 	# cloud scenario 3: Cirrus
 
@@ -539,7 +612,7 @@ else if (rn > 0.666)
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.0, alt+alt_offset +20000.0, alt+alt_offset + 22000.0, 0.8, alt+alt_offset, alt+alt_offset + 2500.0); 
 
 	}
-else if (rn > 0.555)
+else if (rn > 0.6)
 	{
 	# cloud scenario 4: thin Stratus streaks
 
@@ -552,7 +625,7 @@ else if (rn > 0.555)
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.0, alt+alt_offset +20000.0, alt+alt_offset + 25000.0, 0.8, alt+alt_offset, alt+alt_offset + 2500.0); 
 
 	}
-else if (rn > 0.444)
+else if (rn > 0.5)
 	{
 	# cloud scenario 5: scattered Stratus
 
@@ -567,7 +640,7 @@ else if (rn > 0.444)
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.2, alt+alt_offset +20000.0, alt+alt_offset + 25000.0, 0.8, alt+alt_offset, alt+alt_offset + 2500.0); 
 
 	}
-else if (rn > 0.333)
+else if (rn > 0.4)
 	{
 	# cloud scenario 6: Cirrocumulus sheets
 
@@ -590,7 +663,7 @@ else if (rn > 0.333)
 	# and specify the atmosphere
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.0, alt+alt_offset +20000.0, alt+alt_offset + 25000.0, 0.85, alt+alt_offset, alt+alt_offset + 2500.0); 
 	}
-else if (rn > 0.222)
+else if (rn > 0.3)
 	{
 	# cloud scenario 7: Thin Cirrocumulus sheets over weak Cumulus
 
@@ -603,7 +676,7 @@ else if (rn > 0.222)
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.05, alt+alt_offset +20000.0, alt+alt_offset + 25000.0, 0.8, alt+alt_offset, alt+alt_offset + 2500.0); 
 
 	}
-else if (rn > 0.111)
+else if (rn > 0.2)
 	{
 	# cloud scenario 8: Altocumulus perlucidus
 	
@@ -615,7 +688,7 @@ else if (rn > 0.111)
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.25, alt+alt_offset +26000.0, alt+alt_offset + 30000.0, 0.8, alt+alt_offset, alt+alt_offset + 2500.0); 
 
 	}
-else if (rn > 0.0)
+else if (rn > 0.1)
 	{
 	# cloud scenario 9: Cumulus, Altocumulus and Cirrus
 
@@ -630,7 +703,16 @@ else if (rn > 0.0)
 	# and specify the atmosphere
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.0, alt+alt_offset +26000.0, alt+alt_offset + 30000.0, 0.8, alt+alt_offset, alt+alt_offset + 2500.0); 
 	}
+else if (rn > 0.0)
+	{
+	# cloud scenario 10: Cumulus alleys and Cirrus
 
+	create_4_8_cumulus_alleys(blat, blon, alt+ alt_offset, alpha);
+	create_4_8_cirrus(blat, blon, alt + alt_offset + 35000.0, alpha);
+
+	# and specify the atmosphere
+	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.1, alt+alt_offset +30000.0, alt+alt_offset + 35000.0, 0.8, alt+alt_offset, alt+alt_offset + 2500.0); 
+	}
 
 
 # store convective altitude and strength
@@ -700,8 +782,10 @@ if (rand() < small_scale_persistence)
 else
 	{rnd_store = rn;}
 
+# rn = 0.05;
 
-if (rn > 0.857)
+
+if (rn > 0.875)
 	{
 	# cloud scenario 1: low Stratocumulus, thin streaks above
 
@@ -716,7 +800,7 @@ if (rn > 0.857)
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.0, alt+alt_offset +20000.0, alt+alt_offset + 25000.0, 0.75, alt+alt_offset, alt+alt_offset + 2500.0); 
 
 	}
-else if (rn > 0.714)
+else if (rn > 0.75)
 	{
 	# cloud scenario 2: weak Cumulus, Stratus undulatus above
 
@@ -730,7 +814,7 @@ else if (rn > 0.714)
 	# and specify the atmosphere
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.0, alt+alt_offset +20000.0, alt+alt_offset + 25000.0, 0.8, alt+alt_offset, alt+alt_offset + 2500.0); 
 	}
-else if (rn > 0.571)
+else if (rn > 0.625)
 	{
 	# cloud scenario 3: Stratocumulus banks with patches above
 
@@ -742,7 +826,7 @@ else if (rn > 0.571)
 	# and specify the atmosphere
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.0, alt+alt_offset +20000.0, alt+alt_offset + 25000.0, 0.7, alt+alt_offset, alt+alt_offset + 2500.0); 
 	}
-else if (rn > 0.428)
+else if (rn > 0.5)
 	{
 	# cloud scenario 4: structured Stratus
 	
@@ -753,7 +837,7 @@ else if (rn > 0.428)
 	# and specify the atmosphere
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.25, alt+alt_offset +20000.0, alt+alt_offset + 25000.0, 0.7, alt+alt_offset, alt+alt_offset + 2500.0); 
 	}
-else if (rn > 0.285)
+else if (rn > 0.375)
 	{
 	# cloud scenario 5: Stratus blending with Cumulus with Cirrocumulus above
 	
@@ -767,7 +851,7 @@ else if (rn > 0.285)
 	# and specify the atmosphere
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.15, alt+alt_offset +20000.0, alt+alt_offset + 25000.0, 0.75, alt+alt_offset, alt+alt_offset + 2500.0); 
 	}
-else if (rn > 0.142)
+else if (rn > 0.250)
 	{
 	# cloud scenario 6: small Stratocumulus banks
 	
@@ -781,7 +865,7 @@ else if (rn > 0.142)
 	# and specify the atmosphere
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.3, alt+alt_offset +20000.0, alt+alt_offset + 25000.0, 0.75, alt+alt_offset, alt+alt_offset + 2500.0); 
 	}
-else
+else if (rn > 0.125)
 	{
 	# cloud scenario 7: blended structured and unstructured Stratiform clouds
 
@@ -792,6 +876,19 @@ else
 
 	# and specify the atmosphere
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.2, alt+alt_offset +20000.0, alt+alt_offset + 25000.0, 0.75, alt+alt_offset, alt+alt_offset + 2500.0); 
+	}
+else if (rn > 0.0)
+	{
+	# cloud scenario 8: Cumulus alleys beneath a high dense stratus cover
+	
+	local_weather.top_shade = 0.7;
+	create_4_8_cumulus_alleys(blat, blon, alt+ alt_offset, alpha);
+
+	local_weather.top_shade = 1.0;
+	create_6_8_tstratus_undulatus(blat, blon, alt+alt_offset + 6000.0,alpha);
+
+	# and specify the atmosphere
+	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.5, alt+alt_offset +5500.0, alt+alt_offset + 6500.0, 0.65, alt+alt_offset + 6000.0, alt+alt_offset + 7500.0); 
 	}
 
 
@@ -1081,6 +1178,9 @@ local_weather.set_weather_station(blat, blon, alt_offset, vis, T, D, p * hp_to_i
 var alt = spread * 400.0;
 var strength = 0.0;
 
+# bias Cumulus clouds towards larger sizes due to strong convection
+local_weather.convective_size_bias = 0.3 + rand() * 0.1;
+
 var rn = rand();
 
 if (rand() < small_scale_persistence)
@@ -1093,7 +1193,7 @@ else
 if (rn > 0.5)
 	{
 	# cloud scenario 1: strong Cumulus development
-	strength = 0.8 + rand() * 0.2;
+	strength = 0.6 + rand() * 0.1;
 	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
 
 	# and specify the atmosphere
@@ -1104,7 +1204,7 @@ else if (rn > 0.0)
 	{
 	# cloud scenario 2: Cirrocumulus sheets over Cumulus
 
-	strength = 0.6 + rand() * 0.2;
+	strength = 0.5 + rand() * 0.1;
 	local_weather.create_cumosys(blat,blon, alt + alt_offset, get_n(strength), 20000.0);
 	
 	for (var i = 0; i < 2; i = i + 1)
@@ -2293,19 +2393,23 @@ for (var i = n; i <n_layers; i=i+1)
 			if (altitude < 14000.0)
 				{	
 				var rn = rand();
-				if (rn > 0.66)			
+				if (rn > 0.75)			
 					{create_2_8_tstratus(blat, blon, altitude+metar_alt_offset, alpha);}
-				else if (rn > 0.33)
+				else if (rn > 0.5)
 					{create_2_8_sstratus(blat, blon, altitude+metar_alt_offset, alpha);}
-				else 
+				else if (rn > 0.25)
+					{create_2_8_altocumulus_perlucidus(blat, blon, altitude+metar_alt_offset, alpha);}
+				else if (rn > 0.0)
 					{create_2_8_alttstratus(blat, blon, altitude+metar_alt_offset, alpha);}	
 				}
 			else 
 				{
 				var rn = rand();
-				if (rn > 0.5)
+				if (rn > 0.9)
+					{create_2_8_cirrocumulus_patches(blat, blon, altitude+metar_alt_offset, alpha);}
+				if (rn > 0.4)
 					{create_2_8_cirrocumulus(blat, blon, altitude+metar_alt_offset, alpha);}
-				else
+				else if (rn > 0.0)
 					{create_2_8_alttstratus(blat, blon, altitude+metar_alt_offset, alpha);}	
 
 				}
@@ -2627,7 +2731,7 @@ if (rain > 0.1)
 	}
 else
 	{
-	local_weather.create_effect_volume(3, lat, lon, 20000.0, 20000.0, alpha, alt-1500.0, alt+900.0, 2000.0, -1 , -1, -1, -1,0 ,-1);
+	local_weather.create_effect_volume(3, lat, lon, 20000.0, 20000.0, alpha, alt, alt+900.0, 2000.0, -1 , -1, -1, -1,0 ,-1);
 	local_weather.create_effect_volume(3, lat, lon, 20000.0, 20000.0, alpha, 0.0, alt, -1, rain , -1, -1, -1,0 ,0.9);
 	}
 
@@ -3065,6 +3169,23 @@ else
 }
 
 
+var create_4_8_cumulus_alleys = func (lat, lon, alt, alpha) {
+
+
+var phi = alpha * math.pi/180.0;
+var x = 2.0 * (rand()-0.5) * 5000;
+var y = 2.0 * (rand()-0.5) * 5000;
+var tri = 1.0 + 0.4 * rand();
+
+# create_cumulus_alleys = func (blat, blong, balt, alt_var, nx, xoffset, edgex, x_var, ny, yoffset, edgey, y_var, und_strength, direction, tri)
+
+local_weather.create_cumulus_alleys(lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt, 0.0, 9, 3500.0,0.2, 500.0, 30 ,1130.0, 0.2, 300.0, 1000.0, alpha,tri);
+
+}
+
+
+
+
 var create_4_8_cirrus = func (lat, lon, alt, alpha) {
 
 var phi = alpha * math.pi/180.0;
@@ -3133,6 +3254,22 @@ for (var i=0; i<8; i=i+1)
 
 
 
+var create_2_8_altocumulus_perlucidus = func (lat, lon, alt, alpha) {
+
+if (local_weather.hardcoded_clouds_flag == 1) {alt = alt - 300.0;}
+
+var phi = alpha * math.pi/180.0;
+
+for (var i=0; i<40; i=i+1)
+	{
+	var x = 2.0 * (rand()-0.5) * 18000;
+	var y = 2.0 * (rand()-0.5) * 18000;
+	var beta = (rand() -0.5) * 180.0;
+	local_weather.create_streak("Altocumulus perlucidus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,300.0,2,1400.0,0.1,900.0,2,1400.0,0.1,900.0,alpha+beta,1.0);
+
+	}
+
+}
 
 
 
@@ -3386,14 +3523,14 @@ if (local_weather.hardcoded_clouds_flag == 0)
 	}
 else
 	{
-	local_weather.create_streak("Stratocumulus",lat+get_lat(x,y+7500,phi), lon+get_lon(x,y+7500,phi), alt-1000.0 ,500.0,m,1100.0,0.1,400.0,n,1100.0,0.1,400.0,alpha+90.0+beta,tri);
+	local_weather.create_streak("Stratocumulus",lat+get_lat(x,y+7500,phi), lon+get_lon(x,y+7500,phi), alt-local_weather.offset_map["Congestus"] + 400.0 ,500.0,m,1100.0,0.1,400.0,n,1100.0,0.1,400.0,alpha+90.0+beta,tri);
 
-	local_weather.create_streak("Stratocumulus",lat+get_lat(x,y-7500,phi), lon+get_lon(x,y-7500,phi), alt-1000.0 ,500.0,m,1100.0,0.1,400.0,n,1100.0,0.1,400.0,alpha+270.0+beta,tri);
+	local_weather.create_streak("Stratocumulus",lat+get_lat(x,y-7500,phi), lon+get_lon(x,y-7500,phi), alt-local_weather.offset_map["Congestus"] + 400.0 ,500.0,m,1100.0,0.1,400.0,n,1100.0,0.1,400.0,alpha+270.0+beta,tri);
 
 
-	local_weather.create_streak("Stratocumulus bottom",lat+get_lat(x,y+5250,phi), lon+get_lon(x,y+5250,phi), alt-1000.0,0.0,m+1,700.0,0.2,400.0,n+1,700.0,0.0,400.0,alpha+90.0+beta,tri);
+	local_weather.create_streak("Stratocumulus bottom",lat+get_lat(x,y+5250,phi), lon+get_lon(x,y+5250,phi), alt-local_weather.offset_map["Stratus"],0.0,m+1,700.0,0.2,400.0,n+1,700.0,0.0,400.0,alpha+90.0+beta,tri);
 
-	local_weather.create_streak("Stratocumulus bottom",lat+get_lat(x,y-5250,phi), lon+get_lon(x,y-5250,phi), alt-1000.0,0.0,m+1,700.0,0.2,400.0,n+1,700.0,0.0,400.0,alpha+270.0+beta,tri);
+	local_weather.create_streak("Stratocumulus bottom",lat+get_lat(x,y-5250,phi), lon+get_lon(x,y-5250,phi), alt-local_weather.offset_map["Stratus"],0.0,m+1,700.0,0.2,400.0,n+1,700.0,0.0,400.0,alpha+270.0+beta,tri);
 
 	}
 
@@ -3413,14 +3550,14 @@ var n = int(6 + rand() * 5);
 
 var alt_offset = 0.5 * local_weather.cloud_vertical_size_map["Cumulus"] * ft_to_m;
 
-local_weather.create_streak("Stratocumulus",lat+get_lat(x,y+7500,phi), lon+get_lon(x,y+7500,phi), alt + alt_offset,500.0,m,1100.0,0.12,400.0,n,1100.0,0.12,400.0,alpha+90.0+beta,tri);
+local_weather.create_streak("Stratocumulus",lat+get_lat(x,y+7500,phi), lon+get_lon(x,y+7500,phi), alt - local_weather.offset_map["Congestus"] + 400.0,500.0,m,1100.0,0.12,400.0,n,1100.0,0.12,400.0,alpha+90.0+beta,tri);
 
-local_weather.create_streak("Stratocumulus",lat+get_lat(x,y-7500,phi), lon+get_lon(x,y-7500,phi), alt + alt_offset,500.0,m,1100.0,0.12,400.0,n,1100.0,0.12,400.0,alpha+270.0+beta,tri);
+local_weather.create_streak("Stratocumulus",lat+get_lat(x,y-7500,phi), lon+get_lon(x,y-7500,phi), alt -local_weather.offset_map["Congestus"] + 400.0,500.0,m,1100.0,0.12,400.0,n,1100.0,0.12,400.0,alpha+270.0+beta,tri);
 
 
-local_weather.create_streak("Stratocumulus bottom",lat+get_lat(x,y+7050,phi), lon+get_lon(x,y+7050,phi), alt,0.0,m,700.0,0.2,400.0,n,700.0,0.0,400.0,alpha+90.0+beta,tri);
+local_weather.create_streak("Stratocumulus bottom",lat+get_lat(x,y+7050,phi), lon+get_lon(x,y+7050,phi), alt - local_weather.offset_map["Stratus"],0.0,m,700.0,0.2,400.0,n,700.0,0.0,400.0,alpha+90.0+beta,tri);
 
-local_weather.create_streak("Stratocumulus bottom",lat+get_lat(x,y-7050,phi), lon+get_lon(x,y-7050,phi), alt,0.0,m,700.0,0.2,400.0,n,700.0,0.0,400.0,alpha+270.0+beta,tri);
+local_weather.create_streak("Stratocumulus bottom",lat+get_lat(x,y-7050,phi), lon+get_lon(x,y-7050,phi), alt-local_weather.offset_map["Stratus"],0.0,m,700.0,0.2,400.0,n,700.0,0.0,400.0,alpha+270.0+beta,tri);
 
 }
 
@@ -3536,7 +3673,7 @@ if (local_weather.wxradar_support_flag == 1)
 
 }
 
-# spectacular, but not useful in practice
+
 
 
 var create_2_8_cirrocumulus_patches = func (lat, lon, alt, alpha) {
@@ -3550,9 +3687,7 @@ for (var i=0; i<2; i=i+1)
 	var tri = 1.5 + rand();	
 	var beta = rand() * math.pi;
 
-	#local_weather.create_streak("Cirrocumulus (new)",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,0.0,50,150.0,0.2,50.0,50,150.0,0.2,50.0,alpha ,tri);
-
-	local_weather.create_layer("Cirrocumulus (new)", lat+get_lat(x,y,phi), lon+get_lat(x,y,phi), alt, 0.0, 8500.0, 5000.0, beta, 15.0, 0.25, 0, 0.0);	
+	local_weather.create_layer("Cirrocumulus (new)", lat+get_lat(x,y,phi), lon+get_lat(x,y,phi), alt, 0.0, 8000.0, 4500.0, beta, 10.0, 0.25, 0, 0.0);	
 
 	}
 }

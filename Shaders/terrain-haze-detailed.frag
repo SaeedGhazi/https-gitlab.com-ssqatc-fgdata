@@ -5,11 +5,15 @@
 varying vec4 diffuse_term;
 varying vec3 normal;
 varying vec3 relPos;
+varying vec4 rawPos;
+
 
 //varying vec3 hazeColor;
 //varying float fogCoord;
 
 uniform sampler2D texture;
+uniform sampler3D NoiseTex;
+uniform sampler2D snow_texture;
 
 //varying float ct;
 //varying float delta_z;
@@ -20,6 +24,7 @@ varying float earthShade;
 //varying float vertex_alt;
 varying float yprime_alt;
 varying float mie_angle;
+varying float steepness;
 
 
 uniform float visibility;
@@ -32,6 +37,9 @@ uniform float hazeLayerAltitude;
 uniform float overcast;
 //uniform float altitude;
 uniform float eye_alt;
+uniform float mysnowlevel;
+uniform float dust_cover_factor;
+uniform float fogstructure;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -95,6 +103,7 @@ void main()
     vec3 lightDir = gl_LightSource[0].position.xyz;
     vec3 halfVector = gl_LightSource[0].halfVector.xyz;
     vec4 texel;
+    vec4 snow_texel;
     vec4 fragColor;
     vec4 specular = vec4(0.0);
     float intensity;
@@ -123,9 +132,50 @@ void main()
     // is closer to what the OpenGL fixed function pipeline does.
     color = clamp(color, 0.0, 1.0);
     texel = texture2D(texture, gl_TexCoord[0].st);
+    snow_texel = texture2D(snow_texture, gl_TexCoord[0].st);
+
+
+// this is the snow and dust generating part, ger some noise vectors
+vec4 noisevec   = texture3D(NoiseTex, (rawPos.xyz)*0.003); // small scale noise
+//vec4 nvL   = texture3D(NoiseTex, (rawPos.xyz)*0.00066);
+vec4 nvL   = texture3D(NoiseTex, (rawPos.xyz)*0.0001); // large scale noise
+vec4 nvR   = texture3D(NoiseTex, (rawPos.xyz)*0.00003); // really large scale noise
+
+//float ns=0.06;
+  //  ns += nvL[0]*0.4;
+    //ns += nvL[1]*0.6;
+    //ns += nvL[2]*2.0;
+    //ns += nvL[3]*4.0;
+    //ns += noisevec[0]*0.1;
+    //ns += noisevec[1]*0.4;
+
+    //ns += noisevec[2]*0.8;
+    //ns += noisevec[3]*2.1;
+
+   // gradient effect for snow
+
+
+// mix dust
+    vec4 dust_color = vec4 (0.76, 0.71, 0.56, 1.0);
+    //dust_color.rgb = dust_color.rgb * nvL[1];
+
+    texel = mix(texel, dust_color, clamp(0.5 * dust_cover_factor + 3.0 * dust_cover_factor * nvL[1],0.0, 1.0) );
+
+
+   float snow_alpha = smoothstep(0.7, 0.8, abs(steepness));
+
+   //vec4 snow_texel =   clamp(ns+nvL[2]*4.1+vec4(0.1, 0.1, nvL[2]*2.2, 1.0), 0.7, 1.0);  
+	//snow_texel.a = snow_alpha * snow_texel.a;
+
+    
+
+    // mix snow
+    texel = mix(texel, snow_texel, smoothstep(mysnowlevel, mysnowlevel+200.0, snow_alpha * (relPos.z + eye_alt)+ (noisevec[1] * abs(noisevec[1])+ nvL[1])*1500.0));
+
+// gradient
+    //fragColor = mix(vec4(ns-0.30, ns-0.29, ns-0.37, 1.0), fragColor, smoothstep(0.0, 0.40,  steepness));// +nvL[2]*1.3));
+
     fragColor = color * texel + specular;
-
-
 
 // here comes the terrain haze model
 
@@ -199,16 +249,19 @@ float eqColorFactor;
 
 //float scattering = ground_scattering + (1.0 - ground_scattering) * smoothstep(hazeLayerAltitude -100.0, hazeLayerAltitude + 100.0, relPos.z + eye_alt);
 
+
 if (visibility < avisibility)
 	{
-	transmission_arg = transmission_arg + (distance_in_layer/visibility);
+	transmission_arg = transmission_arg + (distance_in_layer/(1.0 * visibility + 0.8 * visibility * fogstructure * (( 0.4 * nvL[1] + 0.6 * nvR[1]) -0.1) ));
+	//transmission_arg = transmission_arg + (distance_in_layer/visibility);
 	// this combines the Weber-Fechner intensity
 	eqColorFactor = 1.0 - 0.1 * delta_zv/visibility - (1.0 -scattering);
 
 	}
 else 
 	{
-	transmission_arg = transmission_arg + (distance_in_layer/avisibility);
+	transmission_arg = transmission_arg + (distance_in_layer/(1.0 * avisibility + 0.8 * avisibility * fogstructure * (( 0.4 * nvL[1] + 0.6 * nvR[1]) -0.1) ));
+	//transmission_arg = transmission_arg + (distance_in_layer/avisibility);
 	// this combines the Weber-Fechner intensity
 	eqColorFactor = 1.0 - 0.1 * delta_zv/avisibility - (1.0 -scattering);
 	}
@@ -235,7 +288,7 @@ earthShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + 
 
 // Mie-like factor
 
-if (lightArg < 10.0)
+if (lightArg < 5.0)
 	{intensity = length(hazeColor);
 	float mie_magnitude = 0.5 * smoothstep(350000.0, 150000.0, terminator-sqrt(2.0 * EarthRadius * terrain_alt));
 	hazeColor = intensity * ((1.0 - mie_magnitude) + mie_magnitude * mie_angle) * normalize(mix(hazeColor,  vec3 (0.5, 0.58, 0.65), mie_magnitude * (0.5 - 0.5 * mie_angle)) ); 
@@ -267,20 +320,32 @@ hazeColor = intensity * normalize(mix(hazeColor,  2.0 * vec3 (0.55, 0.6, 0.8), (
 float shadow = mix( min(1.0 + dot(normal,lightDir),1.0), 1.0, 1.0-smoothstep(0.1, 0.4, transmission));
 hazeColor = mix(shadow * hazeColor, hazeColor, 0.3 + 0.7* smoothstep(250000.0, 400000.0, terminator));
 
+// randomness
+
+//hazeColor.rgb = hazeColor.rgb + 0.2 * hazeColor.rgb * nvL[1];
 
 // determine the right mix of transmission and haze
 
 //fragColor.xyz = transmission * fragColor.xyz + (1.0-transmission)  * eqColorFactor * hazeColor * earthShade;
 
+
+//fragColor.rgb = mix(fragColor.rgb, vec3 (1.0, 1.0, 1.0), overcast );
+
+
 fragColor.xyz = mix(eqColorFactor * hazeColor * earthShade, fragColor.xyz,transmission);
 
+
 gl_FragColor = fragColor;
+
 
 }
 else // if dist < 40.0 no fogging at all 
 {
 gl_FragColor = fragColor;
 }
+
+
+//gl_FragColor.rgb = 5.0 * nvL[1] * vec3 (1.0, 1.0, 1.0);
 
 }
 

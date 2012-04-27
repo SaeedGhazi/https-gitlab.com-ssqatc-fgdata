@@ -34,15 +34,13 @@
 # create_detailed_cumulus_cloud	to place multiple cloudlets into a box based on a size parameter
 # create_cumulonimbus_cloud	to place multiple cloudlets into a box 
 # create_cumulonimbus_cloud_rain to place multiple cloudlets into a box and add a rain layer beneath
-# create_cumosys		wrapper to place a convective cloud system based on terrain coverage
+# create_cumosys		(wrapper to place a convective cloud system based on terrain coverage)
 # cumulus_loop			to place 25 Cumulus clouds each frame
 # create_cumulus		to place a convective cloud system based on terrain coverage
 # recreate_cumulus		to respawn convective clouds as part of the convective dynamics algorithm
 # cumulus_exclusion_layer	to create a layer with 'holes' left for thunderstorm placement
 # create_rise_clouds		to create a barrier cloud system
 # create_streak			to create a cloud streak
-# create_undulatus		to create an undulating cloud pattern
-# create_layer			to create a cloud layer with optional precipitation
 # create_hollow_layer		to create a cloud layer in a hollow cylinder (better for performance)
 # create_cloudbox		to create a sophisticated cumulus cloud with different textures (experimental)
 # terrain_presampling_start	to initialize terrain presampling
@@ -640,29 +638,65 @@ if (vis > max_vis_range)
 
 if (scattering_shader_flag == 1) 
 	{
-	var rayleigh = 0.0003 ;
-	var mie = 0.003;
+	#var rayleigh = 0.0003 ;
+	#var mie = 0.003;
+	#var density = 0.3;
+	
+        # values to be used with new exposure filter
+	var rayleigh = 0.0003;
+	var mie = 0.005;
 	var density = 0.3;
 
+	var vis_factor = (vis - 30000.0)/90000.0;
+	if (vis_factor < 0.0) {vis_factor = 0.0;}
+	if (vis_factor > 1.0) {vis_factor = 1.0;}
+ 	
+	#if (altitude < 30000.0) 
+	#	{
+	#	rayleigh = 0.0004 - altitude/30000.0 * 0.0001;
+	#	mie = 0.004 - altitude/30000.0 * 0.001; 
+	#	mie = 0.002 - altitude/30000.0 * 0.001; 
+	#	}
+	#else if (altitude < 60000.0)
+	#	{
+	#	rayleigh = 0.0003 - (altitude-30000.0)/30000.0 * 0.0001;
+	#	mie = 0.003 - (altitude-30000.0)/30000.0 * 0.001; 
+	#	}
+	#else if (altitude < 85000.0)
+	#	{
+	#	rayleigh = 0.0002 - (altitude-60000.0)/25000.0 * 0.0001;
+	#	mie = 0.002;
+	#	}
+	#else 
+	#	{rayleigh = 0.0001; mie = 0.002;}
 
-	
-	if (altitude < 30000.0) 
+	if (altitude < 36000.0) 
 		{
-		rayleigh = 0.0004 - altitude/30000.0 * 0.0001;
-		mie = 0.004 - altitude/30000.0 * 0.001; 
-		}
-	else if (altitude < 60000.0)
-		{
-		rayleigh = 0.0003 - (altitude-30000.0)/30000.0 * 0.0001;
-		mie = 0.003 - (altitude-30000.0)/30000.0 * 0.001; 
+		rayleigh = 0.0003 - 0.0001 * vis_factor;
+		mie = 0.005 - vis_factor * 0.002; 
 		}
 	else if (altitude < 85000.0)
 		{
-		rayleigh = 0.0002 - (altitude-60000.0)/25000.0 * 0.0001;
-		mie = 0.002;
+		rayleigh = (0.0003 - 0.0001 * vis_factor)  - (altitude-36000.0)/49000.0 * 0.0001;
+		mie = 0.005 - vis_factor * 0.002 - (altitude-36000.0)/49000.0 * 0.002;
 		}
 	else 
-		{rayleigh = 0.0001; mie = 0.002;}
+		{rayleigh = 0.0002 - 0.0001 * vis_factor; mie = 0.003 - vis_factor * 0.002;}
+
+       # now the pollution factor
+   
+	if (altitude < alt1)
+		{
+		rayleigh = rayleigh +0.0003 * air_pollution_norm + 0.0004 * air_pollution_norm * (1.0 - (altitude/alt1) * (altitude/alt1));
+		density = density + 0.05 * air_pollution_norm + 0.05 * air_pollution_norm * (1.0 - (altitude/alt1) * (altitude/alt1));
+		}
+	else
+		{
+		rayleigh = rayleigh + 0.0003 * air_pollution_norm;
+		density = density + 0.05 * air_pollution_norm;
+		}
+
+
 	}
 # otherwise compute normal skydome shader parameters
 
@@ -725,6 +759,8 @@ if (scattering_shader_flag == 1)
 
 local_weather.setScattering(scatt);
 local_weather.setOvercast(ovcst);
+
+
 	
 
 # now check if an effect volume writes the property and set only if not
@@ -928,10 +964,15 @@ setprop(lw~"current/wind-speed-kt",windspeed_current);
 setprop("/environment/config/boundary/entry[0]/wind-from-heading-deg",winddir);
 setprop("/environment/config/boundary/entry[0]/wind-speed-kt",windspeed_ground);
 
-#setprop("/environment/sea/surface/wind-from-east-fps",windspeed_ground * math.sin(winddir * math.pi/180.0));
-#setprop("/environment/sea/surface/wind-from-east-fps",windspeed_ground * math.cos(winddir * math.pi/180.0));
 # end hack
 
+# set scattering on the ground - this doesn't affect fog but is diffuse and specular light reduction
+# so it is stronger than normal scattering
+
+var scatt_ground = 2.0 * (scatt_max - 0.5);
+if (scatt_ground < 0.0) {scatt_ground = 0.0;}
+
+setprop("/environment/surface/scattering", scatt_ground);
 
 if (getprop(lw~"interpolation-loop-flag") ==1) {settimer(interpolation_loop, interpolation_loop_time);}
 
@@ -1506,6 +1547,7 @@ if (path == "new") # we have to switch to new cloud generating routines
 	local_weather.cloudAssembly.lat = lat;
 	local_weather.cloudAssembly.lon = long;
 	local_weather.cloudAssembly.alt = alt;	
+	local_weather.cloudAssembly.top_shade = top_shade;
 
 	#print(lat," ",long, " ", alt);
 
@@ -2564,158 +2606,10 @@ for (var i=0; i<ny; i=i+1)
 
 }
 
-###########################################################
-# place an undulatus pattern 
-###########################################################
-
-var create_undulatus = func (type, blat, blong, balt, alt_var, nx, xoffset, edgex, x_var, ny, yoffset, edgey, y_var, und_strength, direction, tri) {
-
-var flag = 0;
-var path = "Models/Weather/blank.ac";
-calc_geo(blat);
-var dir = direction * math.pi/180.0;
-
-var ymin = -0.5 * ny * yoffset;
-var xmin = -0.5 * nx * xoffset;
-var xinc = xoffset * (tri-1.0) /ny;
- 
-var jlow = int(nx*edgex);
-var ilow = int(ny*edgey);
-
-var und = 0.0;
-var und_array = [];
-
-for (var i=0; i<ny; i=i+1)
-	{
-	und = und + 2.0 * (rand() -0.5) * und_strength;
-	append(und_array,und);
-	}
-
-for (var i=0; i<ny; i=i+1)
-	{
-	var y = ymin + i * yoffset; 
-	
-	for (var j=0; j<nx; j=j+1)
-		{
-		var y0 = y + y_var * 2.0 * (rand() -0.5);
-		var x = xmin + j * (xoffset + i * xinc) + x_var * 2.0 * (rand() -0.5) + und_array[i];
-		var lat = blat + m_to_lat * (y0 * math.cos(dir) - x * math.sin(dir));
-		var long = blong + m_to_lon * (x * math.cos(dir) + y0 * math.sin(dir));
-
-		var alt = balt + alt_var * 2 * (rand() - 0.5);
-		
-		flag = 0;
-		var rn = 6.0 * rand();
-
-		if (((j<jlow) or (j>(nx-jlow-1))) and ((i<ilow) or (i>(ny-ilow-1)))) # select a small or no cloud		
-			{
-			if (rn > 2.0) {flag = 1;} else {path = select_cloud_model(type,"small");}
-			}
-		if ((j<jlow) or (j>(nx-jlow-1)) or (i<ilow) or (i>(ny-ilow-1))) 	
-			{
-			if (rn > 5.0) {flag = 1;} else {path = select_cloud_model(type,"small");}
-			}
-		else	{ # select a large cloud
-			if (rn > 5.0) {flag = 1;} else {path = select_cloud_model(type,"large");}
-			}
 
 
-		if (flag==0){
-			if (thread_flag == 1)
-				{create_cloud_vec(path, lat, long, alt, 0.0);}
-			else
-				{compat_layer.create_cloud(path, lat, long, alt, 0.0);}
-			
-
-				}
-		}
-
-	} 
-
-}
 
 
-###########################################################
-# place a cloud layer 
-###########################################################
-
-var create_layer = func (type, blat, blon, balt, bthick, rx, ry, phi, density, edge, rainflag, rain_density) {
-
-
-var i = 0;
-var area = math.pi * rx * ry;
-var circ = math.pi * (rx + ry); # that's just an approximation
-var n = int(area/80000000.0 * 100 * density);
-var m = int(circ/63000.0 * 40 * rain_density);
-var path = "Models/Weather/blank.ac";
-
-#print("density: ",n);
-
-phi = phi * math.pi/180.0;
-
-if (contains(cloud_vertical_size_map, type)) 
-		{var alt_offset = cloud_vertical_size_map[type]/2.0 * m_to_ft;}
-	else {var alt_offset = 0.0;}
-
-while(i<n)
-	{
-	var x = rx * (2.0 * rand() - 1.0); 
-	var y = ry * (2.0 * rand() - 1.0); 
-	var alt = balt + bthick * rand() + 0.8 * alt_offset;
-	var res = (x*x)/(rx*rx) + (y*y)/(ry*ry);
-
-	if (res < 1.0)
-		{
-		var lat = blat + m_to_lat * (y * math.cos(phi) - x * math.sin(phi));
-		var lon = blon + m_to_lon * (x * math.cos(phi) + y * math.sin(phi));
-		if (res > ((1.0 - edge) * (1.0- edge)))
-			{
-			if (rand() > 0.4) {
-				path = select_cloud_model(type,"small");
-			if (thread_flag == 1)
-				{create_cloud_vec(path, lat, lon, alt, 0.0);}
-			else
-				{compat_layer.create_cloud(path, lat, lon, alt, 0.0);}
-				}
-			}
-		else {
-			path = select_cloud_model(type,"large");
-			if (thread_flag == 1)
-				{create_cloud_vec(path, lat, lon, alt, 0.0);}
-			else 
-				{compat_layer.create_cloud(path, lat, lon, alt, 0.0);}
-			}
-		i = i + 1;
-		}
-	}
-
-i = 0;
-
-if (rainflag ==1){
-
-if (local_weather.hardcoded_clouds_flag == 1) {balt = balt + local_weather.offset_map[type]; }
-
-	while(i<m)
-		{
-		var alpha = rand() * 2.0 * math.pi;
-		x = 0.8 * (1.0 - edge) * (1.0-edge) * rx * math.cos(alpha);
-		y = 0.8 * (1.0 - edge) * (1.0-edge) * ry * math.sin(alpha);
-
-		lat = blat + m_to_lat * (y * math.cos(phi) - x * math.sin(phi));
-		lon = blon + m_to_lon * (x * math.cos(phi) + y * math.sin(phi));	
-	
-		path = "Models/Weather/rain1.xml";
- 		if (contains(cloud_vertical_size_map,type)) {var alt_shift = cloud_vertical_size_map[type];}
-		else {var alt_shift = 0.0;}
-		
-		if (thread_flag == 1)
-		{create_cloud_vec(path, lat, lon,balt +0.5*bthick+ alt_shift, 0.0);}		
-		else		
-		{compat_layer.create_cloud(path, lat, lon, balt + 0.5 * bthick + alt_shift, 0.0);}
-		i = i + 1;
-		} # end while	
-	} # end if (rainflag ==1)
-}
 
 
 ###########################################################
@@ -4176,7 +4070,9 @@ if (buffer_flag == 1)
 		}
 	}
 
+# start the sea color loop
 
+local_weather.init_sea_colors();
 
 # weather_tile_management.watchdog_loop();
 
@@ -4274,7 +4170,9 @@ setlistener(lw~"config/aux-max-vis-range-m", func {max_vis_range = math.exp(getp
 
 setlistener(lw~"config/temperature-offset-degc", func {temperature_offset = getprop(lw~"config/temperature-offset-degc");});
 
-setlistener("/sim/rendering/shaders/skydome", func {scattering_shader_flag = getprop("/sim/rendering/shaders/skydome"); });
+setlistener("/environment/air-pollution-norm", func {air_pollution_norm = getprop("/environment/air-pollution-norm");});
+
+setlistener("/sim/rendering/shaders/skydome", func {scattering_shader_flag = getprop("/sim/rendering/shaders/skydome"); if (scattering_shader_flag ==1) {setprop("/sim/rendering/minimum-sky-visibility",0.0);} else  {setprop("/sim/rendering/minimum-sky-visibility",1000.0);} });
 }
 
 
@@ -4312,7 +4210,8 @@ presampling_flag = 0;
 
 #create_cumulonimbus_cloud(lat, lon, 6000.0, 2.5);
 
-local_weather.place_model("Models/Weather/cloudsphere.ac",lat, lon, alt-10000.0, 0.0);
+earthview.place_earth_model("Models/Astro/earth.xml",lat, lon, 0.0, 0.0, 0.0, 0.0);
+earthview.place_earth_model("Models/Astro/cloudsphere.xml",lat, lon, 0.0, 0.0, 0.0, 0.0);
 
 #setprop("/environment/terrain/area[0]/input/latitude-deg", lat );
 #setprop("/environment/terrain/area[0]/input/longitude-deg", lon );
@@ -4680,6 +4579,10 @@ var convective_size_bias = 0.0;
 var cumulus_efficiency_factor = 1.0;
 var cloud_mean_altitude = 0.0;
 
+# global keeping track of lighting
+
+var top_shade = 1.0;
+
 # globals keeping track of the lifetime when building a Cumulus from individual cloudlets
 
 var cloud_fractional_lifetime = 0.0;
@@ -4714,6 +4617,7 @@ var ground_haze_factor = 1.0;
 var max_vis_range = 120000.0;
 var temperature_offset = 0.0;
 var current_mean_alt = 0.0;
+var air_pollution_norm = 0.0;
 
 # globals for framerate controlled cloud management
 

@@ -288,7 +288,7 @@
 				<slider>
 					<name>building-density</name>
 					<min>0</min>
-					<max>10.0</max>
+					<max>5.0</max>
 					<property>/sim/rendering/building-density</property>
 					<binding>
 						<command>dialog-apply</command>

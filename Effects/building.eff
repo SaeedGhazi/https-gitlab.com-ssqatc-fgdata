@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+	<name>Effects/building</name>
+	<inherits-from>Effects/model-default</inherits-from>	
+	<parameters>
+		<texture n ="0">
+		  <active>true</active>
+		  <type>2d</type>
+		  <internal-format>normalized</internal-format>
+		  <filter>linear-mipmap-linear</filter>
+		  <wrap-s>clamp</wrap-s>
+		  <wrap-t>clamp</wrap-t>		
+		</texture>
+		<transparent>false</transparent>
+		<vertex-program-two-side type="bool">false</vertex-program-two-side>
+		<material>
+		  <active>true</active>
+			<color-mode-uniform>1</color-mode-uniform>
+      <ambient type="vec4d">0.3 0.3 0.3 1.0</ambient>			
+      <diffuse type="vec4d">1.0 1.0 1.0 1.0</diffuse>			
+      <specular type="vec4d">0.0 0.0 0.0 1.0</specular>			
+      <emissive type="vec4d">0.02 0.02 0.02 1.0</emissive>
+      <shininess>0.0</shininess>
+      <color-mode>ambient-and-diffuse</color-mode>
+      <color-mode-uniform>ambient-and-diffuse</color-mode-uniform>
+			<!-- DIFFUSE -->
+		</material>
+		<material-id>0</material-id>
+		<blend>
+		  <active>0</active>
+		  <source>0</source>
+		  <destination>0</destination>
+    </blend>
+    <shade-model>flat</shade-model>
+    <cull-face>back</cull-face>
+    <rendering-hint>opaque</rendering-hint>
+    <vertex-program-two-side>false</vertex-program-two-side>
+		<!-- 	fog include -->
+		<visibility>
+			<use>/environment/ground-visibility-m</use>
+		</visibility>
+		<avisibility>
+			<use>/environment/visibility-m</use>
+		</avisibility>
+		<lthickness>
+			<use>/environment/ground-haze-thickness-m</use>
+		</lthickness>
+		<scattering>
+			<use>/rendering/scene/scattering</use>
+		</scattering>
+		<terminator>
+			<use>/environment/terminator-relative-position-m</use>
+		</terminator>
+		<fogtype>
+			<use>/sim/rendering/shaders/skydome</use>
+		</fogtype>
+		<!-- 	END fog include -->
+	</parameters>
+</PropertyList>

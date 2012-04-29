@@ -8,23 +8,19 @@ uniform vec4 fg_SunSpecularColor;
 uniform vec3 fg_SunDirection;
 uniform vec3 fg_Planes;
 varying vec3 ray;
+
+vec3 normal_decode(vec2 enc);
+
 void main() {
     vec2 coords = gl_TexCoord[0].xy;
     vec4 spec_emis = texture2D( spec_emis_tex, coords );
     if ( spec_emis.a < 0.1 )
         discard;
-    vec3 normal;
-    normal.xy = texture2D( normal_tex, coords ).rg * 2.0 - vec2(1.0,1.0);
-    normal.z = sqrt( 1.0 - dot( normal.xy, normal.xy ) );
+    vec3 normal = normal_decode(texture2D( normal_tex, coords ).rg);
     float len = length(normal);
     normal /= len;
     vec3 viewDir = normalize(ray);
-    float depth = texture2D( depth_tex, coords ).r;
-    vec3 pos;
-    pos.z = - fg_Planes.y / (fg_Planes.x + depth * fg_Planes.z);
-    pos.xy = viewDir.xy / viewDir.z * pos.z;
 
-    vec4 tint;
     vec3 lightDir = (fg_ViewMatrix * vec4( fg_SunDirection, 0.0 )).xyz;
     lightDir = normalize( lightDir );
     vec3 color = texture2D( color_tex, coords ).rgb;

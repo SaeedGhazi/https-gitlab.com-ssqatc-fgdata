@@ -455,14 +455,13 @@
 			</binding>
 		</item>
 
-		<!--  Not working at present
 		<item>
-			<label>ATC Services in range</label>
+			<label>ATC Services in Range</label>
+			<name>atc-in-range</name>
 			<binding>
 				<command>ATC-freq-search</command>
 			</binding>
 		</item>
-		-->
 
 		<item>
 			<label>Wingman Controls</label>

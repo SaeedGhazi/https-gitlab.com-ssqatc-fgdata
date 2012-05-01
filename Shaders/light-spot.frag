@@ -19,7 +19,7 @@ uniform float Far;
 
 varying vec4 ecPosition;
 
-vec3 position( vec3 viewdir, float depth );
+vec3 position( vec3 viewDir, vec2 coords, sampler2D depth_tex );
 vec3 normal_decode(vec2 enc);
 
 void main() {
@@ -31,7 +31,7 @@ void main() {
 	vec3 normal = normal_decode(texture2D( normal_tex, coords ).rg);
 	vec4 spec_emis = texture2D( spec_emis_tex, coords );
 	
-    vec3 pos = position(viewDir, texture2D( depth_tex, coords ).r);
+    vec3 pos = position(viewDir, coords, depth_tex);
 
 	if ( pos.z < ecPos3.z ) // Negative direction in z
 		discard; // Don't light surface outside the light volume

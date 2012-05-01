@@ -17,7 +17,7 @@ varying vec4 eyePlaneT;
 varying vec4 eyePlaneR;
 varying vec4 eyePlaneQ;
 
-vec3 position( vec3 viewdir, float depth );
+vec3 position( vec3 viewDir, vec2 coords, sampler2D depth_tex );
 vec3 normal_decode(vec2 enc);
 
 vec4 DynamicShadow( in vec4 ecPosition, out vec4 tint )
@@ -43,7 +43,7 @@ void main() {
     float len = length(normal);
     normal /= len;
     vec3 viewDir = normalize(ray);
-    vec3 pos = position( viewDir, texture2D( depth_tex, coords ).r );
+    vec3 pos = position( viewDir, coords, depth_tex );
 
     vec4 tint;
     float shadow;

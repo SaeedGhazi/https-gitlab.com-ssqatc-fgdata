@@ -76,7 +76,8 @@ void main (void)
 	//vec3 ambient = fg_SunAmbientColor.rgb;
 	vec3 N;
 	vec3 dotN;
-	float emission = dot( gl_FrontLightModelProduct.sceneColor.rgb + gl_FrontMaterial.emission , vec3( 0.3, 0.59, 0.11 ) );
+	float emission = dot( gl_FrontLightModelProduct.sceneColor.rgb + gl_FrontMaterial.emission,
+						  vec3( 0.3, 0.59, 0.11 ) );
 	float pf;
 
 ///BEGIN bump
@@ -108,9 +109,9 @@ void main (void)
 			reflFactor = reflmap.a + transparency_offset;
 		} else if (nmap_enabled > 0) {
 			// set the reflectivity proportional to shininess with user input
-			reflFactor = (gl_FrontMaterial.shininess / 128.0) * nmap.a + transparency_offset;
+			reflFactor = gl_FrontMaterial.shininess * 0.0078125 * nmap.a + transparency_offset;
 		} else {
-			reflFactor = gl_FrontMaterial.shininess/128.0 + transparency_offset;
+			reflFactor = gl_FrontMaterial.shininess * 0.0078125 + transparency_offset;
 		}
 		reflFactor = clamp(reflFactor, 0.0, 1.0);
 
@@ -130,17 +131,16 @@ void main (void)
  	//////////////////////////////////////////////////////////////////////
  	//begin DIRT
  	//////////////////////////////////////////////////////////////////////
- 	if (dirt_enabled > 0.0){
-		float dirtFactorR = reflmap.r * dirt_r_factor;
-		dirtFactorR = smoothstep(0.0, 1.0, dirtFactorR);
-		mixedcolor.rgb = mix(mixedcolor.rgb, dirt_r_color, dirtFactorR);
+	if (dirt_enabled > 0.0){
+		vec3 dirtFactorIn = vec3 (dirt_r_factor, dirt_g_factor, dirt_b_factor);
+		vec3 dirtFactor.rgb = reflmap.rgb * dirtFactorIn.rgb;
+		//dirtFactor.r = smoothstep(0.0, 1.0, dirtFactor.r);
+		mixedcolor.rgb = mix(mixedcolor.rgb, dirt_r_color, smoothstep(0.0, 1.0, dirtFactor.r));
 		if (dirt_multi > 0) {
-			float dirtFactorG = reflmap.g * dirt_g_factor;
-			float dirtFactorB = reflmap.b * dirt_b_factor;
-			dirtFactorG = smoothstep(0.0, 1.0, dirtFactorG);
-			dirtFactorB = smoothstep(0.0, 1.0, dirtFactorB);
-			mixedcolor.rgb = mix(mixedcolor.rgb, dirt_g_color, dirtFactorG);
-			mixedcolor.rgb = mix(mixedcolor.rgb, dirt_b_color, dirtFactorB);
+			//dirtFactor.g = smoothstep(0.0, 1.0, dirtFactor.g);
+			//dirtFactor.b = smoothstep(0.0, 1.0, dirtFactor.b);
+			mixedcolor.rgb = mix(mixedcolor.rgb, dirt_g_color, smoothstep(0.0, 1.0, dirtFactor.g));
+			mixedcolor.rgb = mix(mixedcolor.rgb, dirt_b_color, smoothstep(0.0, 1.0, dirtFactor.b));
 		}
 	}
 	//////////////////////////////////////////////////////////////////////
@@ -162,19 +162,23 @@ void main (void)
 //////////////////////////////////////////////////////////////////////
 	if ( lightmap_enabled >= 1 ) {
 		vec3 lightmapcolor;
+		vec4 lightmapFactor = vec4(lightmap_r_factor, lightmap_g_factor, lightmap_b_factor, lightmap_a_factor);
+		lightmapFactor = lightmapFactor * lightmapTexel;
 		if (lightmap_multi >0 ){
-			lightmapcolor = lightmap_r_color * lightmap_r_factor * lightmapTexel.r +
-			                lightmap_g_color * lightmap_g_factor * lightmapTexel.g +
-			                lightmap_b_color * lightmap_b_factor * lightmapTexel.b +
-			                lightmap_a_color * lightmap_a_factor * lightmapTexel.a ;
-		    emission = max(max(lightmap_r_factor * lightmapTexel.r, lightmap_g_factor * lightmapTexel.g),max( lightmap_b_factor * lightmapTexel.b, lightmap_a_factor * lightmapTexel.a));
+			lightmapcolor = lightmap_r_color * lightmapFactor.r +
+			                lightmap_g_color * lightmapFactor.g +
+			                lightmap_b_color * lightmapFactor.b +
+			                lightmap_a_color * lightmapFactor.a ;
+		    emission = max(max(lightmapFactor.r * lightmapTexel.r, lightmapFactor.g * lightmapTexel.g),
+						   max( lightmapFactor.b * lightmapTexel.b, lightmapFactor.a * lightmapTexel.a));
 		} else {
-			lightmapcolor = lightmapTexel.r * lightmap_r_color * lightmap_r_factor;
-			emission = lightmapTexel.r * lightmap_r_factor;
+			lightmapcolor = lightmapTexel.rgb * lightmap_r_color * lightmapFactor.r;
+			emission = lightmapTexel.r * lightmapFactor.r;
 		}
 		//fragColor.rgb = max(fragColor.rgb, lightmapcolor * gl_FrontMaterial.diffuse.rgb * mixedcolor);
 		emission = length(lightmapcolor);
-		fragColor.rgb = max(fragColor.rgb * (1.0 - emission), lightmapcolor * gl_FrontMaterial.diffuse.rgb * mixedcolor);
+		fragColor.rgb = max(fragColor.rgb * (1.0 - emission),
+							lightmapcolor * gl_FrontMaterial.diffuse.rgb * mixedcolor);
 	}
 //////////////////////////////////////////////////////////////////////
 // END lightmap

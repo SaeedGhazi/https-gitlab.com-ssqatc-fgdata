@@ -30,7 +30,7 @@
     <empty><stretch>true</stretch></empty>
 
     <text>
-      <label>AI Scenario Selection</label>
+      <label>AI Traffic and Scenario Settings</label>
     </text>
 
     <empty><stretch>true</stretch></empty>
@@ -50,14 +50,25 @@
   <hrule/>
 
   <checkbox>
-	<halign>left</halign>
-	<label>Enable AI scenarios</label>
-	<name>enable-ai-scenarios</name>
-	<property>/sim/ai/scenarios-enabled</property>
-	<binding>
-		<command>dialog-apply</command>
-		<object-name>enable-ai-scenarios</object-name>
-	</binding>
+    <halign>left</halign>
+    <label>Enable AI traffic</label>
+    <name>enable-ai-traffic</name>
+    <property>/sim/traffic-manager/enabled</property>
+    <binding>
+        <command>dialog-apply</command>
+        <object-name>enable-ai-traffic</object-name>
+    </binding>
+  </checkbox>
+
+  <checkbox>
+    <halign>left</halign>
+    <label>Enable AI scenarios (requires restart)</label>
+    <name>enable-ai-scenarios</name>
+    <property>/sim/ai/scenarios-enabled</property>
+    <binding>
+        <command>dialog-apply</command>
+        <object-name>enable-ai-scenarios</object-name>
+    </binding>
   </checkbox>
 
   <text><label/></text>
@@ -70,7 +81,6 @@
   </text>
 
   <hrule/>
-
 
   <group>
     <layout>hbox</layout>

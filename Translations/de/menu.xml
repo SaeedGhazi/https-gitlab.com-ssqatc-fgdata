@@ -59,10 +59,11 @@
 
 	<!-- AI menu -->
 	<ai>KI</ai>
+	<scenario>Flugverkehr und Szenarien</scenario>
+	<atc-in-range>ATC Stationen in der Nähe</atc-in-range>
 	<wingman>Steuerung Flügelmann</wingman>
 	<tanker>Steuerung Tanker</tanker>
 	<carrier>Steuerung Flugzeugträger</carrier>
-	<scenario>Auswahl der KI Szenarien (Neustart notwendig)</scenario>
 	<jetway>Steuerung Fluggastbrücke</jetway>
 
 	<!-- Equipment -->

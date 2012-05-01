@@ -63,11 +63,12 @@ Started September 2000 by David Megginson, david@megginson.com
 			<season type="string" preserve="y">summer</season>
 		</startup>
 		<rendering>
-		  <materials-file>Materials/default/materials.xml</materials-file>
+			<materials-file>Materials/default/materials.xml</materials-file>
 			<rembrandt type="bool">false</rembrandt>
 			<show-buffers type="bool" userarchive="y">true</show-buffers>
 			<ambient-occlusion type="bool" userarchive="y">false</ambient-occlusion>
 			<exposure type="float" userarchive="y">1.0</exposure>
+			<use-color-for-depth type="bool">false</use-color-for-depth>
 			<debug type="bool">false</debug>
 			<realism type="int">5</realism>
 			<filtering type="int">8</filtering>
@@ -748,13 +749,9 @@ Started September 2000 by David Megginson, david@megginson.com
 
 		<ai>
 			<enabled type="bool">true</enabled>
+			<scenarios-enabled type="bool" userarchive="y">true</scenarios-enabled>
 			<scenario>nimitz_demo</scenario>
-                        <groundnet-cache type="bool">true</groundnet-cache>
-			<!-- <scenario>balloon_demo</scenario> -->
-			<!-- <scenario>aircraft_demo</scenario> -->
-			<!-- <scenario>refueling_demo</scenario> -->
-			<!-- <scenario>lead_aircraft</scenario> -->
-			<!-- <scenario>vinson_demo</scenario> -->
+			<groundnet-cache type="bool">true</groundnet-cache>
 		</ai>
 
 		<multiplay preserve="y">

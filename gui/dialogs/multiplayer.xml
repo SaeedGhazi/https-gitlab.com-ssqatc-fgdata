@@ -51,16 +51,52 @@
     </group>
     <hrule/>
 
+    <!-- main dialog area -->
     <group>
         <layout>table</layout>
         <halign>center</halign>
+
         <text>
-          <row>0</row><col>0</col>
+            <row>0</row>
+            <col>0</col>
+            <label>Options:</label>
+            <halign>right</halign>
+        </text>
+        <checkbox>
+            <row>0</row>
+            <col>1</col>
+            <colspan>2</colspan>
+            <halign>left</halign>
+            <name>hide-replay</name>
+            <label>Hide replay sessions over MP (less annoying to other players)</label>
+            <property>/sim/multiplay/freeze-on-replay</property>
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>hide-replay</object-name>
+            </binding>
+        </checkbox>
+
+        <checkbox>
+            <row>1</row>
+            <col>1</col>
+            <colspan>2</colspan>
+            <halign>left</halign>
+            <name>ai-traffic</name>
+            <label>Show AI Traffic (mixing MP and AI traffic may be confusing)</label>
+            <property>/sim/traffic-manager/enabled</property>
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>ai-traffic</object-name>
+            </binding>
+        </checkbox>
+
+        <text>
+          <row>2</row><col>0</col>
           <halign>right</halign>
           <label>Callsign:</label>
         </text>
         <input>
-          <row>0</row><col>1</col>
+          <row>2</row><col>1</col>
           <halign>left</halign>
           <property>/sim/multiplay/callsign</property>
           <enable>
@@ -69,19 +105,16 @@
             </not>
           </enable>
         </input>
+
         <text>
-          <row>0</row><col>2</col>
-          <halign>left</halign>
-          <label>(requires reconnect)</label>
-        </text>
-        <text>
-          <row>1</row><col>0</col>
+          <row>3</row><col>0</col>
           <halign>right</halign>
           <label>Server:</label>
         </text>
         <combo>
             <name>host</name>
-            <row>1</row><col>1</col>
+            <halign>left</halign>
+            <row>3</row><col>1</col>
             <colspan>2</colspan>
             <pref-width>350</pref-width>
             <property>/sim/multiplay/selected-server</property>
@@ -99,22 +132,23 @@
             <value>mpserver12.flightgear.org (Amsterdam, Netherlands)</value>
             <value>mpserver13.flightgear.org (Grenoble, France)</value>
         </combo>
-    <!-- status area -->
+
+        <!-- status area -->
         <text>
             <visible>
                 <not><property>/sim/multiplay/online</property></not>
             </visible>
-            <row>3</row>
+            <row>5</row>
             <col>1</col>
             <halign>left</halign>
-             <label>Not connected</label>
+            <label>Not connected</label>
         </text>
-        
+
         <text>
             <visible>
                 <property>/sim/multiplay/online</property>
             </visible>
-            <row>3</row>
+            <row>5</row>
             <col>1</col>
             <halign>left</halign>
             <label>MMMMMMMMMMMMMMMMM</label>
@@ -123,7 +157,8 @@
             <live>true</live>
         </text>
     </group>
-    
+
+    <!-- button area -->
     <hrule/>
     <group>
         <layout>hbox</layout>
@@ -160,6 +195,7 @@
             <subsystem>mp</subsystem>
           </binding>
         </button>
+
         <button>
           <legend>Disconnect</legend>
           <equal>true</equal>
@@ -180,6 +216,7 @@
             <subsystem>mp</subsystem>
           </binding>
         </button>
+
         <button>
             <row>1</row><col>2</col>
             <legend>Server Status</legend>
@@ -188,6 +225,7 @@
                 <path>http://mpmap01.flightgear.org/mpstatus/</path>
             </binding>
         </button>
+
         <button>
           <legend>Close</legend>
           <default>true</default>

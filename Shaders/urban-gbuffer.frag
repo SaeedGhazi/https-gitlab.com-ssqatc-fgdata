@@ -37,7 +37,7 @@ int linear_search_steps = 10;
 int GlobalIterationCount = 0;
 int gIterationCap = 64;
 
-vec2 normal_encode(vec3 n);
+void encode_gbuffer(vec3 normal, vec3 color, int mId, float specular, float shininess, float emission, float depth);
 
 void QDM(inout vec3 p, inout vec3 v)
 {
@@ -190,7 +190,6 @@ void main (void)
     N.z = sqrt(1.0 - min(1.0,dot(N.xy, N.xy)));
     float Nz = N.z;
     N = normalize(N.x * tangent + N.y * binormal + N.z * normal);
-	gl_FragData[0] = vec4( normal_encode(N), 0.0, 1.0 );
 
     vec4 ambient_light = constantColor + vec4(gl_Color.rgb, 1.0);
 
@@ -216,9 +215,6 @@ void main (void)
 
     vec4 p = vec4( ecPos3 + tile_size * V * (d-1.0) * depth_factor / s.z, 1.0 );
 
-    gl_FragData[1] = vec4( finalColor.rgb, 1.0 / 255.0 );
-    gl_FragData[2] = vec4( dot(specular.xyz,vec3(0.3, 0.59, 0.11 )), specular.w/128.0, 0.0, 1.0 );
-
     if (dot(normal,-V) > 0.1) {
         vec4 iproj = gl_ProjectionMatrix * p;
         iproj /= iproj.w;
@@ -226,4 +222,5 @@ void main (void)
     } else {
         gl_FragDepth = gl_FragCoord.z;
     }
+    encode_gbuffer(N, finalColor.rgb, 1, dot(specular.xyz,vec3(0.3, 0.59, 0.11 )), specular.w, 0.0, gl_FragDepth);
 }

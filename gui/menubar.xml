@@ -22,14 +22,6 @@
 				<script>gui.save_flight()</script>
 			</binding>
 		</item>
-
-		<item>
-			<label>Scenario</label>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>scenario</dialog-name>
-			</binding>
-		</item>
 -->
 		<item>
 			<name>reset</name>
@@ -39,8 +31,8 @@
 				<command>reset</command>
 			</binding>
 		</item>
-
-		<!--		<item>
+<!--
+		<item>
 			<label>High-Res Snapshot</label>
 			<enabled>false</enabled>
 			<binding>
@@ -60,6 +52,7 @@
 				</script>
 			</binding>
 		</item>
+
 		<item>
 			<name>snap-shot-dir</name>
 			<label>Screenshot Directory</label>
@@ -452,14 +445,23 @@
 	<menu>
 		<name>ai</name>
 		<label>AI</label>
-		<!--  Not working at present
+
 		<item>
-			<label>ATC Services in range</label>
+			<label>Traffic and Scenario Settings</label>
+			<name>scenario</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>scenario</dialog-name>
+			</binding>
+		</item>
+
+		<item>
+			<label>ATC Services in Range</label>
+			<name>atc-in-range</name>
 			<binding>
 				<command>ATC-freq-search</command>
 			</binding>
 		</item>
-		-->
 
 		<item>
 			<label>Wingman Controls</label>
@@ -490,15 +492,6 @@
 		</item>
 
 		<item>
-			<label>Scenario Select (requires restart)</label>
-			<name>scenario</name>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>scenario</dialog-name>
-			</binding>
-		</item>
-
-		<item>
 			<label>Jetway Settings</label>
 			<name>jetway</name>
 			<binding>
@@ -521,7 +514,7 @@
 				<dialog-name>multiplayer</dialog-name>
 			</binding>
 		</item>
-		
+
 		<item>
 			<label>Chat Dialog</label>
 			<name>mp-chat</name>
@@ -597,7 +590,6 @@
 				<subsystem>hud</subsystem>
 			</binding>
 		</item>
-
 
 		<item>
 			<name>reload-panel</name>

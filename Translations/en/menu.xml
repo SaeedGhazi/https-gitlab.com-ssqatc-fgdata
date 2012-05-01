@@ -62,10 +62,11 @@
 
 	<!-- AI menu -->
 	<ai>AI</ai>
+	<scenario>Traffic and Scenario Settings</scenario>
+	<atc-in-range>ATC Services in Range</atc-in-range>
 	<wingman>Wingman Controls</wingman>
 	<tanker>Tanker Controls</tanker>
 	<carrier>Carrier Controls</carrier>
-	<scenario>Scenario Select (requires restart)</scenario>
 	<jetway>Jetway Settings</jetway>
 
 	<!-- Multiplayer menu -->

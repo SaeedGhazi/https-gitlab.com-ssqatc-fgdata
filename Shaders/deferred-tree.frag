@@ -6,6 +6,7 @@
 //
 uniform int materialID;
 uniform sampler2D texture;
+void encode_gbuffer(vec3 normal, vec3 color, int mId, float specular, float shininess, float emission, float depth);
 void main() {
     vec4 texel = texture2D(texture, gl_TexCoord[0].st);
     if (texel.a < 0.1)
@@ -14,9 +15,6 @@ void main() {
     float shininess = 0.1;
     float emission = 0.0;
         
-	  // Normal is straight towards the viewer.
-	  vec3 normal2 = vec3(0.0, 0.0, 0.0);
-    gl_FragData[0] = vec4( 0.5, 0.5, 0.0, 1.0 );
-    gl_FragData[1] = vec4( gl_Color.rgb * texel.rgb, float( materialID ) / 255.0 );
-    gl_FragData[2] = vec4( specular, shininess / 255.0, emission, 1.0 );
+    // Normal is straight towards the viewer. (FB: Are they really billboards ? )
+    encode_gbuffer(vec3(0.5, 0.5, 0.0), gl_Color.rgb * texel.rgb, materialID, specular, shininess, emission, gl_FragCoord.z);
 }

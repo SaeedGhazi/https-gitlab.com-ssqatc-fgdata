@@ -30,7 +30,7 @@ uniform int			rembrandt_enabled;
 
 void	rotationMatrixPR(in float sinRx, in float cosRx, in float sinRy, in float cosRy, out mat4 rotmat)
 {
-	rotmat = mat4(	cosRy ,	sinRx * sinRy,	cosRx * sinRy ,	0.0,
+	rotmat = mat4(	cosRy ,	sinRx * sinRy ,	cosRx * sinRy,	0.0,
 									0.0   ,	cosRx        ,	-sinRx * cosRx,	0.0,
 									-sinRy,	sinRx * cosRy,	cosRx * cosRy ,	0.0,
 									0.0   ,	0.0          ,	0.0           ,	1.0 );
@@ -39,9 +39,9 @@ void	rotationMatrixPR(in float sinRx, in float cosRx, in float sinRy, in float c
 void	rotationMatrixH(in float sinRz, in float cosRz, out mat4 rotmat)
 {
 	rotmat = mat4(	cosRz,	-sinRz,	0.0,	0.0,
-									sinRz,	cosRz	,	0.0,	0.0,
-									0.0  ,	0.0   ,	1.0,	0.0,
-									0.0  ,	0.0   ,	0.0,	1.0 );
+									sinRz,	cosRz,	0.0,	0.0,
+									0.0  ,	0.0  ,	1.0,	0.0,
+									0.0  ,	0.0  ,	0.0,	1.0 );
 }
 
 void	main(void)
@@ -103,7 +103,8 @@ void	main(void)
 		}
 
 		if(rembrandt_enabled < 1){
-		gl_FrontColor = gl_FrontMaterial.emission + gl_Color * (gl_LightModel.ambient + gl_LightSource[0].ambient);
+		gl_FrontColor = gl_FrontMaterial.emission + gl_Color
+					  * (gl_LightModel.ambient + gl_LightSource[0].ambient);
 		} else {
 		  gl_FrontColor = gl_Color;
 		}

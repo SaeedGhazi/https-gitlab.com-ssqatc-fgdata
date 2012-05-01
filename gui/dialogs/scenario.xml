@@ -30,7 +30,7 @@
     <empty><stretch>true</stretch></empty>
 
     <text>
-      <label>AI Scenario Select</label>
+      <label>AI Traffic and Scenario Settings</label>
     </text>
 
     <empty><stretch>true</stretch></empty>
@@ -49,12 +49,38 @@
 
   <hrule/>
 
+  <checkbox>
+    <halign>left</halign>
+    <label>Enable AI traffic</label>
+    <name>enable-ai-traffic</name>
+    <property>/sim/traffic-manager/enabled</property>
+    <binding>
+        <command>dialog-apply</command>
+        <object-name>enable-ai-traffic</object-name>
+    </binding>
+  </checkbox>
+
+  <checkbox>
+    <halign>left</halign>
+    <label>Enable AI scenarios (requires restart)</label>
+    <name>enable-ai-scenarios</name>
+    <property>/sim/ai/scenarios-enabled</property>
+    <binding>
+        <command>dialog-apply</command>
+        <object-name>enable-ai-scenarios</object-name>
+    </binding>
+  </checkbox>
+
+  <text><label/></text>
+
   <text>
     <label>Choose active scenario(s) for the next program start</label>
+    <enable>
+      <property>/sim/ai/scenarios-enabled</property>
+    </enable>
   </text>
 
   <hrule/>
-
 
   <group>
     <layout>hbox</layout>
@@ -120,8 +146,12 @@
         var scenarioN = rootN.getNode("scenario");
         if( scenarioN == nil ) return;
         var descriptionN = rootN.getNode("description");
-        if( descriptionN == nil )
-          var descriptionN = scenarioN.getNode("description");
+        var nameN = rootN.getNode("name");
+        if( (descriptionN == nil)and(nameN == nil) )
+        {
+          descriptionN = scenarioN.getNode("description");
+          nameN = scenarioN.getNode("name");
+        }
         var description = descriptionN != nil ? descriptionN.getValue() : "";
         var propertyRoot = props.globals.getNode("sim/gui/dialogs/scenario",1).getChild( "scenario", nr, 1 );
         propertyRoot.getNode("selected",1).setBoolValue(isEnabledScenario(file));
@@ -131,8 +161,12 @@
         group.getNode("layout",1).setValue("hbox");
         var cb = group.getNode("checkbox",1);
         cb.getNode("property",1).setValue(propertyRoot.getNode("selected").getPath());
-        cb.getNode("label",1).setValue(file);
+        var label = string.replace(file, "_", " ");
+        if (nameN != nil)
+            label = nameN.getValue();
+        cb.getNode("label",1).setValue(label);
         cb.getNode("name",1).setValue(file);
+        cb.getNode("enable/property",1).setValue("/sim/ai/scenarios-enabled");
         group.getNode("empty",1).getNode("stretch",1).setValue("true");
       }
 

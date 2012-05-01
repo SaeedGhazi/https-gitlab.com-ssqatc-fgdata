@@ -67,6 +67,7 @@
 			<program>
 				<vertex-shader>Shaders/deferred-tree.vert</vertex-shader>
 				<fragment-shader>Shaders/deferred-tree.frag</fragment-shader>
+				<fragment-shader>Shaders/gbuffer-functions.frag</fragment-shader>
 			</program>
 			<uniform>
 				<name>texture</name>

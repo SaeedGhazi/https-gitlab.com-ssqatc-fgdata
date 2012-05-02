@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
 	<name>Effects/building</name>
-	<inherits-from>Effects/model-default</inherits-from>	
+	<inherits-from>Effects/model-default</inherits-from>
 	<parameters>
 		<texture n="0">
 		  <active>true</active>
@@ -9,7 +9,7 @@
 		  <internal-format>normalized</internal-format>
 		  <filter>linear-mipmap-linear</filter>
 		  <wrap-s>clamp</wrap-s>
-		  <wrap-t>clamp</wrap-t>		
+		  <wrap-t>clamp</wrap-t>
 		</texture>
 		<texture n="1">
 		  <active>true</active>
@@ -17,15 +17,15 @@
 		  <internal-format>normalized</internal-format>
 		  <filter>linear-mipmap-linear</filter>
 		  <wrap-s>clamp</wrap-s>
-		  <wrap-t>clamp</wrap-t>		
-		</texture>		
+		  <wrap-t>clamp</wrap-t>
+		</texture>
 		<transparent>false</transparent>
 		<material>
 		  <active>true</active>
 			<color-mode-uniform>1</color-mode-uniform>
-      <ambient type="vec4d">0.6 0.6 0.6 1.0</ambient>			
-      <diffuse type="vec4d">1.0 1.0 1.0 1.0</diffuse>			
-      <specular type="vec4d">0.0 0.0 0.0 1.0</specular>			
+      <ambient type="vec4d">0.6 0.6 0.6 1.0</ambient>
+      <diffuse type="vec4d">1.0 1.0 1.0 1.0</diffuse>
+      <specular type="vec4d">0.0 0.0 0.0 1.0</specular>
       <emissive type="vec4d">0.02 0.02 0.02 1.0</emissive>
       <shininess>0.0</shininess>
       <color-mode>ambient-and-diffuse</color-mode>
@@ -66,8 +66,8 @@
 		  <use>/sim/time/sun-angle-rad</use>
     </sun-angle>
 	</parameters>
-	
-	<!-- Override some of the default shaders so we can add emissive lighting -->	
+
+	<!-- Override some of the default shaders so we can add emissive lighting -->
 	<!-- Skydome -->
   <technique n="5">
     <pass n="0">
@@ -77,7 +77,7 @@
       </program>
     </pass>
   </technique>
-  
+
   <!-- Rembrandt -->
   <technique n="10">
   	<pass n="0">
@@ -88,9 +88,9 @@
 		  </program>
     </pass>
   </technique>
-  
+
   <!-- Default shader -->
-  <technique n="11">  
+  <technique n="11">
 	  <pass n="0">
 			<texture-unit n="1">
 				<!-- Emissive texture-->
@@ -117,9 +117,9 @@
           <use>texture[1]/internal-format</use>
         </internal-format>
         -->
-			</texture-unit>	  
+			</texture-unit>
 		  <program n="0">
-				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader>
+<!-- 				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader> -->
 				<!--fog include-->
 				<vertex-shader n="1">Shaders/default.vert</vertex-shader>
 				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>

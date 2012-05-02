@@ -162,7 +162,7 @@
 			</uniform>
 			<!-- 			END fog include -->
 		</pass>
-		
+
     <pass n="1">
 			<lighting>true</lighting>
 			<material>
@@ -195,7 +195,7 @@
 				<wrap-t>clamp</wrap-t>
 			</texture-unit>
 			<program>
-				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader>
+<!-- 				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader> -->
 				<vertex-shader n="1">Shaders/tree.vert</vertex-shader>
 				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
 				<fragment-shader n="1">Shaders/tree.frag</fragment-shader>

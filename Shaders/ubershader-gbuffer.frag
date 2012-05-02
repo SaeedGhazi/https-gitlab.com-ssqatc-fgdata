@@ -133,7 +133,7 @@ void main (void)
  	//////////////////////////////////////////////////////////////////////
 	if (dirt_enabled > 0.0){
 		vec3 dirtFactorIn = vec3 (dirt_r_factor, dirt_g_factor, dirt_b_factor);
-		vec3 dirtFactor.rgb = reflmap.rgb * dirtFactorIn.rgb;
+		vec3 dirtFactor = reflmap.rgb * dirtFactorIn.rgb;
 		//dirtFactor.r = smoothstep(0.0, 1.0, dirtFactor.r);
 		mixedcolor.rgb = mix(mixedcolor.rgb, dirt_r_color, smoothstep(0.0, 1.0, dirtFactor.r));
 		if (dirt_multi > 0) {

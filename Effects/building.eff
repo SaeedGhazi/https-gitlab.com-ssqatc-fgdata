@@ -3,7 +3,7 @@
 	<name>Effects/building</name>
 	<inherits-from>Effects/model-default</inherits-from>	
 	<parameters>
-		<texture n ="0">
+		<texture n="0">
 		  <active>true</active>
 		  <type>2d</type>
 		  <internal-format>normalized</internal-format>
@@ -11,12 +11,19 @@
 		  <wrap-s>clamp</wrap-s>
 		  <wrap-t>clamp</wrap-t>		
 		</texture>
+		<texture n="1">
+		  <active>true</active>
+		  <type>2d</type>
+		  <internal-format>normalized</internal-format>
+		  <filter>linear-mipmap-linear</filter>
+		  <wrap-s>clamp</wrap-s>
+		  <wrap-t>clamp</wrap-t>		
+		</texture>		
 		<transparent>false</transparent>
-		<vertex-program-two-side type="bool">false</vertex-program-two-side>
 		<material>
 		  <active>true</active>
 			<color-mode-uniform>1</color-mode-uniform>
-      <ambient type="vec4d">0.3 0.3 0.3 1.0</ambient>			
+      <ambient type="vec4d">0.6 0.6 0.6 1.0</ambient>			
       <diffuse type="vec4d">1.0 1.0 1.0 1.0</diffuse>			
       <specular type="vec4d">0.0 0.0 0.0 1.0</specular>			
       <emissive type="vec4d">0.02 0.02 0.02 1.0</emissive>
@@ -55,5 +62,82 @@
 			<use>/sim/rendering/shaders/skydome</use>
 		</fogtype>
 		<!-- 	END fog include -->
+		<sun-angle>
+		  <use>/sim/time/sun-angle-rad</use>
+    </sun-angle>
 	</parameters>
+	
+	<!-- Override some of the default shaders so we can add emissive lighting -->	
+	<!-- Skydome -->
+  <technique n="5">
+    <pass n="0">
+      <program n="0">
+        <vertex-shader n="0">Shaders/terrain-haze.vert</vertex-shader>
+        <fragment-shader n="0">Shaders/terrain-haze.frag</fragment-shader>
+      </program>
+    </pass>
+  </technique>
+  
+  <!-- Rembrandt -->
+  <technique n="10">
+  	<pass n="0">
+		  <program n="0">
+	  		<vertex-shader n="0">Shaders/deferred-gbuffer.vert</vertex-shader>
+		  	<fragment-shader n="0">Shaders/deferred-gbuffer.frag</fragment-shader>
+		  	<fragment-shader n="1">Shaders/gbuffer-functions.frag</fragment-shader>
+		  </program>
+    </pass>
+  </technique>
+  
+  <!-- Default shader -->
+  <technique n="11">  
+	  <pass n="0">
+			<texture-unit n="1">
+				<!-- Emissive texture-->
+				<unit>1</unit>
+				<!-- If there is a texture, the type in the derived effect
+        will be "2d". -->
+				<type>
+					<use>texture[1]/type</use>
+				</type>
+				<image>
+					<use>texture[1]/image</use>
+				</image>
+				<filter>
+					<use>texture[1]/filter</use>
+				</filter>
+				<wrap-s>
+					<use>texture[1]/wrap-s</use>
+				</wrap-s>
+				<wrap-t>
+					<use>texture[1]/wrap-t</use>
+				</wrap-t>
+				<!--
+        <internal-format>
+          <use>texture[1]/internal-format</use>
+        </internal-format>
+        -->
+			</texture-unit>	  
+		  <program n="0">
+				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader>
+				<!--fog include-->
+				<vertex-shader n="1">Shaders/default.vert</vertex-shader>
+				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
+				<!--fog include-->
+				<fragment-shader n="1">Shaders/building-default.frag</fragment-shader>
+		  </program>
+			<uniform n="9">
+				<name>lightmap</name>
+				<type>sampler-2d</type>
+				<value type="int">1</value>
+			</uniform>
+			<uniform n="10">
+				<name>sunangle</name>
+				<type>float</type>
+				<value>
+					<use>sun-angle</use>
+				</value>
+		  </uniform>
+    </pass>
+  </technique>
 </PropertyList>

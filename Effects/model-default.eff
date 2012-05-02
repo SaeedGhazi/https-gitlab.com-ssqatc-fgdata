@@ -119,6 +119,13 @@
         <type>float</type>
         <value><use>scattering</use></value>
       </uniform>
+	  <uniform>
+		<name>terminator</name>
+		<type>float</type>
+		<value>
+		  <use>terminator</use>
+		</value>
+	  </uniform>
       <uniform>
         <name>texture</name>
         <type>sampler-2d</type>

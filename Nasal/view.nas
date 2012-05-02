@@ -292,6 +292,8 @@ var fly_by_view_handler = {
 		} else {
 		    # use actual distance
 		    dist = me.last.distance_to(pos);
+		    # reset when too far (i.e. position changed due to skipping time in replay mode)
+		    if (dist>5000) return me.reset();
 		}
 
 		# check if the aircraft has moved enough

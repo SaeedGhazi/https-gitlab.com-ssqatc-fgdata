@@ -79,12 +79,14 @@
   </technique>
 
   <!-- Rembrandt -->
+  <!-- FredB: What is the purpose of that ? -->
   <technique n="10">
   	<pass n="0">
 		  <program n="0">
 	  		<vertex-shader n="0">Shaders/deferred-gbuffer.vert</vertex-shader>
 		  	<fragment-shader n="0">Shaders/deferred-gbuffer.frag</fragment-shader>
 		  	<fragment-shader n="1">Shaders/gbuffer-functions.frag</fragment-shader>
+			<fragment-shader n="2">Shaders/gbuffer-encode.frag</fragment-shader>
 		  </program>
     </pass>
   </technique>

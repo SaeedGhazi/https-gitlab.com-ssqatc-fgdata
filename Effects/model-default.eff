@@ -195,6 +195,7 @@
 			<vertex-shader>Shaders/deferred-gbuffer.vert</vertex-shader>
 			<fragment-shader>Shaders/deferred-gbuffer.frag</fragment-shader>
 			<fragment-shader>Shaders/gbuffer-functions.frag</fragment-shader>
+			<fragment-shader>Shaders/gbuffer-encode.frag</fragment-shader>
 		</program>
 		<uniform>
 			<name>texture</name>

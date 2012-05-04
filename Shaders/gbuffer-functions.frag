@@ -67,17 +67,3 @@ vec3 position( vec3 viewDir, vec2 coords, sampler2D depth_tex )
         depth = texture2D( depth_tex, coords ).r;
     return position( viewDir, depth );
 }
-
-// attachment 0:  normal.x  |  normal.y  |    0.0     |    1.0
-// attachment 1: diffuse.r  | diffuse.g  | diffuse.b  | material Id
-// attachment 2: specular.l | shininess  | emission.l |  unused
-// attachment 3:     ---------- depth ------------    |  unused        (optional)
-//
-void encode_gbuffer(vec3 normal, vec3 color, int mId, float specular, float shininess, float emission, float depth)
-{
-    gl_FragData[0] = vec4( normal_encode(normal), 0.0, 1.0 );
-    gl_FragData[1] = vec4( color, float( mId ) / 255.0 );
-    gl_FragData[2] = vec4( specular, shininess / 128.0, emission, 1.0 );
-    if (fg_DepthInColor)
-        gl_FragData[3] = vec4(float_to_color(depth), 1.0);
-}

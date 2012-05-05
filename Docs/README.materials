@@ -155,14 +155,12 @@ Random Buildings
 
 Random Buildings come in three sizes, with individual constraints. 
 
-Small buildings, which may have pitched roofs.  They have different front, back and
-side textures.  Small buildings are never deeper than they are wide.
+Small buildings.  These have different textures on the sides compared to the front and back.
+Small buildings are never deeper than they are wide.
 
-Medium buildings, which have flat roofs. They have different front and side textures.
-They are never taller than they are wide.
+Medium buildings, which are never taller than they are wide.
 
-Large buildings, which have flat roofs. They have different front and size textures. There
-are no constraints on their width, depth or height.
+Large buildings. There are no constraints on their width, depth or height.
            
 building-coverage : The coverage of random buildings in areas marked for random objects in 
          m^2. A lower number means a higher density of buildings. A value of 
@@ -212,5 +210,8 @@ building-large-max-width-m : Maximum width of large buildings. (default 75)
 building-large-min-depth-m : Minimum depth of large buildings. (default 50)
 building-large-max-depth-m : Maximum depty of large buildings. (default 75)
 
-texture : The texture used for all buildings. See Docs/buildings.png for details. 
+building-texture : The texture used for all buildings. See Docs/buildings.png for details. 
 (default Texture/buildings.png)
+
+building-lightmap: Emissive texture for all buildings, which is faded in at night to provide
+illusion of lit windows.  Same texture coordinates and format at building-texture above.

@@ -524,7 +524,9 @@ Shared parameters for various materials.
 <material n="2007">
   <name>Lava</name>
   <name>Burnt</name>
-  <texture>Terrain/lava.png</texture>
+  <texture>Terrain/lava1.png</texture>
+  <texture>Terrain/lava2.png</texture>
+  <texture>Terrain/lava3.png</texture>
   <xsize>500</xsize>
   <ysize>500</ysize>
   <solid>1</solid>

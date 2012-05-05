@@ -17,6 +17,8 @@ void encode_gbuffer(vec3 normal, vec3 color, int mId, float specular, float shin
     gl_FragData[0] = vec4( normal_encode(normal), 0.0, 1.0 );
     gl_FragData[1] = vec4( color, float( mId ) / 255.0 );
     gl_FragData[2] = vec4( specular, shininess / 128.0, emission, 1.0 );
+    vec3 dcol = vec3(1.0, 1.0, 1.0);
     if (fg_DepthInColor)
-        gl_FragData[3] = vec4(float_to_color(depth), 1.0);
+        dcol = float_to_color(depth);
+    gl_FragData[3] = vec4(dcol, 1.0);
 }

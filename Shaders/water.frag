@@ -4,6 +4,9 @@
 //  © Michael Horsch - 2005
 //  Major update and revisions - 2011-10-07
 //  © Emilian Huminiuc and Vivian Meazza
+//  Optimisation - 2012-5-05
+//  Based on ideas by Thorsten Renk
+//  © Emilian Huminiuc and Vivian Meazza
 
 #version 120
 
@@ -21,8 +24,6 @@ uniform int Status;
 
 varying vec4 waterTex1; //moving texcoords
 varying vec4 waterTex2; //moving texcoords
-varying vec4 waterTex4; //viewts
-varying vec4 ecPosition;
 varying vec3 viewerdir;
 varying vec3 lightdir;
 varying vec3 normal;
@@ -72,7 +73,7 @@ void main(void)
     //bool Status = true;
 
 
-    float windEffect = sqrt( WindE*WindE + WindN*WindN ) * 0.6; 				//wind speed in kt
+    float windEffect = sqrt( WindE*WindE + WindN*WindN ) * 0.6; 				         //wind speed in kt
     float windScale = 15.0/(3.0 + windEffect);											//wave scale
     float windEffect_low = 0.3 + 0.7 * smoothstep(0.0, 5.0, windEffect);				//low windspeed wave filter
     float waveRoughness = 0.05 + smoothstep(0.0, 20.0, windEffect);						//wave roughness filter
@@ -91,7 +92,7 @@ void main(void)
                 }
         }
 
-    vec4 viewt = normalize(waterTex4);
+    vec4 viewt = vec4(-E, 0.0) * 0.6;
 
     vec4 disdis = texture2D(water_dudvmap, vec2(waterTex2 * tscale)* windScale) * 2.0 - 1.0;
 
@@ -122,13 +123,14 @@ void main(void)
     nmap1 *= windEffect_low;
     // mix water and noise, modulated by factor
     vec4 vNorm = normalize(mix(nmap, nmap1, mixFactor) * waveRoughness);
-    //vNorm.r += ddx;
+
     vNorm = -vNorm;		//dds fix
 
     //load reflection
     vec4 tmp = vec4(lightdir, 0.0);
     vec4 refTex;
     vec4 refl;
+
     //    cover = 0;
 
     if(cover >= 1.5){
@@ -163,8 +165,6 @@ void main(void)
     N1 *= windEffect_low;
 
     vec3 N = normalize(mix(Normal + N0, Normal + N1, mixFactor) * waveRoughness);
-    //N.r += ddx;
-    //N.g += ddy;
 
     N = -N; //dds fix
 
@@ -180,15 +180,6 @@ void main(void)
     vec4 fres = vec4(1.0) + invfres;
     refl *= fres;
 
-    //calculate the fog factor
-//          float fogFactor;
-//          float fogCoord = ecPosition.z;
-//          const float LOG2 = 1.442695;
-//          fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
-//
-//          if(gl_Fog.density == 1.0)
-//              fogFactor=1.0;
-
     //calculate final colour
     vec4 ambient_light = gl_LightSource[0].diffuse;
     vec4 finalColor;
@@ -200,7 +191,6 @@ void main(void)
         }
 
     float foamSlope = 0.10 + 0.1 * windScale;
-    //float waveSlope = mix(N0.g, N1.g, 0.25);
 
     vec4 foam_texel = texture2D(sea_foam, vec2(waterTex2 * tscale) * 25.0);
     float waveSlope = N.g;

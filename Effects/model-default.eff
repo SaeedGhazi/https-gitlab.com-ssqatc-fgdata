@@ -119,6 +119,13 @@
         <type>float</type>
         <value><use>scattering</use></value>
       </uniform>
+	  <uniform>
+		<name>terminator</name>
+		<type>float</type>
+		<value>
+		  <use>terminator</use>
+		</value>
+	  </uniform>
       <uniform>
         <name>texture</name>
         <type>sampler-2d</type>
@@ -188,6 +195,7 @@
 			<vertex-shader>Shaders/deferred-gbuffer.vert</vertex-shader>
 			<fragment-shader>Shaders/deferred-gbuffer.frag</fragment-shader>
 			<fragment-shader>Shaders/gbuffer-functions.frag</fragment-shader>
+			<fragment-shader>Shaders/gbuffer-encode.frag</fragment-shader>
 		</program>
 		<uniform>
 			<name>texture</name>
@@ -296,7 +304,7 @@
 				<use>vertex-program-two-side</use>
 			</vertex-program-two-side>
 			<program>
-				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader>
+<!-- 				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader> -->
 				<!--fog include-->
 				<vertex-shader n="1">Shaders/default.vert</vertex-shader>
 				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>

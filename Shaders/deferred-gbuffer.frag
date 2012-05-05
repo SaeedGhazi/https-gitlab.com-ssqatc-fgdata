@@ -1,15 +1,15 @@
 #extension GL_EXT_gpu_shader4 : enable
+// -*- mode: C; -*-
+// Licence: GPL v2
+// Author: Frederic Bouvier.
 //
-// attachment 0:  normal.x  |  normal.x  |  normal.y  |  normal.y
-// attachment 1: diffuse.r  | diffuse.g  | diffuse.b  | material Id
-// attachment 2: specular.l | shininess  | emission.l |  unused
-//
+
 varying vec3 ecNormal;
 varying float alpha;
 uniform int materialID;
 uniform sampler2D texture;
 
-vec2 normal_encode(vec3 n);
+void encode_gbuffer(vec3 normal, vec3 color, int mId, float specular, float shininess, float emission, float depth);
 
 void main() {
     vec4 texel = texture2D(texture, gl_TexCoord[0].st);
@@ -19,8 +19,6 @@ void main() {
     float shininess = gl_FrontMaterial.shininess;
     float emission = dot( gl_FrontLightModelProduct.sceneColor.rgb, vec3( 0.3, 0.59, 0.11 ) );
     
-	vec3 normal2 = normalize( (2.0 * gl_Color.a - 1.0) * ecNormal );
-    gl_FragData[0] = vec4( normal_encode(normal2), 0.0, 1.0 );
-    gl_FragData[1] = vec4( gl_Color.rgb * texel.rgb, float( materialID ) / 255.0 );
-    gl_FragData[2] = vec4( specular, shininess / 128.0, emission, 1.0 );
+    vec3 normal2 = normalize( (2.0 * gl_Color.a - 1.0) * ecNormal );
+    encode_gbuffer(normal2, gl_Color.rgb * texel.rgb, materialID, specular, shininess, emission, gl_FragCoord.z);
 }

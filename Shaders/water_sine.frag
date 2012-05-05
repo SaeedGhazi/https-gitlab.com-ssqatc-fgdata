@@ -4,6 +4,9 @@
 //  © Michael Horsch - 2005
 //  Major update and revisions - 2011-10-07
 //  © Emilian Huminiuc and Vivian Meazza
+//  Optimisation - 2012-5-05
+//  Based on ideas by Thorsten Renk
+//  © Emilian Huminiuc and Vivian Meazza
 
 #version 120
 
@@ -23,8 +26,7 @@ uniform int Status;
 
 varying vec4 waterTex1; //moving texcoords
 varying vec4 waterTex2; //moving texcoords
-varying vec4 waterTex4; //viewts
-//varying vec4 ecPosition;
+
 varying vec3 viewerdir;
 varying vec3 lightdir;
 varying vec3 normal;
@@ -41,6 +43,8 @@ uniform int fogType;
 
 vec3 fog_Func(vec3 color, int type);
 //////////////////////
+
+const vec4 AllOnes = vec4(1.0);
 
 /////// functions /////////
 
@@ -92,7 +96,7 @@ void sumWaves(float angle, float dangle, float windScale, float factor, out floa
 	{
 	mat4 RotationMatrix;
 	float deriv;
-	vec4 P = waterTex1 * 1024;
+	vec4 P = waterTex1 * 1024.0;
 
 	rotationmatrix(radians(angle + dangle * windScale + 0.6 * sin(P.x * factor)), RotationMatrix);
 	P *= RotationMatrix;
@@ -139,14 +143,16 @@ void main(void)
 
 	const float water_shininess = 240.0;
 
+	float range = gl_ProjectionMatrix[3].z/(gl_FragCoord.z * -2.0 + 1.0 - gl_ProjectionMatrix[2].z);
+
 	// approximate cloud cover
 	float cover = 0.0;
 	//bool Status = true;
 
-	float windEffect = sqrt( WindE*WindE + WindN*WindN ) * 0.6; 				//wind speed in kt
-	float windScale =  15.0/(3.0 + windEffect);             											//wave scale
-	float windEffect_low = 0.3 + 0.7 * smoothstep(0.0, 5.0, windEffect);    				//low windspeed wave filter
-	float waveRoughness = 0.01 + smoothstep(0.0, 40.0, windEffect);						//wave roughness filter
+	float windEffect = sqrt( WindE*WindE + WindN*WindN ) * 0.6; 	        //wind speed in kt
+	float windScale =  15.0/(3.0 + windEffect);             				//wave scale
+	float windEffect_low = 0.3 + 0.7 * smoothstep(0.0, 5.0, windEffect); 	//low windspeed wave filter
+	float waveRoughness = 0.01 + smoothstep(0.0, 40.0, windEffect);			//wave roughness filter
 
 	float mixFactor = 0.2 + 0.02 * smoothstep(0.0, 50.0, windEffect);
 	//mixFactor = 0.2;
@@ -154,68 +160,94 @@ void main(void)
 
 	// sine waves
 
+	// Test data
 	//float WaveFreq =1.0;
 	//float WaveAmp = 1000.0;
 	//float WaveSharp = 10.0;
-	float angle = 0.0;
 
-	wave0.freq = WaveFreq ;
-	wave0.amp = WaveAmp;
-	wave0.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
+	  vec4 ddxVec = vec4(0.0);
+	  vec4 ddyVec = vec4(0.0);
+	  int detailFlag = 0;
 
-	angle -= 45;
-	wave1.freq = WaveFreq * 2.0 ;
-	wave1.amp = WaveAmp * 1.25;
-	wave1.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
+	//uncomment to test
+	//range = -20000;
 
-	angle += 30;
-	wave2.freq = WaveFreq * 3.5;
-	wave2.amp = WaveAmp * 0.75;
-	wave2.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
+	if (range > -15000 || dot(Normal,H) > 0.95 ) {
 
-	angle -= 50;
-	wave3.freq = WaveFreq * 3.0 ;
-	wave3.amp = WaveAmp * 0.75;
-	wave3.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
+		float ddx = 0.0, ddy = 0.0;
+		float ddx1 = 0.0, ddy1 = 0.0;
+		float ddx2 = 0.0, ddy2 = 0.0;
+		float ddx3 = 0.0, ddy3 = 0.0;
+		float waveamp;
 
-	// sum waves
+		float angle = 0.0;
 
-	float ddx = 0.0, ddy = 0.0;
-	sumWaves(WaveAngle, -1.5, windScale, WaveFactor, ddx, ddy);
+		wave0.freq = WaveFreq ;
+		wave0.amp = WaveAmp;
+		wave0.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
 
-	float ddx1 = 0.0, ddy1 = 0.0;
-	sumWaves(WaveAngle, 1.5, windScale, WaveFactor, ddx1, ddy1);
+		angle -= 45;
+		wave1.freq = WaveFreq * 2.0 ;
+		wave1.amp = WaveAmp * 1.25;
+		wave1.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
 
-	//reset the waves
-	angle = 0.0;
-	float waveamp = WaveAmp * 0.75;
+		angle += 30;
+		wave2.freq = WaveFreq * 3.5;
+		wave2.amp = WaveAmp * 0.75;
+		wave2.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
 
-	wave0.freq = WaveFreq ;
-	wave0.amp = waveamp;
-	wave0.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
+		angle -= 50;
+		wave3.freq = WaveFreq * 3.0 ;
+		wave3.amp = WaveAmp * 0.75;
+		wave3.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
 
-	angle -= 20;
-	wave1.freq = WaveFreq * 2.0 ;
-	wave1.amp = waveamp * 1.25;
-	wave1.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
+		// sum waves
 
-	angle += 35;
-	wave2.freq = WaveFreq * 3.5;
-	wave2.amp = waveamp * 0.75;
-	wave2.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
+		ddx = 0.0, ddy = 0.0;
+		sumWaves(WaveAngle, -1.5, windScale, WaveFactor, ddx, ddy);
 
-	angle -= 45;
-	wave3.freq = WaveFreq * 3.0 ;
-	wave3.amp = waveamp * 0.75;
-	wave3.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
+		ddx1 = 0.0, ddy1 = 0.0;
+		sumWaves(WaveAngle, 1.5, windScale, WaveFactor, ddx1, ddy1);
 
-	float ddx2 = 0.0, ddy2 = 0.0;
-	sumWaves(WaveAngle + WaveDAngle, -1.5, windScale, WaveFactor, ddx2, ddy2);
+		//reset the waves
+		angle = 0.0;
+		waveamp = WaveAmp * 0.75;
 
-	float ddx3 = 0.0, ddy3 = 0.0;
-	sumWaves(WaveAngle + WaveDAngle, 1.5, windScale, WaveFactor, ddx3, ddy3);
+		wave0.freq = WaveFreq ;
+		wave0.amp = waveamp;
+		wave0.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
 
-	// end sine stuff
+		angle -= 20;
+		wave1.freq = WaveFreq * 2.0 ;
+		wave1.amp = waveamp * 1.25;
+		wave1.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
+
+		angle += 35;
+		wave2.freq = WaveFreq * 3.5;
+		wave2.amp = waveamp * 0.75;
+		wave2.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
+
+		angle -= 45;
+		wave3.freq = WaveFreq * 3.0 ;
+		wave3.amp = waveamp * 0.75;
+		wave3.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
+
+		// sum waves
+		ddx2 = 0.0, ddy2 = 0.0;
+		sumWaves(WaveAngle + WaveDAngle, -1.5, windScale, WaveFactor, ddx2, ddy2);
+
+		ddx3 = 0.0, ddy3 = 0.0;
+		sumWaves(WaveAngle + WaveDAngle, 1.5, windScale, WaveFactor, ddx3, ddy3);
+
+		ddxVec = vec4(ddx, ddx1, ddx2, ddx3);
+		ddyVec = vec4(ddy, ddy1, ddy2, ddy3);
+
+		//toggle detailFlag
+		detailFlag = 1;
+		}	// end sine stuff
+
+	float ddxSum = dot(ddxVec, AllOnes);
+	float ddySum = dot(ddyVec, AllOnes);
 
 	if (Status == 1){
 		cover = min(min(min(min(CloudCover0, CloudCover1),CloudCover2),CloudCover3),CloudCover4);
@@ -228,15 +260,10 @@ void main(void)
 				}
 		}
 
-	vec4 viewt = normalize(waterTex4);
+//	vec4 viewt = normalize(waterTex4);
+	vec4 viewt = vec4(-E, 0.0) * 0.6;
 
 	vec4 disdis = texture2D(water_dudvmap, vec2(waterTex2 * tscale)* windScale) * 2.0 - 1.0;
-
-	//vec4 dist   = texture2D(water_dudvmap, vec2(waterTex1 + disdis*sca2)* windScale) * 2.0 - 1.0;
-	//dist *= (0.6 + 0.5 * smoothstep(0.0, 15.0, windEffect));
-	//vec4 fdist  = normalize(dist);
-	//fdist = -fdist; //dds fix
-	//fdist *= sca;
 
 	//normalmaps
 	vec4 nmap   = texture2D(water_normalmap, vec2(waterTex1 + disdis * sca2) * windScale) * 2.0 - 1.0;
@@ -251,18 +278,21 @@ void main(void)
 
 	// mix water and noise, modulated by factor
 	vec4 vNorm = normalize(mix(nmap, nmap1, mixFactor) * waveRoughness);
-	vNorm.r += ddx + ddx1 + ddx2 + ddx3;
+	vNorm.r += ddxSum;
 	vNorm = -vNorm;		//dds fix
 
 	//load reflection
 	vec4 tmp = vec4(lightdir, 0.0);
-	vec4 refTex = texture2D(water_reflection, vec2(tmp)) ;
-	vec4 refTexGrey = texture2D(water_reflection_grey, vec2(tmp)) ;
+	vec4 refTex = texture2D(water_reflection, vec2(tmp  + waterTex1) * 32.0) ;
+	vec4 refTexGrey = texture2D(water_reflection_grey, vec2(tmp * waterTex1)) ;
 	vec4 refl ;
-	//    cover = 0;
+
+	// Test data
+	// cover = 0;
 
 	if(cover >= 1.5){
-		refl= normalize(refTex);
+		refl = normalize(refTex);
+		refl.a = 1.0;
 		}
 	else
 		{
@@ -270,9 +300,8 @@ void main(void)
 		refl.r *= (0.75 + 0.15 * cover);
 		refl.g *= (0.80 + 0.15 * cover);
 		refl.b *= (0.875 + 0.125 * cover);
-		refl.a  *= 1.0;
+		refl.a  = 1.0;
 		}
-
 
 	vec3 N0 = vec3(texture2D(water_normalmap, vec2(waterTex1 + disdis * sca2) * windScale) * 2.0 - 1.0);
 	vec3 N1 = vec3(texture2D(perlin_normalmap, vec2(waterTex1 + disdis * sca) * windScale) * 2.0 - 1.0);
@@ -288,19 +317,24 @@ void main(void)
 	N0 += vec3(texture2D(water_normalmap, vec2(waterTex1 * RotationMatrix + disdis * sca2) * windScale) * 2.0 - 1.0);
 	N1 += vec3(texture2D(perlin_normalmap, vec2(waterTex1 * RotationMatrix + disdis * sca) * windScale) * 2.0 - 1.0);
 
-	N0 *= windEffect_low;
-	N1 *= windEffect_low;
+	if(detailFlag > 0)
+		{
+			N0 *= windEffect_low;
+			N1 *= windEffect_low;
+			//N0.r += (ddx + ddx1 + ddx2 + ddx3);
+			//N0.g += (ddy + ddy1 + ddy2 + ddy3);
 
-	N0.r += (ddx + ddx1 + ddx2 + ddx3);
-	N0.g += (ddy + ddy1 + ddy2 + ddy3);
+			N0.r += ddxSum;
+			N0.g += ddySum;
 
-	vec3 N = normalize(mix(Normal + N0, Normal + N1, mixFactor) * waveRoughness);
+			Normal = normalize(mix(Normal + N0, Normal + N1, mixFactor) * waveRoughness);
+			Normal = -Normal; //dds fix
+		}
 
-	N = -N; //dds fix
 
 	// specular
 	vec3 specular_color = vec3(gl_LightSource[0].diffuse)
-		* pow(max(0.0, dot(N, H)), water_shininess) * 6.0;
+						  * pow(max(0.0, dot(Normal, H)), water_shininess) * 6.0;
 	vec4 specular = vec4(specular_color, 0.5);
 
 	specular = specular * saturation * 0.3 ;
@@ -309,15 +343,6 @@ void main(void)
 	vec4 invfres = vec4( dot(vNorm, viewt) );
 	vec4 fres = vec4(1.0) + invfres;
 	refl *= fres;
-
-	//calculate the fog factor
-	//     float fogFactor;
-	//     float fogCoord = ecPosition.z;
-	//     const float LOG2 = 1.442695;
-	//     fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
-	//
-	//     if(gl_Fog.density == 1.0)
-	//         fogFactor=1.0;
 
 	//calculate final colour
 	vec4 ambient_light = gl_LightSource[0].diffuse;
@@ -330,41 +355,26 @@ void main(void)
 		}
 
 	//add foam
-
-	float foamSlope = 0.10 + 0.1 * windScale;
-	//float waveSlope = mix(N0.g, N1.g, 0.25);
-
 	vec4 foam_texel = texture2D(sea_foam, vec2(waterTex2 * tscale) * 25.0);
-	float waveSlope = N.g;
+	if (range > -10000.0){
 
-	if (windEffect >= 8.0)
-		if (waveSlope >= foamSlope){
-			finalColor = mix(finalColor, max(finalColor, finalColor + foam_texel), smoothstep(0.01, 0.50, N.g));
+		float foamSlope = 0.1 + 0.1 * windScale;
+		//float waveSlope = mix(N0.g, N1.g, 0.25);
+		float waveSlope = Normal.g;
+
+		if (windEffect >= 8.0)
+
+			if (waveSlope >= foamSlope){
+				finalColor = mix(finalColor, max(finalColor, finalColor + foam_texel),
+											  smoothstep(0.01, 0.50, Normal.g));
 			}
 
-		//   float deltaN0 = 1.0 - N0.g;
-		//float deltaN1 = 1.0 - N1.g;
-		//if (windEffect >= 8.0){
-		//	if (N0.g >= foamSlope){
-		//		if (deltaN0 > 0.8){
-		//			finalColor = mix(finalColor, max(finalColor,  finalColor + foam_texel), smoothstep(0.01, 0.50, N0.g));
-		//		} else {
-		//			finalColor = mix(finalColor, max(finalColor,  finalColor + foam_texel), smoothstep(0.15, 0.25, deltaN0));
-		//		}
-		//	}
-		//	if (N1.g >= foamSlope){
-		//		if (deltaN1 > 0.85){
-		//			finalColor = mix(finalColor, max(finalColor,  finalColor + foam_texel), smoothstep(0.01, 0.13, N1.g));
-		//		} else {
-		//			finalColor = mix(finalColor, max(finalColor,  finalColor + foam_texel), smoothstep(0.01, 0.20, deltaN1));
-		//		}
-		//	}
-		//}
+	} // end range
 
 
-		finalColor *= ambient_light;
+	finalColor *= ambient_light;
 
-		//gl_FragColor = mix(gl_Fog.color, finalColor, fogFactor);
-		finalColor.rgb = fog_Func(finalColor.rgb, fogType);
-		gl_FragColor = finalColor;
+	//gl_FragColor = mix(gl_Fog.color, finalColor, fogFactor);
+	finalColor.rgb = fog_Func(finalColor.rgb, fogType);
+	gl_FragColor = finalColor;
 	}

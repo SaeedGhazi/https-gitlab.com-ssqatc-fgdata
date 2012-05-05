@@ -11,9 +11,6 @@
 			<internal-format>normalized</internal-format>
 		</texture>
 		<texture n="2">
-			<!--<image>Textures/Water/water-normalmap.png</image>-->
-			<!--<image>Textures/Water/water-normalmap2.dds</image>-->
-				<!--<image>Textures/Water/water_sine_nmap.dds</image>-->
 			<image>Textures/Water/waves-ver10-nm.dds</image>
 			<filter>linear-mipmap-linear</filter>
 			<wrap-s>repeat</wrap-s>
@@ -21,11 +18,7 @@
 			<internal-format>normalized</internal-format>
 		</texture>
 		<texture n="3">
-			<!--<image>Textures/Water/water-dudv.png</image>-->
-			<!--<image>Textures/Water/dudvmap2.png</image>-->
-			<!--<image>Textures/Water/waves-ver10-dudv.dds</image>-->
-			<!--<image>Textures/Water/water-reflection-grey.png</image>-->
-				<image>Textures/Water/water_sine_nmap.dds</image>
+			<image>Textures/Water/water_sine_nmap.dds</image>
 			<filter>linear-mipmap-linear</filter>
 			<wrap-s>repeat</wrap-s>
 			<wrap-t>repeat</wrap-t>
@@ -47,7 +40,6 @@
 		</texture>
 		<texture n="6">
 			<image>Textures/Water/perlin-noise-nm.dds</image>
-<!-- 			<image>Textures/Water/water_sine_nmap.dds</image> -->
 			<filter>linear-mipmap-linear</filter>
 			<wrap-s>repeat</wrap-s>
 			<wrap-t>repeat</wrap-t>
@@ -77,18 +69,12 @@
 		<cloud-cover n="4">
 			<use>/environment/clouds/layer[4]/coverage-type</use>
 		</cloud-cover>
-		<!--<wind>
-			<use>/environment/wind-speed-kt</use>
-		</wind>-->
 		<windE>
 			<use>/environment/sea/surface/wind-from-east-fps</use>
 		</windE>
 		<windN>
 			<use>/environment/sea/surface/wind-from-north-fps</use>
 		</windN>
-		<!--wind-from> unused?
-			<use>/environment/config/boundary/entry[0]/wind-from-heading-deg</use>
-		</wind-from-->
 		<WaveFreq>
 			<use>/environment/wave/freq</use>
 		</WaveFreq>
@@ -109,50 +95,74 @@
 		</WaveDAngle>
 
 		<!-- 	fog include -->
-		<visibility><use>/environment/ground-visibility-m</use></visibility>
-		<avisibility><use>/environment/visibility-m</use></avisibility>
-		<lthickness><use>/environment/ground-haze-thickness-m</use></lthickness>
-		<scattering><use>/rendering/scene/scattering</use></scattering>
-		<ground_scattering><use>/environment/surface/scattering</use></ground_scattering>
-		<terminator><use>/environment/terminator-relative-position-m</use></terminator>
-		<terrain_alt><use>/environment/mean-terrain-elevation-m</use></terrain_alt>
-    		<overcast><use>/rendering/scene/overcast</use></overcast>
-    		<eye_alt><use>/sim/rendering/eye-altitude-m</use></eye_alt>
+		<visibility>
+			<use>/environment/ground-visibility-m</use>
+		</visibility>
+		<avisibility>
+			<use>/environment/visibility-m</use>
+		</avisibility>
+		<lthickness>
+			<use>/environment/ground-haze-thickness-m</use>
+		</lthickness>
+		<scattering>
+			<use>/rendering/scene/scattering</use>
+		</scattering>
+		<ground_scattering>
+			<use>/environment/surface/scattering</use>
+		</ground_scattering>
+		<terminator>
+			<use>/environment/terminator-relative-position-m</use>
+		</terminator>
+		<terrain_alt>
+			<use>/environment/mean-terrain-elevation-m</use>
+		</terrain_alt>
+		<overcast>
+			<use>/rendering/scene/overcast</use>
+		</overcast>
+		<eye_alt>
+			<use>/sim/rendering/eye-altitude-m</use>
+		</eye_alt>
 		<fogtype>
 			<use>/sim/rendering/shaders/skydome</use>
 		</fogtype>
 		<!-- sea colors -->
-		<sea_r><use>/environment/sea/color_r</use></sea_r>
-		<sea_g><use>/environment/sea/color_g</use></sea_g>
-		<sea_b><use>/environment/sea/color_b</use></sea_b>
+		<sea_r>
+			<use>/environment/sea/color_r</use>
+		</sea_r>
+		<sea_g>
+			<use>/environment/sea/color_g</use>
+		</sea_g>
+		<sea_b>
+			<use>/environment/sea/color_b</use>
+		</sea_b>
 
-		<!-- 	END fog include -->
+		<!-- END fog include -->
 	</parameters>
 
 
-<technique n="3">
- <predicate>
-      <and>
-        <property>/sim/rendering/shaders/skydome</property>
-	<less-equal>
-		<value type="float">4.0</value>
-		<float-property>/sim/rendering/shaders/water</float-property>
-	</less-equal>
-        <or>
-          <less-equal>
-            <value type="float">2.0</value>
-            <glversion/>
-          </less-equal>
-          <and>
-            <extension-supported>GL_ARB_shader_objects</extension-supported>
-            <extension-supported>GL_ARB_shading_language_100</extension-supported>
-            <extension-supported>GL_ARB_vertex_shader</extension-supported>
-            <extension-supported>GL_ARB_fragment_shader</extension-supported>
-          </and>
-        </or>
-      </and>
-    </predicate>
-		
+	<technique n="3">
+		<predicate>
+			<and>
+				<property>/sim/rendering/shaders/skydome</property>
+				<less-equal>
+					<value type="float">4.0</value>
+					<float-property>/sim/rendering/shaders/water</float-property>
+				</less-equal>
+				<or>
+					<less-equal>
+						<value type="float">2.0</value>
+						<glversion/>
+					</less-equal>
+					<and>
+						<extension-supported>GL_ARB_shader_objects</extension-supported>
+						<extension-supported>GL_ARB_shading_language_100</extension-supported>
+						<extension-supported>GL_ARB_vertex_shader</extension-supported>
+						<extension-supported>GL_ARB_fragment_shader</extension-supported>
+					</and>
+				</or>
+			</and>
+		</predicate>
+
 		<pass>
 			<lighting>true</lighting>
 			<material>
@@ -201,10 +211,6 @@
 					<use>texture[0]/internal-format</use>
 				</internal-format>
 			</texture-unit>-->
-			<!--<texture-unit>
-	  			<unit>1</unit>
-	  			<type>noise</type>
-     			 </texture-unit>-->
 			<texture-unit>
 				<unit>2</unit>
 				<image>
@@ -297,9 +303,7 @@
 			</texture-unit>
 
 			<program>
-<!-- 				<vertex-shader>Shaders/include_fog.vert</vertex-shader> -->
 				<vertex-shader>Shaders/water_lightfield.vert</vertex-shader>
-				<!--<fragment-shader>Shaders/include_fog.frag</fragment-shader>-->
 				<fragment-shader>Shaders/water_lightfield.frag</fragment-shader>
 			</program>
 			<!--<uniform>
@@ -307,11 +311,6 @@
 				<type>sampler-2d</type>
 				<value type="int">0</value>
 			</uniform>-->
-  			<!--<uniform>
-				<name>Noise</name>
-				<type>sampler-3d</type>
-				<value type="int">1</value>
-      			</uniform>-->
 			<uniform>
 				<name>water_normalmap</name>
 				<type>sampler-2d</type>
@@ -322,11 +321,6 @@
 				<type>sampler-2d</type>
 				<value type="int">3</value>
 			</uniform>
-			<!--<uniform>
-				<name>water_reflection_grey</name>
-				<type>sampler-2d</type>
-				<value type="int">4</value>
-			</uniform>-->
 			<uniform>
 				<name>sea_foam</name>
 				<type>sampler-2d</type>
@@ -341,57 +335,10 @@
 				<name>saturation</name>
 				<type>float</type>
 				<!--<value>0.4</value>-->
-				<value><use>saturation</use></value>
-			</uniform>
-			<!--<uniform>
-				<name>CloudCover0</name>
-				<type>float</type>
 				<value>
-					<use>cloud-cover[0]</use>
+					<use>saturation</use>
 				</value>
 			</uniform>
-			<uniform>
-				<name>CloudCover1</name>
-				<type>float</type>
-				<value>
-					<use>cloud-cover[1]</use>
-				</value>
-			</uniform>
-			<uniform>
-				<name>CloudCover2</name>
-				<type>float</type>
-				<value>
-					<use>cloud-cover[2]</use>
-				</value>
-			</uniform>
-			<uniform>
-				<name>CloudCover3</name>
-				<type>float</type>
-				<value>
-					<use>cloud-cover[3]</use>
-				</value>
-			</uniform>
-			<uniform>
-				<name>CloudCover4</name>
-				<type>float</type>
-				<value>
-					<use>cloud-cover[4]</use>
-				</value>
-			</uniform>
-			<uniform>
-				<name>Status</name>
-				<type>int</type>
-				<value>
-					<use>status</use>
-				</value>
-			</uniform>-->
-			<!--<uniform>
-				<name>Overcast</name>
-				<type>float</type>
-				<value>
-					<use>overcast</use>
-				</value>
-			</uniform>-->
 			<uniform>
 				<name>WindE</name>
 				<type>float</type>
@@ -406,13 +353,6 @@
 					<use>windN</use>
 				</value>
 			</uniform>
-			<!-- uniform> unused?
-				<name>WindFrom</name>
-				<type>float</type>
-				<value>
-					<use>wind-from</use>
-				</value>
-			</uniform-->
 			<uniform>
 				<name>WaveFreq</name>
 				<type>float</type>
@@ -458,7 +398,7 @@
 
 
 
-			<!-- 	    BEGIN fog include -->
+			<!-- BEGIN fog include -->
 			<uniform>
 				<name>visibility</name>
 				<type>float</type>
@@ -488,10 +428,12 @@
 				</value>
 			</uniform>
 			<uniform>
-  	      			<name>ground_scattering</name>
-       				<type>float</type>
-        			<value><use>ground_scattering</use></value>
-      			</uniform>
+				<name>ground_scattering</name>
+				<type>float</type>
+				<value>
+					<use>ground_scattering</use>
+				</value>
+			</uniform>
 			<uniform>
 				<name>terminator</name>
 				<type>float</type>
@@ -500,47 +442,49 @@
 				</value>
 			</uniform>
 			<uniform>
-        			<name>terrain_alt</name>
-      				 <type>float</type>
-    				 <value><use>terrain_alt</use></value>
-     			 </uniform>
-     			 <uniform>
-      				 <name>overcast</name>
-       				 <type>float</type>
-       				 <value><use>overcast</use></value>
-      			</uniform>
-    			 <uniform>
-     				  <name>eye_alt</name>
-       				  <type>float</type>
-        			  <value><use>eye_alt</use></value>
-      			</uniform>
+				<name>terrain_alt</name>
+				<type>float</type>
+				<value>
+					<use>terrain_alt</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>overcast</name>
+				<type>float</type>
+				<value>
+					<use>overcast</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>eye_alt</name>
+				<type>float</type>
+				<value>
+					<use>eye_alt</use>
+				</value>
+			</uniform>
 			<!-- sea colors -->
 			<uniform>
-     				  <name>sea_r</name>
-       				  <type>float</type>
-        			  <value><use>sea_r</use></value>
-      			</uniform>
-			<uniform>
-     				  <name>sea_g</name>
-       				  <type>float</type>
-        			  <value><use>sea_g</use></value>
-      			</uniform>
-			<uniform>
-     				  <name>sea_b</name>
-       				  <type>float</type>
-        			  <value><use>sea_b</use></value>
-      			</uniform>
-
-
-
-			<!--<uniform>
-				<name>fogType</name>
-				<type>int</type>
+				<name>sea_r</name>
+				<type>float</type>
 				<value>
-					<use>fogtype</use>
+					<use>sea_r</use>
 				</value>
-			</uniform>-->
-			<!-- 			END fog include -->
+			</uniform>
+			<uniform>
+				<name>sea_g</name>
+				<type>float</type>
+				<value>
+					<use>sea_g</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>sea_b</name>
+				<type>float</type>
+				<value>
+					<use>sea_b</use>
+				</value>
+			</uniform>
+			<!-- END fog include -->
 		</pass>
 	</technique>
 
@@ -598,6 +542,7 @@
 					<use>render-bin/bin-name</use>
 				</bin-name>
 			</render-bin>
+			
 			<texture-unit>
 				<unit>0</unit>
 				<image>
@@ -616,7 +561,6 @@
 					<use>texture[0]/internal-format</use>
 				</internal-format>
 			</texture-unit>
-
 			<texture-unit>
 				<unit>2</unit>
 				<image>
@@ -709,7 +653,6 @@
 			</texture-unit>
 
 			<program>
-<!-- 				<vertex-shader>Shaders/include_fog.vert</vertex-shader> -->
 				<vertex-shader>Shaders/water.vert</vertex-shader>
 				<fragment-shader>Shaders/include_fog.frag</fragment-shader>
 				<fragment-shader>Shaders/water_sine.frag</fragment-shader>
@@ -719,7 +662,6 @@
 				<type>sampler-2d</type>
 				<value type="int">0</value>
 			</uniform>
-
 			<uniform>
 				<name>water_normalmap</name>
 				<type>sampler-2d</type>
@@ -749,7 +691,9 @@
 				<name>saturation</name>
 				<type>float</type>
 				<!--<value>0.4</value>-->
-				<value><use>saturation</use></value>
+				<value>
+					<use>saturation</use>
+				</value>
 			</uniform>
 			<uniform>
 				<name>CloudCover0</name>
@@ -815,13 +759,6 @@
 					<use>windN</use>
 				</value>
 			</uniform>
-			<!-- uniform> unused?
-				<name>WindFrom</name>
-				<type>float</type>
-				<value>
-					<use>wind-from</use>
-				</value>
-			</uniform-->
 			<uniform>
 				<name>WaveFreq</name>
 				<type>float</type>
@@ -865,9 +802,7 @@
 				</value>
 			</uniform>
 
-
-
-			<!-- 	    BEGIN fog include -->
+			<!-- BEGIN fog include -->
 			<uniform>
 				<name>visibility</name>
 				<type>float</type>
@@ -910,7 +845,7 @@
 					<use>fogtype</use>
 				</value>
 			</uniform>
-			<!-- 			END fog include -->
+			<!-- END fog include -->
 		</pass>
 	</technique>
 	<technique n="9">
@@ -1075,7 +1010,6 @@
 			</texture-unit>
 
 			<program>
-<!-- 				<vertex-shader>Shaders/include_fog.vert</vertex-shader> -->
 				<vertex-shader>Shaders/water.vert</vertex-shader>
 				<fragment-shader>Shaders/include_fog.frag</fragment-shader>
 				<fragment-shader>Shaders/water.frag</fragment-shader>

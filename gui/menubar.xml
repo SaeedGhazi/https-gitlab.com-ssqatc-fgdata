@@ -3,7 +3,6 @@
 
 	<menu>
 		<name>file</name>
-		<label>File</label>
 <!--
 		<item>
 			<label>Load Flight</label>
@@ -25,7 +24,6 @@
 -->
 		<item>
 			<name>reset</name>
-			<label>Reset</label>
 			<key>Shift-Esc</key>
 			<binding>
 				<command>reset</command>
@@ -42,7 +40,6 @@
 -->
 		<item>
 			<name>snap-shot</name>
-			<label>Screenshot  </label>
 			<key>F3</key>
 			<binding>
 				<command>nasal</command>
@@ -55,7 +52,6 @@
 
 		<item>
 			<name>snap-shot-dir</name>
-			<label>Screenshot Directory</label>
 			<binding>
 				<command>nasal</command>
 				<script>gui.set_screenshotdir()</script>
@@ -64,7 +60,6 @@
 
 		<item>
 			<name>sound-config</name>
-			<label>Sound Configuration</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>sound-dialog</dialog-name>
@@ -73,7 +68,6 @@
 
 		<item>
 			<name>exit</name>
-			<label>Quit          </label>
 			<key>Esc</key>
 			<binding>
 				<command>dialog-show</command>
@@ -84,11 +78,9 @@
 
 	<menu>
 		<name>view</name>
-		<label>View</label>
 
 		<item>
 			<name>display-options</name>
-			<label>Display Options</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>display</dialog-name>
@@ -97,7 +89,6 @@
 
 		<item>
 			<name>rendering-options</name>
-			<label>Rendering Options</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>rendering</dialog-name>
@@ -106,7 +97,6 @@
 
 		<item>
 			<name>view-options</name>
-			<label>View Options</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>view</dialog-name>
@@ -115,7 +105,6 @@
 
 		<item>
 			<name>cockpit-view-options</name>
-			<label>Cockpit View Options</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>cockpit-view</dialog-name>
@@ -124,7 +113,6 @@
 
 		<item>
 			<name>adjust-lod</name>
-			<label>Adjust LOD Ranges</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>static-lod</dialog-name>
@@ -133,7 +121,6 @@
 
 		<item>
 			<name>pilot-offset</name>
-			<label>Adjust View Position</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>pilot_offset</dialog-name>
@@ -142,7 +129,6 @@
 
 		<item>
 			<name>adjust-hud</name>
-			<label>Adjust HUD Properties</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>hud</dialog-name>
@@ -151,7 +137,6 @@
 
 		<item>
 			<name>toggle-glide-slope</name>
-			<label>Toggle Glide Slope Tunnel</label>
 			<binding>
 				<command>nasal</command>
 				<script>
@@ -164,7 +149,6 @@
 
 		<item>
 			<name>replay</name>
-			<label>Instant Replay</label>
 			<key>Ctrl-R</key>
 			<binding>
 				<command>replay</command>
@@ -177,7 +161,6 @@
 
 		<item>
 			<name>stereoscopic-options</name>
-			<label>Stereoscopic View Options</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>stereoscopic-view-options</dialog-name>
@@ -187,11 +170,9 @@
 
 	<menu>
 		<name>location</name>
-		<label>Location</label>
 
 		<item>
 			<name>position-on-ground</name>
-			<label>Position Aircraft On Ground</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>location-on-ground</dialog-name>
@@ -200,7 +181,6 @@
 
 		<item>
 			<name>position-in-air</name>
-			<label>Position Aircraft In Air</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>location-in-air</dialog-name>
@@ -208,7 +188,6 @@
 		</item>
 
 		<item>
-			<label>Select Airport From List</label>
 			<name>goto-airport</name>
 			<binding>
 				<command>dialog-show</command>
@@ -217,7 +196,6 @@
 		</item>
 
 		<item>
-			<label>Random Attitude</label>
 			<name>random-attitude</name>
 			<binding>
 				<command>property-assign</command>
@@ -246,7 +224,6 @@
 
 		<item>
 			<name>tower-position</name>
-			<label>Tower Position</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>location-of-tower</dialog-name>
@@ -256,11 +233,9 @@
 	</menu>
 
 	<menu>
-		<label>Autopilot</label>
 		<name>autopilot</name>
 
 		<item>
-			<label>Autopilot Settings</label>
 			<key>F11</key>
 			<name>autopilot-settings</name>
 			<binding>
@@ -270,7 +245,6 @@
 		</item>
 
 		<item>
-			<label>Route Manager</label>
 			<name>route-manager</name>
 			<binding>
 				<command>dialog-show</command>
@@ -279,7 +253,6 @@
 		</item>
 
 		<item>
-			<label>Previous Waypoint</label>
 			<name>previous-waypoint</name>
 			<binding>
 				<command>nasal</command>
@@ -288,7 +261,6 @@
 		</item>
 
 		<item>
-			<label>Next Waypoint</label>
 			<name>next-waypoint</name>
 			<binding>
 				<command>nasal</command>
@@ -298,11 +270,9 @@
 	</menu>
 
 	<menu>
-		<label>Environment</label>
 		<name>environment</name>
 
 		<item>
-			<label>Weather</label>
 			<name>global-weather</name>
 			<binding>
 				<condition>
@@ -321,7 +291,6 @@
 		</item>
 
 		<item>
-			<label>Time Settings</label>
 			<name>time-settings</name>
 			<binding>
 				<command>dialog-show</command>
@@ -330,7 +299,6 @@
 		</item>
 
 		<item>
-			<label>Wildfire Settings</label>
 			<name>wildfire-settings</name>
 			<binding>
 				<command>nasal</command>
@@ -339,7 +307,6 @@
 		</item>
 
 		<item>
-			<label>Scenery Download</label>
 			<name>terrasync</name>
 			<binding>
 				<command>dialog-show</command>
@@ -350,11 +317,9 @@
 	</menu>
 
 	<menu>
-		<label>Equipment</label>
 		<name>equipment</name>
 
 		<item>
-			<label>Map</label>
 			<name>map</name>
 			<binding>
 				<command>dialog-show</command>
@@ -363,7 +328,6 @@
 		</item>
 
 		<item>
-			<label>Stopwatch</label>
 			<name>stopwatch</name>
 			<binding>
 				<command>dialog-show</command>
@@ -372,7 +336,6 @@
 		</item>
 
 		<item>
-			<label>Fuel And Payload</label>
 			<name>fuel-and-payload</name>
 			<binding>
 				<command>nasal</command>
@@ -381,7 +344,6 @@
 		</item>
 
 		<item>
-			<label>Radio Settings</label>
 			<key>F12</key>
 			<name>radio</name>
 			<binding>
@@ -391,7 +353,6 @@
 		</item>
 
 		<item>
-			<label>GPS Settings</label>
 			<name>gps</name>
 			<binding>
 				<command>dialog-show</command>
@@ -400,7 +361,6 @@
 		</item>
 
 		<item>
-			<label>Instrument Settings</label>
 			<name>instrument-settings</name>
 			<binding>
 				<command>dialog-show</command>
@@ -410,12 +370,10 @@
 
 		<item>
 			<name>failure-submenu</name>
-			<label> --- Failures ---</label>
 			<enabled>false</enabled>
 		</item>
 
 		<item>
-			<label>Random Failures</label>
 			<name>random-failures</name>
 			<binding>
 				<command>dialog-show</command>
@@ -424,7 +382,6 @@
 		</item>
 
 		<item>
-			<label>System Failures</label>
 			<name>system-failures</name>
 			<binding>
 				<command>dialog-show</command>
@@ -433,7 +390,6 @@
 		</item>
 
 		<item>
-			<label>Instrument Failures</label>
 			<name>instrument-failures</name>
 			<binding>
 				<command>dialog-show</command>
@@ -444,10 +400,8 @@
 
 	<menu>
 		<name>ai</name>
-		<label>AI</label>
 
 		<item>
-			<label>Traffic and Scenario Settings</label>
 			<name>scenario</name>
 			<binding>
 				<command>dialog-show</command>
@@ -456,7 +410,6 @@
 		</item>
 
 		<item>
-			<label>ATC Services in Range</label>
 			<name>atc-in-range</name>
 			<binding>
 				<command>ATC-freq-search</command>
@@ -464,7 +417,6 @@
 		</item>
 
 		<item>
-			<label>Wingman Controls</label>
 			<name>wingman</name>
 			<binding>
 				<command>dialog-show</command>
@@ -473,7 +425,6 @@
 		</item>
 
 		<item>
-			<label>Tanker Controls</label>
 			<name>tanker</name>
 			<enabled>false</enabled>
 			<binding>
@@ -483,7 +434,6 @@
 		</item>
 
 		<item>
-			<label>Carrier Controls</label>
 			<name>carrier</name>
 			<binding>
 				<command>dialog-show</command>
@@ -492,7 +442,6 @@
 		</item>
 
 		<item>
-			<label>Jetway Settings</label>
 			<name>jetway</name>
 			<binding>
 				<command>dialog-show</command>
@@ -503,11 +452,9 @@
 	</menu>
 
 	<menu>
-		<label>Multiplayer</label>
 		<name>multiplayer</name>
 
 		<item>
-			<label>Multiplayer Settings</label>
 			<name>mp-settings</name>
 			<binding>
 				<command>dialog-show</command>
@@ -516,7 +463,6 @@
 		</item>
 
 		<item>
-			<label>Chat Dialog</label>
 			<name>mp-chat</name>
 			<binding>
 				<command>dialog-show</command>
@@ -525,7 +471,6 @@
 		</item>
 
 		<item>
-			<label>Chat Menu</label>
 			<key>-</key>
 			<name>mp-chat-menu</name>
 			<binding>
@@ -535,7 +480,6 @@
 		</item>
 
 		<item>
-			<label>Pilot List</label>
 			<name>mp-list</name>
 			<binding>
 				<command>nasal</command>
@@ -544,7 +488,6 @@
 		</item>
 
 		<item>
-			<label>MPCarrier Selection</label>
 			<name>mp-carrier</name>
 			<binding>
 				<command>nasal</command>
@@ -562,11 +505,9 @@
 
 	<menu>
 		<name>debug</name>
-		<label>Debug</label>
 
 		<item>
 			<name>reload-gui</name>
-			<label>Reload GUI</label>
 			<binding>
 				<command>reinit</command>
 				<subsystem>gui</subsystem>
@@ -575,7 +516,6 @@
 
 		<item>
 			<name>reload-input</name>
-			<label>Reload Input</label>
 			<binding>
 				<command>reinit</command>
 				<subsystem>input</subsystem>
@@ -584,7 +524,6 @@
 
 		<item>
 			<name>reload-hud</name>
-			<label>Reload HUD</label>
 			<binding>
 				<command>reinit</command>
 				<subsystem>hud</subsystem>
@@ -593,7 +532,6 @@
 
 		<item>
 			<name>reload-panel</name>
-			<label>Reload Panel</label>
 			<binding>
 				<command>panel-load</command>
 			</binding>
@@ -601,7 +539,6 @@
 
 		<item>
 			<name>reload-autopilot</name>
-			<label>Reload Autopilot</label>
 			<binding>
 				<command>reinit</command>
 				<subsystem>xml-autopilot</subsystem>
@@ -610,7 +547,6 @@
 
 		<item>
 			<name>reload-network</name>
-			<label>Reload Network</label>
 			<binding>
 				<command>reinit</command>
 				<subsystem>io</subsystem>
@@ -619,7 +555,6 @@
 
 		<item>
 			<name>nasal-console</name>
-			<label>Nasal Console</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>nasal-console</dialog-name>
@@ -628,7 +563,6 @@
 
 		<item>
 			<name>development-keys</name>
-			<label>Development Keys</label>
 			<binding>
 				<command>nasal</command>
 				<script>gui.showHelpDialog("/sim/help/debug")</script>
@@ -637,7 +571,6 @@
 
 		<item>
 			<name>configure-dev-extension</name>
-			<label>Configure Development Extensions</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>devel-extensions</dialog-name>
@@ -646,7 +579,6 @@
 
 		<item>
 			<name>display-marker</name>
-			<label>Display Tutorial Marker</label>
 			<binding>
 				<command>nasal</command>
 				<script>
@@ -658,7 +590,6 @@
 
 		<item>
 			<name>dump-scene-graph</name>
-			<label>Dump Scene Graph</label>
 			<binding>
 				<command>dump-scenegraph</command>
 			</binding>
@@ -666,7 +597,6 @@
 
 		<item>
 			<name>print-rendering-statistics</name>
-			<label>Print Rendering Statistics</label>
 			<binding>
 				<command>property-assign</command>
 				<property>/sim/rendering/print-statistics</property>
@@ -676,7 +606,6 @@
 
 		<item>
 			<name>statistics-display</name>
-			<label>Cycle On-Screen Statistics</label>
 			<binding>
 				<command>property-adjust</command>
 				<property>/sim/rendering/on-screen-statistics</property>
@@ -686,7 +615,6 @@
 
 		<item>
 			<name>performance-monitor</name>
-			<label>Monitor System Performance</label>
 			<binding>
 				<command>property-assign</command>
 				<property>/nasal/performance_monitor/enabled</property>
@@ -700,7 +628,6 @@
 
 		<item>
 			<name>property-browser</name>
-			<label>Browse Internal Properties</label>
 			<binding>
 				<command>nasal</command>
 				<script>gui.property_browser()</script>
@@ -709,7 +636,6 @@
 
 		<item>
 			<name>logging</name>
-			<label>Logging</label>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>logging</dialog-name>
@@ -717,7 +643,6 @@
 		</item>
 
 		<item>
-			<label>Local Weather (Test)</label>
 			<name>local_weather</name>
 			<enabled>false</enabled>
 			<binding>
@@ -728,14 +653,12 @@
 
 		<item>
 			<name>print-scene-info</name>
-			<label>Print Visible Scene Info</label>
 			<binding>
 				<command>print-visible-scene</command>
 			</binding>
 		</item>
 
 		<item>
-			<label>Hide/Show Rendering Buffers</label>
 			<name>rendering-buffers</name>
 			<binding>
 				<command>property-toggle</command>
@@ -747,11 +670,9 @@
 	</menu>
 
 	<menu>
-		<label>Help</label>
 		<name>help</name>
 
 		<item>
-			<label>Help  (opens in browser)</label>
 			<name>help-browser</name>
 			<binding>
 				<command>open-browser</command>
@@ -760,7 +681,6 @@
 		</item>
 
 		<item>
-			<label>Aircraft Help</label>
 			<key>?</key>
 			<name>aircraft-keys</name>
 			<binding>
@@ -770,7 +690,6 @@
 		</item>
 
 		<item>
-			<label>Common Aircraft Keys</label>
 			<name>common-keys</name>
 			<binding>
 				<command>nasal</command>
@@ -779,7 +698,6 @@
 		</item>
 
 		<item>
-			<label>Basic Simulator Keys</label>
 			<name>basic-keys</name>
 			<binding>
 				<command>nasal</command>
@@ -788,7 +706,6 @@
 		</item>
 
 		<item>
-			<label>Joystick Information</label>
 			<name>joystick-info</name>
 			<binding>
 				<command>dialog-show</command>
@@ -802,7 +719,6 @@
 		</item>
 
 		<item>
-			<label>Tutorials</label>
 			<name>tutorial-start</name>
 			<binding>
 				<command>dialog-show</command>
@@ -811,7 +727,6 @@
 		</item>
 
 		<item>
-			<label>About</label>
 			<name>menu-about</name>
 			<binding>
 				<command>dialog-show</command>

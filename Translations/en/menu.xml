@@ -79,7 +79,27 @@
 
 	<!-- Debug menu -->
 	<debug>Debug</debug>
-	<!-- Not translated since options are not useful for end users -->
+	<!-- Note: Debug menu items may not need to be translated
+	     since these options are not useful to end users anyway. -->
+	<reload-gui>Reload GUI</reload-gui>
+	<reload-input>Reload Input</reload-input>
+	<reload-hud>Reload HUD</reload-hud>
+	<reload-panel>Reload Panel</reload-panel>
+	<reload-autopilot>Reload Autopilot</reload-autopilot>
+	<reload-network>Reload Network</reload-network>
+	<nasal-console>Nasal Console</nasal-console>
+	<development-keys>Development Keys</development-keys>
+	<configure-dev-extension>Configure Development Extensions</configure-dev-extension>
+	<display-marker>Display Tutorial Marker</display-marker>
+	<dump-scene-graph>Dump Scene Graph</dump-scene-graph>
+	<print-rendering-statistics>Print Rendering Statistics</print-rendering-statistics>
+	<statistics-display>Cycle On-Screen Statistics</statistics-display>
+	<performance-monitor>Monitor System Performance</performance-monitor>
+	<property-browser>Browse Internal Properties</property-browser>
+	<logging>Logging</logging>
+	<local_weather>Local Weather (Test)</local_weather>
+	<print-scene-info>Print Visible Scene Info</print-scene-info>
+	<rendering-buffers>Hide/Show Rendering Buffers</rendering-buffers>
 
 	<!-- Help menu -->
 	<help>Help</help>

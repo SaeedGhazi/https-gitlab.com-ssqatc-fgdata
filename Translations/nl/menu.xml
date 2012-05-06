@@ -4,41 +4,111 @@
 
 <PropertyList>
 
-	<!--      -->
-	<!-- Menu -->
-	<!--      -->
 	<!-- File menu -->
 	<file>Bestand</file>
-	<save-flight>Huidige situatie bewaren</save-flight>
-	<load-flight>Oude situatie opvragen</load-flight>
-	<reset>Begin situatie herstellen</reset>
-	<hi-res-snap-shot>Hoge resolutie opname</hi-res-snap-shot>
-	<snap-shot>Moment opname                     </snap-shot>
-	<print>Afdrukken</print>
-	<exit>Beëindigen                           </exit>
+	<reset>Opnieuw starten</reset>
+	<snap-shot>Screenshot</snap-shot>
+	<snap-shot-dir>Screenshotmap</snap-shot-dir>
+	<sound-config>Audio instellingen</sound-config>
+	<exit>Afsluiten</exit>
 
 	<!-- View menu -->
-	<view>Visueel</view>
-	<toggle-panel>Paneel zichtbaarheid</toggle-panel>
+	<view>Beeld</view>
+	<display-options>Beeld instellingen</display-options>
+	<rendering-options>Weergave instellingen</rendering-options>
+	<view-options>Zicht instellingen</view-options>
+	<cockpit-view-options>Cockpit zicht instellingen</cockpit-view-options>
+	<adjust-lod>LOD niveaus aanpasssen</adjust-lod>
 	<pilot-offset>Piloot verplaatsen</pilot-offset>
-	<hud-alpha>HUD intensiteit</hud-alpha>
-	<properties>Instellingen</properties>
+	<adjust-hud>HUD aanpassen</adjust-hud>
+	<toggle-glide-slope>Toon/verberg glijpad</toggle-glide-slope>
+	<replay>Herhaling</replay>
+	<stereoscopic-options>Stereoscopische weergaveopties</stereoscopic-options>
 
-	<!-- Environment menu -->
-	<environment>Omgeving</environment>
-	<goto-airport>Ander vliegveld</goto-airport>
+	<!-- Location menu -->
+	<location>Locatie</location>
+	<position-on-ground>Plaats vliegtuig op de grond</position-on-ground>
+	<position-in-air>Plaats vliegtuig in de lucht</position-in-air>
+	<goto-airport>Vliegveld uit een lijst kiezen</goto-airport>
+	<random-attitude>Willekeurige orientatie</random-attitude>
+	<tower-position>Torenpositie</tower-position>
 
 	<!-- Autopilot menu -->
 	<autopilot>Automatische piloot</autopilot>
-	<set-heading>Verander richting</set-heading>
-	<set-altitude>Verander hoogte</set-altitude>
-	<add-waypoint>Tussenstation toevoegen</add-waypoint>
-	<skip-current-waypoint>Tussenstation orverslaan</skip-current-waypoint>
-	<clear-route>Route opschonen</clear-route>
-	<adjust-ap-settings>Verander AP instellingen</adjust-ap-settings>
-	<toggle-hud-format>Verander HUD indeling</toggle-hud-format>
-
+	<autopilot-settings>Autopilot instellingen</autopilot-settings>
+	<route-manager>Route manager</route-manager>
+	<previous-waypoint>Vorig routepunt</previous-waypoint>
+	<next-waypoint>Volgend routepunt</next-waypoint>
+	
+	<!-- Environment menu -->
+	<environment>Omgeving</environment>
+	<global-weather>Weer</global-weather>
+	<time-settings>Tijds instellingen</time-settings>
+	<wildfire-settings>Bosbrand instellingen</wildfire-settings>
+	<terrasync>Scenery downloaden</terrasync>
+	
+	<!-- Equipment menu -->
+	<equipment>Uitrusting</equipment>
+	<map>Kaart</map>
+	<stopwatch>Stopwatch</stopwatch>
+	<fuel-and-payload>Brandstof en vracht</fuel-and-payload>
+	<radio>Radio instellingen</radio>
+	<gps>GPS instellingen</gps>
+	<instrument-settings>Instrument instellingen</instrument-settings>
+	<failure-submenu> --- Storingen ---</failure-submenu>
+	<random-failures>Willekeurige storingen</random-failures>
+	<system-failures>Systeemstoringen</system-failures>
+	<instrument-failures>Instrumentstoringen</instrument-failures>
+	
+	<!-- AI menu -->
+	<ai>AI</ai>
+	<scenario>Verkeer- en scenarioinstellingen</scenario>
+	<atc-in-range>ATC Services in Range</atc-in-range>
+	<wingman>Wingman besturing</wingman>
+	<tanker>Tankvliegtuig besturing</tanker>
+	<carrier>Vliegdekschip besturing</carrier>
+	<jetway>Vliegtuigslurf besturing</jetway>
+	
+	<!-- Multiplayer menu -->
+	<multiplayer>Multiplayer</multiplayer>
+	<mp-settings>Multiplayer instellingen</mp-settings>
+	<mp-chat>Chatvenster</mp-chat>
+	<mp-chat-menu>Chatmenu</mp-chat-menu>
+	<mp-list>Pilotenlijst</mp-list>
+	<mp-carrier>MP vliegdekschip selectie</mp-carrier>
+	
+	<!-- Debug menu -->
+	<debug>Debug</debug>
+	<!-- Note: Debug menu items may not need to be translated
+	     since these options are not useful to end users anyway. -->
+	<reload-gui>GUI herladen</reload-gui>
+	<reload-input>Invoer herladen</reload-input>
+	<reload-hud>HUD herladen</reload-hud>
+	<reload-panel>Paneel herladen</reload-panel>
+	<reload-autopilot>Autopilot herladen</reload-autopilot>
+	<reload-network>Network herladen</reload-network>
+	<nasal-console>Nasal console</nasal-console>
+	<development-keys>Ontwikkelingstoetsen</development-keys>
+	<configure-dev-extension>Ontwikkelingsextensies beheren</configure-dev-extension>
+	<display-marker>Tutorial marker weergeven</display-marker>
+	<dump-scene-graph>Scene graph dumpen</dump-scene-graph>
+	<print-rendering-statistics>Weergave statistieken printen</print-rendering-statistics>
+	<statistics-display>Blader door scherm statiestieken</statistics-display>
+	<performance-monitor>Monitor systeemprestaties</performance-monitor>
+	<property-browser>Blader door interne eigenschappen</property-browser>
+	<logging>Logging</logging>
+	<local_weather>Local weather (test)</local_weather>
+	<print-scene-info>Print zichtbare scene informatie</print-scene-info>
+	<rendering-buffers>Verberg/toon weergave buffers</rendering-buffers>
+	
 	<!-- Help menu -->
-	<help>Hulp</help>
+	<help>Help</help>
+	<help-browser>Help (opent in browser)</help-browser>
+	<aircraft-keys>Vliegtuig help</aircraft-keys>
+	<common-keys>Algemene vliegtuig toetsen</common-keys>
+	<basic-keys>Standaard simulator toetsen</basic-keys>
+	<joystick-info>Joystick informatie</joystick-info>
+	<tutorial-start>Tutorials</tutorial-start>
+	<menu-about>Over...</menu-about>
 
 </PropertyList>

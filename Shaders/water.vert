@@ -9,7 +9,6 @@
 
 varying vec4 waterTex1;
 varying vec4 waterTex2;
-//varying vec4 waterTex4;
 
 varying vec3 viewerdir;
 varying vec3 lightdir;
@@ -34,12 +33,8 @@ void main(void)
 	vec3 N = normalize(gl_Normal);
 	normal = N;
 
-	vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
-
 	viewerdir = vec3(gl_ModelViewMatrixInverse[3]) - vec3(gl_Vertex);
 	lightdir = normalize(vec3(gl_ModelViewMatrixInverse * gl_LightSource[0].position));
-
-	//waterTex4 = vec4(ecPosition.xzy, 0.0 );
 
 	vec4 t1 = vec4(0.0, osg_SimulationTime * 0.005217, 0.0, 0.0);
 	vec4 t2 = vec4(0.0, osg_SimulationTime * -0.0012, 0.0, 0.0);

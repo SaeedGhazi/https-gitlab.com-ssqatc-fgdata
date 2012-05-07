@@ -24,8 +24,6 @@ uniform int 	Status;
 
 varying vec4 waterTex1; //moving texcoords
 varying vec4 waterTex2; //moving texcoords
-//varying vec4 waterTex4; //viewts
-//varying vec4 ecPosition;
 varying vec3 viewerdir;
 varying vec3 lightdir;
 varying vec3 normal;
@@ -147,10 +145,10 @@ void main(void)
     vNorm = -vNorm;
 
 	//load reflection
-	vec4 tmp = vec4(lightdir, 0.0);
-	vec4 refTex = texture2D(water_reflection, vec2(tmp)) ;
-	vec4 refTexGrey = texture2D(water_reflection_grey, vec2(tmp)) ;
-	vec4 refl ;
+    vec4 tmp = vec4(lightdir, 0.0);
+    vec4 refTex = texture2D(water_reflection, vec2(tmp + waterTex1) * 32.0) ;
+    vec4 refTexGrey = texture2D(water_reflection_grey, vec2(tmp + waterTex1) * 32.0) ;
+    vec4 refl ;
 	//    cover = 0;
 
 	if(cover >= 1.5){
@@ -185,16 +183,6 @@ void main(void)
     refl *= fres;
 
     vec4 alpha0 = texture2D(alpha_tex, gl_TexCoord[0].st);
-    //refl.a *= alpha0.a;
-
-    ////calculate the fog factor
-    //float fogFactor;
-    //float fogCoord = ecPosition.z;
-    //const float LOG2 = 1.442695;
-    //fogFactor = exp2(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord * LOG2);
-
-    //if(gl_Fog.density == 1.0)
-    //    fogFactor=1.0;
 
     //calculate final colour
     vec4 ambient_light = gl_LightSource[0].diffuse;

@@ -283,8 +283,8 @@ void main(void)
 
 	//load reflection
 	vec4 tmp = vec4(lightdir, 0.0);
-	vec4 refTex = texture2D(water_reflection, vec2(tmp  + waterTex1) * 32.0) ;
-	vec4 refTexGrey = texture2D(water_reflection_grey, vec2(tmp * waterTex1)) ;
+	vec4 refTex = texture2D(water_reflection, vec2(tmp + waterTex1) * 32.0) ;
+	vec4 refTexGrey = texture2D(water_reflection_grey, vec2(tmp + waterTex1) * 32.0) ;
 	vec4 refl ;
 
 	// Test data

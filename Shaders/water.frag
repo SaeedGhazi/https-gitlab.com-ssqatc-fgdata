@@ -128,21 +128,23 @@ void main(void)
 
     //load reflection
     vec4 tmp = vec4(lightdir, 0.0);
-    vec4 refTex;
-    vec4 refl;
+    vec4 refTex = texture2D(water_reflection, vec2(tmp + waterTex1) * 32.0) ;
+    vec4 refTexGrey = texture2D(water_reflection_grey, vec2(tmp + waterTex1) * 32.0) ;
+    vec4 refl ;
 
     //    cover = 0;
 
     if(cover >= 1.5){
-        refTex = texture2D(water_reflection, vec2(tmp));
-        refl= normalize(refTex);
-        } else {
-            refTex = texture2D(water_reflection_grey, vec2(tmp));
-            refl = normalize(refTex);
-            refl.r *= (0.75 + 0.15 * cover);
-            refl.g *= (0.80 + 0.15 * cover);
-            refl.b *= (0.875 + 0.125 * cover);
-            refl.a  *= 1.0;
+        refl = normalize(refTex);
+        refl.a = 1.0;
+        }
+    else
+        {
+        refl = normalize(refTexGrey);
+        refl.r *= (0.75 + 0.15 * cover);
+        refl.g *= (0.80 + 0.15 * cover);
+        refl.b *= (0.875 + 0.125 * cover);
+        refl.a  = 1.0;
         }
 
     rotationmatrix(radians(2.1* windScale + 0.25 * sin(waterTex1.s *0.14)), RotationMatrix);

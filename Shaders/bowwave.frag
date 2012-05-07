@@ -2,6 +2,10 @@
 //  http://www.bonzaisoftware.com/water_tut.html and its glsl conversion
 //  available at http://forum.bonzaisoftware.com/viewthread.php?tid=10
 //  © Michael Horsch - 2005
+//  Major update and revisions - 2011-10-07
+//  © Emilian Huminiuc and Vivian Meazza
+//  Optimisation - 2012-5-05
+//  © Emilian Huminiuc and Vivian Meazza
 
 #version 120
 #define fps2kts 0.5925
@@ -20,8 +24,8 @@ uniform int 	Status;
 
 varying vec4 waterTex1; //moving texcoords
 varying vec4 waterTex2; //moving texcoords
-varying vec4 waterTex4; //viewts
-varying vec4 ecPosition;
+//varying vec4 waterTex4; //viewts
+//varying vec4 ecPosition;
 varying vec3 viewerdir;
 varying vec3 lightdir;
 varying vec3 normal;
@@ -124,7 +128,8 @@ void main(void)
 
         }
 
-    vec4 viewt = normalize(waterTex4);
+    //vec4 viewt = normalize(waterTex4);
+    vec4 viewt = vec4(-E, 0.0) * 0.6;
 
     vec4 disdis = texture2D(water_dudvmap, vec2(waterTex2 * tscale)* windScale * 2.0) * 2.0 - 1.0;
     vec4 dist   = texture2D(water_dudvmap, vec2(waterTex1 + disdis*sca2)* windScale * 2.0) * 2.0 - 1.0;

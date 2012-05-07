@@ -2,14 +2,18 @@
 //  http://www.bonzaisoftware.com/water_tut.html and its glsl conversion
 //  available at http://forum.bonzaisoftware.com/viewthread.php?tid=10
 //  © Michael Horsch - 2005
+//  Major update and revisions - 2011-10-07
+//  © Emilian Huminiuc and Vivian Meazza
+//  Optimisation - 2012-5-05
+//  © Emilian Huminiuc and Vivian Meazza
 
 #version 120
 #define fps2kts 0.5925
 
 varying vec4 waterTex1;
 varying vec4 waterTex2;
-varying vec4 waterTex4;
-varying vec4 ecPosition;
+//varying vec4 waterTex4;
+//varying vec4 ecPosition;
 varying vec3 viewerdir;
 varying vec3 lightdir;
 varying vec3 normal;
@@ -54,12 +58,12 @@ void main(void)
     vec3 N = normalize(gl_Normal);
     normal = N;
 
-    ecPosition = gl_ModelViewMatrix * gl_Vertex;
+//    ecPosition = gl_ModelViewMatrix * gl_Vertex;
 
     viewerdir = vec3(gl_ModelViewMatrixInverse[3]) - vec3(gl_Vertex);
     lightdir = normalize(vec3(gl_ModelViewMatrixInverse * gl_LightSource[0].position));
 
-    waterTex4 = vec4( ecPosition.xzy, 0.0 );
+//    waterTex4 = vec4( ecPosition.xzy, 0.0 );
 
     vec4 t1 = vec4(osg_SimulationTime*0.005217, 0.0, 0.0, 0.0);
     vec4 t2 = vec4(osg_SimulationTime*-0.0012, 0.0, 0.0, 0.0);

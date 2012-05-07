@@ -186,9 +186,6 @@ command interface /autopilot/route-manager/input:
                 var apt = flightplan().destination;
                 var rwy = flightplan().destination_runway;
                 
-                debug.dump("updateAproaches for " ~ rwy.id);
-                debug.dump(apt.getApproachList(rwy));
-                
                 if (apt == nil or apt.getApproachList(rwy) == nil) {
                     return;
                 }

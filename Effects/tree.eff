@@ -40,7 +40,7 @@
 	<technique n="9">
 		<predicate>
 			<and>
-        <property>/sim/rendering/rembrandt</property>
+        <property>/sim/rendering/rembrandt/enabled</property>
 				<property>/sim/rendering/random-vegetation</property>
 			</and>
 		</predicate>

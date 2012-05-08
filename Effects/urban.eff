@@ -42,7 +42,7 @@
 	<technique n="6">
 		<predicate>
 			<and>
-				<property>/sim/rendering/rembrandt</property>
+				<property>/sim/rendering/rembrandt/enabled</property>
 				<property>/sim/rendering/shaders/urban</property>
 				<less-equal>
 					<value type="float">4.0</value>
@@ -233,7 +233,7 @@
 	<technique n="7">
 		<predicate>
 			<and>
-				<property>/sim/rendering/rembrandt</property>
+				<property>/sim/rendering/rembrandt/enabled</property>
 				<property>/sim/rendering/shaders/urban</property>
 				<less-equal>
 					<value type="float">1.0</value>

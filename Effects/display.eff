@@ -2,8 +2,8 @@
 <PropertyList>
 	<name>Effects/display</name>
 	<parameters>
-		<exposure type="float"><use>/sim/rendering/exposure</use></exposure>
-		<show-buffers type="bool"><use>/sim/rendering/show-buffers</use></show-buffers>
+		<exposure type="float"><use>/sim/rendering/rembrandt/exposure</use></exposure>
+		<show-buffers type="bool"><use>/sim/rendering/rembrandt/show-buffers</use></show-buffers>
 	</parameters>
 	<technique n="11">
 		<pass>

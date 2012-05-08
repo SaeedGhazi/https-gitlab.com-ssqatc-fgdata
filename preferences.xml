@@ -64,12 +64,14 @@ Started September 2000 by David Megginson, david@megginson.com
 		</startup>
 		<rendering>
 			<materials-file>Materials/default/materials.xml</materials-file>
-			<rembrandt type="bool">false</rembrandt>
-			<renderer userarchive="y">default-pipeline</renderer>
-			<show-buffers type="bool" userarchive="y">true</show-buffers>
-			<ambient-occlusion type="bool" userarchive="y">false</ambient-occlusion>
-			<exposure type="float" userarchive="y">1.0</exposure>
-			<use-color-for-depth type="bool">false</use-color-for-depth>
+			<rembrandt>
+				<enabled type="bool">false</enabled>
+				<renderer userarchive="y">default-pipeline</renderer>
+				<show-buffers type="bool" userarchive="y">true</show-buffers>
+				<ambient-occlusion type="bool" userarchive="y">false</ambient-occlusion>
+				<exposure type="float" userarchive="y">1.0</exposure>
+				<use-color-for-depth type="bool">false</use-color-for-depth>
+			</rembrandt>
 			<debug type="bool">false</debug>
 			<realism type="int">5</realism>
 			<filtering type="int">8</filtering>

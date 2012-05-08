@@ -547,13 +547,13 @@
 					<label>Rembrandt</label>
 					<halign>left</halign>
 					<visible>
-						<property>/sim/rendering/rembrandt</property>
+						<property>/sim/rendering/rembrandt/enabled</property>
 					</visible>
 				</text>
 				<hrule>
 					<stretch>true</stretch>
 					<visible>
-						<property>/sim/rendering/rembrandt</property>
+						<property>/sim/rendering/rembrandt/enabled</property>
 					</visible>
 				</hrule>
 			</group>
@@ -568,7 +568,7 @@
 					<object-name>shadow</object-name>
 				</binding>
 				<visible>
-					<property>/sim/rendering/rembrandt</property>
+					<property>/sim/rendering/rembrandt/enabled</property>
 				</visible>
 			</checkbox>
 			
@@ -576,7 +576,7 @@
 				<layout>hbox</layout>
 				<halign>right</halign>
 				<visible>
-					<property>/sim/rendering/rembrandt</property>
+					<property>/sim/rendering/rembrandt/enabled</property>
 				</visible>
 				
 				<text>

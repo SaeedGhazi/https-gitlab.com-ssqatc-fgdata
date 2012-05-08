@@ -141,7 +141,7 @@ please see Docs/README.model-combined.eff for documentation
 			<use>/sim/rendering/shaders/skydome</use>
 		</fogtype>
 		<rembrandt>
-		  <use>/sim/rendering/rembrandt</use>
+		  <use>/sim/rendering/rembrandt/enabled</use>
 		</rembrandt>
 		<!-- 		END fog include -->
 	</parameters>
@@ -156,7 +156,7 @@ please see Docs/README.model-combined.eff for documentation
 	<predicate>
 	  <and>
 		<property>/sim/rendering/shaders/model</property>
-		<property>/sim/rendering/rembrandt</property>
+		<property>/sim/rendering/rembrandt/enabled</property>
 		<or>
 		  <less-equal>
 			<value type="float">2.0</value>

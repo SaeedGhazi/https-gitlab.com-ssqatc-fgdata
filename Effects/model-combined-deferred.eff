@@ -12,7 +12,7 @@ the objects that use it, and replaces it with the default shader.
   <technique n="8">
 	<predicate>
 	  <and>
-		<property>/sim/rendering/rembrandt</property>
+		<property>/sim/rendering/rembrandt/enabled</property>
 		<or>
 		  <less-equal>
 			<value type="float">2.0</value>

@@ -662,7 +662,7 @@
 			<name>rendering-buffers</name>
 			<binding>
 				<command>property-toggle</command>
-				<property>/sim/rendering/show-buffers</property>
+				<property>/sim/rendering/rembrandt/show-buffers</property>
 			</binding>
 			<enabled>false</enabled>
 		</item>

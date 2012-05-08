@@ -38,7 +38,8 @@ command interface /autopilot/route-manager/input:
             }
 
             var clear = func {
-                cmd.setValue("@clear");
+                #cmd.setValue("@clear");
+                flightplan().cleanPlan();
                 selection.setIntValue(-1);
             }
 
@@ -59,15 +60,29 @@ command interface /autopilot/route-manager/input:
             }
 
             var remove = func {
-                cmd.setValue("@delete" ~ sel_index());
+                #cmd.setValue("@delete" ~ sel_index());
+                flightplan().deleteWP(sel_index());
             }
 
             var route = func {
-                cmd.setValue("@route" ~ sel_index());
+                #cmd.setValue("@route" ~ sel_index());
+            
+                var fp = flightplan();
+                var from = fp.getWP(sel_index() - 1);
+                var to = fp.getWP(sel_index());
+                
+                if ((from  == nil ) or (to == nil)) {
+                    debug.dump('unable to route, invalid start ad end points');
+                    return;
+                }
+                
+                var route = airwaysRoute(from, to);
+                fp.insertWaypoints(route, sel_index());
             }
 
             var jump_to = func {
-                cmd.setValue("@jump" ~ sel_index());
+                #cmd.setValue("@jump" ~ sel_index());
+                flightplan().current = sel_index();
             }
 
             var load_route = func(path) {

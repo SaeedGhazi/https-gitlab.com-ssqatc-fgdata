@@ -54,6 +54,36 @@
 		<wrap-mode>clamp-to-border</wrap-mode>
 	</buffer>
 	<buffer>
+		<name>ao-1</name>
+		<internal-format>rgba8</internal-format>
+		<source-format>rgba</source-format>
+		<source-type>unsigned-byte</source-type>
+		<width>screen</width>
+		<height>screen</height>
+		<scale-factor>0.25</scale-factor>
+		<wrap-mode>clamp-to-border</wrap-mode>
+	</buffer>
+	<buffer>
+		<name>ao-2</name>
+		<internal-format>rgba8</internal-format>
+		<source-format>rgba</source-format>
+		<source-type>unsigned-byte</source-type>
+		<width>screen</width>
+		<height>screen</height>
+		<scale-factor>0.25</scale-factor>
+		<wrap-mode>clamp-to-border</wrap-mode>
+	</buffer>
+	<buffer>
+		<name>ao-3</name>
+		<internal-format>rgba8</internal-format>
+		<source-format>rgba</source-format>
+		<source-type>unsigned-byte</source-type>
+		<width>screen</width>
+		<height>screen</height>
+		<scale-factor>0.25</scale-factor>
+		<wrap-mode>clamp-to-border</wrap-mode>
+	</buffer>
+	<buffer>
 		<name>lighting</name>
 		<internal-format>rgba8</internal-format>
 		<source-format>rgba</source-format>
@@ -67,6 +97,7 @@
 	<!-- STAGES -->
 	<stage>
 		<name>geometry</name>
+		<order-num>0</order-num>
 		<attachment>
 			<component>depth</component>
 			<buffer>depth</buffer>
@@ -86,13 +117,49 @@
 	</stage>
 	<stage>
 		<name>shadow</name>
+		<order-num>1</order-num>
 		<attachment>
 			<component>depth</component>
 			<buffer>shadow</buffer>
 		</attachment>
 	</stage>
 	<stage>
+		<name>ssao-1</name>
+		<type>fullscreen</type>
+		<order-num>2</order-num>
+		<effect>Effects/ssao</effect>
+		<needs-du-dv>true</needs-du-dv>
+		<scale-factor>0.25</scale-factor>
+		<attachment>
+			<component>color0</component>
+			<buffer>ao-1</buffer>
+		</attachment>
+	</stage>
+	<stage>
+		<name>ssao-2</name>
+		<type>fullscreen</type>
+		<order-num>3</order-num>
+		<effect>Effects/ssao-blur-1</effect>
+		<scale-factor>0.25</scale-factor>
+		<attachment>
+			<component>color0</component>
+			<buffer>ao-2</buffer>
+		</attachment>
+	</stage>
+	<stage>
+		<name>ssao-3</name>
+		<type>fullscreen</type>
+		<order-num>4</order-num>
+		<effect>Effects/ssao-blur-2</effect>
+		<scale-factor>0.25</scale-factor>
+		<attachment>
+			<component>color0</component>
+			<buffer>ao-3</buffer>
+		</attachment>
+	</stage>
+	<stage>
 		<name>lighting</name>
+		<order-num>50</order-num>
 		<attachment>
 			<component>depth</component>
 			<buffer>depth</buffer>
@@ -104,5 +171,7 @@
 	</stage>
 	<stage>
 		<name>display</name>
+		<order-num>99</order-num>
+		<effect>Effects/display</effect>
 	</stage>
 </PropertyList>

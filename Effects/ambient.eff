@@ -31,6 +31,11 @@
 				<type>buffer</type>
 				<name>spec-emis</name>
 			</texture-unit>
+			<texture-unit>
+				<unit>4</unit>
+				<type>buffer</type>
+				<name>ao-3</name>
+			</texture-unit>
 			<program>
 				<vertex-shader>Shaders/ambient.vert</vertex-shader>
 				<fragment-shader>Shaders/ambient.frag</fragment-shader>
@@ -54,6 +59,11 @@
 				<name>spec_emis_tex</name>
 				<type>sampler-2d</type>
 				<value type="int">3</value>
+			</uniform>
+			<uniform>
+				<name>ao_tex</name>
+				<type>sampler-2d</type>
+				<value type="int">4</value>
 			</uniform>
 			<!-- The following uniforms are automatically defined and initialized :
 				- fg_SunAmbientColor

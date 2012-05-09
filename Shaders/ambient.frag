@@ -1,5 +1,5 @@
 uniform sampler2D color_tex;
-//uniform sampler2D ao_tex;
+uniform sampler2D ao_tex;
 uniform sampler2D normal_tex;
 uniform sampler2D spec_emis_tex;
 uniform vec4 fg_SunAmbientColor;
@@ -9,7 +9,7 @@ void main() {
     if ( initialized < 0.1 )
         discard;
     vec3 tcolor = texture2D( color_tex, coords ).rgb;
-//    float ao = texture2D( ao_tex, coords ).r;
-//    gl_FragColor = vec4(tcolor*fg_SunAmbientColor.rgb*ao, 1.0);
-    gl_FragColor = vec4(tcolor*fg_SunAmbientColor.rgb, 1.0);
+    float ao = texture2D( ao_tex, coords ).r;
+    gl_FragColor = vec4(tcolor*fg_SunAmbientColor.rgb*ao, 1.0);
+//    gl_FragColor = vec4(tcolor*fg_SunAmbientColor.rgb, 1.0);
 }

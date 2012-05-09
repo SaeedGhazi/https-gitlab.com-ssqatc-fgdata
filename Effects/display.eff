@@ -36,6 +36,11 @@
 				<type>buffer</type>
 				<name>lighting</name>
 			</texture-unit>
+			<texture-unit>
+				<unit>5</unit>
+				<type>buffer</type>
+				<name>ao-3</name>
+			</texture-unit>
 			<program>
 				<vertex-shader>Shaders/display.vert</vertex-shader>
 				<fragment-shader>Shaders/display.frag</fragment-shader>
@@ -64,6 +69,11 @@
 				<name>lighting_tex</name>
 				<type>sampler-2d</type>
 				<value type="int">4</value>
+			</uniform>
+			<uniform>
+				<name>ao_tex</name>
+				<type>sampler-2d</type>
+				<value type="int">5</value>
 			</uniform>
 			<uniform>
 				<name>exposure</name>

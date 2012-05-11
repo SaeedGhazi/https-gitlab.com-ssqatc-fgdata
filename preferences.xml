@@ -67,10 +67,12 @@ Started September 2000 by David Megginson, david@megginson.com
 			<rembrandt>
 				<enabled type="bool">false</enabled>
 				<renderer>default-pipeline</renderer>
-				<show-buffers type="bool" userarchive="y">true</show-buffers>
+				<show-buffers type="bool" userarchive="y">false</show-buffers>
 				<ambient-occlusion type="bool" userarchive="y">false</ambient-occlusion>
+				<ambient-occlusion-buffers type="bool">true</ambient-occlusion-buffers>
 				<exposure type="float" userarchive="y">1.0</exposure>
 				<use-color-for-depth type="bool">false</use-color-for-depth>
+				<no-16bit-buffer type="bool">false</no-16bit-buffer>
 			</rembrandt>
 			<debug type="bool">false</debug>
 			<realism type="int">5</realism>

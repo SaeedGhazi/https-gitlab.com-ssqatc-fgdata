@@ -4,6 +4,7 @@
 	<parameters>
 		<exposure type="float"><use>/sim/rendering/rembrandt/exposure</use></exposure>
 		<show-buffers type="bool"><use>/sim/rendering/rembrandt/show-buffers</use></show-buffers>
+		<ambient-occlusion type="bool"><use>/sim/rendering/rembrandt/ambient-occlusion-buffers</use></ambient-occlusion>
 	</parameters>
 	<technique n="11">
 		<pass>
@@ -84,6 +85,11 @@
 				<name>showBuffers</name>
 				<type>bool</type>
 				<value type="bool"><use>show-buffers</use></value>
+			</uniform>
+			<uniform>
+				<name>ambientOcclusion</name>
+				<type>bool</type>
+				<value type="bool"><use>ambient-occlusion</use></value>
 			</uniform>
 		</pass>
 	</technique>

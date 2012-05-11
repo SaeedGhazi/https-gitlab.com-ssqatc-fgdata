@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<!-- 
-  FlightGear Materials File. See Docs/README.materials for details. 
-  
+<!--
+  FlightGear Materials File. See Docs/README.materials for details.
+
   This file contains material definitions and settings shared across
   all material definition file. It is intended to be included within
   materials.xml etc. using an include="Materials/materials-base.xml"
@@ -20,9 +20,9 @@ Shared parameters for various materials.
    <tree-range-m>8000</tree-range-m>
   </forest>
  </params>
- 
+
  <!-- Signage -->
- 
+
 <material n="1000">
   <name>lf_sng_solid_yellow</name>
   <effect>Effects/lfeat</effect>
@@ -349,7 +349,7 @@ Shared parameters for various materials.
 </material>
 
 <!-- Shared material definitions -->
- 
+
 <material n="2001">
   <name>Unknown</name>
   <texture>Terrain/unknown.png</texture>
@@ -574,5 +574,27 @@ Shared parameters for various materials.
   <bumpiness>0.5</bumpiness>
   <load-resistance>1e10</load-resistance>
 </material>
- 
+
+<!-- Taxiway signs -->
+    <material n="2100">
+        <name>signcase</name>
+        <texture>Signs/signs_case.png</texture>
+        <effect>Effects/terrain-default</effect>
+        <ambient>
+            <r>1.0</r>
+            <g>1.0</g>
+            <b>1.0</b>
+        </ambient>
+        <glyph>
+            <name>cover1</name>
+            <left>0.000</left>
+            <right>0.625</right>
+        </glyph>
+        <glyph>
+            <name>cover2</name>
+            <left>0.625</left>
+            <right>0.000</right>
+        </glyph>
+    </material>
+
 </PropertyList>

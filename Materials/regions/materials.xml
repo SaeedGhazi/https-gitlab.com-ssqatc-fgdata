@@ -3029,20 +3029,8 @@
 
  <!-- runway and taxiway signs -->
 
-
-<material>
-  <name>YellowSign.unlighted</name>
-  <texture>Signs/yellow.png</texture>
-  <emissive>
-   <r>0.4</r>
-   <g>0.4</g>
-   <b>0.4</b>
-  </emissive>
-</material>
-
 <material include="Materials/base/glyphs-yellow.xml">
   <name>YellowSign</name>
-  <name>YellowSign.lighted</name>
   <texture>Signs/yellow.png</texture>
   <emissive>
    <r>0.9</r>
@@ -3051,21 +3039,10 @@
   </emissive>
   <xsize>4096</xsize>
   <ysize>128</ysize>
-</material>
-
-<material>
-  <name>RedSign.unlighted</name>
-  <texture>Signs/red.png</texture>
-  <emissive>
-   <r>0.4</r>
-   <g>0.4</g>
-   <b>0.4</b>
-  </emissive>
 </material>
 
 <material include="Materials/base/glyphs-red.xml">
   <name>RedSign</name>
-  <name>RedSign.lighted</name>
   <texture>Signs/red.png</texture>
   <emissive>
    <r>0.9</r>
@@ -3076,19 +3053,8 @@
   <ysize>128</ysize>
 </material>
 
-<material>
-  <name>BlackSign.unlighted</name>
-  <texture>Signs/black.png</texture>
-  <emissive>
-   <r>0.4</r>
-   <g>0.4</g>
-   <b>0.4</b>
-  </emissive>
-</material>
-
 <material include="Materials/base/glyphs-black.xml">
   <name>BlackSign</name>
-  <name>BlackSign.lighted</name>
   <texture>Signs/black.png</texture>
   <emissive>
    <r>0.9</r>
@@ -3097,21 +3063,10 @@
   </emissive>
   <xsize>4096</xsize>
   <ysize>128</ysize>
-</material>
-
-<material>
-  <name>FramedSign.unlighted</name>
-  <texture>Signs/framed.png</texture>
-  <emissive>
-   <r>0.4</r>
-   <g>0.4</g>
-   <b>0.4</b>
-  </emissive>
 </material>
 
 <material include="Materials/base/glyphs-framed.xml">
   <name>FramedSign</name>
-  <name>FramedSign.lighted</name>
   <texture>Signs/framed.png</texture>
   <emissive>
    <r>0.9</r>
@@ -3122,20 +3077,9 @@
   <ysize>128</ysize>
 </material>
 
-<material>
-  <name>RunwaySign.unlighted</name>
-  <texture>Signs/yellow_rwy.png</texture>
-  <emissive>
-   <r>0.4</r>
-   <g>0.4</g>
-   <b>0.4</b>
-  </emissive>
-</material>
-
-<material include="Materials/base/glyphs-runway.xml">
-  <name>RunwaySign</name>
-  <name>RunwaySign.lighted</name>
-  <texture>Signs/yellow_rwy.png</texture>
+<material include="Materials/base/glyphs-special.xml">
+  <name>SpecialSign</name>
+  <texture>Signs/special.png</texture>
   <emissive>
    <r>0.9</r>
    <g>0.9</g>

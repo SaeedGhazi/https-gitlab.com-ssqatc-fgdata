@@ -2196,17 +2196,6 @@
  <!-- runway and taxiway signs -->
 
 <material>
-  <name>signcase</name>
-  <texture>Signs/signs_case.png</texture>
-   <emissive>
-     <r>0.1</r>
-     <g>0.1</g>
-     <b>0.1</b>
-   </emissive>
-  <glyph> <name>cover</name> <left>0.00000</left> <right>0.625</right> </glyph>
-</material>
-
-<material>
   <name>YellowSign.unlighted</name>
   <texture>Signs/yellow.png</texture>
   <emissive>

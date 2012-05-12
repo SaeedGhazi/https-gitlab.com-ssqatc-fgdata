@@ -560,6 +560,34 @@
 			
 			<checkbox>
 				<halign>left</halign>
+				<label>Bloom</label>
+				<name>bloom</name>
+				<property>/sim/rendering/rembrandt/bloom</property>
+				<binding>
+					<command>dialog-apply</command>
+					<object-name>bloom</object-name>
+				</binding>
+				<visible>
+					<property>/sim/rendering/rembrandt/enabled</property>
+				</visible>
+			</checkbox>
+			
+			<checkbox>
+				<halign>left</halign>
+				<label>Ambient occlusion</label>
+				<name>occlusion</name>
+				<property>/sim/rendering/rembrandt/ambient-occlusion</property>
+				<binding>
+					<command>dialog-apply</command>
+					<object-name>occlusion</object-name>
+				</binding>
+				<visible>
+					<property>/sim/rendering/rembrandt/enabled</property>
+				</visible>
+			</checkbox>
+			
+			<checkbox>
+				<halign>left</halign>
 				<label>Shadows</label>
 				<name>shadow</name>
 				<property>/sim/rendering/shadows/enabled</property>

@@ -74,7 +74,7 @@ Started September 2000 by David Megginson, david@megginson.com
 				<bloom-buffers type="bool">true</bloom-buffers>
 				<exposure type="float" userarchive="y">1.0</exposure>
 				<use-color-for-depth type="bool">false</use-color-for-depth>
-				<no-16bit-buffer type="bool">false</no-16bit-buffer>
+				<no-16bit-buffer type="bool">true</no-16bit-buffer>
 			</rembrandt>
 			<debug type="bool">false</debug>
 			<realism type="int">5</realism>

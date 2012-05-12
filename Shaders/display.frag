@@ -31,8 +31,8 @@ void main() {
             color = texture2D( color_tex, (coords - vec2( 0.8, 0.0 )) * 5.0 );
         } else if (coords.x < 0.2 && coords.y >= 0.8 && fg_DepthInColor) {
             color = texture2D( depth_tex, (coords - vec2( 0.0, 0.8 )) * 5.0 );
-        } else if (coords.x < 0.2 && coords.y >= 0.8 && ambientOcclusion) {
-            color = texture2D( ao_tex, (coords - vec2( 0.0, 0.8 )) * 5.0 );
+        } else if (coords.x < 0.2 && coords.y >= 0.8 && bloomEnabled) {
+            color = texture2D( bloom_tex, (coords - vec2( 0.0, 0.8 )) * 5.0 );
         } else {
             color = texture2D( lighting_tex, coords );
             if (bloomEnabled)

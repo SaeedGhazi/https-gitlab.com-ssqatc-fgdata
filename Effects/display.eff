@@ -43,6 +43,11 @@
 				<type>buffer</type>
 				<name>bloom-3</name>
 			</texture-unit>
+			<texture-unit>
+				<unit>6</unit>
+				<type>buffer</type>
+				<name>ao-3</name>
+			</texture-unit>
 			<program>
 				<vertex-shader>Shaders/fullscreen.vert</vertex-shader>
 				<fragment-shader>Shaders/display.frag</fragment-shader>
@@ -76,6 +81,11 @@
 				<name>bloom_tex</name>
 				<type>sampler-2d</type>
 				<value type="int">5</value>
+			</uniform>
+			<uniform>
+				<name>ao_tex</name>
+				<type>sampler-2d</type>
+				<value type="int">6</value>
 			</uniform>
 			<uniform>
 				<name>exposure</name>

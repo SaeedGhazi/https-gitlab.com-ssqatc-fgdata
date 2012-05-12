@@ -40,7 +40,7 @@
 				<name>ao-3</name>
 			</texture-unit>
 			<program>
-				<vertex-shader>Shaders/ambient.vert</vertex-shader>
+				<vertex-shader>Shaders/fullscreen.vert</vertex-shader>
 				<fragment-shader>Shaders/ambient.frag</fragment-shader>
 			</program>
 			<uniform>

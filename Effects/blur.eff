@@ -14,7 +14,7 @@
 				<name><use>buffer-name</use></name>
 			</texture-unit>
 			<program>
-				<vertex-shader>Shaders/blur.vert</vertex-shader>
+				<vertex-shader>Shaders/fullscreen.vert</vertex-shader>
 				<fragment-shader>Shaders/blur.frag</fragment-shader>
 			</program>
 			<uniform>

@@ -5,6 +5,7 @@
 		<exposure type="float"><use>/sim/rendering/rembrandt/exposure</use></exposure>
 		<show-buffers type="bool"><use>/sim/rendering/rembrandt/show-buffers</use></show-buffers>
 		<ambient-occlusion type="bool"><use>/sim/rendering/rembrandt/ambient-occlusion-buffers</use></ambient-occlusion>
+		<bloom type="bool"><use>/sim/rendering/rembrandt/bloom</use></bloom>
 	</parameters>
 	<technique n="11">
 		<pass>
@@ -40,7 +41,7 @@
 			<texture-unit>
 				<unit>5</unit>
 				<type>buffer</type>
-				<name>ao-3</name>
+				<name>bloom-3</name>
 			</texture-unit>
 			<program>
 				<vertex-shader>Shaders/fullscreen.vert</vertex-shader>
@@ -72,7 +73,7 @@
 				<value type="int">4</value>
 			</uniform>
 			<uniform>
-				<name>ao_tex</name>
+				<name>bloom_tex</name>
 				<type>sampler-2d</type>
 				<value type="int">5</value>
 			</uniform>
@@ -90,6 +91,11 @@
 				<name>ambientOcclusion</name>
 				<type>bool</type>
 				<value type="bool"><use>ambient-occlusion</use></value>
+			</uniform>
+			<uniform>
+				<name>bloomEnabled</name>
+				<type>bool</type>
+				<value type="bool"><use>bloom</use></value>
 			</uniform>
 		</pass>
 	</technique>

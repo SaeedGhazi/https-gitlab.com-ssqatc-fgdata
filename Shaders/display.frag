@@ -3,12 +3,13 @@ uniform sampler2D normal_tex;
 uniform sampler2D color_tex;
 uniform sampler2D specular_tex;
 uniform sampler2D lighting_tex;
-//uniform sampler2D bloom_tex;
+uniform sampler2D bloom_tex;
 uniform sampler2D ao_tex;
 uniform float exposure;
 uniform bool showBuffers;
 uniform bool fg_DepthInColor;
 uniform bool ambientOcclusion;
+uniform bool bloomEnabled;
 
 vec3 HDR(vec3 L) {
     L = L * exposure;
@@ -33,11 +34,15 @@ void main() {
         } else if (coords.x < 0.2 && coords.y >= 0.8 && ambientOcclusion) {
             color = texture2D( ao_tex, (coords - vec2( 0.0, 0.8 )) * 5.0 );
         } else {
-            color = texture2D( lighting_tex, coords ) /* + texture2D( bloom_tex, coords ) */;
+            color = texture2D( lighting_tex, coords );
+            if (bloomEnabled)
+                color = color + texture2D( bloom_tex, coords );
             //color = vec4( HDR( color.rgb ), 1.0 );
         }
     } else {
-        color = texture2D( lighting_tex, coords ) /* + texture2D( bloom_tex, coords ) */;
+        color = texture2D( lighting_tex, coords );
+        if (bloomEnabled)
+            color = color + texture2D( bloom_tex, coords );
         //color = vec4( HDR( color.rgb ), 1.0 );
     }
     gl_FragColor = color;

@@ -70,6 +70,8 @@ Started September 2000 by David Megginson, david@megginson.com
 				<show-buffers type="bool" userarchive="y">false</show-buffers>
 				<ambient-occlusion type="bool" userarchive="y">false</ambient-occlusion>
 				<ambient-occlusion-buffers type="bool">true</ambient-occlusion-buffers>
+				<bloom type="bool" userarchive="y">true</bloom>
+				<bloom-buffers type="bool">true</bloom-buffers>
 				<exposure type="float" userarchive="y">1.0</exposure>
 				<use-color-for-depth type="bool">false</use-color-for-depth>
 				<no-16bit-buffer type="bool">false</no-16bit-buffer>

@@ -124,6 +124,45 @@
 		<scale-factor>1.0</scale-factor>
 		<wrap-mode>clamp-to-border</wrap-mode>
 	</buffer>
+	<buffer>
+		<name>bloom-1</name>
+		<condition>
+			<property>/sim/rendering/rembrandt/bloom-buffers</property>
+		</condition>
+		<internal-format>rgba8</internal-format>
+		<source-format>rgba</source-format>
+		<source-type>unsigned-byte</source-type>
+		<width>screen</width>
+		<height>screen</height>
+		<scale-factor>0.25</scale-factor>
+		<wrap-mode>clamp-to-border</wrap-mode>
+	</buffer>
+	<buffer>
+		<name>bloom-2</name>
+		<condition>
+			<property>/sim/rendering/rembrandt/bloom-buffers</property>
+		</condition>
+		<internal-format>rgba8</internal-format>
+		<source-format>rgba</source-format>
+		<source-type>unsigned-byte</source-type>
+		<width>screen</width>
+		<height>screen</height>
+		<scale-factor>0.25</scale-factor>
+		<wrap-mode>clamp-to-border</wrap-mode>
+	</buffer>
+	<buffer>
+		<name>bloom-3</name>
+		<condition>
+			<property>/sim/rendering/rembrandt/bloom-buffers</property>
+		</condition>
+		<internal-format>rgba8</internal-format>
+		<source-format>rgba</source-format>
+		<source-type>unsigned-byte</source-type>
+		<width>screen</width>
+		<height>screen</height>
+		<scale-factor>0.25</scale-factor>
+		<wrap-mode>clamp-to-border</wrap-mode>
+	</buffer>
 	
 	<!-- STAGES -->
 	<stage>
@@ -209,6 +248,50 @@
 			<buffer>lighting</buffer>
 		</attachment>
 	</stage>
+
+	<stage>
+		<name>bloom-1</name>
+		<type>fullscreen</type>
+		<condition>
+			<property>/sim/rendering/rembrandt/bloom-buffers</property>
+		</condition>
+		<order-num>60</order-num>
+		<effect>Effects/bloom-combine</effect>
+		<scale-factor>0.25</scale-factor>
+		<attachment>
+			<component>color0</component>
+			<buffer>bloom-1</buffer>
+		</attachment>
+	</stage>
+	<stage>
+		<name>bloom-2</name>
+		<type>fullscreen</type>
+		<condition>
+			<property>/sim/rendering/rembrandt/bloom-buffers</property>
+		</condition>
+		<order-num>61</order-num>
+		<effect>Effects/bloom-blur-1</effect>
+		<scale-factor>0.25</scale-factor>
+		<attachment>
+			<component>color0</component>
+			<buffer>bloom-2</buffer>
+		</attachment>
+	</stage>
+	<stage>
+		<name>bloom-3</name>
+		<type>fullscreen</type>
+		<condition>
+			<property>/sim/rendering/rembrandt/bloom-buffers</property>
+		</condition>
+		<order-num>62</order-num>
+		<effect>Effects/bloom-blur-2</effect>
+		<scale-factor>0.25</scale-factor>
+		<attachment>
+			<component>color0</component>
+			<buffer>bloom-3</buffer>
+		</attachment>
+	</stage>
+
 	<stage>
 		<name>display</name>
 		<order-num>99</order-num>

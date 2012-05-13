@@ -1,7 +1,5 @@
 This document describes how FlightGear searches and loads scenery, how to
 add static objects to the scenery as well as the syntax of *.stg files.
-It does *not* describe how to generate terrain. For that see
-http://www.terragear.org/.
 
 
 
@@ -17,7 +15,6 @@ Contents ----------------------------------------------------------------------
    3.4  OBJECT_SHARED
    3.3  OBJECT_STATIC
    3.5  OBJECT_SIGN
-   3.6  OBJECT_RUNWAY_SIGN
 
 4  model manager ("/models/model")
    4.1  static objects
@@ -249,14 +246,16 @@ Example:
 3.5 OBJECT_SIGN
 ---------------
 
-defines taxiway or runway sign. The syntax is like that of OBJECT_SHARED
-entries, except that the path is replaced with a sign contents specification.
+defines taxiway or runway sign. The syntax is much like that of OBJECT_SHARED
+entries, except that the path is replaced with a sign contents specification
+and that there is an additional size value at the end of the line.
 
 Example:
 
-  OBJECT_SIGN {@R}10L-28R{@L}C -122.35797457 37.61276290 -0.5398 74.0
+  OBJECT_SIGN {@R}10L-28R{@L}C -122.35797457 37.61276290 -0.5398 74.0 2
 
-The sign specification defines the sign contents and dimensions.
+The sign specification defines the sign contents. We try to resemble the
+apt.dat 850 specifications in our implementation.
 In the simplest form it contains just 'normal' text, for example:
 
   EXIT
@@ -308,43 +307,18 @@ more):
   no-entry "no entry" symbol
   critical runway critical area
   safety   ils safety area
-
-
-In addition to multi-letter glyph names there are also commands, which
-always start with an '@' symbol.
-The following commands are available -- for sign properties:
-
-  @size=2.3        set sign height to 2.3m (width is derived from that
-                                            and not separately settable)
-
-  @material=foo    use texture font <material> with <name> "foo"
-                   (see $FG_ROOT/materials.xml). By default available are:
-                   BlackSign, YellowSign, RedSign, FramedSign
-
-  @light=0         make sign non-emissive (default: 1, which uses the
-                   emission defined for the material in materials.xml)
-                   The GL material for lighted signs is defined in the
-                   sign's <material> entry (e.g. for "RedSign"), while
-                   the state for the respective unlighted sign is defined
-                   in an entry for the same name with ".unlighted" appended
-                   ("RegSign.unlighted").
+  hazard   end of taxiway
 
 
 
-And there are commands for pre-defined sign types according to the FAA
+There are commands for pre-defined sign types according to the FAA
 specification (5345-44; see http://www.google.com/search?q=5345-44g).
 
-  @Y @Y1 @Y2 @Y3   "Direction, Destination, Boundary" sign (black on yellow)
-  @R @R1 @R2 @R3   "Mandatory Instruction" sign (white on red with black outline)
-  @L @L1 @L2 @L3   "Location" sign  (yellow text and frame on black)
-  @B @B4 @B5       "Runway Distance Remaining" sign  (white on black)
+  @Y   "Direction, Destination, Boundary" sign (black on yellow)
+  @R   "Mandatory Instruction" sign (white on red with black outline)
+  @L   "Location" sign  (yellow text and frame on black)
+  @B   "Runway Distance Remaining" sign  (white on black)
 
-The numbered versions define the panel heights according to the spec. If
-the number is omitted, then a default size is used (@Y3, @R3, @L3, @B4). If
-such a pre-defined sign type is used, then fgfs takes care of opening and
-closing frames, and of inserting the proper spaces. You can avoid this
-automatism by setting the sign properties yourself, using @size and @material.
-Frames can be opened/closed using glyph names {start-frame} and {stop-frame}.
 
 Examples:
 
@@ -352,31 +326,12 @@ Examples:
   {@Y,^l}P|{^lu}N{@L}F{@Y}F{^ru}
   {@Y,^ld}C   ...  same as any of {@Y}{@ld}C  {@Y,@ld,C}
   {@B}17
-  {@material=RedSign,@size=1.6,no-exit}
 
 
 Syntax errors are reported in --log-level=debug, in the SG_TERRAIN
 group. You can use this command line to filter out such messages:
 
   $ fgfs --log-level=debug 2>&1|grep OBJECT_SIGN
-
-
-
-
-3.6  OBJECT_RUNWAY_SIGN
------------------------
-
-are experimental entries and not of much use.
-
-Example:
-
-  OBJECT_RUNWAY_SIGN OMG_Ponies -122.35797457 37.61276290 -0.5398 74.0
-
-The second element is a texture name from $FG_ROOT/materials.xml. The
-texture is put on a sign of dimension 3m x 1m (WxH) that floats 25cm
-above ground and is invisible from the backside. (Reference point is
-the middle of the base.) This entry will likely change in the future
-or be removed altogether. Better don't use it!
 
 
 

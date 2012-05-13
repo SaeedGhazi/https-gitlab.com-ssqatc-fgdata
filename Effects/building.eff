@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
-  <name>Effects/building
-  </name>
+  <name>Effects/building</name>
   <inherits-from>Effects/model-combined-deferred</inherits-from>
   <parameters>
+      <texture n="0">
+          <type>2d</type>
+          <image>Textures/buildings.png</image>
+          <filter>linear-mipmap-linear</filter>
+          <wrap-s>clamp</wrap-s>
+          <wrap-t>clamp</wrap-t>
+          <internal-format>normalized</internal-format>
+      </texture>
 	<!-- Normal Map -->
 	<normalmap-enabled type="int"> 0 </normalmap-enabled>
 	<normalmap-dds type="int"> 0 </normalmap-dds>

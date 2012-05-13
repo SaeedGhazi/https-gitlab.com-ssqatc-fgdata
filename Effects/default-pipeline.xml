@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
+	<!-- Default rendering pipeline
+
+	options:
+		/sim/rendering/rembrandt/use-color-for-depth
+		/sim/rendering/rembrandt/no-16bit-buffer
+		/sim/rendering/shadows/map-size
+		/sim/rendering/rembrandt/ambient-occlusion-buffers
+		/sim/rendering/rembrandt/bloom-buffers
+	-->
 	<buffer>
 		<name>depth</name>
 		<condition>
@@ -328,6 +337,32 @@
 			<component>color0</component>
 			<buffer>lighting</buffer>
 		</attachment>
+
+		<pass>
+			<name>sky-clouds</name>
+		</pass>
+		<pass>
+			<name>ambient</name>
+			<type>fullscreen</type>
+			<effect>Effects/ambient</effect>
+			<order-num>1</order-num>
+		</pass>
+		<pass>
+			<name>sunlight</name>
+			<type>fullscreen</type>
+			<effect>Effects/sunlight</effect>
+			<order-num>2</order-num>
+		</pass>
+		<pass>
+			<name>lights</name>
+			<order-num>3</order-num>
+		</pass>
+		<pass>
+			<name>fog</name>
+			<type>fullscreen</type>
+			<effect>Effects/fog</effect>
+			<order-num>4</order-num>
+		</pass>
 	</stage>
 
 	<stage>

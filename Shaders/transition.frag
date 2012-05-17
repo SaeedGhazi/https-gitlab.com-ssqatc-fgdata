@@ -4,13 +4,27 @@
 // � Emilian Huminiuc 2011
 
 // Ambient term comes in gl_Color.rgb.
-varying vec4	diffuse_term, RawPos;
-varying vec3	Vnormal, normal;
-//varying float	fogCoord;
+varying vec4	diffuse_term;
+varying vec4    RawPos;
+varying vec3	normal;
+varying vec3    Vnormal;
 
-uniform float	SnowLevel, Transitions, InverseSlope, RainNorm;
-uniform float CloudCover0, CloudCover1, CloudCover2, CloudCover3, CloudCover4;
-uniform sampler2D BaseTex, SecondTex, ThirdTex, SnowTex;
+uniform float	SnowLevel;
+uniform float   Transitions;
+uniform float   InverseSlope;
+uniform float   RainNorm;
+
+uniform float CloudCover0;
+uniform float CloudCover1;
+uniform float CloudCover2;
+uniform float CloudCover3;
+uniform float CloudCover4;
+
+uniform sampler2D BaseTex;
+uniform sampler2D SecondTex;
+uniform sampler2D ThirdTex;
+uniform sampler2D SnowTex;
+
 uniform sampler3D NoiseTex;
 
 ////fog "include" /////
@@ -21,10 +35,25 @@ vec3 fog_Func(vec3 color, int type);
 
 void main()
     {
-    float MixFactor, NdotL, NdotHV, fogFactor, cover, slope, L1, L2, wetness;
+    float MixFactor;
+    float NdotL;
+    float NdotHV;
+    float fogFactor;
+    float cover;
+    float slope;
+    float L1;
+    float L2;
+    float wetness;
 
-    vec3 n, lightDir, halfVector;
-    vec4 texel, fragColor, color, specular, Noise;
+    vec3 n;
+    vec3 lightDir;
+    vec3 halfVector;
+
+    vec4 texel;
+    vec4 fragColor;
+    vec4 color;
+    vec4 specular;
+    vec4 Noise;
 
     lightDir = gl_LightSource[0].position.xyz;
     halfVector = gl_LightSource[0].halfVector.xyz;
@@ -68,9 +97,10 @@ void main()
 
     //pull the texture fetch outside flow control to fix aliasing artefacts :(
     vec4 baseTexel = texture2D(BaseTex, gl_TexCoord[0].st);
-		vec4 secondTexel = texture2D(SecondTex, gl_TexCoord[0].st);
-		vec4 thirdTexel = texture2D(ThirdTex, gl_TexCoord[0].st);
-		vec4 snowTexel = texture2D(SnowTex, gl_TexCoord[0].st);
+    vec4 secondTexel = texture2D(SecondTex, gl_TexCoord[0].st);
+    vec4 thirdTexel = texture2D(ThirdTex, gl_TexCoord[0].st);
+    vec4 snowTexel = texture2D(SnowTex, gl_TexCoord[0].st);
+
     //Normal transition. For more abrupt faces apply another texture (or 2).
     if (InverseSlope == 0.0) {
         //Do we do an intermediate transition
@@ -123,11 +153,14 @@ void main()
     wetness = 1.0 - 0.3 * RainNorm;
     texel.rgb = texel.rgb * wetness;
 
-
-		float altitude = RawPos.z;
+    float altitude = RawPos.z;
     //Snow texture for areas higher than SnowLevel
     if (altitude >= SnowLevel - (1000.0 * slope + 300.0 * MixFactor) && slope > L2 - 0.12) {
-        texel = mix(texel, mix(texel, snowTexel, smoothstep(L2 - 0.09 * MixFactor, L2, slope)), smoothstep(SnowLevel - (1000.0 * slope + 300.0 * MixFactor), SnowLevel - (1000.0 * slope - 150.0 * MixFactor), altitude));
+        texel = mix(texel, mix(texel, snowTexel, smoothstep(L2 - 0.09 * MixFactor, L2, slope)),
+                    smoothstep(SnowLevel - (1000.0 * slope + 300.0 * MixFactor),
+                               SnowLevel - (1000.0 * slope - 150.0 * MixFactor),
+                               altitude)
+                               );
         }
 
     fragColor = color * texel + specular;
@@ -142,6 +175,5 @@ void main()
     //fogFactor = exp(-gl_Fog.density * gl_Fog.density * fogCoord * fogCoord);
     fragColor.rgb *= 1.2 - 0.4 * MixFactor;
     fragColor.rgb = fog_Func(fragColor.rgb, fogType);
-    //gl_FragColor = mix(gl_Fog.color, fragColor, fogFactor);
     gl_FragColor = fragColor;
-		}
+    }

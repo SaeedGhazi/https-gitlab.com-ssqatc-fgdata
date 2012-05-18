@@ -673,6 +673,7 @@
 				<command>dialog-show</command>
 				<dialog-name>rembrandt-buffers</dialog-name>
 			</binding>
+			<enabled>false</enabled>
 		</item>
 
 	</menu>

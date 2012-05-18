@@ -69,6 +69,7 @@ Started September 2000 by David Megginson, david@megginson.com
 				<renderer>default-pipeline</renderer>
 				<show-buffers type="bool" userarchive="y">false</show-buffers>
 				<ambient-occlusion type="bool" userarchive="y">false</ambient-occlusion>
+				<ambient-occlusion-strength type="float" userarchive="y">1.0</ambient-occlusion-strength>
 				<ambient-occlusion-buffers type="bool">true</ambient-occlusion-buffers>
 				<bloom type="bool" userarchive="y">true</bloom>
 				<bloom-buffers type="bool">true</bloom-buffers>

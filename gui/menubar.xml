@@ -659,15 +659,6 @@
 		</item>
 
 		<item>
-			<name>ambient-occlusion</name>
-			<binding>
-				<command>property-toggle</command>
-				<property>/sim/rendering/rembrandt/ambient-occlusion</property>
-			</binding>
-			<enabled>false</enabled>
-		</item>
-
-		<item>
 			<name>rendering-buffers</name>
 			<binding>
 				<command>property-toggle</command>

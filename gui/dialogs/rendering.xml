@@ -614,7 +614,7 @@
 					</enable>
 					<min>0.0</min>
 					<max>1.0</max>
-					<step>0.05</step>
+					<step>0.01</step>
 					<property>/sim/rendering/rembrandt/ambient-occlusion-strength</property>
 					<binding>
 						<command>dialog-apply</command>
@@ -626,7 +626,7 @@
 						<property>/sim/rendering/rembrandt/ambient-occlusion</property>
 					</enable>
 					<label>12345678</label>
-					<format>%.1f</format>
+					<format>%.2f</format>
 					<live>true</live>
 					<property>/sim/rendering/rembrandt/ambient-occlusion-strength</property>
 				</text>

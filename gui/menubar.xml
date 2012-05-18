@@ -667,6 +667,14 @@
 			<enabled>false</enabled>
 		</item>
 
+		<item>
+			<name>rembrandt-buffers-choice</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>rembrandt-buffers</dialog-name>
+			</binding>
+		</item>
+
 	</menu>
 
 	<menu>

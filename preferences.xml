@@ -76,6 +76,22 @@ Started September 2000 by David Megginson, david@megginson.com
 				<exposure type="float" userarchive="y">1.0</exposure>
 				<use-color-for-depth type="bool">false</use-color-for-depth>
 				<no-16bit-buffer type="bool">true</no-16bit-buffer>
+				<debug-buffer n="0">
+					<enabled type="bool" userarchive="y">false</enabled>
+					<name userarchive="y"></name>
+				</debug-buffer>
+				<debug-buffer n="1">
+					<enabled type="bool" userarchive="y">true</enabled>
+					<name userarchive="y">spec-emis</name>
+				</debug-buffer>
+				<debug-buffer n="2">
+					<enabled type="bool" userarchive="y">true</enabled>
+					<name userarchive="y">normal</name>
+				</debug-buffer>
+				<debug-buffer n="3">
+					<enabled type="bool" userarchive="y">true</enabled>
+					<name userarchive="y">diffuse</name>
+				</debug-buffer>
 			</rembrandt>
 			<debug type="bool">false</debug>
 			<realism type="int">5</realism>

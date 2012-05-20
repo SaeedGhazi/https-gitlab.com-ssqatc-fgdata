@@ -659,19 +659,19 @@
 		</item>
 
 		<item>
-			<name>ambient-occlusion</name>
+			<name>rendering-buffers</name>
 			<binding>
 				<command>property-toggle</command>
-				<property>/sim/rendering/rembrandt/ambient-occlusion</property>
+				<property>/sim/rendering/rembrandt/show-buffers</property>
 			</binding>
 			<enabled>false</enabled>
 		</item>
 
 		<item>
-			<name>rendering-buffers</name>
+			<name>rembrandt-buffers-choice</name>
 			<binding>
-				<command>property-toggle</command>
-				<property>/sim/rendering/rembrandt/show-buffers</property>
+				<command>dialog-show</command>
+				<dialog-name>rembrandt-buffers</dialog-name>
 			</binding>
 			<enabled>false</enabled>
 		</item>

@@ -99,8 +99,8 @@
 	<logging>Logging</logging>
 	<local_weather>Local Weather (Test)</local_weather>
 	<print-scene-info>Print Visible Scene Info</print-scene-info>
-	<ambient-occlusion>Hide/Show Ambient occlusion</ambient-occlusion>
 	<rendering-buffers>Hide/Show Rendering Buffers</rendering-buffers>
+	<rembrandt-buffers-choice>Select Rendering Buffers</rembrandt-buffers-choice>
 
 	<!-- Help menu -->
 	<help>Help</help>

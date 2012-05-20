@@ -222,7 +222,7 @@
 					<command>dialog-apply</command>
 					<object-name>random-objects</object-name>
 				</binding>
-      </checkbox>
+			</checkbox>
 
 			<checkbox>
 				<halign>left</halign>
@@ -306,13 +306,13 @@
 				</text>
 			</group>
 
-      <button>
-        <legend>Reload Scenery</legend>
+			<button>
+				<legend>Reload Scenery</legend>
 				<binding>
 					<command>reinit</command>
 					<subsystem>tile-manager</subsystem>
 				</binding>
-      </button>
+			</button>
 
 			<group>
 				<layout>vbox</layout>
@@ -568,7 +568,10 @@
 					<object-name>bloom</object-name>
 				</binding>
 				<visible>
-					<property>/sim/rendering/rembrandt/enabled</property>
+					<and>
+						<property>/sim/rendering/rembrandt/enabled</property>
+						<property>/sim/rendering/rembrandt/bloom-buffers</property>
+					</and>
 				</visible>
 			</checkbox>
 			
@@ -582,10 +585,53 @@
 					<object-name>occlusion</object-name>
 				</binding>
 				<visible>
-					<property>/sim/rendering/rembrandt/enabled</property>
+					<and>
+						<property>/sim/rendering/rembrandt/enabled</property>
+						<property>/sim/rendering/rembrandt/ambient-occlusion-buffers</property>
+					</and>
 				</visible>
 			</checkbox>
-			
+
+			<group>
+				<layout>hbox</layout>
+				<halign>right</halign>
+				<visible>
+					<and>
+						<property>/sim/rendering/rembrandt/enabled</property>
+						<property>/sim/rendering/rembrandt/ambient-occlusion-buffers</property>
+					</and>
+				</visible>
+				<text>
+					<label>Ambient occlusion strength</label>
+					<enable>
+						<property>/sim/rendering/rembrandt/ambient-occlusion</property>
+					</enable>
+				</text>
+				<slider>
+					<name>ambient-occlusion-strength</name>
+					<enable>
+						<property>/sim/rendering/rembrandt/ambient-occlusion</property>
+					</enable>
+					<min>0.0</min>
+					<max>1.0</max>
+					<step>0.01</step>
+					<property>/sim/rendering/rembrandt/ambient-occlusion-strength</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>ambient-occlusion-strength</object-name>
+					</binding>
+				</slider>
+				<text>
+					<enable>
+						<property>/sim/rendering/rembrandt/ambient-occlusion</property>
+					</enable>
+					<label>12345678</label>
+					<format>%.2f</format>
+					<live>true</live>
+					<property>/sim/rendering/rembrandt/ambient-occlusion-strength</property>
+				</text>
+			</group>
+
 			<checkbox>
 				<halign>left</halign>
 				<label>Shadows</label>

@@ -67,7 +67,7 @@
 #
 # geo.normdeg(<angle>)            ... returns angle normalized to  0 <= angle < 360
 #
-# geo.put_model(<path>, <lat>, <lon> [, <elev:nil> [, <hdg:0> [, <pitch:0> [, <roll:0>]]]]);
+# geo.put_model(<path>, <lat>, <lon> [, <elev:nil> [, <hdg:0> [, <pitch:0> [, <roll:0>[, <speed>]]]]]);
 #                                 ... put model <path> at location <lat>/<lon> with given elevation
 #                                     (optional, default: surface). <hdg>/<pitch>/<roll> are optional
 #                                     and default to zero.
@@ -260,14 +260,15 @@ var put_model = func(path, c, arg...) {
 }
 
 
-var _put_model = func(path, lat, lon, elev_m = nil, hdg = 0, pitch = 0, roll = 0) {
+var _put_model = func(path, lat, lon, elev_m = nil, hdg = 0, pitch = 0, roll = 0, speed = 0, vs=0, hs=0) {
 	if (elev_m == nil)
 		elev_m = elevation(lat, lon);
 	if (elev_m == nil)
 		die("geo.put_model(): cannot get elevation for " ~ lat ~ "/" ~ lon);
 	fgcommand("add-model", var n = props.Node.new({ "path": path,
 		"latitude-deg": lat, "longitude-deg": lon, "elevation-m": elev_m,
-		"heading-deg": hdg, "pitch-deg": pitch, "roll-deg": roll,
+		"heading-deg": hdg, "pitch-deg": pitch, "roll-deg": roll, "speed-kt": speed,
+		"vertical-fps": vs, "horizontal-fps": hs,
 	}));
 	return props.globals.getNode(n.getNode("property").getValue());
 }

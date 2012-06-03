@@ -363,7 +363,7 @@ var scanf = func(test, format, result) {
 			return 0;
 
 		} else {
-			sucess = 2;		# safe match
+			success = 2;		# safe match
 		}
 	}
 	return str.getc() == nil and format.getc() == nil ? success : 0;

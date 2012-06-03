@@ -70,8 +70,8 @@ void main (void)
 	vec4 lightmapTexel = texture2D(LightMapTex, gl_TexCoord[0].st);
 
 	vec3 mixedcolor;
-	vec3 N;
-	float pf;
+	vec3 N = vec3(0.0,0.0,1.0);
+	float pf = 0.0;
 
 ///BEGIN bump
  	if (nmap_enabled > 0 && shader_qual > 2){
@@ -114,7 +114,7 @@ void main (void)
 //BEGIN reflect
 ////////////////////////////////////////////////////////////////////
 	if (refl_enabled > 0 && shader_qual > 1){
-		float reflFactor;
+		float reflFactor = 0.0;
 		float transparency_offset = clamp(refl_correction, -1.0, 1.0);// set the user shininess offset
 
 		if(refl_map > 0){
@@ -174,15 +174,13 @@ void main (void)
 	color.a = texel.a * alpha;
 	vec4 fragColor = vec4(color.rgb * mixedcolor + ambient_Correction.rgb, color.a);
 
-
-
 	fragColor += Specular * nmap.a;
 
 //////////////////////////////////////////////////////////////////////
 // BEGIN lightmap
 //////////////////////////////////////////////////////////////////////
 	if ( lightmap_enabled >= 1 ) {
-		vec3 lightmapcolor;
+		vec3 lightmapcolor = vec3(0.0);
 		vec4 lightmapFactor = vec4(lightmap_r_factor, lightmap_g_factor,
 								  lightmap_b_factor, lightmap_a_factor);
 		lightmapFactor = lightmapFactor * lightmapTexel;

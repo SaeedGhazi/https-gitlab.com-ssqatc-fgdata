@@ -1,7 +1,251 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="ISO-8859-1" ?>
 
-<!-- FlightGear options: French language resource -->
+<!-- Options de FlightGear : ressource linguistique française -->
 
 <PropertyList>
+
+	<usage>Utilisation : fgfs [ option ... ]</usage>
+	<verbose-help>Pour une liste complète des options, utilisez --help --verbose</verbose-help>
+
+	<!-- Options générales -->
+	<general-options>Options générales</general-options>
+	<help-desc>Affiche les options de ligne de commande les plus appropriées.</help-desc>
+	<verbose-desc>Affiche toutes les options de ligne de commande lorsqu'il est combiné avec --help ou -h.</verbose-desc>
+	<version-desc>Affiche la version actuelle de FlightGear.</version-desc>
+	<fg-root-desc>Spéficie l'emplacement du répertoire racine des données.</fg-root-desc>
+	<fg-scenery-desc n="0">Spéficie l'emplacement des répertoires des scènes.</fg-scenery-desc>
+	<fg-scenery-desc n="1">Positionne par défaut à $FG_ROOT/Scenery.</fg-scenery-desc>
+	<fg-aircraft-desc>Spéficie les emplacements des répertoires des aéronefs additionnels.</fg-aircraft-desc>
+	<language-desc>Choisit la langue pour cette session.</language-desc>
+	<disable-game-mode-desc>Désactive le mode de jeu plein écran.</disable-game-mode-desc>
+	<enable-game-mode-desc>Active le mode de jeu plein écran.</enable-game-mode-desc>
+	<disable-splash-screen-desc>Désactive l'écran d'accueil.</disable-splash-screen-desc>
+	<enable-splash-screen-desc>Active l'écran d'accueil.</enable-splash-screen-desc>
+	<disable-save-on-exit>Ne sauvegarde pas les préférences lors de la sortie du programme.</disable-save-on-exit>
+	<enable-save-on-exit>Autorise la sauvegarde des préférences à la sortie du programme.</enable-save-on-exit>
+	<disable-intro-music-desc>Désactive la musique d'introduction.</disable-intro-music-desc>
+	<enable-intro-music-desc>Active la musique d'introduction.</enable-intro-music-desc>
+	<disable-mouse-pointer-desc>Désactive le pointeur de la souris supplémentaire.</disable-mouse-pointer-desc>
+	<enable-mouse-pointer-desc n="0">Active le pointeur de la souris supplémentaire.</enable-mouse-pointer-desc>
+	<enable-mouse-pointer-desc n="1">(c'est-à-dire pour l'affichage plein écran avec des cartes à base de Voodoo)</enable-mouse-pointer-desc>
+	<disable-random-objects-desc>Exclut les objets aléatoires des scènes.</disable-random-objects-desc>
+	<enable-random-objects-desc>Inclut les objets aléatoires des scènes.</enable-random-objects-desc>
+	<disable-real-weather-fetch-desc>Désactive la récupération de la météo en temps réel se basant sur les METAR.</disable-real-weather-fetch-desc>
+	<enable-real-weather-fetch-desc>Active la récupération de la météo en temps réel se basant sur les METAR (nécessite une connection internet active.</enable-real-weather-fetch-desc>
+	<metar-desc>Passe un METAR pour concevoir la météo statique.</metar-desc>
+	<random-objects-desc>(bâtiments, etc.)</random-objects-desc>
+	<disable-ai-models-desc>Option dépréciée (désactive le sous-système IA interne).</disable-ai-models-desc>
+	<enable-ai-models-desc>Active le sous-système IA (nécessaire pour le multi-joueurs, le trafic AI et de nombreuses autres animations).</enable-ai-models-desc>
+	<disable-ai-traffic-desc>Désactive le trafic artificiel.</disable-ai-traffic-desc>
+	<enable-ai-traffic-desc>Active le trafic artificiel.</enable-ai-traffic-desc>
+	<disable-ai-scenarios>Désactive tous les scénarios IA.</disable-ai-scenarios>
+	<ai-scenario>Ajoute et active un nouveau scénario. Les options multiples sont autorisées.</ai-scenario>
+	<disable-freeze-desc>Démarre dans un état fonctionnel.</disable-freeze-desc>
+	<enable-freeze-desc>Démarre dans un état gelé.</enable-freeze-desc>
+	<disable-fuel-freeze-desc>Le carburant est consommé normalement.</disable-fuel-freeze-desc>
+	<enable-fuel-freeze-desc>La quantité de carburant dans les réservoirs reste constante.</enable-fuel-freeze-desc>
+	<disable-clock-freeze-desc>L'horloge avance normalement.</disable-clock-freeze-desc>
+	<enable-clock-freeze-desc>L'horloge n'avance pas.</enable-clock-freeze-desc>
+	<control-desc>Mode de contrôle primaire (joystick, clavier, souris).</control-desc>
+	<enable-auto-coordination-desc>Active l'auto-coordination.</enable-auto-coordination-desc>
+	<disable-auto-coordination-desc>Désactive l'auto coordination.</disable-auto-coordination-desc>
+	<browser-app-desc>Précise le chemin vers votre navigateur Internet.</browser-app-desc>
+	<prop-desc>Positionne la propriété &lt;nom&gt; à la &lt;valeur&gt;. Le &lt;type&gt; peut être l'un parmi string, double, float, long, int, ou bool.</prop-desc>
+	<config-desc>Charge des propriétés additionnelles à partir de l'emplacement.</config-desc>
+	<units-feet-desc>Utilise le pied comme unité de mesure.</units-feet-desc>
+	<units-meters-desc>Utilise le mètre comme unité de mesure.</units-meters-desc>
+
+	<!-- Options de caractéristiques-->
+	<environment-options>Options d'environnement.</environment-options>
+	<features-options>Options des caractéristiques.</features-options>
+	<disable-hud-desc>Désactive le collimateur (Head Up Display, HUD).</disable-hud-desc>
+	<enable-hud-desc>Active le collimateur (Head Up Display, HUD).</enable-hud-desc>
+	<disable-panel-desc>Désactive le panneau des instruments.</disable-panel-desc>
+	<enable-panel-desc>Active le panneau des instruments.</enable-panel-desc>
+	<disable-anti-alias-hud-desc>Désactive l'anti-crénelage du collimateur.</disable-anti-alias-hud-desc>
+	<enable-anti-alias-hud-desc>Active l'anti-crénelage du collimateur.</enable-anti-alias-hud-desc>
+	<disable-hud-3d-desc>Désactive le collimateur 3D.</disable-hud-3d-desc>
+	<enable-hud-3d-desc>Active le collimateur 3D.</enable-hud-3d-desc>
+
+	<!-- Options des aéronefs -->
+	<aircraft-options>Options des aéronefs.</aircraft-options>
+	<aircraft-desc>Choisit un profil d'aéronef défini par un fichier &lt;nom&gt;-set.xml.</aircraft-desc>
+	<show-aircraft-desc>Affiche une liste des types d'aéronefs actuellement disponibles.</show-aircraft-desc>
+	<min-aircraft-status>Permet de définir le niveau de statut minimum (= statut de développement) pour tous les aéronefs listés.</min-aircraft-status>
+	<vehicle-desc>Choisit un profil de véhicule défini par un fichier &lt;nom&gt;-set.xml</vehicle-desc>
+	<livery-desc>Choisit une livrée d'aéronef</livery-desc>
+
+	<!-- Options du modèle dynamique de vol -->
+	<fdm-options>Modèle de vol.</fdm-options>
+	<fdm-desc n="0">Choisit le modèle dynamique de vol de base.</fdm-desc>
+	<fdm-desc n="1">Peut être jsb, larcsim, yasim, magic, balloon, ada, external, ou null.</fdm-desc>
+	<aero-desc>Choisit le modèle aérodynamique de l'aéronef à charger.</aero-desc>
+	<model-hz-desc>Lance le FDM à ce taux (itérations par seconde).</model-hz-desc>
+	<speed-desc>Lance le FDM 'n' fois plus vite que le temps réel.</speed-desc>
+	<notrim-desc n="0">NE PAS essayer d'affecter le modèle.</notrim-desc>
+	<notrim-desc n="1">(uniquement avec fdm=jsbsim)</notrim-desc>
+	<trim-desc n="0">Affecte le modèle.</trim-desc>
+	<trim-desc n="1">(uniquement avec fdm=jsbsim)</trim-desc>
+	<on-ground-desc>Démarre au niveau du sol (par défaut).</on-ground-desc>
+	<in-air-desc>Démarre en altitude (tacite quand on utilise --altitude).</in-air-desc>
+	<wind-desc>Précise que le vent vient de DIR (degrés) à la vitesse SPEED (noeud).</wind-desc>
+	<random-wind-desc>Paramètre une direction et une vitesse du vent aléatoires.</random-wind-desc>
+	<turbulence-desc>Précise la turbulence de 0.0 (calme) à 1.0 (sévère).</turbulence-desc>
+	<ceiling-desc>Crée un plafond couvert, optionnellement d'une épaisseur spécifique (par défaut, 2000 pieds).</ceiling-desc>
+	<aircraft-dir-desc>Répertoire relatif des aéronefs par rapport à l'emplacement de l'exécutable.</aircraft-dir-desc>
+	<aircraft-model-options>Répertoire du modèle des aéronefs (FDM UIUC uniquement).</aircraft-model-options>
+
+	<!-- Options de positionnement et d'orientation -->
+	<position-options>Position et orientation initiales.</position-options>
+	<airport-desc>Précise la position de démarrage relative à un aéroport.</airport-desc>
+	<parking-id-desc>Précise la position de parking sur un aéroport (un aéroport doit également être précisé).</parking-id-desc>
+	<carrier-desc>Précise la position de démarrage sur un porte-avions AI.</carrier-desc>
+	<parkpos-desc>Précise la position de parking sur un porte-avions AI (un porte-avions doit également être précisé).</parkpos-desc>
+	<vor-desc>Précise la position de démarrage relative à un VOR.</vor-desc>
+	<vor-freq-desc>Précise la fréquence du VOR. A utiliser avec --vor=ID.</vor-freq-desc>
+	<ndb-desc>Précise la position de démarrage relative à un NDB.</ndb-desc>
+	<ndb-freq-desc>Précise la fréquence du NDB. A utiliser avec --ndb=ID.</ndb-freq-desc>
+	<fix-desc>Précise la position de démarre relative à un fix.</fix-desc>
+	<runway-no-desc>Précise la piste de départ (un aéroport doit également être précisé).</runway-no-desc>
+	<offset-distance-desc>Précise la distance par rapport un un point de référence (en miles).</offset-distance-desc>
+	<offset-azimuth-desc>Précise le cap par rapport à un point de référence.</offset-azimuth-desc>
+	<lon-desc>Longitude de démarrage (ouest = -).</lon-desc>
+	<lat-desc>Latitude de démarrage (sud = -).</lat-desc>
+	<altitude-desc>Altitude de démarrage.</altitude-desc>
+	<heading-desc>Précise le cap de démarrage (Psi).</heading-desc>
+	<roll-desc>Précise l'angle de roulis (Phi).</roll-desc>
+	<pitch-desc>Précise l'angle d'inclinaison (Theta).</pitch-desc>
+	<uBody-desc>Précise la vélocité le long de l'axe X.</uBody-desc>
+	<vBody-desc>Précise la vélocité le long de l'axe Y.</vBody-desc>
+	<wBody-desc>Précise la vélocité le long de l'axe Z.</wBody-desc>
+	<vNorth-desc>Précise la vélocité le long d'un axe sud-nord.</vNorth-desc>
+	<vEast-desc>Précise la vélocité le long d'un axe ouest-est.</vEast-desc>
+	<vDown-desc>Précise la vélocité le long d'un axe vertical.</vDown-desc>
+	<vc-desc>Précise la vitesse air initiale.</vc-desc>
+	<mach-desc>Précise le numéro de mach initial.</mach-desc>
+	<glideslope-desc>Précise l'angle de vol (peut être positif).</glideslope-desc>
+	<roc-desc>Précise le taux de montée initial (peut être négatif).</roc-desc>
+
+	<!-- Options sonores. -->
+	<audio-options>Options sonores.</audio-options>
+	<disable-sound-desc>Désactive les effets sonores.</disable-sound-desc>
+	<enable-sound-desc>Active les effets sonores.</enable-sound-desc>
+	<show-sound-devices-desc>Affiche une liste des ressources audio disponibles.</show-sound-devices-desc>
+	<sound-device-desc>Précise spécifiquement la ressource audio à utiliser.</sound-device-desc>
+
+	<!-- Options de rendu. -->
+	<rendering-options>Options de rendu.</rendering-options>
+	<bpp-desc>Précise les bits par pixel.</bpp-desc>
+	<fog-disable-desc>Active le brouillard/brume.</fog-disable-desc>
+	<fog-fastest-desc>Active un rendu brouillard/brume plus rapide.</fog-fastest-desc>
+	<fog-nicest-desc>Active un rendu brouillard/brume plus joli.</fog-nicest-desc>
+	<disable-horizon-effect>Désactive l'illusion de loupe des corps célestes à proximité de l'horizon.</disable-horizon-effect>
+	<enable-horizon-effect>Active l'illusion de loupe des corps célestes à proximité de l'horizon.</enable-horizon-effect>
+	<disable-enhanced-lighting>Désactive l'éclairage amélioré des pistes.</disable-enhanced-lighting>
+	<enable-enhanced-lighting>Active l'éclairage amélioré des pistes.</enable-enhanced-lighting>
+	<disable-distance-attenuation>Désactive l'atténuation de l'éclairage des pistes due à la distance.</disable-distance-attenuation>
+	<enable-distance-attenuation>Active l'atténuation de l'éclairage des pistes due à la distance.</enable-distance-attenuation>
+	<disable-specular-highlight>Désactive les réflexions spéculaires sur les objets texturés.</disable-specular-highlight>
+	<enable-specular-highlight>Active les réflexions spéculaires sur les objets texturés.</enable-specular-highlight>
+	<enable-clouds-desc>Active les couches de nuages 2D (à plat).</enable-clouds-desc>
+	<disable-clouds-desc>Désactive les couches de nuages 2D (à plat).</disable-clouds-desc>
+	<enable-clouds3d-desc>Active les couches de nuages 3D (volumétriques).</enable-clouds3d-desc>
+	<disable-clouds3d-desc>Désactive les couches de nuages 3D (volumétriques).</disable-clouds3d-desc>
+	<fov-desc>Précise le champ de l'angle de vue.</fov-desc>
+	<arm-desc>Précise un multiplicateur pour le ratio de rendu.</arm-desc>
+	<disable-fullscreen-desc>Désactive le mode plein écran.</disable-fullscreen-desc>
+	<enable-fullscreen-desc>Active le mode plein écran.</enable-fullscreen-desc>
+	<shading-flat-desc>Active l'ombrage à plat.</shading-flat-desc>
+	<shading-smooth-desc>Active l'ombrage doux.</shading-smooth-desc>
+	<disable-skyblend-desc>Désactive le dégradé du ciel.</disable-skyblend-desc>
+	<enable-skyblend-desc>Active le dégradé du ciel.</enable-skyblend-desc>
+	<disable-textures-desc>Désactive les textures.</disable-textures-desc>
+	<enable-textures-desc>Active les textures.</enable-textures-desc>
+	<materials-file-desc>Précise le fichier de matériaux utilisé pour le rendu des scènes (par défaut : materials.xml).</materials-file-desc>
+	<texture-filtering-desc>Filtre de texture anisotropique : les valeurs doivent être 1 (défault), 2, 4, 8 ou 16.</texture-filtering-desc>
+	<disable-wireframe-desc>Désactive le mode de dessin en fil de fer.</disable-wireframe-desc>
+	<enable-wireframe-desc>Active le mode de dessin en fil de fer.</enable-wireframe-desc>
+	<geometry-desc>Précise la géométrie de la fenêtre (640x480, etc.).</geometry-desc>
+	<view-offset-desc>Précise la direction de vue vers l'avant par défaut comme décalage par rapport à une direction droite devant. Les valeurs autorisées sont LEFT, RIGHT, CENTER, ou un nombre spécifique en degrés.</view-offset-desc>
+	<visibility-desc>Précise la visibilité initiale.</visibility-desc>
+	<visibility-miles-desc>Précise la visibilité initiale en miles.</visibility-miles-desc>
+	<max-fps-desc>Taux maximum de rafraîchissement en Hz.</max-fps-desc>
+
+	<!-- Options du collimateur -->
+	<hud-options>Options du collimateur tête-haute (HUD).</hud-options>
+	<hud-tris-desc>Le collimateur affiche le nombre de triangles rendus.</hud-tris-desc>
+	<hud-culled-desc>Le collimateur affiche le pourcentage de triangles supprimés.</hud-culled-desc>
+
+	<!-- Options de temps -->
+	<time-options>Options de temps.</time-options>
+	<timeofday-desc>Précise l'heure du jour.</timeofday-desc>
+	<season-desc>Précise la saison de démarrage.</season-desc>
+	<time-offset-desc>Ajoute ce décalage temporel.</time-offset-desc>
+	<time-match-real-desc>Synchronise l'heure avec l'heure réelle.</time-match-real-desc>
+	<time-match-local-desc>Synchronise l'heure avec l'heure locale réelle.</time-match-local-desc>
+	<start-date-desc>Précise une date/heure de départ respectant</start-date-desc>
+
+	<!-- Options réseau -->
+	<network-options>Options réseau.</network-options>
+	<httpd-desc>Active un serveur HTTP sur un port spécifié.</httpd-desc>
+	<proxy-desc>Précise quel serveur proxy (et port) à utiliser. Le nom d'utilisateur et le mot de passe sont optionnels et doivent déjà être hachés avec l'algorithme MD5. Cette option n'est utilise que si elle est utilisé en conjonction avec l'option real-weather-fetch.</proxy-desc>
+	<telnet-desc>Active un serveur telnet sur le port précisé.</telnet-desc>
+	<jpg-httpd-desc>Active le serveur HTTP de captures d'écran sur le port précisé.</jpg-httpd-desc>
+	<disable-terrasync-desc>Désactive le téléchargement/la mise à jour automatique des scènes.</disable-terrasync-desc>
+	<enable-terrasync-desc>Active le téléchargement/la mise à jour automatique des scènes.</enable-terrasync-desc>
+	<terrasync-dir-desc>Précise le répertoire cible pour les téléchargements des scènes.</terrasync-dir-desc>
+
+	<!-- Options multijoueurs -->
+	<multiplayer-options>Options multijoueurs.</multiplayer-options>
+	<multiplay-desc>Précise les paramètres de communication multijoueurs.</multiplay-desc>
+	<callsign-desc>Assigne un nom unique à un joueur.</callsign-desc>
+
+	<!-- Options de point de route -->
+	<route-options>Options de point tournant de route.</route-options>
+	<wp-desc>Précise un point tournant (waypoint) pour le pilote automatique GC.</wp-desc>
+	<flight-plan-desc>Lire tous les points tournants à partir d'un fichier.</flight-plan-desc>
+
+	<!-- Options d'entrée/sortie -->
+	<io-options>Options d'entrée/sortie.</io-options>
+	<AV400-desc>Emet le protocole Garmin AV400 nécessaire pour gérer un GPS de la série Garmin 196/296.</AV400-desc>
+	<AV400Sim-desc>Emet l'ensemble des champs AV400 nécessaires pour gérer un GPS de la série Garmin 400 à partir de FlightGear.</AV400Sim-desc>
+	<atlas-desc>Ouvre une connexion en utilisant le protocole Atlas.</atlas-desc>
+	<atcsim-desc>Ouvre une connexion en utilisant le protocole de simulation ATC (atc610x).</atcsim-desc>
+	<garmin-desc>Ouvre une connexion en utilisant le protocole GPS Garmin.</garmin-desc>
+	<joyclient-desc>Ouvre une connexion en utilisant un joystick Agwagon.</joyclient-desc>
+	<jsclient-desc>Ouvre une connexion vers une télécommande joystick.</jsclient-desc>
+	<native-ctrls-desc>Ouvre une connexion utilisant le protocole Native Controls de FG.</native-ctrls-desc>
+	<native-fdm-desc>Ouvre une connexion utilisant le protocole Native FDM de FG.</native-fdm-desc>
+	<native-gui-desc>Ouvre une connexion utilisant le protocole Native GUI de FG.</native-gui-desc>
+	<native-desc>Ouvre une connexion en utilisant le protocole FG Native.</native-desc>
+	<nmea-desc>Ouvre une connexion en utilisant le protocole NMEA.</nmea-desc>
+	<generic-desc>Ouvre une connexion utilisant une interface de communication prédéfinie et un protocole de communication présélectionné.</generic-desc>
+	<opengc-desc>Ouvre une connexion utilisant le protocole OpenGC.</opengc-desc>
+	<props-desc>Ouvre une connexion utilisant le gestionnaire de propriétés interactif.</props-desc>
+	<pve-desc>Ouvre une connexion utilisant le protocole PVE.</pve-desc>
+	<ray-desc>Ouvre une connexion utilisant le protocole de déplacement de chaise Ray Woodworth.</ray-desc>
+	<rul-desc>Ouvre une connexion utilisant le protocole RUL.</rul-desc>
+
+	<!-- Options -->
+	<avionics-options>Options de l'avionique.</avionics-options>
+	<com1-desc>Précise la fréquence radio COM1.</com1-desc>
+	<com2-desc>Précise la fréquence radio COM2.</com2-desc>
+	<nav1-desc>Précise la fréquence radio NAV1, éventuellement précédée d'une radiale.</nav1-desc>
+	<nav2-desc>Précise la fréquence radi NAV2, éventuellement précédée d'une radiale.</nav2-desc>
+	<adf1-desc>Précise la fréquence radio ADF1, éventuellement précédée d'une rotation de carte.</adf1-desc>
+	<adf2-desc>Précise la fréquence radio ADF2, éventuellement précédée d'une rotation de carte.</adf2-desc>
+	<dme-desc>Rend l'ADF esclave d'une des radios NAV, ou précise sa fréquence interne.</dme-desc>
+
+	<situation-options>Options de situation.</situation-options>
+	<failure-desc>Met en panne les systèmes pitot, statique, de vide, ou électrique (répéter l'option pour des pannes système multiples).</failure-desc>
+
+	<!-- Options de débogage -->
+	<debugging-options>Options de débogage.</debugging-options>
+	<fpe-desc>Abandon en cas d'exception sur point flottant.</fpe-desc>
+	<fgviewer-desc>Utilise un visualisateur de modèle plutôt que de charger le simulateur entier.</fgviewer-desc>
+	<trace-read-desc>Trace les lectures pour une propriété.</trace-read-desc>
+	<trace-write-desc>Trace les écritures pour une propriété.</trace-write-desc>
+	<log-level-desc>Précise quel niveau de journalisation utiliser.</log-level-desc>
+	<log-class-desc>Précise quelles classe(s) de journalisation utiliser.</log-class-desc>
 
 </PropertyList>

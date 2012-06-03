@@ -4,8 +4,17 @@
 	<parameters>
 		<exposure type="float"><use>/sim/rendering/rembrandt/exposure</use></exposure>
 		<show-buffers type="bool"><use>/sim/rendering/rembrandt/show-buffers</use></show-buffers>
-		<ambient-occlusion type="bool"><use>/sim/rendering/rembrandt/ambient-occlusion-buffers</use></ambient-occlusion>
 		<bloom type="bool"><use>/sim/rendering/rembrandt/bloom</use></bloom>
+		<bloom-buffers type="bool"><use>/sim/rendering/rembrandt/bloom-buffers</use></bloom-buffers>
+
+		<buffer-nw-enabled><use>/sim/rendering/rembrandt/debug-buffer[0]/enabled</use></buffer-nw-enabled>
+		<buffer-nw-name><use>/sim/rendering/rembrandt/debug-buffer[0]/name</use></buffer-nw-name>
+		<buffer-ne-enabled><use>/sim/rendering/rembrandt/debug-buffer[1]/enabled</use></buffer-ne-enabled>
+		<buffer-ne-name><use>/sim/rendering/rembrandt/debug-buffer[1]/name</use></buffer-ne-name>
+		<buffer-sw-enabled><use>/sim/rendering/rembrandt/debug-buffer[2]/enabled</use></buffer-sw-enabled>
+		<buffer-sw-name><use>/sim/rendering/rembrandt/debug-buffer[2]/name</use></buffer-sw-name>
+		<buffer-se-enabled><use>/sim/rendering/rembrandt/debug-buffer[3]/enabled</use></buffer-se-enabled>
+		<buffer-se-name><use>/sim/rendering/rembrandt/debug-buffer[3]/name</use></buffer-se-name>
 	</parameters>
 	<technique n="11">
 		<pass>
@@ -16,76 +25,68 @@
 			<texture-unit>
 				<unit>0</unit>
 				<type>buffer</type>
-				<name>depth</name>
+				<name>lighting</name>
 			</texture-unit>
 			<texture-unit>
 				<unit>1</unit>
 				<type>buffer</type>
-				<name>normal</name>
+				<name>bloom-3</name>
 			</texture-unit>
+
 			<texture-unit>
 				<unit>2</unit>
 				<type>buffer</type>
-				<name>diffuse</name>
+				<name><use>buffer-nw-name</use></name>
 			</texture-unit>
 			<texture-unit>
 				<unit>3</unit>
 				<type>buffer</type>
-				<name>spec-emis</name>
+				<name><use>buffer-ne-name</use></name>
 			</texture-unit>
 			<texture-unit>
 				<unit>4</unit>
 				<type>buffer</type>
-				<name>lighting</name>
+				<name><use>buffer-sw-name</use></name>
 			</texture-unit>
 			<texture-unit>
 				<unit>5</unit>
 				<type>buffer</type>
-				<name>bloom-3</name>
+				<name><use>buffer-se-name</use></name>
 			</texture-unit>
-			<texture-unit>
-				<unit>6</unit>
-				<type>buffer</type>
-				<name>ao-3</name>
-			</texture-unit>
+
 			<program>
 				<vertex-shader>Shaders/fullscreen.vert</vertex-shader>
 				<fragment-shader>Shaders/display.frag</fragment-shader>
 			</program>
 			<uniform>
-				<name>depth_tex</name>
+				<name>lighting_tex</name>
 				<type>sampler-2d</type>
 				<value type="int">0</value>
 			</uniform>
 			<uniform>
-				<name>normal_tex</name>
+				<name>bloom_tex</name>
 				<type>sampler-2d</type>
 				<value type="int">1</value>
 			</uniform>
 			<uniform>
-				<name>color_tex</name>
+				<name>bufferNW_tex</name>
 				<type>sampler-2d</type>
 				<value type="int">2</value>
 			</uniform>
 			<uniform>
-				<name>specular_tex</name>
+				<name>bufferNE_tex</name>
 				<type>sampler-2d</type>
 				<value type="int">3</value>
 			</uniform>
 			<uniform>
-				<name>lighting_tex</name>
+				<name>bufferSW_tex</name>
 				<type>sampler-2d</type>
 				<value type="int">4</value>
 			</uniform>
 			<uniform>
-				<name>bloom_tex</name>
+				<name>bufferSE_tex</name>
 				<type>sampler-2d</type>
 				<value type="int">5</value>
-			</uniform>
-			<uniform>
-				<name>ao_tex</name>
-				<type>sampler-2d</type>
-				<value type="int">6</value>
 			</uniform>
 			<uniform>
 				<name>exposure</name>
@@ -97,15 +98,37 @@
 				<type>bool</type>
 				<value type="bool"><use>show-buffers</use></value>
 			</uniform>
+
 			<uniform>
-				<name>ambientOcclusion</name>
+				<name>bufferNW_enabled</name>
 				<type>bool</type>
-				<value type="bool"><use>ambient-occlusion</use></value>
+				<value type="bool"><use>buffer-nw-enabled</use></value>
 			</uniform>
+			<uniform>
+				<name>bufferNE_enabled</name>
+				<type>bool</type>
+				<value type="bool"><use>buffer-ne-enabled</use></value>
+			</uniform>
+			<uniform>
+				<name>bufferSW_enabled</name>
+				<type>bool</type>
+				<value type="bool"><use>buffer-sw-enabled</use></value>
+			</uniform>
+			<uniform>
+				<name>bufferSE_enabled</name>
+				<type>bool</type>
+				<value type="bool"><use>buffer-se-enabled</use></value>
+			</uniform>
+
 			<uniform>
 				<name>bloomEnabled</name>
 				<type>bool</type>
 				<value type="bool"><use>bloom</use></value>
+			</uniform>
+			<uniform>
+				<name>bloomBuffers</name>
+				<type>bool</type>
+				<value type="bool"><use>bloom-buffers</use></value>
 			</uniform>
 		</pass>
 	</technique>

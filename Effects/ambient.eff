@@ -3,6 +3,7 @@
 	<name>Effects/ambient</name>
 	<parameters>
 		<ambient-occlusion type="bool"><use>/sim/rendering/rembrandt/ambient-occlusion</use></ambient-occlusion>
+		<ambient-occlusion-strength type="float"><use>/sim/rendering/rembrandt/ambient-occlusion-strength</use></ambient-occlusion-strength>
 	</parameters>
 	<technique n="11">
 		<pass>
@@ -71,7 +72,12 @@
 			<uniform>
 				<name>ambientOcclusion</name>
 				<type>bool</type>
-				<value type="bool"><use>ambient-occlusion</use></value>
+				<value><use>ambient-occlusion</use></value>
+			</uniform>
+			<uniform>
+				<name>ambientOcclusionStrength</name>
+				<type>float</type>
+				<value><use>ambient-occlusion-strength</use></value>
 			</uniform>
 			<!-- The following uniforms are automatically defined and initialized :
 				- fg_SunAmbientColor

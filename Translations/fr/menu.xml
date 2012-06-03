@@ -4,38 +4,112 @@
 
 <PropertyList>
 
-	<!-- File menu -->
+	<!-- Menu Fichier -->
 	<file>Fichier</file>
-	<save-flight>Enregistrer le vol</save-flight>
-	<load-flight>Charger un vol</load-flight>
 	<reset>Réinitialiser</reset>
-	<hi-res-snap-shot>Capture Haute Résolution</hi-res-snap-shot>
-	<snap-shot>Capture               </snap-shot>
-	<print>Imprimer</print>
-	<exit>Quitter               </exit>
+	<snap-shot>Capture d'écran</snap-shot>
+	<snap-shot-dir>Répertoire des captures</snap-shot-dir>
+	<sound-config>Configuration du son</sound-config>
+	<exit>Quitter</exit>
 
-	<!-- View menu -->
-	<view>Vue</view>
-	<toggle-panel>Basculer le tableau de bord</toggle-panel>
-	<pilot-offset>Excentrage du pilote</pilot-offset>
-	<hud-alpha>Alpha du HUD</hud-alpha>
-	<properties>Propriétés</properties>
+	<!-- Menu Affichage -->
+	<view>Affichage</view>
+	<display-options>Options d'affichage</display-options>
+	<rendering-options>Options de rendu</rendering-options>
+	<view-options>Options de la vue</view-options>
+	<cockpit-view-options>Options d'affichage du cockpit</cockpit-view-options>
+	<adjust-lod>Ajuster le niveau de détail</adjust-lod>
+	<pilot-offset>Ajuster la position de la vue</pilot-offset>
+	<adjust-hud>Ajuster les propriétés du HUD</adjust-hud>
+	<toggle-glide-slope>(Dés)Activer le tunnel ILS</toggle-glide-slope>
+	<replay>Rejeu instantané</replay>
+	<stereoscopic-options>Options de vue stéréoscopique</stereoscopic-options>
 
-	<!-- Environment menu -->
+	<!-- Menu Position -->
+	<location>Position</location>
+	<position-on-ground>Positionner l'aéronef au sol</position-on-ground>
+	<position-in-air>Positionner l'aéronef en vol</position-in-air>
+	<goto-airport>Choisir un aéroport à partir de la liste</goto-airport>
+	<random-attitude>Attitude aléatoire</random-attitude>
+	<tower-position>Position de la tour</tower-position>
+
+	<!-- Menu pilote automatique-->
+	<autopilot>Pilote automatique</autopilot>
+	<autopilot-settings>Paramètres</autopilot-settings>
+	<route-manager>Gestionnaire de routes</route-manager>
+	<previous-waypoint>Point de cheminement précédent</previous-waypoint>
+	<next-waypoint>Point de cheminement suivant</next-waypoint>
+
+	<!-- Menu Environnement -->
 	<environment>Environnement</environment>
-	<goto-airport>Aller à l'aéroport</goto-airport>
+	<global-weather>Météo</global-weather>
+	<time-settings>Paramètres du temps</time-settings>
+	<wildfire-settings>Paramètres de feu</wildfire-settings>
+	<terrasync>Téléchargement de scènes</terrasync>
 
-	<!-- Autopilot menu -->
-	<autopilot>Autopilote</autopilot>
-	<set-heading>Définir le cap</set-heading>
-	<set-altitude>Définir l'altitude</set-altitude>
-	<add-waypoint>Ajouter un point de route</add-waypoint>
-	<skip-current-waypoint>Passer le point de route actuel</skip-current-waypoint>
-	<clear-route>Effacer la route</clear-route>
-	<adjust-ap-settings>Ajuster les paramètres AP</adjust-ap-settings>
-	<toggle-hud-format>Basculer le format du HUD</toggle-hud-format>
+	<!-- Menu Equipement -->
+	<equipment>Equipement</equipment>
+	<map>Carte</map>
+	<stopwatch>Chronomètre</stopwatch>
+	<fuel-and-payload>Carburant et chargement</fuel-and-payload>
+	<radio>Paramètres radio</radio>
+	<gps>Paramètres GPS</gps>
+	<instrument-settings>Paramètres des instruments</instrument-settings>
+	<failure-submenu> --- Pannes ---</failure-submenu>
+	<random-failures>Pannes aléatoires</random-failures>
+	<system-failures>Pannes système</system-failures>
+	<instrument-failures>Pannes des instruments</instrument-failures>
 
-	<!-- Help menu -->
+	<!-- Menu IA -->
+	<ai>IA</ai>
+	<scenario>Paramètres de trafic et de scénario</scenario>
+	<atc-in-range>Services ATC à proximité</atc-in-range>
+	<wingman>Contrôle des ailiers</wingman>
+	<tanker>Contrôle du ravitailleur</tanker>
+	<carrier>Contrôle du porte-avions</carrier>
+	<jetway>Paramètres des passerelles d'embarquement</jetway>
+
+	<!-- Menu multijoueurs -->
+	<multiplayer>Multijoueurs</multiplayer>
+	<mp-settings>Paramètres</mp-settings>
+	<mp-chat>Fenêtre de clavardage</mp-chat>
+	<mp-chat-menu>Menu de clavardage</mp-chat-menu>
+	<mp-list>Liste des pilotes</mp-list>
+	<mp-carrier>Choix du porte-avions multijoueurs</mp-carrier>
+
+	<!-- Menu débogage -->
+	<debug>Débogage</debug>
+	<!-- Note : il n'est pas franchement indispensable de traduire les items du menu de débogage
+	     étant donné que ces options ne sont pas utiles aux utilisateurs finaux. -->
+	<reload-gui>Relancer l'interface graphique</reload-gui>
+	<reload-input>Relancer les interfaces d'entrée</reload-input>
+	<reload-hud>Relancer le HUD</reload-hud>
+	<reload-panel>Relancer le panneau</reload-panel>
+	<reload-autopilot>Relancer le pilote automatique</reload-autopilot>
+	<reload-network>Relancer le réseau</reload-network>
+	<nasal-console>Console Nasal</nasal-console>
+	<development-keys>Touches de développement</development-keys>
+	<configure-dev-extension>Configurer les extensions de développement</configure-dev-extension>
+	<display-marker>Afficher le marqueur de tutoriel</display-marker>
+	<dump-scene-graph>Faire un cliché du graphique de scène</dump-scene-graph>
+	<print-rendering-statistics>Afficher les statistiques de rendu</print-rendering-statistics>
+	<statistics-display>Faire défiler les statistiques à l'écran</statistics-display>
+	<performance-monitor>Suivre la performance du système</performance-monitor>
+	<property-browser>Parcourir les propriétés internes</property-browser>
+	<logging>Journalisation</logging>
+	<local_weather>Météo locale (test)</local_weather>
+	<print-scene-info>Afficher les infos de scène visible</print-scene-info>
+	<rendering-buffers>Masquer/Afficher les tampons de rendu</rendering-buffers>
+	<rembrandt-buffers-choice>Choisir les tampons de rendu</rembrandt-buffers-choice>
+
+	<!-- Menu Aide -->
 	<help>Aide</help>
+	<help-browser>Aide (s'ouvre dans le navigateur)</help-browser>
+	<aircraft-keys>Aide de l'aéronef</aircraft-keys>
+	<common-keys>Touches communes aux aéronefs</common-keys>
+	<basic-keys>Touches de base du simulateur</basic-keys>
+	<joystick-info>Informations sur le joystick</joystick-info>
+	<tutorial-start>Tutoriels</tutorial-start>
+	<menu-about>A propos de FlightGear</menu-about>
 
 </PropertyList>

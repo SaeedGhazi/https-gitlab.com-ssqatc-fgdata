@@ -165,6 +165,7 @@
 				<command>dialog-show</command>
 				<dialog-name>stereoscopic-view-options</dialog-name>
 			</binding>
+			<enabled>false</enabled>
 		</item>
 	</menu>
 

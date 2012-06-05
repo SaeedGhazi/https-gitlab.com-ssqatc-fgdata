@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- Glyph locations in bitmap, for inclusion by materials file -->
 <PropertyList>
   <glyph> <name>*</name>          <left>0.00439</left> <right>0.01758</right> </glyph>
@@ -40,16 +40,12 @@
   <glyph> <name>7</name>          <left>0.58570</left> <right>0.60254</right> </glyph>
   <glyph> <name>8</name>          <left>0.60254</left> <right>0.61914</right> </glyph>
   <glyph> <name>9</name>          <left>0.61914</left> <right>0.63672</right> </glyph>
-  <glyph> <name>t0</name>         <left>0.63672</left> <right>0.65137</right> </glyph>
-  <glyph> <name>t1</name>         <left>0.65137</left> <right>0.65918</right> </glyph>
-  <glyph> <name>t2</name>         <left>0.65918</left> <right>0.67334</right> </glyph>
-  <glyph> <name>t3</name>         <left>0.67334</left> <right>0.68726</right> </glyph>
-  <glyph> <name>t4</name>         <left>0.68726</left> <right>0.70288</right> </glyph>
-  <glyph> <name>t5</name>         <left>0.70288</left> <right>0.71680</right> </glyph>
-  <glyph> <name>t6</name>         <left>0.71680</left> <right>0.73120</right> </glyph>
-  <glyph> <name>t7</name>         <left>0.73120</left> <right>0.74634</right> </glyph>
-  <glyph> <name>t8</name>         <left>0.74634</left> <right>0.76001</right> </glyph>
-  <glyph> <name>t9</name>         <left>0.76001</left> <right>0.77441</right> </glyph>
+  <glyph> <name>.</name>          <left>0.640625000</left> <right>0.648437500</right> </glyph>
+  <glyph> <name>,</name>          <left>0.648437500</left> <right>0.656250000</right> </glyph>
+  <glyph> <name>/</name>          <left>0.656250000</left> <right>0.671875000</right> </glyph>
+  <glyph> <name>^I1</name>        <left>0.671875000</left> <right>0.683593750</right> </glyph>
+  <glyph> <name>^I2</name>        <left>0.683593750</left> <right>0.701171875</right> </glyph>
+  <glyph> <name>^I3</name>        <left>0.701171875</left> <right>0.724609375</right> </glyph>
   <glyph> <name>^u</name>         <left>0.77441</left> <right>0.79200</right> </glyph>
   <glyph> <name>^d</name>         <left>0.79200</left> <right>0.81006</right> </glyph>
   <glyph> <name>^l</name>         <left>0.81006</left> <right>0.83276</right> </glyph>

@@ -374,6 +374,8 @@ var Model = {
 		var lat = node.getNode("latitude-deg").getValue();
 		var lon = node.getNode("longitude-deg").getValue();
 		var elev = node.getNode("elevation-ft").getValue();
+		var pitch = node.getNode("pitch-deg").getValue();
+		var roll = node.getNode("roll-deg").getValue();
 		var hdg = node.getNode("heading-deg").getValue();
 		var legend = node.getNode("legend").getValue();
 		var type = nil;
@@ -396,7 +398,7 @@ var Model = {
 		var stg_hdg = normdeg(360 - hdg);
 		var stg_path = geo.tile_path(lat, lon);
 		var abs_path = getprop("/sim/fg-root") ~ "/" ~ path;
-		var obj_line = sprintf("%s %s %.8f %.8f %.4f %.1f", type, spec, lon, lat, elev_m, stg_hdg);
+		var obj_line = sprintf("%s %s %.8f %.8f %.4f %.1f %.1f -%.1f", type, spec, lon, lat, elev_m, stg_hdg, pitch, roll);
 
 		node.getNode("absolute-path", 1).setValue(abs_path);
 		node.getNode("legend", 1).setValue(legend);
@@ -718,7 +720,7 @@ var print_model_data = func(prop) {
 	printf("Altitude ASL: %.4f m (%.4f ft)", elev * FT2M, elev);
 	printf("Heading:      %.1f deg", prop.getNode("heading-deg").getValue());
 	printf("Pitch:        %.1f deg", prop.getNode("pitch-deg").getValue());
-	printf("Roll:         %.1f deg", prop.getNode("roll-deg").getValue());
+	printf("Roll:        -%.1f deg", prop.getNode("roll-deg").getValue());
 }
 
 

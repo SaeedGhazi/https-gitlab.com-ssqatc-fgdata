@@ -231,7 +231,8 @@ hazeColor.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
 
 
 // now dim the light for haze
-earthShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt) + 0.1;
+float eShade = earthShade;
+eShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt) + 0.1;
 
 // Mie-like factor
 
@@ -255,7 +256,7 @@ hazeColor.y = hazeColor.y * 0.9;
 // additional blue in indirect light
 float fade_out = max(0.65 - 0.3 *overcast, 0.45);
 intensity = length(hazeColor);
-hazeColor = intensity * normalize(mix(hazeColor,  1.5* vec3 (0.45, 0.6, 0.8), 1.0 -smoothstep(0.25, fade_out,earthShade) )); 
+hazeColor = intensity * normalize(mix(hazeColor,  1.5* vec3 (0.45, 0.6, 0.8), 1.0 -smoothstep(0.25, fade_out,eShade) )); 
 
 // change haze color to blue hue for strong fogging
 //intensity = length(hazeColor);
@@ -272,7 +273,7 @@ hazeColor = mix(shadow * hazeColor, hazeColor, 0.3 + 0.7* smoothstep(250000.0, 4
 
 //fragColor.xyz = transmission * fragColor.xyz + (1.0-transmission)  * eqColorFactor * hazeColor * earthShade;
 
-fragColor.xyz = mix(eqColorFactor * hazeColor * earthShade, fragColor.xyz,transmission);
+fragColor.xyz = mix(eqColorFactor * hazeColor * eShade, fragColor.xyz,transmission);
 
 gl_FragColor = fragColor;
 

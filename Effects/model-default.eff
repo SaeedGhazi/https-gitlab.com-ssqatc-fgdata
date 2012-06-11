@@ -13,21 +13,15 @@
 		</material>
 		<material-id>0</material-id>
 		<!-- 		BEGIN fog include -->
-		<visibility>
-			<use>/environment/ground-visibility-m</use>
-		</visibility>
-		<avisibility>
-			<use>/environment/visibility-m</use>
-		</avisibility>
-		<lthickness>
-			<use>/environment/ground-haze-thickness-m</use>
-		</lthickness>
-		<scattering>
-			<use>/rendering/scene/scattering</use>
-		</scattering>
-		<terminator>
-			<use>/environment/terminator-relative-position-m</use>
-		</terminator>
+		<visibility><use>/environment/ground-visibility-m</use></visibility>
+		<avisibility><use>/environment/visibility-m</use></avisibility>
+		<lthickness><use>/environment/ground-haze-thickness-m</use></lthickness>
+		<scattering><use>/rendering/scene/scattering</use></scattering>
+		<ground_scattering><use>/environment/surface/scattering</use></ground_scattering>
+		<terminator><use>/environment/terminator-relative-position-m</use></terminator>
+		<terrain_alt><use>/environment/mean-terrain-elevation-m</use></terrain_alt>
+    		<overcast><use>/rendering/scene/overcast</use></overcast>
+    		<eye_alt><use>/sim/rendering/eye-altitude-m</use></eye_alt>
 		<fogtype>
 			<use>/sim/rendering/shaders/skydome</use>
 		</fogtype>

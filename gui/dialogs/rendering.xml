@@ -698,7 +698,7 @@
 				<layout>vbox</layout>
 				<checkbox>
 					<halign>left</halign>
-					<label>Skydome scattering</label>
+					<label>Atmospheric light scattering</label>
 					<name>skydome-scattering</name>
 					<property>/sim/rendering/shaders/skydome</property>
 					<binding>

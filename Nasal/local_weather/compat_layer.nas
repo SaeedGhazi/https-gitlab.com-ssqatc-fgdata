@@ -154,34 +154,22 @@ local_weather.startup();
 
 var setDefaultCloudsOff = func {
 
-if (features.can_disable_environment == 1)
-	{
-	var layers = props.globals.getNode("/environment/clouds").getChildren("layer");
+var layers = props.globals.getNode("/environment/clouds").getChildren("layer");
 	
-	foreach (l; layers)
-		{
-		l.getNode("coverage-type").setValue(5);
-		}
-	}
-else
+foreach (l; layers)
 	{
-	var layers = props.globals.getNode("/environment/clouds").getChildren("layer");
-
-	foreach (l; layers)
-		{
-		l.getNode("coverage").setValue("clear");
-		}
+	l.getNode("coverage-type").setValue(5);
 	}
+	
 
-if (local_weather.hardcoded_clouds_flag == 1) 
-	{
-	# we store that information ourselves, so this should be zero, but rain forces us to go for an offset
-	setprop("/environment/clouds/layer[0]/elevation-ft",0.0);
+
+# we store that information ourselves, so this should be zero, but rain forces us to go for an offset
+setprop("/environment/clouds/layer[0]/elevation-ft",0.0);
 		
-	# layer wrapping off
-	setprop("/sim/rendering/clouds3d-wrap",0);
+# layer wrapping off
+setprop("/sim/rendering/clouds3d-wrap",0);
 
-	}
+	
 
 
 
@@ -194,33 +182,13 @@ if (local_weather.hardcoded_clouds_flag == 1)
 
 var setVisibility = func (vis) {
 
-if (features.can_disable_environment == 1)
-	{
-	setprop("/environment/visibility-m",vis);
-	}
-else
-	{
-	# this is a workaround for systems which lack hard-coded support
-	# essentially we update all entries in config and reinit environment
-
-	var entries_aloft = props.globals.getNode("environment/config/aloft", 1).getChildren("entry");
-	foreach (var e; entries_aloft) {
-			e.getNode("visibility-m",1).setValue(vis);
-			}
-
-	var entries_boundary = props.globals.getNode("environment/config/boundary", 1).getChildren("entry");
-	foreach (var e; entries_boundary) {
-			e.getNode("visibility-m",1).setValue(vis);
-			}
-	fgcommand("reinit", props.Node.new({subsystem:"environment"}));
-	}
+setprop("/environment/visibility-m",vis);
+	
 }
 
 
 var setVisibilitySmoothly = func (vis) {
 
-if (features.can_disable_environment == 0)
-	{setVisibility(vis); return;}
 
 visibility_target = vis;
 visibility_current = getprop("/environment/visibility-m");
@@ -273,19 +241,7 @@ setprop("/environment/local-weather-lift-fps",lift);
 
 var setRain = func (rain) {
 
-if (features.can_disable_environment == 1)
-	{
-	setprop("/environment/rain-norm", rain);
-	}
-else
-	{
-	# setting the lowest cloud layer to 30.000 ft is a workaround
-	# as rain is only created below that layer in default
-
-	setprop("/environment/clouds/layer[0]/elevation-ft", 30000.0);
-	setprop("/environment/metar/rain-norm",rain);
-	}
-
+setprop("/environment/rain-norm", rain);
 }
 
 ####################################
@@ -294,18 +250,7 @@ else
 
 var setSnow = func (snow) {
 
-if (features.can_disable_environment == 1)
-	{
-	setprop("/environment/snow-norm", snow);
-	}
-else
-	{
-	# setting the lowest cloud layer to 30.000 ft is a workaround
-	# as snow is only created below that layer in default
-
-	setprop("environment/clouds/layer[0]/elevation-ft", 30000.0);
-	setprop("environment/metar/snow-norm",snow);
-	}
+setprop("/environment/snow-norm", snow);
 }
 
 
@@ -314,37 +259,9 @@ else
 ####################################
 
 var setTurbulence = func (turbulence) {
-
-if (features.can_disable_environment == 1)
-	{
-	setprop("/environment/turbulence/magnitude-norm",turbulence);
-	setprop("/environment/turbulence/rate-hz",3.0);
-	}
-
-else
-	{
-	# this is a workaround for systems which lack hard-coded support
-	# essentially we update all entries in config and reinit environment
-
-	var entries_aloft = props.globals.getNode("environment/config/aloft", 1).getChildren("entry");
-	foreach (var e; entries_aloft) {
-			e.getNode("turbulence/magnitude-norm",1).setValue(turbulence);
-			e.getNode("turbulence/rate-hz",1).setValue(3.0);
-			e.getNode("turbulence/factor",1).setValue(1.0);
-			}
-
-	# turbulence is slightly reduced in boundary layers
-
-	var entries_boundary = props.globals.getNode("environment/config/boundary", 1).getChildren("entry");
-	var i = 1;
-	foreach (var e; entries_boundary) {
-			e.getNode("turbulence/magnitude-norm",1).setValue(turbulence * 0.25*i);
-			e.getNode("turbulence/rate-hz",1).setValue(5.0);
-			e.getNode("turbulence/factor",1).setValue(1.0);
-			i = i + 1;
-			}
-	fgcommand("reinit", props.Node.new({subsystem:"environment"}));
-	}
+	
+setprop("/environment/turbulence/magnitude-norm",turbulence);
+setprop("/environment/turbulence/rate-hz",3.0);
 }
 
 
@@ -354,19 +271,7 @@ else
 
 var setTemperature = func (T) {
 
-
-if (features.can_disable_environment == 1)
-	{
-	setprop("/environment/temperature-sea-level-degc",T);
-	}
-else
-	{
-	# this is a workaround for systems which lack hard-coded support
-	# essentially we update the entry in config and reinit environment
-	
-	setprop(ec~"boundary/entry[0]/temperature-degc",T);
-	fgcommand("reinit", props.Node.new({subsystem:"environment"}));
-	}
+setprop("/environment/temperature-sea-level-degc",T);
 }
 
 ####################################
@@ -375,19 +280,7 @@ else
 
 var setPressure = func (p) {
 
-if (features.can_disable_environment == 1)
-	{
-	setprop("/environment/pressure-sea-level-inhg",p);
-	}
-else
-	{
-	# this is a workaround for systems which lack hard-coded support
-	# essentially we update the entry in config and reinit environment
-
-	setprop(ec~"boundary/entry[0]/pressure-sea-level-inhg",p);
-	setprop(ec~"aloft/entry[0]/pressure-sea-level-inhg",p);
-	fgcommand("reinit", props.Node.new({subsystem:"environment"}));
-	}
+setprop("/environment/pressure-sea-level-inhg",p);
 }
 
 ####################################
@@ -396,18 +289,7 @@ else
 
 var setDewpoint = func (D) {
 
-if (features.can_disable_environment == 1)
-	{
-	setprop("/environment/dewpoint-sea-level-degc",D);
-	}
-else
-	{
-	# this is a workaround for systems which lack hard-coded support
-	# essentially we update the entry in config and reinit environment
-
-	setprop(ec~"boundary/entry[0]/dewpoint-degc",D);
-	fgcommand("reinit", props.Node.new({subsystem:"environment"}));
-	}
+setprop("/environment/dewpoint-sea-level-degc",D);
 }
 
 ####################################
@@ -416,16 +298,10 @@ else
 
 var setLight = func (s) {
 
-if (features.can_set_light == 1)
-	{	
-	setprop("/rendering/scene/saturation",s);
-	}
+setprop("/rendering/scene/saturation",s);
 }
 
 var setLightSmoothly = func (s) {
-
-if (features.can_set_light == 0)
-	{return;}
 
 light_target = s;
 light_current = getprop("/rendering/scene/saturation");
@@ -468,10 +344,7 @@ settimer( func {light_loop(); },0);
 
 var setScattering = func (s) {
 
-if (features.can_set_scattering == 1)
-	{	
-	setprop("/rendering/scene/scattering",s);
-	}
+setprop("/rendering/scene/scattering",s);
 }
 
 ####################################
@@ -480,10 +353,7 @@ if (features.can_set_scattering == 1)
 
 var setOvercast = func (o) {
 
-if (features.can_set_scattering == 1)
-	{	
-	setprop("/rendering/scene/overcast",o);
-	}
+setprop("/rendering/scene/overcast",o);
 }
 
 
@@ -496,7 +366,6 @@ var setSkydomeShader = func (r, m, d) {
 setprop("/sim/rendering/rayleigh", r);
 setprop("/sim/rendering/mie", m);
 setprop("/sim/rendering/dome-density",d);
-
 }
 
 ###########################################################
@@ -506,38 +375,13 @@ setprop("/sim/rendering/dome-density",d);
 
 var setWind = func (dir, speed) {
 
-if (features.can_disable_environment == 1)
-	{
-	setprop("/environment/wind-from-heading-deg",dir);
-	setprop("/environment/wind-speed-kt",speed);
-	}
+setprop("/environment/wind-from-heading-deg",dir);
+setprop("/environment/wind-speed-kt",speed);
+	
 
 # this is needed to trigger the cloud drift to pick up the new wind setting
-if (local_weather.hardcoded_clouds_flag == 1)
-	{
-	setprop("/environment/clouds/layer[0]/elevation-ft",0.0);
-	}
-
-
-else
-	{
-	# this is a workaround for systems which lack hard-coded support
-	# essentially we update all entries in config and reinit environment
+setprop("/environment/clouds/layer[0]/elevation-ft",0.0);
 	
-	var entries_aloft = props.globals.getNode("environment/config/aloft", 1).getChildren("entry");
-	foreach (var e; entries_aloft) {
-			e.getNode("wind-from-heading-deg",1).setValue(dir);
-			e.getNode("wind-speed-kt",1).setValue(speed);
-			}
-
-	var entries_boundary = props.globals.getNode("environment/config/boundary", 1).getChildren("entry");
-	foreach (var e; entries_boundary) {
-			e.getNode("wind-from-heading-deg",1).setValue(dir);
-			e.getNode("wind-speed-kt",1).setValue(speed);
-			}
-
-	fgcommand("reinit", props.Node.new({subsystem:"environment"}));
-	}
 }
 
 ###########################################################
@@ -548,52 +392,9 @@ else
 
 var setWindSmoothly = func (dir, speed) {
 
-if (features.can_disable_environment == 1)
-	{
-	setWind(dir, speed);
-	}
-else
-	{
-
-	var entries_aloft = props.globals.getNode("environment/config/aloft", 1).getChildren("entry");
-
-	var dir_old = entries_aloft[0].getNode("wind-from-heading-deg",1).getValue();
-	var speed_old = entries_aloft[0].getNode("wind-speed-kt",1).getValue();
-
-	var dir = dir * math.pi/180.0;
-	var dir_old = dir_old * math.pi/180.0;
-
-	var vx = speed * math.sin(dir);
-	var vx_old = speed_old * math.sin(dir_old);
-
-	var vy = speed * math.cos(dir);
-	var vy_old = speed_old * math.cos(dir_old);
-
-	smooth_wind_loop(vx,vy,vx_old, vy_old, 4, 4);
-	}
-
+setWind(dir, speed);	
 }
 
-
-var smooth_wind_loop = func (vx, vy, vx_old, vy_old, counter, count_max) {
-
-var time_delay = 0.9/count_max;
-
-if (counter == 0) {return;}
-
-var f = (counter -1)/count_max;
-
-var vx_set = f * vx_old + (1-f) * vx;
-var vy_set = f * vy_old + (1-f) * vy;
-
-var speed_set = math.sqrt(vx_set * vx_set + vy_set * vy_set);
-var dir_set = math.atan2(vx_set,vy_set) * 180.0/math.pi;
-
-setWind(dir_set,speed_set);
-
-settimer( func {smooth_wind_loop(vx,vy,vx_old,vy_old,counter-1, count_max); },time_delay);
-
-}
 
 ###########################################################
 # place a single cloud 
@@ -635,31 +436,7 @@ else if (find("congestus",path) != -1)
 # first check if the cloud should be stored in the buffer
 # we keep it if it is in visual range or at high altitude (where visual range is different)
 
-if (buffer_flag == 1)
-	{
-	# calculate the distance to the aircraft
-	var pos = geo.aircraft_position();
-	var cpos = geo.Coord.new();
-	cpos.set_latlon(lat,long,0.0);
-	var d = pos.distance_to(cpos);
-	
-	if ((d > d_max) and (alt < 20000.0)) # we buffer the cloud
-		{
-		var b = weather_tile_management.cloudBuffer.new(lat, long, alt, path, heading, tile_counter, convective_flag);
-		if (local_weather.dynamics_flag ==1) 
-			{
-			b.timestamp = weather_dynamics.time_lw;
-			if (convective_flag !=0) # Cumulus clouds get some extra info
-				{
-				b.evolution_timestamp = cloud_evolution_timestamp;
-				b.flt = cloud_flt;
-				b.rel_alt = alt - cloud_mean_altitude;
-				}
-			}
-		append(weather_tile_management.cloudBufferArray,b);
-		return;
-		}
-	}
+
 
 # now check if we are writing from the buffer, in this case change tile index
 # to buffered one
@@ -731,13 +508,6 @@ if (local_weather.dynamics_flag == 1)
 	cs.timestamp = weather_dynamics.time_lw;
 	cs.write_index = placement_index;
 
-	if (convective_flag !=0) # Cumulus clouds get some extra info
-			{
-			cs.evolution_timestamp = cloud_evolution_timestamp;
-			cs.flt = cloud_flt;
-			cs.rel_alt = alt - cloud_mean_altitude;
-			cs.target_alt = alt;
-			}
 
 	if (getprop(lw~"tmp/buffer-status") == "placing")
 		{
@@ -830,8 +600,8 @@ var p = props.Node.new({ "layer" : 0,
 			 "num-textures-y": c.num_tex_y,
 			 "min-cloud-width-m": c.min_cloud_width,
 			 "max-cloud-width-m": c.min_cloud_width,
-			 "min-cloud-height-m": c.min_cloud_height,	
-			 "max-cloud-height-m": c.min_cloud_height,	
+			 "min-cloud-height-m": c.min_cloud_height + c.min_cloud_height * 0.2 * local_weather.height_bias,	
+			 "max-cloud-height-m": c.min_cloud_height + c.min_cloud_height * 0.2 * local_weather.height_bias,	
 			 "z-scale": c.z_scale,
 			 "height-map-texture": 0,
                          "alt-ft" :  c.alt });
@@ -931,8 +701,6 @@ var create_new_cloud_array = func (i, cloudArray)
 
 
 
-#if (getprop(lw~"tmp/thread-status") != "placing") {return;}
-#if (getprop(lw~"tmp/convective-status") != "idle") {return;}
 
 if ((i < 0) or (i==0)) 
 	{
@@ -941,7 +709,6 @@ if ((i < 0) or (i==0))
 	return;
 	}
 
-#print("Hello world! i is now: ",i);
 
 var k_max = 20;
 var s = size(cloudArray);  

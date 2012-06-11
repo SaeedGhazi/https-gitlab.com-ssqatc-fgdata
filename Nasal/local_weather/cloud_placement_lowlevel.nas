@@ -159,6 +159,85 @@ for (var i=0; i<ny; i=i+1)
 }
 
 
+
+###########################################################
+# place a Cumulus alley pattern 
+###########################################################
+
+var create_developing_cumulus_alleys = func (blat, blon, balt, alt_var, nx, xoffset, edgex, x_var, ny, yoffset, edgey, y_var, und_strength, direction, tri) {
+
+var flag = 0;
+var path = "Models/Weather/blank.ac";
+local_weather.calc_geo(blat);
+var dir = direction * math.pi/180.0;
+
+var ymin = -0.5 * ny * yoffset;
+var xmin = -0.5 * nx * xoffset;
+var xinc = xoffset * (tri-1.0) /ny;
+ 
+var jlow = int(nx*edgex);
+var ilow = int(ny*edgey);
+
+var und = 0.0;
+var und_array = [];
+
+var spacing = 0.0;
+var spacing_array = [];
+
+
+for (var i=0; i<ny; i=i+1)
+	{
+	und = und + 2.0 * (rand() -0.5) * und_strength;
+	append(und_array,und);
+	}
+
+for (var i=0; i<nx; i=i+1)
+	{
+	spacing = spacing + 2.0 * (rand() -0.5) * 0.5 * xoffset;
+	append(spacing_array,spacing);
+	}
+
+
+for (var i=0; i<ny; i=i+1)
+	{
+	var y = ymin + i * yoffset; 
+	var xshift = 2.0 * (rand() -0.5) * 0.5 * xoffset; 
+	x_var = 0.0; xshift = 0.0;
+
+	for (var j=0; j<nx; j=j+1)
+		{
+		var y0 = y + y_var * 2.0 * (rand() -0.5);
+		var x = xmin + j * (xoffset + i * xinc) + x_var * 2.0 * (rand() -0.5) + spacing_array[j] + und_array[i];
+		var lat = blat + m_to_lat * (y0 * math.cos(dir) - x * math.sin(dir));
+		var lon = blon + m_to_lon * (x * math.cos(dir) + y0 * math.sin(dir));
+
+		var alt = balt + alt_var * 2 * (rand() - 0.5);
+		
+		flag = 0;
+		var strength = 0.0;
+		var rn = 6.0 * rand();
+
+		if (((j<jlow) or (j>(nx-jlow-1))) and ((i<ilow) or (i>(ny-ilow-1)))) # select a small or no cloud		
+			{
+			if (rn > 2.0) {flag = 1;} else {strength = 0.1 + rand() * 0.5;}
+			}
+		if ((j<jlow) or (j>(nx-jlow-1)) or (i<ilow) or (i>(ny-ilow-1))) 	
+			{
+			if (rn > 5.0) {flag = 1;} else {strength = 0.4 + rand() * 0.5;}
+			}
+		else	{ # select a large cloud
+			if (rn > 5.0) {flag = 1;} else {strength = 0.6 + rand() * 0.6;}
+			}
+
+
+		if (flag==0){create_detailed_cumulus_cloud(lat, lon, alt, strength); }
+		}
+
+	} 
+
+}
+
+
 ###########################################################
 # place a cloud layer 
 ###########################################################
@@ -239,5 +318,46 @@ if (local_weather.hardcoded_clouds_flag == 1) {balt = balt + local_weather.offse
 		i = i + 1;
 		} # end while	
 	} # end if (rainflag ==1)
+}
+
+
+###########################################################
+# place a Cumulus layer with excluded regions
+# to avoid placing cumulus underneath a thunderstorm
+###########################################################
+
+var cumulus_exclusion_layer = func (blat, blon, balt, n, size_x, size_y, alpha, s_min, s_max, n_ex, exlat, exlon, exrad) {
+
+
+var strength = 0;
+var flag = 1;
+var phi = alpha * math.pi/180.0;
+
+var i_max = int(0.35*n);
+
+
+
+for (var i =0; i< i_max; i=i+1)
+	{
+	var x = (2.0 * rand() - 1.0) * size_x;
+	var y = (2.0 * rand() - 1.0) * size_y; 
+
+	var lat = blat + (y * math.cos(phi) - x * math.sin(phi)) * m_to_lat;
+	var lon = blon + (x * math.cos(phi) + y * math.sin(phi)) * m_to_lon;
+
+	flag = 1;
+
+	for (var j=0; j<n_ex; j=j+1)
+		{
+		if (calc_d_sq(lat, lon, exlat[j], exlon[j]) < (exrad[j] * exrad[j])) {flag = 0;}
+		}
+	if (flag == 1)
+		{
+		strength = s_min + rand() * (s_max - s_min);		
+		create_detailed_cumulus_cloud(lat, lon, balt, strength);
+		} 
+
+	} # end for i
+
 }
 

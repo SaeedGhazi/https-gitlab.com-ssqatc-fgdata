@@ -24,19 +24,24 @@ var seaColorPoint = {
 var init_sea_colors = func {
 
 var viewpos = geo.aircraft_position();
+var ppos = geo.Coord.new();
 
 # St. Tropez
 var s = seaColorPoint.new(43.20, 6.47, 1.0,0.03, 0.22, 0.46);
-
-var ppos = geo.Coord.new();
 ppos.set_latlon(s.lat,s.lon,0.0);
 s.distance = viewpos.distance_to(ppos);
 append(interpolation_vector,s);
 
-# St. Maarten
-s = seaColorPoint.new(18.03, -63.11, 1.0,0.08, 0.40, 0.425,0.66);
 
-var ppos = geo.Coord.new();
+# Hawaii
+var s = seaColorPoint.new(22.0, -165.0, 1.0,0.03, 0.22, 0.46);
+ppos.set_latlon(s.lat,s.lon,0.0);
+s.distance = viewpos.distance_to(ppos);
+append(interpolation_vector,s);
+
+
+# St. Maarten
+s = seaColorPoint.new(18.03, -63.11, 1.0,0.08, 0.40, 0.425);
 ppos.set_latlon(s.lat,s.lon,0.0);
 s.distance = viewpos.distance_to(ppos);
 append(interpolation_vector,s);

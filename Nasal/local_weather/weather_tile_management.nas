@@ -14,7 +14,7 @@
 # create_neighbours		to initialize the 8 neighbours of the initial tile
 # buffer_loop			to manage the buffering of faraway clouds in an array
 # housekeeping_loop		to shift clouds from the scenery into the buffer
-# wathcdog loop			(debug helping structure)
+# watchdog loop			(debug helping structure)
 # calc_geo			to get local Cartesian geometry for latitude conversion
 # get_lat			to get latitude from Cartesian coordinates
 # get_lon			to get longitude from Cartesian coordinates
@@ -45,7 +45,8 @@ var d_min = 100000.0;
 var i_min = 0;
 # var distance_to_load = getprop(lw~"config/distance-to-load-tile-m");
 # var distance_to_remove = getprop(lw~"config/distance-to-remove-tile-m");
-var current_visibility = getprop(lw~"interpolation/visibility-m");
+# var current_visibility = getprop(lw~"interpolation/visibility-m");
+var current_visibility = local_weather.interpolated_conditions.visibility_m;
 var current_heading = getprop("orientation/heading-deg");
 var loading_flag = getprop(lw~"tmp/asymmetric-tile-loading-flag");
 var this_frame_action_flag = 0; # use this flag to avoid overlapping tile operations
@@ -1106,138 +1107,6 @@ setprop(lw~"tiles/tile[8]/orientation-deg",alpha);
 }
 
 
-###############################
-# buffer loop
-###############################
-
-var buffer_loop = func (index) {
-
-if (local_weather.local_weather_running_flag == 0) {return;}
-
-var n = 5;
-var n_max = size(cloudBufferArray);
-var s = size(active_tile_list);
-
-setprop(lw~"clouds/buffer-count",n_max);
-
-# don't do anything as long as the buffer is empty
-
-if (n_max == 0) # nothing to do, loop over
-	{if (getprop(lw~"buffer-loop-flag") ==1) {settimer( func {buffer_loop(index)}, 0);} return;}
-
-# don't process the buffer if a tile call is writing clouds into the scenery
-
-if (getprop(lw~"tmp/thread-status") == "placing") 
-	{if (getprop(lw~"buffer-loop-flag") ==1) {settimer( func {buffer_loop(index)}, 0);} return;}
-
-# lock the system status for buffer operations and get flags
-
-setprop(lw~"tmp/buffer-status", "placing");
-var asymmetric_buffering_flag = getprop(lw~"config/asymmetric-buffering-flag");
-	
-if (asymmetric_buffering_flag ==1)
-	{
-	var buffering_angle = getprop(lw~"config/asymmetric-buffering-angle-deg");
-	var buffering_reduction = getprop(lw~"config/asymmetric-buffering-reduction");
-	var current_heading = getprop("orientation/heading-deg");
-	}
-
-# now process the buffer
-
-
-if (index > n_max-1) {index = 0;}
-
-var i_max = index + n;
-if (i_max > n_max) {i_max = n_max;}
-
-for (var i = index; i < i_max; i = i+1)
-	{
-	var c = cloudBufferArray[i];
-
-	# check if the cloud is still part of an active tile, if not remove from buffer
-	
-
-	var flag = 0;
-	for (var j = 0; j < s; j = j+1)
-		{
-		if (active_tile_list[j] == c.index) {flag = 1; break;}
-		}
-
-	if (flag == 0)
-		{
-		cloudBufferArray = delete_from_vector(cloudBufferArray,i);
-		i = i -1; i_max = i_max - 1; n_max = n_max - 1;
-		continue;
-		}
-
-	# if wind drift is on, move the cloud
-
-	if (local_weather.dynamics_flag == 1)
-		{
-		c.move();
-		}	
-
-
-	# check distance and decide if the cloud should be created
-	
-	var d = c.get_distance();
-	var d_comp = cloud_view_distance + 1000.0;
-
-	if (asymmetric_buffering_flag == 1)
-		{
-		var dir = c.get_course();
-		var angle = abs(dir-current_heading);
-		if ((angle > 180.0 - 0.5 * buffering_angle) and (angle < 180 + 0.5 * buffering_angle))
-			{		
-			d_comp = buffering_reduction * d_comp;
-			} 
-		}
-
-
-
-	if (d < d_comp) # insert the cloud into scenery and delete from buffer
-		{
-		compat_layer.buffered_tile_index = c.index;
-		
-		if (local_weather.dynamics_flag == 1) # assemble the current tile coordinates for insertion into quadtree
-			{
-			for (var j = 0; j < 9; j=j+1)
-				{
-				if (getprop(lw~"tiles/tile["~j~"]/tile-index") == c.index)
-					{
-					compat_layer.buffered_tile_latitude = getprop(lw~"tiles/tile["~j~"]/latitude-deg");
-					compat_layer.buffered_tile_longitude = getprop(lw~"tiles/tile["~j~"]/longitude-deg");
-					compat_layer.buffered_tile_alpha=getprop(lw~"tiles/tile["~j~"]/orientation-deg");
-					break;
-					}
-				} 
-			}
-
-		if ((c.type !=0) and (local_weather.dynamics_flag == 1)) # set additional info for Cumulus clouds
-			{
-			compat_layer.cloud_mean_altitude = c.alt - c.rel_alt;
-			compat_layer.cloud_flt = c.flt;
-			compat_layer.cloud_evolution_timestamp = c.evolution_timestamp;
-			}
-		compat_layer.create_cloud(c.path, c.lat, c.lon, c.alt, c.orientation);
-		n_cloudSceneryArray = n_cloudSceneryArray +1;
-		cloudBufferArray = delete_from_vector(cloudBufferArray,i);
-		i = i -1; i_max = i_max - 1; n_max = n_max - 1;
-		deleted_flag = 1;
-		}
-	
-	
-
-	
-	} # end for i
-
-
-# unlock the system status for buffer operations
-
-setprop(lw~"tmp/buffer-status", "idle");
-
-if (getprop(lw~"buffer-loop-flag") ==1) {settimer( func {buffer_loop(i)}, 0);}
-}
 
 
 ###############################
@@ -1264,14 +1133,6 @@ if ((n_max == 0) and (m_max == 0)) # nothing to do, loop over
 
 # parse the flags
 
-var asymmetric_buffering_flag = getprop(lw~"config/asymmetric-buffering-flag");
-	
-if (asymmetric_buffering_flag ==1)
-	{
-	var buffering_angle = getprop(lw~"config/asymmetric-buffering-angle-deg");
-	var buffering_reduction = getprop(lw~"config/asymmetric-buffering-reduction");
-	var current_heading = getprop("orientation/heading-deg");
-	}
 
 # now process the Scenery array
 
@@ -1299,32 +1160,6 @@ for (var i = index; i < i_max; i = i+1)
 		n_cloudSceneryArray = n_cloudSceneryArray -1;
 		continue;
 		}
-	
-	var d = c.get_distance();
-	var alt = c.get_altitude();
-
-	d_comp = cloud_view_distance + 1000.0;
-
-
-	if (asymmetric_buffering_flag == 1)
-		{
-		var dir = c.get_course();
-		var angle = abs(dir-current_heading);
-		if ((angle > 180.0 - 0.5 * buffering_angle) and (angle < 180 + 0.5 * buffering_angle))
-			{		
-			d_comp = buffering_reduction * d_comp;
-			} 
-		}
-
-	if ((d > d_comp) and (alt < 20000.0))
-		{
-		append(cloudBufferArray,c.to_buffer());
-		cloudSceneryArray = delete_from_vector(cloudSceneryArray,i);
-		i = i -1; i_max = i_max - 1; n_max = n_max - 1;
-		n_cloudSceneryArray = n_cloudSceneryArray -1;
-		continue;
-		}
-
 	}
 
 

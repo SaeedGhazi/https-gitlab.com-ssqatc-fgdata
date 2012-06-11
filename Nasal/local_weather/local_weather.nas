@@ -427,7 +427,8 @@ var viewpos = geo.aircraft_position();
 
 
 
-var vis_before = getprop(lwi~"visibility-m");
+#var vis_before = getprop(lwi~"visibility-m");
+var vis_before = interpolated_conditions.visibility_m;
 
 # if applicable, do some work for fps sampling
 
@@ -448,10 +449,9 @@ else
 # if we can set environment without a reset, the loop can run a bit faster for smoother interpolation
 # so determine the suitable timing
 
-if (compat_layer.features.can_disable_environment == 1)
-	{var interpolation_loop_time = 0.2; var vlimit = 1.01;}
-else
-	{var interpolation_loop_time = 1.0; var vlimit = 1.05;} 
+
+var interpolation_loop_time = 0.1; 
+var vlimit = 1.01;
 
 
 # get an inverse distance weighted average from all defined weather stations
@@ -638,9 +638,6 @@ if (vis > max_vis_range)
 
 if (scattering_shader_flag == 1) 
 	{
-	#var rayleigh = 0.0003 ;
-	#var mie = 0.003;
-	#var density = 0.3;
 	
         # values to be used with new exposure filter
 	var rayleigh = 0.0003;
@@ -650,25 +647,7 @@ if (scattering_shader_flag == 1)
 	var vis_factor = (vis - 30000.0)/90000.0;
 	if (vis_factor < 0.0) {vis_factor = 0.0;}
 	if (vis_factor > 1.0) {vis_factor = 1.0;}
- 	
-	#if (altitude < 30000.0) 
-	#	{
-	#	rayleigh = 0.0004 - altitude/30000.0 * 0.0001;
-	#	mie = 0.004 - altitude/30000.0 * 0.001; 
-	#	mie = 0.002 - altitude/30000.0 * 0.001; 
-	#	}
-	#else if (altitude < 60000.0)
-	#	{
-	#	rayleigh = 0.0003 - (altitude-30000.0)/30000.0 * 0.0001;
-	#	mie = 0.003 - (altitude-30000.0)/30000.0 * 0.001; 
-	#	}
-	#else if (altitude < 85000.0)
-	#	{
-	#	rayleigh = 0.0002 - (altitude-60000.0)/25000.0 * 0.0001;
-	#	mie = 0.002;
-	#	}
-	#else 
-	#	{rayleigh = 0.0001; mie = 0.002;}
+ 
 
 	if (altitude < 36000.0) 
 		{
@@ -698,9 +677,7 @@ if (scattering_shader_flag == 1)
 
 
 	}
-# otherwise compute normal skydome shader parameters
 
-	
 
 # compute the horizon shading
 
@@ -730,6 +707,15 @@ else
 	{var ovcst = 0.0;}
 
 
+# compute base turbulence
+
+var base_turbulence = 0.0;
+
+if (altitude < alt1)
+	{
+	base_turbulence = lowest_layer_turbulence;
+	}
+
 
 
 # limit relative changes of the visibility, will make for gradual transitions
@@ -742,14 +728,20 @@ else if (vis/vis_before < (2.0-vlimit))
 
 
 
-# write all properties into the weather interpolation record in the property tree
+# write all properties into the weather interpolation record 
 
 setprop(lwi~"mean-terrain-altitude-ft",ialt);
-if (vis > 0.0) {setprop(lwi~"visibility-m",vis);} # a redundancy check
-setprop(lwi~"temperature-degc",T);
-setprop(lwi~"dewpoint-degc",D);
-if (p > 10.0) {setprop(lwi~"pressure-sea-level-inhg",p);}
-setprop(lwi~"turbulence",0.0);
+# if (vis > 0.0) {setprop(lwi~"visibility-m",vis);} # a redundancy check
+# setprop(lwi~"temperature-degc",T);
+# setprop(lwi~"dewpoint-degc",D);
+# if (p > 10.0) {setprop(lwi~"pressure-sea-level-inhg",p);}
+# setprop(lwi~"turbulence",0.0);
+
+if (vis > 0.0) interpolated_conditions.visibility_m = vis;
+interpolated_conditions.temperature_degc = T;
+interpolated_conditions.dewpoint_degc = D;
+if (p>10.0) interpolated_conditions.pressure_sea_level_inhg = p;
+
 
 
 if (scattering_shader_flag == 1)
@@ -769,39 +761,24 @@ flag = getprop("local-weather/effect-volumes/number-active-vis");
 
 if ((flag ==0) and (vis > 0.0) and (getprop(lw~"lift-loop-flag") == 0) and (compat_layer.smooth_visibility_loop_flag == 0))
 	{
-	setprop(lw~"current/visibility-m",vis);
 	compat_layer.setVisibility(vis);
 	}
 
-flag = getprop("local-weather/effect-volumes/number-active-turb");
 
-if ((flag ==0))
-	{
-	setprop(lw~"current/turbulence",0.0);		
-	compat_layer.setTurbulence(0.0);
-	}
 
 
 flag = getprop("local-weather/effect-volumes/number-active-lift");
 
 if (flag ==0) 
 	{
-	setprop(lw~"current/thermal-lift",0.0);
+	#setprop(lw~"current/thermal-lift",0.0);
 	}
 
 # no need to check for these, as they are not modelled in effect volumes
 
-setprop(lw~"current/temperature-degc",T);
 compat_layer.setTemperature(T);
-
-setprop(lw~"current/dewpoint-degc", D);
 compat_layer.setDewpoint(D);
-
-if (p>0.0) 
-	{
-	setprop(lw~"current/pressure-sea-level-inhg",p);
-	compat_layer.setPressure(p);
-	}
+if (p>0.0) {compat_layer.setPressure(p);}
 
 
 # now determine the local wind 
@@ -851,6 +828,11 @@ wind.surface = [wind.cloudlayer[0], wind.cloudlayer[1] * get_slowdown_fraction()
 # now do the boundary layer computations
 
 var altitude_agl = getprop("/position/altitude-agl-ft");
+
+if (altitude_agl < 50.0)
+	{
+	base_turbulence = base_turbulence * altitude_agl/50.0;
+	}
 
 
 if (presampling_flag == 0)
@@ -917,8 +899,9 @@ if (gust_frequency > 0.0)
 	var gust_relative_strength = getprop(lw~"tmp/gust-relative-strength");
 	var gust_angvar = getprop(lw~"tmp/gust-angular-variation-deg");
 	
-	var winddir_last = getprop(lwi~"wind-from-heading-deg");
-
+	# var winddir_last = getprop(lwi~"wind-from-heading-deg");
+	var winddir_last = interpolated_conditions.wind_from_heading_deg;
+	
 	var alt_scaling_factor = 1.2 * windspeed / 10.0;
 	if (alt_scaling_factor < 1.0) {alt_scaling_factor = 1.0;}
 
@@ -952,12 +935,8 @@ if (gust_frequency > 0.0)
 
 compat_layer.setWindSmoothly(winddir, windspeed_current);
 
-setprop(lwi~"wind-from-heading-deg", winddir);
-setprop(lwi~"wind-speed-kt",windspeed_current);
-
-setprop(lw~"current/wind-from-heading-deg",winddir);
-setprop(lw~"current/wind-speed-kt",windspeed_current);
-
+interpolated_conditions.wind_from_heading_deg = winddir;
+interpolated_conditions.windspeed_kt = windspeed_current;
 
 # hack to get access to the water shader
 
@@ -966,15 +945,27 @@ setprop("/environment/config/boundary/entry[0]/wind-speed-kt",windspeed_ground);
 
 # end hack
 
+
+
+
+# set turbulence
+flag = getprop("local-weather/effect-volumes/number-active-turb");
+
+var wind_enhancement_factor = windspeed_current/15.0;
+if (wind_enhancement_factor > 1.5) {wind_enhancement_factor = 1.5;}
+
+if ((flag ==0))
+	{compat_layer.setTurbulence(base_turbulence * wind_enhancement_factor);}
+
 # set scattering on the ground - this doesn't affect fog but is diffuse and specular light reduction
 # so it is stronger than normal scattering
 
-var scatt_ground = 2.0 * (scatt_max - 0.5);
+var scatt_ground = (scatt_max - 0.4)/0.6;
 if (scatt_ground < 0.0) {scatt_ground = 0.0;}
 
 setprop("/environment/surface/scattering", scatt_ground);
 
-if (getprop(lw~"interpolation-loop-flag") ==1) {settimer(interpolation_loop, interpolation_loop_time);}
+if (getprop(lw~"interpolation-loop-flag") ==1) {settimer(interpolation_loop, 0.0);}
 
 }
 
@@ -1059,7 +1050,9 @@ if (getprop(lw~"wave-loop-flag") ==1)
 
 # compute a reduction in visibility when entering the cloudbase
 
-var vis = getprop(lw~"interpolation/visibility-m");
+#var vis = getprop(lw~"interpolation/visibility-m");
+
+var vis = interpolated_conditions.visibility_m;
 
 if (alt > 0.9 * thermal.height)
 	{
@@ -1313,12 +1306,11 @@ if (ev.vis_flag == 1)
 	# leave property at current because new definitions are already active and should not
 	# be cancelled
 	
-	if (n_active ==1){var vis = props.globals.getNode(lw~"interpolation/visibility-m").getValue();}
-	else if ((n_active -1) == n_entry) #{var vis = ev.getNode("restore/visibility-m").getValue();}
+	if (n_active ==1){var vis = interpolated_conditions.visibility_m;}
+	else if ((n_active -1) == n_entry) 
 		{var vis = ev.vis_r;}
 	else {var vis = cNode.getNode("visibility-m").getValue();}
 	cNode.getNode("visibility-m").setValue(vis);
-	#compat_layer.setVisibility(vis);
 	compat_layer.setVisibilitySmoothly(vis);
 	
 	# and subtract from the counter
@@ -1329,8 +1321,8 @@ if (ev.rain_flag == 1)
 	var n_active = getprop(lw~"effect-volumes/number-active-rain");
 	var n_entry = ev.n_entry_rain;
 
-	if (n_active ==1){var rain = props.globals.getNode(lw~"interpolation/rain-norm").getValue();}
-	else if ((n_active -1) == n_entry)# {var rain = ev.getNode("restore/rain-norm").getValue();}
+	if (n_active ==1){var rain = interpolated_conditions.rain_norm;}
+	else if ((n_active -1) == n_entry)
 		 {var rain = ev.rain_r;}
 	else {var rain = cNode.getNode("rain-norm").getValue();}
 	cNode.getNode("rain-norm").setValue(rain);
@@ -1343,7 +1335,7 @@ if (ev.snow_flag == 1)
 	var n_active = getprop(lw~"effect-volumes/number-active-snow");
 	var n_entry = ev.n_entry_snow;	
 
-	if (n_active ==1){var snow = props.globals.getNode(lw~"interpolation/snow-norm").getValue();}
+	if (n_active ==1){var snow = interpolated_conditions.snow_norm;}
 	else if ((n_active -1) == n_entry)
 		{var snow = ev.snow_r;}
 	else {var snow = cNode.getNode("snow-norm").getValue();}
@@ -1356,7 +1348,7 @@ if (ev.turb_flag == 1)
 	{
 	var n_active = getprop(lw~"effect-volumes/number-active-turb");
 	var n_entry = ev.n_entry_turb;
-	if (n_active ==1){var turbulence = props.globals.getNode(lw~"interpolation/turbulence").getValue();}
+	if (n_active ==1){var turbulence = interpolated_conditions.turbulence;}
 	else if ((n_active -1) == n_entry) 
 		 {var turbulence = ev.turb_r;}
 	else {var turbulence = cNode.getNode("turbulence").getValue();}
@@ -1381,7 +1373,7 @@ if (ev.lift_flag == 1)
 	{
 	var n_active = getprop(lw~"effect-volumes/number-active-lift");
 	var n_entry = ev.n_entry_lift;
-	if (n_active ==1){var lift = props.globals.getNode(lw~"interpolation/thermal-lift").getValue();}
+	if (n_active ==1){var lift = interpolated_conditions.thermal_lift;}
 	else if ((n_active -1) == n_entry)
 		 {var lift = ev.lift_r;}
 	else {var lift = cNode.getNode("thermal-lift").getValue();}
@@ -1714,93 +1706,17 @@ local_weather_running_flag = 0;
 var create_detailed_cumulus_cloud = func (lat, lon, alt, size) {
 
 
+# various distribution biases
+
 var edge_bias = convective_texture_mix;
-
 size = size + convective_size_bias;
+height_bias = 1.0;
+if (edge_bias > 0.0) {height_bias = height_bias +  15.0 *edge_bias + 20.0 * rand() * edge_bias;}
 
 
-if (hardcoded_clouds_flag == 0)
-	{
-	if (size > 2.0)
-		{
-		if (rand() > (size - 2.0))
-			{create_cumulonimbus_cloud(lat, lon, alt, size); }
-		else
-			{create_cumulonimbus_cloud_rain(lat, lon, alt, size, 0.1 + 0.2* rand());}
-		return;
-		}
+#height_bias = 6.0;
 
-	else if (size>1.5)
-		{
-		var type = "Congestus";
-		var btype = "Congestus bottom";
-		var height = 400;
-		var n = 8;
-		var n_b = 4;
-		var x = 1000.0;
-		var y = 300.0;
-		var edge = 0.3;
-		}
-
-	else if (size>1.1)
-		{
-		var type = "Cumulus (cloudlet)";
-		var btype = "Cumulus bottom";
-		var height = 200;
-		var n = 8;
-		var n_b = 1;
-		var x = 400.0;
-		var y = 200.0;
-		var edge = 0.3;
-		}
-	else if (size>0.8)
-		{
-		var type = "Cumulus (cloudlet)";
-		var btype = "Cumulus bottom";
-		var height = 150;
-		var n = 6;
-		var x = 300.0;
-		var y = 200.0;
-		var edge = 0.3;
-		}
-	else if (size>0.4)
-		{
-		var type = "Cumulus (cloudlet)";
-		var btype = "Cumulus bottom";
-		var height = 100;
-		var n = 4;
-		var x = 200.0;
-		var y = 200.0;
-		var edge = 1.0;
-		}
-	else 
-		{
-		var type = "Cumulus (whisp)";
-		var btype = "Cumulus bottom";
-		var height = 100;
-		var n = 1;
-		var x = 100.0;
-		var y = 100.0;
-		var edge = 1.0;
-		}
-
-	var alpha = rand() * 180.0;
-	edge = edge + edge_bias;
-	create_streak(type,lat,lon, alt+ 0.5* (height +cloud_vertical_size_map["Cumulus"] * ft_to_m), height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
-
-	# for large clouds, add a bottom
-
-	if ((size > 1.1) and (edge < 0.4))
-		{
-
-		create_streak(btype,lat,lon, alt, 100.0,n_b,0.0,edge,0.3*x,1,0.0,0.0,0.3*y,alpha,1.0);
-		}
-
-
-
-	}
-else
-	{
+	
 	if (size > 2.0)
 		{
 		if (rand() > (size - 2.0))
@@ -1827,19 +1743,20 @@ else
 
 		var type = "Cu (volume)";
 		var height = 400;
-		var n = 10;
+		var n = 10 + int(height_bias);
 		var x = 1400.0;
 		var y = 400.0;
 		var edge = 0.2;
 		
 		edge = edge + edge_bias;		
 
-		create_streak(type,lat,lon, alt+ 0.3* (height )-offset_map["Congestus"], height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
+		create_streak(type,lat,lon, alt+ 0.5* (height * height_bias )-offset_map["Cumulus"], height * height_bias ,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
 
 		var btype = "Congestus bottom";
 		var n_b = 6;
+		height_bias = 1.0;
 
-		create_streak(btype,lat,lon, alt -offset_map["Congestus"] -200.0, 100.0,n_b,0.0,edge,0.3*x,1,0.0,0.0,0.3*y,alpha,1.0);
+		create_streak(btype,lat,lon, alt -offset_map["Congestus"] -900.0, 100.0,n_b,0.0,edge,0.3*x,1,0.0,0.0,0.3*y,alpha,1.0);
 
 		}
 	else if (size>1.1)
@@ -1847,7 +1764,7 @@ else
 		var type = "Cumulus (cloudlet)";
 		var btype = "Cumulus bottom";
 		var height = 200;
-		var n = 6;
+		var n = 6 + int(height_bias);
 		var n_b = 2;
 		var x = 900.0;
 		var y = 200.0;
@@ -1855,8 +1772,9 @@ else
 
 		var alpha = rand() * 180.0;
 		edge = edge + edge_bias;
-		create_streak(type,lat,lon, alt+ 0.3* (height )-offset_map["Cumulus"], height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
+		create_streak(type,lat,lon, alt+ 0.5* (height* height_bias )-offset_map["Cumulus"], height * height_bias,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
 
+		height_bias = 1.0;
 		create_streak(btype,lat,lon, alt -offset_map["Cumulus"] - 200.0, 100.0,n_b,0.0,edge,0.3*x,1,0.0,0.0,0.3*y,alpha,1.0);
 
 		}
@@ -1864,34 +1782,34 @@ else
 		{
 		var type = "Cumulus (cloudlet)";
 		var height = 150;
-		var n = 4;
+		var n = 4 + int(height_bias);
 		var x = 300.0;
 		var y = 300.0;
 		var edge = 0.3;
 
 		var alpha = rand() * 180.0;
 		edge = edge + edge_bias;
-		create_streak(type,lat,lon, alt+ 0.3* (height )-offset_map["Cumulus"], height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
+		create_streak(type,lat,lon, alt+ 0.5* (height * height_bias )-offset_map["Cumulus"], height * height_bias,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
 
 		n = 2;
 		x = 700.0;
 		y = 200.0;
 		edge = 1.0;
-		create_streak(type,lat,lon, alt+ 0.3* (height )-offset_map["Cumulus"], height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
+		create_streak(type,lat,lon, alt+ 0.5* (height*height_bias )-offset_map["Cumulus"], height * height_bias,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
 		}
 
 	else if (size>0.4)
 		{
 		var type = "Cumulus (cloudlet)";
 		var height = 100;
-		var n = 2;
+		var n = 2 + int(height_bias * 0.5);
 		var x = 600.0;
 		var y = 100.0;
 		var edge = 1.0;
 
 		var alpha = rand() * 180.0;
 		edge = edge + edge_bias;
-		create_streak(type,lat,lon, alt+ 0.3* (height)-offset_map["Cumulus"], height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
+		create_streak(type,lat,lon, alt+ 0.5* (height * height_bias)-offset_map["Cumulus"], height * height_bias,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
 		}
 	else 
 		{
@@ -1906,11 +1824,6 @@ else
 		edge = edge + edge_bias;
 		create_streak(type,lat,lon, alt+ 0.3* (height )-offset_map["Cumulus"], height,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
 		}
-
-	}
-
-
-
 } 
 
 ###########################################################
@@ -1919,12 +1832,8 @@ else
 
 var create_cumulonimbus_cloud = func(lat, lon, alt, size) {
 
-if (hardcoded_clouds_flag == 1)
-	{create_cloudbox("Cb_box", lat, lon, alt, 2500.0,2000.0, 1000.0,14, 0.2, 0.1, 3.4, 8, 0.8, 0.1, 8);}
-else
-	{create_cloudbox("Cb_box", lat, lon, alt, 2500.0,2000.0, 1000.0,14, 0.2, 0.1, 1.4, 4, 0.9, 0.2, 8);}
 
-
+create_cloudbox("Cb_box", lat, lon, alt, 2500.0,2000.0, 1000.0,14, 0.2, 0.1, 3.4, 8, 0.8, 0.1, 8);
 
 }
 
@@ -1934,10 +1843,9 @@ else
 
 var create_cumulonimbus_cloud_rain = func(lat, lon, alt, size, rain) {
 
-if (hardcoded_clouds_flag == 1)
-	{create_cloudbox("Cb_box", lat, lon, alt, 2500.0,2000.0, 1000.0,14, 0.2, 0.1, 3.4, 8, 0.8, 0.1, 8);}
-else
-	{create_cloudbox("Cb_box", lat, lon, alt, 2500.0,2000.0, 1000.0,14, 0.2, 0.1, 1.4, 4, 0.9, 0.2, 8);}
+
+create_cloudbox("Cb_box", lat, lon, alt, 2500.0,2000.0, 1000.0,14, 0.2, 0.1, 3.4, 8, 0.8, 0.1, 8);
+
 
 
 # place a rain texture
@@ -2000,6 +1908,7 @@ if (nc < 0)
 	setprop(lw~"tmp/convective-status", "idle");
 	assemble_effect_array();
 	convective_size_bias = 0.0;
+	height_bias = 1.0;
 	return;
 	}
 
@@ -2067,7 +1976,7 @@ var t_factor2 = 0.5 * (1.0-math.cos((t * sec_to_rad)-0.9));
 
 nc = t_factor1 * nc * math.cos(blat/180.0*math.pi); 
 
-var thermal_conditions = getprop(lw~"config/thermal-properties");
+# var thermal_conditions = getprop(lw~"config/thermal-properties");
 
 
 while (i < nc) {
@@ -2156,13 +2065,7 @@ while (i < nc) {
 
 		var rn = rand();
 		strength = (1.5 * rn + (2.0 * p * terrain_strength_factor)) * t_factor2;  
-		if (strength > 1.0)  
-			{
-			# we place a large cloud, and we generate lift
-			path = select_cloud_model("Cumulus","large"); place_lift_flag = 1;
-			}
-		else {path = select_cloud_model("Cumulus","small");}
-
+		
 		# the terrain effect cannot create Cb development, so we have to curb
 		# the strength if it would not have been Cb otherwise
 
@@ -2173,22 +2076,17 @@ while (i < nc) {
 			}
 
 
+		if (strength > 1.0) {place_lift_flag = 1;}
+
 		cloud_mean_altitude = place_alt;
 		cloud_fractional_lifetime = rand();
 		cloud_evolution_timestamp = weather_dynamics.time_lw;
 
+
+
 		if (generate_thermal_lift_flag != 3) # no clouds if we produce blue thermals
 			{		
-			if (thread_flag == 1)
-				{
-				if (detail_flag == 0){create_cloud_vec(path,lat,lon, place_alt, 0.0);}
-				else {create_detailed_cumulus_cloud(lat, lon, place_alt, strength);}
-				}
-			else
-				{
-				if (detail_flag == 0){compat_layer.create_cloud(path, lat, lon, place_alt, 0.0);}
-				else {create_detailed_cumulus_cloud(lat, lon, place_alt, strength);}
-				}
+			create_detailed_cumulus_cloud(lat, lon, place_alt, strength);
 			}	
 
 		# now see if we need to create a thermal - first check the flag
@@ -2272,7 +2170,7 @@ var t_factor2 = 0.5 * (1.0-math.cos((t * sec_to_rad)-0.9));
 
 nc = t_factor1 * nc * math.cos(blat/180.0*math.pi); 
 
-var thermal_conditions = getprop(lw~"config/thermal-properties");
+# var thermal_conditions = getprop(lw~"config/thermal-properties");
 
 var alt_base = alt_20_array[tile_index -1];
 
@@ -2416,62 +2314,6 @@ while (i < nc) {
 
 
 
-###########################################################
-# place a Cumulus layer with excluded regions
-# to avoid placing cumulus underneath a thunderstorm
-###########################################################
-
-var cumulus_exclusion_layer = func (blat, blon, balt, n, size_x, size_y, alpha, s_min, s_max, n_ex, exlat, exlon, exrad) {
-
-
-var strength = 0;
-var flag = 1;
-var phi = alpha * math.pi/180.0;
-
-var detail_flag = detailed_clouds_flag;
-
-if (detail_flag == 1) {var i_max = int(0.25*n);} else {var i_max = int(1.0*n);}
-
-
-
-for (var i =0; i< i_max; i=i+1)
-	{
-	var x = (2.0 * rand() - 1.0) * size_x;
-	var y = (2.0 * rand() - 1.0) * size_y; 
-
-	var lat = blat + (y * math.cos(phi) - x * math.sin(phi)) * m_to_lat;
-	var lon = blon + (x * math.cos(phi) + y * math.sin(phi)) * m_to_lon;
-
-	flag = 1;
-
-	for (var j=0; j<n_ex; j=j+1)
-		{
-		if (calc_d_sq(lat, lon, exlat[j], exlon[j]) < (exrad[j] * exrad[j])) {flag = 0;}
-		}
-	if (flag == 1)
-		{
-		
-		strength = s_min + rand() * (s_max - s_min);		
-	
-		if (strength > 1.0)  {var path = select_cloud_model("Cumulus","large"); }
-		else {var path = select_cloud_model("Cumulus","small");}
-
-		if (thread_flag == 1)
-			{
-			if (detail_flag == 0){create_cloud_vec(path,lat,lon, balt, 0.0);}
-			else {create_detailed_cumulus_cloud(lat, lon, balt, strength);}
-			}
-		else
-			{
-			if (detail_flag == 0){compat_layer.create_cloud(path, lat, lon, balt, 0.0);}
-			else {create_detailed_cumulus_cloud(lat, lon, balt, strength);}
-			}
-
-		} # end if flag
-
-	} # end for i
-
-}
 
 
 ###########################################################
@@ -3297,12 +3139,15 @@ else {print("Wind model not implemented!"); wind_model_flag =1;}
 var set_texture_mix = func {
 
 var thermal_properties = getprop(lw~"config/thermal-properties");
-
+thermal_conditions = thermal_properties;
 
 convective_texture_mix = -(thermal_properties - 1.0) * 0.4;
 
 if (convective_texture_mix < -0.2) {convective_texture_mix = -0.2;}
 if (convective_texture_mix > 0.2) {convective_texture_mix = 0.2;}
+
+lowest_layer_turbulence = 0.7 - thermal_properties;
+if (lowest_layer_turbulence < 0.0) {lowest_layer_turbulence = 0.0;}
 }
 
 ###########################################################
@@ -4046,7 +3891,7 @@ if (dynamics_flag ==1)
 	if (getprop(lw~"dynamics-loop-flag") == 0) 
 		{
 		setprop(lw~"dynamics-loop-flag",1); 
-		weather_dynamics.quadtree_loop(); 
+		# weather_dynamics.quadtree_loop(); 
 		weather_dynamics.weather_dynamics_loop(0,0);
 		}
 	if ((getprop(lw~"convective-loop-flag") == 0) and (getprop(lw~"config/dynamical-convection-flag") ==1))
@@ -4065,7 +3910,7 @@ if (buffer_flag == 1)
 	{
 	if (getprop(lw~"buffer-loop-flag") == 0) 
 		{
-		setprop(lw~"buffer-loop-flag",1); weather_tile_management.buffer_loop(0);
+		# setprop(lw~"buffer-loop-flag",1); weather_tile_management.buffer_loop(0);
 		setprop(lw~"housekeeping-loop-flag",1); weather_tile_management.housekeeping_loop(0,0);
 		}
 	}
@@ -4095,29 +3940,45 @@ calc_geo(lat);
 
 # copy weather properties at startup to local weather
 
-setprop(lw~"interpolation/visibility-m",getprop(ec~"boundary/entry[0]/visibility-m"));
-setprop(lw~"interpolation/pressure-sea-level-inhg",getprop(ec~"boundary/entry[0]/pressure-sea-level-inhg"));
-setprop(lw~"interpolation/temperature-degc",getprop(ec~"boundary/entry[0]/temperature-degc"));
-setprop(lw~"interpolation/wind-from-heading-deg",getprop(ec~"boundary/entry[0]/wind-from-heading-deg"));
-setprop(lw~"interpolation/wind-speed-kt",getprop(ec~"boundary/entry[0]/wind-speed-kt"));
-setprop(lw~"interpolation/turbulence",getprop(ec~"boundary/entry[0]/turbulence/magnitude-norm"));
+#setprop(lw~"interpolation/visibility-m",getprop(ec~"boundary/entry[0]/visibility-m"));
+#setprop(lw~"interpolation/pressure-sea-level-inhg",getprop(ec~"boundary/entry[0]/pressure-sea-level-inhg"));
+#setprop(lw~"interpolation/temperature-degc",getprop(ec~"boundary/entry[0]/temperature-degc"));
+#setprop(lw~"interpolation/wind-from-heading-deg",getprop(ec~"boundary/entry[0]/wind-from-heading-deg"));
+#setprop(lw~"interpolation/wind-speed-kt",getprop(ec~"boundary/entry[0]/wind-speed-kt"));
+#setprop(lw~"interpolation/turbulence",getprop(ec~"boundary/entry[0]/turbulence/magnitude-norm"));
+#setprop(lw~"interpolation/rain-norm",0.0);
+#setprop(lw~"interpolation/snow-norm",0.0);
+#setprop(lw~"interpolation/thermal-lift",0.0);
 
-setprop(lw~"interpolation/rain-norm",0.0);
-setprop(lw~"interpolation/snow-norm",0.0);
-setprop(lw~"interpolation/thermal-lift",0.0);
+interpolated_conditions.visibility_m = getprop(ec~"boundary/entry[0]/visibility-m");
+interpolated_conditions.pressure_sea_level_inhg = getprop(ec~"boundary/entry[0]/pressure-sea-level-inhg");
+interpolated_conditions.temperature_degc = getprop(ec~"boundary/entry[0]/temperature-degc");
+interpolated_conditions.dewpoint_degc = getprop(ec~"boundary/entry[0]/dewpoint-degc");
+interpolated_conditions.wind_from_heading_deg = getprop(ec~"boundary/entry[0]/wind-from-heading-deg");
+interpolated_conditions.wind_speed_kt = getprop(ec~"boundary/entry[0]/wind-speed-kt");
+interpolated_conditions.turbulence = getprop(ec~"boundary/entry[0]/turbulence/magnitude-norm");
+interpolated_conditions.rain_norm = 0.0;
+interpolated_conditions.snow_norm = 0.0;
+interpolated_conditions.thermal_lift = 0.0;
 
 
 # before interpolation starts, these are also initially current
 
-setprop(lw~"current/visibility-m",getprop(lwi~"visibility-m"));
-setprop(lw~"current/pressure-sea-level-inhg",getprop(lw~"interpolation/pressure-sea-level-inhg"));
-setprop(lw~"current/temperature-degc",getprop(lw~"interpolation/temperature-degc"));
-setprop(lw~"current/wind-from-heading-deg",getprop(lw~"interpolation/wind-from-heading-deg"));
-setprop(lw~"current/wind-speed-kt",getprop(lw~"interpolation/wind-speed-kt"));
-setprop(lw~"current/rain-norm",getprop(lw~"interpolation/rain-norm"));
-setprop(lw~"current/snow-norm",getprop(lw~"interpolation/snow-norm"));
-setprop(lw~"current/thermal-lift",getprop(lw~"interpolation/thermal-lift"));
-setprop(lw~"current/turbulence",getprop(lwi~"turbulence"));
+setprop(lw~"current/visibility-m",interpolated_conditions.visibility_m);
+setprop(lw~"current/rain-norm",0.0);
+setprop(lw~"current/snow-norm",0.0);
+setprop(lw~"current/thermal-lift", 0.0);
+setprop(lw~"current/turbulence",interpolated_conditions.turbulence);
+
+#setprop(lw~"current/visibility-m",getprop(lwi~"visibility-m"));
+#setprop(lw~"current/pressure-sea-level-inhg",getprop(lw~"interpolation/pressure-sea-level-inhg"));
+#setprop(lw~"current/temperature-degc",getprop(lw~"interpolation/temperature-degc"));
+#setprop(lw~"current/wind-from-heading-deg",getprop(lw~"interpolation/wind-from-heading-deg"));
+#setprop(lw~"current/wind-speed-kt",getprop(lw~"interpolation/wind-speed-kt"));
+#setprop(lw~"current/rain-norm",getprop(lw~"interpolation/rain-norm"));
+#setprop(lw~"current/snow-norm",getprop(lw~"interpolation/snow-norm"));
+#setprop(lw~"current/thermal-lift",getprop(lw~"interpolation/thermal-lift"));
+#setprop(lw~"current/turbulence",getprop(lwi~"turbulence"));
 
 # create default properties for METAR system, should be overwritten by real-weather-fetch
 
@@ -4186,9 +4047,9 @@ var lat = getprop("position/latitude-deg");
 var lon = getprop("position/longitude-deg");
 var alt = getprop("position/altitude-ft");
 
-thread_flag = 0;
-dynamics_flag = 0;
-presampling_flag = 0;
+# thread_flag = 0;
+# dynamics_flag = 0;
+# presampling_flag = 0;
 
 
 #if (compat_layer.features.can_disable_environment ==1)
@@ -4208,36 +4069,18 @@ presampling_flag = 0;
 
 # debug.dump(geodinfo(lat, lon));
 
-#create_cumulonimbus_cloud(lat, lon, 6000.0, 2.5);
 
-earthview.place_earth_model("Models/Astro/earth.xml",lat, lon, 0.0, 0.0, 0.0, 0.0);
-earthview.place_earth_model("Models/Astro/cloudsphere.xml",lat, lon, 0.0, 0.0, 0.0, 0.0);
 
-#setprop("/environment/terrain/area[0]/input/latitude-deg", lat );
-#setprop("/environment/terrain/area[0]/input/longitude-deg", lon );
+var info = {};
 
-#setprop("/environment/terrain/area[0]/output/valid", 0 );
+for (var i = 0; i< 100000; i=i+1)
+	{
+	info = geodinfo(lat, lon);
+	}
 
-# elttest();
 
 }
 
-
-var elttest = func {
-
-var lat_uncertainty = 0.001;
-var lon_uncertainty = 0.001;
-
-#var lat = getprop("/position/latitude-deg") + lat_uncertainty * 0.5 - rand();
-#var lon = getprop("/position/longitude-deg") + lon_uncertainty * 0.5 - rand();
-var lat = getprop("/position/latitude-string");
-var lon = getprop("/position/longitude-string");
-var aircraft = getprop("sim/description");
-var callsign = getprop("sim/multiplay/callsign");
-var help_string = "ELT AutoMessage: " ~ aircraft ~ " " ~ callsign ~ " " ~lat~" LAT "~lon~" LON, requesting SAR service";
-
-setprop("/sim/multiplay/chat", help_string);
-}
 
 
 #################################################################
@@ -4549,10 +4392,13 @@ var alt_mean_array = [];
 var effectVolumeArray = [];
 var n_effectVolumeArray = 0;
 
-# the thermal and the wave hash
+# global weather hashes
 
 var thermal = {};
 var wave = {};
+var interpolated_conditions = {};
+var current_conditions = {};
+
 
 # the wind hash stores the current winds
 
@@ -4575,9 +4421,13 @@ var wind_model_flag = 1;
 # globals governing properties of the Cumulus system
 
 var convective_texture_mix = 0.0;
+var height_bias = 1.0;
 var convective_size_bias = 0.0;
 var cumulus_efficiency_factor = 1.0;
 var cloud_mean_altitude = 0.0;
+var thermal_conditions = getprop(lw~"config/thermal-properties");
+var lowest_layer_turbulence = 0.6 - thermal_conditions;
+if (lowest_layer_turbulence < 0.0) {lowest_layer_turbulence = 0.0;}
 
 # global keeping track of lighting
 

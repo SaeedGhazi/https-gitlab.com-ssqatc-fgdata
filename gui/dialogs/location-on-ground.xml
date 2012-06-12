@@ -60,7 +60,7 @@
         }
       }
       if (!initialized) {
-        set_radio("runway");
+        set_radio("bestrunway");
       }
 
       var runways = dlg.getNode("available-runways", 1);

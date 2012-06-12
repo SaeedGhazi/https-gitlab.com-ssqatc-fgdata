@@ -23,11 +23,9 @@ Started September 2000 by David Megginson, david@megginson.com
 		<!-- Limit the time we need to spend in simulation loops to 1 second -->
 		<max-simtime-per-frame type="double">1.0</max-simtime-per-frame>
 
-		<session type="int"
-						 userarchive="y">0</session>
+		<session type="int" userarchive="y">0</session>
 		<paths>
-			<screenshot-dir type="string"
-											userarchive="y"/>
+			<screenshot-dir type="string" userarchive="y"/>
 			<!-- defaults to current working dir -->
 			<validate>
 				<read type="string"/>
@@ -55,8 +53,7 @@ Started September 2000 by David Megginson, david@megginson.com
 			<game-mode type="bool" preserve="y">false</game-mode>
 			<fullscreen type="bool" preserve="y">false</fullscreen>
 			<units>feet</units>
-			<save-on-exit type="bool"
-										userarchive="y">true</save-on-exit>
+			<save-on-exit type="bool" userarchive="y">true</save-on-exit>
 			<browser-app write="n">firefox -new-tab "%u"</browser-app>
 			<!--  help viewer; only used under Unix -->
 			<terminal-ansi-colors type="bool">true</terminal-ansi-colors>
@@ -109,12 +106,9 @@ Started September 2000 by David Megginson, david@megginson.com
 				<water type="float" userarchive="y">1.0</water>
 				<quality-level-internal type="float" userarchive="y">3.0</quality-level-internal>
 			</shaders>
-			<mie type="float"
-					 userarchive="y">0.003</mie>
-			<rayleigh type="float"
-								userarchive="y">0.0003</rayleigh>
-			<dome-density type="float"
-										userarchive="y">0.5</dome-density>
+			<mie type="float" userarchive="y">0.003</mie>
+			<rayleigh type="float" userarchive="y">0.0003</rayleigh>
+			<dome-density type="float" userarchive="y">0.5</dome-density>
 			<!-- multithreading-mode>AutomaticSelection</multithreading-mode -->
 			<!--
      Uncomment the above element to select OSG multi-threading mode.
@@ -138,20 +132,13 @@ Started September 2000 by David Megginson, david@megginson.com
 			<vegetation-density type="double" userarchive="y">1.0</vegetation-density>
 			<random-buildings type="bool" userarchive="y">false</random-buildings>
 			<building-density type="double" userarchive="y">1.0</building-density>
-			<horizon-effect type="bool"
-											userarchive="y">false</horizon-effect>
-			<point-sprites type="bool"
-										 userarchive="y">true</point-sprites>
-			<enhanced-lighting type="bool"
-												 userarchive="y">false</enhanced-lighting>
-			<distance-attenuation type="bool"
-														userarchive="y">false</distance-attenuation>
-			<particles type="bool"
-								 userarchive="y">true</particles>
-			<precipitation-gui-enable type="bool"
-																userarchive="y">false</precipitation-gui-enable>
-			<precipitation-enable type="bool"
-														userarchive="y">false</precipitation-enable>
+			<horizon-effect type="bool" userarchive="y">false</horizon-effect>
+			<point-sprites type="bool" userarchive="y">true</point-sprites>
+			<enhanced-lighting type="bool" userarchive="y">false</enhanced-lighting>
+			<distance-attenuation type="bool" userarchive="y">false</distance-attenuation>
+			<particles type="bool" userarchive="y">true</particles>
+			<precipitation-gui-enable type="bool" userarchive="y">false</precipitation-gui-enable>
+			<precipitation-enable type="bool" userarchive="y">false</precipitation-enable>
 			<precipitation-aircraft-enable type="bool">true</precipitation-aircraft-enable>
 			<precipitation>
 				<!-- streaks coloring and transparency -->
@@ -181,34 +168,21 @@ Started September 2000 by David Megginson, david@megginson.com
 				<cone-base-radius type="float">15.0</cone-base-radius>
 				<cone-height type="float">30.0</cone-height>
 			</precipitation>
-			<lightning-enable type="bool"
-												userarchive="y">false</lightning-enable>
-			<specular-highlight type="bool"
-													userarchive="y">false</specular-highlight>
-			<bump-mapping type="bool"
-										userarchive="y">false</bump-mapping>
-			<clouds3d-enable type="bool"
-											 userarchive="y">false</clouds3d-enable>
-			<clouds3d-vis-range type="float"
-													userarchive="y">10000.0</clouds3d-vis-range>
-			<clouds3d-density type="float"
-												userarchive="y">0.25</clouds3d-density>
+			<lightning-enable type="bool" userarchive="y">false</lightning-enable>
+			<specular-highlight type="bool" userarchive="y">false</specular-highlight>
+			<bump-mapping type="bool" userarchive="y">false</bump-mapping>
+			<clouds3d-enable type="bool" userarchive="y">false</clouds3d-enable>
+			<clouds3d-vis-range type="float" userarchive="y">10000.0</clouds3d-vis-range>
+			<clouds3d-density type="float" userarchive="y">0.25</clouds3d-density>
 			<draw-otw type="bool">true</draw-otw>
-			<shadows-ac type="bool"
-									userarchive="y">false</shadows-ac>
-			<shadows-ac-transp type="bool"
-												 userarchive="y">false</shadows-ac-transp>
-			<shadows-ai type="bool"
-									userarchive="y">false</shadows-ai>
-			<shadows-to type="bool"
-									userarchive="y">false</shadows-to>
-			<shadows-debug type="bool"
-										 userarchive="y">false</shadows-debug>
+			<shadows-ac type="bool" userarchive="y">false</shadows-ac>
+			<shadows-ac-transp type="bool" userarchive="y">false</shadows-ac-transp>
+			<shadows-ai type="bool" userarchive="y">false</shadows-ai>
+			<shadows-to type="bool" userarchive="y">false</shadows-to>
+			<shadows-debug type="bool" userarchive="y">false</shadows-debug>
 			<shadows>
-				<enabled type="bool"
-								 userarchive="y">true</enabled>
-				<debug type="bool"
-							 userarchive="y">false</debug>
+				<enabled type="bool" userarchive="y">true</enabled>
+				<debug type="bool" userarchive="y">false</debug>
 				<map-size type="int">4096</map-size>
 				<num-cascades type="int" userarchive="y">4</num-cascades>
 				<cascade-far-m index="0" type="float" userarchive="y">5.0</cascade-far-m>
@@ -217,20 +191,14 @@ Started September 2000 by David Megginson, david@megginson.com
 				<cascade-far-m index="3" type="float" userarchive="y">5000.0</cascade-far-m>
 				<filtering type="int" userarchive="y">2</filtering>
 			</shadows>
-			<shader-experimental type="bool"
-													 userarchive="y">false</shader-experimental>
-			<shader-effects type="bool"
-											userarchive="y">true</shader-effects>
-			<fps-display type="bool"
-									 userarchive="y">false</fps-display>
-			<frame-latency-display type="bool"
-														 userarchive="y">false</frame-latency-display>
+			<shader-experimental type="bool" userarchive="y">false</shader-experimental>
+			<shader-effects type="bool" userarchive="y">true</shader-effects>
+			<fps-display type="bool" userarchive="y">false</fps-display>
+			<frame-latency-display type="bool" userarchive="y">false</frame-latency-display>
 			<on-screen-statistics type="int">0</on-screen-statistics>
-			<glide-slope-tunnel type="bool"
-													userarchive="y">false</glide-slope-tunnel>
+			<glide-slope-tunnel type="bool" userarchive="y">false</glide-slope-tunnel>
 			<redout>
-				<enabled type="bool"
-								 userarchive="y">true</enabled>
+				<enabled type="bool" userarchive="y">true</enabled>
 				<parameters>
 					<blackout-onset-g type="double">3.5</blackout-onset-g>
 					<blackout-complete-g type="double">5</blackout-complete-g>
@@ -239,17 +207,13 @@ Started September 2000 by David Megginson, david@megginson.com
 				</parameters>
 			</redout>
 			<headshake>
-				<enabled type="bool"
-								 userarchive="y">false</enabled>
+				<enabled type="bool" userarchive="y">false</enabled>
 				<rate-m-g type="double">0.005</rate-m-g>
 			</headshake>
 			<osg-displaysettings>
-				<eye-separation type="double"
-												userarchive="y">0.05</eye-separation>
-				<screen-distance type="double"
-												 userarchive="y">0.5</screen-distance>
-				<stereo-mode type="string"
-										 userarchive="y">OFF</stereo-mode>
+				<eye-separation type="double" userarchive="y">0.05</eye-separation>
+				<screen-distance type="double" userarchive="y">0.5</screen-distance>
+				<stereo-mode type="string" userarchive="y">OFF</stereo-mode>
 			</osg-displaysettings>
 			<cache type="bool">true</cache>
 		</rendering>
@@ -261,45 +225,31 @@ Started September 2000 by David Megginson, david@megginson.com
 			</localizers>
 		</navdb>
 		<sound>
-			<volume type="float"
-							userarchive="y">0.8</volume>
+			<volume type="float" userarchive="y">0.8</volume>
 			<enabled type="bool" userarchive="y">true</enabled>
 			<atc>
-				<enabled type="bool"
-								 userarchive="y">true</enabled>
-				<external-view type="bool"
-											 userarchive="y">true</external-view>
-				<volume type="float"
-								userarchive="y">0.6</volume>
+				<enabled type="bool" userarchive="y">true</enabled>
+				<external-view type="bool" userarchive="y">true</external-view>
+				<volume type="float" userarchive="y">0.6</volume>
 			</atc>
 			<avionics>
-				<enabled type="bool"
-								 userarchive="y">true</enabled>
-				<external-view type="bool"
-											 userarchive="y">true</external-view>
-				<volume type="float"
-								userarchive="y">0.6</volume>
+				<enabled type="bool" userarchive="y">true</enabled>
+				<external-view type="bool" userarchive="y">true</external-view>
+				<volume type="float" userarchive="y">0.6</volume>
 			</avionics>
 			<chatter>
-				<enabled type="bool"
-								 userarchive="y">false</enabled>
-				<volume type="float"
-								userarchive="y">0.6</volume>
+				<enabled type="bool" userarchive="y">false</enabled>
+				<volume type="float" userarchive="y">0.6</volume>
 			</chatter>
 			<effects>
-				<enabled type="bool"
-								 userarchive="y">true</enabled>
-				<volume type="float"
-								userarchive="y">0.6</volume>
+				<enabled type="bool" userarchive="y">true</enabled>
+				<volume type="float" userarchive="y">0.6</volume>
 			</effects>
-			<device-name type="string"
-									 userarchive="y"/>
+			<device-name type="string" userarchive="y"/>
 			<voice type="bool">true</voice>
 			<voices>
-				<host type="string"
-							write="n">localhost</host>
-				<port type="string"
-							write="n">1314</port>
+				<host type="string" write="n">localhost</host>
+				<port type="string" write="n">1314</port>
 				<enabled type="bool">false</enabled>
 				<atc alias="/sim/sound/voices/voice[0]/text"/>
 				<approach alias="/sim/sound/voices/voice[0]/text"/>
@@ -352,13 +302,11 @@ Started September 2000 by David Megginson, david@megginson.com
 		<current-view>
 			<field-of-view type="double">55.0</field-of-view>
 			<aspect-ratio-multiplier type="double">1.0</aspect-ratio-multiplier>
-			<dynamic-view type="bool"
-										userarchive="y">false</dynamic-view>
+			<dynamic-view type="bool" userarchive="y">false</dynamic-view>
 		</current-view>
 		<panel>
 			<path>Aircraft/Generic/Panels/generic-vfr-panel.xml</path>
-			<visibility type="bool"
-									userarchive="y">false</visibility>
+			<visibility type="bool" userarchive="y">false</visibility>
 			<jitter type="bool">false</jitter>
 		</panel>
 		<panel_2>
@@ -370,8 +318,7 @@ Started September 2000 by David Megginson, david@megginson.com
 			<path n="3">Huds/minimal.xml</path>
 			
 			<!-- new HUD -->
-			<visibility n="1"
-									type="bool">false</visibility>
+			<visibility n="1" type="bool">false</visibility>
 			<!-- new HUD -->
 			<font>
 				<name type="string">Helvetica.txf</name>
@@ -445,8 +392,7 @@ Started September 2000 by David Megginson, david@megginson.com
 			</dg>
 		</instrument-options>
 		<input>
-			<property-key-handler type="bool"
-														userarchive="y">false</property-key-handler>
+			<property-key-handler type="bool" userarchive="y">false</property-key-handler>
 		</input>
 
 		<chase-distance-m type="double">-25.0</chase-distance-m>
@@ -467,8 +413,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
 		<view>
 			<name>Cockpit View</name>
-			<enabled type="bool"
-							 userarchive="y">true</enabled>
+			<enabled type="bool" userarchive="y">true</enabled>
 			<type>lookfrom</type>
 			<internal type="bool">false</internal>
 			<config>
@@ -505,8 +450,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
 		<view>
 			<name>Helicopter View</name>
-			<enabled type="bool"
-							 userarchive="y">true</enabled>
+			<enabled type="bool" userarchive="y">true</enabled>
 			<type>lookat</type>
 			<config>
 				<from-model type="bool">false</from-model>
@@ -532,8 +476,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
 		<view>
 			<name>Chase View</name>
-			<enabled type="bool"
-							 userarchive="y">true</enabled>
+			<enabled type="bool" userarchive="y">true</enabled>
 			<type>lookat</type>
 			<config>
 				<from-model type="bool">false</from-model>
@@ -563,8 +506,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
 		<view>
 			<name>Tower View</name>
-			<enabled type="bool"
-							 userarchive="y">true</enabled>
+			<enabled type="bool" userarchive="y">true</enabled>
 			<type>lookat</type>
 			<config>
 				<eye-lat-deg-path>/sim/tower/latitude-deg</eye-lat-deg-path>
@@ -588,8 +530,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
 		<view>
 			<name>Tower View Look From</name>
-			<enabled type="bool"
-							 userarchive="y">true</enabled>
+			<enabled type="bool" userarchive="y">true</enabled>
 			<type>lookfrom</type>
 			<config>
 				<eye-lat-deg-path>/sim/tower/latitude-deg</eye-lat-deg-path>
@@ -610,8 +551,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
 		<view>
 			<name>Chase View Without Yaw</name>
-			<enabled type="bool"
-							 userarchive="y">true</enabled>
+			<enabled type="bool" userarchive="y">true</enabled>
 			<type>lookat</type>
 			<config>
 				<from-model type="bool">false</from-model>
@@ -634,8 +574,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
 		<view>
 			<name>Fly-By View</name>
-			<enabled type="bool"
-							 userarchive="y">true</enabled>
+			<enabled type="bool" userarchive="y">true</enabled>
 			<type>lookat</type>
 			<config>
 				<eye-lon-deg-path>/sim/viewer/longitude-deg</eye-lon-deg-path>
@@ -652,8 +591,7 @@ Started September 2000 by David Megginson, david@megginson.com
 
 		<view>
 			<name>Model View</name>
-			<enabled type="bool"
-							userarchive="y">true</enabled>
+			<enabled type="bool" userarchive="y">true</enabled>
 			<type>lookat</type>
 			<config>
 				<from-model type="bool">false</from-model>
@@ -693,32 +631,24 @@ Started September 2000 by David Megginson, david@megginson.com
 		</view>
 
 		<menubar>
-			<visibility type="bool"
-									userarchive="y">true</visibility>
+			<visibility type="bool" userarchive="y">true</visibility>
 			<default include="gui/menubar.xml"/>
 			<autovisibility>
-				<enabled type="bool"
-								 userarchive="y">false</enabled>
+				<enabled type="bool" userarchive="y">false</enabled>
 				<edge-size type="int">5</edge-size>
 			</autovisibility>
 		</menubar>
 
 		<gui preserve="y">
-			<current-style type="int"
-										 userarchive="y">1</current-style>
-			<style n="0"
-						 include="gui/styles/classic.xml"/>
-			<style n="1"
-						 include="gui/styles/anthrax.xml"/>
-			<devel-widgets type="bool"
-										 userarchive="y">false</devel-widgets>
+			<current-style type="int" userarchive="y">1</current-style>
+			<style n="0" include="gui/styles/classic.xml"/>
+			<style n="1" include="gui/styles/anthrax.xml"/>
+			<devel-widgets type="bool" userarchive="y">false</devel-widgets>
 		</gui>
 
 		<mouse>
-			<hide-cursor type="bool"
-									 userarchive="y">true</hide-cursor>
-			<cursor-timeout-sec type="double"
-													userarchive="y">10.0</cursor-timeout-sec>
+			<hide-cursor type="bool" userarchive="y">true</hide-cursor>
+			<cursor-timeout-sec type="double" userarchive="y">10.0</cursor-timeout-sec>
 		</mouse>
 
 		<replay>
@@ -756,10 +686,8 @@ Started September 2000 by David Megginson, david@megginson.com
 		</atc>
 
 		<ai-traffic>
-			<enabled type="bool"
-							 userarchive="y">false</enabled>
-			<level type="int"
-						 userarchive="y">1</level>
+			<enabled type="bool" userarchive="y">false</enabled>
+			<level type="int" userarchive="y">1</level>
 		</ai-traffic>
 
 		<traffic-manager>
@@ -781,8 +709,7 @@ Started September 2000 by David Megginson, david@megginson.com
 		<multiplay preserve="y">
 			<chat type="string" preserve="y">Hello</chat>
 			<transmission-freq-hz type="string">118500000</transmission-freq-hz>
-			<chat-display type="bool"
-										userarchive="y">true</chat-display>
+			<chat-display type="bool" userarchive="y">true</chat-display>
 			<chat-menu include="ATC/chat-menu-entries.xml"/>
 			<write-message-log type="bool">false</write-message-log>
 			<freeze-on-replay type="bool">true</freeze-on-replay>
@@ -1075,78 +1002,60 @@ Started September 2000 by David Megginson, david@megginson.com
 		<!-- Instruments -->
 
 		<airspeed-indicator>
-			<serviceable type="bool"
-									 archive="y">true</serviceable>
+			<serviceable type="bool" archive="y">true</serviceable>
 		</airspeed-indicator>
 
 		<attitude-indicator>
 			<config>
 				<!-- true if this AI can tumble -->
-				<tumble-flag type="bool"
-										 archive="y">false</tumble-flag>
+				<tumble-flag type="bool" archive="y">false</tumble-flag>
 			</config>
-			<caged-flag type="bool"
-						 archive="y">false</caged-flag>
-			<serviceable type="bool"
-									 archive="y">true</serviceable>
-			<spin type="double"
-						archive="y">0.0</spin>
-			<tumble-norm type="double"
-									 archive="y">0.0</tumble-norm>
+			<caged-flag type="bool" archive="y">false</caged-flag>
+			<serviceable type="bool" archive="y">true</serviceable>
+			<spin type="double" archive="y">0.0</spin>
+			<tumble-norm type="double" archive="y">0.0</tumble-norm>
 			<indicated-pitch-deg type="double">0.0</indicated-pitch-deg>
 			<indicated-roll-deg type="double">0.0</indicated-roll-deg>
 		</attitude-indicator>
 
 		<altimeter>
-			<serviceable type="bool"
-									 archive="y">true</serviceable>
-			<setting-inhg type="double"
-										archive="y">29.92</setting-inhg>
+			<serviceable type="bool" archive="y">true</serviceable>
+			<setting-inhg type="double" archive="y">29.92</setting-inhg>
 		</altimeter>
 
 		<turn-indicator>
-			<serviceable type="bool"
-									 archive="y">true</serviceable>
+			<serviceable type="bool" archive="y">true</serviceable>
 		</turn-indicator>
 
 		<slip-skid-ball>
-			<serviceable type="bool"
-									 archive="y">true</serviceable>
+			<serviceable type="bool" archive="y">true</serviceable>
 		</slip-skid-ball>
 
 		<heading-indicator>
-			<serviceable type="bool"
-									 archive="y">true</serviceable>
-			<spin type="double"
-						archive="y">0.0</spin>
-			<offset-deg type="double"
-									archive="y">4.5</offset-deg>
+			<serviceable type="bool" archive="y">true</serviceable>
+			<spin type="double" archive="y">0.0</spin>
+			<offset-deg type="double" archive="y">4.5</offset-deg>
 			<!-- just for fun -->
 		</heading-indicator>
 
 		<vertical-speed-indicator>
-			<serviceable type="bool"
-									 archive="y">true</serviceable>
+			<serviceable type="bool" archive="y">true</serviceable>
 		</vertical-speed-indicator>
 
 		<magnetic-compass>
-			<serviceable type="bool"
-									 archive="y">true</serviceable>
+			<serviceable type="bool" archive="y">true</serviceable>
 		</magnetic-compass>
 
 		<dme n="0">
-			<serviceable type="bool"
-									 archive="y">true</serviceable>
-			<switch-position type="int"
-											 archive="y">1</switch-position>
+			<serviceable type="bool" archive="y">true</serviceable>
+			<switch-position type="int" archive="y">1</switch-position>
 			<frequencies>
 				<source>/instrumentation/nav[0]/frequencies/selected-mhz</source>
 			</frequencies>
 		</dme>
 
 		<gps>
-			<serviceable type="bool"
-									 archive="y">true</serviceable>
+			<serviceable type="bool" archive="y">true</serviceable>
 			<message-alert type="bool">false</message-alert>
 			<waypoint-alert type="bool">false</waypoint-alert>
 			<leg-mode type="bool">true</leg-mode>
@@ -1157,15 +1066,12 @@ Started September 2000 by David Megginson, david@megginson.com
 		</gps>
 
 		<kln89>
-			<scan-pull type="bool"
-								 archive="y">false</scan-pull>
+			<scan-pull type="bool" archive="y">false</scan-pull>
 		</kln89>
 
 		<clock>
-			<serviceable type="bool"
-									 archive="y">true</serviceable>
-			<offset-sec type="long"
-									archive="y">0</offset-sec>
+			<serviceable type="bool" archive="y">true</serviceable>
+			<offset-sec type="long" archive="y">0</offset-sec>
 		</clock>
 
 		<adf n="0">
@@ -1173,8 +1079,7 @@ Started September 2000 by David Megginson, david@megginson.com
 				<selected-khz type="int">379</selected-khz>
 				<standby-khz type="int">341</standby-khz>
 			</frequencies>
-			<serviceable type="bool"
-									 archive="y">true</serviceable>
+			<serviceable type="bool" archive="y">true</serviceable>
 			<indicated-bearing-deg type="double">90</indicated-bearing-deg>
 			<error-deg type="double">2</error-deg>
 			<mode>adf</mode>
@@ -1187,8 +1092,7 @@ Started September 2000 by David Megginson, david@megginson.com
 				<selected-khz type="int">379</selected-khz>
 				<standby-khz type="int">341</standby-khz>
 			</frequencies>
-			<serviceable type="bool"
-									 archive="y">true</serviceable>
+			<serviceable type="bool" archive="y">true</serviceable>
 			<indicated-bearing-deg type="double">90</indicated-bearing-deg>
 			<error-deg type="double">2</error-deg>
 			<mode>adf</mode>
@@ -1211,10 +1115,8 @@ Started September 2000 by David Megginson, david@megginson.com
 		</gps-annunciator>
 
 		<tacan n="0">
-			<serviceable type="bool"
-									 archive="y">true</serviceable>
-			<switch-position type="int"
-											 archive="y">1</switch-position>
+			<serviceable type="bool" archive="y">true</serviceable>
+			<switch-position type="int" archive="y">1</switch-position>
 			<frequencies>
 				<selected-channel n="1">0</selected-channel>
 				<selected-channel n="2">2</selected-channel>
@@ -1226,30 +1128,23 @@ Started September 2000 by David Megginson, david@megginson.com
 
 	<systems>
 		<pitot>
-			<serviceable type="bool"
-									 archive="y">true</serviceable>
+			<serviceable type="bool" archive="y">true</serviceable>
 		</pitot>
 		<static>
-			<serviceable type="bool"
-									 archive="y">true</serviceable>
-			<pressure-inhg type="double"
-										 archive="y">29.92</pressure-inhg>
+			<serviceable type="bool" archive="y">true</serviceable>
+			<pressure-inhg type="double" archive="y">29.92</pressure-inhg>
 		</static>
 		<electrical>
-			<serviceable type="bool"
-									 archive="y">true</serviceable>
+			<serviceable type="bool" archive="y">true</serviceable>
 		</electrical>
 		<vacuum>
-			<serviceable type="bool"
-									 archive="y">true</serviceable>
+			<serviceable type="bool" archive="y">true</serviceable>
 		</vacuum>
 		<vacuum>
-			<serviceable type="bool"
-									 archive="y">true</serviceable>
+			<serviceable type="bool" archive="y">true</serviceable>
 		</vacuum>
 		<refuel>
-			<serviceable type="bool"
-									 archive="y">true</serviceable>
+			<serviceable type="bool" archive="y">true</serviceable>
 		</refuel>
 	</systems>
 
@@ -1309,7 +1204,7 @@ Started September 2000 by David Megginson, david@megginson.com
 			<enabled type="bool" userarchive="n">false</enabled>
 		</atc-chatter>
 		<local_weather>
-  			<enabled type="bool" userarchive="y">false</enabled>
+			<enabled type="bool" userarchive="y">false</enabled>
 		</local_weather>
 		<jetways>
 			<enabled type="bool" userarchive="y">false</enabled>

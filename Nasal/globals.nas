@@ -28,7 +28,7 @@ var __ = {};
 #
 var isa = func(obj, class) {
     if(typeof(obj) == "hash" and obj["parents"] != nil)
-        foreach(c; obj.parents)
+        foreach(var c; obj.parents)
             if(c == class or isa(c, class))
                 return 1;
     return 0;

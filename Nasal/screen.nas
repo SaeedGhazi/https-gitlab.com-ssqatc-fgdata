@@ -180,7 +180,7 @@ var window = {
 			me.show();
 		} else {
 			me.close();
-			dialog = nil;
+			me.dialog = nil;
 			me.lines = [];
 		}
 	},

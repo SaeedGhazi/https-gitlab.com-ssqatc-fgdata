@@ -13,9 +13,9 @@ find_weather_scenario = func(name) {
 }
 
 var initialize_weather_scenario = func {
-  getprop( "/environment/params/metar-updates-environment", 0 ) == 0 and return;
-  getprop( "/environment/realwx/enabled", 0 ) and return;
-  getprop( "/environment/metar/data", "" ) != "" and return;
+  getprop( "/environment/params/metar-updates-environment" ) == 0 and return;
+  getprop( "/environment/realwx/enabled" ) and return;
+  getprop( "/environment/metar/data" ) != "" and return;
 
   # preset configured scenario
   var scn = getprop("/environment/weather-scenario", "");

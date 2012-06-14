@@ -305,7 +305,7 @@ setlistener("/sim/cam/lock", func(n) {
 setlistener("/sim/signals/fdm-initialized", func {
     var views = props.globals.getNode("/sim").getChildren("view");
     forindex (var i; views)
-        if (views[i].getNode("name").getValue() == "Cam View")
+        if (views[i].getNode("name", 1).getValue() == "Cam View")
             cam_view = i;
 
     setprop("/sim/current-view/view-number", cam_view);

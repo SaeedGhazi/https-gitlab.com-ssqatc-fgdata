@@ -41,11 +41,12 @@ uniform    float WaveSharp ;
 uniform    float WaveAngle ;
 uniform    float WaveFactor ;
 uniform    float WaveDAngle ;
+uniform    float normalmap_dds;
 
 
 uniform float hazeLayerAltitude;
 uniform float terminator;
-uniform float terrain_alt; 
+uniform float terrain_alt;
 uniform float avisibility;
 uniform float visibility;
 uniform float overcast;
@@ -173,9 +174,9 @@ if (eye_alt < 30000.0)
 else if (eye_alt < 50000.0)
 	{
 	fade_mix = (eye_alt - 30000.0)/20000.0;
-	return fade_mix * exp(-targ*targ - pow(targ,4.0)) + (1.0 - fade_mix) * exp(-targ - pow(targ,4.0));	
+	return fade_mix * exp(-targ*targ - pow(targ,4.0)) + (1.0 - fade_mix) * exp(-targ - pow(targ,4.0));
 	}
-else 
+else
 	{
 	return exp(- targ * targ - pow(targ,4.0));
 	}
@@ -223,9 +224,9 @@ void main(void)
 	// we only need detail in the near zone or where the sun reflection is
 
 	int detail_flag;
-	if ((dist > 15000.0) && (dot(normalize(vec3 (lightdir.x, lightdir.y, 0.0) ), normalize(relPos)) < 0.7 ))  {detail_flag = 0;} 
+	if ((dist > 15000.0) && (dot(normalize(vec3 (lightdir.x, lightdir.y, 0.0) ), normalize(relPos)) < 0.7 ))  {detail_flag = 0;}
 	else {detail_flag = 1;}
-	
+
 
 	// sine waves
 	float ddx, ddx1, ddx2, ddx3, ddy, ddy1, ddy2, ddy3;
@@ -299,9 +300,9 @@ void main(void)
 
 	vec4 disdis = texture2D(water_dudvmap, vec2(waterTex2 * tscale)* windScale) * 2.0 - 1.0;
 
-	vec4 vNorm;	
+	vec4 vNorm;
 
-	
+
 	//normalmaps
 	vec4 nmap   = texture2D(water_normalmap, vec2(waterTex1 + disdis * sca2) * windScale) * 2.0 - 1.0;
 	vec4 nmap1  = texture2D(perlin_normalmap, vec2(waterTex1 + disdis * sca2) * windScale) * 2.0 - 1.0;
@@ -316,29 +317,27 @@ void main(void)
 	// mix water and noise, modulated by factor
 	vNorm = normalize(mix(nmap, nmap1, mixFactor) * waveRoughness);
 	if (detail_flag == 1)	{vNorm.r += ddx + ddx1 + ddx2 + ddx3;}
-	vNorm = -vNorm;	
-	//dds fix
-	
-	
-		
+
+	if (normalmap_dds > 0)
+        vNorm = -vNorm; //dds fix
 
 	//load reflection
-	
+
 	vec4 refl ;
 
 	refl.r = sea_r;
 	refl.g = sea_g;
 	refl.b = sea_b;
-	refl.a = 1.0; 
-	
+	refl.a = 1.0;
+
 
 	float intensity;
 	// de-saturate for reduced light
-	refl.rgb = mix(refl.rgb,  vec3 (0.248, 0.248, 0.248), 1.0 - smoothstep(0.3, 0.7, ground_scattering)); 	
+	refl.rgb = mix(refl.rgb,  vec3 (0.248, 0.248, 0.248), 1.0 - smoothstep(0.3, 0.7, ground_scattering));
 
   	// de-saturate light for overcast haze
 	intensity = length(refl.rgb);
-	refl.rgb = mix(refl.rgb,  intensity * vec3 (1.0, 1.0, 1.0), smoothstep(0.1, 0.8, overcast)); 	
+	refl.rgb = mix(refl.rgb,  intensity * vec3 (1.0, 1.0, 1.0), smoothstep(0.1, 0.8, overcast));
 
 	vec3 N;
 
@@ -367,16 +366,17 @@ void main(void)
 
 	N = normalize(mix(Normal + N0, Normal + N1, mixFactor) * waveRoughness);
 
-	N = -N; //dds fix
-	} 
-	else 
+	if (normalmap_dds > 0)
+        N = -N; //dds fix
+	}
+	else
 	{N = vec3 (0.0, 0.0, 1.0);}
 
     	//float lightArg = (terminator-yprime_alt)/100000.0;
 
 
 
-	
+
 	vec3 specular_color = vec3(specular_light)
 		* pow(max(0.0, dot(N, Hv)), water_shininess) * 6.0;
 	vec4 specular = vec4(specular_color, 0.5);
@@ -394,8 +394,8 @@ void main(void)
 
 	ambient_light.rgb = specular_light.rgb;
    	ambient_light.a = 1.0;
-   	
-	
+
+
 	vec4 finalColor;
 
 	//if(cover >= 1.5)
@@ -423,7 +423,7 @@ void main(void)
 			finalColor = mix(finalColor, max(finalColor, finalColor + foam_texel), smoothstep(0.01, 0.50, N.g));
 			}
 	}
-		
+
 
 
 		finalColor *= ambient_light;
@@ -457,7 +457,7 @@ float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
 
 if (delta_z > 0.0) // we're inside the layer
 	{
-	if (ct < 0.0) // we look down 
+	if (ct < 0.0) // we look down
 		{
 		distance_in_layer = dist;
 		//lambda = visibility;
@@ -471,26 +471,26 @@ if (delta_z > 0.0) // we're inside the layer
 		else {distance_in_layer = dist;}
 		//lambda = visibility;
 		vAltitude = min(distance_in_layer,visibility) * ct;
-  		delta_zv = delta_z - vAltitude;	
+  		delta_zv = delta_z - vAltitude;
 		}
 	}
   else // we see the layer from above, delta_z < 0.0
-	{	
+	{
 	H = dist * -ct;
 	if (H  < (-delta_z)) // we don't see into the layer at all, aloft visibility is the only fading
 		{
 		distance_in_layer = 0.0;
 		delta_zv = 0.0;
-		}		
+		}
 	else
 		{
 		vAltitude = H + delta_z;
-		distance_in_layer = vAltitude/H * dist; 
+		distance_in_layer = vAltitude/H * dist;
 		vAltitude = min(distance_in_layer,visibility) * (-ct);
 		delta_zv = vAltitude;
-		} 
+		}
 	}
-	
+
 
 // ground haze cannot be thinner than aloft visibility in the model,
 // so we need to use aloft visibility otherwise
@@ -509,7 +509,7 @@ if (visibility < avisibility)
 	eqColorFactor = 1.0 - 0.1 * delta_zv/visibility - (1.0 -scattering);
 
 	}
-else 
+else
 	{
 	transmission_arg = transmission_arg + (distance_in_layer/avisibility);
 	// this combines the Weber-Fechner intensity
@@ -539,7 +539,7 @@ float eShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width 
 if (lightArg < 5.0)
 	{intensity = length(hazeColor);
 	float mie_magnitude = 0.5 * smoothstep(350000.0, 150000.0, terminator-sqrt(2.0 * EarthRadius * terrain_alt));
-	hazeColor = intensity * ((1.0 - mie_magnitude) + mie_magnitude * mie_angle) * normalize(mix(hazeColor,  vec3 (0.5, 0.58, 0.65), mie_magnitude * (0.5 - 0.5 * mie_angle)) ); 
+	hazeColor = intensity * ((1.0 - mie_magnitude) + mie_magnitude * mie_angle) * normalize(mix(hazeColor,  vec3 (0.5, 0.58, 0.65), mie_magnitude * (0.5 - 0.5 * mie_angle)) );
 	}
 
 // high altitude desaturation of the haze color
@@ -550,17 +550,17 @@ hazeColor = intensity * normalize (mix(hazeColor, intensity * vec3 (1.0,1.0,1.0)
 // blue hue of haze
 
 hazeColor.x = hazeColor.x * 0.83;
-hazeColor.y = hazeColor.y * 0.9; 
+hazeColor.y = hazeColor.y * 0.9;
 
 
 // additional blue in indirect light
 float fade_out = max(0.65 - 0.3 *overcast, 0.45);
 intensity = length(hazeColor);
-hazeColor = intensity * normalize(mix(hazeColor,  1.5* vec3 (0.45, 0.6, 0.8), 1.0 -smoothstep(0.25, fade_out,eShade) )); 
+hazeColor = intensity * normalize(mix(hazeColor,  1.5* vec3 (0.45, 0.6, 0.8), 1.0 -smoothstep(0.25, fade_out,eShade) ));
 
 // change haze color to blue hue for strong fogging
 //intensity = length(hazeColor);
-hazeColor = intensity * normalize(mix(hazeColor,  2.0 * vec3 (0.55, 0.6, 0.8), (1.0-smoothstep(0.3,0.8,eqColorFactor)))); 
+hazeColor = intensity * normalize(mix(hazeColor,  2.0 * vec3 (0.55, 0.6, 0.8), (1.0-smoothstep(0.3,0.8,eqColorFactor))));
 
 
 // reduce haze intensity when looking at shaded surfaces, only in terminator region

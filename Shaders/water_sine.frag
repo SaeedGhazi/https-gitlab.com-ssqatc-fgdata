@@ -37,6 +37,7 @@ uniform    float WaveSharp ;
 uniform    float WaveAngle ;
 uniform    float WaveFactor ;
 uniform    float WaveDAngle ;
+uniform    float normalmap_dds;
 
 ////fog "include" /////
 uniform int fogType;
@@ -279,7 +280,9 @@ void main(void)
 	// mix water and noise, modulated by factor
 	vec4 vNorm = normalize(mix(nmap, nmap1, mixFactor) * waveRoughness);
 	vNorm.r += ddxSum;
-	vNorm = -vNorm;		//dds fix
+
+    if (normalmap_dds > 0)
+        vNorm = -vNorm;		//dds fix
 
 	//load reflection
 	vec4 tmp = vec4(lightdir, 0.0);
@@ -328,7 +331,9 @@ void main(void)
 			N0.g += ddySum;
 
 			Normal = normalize(mix(Normal + N0, Normal + N1, mixFactor) * waveRoughness);
-			Normal = -Normal; //dds fix
+
+            if (normalmap_dds > 0)
+                Normal = -Normal; //dds fix
 		}
 
 

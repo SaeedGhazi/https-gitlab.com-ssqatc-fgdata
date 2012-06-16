@@ -31,6 +31,7 @@ varying vec3 normal;
 uniform    float WaveFreq ;
 uniform    float WaveAmp ;
 uniform    float WaveSharp ;
+uniform    float normalmap_dds;
 
 ////fog "include" /////
 uniform int fogType;
@@ -99,7 +100,8 @@ void main(void)
     vec4 dist   = texture2D(water_dudvmap, vec2(waterTex1 + disdis*sca2)* windScale) * 2.0 - 1.0;
     dist *= (0.6 + 0.5 * smoothstep(0.0, 15.0, windEffect));
     vec4 fdist  = normalize(dist);
-    fdist = -fdist; //dds fix
+    if (normalmap_dds > 0)
+        fdist = -fdist; //dds fix
     fdist *= sca;
 
     //normalmaps
@@ -123,8 +125,8 @@ void main(void)
     nmap1 *= windEffect_low;
     // mix water and noise, modulated by factor
     vec4 vNorm = normalize(mix(nmap, nmap1, mixFactor) * waveRoughness);
-
-    vNorm = -vNorm;		//dds fix
+    if (normalmap_dds > 0)
+        vNorm = -vNorm;		//dds fix
 
     //load reflection
     vec4 tmp = vec4(lightdir, 0.0);
@@ -168,7 +170,8 @@ void main(void)
 
     vec3 N = normalize(mix(Normal + N0, Normal + N1, mixFactor) * waveRoughness);
 
-    N = -N; //dds fix
+    if (normalmap_dds > 0)
+        N = -N; //dds fix
 
     // specular
     vec3 specular_color = vec3(gl_LightSource[0].diffuse)

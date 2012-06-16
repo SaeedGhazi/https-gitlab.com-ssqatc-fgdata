@@ -897,7 +897,7 @@
     <b>0.02</b>
     <a>1.0</a>
   </emissive>
-  <object-group include="Materials/base/urban-buildings.xml"/>  
+  <object-group include="Materials/base/urban-buildings.xml"/>
   <building-coverage>2500.0</building-coverage>
   <building-small-ratio>0.4</building-small-ratio>
   <building-small-min-floors>3</building-small-min-floors>
@@ -943,7 +943,7 @@
     <b>0.02</b>
     <a>1.0</a>
   </emissive>
-  <object-group include="Materials/base/urban-buildings.xml"/>  
+  <object-group include="Materials/base/urban-buildings.xml"/>
   <building-coverage>2500.0</building-coverage>
   <building-small-ratio>0.4</building-small-ratio>
   <building-small-min-floors>3</building-small-min-floors>
@@ -991,7 +991,7 @@
     <b>0.02</b>
     <a>1.0</a>
   </emissive>
-	<object-group include="Materials/base/industrial-buildings.xml"/>	
+	<object-group include="Materials/base/industrial-buildings.xml"/>
 </material>
 
 <material>
@@ -1004,7 +1004,7 @@
   <name>Town</name>
   <name>SubUrban</name>
   <texture>Terrain/Town1.png</texture>
-  <object-mask>Terrain/Town1.mask.png</object-mask>    
+  <object-mask>Terrain/Town1.mask.png</object-mask>
   <xsize>1024</xsize>
   <ysize>1024</ysize>
   <light-coverage>100000.0</light-coverage>
@@ -1028,40 +1028,10 @@
   <tree-width-m>15.0</tree-width-m>
 </material>
 
-<material>
-  <condition>
-    <equals>
-      <property>sim/startup/season</property>
-      <value>summer</value>
-    </equals>
-  </condition>
-  <effect>Effects/water</effect>
-  <name>Lagoon</name>
-  <texture>Terrain/water-lake.png</texture>
-  <xsize>400</xsize>
-  <ysize>400</ysize>
-  <ambient>
-    <r>0.0</r>
-    <g>0.0</g>
-    <b>0.0</b>
-    <a>1.0</a>
-  </ambient>
-  <diffuse>
-    <r>0.5</r>
-    <g>0.5</g>
-    <b>0.5</b>
-    <a>1.0</a>
-  </diffuse>
-  <specular>
-    <r>0.3</r>
-    <g>0.3</g>
-    <b>0.3</b>
-    <a>1.0</a>
-  </specular>
-  <shininess>1.2</shininess>
-  <solid>0</solid>
-  <rolling-friction>1.5</rolling-friction>
-  <bumpiness>0.6</bumpiness>
+<material include="Materials/base/water.xml">
+  <name>Ocean</name>
+  <effect>Effects/water-dds</effect>
+  <texture>Terrain/water.png</texture>
 </material>
 
 <material>
@@ -1789,7 +1759,7 @@
       <texture n="2">Terrain/city2-relief-light.png</texture>
   </texture-set>
   <object-mask>Terrain/city1.mask.png</object-mask>
-  <object-mask>Terrain/city2.mask.png</object-mask>  
+  <object-mask>Terrain/city2.mask.png</object-mask>
   <object-mask>Terrain/city1.mask.png</object-mask>
   <object-mask>Terrain/city2.mask.png</object-mask>
     <xsize>1000</xsize>
@@ -1801,7 +1771,7 @@
     <b>0.02</b>
     <a>1.0</a>
   </emissive>
-  <object-group include="Materials/base/urban-buildings.xml"/>  
+  <object-group include="Materials/base/urban-buildings.xml"/>
   <building-coverage>2500.0</building-coverage>
   <building-small-ratio>0.4</building-small-ratio>
   <building-small-min-floors>3</building-small-min-floors>
@@ -1842,7 +1812,7 @@
     <b>0.02</b>
     <a>1.0</a>
   </emissive>
-	<object-group include="Materials/base/industrial-buildings.xml"/>	
+	<object-group include="Materials/base/industrial-buildings.xml"/>
 </material>
 
 <material>
@@ -1855,7 +1825,7 @@
   <name>Town</name>
   <name>SubUrban</name>
   <texture>Terrain.winter/Town1.png</texture>
-  <object-mask>Terrain/Town1.mask.png</object-mask>    
+  <object-mask>Terrain/Town1.mask.png</object-mask>
   <xsize>1024</xsize>
   <ysize>1024</ysize>
   <light-coverage>100000.0</light-coverage>

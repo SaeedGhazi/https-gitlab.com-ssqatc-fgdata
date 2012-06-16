@@ -122,61 +122,62 @@
 				</binding>
 			</checkbox>
 			-->
-				<group>
-					<layout>hbox</layout>
-					<row>1</row>
-					<col>0</col>
-
-					<checkbox>
-						<halign>left</halign>
-						<label>Throttle frame rate</label>
-						<name>frame-rate-throttle</name>
-						<property>/sim/gui/frame-rate-throttled</property>
-						<binding>
-							<command>dialog-apply</command>
-							<object-name>frame-rate-throttle</object-name>
-						</binding>
-						<binding>
-							<command>nasal</command>
-							<script>
-								var throttled = getprop("/sim/gui/frame-rate-throttled");
-								if (throttled)
-									setprop("/sim/frame-rate-throttle-hz", 50);
-								else
-									setprop("/sim/frame-rate-throttle-hz", 0);
-							</script>
-						</binding>
-					</checkbox>
-
-					<group>
-						<layout>hbox</layout>
-						<visible>
-							<greater-than>
-								<property>/sim/frame-rate-throttle-hz</property>
-								<value>0</value>
-							</greater-than>
-						</visible>
-
-						<slider>
-							<name>frame-rate</name>
-							<min>15.0</min>
-							<max>70.0</max>
-							<step>1.0</step>
+			<group>
+				<layout>hbox</layout>
+				<halign>left</halign>
+				
+				<checkbox>
+					<label>Throttle frame rate</label>
+					<name>frame-rate-throttle</name>
+					<property>/sim/gui/frame-rate-throttled</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>frame-rate-throttle</object-name>
+					</binding>
+					<binding>
+						<command>nasal</command>
+						<script>
+							var throttled = getprop("/sim/gui/frame-rate-throttled");
+							if (throttled)
+								setprop("/sim/frame-rate-throttle-hz", 50);
+							else
+								setprop("/sim/frame-rate-throttle-hz", 0);
+						</script>
+					</binding>
+				</checkbox>
+				<empty>
+					<pref-width>46</pref-width>
+				</empty>
+				<slider>
+					<name>frame-rate</name>
+					<visible>
+						<greater-than>
 							<property>/sim/frame-rate-throttle-hz</property>
-							<binding>
-								<command>dialog-apply</command>
-								<object-name>frame-rate</object-name>
-							</binding>
-						</slider>
-						<text>
-							<halign>left</halign>
-							<label>99 Hz</label>
-							<format>%2.0f Hz</format>
-							<live>true</live>
+							<value>0</value>
+						</greater-than>
+					</visible>
+					<min>15.0</min>
+					<max>70.0</max>
+					<step>1.0</step>
+					<property>/sim/frame-rate-throttle-hz</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>frame-rate</object-name>
+					</binding>
+				</slider>
+				<text>
+					<visible>
+						<greater-than>
 							<property>/sim/frame-rate-throttle-hz</property>
-						</text>
-					</group>
-				</group>
+							<value>0</value>
+						</greater-than>
+					</visible>
+					<label>99 Hz</label>
+					<format>%2.0f Hz</format>
+					<live>true</live>
+					<property>/sim/frame-rate-throttle-hz</property>
+				</text>
+			</group>
 
 			<!--
 
@@ -224,30 +225,36 @@
 				</binding>
 			</checkbox>
 
-			<checkbox>
-				<halign>left</halign>
-				<label>Random vegetation</label>
-				<name>random-vegetation</name>
-				<property>/sim/rendering/random-vegetation</property>
-				<binding>
-					<command>dialog-apply</command>
-					<object-name>random-vegetation</object-name>
-				</binding>
-			</checkbox>
-
 			<group>
-				<layout>hbox</layout>
-				<halign>right</halign>
+				<layout>table</layout>
+
+				<checkbox>
+					<row>0</row>
+					<col>0</col>
+					<halign>left</halign>
+					<label>Random vegetation</label>
+					<name>random-vegetation</name>
+					<property>/sim/rendering/random-vegetation</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>random-vegetation</object-name>
+					</binding>
+				</checkbox>
 				<text>
-					<label>Vegetation density</label>
+					<row>0</row>
+					<col>1</col>
+					<label>density</label>
 					<enable>
 						<property>/sim/rendering/random-vegetation</property>
 					</enable>
 				</text>
 				<slider>
+					<row>0</row>
+					<col>2</col>
 					<name>vegetation-density</name>
 					<min>0</min>
 					<max>10.0</max>
+					<step>0.1</step>
 					<property>/sim/rendering/vegetation-density</property>
 					<binding>
 						<command>dialog-apply</command>
@@ -255,40 +262,44 @@
 					</binding>
 				</slider>
 				<text>
+					<row>0</row>
+					<col>3</col>
 					<label>12345678</label>
-					<format>%.2f</format>
+					<format>%.1f</format>
 					<live>true</live>
 					<property>/sim/rendering/vegetation-density</property>
 					<enable>
 						<property>/sim/rendering/random-vegetation</property>
 					</enable>
 				</text>
-			</group>
-
-			<checkbox>
-				<halign>left</halign>
-				<label>Random buildings</label>
-				<name>random-buildings</name>
-				<property>/sim/rendering/random-buildings</property>
-				<binding>
-					<command>dialog-apply</command>
-					<object-name>random-buildings</object-name>
-				</binding>
-			</checkbox>
-
-			<group>
-				<layout>hbox</layout>
-				<halign>right</halign>
+				
+				<checkbox>
+					<row>1</row>
+					<col>0</col>
+					<halign>left</halign>
+					<label>Random buildings</label>
+					<name>random-buildings</name>
+					<property>/sim/rendering/random-buildings</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>random-buildings</object-name>
+					</binding>
+				</checkbox>
 				<text>
-					<label>Building density</label>
+					<row>1</row>
+					<col>1</col>
+					<label>density</label>
 					<enable>
 						<property>/sim/rendering/random-buildings</property>
 					</enable>
 				</text>
 				<slider>
+					<row>1</row>
+					<col>2</col>
 					<name>building-density</name>
 					<min>0</min>
 					<max>5.0</max>
+					<step>0.05</step>
 					<property>/sim/rendering/building-density</property>
 					<binding>
 						<command>dialog-apply</command>
@@ -296,6 +307,8 @@
 					</binding>
 				</slider>
 				<text>
+					<row>1</row>
+					<col>3</col>
 					<label>12345678</label>
 					<format>%.2f</format>
 					<live>true</live>
@@ -313,12 +326,155 @@
 					<subsystem>tile-manager</subsystem>
 				</binding>
 			</button>
+			
+			<group>
+				<layout>hbox</layout>
+				
+				<text>
+					<label>Rembrandt</label>
+					<halign>left</halign>
+					<visible>
+						<property>/sim/rendering/rembrandt/enabled</property>
+					</visible>
+				</text>
+				<text>
+					<label>(Experimental)</label>
+					<halign>left</halign>
+					<color>
+						<red>1.0</red>
+						<green>0.6</green>
+						<blue>0.6</blue>
+					</color>
+					<visible>
+						<property>/sim/rendering/rembrandt/enabled</property>
+					</visible>
+				</text>
+				<hrule>
+					<stretch>true</stretch>
+					<visible>
+						<property>/sim/rendering/rembrandt/enabled</property>
+					</visible>
+				</hrule>
+			</group>
+			
+			<button>
+				<visible>
+					<property>/sim/rendering/rembrandt/enabled</property>
+				</visible>
+				<legend>Rembrandt Options</legend>
+				<halign>center</halign>
+				<binding>
+					<command>dialog-show</command>
+					<dialog-name>rembrandt</dialog-name>
+				</binding>
+				<binding>
+					<command>dialog-close</command>
+					<dialog-name>rendering</dialog-name>
+				</binding>
+				<pref-width>200</pref-width>
+			</button>
 
 			<group>
 				<layout>vbox</layout>
 				<stretch>1</stretch>
 			</group>
 
+		</group>
+
+		<vrule/>
+
+		<group>
+			<layout>vbox</layout>
+			
+			<group>
+				<layout>hbox</layout>
+				<text>
+					<label>Shader effects</label>
+					<halign>left</halign>
+				</text>
+				<hrule>
+					<stretch>true</stretch>
+				</hrule>
+			</group>
+			
+			<group>
+				<layout>table</layout>
+				
+				<checkbox>
+					<halign>left</halign>
+					<row>0</row>
+					<col>0</col>
+					<label>Custom settings (fine-tuning)</label>
+					<name>custom-settings</name>
+					<property>/sim/rendering/shaders/custom-settings</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>custom-settings</object-name>
+					</binding>
+				</checkbox>
+				
+				<group>
+					<layout>hbox</layout>
+					<row>1</row>
+					<col>0</col>
+					<visible>
+						<not>
+							<property>/sim/rendering/shaders/custom-settings</property>
+						</not>
+					</visible>
+
+					<text>
+						<label>Performance</label>
+					</text>
+					<slider>
+						<name>quality-level</name>
+						<min>0.0</min>
+						<max>5.0</max>
+						<step>1.0</step>
+						<fraction>0.17</fraction>
+						<property>/sim/rendering/shaders/quality-level-internal</property>
+						<binding>
+							<command>dialog-apply</command>
+							<object-name>quality-level</object-name>
+						</binding>
+					</slider>
+					<text>
+						<label>Quality</label>
+					</text>
+					<text>
+						<label>12345678</label>
+						<format>(%1.0f)</format>
+						<live>true</live>
+						<property>/sim/rendering/shaders/quality-level-internal</property>
+					</text>
+					
+				</group>
+				
+				<group>
+					<layout>hbox</layout>
+					<row>1</row>
+					<col>0</col>
+					<visible>
+						<property>/sim/rendering/shaders/custom-settings</property>
+					</visible>
+					
+					<button>
+						<legend>Shader Options</legend>
+						<halign>left</halign>
+						<binding>
+							<command>dialog-show</command>
+							<dialog-name>shaders</dialog-name>
+						</binding>
+						<binding>
+							<command>dialog-close</command>
+							<dialog-name>rendering</dialog-name>
+						</binding>
+						<pref-width>200</pref-width>
+					</button>
+
+				</group>
+			</group>
+			
 			<group>
 				<layout>hbox</layout>
 				<text>
@@ -443,274 +599,48 @@
 					<property>/sim/rendering/clouds3d-vis-range</property>
 				</text>
 			</group>
-
-		</group>
-
-		<vrule/>
-
-		<group>
-			<layout>vbox</layout>
-
-			<group>
-				<layout>hbox</layout>
-				<text>
-					<label>Shader effects</label>
-					<halign>left</halign>
-				</text>
-				<hrule>
-					<stretch>true</stretch>
-				</hrule>
-			</group>
-			
-			<group>
-				<layout>table</layout>
-				
-				<checkbox>
-					<halign>left</halign>
-					<row>0</row>
-					<col>0</col>
-					<label>Custom settings (fine-tuning)</label>
-					<name>custom-settings</name>
-					<property>/sim/rendering/shaders/custom-settings</property>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>custom-settings</object-name>
-					</binding>
-				</checkbox>
-				
-				<group>
-					<layout>hbox</layout>
-					<row>1</row>
-					<col>0</col>
-					<visible>
-						<not>
-							<property>/sim/rendering/shaders/custom-settings</property>
-						</not>
-					</visible>
-
-					<text>
-						<label>Performance</label>
-					</text>
-					<slider>
-						<name>quality-level</name>
-						<min>0.0</min>
-						<max>5.0</max>
-						<step>1.0</step>
-						<fraction>0.17</fraction>
-						<property>/sim/rendering/shaders/quality-level-internal</property>
-						<binding>
-							<command>dialog-apply</command>
-							<object-name>quality-level</object-name>
-						</binding>
-					</slider>
-					<text>
-						<label>Quality</label>
-					</text>
-					<text>
-						<label>12345678</label>
-						<format>(%1.0f)</format>
-						<live>true</live>
-						<property>/sim/rendering/shaders/quality-level-internal</property>
-					</text>
-					
-				</group>
-				
-				<group>
-					<layout>hbox</layout>
-					<row>1</row>
-					<col>0</col>
-					<visible>
-						<property>/sim/rendering/shaders/custom-settings</property>
-					</visible>
-					
-					<button>
-						<legend>Shader Options</legend>
-						<halign>left</halign>
-						<binding>
-							<command>dialog-show</command>
-							<dialog-name>shaders</dialog-name>
-						</binding>
-						<binding>
-							<command>dialog-close</command>
-							<dialog-name>rendering</dialog-name>
-						</binding>
-						<pref-width>200</pref-width>
-					</button>
-
-				</group>
-			</group>
 			
 			<group>
 				<layout>hbox</layout>
-				
-				<text>
-					<label>Rembrandt</label>
-					<halign>left</halign>
-					<visible>
-						<property>/sim/rendering/rembrandt/enabled</property>
-					</visible>
-				</text>
-				<hrule>
-					<stretch>true</stretch>
-					<visible>
-						<property>/sim/rendering/rembrandt/enabled</property>
-					</visible>
-				</hrule>
-			</group>
-			
-			<checkbox>
 				<halign>left</halign>
-				<label>Bloom</label>
-				<name>bloom</name>
-				<property>/sim/rendering/rembrandt/bloom</property>
-				<binding>
-					<command>dialog-apply</command>
-					<object-name>bloom</object-name>
-				</binding>
-				<visible>
-					<and>
-						<property>/sim/rendering/rembrandt/enabled</property>
-						<property>/sim/rendering/rembrandt/bloom-buffers</property>
-					</and>
-				</visible>
-			</checkbox>
-			
-			<checkbox>
-				<halign>left</halign>
-				<label>Ambient occlusion</label>
-				<name>occlusion</name>
-				<property>/sim/rendering/rembrandt/ambient-occlusion</property>
-				<binding>
-					<command>dialog-apply</command>
-					<object-name>occlusion</object-name>
-				</binding>
-				<visible>
-					<and>
-						<property>/sim/rendering/rembrandt/enabled</property>
-						<property>/sim/rendering/rembrandt/ambient-occlusion-buffers</property>
-					</and>
-				</visible>
-			</checkbox>
-
-			<group>
-				<layout>hbox</layout>
-				<halign>right</halign>
-				<visible>
-					<and>
-						<property>/sim/rendering/rembrandt/enabled</property>
-						<property>/sim/rendering/rembrandt/ambient-occlusion-buffers</property>
-					</and>
-				</visible>
-				<text>
-					<label>Ambient occlusion strength</label>
-					<enable>
-						<property>/sim/rendering/rembrandt/ambient-occlusion</property>
-					</enable>
-				</text>
-				<slider>
-					<name>ambient-occlusion-strength</name>
-					<enable>
-						<property>/sim/rendering/rembrandt/ambient-occlusion</property>
-					</enable>
-					<min>0.0</min>
-					<max>1.0</max>
-					<step>0.01</step>
-					<property>/sim/rendering/rembrandt/ambient-occlusion-strength</property>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>ambient-occlusion-strength</object-name>
-					</binding>
-				</slider>
-				<text>
-					<enable>
-						<property>/sim/rendering/rembrandt/ambient-occlusion</property>
-					</enable>
-					<label>12345678</label>
-					<format>%.2f</format>
-					<live>true</live>
-					<property>/sim/rendering/rembrandt/ambient-occlusion-strength</property>
-				</text>
-			</group>
-
-			<checkbox>
-				<halign>left</halign>
-				<label>Shadows</label>
-				<name>shadow</name>
-				<property>/sim/rendering/shadows/enabled</property>
-				<binding>
-					<command>dialog-apply</command>
-					<object-name>shadow</object-name>
-				</binding>
-				<visible>
-					<property>/sim/rendering/rembrandt/enabled</property>
-				</visible>
-			</checkbox>
-			
-			<group>
-				<layout>hbox</layout>
-				<halign>right</halign>
-				<visible>
-					<property>/sim/rendering/rembrandt/enabled</property>
-				</visible>
-				
-				<text>
-					<label>Map size</label>
-					<enable>
-						<property>/sim/rendering/shadows/enabled</property>
-					</enable>
-				</text>
-				<combo>
-					<halign>left</halign>
-					<name>shadow-map-size</name>
-					<property>/sim/rendering/shadows/map-size</property>
-					<value>1024</value>
-					<value>2048</value>
-					<value>4096</value>
-					<value>8192</value>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>shadow-map-size</object-name>
-					</binding>
-				</combo>
-				<empty>
-					<!-- align it nicely with the quality slider -->
-					<pref-width>105</pref-width>
-				</empty>
-			</group>
-			
-			<group>
-				<layout>hbox</layout>
-				<text>
-					<label>Experimental effects</label>
-					<halign>left</halign>
-					<color>
-						<red>1.0</red>
-						<green>0.6</green>
-						<blue>0.6</blue>
-					</color>
-				</text>
-				<hrule>
-					<stretch>true</stretch>
-				</hrule>
-			</group>
-
-			<group>
-				<layout>vbox</layout>
 				<checkbox>
 					<halign>left</halign>
 					<label>Atmospheric light scattering</label>
 					<name>skydome-scattering</name>
+					<visible>
+						<not>
+							<property>/sim/rendering/rembrandt/enabled</property>
+						</not>
+					</visible>
 					<property>/sim/rendering/shaders/skydome</property>
 					<binding>
 						<command>dialog-apply</command>
 						<object-name>skydome-scattering</object-name>
 					</binding>
 				</checkbox>
+				<text>
+					<label>(Experimental)</label>
+					<visible>
+						<not>
+							<property>/sim/rendering/rembrandt/enabled</property>
+						</not>
+					</visible>
+					<color>
+						<red>1.0</red>
+						<green>0.6</green>
+						<blue>0.6</blue>
+					</color>
+				</text>
 			</group>
 
 			<group>
 				<layout>hbox</layout>
 				<halign>right</halign>
+				<visible>
+					<not>
+						<property>/sim/rendering/rembrandt/enabled</property>
+					</not>
+				</visible>
 				<text>
 					<label>Mie factor</label>
 					<enable>
@@ -745,6 +675,11 @@
 			<group>
 				<layout>hbox</layout>
 				<halign>right</halign>
+				<visible>
+					<not>
+						<property>/sim/rendering/rembrandt/enabled</property>
+					</not>
+				</visible>
 				<text>
 					<label>Rayleigh factor</label>
 					<enable>
@@ -779,6 +714,11 @@
 			<group>
 				<layout>hbox</layout>
 				<halign>right</halign>
+				<visible>
+					<not>
+						<property>/sim/rendering/rembrandt/enabled</property>
+					</not>
+				</visible>
 				<text>
 					<label>Density factor</label>
 					<enable>

@@ -75,7 +75,7 @@
   <wrapu>false</wrapu>
   <wrapv>false</wrapv>
 </material>
- 
+
 <material include="Materials/base/runway_effect.xml">
   <name>pa_stopway</name>
   <texture>Runway/pa_stopway.png</texture>
@@ -352,7 +352,7 @@
   <wrapu>false</wrapu>
   <wrapv>false</wrapv>
 </material>
- 
+
 <material include="Materials/base/runway_effect.xml">
   <name>pc_stopway</name>
   <texture>Runway/pc_stopway.png</texture>
@@ -1095,7 +1095,7 @@
    <b>0.02</b>
    <a>1.0</a>
   </emissive>
-  <object-group include="Materials/base/urban-buildings.xml"/>  
+  <object-group include="Materials/base/urban-buildings.xml"/>
   <building-coverage>500.0</building-coverage>
   <building-small-ratio>0.4</building-small-ratio>
   <building-small-min-floors>3</building-small-min-floors>
@@ -1133,7 +1133,7 @@
    <texture n="2">Terrain/city2-relief-light.png</texture>
   </texture-set>
 	<object-mask>Terrain/city1.mask.png</object-mask>
-	<object-mask>Terrain/city2.mask.png</object-mask>  
+	<object-mask>Terrain/city2.mask.png</object-mask>
   <xsize>1000</xsize>
   <ysize>1000</ysize>
   <light-coverage>100000.0</light-coverage>
@@ -1143,7 +1143,7 @@
    <b>0.02</b>
    <a>1.0</a>
   </emissive>
-  <object-group include="Materials/base/urban-buildings.xml"/>  
+  <object-group include="Materials/base/urban-buildings.xml"/>
   <building-coverage>2500.0</building-coverage>
   <building-small-ratio>0.4</building-small-ratio>
   <building-small-min-floors>3</building-small-min-floors>
@@ -1173,7 +1173,7 @@
   <texture>Terrain/city1.png</texture>
   <texture>Terrain/city2.png</texture>
 	<object-mask>Terrain/city1.mask.png</object-mask>
-	<object-mask>Terrain/city2.mask.png</object-mask>  
+	<object-mask>Terrain/city2.mask.png</object-mask>
   <xsize>1000</xsize>
   <ysize>1000</ysize>
   <light-coverage>100000.0</light-coverage>
@@ -1183,9 +1183,9 @@
    <b>0.02</b>
    <a>1.0</a>
   </emissive>
-	<object-group include="Materials/base/industrial-buildings.xml"/>	
+	<object-group include="Materials/base/industrial-buildings.xml"/>
 </material>
- 
+
 
 <!-- regional town Hawaii -->
 
@@ -1218,8 +1218,8 @@
   </condition>
   <name>Town</name>
   <name>SubUrban</name>
-  <texture>Terrain/town-europe.png</texture>   
-  <object-mask>Terrain/town-europe.mask.png</object-mask>      
+  <texture>Terrain/town-europe.png</texture>
+  <object-mask>Terrain/town-europe.mask.png</object-mask>
   <xsize>1024</xsize>
   <ysize>1024</ysize>
   <light-coverage>100000.0</light-coverage>
@@ -1271,8 +1271,8 @@
   </condition>
   <name>Town</name>
   <name>SubUrban</name>
-  <texture>Terrain/town-europe.png</texture>   
-  <object-mask>Terrain/town-europe.mask.png</object-mask>      
+  <texture>Terrain/town-europe.png</texture>
+  <object-mask>Terrain/town-europe.mask.png</object-mask>
   <xsize>1024</xsize>
   <ysize>1024</ysize>
   <light-coverage>100000.0</light-coverage>
@@ -1309,7 +1309,7 @@
   <name>Town</name>
   <name>SubUrban</name>
   <texture>Terrain/Town1.png</texture>
-  <object-mask>Terrain/Town1.mask.png</object-mask>      
+  <object-mask>Terrain/Town1.mask.png</object-mask>
   <xsize>1024</xsize>
   <ysize>1024</ysize>
   <light-coverage>100000.0</light-coverage>
@@ -1331,6 +1331,12 @@
   <tree-range-m alias="/params/forest/tree-range-m"/>
   <tree-height-m>25.0</tree-height-m>
   <tree-width-m>15.0</tree-width-m>
+</material>
+
+<material include="Materials/base/water.xml">
+  <name>Ocean</name>
+  <effect>Effects/water</effect>
+  <texture>Terrain/water.png</texture>
 </material>
 
 <material>
@@ -2068,7 +2074,7 @@
   </condition>
   <name>NaturalCrop</name>
   <texture>Terrain/naturalcrop1.png</texture>
-  <object-mask>Terrain/naturalcrop1.mask.png</object-mask> 
+  <object-mask>Terrain/naturalcrop1.mask.png</object-mask>
   <xsize>2000</xsize>
   <ysize>2000</ysize>
   <solid>1</solid>
@@ -2469,7 +2475,7 @@
    <texture n="2">Terrain/city2-relief-light.png</texture>
   </texture-set>
 	<object-mask>Terrain/city1.mask.png</object-mask>
-	<object-mask>Terrain/city2.mask.png</object-mask>	  
+	<object-mask>Terrain/city2.mask.png</object-mask>
   <xsize>1000</xsize>
   <ysize>1000</ysize>
   <light-coverage>100000.0</light-coverage>
@@ -2479,7 +2485,7 @@
    <b>0.02</b>
    <a>1.0</a>
   </emissive>
-  <object-group include="Materials/base/urban-buildings.xml"/>  
+  <object-group include="Materials/base/urban-buildings.xml"/>
   <building-coverage>2500.0</building-coverage>
   <building-small-ratio>0.4</building-small-ratio>
   <building-small-min-floors>3</building-small-min-floors>
@@ -2509,7 +2515,7 @@
   <texture>Terrain/city1.png</texture>
   <texture>Terrain/city2.png</texture>
 	<object-mask>Terrain/city1.mask.png</object-mask>
-	<object-mask>Terrain/city2.mask.png</object-mask>	  
+	<object-mask>Terrain/city2.mask.png</object-mask>
   <xsize>1000</xsize>
   <ysize>1000</ysize>
   <light-coverage>100000.0</light-coverage>
@@ -2519,9 +2525,9 @@
    <b>0.02</b>
    <a>1.0</a>
   </emissive>
-	<object-group include="Materials/base/industrial-buildings.xml"/>	
+	<object-group include="Materials/base/industrial-buildings.xml"/>
 </material>
- 
+
 <material>
   <condition>
    <equals>
@@ -2532,7 +2538,7 @@
   <name>Town</name>
   <name>SubUrban</name>
   <texture>Terrain.winter/Town1.png</texture>
-  <object-mask>Terrain/Town1.mask.png</object-mask>    
+  <object-mask>Terrain/Town1.mask.png</object-mask>
   <xsize>1024</xsize>
   <ysize>1024</ysize>
   <light-coverage>100000.0</light-coverage>
@@ -3099,7 +3105,7 @@
      <a>1.0</a>
    </emissive>
 </material>
- 
+
  <material>
    <name>UnidirectionalTaperRed</name>
    <texture>Symbols/unidirectionalred.png</texture>

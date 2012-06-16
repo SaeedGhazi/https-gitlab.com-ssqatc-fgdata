@@ -160,8 +160,9 @@ var dialog = {
         #
         # "private"
         var font = { name: "FIXED_8x13" };
-        me.header = [" callsign", "model", "brg", func dialog.dist_hdr, func dialog.alt_hdr ~ " ", "ignore" ~ " "];
+        me.header = ["chat", " callsign", "model", "brg", func dialog.dist_hdr, func dialog.alt_hdr ~ " ", "ignore" ~ " "];
         me.columns = [
+            { type: "button", legend: "", halign: "right", callback: "multiplayer.compose_message", "pref-height": 14, "pref-width": 14},
             { type: "text", property: "callsign",    format: " %s",    label: "-----------",    halign: "fill" },
             { type: "text", property: "model-short", format: "%s",     label: "--------------", halign: "fill" },
             { type: "text", property: "bearing-to",  format: " %3.0f", label: "----",           halign: "right", font: font },
@@ -238,17 +239,24 @@ var dialog = {
             var col = 0;
             var color = mp.node.getNode("model-installed").getValue() ? me.fg[odd = !odd] : me.fg[2];
             foreach (var column; me.columns) {
-                var p = typeof(column.property) == "func" ? column.property() : column.property;
                 var w = nil;
-                if (column.type == "text") {
-                    w = content.addChild("text");
-                    w.node.setValues(column);
-                } elsif (column.type == "checkbox") {
-                    w = content.addChild("checkbox");
-                    w.setBinding("nasal", column.callback ~ "(getprop(\"" ~ mp.root ~ "/" ~ column.argprop ~ "\"))");
-                }
+		if (column.type == "button") {
+		    w = content.addChild("button");
+		    w.node.setValues(column);
+		    w.setBinding("nasal", column.callback ~ "(\"" ~ mp.callsign ~ ", \");");
+                    w.node.setValues({ row: row, col: col});
+		} else {
+		    var p = typeof(column.property) == "func" ? column.property() : column.property;
+		    if (column.type == "text") {
+		    	w = content.addChild("text");
+		    	w.node.setValues(column);
+		    } elsif (column.type == "checkbox") {
+		    	w = content.addChild("checkbox");
+		    	w.setBinding("nasal", column.callback ~ "(getprop(\"" ~ mp.root ~ "/" ~ column.argprop ~ "\"))");
+		    }
+                    w.node.setValues({ row: row, col: col, live: 1, property: mp.root ~ "/" ~ p });
+		}
                 w.setColor(color[0], color[1], color[2], color[3]);
-                w.node.setValues({ row: row, col: col, live: 1, property: mp.root ~ "/" ~ p });
                 col += 1;
             }
             row += 1;

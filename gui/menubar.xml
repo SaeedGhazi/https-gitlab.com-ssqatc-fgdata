@@ -552,7 +552,15 @@
 				<command>reinit</command>
 				<subsystem>io</subsystem>
 			</binding>
-		</item>
+        </item>
+
+        <item>
+            <label>Reload Aircraft Model</label>
+            <binding>
+                <command>reinit</command>
+                <subsystem>aircraft-model</subsystem>
+            </binding>
+        </item>
 
 		<item>
 			<name>nasal-console</name>

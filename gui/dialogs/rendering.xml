@@ -159,6 +159,7 @@
 					<min>15.0</min>
 					<max>70.0</max>
 					<step>1.0</step>
+					<live>true</live>
 					<property>/sim/frame-rate-throttle-hz</property>
 					<binding>
 						<command>dialog-apply</command>

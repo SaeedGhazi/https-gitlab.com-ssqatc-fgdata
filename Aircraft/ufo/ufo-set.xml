@@ -544,7 +544,7 @@
 			</display-controls>
 		</radar>
 		<nav n="0">
-			<volume type="double">0.1</volume>
+			<volume type="double">0</volume>
 		</nav>
 		<nav n="1">
 			<volume type="double">0</volume>

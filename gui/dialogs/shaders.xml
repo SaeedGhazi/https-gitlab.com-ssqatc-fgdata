@@ -56,7 +56,9 @@
 				<halign>left</halign>
 				<label>Generic</label>
 				<enable>
-					<property>/sim/rendering/shaders/generic</property>
+					<not>
+						<property>/sim/rendering/rembrandt/enabled</property>
+					</not>
 				</enable>
 			</text>
 			
@@ -64,7 +66,9 @@
 				<halign>left</halign>
 				<label>Crop</label>
 				<enable>
-					<property>/sim/rendering/shaders/crop</property>
+					<not>
+						<property>/sim/rendering/rembrandt/enabled</property>
+					</not>
 				</enable>
 			</text>
 
@@ -72,7 +76,9 @@
 				<halign>left</halign>
 				<label>Landmass</label>
 				<enable>
-					<property>/sim/rendering/shaders/landmass</property>
+					<not>
+						<property>/sim/rendering/rembrandt/enabled</property>
+					</not>
 				</enable>
 			</text>
 
@@ -80,7 +86,9 @@
 				<halign>left</halign>
 				<label>Persistent contrails</label>
 				<enable>
-					<property>/sim/rendering/shaders/contrails</property>
+					<not>
+						<property>/sim/rendering/rembrandt/enabled</property>
+					</not>
 				</enable>
 			</text>
 
@@ -88,31 +96,29 @@
 				<halign>left</halign>
 				<label>Transition</label>
 				<enable>
-					<property>/sim/rendering/shaders/transition</property>
+					<not>
+						<property>/sim/rendering/rembrandt/enabled</property>
+					</not>
 				</enable>
 			</text>
 			
 			<text>
 				<halign>left</halign>
 				<label>Model</label>
-				<enable>
-					<property>/sim/rendering/shaders/model</property>
-				</enable>
 			</text>
 
 			<text>
 				<halign>left</halign>
 				<label>Urban</label>
-				<enable>
-					<property>/sim/rendering/shaders/urban</property>
-				</enable>
 			</text>
 
 			<text>
 				<halign>left</halign>
 				<label>Water</label>
 				<enable>
-					<property>/sim/rendering/shaders/water</property>
+					<not>
+						<property>/sim/rendering/rembrandt/enabled</property>
+					</not>
 				</enable>
 			</text>
 
@@ -123,6 +129,11 @@
 
 			<slider>
 				<name>generic</name>
+				<enable>
+					<not>
+						<property>/sim/rendering/rembrandt/enabled</property>
+					</not>
+				</enable>
 				<min>0.0</min>
 				<max>1.0</max>
 				<step>1.0</step>
@@ -137,6 +148,11 @@
 			
 			<slider>
 				<name>crop</name>
+				<enable>
+					<not>
+						<property>/sim/rendering/rembrandt/enabled</property>
+					</not>
+				</enable>
 				<min>0.0</min>
 				<max>1.0</max>
 				<step>1.0</step>
@@ -151,6 +167,11 @@
 
 			<slider>
 				<name>landmass</name>
+				<enable>
+					<not>
+						<property>/sim/rendering/rembrandt/enabled</property>
+					</not>
+				</enable>
 				<min>0.0</min>
 				<max>5.0</max>
 				<step>1.0</step>
@@ -165,6 +186,11 @@
 
 			<slider>
 				<name>contrails</name>
+				<enable>
+					<not>
+						<property>/sim/rendering/rembrandt/enabled</property>
+					</not>
+				</enable>
 				<min>0.0</min>
 				<max>1.0</max>
 				<step>1.0</step>
@@ -179,6 +205,11 @@
 
 			<slider>
 				<name>transition</name>
+				<enable>
+					<not>
+						<property>/sim/rendering/rembrandt/enabled</property>
+					</not>
+				</enable>
 				<min>0.0</min>
 				<max>1.0</max>
 				<step>1.0</step>
@@ -221,6 +252,11 @@
 
 			<slider>
 				<name>water</name>
+				<enable>
+					<not>
+						<property>/sim/rendering/rembrandt/enabled</property>
+					</not>
+				</enable>
 				<min>0.0</min>
 				<max>5.0</max>
 				<step>1.0</step>
@@ -236,6 +272,30 @@
 		</group>
 
 	</group>
+	
+	<text>
+		<label>Some shaders are disabled because</label>
+		<color>
+			<red>1.0</red>
+			<green>0.6</green>
+			<blue>0.6</blue>
+		</color>
+		<visible>
+			<property>/sim/rendering/rembrandt/enabled</property>
+		</visible>
+	</text>
+	<text>
+		<halign>left</halign>
+		<label>you have Rembrandt enabled.</label>
+		<color>
+			<red>1.0</red>
+			<green>0.6</green>
+			<blue>0.6</blue>
+		</color>
+		<visible>
+			<property>/sim/rendering/rembrandt/enabled</property>
+		</visible>
+	</text>
 
 	<group>
 		<layout>hbox</layout>

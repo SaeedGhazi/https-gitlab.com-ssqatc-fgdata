@@ -327,53 +327,6 @@
 					<subsystem>tile-manager</subsystem>
 				</binding>
 			</button>
-			
-			<group>
-				<layout>hbox</layout>
-				
-				<text>
-					<label>Rembrandt</label>
-					<halign>left</halign>
-					<visible>
-						<property>/sim/rendering/rembrandt/enabled</property>
-					</visible>
-				</text>
-				<text>
-					<label>(Experimental)</label>
-					<halign>left</halign>
-					<color>
-						<red>1.0</red>
-						<green>0.6</green>
-						<blue>0.6</blue>
-					</color>
-					<visible>
-						<property>/sim/rendering/rembrandt/enabled</property>
-					</visible>
-				</text>
-				<hrule>
-					<stretch>true</stretch>
-					<visible>
-						<property>/sim/rendering/rembrandt/enabled</property>
-					</visible>
-				</hrule>
-			</group>
-			
-			<button>
-				<visible>
-					<property>/sim/rendering/rembrandt/enabled</property>
-				</visible>
-				<legend>Rembrandt Options</legend>
-				<halign>center</halign>
-				<binding>
-					<command>dialog-show</command>
-					<dialog-name>rembrandt</dialog-name>
-				</binding>
-				<binding>
-					<command>dialog-close</command>
-					<dialog-name>rendering</dialog-name>
-				</binding>
-				<pref-width>200</pref-width>
-			</button>
 
 			<group>
 				<layout>vbox</layout>
@@ -456,7 +409,12 @@
 					<row>1</row>
 					<col>0</col>
 					<visible>
-						<property>/sim/rendering/shaders/custom-settings</property>
+						<and>
+							<property>/sim/rendering/shaders/custom-settings</property>
+							<not>
+								<property>/sim/rendering/shaders/skydome</property>
+							</not>
+						</and>
 					</visible>
 					
 					<button>
@@ -465,6 +423,35 @@
 						<binding>
 							<command>dialog-show</command>
 							<dialog-name>shaders</dialog-name>
+						</binding>
+						<binding>
+							<command>dialog-close</command>
+							<dialog-name>rendering</dialog-name>
+						</binding>
+						<pref-width>200</pref-width>
+					</button>
+
+				</group>
+				<group>
+					<layout>hbox</layout>
+					<row>1</row>
+					<col>0</col>
+					<visible>
+						<and>
+							<property>/sim/rendering/shaders/custom-settings</property>
+							<property>/sim/rendering/shaders/skydome</property>
+							<not>
+								<property>/sim/rendering/rembrandt/enabled</property>
+							</not>
+						</and>
+					</visible>
+					
+					<button>
+						<legend>Shader Options</legend>
+						<halign>left</halign>
+						<binding>
+							<command>dialog-show</command>
+							<dialog-name>shaders-lightfield</dialog-name>
 						</binding>
 						<binding>
 							<command>dialog-close</command>
@@ -602,25 +589,46 @@
 			</group>
 			
 			<group>
-				<layout>hbox</layout>
-				<halign>left</halign>
-				<checkbox>
+				<layout>table</layout>
+				<group>
+					<layout>hbox</layout>
 					<halign>left</halign>
-					<label>Atmospheric light scattering</label>
-					<name>skydome-scattering</name>
-					<visible>
-						<not>
-							<property>/sim/rendering/rembrandt/enabled</property>
-						</not>
-					</visible>
-					<property>/sim/rendering/shaders/skydome</property>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>skydome-scattering</object-name>
-					</binding>
-				</checkbox>
+					<row>0</row>
+					<col>0</col>
+					<checkbox>
+						<halign>left</halign>
+						<label>Atmospheric light scattering</label>
+						<name>skydome-scattering</name>
+						<visible>
+							<not>
+								<property>/sim/rendering/rembrandt/enabled</property>
+							</not>
+						</visible>
+						<property>/sim/rendering/shaders/skydome</property>
+						<binding>
+							<command>dialog-apply</command>
+							<object-name>skydome-scattering</object-name>
+						</binding>
+					</checkbox>
+					<text>
+						<label>(Experimental)</label>
+						<visible>
+							<not>
+								<property>/sim/rendering/rembrandt/enabled</property>
+							</not>
+						</visible>
+						<color>
+							<red>1.0</red>
+							<green>0.6</green>
+							<blue>0.6</blue>
+						</color>
+					</text>
+				</group>
 				<text>
-					<label>(Experimental)</label>
+					<row>1</row>
+					<col>0</col>
+					<label>This disables most effects/shaders.</label>
+					<halign>left</halign>
 					<visible>
 						<not>
 							<property>/sim/rendering/rembrandt/enabled</property>
@@ -632,123 +640,58 @@
 						<blue>0.6</blue>
 					</color>
 				</text>
-			</group>
-
-			<group>
-				<layout>hbox</layout>
-				<halign>right</halign>
-				<visible>
-					<not>
+				
+				<group>
+					<layout>hbox</layout>
+					<row>0</row>
+					<col>0</col>
+					
+					<text>
+						<label>Rembrandt</label>
+						<halign>left</halign>
+						<visible>
+							<property>/sim/rendering/rembrandt/enabled</property>
+						</visible>
+					</text>
+					<text>
+						<label>(Experimental)</label>
+						<halign>left</halign>
+						<color>
+							<red>1.0</red>
+							<green>0.6</green>
+							<blue>0.6</blue>
+						</color>
+						<visible>
+							<property>/sim/rendering/rembrandt/enabled</property>
+						</visible>
+					</text>
+					<hrule>
+						<stretch>true</stretch>
+						<visible>
+							<property>/sim/rendering/rembrandt/enabled</property>
+						</visible>
+					</hrule>
+				</group>
+				
+				<button>
+					<row>1</row>
+					<col>0</col>
+					<visible>
 						<property>/sim/rendering/rembrandt/enabled</property>
-					</not>
-				</visible>
-				<text>
-					<label>Mie factor</label>
-					<enable>
-						<property>/sim/rendering/shaders/skydome</property>
-					</enable>
-				</text>
-				<slider>
-					<name>mie-factor</name>
-					<enable>
-						<property>/sim/rendering/shaders/skydome</property>
-					</enable>
-					<min>0.0</min>
-					<max>0.01</max>
-					<step>0.001</step>
-					<property>/sim/rendering/mie</property>
+					</visible>
+					<legend>Rembrandt Options</legend>
+					<halign>center</halign>
 					<binding>
-						<command>dialog-apply</command>
-						<object-name>mie-factor</object-name>
+						<command>dialog-show</command>
+						<dialog-name>rembrandt</dialog-name>
 					</binding>
-				</slider>
-				<text>
-					<enable>
-						<property>/sim/rendering/shaders/skydome</property>
-					</enable>
-					<label>12345678</label>
-					<format>%.3f</format>
-					<live>true</live>
-					<property>/sim/rendering/mie</property>
-				</text>
-			</group>
-
-			<group>
-				<layout>hbox</layout>
-				<halign>right</halign>
-				<visible>
-					<not>
-						<property>/sim/rendering/rembrandt/enabled</property>
-					</not>
-				</visible>
-				<text>
-					<label>Rayleigh factor</label>
-					<enable>
-						<property>/sim/rendering/shaders/skydome</property>
-					</enable>
-				</text>
-				<slider>
-					<name>rayleigh-factor</name>
-					<enable>
-						<property>/sim/rendering/shaders/skydome</property>
-					</enable>
-					<min>0.0</min>
-					<max>0.001</max>
-					<step>0.0001</step>
-					<property>/sim/rendering/rayleigh</property>
 					<binding>
-						<command>dialog-apply</command>
-						<object-name>rayleigh-factor</object-name>
+						<command>dialog-close</command>
+						<dialog-name>rendering</dialog-name>
 					</binding>
-				</slider>
-				<text>
-					<enable>
-						<property>/sim/rendering/shaders/skydome</property>
-					</enable>
-					<label>12345678</label>
-					<format>%.4f</format>
-					<live>true</live>
-					<property>/sim/rendering/rayleigh</property>
-				</text>
-			</group>
-
-			<group>
-				<layout>hbox</layout>
-				<halign>right</halign>
-				<visible>
-					<not>
-						<property>/sim/rendering/rembrandt/enabled</property>
-					</not>
-				</visible>
-				<text>
-					<label>Density factor</label>
-					<enable>
-						<property>/sim/rendering/shaders/skydome</property>
-					</enable>
-				</text>
-				<slider>
-					<name>density-factor</name>
-					<enable>
-						<property>/sim/rendering/shaders/skydome</property>
-					</enable>
-					<min>0.0</min>
-					<max>1.0</max>
-					<step>0.1</step>
-					<property>/sim/rendering/dome-density</property>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>density-factor</object-name>
-					</binding>
-				</slider>
-				<text>
-					<enable>
-						<property>/sim/rendering/shaders/skydome</property>
-					</enable>
-					<label>12345678</label>
-					<format>%.1f</format>
-					<live>true</live>
-					<property>/sim/rendering/dome-density</property>
-				</text>
+					<pref-width>200</pref-width>
+				</button>
+			
 			</group>
 
 			<empty>

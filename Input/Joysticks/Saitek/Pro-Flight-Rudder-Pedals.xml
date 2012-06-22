@@ -18,6 +18,10 @@ $Id$
 
  <name>Saitek Pro Flight Rudder Pedals</name>
  <name>Saitek Saitek Pro Flight Rudder Pedals</name>
+ <name>Mad Catz Pro Flight Cessna Rudder Pedals</name>
+ <name>Saitek Pro Flight Cessna Rudder Pedals</name>
+ <name>Saitek Saitek Pro Flight Cessna Rudder Pedals</name>
+ <name>ProFlight Cessna Rudder Pedals</name>
 
  <axis n="0">
   <desc>Brake left</desc>

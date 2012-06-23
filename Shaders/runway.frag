@@ -45,53 +45,46 @@ void main (void)
     //vec3 halfV;
     //float NdotL, NdotHV;
 
-		vec4 texel = texture2D(BaseTex, gl_TexCoord[0].st);
-		vec4 nmap  = texture2D(NormalTex, gl_TexCoord[0].st * 8.0);
-		vec4 map   = texture2D(Map, gl_TexCoord[0].st * 8.0);
-		vec4 specNoise = texture3D(Noise, rawpos.xyz * 0.0045);
-		vec4 noisevec = texture3D(Noise, rawpos.xyz);
+    vec4 texel = texture2D(BaseTex, gl_TexCoord[0].st);
+    vec4 nmap  = texture2D(NormalTex, gl_TexCoord[0].st * 8.0);
+    vec4 map   = texture2D(Map, gl_TexCoord[0].st * 8.0);
+    vec4 specNoise = texture3D(Noise, rawpos.xyz * 0.0045);
+    vec4 noisevec = texture3D(Noise, rawpos.xyz);
 
     vec3 lightDir = gl_LightSource[0].position.xyz;
     vec3 halfVector = gl_LightSource[0].halfVector.xyz;
-		vec3 N;
-		float pf;
+    vec3 N;
+    float pf;
 
-   // vec4 color = gl_Color;
-    //vec4 specular = vec4(0.0);
-
-		N = nmap.rgb * 2.0 - 1.0;
-		N = normalize(N.x * VTangent + N.y * VBinormal + N.z * VNormal);
-		if (normalmap_dds > 0)
-			N = -N;
+    N = nmap.rgb * 2.0 - 1.0;
+    N = normalize(N.x * VTangent + N.y * VBinormal + N.z * VNormal);
+    if (normalmap_dds > 0)
+        N = -N;
 
 
     // calculate the specular light
-		float refl_correction = spec_adjust * 1.9 - 1.0;
-		float shininess = max (0.35, refl_correction);
+    float refl_correction = spec_adjust * 1.9 - 1.0;
+    float shininess = max (0.35, refl_correction);
     float nDotVP = max(0.0, dot(N, normalize(gl_LightSource[0].position.xyz)));
-		float nDotHV = max(0.0, dot(N, normalize(gl_LightSource[0].halfVector.xyz)));
+    float nDotHV = max(0.0, dot(N, normalize(gl_LightSource[0].halfVector.xyz)));
 
-		if (nDotVP == 0.0)
-			pf = 0.0;
-		else
-			pf = pow(nDotHV, /*gl_FrontMaterial.*/shininess);
+    if (nDotVP == 0.0)
+        pf = 0.0;
+    else
+        pf = pow(nDotHV, /*gl_FrontMaterial.*/shininess);
 
-		vec4 Diffuse  = gl_LightSource[0].diffuse * nDotVP;
-		vec4 Specular = /*gl_FrontMaterial.specular*/ vec4(vec3(0.5*shininess), 1.0)* gl_LightSource[0].specular * pf;
+    vec4 Diffuse  = gl_LightSource[0].diffuse * nDotVP;
+    vec4 Specular = vec4(vec3(0.5*shininess), 1.0)* gl_LightSource[0].specular * pf;
 
-		vec4 color = gl_Color + Diffuse * gl_FrontMaterial.diffuse;
-		color += Specular * /*gl_FrontMaterial.specular*/ vec4(vec3(0.5*shininess), 1.0) * nmap.a;
-
-    //color.a = alpha;
-
-    //vec4 texelcolor = color * texel + specular;
+    vec4 color = gl_Color + Diffuse * gl_FrontMaterial.diffuse;
+    color += Specular * vec4(vec3(0.5*shininess), 1.0) * nmap.a;
     color.a = texel.a * alpha;
     color = clamp(color, 0.0, 1.0);
 
     vec3 viewVec = normalize(vViewVec);
 
     // Map a rainbowish color
-		float v = dot(viewVec, normalize(VNormal));
+    float v = dot(viewVec, normalize(VNormal));
     vec4 rainbow = texture2D(Rainbow, vec2(v, 0.0));
 
     // Map a fresnel effect
@@ -105,14 +98,12 @@ void main (void)
     float transparency_offset = clamp(refl_correction, -1.0, 1.0);
     float reflFactor = 0.0;
 
-		//vec4 specNoise1 = texture3D(Noise, rawpos.xyz*0.001);
+    float MixFactor = specNoise.r * specNoise.g * specNoise.b * 350.0;
 
-		float MixFactor = specNoise.r * specNoise.g * specNoise.b * 350.0;
-		//MixFactor *= specNoise1.r;
-		MixFactor = 0.75 * smoothstep(0.0, 1.0, MixFactor);
+    MixFactor = 0.75 * smoothstep(0.0, 1.0, MixFactor);
 
     reflFactor = max(map.a * (texel.r + texel.g), 1.0 - MixFactor)  * (1.0- N.z)  + transparency_offset ;
-    //reflFactor = clamp(reflFactor, 0.0, 0.75);
+
     reflFactor =0.75 * smoothstep(0.05, 1.0, reflFactor);
 
     // set ambient adjustment to remove bluiness with user input
@@ -122,17 +113,17 @@ void main (void)
 
     // add fringing fresnel and rainbow effects and modulate by reflection
     vec4 reflcolor = mix(reflection, rainbow, rainbowiness * v);
-		reflcolor += Specular * nmap.a;
+    reflcolor += Specular * nmap.a;
     vec4 reflfrescolor = mix(reflcolor, fresnel, fresneliness * v);
     vec4 noisecolor = mix(reflfrescolor, noisevec, noisiness);
     vec4 raincolor = vec4(noisecolor.rgb * reflFactor, 1.0);
-		raincolor += Specular * nmap.a;
+    raincolor += Specular * nmap.a;
 
     vec4 mixedcolor = mix(texel, raincolor, reflFactor);
 
     // the final reflection
     vec4 fragColor = vec4(color.rgb * mixedcolor.rgb  + ambient_Correction.rgb, color.a);
-		fragColor += Specular * nmap.a;
+	fragColor += Specular * nmap.a;
 
     fragColor.rgb = fog_Func(fragColor.rgb, fogType);
     gl_FragColor = fragColor;

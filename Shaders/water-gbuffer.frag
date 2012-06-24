@@ -57,10 +57,10 @@ void main(void)
     vec3 E = normalize(viewerdir);
 
     // compute direction to light source
-    vec3 L = normalize(lightdir);
+    //vec3 L = normalize(lightdir);
 
     // half vector
-    vec3 H = normalize(L + E);
+    //vec3 H = normalize(L + E);
 
     vec3 Normal = normalize(normal);
 
@@ -126,7 +126,8 @@ void main(void)
         vNorm = -vNorm;		//dds fix
 
     //load reflection
-    vec4 tmp = vec4(lightdir, 0.0);
+    //vec4 tmp = vec4(lightdir, 0.0);
+    vec4 tmp = vec4(0.0);
     vec4 refTex = texture2D(water_reflection, vec2(tmp + waterTex1) * 32.0) ;
     vec4 refTexGrey = texture2D(water_reflection_grey, vec2(tmp + waterTex1) * 32.0) ;
     vec4 refl ;
@@ -176,7 +177,7 @@ void main(void)
     //vec4 specular = vec4(specular_color, 0.5);
 
     //specular = specular * saturation * 0.3 ;
-    float specular = saturation * 0.3;
+    //float specular = saturation * 0.3;
 
     //calculate fresnel
     vec4 invfres = vec4( dot(vNorm, viewt) );
@@ -184,12 +185,12 @@ void main(void)
     refl *= fres;
 
     //calculate final colour
-    vec4 ambient_light = gl_LightSource[0].diffuse;
+    //vec4 ambient_light = gl_LightSource[0].diffuse;
     vec4 finalColor = refl;
 
-    if(cover < 1.5){
-            specular = 0.0;
-        }
+//     if(cover < 1.5){
+//             specular = 0.0;
+//         }
 
     float foamSlope = 0.10 + 0.1 * windScale;
 
@@ -207,7 +208,7 @@ void main(void)
         //gl_FragColor = mix(gl_Fog.color, finalColor, fogFactor);
         //finalColor.rgb = fog_Func(finalColor.rgb, fogType);
         //gl_FragColor = finalColor;
-    float emission = dot( gl_FrontLightModelProduct.sceneColor.rgb + gl_FrontMaterial.emission,
+    float emission = dot( gl_FrontLightModelProduct.sceneColor.rgb + gl_FrontMaterial.emission.rgb,
                           vec3( 0.3, 0.59, 0.11 ) );
-    encode_gbuffer(N, finalColor.rgb, 1, specular, water_shininess, emission, gl_FragCoord.z);
+    encode_gbuffer(N, finalColor.rgb, 1, 1.0, water_shininess, emission, gl_FragCoord.z);
     }

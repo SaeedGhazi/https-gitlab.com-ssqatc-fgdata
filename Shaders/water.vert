@@ -14,8 +14,15 @@ varying vec3 viewerdir;
 varying vec3 lightdir;
 varying vec3 normal;
 
+varying vec3    VTangent;
+varying vec3    VBinormal;
+
 uniform float osg_SimulationTime;
 uniform float WindE, WindN;
+uniform int rembrandt_enabled;
+
+attribute   vec3    tangent;
+attribute   vec3    binormal;
 
 /////// functions /////////
 
@@ -30,8 +37,14 @@ void rotationmatrix(in float angle, out mat4 rotmat)
 void main(void)
 	{
 	mat4 RotationMatrix;
-	vec3 N = normalize(gl_Normal);
-	normal = N;
+	if (rembrandt_enabled > 0){
+        normal = gl_NormalMatrix * gl_Normal;
+	} else {
+        normal = normalize(gl_Normal);
+	}
+
+    VTangent = normalize(gl_NormalMatrix * tangent);
+    VBinormal = normalize(gl_NormalMatrix * binormal);
 
 	viewerdir = vec3(gl_ModelViewMatrixInverse[3]) - vec3(gl_Vertex);
 	lightdir = normalize(vec3(gl_ModelViewMatrixInverse * gl_LightSource[0].position));

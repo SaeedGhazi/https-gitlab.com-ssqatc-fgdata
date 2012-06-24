@@ -55,11 +55,6 @@
 			<text>
 				<halign>left</halign>
 				<label>Generic</label>
-				<enable>
-					<not>
-						<property>/sim/rendering/rembrandt/enabled</property>
-					</not>
-				</enable>
 			</text>
 			
 			<text>
@@ -129,11 +124,6 @@
 
 			<slider>
 				<name>generic</name>
-				<enable>
-					<not>
-						<property>/sim/rendering/rembrandt/enabled</property>
-					</not>
-				</enable>
 				<min>0.0</min>
 				<max>1.0</max>
 				<step>1.0</step>

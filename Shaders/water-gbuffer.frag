@@ -25,8 +25,8 @@ uniform int     Status;
 varying vec4    waterTex1; //moving texcoords
 varying vec4    waterTex2; //moving texcoords
 varying vec3    viewerdir;
-// varying vec3 lightdir;
 varying vec3    normal;
+varying vec3    Vnormal;
 varying vec3    VTangent;
 varying vec3    VBinormal;
 
@@ -56,13 +56,8 @@ void main(void)
     // compute direction to viewer
     vec3 E = normalize(viewerdir);
 
-    // compute direction to light source
-    //vec3 L = normalize(lightdir);
-
-    // half vector
-    //vec3 H = normalize(L + E);
-
     vec3 Normal = normalize(normal);
+    vec3 vNormal = normalize(Vnormal);
 
     const float water_shininess = 240.0;
 
@@ -166,11 +161,14 @@ void main(void)
     N0 *= windEffect_low;
     N1 *= windEffect_low;
 
-    vec3 N = normalize(mix(Normal + N0, Normal + N1, mixFactor) * waveRoughness);
-    N = normalize(N.x * VTangent + N.y * VBinormal + N.z * normal);
-    if (normalmap_dds > 0)
-        N = -N; //dds fix
+    vec3 N2 = normalize(mix(N0, N1, mixFactor) * waveRoughness);
+    Normal = normalize(N2.x * VTangent + N2.y * VBinormal + N2.z * Normal);
+    vNormal = normalize(mix(vNormal + N0, vNormal + N1, mixFactor) * waveRoughness);
 
+    if (normalmap_dds > 0){
+        Normal = -Normal; //dds fix
+        vNormal = -vNormal;
+    }
     // specular
     //vec3 specular_color = vec3(gl_LightSource[0].diffuse)
     //    * pow(max(0.0, dot(N, H)), water_shininess) * 6.0;
@@ -188,27 +186,18 @@ void main(void)
     //vec4 ambient_light = gl_LightSource[0].diffuse;
     vec4 finalColor = refl;
 
-//     if(cover < 1.5){
-//             specular = 0.0;
-//         }
-
-    float foamSlope = 0.10 + 0.1 * windScale;
-
-    vec4 foam_texel = texture2D(sea_foam, vec2(waterTex2 * tscale) * 25.0);
-    float waveSlope = N.g;
+    float   foamSlope = 0.10 + 0.1 * windScale;
+    vec4    foam_texel = texture2D(sea_foam, vec2(waterTex2 * tscale) * 25.0);
+    float   waveSlope = vNormal.g;
 
     if (windEffect >= 8.0)
         if (waveSlope >= foamSlope){
-            finalColor = mix(finalColor, max(finalColor, finalColor + foam_texel), smoothstep(0.01, 0.50, N.g));
+            finalColor = mix(finalColor, max(finalColor, finalColor + foam_texel), smoothstep(0.01, 0.50, vNormal.g));
             }
 
-
-        //finalColor *= ambient_light;
-
-        //gl_FragColor = mix(gl_Fog.color, finalColor, fogFactor);
-        //finalColor.rgb = fog_Func(finalColor.rgb, fogType);
-        //gl_FragColor = finalColor;
     float emission = dot( gl_FrontLightModelProduct.sceneColor.rgb + gl_FrontMaterial.emission.rgb,
-                          vec3( 0.3, 0.59, 0.11 ) );
-    encode_gbuffer(N, finalColor.rgb, 1, 1.0, water_shininess, emission, gl_FragCoord.z);
+                          vec3( 0.3, 0.59, 0.11 )
+                        );
+    float specular = smoothstep(0.0, 3.5, cover);
+    encode_gbuffer(Normal, finalColor.rgb, 1, specular, 128, emission, gl_FragCoord.z);
     }

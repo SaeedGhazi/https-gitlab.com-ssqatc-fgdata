@@ -138,9 +138,6 @@
 		</sea_b>
 
 		<!-- END fog include -->
-        <rembrandt>
-            <use>/sim/rendering/rembrandt/enabled</use>
-        </rembrandt>
 	</parameters>
 
    <generate>
@@ -676,7 +673,7 @@
            </texture-unit>
 
            <program>
-               <vertex-shader>Shaders/water.vert</vertex-shader>
+               <vertex-shader>Shaders/water-gbuffer.vert</vertex-shader>
                <fragment-shader>Shaders/water_sine-gbuffer.frag</fragment-shader>
                <fragment-shader>Shaders/gbuffer-functions.frag</fragment-shader>
                <fragment-shader>Shaders/gbuffer-encode.frag</fragment-shader>
@@ -1064,7 +1061,7 @@
                    </texture-unit>
 
                    <program>
-                       <vertex-shader>Shaders/water.vert</vertex-shader>
+                       <vertex-shader>Shaders/water-gbuffer.vert</vertex-shader>
                        <fragment-shader>Shaders/water-gbuffer.frag</fragment-shader>
                        <fragment-shader>Shaders/gbuffer-functions.frag</fragment-shader>
                        <fragment-shader>Shaders/gbuffer-encode.frag</fragment-shader>

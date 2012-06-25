@@ -7,15 +7,22 @@
 
 #version 120
 
-varying vec4 waterTex1;
-varying vec4 waterTex2;
+varying vec4    waterTex1;
+varying vec4    waterTex2;
 
-varying vec3 viewerdir;
-varying vec3 lightdir;
-varying vec3 normal;
+varying vec3    viewerdir;
+varying vec3    lightdir;
+varying vec3    normal;
 
-uniform float osg_SimulationTime;
-uniform float WindE, WindN;
+varying vec3    VTangent;
+varying vec3    VBinormal;
+
+uniform float   osg_SimulationTime;
+uniform float   WindE, WindN;
+uniform int     rembrandt_enabled;
+
+attribute vec3    tangent;
+attribute vec3    binormal;
 
 /////// functions /////////
 
@@ -30,9 +37,11 @@ void rotationmatrix(in float angle, out mat4 rotmat)
 void main(void)
     {
     mat4 RotationMatrix;
-    normal = normalize(gl_Normal);
+    normal = gl_NormalMatrix * gl_Normal;
+    VTangent = normalize(gl_NormalMatrix * tangent);
+    VBinormal = normalize(gl_NormalMatrix * binormal);
+
     viewerdir = vec3(gl_ModelViewMatrixInverse[3]) - vec3(gl_Vertex);
-    lightdir = normalize(vec3(gl_ModelViewMatrixInverse * gl_LightSource[0].position));
 
     vec4 t1 = vec4(0.0, osg_SimulationTime * 0.005217, 0.0, 0.0);
     vec4 t2 = vec4(0.0, osg_SimulationTime * -0.0012, 0.0, 0.0);

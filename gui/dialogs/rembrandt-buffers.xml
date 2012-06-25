@@ -77,6 +77,7 @@
 			<value>bloom-2</value>
 			<value>bloom-3</value>
 			<value>lighting</value>
+			<value>shadow</value>
 			<binding>
 				<command>dialog-apply</command>
 				<object-name>buffer-nw-name</object-name>
@@ -139,6 +140,7 @@
 			<value>bloom-2</value>
 			<value>bloom-3</value>
 			<value>lighting</value>
+			<value>shadow</value>
 			<binding>
 				<command>dialog-apply</command>
 				<object-name>buffer-ne-name</object-name>
@@ -189,6 +191,7 @@
 			<value>bloom-2</value>
 			<value>bloom-3</value>
 			<value>lighting</value>
+			<value>shadow</value>
 			<binding>
 				<command>dialog-apply</command>
 				<object-name>buffer-sw-name</object-name>
@@ -251,6 +254,7 @@
 			<value>bloom-2</value>
 			<value>bloom-3</value>
 			<value>lighting</value>
+			<value>shadow</value>
 			<binding>
 				<command>dialog-apply</command>
 				<object-name>buffer-se-name</object-name>

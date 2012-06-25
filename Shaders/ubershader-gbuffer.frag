@@ -184,5 +184,5 @@ void main (void)
 // END lightmap
 /////////////////////////////////////////////////////////////////////
 
-	encode_gbuffer(N, fragColor.rgb, 1, specular, gl_FrontMaterial.shininess, emission, gl_FragCoord.z);
+	encode_gbuffer(N, fragColor.rgb, 255, specular, gl_FrontMaterial.shininess, emission, gl_FragCoord.z);
 }

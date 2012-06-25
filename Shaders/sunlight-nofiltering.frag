@@ -73,6 +73,11 @@ void main() {
         halfDir /= len;
         Ispec = pow( clamp( dot( halfDir, normal ), 0.0, 1.0 ), spec_emis.y * 128.0 ) * spec_emis.x * fg_SunSpecularColor.rgb;
     }
+
+    float matID = texture2D( color_tex, coords ).a * 255.0;
+    if (matID == 255.0)
+        Idiff += Ispec * spec_emis.x;
+
     gl_FragColor = vec4(mix(vec3(0.0), Idiff + Ispec, shadow) + Iemis, 1.0);
 //    gl_FragColor = mix(tint, vec4(mix(vec3(0.0), Idiff + Ispec, shadow) + Iemis, 1.0), 0.92);
 }

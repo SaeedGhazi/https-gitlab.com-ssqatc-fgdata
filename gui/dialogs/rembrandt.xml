@@ -211,10 +211,10 @@
 			<enable>
 				<property>/sim/rendering/shadows/enabled</property>
 			</enable>
-			<min>0.0</min>
-			<max>5.0</max>
+			<min>1.0</min>
+			<max>3.0</max>
 			<step>1.0</step>
-			<fraction>0.167</fraction>
+			<fraction>0.333</fraction>
 			<property>/sim/rendering/shadows/filtering</property>
 			<binding>
 				<command>dialog-apply</command>

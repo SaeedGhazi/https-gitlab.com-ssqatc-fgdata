@@ -5,6 +5,7 @@
 		<exposure type="float"><use>/sim/rendering/rembrandt/exposure</use></exposure>
 		<show-buffers type="bool"><use>/sim/rendering/rembrandt/show-buffers</use></show-buffers>
 		<bloom type="bool"><use>/sim/rendering/rembrandt/bloom</use></bloom>
+		<bloom-strength type="float"><use>/sim/rendering/rembrandt/bloom-strength</use></bloom-strength>
 		<bloom-buffers type="bool"><use>/sim/rendering/rembrandt/bloom-buffers</use></bloom-buffers>
 
 		<buffer-nw-enabled><use>/sim/rendering/rembrandt/debug-buffer[0]/enabled</use></buffer-nw-enabled>
@@ -126,9 +127,14 @@
 				<value type="bool"><use>bloom</use></value>
 			</uniform>
 			<uniform>
+				<name>bloomStrength</name>
+				<type>float</type>
+				<value><use>bloom-strength</use></value>
+			</uniform>
+			<uniform>
 				<name>bloomBuffers</name>
 				<type>bool</type>
-				<value type="bool"><use>bloom-buffers</use></value>
+				<value><use>bloom-buffers</use></value>
 			</uniform>
 		</pass>
 	</technique>

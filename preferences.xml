@@ -69,6 +69,7 @@ Started September 2000 by David Megginson, david@megginson.com
 				<ambient-occlusion-strength type="float" userarchive="y">1.0</ambient-occlusion-strength>
 				<ambient-occlusion-buffers type="bool">true</ambient-occlusion-buffers>
 				<bloom type="bool" userarchive="y">true</bloom>
+				<bloom-strength type="float" userarchive="y">1.0</bloom-strength>
 				<bloom-buffers type="bool">true</bloom-buffers>
 				<exposure type="float" userarchive="y">1.0</exposure>
 				<use-color-for-depth type="bool">false</use-color-for-depth>

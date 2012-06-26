@@ -10,6 +10,7 @@ uniform float exposure;
 uniform bool showBuffers;
 
 uniform bool bloomEnabled;
+uniform float bloomStrength;
 uniform bool bloomBuffers;
 
 uniform bool bufferNW_enabled;
@@ -40,13 +41,13 @@ void main() {
         } else {
             color = texture2D( lighting_tex, coords );
             if (bloomEnabled && bloomBuffers)
-                color = color + texture2D( bloom_tex, coords );
+                color = color + bloomStrength * texture2D( bloom_tex, coords );
             //color = vec4( HDR( color.rgb ), 1.0 );
         }
     } else {
         color = texture2D( lighting_tex, coords );
         if (bloomEnabled && bloomBuffers)
-            color = color + texture2D( bloom_tex, coords );
+            color = color + bloomStrength * texture2D( bloom_tex, coords );
         //color = vec4( HDR( color.rgb ), 1.0 );
     }
     gl_FragColor = color;

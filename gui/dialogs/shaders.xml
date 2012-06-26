@@ -110,11 +110,6 @@
 			<text>
 				<halign>left</halign>
 				<label>Water</label>
-				<enable>
-					<not>
-						<property>/sim/rendering/rembrandt/enabled</property>
-					</not>
-				</enable>
 			</text>
 
 		</group>
@@ -242,11 +237,6 @@
 
 			<slider>
 				<name>water</name>
-				<enable>
-					<not>
-						<property>/sim/rendering/rembrandt/enabled</property>
-					</not>
-				</enable>
 				<min>0.0</min>
 				<max>5.0</max>
 				<step>1.0</step>

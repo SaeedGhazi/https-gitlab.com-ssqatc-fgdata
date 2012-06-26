@@ -309,6 +309,8 @@ Started September 2000 by David Megginson, david@megginson.com
 			<path>Aircraft/Generic/Panels/generic-vfr-panel.xml</path>
 			<visibility type="bool" userarchive="y">false</visibility>
 			<jitter type="bool">false</jitter>
+            <hide-nonzero-view type="bool" userarchive="y">true</hide-nonzero-view>
+            <hide-nonzero-heading-offset type="bool" userarchive="y">true</hide-nonzero-heading-offset>
 		</panel>
 		<panel_2>
 			<path>Aircraft/Generic/Panels/generic-trans-mini-panel.xml</path>

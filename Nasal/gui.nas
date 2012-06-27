@@ -1354,8 +1354,9 @@ _setlistener("/sim/sound/chatter/enabled", func {
 ##
 # overwrite custom shader settings when quality-level is set on startup
 var qualityLevel = getprop("/sim/rendering/shaders/quality-level");
+var rembrandtOn = getprop("/sim/rendering/rembrandt/enabled");
 if (qualityLevel == -1) {
-    setprop("/sim/rendering/shaders/custom-settings",1); 
+    setprop("/sim/rendering/shaders/custom-settings",1);
 }
 elsif (qualityLevel != nil) {
     setprop("/sim/rendering/shaders/custom-settings",0);
@@ -1364,10 +1365,10 @@ elsif (qualityLevel != nil) {
         setprop("/sim/rendering/shaders/skydome",0);
     }
 }
-# overwrite custom shader settings when quality-level is set through the slider 
+# overwrite custom shader settings when quality-level is set through the slider
 # in the Rendering Options dialog
 var update_shader_settings = func() {
-    if (!getprop("/sim/rendering/shaders/custom-settings")){ 
+    if (!getprop("/sim/rendering/shaders/custom-settings")){
         var qualityLvl = getprop("/sim/rendering/shaders/quality-level-internal");
         setprop("/sim/rendering/shaders/landmass",qualityLvl);
         setprop("/sim/rendering/shaders/urban",qualityLvl);
@@ -1384,6 +1385,10 @@ var update_shader_settings = func() {
         setprop("/sim/rendering/shaders/generic",qualityLvl);
         setprop("/sim/rendering/shaders/transition",qualityLvl);
     }
+
+    if (rembrandtOn) {
+		setprop("/sim/rendering/shaders/skydome",0);
+	}
 };
 _setlistener("/sim/rendering/shaders/custom-settings", func { update_shader_settings() } );
 _setlistener("/sim/rendering/shaders/quality-level-internal",   func { update_shader_settings() } );

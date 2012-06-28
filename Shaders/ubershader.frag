@@ -167,7 +167,8 @@ void main (void)
 
 	// set ambient adjustment to remove bluiness with user input
 	float ambient_offset = clamp(amb_correction, -1.0, 1.0);
-	vec4 ambient_Correction = vec4(gl_LightSource[0].ambient.rg, gl_LightSource[0].ambient.b * 0.6, 0.5)
+	vec4 ambient = gl_LightModel.ambient + gl_LightSource[0].ambient;
+	vec4 ambient_Correction = vec4(ambient.rg, ambient.b * 0.6, 1.0)
 							  * ambient_offset ;
 	ambient_Correction = clamp(ambient_Correction, -1.0, 1.0);
 

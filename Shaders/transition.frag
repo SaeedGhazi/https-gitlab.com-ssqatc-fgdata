@@ -44,6 +44,7 @@ void main()
     float L1;
     float L2;
     float wetness;
+	float pf;
 
     vec3 n;
     vec3 lightDir;
@@ -58,7 +59,7 @@ void main()
     lightDir = gl_LightSource[0].position.xyz;
     halfVector = gl_LightSource[0].halfVector.xyz;
 
-    color = gl_Color;
+    //color = gl_Color;
     specular = vec4(0.0);
 
     cover = min(min(min(min(CloudCover0, CloudCover1),CloudCover2),CloudCover3),CloudCover4);
@@ -75,15 +76,36 @@ void main()
     n = (2.0 * gl_Color.a - 1.0) * Vnormal;
     n = normalize(n);
 
-    NdotL = dot(n, lightDir);
-    if (NdotL > 0.0) {
-        color += diffuse_term * NdotL;
-        NdotHV = max(dot(n, halfVector), 0.0);
-        if (gl_FrontMaterial.shininess > 0.0)
-            specular.rgb = (gl_FrontMaterial.specular.rgb
-            * gl_LightSource[0].specular.rgb
-            * pow(NdotHV, gl_FrontMaterial.shininess));
-        }
+//     NdotL = dot(n, lightDir);
+//     if (NdotL > 0.0) {
+//         color += diffuse_term * NdotL;
+//         NdotHV = max(dot(n, halfVector), 0.0);
+//         if (gl_FrontMaterial.shininess > 0.0)
+//             specular.rgb = (gl_FrontMaterial.specular.rgb
+//             * gl_LightSource[0].specular.rgb
+//             * pow(NdotHV, gl_FrontMaterial.shininess));
+//         }
+
+	float nDotVP = max(0.0, dot(n, normalize(gl_LightSource[0].position.xyz)));
+	float nDotHV = max(0.0, dot(n, normalize(gl_LightSource[0].halfVector.xyz)));
+	vec4 Diffuse  = gl_LightSource[0].diffuse * nDotVP;
+
+	if (nDotVP == 0.0)
+		pf = 0.0;
+	else
+		pf = pow(nDotHV, gl_FrontMaterial.shininess);
+
+	if (gl_FrontMaterial.shininess > 0.0)
+		specular = gl_FrontMaterial.specular * gl_LightSource[0].specular * pf;
+
+	color = gl_FrontMaterial.emission +
+			gl_Color * (gl_LightModel.ambient + gl_LightSource[0].ambient) +
+			Diffuse * gl_FrontMaterial.diffuse;
+
+	color += specular * gl_FrontMaterial.specular;
+
+
+
 
     color.a = diffuse_term.a;
     // This shouldn't be necessary, but our lighting becomes very

@@ -300,7 +300,7 @@
 					<name>building-density</name>
 					<min>0</min>
 					<max>5.0</max>
-					<step>0.05</step>
+					<step>0.1</step>
 					<property>/sim/rendering/building-density</property>
 					<binding>
 						<command>dialog-apply</command>

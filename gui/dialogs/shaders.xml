@@ -56,7 +56,7 @@
 				<halign>left</halign>
 				<label>Generic</label>
 			</text>
-			
+
 			<text>
 				<halign>left</halign>
 				<label>Crop</label>
@@ -91,12 +91,18 @@
 				<halign>left</halign>
 				<label>Transition</label>
 				<enable>
-					<not>
-						<property>/sim/rendering/rembrandt/enabled</property>
-					</not>
+					<or>
+						<not>
+							<property>/sim/rendering/rembrandt/enabled</property>
+						</not>
+						<equals>
+							<property>/sim/rendering/materials-file</property>
+							<value>Materials/dds/materials.xml</value>
+						</equals>
+					</or>
 				</enable>
 			</text>
-			
+
 			<text>
 				<halign>left</halign>
 				<label>Model</label>
@@ -130,7 +136,7 @@
 					<object-name>generic</object-name>
 				</binding>
 			</slider>
-			
+
 			<slider>
 				<name>crop</name>
 				<enable>
@@ -191,9 +197,15 @@
 			<slider>
 				<name>transition</name>
 				<enable>
-					<not>
-						<property>/sim/rendering/rembrandt/enabled</property>
-					</not>
+					<or>
+						<not>
+							<property>/sim/rendering/rembrandt/enabled</property>
+						</not>
+						<equals>
+							<property>/sim/rendering/materials-file</property>
+							<value>Materials/dds/materials.xml</value>
+						</equals>
+					</or>
 				</enable>
 				<min>0.0</min>
 				<max>1.0</max>
@@ -252,7 +264,7 @@
 		</group>
 
 	</group>
-	
+
 	<text>
 		<label>Some shaders are disabled because</label>
 		<color>
@@ -371,7 +383,7 @@
 	</group>
 
 	<hrule/>
-	
+
 	<group>
 		<layout>hbox</layout>
 

@@ -94,10 +94,6 @@ parameters :
 			<and>
 				<property>/sim/rendering/shaders/transition</property>
 				<property>/sim/rendering/rembrandt/enabled</property>
-				<less-equal>
-					<value type="float">4.0</value>
-					<float-property>/sim/rendering/shaders/water</float-property>
-				</less-equal>
 				<or>
 					<less-equal>
 						<value type="float">2.0</value>
@@ -394,6 +390,10 @@ parameters :
 		<predicate>
 			<and>
 				<property>/sim/rendering/shaders/transition</property>
+				<equal>
+					<value type="float">0.0</value>
+					<float-property>/sim/rendering/rembrandt/enabled</float-property>
+				</equal>
 				<or>
 					<less-equal>
 						<value type="float">2.0</value>

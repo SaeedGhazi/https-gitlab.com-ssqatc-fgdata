@@ -274,17 +274,11 @@ var adjEngControl = func {
 # arg[0] is the throttle increment
 # arg[1] is the auto-throttle target speed increment
 var incThrottle = func {
-    var auto = props.globals.getNode("/autopilot/locks/speed", 1);
-    var passive = props.globals.getNode("/autopilot/locks/passive-mode", 1);
-    if (!auto.getValue() or passive.getValue()) {
-        foreach(var e; engines) {
-            if(e.selected.getValue()) {
-                var node = e.controls.getNode("throttle", 1);
-                var val = node.getValue() + arg[0];
-                node.setValue(val < -1.0 ? -1.0 : val > 1.0 ? 1.0 : val);
-            }
-        }
-    } else {
+    var passive = getprop("/autopilot/locks/passive-mode");
+    var locked = getprop("/autopilot/locks/speed");
+    # Note: passive/locked may be nil on aircraft without A/P
+    if ((passive == 0) and (locked))
+    {
         var node = props.globals.getNode("/autopilot/settings/target-speed-kt", 1);
         if (node.getValue() == nil) {
             node.setValue(0.0);
@@ -294,28 +288,29 @@ var incThrottle = func {
             node.setValue(0.0);
         }
     }
+    else
+    {
+        foreach(var e; engines)
+        {
+            if(e.selected.getValue())
+            {
+                var node = e.controls.getNode("throttle", 1);
+                var val = node.getValue() + arg[0];
+                node.setValue(val < -1.0 ? -1.0 : val > 1.0 ? 1.0 : val);
+            }
+        }
+    }
 }
 
 ##
 # arg[0] is the aileron increment
 # arg[1] is the autopilot target heading increment
 var incAileron = func {
-    var auto = props.globals.getNode("/autopilot/locks/heading", 1);
-    var passive = props.globals.getNode("/autopilot/locks/passive-mode", 1);
-    if (!auto.getValue() or passive.getValue()){
-        var aileron = props.globals.getNode("/controls/flight/aileron");
-        if (aileron.getValue() == nil) {
-            aileron.setValue(0.0);
-        }
-        aileron.setValue(aileron.getValue() + arg[0]);
-        if (aileron.getValue() < -1.0) {
-            aileron.setValue(-1.0);
-        }
-        if (aileron.getValue() > 1.0) {
-            aileron.setValue(1.0);
-        }
-    }
-    if (auto.getValue() == "dg-heading-hold") {
+    var passive = getprop("/autopilot/locks/passive-mode");
+    var locked = getprop("/autopilot/locks/heading");
+    # Note: passive/locked may be nil on aircraft without A/P
+    if ((passive == 0) and (locked == "dg-heading-hold"))
+    {
         var node = props.globals.getNode("/autopilot/settings/heading-bug-deg", 1);
         if (node.getValue() == nil) {
             node.setValue(0.0);
@@ -328,7 +323,8 @@ var incAileron = func {
             node.setValue(node.getValue() - 360.0);
         }
     }
-    if (auto.getValue() == "true-heading-hold") {
+    else if ((passive == 0) and (locked == "true-heading-hold"))
+    {
         var node = props.globals.getNode("/autopilot/settings/true-heading-deg", 1);
         if (node.getValue() == nil) {
             node.setValue(0.0);
@@ -341,15 +337,42 @@ var incAileron = func {
             node.setValue(node.getValue() - 360.0);
         }
     }
+    else
+    {
+        var aileron = props.globals.getNode("/controls/flight/aileron");
+        if (aileron.getValue() == nil) {
+           aileron.setValue(0.0);
+        }
+        aileron.setValue(aileron.getValue() + arg[0]);
+        if (aileron.getValue() < -1.0) {
+            aileron.setValue(-1.0);
+        }
+        if (aileron.getValue() > 1.0) {
+            aileron.setValue(1.0);
+        }
+    }
 }
 
 ##
 # arg[0] is the elevator increment
 # arg[1] is the autopilot target altitude increment
 var incElevator = func {
-    var auto = props.globals.getNode("/autopilot/locks/altitude", 1);
-    var passive = props.globals.getNode("/autopilot/locks/passive-mode", 1);
-    if (!auto.getValue() or auto.getValue() == 0  or passive.getValue()) {
+    var passive = getprop("/autopilot/locks/passive-mode");
+    var locked = getprop("/autopilot/locks/altitude");
+    # Note: passive/locked may be nil on aircraft without A/P
+    if ((passive == 0) and (locked =="altitude-hold"))
+    {
+        var node = props.globals.getNode("/autopilot/settings/target-altitude-ft", 1);
+        if (node.getValue() == nil) {
+            node.setValue(0.0);
+        }
+        node.setValue(node.getValue() + arg[1]);
+        if (node.getValue() < 0.0) {
+            node.setValue(0.0);
+        }
+    }
+    else
+    {
         var elevator = props.globals.getNode("/controls/flight/elevator");
         if (elevator.getValue() == nil) {
             elevator.setValue(0.0);
@@ -360,15 +383,6 @@ var incElevator = func {
         }
         if (elevator.getValue() > 1.0) {
             elevator.setValue(1.0);
-        }
-    } elsif (auto.getValue() == "altitude-hold") {
-        var node = props.globals.getNode("/autopilot/settings/target-altitude-ft", 1);
-        if (node.getValue() == nil) {
-            node.setValue(0.0);
-        }
-        node.setValue(node.getValue() + arg[1]);
-        if (node.getValue() < 0.0) {
-            node.setValue(0.0);
         }
     }
 }

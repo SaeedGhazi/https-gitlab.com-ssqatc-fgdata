@@ -31,8 +31,6 @@
 		<dust_cover_factor><use>/environment/surface/dust-cover-factor</use></dust_cover_factor>
 		<fogtype><use>/sim/rendering/shaders/skydome</use></fogtype>
 		<fogstructure><use>/environment/fog-structure</use></fogstructure>
-		<render-bin-number><use>/sim/rendering/tree-bin</use></render-bin-number>
-		<render-bin-name><use>/sim/rendering/tree-bin-name</use></render-bin-name>
 		<!-- 	END fog include -->
 	</parameters>
 	

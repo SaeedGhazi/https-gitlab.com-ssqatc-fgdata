@@ -311,7 +311,7 @@
 					<row>1</row>
 					<col>3</col>
 					<label>12345678</label>
-					<format>%.2f</format>
+					<format>%.1f</format>
 					<live>true</live>
 					<property>/sim/rendering/building-density</property>
 					<enable>

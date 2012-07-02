@@ -1,10 +1,12 @@
 // -*-C++-*-
 // Texture switching based on face slope and snow level
 // based on earlier work by Frederic Bouvier, Tim Moore, and Yves Sablonier.
-// � Emilian Huminiuc 2011
+// © Emilian Huminiuc 2011
 
 // Ambient term comes in gl_Color.rgb.
-varying vec4	diffuse_term;
+
+#version 120
+
 varying vec4    RawPos;
 varying vec3	normal;
 varying vec3    Vnormal;
@@ -14,11 +16,11 @@ uniform float   Transitions;
 uniform float   InverseSlope;
 uniform float   RainNorm;
 
-uniform float CloudCover0;
-uniform float CloudCover1;
-uniform float CloudCover2;
-uniform float CloudCover3;
-uniform float CloudCover4;
+uniform float	CloudCover0;
+uniform float	CloudCover1;
+uniform float	CloudCover2;
+uniform float	CloudCover3;
+uniform float	CloudCover4;
 
 uniform sampler2D BaseTex;
 uniform sampler2D SecondTex;
@@ -64,7 +66,7 @@ void main()
 
     cover = min(min(min(min(CloudCover0, CloudCover1),CloudCover2),CloudCover3),CloudCover4);
 
-    Noise =  texture3D(NoiseTex, RawPos.xyz*0.0011);
+    Noise =  texture3D(NoiseTex, RawPos.xyz * 0.0011);
     MixFactor = Noise.r * Noise.g * Noise.b;	//Mixing Factor to create a more organic looking boundary
     MixFactor *= 300.0;
     MixFactor = clamp(MixFactor, 0.0, 1.0);
@@ -75,16 +77,6 @@ void main()
     // Vnormal should be reversed.
     n = (2.0 * gl_Color.a - 1.0) * Vnormal;
     n = normalize(n);
-
-//     NdotL = dot(n, lightDir);
-//     if (NdotL > 0.0) {
-//         color += diffuse_term * NdotL;
-//         NdotHV = max(dot(n, halfVector), 0.0);
-//         if (gl_FrontMaterial.shininess > 0.0)
-//             specular.rgb = (gl_FrontMaterial.specular.rgb
-//             * gl_LightSource[0].specular.rgb
-//             * pow(NdotHV, gl_FrontMaterial.shininess));
-//         }
 
 	float nDotVP = max(0.0, dot(n, normalize(gl_LightSource[0].position.xyz)));
 	float nDotHV = max(0.0, dot(n, normalize(gl_LightSource[0].halfVector.xyz)));
@@ -99,15 +91,11 @@ void main()
 		specular = gl_FrontMaterial.specular * gl_LightSource[0].specular * pf;
 
 	color = gl_FrontMaterial.emission +
-			gl_Color * (gl_LightModel.ambient + gl_LightSource[0].ambient) +
+			vec4(1.0) * (gl_LightModel.ambient + gl_LightSource[0].ambient) +
 			Diffuse * gl_FrontMaterial.diffuse;
 
 	color += specular * gl_FrontMaterial.specular;
 
-
-
-
-    color.a = diffuse_term.a;
     // This shouldn't be necessary, but our lighting becomes very
     // saturated. Clamping the color before modulating by the texture
     // is closer to what the OpenGL fixed function pipeline does.
@@ -128,7 +116,6 @@ void main()
         //Do we do an intermediate transition
         if (Transitions >= 1.5) {
             if (slope >= L1) {
-                //texel = mix(texture2D(SecondTex, gl_TexCoord[0].st), texture2D(BaseTex, gl_TexCoord[0].st), smoothstep(L1, L1 + 0.03 * MixFactor, slope));
                 texel = baseTexel;
                 }
             if (slope >= L2  && slope < L1){

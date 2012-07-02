@@ -95,7 +95,7 @@ void main()
 
   vec4 diffuse_color = gl_FrontMaterial.diffuse * max(0.1, n);
   //diffuse_color.a = 1.0;
-  vec4 ambient_color = gl_FrontLightModelProduct.sceneColor + gl_LightSource[0].ambient * gl_FrontMaterial.ambient;
+  vec4 ambient_color = gl_FrontMaterial.ambient;
 
     // here start computations for the haze layer
     // we need several geometrical quantities

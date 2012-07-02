@@ -68,6 +68,10 @@
 				<source>src-alpha</source>
 				<destination>one-minus-src-alpha</destination>
 			</blend>
+			<alpha-test>
+				<comparison>gequal</comparison>
+				<reference type="float">0.1</reference>
+			</alpha-test>
 			<texture-unit>
 				<unit>0</unit>
 				<type>2d</type>
@@ -107,6 +111,10 @@
 				<wrap-s>clamp</wrap-s>
 				<wrap-t>clamp</wrap-t>
 			</texture-unit>
+			<alpha-test>
+				<comparison>gequal</comparison>
+				<reference type="float">0.1</reference>
+			</alpha-test>
       <program>
         <vertex-shader>Shaders/tree-haze.vert</vertex-shader>
         <fragment-shader>Shaders/tree-haze.frag</fragment-shader>

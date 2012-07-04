@@ -176,12 +176,10 @@
 				<binding>
 					<command>nasal</command>
 					<script>
-						print("get red light");
 						var v = getprop("/ai/models/carrier/controls/lighting/flood-lights-red-norm");
 						foreach (var c; props.globals.getNode("/ai/models").getChildren("carrier"))
 						{
 						c.getNode("controls/lighting/flood-lights-red-norm",1).setDoubleValue(v);
-						print("set red light", v);
 						}
 					</script>
 				</binding>

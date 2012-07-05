@@ -60,7 +60,7 @@ Started September 2000 by David Megginson, david@megginson.com
 			<season type="string" preserve="y">summer</season>
 		</startup>
 		<rendering>
-			<materials-file>Materials/default/materials.xml</materials-file>
+			<materials-file>Materials/regions/materials.xml</materials-file>
 			<rembrandt>
 				<enabled type="bool">false</enabled>
 				<renderer>default-pipeline</renderer>

@@ -196,12 +196,39 @@
 			<group>
 				<layout>hbox</layout>
 				<text>
-					<label>Scenery objects</label>
+					<label>Scenery</label>
 					<halign>left</halign>
 				</text>
 				<hrule>
 					<stretch>true</stretch>
 				</hrule>
+			</group>
+
+			<group>
+				<layout>hbox</layout>
+				<text>
+					<label>Season (ground textures): </label>
+					<halign>left</halign>
+				</text>
+				<empty>
+					<stretch>true</stretch>
+				</empty>
+				<combo>
+					<name>season</name>
+					<halign>left</halign>
+					<live>true</live>
+					<property>/sim/startup/season</property>
+					<value>summer</value>
+					<value>winter</value>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>season</object-name>
+					</binding>
+				</combo>
+				<empty>
+					<stretch>true</stretch>
+				</empty>
+
 			</group>
 
 			<checkbox>

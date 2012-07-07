@@ -1822,6 +1822,7 @@
   <name>MixedCrop</name>
   <name>ComplexCrop</name>
   <texture>Terrain/rice1.png</texture>
+  <object-mask>Terrain/rice1.mask.png</object-mask>
   <xsize>2000</xsize>
   <ysize>2000</ysize>
   <light-coverage>2000000.0</light-coverage>
@@ -2874,10 +2875,10 @@
   <texture>Terrain.winter/drycrop2.png</texture>
   <texture>Terrain.winter/drycrop3.png</texture>
   <texture>Terrain.winter/drycrop4.png</texture>
-  <object-mask>Terrain/drycrop1.png</object-mask>
-  <object-mask>Terrain/drycrop2.png</object-mask>
-  <object-mask>Terrain/drycrop3.png</object-mask>
-  <object-mask>Terrain/drycrop4.png</object-mask>
+  <object-mask>Terrain/drycrop1.mask.png</object-mask>
+  <object-mask>Terrain/drycrop2.mask.png</object-mask>
+  <object-mask>Terrain/drycrop3.mask.png</object-mask>
+  <object-mask>Terrain/drycrop4.mask.png</object-mask>
   <xsize>2000</xsize>
   <ysize>2000</ysize>
   <solid>1</solid>

@@ -54,6 +54,7 @@
     <label>Enable AI traffic</label>
     <name>enable-ai-traffic</name>
     <property>/sim/traffic-manager/enabled</property>
+    <live>true</live>
     <binding>
         <command>dialog-apply</command>
         <object-name>enable-ai-traffic</object-name>

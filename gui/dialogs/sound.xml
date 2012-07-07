@@ -295,6 +295,18 @@
         <property>/sim/sound/enabled</property>
       </enable>
     </checkbox>
+
+    <slider>
+      <row>6</row>
+      <col>2</col>
+      <property>/sim/sound/aimodels/volume</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+	  <enable>
+        <property>/sim/sound/enabled</property>
+      </enable>
+    </slider>
   </group>
 
   <hrule/>

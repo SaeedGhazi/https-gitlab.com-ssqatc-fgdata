@@ -1031,7 +1031,7 @@
 <material include="Materials/base/water.xml">
   <name>Ocean</name>
   <effect>Effects/water-dds</effect>
-  <texture>Terrain/water.png</texture>
+  <texture>Terrain/water.dds</texture>
 </material>
 
 <material>
@@ -1050,10 +1050,10 @@
   <name>Estuary</name>
   <name>Watercourse</name>
   <name>Saline</name>
-  <texture>Terrain/estuary.dds</texture>
+  <texture>Terrain/water-inland.dds</texture>
   <!--<texture>Terrain/water-lake.png</texture>-->
-  <xsize>400</xsize>
-  <ysize>400</ysize>
+  <xsize>128</xsize>
+  <ysize>128</ysize>
   <ambient>
     <r>0.0</r>
     <g>0.0</g>

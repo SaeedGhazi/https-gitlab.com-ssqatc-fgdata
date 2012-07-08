@@ -1287,10 +1287,12 @@
   <name>MixedCrop</name>
   <name>ComplexCrop</name>
   <texture>Terrain/countryside1.green.dds</texture>
+  <texture>Terrain/countryside2.green.dds</texture>
   <!--  <texture>Terrain/mixedcrop1.dds</texture>
   <texture>Terrain/mixedcrop4.dds</texture>
   <texture>Terrain/mixedcrop3.dds</texture>-->
   <object-mask>Terrain/countryside1.green.mask.png</object-mask>
+  <object-mask>Terrain/countryside2.green.mask.png</object-mask>
   <!--  <object-mask>Terrain/mixedcrop1.mask.png</object-mask>
   <object-mask>Terrain/mixedcrop4.mask.png</object-mask>
   <object-mask>Terrain/mixedcrop3.mask.png</object-mask>-->
@@ -1364,11 +1366,11 @@
     <texture>Terrain/uk_countryside1.dds</texture>
     <texture n="4">Terrain.winter/countryside1.winter.dds</texture>
   </texture-set>
-  <!--<texture-set>
-    <texture>Terrain/countryside2.green.dds</texture>
+  <texture-set>
+    <texture>Terrain/uk_countryside2.dds</texture>
     <texture n="4">Terrain.winter/countryside2.winter.dds</texture>
   </texture-set>
-  <texture-set>
+  <!--<texture-set>
     <texture>Terrain/countryside3.green.dds</texture>
     <texture n="4">Terrain.winter/countryside3.winter.dds</texture>
   </texture-set>
@@ -1377,8 +1379,8 @@
     <texture n="4">Terrain.winter/countryside4.winter.dds</texture>
   </texture-set> -->
   <object-mask>Terrain/countryside1.green.mask.png</object-mask>
-  <!--<object-mask>Terrain/countryside2.green.mask.png</object-mask>
-  <object-mask>Terrain/countryside3.green.mask.png</object-mask>
+  <object-mask>Terrain/countryside2.green.mask.png</object-mask>
+  <!--<object-mask>Terrain/countryside3.green.mask.png</object-mask>
   <object-mask>Terrain/countryside4.green.mask.png</object-mask>-->
   <xsize>1800</xsize>
   <ysize>1800</ysize>
@@ -2172,12 +2174,12 @@
   <effect>Effects/transition-base-dirt</effect>
   <texture >Terrain.winter/countryside1.winter.dds</texture>
   <texture >Terrain.winter/countryside2.winter.dds</texture>
-  <texture >Terrain.winter/countryside3.winter.dds</texture>
-  <texture >Terrain.winter/countryside3.winter.dds</texture>
+  <!--<texture >Terrain.winter/countryside3.winter.dds</texture>
+  <texture >Terrain.winter/countryside3.winter.dds</texture>-->
   <object-mask>Terrain/countryside1.green.mask.png</object-mask>
   <object-mask>Terrain/countryside2.green.mask.png</object-mask>
-  <object-mask>Terrain/countryside3.green.mask.png</object-mask>
-  <object-mask>Terrain/countryside4.green.mask.png</object-mask>
+  <!--<object-mask>Terrain/countryside3.green.mask.png</object-mask>
+  <object-mask>Terrain/countryside4.green.mask.png</object-mask>-->
   <xsize>1800</xsize>
   <ysize>1800</ysize>
   <solid>1</solid>

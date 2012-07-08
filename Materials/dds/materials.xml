@@ -1461,6 +1461,8 @@
   <rolling-friction>0.1</rolling-friction>
   <bumpiness>0.3</bumpiness>
   <load-resistance>1e30</load-resistance>
+  <light-coverage>2000000.0</light-coverage>
+  <object-group include="Materials/base/farm-buildings.xml"/>
   <wood-coverage>2000.0</wood-coverage>
   <tree-texture>Trees/deciduous-summer.dds</tree-texture>
   <tree-varieties>8</tree-varieties>
@@ -1530,6 +1532,8 @@
   <rolling-friction>0.6</rolling-friction>
   <bumpiness>0.7</bumpiness>
   <load-resistance>10</load-resistance>
+  <light-coverage>2000000.0</light-coverage>
+  <object-group include="Materials/base/farm-buildings.xml"/>
   <wood-coverage>2000.0</wood-coverage>
   <tree-texture>Trees/mixed-summer.dds</tree-texture>
   <tree-varieties>8</tree-varieties>

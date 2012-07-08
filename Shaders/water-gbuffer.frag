@@ -10,30 +10,38 @@
 
 #version 120
 
-uniform sampler2D water_normalmap;
-uniform sampler2D water_reflection;
-uniform sampler2D water_dudvmap;
-uniform sampler2D water_reflection_grey;
-uniform sampler2D sea_foam;
-uniform sampler2D perlin_normalmap;
+uniform sampler2D	water_normalmap;
+uniform sampler2D	water_reflection;
+uniform sampler2D	water_dudvmap;
+uniform sampler2D	water_reflection_grey;
+uniform sampler2D	sea_foam;
+uniform sampler2D	perlin_normalmap;
 
-uniform float   saturation, Overcast, WindE, WindN;
-uniform float   CloudCover0, CloudCover1, CloudCover2, CloudCover3, CloudCover4;
-uniform float   osg_SimulationTime;
-uniform int     Status;
+uniform float	CloudCover0;
+uniform float	CloudCover1;
+uniform float	CloudCover2;
+uniform float	CloudCover3;
+uniform float	CloudCover4;
+uniform float	Overcast;
+uniform float	WaveAmp;
+uniform float	WaveFreq;
+uniform float	WaveSharp;
+uniform float	WindE;
+uniform float	WindN;
+uniform float	normalmap_dds;
+uniform float	osg_SimulationTime;
+uniform float	saturation;
 
-varying vec4    waterTex1; //moving texcoords
-varying vec4    waterTex2; //moving texcoords
-varying vec3    viewerdir;
-varying vec3    normal;
-varying vec3    Vnormal;
-varying vec3    VTangent;
-varying vec3    VBinormal;
+uniform int		Status;
 
-uniform float   WaveFreq ;
-uniform float   WaveAmp ;
-uniform float   WaveSharp ;
-uniform float   normalmap_dds;
+varying vec4	waterTex1; //moving texcoords
+varying vec4	waterTex2; //moving texcoords
+varying vec3	viewerdir;
+varying vec3	normal;
+varying vec3	Vnormal;
+varying vec3	VTangent;
+varying vec3	VBinormal;
+
 
 /////// functions /////////
 void encode_gbuffer(vec3 normal, vec3 color, int mId, float specular, float shininess, float emission, float depth);

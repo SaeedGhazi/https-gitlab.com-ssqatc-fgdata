@@ -56,8 +56,8 @@ void main()
 
     // If gl_Color.a == 0, this is a back-facing polygon and the
     // Vnormal should be reversed.
-    vec3 n = (2.0 * gl_Color.a - 1.0) * Vnormal;
-    n = normalize(n);
+    // vec3 n = (2.0 * gl_Color.a - 1.0) * Vnormal;
+    vec3 n = normalize(Vnormal);
 
 	float	nDotVP = max(0.0, dot(n, normalize(gl_LightSource[0].position.xyz)));
 	float	nDotHV = max(0.0, dot(n, normalize(gl_LightSource[0].halfVector.xyz)));

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 
-<!-- FlightGear menu: Spanish language resource -->
+<!-- FlightGear menu: Portuguese language resource -->
 
 <!-- ###
 ### This file is automatically synchronized with the master (=English language) resource.
@@ -20,21 +20,21 @@
 <PropertyList>
 
 	<!-- File menu -->
-	<file>Archivo</file>   <!-- English: "File" -->
-	<reset>Reset</reset>   <!-- English: "Reset" -->
-	<snap-shot>Fotografía</snap-shot>   <!-- English: "Screenshot  " -->
+<!-- 	<file>???</file> -->   <!-- English: "File" -->
+<!-- 	<reset>???</reset> -->   <!-- English: "Reset" -->
+<!-- 	<snap-shot>???</snap-shot> -->   <!-- English: "Screenshot  " -->
 <!-- 	<snap-shot-dir>???</snap-shot-dir> -->   <!-- English: "Screenshot Directory" -->
 <!-- 	<sound-config>???</sound-config> -->   <!-- English: "Sound Configuration" -->
-	<exit>Salir</exit>   <!-- English: "Quit          " -->
+<!-- 	<exit>???</exit> -->   <!-- English: "Quit          " -->
 
 	<!-- View menu -->
-	<view>Visualizar</view>   <!-- English: "View" -->
+<!-- 	<view>???</view> -->   <!-- English: "View" -->
 <!-- 	<display-options>???</display-options> -->   <!-- English: "Display Options" -->
 <!-- 	<rendering-options>???</rendering-options> -->   <!-- English: "Rendering Options" -->
 <!-- 	<view-options>???</view-options> -->   <!-- English: "View Options" -->
 <!-- 	<cockpit-view-options>???</cockpit-view-options> -->   <!-- English: "Cockpit View Options" -->
 <!-- 	<adjust-lod>???</adjust-lod> -->   <!-- English: "Adjust LOD Ranges" -->
-	<pilot-offset>Posición del piloto</pilot-offset>   <!-- English: "Adjust View Position" -->
+<!-- 	<pilot-offset>???</pilot-offset> -->   <!-- English: "Adjust View Position" -->
 <!-- 	<adjust-hud>???</adjust-hud> -->   <!-- English: "Adjust HUD Properties" -->
 <!-- 	<toggle-glide-slope>???</toggle-glide-slope> -->   <!-- English: "Toggle Glide Slope Tunnel" -->
 <!-- 	<replay>???</replay> -->   <!-- English: "Instant Replay" -->
@@ -49,7 +49,7 @@
 <!-- 	<tower-position>???</tower-position> -->   <!-- English: "Tower Position" -->
 
 	<!-- Autopilot menu -->
-	<autopilot>Autopiloto</autopilot>   <!-- English: "Autopilot" -->
+<!-- 	<autopilot>???</autopilot> -->   <!-- English: "Autopilot" -->
 <!-- 	<autopilot-settings>???</autopilot-settings> -->   <!-- English: "Autopilot Settings" -->
 <!-- 	<route-manager>???</route-manager> -->   <!-- English: "Route Manager" -->
 <!-- 	<previous-waypoint>???</previous-waypoint> -->   <!-- English: "Previous Waypoint" -->
@@ -118,7 +118,7 @@
 <!-- 	<rembrandt-buffers-choice>???</rembrandt-buffers-choice> -->   <!-- English: "Select Rendering Buffers" -->
 
 	<!-- Help menu -->
-	<help>Ayuda</help>   <!-- English: "Help" -->
+<!-- 	<help>???</help> -->   <!-- English: "Help" -->
 <!-- 	<help-browser>???</help-browser> -->   <!-- English: "Help  (opens in browser)" -->
 <!-- 	<aircraft-keys>???</aircraft-keys> -->   <!-- English: "Aircraft Help" -->
 <!-- 	<common-keys>???</common-keys> -->   <!-- English: "Common Aircraft Keys" -->

@@ -13,48 +13,129 @@
      Special thanks to Wojciech Jozwiak, Maciej Obarski and Krzysztof Nowak
 -->
 
+<!-- ###
+### This file is automatically synchronized with the master (=English language) resource.
+### Please do not add comments, change order or restructure the file.
+###
+### To translate:
+###    * Replace "???" entries with appropriate translation.
+###    * Remove enclosing "<!-_ ... _->" tags for completed translations.
+###    * Keep the original English text unmodified (the '<!-_ English: "..." -_>)',
+###      so we know which version of the English original the translation is based upon
+###      (and we can identify translations which need to be updated, when the original changes).
+###    * Replace "-_" occurences with a double "-" in all translations (XML does not allow
+###      consecutive "-" characters in comments).
+###
+### Last synchronized with English master resource on 2012-July-08 for FlightGear 2.8.0
+### -->
 <PropertyList>
 
 	<!-- File menu -->
-	<file>Plik</file>
-	<save-flight>Zapisz lot</save-flight>
-	<load-flight>Załaduj lot</load-flight>
-	<reset>Reset</reset>
-	<hi-res-snap-shot>Zrzut (wys. roz.)</hi-res-snap-shot>
-	<snap-shot>Zrzut ekranu</snap-shot>
-	<print>Drukuj</print>
-	<exit>Zamknij</exit>
+	<file>Plik</file>   <!-- English: "File" -->
+	<reset>Reset</reset>   <!-- English: "Reset" -->
+	<snap-shot>Zrzut ekranu</snap-shot>   <!-- English: "Screenshot  " -->
+<!-- 	<snap-shot-dir>???</snap-shot-dir> -->   <!-- English: "Screenshot Directory" -->
+<!-- 	<sound-config>???</sound-config> -->   <!-- English: "Sound Configuration" -->
+	<exit>Zamknij</exit>   <!-- English: "Quit          " -->
 
 	<!-- View menu -->
-	<view>Widok</view>
-	<toggle-panel>Przełącz panel (2D/3D)</toggle-panel>
-	<pilot-offset>Położenie pilota</pilot-offset>
-	<hud-alpha>Antyaliasing wyświetlacza przeziernego wł./wy.</hud-alpha>
-	<properties>Właściwości</properties>
+	<view>Widok</view>   <!-- English: "View" -->
+<!-- 	<display-options>???</display-options> -->   <!-- English: "Display Options" -->
+<!-- 	<rendering-options>???</rendering-options> -->   <!-- English: "Rendering Options" -->
+<!-- 	<view-options>???</view-options> -->   <!-- English: "View Options" -->
+<!-- 	<cockpit-view-options>???</cockpit-view-options> -->   <!-- English: "Cockpit View Options" -->
+<!-- 	<adjust-lod>???</adjust-lod> -->   <!-- English: "Adjust LOD Ranges" -->
+	<pilot-offset>Położenie pilota</pilot-offset>   <!-- English: "Adjust View Position" -->
+<!-- 	<adjust-hud>???</adjust-hud> -->   <!-- English: "Adjust HUD Properties" -->
+<!-- 	<toggle-glide-slope>???</toggle-glide-slope> -->   <!-- English: "Toggle Glide Slope Tunnel" -->
+<!-- 	<replay>???</replay> -->   <!-- English: "Instant Replay" -->
+<!-- 	<stereoscopic-options>???</stereoscopic-options> -->   <!-- English: "Stereoscopic View Options" -->
 
-	<!-- Environment menu -->
-	<environment>Środowisko</environment>
-	<goto-airport>Wybierz lotnisko</goto-airport>
-	<presets>Ustawienia</presets>
-	<preset-airport>Nowe lotnisko</preset-airport>
-	<preset-runway>Nowy pas startowy</preset-runway>
-	<preset-offset-distance>Ustaw odległość przesunięcia</preset-offset-distance>
-	<preset-altitude>Ustaw wysokość</preset-altitude>
-	<preset-glideslope>Ustaw opadanie [stopnie]</preset-glideslope>
-	<preset-airspeed>Ustaw prędkość [kts]</preset-airspeed>
-	<preset-commit>Zatwierdź zmiany</preset-commit>
+	<!-- Location menu -->
+<!-- 	<location>???</location> -->   <!-- English: "Location" -->
+<!-- 	<position-on-ground>???</position-on-ground> -->   <!-- English: "Position Aircraft On Ground" -->
+<!-- 	<position-in-air>???</position-in-air> -->   <!-- English: "Position Aircraft In Air" -->
+	<goto-airport>Wybierz lotnisko</goto-airport>   <!-- English: "Select Airport From List" -->
+<!-- 	<random-attitude>???</random-attitude> -->   <!-- English: "Random Attitude" -->
+<!-- 	<tower-position>???</tower-position> -->   <!-- English: "Tower Position" -->
 
 	<!-- Autopilot menu -->
-	<autopilot>Autopilot</autopilot>
-	<set-heading>Ustaw kierunek </set-heading>
-	<set-altitude>Ustaw wysokość</set-altitude>
-	<add-waypoint>Dodaj punkt przelotowy</add-waypoint>
-	<skip-current-waypoint>Przeskocz obecny punkt</skip-current-waypoint>
-	<clear-route>Wyczyść trasę</clear-route>
-	<adjust-ap-settings>Dostosuj ustawienia AP</adjust-ap-settings>
-	<toggle-hud-format>Przełącz format wyświetlacza przeziernego</toggle-hud-format>
+	<autopilot>Autopilot</autopilot>   <!-- English: "Autopilot" -->
+<!-- 	<autopilot-settings>???</autopilot-settings> -->   <!-- English: "Autopilot Settings" -->
+<!-- 	<route-manager>???</route-manager> -->   <!-- English: "Route Manager" -->
+<!-- 	<previous-waypoint>???</previous-waypoint> -->   <!-- English: "Previous Waypoint" -->
+<!-- 	<next-waypoint>???</next-waypoint> -->   <!-- English: "Next Waypoint" -->
+
+	<!-- Environment menu -->
+	<environment>Środowisko</environment>   <!-- English: "Environment" -->
+<!-- 	<global-weather>???</global-weather> -->   <!-- English: "Weather" -->
+<!-- 	<time-settings>???</time-settings> -->   <!-- English: "Time Settings" -->
+<!-- 	<wildfire-settings>???</wildfire-settings> -->   <!-- English: "Wildfire Settings" -->
+<!-- 	<terrasync>???</terrasync> -->   <!-- English: "Scenery Download" -->
+
+	<!-- Equipment menu -->
+<!-- 	<equipment>???</equipment> -->   <!-- English: "Equipment" -->
+<!-- 	<map>???</map> -->   <!-- English: "Map" -->
+<!-- 	<stopwatch>???</stopwatch> -->   <!-- English: "Stopwatch" -->
+<!-- 	<fuel-and-payload>???</fuel-and-payload> -->   <!-- English: "Fuel and Payload" -->
+<!-- 	<radio>???</radio> -->   <!-- English: "Radio Settings" -->
+<!-- 	<gps>???</gps> -->   <!-- English: "GPS Settings" -->
+<!-- 	<instrument-settings>???</instrument-settings> -->   <!-- English: "Instrument Settings" -->
+<!-- 	<failure-submenu>???</failure-submenu> -->   <!-- English: " -_- Failures -_-" -->
+<!-- 	<random-failures>???</random-failures> -->   <!-- English: "Random Failures" -->
+<!-- 	<system-failures>???</system-failures> -->   <!-- English: "System Failures" -->
+<!-- 	<instrument-failures>???</instrument-failures> -->   <!-- English: "Instrument Failures" -->
+
+	<!-- AI menu -->
+<!-- 	<ai>???</ai> -->   <!-- English: "AI" -->
+<!-- 	<scenario>???</scenario> -->   <!-- English: "Traffic and Scenario Settings" -->
+<!-- 	<atc-in-range>???</atc-in-range> -->   <!-- English: "ATC Services in Range" -->
+<!-- 	<wingman>???</wingman> -->   <!-- English: "Wingman Controls" -->
+<!-- 	<tanker>???</tanker> -->   <!-- English: "Tanker Controls" -->
+<!-- 	<carrier>???</carrier> -->   <!-- English: "Carrier Controls" -->
+<!-- 	<jetway>???</jetway> -->   <!-- English: "Jetway Settings" -->
+
+	<!-- Multiplayer menu -->
+<!-- 	<multiplayer>???</multiplayer> -->   <!-- English: "Multiplayer" -->
+<!-- 	<mp-settings>???</mp-settings> -->   <!-- English: "Multiplayer Settings" -->
+<!-- 	<mp-chat>???</mp-chat> -->   <!-- English: "Chat Dialog" -->
+<!-- 	<mp-chat-menu>???</mp-chat-menu> -->   <!-- English: "Chat Menu" -->
+<!-- 	<mp-list>???</mp-list> -->   <!-- English: "Pilot List" -->
+<!-- 	<mp-carrier>???</mp-carrier> -->   <!-- English: "MPCarrier Selection" -->
+
+	<!-- Debug menu -->
+<!-- 	<debug>???</debug> -->   <!-- English: "Debug" -->
+	<!-- Note: Debug menu items may not need to be translated
+	     since these options are not useful to end users anyway. -->
+<!-- 	<reload-gui>???</reload-gui> -->   <!-- English: "Reload GUI" -->
+<!-- 	<reload-input>???</reload-input> -->   <!-- English: "Reload Input" -->
+<!-- 	<reload-hud>???</reload-hud> -->   <!-- English: "Reload HUD" -->
+<!-- 	<reload-panel>???</reload-panel> -->   <!-- English: "Reload Panel" -->
+<!-- 	<reload-autopilot>???</reload-autopilot> -->   <!-- English: "Reload Autopilot" -->
+<!-- 	<reload-network>???</reload-network> -->   <!-- English: "Reload Network" -->
+<!-- 	<nasal-console>???</nasal-console> -->   <!-- English: "Nasal Console" -->
+<!-- 	<development-keys>???</development-keys> -->   <!-- English: "Development Keys" -->
+<!-- 	<configure-dev-extension>???</configure-dev-extension> -->   <!-- English: "Configure Development Extensions" -->
+<!-- 	<display-marker>???</display-marker> -->   <!-- English: "Display Tutorial Marker" -->
+<!-- 	<dump-scene-graph>???</dump-scene-graph> -->   <!-- English: "Dump Scene Graph" -->
+<!-- 	<print-rendering-statistics>???</print-rendering-statistics> -->   <!-- English: "Print Rendering Statistics" -->
+<!-- 	<statistics-display>???</statistics-display> -->   <!-- English: "Cycle On-Screen Statistics" -->
+<!-- 	<performance-monitor>???</performance-monitor> -->   <!-- English: "Monitor System Performance" -->
+<!-- 	<property-browser>???</property-browser> -->   <!-- English: "Browse Internal Properties" -->
+<!-- 	<logging>???</logging> -->   <!-- English: "Logging" -->
+<!-- 	<local_weather>???</local_weather> -->   <!-- English: "Local Weather (Test)" -->
+<!-- 	<print-scene-info>???</print-scene-info> -->   <!-- English: "Print Visible Scene Info" -->
+<!-- 	<rendering-buffers>???</rendering-buffers> -->   <!-- English: "Hide/Show Rendering Buffers" -->
+<!-- 	<rembrandt-buffers-choice>???</rembrandt-buffers-choice> -->   <!-- English: "Select Rendering Buffers" -->
 
 	<!-- Help menu -->
-	<help>Pomoc</help>
+	<help>Pomoc</help>   <!-- English: "Help" -->
+<!-- 	<help-browser>???</help-browser> -->   <!-- English: "Help  (opens in browser)" -->
+<!-- 	<aircraft-keys>???</aircraft-keys> -->   <!-- English: "Aircraft Help" -->
+<!-- 	<common-keys>???</common-keys> -->   <!-- English: "Common Aircraft Keys" -->
+<!-- 	<basic-keys>???</basic-keys> -->   <!-- English: "Basic Simulator Keys" -->
+<!-- 	<joystick-info>???</joystick-info> -->   <!-- English: "Joystick Information" -->
+<!-- 	<tutorial-start>???</tutorial-start> -->   <!-- English: "Tutorials" -->
+<!-- 	<menu-about>???</menu-about> -->   <!-- English: "About" -->
 
 </PropertyList>

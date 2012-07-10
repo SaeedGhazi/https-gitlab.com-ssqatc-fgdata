@@ -15,7 +15,7 @@
 ###    * Replace "-_" occurences with a double "-" in all translations (XML does not allow
 ###      consecutive "-" characters in comments).
 ###
-### Last synchronized with English master resource on 2012-July-08 for FlightGear 2.8.0
+### Last synchronized with English master resource on 2012-July-10 for FlightGear 2.8.0
 ### -->
 <PropertyList>
 
@@ -115,7 +115,7 @@
 	<local_weather>Local weather (test)</local_weather>   <!-- English: "Local Weather (Test)" -->
 	<print-scene-info>Print zichtbare scene informatie</print-scene-info>   <!-- English: "Print Visible Scene Info" -->
 	<rendering-buffers>Verberg/toon weergave buffers</rendering-buffers>   <!-- English: "Hide/Show Rendering Buffers" -->
- 	<rembrandt-buffers-choice>Selecteer weergave buffers</rembrandt-buffers-choice>   <!-- English: "Select Rendering Buffers" -->
+	<rembrandt-buffers-choice>Selecteer weergave buffers</rembrandt-buffers-choice>   <!-- English: "Select Rendering Buffers" -->
 
 	<!-- Help menu -->
 	<help>Help</help>   <!-- English: "Help" -->

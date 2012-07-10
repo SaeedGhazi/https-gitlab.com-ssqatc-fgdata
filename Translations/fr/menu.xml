@@ -15,7 +15,7 @@
 ###    * Replace "-_" occurences with a double "-" in all translations (XML does not allow
 ###      consecutive "-" characters in comments).
 ###
-### Last synchronized with English master resource on 2012-July-08 for FlightGear 2.8.0
+### Last synchronized with English master resource on 2012-July-10 for FlightGear 2.8.0
 ### -->
 <PropertyList>
 
@@ -44,7 +44,7 @@
 	<location>Position</location>   <!-- English: "Location" -->
 	<position-on-ground>Positionner l'aéronef au sol</position-on-ground>   <!-- English: "Position Aircraft On Ground" -->
 	<position-in-air>Positionner l'aéronef en vol</position-in-air>   <!-- English: "Position Aircraft In Air" -->
-	<goto-airport>Choisir un aéroport à partir de la liste</goto-airport>   <!-- English: "Select Airport From List" -->
+	<goto-airport>Choisir un aéroport depuis la liste</goto-airport>   <!-- English: "Select Airport From List" -->
 	<random-attitude>Attitude aléatoire</random-attitude>   <!-- English: "Random Attitude" -->
 	<tower-position>Position de la tour</tower-position>   <!-- English: "Tower Position" -->
 
@@ -59,7 +59,7 @@
 	<environment>Environnement</environment>   <!-- English: "Environment" -->
 	<global-weather>Météo</global-weather>   <!-- English: "Weather" -->
 	<time-settings>Paramètres du temps</time-settings>   <!-- English: "Time Settings" -->
-	<wildfire-settings>Paramètres de feu</wildfire-settings>   <!-- English: "Wildfire Settings" -->
+	<wildfire-settings>Paramètres de feu de forêt</wildfire-settings>   <!-- English: "Wildfire Settings" -->
 	<terrasync>Téléchargement de scènes</terrasync>   <!-- English: "Scenery Download" -->
 
 	<!-- Equipment menu -->
@@ -96,7 +96,7 @@
 	<debug>Débogage</debug>   <!-- English: "Debug" -->
 	<!-- Note: Debug menu items may not need to be translated
 	     since these options are not useful to end users anyway. -->
-	<reload-gui>Relancer l'interface graphique</reload-gui>   <!-- English: "Reload GUI" -->
+	<reload-gui>Rafraîchir l'interface graphique</reload-gui>   <!-- English: "Reload GUI" -->
 	<reload-input>Relancer les interfaces d'entrée</reload-input>   <!-- English: "Reload Input" -->
 	<reload-hud>Relancer le HUD</reload-hud>   <!-- English: "Reload HUD" -->
 	<reload-panel>Relancer le panneau</reload-panel>   <!-- English: "Reload Panel" -->

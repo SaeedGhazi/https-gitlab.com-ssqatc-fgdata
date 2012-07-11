@@ -75,12 +75,13 @@ var Transform = {
   {
     var m = {
       parents: [Transform],
-      a: node.getNode("a", 1),
-      b: node.getNode("b", 1),
-      c: node.getNode("c", 1),
-      d: node.getNode("d", 1),
-      e: node.getNode("e", 1),
-      f: node.getNode("f", 1)
+      _node: node,
+      a: node.getNode("m[0]", 1),
+      b: node.getNode("m[1]", 1),
+      c: node.getNode("m[2]", 1),
+      d: node.getNode("m[3]", 1),
+      e: node.getNode("m[4]", 1),
+      f: node.getNode("m[5]", 1)
     };
     
     var use_vals = typeof(vals) == 'vector' and size(vals) == 6;
@@ -173,6 +174,12 @@ var Element = {
   {
     me._node.getNode("update", 1).setValue(1);
   },
+  #
+  setGeoPosition: func(lat, lon)
+  {
+    me._getTf()._node.getNode("m-geo[4]", 1).setValue("N" ~ lat);
+    me._getTf()._node.getNode("m-geo[5]", 1).setValue("E" ~ lon);
+  },
   # Create a new transformation matrix
   #
   # @param vals Default values (Vector of 6 elements)
@@ -211,9 +218,9 @@ var Element = {
 # Class for a group element on a canvas
 #
 var Group = {
-  new: func(parent, name)
+  new: func(parent, name, type = "group")
   {
-    return { parents: [Group, Element.new(parent, "group", name)] };
+    return { parents: [Group, Element.new(parent, type, name)] };
   },
   # Create a child of given type with specified name.
   # type can be group, text
@@ -235,6 +242,18 @@ var Group = {
     foreach(var type; keys(me._element_factories))
       me._node.removeChildren(type, 0);
   }
+};
+
+# Group
+# ==============================================================================
+# Class for a group element on a canvas
+#
+var Map = {
+  new: func(parent, name)
+  {
+    return { parents: [Map, Group.new(parent, name, "map")] };
+  }
+  # TODO
 };
 
 # Text
@@ -398,6 +417,13 @@ var Path = {
     me._node.removeChildren('coord', 0);
     me._node.setValues({cmd: cmds, coord: coords});
   },
+  setDataGeo: func(cmds, coords)
+  {
+    me._node.removeChildren('cmd', 0);
+    me._node.removeChildren('coord', 0);
+    me._node.removeChildren('coord-geo', 0);
+    me._node.setValues({cmd: cmds, 'coord-geo': coords});
+  },
   setStrokeLineWidth: func(width)
   {
     me._node.getNode('stroke-width', 1).setDoubleValue(width);
@@ -420,6 +446,7 @@ var Path = {
 # Element factories used by #Group elements to create children
 Group._element_factories = {
   "group": Group.new,
+  "map": Map.new,
   "text": Text.new,
   "path": Path.new
 };

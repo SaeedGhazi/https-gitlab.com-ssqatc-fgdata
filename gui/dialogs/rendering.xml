@@ -205,15 +205,19 @@
 			</group>
 
 			<group>
-				<layout>hbox</layout>
+				<layout>table</layout>
+				
 				<text>
+					<row>0</row>
+					<col>0</col>
+					<colspan>2</colspan>
 					<label>Season (ground textures): </label>
-					<halign>left</halign>
+					<halign>right</halign>
 				</text>
-				<empty>
-					<stretch>true</stretch>
-				</empty>
 				<combo>
+					<row>0</row>
+					<col>2</col>
+					<colspan>2</colspan>
 					<name>season</name>
 					<halign>left</halign>
 					<live>true</live>
@@ -225,39 +229,35 @@
 						<object-name>season</object-name>
 					</binding>
 				</combo>
-				<empty>
-					<stretch>true</stretch>
-				</empty>
-
-			</group>
-
-			<checkbox>
-				<halign>left</halign>
-				<label>Animated jetways</label>
-				<name>jetways</name>
-				<property>/nasal/jetways/enabled</property>
-				<binding>
-					<command>dialog-apply</command>
-					<object-name>jetways</object-name>
-				</binding>
-			</checkbox>
-
-			<checkbox>
-				<halign>left</halign>
-				<label>Random objects</label>
-				<name>random-objects</name>
-				<property>/sim/rendering/random-objects</property>
-				<binding>
-					<command>dialog-apply</command>
-					<object-name>random-objects</object-name>
-				</binding>
-			</checkbox>
-
-			<group>
-				<layout>table</layout>
 
 				<checkbox>
-					<row>0</row>
+					<row>1</row>
+					<col>0</col>
+					<halign>left</halign>
+					<label>Animated jetways</label>
+					<name>jetways</name>
+					<property>/nasal/jetways/enabled</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>jetways</object-name>
+					</binding>
+				</checkbox>
+
+				<checkbox>
+					<row>2</row>
+					<col>0</col>
+					<halign>left</halign>
+					<label>Random objects</label>
+					<name>random-objects</name>
+					<property>/sim/rendering/random-objects</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>random-objects</object-name>
+					</binding>
+				</checkbox>
+
+				<checkbox>
+					<row>3</row>
 					<col>0</col>
 					<halign>left</halign>
 					<label>Random vegetation</label>
@@ -269,7 +269,7 @@
 					</binding>
 				</checkbox>
 				<text>
-					<row>0</row>
+					<row>3</row>
 					<col>1</col>
 					<label>density</label>
 					<enable>
@@ -277,7 +277,7 @@
 					</enable>
 				</text>
 				<slider>
-					<row>0</row>
+					<row>3</row>
 					<col>2</col>
 					<name>vegetation-density</name>
 					<min>0</min>
@@ -290,7 +290,7 @@
 					</binding>
 				</slider>
 				<text>
-					<row>0</row>
+					<row>3</row>
 					<col>3</col>
 					<label>12345678</label>
 					<format>%.1f</format>
@@ -302,7 +302,7 @@
 				</text>
 				
 				<checkbox>
-					<row>1</row>
+					<row>4</row>
 					<col>0</col>
 					<halign>left</halign>
 					<label>Random buildings</label>
@@ -314,7 +314,7 @@
 					</binding>
 				</checkbox>
 				<text>
-					<row>1</row>
+					<row>4</row>
 					<col>1</col>
 					<label>density</label>
 					<enable>
@@ -322,7 +322,7 @@
 					</enable>
 				</text>
 				<slider>
-					<row>1</row>
+					<row>4</row>
 					<col>2</col>
 					<name>building-density</name>
 					<min>0</min>
@@ -335,7 +335,7 @@
 					</binding>
 				</slider>
 				<text>
-					<row>1</row>
+					<row>4</row>
 					<col>3</col>
 					<label>12345678</label>
 					<format>%.1f</format>

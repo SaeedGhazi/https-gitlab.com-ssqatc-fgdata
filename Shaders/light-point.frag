@@ -19,37 +19,42 @@ vec3 position( vec3 viewDir, vec2 coords, sampler2D depth_tex );
 vec3 normal_decode(vec2 enc);
 
 void main() {
-	vec3 ray = ecPosition.xyz / ecPosition.w;
-	vec3 ecPos3 = ray;
+    vec3 ray = ecPosition.xyz / ecPosition.w;
+    vec3 ecPos3 = ray;
     vec3 viewDir = normalize(ray);
-	vec2 coords = gl_FragCoord.xy / fg_BufferSize;
-	
-	vec3 normal = normal_decode(texture2D( normal_tex, coords ).rg);
-	vec4 spec_emis = texture2D( spec_emis_tex, coords );
-	
+    vec2 coords = gl_FragCoord.xy / fg_BufferSize;
+
+    vec3 normal = normal_decode(texture2D( normal_tex, coords ).rg);
+    vec4 spec_emis = texture2D( spec_emis_tex, coords );
+
     vec3 pos = position(viewDir, coords, depth_tex);
-	
-	if ( pos.z < ecPos3.z ) // Negative direction in z
-		discard; // Don't light surface outside the light volume
 
-	vec3 VP = LightPosition.xyz - pos;
-	if ( dot( VP, VP ) > ( Far * Far ) )
-		discard; // Don't light surface outside the light volume
+    if ( pos.z < ecPos3.z ) // Negative direction in z
+        discard; // Don't light surface outside the light volume
 
-	float d = length( VP );
-	VP /= d;
+    vec3 VP = LightPosition.xyz - pos;
+    if ( dot( VP, VP ) > ( Far * Far ) )
+        discard; // Don't light surface outside the light volume
 
-	vec3 halfVector = normalize(VP - viewDir);
+    float d = length( VP );
+    VP /= d;
+
+    vec3 halfVector = normalize(VP - viewDir);
 
     float att = 1.0 / (Attenuation.x + Attenuation.y * d + Attenuation.z *d*d);
-		
-	float nDotVP = max(0.0, dot(normal, VP));
-	float nDotHV = max(0.0, dot(normal, halfVector));
-	
-	vec4 color = texture2D( color_tex, coords );
-	vec4 Iamb = Ambient * color * att;
-	vec4 Idiff = Diffuse * color * att * nDotVP;
-	vec3 Ispec = pow( nDotHV, spec_emis.y ) * spec_emis.x * att * Specular.rgb;
-	
-	gl_FragColor = vec4(Iamb.rgb + Idiff.rgb + Ispec, 1.0);
+
+    float cosAngIncidence = clamp(dot(normal, VP), 0.0, 1.0);
+
+    float nDotVP = max(0.0, dot(normal, VP));
+    float nDotHV = max(0.0, dot(normal, halfVector));
+
+    vec4 color = texture2D( color_tex, coords );
+    vec4 Iamb = Ambient * color * att;
+    vec4 Idiff = Diffuse * color * att * nDotVP;
+
+    vec3 Ispec = vec3(0.0);
+    if (cosAngIncidence > 0.0)
+        Ispec = pow( nDotHV, spec_emis.y * 128.0 ) * spec_emis.x * att * Specular.rgb;
+
+    gl_FragColor = vec4(Iamb.rgb + Idiff.rgb + Ispec, 1.0);
 }

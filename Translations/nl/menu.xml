@@ -15,7 +15,7 @@
 ###    * Replace "-_" occurences with a double "-" in all translations (XML does not allow
 ###      consecutive "-" characters in comments).
 ###
-### Last synchronized with English master resource on 2012-July-08 for FlightGear 2.8.0
+### Last synchronized with English master resource on 2012-July-10 for FlightGear 2.8.0
 ### -->
 <PropertyList>
 
@@ -58,7 +58,7 @@
 	<!-- Environment menu -->
 	<environment>Omgeving</environment>   <!-- English: "Environment" -->
 	<global-weather>Weer</global-weather>   <!-- English: "Weather" -->
-	<time-settings>Tijds instellingen</time-settings>   <!-- English: "Time Settings" -->
+	<time-settings>Tijdsinstellingen</time-settings>   <!-- English: "Time Settings" -->
 	<wildfire-settings>Bosbrand instellingen</wildfire-settings>   <!-- English: "Wildfire Settings" -->
 	<terrasync>Scenery downloaden</terrasync>   <!-- English: "Scenery Download" -->
 
@@ -107,24 +107,24 @@
 	<configure-dev-extension>Ontwikkelingsextensies beheren</configure-dev-extension>   <!-- English: "Configure Development Extensions" -->
 	<display-marker>Tutorial marker weergeven</display-marker>   <!-- English: "Display Tutorial Marker" -->
 	<dump-scene-graph>Scene graph dumpen</dump-scene-graph>   <!-- English: "Dump Scene Graph" -->
-	<print-rendering-statistics>Weergave statistieken printen</print-rendering-statistics>   <!-- English: "Print Rendering Statistics" -->
-	<statistics-display>Blader door scherm statiestieken</statistics-display>   <!-- English: "Cycle On-Screen Statistics" -->
+	<print-rendering-statistics>Weergavestatistieken printen</print-rendering-statistics>   <!-- English: "Print Rendering Statistics" -->
+	<statistics-display>Blader door schermstatiestieken</statistics-display>   <!-- English: "Cycle On-Screen Statistics" -->
 	<performance-monitor>Monitor systeemprestaties</performance-monitor>   <!-- English: "Monitor System Performance" -->
 	<property-browser>Blader door interne eigenschappen</property-browser>   <!-- English: "Browse Internal Properties" -->
 	<logging>Logging</logging>   <!-- English: "Logging" -->
 	<local_weather>Local weather (test)</local_weather>   <!-- English: "Local Weather (Test)" -->
 	<print-scene-info>Print zichtbare scene informatie</print-scene-info>   <!-- English: "Print Visible Scene Info" -->
 	<rendering-buffers>Verberg/toon weergave buffers</rendering-buffers>   <!-- English: "Hide/Show Rendering Buffers" -->
-<!-- 	<rembrandt-buffers-choice>???</rembrandt-buffers-choice> -->   <!-- English: "Select Rendering Buffers" -->
+	<rembrandt-buffers-choice>Selecteer weergave buffers</rembrandt-buffers-choice>   <!-- English: "Select Rendering Buffers" -->
 
 	<!-- Help menu -->
 	<help>Help</help>   <!-- English: "Help" -->
 	<help-browser>Help (opent in browser)</help-browser>   <!-- English: "Help  (opens in browser)" -->
 	<aircraft-keys>Vliegtuig help</aircraft-keys>   <!-- English: "Aircraft Help" -->
-	<common-keys>Algemene vliegtuig toetsen</common-keys>   <!-- English: "Common Aircraft Keys" -->
-	<basic-keys>Standaard simulator toetsen</basic-keys>   <!-- English: "Basic Simulator Keys" -->
+	<common-keys>Algemene toetsencombinaties</common-keys>   <!-- English: "Common Aircraft Keys" -->
+	<basic-keys>Simulator toetsencombinaties</basic-keys>   <!-- English: "Basic Simulator Keys" -->
 	<joystick-info>Joystick informatie</joystick-info>   <!-- English: "Joystick Information" -->
 	<tutorial-start>Tutorials</tutorial-start>   <!-- English: "Tutorials" -->
-	<menu-about>Over...</menu-about>   <!-- English: "About" -->
+	<menu-about>Over</menu-about>   <!-- English: "About" -->
 
 </PropertyList>

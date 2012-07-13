@@ -8,6 +8,8 @@
 ###
 ### To translate:
 ###    * Replace "???" entries with appropriate translation.
+###    * Keep untranslated items unmodified (leave the "???"). English original is the
+###      automatic default.
 ###    * Remove enclosing "<!-_ ... _->" tags for completed translations.
 ###    * Keep the original English text unmodified (the '<!-_ English: "..." -_>)',
 ###      so we know which version of the English original the translation is based upon
@@ -15,7 +17,7 @@
 ###    * Replace "-_" occurences with a double "-" in all translations (XML does not allow
 ###      consecutive "-" characters in comments).
 ###
-### Last synchronized with English master resource on 2012-July-10 for FlightGear 2.8.0
+### Last synchronized with English master resource on 2012-July-13 for FlightGear 2.8.0
 ### -->
 <PropertyList>
 
@@ -102,6 +104,7 @@
 	<reload-panel>Paneel herladen</reload-panel>   <!-- English: "Reload Panel" -->
 	<reload-autopilot>Autopilot herladen</reload-autopilot>   <!-- English: "Reload Autopilot" -->
 	<reload-network>Network herladen</reload-network>   <!-- English: "Reload Network" -->
+<!-- 	<reload-model>???</reload-model> -->   <!-- English: "Reload Aircraft Model" -->
 	<nasal-console>Nasal console</nasal-console>   <!-- English: "Nasal Console" -->
 	<development-keys>Ontwikkelingstoetsen</development-keys>   <!-- English: "Development Keys" -->
 	<configure-dev-extension>Ontwikkelingsextensies beheren</configure-dev-extension>   <!-- English: "Configure Development Extensions" -->

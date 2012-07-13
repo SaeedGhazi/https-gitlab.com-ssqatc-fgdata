@@ -379,5 +379,5 @@ void main(void)
                           vec3( 0.3, 0.59, 0.11 )
                         );
     float specular = smoothstep(0.0, 3.5, cover);
-    encode_gbuffer(Normal, finalColor.rgb, 255, specular, water_shininess, emission, gl_FragCoord.z);
+    encode_gbuffer(Normal, finalColor.rgb, 254, specular, water_shininess, emission, gl_FragCoord.z);
     }

@@ -85,7 +85,8 @@ void main() {
     }
     vec3 lightDir = (fg_ViewMatrix * vec4( fg_SunDirection, 0.0 )).xyz;
     lightDir = normalize( lightDir );
-    vec3 color = texture2D( color_tex, coords ).rgb;
+    vec4 color_material = texture2D( color_tex, coords );
+    vec3 color = color_material.rgb;
     vec3 Idiff = clamp( dot( lightDir, normal ), 0.0, 1.0 ) * color * fg_SunDiffuseColor.rgb;
     vec3 halfDir = normalize( lightDir - viewDir );
     vec3 Ispec = vec3(0.0);
@@ -97,8 +98,8 @@ void main() {
     if (cosAngIncidence > 0.0)
         Ispec = pow( blinnTerm, spec_emis.y * 128.0 ) * spec_emis.x * fg_SunSpecularColor.rgb;
 
-    float matID = texture2D( color_tex, coords ).a * 255.0;
-    if (matID == 255.0)
+    float matID = color_material.a * 255.0;
+    if (matID >= 254.0) // 254: Water, 255: Ubershader
         Idiff += Ispec * spec_emis.x;
 
     gl_FragColor = vec4(mix(vec3(0.0), Idiff + Ispec, shadow) + Iemis, 1.0);

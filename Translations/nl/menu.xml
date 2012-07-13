@@ -104,7 +104,7 @@
 	<reload-panel>Paneel herladen</reload-panel>   <!-- English: "Reload Panel" -->
 	<reload-autopilot>Autopilot herladen</reload-autopilot>   <!-- English: "Reload Autopilot" -->
 	<reload-network>Network herladen</reload-network>   <!-- English: "Reload Network" -->
-<!-- 	<reload-model>???</reload-model> -->   <!-- English: "Reload Aircraft Model" -->
+	<reload-model>Vliegtuigmodel herladen</reload-model>   <!-- English: "Reload Aircraft Model" -->
 	<nasal-console>Nasal console</nasal-console>   <!-- English: "Nasal Console" -->
 	<development-keys>Ontwikkelingstoetsen</development-keys>   <!-- English: "Development Keys" -->
 	<configure-dev-extension>Ontwikkelingsextensies beheren</configure-dev-extension>   <!-- English: "Configure Development Extensions" -->

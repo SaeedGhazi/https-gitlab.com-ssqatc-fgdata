@@ -48,7 +48,7 @@
 	<position-in-air>Flugzeug positionieren (in der Luft)</position-in-air>   <!-- English: "Position Aircraft In Air" -->
 	<goto-airport>Flughafenauswahl</goto-airport>   <!-- English: "Select Airport From List" -->
 	<random-attitude>Zufällige Fluglage</random-attitude>   <!-- English: "Random Attitude" -->
-	<tower-position>Kontrollturmposition festlegen</tower-position>   <!-- English: "Tower Position" -->
+	<tower-position>Towerposition festlegen</tower-position>   <!-- English: "Tower Position" -->
 
 	<!-- Autopilot menu -->
 	<autopilot>Autopilot</autopilot>   <!-- English: "Autopilot" -->
@@ -81,10 +81,10 @@
 	<ai>KI</ai>   <!-- English: "AI" -->
 	<scenario>Flugverkehr und Szenarien</scenario>   <!-- English: "Traffic and Scenario Settings" -->
 	<atc-in-range>ATC Stationen in der Nähe</atc-in-range>   <!-- English: "ATC Services in Range" -->
-	<wingman>Steuerung Flügelmann</wingman>   <!-- English: "Wingman Controls" -->
-	<tanker>Steuerung Tanker</tanker>   <!-- English: "Tanker Controls" -->
-	<carrier>Steuerung Flugzeugträger</carrier>   <!-- English: "Carrier Controls" -->
-	<jetway>Steuerung Fluggastbrücke</jetway>   <!-- English: "Jetway Settings" -->
+	<wingman>Wingman</wingman>   <!-- English: "Wingman Controls" -->
+	<tanker>Tanker</tanker>   <!-- English: "Tanker Controls" -->
+	<carrier>Flugzeugträger</carrier>   <!-- English: "Carrier Controls" -->
+	<jetway>Jetway</jetway>   <!-- English: "Jetway Settings" -->
 
 	<!-- Multiplayer menu -->
 	<multiplayer>Multiplayer</multiplayer>   <!-- English: "Multiplayer" -->
@@ -122,12 +122,12 @@
 
 	<!-- Help menu -->
 	<help>Hilfe</help>   <!-- English: "Help" -->
-	<help-browser>Hilfe (öffnet sich im Browser)</help-browser>   <!-- English: "Help  (opens in browser)" -->
-	<aircraft-keys>Spezielle Hilfe zum aktuellen Flugzeug</aircraft-keys>   <!-- English: "Aircraft Help" -->
-	<common-keys>Allgemeine Hilfe zur Flugzeugsteuerung</common-keys>   <!-- English: "Common Aircraft Keys" -->
-	<basic-keys>Hilfe zur Simulatorsteuerung</basic-keys>   <!-- English: "Basic Simulator Keys" -->
+	<help-browser>Hilfe (im Browser)</help-browser>   <!-- English: "Help  (opens in browser)" -->
+	<aircraft-keys>Flugzeug Hilfe</aircraft-keys>   <!-- English: "Aircraft Help" -->
+	<common-keys>Tastenbelegung (Flugzeugsteuerung)</common-keys>   <!-- English: "Common Aircraft Keys" -->
+	<basic-keys>Tastenbelegung (allgemein)</basic-keys>   <!-- English: "Basic Simulator Keys" -->
 	<joystick-info>Joystick Informationen</joystick-info>   <!-- English: "Joystick Information" -->
-	<tutorial-start>Übungen und Anleitungen</tutorial-start>   <!-- English: "Tutorials" -->
+	<tutorial-start>Tutorials</tutorial-start>   <!-- English: "Tutorials" -->
 	<menu-about>Über FlightGear</menu-about>   <!-- English: "About" -->
 
 </PropertyList>

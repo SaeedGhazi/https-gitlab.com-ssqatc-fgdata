@@ -101,7 +101,7 @@ void main (void)
 	vec4 mixedcolor = mix(texel, raincolor * (1.0 - refl_correction * (1.0 - lightness)), reflFactor);
 
     // the final reflection
-	vec4 fragColor = vec4(color.rgb * mixedcolor.rgb  + ambient_Correction * (1.0 - refl_correction * (1.0 - 0.8 * lightness)), color.a);
+	vec4 fragColor = vec4(color.rgb * mixedcolor.rgb  + ambient_Correction, color.a);
 
-    encode_gbuffer(N, fragColor.rgb, 254, specular, shininess, emission, gl_FragCoord.z);
+    encode_gbuffer(N, fragColor.rgb, 1, specular, shininess, emission, gl_FragCoord.z);
 }

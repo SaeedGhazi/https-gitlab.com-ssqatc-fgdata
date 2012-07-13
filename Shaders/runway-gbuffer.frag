@@ -50,12 +50,12 @@ void main (void)
     if (normalmap_dds > 0)
         N = -N;
 
-
+	float lightness = dot(texel.rgb, vec3( 0.3, 0.59, 0.11 ));
     // calculate the specular light
-    float refl_correction = spec_adjust * 1.9 - 1.0;
+    float refl_correction = spec_adjust * 2.5 - 1.0;
     float shininess = max (0.35, refl_correction) * nmap.a;
 
-	float specular = dot(vec3(0.5*shininess), vec3( 0.3, 0.59, 0.11 ));
+	float specular = dot(vec3(1.0) * lightness , vec3( 0.3, 0.59, 0.11 ));
 
 	vec4 color = vec4(1.0);
 
@@ -98,10 +98,10 @@ void main (void)
     vec4 noisecolor = mix(reflfrescolor, noisevec, noisiness);
     vec4 raincolor = vec4(noisecolor.rgb * reflFactor, 1.0);
 
-    vec4 mixedcolor = mix(texel, raincolor, reflFactor);
+	vec4 mixedcolor = mix(texel, raincolor * (1.0 - refl_correction * (1.0 - lightness)), reflFactor);
 
     // the final reflection
-    vec4 fragColor = vec4(color.rgb * mixedcolor.rgb  + ambient_Correction, color.a);
+	vec4 fragColor = vec4(color.rgb * mixedcolor.rgb  + ambient_Correction * (1.0 - refl_correction * (1.0 - 0.8 * lightness)), color.a);
 
-    encode_gbuffer(N, fragColor.rgb, 1, specular, shininess, emission, gl_FragCoord.z);
+    encode_gbuffer(N, fragColor.rgb, 254, specular, shininess, emission, gl_FragCoord.z);
 }

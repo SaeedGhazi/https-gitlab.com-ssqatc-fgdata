@@ -2199,6 +2199,15 @@
 
  <!-- end winter-->
 
+ <material include="Materials/base/rock.xml">
+  <name>BarrenCover</name>
+  <name>Dirt</name>
+  <name>OpenMining</name>
+  <name>Rock</name>
+  <name>Dump</name>
+  <texture>Terrain/rock.png</texture>
+</material>
+
  <!-- runway and taxiway signs -->
 
 <material include="Materials/base/glyphs-yellow.xml">

@@ -555,7 +555,7 @@
         </item>
 
         <item>
-            <label>Reload Aircraft Model</label>
+            <name>reload-model</name>
             <binding>
                 <command>reinit</command>
                 <subsystem>aircraft-model</subsystem>

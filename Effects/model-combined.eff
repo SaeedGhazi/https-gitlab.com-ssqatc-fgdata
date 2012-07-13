@@ -169,8 +169,6 @@ please see Docs/README.model-combined.eff for documentation
 			<extension-supported>GL_ARB_fragment_shader</extension-supported>
 		  </and>
 		</or>
-		<extension-supported>GL_EXT_gpu_shader4</extension-supported>
-		<extension-supported>GL_ARB_texture_rg</extension-supported>
 	  </and>
 	</predicate>
 		<pass>

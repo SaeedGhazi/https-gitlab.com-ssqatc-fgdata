@@ -1,5 +1,4 @@
 #version 120
-#extension GL_EXT_gpu_shader4 : enable
 uniform sampler2D normal_tex;
 uniform sampler2D depth_tex;
 uniform sampler2D spec_emis_tex;
@@ -13,7 +12,7 @@ uniform float g_bias;
 uniform float g_intensity;
 uniform float g_sample_rad;
 uniform float random_size;
-uniform unsigned int osg_FrameNumber;
+uniform int osg_FrameNumber;
 
 varying vec4 ray;
 
@@ -23,7 +22,7 @@ vec3 position( vec3 viewDir, vec2 coords, sampler2D depth_tex );
 vec3 normal_decode(vec2 enc);
 
 vec2 getRandom( in vec2 uv ) {
-    unsigned int level = osg_FrameNumber - ((osg_FrameNumber / 64U) * 64U);
+    int level = osg_FrameNumber - ((osg_FrameNumber / 64) * 64);
     return normalize( texture3D( noise_tex, vec3(uv*50.0, float(level) / 64.0) ).xy * 0.14 - 0.07 );
 }
 vec3 getPosition(in vec2 uv, in vec2 uv0, in vec4 ray0) {

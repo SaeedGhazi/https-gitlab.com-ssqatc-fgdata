@@ -90,6 +90,17 @@ Started September 2000 by David Megginson, david@megginson.com
 					<enabled type="bool" userarchive="y">true</enabled>
 					<name userarchive="y">diffuse</name>
 				</debug-buffer>
+				<debug>
+					<lighting>
+						<sky type="bool">true</sky>
+						<ambient type="bool">true</ambient>
+						<sunlight type="bool">true</sunlight>
+						<lights type="bool">true</lights>
+						<fog type="bool">true</fog>
+						<debug type="bool">false</debug>
+						<transparent type="bool">false</transparent>
+					</lighting>
+				</debug>
 			</rembrandt>
 			<debug type="bool">false</debug>
 			<realism type="int">5</realism>

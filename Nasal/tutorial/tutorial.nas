@@ -2,8 +2,8 @@
 # ---------------------------------------------------------------------------------------
 
 
-var step_interval = 0.0;   # time between tutorial steps (default is set below)
-var exit_interval = 0.0;   # time between fulfillment of a step and the start of the next step (default is set below)
+var step_interval = 0;   # time between tutorial steps (default is set below)
+var exit_interval = 0;   # time between fulfillment of a step and the start of the next step (default is set below)
 
 var loop_id = 0;
 var tutorialN = nil;
@@ -67,8 +67,8 @@ var startTutorial = func {
 	last_step_time = time_elapsedN.getValue();
 	steps = tutorialN.getChildren("step");
 
-	step_interval = read_double(tutorialN, "step-time", 5.0); # time between tutorial steps
-	exit_interval = read_double(tutorialN, "exit-time", 1.0); # time between fulfillment of steps
+	step_interval = read_int(tutorialN, "step-time", 5); # time between tutorial steps
+	exit_interval = read_int(tutorialN, "exit-time", 1); # time between fulfillment of steps
 	run_nasal(tutorialN);
 	set_models(tutorialN.getNode("models"));
 
@@ -133,9 +133,12 @@ var stopTutorial = func {
 #   - Otherwise display the instructions for the step.
 #
 var step_tutorial = func(id) {
+
+  # Check to ensure that this is the currently running tutorial.
 	id == loop_id or return;
-	var continue_after = func(n, dflt) {
-		settimer(func { step_tutorial(id) }, read_double(n, "wait", dflt));
+	
+	var continue_after = func(n, w) {
+		settimer(func { step_tutorial(id) }, w);
 	}
 
 	# <end>
@@ -159,7 +162,10 @@ var step_tutorial = func(id) {
 		step_countN.setIntValue(step_iter_count = 0);
 
 		do_group(step, "Tutorial step " ~ current_step);
-		return continue_after(step, step_interval);
+		
+		# A <wait> tag affects only the initial entry to the step
+		var w = read_int(step, "wait", step_interval);
+		return continue_after(step, w);
 	}
 
 	step_countN.setIntValue(step_iter_count += 1);
@@ -197,7 +203,7 @@ var step_tutorial = func(id) {
 				step_start_time = time_elapsedN.getValue();
 				do_group(step, "Tutorial step " ~ current_step);
 			}
-			return continue_after(exit, step_interval);
+			return continue_after(exit, exit_interval);
 		}
 
 		do_group(exit);
@@ -221,12 +227,11 @@ var do_group = func(node, default_msg = nil) {
 	run_nasal(node);
 }
 
-
-var read_double = func(node, child, default) {
+var read_int = func(node, child, default) {
 	var c = node.getNode(child);
 	if (c == nil)
 		return default;
-	c = c.getValue();
+	c = int(c.getValue());
 	return c != nil ? c : default;
 }
 

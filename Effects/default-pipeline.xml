@@ -340,29 +340,41 @@
 
 		<pass>
 			<name>sky-clouds</name>
+			<debug-property>/sim/rendering/rembrandt/debug/lighting/sky</debug-property>
 		</pass>
 		<pass>
 			<name>ambient</name>
 			<type>fullscreen</type>
 			<effect>Effects/ambient</effect>
 			<order-num>1</order-num>
+			<debug-property>/sim/rendering/rembrandt/debug/lighting/ambient</debug-property>
 		</pass>
 		<pass>
 			<name>sunlight</name>
 			<type>fullscreen</type>
 			<effect>Effects/sunlight</effect>
 			<order-num>2</order-num>
-		</pass>
-		<pass>
-			<name>lights</name>
-			<order-num>3</order-num>
+			<debug-property>/sim/rendering/rembrandt/debug/lighting/sunlight</debug-property>
 		</pass>
 		<pass>
 			<name>fog</name>
 			<type>fullscreen</type>
 			<effect>Effects/fog</effect>
-			<order-num>4</order-num>
+			<order-num>3</order-num>
+			<debug-property>/sim/rendering/rembrandt/debug/lighting/fog</debug-property>
 		</pass>
+		<pass>
+			<name>lights</name>
+			<order-num>4</order-num>
+			<debug-property>/sim/rendering/rembrandt/debug/lighting/lights</debug-property>
+		</pass>
+		<!-- pass>
+			<name>debug</name>
+			<type>fullscreen</type>
+			<effect>Effects/debug</effect>
+			<order-num>5</order-num>
+			<debug-property>/sim/rendering/rembrandt/debug/lighting/debug</debug-property>
+		</pass -->
 	</stage>
 
 	<stage>

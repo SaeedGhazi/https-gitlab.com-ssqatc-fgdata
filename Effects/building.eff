@@ -43,6 +43,17 @@
     <reflection-fresnel type="float"> 0.0 </reflection-fresnel>
     <reflection-rainbow type="float"> 0.0 </reflection-rainbow>
     <reflection-noise type="float"> 0.0 </reflection-noise>
+	<texture n= "5" >
+		<type>cubemap</type>
+		<images>
+			<positive-x>Aircraft/Generic/Effects/CubeMaps/fgfs-sky/1.png</positive-x>
+			<negative-x>Aircraft/Generic/Effects/CubeMaps/fgfs-sky/4.png</negative-x>
+			<positive-y>Aircraft/Generic/Effects/CubeMaps/fgfs-sky/2.png</positive-y>
+			<negative-y>Aircraft/Generic/Effects/CubeMaps/fgfs-sky/3.png</negative-y>
+			<positive-z>Aircraft/Generic/Effects/CubeMaps/fgfs-sky/6.png</positive-z>
+			<negative-z>Aircraft/Generic/Effects/CubeMaps/fgfs-sky/5.png</negative-z>
+		</images>
+	</texture>
     <!--Ambient correction -->
     <ambient-correction type="float"> 0.0 </ambient-correction>
     <dirt-enabled type="int"> 0 </dirt-enabled>
@@ -86,7 +97,7 @@
 		<fogstructure><use>/environment/fog-structure</use></fogstructure>
 		<!-- 	END fog include -->
   </parameters>
-  
+
   <!-- Atmospheric scattering technique -->
   <technique n="5">
     <predicate>
@@ -106,7 +117,7 @@
         </or>
       </and>
     </predicate>
-    
+
     <pass>
       <lighting>true</lighting>
       <material>
@@ -239,7 +250,7 @@
         <write-mask type="bool">false</write-mask>
       </depth>
     </pass>
-  </technique>  
+  </technique>
 
   <technique n="8">
 	<pass>

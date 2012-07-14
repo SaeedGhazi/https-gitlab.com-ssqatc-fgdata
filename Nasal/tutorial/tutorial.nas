@@ -203,7 +203,7 @@ var step_tutorial = func(id) {
 				step_start_time = time_elapsedN.getValue();
 				do_group(step, "Tutorial step " ~ current_step);
 			}
-			return continue_after(exit, exit_interval);
+			return continue_after(exit, step_interval);
 		}
 
 		do_group(exit);

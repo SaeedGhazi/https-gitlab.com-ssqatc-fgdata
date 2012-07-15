@@ -17,7 +17,7 @@
 ###    * Replace "-_" occurences with a double "-" in all translations (XML does not allow
 ###      consecutive "-" characters in comments).
 ###
-### Last synchronized with English master resource on 2012-July-13 for FlightGear 2.8.0
+### Last synchronized with English master resource on 2012-July-15 for FlightGear 2.8.0
 ### -->
 <PropertyList>
 
@@ -38,6 +38,7 @@
 	<enable-game-mode-desc>abilita modalita'di gioco a schermo pieno </enable-game-mode-desc>   <!-- English: "Enable full-screen game mode" -->
 	<disable-splash-screen-desc>Disabilita schermo splash</disable-splash-screen-desc>   <!-- English: "Disable splash screen" -->
 	<enable-splash-screen-desc>Abilita schermo splash</enable-splash-screen-desc>   <!-- English: "Enable splash screen" -->
+<!-- 	<restore-defaults-desc>???</restore-defaults-desc> -->   <!-- English: "Reset all user settings to their defaults (rendering options etc)" -->
 	<disable-save-on-exit>Non salvare le impostazioni all'uscita del programma</disable-save-on-exit>   <!-- English: "Don't save preferences upon program exit" -->
 	<enable-save-on-exit>Salva le impostazioni all'uscita del programma</enable-save-on-exit>   <!-- English: "Allow saving preferences at program exit" -->
 	<disable-intro-music-desc>Disabilita musica introduttiva</disable-intro-music-desc>   <!-- English: "Disable introduction music" -->
@@ -47,6 +48,10 @@
 	<enable-mouse-pointer-desc n="1">(i.e per schermo pieno basato su carte Vodoo)</enable-mouse-pointer-desc>   <!-- English: "(i.e. for full screen Voodoo based cards)" -->
 	<disable-random-objects-desc>Escludi casuali oggetti di scenario</disable-random-objects-desc>   <!-- English: "Exclude random scenery objects" -->
 	<enable-random-objects-desc>Includi casuali oggetti di scenario</enable-random-objects-desc>   <!-- English: "Include random scenery objects" -->
+<!-- 	<disable-random-vegetation-desc>???</disable-random-vegetation-desc> -->   <!-- English: "Exclude random vegetation objects" -->
+<!-- 	<enable-random-vegetation-desc>???</enable-random-vegetation-desc> -->   <!-- English: "Include random vegetation objects" -->
+<!-- 	<disable-random-buildings-desc>???</disable-random-buildings-desc> -->   <!-- English: "Exclude random buildings objects" -->
+<!-- 	<enable-random-buildings-desc>???</enable-random-buildings-desc> -->   <!-- English: "Include random buildings objects" -->
 	<disable-real-weather-fetch-desc>Disabilita raccoglimento meteo in tempo reale basato su METAR </disable-real-weather-fetch-desc>   <!-- English: "Disable METAR based real weather fetching" -->
 	<enable-real-weather-fetch-desc>Abilita raccoglimento meteo in tempo reale basato su METAR (questo richiede una connessione a internet aperta) </enable-real-weather-fetch-desc>   <!-- English: "Enable METAR based real weather fetching (this requires an open internet connection)" -->
 	<metar-desc>Passa a METAR per configurare meteo statico</metar-desc>   <!-- English: "Pass a METAR to set up static weather" -->
@@ -67,7 +72,7 @@
 	<enable-auto-coordination-desc>Abilita coordinazione  automatica</enable-auto-coordination-desc>   <!-- English: "Enable auto coordination" -->
 	<disable-auto-coordination-desc>disabilita coordinazione automatica</disable-auto-coordination-desc>   <!-- English: "Disable auto coordination" -->
 	<browser-app-desc>Specifica il perocorso per il tuo programma di ricerca rete </browser-app-desc>   <!-- English: "Specify path to your web browser" -->
-	<prop-desc>Imposta la proprieta &lt;name&gt; a &lt;value&gt;. &lt;type&gt; la quale puo' essere una string, double, float, long, int, o boolean.' </prop-desc>   <!-- English: "Set property &lt;name&gt; to &lt;value&gt;. &lt;type&gt; can be one of string, double, float, long, int, or bool." -->
+	<prop-desc>Imposta la proprieta &lt;name&gt; a &lt;value&gt;. &lt;type&gt; la quale puo' essere una string, double, float, long, int, o bool.' </prop-desc>   <!-- English: "Set property &lt;name&gt; to &lt;value&gt;. &lt;type&gt; can be one of string, double, float, long, int, or bool." -->
 	<config-desc>Carica proprieta' addizionali dalla percorso</config-desc>   <!-- English: "Load additional properties from path" -->
 	<units-feet-desc>Usa piedi sistema anglossassone per le distanze</units-feet-desc>   <!-- English: "Use feet for distances" -->
 	<units-meters-desc>Usa sistema metrico per le distanze </units-meters-desc>   <!-- English: "Use meters for distances" -->

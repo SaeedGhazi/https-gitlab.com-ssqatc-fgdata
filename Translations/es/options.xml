@@ -17,7 +17,7 @@
 ###    * Replace "-_" occurences with a double "-" in all translations (XML does not allow
 ###      consecutive "-" characters in comments).
 ###
-### Last synchronized with English master resource on 2012-July-13 for FlightGear 2.8.0
+### Last synchronized with English master resource on 2012-July-15 for FlightGear 2.8.0
 ### -->
 <PropertyList>
 
@@ -38,6 +38,7 @@
 	<enable-game-mode-desc>Activa el modo de pantalla completa</enable-game-mode-desc>   <!-- English: "Enable full-screen game mode" -->
 	<disable-splash-screen-desc>Desactiva splash screen</disable-splash-screen-desc>   <!-- English: "Disable splash screen" -->
 	<enable-splash-screen-desc>Activa splash screen</enable-splash-screen-desc>   <!-- English: "Enable splash screen" -->
+<!-- 	<restore-defaults-desc>???</restore-defaults-desc> -->   <!-- English: "Reset all user settings to their defaults (rendering options etc)" -->
 	<disable-save-on-exit>No guardar las preferencias al salir del programa</disable-save-on-exit>   <!-- English: "Don't save preferences upon program exit" -->
 	<enable-save-on-exit>Permitir guardar las preferencias al salir del programa</enable-save-on-exit>   <!-- English: "Allow saving preferences at program exit" -->
 	<disable-intro-music-desc>Desactiva la introducción musical</disable-intro-music-desc>   <!-- English: "Disable introduction music" -->
@@ -47,6 +48,10 @@
 	<enable-mouse-pointer-desc n="1">(p.ej. para tarjetas tipo Voodoo a pantalla completa)</enable-mouse-pointer-desc>   <!-- English: "(i.e. for full screen Voodoo based cards)" -->
 	<disable-random-objects-desc>Excluir objetos aleatorios de escenografía</disable-random-objects-desc>   <!-- English: "Exclude random scenery objects" -->
 	<enable-random-objects-desc>Incluir objetos aleatorios de escenografía</enable-random-objects-desc>   <!-- English: "Include random scenery objects" -->
+<!-- 	<disable-random-vegetation-desc>???</disable-random-vegetation-desc> -->   <!-- English: "Exclude random vegetation objects" -->
+<!-- 	<enable-random-vegetation-desc>???</enable-random-vegetation-desc> -->   <!-- English: "Include random vegetation objects" -->
+<!-- 	<disable-random-buildings-desc>???</disable-random-buildings-desc> -->   <!-- English: "Exclude random buildings objects" -->
+<!-- 	<enable-random-buildings-desc>???</enable-random-buildings-desc> -->   <!-- English: "Include random buildings objects" -->
 	<disable-real-weather-fetch-desc>Desactiva la recogida de meteo real basada en METAR</disable-real-weather-fetch-desc>   <!-- English: "Disable METAR based real weather fetching" -->
 	<enable-real-weather-fetch-desc>Activa la recogida de meteo real basada en METAR (esto requiere una conexión a Internet)</enable-real-weather-fetch-desc>   <!-- English: "Enable METAR based real weather fetching (this requires an open internet connection)" -->
 	<metar-desc>Pasar una METAR para establecer una meteo estática</metar-desc>   <!-- English: "Pass a METAR to set up static weather" -->

@@ -93,6 +93,11 @@
    </option>
 
    <option>
+    <name>restore-defaults</name>
+    <description>restore-defaults-desc</description>
+   </option>
+
+   <option>
     <name>disable-save-on-exit</name>
     <description>disable-save-on-exit</description>
    </option>
@@ -211,6 +216,30 @@
     <name>enable-random-objects</name>
     <description>enable-random-objects-desc</description>
     <description>random-objects-desc</description>
+   </option>
+
+   <option>
+    <name>disable-random-vegetation</name>
+    <description>disable-random-vegetation-desc</description>
+    <description>random-vegetation-desc</description>
+   </option>
+
+   <option>
+    <name>enable-random-vegetation</name>
+    <description>enable-random-vegetation-desc</description>
+    <description>random-vegetation-desc</description>
+   </option>
+
+   <option>
+    <name>disable-random-buildings</name>
+    <description>disable-random-buildings-desc</description>
+    <description>random-buildings-desc</description>
+   </option>
+
+   <option>
+    <name>enable-random-buildings</name>
+    <description>enable-random-buildings-desc</description>
+    <description>random-buildings-desc</description>
    </option>
 
    <option>

@@ -1193,18 +1193,20 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	}
 #### end of temporary hack for /sim/auto-coordination
 
-	if (getprop("/sim/startup/save-on-exit")) {
+	if (!getprop("/sim/startup/restore-defaults")) {
+		# load user-specific aircraft settings
 		data.load();
 		var n = props.globals.getNode("/sim/aircraft-data");
 		if (n != nil)
 			foreach (var c; n.getChildren("path"))
 				if (c.getType() != "NONE")
 					data.add(c.getValue());
-	} else {
+	}
+	if (!getprop("/sim/startup/save-on-exit"))
+	{
+		# prevent saving
 		data._save_ = func nil;
 		data._loop_ = func nil;
 	}
 });
-
-
 

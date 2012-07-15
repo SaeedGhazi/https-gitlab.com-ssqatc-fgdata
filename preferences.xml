@@ -54,6 +54,7 @@ Started September 2000 by David Megginson, david@megginson.com
 			<fullscreen type="bool" preserve="y">false</fullscreen>
 			<units>feet</units>
 			<save-on-exit type="bool" userarchive="y">true</save-on-exit>
+			<restore-defaults type="bool">false</restore-defaults>
 			<browser-app write="n">firefox -new-tab "%u"</browser-app>
 			<!--  help viewer; only used under Unix -->
 			<terminal-ansi-colors type="bool">true</terminal-ansi-colors>

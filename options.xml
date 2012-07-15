@@ -928,6 +928,7 @@
 
    <option>
     <name>metar</name>
+    <arg>METAR</arg>
     <description>metar-desc</description>
    </option>
 

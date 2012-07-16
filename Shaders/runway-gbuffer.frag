@@ -50,12 +50,14 @@ void main (void)
     if (normalmap_dds > 0)
         N = -N;
 
+	float nFactor = 1.0 - N.z;
 	float lightness = dot(texel.rgb, vec3( 0.3, 0.59, 0.11 ));
     // calculate the specular light
     float refl_correction = spec_adjust * 2.5 - 1.0;
-    float shininess = max (0.35, refl_correction) * nmap.a;
+    float shininess = max (0.35, refl_correction) * nmap.a * nFactor;
 
-	float specular = dot(vec3(1.0) * lightness , vec3( 0.3, 0.59, 0.11 ));
+
+	float specular = dot(vec3(1.0) * lightness , vec3( 0.3, 0.59, 0.11 )) * nFactor;
 
 	vec4 color = vec4(1.0);
 
@@ -65,7 +67,7 @@ void main (void)
     vec3 viewVec = normalize(vViewVec);
 
     // Map a rainbowish color
-	float v = dot(viewVec, normalize(VNormal));
+	float v = abs(dot(viewVec, normalize(VNormal)));
     vec4 rainbow = texture2D(Rainbow, vec2(v, 0.0));
 
     // Map a fresnel effect
@@ -83,7 +85,7 @@ void main (void)
 
 	MixFactor = 0.75 * smoothstep(0.0, 1.0, MixFactor);
 
-    reflFactor = max(map.a * (texel.r + texel.g), 1.0 - MixFactor)  * (1.0- N.z)  + transparency_offset ;
+    reflFactor = max(map.a * (texel.r + texel.g), 1.0 - MixFactor)  * nFactor  + transparency_offset ;
     reflFactor =0.75 * smoothstep(0.05, 1.0, reflFactor);
 
     // set ambient adjustment to remove bluiness with user input
@@ -96,12 +98,12 @@ void main (void)
 
     vec4 reflfrescolor = mix(reflcolor, fresnel, fresneliness * v);
     vec4 noisecolor = mix(reflfrescolor, noisevec, noisiness);
-    vec4 raincolor = vec4(noisecolor.rgb * reflFactor, 1.0);
+	vec4 raincolor = vec4(noisecolor.rgb * reflFactor, 1.0) * nFactor;
 
 	vec4 mixedcolor = mix(texel, raincolor * (1.0 - refl_correction * (1.0 - lightness)), reflFactor);
 
     // the final reflection
-	vec4 fragColor = vec4(color.rgb * mixedcolor.rgb  + ambient_Correction, color.a);
+	vec4 fragColor = vec4(color.rgb * mixedcolor.rgb  + ambient_Correction * nFactor, color.a);
 
     encode_gbuffer(N, fragColor.rgb, 1, specular, shininess, emission, gl_FragCoord.z);
 }

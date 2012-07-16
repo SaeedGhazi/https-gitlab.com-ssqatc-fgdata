@@ -92,7 +92,7 @@ void main (void)
 ///END bump
 	vec4 reflection = textureCube(Environment, reflVec * N);
 	vec3 viewVec = normalize(vViewVec);
-	float v      = dot(viewVec, normalize(VNormal));// Map a rainbowish color
+	float v      = abs(dot(viewVec, normalize(VNormal)));// Map a rainbowish color
 	vec4 fresnel = texture2D(ReflFresnelTex, vec2(v, 0.0));
 	vec4 rainbow = texture2D(ReflRainbowTex, vec2(v, 0.0));
 	vec4 color = gl_Color * gl_FrontMaterial.diffuse;

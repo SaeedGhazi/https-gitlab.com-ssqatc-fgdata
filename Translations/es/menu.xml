@@ -104,7 +104,7 @@
 	<reload-panel>Reiniciar panel</reload-panel>   <!-- English: "Reload Panel" -->
 	<reload-autopilot>Reiniciar autopiloto</reload-autopilot>   <!-- English: "Reload Autopilot" -->
 	<reload-network>Reiniciar conexión de red</reload-network>   <!-- English: "Reload Network" -->
-<!-- 	<reload-model>???</reload-model> -->   <!-- English: "Reload Aircraft Model" -->
+	<reload-model>Recargar modelo de la aeronave</reload-model>   <!-- English: "Reload Aircraft Model" -->
 	<nasal-console>Consola nasal</nasal-console>   <!-- English: "Nasal Console" -->
 	<development-keys>Teclas de desarrollo</development-keys>   <!-- English: "Development Keys" -->
 	<configure-dev-extension>Configurar extensiones de desarrollo</configure-dev-extension>   <!-- English: "Configure Development Extensions" -->

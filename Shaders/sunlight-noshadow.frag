@@ -35,7 +35,7 @@ void main() {
     }
 
     float matID = texture2D( color_tex, coords ).a * 255.0;
-    if (matID == 255.0)
+    if (matID >= 254.0)
         Idiff += Ispec * spec_emis.x;
 
     gl_FragColor = vec4(Idiff + Ispec + Iemis, 1.0);

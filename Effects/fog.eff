@@ -12,7 +12,7 @@
 				<destination>one-minus-src-alpha</destination>
 			</blend>
 			<render-bin>
-				<bin-number>10000</bin-number>
+				<bin-number>1</bin-number>
 				<bin-name>RenderBin</bin-name>
 			</render-bin>
 			<texture-unit>

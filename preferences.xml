@@ -54,6 +54,7 @@ Started September 2000 by David Megginson, david@megginson.com
 			<fullscreen type="bool" preserve="y">false</fullscreen>
 			<units>feet</units>
 			<save-on-exit type="bool" userarchive="y">true</save-on-exit>
+			<restore-defaults type="bool">false</restore-defaults>
 			<browser-app write="n">firefox -new-tab "%u"</browser-app>
 			<!--  help viewer; only used under Unix -->
 			<terminal-ansi-colors type="bool">true</terminal-ansi-colors>
@@ -90,6 +91,17 @@ Started September 2000 by David Megginson, david@megginson.com
 					<enabled type="bool" userarchive="y">true</enabled>
 					<name userarchive="y">diffuse</name>
 				</debug-buffer>
+				<debug>
+					<lighting>
+						<sky type="bool">true</sky>
+						<ambient type="bool">true</ambient>
+						<sunlight type="bool">true</sunlight>
+						<lights type="bool">true</lights>
+						<fog type="bool">true</fog>
+						<debug type="bool">false</debug>
+						<transparent type="bool">false</transparent>
+					</lighting>
+				</debug>
 			</rembrandt>
 			<debug type="bool">false</debug>
 			<realism type="int">5</realism>
@@ -687,13 +699,8 @@ Started September 2000 by David Megginson, david@megginson.com
 		<atc>
 			<enabled type="bool">true</enabled>
 			<runway type="string" preserve="y"/>
+			<use-millibars type="bool" preserve="y">false</use-millibars>
 		</atc>
-
-		<ai-traffic>
-			<!-- Obsolete and unused - to be removed -->
-			<enabled type="bool" userarchive="y">false</enabled>
-			<level type="int" userarchive="y">1</level>
-		</ai-traffic>
 
 		<traffic-manager>
 			<enabled type="bool" userarchive="y">true</enabled>

@@ -60,13 +60,25 @@ void main() {
     float nDotVP = max(0.0, dot(normal, VP));
     float nDotHV = max(0.0, dot(normal, halfVector));
 
-    vec4 color = texture2D( color_tex, coords );
-    vec4 Iamb = Ambient * color * att;
-    vec4 Idiff = Diffuse * color * att * nDotVP;
+    vec4 color_material = texture2D( color_tex, coords );
+    vec3 color = color_material.rgb;
+    vec3 Iamb = Ambient.rgb * color * att;
+    vec3 Idiff = Diffuse.rgb * color * att * nDotVP;
+
+    float matID = color_material.a * 255.0;
+    float spec_intensity = spec_emis.x;
+    float spec_att = att;
+    if (matID == 254.0) { // 254: water, 255: Ubershader
+        spec_intensity = 1.0; // spec_color shouldn't depend on cloud cover when rendering spot light
+        spec_att = min(10.0 * att, 1.0); // specular attenuation reduced on water
+    }
 
     vec3 Ispec = vec3(0.0);
     if (cosAngIncidence > 0.0)
-        Ispec = pow( nDotHV, spec_emis.y * 128.0 ) * spec_emis.x * att * Specular.rgb;
+        Ispec = pow( nDotHV, spec_emis.y * 128.0 ) * spec_intensity * spec_att * Specular.rgb;
 
-    gl_FragColor = vec4(Iamb.rgb + Idiff.rgb + Ispec, 1.0);
+    if (matID >= 254.0)
+        Idiff += Ispec * spec_emis.x;
+
+    gl_FragColor = vec4(Iamb + Idiff + Ispec, 1.0);
 }

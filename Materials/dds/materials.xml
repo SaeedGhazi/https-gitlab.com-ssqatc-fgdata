@@ -2352,6 +2352,15 @@
 
  <!-- end winter-->
 
+<material include="Materials/base/rock.xml">
+	<name>BarrenCover</name>
+	<name>Dirt</name>
+	<name>OpenMining</name>
+	<name>Rock</name>
+	<name>Dump</name>
+	<effect>Effects/transition-base-grass-inverse</effect>
+	<texture>Terrain/rock7.dds</texture>
+</material>
 
  <!-- runway and taxiway signs -->
 

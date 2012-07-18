@@ -699,13 +699,8 @@ Started September 2000 by David Megginson, david@megginson.com
 		<atc>
 			<enabled type="bool">true</enabled>
 			<runway type="string" preserve="y"/>
+			<use-millibars type="bool" preserve="y">false</use-millibars>
 		</atc>
-
-		<ai-traffic>
-			<!-- Obsolete and unused - to be removed -->
-			<enabled type="bool" userarchive="y">false</enabled>
-			<level type="int" userarchive="y">1</level>
-		</ai-traffic>
 
 		<traffic-manager>
 			<enabled type="bool" userarchive="y">true</enabled>

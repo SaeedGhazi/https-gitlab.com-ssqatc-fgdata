@@ -66,7 +66,7 @@
       <diffuse type="vec4d">1.0 1.0 1.0 1.0</diffuse>
       <specular type="vec4d">0.0 0.0 0.0 1.0</specular>
       <emissive type="vec4d">0.02 0.02 0.02 1.0</emissive>
-      <shininess>0.0</shininess>
+      <shininess>0.1</shininess>
       <color-mode>ambient-and-diffuse</color-mode>
       <color-mode-uniform>ambient-and-diffuse</color-mode-uniform>
       <!-- DIFFUSE -->

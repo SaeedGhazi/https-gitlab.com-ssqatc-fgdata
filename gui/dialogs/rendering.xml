@@ -247,6 +247,19 @@
 					<row>2</row>
 					<col>0</col>
 					<halign>left</halign>
+					<label>Random buildings</label>
+					<name>random-buildings</name>
+					<property>/sim/rendering/random-buildings</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>random-buildings</object-name>
+					</binding>
+				</checkbox>
+
+				<checkbox>
+					<row>3</row>
+					<col>0</col>
+					<halign>left</halign>
 					<label>Random objects</label>
 					<name>random-objects</name>
 					<property>/sim/rendering/random-objects</property>
@@ -257,7 +270,7 @@
 				</checkbox>
 
 				<checkbox>
-					<row>3</row>
+					<row>4</row>
 					<col>0</col>
 					<halign>left</halign>
 					<label>Random vegetation</label>
@@ -269,7 +282,7 @@
 					</binding>
 				</checkbox>
 				<text>
-					<row>3</row>
+					<row>4</row>
 					<col>1</col>
 					<label>density</label>
 					<enable>
@@ -277,7 +290,7 @@
 					</enable>
 				</text>
 				<slider>
-					<row>3</row>
+					<row>4</row>
 					<col>2</col>
 					<name>vegetation-density</name>
 					<min>0</min>
@@ -290,7 +303,7 @@
 					</binding>
 				</slider>
 				<text>
-					<row>3</row>
+					<row>4</row>
 					<col>3</col>
 					<label>12345678</label>
 					<format>%.1f</format>
@@ -301,50 +314,6 @@
 					</enable>
 				</text>
 				
-				<checkbox>
-					<row>4</row>
-					<col>0</col>
-					<halign>left</halign>
-					<label>Random buildings</label>
-					<name>random-buildings</name>
-					<property>/sim/rendering/random-buildings</property>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>random-buildings</object-name>
-					</binding>
-				</checkbox>
-				<text>
-					<row>4</row>
-					<col>1</col>
-					<label>density</label>
-					<enable>
-						<property>/sim/rendering/random-buildings</property>
-					</enable>
-				</text>
-				<slider>
-					<row>4</row>
-					<col>2</col>
-					<name>building-density</name>
-					<min>0</min>
-					<max>5.0</max>
-					<step>0.1</step>
-					<property>/sim/rendering/building-density</property>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>building-density</object-name>
-					</binding>
-				</slider>
-				<text>
-					<row>4</row>
-					<col>3</col>
-					<label>12345678</label>
-					<format>%.1f</format>
-					<live>true</live>
-					<property>/sim/rendering/building-density</property>
-					<enable>
-						<property>/sim/rendering/random-buildings</property>
-					</enable>
-				</text>
 			</group>
 
 			<button>

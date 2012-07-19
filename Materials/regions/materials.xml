@@ -617,122 +617,171 @@
   <wrapu>false</wrapu>
 </material>
 
- <!-- Default Summer -->
+<!-- REGIONAL DEFINITIONS - CARIBBEAN ISLANDS               -->
 
-<material>
-  <condition>
-   <equals>
-    <property>sim/startup/season</property>
-    <value>summer</value>
-   </equals>
-  </condition>
-  <name>Landmass</name>
-  <name>SomeSort</name>
-  <name>Island</name>
-  <name>Default</name>
-  <effect>Effects/landmass-nowood</effect>
-  <texture>Terrain/forest1a.png</texture>
-  <texture>Terrain/forest1b.png</texture>
-  <texture>Terrain/forest1c.png</texture>
-  <xsize>2000</xsize>
-  <ysize>2000</ysize>
-  <light-coverage>10000000.0</light-coverage>
-  <wood-coverage>4000.0</wood-coverage>
-  <tree-texture>Trees/coniferous-summer.png</tree-texture>
-  <tree-varieties>8</tree-varieties>
-  <tree-range-m alias="/params/forest/tree-range-m"/>
-  <tree-height-m>25.0</tree-height-m>
-  <tree-width-m>15.0</tree-width-m>
-  <rolling-friction>1</rolling-friction>
-  <bumpiness>1</bumpiness>
-</material>
-
-<material>
-  <condition>
-   <equals>
-    <property>sim/startup/season</property>
-    <value>summer</value>
-   </equals>
-  </condition>
-  <name>EvergreenBroadCover</name>
-  <name>EvergreenForest</name>
-  <effect>Effects/forest</effect>
-  <texture>Terrain/forest1a.png</texture>
-  <texture>Terrain/forest1b.png</texture>
-  <texture>Terrain/forest1c.png</texture>
-  <xsize>2000</xsize>
-  <ysize>2000</ysize>
-  <light-coverage>10000000.0</light-coverage>
-  <wood-coverage>4000.0</wood-coverage>
-  <tree-texture>Trees/coniferous-summer.png</tree-texture>
-  <tree-varieties>8</tree-varieties>
-  <tree-range-m alias="/params/forest/tree-range-m"/>
-  <tree-height-m>25.0</tree-height-m>
-  <tree-width-m>18.0</tree-width-m>
-  <rolling-friction>1</rolling-friction>
-  <bumpiness>1</bumpiness>
-</material>
-
-<material>
-  <condition>
-   <equals>
-    <property>sim/startup/season</property>
-    <value>summer</value>
-   </equals>
-  </condition>
-  <effect>Effects/forest</effect>
-  <name>DeciduousBroadCover</name>
-  <name>DeciduousForest</name>
-  <name>Bog</name>
-  <name>Heath</name>
-  <texture>Terrain/deciduous-hires.png</texture>
-  <xsize>2000</xsize>
-  <ysize>2000</ysize>
-  <light-coverage>10000000.0</light-coverage>
-  <wood-coverage>4000.0</wood-coverage>
-  <tree-texture>Trees/deciduous-summer.png</tree-texture>
-  <tree-varieties>8</tree-varieties>
-  <tree-range-m alias="/params/forest/tree-range-m"/>
-  <tree-height-m>25.0</tree-height-m>
-  <tree-width-m>15.0</tree-width-m>
-  <rolling-friction>1</rolling-friction>
-  <bumpiness>0.85</bumpiness>
-</material>
-
-
-<!-- regional forest Hawaii -->
-
-<material>
-  <condition>
-   <and>
-   <equals>
-    <property>sim/startup/season</property>
-    <value>summer</value>
-   </equals>
-    <and>
-     <greater-than>
-      <property>position/longitude-deg</property>
-      <value>-179.0</value>
-     </greater-than>
-     <less-than>
-      <property>position/longitude-deg</property>
-      <value>-154.0</value>
-     </less-than>
-     <greater-than>
-      <property>position/latitude-deg</property>
-      <value>18.8</value>
-     </greater-than>
-     <less-than>
-      <property>position/latitude-deg</property>
-      <value>28.5</value>
-     </less-than>
-    </and>
-   </and>
-  </condition>
+<material include="Materials/regions/caribbean.xml">
   <effect>Effects/forest</effect>
   <name>MixedForestCover</name>
   <name>MixedForest</name>
   <name>RainForest</name>
+  <name>EvergreenBroadCover</name>
+  <texture>Terrain/rainforest-hawaii.png</texture>
+  <xsize>2000</xsize>
+  <ysize>2000</ysize>
+  <light-coverage>5000000.0</light-coverage>
+  <wood-coverage>4000.0</wood-coverage>
+  <rolling-friction>1</rolling-friction>
+  <bumpiness>0.95</bumpiness>
+</material>
+
+<material include="Materials/regions/caribbean.xml">
+  <name>Town</name>
+  <name>SubUrban</name>
+  <texture>Terrain/town-europe.png</texture>
+  <object-mask>Terrain/town-europe.mask.png</object-mask>
+  <xsize>1024</xsize>
+  <ysize>1024</ysize>
+  <light-coverage>100000.0</light-coverage>
+  <emissive>
+   <r>0.05</r>
+   <g>0.05</g>
+   <b>0.02</b>
+   <a>1.0</a>
+  </emissive>
+  <object-group include="Materials/base/town-buildings.xml"/>
+  <building-coverage>500.0</building-coverage>
+  <building-small-ratio>0.9</building-small-ratio>
+  <building-medium-ratio>0.1</building-medium-ratio>
+  <building-large-ratio>0.0</building-large-ratio>
+  <wood-coverage>5000.0</wood-coverage>
+</material>
+
+<!-- Caribbean city -->
+<material include="Materials/regions/caribbean.xml">
+  <name>BuiltUpCover</name>
+  <name>Urban</name>
+  <effect>Effects/urban</effect>
+  <texture-set>
+   <texture>Terrain/city1.png</texture>
+   <texture n="2">Terrain/city1-relief-light.png</texture>
+  </texture-set>
+  <texture-set>
+   <texture>Terrain/city2.png</texture>
+   <texture n="2">Terrain/city2-relief-light.png</texture>
+  </texture-set>
+	<object-mask>Terrain/city1.mask.png</object-mask>
+	<object-mask>Terrain/city2.mask.png</object-mask>
+  <xsize>1000</xsize>
+  <ysize>1000</ysize>
+  <light-coverage>100000.0</light-coverage>
+  <emissive>
+   <r>0.05</r>
+   <g>0.05</g>
+   <b>0.02</b>
+   <a>1.0</a>
+  </emissive>
+  <object-group include="Materials/base/town-buildings.xml"/>
+  <building-small-ratio>0.7</building-small-ratio>
+  <building-medium-ratio>0.3</building-medium-ratio>
+  <building-large-ratio>0.0</building-large-ratio>
+  <building-coverage>500.0</building-coverage>
+  <wood-coverage>5000.0</wood-coverage>
+</material>
+
+<material include="Materials/regions/caribbean.xml">
+  <name>GolfCourse</name>
+  <texture>Terrain/golfcourse1.png</texture>
+  <object-mask>Terrain/golfcourse1.mask.png</object-mask>
+  <xsize>800</xsize>
+  <ysize>800</ysize>
+  <light-coverage>2000000.0</light-coverage>
+  <diffuse>
+   <r>0.9</r>
+   <g>0.95</g>
+   <b>0.9</b>
+   <a>1.0</a>
+  </diffuse>
+  <specular>
+   <r>0.1</r>
+   <g>0.12</g>
+   <b>0.1</b>
+   <a>1.0</a>
+  </specular>
+  <shininess>1.2</shininess>
+  <solid>1</solid>
+  <friction-factor>0.7</friction-factor>
+  <rolling-friction>0.1</rolling-friction>
+  <bumpiness>0.3</bumpiness>
+  <load-resistance>1e30</load-resistance>
+  <wood-coverage>1000.0</wood-coverage>
+</material>
+
+<material include="Materials/regions/caribbean.xml">
+  <effect>Effects/crop</effect>
+  <name>DryCropPastureCover</name>
+  <name>DryCrop</name>
+  <name>MixedCropPastureCover</name>
+  <name>MixedCrop</name>
+  <name>ComplexCrop</name>
+  <texture>Terrain/mixedcrop-caribbean.png</texture>
+  <object-mask>Terrain/mixedcrop4.mask.png</object-mask>
+  <diffuse>
+   <r>0.0</r>
+   <g>0.9</g>
+   <b>0.0</b>
+   <a>1.0</a>
+  </diffuse>
+  <xsize>2000</xsize>
+  <ysize>2000</ysize>
+  <light-coverage>2000000.0</light-coverage>
+  <solid>1</solid>
+  <friction-factor>0.9</friction-factor>
+  <rolling-friction>0.1</rolling-friction>
+  <bumpiness>0.7</bumpiness>
+  <load-resistance>1e30</load-resistance>
+  <object-group include="Materials/regions/caribbean-farm-buildings.xml"/>
+  <wood-coverage>1000.0</wood-coverage>
+</material>
+
+<material include="Materials/regions/caribbean.xml">
+  <name>GrassCover</name>
+  <name>BareTundraCover</name>
+  <name>MixedTundraCover</name>
+  <name>Cemetery</name>
+  <effect>Effects/landmass-nowood</effect>
+  <texture>Terrain/grass-caribbean.png</texture>
+  <xsize>2000</xsize>
+  <ysize>2000</ysize>
+  <light-coverage>4000000.0</light-coverage>
+  <diffuse>
+   <r>0.93</r>
+   <g>0.95</g>
+   <b>0.93</b>
+   <a>1.0</a>
+  </diffuse>
+  <specular>
+   <r>0.1</r>
+   <g>0.12</g>
+   <b>0.1</b>
+   <a>1.0</a>
+  </specular>
+  <shininess>1.2</shininess>
+  <solid>1</solid>
+  <friction-factor>0.7</friction-factor>
+  <rolling-friction>0.1</rolling-friction>
+  <bumpiness>0.15</bumpiness>
+  <load-resistance>1e30</load-resistance>
+</material>
+
+
+<!-- REGIONAL DEFINITIONS - HAWAII ISLANDS                -->
+
+<material include="Materials/regions/hawaii.xml">
+  <effect>Effects/forest</effect>
+  <name>MixedForestCover</name>
+  <name>MixedForest</name>
+  <name>RainForest</name>
+  <name>EvergreenBroadCover</name>
   <texture>Terrain/rainforest-hawaii.png</texture>
   <xsize>2000</xsize>
   <ysize>2000</ysize>
@@ -747,108 +796,7 @@
   <bumpiness>0.95</bumpiness>
 </material>
 
-
-<material>
-  <condition>
-   <equals>
-    <property>sim/startup/season</property>
-    <value>summer</value>
-   </equals>
-  </condition>
-  <effect>Effects/forest</effect>
-  <name>MixedForestCover</name>
-  <name>MixedForest</name>
-  <name>RainForest</name>
-  <texture>Terrain/mixedforest-hires.png</texture>
-  <xsize>2000</xsize>
-  <ysize>2000</ysize>
-  <light-coverage>5000000.0</light-coverage>
-  <wood-coverage>4000.0</wood-coverage>
-  <tree-texture>Trees/mixed-summer.png</tree-texture>
-  <tree-varieties>8</tree-varieties>
-  <tree-range-m alias="/params/forest/tree-range-m"/>
-  <tree-height-m>25.0</tree-height-m>
-  <tree-width-m>15.0</tree-width-m>
-  <rolling-friction>1</rolling-friction>
-  <bumpiness>0.95</bumpiness>
-</material>
-
-<material>
-  <condition>
-   <equals>
-    <property>sim/startup/season</property>
-    <value>summer</value>
-   </equals>
-  </condition>
-  <effect>Effects/forest</effect>
-  <name>EvergreenNeedleCover</name>
-  <name>WoodedTundraCover</name>
-  <texture>Terrain/dec_evergreen-hires.png</texture>
-  <xsize>1000</xsize>
-  <ysize>1000</ysize>
-  <light-coverage>10000000.0</light-coverage>
-  <wood-coverage>4000.0</wood-coverage>
-  <tree-texture>Trees/coniferous-summer.png</tree-texture>
-  <tree-varieties>8</tree-varieties>
-  <tree-range-m alias="/params/forest/tree-range-m"/>
-  <tree-height-m>20.0</tree-height-m>
-  <tree-width-m>15.0</tree-width-m>
-  <rolling-friction>1</rolling-friction>
-  <bumpiness>1</bumpiness>
-</material>
-
-<material>
-  <condition>
-   <equals>
-    <property>sim/startup/season</property>
-    <value>summer</value>
-   </equals>
-  </condition>
-  <effect>Effects/forest</effect>
-  <name>DeciduousNeedleCover</name>
-  <texture>Terrain/dec_evergreen-hires.png</texture>
-  <xsize>1000</xsize>
-  <ysize>1000</ysize>
-  <light-coverage>10000000.0</light-coverage>
-  <wood-coverage>4000.0</wood-coverage>
-  <tree-texture>Trees/coniferous-summer.png</tree-texture>
-  <tree-varieties>8</tree-varieties>
-  <tree-range-m alias="/params/forest/tree-range-m"/>
-  <tree-height-m>15.0</tree-height-m>
-  <tree-width-m>8.0</tree-width-m>
-  <rolling-friction>1</rolling-friction>
-  <bumpiness>1</bumpiness>
-</material>
-
-<!-- Hawaii sand -->
-
-<material>
-  <condition>
-   <and>
-   <equals>
-    <property>sim/startup/season</property>
-    <value>summer</value>
-   </equals>
-    <and>
-     <greater-than>
-      <property>position/longitude-deg</property>
-      <value>-179.0</value>
-     </greater-than>
-     <less-than>
-      <property>position/longitude-deg</property>
-      <value>-154.0</value>
-     </less-than>
-     <greater-than>
-      <property>position/latitude-deg</property>
-      <value>18.8</value>
-     </greater-than>
-     <less-than>
-      <property>position/latitude-deg</property>
-      <value>28.5</value>
-     </less-than>
-    </and>
-   </and>
-  </condition>
+<material include="Materials/regions/hawaii.xml">
   <name>Sand</name>
   <texture>Terrain/sand-hawaii4.png</texture>
   <xsize>2000</xsize>
@@ -860,31 +808,7 @@
   <bumpiness>0.1</bumpiness>
 </material>
 
-
-
-<material>
-  <condition>
-   <equals>
-    <property>sim/startup/season</property>
-    <value>summer</value>
-   </equals>
-  </condition>
-  <name>Sand</name>
-  <texture>Terrain/sand4.png</texture>
-  <texture>Terrain/sand5.png</texture>
-  <texture>Terrain/sand6.png</texture>
-  <xsize>2000</xsize>
-  <ysize>2000</ysize>
-  <light-coverage>10000000.0</light-coverage>
-  <shininess>2.5</shininess>
-  <rolling-friction>0.1</rolling-friction>
-  <friction-factor>0.7</friction-factor>
-  <bumpiness>0.1</bumpiness>
-</material>
-
-
 <!-- special Kau'ai and Oahu shrub cover - more green (this is seen in satellite images  -->
-
 <material>
   <condition>
    <and>
@@ -945,36 +869,8 @@
   <bumpiness>0.4</bumpiness>
 </material>
 
-
 <!-- Hawaii red sand shrub cover -->
-
-<material>
-  <condition>
-   <and>
-   <equals>
-    <property>sim/startup/season</property>
-    <value>summer</value>
-   </equals>
-    <and>
-     <greater-than>
-      <property>position/longitude-deg</property>
-      <value>-179.0</value>
-     </greater-than>
-     <less-than>
-      <property>position/longitude-deg</property>
-      <value>-154.0</value>
-     </less-than>
-     <greater-than>
-      <property>position/latitude-deg</property>
-      <value>18.8</value>
-     </greater-than>
-     <less-than>
-      <property>position/latitude-deg</property>
-      <value>28.5</value>
-     </less-than>
-    </and>
-   </and>
-  </condition>
+<material include="Materials/regions/hawaii.xml">
   <!--<effect>Effects/landmass-scrub</effect>-->
   <name>ShrubCover</name>
   <name>ShrubGrassCover</name>
@@ -1006,6 +902,549 @@
   <tree-width-m>2.0</tree-width-m>
   <rolling-friction>0.6</rolling-friction>
   <bumpiness>0.4</bumpiness>
+</material>
+
+<material include="Materials/regions/hawaii.xml">
+  <name>Town</name>
+  <name>SubUrban</name>
+  <texture>Terrain/town-europe.png</texture>
+  <object-mask>Terrain/town-europe.mask.png</object-mask>
+  <xsize>1024</xsize>
+  <ysize>1024</ysize>
+  <light-coverage>100000.0</light-coverage>
+  <emissive>
+   <r>0.05</r>
+   <g>0.05</g>
+   <b>0.02</b>
+   <a>1.0</a>
+  </emissive>
+  <object-group include="Materials/base/town-buildings.xml"/>
+  <building-coverage>500.0</building-coverage>
+  <building-small-ratio>0.9</building-small-ratio>
+  <building-medium-ratio>0.1</building-medium-ratio>
+  <building-large-ratio>0.0</building-large-ratio>
+  <wood-coverage>5000.0</wood-coverage>
+  <tree-texture>Trees/tropical-summer.png</tree-texture>
+  <tree-varieties>8</tree-varieties>
+  <tree-range-m alias="/params/forest/tree-range-m"/>
+  <tree-height-m>25.0</tree-height-m>
+  <tree-width-m>15.0</tree-width-m>
+</material>
+
+<!-- More green Oahu and Kaua'i tundra cover -->
+<material>
+  <condition>
+   <and>
+   <equals>
+    <property>sim/startup/season</property>
+    <value>summer</value>
+   </equals>
+    <and>
+     <greater-than>
+      <property>position/longitude-deg</property>
+      <value>-160.0</value>
+     </greater-than>
+     <less-than>
+      <property>position/longitude-deg</property>
+      <value>-157.5</value>
+     </less-than>
+     <greater-than>
+      <property>position/latitude-deg</property>
+      <value>18.8</value>
+     </greater-than>
+     <less-than>
+      <property>position/latitude-deg</property>
+      <value>28.5</value>
+     </less-than>
+    </and>
+   </and>
+  </condition>
+  <name>GrassCover</name>
+  <name>BareTundraCover</name>
+  <name>MixedTundraCover</name>
+  <name>Cemetery</name>
+  <effect>Effects/landmass-nowood</effect>
+  <texture>Terrain/tundra-hawaii-green.png</texture>
+  <xsize>2000</xsize>
+  <ysize>2000</ysize>
+  <light-coverage>4000000.0</light-coverage>
+  <diffuse>
+   <r>0.93</r>
+   <g>0.95</g>
+   <b>0.93</b>
+   <a>1.0</a>
+  </diffuse>
+  <specular>
+   <r>0.1</r>
+   <g>0.12</g>
+   <b>0.1</b>
+   <a>1.0</a>
+  </specular>
+  <shininess>1.2</shininess>
+  <solid>1</solid>
+  <friction-factor>0.7</friction-factor>
+  <rolling-friction>0.1</rolling-friction>
+  <bumpiness>0.15</bumpiness>
+  <load-resistance>1e30</load-resistance>
+</material>
+
+
+<!-- Hawaii tundra cover -->
+<material include="Materials/regions/hawaii.xml">
+  <name>GrassCover</name>
+  <name>BareTundraCover</name>
+  <name>MixedTundraCover</name>
+  <name>Cemetery</name>
+  <effect>Effects/landmass-nowood</effect>
+  <texture>Terrain/tundra-hawaii.png</texture>
+  <xsize>2000</xsize>
+  <ysize>2000</ysize>
+  <light-coverage>4000000.0</light-coverage>
+  <diffuse>
+   <r>0.93</r>
+   <g>0.95</g>
+   <b>0.93</b>
+   <a>1.0</a>
+  </diffuse>
+  <specular>
+   <r>0.1</r>
+   <g>0.12</g>
+   <b>0.1</b>
+   <a>1.0</a>
+  </specular>
+  <shininess>1.2</shininess>
+  <solid>1</solid>
+  <friction-factor>0.7</friction-factor>
+  <rolling-friction>0.1</rolling-friction>
+  <bumpiness>0.15</bumpiness>
+  <load-resistance>1e30</load-resistance>
+</material>
+
+<material include="Materials/regions/hawaii.xml">
+  <effect>Effects/crop</effect>
+  <name>MixedCropPastureCover</name>
+  <name>MixedCrop</name>
+  <name>ComplexCrop</name>
+  <texture>Terrain/rice1.png</texture>
+  <object-mask>Terrain/rice1.mask.png</object-mask>
+  <xsize>2000</xsize>
+  <ysize>2000</ysize>
+  <light-coverage>2000000.0</light-coverage>
+  <solid>1</solid>
+  <friction-factor>0.9</friction-factor>
+  <rolling-friction>0.1</rolling-friction>
+  <bumpiness>0.7</bumpiness>
+  <load-resistance>1e30</load-resistance>
+  <object-group include="Materials/base/farm-buildings.xml"/>
+  <wood-coverage>10000.0</wood-coverage>
+  <tree-texture>Trees/mixed-summer.png</tree-texture>
+  <tree-varieties>8</tree-varieties>
+  <tree-range-m alias="/params/forest/tree-range-m"/>
+  <tree-height-m>20.0</tree-height-m>
+  <tree-width-m>12.0</tree-width-m>
+</material>
+
+<!-- REGIONAL DEFINITIONS - EUROPE                        -->
+
+<material include="Materials/regions/european.xml">
+  <effect>Effects/cropgrass</effect>
+  <name>CropGrassCover</name>
+  <name>CropGrass</name>
+  <name>Grassland</name>
+  <texture>Terrain/cropgrass-hires.png</texture>
+  <object-mask>Terrain/cropgrass-hires.mask.png</object-mask>
+  <xsize>2000</xsize>
+  <ysize>2000</ysize>
+  <light-coverage>2000000.0</light-coverage>
+  <diffuse>
+   <r>0.93</r>
+   <g>0.95</g>
+   <b>0.93</b>
+   <a>1.0</a>
+  </diffuse>
+  <specular>
+   <r>0.1</r>
+   <g>0.12</g>
+   <b>0.1</b>
+   <a>1.0</a>
+  </specular>
+  <shininess>1.2</shininess>
+  <solid>1</solid>
+  <friction-factor>0.7</friction-factor>
+  <rolling-friction>0.1</rolling-friction>
+  <bumpiness>0.3</bumpiness>
+  <load-resistance>1e30</load-resistance>
+  <wood-coverage>5000.0</wood-coverage>
+  <object-group include="Materials/base/farm-buildings.xml"/>
+  <tree-texture>Trees/mixed-summer.png</tree-texture>
+  <tree-varieties>8</tree-varieties>
+  <tree-range-m alias="/params/forest/tree-range-m"/>
+  <tree-height-m>20.0</tree-height-m>
+  <tree-width-m>12.0</tree-width-m>
+</material>
+
+<material include="Materials/regions/european.xml">
+  <name>BuiltUpCover</name>
+  <name>Urban</name>
+  <texture>Terrain/18th_century_city.png</texture>
+  <object-mask>Terrain/18th_century_city.mask.png</object-mask>
+  <xsize>1000</xsize>
+  <ysize>1000</ysize>
+  <light-coverage>100000.0</light-coverage>
+  <emissive>
+   <r>0.05</r>
+   <g>0.05</g>
+   <b>0.02</b>
+   <a>1.0</a>
+  </emissive>
+  <object-group include="Materials/base/urban-buildings.xml"/>
+  <building-coverage>500.0</building-coverage>
+  <building-small-ratio>0.4</building-small-ratio>
+  <building-small-min-floors>3</building-small-min-floors>
+  <building-small-max-width-m>30.0</building-small-max-width-m>
+  <building-small-min-depth-m>10.0</building-small-min-depth-m>
+  <building-small-max-depth-m>30.0</building-small-max-depth-m>
+  <building-medium-ratio>0.6</building-medium-ratio>
+  <building-large-ratio>0.2</building-large-ratio>
+  <wood-coverage>250000.0</wood-coverage>
+  <tree-texture>Trees/deciduous-summer.png</tree-texture>
+  <tree-varieties>8</tree-varieties>
+  <tree-range-m alias="/params/forest/tree-range-m"/>
+  <tree-height-m>15.0</tree-height-m>
+  <tree-width-m>10.0</tree-width-m>
+</material>
+
+<material include="Materials/regions/european.xml">
+  <name>Town</name>
+  <name>SubUrban</name>
+  <texture>Terrain/town-europe.png</texture>
+  <object-mask>Terrain/town-europe.mask.png</object-mask>
+  <xsize>1024</xsize>
+  <ysize>1024</ysize>
+  <light-coverage>100000.0</light-coverage>
+  <emissive>
+   <r>0.05</r>
+   <g>0.05</g>
+   <b>0.02</b>
+   <a>1.0</a>
+  </emissive>
+  <object-group include="Materials/base/town-buildings.xml"/>
+  <building-coverage>500.0</building-coverage>
+  <building-small-ratio>0.9</building-small-ratio>
+  <building-medium-ratio>0.1</building-medium-ratio>
+  <building-large-ratio>0.0</building-large-ratio>
+  <building-medium-max-floors>4</building-medium-max-floors>
+  <wood-coverage>1000.0</wood-coverage>
+  <tree-texture>Trees/deciduous-summer.png</tree-texture>
+  <tree-varieties>8</tree-varieties>
+  <tree-range-m alias="/params/forest/tree-range-m"/>
+  <tree-height-m>15.0</tree-height-m>
+  <tree-width-m>10.0</tree-width-m>
+</material>
+
+<material include="Materials/regions/european.xml">
+  <name>Marsh</name>
+  <name>Littoral</name>
+  <name>FloodLand</name>
+  <name>SaltMarsh</name>
+  <name>HerbWetlandCover</name>
+  <name>WoodedWetlandCover</name>
+  <texture>Terrain/marsh2a.png</texture>
+  <texture>Terrain/marsh3a.png</texture>
+  <texture>Terrain/marsh4a.png</texture>
+  <xsize>2000</xsize>
+  <ysize>2000</ysize>
+  <solid>1</solid>
+  <light-coverage>40000000.0</light-coverage>
+  <friction-factor>0.8</friction-factor>
+  <rolling-friction>0.3</rolling-friction>
+  <bumpiness>0.2</bumpiness>
+  <load-resistance>1e30</load-resistance>
+</material>
+
+<material include="Materials/regions/european.xml">
+  <effect>Effects/crop</effect>
+  <name>MixedCropPastureCover</name>
+  <name>MixedCrop</name>
+  <name>ComplexCrop</name>
+  <texture>Terrain/irrcrop-europe.png</texture>
+  <object-mask>Terrain/irrcrop-europe.mask.png</object-mask>
+  <xsize>2000</xsize>
+  <ysize>2000</ysize>
+  <light-coverage>2000000.0</light-coverage>
+  <solid>1</solid>
+  <friction-factor>0.9</friction-factor>
+  <rolling-friction>0.1</rolling-friction>
+  <bumpiness>0.7</bumpiness>
+  <load-resistance>1e30</load-resistance>
+  <object-group include="Materials/base/farm-buildings.xml"/>
+  <wood-coverage>5000.0</wood-coverage>
+  <tree-texture>Trees/mixed-summer.png</tree-texture>
+  <tree-varieties>8</tree-varieties>
+  <tree-range-m alias="/params/forest/tree-range-m"/>
+  <tree-height-m>20.0</tree-height-m>
+  <tree-width-m>12.0</tree-width-m>
+</material>
+
+<material include="Materials/regions/european.xml">
+  <effect>Effects/crop</effect>
+  <name>IrrCropPastureCover</name>
+  <name>IrrCrop</name>
+  <name>Orchard</name>
+  <name>Olives</name>
+  <name>Vineyard</name>
+  <name>Rice</name>
+  <texture>Terrain/irrcrop-europe.png</texture>
+  <object-mask>Terrain/irrcrop-europe.mask.png</object-mask>
+  <xsize>2000</xsize>
+  <ysize>2000</ysize>
+  <light-coverage>2000000.0</light-coverage>
+  <solid>1</solid>
+  <friction-factor>0.9</friction-factor>
+  <rolling-friction>0.3</rolling-friction>
+  <bumpiness>0.6</bumpiness>
+  <load-resistance>1e30</load-resistance>
+  <object-group include="Materials/base/farm-buildings.xml"/>
+  <wood-coverage>5000.0</wood-coverage>
+  <tree-texture>Trees/mixed-summer.png</tree-texture>
+  <tree-varieties>8</tree-varieties>
+  <tree-range-m alias="/params/forest/tree-range-m"/>
+  <tree-height-m>20.0</tree-height-m>
+  <tree-width-m>12.0</tree-width-m>
+</material>
+
+
+<!-- REGIONAL DEFINITIONS - ASIA                          -->
+
+<!-- Regional Asian irrigated crops -->
+<material>
+  <condition>
+  <and>
+   <equals>
+    <property>sim/startup/season</property>
+    <value>summer</value>
+   </equals>
+    <and>
+     <greater-than>
+      <property>position/longitude-deg</property>
+      <value>60.0</value>
+     </greater-than>
+     <less-than>
+      <property>position/longitude-deg</property>
+      <value>180.0</value>
+     </less-than>
+     <greater-than>
+      <property>position/latitude-deg</property>
+      <value>-15.0</value>
+     </greater-than>
+     <less-than>
+      <property>position/latitude-deg</property>
+      <value>45.0</value>
+     </less-than>
+    </and>
+   </and>
+  </condition>
+  <effect>Effects/crop</effect>
+  <name>IrrCropPastureCover</name>
+  <name>IrrCrop</name>
+  <name>Orchard</name>
+  <name>Olives</name>
+  <name>Vineyard</name>
+  <name>Rice</name>
+  <texture>Terrain/rice1.png</texture>
+  <object-mask>Terrain/rice1.mask.png</object-mask>
+  <xsize>2000</xsize>
+  <ysize>2000</ysize>
+  <light-coverage>2000000.0</light-coverage>
+  <solid>1</solid>
+  <friction-factor>0.9</friction-factor>
+  <rolling-friction>0.3</rolling-friction>
+  <bumpiness>0.6</bumpiness>
+  <load-resistance>1e30</load-resistance>
+  <object-group include="Materials/base/farm-buildings.xml"/>
+  <wood-coverage>10000.0</wood-coverage>
+  <tree-texture>Trees/mixed-summer.png</tree-texture>
+  <tree-varieties>8</tree-varieties>
+  <tree-range-m alias="/params/forest/tree-range-m"/>
+  <tree-height-m>20.0</tree-height-m>
+  <tree-width-m>12.0</tree-width-m>
+</material>
+
+<!-- DEFAULT SUMMER DEFINITIONS                           -->
+
+<material>
+  <condition>
+   <equals>
+    <property>sim/startup/season</property>
+    <value>summer</value>
+   </equals>
+  </condition>
+  <name>Landmass</name>
+  <name>SomeSort</name>
+  <name>Island</name>
+  <name>Default</name>
+  <effect>Effects/landmass-nowood</effect>
+  <texture>Terrain/forest1a.png</texture>
+  <texture>Terrain/forest1b.png</texture>
+  <texture>Terrain/forest1c.png</texture>
+  <xsize>2000</xsize>
+  <ysize>2000</ysize>
+  <light-coverage>10000000.0</light-coverage>
+  <wood-coverage>4000.0</wood-coverage>
+  <tree-texture>Trees/coniferous-summer.png</tree-texture>
+  <tree-varieties>8</tree-varieties>
+  <tree-range-m alias="/params/forest/tree-range-m"/>
+  <tree-height-m>25.0</tree-height-m>
+  <tree-width-m>15.0</tree-width-m>
+  <rolling-friction>1</rolling-friction>
+  <bumpiness>1</bumpiness>
+</material>
+
+
+<material>
+  <condition>
+   <equals>
+    <property>sim/startup/season</property>
+    <value>summer</value>
+   </equals>
+  </condition>
+  <effect>Effects/forest</effect>
+  <name>DeciduousBroadCover</name>
+  <name>DeciduousForest</name>
+  <name>Bog</name>
+  <name>Heath</name>
+  <texture>Terrain/deciduous-hires.png</texture>
+  <xsize>2000</xsize>
+  <ysize>2000</ysize>
+  <light-coverage>10000000.0</light-coverage>
+  <wood-coverage>4000.0</wood-coverage>
+  <tree-texture>Trees/deciduous-summer.png</tree-texture>
+  <tree-varieties>8</tree-varieties>
+  <tree-range-m alias="/params/forest/tree-range-m"/>
+  <tree-height-m>25.0</tree-height-m>
+  <tree-width-m>15.0</tree-width-m>
+  <rolling-friction>1</rolling-friction>
+  <bumpiness>0.85</bumpiness>
+</material>
+
+
+
+<material>
+  <condition>
+   <equals>
+    <property>sim/startup/season</property>
+    <value>summer</value>
+   </equals>
+  </condition>
+  <effect>Effects/forest</effect>
+  <name>MixedForestCover</name>
+  <name>MixedForest</name>
+  <name>RainForest</name>
+  <texture>Terrain/mixedforest-hires.png</texture>
+  <xsize>2000</xsize>
+  <ysize>2000</ysize>
+  <light-coverage>5000000.0</light-coverage>
+  <wood-coverage>4000.0</wood-coverage>
+  <tree-texture>Trees/mixed-summer.png</tree-texture>
+  <tree-varieties>8</tree-varieties>
+  <tree-range-m alias="/params/forest/tree-range-m"/>
+  <tree-height-m>25.0</tree-height-m>
+  <tree-width-m>15.0</tree-width-m>
+  <rolling-friction>1</rolling-friction>
+  <bumpiness>0.95</bumpiness>
+</material>
+
+<material>
+  <condition>
+   <equals>
+    <property>sim/startup/season</property>
+    <value>summer</value>
+   </equals>
+  </condition>
+  <name>EvergreenBroadCover</name>
+  <name>EvergreenForest</name>
+  <effect>Effects/forest</effect>
+  <texture>Terrain/forest1a.png</texture>
+  <texture>Terrain/forest1b.png</texture>
+  <texture>Terrain/forest1c.png</texture>
+  <xsize>2000</xsize>
+  <ysize>2000</ysize>
+  <light-coverage>10000000.0</light-coverage>
+  <wood-coverage>4000.0</wood-coverage>
+  <tree-texture>Trees/coniferous-summer.png</tree-texture>
+  <tree-varieties>8</tree-varieties>
+  <tree-range-m alias="/params/forest/tree-range-m"/>
+  <tree-height-m>25.0</tree-height-m>
+  <tree-width-m>18.0</tree-width-m>
+  <rolling-friction>1</rolling-friction>
+  <bumpiness>1</bumpiness>
+</material>
+
+<material>
+  <condition>
+   <equals>
+    <property>sim/startup/season</property>
+    <value>summer</value>
+   </equals>
+  </condition>
+  <effect>Effects/forest</effect>
+  <name>EvergreenNeedleCover</name>
+  <name>WoodedTundraCover</name>
+  <texture>Terrain/dec_evergreen-hires.png</texture>
+  <xsize>1000</xsize>
+  <ysize>1000</ysize>
+  <light-coverage>10000000.0</light-coverage>
+  <wood-coverage>4000.0</wood-coverage>
+  <tree-texture>Trees/coniferous-summer.png</tree-texture>
+  <tree-varieties>8</tree-varieties>
+  <tree-range-m alias="/params/forest/tree-range-m"/>
+  <tree-height-m>20.0</tree-height-m>
+  <tree-width-m>15.0</tree-width-m>
+  <rolling-friction>1</rolling-friction>
+  <bumpiness>1</bumpiness>
+</material>
+
+<material>
+  <condition>
+   <equals>
+    <property>sim/startup/season</property>
+    <value>summer</value>
+   </equals>
+  </condition>
+  <effect>Effects/forest</effect>
+  <name>DeciduousNeedleCover</name>
+  <texture>Terrain/dec_evergreen-hires.png</texture>
+  <xsize>1000</xsize>
+  <ysize>1000</ysize>
+  <light-coverage>10000000.0</light-coverage>
+  <wood-coverage>4000.0</wood-coverage>
+  <tree-texture>Trees/coniferous-summer.png</tree-texture>
+  <tree-varieties>8</tree-varieties>
+  <tree-range-m alias="/params/forest/tree-range-m"/>
+  <tree-height-m>15.0</tree-height-m>
+  <tree-width-m>8.0</tree-width-m>
+  <rolling-friction>1</rolling-friction>
+  <bumpiness>1</bumpiness>
+</material>
+
+<material>
+  <condition>
+   <equals>
+    <property>sim/startup/season</property>
+    <value>summer</value>
+   </equals>
+  </condition>
+  <name>Sand</name>
+  <texture>Terrain/sand4.png</texture>
+  <texture>Terrain/sand5.png</texture>
+  <texture>Terrain/sand6.png</texture>
+  <xsize>2000</xsize>
+  <ysize>2000</ysize>
+  <light-coverage>10000000.0</light-coverage>
+  <shininess>2.5</shininess>
+  <rolling-friction>0.1</rolling-friction>
+  <friction-factor>0.7</friction-factor>
+  <bumpiness>0.1</bumpiness>
 </material>
 
 
@@ -1057,63 +1496,7 @@
 </material>
 
 
-<!-- Europe style city, currently without effects -->
-
-<material>
-  <condition>
-   <and>
-   <equals>
-    <property>sim/startup/season</property>
-    <value>summer</value>
-   </equals>
-    <and>
-     <greater-than>
-      <property>position/longitude-deg</property>
-      <value>-20.0</value>
-     </greater-than>
-     <less-than>
-      <property>position/longitude-deg</property>
-      <value>40.0</value>
-     </less-than>
-     <greater-than>
-      <property>position/latitude-deg</property>
-      <value>35.0</value>
-     </greater-than>
-    </and>
-   </and>
-  </condition>
-  <name>BuiltUpCover</name>
-  <name>Urban</name>
-  <texture>Terrain/18th_century_city.png</texture>
-  <object-mask>Terrain/18th_century_city.mask.png</object-mask>
-  <xsize>1000</xsize>
-  <ysize>1000</ysize>
-  <light-coverage>100000.0</light-coverage>
-  <emissive>
-   <r>0.05</r>
-   <g>0.05</g>
-   <b>0.02</b>
-   <a>1.0</a>
-  </emissive>
-  <object-group include="Materials/base/urban-buildings.xml"/>
-  <building-coverage>500.0</building-coverage>
-  <building-small-ratio>0.4</building-small-ratio>
-  <building-small-min-floors>3</building-small-min-floors>
-  <building-small-max-width-m>30.0</building-small-max-width-m>
-  <building-small-min-depth-m>10.0</building-small-min-depth-m>
-  <building-small-max-depth-m>30.0</building-small-max-depth-m>
-  <building-medium-ratio>0.6</building-medium-ratio>
-  <building-large-ratio>0.2</building-large-ratio>
-  <wood-coverage>250000.0</wood-coverage>
-  <tree-texture>Trees/deciduous-summer.png</tree-texture>
-  <tree-varieties>8</tree-varieties>
-  <tree-range-m alias="/params/forest/tree-range-m"/>
-  <tree-height-m>15.0</tree-height-m>
-  <tree-width-m>10.0</tree-width-m>
-</material>
-
 <!-- default US style city -->
-
 <material>
   <condition>
    <equals>
@@ -1186,119 +1569,7 @@
 	<object-group include="Materials/base/industrial-buildings.xml"/>
 </material>
 
-
-<!-- regional town Hawaii -->
-
-<material>
-  <condition>
-  <and>
-   <equals>
-    <property>sim/startup/season</property>
-    <value>summer</value>
-   </equals>
-    <and>
-     <greater-than>
-      <property>position/longitude-deg</property>
-      <value>-179.0</value>
-     </greater-than>
-     <less-than>
-      <property>position/longitude-deg</property>
-      <value>-154.0</value>
-     </less-than>
-     <greater-than>
-      <property>position/latitude-deg</property>
-      <value>18.8</value>
-     </greater-than>
-     <less-than>
-      <property>position/latitude-deg</property>
-      <value>28.5</value>
-     </less-than>
-    </and>
-   </and>
-  </condition>
-  <name>Town</name>
-  <name>SubUrban</name>
-  <texture>Terrain/town-europe.png</texture>
-  <object-mask>Terrain/town-europe.mask.png</object-mask>
-  <xsize>1024</xsize>
-  <ysize>1024</ysize>
-  <light-coverage>100000.0</light-coverage>
-  <emissive>
-   <r>0.05</r>
-   <g>0.05</g>
-   <b>0.02</b>
-   <a>1.0</a>
-  </emissive>
-  <object-group include="Materials/base/town-buildings.xml"/>
-  <building-coverage>500.0</building-coverage>
-  <building-small-ratio>0.9</building-small-ratio>
-  <building-medium-ratio>0.1</building-medium-ratio>
-  <building-large-ratio>0.0</building-large-ratio>
-  <building-medium-max-floors>4</building-medium-max-floors>
-  <wood-coverage>5000.0</wood-coverage>
-  <tree-texture>Trees/mixed-summer.png</tree-texture>
-  <tree-varieties>8</tree-varieties>
-  <tree-range-m alias="/params/forest/tree-range-m"/>
-  <tree-height-m>25.0</tree-height-m>
-  <tree-width-m>15.0</tree-width-m>
-</material>
-
-
-<!-- regional town Europe -->
-
-<material>
-  <condition>
-   <and>
-   <equals>
-    <property>sim/startup/season</property>
-    <value>summer</value>
-   </equals>
-    <and>
-     <greater-than>
-      <property>position/longitude-deg</property>
-      <value>-20.0</value>
-     </greater-than>
-     <less-than>
-      <property>position/longitude-deg</property>
-      <value>40.0</value>
-     </less-than>
-     <greater-than>
-      <property>position/latitude-deg</property>
-      <value>35.0</value>
-     </greater-than>
-    </and>
-   </and>
-  </condition>
-  <name>Town</name>
-  <name>SubUrban</name>
-  <texture>Terrain/town-europe.png</texture>
-  <object-mask>Terrain/town-europe.mask.png</object-mask>
-  <xsize>1024</xsize>
-  <ysize>1024</ysize>
-  <light-coverage>100000.0</light-coverage>
-  <emissive>
-   <r>0.05</r>
-   <g>0.05</g>
-   <b>0.02</b>
-   <a>1.0</a>
-  </emissive>
-  <object-group include="Materials/base/town-buildings.xml"/>
-  <building-coverage>500.0</building-coverage>
-  <building-small-ratio>0.9</building-small-ratio>
-  <building-medium-ratio>0.1</building-medium-ratio>
-  <building-large-ratio>0.0</building-large-ratio>
-  <building-medium-max-floors>4</building-medium-max-floors>
-  <wood-coverage>1000.0</wood-coverage>
-  <tree-texture>Trees/deciduous-summer.png</tree-texture>
-  <tree-varieties>8</tree-varieties>
-  <tree-range-m alias="/params/forest/tree-range-m"/>
-  <tree-height-m>15.0</tree-height-m>
-  <tree-width-m>10.0</tree-width-m>
-</material>
-
 <!-- default town US style -->
-
-
 <material>
   <condition>
    <equals>
@@ -1421,51 +1692,6 @@
   <bumpiness>0.6</bumpiness>
 </material>
 
-<!-- Europe - better blended with agriculture textures -->
-
-<material>
-  <condition>
-   <and>
-   <equals>
-    <property>sim/startup/season</property>
-    <value>summer</value>
-   </equals>
-    <and>
-     <greater-than>
-      <property>position/longitude-deg</property>
-      <value>-20.0</value>
-     </greater-than>
-     <less-than>
-      <property>position/longitude-deg</property>
-      <value>40.0</value>
-     </less-than>
-     <greater-than>
-      <property>position/latitude-deg</property>
-      <value>35.0</value>
-     </greater-than>
-    </and>
-   </and>
-  </condition>
-  <name>Marsh</name>
-  <name>Littoral</name>
-  <name>FloodLand</name>
-  <name>SaltMarsh</name>
-  <name>HerbWetlandCover</name>
-  <name>WoodedWetlandCover</name>
-  <texture>Terrain/marsh2a.png</texture>
-  <texture>Terrain/marsh3a.png</texture>
-  <texture>Terrain/marsh4a.png</texture>
-  <xsize>2000</xsize>
-  <ysize>2000</ysize>
-  <solid>1</solid>
-  <light-coverage>40000000.0</light-coverage>
-  <friction-factor>0.8</friction-factor>
-  <rolling-friction>0.3</rolling-friction>
-  <bumpiness>0.2</bumpiness>
-  <load-resistance>1e30</load-resistance>
-</material>
-
-
 <material>
   <condition>
    <equals>
@@ -1491,125 +1717,6 @@
   <bumpiness>0.2</bumpiness>
   <load-resistance>1e30</load-resistance>
 </material>
-
-
-<!-- More green Oahu and Kaua'i tundra cover -->
-
-<material>
-  <condition>
-   <and>
-   <equals>
-    <property>sim/startup/season</property>
-    <value>summer</value>
-   </equals>
-    <and>
-     <greater-than>
-      <property>position/longitude-deg</property>
-      <value>-160.0</value>
-     </greater-than>
-     <less-than>
-      <property>position/longitude-deg</property>
-      <value>-157.5</value>
-     </less-than>
-     <greater-than>
-      <property>position/latitude-deg</property>
-      <value>18.8</value>
-     </greater-than>
-     <less-than>
-      <property>position/latitude-deg</property>
-      <value>28.5</value>
-     </less-than>
-    </and>
-   </and>
-  </condition>
-  <name>GrassCover</name>
-  <name>BareTundraCover</name>
-  <name>MixedTundraCover</name>
-  <name>Cemetery</name>
-  <effect>Effects/landmass-nowood</effect>
-  <texture>Terrain/tundra-hawaii-green.png</texture>
-  <xsize>2000</xsize>
-  <ysize>2000</ysize>
-  <light-coverage>4000000.0</light-coverage>
-  <diffuse>
-   <r>0.93</r>
-   <g>0.95</g>
-   <b>0.93</b>
-   <a>1.0</a>
-  </diffuse>
-  <specular>
-   <r>0.1</r>
-   <g>0.12</g>
-   <b>0.1</b>
-   <a>1.0</a>
-  </specular>
-  <shininess>1.2</shininess>
-  <solid>1</solid>
-  <friction-factor>0.7</friction-factor>
-  <rolling-friction>0.1</rolling-friction>
-  <bumpiness>0.15</bumpiness>
-  <load-resistance>1e30</load-resistance>
-</material>
-
-
-<!-- Hawaii tundra cover -->
-
-<material>
-  <condition>
-   <and>
-   <equals>
-    <property>sim/startup/season</property>
-    <value>summer</value>
-   </equals>
-    <and>
-     <greater-than>
-      <property>position/longitude-deg</property>
-      <value>-179.0</value>
-     </greater-than>
-     <less-than>
-      <property>position/longitude-deg</property>
-      <value>-154.0</value>
-     </less-than>
-     <greater-than>
-      <property>position/latitude-deg</property>
-      <value>18.8</value>
-     </greater-than>
-     <less-than>
-      <property>position/latitude-deg</property>
-      <value>28.5</value>
-     </less-than>
-    </and>
-   </and>
-  </condition>
-  <name>GrassCover</name>
-  <name>BareTundraCover</name>
-  <name>MixedTundraCover</name>
-  <name>Cemetery</name>
-  <effect>Effects/landmass-nowood</effect>
-  <texture>Terrain/tundra-hawaii.png</texture>
-  <xsize>2000</xsize>
-  <ysize>2000</ysize>
-  <light-coverage>4000000.0</light-coverage>
-  <diffuse>
-   <r>0.93</r>
-   <g>0.95</g>
-   <b>0.93</b>
-   <a>1.0</a>
-  </diffuse>
-  <specular>
-   <r>0.1</r>
-   <g>0.12</g>
-   <b>0.1</b>
-   <a>1.0</a>
-  </specular>
-  <shininess>1.2</shininess>
-  <solid>1</solid>
-  <friction-factor>0.7</friction-factor>
-  <rolling-friction>0.1</rolling-friction>
-  <bumpiness>0.15</bumpiness>
-  <load-resistance>1e30</load-resistance>
-</material>
-
 
 <material>
   <condition>
@@ -1739,111 +1846,7 @@
   <load-resistance>1e30</load-resistance>
 </material>
 
-<!-- European style mixed crop-->
-
-<material>
-  <condition>
- <and>
-   <equals>
-    <property>sim/startup/season</property>
-    <value>summer</value>
-   </equals>
-    <and>
-     <greater-than>
-      <property>position/longitude-deg</property>
-      <value>-20.0</value>
-     </greater-than>
-     <less-than>
-      <property>position/longitude-deg</property>
-      <value>40.0</value>
-     </less-than>
-     <greater-than>
-      <property>position/latitude-deg</property>
-      <value>35.0</value>
-     </greater-than>
-    </and>
-   </and>
-  </condition>
-  <effect>Effects/crop</effect>
-  <name>MixedCropPastureCover</name>
-  <name>MixedCrop</name>
-  <name>ComplexCrop</name>
-  <texture>Terrain/irrcrop-europe.png</texture>
-  <object-mask>Terrain/irrcrop-europe.mask.png</object-mask>
-  <xsize>2000</xsize>
-  <ysize>2000</ysize>
-  <light-coverage>2000000.0</light-coverage>
-  <solid>1</solid>
-  <friction-factor>0.9</friction-factor>
-  <rolling-friction>0.1</rolling-friction>
-  <bumpiness>0.7</bumpiness>
-  <load-resistance>1e30</load-resistance>
-  <object-group include="Materials/base/farm-buildings.xml"/>
-  <wood-coverage>5000.0</wood-coverage>
-  <tree-texture>Trees/mixed-summer.png</tree-texture>
-  <tree-varieties>8</tree-varieties>
-  <tree-range-m alias="/params/forest/tree-range-m"/>
-  <tree-height-m>20.0</tree-height-m>
-  <tree-width-m>12.0</tree-width-m>
-</material>
-
-
-<!-- regional Hawaii mixed crop -->
-
-<material>
-  <condition>
-   <and>
-   <equals>
-    <property>sim/startup/season</property>
-    <value>summer</value>
-   </equals>
-    <and>
-     <greater-than>
-      <property>position/longitude-deg</property>
-      <value>-179.0</value>
-     </greater-than>
-     <less-than>
-      <property>position/longitude-deg</property>
-      <value>-154.0</value>
-     </less-than>
-     <greater-than>
-      <property>position/latitude-deg</property>
-      <value>18.8</value>
-     </greater-than>
-     <less-than>
-      <property>position/latitude-deg</property>
-      <value>28.5</value>
-     </less-than>
-    </and>
-   </and>
-  </condition>
-  <effect>Effects/crop</effect>
-  <name>MixedCropPastureCover</name>
-  <name>MixedCrop</name>
-  <name>ComplexCrop</name>
-  <texture>Terrain/rice1.png</texture>
-  <object-mask>Terrain/rice1.mask.png</object-mask>
-  <xsize>2000</xsize>
-  <ysize>2000</ysize>
-  <light-coverage>2000000.0</light-coverage>
-  <solid>1</solid>
-  <friction-factor>0.9</friction-factor>
-  <rolling-friction>0.1</rolling-friction>
-  <bumpiness>0.7</bumpiness>
-  <load-resistance>1e30</load-resistance>
-  <object-group include="Materials/base/farm-buildings.xml"/>
-  <wood-coverage>10000.0</wood-coverage>
-  <tree-texture>Trees/mixed-summer.png</tree-texture>
-  <tree-varieties>8</tree-varieties>
-  <tree-range-m alias="/params/forest/tree-range-m"/>
-  <tree-height-m>20.0</tree-height-m>
-  <tree-width-m>12.0</tree-width-m>
-</material>
-
-
-
 <!-- default mixed crop -->
-
 <material>
   <condition>
    <equals>
@@ -1878,122 +1881,7 @@
   <tree-width-m>12.0</tree-width-m>
 </material>
 
-
-<!-- regional Asian irrigated crops -->
-
-<material>
-  <condition>
-  <and>
-   <equals>
-    <property>sim/startup/season</property>
-    <value>summer</value>
-   </equals>
-    <and>
-     <greater-than>
-      <property>position/longitude-deg</property>
-      <value>60.0</value>
-     </greater-than>
-     <less-than>
-      <property>position/longitude-deg</property>
-      <value>180.0</value>
-     </less-than>
-     <greater-than>
-      <property>position/latitude-deg</property>
-      <value>-15.0</value>
-     </greater-than>
-     <less-than>
-      <property>position/latitude-deg</property>
-      <value>45.0</value>
-     </less-than>
-    </and>
-   </and>
-  </condition>
-  <effect>Effects/crop</effect>
-  <name>IrrCropPastureCover</name>
-  <name>IrrCrop</name>
-  <name>Orchard</name>
-  <name>Olives</name>
-  <name>Vineyard</name>
-  <name>Rice</name>
-  <texture>Terrain/rice1.png</texture>
-  <object-mask>Terrain/rice1.mask.png</object-mask>
-  <xsize>2000</xsize>
-  <ysize>2000</ysize>
-  <light-coverage>2000000.0</light-coverage>
-  <solid>1</solid>
-  <friction-factor>0.9</friction-factor>
-  <rolling-friction>0.3</rolling-friction>
-  <bumpiness>0.6</bumpiness>
-  <load-resistance>1e30</load-resistance>
-  <object-group include="Materials/base/farm-buildings.xml"/>
-  <wood-coverage>10000.0</wood-coverage>
-  <tree-texture>Trees/mixed-summer.png</tree-texture>
-  <tree-varieties>8</tree-varieties>
-  <tree-range-m alias="/params/forest/tree-range-m"/>
-  <tree-height-m>20.0</tree-height-m>
-  <tree-width-m>12.0</tree-width-m>
-</material>
-
-
-<!-- European irrigated crops -->
-
-<material>
-  <condition>
-  <and>
-   <equals>
-    <property>sim/startup/season</property>
-    <value>summer</value>
-   </equals>
-    <and>
-     <greater-than>
-      <property>position/longitude-deg</property>
-      <value>-20.0</value>
-     </greater-than>
-     <less-than>
-      <property>position/longitude-deg</property>
-      <value>40.0</value>
-     </less-than>
-     <greater-than>
-      <property>position/latitude-deg</property>
-      <value>35.0</value>
-     </greater-than>
-    </and>
-   </and>
-  </condition>
-  <effect>Effects/crop</effect>
-  <name>IrrCropPastureCover</name>
-  <name>IrrCrop</name>
-  <name>Orchard</name>
-  <name>Olives</name>
-  <name>Vineyard</name>
-  <name>Rice</name>
-  <texture>Terrain/irrcrop-europe.png</texture>
-  <object-mask>Terrain/irrcrop-europe.mask.png</object-mask>
-  <!--<texture>Terrain/irrcrop1.png</texture>
-  <texture>Terrain/irrcrop2.png</texture>
-  <texture>Terrain/irrcrop3.png</texture>
-  <object-mask>Terrain/irrcrop1.mask.png</object-mask>
-  <object-mask>Terrain/irrcrop2.mask.png</object-mask>
-  <object-mask>Terrain/irrcrop3.mask.png</object-mask>-->
-  <xsize>2000</xsize>
-  <ysize>2000</ysize>
-  <light-coverage>2000000.0</light-coverage>
-  <solid>1</solid>
-  <friction-factor>0.9</friction-factor>
-  <rolling-friction>0.3</rolling-friction>
-  <bumpiness>0.6</bumpiness>
-  <load-resistance>1e30</load-resistance>
-  <object-group include="Materials/base/farm-buildings.xml"/>
-  <wood-coverage>5000.0</wood-coverage>
-  <tree-texture>Trees/mixed-summer.png</tree-texture>
-  <tree-varieties>8</tree-varieties>
-  <tree-range-m alias="/params/forest/tree-range-m"/>
-  <tree-height-m>20.0</tree-height-m>
-  <tree-width-m>12.0</tree-width-m>
-</material>
-
 <!-- default US style irrigated crops -->
-
 <material>
   <condition>
    <equals>
@@ -2093,69 +1981,8 @@
   <tree-width-m>12.0</tree-width-m>
 </material>
 
-<!-- European style cropgrass -->
-
-<material>
-  <condition>
-   <and>
-   <equals>
-    <property>sim/startup/season</property>
-    <value>summer</value>
-   </equals>
-    <and>
-     <greater-than>
-      <property>position/longitude-deg</property>
-      <value>-20.0</value>
-     </greater-than>
-     <less-than>
-      <property>position/longitude-deg</property>
-      <value>40.0</value>
-     </less-than>
-     <greater-than>
-      <property>position/latitude-deg</property>
-      <value>35.0</value>
-     </greater-than>
-    </and>
-   </and>
-  </condition>
-  <effect>Effects/cropgrass</effect>
-  <name>CropGrassCover</name>
-  <name>CropGrass</name>
-  <name>Grassland</name>
-  <texture>Terrain/cropgrass-hires.png</texture>
-  <object-mask>Terrain/cropgrass-hires.mask.png</object-mask>
-  <xsize>2000</xsize>
-  <ysize>2000</ysize>
-  <light-coverage>2000000.0</light-coverage>
-  <diffuse>
-   <r>0.93</r>
-   <g>0.95</g>
-   <b>0.93</b>
-   <a>1.0</a>
-  </diffuse>
-  <specular>
-   <r>0.1</r>
-   <g>0.12</g>
-   <b>0.1</b>
-   <a>1.0</a>
-  </specular>
-  <shininess>1.2</shininess>
-  <solid>1</solid>
-  <friction-factor>0.7</friction-factor>
-  <rolling-friction>0.1</rolling-friction>
-  <bumpiness>0.3</bumpiness>
-  <load-resistance>1e30</load-resistance>
-  <wood-coverage>5000.0</wood-coverage>
-  <object-group include="Materials/base/farm-buildings.xml"/>
-  <tree-texture>Trees/mixed-summer.png</tree-texture>
-  <tree-varieties>8</tree-varieties>
-  <tree-range-m alias="/params/forest/tree-range-m"/>
-  <tree-height-m>20.0</tree-height-m>
-  <tree-width-m>12.0</tree-width-m>
-</material>
 
 <!-- default US style cropgrass -->
-
 <material>
   <condition>
    <equals>
@@ -2267,9 +2094,11 @@
   <tree-width-m>12.0</tree-width-m>
 </material>
 
- <!-- end summer-->
+<!-- end summer-->
 
- <!-- Winter-->
+
+
+<!-- DEFAULT WINTER DEFINITIONS                           -->
 
 <material>
   <condition>
@@ -3032,18 +2861,18 @@
   <tree-width-m>12.0</tree-width-m>
 </material>
 
- <!-- end winter-->
+<!-- end winter-->
 
- <material include="Materials/base/rock.xml">
+<material include="Materials/base/rock.xml">
   <name>BarrenCover</name>
   <name>Dirt</name>
   <name>OpenMining</name>
   <name>Rock</name>
   <name>Dump</name>
   <texture>Terrain/rock.png</texture>
- </material>
+</material>
 
- <!-- runway and taxiway signs -->
+<!-- runway and taxiway signs -->
 
 <material include="Materials/base/glyphs-yellow.xml">
   <name>YellowSign</name>

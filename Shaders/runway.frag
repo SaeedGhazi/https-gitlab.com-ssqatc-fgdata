@@ -38,8 +38,6 @@ uniform int fogType;
 vec3 fog_Func(vec3 color, int type);
 //////////////////////
 
-vec3 fog_Func(vec3 color, int type);
-
 void main (void)
 {
     //vec3 halfV;

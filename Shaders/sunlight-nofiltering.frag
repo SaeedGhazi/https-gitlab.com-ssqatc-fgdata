@@ -6,6 +6,7 @@ uniform sampler2D spec_emis_tex;
 uniform sampler2DShadow shadow_tex;
 uniform vec4 fg_SunDiffuseColor;
 uniform vec4 fg_SunSpecularColor;
+uniform vec4 fg_SunAmbientColor;
 uniform vec3 fg_SunDirection;
 uniform vec3 fg_Planes;
 uniform int fg_ShadowNumber;
@@ -81,7 +82,7 @@ void main() {
     }
 
     float matID = texture2D( color_tex, coords ).a * 255.0;
-    if (matID == 255.0)
+    if (matID >= 254.0)
         Idiff += Ispec * spec_emis.x;
 
     gl_FragColor = vec4(mix(vec3(0.0), Idiff + Ispec, shadow) + Iemis, 1.0);

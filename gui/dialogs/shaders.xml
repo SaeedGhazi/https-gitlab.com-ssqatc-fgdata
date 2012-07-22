@@ -118,6 +118,14 @@
 				<label>Water</label>
 			</text>
 
+			<text>
+				<halign>left</halign>
+				<label>Lights</label>
+				<enable>
+					<property>/sim/rendering/rembrandt/enabled</property>
+				</enable>
+			</text>
+
 		</group>
 
 		<group>
@@ -258,6 +266,23 @@
 				<binding>
 					<command>dialog-apply</command>
 					<object-name>water</object-name>
+				</binding>
+			</slider>
+
+			<slider>
+				<name>lights</name>
+				<enable>
+					<property>/sim/rendering/rembrandt/enabled</property>
+				</enable>
+				<min>0.0</min>
+				<max>4.0</max>
+				<step>1.0</step>
+				<fraction>0.2</fraction>
+				<live>true</live>
+				<property>/sim/rendering/shaders/lights</property>
+				<binding>
+					<command>dialog-apply</command>
+					<object-name>lights</object-name>
 				</binding>
 			</slider>
 

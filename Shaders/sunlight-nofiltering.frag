@@ -61,8 +61,6 @@ void main() {
     if ( spec_emis.a < 0.1 )
         discard;
     vec3 normal = normal_decode(texture2D( normal_tex, coords ).rg);
-    float len = length(normal);
-    normal /= len;
     vec3 viewDir = normalize(ray);
     vec3 pos = position( viewDir, coords, depth_tex );
 
@@ -72,14 +70,15 @@ void main() {
     lightDir = normalize( lightDir );
     vec3 color = texture2D( color_tex, coords ).rgb;
     vec3 Idiff = clamp( dot( lightDir, normal ), 0.0, 1.0 ) * color * fg_SunDiffuseColor.rgb;
-    vec3 halfDir = lightDir - viewDir;
-    len = length( halfDir );
+    vec3 halfDir = normalize( lightDir - viewDir );
     vec3 Ispec = vec3(0.0);
     vec3 Iemis = spec_emis.z * color;
-    if (len > 0.0001) {
-        halfDir /= len;
-        Ispec = pow( clamp( dot( halfDir, normal ), 0.0, 1.0 ), spec_emis.y * 128.0 ) * spec_emis.x * fg_SunSpecularColor.rgb;
-    }
+
+    float cosAngIncidence = clamp(dot(normal, lightDir), 0.0, 1.0);
+    float blinnTerm = clamp( dot( halfDir, normal ), 0.0, 1.0 );
+
+    if (cosAngIncidence > 0.0)
+        Ispec = pow( blinnTerm, spec_emis.y * 128.0 ) * spec_emis.x * fg_SunSpecularColor.rgb;
 
     float matID = texture2D( color_tex, coords ).a * 255.0;
     if (matID >= 254.0)

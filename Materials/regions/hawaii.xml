@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!-- General settings for all Hawaii materials -->
+<PropertyList>
+  <!-- Define Hawaii as a box with given latitude/longitude -->
+  <condition>
+   <and>
+     <greater-than>
+      <property>position/longitude-deg</property>
+      <value>-179.0</value>
+     </greater-than>
+     <less-than>
+      <property>position/longitude-deg</property>
+      <value>-154.0</value>
+     </less-than>
+     <greater-than>
+      <property>position/latitude-deg</property>
+      <value>18.8</value>
+     </greater-than>
+     <less-than>
+      <property>position/latitude-deg</property>
+      <value>28.5</value>
+     </less-than>
+   </and>
+  </condition>
+  
+  <!-- Hawaiian buildings definitions. Notes that these will be used for  -->
+  <!-- both towns and cities                                              -->
+  <building-texture>Textures/buildings-caribbean.png</building-texture>
+  <building-lightmap>Textures/buildings-caribbean-lightmap.png</building-lightmap>
+  <building-small-min-floors>1</building-small-min-floors>
+  <building-small-max-floors>2</building-small-max-floors>
+  <building-small-max-width-m>20.0</building-small-max-width-m>
+  <building-small-min-depth-m>8.0</building-small-min-depth-m>
+  <building-small-max-depth-m>20.0</building-small-max-depth-m>
+  <building-medium-min-floors>1</building-medium-min-floors>
+  <building-medium-max-floors>3</building-medium-max-floors>
+  
+</PropertyList>

@@ -76,7 +76,7 @@ void main (void)
 	//vec3 ambient = fg_SunAmbientColor.rgb;
 	vec3 N;
 	vec3 dotN;
-	float emission = dot( gl_FrontLightModelProduct.sceneColor.rgb + gl_FrontMaterial.emission,
+	float emission = dot( gl_FrontLightModelProduct.sceneColor.rgb + gl_FrontMaterial.emission.rgb,
 						  vec3( 0.3, 0.59, 0.11 ) );
 	float pf;
 

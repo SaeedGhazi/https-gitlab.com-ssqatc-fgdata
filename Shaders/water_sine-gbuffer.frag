@@ -97,7 +97,7 @@ float evaluateWaveSharp(Wave w, vec2 pos, float t, float k)
 
 float evaluateWaveDerivSharp(Wave w, vec2 pos, float t, float k)
     {
-    return k*w.freq*w.amp * pow(sin( dot(w.dir, pos)*w.freq + t*w.phase)* 0.5 + 0.5 , k - 1) * cos( dot(w.dir, pos)*w.freq + t*w.phase) ;
+    return k*w.freq*w.amp * pow(sin( dot(w.dir, pos)*w.freq + t*w.phase)* 0.5 + 0.5 , k - 1.0) * cos( dot(w.dir, pos)*w.freq + t*w.phase) ;
     }
 
 void sumWaves(float angle, float dangle, float windScale, float factor, out float ddx, float ddy)
@@ -192,17 +192,17 @@ void main(void)
         wave0.amp = WaveAmp ;
         wave0.dir =  vec2(cos(radians(angle)), sin(radians(angle))) ;
 
-        angle -= 45 ;
+        angle -= 45.0 ;
         wave1.freq = WaveFreq * 2.0 ;
         wave1.amp  = WaveAmp * 1.25 ;
         wave1.dir  = vec2(cos(radians(angle)), sin(radians(angle))) ;
 
-        angle += 30;
+        angle += 30.0;
         wave2.freq = WaveFreq * 3.5 ;
         wave2.amp  = WaveAmp * 0.75 ;
         wave2.dir  = vec2(cos(radians(angle)), sin(radians(angle))) ;
 
-        angle -= 50 ;
+        angle -= 50.0 ;
         wave3.freq = WaveFreq * 3.0 ;
         wave3.amp = WaveAmp * 0.75 ;
         wave3.dir =  vec2(cos(radians(angle)), sin(radians(angle))) ;
@@ -223,17 +223,17 @@ void main(void)
         wave0.amp  = waveamp ;
         wave0.dir  = vec2(cos(radians(angle)), sin(radians(angle))) ;
 
-        angle -= 20 ;
+        angle -= 20.0 ;
         wave1.freq = WaveFreq * 2.0 ;
         wave1.amp  = waveamp * 1.25 ;
         wave1.dir  = vec2(cos(radians(angle)), sin(radians(angle))) ;
 
-        angle += 35 ;
+        angle += 35.0 ;
         wave2.freq = WaveFreq * 3.5 ;
         wave2.amp  = waveamp * 0.75 ;
         wave2.dir  = vec2(cos(radians(angle)), sin(radians(angle))) ;
 
-        angle -= 45 ;
+        angle -= 45.0 ;
         wave3.freq = WaveFreq * 3.0 ;
         wave3.amp  = waveamp * 0.75 ;
         wave3.dir  = vec2(cos(radians(angle)), sin(radians(angle))) ;
@@ -259,10 +259,10 @@ void main(void)
         cover = min(min(min(min(CloudCover0, CloudCover1),CloudCover2),CloudCover3),CloudCover4) ;
         } else {
             // hack to allow for Overcast not to be set by Local Weather
-            if (Overcast == 0){
-                cover = 5;
+            if (Overcast == 0.0){
+                cover = 5.0;
                 } else {
-                    cover = Overcast * 5;
+                    cover = Overcast * 5.0;
                 }
         }
 

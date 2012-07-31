@@ -115,7 +115,7 @@ void sumWaves(float angle, float dangle, float windScale, float factor, out floa
 	{
 	mat4 RotationMatrix;
 	float deriv;
-	vec4 P = waterTex1 * 1024;
+	vec4 P = waterTex1 * 1024.0;
 
 	rotationmatrix(radians(angle + dangle * windScale + 0.6 * sin(P.x * factor)), RotationMatrix);
 	P *= RotationMatrix;
@@ -239,17 +239,17 @@ void main(void)
 	wave0.amp = WaveAmp;
 	wave0.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
 
-	angle -= 45;
+	angle -= 45.0;
 	wave1.freq = WaveFreq * 2.0 ;
 	wave1.amp = WaveAmp * 1.25;
 	wave1.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
 
-	angle += 30;
+	angle += 30.0;
 	wave2.freq = WaveFreq * 3.5;
 	wave2.amp = WaveAmp * 0.75;
 	wave2.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
 
-	angle -= 50;
+	angle -= 50.0;
 	wave3.freq = WaveFreq * 3.0 ;
 	wave3.amp = WaveAmp * 0.75;
 	wave3.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
@@ -270,17 +270,17 @@ void main(void)
 	wave0.amp = waveamp;
 	wave0.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
 
-	angle -= 20;
+	angle -= 20.0;
 	wave1.freq = WaveFreq * 2.0 ;
 	wave1.amp = waveamp * 1.25;
 	wave1.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
 
-	angle += 35;
+	angle += 35.0;
 	wave2.freq = WaveFreq * 3.5;
 	wave2.amp = waveamp * 0.75;
 	wave2.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
 
-	angle -= 45;
+	angle -= 45.0;
 	wave3.freq = WaveFreq * 3.0 ;
 	wave3.amp = waveamp * 0.75;
 	wave3.dir =  vec2(cos(radians(angle)), sin(radians(angle)));

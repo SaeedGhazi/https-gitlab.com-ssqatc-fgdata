@@ -28,9 +28,6 @@ varying float earthShade;
 varying float yprime_alt;
 varying float mie_angle;
 
-
-
-
 uniform int colorMode;
 uniform float hazeLayerAltitude;
 uniform float terminator;
@@ -40,7 +37,6 @@ uniform float visibility;
 uniform float overcast;
 //uniform float scattering;
 uniform float ground_scattering;
-
 
 // This is the value used in the skydome scattering shader - use the same here for consistency?
 const float EarthRadius = 5800000.0;
@@ -75,8 +71,12 @@ void main()
   float numVarieties = gl_Normal.z;
   float texFract = floor(fract(gl_MultiTexCoord0.x) * numVarieties) / numVarieties;
   texFract += floor(gl_MultiTexCoord0.x) / numVarieties;
-  float sr = sin(gl_FogCoord);
-  float cr = cos(gl_FogCoord);
+  
+  // Determine the rotation for the tree.  The Fog Coordinate provides rotation information
+  // to rotate one of the quands by 90 degrees.  We then apply an additional position seed
+  // so that trees aren't all oriented N/S
+  float sr = sin(gl_FogCoord + gl_Color.x);
+  float cr = cos(gl_FogCoord + gl_Color.x);
   gl_TexCoord[0] = vec4(texFract, gl_MultiTexCoord0.y, 0.0, 0.0);
 
   // scaling
@@ -84,6 +84,8 @@ void main()
 
   // Rotation of the generic quad to specific one for the tree.
   position.xy = vec2(dot(position.xy, vec2(cr, sr)), dot(position.xy, vec2(-sr, cr)));
+
+  // Move to correct location (stored in gl_Color)
   position = position + gl_Color.xyz;
   gl_Position   = gl_ModelViewProjectionMatrix * vec4(position,1.0);
 

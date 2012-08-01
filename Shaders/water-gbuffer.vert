@@ -48,7 +48,7 @@ void main(void)
 
     float Angle;
 
-    float windFactor = sqrt(pow(abs(WindE),2)+pow(abs(WindN),2)) * 0.05;
+    float windFactor = sqrt(WindE * WindE + WindN * WindN) * 0.05;
 
     if (WindN == 0.0 && WindE == 0.0) {
         Angle = 0.0;

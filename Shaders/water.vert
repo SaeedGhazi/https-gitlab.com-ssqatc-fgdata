@@ -1,9 +1,9 @@
 // This shader is mostly an adaptation of the shader found at
 //  http://www.bonzaisoftware.com/water_tut.html and its glsl conversion
 //  available at http://forum.bonzaisoftware.com/viewthread.php?tid=10
-//  © Michael Horsch - 2005
+//   Michael Horsch - 2005
 //  Major update and revisions - 2011-10-07
-//  © Emilian Huminiuc and Vivian Meazza
+//   Emilian Huminiuc and Vivian Meazza
 
 #version 120
 
@@ -39,7 +39,7 @@ void main(void)
 
     float Angle;
 
-    float windFactor = sqrt(pow(abs(WindE),2)+pow(abs(WindN),2)) * 0.05;
+    float windFactor = sqrt(WindE * WindE + WindN * WindN) * 0.05;
 
     if (WindN == 0.0 && WindE == 0.0) {
         Angle = 0.0;

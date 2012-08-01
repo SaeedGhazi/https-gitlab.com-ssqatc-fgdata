@@ -86,10 +86,10 @@ void main(void)
         cover = min(min(min(min(CloudCover0, CloudCover1),CloudCover2),CloudCover3),CloudCover4);
         } else {
             // hack to allow for Overcast not to be set by Local Weather
-            if (Overcast == 0){
-                cover = 5;
+            if (Overcast == 0.0){
+                cover = 5.0;
                 } else {
-                    cover = Overcast * 5;
+                    cover = Overcast * 5.0;
                 }
         }
 
@@ -207,5 +207,5 @@ void main(void)
                           vec3( 0.3, 0.59, 0.11 )
                         );
     float specular = smoothstep(0.0, 3.5, cover);
-    encode_gbuffer(Normal, finalColor.rgb, 254, specular, 128, emission, gl_FragCoord.z);
+    encode_gbuffer(Normal, finalColor.rgb, 254, specular, 128.0, emission, gl_FragCoord.z);
     }

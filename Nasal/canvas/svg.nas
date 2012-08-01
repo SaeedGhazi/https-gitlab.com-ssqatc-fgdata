@@ -1,15 +1,50 @@
 # Parse an xml file into a canvas group element
 #
-# @param group  The canvas.Group instance to append the parsed elements to
-# @param path   The path of the svg file (absolute or relative to FG_ROOT)
-var parsesvg = func(group, path)
+# @param group    The canvas.Group instance to append the parsed elements to
+# @param path     The path of the svg file (absolute or relative to FG_ROOT)
+# @param options  Optional hash of options
+var parsesvg = func(group, path, options = nil)
 {
   if( !isa(group, Group) )
     die("Invalid argument group (type != Group)");
+  
+  if( options == nil )
+    options = {};
+  
+  if( typeof(options) != "hash" )
+    die("Options need to be of type hash!");
+
+  var custom_font_mapper = options['font-mapper'];
+  var font_mapper = func(family, weight)
+  {
+    if( typeof(custom_font_mapper) == 'func' )
+    {
+      var font = custom_font_mapper(family, weight);
+      if( font != nil )
+        return font;
+    }
+      
+    return "LiberationFonts/LiberationMono-Bold.ttf";
+  };
 
   var level = 0;
   var skip  = 0;
   var stack = [group];
+  var close_stack = []; # helper for check tag closing
+  
+  # lookup table for element ids (for <use> element)
+  var id_dict = {};
+  
+  # ----------------------------------------------------------------------------
+  # Create a new child an push it onto the stack
+  var pushElement = func(type, id = nil)
+  {
+    append(stack, stack[-1].createChild(type, id));
+    append(close_stack, level);
+
+    if( typeof(id) == 'scalar' and size(id) )
+      id_dict[ id ] = stack[-1];
+  };
   
   # ----------------------------------------------------------------------------
   # Parse a transformation (matrix)
@@ -261,11 +296,11 @@ var parsesvg = func(group, path)
     }
     else if( name == "g" )
     {
-      append(stack, stack[-1].createChild('group', attr['id']));
+      pushElement('group', attr['id']);
     }
     else if( name == "text" )
     {
-      append(stack, stack[-1].createChild('text', attr['id']));
+      pushElement('text', attr['id']);
       stack[-1].setTranslation(attr['x'], attr['y']);
       
       # http://www.w3.org/TR/SVG/text.html#TextAnchorProperty
@@ -280,12 +315,19 @@ var parsesvg = func(group, path)
       # TODO vertical align
       
       stack[-1].setColor(parseColor(style['fill']));
-      stack[-1].setFont("UbuntuMono-B.ttf");
-      #stack[-1].setFont("LiberationFonts/LiberationMono-Bold.ttf");
+      stack[-1].setFont
+      (
+        font_mapper(style["font-family"], style["font-weight"])
+      );
+
+      var font_size = style["font-size"];
+      if( font_size != nil )
+        # eg. font-size: 123px
+        stack[-1].setFontSize(substr(font_size, 0, size(font_size) - 2));
     }
     else if( name == "path" or name == "rect" )
     {
-      append(stack, stack[-1].createChild('path', attr['id']));
+      pushElement('path', attr['id']);
       var d = attr['d'];
 
       if( name == "rect" )
@@ -304,22 +346,45 @@ var parsesvg = func(group, path)
       stack[-1].setStrokeLineWidth( w != nil ? w : 1 );
       stack[-1].setColor(parseColor(style['stroke']));
       
+      var linecap = style['stroke-linecap'];
+      if( linecap != nil )
+        stack[-1].setStrokeLineCap(style['stroke-linecap']);
+      
       var fill = style['fill'];
       if( fill != nil and fill != "none" )
-      {
         stack[-1].setColorFill(parseColor(fill));
-        stack[-1].setFill(1);
-      }
       
       # http://www.w3.org/TR/SVG/painting.html#StrokeDasharrayProperty
       var dash = style['stroke-dasharray'];
       if( dash and size(dash) > 3 )
         # at least 2 comma separated values...
-        stack[-1].setStrokeDashPattern(split(',', dash));
+        stack[-1].setStrokeDashArray(split(',', dash));
+
+      var cx = attr['inkscape:transform-center-x'];
+      var cy = attr['inkscape:transform-center-y'];
+      if( cx != nil or cy != nil )
+        stack[-1].setCenter(cx or 0, -(cy or 0));
     }
     else if( name == "tspan" )
     {
       return;
+    }
+    else if( name == "use" )
+    {
+      var ref = attr["xlink:href"];
+      if( ref == nil or size(ref) < 2 or ref[0] != `#` )
+        return debug.dump("Invalid or missing href", ref);
+
+      var el_src = id_dict[ substr(ref, 1) ];
+      if( el_src == nil )
+        return print("parsesvg: Reference to unknown element (" ~ ref ~ ")");
+      
+      # Create new element and copy sub branch from source node
+      pushElement(el_src._node.getName(), attr['id']);
+      props.copy(el_src._node, stack[-1]._node);
+
+      # copying also overrides the id so we need to set it again
+      stack[-1]._node.getNode("id").setValue(attr['id']);
     }
     else
     {
@@ -343,8 +408,11 @@ var parsesvg = func(group, path)
       return;
     }
     
-    if( name == 'g' or name == 'text' or name == 'path' or name == 'rect' )
+    if( size(close_stack) and (level + 1) == close_stack[-1] )
+    {
       pop(stack);
+      pop(close_stack);
+    }
   };
 
   # XML parsers element data callback

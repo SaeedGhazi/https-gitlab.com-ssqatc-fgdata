@@ -1,10 +1,10 @@
 # Helper function to create a node with the first available index for the given
 # path relative to the given node
 #
-var _createNodeWithIndex = func(node, path)
+var _createNodeWithIndex = func(node, path, min_index = 0)
 {
   # TODO do we need an upper limit? (50000 seems already seems unreachable)
-  for(var i = 0; i < 50000; i += 1)
+  for(var i = min_index; i < 50000; i += 1)
   {
     var p = path ~ "[" ~ i ~ "]";
     if( node.getNode(p) == nil )
@@ -53,10 +53,11 @@ var _setColorNodes = func(nodes, color)
 
 var _arg2valarray = func
 {
-  while (    typeof(arg) == "vector"
-            and size(arg) == 1 and typeof(arg[0]) == "vector" )
-      arg = arg[0];
-  return arg;
+  var ret = arg;
+  while (    typeof(ret) == "vector"
+            and size(ret) == 1 and typeof(ret[0]) == "vector" )
+      ret = ret[0];
+  return ret;
 }
 
 # Transform
@@ -105,15 +106,30 @@ var Transform = {
     
     return me;
   },
+  # Set rotation (Optionally around a specified point instead of (0,0))
+  #
+  #  setRotation(rot)
+  #  setRotation(rot, cx, cy)
+  #
+  # @note If using with rotation center different to (0,0) don't use
+  #       #setTranslation as it would interfere with the rotation.
   setRotation: func(angle)
   {
+    var center = _arg2valarray(arg);
+
     var s = math.sin(angle);
     var c = math.cos(angle);
 
-    me.a.setValue(c);
-    me.b.setValue(s);
-    me.c.setValue(-s);
-    me.d.setValue(c);
+    me.a.setDoubleValue(c);
+    me.b.setDoubleValue(s);
+    me.c.setDoubleValue(-s);
+    me.d.setDoubleValue(c);
+
+    if( size(center) == 2 )
+    {
+      me.e.setDoubleValue( (-center[0] * c) + (center[1] * s) + center[0] );
+      me.f.setDoubleValue( (-center[0] * s) - (center[1] * c) + center[1] );
+    }
     
     return me;
   },
@@ -147,16 +163,31 @@ var Element = {
   #
   # @param parent   Parent node (In the property tree)
   # @param type     Type string (Used as node name)
-  # @param name     Name (Should be unique)
-  new: func(parent, type, name)
+  # @param id       ID/Name (Should be unique)
+  new: func(parent, type, id)
   {
+    # arg can contain the node to be used instead of creating a new one
+    var args = _arg2valarray(arg);
+    if( size(args) == 1 )
+    {
+      var node = args[0];
+      if( !isa(node, props.Node) )
+        return debug.warn("Not a props.Node!");
+    }
+    else
+      var node = _createNodeWithIndex(parent, type);
+
     var m = {
       parents: [Element],
-      _node: _createNodeWithIndex(parent, type),
+      _node: node,
+      _center: [
+        node.getNode("center[0]"),
+        node.getNode("center[1]")
+      ]
     };
     
-    if( name != nil )
-      m._node.getNode("name", 1).setValue(name);
+    if( id != nil )
+      m._node.getNode("id", 1).setValue(id);
 
     return m;
   },
@@ -165,6 +196,26 @@ var Element = {
   {
     me._node.remove();
   },
+  set: func(key, value)
+  {
+    me._node.getNode(key, 1).setValue(value);
+    return me;
+  },
+  setBool: func(key, value)
+  {
+    me._node.getNode(key, 1).setBoolValue(value);
+    return me;
+  },
+  setDouble: func(key, value)
+  {
+    me._node.getNode(key, 1).setDoubleValue(value);
+    return me;
+  },
+  setInt: func(key, value)
+  {
+    me._node.getNode(key, 1).setIntValue(value);
+    return me;
+  },
   # Trigger an update of the element
   # 
   # Elements are automatically updated once a frame, with a delay of one frame.
@@ -172,45 +223,118 @@ var Element = {
   # this method.
   update: func()
   {
-    me._node.getNode("update", 1).setValue(1);
+    me.setInt("update", 1);
   },
+  # Hide/Show element
+  #
+  # @param visible  Whether the element should be visible
+  setVisible: func(visible = 1)
+  {
+    me.setBool("visible", visible);
+  },
+  # Hide element (Shortcut for setVisible(0))
+  hide: func me.setVisible(0),
+  # Show element (Shortcut for setVisible(1))
+  show: func me.setVisible(1),
   #
   setGeoPosition: func(lat, lon)
   {
     me._getTf()._node.getNode("m-geo[4]", 1).setValue("N" ~ lat);
     me._getTf()._node.getNode("m-geo[5]", 1).setValue("E" ~ lon);
+    return me;
   },
   # Create a new transformation matrix
   #
   # @param vals Default values (Vector of 6 elements)
   createTransform: func(vals = nil)
   {
-    var node = _createNodeWithIndex(me._node, "tf");
+    var node = _createNodeWithIndex(me._node, "tf", 1); # tf[0] is reserved for
+                                                        # setRotation
     return Transform.new(node, vals);
   },
   # Shortcut for setting translation
-  setTranslation: func me._getTf().setTranslation(arg),
-  # Shortcut for setting rotation
-  setRotation: func(rot) me._getTf().setRotation(rot),
+  setTranslation: func { me._getTf().setTranslation(arg); return me; },
+  # Set rotation around transformation center (see #setCenter).
+  #
+  # @note This replaces the the existing transformation. For additional scale or
+  #       translation use additional transforms (see #createTransform).
+  setRotation: func(rot)
+  {
+    if( me['_tf_rot'] == nil )
+      # always use the first matrix slot to ensure correct rotation
+      # around transformation center.
+      me['_tf_rot'] = Transform.new(me._node.getNode("tf[0]", 1));
+
+    me._tf_rot.setRotation(rot, me.getCenter());
+    return me;
+  },
   # Shortcut for setting scale
-  setScale: func me._getTf().setScale(arg),
+  setScale: func { me._getTf().setScale(arg); return me; },
   # Shortcut for getting scale
   getScale: func me._getTf().getScale(),
   # Set the line/text color
   #
   # @param color  Vector of 3 or 4 values in [0, 1]
-  setColor: func _setColorNodes(me.color, arg),
+  setColor: func { _setColorNodes(me.color, arg); return me; },
   # Set the fill/background/boundingbox color
   #
   # @param color  Vector of 3 or 4 values in [0, 1]
-  setColorFill: func _setColorNodes(me.color_fill, arg),
+  setColorFill: func { _setColorNodes(me.color_fill, arg); return me; },
+  #
+  getBoundingBox: func()
+  {
+    var bb = me._node.getNode("bounding-box");
+    var min_x = bb.getNode("min-x").getValue();
+    
+    if( min_x != nil )
+      return [ min_x,
+                bb.getNode("min-y").getValue(),
+                bb.getNode("max-x").getValue(),
+                bb.getNode("max-y").getValue() ];
+    else
+      return [0, 0, 0, 0];
+  },
+  # Set transformation center (currently only used for rotation)
+  setCenter: func()
+  {
+    var center = _arg2valarray(arg);
+    if( size(center) != 2 )
+      return debug.warn("invalid arg");
+      
+    if( me._center[0] == nil )
+      me._center[0] = me._node.getNode("center[0]", 1);
+    if( me._center[1] == nil )
+      me._center[1] = me._node.getNode("center[1]", 1);
+
+    me._center[0].setDoubleValue(center[0] or 0);
+    me._center[1].setDoubleValue(center[1] or 0);
+    
+    return me;
+  },
+  # Get transformation center
+  getCenter: func()
+  {
+    var bb = me.getBoundingBox();
+    var center = [0, 0];
+    
+    if( me._center[0] != nil )
+      center[0] = me._center[0].getValue() or 0;
+    if( me._center[1] != nil )
+      center[1] = me._center[1].getValue() or 0;
+
+    if( bb[0] >= bb[2] or bb[1] >= bb[3] )
+      return center;
+    
+    return [ 0.5 * (bb[0] + bb[2]) + center[0],
+              0.5 * (bb[1] + bb[3]) + center[1] ];
+  },
   # Internal Transform for convenience transform functions
   _getTf: func
   {
     if( me['_tf'] == nil )
       me['_tf'] = me.createTransform();
     return me._tf;
-  },
+  }
 };
 
 # Group
@@ -218,13 +342,21 @@ var Element = {
 # Class for a group element on a canvas
 #
 var Group = {
-  new: func(parent, name, type = "group")
+  new: func(parent, id, type = "group")
   {
-    return { parents: [Group, Element.new(parent, type, name)] };
+    # special case: if called from #getElementById the third argument is the
+    # existing node so we need to rearange the variables a bit.
+    if( typeof(type) != "scalar" )
+    {
+      var arg = [type];
+      var type = "group";
+    }
+
+    return { parents: [Group, Element.new(parent, type, id, arg)] };
   },
-  # Create a child of given type with specified name.
+  # Create a child of given type with specified id.
   # type can be group, text
-  createChild: func(type, name = nil)
+  createChild: func(type, id = nil)
   {
     var factory = me._element_factories[type];
     
@@ -234,24 +366,62 @@ var Group = {
       return nil;
     }
     
-    return factory(me._node, name);
+    return factory(me._node, id);
+  },
+  # Get first child with given id (breadth-first search)
+  #
+  # @note Use with care as it can take several miliseconds (for me eg. ~2ms).
+  getElementById: func(id)
+  {
+    # TODO can we improve the queue or better port this to C++ or use some kind
+    # of lookup hash? Searching is really slow now...
+    var stack = [me._node];
+    var index = 0;
+    
+    while( index < size(stack) )
+    {
+      var node = stack[index];
+      index += 1;
+
+      if( node != me._node )
+      {
+        var node_id = node.getNode("id");
+        if( node_id != nil and node_id.getValue() == id )
+          return me._element_factories[ node.getName() ]
+          (
+            nil,
+            nil,
+            # use the existing node
+            node
+          );
+      }
+        
+      foreach(var c; node.getChildren())
+        # element nodes have type NONE and valid element names (those in the the
+        # factor list)
+        if(     c.getType() == "NONE"
+            and me._element_factories[ c.getName() ] != nil )
+          append(stack, c);
+    }
   },
   # Remove all children
   removeAllChildren: func()
   {
     foreach(var type; keys(me._element_factories))
       me._node.removeChildren(type, 0);
+    return me;
   }
 };
 
-# Group
+# Map
 # ==============================================================================
-# Class for a group element on a canvas
+# Class for a group element on a canvas with possibly geopgraphic positions
+# which automatically get projected according to the specified projection.
 #
 var Map = {
-  new: func(parent, name)
+  new: func(parent, id)
   {
-    return { parents: [Map, Group.new(parent, name, "map")] };
+    return { parents: [Map, Group.new(parent, id, "map", arg)] };
   }
   # TODO
 };
@@ -261,10 +431,10 @@ var Map = {
 # Class for a text element on a canvas
 #
 var Text = {
-  new: func(parent, name)
+  new: func(parent, id)
   {
     var m = {
-      parents: [Text, Element.new(parent, "text", name)]
+      parents: [Text, Element.new(parent, "text", id, arg)]
     };
     m.color = _createColorNodes(m._node, "color");
     m.color_fill = _createColorNodes(m._node, "color-fill");
@@ -274,7 +444,7 @@ var Text = {
   setText: func(text)
   {
     # add space because osg seems to remove last character if its a space
-    me._node.getNode("text", 1).setValue(typeof(text) == 'scalar' ? text ~ ' ' : "");
+    me.set("text", typeof(text) == 'scalar' ? text ~ ' ' : "");
   },
   # Set alignment
   #
@@ -297,18 +467,18 @@ var Text = {
   #
   setAlignment: func(align)
   {
-    me._node.getNode("alignment", 1).setValue(align);
+    me.set("alignment", align);
   },
   # Set the font size
-  setSize: func(size, aspect = 1)
+  setFontSize: func(size, aspect = 1)
   {
-    me._node.getNode("character-size", 1).setDoubleValue(size);
-    me._node.getNode("character-aspect-ratio", 1).setDoubleValue(aspect);
+    me.setDouble("character-size", size);
+    me.setDouble("character-aspect-ratio", aspect);
   },
   # Set font (by name of font file)
   setFont: func(name)
   {
-    me._node.getNode("font", 1).setValue(name);
+    me.set("font", name);
   },
   # Enumeration of values for drawing mode:
   TEXT:               1, # The text itself
@@ -321,21 +491,16 @@ var Text = {
   #  eg. my_text.setDrawMode(Text.TEXT + Text.BOUNDINGBOX);
   setDrawMode: func(mode)
   {
-    me._node.getNode("draw-mode", 1).setValue(mode);
+    me.setInt("draw-mode", mode);
   },
   # Set bounding box padding
   setPadding: func(pad)
   {
-    me._node.getNode("padding", 1).setValue(pad);
+    me.setDouble("padding", pad);
   },
-  #
-  getBoundingBox: func()
+  setMaxWidth: func(w)
   {
-    var bb = me._node.getNode("bounding-box");
-    return [ bb.getChild("min-x").getValue(),
-              bb.getChild("min-y").getValue(),
-              bb.getChild("max-x").getValue(),
-              bb.getChild("max-y").getValue() ];
+    me.setDouble("max-width", w);
   }
 };
 
@@ -370,76 +535,169 @@ var Path = {
   VG_SCUBIC_TO:     16,
   VG_SCUBIC_TO_ABS: 16,
   VG_SCUBIC_TO_REL: 17,
-  VG_SCCWARC_TO:    18,
-  VG_SCCWARC_TO_ABS:18,
-  VG_SCCWARC_TO_REL:19,
-  VG_SCWARC_TO:     20,
-  VG_SCWARC_TO_ABS: 20,
-  VG_SCWARC_TO_REL: 21,
-  VG_LCCWARC_TO:    22,
-  VG_LCCWARC_TO_ABS:22,
-  VG_LCCWARC_TO_REL:23,
-  VG_LCWARC_TO:     24,
-  VG_LCWARC_TO_ABS: 24,
-  VG_LCWARC_TO_REL: 25,
-  
+  VG_SCCWARC_TO:    20, # Note that CC and CCW commands are swapped. This is
+  VG_SCCWARC_TO_ABS:20, # needed  due to the different coordinate systems used.
+  VG_SCCWARC_TO_REL:21, # In OpenVG values along the y-axis increase from bottom
+  VG_SCWARC_TO:     18, # to top, whereas in the Canvas system it is flipped.
+  VG_SCWARC_TO_ABS: 18,
+  VG_SCWARC_TO_REL: 19,
+  VG_LCCWARC_TO:    24,
+  VG_LCCWARC_TO_ABS:24,
+  VG_LCCWARC_TO_REL:25,
+  VG_LCWARC_TO:     22,
+  VG_LCWARC_TO_ABS: 22,
+  VG_LCWARC_TO_REL: 23,
+
   # Number of coordinates per command
-  num_coords: {
-    0:  0, # VG_CLOSE_PATH
-    2:  2, # VG_MOVE_TO
-    4:  2, # VG_LINE_TO
-    6:  1, # VG_HLINE_TO
-    8:  1, # VG_VLINE_TO
-    10: 4, # VG_QUAD_TO
-    12: 6, # VG_CUBIC_TO
-    14: 2, # VG_SQUAD_TO
-    16: 4, # VG_SCUBIC_TO
-    18: 5, # VG_SCCWARC_TO
-    20: 5, # VG_SCWARC_TO
-    22: 5, # VG_LCCWARC_TO
-    24: 5  # VG_LCWARC_TO
-  },
+  num_coords: [
+    0, 0, # VG_CLOSE_PATH
+    2, 2, # VG_MOVE_TO
+    2, 2, # VG_LINE_TO
+    1, 1, # VG_HLINE_TO
+    1, 1, # VG_VLINE_TO
+    4, 4, # VG_QUAD_TO
+    6, 6, # VG_CUBIC_TO
+    2, 2, # VG_SQUAD_TO
+    4, 4, # VG_SCUBIC_TO
+    5, 5, # VG_SCCWARC_TO
+    5, 5, # VG_SCWARC_TO
+    5, 5, # VG_LCCWARC_TO
+    5, 5  # VG_LCWARC_TO
+  ],
 
   #
-  new: func(parent, name)
+  new: func(parent, id)
   {
     var m = {
-      parents: [Path, Element.new(parent, "path", name)]
+      parents: [Path, Element.new(parent, "path", id, arg)],
+      _num_cmds: 0,
+      _num_coords: 0
     };
     m.color = _createColorNodes(m._node, "color");
     m.color_fill = _createColorNodes(m._node, "color-fill");
     return m;
   },
-  # Set the path data (commands and coordinates)
-  setData: func(cmds, coords)
-  {
-    me._node.removeChildren('cmd', 0);
-    me._node.removeChildren('coord', 0);
-    me._node.setValues({cmd: cmds, coord: coords});
-  },
-  setDataGeo: func(cmds, coords)
+  # Remove all existing path data
+  reset: func
   {
     me._node.removeChildren('cmd', 0);
     me._node.removeChildren('coord', 0);
     me._node.removeChildren('coord-geo', 0);
-    me._node.setValues({cmd: cmds, 'coord-geo': coords});
+    me._num_cmds = 0;
+    me._num_coords = 0;
+    return me;
   },
+  # Set the path data (commands and coordinates)
+  setData: func(cmds, coords)
+  {
+    me.reset();
+    me._node.setValues({cmd: cmds, coord: coords});
+    me._num_cmds = size(cmds);
+    me._num_coords = size(coords);
+    return me;
+  },
+  setDataGeo: func(cmds, coords)
+  {
+    me.reset();
+    me._node.setValues({cmd: cmds, 'coord-geo': coords});
+    me._num_cmds = size(cmds);
+    me._num_coords = size(coords);
+    return me;
+  },
+  # Add a path segment
+  addSegment: func(cmd, coords...)
+  {
+    var coords = _arg2valarray(coords);
+    var num_coords = me.num_coords[cmd];
+    if( size(coords) != num_coords )
+      debug.warn
+      (
+        "Invalid number of arguments (expected " ~ (num_coords + 1) ~ ")"
+      );
+    else
+    {
+      me.setInt("cmd[" ~ (me._num_cmds += 1) ~ "]", cmd);
+      for(var i = 0; i < num_coords; i += 1)
+        me.setDouble("coord[" ~ (me._num_coords += 1) ~ "]", coords[i]);
+    }
+    
+    return me;
+  },
+  # Move path cursor
+  moveTo: func me.addSegment(me.VG_MOVE_TO_ABS, arg),
+  move:   func me.addSegment(me.VG_MOVE_TO_REL, arg),
+  # Add a line
+  lineTo: func me.addSegment(me.VG_LINE_TO_ABS, arg),
+  line:   func me.addSegment(me.VG_LINE_TO_REL, arg),
+  # Add a horizontal line
+  horizTo: func me.addSegment(me.VG_HLINE_TO_ABS, arg),
+  horiz:   func me.addSegment(me.VG_HLINE_TO_REL, arg),
+  # Add a vertical line
+  vertTo: func me.addSegment(me.VG_VLINE_TO_ABS, arg),
+  vert:   func me.addSegment(me.VG_VLINE_TO_REL, arg),
+  # Add a quadratic Bézier curve
+  quadTo: func me.addSegment(me.VG_QUAD_TO_ABS, arg),
+  quad:   func me.addSegment(me.VG_QUAD_TO_REL, arg),
+  # Add a cubic Bézier curve
+  cubicTo: func me.addSegment(me.VG_CUBIC_TO_ABS, arg),
+  cubic:   func me.addSegment(me.VG_CUBIC_TO_REL, arg),
+  # Add a smooth quadratic Bézier curve
+  quadTo: func me.addSegment(me.VG_SQUAD_TO_ABS, arg),
+  quad:   func me.addSegment(me.VG_SQUAD_TO_REL, arg),
+  # Add a smooth cubic Bézier curve
+  cubicTo: func me.addSegment(me.VG_SCUBIC_TO_ABS, arg),
+  cubic:   func me.addSegment(me.VG_SCUBIC_TO_REL, arg),
+  # Draw an elliptical arc (shorter counter-clockwise arc)
+  arcSmallCCWTo: func me.addSegment(me.VG_SCCWARC_TO_ABS, arg),
+  arcSmallCCW:   func me.addSegment(me.VG_SCCWARC_TO_REL, arg),
+  # Draw an elliptical arc (shorter clockwise arc)
+  arcSmallCWTo: func me.addSegment(me.VG_SCWARC_TO_ABS, arg),
+  arcSmallCW:   func me.addSegment(me.VG_SCWARC_TO_REL, arg),
+  # Draw an elliptical arc (longer counter-clockwise arc)
+  arcLargeCCWTo: func me.addSegment(me.VG_LCCWARC_TO_ABS, arg),
+  arcLargeCCW:   func me.addSegment(me.VG_LCCWARC_TO_REL, arg),
+  # Draw an elliptical arc (shorter clockwise arc)
+  arcLargeCWTo: func me.addSegment(me.VG_LCWARC_TO_ABS, arg),
+  arcLargeCW:   func me.addSegment(me.VG_LCWARC_TO_REL, arg),
+  # Close the path (implicit lineTo to first point of path)
+  close: func me.addSegment(me.VG_CLOSE_PATH),
+
   setStrokeLineWidth: func(width)
   {
-    me._node.getNode('stroke-width', 1).setDoubleValue(width);
+    me.setDouble('stroke-width', width);
   },
-  setStrokeDashPattern: func(pattern)
+  # Set stroke linecap
+  #
+  # @param linecap String, "butt", "round" or "square"
+  #
+  # See http://www.w3.org/TR/SVG/painting.html#StrokeLinecapProperty for details
+  setStrokeLineCap: func(linecap)
+  {
+    me.set('stroke-linecap', linecap);
+  },
+  # Set stroke dasharray
+  #
+  # @param pattern Vector, Vector of alternating dash and gap lengths
+  #  [on1, off1, on2, ...]
+  setStrokeDashArray: func(pattern)
   {
     me._node.removeChildren('stroke-dasharray');
 
     if( typeof(pattern) == 'vector' )
       me._node.setValues({'stroke-dasharray': pattern});
     else
-      debug.warn("setStrokeDashPattern: vector expected!");
+      debug.warn("setStrokeDashArray: vector expected!");
+
+    return me;
   },
+  # Set the fill color and enable filling this path
+  #
+  # @param color  Vector of 3 or 4 values in [0, 1]
+  setColorFill: func { _setColorNodes(me.color_fill, arg); me.setFill(1); },
+  # Enable/disable filling this path
   setFill: func(fill)
   {
-    me._node.getNode("fill", 1).setValue(fill);
+    me.setBool("fill", fill);
   }
 };
 
@@ -476,15 +734,15 @@ var Canvas = {
   },
   # Create a new group with the given name
   #
-  # @param name Option name for the group
-  createGroup: func(name = nil)
+  # @param id Optional id/name for the group
+  createGroup: func(id = nil)
   {
-    return Group.new(me.texture, name);
+    return Group.new(me.texture, id);
   },
   # Set the background color
   #
   # @param color  Vector of 3 or 4 values in [0, 1]
-  setColorBackground: func _setColorNodes(me.color, arg)
+  setColorBackground: func { _setColorNodes(me.color, arg); return me; }
 };
 
 # Create a new canvas. Pass parameters as hash, eg:
@@ -545,3 +803,26 @@ var get = func(name)
     color: _createColorNodes(node_canvas, "color-background")
   };
 };
+
+# ------------------------------------------------------------------------------
+# Show warnings if API used with too old version of FlightGear without Canvas
+# support (Wrapped in anonymous function do not polute the canvas namespace)
+
+(func {
+var version_str = getprop("/sim/version/flightgear");
+if( string.scanf(version_str, "%u.%u.%u", var fg_version = []) < 1 )
+  debug.warn("Canvas: Error parsing flightgear version (" ~ version_str ~ ")");
+else
+{
+  if(     fg_version[0] < 2
+      or (fg_version[0] == 2 and fg_version[1] < 8) )
+  {
+    debug.warn("Canvas: FlightGear version too old (" ~ version_str ~ ")");
+    gui.popupTip
+    (
+      "FlightGear v2.8.0 or newer needed for Canvas support!",
+      600,
+      {button: {legend: "Ok", binding: {command: "dialog-close"}}}
+    );
+  }
+} })();

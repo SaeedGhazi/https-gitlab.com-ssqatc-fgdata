@@ -836,9 +836,9 @@
   <name>Sclerophyllous</name>
   <name>Heath</name>
   <texture>Terrain/shrub.dds</texture>
-  <texture>Terrain/shrub1.dds</texture>
+  <!--<texture>Terrain/shrub1.dds</texture>
   <texture>Terrain/shrub2.dds</texture>
-  <texture>Terrain/shrub3.dds</texture>
+  <texture>Terrain/shrub3.dds</texture>-->
   <xsize>2000</xsize>
   <ysize>2000</ysize>
   <diffuse>
@@ -1031,7 +1031,7 @@
 <material include="Materials/base/water.xml">
   <name>Ocean</name>
   <effect>Effects/water-dds</effect>
-  <texture>Terrain/water.png</texture>
+  <texture>Terrain/water.dds</texture>
 </material>
 
 <material>
@@ -1050,10 +1050,10 @@
   <name>Estuary</name>
   <name>Watercourse</name>
   <name>Saline</name>
-  <texture>Terrain/estuary.dds</texture>
+  <texture>Terrain/water-inland.dds</texture>
   <!--<texture>Terrain/water-lake.png</texture>-->
-  <xsize>400</xsize>
-  <ysize>400</ysize>
+  <xsize>128</xsize>
+  <ysize>128</ysize>
   <ambient>
     <r>0.0</r>
     <g>0.0</g>
@@ -1158,7 +1158,7 @@
   <name>Cemetery</name>
   <effect>Effects/transition-base-rock</effect>
   <texture>Terrain/grass10c.dds</texture>
-  <texture>Terrain/grass10b.dds</texture>
+  <!--   <texture>Terrain/grass10b.dds</texture> -->
   <xsize>500</xsize>
   <ysize>500</ysize>
   <light-coverage>4000000.0</light-coverage>
@@ -1193,8 +1193,8 @@
   <name>HerbTundra</name>
   <effect>Effects/transition-base-rock</effect>
   <texture>Terrain/herbtundra.dds</texture>
-  <texture>Terrain/herbtundra2.dds</texture>
-  <texture>Terrain/herbtundra3.dds</texture>
+  <!-- <texture>Terrain/herbtundra2.dds</texture>
+  <texture>Terrain/herbtundra3.dds</texture>-->
   <xsize>2000</xsize>
   <ysize>2000</ysize>
   <light-coverage>4000000.0</light-coverage>
@@ -1251,7 +1251,7 @@
   <name>Greenspace</name>
   <effect>Effects/transition-base-dirt</effect>
   <texture>Terrain/grass10b.dds</texture>
-  <texture>Terrain/grass10c.dds</texture>
+  <!--   <texture>Terrain/grass10c.dds</texture> -->
   <xsize>250</xsize>
   <ysize>250</ysize>
   <light-coverage>4000000.0</light-coverage>
@@ -1286,12 +1286,16 @@
   <name>MixedCropPastureCover</name>
   <name>MixedCrop</name>
   <name>ComplexCrop</name>
-  <texture>Terrain/mixedcrop1.dds</texture>
+  <texture>Terrain/countryside1.green.dds</texture>
+  <texture>Terrain/countryside2.green.dds</texture>
+  <!--  <texture>Terrain/mixedcrop1.dds</texture>
   <texture>Terrain/mixedcrop4.dds</texture>
-  <texture>Terrain/mixedcrop3.dds</texture>
-  <object-mask>Terrain/mixedcrop1.mask.png</object-mask>
+  <texture>Terrain/mixedcrop3.dds</texture>-->
+  <object-mask>Terrain/countryside1.green.mask.png</object-mask>
+  <object-mask>Terrain/countryside2.green.mask.png</object-mask>
+  <!--  <object-mask>Terrain/mixedcrop1.mask.png</object-mask>
   <object-mask>Terrain/mixedcrop4.mask.png</object-mask>
-  <object-mask>Terrain/mixedcrop3.mask.png</object-mask>
+  <object-mask>Terrain/mixedcrop3.mask.png</object-mask>-->
   <xsize>2000</xsize>
   <ysize>2000</ysize>
   <light-coverage>2000000.0</light-coverage>
@@ -1301,7 +1305,7 @@
   <bumpiness>0.7</bumpiness>
   <load-resistance>1e30</load-resistance>
   <object-group include="Materials/base/farm-buildings.xml"/>
-  <wood-coverage>10000.0</wood-coverage>
+  <wood-coverage>2000.0</wood-coverage>
   <tree-texture>Trees/mixed-summer.dds</tree-texture>
   <tree-varieties>8</tree-varieties>
   <tree-range-m alias="/params/forest/tree-range-m"/>
@@ -1323,12 +1327,14 @@
   <name>Olives</name>
   <name>Vineyard</name>
   <name>Rice</name>
-  <texture>Terrain/irrcrop1.dds</texture>
+  <texture>Terrain/irrcrop.dds</texture>
+  <!--<texture>Terrain/irrcrop1.dds</texture>
   <texture>Terrain/irrcrop2.dds</texture>
-  <texture>Terrain/irrcrop3.dds</texture>
-  <object-mask>Terrain/irrcrop1.mask.png</object-mask>
+  <texture>Terrain/irrcrop3.dds</texture>-->
+  <object-mask>Terrain/irrcrop-dds.mask.png</object-mask>
+  <!--<object-mask>Terrain/irrcrop1.mask.png</object-mask>
   <object-mask>Terrain/irrcrop2.mask.png</object-mask>
-  <object-mask>Terrain/irrcrop3.mask.png</object-mask>
+  <object-mask>Terrain/irrcrop3.mask.png</object-mask>-->
   <xsize>2000</xsize>
   <ysize>2000</ysize>
   <light-coverage>2000000.0</light-coverage>
@@ -1338,7 +1344,7 @@
   <bumpiness>0.6</bumpiness>
   <load-resistance>1e30</load-resistance>
   <object-group include="Materials/base/farm-buildings.xml"/>
-  <wood-coverage>10000.0</wood-coverage>
+  <wood-coverage>2000.0</wood-coverage>
   <tree-texture>Trees/mixed-summer.dds</tree-texture>
   <tree-varieties>8</tree-varieties>
   <tree-range-m alias="/params/forest/tree-range-m"/>
@@ -1357,14 +1363,14 @@
   <name>DryCropPastureCover</name>
   <name>DryCrop</name>
   <texture-set>
-    <texture>Terrain/countryside1.green.dds</texture>
+    <texture>Terrain/uk_countryside1.dds</texture>
     <texture n="4">Terrain.winter/countryside1.winter.dds</texture>
   </texture-set>
-  <!--<texture-set>
-    <texture>Terrain/countryside2.green.dds</texture>
+  <texture-set>
+    <texture>Terrain/uk_countryside2.dds</texture>
     <texture n="4">Terrain.winter/countryside2.winter.dds</texture>
   </texture-set>
-  <texture-set>
+  <!--<texture-set>
     <texture>Terrain/countryside3.green.dds</texture>
     <texture n="4">Terrain.winter/countryside3.winter.dds</texture>
   </texture-set>
@@ -1374,8 +1380,8 @@
   </texture-set> -->
   <object-mask>Terrain/countryside1.green.mask.png</object-mask>
   <object-mask>Terrain/countryside2.green.mask.png</object-mask>
-  <object-mask>Terrain/countryside3.green.mask.png</object-mask>
-  <object-mask>Terrain/countryside4.green.mask.png</object-mask>
+  <!--<object-mask>Terrain/countryside3.green.mask.png</object-mask>
+  <object-mask>Terrain/countryside4.green.mask.png</object-mask>-->
   <xsize>1800</xsize>
   <ysize>1800</ysize>
   <solid>1</solid>
@@ -1385,7 +1391,7 @@
   <load-resistance>1e30</load-resistance>
   <light-coverage>2000000.0</light-coverage>
   <object-group include="Materials/base/farm-buildings.xml"/>
-  <wood-coverage>4000.0</wood-coverage>
+  <wood-coverage>2000.0</wood-coverage>
   <tree-texture>Trees/deciduous-summer.dds</tree-texture>
   <tree-varieties>8</tree-varieties>
   <tree-range-m alias="/params/forest/tree-range-m"/>
@@ -1432,10 +1438,12 @@
   <name>CropGrassCover</name>
   <name>CropGrass</name>
   <name>Grassland</name>
-  <texture>Terrain/cropgrass1.dds</texture>
-  <texture>Terrain/cropgrass2.dds</texture>
-  <xsize>1500</xsize>
-  <ysize>1500</ysize>
+  <texture>Terrain/cropgrass.dds</texture>
+  <!--<texture>Terrain/cropgrass1.dds</texture>
+  <texture>Terrain/cropgrass2.dds</texture>-->
+  <object-mask>Terrain/cropgrass-dds.mask.png</object-mask>
+  <xsize>1399</xsize>
+  <ysize>1399</ysize>
   <light-coverage>2000000.0</light-coverage>
   <diffuse>
     <r>0.93</r>
@@ -1455,7 +1463,9 @@
   <rolling-friction>0.1</rolling-friction>
   <bumpiness>0.3</bumpiness>
   <load-resistance>1e30</load-resistance>
-  <wood-coverage>500000.0</wood-coverage>
+  <light-coverage>2000000.0</light-coverage>
+  <object-group include="Materials/base/farm-buildings.xml"/>
+  <wood-coverage>2000.0</wood-coverage>
   <tree-texture>Trees/deciduous-summer.dds</tree-texture>
   <tree-varieties>8</tree-varieties>
   <tree-range-m alias="/params/forest/tree-range-m"/>
@@ -1515,7 +1525,7 @@
   <name>AgroForest</name>
   <effect>Effects/transition-base-dirt</effect>
   <texture>Terrain/cropwood.dds</texture>
-  <object-mask>Terrain/cropwood.mask.png</object-mask>
+  <object-mask>Terrain/cropwood-dds.mask.png</object-mask>
   <xsize>1500</xsize>
   <ysize>1500</ysize>
   <light-coverage>2000000.0</light-coverage>
@@ -1524,7 +1534,9 @@
   <rolling-friction>0.6</rolling-friction>
   <bumpiness>0.7</bumpiness>
   <load-resistance>10</load-resistance>
-  <wood-coverage>4000.0</wood-coverage>
+  <light-coverage>2000000.0</light-coverage>
+  <object-group include="Materials/base/farm-buildings.xml"/>
+  <wood-coverage>2000.0</wood-coverage>
   <tree-texture>Trees/mixed-summer.dds</tree-texture>
   <tree-varieties>8</tree-varieties>
   <tree-range-m alias="/params/forest/tree-range-m"/>
@@ -2162,12 +2174,12 @@
   <effect>Effects/transition-base-dirt</effect>
   <texture >Terrain.winter/countryside1.winter.dds</texture>
   <texture >Terrain.winter/countryside2.winter.dds</texture>
-  <texture >Terrain.winter/countryside3.winter.dds</texture>
-  <texture >Terrain.winter/countryside3.winter.dds</texture>
+  <!--<texture >Terrain.winter/countryside3.winter.dds</texture>
+  <texture >Terrain.winter/countryside3.winter.dds</texture>-->
   <object-mask>Terrain/countryside1.green.mask.png</object-mask>
   <object-mask>Terrain/countryside2.green.mask.png</object-mask>
-  <object-mask>Terrain/countryside3.green.mask.png</object-mask>
-  <object-mask>Terrain/countryside4.green.mask.png</object-mask>
+  <!--<object-mask>Terrain/countryside3.green.mask.png</object-mask>
+  <object-mask>Terrain/countryside4.green.mask.png</object-mask>-->
   <xsize>1800</xsize>
   <ysize>1800</ysize>
   <solid>1</solid>
@@ -2340,6 +2352,15 @@
 
  <!-- end winter-->
 
+<material include="Materials/base/rock.xml">
+	<name>BarrenCover</name>
+	<name>Dirt</name>
+	<name>OpenMining</name>
+	<name>Rock</name>
+	<name>Dump</name>
+	<effect>Effects/transition-base-grass-inverse</effect>
+	<texture>Terrain/rock7.dds</texture>
+</material>
 
  <!-- runway and taxiway signs -->
 

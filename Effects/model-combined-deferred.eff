@@ -25,7 +25,6 @@ the objects that use it, and replaces it with the default shader.
 			<extension-supported>GL_ARB_fragment_shader</extension-supported>
 		  </and>
 		</or>
-		<extension-supported>GL_EXT_gpu_shader4</extension-supported>
 	  </and>
 	</predicate>
 	<pass>

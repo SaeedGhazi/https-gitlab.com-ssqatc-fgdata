@@ -208,9 +208,9 @@ var remove = func(vector, item)
 # checks if an item is in a vector
 var isin = func(vector, v)
  {
- for (var i = 0; i < size(vector); i += 1)
+ foreach (var item; vector)
   {
-  if (vector[i] == v) return 1;
+  if (item == v) return 1;
   }
  return 0;
  };
@@ -665,10 +665,9 @@ var toggle_jetway_from_coord = func(door, hood, heading, lat, lon = nil)
  var closest_jetway = nil;
  var closest_jetway_dist = nil;
  var closest_jetway_coord = nil;
- for (var i = 0; i < size(jetways); i += 1)
+ foreach (var jetway; jetways)
   {
-  if (jetways[i] == nil) continue;
-  var jetway = jetways[i];
+  if (jetway == nil) continue;
   var jetway_coord = geo.Coord.new();
   jetway_coord.set_latlon(jetway.lat, jetway.lon);
 
@@ -718,6 +717,7 @@ var load_airport_jetways = func(airport)
  if (isin(loaded_airports, airport)) return;
  var tree = props.globals.getNode("/sim/paths/use-custom-scenery-data", 1).getBoolValue() ? io.read_airport_properties(airport, "jetways") : (io.stat(root ~ "/AI/Airports/" ~ airport ~ "/jetways.xml") == nil ? nil : io.read_properties(root ~ "/AI/Airports/" ~ airport ~ "/jetways.xml"));
  if (tree == nil) return;
+ append(loaded_airports, airport);
  print_debug("Loading jetways for airport " ~ airport);
  var nodes = tree.getChildren("jetway");
 
@@ -726,11 +726,7 @@ var load_airport_jetways = func(airport)
  var loop = func(id)
   {
   if (id != loadids[airport]) return;
-  if (i >= size(nodes))
-   {
-   append(loaded_airports, airport);
-   return;
-   }
+  if (i >= size(nodes)) return;
   var jetway = nodes[i];
   var model = jetway.getNode("model", 1).getValue() or return;
   var gate = jetway.getNode("gate", 1).getValue() or "";
@@ -783,18 +779,17 @@ var update_jetways = func(loopid)
  # if jetways disabled, unload jetways and terminate
  if (!on_switch.getBoolValue())
   {
-  for (var i = 0; i < size(jetways); i += 1)
+ foreach (var jetway; jetways)
    {
-   if (jetways[i] != nil) jetways[i].remove();
+   if (jetway != nil) jetway.remove();
    }
   setsize(jetways, 0);
   setsize(loaded_airports, 0);
   return;
   }
  # interpolate jetway values
- for (var i = 0; i < size(jetways); i += 1)
+ foreach (var jetway; jetways)
   {
-  var jetway = jetways[i];
   if (jetway == nil) continue;
   if (jetway._active or jetway._edit)
    {

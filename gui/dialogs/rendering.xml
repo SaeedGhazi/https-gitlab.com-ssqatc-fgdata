@@ -196,7 +196,7 @@
 			<group>
 				<layout>hbox</layout>
 				<text>
-					<label>Scenery objects</label>
+					<label>Scenery</label>
 					<halign>left</halign>
 				</text>
 				<hrule>
@@ -204,33 +204,73 @@
 				</hrule>
 			</group>
 
-			<checkbox>
-				<halign>left</halign>
-				<label>Animated jetways</label>
-				<name>jetways</name>
-				<property>/nasal/jetways/enabled</property>
-				<binding>
-					<command>dialog-apply</command>
-					<object-name>jetways</object-name>
-				</binding>
-			</checkbox>
-
-			<checkbox>
-				<halign>left</halign>
-				<label>Random objects</label>
-				<name>random-objects</name>
-				<property>/sim/rendering/random-objects</property>
-				<binding>
-					<command>dialog-apply</command>
-					<object-name>random-objects</object-name>
-				</binding>
-			</checkbox>
-
 			<group>
 				<layout>table</layout>
+				
+				<text>
+					<row>0</row>
+					<col>0</col>
+					<colspan>2</colspan>
+					<label>Season (ground textures): </label>
+					<halign>right</halign>
+				</text>
+				<combo>
+					<row>0</row>
+					<col>2</col>
+					<colspan>2</colspan>
+					<name>season</name>
+					<halign>left</halign>
+					<live>true</live>
+					<property>/sim/startup/season</property>
+					<value>summer</value>
+					<value>winter</value>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>season</object-name>
+					</binding>
+				</combo>
 
 				<checkbox>
-					<row>0</row>
+					<row>1</row>
+					<col>0</col>
+					<halign>left</halign>
+					<label>Animated jetways</label>
+					<name>jetways</name>
+					<property>/nasal/jetways/enabled</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>jetways</object-name>
+					</binding>
+				</checkbox>
+
+				<checkbox>
+					<row>2</row>
+					<col>0</col>
+					<halign>left</halign>
+					<label>Random buildings</label>
+					<name>random-buildings</name>
+					<property>/sim/rendering/random-buildings</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>random-buildings</object-name>
+					</binding>
+				</checkbox>
+
+				<checkbox>
+					<row>3</row>
+					<col>0</col>
+					<halign>left</halign>
+					<label>Random objects</label>
+					<name>random-objects</name>
+					<property>/sim/rendering/random-objects</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>random-objects</object-name>
+					</binding>
+				</checkbox>
+
+				<checkbox>
+					<row>4</row>
 					<col>0</col>
 					<halign>left</halign>
 					<label>Random vegetation</label>
@@ -242,7 +282,7 @@
 					</binding>
 				</checkbox>
 				<text>
-					<row>0</row>
+					<row>4</row>
 					<col>1</col>
 					<label>density</label>
 					<enable>
@@ -250,7 +290,7 @@
 					</enable>
 				</text>
 				<slider>
-					<row>0</row>
+					<row>4</row>
 					<col>2</col>
 					<name>vegetation-density</name>
 					<min>0</min>
@@ -263,7 +303,7 @@
 					</binding>
 				</slider>
 				<text>
-					<row>0</row>
+					<row>4</row>
 					<col>3</col>
 					<label>12345678</label>
 					<format>%.1f</format>
@@ -274,50 +314,6 @@
 					</enable>
 				</text>
 				
-				<checkbox>
-					<row>1</row>
-					<col>0</col>
-					<halign>left</halign>
-					<label>Random buildings</label>
-					<name>random-buildings</name>
-					<property>/sim/rendering/random-buildings</property>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>random-buildings</object-name>
-					</binding>
-				</checkbox>
-				<text>
-					<row>1</row>
-					<col>1</col>
-					<label>density</label>
-					<enable>
-						<property>/sim/rendering/random-buildings</property>
-					</enable>
-				</text>
-				<slider>
-					<row>1</row>
-					<col>2</col>
-					<name>building-density</name>
-					<min>0</min>
-					<max>5.0</max>
-					<step>0.05</step>
-					<property>/sim/rendering/building-density</property>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>building-density</object-name>
-					</binding>
-				</slider>
-				<text>
-					<row>1</row>
-					<col>3</col>
-					<label>12345678</label>
-					<format>%.2f</format>
-					<live>true</live>
-					<property>/sim/rendering/building-density</property>
-					<enable>
-						<property>/sim/rendering/random-buildings</property>
-					</enable>
-				</text>
 			</group>
 
 			<button>

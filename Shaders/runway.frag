@@ -38,8 +38,6 @@ uniform int fogType;
 vec3 fog_Func(vec3 color, int type);
 //////////////////////
 
-vec3 fog_Func(vec3 color, int type);
-
 void main (void)
 {
     //vec3 halfV;
@@ -61,9 +59,9 @@ void main (void)
     if (normalmap_dds > 0)
         N = -N;
 
-
+	float lightness = dot(texel.rgb, vec3( 0.3, 0.59, 0.11 ));
     // calculate the specular light
-    float refl_correction = spec_adjust * 1.9 - 1.0;
+    float refl_correction = spec_adjust * 2.5 - 1.0;
     float shininess = max (0.35, refl_correction);
     float nDotVP = max(0.0, dot(N, normalize(gl_LightSource[0].position.xyz)));
     float nDotHV = max(0.0, dot(N, normalize(gl_LightSource[0].halfVector.xyz)));
@@ -74,17 +72,20 @@ void main (void)
         pf = pow(nDotHV, /*gl_FrontMaterial.*/shininess);
 
     vec4 Diffuse  = gl_LightSource[0].diffuse * nDotVP;
-    vec4 Specular = vec4(vec3(0.5*shininess), 1.0)* gl_LightSource[0].specular * pf;
+    //vec4 Specular = vec4(vec3(0.5*shininess), 1.0)* gl_LightSource[0].specular * pf;
+	vec4 Specular = vec4(1.0)* lightness * gl_LightSource[0].specular * pf;
 
     vec4 color = gl_Color + Diffuse * gl_FrontMaterial.diffuse;
-    color += Specular * vec4(vec3(0.5*shininess), 1.0) * nmap.a;
+    //color += Specular * vec4(vec3(0.5*shininess), 1.0) * nmap.a;
+	float nFactor = 1.0 - N.z;
+	color += Specular * vec4(1.0) * nmap.a * nFactor;
     color.a = texel.a * alpha;
     color = clamp(color, 0.0, 1.0);
 
     vec3 viewVec = normalize(vViewVec);
 
     // Map a rainbowish color
-    float v = dot(viewVec, normalize(VNormal));
+    float v = abs(dot(viewVec, normalize(VNormal)));
     vec4 rainbow = texture2D(Rainbow, vec2(v, 0.0));
 
     // Map a fresnel effect
@@ -113,17 +114,18 @@ void main (void)
 
     // add fringing fresnel and rainbow effects and modulate by reflection
     vec4 reflcolor = mix(reflection, rainbow, rainbowiness * v);
-    reflcolor += Specular * nmap.a;
+    reflcolor += Specular * nmap.a * nFactor;
     vec4 reflfrescolor = mix(reflcolor, fresnel, fresneliness * v);
     vec4 noisecolor = mix(reflfrescolor, noisevec, noisiness);
     vec4 raincolor = vec4(noisecolor.rgb * reflFactor, 1.0);
-    raincolor += Specular * nmap.a;
+    raincolor += Specular * nmap.a * nFactor;
 
-    vec4 mixedcolor = mix(texel, raincolor, reflFactor);
+
+	vec4 mixedcolor = mix(texel, raincolor * (1.0 - refl_correction * (1.0 - lightness)), reflFactor);  //* (1.0 - 0.5 * transparency_offset )
 
     // the final reflection
-    vec4 fragColor = vec4(color.rgb * mixedcolor.rgb  + ambient_Correction.rgb, color.a);
-	fragColor += Specular * nmap.a;
+    vec4 fragColor = vec4(color.rgb * mixedcolor.rgb  + ambient_Correction.rgb * (1.0 - refl_correction * (1.0 - 0.8 * lightness)) * nFactor, color.a);
+	fragColor += Specular * nmap.a * nFactor;
 
     fragColor.rgb = fog_Func(fragColor.rgb, fogType);
     gl_FragColor = fragColor;

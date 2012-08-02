@@ -31,8 +31,6 @@
 		<dust_cover_factor><use>/environment/surface/dust-cover-factor</use></dust_cover_factor>
 		<fogtype><use>/sim/rendering/shaders/skydome</use></fogtype>
 		<fogstructure><use>/environment/fog-structure</use></fogstructure>
-		<render-bin-number><use>/sim/rendering/tree-bin</use></render-bin-number>
-		<render-bin-name><use>/sim/rendering/tree-bin-name</use></render-bin-name>
 		<!-- 	END fog include -->
 	</parameters>
 	
@@ -70,6 +68,10 @@
 				<source>src-alpha</source>
 				<destination>one-minus-src-alpha</destination>
 			</blend>
+			<alpha-test>
+				<comparison>gequal</comparison>
+				<reference type="float">0.1</reference>
+			</alpha-test>
 			<texture-unit>
 				<unit>0</unit>
 				<type>2d</type>
@@ -109,6 +111,10 @@
 				<wrap-s>clamp</wrap-s>
 				<wrap-t>clamp</wrap-t>
 			</texture-unit>
+			<alpha-test>
+				<comparison>gequal</comparison>
+				<reference type="float">0.1</reference>
+			</alpha-test>
       <program>
         <vertex-shader>Shaders/tree-haze.vert</vertex-shader>
         <fragment-shader>Shaders/tree-haze.frag</fragment-shader>

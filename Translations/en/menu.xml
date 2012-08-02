@@ -87,6 +87,9 @@
 	<reload-panel>Reload Panel</reload-panel>
 	<reload-autopilot>Reload Autopilot</reload-autopilot>
 	<reload-network>Reload Network</reload-network>
+	<reload-model>Reload Aircraft Model</reload-model>
+	<reload-materials>Reload Materials</reload-materials>
+	<reload-scenery>Reload Scenery</reload-scenery>
 	<nasal-console>Nasal Console</nasal-console>
 	<development-keys>Development Keys</development-keys>
 	<configure-dev-extension>Configure Development Extensions</configure-dev-extension>

@@ -102,7 +102,6 @@
                         <extension-supported>GL_ARB_fragment_shader</extension-supported>
                     </and>
                 </or>
-                <extension-supported>GL_EXT_gpu_shader4</extension-supported>
             </and>
         </predicate>
         <pass>
@@ -247,7 +246,7 @@
             </material>
             <cull-face>back</cull-face>
             <program>
-                <vertex-shader>Shaders/reflect-bump-spec.vert</vertex-shader>
+                <vertex-shader>Shaders/runway-gbuffer.vert</vertex-shader>
                 <fragment-shader>Shaders/runway-gbuffer.frag</fragment-shader>
                 <fragment-shader>Shaders/gbuffer-functions.frag</fragment-shader>
                 <fragment-shader>Shaders/gbuffer-encode.frag</fragment-shader>

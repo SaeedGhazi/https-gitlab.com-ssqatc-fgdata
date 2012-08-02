@@ -56,7 +56,7 @@
 				<halign>left</halign>
 				<label>Generic</label>
 			</text>
-			
+
 			<text>
 				<halign>left</halign>
 				<label>Crop</label>
@@ -91,12 +91,18 @@
 				<halign>left</halign>
 				<label>Transition</label>
 				<enable>
-					<not>
-						<property>/sim/rendering/rembrandt/enabled</property>
-					</not>
+					<or>
+						<not>
+							<property>/sim/rendering/rembrandt/enabled</property>
+						</not>
+						<equals>
+							<property>/sim/rendering/materials-file</property>
+							<value>Materials/dds/materials.xml</value>
+						</equals>
+					</or>
 				</enable>
 			</text>
-			
+
 			<text>
 				<halign>left</halign>
 				<label>Model</label>
@@ -110,6 +116,14 @@
 			<text>
 				<halign>left</halign>
 				<label>Water</label>
+			</text>
+
+			<text>
+				<halign>left</halign>
+				<label>Lights</label>
+				<enable>
+					<property>/sim/rendering/rembrandt/enabled</property>
+				</enable>
 			</text>
 
 		</group>
@@ -130,7 +144,7 @@
 					<object-name>generic</object-name>
 				</binding>
 			</slider>
-			
+
 			<slider>
 				<name>crop</name>
 				<enable>
@@ -191,9 +205,15 @@
 			<slider>
 				<name>transition</name>
 				<enable>
-					<not>
-						<property>/sim/rendering/rembrandt/enabled</property>
-					</not>
+					<or>
+						<not>
+							<property>/sim/rendering/rembrandt/enabled</property>
+						</not>
+						<equals>
+							<property>/sim/rendering/materials-file</property>
+							<value>Materials/dds/materials.xml</value>
+						</equals>
+					</or>
 				</enable>
 				<min>0.0</min>
 				<max>1.0</max>
@@ -249,10 +269,27 @@
 				</binding>
 			</slider>
 
+			<slider>
+				<name>lights</name>
+				<enable>
+					<property>/sim/rendering/rembrandt/enabled</property>
+				</enable>
+				<min>0.0</min>
+				<max>4.0</max>
+				<step>1.0</step>
+				<fraction>0.2</fraction>
+				<live>true</live>
+				<property>/sim/rendering/shaders/lights</property>
+				<binding>
+					<command>dialog-apply</command>
+					<object-name>lights</object-name>
+				</binding>
+			</slider>
+
 		</group>
 
 	</group>
-	
+
 	<text>
 		<label>Some shaders are disabled because</label>
 		<color>
@@ -371,7 +408,7 @@
 	</group>
 
 	<hrule/>
-	
+
 	<group>
 		<layout>hbox</layout>
 

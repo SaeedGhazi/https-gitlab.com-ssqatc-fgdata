@@ -38,10 +38,13 @@ in detail below:
                                              tutorial selection dialog
       <description>...</description> mandatory; longer description for the dialog
       <audio-dir>...</audio-dir>  optional; defines where to load sound samples
-      <interval>5</interval>      optional; defines default loop interval in sec
       <timeofday>noon</timeofday> optional; defines daytime; any of "dawn",
                                             "morning", "noon", "afternoon",
                                             "evening", "dusk", "midnight", "real"
+                                            
+      <step-time>                 optional; period between each step being executed. Default 5
+      <exit-time>                 optional; period between exit/abort conditions being checked. Default 1
+      
       <nasal>
           ...                     optional; initial Nasal code; see below
       </nasal>
@@ -72,10 +75,7 @@ in detail below:
           <nasal>
               ...                     optional; Nasal code
           </nasal>
-          <interval>10</interval>     optional; run loop next in this many seconds
-      </init>                                   (default: 5); doesn't change global
-                                                interval
-
+      </init>                                  
 
       <step>                      mandatory; well, not really, but if there's not
                                       at least one <step>, then the whole tutorial
@@ -100,7 +100,7 @@ in detail below:
               ...                     optional; Nasal code that is executed when the
           </nasal>                              step is entered
 
-          <interval>10</interval>     optional; run loop next in this many seconds
+          <wait>10</wait>             optional; wait period after initial messages etc. 
 
           <error>                     optional; allowed several times
               <message>..</message>       optional; text displayed/spoken
@@ -113,8 +113,6 @@ in detail below:
               <nasal>
                   ...                     optional; Nasal code that is executed when the
               </nasal>                              error condition was fulfilled
-
-              <interval>10</interval>     optional; run loop next in this many seconds
           </error>
 
           <exit>                      optional; defines when to leave this <step>

@@ -46,6 +46,8 @@ effect : The effect to be used for this material. (default:
        ambient, diffuse, specular, emissive, and shininess are copied into the
        parameter section of the effect created for this material.
 
+parameters : Additional parameters to be used in the effect. See README.effects        for format information.
+
 wrapu : True if the texture should repeat horizontally over a surface, false if 
        it should not repeat (default: true).
 

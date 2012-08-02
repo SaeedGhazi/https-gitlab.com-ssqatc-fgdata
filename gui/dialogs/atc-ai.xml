@@ -31,25 +31,8 @@
 			<checkbox>
 				<halign>left</halign>
 				<label>Enable AI traffic</label>
-				<property>/sim/ai-traffic/enabled</property>
+				<property>/sim/traffic-manager/enabled</property>
 			</checkbox>
-
-			<group>
-				<layout>hbox</layout>
-
-				<text>
-					<halign>left</halign>
-					<label>AI traffic density:</label>
-				</text>
-
-				<combo>
-					<halign>left</halign>
-					<property>/sim/ai-traffic/level</property>
-					<value>1</value>
-					<value>2</value>
-					<value>3</value>
-				</combo>
-			</group>
 
 		</group>
 

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!-- General settings for all European materials -->
+<PropertyList>
+  <!-- Define Europe as a box with given latitude/longitude -->
+  <condition>
+    <and>
+      <equals>
+        <property>sim/startup/season</property>
+        <value>summer</value>
+      </equals>
+    <and>
+     <greater-than>
+      <property>position/longitude-deg</property>
+      <value>-20.0</value>
+     </greater-than>
+     <less-than>
+      <property>position/longitude-deg</property>
+      <value>40.0</value>
+     </less-than>
+     <greater-than>
+      <property>position/latitude-deg</property>
+      <value>35.0</value>
+     </greater-than>
+    </and>
+   </and>
+  </condition>
+  
+  <!-- European buildings definitions. Notes that these will be used for  -->
+  <!-- both towns and cities                                              -->
+  <building-texture>Textures/buildings.png</building-texture>
+  <building-lightmap>Textures/buildings-lightmap.png</building-lightmap>
+
+  
+</PropertyList>

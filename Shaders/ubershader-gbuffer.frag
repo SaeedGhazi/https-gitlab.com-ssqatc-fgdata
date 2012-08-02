@@ -76,7 +76,7 @@ void main (void)
 	//vec3 ambient = fg_SunAmbientColor.rgb;
 	vec3 N;
 	vec3 dotN;
-	float emission = dot( gl_FrontLightModelProduct.sceneColor.rgb + gl_FrontMaterial.emission,
+	float emission = dot( gl_FrontLightModelProduct.sceneColor.rgb + gl_FrontMaterial.emission.rgb,
 						  vec3( 0.3, 0.59, 0.11 ) );
 	float pf;
 
@@ -92,7 +92,7 @@ void main (void)
 ///END bump
 	vec4 reflection = textureCube(Environment, reflVec * N);
 	vec3 viewVec = normalize(vViewVec);
-	float v      = dot(viewVec, normalize(VNormal));// Map a rainbowish color
+	float v      = abs(dot(viewVec, normalize(VNormal)));// Map a rainbowish color
 	vec4 fresnel = texture2D(ReflFresnelTex, vec2(v, 0.0));
 	vec4 rainbow = texture2D(ReflRainbowTex, vec2(v, 0.0));
 	vec4 color = gl_Color * gl_FrontMaterial.diffuse;

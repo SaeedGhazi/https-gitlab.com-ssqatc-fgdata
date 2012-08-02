@@ -21,6 +21,7 @@
 	<enable-game-mode-desc>Enable full-screen game mode</enable-game-mode-desc>
 	<disable-splash-screen-desc>Disable splash screen</disable-splash-screen-desc>
 	<enable-splash-screen-desc>Enable splash screen</enable-splash-screen-desc>
+	<restore-defaults-desc>Reset all user settings to their defaults (rendering options etc)</restore-defaults-desc>
 	<disable-save-on-exit>Don't save preferences upon program exit</disable-save-on-exit>
 	<enable-save-on-exit>Allow saving preferences at program exit</enable-save-on-exit>
 	<disable-intro-music-desc>Disable introduction music</disable-intro-music-desc>
@@ -30,6 +31,10 @@
 	<enable-mouse-pointer-desc n="1">(i.e. for full screen Voodoo based cards)</enable-mouse-pointer-desc>
 	<disable-random-objects-desc>Exclude random scenery objects</disable-random-objects-desc>
 	<enable-random-objects-desc>Include random scenery objects</enable-random-objects-desc>
+	<disable-random-vegetation-desc>Exclude random vegetation objects</disable-random-vegetation-desc>
+	<enable-random-vegetation-desc>Include random vegetation objects</enable-random-vegetation-desc>
+	<disable-random-buildings-desc>Exclude random buildings objects</disable-random-buildings-desc>
+	<enable-random-buildings-desc>Include random buildings objects</enable-random-buildings-desc>
 	<disable-real-weather-fetch-desc>Disable METAR based real weather fetching</disable-real-weather-fetch-desc>
 	<enable-real-weather-fetch-desc>Enable METAR based real weather fetching (this requires an open internet connection)</enable-real-weather-fetch-desc>
 	<metar-desc>Pass a METAR to set up static weather</metar-desc>
@@ -162,7 +167,7 @@
 	<enable-skyblend-desc>Enable sky blending</enable-skyblend-desc>
 	<disable-textures-desc>Disable textures</disable-textures-desc>
 	<enable-textures-desc>Enable textures</enable-textures-desc>
-	<materials-file-desc>Specify the materials file used to render the scenery (default: materials.xml)</materials-file-desc>
+	<materials-file-desc>Specify the materials file used to render the scenery (default: Materials/regions/materials.xml)</materials-file-desc>
 	<texture-filtering-desc>Anisotropic Texture Filtering: values should be 1 (default),2,4,8 or 16</texture-filtering-desc>
 	<disable-wireframe-desc>Disable wireframe drawing mode</disable-wireframe-desc>
 	<enable-wireframe-desc>Enable wireframe drawing mode</enable-wireframe-desc>

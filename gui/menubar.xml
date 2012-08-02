@@ -552,15 +552,30 @@
 				<command>reinit</command>
 				<subsystem>io</subsystem>
 			</binding>
-        </item>
+		</item>
 
-        <item>
-            <label>Reload Aircraft Model</label>
-            <binding>
-                <command>reinit</command>
-                <subsystem>aircraft-model</subsystem>
-            </binding>
-        </item>
+		<item>
+			<name>reload-model</name>
+			<binding>
+				<command>reinit</command>
+				<subsystem>aircraft-model</subsystem>
+		        </binding>
+		</item>
+
+		<item>
+			<name>reload-materials</name>
+			<binding>
+				<command>reload-materials</command>
+			</binding>
+		</item>
+
+		<item>
+			<name>reload-scenery</name>
+			<binding>
+				<command>reinit</command>
+				<subsystem>tile-manager</subsystem>
+			</binding>
+		</item>
 
 		<item>
 			<name>nasal-console</name>

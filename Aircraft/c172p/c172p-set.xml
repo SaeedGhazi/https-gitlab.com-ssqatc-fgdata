@@ -25,7 +25,7 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
   <flight-model archive="y">jsb</flight-model>
   <aero archive="y">c172p</aero>
 
-  <allow-toggle-cockpit>true</allow-toggle-cockpit>
+  <allow-toggle-cockpit type="bool">true</allow-toggle-cockpit>
 
   <model>
     <path archive="y">Aircraft/c172p/Models/c172p.xml</path>
@@ -51,7 +51,7 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
       <fairing2 type="bool">false</fairing2>
       <fairing3 type="bool">false</fairing3>
     </c172p>
-
+    <hide-yoke type="bool">false</hide-yoke>
   </model>
 
   <startup>
@@ -69,10 +69,10 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
   <view>
    <internal type="bool" archive="y">true</internal>
    <config>
-     <x-offset-m archive="y">-0.21</x-offset-m>
-     <y-offset-m archive="y">0.235</y-offset-m>
-     <z-offset-m archive="y">0.36</z-offset-m>
-     <pitch-offset-deg>-12</pitch-offset-deg>
+     <x-offset-m archive="y" type="double">-0.21</x-offset-m>
+     <y-offset-m archive="y" type="double">0.235</y-offset-m>
+     <z-offset-m archive="y" type="double">0.36</z-offset-m>
+     <pitch-offset-deg type="double">-12</pitch-offset-deg>
    </config>
   </view>
 
@@ -98,6 +98,12 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
   <help include="c172-help.xml"/>
 
   <tutorials include="Tutorials/c172-tutorials.xml"/>
+  
+  <dimensions>
+    <radius-m type="double">5</radius-m>
+  </dimensions>
+  <aircraft-class type="string">ga</aircraft-class>
+  <aircraft-operator type="string">NONE</aircraft-operator>
 
   <multiplay>
       <chat_display>1</chat_display>
@@ -129,12 +135,14 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
 
  <controls>
   <flight>
-   <aileron-trim>0.027</aileron-trim>
-   <rudder-trim>0.0</rudder-trim>
+   <aileron-trim type="double">0.027</aileron-trim>
+   <rudder-trim type="double">0.0</rudder-trim>
   </flight>
   <engines>
    <engine n="0">
-    <magnetos>3</magnetos>
+    <magnetos type="int">3</magnetos>
+    <master-bat type="bool">true</master-bat>
+    <master-alt type="bool">true</master-alt>
    </engine>
   </engines>
   <lighting>
@@ -143,8 +151,17 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
    <strobe type="bool">false</strobe>
    <beacon type="bool">false</beacon>
    <nav-lights type="bool">false</nav-lights>
-   <taxi-light type="bool">false</taxi-light>
   </lighting>
+  <switches>
+   <master-avionics type="bool">true</master-avionics>
+   <starter type="bool">false</starter>
+  </switches>
+  <engines>
+    <engine>
+      <master-bat type="bool">true</master-bat>
+      <master-alt type="bool">true</master-alt>
+    </engine>
+  </engines>
  </controls>
 
  <autopilot>
@@ -178,6 +195,16 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
   <encoder>
    <serviceable type="bool">true</serviceable>
   </encoder>
+  <adf n="0">
+    <ident-audible type="bool">false</ident-audible>
+    <volume type="double">0.7</volume>
+  </adf>
+  <nav n="0">
+    <volume type="double">0.7</volume>
+  </nav>
+  <nav n="1">
+    <volume type="double">0.7</volume>
+  </nav>
  </instrumentation>
 
  <engines>
@@ -197,6 +224,7 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
       <file>Aircraft/c172p/Nasal/doors.nas</file>
       <file>Aircraft/c172p/Nasal/light.nas</file>
       <file>Aircraft/c172p/Nasal/tanks.nas</file>
+      <file>Aircraft/c172p/Nasal/kma20.nas</file>
       <file>Aircraft/c172p/Nasal/ki266.nas</file>
       <script><![CDATA[
         ki266.new(0);
@@ -220,8 +248,8 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
    </script>
   </kap140>
   <kr87>
-            <file>Aircraft/c172p/Nasal/kr87.nas</file>
-        </kr87>
+    <file>Aircraft/c172p/Nasal/kr87.nas</file>
+  </kr87>
  </nasal>
  <payload>
   <weight>
@@ -255,6 +283,14 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
    <max-lb type="double">150.0</max-lb> <!-- WARNING: Max baggage "by the book" is 120lbs or less! -->
   </weight>
  </payload>
+
+ <limits>
+  <mass-and-balance>
+   <maximum-ramp-mass-lbs>2407</maximum-ramp-mass-lbs>
+   <maximum-takeoff-mass-lbs>2400</maximum-takeoff-mass-lbs>
+   <maximum-landing-mass-lbs>2400</maximum-landing-mass-lbs>
+  </mass-and-balance>
+ </limits>
 
  <input>
   <keyboard>

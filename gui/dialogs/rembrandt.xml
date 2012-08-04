@@ -152,9 +152,9 @@
 			</enable>
 		</text>
 	</group>
-	
+
 	<hrule/>
-	
+
 	<group>
 		<layout>hbox</layout>
 		<halign>left</halign>
@@ -373,6 +373,24 @@
 				<object-name>shadow-cascade-4</object-name>
 			</binding>
 		</input>
+	</group>
+
+	<hrule/>
+
+	<group>
+		<layout>hbox</layout>
+		<halign>left</halign>
+
+		<checkbox>
+			<halign>left</halign>
+			<label>Night vision</label>
+			<name>night-vision</name>
+			<property>/sim/rendering/rembrandt/night-vision</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>night-vision</object-name>
+			</binding>
+		</checkbox>
 	</group>
 
 	<hrule/>

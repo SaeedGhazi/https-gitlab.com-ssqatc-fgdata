@@ -72,6 +72,7 @@ Started September 2000 by David Megginson, david@megginson.com
 				<bloom type="bool" userarchive="y">true</bloom>
 				<bloom-strength type="float" userarchive="y">1.0</bloom-strength>
 				<bloom-buffers type="bool">true</bloom-buffers>
+				<night-vision type="bool">false</night-vision>
 				<exposure type="float" userarchive="y">1.0</exposure>
 				<use-color-for-depth type="bool">false</use-color-for-depth>
 				<no-16bit-buffer type="bool">true</no-16bit-buffer>

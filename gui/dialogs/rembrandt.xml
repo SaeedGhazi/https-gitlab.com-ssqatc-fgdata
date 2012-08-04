@@ -52,7 +52,7 @@
 			</enable>
 		</checkbox>
 		<empty>
-			<pref-width>66</pref-width>
+			<pref-width>63</pref-width>
 		</empty>
 		<text>
 			<label>Strength</label>
@@ -111,7 +111,7 @@
 			</enable>
 		</checkbox>
 		<empty>
-			<pref-width>-4</pref-width>
+			<pref-width>-7</pref-width>
 		</empty>
 		<text>
 			<label>Strength</label>
@@ -170,7 +170,7 @@
 			</binding>
 		</checkbox>
 		<empty>
-			<pref-width>45</pref-width>
+			<pref-width>42</pref-width>
 		</empty>
 		<text>
 			<label>Map size</label>
@@ -231,7 +231,7 @@
 			<property>/sim/rendering/shadows/filtering</property>
 		</text>
 		<empty>
-			<pref-width>67</pref-width>
+			<pref-width>114</pref-width>
 		</empty>
 	</group>
 	
@@ -289,18 +289,14 @@
 			<property>/sim/rendering/shadows/num-cascades</property>
 		</text>
 		<empty>
-			<pref-width>67</pref-width>
+			<pref-width>114</pref-width>
 		</empty>
 	</group>
 	
 	<group>
 		<layout>hbox</layout>
 		<halign>right</halign>
-		
-		<empty>
-			<pref-width>130</pref-width>
-		</empty>
-		
+
 		<text>
 			<label>Cascades</label>
 			<enable>
@@ -373,6 +369,274 @@
 				<object-name>shadow-cascade-4</object-name>
 			</binding>
 		</input>
+		<empty>
+			<pref-width>39</pref-width>
+		</empty>
+	</group>
+
+	<hrule/>
+
+	<group>
+		<layout>hbox</layout>
+		<halign>left</halign>
+
+		<checkbox>
+			<halign>left</halign>
+			<label>Vignette</label>
+			<name>vignette</name>
+			<property>/sim/rendering/rembrandt/cinema/vignette</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>vignette</object-name>
+			</binding>
+		</checkbox>
+		<empty>
+			<pref-width>34</pref-width>
+		</empty>
+		<text>
+			<label>Inner circle</label>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/vignette</property>
+			</enable>
+		</text>
+		<slider>
+			<name>inner-circle</name>
+			<min>0.0</min>
+			<max>1.5</max>
+			<step>0.01</step>
+			<property>/sim/rendering/rembrandt/cinema/inner-circle</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>inner-circle</object-name>
+			</binding>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/vignette</property>
+			</enable>
+		</slider>
+		<text>
+			<label>12345678</label>
+			<format>%.2f</format>
+			<live>true</live>
+			<property>/sim/rendering/rembrandt/cinema/inner-circle</property>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/vignette</property>
+			</enable>
+		</text>
+	</group>
+
+	<group>
+		<layout>hbox</layout>
+		<halign>right</halign>
+
+		<text>
+			<label>Outer circle</label>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/vignette</property>
+			</enable>
+		</text>
+		<slider>
+			<name>outer-circle</name>
+			<min>1.0</min>
+			<max>2.0</max>
+			<step>0.01</step>
+			<property>/sim/rendering/rembrandt/cinema/outer-circle</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>outer-circle</object-name>
+			</binding>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/vignette</property>
+			</enable>
+		</slider>
+		<text>
+			<label>12345678</label>
+			<format>%.2f</format>
+			<live>true</live>
+			<property>/sim/rendering/rembrandt/cinema/outer-circle</property>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/vignette</property>
+			</enable>
+		</text>
+		<empty>
+			<pref-width>114</pref-width>
+		</empty>
+	</group>
+
+	<hrule/>
+
+	<group>
+		<layout>hbox</layout>
+		<halign>left</halign>
+
+		<checkbox>
+			<halign>left</halign>
+			<label>Color shift</label>
+			<name>color-shift</name>
+			<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>color-shift</object-name>
+			</binding>
+		</checkbox>
+		<empty>
+			<pref-width>37</pref-width>
+		</empty>
+		<text>
+			<label>Red shift</label>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+			</enable>
+		</text>
+		<slider>
+			<name>red-shift-r</name>
+			<min>0.0</min>
+			<max>1.0</max>
+			<step>0.01</step>
+			<property>/sim/rendering/rembrandt/cinema/red-shift/x</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>red-shift-r</object-name>
+			</binding>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+			</enable>
+		</slider>
+		<slider>
+			<name>red-shift-g</name>
+			<min>0.0</min>
+			<max>1.0</max>
+			<step>0.01</step>
+			<property>/sim/rendering/rembrandt/cinema/red-shift/y</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>red-shift-g</object-name>
+			</binding>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+			</enable>
+		</slider>
+		<slider>
+			<name>red-shift-b</name>
+			<min>0.0</min>
+			<max>1.0</max>
+			<step>0.01</step>
+			<property>/sim/rendering/rembrandt/cinema/red-shift/z</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>red-shift-b</object-name>
+			</binding>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+			</enable>
+		</slider>
+	</group>
+
+	<group>
+		<layout>hbox</layout>
+		<halign>right</halign>
+
+		<text>
+			<label>Green shift</label>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+			</enable>
+		</text>
+		<slider>
+			<name>green-shift-r</name>
+			<min>0.0</min>
+			<max>1.0</max>
+			<step>0.01</step>
+			<property>/sim/rendering/rembrandt/cinema/green-shift/x</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>green-shift-r</object-name>
+			</binding>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+			</enable>
+		</slider>
+		<slider>
+			<name>green-shift-g</name>
+			<min>0.0</min>
+			<max>1.0</max>
+			<step>0.01</step>
+			<property>/sim/rendering/rembrandt/cinema/green-shift/y</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>green-shift-g</object-name>
+			</binding>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+			</enable>
+		</slider>
+		<slider>
+			<name>green-shift-b</name>
+			<min>0.0</min>
+			<max>1.0</max>
+			<step>0.01</step>
+			<property>/sim/rendering/rembrandt/cinema/green-shift/z</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>green-shift-b</object-name>
+			</binding>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+			</enable>
+		</slider>
+	</group>
+
+	<group>
+		<layout>hbox</layout>
+		<halign>right</halign>
+
+		<text>
+			<label>Blue shift</label>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+			</enable>
+		</text>
+		<slider>
+			<name>blue-shift-r</name>
+			<min>0.0</min>
+			<max>1.0</max>
+			<step>0.01</step>
+			<property>/sim/rendering/rembrandt/cinema/blue-shift/x</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>blue-shift-r</object-name>
+			</binding>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+			</enable>
+		</slider>
+		<slider>
+			<name>blue-shift-g</name>
+			<min>0.0</min>
+			<max>1.0</max>
+			<step>0.01</step>
+			<property>/sim/rendering/rembrandt/cinema/blue-shift/y</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>blue-shift-g</object-name>
+			</binding>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+			</enable>
+		</slider>
+		<slider>
+			<name>blue-shift-b</name>
+			<min>0.0</min>
+			<max>1.0</max>
+			<step>0.01</step>
+			<property>/sim/rendering/rembrandt/cinema/blue-shift/z</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>blue-shift-b</object-name>
+			</binding>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+			</enable>
+		</slider>
 	</group>
 
 	<hrule/>
@@ -390,6 +654,14 @@
 				<command>dialog-apply</command>
 				<object-name>night-vision</object-name>
 			</binding>
+			<enable>
+				<not>
+					<or>
+						<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+						<property>/sim/rendering/rembrandt/cinema/vignette</property>
+					</or>
+				</not>
+			</enable>
 		</checkbox>
 	</group>
 

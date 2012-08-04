@@ -14,6 +14,16 @@
 			<internal-format>normalized</internal-format>
 		</texture>
 
+		<cinema>
+			<vignette><use>/sim/rendering/rembrandt/cinema/vignette</use></vignette>
+			<inner-circle><use>/sim/rendering/rembrandt/cinema/inner-circle</use></inner-circle>
+			<outer-circle><use>/sim/rendering/rembrandt/cinema/outer-circle</use></outer-circle>
+			<color-shift><use>/sim/rendering/rembrandt/cinema/color-shift</use></color-shift>
+			<red-shift><use>/sim/rendering/rembrandt/cinema/red-shift</use></red-shift>
+			<green-shift><use>/sim/rendering/rembrandt/cinema/green-shift</use></green-shift>
+			<blue-shift><use>/sim/rendering/rembrandt/cinema/blue-shift</use></blue-shift>
+		</cinema>
+
 		<buffer-nw-enabled><use>/sim/rendering/rembrandt/debug-buffer[0]/enabled</use></buffer-nw-enabled>
 		<buffer-nw-name><use>/sim/rendering/rembrandt/debug-buffer[0]/name</use></buffer-nw-name>
 		<buffer-ne-enabled><use>/sim/rendering/rembrandt/debug-buffer[1]/enabled</use></buffer-ne-enabled>
@@ -23,6 +33,103 @@
 		<buffer-se-enabled><use>/sim/rendering/rembrandt/debug-buffer[3]/enabled</use></buffer-se-enabled>
 		<buffer-se-name><use>/sim/rendering/rembrandt/debug-buffer[3]/name</use></buffer-se-name>
 	</parameters>
+	<technique n="9">
+		<predicate>
+			<and>
+				<or>
+					<property>/sim/rendering/rembrandt/cinema/vignette</property>
+					<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				</or>
+				<equal>
+					<value type="float">0.0</value>
+					<float-property>/sim/rendering/rembrandt/show-buffers</float-property>
+				</equal>
+			</and>
+		</predicate>
+		<pass>
+			<render-bin>
+				<bin-number>99999</bin-number>
+				<bin-name>RenderBin</bin-name>
+			</render-bin>
+			<texture-unit>
+				<unit>0</unit>
+				<type>buffer</type>
+				<name>lighting</name>
+			</texture-unit>
+			<texture-unit>
+				<unit>1</unit>
+				<type>buffer</type>
+				<name>bloom-3</name>
+			</texture-unit>
+
+			<program>
+				<vertex-shader>Shaders/fullscreen.vert</vertex-shader>
+				<fragment-shader>Shaders/cinema.frag</fragment-shader>
+			</program>
+			<uniform>
+				<name>lighting_tex</name>
+				<type>sampler-2d</type>
+				<value type="int">0</value>
+			</uniform>
+			<uniform>
+				<name>bloom_tex</name>
+				<type>sampler-2d</type>
+				<value type="int">1</value>
+			</uniform>
+
+			<uniform>
+				<name>bloomEnabled</name>
+				<type>bool</type>
+				<value type="bool"><use>bloom</use></value>
+			</uniform>
+			<uniform>
+				<name>bloomStrength</name>
+				<type>float</type>
+				<value><use>bloom-strength</use></value>
+			</uniform>
+			<uniform>
+				<name>bloomBuffers</name>
+				<type>bool</type>
+				<value><use>bloom-buffers</use></value>
+			</uniform>
+
+			<uniform>
+				<name>vignette</name>
+				<type>bool</type>
+				<value><use>cinema/vignette</use></value>
+			</uniform>
+			<uniform>
+				<name>innerCircle</name>
+				<type>float</type>
+				<value><use>cinema/inner-circle</use></value>
+			</uniform>
+			<uniform>
+				<name>outerCircle</name>
+				<type>float</type>
+				<value><use>cinema/outer-circle</use></value>
+			</uniform>
+			<uniform>
+				<name>colorShift</name>
+				<type>bool</type>
+				<value><use>cinema/color-shift</use></value>
+			</uniform>
+			<uniform>
+				<name>redShift</name>
+				<type>float-vec3</type>
+				<value><use>cinema/red-shift</use></value>
+			</uniform>
+			<uniform>
+				<name>greenShift</name>
+				<type>float-vec3</type>
+				<value><use>cinema/green-shift</use></value>
+			</uniform>
+			<uniform>
+				<name>blueShift</name>
+				<type>float-vec3</type>
+				<value><use>cinema/blue-shift</use></value>
+			</uniform>
+		</pass>
+	</technique>
 	<technique n="10">
 		<predicate>
 			<and>

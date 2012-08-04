@@ -231,7 +231,7 @@
 			<property>/sim/rendering/shadows/filtering</property>
 		</text>
 		<empty>
-			<pref-width>114</pref-width>
+			<pref-width>222</pref-width>
 		</empty>
 	</group>
 	
@@ -289,7 +289,7 @@
 			<property>/sim/rendering/shadows/num-cascades</property>
 		</text>
 		<empty>
-			<pref-width>114</pref-width>
+			<pref-width>222</pref-width>
 		</empty>
 	</group>
 	
@@ -370,7 +370,7 @@
 			</binding>
 		</input>
 		<empty>
-			<pref-width>39</pref-width>
+			<pref-width>147</pref-width>
 		</empty>
 	</group>
 
@@ -458,7 +458,7 @@
 			</enable>
 		</text>
 		<empty>
-			<pref-width>114</pref-width>
+			<pref-width>222</pref-width>
 		</empty>
 	</group>
 
@@ -491,7 +491,7 @@
 			<name>red-shift-r</name>
 			<min>0.0</min>
 			<max>1.0</max>
-			<step>0.01</step>
+			<step>0.004</step>
 			<property>/sim/rendering/rembrandt/cinema/red-shift/x</property>
 			<binding>
 				<command>dialog-apply</command>
@@ -501,11 +501,20 @@
 				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
 			</enable>
 		</slider>
+		<text>
+			<label>1234</label>
+			<format>%.2f</format>
+			<live>true</live>
+			<property>/sim/rendering/rembrandt/cinema/red-shift/x</property>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+			</enable>
+		</text>
 		<slider>
 			<name>red-shift-g</name>
 			<min>0.0</min>
 			<max>1.0</max>
-			<step>0.01</step>
+			<step>0.004</step>
 			<property>/sim/rendering/rembrandt/cinema/red-shift/y</property>
 			<binding>
 				<command>dialog-apply</command>
@@ -515,11 +524,20 @@
 				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
 			</enable>
 		</slider>
+		<text>
+			<label>1234</label>
+			<format>%.2f</format>
+			<live>true</live>
+			<property>/sim/rendering/rembrandt/cinema/red-shift/y</property>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+			</enable>
+		</text>
 		<slider>
 			<name>red-shift-b</name>
 			<min>0.0</min>
 			<max>1.0</max>
-			<step>0.01</step>
+			<step>0.004</step>
 			<property>/sim/rendering/rembrandt/cinema/red-shift/z</property>
 			<binding>
 				<command>dialog-apply</command>
@@ -529,6 +547,15 @@
 				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
 			</enable>
 		</slider>
+		<text>
+			<label>1234</label>
+			<format>%.2f</format>
+			<live>true</live>
+			<property>/sim/rendering/rembrandt/cinema/red-shift/z</property>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+			</enable>
+		</text>
 	</group>
 
 	<group>
@@ -545,7 +572,7 @@
 			<name>green-shift-r</name>
 			<min>0.0</min>
 			<max>1.0</max>
-			<step>0.01</step>
+			<step>0.004</step>
 			<property>/sim/rendering/rembrandt/cinema/green-shift/x</property>
 			<binding>
 				<command>dialog-apply</command>
@@ -555,11 +582,20 @@
 				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
 			</enable>
 		</slider>
+		<text>
+			<label>1234</label>
+			<format>%.2f</format>
+			<live>true</live>
+			<property>/sim/rendering/rembrandt/cinema/green-shift/x</property>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+			</enable>
+		</text>
 		<slider>
 			<name>green-shift-g</name>
 			<min>0.0</min>
 			<max>1.0</max>
-			<step>0.01</step>
+			<step>0.004</step>
 			<property>/sim/rendering/rembrandt/cinema/green-shift/y</property>
 			<binding>
 				<command>dialog-apply</command>
@@ -569,11 +605,20 @@
 				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
 			</enable>
 		</slider>
+		<text>
+			<label>1234</label>
+			<format>%.2f</format>
+			<live>true</live>
+			<property>/sim/rendering/rembrandt/cinema/green-shift/y</property>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+			</enable>
+		</text>
 		<slider>
 			<name>green-shift-b</name>
 			<min>0.0</min>
 			<max>1.0</max>
-			<step>0.01</step>
+			<step>0.004</step>
 			<property>/sim/rendering/rembrandt/cinema/green-shift/z</property>
 			<binding>
 				<command>dialog-apply</command>
@@ -583,6 +628,15 @@
 				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
 			</enable>
 		</slider>
+		<text>
+			<label>1234</label>
+			<format>%.2f</format>
+			<live>true</live>
+			<property>/sim/rendering/rembrandt/cinema/green-shift/z</property>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+			</enable>
+		</text>
 	</group>
 
 	<group>
@@ -599,7 +653,7 @@
 			<name>blue-shift-r</name>
 			<min>0.0</min>
 			<max>1.0</max>
-			<step>0.01</step>
+			<step>0.004</step>
 			<property>/sim/rendering/rembrandt/cinema/blue-shift/x</property>
 			<binding>
 				<command>dialog-apply</command>
@@ -609,11 +663,20 @@
 				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
 			</enable>
 		</slider>
+		<text>
+			<label>1234</label>
+			<format>%.2f</format>
+			<live>true</live>
+			<property>/sim/rendering/rembrandt/cinema/blue-shift/x</property>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+			</enable>
+		</text>
 		<slider>
 			<name>blue-shift-g</name>
 			<min>0.0</min>
 			<max>1.0</max>
-			<step>0.01</step>
+			<step>0.004</step>
 			<property>/sim/rendering/rembrandt/cinema/blue-shift/y</property>
 			<binding>
 				<command>dialog-apply</command>
@@ -623,11 +686,20 @@
 				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
 			</enable>
 		</slider>
+		<text>
+			<label>1234</label>
+			<format>%.2f</format>
+			<live>true</live>
+			<property>/sim/rendering/rembrandt/cinema/blue-shift/y</property>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+			</enable>
+		</text>
 		<slider>
 			<name>blue-shift-b</name>
 			<min>0.0</min>
 			<max>1.0</max>
-			<step>0.01</step>
+			<step>0.004</step>
 			<property>/sim/rendering/rembrandt/cinema/blue-shift/z</property>
 			<binding>
 				<command>dialog-apply</command>
@@ -637,6 +709,15 @@
 				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
 			</enable>
 		</slider>
+		<text>
+			<label>1234</label>
+			<format>%.2f</format>
+			<live>true</live>
+			<property>/sim/rendering/rembrandt/cinema/blue-shift/z</property>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+			</enable>
+		</text>
 	</group>
 
 	<hrule/>

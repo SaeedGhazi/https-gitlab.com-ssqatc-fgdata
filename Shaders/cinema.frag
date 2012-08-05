@@ -13,6 +13,9 @@ uniform float outerCircle;
 uniform bool distortion;
 uniform vec3 distortionFactor;
 
+uniform bool colorFringe;
+uniform float colorFringeFactor;
+
 uniform vec2 fg_BufferSize;
 // uniform float osg_SimulationTime;
 // uniform float shutterFreq;
@@ -23,31 +26,50 @@ uniform float bloomStrength;
 uniform bool bloomBuffers;
 
 void main() {
-    vec2 coords = gl_TexCoord[0].xy;
-	vec2 initialCoords = coords;
+    vec2 c1 = gl_TexCoord[0].xy;
+	vec2 initialCoords = c1;
+	vec2 c2;
 
 	if (distortion) {
-		vec2 c = 2.0 * coords - vec2(1.,1.);
-		c *= vec2( 1.0, fg_BufferSize.y / fg_BufferSize.x );
-		float r = length(c);
+		c1 = 2.0 * initialCoords - vec2(1.,1.);
+		c1 *= vec2( 1.0, fg_BufferSize.y / fg_BufferSize.x );
+		float r = length(c1);
 
-		c += c * dot(distortionFactor.xy, vec2(r*r, r*r*r*r));
-		c /= distortionFactor.z;
+		c1 += c1 * dot(distortionFactor.xy, vec2(r*r, r*r*r*r));
+		c1 /= distortionFactor.z;
 
-		c *= vec2( 1.0, fg_BufferSize.x / fg_BufferSize.y );
-		coords = c * .5 + .5;
+		c1 *= vec2( 1.0, fg_BufferSize.x / fg_BufferSize.y );
+		c1 = c1 * .5 + .5;
+
+		if (colorFringe) {
+			c2 = 2.0 * initialCoords - vec2(1.,1.);
+			c2 *= vec2( 1.0, fg_BufferSize.y / fg_BufferSize.x );
+			r = length(c2);
+
+			c2 += c2 * dot(distortionFactor.xy*colorFringeFactor, vec2(r*r, r*r*r*r));
+			c2 /= distortionFactor.z;
+
+			c2 *= vec2( 1.0, fg_BufferSize.x / fg_BufferSize.y );
+			c2 = c2 * .5 + .5;
+		}
 	}
 
-    vec4 color = texture2D( lighting_tex, coords );
+    vec4 color = texture2D( lighting_tex, c1 );
 	if (bloomEnabled && bloomBuffers)
-		color = color + bloomStrength * texture2D( bloom_tex, coords );
+		color += bloomStrength * texture2D( bloom_tex, c1 );
+
+	if (distortion && colorFringe) {
+		color.g = texture2D( lighting_tex, c2 ).g;
+		if (bloomEnabled && bloomBuffers)
+			color.g += bloomStrength * texture2D( bloom_tex, c2 ).g;
+	}
 
 	if (colorShift) {
-		vec3 c2;
-		c2.r = dot(color, redShift);
-		c2.g = dot(color, greenShift);
-		c2.b = dot(color, blueShift);
-		color.rgb = c2;
+		vec3 col2;
+		col2.r = dot(color.rgb, redShift);
+		col2.g = dot(color.rgb, greenShift);
+		col2.b = dot(color.rgb, blueShift);
+		color.rgb = col2;
 	}
 
 	if (vignette) {

@@ -24,6 +24,8 @@
 			<blue-shift><use>/sim/rendering/rembrandt/cinema/blue-shift</use></blue-shift>
 			<distortion><use>/sim/rendering/rembrandt/cinema/distortion</use></distortion>
 			<distortion-factor><use>/sim/rendering/rembrandt/cinema/distortion-factor</use></distortion-factor>
+			<color-fringe><use>/sim/rendering/rembrandt/cinema/color-fringe</use></color-fringe>
+			<color-fringe-factor><use>/sim/rendering/rembrandt/cinema/color-fringe-factor</use></color-fringe-factor>
 		</cinema>
 
 		<buffer-nw-enabled><use>/sim/rendering/rembrandt/debug-buffer[0]/enabled</use></buffer-nw-enabled>
@@ -141,6 +143,17 @@
 				<name>distortionFactor</name>
 				<type>float-vec3</type>
 				<value><use>cinema/distortion-factor</use></value>
+			</uniform>
+
+			<uniform>
+				<name>colorFringe</name>
+				<type>bool</type>
+				<value><use>cinema/color-fringe</use></value>
+			</uniform>
+			<uniform>
+				<name>colorFringeFactor</name>
+				<type>float</type>
+				<value><use>cinema/color-fringe-factor</use></value>
 			</uniform>
 		</pass>
 	</technique>

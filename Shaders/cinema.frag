@@ -1,5 +1,6 @@
 uniform sampler2D lighting_tex;
 uniform sampler2D bloom_tex;
+uniform sampler2D film_tex;
 
 uniform bool colorShift;
 uniform vec3 redShift;
@@ -16,8 +17,10 @@ uniform vec3 distortionFactor;
 uniform bool colorFringe;
 uniform float colorFringeFactor;
 
+uniform bool filmWear;
+
 uniform vec2 fg_BufferSize;
-// uniform float osg_SimulationTime;
+uniform float osg_SimulationTime;
 // uniform float shutterFreq;
 // uniform float shutterDuration;
 
@@ -54,6 +57,11 @@ void main() {
 		}
 	}
 
+	vec3 dirt = vec3(1.0);
+	if (filmWear) {
+		dirt = texture2D(film_tex, initialCoords + vec2(0.0, osg_SimulationTime * 7.7)).rgb;
+	}
+
     vec4 color = texture2D( lighting_tex, c1 );
 	if (bloomEnabled && bloomBuffers)
 		color += bloomStrength * texture2D( bloom_tex, c1 );
@@ -77,10 +85,10 @@ void main() {
 		c = c * vec2( 1.0, fg_BufferSize.y / fg_BufferSize.x );
 		float l = length(c);
 		float f = smoothstep( innerCircle, innerCircle * outerCircle, l );
-		color.rgb = (1 - f) * color.rgb;
+		color.rgb = (1.0 - f) * color.rgb;
 	}
 	// if ((osg_FrameNumber % 6) == 0)
 		// f = 1.0;
 
-    gl_FragColor = color;
+    gl_FragColor = color * vec4(dirt, 1.0);
 }

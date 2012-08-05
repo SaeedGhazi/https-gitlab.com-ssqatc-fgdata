@@ -93,6 +93,12 @@ Started September 2000 by David Megginson, david@megginson.com
 						<y type="float" userarchive="y">.534</y>
 						<z type="float" userarchive="y">.131</z>
 					</blue-shift>
+					<distortion type="bool">false</distortion>
+					<distortion-factor>
+						<x type="float" userarchive="y">0.0</x>
+						<y type="float" userarchive="y">0.0</y>
+						<z type="float" userarchive="y">1.0</z>
+					</distortion-factor>
 				</cinema>
 				<exposure type="float" userarchive="y">1.0</exposure>
 				<use-color-for-depth type="bool">false</use-color-for-depth>

@@ -10,6 +10,9 @@ uniform bool vignette;
 uniform float innerCircle;
 uniform float outerCircle;
 
+uniform bool distortion;
+uniform vec3 distortionFactor;
+
 uniform vec2 fg_BufferSize;
 // uniform float osg_SimulationTime;
 // uniform float shutterFreq;
@@ -21,6 +24,19 @@ uniform bool bloomBuffers;
 
 void main() {
     vec2 coords = gl_TexCoord[0].xy;
+
+	if (distortion) {
+		vec2 c = 2.0 * coords - vec2(1.,1.);
+		c *= vec2( 1.0, fg_BufferSize.y / fg_BufferSize.x );
+		float r = length(c);
+
+		c += c * dot(distortionFactor.xy, vec2(r*r, r*r*r*r));
+		c /= distortionFactor.z;
+
+		c *= vec2( 1.0, fg_BufferSize.x / fg_BufferSize.y );
+		coords = c * .5 + .5;
+	}
+
     vec4 color = texture2D( lighting_tex, coords );
 	if (bloomEnabled && bloomBuffers)
 		color = color + bloomStrength * texture2D( bloom_tex, coords );

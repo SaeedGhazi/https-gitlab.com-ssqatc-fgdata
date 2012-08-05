@@ -462,8 +462,6 @@
 		</empty>
 	</group>
 
-	<hrule/>
-
 	<group>
 		<layout>hbox</layout>
 		<halign>left</halign>
@@ -716,6 +714,100 @@
 			<property>/sim/rendering/rembrandt/cinema/blue-shift/z</property>
 			<enable>
 				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+			</enable>
+		</text>
+	</group>
+
+	<group>
+		<layout>hbox</layout>
+		<halign>left</halign>
+
+		<checkbox>
+			<halign>left</halign>
+			<label>Distortion</label>
+			<name>distortion</name>
+			<property>/sim/rendering/rembrandt/cinema/distortion</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>distortion</object-name>
+			</binding>
+		</checkbox>
+		<empty>
+			<pref-width>48</pref-width>
+		</empty>
+		<text>
+			<label>Factors</label>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/distortion</property>
+			</enable>
+		</text>
+		<slider>
+			<name>distortion-factor-x</name>
+			<min>-0.5</min>
+			<max>0.5</max>
+			<step>0.01</step>
+			<property>/sim/rendering/rembrandt/cinema/distortion-factor/x</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>distortion-factor-x</object-name>
+			</binding>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/distortion</property>
+			</enable>
+		</slider>
+		<text>
+			<label>1234</label>
+			<format>%.2f</format>
+			<live>true</live>
+			<property>/sim/rendering/rembrandt/cinema/distortion-factor/x</property>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/distortion</property>
+			</enable>
+		</text>
+		<slider>
+			<name>distortion-factor-y</name>
+			<min>-0.5</min>
+			<max>0.5</max>
+			<step>0.01</step>
+			<property>/sim/rendering/rembrandt/cinema/distortion-factor/y</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>distortion-factor-y</object-name>
+			</binding>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/distortion</property>
+			</enable>
+		</slider>
+		<text>
+			<label>1234</label>
+			<format>%.2f</format>
+			<live>true</live>
+			<property>/sim/rendering/rembrandt/cinema/distortion-factor/y</property>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/distortion</property>
+			</enable>
+		</text>
+		<slider>
+			<name>distortion-factor-z</name>
+			<min>0.5</min>
+			<max>1.5</max>
+			<step>0.01</step>
+			<property>/sim/rendering/rembrandt/cinema/distortion-factor/z</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>distortion-factor-z</object-name>
+			</binding>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/distortion</property>
+			</enable>
+		</slider>
+		<text>
+			<label>1234</label>
+			<format>%.2f</format>
+			<live>true</live>
+			<property>/sim/rendering/rembrandt/cinema/distortion-factor/z</property>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/distortion</property>
 			</enable>
 		</text>
 	</group>

@@ -22,6 +22,8 @@
 			<red-shift><use>/sim/rendering/rembrandt/cinema/red-shift</use></red-shift>
 			<green-shift><use>/sim/rendering/rembrandt/cinema/green-shift</use></green-shift>
 			<blue-shift><use>/sim/rendering/rembrandt/cinema/blue-shift</use></blue-shift>
+			<distortion><use>/sim/rendering/rembrandt/cinema/distortion</use></distortion>
+			<distortion-factor><use>/sim/rendering/rembrandt/cinema/distortion-factor</use></distortion-factor>
 		</cinema>
 
 		<buffer-nw-enabled><use>/sim/rendering/rembrandt/debug-buffer[0]/enabled</use></buffer-nw-enabled>
@@ -39,6 +41,7 @@
 				<or>
 					<property>/sim/rendering/rembrandt/cinema/vignette</property>
 					<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+					<property>/sim/rendering/rembrandt/cinema/distortion</property>
 				</or>
 				<equal>
 					<value type="float">0.0</value>
@@ -127,6 +130,17 @@
 				<name>blueShift</name>
 				<type>float-vec3</type>
 				<value><use>cinema/blue-shift</use></value>
+			</uniform>
+
+			<uniform>
+				<name>distortion</name>
+				<type>bool</type>
+				<value><use>cinema/distortion</use></value>
+			</uniform>
+			<uniform>
+				<name>distortionFactor</name>
+				<type>float-vec3</type>
+				<value><use>cinema/distortion-factor</use></value>
 			</uniform>
 		</pass>
 	</technique>

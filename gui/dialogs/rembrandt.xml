@@ -195,7 +195,7 @@
 		</combo>
 		
 	</group>
-	
+
 	<group>
 		<layout>hbox</layout>
 		<halign>right</halign>
@@ -234,7 +234,7 @@
 			<pref-width>222</pref-width>
 		</empty>
 	</group>
-	
+
 	<group>
 		<layout>hbox</layout>
 		<halign>right</halign>
@@ -791,7 +791,7 @@
 			<name>distortion-factor-z</name>
 			<min>0.5</min>
 			<max>1.5</max>
-			<step>0.01</step>
+			<step>0.001</step>
 			<property>/sim/rendering/rembrandt/cinema/distortion-factor/z</property>
 			<binding>
 				<command>dialog-apply</command>
@@ -808,6 +808,66 @@
 			<property>/sim/rendering/rembrandt/cinema/distortion-factor/z</property>
 			<enable>
 				<property>/sim/rendering/rembrandt/cinema/distortion</property>
+			</enable>
+		</text>
+	</group>
+
+	<group>
+		<layout>hbox</layout>
+		<halign>left</halign>
+
+		<checkbox>
+			<halign>left</halign>
+			<label>Color fringe</label>
+			<name>color-fringe</name>
+			<property>/sim/rendering/rembrandt/cinema/color-fringe</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>color-fringe</object-name>
+			</binding>
+			<enable>
+				<property>/sim/rendering/rembrandt/cinema/distortion</property>
+			</enable>
+		</checkbox>
+		<empty>
+			<pref-width>42</pref-width>
+		</empty>
+		<text>
+			<label>Factor</label>
+			<enable>
+				<and>
+					<property>/sim/rendering/rembrandt/cinema/distortion</property>
+					<property>/sim/rendering/rembrandt/cinema/color-fringe</property>
+				</and>
+			</enable>
+		</text>
+		<slider>
+			<name>color-fringe-factor</name>
+			<min>0.96</min>
+			<max>1.04</max>
+			<step>0.001</step>
+			<property>/sim/rendering/rembrandt/cinema/color-fringe-factor</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>color-fringe-factor</object-name>
+			</binding>
+			<enable>
+				<and>
+					<property>/sim/rendering/rembrandt/cinema/distortion</property>
+					<property>/sim/rendering/rembrandt/cinema/color-fringe</property>
+				</and>
+			</enable>
+		</slider>
+		<text>
+			<label>12345678</label>
+			<format>%.3f</format>
+			<live>true</live>
+			<property>/sim/rendering/rembrandt/cinema/color-fringe-factor</property>
+			<enable>
+				<and>
+					<property>/sim/rendering/rembrandt/cinema/distortion</property>
+					<property>/sim/rendering/rembrandt/cinema/color-fringe</property>
+				</and>
 			</enable>
 		</text>
 	</group>

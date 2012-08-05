@@ -8,96 +8,6 @@
         <g_sample_rad type="float">0.03</g_sample_rad>
         <random_size type="float">800.0</random_size>
 	</parameters>
-	<technique n="10">
-		<predicate>
-			<and>
-				<or>
-					<less-equal>
-						<value type="float">2.0</value>
-						<glversion/>
-					</less-equal>
-					<and>
-						<extension-supported>GL_ARB_shader_objects</extension-supported>
-						<extension-supported>GL_ARB_shading_language_100</extension-supported>
-						<extension-supported>GL_ARB_vertex_shader</extension-supported>
-						<extension-supported>GL_ARB_fragment_shader</extension-supported>
-					</and>
-				</or>
-				<extension-supported>GL_EXT_gpu_shader4</extension-supported>
-			</and>
-		</predicate>
-		<pass>
-			<texture-unit>
-				<unit>0</unit>
-				<type>buffer</type>
-				<name>depth</name>
-			</texture-unit>
-			<texture-unit>
-				<unit>1</unit>
-				<type>buffer</type>
-				<name>normal</name>
-			</texture-unit>
-			<texture-unit>
-				<unit>2</unit>
-				<type>buffer</type>
-				<name>spec-emis</name>
-			</texture-unit>
-			<texture-unit>
-				<unit>3</unit>
-				<type>noise</type>
-			</texture-unit>
-			<program>
-				<vertex-shader>Shaders/ssao.vert</vertex-shader>
-				<fragment-shader>Shaders/ssao.frag</fragment-shader>
-				<fragment-shader>Shaders/gbuffer-functions.frag</fragment-shader>
-			</program>
-			<uniform>
-				<name>depth_tex</name>
-				<type>sampler-2d</type>
-				<value type="int">0</value>
-			</uniform>
-			<uniform>
-				<name>normal_tex</name>
-				<type>sampler-2d</type>
-				<value type="int">1</value>
-			</uniform>
-			<uniform>
-				<name>spec_emis_tex</name>
-				<type>sampler-2d</type>
-				<value type="int">2</value>
-			</uniform>
-			<uniform>
-				<name>noise_tex</name>
-				<type>sampler-2d</type>
-				<value type="int">3</value>
-			</uniform>
-			<uniform>
-				<name>g_scale</name>
-				<type>float</type>
-				<value><use>g_scale</use></value>
-			</uniform>
-			<uniform>
-				<name>g_bias</name>
-				<type>float</type>
-				<value><use>g_bias</use></value>
-			</uniform>
-			<uniform>
-				<name>g_intensity</name>
-				<type>float</type>
-				<value><use>g_intensity</use></value>
-			</uniform>
-			<uniform>
-				<name>g_sample_rad</name>
-				<type>float</type>
-				<value><use>g_sample_rad</use></value>
-			</uniform>
-			<uniform>
-				<name>random_size</name>
-				<type>float</type>
-				<value><use>random_size</use></value>
-			</uniform>
-		</pass>
-	</technique>
 	<technique n="11">
 		<pass>
 			<texture-unit>
@@ -121,7 +31,7 @@
 			</texture-unit>
 			<program>
 				<vertex-shader>Shaders/ssao.vert</vertex-shader>
-				<fragment-shader>Shaders/ssao-ati.frag</fragment-shader>
+				<fragment-shader>Shaders/ssao.frag</fragment-shader>
 				<fragment-shader>Shaders/gbuffer-functions.frag</fragment-shader>
 			</program>
 			<uniform>

@@ -40,6 +40,97 @@
 	<technique n="9">
 		<predicate>
 			<and>
+				<property>/sim/rendering/rembrandt/night-vision</property>
+				<equal>
+					<value type="float">0.0</value>
+					<float-property>/sim/rendering/rembrandt/show-buffers</float-property>
+				</equal>
+			</and>
+		</predicate>
+		<pass>
+			<render-bin>
+				<bin-number>99999</bin-number>
+				<bin-name>RenderBin</bin-name>
+			</render-bin>
+			<texture-unit>
+				<unit>0</unit>
+				<type>buffer</type>
+				<name>lighting</name>
+			</texture-unit>
+			<texture-unit>
+				<unit>1</unit>
+				<type>buffer</type>
+				<name>bloom-3</name>
+			</texture-unit>
+			<texture-unit>
+				<unit>2</unit>
+				<type>buffer</type>
+				<name>spec-emis</name>
+			</texture-unit>
+			<texture-unit>
+				<unit>3</unit>
+				<type>buffer</type>
+				<name>diffuse</name>
+			</texture-unit>
+			<texture-unit>
+				<unit>4</unit>
+				<image><use>texture[0]/image</use></image>
+				<filter><use>texture[0]/filter</use></filter>
+				<wrap-s><use>texture[0]/wrap-s</use></wrap-s>
+				<wrap-t><use>texture[0]/wrap-t</use></wrap-t>
+				<internal-format><use>texture[0]/internal-format</use></internal-format>
+			</texture-unit>
+
+			<program>
+				<vertex-shader>Shaders/fullscreen.vert</vertex-shader>
+				<fragment-shader>Shaders/night-vision.frag</fragment-shader>
+			</program>
+			<uniform>
+				<name>lighting_tex</name>
+				<type>sampler-2d</type>
+				<value type="int">0</value>
+			</uniform>
+			<uniform>
+				<name>bloom_tex</name>
+				<type>sampler-2d</type>
+				<value type="int">1</value>
+			</uniform>
+			<uniform>
+				<name>spec_emis_tex</name>
+				<type>sampler-2d</type>
+				<value type="int">2</value>
+			</uniform>
+			<uniform>
+				<name>color_tex</name>
+				<type>sampler-2d</type>
+				<value type="int">3</value>
+			</uniform>
+			<uniform>
+				<name>noise_tex</name>
+				<type>sampler-2d</type>
+				<value type="int">4</value>
+			</uniform>
+
+			<uniform>
+				<name>bloomEnabled</name>
+				<type>bool</type>
+				<value type="bool"><use>bloom</use></value>
+			</uniform>
+			<uniform>
+				<name>bloomStrength</name>
+				<type>float</type>
+				<value><use>bloom-strength</use></value>
+			</uniform>
+			<uniform>
+				<name>bloomBuffers</name>
+				<type>bool</type>
+				<value><use>bloom-buffers</use></value>
+			</uniform>
+		</pass>
+	</technique>
+	<technique n="10">
+		<predicate>
+			<and>
 				<or>
 					<property>/sim/rendering/rembrandt/cinema/vignette</property>
 					<property>/sim/rendering/rembrandt/cinema/color-shift</property>
@@ -154,97 +245,6 @@
 				<name>colorFringeFactor</name>
 				<type>float</type>
 				<value><use>cinema/color-fringe-factor</use></value>
-			</uniform>
-		</pass>
-	</technique>
-	<technique n="10">
-		<predicate>
-			<and>
-				<property>/sim/rendering/rembrandt/night-vision</property>
-				<equal>
-					<value type="float">0.0</value>
-					<float-property>/sim/rendering/rembrandt/show-buffers</float-property>
-				</equal>
-			</and>
-		</predicate>
-		<pass>
-			<render-bin>
-				<bin-number>99999</bin-number>
-				<bin-name>RenderBin</bin-name>
-			</render-bin>
-			<texture-unit>
-				<unit>0</unit>
-				<type>buffer</type>
-				<name>lighting</name>
-			</texture-unit>
-			<texture-unit>
-				<unit>1</unit>
-				<type>buffer</type>
-				<name>bloom-3</name>
-			</texture-unit>
-			<texture-unit>
-				<unit>2</unit>
-				<type>buffer</type>
-				<name>spec-emis</name>
-			</texture-unit>
-			<texture-unit>
-				<unit>3</unit>
-				<type>buffer</type>
-				<name>diffuse</name>
-			</texture-unit>
-			<texture-unit>
-				<unit>4</unit>
-				<image><use>texture[0]/image</use></image>
-				<filter><use>texture[0]/filter</use></filter>
-				<wrap-s><use>texture[0]/wrap-s</use></wrap-s>
-				<wrap-t><use>texture[0]/wrap-t</use></wrap-t>
-				<internal-format><use>texture[0]/internal-format</use></internal-format>
-			</texture-unit>
-
-			<program>
-				<vertex-shader>Shaders/fullscreen.vert</vertex-shader>
-				<fragment-shader>Shaders/night-vision.frag</fragment-shader>
-			</program>
-			<uniform>
-				<name>lighting_tex</name>
-				<type>sampler-2d</type>
-				<value type="int">0</value>
-			</uniform>
-			<uniform>
-				<name>bloom_tex</name>
-				<type>sampler-2d</type>
-				<value type="int">1</value>
-			</uniform>
-			<uniform>
-				<name>spec_emis_tex</name>
-				<type>sampler-2d</type>
-				<value type="int">2</value>
-			</uniform>
-			<uniform>
-				<name>color_tex</name>
-				<type>sampler-2d</type>
-				<value type="int">3</value>
-			</uniform>
-			<uniform>
-				<name>noise_tex</name>
-				<type>sampler-2d</type>
-				<value type="int">4</value>
-			</uniform>
-
-			<uniform>
-				<name>bloomEnabled</name>
-				<type>bool</type>
-				<value type="bool"><use>bloom</use></value>
-			</uniform>
-			<uniform>
-				<name>bloomStrength</name>
-				<type>float</type>
-				<value><use>bloom-strength</use></value>
-			</uniform>
-			<uniform>
-				<name>bloomBuffers</name>
-				<type>bool</type>
-				<value><use>bloom-buffers</use></value>
 			</uniform>
 		</pass>
 	</technique>

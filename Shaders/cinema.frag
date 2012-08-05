@@ -24,6 +24,7 @@ uniform bool bloomBuffers;
 
 void main() {
     vec2 coords = gl_TexCoord[0].xy;
+	vec2 initialCoords = coords;
 
 	if (distortion) {
 		vec2 c = 2.0 * coords - vec2(1.,1.);
@@ -50,7 +51,7 @@ void main() {
 	}
 
 	if (vignette) {
-		vec2 c = 2.0 * coords - vec2(1.,1.);
+		vec2 c = 2.0 * initialCoords - vec2(1.,1.);
 		c = c * vec2( 1.0, fg_BufferSize.y / fg_BufferSize.x );
 		float l = length(c);
 		float f = smoothstep( innerCircle, innerCircle * outerCircle, l );

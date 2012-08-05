@@ -101,6 +101,7 @@ Started September 2000 by David Megginson, david@megginson.com
 					</distortion-factor>
 					<color-fringe type="bool">false</color-fringe>
 					<color-fringe-factor type="float" userarchive="y">1.0</color-fringe-factor>
+					<film-wear type="bool">false</film-wear>
 				</cinema>
 				<exposure type="float" userarchive="y">1.0</exposure>
 				<use-color-for-depth type="bool">false</use-color-for-depth>

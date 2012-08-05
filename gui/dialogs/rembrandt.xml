@@ -1007,6 +1007,31 @@
 		</text>
 	</group>
 
+	<group>
+		<layout>hbox</layout>
+		<halign>left</halign>
+
+		<checkbox>
+			<halign>left</halign>
+			<label>Film wear</label>
+			<name>film-wear</name>
+			<property>/sim/rendering/rembrandt/cinema/film-wear</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>film-wear</object-name>
+			</binding>
+			<enable>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<or>
+						<property>/sim/rendering/rembrandt/cinema/vignette</property>
+						<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+					</or>
+				</and>
+			</enable>
+		</checkbox>
+	</group>
+
 	<hrule/>
 
 	<group>

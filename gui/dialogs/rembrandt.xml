@@ -195,7 +195,7 @@
 		</combo>
 		
 	</group>
-	
+
 	<group>
 		<layout>hbox</layout>
 		<halign>right</halign>
@@ -234,7 +234,7 @@
 			<pref-width>222</pref-width>
 		</empty>
 	</group>
-	
+
 	<group>
 		<layout>hbox</layout>
 		<halign>right</halign>
@@ -382,6 +382,24 @@
 
 		<checkbox>
 			<halign>left</halign>
+			<label>Night vision</label>
+			<name>night-vision</name>
+			<property>/sim/rendering/rembrandt/night-vision</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>night-vision</object-name>
+			</binding>
+		</checkbox>
+	</group>
+
+	<hrule/>
+
+	<group>
+		<layout>hbox</layout>
+		<halign>left</halign>
+
+		<checkbox>
+			<halign>left</halign>
 			<label>Vignette</label>
 			<name>vignette</name>
 			<property>/sim/rendering/rembrandt/cinema/vignette</property>
@@ -389,6 +407,9 @@
 				<command>dialog-apply</command>
 				<object-name>vignette</object-name>
 			</binding>
+			<enable>
+				<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+			</enable>
 		</checkbox>
 		<empty>
 			<pref-width>34</pref-width>
@@ -396,7 +417,10 @@
 		<text>
 			<label>Inner circle</label>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/vignette</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/vignette</property>
+				</and>
 			</enable>
 		</text>
 		<slider>
@@ -410,7 +434,10 @@
 				<object-name>inner-circle</object-name>
 			</binding>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/vignette</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/vignette</property>
+				</and>
 			</enable>
 		</slider>
 		<text>
@@ -419,7 +446,10 @@
 			<live>true</live>
 			<property>/sim/rendering/rembrandt/cinema/inner-circle</property>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/vignette</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/vignette</property>
+				</and>
 			</enable>
 		</text>
 	</group>
@@ -431,7 +461,10 @@
 		<text>
 			<label>Outer circle</label>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/vignette</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/vignette</property>
+				</and>
 			</enable>
 		</text>
 		<slider>
@@ -445,7 +478,10 @@
 				<object-name>outer-circle</object-name>
 			</binding>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/vignette</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/vignette</property>
+				</and>
 			</enable>
 		</slider>
 		<text>
@@ -454,15 +490,16 @@
 			<live>true</live>
 			<property>/sim/rendering/rembrandt/cinema/outer-circle</property>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/vignette</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/vignette</property>
+				</and>
 			</enable>
 		</text>
 		<empty>
 			<pref-width>222</pref-width>
 		</empty>
 	</group>
-
-	<hrule/>
 
 	<group>
 		<layout>hbox</layout>
@@ -477,6 +514,9 @@
 				<command>dialog-apply</command>
 				<object-name>color-shift</object-name>
 			</binding>
+			<enable>
+				<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+			</enable>
 		</checkbox>
 		<empty>
 			<pref-width>37</pref-width>
@@ -484,7 +524,10 @@
 		<text>
 			<label>Red shift</label>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				</and>
 			</enable>
 		</text>
 		<slider>
@@ -498,7 +541,10 @@
 				<object-name>red-shift-r</object-name>
 			</binding>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				</and>
 			</enable>
 		</slider>
 		<text>
@@ -507,7 +553,10 @@
 			<live>true</live>
 			<property>/sim/rendering/rembrandt/cinema/red-shift/x</property>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				</and>
 			</enable>
 		</text>
 		<slider>
@@ -521,7 +570,10 @@
 				<object-name>red-shift-g</object-name>
 			</binding>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				</and>
 			</enable>
 		</slider>
 		<text>
@@ -530,7 +582,10 @@
 			<live>true</live>
 			<property>/sim/rendering/rembrandt/cinema/red-shift/y</property>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				</and>
 			</enable>
 		</text>
 		<slider>
@@ -544,7 +599,10 @@
 				<object-name>red-shift-b</object-name>
 			</binding>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				</and>
 			</enable>
 		</slider>
 		<text>
@@ -553,7 +611,10 @@
 			<live>true</live>
 			<property>/sim/rendering/rembrandt/cinema/red-shift/z</property>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				</and>
 			</enable>
 		</text>
 	</group>
@@ -565,7 +626,10 @@
 		<text>
 			<label>Green shift</label>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				</and>
 			</enable>
 		</text>
 		<slider>
@@ -579,7 +643,10 @@
 				<object-name>green-shift-r</object-name>
 			</binding>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				</and>
 			</enable>
 		</slider>
 		<text>
@@ -588,7 +655,10 @@
 			<live>true</live>
 			<property>/sim/rendering/rembrandt/cinema/green-shift/x</property>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				</and>
 			</enable>
 		</text>
 		<slider>
@@ -602,7 +672,10 @@
 				<object-name>green-shift-g</object-name>
 			</binding>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				</and>
 			</enable>
 		</slider>
 		<text>
@@ -611,7 +684,10 @@
 			<live>true</live>
 			<property>/sim/rendering/rembrandt/cinema/green-shift/y</property>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				</and>
 			</enable>
 		</text>
 		<slider>
@@ -625,7 +701,10 @@
 				<object-name>green-shift-b</object-name>
 			</binding>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				</and>
 			</enable>
 		</slider>
 		<text>
@@ -634,7 +713,10 @@
 			<live>true</live>
 			<property>/sim/rendering/rembrandt/cinema/green-shift/z</property>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				</and>
 			</enable>
 		</text>
 	</group>
@@ -646,7 +728,10 @@
 		<text>
 			<label>Blue shift</label>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				</and>
 			</enable>
 		</text>
 		<slider>
@@ -660,7 +745,10 @@
 				<object-name>blue-shift-r</object-name>
 			</binding>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				</and>
 			</enable>
 		</slider>
 		<text>
@@ -669,7 +757,10 @@
 			<live>true</live>
 			<property>/sim/rendering/rembrandt/cinema/blue-shift/x</property>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				</and>
 			</enable>
 		</text>
 		<slider>
@@ -683,7 +774,10 @@
 				<object-name>blue-shift-g</object-name>
 			</binding>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				</and>
 			</enable>
 		</slider>
 		<text>
@@ -692,7 +786,10 @@
 			<live>true</live>
 			<property>/sim/rendering/rembrandt/cinema/blue-shift/y</property>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				</and>
 			</enable>
 		</text>
 		<slider>
@@ -706,7 +803,10 @@
 				<object-name>blue-shift-b</object-name>
 			</binding>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				</and>
 			</enable>
 		</slider>
 		<text>
@@ -715,12 +815,13 @@
 			<live>true</live>
 			<property>/sim/rendering/rembrandt/cinema/blue-shift/z</property>
 			<enable>
-				<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/color-shift</property>
+				</and>
 			</enable>
 		</text>
 	</group>
-
-	<hrule/>
 
 	<group>
 		<layout>hbox</layout>
@@ -728,20 +829,205 @@
 
 		<checkbox>
 			<halign>left</halign>
-			<label>Night vision</label>
-			<name>night-vision</name>
-			<property>/sim/rendering/rembrandt/night-vision</property>
+			<label>Distortion</label>
+			<name>distortion</name>
+			<property>/sim/rendering/rembrandt/cinema/distortion</property>
 			<binding>
 				<command>dialog-apply</command>
-				<object-name>night-vision</object-name>
+				<object-name>distortion</object-name>
 			</binding>
 			<enable>
-				<not>
+				<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+			</enable>
+		</checkbox>
+		<empty>
+			<pref-width>48</pref-width>
+		</empty>
+		<text>
+			<label>Factors</label>
+			<enable>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/distortion</property>
+				</and>
+			</enable>
+		</text>
+		<slider>
+			<name>distortion-factor-x</name>
+			<min>-0.5</min>
+			<max>0.5</max>
+			<step>0.01</step>
+			<property>/sim/rendering/rembrandt/cinema/distortion-factor/x</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>distortion-factor-x</object-name>
+			</binding>
+			<enable>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/distortion</property>
+				</and>
+			</enable>
+		</slider>
+		<text>
+			<label>1234</label>
+			<format>%.2f</format>
+			<live>true</live>
+			<property>/sim/rendering/rembrandt/cinema/distortion-factor/x</property>
+			<enable>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/distortion</property>
+				</and>
+			</enable>
+		</text>
+		<slider>
+			<name>distortion-factor-y</name>
+			<min>-0.5</min>
+			<max>0.5</max>
+			<step>0.01</step>
+			<property>/sim/rendering/rembrandt/cinema/distortion-factor/y</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>distortion-factor-y</object-name>
+			</binding>
+			<enable>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/distortion</property>
+				</and>
+			</enable>
+		</slider>
+		<text>
+			<label>1234</label>
+			<format>%.2f</format>
+			<live>true</live>
+			<property>/sim/rendering/rembrandt/cinema/distortion-factor/y</property>
+			<enable>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/distortion</property>
+				</and>
+			</enable>
+		</text>
+		<slider>
+			<name>distortion-factor-z</name>
+			<min>0.5</min>
+			<max>1.5</max>
+			<step>0.001</step>
+			<property>/sim/rendering/rembrandt/cinema/distortion-factor/z</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>distortion-factor-z</object-name>
+			</binding>
+			<enable>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/distortion</property>
+				</and>
+			</enable>
+		</slider>
+		<text>
+			<label>1234</label>
+			<format>%.2f</format>
+			<live>true</live>
+			<property>/sim/rendering/rembrandt/cinema/distortion-factor/z</property>
+			<enable>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/distortion</property>
+				</and>
+			</enable>
+		</text>
+	</group>
+
+	<group>
+		<layout>hbox</layout>
+		<halign>left</halign>
+
+		<checkbox>
+			<halign>left</halign>
+			<label>Color fringe</label>
+			<name>color-fringe</name>
+			<property>/sim/rendering/rembrandt/cinema/color-fringe</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>color-fringe</object-name>
+			</binding>
+			<enable>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/distortion</property>
+				</and>
+			</enable>
+		</checkbox>
+		<empty>
+			<pref-width>42</pref-width>
+		</empty>
+		<text>
+			<label>Factor</label>
+			<enable>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/distortion</property>
+					<property>/sim/rendering/rembrandt/cinema/color-fringe</property>
+				</and>
+			</enable>
+		</text>
+		<slider>
+			<name>color-fringe-factor</name>
+			<min>0.96</min>
+			<max>1.04</max>
+			<step>0.001</step>
+			<property>/sim/rendering/rembrandt/cinema/color-fringe-factor</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>color-fringe-factor</object-name>
+			</binding>
+			<enable>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/distortion</property>
+					<property>/sim/rendering/rembrandt/cinema/color-fringe</property>
+				</and>
+			</enable>
+		</slider>
+		<text>
+			<label>12345678</label>
+			<format>%.3f</format>
+			<live>true</live>
+			<property>/sim/rendering/rembrandt/cinema/color-fringe-factor</property>
+			<enable>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
+					<property>/sim/rendering/rembrandt/cinema/distortion</property>
+					<property>/sim/rendering/rembrandt/cinema/color-fringe</property>
+				</and>
+			</enable>
+		</text>
+	</group>
+
+	<group>
+		<layout>hbox</layout>
+		<halign>left</halign>
+
+		<checkbox>
+			<halign>left</halign>
+			<label>Film wear</label>
+			<name>film-wear</name>
+			<property>/sim/rendering/rembrandt/cinema/film-wear</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>film-wear</object-name>
+			</binding>
+			<enable>
+				<and>
+					<not><property>/sim/rendering/rembrandt/night-vision</property></not>
 					<or>
-						<property>/sim/rendering/rembrandt/cinema/color-shift</property>
 						<property>/sim/rendering/rembrandt/cinema/vignette</property>
+						<property>/sim/rendering/rembrandt/cinema/color-shift</property>
 					</or>
-				</not>
+				</and>
 			</enable>
 		</checkbox>
 	</group>

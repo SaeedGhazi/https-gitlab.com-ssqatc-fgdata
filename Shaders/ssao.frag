@@ -13,7 +13,7 @@ uniform float g_bias;
 uniform float g_intensity;
 uniform float g_sample_rad;
 uniform float random_size;
-uniform unsigned int osg_FrameNumber;
+uniform float osg_SimulationTime;
 
 varying vec4 ray;
 
@@ -23,8 +23,8 @@ vec3 position( vec3 viewDir, vec2 coords, sampler2D depth_tex );
 vec3 normal_decode(vec2 enc);
 
 vec2 getRandom( in vec2 uv ) {
-    unsigned int level = osg_FrameNumber - ((osg_FrameNumber / 64U) * 64U);
-    return normalize( texture3D( noise_tex, vec3(uv*50.0, float(level) / 64.0) ).xy * 0.14 - 0.07 );
+    float level = osg_SimulationTime - float(int(osg_SimulationTime));
+    return normalize( texture3D( noise_tex, vec3(uv*50.0, level) ).xy * 0.14 - 0.07 );
 }
 vec3 getPosition(in vec2 uv, in vec2 uv0, in vec4 ray0) {
     vec2 duv = uv - uv0;

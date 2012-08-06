@@ -59,7 +59,7 @@ void main() {
 
 	vec3 dirt = vec3(1.0);
 	if (filmWear) {
-		dirt = texture2D(film_tex, initialCoords + vec2(0.0, osg_SimulationTime * 7.7)).rgb;
+		dirt = texture2D(film_tex, initialCoords*vec2( 1.0, fg_BufferSize.y / fg_BufferSize.x ) + vec2(0.0, osg_SimulationTime * 7.7)).rgb;
 	}
 
     vec4 color = texture2D( lighting_tex, c1 );

@@ -701,12 +701,34 @@ var Path = {
   }
 };
 
+# Image
+# ==============================================================================
+# Class for an image element on a canvas
+#
+var Image = {
+  new: func(parent, id)
+  {
+    var m = {
+      parents: [Image, Element.new(parent, "image", id, arg)]
+    };
+    m.color = _createColorNodes(m._node, "color");
+    m.sourceRect = m._node.getNode("source", 1);
+    return m;
+  },
+  
+  setFile: func(file)
+  {
+      me.set("file", file);
+  }
+};
+
 # Element factories used by #Group elements to create children
 Group._element_factories = {
   "group": Group.new,
   "map": Map.new,
   "text": Text.new,
-  "path": Path.new
+  "path": Path.new,
+  "image": Image.new
 };
 
 # Canvas

@@ -18,7 +18,7 @@ varying vec4  rawpos;
 varying vec4  ecPosition;
 varying vec3  VNormal;
 varying vec3  VTangent;
-varying vec3  VBinormal;
+//varying vec3  VBinormal;
 varying vec3  Normal;
 varying vec4  constantColor;
 
@@ -177,7 +177,8 @@ void main (void)
     }
     vec3 normal = normalize(VNormal);
     vec3 tangent = normalize(VTangent);
-    vec3 binormal = normalize(VBinormal);
+    //vec3 binormal = normalize(VBinormal);
+    vec3 binormal = normalize(cross(normal, tangent));
     vec3 ecPos3 = ecPosition.xyz / ecPosition.w;
     vec3 V = normalize(ecPos3);
     vec3 s = vec3(dot(V, tangent), dot(V, binormal), dot(normal, -V));

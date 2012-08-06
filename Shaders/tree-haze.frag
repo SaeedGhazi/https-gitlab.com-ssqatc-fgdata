@@ -1,23 +1,15 @@
 // -*-C++-*-
 
 // written by Thorsten Renk, Oct 2011, based on default.frag
-// Ambient term comes in gl_Color.rgb.
-varying vec4 diffuse_term;
-varying vec3 normal;
+
+
+
 varying vec3 relPos;
 
-//varying vec3 hazeColor;
-//varying float fogCoord;
 
 uniform sampler2D texture;
 
-//varying float ct;
-//varying float delta_z;
-//varying float alt;
 
-varying float earthShade;
-//varying float yprime;
-//varying float vertex_alt;
 varying float yprime_alt;
 varying float mie_angle;
 
@@ -25,13 +17,12 @@ varying float mie_angle;
 uniform float visibility;
 uniform float avisibility;
 uniform float scattering;
-//uniform float ground_scattering;
 uniform float terminator;
 uniform float terrain_alt; 
 uniform float hazeLayerAltitude;
 uniform float overcast;
-//uniform float altitude;
 uniform float eye_alt;
+
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -68,7 +59,7 @@ float fade_mix;
 // for large altitude > 30 km, we switch to some component of quadratic distance fading to
 // create the illusion of improved visibility range
 
-targ = 1.25 * targ; // need to sync with the distance to which terrain is drawn
+targ = 1.25 * targ * smoothstep(0.07,0.1,targ); // need to sync with the distance to which terrain is drawn
 
 
 if (alt < 30000.0)
@@ -88,43 +79,13 @@ else
 void main()
 {
 
-// this is taken from default.frag
-    vec3 n;
-    float NdotL, NdotHV, fogFactor;
-    vec4 color = gl_Color;
+
+
+
     vec3 lightDir = gl_LightSource[0].position.xyz;
-    vec3 halfVector = gl_LightSource[0].halfVector.xyz;
-    vec4 texel;
-    vec4 fragColor;
-    vec4 specular = vec4(0.0);
     float intensity;
 
-
-
-    vec4 light_specular = gl_LightSource[0].specular;
-
-    // If gl_Color.a == 0, this is a back-facing polygon and the
-    // normal should be reversed.
-    n = (2.0 * gl_Color.a - 1.0) * normal;
-    n = normalize(n);
-
-    NdotL = dot(n, lightDir);
-    if (NdotL > 0.0) {
-        color += diffuse_term * NdotL;
-        NdotHV = max(dot(n, halfVector), 0.0);
-        if (gl_FrontMaterial.shininess > 0.0)
-            specular.rgb = (gl_FrontMaterial.specular.rgb
-                            * light_specular.rgb
-                            * pow(NdotHV, gl_FrontMaterial.shininess));
-    }
-    color.a = diffuse_term.a;
-    // This shouldn't be necessary, but our lighting becomes very
-    // saturated. Clamping the color before modulating by the texture
-    // is closer to what the OpenGL fixed function pipeline does.
-    color = clamp(color, 0.0, 1.0);
-    texel = texture2D(texture, gl_TexCoord[0].st);
-
-    fragColor = color * texel + specular;
+    vec4 fragColor = gl_Color * texture2D(texture, gl_TexCoord[0].st);
 
 
 
@@ -134,8 +95,9 @@ void main()
 float delta_z = hazeLayerAltitude - eye_alt;
 float dist = length(relPos);
 
-
-if (dist > 40.0)
+if (dist > max(40.0, 0.07 * min(visibility,avisibility))) 
+//if (dist > 40.0)
+//if (0==1)
 {
 
 alt = eye_alt;
@@ -232,8 +194,8 @@ hazeColor.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
 
 
 // now dim the light for haze
-float eShade = earthShade;
-eShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt) + 0.1;
+//float eShade = earthShade;
+float eShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt) + 0.1;
 
 // Mie-like factor
 
@@ -266,8 +228,8 @@ hazeColor = intensity * normalize(mix(hazeColor,  2.0 * vec3 (0.55, 0.6, 0.8), (
 
 // reduce haze intensity when looking at shaded surfaces, only in terminator region
 
-float shadow = mix( min(1.0 + dot(normal,lightDir),1.0), 1.0, 1.0-smoothstep(0.1, 0.4, transmission));
-hazeColor = mix(shadow * hazeColor, hazeColor, 0.3 + 0.7* smoothstep(250000.0, 400000.0, terminator));
+//float shadow = mix( min(1.0 + dot(normal,lightDir),1.0), 1.0, 1.0-smoothstep(0.1, 0.4, transmission));
+//hazeColor = mix(shadow * hazeColor, hazeColor, 0.3 + 0.7* smoothstep(250000.0, 400000.0, terminator));
 
 
 // determine the right mix of transmission and haze

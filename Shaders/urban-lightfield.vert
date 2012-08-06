@@ -18,17 +18,23 @@
 // the surface normal is passed in gl_{Front,Back}Color. The alpha
 // component is set to 1 for front, 0 for back in order to work around
 // bugs with gl_FrontFacing in the fragment shader.
-varying vec4 diffuse_term;
-varying vec3 normal;
-varying vec3 relPos;
 
-//varying float earthShade;
-//varying float yprime;
-//varying float vertex_alt;
+
+varying vec3 relPos;
+varying vec3 rawPos;
+
+varying vec3  VNormal;
+//varying vec3  Normal;
+varying vec3  VTangent;
+//varying vec3  VBinormal;
+varying vec4  ecPosition;
+varying vec4  constantColor;
+varying vec3 light_diffuse;
+
+
 varying float yprime_alt;
 varying float mie_angle;
-
-
+//varying float steepness;
 
 
 uniform int colorMode;
@@ -38,16 +44,18 @@ uniform float terrain_alt;
 uniform float avisibility;
 uniform float visibility;
 uniform float overcast;
-//uniform float scattering;
 uniform float ground_scattering;
+uniform float eye_alt;
 
+
+attribute vec3 tangent;//, binormal;
+
+float earthShade;
+float steepness;
 
 // This is the value used in the skydome scattering shader - use the same here for consistency?
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
-
-
-float earthShade;
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
 {
@@ -63,7 +71,7 @@ return e / pow((1.0 + a * exp(-b * (x-c)) ),(1.0/d));
 void main()
 {
 
-  vec4 light_diffuse;
+
   vec4 light_ambient;
 
   //float yprime_alt;
@@ -73,12 +81,21 @@ void main()
   float vertex_alt;
   float scattering;
 
+    rawPos = gl_Vertex.xyz;
+    steepness = dot(normalize(gl_Normal), vec3 (0.0, 0.0, 1.0));
+    VNormal = normalize(gl_NormalMatrix * gl_Normal);
+    ecPosition = gl_ModelViewMatrix * gl_Vertex;
+//    Normal = normalize(gl_Normal);
+    VTangent  = gl_NormalMatrix * tangent;
+//    VBinormal = gl_NormalMatrix * binormal;
+
+
 // this code is copied from default.vert
 
     //vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
     gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
-    normal = gl_NormalMatrix * gl_Normal;
+    //normal = gl_NormalMatrix * gl_Normal;
     vec4 ambient_color, diffuse_color;
     if (colorMode == MODE_DIFFUSE) {
         diffuse_color = gl_Color;
@@ -96,7 +113,8 @@ void main()
     // here start computations for the haze layer
     // we need several geometrical quantities
 
-    // first current altitude of eye position in model space
+    
+// first current altitude of eye position in model space
     vec4 ep = gl_ModelViewMatrixInverse * vec4(0.0,0.0,0.0,1.0);
     
     // and relative position to vector
@@ -106,9 +124,27 @@ void main()
     // is later computed in the fragment shader again
     float dist = length(relPos);
 
+
     // altitude of the vertex in question, somehow zero leads to artefacts, so ensure it is at least 100m
     vertex_alt = max(gl_Vertex.z,100.0);
     scattering = ground_scattering + (1.0 - ground_scattering) * smoothstep(hazeLayerAltitude -100.0, hazeLayerAltitude + 100.0, vertex_alt); 
+
+
+
+// early culling of vertices which can't be seen due to ground haze despite being in aloft visibility range
+
+float delta_z = hazeLayerAltitude - eye_alt;
+//if (((dist * (relPos.z - delta_z)/relPos.z >  visibility ) && (relPos.z < 0.0) && (delta_z < 0.0) && (dist > 30000.0)))
+if (0==1)
+	{
+	gl_Position = vec4(0.0, 0.0, -1000.0, 1.0); // move outside of view frustrum, gets culled before reaching fragment shader
+   	earthShade = 1.0;
+    	mie_angle = 1.0;
+	yprime_alt = 0.0;
+	}
+else
+	{
+
 
     // branch dependent on daytime
 
@@ -137,7 +173,7 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
     lightArg = (terminator-yprime_alt)/100000.0;
 
     // directional scattering for low sun
-    if (lightArg < 10.0)
+    if (lightArg < 5.0)
     	{mie_angle = (0.5 *  dot(normalize(relPos), normalize(lightFull)) ) + 0.5;}
     else 
 	{mie_angle = 1.0;}
@@ -148,7 +184,7 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
    light_diffuse.b = light_func(lightArg, 1.330e-05, 0.264, 3.827, 1.08e-05, 1.0);
    light_diffuse.g = light_func(lightArg, 3.931e-06, 0.264, 3.827, 7.93e-06, 1.0);
    light_diffuse.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
-   light_diffuse.a = 0.0;
+
    light_diffuse = light_diffuse * scattering;
 
    light_ambient.b = light_func(lightArg, 0.000506, 0.131, -3.315, 0.000457, 0.5);
@@ -200,7 +236,7 @@ else // the faster, full-day version without lightfields
     mie_angle = 1.0;
     
     if (terminator > 3000000.0)
-    	{light_diffuse = vec4 (1.0, 1.0, 1.0, 0.0);
+    	{light_diffuse = vec3 (1.0, 1.0, 1.0);
 	light_ambient = vec4 (0.33, 0.4, 0.5, 0.0); }
     else
 	{
@@ -209,12 +245,11 @@ else // the faster, full-day version without lightfields
 	light_diffuse.b = 0.78  + lightArg * 0.21;
 	light_diffuse.g = 0.907 + lightArg * 0.091;
 	light_diffuse.r = 0.904 + lightArg * 0.092;
-	light_diffuse.a = 0.0;
 
 	light_ambient.b = 0.41 + lightArg * 0.08;
 	light_ambient.g = 0.333 + lightArg * 0.06;
 	light_ambient.r = 0.316 + lightArg * 0.016;
-	light_ambient.a = 0.0;
+
 	}  
     
     light_diffuse = light_diffuse * scattering;
@@ -222,20 +257,23 @@ else // the faster, full-day version without lightfields
 }
  
 
+// a sky/earth irradiation map model - the sky creates much more diffuse radiation than the ground, so
+// steep faces end up shaded more
+
+light_ambient = light_ambient * ((1.0+steepness)/2.0 * 1.2 + (1.0-steepness)/2.0 * 0.2);
+
+
 // default lighting based on texture and material using the light we have just computed
 
- diffuse_term = diffuse_color* light_diffuse;
-    vec4 constant_term = gl_FrontMaterial.emission + ambient_color *
-        (gl_LightModel.ambient +  light_ambient);
-    // Super hack: if diffuse material alpha is less than 1, assume a
-    // transparency animation is at work
-    if (gl_FrontMaterial.diffuse.a < 1.0)
-        diffuse_term.a = gl_FrontMaterial.diffuse.a;
-    else
-        diffuse_term.a = gl_Color.a;
-    // Another hack for supporting two-sided lighting without using
-    // gl_FrontFacing in the fragment shader.
-    gl_FrontColor.rgb = constant_term.rgb;  gl_FrontColor.a = 1.0;
-    gl_BackColor.rgb = constant_term.rgb; gl_BackColor.a = 0.0;
+ gl_FrontColor = gl_Color;
+    constantColor = gl_FrontMaterial.emission
+        + gl_Color * (gl_LightModel.ambient + light_ambient);
+
+
+     
+
+
+}
+	
 }
 

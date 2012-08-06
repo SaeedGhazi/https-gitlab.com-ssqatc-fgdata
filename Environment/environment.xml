@@ -340,15 +340,16 @@
 
   <!-- definitions for the scattering skydome shader -->
   <ground-visibility-m type="double" userarchive="n">16000.0</ground-visibility-m>
-  <air-pollution-norm type="double" userarchive="n">0.0</air-pollution-norm>
+  <air-pollution-norm type="double" userarchive="y">0.0</air-pollution-norm>
   <ground-haze-thickness-m type="double" userarchive="n">2000.0</ground-haze-thickness-m>
   <terminator-relative-position-m type="double" userarchive="n">1000000.0</terminator-relative-position-m>
   <mean-terrain-elevation-m type="double" userarchive="n">0.0</mean-terrain-elevation-m>
-  <mysnow-level-m type="double" userarchive="n">3200.0</mysnow-level-m>
-  <fog-structure type="double" userarchive="n">0.0</fog-structure>
+  <mysnow-level-m type="double" userarchive="y">3200.0</mysnow-level-m>
+  <fog-structure type="double" userarchive="y">0.0</fog-structure>
   <!-- definitions for the environment at surface interface -->
   <surface>
     <scattering type="double" userarchive="n">0.7</scattering>
-    <dust-cover-factor type="double" userarchive="n">0.0</dust-cover-factor>
+    <dust-cover-factor type="double" userarchive="y">0.0</dust-cover-factor>
+    <wetness type="double" userarchive="y">0.0</wetness>
   </surface>
 </PropertyList>

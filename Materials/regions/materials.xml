@@ -1435,9 +1435,21 @@
    </equals>
   </condition>
   <name>Sand</name>
-  <texture>Terrain/sand4.png</texture>
+  <texture-set>
+   <texture>Terrain/sand4.png</texture>
+   <texture n="11">Terrain/sand_hires.png</texture>
+  </texture-set>
+<texture-set>
+   <texture>Terrain/sand5.png</texture>
+   <texture n="11">Terrain/sand_hires.png</texture>
+  </texture-set>
+<texture-set>
+   <texture>Terrain/sand6.png</texture>
+   <texture n="11">Terrain/sand_hires.png</texture>
+  </texture-set>
+  <!--<texture>Terrain/sand4.png</texture>
   <texture>Terrain/sand5.png</texture>
-  <texture>Terrain/sand6.png</texture>
+  <texture>Terrain/sand6.png</texture>-->
   <xsize>2000</xsize>
   <ysize>2000</ysize>
   <light-coverage>10000000.0</light-coverage>
@@ -1463,8 +1475,12 @@
   <name>ScrubCover</name>
   <name>Scrub</name>
   <name>Sclerophyllous</name>
-  <texture>Terrain/shrub1.png</texture>
-<!--
+  <texture-set>
+   <texture>Terrain/shrub1.png</texture>
+   <texture n="11">Terrain/grass_hires.png</texture>
+   <texture n="12">Terrain/dirtrock.png</texture>
+  </texture-set>
+<!--  <texture>Terrain/shrub1.png</texture>
   <texture>Terrain/shrub.png</texture>
   <texture>Terrain/shrub2.png</texture>
   <texture>Terrain/shrub3.png</texture>
@@ -1664,9 +1680,21 @@
   <name>DryLake</name>
   <name>IntermittentReservoir</name>
   <name>IntermittentLake</name>
-  <texture>Terrain/sand1.png</texture>
+ <texture-set>
+  	<texture>Terrain/sand1.png</texture>
+	<texture n="11">Terrain/sand3.png</texture>
+  </texture-set>
+  <texture-set>
+  	<texture>Terrain/sand2.png</texture>
+	<texture n="11">Terrain/sand1.png</texture>
+  </texture-set>
+  <texture-set>
+  	<texture>Terrain/sand3.png</texture>
+	<texture n="11">Terrain/sand2.png</texture>
+  </texture-set>
+  <!--<texture>Terrain/sand1.png</texture>
   <texture>Terrain/sand2.png</texture>
-  <texture>Terrain/sand3.png</texture>
+  <texture>Terrain/sand3.png</texture>-->
   <xsize>2000</xsize>
   <ysize>2000</ysize>
   <solid>1</solid>
@@ -1766,9 +1794,24 @@
   <name>HerbTundraCover</name>
   <name>HerbTundra</name>
   <effect>Effects/herbtundra</effect>
+  <texture-set>
   <texture>Terrain/herbtundra.png</texture>
+  <texture n="11">Terrain/grass_hires.png</texture>
+  <texture n="12">Terrain/rock.png</texture>
+  </texture-set>
+  <texture-set>
   <texture>Terrain/herbtundra2.png</texture>
+  <texture n="11">Terrain/grass_hires.png</texture>
+  <texture n="12">Terrain/rock.png</texture>
+  </texture-set>
+  <texture-set>
   <texture>Terrain/herbtundra3.png</texture>
+  <texture n="11">Terrain/grass_hires.png</texture>
+  <texture n="12">Terrain/rock.png</texture>
+  </texture-set>
+  <!--<texture>Terrain/herbtundra.png</texture>
+  <texture>Terrain/herbtundra2.png</texture>
+  <texture>Terrain/herbtundra3.png</texture>-->
   <xsize>2000</xsize>
   <ysize>2000</ysize>
   <light-coverage>4000000.0</light-coverage>

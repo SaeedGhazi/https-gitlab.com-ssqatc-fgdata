@@ -272,22 +272,12 @@
 
 	<menu>
 		<name>environment</name>
-
+		
 		<item>
 			<name>global-weather</name>
 			<binding>
-				<condition>
-					<not><property>/nasal/local_weather/enabled</property></not>
-				</condition>
 				<command>dialog-show</command>
 				<dialog-name>weather</dialog-name>
-			</binding>
-			<binding>
-				<condition>
-					<property>/nasal/local_weather/enabled</property>
-				</condition>
-				<command>dialog-show</command>
-				<dialog-name>local_weather_tiles</dialog-name>
 			</binding>
 		</item>
 

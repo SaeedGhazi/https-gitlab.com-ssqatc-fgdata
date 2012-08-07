@@ -18,24 +18,23 @@
 <PropertyList>
   <weather-scenarios>
     <scenario>
-      <name type="string">Disabled</name>
-      <description type="string">METAR weather generation is disabled. Use the above controls to setup your weather.</description>
-    </scenario>
-    <scenario>
       <name type="string">Live data</name>
       <description type="string">
         Fetch live weather data for your nearest airport from noaa.gov. You need a working internet connection.
         All the controls in this dialog are computed automatically, once a valid METAR is received.
       </description>
+      <tile>live</tile>
     </scenario>
     <scenario>
       <name type="string">Manual input</name>
-      <description type="string">Enter your favorite METAR weather in the textbox below. A valid METAR syntax is required.</description>
+      <description type="string">Enter your favorite METAR weather in the textbox above. A valid METAR syntax is required.</description>
+      <tile>manual</tile>
     </scenario>
     <scenario>
       <name type="string">Fair weather</name>
       <metar type="string">XXXX 012345Z 15003KT 12SM SCT041 FEW200 20/08 Q1015 NOSIG</metar>
       <description type="string">A lovely day for trip to your favorite 100$ hamburger airfield</description>
+      <tile>High-pressure-core</tile>
     </scenario>
     <scenario>
       <name type="string">Thunderstorm</name>
@@ -45,6 +44,7 @@
         Be prepared for reduction of visibility in showers and strong gusts
         near thunderstorms
       </description>
+      <tile>Thunderstorms</tile>
     </scenario>
     <scenario>
       <name type="string">Stormy Monday</name>

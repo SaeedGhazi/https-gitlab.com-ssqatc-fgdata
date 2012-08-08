@@ -21,16 +21,13 @@
 varying vec4 diffuse_term;
 varying vec3 normal;
 varying vec3 relPos;
-varying vec4 rawPos;
+varying vec3 rawPos;
+//varying vec3 ecViewdir;
 
-varying float earthShade;
-//varying float yprime;
-//varying float vertex_alt;
+//varying float earthShade;
 varying float yprime_alt;
 varying float mie_angle;
 varying float steepness;
-
-
 
 
 uniform int colorMode;
@@ -40,8 +37,10 @@ uniform float terrain_alt;
 uniform float avisibility;
 uniform float visibility;
 uniform float overcast;
-//uniform float scattering;
 uniform float ground_scattering;
+uniform float eye_alt;
+
+float earthShade;
 
 
 // This is the value used in the skydome scattering shader - use the same here for consistency?
@@ -72,8 +71,9 @@ void main()
   float vertex_alt;
   float scattering;
 
-    rawPos = gl_Vertex;
+    rawPos = gl_Vertex.xyz;
     steepness = dot(normalize(gl_Normal), vec3 (0.0, 0.0, 1.0));
+
 
 // this code is copied from default.vert
 
@@ -98,19 +98,40 @@ void main()
     // here start computations for the haze layer
     // we need several geometrical quantities
 
-    // first current altitude of eye position in model space
+    
+// first current altitude of eye position in model space
     vec4 ep = gl_ModelViewMatrixInverse * vec4(0.0,0.0,0.0,1.0);
     
     // and relative position to vector
     relPos = gl_Vertex.xyz - ep.xyz;
+    
+    //ecViewdir = (gl_ModelViewMatrix * (ep - gl_Vertex)).xyz;
 
     // unfortunately, we need the distance in the vertex shader, although the more accurate version
     // is later computed in the fragment shader again
     float dist = length(relPos);
 
+
     // altitude of the vertex in question, somehow zero leads to artefacts, so ensure it is at least 100m
     vertex_alt = max(gl_Vertex.z,100.0);
     scattering = ground_scattering + (1.0 - ground_scattering) * smoothstep(hazeLayerAltitude -100.0, hazeLayerAltitude + 100.0, vertex_alt); 
+
+
+
+// early culling of vertices which can't be seen due to ground haze despite being in aloft visibility range
+
+float delta_z = hazeLayerAltitude - eye_alt;
+//if (((dist * (relPos.z - delta_z)/relPos.z >  visibility ) && (relPos.z < 0.0) && (delta_z < 0.0) && (dist > 30000.0)))
+if (0==1)
+	{
+	gl_Position = vec4(0.0, 0.0, -1000.0, 1.0); // move outside of view frustrum, gets culled before reaching fragment shader
+   	earthShade = 1.0;
+    	mie_angle = 1.0;
+	yprime_alt = 0.0;
+	}
+else
+	{
+
 
     // branch dependent on daytime
 
@@ -164,13 +185,13 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
 // correct ambient light intensity and hue before sunrise
 if (earthShade < 0.5)
 	{
-	light_ambient = light_ambient * (0.4 + 0.6 * smoothstep(0.2, 0.5, earthShade));
+	light_ambient = light_ambient * (0.7 + 0.3 * smoothstep(0.2, 0.5, earthShade));
 	intensity = length(light_ambient.xyz); 
 
-	light_ambient.xyz = intensity * normalize(mix(light_ambient.xyz,  vec3 (0.45, 0.6, 0.8), 1.0 -smoothstep(0.1, 0.5,earthShade) ));
+	light_ambient.xyz = intensity * normalize(mix(light_ambient.xyz,  vec3 (0.45, 0.6, 0.8), 1.0 -smoothstep(0.1, 0.8,earthShade) ));
 
 	intensity = length(light_diffuse.xyz); 
-	light_diffuse.xyz = intensity * normalize(mix(light_diffuse.xyz,  vec3 (0.45, 0.6, 0.8), 1.0 -smoothstep(0.1, 0.5,earthShade) ));
+	light_diffuse.xyz = intensity * normalize(mix(light_diffuse.xyz,  vec3 (0.45, 0.6, 0.8), 1.0 -smoothstep(0.1, 0.7,earthShade) ));
 	}
 
 
@@ -224,6 +245,12 @@ else // the faster, full-day version without lightfields
 }
  
 
+// a sky/earth irradiation map model - the sky creates much more diffuse radiation than the ground, so
+// steep faces end up shaded more
+
+light_ambient = light_ambient * ((1.0+steepness)/2.0 * 1.2 + (1.0-steepness)/2.0 * 0.2);
+
+
 // default lighting based on texture and material using the light we have just computed
 
  diffuse_term = diffuse_color* light_diffuse;
@@ -239,5 +266,8 @@ else // the faster, full-day version without lightfields
     // gl_FrontFacing in the fragment shader.
     gl_FrontColor.rgb = constant_term.rgb;  gl_FrontColor.a = 1.0;
     gl_BackColor.rgb = constant_term.rgb; gl_BackColor.a = 0.0;
+
+}
+	
 }
 

@@ -6,18 +6,10 @@ varying vec4 diffuse_term;
 varying vec3 normal;
 varying vec3 relPos;
 
-//varying vec3 hazeColor;
-//varying float fogCoord;
 
 uniform sampler2D texture;
 
-//varying float ct;
-//varying float delta_z;
-//varying float alt;
 
-varying float earthShade;
-//varying float yprime;
-//varying float vertex_alt;
 varying float yprime_alt;
 varying float mie_angle;
 
@@ -37,6 +29,7 @@ const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
 
 float alt;
+float eShade;
 
 float luminance(vec3 color)
 {
@@ -133,8 +126,8 @@ void main()
 float delta_z = hazeLayerAltitude - eye_alt;
 float dist = length(relPos);
 
-
-if (dist > 40.0)
+if (dist > max(40.0, 0.04 * min(visibility,avisibility))) 
+//if (dist > 40.0)
 {
 
 alt = eye_alt;
@@ -231,7 +224,7 @@ hazeColor.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
 
 
 // now dim the light for haze
-float eShade = earthShade;
+
 eShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt) + 0.1;
 
 // Mie-like factor
@@ -271,7 +264,6 @@ hazeColor = mix(shadow * hazeColor, hazeColor, 0.3 + 0.7* smoothstep(250000.0, 4
 
 // determine the right mix of transmission and haze
 
-//fragColor.xyz = transmission * fragColor.xyz + (1.0-transmission)  * eqColorFactor * hazeColor * earthShade;
 
 fragColor.xyz = mix(eqColorFactor * hazeColor * eShade, fragColor.xyz,transmission);
 

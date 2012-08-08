@@ -121,6 +121,38 @@
 </text>
 
 
+<text>
+   <x>5</x>
+   <y>60</y>
+   <label>Terrain wetness:</label>
+</text>
+
+<text>
+   <x>120</x>
+   <y>60</y>
+   <label>dry </label>
+</text>
+
+<slider>
+   <x>190</x>
+   <y>60</y>
+   <width>90</width>
+   <height>20</height>
+   <min>0.0</min>
+   <max>0.7</max>
+   <property>/environment/surface/wetness</property>
+   <binding>
+     <command>dialog-apply</command>
+   </binding>
+</slider>
+
+<text>
+   <x>290</x>
+   <y>60</y>
+   <label>wet</label>
+</text>
+
+
 <group>
   <x>10</x>
   <y>10</y>

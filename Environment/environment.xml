@@ -23,18 +23,27 @@
         Fetch live weather data for your nearest airport from noaa.gov. You need a working internet connection.
         All the controls in this dialog are computed automatically, once a valid METAR is received.
       </description>
-      <tile>live</tile>
+      <local-weather>
+        <tile-type>live</tile-type>
+        <tile-management>METAR</tile-management>        
+      </local-weather>
     </scenario>
     <scenario>
       <name type="string">Manual input</name>
       <description type="string">Enter your favorite METAR weather in the textbox above. A valid METAR syntax is required.</description>
-      <tile>manual</tile>
+      <local-weather>
+        <tile-type>manual</tile-type>
+        <tile-management>METAR</tile-management>        
+      </local-weather>
     </scenario>
     <scenario>
       <name type="string">Fair weather</name>
       <metar type="string">XXXX 012345Z 15003KT 12SM SCT041 FEW200 20/08 Q1015 NOSIG</metar>
       <description type="string">A lovely day for trip to your favorite 100$ hamburger airfield</description>
-      <tile>High-pressure-core</tile>
+      <local-weather>
+        <tile-type>High-pressure-core</tile-type>
+        <tile-management>realistic-weather</tile-management>        
+      </local-weather>
     </scenario>
     <scenario>
       <name type="string">Thunderstorm</name>
@@ -44,7 +53,10 @@
         Be prepared for reduction of visibility in showers and strong gusts
         near thunderstorms
       </description>
-      <tile>Thunderstorms</tile>
+      <local-weather>
+        <tile-type>Thunderstorms</tile-type>
+        <tile-management>realistic-weather</tile-management>        
+      </local-weather>
     </scenario>
     <scenario>
       <name type="string">Stormy Monday</name>

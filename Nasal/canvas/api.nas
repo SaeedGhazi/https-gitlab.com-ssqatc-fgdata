@@ -791,7 +791,12 @@ var Canvas = {
   # Set the background color
   #
   # @param color  Vector of 3 or 4 values in [0, 1]
-  setColorBackground: func { _setColorNodes(me.color, arg); return me; }
+  setColorBackground: func { _setColorNodes(me.color, arg); return me; },
+  # Get path of canvas to be used eg. in Image::setFile
+  getPath: func()
+  {
+    return "canvas://by-index/texture[" ~ me._node.getIndex() ~ "]";
+  }
 };
 
 # Create a new canvas. Pass parameters as hash, eg:

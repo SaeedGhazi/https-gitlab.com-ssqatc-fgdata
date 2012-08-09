@@ -43,6 +43,7 @@
 	<!-- Environment menu -->
 	<environment>Environment</environment>
 	<global-weather>Weather</global-weather>
+	<environment-settings>Environment Settings</environment-settings>
 	<time-settings>Time Settings</time-settings>
 	<wildfire-settings>Wildfire Settings</wildfire-settings>
 	<terrasync>Scenery Download</terrasync>

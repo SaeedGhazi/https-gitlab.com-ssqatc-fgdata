@@ -28,7 +28,7 @@ uniform float terrain_alt;
 uniform float hazeLayerAltitude;
 uniform float overcast;
 uniform float eye_alt;
-uniform float mysnowlevel;
+uniform float snowlevel;
 uniform float dust_cover_factor;
 uniform float wetness;
 uniform float fogstructure;
@@ -262,7 +262,7 @@ void main()
 		
 		// mix snow
 		snow_alpha = smoothstep(0.75, 0.85, abs(steepness));
-		texel = mix(texel, snow_texel, smoothstep(mysnowlevel, mysnowlevel+200.0, snow_alpha * (relPos.z + eye_alt)+ (noise_2000m + 0.1 * noise_10m -0.55) *400.0));
+		texel = mix(texel, snow_texel, smoothstep(snowlevel, snowlevel+200.0, snow_alpha * (relPos.z + eye_alt)+ (noise_2000m + 0.1 * noise_10m -0.55) *400.0));
 	}
 	
 	

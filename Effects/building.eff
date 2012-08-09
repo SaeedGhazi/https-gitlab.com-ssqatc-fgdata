@@ -91,7 +91,7 @@
 		<terrain_alt><use>/environment/mean-terrain-elevation-m</use></terrain_alt>
     <overcast><use>/rendering/scene/overcast</use></overcast>
     <eye_alt><use>/sim/rendering/eye-altitude-m</use></eye_alt>
-		<mysnow_level><use>/environment/mysnow-level-m</use></mysnow_level>
+		<snow_level><use>/environment/snow-level-m</use></snow_level>
 		<dust_cover_factor><use>/environment/surface/dust-cover-factor</use></dust_cover_factor>
 		<fogtype><use>/sim/rendering/shaders/skydome</use></fogtype>
 		<fogstructure><use>/environment/fog-structure</use></fogstructure>

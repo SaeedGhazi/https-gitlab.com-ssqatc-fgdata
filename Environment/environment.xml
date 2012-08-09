@@ -297,6 +297,7 @@
     <metar-max-age-min type="long">240</metar-max-age-min>
     <metar-updates-environment type="bool">true</metar-updates-environment>
     <metar-updates-winds-aloft type="bool">true</metar-updates-winds-aloft>
+    <metar-updates-snow-level type="bool" userarchive="y">true</metar-updates-snow-level>
     <control-fdm-atmosphere type="bool">true</control-fdm-atmosphere>
     <contrail-altitude type="double">30000</contrail-altitude>
     <!-- definitions for the metar generated fog/mist/haze layer -->
@@ -356,7 +357,6 @@
   <ground-haze-thickness-m type="double" userarchive="n">2000.0</ground-haze-thickness-m>
   <terminator-relative-position-m type="double" userarchive="n">1000000.0</terminator-relative-position-m>
   <mean-terrain-elevation-m type="double" userarchive="n">0.0</mean-terrain-elevation-m>
-  <mysnow-level-m type="double" userarchive="y">3200.0</mysnow-level-m>
   <fog-structure type="double" userarchive="y">0.0</fog-structure>
   <!-- definitions for the environment at surface interface -->
   <surface>

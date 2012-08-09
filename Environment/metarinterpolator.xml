@@ -415,6 +415,12 @@
     <name>MetarController:snow-level</name>
     <type>gain</type>
     <gain>1.0</gain>
+    <enable>
+      <condition>
+        <property>/environment/params/metar-updates-snow-level</property>
+        <property>/environment/params/metar-updates-environment</property>
+      </condition>
+    </enable>
     <input>
       <condition>
         <property>/environment/metar/valid</property>

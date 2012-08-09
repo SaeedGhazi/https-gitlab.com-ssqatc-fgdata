@@ -430,18 +430,50 @@
         <row>3</row>
         <col>0</col>
         <halign>right</halign>
-        <label>Max. visibility</label>
+        <label>Fog properties</label>
       </text>
 
       <text>
         <row>3</row>
         <col>1</col>
         <halign>right</halign>
-        <label>20 km</label>
+        <label>smooth</label>
       </text>
 
       <slider>
         <row>3</row>
+        <col>2</col>
+        <min>0.0</min>
+        <max>12.0</max>
+        <property>/environment/fog-structure</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </slider>
+
+      <text>
+        <row>3</row>
+        <col>3</col>
+        <halign>left</halign>
+        <label>structured</label>
+      </text>
+
+      <text>
+        <row>4</row>
+        <col>0</col>
+        <halign>right</halign>
+        <label>Max. visibility</label>
+      </text>
+
+      <text>
+        <row>4</row>
+        <col>1</col>
+        <halign>right</halign>
+        <label>20 km</label>
+      </text>
+
+      <slider>
+        <row>4</row>
         <col>2</col>
         <min>9.90348</min>
         <max>12.429216196</max>
@@ -452,14 +484,14 @@
       </slider>
 
       <text>
-        <row>3</row>
+        <row>4</row>
         <col>3</col>
         <halign>left</halign>
         <label>250 km</label>
       </text>
 
       <text>
-        <row>3</row>
+        <row>4</row>
         <col>4</col>
         <halign>left</halign>
         <label>12345678</label>
@@ -579,17 +611,6 @@
       </binding>
     </button>
 
-    <button>
-      <legend>Advanced...</legend>
-      <binding>
-        <command>dialog-show</command>
-        <dialog-name>local_weather_environment</dialog-name>
-      </binding>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-    </button>
-    
     <empty>
       <stretch>true</stretch>
     </empty>

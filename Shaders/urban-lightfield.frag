@@ -43,7 +43,7 @@ uniform float terrain_alt;
 uniform float hazeLayerAltitude;
 uniform float overcast;
 uniform float eye_alt;
-uniform float mysnowlevel;
+uniform float snowlevel;
 uniform float dust_cover_factor;
 uniform float wetness;
 uniform float fogstructure;

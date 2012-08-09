@@ -255,6 +255,18 @@
 						<object-name>random-buildings</object-name>
 					</binding>
 				</checkbox>
+				
+				<text>
+				  <row>2</row>
+				  <col>1</col>
+					<colspan>3</colspan>
+          <color>
+            <red>1.0</red>
+            <green>0.6</green>
+            <blue>0.6</blue>
+          </color>
+				  <label>Warning: Requires lots of memory</label>
+        </text>
 
 				<checkbox>
 					<row>3</row>

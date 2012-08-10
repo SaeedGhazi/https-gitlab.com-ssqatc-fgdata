@@ -303,9 +303,9 @@
    	     			 <value><use>eye_alt</use></value>
    	   		  </uniform>
   	    		  <uniform>
-				 <name>mysnowlevel</name>
+				 <name>snowlevel</name>
 				 <type>float</type>
-				 <value><use>mysnow_level</use></value>
+				 <value><use>snow_level</use></value>
     	  		  </uniform>
 			  <uniform>
 				 <name>dust_cover_factor</name>
@@ -500,9 +500,9 @@
    	     			 <value><use>eye_alt</use></value>
    	   		  </uniform>
   	    		  <uniform>
-				 <name>mysnowlevel</name>
+				 <name>snowlevel</name>
 				 <type>float</type>
-				 <value><use>mysnow_level</use></value>
+				 <value><use>snow_level</use></value>
     	  		  </uniform>
 			  <uniform>
 				 <name>dust_cover_factor</name>

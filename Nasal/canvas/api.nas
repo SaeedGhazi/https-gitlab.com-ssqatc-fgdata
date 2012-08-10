@@ -711,14 +711,41 @@ var Image = {
     var m = {
       parents: [Image, Element.new(parent, "image", id, arg)]
     };
-    m.color = _createColorNodes(m._node, "color");
-    m.sourceRect = m._node.getNode("source", 1);
+    m.color_fill = _createColorNodes(m._node, "color-fill");
     return m;
   },
-  
+  # Set image file to be used
+  #
+  # @param file Path to file or canvas (Use canvas://... for canvas, eg.
+  #             canvas://by-index/texture[0])
   setFile: func(file)
   {
-      me.set("file", file);
+    me.set("file", file);
+  },
+  # Set rectangular region of source image to be used
+  #
+  # @param left   Rectangle minimum x coordinate
+  # @param top    Rectangle minimum y coordinate
+  # @param right  Rectangle maximum x coordinate
+  # @param bottom Rectangle maximum y coordinate
+  # @param normalized Whether to use normalized ([0,1]) or image
+  #                   ([0, image_width]/[0, image_height]) coordinates
+  setSourceRect: func(left, top, right, bottom, normalized = 1)
+  {
+    me._node.getNode("source", 1).setValues({
+      left: left,
+      top: top,
+      right: right,
+      bottom: bottom,
+      normalized: normalized
+    });
+    return me;
+  },
+  # Set size of image element
+  setSize: func(width, height)
+  {
+    me._node.setValues({size: [width, height]});
+    return me;
   }
 };
 
@@ -764,7 +791,12 @@ var Canvas = {
   # Set the background color
   #
   # @param color  Vector of 3 or 4 values in [0, 1]
-  setColorBackground: func { _setColorNodes(me.color, arg); return me; }
+  setColorBackground: func { _setColorNodes(me.color, arg); return me; },
+  # Get path of canvas to be used eg. in Image::setFile
+  getPath: func()
+  {
+    return "canvas://by-index/texture[" ~ me._node.getIndex() ~ "]";
+  }
 };
 
 # Create a new canvas. Pass parameters as hash, eg:
@@ -779,11 +811,7 @@ var new = func(vals)
 {
   var m = { parents: [Canvas] };
 
-  m.texture = _createNodeWithIndex
-  (
-    props.globals.getNode("canvas", 1),
-    "texture"
-  );
+  m.texture = _createNodeWithIndex(Canvas.property_root, "texture");
   m.color = _createColorNodes(m.texture, "color-background");
   m.texture.setValues(vals);
 
@@ -802,11 +830,7 @@ var get = func(name)
     node_canvas = name;
   else if( typeof(name) == 'scalar' )
   {
-    var canvas_root = props.globals.getNode("canvas");
-    if( canvas_root == nil )
-      return nil;
-
-    foreach(var c; canvas_root.getChildren("texture"))
+    foreach(var c; Canvas.property_root.getChildren("texture"))
     {
       if( c.getValue("name") == name )
         node_canvas = c;
@@ -847,4 +871,7 @@ else
       {button: {legend: "Ok", binding: {command: "dialog-close"}}}
     );
   }
-} })();
+}
+
+Canvas.property_root = props.globals.getNode("canvas/by-index", 1);
+})();

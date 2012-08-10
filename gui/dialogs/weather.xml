@@ -38,9 +38,10 @@
           var scenarioName = getprop( me.base ~ "/source-selection");
                 
           if (getprop( me.base ~ "/mode/manual-weather")) {
-            # In manual weather mode we have to diable live weather
+            # In manual weather mode we have to disable live weather
             # fetch so the weather can be changed by the user in the
             # weather configuration dialog.  
+            
             setprop( "/environment/params/metar-updates-environment", 0 );
             setprop( "/environment/realwx/enabled", 0 );
             setprop( "/environment/config/enabled", 0 );
@@ -77,13 +78,14 @@
           } else {
             # preset configured scenario
             var wsn = props.globals.getNode( "/environment/weather-scenarios" );
+            var current = getprop("/environment/weather-scenario", "");
             var found = 0;
             if( wsn != nil ) {
               var scenarios = wsn.getChildren("scenario");
               forindex (var i; scenarios ) {
                 var metarN = scenarios[i].getNode("metar");
                 metarN == nil and continue;
-                if( metarN.getValue() == getprop("/environment/metar/data","") ) {
+                if( scenarios[i].getNode("name").getValue() == current ) {
                   setprop( me.base ~ "/source-selection", scenarios[i].getNode("name").getValue() );
                   found = 1;
                   break;
@@ -122,7 +124,6 @@
         apply : func {
           var scenarioName = getprop( me.base ~ "/source-selection");
           var metar = getprop( "environment/metar/data" );
-          var tile = getprop( me.base ~ "/tile");
           var global_weather_enabled = getprop( me.base ~ "/mode/global-weather");
           var local_weather_enabled = getprop( me.base ~ "/mode/local-weather");
           var manual_weather_enabled = getprop( me.base ~ "/mode/manual-weather");
@@ -131,7 +132,7 @@
           if (manual_weather_enabled == 1) {
             setprop( "/environment/params/metar-updates-environment", 0 );
             setprop( "/environment/realwx/enabled", 0 );
-            setprop( "/environment/config/enabled", 0 );
+            setprop( "/environment/config/enabled", 1 );
             metar = "";
           } else if( scenarioName == "Live data" ) {
             setprop( "/environment/params/metar-updates-environment", 1 );
@@ -149,6 +150,8 @@
             metar = getprop( me.base ~ "/metar-string" );
           }
           
+          setprop("/environment/weather-scenario", scenarioName);
+          
           if( metar != nil ) {
             setprop( "environment/metar/data", normalize_string(metar) );
           }
@@ -161,20 +164,6 @@
             # If Local Weather is enabled, re-initialize with updated 
             # initial tile and tile selection.
             setprop("/nasal/local_weather/enabled", "true");
-            setprop("/local-weather/tmp/tile-type", tile);
-            
-            if ((scenarioName == "Live data"   ) or
-                (scenarioName == "Manual input")   ) {
-              # If using Live data, or a manually entered METAR string, the 
-              # only sensible tile selection mode is "METAR"
-              setprop("/local-weather/tmp/tile-management", "METAR");
-            } else if (tile != "") {
-              # Use Realistic Weather for defined tiles
-              setprop("/local-weather/tmp/tile-management", "realistic weather");
-            } else {
-              # Otherwise repeat the tile
-              setprop("/local-weather/tmp/tile-management", "repeat-tile");
-            }
             
             # Re-initialize local weather.
             local_weather.set_tile();            
@@ -194,14 +183,15 @@
         },
 
         scenarioListener : func( n ) {
-          description = "";
-          metar = "nil";
-          tile = "";
+          var description = "";
+          var metar = "nil";
+          var local_weather_props = nil;
+          
           var scenario = me.findScenarioByName( n.getValue() );
           if( scenario != nil ) {
             description = normalize_string(scenario.getNode("description", 1 ).getValue());
             metar = normalize_string(scenario.getNode("metar", 1 ).getValue());
-            tile = normalize_string(scenario.getNode("tile", 1 ).getValue());
+            local_weather_props = scenario.getNode("local-weather");
           }
           
           if (n.getValue() == "Live data") {
@@ -212,12 +202,63 @@
           if (n.getValue() == "Manual input") {
             # Special case - retain current values
             var metar = getprop( me.base ~ "/metar-string" );
-          }
-          
+          }          
 
           setprop(me.base ~ "/description", description );
           setprop(me.base ~ "/metar-string", metar );
-          setprop(me.base ~ "/tile", tile);
+          
+          # Set the wind from the METAR string.
+          var result = [];
+          var msplit = split(" ", string.uc(metar));
+          foreach (var word; msplit) {
+          
+            if ((size(word) > 6) and string.match(word, "*[0-9][0-9]KT")) {
+              # We've got the wind definition word. Now to split it up.
+              # Format is nnnmmKT or nnnmmGppKT
+              # Direction is easy - the first 3 characters.
+              var dir = chr(word[0]) ~ chr(word[1]) ~ chr(word[2]);
+              
+              if (dir == "VRB") {
+                setprop("/local-weather/tmp/tile-orientation-deg", 360.0 * rand());
+                setprop("/local-weather/tmp/gust-angular-variation-deg", 180.0);
+                setprop("/local-weather/tmp/gust-frequency-hz", 0.001);
+              } else {
+                setprop("/local-weather/tmp/tile-orientation-deg", dir);              
+                setprop("/local-weather/tmp/gust-angular-variation-deg", 0.0);
+                setprop("/local-weather/tmp/gust-frequency-hz", 0.0);
+              }
+              
+              # Next two are the base wind
+              var spd = chr(word[3]) ~ chr(word[4]);
+              setprop("/local-weather/tmp/windspeed-kt", spd);
+              
+              var gst = 0;
+              if ((size(word) > 7) and (chr(word[5]) == 'G')) {
+                # Gusty case
+                gst = chr(word[6]) ~ chr(word[7]);
+              }
+                              
+              if ((gst > spd) and (spd > 0)) {
+                setprop("/local-weather/tmp/gust-relative-strength", (gst - spd) / spd);
+                setprop("/local-weather/tmp/gust-frequency-hz", 0.7);
+              } else {
+                setprop("/local-weather/tmp/gust-relative-strength", 0.0);
+              }
+            }
+          }
+          
+          
+          if (local_weather_props != nil) {
+            # The local weather properties need to be set now, so they can 
+            # be configured by the user if they select Advanced Settings
+            props.copy(local_weather_props, props.globals.getNode("/local-weather/tmp", 1));
+          } else {
+            # If no local weather properties have been set, we'll read from the scenario
+            # METAR
+            setprop("/local-weather/tmp/tile-type", "manual");
+            setprop("/local-weather/tmp/tile-management", "METAR");
+          }          
+
           me.refresh();
         },
 

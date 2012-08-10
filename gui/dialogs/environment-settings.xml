@@ -1,0 +1,259 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+  <name>environment-settings</name>
+  <modal>false</modal>
+  <resizable>false</resizable>
+  <layout>vbox</layout>
+  <default-padding>3</default-padding>
+
+  <!-- Title bar with close button -->
+  <group>
+    <layout>hbox</layout>
+    <default-padding>1</default-padding>
+
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+
+    <text>
+      <label>Environmental Settings</label>
+    </text>
+
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+
+    <button>
+      <legend/>
+      <key>Esc</key>
+      <pref-width>16</pref-width>
+      <pref-height>16</pref-height>
+      <border>2</border>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
+
+  <hrule/>
+
+  <group>
+    <layout>table</layout>
+    
+    <text>
+      <row>0</row>
+      <col>0</col>
+      <label>Ground textures:</label>
+      <halign>right</halign>
+    </text>
+    <combo>
+      <row>0</row>
+      <col>1</col>
+      <name>season</name>
+      <halign>left</halign>
+      <live>true</live>
+      <property>/sim/startup/season</property>
+      <value>summer</value>
+      <value>winter</value>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>season</object-name>
+      </binding>
+    </combo>
+
+    <button>
+      <row>0</row>
+      <col>2</col>
+      <legend>Reload Scenery</legend>
+      <binding>
+        <command>reinit</command>
+        <subsystem>tile-manager</subsystem>
+      </binding>
+    </button>
+    
+  </group>
+    
+  <hrule/>
+  
+    
+  <group>
+    <layout>table</layout>
+    
+    <text>
+      <row>0</row>
+      <col>0</col>
+      <colspan>4</colspan>
+      <halign>left</halign>
+      <label>Ground conditions (requires shaders effects)</label>
+    </text>
+    
+    <checkbox>
+      <row>1</row>
+      <col>0</col>
+      <colspan>4</colspan>
+      <halign>left</halign>
+      <label>Set snow level from METAR</label>
+      <name>metar-snow</name>
+      <property>/environment/params/metar-updates-snow-level</property>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>metar-snow</object-name>
+      </binding>
+    </checkbox>
+    
+    <text>
+      <label>Snow line</label>
+      <halign>left</halign>
+      <row>2</row>
+      <col>0</col>
+    </text>
+    
+    <text>
+      <label>-425m</label>
+      <halign>right</halign>
+      <row>2</row>
+      <col>1</col>
+    </text>
+        
+    <slider>
+      <name>snow-level</name>
+      <row>2</row>
+      <col>2</col>
+      <min>-425.0</min>
+      <max>7500.0</max>
+      <live>true</live>
+      <property>/environment/snow-level-m</property>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>snow-level</object-name>
+      </binding>
+    </slider>
+
+    <text>
+      <label>7500m</label>
+      <halign>left</halign>
+      <row>2</row>
+      <col>3</col>
+    </text>
+    
+    <text>
+      <row>2</row>
+      <col>4</col>
+      <label>12345678</label>
+      <format>%.fm</format>
+      <live>true</live>
+      <property>/environment/snow-level-m</property>
+    </text>    
+    
+    <text>
+      <label>Dust cover</label>
+      <halign>left</halign>
+      <row>3</row>
+      <col>0</col>
+    </text>
+    
+    <text>
+      <label>none</label>
+      <halign>right</halign>
+      <row>3</row>
+      <col>1</col>
+    </text>
+        
+    <slider>
+      <name>dust-level</name>
+      <row>3</row>
+      <col>2</col>
+      <min>0.0</min>
+      <max>0.7</max>
+      <live>true</live>
+      <property>/environment/surface/dust-cover-factor</property>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>dust-level</object-name>
+      </binding>
+    </slider>
+
+    <text>
+      <label>dusty</label>
+      <halign>left</halign>
+      <row>3</row>
+      <col>3</col>
+    </text>
+
+    <text>
+      <label>Wetness</label>
+      <halign>left</halign>
+      <row>4</row>
+      <col>0</col>
+    </text>
+    
+    <text>
+      <label>dry</label>
+      <halign>right</halign>
+      <row>4</row>
+      <col>1</col>
+    </text>
+        
+    <slider>
+      <name>wetness</name>
+      <row>4</row>
+      <col>2</col>
+      <min>0.0</min>
+      <max>0.7</max>
+      <live>true</live>
+      <property>/environment/surface/wetness</property>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>wetness</object-name>
+      </binding>
+    </slider>
+
+    <text>
+      <label>wet</label>
+      <halign>left</halign>
+      <row>4</row>
+      <col>3</col>
+    </text>
+    
+  </group>
+  
+  <hrule/>
+
+  <group>
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+    <layout>hbox</layout>
+
+    <button>
+      <legend>OK</legend>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+    
+    <button>
+      <legend>Apply</legend>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </button>
+
+    <button>
+      <legend>Close</legend>
+      <default>true</default>
+      <key>Esc</key>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+  </group>
+
+</PropertyList>

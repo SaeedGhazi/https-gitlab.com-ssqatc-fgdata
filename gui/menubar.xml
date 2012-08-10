@@ -282,6 +282,14 @@
 		</item>
 
 		<item>
+			<name>environment-settings</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>environment-settings</dialog-name>
+			</binding>
+		</item>
+
+		<item>
 			<name>time-settings</name>
 			<binding>
 				<command>dialog-show</command>

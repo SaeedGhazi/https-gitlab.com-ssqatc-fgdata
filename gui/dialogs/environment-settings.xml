@@ -93,7 +93,7 @@
       <col>0</col>
       <colspan>4</colspan>
       <halign>left</halign>
-      <label>Set snow level from METAR</label>
+      <label>Set maximum snow level from METAR</label>
       <name>metar-snow</name>
       <property>/environment/params/metar-updates-snow-level</property>
       <binding>

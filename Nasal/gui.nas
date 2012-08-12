@@ -904,7 +904,7 @@ var showWeightDialog = func {
 
     if( fdmdata.cg != nil ) { 
         var n = props.globals.getNode("/limits/mass-and-balance/cg/dimension");
-        tablerow("Center of Gravity", fdmdata.cg, "%.1f " ~ (n == nil ? "in" : n.getValue()));
+        tablerow("Center of Gravity", props.globals.getNode(fdmdata.cg), "%.1f " ~ (n == nil ? "in" : n.getValue()));
     }
 
     dialog[name].addChild("hrule");

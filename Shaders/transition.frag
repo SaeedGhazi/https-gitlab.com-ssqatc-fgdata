@@ -69,10 +69,19 @@ void main()
 	if (gl_FrontMaterial.shininess > 0.0)
 		specular = gl_FrontMaterial.specular * gl_LightSource[0].specular * pf;
 
+<<<<<<< HEAD
 	vec4	diffuseColor = gl_FrontMaterial.emission +
 							vec4(1.0) * (gl_LightModel.ambient + gl_LightSource[0].ambient) +
 							Diffuse * gl_FrontMaterial.diffuse;
 
+=======
+// 	vec4	diffuseColor = gl_FrontMaterial.emission +
+// 							vec4(1.0) * (gl_LightModel.ambient + gl_LightSource[0].ambient) +
+// 							Diffuse * gl_FrontMaterial.diffuse;
+	vec4	ambientColor = gl_LightModel.ambient + gl_LightSource[0].ambient;
+	//vec4	diffuseColor = gl_Color + Diffuse * gl_FrontMaterial.diffuse + ambientColor;
+	vec4	diffuseColor = vec4(Diffuse) + ambientColor; //ATI workaround
+>>>>>>> 458720af8eb7ffa022b5b8dcc51d3cde60e5dded
 	diffuseColor += specular * gl_FrontMaterial.specular;
 
     // This shouldn't be necessary, but our lighting becomes very

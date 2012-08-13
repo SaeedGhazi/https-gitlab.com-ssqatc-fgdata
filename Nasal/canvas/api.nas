@@ -3,6 +3,8 @@
 #
 var _createNodeWithIndex = func(node, path, min_index = 0)
 {
+  var node = aircraft.makeNode(node);
+
   # TODO do we need an upper limit? (50000 seems already seems unreachable)
   for(var i = min_index; i < 50000; i += 1)
   {
@@ -161,60 +163,19 @@ var Transform = {
 var Element = {
   # Constructor
   #
-  # @param parent   Parent node (In the property tree)
-  # @param type     Type string (Used as node name)
+  # @param node     Node to be used for element or vector [parent, type] for
+  #                 creation of a new node with name type and given parent
   # @param id       ID/Name (Should be unique)
-  new: func(parent, type, id)
+  new: func(node, id)
   {
-    # arg can contain the node to be used instead of creating a new one
-    var args = _arg2valarray(arg);
-    if( size(args) == 1 )
-    {
-      var node = args[0];
-      if( !isa(node, props.Node) )
-        return debug.warn("Not a props.Node!");
-    }
-    else
-      var node = _createNodeWithIndex(parent, type);
+    var m = { parents: [PropertyElement.new(node, id), Element] };
 
-    var m = {
-      parents: [Element],
-      _node: node,
-      _center: [
-        node.getNode("center[0]"),
-        node.getNode("center[1]")
-      ]
-    };
-    
-    if( id != nil )
-      m._node.getNode("id", 1).setValue(id);
+    m._center = [
+      m._node.getNode("center[0]"),
+      m._node.getNode("center[1]")
+    ];
 
     return m;
-  },
-  # Destructor (has to be called manually!)
-  del: func()
-  {
-    me._node.remove();
-  },
-  set: func(key, value)
-  {
-    me._node.getNode(key, 1).setValue(value);
-    return me;
-  },
-  setBool: func(key, value)
-  {
-    me._node.getNode(key, 1).setBoolValue(value);
-    return me;
-  },
-  setDouble: func(key, value)
-  {
-    me._node.getNode(key, 1).setDoubleValue(value);
-    return me;
-  },
-  setInt: func(key, value)
-  {
-    me._node.getNode(key, 1).setIntValue(value);
-    return me;
   },
   # Trigger an update of the element
   # 
@@ -342,17 +303,9 @@ var Element = {
 # Class for a group element on a canvas
 #
 var Group = {
-  new: func(parent, id, type = "group")
+  new: func(node, id)
   {
-    # special case: if called from #getElementById the third argument is the
-    # existing node so we need to rearange the variables a bit.
-    if( typeof(type) != "scalar" )
-    {
-      var arg = [type];
-      var type = "group";
-    }
-
-    return { parents: [Group, Element.new(parent, type, id, arg)] };
+    return { parents: [Group, Element.new(node, id)] };
   },
   # Create a child of given type with specified id.
   # type can be group, text
@@ -366,7 +319,7 @@ var Group = {
       return nil;
     }
     
-    return factory(me._node, id);
+    return factory([me._node, type], id);
   },
   # Get first child with given id (breadth-first search)
   #
@@ -387,13 +340,8 @@ var Group = {
       {
         var node_id = node.getNode("id");
         if( node_id != nil and node_id.getValue() == id )
-          return me._element_factories[ node.getName() ]
-          (
-            nil,
-            nil,
-            # use the existing node
-            node
-          );
+          # Create element from existing node
+          return me._element_factories[ node.getName() ](node, nil);
       }
         
       foreach(var c; node.getChildren())
@@ -419,9 +367,9 @@ var Group = {
 # which automatically get projected according to the specified projection.
 #
 var Map = {
-  new: func(parent, id)
+  new: func(node, id)
   {
-    return { parents: [Map, Group.new(parent, id, "map", arg)] };
+    return { parents: [Map, Group.new(node, id)] };
   }
   # TODO
 };
@@ -431,11 +379,9 @@ var Map = {
 # Class for a text element on a canvas
 #
 var Text = {
-  new: func(parent, id)
+  new: func(node, id)
   {
-    var m = {
-      parents: [Text, Element.new(parent, "text", id, arg)]
-    };
+    var m = { parents: [Text, Element.new(node, id)] };
     m.color = _createColorNodes(m._node, "color");
     m.color_fill = _createColorNodes(m._node, "color-fill");
     return m;
@@ -566,10 +512,10 @@ var Path = {
   ],
 
   #
-  new: func(parent, id)
+  new: func(node, id)
   {
     var m = {
-      parents: [Path, Element.new(parent, "path", id, arg)],
+      parents: [Path, Element.new(node, id)],
       _num_cmds: 0,
       _num_coords: 0
     };
@@ -706,10 +652,10 @@ var Path = {
 # Class for an image element on a canvas
 #
 var Image = {
-  new: func(parent, id)
+  new: func(node, id)
   {
     var m = {
-      parents: [Image, Element.new(parent, "image", id, arg)]
+      parents: [Image, Element.new(node, id)]
     };
     m.color_fill = _createColorNodes(m._node, "color-fill");
     return m;
@@ -786,7 +732,7 @@ var Canvas = {
   # @param id Optional id/name for the group
   createGroup: func(id = nil)
   {
-    return Group.new(me.texture, id);
+    return Group.new([me.texture, "group"], id);
   },
   # Set the background color
   #

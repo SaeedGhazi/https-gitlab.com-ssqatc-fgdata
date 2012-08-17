@@ -3,7 +3,7 @@
 ##  A cellular automaton forest fire model with the ability to
 ##  spread over the multiplayer network.
 ##
-##  Copyright (C) 2007 - 2011  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2007 - 2012  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
@@ -428,6 +428,7 @@ CAFireModels.MODEL = {         # Model paths
     "soot"                   : "Models/Effects/Wildfire/soot.xml",
     "foam"                   : "Models/Effects/Wildfire/foam.xml",
     "water"                  : "",
+    "retardant"              : "Models/Effects/Wildfire/retardant.xml",
     "protected"              : "",
     "none"                   : "",
 };
@@ -673,11 +674,40 @@ CAFire.resolve_water_drop = func (lat, lon, radius, volume=0) {
 }
 ############################################################
 # Resolve a fire retardant drop.
-# For now: Assume that water makes the affected cell nonflammable forever
-#          and extinguishes it if burning.
+# For now: Assume that the retardant makes the affected cell nonflammable
+#          forever and extinguishes it if burning.
 # Note: volume is unused ATM.
 CAFire.resolve_retardant_drop = func (lat, lon, radius, volume=0) {
-  return me.resolve_water_drop(lat, lon, radius, volume);
+  trace("CAFire.resolve_retardant_drop: Dumping retardant at " ~
+        lat ~", " ~ lon ~ " radius " ~ radius ~".");
+  var x = int(lon*60/me.CELL_SIZE);
+  var y = int(lat*60/me.CELL_SIZE);
+  var r = int(2*radius/(me.CELL_SIZE*1852.0));
+  var result = { extinguished : 0, protected : 0, waste : 0 };
+  for (var dx = -r; dx <= r; dx += 1) {
+    for (var dy = -r; dy <= r; dy += 1) {
+      var cell = me.get_cell(x + dx, y + dy);
+      if (cell == nil) {
+        cell = FireCell.new(x + dx, y + dy);
+        me.set_cell(x + dx, y + dy,
+                    cell);
+      }
+      if (cell != nil) {
+        var res = cell.extinguish("retardant");
+        if (res > 0) {
+          result.extinguished += 1;
+        } else {
+          if (res == 0) result.protected += 1;
+          else          result.waste += 1;
+        }
+      } else {
+        result.waste += 1;
+      }
+    }
+  }
+  append(me.event_log,
+         [SimTime.current_time(), "retardant_drop", lat, lon, radius]);
+  return result;
 }
 ############################################################
 # Resolve a foam drop.
@@ -737,6 +767,8 @@ CAFire.save_event_log = func (filename) {
     if (e[1] == "water_drop")
       event.getNode("radius", 1).setDoubleValue(e[4]);
     if (e[1] == "foam_drop")
+      event.getNode("radius", 1).setDoubleValue(e[4]);
+    if (e[1] == "retardant_drop")
       event.getNode("radius", 1).setDoubleValue(e[4]);
 
 #    debug.dump(e);
@@ -802,6 +834,12 @@ CAFire.load_event_log = func (filename, skip_ahead_until=-1) {
       me.resolve_foam_drop(event.getNode("latitude").getValue(),
                            event.getNode("longitude").getValue(),
                            event.getNode("radius").getValue());
+      me.event_log[size(me.event_log) - 1][0] = e[0];
+    }
+    if (event.getNode("type").getValue() == "retardant_drop") {
+      me.resolve_retardant_drop(event.getNode("latitude").getValue(),
+                                event.getNode("longitude").getValue(),
+                                event.getNode("radius").getValue());
       me.event_log[size(me.event_log) - 1][0] = e[0];
     }
   }

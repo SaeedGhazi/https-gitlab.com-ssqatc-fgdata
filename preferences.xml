@@ -55,7 +55,6 @@ Started September 2000 by David Megginson, david@megginson.com
 			<units>feet</units>
 			<save-on-exit type="bool" userarchive="y">true</save-on-exit>
 			<restore-defaults type="bool">false</restore-defaults>
-			<browser-app write="n">firefox -new-tab "%u"</browser-app>
 			<!--  help viewer; only used under Unix -->
 			<terminal-ansi-colors type="bool">true</terminal-ansi-colors>
 			<season type="string" preserve="y">summer</season>

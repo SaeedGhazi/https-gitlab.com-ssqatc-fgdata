@@ -154,8 +154,8 @@ void main (void)
 	ambient_Correction = clamp(ambient_Correction, -1.0, 1.0);
 
 	color.a = texel.a * alpha;
-	//vec4 fragColor = vec4(color.rgb * mixedcolor.rgb + ambient_Correction.rgb, color.a);
-	vec4 fragColor = vec4(color.rgb * mixedcolor, color.a);
+	vec4 fragColor = vec4(color.rgb * mixedcolor.rgb + ambient_Correction.rgb, color.a);
+	//vec4 fragColor = vec4(color.rgb * mixedcolor, color.a);
 
 //////////////////////////////////////////////////////////////////////
 // BEGIN lightmap

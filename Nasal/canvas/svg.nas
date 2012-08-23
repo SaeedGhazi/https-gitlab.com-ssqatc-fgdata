@@ -341,18 +341,16 @@ var parsesvg = func(group, path, options = nil)
       }
       
       parsePath(d);
-      
+
+      stack[-1].set('fill', style['fill']);
+
       var w = style['stroke-width'];
       stack[-1].setStrokeLineWidth( w != nil ? w : 1 );
-      stack[-1].setColor(parseColor(style['stroke']));
+      stack[-1].set('stroke', style['stroke'] or "none");
       
       var linecap = style['stroke-linecap'];
       if( linecap != nil )
         stack[-1].setStrokeLineCap(style['stroke-linecap']);
-      
-      var fill = style['fill'];
-      if( fill != nil and fill != "none" )
-        stack[-1].setColorFill(parseColor(fill));
       
       # http://www.w3.org/TR/SVG/painting.html#StrokeDasharrayProperty
       var dash = style['stroke-dasharray'];

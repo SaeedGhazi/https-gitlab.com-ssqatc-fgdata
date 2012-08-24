@@ -112,6 +112,7 @@
 	<aircraft-keys>Aircraft Help</aircraft-keys>
 	<common-keys>Common Aircraft Keys</common-keys>
 	<basic-keys>Basic Simulator Keys</basic-keys>
+	<joystick-config>Joystick Configuration</joystick-config>
 	<joystick-info>Joystick Information</joystick-info>
 	<tutorial-start>Tutorials</tutorial-start>
 	<menu-about>About</menu-about>

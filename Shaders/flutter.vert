@@ -56,8 +56,8 @@ void relWind(out float rel_wind_speed_kts, out float rel_wind_from_rad)
     float rel_wind_speed_from_north_kts = WindN*fps2kts + speed_north_kts;
 
     //combine relative speeds north and east to get relative windspeed in kts
-    rel_wind_speed_kts = sqrt(pow(abs(rel_wind_speed_from_east_kts), 2)
-        + pow(abs(rel_wind_speed_from_north_kts), 2));
+    rel_wind_speed_kts = sqrt(pow(abs(rel_wind_speed_from_east_kts), 2.0)
+        + pow(abs(rel_wind_speed_from_north_kts), 2.0));
 
     //calculate the relative wind direction
     float rel_wind_from_deg = degrees(atan(rel_wind_speed_from_east_kts, rel_wind_speed_from_north_kts));
@@ -79,8 +79,8 @@ void main()
     {
     mat4 RotationMatrix;
 
-    float relWindspd=0;
-    float relWinddir=0;
+    float relWindspd=0.0;
+    float relWinddir=0.0;
 
     // compute relative wind speed and direction
     relWind (relWindspd, relWinddir);
@@ -93,9 +93,9 @@ void main()
     vec4 pos = gl_Vertex;
     vec4 oldpos = gl_Vertex;
 
-    float freq = (10 * relWindspd) + 10;
+    float freq = (10.0 * relWindspd) + 10.0;
     pos.y = sin((pos.x * 5.0 + tsec * freq )/5.0) * 0.5 ;
-    pos.y += sin((pos.z * 5.0 + tsec * freq/2)/5.0) * 0.125 ;
+    pos.y += sin((pos.z * 5.0 + tsec * freq/2.0)/5.0) * 0.125 ;
 
     pos.y *= pow(pos.x - Offset, 2.0) * AmpFactor;
 

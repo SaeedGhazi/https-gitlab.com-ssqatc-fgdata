@@ -27,7 +27,7 @@
 		<terrain_alt><use>/environment/mean-terrain-elevation-m</use></terrain_alt>
     <overcast><use>/rendering/scene/overcast</use></overcast>
     <eye_alt><use>/sim/rendering/eye-altitude-m</use></eye_alt>
-		<mysnow_level><use>/environment/mysnow-level-m</use></mysnow_level>
+		<snow_level><use>/environment/snow-level-m</use></snow_level>
 		<dust_cover_factor><use>/environment/surface/dust-cover-factor</use></dust_cover_factor>
 		<fogtype><use>/sim/rendering/shaders/skydome</use></fogtype>
 		<fogstructure><use>/environment/fog-structure</use></fogstructure>
@@ -38,7 +38,7 @@
     <predicate>
       <and>
         <property>/sim/rendering/shaders/skydome</property>
-				<property>/sim/rendering/random-vegetation</property>
+	<property>/sim/rendering/random-vegetation</property>
         <or>
           <less-equal>
             <value type="float">2.0</value>
@@ -53,48 +53,7 @@
         </or>
       </and>
     </predicate>
-    <pass>
-      <lighting>true</lighting>
-			<material>
-				<ambient type="vec4d">1.0 1.0 1.0 1.0</ambient>
-				<diffuse type="vec4d">1.0 1.0 1.0 1.0</diffuse>
-				<color-mode>off</color-mode>
-			</material>
-			<render-bin>
-				<bin-number>-1</bin-number>
-				<bin-name>RenderBin</bin-name>
-			</render-bin>
-			<blend>
-				<source>src-alpha</source>
-				<destination>one-minus-src-alpha</destination>
-			</blend>
-			<alpha-test>
-				<comparison>gequal</comparison>
-				<reference type="float">0.1</reference>
-			</alpha-test>
-			<texture-unit>
-				<unit>0</unit>
-				<type>2d</type>
-				<image>
-					<use>texture[0]/image</use>
-				</image>
-				<wrap-s>clamp</wrap-s>
-				<wrap-t>clamp</wrap-t>
-			</texture-unit>
-
-      <program>
-<!--        <vertex-shader n="0">Shaders/include_fog.vert</vertex-shader> -->
-        <vertex-shader n="1">Shaders/tree.vert</vertex-shader>
-        <fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
-        <fragment-shader n="1">Shaders/tree.frag</fragment-shader>
-      </program>
-      <uniform>
-        <name>texture</name>
-        <type>sampler-2d</type>
-        <value type="int">0</value>
-      </uniform>
-      <color-mask type="vec4d">0 0 0 0</color-mask>
-    </pass>
+   
     <pass>
       <lighting>true</lighting>
 			<material>
@@ -174,11 +133,13 @@
         <type>int</type>
         <value>2</value> <!-- AMBIENT_AND_DIFFUSE -->
       </uniform>
-      <depth>
+      <!--<depth>
         <function>lequal</function>
         <write-mask type="bool">false</write-mask>
-      </depth>
+      </depth>-->
     </pass>
+
+
   </technique>
 	
 	<technique n="9">

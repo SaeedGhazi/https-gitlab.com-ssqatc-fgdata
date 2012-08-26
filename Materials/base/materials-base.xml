@@ -442,7 +442,7 @@ Shared parameters for various materials.
 
 <material n="2010">
   <name>Railroad</name>
-  <!--<name>Transport</name>-->
+  <name>Transport</name>
   <texture>Terrain/gravel.png</texture>
   <xsize>400</xsize>
   <ysize>400</ysize>

@@ -3,8 +3,6 @@
 // based on earlier work by Frederic Bouvier, Tim Moore, and Yves Sablonier.
 // © Emilian Huminiuc 2011
 
-// Ambient term comes in gl_Color.rgb.
-
 #version 120
 
 varying vec4    RawPos;
@@ -69,10 +67,12 @@ void main()
 	if (gl_FrontMaterial.shininess > 0.0)
 		specular = gl_FrontMaterial.specular * gl_LightSource[0].specular * pf;
 
-	vec4	diffuseColor = gl_FrontMaterial.emission +
-							vec4(1.0) * (gl_LightModel.ambient + gl_LightSource[0].ambient) +
-							Diffuse * gl_FrontMaterial.diffuse;
-
+// 	vec4	diffuseColor = gl_FrontMaterial.emission +
+// 							vec4(1.0) * (gl_LightModel.ambient + gl_LightSource[0].ambient) +
+// 							Diffuse * gl_FrontMaterial.diffuse;
+	vec4	ambientColor = gl_LightModel.ambient + gl_LightSource[0].ambient;
+	//vec4	diffuseColor = gl_Color + Diffuse * gl_FrontMaterial.diffuse + ambientColor;
+	vec4	diffuseColor = vec4(Diffuse) + ambientColor; //ATI workaround
 	diffuseColor += specular * gl_FrontMaterial.specular;
 
     // This shouldn't be necessary, but our lighting becomes very

@@ -207,31 +207,8 @@
 			<group>
 				<layout>table</layout>
 				
-				<text>
-					<row>0</row>
-					<col>0</col>
-					<colspan>2</colspan>
-					<label>Season (ground textures): </label>
-					<halign>right</halign>
-				</text>
-				<combo>
-					<row>0</row>
-					<col>2</col>
-					<colspan>2</colspan>
-					<name>season</name>
-					<halign>left</halign>
-					<live>true</live>
-					<property>/sim/startup/season</property>
-					<value>summer</value>
-					<value>winter</value>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>season</object-name>
-					</binding>
-				</combo>
-
 				<checkbox>
-					<row>1</row>
+					<row>0</row>
 					<col>0</col>
 					<halign>left</halign>
 					<label>Animated jetways</label>
@@ -244,7 +221,7 @@
 				</checkbox>
 
 				<checkbox>
-					<row>2</row>
+					<row>1</row>
 					<col>0</col>
 					<halign>left</halign>
 					<label>Random buildings</label>
@@ -255,9 +232,21 @@
 						<object-name>random-buildings</object-name>
 					</binding>
 				</checkbox>
+				
+				<text>
+				  <row>1</row>
+				  <col>1</col>
+					<colspan>3</colspan>
+          <color>
+            <red>1.0</red>
+            <green>0.6</green>
+            <blue>0.6</blue>
+          </color>
+				  <label>Warning: Requires lots of memory</label>
+        </text>
 
 				<checkbox>
-					<row>3</row>
+					<row>2</row>
 					<col>0</col>
 					<halign>left</halign>
 					<label>Random objects</label>
@@ -270,7 +259,7 @@
 				</checkbox>
 
 				<checkbox>
-					<row>4</row>
+					<row>3</row>
 					<col>0</col>
 					<halign>left</halign>
 					<label>Random vegetation</label>
@@ -282,7 +271,7 @@
 					</binding>
 				</checkbox>
 				<text>
-					<row>4</row>
+					<row>3</row>
 					<col>1</col>
 					<label>density</label>
 					<enable>
@@ -290,7 +279,7 @@
 					</enable>
 				</text>
 				<slider>
-					<row>4</row>
+					<row>3</row>
 					<col>2</col>
 					<name>vegetation-density</name>
 					<min>0</min>
@@ -303,7 +292,7 @@
 					</binding>
 				</slider>
 				<text>
-					<row>4</row>
+					<row>3</row>
 					<col>3</col>
 					<label>12345678</label>
 					<format>%.1f</format>

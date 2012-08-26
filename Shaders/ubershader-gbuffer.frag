@@ -76,7 +76,7 @@ void main (void)
 	//vec3 ambient = fg_SunAmbientColor.rgb;
 	vec3 N;
 	vec3 dotN;
-	float emission = dot( gl_FrontLightModelProduct.sceneColor.rgb + gl_FrontMaterial.emission,
+	float emission = dot( gl_FrontLightModelProduct.sceneColor.rgb + gl_FrontMaterial.emission.rgb,
 						  vec3( 0.3, 0.59, 0.11 ) );
 	float pf;
 
@@ -154,8 +154,8 @@ void main (void)
 	ambient_Correction = clamp(ambient_Correction, -1.0, 1.0);
 
 	color.a = texel.a * alpha;
-	//vec4 fragColor = vec4(color.rgb * mixedcolor.rgb + ambient_Correction.rgb, color.a);
-	vec4 fragColor = vec4(color.rgb * mixedcolor, color.a);
+	vec4 fragColor = vec4(color.rgb * mixedcolor.rgb + ambient_Correction.rgb, color.a);
+	//vec4 fragColor = vec4(color.rgb * mixedcolor, color.a);
 
 //////////////////////////////////////////////////////////////////////
 // BEGIN lightmap

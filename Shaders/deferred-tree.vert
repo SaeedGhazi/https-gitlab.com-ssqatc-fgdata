@@ -15,11 +15,13 @@ void main() {
     
     // Position and scaling
     vec3 position = gl_Vertex.xyz * gl_Normal.xxy;
-    float sr = sin(gl_FogCoord);
-    float cr = cos(gl_FogCoord);
+    float sr = sin(gl_FogCoord + gl_Color.x);
+    float cr = cos(gl_FogCoord + gl_Color.x);
 
     // Rotation of the generic quad to specific one for the tree.
     position.xy = vec2(dot(position.xy, vec2(cr, sr)), dot(position.xy, vec2(-sr, cr)));
+
+    // Move to correct location (stored in gl_Color)
     position = position + gl_Color.xyz;
     gl_Position   = gl_ModelViewProjectionMatrix * vec4(position,1.0);
 

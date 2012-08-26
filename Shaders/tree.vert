@@ -18,8 +18,12 @@ void main(void)
   float numVarieties = gl_Normal.z;
   float texFract = floor(fract(gl_MultiTexCoord0.x) * numVarieties) / numVarieties;
   texFract += floor(gl_MultiTexCoord0.x) / numVarieties;
-  float sr = sin(gl_FogCoord);
-  float cr = cos(gl_FogCoord);
+  
+  // Determine the rotation for the tree.  The Fog Coordinate provides rotation information
+  // to rotate one of the quands by 90 degrees.  We then apply an additional position seed
+  // so that trees aren't all oriented N/S
+  float sr = sin(gl_FogCoord + gl_Color.x);
+  float cr = cos(gl_FogCoord + gl_Color.x);
   gl_TexCoord[0] = vec4(texFract, gl_MultiTexCoord0.y, 0.0, 0.0);
 
   // scaling

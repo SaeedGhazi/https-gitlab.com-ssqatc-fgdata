@@ -856,47 +856,55 @@ var showWeightDialog = func {
 
     var contentArea = dialog[name].addChild("group");
     contentArea.set("layout", "hbox");
+    contentArea.set("default-padding", 10);
+
+    dialog[name].addChild("empty");
+
+    var limits = dialog[name].addChild("group");
+    limits.set("layout", "table");
+    limits.set("halign", "center");
+    var row = 0;
+
+    var massLimits = props.globals.getNode("/limits/mass-and-balance");
+
+    var tablerow = func(name, node, format ) {
+
+        var n = isa( node, props.Node ) ? node : massLimits.getNode( node );
+        if( n == nil ) return;
+
+        var label = limits.addChild("text");
+        label.set("row", row);
+        label.set("col", 0);
+        label.set("halign", "right");
+        label.set("label", name ~ ":");
+
+        var val = limits.addChild("text");
+        val.set("row", row);
+        val.set("col", 1);
+        val.set("halign", "left");
+        val.set("label", "0123457890123456789");
+        val.set("format", format);
+        val.set("property", n.getPath());
+        val.set("live", 1);
+          
+        row += 1;
+    }
 
     var grossWgt = props.globals.getNode(fdmdata.grosswgt);
     if(grossWgt != nil) {
-        var gwg = dialog[name].addChild("group");
-        gwg.set("layout", "hbox");
-        gwg.addChild("empty").set("stretch", 1);
-        gwg.addChild("text").set("label", "Gross Weight:");
-        var txt = gwg.addChild("text");
-        txt.set("label", "0123456789");
-        txt.set("format", "%.0f lb");
-        txt.set("property", fdmdata.grosswgt);
-        txt.set("live", 1);
-        gwg.addChild("empty").set("stretch", 1);
+        tablerow("Gross Weight", grossWgt, "%.0f lb");
     }
 
-    var massLimits = props.globals.getNode("/limits/mass-and-balance");
     if(massLimits != nil ) {
+        tablerow("Max. Ramp Weight", "maximum-ramp-mass-lbs", "%.0f lb" );
+        tablerow("Max. Takeoff  Weight", "maximum-takeoff-mass-lbs", "%.0f lb" );
+        tablerow("Max. Landing  Weight", "maximum-landing-mass-lbs", "%.0f lb" );
+        tablerow("Max. Zero Fuel Weight", "maximum-zero-fuel-mass-lbs", "%.0f lb" );
+    }
 
-        var weightitem = func( group, name, node, format ) {
-          group.set("layout", "hbox");
-          var n = isa( node, props.Node ) ? node : massLimits.getNode( node );
-          if( n == nil ) return;
-          group.addChild("empty").set("stretch", 1);
-          group.addChild("text").set("label", name ~ ":" );
-          var txt = group.addChild("text");
-          txt.set("label", "");
-          txt.set("format", format );
-          txt.set("property", n.getPath() );
-          txt.set("live", 1);
-          group.addChild("empty").set("stretch", 1);
-        }
-        weightitem( dialog[name].addChild("group"), "Max. Ramp Weight", "maximum-ramp-mass-lbs", "%.0f lb" );
-        weightitem( dialog[name].addChild("group"), "Max. Takeoff  Weight", "maximum-takeoff-mass-lbs", "%.0f lb" );
-        weightitem( dialog[name].addChild("group"), "Max. Landing  Weight", "maximum-landing-mass-lbs", "%.0f lb" );
-        weightitem( dialog[name].addChild("group"), "Max. Zero Fuel Weight", "maximum-zero-fuel-mass-lbs", "%.0f lb" );
-
-        if( fdmdata.cg != nil ) {
-          var n = massLimits.getNode("cg/dimension");
-          weightitem( dialog[name].addChild("group"), "CG", fdmdata.cg, "%.1f " ~ (n == nil ? "in" : n.getValue()));
-        }
-        weightitem = nil;
+    if( fdmdata.cg != nil ) { 
+        var n = props.globals.getNode("/limits/mass-and-balance/cg/dimension");
+        tablerow("Center of Gravity", props.globals.getNode(fdmdata.cg), "%.1f " ~ (n == nil ? "in" : n.getValue()));
     }
 
     dialog[name].addChild("hrule");
@@ -934,6 +942,7 @@ var showWeightDialog = func {
     tcell(fuelTable, "text", 0, 0).set("label", "Tank");
     tcell(fuelTable, "text", 0, 3).set("label", "Pounds");
     tcell(fuelTable, "text", 0, 4).set("label", "Gallons");
+    tcell(fuelTable, "text", 0, 5).set("label", "Fraction");
 
     var tanks = props.globals.getNode("/consumables/fuel").getChildren("tank");
     for(var i=0; i<size(tanks); i+=1) {
@@ -950,6 +959,9 @@ var showWeightDialog = func {
         # Hack, to ignore the "ghost" tanks created by the C++ code.
         if(cap == nil ) { continue; }
         cap = cap.getValue();
+
+        # Ignore tanks of capacity 0
+        if (cap == 0) { continue; }
 
         var title = tcell(fuelTable, "text", i+1, 0);
         title.set("label", tname);
@@ -974,14 +986,51 @@ var showWeightDialog = func {
         lbs.set("property", tankprop ~ "/level-lbs");
         lbs.set("label", "0123456");
         lbs.set("format", cap < 1 ? "%.3f" : cap < 10 ? "%.2f" : "%.1f" );
+        lbs.set("halign", "right");
         lbs.set("live", 1);
 
         var gals = tcell(fuelTable, "text", i+1, 4);
         gals.set("property", tankprop ~ "/level-gal_us");
         gals.set("label", "0123456");
         gals.set("format", cap < 1 ? "%.3f" : cap < 10 ? "%.2f" : "%.1f" );
+        gals.set("halign", "right");
         gals.set("live", 1);
+
+        var per = tcell(fuelTable, "text", i+1, 5);
+        per.set("property", tankprop ~ "/level-norm");
+        per.set("label", "0123456");
+        per.set("format", "%.2f");
+        per.set("halign", "right");
+        per.set("live", 1);
     }
+
+    varbar = tcell(fuelTable, "hrule", size(tanks)+1, 0);
+    varbar.set("colspan", 6);
+
+    var total_label = tcell(fuelTable, "text", size(tanks)+2, 2);
+    total_label.set("label", "Total:");
+    total_label.set("halign", "right");
+
+    var lbs = tcell(fuelTable, "text", size(tanks)+2, 3);
+    lbs.set("property", "/consumables/fuel/total-fuel-lbs");
+    lbs.set("label", "0123456");
+    lbs.set("format", "%.1f" );
+    lbs.set("halign", "right");
+    lbs.set("live", 1);
+
+    var gals = tcell(fuelTable, "text",size(tanks) +2, 4);
+    gals.set("property", "/consumables/fuel/total-fuel-gal_us");
+    gals.set("label", "0123456");
+    gals.set("format", "%.1f" );
+    gals.set("halign", "right");
+    gals.set("live", 1);
+
+    var per = tcell(fuelTable, "text", size(tanks)+2, 5);
+    per.set("property", "/consumables/fuel/total-fuel-norm");
+    per.set("label", "0123456");
+    per.set("format", "%.2f");
+    per.set("halign", "right");
+    per.set("live", 1);
 
     var weightArea = contentArea.addChild("group");
     weightArea.set("layout", "vbox");

@@ -18,24 +18,32 @@
 <PropertyList>
   <weather-scenarios>
     <scenario>
-      <name type="string">Disabled</name>
-      <description type="string">METAR weather generation is disabled. Use the above controls to setup your weather.</description>
-    </scenario>
-    <scenario>
       <name type="string">Live data</name>
       <description type="string">
         Fetch live weather data for your nearest airport from noaa.gov. You need a working internet connection.
         All the controls in this dialog are computed automatically, once a valid METAR is received.
       </description>
+      <local-weather>
+        <tile-type>live</tile-type>
+        <tile-management>METAR</tile-management>        
+      </local-weather>
     </scenario>
     <scenario>
       <name type="string">Manual input</name>
-      <description type="string">Enter your favorite METAR weather in the textbox below. A valid METAR syntax is required.</description>
+      <description type="string">Enter your favorite METAR weather in the textbox above. A valid METAR syntax is required.</description>
+      <local-weather>
+        <tile-type>manual</tile-type>
+        <tile-management>METAR</tile-management>        
+      </local-weather>
     </scenario>
     <scenario>
       <name type="string">Fair weather</name>
       <metar type="string">XXXX 012345Z 15003KT 12SM SCT041 FEW200 20/08 Q1015 NOSIG</metar>
       <description type="string">A lovely day for trip to your favorite 100$ hamburger airfield</description>
+      <local-weather>
+        <tile-type>High-pressure-core</tile-type>
+        <tile-management>realistic-weather</tile-management>        
+      </local-weather>
     </scenario>
     <scenario>
       <name type="string">Thunderstorm</name>
@@ -45,6 +53,10 @@
         Be prepared for reduction of visibility in showers and strong gusts
         near thunderstorms
       </description>
+      <local-weather>
+        <tile-type>Thunderstorms</tile-type>
+        <tile-management>realistic-weather</tile-management>        
+      </local-weather>
     </scenario>
     <scenario>
       <name type="string">Stormy Monday</name>
@@ -285,6 +297,7 @@
     <metar-max-age-min type="long">240</metar-max-age-min>
     <metar-updates-environment type="bool">true</metar-updates-environment>
     <metar-updates-winds-aloft type="bool">true</metar-updates-winds-aloft>
+    <metar-updates-snow-level type="bool" userarchive="y">true</metar-updates-snow-level>
     <control-fdm-atmosphere type="bool">true</control-fdm-atmosphere>
     <contrail-altitude type="double">30000</contrail-altitude>
     <!-- definitions for the metar generated fog/mist/haze layer -->
@@ -340,15 +353,15 @@
 
   <!-- definitions for the scattering skydome shader -->
   <ground-visibility-m type="double" userarchive="n">16000.0</ground-visibility-m>
-  <air-pollution-norm type="double" userarchive="n">0.0</air-pollution-norm>
+  <air-pollution-norm type="double" userarchive="y">0.0</air-pollution-norm>
   <ground-haze-thickness-m type="double" userarchive="n">2000.0</ground-haze-thickness-m>
   <terminator-relative-position-m type="double" userarchive="n">1000000.0</terminator-relative-position-m>
   <mean-terrain-elevation-m type="double" userarchive="n">0.0</mean-terrain-elevation-m>
-  <mysnow-level-m type="double" userarchive="n">3200.0</mysnow-level-m>
-  <fog-structure type="double" userarchive="n">0.0</fog-structure>
+  <fog-structure type="double" userarchive="y">0.0</fog-structure>
   <!-- definitions for the environment at surface interface -->
   <surface>
     <scattering type="double" userarchive="n">0.7</scattering>
-    <dust-cover-factor type="double" userarchive="n">0.0</dust-cover-factor>
+    <dust-cover-factor type="double" userarchive="y">0.0</dust-cover-factor>
+    <wetness type="double" userarchive="y">0.0</wetness>
   </surface>
 </PropertyList>

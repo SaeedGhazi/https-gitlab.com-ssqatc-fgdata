@@ -27,7 +27,7 @@ uniform float WindE, WindN;
 
 uniform float hazeLayerAltitude;
 uniform float terminator;
-uniform float terrain_alt; 
+uniform float terrain_alt;
 uniform float avisibility;
 uniform float visibility;
 uniform float overcast;
@@ -83,7 +83,7 @@ void main(void)
 
     float Angle;
 
-    float windFactor = sqrt(pow(abs(WindE),2)+pow(abs(WindN),2)) * 0.05;
+    float windFactor = sqrt(WindE * WindE + WindN * WindN) * 0.05;
     if (WindN == 0.0 && WindE == 0.0) {
         Angle = 0.0;
     }else{
@@ -114,32 +114,32 @@ void main(void)
 
     // first current altitude of eye position in model space
     vec4 ep = gl_ModelViewMatrixInverse * vec4(0.0,0.0,0.0,1.0);
-    
+
     // and relative position to vector
     relPos = gl_Vertex.xyz - ep.xyz;
 
     // unfortunately, we need the distance in the vertex shader, although the more accurate version
     // is later computed in the fragment shader again
     float dist = length(relPos);
- 
+
 
 // altitude of the vertex in question, somehow zero leads to artefacts, so ensure it is at least 100m
     vertex_alt = max(gl_Vertex.z,100.0);
-    scattering = 0.5 + 0.5 * ground_scattering + 0.5* (1.0 - ground_scattering) * smoothstep(hazeLayerAltitude -100.0, hazeLayerAltitude + 100.0, vertex_alt); 
+    scattering = 0.5 + 0.5 * ground_scattering + 0.5* (1.0 - ground_scattering) * smoothstep(hazeLayerAltitude -100.0, hazeLayerAltitude + 100.0, vertex_alt);
 
     // branch dependent on daytime
 
 if (terminator < 1000000.0) // the full, sunrise and sunset computation
 {
 
-    
+
     // establish coordinates relative to sun position
 
     //vec3 lightFull = (gl_ModelViewMatrixInverse * gl_LightSource[0].position).xyz;
     //vec3 lightHorizon = normalize(vec3(lightFull.x,lightFull.y, 0.0));
     vec3 lightHorizon = normalize(vec3(lightdir.x,lightdir.y, 0.0));
 
-    
+
     // yprime is the distance of the vertex into sun direction
     yprime = -dot(relPos, lightHorizon);
 
@@ -149,7 +149,7 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
     // two times terminator width governs how quickly light fades into shadow
     // now the light-dimming factor
     earthShade = 0.6 * (1.0 - smoothstep(-terminator_width+ terminator, terminator_width + terminator, yprime_alt)) + 0.4;
-  
+
    // parametrized version of the Flightgear ground lighting function
     lightArg = (terminator-yprime_alt)/100000.0;
 
@@ -162,7 +162,7 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
 	// correct ambient light intensity and hue before sunrise
 	if (earthShade < 0.5)
 	{
-	intensity = length(specular_light.rgb); 
+	intensity = length(specular_light.rgb);
 	specular_light.xyz = intensity * normalize(mix(specular_light.xyz,  vec3 (0.45, 0.6, 0.8), 1.0 -smoothstep(0.1, 0.5,earthShade) ));
 	}
 
@@ -170,7 +170,7 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
     if (lightArg < 5.0)
     	//{mie_angle = (0.5 *  dot(normalize(relPos), normalize(lightFull)) ) + 0.5;}
 	{mie_angle = (0.5 *  dot(normalize(relPos), lightdir) ) + 0.5;}
-    else 
+    else
 	{mie_angle = 1.0;}
 
 
@@ -200,7 +200,7 @@ else
 else // the faster, full-day version without lightfields
 {
     //vertex_alt = max(gl_Vertex.z,100.0);
- 
+
     earthShade = 1.0;
     mie_angle = 1.0;
 
@@ -214,7 +214,7 @@ else // the faster, full-day version without lightfields
   	specular_light.g = 0.907 + lightArg * 0.091;
   	specular_light.r = 0.904 + lightArg * 0.092;
 	}
-   
+
    specular_light = specular_light * scattering;
 
     yprime_alt = -sqrt(2.0 * EarthRadius * hazeLayerAltitude);

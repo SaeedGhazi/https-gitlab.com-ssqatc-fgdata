@@ -86,7 +86,7 @@
 
         i = 0;
         foreach (var park; a.parking()) {
-          parking.getNode("value[" ~ i ~ "]", 1).setValue(park);
+          parking.getNode("value[" ~ i ~ "]", 1).setValue(park.name);
           i += 1;
         }
         

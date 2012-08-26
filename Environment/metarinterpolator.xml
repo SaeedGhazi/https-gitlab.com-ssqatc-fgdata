@@ -415,11 +415,27 @@
     <name>MetarController:snow-level</name>
     <type>gain</type>
     <gain>1.0</gain>
-    <input>
+    <enable>
       <condition>
-        <property>/environment/metar/valid</property>
+        <property>/environment/params/metar-updates-snow-level</property>
+        <property>/environment/params/metar-updates-environment</property>
         <property>/environment/metar/snow-cover</property>
+        <property>/environment/metar/valid</property>
+        <less-than>
+          <expression>
+            <difference> 
+              <product>
+                <property>/environment/metar/station-elevation-ft</property>
+                <value>0.3048</value>
+              </product>
+              <property>/environment/snow-level-m</property>
+            </difference>
+          </expression>
+          <value>0</value>
+        </less-than>
       </condition>
+    </enable>
+    <input>
       <expression>
         <sum>
           <product>
@@ -432,6 +448,7 @@
     </input>
     <input>3200</input>
     <output>/environment/snow-level-m</output>
-    <max>3200</max>
+    <min>-425</min>
+    <max>7500</max>
   </filter>
 </PropertyList> 

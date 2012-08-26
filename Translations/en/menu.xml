@@ -43,6 +43,7 @@
 	<!-- Environment menu -->
 	<environment>Environment</environment>
 	<global-weather>Weather</global-weather>
+	<environment-settings>Environment Settings</environment-settings>
 	<time-settings>Time Settings</time-settings>
 	<wildfire-settings>Wildfire Settings</wildfire-settings>
 	<terrasync>Scenery Download</terrasync>
@@ -111,6 +112,7 @@
 	<aircraft-keys>Aircraft Help</aircraft-keys>
 	<common-keys>Common Aircraft Keys</common-keys>
 	<basic-keys>Basic Simulator Keys</basic-keys>
+	<joystick-config>Joystick Configuration</joystick-config>
 	<joystick-info>Joystick Information</joystick-info>
 	<tutorial-start>Tutorials</tutorial-start>
 	<menu-about>About</menu-about>

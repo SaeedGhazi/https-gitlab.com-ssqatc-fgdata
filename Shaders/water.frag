@@ -94,10 +94,10 @@ void main(void)
         cover = min(min(min(min(CloudCover0, CloudCover1),CloudCover2),CloudCover3),CloudCover4);
         } else {
             // hack to allow for Overcast not to be set by Local Weather
-            if (Overcast == 0){
-                cover = 5;
+            if (Overcast == 0.0){
+                cover = 5.0;
                 } else {
-                    cover = Overcast * 5;
+                    cover = Overcast * 5.0;
                 }
         }
 

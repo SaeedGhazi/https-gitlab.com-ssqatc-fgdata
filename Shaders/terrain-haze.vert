@@ -22,7 +22,7 @@ varying vec4 diffuse_term;
 varying vec3 normal;
 varying vec3 relPos;
 
-varying float earthShade;
+//varying float earthShade;
 //varying float yprime;
 //varying float vertex_alt;
 varying float yprime_alt;
@@ -45,6 +45,9 @@ uniform float ground_scattering;
 // This is the value used in the skydome scattering shader - use the same here for consistency?
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
+
+
+float earthShade;
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
 {
@@ -159,13 +162,13 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
 // correct ambient light intensity and hue before sunrise
 if (earthShade < 0.5)
 	{
-	light_ambient = light_ambient * (0.4 + 0.6 * smoothstep(0.2, 0.5, earthShade));
+	light_ambient = light_ambient * (0.7 + 0.3 * smoothstep(0.2, 0.5, earthShade));
 	intensity = length(light_ambient.xyz); 
 
-	light_ambient.xyz = intensity * normalize(mix(light_ambient.xyz,  vec3 (0.45, 0.6, 0.8), 1.0 -smoothstep(0.1, 0.5,earthShade) ));
+	light_ambient.xyz = intensity * normalize(mix(light_ambient.xyz,  vec3 (0.45, 0.6, 0.8), 1.0 -smoothstep(0.1, 0.8,earthShade) ));
 
 	intensity = length(light_diffuse.xyz); 
-	light_diffuse.xyz = intensity * normalize(mix(light_diffuse.xyz,  vec3 (0.45, 0.6, 0.8), 1.0 -smoothstep(0.1, 0.5,earthShade) ));
+	light_diffuse.xyz = intensity * normalize(mix(light_diffuse.xyz,  vec3 (0.45, 0.6, 0.8), 1.0 -smoothstep(0.1, 0.7,earthShade) ));
 	}
 
 

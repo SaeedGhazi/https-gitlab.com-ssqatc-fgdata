@@ -18,18 +18,15 @@
 // the surface normal is passed in gl_{Front,Back}Color. The alpha
 // component is set to 1 for front, 0 for back in order to work around
 // bugs with gl_FrontFacing in the fragment shader.
-varying vec4 diffuse_term;
-varying vec3 normal;
+//varying vec4 diffuse_term;
+//varying vec3 normal;
 varying vec3 relPos;
 
-varying float earthShade;
+//varying float earthShade;
 //varying float yprime;
 //varying float vertex_alt;
 varying float yprime_alt;
 varying float mie_angle;
-
-
-
 
 uniform int colorMode;
 uniform float hazeLayerAltitude;
@@ -41,6 +38,7 @@ uniform float overcast;
 //uniform float scattering;
 uniform float ground_scattering;
 
+float earthShade;
 
 // This is the value used in the skydome scattering shader - use the same here for consistency?
 const float EarthRadius = 5800000.0;
@@ -75,8 +73,12 @@ void main()
   float numVarieties = gl_Normal.z;
   float texFract = floor(fract(gl_MultiTexCoord0.x) * numVarieties) / numVarieties;
   texFract += floor(gl_MultiTexCoord0.x) / numVarieties;
-  float sr = sin(gl_FogCoord);
-  float cr = cos(gl_FogCoord);
+  
+  // Determine the rotation for the tree.  The Fog Coordinate provides rotation information
+  // to rotate one of the quands by 90 degrees.  We then apply an additional position seed
+  // so that trees aren't all oriented N/S
+  float sr = sin(gl_FogCoord + gl_Color.x);
+  float cr = cos(gl_FogCoord + gl_Color.x);
   gl_TexCoord[0] = vec4(texFract, gl_MultiTexCoord0.y, 0.0, 0.0);
 
   // scaling
@@ -84,11 +86,13 @@ void main()
 
   // Rotation of the generic quad to specific one for the tree.
   position.xy = vec2(dot(position.xy, vec2(cr, sr)), dot(position.xy, vec2(-sr, cr)));
+
+  // Move to correct location (stored in gl_Color)
   position = position + gl_Color.xyz;
   gl_Position   = gl_ModelViewProjectionMatrix * vec4(position,1.0);
 
   vec3 ecPosition = vec3(gl_ModelViewMatrix * vec4(position, 1.0));
-  normal = normalize(-ecPosition);
+  //normal = normalize(-ecPosition);
 
   float n = dot(normalize(gl_LightSource[0].position.xyz), normalize(-ecPosition));
   
@@ -226,20 +230,13 @@ else // the faster, full-day version without lightfields
 }
  
 
-// default lighting based on texture and material using the light we have just computed
+// tree shader lighting
 
- diffuse_term = diffuse_color* light_diffuse;
-    vec4 constant_term = gl_FrontMaterial.emission + ambient_color *
-        (gl_LightModel.ambient +  light_ambient);
-    // Super hack: if diffuse material alpha is less than 1, assume a
-    // transparency animation is at work
-    if (gl_FrontMaterial.diffuse.a < 1.0)
-        diffuse_term.a = gl_FrontMaterial.diffuse.a;
-    else
-        diffuse_term.a = gl_Color.a;
-    // Another hack for supporting two-sided lighting without using
-    // gl_FrontFacing in the fragment shader.
-    gl_FrontColor.rgb = constant_term.rgb;  gl_FrontColor.a = 1.0;
-    gl_BackColor.rgb = constant_term.rgb; gl_BackColor.a = 0.0;
+  vec3 diffuse = gl_FrontMaterial.diffuse.rgb * max(0.1, n);
+  vec4 ambientColor = gl_FrontLightModelProduct.sceneColor + light_ambient * gl_FrontMaterial.ambient;
+  gl_FrontColor = ambientColor + light_diffuse * vec4(diffuse, 1.0);
+
+
+
 }
 

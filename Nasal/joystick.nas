@@ -526,7 +526,7 @@ var readConfig = func(dialog_root="/sim/gui/dialogs/joystick-config") {
   var js_name = getprop(dialog_root ~ "/selected-joystick");
   var joysticks = props.globals.getNode("/input/joysticks").getChildren("js");
   
-  if (size(joystick) == 0) { return 0; }
+  if (size(joysticks) == 0) { return 0; }
   
   if (js_name == nil) {
     js_name = joysticks[0].getNode("id").getValue();  
@@ -543,6 +543,13 @@ var readConfig = func(dialog_root="/sim/gui/dialogs/joystick-config") {
       setprop(dialog_root ~ "/selected-joystick-index", i);
       setprop(dialog_root ~ "/selected-joystick-config", joysticks[i].getNode("source").getValue());
     }
+  }
+  
+  if (js == nil) {
+    # We didn't find the joystick we expected - default to the first 
+    setprop(dialog_root ~ "/selected-joystick", joysticks[0].getNode("id").getValue());
+    setprop(dialog_root ~ "/selected-joystick-index", 0);
+    setprop(dialog_root ~ "/selected-joystick-config", joysticks[0].getNode("source").getValue());
   }
   
   # Set up the axes assignments
@@ -675,7 +682,7 @@ var writeConfig = func(dialog_root="/sim/gui/dialogs/joystick-config") {
   }
   
   var filename = id;
-  filename = string.replace(filename, " ", "");
+  filename = string.replace(filename, " ", "-");
   filename = string.replace(filename, ".", "");
   filename = string.replace(filename, "/", "");
   

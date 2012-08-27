@@ -38,3 +38,5 @@ WRITE ALLOW $FG_HOME/state/*.xml
 WRITE ALLOW $FG_HOME/aircraft-data/*.xml
 WRITE ALLOW $FG_HOME/Wildfire/*.xml
 WRITE ALLOW $FG_HOME/runtime-jetways/*.xml
+WRITE ALLOW $FG_HOME/Input/Joysticks/*.xml
+

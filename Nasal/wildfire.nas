@@ -95,7 +95,7 @@ var resolve_foam_drop = func (pos, radius, volume, source=1) {
 #    x < last event    - fast forward all the way to current time (use 0).
 #                        NOTE: Can be VERY time consuming.
 #     -1               - skip to current time.
-var load_event_log = func (filename, skip_ahead_until=-1) {
+var load_event_log = func (filename, skip_ahead_until) {
   CAFire.load_event_log(filename, skip_ahead_until);
 }
 
@@ -129,6 +129,9 @@ var restore_on_startup_pp = "environment/wildfire/restore-on-startup";
 var crash_fire_pp         = "environment/wildfire/fire-on-crash";
 var impact_fire_pp        = "environment/wildfire/fire-on-impact";
 var report_score_pp       = "environment/wildfire/report-score";
+var event_file_pp         = "environment/wildfire/events-file";
+var time_hack_pp          = "environment/wildfire/time-hack-gmt";
+#                           Format: "yyyy:mm:dd:hh:mm:ss"
 # Internal properties to control the models
 var models_enabled_pp     = "environment/wildfire/models/enabled";
 var fire_LOD_pp           = "environment/wildfire/models/fire-lod";
@@ -788,7 +791,7 @@ CAFire.save_event_log = func (filename) {
 #                      to current time.
 #    x < last event    - fast forward all the way to current time (use 0).
 #     -1               - skip to current time.
-CAFire.load_event_log = func (filename, skip_ahead_until=-1) {
+CAFire.load_event_log = func (filename, skip_ahead_until) {
   me.load_count += 1;
   var logbase = "/tmp/wildfire-load-log[" ~ me.load_count ~ "]";
   if (!fgcommand("loadxml",
@@ -814,7 +817,7 @@ CAFire.load_event_log = func (filename, skip_ahead_until=-1) {
              event.getNode("type").getValue()];
 
     # Fast forward state.
-    while (me.generation * me.GENERATION_DURATION <= e[0]) {
+    while (me.generation * me.GENERATION_DURATION < e[0]) {
 #      print("between event ff " ~ me.generation);
       me.update();
     }
@@ -958,6 +961,8 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
   props.globals.initNode(restore_on_startup_pp, 0, "BOOL");
   props.globals.initNode(models_enabled_pp, 1, "BOOL");
   props.globals.initNode(report_score_pp, 1, "BOOL");
+  props.globals.initNode(event_file_pp, "", "STRING");
+  props.globals.initNode(time_hack_pp, "", "STRING");
 
   props.globals.initNode(fire_LOD_pp, 10, "INT");
   props.globals.initNode(smoke_LOD_pp, 10, "INT");
@@ -977,10 +982,35 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
       CAFire.save_event_log(SAVEDIR ~ "fire_log.xml");
   });
 
-  if (getprop(restore_on_startup_pp)) {
+  # Determine the skip-ahead-to time, if any.
+  var time_hack = time_string_to_epoch(getprop(time_hack_pp));
+  if (time_hack > SimTime.current_time()) {
+    printlog("alert",
+             "wildfire.nas: Ignored time hack " ~
+             (SimTime.current_time() - time_hack) ~
+             " seconds into the future.");
+    # Skip ahead to current time instead.
+    time_hack = -1;
+  } elsif (time_hack > 0) {
+    printlog("alert",
+             "wildfire.nas: Time hack " ~
+             (SimTime.current_time() - time_hack) ~
+             " seconds ago.");
+  } else {
+    # Skip ahead to current time instead.
+    time_hack = -1;
+  }
+
+  if (getprop(event_file_pp) != "") {
     settimer(func {
       # Delay loading the log until the terrain is there. Note: hack.
-      CAFire.load_event_log(SAVEDIR ~ "fire_log.xml", 1);
+      CAFire.load_event_log(getprop(event_file_pp), time_hack);
+    }, 3);      
+  } elsif (getprop(restore_on_startup_pp)) {
+    settimer(func {
+      # Delay loading the log until the terrain is there. Note: hack.
+      # Restore skips ahead to current time.
+      CAFire.load_event_log(SAVEDIR ~ "fire_log.xml", -1);
     }, 3);
   }
 
@@ -990,25 +1020,58 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
       wildfire.ignite(geo.aircraft_position());
   });
 
-  # Detect impact
+  # Detect impact.
   var impact_node = props.globals.getNode("sim/ai/aircraft/impact/bomb", 1);
   setlistener("sim/ai/aircraft/impact/bomb", func(n) {
 
-      if (getprop(impact_fire_pp) and n.getBoolValue()){
-          var node = props.globals.getNode(n.getValue(), 1);
-          var impactpos = geo.Coord.new();
-          impactpos.set_latlon(
-              node.getNode("impact/latitude-deg").getValue(),
-              node.getNode("impact/longitude-deg").getValue()
-              );
-          wildfire.ignite(impactpos);
-      }
+    if (getprop(impact_fire_pp) and n.getBoolValue()){
+       var node = props.globals.getNode(n.getValue(), 1);
+       var impactpos = geo.Coord.new();
+       impactpos.set_latlon
+         (node.getNode("impact/latitude-deg").getValue(),
+          node.getNode("impact/longitude-deg").getValue());
+       wildfire.ignite(impactpos);
+    }
 
   });
 
   printlog("info", "Wildfire ... initialized.");
 });
 ###############################################################################
+
+###############################################################################
+# Utility functions
+
+# Convert a time string in the format yyyy[:mm[:dd[:hh[:mm[:ss]]]]]
+# to seconds since 1970:01:01:00:00:00.
+#
+# Note: This is an over simplified approximation.
+var time_string_to_epoch = func (time) {
+  var res = [];
+  if      (string.scanf(time, "%d:%d:%d:%d:%d:%d", var res1 = []) != 0) {
+    res = res1;
+  } elsif (string.scanf(time, "%d:%d:%d:%d:%d", var res2 = []) != 0) {
+    res = res2 ~ [0];
+  } elsif (string.scanf(time, "%d:%d:%d:%d", var res3 = []) != 0) {
+    res = res3 ~ [0, 0];
+  } elsif (string.scanf(time, "%d:%d:%d", var res4 = []) != 0) {
+    res = res4 ~ [0, 0, 0];
+  } elsif (string.scanf(time, "%d:%d", var res5 = []) != 0) {
+    res = res5 ~ [0, 0, 0, 0];
+  } elsif (string.scanf(time, "%d", var res6 = []) != 0) {
+    res = res6 ~ [0, 0, 0, 0, 0];
+  } else {
+    return -1;
+  }
+  return
+    (res[0] - 1970) * 3.15569e7 +
+    (res[1] - 1) * 2.63e+6 +
+    (res[2] - 1) * 86400 +
+    res[3] * 3600 +
+    res[4] * 60 +
+    res[5];
+}
+
 
 ###############################################################################
 ## WildFire configuration dialog.
@@ -1126,7 +1189,7 @@ var dialog = {
 #################################################################
     select_and_load : func {
         var selector = gui.FileSelector.new
-            (func (n) { CAFire.load_event_log(n.getValue()); },
+            (func (n) { load_event_log(n.getValue(), -1); },
              "Load Wildfire log",                    # dialog title
              "Load",                                 # button text
              ["*.xml"],                              # pattern for files

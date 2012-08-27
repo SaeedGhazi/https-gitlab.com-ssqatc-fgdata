@@ -53,6 +53,31 @@ var _setColorNodes = func(nodes, color)
     nodes[3].setDoubleValue(1);
 };
 
+var _getColor = func(color)
+{
+  if( size(color) == 1 )
+    var color = color[0];
+
+  if( typeof(color) == 'scalar' )
+    return color;
+  if( typeof(color) != "vector" )
+    return debug.warn("Wrong type for color");
+
+  if( size(color) < 3 or size(color) > 4 )
+    return debug.warn("Color needs 3 or 4 values (RGB or RGBA)");
+
+  var str = 'rgb';
+  if( size(color) == 4 )
+    str ~= 'a';
+  str ~= '(';
+
+  # rgb = [0,255], a = [0,1]
+  for(var i = 0; i < size(color); i += 1)
+    str ~= (i > 0 ? ',' : '') ~ (i < 3 ? int(color[i] * 255) : color[i]);
+
+  return str ~ ')';
+};
+
 var _arg2valarray = func
 {
   var ret = arg;
@@ -233,14 +258,10 @@ var Element = {
   setScale: func { me._getTf().setScale(arg); return me; },
   # Shortcut for getting scale
   getScale: func me._getTf().getScale(),
-  # Set the line/text color
-  #
-  # @param color  Vector of 3 or 4 values in [0, 1]
-  setColor: func { _setColorNodes(me.color, arg); return me; },
   # Set the fill/background/boundingbox color
   #
   # @param color  Vector of 3 or 4 values in [0, 1]
-  setColorFill: func { _setColorNodes(me.color_fill, arg); return me; },
+  setColorFill: func me.set('fill', _getColor(arg)),
   #
   getBoundingBox: func()
   {
@@ -381,10 +402,7 @@ var Map = {
 var Text = {
   new: func(node, id)
   {
-    var m = { parents: [Text, Element.new(node, id)] };
-    m.color = _createColorNodes(m._node, "color");
-    m.color_fill = _createColorNodes(m._node, "color-fill");
-    return m;
+    return { parents: [Text, Element.new(node, id)] };
   },
   # Set the text
   setText: func(text)
@@ -447,7 +465,9 @@ var Text = {
   setMaxWidth: func(w)
   {
     me.setDouble("max-width", w);
-  }
+  },
+  setColor: func me.set('fill', _getColor(arg)),
+  setColorFill: func me.set('background', _getColor(arg))
 };
 
 # Path
@@ -514,14 +534,11 @@ var Path = {
   #
   new: func(node, id)
   {
-    var m = {
+    return {
       parents: [Path, Element.new(node, id)],
       _num_cmds: 0,
       _num_coords: 0
     };
-    m.color = _createColorNodes(m._node, "color");
-    m.color_fill = _createColorNodes(m._node, "color-fill");
-    return m;
   },
   # Remove all existing path data
   reset: func
@@ -608,6 +625,17 @@ var Path = {
   # Close the path (implicit lineTo to first point of path)
   close: func me.addSegment(me.VG_CLOSE_PATH),
 
+  setColor: func me.setStroke(_getColor(arg)),
+  setColorFill: func me.setFill(_getColor(arg)),
+  
+  setFill: func(fill)
+  {
+    me.set('fill', fill);
+  },
+  setStroke: func(stroke)
+  {
+    me.set('stroke', stroke);
+  },
   setStrokeLineWidth: func(width)
   {
     me.setDouble('stroke-width', width);
@@ -627,23 +655,12 @@ var Path = {
   #  [on1, off1, on2, ...]
   setStrokeDashArray: func(pattern)
   {
-    me._node.removeChildren('stroke-dasharray');
-
     if( typeof(pattern) == 'vector' )
-      me._node.setValues({'stroke-dasharray': pattern});
+      me.set('stroke-dasharray', string.join(',', pattern));
     else
       debug.warn("setStrokeDashArray: vector expected!");
 
     return me;
-  },
-  # Set the fill color and enable filling this path
-  #
-  # @param color  Vector of 3 or 4 values in [0, 1]
-  setColorFill: func { _setColorNodes(me.color_fill, arg); me.setFill(1); },
-  # Enable/disable filling this path
-  setFill: func(fill)
-  {
-    me.setBool("fill", fill);
   }
 };
 

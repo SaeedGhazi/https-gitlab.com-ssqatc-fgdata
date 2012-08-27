@@ -28,15 +28,19 @@
 
   <hrule/>
 
-  <text>       
+  <text>
+    <name>message</name>
     <color>
       <red>1.0</red>
       <green>0.4</green>
       <blue>0.4</blue>
     </color>
     <halign>center</halign>
-    <label>Monitor your bandwidth or use a flat-rate when using automatic download.</label>
+    <label></label>
   </text>
+
+  <group>
+    <layout>vbox</layout>
 
   <group>
     <layout>table</layout>
@@ -431,11 +435,28 @@
     <empty><stretch>true</stretch></empty>
   </group>
 
+    <visible>
+      <property>/sim/terrasync/built-in-svn-available</property>
+    </visible>
+
+  </group>
+
   <nasal>
     <open><![CDATA[
+      var msg = "";
+      if (getprop("/sim/terrasync/built-in-svn-available",0))
+      {
+          msg = "Sorry, this binary was built without support to download scenery.";
+          setprop("/sim/terrasync/enabled", 0);
+      }
+      else
+          msg = "Monitor your bandwidth or use a flat-rate when using automatic download.";
+      var msgLabel = gui.findElementByName(cmdarg(),"message");
+      msgLabel.getNode("label",1).setValue(msg);
+
       var fg_scenery = props.globals.getNode("sim").getChildren("fg-scenery");
       var fg_data = props.globals.getNode("sim").getChild("fg-root").getValue();
-      var combo = cmdarg().getChildren("group")[1].getChildren("combo")[0];
+      var combo = gui.findElementByName(cmdarg(),"scenery-dir");
       var valid = 0;
 
       for (var i = 0; i < size(fg_scenery); i = i + 1) {

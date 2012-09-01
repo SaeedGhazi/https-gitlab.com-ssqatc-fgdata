@@ -818,6 +818,7 @@ var get = func(name)
 # support (Wrapped in anonymous function do not polute the canvas namespace)
 
 (func {
+var legacy_dir = getprop("/sim/fg-root") ~ "/Nasal/canvas";
 var version_str = getprop("/sim/version/flightgear");
 if( string.scanf(version_str, "%u.%u.%u", var fg_version = []) < 1 )
   debug.warn("Canvas: Error parsing flightgear version (" ~ version_str ~ ")");
@@ -834,6 +835,10 @@ else
       {button: {legend: "Ok", binding: {command: "dialog-close"}}}
     );
   }
+  
+  # Load support for older versions of FlightGear (TODO generalize :) )
+  if( fg_version[0] == 2 and fg_version[1] == 8 )
+    io.load_nasal(legacy_dir ~ "/api.nas.2.8", "canvas");
 }
 
 Canvas.property_root = props.globals.getNode("canvas/by-index", 1);

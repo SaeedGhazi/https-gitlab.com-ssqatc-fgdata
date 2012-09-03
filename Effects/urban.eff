@@ -43,7 +43,7 @@
 
 
 
-<technique n="2">
+	<technique n="2">
 		<predicate>
 			<and>
 				<property>/sim/rendering/shaders/skydome</property>
@@ -328,9 +328,10 @@
 	</technique>
 
 
-<technique n="3">
+	<technique n="3">
 		<predicate>
 			<and>
+				<property>/sim/rendering/shaders/skydome</property>
 				<property>/sim/rendering/shaders/urban</property>
 				<less-equal>
 					<value type="float">1.0</value>

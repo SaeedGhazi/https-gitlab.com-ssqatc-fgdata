@@ -56,7 +56,7 @@ var assignButton = func(cmd) {
 	
 	<text>
 	  <halign>left</halign>
-	  <label>Select the command you wish to assign to this button</label>
+	  <label>Select the command you wish to assign to this button.</label>
   </text>
   
   <hrule/>

@@ -737,10 +737,10 @@
 		</item>
 
 		<item>
-			<name>joystick-info</name>
+			<name>joystick-config</name>
 			<binding>
 				<command>dialog-show</command>
-				<dialog-name>joystick-info</dialog-name>
+				<dialog-name>joystick-config</dialog-name>
 			</binding>
 		</item>
 

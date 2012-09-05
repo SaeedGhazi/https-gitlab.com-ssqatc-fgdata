@@ -575,7 +575,7 @@ var Path = {
     if( size(coords) != num_coords )
       debug.warn
       (
-        "Invalid number of arguments (expected " ~ (num_coords + 1) ~ ")"
+        "Invalid number of arguments (expected " ~ num_coords ~ ")"
       );
     else
     {
@@ -608,8 +608,8 @@ var Path = {
   quadTo: func me.addSegment(me.VG_SQUAD_TO_ABS, arg),
   quad:   func me.addSegment(me.VG_SQUAD_TO_REL, arg),
   # Add a smooth cubic Bézier curve
-  cubicTo: func me.addSegment(me.VG_SCUBIC_TO_ABS, arg),
-  cubic:   func me.addSegment(me.VG_SCUBIC_TO_REL, arg),
+  scubicTo: func me.addSegment(me.VG_SCUBIC_TO_ABS, arg),
+  scubic:   func me.addSegment(me.VG_SCUBIC_TO_REL, arg),
   # Draw an elliptical arc (shorter counter-clockwise arc)
   arcSmallCCWTo: func me.addSegment(me.VG_SCCWARC_TO_ABS, arg),
   arcSmallCCW:   func me.addSegment(me.VG_SCCWARC_TO_REL, arg),

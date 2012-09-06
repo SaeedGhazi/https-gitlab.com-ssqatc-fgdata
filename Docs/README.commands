@@ -180,7 +180,9 @@ property-interpolate - assign a value to a property, interpolated
   value:       the new value for the property; or
   property[1]: the name of the property holding the new value.
   time:        the time in seconds it takes for the transition from the
-               old value to the new value of property[0]
+               old value to the new value of property[0]; or
+  rate:        the ammount of change per second the value of property[0] changes
+               to transition to the new value
 
 property-adjust - adjust the value of a property
   property: the name of the property to increment or decrement

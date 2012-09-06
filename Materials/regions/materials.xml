@@ -1144,7 +1144,6 @@
 
 <material include="Materials/regions/european.xml">
   <name>Marsh</name>
-  <name>Littoral</name>
   <name>FloodLand</name>
   <name>SaltMarsh</name>
   <name>HerbWetlandCover</name>
@@ -1152,6 +1151,19 @@
   <texture>Terrain/marsh2a.png</texture>
   <texture>Terrain/marsh3a.png</texture>
   <texture>Terrain/marsh4a.png</texture>
+  <xsize>2000</xsize>
+  <ysize>2000</ysize>
+  <solid>1</solid>
+  <light-coverage>40000000.0</light-coverage>
+  <friction-factor>0.8</friction-factor>
+  <rolling-friction>0.3</rolling-friction>
+  <bumpiness>0.2</bumpiness>
+  <load-resistance>1e30</load-resistance>
+</material>
+
+<material include="Materials/regions/european.xml">
+  <name>Littoral</name>
+  <texture>Terrain/tidal.png</texture>
   <xsize>2000</xsize>
   <ysize>2000</ysize>
   <solid>1</solid>
@@ -1728,7 +1740,6 @@
    </equals>
   </condition>
   <name>Marsh</name>
-  <name>Littoral</name>
   <name>FloodLand</name>
   <name>SaltMarsh</name>
   <name>HerbWetlandCover</name>
@@ -1736,6 +1747,25 @@
   <texture>Terrain/marsh2.png</texture>
   <texture>Terrain/marsh3.png</texture>
   <texture>Terrain/marsh4.png</texture>
+  <xsize>2000</xsize>
+  <ysize>2000</ysize>
+  <solid>1</solid>
+  <light-coverage>40000000.0</light-coverage>
+  <friction-factor>0.8</friction-factor>
+  <rolling-friction>0.3</rolling-friction>
+  <bumpiness>0.2</bumpiness>
+  <load-resistance>1e30</load-resistance>
+</material>
+
+<material>
+  <condition>
+   <equals>
+    <property>sim/startup/season</property>
+    <value>summer</value>
+   </equals>
+  </condition>
+  <name>Littoral</name>
+  <texture>Terrain/tidal.png</texture>
   <xsize>2000</xsize>
   <ysize>2000</ysize>
   <solid>1</solid>
@@ -2522,7 +2552,6 @@
    </equals>
   </condition>
   <name>Marsh</name>
-  <name>Littoral</name>
   <name>FloodLand</name>
   <name>SaltMarsh</name>
   <name>HerbWetlandCover</name>
@@ -2530,6 +2559,25 @@
   <texture>Terrain.winter/marsh2.png</texture>
   <texture>Terrain.winter/marsh3.png</texture>
   <texture>Terrain.winter/marsh4.png</texture>
+  <xsize>2000</xsize>
+  <ysize>2000</ysize>
+  <solid>1</solid>
+  <light-coverage>40000000.0</light-coverage>
+  <friction-factor>0.8</friction-factor>
+  <rolling-friction>0.3</rolling-friction>
+  <bumpiness>0.2</bumpiness>
+  <load-resistance>1e30</load-resistance>
+</material>
+
+<material>
+  <condition>
+   <equals>
+    <property>sim/startup/season</property>
+    <value>winter</value>
+   </equals>
+  </condition>
+  <name>Littoral</name>
+  <texture>Terrain/tidal.png</texture>
   <xsize>2000</xsize>
   <ysize>2000</ysize>
   <solid>1</solid>

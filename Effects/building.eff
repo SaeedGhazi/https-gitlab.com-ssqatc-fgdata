@@ -252,7 +252,7 @@
     </pass>
   </technique>
 
-  <technique n="8">
+  <technique n="7">
 	<pass>
 	  <texture-unit n="4">
 		<unit>4</unit>

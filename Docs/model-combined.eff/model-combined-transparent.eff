@@ -7,8 +7,8 @@ Remove unnedeed settings.
 WARNING: do not remove the Transparency include at the end-->
 
 <PropertyList>
-		<name><!--my/effect/name--></name>
-    <inherits-from>Effects/model-combined</inherits-from>
+	<name><!--my/effect/name--></name>
+    <inherits-from>Effects/model-combined-transparent</inherits-from>
 		<parameters>
 	<!-- Normal Map -->
 			<normalmap-enabled type="int"> 0 </normalmap-enabled>

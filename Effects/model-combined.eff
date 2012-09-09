@@ -173,6 +173,9 @@ please see Docs/README.model-combined.eff for documentation
 	</predicate>
 		<pass>
 			<lighting>true</lighting>
+			<depth>
+				<write-mask type="bool">false</write-mask>
+			</depth>
 			<material>
 				<active>
 					<use>material/active</use>
@@ -223,12 +226,8 @@ please see Docs/README.model-combined.eff for documentation
 				<use>transparent</use>
 			</alpha-test>
 			<render-bin>
-				<bin-number>
-					<use>render-bin/bin-number</use>
-				</bin-number>
-				<bin-name>
-					<use>render-bin/bin-name</use>
-				</bin-name>
+				<bin-number>111</bin-number>
+				<bin-name>DepthSortedBin</bin-name>
 			</render-bin>
 			<!-- Diffuse texture unit-->
 			<texture-unit>

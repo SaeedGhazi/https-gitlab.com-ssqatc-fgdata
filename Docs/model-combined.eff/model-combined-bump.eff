@@ -7,7 +7,7 @@
 		WARNING: do not remove the Normalmap include at the end-->
 <PropertyList>
 		<name><!--my/effect/name--></name>
-    <inherits-from>Effects/model-combined</inherits-from>
+    <inherits-from>Effects/model-combined-deferred</inherits-from>
 		<parameters>
 		<!-- Normal Map -->
 			<normalmap-enabled type="int"> 1 </normalmap-enabled>
@@ -77,7 +77,7 @@
 			<binormal type="int">7</binormal>
 		</generate>
 
-		<technique n="8">
+		<technique n="7">
 			<pass>
 				<program>
 					<attribute>

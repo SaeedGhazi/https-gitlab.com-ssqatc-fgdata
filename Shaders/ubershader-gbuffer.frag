@@ -90,7 +90,7 @@ void main (void)
  		N = normalize(VNormal);
  	}
 ///END bump
-	vec4 reflection = textureCube(Environment, reflVec * N);
+	vec4 reflection = textureCube(Environment, reflVec * dot(N,VNormal));
 	vec3 viewVec = normalize(vViewVec);
 	float v      = abs(dot(viewVec, normalize(VNormal)));// Map a rainbowish color
 	vec4 fresnel = texture2D(ReflFresnelTex, vec2(v, 0.0));

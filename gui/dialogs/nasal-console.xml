@@ -111,8 +111,39 @@
 		<empty><stretch>1</stretch></empty>
 
 		<button>
-			<legend>Clear</legend>
+			<legend>Copy to Clipboard</legend>
 			<key>Ctrl-c</key>
+			<key-desc>Copy buffer contents to clipboard</key-desc>
+			<equal>true</equal>
+			<binding>
+				<command>nasal</command>
+				<script>active and copy()</script>
+			</binding>
+			<binding>
+				<command>dialog-update</command>
+				<object-name>editfield</object-name>
+			</binding>
+		</button>
+
+		<button>
+			<legend>Paste from Clipboard</legend>
+			<key>Ctrl-v</key>
+			<key-desc>Paste clipboard contents into active buffer</key-desc>
+			<equal>true</equal>
+			<binding>
+				<command>nasal</command>
+				<script>active and paste()</script>
+			</binding>
+			<binding>
+				<command>dialog-update</command>
+				<object-name>editfield</object-name>
+			</binding>
+		</button>
+
+		<button>
+			<legend>Clear</legend>
+			<key>Ctrl-x</key>
+			<key-desc>Clear buffer</key-desc>
 			<equal>true</equal>
 			<binding>
 				<command>nasal</command>
@@ -127,6 +158,7 @@
 		<button>
 			<legend>Dump</legend>
 			<key>Ctrl-d</key>
+			<key-desc>Dump buffer contents to console</key-desc>
 			<equal>true</equal>
 			<binding>
 				<command>dialog-apply</command>
@@ -181,6 +213,17 @@
 				select(active);
 			}
 
+			var copy = func {
+				gui.dialog_apply("nasal-console", "editfield");
+				select(active);
+				clipboard.setText( edit.getValue() );
+			}
+
+			var paste = func {
+				edit.setValue( clipboard.getText() );
+				select(active);
+			}
+
 			var execute = func(what = nil) {
 				var num = what != nil ? what.getIndex() : active;
 				var tag = "&lt;nasal-console/#" ~ num ~ ">";
@@ -216,6 +259,21 @@
 				dlg.getNode("active").setIntValue(active = which);
 				edit.setValue(dlg.getChild("code", active).getValue());
 			}
+			var get_button_desc = func (b) {
+				var sep = " ... ";
+				var key=b.getChild("key");
+				var desc=b.getChild("key-desc");
+				if( !isa(key, props.Node) or !isa(desc, props.Node) )
+				return "";
+				return    "  "~key.getValue() ~sep~desc.getValue() ~"\n";
+			}
+
+			var key_bindings = (func {
+				var desc = "";
+				var buttons = self.getNode("group[2]").getChildren("button");
+				foreach(var b; buttons) desc ~= get_button_desc(b);
+				return desc;
+			})();
 
 			var help = func {
 				active = 0;
@@ -225,8 +283,7 @@
 				edit.setValue("Keys:\n"
 					~ "  tab    ... leave edit mode (visible text cursor)\n"
 					~ "  return ... execute active code\n"
-					~ "  ctrl-c ... clear input field\n"
-					~ "  ctrl-d ... dump input field contents to terminal\n"
+				~ key_bindings
 					~ "  esc    ... close dialog\n\n"
 					~ "Ctrl-click on tab buttons executes code without\n"
 					~ "switching to the tab. Add more &lt;code> properties\n"

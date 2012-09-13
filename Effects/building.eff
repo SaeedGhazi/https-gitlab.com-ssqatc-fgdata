@@ -37,9 +37,9 @@
     <lightmap-color type="vec3d" n="3"> 1.0 1.0 1.0 </lightmap-color>-->
     <!-- Reflection -->
     <reflection-enabled type="int"> 1 </reflection-enabled>
-<!--    <reflect-map-enabled type="int"> 1 </reflect-map-enabled>  -->
-<reflect-map-enabled type="int"> 0 </reflect-map-enabled>
-    <reflection-correction type="float"> 0.10 </reflection-correction>
+    <reflect-map-enabled type="int"> 1 </reflect-map-enabled>
+<!--     <reflect-map-enabled type="int"> 0 </reflect-map-enabled> -->
+    <reflection-correction type="float"> -0.10 </reflection-correction>
     <reflection-dynamic type="int"> 0 </reflection-dynamic>
     <reflection-fresnel type="float"> 0.0 </reflection-fresnel>
     <reflection-rainbow type="float"> 0.0 </reflection-rainbow>

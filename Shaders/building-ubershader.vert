@@ -61,9 +61,9 @@ void	main(void)
     // Rotate the normal.
     vec3 normal = gl_Normal;
     normal.xy = vec2(dot(normal.xy, vec2(cr, sr)), dot(normal.xy, vec2(-sr, cr)));
-    normal = gl_NormalMatrix * normal;
+    //normal = gl_NormalMatrix * normal;
 
-		VNormal = normalize(normal);
+		VNormal = normalize(gl_NormalMatrix * normal);
 		if (nmap_enabled > 0 && shader_qual > 2){
 		  VTangent = normalize(gl_NormalMatrix * tangent);
 		  VBinormal = normalize(gl_NormalMatrix * binormal);

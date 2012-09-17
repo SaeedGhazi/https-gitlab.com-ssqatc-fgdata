@@ -173,14 +173,6 @@
 		<name>location</name>
 
 		<item>
-			<name>position-on-ground</name>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>location-on-ground</dialog-name>
-			</binding>
-		</item>
-
-		<item>
 			<name>position-in-air</name>
 			<binding>
 				<command>dialog-show</command>

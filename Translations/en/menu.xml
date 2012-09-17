@@ -27,9 +27,8 @@
 
 	<!-- Location menu -->
 	<location>Location</location>
-	<position-on-ground>Position Aircraft On Ground</position-on-ground>
 	<position-in-air>Position Aircraft In Air</position-in-air>
-	<goto-airport>Select Airport From List</goto-airport>
+	<goto-airport>Select Airport</goto-airport>
 	<random-attitude>Random Attitude</random-attitude>
 	<tower-position>Tower Position</tower-position>
 

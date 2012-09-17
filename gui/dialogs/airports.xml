@@ -479,13 +479,12 @@
                 rws_done[rw] = 1; 
 
                 rw = me._apt.runways[rw];
-                var icon_rw = me.grp_apt.createChild("path", "runway");
-                
-                icon_rw.setStrokeLineWidth(0.5);
-                icon_rw.setColor(1.0,1.0,1.0);
-                icon_rw.setColorFill(0.2, 0.2, 0.2);
-                icon_rw.setFill(1);
-                
+                var icon_rw =
+                  me.grp_apt.createChild("path", "runway")
+                            .setStrokeLineWidth(0.5)
+                            .setColor(1.0,1.0,1.0)
+                            .setColorFill(0.2, 0.2, 0.2);
+
                 var rwy = Runway.new(rw);
                 var beg_thr  = rwy.pointOffCenterline(rw.threshold);
                 var beg_thr1 = rwy.pointOffCenterline(rw.threshold,  0.5 * rw.width);
@@ -516,10 +515,11 @@
                 {
                   # only runways which are much longer than wide are
                   # real runways, otherwise it's probably a heliport.
-                  var icon_cl = me.grp_apt.createChild("path", "centerline");
-                  icon_cl.setStrokeLineWidth(0.5);
-                  icon_cl.setColor(1,1,1);
-                  icon_cl.setStrokeDashArray([15, 10]);
+                  var icon_cl =
+                    me.grp_apt.createChild("path", "centerline")
+                              .setStrokeLineWidth(0.5)
+                              .setColor(1,1,1)
+                              .setStrokeDashArray([15, 10]);
                   
                   icon_cl.setDataGeo
                   (
@@ -529,9 +529,10 @@
                       end_thr[0], end_thr[1] ]
                   );
                   
-                  var icon_thr = me.grp_apt.createChild("path", "threshold");
-                  icon_thr.setStrokeLineWidth(1.5);
-                  icon_thr.setColor(1,1,1);
+                  var icon_thr =
+                    me.grp_apt.createChild("path", "threshold")
+                              .setStrokeLineWidth(1.5)
+                              .setColor(1,1,1);
                   
                   icon_thr.setDataGeo
                   (
@@ -549,12 +550,14 @@
               
               foreach(var park; me._apt.parking())
               {
-                var icon_park = me.grp_apt.createChild("text");
-                icon_park.setDrawMode(9);
-                icon_park.setText(park.name);
-                icon_park.setFont("LiberationFonts/LiberationMono-Bold.ttf");
-                icon_park.setGeoPosition(park.lat, park.lon);
-                icon_park.setFontSize(15, 1.3);
+                var icon_park =
+                  me.grp_apt.createChild("text")
+                            .setDrawMode( canvas.Text.ALIGNMENT
+                                        + canvas.Text.TEXT )
+                            .setText(park.name)
+                            .setFont("LiberationFonts/LiberationMono-Bold.ttf")
+                            .setGeoPosition(park.lat, park.lon)
+                            .setFontSize(15, 1.3);
               }
             }
           };
@@ -564,31 +567,22 @@
 
           var root = my_canvas.createGroup();
           
-          var map = root.createChild("map", "map-test");
-          map.setTranslation(300, 200);
+          var map = root.createChild("map", "map-test")
+                        .setTranslation(300, 200);
           
           var layer_runways = map.createChild("group", "runways");
-          var icon_tower = map.createChild("path", "tower");
-          icon_tower.setStrokeLineWidth(1);
-          icon_tower.setScale(1.5);
-          icon_tower.setColor(0.2,0.2,1.0);
-          
-          icon_tower.setData
-          (
-            [ canvas.Path.VG_MOVE_TO,
-              canvas.Path.VG_VLINE_TO_REL,
-              canvas.Path.VG_LINE_TO_REL,
-              canvas.Path.VG_HLINE_TO_REL,
-              canvas.Path.VG_LINE_TO_REL,
-              canvas.Path.VG_VLINE_TO_REL ],
-            [ -3, 0,
-             -10,
-              -3, -10,
-              12,
-              -3, 10,
-              10 ]
-          );
-          
+          var icon_tower =
+            map.createChild("path", "tower")
+               .setStrokeLineWidth(1)
+               .setScale(1.5)
+               .setColor(0.2,0.2,1.0)
+               .moveTo(-3, 0)
+               .vert(-10)
+               .line(-3, -10)
+               .horiz(12)
+               .line(-3, 10)
+               .vert(10);
+
           var updateMap = func() {
             var id = getprop("/sim/gui/dialogs/airports/selected-airport/id");
           
@@ -615,7 +609,7 @@
             var zoom = ranges[4 - z];
             map._node.getNode("range", 1).setDoubleValue(zoom);
                     
-            settimer(updateZoom, 0.5);
+            settimer(updateZoom, 0.5, 1);
           };
           
           var aptlistener = setlistener("/sim/gui/dialogs/airports/selected-airport/id", updateMap);

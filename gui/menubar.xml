@@ -711,6 +711,14 @@
 				<script>gui.showHelpDialog("/sim/help")</script>
 			</binding>
 		</item>
+		
+		<item>
+			<name>aircraft-checklists</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>checklist</dialog-name>
+			</binding>
+		</item>
 
 		<item>
 			<name>common-keys</name>

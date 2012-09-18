@@ -324,6 +324,7 @@ var Element = {
 # Class for a group element on a canvas
 #
 var Group = {
+# public:
   new: func(node, id)
   {
     return { parents: [Group, Element.new(node, id)] };
@@ -341,6 +342,17 @@ var Group = {
     }
     
     return factory([me._node, type], id);
+  },
+  # Get a vector of all child elements
+  getChildren: func()
+  {
+    var children = [];
+
+    foreach(var c; me._node.getChildren())
+      if( me._isElementNode(c) )
+        append(children, me._wrapElement(c));
+
+    return children;
   },
   # Get first child with given id (breadth-first search)
   #
@@ -361,15 +373,11 @@ var Group = {
       {
         var node_id = node.getNode("id");
         if( node_id != nil and node_id.getValue() == id )
-          # Create element from existing node
-          return me._element_factories[ node.getName() ](node, nil);
+          return me._wrapElement(node);
       }
         
       foreach(var c; node.getChildren())
-        # element nodes have type NONE and valid element names (those in the the
-        # factor list)
-        if(     c.getType() == "NONE"
-            and me._element_factories[ c.getName() ] != nil )
+        if( me._isElementNode(c) )
           append(stack, c);
     }
   },
@@ -379,6 +387,19 @@ var Group = {
     foreach(var type; keys(me._element_factories))
       me._node.removeChildren(type, 0);
     return me;
+  },
+# private:
+  _isElementNode: func(el)
+  {
+    # element nodes have type NONE and valid element names (those in the factory
+    # list)
+    return el.getType() == "NONE"
+        and me._element_factories[ el.getName() ] != nil;
+  },
+  _wrapElement: func(node)
+  {
+    # Create element from existing node
+    return me._element_factories[ node.getName() ](node, nil);
   }
 };
 

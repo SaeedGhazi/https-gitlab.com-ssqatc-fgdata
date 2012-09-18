@@ -434,8 +434,8 @@
             if (id != "") {
               var apt = airportinfo(id);
               
-              #map.removeAllChildren();
-              #layer_runways = map.createChild("group", "runways");
+              map.removeAllChildren();
+              layer_runways = map.createChild("group", "runways");
               
               var airport = canvas.AirportMap.new(apt);
               airport.build(layer_runways);

@@ -31,10 +31,11 @@
 
   <nasal>
     <open>
-      var airport_id = getprop("/sim/presets/airport-id");
       setprop("/sim/gui/dialogs/airports/selected-airport/rwy", "");
       setprop("/sim/gui/dialogs/airports/selected-airport/parkpos", "");
-
+      setprop("/sim/gui/dialogs/airports/list", "");
+      
+      var airport_id = getprop("/sim/presets/airport-id");
       if (airport_id == nil) { airport_id = "KSFO"; }
       
       var dlg = props.globals.getNode("/sim/gui/dialogs/airports", 1);
@@ -77,6 +78,8 @@
           setprop("/sim/gui/dialogs/airports/selected-airport/location", sprintf("%.3f / %.3f", info.lon, info.lat));
           setprop("/sim/gui/dialogs/airports/selected-airport/lon", info.lon);
           setprop("/sim/gui/dialogs/airports/selected-airport/elevation-ft", 3.28 * info.elevation);
+          setprop("/sim/gui/dialogs/airports/selected-airport/rwy", "");
+          setprop("/sim/gui/dialogs/airports/selected-airport/parkpos", "");
           
           var longest_runway = 0;
           var runway_string = "";
@@ -136,6 +139,9 @@
           }
          
       }    
+      
+      
+      update_info();
     </open>
   </nasal>
   
@@ -421,32 +427,23 @@
                         .setTranslation(300, 200);
           
           var layer_runways = map.createChild("group", "runways");
-          var icon_tower =
-            map.createChild("path", "tower")
-               .setStrokeLineWidth(1)
-               .setScale(1.5)
-               .setColor(0.2,0.2,1.0)
-               .moveTo(-3, 0)
-               .vert(-10)
-               .line(-3, -10)
-               .horiz(12)
-               .line(-3, 10)
-               .vert(10);
 
           var updateMap = func() {
             var id = getprop("/sim/gui/dialogs/airports/selected-airport/id");
           
             if (id != "") {
               var apt = airportinfo(id);
+              
+              #map.removeAllChildren();
+              #layer_runways = map.createChild("group", "runways");
+              
               var airport = canvas.AirportMap.new(apt);
-              airport.build(layer_runways, "/sim/gui/dialogs/airports/selected-airport/rwy" );
+              airport.build(layer_runways);
 
-              var pos = apt.tower();
-              icon_tower.setGeoPosition(pos.lat, pos.lon);
               map._node.getNode("ref-lat", 1).setDoubleValue(apt.lat);
               map._node.getNode("ref-lon", 1).setDoubleValue(apt.lon);
               map._node.getNode("hdg", 1).setDoubleValue(0.0);
-              }
+            }
           }
                 
           var ranges = [0.1, 0.25, 0.5, 1, 2.5, 5];
@@ -462,7 +459,63 @@
             settimer(updateZoom, 0.5, 1);
           };
           
+          var updateRunwayHighlight = func()
+          {
+            var selected_rwy = getprop("/sim/gui/dialogs/airports/selected-airport/rwy");
+            var selected_apt = getprop("/sim/gui/dialogs/airports/selected-airport/id");
+            
+            var is_heli = substr(selected_rwy, 0, 1) == "H";
+            var rw_dir = is_heli ? nil : int(substr(selected_rwy, 0, 2));
+            
+            var rw_rec = "";
+            if( rw_dir != nil ) {
+              rw_rec = sprintf("%02d", math.mod(rw_dir - 18, 36));
+              if( size(selected_rwy) == 3 ) {
+                var map_rec = {
+                  "R": "L",
+                  "L": "R",
+                  "C": "C"
+                };
+                rw_rec ~= map_rec[substr(selected_rwy, 2)];
+              }
+            }
+            
+            foreach (var apt; layer_runways.getChildren()) {
+              if (apt.get("id") == "apt-" ~ selected_apt) {
+                foreach (var rwy; apt.getChildren()) {
+                  if ((rwy.get("id") == "runway-" ~ selected_rwy) or 
+                      (rwy.get("id") == "runway-" ~ rw_rec)          ) 
+                  {
+                    rwy.setColor(1.0,0.0,0.0);
+                  } else { 
+                    rwy.setColor(1.0,1.0,1.0);                  
+                  }
+                }              
+              }            
+            }
+          }          
+
+          var updateParkingHighlight = func()
+          {
+            var selected_parkpos = getprop("/sim/gui/dialogs/airports/selected-airport/parkpos");          
+            var selected_apt = getprop("/sim/gui/dialogs/airports/selected-airport/id");
+            
+            foreach (var apt; layer_runways.getChildren()) {
+              if (apt.get("id") == "apt-" ~ selected_apt) {
+                foreach (var rwy; apt.getChildren()) {
+                  if (rwy.get("id") == "parking-" ~ selected_parkpos) {
+                    rwy.setColor(1.0,0.0,0.0);
+                  } else { 
+                    rwy.setColor(1.0,1.0,1.0);                  
+                  }
+                }              
+              }            
+            }
+          }          
+          
           var aptlistener = setlistener("/sim/gui/dialogs/airports/selected-airport/id", updateMap);
+          var rwylistener = setlistener("/sim/gui/dialogs/airports/selected-airport/rwy", updateRunwayHighlight);
+          var parkposlistener = setlistener("/sim/gui/dialogs/airports/selected-airport/parkpos", updateParkingHighlight);
           
           update_info();
           updateZoom();
@@ -470,6 +523,8 @@
           </load>
           <close>
             removelistener(aptlistener);      
+            removelistener(rwylistener);
+            removelistener(parkposlistener);
           </close>
         </nasal>
       </canvas>

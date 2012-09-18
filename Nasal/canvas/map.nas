@@ -45,14 +45,11 @@ var AirportMap = {
   # Build the graphical representation of the represented airport
   #
   # @param layer_runways  canvas.Group to attach airport map to
-  # @param selected       [optional] The name of a property containing the
-  #                       currently selected runway
-  build: func(layer_runways, selected = nil)
+  build: func(layer_runways)
   {
     var rws_done = {};
 
     me.grp_apt = layer_runways.createChild("group", "apt-" ~ me._apt.id);
-    var selected_rwy = (selected) ? getprop(selected) : nil;
 
     foreach(var rw; keys(me._apt.runways))
     {
@@ -86,7 +83,7 @@ var AirportMap = {
 
       rw = me._apt.runways[rw];
       var icon_rw =
-        me.grp_apt.createChild("path", "runway")
+        me.grp_apt.createChild("path", "runway-" ~ rw.id)
                   .setStrokeLineWidth(0.5)
                   .setColor(1.0,1.0,1.0)
                   .setColorFill(0.2, 0.2, 0.2);
@@ -157,7 +154,7 @@ var AirportMap = {
     foreach(var park; me._apt.parking())
     {
       var icon_park =
-        me.grp_apt.createChild("text")
+        me.grp_apt.createChild("text", "parking-" ~ park.name)
                   .setDrawMode( canvas.Text.ALIGNMENT
                               + canvas.Text.TEXT )
                   .setText(park.name)
@@ -165,5 +162,21 @@ var AirportMap = {
                   .setGeoPosition(park.lat, park.lon)
                   .setFontSize(15, 1.3);
     }
+    
+    var icon_tower =
+            me.grp_apt.createChild("path", "tower")
+               .setStrokeLineWidth(1)
+               .setScale(1.5)
+               .setColor(0.2,0.2,1.0)
+               .moveTo(-3, 0)
+               .vert(-10)
+               .line(-3, -10)
+               .horiz(12)
+               .line(-3, 10)
+               .vert(10);
+               
+    var pos = me._apt.tower();
+    icon_tower.setGeoPosition(pos.lat, pos.lon);               
+    
   }
 };

@@ -113,6 +113,9 @@
     <empty>
       <stretch>true</stretch>
     </empty>
+    
+    <hrule/>
+    
 
     <text>
       <halign>center</halign>
@@ -166,7 +169,67 @@
         <format>Revision: %s</format>
         <property>/sim/version/revision</property>
       </text>
+    </group>
       
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+
+    <hrule/>
+      
+    <text>
+      <halign>center</halign>
+      <label>Graphics/OpenGL Information</label>
+    </text>
+    
+    <group>
+      <layout>vbox</layout>
+      <border>10</border>
+      <halign>center</halign>
+      <default-padding>2</default-padding>
+    
+  
+      <text>
+        <halign>left</halign>
+        <label>MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM</label>
+        <format>OpenGL Vendor: %s</format>
+        <property>/sim/rendering/gl-vendor</property>
+      </text>
+
+      <text>
+        <halign>left</halign>
+        <label>MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM</label>
+        <format>OpenGL Renderer: %s</format>
+        <property>/sim/rendering/gl-renderer</property>
+      </text>
+
+      <text>
+        <halign>left</halign>
+        <label>MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM</label>
+        <format>OpenGL Version: %s</format>
+        <property>/sim/rendering/gl-version</property>
+      </text>
+   
+      <text>
+        <halign>left</halign>
+        <label>MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM</label>
+        <format>GLSL Version: %s</format>
+        <property>/sim/rendering/gl-shading-language-version</property>
+      </text>
+
+      <text>
+        <halign>left</halign>
+        <label>MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM</label>
+        <format>Max Texture Size: %s</format>
+        <property>/sim/rendering/max-texture-size</property>
+      </text>
+
+      <text>
+        <halign>left</halign>
+        <label>MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM</label>
+        <format>Depth Buffer Bits: %s</format>
+        <property>/sim/rendering/depth-buffer-bits</property>
+      </text>
     </group>
   </group>
   
@@ -187,6 +250,35 @@
         <command>dialog-close</command>
       </binding>
     </button>
+
+    <button>
+      <legend>Take screen shot</legend>
+      <equal>true</equal>
+      <default>false</default>
+      <binding>
+        <command>nasal</command>
+   <script>fgcommand("screen-capture");</script>
+      </binding>
+    </button>
+
+    <button>
+      <legend>Copy to Clipboard</legend>
+      <equal>true</equal>
+      <default>false</default>
+      <binding>
+        <command>nasal</command>
+        <script><![CDATA[
+   var properties = ["gl-vendor","gl-version","gl-renderer", "gl-shading-language-version"];
+   var data = "";
+   var path = "/sim/rendering/";
+   foreach(var p; properties)
+      data ~= p ~":"~getprop(path~p) ~"\n";
+   clipboard.setText(data);
+   gui.popupTip("Copied version information to clipboard!");
+   ]]></script>
+      </binding>
+    </button>
+
 
     <empty><stretch>true</stretch></empty>
     

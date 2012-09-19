@@ -30,11 +30,23 @@
   <hrule/>
 
   <nasal>
-    <open>
+    <open><![CDATA[
       setprop("/sim/gui/dialogs/airports/selected-airport/rwy", "");
       setprop("/sim/gui/dialogs/airports/selected-airport/parkpos", "");
       setprop("/sim/gui/dialogs/airports/list", "");
       
+      if (getprop("/sim/gui/dialogs/airports/display-taxiways") == "") {
+        setprop("/sim/gui/dialogs/airports/display-taxiways", "1");
+      }
+      
+      if (getprop("/sim/gui/dialogs/airports/display-parking") == "") {
+        setprop("/sim/gui/dialogs/airports/display-parking", "0");
+      }
+      
+      if (getprop("/sim/gui/dialogs/airports/display-tower") == "") {
+        setprop("/sim/gui/dialogs/airports/display-tower", "1");
+      }
+            
       var airport_id = getprop("/sim/presets/airport-id");
       if (airport_id == nil) { airport_id = "KSFO"; }
       
@@ -75,7 +87,7 @@
           var info = airportinfo(airport_id);
           setprop("/sim/gui/dialogs/airports/selected-airport/id", airport_id);
           setprop("/sim/gui/dialogs/airports/selected-airport/name", info.name ~ " (" ~ airport_id ~ ")");
-          setprop("/sim/gui/dialogs/airports/selected-airport/location", sprintf("%.3f / %.3f", info.lon, info.lat));
+          setprop("/sim/gui/dialogs/airports/selected-airport/location", sprintf("%.3f / %.3f", info.lat, info.lon));
           setprop("/sim/gui/dialogs/airports/selected-airport/lon", info.lon);
           setprop("/sim/gui/dialogs/airports/selected-airport/elevation-ft", 3.28 * info.elevation);
           setprop("/sim/gui/dialogs/airports/selected-airport/rwy", "");
@@ -104,6 +116,14 @@
           }          
 
           setprop("/sim/gui/dialogs/airports/selected-airport/longest-runway", longest_runway);
+          
+          var airport_pos = geo.Coord.new();
+          airport_pos.set_latlon(info.lat, info.lon);
+          
+          var dst = airport_pos.distance_to(geo.aircraft_position()) / 1852.0;
+          var crs = airport_pos.course_to(geo.aircraft_position());
+          setprop("/sim/gui/dialogs/airports/selected-airport/distance-nm", dst);
+          setprop("/sim/gui/dialogs/airports/selected-airport/course-deg", crs);
           
           gui.dialog_update("airports", "runway-list");
           gui.dialog_update("airports", "parking-list");         
@@ -136,12 +156,11 @@
           } else {
             setprop("/sim/presets/runway", "");
             setprop("/sim/presets/parkpos", getprop("/sim/gui/dialogs/airports/selected-airport/parkpos"));
-          }
-         
+          }         
       }    
-      
-      
+            
       update_info();
+      ]]>
     </open>
   </nasal>
   
@@ -234,7 +253,7 @@
         <text>
           <row>0</row>
           <col>0</col>
-          <width>200</width>
+          <width>100</width>
           <halign>right</halign>        
           <label>Airport:</label>
         </text>
@@ -251,7 +270,7 @@
           <row>1</row>
           <col>0</col>
           <halign>right</halign>
-          <label>Lon/Lat:</label>
+          <label>Lat / Lon:</label>
         </text>
         <text>
           <row>1</row>
@@ -263,16 +282,16 @@
 
         <text>
           <row>1</row>
-          <col>3</col>
+          <col>2</col>
           <halign>right</halign>
-          <label>Elevation (ft):</label>
+          <label>Elevation:</label>
         </text>
         <text>
           <row>1</row>
-          <col>4</col>
+          <col>3</col>
           <halign>left</halign>
           <live>true</live>
-          <format>%.0f</format>
+          <format>%.0f ft</format>
           <property>/sim/gui/dialogs/airports/selected-airport/elevation-ft</property>
         </text>
 
@@ -280,15 +299,45 @@
           <row>2</row>
           <col>0</col>
           <halign>right</halign>
-          <label>Longest runway (ft):</label>
+          <label>Longest runway:</label>
         </text>
         <text>
           <row>2</row>
           <col>1</col>
           <halign>left</halign>
           <live>true</live>
-          <format>%.0f</format>
+          <format>%.0f ft</format>
           <property>/sim/gui/dialogs/airports/selected-airport/longest-runway</property>
+        </text>
+
+        <text>
+          <row>3</row>
+          <col>0</col>
+          <halign>right</halign>
+          <label>Distance:</label>
+        </text>
+        <text>
+          <row>3</row>
+          <col>1</col>
+          <halign>left</halign>
+          <live>true</live>
+          <format>%.1f nm</format>
+          <property>/sim/gui/dialogs/airports/selected-airport/distance-nm</property>
+        </text>
+
+        <text>
+          <row>3</row>
+          <col>2</col>
+          <halign>right</halign>
+          <label>Course:</label>
+        </text>
+        <text>
+          <row>3</row>
+          <col>3</col>
+          <halign>left</halign>
+          <live>true</live>
+          <format>%.0f deg</format>
+          <property>/sim/gui/dialogs/airports/selected-airport/course-deg</property>
         </text>
 
       </group>
@@ -437,7 +486,11 @@
               map.removeAllChildren();
               layer_runways = map.createChild("group", "runways");
               
-              var airport = canvas.AirportMap.new(apt);
+              var display_taxiways = getprop("/sim/gui/dialogs/airports/display-taxiways");
+              var display_parking  = getprop("/sim/gui/dialogs/airports/display-parking");
+              var display_tower    = getprop("/sim/gui/dialogs/airports/display-tower");
+              
+              var airport = canvas.AirportMap.new(apt, 1, display_taxiways, display_parking, display_tower);
               airport.build(layer_runways);
 
               map._node.getNode("ref-lat", 1).setDoubleValue(apt.lat);
@@ -513,18 +566,26 @@
             }
           }          
           
-          var aptlistener = setlistener("/sim/gui/dialogs/airports/selected-airport/id", updateMap);
-          var rwylistener = setlistener("/sim/gui/dialogs/airports/selected-airport/rwy", updateRunwayHighlight);
-          var parkposlistener = setlistener("/sim/gui/dialogs/airports/selected-airport/parkpos", updateParkingHighlight);
+          var listeners = [];
+          
+          append(listeners, setlistener("/sim/gui/dialogs/airports/selected-airport/id", updateMap));
+          append(listeners, setlistener("/sim/gui/dialogs/airports/selected-airport/rwy", updateRunwayHighlight));
+          append(listeners, setlistener("/sim/gui/dialogs/airports/selected-airport/parkpos", updateParkingHighlight));
+          append(listeners, setlistener("/sim/gui/dialogs/airports/display-taxiways", updateMap));
+          append(listeners, setlistener("/sim/gui/dialogs/airports/display-parking", updateMap));
+          append(listeners, setlistener("/sim/gui/dialogs/airports/display-tower", updateMap));
           
           update_info();
           updateZoom();
           ]]>
           </load>
-          <close>
-            removelistener(aptlistener);      
-            removelistener(rwylistener);
-            removelistener(parkposlistener);
+          <close><![CDATA[
+            foreach (var listener, listeners) 
+            {
+              removelistener(listener);      
+            
+            }          
+          ]]>
           </close>
         </nasal>
       </canvas>
@@ -549,7 +610,8 @@
           </button>
           
           <text>
-              <label>MMM</label>
+              <label>MMMM</label>
+              <halign>center</halign>
               <format>Zoom %d</format>
               <property>/sim/gui/dialogs/airports/zoom</property>
               <live>true</live>
@@ -563,11 +625,43 @@
 
               <binding>
                   <command>property-adjust</command>
-                  <property>//sim/gui/dialogs/airports/zoom</property>
+                  <property>/sim/gui/dialogs/airports/zoom</property>
                   <step>1</step>
                   <max>4</max>
               </binding>
           </button>
+          
+          <empty><stretch>true</stretch></empty>
+          
+          <checkbox>
+              <name>display-taxiways</name>
+              <label>Display Taxiways</label>
+              <property>/sim/gui/dialogs/airports/display-taxiways</property>
+              <binding>
+                <command>dialog-apply</command>
+                <object-name>display-taxiways</object-name>
+              </binding>
+          </checkbox>
+          
+          <checkbox>
+              <name>display-parking</name>
+              <label>Display Parking Position</label>
+              <property>/sim/gui/dialogs/airports/display-parking</property>
+              <binding>
+                <command>dialog-apply</command>
+                <object-name>display-parking</object-name>
+              </binding>
+          </checkbox>
+          
+          <checkbox>
+              <name>display-tower</name>
+              <label>Display Tower</label>
+              <property>/sim/gui/dialogs/airports/display-tower</property>
+              <binding>
+                <command>dialog-apply</command>
+                <object-name>display-tower</object-name>
+              </binding>
+          </checkbox>          
       </group>
     </group>
   </group>
@@ -581,7 +675,7 @@
     <empty><stretch>true</stretch></empty>
 
     <button>
-      <legend>OK</legend>
+      <legend>Go To Airport</legend>
       <equal>true</equal>
       <binding>
         <command>dialog-apply</command>
@@ -602,7 +696,7 @@
     <empty><stretch>true</stretch></empty>
 
     <button>
-      <legend>Cancel</legend>
+      <legend>Close</legend>
       <equal>true</equal>
       <key>Esc</key>
       <binding>

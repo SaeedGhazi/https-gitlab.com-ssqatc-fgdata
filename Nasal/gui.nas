@@ -146,6 +146,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
     # enable/disable menu entries
     menuEnable("fuel-and-payload", fdm == "yasim" or fdm == "jsb");
+    menuEnable("aircraft-checklists", props.globals.getNode("/sim/checklists") != nil);
     var isAutopilotMenuEnabled = func {
       foreach( var apdp; autopilotDisableProps ) {
         if( props.globals.getNode( apdp ) != nil )

@@ -20,6 +20,9 @@
   Button 13/14 (left hand quadrant buttons): Flaps Up/Down
   Buttons 15/16 (middle quadrant buttons): Gear Up/Down
   Buttons 17/18 (right quandrant buttons): Spoilers Up/Down
+  Button 19 (Throttle < 0): Reverse Thrust
+  Button 20 (Prop < 0): Propellor Beta
+  Button 21 (Mixture <0) : Cut-off
   Buttons 23/24/25 (right hand selector switch): View direction Sensitivity
 
 -->
@@ -32,7 +35,7 @@
     <name>Pro Flight Cessna Yoke</name>
     
     <axis n="0">
-	<name>Yoke left/right</name>
+	<name>Yoke lepft/right</name>
         <desc>Aileron</desc>
         <binding>
             <command>property-scale</command>
@@ -379,6 +382,191 @@
             </binding>
         </mod-up>
     </button>
+
+    <button n="19"> <!-- Power < 0 -->
+	<name>Throttle pushed below 0</name>
+        <desc>Thrust reverser/beta</desc>
+        <repeatable>false</repeatable>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/engines/engine[0]/reverser</property>
+            <value>true</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/engines/engine[1]/reverser</property>
+            <value>true</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/engines/engine[2]/reverser</property>
+            <value>true</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/engines/engine[3]/reverser</property>
+            <value>true</value>
+        </binding>
+	<binding>
+            <command>property-assign</command>
+            <property>/engines/engine[0]/reverse-thrust</property>
+            <value>1</value>
+        </binding>
+	<binding>
+            <command>property-assign</command>
+            <property>/engines/engine[1]/reverse-thrust</property>
+            <value>1</value>
+        </binding>
+	<binding>
+            <command>property-assign</command>
+            <property>/engines/engine[2]/reverse-thrust</property>
+            <value>1</value>
+        </binding>
+	<binding>
+            <command>property-assign</command>
+            <property>/engines/engine[3]/reverse-thrust</property>
+            <value>1</value>
+        </binding>
+        <mod-up>
+	        <binding>
+        	    <command>property-assign</command>
+	            <property>/controls/engines/engine[0]/reverser</property>
+        	    <value>false</value>
+	        </binding>
+	        <binding>
+        	    <command>property-assign</command>
+	            <property>/controls/engines/engine[1]/reverser</property>
+        	    <value>false</value>
+	        </binding>
+	        <binding>
+        	    <command>property-assign</command>
+	            <property>/controls/engines/engine[2]/reverser</property>
+        	    <value>false</value>
+	        </binding>
+	        <binding>
+        	    <command>property-assign</command>
+	            <property>/controls/engines/engine[3]/reverser</property>
+        	    <value>false</value>
+	        </binding>
+	        <binding>
+        	    <command>property-assign</command>
+	            <property>/engines/engine[0]/reverse-thrust</property>
+        	    <value>0</value>
+	        </binding>
+	        <binding>
+        	    <command>property-assign</command>
+	            <property>/engines/engine[1]/reverse-thrust</property>
+        	    <value>0</value>
+	        </binding>
+	        <binding>
+        	    <command>property-assign</command>
+	            <property>/engines/engine[2]/reverse-thrust</property>
+        	    <value>0</value>
+	        </binding>
+	        <binding>
+        	    <command>property-assign</command>
+	            <property>/engines/engine[3]/reverse-thrust</property>
+        	    <value>0</value>
+	        </binding>
+        </mod-up>
+    </button>
+
+    <button n="20"> <!-- Propeller < 0 -->
+	<name>Propeller pushed below 0</name>
+        <desc>Feather Prop</desc>
+        <repeatable>false</repeatable>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/engines/engine[0]/propeller-feather</property>
+            <value>true</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/engines/engine[1]/propeller-feather</property>
+            <value>true</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/engines/engine[2]/propeller-feather</property>
+            <value>true</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/engines/engine[3]/propeller-feather</property>
+            <value>true</value>
+        </binding>
+        <mod-up>
+	        <binding>
+        	    <command>property-assign</command>
+	            <property>/controls/engines/engine[0]/propeller-feather</property>
+        	    <value>false</value>
+	        </binding>
+	        <binding>
+        	    <command>property-assign</command>
+	            <property>/controls/engines/engine[1]/propeller-feather</property>
+        	    <value>false</value>
+	        </binding>
+	        <binding>
+        	    <command>property-assign</command>
+	            <property>/controls/engines/engine[2]/propeller-feather</property>
+        	    <value>false</value>
+	        </binding>
+	        <binding>
+        	    <command>property-assign</command>
+	            <property>/controls/engines/engine[3]/propeller-feather</property>
+        	    <value>false</value>
+	        </binding>
+        </mod-up>
+    </button>
+
+    <button n="21"> <!-- Mixture < 0 -->
+	<name>Mixture pushed below 0</name>
+        <desc>Engine cut-off</desc>
+        <repeatable>false</repeatable>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/engines/engine[0]/cutoff</property>
+            <value>true</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/engines/engine[1]/cutoff</property>
+            <value>true</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/engines/engine[2]/cutoff</property>
+            <value>true</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/engines/engine[3]/cutoff</property>
+            <value>true</value>
+        </binding>
+        <mod-up>
+	        <binding>
+        	    <command>property-assign</command>
+	            <property>/controls/engines/engine[0]/cutoff</property>
+        	    <value>false</value>
+	        </binding>
+	        <binding>
+        	    <command>property-assign</command>
+	            <property>/controls/engines/engine[1]/cutoff</property>
+        	    <value>false</value>
+	        </binding>
+	        <binding>
+        	    <command>property-assign</command>
+	            <property>/controls/engines/engine[2]/cutoff</property>
+        	    <value>false</value>
+	        </binding>
+	        <binding>
+        	    <command>property-assign</command>
+	            <property>/controls/engines/engine[3]/cutoff</property>
+        	    <value>false</value>
+	        </binding>
+        </mod-up>
+    </button>
+
     <button n="22">
 	<name>Yoke mode switch left</name>
         <desc>Coolie hat sensitivity low</desc>

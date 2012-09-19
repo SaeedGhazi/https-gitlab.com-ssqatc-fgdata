@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+  <name>checklist</name>
+  <layout>vbox</layout>
+	<default-padding>1</default-padding>
+
+  <color>
+    <red type="float">0.41</red>
+    <green type="float">0.4</green>
+    <blue type="float">0.42</blue>
+    <alpha type="float">1.0</alpha>
+    <alpha type="float">1.0</alpha>
+  </color>
+
+  <nasal>
+    <open>
+      var dlgRoot = cmdarg();
+      var checklists = props.globals.getNode("/sim/checklists", 1).getChildren("checklist");
+      
+      if (size(checklists) > 0) {
+        
+        var combo = gui.findElementByName(dlgRoot, "checklist-combo");
+        var group = gui.findElementByName(dlgRoot, "checklist-table-group");
+        
+        forindex (var idx; checklists) {
+          combo.getChild("value", idx, 1).setValue(checklists[idx].getNode("title", 1).getValue());
+          var c = checklists[idx];        
+          var row = 0;
+          
+          # Set up a new table, only visible when this checklist is selected.
+          var table = group.getChild("group", idx, 1);
+          table.getNode("row", 1).setValue(0);
+          table.getNode("col", 1).setValue(0);
+          table.getNode("default-padding", 1).setValue(4);
+          table.getNode("layout", 1).setValue("table");
+          table.getNode("valign", 1).setValue("top");
+          
+          var vis = table.getNode("visible", 1).getNode("equals", 1);
+          vis.getNode("property", 1).setValue("sim/gui/dialogs/checklist/selected-checklist");
+          vis.getNode("value", 1).setValue(c.getNode("title").getValue());
+          
+          var items = c.getChildren("item");
+          var txtcount = 0;
+          
+          forindex (var i; items) {          
+            var item = items[i];
+
+            var t = table.getChild("text", txtcount, 1);
+            txtcount += 1;
+            
+            t.getNode("halign", 1).setValue("left");
+            t.getNode("row", 1).setValue(row);
+            t.getNode("col", 1).setValue(0);
+            t.getNode("label", 1).setValue(item.getNode("name", 1).getValue());
+            
+            var values = item.getChildren("value");
+            
+            forindex (var v; values) {
+              var t = table.getChild("text", txtcount, 1);
+              txtcount += 1;
+              t.getNode("halign", 1).setValue("right");
+              t.getNode("row", 1).setValue(row);
+              if (v > 0) {
+                # The second row of values can overlap with the
+                # first column if required - helps keep the 
+                # checklist dialog as compact as possible
+                t.getNode("col", 1).setValue(0);
+                t.getNode("colspan", 1).setValue(2);
+              } else {
+                t.getNode("col", 1).setValue(1);
+              }
+                
+              t.getNode("label", 1).setValue(values[v].getValue());                
+              row = row + 1;              
+            }
+          }
+        }
+        
+        setprop("sim/gui/dialogs/checklist/selected-checklist", 
+                checklists[0].getNode("title").getValue());
+      } else {
+          var group = gui.findElementByName(dlgRoot, "checklist-table-group");
+          var table = group.getNode("text", 1);
+          table.getNode("row", 1).setValue(0);
+          table.getNode("col", 1).setValue(0);
+          table.getNode("default-padding", 1).setValue(4);
+          table.getNode("layout", 1).setValue("table");
+          table.getNode("valign", 1).setValue("top");
+          table.getNode("halign", 1).setValue("center");
+          table.getNode("label", 1).setValue("No checklists exist for this aircraft");
+      
+      }
+      
+      var setTransparency = func(updateDialog){
+          var alpha = (getprop("/sim/gui/dialogs/checklist/transparent") or 0);
+          dlgRoot.getNode("color/alpha").setValue(1-alpha*0.3);
+          dlgRoot.getNode("color/red").setValue(0.41-alpha*0.2);
+          dlgRoot.getNode("color/green").setValue(0.4-alpha*0.2);
+          dlgRoot.getNode("color/blue").setValue(0.42-alpha*0.2);
+          var n = props.Node.new({ "dialog-name": "checklist" });
+          if (updateDialog)
+          {
+              fgcommand("dialog-close", n);
+              fgcommand("dialog-show", n);
+          }
+      }
+      setTransparency(0);
+      
+    </open>
+  </nasal>
+
+  <group>
+    <layout>hbox</layout>
+    <empty><stretch>1</stretch></empty>
+
+    <text>
+      <label>Aircraft Checklists</label>
+    </text>
+
+    <empty><stretch>1</stretch></empty>
+
+    <button>
+      <pref-width>16</pref-width>
+      <pref-height>16</pref-height>
+      <legend></legend>
+      <keynum>27</keynum>
+      <border>2</border>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
+
+  <hrule/>
+
+  <group>
+    <layout>hbox</layout>
+
+    <text>
+      <halign>right</halign>
+      <label>Checklist:</label>
+    </text>
+
+    <combo>
+      <name>checklist-combo</name>
+      <property>/sim/gui/dialogs/checklist/selected-checklist</property>
+      <editable>false</editable>
+      <pref-width>200</pref-width>
+      <halign>fill</halign>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>checklist-combo</object-name>
+      </binding>
+    </combo>
+    
+    <empty><stretch>true</stretch></empty>
+    
+    <checkbox>
+        <label>Transparent</label>
+        <pref-width>100</pref-width>
+        <property>/sim/gui/dialogs/checklist/transparent</property>
+        <live>true</live>
+        <halign>right</halign>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+        <binding>
+          <command>property-toggle</command>
+        </binding>
+        <binding>
+            <command>nasal</command>
+            <script>setTransparency(1);</script>
+        </binding>
+    </checkbox>
+  </group>
+  
+  <hrule/>
+  
+  <group>
+    <default-padding>4</default-padding>
+    <halign>fill</halign>
+    <layout>table</layout>
+    <name>checklist-table-group</name>
+  </group>
+</PropertyList>

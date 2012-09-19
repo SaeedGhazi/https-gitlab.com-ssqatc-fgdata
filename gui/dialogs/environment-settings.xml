@@ -17,7 +17,7 @@
     </empty>
 
     <text>
-      <label>Environmental Settings</label>
+      <label>Environment Settings</label>
     </text>
 
     <empty>
@@ -225,23 +225,6 @@
       <stretch>true</stretch>
     </empty>
     <layout>hbox</layout>
-
-    <button>
-      <legend>OK</legend>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-      <binding>
-        <command>dialog-close</command>
-      </binding>
-    </button>
-    
-    <button>
-      <legend>Apply</legend>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-    </button>
 
     <button>
       <legend>Close</legend>

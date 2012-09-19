@@ -173,14 +173,6 @@
 		<name>location</name>
 
 		<item>
-			<name>position-on-ground</name>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>location-on-ground</dialog-name>
-			</binding>
-		</item>
-
-		<item>
 			<name>position-in-air</name>
 			<binding>
 				<command>dialog-show</command>
@@ -717,6 +709,14 @@
 			<binding>
 				<command>nasal</command>
 				<script>gui.showHelpDialog("/sim/help")</script>
+			</binding>
+		</item>
+		
+		<item>
+			<name>aircraft-checklists</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>checklist</dialog-name>
 			</binding>
 		</item>
 

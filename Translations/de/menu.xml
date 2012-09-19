@@ -123,7 +123,9 @@
 	<!-- Help menu -->
 	<help>Hilfe</help>   <!-- English: "Help" -->
 	<help-browser>Hilfe (im Browser)</help-browser>   <!-- English: "Help  (opens in browser)" -->
+	<doc-browser>Erweiterte Dokumentation</doc-browser> <!-- English: "Documentation Browser" -->
 	<aircraft-keys>Flugzeug Hilfe</aircraft-keys>   <!-- English: "Aircraft Help" -->
+	<aircraft-checklists>Flugzeug Checklisten</aircraft-checklists> <!-- English: "Aircraft Checklists" -->
 	<common-keys>Tastenbelegung (Flugzeugsteuerung)</common-keys>   <!-- English: "Common Aircraft Keys" -->
 	<basic-keys>Tastenbelegung (allgemein)</basic-keys>   <!-- English: "Basic Simulator Keys" -->
 	<joystick-info>Joystick Informationen</joystick-info>   <!-- English: "Joystick Information" -->

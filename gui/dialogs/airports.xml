@@ -47,8 +47,8 @@
         setprop("/sim/gui/dialogs/airports/display-tower", "1");
       }
             
-      var airport_id = getprop("/sim/presets/airport-id");
-      if (airport_id == nil) { airport_id = "KSFO"; }
+      # Start with the closest airport
+      var airport_id = airportinfo().id;
       
       var dlg = props.globals.getNode("/sim/gui/dialogs/airports", 1);
       var avail_runways = dlg.getNode("available-runways", 1);
@@ -120,8 +120,9 @@
           var airport_pos = geo.Coord.new();
           airport_pos.set_latlon(info.lat, info.lon);
           
-          var dst = airport_pos.distance_to(geo.aircraft_position()) / 1852.0;
-          var crs = airport_pos.course_to(geo.aircraft_position());
+          var pos = geo.aircraft_position();          
+          var dst = pos.distance_to(airport_pos) / 1852.0;
+          var crs = pos.course_to(airport_pos);
           setprop("/sim/gui/dialogs/airports/selected-airport/distance-nm", dst);
           setprop("/sim/gui/dialogs/airports/selected-airport/course-deg", crs);
           
@@ -496,6 +497,8 @@
               map._node.getNode("ref-lat", 1).setDoubleValue(apt.lat);
               map._node.getNode("ref-lon", 1).setDoubleValue(apt.lon);
               map._node.getNode("hdg", 1).setDoubleValue(0.0);
+              
+              updateZoom();
             }
           }
                 
@@ -509,7 +512,6 @@
             var zoom = ranges[4 - z];
             map._node.getNode("range", 1).setDoubleValue(zoom);
                     
-            settimer(updateZoom, 0.5, 1);
           };
           
           var updateRunwayHighlight = func()
@@ -574,9 +576,9 @@
           append(listeners, setlistener("/sim/gui/dialogs/airports/display-taxiways", updateMap));
           append(listeners, setlistener("/sim/gui/dialogs/airports/display-parking", updateMap));
           append(listeners, setlistener("/sim/gui/dialogs/airports/display-tower", updateMap));
+          append(listeners, setlistener("/sim/gui/dialogs/airports/zoom", updateZoom));
           
           update_info();
-          updateZoom();
           ]]>
           </load>
           <close><![CDATA[

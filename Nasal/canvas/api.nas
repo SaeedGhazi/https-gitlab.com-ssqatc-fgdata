@@ -218,10 +218,13 @@ var Element = {
   {
     me.setBool("visible", visible);
   },
+  getVisible: func me.getBool("visible"),
   # Hide element (Shortcut for setVisible(0))
   hide: func me.setVisible(0),
   # Show element (Shortcut for setVisible(1))
   show: func me.setVisible(1),
+  # Toggle element visibility
+  toggleVisibility: func me.setVisible( !me.getVisible() ),
   #
   setGeoPosition: func(lat, lon)
   {

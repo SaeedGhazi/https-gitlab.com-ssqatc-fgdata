@@ -132,4 +132,12 @@
 	<tutorial-start>Tutorials</tutorial-start>   <!-- English: "Tutorials" -->
 	<menu-about>Über FlightGear</menu-about>   <!-- English: "About" -->
 
+	<!-- Aircraft menu (only frequent/common custom menu entries are supported) -->
+	<select-livery>Lackierung auswählen</select-livery>
+	<show-hide-yokes>Steuerhorn aus-/einblenden</show-hide-yokes>
+	<immatriculation>Luftfahrzeugkennzeichen</immatriculation>
+	<pushback>Flugzeugschlepper</pushback>
+	<autostart>Autostart</autostart>
+	<tiller-steering>Bugradsteuerung</tiller-steering>
+
 </PropertyList>

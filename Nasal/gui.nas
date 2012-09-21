@@ -159,6 +159,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     menuEnable("rendering-buffers", getprop("/sim/rendering/rembrandt/enabled"));
     menuEnable("rembrandt-buffers-choice", getprop("/sim/rendering/rembrandt/enabled"));
     menuEnable("stereoscopic-options", !getprop("/sim/rendering/rembrandt/enabled"));
+    menuEnable("sound-config", getprop("/sim/sound/working"));
 
     # frame-per-second display
     var fps = props.globals.getNode("/sim/rendering/fps-display", 1);

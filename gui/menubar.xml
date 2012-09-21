@@ -64,6 +64,7 @@
 				<command>dialog-show</command>
 				<dialog-name>sound-dialog</dialog-name>
 			</binding>
+			<enabled>false</enabled>
 		</item>
 
 		<item>

@@ -15,6 +15,7 @@
 		<strings>
 			<options>Translations/en/options.xml</options>
 			<menu>Translations/en/menu.xml</menu>
+			<sys>Translations/en/sys.xml</sys>
 		</strings>
 	</locale>
 
@@ -27,6 +28,7 @@
 		<strings>
 			<options>Translations/es/options.xml</options>
 			<menu>Translations/es/menu.xml</menu>
+			<sys>Translations/es/sys.xml</sys>
 		</strings>
 	</locale>
 
@@ -39,6 +41,7 @@
 		<strings>
 			<options>Translations/de/options.xml</options>
 			<menu>Translations/de/menu.xml</menu>
+			<sys>Translations/de/sys.xml</sys>
 		</strings>
 	</locale>
 
@@ -52,6 +55,7 @@
 		<strings>
 			<options>Translations/fr/options.xml</options>
 			<menu>Translations/fr/menu.xml</menu>
+			<sys>Translations/fr/sys.xml</sys>
 		</strings>
 	</locale>
 
@@ -64,6 +68,7 @@
 		<strings>
 			<options>Translations/it/options.xml</options>
 			<menu>Translations/it/menu.xml</menu>
+			<sys>Translations/it/sys.xml</sys>
 		</strings>
 	</locale>
 
@@ -75,6 +80,7 @@
 		<strings>
 			<options>Translations/nl/options.xml</options>
 			<menu>Translations/nl/menu.xml</menu>
+			<sys>Translations/nl/sys.xml</sys>
 		</strings>
 	</locale>
 
@@ -85,6 +91,7 @@
 		<strings>
 			<options>Translations/pl/options.xml</options>
 			<menu>Translations/pl/menu.xml</menu>
+			<sys>Translations/pl/sys.xml</sys>
 		</strings>
 	</locale>
 
@@ -104,6 +111,7 @@
 		<strings>
 			<options>Translations/cs/options.xml</options>
 			<menu>Translations/cs/menu.xml</menu>
+			<sys>Translations/cs/sys.xml</sys>
 		</strings>
 	</locale>
 
@@ -113,6 +121,7 @@
 		<strings>
 			<options>Translations/da/options.xml</options>
 			<menu>Translations/da/menu.xml</menu>
+			<sys>Translations/da/sys.xml</sys>
 		</strings>
 	</locale>
 

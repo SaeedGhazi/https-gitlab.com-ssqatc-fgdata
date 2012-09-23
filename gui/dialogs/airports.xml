@@ -33,6 +33,7 @@
     <open><![CDATA[
       setprop("/sim/gui/dialogs/airports/selected-airport/rwy", "");
       setprop("/sim/gui/dialogs/airports/selected-airport/parkpos", "");
+      setprop("/sim/gui/dialogs/airports/mode", "search");
       setprop("/sim/gui/dialogs/airports/list", "");
       
       if (getprop("/sim/gui/dialogs/airports/display-taxiways") == "") {
@@ -49,6 +50,10 @@
             
       # Start with the closest airport
       var airport_id = airportinfo().id;
+
+      # Retrieve METAR
+      fgcommand("request-metar", var n = props.Node.new({ "path": "/sim/gui/dialogs/airports/selected-airport/metar", 
+                                                         "station": airport_id}));
       
       var dlg = props.globals.getNode("/sim/gui/dialogs/airports", 1);
       var avail_runways = dlg.getNode("available-runways", 1);
@@ -92,6 +97,18 @@
           setprop("/sim/gui/dialogs/airports/selected-airport/elevation-ft", 3.28 * info.elevation);
           setprop("/sim/gui/dialogs/airports/selected-airport/rwy", "");
           setprop("/sim/gui/dialogs/airports/selected-airport/parkpos", "");
+          
+          if (info.has_metar) {
+            # Retrieve an updated METAR, and indicate that we've not got one currently.
+            setprop("/sim/gui/dialogs/airports/selected-airport/metar/station-id", airport_id);
+            setprop("/sim/gui/dialogs/airports/selected-airport/metar/time-to-live", 0);
+            setprop("/sim/gui/dialogs/airports/selected-airport/metar/data", "Retrieving METAR, please wait.");
+          } else {          
+            # This airport has no METAR. Ratehr than cancelling the retrieve-metar command, simply set the TTL
+            # to a very long time so it won't over-ride our message.
+            setprop("/sim/gui/dialogs/airports/selected-airport/metar/data", "No METAR available from this airport");
+            setprop("/sim/gui/dialogs/airports/selected-airport/metar/time-to-live", 9999);
+          }
           
           var longest_runway = 0;
           var runway_string = "";
@@ -159,10 +176,13 @@
             setprop("/sim/presets/parkpos", getprop("/sim/gui/dialogs/airports/selected-airport/parkpos"));
           }         
       }    
-            
-      update_info();
+
       ]]>
     </open>
+    <close>
+          fgcommand("clear-metar", var n = props.Node.new({ "path": "/sim/gui/dialogs/airports/selected-airport/metar", 
+                                                             "station": airport_id}));    
+    </close>
   </nasal>
   
   <group>
@@ -200,6 +220,11 @@
           <legend>Clear</legend>
           <binding>
             <command>property-assign</command>
+            <property>/sim/gui/dialogs/airports/mode</property>
+            <value>search</value>
+          </binding>
+          <binding>
+            <command>property-assign</command>
             <property>/sim/gui/dialogs/airports/list</property>
             <value></value>
           </binding>
@@ -217,6 +242,11 @@
           <legend>Search</legend>
           <default>true</default>
           <binding>
+            <command>property-assign</command>
+            <property>/sim/gui/dialogs/airports/mode</property>
+            <value>search</value>
+          </binding>
+          <binding>
             <command>dialog-apply</command>
             <object-name>input</object-name>
           </binding>
@@ -226,25 +256,91 @@
           </binding>
         </button>
 
-      </group>
+        <button>
+          <legend>Within 100nm</legend>
+          <binding>
+            <command>property-assign</command>
+            <property>/sim/gui/dialogs/airports/mode</property>
+            <value>100nm</value>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>
+              var airports = findAirportsWithinRange(100);
+              
+              var list = dlg.getNode("close-airports", 1);
+              
+              list.removeChildren("value");
+              
+              forindex (var idx; airports) {
+                list.getNode("value["~ idx ~ "]", 1).setValue(airports[idx].name ~ "  (" ~ airports[idx].id ~ ")");
+              }
+            </script>
+          </binding>
+          <binding>
+            <command>dialog-update</command>
+            <object-name>close-airport-list</object-name>
+          </binding>
+        </button>
 
-      <airport-list>
-        <name>airport-list</name>
-        <pref-width>300</pref-width>
-        <pref-height>260</pref-height>
-        <halign>fill</halign>
-        <valign>fill</valign>
-        <stretch>true</stretch>
-        <property>/sim/gui/dialogs/airports/list</property>
-        <binding>
-          <command>dialog-apply</command>
-          <object-name>airport-list</object-name>
-        </binding>
-        <binding>
-          <command>nasal</command>
-          <script>listbox()</script>
-        </binding>
-      </airport-list>
+      </group>
+      
+      <group>
+        <layout>table</layout>
+        <default-padding>0</default-padding>
+        
+        <list>
+          <row>0</row><col>0</col>
+          <visible>
+            <equals>
+              <property>/sim/gui/dialogs/airports/mode</property>
+              <value>100nm</value>
+            </equals>
+          </visible>
+          <name>close-airport-list</name>
+          <pref-width>300</pref-width>
+          <pref-height>260</pref-height>
+          <halign>fill</halign>
+          <valign>fill</valign>
+          <stretch>true</stretch>
+          <property>/sim/gui/dialogs/airports/list</property>
+          <properties>/sim/gui/dialogs/airports/close-airports</properties>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>close-airport-list</object-name>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>listbox()</script>
+          </binding>
+        </list>
+
+        <airport-list>
+          <row>0</row><col>0</col>
+          <visible>
+            <equals>
+              <property>/sim/gui/dialogs/airports/mode</property>
+              <value>search</value>
+            </equals>
+          </visible>
+          <name>airport-list</name>
+          <pref-width>300</pref-width>
+          <pref-height>260</pref-height>
+          <halign>fill</halign>
+          <valign>fill</valign>
+          <stretch>true</stretch>
+          <property>/sim/gui/dialogs/airports/list</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>airport-list</object-name>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>listbox()</script>
+          </binding>
+        </airport-list>
+        
+      </group>
 
       <hrule/>
       
@@ -340,6 +436,31 @@
           <format>%.0f deg</format>
           <property>/sim/gui/dialogs/airports/selected-airport/course-deg</property>
         </text>
+        
+        <text>
+          <row>4</row>
+          <col>0</col>
+          <colspan>3</colspan>
+          <halign>left</halign>
+          <live>true</live>
+          <label>METAR:</label>
+        </text>
+
+        <textbox>
+          <name>metar</name>
+          <row>5</row>
+          <col>0</col>
+          <colspan>4</colspan>
+          <halign>fill</halign>
+          <stretch>true</stretch>
+          <pref-width>300</pref-width>
+          <pref-height>60</pref-height>
+          <slider>0</slider>
+          <editable>false</editable>
+          <wrap>true</wrap>
+          <live>true</live>
+          <property>/sim/gui/dialogs/airports/selected-airport/metar/data</property>
+        </textbox>
 
       </group>
       

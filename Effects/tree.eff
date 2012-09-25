@@ -33,12 +33,116 @@
 		<fogstructure><use>/environment/fog-structure</use></fogstructure>
 		<!-- 	END fog include -->
 	</parameters>
+
+  <technique n="4">
+    <predicate>
+      <and>
+        <property>/sim/rendering/shaders/skydome</property>
+        <property>/sim/rendering/random-vegetation</property>
+        <or>
+          <less-equal>
+            <value type="float">2.0</value>
+            <glversion/>
+          </less-equal>
+          <and>
+            <extension-supported>GL_ARB_shader_objects</extension-supported>
+            <extension-supported>GL_ARB_shading_language_100</extension-supported>
+            <extension-supported>GL_ARB_vertex_shader</extension-supported>
+            <extension-supported>GL_ARB_fragment_shader</extension-supported>
+            <extension-supported>GL_ARB_multisample</extension-supported>
+          </and>
+        </or>
+      </and>
+    </predicate>
+   
+    <pass>
+      <lighting>true</lighting>
+			<material>
+				<ambient type="vec4d">1.0 1.0 1.0 1.0</ambient>
+				<diffuse type="vec4d">1.0 1.0 1.0 1.0</diffuse>
+				<color-mode>off</color-mode>
+			</material>
+			<texture-unit>
+				<unit>0</unit>
+				<type>2d</type>
+				<image>
+					<use>texture[0]/image</use>
+				</image>
+				<wrap-s>clamp</wrap-s>
+				<wrap-t>clamp</wrap-t>
+			</texture-unit>
+			<alpha-to-coverage>true</alpha-to-coverage>
+      <program>
+        <vertex-shader>Shaders/tree-haze.vert</vertex-shader>
+        <fragment-shader>Shaders/tree-haze.frag</fragment-shader>
+      </program>
+      <uniform>
+        <name>visibility</name>
+        <type>float</type>
+        <value><use>visibility</use></value>
+      </uniform>
+      <uniform>
+        <name>avisibility</name>
+        <type>float</type>
+        <value><use>avisibility</use></value>
+      </uniform>
+       <uniform>
+        <name>hazeLayerAltitude</name>
+        <type>float</type>
+        <value><use>lthickness</use></value>
+      </uniform>
+      <uniform>
+        <name>scattering</name>
+        <type>float</type>
+        <value><use>scattering</use></value>
+      </uniform>
+      <uniform>
+        <name>ground_scattering</name>
+        <type>float</type>
+        <value><use>ground_scattering</use></value>
+      </uniform>
+      <uniform>
+        <name>terminator</name>
+        <type>float</type>
+        <value><use>terminator</use></value>
+      </uniform>
+      <uniform>
+        <name>terrain_alt</name>
+        <type>float</type>
+        <value><use>terrain_alt</use></value>
+      </uniform>
+      <uniform>
+        <name>overcast</name>
+        <type>float</type>
+        <value><use>overcast</use></value>
+      </uniform>
+     <uniform>
+        <name>eye_alt</name>
+        <type>float</type>
+        <value><use>eye_alt</use></value>
+      </uniform>
+      <uniform>
+        <name>texture</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>colorMode</name>
+        <type>int</type>
+        <value>2</value> <!-- AMBIENT_AND_DIFFUSE -->
+      </uniform>
+      <!--<depth>
+        <function>lequal</function>
+        <write-mask type="bool">false</write-mask>
+      </depth>-->
+    </pass>
+  </technique>
 	
   <technique n="5">
     <predicate>
       <and>
         <property>/sim/rendering/shaders/skydome</property>
-	<property>/sim/rendering/random-vegetation</property>
+        <property>/sim/rendering/random-vegetation</property>
         <or>
           <less-equal>
             <value type="float">2.0</value>
@@ -138,11 +242,9 @@
         <write-mask type="bool">false</write-mask>
       </depth>-->
     </pass>
-
-
   </technique>
-	
-	<technique n="9">
+  	
+	<technique n="8">
 		<predicate>
 			<and>
         <property>/sim/rendering/rembrandt/enabled</property>
@@ -182,6 +284,95 @@
 			</uniform>
 		</pass>
 	</technique>
+	
+	<technique n="9">
+		<predicate>
+			<and>
+				<property>/sim/rendering/random-vegetation</property>
+        <extension-supported>GL_ARB_multisample</extension-supported>
+        <extension-supported>GL_ARB_vertex_shader</extension-supported>
+        <extension-supported>GL_ARB_fragment_shader</extension-supported>
+				<less-equal>
+					<value type="float">1.0</value>
+					<shader-language/>
+				</less-equal>
+			</and>
+		</predicate>
+		<pass n="0">
+			<lighting>true</lighting>
+			<material>
+				<ambient type="vec4d">1.0 1.0 1.0 1.0</ambient>
+				<diffuse type="vec4d">1.0 1.0 1.0 1.0</diffuse>
+				<color-mode>off</color-mode>
+			</material>
+			<alpha-to-coverage>true</alpha-to-coverage>
+			<texture-unit>
+				<unit>0</unit>
+				<type>2d</type>
+				<image>
+					<use>texture[0]/image</use>
+				</image>
+				<wrap-s>clamp</wrap-s>
+				<wrap-t>clamp</wrap-t>
+			</texture-unit>
+			<program>
+				<!-- 				<vertex-shader>Shaders/include_fog.vert</vertex-shader> -->
+				<vertex-shader>Shaders/tree.vert</vertex-shader>
+				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
+				<fragment-shader n="1">Shaders/tree.frag</fragment-shader>
+			</program>
+			<uniform>
+				<name>baseTexture</name>
+				<type>sampler-2d</type>
+				<value type="int">0</value>
+			</uniform>
+			<!-- 	    BEGIN fog include -->
+			<uniform>
+				<name>visibility</name>
+				<type>float</type>
+				<value>
+					<use>visibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>avisibility</name>
+				<type>float</type>
+				<value>
+					<use>avisibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>hazeLayerAltitude</name>
+				<type>float</type>
+				<value>
+					<use>lthickness</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>scattering</name>
+				<type>float</type>
+				<value>
+					<use>scattering</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>terminator</name>
+				<type>float</type>
+				<value>
+					<use>terminator</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>fogType</name>
+				<type>int</type>
+				<value>
+					<use>fogtype</use>
+				</value>
+			</uniform>
+			<!-- 			END fog include -->
+		</pass>
+	</technique>
+	
 	<technique n="10">
 		<predicate>
 			<and>

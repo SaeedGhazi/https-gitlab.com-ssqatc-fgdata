@@ -266,15 +266,18 @@ var Element = {
   getBoundingBox: func()
   {
     var bb = me._node.getNode("bounding-box");
-    var min_x = bb.getNode("min-x").getValue();
-    
-    if( min_x != nil )
-      return [ min_x,
-                bb.getNode("min-y").getValue(),
-                bb.getNode("max-x").getValue(),
-                bb.getNode("max-y").getValue() ];
-    else
-      return [0, 0, 0, 0];
+    if( bb != nil )
+    {
+      var min_x = bb.getNode("min-x").getValue();
+
+      if( min_x != nil )
+        return [ min_x,
+                  bb.getNode("min-y").getValue(),
+                  bb.getNode("max-x").getValue(),
+                  bb.getNode("max-y").getValue() ];
+    }
+
+    return [0, 0, 0, 0];
   },
   # Set transformation center (currently only used for rotation)
   setCenter: func()

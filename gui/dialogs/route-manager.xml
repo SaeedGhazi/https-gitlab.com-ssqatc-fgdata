@@ -38,7 +38,9 @@ command interface /autopilot/route-manager/input:
             }
 
             var clear = func {
-                #cmd.setValue("@clear");
+                # deactive first, see http://https://code.google.com/p/flightgear-bugs/issues/detail?id=885
+                fgcommand("activate-flightplan", props.Node.new({"activate": 0}));
+                
                 flightplan().cleanPlan();
                 selection.setIntValue(-1);
             }
@@ -60,13 +62,10 @@ command interface /autopilot/route-manager/input:
             }
 
             var remove = func {
-                #cmd.setValue("@delete" ~ sel_index());
                 flightplan().deleteWP(sel_index());
             }
 
-            var route = func {
-                #cmd.setValue("@route" ~ sel_index());
-            
+            var route = func {            
                 var fp = flightplan();
                 var from = fp.getWP(sel_index() - 1);
                 var to = fp.getWP(sel_index());
@@ -81,7 +80,6 @@ command interface /autopilot/route-manager/input:
             }
 
             var jump_to = func {
-                #cmd.setValue("@jump" ~ sel_index());
                 flightplan().current = sel_index();
             }
 
@@ -101,7 +99,7 @@ command interface /autopilot/route-manager/input:
             var save_selector = gui.FileSelector.new(save_route, "Save flight-plan", "Save");
 
             var activate_fp = func {
-                cmd.setValue("@activate");
+                fgcommand("activate-flightplan", props.Node.new({"activate": 1}));
             }
 
             var departureRunways = dlg.getNode("departure-runways", 1);

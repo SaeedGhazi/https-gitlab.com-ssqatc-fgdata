@@ -146,6 +146,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
     # enable/disable menu entries
     menuEnable("fuel-and-payload", fdm == "yasim" or fdm == "jsb");
+    menuEnable("aircraft-checklists", props.globals.getNode("/sim/checklists") != nil);
     var isAutopilotMenuEnabled = func {
       foreach( var apdp; autopilotDisableProps ) {
         if( props.globals.getNode( apdp ) != nil )
@@ -158,6 +159,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     menuEnable("rendering-buffers", getprop("/sim/rendering/rembrandt/enabled"));
     menuEnable("rembrandt-buffers-choice", getprop("/sim/rendering/rembrandt/enabled"));
     menuEnable("stereoscopic-options", !getprop("/sim/rendering/rembrandt/enabled"));
+    menuEnable("sound-config", getprop("/sim/sound/working"));
 
     # frame-per-second display
     var fps = props.globals.getNode("/sim/rendering/fps-display", 1);

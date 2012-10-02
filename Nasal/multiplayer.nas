@@ -412,9 +412,8 @@ var model = {
         me.callsign = {};
 
         foreach (var n; props.globals.getNode("ai/models", 1).getChildren("multiplayer")) {
-            if (!n.getNode("valid").getValue())
+            if ((var valid = n.getNode("valid")) == nil or (!valid.getValue()))
                 continue;
-
             if ((var callsign = n.getNode("callsign")) == nil or !(callsign = callsign.getValue()))
                 continue;
             if (!(callsign = string.trim(callsign)))

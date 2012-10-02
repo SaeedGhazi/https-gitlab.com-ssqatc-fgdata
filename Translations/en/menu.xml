@@ -27,9 +27,8 @@
 
 	<!-- Location menu -->
 	<location>Location</location>
-	<position-on-ground>Position Aircraft On Ground</position-on-ground>
 	<position-in-air>Position Aircraft In Air</position-in-air>
-	<goto-airport>Select Airport From List</goto-airport>
+	<goto-airport>Select Airport</goto-airport>
 	<random-attitude>Random Attitude</random-attitude>
 	<tower-position>Tower Position</tower-position>
 
@@ -109,12 +108,22 @@
 	<!-- Help menu -->
 	<help>Help</help>
 	<help-browser>Help  (opens in browser)</help-browser>
+	<doc-browser>Documentation Browser</doc-browser>
 	<aircraft-keys>Aircraft Help</aircraft-keys>
+	<aircraft-checklists>Aircraft Checklists</aircraft-checklists>
 	<common-keys>Common Aircraft Keys</common-keys>
 	<basic-keys>Basic Simulator Keys</basic-keys>
 	<joystick-config>Joystick Configuration</joystick-config>
 	<joystick-info>Joystick Information</joystick-info>
 	<tutorial-start>Tutorials</tutorial-start>
 	<menu-about>About</menu-about>
+
+	<!-- Aircraft menu (only frequent/common custom menu entries are supported) -->
+	<select-livery>Select livery</select-livery>
+	<show-hide-yokes>Show/hide yokes</show-hide-yokes>
+	<immatriculation>Immatriculation</immatriculation>
+	<pushback>Pushback</pushback>
+	<autostart>Autostart</autostart>
+	<tiller-steering>Tiller Steering</tiller-steering>
 
 </PropertyList>

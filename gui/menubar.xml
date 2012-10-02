@@ -64,6 +64,7 @@
 				<command>dialog-show</command>
 				<dialog-name>sound-dialog</dialog-name>
 			</binding>
+			<enabled>false</enabled>
 		</item>
 
 		<item>
@@ -171,14 +172,6 @@
 
 	<menu>
 		<name>location</name>
-
-		<item>
-			<name>position-on-ground</name>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>location-on-ground</dialog-name>
-			</binding>
-		</item>
 
 		<item>
 			<name>position-in-air</name>
@@ -712,11 +705,27 @@
 		</item>
 
 		<item>
+			<name>doc-browser</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>doc-browser</dialog-name>
+			</binding>
+		</item>
+
+		<item>
 			<key>?</key>
 			<name>aircraft-keys</name>
 			<binding>
 				<command>nasal</command>
 				<script>gui.showHelpDialog("/sim/help")</script>
+			</binding>
+		</item>
+		
+		<item>
+			<name>aircraft-checklists</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>checklist</dialog-name>
 			</binding>
 		</item>
 

@@ -123,11 +123,21 @@
 	<!-- Help menu -->
 	<help>Hilfe</help>   <!-- English: "Help" -->
 	<help-browser>Hilfe (im Browser)</help-browser>   <!-- English: "Help  (opens in browser)" -->
+	<doc-browser>Erweiterte Dokumentation</doc-browser> <!-- English: "Documentation Browser" -->
 	<aircraft-keys>Flugzeug Hilfe</aircraft-keys>   <!-- English: "Aircraft Help" -->
+	<aircraft-checklists>Flugzeug Checklisten</aircraft-checklists> <!-- English: "Aircraft Checklists" -->
 	<common-keys>Tastenbelegung (Flugzeugsteuerung)</common-keys>   <!-- English: "Common Aircraft Keys" -->
 	<basic-keys>Tastenbelegung (allgemein)</basic-keys>   <!-- English: "Basic Simulator Keys" -->
 	<joystick-info>Joystick Informationen</joystick-info>   <!-- English: "Joystick Information" -->
 	<tutorial-start>Tutorials</tutorial-start>   <!-- English: "Tutorials" -->
 	<menu-about>Über FlightGear</menu-about>   <!-- English: "About" -->
+
+	<!-- Aircraft menu (only frequent/common custom menu entries are supported) -->
+	<select-livery>Lackierung auswählen</select-livery>
+	<show-hide-yokes>Steuerhorn aus-/einblenden</show-hide-yokes>
+	<immatriculation>Luftfahrzeugkennzeichen</immatriculation>
+	<pushback>Flugzeugschlepper</pushback>
+	<autostart>Autostart</autostart>
+	<tiller-steering>Bugradsteuerung</tiller-steering>
 
 </PropertyList>

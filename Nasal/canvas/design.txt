@@ -1,0 +1,23 @@
+Nothing set in stone yet, we'll document things once the API becomes more stable and once it has been used in several dialogs and instruments
+
+At the moment, this implements the notion of a "LayeredMap", a LayeredMap is a conventional Canvas Map which has support for easily managing "Layers",
+which are internally mapped to Canvas Groups. Each Group's "visible" property is managed by the LayeredMap, so that layers can be easily
+toggled on/off, i.e. via checkboxes.
+
+Basically, the idea is this, we'll have a MVC (Model/View/Controller) setup, where:
+	- the Model is mapped to the drawable's meta information (i.e. position)
+	- the View is mapped to a conventional canvas group
+	- the Controller is mapped to a bunch of property/timer callbacks to control the Model/View
+
+
+
+
+Model = PositionedSource
+View =  Canvas
+Controller = control properties (zoom, range etc)
+
+LayerElement = callback to create a canvas group
+Layer = canvas.Group
+
+Map -> LayeredMap -> GenericMap -> AirportMap
+

@@ -179,6 +179,7 @@
   <!-- TODO: handle variable winds -->
   <filter include="layer-heading-offset.xml"/>
   <filter include="layer-heading-offset.xml">
+    <name>MetarController:layer:wind-from-heading-deg_0</name>
     <enable>
       <condition>
         <property>/environment/metar/valid</property>
@@ -192,6 +193,7 @@
     <output>/environment/config/aloft/entry[0]/wind-from-heading-deg</output>
   </filter>
   <filter include="layer-heading-offset.xml">
+    <name>MetarController:layer:wind-from-heading-deg_1</name>
     <enable>
       <condition>
         <property>/environment/metar/valid</property>
@@ -205,6 +207,7 @@
     <output>/environment/config/aloft/entry[1]/wind-from-heading-deg</output>
   </filter>
   <filter include="layer-heading-offset.xml">
+    <name>MetarController:layer:wind-from-heading-deg_2</name>
     <enable>
       <condition>
         <property>/environment/metar/valid</property>
@@ -218,6 +221,7 @@
     <output>/environment/config/aloft/entry[2]/wind-from-heading-deg</output>
   </filter>
   <filter include="layer-heading-offset.xml">
+    <name>MetarController:layer:wind-from-heading-deg_3</name>
     <enable>
       <condition>
         <property>/environment/metar/valid</property>
@@ -231,6 +235,7 @@
     <output>/environment/config/aloft/entry[3]/wind-from-heading-deg</output>
   </filter>
   <filter include="layer-heading-offset.xml">
+    <name>MetarController:layer:wind-from-heading-deg_4</name>
     <enable>
       <condition>
         <property>/environment/metar/valid</property>
@@ -246,6 +251,7 @@
 
   <filter include="layer-speed-change.xml"/>
   <filter include="layer-speed-change.xml">
+    <name>MetarController:layer:wind-speed-kt_0</name>
     <enable>
       <condition>
         <property>/environment/metar/valid</property>
@@ -259,6 +265,7 @@
     <output>/environment/config/aloft/entry[0]/wind-speed-kt</output>
   </filter>
   <filter include="layer-speed-change.xml">
+    <name>MetarController:layer:wind-speed-kt_1</name>
     <enable>
       <condition>
         <property>/environment/metar/valid</property>
@@ -272,6 +279,7 @@
     <output>/environment/config/aloft/entry[1]/wind-speed-kt</output>
   </filter>
   <filter include="layer-speed-change.xml">
+    <name>MetarController:layer:wind-speed-kt_2</name>
     <enable>
       <condition>
         <property>/environment/metar/valid</property>
@@ -285,6 +293,7 @@
     <output>/environment/config/aloft/entry[2]/wind-speed-kt</output>
   </filter>
   <filter include="layer-speed-change.xml">
+    <name>MetarController:layer:wind-speed-kt_3</name>
     <enable>
       <condition>
         <property>/environment/metar/valid</property>
@@ -298,6 +307,7 @@
     <output>/environment/config/aloft/entry[3]/wind-speed-kt</output>
   </filter>
   <filter include="layer-speed-change.xml">
+    <name>MetarController:layer:wind-speed-kt_4</name>
     <enable>
       <condition>
         <property>/environment/metar/valid</property>
@@ -314,24 +324,28 @@
   <!-- Clouds -->
   <filter include="clouds-altitude-interpolate.xml"/>
   <filter include="clouds-altitude-interpolate.xml">
+    <name>MetarController:clouds:altitude_interpolate_0</name>
     <params>
       <from>/environment/metar/clouds/layer[1]/elevation-ft</from>
       <to>/environment/clouds/layer[1]/elevation-ft</to>
     </params>
   </filter>
   <filter include="clouds-altitude-interpolate.xml">
+    <name>MetarController:clouds:altitude_interpolate_1</name>
     <params>
       <from>/environment/metar/clouds/layer[2]/elevation-ft</from>
       <to>/environment/clouds/layer[2]/elevation-ft</to>
     </params>
   </filter>
   <filter include="clouds-altitude-interpolate.xml">
+    <name>MetarController:clouds:altitude_interpolate_2</name>
     <params>
       <from>/environment/metar/clouds/layer[3]/elevation-ft</from>
       <to>/environment/clouds/layer[3]/elevation-ft</to>
     </params>
   </filter>
   <filter include="clouds-altitude-interpolate.xml">
+    <name>MetarController:clouds:altitude_interpolate_3</name>
     <params>
       <from>/environment/metar/clouds/layer[4]/elevation-ft</from>
       <to>/environment/clouds/layer[4]/elevation-ft</to>
@@ -340,42 +354,50 @@
 
   <filter include="clouds-thickness.xml"/>
   <filter include="clouds-thickness.xml">
+    <name>MetarController:clouds:thickness_0</name>
     <input>/environment/metar/clouds/layer[1]/thickness-ft</input>
     <output>/environment/clouds/layer[1]/thickness-ft</output>
   </filter>
   <filter include="clouds-thickness.xml">
+    <name>MetarController:clouds:thickness_1</name>
     <input>/environment/metar/clouds/layer[2]/thickness-ft</input>
     <output>/environment/clouds/layer[2]/thickness-ft</output>
   </filter>
   <filter include="clouds-thickness.xml">
+    <name>MetarController:clouds:thickness_2</name>
     <input>/environment/metar/clouds/layer[3]/thickness-ft</input>
     <output>/environment/clouds/layer[3]/thickness-ft</output>
   </filter>
   <filter include="clouds-thickness.xml">
+    <name>MetarController:clouds:thickness_3</name>
     <input>/environment/metar/clouds/layer[4]/thickness-ft</input>
     <output>/environment/clouds/layer[4]/thickness-ft</output>
   </filter>
 
   <filter include="clouds-coverage.xml"/>
   <filter include="clouds-coverage.xml">
+    <name>MetarController:clouds:coverage_0</name>
     <params>
       <from>/environment/metar/clouds/layer[1]/coverage-type</from>
       <to>environment/clouds/layer[1]/coverage-type</to>
     </params>
   </filter>
   <filter include="clouds-coverage.xml">
+    <name>MetarController:clouds:coverage_1</name>
     <params>
       <from>/environment/metar/clouds/layer[2]/coverage-type</from>
       <to>environment/clouds/layer[2]/coverage-type</to>
     </params>
   </filter>
   <filter include="clouds-coverage.xml">
+    <name>MetarController:clouds:coverage_2</name>
     <params>
       <from>/environment/metar/clouds/layer[3]/coverage-type</from>
       <to>environment/clouds/layer[3]/coverage-type</to>
     </params>
   </filter>
   <filter include="clouds-coverage.xml">
+    <name>MetarController:clouds:coverage_3</name>
     <params>
       <from>/environment/metar/clouds/layer[4]/coverage-type</from>
       <to>environment/clouds/layer[4]/coverage-type</to>

@@ -8,8 +8,13 @@ The model-combined effect uses the ubershader to provide any or all of diffuse, 
 
 To use this on your aircraft model, you are advised to create a local effect that has the following lines:
 
+1. for automatic Rembrandt support on opaque objects use this:
 	<name>my-aircraft-effect</name>
-	<inherits-from>Effects/model-combined</inherits-from>
+	<inherits-from>Effects/model-combined-deferred</inherits-from>
+
+2. for automatic Rembrandt support on transparent objects (glass) use this:
+	<name>my-aircraft-glass-effect</name>
+	<inherits-from>Effects/model-combined-transparent</inherits-from>
 
 The only modeller-adjustable settings are those found in the parameters section and listed here. There are other entries in the parameters section, but those are for internal use only, please don't mess with them.
 

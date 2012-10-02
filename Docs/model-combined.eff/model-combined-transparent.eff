@@ -7,8 +7,8 @@ Remove unnedeed settings.
 WARNING: do not remove the Transparency include at the end-->
 
 <PropertyList>
-		<name><!--my/effect/name--></name>
-    <inherits-from>Effects/model-combined</inherits-from>
+	<name><!--my/effect/name--></name>
+    <inherits-from>Effects/model-combined-transparent</inherits-from>
 		<parameters>
 	<!-- Normal Map -->
 			<normalmap-enabled type="int"> 0 </normalmap-enabled>
@@ -83,5 +83,49 @@ WARNING: do not remove the Transparency include at the end-->
 ### END TRANSPARENCY INCLUDE ###
 ############################# -->
 	</parameters>
-<!-- 	Add normalmap include here if needed -->
+<!--WARNING: Do not edit above this line -->
+
+<!-- 	Add normalmap include here, as follows, if needed.
+	WARNING: do not enable on untextured objects
+-->
+<!-- ####################
+### NORMALMAP INCLUDE ###
+######################### -->
+		<generate>
+			<tangent type="int">6</tangent>
+			<binormal type="int">7</binormal>
+		</generate>
+
+		<technique n="8">
+			<pass>
+				<program>
+					<attribute>
+						<name>tangent</name>
+						<index>6</index>
+					</attribute>
+					<attribute>
+						<name>binormal</name>
+						<index>7</index>
+					</attribute>
+				</program>
+			</pass>
+		</technique>
+
+		<technique n="9">
+		  <pass>
+			<program>
+			  <attribute>
+				<name>tangent</name>
+				<index>6</index>
+			  </attribute>
+			  <attribute>
+				<name>binormal</name>
+				<index>7</index>
+			  </attribute>
+			</program>
+		  </pass>
+		</technique>
+<!-- ########################
+### END NORMALMAP INCLUDE ###
+############################# -->
 </PropertyList>

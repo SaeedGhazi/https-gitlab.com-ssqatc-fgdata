@@ -143,6 +143,8 @@ alpha-test - children: active, comparison, reference
 		 Valid values for comparision:
 			 never, less, equal, lequal, greater, notequal, gequal,
 			 always 
+			 
+alpha-to-coverage - true, false
 
 blend - children: active, source, destination, source-rgb,
 		 source-alpha, destination-rgb, destination-alpha

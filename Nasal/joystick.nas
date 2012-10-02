@@ -611,7 +611,7 @@ var readConfig = func(dialog_root="/sim/gui/dialogs/joystick-config") {
 
     if (a != nil) {         
       # Read properties from bindings
-      props.copy(a, p.getNode("original_binding", 1));
+      props.copy(a, btn.getNode("original_binding", 1));
       var binding = nil;
       foreach (var b; joystick.buttonBindings) {
         if ((binding == nil) and (a != nil) and b.match(a)) {

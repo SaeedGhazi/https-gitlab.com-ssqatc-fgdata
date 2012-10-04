@@ -22,7 +22,9 @@ uniform float terrain_alt;
 uniform float hazeLayerAltitude;
 uniform float overcast;
 uniform float eye_alt;
+uniform float dust_cover_factor;
 
+uniform int quality_level;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -88,6 +90,13 @@ void main()
     vec4 fragColor = gl_Color * texture2D(texture, gl_TexCoord[0].st);
 
 
+if (quality_level > 3)
+	{
+	// mix dust
+    	vec4 dust_color = vec4 (0.76, 0.71, 0.56, fragColor.a);
+
+    	fragColor = mix(fragColor, dust_color, clamp(0.6 * dust_cover_factor ,0.0, 1.0) );
+	}
 
 // here comes the terrain haze model
 

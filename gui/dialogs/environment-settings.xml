@@ -216,6 +216,42 @@
       <col>3</col>
     </text>
     
+
+    <text>
+      <label>Vegetation</label>
+      <halign>left</halign>
+      <row>5</row>
+      <col>0</col>
+    </text>
+    
+    <text>
+      <label>none</label>
+      <halign>right</halign>
+      <row>5</row>
+      <col>1</col>
+    </text>
+        
+    <slider>
+      <name>lichen-level</name>
+      <row>5</row>
+      <col>2</col>
+      <min>0.0</min>
+      <max>0.7</max>
+      <live>true</live>
+      <property>/environment/surface/lichen-cover-factor</property>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>lichen-level</object-name>
+      </binding>
+    </slider>
+
+    <text>
+      <label>mossy</label>
+      <halign>left</halign>
+      <row>5</row>
+      <col>3</col>
+    </text>
+
   </group>
   
   <hrule/>

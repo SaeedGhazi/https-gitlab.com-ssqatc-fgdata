@@ -153,7 +153,7 @@ Started September 2000 by David Megginson, david@megginson.com
 			<mie type="float" userarchive="y">0.003</mie>
 			<rayleigh type="float" userarchive="y">0.0003</rayleigh>
 			<dome-density type="float" userarchive="y">0.5</dome-density>
-			<!-- multithreading-mode>AutomaticSelection</multithreading-mode -->
+			<multithreading-mode>AutomaticSelection</multithreading-mode>
 			<!--
      Uncomment the above element to select OSG multi-threading mode.
      This may improve performance on multi-core, multi-CPU
@@ -346,6 +346,7 @@ Started September 2000 by David Megginson, david@megginson.com
 		<speed-up type="double">1.0</speed-up>
 		<current-view>
 			<field-of-view type="double">55.0</field-of-view>
+			<field-of-view-compensation type="bool" userarchive="y">false</field-of-view-compensation>
 			<aspect-ratio-multiplier type="double">1.0</aspect-ratio-multiplier>
 			<dynamic-view type="bool" userarchive="y">false</dynamic-view>
 		</current-view>

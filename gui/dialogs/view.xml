@@ -88,6 +88,25 @@
 	</group>
 
 	<hrule/>
+	<group>
+		<layout>hbox</layout>
+		<checkbox>
+			<property>sim/current-view/field-of-view-compensation</property>
+			<live>false</live>
+					<binding>
+						<command>nasal</command>
+						<script>view.screenWidthCompens(1)</script>
+					</binding>
+		</checkbox>
+		<text>
+			<label>Compensate Field of View for wider screens</label>
+		</text>
+	</group>
+
+
+
+
+	<hrule/>
 
 	<button>
 		<legend>Close</legend>

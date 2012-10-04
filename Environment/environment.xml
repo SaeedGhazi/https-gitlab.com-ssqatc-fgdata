@@ -37,12 +37,66 @@
       </local-weather>
     </scenario>
     <scenario>
+      <name type="string">Core high pressure region</name>
+      <metar type="string">XXXX 012345Z 15003KT 19SM FEW072 FEW350 25/07 Q1028 NOSIG</metar>
+      <description type="string">The center of a high pressure region, characterized by descending air and hence only weak cloud development with high visibility.</description>
+      <local-weather>
+        <tile-type>High-pressure-core</tile-type>
+        <tile-management>realistic weather</tile-management>        
+      </local-weather>
+    </scenario>
+    <scenario>
+      <name type="string">High pressure region</name>
+      <metar type="string">XXXX 012345Z 15003KT 12SM SCT048 FEW300 20/08 Q1022 NOSIG</metar>
+      <description type="string">A high pressure region, characterized my moderate to strong Cumulus development in the afternoon and fairly good visibility conditions.</description>
+      <local-weather>
+        <tile-type>High-pressure</tile-type>
+        <tile-management>realistic weather</tile-management>        
+      </local-weather>
+    </scenario>
+    <scenario>
+      <name type="string">Border of a high pressure region</name>
+      <metar type="string">XXXX 012345Z 15003KT 10SM SCT036 SCT150 17/08 Q1016 NOSIG</metar>
+      <description type="string">The border of a high pressure region, in which the airmass becomes unstable and various convective and stratiform clouds may appear.</description>
+      <local-weather>
+        <tile-type>High-pressure-border</tile-type>
+        <tile-management>realistic weather</tile-management>        
+      </local-weather>
+    </scenario>
+    <scenario>
+      <name type="string">Border of a low pressure region</name>
+      <metar type="string">XXXX 012345Z 15003KT 9SM BKN028 SCT090 FEW160 15/08 Q1010 NOSIG</metar>
+      <description type="string">The border of a low pressure region, in which the airmass is unstable and convective clouds start to form layers and merge into stratiform clouds.</description>
+      <local-weather>
+        <tile-type>Low-pressure-border</tile-type>
+        <tile-management>realistic weather</tile-management>        
+      </local-weather>
+    </scenario>
+    <scenario>
+      <name type="string">Low pressure region</name>
+      <metar type="string">XXXX 012345Z 15003KT 6SM SHRA BKN024 BKN053 FEW090 13/07 Q1004 NOSIG</metar>
+      <description type="string">A low pressure region, characterized by rising air, widespread formation of stratiform clouds and beginning rain.</description>
+      <local-weather>
+        <tile-type>Low-pressure</tile-type>
+        <tile-management>realistic weather</tile-management>        
+      </local-weather>
+    </scenario>
+    <scenario>
+      <name type="string">Core low pressure region</name>
+      <metar type="string">XXXX 012345Z 15003KT 4SM RA OVC020 SCT050 07/02 Q0998 NOSIG</metar>
+      <description type="string">The core of a low pressure region, characterized by overcast clouds, bad visibility on the ground and significant rainfall.</description>
+      <local-weather>
+        <tile-type>Low-pressure-core</tile-type>
+        <tile-management>realistic weather</tile-management>        
+      </local-weather>
+    </scenario>
+    <scenario>
       <name type="string">Fair weather</name>
       <metar type="string">XXXX 012345Z 15003KT 12SM SCT041 FEW200 20/08 Q1015 NOSIG</metar>
       <description type="string">A lovely day for trip to your favorite 100$ hamburger airfield</description>
       <local-weather>
         <tile-type>High-pressure-core</tile-type>
-        <tile-management>realistic-weather</tile-management>        
+        <tile-management>realistic weather</tile-management>        
       </local-weather>
     </scenario>
     <scenario>
@@ -55,7 +109,7 @@
       </description>
       <local-weather>
         <tile-type>Thunderstorms</tile-type>
-        <tile-management>realistic-weather</tile-management>        
+        <tile-management>repeat tile</tile-management>        
       </local-weather>
     </scenario>
     <scenario>
@@ -362,6 +416,7 @@
   <surface>
     <scattering type="double" userarchive="n">0.7</scattering>
     <dust-cover-factor type="double" userarchive="y">0.0</dust-cover-factor>
+    <lichen-cover-factor type="double" userarchive="y">0.0</lichen-cover-factor>
     <wetness type="double" userarchive="y">0.0</wetness>
   </surface>
 </PropertyList>

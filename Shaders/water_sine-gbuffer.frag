@@ -46,7 +46,7 @@ varying vec4    waterTex2 ; //moving texcoords
 varying vec3    viewerdir ;
 varying vec3    lightdir ;
 varying vec3    normal ;
-varying vec3    Vnormal ;
+varying vec3    rawNormal ;
 varying vec3    VTangent ;
 varying vec3    VBinormal ;
 
@@ -147,8 +147,8 @@ void main(void)
     //vec3 H = normalize(L + E);
 
     vec3 Normal = normalize(normal) ;
-    vec3 vNormal = normalize(Vnormal) ;
-    const float water_shininess = 128.0 ;
+    vec3 vNormal = normalize(rawNormal) ;
+    const float water_shininess = 240.0 ;
 
 //  float range = gl_ProjectionMatrix[3].z/(gl_FragCoord.z * -2.0 + 1.0 - gl_ProjectionMatrix[2].z);
 
@@ -334,7 +334,8 @@ void main(void)
             N0.g += ddySum;
             vec3 N2 = normalize(mix(N0, N1, mixFactor) * waveRoughness);
             Normal = normalize(N2.x * VTangent + N2.y * VBinormal + N2.z * Normal);
-            vNormal = normalize(mix(vNormal + N0, vNormal + N1, mixFactor) * waveRoughness);
+            //vNormal = normalize(mix(vNormal + N0, vNormal + N1, mixFactor) * waveRoughness);
+			vNormal = normalize(N2.x * vec3(1.0, 0.0, 0.0) + N2.y * vec3(0.0, 1., 0.0) + N2.z * vNormal);
             if (normalmap_dds > 0){ //dds fix
                 Normal = -Normal;
                 vNormal = -vNormal;
@@ -379,5 +380,5 @@ void main(void)
                           vec3( 0.3, 0.59, 0.11 )
                         );
     float specular = smoothstep(0.0, 3.5, cover);
-    encode_gbuffer(Normal, finalColor.rgb, 254, specular, water_shininess, emission, gl_FragCoord.z);
+	encode_gbuffer(Normal, finalColor.rgb, 254, specular, water_shininess, emission, gl_FragCoord.z);
     }

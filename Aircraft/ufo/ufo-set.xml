@@ -109,6 +109,10 @@
 				<desc>move selected object(s) to new place</desc>
 			</key>
 			<key>
+				<name>Ctrl + Alt + mouse click</name>
+				<desc>Print lat/lon/alt and landclass of mouse click position</desc>
+			</key>
+			<key>
 				<name>g (gear) + click</name>
 				<desc>teleport to click position, looking at active object</desc>
 			</key>

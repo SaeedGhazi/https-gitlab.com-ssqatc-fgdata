@@ -193,6 +193,16 @@
 
 			-->
 
+			<checkbox>
+				<halign>left</halign>
+				<label>Compensate field of view for wider screens</label>
+				<property>sim/current-view/field-of-view-compensation</property>
+				<binding>
+					<command>nasal</command>
+					<script>view.screenWidthCompens(1)</script>
+				</binding>
+			</checkbox>
+
 			<group>
 				<layout>hbox</layout>
 				<text>

@@ -60,5 +60,10 @@ var PropertyElement = {
       return node.getValue();
     else
       return default;
-  }
+  },
+  getBool: func(key)
+  {
+    me._node.getNode(key, 1).getBoolValue();
+  },
+
 };

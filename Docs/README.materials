@@ -120,9 +120,25 @@ tree-height-m : The average height of the trees. Actual tree height will
 
 tree-width-m : The average width of the tree cover. Actual tree width will 
          vary by +/- 50%. (default 0)
+         
+tree-max-density-angle-deg : The slope angle at which trees begin to thin out
+         as the slope is too steep to support the full coverage. Shallower 
+         slopes have maximum wood-coverage.  Steeper slopes have fewer trees.
+         (default : 45)
+         
+tree-zero-density-angle-deg : The angle at which the slope is too steep to 
+         support significant vegetation.  Steeper slopes have no trees. 
+         (default : 60)
+
+object-max-density-angle-deg : The angle at which objects and buildings become 
+         less dense due to a steep slope. (default : 20)
+
+object-zero-density-angle-deg : The angle at which the slope is too steep to build
+         on.  No object/buildings will be placed on slopes steeper than this.
+         (default : 30)
 
 object-group : A group of random objects to be placed on the surface. Contains
-         <range-m> and one or mode <object> children.
+         <range-m> and one or more <object> children.
          
 range-m : The distance at which objects within this object-group become 
          visible. Note that for realism, 60% of the objects will become visible

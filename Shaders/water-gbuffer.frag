@@ -38,7 +38,7 @@ varying vec4	waterTex1; //moving texcoords
 varying vec4	waterTex2; //moving texcoords
 varying vec3	viewerdir;
 varying vec3	normal;
-varying vec3	Vnormal;
+varying vec3	rawNormal;
 varying vec3	VTangent;
 varying vec3	VBinormal;
 
@@ -65,7 +65,7 @@ void main(void)
     vec3 E = normalize(viewerdir);
 
     vec3 Normal = normalize(normal);
-    vec3 vNormal = normalize(Vnormal);
+    vec3 vNormal = normalize(rawNormal);
 
     const float water_shininess = 240.0;
 
@@ -171,7 +171,8 @@ void main(void)
 
     vec3 N2 = normalize(mix(N0, N1, mixFactor) * waveRoughness);
     Normal = normalize(N2.x * VTangent + N2.y * VBinormal + N2.z * Normal);
-    vNormal = normalize(mix(vNormal + N0, vNormal + N1, mixFactor) * waveRoughness);
+    //vNormal = normalize(mix(vNormal + N0, vNormal + N1, mixFactor) * waveRoughness);
+	vNormal = normalize(N2.x * vec3(1.,0.,0.) + N2.y * vec3(0.,1.,0.) + N2.z * vNormal);
 
     if (normalmap_dds > 0){
         Normal = -Normal; //dds fix

@@ -175,7 +175,7 @@ void main (void)
 
 
 	//adding snow and permanent snow/glacier
-	if (vegetationlevel > snowlevel || vegetationlevel > 3100.0) {
+	if (vegetationlevel > snowlevel) {
 	c3 = mix(vec4(n+1.0, n+1.0, n+1.0, 0.0), c1, smoothstep(0.990, 0.965, abs(normalize(Normal).z)+nvL[2]*1.3));
 	c4 = mix(vec4(n+1.0, n+1.0, n+1.0, 0.0), c1, smoothstep(0.990, 0.965, abs(normalize(Normal).z)+nvL[2]*0.9));
 	c5 = mix(c3, c4, 1.0);

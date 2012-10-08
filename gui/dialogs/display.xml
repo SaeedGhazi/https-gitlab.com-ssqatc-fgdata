@@ -33,6 +33,7 @@
   <group>
     <layout>vbox</layout>
     <halign>center</halign>
+    <padding>4</padding>
 
     <checkbox>
       <halign>left</halign>
@@ -90,6 +91,7 @@
 
     <group>
       <layout>hbox</layout>
+      <padding>0</padding>
 
       <checkbox>
         <label>Autohide cursor in</label>

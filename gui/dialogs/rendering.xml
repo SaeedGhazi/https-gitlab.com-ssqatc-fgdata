@@ -13,7 +13,7 @@
 		</empty>
 
 		<text>
-			<label>Rendering options</label>
+			<label>Rendering Options</label>
 		</text>
 
 		<empty>
@@ -193,6 +193,16 @@
 
 			-->
 
+			<checkbox>
+				<halign>left</halign>
+				<label>Compensate field of view for wider screens</label>
+				<property>sim/current-view/field-of-view-compensation</property>
+				<binding>
+					<command>nasal</command>
+					<script>view.screenWidthCompens(1)</script>
+				</binding>
+			</checkbox>
+
 			<group>
 				<layout>hbox</layout>
 				<text>
@@ -206,9 +216,44 @@
 
 			<group>
 				<layout>table</layout>
-				
-				<checkbox>
+
+				<text>
 					<row>0</row>
+					<col>0</col>
+					<halign>left</halign>
+					<label>Texture set</label>
+        </text>
+        
+        <combo>
+          <row>0</row>
+          <col>1</col>
+          <colspan>3</colspan>
+          <name>texture-set</name>
+          <halign>fill</halign>
+          <stretch>true</stretch>
+          <pref-width>150</pref-width>
+          <property>sim/gui/dialogs/rendering/texture-set</property>
+          <value>Region-specific</value>
+          <value>Global</value>
+          <value>DDS</value>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>texture-set</object-name>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>
+              var file = materials[getprop("/sim/gui/dialogs/rendering/texture-set")];
+              setprop("/sim/rendering/materials-file", file);
+            </script>
+          </binding>
+          <binding>
+            <command>reload-materials</command>
+          </binding>
+        </combo>
+
+				<checkbox>
+					<row>1</row>
 					<col>0</col>
 					<halign>left</halign>
 					<label>Animated jetways</label>
@@ -221,7 +266,7 @@
 				</checkbox>
 
 				<checkbox>
-					<row>1</row>
+					<row>2</row>
 					<col>0</col>
 					<halign>left</halign>
 					<label>Random buildings</label>
@@ -234,7 +279,7 @@
 				</checkbox>
 				
 				<text>
-				  <row>1</row>
+				  <row>2</row>
 				  <col>1</col>
 					<colspan>3</colspan>
           <color>
@@ -246,7 +291,7 @@
         </text>
 
 				<checkbox>
-					<row>2</row>
+					<row>3</row>
 					<col>0</col>
 					<halign>left</halign>
 					<label>Random objects</label>
@@ -259,7 +304,7 @@
 				</checkbox>
 
 				<checkbox>
-					<row>3</row>
+					<row>4</row>
 					<col>0</col>
 					<halign>left</halign>
 					<label>Random vegetation</label>
@@ -271,7 +316,7 @@
 					</binding>
 				</checkbox>
 				<text>
-					<row>3</row>
+					<row>4</row>
 					<col>1</col>
 					<label>density</label>
 					<enable>
@@ -279,7 +324,7 @@
 					</enable>
 				</text>
 				<slider>
-					<row>3</row>
+					<row>4</row>
 					<col>2</col>
 					<name>vegetation-density</name>
 					<min>0</min>
@@ -292,7 +337,7 @@
 					</binding>
 				</slider>
 				<text>
-					<row>3</row>
+					<row>4</row>
 					<col>3</col>
 					<label>12345678</label>
 					<format>%.1f</format>
@@ -699,9 +744,22 @@
 
 	<nasal>
 		<open>
+		
+      var materials = { "Region-specific" : "Materials/regions/materials.xml",
+                        "Global" : "Materials/default/materials.xml",
+                        "DDS" : "Materials/dds/materials.xml" };
+      
+		
 			gui.enable_widgets(cmdarg(), "shadows-debug", getprop("/sim/gui/devel-widgets"));
 			props.globals.getNode("/sim/rendering/shaders/quality-level", 1).setAttribute("userarchive", 0);
 			setprop("/sim/gui/frame-rate-throttled", (getprop("/sim/frame-rate-throttle-hz") > 0));
+
+			var matfile = getprop("/sim/rendering/materials-file");
+			foreach (var name; keys(materials)) {
+			  if (matfile == materials[name]) {			  
+          setprop("/sim/gui/dialogs/rendering/texture-set", name);			  
+			  }
+			}
 		</open>
 	</nasal>
 </PropertyList>

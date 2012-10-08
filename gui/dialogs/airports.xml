@@ -24,19 +24,49 @@
       <binding>
         <command>dialog-close</command>
       </binding>
+      <binding>
+	<command>property-toggle</command>
+	<property>/sim/gui/dialogs/airports/signals/dialog-close</property>
+      </binding>
     </button>
   </group>
 
   <hrule/>
 
   <nasal>
-    <open>
+    <!-- Generalize all this, turn into helpers and load defaults via XML -->
+    <open><![CDATA[
+      ## "prologue" currently required by the canvas-generic-map 
+       var dialog_name ="airports"; #TODO: use substr() and cmdarg() to get this dynamically
+       var dialog_property = func(p) return "/sim/gui/dialogs/airports/"~p; #TODO: generalize using cmdarg	
+       var DIALOG_CANVAS = gui.findElementByName(cmdarg(), "airport-selection");
+       canvas.GenericMap.setupGUI(DIALOG_CANVAS, "canvas-control"); #TODO: this is not a method!
+      ## end of canvas-generic-map prologue
+
+
       setprop("/sim/gui/dialogs/airports/selected-airport/rwy", "");
       setprop("/sim/gui/dialogs/airports/selected-airport/parkpos", "");
+      setprop("/sim/gui/dialogs/airports/mode", "search");
       setprop("/sim/gui/dialogs/airports/list", "");
       
-      var airport_id = getprop("/sim/presets/airport-id");
-      if (airport_id == nil) { airport_id = "KSFO"; }
+      if (getprop("/sim/gui/dialogs/airports/display-taxiways") == "") {
+        setprop("/sim/gui/dialogs/airports/display-taxiways", "1");
+      }
+      
+      if (getprop("/sim/gui/dialogs/airports/display-parking") == "") {
+        setprop("/sim/gui/dialogs/airports/display-parking", "0");
+      }
+      
+      if (getprop("/sim/gui/dialogs/airports/display-tower") == "") {
+        setprop("/sim/gui/dialogs/airports/display-tower", "1");
+      }
+            
+      # Start with the closest airport
+      var airport_id = airportinfo().id;
+
+      # Retrieve METAR
+      fgcommand("request-metar", var n = props.Node.new({ "path": "/sim/gui/dialogs/airports/selected-airport/metar", 
+                                                         "station": airport_id}));
       
       var dlg = props.globals.getNode("/sim/gui/dialogs/airports", 1);
       var avail_runways = dlg.getNode("available-runways", 1);
@@ -75,11 +105,23 @@
           var info = airportinfo(airport_id);
           setprop("/sim/gui/dialogs/airports/selected-airport/id", airport_id);
           setprop("/sim/gui/dialogs/airports/selected-airport/name", info.name ~ " (" ~ airport_id ~ ")");
-          setprop("/sim/gui/dialogs/airports/selected-airport/location", sprintf("%.3f / %.3f", info.lon, info.lat));
+          setprop("/sim/gui/dialogs/airports/selected-airport/location", sprintf("%.3f / %.3f", info.lat, info.lon));
           setprop("/sim/gui/dialogs/airports/selected-airport/lon", info.lon);
           setprop("/sim/gui/dialogs/airports/selected-airport/elevation-ft", 3.28 * info.elevation);
           setprop("/sim/gui/dialogs/airports/selected-airport/rwy", "");
           setprop("/sim/gui/dialogs/airports/selected-airport/parkpos", "");
+          
+          if (info.has_metar) {
+            # Retrieve an updated METAR, and indicate that we've not got one currently.
+            setprop("/sim/gui/dialogs/airports/selected-airport/metar/station-id", airport_id);
+            setprop("/sim/gui/dialogs/airports/selected-airport/metar/time-to-live", 0);
+            setprop("/sim/gui/dialogs/airports/selected-airport/metar/data", "Retrieving METAR, please wait.");
+          } else {          
+            # This airport has no METAR. Ratehr than cancelling the retrieve-metar command, simply set the TTL
+            # to a very long time so it won't over-ride our message.
+            setprop("/sim/gui/dialogs/airports/selected-airport/metar/data", "No METAR available from this airport");
+            setprop("/sim/gui/dialogs/airports/selected-airport/metar/time-to-live", 9999);
+          }
           
           var longest_runway = 0;
           var runway_string = "";
@@ -104,6 +146,15 @@
           }          
 
           setprop("/sim/gui/dialogs/airports/selected-airport/longest-runway", longest_runway);
+          
+          var airport_pos = geo.Coord.new();
+          airport_pos.set_latlon(info.lat, info.lon);
+          
+          var pos = geo.aircraft_position();          
+          var dst = pos.distance_to(airport_pos) / 1852.0;
+          var crs = pos.course_to(airport_pos);
+          setprop("/sim/gui/dialogs/airports/selected-airport/distance-nm", dst);
+          setprop("/sim/gui/dialogs/airports/selected-airport/course-deg", crs);
           
           gui.dialog_update("airports", "runway-list");
           gui.dialog_update("airports", "parking-list");         
@@ -136,13 +187,18 @@
           } else {
             setprop("/sim/presets/runway", "");
             setprop("/sim/presets/parkpos", getprop("/sim/gui/dialogs/airports/selected-airport/parkpos"));
-          }
-         
+          }         
       }    
-      
-      
+            
       update_info();
+
+      ]]>
     </open>
+    <close>
+	fgcommand("clear-metar", var n = props.Node.new({ "path": "/sim/gui/dialogs/airports/selected-airport/metar",
+                                                             "station": airport_id}));
+        # map.cleanup_listeners(); #TODO: We should be setting a signal when closing the dialog, so that cleanup code can be invoked automatically
+    </close>
   </nasal>
   
   <group>
@@ -180,6 +236,11 @@
           <legend>Clear</legend>
           <binding>
             <command>property-assign</command>
+            <property>/sim/gui/dialogs/airports/mode</property>
+            <value>search</value>
+          </binding>
+          <binding>
+            <command>property-assign</command>
             <property>/sim/gui/dialogs/airports/list</property>
             <value></value>
           </binding>
@@ -197,6 +258,11 @@
           <legend>Search</legend>
           <default>true</default>
           <binding>
+            <command>property-assign</command>
+            <property>/sim/gui/dialogs/airports/mode</property>
+            <value>search</value>
+          </binding>
+          <binding>
             <command>dialog-apply</command>
             <object-name>input</object-name>
           </binding>
@@ -206,25 +272,91 @@
           </binding>
         </button>
 
-      </group>
+        <button>
+          <legend>Within 100nm</legend>
+          <binding>
+            <command>property-assign</command>
+            <property>/sim/gui/dialogs/airports/mode</property>
+            <value>100nm</value>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>
+              var airports = findAirportsWithinRange(100);
+              
+              var list = dlg.getNode("close-airports", 1);
+              
+              list.removeChildren("value");
+              
+              forindex (var idx; airports) {
+                list.getNode("value["~ idx ~ "]", 1).setValue(airports[idx].name ~ "  (" ~ airports[idx].id ~ ")");
+              }
+            </script>
+          </binding>
+          <binding>
+            <command>dialog-update</command>
+            <object-name>close-airport-list</object-name>
+          </binding>
+        </button>
 
-      <airport-list>
-        <name>airport-list</name>
-        <pref-width>300</pref-width>
-        <pref-height>260</pref-height>
-        <halign>fill</halign>
-        <valign>fill</valign>
-        <stretch>true</stretch>
-        <property>/sim/gui/dialogs/airports/list</property>
-        <binding>
-          <command>dialog-apply</command>
-          <object-name>airport-list</object-name>
-        </binding>
-        <binding>
-          <command>nasal</command>
-          <script>listbox()</script>
-        </binding>
-      </airport-list>
+      </group>
+      
+      <group>
+        <layout>table</layout>
+        <default-padding>0</default-padding>
+        
+        <list>
+          <row>0</row><col>0</col>
+          <visible>
+            <equals>
+              <property>/sim/gui/dialogs/airports/mode</property>
+              <value>100nm</value>
+            </equals>
+          </visible>
+          <name>close-airport-list</name>
+          <pref-width>300</pref-width>
+          <pref-height>260</pref-height>
+          <halign>fill</halign>
+          <valign>fill</valign>
+          <stretch>true</stretch>
+          <property>/sim/gui/dialogs/airports/list</property>
+          <properties>/sim/gui/dialogs/airports/close-airports</properties>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>close-airport-list</object-name>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>listbox()</script>
+          </binding>
+        </list>
+
+        <airport-list>
+          <row>0</row><col>0</col>
+          <visible>
+            <equals>
+              <property>/sim/gui/dialogs/airports/mode</property>
+              <value>search</value>
+            </equals>
+          </visible>
+          <name>airport-list</name>
+          <pref-width>300</pref-width>
+          <pref-height>260</pref-height>
+          <halign>fill</halign>
+          <valign>fill</valign>
+          <stretch>true</stretch>
+          <property>/sim/gui/dialogs/airports/list</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>airport-list</object-name>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>listbox()</script>
+          </binding>
+        </airport-list>
+        
+      </group>
 
       <hrule/>
       
@@ -234,7 +366,7 @@
         <text>
           <row>0</row>
           <col>0</col>
-          <width>200</width>
+          <width>100</width>
           <halign>right</halign>        
           <label>Airport:</label>
         </text>
@@ -251,7 +383,7 @@
           <row>1</row>
           <col>0</col>
           <halign>right</halign>
-          <label>Lon/Lat:</label>
+          <label>Lat / Lon:</label>
         </text>
         <text>
           <row>1</row>
@@ -263,16 +395,16 @@
 
         <text>
           <row>1</row>
-          <col>3</col>
+          <col>2</col>
           <halign>right</halign>
-          <label>Elevation (ft):</label>
+          <label>Elevation:</label>
         </text>
         <text>
           <row>1</row>
-          <col>4</col>
+          <col>3</col>
           <halign>left</halign>
           <live>true</live>
-          <format>%.0f</format>
+          <format>%.0f ft</format>
           <property>/sim/gui/dialogs/airports/selected-airport/elevation-ft</property>
         </text>
 
@@ -280,16 +412,71 @@
           <row>2</row>
           <col>0</col>
           <halign>right</halign>
-          <label>Longest runway (ft):</label>
+          <label>Longest runway:</label>
         </text>
         <text>
           <row>2</row>
           <col>1</col>
           <halign>left</halign>
           <live>true</live>
-          <format>%.0f</format>
+          <format>%.0f ft</format>
           <property>/sim/gui/dialogs/airports/selected-airport/longest-runway</property>
         </text>
+
+        <text>
+          <row>3</row>
+          <col>0</col>
+          <halign>right</halign>
+          <label>Distance:</label>
+        </text>
+        <text>
+          <row>3</row>
+          <col>1</col>
+          <halign>left</halign>
+          <live>true</live>
+          <format>%.1f nm</format>
+          <property>/sim/gui/dialogs/airports/selected-airport/distance-nm</property>
+        </text>
+
+        <text>
+          <row>3</row>
+          <col>2</col>
+          <halign>right</halign>
+          <label>Course:</label>
+        </text>
+        <text>
+          <row>3</row>
+          <col>3</col>
+          <halign>left</halign>
+          <live>true</live>
+          <format>%.0f deg</format>
+          <property>/sim/gui/dialogs/airports/selected-airport/course-deg</property>
+        </text>
+        
+        <text>
+          <row>4</row>
+          <col>0</col>
+          <colspan>3</colspan>
+          <halign>left</halign>
+          <live>true</live>
+          <label>METAR:</label>
+        </text>
+
+        <textbox>
+          <name>metar</name>
+          <row>5</row>
+          <col>0</col>
+          <colspan>4</colspan>
+          <halign>fill</halign>
+          <stretch>true</stretch>
+          <pref-width>300</pref-width>
+          <pref-height>60</pref-height>
+          <slider>0</slider>
+          <editable>false</editable>
+          <wrap>true</wrap>
+          <live>true</live>
+          <property>/sim/gui/dialogs/airports/selected-airport/metar/data</property>
+        </textbox>
 
       </group>
       
@@ -404,8 +591,11 @@
     <group>
       <layout>vbox</layout>
 
-      <canvas>
-        <name>map-dialog</name>
+      <!-- Instantiate a generic canvas map and parametrize it via inclusion -->
+      <!-- TODO: use params and aliasing -->
+      <canvas include="/Nasal/canvas/generic-canvas-map.xml">
+
+	<name>airport-selection</name>
         <valign>fill</valign>
         <halign>fill</halign>
         <stretch>true</stretch>
@@ -413,161 +603,77 @@
         <pref-height>400</pref-height>
         <view n="0">600</view>
         <view n="1">400</view>
-        
-        <nasal>
-      
-      
-        <load><![CDATA[
-          var my_canvas = canvas.get(cmdarg());
-          my_canvas.setColorBackground(0.2, 0.5, 0.2, 0.5);
 
-          var root = my_canvas.createGroup();
-          
-          var map = root.createChild("map", "map-test")
-                        .setTranslation(300, 200);
-          
-          var layer_runways = map.createChild("group", "runways");
 
-          var updateMap = func() {
-            var id = getprop("/sim/gui/dialogs/airports/selected-airport/id");
-          
-            if (id != "") {
-              var apt = airportinfo(id);
-              
-              map.removeAllChildren();
-              layer_runways = map.createChild("group", "runways");
-              
-              var airport = canvas.AirportMap.new(apt);
-              airport.build(layer_runways);
+       <features>
+	<!-- TODO: use params and aliases to make this shorter -->
+	<!-- TODO: support styling, i.e. image sets/fonts and colors to be used -->
+	<!-- this will set up individual "layers" and map them to boolean "toggle" properties -->
+	<!-- providing an optional "description" tag here allows us to create all checkboxes procedurally -->
+	<dialog-root>/sim/gui/dialogs/airports</dialog-root>
+	<range-property>zoom</range-property>
 
-              map._node.getNode("ref-lat", 1).setDoubleValue(apt.lat);
-              map._node.getNode("ref-lon", 1).setDoubleValue(apt.lon);
-              map._node.getNode("hdg", 1).setDoubleValue(0.0);
-            }
-          }
-                
-          var ranges = [0.1, 0.25, 0.5, 1, 2.5, 5];
-          
-          var updateZoom = func()
-          {
-            var z = getprop("/sim/gui/dialogs/airports/zoom");
-            if( z == nil )
-              z = 0;
-            var zoom = ranges[4 - z];
-            map._node.getNode("range", 1).setDoubleValue(zoom);
-                    
-            settimer(updateZoom, 0.5, 1);
-          };
-          
-          var updateRunwayHighlight = func()
-          {
-            var selected_rwy = getprop("/sim/gui/dialogs/airports/selected-airport/rwy");
-            var selected_apt = getprop("/sim/gui/dialogs/airports/selected-airport/id");
-            
-            var is_heli = substr(selected_rwy, 0, 1) == "H";
-            var rw_dir = is_heli ? nil : int(substr(selected_rwy, 0, 2));
-            
-            var rw_rec = "";
-            if( rw_dir != nil ) {
-              rw_rec = sprintf("%02d", math.mod(rw_dir - 18, 36));
-              if( size(selected_rwy) == 3 ) {
-                var map_rec = {
-                  "R": "L",
-                  "L": "R",
-                  "C": "C"
-                };
-                rw_rec ~= map_rec[substr(selected_rwy, 2)];
-              }
-            }
-            
-            foreach (var apt; layer_runways.getChildren()) {
-              if (apt.get("id") == "apt-" ~ selected_apt) {
-                foreach (var rwy; apt.getChildren()) {
-                  if ((rwy.get("id") == "runway-" ~ selected_rwy) or 
-                      (rwy.get("id") == "runway-" ~ rw_rec)          ) 
-                  {
-                    rwy.setColor(1.0,0.0,0.0);
-                  } else { 
-                    rwy.setColor(1.0,1.0,1.0);                  
-                  }
-                }              
-              }            
-            }
-          }          
+	<!-- These are the ranges available for the map:       var ranges = [0.1, 0.25, 0.5, 1, 2.5, 5] -->
 
-          var updateParkingHighlight = func()
-          {
-            var selected_parkpos = getprop("/sim/gui/dialogs/airports/selected-airport/parkpos");          
-            var selected_apt = getprop("/sim/gui/dialogs/airports/selected-airport/id");
-            
-            foreach (var apt; layer_runways.getChildren()) {
-              if (apt.get("id") == "apt-" ~ selected_apt) {
-                foreach (var rwy; apt.getChildren()) {
-                  if (rwy.get("id") == "parking-" ~ selected_parkpos) {
-                    rwy.setColor(1.0,0.0,0.0);
-                  } else { 
-                    rwy.setColor(1.0,1.0,1.0);                  
-                  }
-                }              
-              }            
-            }
-          }          
-          
-          var aptlistener = setlistener("/sim/gui/dialogs/airports/selected-airport/id", updateMap);
-          var rwylistener = setlistener("/sim/gui/dialogs/airports/selected-airport/rwy", updateRunwayHighlight);
-          var parkposlistener = setlistener("/sim/gui/dialogs/airports/selected-airport/parkpos", updateParkingHighlight);
-          
-          update_info();
-          updateZoom();
-          ]]>
-          </load>
-          <close>
-            removelistener(aptlistener);      
-            removelistener(rwylistener);
-            removelistener(parkposlistener);
-          </close>
-        </nasal>
+	<ranges>
+		<range>0.1</range>
+		<range>0.25</range>
+		<range>0.5</range>
+		<range>1</range>
+		<range>2.5</range>
+		<range>5</range>
+	</ranges>
+
+	<!-- available layers and their toggle property (appended to dialog-root specified above) -->
+
+	<layer>
+		<name>runways</name>					<!-- the name of the layer -->
+		<init-property>selected-airport/id</init-property>	<!-- the init/input property that re-inits the layer MODEL -->
+		<property>display-runways</property>			<!-- the property switch that toggles the layer on/off (show/hide) -->
+		<description>Show Runways</description> 		<!-- the checkbox label for the property -->
+		<default>enabled</default>				<!-- default state -->
+		<hide-checkbox>true</hide-checkbox>  			<!-- if the checkbox should be shown or hidden -->
+	</layer>
+ 	<layer>
+                <name>taxiways</name>
+		<init-property>selected-airport/id</init-property>
+                <property>display-taxiways</property>
+		<description>Show Taxiways</description>
+		<default>disabled</default>
+        </layer>
+
+ 	<layer>
+                <name>parkings</name>
+		<init-property>selected-airport/id</init-property>
+                <property>display-parking</property>
+		<description>Show Parking</description>
+		<default>disabled</default>
+        </layer>
+
+ 	<layer>
+                <name>towers</name>
+		<init-property>selected-airport/id</init-property>
+                <property>display-tower</property>
+		<description>Show Tower</description>
+		<default>enabled</default>
+        </layer>
+	<!-- Uncomment this to add a navaid layer (not yet fully implemented, and no LOD yet)
+ 	<layer>
+                <name>navaids</name>
+		<init-property>selected-airport/id</init-property>
+                <property>display-navaids</property>
+		<description>Display Navaids within current range</description>
+		<default>disabled</default>
+        </layer>
+	-->
+
+       </features>
       </canvas>
-
       <hrule/>
       
       <group>
+	  <name>canvas-control</name> <!-- this is the handle we use to procedurally add all "toggle layer" checkboxes  and the zoom control-->
           <layout>hbox</layout>
-          
-          <button>
-              <name>zoomout</name>
-              <legend>-</legend>
-              <pref-width>22</pref-width>
-              <pref-height>22</pref-height>
-
-              <binding>
-                  <command>property-adjust</command>
-                  <property>/sim/gui/dialogs/airports/zoom</property>
-                  <min>0</min>
-                  <step>-1</step>
-              </binding>
-          </button>
-          
-          <text>
-              <label>MMM</label>
-              <format>Zoom %d</format>
-              <property>/sim/gui/dialogs/airports/zoom</property>
-              <live>true</live>
-          </text>
-          
-          <button>
-              <name>zoomin</name>
-              <legend>+</legend>
-              <pref-width>22</pref-width>
-              <pref-height>22</pref-height>
-
-              <binding>
-                  <command>property-adjust</command>
-                  <property>//sim/gui/dialogs/airports/zoom</property>
-                  <step>1</step>
-                  <max>4</max>
-              </binding>
-          </button>
       </group>
     </group>
   </group>
@@ -581,7 +687,7 @@
     <empty><stretch>true</stretch></empty>
 
     <button>
-      <legend>OK</legend>
+      <legend>Go To Airport</legend>
       <equal>true</equal>
       <binding>
         <command>dialog-apply</command>
@@ -602,7 +708,7 @@
     <empty><stretch>true</stretch></empty>
 
     <button>
-      <legend>Cancel</legend>
+      <legend>Close</legend>
       <equal>true</equal>
       <key>Esc</key>
       <binding>

@@ -160,7 +160,7 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
     lightArg = (terminator-yprime_alt)/100000.0;
 
     // directional scattering for low sun
-    if (lightArg < 5.0)
+    if (lightArg < 10.0)
     	{mie_angle = (0.5 *  dot(normalize(relPos), normalize(lightFull)) ) + 0.5;}
     else 
 	{mie_angle = 1.0;}

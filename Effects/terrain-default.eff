@@ -68,6 +68,7 @@
     <eye_alt><use>/sim/rendering/eye-altitude-m</use></eye_alt>
     <snow_level><use>/environment/snow-level-m</use></snow_level>
     <dust_cover_factor><use>/environment/surface/dust-cover-factor</use></dust_cover_factor>
+    <lichen_cover_factor><use>/environment/surface/lichen-cover-factor</use></lichen_cover_factor>
     <wetness><use>/environment/surface/wetness</use></wetness>
     <fogtype><use>/sim/rendering/shaders/skydome</use></fogtype>
     <fogstructure><use>/environment/fog-structure</use></fogstructure>
@@ -260,6 +261,11 @@
         <name>dust_cover_factor</name>
         <type>float</type>
         <value><use>dust_cover_factor</use></value>
+      </uniform>
+      <uniform>
+	<name>lichen_cover_factor</name>
+	<type>float</type>
+	<value>	<use>lichen_cover_factor</use></value>
       </uniform>
       <uniform>
         <name>wetness</name>

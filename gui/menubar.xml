@@ -64,6 +64,7 @@
 				<command>dialog-show</command>
 				<dialog-name>sound-dialog</dialog-name>
 			</binding>
+			<enabled>false</enabled>
 		</item>
 
 		<item>
@@ -700,6 +701,14 @@
 			<binding>
 				<command>open-browser</command>
 				<path>Docs/index.html</path>
+			</binding>
+		</item>
+
+		<item>
+			<name>doc-browser</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>doc-browser</dialog-name>
 			</binding>
 		</item>
 

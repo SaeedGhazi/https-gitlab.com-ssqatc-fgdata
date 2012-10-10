@@ -81,14 +81,6 @@
 		<name>view</name>
 
 		<item>
-			<name>display-options</name>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>display</dialog-name>
-			</binding>
-		</item>
-
-		<item>
 			<name>rendering-options</name>
 			<binding>
 				<command>dialog-show</command>

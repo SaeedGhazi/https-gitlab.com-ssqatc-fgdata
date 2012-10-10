@@ -221,7 +221,7 @@
 					<row>0</row>
 					<col>0</col>
 					<halign>left</halign>
-					<label>Texture set</label>
+					<label>Terrain texture scheme</label>
         </text>
         
         <combo>
@@ -231,11 +231,11 @@
           <name>texture-set</name>
           <halign>fill</halign>
           <stretch>true</stretch>
-          <pref-width>150</pref-width>
+          <pref-width>180</pref-width>
           <property>sim/gui/dialogs/rendering/texture-set</property>
           <value>Region-specific</value>
           <value>Global</value>
-          <value>DDS</value>
+          <value>Global alternative (DDS format)</value>
           <binding>
             <command>dialog-apply</command>
             <object-name>texture-set</object-name>
@@ -747,7 +747,7 @@
 		
       var materials = { "Region-specific" : "Materials/regions/materials.xml",
                         "Global" : "Materials/default/materials.xml",
-                        "DDS" : "Materials/dds/materials.xml" };
+                        "Global alternative (DDS format)" : "Materials/dds/materials.xml" };
       
 		
 			gui.enable_widgets(cmdarg(), "shadows-debug", getprop("/sim/gui/devel-widgets"));

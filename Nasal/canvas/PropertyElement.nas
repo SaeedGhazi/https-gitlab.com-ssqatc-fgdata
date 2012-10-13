@@ -11,7 +11,7 @@ var PropertyElement = {
   new: func(node, id)
   {
     if( typeof(node) == 'vector' )
-      var node = _createNodeWithIndex(node[0], node[1]);
+      var node = aircraft.makeNode(node[0]).addChild(node[1], 0, 0);
     else
       var node = aircraft.makeNode(node);
 

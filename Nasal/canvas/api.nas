@@ -319,15 +319,24 @@ var Group = {
   # type can be group, text
   createChild: func(type, id = nil)
   {
-    var factory = me._element_factories[type];
-    
+    var factory = me._getFactory(type);
     if( factory == nil )
-    {
-      debug.dump("canvas.Group.createChild(): unknown type (" ~ type ~ ")");
       return nil;
-    }
-    
+
     return factory([me._node, type], id);
+  },
+  # Create multiple children of given type
+  createChildren: func(type, count)
+  {
+    var factory = me._getFactory(type);
+    if( factory == nil )
+      return [];
+
+    var nodes = me._node.addChildren(type, count, 0, 0);
+    for(var i = 0; i < count; i += 1)
+      nodes[i] = factory(nodes[i], nil); # TODO id. Maybe <base id>-<index>?
+
+    return nodes;
   },
   # Get a vector of all child elements
   getChildren: func()
@@ -386,6 +395,15 @@ var Group = {
   {
     # Create element from existing node
     return me._element_factories[ node.getName() ](node, nil);
+  },
+  _getFactory: func(type)
+  {
+    var factory = me._element_factories[type];
+
+    if( factory == nil )
+      debug.dump("canvas.Group.createChild(): unknown type (" ~ type ~ ")");
+
+    return factory;
   }
 };
 

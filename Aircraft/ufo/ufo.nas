@@ -435,6 +435,17 @@ var modelmgr = {
 		me.mouse_coord = mouse_coord;
 		status_dialog.open();
 		adjust_dialog.center_sliders();
+		
+		if (KbdAlt.getValue() and KbdCtrl.getValue()) { # Provide information on the selected point
+      var geod = geodinfo(me.mouse_coord.lat(), me.mouse_coord.lon());
+      var landclass = string.join(" ", geod[1].names);
+      var str = sprintf("lat:%.4f lon:%.4f alt:%.0fm class(es): %s", 
+                         me.mouse_coord.lat(), me.mouse_coord.lon(), 
+                         me.mouse_coord.alt(), landclass);
+      gui.popupTip(str, 3);
+      print(str);      
+		  return;
+		}
 
 		if (KbdAlt.getValue()) {	# move active object here (and other selected ones along with it)
 			(me.active == nil) and return;

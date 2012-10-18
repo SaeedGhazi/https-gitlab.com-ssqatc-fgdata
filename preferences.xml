@@ -731,8 +731,14 @@ Started September 2000 by David Megginson, david@megginson.com
 		<atc>
 			<enabled type="bool">true</enabled>
 			<runway type="string" preserve="y"/>
-			<use-millibars type="bool" preserve="y">false</use-millibars>
 		</atc>
+
+		<atis>
+			<voice type="string" preserve="y">default</voice>
+			<concise-reports type="bool" preserve="y">false</concise-reports>
+			<random-notams type="bool" preserve="y">true</random-notams>
+			<announce-ils-frequency type="bool" preserve="y">false</announce-ils-frequency>
+		</atis>
 
 		<traffic-manager>
 			<enabled type="bool" userarchive="y">true</enabled>

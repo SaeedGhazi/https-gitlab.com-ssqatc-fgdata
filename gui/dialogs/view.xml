@@ -2,8 +2,62 @@
 
 <PropertyList>
 	<name>view</name>
+	
+
+
+
+  <nasal>
+    <open>
+    
+      var group = gui.findElementByName(cmdarg(), "active-views");    
+      var ac = getprop("/sim/aircraft");
+      group.removeChildren("checkbox");
+      group.removeChildren("hrule");
+      group.removeChildren("text");
+      
+      var t = group.getChild("text", 0, 1);
+      t.getNode("label", 1).setValue("Standard Views");
+      t.getNode("halign", 1).setValue("left");
+      
+      
+      var mode = 0;
+      foreach (var v; view.views) {
+        var index = v.getIndex();
+        var enabled = v.initNode("enabled", 1, "BOOL");
+        var name = v.getNode("name");
+        if (name != nil) {
+          if (index >= 200) {
+            if (mode != 2) {
+              mode = 2;
+              group.getChild("empty", 1, 1).getChild("stretch", 0, 1).setValue(1);
+              var t = group.getChild("text", 1, 1);
+              t.getNode("label", 1).setValue("Other Views");
+            }
+
+          } elsif (index >= 100) {
+            aircraft.data.add(enabled);
+            if (mode != 1) {
+              mode = 1;              
+              group.getChild("empty", 0, 1).getChild("stretch", 0, 1).setValue(1);
+              var t = group.getChild("text", 1, 1);
+              t.getNode("label", 1).setValue("\"" ~ ac ~ "\" Specific Views");
+              t.getNode("halign", 1).setValue("left");
+            }
+          }
+
+          var target = group.getChild("checkbox", index, 1);
+          props.copy(group.getNode("checkbox-template"), target);
+          target.getNode("label").setValue(name != nil ? name.getValue() : ("** unnamed view " ~ index ~ " **"));
+          target.getNode("property").setValue(enabled.getPath());
+        }
+      }
+    </open>
+  </nasal>
+	
 	<modal>false</modal>
 	<layout>vbox</layout>
+	
+	
 
   <group>
     <layout>hbox</layout>
@@ -28,83 +82,137 @@
   </group>
 
   <hrule/>
+  
+  <group>
+    <layout>hbox</layout>
+    
+    <group>
+      <layout>vbox</layout>
+      
+      <text>
+        <label>Select Active Views</label>
+      </text>
 
-	<text>
-		<label>Select Active Views</label>
-	</text>
+      <group>
+        <layout>vbox</layout>
+        <halign>center</halign>
+        <name>active-views</name>
 
-  <nasal>
-		<open>
-			var group = cmdarg().getChildren("group")[1];
-			var ac = getprop("/sim/aircraft");
-			group.removeChildren("checkbox");
-			group.removeChildren("hrule");
-			group.removeChildren("text");
-			var mode = 0;
-			foreach (var v; view.views) {
-				var index = v.getIndex();
-				var enabled = v.initNode("enabled", 1, "BOOL");
-				var name = v.getNode("name");
-				if (name != nil) {
-					if (index >= 200) {
-						if (mode != 2) {
-							mode = 2;
-							group.getChild("hrule", 1, 1);
-							var t = group.getChild("text", 1, 1);
-							t.getNode("label", 1).setValue("Other Views");
-						}
+        <text>
+          <halign>left</halign>
+          <label>Standard Views</label>
+        </text>
+        
+        <checkbox-template>
+          <halign>left</halign>
+          <label><!----></label>
+          <property><!----></property>
+          <binding>
+            <command>dialog-apply</command>
+          </binding>
+        </checkbox-template>
+      </group>
+    </group>
+      
+    <vrule/>
+    
+    <group>
+      <layout>vbox</layout>      
+      <halign>center</halign>
+      <valign>top</valign>
+      
+      <text>
+        <label>Display Options</label>
+      </text>
 
-					} elsif (index >= 100) {
-						aircraft.data.add(enabled);
-						if (mode != 1) {
-							mode = 1;
-							group.getChild("hrule", 0, 1);
-							var t = group.getChild("text", 0, 1);
-							t.getNode("label", 1).setValue("\"" ~ ac ~ "\" Specific Views");
-						}
-					}
+      <checkbox>
+        <halign>left</halign>
+        <label>Show frame rate</label>
+        <property>/sim/rendering/fps-display</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
 
-					var target = group.getChild("checkbox", index, 1);
-					props.copy(group.getNode("checkbox-template"), target);
-					target.getNode("label").setValue(name != nil ? name.getValue() : ("** unnamed view " ~ index ~ " **"));
-					target.getNode("property").setValue(enabled.getPath());
-				}
-			}
-		</open>
-	</nasal>
+      <checkbox>
+        <halign>left</halign>
+        <label>Show frame spacing</label>
+        <property>/sim/rendering/frame-latency-display</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
 
-	<group>
-		<layout>vbox</layout>
-		<halign>center</halign>
+      <checkbox>
+        <halign>left</halign>
+        <label>Show chat messages</label>
+        <property>/sim/multiplay/chat-display</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
 
-		<checkbox-template>
-			<halign>left</halign>
-			<label><!----></label>
-			<property><!----></property>
-			<binding>
-				<command>dialog-apply</command>
-			</binding>
-		</checkbox-template>
-	</group>
+      <checkbox>
+        <halign>left</halign>
+        <label>Show view name popup</label>
+        <property>/sim/view-name-popup</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
 
-	<hrule/>
-	<group>
-		<layout>hbox</layout>
-		<checkbox>
-			<property>sim/current-view/field-of-view-compensation</property>
-			<live>false</live>
-					<binding>
-						<command>nasal</command>
-						<script>view.screenWidthCompens(1)</script>
-					</binding>
-		</checkbox>
-		<text>
-			<label>Compensate Field of View for wider screens</label>
-		</text>
-	</group>
+      <checkbox>
+        <halign>left</halign>
+        <label>Show 2D panel</label>
+        <property>/sim/panel/visibility</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
 
+      <checkbox>
+        <halign>left</halign>
+        <label>Autohide menubar</label>
+        <property>/sim/menubar/autovisibility/enabled</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
 
+      <group>
+        <layout>hbox</layout>
+        <padding>0</padding>
 
+        <checkbox>
+          <label>Autohide cursor in</label>
+          <property>/sim/mouse/hide-cursor</property>
+          <binding>
+            <command>dialog-apply</command>
+          </binding>
+        </checkbox>
+
+        <input>
+          <live>true</live>
+          <pref-width>40</pref-width>
+          <pref-height>10</pref-height>
+          <enable>
+            <property>/sim/mouse/hide-cursor</property>
+          </enable>
+          <property>/sim/mouse/cursor-timeout-sec</property>
+          <binding>
+            <command>dialog-apply</command>
+          </binding>
+        </input>
+
+        <text>
+          <label>sec.</label>
+        </text>
+      </group>
+      
+    </group>
+
+  </group>
+      
 
 	<hrule/>
 

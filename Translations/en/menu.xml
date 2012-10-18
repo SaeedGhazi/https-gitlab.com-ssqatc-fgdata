@@ -14,7 +14,6 @@
 
 	<!-- View menu -->
 	<view>View</view>
-	<display-options>Display Options</display-options>
 	<rendering-options>Rendering Options</rendering-options>
 	<view-options>View Options</view-options>
 	<cockpit-view-options>Cockpit View Options</cockpit-view-options>

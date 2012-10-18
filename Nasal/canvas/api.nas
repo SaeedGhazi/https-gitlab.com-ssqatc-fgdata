@@ -1,23 +1,3 @@
-# Helper function to create a node with the first available index for the given
-# path relative to the given node
-#
-var _createNodeWithIndex = func(node, path, min_index = 0)
-{
-  var node = aircraft.makeNode(node);
-
-  # TODO do we need an upper limit? (50000 seems already seems unreachable)
-  for(var i = min_index; i < 50000; i += 1)
-  {
-    var p = path ~ "[" ~ i ~ "]";
-    if( node.getNode(p) == nil )
-      return node.getNode(p, 1);
-  }
-  
-  debug.warn("Unable to get child (already 50000 exist)");
-
-  return nil;
-};
-
 # Internal helper
 var _createColorNodes = func(parent, name)
 {
@@ -237,8 +217,8 @@ var Element = {
   # @param vals Default values (Vector of 6 elements)
   createTransform: func(vals = nil)
   {
-    var node = _createNodeWithIndex(me._node, "tf", 1); # tf[0] is reserved for
-                                                        # setRotation
+    var node = me._node.addChild("tf", 1); # tf[0] is reserved for
+                                           # setRotation
     return Transform.new(node, vals);
   },
   # Shortcut for setting translation
@@ -339,15 +319,24 @@ var Group = {
   # type can be group, text
   createChild: func(type, id = nil)
   {
-    var factory = me._element_factories[type];
-    
+    var factory = me._getFactory(type);
     if( factory == nil )
-    {
-      debug.dump("canvas.Group.createChild(): unknown type (" ~ type ~ ")");
       return nil;
-    }
-    
+
     return factory([me._node, type], id);
+  },
+  # Create multiple children of given type
+  createChildren: func(type, count)
+  {
+    var factory = me._getFactory(type);
+    if( factory == nil )
+      return [];
+
+    var nodes = me._node.addChildren(type, count, 0, 0);
+    for(var i = 0; i < count; i += 1)
+      nodes[i] = factory(nodes[i], nil); # TODO id. Maybe <base id>-<index>?
+
+    return nodes;
   },
   # Get a vector of all child elements
   getChildren: func()
@@ -406,6 +395,15 @@ var Group = {
   {
     # Create element from existing node
     return me._element_factories[ node.getName() ](node, nil);
+  },
+  _getFactory: func(type)
+  {
+    var factory = me._element_factories[type];
+
+    if( factory == nil )
+      debug.dump("canvas.Group.createChild(): unknown type (" ~ type ~ ")");
+
+    return factory;
   }
 };
 
@@ -767,7 +765,7 @@ var Canvas = {
   # given every texture of the model will be replaced.
   addPlacement: func(vals)
   {
-    var placement = _createNodeWithIndex(me.texture, "placement");
+    var placement = me.texture.addChild("placement", 0, 0);
     placement.setValues(vals);
     return placement;
   },
@@ -801,7 +799,7 @@ var new = func(vals)
 {
   var m = { parents: [Canvas] };
 
-  m.texture = _createNodeWithIndex(Canvas.property_root, "texture");
+  m.texture = Canvas.property_root.addChild("texture", 0, 0);
   m.color = _createColorNodes(m.texture, "color-background");
   m.texture.setValues(vals);
 

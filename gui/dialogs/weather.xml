@@ -166,7 +166,7 @@
             setprop("/nasal/local_weather/enabled", "true");
             
             # Re-initialize local weather.
-            local_weather.set_tile();            
+            settimer( func {local_weather.set_tile();}, 0.2);            
           } 
         },
 

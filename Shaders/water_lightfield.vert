@@ -163,11 +163,11 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
 	if (earthShade < 0.5)
 	{
 	intensity = length(specular_light.rgb);
-	specular_light.xyz = intensity * normalize(mix(specular_light.xyz,  vec3 (0.45, 0.6, 0.8), 1.0 -smoothstep(0.1, 0.5,earthShade) ));
+	specular_light.xyz = intensity * normalize(mix(specular_light.xyz,  vec3 (0.45, 0.6, 0.8), 1.0 -smoothstep(0.1, 0.7,earthShade) ));
 	}
 
     // directional scattering for low sun
-    if (lightArg < 5.0)
+    if (lightArg < 10.0)
     	//{mie_angle = (0.5 *  dot(normalize(relPos), normalize(lightFull)) ) + 0.5;}
 	{mie_angle = (0.5 *  dot(normalize(relPos), lightdir) ) + 0.5;}
     else

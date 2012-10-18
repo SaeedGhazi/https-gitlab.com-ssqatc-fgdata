@@ -13,6 +13,7 @@ varying vec4    waterTex2;
 varying vec3    viewerdir;
 varying vec3    lightdir;
 varying vec3    normal;
+varying vec3	rawNormal;
 
 varying vec3    VTangent;
 varying vec3    VBinormal;
@@ -37,6 +38,7 @@ void rotationmatrix(in float angle, out mat4 rotmat)
 void main(void)
     {
     mat4 RotationMatrix;
+	rawNormal= gl_Normal;
     normal = gl_NormalMatrix * gl_Normal;
     VTangent = normalize(gl_NormalMatrix * tangent);
     VBinormal = normalize(gl_NormalMatrix * binormal);

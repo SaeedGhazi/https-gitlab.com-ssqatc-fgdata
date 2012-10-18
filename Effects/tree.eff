@@ -25,12 +25,13 @@
 		<terminator><use>/environment/terminator-relative-position-m</use></terminator>
 		<fogtype><use>/sim/rendering/shaders/skydome</use></fogtype>
 		<terrain_alt><use>/environment/mean-terrain-elevation-m</use></terrain_alt>
-    <overcast><use>/rendering/scene/overcast</use></overcast>
-    <eye_alt><use>/sim/rendering/eye-altitude-m</use></eye_alt>
+  	        <overcast><use>/rendering/scene/overcast</use></overcast>
+    	        <eye_alt><use>/sim/rendering/eye-altitude-m</use></eye_alt>
 		<snow_level><use>/environment/snow-level-m</use></snow_level>
 		<dust_cover_factor><use>/environment/surface/dust-cover-factor</use></dust_cover_factor>
 		<fogtype><use>/sim/rendering/shaders/skydome</use></fogtype>
 		<fogstructure><use>/environment/fog-structure</use></fogstructure>
+   		<quality_level><use>/sim/rendering/shaders/landmass</use></quality_level>
 		<!-- 	END fog include -->
 	</parameters>
 
@@ -122,6 +123,11 @@
         <value><use>eye_alt</use></value>
       </uniform>
       <uniform>
+	<name>dust_cover_factor</name>
+	<type>float</type>
+	<value>	<use>dust_cover_factor</use></value>
+      </uniform>
+      <uniform>
         <name>texture</name>
         <type>sampler-2d</type>
         <value type="int">0</value>
@@ -131,10 +137,11 @@
         <type>int</type>
         <value>2</value> <!-- AMBIENT_AND_DIFFUSE -->
       </uniform>
-      <!--<depth>
-        <function>lequal</function>
-        <write-mask type="bool">false</write-mask>
-      </depth>-->
+     <uniform>
+	<name>quality_level</name>
+	<type>int</type>
+	<value>	<use>quality_level</use></value>
+     </uniform>
     </pass>
   </technique>
 	
@@ -228,6 +235,11 @@
         <value><use>eye_alt</use></value>
       </uniform>
       <uniform>
+	<name>dust_cover_factor</name>
+	<type>float</type>
+	<value>	<use>dust_cover_factor</use></value>
+      </uniform>
+      <uniform>
         <name>texture</name>
         <type>sampler-2d</type>
         <value type="int">0</value>
@@ -237,10 +249,11 @@
         <type>int</type>
         <value>2</value> <!-- AMBIENT_AND_DIFFUSE -->
       </uniform>
-      <!--<depth>
-        <function>lequal</function>
-        <write-mask type="bool">false</write-mask>
-      </depth>-->
+     <uniform>
+	<name>quality_level</name>
+	<type>int</type>
+	<value>	<use>quality_level</use></value>
+     </uniform>
     </pass>
   </technique>
   	

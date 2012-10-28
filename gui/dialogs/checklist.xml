@@ -49,30 +49,40 @@
             var t = table.getChild("text", txtcount, 1);
             txtcount += 1;
             
-            t.getNode("halign", 1).setValue("left");
-            t.getNode("row", 1).setValue(row);
-            t.getNode("col", 1).setValue(0);
-            t.getNode("label", 1).setValue(item.getNode("name", 1).getValue());
-            
             var values = item.getChildren("value");
             
-            forindex (var v; values) {
-              var t = table.getChild("text", txtcount, 1);
-              txtcount += 1;
-              t.getNode("halign", 1).setValue("right");
+            if (size(values) == 0) {
+              # Single name element with no values. Used as title
+              t.getNode("halign", 1).setValue("center");
               t.getNode("row", 1).setValue(row);
-              if (v > 0) {
-                # The second row of values can overlap with the
-                # first column if required - helps keep the 
-                # checklist dialog as compact as possible
-                t.getNode("col", 1).setValue(0);
-                t.getNode("colspan", 1).setValue(2);
-              } else {
-                t.getNode("col", 1).setValue(1);
+              t.getNode("col", 1).setValue(0);
+              t.getNode("colspan", 1).setValue(2);
+              t.getNode("label", 1).setValue(item.getNode("name", 1).getValue());
+              row = row + 1;
+            } else {
+              t.getNode("halign", 1).setValue("left");
+              t.getNode("row", 1).setValue(row);
+              t.getNode("col", 1).setValue(0);
+              t.getNode("label", 1).setValue(item.getNode("name", 1).getValue());                        
+              
+              forindex (var v; values) {
+                var t = table.getChild("text", txtcount, 1);
+                txtcount += 1;
+                t.getNode("halign", 1).setValue("right");
+                t.getNode("row", 1).setValue(row);
+                if (v > 0) {
+                  # The second row of values can overlap with the
+                  # first column if required - helps keep the 
+                  # checklist dialog as compact as possible
+                  t.getNode("col", 1).setValue(0);
+                  t.getNode("colspan", 1).setValue(2);
+                } else {
+                  t.getNode("col", 1).setValue(1);
+                }
+                  
+                t.getNode("label", 1).setValue(values[v].getValue());                
+                row = row + 1;              
               }
-                
-              t.getNode("label", 1).setValue(values[v].getValue());                
-              row = row + 1;              
             }
           }
         }

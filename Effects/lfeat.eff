@@ -18,6 +18,7 @@
 	  </emissive>
 	  <shininess>1.2</shininess>
 	</material>
+    <transparent>true</transparent>
   </parameters>
   <technique n="1">
     <pass>

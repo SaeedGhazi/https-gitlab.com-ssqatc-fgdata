@@ -758,14 +758,15 @@ Started September 2000 by David Megginson, david@megginson.com
 
 		<multiplay preserve="y">
 			<chat type="string" preserve="y">Hello</chat>
-			<transmission-freq-hz type="string">118500000</transmission-freq-hz>
+			<transmission-freq-hz type="string" preserve="y">118500000</transmission-freq-hz>
 			<chat-display type="bool" userarchive="y">true</chat-display>
 			<chat-menu include="ATC/chat-menu-entries.xml"/>
-			<write-message-log type="bool">false</write-message-log>
-			<freeze-on-replay type="bool">true</freeze-on-replay>
-			<default-model type="string">Models/Geometry/glider.ac</default-model>
+			<write-message-log type="bool" preserve="y">false</write-message-log>
+			<freeze-on-replay type="bool" preserve="y">true</freeze-on-replay>
+			<default-model type="string" preserve="y">Models/Geometry/glider.ac</default-model>
 			<callsign type="string" userarchive="y">callsign</callsign>
 			<selected-server type="string" userarchive="y"/>
+			<txhost type="string" preserve="y"/>
 		</multiplay>
 
 		<user>

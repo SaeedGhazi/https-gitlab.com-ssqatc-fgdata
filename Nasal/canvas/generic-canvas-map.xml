@@ -97,8 +97,8 @@ In the close block, you'll want to call "map.cleanup_listeners()" at the moment
 			.setupZoom( dialog:DIALOG_CANVAS ) 			# TODO: make zooming configurable for non GUI use
 			.pickupFeatures (DIALOG_CANVAS);			# set up the features specified in the XML file
 
-	 # FIXME: resource cleanup (listeners!)
-	update_info();
+	canvas.run_callbacks(); # WORKAROUND to run dialog-specific init code - 
+				# must be set up via register_callback() in the dialog's open block currently 
           ]]>
           </load>
         </nasal>

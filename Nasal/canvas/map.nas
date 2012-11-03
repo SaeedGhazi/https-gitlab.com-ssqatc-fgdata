@@ -37,6 +37,12 @@
 #
 
 
+#FIXME: this is a hack so that dialogs can register their own
+# callbacks that are automatically invoked at the end of the
+# generic-canvas-map.xml file (canvas/nasal section)
+var callbacks = [];
+var register_callback = func(c) append(callbacks, c);
+var run_callbacks = func foreach(var c; callbacks) c();
 
 var DEBUG=0;
 if (DEBUG) {
@@ -418,7 +424,7 @@ LayeredMap.updateState = func {
 
  #FIXME: listener management should be done at the MVC level, for each component - not as part of the LayeredMap!
  LayeredMap.cleanup_listeners = func {
-  print("Cleaning up listeners");
+  # print("Cleaning up listeners");
   foreach(var l; me.listeners) 
 	removelistener(l);
         

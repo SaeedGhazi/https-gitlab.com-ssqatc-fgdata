@@ -190,14 +190,13 @@
           }         
       }    
             
-      update_info();
-
+	canvas.register_callback(update_info); # FIXME: this is a workaround to run dialog-specific code in the canvas block
       ]]>
     </open>
     <close>
 	fgcommand("clear-metar", var n = props.Node.new({ "path": "/sim/gui/dialogs/airports/selected-airport/metar",
                                                              "station": airport_id}));
-        # map.cleanup_listeners(); #TODO: We should be setting a signal when closing the dialog, so that cleanup code can be invoked automatically
+        map.cleanup_listeners(); #TODO: We should be setting a signal when closing the dialog, so that cleanup code can be invoked automatically
     </close>
   </nasal>
   
@@ -657,6 +656,7 @@
 		<description>Show Tower</description>
 		<default>enabled</default>
         </layer>
+
 	<!-- Uncomment this to add a navaid layer (not yet fully implemented, and no LOD yet)
  	<layer>
                 <name>navaids</name>

@@ -36,6 +36,13 @@ Path.setColorFill = Element.setColorFill;
 Text.setColor = Element.setColor;
 Text.setColorFill = Element.setColorFill;
 
+#
+Canvas.setColorBackground = func()
+{
+  me._node = me.texture;
+  setColorNodes(me, "color-background", arg);
+};
+
 # 2.8 uses multiple properties instead of a single string property
 Canvas.setStrokeDashArray = func(pattern)
 {

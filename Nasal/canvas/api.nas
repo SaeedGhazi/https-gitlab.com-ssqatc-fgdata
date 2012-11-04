@@ -1,38 +1,4 @@
 # Internal helper
-var _createColorNodes = func(parent, name)
-{
-  var node = parent.getNode(name, 1);
-  return [ node.getNode("red", 1),
-           node.getNode("green", 1),
-           node.getNode("blue", 1),
-           node.getNode("alpha", 1) ];
-};
-
-var _setColorNodes = func(nodes, color)
-{
-  if( typeof(nodes) != "vector" )
-  {
-    debug.warn("This element doesn't support setting color");
-    return;
-  }
-  
-  if( size(color) == 1 )
-    color = color[0];
-
-  if( typeof(color) != "vector" )
-    return debug.warn("Wrong type for color");
-  
-  if( size(color) < 3 or size(color) > 4 )
-    return debug.warn("Color needs 3 or 4 values (RGB or RGBA)");
-
-  for(var i = 0; i < size(color); i += 1)
-    nodes[i].setDoubleValue( color[i] );
-
-  if( size(color) == 3 )
-    # default alpha is 1
-    nodes[3].setDoubleValue(1);
-};
-
 var _getColor = func(color)
 {
   if( size(color) == 1 )
@@ -91,9 +57,9 @@ var Transform = {
       e: node.getNode("m[4]", 1),
       f: node.getNode("m[5]", 1)
     };
-    
+
     var use_vals = typeof(vals) == 'vector' and size(vals) == 6;
-    
+
     # initialize to identity matrix
     m.a.setDoubleValue(use_vals ? vals[0] : 1);
     m.b.setDoubleValue(use_vals ? vals[1] : 0);
@@ -101,7 +67,7 @@ var Transform = {
     m.d.setDoubleValue(use_vals ? vals[3] : 1);
     m.e.setDoubleValue(use_vals ? vals[4] : 0);
     m.f.setDoubleValue(use_vals ? vals[5] : 0);
-    
+
     return m;
   },
   setTranslation: func
@@ -110,7 +76,7 @@ var Transform = {
 
     me.e.setDoubleValue(trans[0]);
     me.f.setDoubleValue(trans[1]);
-    
+
     return me;
   },
   # Set rotation (Optionally around a specified point instead of (0,0))
@@ -137,7 +103,7 @@ var Transform = {
       me.e.setDoubleValue( (-center[0] * c) + (center[1] * s) + center[0] );
       me.f.setDoubleValue( (-center[0] * s) - (center[1] * c) + center[1] );
     }
-    
+
     return me;
   },
   # Set scale (either as parameters or array)
@@ -151,7 +117,7 @@ var Transform = {
 
     me.a.setDoubleValue(scale[0]);
     me.d.setDoubleValue(size(scale) >= 2 ? scale[1] : scale[0]);
-    
+
     return me;
   },
   getScale: func()
@@ -183,7 +149,7 @@ var Element = {
     return m;
   },
   # Trigger an update of the element
-  # 
+  #
   # Elements are automatically updated once a frame, with a delay of one frame.
   # If you wan't to get an element updated in the current frame you have to use
   # this method.
@@ -268,7 +234,7 @@ var Element = {
     var center = _arg2valarray(arg);
     if( size(center) != 2 )
       return debug.warn("invalid arg");
-      
+
     if( me._center[0] == nil )
       me._center[0] = me._node.getNode("center[0]", 1);
     if( me._center[1] == nil )
@@ -276,7 +242,7 @@ var Element = {
 
     me._center[0].setDoubleValue(center[0] or 0);
     me._center[1].setDoubleValue(center[1] or 0);
-    
+
     return me;
   },
   # Get transformation center
@@ -284,7 +250,7 @@ var Element = {
   {
     var bb = me.getBoundingBox();
     var center = [0, 0];
-    
+
     if( me._center[0] != nil )
       center[0] = me._center[0].getValue() or 0;
     if( me._center[1] != nil )
@@ -292,7 +258,7 @@ var Element = {
 
     if( bb[0] >= bb[2] or bb[1] >= bb[3] )
       return center;
-    
+
     return [ 0.5 * (bb[0] + bb[2]) + center[0],
               0.5 * (bb[1] + bb[3]) + center[1] ];
   },
@@ -358,7 +324,7 @@ var Group = {
     # of lookup hash? Searching is really slow now...
     var stack = [me._node];
     var index = 0;
-    
+
     while( index < size(stack) )
     {
       var node = stack[index];
@@ -370,7 +336,7 @@ var Group = {
         if( node_id != nil and node_id.getValue() == id )
           return me._wrapElement(node);
       }
-        
+
       foreach(var c; node.getChildren())
         if( me._isElementNode(c) )
           append(stack, c);
@@ -608,7 +574,7 @@ var Path = {
       for(var i = 0; i < num_coords; i += 1)
         me.setDouble("coord[" ~ (me._num_coords += 1) ~ "]", coords[i]);
     }
-    
+
     return me;
   },
   # Move path cursor
@@ -652,7 +618,7 @@ var Path = {
 
   setColor: func me.setStroke(_getColor(arg)),
   setColorFill: func me.setFill(_getColor(arg)),
-  
+
   setFill: func(fill)
   {
     me.set('fill', fill);
@@ -696,11 +662,7 @@ var Path = {
 var Image = {
   new: func(node, id)
   {
-    var m = {
-      parents: [Image, Element.new(node, id)]
-    };
-    m.color_fill = _createColorNodes(m._node, "color-fill");
-    return m;
+    return {parents: [Image, Element.new(node, id)]};
   },
   # Set image file to be used
   #
@@ -759,7 +721,7 @@ var Canvas = {
   #    "node": "PFD-Screen",
   #    "parent": "Some parent name"
   #  });
-  # 
+  #
   # Note that we can choose whichever of the three filter criterions we use for
   # matching the target object for our placement. If none of the three fields is
   # given every texture of the model will be replaced.
@@ -779,7 +741,7 @@ var Canvas = {
   # Set the background color
   #
   # @param color  Vector of 3 or 4 values in [0, 1]
-  setColorBackground: func { _setColorNodes(me.color, arg); return me; },
+  setColorBackground: func () { me.texture.getNode('background', 1).setValue(_getColor(arg)); me; },
   # Get path of canvas to be used eg. in Image::setFile
   getPath: func()
   {
@@ -800,7 +762,6 @@ var new = func(vals)
   var m = { parents: [Canvas] };
 
   m.texture = Canvas.property_root.addChild("texture", 0, 0);
-  m.color = _createColorNodes(m.texture, "color-background");
   m.texture.setValues(vals);
 
   return m;
@@ -824,17 +785,16 @@ var get = func(name)
         node_canvas = c;
     }
   }
-  
+
   if( node_canvas == nil )
   {
     debug.warn("Canvas not found: " ~ name);
     return nil;
   }
-  
+
   return {
     parents: [Canvas],
-    texture: node_canvas,
-    color: _createColorNodes(node_canvas, "color-background")
+    texture: node_canvas
   };
 };
 
@@ -860,7 +820,7 @@ else
       {button: {legend: "Ok", binding: {command: "dialog-close"}}}
     );
   }
-  
+
   # Load support for older versions of FlightGear (TODO generalize :) )
   if( fg_version[0] == 2 and fg_version[1] == 8 )
     io.load_nasal(legacy_dir ~ "/api.nas.2.8", "canvas");

@@ -959,7 +959,7 @@
     <value>summer</value>
    </equals>
   </condition>
-  <effect>Effects/water</effect>
+  <effect>Effects/water-inland</effect>
   <name>Lake</name>
   <name>Pond</name>
   <name>Reservoir</name>

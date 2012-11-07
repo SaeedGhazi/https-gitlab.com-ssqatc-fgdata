@@ -25,8 +25,8 @@
         <command>dialog-close</command>
       </binding>
       <binding>
-	<command>property-toggle</command>
-	<property>/sim/gui/dialogs/airports/signals/dialog-close</property>
+        <command>property-toggle</command>
+        <property>/sim/gui/dialogs/airports/signals/dialog-close</property>
       </binding>
     </button>
   </group>
@@ -36,10 +36,13 @@
   <nasal>
     <!-- Generalize all this, turn into helpers and load defaults via XML -->
     <open><![CDATA[
+    
+      var DIALOG = cmdarg();
+      
       ## "prologue" currently required by the canvas-generic-map 
        var dialog_name ="airports"; #TODO: use substr() and cmdarg() to get this dynamically
        var dialog_property = func(p) return "/sim/gui/dialogs/airports/"~p; #TODO: generalize using cmdarg	
-       var DIALOG_CANVAS = gui.findElementByName(cmdarg(), "airport-selection");
+       var DIALOG_CANVAS = gui.findElementByName(DIALOG, "airport-selection");
        canvas.GenericMap.setupGUI(DIALOG_CANVAS, "canvas-control"); #TODO: this is not a method!
       ## end of canvas-generic-map prologue
 
@@ -104,7 +107,7 @@
       var update_info = func {
           var info = airportinfo(airport_id);
           setprop("/sim/gui/dialogs/airports/selected-airport/id", airport_id);
-          setprop("/sim/gui/dialogs/airports/selected-airport/name", info.name ~ " (" ~ airport_id ~ ")");
+          setprop("/sim/gui/dialogs/airports/selected-airport/name", info.name);
           setprop("/sim/gui/dialogs/airports/selected-airport/location", sprintf("%.3f / %.3f", info.lat, info.lon));
           setprop("/sim/gui/dialogs/airports/selected-airport/lon", info.lon);
           setprop("/sim/gui/dialogs/airports/selected-airport/elevation-ft", 3.28 * info.elevation);
@@ -117,10 +120,42 @@
             setprop("/sim/gui/dialogs/airports/selected-airport/metar/time-to-live", 0);
             setprop("/sim/gui/dialogs/airports/selected-airport/metar/data", "Retrieving METAR, please wait.");
           } else {          
-            # This airport has no METAR. Ratehr than cancelling the retrieve-metar command, simply set the TTL
+            # This airport has no METAR. Rather than cancelling the retrieve-metar command, simply set the TTL
             # to a very long time so it won't over-ride our message.
             setprop("/sim/gui/dialogs/airports/selected-airport/metar/data", "No METAR available from this airport");
             setprop("/sim/gui/dialogs/airports/selected-airport/metar/time-to-live", 9999);
+          }
+          
+          
+          # Display the comms frequencies for this airport
+          var fcount = 0;          
+          
+          if (size(info.comms()) > 0) {
+            # Airport has one or more frequencies assigned to it.
+            var freqs = {};
+            var comms = info.comms();
+
+            foreach (var c; comms) {              
+              var f = sprintf("%.3f", c.frequency);
+              if (freqs[c.ident] == nil) {  
+                freqs[c.ident] = f; 
+              } else {
+                freqs[c.ident] = freqs[c.ident] ~ " " ~ f;
+              }
+            }         
+                        
+            foreach (var c; sort(keys(freqs), string.icmp)) {
+              setprop("sim/gui/dialogs/airports/selected-airport/comms/freq[" ~ fcount ~ "]/label", c);
+              setprop("sim/gui/dialogs/airports/selected-airport/comms/freq[" ~ fcount ~ "]/value", freqs[c]);
+              fcount += 1;
+            }
+          }
+            
+          while (fcount < 8) {
+            # zero remaining comms channels
+            setprop("sim/gui/dialogs/airports/selected-airport/comms/freq[" ~ fcount ~ "]/label", "");
+            setprop("sim/gui/dialogs/airports/selected-airport/comms/freq[" ~ fcount ~ "]/value", "");
+            fcount += 1;
           }
           
           var longest_runway = 0;
@@ -188,9 +223,9 @@
             setprop("/sim/presets/runway", "");
             setprop("/sim/presets/parkpos", getprop("/sim/gui/dialogs/airports/selected-airport/parkpos"));
           }         
-      }    
-            
-	canvas.register_callback(update_info); # FIXME: this is a workaround to run dialog-specific code in the canvas block
+      }  
+        
+      canvas.register_callback(update_info); # FIXME: this is a workaround to run dialog-specific code in the canvas block
       ]]>
     </open>
     <close>
@@ -357,233 +392,422 @@
         
       </group>
 
-      <hrule/>
+      <group>
+        <layout>hbox</layout>
       
+        <group>
+          <layout>table</layout>
+          <valign>top</valign>
+          
+          <group>
+            <layout>hbox</layout>
+            <halign>fill</halign>
+            <row>0</row>
+            <col>0</col>
+            <colspan>2</colspan>
+
+            <text>
+              <label>Airfield Information</label>
+            </text>
+            
+            <hrule><stretch>1</stretch></hrule>
+          </group>
+
+          <text>
+            <row>1</row>
+            <col>0</col>
+            <halign>right</halign>
+            <label>Name:</label>
+          </text>
+          <text>
+            <row>1</row>
+            <col>1</col>
+            <halign>left</halign>
+            <live>true</live>
+            <label>Athens Intl Airport Elefterios Venizel</label>
+            <!--  The above airport is the longest name in Airports/apt.dat.gz as of 3 November 2012 -->
+            <property>/sim/gui/dialogs/airports/selected-airport/name</property>
+          </text>
+
+          <text>
+            <row>2</row>
+            <col>0</col>
+            <halign>right</halign>
+            <label>ICAO:</label>
+          </text>
+          <text>
+            <row>2</row>
+            <col>1</col>
+            <halign>left</halign>
+            <live>true</live>
+            <label>AAAA</label>
+            <property>/sim/gui/dialogs/airports/selected-airport/id</property>
+          </text>
+
+          <text>
+            <row>3</row>
+            <col>0</col>
+            <halign>right</halign>
+            <label>Lat / Lon:</label>
+          </text>
+          <text>
+            <row>3</row>
+            <col>1</col>
+            <halign>left</halign>
+            <live>true</live>
+            <label>XXXXXXXXXXXX</label>
+            <property>/sim/gui/dialogs/airports/selected-airport/location</property>
+          </text>
+
+          <text>
+            <row>4</row>
+            <col>0</col>
+            <halign>right</halign>
+            <label>Elevation:</label>
+          </text>
+          <text>
+            <row>4</row>
+            <col>1</col>
+            <halign>left</halign>
+            <live>true</live>
+            <format>%.0f ft</format>
+            <property>/sim/gui/dialogs/airports/selected-airport/elevation-ft</property>
+          </text>
+
+          <text>
+            <row>5</row>
+            <col>0</col>
+            <halign>right</halign>
+            <label>Longest runway:</label>
+          </text>
+          <text>
+            <row>5</row>
+            <col>1</col>
+            <halign>left</halign>
+            <live>true</live>
+            <format>%.0f ft</format>
+            <property>/sim/gui/dialogs/airports/selected-airport/longest-runway</property>
+          </text>
+
+          <text>
+            <row>6</row>
+            <col>0</col>
+            <halign>right</halign>
+            <label>Distance:</label>
+          </text>
+          <text>
+            <row>6</row>
+            <col>1</col>
+            <halign>left</halign>
+            <live>true</live>
+            <format>%.1f nm</format>
+            <property>/sim/gui/dialogs/airports/selected-airport/distance-nm</property>
+          </text>
+
+          <text>
+            <row>7</row>
+            <col>0</col>
+            <halign>right</halign>
+            <label>Course:</label>
+          </text>
+          <text>
+            <row>7</row>
+            <col>1</col>
+            <halign>left</halign>
+            <live>true</live>
+            <format>%.0f deg</format>
+            <property>/sim/gui/dialogs/airports/selected-airport/course-deg</property>
+          </text>
+        </group>
+        
+        <vrule/>
+        
+        <group>
+          <layout>vbox</layout>
+          <valign>top</valign>
+        
+          <group>
+            <layout>hbox</layout>
+            <halign>fill</halign>
+            <row>0</row>
+            <col>0</col>
+            <colspan>2</colspan>
+            
+            <text>
+              <label>Aircraft Position</label>
+            </text>
+            
+            <hrule><stretch>1</stretch></hrule>
+          </group>
+          
+          <group>
+            <layout>table</layout>
+            <halign>center</halign>
+            
+            <radio>
+              <row>2</row><col>0</col>
+              <property>/sim/gui/dialogs/airports/use_best_runway</property>
+              <live>true</live>
+              <binding>
+                <command>nasal</command>
+                <script>set_radio("bestrunway")</script>
+              </binding>
+            </radio>
+
+            <text>
+              <row>2</row><col>1</col>
+              <halign>right</halign>
+              <label>Best runway</label>
+              <enable>
+                <property>/sim/gui/dialogs/airports/use_best_runway</property>
+              </enable>
+            </text>
+            <text>
+              <row>2</row><col>2</col>
+              <halign>right</halign>
+              <label>(based on wind)</label>
+              <enable>
+                <property>/sim/gui/dialogs/airports/use_best_runway</property>
+              </enable>
+            </text>
+
+            <radio>
+              <row>3</row><col>0</col>
+              <property>/sim/gui/dialogs/airports/use_runway</property>
+              <live>true</live>
+              <binding>
+                <command>nasal</command>
+                <script>set_radio("runway")</script>
+              </binding>
+            </radio>
+
+            <text>
+              <row>3</row><col>1</col>
+              <halign>right</halign>
+              <label>Runway:</label>
+              <enable>
+                <property>/sim/gui/dialogs/airports/use_runway</property>
+              </enable>
+            </text>
+
+            <combo>
+              <name>runway-list</name>
+              <row>3</row><col>2</col>
+              <pref-width>85</pref-width>
+              <enable>
+                <property>/sim/gui/dialogs/airports/use_runway</property>
+              </enable>
+              <property>/sim/gui/dialogs/airports/selected-airport/rwy</property>
+              <editable>false</editable>
+              <properties>sim/gui/dialogs/airports/available-runways</properties>
+              <binding>
+                <command>dialog-apply</command>
+                <object-name>runway-list</object-name>
+              </binding>
+            </combo>
+
+            <radio>
+              <row>4</row><col>0</col>
+              <property>/sim/gui/dialogs/airports/use_parkpos</property>
+              <live>true</live>
+              <binding>
+                <command>nasal</command>
+                <script>set_radio("parkpos")</script>
+              </binding>
+            </radio>
+
+            <text>
+              <row>4</row><col>1</col>
+              <halign>right</halign>
+              <label>Parking:</label>
+              <enable>
+                <property>/sim/gui/dialogs/airports/use_parkpos</property>
+              </enable>
+            </text>
+            
+            <combo>
+              <name>parking-list</name>
+              <row>4</row><col>2</col>
+              <pref-width>85</pref-width>
+              <enable>
+                <property>/sim/gui/dialogs/airports/use_parkpos</property>
+              </enable>
+              <property>/sim/gui/dialogs/airports/selected-airport/parkpos</property>
+              <editable>false</editable>
+              <properties>sim/gui/dialogs/airports/available-parking</properties>
+              <binding>
+                <command>dialog-apply</command>
+                <object-name>parking-list</object-name>
+              </binding>
+            </combo>
+          </group>
+        </group>
+      </group>                
+
       <group>
         <layout>table</layout>
+        <halign>fill</halign>
         
-        <text>
+        <group>
+          <layout>hbox</layout>
+          <halign>fill</halign>
           <row>0</row>
           <col>0</col>
-          <width>100</width>
-          <halign>right</halign>        
-          <label>Airport:</label>
-        </text>
-        <text>
-          <row>0</row>
-          <col>1</col>
-          <colspan>3</colspan>
-          <halign>left</halign>
-          <live>true</live>
-          <property>/sim/gui/dialogs/airports/selected-airport/name</property>
-        </text>
+          <colspan>2</colspan>
+          
+          <text>
+            <label>Communications Frequencies</label>
+          </text>
+          
+          <hrule><stretch>1</stretch></hrule>
+        </group>
         
         <text>
           <row>1</row>
           <col>0</col>
-          <halign>right</halign>
-          <label>Lat / Lon:</label>
-        </text>
-        <text>
-          <row>1</row>
-          <col>1</col>
           <halign>left</halign>
           <live>true</live>
-          <property>/sim/gui/dialogs/airports/selected-airport/location</property>
+          <label>ACTIVATE LIGHTS ONLY MULTICOM</label>
+          <property>/sim/gui/dialogs/airports/selected-airport/comms/freq[0]/label</property>
         </text>
 
         <text>
           <row>1</row>
-          <col>2</col>
-          <halign>right</halign>
-          <label>Elevation:</label>
+          <col>1</col>
+          <halign>right</halign>            
+          <live>true</live>
+          <label>123.456 123.456 123.456 123.456 123.456</label>
+          <property>/sim/gui/dialogs/airports/selected-airport/comms/freq[0]/value</property>
         </text>
+        
         <text>
-          <row>1</row>
-          <col>3</col>
+          <row>2</row>
+          <col>0</col>
           <halign>left</halign>
           <live>true</live>
-          <format>%.0f ft</format>
-          <property>/sim/gui/dialogs/airports/selected-airport/elevation-ft</property>
+          <label>ACTIVATE LIGHTS ONLY MULTICOM</label>
+          <property>/sim/gui/dialogs/airports/selected-airport/comms/freq[1]/label</property>
         </text>
 
         <text>
           <row>2</row>
-          <col>0</col>
-          <halign>right</halign>
-          <label>Longest runway:</label>
-        </text>
-        <text>
-          <row>2</row>
           <col>1</col>
+          <halign>right</halign>            
+          <live>true</live>
+          <label>123.456 123.456 123.456 123.456 123.456</label>
+          <property>/sim/gui/dialogs/airports/selected-airport/comms/freq[1]/value</property>
+        </text>
+        
+        <text>
+          <row>3</row>
+          <col>0</col>
           <halign>left</halign>
           <live>true</live>
-          <format>%.0f ft</format>
-          <property>/sim/gui/dialogs/airports/selected-airport/longest-runway</property>
+          <label>ACTIVATE LIGHTS ONLY MULTICOM</label>
+          <property>/sim/gui/dialogs/airports/selected-airport/comms/freq[2]/label</property>
         </text>
 
         <text>
           <row>3</row>
-          <col>0</col>
-          <halign>right</halign>
-          <label>Distance:</label>
-        </text>
-        <text>
-          <row>3</row>
           <col>1</col>
-          <halign>left</halign>
+          <halign>right</halign>            
           <live>true</live>
-          <format>%.1f nm</format>
-          <property>/sim/gui/dialogs/airports/selected-airport/distance-nm</property>
-        </text>
-
-        <text>
-          <row>3</row>
-          <col>2</col>
-          <halign>right</halign>
-          <label>Course:</label>
-        </text>
-        <text>
-          <row>3</row>
-          <col>3</col>
-          <halign>left</halign>
-          <live>true</live>
-          <format>%.0f deg</format>
-          <property>/sim/gui/dialogs/airports/selected-airport/course-deg</property>
+          <label>123.456 123.456 123.456 123.456 123.456</label>
+          <property>/sim/gui/dialogs/airports/selected-airport/comms/freq[2]/value</property>
         </text>
         
         <text>
           <row>4</row>
           <col>0</col>
-          <colspan>3</colspan>
           <halign>left</halign>
           <live>true</live>
-          <label>METAR:</label>
+          <label>ACTIVATE LIGHTS ONLY MULTICOM</label>
+          <property>/sim/gui/dialogs/airports/selected-airport/comms/freq[3]/label</property>
         </text>
 
-        <textbox>
-          <name>metar</name>
+        <text>
+          <row>4</row>
+          <col>1</col>
+          <halign>right</halign>            
+          <live>true</live>
+          <label>123.456 123.456 123.456 123.456 123.456</label>
+          <property>/sim/gui/dialogs/airports/selected-airport/comms/freq[3]/value</property>
+        </text>
+        
+        <text>
           <row>5</row>
           <col>0</col>
-          <colspan>4</colspan>
-          <halign>fill</halign>
-          <stretch>true</stretch>
-          <pref-width>300</pref-width>
-          <pref-height>60</pref-height>
-          <slider>0</slider>
-          <editable>false</editable>
-          <wrap>true</wrap>
+          <halign>left</halign>
           <live>true</live>
-          <property>/sim/gui/dialogs/airports/selected-airport/metar/data</property>
-        </textbox>
-
-      </group>
-      
-      <hrule/>
-      
-      <group>
-        <layout>table</layout>
-        <halign>center</halign>
-        
-        <radio>
-          <row>2</row><col>0</col>
-          <property>/sim/gui/dialogs/airports/use_best_runway</property>
-          <live>true</live>
-          <binding>
-            <command>nasal</command>
-            <script>set_radio("bestrunway")</script>
-          </binding>
-        </radio>
-
-        <text>
-          <row>2</row><col>1</col>
-          <halign>right</halign>
-          <label>Best runway</label>
-          <enable>
-            <property>/sim/gui/dialogs/airports/use_best_runway</property>
-          </enable>
-        </text>
-        <text>
-          <row>2</row><col>2</col>
-          <halign>right</halign>
-          <label>(based on wind)</label>
-          <enable>
-            <property>/sim/gui/dialogs/airports/use_best_runway</property>
-          </enable>
+          <label>ACTIVATE LIGHTS ONLY MULTICOM</label>
+          <property>/sim/gui/dialogs/airports/selected-airport/comms/freq[4]/label</property>
         </text>
 
-        <radio>
-          <row>3</row><col>0</col>
-          <property>/sim/gui/dialogs/airports/use_runway</property>
-          <live>true</live>
-          <binding>
-            <command>nasal</command>
-            <script>set_radio("runway")</script>
-          </binding>
-        </radio>
-
         <text>
-          <row>3</row><col>1</col>
-          <halign>right</halign>
-          <label>Runway:</label>
-          <enable>
-            <property>/sim/gui/dialogs/airports/use_runway</property>
-          </enable>
-        </text>
-
-        <combo>
-          <name>runway-list</name>
-          <row>3</row><col>2</col>
-          <pref-width>85</pref-width>
-          <enable>
-            <property>/sim/gui/dialogs/airports/use_runway</property>
-          </enable>
-          <property>/sim/gui/dialogs/airports/selected-airport/rwy</property>
-          <editable>false</editable>
-          <properties>sim/gui/dialogs/airports/available-runways</properties>
-          <binding>
-            <command>dialog-apply</command>
-            <object-name>runway-list</object-name>
-          </binding>
-        </combo>
-
-        <radio>
-          <row>4</row><col>0</col>
-          <property>/sim/gui/dialogs/airports/use_parkpos</property>
+          <row>5</row>
+          <col>1</col>
+          <halign>right</halign>            
           <live>true</live>
-          <binding>
-            <command>nasal</command>
-            <script>set_radio("parkpos")</script>
-          </binding>
-        </radio>
-
-        <text>
-          <row>4</row><col>1</col>
-          <halign>right</halign>
-          <label>Parking:</label>
-          <enable>
-            <property>/sim/gui/dialogs/airports/use_parkpos</property>
-          </enable>
+          <label>123.456 123.456 123.456 123.456 123.456</label>
+          <property>/sim/gui/dialogs/airports/selected-airport/comms/freq[4]/value</property>
         </text>
         
-        <combo>
-          <name>parking-list</name>
-          <row>4</row><col>2</col>
-          <pref-width>85</pref-width>
-          <enable>
-            <property>/sim/gui/dialogs/airports/use_parkpos</property>
-          </enable>
-          <property>/sim/gui/dialogs/airports/selected-airport/parkpos</property>
-          <editable>false</editable>
-          <properties>sim/gui/dialogs/airports/available-parking</properties>
-          <binding>
-            <command>dialog-apply</command>
-            <object-name>parking-list</object-name>
-          </binding>
-        </combo>
-      </group>
+        <text>
+          <row>6</row>
+          <col>0</col>
+          <halign>left</halign>
+          <live>true</live>
+          <label>ACTIVATE LIGHTS ONLY MULTICOM</label>
+          <property>/sim/gui/dialogs/airports/selected-airport/comms/freq[5]/label</property>
+        </text>
 
-    </group>    
+        <text>
+          <row>6</row>
+          <col>1</col>
+          <halign>right</halign>            
+          <live>true</live>
+          <label>123.456 123.456 123.456 123.456 123.456</label>
+          <property>/sim/gui/dialogs/airports/selected-airport/comms/freq[5]/value</property>
+        </text>
+
+        <text>
+          <row>7</row>
+          <col>0</col>
+          <halign>left</halign>
+          <live>true</live>
+          <label>ACTIVATE LIGHTS ONLY MULTICOM</label>
+          <property>/sim/gui/dialogs/airports/selected-airport/comms/freq[6]/label</property>
+        </text>
+
+        <text>
+          <row>7</row>
+          <col>1</col>
+          <halign>right</halign>            
+          <live>true</live>
+          <label>123.456 123.456 123.456 123.456 123.456</label>
+          <property>/sim/gui/dialogs/airports/selected-airport/comms/freq[6]/value</property>
+        </text>
+
+        <text>
+          <row>8</row>
+          <col>0</col>
+          <halign>left</halign>
+          <live>true</live>
+          <label>ACTIVATE LIGHTS ONLY MULTICOM</label>
+          <property>/sim/gui/dialogs/airports/selected-airport/comms/freq[7]/label</property>
+        </text>
+
+        <text>
+          <row>8</row>
+          <col>1</col>
+          <halign>right</halign>            
+          <live>true</live>
+          <label>123.456 123.456 123.456 123.456 123.456</label>
+          <property>/sim/gui/dialogs/airports/selected-airport/comms/freq[7]/value</property>
+        </text>
+        
+      </group>        
+    </group>
     
     <vrule/>
   
@@ -599,9 +823,9 @@
         <halign>fill</halign>
         <stretch>true</stretch>
         <pref-width>600</pref-width>
-        <pref-height>400</pref-height>
+        <pref-height>600</pref-height>
         <view n="0">600</view>
-        <view n="1">400</view>
+        <view n="1">600</view>
 
 
        <features>
@@ -656,7 +880,6 @@
 		<description>Show Tower</description>
 		<default>enabled</default>
         </layer>
-
 	<!-- Uncomment this to add a navaid layer (not yet fully implemented, and no LOD yet)
  	<layer>
                 <name>navaids</name>
@@ -669,12 +892,40 @@
 
        </features>
       </canvas>
-      <hrule/>
       
       <group>
 	  <name>canvas-control</name> <!-- this is the handle we use to procedurally add all "toggle layer" checkboxes  and the zoom control-->
           <layout>hbox</layout>
       </group>
+      
+      <group>
+        <layout>hbox</layout>
+        <halign>fill</halign>
+        <row>0</row>
+        <col>0</col>
+        <colspan>2</colspan>
+
+        <text>
+          <label>METAR</label>
+        </text>
+        
+        <hrule><stretch>1</stretch></hrule>
+      </group>
+
+      <textbox>
+        <name>metar</name>
+        <halign>fill</halign>
+        <stretch>true</stretch>
+        <pref-width>300</pref-width>
+        <pref-height>60</pref-height>
+        <slider>0</slider>
+        <editable>false</editable>
+        <wrap>true</wrap>
+        <live>true</live>
+        <property>/sim/gui/dialogs/airports/selected-airport/metar/data</property>
+      </textbox>
+      
+      
     </group>
   </group>
   

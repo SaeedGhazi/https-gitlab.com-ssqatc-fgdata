@@ -714,6 +714,7 @@ Started September 2000 by David Megginson, david@megginson.com
 				<low-res-sample-dt type="double">5.0</low-res-sample-dt>
 				<low-res-time type="double">3600.0</low-res-time><!-- 1 h -->
 			</buffer>
+			<tape-directory type="string" userarchive="y"></tape-directory>
 		</replay>
 
 		<airport>

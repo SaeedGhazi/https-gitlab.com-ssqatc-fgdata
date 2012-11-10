@@ -1098,25 +1098,27 @@ top down before the key bindings are parsed.
   </binding>
  </key>
 
- <!--<key n="257">
+ <key n="257">
   <name>F1</name>
   <mod-shift>
-   <desc>Load flight</desc>
+   <desc>Load flight recorder tape</desc>
    <binding>
-    <command>load</command>
+    <command>dialog-show</command>
+    <dialog-name>flight-recorder-load</dialog-name>
    </binding>
   </mod-shift>
  </key>
 
  <key n="258">
+  <name>F2</name>
   <mod-shift>
-   <desc>Save flight</desc>
+   <desc>Save flight recorder tape</desc>
    <binding>
-    <command>save</command>
-    <write-all>false</write-all>
+    <command>dialog-show</command>
+    <dialog-name>flight-recorder-save</dialog-name>
    </binding>
   </mod-shift>
- </key>-->
+ </key>
 
  <key n="259">
   <name>F3</name>

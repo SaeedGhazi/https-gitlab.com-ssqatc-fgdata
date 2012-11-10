@@ -3,25 +3,7 @@
 
 	<menu>
 		<name>file</name>
-<!--
-		<item>
-			<label>Load Flight</label>
-			<key>Shift-F1</key>
-			<binding>
-				<command>nasal</command>
-				<script>gui.load_flight()</script>
-			</binding>
-		</item>
 
-		<item>
-			<label>Save Flight</label>
-			<key>Shift-F2</key>
-			<binding>
-				<command>nasal</command>
-				<script>gui.save_flight()</script>
-			</binding>
-		</item>
--->
 		<item>
 			<name>reset</name>
 			<key>Shift-Esc</key>
@@ -29,15 +11,25 @@
 				<command>reset</command>
 			</binding>
 		</item>
-<!--
+
 		<item>
-			<label>High-Res Snapshot</label>
-			<enabled>false</enabled>
+			<name>load-tape</name>
+			<key>Shift-F1</key>
 			<binding>
-				<command>hires-screen-capture</command>
+				<command>dialog-show</command>
+				<dialog-name>flight-recorder-load</dialog-name>
 			</binding>
 		</item>
--->
+
+		<item>
+			<name>save-tape</name>
+			<key>Shift-F2</key>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>flight-recorder-save</dialog-name>
+			</binding>
+		</item>
+
 		<item>
 			<name>snap-shot</name>
 			<key>F3</key>

@@ -6,11 +6,13 @@
 
 	<!-- File menu -->
 	<file>File</file>
-	<reset>Reset</reset>
-	<snap-shot>Screenshot  </snap-shot>
+	<reset>Reset                              </reset>
+	<load-tape>Load Flight Recorder Tape</load-tape>
+	<save-tape>Save Flight Recorder Tape</save-tape>
+	<snap-shot>Screenshot                      </snap-shot>
 	<snap-shot-dir>Screenshot Directory</snap-shot-dir>
 	<sound-config>Sound Configuration</sound-config>
-	<exit>Quit          </exit>
+	<exit>Quit                               </exit>
 
 	<!-- View menu -->
 	<view>View</view>

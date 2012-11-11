@@ -444,7 +444,7 @@
   <nasal>
     <open><![CDATA[
       var msg = "";
-      if (getprop("/sim/terrasync/built-in-svn-available",0))
+      if (getprop("/sim/terrasync/built-in-svn-available") == 0)
       {
           msg = "Sorry, this binary was built without support to download scenery.";
           setprop("/sim/terrasync/enabled", 0);
@@ -469,7 +469,7 @@
       }
 
       # Add error text if the user only has fg-data/Scenery available and disable controls.
-      if (! valid) {
+      if (!valid) {
         var warning = cmdarg().getChildren("group")[1].getChildren("text")[1];
         var txt = "You must configure a separate FG_SCENERY directory for automatic scenery download";
         warning.getNode("label").setValue(txt);

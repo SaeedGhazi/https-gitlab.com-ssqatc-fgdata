@@ -235,7 +235,7 @@ var manager = {
 			me.current.handler.start();
 		if (hasmember(me.current.handler, "update"))
 			me._loop_(me.loopid += 1);
-		resetFOV();
+#		resetFOV();
 	},
 	reset : func {
 		if (hasmember(me.current.handler, "reset"))

@@ -7,7 +7,7 @@
     <resizable>false</resizable>
 
     <nasal>
-        <open>
+        <open><![CDATA[
             if ((getprop("/sim/multiplay/selected-server") == nil) or 
                 (getprop("/sim/multiplay/selected-server") == "" )   ){
                 var tx = getprop("/sim/multiplay/txhost");
@@ -21,6 +21,49 @@
                     }
                 }
             }
+            
+            var servers = props.globals.getNode("/sim/gui/dialogs/multiplay/servers", 1);
+            var updateServers = func {
+                servers.removeChildren("value");
+                
+                debug.dump("Got server list");
+                
+                # get the results list from the server
+                var serverlist = props.globals.getNode("/sim/multiplay/server-list", 1);
+            
+                var i=0;
+                foreach (var s; serverlist.getChildren("server")) {
+                    
+                    if (!s.getNode("online").getBoolValue()) {
+                      continue; # skip offline servers
+                    }
+                  
+                # label is name and location, for the moment
+                # should we include the number of users? or wait until we
+                # have a better UI toolkit?
+                    var nm = s.getNode("hostname").getValue() ~ " - " ~ s.getNode("location").getValue();
+                    servers.getNode("value[" ~ i ~ "]", 1).setValue(nm);
+                    i += 1;
+                }
+
+                gui.dialog_update("multiplayer", "host");
+            }
+            
+            var updateServersFailed = func {
+                debug.dump("Failed to retrieve server list!");
+            }
+            
+            # listen for results arriving  
+            setlistener("/sim/multiplay/got-servers", updateServers, 1);
+            setlistener("/sim/multiplay/get-servers-failure", updateServersFailed, 1);
+            
+            fgcommand("xmlhttprequest",  props.Node.new({
+              "url" : "http://liveries.flightgear.org/mpstatus/mpservers.xml",
+              "targetnode" : "/sim/multiplay/server-list",
+              "complete" : "/sim/multiplay/got-servers",
+              "failure" : "/sim/multiplay/get-servers-failure"
+            }));
+            ]]>
         </open>
         
         <close>
@@ -119,6 +162,9 @@
             <pref-width>350</pref-width>
             <property>/sim/multiplay/selected-server</property>
             <editable>false</editable>
+            
+            <properties>/sim/gui/dialogs/multiplay/servers</properties>
+    <!--
             <value>mpserver01.flightgear.org (Frankfurt, Germany)</value>
             <value>mpserver02.flightgear.org (Kansas, USA)</value>
             <value>mpserver03.flightgear.org (Germany)</value>
@@ -130,7 +176,7 @@
             <value>mpserver10.flightgear.org (Montpellier, France)</value>
             <value>mpserver11.flightgear.org (Vilnius, Lithuania)</value>
             <value>mpserver12.flightgear.org (Amsterdam, Netherlands)</value>
-            <value>mpserver13.flightgear.org (Grenoble, France)</value>
+            <value>mpserver13.flightgear.org (Grenoble, France)</value> -->
         </combo>
 
         <!-- status area -->

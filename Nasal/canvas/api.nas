@@ -745,7 +745,7 @@ var Canvas = {
   # Get path of canvas to be used eg. in Image::setFile
   getPath: func()
   {
-    return "canvas://by-index/texture[" ~ me._node.getIndex() ~ "]";
+    return "canvas://by-index/texture[" ~ me.texture.getIndex() ~ "]";
   }
 };
 
@@ -759,9 +759,9 @@ var Canvas = {
 #  });
 var new = func(vals)
 {
-  var m = { parents: [Canvas] };
+  var m = { parents: [Canvas, _newCanvasGhost()] };
 
-  m.texture = Canvas.property_root.addChild("texture", 0, 0);
+  m.texture = props.wrapNode(m._node_ghost);
   m.texture.setValues(vals);
 
   return m;

@@ -56,6 +56,19 @@ Canvas.setStrokeDashArray = func(pattern)
   return me;
 };
 
+# Internal helper for creating a canvas.
+#
+# @note In 2.9+ this function is replaced by a C++ function. This
+#       implementation is just used as fallback for 2.8 and for usage
+#       in other programs.
+canvas._newCanvasGhost = func()
+{
+  return {
+    parents: [Canvas],
+    texture: Canvas.property_root.addChild("texture", 0, 0)
+  };
+};
+
 print("Canvas API: FlightGear 2.8 backward support loaded.");
 
 })();

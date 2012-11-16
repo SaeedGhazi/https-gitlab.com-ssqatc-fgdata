@@ -269,7 +269,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
                 var p = substr(pattern, 13);
                 var sim = props.globals.getNode("/sim");
                 foreach (var c; sim.getChildren("fg-aircraft")) {
-                    pattern = c.getValue() ~ "/" ~ p;
+                    pattern = string.normpath(c.getValue()) ~ "/" ~ p;
                     append(rules, [pattern, allow]);
                     printlog("info", "IORules: appending ", pattern);
                 }
@@ -277,7 +277,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
                 var p = substr(pattern, 12);
                 var sim = props.globals.getNode("/sim");
                 foreach (var c; sim.getChildren("fg-scenery")) {
-                    pattern = c.getValue() ~ "/" ~ p;
+                    pattern = string.normpath(c.getValue()) ~ "/" ~ p;
                     append(rules, [pattern, allow]);
                     printlog("info", "IORules: appending ", pattern);
                 }        

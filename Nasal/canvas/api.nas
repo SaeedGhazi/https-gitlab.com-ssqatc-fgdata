@@ -736,7 +736,17 @@ var Canvas = {
   # @param id Optional id/name for the group
   createGroup: func(id = nil)
   {
-    return Group.new([me.texture, "group"], id);
+    if( size(me.parents) >= 2 )
+    {
+      var ghost = me.parents[1].createGroup();
+      return {
+        parents: [ Group.new(props.wrapNode(ghost._node_ghost), id),
+                   ghost ]
+      };
+    }
+    else
+      # Fallback for Canvas instances not based on a ghost
+      return Group.new([me.texture, "group"], id);
   },
   # Set the background color
   #

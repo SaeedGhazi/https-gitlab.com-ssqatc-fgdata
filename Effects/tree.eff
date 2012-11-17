@@ -389,6 +389,7 @@
 	<technique n="10">
 		<predicate>
 			<and>
+				<property>/sim/rendering/shaders/quality-level</property>
 				<property>/sim/rendering/random-vegetation</property>
 				<less-equal>
 					<value type="float">1.0</value>

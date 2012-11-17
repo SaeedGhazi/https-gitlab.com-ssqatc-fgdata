@@ -21,6 +21,7 @@
   <technique n="9">
     <predicate>
       <and>
+	    <property>/sim/rendering/shaders/quality-level</property>
         <property>/sim/rendering/shaders/crop</property>
 		<equal>
 			<value type="float">0.0</value>

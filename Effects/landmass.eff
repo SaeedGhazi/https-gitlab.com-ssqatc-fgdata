@@ -48,6 +48,7 @@
 	<technique n="8">
 		<predicate>
 			<and>
+				<property>/sim/rendering/shaders/quality-level</property>
 				<property>/sim/rendering/shaders/landmass</property>
 				<less-equal>
 					<value type="float">4.0</value>
@@ -375,6 +376,7 @@
 	<technique n="9">
 		<predicate>
 			<and>
+				<property>/sim/rendering/shaders/quality-level</property>
 				<property>/sim/rendering/shaders/landmass</property>
 				<equal>
 					<value type="float">0.0</value>

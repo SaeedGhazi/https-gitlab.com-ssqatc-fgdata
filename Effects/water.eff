@@ -1637,6 +1637,7 @@
 	<technique n="8">
 		<predicate>
 			<and>
+				<property>/sim/rendering/shaders/quality-level</property>
 				<property>/sim/rendering/shaders/water</property>
 				<less-equal>
 					<value type="float">4.0</value>
@@ -2010,6 +2011,7 @@
 	<technique n="9">
 		<predicate>
 			<and>
+				<property>/sim/rendering/shaders/quality-level</property>
 				<property>/sim/rendering/shaders/water</property>
 				<less-equal>
 					<value type="float">2.0</value>

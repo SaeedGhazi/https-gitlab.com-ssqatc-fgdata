@@ -1435,7 +1435,9 @@ var update_shader_settings = func() {
         setprop("/sim/rendering/shaders/crop",qualityLvl);
         setprop("/sim/rendering/shaders/generic",qualityLvl);
         setprop("/sim/rendering/shaders/transition",qualityLvl);
-    }
+    } else {
+		setprop("/sim/rendering/shaders/quality-level",-1);
+	}
 
     if (rembrandtOn) {
 		setprop("/sim/rendering/shaders/skydome",0);

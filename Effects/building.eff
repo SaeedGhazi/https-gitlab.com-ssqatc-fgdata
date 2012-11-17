@@ -342,7 +342,7 @@
   <technique n="11">
     <pass>
       <program n="0">
-        <vertex-shader n="0">Shaders/building-default.vert</vertex-shader>
+        <vertex-shader n="1">Shaders/building-default.vert</vertex-shader>
       </program>
     </pass>
   </technique>  

@@ -766,6 +766,7 @@ please see Docs/README.model-combined.eff for documentation
 	<technique n="9">
 	  <predicate>
 		<and>
+		  <property>/sim/rendering/shaders/quality-level</property>
 		  <property>/sim/rendering/shaders/model</property>
 		  <or>
 			<less-equal>

@@ -540,6 +540,7 @@
   <technique n="11">
     <predicate>
       <and>
+		<property>/sim/rendering/shaders/quality-level</property>
         <property>/sim/rendering/shaders/generic</property>
         <or>
           <less-equal>

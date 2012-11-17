@@ -135,6 +135,7 @@ EXAMPLES: You can find examples of both usages in the Hunter and Lightning model
 	<technique n="9">
 		<predicate>
 			<and>
+				<property>/sim/rendering/shaders/quality-level</property>
 				<property>/sim/rendering/shaders/model</property>
 				<or>
 					<less-equal>

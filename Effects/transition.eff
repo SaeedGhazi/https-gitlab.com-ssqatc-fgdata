@@ -388,6 +388,7 @@ parameters :
 	<technique n="9">
 		<predicate>
 			<and>
+				<property>/sim/rendering/shaders/quality-level</property>
 				<property>/sim/rendering/shaders/transition</property>
 				<equal>
 					<value type="float">0.0</value>

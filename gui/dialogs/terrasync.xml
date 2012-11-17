@@ -444,13 +444,15 @@
   <nasal>
     <open><![CDATA[
       var msg = "";
-      if (getprop("/sim/terrasync/built-in-svn-available") == 0)
+      if (getprop("/sim/terrasync/built-in-svn-available"))
+      {
+          msg = "Monitor your bandwidth or use a flat-rate when using automatic download.";
+      }
+      else
       {
           msg = "Sorry, this binary was built without support to download scenery.";
           setprop("/sim/terrasync/enabled", 0);
       }
-      else
-          msg = "Monitor your bandwidth or use a flat-rate when using automatic download.";
       var msgLabel = gui.findElementByName(cmdarg(),"message");
       msgLabel.getNode("label",1).setValue(msg);
 

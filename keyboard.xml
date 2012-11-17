@@ -1205,11 +1205,17 @@ top down before the key bindings are parsed.
    <property>/sim/menubar/visibility</property>
   </binding>
   <mod-shift>
+    <desc>Toggle fullscreen</desc>
+    <binding>
+      <command>toggle-fullscreen</command>
+    </binding>
+<!--
    <desc>Switch to next GUI style</desc>
    <binding>
     <command>nasal</command>
     <script>gui.nextStyle()</script>
    </binding>
+-->
   </mod-shift>
  </key>
 

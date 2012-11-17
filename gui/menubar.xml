@@ -73,6 +73,14 @@
 		<name>view</name>
 
 		<item>
+			<name>toggle-fullscreen</name>
+			<key>Shift-F10</key>
+			<binding>
+				<command>toggle-fullscreen</command>
+			</binding>
+		</item>
+
+		<item>
 			<name>rendering-options</name>
 			<binding>
 				<command>dialog-show</command>

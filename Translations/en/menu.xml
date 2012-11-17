@@ -16,6 +16,7 @@
 
 	<!-- View menu -->
 	<view>View</view>
+	<toggle-fullscreen>Toggle Fullscreen</toggle-fullscreen>
 	<rendering-options>Rendering Options</rendering-options>
 	<view-options>View Options</view-options>
 	<cockpit-view-options>Cockpit View Options</cockpit-view-options>

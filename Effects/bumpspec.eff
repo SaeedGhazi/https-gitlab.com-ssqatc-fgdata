@@ -37,6 +37,7 @@ in Aircraft/A320/Models/Effects/a320_bumpspec.eff ( or whatever, private to the 
   <technique n="11"> <!-- This number should be the same than the second technique in model-default -->
     <predicate>
       <and>
+		<property>/sim/rendering/shaders/quality-level</property>
         <property>/sim/rendering/shaders/model</property>
         <or>
           <less-equal>

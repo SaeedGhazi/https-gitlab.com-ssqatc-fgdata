@@ -120,6 +120,7 @@
 	<technique n="9">
 		<predicate>
 			<and>
+				<property>/sim/rendering/shaders/quality-level</property>
 				<property>/sim/rendering/shaders/water</property>
 				<less-equal>
 					<value type="float">2.0</value>
@@ -495,6 +496,7 @@
 	<technique n="11"> <!-- FIXME: this technique number overlaps the one in model-default -->
 		<predicate>
 			<and>
+				<property>/sim/rendering/shaders/quality-level</property>
 				<property>/sim/rendering/shaders/water</property>
 				<or>
 					<less-equal>

@@ -507,8 +507,6 @@ var speedup = func(speed_up)
     if (speed_up < 0)
     {
         t = (t > 1/32) ? t/2 : 1/32;
-        if ((t<1)and(0==getprop("/sim/freeze/replay-state")))
-            t=1;
     }
     else
     {

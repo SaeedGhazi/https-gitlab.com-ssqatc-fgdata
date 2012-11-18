@@ -736,17 +736,10 @@ var Canvas = {
   # @param id Optional id/name for the group
   createGroup: func(id = nil)
   {
-    if( size(me.parents) >= 2 )
-    {
-      var ghost = me.parents[1].createGroup();
-      return {
-        parents: [ Group.new(props.wrapNode(ghost._node_ghost), id),
-                   ghost ]
-      };
-    }
-    else
-      # Fallback for Canvas instances not based on a ghost
-      return Group.new([me.texture, "group"], id);
+    var ghost = me.parents[1].createGroup();
+    return {
+      parents: [ Group.new(props.wrapNode(ghost._node_ghost), id), ghost ]
+    };
   },
   # Set the background color
   #
@@ -759,6 +752,14 @@ var Canvas = {
   }
 };
 
+var wrapCanvas = func(canvas_ghost)
+{
+  return {
+    parents: [Canvas, canvas_ghost],
+    texture: props.wrapNode(canvas_ghost._node_ghost)
+  };
+}
+
 # Create a new canvas. Pass parameters as hash, eg:
 #
 #  var my_canvas = canvas.new({
@@ -769,11 +770,8 @@ var Canvas = {
 #  });
 var new = func(vals)
 {
-  var m = { parents: [Canvas, _newCanvasGhost()] };
-
-  m.texture = props.wrapNode(m._node_ghost);
+  var m = wrapCanvas(_newCanvasGhost());
   m.texture.setValues(vals);
-
   return m;
 };
 
@@ -782,30 +780,20 @@ var new = func(vals)
 # @param name Name of the canvas
 # @return #Canvas, if canvas with #name exists
 #         nil, otherwise
-var get = func(name)
+var get = func(arg)
 {
-  var node_canvas = nil;
-  if( isa(name, props.Node) )
-    node_canvas = name;
-  else if( typeof(name) == 'scalar' )
-  {
-    foreach(var c; Canvas.property_root.getChildren("texture"))
-    {
-      if( c.getValue("name") == name )
-        node_canvas = c;
-    }
-  }
+  if( isa(arg, props.Node) )
+    var node = arg;
+  else if( typeof(arg) == "hash" )
+    var node = props.Node.new(arg);
+  else
+    die("canvas.new: Invalid argument.");
 
-  if( node_canvas == nil )
-  {
-    debug.warn("Canvas not found: " ~ name);
+  var canvas_ghost = _getCanvasGhost(node._g);
+  if( canvas_ghost == nil )
     return nil;
-  }
 
-  return {
-    parents: [Canvas],
-    texture: node_canvas
-  };
+  return wrapCanvas(canvas_ghost);
 };
 
 # ------------------------------------------------------------------------------

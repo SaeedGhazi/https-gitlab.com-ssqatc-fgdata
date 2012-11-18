@@ -22,7 +22,7 @@ var setColorNodes = func(obj, name, color)
           .setDoubleValue( i < size(color) ? color[i]
                                            : 1 ); # default alpha is 1
   }
-  
+
   return obj;
 };
 
@@ -56,6 +56,16 @@ Canvas.setStrokeDashArray = func(pattern)
   return me;
 };
 
+# Create a canvas object from the given node. Used instead of ghost available
+# in newer FG versions.
+var makeCanvas = func(node)
+{
+  return {
+    _node_ghost: node._g,
+    createGroup: func props.wrapNode(me._node_ghost).addChild("group", 0, 0)._g
+  };
+};
+
 # Internal helper for creating a canvas.
 #
 # @note In 2.9+ this function is replaced by a C++ function. This
@@ -63,10 +73,39 @@ Canvas.setStrokeDashArray = func(pattern)
 #       in other programs.
 canvas._newCanvasGhost = func()
 {
-  return {
-    parents: [Canvas],
-    texture: Canvas.property_root.addChild("texture", 0, 0)
-  };
+  return makeCanvas( Canvas.property_root.addChild("texture", 0, 0) );
+};
+
+# Internal helper for retrieving an existing canvas.
+#
+canvas._getCanvasGhost = func(arg_ghost)
+{
+  var arg = props.wrapNode(arg_ghost);
+
+  # get a canvas specified by its root node
+  if( Canvas.property_root.getPath() == arg.getParent().getPath() )
+    var node = Canvas.property_root.getChild("texture", arg.getIndex());
+
+  # get a canvas by its name
+  else if( (var name = arg.getChild("name")) != nil )
+  {
+    name = name.getValue();
+    var node = nil;
+    foreach(var c; Canvas.property_root.getChildren("texture"))
+    {
+      if( c.getValue("name") == name )
+        node_canvas = c;
+    }
+  }
+
+  # get a canvas by its index
+  else if( (var index = arg.getChild("index")) != nil )
+    var node = Canvas.property_root.getChild("texture", index.getValue());
+
+  if( node == nil )
+    return nil;
+
+  return makeCanvas( node );
 };
 
 print("Canvas API: FlightGear 2.8 backward support loaded.");

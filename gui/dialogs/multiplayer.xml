@@ -24,10 +24,7 @@
             
             var servers = props.globals.getNode("/sim/gui/dialogs/multiplay/servers", 1);
             var updateServers = func {
-                servers.removeChildren("value");
-                
-                debug.dump("Got server list");
-                
+                servers.removeChildren("value");                
                 # get the results list from the server
                 var serverlist = props.globals.getNode("/sim/multiplay/server-list", 1);
             
@@ -54,8 +51,8 @@
             }
             
             # listen for results arriving  
-            setlistener("/sim/multiplay/got-servers", updateServers, 1);
-            setlistener("/sim/multiplay/get-servers-failure", updateServersFailed, 1);
+            setlistener("/sim/multiplay/got-servers", updateServers);
+            setlistener("/sim/multiplay/get-servers-failure", updateServersFailed);
             
             fgcommand("xmlhttprequest",  props.Node.new({
               "url" : "http://liveries.flightgear.org/mpstatus/mpservers.xml",

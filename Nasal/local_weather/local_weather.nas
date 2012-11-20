@@ -467,7 +467,7 @@ var n_stations = size(weatherStationArray);
 
 for (var i = 0; i < n_stations; i=i+1) {
 	
-	s = weatherStationArray[i];
+	var s = weatherStationArray[i];
 	
 
 	var stpos = geo.Coord.new();
@@ -511,6 +511,7 @@ var D = sum_D/sum_norm + temperature_offset;
 var T = sum_T/sum_norm + temperature_offset;
 
 
+
 # get an inverse distance weighted average from all defined atmospheric condition points
 
 sum_norm = 0.0;
@@ -528,7 +529,7 @@ var n_iPoints = size(atmosphereIpointArray);
 
 for (var i = 0; i < n_iPoints; i=i+1) {
 	
-	a = atmosphereIpointArray[i];
+	var a = atmosphereIpointArray[i];
 	
 
 	var apos = geo.Coord.new();
@@ -587,10 +588,11 @@ var scatt_alt_high = sum_scatt_alt_high/sum_norm;
 vis = vis * ground_haze_factor;
 
 var altitude = getprop("position/altitude-ft");
-current_mean_terrain_elevation = ialt;
+# var current_mean_terrain_elevation = ialt;
 
 var alt1 = vis_alt1;
 var alt2 = alt1 + 1500.0;
+
 
 setprop("/environment/ground-visibility-m",vis);
 setprop("/environment/ground-haze-thickness-m",alt2 * ft_to_m);
@@ -693,6 +695,11 @@ else
 	{var scatt = 0.95;}
 
 
+# compute  the cloud layer self shading correction
+
+var sun_angle = 1.57079632675 - getprop("/sim/time/sun-angle-rad");
+var cloud_layer_shading = 1.0 - ((1.0 - scatt_max) *  math.pow(math.cos(sun_angle),100.0));
+
 # compute the overcast haze
 
 if (altitude < ovcst_alt_low)
@@ -731,11 +738,7 @@ else if (vis/vis_before < (2.0-vlimit))
 # write all properties into the weather interpolation record 
 
 setprop(lwi~"mean-terrain-altitude-ft",ialt);
-# if (vis > 0.0) {setprop(lwi~"visibility-m",vis);} # a redundancy check
-# setprop(lwi~"temperature-degc",T);
-# setprop(lwi~"dewpoint-degc",D);
-# if (p > 10.0) {setprop(lwi~"pressure-sea-level-inhg",p);}
-# setprop(lwi~"turbulence",0.0);
+
 
 if (vis > 0.0) interpolated_conditions.visibility_m = vis;
 interpolated_conditions.temperature_degc = T;
@@ -747,6 +750,7 @@ if (p>10.0) interpolated_conditions.pressure_sea_level_inhg = p;
 if (scattering_shader_flag == 1)
 	{
 	local_weather.setSkydomeShader(rayleigh, mie, density);
+	setprop("/environment/cloud-self-shading", cloud_layer_shading);
 	}
 
 local_weather.setScattering(scatt);
@@ -757,7 +761,7 @@ local_weather.setOvercast(ovcst);
 
 # now check if an effect volume writes the property and set only if not
 
-flag = getprop("local-weather/effect-volumes/number-active-vis");
+var flag = getprop("local-weather/effect-volumes/number-active-vis");
 
 if ((flag ==0) and (vis > 0.0) and (getprop(lw~"lift-loop-flag") == 0) and (compat_layer.smooth_visibility_loop_flag == 0))
 	{
@@ -1532,12 +1536,12 @@ return lift;
 # separately
 ###########################################################
 
-var create_cloud_vec = func(path, lat, long, alt, heading) {
+var create_cloud_vec = func(path, lat, lon, alt, heading) {
 
 if (path == "new") # we have to switch to new cloud generating routines
 	{
 	local_weather.cloudAssembly.lat = lat;
-	local_weather.cloudAssembly.lon = long;
+	local_weather.cloudAssembly.lon = lon;
 	local_weather.cloudAssembly.alt = alt;	
 	local_weather.cloudAssembly.top_shade = top_shade;
 
@@ -1550,16 +1554,39 @@ if (path == "new") # we have to switch to new cloud generating routines
 		local_weather.cloudAssembly.evolution_timestamp = cloud_evolution_timestamp;
 		local_weather.cloudAssembly.rel_alt = cloudAssembly.alt - cloud_mean_altitude;
 		}
-	#compat_layer.create_cloud_new(local_weather.cloudAssembly);	
 
 	append(cloudAssemblyArray,cloudAssembly);
+
+	# at this point we insert tracers for the depth buffer
+	
+	#if (local_weather.cloudAssembly.tracer_flag == 1)
+	#	{	
+	#	tracerAssembly = local_weather.cloud.new("Tracer", "default");
+	#	tracerAssembly.texture_sheet = "/Models/Weather/nimbus_sheet1.rgb";
+	#	tracerAssembly.n_sprites = 1;
+	#	tracerAssembly.bottom_shade = 0.0;
+	#	tracerAssembly.top_shade = 0.0;
+	#	tracerAssembly.num_tex_x = 1;
+	#	tracerAssembly.num_tex_y = 1;
+	#	tracerAssembly.lat = lat;
+	#	tracerAssembly.lon = lon;
+	#	tracerAssembly.alt = alt + local_weather.cloudAssembly.min_height *0.35 * m_to_ft ;
+	#	tracerAssembly.min_width = local_weather.cloudAssembly.min_width * 0.35;
+	#	tracerAssembly.max_width = local_weather.cloudAssembly.max_width * 0.35;
+	#	tracerAssembly.min_height = local_weather.cloudAssembly.min_height * 0.35;
+	#	tracerAssembly.max_height = local_weather.cloudAssembly.max_height * 0.35;
+	#	tracerAssembly.min_cloud_width = local_weather.cloudAssembly.min_cloud_width * 0.35;
+	#	tracerAssembly.min_cloud_height = local_weather.cloudAssembly.min_cloud_height * 0.35;
+	#	tracerAssembly.z_scale = local_weather.cloudAssembly.z_scale;
+	#	append(cloudAssemblyArray,tracerAssembly);
+	#	}
 
 	return;
 	}
 
 append(clouds_path,path);
 append(clouds_lat,lat);
-append(clouds_lon,long);
+append(clouds_lon,lon);
 append(clouds_alt,alt);
 append(clouds_orientation,heading);
 
@@ -1872,6 +1899,7 @@ create_effect_volume(1, lat, lon, 2000.0, 2000.0, 0.0, 0.0, alt+1000.0, 8000.0 +
 ###########################################################
 
 var create_cumosys = func (blat, blon, balt, nc, size) {
+
 
 # realistic Cumulus has somewhat larger models, so compensate to get the same coverage
 if (detailed_clouds_flag == 1) 
@@ -2680,10 +2708,10 @@ var terrain_presampling_loop = func (blat, blon, nc, size, alpha) {
 if ((local_weather_running_flag == 0) and (local_weather_startup_flag == 0)) {return;}
 
 
+var n = 25;
+var n_out = 25;
 if (local_weather.features.fast_geodinfo == 0)
-	{var n = 25;
-	var n_out = 25;
-
+	{
 	# dynamically drop accuracy if framerate is low
 
 	var dt = getprop("/sim/time/delta-sec");
@@ -2742,9 +2770,9 @@ for (var i=0; i<ntries; i=i+1)
 var elevation_vec = compat_layer.get_elevation_array(lat_vec, lon_vec);
 	
 	
-for (i=0; i<ntries;i=i+1)
+for (var i=0; i<ntries;i=i+1)
 	{
-	for(j=0;j<30;j=j+1)
+	for(var j=0;j<30;j=j+1)
 		{
 		if ((elevation_vec[i] != -1.0) and (elevation_vec[i] < 500.0 * (j+1))) 
 			{terrain_n[j] = terrain_n[j]+1;  break;}
@@ -2810,7 +2838,7 @@ if ((compat_layer.features.terrain_presampling_active == 0) or (getprop(lw~"tile
 	}
 else
 	{
-	#print("Hard-coded sampling...");
+#	print("Hard-coded sampling...");
 	var n_tot = getprop("/environment/terrain/area[0]/input/max-samples");
 	var alt_mean = getprop("/environment/terrain/area[0]/output/alt-mean-ft");
 	var alt_med = getprop("/environment/terrain/area[0]/output/alt-median-ft");
@@ -2831,7 +2859,7 @@ setprop(lw~"tmp/tile-alt-mean-ft",alt_mean);
 setprop(lw~"tmp/tile-alt-layered-ft",0.5 * (alt_min + alt_20));
 
 append(alt_50_array, alt_med);
-append(alt_20_array, alt_20);
+append(alt_20_array, alt_20); 
 append(alt_min_array, alt_min);
 append(alt_mean_array, alt_mean);
 
@@ -3916,8 +3944,11 @@ if (buffer_flag == 1)
 	}
 
 # start the sea color loop
-
 local_weather.init_sea_colors();
+
+# start the mask loop
+#local_weather.init_mask();
+
 
 # weather_tile_management.watchdog_loop();
 
@@ -4067,16 +4098,16 @@ var alt = getprop("position/altitude-ft");
 
 #var pos = geo.aircraft_position();
 
-# debug.dump(geodinfo(lat, lon));
+debug.dump(geodinfo(lat, lon));
 
 
 
-var info = {};
+#var info = {};
 
-for (var i = 0; i< 100000; i=i+1)
-	{
-	info = geodinfo(lat, lon);
-	}
+#for (var i = 0; i< 100000; i=i+1)
+#	{
+#	info = geodinfo(lat, lon);
+#	}
 
 
 }
@@ -4398,6 +4429,7 @@ var thermal = {};
 var wave = {};
 var interpolated_conditions = {};
 var current_conditions = {};
+var tracerAssembly = {};
 
 
 # the wind hash stores the current winds

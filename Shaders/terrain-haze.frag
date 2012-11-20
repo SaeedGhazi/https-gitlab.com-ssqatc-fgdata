@@ -24,6 +24,7 @@ uniform float hazeLayerAltitude;
 uniform float overcast;
 //uniform float altitude;
 uniform float eye_alt;
+uniform float cloud_self_shading;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -61,7 +62,7 @@ float fade_mix;
 // for large altitude > 30 km, we switch to some component of quadratic distance fading to
 // create the illusion of improved visibility range
 
-targ = 1.25 * targ; // need to sync with the distance to which terrain is drawn
+targ = 1.25 * targ * smoothstep(0.04,0.06,targ); // need to sync with the distance to which terrain is drawn
 
 
 if (alt < 30000.0)
@@ -81,6 +82,7 @@ else
 void main()
 {
 
+  vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
 // this is taken from default.frag
     vec3 n;
     float NdotL, NdotHV, fogFactor;
@@ -92,6 +94,7 @@ void main()
     vec4 specular = vec4(0.0);
     float intensity;
 
+    float effective_scattering = min(scattering, cloud_self_shading);
 
 
     vec4 light_specular = gl_LightSource[0].specular;
@@ -196,14 +199,14 @@ if (visibility < avisibility)
 	{
 	transmission_arg = transmission_arg + (distance_in_layer/visibility);
 	// this combines the Weber-Fechner intensity
-	eqColorFactor = 1.0 - 0.1 * delta_zv/visibility - (1.0 -scattering);
+	eqColorFactor = 1.0 - 0.1 * delta_zv/visibility - (1.0 -effective_scattering);
 
 	}
 else 
 	{
 	transmission_arg = transmission_arg + (distance_in_layer/avisibility);
 	// this combines the Weber-Fechner intensity
-	eqColorFactor = 1.0 - 0.1 * delta_zv/avisibility - (1.0 -scattering);
+	eqColorFactor = 1.0 - 0.1 * delta_zv/avisibility - (1.0 -effective_scattering);
 	}
 
 
@@ -249,11 +252,11 @@ hazeColor.y = hazeColor.y * 0.9;
 // additional blue in indirect light
 float fade_out = max(0.65 - 0.3 *overcast, 0.45);
 intensity = length(hazeColor);
-hazeColor = intensity * normalize(mix(hazeColor,  1.5* vec3 (0.45, 0.6, 0.8), 1.0 -smoothstep(0.25, fade_out,eShade) )); 
+hazeColor = intensity * normalize(mix(hazeColor,  1.5* shadedFogColor, 1.0 -smoothstep(0.25, fade_out,eShade) )); 
 
 // change haze color to blue hue for strong fogging
 //intensity = length(hazeColor);
-hazeColor = intensity * normalize(mix(hazeColor,  2.0 * vec3 (0.55, 0.6, 0.8), (1.0-smoothstep(0.3,0.8,eqColorFactor)))); 
+hazeColor = intensity * normalize(mix(hazeColor,  shadedFogColor, (1.0-smoothstep(0.5,0.9,eqColorFactor)))); 
 
 
 // reduce haze intensity when looking at shaded surfaces, only in terminator region

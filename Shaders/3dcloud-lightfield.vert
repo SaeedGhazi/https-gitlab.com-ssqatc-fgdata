@@ -2,13 +2,14 @@
 #version 120
 
 varying float fogFactor;
-//varying float MieFactor;
 varying vec3 hazeColor;
 
 uniform float range; // From /sim/rendering/clouds3d-vis-range
 uniform float scattering;
 uniform float terminator;
 uniform float altitude;
+uniform float cloud_self_shading;
+uniform float moonlight;
 
 attribute vec3 usrAttr1;
 attribute vec3 usrAttr2;
@@ -28,9 +29,10 @@ float light_func (in float x, in float a, in float b, in float c, in float d, in
 {
 x = x-0.5;
 
+
 // use the asymptotics to shorten computations
 if (x > 30.0) {return e;}
-if (x < -15.0) {return 0.0;}
+if (x < -15.0) {return 0.03;}
 
 
 return e / pow((1.0 + a * exp(-b * (x-c)) ),(1.0/d));
@@ -45,7 +47,18 @@ return x + 2.0 * x * Mie * (1.0 -0.8*x) * (1.0 -0.8*x);
 void main(void)
 {
 
+
+  //shade_factor = shade_factor * cloud_self_shading; 
+  //top_factor = top_factor * cloud_self_shading;
+  //shade_factor = min(shade_factor, top_factor);
+  //middle_factor = min(middle_factor, top_factor);
+  //bottom_factor = min(bottom_factor, top_factor);
+
   float intensity;
+  float mix_factor;
+
+  vec3 shadedFogColor =  vec3(0.65, 0.67, 0.78);//vec3 (0.55, 0.6, 0.8);
+  vec3 moonLightColor = vec3 (0.095, 0.095, 0.15) * moonlight * scattering;
   gl_TexCoord[0] = gl_MultiTexCoord0;
   vec4 ep = gl_ModelViewMatrixInverse * vec4(0.0,0.0,0.0,1.0);
   vec4 l  = gl_ModelViewMatrixInverse * vec4(0.0,0.0,1.0,1.0);
@@ -121,6 +134,10 @@ void main(void)
   float yprime = -dot(relVector, lightHorizon);
   float yprime_alt = yprime -sqrt(2.0 * EarthRadius * vertex_alt);
 
+ // two times terminator width governs how quickly light fades into shadow
+  float terminator_width = 200000.0;
+  float earthShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt) + 0.1;
+
   // compute the light at the position
   vec4 light_diffuse;
   
@@ -129,16 +146,26 @@ void main(void)
   light_diffuse.b = light_func(lightArg, 1.330e-05, 0.264, 2.227, 1.08e-05, 1.0);
   light_diffuse.g = light_func(lightArg, 3.931e-06, 0.264, 3.827, 7.93e-06, 1.0);
   light_diffuse.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
-  light_diffuse.a = 0.0;
+  light_diffuse.a = 1.0;
 
-   intensity = length(light_diffuse);
-  light_diffuse = intensity * normalize(mix(light_diffuse, 2.0*vec4 (0.55, 0.6, 0.8, 1.0), (1.0 - smoothstep(0.3,0.8, scattering))));   
+  intensity = (1.0 - (0.5 * (1.0 - earthShade))) *  length(light_diffuse.rgb);
+  light_diffuse.rgb = intensity * normalize(mix(light_diffuse.rgb, shadedFogColor, (1.0 - smoothstep(0.5,0.9, min(scattering, cloud_self_shading)  ))));   
 
-
+// correct ambient light intensity and hue before sunrise
+if (earthShade < 0.8)
+	{
+	light_diffuse.rgb = intensity * normalize(mix(light_diffuse.rgb,  shadedFogColor, 1.0 -smoothstep(0.1, 0.8,earthShade ) ));
+	 
+	}
 
 
   //gl_FrontColor = gl_LightSource[0].diffuse * shade + gl_FrontLightModelProduct.sceneColor;
-  gl_FrontColor = light_diffuse * shade + gl_FrontLightModelProduct.sceneColor;
+   //intensity = length(light_diffuse.xyz);
+ 
+  gl_FrontColor.rgb = intensity * shade * normalize(mix(light_diffuse.rgb, shadedFogColor, smoothstep(0.1,0.4, (1.0 - shade)  ))) ; 
+   
+  //gl_FrontColor.a = 1.0;
+	//light_diffuse+ gl_FrontLightModelProduct.sceneColor;// * shade ;//+ gl_FrontLightModelProduct.sceneColor;
 
   // As we get within 100m of the sprite, it is faded out. Equally at large distances it also fades out.
   gl_FrontColor.a = min(smoothstep(10.0, 100.0, fogCoord), 1.0 - smoothstep(range*0.9, range, fogCoord));
@@ -155,33 +182,31 @@ void main(void)
   //fogFactor = clamp(fogFactor, 0.0, 1.0);
 
 // haze of ground haze shader is slightly bluish
-  hazeColor = light_diffuse.xyz;
-  hazeColor.x = hazeColor.x * 0.83;
-  hazeColor.y = hazeColor.y * 0.9; 
+  hazeColor = light_diffuse.rgb;
+  hazeColor.r = hazeColor.r * 0.83;
+  hazeColor.g = hazeColor.g * 0.9; 
+  //hazeColor = intensity * normalize(mix(hazeColor,  shadedFogColor, (1.0 - smoothstep(0.5,0.9,cloud_self_shading)) )); 
   hazeColor = hazeColor * scattering;
 
   // in sunset or sunrise conditions, do extra shading of clouds
   
-  // two times terminator width governs how quickly light fades into shadow
-  float terminator_width = 200000.0;
-  float earthShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt) + 0.1;
-
+ 
   // change haze color to blue hue for strong fogging
-  intensity = length(hazeColor);
-  hazeColor = intensity * normalize(mix(hazeColor,  2.0* vec3 (0.55, 0.6, 0.8), (1.0 - smoothstep(0.3,0.8,scattering)))); 	
+  //intensity = length(hazeColor);
+  //hazeColor = intensity * normalize(mix(hazeColor,  2.0* vec3 (0.55, 0.6, 0.8), (1.0 - smoothstep(0.3,0.8,scattering)))); 	
   
 
-  hazeColor = hazeColor * earthShade;
-  gl_FrontColor.xyz = gl_FrontColor.xyz * earthShade;
+  //hazeColor = hazeColor * earthShade;
+  //gl_FrontColor.xyz = gl_FrontColor.xyz * earthShade;
   	
   // Mie correction
   float Mie;
   float MieFactor;
 
-   if (shade_factor > 0.6) 
+   if (bottom_factor > 0.6) 
 	{
 	MieFactor =   dot(normalize(lightFull), normalize(relVector));
-	Mie = 1.5 * smoothstep(0.9,1.0, MieFactor) * smoothstep(0.6, 0.8, shade_factor);  
+	Mie = 1.5 * smoothstep(0.9,1.0, MieFactor) * smoothstep(0.6, 0.8, bottom_factor);  
 	}
    else {Mie = 0.0;}
 
@@ -196,5 +221,11 @@ void main(void)
 	gl_FrontColor.b = mie_func(gl_FrontColor.b, 0.5*Mie);
 	}
  
-   gl_BackColor = gl_FrontColor;
+  gl_FrontColor.rgb = gl_FrontColor.rgb +  moonLightColor * (1.0 - smoothstep(0.4, 0.5, earthShade));
+  hazeColor.rgb = hazeColor.rgb + moonLightColor * (1.0 - smoothstep(0.4, 0.5, earthShade));
+  gl_BackColor = gl_FrontColor;
+  
+
+
+
 }

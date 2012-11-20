@@ -13,6 +13,7 @@
     <lthickness><use>/environment/ground-haze-thickness-m</use></lthickness>
     <terminator><use>/environment/terminator-relative-position-m</use></terminator>
     <terrain_alt><use>/environment/mean-terrain-elevation-m</use></terrain_alt>
+    <cloud_self_shading><use>/environment/cloud-self-shading</use></cloud_self_shading>
   </parameters>
   <technique n="8">
     <predicate>
@@ -95,6 +96,11 @@
         <name>terrain_alt</name>
         <type>float</type>
         <value><use>terrain_alt</use></value>
+      </uniform>
+      <uniform>
+        <name>cloud_self_shading</name>
+        <type>float</type>
+        <value><use>cloud_self_shading</use></value>
       </uniform>
     </pass>
   </technique>

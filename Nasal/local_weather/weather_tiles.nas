@@ -353,6 +353,7 @@ setprop(lw~"tiles/code","high_pressure");
 
 tile_start();
 
+
 var x = 0.0;
 var y = 0.0;
 var lat = 0.0;
@@ -2911,7 +2912,7 @@ var create_6_8_stratocumulus = func (lat, lon, alt, alpha) {
 
 if (local_weather.detailed_clouds_flag == 1)
 	{
-	for (i=0; i< 2; i=i+1)
+	for (var i=0; i< 2; i=i+1)
 		{
 		var phi = alpha * math.pi/180.0;
 		var x = 2.0 * (rand()-0.5) * 4000;

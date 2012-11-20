@@ -67,11 +67,14 @@
     <overcast><use>/rendering/scene/overcast</use></overcast>
     <eye_alt><use>/sim/rendering/eye-altitude-m</use></eye_alt>
     <snow_level><use>/environment/snow-level-m</use></snow_level>
+    <snow_thickness_factor><use>/environment/surface/snow-thickness-factor</use></snow_thickness_factor>
     <dust_cover_factor><use>/environment/surface/dust-cover-factor</use></dust_cover_factor>
     <lichen_cover_factor><use>/environment/surface/lichen-cover-factor</use></lichen_cover_factor>
     <wetness><use>/environment/surface/wetness</use></wetness>
     <fogtype><use>/sim/rendering/shaders/skydome</use></fogtype>
     <fogstructure><use>/environment/fog-structure</use></fogstructure>
+    <cloud_self_shading><use>/environment/cloud-self-shading</use></cloud_self_shading>
+    <moonlight><use>/environment/moonlight</use></moonlight>
     <quality_level><use>/sim/rendering/shaders/landmass</use></quality_level>
     <tquality_level><use>/sim/rendering/shaders/transition</use></tquality_level>
   </parameters>
@@ -122,27 +125,10 @@
         <bin-number>-1</bin-number>
         <bin-name>RenderBin</bin-name>
       </render-bin>
-      <!--<texture-unit>
-        <unit>0</unit>
-          <image><use>texture[0]/image</use></image>
-          <filter><use>texture[0]/filter</use></filter>
-          <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
-          <wrap-t><use>texture[0]/wrap-t</use></wrap-t>
-          <internal-format><use>texture[0]/internal-format</use></internal-format>
-      </texture-unit>-->
       <program>
-        <!--<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader>
-		<vertex-shader n="1">Shaders/default.vert</vertex-shader>
-		<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
-		<fragment-shader n="1">Shaders/terrain-nocolor.frag</fragment-shader>-->
         <vertex-shader>Shaders/trivial.vert</vertex-shader>
         <fragment-shader>Shaders/trivial.frag</fragment-shader>
       </program>
-      <!--<uniform>
-        <name>texture</name>
-        <type>sampler-2d</type>
-        <value type="int">0</value>
-      </uniform>-->
       <color-mask type="vec4d">0 0 0 0</color-mask>
     </pass>
     <pass>
@@ -163,10 +149,6 @@
         <bin-number><use>render-bin/bin-number</use></bin-number>
         <bin-name><use>render-bin/bin-name</use></bin-name>
       </render-bin>
-      <!--<render-bin>
-		<bin-number>1</bin-number>
-		<bin-name>RenderBin</bin-name>
-	  </render-bin>-->
       <texture-unit>
         <unit>0</unit>
         <image><use>texture[0]/image</use></image>
@@ -258,6 +240,11 @@
         <value><use>snow_level</use></value>
       </uniform>
       <uniform>
+	<name>snow_thickness_factor</name>
+	<type>float</type>
+	<value>	<use>snow_thickness_factor</use></value>
+      </uniform>
+      <uniform>
         <name>dust_cover_factor</name>
         <type>float</type>
         <value><use>dust_cover_factor</use></value>
@@ -276,6 +263,16 @@
         <name>fogstructure</name>
         <type>float</type>
         <value><use>fogstructure</use></value>
+      </uniform>
+      <uniform>
+        <name>cloud_self_shading</name>
+        <type>float</type>
+        <value><use>cloud_self_shading</use></value>
+      </uniform>
+      <uniform>
+        <name>moonlight</name>
+        <type>float</type>
+        <value><use>moonlight</use></value>
       </uniform>
       <uniform>
         <name>quality_level</name>
@@ -454,6 +451,16 @@
         <name>eye_alt</name>
         <type>float</type>
         <value><use>eye_alt</use></value>
+      </uniform>
+      <uniform>
+        <name>cloud_self_shading</name>
+        <type>float</type>
+        <value><use>cloud_self_shading</use></value>
+      </uniform>
+      <uniform>
+        <name>moonlight</name>
+        <type>float</type>
+        <value><use>moonlight</use></value>
       </uniform>
       <uniform>
         <name>texture</name>

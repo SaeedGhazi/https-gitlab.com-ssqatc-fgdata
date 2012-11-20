@@ -26,7 +26,7 @@ varying vec3 relPos;
 //varying float yprime;
 //varying float vertex_alt;
 varying float yprime_alt;
-varying float mie_angle;
+//varying float mie_angle;
 
 uniform int colorMode;
 uniform float hazeLayerAltitude;
@@ -39,6 +39,7 @@ uniform float overcast;
 uniform float ground_scattering;
 
 float earthShade;
+float mie_angle;
 
 // This is the value used in the skydome scattering shader - use the same here for consistency?
 const float EarthRadius = 5800000.0;
@@ -61,7 +62,8 @@ void main()
   vec4 light_diffuse;
   vec4 light_ambient;
 
-  //float yprime_alt;
+  vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
+
   float yprime;
   float lightArg;
   float intensity;
@@ -156,13 +158,15 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
    light_diffuse.b = light_func(lightArg, 1.330e-05, 0.264, 3.827, 1.08e-05, 1.0);
    light_diffuse.g = light_func(lightArg, 3.931e-06, 0.264, 3.827, 7.93e-06, 1.0);
    light_diffuse.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
-   light_diffuse.a = 0.0;
+   light_diffuse.a = 1.0;
    light_diffuse = light_diffuse * scattering;
 
-   light_ambient.b = light_func(lightArg, 0.000506, 0.131, -3.315, 0.000457, 0.5);
-   light_ambient.g = light_func(lightArg, 2.264e-05, 0.134, 0.967, 3.66e-05, 0.4);
    light_ambient.r = light_func(lightArg, 0.236, 0.253, 1.073, 0.572, 0.33);
-   light_ambient.a = 0.0;
+   light_ambient.g = light_ambient.r * 0.4/0.33; 
+   light_ambient.b = light_ambient.r * 0.5/0.33; 
+   light_ambient.a = 1.0;
+
+   
 
 
 
@@ -170,13 +174,12 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
 // correct ambient light intensity and hue before sunrise
 if (earthShade < 0.5)
 	{
-	light_ambient = light_ambient * (0.4 + 0.6 * smoothstep(0.2, 0.5, earthShade));
-	intensity = length(light_ambient.xyz); 
+	//light_ambient = light_ambient * (0.4 + 0.6 * smoothstep(0.2, 0.5, earthShade));
+	intensity = length(light_ambient.rgb); 
+	light_ambient.rgb = intensity * normalize(mix(light_ambient.rgb,  shadedFogColor, 1.0 -smoothstep(0.1, 0.8,earthShade) ));
 
-	light_ambient.xyz = intensity * normalize(mix(light_ambient.xyz,  vec3 (0.45, 0.6, 0.8), 1.0 -smoothstep(0.1, 0.5,earthShade) ));
-
-	intensity = length(light_diffuse.xyz); 
-	light_diffuse.xyz = intensity * normalize(mix(light_diffuse.xyz,  vec3 (0.45, 0.6, 0.8), 1.0 -smoothstep(0.1, 0.5,earthShade) ));
+	intensity = length(light_diffuse.rgb); 
+	light_diffuse.rgb = intensity * normalize(mix(light_diffuse.rgb,  shadedFogColor, 1.0 -smoothstep(0.1, 0.7,earthShade) ));
 	}
 
 
@@ -208,8 +211,8 @@ else // the faster, full-day version without lightfields
     mie_angle = 1.0;
     
     if (terminator > 3000000.0)
-    	{light_diffuse = vec4 (1.0, 1.0, 1.0, 0.0);
-	light_ambient = vec4 (0.33, 0.4, 0.5, 0.0); }
+    	{light_diffuse = vec4 (1.0, 1.0, 1.0, 1.0);
+	light_ambient = vec4 (0.33, 0.4, 0.5, 1.0); }
     else
 	{
 
@@ -217,12 +220,12 @@ else // the faster, full-day version without lightfields
 	light_diffuse.b = 0.78  + lightArg * 0.21;
 	light_diffuse.g = 0.907 + lightArg * 0.091;
 	light_diffuse.r = 0.904 + lightArg * 0.092;
-	light_diffuse.a = 0.0;
+	light_diffuse.a = 1.0;
 
-	light_ambient.b = 0.41 + lightArg * 0.08;
-	light_ambient.g = 0.333 + lightArg * 0.06;
 	light_ambient.r = 0.316 + lightArg * 0.016;
-	light_ambient.a = 0.0;
+	light_ambient.g = light_ambient.r * 0.4/0.33; 
+   	light_ambient.b = light_ambient.r * 0.5/0.33;
+	light_ambient.a = 1.0;
 	}  
     
     light_diffuse = light_diffuse * scattering;
@@ -235,6 +238,8 @@ else // the faster, full-day version without lightfields
   vec3 diffuse = gl_FrontMaterial.diffuse.rgb * max(0.1, n);
   vec4 ambientColor = gl_FrontLightModelProduct.sceneColor + light_ambient * gl_FrontMaterial.ambient;
   gl_FrontColor = ambientColor + light_diffuse * vec4(diffuse, 1.0);
+  gl_FrontColor.a = mie_angle; gl_BackColor.a = mie_angle; 
+  //gl_FrontColor.a = 1.0; gl_BackColor.a = 1.0;
 
 
 

@@ -21,12 +21,9 @@
 
 
 varying vec3 relPos;
-varying vec3 rawPos;
-
+varying vec2 rawPos;
 varying vec3  VNormal;
-//varying vec3  Normal;
 varying vec3  VTangent;
-//varying vec3  VBinormal;
 varying vec4  ecPosition;
 varying vec4  constantColor;
 varying vec3 light_diffuse;
@@ -34,7 +31,6 @@ varying vec3 light_diffuse;
 
 varying float yprime_alt;
 varying float mie_angle;
-//varying float steepness;
 
 
 uniform int colorMode;
@@ -46,6 +42,7 @@ uniform float visibility;
 uniform float overcast;
 uniform float ground_scattering;
 uniform float eye_alt;
+uniform float moonlight;
 
 
 attribute vec3 tangent;//, binormal;
@@ -73,6 +70,8 @@ void main()
 
 
   vec4 light_ambient;
+  vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
+  vec3 moonLightColor = vec3 (0.095, 0.095, 0.15) * moonlight;
 
   //float yprime_alt;
   float yprime;
@@ -81,7 +80,7 @@ void main()
   float vertex_alt;
   float scattering;
 
-    rawPos = gl_Vertex.xyz;
+    rawPos = gl_Vertex.xy;
     steepness = dot(normalize(gl_Normal), vec3 (0.0, 0.0, 1.0));
     VNormal = normalize(gl_NormalMatrix * gl_Normal);
     ecPosition = gl_ModelViewMatrix * gl_Vertex;
@@ -173,7 +172,7 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
     lightArg = (terminator-yprime_alt)/100000.0;
 
     // directional scattering for low sun
-    if (lightArg < 5.0)
+    if (lightArg < 10.0)
     	{mie_angle = (0.5 *  dot(normalize(relPos), normalize(lightFull)) ) + 0.5;}
     else 
 	{mie_angle = 1.0;}
@@ -187,24 +186,24 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
 
    light_diffuse = light_diffuse * scattering;
 
-   light_ambient.b = light_func(lightArg, 0.000506, 0.131, -3.315, 0.000457, 0.5);
-   light_ambient.g = light_func(lightArg, 2.264e-05, 0.134, 0.967, 3.66e-05, 0.4);
    light_ambient.r = light_func(lightArg, 0.236, 0.253, 1.073, 0.572, 0.33);
-   light_ambient.a = 0.0;
-
+   light_ambient.g = light_ambient.r * 0.4/0.33; 
+   light_ambient.b = light_ambient.r * 0.5/0.33; 
+   light_ambient.a = 1.0;
 
 
 
 // correct ambient light intensity and hue before sunrise
 if (earthShade < 0.5)
 	{
-	light_ambient = light_ambient * (0.7 + 0.3 * smoothstep(0.2, 0.5, earthShade));
-	intensity = length(light_ambient.xyz); 
+	//light_ambient = light_ambient * (0.7 + 0.3 * smoothstep(0.2, 0.5, earthShade));
+	intensity = length(light_ambient.rgb); 
 
-	light_ambient.xyz = intensity * normalize(mix(light_ambient.xyz,  vec3 (0.45, 0.6, 0.8), 1.0 -smoothstep(0.1, 0.8,earthShade) ));
+	light_ambient.rgb = intensity * normalize(mix(light_ambient.xyz,  shadedFogColor, 1.0 -smoothstep(0.1, 0.8,earthShade) ));
+	light_ambient.rgb = light_ambient.rgb +   moonLightColor *  (1.0 - smoothstep(0.4, 0.5, earthShade));
 
 	intensity = length(light_diffuse.xyz); 
-	light_diffuse.xyz = intensity * normalize(mix(light_diffuse.xyz,  vec3 (0.45, 0.6, 0.8), 1.0 -smoothstep(0.1, 0.7,earthShade) ));
+	light_diffuse.xyz = intensity * normalize(mix(light_diffuse.xyz,  shadedFogColor, 1.0 -smoothstep(0.1, 0.7,earthShade) ));
 	}
 
 

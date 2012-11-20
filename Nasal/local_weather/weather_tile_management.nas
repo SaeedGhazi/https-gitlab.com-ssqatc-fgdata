@@ -24,6 +24,7 @@
 
 # object			purpose
 #
+# cloud				to provide the data hash for the new cloud rendering system
 # cloudBuffer			to store a cloud in a Nasal buffer, to provide methods to move it
 # cloudScenery			to store info for clouds in scenery, to provide methods to move and evolve them
 
@@ -43,9 +44,6 @@ var code = getprop(lw~"tiles/tile[4]/code");
 var i = 0;
 var d_min = 100000.0;
 var i_min = 0;
-# var distance_to_load = getprop(lw~"config/distance-to-load-tile-m");
-# var distance_to_remove = getprop(lw~"config/distance-to-remove-tile-m");
-# var current_visibility = getprop(lw~"interpolation/visibility-m");
 var current_visibility = local_weather.interpolated_conditions.visibility_m;
 var current_heading = getprop("orientation/heading-deg");
 var loading_flag = getprop(lw~"tmp/asymmetric-tile-loading-flag");
@@ -60,10 +58,7 @@ if (distance_to_load > 65000.0) {distance_to_load = 65000.0;}
 if (distance_to_load < 29000.0) {distance_to_load = 29000.0;}
 
 
-#if (distance_to_load > 3.0 * current_visibility)
-#	{distance_to_load = 3.0 * current_visibility;}
-#if (distance_to_load < 29000.0)
-#	{distance_to_load = 29000.0;}
+
 
 var distance_to_remove = distance_to_load + 20000.0;
 if (distance_to_remove > 65500.0) {distance_to_remove = 65500.0;}
@@ -154,7 +149,6 @@ foreach (var t; tNode) {
 		t.getNode("generated-flag").setValue(1);
 		t.getNode("timestamp-sec").setValue(weather_dynamics.time_lw);
 		t.getNode("tile-index",1).setValue(getprop(lw~"tiles/tile-counter"));
-		
 		generate_tile(code, tpos.lat(), tpos.lon(),i);
 
 		} 
@@ -334,9 +328,10 @@ if (((local_weather.presampling_flag == 1) and (getprop(lw~"tmp/presampling-stat
 		
 		# compute the new windspeed
 
+		var windspeed = 0;
 		if (local_weather.metar_flag == 0)
 			{
-			var windspeed = getprop(lw~"tmp/windspeed-kt");
+			windspeed = getprop(lw~"tmp/windspeed-kt");
 			windspeed = windspeed + 2.0 * (rand()-0.5) * 2.0;
 			if (windspeed < 0) {windspeed = rand();}
 			}
@@ -1549,7 +1544,7 @@ var cloud = {
 	        var c = { parents: [cloud] };
 		c.type = type;
 		c.subtype = subtype;		
-
+		c.tracer_flag = 0;
 	        return c;
 	},
 	remove: func {

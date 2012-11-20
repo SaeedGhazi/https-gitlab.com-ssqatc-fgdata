@@ -4,19 +4,12 @@
   <parameters>
     <texture n ="0">
     </texture>
-    <range>
-      <use>/sim/rendering/clouds3d-vis-range</use>
-    </range>   
-    <scattering>
-      <use>/rendering/scene/scattering</use>
-    </scattering>   
-    <terminator>
-      <use>/environment/terminator-relative-position-m</use>
-    </terminator>
-   <!--<altitude>
-      <use>/position/altitude-ft</use>
-    </altitude>-->
-  <altitude><use>/sim/rendering/eye-altitude-m</use></altitude>
+    <range><use>/sim/rendering/clouds3d-vis-range</use></range>   
+    <scattering><use>/rendering/scene/scattering</use></scattering>   
+    <terminator><use>/environment/terminator-relative-position-m</use></terminator>
+    <altitude><use>/sim/rendering/eye-altitude-m</use></altitude>
+    <cloud_self_shading><use>/environment/cloud-self-shading</use></cloud_self_shading>
+    <moonlight><use>/environment/moonlight</use></moonlight>
   </parameters>
 <technique n="9">
     <predicate>
@@ -96,7 +89,17 @@
         <type>float</type>
         <value><use>altitude</use></value>
       </uniform>
-      <vertex-program-two-side>true</vertex-program-two-side>
+      <uniform>
+        <name>cloud_self_shading</name>
+        <type>float</type>
+        <value><use>cloud_self_shading</use></value>
+      </uniform>
+      <uniform>
+        <name>moonlight</name>
+        <type>float</type>
+        <value><use>moonlight</use></value>
+      </uniform>
+      <!--<vertex-program-two-side>true</vertex-program-two-side>-->
     </pass>
   </technique>
   <technique n="10">

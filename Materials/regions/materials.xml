@@ -2040,6 +2040,7 @@
     <value>summer</value>
    </equals>
   </condition>
+  <effect>Effects/airfield</effect>
   <name>Grass</name>
   <name>Airport</name>
   <name>AirportKeep</name>

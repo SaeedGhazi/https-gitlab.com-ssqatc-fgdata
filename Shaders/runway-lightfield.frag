@@ -36,6 +36,10 @@ uniform float wetness;
 uniform float fogstructure;
 uniform float snow_thickness_factor;
 uniform float cloud_self_shading;
+uniform float ylimit;
+uniform float zlimit1;
+uniform float zlimit2;
+uniform float xslope;
 uniform int quality_level;
 uniform int tquality_level;
 
@@ -138,6 +142,15 @@ else
 
 void main()
 {
+
+// drop fragments behind the mask of the instrument panel as passed by properties
+
+
+int xoffset = int(xslope * (ylimit - gl_FragCoord.y)); 
+
+
+if ((gl_FragCoord.y < ylimit) && (gl_FragCoord.x > zlimit1 - xoffset) && (gl_FragCoord.x < zlimit2 + xoffset))
+	{discard;}
 
 
 yprime_alt = diffuse_term.a;
@@ -311,12 +324,12 @@ if (quality_level > 3)
 	texel = mix(texel, dust_color, clamp(0.5 * dust_cover_factor + 3.0 * dust_cover_factor * (((noise_1500m - 0.5) * 0.125)+0.125 ),0.0, 1.0) );
 	
     	// mix snow
-	if (relPos.z + eye_alt +500.0 > snowlevel)
-		{
-   		snow_alpha = smoothstep(0.75, 0.85, abs(steepness));
+	//if (relPos.z + eye_alt +500.0 > snowlevel)
+	//	{
+   	//	snow_alpha = smoothstep(0.75, 0.85, abs(steepness));
 		//texel = mix(texel, snow_texel, texel_snow_fraction);
-		texel = mix(texel, snow_texel, snow_texel.a* smoothstep(snowlevel, snowlevel+200.0,  snow_alpha * (relPos.z + eye_alt)+ (noise_2000m + 0.1 * noise_10m -0.55) *400.0));
-		}
+	//	texel = mix(texel, snow_texel, snow_texel.a* smoothstep(snowlevel, snowlevel+200.0,  snow_alpha * (relPos.z + eye_alt)+ (noise_2000m + 0.1 * noise_10m -0.55) *400.0));
+	//	}
 	}
 
 

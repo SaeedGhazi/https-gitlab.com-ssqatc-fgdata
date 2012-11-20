@@ -146,23 +146,59 @@
       <property>/environment/snow-level-m</property>
     </text>    
     
-    <text>
-      <label>Dust cover</label>
+
+   <text>
+      <label>Snow thickness</label>
       <halign>left</halign>
       <row>3</row>
       <col>0</col>
     </text>
     
     <text>
-      <label>none</label>
+      <label>thin</label>
       <halign>right</halign>
       <row>3</row>
       <col>1</col>
     </text>
         
     <slider>
-      <name>dust-level</name>
+      <name>snow-thickness</name>
       <row>3</row>
+      <col>2</col>
+      <min>0.0</min>
+      <max>0.6</max>
+      <live>true</live>
+      <property>/environment/surface/snow-thickness-factor</property>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>snow-thickness</object-name>
+      </binding>
+    </slider>
+
+    <text>
+      <label>thick</label>
+      <halign>left</halign>
+      <row>3</row>
+      <col>3</col>
+    </text>
+
+    <text>
+      <label>Dust cover</label>
+      <halign>left</halign>
+      <row>4</row>
+      <col>0</col>
+    </text>
+    
+    <text>
+      <label>none</label>
+      <halign>right</halign>
+      <row>4</row>
+      <col>1</col>
+    </text>
+        
+    <slider>
+      <name>dust-level</name>
+      <row>4</row>
       <col>2</col>
       <min>0.0</min>
       <max>0.7</max>
@@ -177,27 +213,27 @@
     <text>
       <label>dusty</label>
       <halign>left</halign>
-      <row>3</row>
+      <row>4</row>
       <col>3</col>
     </text>
 
     <text>
       <label>Wetness</label>
       <halign>left</halign>
-      <row>4</row>
+      <row>5</row>
       <col>0</col>
     </text>
     
     <text>
       <label>dry</label>
       <halign>right</halign>
-      <row>4</row>
+      <row>5</row>
       <col>1</col>
     </text>
         
     <slider>
       <name>wetness</name>
-      <row>4</row>
+      <row>5</row>
       <col>2</col>
       <min>0.0</min>
       <max>0.7</max>
@@ -212,7 +248,7 @@
     <text>
       <label>wet</label>
       <halign>left</halign>
-      <row>4</row>
+      <row>5</row>
       <col>3</col>
     </text>
     
@@ -220,20 +256,20 @@
     <text>
       <label>Vegetation</label>
       <halign>left</halign>
-      <row>5</row>
+      <row>6</row>
       <col>0</col>
     </text>
     
     <text>
       <label>none</label>
       <halign>right</halign>
-      <row>5</row>
+      <row>6</row>
       <col>1</col>
     </text>
         
     <slider>
       <name>lichen-level</name>
-      <row>5</row>
+      <row>6</row>
       <col>2</col>
       <min>0.0</min>
       <max>0.7</max>
@@ -248,7 +284,7 @@
     <text>
       <label>mossy</label>
       <halign>left</halign>
-      <row>5</row>
+      <row>6</row>
       <col>3</col>
     </text>
 

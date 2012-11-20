@@ -128,6 +128,8 @@ var viewpos = geo.viewer_position();
 
 setprop("/sim/rendering/eye-altitude-m", viewpos.alt());
 
+
+
 if (local_weather.presampling_flag == 1)
 	{
 	var mean_terrain_elevation_m = ft_to_m * local_weather.current_mean_alt ; }
@@ -170,7 +172,7 @@ tan_vangle = math.tan(vangle * math.pi/180.0);
 var tiles = props.globals.getNode(lw~"tiles").getChildren("tile");
 
 
-foreach (t; tiles)
+foreach (var t; tiles)
 	{
 	var generated_flag = t.getNode("generated-flag").getValue();
 	
@@ -210,7 +212,7 @@ if (view_distance > weather_tile_management.cloud_view_distance) {view_distance 
 # shift the tile centers with the windfield
 
 var tiles = props.globals.getNode("local-weather/tiles", 1).getChildren("tile");
-foreach (t; tiles) {move_tile(t);}
+foreach (var t; tiles) {move_tile(t);}
 
 
 
@@ -369,7 +371,7 @@ for(var i = 0; i < 9; i = i + 1)
 
 	n = n/cloud_convective_lifetime_s * cloud_respawning_interval_s * math.sqrt(0.35);
 
-	n_res = n - int(n);
+	var n_res = n - int(n);
 	n = int(n);
 	if (rand() < n_res) {n=n+1;}
 
@@ -437,7 +439,7 @@ if (depth ==0) {return tree_base_vec;} else {return c_vec;}
 
 var sort_into_quadtree = func (blat, blon, alpha, lat, lon, tree, object) {
 
-xy_vec = get_cartesian (blat, blon, alpha, lat, lon);
+var xy_vec = get_cartesian (blat, blon, alpha, lat, lon);
 
 sorting_recursion (xy_vec[0], xy_vec[1], tree, object, 0);
 

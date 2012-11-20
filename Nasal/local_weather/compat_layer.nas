@@ -156,7 +156,7 @@ var setDefaultCloudsOff = func {
 
 var layers = props.globals.getNode("/environment/clouds").getChildren("layer");
 	
-foreach (l; layers)
+foreach (var l; layers)
 	{
 	l.getNode("coverage-type").setValue(5);
 	}
@@ -407,29 +407,29 @@ var buffer_flag = getprop(lw~"config/buffer-flag");
 var d_max = weather_tile_management.cloud_view_distance + 1000.0;
 
 
-# check if we deal with a convective cloud
+# check if we deal with a convective cloud - no need to do this any more, convective clouds go via a different system
 
 var convective_flag = 0;
 
-if (find("cumulus",path) != -1)
-	{
-	if ((find("alto",path) != -1) or (find("cirro", path) != -1) or (find("strato", path) != -1))
-		{convective_flag = 0;}
-	else if ((find("small",path) != -1) or (find("whisp",path) != -1)) 
-		{convective_flag = 1;}
-	else if (find("bottom",path) != -1) 
-		{convective_flag = 4;}
-	else	
-		{convective_flag = 2;}
-	
-	}
-else if (find("congestus",path) != -1)
-	{
-	if (find("bottom",path) != -1) 
-		{convective_flag = 5;}
-	else
-		{convective_flag = 3;}
-	} 
+#if (find("cumulus",path) != -1)
+#	{
+#	if ((find("alto",path) != -1) or (find("cirro", path) != -1) or (find("strato", path) != -1))
+#		{convective_flag = 0;}
+#	else if ((find("small",path) != -1) or (find("whisp",path) != -1)) 
+#		{convective_flag = 1;}
+#	else if (find("bottom",path) != -1) 
+#		{convective_flag = 4;}
+#	else	
+#		{convective_flag = 2;}
+#	
+#	}
+#else if (find("congestus",path) != -1)
+#	{
+#	if (find("bottom",path) != -1) 
+#		{convective_flag = 5;}
+#	else
+#		{convective_flag = 3;}
+#	} 
 
 #print("path: ", path, " flag: ", convective_flag);
 
@@ -443,7 +443,6 @@ else if (find("congestus",path) != -1)
 
 if (getprop(lw~"tmp/buffer-status") == "placing")
 	{
-	#tile_counter = getprop(lw~"tmp/buffer-tile-index");
 	tile_counter = buffered_tile_index;
 	}
 
@@ -460,18 +459,18 @@ var cloud_number = n.getNode("placement-index").getValue();
 		for (var i = cloud_number; 1; i += 1)
 			if (c.getChild("cloud", i, 0) == nil)
 				break;
-	cl = c.getChild("cloud", i, 1);
-	n.getNode("placement-index").setValue(i);
+var cl = c.getChild("cloud", i, 1);
+n.getNode("placement-index").setValue(i);
 
-	var placement_index = i;
+var placement_index = i;
 
 var model_number = n.getNode("model-placement-index").getValue();
 var m = props.globals.getNode("models", 1);
 		for (var i = model_number; 1; i += 1)
 			if (m.getChild("model", i, 0) == nil)
 				break;
-	model = m.getChild("model", i, 1);
-	n.getNode("model-placement-index").setValue(i);	
+var model = m.getChild("model", i, 1);
+n.getNode("model-placement-index").setValue(i);	
 
 
 
@@ -483,15 +482,19 @@ var hdgN = cl.getNode("orientation/true-heading-deg", 1); hdgN.setValue(heading)
 cl.getNode("tile-index",1).setValue(tile_counter);
 
 model.getNode("path", 1).setValue(path);
-model.getNode("latitude-deg-prop", 1).setValue(latN.getPath());
-model.getNode("longitude-deg-prop", 1).setValue(lonN.getPath());
-model.getNode("elevation-ft-prop", 1).setValue(altN.getPath());
-model.getNode("heading-deg-prop", 1).setValue(hdgN.getPath());
+model.getNode("latitude-deg", 1).setValue(lat);
+model.getNode("longitude-deg", 1).setValue(long);
+model.getNode("elevation-ft", 1).setValue(alt);
+model.getNode("heading-deg", 1).setValue(local_weather.wind.cloudlayer[0]+180.0);
 model.getNode("tile-index",1).setValue(tile_counter);
+model.getNode("speed-kt",1).setValue(local_weather.wind.cloudlayer[1]);
 model.getNode("load", 1).remove();
 
 
-
+#model.getNode("latitude-deg-prop", 1).setValue(latN.getPath());
+#model.getNode("longitude-deg-prop", 1).setValue(lonN.getPath());
+#model.getNode("elevation-ft-prop", 1).setValue(altN.getPath());
+#model.getNode("heading-deg-prop", 1).setValue(hdgN.getPath());
 
 # sort the cloud into the cloud hash array
 
@@ -655,7 +658,6 @@ if ((i < 0) or (i==0))
 	# now set flag that tile has been completely processed
 	var dir_index = props.globals.getNode(lw~"tiles/tmp/dir-index").getValue();
 
-	#props.globals.getNode(lw~"tiles").getChild("tile",dir_index).getNode("generated-flag").setValue(2);
 	setprop(lw~"tiles/tile["~dir_index~"]/generated-flag",2);	
 
 	return;

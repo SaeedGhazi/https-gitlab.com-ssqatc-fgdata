@@ -33,7 +33,8 @@ $Id$
  <name>Microsoft SideWinder Precision 2</name>
  <name>Microsoft Microsoft SideWinder Precision Pro (USB)</name>
  <name>Microsoft SideWinder Precision Pro (USB)</name>
-
+ <name>SideWinder Precision 2 Joystick</name>
+ 
  <axis n="0">
   <desc>Aileron</desc>
   <binding>

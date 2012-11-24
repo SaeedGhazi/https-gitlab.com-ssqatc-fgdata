@@ -38,7 +38,7 @@
 		<halign>fill</halign>
 		<valign>fill</valign>
 		<stretch>true</stretch>
-		<pref-height>200</pref-height>
+		<pref-height>205</pref-height>
 		<property>$result</property>
 		<binding>
 			<command>dialog-apply</command>

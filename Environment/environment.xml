@@ -352,6 +352,8 @@
     <metar-updates-environment type="bool">true</metar-updates-environment>
     <metar-updates-winds-aloft type="bool">true</metar-updates-winds-aloft>
     <metar-updates-snow-level type="bool" userarchive="y">true</metar-updates-snow-level>
+    <use-external-precipitation-level type="bool">false</use-external-precipitation-level>
+    <external-precipitation-level-m type="double">0</external-precipitation-level-m>
     <control-fdm-atmosphere type="bool">true</control-fdm-atmosphere>
     <contrail-altitude type="double">30000</contrail-altitude>
     <!-- definitions for the metar generated fog/mist/haze layer -->
@@ -373,7 +375,6 @@
       <haze-2dlayer-alpha type="double">0.6</haze-2dlayer-alpha>
       <haze-2dlayer-coverage type="string">overcast</haze-2dlayer-coverage>
     </fog-mist-haze-layer>
-
   </params>
 
 

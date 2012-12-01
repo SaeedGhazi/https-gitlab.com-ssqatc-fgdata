@@ -134,12 +134,13 @@ var Transform = {
 var Element = {
   # Constructor
   #
-  # @param node     Node to be used for element or vector [parent, type] for
-  #                 creation of a new node with name type and given parent
-  # @param id       ID/Name (Should be unique)
-  new: func(node, id)
+  # @param ghost  Element ghost as retrieved from core methods
+  new: func(ghost)
   {
-    var m = { parents: [PropertyElement.new(node, id), Element] };
+    var m = {
+      parents: [PropertyElement, Element, ghost],
+      _node: props.wrapNode(ghost._node_ghost)
+    };
 
     m._center = [
       m._node.getNode("center[0]"),
@@ -235,6 +236,8 @@ var Element = {
     if( size(center) != 2 )
       return debug.warn("invalid arg");
 
+    me._setupCenterNodes();
+
     if( me._center[0] == nil )
       me._center[0] = me._node.getNode("center[0]", 1);
     if( me._center[1] == nil )
@@ -250,6 +253,8 @@ var Element = {
   {
     var bb = me.getBoundingBox();
     var center = [0, 0];
+
+    me._setupCenterNodes();
 
     if( me._center[0] != nil )
       center[0] = me._center[0].getValue() or 0;
@@ -268,6 +273,14 @@ var Element = {
     if( me['_tf'] == nil )
       me['_tf'] = me.createTransform();
     return me._tf;
+  },
+  _setupCenterNodes: func()
+  {
+    if( me["_center"] == nil )
+      me["_center"] = [
+        me._node.getNode("center[0]"),
+        me._node.getNode("center[1]")
+      ];
   }
 };
 
@@ -277,19 +290,20 @@ var Element = {
 #
 var Group = {
 # public:
-  new: func(node, id)
+  new: func(ghost)
   {
-    return { parents: [Group, Element.new(node, id)] };
+    return { parents: [Group, Element.new(ghost)] };
   },
   # Create a child of given type with specified id.
   # type can be group, text
   createChild: func(type, id = nil)
   {
+    var ghost = me._createChild(type, id);
     var factory = me._getFactory(type);
     if( factory == nil )
-      return nil;
+      return ghost;
 
-    return factory([me._node, type], id);
+    return factory(ghost);
   },
   # Create multiple children of given type
   createChildren: func(type, count)
@@ -298,9 +312,9 @@ var Group = {
     if( factory == nil )
       return [];
 
-    var nodes = me._node.addChildren(type, count, 0, 0);
+    var nodes = props._addChildren(me._node._g, [type, count, 0, 0]);
     for(var i = 0; i < count; i += 1)
-      nodes[i] = factory(nodes[i], nil); # TODO id. Maybe <base id>-<index>?
+      nodes[i] = factory( me._getChild(nodes[i]) );
 
     return nodes;
   },
@@ -318,29 +332,19 @@ var Group = {
   # Get first child with given id (breadth-first search)
   #
   # @note Use with care as it can take several miliseconds (for me eg. ~2ms).
+  #       TODO check with new C++ implementation
   getElementById: func(id)
   {
-    # TODO can we improve the queue or better port this to C++ or use some kind
-    # of lookup hash? Searching is really slow now...
-    var stack = [me._node];
-    var index = 0;
+    var ghost = me._getElementById(id);
+    if( ghost == nil )
+      return nil;
 
-    while( index < size(stack) )
-    {
-      var node = stack[index];
-      index += 1;
+    var node = props.wrapNode(ghost._node_ghost);
+    var factory = me._getFactory( node.getName() );
+    if( factory == nil )
+      return ghost;
 
-      if( node != me._node )
-      {
-        var node_id = node.getNode("id");
-        if( node_id != nil and node_id.getValue() == id )
-          return me._wrapElement(node);
-      }
-
-      foreach(var c; node.getChildren())
-        if( me._isElementNode(c) )
-          append(stack, c);
-    }
+    return factory(ghost);
   },
   # Remove all children
   removeAllChildren: func()
@@ -360,7 +364,7 @@ var Group = {
   _wrapElement: func(node)
   {
     # Create element from existing node
-    return me._element_factories[ node.getName() ](node, nil);
+    return me._element_factories[ node.getName() ]( me._getChild(node._g) );
   },
   _getFactory: func(type)
   {
@@ -379,9 +383,9 @@ var Group = {
 # which automatically get projected according to the specified projection.
 #
 var Map = {
-  new: func(node, id)
+  new: func(ghost)
   {
-    return { parents: [Map, Group.new(node, id)] };
+    return { parents: [Map, Group.new(ghost)] };
   }
   # TODO
 };
@@ -391,9 +395,9 @@ var Map = {
 # Class for a text element on a canvas
 #
 var Text = {
-  new: func(node, id)
+  new: func(ghost)
   {
-    return { parents: [Text, Element.new(node, id)] };
+    return { parents: [Text, Element.new(ghost)] };
   },
   # Set the text
   setText: func(text)
@@ -523,10 +527,10 @@ var Path = {
   ],
 
   #
-  new: func(node, id)
+  new: func(ghost)
   {
     return {
-      parents: [Path, Element.new(node, id)],
+      parents: [Path, Element.new(ghost)],
       _num_cmds: 0,
       _num_coords: 0
     };
@@ -660,9 +664,9 @@ var Path = {
 # Class for an image element on a canvas
 #
 var Image = {
-  new: func(node, id)
+  new: func(ghost)
   {
-    return {parents: [Image, Element.new(node, id)]};
+    return {parents: [Image, Element.new(ghost)]};
   },
   # Set image file to be used
   #
@@ -736,9 +740,9 @@ var Canvas = {
   # @param id Optional id/name for the group
   createGroup: func(id = nil)
   {
-    var ghost = me.parents[1].createGroup();
+    var ghost = me._createGroup();
     return {
-      parents: [ Group.new(props.wrapNode(ghost._node_ghost), id), ghost ]
+      parents: [ Group.new(ghost) ]
     };
   },
   # Set the background color

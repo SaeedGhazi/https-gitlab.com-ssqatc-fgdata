@@ -7,10 +7,10 @@ varying vec4  ecPosition;
 varying vec3  VNormal;
 varying vec3  Normal;
 varying vec3  VTangent;
-//varying vec3  VBinormal;
+varying vec3  VBinormal;
 varying vec4  constantColor;
 
-attribute vec3 tangent;//, binormal;
+attribute vec3 tangent, binormal;
 
 ////fog "include"////////
 // uniform int fogType;

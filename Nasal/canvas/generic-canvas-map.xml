@@ -97,6 +97,19 @@ In the close block, you'll want to call "map.cleanup_listeners()" at the moment
 			.setupZoom( dialog:DIALOG_CANVAS ) 			# TODO: make zooming configurable for non GUI use
 			.pickupFeatures (DIALOG_CANVAS);			# set up the features specified in the XML file
 
+	  var offset = [0,0];
+	  my_canvas.addEventListener("drag", func(e)
+          {
+            offset[0] += e.deltaX;
+            offset[1] += e.deltaY;
+            map.setTranslation(300 + offset[0], 200 + offset[1]);
+          });
+
+          my_canvas.addEventListener("wheel", func(e)
+          {
+            map.zoom_property.setIntValue(map.zoom_property.getValue() + e.deltaY );
+          });
+
 	canvas.run_callbacks(); # WORKAROUND to run dialog-specific init code - 
 				# must be set up via register_callback() in the dialog's open block currently 
           ]]>

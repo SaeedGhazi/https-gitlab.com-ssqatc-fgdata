@@ -373,12 +373,16 @@ var LayeredMap = { 	ranges:[],
 	}
 
  LayeredMap.updateZoom = func {
-	var z = getprop(me.zoom_property) or 0;
-        var zoom = me.ranges[ size(me.ranges)-1 -z];
+	var z = me.zoom_property.getValue() or 0;
+	z = math.max(0, math.min(z, size(me.ranges) - 1));
+	me.zoom_property.setIntValue(z);
+        var zoom = me.ranges[size(me.ranges) - 1 - z];
 	# print("Setting zoom range to:", zoom);
-	benchmark("Zooming map:"~zoom, func 
-        	me._node.getNode("range", 1).setDoubleValue(zoom)
-	);
+	benchmark("Zooming map:"~zoom, func
+	{
+		me._node.getNode("range", 1).setDoubleValue(zoom);
+		# TODO update center/limit translation to keep airport always visible
+	});
 	me; #chainable
  }
 
@@ -398,14 +402,15 @@ LayeredMap.updateState = func {
 # TODO: this is currently GUI specific and not re-usable for instruments 
  LayeredMap.setupZoom = func(dialog) {
    	var dlgroot =  dialog.getNode("features/dialog-root").getValue();#FIXME: GUI specific - needs to be re-implemented for instruments
-   	var zoom_property = dlgroot ~"/"~dialog.getNode("features/range-property").getValue(); #FIXME: this doesn't belong here, need to be in ctor instead !!!
+	me.zoom_property = props.globals.getNode(dlgroot ~"/"~dialog.getNode("features/range-property").getValue(), 1); #FIXME: this doesn't belong here, need to be in ctor instead !!!
 	ranges=dialog.getNode("features/ranges").getChildren("range");
-	foreach(var r; ranges)
-		append(me.ranges, r.getValue() );
+	if( size(me.ranges) == 0 )
+		# TODO check why this gets called everytime the dialog is opened
+		foreach(var r; ranges)
+			append(me.ranges, r.getValue() );
 
 	# print("Setting up Zoom Ranges:", size(ranges)-1);
-	me.zoom_property=zoom_property;
-	me.listen(zoom_property, func me.updateZoom() );
+	me.listen(me.zoom_property, func me.updateZoom() );
 	me.updateZoom();
 	me; #chainable
 	}

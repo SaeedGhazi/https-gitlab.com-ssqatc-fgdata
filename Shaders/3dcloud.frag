@@ -4,6 +4,9 @@ varying float fogFactor;
 void main(void)
 {
       vec4 base = texture2D( baseTexture, gl_TexCoord[0].st);
+      if (base.a <= 0.01)
+        discard;
+
       vec4 finalColor = base * gl_Color;
       gl_FragColor.rgb = mix(gl_Fog.color.rgb, finalColor.rgb, fogFactor );
       gl_FragColor.a = finalColor.a;

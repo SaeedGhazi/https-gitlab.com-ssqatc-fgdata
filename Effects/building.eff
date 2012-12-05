@@ -147,10 +147,10 @@
           </internal-format>
       </texture-unit>
       <program>
-	<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader>
-	<vertex-shader n="1">Shaders/building-default.vert</vertex-shader>
-	<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
-	<fragment-shader n="1">Shaders/terrain-nocolor.frag</fragment-shader>
+          <vertex-shader n="0">Shaders/include_fog.vert</vertex-shader>
+          <vertex-shader n="1">Shaders/building-default.vert</vertex-shader>
+          <fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
+	        <fragment-shader n="1">Shaders/terrain-nocolor.frag</fragment-shader>
       </program>
       <uniform>
         <name>texture</name>
@@ -235,6 +235,16 @@
         <name>eye_alt</name>
         <type>float</type>
         <value><use>eye_alt</use></value>
+      </uniform>
+      <uniform>
+        <name>cloud_self_shading</name>
+        <type>float</type>
+        <value><use>cloud_self_shading</use></value>
+      </uniform>
+      <uniform>
+        <name>moonlight</name>
+        <type>float</type>
+        <value><use>moonlight</use></value>
       </uniform>
       <uniform>
         <name>texture</name>

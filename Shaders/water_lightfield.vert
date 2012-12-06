@@ -10,13 +10,12 @@
 varying vec4 waterTex1;
 varying vec4 waterTex2;
 varying vec4 waterTex4;
-//varying vec4 ecPosition;
 varying vec3 relPos;
-varying vec3 specular_light;
+
 
 varying vec3 viewerdir;
 varying vec3 lightdir;
-//varying vec3 normal;
+
 
 varying float earthShade;
 varying float yprime_alt;
@@ -24,7 +23,6 @@ varying float mie_angle;
 
 uniform float osg_SimulationTime;
 uniform float WindE, WindN;
-
 uniform float hazeLayerAltitude;
 uniform float terminator;
 uniform float terrain_alt;
@@ -32,6 +30,9 @@ uniform float avisibility;
 uniform float visibility;
 uniform float overcast;
 uniform float ground_scattering;
+
+
+vec3 specular_light;
 
 // This is the value used in the skydome scattering shader - use the same here for consistency?
 const float EarthRadius = 5800000.0;
@@ -68,8 +69,9 @@ void main(void)
 {
 
     mat4 RotationMatrix;
-   // vec3 N = normalize(gl_Normal);
-   // normal = N;
+  
+
+    vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
 
     vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
 
@@ -157,18 +159,19 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
     	specular_light.g = light_func(lightArg, 3.931e-06, 0.264, 3.827, 7.93e-06, 1.0);
    	specular_light.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
 
-	specular_light = specular_light * scattering;
+	specular_light = max(specular_light * scattering, vec3 (0.05, 0.05, 0.05));
 
-	// correct ambient light intensity and hue before sunrise
-	if (earthShade < 0.5)
-	{
 	intensity = length(specular_light.rgb);
-	specular_light.xyz = intensity * normalize(mix(specular_light.xyz,  vec3 (0.45, 0.6, 0.8), 1.0 -smoothstep(0.1, 0.7,earthShade) ));
-	}
+	specular_light.rgb = intensity * normalize(mix(specular_light.rgb,  shadedFogColor, 1.0 -smoothstep(0.1, 0.6,ground_scattering) ));
+
+	// correct ambient light intensity and hue before sunrise - seems unnecessary and create artefacts though...
+	//if (earthShade < 0.5)
+	//{
+	//specular_light.rgb = intensity * normalize(mix(specular_light.rgb,  shadedFogColor, 1.0 -smoothstep(0.1, 0.7,earthShade) ));
+	//}
 
     // directional scattering for low sun
     if (lightArg < 10.0)
-    	//{mie_angle = (0.5 *  dot(normalize(relPos), normalize(lightFull)) ) + 0.5;}
 	{mie_angle = (0.5 *  dot(normalize(relPos), lightdir) ) + 0.5;}
     else
 	{mie_angle = 1.0;}
@@ -221,6 +224,8 @@ else // the faster, full-day version without lightfields
 
 }
 
+gl_FrontColor.rgb = specular_light;
+gl_BackColor.rgb = gl_FrontColor.rgb;
 
 
 }

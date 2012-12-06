@@ -11,7 +11,7 @@ uniform sampler2D texture;
 
 
 varying float yprime_alt;
-varying float mie_angle;
+//varying float mie_angle;
 
 
 uniform float visibility;
@@ -24,12 +24,15 @@ uniform float overcast;
 uniform float eye_alt;
 uniform float dust_cover_factor;
 
+
+
 uniform int quality_level;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
 
 float alt;
+float mie_angle;
 
 float luminance(vec3 color)
 {
@@ -82,21 +85,28 @@ void main()
 {
 
 
+  vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
+
 
 
     vec3 lightDir = gl_LightSource[0].position.xyz;
     float intensity;
 
-    vec4 fragColor = gl_Color * texture2D(texture, gl_TexCoord[0].st);
+    mie_angle = gl_Color.a;
+    vec4 texel = texture2D(texture, gl_TexCoord[0].st);
+
 
 
 if (quality_level > 3)
 	{
 	// mix dust
-    	vec4 dust_color = vec4 (0.76, 0.71, 0.56, fragColor.a);
+    	vec4 dust_color = vec4 (0.76, 0.71, 0.56, texel.a);
 
-    	fragColor = mix(fragColor, dust_color, clamp(0.6 * dust_cover_factor ,0.0, 1.0) );
+    	texel = mix(texel, dust_color, clamp(0.6 * dust_cover_factor ,0.0, 1.0) );
 	}
+
+      vec4 fragColor = vec4 (gl_Color.xyz,1.0) * texel;
+
 
 // here comes the terrain haze model
 
@@ -228,11 +238,11 @@ hazeColor.y = hazeColor.y * 0.9;
 // additional blue in indirect light
 float fade_out = max(0.65 - 0.3 *overcast, 0.45);
 intensity = length(hazeColor);
-hazeColor = intensity * normalize(mix(hazeColor,  1.5* vec3 (0.45, 0.6, 0.8), 1.0 -smoothstep(0.25, fade_out,eShade) )); 
+hazeColor = intensity * normalize(mix(hazeColor,  1.5* shadedFogColor, 1.0 -smoothstep(0.25, fade_out,eShade) )); 
 
 // change haze color to blue hue for strong fogging
 //intensity = length(hazeColor);
-hazeColor = intensity * normalize(mix(hazeColor,  2.0 * vec3 (0.55, 0.6, 0.8), (1.0-smoothstep(0.3,0.8,eqColorFactor)))); 
+hazeColor = intensity * normalize(mix(hazeColor,  shadedFogColor, (1.0-smoothstep(0.5,0.9,eqColorFactor)))); 
 
 
 // reduce haze intensity when looking at shaded surfaces, only in terminator region
@@ -245,7 +255,7 @@ hazeColor = intensity * normalize(mix(hazeColor,  2.0 * vec3 (0.55, 0.6, 0.8), (
 
 //fragColor.xyz = transmission * fragColor.xyz + (1.0-transmission)  * eqColorFactor * hazeColor * earthShade;
 
-fragColor.xyz = mix(eqColorFactor * hazeColor * eShade, fragColor.xyz,transmission);
+fragColor.rgb = mix(eqColorFactor * hazeColor * eShade, fragColor.rgb,transmission);
 
 gl_FragColor = fragColor;
 

@@ -322,6 +322,16 @@
 				 <type>float</type>
 				 <value><use>fogstructure</use></value>
      		 	  </uniform>
+  			  <uniform>
+      				  <name>cloud_self_shading</name>
+        			  <type>float</type>
+        			   <value><use>cloud_self_shading</use></value>
+      			  </uniform>
+      			  <uniform>
+        			  <name>moonlight</name>
+        			  <type>float</type>
+        			  <value><use>moonlight</use></value>
+      			   </uniform>
 			
 			<!-- 			END fog include -->
 		</pass>
@@ -573,6 +583,16 @@
 					<use>snow-level</use>
 				</value>
 			</uniform>
+  			<uniform>
+      				  <name>cloud_self_shading</name>
+        			  <type>float</type>
+        			   <value><use>cloud_self_shading</use></value>
+      			  </uniform>
+      			  <uniform>
+        			  <name>moonlight</name>
+        			  <type>float</type>
+        			  <value><use>moonlight</use></value>
+      			   </uniform>
 
 
 		</pass>

@@ -123,6 +123,12 @@
 		<eye_alt>
 			<use>/sim/rendering/eye-altitude-m</use>
 		</eye_alt>
+		<cloud_self_shading>
+			<use>/environment/cloud-self-shading</use>
+		</cloud_self_shading>
+    		<moonlight>
+			<use>/environment/moonlight</use>
+		</moonlight>
 		<fogtype>
 			<use>/sim/rendering/shaders/skydome</use>
 		</fogtype>
@@ -136,7 +142,6 @@
 		<sea_b>
 			<use>/environment/sea/color_b</use>
 		</sea_b>
-
 		<!-- END fog include -->
 	</parameters>
 
@@ -476,6 +481,11 @@
 					<use>eye_alt</use>
 				</value>
 			</uniform>
+ 			<uniform>
+        			<name>cloud_self_shading</name>
+        			<type>float</type>
+        			<value><use>cloud_self_shading</use></value>
+      			</uniform>
 			<!-- sea colors -->
 			<uniform>
 				<name>sea_r</name>
@@ -833,6 +843,11 @@
 					<use>eye_alt</use>
 				</value>
 			</uniform>
+			<uniform>
+        			<name>cloud_self_shading</name>
+        			<type>float</type>
+        			<value><use>cloud_self_shading</use></value>
+      			</uniform>
 			<!-- sea colors -->
 			<uniform>
 				<name>sea_r</name>

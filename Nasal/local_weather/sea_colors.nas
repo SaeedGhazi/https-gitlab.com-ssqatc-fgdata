@@ -46,6 +46,14 @@ ppos.set_latlon(s.lat,s.lon,0.0);
 s.distance = viewpos.distance_to(ppos);
 append(interpolation_vector,s);
 
+
+# Venezuela rivers
+s = seaColorPoint.new(5.00, -62.11, 3.0,0.17, 0.25, 0.31);
+ppos.set_latlon(s.lat,s.lon,0.0);
+s.distance = viewpos.distance_to(ppos);
+append(interpolation_vector,s);
+
+
 ivector_size = size(interpolation_vector);
 
 sea_color_loop(0);

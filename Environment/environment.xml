@@ -413,11 +413,14 @@
   <terminator-relative-position-m type="double" userarchive="n">1000000.0</terminator-relative-position-m>
   <mean-terrain-elevation-m type="double" userarchive="n">0.0</mean-terrain-elevation-m>
   <fog-structure type="double" userarchive="y">0.0</fog-structure>
+  <cloud-self-shading type="double" userarchive="n">1.0</cloud-self-shading>
+  <moonlight type="double" userarchive="n">0.0</moonlight>
   <!-- definitions for the environment at surface interface -->
   <surface>
     <scattering type="double" userarchive="n">0.7</scattering>
     <dust-cover-factor type="double" userarchive="y">0.0</dust-cover-factor>
     <lichen-cover-factor type="double" userarchive="y">0.0</lichen-cover-factor>
     <wetness type="double" userarchive="y">0.0</wetness>
+    <snow-thickness-factor type="double" userarchive="y">1.0</snow-thickness-factor>
   </surface>
 </PropertyList>

@@ -23,7 +23,7 @@ varying vec4 waterTex2; //moving texcoords
 varying vec4 waterTex4; //viewts
 varying vec3 viewerdir;
 varying vec3 lightdir;
-varying vec3 specular_light;
+//varying vec3 specular_light;
 varying vec3 relPos;
 
 varying float earthShade;
@@ -47,13 +47,14 @@ uniform float visibility;
 uniform float overcast;
 uniform float scattering;
 uniform float ground_scattering;
+uniform float cloud_self_shading;
 uniform float eye_alt;
 uniform float sea_r;
 uniform float sea_g;
 uniform float sea_b;
-uniform float ylimit;
-uniform float zlimit1;
-uniform float zlimit2;
+
+
+vec3 specular_light;
 
 //uniform int wquality_level;
 
@@ -190,10 +191,8 @@ void main(void)
 	{
 
 
-
-if ((gl_FragCoord.y < ylimit) && (gl_FragCoord.x > zlimit1) && (gl_FragCoord.x < zlimit2))
-	{discard;}
-
+        vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
+	float effective_scattering = min(scattering, cloud_self_shading);
 
 	float dist = length(relPos);
 	const vec4 sca = vec4(0.005, 0.005, 0.005, 0.005);
@@ -259,10 +258,10 @@ if ((gl_FragCoord.y < ylimit) && (gl_FragCoord.x > zlimit1) && (gl_FragCoord.x <
 	wave2.amp = WaveAmp * 0.75;
 	wave2.dir =  vec2(0.96592, -0.2588);// vec2(cos(radians(angle)), sin(radians(angle)));
 
-	//angle -= 50;
-	//wave3.freq = WaveFreq * 3.0 ;
-	//wave3.amp = WaveAmp * 0.75;
-	//wave3.dir =  vec2(0.42261, -0.9063); //vec2(cos(radians(angle)), sin(radians(angle)));
+	angle -= 50;
+	wave3.freq = WaveFreq * 3.0 ;
+	wave3.amp = WaveAmp * 0.75;
+	wave3.dir =  vec2(0.42261, -0.9063); //vec2(cos(radians(angle)), sin(radians(angle)));
 
 	// sum waves
 
@@ -276,7 +275,7 @@ if ((gl_FragCoord.y < ylimit) && (gl_FragCoord.x > zlimit1) && (gl_FragCoord.x <
 	/*
 	angle = 0.0;
 	float waveamp = WaveAmp * 0.75;
-
+	
 	wave0.freq = WaveFreq ;
 	wave0.amp = waveamp;
 	wave0.dir =  vec2 (0.0, 1.0); //vec2(cos(radians(angle)), sin(radians(angle)));
@@ -295,13 +294,13 @@ if ((gl_FragCoord.y < ylimit) && (gl_FragCoord.x > zlimit1) && (gl_FragCoord.x <
 	wave3.freq = WaveFreq * 3.0 ;
 	wave3.amp = waveamp * 0.75;
 	wave3.dir =  vec2(0.866025, -0.5); //vec2(cos(radians(angle)), sin(radians(angle)));
-	*/
-	//ddx2 = 0.0, ddy2 = 0.0;
-	//sumWaves(WaveAngle + WaveDAngle, -1.5, windScale, WaveFactor, ddx2, ddy2);
+
+	ddx2 = 0.0, ddy2 = 0.0;
+	sumWaves(WaveAngle + WaveDAngle, -1.5, windScale, WaveFactor, ddx2, ddy2);
 	
-	//ddx3 = 0.0, ddy3 = 0.0;
-	//sumWaves(WaveAngle + WaveDAngle, 1.5, windScale, WaveFactor, ddx3, ddy3);
-		
+	ddx3 = 0.0, ddy3 = 0.0;
+	sumWaves(WaveAngle + WaveDAngle, 1.5, windScale, WaveFactor, ddx3, ddy3);
+	*/	
 	}
 	// end sine stuff
 
@@ -319,21 +318,20 @@ if ((gl_FragCoord.y < ylimit) && (gl_FragCoord.x > zlimit1) && (gl_FragCoord.x <
 	vec4 nmap   = texture2D(water_normalmap, vec2(waterTex1 + disdis * sca2) * windScale) * 2.0 - 1.0;
 	vec4 nmap1  = texture2D(perlin_normalmap, vec2(waterTex1 + disdis * sca2) * windScale) * 2.0 - 1.0;
 
-	rotationmatrix(radians(3.0 * sin(osg_SimulationTime * 0.0075)), RotationMatrix);
-	nmap  += texture2D(water_normalmap, vec2(waterTex2 * RotationMatrix * tscale) * windScale) * 2.0 - 1.0;
-	nmap1 += texture2D(perlin_normalmap, vec2(waterTex2 * RotationMatrix * tscale) * windScale) * 2.0 - 1.0;
+	//rotationmatrix(radians(3.0 * sin(osg_SimulationTime * 0.0075)), RotationMatrix);
+	//nmap  += texture2D(water_normalmap, vec2(waterTex2 * RotationMatrix * tscale) * windScale) * 2.0 - 1.0;
+	//nmap1 += texture2D(perlin_normalmap, vec2(waterTex2 * RotationMatrix * tscale) * windScale) * 2.0 - 1.0;
 
 	nmap  *= windEffect_low;
 	nmap1 *= windEffect_low;
 
 	// mix water and noise, modulated by factor
 	vNorm = normalize(mix(nmap, nmap1, mixFactor) * waveRoughness);
-	if (detail_flag == 1)	{vNorm.r += ddx + ddx1;}
+	if (detail_flag == 1)	{vNorm.r += ddx + ddx1 + ddx2 + ddx3;}
+
 	
    	if (normalmap_dds > 0)
         	{vNorm = -vNorm;}		//dds fix
-
-
 		
 
 	//load reflection
@@ -348,7 +346,7 @@ if ((gl_FragCoord.y < ylimit) && (gl_FragCoord.x > zlimit1) && (gl_FragCoord.x <
 
 	float intensity;
 	// de-saturate for reduced light
-	refl.rgb = mix(refl.rgb,  vec3 (0.248, 0.248, 0.248), 1.0 - smoothstep(0.1, 0.8, ground_scattering)); 	
+	refl.rgb = mix(refl.rgb,  vec3 (0.248, 0.248, 0.248), 1.0 - smoothstep(0.1, 0.8, ground_scattering)); 
 
   	// de-saturate light for overcast haze
 	intensity = length(refl.rgb);
@@ -356,22 +354,43 @@ if ((gl_FragCoord.y < ylimit) && (gl_FragCoord.x > zlimit1) && (gl_FragCoord.x <
 
 	vec3 N;
 
+
+	
+
+	vec3 N0 = vec3(texture2D(water_normalmap, vec2(waterTex1 + disdis * sca2) * windScale) * 2.0 - 1.0);
+	vec3 N1 = vec3(texture2D(perlin_normalmap, vec2(waterTex1 + disdis * sca) * windScale) * 2.0 - 1.0);
+
+	N0 += vec3(texture2D(water_normalmap, vec2(waterTex1 * tscale) * windScale) * 2.0 - 1.0);
+	N1 += vec3(texture2D(perlin_normalmap, vec2(waterTex2 * tscale) * windScale) * 2.0 - 1.0);
+
+
 		
 	rotationmatrix(radians(2.0 * sin(osg_SimulationTime * 0.005)), RotationMatrix);
-	vec3 N0 = vec3(texture2D(water_normalmap, vec2(waterTex2 * RotationMatrix * (tscale + sca2)) * windScale) * 2.0 - 1.0);
-	vec3 N1 = vec3(texture2D(perlin_normalmap, vec2(waterTex2 * RotationMatrix * (tscale + sca2)) * windScale) * 2.0 - 1.0);
+	N0 += vec3(texture2D(water_normalmap, vec2(waterTex2 * RotationMatrix * (tscale + sca2)) * windScale) * 2.0 - 1.0);
+	N1 += vec3(texture2D(perlin_normalmap, vec2(waterTex2 * RotationMatrix * (tscale + sca2)) * windScale) * 2.0 - 1.0);
+
+	rotationmatrix(radians(-4.0 * sin(osg_SimulationTime * 0.003)), RotationMatrix);
+	N0 += vec3(texture2D(water_normalmap, vec2(waterTex1 * RotationMatrix + disdis * sca2) * windScale) * 2.0 - 1.0);
+	N1 += vec3(texture2D(perlin_normalmap, vec2(waterTex1 * RotationMatrix + disdis * sca) * windScale) * 2.0 - 1.0);
 		
 
 	N0 *= windEffect_low;
 	N1 *= windEffect_low;
 
-	N0.r += (ddx + ddx1);
-	N0.g += (ddy + ddy1);
+	N0.r += (ddx + ddx1 + ddx2 + ddx3);
+	N0.g += (ddy + ddy1 + ddy2 + ddy3);
 
 	N = normalize(mix(Normal + N0, Normal + N1, mixFactor) * waveRoughness);
 
-       if (normalmap_dds > 0)
+         if (normalmap_dds > 0)
                 {N = -N;} //dds fix
+
+
+	
+
+
+       specular_light = gl_Color.rgb;
+
 	
 	vec3 specular_color = vec3(specular_light)
 		* pow(max(0.0, dot(N, Hv)), water_shininess) * 6.0;
@@ -387,8 +406,9 @@ if ((gl_FragCoord.y < ylimit) && (gl_FragCoord.x > zlimit1) && (gl_FragCoord.x <
 
 
 	vec4 ambient_light;
-
+	//intensity = length(specular_light.rgb);
 	ambient_light.rgb = max(specular_light.rgb, vec3(0.1, 0.1, 0.1));
+	//ambient_light.rgb = max(intensity * normalize(vec3 (0.33, 0.4, 0.5)), vec3 (0.1,0.1,0.1));
    	ambient_light.a = 1.0;
    	
 	
@@ -402,7 +422,7 @@ if ((gl_FragCoord.y < ylimit) && (gl_FragCoord.x > zlimit1) && (gl_FragCoord.x <
 
 	if (dist < 10000.0)
 	{
-	float foamSlope = 0.12 + 0.1 * windScale;
+	float foamSlope = 0.10 + 0.1 * windScale;
 
 
 	vec4 foam_texel = texture2D(sea_foam, vec2(waterTex2 * tscale) * 25.0);
@@ -450,7 +470,6 @@ if (delta_z > 0.0) // we're inside the layer
 	if (ct < 0.0) // we look down 
 		{
 		distance_in_layer = dist;
-		//lambda = visibility;
 		vAltitude = min(distance_in_layer,min(visibility,avisibility)) * ct;
   		delta_zv = delta_z - vAltitude;
 		}
@@ -459,7 +478,6 @@ if (delta_z > 0.0) // we're inside the layer
 		H = dist * ct;
 		if (H > delta_z) {distance_in_layer = dist/H * delta_z;}
 		else {distance_in_layer = dist;}
-		//lambda = visibility;
 		vAltitude = min(distance_in_layer,visibility) * ct;
   		delta_zv = delta_z - vAltitude;	
 		}
@@ -496,14 +514,14 @@ if (visibility < avisibility)
 	{
 	transmission_arg = transmission_arg + (distance_in_layer/visibility);
 	// this combines the Weber-Fechner intensity
-	eqColorFactor = 1.0 - 0.1 * delta_zv/visibility - (1.0 -scattering);
+	eqColorFactor = 1.0 - 0.1 * delta_zv/visibility - (1.0 -effective_scattering);
 
 	}
 else 
 	{
 	transmission_arg = transmission_arg + (distance_in_layer/avisibility);
 	// this combines the Weber-Fechner intensity
-	eqColorFactor = 1.0 - 0.1 * delta_zv/avisibility - (1.0 -scattering);
+	eqColorFactor = 1.0 - 0.1 * delta_zv/avisibility - (1.0 -effective_scattering);
 	}
 
 
@@ -516,7 +534,6 @@ if (eqColorFactor < 0.2) eqColorFactor = 0.2;
 float lightArg = (terminator-yprime_alt)/100000.0;
 
 vec3 hazeColor;
-//hazeColor.rgb = specular_light.rgb;
 hazeColor.b = light_func(lightArg, 1.330e-05, 0.264, 2.527, 1.08e-05, 1.0);
 hazeColor.g = light_func(lightArg, 3.931e-06, 0.264, 3.827, 7.93e-06, 1.0);
 hazeColor.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
@@ -535,33 +552,33 @@ if (lightArg < 10.0)
 // high altitude desaturation of the haze color
 
 intensity = length(hazeColor);
-hazeColor = intensity * normalize (mix(hazeColor, intensity * vec3 (1.0,1.0,1.0), 0.7* smoothstep(5000.0, 50000.0, eye_alt)));
-
-// blue hue of haze
-
-hazeColor.x = hazeColor.x * 0.83;
-hazeColor.y = hazeColor.y * 0.9; 
 
 
-// additional blue in indirect light
-float fade_out = max(0.65 - 0.3 *overcast, 0.45);
-intensity = length(hazeColor);
-hazeColor = intensity * normalize(mix(hazeColor,  1.5* vec3 (0.45, 0.6, 0.8), 1.0 -smoothstep(0.25, fade_out,eShade) )); 
+if (intensity > 0.0) // this needs to be a condition, because otherwise hazeColor doesn't come out correctly
+	{
+	hazeColor = intensity * normalize (mix(hazeColor, intensity * vec3 (1.0,1.0,1.0), 0.7* smoothstep(5000.0, 50000.0, eye_alt)));
 
-// change haze color to blue hue for strong fogging
-//intensity = length(hazeColor);
-hazeColor = intensity * normalize(mix(hazeColor,  2.0 * vec3 (0.55, 0.6, 0.8), (1.0-smoothstep(0.3,0.8,eqColorFactor)))); 
+	// blue hue of haze
+	
+	hazeColor.x = hazeColor.x * 0.83;
+	hazeColor.y = hazeColor.y * 0.9; 
 
 
-// reduce haze intensity when looking at shaded surfaces, only in terminator region
+	// additional blue in indirect light
+	float fade_out = max(0.65 - 0.3 *overcast, 0.45);
+	intensity = length(hazeColor);
+	hazeColor = intensity * normalize(mix(hazeColor,  1.5* shadedFogColor, 1.0 -smoothstep(0.25, fade_out,eShade) )); 
 
-//float shadow = mix( min(1.0 + dot(normal,lightdir),1.0), 1.0, 1.0-smoothstep(0.1, 0.4, transmission));
-//hazeColor = mix(shadow * hazeColor, hazeColor, 0.3 + 0.7* smoothstep(250000.0, 400000.0, terminator));
+	// change haze color to blue hue for strong fogging
+	hazeColor = intensity * normalize(mix(hazeColor,  shadedFogColor, (1.0-smoothstep(0.5,0.9,eqColorFactor)))); 
+	}
+
+	
 
 	finalColor.rgb = mix(eqColorFactor * hazeColor * eShade, finalColor.rgb,transmission);
 
 
 	}
-		gl_FragColor = finalColor;
+	gl_FragColor = finalColor;
 
 }

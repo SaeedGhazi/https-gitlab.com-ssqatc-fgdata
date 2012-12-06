@@ -6,6 +6,8 @@ varying vec3 hazeColor;
 
 uniform float terminator;
 uniform float altitude;
+uniform float cloud_self_shading;
+uniform float moonlight;
 
 const float shade = 1.0;
 const float cloud_height = 1000.0;
@@ -20,7 +22,7 @@ x = x-0.5;
 
 // use the asymptotics to shorten computations
 if (x > 30.0) {return e;}
-if (x < -15.0) {return 0.0;}
+if (x < -15.0) {return 0.03;}
 
 
 return e / pow((1.0 + a * exp(-b * (x-c)) ),(1.0/d));
@@ -28,6 +30,9 @@ return e / pow((1.0 + a * exp(-b * (x-c)) ),(1.0/d));
 
 void main(void)
 {	
+
+  vec3 shadedFogColor = vec3 (0.65, 0.67, 0.78);
+  vec3 moonLightColor = vec3 (0.095, 0.095, 0.15) * moonlight;
 
   gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
   //gl_TexCoord[0] = gl_MultiTexCoord0 + vec4(textureIndexX, textureIndexY, 0.0, 0.0);
@@ -73,18 +78,20 @@ void main(void)
   
   float lightArg = (terminator-yprime_alt)/100000.0;
 
-  light_diffuse.b = light_func(lightArg, 1.330e-05, 0.264, 2.827, 1.08e-05, 1.0);
+  light_diffuse.b = light_func(lightArg, 1.330e-05, 0.264, 2.227, 1.08e-05, 1.0);
   light_diffuse.g = light_func(lightArg, 3.931e-06, 0.264, 3.827, 7.93e-06, 1.0);
   light_diffuse.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
-  light_diffuse.a = 0.0;
+  light_diffuse.a = 1.0;
 
+  float intensity = length(light_diffuse.rgb);
+  light_diffuse.rgb = intensity * normalize(mix(light_diffuse.rgb, shadedFogColor, (1.0 - smoothstep(0.5,0.9, cloud_self_shading ))));   
 
 // Determine the shading of the sprite based on its vertical position and position relative to the sun.
   n = min(smoothstep(-0.5, 0.0, n), fract);
 // Determine the shading based on a mixture from the backlight to the front
   vec4 backlight = light_diffuse * shade;
 
-  gl_FrontColor = mix(backlight, gl_LightSource[0].diffuse, n);
+  gl_FrontColor = mix(backlight, light_diffuse, n);
   gl_FrontColor += gl_FrontLightModelProduct.sceneColor;
 
   // As we get within 100m of the sprite, it is faded out. Equally at large distances it also fades out.
@@ -98,9 +105,9 @@ float fadeScale = 0.05 + 0.2 * log(fogCoord/1000.0);
   if (fadeScale < 0.05) fadeScale = 0.05;
   fogFactor = exp( -gl_Fog.density * fogCoord * fadeScale);
 
-  hazeColor = light_diffuse.xyz;
-  hazeColor.x = hazeColor.x * 0.83;
-  hazeColor.y = hazeColor.y * 0.9; 
+  hazeColor = light_diffuse.rgb;
+  hazeColor.r = hazeColor.r * 0.83;
+  hazeColor.g = hazeColor.g * 0.9; 
 
  // in sunset or sunrise conditions, do extra shading of clouds
   
@@ -112,8 +119,16 @@ float fadeScale = 0.05 + 0.2 * log(fogCoord/1000.0);
   // now dim the light
   float earthShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt) + 0.1;
 
+  if (earthShade < 0.8)
+	{
+	intensity = length(light_diffuse.rgb); 
+	gl_FrontColor.rgb = intensity * normalize(mix(gl_FrontColor.rgb,  shadedFogColor, 1.0 -smoothstep(0.1, 0.8,earthShade ) ));
+	}
+
   hazeColor = hazeColor * earthShade;
-  gl_FrontColor.xyz = gl_FrontColor.xyz * earthShade;
+  gl_FrontColor.rgb = gl_FrontColor.rgb * earthShade;
+  gl_FrontColor.rgb = gl_FrontColor.rgb +  moonLightColor * (1.0 - smoothstep(0.4, 0.5, earthShade));
+  hazeColor.rgb = hazeColor.rgb + moonLightColor * (1.0 - smoothstep(0.4, 0.5, earthShade));
   gl_BackColor = gl_FrontColor;
 
 }

@@ -4,31 +4,26 @@
 //  © Michael Horsch - 2005
 //  Major update and revisions - 2011-10-07
 //  © Emilian Huminiuc and Vivian Meazza
+// ported to lightfield shading Thorsten Renk 2012
 
 #version 120
 
 uniform sampler2D water_normalmap;
-//uniform sampler2D water_reflection;
 uniform sampler2D water_dudvmap;
-//uniform sampler2D water_reflection_grey;
 uniform sampler2D sea_foam;
 uniform sampler2D perlin_normalmap;
 
 uniform sampler3D Noise;
 
 uniform float saturation, Overcast, WindE, WindN;
-//uniform float CloudCover0, CloudCover1, CloudCover2, CloudCover3, CloudCover4;
 uniform float osg_SimulationTime;
-//uniform int Status;
 
 varying vec4 waterTex1; //moving texcoords
 varying vec4 waterTex2; //moving texcoords
 varying vec4 waterTex4; //viewts
-//varying vec4 ecPosition;
 varying vec3 viewerdir;
 varying vec3 lightdir;
-//varying vec3 normal;
-varying vec3 specular_light;
+//varying vec3 specular_light;
 varying vec3 relPos;
 
 varying float earthShade;
@@ -46,16 +41,22 @@ uniform    float normalmap_dds;
 
 uniform float hazeLayerAltitude;
 uniform float terminator;
-uniform float terrain_alt;
+uniform float terrain_alt; 
 uniform float avisibility;
 uniform float visibility;
 uniform float overcast;
 uniform float scattering;
 uniform float ground_scattering;
+uniform float cloud_self_shading;
 uniform float eye_alt;
 uniform float sea_r;
 uniform float sea_g;
 uniform float sea_b;
+
+
+vec3 specular_light;
+
+//uniform int wquality_level;
 
 const float terminator_width = 200000.0;
 const float EarthRadius = 5800000.0;
@@ -89,6 +90,9 @@ Wave wave1 = Wave(2.0, 0.5, 1.3, vec2(0.97, -0.25));
 Wave wave2 = Wave(1.0, 1.0, 0.6, vec2(0.95, -0.3));
 Wave wave3 = Wave(2.0, 0.5, 1.4, vec2(0.99, 0.1));
 
+
+
+
 float evaluateWave(in Wave w, vec2 pos, float t)
 	{
 	return w.amp * sin( dot(w.dir, pos) * w.freq + t * w.phase);
@@ -115,7 +119,7 @@ void sumWaves(float angle, float dangle, float windScale, float factor, out floa
 	{
 	mat4 RotationMatrix;
 	float deriv;
-	vec4 P = waterTex1 * 1024.0;
+	vec4 P = waterTex1 * 1024;
 
 	rotationmatrix(radians(angle + dangle * windScale + 0.6 * sin(P.x * factor)), RotationMatrix);
 	P *= RotationMatrix;
@@ -174,9 +178,9 @@ if (eye_alt < 30000.0)
 else if (eye_alt < 50000.0)
 	{
 	fade_mix = (eye_alt - 30000.0)/20000.0;
-	return fade_mix * exp(-targ*targ - pow(targ,4.0)) + (1.0 - fade_mix) * exp(-targ - pow(targ,4.0));
+	return fade_mix * exp(-targ*targ - pow(targ,4.0)) + (1.0 - fade_mix) * exp(-targ - pow(targ,4.0));	
 	}
-else
+else 
 	{
 	return exp(- targ * targ - pow(targ,4.0));
 	}
@@ -185,6 +189,10 @@ else
 
 void main(void)
 	{
+
+
+        vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
+	float effective_scattering = min(scattering, cloud_self_shading);
 
 	float dist = length(relPos);
 	const vec4 sca = vec4(0.005, 0.005, 0.005, 0.005);
@@ -224,35 +232,36 @@ void main(void)
 	// we only need detail in the near zone or where the sun reflection is
 
 	int detail_flag;
-	if ((dist > 15000.0) && (dot(normalize(vec3 (lightdir.x, lightdir.y, 0.0) ), normalize(relPos)) < 0.7 ))  {detail_flag = 0;}
+	if ((dist > 15000.0) && (dot(normalize(vec3 (lightdir.x, lightdir.y, 0.0) ), normalize(relPos)) < 0.7 ))  {detail_flag = 0;} 
 	else {detail_flag = 1;}
-
+	
+	//detail_flag = 1;
 
 	// sine waves
 	float ddx, ddx1, ddx2, ddx3, ddy, ddy1, ddy2, ddy3;
-
+	float angle;
 	if (detail_flag == 1)
 	{
-	float angle = 0.0;
+	angle = 0.0;
 
 	wave0.freq = WaveFreq ;
 	wave0.amp = WaveAmp;
-	wave0.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
+	wave0.dir =  vec2 (0.0, 1.0); //vec2(cos(radians(angle)), sin(radians(angle)));
 
-	angle -= 45.0;
+	angle -= 45;
 	wave1.freq = WaveFreq * 2.0 ;
 	wave1.amp = WaveAmp * 1.25;
-	wave1.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
+	wave1.dir =  vec2(0.70710, -0.7071); //vec2(cos(radians(angle)), sin(radians(angle)));
 
-	angle += 30.0;
+	angle += 30;
 	wave2.freq = WaveFreq * 3.5;
 	wave2.amp = WaveAmp * 0.75;
-	wave2.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
+	wave2.dir =  vec2(0.96592, -0.2588);// vec2(cos(radians(angle)), sin(radians(angle)));
 
-	angle -= 50.0;
+	angle -= 50;
 	wave3.freq = WaveFreq * 3.0 ;
 	wave3.amp = WaveAmp * 0.75;
-	wave3.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
+	wave3.dir =  vec2(0.42261, -0.9063); //vec2(cos(radians(angle)), sin(radians(angle)));
 
 	// sum waves
 
@@ -268,28 +277,29 @@ void main(void)
 
 	wave0.freq = WaveFreq ;
 	wave0.amp = waveamp;
-	wave0.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
+	wave0.dir =  vec2 (0.0, 1.0); //vec2(cos(radians(angle)), sin(radians(angle)));
 
-	angle -= 20.0;
+	angle -= 20;
 	wave1.freq = WaveFreq * 2.0 ;
 	wave1.amp = waveamp * 1.25;
-	wave1.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
+	wave1.dir =  vec2(0.93969, -0.34202);// vec2(cos(radians(angle)), sin(radians(angle)));
 
-	angle += 35.0;
+	angle += 35;
 	wave2.freq = WaveFreq * 3.5;
 	wave2.amp = waveamp * 0.75;
-	wave2.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
+	wave2.dir =  vec2(0.965925, 0.25881);  //vec2(cos(radians(angle)), sin(radians(angle)));
 
-	angle -= 45.0;
+	angle -= 45;
 	wave3.freq = WaveFreq * 3.0 ;
 	wave3.amp = waveamp * 0.75;
-	wave3.dir =  vec2(cos(radians(angle)), sin(radians(angle)));
+	wave3.dir =  vec2(0.866025, -0.5); //vec2(cos(radians(angle)), sin(radians(angle)));
 
 	ddx2 = 0.0, ddy2 = 0.0;
 	sumWaves(WaveAngle + WaveDAngle, -1.5, windScale, WaveFactor, ddx2, ddy2);
-
+	
 	ddx3 = 0.0, ddy3 = 0.0;
 	sumWaves(WaveAngle + WaveDAngle, 1.5, windScale, WaveFactor, ddx3, ddy3);
+		
 	}
 	// end sine stuff
 
@@ -300,9 +310,9 @@ void main(void)
 
 	vec4 disdis = texture2D(water_dudvmap, vec2(waterTex2 * tscale)* windScale) * 2.0 - 1.0;
 
-	vec4 vNorm;
+	vec4 vNorm;	
 
-
+	
 	//normalmaps
 	vec4 nmap   = texture2D(water_normalmap, vec2(waterTex1 + disdis * sca2) * windScale) * 2.0 - 1.0;
 	vec4 nmap1  = texture2D(perlin_normalmap, vec2(waterTex1 + disdis * sca2) * windScale) * 2.0 - 1.0;
@@ -318,31 +328,33 @@ void main(void)
 	vNorm = normalize(mix(nmap, nmap1, mixFactor) * waveRoughness);
 	if (detail_flag == 1)	{vNorm.r += ddx + ddx1 + ddx2 + ddx3;}
 
-	if (normalmap_dds > 0)
-        vNorm = -vNorm; //dds fix
+	
+   	if (normalmap_dds > 0)
+        	{vNorm = -vNorm;}		//dds fix
+		
 
 	//load reflection
-
+	
 	vec4 refl ;
 
 	refl.r = sea_r;
 	refl.g = sea_g;
 	refl.b = sea_b;
-	refl.a = 1.0;
-
+	refl.a = 1.0; 
+	
 
 	float intensity;
 	// de-saturate for reduced light
-	refl.rgb = mix(refl.rgb,  vec3 (0.248, 0.248, 0.248), 1.0 - smoothstep(0.3, 0.7, ground_scattering));
+	refl.rgb = mix(refl.rgb,  vec3 (0.248, 0.248, 0.248), 1.0 - smoothstep(0.1, 0.8, ground_scattering)); 
 
   	// de-saturate light for overcast haze
 	intensity = length(refl.rgb);
-	refl.rgb = mix(refl.rgb,  intensity * vec3 (1.0, 1.0, 1.0), smoothstep(0.1, 0.8, overcast));
+	refl.rgb = mix(refl.rgb,  intensity * vec3 (1.0, 1.0, 1.0), 0.5 * smoothstep(0.1, 0.9, overcast)); 	
 
 	vec3 N;
 
-	if (detail_flag == 1)
-	{
+
+	
 
 	vec3 N0 = vec3(texture2D(water_normalmap, vec2(waterTex1 + disdis * sca2) * windScale) * 2.0 - 1.0);
 	vec3 N1 = vec3(texture2D(perlin_normalmap, vec2(waterTex1 + disdis * sca) * windScale) * 2.0 - 1.0);
@@ -350,6 +362,8 @@ void main(void)
 	N0 += vec3(texture2D(water_normalmap, vec2(waterTex1 * tscale) * windScale) * 2.0 - 1.0);
 	N1 += vec3(texture2D(perlin_normalmap, vec2(waterTex2 * tscale) * windScale) * 2.0 - 1.0);
 
+
+		
 	rotationmatrix(radians(2.0 * sin(osg_SimulationTime * 0.005)), RotationMatrix);
 	N0 += vec3(texture2D(water_normalmap, vec2(waterTex2 * RotationMatrix * (tscale + sca2)) * windScale) * 2.0 - 1.0);
 	N1 += vec3(texture2D(perlin_normalmap, vec2(waterTex2 * RotationMatrix * (tscale + sca2)) * windScale) * 2.0 - 1.0);
@@ -357,6 +371,7 @@ void main(void)
 	rotationmatrix(radians(-4.0 * sin(osg_SimulationTime * 0.003)), RotationMatrix);
 	N0 += vec3(texture2D(water_normalmap, vec2(waterTex1 * RotationMatrix + disdis * sca2) * windScale) * 2.0 - 1.0);
 	N1 += vec3(texture2D(perlin_normalmap, vec2(waterTex1 * RotationMatrix + disdis * sca) * windScale) * 2.0 - 1.0);
+		
 
 	N0 *= windEffect_low;
 	N1 *= windEffect_low;
@@ -366,17 +381,16 @@ void main(void)
 
 	N = normalize(mix(Normal + N0, Normal + N1, mixFactor) * waveRoughness);
 
-	if (normalmap_dds > 0)
-        N = -N; //dds fix
-	}
-	else
-	{N = vec3 (0.0, 0.0, 1.0);}
-
-    	//float lightArg = (terminator-yprime_alt)/100000.0;
+         if (normalmap_dds > 0)
+                {N = -N;} //dds fix
 
 
+	
 
 
+       specular_light = gl_Color.rgb;
+
+	
 	vec3 specular_color = vec3(specular_light)
 		* pow(max(0.0, dot(N, Hv)), water_shininess) * 6.0;
 	vec4 specular = vec4(specular_color, 0.5);
@@ -391,20 +405,15 @@ void main(void)
 
 
 	vec4 ambient_light;
-
-	ambient_light.rgb = specular_light.rgb;
+	//intensity = length(specular_light.rgb);
+	ambient_light.rgb = max(specular_light.rgb, vec3(0.1, 0.1, 0.1));
+	//ambient_light.rgb = max(intensity * normalize(vec3 (0.33, 0.4, 0.5)), vec3 (0.1,0.1,0.1));
    	ambient_light.a = 1.0;
-
-
+   	
+	
 	vec4 finalColor;
 
-	//if(cover >= 1.5)
-	//if (ground_scattering > 0.4)
-	//	{
-	//	finalColor = refl + specular;
-	//	} else {
-	//		finalColor = refl;
-	//	}
+
 
 	finalColor = refl + specular * smoothstep(0.3, 0.6, ground_scattering);
 
@@ -423,7 +432,7 @@ void main(void)
 			finalColor = mix(finalColor, max(finalColor, finalColor + foam_texel), smoothstep(0.01, 0.50, N.g));
 			}
 	}
-
+		
 
 
 		finalColor *= ambient_light;
@@ -457,10 +466,9 @@ float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
 
 if (delta_z > 0.0) // we're inside the layer
 	{
-	if (ct < 0.0) // we look down
+	if (ct < 0.0) // we look down 
 		{
 		distance_in_layer = dist;
-		//lambda = visibility;
 		vAltitude = min(distance_in_layer,min(visibility,avisibility)) * ct;
   		delta_zv = delta_z - vAltitude;
 		}
@@ -469,28 +477,27 @@ if (delta_z > 0.0) // we're inside the layer
 		H = dist * ct;
 		if (H > delta_z) {distance_in_layer = dist/H * delta_z;}
 		else {distance_in_layer = dist;}
-		//lambda = visibility;
 		vAltitude = min(distance_in_layer,visibility) * ct;
-  		delta_zv = delta_z - vAltitude;
+  		delta_zv = delta_z - vAltitude;	
 		}
 	}
   else // we see the layer from above, delta_z < 0.0
-	{
+	{	
 	H = dist * -ct;
 	if (H  < (-delta_z)) // we don't see into the layer at all, aloft visibility is the only fading
 		{
 		distance_in_layer = 0.0;
 		delta_zv = 0.0;
-		}
+		}		
 	else
 		{
 		vAltitude = H + delta_z;
-		distance_in_layer = vAltitude/H * dist;
+		distance_in_layer = vAltitude/H * dist; 
 		vAltitude = min(distance_in_layer,visibility) * (-ct);
 		delta_zv = vAltitude;
-		}
+		} 
 	}
-
+	
 
 // ground haze cannot be thinner than aloft visibility in the model,
 // so we need to use aloft visibility otherwise
@@ -506,14 +513,14 @@ if (visibility < avisibility)
 	{
 	transmission_arg = transmission_arg + (distance_in_layer/visibility);
 	// this combines the Weber-Fechner intensity
-	eqColorFactor = 1.0 - 0.1 * delta_zv/visibility - (1.0 -scattering);
+	eqColorFactor = 1.0 - 0.1 * delta_zv/visibility - (1.0 -effective_scattering);
 
 	}
-else
+else 
 	{
 	transmission_arg = transmission_arg + (distance_in_layer/avisibility);
 	// this combines the Weber-Fechner intensity
-	eqColorFactor = 1.0 - 0.1 * delta_zv/avisibility - (1.0 -scattering);
+	eqColorFactor = 1.0 - 0.1 * delta_zv/avisibility - (1.0 -effective_scattering);
 	}
 
 
@@ -526,7 +533,6 @@ if (eqColorFactor < 0.2) eqColorFactor = 0.2;
 float lightArg = (terminator-yprime_alt)/100000.0;
 
 vec3 hazeColor;
-//hazeColor.rgb = specular_light.rgb;
 hazeColor.b = light_func(lightArg, 1.330e-05, 0.264, 2.527, 1.08e-05, 1.0);
 hazeColor.g = light_func(lightArg, 3.931e-06, 0.264, 3.827, 7.93e-06, 1.0);
 hazeColor.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
@@ -536,42 +542,42 @@ float eShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width 
 
 // Mie-like factor
 
-if (lightArg < 5.0)
+if (lightArg < 10.0)
 	{intensity = length(hazeColor);
 	float mie_magnitude = 0.5 * smoothstep(350000.0, 150000.0, terminator-sqrt(2.0 * EarthRadius * terrain_alt));
-	hazeColor = intensity * ((1.0 - mie_magnitude) + mie_magnitude * mie_angle) * normalize(mix(hazeColor,  vec3 (0.5, 0.58, 0.65), mie_magnitude * (0.5 - 0.5 * mie_angle)) );
+	hazeColor = intensity * ((1.0 - mie_magnitude) + mie_magnitude * mie_angle) * normalize(mix(hazeColor,  vec3 (0.5, 0.58, 0.65), mie_magnitude * (0.5 - 0.5 * mie_angle)) ); 
 	}
 
 // high altitude desaturation of the haze color
 
 intensity = length(hazeColor);
-hazeColor = intensity * normalize (mix(hazeColor, intensity * vec3 (1.0,1.0,1.0), 0.7* smoothstep(5000.0, 50000.0, eye_alt)));
-
-// blue hue of haze
-
-hazeColor.x = hazeColor.x * 0.83;
-hazeColor.y = hazeColor.y * 0.9;
 
 
-// additional blue in indirect light
-float fade_out = max(0.65 - 0.3 *overcast, 0.45);
-intensity = length(hazeColor);
-hazeColor = intensity * normalize(mix(hazeColor,  1.5* vec3 (0.45, 0.6, 0.8), 1.0 -smoothstep(0.25, fade_out,eShade) ));
+if (intensity > 0.0) // this needs to be a condition, because otherwise hazeColor doesn't come out correctly
+	{
+	hazeColor = intensity * normalize (mix(hazeColor, intensity * vec3 (1.0,1.0,1.0), 0.7* smoothstep(5000.0, 50000.0, eye_alt)));
 
-// change haze color to blue hue for strong fogging
-//intensity = length(hazeColor);
-hazeColor = intensity * normalize(mix(hazeColor,  2.0 * vec3 (0.55, 0.6, 0.8), (1.0-smoothstep(0.3,0.8,eqColorFactor))));
+	// blue hue of haze
+	
+	hazeColor.x = hazeColor.x * 0.83;
+	hazeColor.y = hazeColor.y * 0.9; 
 
 
-// reduce haze intensity when looking at shaded surfaces, only in terminator region
+	// additional blue in indirect light
+	float fade_out = max(0.65 - 0.3 *overcast, 0.45);
+	intensity = length(hazeColor);
+	hazeColor = intensity * normalize(mix(hazeColor,  1.5* shadedFogColor, 1.0 -smoothstep(0.25, fade_out,eShade) )); 
 
-//float shadow = mix( min(1.0 + dot(normal,lightdir),1.0), 1.0, 1.0-smoothstep(0.1, 0.4, transmission));
-//hazeColor = mix(shadow * hazeColor, hazeColor, 0.3 + 0.7* smoothstep(250000.0, 400000.0, terminator));
+	// change haze color to blue hue for strong fogging
+	hazeColor = intensity * normalize(mix(hazeColor,  shadedFogColor, (1.0-smoothstep(0.5,0.9,eqColorFactor)))); 
+	}
+
+	
 
 	finalColor.rgb = mix(eqColorFactor * hazeColor * eShade, finalColor.rgb,transmission);
 
 
 	}
-		gl_FragColor = finalColor;
+	gl_FragColor = finalColor;
 
 }

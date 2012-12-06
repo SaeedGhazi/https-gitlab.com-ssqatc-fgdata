@@ -112,6 +112,7 @@ var Tanker = {
 		m.ai.getNode("navaids/tacan/channel-ID", 1).setValue(m.tacan);
 		m.ai.getNode("refuel/type", 1).setValue(type);
 		m.ai.getNode("refuel/contact", 1).setBoolValue(0);
+		m.ai.getNode("radar/in-range", 1).setBoolValue(1);
 
 		m.latN = m.ai.getNode("position/latitude-deg", 1);
 		m.lonN = m.ai.getNode("position/longitude-deg", 1);
@@ -125,6 +126,8 @@ var Tanker = {
 		m.brgN = m.ai.getNode("radar/bearing-deg", 1);
 		m.elevN = m.ai.getNode("radar/elevation-deg", 1);
 		m.contactN = m.ai.getNode("refuel/contact", 1);
+		m.hOffsetN = m.ai.getNode("radar/h-offset", 1);
+		m.vOffsetN = m.ai.getNode("radar/v-offset", 1);
 
 		m.update();
 		m.model.getNode("path", 1).setValue(type == "boom" ? boom_tanker : probe_tanker);
@@ -202,7 +205,9 @@ var Tanker = {
 
 		var dalt = alt - me.ac.alt();
 		var ac_hdg = getprop("/orientation/heading-deg");
-
+		var ac_pitch = getprop("/orientation/pitch-deg");
+		var elev = math.atan2(dalt, me.distance) * R2D;
+        
 		me.latN.setDoubleValue(me.coord.lat());
 		me.lonN.setDoubleValue(me.coord.lon());
 		me.altN.setDoubleValue(alt * M2FT);
@@ -213,9 +218,12 @@ var Tanker = {
 		me.vertN.setDoubleValue(0);
 		me.rangeN.setDoubleValue(me.distance * M2NM);
 		me.brgN.setDoubleValue(me.bearing);
-		me.elevN.setDoubleValue(math.atan2(dalt, me.distance) * R2D);
+		me.elevN.setDoubleValue(elev);
 		me.contactN.setBoolValue(me.distance < 76 and dalt > 0  # 250 ft
 				and abs(view.normdeg(me.bearing - ac_hdg)) < 20);
+				
+	    me.hOffsetN.setDoubleValue(me.bearing - ac_hdg);
+	    me.vOffsetN.setDoubleValue(elev - ac_pitch);
 
 		var droll = me.roll_target - me.roll;
 		if (droll > 0) {

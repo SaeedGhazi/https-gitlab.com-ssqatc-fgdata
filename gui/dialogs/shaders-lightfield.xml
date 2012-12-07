@@ -270,7 +270,7 @@
 	<nasal>
 		<open>
 			if (props.globals.getNode("/sim/rendering/shaders/aircraft") != nil) {
-			var group = cmdarg().getChildren("group")[9];
+			var group = cmdarg().getChildren("group")[11];
 			group.removeChildren("slider");
 			group.removeChildren("hrule");
 			group.removeChildren("text");

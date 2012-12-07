@@ -22,20 +22,17 @@
 <PropertyList>
 
 	<splash>
-
-<!-- I know, this isn't really Dutch. Just a stub until Gijs has time to work on this new file :). -->
-
-		<init>initialisere</init>    <!-- English: "initializing" -->
-<!-- 		<loading-aircraft-list>???</loading-aircraft-list> -->   <!-- English: "loading aircraft list" -->
+		<init>voorbereiden</init>    <!-- English: "initializing" -->
+		<loading-aircraft-list>vliegtuiglijst laden</loading-aircraft-list>   <!-- English: "loading aircraft list" -->
 		<loading-aircraft>vliegtuig laden</loading-aircraft>    <!-- English: "loading aircraft" -->
-<!-- 		<loading-nav-dat>???</loading-nav-dat> -->   <!-- English: "loading navigation data" -->
-<!-- 		<init-scenery>???</init-scenery> -->  <!-- English: "initializing scenery" -->
-<!-- 		<creating-subsystems>???</creating-subsystems> -->   <!-- English: "creating subsystems" -->
-		<init-subsystems>initialisere subsysteme</init-subsystems>   <!-- English: "initializing subsystems" -->
-<!-- 		<binding-subsystems>???</binding-subsystems> -->   <!-- English: "binding subsystems" -->
-<!-- 		<finishing-subsystems>???</finishing-subsystems> -->   <!-- English: "finalizing subsystems" -->
-		<init-graphics>initialisere grafiek</init-graphics>    <!-- English: "initializing graphics engine" -->
-		<loading-scenery>scenerie laden</loading-scenery>   <!-- English: "loading scenery" -->
+ 		<loading-nav-dat>navigatie data laden</loading-nav-dat>   <!-- English: "loading navigation data" -->
+ 		<init-scenery>landschap voorbereiden</init-scenery>  <!-- English: "initializing scenery" -->
+ 		<creating-subsystems>subsystemen aanmaken</creating-subsystems>   <!-- English: "creating subsystems" -->
+		<init-subsystems>subsystemen voorbereiden</init-subsystems>   <!-- English: "initializing subsystems" -->
+ 		<binding-subsystems>subsystemen verbinden</binding-subsystems>  <!-- English: "binding subsystems" -->
+		<finishing-subsystems>subsystemen afronden</finishing-subsystems>   <!-- English: "finalizing subsystems" -->
+		<init-graphics>grafische motor voorbereiden</init-graphics>    <!-- English: "initializing graphics engine" -->
+		<loading-scenery>landschap laden</loading-scenery>   <!-- English: "loading scenery" -->
 	</splash>
 
 </PropertyList>

@@ -21,8 +21,8 @@
 ### -->
 <PropertyList>
 
-	<usage>Usage: fgfs [ opties ... ]</usage>   <!-- English: "Usage: fgfs [ option ... ]" -->
-	<verbose-help>Voor een complete lijst van de opties geef dan -_help -_verbose op</verbose-help>   <!-- English: "For a complete list of options use -_help -_verbose" -->
+	<usage>Gebruik: fgfs [ opties ... ]</usage>   <!-- English: "Usage: fgfs [ option ... ]" -->
+	<verbose-help>Gebruik -_help -_verbose voor een complete lijst van de opties </verbose-help>   <!-- English: "For a complete list of options use -_help -_verbose" -->
 
 	<!-- General options -->
 	<general-options>Standaard opties</general-options>   <!-- English: "General Options" -->
@@ -38,7 +38,7 @@
 	<enable-game-mode-desc>Schermvullende spelmode inschakelen</enable-game-mode-desc>   <!-- English: "Enable full-screen game mode" -->
 	<disable-splash-screen-desc>Introductie scherm overslaan</disable-splash-screen-desc>   <!-- English: "Disable splash screen" -->
 	<enable-splash-screen-desc>Introductie scherm laten zien</enable-splash-screen-desc>   <!-- English: "Enable splash screen" -->
-<!-- 	<restore-defaults-desc>???</restore-defaults-desc> -->   <!-- English: "Reset all user settings to their defaults (rendering options etc)" -->
+ 	<restore-defaults-desc>Reset alle instellingen naar de fabrieksinstellingen (weergave opties etc.)</restore-defaults-desc>   <!-- English: "Reset all user settings to their defaults (rendering options etc)" -->
 	<disable-save-on-exit>Sla de instellingen niet op bij het afsluiten</disable-save-on-exit>   <!-- English: "Don't save preferences upon program exit" -->
 	<enable-save-on-exit>Sla instellingen op bij het afsluiten</enable-save-on-exit>   <!-- English: "Allow saving preferences at program exit" -->
 	<disable-intro-music-desc>Introductie muziek overslaan</disable-intro-music-desc>   <!-- English: "Disable introduction music" -->
@@ -47,11 +47,11 @@
 	<enable-mouse-pointer-desc n="0">Extra cursor inschakelen</enable-mouse-pointer-desc>   <!-- English: "Enable extra mouse pointer" -->
 	<enable-mouse-pointer-desc n="1">(voor Voodoo kaarten in volledige scherm mode)</enable-mouse-pointer-desc>   <!-- English: "(i.e. for full screen Voodoo based cards)" -->
 	<disable-random-objects-desc>Willekeurig geplaatste objecten verbergen</disable-random-objects-desc>   <!-- English: "Exclude random scenery objects" -->
-	<enable-random-objects-desc>Willekeurig geplaatste objecten wel tonen</enable-random-objects-desc>   <!-- English: "Include random scenery objects" -->
-<!-- 	<disable-random-vegetation-desc>???</disable-random-vegetation-desc> -->   <!-- English: "Exclude random vegetation objects" -->
-<!-- 	<enable-random-vegetation-desc>???</enable-random-vegetation-desc> -->   <!-- English: "Include random vegetation objects" -->
-<!-- 	<disable-random-buildings-desc>???</disable-random-buildings-desc> -->   <!-- English: "Exclude random buildings objects" -->
-<!-- 	<enable-random-buildings-desc>???</enable-random-buildings-desc> -->   <!-- English: "Include random buildings objects" -->
+	<enable-random-objects-desc>Willekeurig geplaatste objecten tonen</enable-random-objects-desc>   <!-- English: "Include random scenery objects" -->
+ 	<disable-random-vegetation-desc>Willekeurig geplaatste flora verbergen</disable-random-vegetation-desc>   <!-- English: "Exclude random vegetation objects" -->
+ 	<enable-random-vegetation-desc>Willekeurig geplaatste flora tonen</enable-random-vegetation-desc>   <!-- English: "Include random vegetation objects" -->
+ 	<disable-random-buildings-desc>Willekeurig geplaatste gebouwen verbergen</disable-random-buildings-desc>   <!-- English: "Exclude random buildings objects" -->
+ 	<enable-random-buildings-desc>Willekeurig geplaatste gebouwen tonen</enable-random-buildings-desc>   <!-- English: "Include random buildings objects" -->
 	<disable-real-weather-fetch-desc>Schakel live weer op basis van METAR uit</disable-real-weather-fetch-desc>   <!-- English: "Disable METAR based real weather fetching" -->
 	<enable-real-weather-fetch-desc>Schakel live weer op basis van METAR in (hiervoor is een internetverbinding vereist)</enable-real-weather-fetch-desc>   <!-- English: "Enable METAR based real weather fetching (this requires an open internet connection)" -->
 	<metar-desc>Geef een METAR om statisch weer in te stellen</metar-desc>   <!-- English: "Pass a METAR to set up static weather" -->

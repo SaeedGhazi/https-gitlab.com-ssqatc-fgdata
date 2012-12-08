@@ -632,12 +632,20 @@ var readConfig = func(dialog_root="/sim/gui/dialogs/joystick-config") {
   }
 }
 
-var writeConfig = func(dialog_root="/sim/gui/dialogs/joystick-config") {  
+var writeConfig = func(dialog_root="/sim/gui/dialogs/joystick-config", reset=0) {  
 
   # Write out the joystick file.
   var config = props.Node.new();
   var id = getprop(dialog_root ~ "/selected-joystick");
-  config.getNode("name", 1).setValue(id);
+  
+  if (reset == 1) {
+    # We've been asked to reset the joystick config to the default.  As we can't
+    # delete the configuration file, we achieve this by setting an invalid name 
+    # tag that won't match. 
+    config.getNode("name", 1).setValue("UNUSED INVALID CONFIG");
+  } else {
+    config.getNode("name", 1).setValue(id);
+  }
   
   var axes = props.globals.getNode(dialog_root).getChildren("axis");
   forindex (var axis; axes) {
@@ -690,4 +698,6 @@ var writeConfig = func(dialog_root="/sim/gui/dialogs/joystick-config") {
   io.write_properties(getprop("/sim/fg-home") ~ "/Input/Joysticks/" ~ filename ~ ".xml", config);
 }
 
-
+var resetConfig = func(dialog_root="/sim/gui/dialogs/joystick-config") {
+  writeConfig(dialog_root, 1);
+}

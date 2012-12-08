@@ -188,12 +188,12 @@ var updateConfig = func() {
 	
 	<text>
 	  <halign>left</halign>
-	  <label>To configure your joystick(s):</label>
+	  <label>To configure your joystick/yoke/pedals:</label>
   </text>
 
 	<text>
 	  <halign>left</halign>
-	  <label>  1) Select the joystick your wish to configure below.</label>
+	  <label>  1) Select the device your wish to configure from the drop-down.</label>
   </text>
 
 	<text>
@@ -203,7 +203,7 @@ var updateConfig = func() {
 
 	<text>
 	  <halign>left</halign>
-	  <label>  3) Using the drop down or dialog button, select what you want the control to do.  "Custom" indicates a manually configured command.</label>
+	  <label>  3) Using the drop-down or dialog button, select what you want the control to do.  "Custom" indicates a manually configured command.</label>
   </text>
 
 	<text>
@@ -218,7 +218,7 @@ var updateConfig = func() {
 
 	<text>
 	  <halign>left</halign>
-	  <label>Your modified joystick configuration is saved automatically to a new configuration file.</label>
+	  <label>Your modified joystick configuration is saved automatically.  You can reset the configuration to the default by pressing Reset Configuration.</label>
   </text>
   
   <hrule/>
@@ -259,6 +259,22 @@ var updateConfig = func() {
       <row>0</row>
       <col>2</col>
       <halign>center</halign>
+      <legend>Reset Configuration</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          joystick.resetConfig();
+          fgcommand("reinit", props.Node.new({"subsystem": "input"}));
+          fgcommand("dialog-close", props.Node.new({"dialog-name": "joystick-config"}));
+          fgcommand("dialog-show", props.Node.new({"dialog-name": "joystick-config"}));
+        </script>
+      </binding>
+    </button>
+
+    <button>
+      <row>0</row>
+      <col>3</col>
+      <halign>center</halign>
       <legend>Refresh Joysticks</legend>
       <binding>
         <command>nasal</command>
@@ -281,7 +297,7 @@ var updateConfig = func() {
 	  <text>
 	    <row>1</row>
 	    <col>1</col>
-	    <colspan>2</colspan>
+	    <colspan>3</colspan>
 	    <halign>left</halign>
 	    <label>Joystick Confgig</label>
 	    <property>/sim/gui/dialogs/joystick-config/selected-joystick-config</property>

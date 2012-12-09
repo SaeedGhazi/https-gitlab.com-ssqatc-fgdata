@@ -5,6 +5,7 @@
 
 <material>
   <name>grass_rwy</name>
+  <name>grass</name>
   <texture>Runway/grass_rwy.png</texture>
   <xsize>75</xsize>
   <ysize>75</ysize>
@@ -17,6 +18,7 @@
 
 <material>
   <name>dirt_rwy</name>
+  <name>dirt</name>
   <texture>Runway/dirt_rwy.png</texture>
   <friction-factor>0.7</friction-factor>
   <rolling-friction>0.04</rolling-friction>

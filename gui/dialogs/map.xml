@@ -147,7 +147,20 @@ command interface /autopilot/route-manager/input:
                       <command>property-toggle</command>
                     </binding>
                 </checkbox>
-
+                
+                <checkbox>
+                    <label>Flight History</label>
+                    <pref-width>100</pref-width>
+                    <property>/gui/map/draw-flight-history</property>
+                    <live>true</live>
+                    <binding>
+                      <command>dialog-apply</command>
+                    </binding>
+                    <binding>
+                      <command>property-toggle</command>
+                    </binding>
+                </checkbox>
+                
                 <empty><stretch>true</stretch></empty>
 
                 <checkbox>

@@ -810,6 +810,9 @@ Started September 2000 by David Megginson, david@megginson.com
 			<dme-fallback-to-loc type="bool">false</dme-fallback-to-loc>
 		</realism>
 		<frame-rate-throttle-hz type="double" userarchive="y">0</frame-rate-throttle-hz>
+        <history>
+            <enabled type="bool">true</enabled>
+        </history>
 	</sim>
 	<!-- mouse mode -->
 	<devices>

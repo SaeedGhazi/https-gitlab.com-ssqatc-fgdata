@@ -6,6 +6,7 @@
 <material>
   <name>grass_rwy</name>
   <name>Grass</name>
+  <effect>Effects/airfield</effect>
   <texture>Runway/grass_rwy.png</texture>
   <xsize>75</xsize>
   <ysize>75</ysize>
@@ -1939,9 +1940,11 @@
   <name>MixedTundraCover</name>
   <name>Cemetery</name>
   <effect>Effects/landmass-nowood</effect>
-  <texture>Terrain/tundra.png</texture>
-  <texture>Terrain/tundra2.png</texture>
-  <texture>Terrain/tundra3.png</texture>
+  <texture-set>
+   <texture>Terrain/tundra2.png</texture>
+   <texture n="11">Terrain/grass_hires.png</texture>
+   <texture n="12">Terrain/rock.png</texture>
+  </texture-set>
   <xsize>2000</xsize>
   <ysize>2000</ysize>
   <light-coverage>4000000.0</light-coverage>

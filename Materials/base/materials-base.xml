@@ -376,9 +376,11 @@ Shared parameters for various materials.
   <name>Glacier</name>
   <name>PolarIce</name>
   <effect>Effects/glacier</effect>
-  <texture>Terrain/glacier1.png</texture>
-  <texture>Terrain/glacier2.png</texture>
-  <texture>Terrain/glacier3.png</texture>
+  <texture-set>
+   <texture>Terrain/glacier3.png</texture>
+   <texture n="11">Terrain/snow2.png</texture>
+   <texture n="12">Terrain/glacier1.png</texture>
+  </texture-set>
   <xsize>2000</xsize>
   <ysize>2000</ysize>
   <shininess>1.5</shininess>

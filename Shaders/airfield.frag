@@ -30,6 +30,7 @@ uniform float snowlevel;
 uniform float dust_cover_factor;
 uniform float fogstructure;
 uniform float cloud_self_shading;
+uniform float snow_thickness_factor;
 uniform float ylimit;
 uniform float zlimit1;
 uniform float zlimit2;
@@ -151,6 +152,7 @@ mie_angle = gl_Color.a;
 vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
 
 float dist = length(relPos);
+float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
 
 // this is taken from default.frag
     vec3 n;
@@ -175,7 +177,7 @@ float dist = length(relPos);
 // 		1500m: overlay, detail, dust, fog
 //		2000m: overlay, detail, snow, fog
 
-float noise_02m; 
+float noise_01m; 
 float noise_1m = Noise2D(rawPos.xy, 1.0); 
 float noise_2m;
 
@@ -184,7 +186,7 @@ float noise_5m = Noise2D(rawPos.xy,5.0);
 
 
 
-float noise_500m = Noise2D(rawPos.xy, 500.0);
+float noise_50m = Noise2D(rawPos.xy, 500.0);
 float noise_1500m = Noise2D(rawPos.xy, 1500.0);
 float noise_2000m = Noise2D(rawPos.xy, 2000.0);
 
@@ -197,13 +199,24 @@ float noise_2000m = Noise2D(rawPos.xy, 2000.0);
 
 // get the texels
 
-    texel = texture2D(texture, gl_TexCoord[0].st * (1.0 + 0.1 * noise_500m));
+    texel = texture2D(texture, gl_TexCoord[0].st * 5.0); 
 
     float distortion_factor = 1.0;
+    float noise_term;
+    float snow_alpha;
    
     if (quality_level > 3)
 	{
-	snow_texel = texture2D(snow_texture, gl_TexCoord[0].st);
+	//snow_texel = texture2D(snow_texture, gl_TexCoord[0].st);
+	float sfactor;
+	snow_texel = vec4 (0.95, 0.95, 0.95, 1.0) * (0.9 + 0.1* noise_50m + 0.1* (1.0 - noise_10m) );
+	snow_texel.a = 1.0;
+	noise_term = 0.1 * (noise_50m-0.5);
+	sfactor = 1.0;//sqrt(2.0 * (1.0-steepness)/0.03) + abs(ct)/0.15;
+	noise_term = noise_term + 0.2 * (noise_10m -0.5) * (1.0 - smoothstep(10000.0*sfactor, 16000.0*sfactor, dist)  ) ;
+	noise_term = noise_term + 0.3 * (noise_5m -0.5) * (1.0 - smoothstep(1200.0 * sfactor, 2000.0 * sfactor, dist)  ) ;
+	if (dist < 1000.0*sfactor){ noise_term = noise_term + 0.3 * (noise_1m -0.5) * (1.0 - smoothstep(500.0 * sfactor, 1000.0 *sfactor, dist)  );}
+	snow_texel.a = snow_texel.a * 0.2+0.8* smoothstep(0.2,0.8, 0.3 +noise_term + snow_thickness_factor +0.0001*(relPos.z +eye_alt -snowlevel) );
 	}
 
    
@@ -230,13 +243,17 @@ if ((dist < 3000.0)&& (quality_level > 3) && (wetness>0.0))
 
 // color and shade variation of the grass
 
-    texel.rgb = texel.rgb * (0.7 + 0.1 * (noise_10m + 2.0 * noise_5m + 3.0 * noise_1m));
-
+	float nfact_1m = 3.0 * (noise_1m - 0.5) * (1.0 - smoothstep(3000.0, 6000.0, dist/ abs(ct)));
+	float nfact_5m = 2.0 * (noise_5m - 0.5);
+	float nfact_10m = 1.0 * (noise_10m - 0.5);
+	texel.rgb = texel.rgb * (0.85 + 0.1 * (nfact_1m + nfact_5m + nfact_10m));
+    //texel.rgb = texel.rgb * (0.7 + 0.1 * (noise_10m +   2.0 * noise_5m +   3.0 * noise_1m));
+	//texel.rgb = texel.rgb * (0.7 + 0.1 * (noise_10m + 2.0 * (1.0-smoothstep(50.0, 200.0, dist*abs(ct))) * noise_5m + (1.0-smoothstep(20.0,100.0, dist*abs(ct))) * 3.0 *noise_1m));
     texel.r = texel.r * (1.0 + 0.14 * smoothstep(0.5,0.7, 0.33*(2.0 * noise_10m + (1.0-noise_5m))));
 
 
 vec4 dust_color;
-float snow_alpha;
+//float snow_alpha;
 
 if (quality_level > 3)
 	{
@@ -246,7 +263,7 @@ if (quality_level > 3)
 
     	// mix snow
    	snow_alpha = smoothstep(0.75, 0.85, abs(steepness));
-	texel = mix(texel, snow_texel, smoothstep(snowlevel, snowlevel+200.0, snow_alpha * (relPos.z + eye_alt)+ (noise_2000m + 0.1 * noise_10m -0.55) *400.0));
+	texel = mix(texel, snow_texel, snow_texel.a * smoothstep(snowlevel, snowlevel+200.0, snow_alpha * (relPos.z + eye_alt)+ (noise_2000m + 0.1 * noise_10m -0.55) *400.0));
 	}
 
 
@@ -270,8 +287,8 @@ if (quality_level > 3)
     NdotL = dot(n, lightDir);
 	if ((dist < 200.0) && (quality_level > 4))
 		{
-		noise_02m = Noise2D(rawPos.xy,0.1);
-		NdotL = NdotL + 0.4 * (noise_02m) *   (1.0 - smoothstep(50.0, 100.0, dist)) * (1.0 - water_factor);
+		noise_01m = Noise2D(rawPos.xy,0.1);
+		NdotL = NdotL + 0.8 * (noise_01m-0.5) *   (1.0 - smoothstep(50.0, 100.0, dist)) * (1.0 - water_factor);
 		}
 	
     if (NdotL > 0.0) {
@@ -302,8 +319,6 @@ if (quality_level > 3)
 float delta_z = hazeLayerAltitude - eye_alt;
 
 if (dist > max(40.0, 0.04 * min(visibility,avisibility))) 
-//if ((gl_FragCoord.y > ylimit) || (gl_FragCoord.x < zlimit1) || (gl_FragCoord.x > zlimit2))
-//if (dist > 40.0)
 {
 
 alt = eye_alt;
@@ -316,8 +331,7 @@ float H;
 float distance_in_layer;
 float transmission_arg;
 
-// angle with horizon
-float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
+
 
 
 // we solve the geometry what part of the light path is attenuated normally and what is through the haze layer

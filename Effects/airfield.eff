@@ -166,9 +166,14 @@
         <value><use>eye_alt</use></value>
       </uniform>
       <uniform>
-	<name>snowlevel</name>
-	<type>float</type>
-	<value>	<use>snow_level</use></value>
+	    <name>snowlevel</name>
+	    <type>float</type>
+	    <value>	<use>snow_level</use></value>
+     </uniform>
+	 <uniform>
+	    <name>snow_thickness_factor</name>
+	    <type>float</type>
+	    <value><use>snow_thickness_factor</use></value>
       </uniform>
 	<uniform>
 	<name>dust_cover_factor</name>
@@ -194,21 +199,6 @@
         <name>moonlight</name>
         <type>float</type>
         <value><use>moonlight</use></value>
-      </uniform>
-      <uniform>
-	<name>ylimit</name>
-	<type>float</type>
-	<value>	<use>ylimit</use></value>
-      </uniform>
-       <uniform>
-	<name>zlimit1</name>
-	<type>float</type>
-	<value>	<use>zlimit1</use></value>
-      </uniform>
-      <uniform>
-	<name>zlimit2</name>
-	<type>float</type>
-	<value>	<use>zlimit2</use></value>
       </uniform>
       <uniform>
 	<name>quality_level</name>

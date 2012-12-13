@@ -11,7 +11,8 @@ varying vec2 rawPos;
 
 
 uniform sampler2D texture;
-uniform sampler3D NoiseTex;
+uniform sampler2D NormalTex;
+//uniform sampler3D NoiseTex;
 uniform sampler2D snow_texture;
 uniform sampler2D detail_texture;
 uniform sampler2D mix_texture;
@@ -191,6 +192,8 @@ float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
 // 		1500m: overlay, detail, dust, fog
 //		2000m: overlay, detail, snow, fog
 
+float noise_01m;
+float noise_1m = Noise2D(rawPos.xy, 1.0); 
 float noise_10m; 
 float noise_5m;  
 noise_10m = Noise2D(rawPos.xy, 10.0);
@@ -215,6 +218,8 @@ float noise_2000m = Noise2D(rawPos.xy, 2000.0);
 // get the texels
 
     texel = texture2D(texture, gl_TexCoord[0].st);
+	vec4 nmap  = texture2D(NormalTex, gl_TexCoord[0].st * 8.0);
+	vec3 N = nmap.rgb * 2.0 - 1.0;
 
     float distortion_factor = 1.0;
     vec2 stprime;
@@ -230,18 +235,17 @@ float noise_2000m = Noise2D(rawPos.xy, 2000.0);
 
     if ((quality_level > 3)&&(relPos.z + eye_alt +500.0 > snowlevel))
 	{
-	//snow_texel = texture2D(snow_texture, gl_TexCoord[0].st);
 	float sfactor;
-	snow_texel = vec4 (0.95, 0.95, 0.95, 1.0) * (0.9 + 0.1* noise_500m + 0.1* (1.0 - noise_10m) );
-	snow_texel.r = snow_texel.r * (0.9 + 0.05 * (noise_10m + noise_5m));
-	snow_texel.g = snow_texel.g * (0.9 + 0.05 * (noise_10m + noise_5m));
+	noise_01m = Noise2D(rawPos.xy,0.1);
+	snow_texel = vec4 (0.95, 0.95, 0.95, 1.0) * (0.9 + 0.1* noise_50m + 0.1* (1.0 - noise_10m) );
 	snow_texel.a = 1.0;
-	noise_term = 0.1 * (noise_500m-0.5);
-	sfactor = sqrt(2.0 * (1.0-steepness)/0.03) + abs(ct)/0.15;
-	noise_term = noise_term + 0.2 * (noise_50m -0.5) * (1.0 - smoothstep(18000.0*sfactor, 40000.0*sfactor, dist)  ) ;
-	noise_term = noise_term + 0.3 * (noise_10m -0.5) * (1.0 - smoothstep(4000.0 * sfactor, 8000.0 * sfactor, dist)  ) ;
-	if (dist < 3000*sfactor){ noise_term = noise_term + 0.3 * (noise_5m -0.5) * (1.0 - smoothstep(1000.0 * sfactor, 3000.0 *sfactor, dist)  );}
-	snow_texel.a = snow_texel.a * 0.2+0.8* smoothstep(0.2,0.8, 0.3 +noise_term + snow_thickness_factor +0.0001*(relPos.z +eye_alt -snowlevel) );
+	noise_term = 0.1 * (noise_50m-0.5);
+	sfactor = 1.0;//sqrt(2.0 * (1.0-steepness)/0.03) + abs(ct)/0.15;
+	noise_term = noise_term + 0.2 * (noise_10m -0.5) * (1.0 - smoothstep(10000.0*sfactor, 16000.0*sfactor, dist)  ) ;
+	noise_term = noise_term + 0.3 * (noise_5m -0.5) * (1.0 - smoothstep(1200.0 * sfactor, 2000.0 * sfactor, dist)  ) ;
+	noise_term = noise_term + 0.3 * (noise_1m -0.5) * (1.0 - smoothstep(500.0 * sfactor, 1000.0 *sfactor, dist)  );
+	noise_term = noise_term + 0.3 * (noise_01m -0.5) * (1.0 - smoothstep(20.0 * sfactor, 100.0 *sfactor, dist)  );
+	snow_texel.a = snow_texel.a * 0.2+0.8* smoothstep(0.2,0.8, 0.3 +noise_term + 0.2*snow_thickness_factor +0.0001*(relPos.z +eye_alt -snowlevel) );
    	
 	}
 
@@ -324,12 +328,11 @@ if (quality_level > 3)
 	texel = mix(texel, dust_color, clamp(0.5 * dust_cover_factor + 3.0 * dust_cover_factor * (((noise_1500m - 0.5) * 0.125)+0.125 ),0.0, 1.0) );
 	
     	// mix snow
-	//if (relPos.z + eye_alt +500.0 > snowlevel)
-	//	{
-   	//	snow_alpha = smoothstep(0.75, 0.85, abs(steepness));
-		//texel = mix(texel, snow_texel, texel_snow_fraction);
-	//	texel = mix(texel, snow_texel, snow_texel.a* smoothstep(snowlevel, snowlevel+200.0,  snow_alpha * (relPos.z + eye_alt)+ (noise_2000m + 0.1 * noise_10m -0.55) *400.0));
-	//	}
+	if (relPos.z + eye_alt +500.0 > snowlevel)
+		{
+   		snow_alpha = smoothstep(0.75, 0.85, abs(steepness));
+		texel = mix(texel, snow_texel, snow_texel.a* smoothstep(snowlevel, snowlevel+200.0,  snow_alpha * (relPos.z + eye_alt)+ (noise_2000m + 0.1 * noise_10m -0.55) *400.0));
+		}
 	}
 
 
@@ -369,8 +372,12 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
 	{
 	noisegrad_10m = (noise_10m - Noise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),10.0))/0.05;
 	noisegrad_5m = (noise_5m - Noise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),5.0))/0.05;
-	NdotL = NdotL + 1.0 * (noisegrad_10m + 0.5* noisegrad_5m) * mix_factor/0.8 *  (1.0 - smoothstep(1000.0, 2000.0, dist));
+	NdotL = NdotL +1.0 * (noisegrad_10m + 0.5* noisegrad_5m) * mix_factor/0.8 *  (1.0 - smoothstep(1000.0, 2000.0, dist));
 	}
+	if (quality_level > 4)
+		{
+		NdotL = NdotL + 3.0 * N + 0.1 * (noise_01m-0.5) ;
+		}
     if (NdotL > 0.0) {
         color += diffuse_term * NdotL;
         NdotHV = max(dot(n, halfVector), 0.0);

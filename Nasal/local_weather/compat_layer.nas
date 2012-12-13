@@ -163,15 +163,14 @@ foreach (var l; layers)
 	
 
 
-# we store that information ourselves, so this should be zero, but rain forces us to go for an offset
+# we store that information ourselves, so this should be zero
 setprop("/environment/clouds/layer[0]/elevation-ft",0.0);
 		
 # layer wrapping off
 setprop("/sim/rendering/clouds3d-wrap",0);
 
-	
-
-
+# Basic Weather rain altitude limit off 
+props.globals.getNode("/environment/params/use-external-precipitation-level").setBoolValue("true");
 
 }
 

@@ -3374,6 +3374,11 @@ realistic_visibility_flag = getprop(lw~"config/realistic-visibility-flag");
 detailed_terrain_interaction_flag = getprop(lw~"config/detailed-terrain-interaction-flag");
 scattering_shader_flag = getprop("/sim/rendering/shaders/skydome");
 
+# also initialize menu entries
+
+air_pollution_norm = getprop("/environment/air-pollution-norm");
+
+
 }
 
 ###########################################################

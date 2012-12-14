@@ -37,10 +37,6 @@ uniform float wetness;
 uniform float fogstructure;
 uniform float snow_thickness_factor;
 uniform float cloud_self_shading;
-uniform float ylimit;
-uniform float zlimit1;
-uniform float zlimit2;
-uniform float xslope;
 uniform int quality_level;
 uniform int tquality_level;
 
@@ -144,18 +140,9 @@ else
 void main()
 {
 
-// drop fragments behind the mask of the instrument panel as passed by properties
-
-
-int xoffset = int(xslope * (ylimit - gl_FragCoord.y)); 
-
-
-if ((gl_FragCoord.y < ylimit) && (gl_FragCoord.x > zlimit1 - xoffset) && (gl_FragCoord.x < zlimit2 + xoffset))
-	{discard;}
-
 
 yprime_alt = diffuse_term.a;
-diffuse_term.a = 1.0;
+//diffuse_term.a = 1.0;
 mie_angle = gl_Color.a;
 float effective_scattering = min(scattering, cloud_self_shading);
 
@@ -386,7 +373,7 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
                             * light_specular.rgb
                             * pow(NdotHV, gl_FrontMaterial.shininess + (20.0 * water_factor)));
     }
-    color.a = diffuse_term.a;
+    color.a = 1.0;//diffuse_term.a;
     // This shouldn't be necessary, but our lighting becomes very
     // saturated. Clamping the color before modulating by the texture
     // is closer to what the OpenGL fixed function pipeline does.

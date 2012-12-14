@@ -141,7 +141,7 @@ void main()
 
 
 yprime_alt = diffuse_term.a;
-diffuse_term.a = 1.0;
+//diffuse_term.a = 1.0;
 mie_angle = gl_Color.a;
 float effective_scattering = min(scattering, cloud_self_shading);
 
@@ -366,7 +366,7 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
                             * light_specular.rgb
                             * pow(NdotHV, gl_FrontMaterial.shininess + (20.0 * water_factor)));
     }
-    color.a = diffuse_term.a;
+    color.a = 1.0;//diffuse_term.a;
     // This shouldn't be necessary, but our lighting becomes very
     // saturated. Clamping the color before modulating by the texture
     // is closer to what the OpenGL fixed function pipeline does.

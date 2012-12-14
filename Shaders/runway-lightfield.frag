@@ -363,7 +363,7 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
 	}
 	if (quality_level > 4)
 		{
-		NdotL = NdotL + 3.0 * N + 0.1 * (noise_01m-0.5) ;
+		NdotL = NdotL + 3.0 * N.r + 0.1 * (noise_01m-0.5) ;
 		}
     if (NdotL > 0.0) {
         color += diffuse_term * NdotL;

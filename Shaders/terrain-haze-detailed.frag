@@ -227,7 +227,7 @@ float noise_2000m = Noise2D(rawPos.xy, 2000.0);
 	sfactor = sqrt(2.0 * (1.0-steepness)/0.03) + abs(ct)/0.15;
 	noise_term = noise_term + 0.2 * (noise_50m -0.5) * (1.0 - smoothstep(18000.0*sfactor, 40000.0*sfactor, dist)  ) ;
 	noise_term = noise_term + 0.3 * (noise_10m -0.5) * (1.0 - smoothstep(4000.0 * sfactor, 8000.0 * sfactor, dist)  ) ;
-	if (dist < 3000*sfactor){ noise_term = noise_term + 0.3 * (noise_5m -0.5) * (1.0 - smoothstep(1000.0 * sfactor, 3000.0 *sfactor, dist)  );}
+	if (dist < 3000.0*sfactor){ noise_term = noise_term + 0.3 * (noise_5m -0.5) * (1.0 - smoothstep(1000.0 * sfactor, 3000.0 *sfactor, dist)  );}
 	snow_texel.a = snow_texel.a * 0.2+0.8* smoothstep(0.2,0.8, 0.3 +noise_term + snow_thickness_factor +0.0001*(relPos.z +eye_alt -snowlevel) );
    	
 	}

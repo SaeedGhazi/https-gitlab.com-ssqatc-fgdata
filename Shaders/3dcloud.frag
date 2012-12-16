@@ -4,7 +4,7 @@ varying float fogFactor;
 void main(void)
 {
       vec4 base = texture2D( baseTexture, gl_TexCoord[0].st);
-      if (base.a <= 0.01)
+      if (base.a < 0.02)
         discard;
 
       vec4 finalColor = base * gl_Color;

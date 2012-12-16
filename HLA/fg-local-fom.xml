@@ -37,7 +37,7 @@
                    semantics="Generic object in the scene."
                    sharing="PublishSubscribe">
         <attribute name="location"
-                   dataType="SGLocationWGS84"
+                   dataType="SGLocation"
                    updateType="Periodic"
                    ownership="NoTransfer"
                    sharing="PublishSubscribe"
@@ -52,6 +52,14 @@
                    transportation="HLAreliable"
                    order="TimeStamp"
                    semantics="The angular and linear velocity of the vehicle."/>
+        <attribute name="sceneObjectName"
+                   dataType="HLAASCIIstring"
+                   updateType="Conditional"
+                   ownership="NoTransfer"
+                   sharing="PublishSubscribe"
+                   transportation="HLAreliable"
+                   order="TimeStamp"
+                   semantics="If the location is meant to be relative this is the hla object name of the parent object."/>
 
         <objectClass name="FGAirVehicle"
                      semantics="Generic vehicle like object in the scene. Subscribe to this as a radar station."
@@ -65,7 +73,7 @@
                      order="Receive"
                      semantics="The call sign of the air vehicle."/>
           <attribute name="transponder"
-                     dataType="FGtransponderType"
+                     dataType="FGTransponderType"
                      updateType="Conditional"
                      ownership="NoTransfer"
                      sharing="PublishSubscribe"
@@ -126,30 +134,21 @@
                    order="Receive"
                    semantics="The name of the view."/>
         <attribute name="location"
-                   dataType="SGLocationWGS84"
+                   dataType="SGLocation"
                    updateType="Conditional"
                    ownership="NoTransfer"
                    sharing="PublishSubscribe"
                    transportation="HLAreliable"
                    order="TimeStamp"
-                   semantics="The relative or absolute position/orientation of the view."/>
-
-        <objectClass name="FGStaticView"
-                     semantics="A static view that is fixed in the scene."
-                     sharing="PublishSubscribe">
-        </objectClass>
-        <objectClass name="FGObjectAttachedView"
-                     semantics="A view that is attached to a scene object."
-                     sharing="PublishSubscribe">
-          <attribute name="referencedSceneObjectName"
-                     dataType="HLAASCIIstring"
-                     updateType="Conditional"
-                     ownership="NoTransfer"
-                     sharing="PublishSubscribe"
-                     transportation="HLAreliable"
-                     order="TimeStamp"
-                     semantics="The hla object name of the a FGSceneObject that is referenced by this view."/>
-        </objectClass>
+                   semantics="The relative or absolute position and orientation of the view."/>
+        <attribute name="sceneObjectName"
+                   dataType="HLAASCIIstring"
+                   updateType="Conditional"
+                   ownership="NoTransfer"
+                   sharing="PublishSubscribe"
+                   transportation="HLAreliable"
+                   order="TimeStamp"
+                   semantics="The hla object name of the a FGSceneObject that is referenced by this view."/>
       </objectClass>
 
       <objectClass name="FGViewer"
@@ -166,7 +165,7 @@
         <objectClass name="FGPerspectiveViewer"
                      semantics="A perspective viewer - the usual simulation viewer."
                      sharing="PublishSubscribe">
-          <attribute name="referencedViewName"
+          <attribute name="viewName"
                      dataType="HLAASCIIstring"
                      updateType="Conditional"
                      ownership="NoTransfer"
@@ -175,7 +174,7 @@
                      order="TimeStamp"
                      semantics="The name of the view that is viewer is attached to."/>
           <attribute name="location"
-                     dataType="SGLocationWGS84"
+                     dataType="SGLocation"
                      updateType="Conditional"
                      ownership="NoTransfer"
                      sharing="PublishSubscribe"
@@ -190,27 +189,40 @@
                      transportation="HLAreliable"
                      order="TimeStamp"
                      semantics="A zoom factor for the projections system. Leave at 1 for an immersive system."/>
-          <attribute name="leftEyeOffset"
-                     dataType="SGVec3f"
+          <attribute name="eyeTrackerName"
+                     dataType="HLAASCIIstring"
                      updateType="Conditional"
                      ownership="NoTransfer"
                      sharing="PublishSubscribe"
                      transportation="HLAreliable"
                      order="TimeStamp"
-                     semantics="The relative position of the left eye within the projection system."/>
-          <attribute name="rightEyeOffset"
-                     dataType="SGVec3f"
-                     updateType="Conditional"
-                     ownership="NoTransfer"
-                     sharing="PublishSubscribe"
-                     transportation="HLAreliable"
-                     order="TimeStamp"
-                     semantics="The relative position of the right eye within the projection system."/>
+                     semantics="The name of the view that is viewer is attached to."/>
         </objectClass>
       </objectClass>
 
+      <objectClass name="FGEyeTracker"
+                   semantics="A head tracking offset that can be attached to a viewer system."
+                   sharing="PublishSubscribe">
+        <attribute name="leftEyeOffset"
+                   dataType="SGVec3f"
+                   updateType="Conditional"
+                   ownership="NoTransfer"
+                   sharing="PublishSubscribe"
+                   transportation="HLAreliable"
+                   order="TimeStamp"
+                   semantics="The relative position of the left eye within the projection system. Use for eye tracking."/>
+        <attribute name="rightEyeOffset"
+                   dataType="SGVec3f"
+                   updateType="Conditional"
+                   ownership="NoTransfer"
+                   sharing="PublishSubscribe"
+                   transportation="HLAreliable"
+                   order="TimeStamp"
+                   semantics="The relative position of the right eye within the projection system. Use for eye tracking."/>
+      </objectClass>
+
       <objectClass name="FGRenderer"
-                   semantics="A renderer is an application that provides one or more graphics contexts."
+                   semantics="A renderer is an application that provides one or more drawables."
                    sharing="PublishSubscribe">
         <attribute name="name"
                    dataType="HLAASCIIstring"
@@ -220,6 +232,7 @@
                    transportation="HLAreliable"
                    order="Receive"
                    semantics="The name of the renderer."/>
+        <!-- Publish the available display names and geometries somehow. -->
       </objectClass>
 
       <objectClass name="FGDrawable"
@@ -277,7 +290,7 @@
                      order="Receive"
                      semantics="The size of the window."/>
         </objectClass>
-        <objectClass name="FGVideoDrawable"
+        <!--objectClass name="FGVideoDrawable"
                      semantics="An offscreen buffer encoding its pictures into a video."
                      sharing="PublishSubscribe">
           <attribute name="size"
@@ -288,7 +301,7 @@
                      transportation="HLAreliable"
                      order="Receive"
                      semantics="The size of the window."/>
-        </objectClass>
+        </objectClass-->
       </objectClass>
 
       <objectClass name="FGCamera"
@@ -302,14 +315,6 @@
                    transportation="HLAreliable"
                    order="Receive"
                    semantics="The name of the camera."/>
-        <attribute name="drawable"
-                   dataType="HLAASCIIstring"
-                   updateType="Static"
-                   ownership="NoTransfer"
-                   sharing="PublishSubscribe"
-                   transportation="HLAreliable"
-                   order="TimeStamp"
-                   semantics="The drawable this camera lives in."/>
         <attribute name="viewer"
                    dataType="HLAASCIIstring"
                    updateType="Static"
@@ -318,44 +323,55 @@
                    transportation="HLAreliable"
                    order="TimeStamp"
                    semantics="The viewer this camera belongs to."/>
+        <attribute name="drawable"
+                   dataType="HLAASCIIstring"
+                   updateType="Static"
+                   ownership="NoTransfer"
+                   sharing="PublishSubscribe"
+                   transportation="HLAreliable"
+                   order="TimeStamp"
+                   semantics="The drawable this camera lives in."/>
+        <attribute name="viewport"
+                   dataType="SGVec4i"
+                   updateType="Static"
+                   ownership="NoTransfer"
+                   sharing="PublishSubscribe"
+                   transportation="HLAreliable"
+                   order="TimeStamp"
+                   semantics="The viewport within the drawable for this camera."/>
+        <attribute name="location"
+                   dataType="SGLocation"
+                   updateType="Periodic"
+                   ownership="NoTransfer"
+                   sharing="PublishSubscribe"
+                   transportation="HLAreliable"
+                   order="TimeStamp"
+                   semantics="The position and orientation offset within the viewer."/>
+        <!-- <attribute name="unwrapMesh"/> -->
         <objectClass name="FGPerspectiveCamera"
-                     semantics="Simple perspective camera. Think of it as the default camera for a flightgear window."
+                     semantics="Camera defining a perspective view."
                      sharing="PublishSubscribe">
-          <attribute name="fieldOfView"
-                     dataType="SGfloat32"
-                     updateType="Conditional"
-                     ownership="NoTransfer"
-                     sharing="PublishSubscribe"
-                     transportation="HLAreliable"
-                     order="TimeStamp"
-                     semantics="The field of view for this camera."/>
-        </objectClass>
-        <objectClass name="FGMultiviewerCamera"
-                     semantics="Camera which is defined by a projection systems point in space."
-                     sharing="PublishSubscribe">
-          <attribute name="viewport"
-                     dataType="SGVec4i"
+          <attribute name="projection"
+                     dataType="SGCameraProjectionPerspective"
                      updateType="Static"
                      ownership="NoTransfer"
                      sharing="PublishSubscribe"
                      transportation="HLAreliable"
                      order="TimeStamp"
-                     semantics="The viewport within the renderer for this camera."/>
-          <!-- <attribute name="referencePoints"/> -->
-          <!-- <attribute name="unwrapMesh"/> -->
+                     semantics="The projection of this camera."/>
         </objectClass>
-        <!-- <objectClass name="FGOrthographicCamera" -->
-        <!--              semantics="Camera which is defined by a projection systems point in space." -->
-        <!--              sharing="PublishSubscribe"> -->
-        <!--   <attribute name="viewport" -->
-        <!--              dataType="SGVec4i" -->
-        <!--              updateType="Static" -->
-        <!--              ownership="NoTransfer" -->
-        <!--              sharing="PublishSubscribe" -->
-        <!--              transportation="HLAreliable" -->
-        <!--              order="TimeStamp" -->
-        <!--              semantics="The viewport within the renderer for this camera."/> -->
-        <!-- </objectClass> -->
+        <objectClass name="FGOrthographicCamera"
+                     semantics="Camera defining an orthographic view."
+                     sharing="PublishSubscribe">
+          <attribute name="projection"
+                     dataType="SGCameraProjectionOrthographic"
+                     updateType="Static"
+                     ownership="NoTransfer"
+                     sharing="PublishSubscribe"
+                     transportation="HLAreliable"
+                     order="TimeStamp"
+                     semantics="The projection of this camera."/>
+        </objectClass>
       </objectClass>
     </objectClass>
   </objects>
@@ -367,6 +383,38 @@
                       dimensions="NA"
                       transportation="HLAreliable"
                       order="TimeStamp">
+
+      <!-- Is sent out when a click or something happens on a scene object -->
+      <interactionClass name="SGSceneObjectEvent"
+                        sharing="PublishSubscribe"
+                        dimensions="NA"
+                        transportation="HLAreliable"
+                        order="Receive">
+        <!-- Is sent out when a click or something happens on a scene object -->
+        <interactionClass name="SGSceneObjectMouseEvent"
+                          sharing="PublishSubscribe"
+                          dimensions="NA"
+                          transportation="HLAreliable"
+                          order="Receive">
+          <parameter
+              name="mousePosition"
+              dataType="SGVec2i"/>
+        </interactionClass>
+      </interactionClass>
+
+      <!-- Is sent out when a click or something happens on a scene object -->
+      <interactionClass name="SGViewerEvent"
+                        sharing="PublishSubscribe"
+                        dimensions="NA"
+                        transportation="HLAreliable"
+                        order="Receive">
+        <interactionClass name="SGViewerMouseEvent"
+                          sharing="PublishSubscribe"
+                          dimensions="NA"
+                          transportation="HLAreliable"
+                          order="Receive">
+        </interactionClass>
+      </interactionClass>
     </interactionClass>
   </interactions>
 
@@ -621,17 +669,17 @@
       </enumeratedData>
 
       <enumeratedData
-          name="FGtransponderModeType"
+          name="FGTransponderModeType"
           representation="HLAoctet"
           semantics="The type of the transponder echo.">
         <enumerator
-            name="FGtransponderModeA"
+            name="FGTransponderModeA"
             values="1"/>
         <enumerator
-            name="FGtransponderModeC"
+            name="FGTransponderModeC"
             values="2"/>
         <enumerator
-            name="FGtransponderModeS"
+            name="FGTransponderModeS"
             values="3"/>
       </enumeratedData>
 
@@ -1177,17 +1225,11 @@
           semantics="4-dimensional vector"/>
 
       <arrayData
-          name="SGPositionWGS84"
-          dataType="SGfloat64"
-          cardinality="3"
-          encoding="HLAfixedArray"
-          semantics="WGS84 cartesian coordinates"/>
-      <arrayData
-          name="SGOrientationWGS84"
+          name="SGOrientation"
           dataType="SGfloat32"
           cardinality="3"
           encoding="HLAfixedArray"
-          semantics="WGS84 orientation represented as vector part of the quaternion"/>
+          semantics="Orientation represented as vector part of the quaternion."/>
 
       <arrayData
           name="SGmultiplayerPropertyArray"
@@ -1226,17 +1268,17 @@
       </fixedRecordData>
 
       <fixedRecordData
-          name="SGLocationWGS84"
+          name="SGLocation"
           encoding="HLAfixedRecord"
-          semantics="Location of something in the WGS84 coordinate system">
+          semantics="Cartesian location consisting of a position and orientation.">
         <field
             name="position"
-            dataType="SGPositionWGS84"
-            semantics="The cartesian position in the wgs84 system"/>
+            dataType="SGVec3d"
+            semantics="The cartesian position."/>
         <field
             name="orientation"
-            dataType="SGOrientationWGS84"
-            semantics="The cartesian orientation in the wgs84 system"/>
+            dataType="SGOrientation"
+            semantics="The cartesian orientation"/>
       </fixedRecordData>
 
       <fixedRecordData
@@ -1253,30 +1295,109 @@
             semantics="Linear velocity vector in body coordinates"/>
       </fixedRecordData>
 
+      <fixedRecordData
+          name="FGTransponderModeA"
+          encoding="HLAfixedRecord"
+          semantics="Mode A transponder response.">
+        <field
+            name="squawk"
+            dataType="SGint16"
+            semantics="The squawk value."/>
+      </fixedRecordData>
+
+      <fixedRecordData
+          name="FGTransponderModeC"
+          encoding="HLAfixedRecord"
+          semantics="Mode C transponder response.">
+        <field
+            name="squawk"
+            dataType="SGint16"
+            semantics="The squawk value."/>
+        <!-- fields are missing, extend these -->
+      </fixedRecordData>
+
+      <fixedRecordData
+          name="FGTransponderModeS"
+          encoding="HLAfixedRecord"
+          semantics="Mode S transponder response.">
+        <field
+            name="squawk"
+            dataType="SGint16"
+            semantics="The squawk value."/>
+        <!-- fields are missing, extend these -->
+      </fixedRecordData>
+
+      <fixedRecordData
+          name="SGCameraProjectionPerspective"
+          encoding="HLAfixedRecord"
+          semantics="Perspective camera projection definition.">
+        <field
+            name="left"
+            dataType="SGfloat64"
+            semantics="Left border of the projection space."/>
+        <field
+            name="right"
+            dataType="SGfloat64"
+            semantics="Right border of the projection space."/>
+        <field
+            name="bottom"
+            dataType="SGfloat64"
+            semantics="Bottom border of the projection space."/>
+        <field
+            name="top"
+            dataType="SGfloat64"
+            semantics="Top border of the projection space."/>
+        <field
+            name="distance"
+            dataType="SGfloat64"
+            semantics="The reference distance the above values are meant for. Similar to the near plane but does not impact clipping."/>
+      </fixedRecordData>
+
+      <fixedRecordData
+          name="SGCameraProjectionOrthographic"
+          encoding="HLAfixedRecord"
+          semantics="Orthographic camera projection definition.">
+        <field
+            name="left"
+            dataType="SGfloat64"
+            semantics="Left border of the projection space."/>
+        <field
+            name="right"
+            dataType="SGfloat64"
+            semantics="Right border of the projection space."/>
+        <field
+            name="bottom"
+            dataType="SGfloat64"
+            semantics="Bottom border of the projection space."/>
+        <field
+            name="top"
+            dataType="SGfloat64"
+            semantics="Top border of the projection space."/>
+      </fixedRecordData>
     </fixedRecordDataTypes>
 
     <variantRecordDataTypes>
       <variantRecordData
           encoding="HLAvariantRecord"
-          dataType="FGtransponderModeType"
+          dataType="FGTransponderModeType"
           semantics="The content of an aircraft typical transponder."
           discriminant="transponderModeType"
-          name="FGtransponderType">
+          name="FGTransponderType">
         <alternative
-            dataType="UnsignedShort"
-            semantics="Mode A transponder value - just the squawk"
-            enumerator="FGtransponderModeA"
+            dataType="FGTransponderModeA"
+            semantics="Mode A transponder value."
+            enumerator="FGTransponderModeA"
             name="a"/>
-        <!-- <alternative -->
-        <!--     dataType="" -->
-        <!--     semantics="Mode C transponder value" -->
-        <!--     enumerator="FGtransponderModeC" -->
-        <!--     name="c"/> -->
-        <!-- <alternative -->
-        <!--     dataType="" -->
-        <!--     semantics="Mode S transponder value" -->
-        <!--     enumerator="FGtransponderModeS" -->
-        <!--     name="c"/> -->
+        <alternative
+            dataType="FGTransponderModeC"
+            semantics="Mode C transponder value."
+            enumerator="FGTransponderModeC"
+            name="c"/>
+        <alternative
+            dataType="FGTransponderModeS"
+            semantics="Mode S transponder value."
+            enumerator="FGTransponderModeS"
+            name="s"/>
       </variantRecordData>
 
       <variantRecordData

@@ -5,13 +5,15 @@
     <texture n ="0">
     </texture>
     <range><use>/sim/rendering/clouds3d-vis-range</use></range>   
+    <detail><use>/sim/rendering/clouds3d-detail-range</use></detail>   
     <scattering><use>/rendering/scene/scattering</use></scattering>   
     <terminator><use>/environment/terminator-relative-position-m</use></terminator>
     <altitude><use>/sim/rendering/eye-altitude-m</use></altitude>
     <cloud_self_shading><use>/environment/cloud-self-shading</use></cloud_self_shading>
     <moonlight><use>/environment/moonlight</use></moonlight>
   </parameters>
-<technique n="9">
+  
+  <technique n="9">
     <predicate>
       <and>
        <property>/sim/rendering/shaders/skydome</property>
@@ -75,6 +77,11 @@
         <value><use>range</use></value>
       </uniform>
       <uniform>
+        <name>detail_range</name>
+        <type>float</type>
+        <value><use>detail</use></value>
+      </uniform>
+      <uniform>
         <name>scattering</name>
         <type>float</type>
         <value><use>scattering</use></value>
@@ -102,6 +109,7 @@
       <!--<vertex-program-two-side>true</vertex-program-two-side>-->
     </pass>
   </technique>
+
   <technique n="10">
     <predicate>
       <less-equal>
@@ -161,6 +169,11 @@
         <name>range</name>
         <type>float</type>
         <value><use>range</use></value>
+      </uniform>
+      <uniform>
+        <name>detail_range</name>
+        <type>float</type>
+        <value><use>detail</use></value>
       </uniform>
       <uniform>
         <name>scattering</name>

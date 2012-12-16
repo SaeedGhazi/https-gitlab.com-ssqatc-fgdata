@@ -217,6 +217,7 @@ Started September 2000 by David Megginson, david@megginson.com
 			<bump-mapping type="bool" userarchive="y">false</bump-mapping>
 			<clouds3d-enable type="bool" userarchive="y">false</clouds3d-enable>
 			<clouds3d-vis-range type="float" userarchive="y">10000.0</clouds3d-vis-range>
+			<clouds3d-detail-range type="float" userarchive="y">10000.0</clouds3d-detail-range>
 			<clouds3d-density type="float" userarchive="y">0.25</clouds3d-density>
 			<draw-otw type="bool">true</draw-otw>
 			<shadows-ac type="bool" userarchive="y">false</shadows-ac>

@@ -109,15 +109,3 @@ var Dialog = {
     );
   }
 };
-
-var Event = {
-  PUSH:    1,
-  RELEASE: 2,
-  DRAG:    8,
-  MOVE:    16,
-  SCROLL:  512,
-
-  LEFT_MOUSE_BUTTON:   1,
-  MIDDLE_MOUSE_BUTTON: 2,
-  RIGHT_MOUSE_BUTTON:  4
-};

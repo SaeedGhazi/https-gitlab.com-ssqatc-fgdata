@@ -46,8 +46,34 @@
                 gui.dialog_update("multiplayer", "host");
             }
             
+            var static_serverList = [
+                    ['mpserver01.flightgear.org', 'Frankfurt, Germany'],
+                    ['mpserver02.flightgear.org', 'Kansas, USA'],
+                    ['mpserver03.flightgear.org', 'Germany'],
+                    ['mpserver04.flightgear.org', 'United Kingdom'],
+                    ['mpserver05.flightgear.org', 'Chicago, USA'],
+                    ['mpserver07.flightgear.org', 'Wisconsin, USA'],
+                    ['mpserver08.flightgear.org', 'Frankfurt am Main, Germany'],
+                    ['mpserver09.flightgear.org', 'Koln, Germany'],
+                    ['mpserver10.flightgear.org', 'Montpellier, France'],
+                    ['mpserver11.flightgear.org', 'Vilnius, Lithuania'],
+                    ['mpserver12.flightgear.org', 'Amsterdam, Netherlands'],
+                    ['mpserver13.flightgear.org', 'Grenoble, France']
+                ];
+                
             var updateServersFailed = func {
                 debug.dump("Failed to retrieve server list!");
+    
+                servers.removeChildren("value"); 
+                var i=0;
+                foreach (var s; static_serverList) {
+                # create the node the PUI combo
+                    var nm = s[0] ~ " - " ~ s[1];
+                    servers.getNode("value[" ~ i ~ "]", 1).setValue(nm);
+                    i += 1;
+                }
+                
+                gui.dialog_update("multiplayer", "host");
             }
             
             # listen for results arriving  
@@ -161,19 +187,6 @@
             <editable>false</editable>
             
             <properties>/sim/gui/dialogs/multiplay/servers</properties>
-    <!--
-            <value>mpserver01.flightgear.org (Frankfurt, Germany)</value>
-            <value>mpserver02.flightgear.org (Kansas, USA)</value>
-            <value>mpserver03.flightgear.org (Germany)</value>
-            <value>mpserver04.flightgear.org (United Kingdom)</value>
-            <value>mpserver05.flightgear.org (Chicago, USA)</value>
-            <value>mpserver07.flightgear.org (Wisconsin, USA)</value>
-            <value>mpserver08.flightgear.org (Frankfurt am Main, Germany)</value>
-            <value>mpserver09.flightgear.org (Koln, Germany)</value>
-            <value>mpserver10.flightgear.org (Montpellier, France)</value>
-            <value>mpserver11.flightgear.org (Vilnius, Lithuania)</value>
-            <value>mpserver12.flightgear.org (Amsterdam, Netherlands)</value>
-            <value>mpserver13.flightgear.org (Grenoble, France)</value> -->
         </combo>
 
         <!-- status area -->

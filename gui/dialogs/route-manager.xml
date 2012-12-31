@@ -37,10 +37,7 @@ command interface /autopilot/route-manager/input:
                 return int(selection.getValue());
             }
 
-            var clear = func {
-                # deactive first, see http://https://code.google.com/p/flightgear-bugs/issues/detail?id=885
-                fgcommand("activate-flightplan", props.Node.new({"activate": 0}));
-                
+            var clear = func {             
                 flightplan().cleanPlan();
                 selection.setIntValue(-1);
             }

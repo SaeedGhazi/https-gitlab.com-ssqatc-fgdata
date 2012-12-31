@@ -75,9 +75,15 @@ var RouteManagerDelegate = {
         }
     },
     
+    cleared: func
+    {
+        debug.dump("saw active flightplan cleared, deactivating");
+        # see http://https://code.google.com/p/flightgear-bugs/issues/detail?id=885
+        fgcommand("activate-flightplan", props.Node.new({"activate": 0}));
+    },
+    
     waypointsChanged: func
     {
-        debug.dump('saw waypoints changed');
     },
     
     currentWaypointChanged: func

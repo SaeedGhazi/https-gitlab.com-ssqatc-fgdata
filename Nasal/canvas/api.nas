@@ -753,6 +753,14 @@ var Canvas = {
   getPath: func()
   {
     return "canvas://by-index/texture[" ~ me.texture.getIndex() ~ "]";
+  },
+  # Destructor
+  #
+  # releases associated canvas and makes this object unusable
+  del: func
+  {
+    me.texture.remove();
+    me.parents = nil; # ensure all ghosts get destroyed
   }
 };
 

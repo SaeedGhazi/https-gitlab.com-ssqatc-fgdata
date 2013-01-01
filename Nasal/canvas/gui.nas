@@ -15,6 +15,13 @@ var Dialog = {
 
     return m;
   },
+  # Destructor
+  del: func
+  {
+    me.parents[1].del();
+    if( me["_canvas"] != nil )
+      me._canvas.del();
+  },
   # Create the canvas to be used for this dialog
   #
   # @return The new canvas

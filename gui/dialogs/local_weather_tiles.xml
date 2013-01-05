@@ -318,66 +318,71 @@
     <group>
       <layout>table</layout>
 
-      <checkbox>
+      <text>
         <row>0</row>
         <col>0</col>
-        <halign>left</halign>
+        <halign>right</halign>
         <label>Generate thermals</label>
+      </text>
+
+      <checkbox>
+        <row>0</row>
+        <col>2</col>
+        <halign>left</halign>
         <property>/local-weather/config/generate-thermal-lift-flag</property>
         <binding>
           <command>dialog-apply</command>
         </binding>
       </checkbox>
-
+      
       <text>
-        <row>0</row>
+        <row>1</row>
+        <col>0</col>
+        <halign>right</halign>
+        <label>Convective conditions</label>
+      </text>
+      
+      <text>
+        <row>1</row>
         <col>1</col>
         <halign>right</halign>
-        <enable>
-          <property>/local-weather/config/generate-thermal-lift-flag</property>
-        </enable>
         <label>rough day</label>
       </text>
 
       <slider>
-        <row>0</row>
+        <row>1</row>
         <col>2</col>
         <min>0.3</min>
         <max>1.5</max>
         <property>/local-weather/config/thermal-properties</property>
-        <enable>
-          <property>/local-weather/config/generate-thermal-lift-flag</property>
-        </enable>
         <binding>
           <command>dialog-apply</command>
         </binding>
       </slider>
 
       <text>
-        <row>0</row>
+        <row>1</row>
         <col>3</col>
         <halign>left</halign>
-        <enable>
-          <property>/local-weather/config/generate-thermal-lift-flag</property>
-        </enable>
         <label>low convection</label>
       </text>
 
       <text>
-        <row>1</row>
+        <row>2</row>
         <col>0</col>
         <halign>right</halign>
         <label>Ground haze</label>
       </text>
 
       <text>
-        <row>1</row>
+        <row>2</row>
         <col>1</col>
+        <halign>right</halign>
         <label>thick</label>
       </text>
 
       <slider>
-        <row>1</row>
+        <row>2</row>
         <col>2</col>
         <min>0.1</min>
         <max>1.0</max>
@@ -388,28 +393,28 @@
       </slider>
 
       <text>
-        <row>1</row>
+        <row>2</row>
         <col>3</col>
         <halign>left</halign>
         <label>thin</label>
       </text>
 
       <text>
-        <row>2</row>
+        <row>3</row>
         <col>0</col>
         <halign>right</halign>
         <label>Air pollution</label>
       </text>
 
       <text>
-        <row>2</row>
+        <row>3</row>
         <col>1</col>
         <halign>right</halign>
         <label>clean</label>
       </text>
 
       <slider>
-        <row>2</row>
+        <row>3</row>
         <col>2</col>
         <min>0.0</min>
         <max>1.0</max>
@@ -420,28 +425,28 @@
       </slider>
 
       <text>
-        <row>2</row>
+        <row>3</row>
         <col>3</col>
         <halign>left</halign>
         <label>smog</label>
       </text>
 
       <text>
-        <row>3</row>
+        <row>4</row>
         <col>0</col>
         <halign>right</halign>
         <label>Fog properties</label>
       </text>
 
       <text>
-        <row>3</row>
+        <row>4</row>
         <col>1</col>
         <halign>right</halign>
         <label>smooth</label>
       </text>
 
       <slider>
-        <row>3</row>
+        <row>4</row>
         <col>2</col>
         <min>0.0</min>
         <max>12.0</max>
@@ -452,28 +457,28 @@
       </slider>
 
       <text>
-        <row>3</row>
+        <row>4</row>
         <col>3</col>
         <halign>left</halign>
         <label>structured</label>
       </text>
 
       <text>
-        <row>4</row>
+        <row>5</row>
         <col>0</col>
         <halign>right</halign>
         <label>Max. visibility</label>
       </text>
 
       <text>
-        <row>4</row>
+        <row>5</row>
         <col>1</col>
         <halign>right</halign>
         <label>20 km</label>
       </text>
 
       <slider>
-        <row>4</row>
+        <row>5</row>
         <col>2</col>
         <min>9.90348</min>
         <max>12.429216196</max>
@@ -484,14 +489,14 @@
       </slider>
 
       <text>
-        <row>4</row>
+        <row>5</row>
         <col>3</col>
         <halign>left</halign>
         <label>250 km</label>
       </text>
 
       <text>
-        <row>4</row>
+        <row>5</row>
         <col>4</col>
         <halign>left</halign>
         <label>12345678</label>

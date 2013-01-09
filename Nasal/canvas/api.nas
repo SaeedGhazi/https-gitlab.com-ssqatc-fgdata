@@ -137,17 +137,10 @@ var Element = {
   # @param ghost  Element ghost as retrieved from core methods
   new: func(ghost)
   {
-    var m = {
+    return {
       parents: [PropertyElement, Element, ghost],
       _node: props.wrapNode(ghost._node_ghost)
     };
-
-    m._center = [
-      m._node.getNode("center[0]"),
-      m._node.getNode("center[1]")
-    ];
-
-    return m;
   },
   # Trigger an update of the element
   #
@@ -229,6 +222,22 @@ var Element = {
 
     return [0, 0, 0, 0];
   },
+  # Calculate the transformation center based on bounding box and center-offset
+  updateCenter: func
+  {
+    me.update();
+    var bb = me.getTransformedBounds();
+
+    if( bb[0] > bb[2] or bb[1] > bb[3] )
+      return;
+
+    me._setupCenterNodes
+    (
+      (bb[0] + bb[2]) / 2 + (me.get("center-offset-x") or 0),
+      (bb[1] + bb[3]) / 2 + (me.get("center-offset-y") or 0)
+    );
+    return me;
+  },
   # Set transformation center (currently only used for rotation)
   setCenter: func()
   {
@@ -236,24 +245,13 @@ var Element = {
     if( size(center) != 2 )
       return debug.warn("invalid arg");
 
-    me._setupCenterNodes();
-
-    if( me._center[0] == nil )
-      me._center[0] = me._node.getNode("center[0]", 1);
-    if( me._center[1] == nil )
-      me._center[1] = me._node.getNode("center[1]", 1);
-
-    me._center[0].setDoubleValue(center[0] or 0);
-    me._center[1].setDoubleValue(center[1] or 0);
-
+    me._setupCenterNodes(center[0], center[1]);
     return me;
   },
   # Get transformation center
   getCenter: func()
   {
-    var bb = me.getBoundingBox();
     var center = [0, 0];
-
     me._setupCenterNodes();
 
     if( me._center[0] != nil )
@@ -261,11 +259,7 @@ var Element = {
     if( me._center[1] != nil )
       center[1] = me._center[1].getValue() or 0;
 
-    if( bb[0] >= bb[2] or bb[1] >= bb[3] )
-      return center;
-
-    return [ 0.5 * (bb[0] + bb[2]) + center[0],
-              0.5 * (bb[1] + bb[3]) + center[1] ];
+    return center;
   },
   # Internal Transform for convenience transform functions
   _getTf: func
@@ -274,13 +268,18 @@ var Element = {
       me['_tf'] = me.createTransform();
     return me._tf;
   },
-  _setupCenterNodes: func()
+  _setupCenterNodes: func(cx = nil, cy = nil)
   {
     if( me["_center"] == nil )
       me["_center"] = [
-        me._node.getNode("center[0]"),
-        me._node.getNode("center[1]")
+        me._node.getNode("center[0]", cx != nil),
+        me._node.getNode("center[1]", cy != nil)
       ];
+
+    if( cx != nil )
+      me._center[0].setDoubleValue(cx);
+    if( cy != nil )
+      me._center[1].setDoubleValue(cy);
   }
 };
 

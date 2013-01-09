@@ -357,11 +357,6 @@ var parsesvg = func(group, path, options = nil)
       if( dash and size(dash) > 3 )
         # at least 2 comma separated values...
         stack[-1].setStrokeDashArray(split(',', dash));
-
-      var cx = attr['inkscape:transform-center-x'];
-      var cy = attr['inkscape:transform-center-y'];
-      if( cx != nil or cy != nil )
-        stack[-1].setCenter(cx or 0, -(cy or 0));
     }
     else if( name == "tspan" )
     {
@@ -392,6 +387,14 @@ var parsesvg = func(group, path, options = nil)
     }
 
     parseTransform(attr['transform']);
+
+    var cx = attr['inkscape:transform-center-x'];
+    if( cx != nil and cx != 0 )
+      stack[-1].setDouble("center-offset-x", cx);
+
+    var cy = attr['inkscape:transform-center-y'];
+    if( cy != nil and cy != 0 )
+      stack[-1].setDouble("center-offset-y", -cy);
   };
 
   # XML parsers element close callback

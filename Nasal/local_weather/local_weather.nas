@@ -1663,6 +1663,12 @@ setprop(lw~"clouds/placement-index",0);
 setprop(lw~"clouds/model-placement-index",0);
 setprop(lw~"effect-volumes/effect-placement-index",0);
 setprop(lw~"effect-volumes/number",0);
+setprop(lw~"effect-volumes/number-active-rain",0);
+setprop(lw~"effect-volumes/number-active-snow",0);
+setprop(lw~"effect-volumes/number-active-vis",0);
+setprop(lw~"effect-volumes/number-active-turb",0);
+setprop(lw~"effect-volumes/number-active-lift",0);
+setprop(lw~"effect-volumes/number-active-sat",0);
 setprop(lw~"tiles/tile-counter",0);
 
 

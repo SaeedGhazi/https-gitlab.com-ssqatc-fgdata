@@ -426,8 +426,21 @@ var parsesvg = func(group, path, options = nil)
       stack[-1].setText(data);
   };
 
-  if( path[0] != '/' )
-    path = getprop("/sim/fg-root") ~ "/" ~ path;
+  # check path relative to standard locations
+  foreach(
+    var p;
+    [ "",                                 # absolute path
+      getprop("/sim/aircraft-dir") ~ "/", # current aircraft path
+      getprop("/sim/fg-root") ~ "/"       # fgdata
+    ])
+  {
+    var tmp_path = p ~ path;
+    if( io.stat(tmp_path) != nil )
+    {
+      path = tmp_path;
+      break;
+    }
+  }
 
   call(func parsexml(path, start, end, data), nil, var err = []);
   if( size(err) )

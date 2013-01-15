@@ -172,6 +172,12 @@ setprop("/sim/rendering/clouds3d-wrap",0);
 # Basic Weather rain altitude limit off 
 props.globals.getNode("/environment/params/use-external-precipitation-level").setBoolValue("true");
 
+
+# rain and snow off for clean startup
+
+compat_layer.setRain(0.0);
+compat_layer.setSnow(0.0);
+compat_layer.setLight(1.0);
 }
 
 

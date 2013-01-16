@@ -432,7 +432,9 @@ LayeredMap.updateState = func {
   # print("Cleaning up listeners");
   foreach(var l; me.listeners) 
 	removelistener(l);
-        
+	# TODO check why me.listeners = []; doesn't work. Maybe this is a Nasal bug
+	#      and the old vector is somehow used again.
+  setsize(me.listeners, 0);
  }
 
 ###

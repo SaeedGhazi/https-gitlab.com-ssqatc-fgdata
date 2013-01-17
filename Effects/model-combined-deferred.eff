@@ -303,7 +303,7 @@ the objects that use it, and replaces it with the default shader.
 
 			<uniform>
 				<name>nmap_tile</name>
-				<type>int</type>
+				<type>float</type>
 				<value>
 					<use>normalmap-tiling</use>
 				</value>

@@ -289,7 +289,7 @@
 	</pass>
   </technique>
   
-  <technique n="8">
+<!--  <technique n="8">
 	<pass>
 	  <texture-unit n="4">
 		<unit>4</unit>
@@ -313,7 +313,7 @@
   		<vertex-shader n="1">Shaders/building-ubershader.vert</vertex-shader>
 	  </program>
 	</pass>
-  </technique>
+  </technique>-->
   
   <technique n="9">
 	<pass>

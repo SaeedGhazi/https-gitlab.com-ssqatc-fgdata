@@ -24,7 +24,6 @@ uniform sampler3D ReflNoiseTex;
 
 uniform int nmap_enabled;
 uniform int nmap_dds;
-uniform int nmap_tile;
 uniform int refl_enabled;
 uniform int refl_map;
 uniform int lightmap_enabled;
@@ -37,6 +36,7 @@ uniform float lightmap_r_factor;
 uniform float lightmap_g_factor;
 uniform float lightmap_b_factor;
 uniform float lightmap_a_factor;
+uniform float nmap_tile;
 uniform float refl_correction;
 uniform float refl_fresnel;
 uniform float refl_rainbow;
@@ -95,7 +95,7 @@ void main (void)
 	float v      = abs(dot(viewVec, normalize(VNormal)));// Map a rainbowish color
 	vec4 fresnel = texture2D(ReflFresnelTex, vec2(v, 0.0));
 	vec4 rainbow = texture2D(ReflRainbowTex, vec2(v, 0.0));
-	vec4 color = gl_Color * gl_FrontMaterial.diffuse;
+	vec4 color = gl_Color;// * gl_FrontMaterial.diffuse;
 	float specular = dot((gl_FrontMaterial.specular * nmap.a).rgb, vec3( 0.3, 0.59, 0.11 ));
 
 ////////////////////////////////////////////////////////////////////

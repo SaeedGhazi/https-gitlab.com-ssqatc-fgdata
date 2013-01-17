@@ -5,47 +5,47 @@
 // Emilian Huminiuc and Vivian Meazza 2011
 #version 120
 
-varying	vec3 	rawpos;
+varying	vec3 	VBinormal;
 varying	vec3 	VNormal;
 varying	vec3 	VTangent;
-varying	vec3 	VBinormal;
-varying	vec3 	vViewVec;
+varying	vec3 	rawpos;
 varying	vec3 	reflVec;
+varying	vec3 	vViewVec;
 
 varying	float	alpha;
 
-uniform samplerCube Environment;
 uniform sampler2D BaseTex;
-uniform sampler2D NormalTex;
 uniform sampler2D LightMapTex;
-uniform sampler2D ReflMapTex;
+uniform sampler2D NormalTex;
 uniform sampler2D ReflFresnelTex;
+uniform sampler2D ReflMapTex;
 uniform sampler2D ReflRainbowTex;
 uniform sampler3D ReflNoiseTex;
+uniform samplerCube Environment;
 
-uniform int nmap_enabled;
-uniform int nmap_dds;
-uniform int nmap_tile;
-uniform int refl_enabled;
-uniform int refl_map;
-uniform int lightmap_enabled;
-uniform int lightmap_multi;
-uniform int shader_qual;
 uniform int dirt_enabled;
 uniform int dirt_multi;
+uniform int lightmap_enabled;
+uniform int lightmap_multi;
+uniform int nmap_dds;
+uniform int nmap_enabled;
+uniform int refl_enabled;
+uniform int refl_map;
+uniform int shader_qual;
 
-uniform float lightmap_r_factor;
-uniform float lightmap_g_factor;
-uniform float lightmap_b_factor;
+uniform float amb_correction;
+uniform float dirt_b_factor;
+uniform float dirt_g_factor;
+uniform float dirt_r_factor;
 uniform float lightmap_a_factor;
+uniform float lightmap_b_factor;
+uniform float lightmap_g_factor;
+uniform float lightmap_r_factor;
+uniform float nmap_tile;
 uniform float refl_correction;
 uniform float refl_fresnel;
-uniform float refl_rainbow;
 uniform float refl_noise;
-uniform float amb_correction;
-uniform float dirt_r_factor;
-uniform float dirt_g_factor;
-uniform float dirt_b_factor;
+uniform float refl_rainbow;
 
 uniform vec3 lightmap_r_color;
 uniform vec3 lightmap_g_color;
@@ -104,7 +104,7 @@ void main (void)
 		pf = pow(nDotHV, gl_FrontMaterial.shininess);
 
 	vec4 Diffuse  = gl_LightSource[0].diffuse * nDotVP;
-	vec4 Specular = gl_FrontMaterial.specular * gl_LightSource[0].specular * pf;
+	vec4 Specular = gl_FrontMaterial.specular * gl_LightSource[0].diffuse * pf;
 
 	vec4 color = gl_Color + Diffuse * gl_FrontMaterial.diffuse;
 	color += Specular * gl_FrontMaterial.specular * nmap.a;
@@ -136,7 +136,7 @@ void main (void)
 		vec4 noisecolor = mix(reflfrescolor, noisevec, refl_noise);
 		vec4 raincolor = vec4(noisecolor.rgb * reflFactor, 1.0);
 		raincolor += Specular * nmap.a;
-
+		raincolor *= gl_LightSource[0].diffuse;
 		mixedcolor = mix(texel, raincolor, reflFactor).rgb;
  	} else {
  		mixedcolor = texel.rgb;

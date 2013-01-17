@@ -5,7 +5,8 @@
 
 #version 120
 
-varying vec4    RawPos;
+varying float   RawPosZ;
+varying vec3	WorldPos;
 varying vec3	normal;
 varying vec3    Vnormal;
 
@@ -45,12 +46,16 @@ void main()
 
     float cover = min(min(min(min(CloudCover0, CloudCover1),CloudCover2),CloudCover3),CloudCover4);
 
-    vec4 Noise =  texture3D(NoiseTex, RawPos.xyz * 0.0011);
-    float MixFactor = Noise.r * Noise.g * Noise.b;	//Mixing Factor to create a more organic looking boundary
-    MixFactor *= 300.0;
-    MixFactor = clamp(MixFactor, 0.0, 1.0);
-    float L1 = 0.90 - 0.02 * MixFactor;			//first transition slope
-    float L2 = 0.78 + 0.04 * MixFactor;			//Second transition slope
+	vec4 Noise =  texture3D(NoiseTex, WorldPos.xyz*0.0011);
+	vec4 Noise2 = texture3D(NoiseTex, WorldPos.xyz * 0.00008);
+	float MixFactor = Noise.r * Noise.g * Noise.b;	//Mixing Factor to create a more organic looking boundary
+	float MixFactor2 = Noise2.r * Noise2.g * Noise2.b;
+	MixFactor *= 300.0;
+	MixFactor2 *= 300.0;
+	MixFactor = clamp(MixFactor, 0.0, 1.0);
+	MixFactor2 = clamp(MixFactor2, 0.0, 1.0);
+	float L1 = 0.90 - 0.02 * MixFactor;			//first transition slope
+	float L2 = 0.78 + 0.04 * MixFactor;			//Second transition slope
 
     // If gl_Color.a == 0, this is a back-facing polygon and the
     // Vnormal should be reversed.
@@ -65,7 +70,7 @@ void main()
 		pf = pow(nDotHV, gl_FrontMaterial.shininess);
 
 	if (gl_FrontMaterial.shininess > 0.0)
-		specular = gl_FrontMaterial.specular * gl_LightSource[0].specular * pf;
+		specular = gl_FrontMaterial.specular * gl_LightSource[0].diffuse * pf;
 
 // 	vec4	diffuseColor = gl_FrontMaterial.emission +
 // 							vec4(1.0) * (gl_LightModel.ambient + gl_LightSource[0].ambient) +
@@ -141,7 +146,7 @@ void main()
     float	wetness = 1.0 - 0.3 * RainNorm;
     texel.rgb = texel.rgb * wetness;
 
-    float	altitude = RawPos.z;
+    float	altitude = RawPosZ;
     //Snow texture for areas higher than SnowLevel
     if (altitude >= SnowLevel - (1000.0 * slope + 300.0 * MixFactor) && slope > L2 - 0.12) {
         texel = mix(texel, mix(texel, snowTexel, smoothstep(L2 - 0.09 * MixFactor, L2, slope)),
@@ -160,7 +165,7 @@ void main()
             fragColor.b = fragColor.b * (0.5 + 0.25 * cover);
         }
 
-    fragColor.rgb *= 1.2 - 0.4 * MixFactor;
+	fragColor.rgb *= 1.2 - 0.6 * MixFactor * MixFactor2;
     fragColor.rgb = fog_Func(fragColor.rgb, fogType);
     gl_FragColor = fragColor;
     }

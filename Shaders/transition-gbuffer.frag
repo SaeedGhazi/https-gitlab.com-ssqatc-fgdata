@@ -4,7 +4,8 @@
 // � Emilian Huminiuc 2011
 
 
-varying vec4    RawPos;
+varying float	RawPosZ;
+varying vec3	WorldPos;
 varying vec3	normal;
 varying vec3    Vnormal;
 
@@ -32,7 +33,6 @@ void encode_gbuffer(vec3 normal, vec3 color, int mId, float specular, float shin
 
 void main()
     {
-    float MixFactor;
     float NdotL;
     float NdotHV;
     float fogFactor;
@@ -50,14 +50,17 @@ void main()
     vec4 texel;
     vec4 fragColor;
     vec4 color;
-    vec4 Noise;
-
+    
     cover = min(min(min(min(CloudCover0, CloudCover1),CloudCover2),CloudCover3),CloudCover4);
 
-    Noise =  texture3D(NoiseTex, RawPos.xyz*0.0011);
-    MixFactor = Noise.r * Noise.g * Noise.b;	//Mixing Factor to create a more organic looking boundary
+    vec4 Noise =  texture3D(NoiseTex, WorldPos.xyz*0.0011);
+	vec4 Noise2 = texture3D(NoiseTex, WorldPos.xyz * 0.00008);
+    float MixFactor = Noise.r * Noise.g * Noise.b;	//Mixing Factor to create a more organic looking boundary
+    float MixFactor2 = Noise2.r * Noise2.g * Noise2.b;
     MixFactor *= 300.0;
+	MixFactor2 *= 300.0;
     MixFactor = clamp(MixFactor, 0.0, 1.0);
+	MixFactor2 = clamp(MixFactor2, 0.0, 1.0);
     L1 = 0.90 - 0.02 * MixFactor;			//first transition slope
     L2 = 0.78 + 0.04 * MixFactor;			//Second transition slope
 
@@ -128,7 +131,7 @@ void main()
     wetness = 1.0 - 0.3 * RainNorm;
     texel.rgb = texel.rgb * wetness;
 
-    float altitude = RawPos.z;
+    float altitude = RawPosZ;
     //Snow texture for areas higher than SnowLevel
     if (altitude >= SnowLevel - (1000.0 * slope + 300.0 * MixFactor) && slope > L2 - 0.12) {
         texel = mix( texel,
@@ -149,7 +152,7 @@ void main()
         }
 
 
-    fragColor.rgb *= 1.2 - 0.4 * MixFactor;
+	fragColor.rgb *= 1.2 - 0.6 * MixFactor * MixFactor2;
 
 	float specular = dot( gl_FrontMaterial.specular.rgb, vec3( 0.3, 0.59, 0.11 ) );
 	float emission = dot( gl_FrontLightModelProduct.sceneColor.rgb + gl_FrontMaterial.emission.rgb,

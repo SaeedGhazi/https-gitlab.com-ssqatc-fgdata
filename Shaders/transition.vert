@@ -7,13 +7,17 @@
 
 #version 120
 
-varying vec4 RawPos;
-varying vec3 normal;
-varying vec3 Vnormal;
+varying float	RawPosZ;
+varying vec3	WorldPos;
+varying vec3	normal;
+varying vec3	Vnormal;
+
+uniform mat4 osg_ViewMatrixInverse;
 
 void main()
     {
-    RawPos = gl_Vertex;
+    RawPosZ = gl_Vertex.z;
+	WorldPos = (osg_ViewMatrixInverse *gl_ModelViewMatrix * gl_Vertex).xyz;
     gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
     normal = normalize(gl_Normal);

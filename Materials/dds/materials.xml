@@ -283,6 +283,12 @@
 </material>
 
 <material include="Materials/base/runway_effect_dds.xml">
+  <name>pa_aim_uk</name>
+  <texture>Runway/pa_aim_uk.dds</texture>
+  <wrapu>false</wrapu>
+</material>
+
+<material include="Materials/base/runway_effect_dds.xml">
   <name>pa_tz_two_a</name>
   <texture>Runway/pa_tz_two_a.dds</texture>
   <wrapu>false</wrapu>

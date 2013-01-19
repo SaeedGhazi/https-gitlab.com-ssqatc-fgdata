@@ -22,17 +22,18 @@
 <PropertyList>
 
 	<splash>
-<!-- 		<init>???</init> -->   <!-- English: "initializing" -->
-<!-- 		<loading-aircraft-list>???</loading-aircraft-list> -->   <!-- English: "loading aircraft list" -->
-<!-- 		<loading-aircraft>???</loading-aircraft> -->   <!-- English: "loading aircraft" -->
-<!-- 		<loading-nav-dat>???</loading-nav-dat> -->   <!-- English: "loading navigation data" -->
-<!-- 		<init-scenery>???</init-scenery> -->   <!-- English: "initializing scenery" -->
-<!-- 		<creating-subsystems>???</creating-subsystems> -->   <!-- English: "creating subsystems" -->
-<!-- 		<init-subsystems>???</init-subsystems> -->   <!-- English: "initializing subsystems" -->
-<!-- 		<binding-subsystems>???</binding-subsystems> -->   <!-- English: "binding subsystems" -->
-<!-- 		<finishing-subsystems>???</finishing-subsystems> -->   <!-- English: "finalizing subsystems" -->
-<!-- 		<init-graphics>???</init-graphics> -->   <!-- English: "initializing graphics engine" -->
-<!-- 		<loading-scenery>???</loading-scenery> -->   <!-- English: "loading scenery" -->
+		<init>inicializando</init>   <!-- English: "initializing" -->
+		<loading-aircraft-list>cargando lista de aeronave</loading-aircraft-list>   <!-- English: "loading aircraft list" -->
+		<loading-aircraft>cargando aeronave</loading-aircraft>   <!-- English: "loading aircraft" -->
+		<loading-nav-dat>cargando datos de navegacion</loading-nav-dat>   <!-- English: "loading navigation data" -->
+		<init-scenery>inicializando escenarios</init-scenery>   <!-- English: "initializing scenery" -->
+		<creating-subsystems>creando subsistemas</creating-subsystems>   <!-- English: "creating subsystems" -->
+		<init-subsystems>inicializando subsistemas</init-subsystems>   <!-- English: "initializing subsystems" -->
+		<binding-subsystems>enlazando subsistemas</binding-subsystems>   <!-- English: "binding subsystems" -->
+		<finishing-subsystems>finalizando subsistemas</finishing-subsystems>   <!-- English: "finalizing subsystems" -->
+		<init-graphics>inicializando motor grafico</init-graphics>   <!-- English: "initializing graphics engine" -->
+		<loading-scenery>cargando escenarios</loading-scenery>   <!-- English: "loading scenery" -->
+		<finalize-position>finalizando posicion</finalize-position>   <!-- English: "finalizing position" -->
 	</splash>
 
 </PropertyList>

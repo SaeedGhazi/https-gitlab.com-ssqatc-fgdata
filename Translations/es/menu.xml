@@ -23,14 +23,17 @@
 
 	<!-- File menu -->
 	<file>Archivo</file>   <!-- English: "File" -->
-	<reset>Reset</reset>   <!-- English: "Reset" -->
-	<snap-shot>Capturar pantalla</snap-shot>   <!-- English: "Screenshot  " -->
+	<reset>Reiniciar                          </reset>   <!-- English: "Reset" -->
+	<load-tape>Cargar grabación de vuelo</load-tape>   <!-- English: "Load Flight Recorder Tape" -->
+	<save-tape>Guardar grabación de vuelo</save-tape>   <!-- English: "Save Flight Recorder Tape" -->
+	<snap-shot>Capturar pantalla               </snap-shot>   <!-- English: "Screenshot  " -->
 	<snap-shot-dir>Directorio capturas</snap-shot-dir>   <!-- English: "Screenshot Directory" -->
 	<sound-config>Configurar sonido</sound-config>   <!-- English: "Sound Configuration" -->
-	<exit>Salir         </exit>   <!-- English: "Quit          " -->
+	<exit>Salir                              </exit>   <!-- English: "Quit          " -->
 
 	<!-- View menu -->
 	<view>Vista</view>   <!-- English: "View" -->
+	<toggle-fullscreen>Pantalla completa</toggle-fullscreen>   <!-- English: "Toggle Fullscreen" -->
 	<display-options>Opciones visualización</display-options>   <!-- English: "Display Options" -->
 	<rendering-options>Opciones renderizado</rendering-options>   <!-- English: "Rendering Options" -->
 	<view-options>Opciones de vistas</view-options>   <!-- English: "View Options" -->
@@ -44,9 +47,8 @@
 
 	<!-- Location menu -->
 	<location>Localización</location>   <!-- English: "Location" -->
-	<position-on-ground>Ubicar aeronave en tierra</position-on-ground>   <!-- English: "Position Aircraft On Ground" -->
 	<position-in-air>Ubicar aeronave en vuelo</position-in-air>   <!-- English: "Position Aircraft In Air" -->
-	<goto-airport>Seleccionar aeropuerto en listado</goto-airport>   <!-- English: "Select Airport From List" -->
+	<goto-airport>Seleccionar aeropuerto</goto-airport>   <!-- English: "Select Airport" -->
 	<random-attitude>Dirección al azar</random-attitude>   <!-- English: "Random Attitude" -->
 	<tower-position>Posición de la torre</tower-position>   <!-- English: "Tower Position" -->
 
@@ -60,6 +62,7 @@
 	<!-- Environment menu -->
 	<environment>Ambiente</environment>   <!-- English: "Environment" -->
 	<global-weather>Clima</global-weather>   <!-- English: "Weather" -->
+	<environment-settings>Configurar ambiente</environment-settings>   <!-- English: "Environment Settings" -->
 	<time-settings>Configurar horario</time-settings>   <!-- English: "Time Settings" -->
 	<wildfire-settings>Configurar incendios</wildfire-settings>   <!-- English: "Wildfire Settings" -->
 	<terrasync>Descargar escenarios</terrasync>   <!-- English: "Scenery Download" -->
@@ -95,7 +98,7 @@
 	<mp-carrier>Selección de portaaviones multijugador</mp-carrier>   <!-- English: "MPCarrier Selection" -->
 
 	<!-- Debug menu -->
-	<debug>Debug</debug>   <!-- English: "Debug" -->
+	<debug>Depurar</debug>   <!-- English: "Debug" -->
 	<!-- Note: Debug menu items may not need to be translated
 	     since these options are not useful to end users anyway. -->
 	<reload-gui>Reiniciar interfaz gráfica</reload-gui>   <!-- English: "Reload GUI" -->
@@ -105,6 +108,8 @@
 	<reload-autopilot>Reiniciar autopiloto</reload-autopilot>   <!-- English: "Reload Autopilot" -->
 	<reload-network>Reiniciar conexión de red</reload-network>   <!-- English: "Reload Network" -->
 	<reload-model>Recargar modelo de la aeronave</reload-model>   <!-- English: "Reload Aircraft Model" -->
+	<reload-materials>Recargar materiales</reload-materials>   <!-- English: "Reload Materials" -->
+	<reload-scenery>Recargar escenarios</reload-scenery>   <!-- English: "Reload Scenery" -->
 	<nasal-console>Consola nasal</nasal-console>   <!-- English: "Nasal Console" -->
 	<development-keys>Teclas de desarrollo</development-keys>   <!-- English: "Development Keys" -->
 	<configure-dev-extension>Configurar extensiones de desarrollo</configure-dev-extension>   <!-- English: "Configure Development Extensions" -->
@@ -123,11 +128,22 @@
 	<!-- Help menu -->
 	<help>Ayuda</help>   <!-- English: "Help" -->
 	<help-browser>Ayuda (abre en el navegador)</help-browser>   <!-- English: "Help  (opens in browser)" -->
+	<doc-browser>Navegador de documentación</doc-browser>   <!-- English: "Documentation Browser" -->
 	<aircraft-keys>Ayuda de aeronave</aircraft-keys>   <!-- English: "Aircraft Help" -->
+	<aircraft-checklists>Listas de chequeo de aeronave</aircraft-checklists>   <!-- English: "Aircraft Checklists" -->
 	<common-keys>Teclas comunes a toda aeronave</common-keys>   <!-- English: "Common Aircraft Keys" -->
 	<basic-keys>Teclas básicas del simulador</basic-keys>   <!-- English: "Basic Simulator Keys" -->
+	<joystick-config>Configuración de joystick</joystick-config>   <!-- English: "Joystick Configuration" -->
 	<joystick-info>Información de joystick</joystick-info>   <!-- English: "Joystick Information" -->
 	<tutorial-start>Tutoriales</tutorial-start>   <!-- English: "Tutorials" -->
 	<menu-about>Acerca de</menu-about>   <!-- English: "About" -->
+	
+	<!-- Aircraft menu (only frequent/common custom menu entries are supported) -->
+	<select-livery>Seleccionar livery</select-livery>   <!-- English: "Select livery" -->
+	<show-hide-yokes>Mostrar/ocultar cuernos</show-hide-yokes>   <!-- English: "Show/hide yokes" -->
+	<immatriculation>Matrícula</immatriculation>   <!-- English: "Immatriculation" -->
+	<pushback>Pushback</pushback>   <!-- English: "Pushback" -->
+	<autostart>Autoencendido</autostart>   <!-- English: "Autostart" -->
+	<tiller-steering>Timón de dirección</tiller-steering>   <!-- English: "Tiller Steering" -->
 
 </PropertyList>

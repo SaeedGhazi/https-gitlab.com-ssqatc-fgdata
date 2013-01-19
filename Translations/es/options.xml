@@ -184,7 +184,7 @@
 	<enable-skyblend-desc>Activa el gradiente en el cielo</enable-skyblend-desc>   <!-- English: "Enable sky blending" -->
 	<disable-textures-desc>Desactiva las texturas</disable-textures-desc>   <!-- English: "Disable textures" -->
 	<enable-textures-desc>Activa las texturas</enable-textures-desc>   <!-- English: "Enable textures" -->
-	<materials-file-desc>Especifica el archivo de materiales usado para renderizar el escenario (por defecto: materials.xml)</materials-file-desc>   <!-- English: "Specify the materials file used to render the scenery (default: materials.xml)" -->
+	<materials-file-desc>Especifica el archivo de materiales usado para renderizar el escenario (por defecto: Materials/regions/materials.xml)</materials-file-desc>   <!-- English: "Specify the materials file used to render the scenery (default: Materials/regions/materials.xml)" -->
 	<texture-filtering-desc>Filtrado Anisotrópico de Textura: los valores deberian ser 1 (defecto),2,4,8 o 16</texture-filtering-desc>   <!-- English: "Anisotropic Texture Filtering: values should be 1 (default),2,4,8 or 16" -->
 	<disable-wireframe-desc>Desactiva el modo de dibujo de esqueletos</disable-wireframe-desc>   <!-- English: "Disable wireframe drawing mode" -->
 	<enable-wireframe-desc>Activa el modo de dibujo de esqueletos</enable-wireframe-desc>   <!-- English: "Enable wireframe drawing mode" -->

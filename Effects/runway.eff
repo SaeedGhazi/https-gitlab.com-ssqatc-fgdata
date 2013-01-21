@@ -89,7 +89,7 @@
 	</generate>
 
 
-  <technique n="3">
+  <technique n="2">
     <predicate>
       <and>
         <property>/sim/rendering/shaders/skydome</property>

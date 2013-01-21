@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!-- General settings for all Indonesia materials -->
+<PropertyList>
+  <!-- Define Indonesia as a box with given latitude/longitude -->
+  <condition>
+   <and>
+     <greater-than>
+      <property>position/longitude-deg</property>
+      <value>90.0</value>
+     </greater-than>
+     <less-than>
+      <property>position/longitude-deg</property>
+      <value>160.0.0</value>
+     </less-than>
+     <greater-than>
+      <property>position/latitude-deg</property>
+      <value>-20.0</value>
+     </greater-than>
+     <less-than>
+      <property>position/latitude-deg</property>
+      <value>0.0</value>
+     </less-than>
+   </and>
+  </condition>
+  
+</PropertyList>

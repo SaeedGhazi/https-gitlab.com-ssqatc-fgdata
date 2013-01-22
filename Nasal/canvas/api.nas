@@ -317,6 +317,89 @@ var Group = {
 
     return nodes;
   },
+  # Create a path child drawing a (rounded) rectangle
+  #
+  # @param x    Position of left border
+  # @param y    Position of top border
+  # @param w    Width
+  # @param h    Height
+  # @param cfg  Optional settings (eg. {"border-top-radius": 5})
+  rect: func(x, y, w, h, cfg = nil)
+  {
+    var opts = (cfg != nil) ? cfg : {};
+
+    # resolve border-[top-,bottom-][left-,right-]radius
+    var br = opts["border-radius"];
+    if( typeof(br) == 'scalar' )
+      br = [br, br];
+
+    var _parseRadius = func(id)
+    {
+      var r = opts["border-" ~ id ~ "-radius"];
+      var id = std.string.new(id);
+
+      if( r == nil )
+      {
+        # parse top, bottom, left, right separate if no value specified for
+        # single corner
+        foreach(var s; ["top", "bottom", "left", "right"])
+        {
+          if( id.starts_with(s ~ "-") )
+          {
+            r = opts["border-" ~ s ~ "-radius"];
+            break;
+          }
+        }
+      }
+
+      if( r == nil )
+        return br;
+      else if( typeof(r) == 'scalar' )
+        return [r, r];
+      else
+        return r;
+    };
+
+    var path = me.createChild("path");
+
+    # top-left
+    if( (var r = _parseRadius("top-left")) != nil )
+    {
+      path.moveTo(x, y + r[1])
+          .arcSmallCWTo(r[0], r[1], 0, x + r[0], y);
+    }
+    else
+      path.moveTo(x, y);
+
+    # top-right
+    if( (r = _parseRadius("top-right")) != nil )
+    {
+      path.horizTo(x + w - r[0])
+          .arcSmallCWTo(r[0], r[1], 0, x + w, y + r[1]);
+    }
+    else
+      path.horizTo(x + w);
+
+    # bottom-right
+    if( (r = _parseRadius("bottom-right")) != nil )
+    {
+      path.vertTo(y + h - r[1])
+          .arcSmallCWTo(r[0], r[1], 0, x + w - r[0], y + h);
+    }
+    else
+      path.vertTo(y + h);
+
+    # bottom-left
+    if( (r = _parseRadius("bottom-left")) != nil )
+    {
+      path.horizTo(x + r[0])
+          .arcSmallCWTo(r[0], r[1], 0, x, y + h - r[1]);
+    }
+    else
+      path.horizTo(x);
+
+    return path.close();
+  },
   # Get a vector of all child elements
   getChildren: func()
   {

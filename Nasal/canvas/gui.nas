@@ -1,14 +1,14 @@
-var Dialog = {
+var Window = {
   # Constructor
   #
-  # @param size_dlg Dialog size ([width, height])
-  new: func(size_dlg, id = nil)
+  # @param size ([width, height])
+  new: func(size, id = nil)
   {
     var m = {
-      parents: [Dialog, PropertyElement.new(["/sim/gui/canvas", "window"], id)]
+      parents: [Window, PropertyElement.new(["/sim/gui/canvas", "window"], id)]
     };
-    m.setInt("size[0]", size_dlg[0]);
-    m.setInt("size[1]", size_dlg[1]);
+    m.setInt("size[0]", size[0]);
+    m.setInt("size[1]", size[1]);
 
     # arg = [child, listener_node, mode, is_child_event]
     setlistener(m._node, func m._propCallback(arg[0], arg[2]), 0, 2);
@@ -22,26 +22,29 @@ var Dialog = {
     if( me["_canvas"] != nil )
       me._canvas.del();
   },
-  # Create the canvas to be used for this dialog
+  # Create the canvas to be used for this Window
   #
   # @return The new canvas
   createCanvas: func()
   {
-    var size_dlg = [
+    var size = [
       me.get("size[0]"),
       me.get("size[1]")
     ];
 
     me._canvas = new({
-      size: [2 * size_dlg[0], 2 * size_dlg[1]],
-      view: size_dlg,
+      size: [2 * size[0], 2 * size[1]],
+      view: size,
       placement: {
         type: "window",
         index: me._node.getIndex()
       }
     });
+
+    me._canvas.addEventListener("mousedown", func me.raise());
+    return me._canvas;
   },
-  # Set an existing canvas to be used for this dialog
+  # Set an existing canvas to be used for this Window
   setCanvas: func(canvas_)
   {
     if( !isa(canvas_, canvas.Canvas) )

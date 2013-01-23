@@ -901,6 +901,7 @@ var showWeightDialog = func {
         tablerow("Max. Ramp Weight", "maximum-ramp-mass-lbs", "%.0f lb" );
         tablerow("Max. Takeoff  Weight", "maximum-takeoff-mass-lbs", "%.0f lb" );
         tablerow("Max. Landing  Weight", "maximum-landing-mass-lbs", "%.0f lb" );
+        tablerow("Max. Arrested Landing  Weight", "maximum-arrested-landing-mass-lbs", "%.0f lb" );
         tablerow("Max. Zero Fuel Weight", "maximum-zero-fuel-mass-lbs", "%.0f lb" );
     }
 

@@ -11,6 +11,43 @@ var string = {
   {
     return { parents: [string], _str: str };
   },
+  # compare(s)
+  # compare(pos, n, s)
+  #
+  # @param s    String to compare to
+  # @param pos  Position of first character used to compare
+  # @param n    Number of characters to compare
+  compare: func
+  {
+    var s = "";
+    var pos = 0;
+    var n = -1;
+
+    var num = size(arg);
+    if( num == 1 )
+      s = arg[0];
+    else if( num == 3 )
+    {
+      pos = arg[0];
+      n = arg[1];
+      s = arg[2];
+    }
+    else
+      die("std::string::compare: Invalid args");
+
+    if( n < 0 )
+      n = me.size();
+    else if( n > me.size() )
+      return 0;
+
+    if( n != size(s) )
+      return 0;
+
+    for(var i = pos; i < n; i += 1)
+      if( me._str[i] != s[i] )
+        return 0;
+    return 1;
+  },
   find_first_of: func(s, pos = 0)
   {
     return me._find(pos, size(me._str), s, 1);
@@ -26,6 +63,10 @@ var string = {
   substr: func(pos, len = nil)
   {
     return substr(me._str, pos, len);
+  },
+  starts_with: func(s)
+  {
+    return me.compare(0, size(s), s);
   },
   size: func()
   {
@@ -63,12 +104,12 @@ var stoul = func(str, base = 10)
       var digval = _string.toupper(c) - `A` + 10;
     else
       break;
-      
+
     if( digval >= base )
       break;
-    
+
     val = val * base + digval;
   }
-  
+
   return val;
 };

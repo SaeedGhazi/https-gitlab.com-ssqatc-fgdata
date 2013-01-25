@@ -1,3 +1,4 @@
+
 // -*-C++-*-
 
 // written by Thorsten Renk, Oct 2011, based on default.frag
@@ -106,6 +107,14 @@ if (x < -15.0) {return 0.0;}
 
 return e / pow((1.0 + a * exp(-b * (x-c)) ),(1.0/d));
 }
+
+float detail_fade (in float scale, in float angle, in float dist)
+{
+float fade_dist = 4000.0 * scale * angle;
+
+return 1.0 - smoothstep(0.5 * fade_dist, fade_dist, dist);
+}
+
 
 // this determines how light is attenuated in the distance
 // physically this should be exp(-arg) but for technical reasons we use a sharper cutoff
@@ -243,17 +252,14 @@ if ((dist < 3000.0)&& (quality_level > 3) && (wetness>0.0))
 
 // color and shade variation of the grass
 
-	float nfact_1m = 3.0 * (noise_1m - 0.5) * (1.0 - smoothstep(3000.0, 6000.0, dist/ abs(ct)));
-	float nfact_5m = 2.0 * (noise_5m - 0.5);
+	float nfact_1m = 3.0 * (noise_1m - 0.5) * detail_fade(1.0, abs(ct),dist);//* (1.0 - smoothstep(3000.0, 6000.0, dist/ abs(ct)));
+	float nfact_5m = 2.0 * (noise_5m - 0.5) * detail_fade(2.0, abs(ct),dist);;
 	float nfact_10m = 1.0 * (noise_10m - 0.5);
-	texel.rgb = texel.rgb * (0.85 + 0.1 * (nfact_1m + nfact_5m + nfact_10m));
-    //texel.rgb = texel.rgb * (0.7 + 0.1 * (noise_10m +   2.0 * noise_5m +   3.0 * noise_1m));
-	//texel.rgb = texel.rgb * (0.7 + 0.1 * (noise_10m + 2.0 * (1.0-smoothstep(50.0, 200.0, dist*abs(ct))) * noise_5m + (1.0-smoothstep(20.0,100.0, dist*abs(ct))) * 3.0 *noise_1m));
+	texel.rgb = texel.rgb * (0.85 + 0.1 * (nfact_1m * detail_fade(1.0, abs(ct),dist) + nfact_5m + nfact_10m));
     texel.r = texel.r * (1.0 + 0.14 * smoothstep(0.5,0.7, 0.33*(2.0 * noise_10m + (1.0-noise_5m))));
 
 
 vec4 dust_color;
-//float snow_alpha;
 
 if (quality_level > 3)
 	{
@@ -261,7 +267,7 @@ if (quality_level > 3)
     	dust_color = vec4 (0.76, 0.71, 0.56, 1.0);
     	texel = mix(texel, dust_color, clamp(0.5 * dust_cover_factor + 3.0 * dust_cover_factor * (((noise_1500m - 0.5) * 0.125)+0.125 ),0.0, 1.0) );
 
-    	// mix snow
+    // mix snow
    	snow_alpha = smoothstep(0.75, 0.85, abs(steepness));
 	texel = mix(texel, snow_texel, snow_texel.a * smoothstep(snowlevel, snowlevel+200.0, snow_alpha * (relPos.z + eye_alt)+ (noise_2000m + 0.1 * noise_10m -0.55) *400.0));
 	}
@@ -288,7 +294,7 @@ if (quality_level > 3)
 	if ((dist < 200.0) && (quality_level > 4))
 		{
 		noise_01m = Noise2D(rawPos.xy,0.1);
-		NdotL = NdotL + 0.8 * (noise_01m-0.5) *   (1.0 - smoothstep(50.0, 100.0, dist)) * (1.0 - water_factor);
+		NdotL = NdotL + 0.8 * (noise_01m-0.5) *  detail_fade(0.1, abs(ct),dist) * (1.0 - water_factor);
 		}
 	
     if (NdotL > 0.0) {
@@ -482,4 +488,3 @@ gl_FragColor = fragColor;
 
 
 }
-

@@ -4570,7 +4570,7 @@ setprop(lw~"effect-volumes/number-active-sat",0);
 # setprop(lw~"config/max-vis-range-m", 120000.0);
 setprop(lw~"config/temperature-offset-degc", 0.0);
 
-setprop("/sim/rendering/eye-altitude-m", getprop("/position/altitude-ft") * ft_to_m);
+#setprop("/sim/rendering/eye-altitude-m", getprop("/position/altitude-ft") * ft_to_m);
 
 # create properties for tile management
 

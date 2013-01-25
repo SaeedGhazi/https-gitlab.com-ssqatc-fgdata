@@ -36,4 +36,13 @@
     <gain>6303363.70409</gain> 
   </filter>
 
+  <filter>
+    <name>LocalWeather:eye-altitude</name>
+    <input>
+     <property>/position/altitude-ft</property>
+    </input>
+    <output>/sim/rendering/eye-altitude-m</output>
+    <type>gain</type>
+    <gain>0.30480</gain> 
+  </filter>
 </PropertyList>

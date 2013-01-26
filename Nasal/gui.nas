@@ -544,47 +544,48 @@ var OverlaySelector = {
 #
 var FileSelector = {
     new: func(callback, title, button, pattern = nil, dir = "", file = "", dotfiles = 0, show_files=1) {
-        var name = "file-select-";
-        var data = props.globals.getNode("/sim/gui/dialogs/", 1);
-        for (var i = 1; 1; i += 1)
-            if (data.getNode(name ~ i, 0) == nil)
-                break;
-        data = data.getNode(name ~= i, 1);
-
-        var m = Dialog.new(data.getNode("dialog", 1), "gui/dialogs/file-select.xml", name);
-        m.parents = [FileSelector, Dialog];
-        m.data = data;
+        
+        
+        var usage = gui.FILE_DIALOG_OPEN_FILE;
+        if (!show_files) {
+            usage = gui.FILE_DIALOG_CHOOSE_DIR;
+        } else if (button == 'Save') {
+            # nasty, should make this explicit
+            usage = gui.FILE_DIALOG_SAVE_FILE;
+        }
+        
+        m = { parents:[FileSelector],
+             _inner: gui._createFileDialog(usage)};
+        
         m.set_title(title);
         m.set_button(button);
         m.set_directory(dir);
         m.set_file(file);
-        m.set_show_files(show_files);
         m.set_dotfiles(dotfiles);
         m.set_pattern(pattern);
-        m.cblistener = setlistener(data.getNode("path", 1), callback);
+        
+        m._inner.setCallback(func (path) {  
+            var node = props.Node.new();
+            node.setValue(path);
+            callback(node); 
+        }   );
+        
         return m;
     },
     # setters only take effect after the next call to open()
-    set_title: func(title) { me.data.getNode("title", 1).setValue(title) },
-    set_button: func(button) { me.data.getNode("button", 1).setValue(button) },
-    set_directory: func(dir) { me.data.getNode("directory", 1).setValue(dir) },
-    set_file: func(file) { me.data.getNode("selection", 1).setValue(file) },
-    set_show_files: func(show) { me.data.getNode("show-files", 1).setValue(show) },
-    set_dotfiles: func(dot) { me.data.getNode("dotfiles", 1).setBoolValue(dot) },
-    set_pattern: func(pattern) {
-        me.data.removeChildren("pattern");
-        if (pattern != nil)
-            forindex (var i; pattern)
-                me.data.getChild("pattern", i, 1).setValue(pattern[i]);
-    },
+    set_title: func(title) { me._inner.title = title },
+    set_button: func(button) { me._inner.button = button },
+    set_directory: func(dir) { me._inner.directory = directory },
+    set_file: func(file) { me._inner.placeholder = file },
+    set_dotfiles: func(dot) { me._inner.show_hidden = dot },
+    set_pattern: func(pattern) { me._inner.pattern = (pattern == nil) ? [] : pattern },
+    
+    open: func() { me._inner.open(); },
+    close: func() { me._inner.close(); },
+    
     del: func {
-        me.close();
-        delete(me.instance, me.name);
-        removelistener(me.cblistener);
-        me.data.remove();
-        # call inherited 'del'
-        me.parents = subvec(me.parents,1);
-        me.del();
+        me._inner.close();
+        me._inner = nil;
     },
 };
 

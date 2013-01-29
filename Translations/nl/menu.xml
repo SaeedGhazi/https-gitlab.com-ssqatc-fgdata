@@ -24,6 +24,8 @@
 	<!-- File menu -->
 	<file>Bestand</file>   <!-- English: "File" -->
 	<reset>Opnieuw starten</reset>   <!-- English: "Reset" -->
+	<load-tape>Vluchtrecorder data laden</load-tape>   <!-- English: "Load Flight Recorder Tape" -->
+	<save-tape>Vluchtrecorder data opslaan</save-tape>   <!-- English: "Save Flight Recorder Tape" -->
 	<snap-shot>Screenshot</snap-shot>   <!-- English: "Screenshot  " -->
 	<snap-shot-dir>Screenshotmap</snap-shot-dir>   <!-- English: "Screenshot Directory" -->
 	<sound-config>Audio instellingen</sound-config>   <!-- English: "Sound Configuration" -->
@@ -44,9 +46,8 @@
 
 	<!-- Location menu -->
 	<location>Locatie</location>   <!-- English: "Location" -->
-	<position-on-ground>Plaats vliegtuig op de grond</position-on-ground>   <!-- English: "Position Aircraft On Ground" -->
 	<position-in-air>Plaats vliegtuig in de lucht</position-in-air>   <!-- English: "Position Aircraft In Air" -->
-	<goto-airport>Vliegveld uit een lijst kiezen</goto-airport>   <!-- English: "Select Airport From List" -->
+	<goto-airport>Kies een vliegveld</goto-airport>   <!-- English: "Select Airport" -->
 	<random-attitude>Willekeurige orientatie</random-attitude>   <!-- English: "Random Attitude" -->
 	<tower-position>Torenpositie</tower-position>   <!-- English: "Tower Position" -->
 
@@ -60,6 +61,7 @@
 	<!-- Environment menu -->
 	<environment>Omgeving</environment>   <!-- English: "Environment" -->
 	<global-weather>Weer</global-weather>   <!-- English: "Weather" -->
+	<environment-settings>Omgevingsinstellingen</environment-settings>   <!-- English: "Environment Settings" -->
 	<time-settings>Tijdsinstellingen</time-settings>   <!-- English: "Time Settings" -->
 	<wildfire-settings>Bosbrand instellingen</wildfire-settings>   <!-- English: "Wildfire Settings" -->
 	<terrasync>Scenery downloaden</terrasync>   <!-- English: "Scenery Download" -->
@@ -105,6 +107,8 @@
 	<reload-autopilot>Autopilot herladen</reload-autopilot>   <!-- English: "Reload Autopilot" -->
 	<reload-network>Network herladen</reload-network>   <!-- English: "Reload Network" -->
 	<reload-model>Vliegtuigmodel herladen</reload-model>   <!-- English: "Reload Aircraft Model" -->
+	<reload-materials>Materialen herladen</reload-materials>   <!-- English: "Reload Materials" -->
+	<reload-scenery>Scenery herladen</reload-scenery>   <!-- English: "Reload Scenery" -->
 	<nasal-console>Nasal console</nasal-console>   <!-- English: "Nasal Console" -->
 	<development-keys>Ontwikkelingstoetsen</development-keys>   <!-- English: "Development Keys" -->
 	<configure-dev-extension>Ontwikkelingsextensies beheren</configure-dev-extension>   <!-- English: "Configure Development Extensions" -->
@@ -123,11 +127,22 @@
 	<!-- Help menu -->
 	<help>Help</help>   <!-- English: "Help" -->
 	<help-browser>Help (opent in browser)</help-browser>   <!-- English: "Help  (opens in browser)" -->
+	<doc-browser>Documentatie browser</doc-browser>   <!-- English: "Documentation Browser" -->
 	<aircraft-keys>Vliegtuig help</aircraft-keys>   <!-- English: "Aircraft Help" -->
+	<aircraft-checklists>Vliegtuig checklists</aircraft-checklists>   <!-- English: "Aircraft Checklists" -->
 	<common-keys>Algemene toetsencombinaties</common-keys>   <!-- English: "Common Aircraft Keys" -->
 	<basic-keys>Simulator toetsencombinaties</basic-keys>   <!-- English: "Basic Simulator Keys" -->
+	<joystick-config>Joystick instellingen</joystick-config>   <!-- English: "Joystick Configuration" -->
 	<joystick-info>Joystick informatie</joystick-info>   <!-- English: "Joystick Information" -->
 	<tutorial-start>Tutorials</tutorial-start>   <!-- English: "Tutorials" -->
 	<menu-about>Over</menu-about>   <!-- English: "About" -->
 
+	<!-- Aircraft menu (only frequent/common custom menu entries are supported) -->
+	<select-livery>Kies uitvoering</select-livery>   <!-- English: "Select livery" -->
+	<show-hide-yokes>Toon/verberg yokes</show-hide-yokes>   <!-- English: "Show/hide yokes" -->
+	<immatriculation>Registratie</immatriculation>   <!-- English: "Immatriculation" -->
+	<pushback>Pushback</pushback>   <!-- English: "Pushbac" -->
+	<autostart>Automatisch starten</autostart>   <!-- English: "Autostart" -->
+	<tiller-steering>Tiller besturing</tiller-steering>   <!-- English: "Tiller Steering" -->
+	
 </PropertyList>

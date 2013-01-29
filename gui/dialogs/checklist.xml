@@ -47,8 +47,8 @@
             var item = items[i];
 
             var t = table.getChild("text", txtcount, 1);
-            txtcount += 1;
-            
+            txtcount += 1;            
+
             var values = item.getChildren("value");
             
             if (size(values) == 0) {
@@ -63,7 +63,7 @@
               t.getNode("halign", 1).setValue("left");
               t.getNode("row", 1).setValue(row);
               t.getNode("col", 1).setValue(0);
-              t.getNode("label", 1).setValue(item.getNode("name", 1).getValue());                        
+              t.getNode("label", 1).setValue(item.getNode("name", 1).getValue());
               
               forindex (var v; values) {
                 var t = table.getChild("text", txtcount, 1);
@@ -81,9 +81,54 @@
                 }
                   
                 t.getNode("label", 1).setValue(values[v].getValue());                
+                
+                # If there's a complete node, it contains a condition
+                # that can be checked to ensure the checklist item is
+                # complete. We display this item in yellow while the 
+                # condition is not met, and green once it is complete.
+                
+                var condition = item.getNode("condition");
+                
+                if (condition != nil) {
+                  var vis = t.getNode("visible", 1);
+                  props.copy(condition, vis);
+                  var c = t.getNode("color", 1);
+                  c.getNode("red", 1).setValue(0.2);
+                  c.getNode("green", 1).setValue(1.0);
+                  c.getNode("blue", 1).setValue(0.2);
+                  
+                  # Now create an yellow version for when the condition
+                  # is not met.
+                  t = table.getChild("text", txtcount, 1);
+                  txtcount += 1;            
+                  
+                  t.getNode("halign", 1).setValue("right");
+                  t.getNode("row", 1).setValue(row);
+                  if (v > 0) {
+                    # The second row of values can overlap with the
+                    # first column if required - helps keep the 
+                    # checklist dialog as compact as possible
+                    t.getNode("col", 1).setValue(0);
+                    t.getNode("colspan", 1).setValue(2);
+                  } else {
+                    t.getNode("col", 1).setValue(1);
+                  }
+                    
+                  t.getNode("label", 1).setValue(values[v].getValue());                
+                  
+                  c = t.getNode("color", 1);
+                  c.getNode("red", 1).setValue(1.0);
+                  c.getNode("green", 1).setValue(1.0);
+                  c.getNode("blue", 1).setValue(0.2);                
+                  
+                  vis = t.getNode("visible", 1).getNode("not", 1);
+                  props.copy(condition, vis);                
+                }
+                                
                 row = row + 1;              
               }
             }
+            
           }
         }
         

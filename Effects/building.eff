@@ -147,10 +147,12 @@
           </internal-format>
       </texture-unit>
       <program>
-          <vertex-shader n="0">Shaders/include_fog.vert</vertex-shader>
-          <vertex-shader n="1">Shaders/building-default.vert</vertex-shader>
-          <fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
-	        <fragment-shader n="1">Shaders/terrain-nocolor.frag</fragment-shader>
+          <!--<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader>-->
+          <!--<vertex-shader n="1">Shaders/building-default.vert</vertex-shader>-->
+	  <vertex-shader>Shaders/building-default.vert</vertex-shader>
+	  <fragment-shader>Shaders/trivial.frag</fragment-shader>
+          <!--<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
+	  <fragment-shader n="1">Shaders/terrain-nocolor.frag</fragment-shader>-->
       </program>
       <uniform>
         <name>texture</name>

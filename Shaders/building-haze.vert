@@ -26,7 +26,7 @@ varying vec3 relPos;
 //varying float yprime;
 //varying float vertex_alt;
 varying float yprime_alt;
-//varying float mie_angle;
+varying float mie_angle;
 
 uniform int colorMode;
 uniform float hazeLayerAltitude;
@@ -45,7 +45,7 @@ const float terminator_width = 200000.0;
 
 
 float earthShade;
-float mie_angle;
+//float mie_angle;
 
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
@@ -245,6 +245,6 @@ else // the faster, full-day version without lightfields
     // gl_FrontFacing in the fragment shader.
     gl_FrontColor.rgb = constant_term.rgb;  
     gl_BackColor.rgb = constant_term.rgb; 
-    gl_FrontColor.a = mie_angle; gl_BackColor.a = mie_angle; 
+    //gl_FrontColor.a = mie_angle; gl_BackColor.a = mie_angle; 
 }
 

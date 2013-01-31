@@ -9,6 +9,7 @@ varying	vec3	VTangent;
 varying	vec3	VBinormal;
 varying	vec3	vViewVec;
 varying	vec3	reflVec;
+varying vec3 	vertVec;
 
 varying	float	alpha;
 
@@ -70,7 +71,7 @@ void	main(void)
 			alpha = gl_Color.a;
 
     // Vertex in eye coordinates
-		vec3 vertVec = ecPosition.xyz;
+		vertVec = ecPosition.xyz;
 		vViewVec.x = dot(t, vertVec);
 		vViewVec.y = dot(b, vertVec);
 		vViewVec.z = dot(n, vertVec);

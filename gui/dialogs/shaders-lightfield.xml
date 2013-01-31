@@ -148,6 +148,30 @@
 			<pref-width>55</pref-width>
 		</empty>
 	</group>
+
+	<group>
+		<layout>hbox</layout>
+		<halign>right</halign>
+		<text>
+			<label>Model</label>
+		</text>
+		<slider>
+			<name>model</name>
+			<min>0.0</min>
+			<max>3.0</max>
+			<step>1.0</step>
+			<fraction>0.17</fraction>
+			<live>true</live>
+			<property>/sim/rendering/shaders/model</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>model</object-name>
+			</binding>
+		</slider>
+		<empty>
+			<pref-width>55</pref-width>
+		</empty>
+	</group>
 	
 	<group>
 		<layout>hbox</layout>

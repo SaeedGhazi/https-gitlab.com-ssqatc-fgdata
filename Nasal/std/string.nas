@@ -82,6 +82,9 @@ var string = {
   },
   _find: func(first, last, s, eq)
   {
+    if( first < 0 or last < 0 )
+      return -1;
+
     var sign = first <= last ? 1 : -1;
     for(var i = first; sign * i < last; i += sign)
       if( me._eq(i, s) == eq )

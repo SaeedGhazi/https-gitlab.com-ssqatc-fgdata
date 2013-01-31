@@ -335,10 +335,7 @@ var Group = {
 
     var _parseRadius = func(id)
     {
-      var r = opts["border-" ~ id ~ "-radius"];
-      var id = std.string.new(id);
-
-      if( r == nil )
+      if( (var r = opts["border-" ~ id ~ "-radius"]) == nil )
       {
         # parse top, bottom, left, right separate if no value specified for
         # single corner

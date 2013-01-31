@@ -54,8 +54,6 @@ var parsesvg = func(group, path, options = nil)
     if( tf == nil )
       return;
 
-    tf = std.string.new(tf);
-    
     var end = 0;
     while(1)
     {
@@ -84,10 +82,10 @@ var parsesvg = func(group, path, options = nil)
         end = tf.find_first_of("),\t\n ", start_num + 1);
         if( end < 0 )
           break;
-        append(values, tf.substr(start_num, end - start_num));
+        append(values, substr(tf, start_num, end - start_num));
       }
       
-      var type = tf.substr(start_type, end_type - start_type);
+      var type = substr(tf, start_type, end_type - start_type);
 
       if( type == "translate" )
         # translate(<tx> [<ty>]), which specifies a translation by tx and ty. If
@@ -126,14 +124,12 @@ var parsesvg = func(group, path, options = nil)
     s: Path.VG_SCUBIC_TO
   };
   
-  var parsePath = func(d)
+  var parsePath = func(path_data)
   {
-    if( d == nil )
+    if( path_data == nil )
       return;
 
-    var path_data = std.string.new(d);
     var pos = 0;
-    
     var cmds = [];
     var coords = [];
 
@@ -145,7 +141,7 @@ var parsesvg = func(group, path, options = nil)
         break;
 
       # get command
-      var cmd = path_data.substr(pos, 1);
+      var cmd = substr(path_data, pos, 1);
       pos += 1;
 
       # and get all following arguments
@@ -161,7 +157,7 @@ var parsesvg = func(group, path, options = nil)
         if( start_num == pos )
           break;
 
-        append(args, path_data.substr(start_num, pos > 0 ? pos - start_num : nil));
+        append(args, substr(path_data, start_num, pos > 0 ? pos - start_num : nil));
       }
       
       # now execute the command

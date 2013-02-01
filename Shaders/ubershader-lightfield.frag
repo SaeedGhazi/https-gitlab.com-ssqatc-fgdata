@@ -7,65 +7,61 @@
 // by Thorsten Renk, 2013
 #version 120
 
-varying	vec3 	rawpos;
+varying	vec3 	VBinormal;
 varying	vec3 	VNormal;
 varying	vec3 	VTangent;
-varying	vec3 	VBinormal;
-varying	vec3 	vViewVec;
+varying	vec3 	rawpos;
 varying	vec3 	reflVec;
+varying	vec3 	vViewVec;
 varying vec3	vertVec;
 
 varying	float	alpha;
 
-uniform samplerCube Environment;
 uniform sampler2D BaseTex;
-uniform sampler2D NormalTex;
 uniform sampler2D LightMapTex;
-uniform sampler2D ReflMapTex;
+uniform sampler2D NormalTex;
 uniform sampler2D ReflFresnelTex;
+uniform sampler2D ReflMapTex;
 uniform sampler2D ReflRainbowTex;
 uniform sampler3D ReflNoiseTex;
+uniform samplerCube Environment;
 
-uniform int nmap_enabled;
-uniform int nmap_dds;
-uniform int refl_enabled;
-uniform int refl_map;
-uniform int lightmap_enabled;
-uniform int lightmap_multi;
-uniform int shader_qual;
 uniform int dirt_enabled;
 uniform int dirt_multi;
+uniform int lightmap_enabled;
+uniform int lightmap_multi;
+uniform int nmap_dds;
+uniform int nmap_enabled;
+uniform int refl_enabled;
+uniform int refl_map;
+uniform int shader_qual;
 
-uniform float lightmap_r_factor;
-uniform float lightmap_g_factor;
-uniform float lightmap_b_factor;
+uniform float amb_correction;
+uniform float dirt_b_factor;
+uniform float dirt_g_factor;
+uniform float dirt_r_factor;
 uniform float lightmap_a_factor;
+uniform float lightmap_b_factor;
+uniform float lightmap_g_factor;
+uniform float lightmap_r_factor;
+uniform float nmap_tile;
 uniform float refl_correction;
 uniform float refl_fresnel;
-uniform float refl_rainbow;
 uniform float refl_noise;
-uniform float amb_correction;
-uniform float dirt_r_factor;
-uniform float dirt_g_factor;
-uniform float dirt_b_factor;
-uniform float nmap_tile;
+uniform float refl_rainbow;
 
 
-uniform float hazeLayerAltitude; 		
-uniform float visibility;			
 uniform float avisibility;			
-uniform float terminator;			
-uniform float terrain_alt; 			
-uniform float overcast;				
-uniform float ground_scattering;		
-uniform float scattering;			
-uniform float moonlight;			
 uniform float cloud_self_shading;
 uniform float eye_alt;
-
-uniform mat4 osg_ViewMatrixInverse;
-uniform mat4 osg_ViewMatrix;
-
+uniform float ground_scattering;		
+uniform float hazeLayerAltitude; 		
+uniform float moonlight;			
+uniform float overcast;				
+uniform float scattering;			
+uniform float terminator;			
+uniform float terrain_alt; 			
+uniform float visibility;			
 
 // constants needed by the light and fog computations ###################################################
 
@@ -81,12 +77,8 @@ uniform vec3 dirt_r_color;
 uniform vec3 dirt_g_color;
 uniform vec3 dirt_b_color;
 
-float alt;
-
-///fog include//////////////////////
-uniform int fogType;
-vec3 fog_Func(vec3 color, int type);
-////////////////////////////////////
+// uniform mat4 osg_ViewMatrixInverse;
+// uniform mat4 osg_ViewMatrix;
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
 {
@@ -95,17 +87,17 @@ float light_func (in float x, in float a, in float b, in float c, in float d, in
 	return e / pow((1.0 + a * exp(-b * (x-c)) ),(1.0/d));
 }
 
-float fog_func (in float targ)
+float fog_func (in float targ, in float altitude)
 {
-float fade_mix;
+	float fade_mix;
 
 	targ = 1.25 * targ * smoothstep(0.04,0.06,targ); // need to sync with the distance to which objects are drawn unfogged
 
-	if (alt < 30000.0)
+	if (altitude < 30000.0)
 		{return exp(-targ - targ * targ * targ * targ);}
-	else if (alt < 50000.0)
+	else if (altitude < 50000.0)
 		{
-		fade_mix = (alt - 30000.0)/20000.0;
+		fade_mix = (altitude - 30000.0)/20000.0;
 		return fade_mix * exp(-targ*targ - pow(targ,4.0)) + (1.0 - fade_mix) * exp(-targ - pow(targ,4.0));	
 		}
 	else 
@@ -216,9 +208,7 @@ void main (void)
 	N = nmap.rgb * 2.0 - 1.0;
 		N = normalize(N.x * VTangent + N.y * VBinormal + N.z * VNormal);
 		if (nmap_dds > 0)
-			{
 			N = -N;
-			}
  	} else {
  		N = normalize(VNormal);
  	}
@@ -278,7 +268,7 @@ void main (void)
 		vec4 noisecolor = mix(reflfrescolor, noisevec, refl_noise);
 		vec4 raincolor = vec4(noisecolor.rgb * reflFactor, 1.0);
 		raincolor += Specular * nmap.a;
-
+		raincolor *= light_diffuse;
 		mixedcolor = mix(texel, raincolor, reflFactor).rgb;
  	} else {
  		mixedcolor = texel.rgb;
@@ -404,7 +394,7 @@ if (dist > max(40.0, 0.04 * min(visibility,avisibility)))
 		transmission_arg = transmission_arg + (distance_in_layer/avisibility);
 		eqColorFactor = 1.0 - 0.1 * delta_zv/avisibility - (1.0 -effective_scattering);
 		}
-	transmission =  fog_func(transmission_arg);
+	transmission =  fog_func(transmission_arg, alt);
 	if (eqColorFactor < 0.2) eqColorFactor = 0.2;
 	}
 else

@@ -33,6 +33,21 @@
 	</group>
 
 	<hrule/>
+  
+  <text>
+    <visible>
+      <equals>
+        <property>/sim/gui/dialogs/rendering/shader-warning</property>
+        <value>1</value>
+      </equals>
+    </visible>
+    <color>
+      <red>1.0</red>
+      <green>0.6</green>
+      <blue>0.6</blue>
+    </color>
+    <label>Warning: Intel integrated graphics detected.  Your graphics card may not support shaders or complex graphics.</label>
+  </text>
 
 	<group>
 		<halign>center</halign>
@@ -491,6 +506,7 @@
 					</button>
 
 				</group>
+				
 			</group>
 			
 			<group>
@@ -760,6 +776,16 @@
           setprop("/sim/gui/dialogs/rendering/texture-set", name);			  
 			  }
 			}
+      
+      var vendor = getprop("/sim/rendering/gl-vendor");            
+      if (vendor != nil) {
+        vendor = string.lc(vendor);
+        if (find("intel", vendor) != -1) {
+          setprop("/sim/gui/dialogs/rendering/shader-warning", 1);                  
+        } else {
+          setprop("/sim/gui/dialogs/rendering/shader-warning", 0);        
+        }
+      }			
 		</open>
 	</nasal>
 </PropertyList>

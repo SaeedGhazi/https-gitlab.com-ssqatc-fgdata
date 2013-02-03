@@ -24,6 +24,8 @@
     <!-- File menu -->
     <file>Fichier</file>   <!-- English: "File" -->
     <reset>Réinitialiser</reset>   <!-- English: "Reset" -->
+    <load-tape>Charger la vidéo d'un vol</load-tape>   <!-- English: "Load Flight Recorder Tape" -->
+    <save-tape>Sauvegarder la vidéo d'un vol</save-tape>   <!-- English: "Save Flight Recorder Tape" -->
     <snap-shot>Capture d'écran</snap-shot>   <!-- English: "Screenshot  " -->
     <snap-shot-dir>Répertoire des captures</snap-shot-dir>   <!-- English: "Screenshot Directory" -->
     <sound-config>Configuration du son</sound-config>   <!-- English: "Sound Configuration" -->
@@ -31,9 +33,9 @@
 
     <!-- View menu -->
     <view>Affichage</view>   <!-- English: "View" -->
-    <display-options>Options d'affichage</display-options>   <!-- English: "Display Options" -->
+    <toggle-fullscreen>Passer en plein écran</toggle-fullscreen>   <!-- English: "Toggle Fullscreen" -->
     <rendering-options>Options de rendu</rendering-options>   <!-- English: "Rendering Options" -->
-    <view-options>Options de la vue</view-options>   <!-- English: "View Options" -->
+    <view-options>Options d'affichage</view-options>   <!-- English: "View Options" -->
     <cockpit-view-options>Options d'affichage du cockpit</cockpit-view-options>   <!-- English: "Cockpit View Options" -->
     <adjust-lod>Ajuster le niveau de détail</adjust-lod>   <!-- English: "Adjust LOD Ranges" -->
     <pilot-offset>Ajuster la position de la vue</pilot-offset>   <!-- English: "Adjust View Position" -->
@@ -44,9 +46,8 @@
 
     <!-- Location menu -->
     <location>Position</location>   <!-- English: "Location" -->
-    <position-on-ground>Positionner l'aéronef au sol</position-on-ground>   <!-- English: "Position Aircraft On Ground" -->
     <position-in-air>Positionner l'aéronef en vol</position-in-air>   <!-- English: "Position Aircraft In Air" -->
-    <goto-airport>Choisir un aéroport depuis la liste</goto-airport>   <!-- English: "Select Airport From List" -->
+    <goto-airport>Choisir un aéroport</goto-airport>   <!-- English: "Select Airport From List" -->
     <random-attitude>Attitude aléatoire</random-attitude>   <!-- English: "Random Attitude" -->
     <tower-position>Position de la tour</tower-position>   <!-- English: "Tower Position" -->
 
@@ -60,7 +61,8 @@
     <!-- Environment menu -->
     <environment>Environnement</environment>   <!-- English: "Environment" -->
     <global-weather>Météo</global-weather>   <!-- English: "Weather" -->
-    <time-settings>Paramètres du temps</time-settings>   <!-- English: "Time Settings" -->
+    <environment-settings>Paramètres environnementaux</environment-settings>   <!-- English: "Environment Settings" -->
+    <time-settings>Paramètres horaires</time-settings>   <!-- English: "Time Settings" -->
     <wildfire-settings>Paramètres de feu de forêt</wildfire-settings>   <!-- English: "Wildfire Settings" -->
     <terrasync>Téléchargement de scènes</terrasync>   <!-- English: "Scenery Download" -->
 
@@ -98,13 +100,15 @@
     <debug>Débogage</debug>   <!-- English: "Debug" -->
     <!-- Note: Debug menu items may not need to be translated
          since these options are not useful to end users anyway. -->
-    <reload-gui>Rafraîchir l'interface graphique</reload-gui>   <!-- English: "Reload GUI" -->
+    <reload-gui>Relancer l'interface graphique</reload-gui>   <!-- English: "Reload GUI" -->
     <reload-input>Relancer les interfaces d'entrée</reload-input>   <!-- English: "Reload Input" -->
     <reload-hud>Relancer le HUD</reload-hud>   <!-- English: "Reload HUD" -->
     <reload-panel>Relancer le panneau</reload-panel>   <!-- English: "Reload Panel" -->
     <reload-autopilot>Relancer le pilote automatique</reload-autopilot>   <!-- English: "Reload Autopilot" -->
     <reload-network>Relancer le réseau</reload-network>   <!-- English: "Reload Network" -->
     <reload-model>Relancer le modèle d'aéronef</reload-model>   <!-- English: "Reload Aircraft Model" -->
+    <reload-materials>Recharger les matériaux</reload-materials>   <!-- English: "Reload Materials" -->
+    <reload-scenery>Recharger les scènes</reload-scenery>   <!-- English: "Reload Scenery" -->
     <nasal-console>Console Nasal</nasal-console>   <!-- English: "Nasal Console" -->
     <development-keys>Touches de développement</development-keys>   <!-- English: "Development Keys" -->
     <configure-dev-extension>Configurer les extensions de développement</configure-dev-extension>   <!-- English: "Configure Development Extensions" -->
@@ -123,11 +127,21 @@
     <!-- Help menu -->
     <help>Aide</help>   <!-- English: "Help" -->
     <help-browser>Aide (s'ouvre dans le navigateur)</help-browser>   <!-- English: "Help  (opens in browser)" -->
+    <doc-browser>Naviguer dans la documentation</doc-browser>   <!-- English: "Documentation Browser" -->
     <aircraft-keys>Aide de l'aéronef</aircraft-keys>   <!-- English: "Aircraft Help" -->
     <common-keys>Touches communes aux aéronefs</common-keys>   <!-- English: "Common Aircraft Keys" -->
     <basic-keys>Touches de base du simulateur</basic-keys>   <!-- English: "Basic Simulator Keys" -->
+    <joystick-config>Configuration du joystick</joystick-config>   <!-- English: "Joystick Configuration" -->
     <joystick-info>Informations sur le joystick</joystick-info>   <!-- English: "Joystick Information" -->
     <tutorial-start>Tutoriels</tutorial-start>   <!-- English: "Tutorials" -->
     <menu-about>A propos de FlightGear</menu-about>   <!-- English: "About" -->
+
+    <!-- Aircraft menu (seules les entrées fréquentes/communes des menus sont prises en charge) -->
+    <select-livery>Choisir une livrée</select-livery>   <!-- English: "Select livery" -->
+    <show-hide-yokes>Afficher/masquer le manche</show-hide-yokes>   <!-- English: "Select livery" -->
+    <immatriculation>Immatriculation</immatriculation>   <!-- English: "Immatriculation" -->
+    <pushback>Repoussage</pushback>   <!-- English: "Pushback" -->
+    <autostart>Démarrage automatique</autostart>   <!-- English: "Démarrage automatique" -->
+    <tiller-steering>Manoeuvrer la roulette</tiller-steering>   <!-- English: "Tiller Steering" -->
 
 </PropertyList>

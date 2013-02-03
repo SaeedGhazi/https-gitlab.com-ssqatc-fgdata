@@ -2,7 +2,7 @@
 ##
 ##  A message based information broadcast for the multiplayer network.
 ##
-##  Copyright (C) 2008 - 2011  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2008 - 2013  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
@@ -116,19 +116,22 @@ BroadcastChannel.new = func (mpp_path, process,
               on_disconnect : (on_disconnect != nil) ? on_disconnect
                                                      : func (p) { return; },
               # Internal state.
+              started      : 0,    # External state: started/stopped.
+              running      : 0,    # Internal state: running or not.
               send_buf     : [],
               peers        : {},
               loopid       : 0,
-              running      : 0,
-              PERIOD       : 1.3,
               last_time    : 0.0,  # For join handling.
-              last_send    : 0.0,  # For the send queue 
-              SEND_TIME    : 0.5 };
+              last_send    : 0.0   # For the send queue 
+            };
   if (enable_send and (obj.send_node == nil)) {
     printlog("warn",
              "BroadcastChannel invalid send node.");
     return nil;
   }
+  setlistener(obj.ONLINE_pp, func {
+    obj.set_state();
+  });
   obj.start();
 
   return obj;
@@ -148,26 +151,38 @@ BroadcastChannel.send = func (msg) {
 }
 BroadcastChannel.die = func {
   me.loopid += 1;
+  me.started = 0;
   me.running = 0;
-#  print("BroadcastChannel[" ~ me.mpp_path ~ "] ...  destroyed.");
+  #print("BroadcastChannel[" ~ me.mpp_path ~ "] ...  destroyed.");
 }
 BroadcastChannel.start = func {
-  if (!getprop("/sim/multiplay/online")) {
-    me.stop();
-  } else {
-    #print("mp_broadcast.nas: starting channel " ~ me.send_node.getPath() ~ ".");
-    me.running = 1;
-    me._loop_(me.loopid += 1);
-  }
+  #print("mp_broadcast.nas: starting channel " ~ me.mpp_path ~ ".");
+  me.started = 1;
+  me.set_state();
 }
 BroadcastChannel.stop = func {
-  #print("mp_broadcast.nas: stopping channel " ~ me.send_node.getPath() ~ ".");
-  me.running = 0;
-  me.loopid += 1;
+  #print("mp_broadcast.nas: stopping channel " ~ me.mpp_path ~ ".");
+  me.started = 0;
+  me.set_state();
 }
 
 ############################################################
 # Internals.
+BroadcastChannel.ONLINE_pp = "/sim/multiplay/online";
+BroadcastChannel.PERIOD    = 1.3; 
+BroadcastChannel.SEND_TIME = 0.6;
+BroadcastChannel.set_state = func {
+  if (me.started and getprop(me.ONLINE_pp)) {
+    if (me.running) return;
+    #print("mp_broadcast.nas: activating channel " ~ me.mpp_path ~ ".");
+    me.running = 1;
+    me._loop_(me.loopid += 1);
+  } else {
+    #print("mp_broadcast.nas: deactivating channel " ~ me.mpp_path ~ ".");
+    me.running = 0;
+    me.loopid += 1;
+  }
+}
 BroadcastChannel.update = func {
   var t = getprop("/sim/time/elapsed-sec");
   var process_msg = me.process_msg;
@@ -220,7 +235,7 @@ BroadcastChannel._loop_ = func (id) {
   me.running or return;
   id == me.loopid or return;
 
-  #print("mp_broadcast.nas: " ~ me.send_node.getPath() ~ ":" ~ id ~ ".");
+  #print("mp_broadcast.nas: " ~ me.mpp_path ~ ":" ~ id ~ ".");
   me.update();
   settimer(func { me._loop_(id); }, 0, 1);
 }

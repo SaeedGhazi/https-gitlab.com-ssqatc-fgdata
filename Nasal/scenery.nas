@@ -2,7 +2,7 @@
 ##
 ##  Support tools for multiplayer enabled scenery objects.
 ##
-##  Copyright (C) 2011  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2011 - 2013  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
@@ -65,20 +65,26 @@ var sharedDoor = {
 # Internals
 var shared_pp = "scenery/share-events";
 
-_setlistener("sim/signals/nasal-dir-initialized", func {
-    events = mp_broadcast.EventChannel.new("scenery/events");
-    if (!getprop("/sim/multiplay/online") or !getprop(shared_pp)) {
+var _set_state = func {
+    if (getprop("/sim/signals/reinit")) return; # Ignore resets.
+    if (getprop(shared_pp)) {
+        #print("scenery.nas: starting event sharing.");
+        events.start();
+    } else {
         #print("scenery.nas: stopping event sharing.");
         events.stop();
     }
-    setlistener(shared_pp, func (n) {
-        if (getprop("/sim/signals/reinit")) return; # Ignore resets.
-        if (n.getValue() and getprop("/sim/multiplay/online")) {
-            #print("scenery.nas: starting event sharing.");
-            events.start();
-        } else {
-            #print("scenery.nas: stopping event sharing.");
-            events.stop();
-        }
-    });
+
+}
+
+_setlistener("sim/signals/nasal-dir-initialized", func {
+    events = mp_broadcast.EventChannel.new("scenery/events");
+    if (getprop(shared_pp)) {
+        #print("scenery.nas: starting event sharing.");
+        events.start();
+    } else {
+        #print("scenery.nas: stopping event sharing.");
+        events.stop();
+    }
+    setlistener(shared_pp, _set_state);
 });

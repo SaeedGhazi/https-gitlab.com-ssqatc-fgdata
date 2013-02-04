@@ -373,20 +373,17 @@ var Jetway =
   var model_file = "";
   var model_dir = "";
   var airline_file = "";
-  if (props.globals.getNode("/sim/paths/use-custom-scenery-data", 1).getBoolValue())
+  # search in scenery directories
+  foreach (var scenery_path; scenery)
    {
-   # search in scenery directories
-   foreach (var scenery_path; scenery)
-    {
-    model_dir = scenery_path ~ "/Models/Airport/Jetway";
-    model_file = model_dir ~ "/" ~ model ~ ".xml";
-    airline_file = model_dir ~ "/" ~ model ~ ".airline." ~ airline ~ ".xml";
-    print_debug("Trying to load a jetway model from " ~ model_file);
-    if (io.stat(model_file) == nil) continue;
-    model_tree = io.read_properties(model_file);
-    if (io.stat(airline_file) != nil) props.copy(io.read_properties(airline_file), model_tree);
-    break;
-    }
+   model_dir = scenery_path ~ "/Models/Airport/Jetway";
+   model_file = model_dir ~ "/" ~ model ~ ".xml";
+   airline_file = model_dir ~ "/" ~ model ~ ".airline." ~ airline ~ ".xml";
+   print_debug("Trying to load a jetway model from " ~ model_file);
+   if (io.stat(model_file) == nil) continue;
+   model_tree = io.read_properties(model_file);
+   if (io.stat(airline_file) != nil) props.copy(io.read_properties(airline_file), model_tree);
+   break;
    }
   if (model_tree == nil)
    {
@@ -715,8 +712,12 @@ var toggle_jetway_from_model = func(model)
 var load_airport_jetways = func(airport)
  {
  if (isin(loaded_airports, airport)) return;
- var tree = props.globals.getNode("/sim/paths/use-custom-scenery-data", 1).getBoolValue() ? io.read_airport_properties(airport, "jetways") : (io.stat(root ~ "/AI/Airports/" ~ airport ~ "/jetways.xml") == nil ? nil : io.read_properties(root ~ "/AI/Airports/" ~ airport ~ "/jetways.xml"));
- if (tree == nil) return;
+ var tree = io.read_airport_properties(airport, "jetways");
+ if (tree == nil)
+  {
+  tree = io.read_properties(root ~ "/AI/Airports/" ~ airport ~ "/jetways.xml");
+  if (tree == nil) return;
+  }
  append(loaded_airports, airport);
  print_debug("Loading jetways for airport " ~ airport);
  var nodes = tree.getChildren("jetway");

@@ -129,10 +129,10 @@ void sumWaves(float angle, float dangle, float windScale, float factor, out floa
 	ddx = deriv * wave0.dir.x;
 	ddy = deriv * wave0.dir.y;
 
-	P.y += evaluateWave(wave1, P.xz, osg_SimulationTime);
-	deriv = evaluateWaveDeriv(wave1, P.xz, osg_SimulationTime);
-	ddx += deriv * wave1.dir.x;
-	ddy += deriv * wave1.dir.y;
+	//P.y += evaluateWave(wave1, P.xz, osg_SimulationTime);
+	//deriv = evaluateWaveDeriv(wave1, P.xz, osg_SimulationTime);
+	//ddx += deriv * wave1.dir.x;
+	//ddy += deriv * wave1.dir.y;
 
 	P.y += evaluateWaveSharp(wave2, P.xz, osg_SimulationTime, WaveSharp);
 	deriv = evaluateWaveDerivSharp(wave2, P.xz, osg_SimulationTime, WaveSharp);
@@ -272,10 +272,9 @@ void main(void)
 	sumWaves(WaveAngle, 1.5, windScale, WaveFactor, ddx1, ddy1);
 
 	//reset the waves
-	/*
 	angle = 0.0;
 	float waveamp = WaveAmp * 0.75;
-	
+
 	wave0.freq = WaveFreq ;
 	wave0.amp = waveamp;
 	wave0.dir =  vec2 (0.0, 1.0); //vec2(cos(radians(angle)), sin(radians(angle)));
@@ -296,11 +295,11 @@ void main(void)
 	wave3.dir =  vec2(0.866025, -0.5); //vec2(cos(radians(angle)), sin(radians(angle)));
 
 	ddx2 = 0.0, ddy2 = 0.0;
-	sumWaves(WaveAngle + WaveDAngle, -1.5, windScale, WaveFactor, ddx2, ddy2);
+	//sumWaves(WaveAngle + WaveDAngle, -1.5, windScale, WaveFactor, ddx2, ddy2);
 	
 	ddx3 = 0.0, ddy3 = 0.0;
-	sumWaves(WaveAngle + WaveDAngle, 1.5, windScale, WaveFactor, ddx3, ddy3);
-	*/	
+	//sumWaves(WaveAngle + WaveDAngle, 1.5, windScale, WaveFactor, ddx3, ddy3);
+		
 	}
 	// end sine stuff
 
@@ -318,8 +317,8 @@ void main(void)
 	vec4 nmap   = texture2D(water_normalmap, vec2(waterTex1 + disdis * sca2) * windScale) * 2.0 - 1.0;
 	vec4 nmap1  = texture2D(perlin_normalmap, vec2(waterTex1 + disdis * sca2) * windScale) * 2.0 - 1.0;
 
-	//rotationmatrix(radians(3.0 * sin(osg_SimulationTime * 0.0075)), RotationMatrix);
-	//nmap  += texture2D(water_normalmap, vec2(waterTex2 * RotationMatrix * tscale) * windScale) * 2.0 - 1.0;
+	rotationmatrix(radians(3.0 * sin(osg_SimulationTime * 0.0075)), RotationMatrix);
+	nmap  += texture2D(water_normalmap, vec2(waterTex2 * RotationMatrix * tscale) * windScale) * 2.0 - 1.0;
 	//nmap1 += texture2D(perlin_normalmap, vec2(waterTex2 * RotationMatrix * tscale) * windScale) * 2.0 - 1.0;
 
 	nmap  *= windEffect_low;

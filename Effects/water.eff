@@ -513,7 +513,8 @@
 	</technique>
 
 
-	<technique n="2">
+
+<technique n="2">
 		<predicate>
 			<and>
 				<property>/sim/rendering/shaders/skydome</property>
@@ -843,7 +844,7 @@
 					<use>eye_alt</use>
 				</value>
 			</uniform>
-			<uniform>
+ 			<uniform>
         			<name>cloud_self_shading</name>
         			<type>float</type>
         			<value><use>cloud_self_shading</use></value>
@@ -873,6 +874,9 @@
 			<!-- END fog include -->
 		</pass>
 	</technique>
+	
+
+
 
    <technique n="6">
        <predicate>

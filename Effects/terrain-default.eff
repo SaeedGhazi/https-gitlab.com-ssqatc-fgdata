@@ -242,12 +242,12 @@
         <type>float</type>
         <value><use>intrinsic_wetness</use></value>
       </uniform>
-	  <uniform>
+      <uniform>
         <name>transition_model</name>
         <type>float</type>
         <value><use>transition_model</use></value>
       </uniform>
-	  <uniform>
+      <uniform>
         <name>hires_overlay_bias</name>
         <type>float</type>
         <value><use>hires_overlay_bias</use></value>
@@ -585,6 +585,16 @@
         <name>eye_alt</name>
         <type>float</type>
         <value><use>eye_alt</use></value>
+      </uniform>
+      <uniform>
+        <name>transition_model</name>
+        <type>float</type>
+        <value><use>transition_model</use></value>
+      </uniform>
+      <uniform>
+        <name>hires_overlay_bias</name>
+        <type>float</type>
+        <value><use>hires_overlay_bias</use></value>
       </uniform>
       <uniform>
         <name>snowlevel</name>

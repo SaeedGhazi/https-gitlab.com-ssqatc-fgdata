@@ -36,6 +36,8 @@ uniform float wetness;
 uniform float fogstructure;
 uniform float snow_thickness_factor;
 uniform float cloud_self_shading;
+uniform float transition_model;
+uniform float hires_overlay_bias;
 uniform int quality_level;
 uniform int tquality_level;
 
@@ -265,15 +267,17 @@ float mix_factor;
 if (tquality_level > 2)
    {
    // first the second texture overlay
+   // transition model 0: random patch overlay without any gradient information
+   // transition model 1: only gradient-driven transitions, no randomness
    
    
    if (mix_flag == 1)
 	{
 	nSum =  0.18 * (2.0 * noise_2000m + 2.0 * noise_1500m + noise_500m);
-        nSum = nSum + 0.4 * (1.0 -smoothstep(0.9,0.95, abs(steepness)));
+	nSum = mix(nSum, 0.5, max(0.0, 2.0 * (transition_model - 0.5)));
+	nSum = nSum + 0.4 * (1.0 -smoothstep(0.9,0.95, abs(steepness)+ 0.05 * (noise_50m - 0.5))) * min(1.0, 2.0 * transition_model);
 	mix_factor = smoothstep(0.5, 0.54, nSum);
-        texel = mix(texel, mix_texel, mix_factor);
-
+    texel = mix(texel, mix_texel, mix_factor);
 	}
    
    // then the detail texture overlay	
@@ -290,7 +294,7 @@ if (tquality_level > 3)
 		dist_fact =  0.1 * smoothstep(15000.0,40000.0, dist) - 0.03 * (1.0 - smoothstep(500.0,5000.0, dist));
 		nSum = ((1.0 -noise_2000m) + noise_1500m + 2.0 * noise_250m  +noise_50m)/5.0;
         	nSum = nSum - 0.08 * (1.0 -smoothstep(0.9,0.95, abs(steepness)));		
-		mix_factor = smoothstep(0.47, 0.54, nSum - dist_fact);
+		mix_factor = smoothstep(0.47, 0.54, nSum +hires_overlay_bias - dist_fact);
 		if (mix_factor > 0.8) {mix_factor = 0.8;}
 		texel =  mix(texel, detail_texel,mix_factor);				
 		}

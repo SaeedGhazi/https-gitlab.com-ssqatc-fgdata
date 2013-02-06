@@ -240,6 +240,12 @@ void main(void)
 	// sine waves
 	float ddx, ddx1, ddx2, ddx3, ddy, ddy1, ddy2, ddy3;
 	float angle;
+
+	ddx = 0.0, ddy = 0.0;
+	ddx1 = 0.0, ddy1 = 0.0;
+	ddx2 = 0.0, ddy2 = 0.0;
+	ddx3 = 0.0, ddy3 = 0.0;
+
 	if (detail_flag == 1)
 	{
 	angle = 0.0;
@@ -265,10 +271,8 @@ void main(void)
 
 	// sum waves
 
-	ddx = 0.0, ddy = 0.0;
+	
 	sumWaves(WaveAngle, -1.5, windScale, WaveFactor, ddx, ddy);
-
-	ddx1 = 0.0, ddy1 = 0.0;
 	sumWaves(WaveAngle, 1.5, windScale, WaveFactor, ddx1, ddy1);
 
 	//reset the waves
@@ -294,10 +298,8 @@ void main(void)
 	wave3.amp = waveamp * 0.75;
 	wave3.dir =  vec2(0.866025, -0.5); //vec2(cos(radians(angle)), sin(radians(angle)));
 
-	ddx2 = 0.0, ddy2 = 0.0;
+
 	sumWaves(WaveAngle + WaveDAngle, -1.5, windScale, WaveFactor, ddx2, ddy2);
-	
-	ddx3 = 0.0, ddy3 = 0.0;
 	sumWaves(WaveAngle + WaveDAngle, 1.5, windScale, WaveFactor, ddx3, ddy3);
 		
 	}
@@ -307,9 +309,7 @@ void main(void)
 	//cover = 5.0 * ground_scattering;
 
 	vec4 viewt = normalize(waterTex4);
-
 	vec4 disdis = texture2D(water_dudvmap, vec2(waterTex2 * tscale)* windScale) * 2.0 - 1.0;
-
 	vec4 vNorm;	
 
 	
@@ -326,7 +326,7 @@ void main(void)
 
 	// mix water and noise, modulated by factor
 	vNorm = normalize(mix(nmap, nmap1, mixFactor) * waveRoughness);
-	if (detail_flag == 1)	{vNorm.r += ddx + ddx1 + ddx2 + ddx3;}
+	vNorm.r += ddx + ddx1 + ddx2 + ddx3;
 
 	
    	if (normalmap_dds > 0)
@@ -418,13 +418,13 @@ void main(void)
 	finalColor = refl + specular * smoothstep(0.3, 0.6, ground_scattering);
 
 	//add foam
-
+	vec4 foam_texel = texture2D(sea_foam, vec2(waterTex2 * tscale) * 25.0);
 	if (dist < 10000.0)
 	{
 	float foamSlope = 0.10 + 0.1 * windScale;
 
 
-	vec4 foam_texel = texture2D(sea_foam, vec2(waterTex2 * tscale) * 25.0);
+
 	float waveSlope = N.g;
 
 	if (windEffect >= 8.0)

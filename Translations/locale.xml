@@ -152,14 +152,18 @@
 		<lang type="string">no_NO</lang>
 		<strings></strings>
 	</locale>
-
+-->
 	<locale>
 		<lang type="string">pt</lang>
 		<lang type="string">pt_BR</lang>
 		<lang type="string">pt_PT</lang>
-		<strings></strings>
+		<strings>
+			<options>Translations/pt/options.xml</options>
+			<menu>Translations/pt/menu.xml</menu>
+			<sys>Translations/pt/sys.xml</sys>
+		</strings>
 	</locale>
-
+    <!--
 	<locale>
 		<lang type="string">ru</lang>
 		<strings></strings>

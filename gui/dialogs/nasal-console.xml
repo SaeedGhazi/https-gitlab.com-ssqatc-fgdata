@@ -58,6 +58,15 @@
 		</binding>
 	</textbox>
 
+	<loglist>
+		<halign>fill</halign>
+		<valign>fill</valign>
+		<stretch>true</stretch>
+		<pref-width>450</pref-width>
+		<pref-height>200</pref-height>
+		<padding>6</padding>
+	</loglist>
+    
 	<group>
 		<layout>hbox</layout>
 		<halign>fill</halign>

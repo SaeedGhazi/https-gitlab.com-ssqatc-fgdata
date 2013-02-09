@@ -481,8 +481,7 @@ var Text = {
   # Set the text
   setText: func(text)
   {
-    # add space because osg seems to remove last character if its a space
-    me.set("text", typeof(text) == 'scalar' ? text ~ ' ' : "");
+    me.set("text", typeof(text) == 'scalar' ? text : "");
   },
   # Set alignment
   #

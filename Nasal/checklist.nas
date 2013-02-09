@@ -3,10 +3,13 @@
 # Convert checklists into full tutorials.
 var convert_checklists = func {
 
-  var checklists = props.globals.getNode("/sim/checklists").getChildren("checklist");
-  var tutorials = props.globals.getNode("/sim/tutorials");
+  if ((props.globals.getNode("/sim/checklists") != nil)                            and 
+      (props.globals.getNode("/sim/checklists").getChildren("checklist") != nil)   and
+      (size(props.globals.getNode("/sim/checklists").getChildren("checklist")) > 0)    )
+  {
+    var checklists = props.globals.getNode("/sim/checklists").getChildren("checklist");
+    var tutorials = props.globals.getNode("/sim/tutorials", 1);
 
-  if (size(checklists)) {
     foreach (var ch; checklists) {
       var name = ch.getNode("title", 1).getValue();
       var tutorial = tutorials.getNode("tutorial[" ~ size(tutorials.getChildren("tutorial")) ~ "]", 1);

@@ -173,10 +173,51 @@
   <hrule/>
 
   <group>
+    <layout>hbox</layout>
+    <halign>left</halign>
+    <default-padding>2</default-padding>
+        
+    <button>
+      <legend>Information</legend>
+      <binding>
+        <command>property-assign</command>
+        <property>/sim/gui/dialogs/terrasync/display-mode</property>
+        <value>0</value>
+      </binding>
+    </button>
+            
+    <button>
+      <legend>Log</legend>
+      <binding>
+        <command>property-assign</command>
+        <property>/sim/gui/dialogs/terrasync/display-mode</property>
+        <value>1</value>
+      </binding>
+    </button>
+  </group>            
+    
+  <!-- 'tabbed' group controlled by display-mode property -->
+  <group>  
+      <layout>table</layout>
+      <halign>fill</halign>
+      <valign>fill</valign>
+      <default-padding>0</default-padding>
+      
+  <group>
     <layout>table</layout>
     <halign>left</halign>
+    <valign>top</valign>
     <equal>false</equal>
 
+    <row>0</row>
+    <col>0</col>
+    <visible>
+      <equals>
+        <property>/sim/gui/dialogs/terrasync/display-mode</property>
+        <value>0</value>
+      </equals>
+    </visible>
+    
     <text>
       <row>0</row>
       <col>1</col>
@@ -386,6 +427,29 @@
       </color>
     </text>
   </group>
+
+    <loglist>
+        <row>0</row>
+        <col>0</col>
+        
+        <visible>
+          <equals>
+            <property>/sim/gui/dialogs/terrasync/display-mode</property>
+            <value>1</value>
+          </equals>
+        </visible>
+    
+    
+    	<halign>fill</halign>
+    	<valign>fill</valign>
+    	<stretch>true</stretch>
+    	<pref-height>200</pref-height>
+        <pref-height>600</pref-height>
+        <logclass>terrasync</logclass>
+    	<padding>6</padding>
+    </loglist>
+    
+    </group> <!-- end of tabbed group -->
 
   <hrule/>
 

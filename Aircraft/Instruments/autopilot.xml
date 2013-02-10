@@ -54,7 +54,10 @@ properties' values.
    <type>switch</type>
    <layer>
     <condition>
-     <property>/autopilot/locks/wing-leveler</property>
+     <equals>
+      <property>/autopilot/locks/heading</property>
+      <value>wing-leveler</value>
+     </equals>
     </condition>
     <name>WL on</name>
     <texture>
@@ -128,7 +131,10 @@ properties' values.
    <type>switch</type>
    <layer>
     <condition>
-     <property>/autopilot/locks/heading</property>
+     <equals>
+      <property>/autopilot/locks/heading</property>
+      <value>dg-heading-hold</value>
+     </equals>
     </condition>
     <name>HDG on</name>
     <texture>
@@ -202,7 +208,10 @@ properties' values.
    <type>switch</type>
    <layer>
     <condition>
-     <property>/autopilot/locks/nav[0]</property>
+     <equals>
+      <property>/autopilot/locks/heading</property>
+      <value>nav1-hold</value>
+     </equals>
     </condition>
     <name>NAV on</name>
     <texture>
@@ -276,7 +285,10 @@ properties' values.
    <type>switch</type>
    <layer>
     <condition>
-     <property>/autopilot/locks/glide-slope[0]</property>
+     <equals>
+      <property>/autopilot/locks/altitude</property>
+      <value>gs1-hold</value>
+     </equals>
     </condition>
     <name>APR on</name>
     <texture>
@@ -350,7 +362,10 @@ properties' values.
    <type>switch</type>
    <layer>
     <condition>
-     <property>/autopilot/locks/altitude</property>
+     <equals>
+      <property>/autopilot/locks/altitude</property>
+      <value>altitude-hold</value>
+     </equals>
     </condition>
     <name>ALT on</name>
     <texture>
@@ -450,7 +465,7 @@ properties' values.
    <chunks>
     <chunk>
      <type>number-value</type>
-     <property>/autopilot/settings/altitude-ft</property>
+     <property>/autopilot/settings/target-altitude-ft</property>
      <format>%05.0f</format>
     </chunk>
    </chunks>
@@ -478,8 +493,15 @@ properties' values.
    <w>32</w>
    <h>16</h>
    <binding>
-    <command>property-toggle</command>
-    <property>/autopilot/locks/wing-leveler</property>
+    <command>nasal</command>
+    <script>
+     node = props.globals.getNode("/autopilot/locks/heading", 1);
+     if ( node.getValue() == "wing-leveler" ) {
+      node.setValue( "" );
+     } else {
+      node.setValue( "wing-leveler" );
+     }
+    </script>
    </binding>
   </action>
 
@@ -491,8 +513,15 @@ properties' values.
    <w>32</w>
    <h>16</h>
    <binding>
-    <command>property-toggle</command>
-    <property>/autopilot/locks/heading</property>
+    <command>nasal</command>
+    <script>
+     node = props.globals.getNode("/autopilot/locks/heading", 1);
+     if ( node.getValue() == "dg-heading-hold" ) {
+      node.setValue( "" );
+     } else {
+      node.setValue( "dg-heading-hold" );
+     }
+    </script>
    </binding>
   </action>
 
@@ -504,8 +533,15 @@ properties' values.
    <w>32</w>
    <h>16</h>
    <binding>
-    <command>property-toggle</command>
-    <property>/autopilot/locks/nav[0]</property>
+    <command>nasal</command>
+    <script>
+     node = props.globals.getNode("/autopilot/locks/heading", 1);
+     if ( node.getValue() == "nav1-hold" ) {
+      node.setValue( "" );
+     } else {
+      node.setValue( "nav1-hold" );
+     }
+   </script>
    </binding>
   </action>
 
@@ -517,8 +553,15 @@ properties' values.
    <w>32</w>
    <h>16</h>
    <binding>
-    <command>property-toggle</command>
-    <property>/autopilot/locks/glide-slope[0]</property>
+    <command>nasal</command>
+    <script>
+     node = props.globals.getNode("/autopilot/locks/altitude", 1);
+     if ( node.getValue() == "gs1-hold" ) {
+      node.setValue( "" );
+     } else {
+      node.setValue( "gs1-hold" );
+     }
+    </script>
    </binding>
   </action>
 
@@ -530,8 +573,15 @@ properties' values.
    <w>32</w>
    <h>16</h>
    <binding>
-    <command>property-toggle</command>
-    <property>/autopilot/locks/altitude</property>
+    <command>nasal</command>
+    <script>
+     node = props.globals.getNode("/autopilot/locks/altitude", 1);
+     if ( node.getValue() == "altitude-hold" ) {
+      node.setValue( "" );
+     } else {
+      node.setValue( "altitude-hold" );
+     }
+    </script>
    </binding>
   </action>
 
@@ -544,7 +594,7 @@ properties' values.
    <h>16</h>
    <binding>
     <command>property-adjust</command>
-    <property>/autopilot/settings/altitude-ft</property>
+    <property>/autopilot/settings/target-altitude-ft</property>
     <step>-100</step>
     <min>0</min>
     <max>99900</max>
@@ -561,7 +611,7 @@ properties' values.
    <h>16</h>
    <binding>
     <command>property-adjust</command>
-    <property>/autopilot/settings/altitude-ft</property>
+    <property>/autopilot/settings/target-altitude-ft</property>
     <step>-1000</step>
     <min>0</min>
     <max>99900</max>
@@ -578,7 +628,7 @@ properties' values.
    <h>16</h>
    <binding>
     <command>property-adjust</command>
-    <property>/autopilot/settings/altitude-ft</property>
+    <property>/autopilot/settings/target-altitude-ft</property>
     <step>100</step>
     <min>0</min>
     <max>99900</max>
@@ -595,7 +645,7 @@ properties' values.
    <h>16</h>
    <binding>
     <command>property-adjust</command>
-    <property>/autopilot/settings/altitude-ft</property>
+    <property>/autopilot/settings/target-altitude-ft</property>
     <step>1000</step>
     <min>0</min>
     <max>99900</max>
@@ -606,5 +656,3 @@ properties' values.
  </actions>
 
 </PropertyList>
-
-

@@ -2090,7 +2090,7 @@ while (i < nc) {
 
 		if (detailed_terrain_interaction_flag == 1)
 				{
-				var p_lee_suppression = get_lee_bias(grad);
+				var p_lee_suppression = get_lee_bias(grad, tile_index);
 				if (rand() > p_lee_suppression) {continue;} 
 				}
 
@@ -2289,7 +2289,7 @@ while (i < nc) {
 
 	if (detailed_terrain_interaction_flag == 1)
 			{
-			var p_lee_suppression = get_lee_bias(grad);
+			var p_lee_suppression = get_lee_bias(grad, tile_index);
 				if (rand() > math.sqrt(p_lee_suppression)) {continue;} 
 			}
 		
@@ -3018,7 +3018,7 @@ else
 # suppression of placement in lee terrain
 ###########################################################
 
-var get_lee_bias = func (grad) {
+var get_lee_bias = func (grad, tile_index) {
 
 
 if ((local_weather.wind_model_flag == 1) or (local_weather.wind_model_flag == 3))
@@ -3703,6 +3703,8 @@ else if ((getprop("/environment/metar/valid") == 0) and (getprop(lw~"tmp/tile-ma
 
 # see if we need to create an aloft wind interpolation structure
 
+set_wind_model_flag();
+
 if ((wind_model_flag == 3) or ((wind_model_flag ==5) and (getprop(lwi~"ipoint-number") == 0))) 
 	{
 	if (metar_flag != 1)
@@ -4056,7 +4058,7 @@ setlistener(lw~"tmp/convective-status", func {var s = size(clouds_path); compat_
 setlistener(lw~"tmp/effect-thread-status", func {var s = size(effects_geo);  effect_placement_loop(s); });
 setlistener(lw~"tmp/presampling-status", func {manage_presampling(); });
 
-setlistener(lw~"config/wind-model", func {set_wind_model_flag();});
+# setlistener(lw~"config/wind-model", func {set_wind_model_flag();});
 setlistener(lw~"config/thermal-properties", func {set_texture_mix();});
 
 setlistener(lw~"config/clouds-in-dynamics-loop", func {weather_dynamics.max_clouds_in_loop = int(getprop(lw~"config/clouds-in-dynamics-loop"));});

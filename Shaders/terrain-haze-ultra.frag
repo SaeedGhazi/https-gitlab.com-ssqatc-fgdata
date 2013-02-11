@@ -44,7 +44,6 @@ uniform float wetness;
 uniform float fogstructure;
 uniform float snow_thickness_factor;
 uniform float cloud_self_shading;
-uniform float moonlight;
 uniform float season;
 uniform float windspeed;
 uniform float grain_strength;
@@ -276,7 +275,7 @@ float dotnoisegrad_10m;
 // get the texels
 
 
-    float local_autumn_factor = texel.a;
+
     float distortion_factor = 1.0;
     vec2 stprime;
     int flag = 1;
@@ -285,6 +284,7 @@ float dotnoisegrad_10m;
     float snow_alpha;
 
     texel = texture2D(texture, gl_TexCoord[0].st);
+    float local_autumn_factor = texel.a;
 	grain_texel = texture2D(grain_texture, gl_TexCoord[0].st * 25.0);
 	gradient_texel = texture2D(gradient_texture, gl_TexCoord[0].st * 4.0);
 

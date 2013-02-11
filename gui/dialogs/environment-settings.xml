@@ -288,6 +288,42 @@
       <col>3</col>
     </text>
 
+
+    <text>
+      <label>Season</label>
+      <halign>left</halign>
+      <row>7</row>
+      <col>0</col>
+    </text>
+    
+    <text>
+      <label>summer</label>
+      <halign>right</halign>
+      <row>7</row>
+      <col>1</col>
+    </text>
+        
+    <slider>
+      <name>season</name>
+      <row>7</row>
+      <col>2</col>
+      <min>0.0</min>
+      <max>2.0</max>
+      <live>true</live>
+      <property>/environment/season</property>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>season</object-name>
+      </binding>
+    </slider>
+
+    <text>
+      <label>late autumn</label>
+      <halign>left</halign>
+      <row>7</row>
+      <col>3</col>
+    </text>
+
   </group>
   
   <hrule/>

@@ -1483,7 +1483,7 @@
   <name>CropGrassCover</name>
   <name>CropGrass</name>
   <name>Grassland</name>
-  <texture>Terrain/cropgrass-hires.png</texture>
+  <texture>Terrain/cropgrass-hires-autumn.png</texture>
   <object-mask>Terrain/cropgrass-hires.mask.png</object-mask>
   <xsize>2000</xsize>
   <ysize>2000</ysize>
@@ -1549,7 +1549,7 @@
 <material include="Materials/regions/european.xml">
   <name>Town</name>
   <name>SubUrban</name>
-  <texture>Terrain/town-europe.png</texture>
+  <texture>Terrain/town-europe-autumn.png</texture>
   <object-mask>Terrain/town-europe.mask.png</object-mask>
   <xsize>1024</xsize>
   <ysize>1024</ysize>
@@ -1611,7 +1611,7 @@
   <name>MixedCropPastureCover</name>
   <name>MixedCrop</name>
   <name>ComplexCrop</name>
-  <texture>Terrain/irrcrop-europe.png</texture>
+  <texture>Terrain/irrcrop-europe-autumn.png</texture>
   <object-mask>Terrain/irrcrop-europe.mask.png</object-mask>
   <xsize>2000</xsize>
   <ysize>2000</ysize>
@@ -1929,7 +1929,7 @@
   <name>Scrub</name>
   <name>Sclerophyllous</name>
   <texture-set>
-   <texture>Terrain/shrub1.png</texture>
+   <texture>Terrain/shrub1-autumn.png</texture>
    <texture n="11">Terrain/grass_green_hires.png</texture>
    <texture n="12">Terrain/herbtundra_iceland.png</texture>
   </texture-set>
@@ -2072,7 +2072,7 @@
   <name>DeciduousForest</name>
   <name>Bog</name>
   <name>Heath</name>
-  <texture>Terrain/deciduous-hires.png</texture>
+  <texture>Terrain/deciduous-hires-autumn.png</texture>
   <xsize>2000</xsize>
   <ysize>2000</ysize>
   <light-coverage>10000000.0</light-coverage>
@@ -2099,7 +2099,7 @@
   <name>MixedForestCover</name>
   <name>MixedForest</name>
   <name>RainForest</name>
-  <texture>Terrain/mixedforest-hires.png</texture>
+  <texture>Terrain/mixedforest-hires-autumn.png</texture>
   <xsize>2000</xsize>
   <ysize>2000</ysize>
   <light-coverage>5000000.0</light-coverage>
@@ -2235,7 +2235,7 @@
   <name>Scrub</name>
   <name>Sclerophyllous</name>
   <texture-set>
-   <texture>Terrain/shrub1.png</texture>
+   <texture>Terrain/shrub1-autumn.png</texture>
    <texture n="11">Terrain/grass_hires.png</texture>
    <texture n="12">Terrain/dirtrock.png</texture>
    <texture n="12">Terrain/dirtrock.png</texture>
@@ -2534,7 +2534,7 @@
   <name>Cemetery</name>
   <effect>Effects/landmass-nowood</effect>
   <texture-set>
-   <texture>Terrain/tundra2.png</texture>
+   <texture>Terrain/tundra2-autumn.png</texture>
    <texture n="11">Terrain/grass_hires.png</texture>
    <texture n="12">Terrain/rock.png</texture>
   </texture-set>
@@ -2755,14 +2755,14 @@
   <effect>Effects/crop</effect>
   <name>DryCropPastureCover</name>
   <name>DryCrop</name>
-  <texture>Terrain/drycrop1.png</texture>
-  <texture>Terrain/drycrop2.png</texture>
+  <texture>Terrain/drycrop1-autumn.png</texture>
+  <!--<texture>Terrain/drycrop2.png</texture>
   <texture>Terrain/drycrop3.png</texture>
-  <texture>Terrain/drycrop4.png</texture>
+  <texture>Terrain/drycrop4.png</texture>-->
   <object-mask>Terrain/drycrop1.mask.png</object-mask>
   <object-mask>Terrain/drycrop2.mask.png</object-mask>
   <object-mask>Terrain/drycrop3.mask.png</object-mask>
-  <object-mask>Terrain/drycrop4.mask.png</object-mask>
+  <!--<object-mask>Terrain/drycrop4.mask.png</object-mask>-->
   <xsize>2000</xsize>
   <ysize>2000</ysize>
   <solid>1</solid>
@@ -2902,7 +2902,7 @@
   <name>CropWood</name>
   <name>AgroForest</name>
   <effect>Effects/landmass-nowood</effect>
-  <texture>Terrain/cropwood.png</texture>
+  <texture>Terrain/cropwood-autumn.png</texture>
 	<object-mask>Terrain/cropwood.mask.png</object-mask>
   <xsize>2000</xsize>
   <ysize>2000</ysize>

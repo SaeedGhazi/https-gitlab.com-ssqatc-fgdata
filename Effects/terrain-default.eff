@@ -367,7 +367,7 @@
         <type>float</type>
         <value><use>moonlight</use></value>
       </uniform>
-	  <uniform>
+      <uniform>
         <name>season</name>
         <type>float</type>
         <value><use>season</use></value>
@@ -635,6 +635,11 @@
         <name>moonlight</name>
         <type>float</type>
         <value><use>moonlight</use></value>
+      </uniform>
+      <uniform>
+        <name>season</name>
+        <type>float</type>
+        <value><use>season</use></value>
       </uniform>
       <uniform>
         <name>quality_level</name>

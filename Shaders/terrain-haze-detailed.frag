@@ -36,6 +36,7 @@ uniform float wetness;
 uniform float fogstructure;
 uniform float snow_thickness_factor;
 uniform float cloud_self_shading;
+uniform float season;
 uniform float transition_model;
 uniform float hires_overlay_bias;
 uniform int quality_level;
@@ -204,6 +205,7 @@ float noise_2000m = Noise2D(rawPos.xy, 2000.0);
 // get the texels
 
     texel = texture2D(texture, gl_TexCoord[0].st);
+    float local_autumn_factor = texel.a;
 
     float distortion_factor = 1.0;
     vec2 stprime;
@@ -277,7 +279,8 @@ if (tquality_level > 2)
 	nSum = mix(nSum, 0.5, max(0.0, 2.0 * (transition_model - 0.5)));
 	nSum = nSum + 0.4 * (1.0 -smoothstep(0.9,0.95, abs(steepness)+ 0.05 * (noise_50m - 0.5))) * min(1.0, 2.0 * transition_model);
 	mix_factor = smoothstep(0.5, 0.54, nSum);
-    texel = mix(texel, mix_texel, mix_factor);
+        texel = mix(texel, mix_texel, mix_factor);
+        local_autumn_factor = texel.a;
 	}
    
    // then the detail texture overlay	
@@ -296,10 +299,30 @@ if (tquality_level > 3)
         	nSum = nSum - 0.08 * (1.0 -smoothstep(0.9,0.95, abs(steepness)));		
 		mix_factor = smoothstep(0.47, 0.54, nSum +hires_overlay_bias - dist_fact);
 		if (mix_factor > 0.8) {mix_factor = 0.8;}
-		texel =  mix(texel, detail_texel,mix_factor);				
+		texel =  mix(texel, detail_texel,mix_factor);
+		local_autumn_factor = texel.a;				
 		}
 	}
    }
+
+
+
+// autumn colors
+
+float autumn_factor = season * 2.0 * (1.0 - local_autumn_factor) ;
+
+
+texel.r = min(1.0, (1.0 + 2.5 * autumn_factor) * texel.r);
+texel.g = texel.g;
+texel.b = max(0.0, (1.0 - 4.0 * autumn_factor) *  texel.b);
+
+
+if (local_autumn_factor < 1.0)
+	{
+	intensity = length(texel.rgb) * (1.0 - 0.5 * smoothstep(1.1,2.0,season));
+	texel.rgb = intensity * normalize(mix(texel.rgb, vec3(0.23,0.17,0.08), smoothstep(1.1,2.0, season)));
+	}
+
 
 
 const vec4 dust_color  = vec4 (0.76, 0.71, 0.56, 1.0);

@@ -2,7 +2,8 @@
 <!--
   Based on X52.xml and Aviator.xml
   Modified by Arvid Norlander; 2007-12-03
-
+  Modified by Keiran Smith <affix@affix.me>; 2012-10-10
+  
   This file is released under the GPL license version 2 or later.
 -->
 
@@ -58,6 +59,20 @@ Linux Axis Numbers (no idea about window/mac ones, and they are not same as plai
   8     Lower right hat vertical axis .................. (positive == down)
   9     Mouse Y (positive = up)     (Please don't use this, some of us want to map this to mouse in X)
   10    Mouse X (positive = right)  (Please don't use this, some of us want to map this to mouse in X)
+
+Mac Axis Numbers Added by Keiran "Affix" Smith <affix@affix.me> October 2012
+
+ 0  Aileron(Roll)
+ 1  Elevator(Pitch)
+ 2  Rudder
+ 3  Throttle
+ 4  Throttle Top Rotary Dial
+ 5  Throttle Bottom Rotary Dial
+ 6  Throttle Slider
+ 7  Stick Hat Switch (Bottom)
+ 8  Stick Hat Switch (Top)
+ 9  Mouse Y
+10  Mouse X
 
 Button Numbers (Probably identical b/w Linux/Windows/Mac):
  0  Trigger (half pressed)
@@ -130,7 +145,12 @@ $Id$
 		</script>
 	</nasal>
 
-	<axis n="0">
+	<axis>
+		<number>
+			<mac>0</mac>
+			<unix>0</unix>
+			<windows>0</windows>
+		</number>
 		<desc>Aileron</desc>
 		<binding>
 			<command>property-scale</command>
@@ -139,7 +159,12 @@ $Id$
 		</binding>
 	</axis>
 
-	<axis n="1">
+	<axis>
+		<number>
+			<mac>1</mac>
+			<unix>1</unix>
+			<windows>1</windows>
+		</number>
 		<desc>Elevator</desc>
 		<binding>
 			<command>property-scale</command>
@@ -149,8 +174,12 @@ $Id$
 		</binding>
 	</axis>
 
-	<!-- Axis 2 is assigned for Rudder on Mac OS X -->
-	<axis n="5">
+	<axis>
+		<number>
+			<mac>2</mac>
+			<unix>5</unix>
+			<windows>5</windows>
+		</number>
 		<desc>Rudder</desc>
 		<binding>
 			<command>property-scale</command>
@@ -159,7 +188,12 @@ $Id$
 	</axis>
 
 	<!-- Bottom stick hat -->
-	<axis n="7">
+	<axis>
+		<number>
+			<mac>7</mac>
+			<unix>7</unix>
+			<windows>7</windows>
+		</number>
 		<desc>View Direction; Shift: Increase/Decrease visibility</desc>
 		<low>
 			<repeatable>true</repeatable>
@@ -193,7 +227,12 @@ $Id$
 		</high>
 	</axis>
 
-	<axis n="8">
+	<axis>
+		<number>
+			<mac>8</mac>
+			<unix>8</unix>
+			<windows>8</windows>
+		</number>
 		<desc>View Elevation; Shift: Increase/Decrease field of view</desc>
 		<low>
 			<repeatable>true</repeatable>
@@ -227,7 +266,12 @@ $Id$
 		</high>
 	</axis>
 
-	<axis n="2">
+	<axis>
+		<number>
+			<mac>3</mac>
+			<unix>2</unix>
+			<windows>2</windows>
+		</number>
 		<desc>Throttle</desc>
 		<binding>
 			<command>nasal</command>
@@ -235,8 +279,13 @@ $Id$
 		</binding>
 	</axis>
 
-	<!-- Top Rotary dial on the throttle -->
-	<axis n="4">
+	<!-- Top Rotary dial on the throttle
+	<axis>
+		<number>
+			<mac>5</mac>
+			<unix>4</unix>
+			<windows>5</windows>
+		</number>
 		<desc>Mode1: Mixture; Mode2: Carb Heat</desc>
 		<binding>
 			<command>nasal</command>
@@ -251,10 +300,15 @@ $Id$
 				]]>
 			</script>
 		</binding>
-	</axis>
+	</axis> -->
 
 	<!-- Bottom Rotary dial on the throttle -->
-	<axis n="3">
+	<axis>
+		<number>
+			<mac>4</mac>
+			<unix>3</unix>
+			<windows>4</windows>
+		</number>
 		<desc>Mode1: Propeller Advance</desc>
 		<binding>
 			<command>nasal</command>
@@ -274,7 +328,12 @@ $Id$
 	</axis>
 
 	<!-- Throttle slider; Please add Unix/Windows axis number -->
-	<axis n="6">
+	<axis>
+		<number>
+			<mac>6</mac>
+			<unix>5</unix>
+			<windows>6</windows>
+		</number>
 		<desc>Boost Control</desc>
 		<binding>
 			<command>nasal</command>
@@ -315,7 +374,17 @@ $Id$
 			<desc>Toggle parking brake on or off</desc>
 			<binding>
 				<command>nasal</command>
-				<script>controls.applyParkingBrake(1)</script>
+				<script>
+					<![CDATA[
+						if (modifier.getValue()) {
+							var i = !getprop("/controls/engines/engine[0]/reverser");
+							props.setAll("/controls/engines/engine", "reverser", i);
+							gui.popupTip("ReverseThrust" ~ ["OFF", "ON"][i]);
+						} else {
+							controls.applyParkingBrake(1);
+						}
+					]]>
+				</script>
 			</binding>
 	</button>
 
@@ -381,8 +450,8 @@ $Id$
 		</binding>
 		<mod-up>
 			<binding>
-			<command>nasal</command>
-			<script>modifier.setBoolValue(0)</script>
+				<command>nasal</command>
+				<script>modifier.setBoolValue(0)</script>
 			</binding>
 		</mod-up>
 	</button>
@@ -466,18 +535,26 @@ $Id$
 
 	<!-- Slats control on the T3/T4 -->
 	<button n="10">
-		<desc>Increase slats</desc>
+		<desc>Flaps Up</desc>
 		<binding>
 			<command>nasal</command>
-			<script>controls.stepSlats(1)</script>
+			<script>
+				<![CDATA[
+					if(modifier.getValue()){
+						controls.flapsDown(0);
+					} else {
+						controls.flapsDown(-1);
+					}
+				]]>
+			</script>
 		</binding>
 	</button>
 
 	<button n="11">
-		<desc>Decrease slats</desc>
+		<desc>Flaps Down</desc>
 		<binding>
 			<command>nasal</command>
-			<script>controls.stepSlats(-1)</script>
+			<script>controls.flapsDown(1)</script>
 		</binding>
 	</button>
 

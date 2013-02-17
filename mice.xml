@@ -15,7 +15,7 @@ current mode for each mouse is held in the
 
  <mouse n="0">
 
-  <mode-count type="int">3</mode-count>
+  <mode-count type="int">4</mode-count>
   <mode archive="y" type="int">0</mode>
 
 
@@ -37,12 +37,15 @@ current mode for each mouse is held in the
 
    <button n="2">
     <binding>
+    <condition>
+      <property>/sim/mouse/right-button-mode-cycle-enabled</property>
+    </condition>
      <command>property-assign</command>
      <property>/devices/status/mice/mouse[0]/mode</property>
      <value type="int">1</value>
     </binding>
    </button>
-
+ 
   </mode>
 
   <mode n="1">
@@ -52,6 +55,9 @@ current mode for each mouse is held in the
 
    <button n="2">
     <binding>
+    <condition>
+      <property>/sim/mouse/right-button-mode-cycle-enabled</property>
+    </condition>
      <command>property-assign</command>
      <property>/devices/status/mice/mouse[0]/mode</property>
      <value type="int">2</value>
@@ -180,12 +186,15 @@ current mode for each mouse is held in the
    <!-- right button switches modes -->
    <button n="2">
     <binding>
+        <condition>
+          <property>/sim/mouse/right-button-mode-cycle-enabled</property>
+        </condition>
      <command>property-assign</command>
      <property>/devices/status/mice/mouse[0]/mode</property>
      <value type="int">0</value>
     </binding>
    </button>
-
+ 
    <!-- extra buttons control FoV -->
    <!-- these are often assigned to mouse-wheel motion in Linux -->
    <button n="3">
@@ -307,7 +316,45 @@ current mode for each mouse is held in the
 
   </mode>
 
- </mouse>
+  <!-- Mode 3: spring-loaded-view mode -->
+  <mode n="3">
+   <cursor>left-right</cursor>
+   <constrained type="bool">true</constrained>
+   <pass-through type="bool">false</pass-through>
+
+   <!-- Mouse left/right motion -->
+   <x-axis>
+
+    <!-- rotate the view left or right -->
+    <binding>
+     <command>property-adjust</command>
+     <property>/sim/current-view/heading-offset-deg</property>
+     <factor type="double">-360</factor>
+     <min type="double">0</min>
+     <max type="double">360</max>
+     <wrap type="bool">true</wrap>
+    </binding>
+
+   </x-axis>
+
+   <!-- Mouse up/down motion -->
+   <y-axis>
+
+    <!-- tilt the view up and down -->
+    <binding>
+     <command>property-adjust</command>
+     <property>/sim/current-view/pitch-offset-deg</property>
+     <factor type="double">-180</factor>
+     <min type="double">-90</min>
+     <max type="double">90</max>
+     <wrap type="bool">false</wrap>
+    </binding>
+
+   </y-axis>
+
+  </mode>
+    
+ </mouse> <!-- of mouse 0 -->
 
 </PropertyList>
 

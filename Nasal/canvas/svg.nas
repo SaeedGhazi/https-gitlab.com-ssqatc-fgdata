@@ -374,7 +374,6 @@ var parsesvg = func(group, path, options = nil)
     else if( name == "path" or name == "rect" )
     {
       pushElement('path', attr['id']);
-      var d = attr['d'];
 
       if( name == "rect" )
       {
@@ -382,11 +381,22 @@ var parsesvg = func(group, path, options = nil)
         var height = attr['height'];
         var x = attr['x'];
         var y = attr['y'];
+        var rx = attr['rx'];
+        var ry = attr['ry'];
 
-        d = sprintf("M%f,%f v%f h%f v%fz", x, y, height, width, -height);
+        if( ry == nil )
+          ry = rx;
+        else if( rx == nil )
+          rx = ry;
+
+        var cfg = {};
+        if( rx != nil )
+          cfg["border-radius"] = [rx, ry];
+
+        stack[-1].rect(x, y, width, height, cfg);
       }
-
-      parsePath(d);
+      else
+        parsePath(attr['d']);
 
       stack[-1].set('fill', style['fill']);
 

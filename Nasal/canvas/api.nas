@@ -326,76 +326,7 @@ var Group = {
   # @param cfg  Optional settings (eg. {"border-top-radius": 5})
   rect: func(x, y, w, h, cfg = nil)
   {
-    var opts = (cfg != nil) ? cfg : {};
-
-    # resolve border-[top-,bottom-][left-,right-]radius
-    var br = opts["border-radius"];
-    if( typeof(br) == 'scalar' )
-      br = [br, br];
-
-    var _parseRadius = func(id)
-    {
-      if( (var r = opts["border-" ~ id ~ "-radius"]) == nil )
-      {
-        # parse top, bottom, left, right separate if no value specified for
-        # single corner
-        foreach(var s; ["top", "bottom", "left", "right"])
-        {
-          if( id.starts_with(s ~ "-") )
-          {
-            r = opts["border-" ~ s ~ "-radius"];
-            break;
-          }
-        }
-      }
-
-      if( r == nil )
-        return br;
-      else if( typeof(r) == 'scalar' )
-        return [r, r];
-      else
-        return r;
-    };
-
-    var path = me.createChild("path");
-
-    # top-left
-    if( (var r = _parseRadius("top-left")) != nil )
-    {
-      path.moveTo(x, y + r[1])
-          .arcSmallCWTo(r[0], r[1], 0, x + r[0], y);
-    }
-    else
-      path.moveTo(x, y);
-
-    # top-right
-    if( (r = _parseRadius("top-right")) != nil )
-    {
-      path.horizTo(x + w - r[0])
-          .arcSmallCWTo(r[0], r[1], 0, x + w, y + r[1]);
-    }
-    else
-      path.horizTo(x + w);
-
-    # bottom-right
-    if( (r = _parseRadius("bottom-right")) != nil )
-    {
-      path.vertTo(y + h - r[1])
-          .arcSmallCWTo(r[0], r[1], 0, x + w - r[0], y + h);
-    }
-    else
-      path.vertTo(y + h);
-
-    # bottom-left
-    if( (r = _parseRadius("bottom-left")) != nil )
-    {
-      path.horizTo(x + r[0])
-          .arcSmallCWTo(r[0], r[1], 0, x, y + h - r[1]);
-    }
-    else
-      path.horizTo(x);
-
-    return path.close();
+    return me.createChild("path").rect(x, y, w, h, cfg);
   },
   # Get a vector of all child elements
   getChildren: func()
@@ -697,6 +628,85 @@ var Path = {
   arcLargeCW:   func me.addSegment(me.VG_LCWARC_TO_REL, arg),
   # Close the path (implicit lineTo to first point of path)
   close: func me.addSegment(me.VG_CLOSE_PATH),
+
+  # Add a (rounded) rectangle to the path
+  #
+  # @param x    Position of left border
+  # @param y    Position of top border
+  # @param w    Width
+  # @param h    Height
+  # @param cfg  Optional settings (eg. {"border-top-radius": 5})
+  rect: func(x, y, w, h, cfg = nil)
+  {
+    var opts = (cfg != nil) ? cfg : {};
+
+    # resolve border-[top-,bottom-][left-,right-]radius
+    var br = opts["border-radius"];
+    if( typeof(br) == 'scalar' )
+      br = [br, br];
+
+    var _parseRadius = func(id)
+    {
+      if( (var r = opts["border-" ~ id ~ "-radius"]) == nil )
+      {
+        # parse top, bottom, left, right separate if no value specified for
+        # single corner
+        foreach(var s; ["top", "bottom", "left", "right"])
+        {
+          if( id.starts_with(s ~ "-") )
+          {
+            r = opts["border-" ~ s ~ "-radius"];
+            break;
+          }
+        }
+      }
+
+      if( r == nil )
+        return br;
+      else if( typeof(r) == 'scalar' )
+        return [r, r];
+      else
+        return r;
+    };
+
+    # top-left
+    if( (var r = _parseRadius("top-left")) != nil )
+    {
+      me.moveTo(x, y + r[1])
+        .arcSmallCWTo(r[0], r[1], 0, x + r[0], y);
+    }
+    else
+      me.moveTo(x, y);
+
+    # top-right
+    if( (r = _parseRadius("top-right")) != nil )
+    {
+      me.horizTo(x + w - r[0])
+        .arcSmallCWTo(r[0], r[1], 0, x + w, y + r[1]);
+    }
+    else
+      me.horizTo(x + w);
+
+    # bottom-right
+    if( (r = _parseRadius("bottom-right")) != nil )
+    {
+      me.vertTo(y + h - r[1])
+        .arcSmallCWTo(r[0], r[1], 0, x + w - r[0], y + h);
+    }
+    else
+      me.vertTo(y + h);
+
+    # bottom-left
+    if( (r = _parseRadius("bottom-left")) != nil )
+    {
+      me.horizTo(x + r[0])
+        .arcSmallCWTo(r[0], r[1], 0, x, y + h - r[1]);
+    }
+    else
+      me.horizTo(x);
+
+    return me.close();
+  },
 
   setColor: func me.setStroke(_getColor(arg)),
   setColorFill: func me.setFill(_getColor(arg)),

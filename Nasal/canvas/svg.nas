@@ -70,13 +70,13 @@ var parsesvg = func(group, path, options = nil)
         break;
 
       var values = [];
-      end = start_args;
+      end = start_args + 1;
       while(1)
       {
-        var start_num = tf.find_first_not_of(",\t\n ", end + 1);
+        var start_num = tf.find_first_not_of(",\t\n ", end);
         if( start_num < 0 )
           break;
-        if( tf[start_num] == ')' )
+        if( tf[start_num] == `)` )
           break;
 
         end = tf.find_first_of("),\t\n ", start_num + 1);
@@ -84,9 +84,13 @@ var parsesvg = func(group, path, options = nil)
           break;
         append(values, substr(tf, start_num, end - start_num));
       }
+
+      if( end > 0 )
+        end += 1;
       
       var type = substr(tf, start_type, end_type - start_type);
 
+      # TODO should we warn if to much/wrong number of arguments given?
       if( type == "translate" )
         # translate(<tx> [<ty>]), which specifies a translation by tx and ty. If
         # <ty> is not provided, it is assumed to be zero.
@@ -94,6 +98,18 @@ var parsesvg = func(group, path, options = nil)
         (
           values[0],
           size(values) > 1 ? values[1] : 0,
+        );
+      else if( type == "scale" )
+        # scale(<sx> [<sy>]), which specifies a scale operation by sx and sy. If
+        # <sy> is not provided, it is assumed to be equal to <sx>.
+        stack[-1].createTransform().setScale(values);
+      else if( type == "rotate" )
+        # rotate(<rotate-angle> [<cx> <cy>]), which specifies a rotation by
+        # <rotate-angle> degrees about a given point.
+        stack[-1].createTransform().setRotation
+        (
+          values[0] * D2R, # internal functions use rad
+          size(values) > 1 ? values[1:] : nil
         );
       else if( type == "matrix" )
       {

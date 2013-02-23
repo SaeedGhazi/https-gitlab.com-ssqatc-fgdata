@@ -510,7 +510,13 @@ var parsesvg = func(group, path, options = nil)
              * 1.25 # TODO read correct line spacing
              * stack[-1].get("character-size", character_size);
 
-        pushElement('text', tspan.attr['id']);
+        # Use id of text element with single tspan child, fall back to id of
+        # tspan if text has no id.
+        var id = text.attr['id'];
+        if( id == nil or size(tspans) > 1 )
+          id = tspan.attr['id'];
+
+        pushElement('text', id);
         stack[-1].set("text", tspan.text);
 
         if( x != 0 or y != 0 )

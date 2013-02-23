@@ -7,10 +7,10 @@ var parsesvg = func(group, path, options = nil)
 {
   if( !isa(group, Group) )
     die("Invalid argument group (type != Group)");
-  
+
   if( options == nil )
     options = {};
-  
+
   if( typeof(options) != "hash" )
     die("Options need to be of type hash!");
 
@@ -23,7 +23,7 @@ var parsesvg = func(group, path, options = nil)
       if( font != nil )
         return font;
     }
-      
+
     return "LiberationFonts/LiberationMono-Bold.ttf";
   };
 
@@ -31,10 +31,13 @@ var parsesvg = func(group, path, options = nil)
   var skip  = 0;
   var stack = [group];
   var close_stack = []; # helper for check tag closing
-  
+
+  var text = nil;
+  var tspans = nil;
+
   # lookup table for element ids (for <use> element)
   var id_dict = {};
-  
+
   # ----------------------------------------------------------------------------
   # Create a new child an push it onto the stack
   var pushElement = func(type, id = nil)
@@ -44,8 +47,16 @@ var parsesvg = func(group, path, options = nil)
 
     if( typeof(id) == 'scalar' and size(id) )
       id_dict[ id ] = stack[-1];
-  };
-  
+  }
+
+  # ----------------------------------------------------------------------------
+  # Remove the topmost element from the stack
+  var popElement = func
+  {
+    pop(stack);
+    pop(close_stack);
+  }
+
   # ----------------------------------------------------------------------------
   # Parse a transformation (matrix)
   # http://www.w3.org/TR/SVG/coords.html#TransformAttribute
@@ -87,7 +98,7 @@ var parsesvg = func(group, path, options = nil)
 
       if( end > 0 )
         end += 1;
-      
+
       var type = substr(tf, start_type, end_type - start_type);
 
       # TODO should we warn if to much/wrong number of arguments given?
@@ -122,11 +133,11 @@ var parsesvg = func(group, path, options = nil)
         debug.dump(['unknown transform', type, values]);
     }
   };
-  
+
   # ----------------------------------------------------------------------------
   # Parse a path
   # http://www.w3.org/TR/SVG/paths.html#PathData
-  
+
   # map svg commands OpenVG commands
   var cmd_map = {
     z: Path.VG_CLOSE_PATH,
@@ -139,7 +150,7 @@ var parsesvg = func(group, path, options = nil)
     t: Path.VG_SQUAD_TO,
     s: Path.VG_SCUBIC_TO
   };
-  
+
   var parsePath = func(path_data)
   {
     if( path_data == nil )
@@ -175,7 +186,7 @@ var parsesvg = func(group, path, options = nil)
 
         append(args, substr(path_data, start_num, pos > 0 ? pos - start_num : nil));
       }
-      
+
       # now execute the command
       var rel = string.islower(cmd[0]);
       var cmd = string.lc(cmd);
@@ -196,7 +207,7 @@ var parsesvg = func(group, path, options = nil)
                          args[i + 5],
                          args[i + 6] );
         }
-        
+
         if( math.mod(size(args), 7) > 0 )
           debug.dump('too much coords for cmd', cmd, args);
       }
@@ -221,27 +232,60 @@ var parsesvg = func(group, path, options = nil)
               append(coords, args[j]);
 
             # If a moveto is followed by multiple pairs of coordinates, the
-            # subsequent pairs are treated as implicit lineto commands.            
+            # subsequent pairs are treated as implicit lineto commands.
             if( cmd == 'm' )
               cmd_vg = cmd_map['l'];
           }
-          
+
           if( math.mod(size(args), num_coords) > 0 )
             debug.warn('too much coords for cmd: ' ~ cmd);
         }
       }
     }
-    
+
     stack[-1].setData(cmds, coords);
   };
-  
+
+  # ----------------------------------------------------------------------------
+  # Parse text styles (and apply them to the topmost element)
+  var parseTextStyles = func(style)
+  {
+    # http://www.w3.org/TR/SVG/text.html#TextAnchorProperty
+    var h_align = style["text-anchor"];
+    if( h_align != nil )
+    {
+      if( h_align == "end" )
+        h_align = "right";
+      else if( h_align == "middle" )
+        h_align = "center";
+      else # "start"
+        h_align = "left";
+      stack[-1].set("alignment", h_align ~ "-baseline");
+    }
+    # TODO vertical align
+
+    var fill = style['fill'];
+    if( fill != nil )
+      stack[-1].set("fill", fill);
+
+    var font_family = style["font-family"];
+    var font_weight = style["font-weight"];
+    if( font_family != nil or font_weight != nil )
+      stack[-1].set("font", font_mapper(font_family, font_weight));
+
+    var font_size = style["font-size"];
+    if( font_size != nil )
+      # eg. font-size: 123px
+      stack[-1].setDouble("character-size", substr(font_size, 0, size(font_size) - 2));
+  }
+
   # ----------------------------------------------------------------------------
   # Parse a css style attribute
   var parseStyle = func(style)
   {
     if( style == nil )
       return {};
-    
+
     var styles = {};
     foreach(var part; split(';', style))
     {
@@ -253,17 +297,17 @@ var parsesvg = func(group, path, options = nil)
       var key = string.trim(part[0]);
       if( !size(key) )
         continue;
-      
+
       var value = string.trim(part[1]);
       if( !size(value) )
         continue;
-        
+
       styles[key] = value;
     }
-    
+
     return styles;
   }
-  
+
   # ----------------------------------------------------------------------------
   # Parse a css color
   var parseColor = func(s)
@@ -278,7 +322,7 @@ var parsesvg = func(group, path, options = nil)
                 std.stoul(substr(s, 3, 2), 16) / 255,
                 std.stoul(substr(s, 5, 2), 16) / 255 ];
     }
-    
+
     return color;
   };
 
@@ -298,7 +342,7 @@ var parsesvg = func(group, path, options = nil)
       else
         return;
     }
-    
+
     var style = parseStyle(attr['style']);
 
     if( style['display'] == 'none' )
@@ -312,30 +356,20 @@ var parsesvg = func(group, path, options = nil)
     }
     else if( name == "text" )
     {
-      pushElement('text', attr['id']);
-      stack[-1].setTranslation(attr['x'], attr['y']);
-      
-      # http://www.w3.org/TR/SVG/text.html#TextAnchorProperty
-      var h_align = style["text-anchor"];
-      if( h_align == "end" )
-        h_align = "right";
-      else if( h_align == "middle" )
-        h_align = "center";
-      else # "start"
-        h_align = "left";
-      stack[-1].setAlignment(h_align ~ "-baseline");
-      # TODO vertical align
-      
-      stack[-1].setColor(parseColor(style['fill']));
-      stack[-1].setFont
-      (
-        font_mapper(style["font-family"], style["font-weight"])
-      );
-
-      var font_size = style["font-size"];
-      if( font_size != nil )
-        # eg. font-size: 123px
-        stack[-1].setFontSize(substr(font_size, 0, size(font_size) - 2));
+      text = {
+        "attr": attr,
+        "style": style
+      };
+      tspans = [];
+      return;
+    }
+    else if( name == "tspan" )
+    {
+      append(tspans, {
+        "attr": attr,
+        "style": style
+      });
+      return;
     }
     else if( name == "path" or name == "rect" )
     {
@@ -351,7 +385,7 @@ var parsesvg = func(group, path, options = nil)
 
         d = sprintf("M%f,%f v%f h%f v%fz", x, y, height, width, -height);
       }
-      
+
       parsePath(d);
 
       stack[-1].set('fill', style['fill']);
@@ -359,20 +393,16 @@ var parsesvg = func(group, path, options = nil)
       var w = style['stroke-width'];
       stack[-1].setStrokeLineWidth( w != nil ? w : 1 );
       stack[-1].set('stroke', style['stroke'] or "none");
-      
+
       var linecap = style['stroke-linecap'];
       if( linecap != nil )
         stack[-1].setStrokeLineCap(style['stroke-linecap']);
-      
+
       # http://www.w3.org/TR/SVG/painting.html#StrokeDasharrayProperty
       var dash = style['stroke-dasharray'];
       if( dash and size(dash) > 3 )
         # at least 2 comma separated values...
         stack[-1].setStrokeDashArray(split(',', dash));
-    }
-    else if( name == "tspan" )
-    {
-      return;
     }
     else if( name == "use" )
     {
@@ -383,7 +413,7 @@ var parsesvg = func(group, path, options = nil)
       var el_src = id_dict[ substr(ref, 1) ];
       if( el_src == nil )
         return print("parsesvg: Reference to unknown element (" ~ ref ~ ")");
-      
+
       # Create new element and copy sub branch from source node
       pushElement(el_src._node.getName(), attr['id']);
       props.copy(el_src._node, stack[-1]._node);
@@ -413,18 +443,86 @@ var parsesvg = func(group, path, options = nil)
   var end = func(name)
   {
     level -= 1;
-    
+
     if( skip )
     {
       if( level <= skip )
         skip = 0;
       return;
     }
-    
+
     if( size(close_stack) and (level + 1) == close_stack[-1] )
+      popElement();
+
+    if( name == "text" )
     {
-      pop(stack);
-      pop(close_stack);
+      # Inkscape/SVG text is a bit complicated. If we only got a single tspan
+      # or text without tspan we create just a single canvas.Text, otherwise
+      # we create a canvas.Group with a canvas.Text as child for each tspan.
+      # We need to take care to apply the transform attribute of the text
+      # element to the correct canvas element, and also correctly inherit
+      # the style properties.
+      var character_size = 24;
+      if( size(tspans) > 1 )
+      {
+        pushElement('group', text.attr['id']);
+        parseTextStyles(text.style);
+        parseTransform(text.attr['transform']);
+
+        character_size = stack[-1].get("character-size", character_size);
+      }
+
+      # Helper for getting first number in space separated list of numbers.
+      var first_num = func(str)
+      {
+        if( str == nil )
+          return 0;
+        var end = str.find_first_of(" \n\t");
+        if( end < 0 )
+          return str;
+        else
+          return substr(str, 0, end);
+      }
+
+      var line = 0;
+      foreach(var tspan; tspans)
+      {
+        # Always take first number and ignore individual character placment
+        var x = first_num(tspan.attr['x'] or text.attr['x']);
+        var y = first_num(tspan.attr['y'] or text.attr['y']);
+
+        # Sometimes Inkscape forgets writing x and y coordinates and instead
+        # just indicates a multiline text with sodipodi:role="line".
+        if( tspan.attr['y'] == nil and tspan.attr['sodipodi:role'] == "line" )
+          # TODO should we combine multiple lines into a single text separated
+          #      with newline characters?
+          y += line
+             * 1.25 # TODO read correct line spacing
+             * stack[-1].get("character-size", character_size);
+
+        pushElement('text', tspan.attr['id']);
+        stack[-1].set("text", tspan.text);
+
+        if( x != 0 or y != 0 )
+          stack[-1].setTranslation(x, y);
+
+        if( size(tspans) == 1 )
+        {
+          parseTextStyles(text.style);
+          parseTransform(text.attr['transform']);
+        }
+
+        parseTextStyles(tspan.style);
+        popElement();
+
+        line += 1;
+      }
+
+      if( size(tspans) > 1 )
+        popElement();
+
+      text = nil;
+      tspans = nil;
     }
   };
 
@@ -433,9 +531,15 @@ var parsesvg = func(group, path, options = nil)
   {
     if( skip )
       return;
-    
-    if( size(data) and isa(stack[-1], Text) )
-      stack[-1].setText(data);
+
+    if( size(data) and tspans != nil )
+    {
+      if( size(tspans) == 0 )
+        # If no tspan is found add a dummy one
+        append(tspans, {});
+
+      tspans[-1]["text"] = data;
+    }
   };
 
   # check path relative to standard locations
@@ -460,6 +564,6 @@ var parsesvg = func(group, path, options = nil)
     debug.dump(err);
     return 0;
   }
-  
+
   return 1;
 }

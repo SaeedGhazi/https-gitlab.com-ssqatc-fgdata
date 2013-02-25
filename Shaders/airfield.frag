@@ -324,7 +324,7 @@ if (quality_level > 3)
 
 float delta_z = hazeLayerAltitude - eye_alt;
 
-if (dist > max(40.0, 0.04 * min(visibility,avisibility))) 
+if (dist > 0.04 * min(visibility,avisibility)) 
 {
 
 alt = eye_alt;

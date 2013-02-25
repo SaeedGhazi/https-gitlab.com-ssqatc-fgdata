@@ -129,8 +129,7 @@ void main()
 float delta_z = hazeLayerAltitude - eye_alt;
 float dist = length(relPos);
 
-if (dist > max(40.0, 0.04 * min(visibility,avisibility))) 
-//if (dist > 40.0)
+if (dist > 0.04 * min(visibility,avisibility)) 
 {
 
 alt = eye_alt;

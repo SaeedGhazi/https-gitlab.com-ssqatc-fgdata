@@ -409,7 +409,7 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
 
 float delta_z = hazeLayerAltitude - eye_alt;
 
-if (dist > max(40.0, 0.04 * min(visibility,avisibility))) 
+if (dist > 0.04 * min(visibility,avisibility)) 
 //if ((gl_FragCoord.y > ylimit) || (gl_FragCoord.x < zlimit1) || (gl_FragCoord.x > zlimit2))
 //if (dist > 40.0)
 {

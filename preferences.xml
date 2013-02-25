@@ -757,6 +757,7 @@ Started September 2000 by David Megginson, david@megginson.com
 			<scenarios-enabled type="bool" userarchive="y">true</scenarios-enabled>
 			<scenario>nimitz_demo</scenario>
 			<groundnet-cache type="bool">true</groundnet-cache>
+			<tankers include="AI/tankers.xml"/>
 		</ai>
 
 		<multiplay preserve="y">
@@ -1202,6 +1203,9 @@ Started September 2000 by David Megginson, david@megginson.com
 		</vacuum>
 		<refuel>
 			<serviceable type="bool" archive="y">true</serviceable>
+			<contact-radius-m type="double">76</contact-radius-m>
+			<report-contact type="bool">false</report-contact>
+			<max-fuel-transfer-lbs-min type="double">6000</max-fuel-transfer-lbs-min>
 		</refuel>
 	</systems>
 

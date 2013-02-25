@@ -6,11 +6,6 @@ if (globals["tanker"] != nil) {
 }
 #--------------------------------------------------------------------------------------------------
 
-
-var boom_tanker = "Models/Geometry/KC135/KC135.xml";
-var probe_tanker = "Models/Geometry/KA6-D/KA6-D.xml";
-
-
 var oclock = func(bearing) int(0.5 + geo.normdeg(bearing) / 30) or 12;
 
 
@@ -75,7 +70,7 @@ var identity = {
 
 
 var Tanker = {
-	new: func(aiid, callsign, tacan, type, kias, heading, coord) {
+	new: func(aiid, callsign, tacan, type, model, kias, maxfuel, pattern, heading, coord) {
 		var m = { parents: [Tanker] };
 		m.callsign = callsign;
 		m.tacan = tacan;
@@ -83,7 +78,7 @@ var Tanker = {
 		m.heading = m.course = m.track_course = heading;
 		m.out_of_range_time = 0;
 		m.interval = 10;
-		m.length = (getprop("tanker/pattern-length-nm") or 50) * NM2M;
+		m.length = pattern;
 		m.roll = 0;
 		m.coord = geo.Coord.new(coord);
 		m.anchor = geo.Coord.new(coord).apply_course_distance(m.track_course, m.length); # ARCP
@@ -111,6 +106,7 @@ var Tanker = {
 		m.ai.getNode("valid", 1).setBoolValue(1);
 		m.ai.getNode("navaids/tacan/channel-ID", 1).setValue(m.tacan);
 		m.ai.getNode("refuel/type", 1).setValue(type);
+		m.ai.getNode("refuel/max-fuel-transfer-lbs-min", 1).setValue(maxfuel);
 		m.ai.getNode("refuel/contact", 1).setBoolValue(0);
 		m.ai.getNode("radar/in-range", 1).setBoolValue(1);
 
@@ -130,7 +126,8 @@ var Tanker = {
 		m.vOffsetN = m.ai.getNode("radar/v-offset", 1);
 
 		m.update();
-		m.model.getNode("path", 1).setValue(type == "boom" ? boom_tanker : probe_tanker);
+		
+		m.model.getNode("path", 1).setValue(model);
 		m.model.getNode("latitude-deg-prop", 1).setValue(m.latN.getPath());
 		m.model.getNode("longitude-deg-prop", 1).setValue(m.lonN.getPath());
 		m.model.getNode("elevation-ft-prop", 1).setValue(m.altN.getPath());
@@ -206,6 +203,7 @@ var Tanker = {
 		var dalt = alt - me.ac.alt();
 		var ac_hdg = getprop("/orientation/heading-deg");
 		var ac_pitch = getprop("/orientation/pitch-deg");
+		var ac_contact_dist = getprop("/systems/refuel/contact-radius-m");
 		var elev = math.atan2(dalt, me.distance) * R2D;
         
 		me.latN.setDoubleValue(me.coord.lat());
@@ -219,11 +217,13 @@ var Tanker = {
 		me.rangeN.setDoubleValue(me.distance * M2NM);
 		me.brgN.setDoubleValue(me.bearing);
 		me.elevN.setDoubleValue(elev);
-		me.contactN.setBoolValue(me.distance < 76 and dalt > 0  # 250 ft
-				and abs(view.normdeg(me.bearing - ac_hdg)) < 20);
+		
+		me.contactN.setBoolValue(me.distance < ac_contact_dist and 
+														dalt > 0 and 
+														abs(view.normdeg(me.bearing - ac_hdg)) < 20);
 				
-	    me.hOffsetN.setDoubleValue(me.bearing - ac_hdg);
-	    me.vOffsetN.setDoubleValue(elev - ac_pitch);
+		me.hOffsetN.setDoubleValue(me.bearing - ac_hdg);
+		me.vOffsetN.setDoubleValue(elev - ac_pitch);
 
 		var droll = me.roll_target - me.roll;
 		if (droll > 0) {
@@ -268,47 +268,80 @@ var Tanker = {
 	active: {},
 };
 
+# Factory methods
 
+# Create a tanker based on a given /sim/ai/tankers/tanker property node
+var create_tanker = func(tanker_node, course) {
+	var (aiid, callsign, tacanid) =_= identity.get();
+	var model = tanker_node.getNode("model", 1).getValue();
+	var type  = tanker_node.getNode("type", 1).getValue();
+	var spd = tanker_node.getNode("speed-kts", 1).getValue() or 250;
+	var pattern = (tanker_node.getNode("pattern-length-nm", 1).getValue() or 50) * NM2M;
+	var maxfuel = tanker_node.getNode("max-fuel-transfer-lbs-min", 1).getValue() or 6000;
 
-var request = func {
+	var alt = int(10 + rand() * 15) * 1000;  # FL100--FL250
+	alt = skip_cloud_layer(alt * FT2M);
+	var dist = 6000 + rand() * 4000;	
+	var coord = geo.aircraft_position().apply_course_distance(course, dist).set_alt(alt);	
+	
+	Tanker.new(aiid, callsign, tacanid, type, model, spd, maxfuel, pattern, course, coord);
+}
+
+# Request a new tanker
+var request_new = func(tanker_node=nil) {
+	var tanker = values(Tanker.active);
+	if (size(tanker)) tanker[0].del();
+	request(tanker_node);
+}
+
+var request = func(tanker_node=nil) {
+	var tanker = values(Tanker.active);
+	if (size(tanker))
+		return tanker[0].identify();
+		
+	if (tanker_node == nil) {
+		var type = props.globals.getNode("systems/refuel", 1).getChildren("type");
+		if (!size(type))
+			return;
+		type = type[rand() * size(type)].getValue();
+		
+		var tankers = props.globals.getNode("/sim/ai/tankers", 1).getChildren("tanker");
+		foreach (var tanker; tankers) {
+		  if (tanker.getNode("type", 1).getValue() == type) {
+		    tanker_node = tanker;
+		    break;		  
+		  }		
+		}		
+	}
+
+	var hdg = getprop("orientation/heading-deg");
+	var course = hdg + (rand() - 0.5) * 60;
+	
+	create_tanker(tanker_node, course);
+}
+
+var request_random = func(tanker_node=nil) {
 	var tanker = values(Tanker.active);
 	if (size(tanker))
 		return tanker[0].identify();
 
-	var type = props.globals.getNode("systems/refuel", 1).getChildren("type");
-	if (!size(type))
-		return;
-	type = type[rand() * size(type)].getValue();
+	if (tanker_node == nil) {
+		var type = props.globals.getNode("systems/refuel", 1).getChildren("type");
+		if (!size(type))
+			return;
+		type = type[rand() * size(type)].getValue();
+		
+		var tankers = props.globals.getNode("/sim/ai/tankers", 1).getChildren("tanker");
+		foreach (var tanker; tankers) {
+		  if (tanker.getNode("type", 1).getValue() == type) {
+		    tanker_node = tanker;
+		    break;		  
+		  }		
+		}		
+	}
 
-	var (aiid, callsign, tacanid) =_= identity.get();
-	var hdg = getprop("orientation/heading-deg");
-	var course = hdg + (rand() - 0.5) * 60;
-	var dist = 6000 + rand() * 4000;
-	var alt = int(10 + rand() * 15) * 1000;  # FL100--FL250
-	alt = skip_cloud_layer(alt * FT2M);
-	var coord = geo.aircraft_position().apply_course_distance(course, dist).set_alt(alt);
-	Tanker.new(aiid, callsign, tacanid, type, 250, hdg, coord);
-}
-
-
-var request_random = func {
-        var tanker = values(Tanker.active);
-        if (size(tanker))
-                return tanker[0].identify();
-
-        var type = props.globals.getNode("systems/refuel", 1).getChildren("type");
-        if (!size(type))
-                return;
-        type = type[rand() * size(type)].getValue();
-
-        var (aiid, callsign, tacanid) =_= identity.get();
-        var hdg = rand() * 360;
-        var course = rand() * 360;
-        var dist = 6000 + rand() * 4000;
-        var alt = int(10 + rand() * 15) * 1000;  # FL100--FL250
-        alt = skip_cloud_layer(alt * FT2M);
-        var coord = geo.aircraft_position().apply_course_distance(course, dist).set_alt(alt);
-        Tanker.new(aiid, callsign, tacanid, type, 250, hdg, coord);
+	var course = rand() * 360;
+	create_tanker(tanker_node, course);
 }
 
 

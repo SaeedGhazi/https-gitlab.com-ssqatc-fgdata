@@ -640,9 +640,6 @@
               <stretch>true</stretch>
               <pref-width>400</pref-width>
               <pref-height>400</pref-height>
-              <view n="0">400</view>
-              <view n="1">400</view>
-
 
               <features>
                 <!-- TODO: use params and aliases to make this shorter -->

@@ -2618,7 +2618,14 @@
     <load-resistance>1e30</load-resistance>
   </material>
 
+  <!-- ICEBERGS IN THE ARCTIC SEA REGIONS                           -->
   
+ <material include="Materials/regions/arctic_sea.xml">
+    <name>Ocean</name>
+    <effect>Effects/water</effect>
+    <texture>Terrain/water.png</texture>
+  </material>
+
 
   <!-- DEFAULT SUMMER DEFINITIONS                           -->
 

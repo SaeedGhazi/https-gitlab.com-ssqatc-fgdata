@@ -2,7 +2,12 @@
 
 <PropertyList>
   <nasal>
-    <open><![CDATA[
+    <open>
+      <![CDATA[
+    
+        setprop("sim/gui/dialogs/metar/description[1]","Simple and fast weather engine that interprets METAR data directly or a set of manually defined parameters. Recommended for use with Multiplayer.");
+        setprop("sim/gui/dialogs/metar/description[2]"," Scripted weather engine that gives more detailed and realistic results based on METAR data and a set of predefiend parameters. Use this for Atmospheric Light Scattering.");
+      
         var normalize_string = func(src) {
           if( src == nil ) src = "";
           var dst = "";
@@ -275,11 +280,14 @@
 
       var controller = GlobalWeatherDialogController.new( cmdarg() );
       controller.open();
-    ]]></open>
+    ]]>
+    </open>
 
-    <close><![CDATA[
+    <close>
+      <![CDATA[
       controller.close();
-    ]]></close>
+    ]]>
+    </close>
   </nasal>
 
   <!-- Control the weather -->
@@ -322,15 +330,18 @@
 
   <group>
     <layout>vbox</layout>
-  
+
     <text>
       <halign>left</halign>
-      <label>Weather Modeling</label>
+      <label>Select weather engine</label>
     </text>
-    
+
     <group>
       <layout>hbox</layout>
-      <empty><stretch>true</stretch></empty>  
+      <halign>left</halign>
+      <empty>
+        <stretch>true</stretch>
+      </empty>
       <group>
         <layout>table</layout>
         <radio>
@@ -340,129 +351,174 @@
           <name>simple-weather</name>
           <property>sim/gui/dialogs/metar/mode/global-weather</property>
           <live>true</live>
-          <label>Interpret METAR directly</label>
+          <label>Basic Weather (default)</label>
           <binding>
             <command>property-assign</command>
             <property>sim/gui/dialogs/metar/mode/global-weather</property>
             <value>1</value>
-          </binding>        
+          </binding>
           <binding>
             <command>property-assign</command>
             <property>sim/gui/dialogs/metar/mode/local-weather</property>
             <value>0</value>
-          </binding>        
+          </binding>
           <binding>
             <command>property-assign</command>
             <property>sim/gui/dialogs/metar/mode/manual-weather</property>
             <value>0</value>
-          </binding>        
+          </binding>
           <binding>
             <command>nasal</command>
             <script>
               controller.refresh();
             </script>
-          </binding>        
-          
+          </binding>
         </radio>
+        <checkbox>
+          <row>0</row>
+          <col>2</col>
+          <name>manual-weather-config</name>
+          <property>sim/gui/dialogs/metar/mode/manual-weather</property>
+          <label>Manually Configure Weather</label>
+          <live>true</live>
+          <enable>
+            <property>sim/gui/dialogs/metar/mode/global-weather</property>
+          </enable>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>manual-weather-config</object-name>
+          </binding>
+        </checkbox>
+      </group>
+    </group>
+
+    <textbox>
+      <name>basic description</name>
+      <halign>fill</halign>
+      <stretch>true</stretch>
+      <pref-width>250</pref-width>
+      <pref-height>55</pref-height>
+      <slider>0</slider>
+      <editable>false</editable>
+      <wrap>true</wrap>
+      <live>true</live>
+      <property>sim/gui/dialogs/metar/description[1]</property>
+    </textbox>
+
+    <group>
+      <layout>hbox</layout>
+      <halign>left</halign>
+      <empty>
+        <stretch>true</stretch>
+      </empty>
+      <group>
+        <layout>table</layout>
         <radio>
-          <row>1</row>
+          <row>0</row>
           <col>0</col>
           <halign>left</halign>
           <name>simple-weather</name>
           <property>sim/gui/dialogs/metar/mode/local-weather</property>
           <live>true</live>
-          <label>Model overall weather conditions based on METAR</label>
+          <label>Detailed Weather</label>
           <binding>
             <command>property-assign</command>
             <property>sim/gui/dialogs/metar/mode/local-weather</property>
             <value>1</value>
-          </binding>        
+          </binding>
           <binding>
             <command>property-assign</command>
             <property>sim/gui/dialogs/metar/mode/global-weather</property>
             <value>0</value>
-          </binding>        
+          </binding>
           <binding>
             <command>property-assign</command>
             <property>sim/gui/dialogs/metar/mode/manual-weather</property>
             <value>0</value>
-          </binding>        
+          </binding>
           <binding>
             <command>nasal</command>
             <script>
               controller.refresh();
             </script>
-          </binding>        
-          
+          </binding>
         </radio>
-        <button>
-          <row>1</row>
-          <col>2</col>
-          <halign>fill</halign>
-          <stretch>true</stretch>
-          <legend>Advanced Settings...</legend>
-          <enable>
-              <property>sim/gui/dialogs/metar/mode/local-weather</property>
-              <value>1</value>
-          </enable>
-          <binding>
-            <command>dialog-show</command>
-            <dialog-name>local-weather</dialog-name>
-          </binding>        
-        </button>    
-
-        <radio>
-          <row>2</row>
-          <col>0</col>
-          <halign>left</halign>
-          <name>simple-weather</name>
-          <property>sim/gui/dialogs/metar/mode/manual-weather</property>
-          <live>true</live>
-          <label>Configure weather manually</label>
-          <binding>
-            <command>property-assign</command>
-            <property>sim/gui/dialogs/metar/mode/local-weather</property>
-            <value>0</value>
-          </binding>        
-          <binding>
-            <command>property-assign</command>
-            <property>sim/gui/dialogs/metar/mode/global-weather</property>
-            <value>0</value>
-          </binding>        
-          <binding>
-            <command>property-assign</command>
-            <property>sim/gui/dialogs/metar/mode/manual-weather</property>
-            <value>1</value>
-          </binding>        
-          <binding>
-            <command>nasal</command>
-            <script>
-              controller.refresh();
-            </script>
-          </binding>                  
-        </radio>
-        
-        <button>
-          <row>2</row>
-          <col>2</col>
-          <halign>fill</halign>
-          <stretch>true</stretch>
-          <legend>Weather Configuration...</legend>
-          <enable>
-              <property>sim/gui/dialogs/metar/mode/manual-weather</property>
-          </enable>
-          <binding>
-            <command>dialog-show</command>
-            <dialog-name>weather-configuration</dialog-name>
-          </binding>        
-        </button>    
       </group>
-      
     </group>
-    <empty><stretch>true</stretch></empty>  
+
+    <textbox>
+      <name>advance-description</name>
+      <halign>fill</halign>
+      <stretch>true</stretch>
+      <pref-width>250</pref-width>
+      <pref-height>55</pref-height>
+      <slider>0</slider>
+      <editable>false</editable>
+      <wrap>true</wrap>
+      <live>true</live>
+      <property>sim/gui/dialogs/metar/description[2]</property>
+    </textbox>
+
+    <group>
+      <layout>table</layout>
+      <button>
+        <row>0</row>
+        <col>0</col>
+        <colspan>3</colspan>
+        <pref-width>200</pref-width>
+        <pref-height>40</pref-height>
+        <halign>center</halign>
+        <stretch>true</stretch>
+        <legend>Manual Weather Configuration...</legend>
+        <visible>
+          <property>sim/gui/dialogs/metar/mode/manual-weather</property>
+        </visible>
+        <enable>
+          <property>sim/gui/dialogs/metar/mode/manual-weather</property>
+        </enable>
+        <binding>
+          <command>dialog-show</command>
+          <dialog-name>weather-configuration</dialog-name>
+        </binding>
+        <!--<binding>
+          <command>property-assign</command>
+          <property>sim/gui/dialogs/metar/mode/manual-weather</property>
+          <value>1</value>
+        </binding>-->
+      </button>
+
+      <button>
+        <row>0</row>
+        <col>0</col>
+        <colspan>3</colspan>
+        <pref-width>200</pref-width>
+        <pref-height>40</pref-height>
+        <halign>center</halign>
+        <stretch>true</stretch>
+        <legend>Advanced Settings...</legend>
+        <visible>
+          <property>sim/gui/dialogs/metar/mode/local-weather</property>
+        </visible>
+        <enable>
+          <property>sim/gui/dialogs/metar/mode/local-weather</property>
+          <value>1</value>
+        </enable>
+        <binding>
+          <command>dialog-show</command>
+          <dialog-name>local-weather</dialog-name>
+        </binding>
+      </button>
+    </group>
+
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+
   </group>
-        
-  <hrule/>  
+
+
+
+  <hrule/>
 
   <group>
     <layout>vbox</layout>
@@ -499,7 +555,7 @@
       </combo>
 
     </group>
-    
+
     <group>
       <layout>hbox</layout>
       <text>
@@ -515,7 +571,9 @@
         <property>/environment/metar/valid</property>
         <label/>
         <live>true</live>
-        <enable><false/></enable>
+        <enable>
+          <false/>
+        </enable>
       </checkbox>
     </group>
 
@@ -571,10 +629,13 @@
       <editable>false</editable>
       <wrap>true</wrap>
       <live>true</live>
-      <property>sim/gui/dialogs/metar/description</property>
+      <property>sim/gui/dialogs/metar/description[0]</property>
     </textbox>
+
+
+
   </group>
-  
+
   <hrule/>
 
   <group>
@@ -599,7 +660,7 @@
         <command>dialog-close</command>
       </binding>
     </button>
-    
+
     <button>
       <legend>Apply</legend>
       <binding>

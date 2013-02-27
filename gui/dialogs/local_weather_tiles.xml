@@ -128,17 +128,6 @@
         <row>3</row>
         <col>2</col>
         <halign>left</halign>
-        <label>realistic visibility</label>
-        <property>/local-weather/config/realistic-visibility-flag</property>
-        <binding>
-          <command>dialog-apply</command>
-        </binding>
-      </checkbox>
-
-      <checkbox>
-        <row>4</row>
-        <col>1</col>
-        <halign>left</halign>
         <label>terrain presampling</label>
         <property>/local-weather/config/presampling-flag</property>
         <binding>
@@ -334,7 +323,24 @@
           <command>dialog-apply</command>
         </binding>
       </checkbox>
-      
+
+      <text>
+        <row>0</row>
+        <col>3</col>
+        <halign>right</halign>
+        <label>Realistic visibility</label>
+      </text>
+
+      <checkbox>
+        <row>0</row>
+        <col>4</col>
+        <halign>left</halign>
+        <property>/local-weather/config/realistic-visibility-flag</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+
       <text>
         <row>1</row>
         <col>0</col>
@@ -467,6 +473,12 @@
         <row>5</row>
         <col>0</col>
         <halign>right</halign>
+        <enable>
+          <equals>
+            <property>/local-weather/config/realistic-visibility-flag</property>
+            <value>0</value>
+          </equals>
+        </enable>
         <label>Max. visibility</label>
       </text>
 
@@ -480,6 +492,12 @@
       <slider>
         <row>5</row>
         <col>2</col>
+        <enable>
+          <equals>
+          <property>/local-weather/config/realistic-visibility-flag</property>
+          <value>0</value>
+          </equals>
+        </enable>
         <min>9.90348</min>
         <max>12.429216196</max>
         <property>/local-weather/config/aux-max-vis-range-m</property>
@@ -499,6 +517,12 @@
         <row>5</row>
         <col>4</col>
         <halign>left</halign>
+        <!--<enable>
+          <equals>
+            <property>/local-weather/config/realistic-visibility-flag</property>
+            <value>0</value>
+          </equals>
+        </enable>-->
         <label>12345678</label>
         <format>%.fm</format>
         <live>true</live>

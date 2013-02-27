@@ -112,7 +112,7 @@ var Runway = {
   {
     var coord = geo.Coord.new();
     coord.set_latlon(me.rwy.lat, me.rwy.lon);
-    coord.apply_course_distance(me.rwy.heading, pos - 0.5 * me.rwy.length);
+    coord.apply_course_distance(me.rwy.heading, pos);
 
     if( off )
       coord.apply_course_distance(me.rwy.heading + 90, off);

@@ -1,113 +1,78 @@
 
 #TODO: split: draw_single_runway(pos)
 var draw_runways = func(group, apt,lod) {
-   DEBUG and print("Drawing runways for:", apt.id);
-   # var group = group.createChild("group", "apt-"~apt.id);
-   # group = group.createChild("group", "runways");
-   var rws_done = {};
-      foreach(var rw; keys(apt.runways))
-      {
-        var is_heli = substr(rw, 0, 1) == "H";
-        var rw_dir = is_heli ? nil : int(substr(rw, 0, 2));
+  DEBUG and print("Drawing runways for:", apt.id);
+# var group = group.createChild("group", "apt-"~apt.id);
+# group = group.createChild("group", "runways");
+  foreach(var rw1; apt.runwaysWithoutReciprocals())
+  {
+    rw2 = rw1.reciprocal;
 
-        var rw_rec = "";
-        var thresh_rec = 0;
-        if( rw_dir != nil )
-        {
-          rw_rec = sprintf("%02d", math.mod(rw_dir - 18, 36));
-          if( size(rw) == 3 )
-          {
-            var map_rec = {
-              "R": "L",
-              "L": "R",
-              "C": "C"
-            };
-            rw_rec ~= map_rec[substr(rw, 2)];
-          }
+    var clr = SURFACECOLORS[rw1.surface];
+    if (clr == nil) { clr = SURFACECOLORS[0]};
 
-          if( rws_done[rw_rec] != nil )
-            continue;
+    var icon_rw =
+    group.createChild("path", "runway-" ~ rw1.id)
+    .setStrokeLineWidth(0.5)
+    .setColor(1.0,1.0,1.0)
+    .setColorFill(clr.r, clr.g, clr.b);
 
-          var rw_rec = apt.runways[rw_rec];
-          if( rw_rec != nil )
-            thresh_rec = rw_rec.threshold;
-        }
+    var rwy1 = Runway.new(rw1);
+    var beg_thr  = rwy1.pointOffCenterline(rw1.threshold);
+    var beg_thr1 = rwy1.pointOffCenterline(rw1.threshold,  0.5 * rw1.width);
+    var beg_thr2 = rwy1.pointOffCenterline(rw1.threshold, -0.5 * rw1.width);
+    var beg1 = rwy1.pointOffCenterline(0,  0.5 * rw1.width);
+    var beg2 = rwy1.pointOffCenterline(0, -0.5 * rw1.width);
 
-        rws_done[rw] = 1;
+    var rwy2 = Runway.new(rw2);
+    var end_thr  = rwy2.pointOffCenterline(rw2.threshold);
+    var end_thr1 = rwy2.pointOffCenterline(rw2.threshold,  0.5 * rw2.width);
+    var end_thr2 = rwy2.pointOffCenterline(rw2.threshold, -0.5 * rw2.width);
+    var end1 = rwy2.pointOffCenterline(0,  0.5 * rw2.width);
+    var end2 = rwy2.pointOffCenterline(0, -0.5 * rw2.width);
 
-        rw = apt.runways[rw];
-        
-        var clr = SURFACECOLORS[rw.surface];
-        if (clr == nil) { clr = SURFACECOLORS[0]};
-        
-        var icon_rw =
-          group.createChild("path", "runway-" ~ rw.id)
-                    .setStrokeLineWidth(0.5)
-                    .setColor(1.0,1.0,1.0)
-                    .setColorFill(clr.r, clr.g, clr.b);
+    icon_rw.setDataGeo
+    (
+    [ canvas.Path.VG_MOVE_TO,
+    canvas.Path.VG_LINE_TO,
+    canvas.Path.VG_LINE_TO,
+    canvas.Path.VG_LINE_TO,
+    canvas.Path.VG_CLOSE_PATH ],
+    [ beg1[0], beg1[1],
+    beg2[0], beg2[1],
+    end1[0], end1[1],
+    end2[0], end2[1] ]
+    );
 
-        var rwy = Runway.new(rw);
-        var beg_thr  = rwy.pointOffCenterline(rw.threshold);
-        var beg_thr1 = rwy.pointOffCenterline(rw.threshold,  0.5 * rw.width);
-        var beg_thr2 = rwy.pointOffCenterline(rw.threshold, -0.5 * rw.width);
-        var beg1 = rwy.pointOffCenterline(0,  0.5 * rw.width);
-        var beg2 = rwy.pointOffCenterline(0, -0.5 * rw.width);
+    var icon_cl =
+    group.createChild("path", "centerline")
+    .setStrokeLineWidth(0.5)
+    .setColor(1,1,1)
+    .setStrokeDashArray([15, 10]);
 
-        var end_thr  = rwy.pointOffCenterline(rw.length - thresh_rec);
-        var end_thr1 = rwy.pointOffCenterline(rw.length - thresh_rec,  0.5 * rw.width);
-        var end_thr2 = rwy.pointOffCenterline(rw.length - thresh_rec, -0.5 * rw.width);
-        var end1 = rwy.pointOffCenterline(rw.length,  0.5 * rw.width);
-        var end2 = rwy.pointOffCenterline(rw.length, -0.5 * rw.width);
+    icon_cl.setDataGeo
+    (
+    [ canvas.Path.VG_MOVE_TO,
+    canvas.Path.VG_LINE_TO ],
+    [ beg_thr[0], beg_thr[1],
+    end_thr[0], end_thr[1] ]
+    );
 
-        icon_rw.setDataGeo
-        (
-          [ canvas.Path.VG_MOVE_TO,
-            canvas.Path.VG_LINE_TO,
-            canvas.Path.VG_LINE_TO,
-            canvas.Path.VG_LINE_TO,
-            canvas.Path.VG_CLOSE_PATH ],
-          [ beg1[0], beg1[1],
-            beg2[0], beg2[1],
-            end2[0], end2[1],
-            end1[0], end1[1] ]
-        );
+    var icon_thr =
+    group.createChild("path", "threshold")
+    .setStrokeLineWidth(1.5)
+    .setColor(1,1,1);
 
-        if( rw.length / rw.width > 3 and !is_heli )
-        {
-          # only runways which are much longer than wide are
-          # real runways, otherwise it's probably a heliport.
-          var icon_cl =
-            group.createChild("path", "centerline")
-                      .setStrokeLineWidth(0.5)
-                      .setColor(1,1,1)
-                      .setStrokeDashArray([15, 10]);
-
-          icon_cl.setDataGeo
-          (
-            [ canvas.Path.VG_MOVE_TO,
-              canvas.Path.VG_LINE_TO ],
-            [ beg_thr[0], beg_thr[1],
-              end_thr[0], end_thr[1] ]
-          );
-
-          var icon_thr =
-            group.createChild("path", "threshold")
-                      .setStrokeLineWidth(1.5)
-                      .setColor(1,1,1);
-
-          icon_thr.setDataGeo
-          (
-            [ canvas.Path.VG_MOVE_TO,
-              canvas.Path.VG_LINE_TO,
-              canvas.Path.VG_MOVE_TO,
-              canvas.Path.VG_LINE_TO ],
-            [ beg_thr1[0], beg_thr1[1],
-              beg_thr2[0], beg_thr2[1],
-              end_thr1[0], end_thr1[1],
-              end_thr2[0], end_thr2[1] ]
-          );
-        }
-      }
+    icon_thr.setDataGeo
+    (
+    [ canvas.Path.VG_MOVE_TO,
+    canvas.Path.VG_LINE_TO,
+    canvas.Path.VG_MOVE_TO,
+    canvas.Path.VG_LINE_TO ],
+    [ beg_thr1[0], beg_thr1[1],
+      beg_thr2[0], beg_thr2[1],
+      end_thr1[0], end_thr1[1],
+      end_thr2[0], end_thr2[1] ]
+    );
+  }
 }
-
-

@@ -26,26 +26,43 @@ var convert_checklists = func {
         
       # Now go through each of the checklist items and generate a tutorial step 
       # for each.
-      foreach (var item; ch.getChildren("item")) {
-        step = tutorial.getNode("step["~ size(tutorial.getChildren("step")) ~ "]", 1);
-        
-        var msg = item.getNode("name", 1).getValue();
-        
-        if (size(item.getChildren("value")) > 0) {
-          msg = msg ~ " :";
-          foreach (var v; item.getChildren("value")) {
-            msg = msg ~ " " ~ v.getValue();
-          }
-        }
-              
-        step.getNode("message", 1).setValue(msg);        
-        description = description ~ msg ~ "\n";
-        
-        if (item.getNode("condition") != nil) {
-          var cond = step.getNode("exit", 1).getNode("condition", 1);
-          props.copy(item.getNode("condition", 1), cond);
-        }      
-      }
+          
+			# Checklist may consist of one or more pages.
+			var pages = ch.getChildren("page");
+			
+			if (size(pages) == 0) {
+				# Or no pages at all, in which case we need to create a checklist of one page
+				append(pages, ch);
+			}
+			
+			foreach (var page; pages) {
+				foreach (var item; page.getChildren("item")) {
+					step = tutorial.getNode("step["~ size(tutorial.getChildren("step")) ~ "]", 1);
+					
+					var msg = item.getNode("name", 1).getValue();
+					
+					if (size(item.getChildren("value")) > 0) {
+						msg = msg ~ " :";
+						foreach (var v; item.getChildren("value")) {
+							msg = msg ~ " " ~ v.getValue();
+						}
+					}
+								
+					step.getNode("message", 1).setValue(msg);        
+					description = description ~ msg ~ "\n";
+					
+					if (item.getNode("condition") != nil) {
+						var cond = step.getNode("exit", 1).getNode("condition", 1);
+						props.copy(item.getNode("condition"), cond);
+					}      
+					
+					if (item.getNode("marker") != nil) {
+						var marker= step.getNode("marker", 1);
+						props.copy(item.getNode("marker"), marker);
+					}      
+					
+				}
+			}
       
       tutorial.getNode("description", 1).setValue(description);    
     }

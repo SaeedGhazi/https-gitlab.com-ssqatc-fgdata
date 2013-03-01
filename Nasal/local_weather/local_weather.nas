@@ -605,7 +605,7 @@ if (realistic_visibility_flag == 1)
 	vis_ovcst = vis_ovcst * 3.0;
 	}
 
-var inc1 = 0.1 * (vis_aloft - vis)/(vis_alt1 - ialt);
+var inc1 = 0.0 * (vis_aloft - vis)/(vis_alt1 - ialt);
 var inc2 = 0.9 * (vis_aloft - vis)/1500.0;
 var inc3 = (vis_ovcst - vis_aloft)/(ovcst_alt_high - vis_alt1+1500);
 var inc4 = 0.5;
@@ -636,6 +636,7 @@ else if (altitude > ovcst_alt_high)
 if (vis > max_vis_range)
 	{vis = max_vis_range;}
 
+	
 # determine scattering shader parameters if scattering shader is on
 
 if (scattering_shader_flag == 1) 
@@ -760,6 +761,7 @@ local_weather.setOvercast(ovcst);
 	
 
 # now check if an effect volume writes the property and set only if not
+# but set visibility if interpolated is smaller than effect-specified
 
 var flag = getprop("local-weather/effect-volumes/number-active-vis");
 
@@ -767,6 +769,11 @@ if ((flag ==0) and (vis > 0.0) and (getprop(lw~"lift-loop-flag") == 0) and (comp
 	{
 	compat_layer.setVisibility(vis);
 	}
+else if (getprop("/local-weather/current/visibility-m") > vis)
+	{
+	compat_layer.setVisibility(vis);
+	}
+
 
 
 
@@ -1217,6 +1224,7 @@ if (ev.vis_flag ==1)
 	# then set the new value in current and execute change
 	cNode.getNode("visibility-m").setValue(vis);
 	#compat_layer.setVisibility(vis);
+	#print(vis);
 	compat_layer.setVisibilitySmoothly(vis);
 
 	# then count the number of active volumes on entry (we need that to determine
@@ -1230,6 +1238,7 @@ if (ev.vis_flag ==1)
 if (ev.rain_flag == 1)
 	{
 	var rain = ev.rain;
+	#print("Setting rain to:", rain);
 	ev.rain_r = cNode.getNode("rain-norm").getValue();
 	cNode.getNode("rain-norm").setValue(rain);
 	compat_layer.setRain(rain);
@@ -1711,7 +1720,7 @@ settimer ( func {
 	compat_layer.setOvercast(0.0);
 	setprop(lwi~"ipoint-number",0);
 	setprop(lwi~"atmosphere-ipoint-number", 0);
-	},0.1);
+	},0);
 
 setprop(lw~"tmp/presampling-status", "idle");
 
@@ -1866,8 +1875,9 @@ if (edge_bias > 0.0) {height_bias = height_bias +  15.0 *edge_bias + 20.0 * rand
 var create_cumulonimbus_cloud = func(lat, lon, alt, size) {
 
 
-create_cloudbox("Cb_box", lat, lon, alt, 2500.0,2000.0, 1000.0,14, 0.2, 0.1, 3.4, 8, 0.8, 0.1, 8);
+create_cloudbox("Cb_box", lat, lon, alt, 2500.0,2000.0, 1000.0,10, 0.2, 0.1, 1.0, 1, 0.8, 0.1, 6);
 
+#create_cloudbox = func (type, blat, blon, balt, dx,dy,dz,n, f_core, r_core, h_core, n_core, f_bottom, h_bottom, n_bottom)
 }
 
 ###########################################################
@@ -1877,7 +1887,7 @@ create_cloudbox("Cb_box", lat, lon, alt, 2500.0,2000.0, 1000.0,14, 0.2, 0.1, 3.4
 var create_cumulonimbus_cloud_rain = func(lat, lon, alt, size, rain) {
 
 
-create_cloudbox("Cb_box", lat, lon, alt, 2500.0,2000.0, 1000.0,14, 0.2, 0.1, 3.4, 8, 0.8, 0.1, 8);
+create_cloudbox("Cb_box", lat, lon, alt, 2500.0,2000.0, 1000.0,10, 0.2, 0.1, 1.0, 1, 0.8, 0.1, 6);
 
 
 
@@ -3384,7 +3394,6 @@ scattering_shader_flag = getprop("/sim/rendering/shaders/skydome");
 
 air_pollution_norm = getprop("/environment/air-pollution-norm");
 
-
 }
 
 ###########################################################
@@ -3704,6 +3713,7 @@ else if ((getprop("/environment/metar/valid") == 0) and (getprop(lw~"tmp/tile-ma
 # see if we need to create an aloft wind interpolation structure
 
 set_wind_model_flag();
+
 
 if ((wind_model_flag == 3) or ((wind_model_flag ==5) and (getprop(lwi~"ipoint-number") == 0))) 
 	{
@@ -4058,7 +4068,7 @@ setlistener(lw~"tmp/convective-status", func {var s = size(clouds_path); compat_
 setlistener(lw~"tmp/effect-thread-status", func {var s = size(effects_geo);  effect_placement_loop(s); });
 setlistener(lw~"tmp/presampling-status", func {manage_presampling(); });
 
-# setlistener(lw~"config/wind-model", func {set_wind_model_flag();});
+#setlistener(lw~"config/wind-model", func {set_wind_model_flag();});
 setlistener(lw~"config/thermal-properties", func {set_texture_mix();});
 
 setlistener(lw~"config/clouds-in-dynamics-loop", func {weather_dynamics.max_clouds_in_loop = int(getprop(lw~"config/clouds-in-dynamics-loop"));});
@@ -4572,7 +4582,7 @@ setprop(lw~"effect-volumes/number-active-sat",0);
 # setprop(lw~"config/max-vis-range-m", 120000.0);
 setprop(lw~"config/temperature-offset-degc", 0.0);
 
-#setprop("/sim/rendering/eye-altitude-m", getprop("/position/altitude-ft") * ft_to_m);
+# setprop("/sim/rendering/eye-altitude-m", getprop("/position/altitude-ft") * ft_to_m);
 
 # create properties for tile management
 

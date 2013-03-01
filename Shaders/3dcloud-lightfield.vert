@@ -10,6 +10,7 @@ uniform float scattering;
 uniform float terminator;
 uniform float altitude;
 uniform float cloud_self_shading;
+uniform float visibility;
 uniform float moonlight;
 
 attribute vec3 usrAttr1;
@@ -181,17 +182,19 @@ void main(void)
       // As we get within 100m of the sprite, it is faded out. Equally at large distances it also fades out.
       gl_FrontColor.a = min(smoothstep(10.0, 100.0, fogCoord), 1.0 - smoothstep(0.9 * range, range, fogCoord));    
     }
+    gl_FrontColor.a = gl_FrontColor.a * (1.0 - smoothstep(visibility, 3.0* visibility, fogCoord));
 
     //gl_BackColor = gl_FrontColor;
 
    // Fog doesn't affect clouds as much as other objects.
-    float fadeScale = 0.05 + 0.2 * log(fogCoord/1000.0);
-    if (fadeScale < 0.05) fadeScale = 0.05;
-    fogFactor = exp( -gl_Fog.density * fogCoord * fadeScale);
+    //float fadeScale = 0.05 + 0.2 * log(fogCoord/1000.0);
+    //if (fadeScale < 0.05) fadeScale = 0.05;
+    //fogFactor = exp( -gl_Fog.density * fogCoord * fadeScale);
 
     // Fog doesn't affect clouds as much as other objects.
     //fogFactor = exp( -gl_Fog.density * fogCoord * 0.5);
     //fogFactor = clamp(fogFactor, 0.0, 1.0);
+    fogFactor = exp(-fogCoord/visibility);
 
     // haze of ground haze shader is slightly bluish
     hazeColor = light_diffuse.rgb;

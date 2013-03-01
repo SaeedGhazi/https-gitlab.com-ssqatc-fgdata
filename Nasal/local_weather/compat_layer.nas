@@ -163,21 +163,24 @@ foreach (var l; layers)
 	
 
 
-# we store that information ourselves, so this should be zero
+# we store that information ourselves, so this should be zero, but rain forces us to go for an offset
 setprop("/environment/clouds/layer[0]/elevation-ft",0.0);
 		
 # layer wrapping off
 setprop("/sim/rendering/clouds3d-wrap",0);
 
-# Basic Weather rain altitude limit off 
+# rain altitude limit off 
+
 props.globals.getNode("/environment/params/use-external-precipitation-level").setBoolValue("true");
 
+setprop("/sim/rendering/minimum-sky-visibility", 0.0);
 
-# rain and snow off for clean startup
+# just to be sure, set other parameters off
 
 compat_layer.setRain(0.0);
 compat_layer.setSnow(0.0);
 compat_layer.setLight(1.0);
+
 }
 
 
@@ -222,9 +225,10 @@ else
 	var vis_goal = visibility_target;
 	if (vis_goal > 1.03 * visibility_current) {vis_goal = 1.03 * visibility_current;}
 	}
-	
-setprop("/environment/visibility-m",vis_goal);
-visibility_current = vis_goal;	
+#	print(vis_goal, " ",local_weather.interpolated_conditions.visibility_m );
+if (local_weather.interpolated_conditions.visibility_m > vis_goal)
+	{setprop("/environment/visibility-m",vis_goal);}
+	visibility_current = vis_goal;	
 
 settimer( func {visibility_loop(); },0);
 }

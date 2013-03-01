@@ -245,7 +245,7 @@ else if (type == "Cumulus (whisp)"){
 	cloudAssembly.num_tex_y = 3;
 	
 	#characterize the cloud
-	cloudAssembly.bottom_shade = 0.9;
+	cloudAssembly.bottom_shade = 0.8;
 	cloudAssembly.n_sprites = 4;
 	cloudAssembly.min_width = 400.0 * mult;
 	cloudAssembly.max_width = 600.0 * mult;
@@ -383,7 +383,7 @@ else if (type == "Altocumulus"){
 	cloudAssembly.num_tex_y = 3;
 	
 	#characterize the cloud
-	cloudAssembly.bottom_shade = 0.8;
+	cloudAssembly.bottom_shade = 0.7;
 	cloudAssembly.n_sprites = 10;
 	cloudAssembly.min_width = 400.0 * mult;
 	cloudAssembly.max_width = 700.0 * mult;
@@ -806,7 +806,7 @@ else if (type == "Cb_box") {
 				cloudAssembly.n_sprites = 3;
 				cloudAssembly.min_cloud_width = 2200.0;
 				cloudAssembly.min_cloud_height = 1200.0;
-				cloudAssembly.bottom_shade = 0.4;
+				cloudAssembly.bottom_shade = 0.6;
 				cloudAssembly.z_scale = 1.0;
 				}
 			else
@@ -817,7 +817,7 @@ else if (type == "Cb_box") {
 				cloudAssembly.num_tex_y = 2;
 		
 				#characterize the cloud
-				cloudAssembly.bottom_shade = 0.4;
+				cloudAssembly.bottom_shade = 0.6;
 				cloudAssembly.n_sprites = 6;
 				cloudAssembly.min_width = 800.0;
 				cloudAssembly.max_width = 1100.0;
@@ -838,8 +838,8 @@ else if (type == "Cb_box") {
 			cloudAssembly.num_tex_y = 2;
 	
 			#characterize the cloud
-			cloudAssembly.bottom_shade = 0.4;
-			cloudAssembly.n_sprites = 10;
+			cloudAssembly.bottom_shade = 0.6;
+			cloudAssembly.n_sprites = 20;
 			cloudAssembly.min_width = 1000.0;
 			cloudAssembly.max_width = 1500.0;
 			cloudAssembly.min_height = 1000.0;

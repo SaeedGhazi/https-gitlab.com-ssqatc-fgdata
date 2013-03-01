@@ -11,6 +11,7 @@
     <altitude><use>/sim/rendering/eye-altitude-m</use></altitude>
     <cloud_self_shading><use>/environment/cloud-self-shading</use></cloud_self_shading>
     <moonlight><use>/environment/moonlight</use></moonlight>
+    <visibility><use>/environment/visibility-m</use></visibility>
   </parameters>
   
   <technique n="9">
@@ -105,6 +106,11 @@
         <name>moonlight</name>
         <type>float</type>
         <value><use>moonlight</use></value>
+      </uniform>
+      <uniform>
+        <name>visibility</name>
+        <type>float</type>
+        <value><use>visibility</use></value>
       </uniform>
       <!--<vertex-program-two-side>true</vertex-program-two-side>-->
     </pass>

@@ -1056,7 +1056,7 @@ else if (rn >0.4)
 	create_2_8_tstratus(blat, blon, alt+alt_offset+8000,alpha);
 
 	# and specify the atmosphere
-	local_weather.set_atmosphere_ipoint(blat, blon, vis + 17000.0, alt+alt_offset, vis + 25000.0, 0.35, alt+alt_offset +10000.0, alt+alt_offset + 20000.0, 0.65, alt+alt_offset, alt+alt_offset + 2500.0); 
+	local_weather.set_atmosphere_ipoint(blat, blon, vis + 17000.0, alt+alt_offset, vis + 25000.0, 0.35, alt+alt_offset +10000.0, alt+alt_offset + 20000.0, 0.75, alt+alt_offset, alt+alt_offset + 2500.0); 
 	}
 else if (rn >0.2)
 	{
@@ -1068,7 +1068,7 @@ else if (rn >0.2)
 	create_2_8_sstratus(blat, blon, alt+alt_offset+6000,alpha);
 
 	# and specify the atmosphere
-	local_weather.set_atmosphere_ipoint(blat, blon, vis + 15000.0, alt+alt_offset, vis + 24000.0, 0.2, alt+alt_offset +15000.0, alt+alt_offset + 22000.0, 0.6, alt+alt_offset, alt+alt_offset + 2500.0); 
+	local_weather.set_atmosphere_ipoint(blat, blon, vis + 15000.0, alt+alt_offset, vis + 24000.0, 0.2, alt+alt_offset +15000.0, alt+alt_offset + 22000.0, 0.7 - rand() * 0.1, alt+alt_offset, alt+alt_offset + 2500.0); 
 	}
 else if (rn >0.0)
 	{
@@ -1579,7 +1579,7 @@ calc_geo(blat);
 
 var vis = 9000.0 + rand() * 10000.0;
 var T = 10.0 + rand() * 15.0;
-var spread = 8.0 + 2.0 * rand();
+var spread = 6.0 + 2.0 * rand();
 var D = T - spread;
 var p = 1000 + rand() * 10.0; p = adjust_p(p);
 
@@ -1598,7 +1598,7 @@ local_weather.convective_size_bias = 0.3 + rand() * 0.3;
 
 
 # and specify the atmosphere
-	local_weather.set_atmosphere_ipoint(blat, blon, vis + 12000.0, alt+alt_offset, vis + 20000.0, 0.0, alt+alt_offset +20000.0, alt+alt_offset + 25000.0, 0.65, alt+alt_offset, alt+alt_offset + 2500.0); 
+	local_weather.set_atmosphere_ipoint(blat, blon, vis + 12000.0, alt+alt_offset, vis + 20000.0, 0.0, alt+alt_offset +20000.0, alt+alt_offset + 25000.0, 0.85, alt+alt_offset, alt+alt_offset + 2500.0); 
 
 var rn = rand();
 
@@ -2584,13 +2584,13 @@ var set_METAR_weather_station = func {
 	if (coverage_shade < 1) # clear sky, we need to specify an altitude for the model
 		{shade = 0.9; alt_shade = 9000.0;}
 	else if (coverage_shade < 3)
-		{shade = 0.8;}
+		{shade = 0.85;}
 	else if (coverage_shade < 5)
-		{shade = 0.7;}
+		{shade = 0.8;}
 	else if (coverage_shade < 8)
-		{shade = 0.6;}
+		{shade = 0.75;}
 	else if (coverage_shade == 8)
-		{shade = 0.55;}
+		{shade = 0.7;}
 
 	shade = shade * coverage_mult;
 
@@ -2761,6 +2761,7 @@ else
 	else {create_8_8_nimbus_var3(lat, lon, alt, alpha);}
 	}
 
+	
 if (rain > 0.1)
 	{
 	local_weather.create_effect_volume(3, lat, lon, 20000.0, 20000.0, alpha, 0.0, alt+900.0, 500.0 + (1.0 - 0.5 * rain) * 5500.0, 0.5 * rain , -1, -1, -1,0 ,0.95);
@@ -3521,7 +3522,7 @@ if (rand() > 0.5) # we do a second thunderstorm
 
 # the convective layer
 
-var strength = 0.3;
+var strength = 0.10;
 var n = int(4000 * strength) * 0.5;
 local_weather.cumulus_exclusion_layer(lat, lon, alt, n, 20000.0, 20000.0, alpha, 0.3,2.5 , size(elat), elat, elon, erad);
 

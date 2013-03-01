@@ -75,4 +75,37 @@ var draw_runways = func(group, apt,lod) {
       end_thr2[0], end_thr2[1] ]
     );
   }
+
+  #draw helipads
+  foreach(var hp; keys(apt.helipads))
+  {
+    var hp = apt.runway(hp);
+    var clr = SURFACECOLORS[hp.surface];
+    if (clr == nil) { clr = SURFACECOLORS[0]};
+
+    var icon_hp =
+    group.createChild("path", "helipad-" ~ hp.id)
+    .setStrokeLineWidth(0.5)
+    .setColor(1.0,1.0,1.0)
+    .setColorFill(clr.r, clr.g, clr.b);
+
+    var heli = Runway.new(hp);
+    var p1  = heli.pointOffCenterline(0.5 * hp.length, 0.5 * hp.width);
+    var p2 = heli.pointOffCenterline(0.5 * hp.length, -0.5 * hp.width);
+    var p3 = heli.pointOffCenterline(-0.5 * hp.length, -0.5 * hp.width);
+    var p4 = heli.pointOffCenterline(-0.5 * hp.length, 0.5 * hp.width);
+
+    icon_hp.setDataGeo
+    (
+    [ canvas.Path.VG_MOVE_TO,
+    canvas.Path.VG_LINE_TO,
+    canvas.Path.VG_LINE_TO,
+    canvas.Path.VG_LINE_TO,
+    canvas.Path.VG_CLOSE_PATH ],
+    [ p1[0], p1[1],
+    p2[0], p2[1],
+    p3[0], p3[1],
+    p4[0], p4[1] ]
+    );
+  }
 }

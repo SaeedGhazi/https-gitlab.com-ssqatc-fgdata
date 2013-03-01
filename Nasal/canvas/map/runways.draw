@@ -6,8 +6,6 @@ var draw_runways = func(group, apt,lod) {
 # group = group.createChild("group", "runways");
   foreach(var rw1; apt.runwaysWithoutReciprocals())
   {
-    rw2 = rw1.reciprocal;
-
     var clr = SURFACECOLORS[rw1.surface];
     if (clr == nil) { clr = SURFACECOLORS[0]};
 
@@ -24,6 +22,7 @@ var draw_runways = func(group, apt,lod) {
     var beg1 = rwy1.pointOffCenterline(0,  0.5 * rw1.width);
     var beg2 = rwy1.pointOffCenterline(0, -0.5 * rw1.width);
 
+    var rw2 = rw1.reciprocal;
     var rwy2 = Runway.new(rw2);
     var end_thr  = rwy2.pointOffCenterline(rw2.threshold);
     var end_thr1 = rwy2.pointOffCenterline(rw2.threshold,  0.5 * rw2.width);

@@ -5,6 +5,18 @@
 		<description>UFO from the 'White Project' of the UNESCO</description>
 		<author>ET</author>
 
+        <long-description>With the UFO you can place 3D objects in the FlightGear scenery, 
+            and inspect the scenery without worrying about crashing.</long-description>
+        <fr>
+            <long-description>Avec l'UFO (OVNI) vous pouvez placer des objets 3D dans les scènes de FlightGear scenery</long-description>
+        </fr>
+                
+                
+        <tags>
+            <tag>fictional</tag>
+            <tag>spaceship</tag>
+        </tags>
+            
 		<flight-model>ufo</flight-model>
 
 		<sound>

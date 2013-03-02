@@ -14,6 +14,6 @@ var draw_tower = func (group, apt,lod) {
                  .line(-3, 10)
                  .vert(10);
       
-      icon_tower.setGeoPosition(apt.lat, apt.lon);
+      icon_tower.setGeoPosition(apt.tower().lat, apt.tower().lon);
 }
 

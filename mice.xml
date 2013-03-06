@@ -276,7 +276,7 @@ current mode for each mouse is held in the
      <wrap type="bool">false</wrap>
     </binding>
 
-    <!-- Middle button pressed, no Ctrl: move the view up and down -->
+    <!-- Middle button pressed move the view up and down -->
     <binding>
      <condition>
       <and>
@@ -284,9 +284,6 @@ current mode for each mouse is held in the
         <property>/devices/status/mice/mouse[0]/button[0]</property>
        </not>
        <property>/devices/status/mice/mouse[0]/button[1]</property>
-       <not>
-        <property>/devices/status/keyboard/ctrl</property>
-       </not>
       </and>
      </condition>
      <command>property-adjust</command>
@@ -295,25 +292,26 @@ current mode for each mouse is held in the
      <wrap type="bool">false</wrap>
     </binding>
 
-    <!-- Middle button and Ctrl pressed: move the view forward and backward -->
-    <binding>
-     <condition>
-      <and>
-       <not>
-        <property>/devices/status/mice/mouse[0]/button[0]</property>
-       </not>
-       <property>/devices/status/mice/mouse[0]/button[1]</property>
-       <property>/devices/status/keyboard/ctrl</property>
-      </and>
-     </condition>
-     <command>property-adjust</command>
-     <property>/sim/current-view/z-offset-m</property>
-     <factor type="double">1</factor>
-     <wrap type="bool">false</wrap>
-    </binding>
-
    </y-axis>
 
+<!-- Middle button and Ctrl pressed: move the view forward and backward -->
+   <y-axis-ctrl>
+       <binding>
+        <condition>
+         <and>
+          <not>
+           <property>/devices/status/mice/mouse[0]/button[0]</property>
+          </not>
+          <property>/devices/status/mice/mouse[0]/button[1]</property>
+         </and>
+        </condition>
+        <command>property-adjust</command>
+        <property>/sim/current-view/z-offset-m</property>
+        <factor type="double">1</factor>
+        <wrap type="bool">false</wrap>
+       </binding>
+    </y-axis-ctrl>
+    
   </mode>
 
   <!-- Mode 3: spring-loaded-view mode -->

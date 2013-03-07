@@ -699,6 +699,7 @@ Started September 2000 by David Megginson, david@megginson.com
 			<hide-cursor type="bool" userarchive="y">true</hide-cursor>
             <right-button-mode-cycle-enabled type="bool" userarchive="y">true</right-button-mode-cycle-enabled>
 			<cursor-timeout-sec type="double" userarchive="y">10.0</cursor-timeout-sec>
+            <click-shows-tooltip type="bool">false</click-shows-tooltip>
 		</mouse>
 
 		<replay>

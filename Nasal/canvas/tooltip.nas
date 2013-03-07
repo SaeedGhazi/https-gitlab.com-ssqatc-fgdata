@@ -1,0 +1,258 @@
+var Tooltip = {
+  # Constructor
+  #
+  # @param size ([width, height])
+  new: func(size, id = nil)
+  {
+    var m = {
+      parents: [Tooltip, PropertyElement.new(["/sim/gui/canvas", "window"], id)],
+      _listener: nil,
+      _property: nil,
+      _mapping: "",
+      _width: 0,
+      _height: 0,
+      _tipId: nil
+    };
+    m.setInt("size[0]", size[0]);
+    m.setInt("size[1]", size[1]);
+    m.setBool("visible", 0);
+
+    # arg = [child, listener_node, mode, is_child_event]
+   # setlistener(m._node, func m._propCallback(arg[0], arg[2]), 0, 2);
+
+    return m;
+  },
+  # Destructor
+  del: func
+  {
+    me.parents[1].del();
+    if( me["_canvas"] != nil )
+      me._canvas.del();
+  },
+  # Create the canvas to be used for this Tooltip
+  #
+  # @return The new canvas
+  createCanvas: func()
+  {
+    var size = [
+      me.get("size[0]"),
+      me.get("size[1]")
+    ];
+
+    me._canvas = new({
+      size: [2 * size[0], 2 * size[1]],
+      view: size,
+      placement: {
+        type: "window",
+        index: me._node.getIndex()
+      }
+    });
+    
+    # transparent background
+    me._canvas.setColorBackground(0.0, 0.0, 0.0, 0.0);
+    
+    var root = me._canvas.createGroup();
+    me._root = root;
+    
+    me._frame = root.rect(0, 0, size[0], size[1], {"border-radius":10});
+    me._frame.setColor(0, 1, 1);
+    me._frame.setStrokeLineWidth(3);
+    
+    me._text = root.createChild("text", "tooltip-caption")
+    		    .setText("Aircraft Help")
+    		    .setAlignment("left-top")
+    		    .setFontSize(14)
+    		    .setFont("LiberationFonts/LiberationSans-Bold.ttf")
+    		    .setColor(1,1,1)
+            .setDrawMode(Text.TEXT + Text.FILLEDBOUNDINGBOX);
+    me._text.setPadding(4);
+            
+    #me._text.setPadding(5);
+    me._text.setColorFill(0.3, 0.3, 0.3, 0.8);
+    me._text.setMaxWidth(size[0]);
+    
+    return me._canvas;
+  },
+  
+  setLabel: func(msg)
+  {
+    me._label = msg;
+    me._updateText();
+  },
+  
+  setProperty: func(prop)
+  {
+    if (me._property != nil)
+      removelistener(me._listener);
+    
+    me._property = prop;
+    if (me._property != nil)
+      me._listener = setlistener(me._property, func { me._propertyChanged(); });
+      
+    me._updateText();
+  },
+  
+  _propertyChanged: func
+  {
+    me._updateText();
+  },
+  
+  _updateText: func
+  {
+    var width = me.get("size[0]");
+    
+    var msg = me._label;
+    if (me._property != nil) {
+      var val = me._remapValue(me._property.getValue());
+      msg = sprintf(me._label, val);
+    }
+    
+    me._text.setMaxWidth(width);
+    me._text.setText(msg);
+    me._text.update();
+    
+    var bounds = me._text.getBoundingBox();
+    if ((bounds[2] == me._width) and (bounds[3] == me._height)) 
+      return;
+      
+    me._width = bounds[2] + 8;
+    me._height = bounds[3] + 8;
+
+    me._frame.del();
+    me._frame = me._root.rect(0, 0, me._width, me._height, {"border-radius":4});
+    me._frame.setColor(0, 1, 1);
+    me._frame.setStrokeLineWidth(3);
+    
+    
+  },
+  
+  _remapValue: func(val)
+  {
+    if (me._mapping == "") return val;
+    if (me._mapping == "percent") return int(val * 100);
+    # TODO - translate me!
+    if (me._mapping == "on-off") return (val == 1) ? "ON" : "OFF";
+    if (me._mapping == "arm-disarm") return (val == 1) ? "ARMED" : "DISARMED";
+    
+    return val;
+  },
+  
+  setMapping: func(mapping)
+  {
+    me._mapping = mapping;
+    me._updateText();
+  },
+  
+  setTooltipId: func(tipId)
+  {
+    me._tipId = tipId;
+  },
+  
+  getTooltipId: func { me._tipId; },
+  
+  # Get the displayed canvas
+  getCanvas: func()
+  {
+    return me['_canvas'];
+  },
+  setPosition: func(x, y)
+  {
+    me.setInt("x", x + 10);
+    me.setInt("y", y + 10);
+  },
+  
+  showAfterDelay: func()
+  {
+    me.setBool("visible", 1);
+  },
+  
+  show: func()
+  {
+    # don't show if undefined
+    if (me._tipId == nil) return;
+    me.setBool("visible", 1);
+  },
+  
+  hide: func()
+  {
+    me.setBool("visible", 0);
+  },
+  
+  isVisible: func
+  {
+    return me.getBool("visible");
+  },
+  
+  fadeIn: func()
+  {
+    me.show();
+  },
+  
+  fadeOut: func()
+  {
+    me.hide();
+  }
+  
+# private:
+  
+};
+
+var tooltip = canvas.Tooltip.new([200, 50]);
+    tooltip.createCanvas();
+
+var setTooltip = func(node)
+{
+  var tipId = cmdarg().getNode('tooltip-id').getValue();
+  if (tooltip.getTooltipId() == tipId) {
+    return; # nothing more to do
+  }
+      
+  var x = cmdarg().getNode('x').getValue();
+  var y = cmdarg().getNode('y').getValue();
+
+   var screenHeight = getprop('/sim/startup/ysize');
+   tooltip.setPosition(x, screenHeight - y);
+   tooltip.setTooltipId(tipId);
+   
+   tooltip.setLabel(cmdarg().getNode('label').getValue());
+   var nodePath = cmdarg().getNode('property');
+   if (nodePath != nil) {
+     var n = props.globals.getNode(nodePath.getValue());
+     tooltip.setProperty(n);
+     
+     # mapping modes allow some standard conversion of the property
+     # value to a human readable form.
+     var mapping = cmdarg().getNode('mapping');
+     tooltip.setMapping(mapping == nil ? "" : mapping.getValue());
+   } else {
+     tooltip.setProperty(nil); 
+  }
+  
+  # don't actually show here, we do that response to tooltip-timeout
+  # so this is just getting ready
+}
+
+var showTooltip = func(node)
+{
+  var r = node.getNode("reason");
+  if ((r != nil) and (r.getValue() == "click")) {
+    # click triggering tooltip, show immediately
+    tooltip.show();
+  } else {
+    tooltip.fadeIn();
+  }
+}
+
+var updateHover = func(node)
+{
+  # if not shown, nothing to do here
+  if (!tooltip.isVisible()) return;
+    
+  # reset cursor to standard
+  tooltip.fadeOut();
+  tooltip.setTooltipId(nil);
+}
+
+addcommand("update-hover", updateHover);
+addcommand("set-tooltip", setTooltip);
+addcommand("tooltip-timeout", showTooltip);

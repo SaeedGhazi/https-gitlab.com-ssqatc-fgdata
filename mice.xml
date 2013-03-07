@@ -37,12 +37,8 @@ current mode for each mouse is held in the
 
    <button n="2">
     <binding>
-    <condition>
-      <property>/sim/mouse/right-button-mode-cycle-enabled</property>
-    </condition>
-     <command>property-assign</command>
-     <property>/devices/status/mice/mouse[0]/mode</property>
-     <value type="int">1</value>
+        <command>cycle-mouse-mode</command>
+        <reason>right-click</reason>
     </binding>
    </button>
  
@@ -55,12 +51,8 @@ current mode for each mouse is held in the
 
    <button n="2">
     <binding>
-    <condition>
-      <property>/sim/mouse/right-button-mode-cycle-enabled</property>
-    </condition>
-     <command>property-assign</command>
-     <property>/devices/status/mice/mouse[0]/mode</property>
-     <value type="int">2</value>
+        <command>cycle-mouse-mode</command>
+        <reason>right-click</reason>
     </binding>
    </button>
 
@@ -186,14 +178,11 @@ current mode for each mouse is held in the
    <!-- right button switches modes -->
    <button n="2">
     <binding>
-        <condition>
-          <property>/sim/mouse/right-button-mode-cycle-enabled</property>
-        </condition>
-     <command>property-assign</command>
-     <property>/devices/status/mice/mouse[0]/mode</property>
-     <value type="int">0</value>
+        <command>cycle-mouse-mode</command>
+        <reason>right-click</reason>
     </binding>
    </button>
+   
  
    <!-- extra buttons control FoV -->
    <!-- these are often assigned to mouse-wheel motion in Linux -->

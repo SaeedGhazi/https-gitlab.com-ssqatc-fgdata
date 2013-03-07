@@ -106,6 +106,16 @@ top down before the key bindings are parsed.
   </binding>
  </key>
 
+ <!-- Tab key, also Ctrl-I, bit odd -->
+ <key n="9">
+	<name>Ctrl-I</name>
+	<desc>Cycle mouse mode</desc>
+	<binding>
+		<command>cycle-mouse-mode</command>
+		<reason>key-press</reason>
+	</binding>
+ </key>
+
  <key n="10"> <!-- OSG -->
   <name>Enter</name>
   <desc>Move rudder right</desc>

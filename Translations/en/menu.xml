@@ -106,7 +106,8 @@
 	<print-scene-info>Print Visible Scene Info</print-scene-info>
 	<rendering-buffers>Hide/Show Rendering Buffers</rendering-buffers>
 	<rembrandt-buffers-choice>Select Rendering Buffers</rembrandt-buffers-choice>
-
+    <interface-config>User-interface options</interface-config>
+        
 	<!-- Help menu -->
 	<help>Help</help>
 	<help-browser>Help  (opens in browser)</help-browser>

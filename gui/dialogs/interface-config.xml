@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+
+<!-- Interface / interfaction configuration dialog-->
+
+<PropertyList>
+  <name>interface-dialog</name>
+  <modal>false</modal>
+  <width>400</width>
+  <layout>vbox</layout>
+
+  <group>
+    <layout>hbox</layout>
+	  <empty><stretch>1</stretch></empty>
+
+    <text>
+      <label>Interface Configuration</label>
+    </text>
+
+	  <empty><stretch>1</stretch></empty>
+
+    <button>
+      <pref-width>16</pref-width>
+      <pref-height>16</pref-height>
+      <legend></legend>
+      <keynum>27</keynum>
+      <border>2</border>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
+
+  <hrule/>
+
+  <group>
+    <layout>table</layout>
+    <halign>center</halign>
+
+    <text>
+      <row>0</row>
+      <col>0</col>
+      <label>Tooltips</label>
+      <padding>10</padding>
+    </text>
+
+    <checkbox>
+      <row>0</row>
+      <col>1</col>
+      <property>/sim/gui/tooltips-enabled</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+          <command>nasal</command>
+          <script>
+              var enabled = getprop('/sim/gui/tooltips-enabled');
+            # set delay to negative to disable tooltips
+              var delay = enabled ? 1000 : -1;
+              setprop('/sim/mouse/tooltip-delay-msec', delay);
+          </script>
+      </binding>
+    </checkbox>
+    
+    <text>
+      <row>1</row>
+      <col>0</col>
+      <label>Tooltip on press</label>
+      <padding>10</padding>
+    </text>
+    
+    <checkbox>
+      <row>1</row>
+      <col>1</col>
+      <property>/sim/gui/click-shows-tooltip</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+	  <enable>
+        <property>/sim/gui/tooltips-enabled</property>
+      </enable>
+    </checkbox>
+  
+    <text>
+      <row>2</row>
+      <col>0</col>
+      <label>Right-click cycles mouse mode</label>
+      <padding>10</padding>
+    </text>
+
+    <checkbox>
+      <row>2</row>
+      <col>1</col>
+      <property>/sim/mouse/right-button-mode-cycle-enabled</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
+    
+  </group>
+
+  <nasal>
+    <open><![CDATA[
+      
+
+    ]]></open>
+  </nasal>
+
+</PropertyList>

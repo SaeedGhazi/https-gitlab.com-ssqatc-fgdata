@@ -515,3 +515,27 @@ var speedup = func(speed_up)
     setprop("/sim/speed-up", t);
 }
 
+# mouse-mode handling 
+
+var cycleMouseMode = func(node)
+{
+    var reason = node.getChild("reason").getValue();
+    if (reason == "right-click") {
+        if (!getprop("/sim/mouse/right-button-mode-cycle-enabled")) {
+            return;
+        }
+    }
+    
+    var modeNode = props.globals.getNode('/devices/status/mice/mouse[0]/mode');    
+    var mode = modeNode.getValue() + 1;
+    if (mode == 3) mode = 0;
+    modeNode.setIntValue(mode);
+    
+    if (mode == 1) {
+        setprop("/sim/messages/copilot", "Mouse is controlling flight controls. Press TAB to change.");
+    } elsif (mode == 2) {
+        setprop("/sim/messages/copilot","Mouse is controlling view direction. Press TAB to change.");
+    }
+}
+
+addcommand("cycle-mouse-mode", cycleMouseMode);

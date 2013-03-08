@@ -66,12 +66,15 @@
       <col>0</col>
       <label>Tooltip on press</label>
       <padding>10</padding>
+	  <enable>
+        <property>/sim/gui/tooltips-enabled</property>
+      </enable>
     </text>
     
     <checkbox>
       <row>1</row>
       <col>1</col>
-      <property>/sim/gui/click-shows-tooltip</property>
+      <property>/sim/mouse/click-shows-tooltip</property>
       <binding>
         <command>dialog-apply</command>
       </binding>
@@ -91,6 +94,40 @@
       <row>2</row>
       <col>1</col>
       <property>/sim/mouse/right-button-mode-cycle-enabled</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
+    
+    
+    <text>
+      <row>3</row>
+      <col>0</col>
+      <label>Knob/slider drag sensitivity</label>
+      <padding>10</padding>
+    </text>
+    
+    <input>
+        <row>3</row>
+        <col>1</col>
+        <property>/sim/mouse/drag-sensitivity</property>
+        <live>true</live>
+        <binding>
+            <command>dialog-apply</command>
+        </binding>
+    </input>
+    
+    <text>
+      <row>4</row>
+      <col>0</col>
+      <label>Invert mouse-wheel on knobs/sliders</label>
+      <padding>10</padding>
+    </text>
+
+    <checkbox>
+      <row>4</row>
+      <col>1</col>
+      <property>/sim/mouse/invert-mouse-wheel</property>
       <binding>
         <command>dialog-apply</command>
       </binding>

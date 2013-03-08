@@ -111,6 +111,11 @@ top down before the key bindings are parsed.
 	<name>Ctrl-I</name>
 	<desc>Cycle mouse mode</desc>
 	<binding>
+    
+        <condition>
+            <not><property>/devices/status/keyboard/alt</property></not>
+            <not><property>/devices/status/keyboard/ctrl</property></not>
+        </condition>
 		<command>cycle-mouse-mode</command>
 		<reason>key-press</reason>
 	</binding>

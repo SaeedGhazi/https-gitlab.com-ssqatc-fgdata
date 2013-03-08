@@ -48,6 +48,10 @@ var Tooltip = {
       }
     });
     
+    # don't do anything with mouse events ourselves
+    me.set("capture-events", 0);
+    me.set("fill", "rgba(255,255,255,0.8)");
+    
     # transparent background
     me._canvas.setColorBackground(0.0, 0.0, 0.0, 0.0);
     

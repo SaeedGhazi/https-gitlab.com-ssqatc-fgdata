@@ -524,6 +524,11 @@ var cycleMouseMode = func(node)
         if (!getprop("/sim/mouse/right-button-mode-cycle-enabled")) {
             return;
         }
+    } else if (reason == "key-press") {
+        # ignore alt-tab / ctrl-tab
+        if (getprop('devices/status/keyboard/ctrl') or getprop('devices/status/keyboard/alt')) {
+            return;
+        }
     }
     
     var modeNode = props.globals.getNode('/devices/status/mice/mouse[0]/mode');    

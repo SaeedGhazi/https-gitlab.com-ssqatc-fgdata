@@ -784,9 +784,14 @@ var Image = {
     return me;
   },
   # Set size of image element
-  setSize: func(width, height)
+  #
+  # @param width
+  # @param height
+  # - or -
+  # @param size ([width, height])
+  setSize: func
   {
-    me._node.setValues({size: [width, height]});
+    me._node.setValues({size: _arg2valarray(arg)});
     return me;
   }
 };

@@ -12,7 +12,8 @@ var Tooltip = {
       _width: 0,
       _height: 0,
       _tipId: nil,
-      _slice: 17
+      _slice: 17,
+      _measureText: nil
     };
     m.setInt("size[0]", size[0]);
     m.setInt("size[1]", size[1]);
@@ -83,6 +84,7 @@ var Tooltip = {
   {
     me._label = msg;
     me._updateText();
+    me._updateBounds();
   },
 
   setProperty: func(prop)
@@ -96,6 +98,13 @@ var Tooltip = {
 
     me._updateText();
   },
+  
+  # specify a string used to compute the width of the tooltip
+  setWidthText: func(txt)
+  {
+      me._measureText = txt;
+      me._updateBounds();
+  },
 
   _propertyChanged: func
   {
@@ -104,26 +113,35 @@ var Tooltip = {
 
   _updateText: func
   {
-    var width = me.get("size[0]");
-
     var msg = me._label;
     if (me._property != nil) {
       var val = me._remapValue(me._property.getValue());
       msg = sprintf(me._label, val);
     }
 
-    me._text.setMaxWidth(width);
     me._text.setText(msg);
-    me._text.update();
+  },
+  
+  _updateBounds: func
+  {
+      var width = me.get("size[0]");
+      me._text.setMaxWidth(width);
+      
+      if (me._measureText == nil)
+          me._updateText();
+      else
+          me._text.setText(me._measureText);
+          
+      me._text.update(); # compute the bounds
+      var bounds = me._text.getBoundingBox();
+      me._updateText(); # restore real text after measurement
+      
+      if ((bounds[2] == me._width) and (bounds[3] == me._height))
+        return;
 
-    var bounds = me._text.getBoundingBox();
-    if ((bounds[2] == me._width) and (bounds[3] == me._height))
-      return;
-
-    me._width = bounds[2] + 2 * me._slice;
-    me._height = bounds[3] + 2 * me._slice;
-
-    me._frame.setSize(me._width, me._height);
+      me._width = bounds[2] + 2 * me._slice;
+      me._height = bounds[3] + 2 * me._slice;
+      me._frame.setSize(me._width, me._height);
   },
 
   _remapValue: func(val)
@@ -133,6 +151,7 @@ var Tooltip = {
     # TODO - translate me!
     if (me._mapping == "on-off") return (val == 1) ? "ON" : "OFF";
     if (me._mapping == "arm-disarm") return (val == 1) ? "ARMED" : "DISARMED";
+    if (me._mapping == "heading") return geo.normdeg(val);
 
     return val;
   },
@@ -155,15 +174,11 @@ var Tooltip = {
   {
     return me['_canvas'];
   },
+  
   setPosition: func(x, y)
   {
     me.setInt("x", x + 10);
     me.setInt("y", y + 10);
-  },
-
-  showAfterDelay: func()
-  {
-    me.setBool("visible", 1);
   },
 
   show: func()
@@ -197,7 +212,7 @@ var Tooltip = {
 
 };
 
-var tooltip = canvas.Tooltip.new([200, 50]);
+var tooltip = canvas.Tooltip.new([300, 100]);
     tooltip.createCanvas();
 
 var setTooltip = func(node)
@@ -215,6 +230,13 @@ var setTooltip = func(node)
    tooltip.setTooltipId(tipId);
 
    tooltip.setLabel(cmdarg().getNode('label').getValue());
+   var measure = cmdarg().getNode('measure-text');
+   if (measure != nil) {
+       tooltip.setWidthText(measure.getValue());
+   } else {
+       tooltip.setWidthText(nil);
+   }
+   
    var nodePath = cmdarg().getNode('property');
    if (nodePath != nil) {
      var n = props.globals.getNode(nodePath.getValue());

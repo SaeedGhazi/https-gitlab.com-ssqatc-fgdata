@@ -151,6 +151,9 @@ var Tooltip = {
     # TODO - translate me!
     if (me._mapping == "on-off") return (val == 1) ? "ON" : "OFF";
     if (me._mapping == "arm-disarm") return (val == 1) ? "ARMED" : "DISARMED";
+    # provide both 'senses' of the flag here
+    if (me._mapping == "up-down") return (val == 1) ? "UP" : "DOWN";
+    if (me._mapping == "down-up") return (val == 1) ? "DOWN" : "UP";
     if (me._mapping == "heading") return geo.normdeg(val);
 
     return val;
@@ -248,6 +251,7 @@ var setTooltip = func(node)
      tooltip.setMapping(mapping == nil ? "" : mapping.getValue());
    } else {
      tooltip.setProperty(nil);
+     tooltip.setMapping(nil);
   }
 
   # don't actually show here, we do that response to tooltip-timeout
@@ -267,12 +271,14 @@ var showTooltip = func(node)
 
 var updateHover = func(node)
 {
+  tooltip.setTooltipId(nil);
+  
   # if not shown, nothing to do here
   if (!tooltip.isVisible()) return;
 
   # reset cursor to standard
   tooltip.fadeOut();
-  tooltip.setTooltipId(nil);
+  
 }
 
 addcommand("update-hover", updateHover);

@@ -9,13 +9,15 @@ var Tooltip = {
       _listener: nil,
       _property: nil,
       _mapping: "",
+      _mappingFunc: nil,
       _width: 0,
       _height: 0,
       _tipId: nil,
       _slice: 17,
       _measureText: nil,
       _measureBB: nil,
-      _hideTimer: nil
+      _hideTimer: nil,
+      _hiding: nil
     };
     
     m.setInt("size[0]", size[0]);
@@ -151,26 +153,37 @@ var Tooltip = {
   {
     if (me._mapping == "") return val;
     if (me._mapping == "percent") return int(val * 100);
+    
     # TODO - translate me!
     if (me._mapping == "on-off") return (val == 1) ? "ON" : "OFF";
     if (me._mapping == "arm-disarm") return (val == 1) ? "ARMED" : "DISARMED";
+    
     # provide both 'senses' of the flag here
     if (me._mapping == "up-down") return (val == 1) ? "UP" : "DOWN";
-    if (me._mapping == "down-up") return (val == 1) ? "DOWN" : "UP";
+    if (me._mapping == "down-up") return (val == 1) ? "DOWN" : "UP";    
+    if (me._mapping == "open-close") return (val == 1) ? "OPEN" : "CLOSED";
+    if (me._mapping == "close-open") return (val == 1) ? "CLOSED" : "OPEN";
+    
     if (me._mapping == "heading") return geo.normdeg(val);
+    if (me._mapping == "nasal") return me._mappingFunc(val);
 
     return val;
   },
 
-  setMapping: func(mapping)
+  setMapping: func(mapping, f = nil)
   {
     me._mapping = mapping;
+    me._mappingFunc = f;
     me._updateText();
   },
 
   setTooltipId: func(tipId)
   {
     me._tipId = tipId;
+    if ((tipId != nil) and me._hiding) {
+      me._hideTimer.stop();
+      me._hiding = 0;
+    }
   },
 
   getTooltipId: func { me._tipId; },
@@ -191,7 +204,15 @@ var Tooltip = {
   {
     # don't show if undefined
     if (me._tipId == nil) return;
-    me.setBool("visible", 1);
+    
+    if (me._hiding) {
+      me._hideTimer.stop();
+      me._hiding = 0;
+    }
+    
+    if (!me.isVisible()) {
+      me.setBool("visible", 1); 
+    }
   },
 
   showMessage: func()
@@ -205,7 +226,11 @@ var Tooltip = {
 
   hide: func()
   {
-    me._hideTimer.restart(1.0);
+    # this gets run repeatedly during mouse-moves
+    if (me._hiding) return;
+    me._hiding = 1;
+    
+    me._hideTimer.restart(0.5);
   },
 
   hideNow: func()
@@ -233,6 +258,7 @@ var Tooltip = {
   _hideTimeout: func()
   {
     me.setBool("visible", 0);
+    me._hiding = 0;
   }
 };
 
@@ -249,17 +275,24 @@ var innerSetTooltip = func(node)
        tooltip.setWidthText(nil);
    }
 
-   var nodePath = cmdarg().getNode('property');
-   if (nodePath != nil) {
-     var n = props.globals.getNode(nodePath.getValue());
+   var propPath = cmdarg().getNode('property');
+   if (propPath != nil) {
+     var n = props.globals.getNode(propPath.getValue());
      tooltip.setProperty(n);
-
-     # mapping modes allow some standard conversion of the property
-     # value to a human readable form.
-     var mapping = cmdarg().getNode('mapping');
-     tooltip.setMapping(mapping == nil ? "" : mapping.getValue());
    } else {
-     tooltip.setProperty(nil);
+      tooltip.setProperty(nil);
+   }
+
+   var mapping = cmdarg().getNode('mapping');
+   if (mapping != nil) {
+     var m = mapping.getValue();
+     var f = nil;
+     if (m == 'nasal') {
+       f = compile(cmdarg().getNode('script').getValue());
+     }
+     
+     tooltip.setMapping(m, f);
+   } else {
      tooltip.setMapping(nil);
   }
 }
@@ -274,11 +307,10 @@ var setTooltip = func(node)
   var x = cmdarg().getNode('x').getValue();
   var y = cmdarg().getNode('y').getValue();
 
-   var screenHeight = getprop('/sim/startup/ysize');
-   tooltip.setPosition(x, screenHeight - y);
-   tooltip.setTooltipId(tipId);
-
-   innerSetTooltip(node);
+  var screenHeight = getprop('/sim/startup/ysize');
+  tooltip.setPosition(x, screenHeight - y);
+  tooltip.setTooltipId(tipId);
+  innerSetTooltip(node);
 
   # don't actually show here, we do that response to tooltip-timeout
   # so this is just getting ready

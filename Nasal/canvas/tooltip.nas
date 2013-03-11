@@ -13,7 +13,8 @@ var Tooltip = {
       _height: 0,
       _tipId: nil,
       _slice: 17,
-      _measureText: nil
+      _measureText: nil,
+      _measureBB: nil
     };
     m.setInt("size[0]", size[0]);
     m.setInt("size[1]", size[1]);
@@ -84,7 +85,6 @@ var Tooltip = {
   {
     me._label = msg;
     me._updateText();
-    me._updateBounds();
   },
 
   setProperty: func(prop)
@@ -94,21 +94,18 @@ var Tooltip = {
 
     me._property = prop;
     if (me._property != nil)
-      me._listener = setlistener(me._property, func { me._propertyChanged(); });
+      me._listener = setlistener(me._property, func { me._updateText(); });
 
     me._updateText();
   },
-  
+
   # specify a string used to compute the width of the tooltip
   setWidthText: func(txt)
   {
-      me._measureText = txt;
-      me._updateBounds();
-  },
-
-  _propertyChanged: func
-  {
-    me._updateText();
+    me._measureBB = me._text.setText(txt)
+                            .update()
+                            .getBoundingBox();
+    me._updateBounds();
   },
 
   _updateText: func
@@ -120,28 +117,32 @@ var Tooltip = {
     }
 
     me._text.setText(msg);
+    me._updateBounds();
   },
-  
+
   _updateBounds: func
   {
-      var width = me.get("size[0]");
-      me._text.setMaxWidth(width);
-      
-      if (me._measureText == nil)
-          me._updateText();
-      else
-          me._text.setText(me._measureText);
-          
-      me._text.update(); # compute the bounds
-      var bounds = me._text.getBoundingBox();
-      me._updateText(); # restore real text after measurement
-      
-      if ((bounds[2] == me._width) and (bounds[3] == me._height))
-        return;
+    var max_width = me.get("size[0]") - 2 * me._slice;
+    me._text.setMaxWidth(max_width);
 
-      me._width = bounds[2] + 2 * me._slice;
-      me._height = bounds[3] + 2 * me._slice;
-      me._frame.setSize(me._width, me._height);
+    # compute the bounds
+    var text_bb = me._text.update().getBoundingBox();
+    var width = text_bb[2];
+    var height = text_bb[3];
+
+    if( me._measureBB != nil )
+    {
+      width = math.max(width, me._measureBB[2]);
+      height = math.max(height, me._measureBB[3]);
+    }
+
+    if( width > max_width )
+      width = max_width;
+
+    me._width = width + 2 * me._slice;
+    me._height = height + 2 * me._slice;
+    me._frame.setSize(me._width, me._height)
+             .update();
   },
 
   _remapValue: func(val)
@@ -177,7 +178,7 @@ var Tooltip = {
   {
     return me['_canvas'];
   },
-  
+
   setPosition: func(x, y)
   {
     me.setInt("x", x + 10);
@@ -239,7 +240,7 @@ var setTooltip = func(node)
    } else {
        tooltip.setWidthText(nil);
    }
-   
+
    var nodePath = cmdarg().getNode('property');
    if (nodePath != nil) {
      var n = props.globals.getNode(nodePath.getValue());
@@ -272,13 +273,13 @@ var showTooltip = func(node)
 var updateHover = func(node)
 {
   tooltip.setTooltipId(nil);
-  
+
   # if not shown, nothing to do here
   if (!tooltip.isVisible()) return;
 
   # reset cursor to standard
   tooltip.fadeOut();
-  
+
 }
 
 addcommand("update-hover", updateHover);

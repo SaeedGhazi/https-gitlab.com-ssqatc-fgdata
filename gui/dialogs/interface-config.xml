@@ -133,6 +133,22 @@
       </binding>
     </checkbox>
     
+    
+    <text>
+      <row>5</row>
+      <col>0</col>
+      <label>Disable mouse flight-controls mode</label>
+      <padding>10</padding>
+    </text>
+
+    <checkbox>
+      <row>5</row>
+      <col>1</col>
+      <property>/sim/mouse/skip-flight-controls-mode</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
   </group>
 
   <nasal>

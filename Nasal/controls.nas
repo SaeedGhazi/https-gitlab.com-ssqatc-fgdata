@@ -536,6 +536,10 @@ var cycleMouseMode = func(node)
     if (mode == 3) mode = 0;
     modeNode.setIntValue(mode);
     
+    # this is really a 'show on-screen hints' control
+    if (getprop('/sim/view-name-popup') == 0)
+      return;
+    
     if (mode == 1) {
         setprop("/sim/messages/copilot", "Mouse is controlling flight controls. Press TAB to change.");
     } elsif (mode == 2) {

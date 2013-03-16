@@ -6,23 +6,11 @@
 # comes along and wants to pop a tip up before your delay is finished,
 # you lose. :)
 #
-var popupTip = func(label, delay = nil, override = nil) {
-    var tmpl = props.Node.new({
-            name : "PopTip", modal : 0, layout : "hbox",
-            y: screenHProp.getValue() - 140,
-            text : { label : label, padding : 6 }
-    });
+var popupTip = func(label, delay = nil, override = nil)
+{
+    fgcommand("show-message", props.Node.new({ "label": label, "delay":delay }));
 
-    if (override != nil) tmpl.setValues(override);
-    popdown();
-    fgcommand("dialog-new", tmpl);
-    fgcommand("dialog-show", tipArg);
 
-    currTimer += 1;
-    var thisTimer = currTimer;
-
-    # Final argument is a flag to use "real" time, not simulated time
-    settimer(func { if(currTimer == thisTimer) { popdown() } }, delay or DELAY, 1);
 }
 
 var showDialog = func(name) {

@@ -513,6 +513,16 @@ var speedup = func(speed_up)
         t = (t < 32) ? t*2 : 32;
     }
     setprop("/sim/speed-up", t);
+    
+    # reformat as a string, this is borrowed from replay.xml
+    
+		if (t<0.9)
+		{
+			t=1/t; # invert the value
+			t = "1/" ~ t; # convert to a string and show inverted
+		}
+        
+    gui.popupTip("Time speed-up: " ~ t ~ "x");
 }
 
 # mouse-mode handling 
@@ -540,11 +550,18 @@ var cycleMouseMode = func(node)
     if (getprop('/sim/view-name-popup') == 0)
       return;
     
-    if (mode == 1) {
-        setprop("/sim/messages/copilot", "Mouse is controlling flight controls. Press TAB to change.");
-    } elsif (mode == 2) {
-        setprop("/sim/messages/copilot","Mouse is controlling view direction. Press TAB to change.");
+    if (mode == 0) {
+      fgcommand("clear-message", props.Node.new({ "id":"mouse-mode" }));
+      return;
     }
+    
+    var msg = "";
+    if (mode == 1)
+        msg = "Mouse is controlling flight controls. Press TAB to change.";
+    else
+        msg = "Mouse is controlling view direction. Press TAB to change.";
+    
+  	fgcommand("show-message", props.Node.new({ "label": msg, "id":"mouse-mode" }));
 }
 
 addcommand("cycle-mouse-mode", cycleMouseMode);

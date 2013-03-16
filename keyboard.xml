@@ -653,12 +653,10 @@ top down before the key bindings are parsed.
  <key n="65">
   <name>A</name>
   <desc>Decrease speed-up</desc>
-  <binding>
-   <command>property-adjust</command>
-   <property>/sim/speed-up</property>
-   <min>1</min>
-   <step type="double">-1</step>
-  </binding>
+	<binding>
+		<command>nasal</command>
+		<script>controls.speedup(-1);</script>
+	</binding>
  </key>
 
  <key n="66">
@@ -853,12 +851,10 @@ top down before the key bindings are parsed.
  <key n="97">
   <name>a</name>
   <desc>Increase speed-up</desc>
-  <binding>
-   <command>property-adjust</command>
-   <property>/sim/speed-up</property>
-   <min>1</min>
-   <step type="double">1</step>
-  </binding>
+	<binding>
+		<command>nasal</command>
+		<script>controls.speedup(1);</script>
+	</binding>
  </key>
 
  <key n="98">

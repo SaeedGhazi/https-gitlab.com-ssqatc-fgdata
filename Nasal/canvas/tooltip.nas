@@ -14,15 +14,17 @@ var Tooltip = {
       _tipId: nil,
       _slice: 17,
       _measureText: nil,
-      _measureBB: nil
+      _measureBB: nil,
+      _hideTimer: nil
     };
+    
     m.setInt("size[0]", size[0]);
     m.setInt("size[1]", size[1]);
     m.setBool("visible", 0);
 
-    # arg = [child, listener_node, mode, is_child_event]
-   # setlistener(m._node, func m._propCallback(arg[0], arg[2]), 0, 2);
-
+    m._hideTimer = maketimer(1.0, m, Tooltip._hideTimeout);
+    m._hideTimer.singleShot = 1;
+    
     return m;
   },
   # Destructor
@@ -192,9 +194,24 @@ var Tooltip = {
     me.setBool("visible", 1);
   },
 
+  showMessage: func()
+  {
+    me.setInt("y", getprop('/sim/startup/ysize') * 0.2);
+    var screenW = getprop('/sim/startup/xsize');
+    me.setInt("x", (screenW - me._width) * 0.5);
+    me.show();
+    me._hideTimer.restart(4.0);
+  },
+
   hide: func()
   {
-    me.setBool("visible", 0);
+    me._hideTimer.restart(1.0);
+  },
+
+  hideNow: func()
+  {
+    me._hideTimer.stop();
+    me._hideTimeout();
   },
 
   isVisible: func
@@ -210,29 +227,20 @@ var Tooltip = {
   fadeOut: func()
   {
     me.hide();
-  }
+  },
 
 # private:
-
+  _hideTimeout: func()
+  {
+    me.setBool("visible", 0);
+  }
 };
 
 var tooltip = canvas.Tooltip.new([300, 100]);
-    tooltip.createCanvas();
+tooltip.createCanvas();
 
-var setTooltip = func(node)
+var innerSetTooltip = func(node)
 {
-  var tipId = cmdarg().getNode('tooltip-id').getValue();
-  if (tooltip.getTooltipId() == tipId) {
-    return; # nothing more to do
-  }
-
-  var x = cmdarg().getNode('x').getValue();
-  var y = cmdarg().getNode('y').getValue();
-
-   var screenHeight = getprop('/sim/startup/ysize');
-   tooltip.setPosition(x, screenHeight - y);
-   tooltip.setTooltipId(tipId);
-
    tooltip.setLabel(cmdarg().getNode('label').getValue());
    var measure = cmdarg().getNode('measure-text');
    if (measure != nil) {
@@ -254,6 +262,23 @@ var setTooltip = func(node)
      tooltip.setProperty(nil);
      tooltip.setMapping(nil);
   }
+}
+
+var setTooltip = func(node)
+{
+  var tipId = cmdarg().getNode('tooltip-id').getValue();
+  if (tooltip.getTooltipId() == tipId) {
+    return; # nothing more to do
+  }
+
+  var x = cmdarg().getNode('x').getValue();
+  var y = cmdarg().getNode('y').getValue();
+
+   var screenHeight = getprop('/sim/startup/ysize');
+   tooltip.setPosition(x, screenHeight - y);
+   tooltip.setTooltipId(tipId);
+
+   innerSetTooltip(node);
 
   # don't actually show here, we do that response to tooltip-timeout
   # so this is just getting ready
@@ -282,6 +307,23 @@ var updateHover = func(node)
 
 }
 
+var showMessage = func(node)
+{
+  var msgId = node.getNode("id");
+  tooltip.setTooltipId((msgId == nil) ? 'msg' : msgId.getValue());
+  innerSetTooltip(node);
+  tooltip.showMessage();
+}
+
+var clearMessage = func(node)
+{
+  var msgId = node.getNode("id");
+  if (tooltip.getTooltipId() != msgId.getValue()) return;
+  tooltip.hideNow();
+}
+
 addcommand("update-hover", updateHover);
 addcommand("set-tooltip", setTooltip);
 addcommand("tooltip-timeout", showTooltip);
+addcommand("show-message", showMessage);
+addcommand("clear-message", clearMessage);

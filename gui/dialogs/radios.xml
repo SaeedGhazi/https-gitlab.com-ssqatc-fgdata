@@ -74,6 +74,7 @@
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
+   <live>true</live>
    <property>/instrumentation/comm[0]/frequencies/selected-mhz</property>
   </input>
 
@@ -114,6 +115,7 @@
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
+   <live>true</live>
    <property>/instrumentation/comm[0]/frequencies/standby-mhz</property>
   </input>
 
@@ -131,6 +133,7 @@
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
+   <live>true</live>
    <property>/instrumentation/comm[1]/frequencies/selected-mhz</property>
   </input>
 
@@ -171,6 +174,7 @@
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
+   <live>true</live>
    <property>/instrumentation/comm[1]/frequencies/standby-mhz</property>
   </input>
 
@@ -188,6 +192,7 @@
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
+   <live>true</live>
    <property>/instrumentation/nav[0]/frequencies/selected-mhz</property>
   </input>
 
@@ -228,6 +233,7 @@
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
+   <live>true</live>
    <property>/instrumentation/nav[0]/frequencies/standby-mhz</property>
   </input>
 
@@ -238,6 +244,7 @@
    <width>75</width>
    <height>25</height>
    <label>deg</label>
+   <live>true</live>
    <property>/instrumentation/nav[0]/radials/selected-deg</property>
   </input>
 
@@ -255,6 +262,7 @@
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
+   <live>true</live>
    <property>/instrumentation/nav[1]/frequencies/selected-mhz</property>
   </input>
 
@@ -295,6 +303,7 @@
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
+   <live>true</live>
    <property>/instrumentation/nav[1]/frequencies/standby-mhz</property>
   </input>
 
@@ -305,6 +314,7 @@
    <width>75</width>
    <height>25</height>
    <label>deg</label>
+   <live>true</live>
    <property>/instrumentation/nav[1]/radials/selected-deg</property>
   </input>
 
@@ -322,6 +332,7 @@
    <width>75</width>
    <height>25</height>
    <label>kHz</label>
+   <live>true</live>
    <property>/instrumentation/adf/frequencies/selected-khz</property>
   </input>
 
@@ -362,6 +373,7 @@
    <width>75</width>
    <height>25</height>
    <label>kHz</label>
+   <live>true</live>
    <property>/instrumentation/adf/frequencies/standby-khz</property>
   </input>
 
@@ -372,6 +384,7 @@
    <width>75</width>
    <height>25</height>
    <label>deg</label>
+   <live>true</live>
    <property>/instrumentation/adf/rotation-deg</property>
   </input>
 
@@ -389,6 +402,7 @@
    <width>75</width>
    <height>25</height>
    <label>MHz</label>
+   <live>true</live>
    <property>/instrumentation/dme/frequencies/selected-mhz</property>
   </input>
 
@@ -408,6 +422,7 @@
   <combo>
    <pref-width>45</pref-width>
    <pref-height>25</pref-height>
+   <live>true</live>
    <property>/instrumentation/tacan/frequencies/selected-channel[1]</property>
    <value>0</value>
    <value>1</value>
@@ -424,6 +439,7 @@
   <combo>
    <pref-width>45</pref-width>
    <pref-height>25</pref-height>
+   <live>true</live>
    <property>/instrumentation/tacan/frequencies/selected-channel[2]</property>
    <value>0</value>
    <value>1</value>
@@ -440,6 +456,7 @@
   <combo>
    <pref-width>45</pref-width>
    <pref-height>25</pref-height>
+   <live>true</live>
    <property>/instrumentation/tacan/frequencies/selected-channel[3]</property>
    <value>0</value>
    <value>1</value>
@@ -456,6 +473,7 @@
   <combo>
    <pref-width>45</pref-width>
    <pref-height>25</pref-height>
+   <live>true</live>
    <property>/instrumentation/tacan/frequencies/selected-channel[4]</property>
    <value>X</value>
    <value>Y</value>

@@ -7,34 +7,34 @@
  <modal>false</modal>
  <layout>vbox</layout>
 
-  <group>
-    <layout>hbox</layout>
-	  <empty><stretch>1</stretch></empty>
+ <group>
+  <layout>hbox</layout>
+  <empty><stretch>1</stretch></empty>
 
-    <text>
-      <label>Radio Frequencies</label>
-    </text>
+  <text>
+   <label>Radio Frequencies</label>
+  </text>
 
-	  <empty><stretch>1</stretch></empty>
+  <empty><stretch>1</stretch></empty>
 
-    <button>
-      <pref-width>16</pref-width>
-      <pref-height>16</pref-height>
-      <legend></legend>
-      <keynum>27</keynum>
-      <border>2</border>
-      <binding>
-        <command>dialog-close</command>
-      </binding>
-    </button>
-  </group>
+  <button>
+   <pref-width>16</pref-width>
+   <pref-height>16</pref-height>
+   <legend></legend>
+   <keynum>27</keynum>
+   <border>2</border>
+   <binding>
+    <command>dialog-close</command>
+   </binding>
+  </button>
+ </group>
 
-  <hrule/>
+ <hrule/>
 
-<group>
+ <group>
   <layout>table</layout>
 
- <!-- headers -->
+  <!-- headers -->
   <text>
    <row>0</row>
    <col>1</col>
@@ -76,6 +76,10 @@
    <label>MHz</label>
    <live>true</live>
    <property>/instrumentation/comm[0]/frequencies/selected-mhz</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>com1-selected</object-name>
+   </binding>
   </input>
 
   <button>
@@ -117,6 +121,10 @@
    <label>MHz</label>
    <live>true</live>
    <property>/instrumentation/comm[0]/frequencies/standby-mhz</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>com1-standby</object-name>
+   </binding>
   </input>
 
   <text>
@@ -135,6 +143,10 @@
    <label>MHz</label>
    <live>true</live>
    <property>/instrumentation/comm[1]/frequencies/selected-mhz</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>com2-selected</object-name>
+   </binding>
   </input>
 
   <button>
@@ -176,6 +188,10 @@
    <label>MHz</label>
    <live>true</live>
    <property>/instrumentation/comm[1]/frequencies/standby-mhz</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>com2-standby</object-name>
+   </binding>
   </input>
 
   <text>
@@ -194,6 +210,10 @@
    <label>MHz</label>
    <live>true</live>
    <property>/instrumentation/nav[0]/frequencies/selected-mhz</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>nav1-selected</object-name>
+   </binding>
   </input>
 
   <button>
@@ -235,6 +255,10 @@
    <label>MHz</label>
    <live>true</live>
    <property>/instrumentation/nav[0]/frequencies/standby-mhz</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>nav1-standby</object-name>
+   </binding>
   </input>
 
   <input>
@@ -246,6 +270,10 @@
    <label>deg</label>
    <live>true</live>
    <property>/instrumentation/nav[0]/radials/selected-deg</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>nav1-radial</object-name>
+   </binding>
   </input>
 
   <text>
@@ -264,6 +292,10 @@
    <label>MHz</label>
    <live>true</live>
    <property>/instrumentation/nav[1]/frequencies/selected-mhz</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>nav2-selected</object-name>
+   </binding>
   </input>
 
   <button>
@@ -305,6 +337,10 @@
    <label>MHz</label>
    <live>true</live>
    <property>/instrumentation/nav[1]/frequencies/standby-mhz</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>nav2-standby</object-name>
+   </binding>
   </input>
 
   <input>
@@ -316,6 +352,10 @@
    <label>deg</label>
    <live>true</live>
    <property>/instrumentation/nav[1]/radials/selected-deg</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>nav2-radial</object-name>
+   </binding>
   </input>
 
   <text>
@@ -334,6 +374,10 @@
    <label>kHz</label>
    <live>true</live>
    <property>/instrumentation/adf/frequencies/selected-khz</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>adf-selected</object-name>
+   </binding>
   </input>
 
   <button>
@@ -375,6 +419,10 @@
    <label>kHz</label>
    <live>true</live>
    <property>/instrumentation/adf/frequencies/standby-khz</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>adf-standby</object-name>
+   </binding>
   </input>
 
   <input>
@@ -386,6 +434,10 @@
    <label>deg</label>
    <live>true</live>
    <property>/instrumentation/adf/rotation-deg</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>adf-radial</object-name>
+   </binding>
   </input>
 
   <text>
@@ -404,6 +456,10 @@
    <label>MHz</label>
    <live>true</live>
    <property>/instrumentation/dme/frequencies/selected-mhz</property>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>dme-selected</object-name>
+   </binding>
   </input>
 
 
@@ -420,6 +476,7 @@
 
 
   <combo>
+   <name>tacan-1</name>
    <pref-width>45</pref-width>
    <pref-height>25</pref-height>
    <live>true</live>
@@ -434,9 +491,14 @@
    <value>7</value>
    <value>8</value>
    <value>9</value>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>tacan-1</object-name>
+   </binding>
   </combo>
 <!---->
   <combo>
+   <name>tacan-2</name>
    <pref-width>45</pref-width>
    <pref-height>25</pref-height>
    <live>true</live>
@@ -451,9 +513,14 @@
    <value>7</value>
    <value>8</value>
    <value>9</value>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>tacan-2</object-name>
+   </binding>
   </combo>
 
   <combo>
+   <name>tacan-3</name>
    <pref-width>45</pref-width>
    <pref-height>25</pref-height>
    <live>true</live>
@@ -468,79 +535,62 @@
    <value>7</value>
    <value>8</value>
    <value>9</value>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>tacan-3</object-name>
+   </binding>
   </combo>
 
   <combo>
+   <name>tacan-4</name>
    <pref-width>45</pref-width>
    <pref-height>25</pref-height>
    <live>true</live>
    <property>/instrumentation/tacan/frequencies/selected-channel[4]</property>
    <value>X</value>
    <value>Y</value>
+   <binding>
+    <command>dialog-apply</command>
+    <object-name>tacan-4</object-name>
+   </binding>
   </combo>
 
   <empty>
-    <stretch>true</stretch>
+   <stretch>true</stretch>
   </empty>
 
   <button>
-    <legend>ATC Services in range</legend>
-    <binding>
-      <command>ATC-freq-search</command>
-    </binding>
+   <legend>ATC Services in range</legend>
+   <binding>
+    <command>ATC-freq-search</command>
+   </binding>
   </button>
 
  </group>
  <hrule/>
 
- 	<group>
-		<layout>hbox</layout>
-		<default-padding>6</default-padding>
-		<empty>
-			<stretch>true</stretch>
-		</empty>
+ <group>
+  <layout>hbox</layout>
+  <default-padding>6</default-padding>
+  <empty>
+   <stretch>true</stretch>
+  </empty>
 
-		<button>
-			<legend>OK</legend>
-			<default>true</default>
-			<equal>true</equal>
-			<binding>
-				<command>dialog-apply</command>
-			</binding>
-			<binding>
-				<command>dialog-close</command>
-			</binding>
-		</button>
+  <button>
+   <legend>Close</legend>
+   <default>true</default>
+   <equal>true</equal>
+   <binding>
+    <command>dialog-apply</command>
+   </binding>
+   <binding>
+    <command>dialog-close</command>
+   </binding>
+  </button>
 
-		<button>
-			<legend>Apply</legend>
-			<equal>true</equal>
-			<binding>
-				<command>dialog-apply</command>
-			</binding>
-		</button>
-
-		<button>
-			<legend>Reset</legend>
-			<equal>true</equal>
-			<binding>
-				<command>dialog-update</command>
-			</binding>
-		</button>
-
-		<button>
-			<legend>Cancel</legend>
-			<equal>true</equal>
-			<key>Esc</key>
-			<binding>
-				<command>dialog-close</command>
-			</binding>
-		</button>
-
-		<empty>
-			<stretch>true</stretch>
-		</empty>
-	</group>
-
+  <empty>
+   <stretch>true</stretch>
+  </empty>
+ </group>
 
 </PropertyList>

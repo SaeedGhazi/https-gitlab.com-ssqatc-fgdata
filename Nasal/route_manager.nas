@@ -82,6 +82,12 @@ var RouteManagerDelegate = {
         fgcommand("activate-flightplan", props.Node.new({"activate": 0}));
     },
     
+    endOfFlightPlan: func
+    {
+        debug.dump("end of flight-plan, deactivating");
+        fgcommand("activate-flightplan", props.Node.new({"activate": 0}));
+    },
+    
     waypointsChanged: func
     {
     },

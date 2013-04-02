@@ -61,24 +61,10 @@
     </binding>
   </checkbox>
 
-  <checkbox>
-    <halign>left</halign>
-    <label>Enable AI scenarios (requires restart)</label>
-    <name>enable-ai-scenarios</name>
-    <property>/sim/ai/scenarios-enabled</property>
-    <binding>
-        <command>dialog-apply</command>
-        <object-name>enable-ai-scenarios</object-name>
-    </binding>
-  </checkbox>
-
   <text><label/></text>
 
   <text>
-    <label>Choose active scenario(s) for the next program start</label>
-    <enable>
-      <property>/sim/ai/scenarios-enabled</property>
-    </enable>
+    <label>Choose active scenario(s) </label>
   </text>
 
   <hrule/>
@@ -105,23 +91,7 @@
       <halign>center</halign>
 
     <button>
-      <legend>OK</legend>
-      <equal>true</equal>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-      <binding>
-        <command>nasal</command>
-        <script>apply()</script>
-      </binding>
-      <binding>
-        <command>dialog-close</command>
-      </binding>
-    </button>
-
-    <button>
-      <legend>Cancel</legend>
-      <equal>true</equal>
+      <legend>Close</legend>
       <key>Esc</key>
       <binding>
         <command>dialog-close</command>
@@ -165,24 +135,21 @@
         var label = string.replace(file, "_", " ");
         if (nameN != nil)
             label = nameN.getValue();
+        
         cb.getNode("label",1).setValue(label);
         cb.getNode("name",1).setValue(file);
-        cb.getNode("enable/property",1).setValue("/sim/ai/scenarios-enabled");
+        
+        var applyBind = cb.addChild("binding", 0);
+        applyBind.getNode("command", 1).setValue("dialog-apply");
+        
+        var bind = cb.addChild("binding", 1);
+        bind.getNode("command", 1).setValue("load-scenario");
+        bind.getNode("name", 1).setValue(file);
+        bind.getNode("load-property", 1).setValue(propertyRoot.getNode("selected").getPath());
+        
+        #cb.getNode("enable/property",1).setValue("/sim/ai/scenarios-enabled");
+        
         group.getNode("empty",1).getNode("stretch",1).setValue("true");
-      }
-
-      var apply = func {
-        var targetRoot = props.globals.getNode("sim/ai",1);
-        targetRoot.removeChildren("scenario");
-        var i = 0;
-        foreach( var src; props.globals.getNode("sim/gui/dialogs/scenario",1).getChildren( "scenario" ) ) {
-          if( src.getNode("selected",1).getValue() ) {
-            var scnNode = targetRoot.getChild("scenario", i, 1 );
-            scnNode.setAttribute("userarchive",1);
-            scnNode.setValue( src.getNode("name",1).getValue() );
-            i+=1;
-          }
-        }
       }
 
       var path = getprop("/sim/fg-root") ~ "/AI";

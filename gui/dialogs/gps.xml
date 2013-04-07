@@ -11,14 +11,17 @@
 		var cmd = gps.getNode("command", 1);
 		var scratch = gps.getNode("scratch", 1);
     var scratchValid = scratch.getNode("valid", 1);
-
-    var updateSearchResults = func
-    {
-      debug.dump('search results is:', searchResults);
+    var searchIsWaypoints = 0;
+    var anySpec = 'vor,airport,heliport,ils,seaport,fix,ndb,waypoint,tacan,city,town';
     
-      dlg.getNode("scratch-index", 1).setValue(0);
-      dlg.getNode("scratch-has-next", 1).setBoolValue(size(searchResults) > 1);
+    var updateSearchResults = func(isWpts, index = 0)
+    {
+      searchIsWaypoints = isWpts;
+      dlg.getNode("scratch-index", 1).setValue(index);
       
+      var lastIndex = size(searchResults) - 1;
+      dlg.getNode("scratch-has-next", 1).setValue((index + 1) < lastIndex);
+            
       if (size(searchResults) < 1) {
         scratchValid.setBoolValue(0);
         return;
@@ -34,23 +37,33 @@
         scratchValid.setBoolValue(0);
         return;
       }
-            
-      var ty = result.type;
+      
       scratchValid.setBoolValue(1);
-      scratch.getNode("type", 1).setValue(ty);
       scratch.getNode("latitude-deg", 1).setValue(result.lat);
       scratch.getNode("longitude-deg", 1).setValue(result.lon);
-      scratch.getNode("altitude-ft", 1).setValue(result.elevation);
       scratch.getNode("ident", 1).setValue(result.id);
-      scratch.getNode("name", 1).setValue(result.name);
+      var cd = nil;
       
-      if (ty == 'vor') {
-        scratch.getNode("frequency-mhz", 1).setValue(result.frequency);
-      } elsif (ty == 'ndb') {
-        scratch.getNode("frequency-khz", 1).setValue(result.frequency);
+      if (searchIsWaypoints) {
+        scratch.getNode("type", 1).setValue('WPT');
+        
+        cd = result.courseAndDistanceFrom(geo.aircraft_position());
+      } else {
+        var ty = result.type;
+        scratch.getNode("type", 1).setValue(ty);
+        scratch.getNode("name", 1).setValue(result.name);
+        scratch.getNode("altitude-ft", 1).setValue(result.elevation);
+        
+        if (ty == 'vor') {
+          scratch.getNode("frequency-mhz", 1).setValue(result.frequency);
+        } elsif (ty == 'ndb') {
+          scratch.getNode("frequency-khz", 1).setValue(result.frequency);
+        }
+        
+        cd = positioned.courseAndDistance(result);
       }
-            
-      var cd = positioned.courseAndDistance(result);
+  
+      
       scratch.getNode("mag-bearing-deg", 1).setValue(cd[0] + magvar());
       scratch.getNode("distance-nm", 1).setValue(cd[1]);
       
@@ -60,24 +73,27 @@
     var doSearch = func()
     {
       var ty = dlg.getNode("search-type").getValue();
+      if (ty == 'any') ty = anySpec;
+      
       var query = dlg.getNode("search-query").getValue();      
       searchResults = positioned.sortByRange(positioned.findByIdent(query, ty));
-      updateSearchResults();
+      updateSearchResults(0);
     }
     
     var doSearchNames = func
     {
       var ty = dlg.getNode("search-type").getValue();
+      if (ty == 'any') ty = anySpec;
       var query = dlg.getNode("search-query").getValue();      
       searchResults = positioned.sortByRange(positioned.findByName(query, ty));
-      updateSearchResults();
+      updateSearchResults(0);
     }
     
     var doSearchNearest = func
     {
       var ty = dlg.getNode("search-type").getValue();
       searchResults = positioned.findWithinRange(200.0, ty);
-      updateSearchResults();
+      updateSearchResults(0);
     }
     
     var doLoadRouteWaypoint = func
@@ -87,7 +103,7 @@
       for (var i=0; i < fp.getPlanSize(); i+=1) {
         append(searchResults, fp.getWP(i));
       }
-      updateSearchResults();
+      updateSearchResults(1, fp.current);
     }
     
     var doScratchPrevious = func
@@ -111,7 +127,7 @@
     }
     
     var searchResults = [];
-    updateSearchResults();
+    updateSearchResults(0);
     
 		var slaved = props.globals.getNode("/instrumentation/nav[0]/slaved-to-gps", 1);
 	]]></open>
@@ -399,6 +415,8 @@
                     <value>ndb</value>
                     <value>fix</value>
                     <value>wpt</value>
+                    <value>city</value>
+                    <value>town</value>
                     <live>true</live>
                     <binding>
                         <command>dialog-apply</command>

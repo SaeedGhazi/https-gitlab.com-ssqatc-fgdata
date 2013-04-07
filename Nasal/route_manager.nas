@@ -1,13 +1,13 @@
-# route_manager.nas - default FlightPlan delegate corresponding to the build
-# in route-manager dialog. Intended to provide a sensible default behaviour, 
-# but be disabled by an aircraft-specific FMS / GPS system.
+# route_manager.nas -  FlightPlan delegate(s) corresponding to the built-
+# in route-manager dialog and GPS. Intended to provide a sensible default behaviour, 
+# but can be disabled by an aircraft-specific FMS / GPS system.
 
 var RouteManagerDelegate = {
 	new: func(fp) {
-        # if this property is set, don't build a delegate at all
-        if (getprop('/autopilot/route-manager/disable-fms'))
-            return nil;
-            
+    # if this property is set, don't build a delegate at all
+    if (getprop('/autopilot/route-manager/disable-route-manager'))
+        return nil;
+        
 		var m = { parents: [RouteManagerDelegate] };
 		m.flightplan = fp;
 		return m;
@@ -86,19 +86,66 @@ var RouteManagerDelegate = {
     {
         debug.dump("end of flight-plan, deactivating");
         fgcommand("activate-flightplan", props.Node.new({"activate": 0}));
-    },
+    }
+};
+
+
+var FMSDelegate = {
+	new: func(fp) {
+    # if this property is set, don't build a delegate at all
+    if (getprop('/autopilot/route-manager/disable-fms'))
+        return nil;
+            
+		var m = { parents: [FMSDelegate], flightplan:fp, landingCheck:nil };
+		return m;
+	},
+    
+  _landingCheckTimeout: func
+  {
+    var cur = me.flightplan.currentWP();
+    var wow = getprop('gear/gear[0]/wow');
+    var gs = getprop('velocities/groundspeed-kt');
+    if (wow and (gs < 25))  {
+      debug.dump('touchdown on destination runway, end of route.');
+      me.landingCheck.stop();
+      # record touch-down time?
+      me.flightplan.finish();
+    }
+  },
     
     waypointsChanged: func
     {
     },
     
+    endOfFlightPlan: func
+    {
+      debug.dump('end of flight-plan');
+    },
+    
     currentWaypointChanged: func
     {
-        debug.dump('saw current WP changed, now ' ~ me.flightplan.current);
+        if (me.landingCheck != nil) {
+          me.landingCheck.stop();
+          me.landingCheck = nil; # delete timer
+        }
+        
+        #debug.dump('saw current WP changed, now ' ~ me.flightplan.current);
+        var active = me.flightplan.currentWP();
+        if (active == nil) return;
+        
+        if (active.alt_cstr_type != 'none') {
+          debug.dump('new WP has valid altitude restriction, setting on AP');
+          setprop('/autopilot/settings/target-altitude-ft', active.alt_cstr);
+        }
+        
+        var activeRunway = active.runway();
+        if ((activeRunway != nil) and (activeRunway.id == me.flightplan.destination_runway.id)) {
+          me.landingCheck = maketimer(2.0, me, FMSDelegate._landingCheckTimeout);
+          me.landingCheck.start();
+        }
     }
 };
 
-# debug.dump('register routemanager delegate factory');
-
+registerFlightPlanDelegate(FMSDelegate.new);
 registerFlightPlanDelegate(RouteManagerDelegate.new);
 

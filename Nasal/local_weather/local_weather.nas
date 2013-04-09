@@ -1224,7 +1224,7 @@ if (ev.vis_flag ==1)
 	# then set the new value in current and execute change
 	cNode.getNode("visibility-m").setValue(vis);
 	#compat_layer.setVisibility(vis);
-	#print(vis);
+	print(vis);
 	compat_layer.setVisibilitySmoothly(vis);
 
 	# then count the number of active volumes on entry (we need that to determine
@@ -4488,6 +4488,10 @@ if (lowest_layer_turbulence < 0.0) {lowest_layer_turbulence = 0.0;}
 
 var top_shade = 1.0;
 
+# global cloud size scale;
+
+var cloud_size_scale = 1.0;
+
 # globals keeping track of the lifetime when building a Cumulus from individual cloudlets
 
 var cloud_fractional_lifetime = 0.0;
@@ -4582,7 +4586,7 @@ setprop(lw~"effect-volumes/number-active-sat",0);
 # setprop(lw~"config/max-vis-range-m", 120000.0);
 setprop(lw~"config/temperature-offset-degc", 0.0);
 
-# setprop("/sim/rendering/eye-altitude-m", getprop("/position/altitude-ft") * ft_to_m);
+setprop("/sim/rendering/eye-altitude-m", getprop("/position/altitude-ft") * ft_to_m);
 
 # create properties for tile management
 

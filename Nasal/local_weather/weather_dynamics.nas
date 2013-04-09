@@ -122,9 +122,11 @@ time_lw = time_lw + dt_lw;
 #var terminator_offset = sun_angle /  0.017451 * 110000.0;# + 250000.0;
 #setprop("/environment/terminator-relative-position-m",terminator_offset);
 
-# var viewpos = geo.viewer_position();
+var viewpos = geo.viewer_position();
+
 # setprop("/environment/alt-in-haze-m", getprop("/environment/ground-haze-thickness-m")-viewpos.alt());
-# setprop("/sim/rendering/eye-altitude-m", viewpos.alt());
+
+#setprop("/sim/rendering/eye-altitude-m", viewpos.alt());
 
 
 

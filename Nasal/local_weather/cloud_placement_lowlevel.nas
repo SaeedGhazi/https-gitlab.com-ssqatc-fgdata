@@ -80,6 +80,190 @@ for (var i=0; i<ny; i=i+1)
 }
 
 
+###########################################################
+# place an advanced undulatus pattern 
+###########################################################
+
+var create_adv_undulatus = func (arg) {
+
+var markov_array = [];
+var rnd_array = [];
+var max_num_clouds = int(arg.xsize/arg.cloud_spacing)+1;
+var max_num_streaks = int(arg.ysize/arg.undulatus_spacing)+1;
+var path = "Models/Weather/blank.ac";
+var counter = 0;
+
+append(markov_array,0.0);
+
+var rn = 0.0;
+arg.dir = arg.dir + 90.0;
+
+for (var i=1; i<max_num_clouds; i=i+1)
+	{
+	rn = rand();
+	append(markov_array, markov_array[i-1] + 2.0 * (rn -0.5) * arg.undulatus_amplitude + arg.undulatus_slant);
+	append(rnd_array, rn);
+	}
+
+for (i=0; i< max_num_streaks; i=i+1)
+	{
+	var streak_ypos = -0.5 * arg.ysize + i * arg.undulatus_spacing;
+	var aspect_num_clouds = int((arg.aspect + (1.0-arg.aspect) * i/max_num_streaks) * max_num_clouds);
+	
+	for (var j = 0; j< aspect_num_clouds; j=j+1)
+		{
+		var y = streak_ypos + markov_array[j];
+		var x = -0.5 * arg.xsize + j * arg.cloud_spacing;
+		
+		x = x - arg.Dx + 2.0 * rand() * arg.Dx;
+		y = y - arg.Dy + 2.0 * rand() * arg.Dy;
+		
+		var flag = 0;
+		var	bias =1.0 - (1.0* abs(i-0.5 * max_num_streaks)/max_num_streaks +  1.0* abs(j-0.5 * aspect_num_clouds)/aspect_num_clouds);
+		var comp = -.25 * rnd_array[j] + 0.75 * bias;
+		
+		comp = comp + arg.size_bias;
+		if (comp > 0.7)
+			{
+			flag = 1;
+			path = select_cloud_model(arg.type,"large")
+			}
+		else if (comp > 0.4)
+			{
+			flag = 1;
+			path = select_cloud_model(arg.type,"small")
+			}
+			
+		var lat = arg.blat + m_to_lat * (y * math.cos(arg.dir) - x * math.sin(arg.dir));
+		var lon = arg.blon + m_to_lon * (x * math.cos(arg.dir) + y * math.sin(arg.dir));
+
+		var alt = arg.balt + arg.alt_var * 2 * (rand() - 0.5);
+		
+		if (flag > 0)
+			{create_cloud_vec(path, lat, lon, alt, 0.0); counter = counter +1;}
+		}
+	
+	}
+	print("Cloud count: ",counter);
+
+}
+
+
+###########################################################
+# place a stick bundle pattern 
+###########################################################
+
+var sgn = func (x) {
+
+if (x<0.0) {return -1.0;}
+else {return 1.0;}
+}
+
+var create_stick_bundle = func (arg) {
+
+var path = "Models/Weather/blank.ac";
+var base_size_scale = local_weather.cloud_size_scale;
+
+for (var i = 0; i<arg.n_sticks; i=i+1)
+	{
+	var stick_x = 0.5 * math.pow(rand(),2.0) * arg.xsize * sgn(rand()-0.5);
+	var stick_y = 0.5 * math.pow(rand(),2.0) * arg.ysize * sgn(rand()-0.5);
+		
+	var stick_length = arg.stick_length_min + int(rand() * (arg.stick_length_max - arg.stick_length_min) );
+	var stick_Dphi = arg.stick_Dphi_min + rand() * (arg.stick_Dphi_max - arg.stick_Dphi_min);
+	var stick_size_scale = 0.8 + 0.2 * rand();
+	for (var j=0; j<stick_length;j=j+1)
+		{
+		var y = stick_y;
+		var x = stick_x - 0.5 * stick_length * arg.cloud_spacing;
+		var inc = j * arg.cloud_spacing;
+		var pos_size_scale = base_size_scale +  base_size_scale * 2.0* (1.0 - 2.0* abs(0.5 * stick_length - j)/stick_length);
+		local_weather.cloud_size_scale = pos_size_scale;
+		local_weather.cloud_size_scale = stick_size_scale * local_weather.cloud_size_scale;
+		inc = inc *  stick_size_scale;
+		
+		x = x + inc * math.cos(stick_Dphi);
+		y = y + inc * math.sin(stick_Dphi);
+
+		x = x - arg.Dx + 2.0 * rand() * arg.Dx;
+		y = y - arg.Dy + 2.0 * rand() * arg.Dy;
+
+		path = select_cloud_model(arg.type,"large");
+
+		var lat = arg.blat + m_to_lat * (y * math.cos(arg.dir) - x * math.sin(arg.dir));
+		var lon = arg.blon + m_to_lon * (x * math.cos(arg.dir) + y * math.sin(arg.dir));
+
+		var alt = arg.balt + arg.alt_var * 2 * (rand() - 0.5);
+
+		create_cloud_vec(path, lat, lon, alt, 0.0);
+		}
+	}
+
+}
+
+###########################################################
+# place a nested domains pattern 
+###########################################################
+
+var create_domains = func (arg) {
+
+var path = "Models/Weather/blank.ac";
+
+for (var j=0; j<arg.n_domains; j=j+1)
+	{
+	var domain_pos_x = -0.5 * arg.xsize + rand() * arg.xsize;
+	var domain_pos_y = -0.5 * arg.ysize + rand() * arg.ysize;
+
+	var domain_size_x = arg.min_domain_size_x + rand() * (arg.max_domain_size_x - arg.min_domain_size_x);
+	var domain_size_y = arg.min_domain_size_y + rand() * (arg.max_domain_size_y - arg.min_domain_size_y);
+
+	var n_node = int(arg.node_fraction * arg.n);
+	var n_halo = int(arg.halo_fraction * arg.n);
+	var n_bulk = arg.n - n_node - n_halo;
+	
+	for (var i=0; i<n_halo; i=i+1)
+		{
+		var x = domain_pos_x - 0.5 * domain_size_x + rand() * domain_size_x;
+		var y = domain_pos_y - 0.5 * domain_size_y + rand() * domain_size_y;
+		var lat = arg.blat + m_to_lat * (y * math.cos(arg.dir) - x * math.sin(arg.dir));
+		var lon = arg.blon + m_to_lon * (x * math.cos(arg.dir) + y * math.sin(arg.dir));
+		var alt = arg.balt + arg.alt_var * 2 * (rand() - 0.5);
+		if ((abs(x-domain_pos_x) < 0.3 * domain_size_x) or (abs(y-domain_pos_y) < 0.3 * domain_size_y))
+			{path = select_cloud_model(arg.htype,arg.hsubtype);
+			create_cloud_vec(path, lat, lon, alt, 0.0);}
+		}
+	for (i=0; i<n_bulk; i=i+1)
+		{
+		x = domain_pos_x - 0.5 * 0.4* domain_size_x + rand() * 0.4* domain_size_x;
+		y = domain_pos_y - 0.5 * 0.4* domain_size_y + rand() * 0.4* domain_size_y;
+		lat = arg.blat + m_to_lat * (y * math.cos(arg.dir) - x * math.sin(arg.dir));
+		lon = arg.blon + m_to_lon * (x * math.cos(arg.dir) + y * math.sin(arg.dir));
+		alt = arg.balt + arg.alt_var * 2 * (rand() - 0.5);
+		if ((abs(x-domain_pos_x) < 0.4 * domain_size_x) or (abs(y-domain_pos_y) < 0.4 * domain_size_y))
+			{
+			path = select_cloud_model(arg.type,arg.subtype);
+			create_cloud_vec(path, lat, lon, alt, 0.0);
+			}
+		}
+	for (i=0; i<n_node; i=i+1)
+		{
+		x = domain_pos_x - 0.5 * 0.1* domain_size_x + rand() * 0.1* domain_size_x;
+		y = domain_pos_y - 0.5 * 0.1* domain_size_y + rand() * 0.1* domain_size_y;
+		lat = arg.blat + m_to_lat * (y * math.cos(arg.dir) - x * math.sin(arg.dir));
+		lon = arg.blon + m_to_lon * (x * math.cos(arg.dir) + y * math.sin(arg.dir));
+		alt = arg.balt + arg.alt_var * 2 * (rand() - 0.5);
+		path = select_cloud_model(arg.ntype,arg.nsubtype);
+		create_cloud_vec(path, lat, lon, alt, 0.0);
+		}
+
+	}
+
+
+
+}
+
+
+
 
 ###########################################################
 # place a Cumulus alley pattern 

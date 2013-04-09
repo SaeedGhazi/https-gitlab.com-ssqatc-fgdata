@@ -12,6 +12,7 @@ uniform float altitude;
 uniform float cloud_self_shading;
 uniform float visibility;
 uniform float moonlight;
+uniform float air_pollution;
 
 attribute vec3 usrAttr1;
 attribute vec3 usrAttr2;
@@ -151,8 +152,8 @@ void main(void)
     
     float lightArg = (terminator-yprime_alt)/100000.0;
 
-    light_diffuse.b = light_func(lightArg, 1.330e-05, 0.264, 2.227, 1.08e-05, 1.0);
-    light_diffuse.g = light_func(lightArg, 3.931e-06, 0.264, 3.827, 7.93e-06, 1.0);
+    light_diffuse.b = light_func(lightArg -1.2 * air_pollution, 1.330e-05, 0.264, 2.227, 1.08e-05, 1.0);
+    light_diffuse.g = light_func(lightArg -0.6 * air_pollution, 3.931e-06, 0.264, 3.827, 7.93e-06, 1.0);
     light_diffuse.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
     light_diffuse.a = 1.0;
 
@@ -160,9 +161,9 @@ void main(void)
     light_diffuse.rgb = intensity * normalize(mix(light_diffuse.rgb, shadedFogColor, (1.0 - smoothstep(0.5,0.9, min(scattering, cloud_self_shading)  ))));   
 
     // correct ambient light intensity and hue before sunrise
-    if (earthShade < 0.8)
+    if (earthShade < 0.6)
     {
-    light_diffuse.rgb = intensity * normalize(mix(light_diffuse.rgb,  shadedFogColor, 1.0 -smoothstep(0.1, 0.8,earthShade ) ));
+    light_diffuse.rgb = intensity * normalize(mix(light_diffuse.rgb,  shadedFogColor, 1.0 -smoothstep(0.1, 0.6,earthShade ) ));
      
     }
 

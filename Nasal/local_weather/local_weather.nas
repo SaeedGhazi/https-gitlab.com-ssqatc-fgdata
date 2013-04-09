@@ -699,7 +699,7 @@ else
 # compute  the cloud layer self shading correction
 
 var sun_angle = 1.57079632675 - getprop("/sim/time/sun-angle-rad");
-var cloud_layer_shading = 1.0 - ((1.0 - scatt_max) *  math.pow(math.cos(sun_angle),100.0));
+var cloud_layer_shading = 1.0 - (0.8*(1.0 - scatt_max) *  math.pow(math.cos(sun_angle),100.0));
 
 # compute the overcast haze
 

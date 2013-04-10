@@ -156,7 +156,7 @@ var Tanker = {
 		}
 
 		var distance = dt * (me.ktas - me.headwind) * NM2M / 3600;
-		var deviation = me.roll ? 0.5 * dt * 1085.941 * math.tan(me.roll * D2R) / me.ktas : 0;
+		var deviation = me.roll ? dt * 1085.941 * math.tan(me.roll * D2R) / me.ktas : 0;
 
 		if (me.mode == "leg") {
 			if (me.lastmode != "leg") {

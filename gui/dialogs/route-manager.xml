@@ -224,9 +224,38 @@ command interface /autopilot/route-manager/input:
                 gui.dialog_update("route-manager", "approach");
             }
             
-
+            var initPosition = func {
+              var routeActive = routem.getNode("active").getValue();
+              if (routeActive) return;
+              
+              # FIXME have user waypoints check
+              var fp = flightplan();
+              
+              var airborne = getprop('/gear/gear[0]/wow') == 0;
+              if (airborne) {
+                debug.dump('route-manager dialog, init in-air, clearing departure settings');
+                fp.departure = nil;
+                return;
+              }
+              
+              
+              
+              # we're on the ground, find the nearest airport to start from
+              if (fp.departure == nil) {
+                var apts = findAirportsWithinRange(25.0);
+                if (size(apts) == 0) return; # no airports nearby
+                fp.departure = apts[0]; # use the closest one
+              }
+              
+              if (fp.departure_runway == nil) {
+                debug.dump('selecting departure runway');
+                var rwy = fp.departure.findBestRunwayForPos( geo.aircraft_position() );
+                fp.departure_runway = rwy;
+              }
+            }
+            
         # initialise departure values based on current position
-            cmd.setValue("@posinit");
+            initPosition();
 
             updateRunways();
             updateSIDs();

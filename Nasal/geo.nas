@@ -163,6 +163,12 @@ var Coord = {
 		me._pupdate();
 		course *= D2R;
 		dist /= ERAD;
+		
+		if (dist < 0.0) {
+		  dist = abs(dist);
+		  course = course - math.pi;		
+		}
+		
 		me._lat = math.asin(math.sin(me._lat) * math.cos(dist)
 				+ math.cos(me._lat) * math.sin(dist) * math.cos(course));
 

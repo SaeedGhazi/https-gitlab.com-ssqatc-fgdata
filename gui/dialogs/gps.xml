@@ -4,23 +4,134 @@
     <height>430</height>
     <modal>false</modal>
     <nasal>
-        <open>
+        <open><![CDATA[
+
 		var gps = props.globals.getNode("/instrumentation/gps/", 1);
 		var dlg = props.globals.getNode("/sim/gui/dialogs/gps", 1);
 		var cmd = gps.getNode("command", 1);
-		var scratch = gps.getNode("scratch");
+		var scratch = gps.getNode("scratch", 1);
+    var scratchValid = scratch.getNode("valid", 1);
+    var searchIsWaypoints = 0;
+    var anySpec = 'vor,airport,heliport,ils,seaport,fix,ndb,waypoint,tacan,city,town';
+    
+    var updateSearchResults = func(isWpts, index = 0)
+    {
+      searchIsWaypoints = isWpts;
+      dlg.getNode("scratch-index", 1).setValue(index);
+      
+      var lastIndex = size(searchResults) - 1;
+      dlg.getNode("scratch-has-next", 1).setValue((index + 1) < lastIndex);
+            
+      if (size(searchResults) < 1) {
+        scratchValid.setBoolValue(0);
+        return;
+      }
+      
+      updateScratch();
+    }
+    
+    var updateScratch = func
+    {
+      var result = searchResults[dlg.getNode("scratch-index").getValue()];
+      if (result == nil) {
+        scratchValid.setBoolValue(0);
+        return;
+      }
+      
+      scratchValid.setBoolValue(1);
+      scratch.getNode("latitude-deg", 1).setValue(result.lat);
+      scratch.getNode("longitude-deg", 1).setValue(result.lon);
+      scratch.getNode("ident", 1).setValue(result.id);
+      var cd = nil;
+      
+      if (searchIsWaypoints) {
+        scratch.getNode("type", 1).setValue('WPT');
+        
+        cd = result.courseAndDistanceFrom(geo.aircraft_position());
+      } else {
+        var ty = result.type;
+        scratch.getNode("type", 1).setValue(ty);
+        scratch.getNode("name", 1).setValue(result.name);
+        scratch.getNode("altitude-ft", 1).setValue(result.elevation);
+        
+        if (ty == 'vor') {
+          scratch.getNode("frequency-mhz", 1).setValue(result.frequency);
+        } elsif (ty == 'ndb') {
+          scratch.getNode("frequency-khz", 1).setValue(result.frequency);
+        }
+        
+        cd = positioned.courseAndDistance(result);
+      }
+  
+      
+      scratch.getNode("mag-bearing-deg", 1).setValue(cd[0] + magvar());
+      scratch.getNode("distance-nm", 1).setValue(cd[1]);
+      
+      gui.dialog_update("gps");
+    }
 
-		scratch.getNode("exact", 1).setBoolValue(0);
-		var searchType = scratch.getNode("type", 1);
-		var searchQuery = scratch.getNode("query", 1);
-
-		var copySearchArgs = func {
-			searchType.setValue(dlg.getNode("search-type").getValue());
-			searchQuery.setValue(dlg.getNode("search-query").getValue());
-		}
-
+    var doSearch = func()
+    {
+      var ty = dlg.getNode("search-type").getValue();
+      if (ty == 'any') ty = anySpec;
+      
+      var query = dlg.getNode("search-query").getValue();      
+      searchResults = positioned.sortByRange(positioned.findByIdent(query, ty));
+      updateSearchResults(0);
+    }
+    
+    var doSearchNames = func
+    {
+      var ty = dlg.getNode("search-type").getValue();
+      if (ty == 'any') ty = anySpec;
+      var query = dlg.getNode("search-query").getValue();      
+      searchResults = positioned.sortByRange(positioned.findByName(query, ty));
+      updateSearchResults(0);
+    }
+    
+    var doSearchNearest = func
+    {
+      var ty = dlg.getNode("search-type").getValue();
+      searchResults = positioned.findWithinRange(200.0, ty);
+      updateSearchResults(0);
+    }
+    
+    var doLoadRouteWaypoint = func
+    {
+      var fp = flightplan();
+      searchResults = [];
+      for (var i=0; i < fp.getPlanSize(); i+=1) {
+        append(searchResults, fp.getWP(i));
+      }
+      updateSearchResults(1, fp.current);
+    }
+    
+    var doScratchPrevious = func
+    {
+      var index = dlg.getNode("scratch-index").getValue();
+      if (index == 0) return;
+      dlg.getNode("scratch-index").setValue(index - 1);
+      dlg.getNode("scratch-has-next", 1).setValue(size(searchResults) > 1);
+      updateScratch();
+    }
+    
+    var doScratchNext = func
+    {
+      var index = dlg.getNode("scratch-index").getValue();
+      var lastIndex = size(searchResults) - 1;
+      if (index == lastIndex) return;
+      
+      dlg.getNode("scratch-has-next", 1).setValue((index + 1) < lastIndex);
+      dlg.getNode("scratch-index").setValue(index + 1);
+      updateScratch();
+    }
+    
+    var searchResults = [];
+    updateSearchResults(0);
+    
 		var slaved = props.globals.getNode("/instrumentation/nav[0]/slaved-to-gps", 1);
-	</open>
+	]]></open>
+  
     </nasal>
     <name>gps</name>
     <layout>vbox</layout>
@@ -304,6 +415,8 @@
                     <value>ndb</value>
                     <value>fix</value>
                     <value>wpt</value>
+                    <value>city</value>
+                    <value>town</value>
                     <live>true</live>
                     <binding>
                         <command>dialog-apply</command>
@@ -336,36 +449,21 @@
                     <legend>Search</legend>
                     <binding>
                         <command>nasal</command>
-                        <script>
-				copySearchArgs();
-				cmd.setValue("search");
-			</script>
+                        <script>doSearch()</script>
                     </binding>
                 </button>
                 <button>
                     <legend>Search Names</legend>
                     <binding>
                         <command>nasal</command>
-                        <script>
-				copySearchArgs();
-				cmd.setValue("search-names");
-			</script>
+                        <script>doSearchNames()</script>
                     </binding>
                 </button>
                 <button>
                     <legend>Nrst</legend>
                     <binding>
                         <command>nasal</command>
-                        <script>
-				copySearchArgs();
-				scratch.getNode("max-results", 1).setIntValue(10);
-
-				# ensure scratch pos is invalid, so we use current GPS
-				# position as the search origin
-				scratch.getNode("longitude-deg", 1).setDoubleValue(-9999);
-				scratch.getNode("latitude-deg", 1).setDoubleValue(-9999);
-				cmd.setValue("nearest")
-			</script>
+                        <script>doSearchNearest()</script>
                     </binding>
                 </button>
                 <button>
@@ -375,11 +473,7 @@
                     <legend>Actv RTE WPT</legend>
                     <binding>
                         <command>nasal</command>
-                        <script>
-				scratch.getNode("results", 1).clearValue();
-				scratch.getNode("index", 1).setIntValue(-1);
-				cmd.setValue("load-route-wpt")
-			</script>
+                        <script>doLoadRouteWaypoint()</script>
                     </binding>
                 </button>
                 <empty>
@@ -484,7 +578,7 @@
             <button>
                 <enable>
                     <greater-than>
-                        <property>/instrumentation/gps/scratch/index</property>
+                        <property>/sim/gui/dialogs/gps/scratch-index</property>
                         <value>0</value>
                     </greater-than>
                 </enable>
@@ -494,12 +588,12 @@
                 <key>left</key>
                 <binding>
                     <command>nasal</command>
-                    <script>cmd.setValue("previous")</script>
+                    <script>doScratchPrevious()</script>
                 </binding>
             </button>
             <button>
                 <enable>
-                    <property>/instrumentation/gps/scratch/has-next</property>
+                    <property>/sim/gui/dialogs/gps/scratch-has-next</property>
                 </enable>
                 <row>5</row>
                 <col>1</col>
@@ -507,7 +601,7 @@
                 <key>right</key>
                 <binding>
                     <command>nasal</command>
-                    <script>cmd.setValue("next")</script>
+                    <script>doScratchNext()</script>
                 </binding>
             </button>
         </group>

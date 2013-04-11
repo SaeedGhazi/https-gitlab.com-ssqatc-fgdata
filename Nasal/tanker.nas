@@ -70,7 +70,7 @@ var identity = {
 
 
 var Tanker = {
-	new: func(aiid, callsign, tacan, type, model, kias, maxfuel, pattern, heading, coord) {
+	new: func(aiid, callsign, tacan, type, model, kias, maxfuel, pattern, contacts, heading, coord) {
 		var m = { parents: [Tanker] };
 		m.callsign = callsign;
 		m.tacan = tacan;
@@ -79,6 +79,7 @@ var Tanker = {
 		m.out_of_range_time = 0;
 		m.interval = 10;
 		m.length = pattern;
+		m.contacts = contacts;
 		m.roll = 0;
 		m.coord = geo.Coord.new(coord);
 		m.anchor = geo.Coord.new(coord).apply_course_distance(m.track_course, m.length); # ARCP
@@ -155,7 +156,7 @@ var Tanker = {
 		}
 
 		var distance = dt * (me.ktas - me.headwind) * NM2M / 3600;
-		var deviation = me.roll ? 0.5 * dt * 1085.941 * math.tan(me.roll * D2R) / me.ktas : 0;
+		var deviation = me.roll ? dt * 1085.941 * math.tan(me.roll * D2R) / me.ktas : 0;
 
 		if (me.mode == "leg") {
 			if (me.lastmode != "leg") {
@@ -218,9 +219,43 @@ var Tanker = {
 		me.brgN.setDoubleValue(me.bearing);
 		me.elevN.setDoubleValue(elev);
 		
-		me.contactN.setBoolValue(me.distance < ac_contact_dist and 
-														dalt > 0 and 
-														abs(view.normdeg(me.bearing - ac_hdg)) < 20);
+		# Determine if any of the contact points are in contact
+		var offset_x = getprop("/systems/refuel/offset-x-m") or 0;
+		var offset_y = getprop("/systems/refuel/offset-y-m") or 0;
+		var offset_z = getprop("/systems/refuel/offset-z-m") or 0;
+		var roll = getprop("/orientation/roll-deg") * globals.D2R;
+		
+		# Determine contact position
+		var probe_pos = geo.Coord.new(me.ac);
+		 
+		probe_pos.apply_course_distance(ac_hdg, offset_x);
+		probe_pos.apply_course_distance(ac_hdg + 90, offset_y * math.cos(roll) + offset_z * math.sin(roll));
+		probe_pos.set_alt(me.ac.alt() + offset_z * math.cos(roll) - offset_y * math.sin(roll));		
+				
+		me.contactN.setBoolValue(0);
+		
+		foreach (var c; me.contacts) {
+		  var drogue_pos = geo.Coord.new(me.coord);
+		  
+		  # Offset longitudonally
+		  drogue_pos.apply_course_distance(me.course, c.x);
+		  
+		  var r = me.roll * globals.D2R;
+		  
+		  # Offset laterally, taking into account any roll
+		  drogue_pos.apply_course_distance(me.course +90, c.y * math.cos(r) + c.z * math.sin(r));
+		  
+		  # Offset vertically, again, taking into account any roll				  
+		  drogue_pos.set_alt(drogue_pos.alt() + c.z * math.cos(r) - c.y * math.sin(r));
+		    
+			#print("Distance: " ~ probe_pos.distance_to(drogue_pos) ~ " vs. " ~ me.distance);
+		  
+		  if (probe_pos.distance_to(drogue_pos) < ac_contact_dist and 
+					abs(view.normdeg(me.course - ac_hdg)) < 20) {
+					# Contact!
+					me.contactN.setBoolValue(1);
+			}
+		}
 				
 		me.hOffsetN.setDoubleValue(me.bearing - ac_hdg);
 		me.vOffsetN.setDoubleValue(elev - ac_pitch);
@@ -278,13 +313,27 @@ var create_tanker = func(tanker_node, course) {
 	var spd = tanker_node.getNode("speed-kts", 1).getValue() or 250;
 	var pattern = (tanker_node.getNode("pattern-length-nm", 1).getValue() or 50) * NM2M;
 	var maxfuel = tanker_node.getNode("max-fuel-transfer-lbs-min", 1).getValue() or 6000;
+	
+	var contacts = [];
+	
+	foreach (var contact; tanker_node.getChildren("contact")) {
+	  var x = (contact.getNode("x-m") != nil) ? contact.getNode("x-m").getValue() : 0;
+	  var y = (contact.getNode("y-m") != nil) ? contact.getNode("y-m").getValue() : 0;
+	  var z = (contact.getNode("z-m") != nil) ? contact.getNode("z-m").getValue() : 0;
+	  append(contacts, { "x" : x, "y" : y, "z" : z });
+	}
+	  
+	
+	if (size(contacts) == 0) {
+	  append(contacts, {x: 0, y:0, z:0});
+	}
 
 	var alt = int(10 + rand() * 15) * 1000;  # FL100--FL250
 	alt = skip_cloud_layer(alt * FT2M);
 	var dist = 6000 + rand() * 4000;	
 	var coord = geo.aircraft_position().apply_course_distance(course, dist).set_alt(alt);	
 	
-	Tanker.new(aiid, callsign, tacanid, type, model, spd, maxfuel, pattern, course, coord);
+	Tanker.new(aiid, callsign, tacanid, type, model, spd, maxfuel, pattern, contacts, course, coord);
 }
 
 # Request a new tanker

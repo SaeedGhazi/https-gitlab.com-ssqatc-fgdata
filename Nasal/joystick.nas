@@ -1,6 +1,7 @@
 # Joystick configuration library.
 var DIALOGROOT  = "/sim/gui/dialogs/joystick-config";
 var MAX_AXES = 8;
+var MAX_NASALS = 8;
 var MAX_BUTTONS = 24;
 
 # Hash of the custom axis/buttons
@@ -629,7 +630,24 @@ var readConfig = func(dialog_root="/sim/gui/dialogs/joystick-config") {
       btn.getNode("binding", 1).setValue("None");
       btn.removeChild("original_binding");
     }
-  }
+  }  
+
+  # Set up Nasal code.
+  var nasals = js.getChildren("nasal");
+
+  for (var nasal = 0; nasal < MAX_NASALS; nasal = nasal + 1) {
+    var nas = props.globals.getNode(dialog_root ~ "/nasal[" ~ nasal ~ "]", 1);
+    nas.remove();
+    nas = props.globals.getNode(dialog_root ~ "/nasal[" ~ nasal ~ "]", 1);
+    
+    # Note that we can't simply use an index into the buttons array
+    # as that doesn't work for a sparsley populated set of buttons.
+    # E.g. one with n="3"
+    var a = js.getNode("nasal[" ~ nasal ~ "]");
+    if (a != nil) {
+      props.copy(a, nas.getNode("original_script", 1));
+    }
+  }  
 }
 
 var writeConfig = func(dialog_root="/sim/gui/dialogs/joystick-config", reset=0) {  
@@ -646,6 +664,12 @@ var writeConfig = func(dialog_root="/sim/gui/dialogs/joystick-config", reset=0) 
   } else {
     config.getNode("name", 1).setValue(id);
   }
+  
+  var nasals = props.globals.getNode(dialog_root).getChildren("nasal");
+  forindex (var nas; nasals) {
+      var nasalscript = config.getNode("nasal[" ~ nas ~ "]", 1);
+      props.copy(props.globals.getNode(dialog_root ~ "/nasal[" ~ nas ~ "]/original_script", 1), nasalscript);
+  }  
   
   var axes = props.globals.getNode(dialog_root).getChildren("axis");
   forindex (var axis; axes) {

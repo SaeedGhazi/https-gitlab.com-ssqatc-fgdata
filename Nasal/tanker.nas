@@ -257,8 +257,8 @@ var Tanker = {
 			}
 		}
 				
-		me.hOffsetN.setDoubleValue(me.bearing - ac_hdg);
-		me.vOffsetN.setDoubleValue(elev - ac_pitch);
+		me.hOffsetN.setDoubleValue(view.normdeg(me.bearing - ac_hdg));
+		me.vOffsetN.setDoubleValue(view.normdeg(elev - ac_pitch));
 
 		var droll = me.roll_target - me.roll;
 		if (droll > 0) {

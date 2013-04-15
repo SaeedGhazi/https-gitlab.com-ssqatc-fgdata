@@ -20,14 +20,12 @@
 // bugs with gl_FrontFacing in the fragment shader.
 varying vec4 diffuse_term;
 varying vec3 normal;
-//varying vec2 nvec;
 varying vec3 relPos;
 varying vec2 rawPos;
-//varying vec2 worldPos;
+varying vec3 worldPos;
 varying vec3 ecViewdir;
 
-//varying float earthShade;
-//varying float yprime_alt;
+
 varying float mie_angle;
 varying float steepness;
 varying float grad_dir;
@@ -42,15 +40,13 @@ uniform float visibility;
 uniform float overcast;
 uniform float ground_scattering;
 uniform float eye_alt;
-//uniform float eye_lat;
-//uniform float eye_lon;
 uniform float moonlight;
 
 uniform mat4 osg_ViewMatrixInverse;
 
 float earthShade;
 float yprime_alt;
-//float mie_angle;
+
 
 
 // This is the value used in the skydome scattering shader - use the same here for consistency?
@@ -84,21 +80,12 @@ void main()
   float vertex_alt;
   float scattering;
 
-    rawPos = gl_Vertex.xy;
+   rawPos = gl_Vertex.xy;
+   worldPos = (osg_ViewMatrixInverse *gl_ModelViewMatrix * gl_Vertex).xyz;
 	
-	// try making a continuous coordinate system
-	//vec4 worldPos3D = (osg_ViewMatrixInverse *gl_ModelViewMatrix * gl_Vertex);
-
-	//rawPos = worldPos3d.yz;
-	//float x1 = sin(eye_lon) * worldPos3D.y + cos(eye_lon) * worldPos3D.z;
-	//float y1 = cos(eye_lon) * worldPos3D.y - sin(eye_lon) * worldPos3D.z;
 	
-	//y1 = cos(eye_lat) * y1 + sin(eye_lat) * worldPos3D.x;
-	
-	//worldPos = vec2 (x1, y1);
-	
-    steepness = dot(normalize(gl_Normal), vec3 (0.0, 0.0, 1.0));
-	grad_dir = dot(normalize(gl_Normal.xy), vec2 (1.0, 0.0));
+   steepness = dot(normalize(gl_Normal), vec3 (0.0, 0.0, 1.0));
+   grad_dir = dot(normalize(gl_Normal.xy), vec2 (1.0, 0.0));
 
 // this code is copied from default.vert
 
@@ -277,7 +264,12 @@ else // the faster, full-day version without lightfields
 
 light_ambient = light_ambient * ((1.0+steepness)/2.0 * 1.2 + (1.0-steepness)/2.0 * 0.2);
 
-//light_ambient.rgb = 0.1 * light_ambient.rgb;
+// deeper shadows when there is lots of direct light
+
+float shade_depth =  1.0 * smoothstep (0.6,0.95,ground_scattering) * (1.0-smoothstep(0.1,0.5,overcast)) * smoothstep(0.4,1.5,earthShade);
+
+   light_ambient.rgb = light_ambient.rgb * (1.0 - shade_depth);
+   light_diffuse.rgb = light_diffuse.rgb * (1.0 + 1.2 * shade_depth);
 
 // default lighting based on texture and material using the light we have just computed
 

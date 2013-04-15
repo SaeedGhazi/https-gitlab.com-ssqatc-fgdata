@@ -404,6 +404,9 @@
     <color_r type="double" userarchive="n">0.148</color_r>
     <color_g type="double" userarchive="n">0.27</color_g>
     <color_b type="double" userarchive="n">0.3</color_b>
+   <surface>
+    <ice-cover> 0.0</ice-cover>
+   </surface>
   </sea>
 
   <!-- definitions for the scattering skydome shader -->

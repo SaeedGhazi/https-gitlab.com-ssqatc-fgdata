@@ -388,6 +388,12 @@
             <command>dialog-apply</command>
             <object-name>manual-weather-config</object-name>
           </binding>
+          <binding>
+            <command>nasal</command>
+            <script>
+              controller.refresh();
+            </script>
+          </binding>
         </checkbox>
       </group>
     </group>

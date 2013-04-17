@@ -11,7 +11,7 @@ varying vec4 waterTex1;
 varying vec4 waterTex2;
 varying vec4 waterTex4;
 varying vec3 relPos;
-
+varying vec3 rawPos;
 
 varying vec3 viewerdir;
 varying vec3 lightdir;
@@ -31,6 +31,7 @@ uniform float visibility;
 uniform float overcast;
 uniform float ground_scattering;
 
+uniform mat4 osg_ViewMatrixInverse;
 
 vec3 specular_light;
 
@@ -72,6 +73,7 @@ void main(void)
   
 
     vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
+    rawPos = (osg_ViewMatrixInverse *gl_ModelViewMatrix * gl_Vertex).xyz;
 
     vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
 

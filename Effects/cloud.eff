@@ -11,6 +11,7 @@
     <altitude><use>/sim/rendering/eye-altitude-m</use></altitude>
     <cloud_self_shading><use>/environment/cloud-self-shading</use></cloud_self_shading>
     <moonlight><use>/environment/moonlight</use></moonlight>
+    <air_pollution><use>/environment/air-pollution-norm</use></air_pollution>			
     <visibility><use>/environment/visibility-m</use></visibility>
   </parameters>
   
@@ -106,6 +107,11 @@
         <name>moonlight</name>
         <type>float</type>
         <value><use>moonlight</use></value>
+      </uniform>
+      <uniform>
+        <name>air_pollution</name>
+        <type>float</type>
+        <value><use>air_pollution</use></value>
       </uniform>
       <uniform>
         <name>visibility</name>

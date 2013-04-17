@@ -12,6 +12,7 @@ uniform sampler2D water_normalmap;
 uniform sampler2D water_dudvmap;
 uniform sampler2D sea_foam;
 uniform sampler2D perlin_normalmap;
+uniform sampler2D ice_texture;
 
 uniform sampler3D Noise;
 
@@ -23,8 +24,8 @@ varying vec4 waterTex2; //moving texcoords
 varying vec4 waterTex4; //viewts
 varying vec3 viewerdir;
 varying vec3 lightdir;
-//varying vec3 specular_light;
 varying vec3 relPos;
+varying vec3 rawPos;
 
 varying float earthShade;
 varying float yprime_alt;
@@ -49,6 +50,7 @@ uniform float scattering;
 uniform float ground_scattering;
 uniform float cloud_self_shading;
 uniform float eye_alt;
+uniform float ice_cover;
 uniform float sea_r;
 uniform float sea_g;
 uniform float sea_b;
@@ -67,6 +69,93 @@ vec3 fog_Func(vec3 color, int type);
 //////////////////////
 
 /////// functions /////////
+
+float rand2D(in vec2 co){
+    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
+float rand3D(in vec3 co){
+    return fract(sin(dot(co.xyz ,vec3(12.9898,78.233,144.7272))) * 43758.5453);
+}
+
+float cosine_interpolate(in float a, in float b, in float x)
+{
+	float ft = x * 3.1415927;
+	float f = (1.0 - cos(ft)) * .5;
+
+	return  a*(1.0-f) + b*f;
+}
+
+float simple_interpolate(in float a, in float b, in float x)
+{
+return a + smoothstep(0.0,1.0,x) * (b-a);
+}
+
+float interpolatedNoise2D(in float x, in float y)
+{
+      float integer_x    = x - fract(x);
+      float fractional_x = x - integer_x;
+
+      float integer_y    = y - fract(y);
+      float fractional_y = y - integer_y;
+
+      float v1 = rand2D(vec2(integer_x, integer_y));
+      float v2 = rand2D(vec2(integer_x+1.0, integer_y));
+      float v3 = rand2D(vec2(integer_x, integer_y+1.0));
+      float v4 = rand2D(vec2(integer_x+1.0, integer_y +1.0));
+
+      float i1 = simple_interpolate(v1 , v2 , fractional_x);
+      float i2 = simple_interpolate(v3 , v4 , fractional_x);
+
+      return simple_interpolate(i1 , i2 , fractional_y);
+}
+
+float interpolatedNoise3D(in float x, in float y, in float z)
+{
+      float integer_x    = x - fract(x);
+      float fractional_x = x - integer_x;
+
+      float integer_y    = y - fract(y);
+      float fractional_y = y - integer_y;
+
+      float integer_z    = z - fract(z);
+      float fractional_z = z - integer_z;
+
+      float v1 = rand3D(vec3(integer_x, integer_y, integer_z));
+      float v2 = rand3D(vec3(integer_x+1.0, integer_y, integer_z));
+      float v3 = rand3D(vec3(integer_x, integer_y+1.0, integer_z));
+      float v4 = rand3D(vec3(integer_x+1.0, integer_y +1.0, integer_z));
+
+      float v5 = rand3D(vec3(integer_x, integer_y, integer_z+1.0));
+      float v6 = rand3D(vec3(integer_x+1.0, integer_y, integer_z+1.0));
+      float v7 = rand3D(vec3(integer_x, integer_y+1.0, integer_z+1.0));
+      float v8 = rand3D(vec3(integer_x+1.0, integer_y +1.0, integer_z+1.0));
+
+
+      float i1 = simple_interpolate(v1,v5, fractional_z);
+      float i2 = simple_interpolate(v2,v6, fractional_z);
+      float i3 = simple_interpolate(v3,v7, fractional_z);
+      float i4 = simple_interpolate(v4,v8, fractional_z);
+
+      float ii1 = simple_interpolate(i1,i2,fractional_x);
+      float ii2 = simple_interpolate(i3,i4,fractional_x);
+ 
+
+      return simple_interpolate(ii1 , ii2 , fractional_y);
+}
+
+float Noise2D(in vec2 coord, in float wavelength)
+{
+return interpolatedNoise2D(coord.x/wavelength, coord.y/wavelength);
+
+}
+
+float Noise3D(in vec3 coord, in float wavelength)
+{
+return interpolatedNoise3D(coord.x/wavelength, coord.y/wavelength, coord.z/wavelength);
+}
+
+
 
 void rotationmatrix(in float angle, out mat4 rotmat)
 	{
@@ -198,6 +287,12 @@ void main(void)
 	const vec4 sca = vec4(0.005, 0.005, 0.005, 0.005);
 	const vec4 sca2 = vec4(0.02, 0.02, 0.02, 0.02);
 	const vec4 tscale = vec4(0.25, 0.25, 0.25, 0.25);
+
+	float noise_50m = Noise3D(rawPos.xyz, 50.0);
+	float noise_250m = Noise3D(rawPos.xyz,250.0);
+	float noise_1500m = Noise3D(rawPos.xyz,1500.0);
+	float noise_2000m = Noise3D(rawPos.xyz,2000.0);
+	float noise_2500m = Noise3D(rawPos.xyz, 2500.0);
 
 	mat4 RotationMatrix;
 
@@ -332,6 +427,7 @@ void main(void)
    	if (normalmap_dds > 0)
         	{vNorm = -vNorm;}		//dds fix
 		
+	vNorm = vNorm * (0.5 + 0.5 * noise_250m);	
 
 	//load reflection
 	
@@ -342,6 +438,7 @@ void main(void)
 	refl.b = sea_b;
 	refl.a = 1.0; 
 	
+	refl.g = refl.g * (0.9 + 0.2* noise_2500m);
 
 	float intensity;
 	// de-saturate for reduced light
@@ -435,7 +532,16 @@ void main(void)
 		
 
 
-		finalColor *= ambient_light;
+	// add ice
+	vec4 ice_texel =  texture2D(ice_texture, vec2(waterTex2) * 0.2 );
+
+	float nSum =  0.5 * (noise_250m +  noise_50m);
+	float mix_factor = smoothstep(1.0 - ice_cover, 1.04-ice_cover, nSum);
+        finalColor  = mix(finalColor, ice_texel, mix_factor * ice_texel.a);
+	finalColor.a = 1.0;
+
+
+	finalColor *= ambient_light;
 
 
 

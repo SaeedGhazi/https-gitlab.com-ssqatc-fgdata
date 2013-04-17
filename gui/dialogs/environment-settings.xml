@@ -148,6 +148,9 @@
     
 
    <text>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
       <label>Snow thickness</label>
       <halign>left</halign>
       <row>3</row>
@@ -155,6 +158,9 @@
     </text>
     
     <text>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
       <label>thin</label>
       <halign>right</halign>
       <row>3</row>
@@ -162,6 +168,9 @@
     </text>
         
     <slider>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
       <name>snow-thickness</name>
       <row>3</row>
       <col>2</col>
@@ -176,29 +185,91 @@
     </slider>
 
     <text>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
       <label>thick</label>
       <halign>left</halign>
       <row>3</row>
       <col>3</col>
     </text>
 
+
+   <text>
+    <enable>
+     <property>/sim/rendering/shaders/skydome</property>
+     </enable>
+     <label>Ice cover</label>
+     <halign>left</halign>
+     <row>4</row>
+     <col>0</col>
+    </text>
+    
     <text>
+     <enable>
+      <property>/sim/rendering/shaders/skydome</property> 
+     </enable>
+     <label>none</label>
+     <halign>right</halign>
+     <row>4</row>
+     <col>1</col>
+    </text>
+        
+    <slider>
+     <enable>
+      <property>/sim/rendering/shaders/skydome</property>
+     </enable>
+     <name>ice-cover</name>
+     <row>4</row>
+     <col>2</col>
+     <min>0.0</min>
+     <max>1.0</max>
+     <live>true</live>
+     <property>/environment/sea/surface/ice-cover</property>
+     <binding>
+       <command>dialog-apply</command>
+       <object-name>ice-cover</object-name>
+     </binding>
+    </slider>
+
+    <text>
+     <enable>
+      <property>/sim/rendering/shaders/skydome</property>
+     </enable>
+     <label>thick</label>
+     <halign>left</halign>
+     <row>4</row>
+     <col>3</col>
+    </text>
+
+
+
+    <text>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
       <label>Dust cover</label>
       <halign>left</halign>
-      <row>4</row>
+      <row>5</row>
       <col>0</col>
     </text>
     
     <text>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
       <label>none</label>
       <halign>right</halign>
-      <row>4</row>
+      <row>5</row>
       <col>1</col>
     </text>
         
     <slider>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
       <name>dust-level</name>
-      <row>4</row>
+      <row>5</row>
       <col>2</col>
       <min>0.0</min>
       <max>0.7</max>
@@ -211,29 +282,41 @@
     </slider>
 
     <text>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
       <label>dusty</label>
       <halign>left</halign>
-      <row>4</row>
+      <row>5</row>
       <col>3</col>
     </text>
 
     <text>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
       <label>Wetness</label>
       <halign>left</halign>
-      <row>5</row>
+      <row>6</row>
       <col>0</col>
     </text>
     
     <text>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
       <label>dry</label>
       <halign>right</halign>
-      <row>5</row>
+      <row>6</row>
       <col>1</col>
     </text>
         
     <slider>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
       <name>wetness</name>
-      <row>5</row>
+      <row>6</row>
       <col>2</col>
       <min>0.0</min>
       <max>0.7</max>
@@ -246,30 +329,42 @@
     </slider>
 
     <text>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
       <label>wet</label>
       <halign>left</halign>
-      <row>5</row>
+      <row>6</row>
       <col>3</col>
     </text>
     
 
     <text>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
       <label>Vegetation</label>
       <halign>left</halign>
-      <row>6</row>
+      <row>7</row>
       <col>0</col>
     </text>
     
     <text>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
       <label>none</label>
       <halign>right</halign>
-      <row>6</row>
+      <row>7</row>
       <col>1</col>
     </text>
         
     <slider>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
       <name>lichen-level</name>
-      <row>6</row>
+      <row>7</row>
       <col>2</col>
       <min>0.0</min>
       <max>0.7</max>
@@ -282,30 +377,42 @@
     </slider>
 
     <text>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
       <label>mossy</label>
       <halign>left</halign>
-      <row>6</row>
+      <row>7</row>
       <col>3</col>
     </text>
 
 
     <text>
-      <label>Season</label>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
+      <label>Season (experimental)</label>
       <halign>left</halign>
-      <row>7</row>
+      <row>8</row>
       <col>0</col>
     </text>
     
     <text>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
       <label>summer</label>
       <halign>right</halign>
-      <row>7</row>
+      <row>8</row>
       <col>1</col>
     </text>
         
     <slider>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
       <name>season</name>
-      <row>7</row>
+      <row>8</row>
       <col>2</col>
       <min>0.0</min>
       <max>2.0</max>
@@ -318,9 +425,12 @@
     </slider>
 
     <text>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
       <label>late autumn</label>
       <halign>left</halign>
-      <row>7</row>
+      <row>8</row>
       <col>3</col>
     </text>
 

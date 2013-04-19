@@ -51,13 +51,13 @@
 
   <group>
     <layout>hbox</layout>
-	  <empty><stretch>1</stretch></empty>
+    <empty><stretch>1</stretch></empty>
 
     <text>
       <label>Position Aircraft In Air</label>
     </text>
 
-	  <empty><stretch>1</stretch></empty>
+    <empty><stretch>1</stretch></empty>
 
     <button>
       <pref-width>16</pref-width>
@@ -225,22 +225,25 @@
       <row>0</row><col>0</col>
       <halign>right</halign>
       <label>Distance (nm):</label>
+      <enable><not><property>/sim/gui/dialogs/location-in-air/lonlat</property></not></enable>
     </text>
     <input>
       <row>0</row><col>1</col>
       <property>/sim/presets/offset-distance-nm</property>
+      <enable><not><property>/sim/gui/dialogs/location-in-air/lonlat</property></not></enable>
     </input>
 
     <text>
       <row>0</row><col>2</col>
       <halign>right</halign>
       <label>Azimuth (deg):</label>
+      <enable><not><property>/sim/gui/dialogs/location-in-air/lonlat</property></not></enable>
     </text>
     <input>
       <row>0</row><col>3</col>
       <property>/sim/presets/offset-azimuth-deg</property>
+      <enable><not><property>/sim/gui/dialogs/location-in-air/lonlat</property></not></enable>
     </input>
-
 
     <text>
       <row>1</row><col>0</col>
@@ -276,9 +279,11 @@
       <row>2</row><col>2</col>
       <halign>right</halign>
       <label>Heading (deg):</label>
+      <enable><not><property>/sim/gui/dialogs/location-in-air/airport</property></not></enable>
     </text>
     <input>
       <row>2</row><col>3</col>
+      <enable><not><property>/sim/gui/dialogs/location-in-air/airport</property></not></enable>
       <property>/sim/presets/heading-deg</property>
     </input>
   </group>

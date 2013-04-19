@@ -100,6 +100,10 @@
     <input>
       <row>0</row><col>2</col>
       <property>/sim/presets/airport-id</property>
+      <binding>
+        <command>nasal</command>
+        <script>set_radio("airport")</script>
+      </binding>
     </input>
     <text>
       <row>0</row><col>3</col>
@@ -109,6 +113,10 @@
     <input>
       <row>0</row><col>4</col>
       <property>/sim/presets/runway</property>
+      <binding>
+        <command>nasal</command>
+        <script>set_radio("airport")</script>
+      </binding>
     </input>
 
     <radio>
@@ -131,6 +139,10 @@
     <input>
       <row>1</row><col>2</col>
       <property>/sim/presets/longitude-deg</property>
+      <binding>
+        <command>nasal</command>
+        <script>set_radio("lonlat")</script>
+      </binding>
     </input>
     <text>
       <row>1</row><col>3</col>
@@ -140,6 +152,10 @@
     <input>
       <row>1</row><col>4</col>
       <property>/sim/presets/latitude-deg</property>
+      <binding>
+        <command>nasal</command>
+        <script>set_radio("lonlat")</script>
+      </binding>
     </input>
 
     <radio>
@@ -162,6 +178,10 @@
     <input>
       <row>2</row><col>2</col>
       <property>/sim/presets/vor-id</property>
+      <binding>
+        <command>nasal</command>
+        <script>set_radio("vor")</script>
+      </binding>
     </input>
 
     <radio>
@@ -186,6 +206,10 @@
     <input>
       <row>3</row><col>2</col>
       <property>/sim/presets/ndb-id</property>
+      <binding>
+        <command>nasal</command>
+        <script>set_radio("ndb")</script>
+      </binding>
     </input>
 
     <radio>
@@ -210,6 +234,10 @@
     <input>
       <row>4</row><col>2</col>
       <property>/sim/presets/fix</property>
+      <binding>
+        <command>nasal</command>
+        <script>set_radio("fix")</script>
+      </binding>
     </input>
   </group>
 

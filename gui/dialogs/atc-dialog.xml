@@ -4,9 +4,27 @@
 	<x>-10</x>
 	<layout>vbox</layout>
 
-	<text>
-		<label>ATC Communication</label>
-	</text>
+	<group>
+		<layout>hbox</layout>
+		<empty><stretch>1</stretch></empty>
+
+		<text>
+			<label>ATC Communication</label>
+		</text>
+
+		<empty><stretch>1</stretch></empty>
+
+		<button>
+			<pref-width>16</pref-width>
+			<pref-height>16</pref-height>
+			<legend></legend>
+			<keynum>27</keynum>
+			<border>2</border>
+			<binding>
+				<command>ATC-dialog</command>
+			</binding>
+		</button>
+	</group>
 
 	<hrule/>
 
@@ -38,7 +56,7 @@
 		<legend>Cancel</legend>
 		<key>Esc</key>
 		<binding>
-			<command>dialog-close</command>
+			<command>ATC-dialog</command>
 		</binding>
 	</button>
 </PropertyList>

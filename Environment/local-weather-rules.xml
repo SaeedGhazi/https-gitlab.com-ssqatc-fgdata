@@ -751,4 +751,54 @@
     <output>/environment/mean-terrain-elevation-m</output>
   </filter>
   
+  <!-- Tree "season" - used to determine whether to display the trees in summer or winter foliage -->
+  <filter>
+    <name>EnvironmentInterpolator:Trees:Season:Summer</name>
+    <type>gain</type>
+    <enable>
+      <condition>
+        <not>
+          <or>
+            <equals>
+              <property>sim/startup/season</property>
+              <value>winter</value>
+            </equals>
+            <greater-than>
+              <property>/environment/season</property>
+              <value>1.5</value>
+            </greater-than>
+          </or>
+        </not>
+      </condition>
+    </enable>
+    <input>
+      <value>0.0</value>
+    </input>
+    <output>/environment/tree-season</output>
+  </filter>
+
+
+  <filter>
+    <name>EnvironmentInterpolator:Trees:Season:Winter</name>
+    <type>gain</type>
+    <enable>
+      <condition>
+        <or>
+          <equals>
+            <property>sim/startup/season</property>
+            <value>winter</value>
+          </equals>
+          <greater-than>
+            <property>/environment/season</property>
+            <value>1.5</value>
+          </greater-than>
+        </or>
+      </condition>
+    </enable>
+    <input>
+      <value>1.0</value>
+    </input>
+    <output>/environment/tree-season</output>
+  </filter>
+  
 </PropertyList>

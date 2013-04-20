@@ -109,8 +109,13 @@ tree-range-m : The range at which trees become visible. Note that this
          is not absolute, as trees are loaded in blocks. A lower number means
          trees will not become visible until you are closer.
 
-tree-texture : A texture to use for the trees. Typically this will be a
-         strip with multiple tree textures.
+tree-texture : A texture to use for the trees. Typically this will contain around
+         8 different trees in a row, duplicate 4 times. From bottom to top, the
+         rows contain
+         * summer textures
+         * snow texture
+         * winter texture
+         * winter snow texture
 
 tree-varieties : The number of different trees defined in the tree-texture
          horizontally. (default: 1)
@@ -233,3 +238,6 @@ building-texture : The texture used for all buildings. See Docs/buildings.png fo
 
 building-lightmap: Emissive texture for all buildings, which is faded in at night to provide
 illusion of lit windows.  Same texture coordinates and format at building-texture above.
+
+building-range-m: Range at which all buildings are visible.  Beyond this point fewer and fewer
+          buildings are rendered, with no buildings rendered at 2*building-range-m (default 10000)

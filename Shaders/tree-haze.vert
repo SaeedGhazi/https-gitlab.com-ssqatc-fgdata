@@ -37,6 +37,8 @@ uniform float visibility;
 uniform float overcast;
 //uniform float scattering;
 uniform float ground_scattering;
+uniform float snow_level;
+uniform int   season;
 
 float earthShade;
 float mie_angle;
@@ -82,6 +84,9 @@ void main()
   float sr = sin(gl_FogCoord + gl_Color.x);
   float cr = cos(gl_FogCoord + gl_Color.x);
   gl_TexCoord[0] = vec4(texFract, gl_MultiTexCoord0.y, 0.0, 0.0);
+  
+  // Determine the y texture coordinate based on whether it's summer, winter, snowy.
+  gl_TexCoord[0].y =  gl_TexCoord[0].y + 0.25 * int(gl_Color.z > snow_level) + 0.5 * season;
 
   // scaling
   vec3 position = gl_Vertex.xyz * gl_Normal.xxy;

@@ -117,7 +117,7 @@
           </internal-format>
       </texture-unit>
       <program>
-        <vertex-shader>Shaders/terrain-haze-detailed.vert</vertex-shader>
+        <vertex-shader>Shaders/terrain-haze-ultra.vert</vertex-shader>
         <fragment-shader>Shaders/airfield.frag</fragment-shader>
       </program>
       <uniform>

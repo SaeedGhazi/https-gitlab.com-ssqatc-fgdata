@@ -7,15 +7,15 @@ varying vec3 normal;
 //varying vec2 nvec;
 varying vec3 relPos;
 varying vec2 rawPos;
-//varying vec3 ecViewdir;
+varying vec3 ecViewdir;
 
 
 uniform sampler2D texture;
 uniform sampler2D NormalTex;
 //uniform sampler3D NoiseTex;
-uniform sampler2D snow_texture;
-uniform sampler2D detail_texture;
-uniform sampler2D mix_texture;
+//uniform sampler2D snow_texture;
+//uniform sampler2D detail_texture;
+//uniform sampler2D mix_texture;
 
 //varying float yprime_alt;
 //varying float mie_angle;
@@ -159,8 +159,12 @@ float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
     vec4 color = gl_Color;
     color.a = 1.0;
     vec3 lightDir = gl_LightSource[0].position.xyz;
-    vec3 halfVector = gl_LightSource[0].halfVector.xyz;
-    //vec3 halfVector = normalize(normalize(lightDir) + normalize(ecViewdir));
+    vec3 halfVector;
+    if (quality_level<6)
+	{halfVector = gl_LightSource[0].halfVector.xyz;}
+    else
+	{halfVector = normalize(normalize(lightDir) + normalize(ecViewdir));}
+
     vec4 texel;
     vec4 snow_texel;
     vec4 detail_texel;
@@ -236,71 +240,6 @@ float noise_2000m = Noise2D(rawPos.xy, 2000.0);
    	
 	}
 
-    if (tquality_level > 2)
-	{
-	mix_texel = texture2D(mix_texture, gl_TexCoord[0].st * 1.3);
-	if (mix_texel.a <0.1) {mix_flag = 0;}
- 	}
-
-
-    if (tquality_level > 3)  
-	{
-	stprime = vec2 (0.86*gl_TexCoord[0].s + 0.5*gl_TexCoord[0].t, 0.5*gl_TexCoord[0].s - 0.86*gl_TexCoord[0].t);
-    	//distortion_factor = 0.9375 + (1.0 * nvL[2]);
-	distortion_factor = 0.97 + 0.06 * noise_500m;
-	stprime = stprime * distortion_factor * 15.0;
-	if (quality_level > 4)
-		{
-		stprime = stprime + normalize(relPos).xy * 0.02 * (noise_10m + 0.5 * noise_5m - 0.75);
-		}
-    	detail_texel = texture2D(detail_texture, stprime);
-	if (detail_texel.a <0.1) {flag = 0;}
-	}
-
-
-// texture preparation according to detail level
-
-// mix in hires texture patches
-
-float dist_fact; 
-float nSum;
-float mix_factor;
-
-if (tquality_level > 2)
-   {
-   // first the second texture overlay
-   
-   
-   if (mix_flag == 1)
-	{
-	nSum =  0.18 * (2.0 * noise_2000m + 2.0 * noise_1500m + noise_500m);
-        nSum = nSum + 0.4 * (1.0 -smoothstep(0.9,0.95, abs(steepness)));
-	mix_factor = smoothstep(0.5, 0.54, nSum);
-        texel = mix(texel, mix_texel, mix_factor);
-
-	}
-   
-   // then the detail texture overlay	
-  }
-
-if (tquality_level > 3)
-     {	
-   if (dist < 40000.0)
-   	{
-	if (flag == 1)
-		{
-		//noise_50m = Noise2D(rawPos.xy, 50.0);
-		noise_250m  = Noise2D(rawPos.xy, 250.0); 
-		dist_fact =  0.1 * smoothstep(15000.0,40000.0, dist) - 0.03 * (1.0 - smoothstep(500.0,5000.0, dist));
-		nSum = ((1.0 -noise_2000m) + noise_1500m + 2.0 * noise_250m  +noise_50m)/5.0;
-        	nSum = nSum - 0.08 * (1.0 -smoothstep(0.9,0.95, abs(steepness)));		
-		mix_factor = smoothstep(0.47, 0.54, nSum - dist_fact);
-		if (mix_factor > 0.8) {mix_factor = 0.8;}
-		texel =  mix(texel, detail_texel,mix_factor);				
-		}
-	}
-   }
-
 
 const vec4 dust_color  = vec4 (0.76, 0.71, 0.56, 1.0);
 const vec4 lichen_color = vec4 (0.17, 0.20, 0.06, 1.0);;
@@ -335,12 +274,13 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
 		{
 		water_threshold1 = 1.0-0.5* wetness;
 		water_threshold2 = 1.0 - 0.3 * wetness;
-		water_factor = smoothstep(water_threshold1, water_threshold2 ,   (0.3 * (2.0 * (1.0-noise_10m) + (1.0 -noise_5m)) *   (1.0 - smoothstep(2000.0, 5000.0, dist))) - 5.0 * (1.0 -steepness));
+		//water_factor = smoothstep(water_threshold1, water_threshold2 ,   (0.3 * (2.0 * (1.0-noise_10m) + (1.0 -noise_5m)) *   (1.0 - smoothstep(2000.0, 5000.0, dist))) - 5.0 * (1.0 -steepness));
+		water_factor = smoothstep(water_threshold1, water_threshold2 , 0.5 * (noise_5m + (1.0 -noise_1m))) *   (1.0 - smoothstep(1000.0, 3000.0, dist));
 	}
 
 // darken wet terrain
 
-    texel.rgb = texel.rgb * (1.0 - 0.6 * wetness);
+    texel.rgb = texel.rgb * (1.0 - 0.6 * wetness - 0.1 * water_factor);
 
 
 // light computations
@@ -355,20 +295,16 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
     n = normalize(n);
 
     NdotL = dot(n, lightDir);
-    if ((tquality_level > 3) && (mix_flag ==1)&& (dist < 2000.0) && (quality_level > 4)) 
-	{
-	noisegrad_10m = (noise_10m - Noise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),10.0))/0.05;
-	noisegrad_5m = (noise_5m - Noise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),5.0))/0.05;
-	NdotL = NdotL +1.0 * (noisegrad_10m + 0.5* noisegrad_5m) * mix_factor/0.8 *  (1.0 - smoothstep(1000.0, 2000.0, dist));
-	}
+    
 	if (quality_level > 4)
 		{
-		NdotL = NdotL + 3.0 * N.r + 0.1 * (noise_01m-0.5) ;
+		NdotL = NdotL + (3.0 * N.r + 0.1 * (noise_01m-0.5))* (1.0 - water_factor) ;
+		//NdotL = NdotL + 3.0 * N.r + 0.1 * (noise_01m-0.5) ;
 		}
     if (NdotL > 0.0) {
         color += diffuse_term * NdotL;
         NdotHV = max(dot(n, halfVector), 0.0);
-        if (gl_FrontMaterial.shininess > 0.0)
+        //if (gl_FrontMaterial.shininess > 0.0)
             specular.rgb = ((gl_FrontMaterial.specular.rgb + (water_factor * vec3 (1.0, 1.0, 1.0)))
                             * light_specular.rgb
                             * pow(NdotHV, gl_FrontMaterial.shininess + (20.0 * water_factor)));

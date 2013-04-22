@@ -8,6 +8,7 @@ varying vec3 normal;
 //varying vec2 nvec;
 varying vec3 relPos;
 varying vec2 rawPos;
+varying vec3 ecViewdir;
 
 
 uniform sampler2D texture;
@@ -169,7 +170,11 @@ float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
     vec4 color = gl_Color;
     color.a = 1.0;
     vec3 lightDir = gl_LightSource[0].position.xyz;
-    vec3 halfVector = gl_LightSource[0].halfVector.xyz;
+    vec3 halfVector;
+    if (quality_level<6)
+	{halfVector = gl_LightSource[0].halfVector.xyz;}
+    else
+	{halfVector = normalize(normalize(lightDir) + normalize(ecViewdir));}
     vec4 texel;
     vec4 snow_texel;
     vec4 detail_texel;

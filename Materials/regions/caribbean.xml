@@ -36,7 +36,7 @@
   <building-medium-max-floors>3</building-medium-max-floors>
 
   <!-- Appropriate tropical trees -->
-  <tree-texture>Trees/tropical-alt-summer.png</tree-texture>
+  <tree-texture>Trees/tropical-alt.png</tree-texture>
   <tree-varieties>8</tree-varieties>
   <tree-range-m alias="/params/forest/tree-range-m"/>
   <tree-height-m>25.0</tree-height-m>

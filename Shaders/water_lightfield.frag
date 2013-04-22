@@ -50,11 +50,13 @@ uniform float scattering;
 uniform float ground_scattering;
 uniform float cloud_self_shading;
 uniform float eye_alt;
+uniform float fogstructure;
 uniform float ice_cover;
 uniform float sea_r;
 uniform float sea_g;
 uniform float sea_b;
 
+uniform int quality_level;
 
 vec3 specular_light;
 
@@ -614,7 +616,7 @@ transmission_arg = (dist-distance_in_layer)/avisibility;
 
 float eqColorFactor;
 
-
+/*
 if (visibility < avisibility)
 	{
 	transmission_arg = transmission_arg + (distance_in_layer/visibility);
@@ -625,6 +627,33 @@ if (visibility < avisibility)
 else 
 	{
 	transmission_arg = transmission_arg + (distance_in_layer/avisibility);
+	// this combines the Weber-Fechner intensity
+	eqColorFactor = 1.0 - 0.1 * delta_zv/avisibility - (1.0 -effective_scattering);
+	}
+*/
+if (visibility < avisibility)
+	{
+	if (quality_level > 3)
+		{
+		transmission_arg = transmission_arg + (distance_in_layer/(1.0 * visibility + 1.0 * visibility * fogstructure * 0.06 * (noise_1500m + noise_2000m -1.0) ));
+		}
+	else
+		{
+		transmission_arg = transmission_arg + (distance_in_layer/visibility);
+		}
+	// this combines the Weber-Fechner intensity
+	eqColorFactor = 1.0 - 0.1 * delta_zv/visibility - (1.0 -effective_scattering);
+	}
+else 
+	{
+	if (quality_level > 3)
+		{
+		transmission_arg = transmission_arg + (distance_in_layer/(1.0 * avisibility + 1.0 * avisibility * fogstructure * 0.06 * (noise_1500m + noise_2000m  - 1.0) ));
+		}
+	else
+		{
+		transmission_arg = transmission_arg + (distance_in_layer/avisibility);
+		}
 	// this combines the Weber-Fechner intensity
 	eqColorFactor = 1.0 - 0.1 * delta_zv/avisibility - (1.0 -effective_scattering);
 	}

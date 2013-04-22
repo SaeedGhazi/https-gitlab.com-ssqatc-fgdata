@@ -139,9 +139,15 @@
 		<fogtype>
 			<use>/sim/rendering/shaders/skydome</use>
 		</fogtype>
+		<fogstructure>
+			<use>/environment/fog-structure</use>
+		</fogstructure>
 		<ice_cover>
 			<use>/environment/sea/surface/ice-cover</use>
 		</ice_cover>
+		<quality_level>
+			<use>/sim/rendering/shaders/landmass</use>
+		</quality_level>
 		<!-- sea colors -->
 		<sea_r>
 			<use>/environment/sea/color_r</use>
@@ -520,6 +526,11 @@
         			<value><use>cloud_self_shading</use></value>
       			</uniform>
 			<uniform>
+				<name>fogstructure</name>
+				<type>float</type>
+				<value><use>fogstructure</use></value>
+			</uniform>
+			<uniform>
         			<name>ice_cover</name>
         			<type>float</type>
         		<value><use>ice_cover</use></value>
@@ -545,6 +556,11 @@
 				<value>
 					<use>sea_b</use>
 				</value>
+			</uniform>
+			<uniform>
+				<name>quality_level</name>
+				<type>int</type>
+				<value><use>quality_level</use></value>
 			</uniform>
 			<!-- END fog include -->
 		</pass>

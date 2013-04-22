@@ -529,7 +529,7 @@ if ((dist < 5000.0)&& (quality_level > 3) && (combined_wetness>0.0))
         color += diffuse_term * NdotL;
         NdotHV = max(dot(n, halfVector), 0.0);
         if (gl_FrontMaterial.shininess > 0.0)
-            specular.rgb = ((gl_FrontMaterial.specular.rgb + (water_factor * vec3 (1.0, 1.0, 1.0)))
+            specular.rgb = ((gl_FrontMaterial.specular.rgb * 0.1 + (water_factor * vec3 (1.0, 1.0, 1.0)))
                             * light_specular.rgb
                             * pow(NdotHV, gl_FrontMaterial.shininess + (20.0 * water_factor)));
     }

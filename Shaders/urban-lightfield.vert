@@ -21,7 +21,7 @@
 
 
 varying vec3 relPos;
-varying vec2 rawPos;
+varying vec3 worldPos;
 varying vec3  VNormal;
 varying vec3  VTangent;
 varying vec4  ecPosition;
@@ -44,6 +44,7 @@ uniform float ground_scattering;
 uniform float eye_alt;
 uniform float moonlight;
 
+uniform mat4 osg_ViewMatrixInverse;
 
 attribute vec3 tangent;//, binormal;
 
@@ -80,7 +81,8 @@ void main()
   float vertex_alt;
   float scattering;
 
-    rawPos = gl_Vertex.xy;
+    //rawPos = gl_Vertex.xy;
+    worldPos = (osg_ViewMatrixInverse *gl_ModelViewMatrix * gl_Vertex).xyz;
     steepness = dot(normalize(gl_Normal), vec3 (0.0, 0.0, 1.0));
     VNormal = normalize(gl_NormalMatrix * gl_Normal);
     ecPosition = gl_ModelViewMatrix * gl_Vertex;

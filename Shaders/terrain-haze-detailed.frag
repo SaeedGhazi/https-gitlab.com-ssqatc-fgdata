@@ -4,10 +4,10 @@
 // Ambient term comes in gl_Color.rgb.
 varying vec4 diffuse_term;
 varying vec3 normal;
-//varying vec2 nvec;
 varying vec3 relPos;
 varying vec2 rawPos;
-//varying vec3 ecViewdir;
+varying vec3 worldPos;
+
 
 
 uniform sampler2D texture;
@@ -56,6 +56,10 @@ float rand2D(in vec2 co){
     return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
 }
 
+float rand3D(in vec3 co){
+    return fract(sin(dot(co.xyz ,vec3(12.9898,78.233,144.7272))) * 43758.5453);
+}
+
 float cosine_interpolate(in float a, in float b, in float x)
 {
 	float ft = x * 3.1415927;
@@ -90,10 +94,50 @@ float interpolatedNoise2D(in float x, in float y)
 }
 
 
+float interpolatedNoise3D(in float x, in float y, in float z)
+{
+      float integer_x    = x - fract(x);
+      float fractional_x = x - integer_x;
+
+      float integer_y    = y - fract(y);
+      float fractional_y = y - integer_y;
+
+      float integer_z    = z - fract(z);
+      float fractional_z = z - integer_z;
+
+      float v1 = rand3D(vec3(integer_x, integer_y, integer_z));
+      float v2 = rand3D(vec3(integer_x+1.0, integer_y, integer_z));
+      float v3 = rand3D(vec3(integer_x, integer_y+1.0, integer_z));
+      float v4 = rand3D(vec3(integer_x+1.0, integer_y +1.0, integer_z));
+
+      float v5 = rand3D(vec3(integer_x, integer_y, integer_z+1.0));
+      float v6 = rand3D(vec3(integer_x+1.0, integer_y, integer_z+1.0));
+      float v7 = rand3D(vec3(integer_x, integer_y+1.0, integer_z+1.0));
+      float v8 = rand3D(vec3(integer_x+1.0, integer_y +1.0, integer_z+1.0));
+
+
+      float i1 = simple_interpolate(v1,v5, fractional_z);
+      float i2 = simple_interpolate(v2,v6, fractional_z);
+      float i3 = simple_interpolate(v3,v7, fractional_z);
+      float i4 = simple_interpolate(v4,v8, fractional_z);
+
+      float ii1 = simple_interpolate(i1,i2,fractional_x);
+      float ii2 = simple_interpolate(i3,i4,fractional_x);
+ 
+
+      return simple_interpolate(ii1 , ii2 , fractional_y);
+}
+
+
 float Noise2D(in vec2 coord, in float wavelength)
 {
 return interpolatedNoise2D(coord.x/wavelength, coord.y/wavelength);
 
+}
+
+float Noise3D(in vec3 coord, in float wavelength)
+{
+return interpolatedNoise3D(coord.x/wavelength, coord.y/wavelength, coord.z/wavelength);
 }
 
 
@@ -190,12 +234,12 @@ float noisegrad_10m;
 float noisegrad_5m;
 
 float noise_50m = Noise2D(rawPos.xy, 50.0);; 
-float noise_250m;
-float noise_500m = Noise2D(rawPos.xy, 500.0);
-float noise_1500m = Noise2D(rawPos.xy, 1500.0);
-float noise_2000m = Noise2D(rawPos.xy, 2000.0);
 
 
+float noise_250m = Noise3D(worldPos.xyz,250.0);
+float noise_500m = Noise3D(worldPos.xyz, 500.0);
+float noise_1500m = Noise3D(worldPos.xyz, 1500.0);
+float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
 
 
 
@@ -293,7 +337,7 @@ if (tquality_level > 3)
 	if (flag == 1)
 		{
 		//noise_50m = Noise2D(rawPos.xy, 50.0);
-		noise_250m  = Noise2D(rawPos.xy, 250.0); 
+		//noise_250m  = Noise2D(rawPos.xy, 250.0); 
 		dist_fact =  0.1 * smoothstep(15000.0,40000.0, dist) - 0.03 * (1.0 - smoothstep(500.0,5000.0, dist));
 		nSum = ((1.0 -noise_2000m) + noise_1500m + 2.0 * noise_250m  +noise_50m)/5.0;
         	nSum = nSum - 0.08 * (1.0 -smoothstep(0.9,0.95, abs(steepness)));		
@@ -389,7 +433,7 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
         color += diffuse_term * NdotL;
         NdotHV = max(dot(n, halfVector), 0.0);
         if (gl_FrontMaterial.shininess > 0.0)
-            specular.rgb = ((gl_FrontMaterial.specular.rgb + (water_factor * vec3 (1.0, 1.0, 1.0)))
+            specular.rgb = ((gl_FrontMaterial.specular.rgb * 0.1 + (water_factor * vec3 (1.0, 1.0, 1.0)))
                             * light_specular.rgb
                             * pow(NdotHV, gl_FrontMaterial.shininess + (20.0 * water_factor)));
     }

@@ -22,9 +22,10 @@ uniform sampler2D LightMapTex;
 uniform sampler2D NormalTex;
 uniform sampler2D ReflFresnelTex;
 uniform sampler2D ReflMapTex;
-uniform sampler2D ReflRainbowTex;
+//uniform sampler2D ReflRainbowTex;
 uniform sampler3D ReflNoiseTex;
 uniform samplerCube Environment;
+uniform sampler2D GrainTex;
 
 uniform int dirt_enabled;
 uniform int dirt_multi;
@@ -35,6 +36,7 @@ uniform int nmap_enabled;
 uniform int refl_enabled;
 uniform int refl_map;
 uniform int shader_qual;
+uniform int grain_texture_enabled;
 
 uniform float amb_correction;
 uniform float dirt_b_factor;
@@ -49,6 +51,7 @@ uniform float refl_correction;
 uniform float refl_fresnel;
 uniform float refl_noise;
 uniform float refl_rainbow;
+uniform float grain_magnification;
 
 
 uniform float avisibility;			
@@ -115,6 +118,8 @@ void main (void)
 	vec4 reflmap    = texture2D(ReflMapTex, gl_TexCoord[0].st);
 	vec4 noisevec   = texture3D(ReflNoiseTex, rawpos.xyz);
 	vec4 lightmapTexel = texture2D(LightMapTex, gl_TexCoord[0].st);
+
+	vec4 grainTexel; 
 
 	vec3 mixedcolor;
 	vec3 N = vec3(0.0,0.0,1.0);
@@ -203,6 +208,14 @@ void main (void)
 
 /// END light	
 	
+/// BEGIN grain overlay
+	if (grain_texture_enabled > 0)
+		{
+		grainTexel = texture2D(GrainTex, gl_TexCoord[0].st * grain_magnification);
+		texel.rgb = mix(texel.rgb, grainTexel.rgb,  grainTexel.a );
+		}
+/// END grain overlay	
+
 ///BEGIN bump
  	if (nmap_enabled > 0 && shader_qual > 2){
 	N = nmap.rgb * 2.0 - 1.0;
@@ -217,7 +230,7 @@ void main (void)
 	vec3 viewVec = normalize(vViewVec);
 	float v      = abs(dot(viewVec, normalize(VNormal)));// Map a rainbowish color
 	vec4 fresnel = texture2D(ReflFresnelTex, vec2(v, 0.0));
-	vec4 rainbow = texture2D(ReflRainbowTex, vec2(v, 0.0));
+	//vec4 rainbow = texture2D(ReflRainbowTex, vec2(v, 0.0));
 
 	float nDotVP = max(0.0, dot(N, normalize(gl_LightSource[0].position.xyz)));
 	float nDotHV = max(0.0, dot(N, normalize(gl_LightSource[0].halfVector.xyz)));
@@ -262,7 +275,7 @@ void main (void)
 		reflFactor = clamp(reflFactor, 0.0, 1.0);
 
 		// add fringing fresnel and rainbow effects and modulate by reflection
-		vec4 reflcolor = mix(reflection, rainbow, refl_rainbow * v);
+		vec4 reflcolor = reflection;//mix(reflection, rainbow, refl_rainbow * v);
 		reflcolor += Specular * nmap.a;
 		vec4 reflfrescolor = mix(reflcolor, fresnel, refl_fresnel  * v);
 		vec4 noisecolor = mix(reflfrescolor, noisevec, refl_noise);

@@ -2,13 +2,6 @@
 
 <PropertyList>
   <name>terrasync</name>
-  <nasal>
-    <!-- Generalize all this, turn into helpers and load defaults via XML -->
-    <open><![CDATA[
-      setprop("/sim/gui/dialogs/terrasync/display-mode", "0");
-      ]]>
-    </open>
-  </nasal>
     
   <layout>vbox</layout>
 
@@ -515,6 +508,9 @@
 
   <nasal>
     <open><![CDATA[
+    
+      setprop("/sim/gui/dialogs/terrasync/display-mode", "0");
+    
       var msg = "";
       if (getprop("/sim/terrasync/built-in-svn-available"))
       {

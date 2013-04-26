@@ -287,7 +287,7 @@ and fallback to plain transparency when the model shader is disabled.
 			   </images>
 			   <!-- END 6 image cube map -->
 			   </texture-unit>
-			   <!-- Reflection fresnel texture unit-->
+			   <!-- Reflection Gradients texture unit-->
 			   <texture-unit>
 				   <unit>6</unit>
 				   <image>
@@ -306,27 +306,7 @@ and fallback to plain transparency when the model shader is disabled.
 					   <use>texture[6]/internal-format</use>
 				   </internal-format>
 			   </texture-unit>
-			   <!-- Reflection rainbow texture unit-->
-			   <texture-unit>
-				   <unit>7</unit>
-				   <image>
-					   <use>texture[7]/image</use>
-				   </image>
-				   <filter>
-					   <use>texture[7]/filter</use>
-				   </filter>
-				   <wrap-s>
-					   <use>texture[7]/wrap-s</use>
-				   </wrap-s>
-				   <wrap-t>
-					   <use>texture[7]/wrap-t</use>
-				   </wrap-t>
-				   <internal-format>
-					   <use>texture[7]/internal-format</use>
-				   </internal-format>
-			   </texture-unit>
-			   
-			   
+
 			   <vertex-program-two-side>
 				   <use>vertex-program-two-side</use>
 			   </vertex-program-two-side>
@@ -383,17 +363,11 @@ and fallback to plain transparency when the model shader is disabled.
 			   </uniform>
 			   
 			   <uniform>
-				   <name>ReflFresnelTex</name>
+				   <name>ReflGradientsTex</name>
 				   <type>sampler-2d</type>
 				   <value type="int">6</value>
 			   </uniform>
-			   
-			   <uniform>
-				   <name>ReflRainbowTex</name>
-				   <type>sampler-2d</type>
-				   <value type="int">7</value>
-			   </uniform>
-			   
+
 			   <!-- 			NORMAL MAP -->
 			   <!-- normalmap is used-->
 			   <uniform>

@@ -18,8 +18,7 @@ uniform sampler2D BaseTex;
 uniform sampler2D NormalTex;
 uniform sampler2D LightMapTex;
 uniform sampler2D ReflMapTex;
-uniform sampler2D ReflFresnelTex;
-uniform sampler2D ReflRainbowTex;
+uniform sampler2D ReflGradientsTex;
 uniform sampler3D ReflNoiseTex;
 
 uniform int nmap_enabled;
@@ -93,8 +92,8 @@ void main (void)
 	vec4 reflection = textureCube(Environment, reflVec * dot(N,VNormal));
 	vec3 viewVec = normalize(vViewVec);
 	float v      = abs(dot(viewVec, normalize(VNormal)));// Map a rainbowish color
-	vec4 fresnel = texture2D(ReflFresnelTex, vec2(v, 0.0));
-	vec4 rainbow = texture2D(ReflRainbowTex, vec2(v, 0.0));
+	vec4 fresnel = texture2D(ReflGradientsTex, vec2(v, 0.75));
+	vec4 rainbow = texture2D(ReflGradientsTex, vec2(v, 0.25));
 	vec4 color = gl_Color;// * gl_FrontMaterial.diffuse;
 	float specular = dot((gl_FrontMaterial.specular * nmap.a).rgb, vec3( 0.3, 0.59, 0.11 ));
 

@@ -17,9 +17,8 @@ varying	float	alpha;
 uniform sampler2D BaseTex;
 uniform sampler2D LightMapTex;
 uniform sampler2D NormalTex;
-uniform sampler2D ReflFresnelTex;
+uniform sampler2D ReflGradientsTex;
 uniform sampler2D ReflMapTex;
-uniform sampler2D ReflRainbowTex;
 uniform sampler3D ReflNoiseTex;
 uniform samplerCube Environment;
 
@@ -86,8 +85,8 @@ void main (void)
 	vec4 reflection = textureCube(Environment, reflVec * dot(N,VNormal));
 	vec3 viewVec = normalize(vViewVec);
 	float v      = abs(dot(viewVec, normalize(VNormal)));// Map a rainbowish color
-	vec4 fresnel = texture2D(ReflFresnelTex, vec2(v, 0.0));
-	vec4 rainbow = texture2D(ReflRainbowTex, vec2(v, 0.0));
+	vec4 fresnel = texture2D(ReflGradientsTex, vec2(v, 0.75));
+	vec4 rainbow = texture2D(ReflGradientsTex, vec2(v, 0.25));
 
 	float nDotVP = max(0.0, dot(N, normalize(gl_LightSource[0].position.xyz)));
 	float nDotHV = max(0.0, dot(N, normalize(gl_LightSource[0].halfVector.xyz)));

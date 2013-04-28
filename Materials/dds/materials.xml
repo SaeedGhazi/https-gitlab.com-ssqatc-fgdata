@@ -1059,6 +1059,7 @@
   <name>Estuary</name>
   <name>Watercourse</name>
   <name>Saline</name>
+  <name>Lagoon</name>
   <texture>Terrain/water-inland.dds</texture>
   <!--<texture>Terrain/water-lake.png</texture>-->
   <xsize>128</xsize>

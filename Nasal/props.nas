@@ -32,6 +32,7 @@ var Node = {
     setDoubleValue : func _setDoubleValue(me._g, arg),
     unalias        : func _unalias(me._g, arg),
     alias          : func(n) _alias(me._g, [isa(n, Node) ? n._g : n]),
+    equals         : func(n) _equals(me._g, [isa(n, Node) ? n._g : n]),
     clearValue     : func _alias(me._g, [_globals()]) and me.unalias(),
 
     getPath : func {
@@ -51,6 +52,12 @@ var Node = {
     remove : func {
         if((var p = me.getParent()) == nil) return nil;
         p.removeChild(me.getName(), me.getIndex());
+    },
+
+    removeAllChildren : func {
+      foreach(var c; me.getChildren())
+        me.removeChild(c.getName(), c.getIndex());
+      return me;
     },
 };
 

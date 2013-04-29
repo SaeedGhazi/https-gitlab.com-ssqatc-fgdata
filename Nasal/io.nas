@@ -331,7 +331,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     var write_validator = func(n) setValue(n, [valid(getValue(n, []), write_rules) or ""]);
 
     # validation listeners for load[xml]/save[xml]/parsexml()  (see utils.cxx:fgValidatePath)
-    var n = props.globals.getNode("/sim/paths/validate", 1).remove();
+    var n = props.globals.getNode("/sim/paths/validate", 1).removeAllChildren();
     var rval = _setlistener(n.getNode("read", 1)._g, read_validator);
     var wval = _setlistener(n.getNode("write", 1)._g, write_validator);
 

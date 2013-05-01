@@ -185,6 +185,27 @@
 									                     marker.getNode("z-m", 1).getValue() ~ ", " ~
 									                     scale  ~ ");");
 									}
+									
+									# If there's one or more binding nodes we display a
+									# small button that executes the binding.  Used to 
+									# demonstrate the checklist item
+									var bindings = item.getChildren("binding");
+									
+									if ((v == 0) and (size(bindings) > 0)) {
+									  var btn = table.getChild("button", btncount, 1);
+									  btncount += 1;
+									  btn.getNode("row", 1).setValue(row);
+									  btn.getNode("col", 1).setValue(3);
+									  btn.getNode("pref-width", 1).setValue(20);
+									  btn.getNode("pref-height", 1).setValue(20);
+									  btn.getNode("padding", 1).setValue(1);
+									  btn.getNode("legend", 1).setValue(">");
+									  
+									  forindex (var bdg; bindings) {
+											var binding = btn.getChild("binding", bdg, 1);
+											props.copy(bindings[bdg], binding);
+										}
+									}
 																	
 									row = row + 1;              
 								}

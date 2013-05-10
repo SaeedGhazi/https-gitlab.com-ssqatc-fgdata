@@ -13,7 +13,7 @@ void main() {
     float numVarieties = gl_Normal.z;
 		float texFract = floor(fract(gl_MultiTexCoord0.x) * numVarieties) / (numVarieties * 4.0);
 		texFract += floor(gl_MultiTexCoord0.x) / (numVarieties * 4.0);
-    gl_TexCoord[0] = vec4(texFract + 0.5 * season, gl_MultiTexCoord0.y, 0.0, 0.0);  
+    gl_TexCoord[0] = vec4(texFract + 0.5 * float(season), gl_MultiTexCoord0.y, 0.0, 0.0);  
     
     // Position and scaling
     vec3 position = gl_Vertex.xyz * gl_Normal.xxy;

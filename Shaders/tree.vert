@@ -25,7 +25,7 @@ void main(void)
   // so that trees aren't all oriented N/S
   float sr = sin(gl_FogCoord + gl_Color.x);
   float cr = cos(gl_FogCoord + gl_Color.x);
-  gl_TexCoord[0] = vec4(texFract + 0.5 * season, gl_MultiTexCoord0.y, 0.0, 0.0);
+  gl_TexCoord[0] = vec4(texFract + 0.5 * float(season), gl_MultiTexCoord0.y, 0.0, 0.0);
 
   // scaling
   vec3 position = gl_Vertex.xyz * gl_Normal.xxy;

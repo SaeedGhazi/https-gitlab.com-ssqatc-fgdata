@@ -38,7 +38,7 @@ uniform float overcast;
 //uniform float scattering;
 uniform float ground_scattering;
 uniform float snow_level;
-uniform int   season;
+uniform int season;
 
 float earthShade;
 float mie_angle;
@@ -85,7 +85,7 @@ void main()
   float cr = cos(gl_FogCoord + gl_Color.x);
   
   // Shift texture to account for snow level and seasons
-  gl_TexCoord[0] = vec4(texFract + 0.25 * int(gl_Color.z > snow_level) + 0.5 * season, gl_MultiTexCoord0.y, 0.0, 0.0);
+  gl_TexCoord[0] = vec4(texFract + 0.25 * float(gl_Color.z > snow_level) + 0.5 * float(season), gl_MultiTexCoord0.y, 0.0, 0.0);
   
   // scaling
   vec3 position = gl_Vertex.xyz * gl_Normal.xxy;

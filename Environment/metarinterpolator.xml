@@ -429,10 +429,44 @@
     <input>/environment/metar/clouds/layer[0]/alpha</input>
     <output>/environment/clouds/layer[0]/alpha</output>
   </filter>
-<!-- replace weather-utility.nas 
-    # Put the snow line slightly below the station's elevation, 
-    # so the station is completely covered with snow
--->
+  <!--
+    Place snow line at estimated climatic snow line.
+  -->
+  <filter>
+    <name>MetarController:climatic-snow-line</name>
+    <type>gain</type>
+    <gain>1.0</gain>
+    <enable>
+      <condition>
+        <property>/environment/params/metar-updates-snow-level</property>
+        <property>/environment/params/metar-updates-environment</property>
+        <not><property>/environment/metar/snow-cover</property></not>
+      </condition>
+    </enable>
+    <input>
+      <expression>
+        <sum>
+          <product>
+            <property>/position/latitude-deg</property>
+            <property>/position/latitude-deg</property>
+            <value>-1</value>
+          </product>
+          <product>
+            <value>8.255</value>
+            <property>/position/latitude-deg</property>
+          </product>
+          <value>5504</value>
+        </sum>
+      </expression>
+    </input>
+    <output>/environment/snow-level-m</output>
+    <min>-425</min>
+    <max>7500</max>
+  </filter>
+  <!--
+    Lower the snow line when a station below the current snow line reports
+    snow cover.
+  -->
   <filter>
     <name>MetarController:snow-level</name>
     <type>gain</type>
@@ -445,7 +479,7 @@
         <property>/environment/metar/valid</property>
         <less-than>
           <expression>
-            <difference> 
+            <difference>
               <product>
                 <property>/environment/metar/station-elevation-ft</property>
                 <value>0.3048</value>
@@ -468,7 +502,6 @@
         </sum>
       </expression>
     </input>
-    <input>3200</input>
     <output>/environment/snow-level-m</output>
     <min>-425</min>
     <max>7500</max>

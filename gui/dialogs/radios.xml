@@ -5,6 +5,17 @@
  <name>radios</name>
  <width>550</width>
  <modal>false</modal>
+ 
+ <nasal>
+     <open>
+         <![CDATA[
+             var modes = ['OFF', 'STANDBY', 'TEST', 'GROUND', 'ON', 'ALTITUDE'];
+             var v = getprop('/instrumentation/transponder/inputs/knob-mode');
+             setprop("/sim/gui/dialogs/radios/transponder-mode", modes[v]); 
+         ]]>
+     </open>
+ </nasal>
+     
  <layout>vbox</layout>
 
  <group>
@@ -465,7 +476,9 @@
 
 </group>
 
-<hrule/>
+<!-- TACAN related things -->
+
+  <hrule/>
   <group>
 
    <layout>hbox</layout>
@@ -566,9 +579,141 @@
    </binding>
   </button>
 
- </group>
- <hrule/>
+ </group> <!-- of TACAN group -->
+ 
+ <!-- transponder controls -->
+ 
+  <hrule/>
+ <group>
+     <layout>hbox</layout>
+     <text>
+        <label>Transponder</label>
+     </text>
+     
+     <combo>
+         <name>Tponder-1</name>
+         <pref-width>45</pref-width>
+         <pref-height>25</pref-height>
+         <live>true</live>
+         <property>/instrumentation/transponder/inputs/digit[3]</property>
+         <value>0</value>
+         <value>1</value>
+         <value>2</value>
+         <value>3</value>
+         <value>4</value>
+         <value>5</value>
+         <value>6</value>
+         <value>7</value>
+         <binding>
+             <command>dialog-apply</command>
+             <object-name>Tponder-1</object-name>
+         </binding>
+     </combo>
+ <!-- -->
+     <combo>
+         <name>Tponder-2</name>
+         <pref-width>45</pref-width>
+         <pref-height>25</pref-height>
+         <live>true</live>
+         <property>/instrumentation/transponder/inputs/digit[2]</property>
+         <value>0</value>
+         <value>1</value>
+         <value>2</value>
+         <value>3</value>
+         <value>4</value>
+         <value>5</value>
+         <value>6</value>
+         <value>7</value>
+         <binding>
+             <command>dialog-apply</command>
+             <object-name>Tponder-2</object-name>
+         </binding>
+     </combo>
+     <combo>
+         <name>Tponder-3</name>
+         <pref-width>45</pref-width>
+         <pref-height>25</pref-height>
+         <live>true</live>
+         <property>/instrumentation/transponder/inputs/digit[1]</property>
+         <value>0</value>
+         <value>1</value>
+         <value>2</value>
+         <value>3</value>
+         <value>4</value>
+         <value>5</value>
+         <value>6</value>
+         <value>7</value>
+         <binding>
+             <command>dialog-apply</command>
+             <object-name>Tponder-3</object-name>
+         </binding>
+     </combo>
+     <combo>
+         <name>Tponder-4</name>
+         <pref-width>45</pref-width>
+         <pref-height>25</pref-height>
+         <live>true</live>
+         <property>/instrumentation/transponder/inputs/digit[0]</property>
+         <value>0</value>
+         <value>1</value>
+         <value>2</value>
+         <value>3</value>
+         <value>4</value>
+         <value>5</value>
+         <value>6</value>
+         <value>7</value>
+         <binding>
+             <command>dialog-apply</command>
+             <object-name>Tponder-4</object-name>
+         </binding>
+     </combo>
+     
+     <empty><stretch>true</stretch></empty>
+     
 
+     <text>
+        <label>Mode</label>
+     </text>
+     
+     <combo>
+         <name>Tponder-5</name>
+         <pref-width>120</pref-width>
+         <pref-height>25</pref-height>
+         <live>true</live>
+         <property>/sim/gui/dialogs/radios/transponder-mode</property>
+         <value>OFF</value>
+         <value>STANDBY</value>
+         <value>TEST</value>
+         <value>GROUND</value>
+         <value>ON</value>
+         <value>ALTITUDE</value>
+         <binding>
+             <command>dialog-apply</command>
+             <object-name>Tponder-5</object-name>
+         </binding>
+         <binding>
+             <command>nasal</command>
+             <script><![CDATA[
+                 var v = getprop("/sim/gui/dialogs/radios/transponder-mode"); 
+                 #var modes = ['OFF', 'STANDBY', 'TEST', 'GROUND', 'ON', 'ALTITUDE'];
+                 var index=0;
+                 for (; index<size(modes) and (v != modes[index]); index+=1) { }
+                 setprop("/instrumentation/transponder/inputs/knob-mode", index);
+             ]]></script>
+         </binding>
+     </combo>
+     
+ <button>
+     <legend>IDENT</legend>
+     <property>/instrumentation/transponder/inputs/ident-btn</property>
+     <binding>
+         <command>dialog-apply</command>
+     </binding>
+ </button>
+ </group> <!-- Transponder group -->
+ 
+ <!-- bottom button box -->
+ <hrule/>
  <group>
   <layout>hbox</layout>
   <default-padding>6</default-padding>

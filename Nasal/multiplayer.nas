@@ -160,10 +160,11 @@ var dialog = {
         #
         # "private"
         var font = { name: "FIXED_8x13" };
-        me.header = ["chat", " callsign", "model", "brg", func dialog.dist_hdr, func dialog.alt_hdr ~ " ", "ignore" ~ " "];
+        me.header = ["chat", " callsign"," code"," model", " brg", func dialog.dist_hdr, func dialog.alt_hdr ~ " ", "ignore" ~ " "];
         me.columns = [
             { type: "button", legend: "", halign: "right", callback: "multiplayer.compose_message", "pref-height": 14, "pref-width": 14},
             { type: "text", property: "callsign",    format: " %s",    label: "-----------",    halign: "fill" },
+            { type: "text", property: "id-code",    format: " %s",    label: "-----",    halign: "fill" },
             { type: "text", property: "model-short", format: "%s",     label: "--------------", halign: "fill" },
             { type: "text", property: "bearing-to",  format: " %3.0f", label: "----",           halign: "right", font: font },
             { type: "text", property: func dialog.dist_node, format:" %8.2f", label: "---------", halign: "right", font: font },
@@ -240,22 +241,22 @@ var dialog = {
             var color = mp.node.getNode("model-installed").getValue() ? me.fg[odd = !odd] : me.fg[2];
             foreach (var column; me.columns) {
                 var w = nil;
-		if (column.type == "button") {
-		    w = content.addChild("button");
-		    w.node.setValues(column);
-		    w.setBinding("nasal", column.callback ~ "(\"" ~ mp.callsign ~ ", \");");
+        if (column.type == "button") {
+            w = content.addChild("button");
+            w.node.setValues(column);
+            w.setBinding("nasal", column.callback ~ "(\"" ~ mp.callsign ~ ", \");");
                     w.node.setValues({ row: row, col: col});
-		} else {
-		    var p = typeof(column.property) == "func" ? column.property() : column.property;
-		    if (column.type == "text") {
-		    	w = content.addChild("text");
-		    	w.node.setValues(column);
-		    } elsif (column.type == "checkbox") {
-		    	w = content.addChild("checkbox");
-		    	w.setBinding("nasal", column.callback ~ "(getprop(\"" ~ mp.root ~ "/" ~ column.argprop ~ "\"))");
-		    }
+        } else {
+            var p = typeof(column.property) == "func" ? column.property() : column.property;
+            if (column.type == "text") {
+                w = content.addChild("text");
+                w.node.setValues(column);
+            } elsif (column.type == "checkbox") {
+                w = content.addChild("checkbox");
+                w.setBinding("nasal", column.callback ~ "(getprop(\"" ~ mp.root ~ "/" ~ column.argprop ~ "\"))");
+            }
                     w.node.setValues({ row: row, col: col, live: 1, property: mp.root ~ "/" ~ p });
-		}
+        }
                 w.setColor(color[0], color[1], color[2], color[3]);
                 col += 1;
             }
@@ -279,7 +280,11 @@ var dialog = {
             var z = n.getNode("position/global-z").getValue();
             var ac = geo.Coord.new().set_xyz(x, y, z);
             var distance = nil;
+            var idcode = "----";
+            idcode = me.IDCode(n.getNode("instrumentation/transponder/transmitted-id").getValue());
+
             call(func distance = self.distance_to(ac), nil, var err = []);
+
             if ((size(err))or(distance==nil)) {
                 # Oops, have errors. Bogus position data (and distance==nil).
                 if (me.cs_warnings[mp.callsign]!=1) {
@@ -301,6 +306,7 @@ var dialog = {
                     "distance-to-nm": distance * M2NM,
                     "position/altitude-m": n.getNode("position/altitude-ft").getValue() * FT2M,
                     "controls/invisible": contains(ignore, mp.callsign),
+                    "id-code": idcode
                 });
             }
         }
@@ -364,6 +370,24 @@ var dialog = {
         else
             me.del();
     },
+    IDCode: func(code){
+
+        var idcode= "----";
+
+        if (code != nil )
+            {
+            if (code < 0)
+                {
+                idcode = "----";
+                }
+            else
+                {
+                idcode = sprintf("%04d", code);
+                }
+            }
+
+        return idcode;
+        },
 };
 
 
@@ -373,7 +397,7 @@ var dialog = {
 # "/sim/signals/multiplayer-updated" whenever an aircraft
 # joined or left. Available data containers are:
 #
-#   multiplayer.model.data:        hash, key := /ai/models/* path
+#   multiplayer.model.data:        hash, key := /ai/models/~ path
 #   multiplayer.model.callsign     hash, key := callsign
 #   multiplayer.model.list         vector, sorted alphabetically (ASCII, case insensitive)
 #

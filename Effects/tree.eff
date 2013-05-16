@@ -41,19 +41,16 @@
       <and>
         <property>/sim/rendering/shaders/skydome</property>
         <property>/sim/rendering/random-vegetation</property>
-        <or>
-          <less-equal>
-            <value type="float">2.0</value>
-            <glversion/>
-          </less-equal>
-          <and>
-            <extension-supported>GL_ARB_shader_objects</extension-supported>
-            <extension-supported>GL_ARB_shading_language_100</extension-supported>
-            <extension-supported>GL_ARB_vertex_shader</extension-supported>
-            <extension-supported>GL_ARB_fragment_shader</extension-supported>
-            <extension-supported>GL_ARB_multisample</extension-supported>
-          </and>
-        </or>
+        <property>/sim/rendering/multi-sample-buffers</property>
+			  <less-equal>
+           <value type="float">1.0</value>
+					 <float-property>/sim/rendering/multi-samples</float-property>
+        </less-equal>
+				<extension-supported>GL_ARB_shader_objects</extension-supported>
+				<extension-supported>GL_ARB_shading_language_100</extension-supported>
+				<extension-supported>GL_ARB_vertex_shader</extension-supported>
+				<extension-supported>GL_ARB_fragment_shader</extension-supported>
+				<extension-supported>GL_ARB_multisample</extension-supported>
       </and>
     </predicate>
    
@@ -328,6 +325,11 @@
 		<predicate>
 			<and>
 				<property>/sim/rendering/random-vegetation</property>
+        <property>/sim/rendering/multi-sample-buffers</property>
+			  <less-equal>
+           <value type="float">1.0</value>
+					 <float-property>/sim/rendering/multi-samples</float-property>
+        </less-equal>
         <extension-supported>GL_ARB_multisample</extension-supported>
         <extension-supported>GL_ARB_vertex_shader</extension-supported>
         <extension-supported>GL_ARB_fragment_shader</extension-supported>

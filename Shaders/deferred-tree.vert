@@ -11,9 +11,10 @@ void main() {
 
     // Texture coordinates
     float numVarieties = gl_Normal.z;
-		float texFract = floor(fract(gl_MultiTexCoord0.x) * numVarieties) / (numVarieties * 4.0);
-		texFract += floor(gl_MultiTexCoord0.x) / (numVarieties * 4.0);
-    gl_TexCoord[0] = vec4(texFract + 0.5 * float(season), gl_MultiTexCoord0.y, 0.0, 0.0);  
+    float texFract = floor(fract(gl_MultiTexCoord0.x) * numVarieties) / numVarieties;
+    texFract += floor(gl_MultiTexCoord0.x) / numVarieties;
+    gl_TexCoord[0] = vec4(texFract, gl_MultiTexCoord0.y, 0.0, 0.0);  
+    gl_TexCoord[0].y =  gl_TexCoord[0].y + 0.5 * season;
     
     // Position and scaling
     vec3 position = gl_Vertex.xyz * gl_Normal.xxy;

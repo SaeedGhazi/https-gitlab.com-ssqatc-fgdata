@@ -80,12 +80,10 @@ var resetViewPos = func {
 }
 
 var resetViewDir = func {
-    setprop("/sim/current-view/goal-heading-offset-deg",
-            getprop("/sim/current-view/config/heading-offset-deg"));
-    setprop("/sim/current-view/goal-pitch-offset-deg",
-            getprop("/sim/current-view/config/pitch-offset-deg"));
-    setprop("/sim/current-view/goal-roll-offset-deg",
-            getprop("/sim/current-view/config/roll-offset-deg"));
+    var v = current.getNode("config");
+    setprop("/sim/current-view/heading-offset-deg", v.getNode("heading-offset-deg", 1).getValue() or 0);
+    setprop("/sim/current-view/pitch-offset-deg", v.getNode("pitch-offset-deg", 1).getValue() or 0);
+    setprop("/sim/current-view/roll-offset-deg", v.getNode("roll-offset-deg", 1).getValue() or 0);
 }
 
 ##

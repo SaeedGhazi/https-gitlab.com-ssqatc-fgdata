@@ -5,7 +5,7 @@
 // color - xyz of tree quad origin, replicated 4 times.
 #version 120
 
-uniform int season;
+uniform float season;
 
 void main() {
 

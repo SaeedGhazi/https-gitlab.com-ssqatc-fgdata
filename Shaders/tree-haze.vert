@@ -38,7 +38,7 @@ uniform float overcast;
 //uniform float scattering;
 uniform float ground_scattering;
 uniform float snow_level;
-uniform int   season;
+uniform float season;
 
 float earthShade;
 float mie_angle;

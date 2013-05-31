@@ -132,7 +132,7 @@
       </uniform>
       <uniform>
         <name>season</name>
-        <type>int</type>
+        <type>float</type>
         <value><use>season</use></value>
       </uniform>
       <uniform>
@@ -254,7 +254,7 @@
       </uniform>
       <uniform>
         <name>season</name>
-        <type>int</type>
+        <type>float</type>
         <value><use>season</use></value>
       </uniform>
       <uniform>
@@ -310,7 +310,7 @@
 			</program>
       <uniform>
         <name>season</name>
-        <type>int</type>
+        <type>float</type>
         <value><use>season</use></value>
       </uniform>
 			<uniform>
@@ -412,7 +412,7 @@
 			</uniform>
       <uniform>
         <name>season</name>
-        <type>int</type>
+        <type>float</type>
         <value><use>season</use></value>
       </uniform>
 			<!-- 			END fog include -->
@@ -506,7 +506,7 @@
 			</uniform>
       <uniform>
         <name>season</name>
-        <type>int</type>
+        <type>float</type>
         <value><use>season</use></value>
       </uniform>
 			<!-- 			END fog include -->
@@ -598,7 +598,7 @@
 			</uniform>
       <uniform>
         <name>season</name>
-        <type>int</type>
+        <type>float</type>
         <value><use>season</use></value>
       </uniform>
 		</pass>

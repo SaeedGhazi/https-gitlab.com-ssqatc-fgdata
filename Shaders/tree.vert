@@ -12,7 +12,7 @@
 //
 // void fog_Func(int type);
 // /////////////////////////
-uniform int season;
+uniform float season;
 
 void main(void)
 {

@@ -100,18 +100,17 @@ var FMSDelegate = {
 		return m;
 	},
     
-  _landingCheckTimeout: func
-  {
-    var cur = me.flightplan.currentWP();
-    var wow = getprop('gear/gear[0]/wow');
-    var gs = getprop('velocities/groundspeed-kt');
-    if (wow and (gs < 25))  {
-      debug.dump('touchdown on destination runway, end of route.');
-      me.landingCheck.stop();
-      # record touch-down time?
-      me.flightplan.finish();
-    }
-  },
+    _landingCheckTimeout: func
+    {
+        var wow = getprop('gear/gear[0]/wow');
+        var gs = getprop('velocities/groundspeed-kt');
+        if (wow and (gs < 25))  {
+          debug.dump('touchdown on destination runway, end of route.');
+          me.landingCheck.stop();
+          # record touch-down time?
+          me.flightplan.finish();
+        }
+    },
     
     waypointsChanged: func
     {
@@ -125,8 +124,8 @@ var FMSDelegate = {
     currentWaypointChanged: func
     {
         if (me.landingCheck != nil) {
-          me.landingCheck.stop();
-          me.landingCheck = nil; # delete timer
+            me.landingCheck.stop();
+            me.landingCheck = nil; # delete timer
         }
         
         #debug.dump('saw current WP changed, now ' ~ me.flightplan.current);
@@ -134,14 +133,22 @@ var FMSDelegate = {
         if (active == nil) return;
         
         if (active.alt_cstr_type != 'none') {
-          debug.dump('new WP has valid altitude restriction, setting on AP');
-          setprop('/autopilot/settings/target-altitude-ft', active.alt_cstr);
+            debug.dump('new WP has valid altitude restriction, setting on AP');
+            setprop('/autopilot/settings/target-altitude-ft', active.alt_cstr);
         }
         
         var activeRunway = active.runway();
-        if ((activeRunway != nil) and (activeRunway.id == me.flightplan.destination_runway.id)) {
-          me.landingCheck = maketimer(2.0, me, FMSDelegate._landingCheckTimeout);
-          me.landingCheck.start();
+        # this check is needed to avoid problems with circular routes; when
+        # activating the FP we end up here, and without this check, immediately
+        # detect that we've 'landed' and finish the FP again.
+        var wow = getprop('gear/gear[0]/wow');
+        
+        if (!wow and 
+            (activeRunway != nil) and 
+            (activeRunway.id == me.flightplan.destination_runway.id))
+        {
+            me.landingCheck = maketimer(2.0, me, FMSDelegate._landingCheckTimeout);
+            me.landingCheck.start();
         }
     }
 };

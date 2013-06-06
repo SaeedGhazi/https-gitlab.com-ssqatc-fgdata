@@ -833,10 +833,12 @@ var Canvas = {
   # @param id Optional id/name for the group
   createGroup: func(id = nil)
   {
-    var ghost = me._createGroup();
-    return {
-      parents: [ Group.new(ghost) ]
-    };
+    return Group.new(me._createGroup(id));
+  },
+  # Get the group with the given name
+  getGroup: func(id)
+  {
+    return Group.new(me._getGroup(id));
   },
   # Set the background color
   #
@@ -859,10 +861,12 @@ var Canvas = {
 
 var wrapCanvas = func(canvas_ghost)
 {
-  return {
-    parents: [Canvas, canvas_ghost],
+  var m = {
+    parents: [PropertyElement, Canvas, canvas_ghost],
     texture: props.wrapNode(canvas_ghost._node_ghost)
   };
+  m._node = m.texture;
+  return m;
 }
 
 # Create a new canvas. Pass parameters as hash, eg:

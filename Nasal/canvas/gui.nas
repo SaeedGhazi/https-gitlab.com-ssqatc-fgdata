@@ -186,7 +186,8 @@ var Window = {
                          .set("alignment", "left-center")
                          .set("character-size", 14)
                          .set("font", "LiberationFonts/LiberationSans-Bold.ttf")
-                         .setTranslation(x + 1.5 * w, y + 0.5 * h);
+                         .setTranslation( int(x + 1.5 * w + 0.5),
+                                          int(y + 0.5 * h + 0.5) );
 
     var title = me.get("title", "Canvas Dialog");
     me._node.getNode("title", 1).alias(me._title._node.getPath() ~ "/text");

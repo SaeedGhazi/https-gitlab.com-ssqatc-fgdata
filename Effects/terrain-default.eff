@@ -104,7 +104,9 @@
     <cloud_self_shading><use>/environment/cloud-self-shading</use></cloud_self_shading>
     <moonlight><use>/environment/moonlight</use></moonlight>
     <season><use>/environment/season</use></season>
-    <windspeed><use>/environment/wind-speed-kt</use></windspeed>
+    <wind_effects><use>/sim/rendering/shaders/wind-effects</use></wind_effects>
+    <windE><use>/environment/sea/surface/wind-from-east-fps</use></windE>
+    <windN><use>/environment/sea/surface/wind-from-north-fps</use></windN>
     <quality_level><use>/sim/rendering/shaders/landmass</use></quality_level>
     <tquality_level><use>/sim/rendering/shaders/transition</use></tquality_level>
   </parameters>
@@ -347,11 +349,6 @@
         <type>float</type>
         <value><use>wetness</use></value>
       </uniform>
-	  <uniform>
-        <name>windspeed</name>
-        <type>float</type>
-        <value><use>windspeed</use></value>
-      </uniform>
       <uniform>
         <name>fogstructure</name>
         <type>float</type>
@@ -372,6 +369,16 @@
         <type>float</type>
         <value><use>season</use></value>
       </uniform>
+     <uniform>
+	<name>WindE</name>
+	<type>float</type>
+	<value><use>windE</use></value>
+      </uniform>
+      <uniform>
+	<name>WindN</name>
+	<type>float</type>
+	<value><use>windN</use></value>
+      </uniform>
       <uniform>
         <name>quality_level</name>
         <type>int</type>
@@ -382,6 +389,11 @@
         <type>int</type>
         <value><use>tquality_level</use></value>
       </uniform>
+      <uniform>
+      <name>wind_effects</name>
+      <type>int</type>
+      <value><use>wind_effects</use></value>
+     </uniform>
       <uniform>
         <name>texture</name>
         <type>sampler-2d</type>

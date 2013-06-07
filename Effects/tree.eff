@@ -33,6 +33,9 @@
 		<fogtype><use>/sim/rendering/shaders/skydome</use></fogtype>
 		<fogstructure><use>/environment/fog-structure</use></fogstructure>
 		<quality_level><use>/sim/rendering/shaders/landmass</use></quality_level>
+		<wind_effects><use>/sim/rendering/shaders/wind-effects</use></wind_effects>
+		<windE><use>/environment/sea/surface/wind-from-east-fps</use></windE>
+		<windN><use>/environment/sea/surface/wind-from-north-fps</use></windN>
 		<!-- 	END fog include -->
 	</parameters>
 
@@ -136,6 +139,16 @@
         <value><use>season</use></value>
       </uniform>
       <uniform>
+	<name>WindE</name>
+	<type>float</type>
+	<value><use>windE</use></value>
+      </uniform>
+      <uniform>
+	<name>WindN</name>
+	<type>float</type>
+	<value><use>windN</use></value>
+      </uniform>
+      <uniform>
         <name>texture</name>
         <type>sampler-2d</type>
         <value type="int">0</value>
@@ -149,6 +162,11 @@
       <name>quality_level</name>
       <type>int</type>
       <value><use>quality_level</use></value>
+     </uniform>
+     <uniform>
+      <name>wind_effects</name>
+      <type>int</type>
+      <value><use>wind_effects</use></value>
      </uniform>
     </pass>
   </technique>
@@ -257,6 +275,16 @@
         <type>float</type>
         <value><use>season</use></value>
       </uniform>
+     <uniform>
+	<name>WindE</name>
+	<type>float</type>
+	<value><use>windE</use></value>
+      </uniform>
+      <uniform>
+	<name>WindN</name>
+	<type>float</type>
+	<value><use>windN</use></value>
+      </uniform>
       <uniform>
         <name>texture</name>
         <type>sampler-2d</type>
@@ -271,6 +299,11 @@
       <name>quality_level</name>
       <type>int</type>
       <value><use>quality_level</use></value>
+     </uniform>
+     <uniform>
+      <name>wind_effects</name>
+      <type>int</type>
+      <value><use>wind_effects</use></value>
      </uniform>
     </pass>
   </technique>

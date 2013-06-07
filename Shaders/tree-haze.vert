@@ -18,27 +18,26 @@
 // the surface normal is passed in gl_{Front,Back}Color. The alpha
 // component is set to 1 for front, 0 for back in order to work around
 // bugs with gl_FrontFacing in the fragment shader.
-//varying vec4 diffuse_term;
-//varying vec3 normal;
-varying vec3 relPos;
 
-//varying float earthShade;
-//varying float yprime;
-//varying float vertex_alt;
+
+varying vec3 relPos;
 varying float yprime_alt;
-//varying float mie_angle;
 
 uniform int colorMode;
+uniform int wind_effects;
 uniform float hazeLayerAltitude;
 uniform float terminator;
 uniform float terrain_alt; 
 uniform float avisibility;
 uniform float visibility;
 uniform float overcast;
-//uniform float scattering;
 uniform float ground_scattering;
 uniform float snow_level;
 uniform float season;
+uniform float WindN;
+uniform float WindE;
+
+uniform float osg_SimulationTime;
 
 float earthShade;
 float mie_angle;
@@ -94,6 +93,14 @@ void main()
   // Rotation of the generic quad to specific one for the tree.
   position.xy = vec2(dot(position.xy, vec2(cr, sr)), dot(position.xy, vec2(-sr, cr)));
 
+
+ // Shear by wind.  Note that this only applies to the top vertices    
+  if (wind_effects > 0)           
+  	{
+	position.x = position.x + position.z * (sin(osg_SimulationTime * 1.8 + (gl_Color.x + gl_Color.y + gl_Color.z) * 0.01) + 1.0) * 0.0025 * WindN;
+  	position.y = position.y + position.z * (sin(osg_SimulationTime * 1.8 + (gl_Color.x + gl_Color.y + gl_Color.z) * 0.01) + 1.0) * 0.0025 * WindE;
+	}
+	
   // Move to correct location (stored in gl_Color)
   position = position + gl_Color.xyz;
   gl_Position   = gl_ModelViewProjectionMatrix * vec4(position,1.0);

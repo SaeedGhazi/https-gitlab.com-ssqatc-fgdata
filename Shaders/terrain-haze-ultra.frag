@@ -44,7 +44,6 @@ uniform float fogstructure;
 uniform float snow_thickness_factor;
 uniform float cloud_self_shading;
 uniform float season;
-uniform float windspeed;
 uniform float grain_strength;
 uniform float intrinsic_wetness;
 uniform float transition_model;
@@ -52,9 +51,12 @@ uniform float hires_overlay_bias;
 uniform float dot_density;
 uniform float dot_size;
 uniform float dust_resistance;
+uniform float WindE;
+uniform float WindN;
 uniform float osg_SimulationTime;
 uniform int quality_level;
 uniform int tquality_level;
+uniform int wind_effects;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -272,6 +274,34 @@ float msl_altitude = (relPos.z + eye_alt);
     float intensity;
     
 
+
+// Wind motion of the overlay noise simulating movement of vegetation and loose debris
+
+vec2 windPos;
+
+if (wind_effects > 1)
+	{
+	float windSpeed = length(vec2 (WindE,WindN)) /3.0480; 
+	// interfering sine wave wind pattern
+	float sineTerm = sin(0.35 * windSpeed * osg_SimulationTime + 0.05 * (rawPos.x + rawPos.y));
+	sineTerm = sineTerm + sin(0.3 * windSpeed * osg_SimulationTime + 0.04 * (rawPos.x + rawPos.y));
+	sineTerm = sineTerm + sin(0.22 * windSpeed * osg_SimulationTime + 0.05 * (rawPos.x + rawPos.y));
+	sineTerm = sineTerm/3.0;
+	// non-linear amplification to simulate gusts
+	sineTerm = sineTerm * sineTerm;//smoothstep(0.2, 1.0, sineTerm);
+
+	// wind starts moving dust and leaves at around 8 m/s
+	float timeArg = 0.01 * osg_SimulationTime * windSpeed * smoothstep(8.0, 15.0, windSpeed);
+	timeArg = timeArg + 0.02 * sineTerm;
+
+ 	windPos = vec2 (rawPos.x + WindN * timeArg, rawPos.y +  WindE * timeArg);
+	}
+else
+	{
+	windPos = rawPos.xy;
+	}
+
+
 // get noise at different wavelengths
 
 // used:	5m, 5m gradient, 10m, 10m gradient: heightmap of the closeup terrain, 10m also snow
@@ -287,7 +317,7 @@ float noise_10m = Noise2D(rawPos.xy, 10.0);
 float noise_5m = Noise2D(rawPos.xy ,5.0);
 float noise_2m = Noise2D(rawPos.xy ,2.0); 
 float noise_1m = Noise2D(rawPos.xy ,1.0); 
-float noise_01m = Noise2D(rawPos.xy, 0.1);
+float noise_01m = Noise2D(windPos.xy, 0.1);
 
 float noisegrad_10m;
 float noisegrad_5m;
@@ -488,15 +518,7 @@ if ((dist < 5000.0)&& (quality_level > 3) && (combined_wetness>0.0))
 
     texel.rgb = texel.rgb * (1.0 - 0.6 * combined_wetness);
 	
-// surf - terrain is too bad...
-/*	foam_texel.rgb =vec3 (1.0, 1.0, 1.0);
-	foam_texel.rg = 0.7 * foam_texel.rg +0.3 * noise_2m * foam_texel.rg;
-	float surf_strength = 1.0 + windspeed/5.0;
-	float surf_sine = sin(osg_SimulationTime+5.0*noise_25m);
-	float surf_steepcorr = 1.0 -smoothstep(0.99,1.01,abs(steepness));
-	float surf_alt = (relPos.z+eye_alt )  - 20.0 * surf_steepcorr ;//+ noise_10m * surf_steepcorr
-	texel.rgb = mix(foam_texel.rgb, texel.rgb, smoothstep((0.3 +0.3*surf_strength+ surf_sine) * surf_steepcorr-20.0, (0.3+ surf_strength + surf_sine) * surf_steepcorr-19.0, surf_alt));
-*/
+
 
 // light computations
 

@@ -147,6 +147,7 @@ Started September 2000 by David Megginson, david@megginson.com
 				<transition type="float" userarchive="y">1.0</transition>
 				<urban type="float" userarchive="y">1.0</urban>
 				<water type="float" userarchive="y">1.0</water>
+				<wind-effects type="float" userarchive="y">0.0</wind-effects>
 				<lights type="float" userarchive="y">1.0</lights>
 				<quality-level-internal type="float" userarchive="y">1.0</quality-level-internal>
 			</shaders>

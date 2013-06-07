@@ -508,6 +508,11 @@
 					<use>sea_b</use>
 				</value>
 			</uniform>
+			<uniform>
+				<name>ocean_flag</name>
+				<type>int</type>
+				<value>0</value>
+			</uniform>
 			<!-- END fog include -->
 		</pass>
 	</technique>
@@ -869,6 +874,11 @@
 				<value>
 					<use>sea_b</use>
 				</value>
+			</uniform>
+			<uniform>
+				<name>ocean_flag</name>
+				<type>int</type>
+				<value>0</value>
 			</uniform>
 			<!-- END fog include -->
 		</pass>

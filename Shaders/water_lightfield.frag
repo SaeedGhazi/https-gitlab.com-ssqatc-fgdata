@@ -30,6 +30,7 @@ varying vec3 rawPos;
 varying float earthShade;
 varying float yprime_alt;
 varying float mie_angle;
+varying float steepness;
 
 uniform    float WaveFreq ;
 uniform    float WaveAmp ;
@@ -57,6 +58,7 @@ uniform float sea_g;
 uniform float sea_b;
 
 uniform int quality_level;
+uniform int ocean_flag;
 
 vec3 specular_light;
 
@@ -525,11 +527,18 @@ void main(void)
 
 
 	float waveSlope = N.g;
-
-	if (windEffect >= 8.0)
-		if (waveSlope >= foamSlope){
-			finalColor = mix(finalColor, max(finalColor, finalColor + foam_texel), smoothstep(0.01, 0.50, N.g));
+	float surfFact = 0.0;
+	if ((windEffect >= 8.0)  || (steepness < 0.999)) 
+		{ 
+		if ((waveSlope > 0.0) && (ocean_flag ==1)) 
+			{
+			surfFact = surfFact +(1.0 -smoothstep(0.97,1.0,steepness));
+			waveSlope = waveSlope + 2.0 * surfFact;
 			}
+		if (waveSlope >= foamSlope){
+			finalColor = mix(finalColor, max(finalColor, finalColor + foam_texel), smoothstep(0.01, 0.50, N.g+0.2 * surfFact));
+			}
+		}
 	}
 		
 

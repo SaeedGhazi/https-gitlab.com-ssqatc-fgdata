@@ -15,6 +15,7 @@ varying vec3 rawPos;
 
 varying vec3 viewerdir;
 varying vec3 lightdir;
+varying float steepness;
 
 
 varying float earthShade;
@@ -30,6 +31,8 @@ uniform float avisibility;
 uniform float visibility;
 uniform float overcast;
 uniform float ground_scattering;
+
+uniform int ocean_flag;
 
 uniform mat4 osg_ViewMatrixInverse;
 
@@ -79,6 +82,11 @@ void main(void)
 
     viewerdir = vec3(gl_ModelViewMatrixInverse[3]) - vec3(gl_Vertex);
     lightdir = normalize(vec3(gl_ModelViewMatrixInverse * gl_LightSource[0].position));
+    if (ocean_flag == 1)
+    	{steepness = dot(normalize(gl_Normal), vec3 (0.0, 0.0, 1.0));}
+    else
+	{steepness = 0.0;}
+
 
     waterTex4 = vec4( ecPosition.xzy, 0.0 );
 

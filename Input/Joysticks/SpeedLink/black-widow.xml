@@ -45,6 +45,7 @@ $Id$
 	<name type="string">Mega World USB Game Controllers</name>
 	<name type="string">SpeedLink SL-6640 Black Widow Flight Stick</name>
 	<name type="string">SL-6640 Black Widow Flightstick</name>
+	<name type="string">SL-6640-SBK BLACK WIDOW Flightstick</name>
 	<axis>
 		<desc type="string">Aileron</desc>
 		<number>

@@ -89,9 +89,9 @@ void QDM(inout vec3 p, inout vec3 v)
                 //use additional convergence speed-up
                 #ifdef USE_QDM_ASCEND_INTERVAL
                 if(frac(level*0.5) > EPSILON)
-                  level++;
-                #elseif USE_QDM_ASCEND_CONST
-                 level++;
+                    level++;
+                #elif USE_QDM_ASCEND_CONST
+                level++;
                 #endif
             }
             p2 = p + v * d;

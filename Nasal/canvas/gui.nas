@@ -27,8 +27,13 @@ var Window = {
   del: func
   {
     me._node.remove();
+    me._node = nil;
+
     if( me["_canvas"] != nil )
+    {
       me._canvas.del();
+      me._canvas = nil;
+    }
   },
   # Create the canvas to be used for this Window
   #
@@ -147,6 +152,7 @@ var Window = {
     me.set("decoration-border", "25 1 1");
     me.set("shadow-inset", int((1 - math.cos(45 * D2R)) * border_radius + 0.5));
     me.set("shadow-radius", 5);
+    me.setBool("update", 1);
 
     var canvas_deco = me.getCanvasDecoration();
     canvas_deco.addEventListener("mousedown", func me.raise());

@@ -44,7 +44,7 @@ void main(void)
   float fogCoord = length(vec3(gl_ModelViewMatrix * vec4(gl_Color.x, gl_Color.y, gl_Color.z, 1.0)));
   float center_dist = length(vec3(gl_ModelViewMatrix * vec4(0.0,0.0,0.0,1.0)));
   
-  if ((fogCoord > detail_range) && (fogCoord > center_dist)) {
+  if ((fogCoord > detail_range) && (fogCoord > center_dist) && (shade_factor < 0.7)) {
     // More than detail_range away, so discard all sprites on opposite side of
     // cloud center by shifting them beyond the view fustrum
     gl_Position = vec4(0.0,0.0,10.0,1.0);
@@ -72,7 +72,7 @@ void main(void)
     gl_Position = gl_ModelViewProjectionMatrix * gl_Position;    
     gl_FrontColor = gl_LightSource[0].diffuse * shade + gl_FrontLightModelProduct.sceneColor;
     
-    if ((fogCoord > (0.9 * detail_range)) && (fogCoord > center_dist)) {
+    if ((fogCoord > (0.9 * detail_range)) && (fogCoord > center_dist) && (shade_factor < 0.7)) {
       // cloudlet is almost at the detail range, so fade it out.
       gl_FrontColor.a = 1.0 - smoothstep(0.9 * detail_range, detail_range, fogCoord);
     } else {

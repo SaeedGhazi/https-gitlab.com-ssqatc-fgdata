@@ -50,7 +50,7 @@ var Window = {
       view: size,
       placement: {
         type: "window",
-        index: me._node.getIndex()
+        id: me.get("id")
       }
     });
 
@@ -88,7 +88,9 @@ var Window = {
   # Raise to top of window stack
   raise: func()
   {
-    me.setBool("raise-top", 1);
+    # on writing the z-index the window always is moved to the top of all other
+    # windows with the same z-index.
+    me.setInt("z-index", me.get("z-index", 0));
   },
 # private:
   _propCallback: func(child, mode)

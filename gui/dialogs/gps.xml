@@ -9,26 +9,27 @@
 		var gps = props.globals.getNode("/instrumentation/gps/", 1);
 		var dlg = props.globals.getNode("/sim/gui/dialogs/gps", 1);
 		var cmd = gps.getNode("command", 1);
+		
 		var scratch = gps.getNode("scratch", 1);
-    var scratchValid = scratch.getNode("valid", 1);
-    var searchIsWaypoints = 0;
-    var anySpec = 'vor,airport,heliport,ils,seaport,fix,ndb,waypoint,tacan,city,town';
+    	var scratchValid = dlg.getNode("scratch/valid", 1);
+	    var searchIsWaypoints = 0;
+	    var anySpec = 'vor,airport,heliport,ils,seaport,fix,ndb,waypoint,tacan,city,town';
     
-    var updateSearchResults = func(isWpts, index = 0)
-    {
-      searchIsWaypoints = isWpts;
-      dlg.getNode("scratch-index", 1).setValue(index);
+	    var updateSearchResults = func(isWpts, index = 0)
+	    {
+	      searchIsWaypoints = isWpts;
+	      dlg.getNode("scratch-index", 1).setValue(index);
       
-      var lastIndex = size(searchResults) - 1;
-      dlg.getNode("scratch-has-next", 1).setValue((index + 1) < lastIndex);
+	      var lastIndex = size(searchResults) - 1;
+	      dlg.getNode("scratch-has-next", 1).setValue((index + 1) < lastIndex);
             
-      if (size(searchResults) < 1) {
-        scratchValid.setBoolValue(0);
-        return;
-      }
+	      if (size(searchResults) < 1) {
+	        scratchValid.setBoolValue(0);
+	        return;
+	      }
       
-      updateScratch();
-    }
+	      updateScratch();
+	    }
     
     var updateScratch = func
     {
@@ -64,8 +65,8 @@
       }
   
       
-      scratch.getNode("mag-bearing-deg", 1).setValue(cd[0] + magvar());
-      scratch.getNode("distance-nm", 1).setValue(cd[1]);
+      dlg.getNode("scratch-mag-bearing-deg", 1).setValue(cd[0] + magvar());
+      dlg.getNode("scratch-distance-nm", 1).setValue(cd[1]);
       
       gui.dialog_update("gps");
     }
@@ -484,7 +485,7 @@
         <vrule/>
         <group>
             <visible>
-                <property>/instrumentation/gps/scratch/valid</property>
+                <property>/sim/gui/dialogs/gps/scratch/valid</property>
             </visible>
             <layout>table</layout>
             <text>
@@ -534,7 +535,7 @@
                 <col>0</col>
                 <label>MMMMMM</label>
                 <format>Bearing: %3.0f</format>
-                <property>/instrumentation/gps/scratch/mag-bearing-deg</property>
+                <property>/sim/gui/dialogs/gps/scratch-mag-bearing-deg</property>
                 <live>true</live>
             </text>
             <text>
@@ -542,7 +543,7 @@
                 <col>1</col>
                 <label>MMMMMM</label>
                 <format>Distance: %5.1fnm</format>
-                <property>/instrumentation/gps/scratch/distance-nm</property>
+                <property>/sim/gui/dialogs/gps/scratch-distance-nm</property>
                 <live>true</live>
             </text>
             <!-- navaid info -->

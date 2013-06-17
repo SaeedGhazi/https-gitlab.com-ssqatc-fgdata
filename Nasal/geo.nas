@@ -65,7 +65,8 @@
 #                                 ... returns elevation in meter for given lat/lon, or nil on error;
 #                                     <top> is the altitude at which the intersection test starts
 #
-# geo.normdeg(<angle>)            ... returns angle normalized to  0 <= angle < 360
+# geo.normdeg(<angle>)            ... returns angle normalized to    0 <= angle < 360
+# geo.normdeg180(<angle>)         ... returns angle normalized to -180 < angle <= 360
 #
 # geo.put_model(<path>, <lat>, <lon> [, <elev:nil> [, <hdg:0> [, <pitch:0> [, <roll:0>]]]]);
 #                                 ... put model <path> at location <lat>/<lon> with given elevation
@@ -245,6 +246,15 @@ var normdeg = func(angle) {
 	return angle;
 }
 
+# normalize degree to -180 < angle <= 180
+#
+var normdeg180 = func(angle) {
+	while (angle <= -180)
+		angle += 360;
+	while (angle > 180)
+		angle -= 360;
+	return angle;
+}
 
 var tile_index = func(lat, lon) {
     return tileIndex(lat, lon);

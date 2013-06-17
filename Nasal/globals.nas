@@ -6,6 +6,8 @@ var R2D = 180 / math.pi;               # radian to degree
 
 var FT2M = 0.3048;                     # feet to meter
 var M2FT = 1 / FT2M;
+var IN2M = FT2M / 12;
+var M2IN = 1 / IN2M;
 var NM2M = 1852;                       # nautical miles to meter
 var M2NM = 1 / NM2M;
 

@@ -499,9 +499,9 @@ property tree, like:
 
     <slider>15</slider> <!--width for slider -->
     <wrap>false</wrap> <!-- don't wrap text; default: true -->
-    <top-line>0</top-line <!-- show this line at the top; negative numbers: show last line -->
+    <top-line>0</top-line <!-- line to show at top, -ve numbers: show last line -->
 
-    <editable>true</editable> <!-- whether the puLargeInput is supposed to be editable -->
+    <editable>true</editable> <!-- if the puLargeInput is supposed to be editable -->
 </textbox>
 
 

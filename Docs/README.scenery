@@ -205,11 +205,11 @@ Example:
 
 Syntax:
 
-  OBJECT_SHARED <object-path> <longitude> <latitude> <elevation-m> <heading-deg> <pitch-deg> <roll-deg>
+  OBJECT_SHARED <object-path> <lon> <lat> <elev-m> <hdg-deg> <pitch-deg> <roll-deg>
 
 The <object-path> is relative to the data directory (FG_ROOT).
-<elevation-m> is in meter and relative to mean sea-level (in the fgfs world).
-<heading-deg> is in degree, counter-clockwise with North being 0.0. Note
+<elev-m> is in meter and relative to mean sea-level (in the fgfs world).
+<hdg-deg> is in degree, counter-clockwise with North being 0.0. Note
 that this differs from about every other place in FlightGear, most notably
 the /orientation/heading-deg entry in the property system, which is clockwise.
 <pitch-deg> and <roll-deg> are in degree and optional.

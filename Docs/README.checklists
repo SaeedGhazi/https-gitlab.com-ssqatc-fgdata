@@ -6,7 +6,7 @@ the Help->Checklists menu within the simulator.
 
 Tutorials are automatically generated from checklists on startup.
 
-Each checklist is defined as a property tree under /sim/checklists/checklist[n] 
+Each checklist is defined as a property tree under /sim/checklists/checklist[n]
 with the following tags
 
 <title>       - Name of the checklist
@@ -20,13 +20,13 @@ with the following tags
                 Contains x-m, y-m, z-m and scale tag.
   <condition> - Optional standard FlightGear condition node that evaluates when the
                 checklist item has been completed.
-	<binding>   - Zero or more bindings to execute the checklist item.  Allows the user 
-	              to have their virtual co-pilot perform the action if they select the 
-	              ">" button next to the checklist item.
+  <binding>   - Zero or more bindings to execute the checklist item.  Allows the user
+                to have their virtual co-pilot perform the action if they select the 
+                ">" button next to the checklist item.
                 
 The <page> tag may be omitted for single-page checklists, with the <item> tags 
-immediately under the <checklist[n]> node.                
-                
+immediately under the <checklist[n]> node.
+
 See the c172p for an example of this in action (Aircraft/c172p/c172-checklists.xml).
 
   

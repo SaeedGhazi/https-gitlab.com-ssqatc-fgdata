@@ -370,9 +370,9 @@ gear:     Defines a landing gear.  Accepts <control> subelements to map
                         are not active on runways. Defaults to "0". You can
                         not exclude all gears in the solving process.
 
-launchbar: Defines a catapult launchbar or strop. The default acceleration 
-						provided by the catapult is 25m/s^2. This can be
-						modified by the use of the control axis LACCEL.
+launchbar: Defines a catapult launchbar or strop. The default acceleration
+            provided by the catapult is 25m/s^2. This can be
+            modified by the use of the control axis LACCEL.
            x,y,z:      The location of the mount point of the launch bar or
                        strop on the aircraft.
            length:     The length of the launch bar from mount point to tip
@@ -464,7 +464,7 @@ control-input:
                   INCIDENCE - The incidence angle of a wing.
                   FLAP0 - The flap0 deflection of a wing.
                   FLAP1 - The flap1 deflection of a wing.
-                  FLAP[0/1]EFFECTIVENESS - a multiplier for flap lift, but not drag 
+                  FLAP[0/1]EFFECTIVENESS - a multiplier for flap lift, but not drag
                                            (useful for blown flaps)
                   SLAT - The slat extension of a wing.
                   SPOILER - The spoiler extension for a wing.
@@ -473,7 +473,7 @@ control-input:
                   COLLECTIVE - The collective input of a rotor
                   ROTORENGINEON - If not equal zero the rotor is rotating
                   WINCHRELSPEED - The relative winch speed
-				  LACCEL - The acceleration provided by the catapult.
+          LACCEL - The acceleration provided by the catapult.
                   {... and many more, see FGFDM.cpp ...}
           invert: Negate the value of the property before setting on
                   the object.
@@ -528,7 +528,7 @@ hitch:    A hitch, can be used for winch-start (in gliders) or aerotow (in
           gliders and motor aircrafts) or for external cargo with helicopter.
           You can do aerotow over the net via multiplayer (see j3 and bocian
           as an example).
-          
+
           name:  the name of the hitch. must be aerotow if you want to do
                  aerotow via multiplayer. You will find many properties
                  at /sim/hitches/name. Most of them are directly tied to
@@ -559,7 +559,7 @@ winch: The tow used for aerotow or winch. This must be a subelement
                of an enclosing <hitch> tag.
           max-tow-length:
           min-tow-length:
-          initial-tow-length: all are in m. The initial tow length also 
+          initial-tow-length: all are in m. The initial tow length also
                  defines the length/search radius used for the mp-autoconnect
                  feature
           max-winch-speed: in m/s

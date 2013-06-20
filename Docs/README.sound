@@ -29,7 +29,7 @@ directly you can just add the following line to your ~/.openalrc file:
 
 (define speaker-num 4)
 
-To add 4 channel surround sound to IRIX systems that have more than one 
+To add 4 channel surround sound to IRIX systems that have more than one
 stereo output you can add the following section to your ~/.openalrc file
 (for a typical O2 configuration):
 
@@ -45,7 +45,7 @@ or alternatively:
 
 
 
-(Note the following section is obsolete as of the July 2004 release of 
+(Note the following section is obsolete as of the July 2004 release of
 OpenAL, since your could command OpenAL to use ALSA or Arts directly)
 
 ALSA and Arts
@@ -96,5 +96,7 @@ snd_page_alloc         11396  2 snd_intel8x0,snd_pcm
 snd_mpu401_uart         7936  1 snd_intel8x0
 snd_rawmidi            24832  1 snd_mpu401_uart
 snd_seq_device          8324  1 snd_rawmidi
-snd                    53892  9 snd_pcm_oss,snd_mixer_oss,snd_intel8x0,snd_ac97_codec,snd_pcm,snd_timer,snd_mpu401_uart,snd_rawmidi,snd_seq_device
-soundcore              10208  2 snd 
+snd                    53892  9 snd_pcm_oss,snd_mixer_oss,snd_intel8x0,
+                                snd_ac97_codec,snd_pcm,snd_timer,snd_mpu401_uart,
+                                snd_rawmidi,snd_seq_device
+soundcore              10208  2 snd

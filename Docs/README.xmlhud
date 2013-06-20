@@ -117,21 +117,24 @@ We have a Base class - Hud Instrument Item.
 We derive two more base classes - Instrument Scale and Dual Instrument Item from this.
 (This implementation owes its existence to all those who wrote the HUD code for 0.6.1)
 
-The Hud Instrument Label is an instantiable class derived from Hud Instrument Item - for
-displaying alphanumeric labels (altitude, velocity, Mach no and/or anything else as long you
-have a call back function to pass the value using the property 'data_source').
+The Hud Instrument Label is an instantiable class derived from Hud Instrument Item -
+for displaying alphanumeric labels (altitude, velocity, Mach no and/or anything else
+as long you have a call back function to pass the value using the property
+'data_source').
 
 The Hud Card is an instantiable class derived from Instrument scale - for displaying
-tapes and gauges (single variable display, for displaying aoa, g's, vsi, elevator_posn, etc.).
+tapes and gauges (single variable display, for displaying aoa, g's, vsi,
+elevator_posn, etc.).
 
-The Hud Ladder is an instantiable class derived from Dual Instrument Item - for displaying
-pitch reference ladder or climb/dive ladder (two variable display, for displaying two types of
-ladders, the pitch reference ladder or the climb/dive ladder as defined by MIL-1787b).
+The Hud Ladder is an instantiable class derived from Dual Instrument Item - for
+displaying pitch reference ladder or climb/dive ladder (two variable display, for
+displaying two types of ladders, the pitch reference ladder or the climb/dive ladder
+as defined by MIL-1787b).
 
-The fgTBI Instrument is an instantiable class derived from Dual Instrument scale again
-- for display of Bank angle and Sideslip (two variable display, for display of TSI info, kept
-different from the two variable ladder object basically because of its totally different
-draw member function).
+The fgTBI Instrument is an instantiable class derived from Dual Instrument scale
+again - for display of Bank angle and Sideslip (two variable display, for display
+of TSI info, kept different from the two variable ladder object basically because
+of its totally different draw member function).
 
 Most Hud instruments may be instantiated using above. It is proposed to provide all
 Hud objects as defined in MIL-STD-1797A, soon.
@@ -146,9 +149,9 @@ y ------------ y+height
 this defines the objects position centered about the centroid of above rectangle
 in HUD overlay plane (640x480) coordinates with 0,0 at bottom-left corner.
 
-One more, pixels per degree in the ladder class represents the compression factor of the
-pitch ladder. In case of conformal HUD (climb/dive ladder) it is <640/horizontal_fov>
-or <480/vertical_fov>. In case of pitch reference ladder it is
+One more, pixels per degree in the ladder class represents the compression factor of
+the pitch ladder. In case of conformal HUD (climb/dive ladder) it is
+<640/horizontal_fov> or <480/vertical_fov>. In case of pitch reference ladder it is
 <your_no_of vertical_pixels/your_no_of_ladder_degrees>.
 
 Example of Hud Ladder xml file.
@@ -164,8 +167,10 @@ Example of Hud Ladder xml file.
   <width>120</width>            <!-- x start + width = x end -->
   <height>180</height>          <!-- y start + height = y end -->
   <compression_factor>2.68</compression_factor>    <!-- Pixels per degree -->
-  <loadfn>roll</loadfn>         <!-- Name of the function to be called, here get_roll() is called provision made in Hud.cxx -->
-  <loadfn1>pitch</loadfn1>      <!-- Name of the function to be called, here get_pitch() is called -->
+  <loadfn>roll</loadfn>         <!-- Name of the function to be called, here
+                                     get_roll() is called provision made in Hud.cxx -->
+  <loadfn1>pitch</loadfn1>      <!-- Name of the function to be called, here get_pitch()
+                                     is called -->
   <span_units>45.0</span_units>         <!-- Range of the Ladder seen at any instant -->
   <division_units>10.0</division_units> <!-- Divisions -->
   <screen_hole>70</screen_hole>         <!-- Hole b/w the Ladder Bars -->

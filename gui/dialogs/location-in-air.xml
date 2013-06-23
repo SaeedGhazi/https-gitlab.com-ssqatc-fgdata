@@ -290,7 +290,7 @@
     </text>
     <input>
       <row>1</row><col>3</col>
-      <property>/sim/presets/glidescope-deg</property>
+      <property>/sim/presets/glideslope-deg</property>
     </input>
 
     <text>

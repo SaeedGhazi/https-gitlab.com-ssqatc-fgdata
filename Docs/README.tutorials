@@ -19,11 +19,8 @@ around each tutorial. This is then included like so:
       <tutorials include="foo-tutorials.xml"/>
   </sim>
 
-
-
-
-
-
+Finally, tutorials are automatically generated from any valid checklists
+on startup.  See README.checklists for details.
 
 
 == TUTORIAL STRUCTURE =========================================================
@@ -33,114 +30,116 @@ A tutorial has this structure, where some of the elements are described
 in detail below:
 
 
-  <tutorial>
-      <name>...</name>            mandatory; short identifier, also shown in the
-                                             tutorial selection dialog
-      <description>...</description> mandatory; longer description for the dialog
-      <audio-dir>...</audio-dir>  optional; defines where to load sound samples
-      <timeofday>noon</timeofday> optional; defines daytime; any of "dawn",
-                                            "morning", "noon", "afternoon",
-                                            "evening", "dusk", "midnight", "real"
-                                            
-      <step-time>                 optional; period between each step being executed. Default 5
-      <exit-time>                 optional; period between exit/abort conditions being checked. Default 1
-      
+<tutorial>
+  <name>...</name>            mandatory; short identifier, also shown in the
+                                         tutorial selection dialog
+  <description>...</description> mandatory; longer description for the dialog
+  <audio-dir>...</audio-dir>  optional; defines where to load sound samples
+  <timeofday>noon</timeofday> optional; defines daytime; any of "dawn",
+                                        "morning", "noon", "afternoon",
+                                        "evening", "dusk", "midnight", "real"
+
+  <step-time>                 optional; period between each step being executed.
+                              Default 5
+  <exit-time>                 optional; period between exit/abort conditions being
+                              checked. Default 1
+
+  <nasal>
+      ...                     optional; initial Nasal code; see below
+  </nasal>
+
+  <models>
+      ...                     optional; scenery objects; see below
+  </models>
+
+  <targets>
+      ...                     optional; targets; see below
+  </targets>
+
+  <presets>
+      ...                     optional; initial simulator state; see below
+  </presets>
+
+
+  <init>                      optional; initial settings; see below
+    <set>
+        ...                     optional; property settings; allowed multiple
+    </set>                      times
+    <view>
+        ...                     optional; view settings
+    </view>
+    <marker>
+        ...                     optional; marker coordinates
+    </marker>
+    <nasal>
+        ...                     optional; Nasal code
+    </nasal>
+  </init>
+
+  <step>                      mandatory; well, not really, but if there's not
+                              at least one <step>, then the whole tutorial
+                              won't do anything; see below for details
+
+    <message>...</message>      optional; message to be displayed/spoken when
+                                <step> is entered; allowed multiple times, in
+                                which case one is chosen at random
+
+    <audio>...</audio>          optional; file name of *.wav sample to be played;
+                                          may be used multiple times (random)
+    <set>
+        ...                     optional; allowed several times
+    </set>
+    <view>
+        ...                     optional
+    </view>
+    <marker>
+        ...                     optional
+    </marker>
+    <nasal>
+        ...                     optional; Nasal code that is executed when the
+    </nasal>                              step is entered
+
+    <wait>10</wait>             optional; wait period after initial messages etc.
+
+    <error>                     optional; allowed several times
+        <message>..</message>       optional; text displayed/spoken
+        <audio>...</audio>          optional; name of *.wav sample to be played
+
+        <condition>
+            ...                     optional, but one should be there to make sense
+        </condition>                          see $FG_ROOT/Docs/README.conditions
+
+        <nasal>
+            ...                     optional; Nasal code that is executed when the
+        </nasal>                              error condition was fulfilled
+    </error>
+
+    <exit>                      optional; defines when to leave this <step>
+        <condition>                       see $FG_ROOT/Docs/README.conditions
+            ...
+        </condition>
+
+        <nasal>
+            ...                     optional; Nasal code that is executed when the
+        </nasal>                              exit condition was met
+    </exit>
+  </step>
+
+
+  <end>                           optional; final settings & actions; see below
+      <message>...</message>          optional; multiple times (random)
+      <audio>...</audio>              optional; multiple times (random)
+      <set>
+          ...                         optional
+      </set>
+      <view>
+          ...                         optional
+      </view>
       <nasal>
-          ...                     optional; initial Nasal code; see below
+          ...                         optional
       </nasal>
-
-      <models>
-          ...                     optional; scenery objects; see below
-      </models>
-
-      <targets>
-          ...                     optional; targets; see below
-      </targets>
-
-      <presets>
-          ...                     optional; initial simulator state; see below
-      </presets>
-
-
-      <init>                      optional; initial settings; see below
-          <set>
-              ...                     optional; property settings; allowed multiple
-          </set>                                                   times
-          <view>
-              ...                     optional; view settings
-          </view>
-          <marker>
-              ...                     optional; marker coordinates
-          </marker>
-          <nasal>
-              ...                     optional; Nasal code
-          </nasal>
-      </init>                                  
-
-      <step>                      mandatory; well, not really, but if there's not
-                                      at least one <step>, then the whole tutorial
-                                      won't do anything; see below for details
-
-          <message>...</message>      optional; message to be displayed/spoken when
-                                      <step> is entered; allowed multiple times, in
-                                      which case one is chosen at random
-
-          <audio>...</audio>          optional; file name of *.wav sample to be played;
-                                                may be used multiple times (random)
-          <set>
-              ...                     optional; allowed several times
-          </set>
-          <view>
-              ...                     optional
-          </view>
-          <marker>
-              ...                     optional
-          </marker>
-          <nasal>
-              ...                     optional; Nasal code that is executed when the
-          </nasal>                              step is entered
-
-          <wait>10</wait>             optional; wait period after initial messages etc. 
-
-          <error>                     optional; allowed several times
-              <message>..</message>       optional; text displayed/spoken
-              <audio>...</audio>          optional; name of *.wav sample to be played
-
-              <condition>
-                  ...                     optional, but one should be there to make sense
-              </condition>                          see $FG_ROOT/Docs/README.conditions
-
-              <nasal>
-                  ...                     optional; Nasal code that is executed when the
-              </nasal>                              error condition was fulfilled
-          </error>
-
-          <exit>                      optional; defines when to leave this <step>
-              <condition>                       see $FG_ROOT/Docs/README.conditions
-                  ...
-              </condition>
-
-              <nasal>
-                  ...                     optional; Nasal code that is executed when the
-              </nasal>                              exit condition was met
-          </exit>
-      </step>
-
-
-      <end>                           optional; final settings & actions; see below
-          <message>...</message>          optional; multiple times (random)
-          <audio>...</audio>              optional; multiple times (random)
-          <set>
-              ...                         optional
-          </set>
-          <view>
-              ...                         optional
-          </view>
-          <nasal>
-              ...                         optional
-          </nasal>
-      </end>
-  </tutorial>
+  </end>
+</tutorial>
 
 
 

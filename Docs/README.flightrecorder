@@ -28,27 +28,28 @@ section to your aircraft -set.xml file.
 
 Example:
 
-	<sim>
+<sim>
 
-        <!-- ... -->
+  <!-- ... -->
 
-		<flight-recorder>
-			<replay-config type="int">0</replay-config>
-			<config n="0" include="/Aircraft/Generic/flightrecorder/generic-piston-propeller-1.xml">
-				<name type="string">My Aircraft's Flight Recorder</name>
-				<!-- Custom properties -->
-				<signal>
-					<type>float</type>
-					<property type="string">/controls/gear/nosegear-steering-cmd-norm</property>
-					<interpolation>linear</interpolation>
-				</signal>
-				<!-- More custom signals here -->
-			</config>
-		</flight-recorder>
+  <flight-recorder>
+    <replay-config type="int">0</replay-config>
+    <config n="0" 
+        include="/Aircraft/Generic/flightrecorder/generic-piston-propeller-1.xml">
+      <name type="string">My Aircraft's Flight Recorder</name>
+      <!-- Custom properties -->
+      <signal>
+        <type>float</type>
+        <property type="string">/controls/gear/nosegear-steering-cmd-norm</property>
+        <interpolation>linear</interpolation>
+      </signal>
+      <!-- More custom signals here -->
+    </config>
+  </flight-recorder>
 
-        <!-- ... -->
+      <!-- ... -->
 
-	</sim>
+</sim>
 
 Default type for each signal is "float". Default "interpolation" method
 is "linear" (for float/double). Default values may be omitted. See
@@ -176,36 +177,37 @@ need to match the actual type in the property tree!), the path to the
 property and interpolation type.
 
 Example recording some additional custom properties:
-	<sim>
-		<flight-recorder>
-			<config n="0" include="/Aircraft/Generic/flightrecorder/generic-piston-propeller-1.xml">
-				<!-- Add custom properties here -->
-				<signal>
-					<type>float</type>
-					<property type="string">/controls/gear/nosegear-steering-cmd-norm</property>
-				</signal>
-				<signal>
-					<type>double</type>
-					<interpolation>rotational-deg</interpolation>
-					<property type="string">/ai/model/carrier/alpha-angle-deg</property>
-				</signal>
-				<signal>
-					<type>bool</type>
-					<property type="string">/controls/panel/custom-switch</property>
-				</signal>
-			</config>
-		</flight-recorder>
-	</sim>
+  <sim>
+    <flight-recorder>
+      <config n="0" 
+        include="/Aircraft/Generic/flightrecorder/generic-piston-propeller-1.xml">
+        <!-- Add custom properties here -->
+        <signal>
+          <type>float</type>
+          <property type="string">/controls/gear/nosegear-steering-cmd-norm</property>
+        </signal>
+        <signal>
+          <type>double</type>
+          <interpolation>rotational-deg</interpolation>
+          <property type="string">/ai/model/carrier/alpha-angle-deg</property>
+        </signal>
+        <signal>
+          <type>bool</type>
+          <property type="string">/controls/panel/custom-switch</property>
+        </signal>
+      </config>
+    </flight-recorder>
+  </sim>
 
 
 Signal Configuration
 --------------------
 Template:
-	<signal>
-		<type>bool</type>
-		<interpolation>angular-deg</interpolation>
-		<property type="string">/controls/panel/custom-switch</property>
-	</signal>
+  <signal>
+    <type>bool</type>
+    <interpolation>angular-deg</interpolation>
+    <property type="string">/controls/panel/custom-switch</property>
+  </signal>
 
 * type: The signal's type specifies the recording resolution - not the
   type of the original property. The following types are supported:

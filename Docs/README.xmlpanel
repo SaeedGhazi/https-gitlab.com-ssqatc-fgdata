@@ -142,9 +142,11 @@ New Style Example Top Level Panel Config:
  <w>1024</w>                      <!-- virtual width -->
  <h>768</h>                       <!-- virtual height -->
  <y-offset>-305</y-offset>        <!-- hides the bottom part -->
- <view-height>172</view-height>   <!-- amount of overlap between 2D panel and 3D viewport -->
+ <view-height>172</view-height>   <!-- amount of overlap between 2D panel
+                                       and 3D viewport -->
 
- <instruments>                    <!-- from here down is where old and new styles break compatibility -->
+ <instruments>                    <!-- from here down is where old and new
+                                       styles break compatibility -->
 
   <instrument include="../Instruments/clock.xml">
    <name>Chronometer</name>   <!-- currently optional but strongly recommended -->
@@ -362,21 +364,21 @@ $FG_ROOT/Aircraft/c172/Instruments/brake.xml.
 
   <layer>
    <name>Brake light</name>
-   <type>switch</type>                      <!-- define layer as a switch -->
-   <property>/controls/brakes</property>    <!-- tie it to a property -->
-    <layer1>                                <!-- layer for true state -->
-     <name>on</name>                        <!-- label to make life easy -->
-     <texture>                              <!-- layer1 of switch is a texture layer -->
+   <type>switch</type>                    <!-- define layer as a switch -->
+   <property>/controls/brakes</property>  <!-- tie it to a property -->
+    <layer1>                              <!-- layer for true state -->
+     <name>on</name>                      <!-- label to make life easy -->
+     <texture>                            <!-- layer1 of switch is a texture layer -->
      <path>Aircraft/c172/Instruments/Textures/brake.rgb</path>
      <x1>0.25</x1>
      <y1>0.0</y1>
      <x2>0.5</x2>
      <y2>0.095</y2>
      </texture>
-     <w>64</w>                              <!-- required width - layer isn't static -->
-     <h>24</h>                              <!-- required height - layer isn't static -->
-    </layer1>                               <!-- close layer1 of switch -->
-    <layer2>                                <!-- layer for false state -->
+     <w>64</w>                          <!-- required width - layer isn't static -->
+     <h>24</h>                          <!-- required height - layer isn't static -->
+    </layer1>                           <!-- close layer1 of switch -->
+    <layer2>                            <!-- layer for false state -->
      <name>off</name>
      <texture>
      <path>Aircraft/c172/Instruments/Textures/brake.rgb</path>
@@ -399,40 +401,40 @@ A text layer may be static, as in a label, generated from a property
 or a combination of both.  This example is a switch that contains both
 static and dynamic text:
 
-   <layer1>                               <!-- switch layer -->
-    <name>display</name>
-    <type>text</type>                     <!-- type == text -->
-    <point-size>12</point-size>           <!-- font size -->
-    <color>                               <!-- specify rgb values to color text -->
-     <red>1.0</red>
-     <green>0.5</green>
-     <blue>0.0</blue>
-    </color>                              <!-- close color section -->
-    <chunks>                              <!-- sections of text are referred to as chunks -->
-     <chunk>                              <!-- first chunk of text -->
-      <type>number-value</type>           <!-- value defines it as dynamic -->
-      <property>/radios/nav1/dme/distance</property>      <!-- ties it to a property -->
-      <scale>0.00053995680</scale>        <!-- convert between  statute and nautical miles? -->
-      <format>%5.1f</format>              <!-- define format -->
-     </chunk>
-    </chunks>
-   </layer1>
-   <layer2>                                <!-- switch layer -->
-    <name>display</name>
-    <type>text</type>                      <!-- type == text -->
-    <point-size>10</point-size>            <!-- font size -->
-    <color>                                <!-- specify rgb values to color text -->
-     <red>1.0</red>
-     <green>0.5</green>
-     <blue>0.0</blue>
-    </color>                               <!-- close color section -->
-    <chunks>                               <!-- sections of text are referred to as chunks -->
-     <chunk>                               <!-- first chunk of text -->
-      <type>literal</type>                 <!-- static text -->
-      <text>---.--</text>                  <!-- fixed value -->
-     </chunk>
-    </chunks>
-   </layer2>
+ <layer1>                         <!-- switch layer -->
+  <name>display</name>
+  <type>text</type>               <!-- type == text -->
+  <point-size>12</point-size>     <!-- font size -->
+  <color>                         <!-- specify rgb values to color text -->
+   <red>1.0</red>
+   <green>0.5</green>
+   <blue>0.0</blue>
+  </color>                        <!-- close color section -->
+  <chunks>                        <!-- sections of text are referred to as chunks -->
+   <chunk>                        <!-- first chunk of text -->
+    <type>number-value</type>     <!-- value defines it as dynamic -->
+    <property>/radios/nav1/dme/distance</property>    <!-- ties it to a property -->
+    <scale>0.00053995680</scale>  <!-- convert between statute and nautical miles? -->
+    <format>%5.1f</format>        <!-- define format -->
+   </chunk>
+  </chunks>
+ </layer1>
+ <layer2>                         <!-- switch layer -->
+  <name>display</name>
+  <type>text</type>               <!-- type == text -->
+  <point-size>10</point-size>     <!-- font size -->
+  <color>                         <!-- specify rgb values to color text -->
+   <red>1.0</red>
+   <green>0.5</green>
+   <blue>0.0</blue>
+  </color>                        <!-- close color section -->
+  <chunks>                        <!-- sections of text are referred to as chunks -->
+   <chunk>                        <!-- first chunk of text -->
+    <type>literal</type>          <!-- static text -->
+    <text>---.--</text>           <!-- fixed value -->
+   </chunk>
+  </chunks>
+ </layer2>
 
 
 Transformations:
@@ -464,7 +466,7 @@ cropped texture.
 This example comes from the altimeter.xml
 
   <layer>
-   <name>long needle (hundreds)</name>        <!-- the altimeter has more than one needle -->
+   <name>long needle (hundreds)</name>  <!-- the altimeter has more than one needle -->
    <texture>
     <path>Aircraft/c172/Instruments/Textures/misc-1.rgb</path>
     <x1>0.8</x1>
@@ -474,16 +476,17 @@ This example comes from the altimeter.xml
    </texture>
    <w>8</w>
    <h>56</h>
-   <transformations>                          <!-- begin defining transformations -->
-    <transformation>                          <!-- start definition of transformation that drives the needle -->
+   <transformations>                    <!-- begin defining transformations -->
+    <transformation>                    <!-- start definition of
+                                             transformation that drives the needle -->
      <type>rotation</type>
-     <property>/steam/altitude</property>     <!-- bind it to a property -->
-     <max>100000.0</max>                      <!-- upper limit of instrument -->
-     <scale>0.36</scale>                      <!-- once around == 1000 ft -->
-    </transformation>                         <!-- close this transformation -->
-    <transformation>                          <!-- this one shifts the fulcrum of the needle -->
-     <type>y-shift</type>                     <!-- y-shift relative to needle -->
-     <offset>24.0</offset>                    <!-- amount of shift -->
+     <property>/steam/altitude</property>  <!-- bind it to a property -->
+     <max>100000.0</max>                <!-- upper limit of instrument -->
+     <scale>0.36</scale>                <!-- once around == 1000 ft -->
+    </transformation>                   <!-- close this transformation -->
+    <transformation>                    <!-- shift the fulcrum of the needle -->
+     <type>y-shift</type>               <!-- y-shift relative to needle -->
+     <offset>24.0</offset>              <!-- amount of shift -->
     </transformation>
    </transformations>
   </layer>
@@ -570,7 +573,7 @@ These examples come from the radio stack:
    <increment>-0.05</increment>        <!-- amount of adjustment per mouse click -->
    <min>108.0</min>                    <!-- lower range -->
    <max>117.95</max>                   <!-- upper range -->
-   <wrap>1</wrap>                      <!-- boolean value -- value wraps around when it hits bounds -->
+   <wrap>1</wrap>                      <!-- value wraps around when it hits bounds -->
   </action>
   <action>
    <name>swap nav frequencies</name>
@@ -580,8 +583,8 @@ These examples come from the radio stack:
    <y>-32</y>
    <w>32</w>
    <h>32</h>
-   <property1>/radios/nav1/frequencies/selected</property1>   <!-- properties to toggle between -->
-   <property2>/radios/nav1/frequencies/standby</property2>
+   <property1>/radios/nav1/frequencies/selected</property1>   <!-- properties to
+   <property2>/radios/nav1/frequencies/standby</property2>         toggle between -->
   </action>
   <action>
    <name>ident volume on/off</name>
@@ -591,11 +594,13 @@ These examples come from the radio stack:
    <y>-24</y>
    <w>16</w>
    <h>16</h>
-   <property>/radios/nav1/ident</property>  <!-- this property is for Morse code identification of nav beacons -->
-   <increment>1.0</increment>          <!-- the increment equals the max value so this toggles on/off -->
+   <property>/radios/nav1/ident</property>  <!-- Morse code ID of nav beacons -->
+   <increment>1.0</increment>          <!-- the increment equals the max value
+                                            so this toggles on/off -->
    <min>0</min>
    <max>1</max>
-   <wrap>1</wrap>                      <!-- a shortcut to avoid having separate actions for on/off -->
+   <wrap>1</wrap>                      <!-- a shortcut to avoid having separate
+                                            actions for on/off -->
   </action>
 </actions>
 
@@ -635,7 +640,7 @@ How do I get my panels/instruments into the base package?
 -------------------------------------------------------
 Cash bribes always help ;) Seriously though, there are two main
 considerations.  Firstly, original artwork is a major plus since you
-as the creator can dictate the terms of distribution.All Artwork must
+as the creator can dictate the terms of distribution.  All Artwork must
 have a license compatible with the GPL.  Artwork of unverifiable
 origin is not acceptable.  Secondly, texture sizes must meet the
 lowest common denominator of 256e2 pixels.  Artwork from third parties

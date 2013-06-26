@@ -432,6 +432,7 @@ var pilot_view_limiter = {
 		me.xoffsetN = props.globals.getNode("/sim/current-view/x-offset-m");
 		me.xoffset_lowpass = aircraft.lowpass.new(0.1);
 		me.last_offset = 0;
+		me.needs_start = 0;
 	},
 	start : func {
 		var limits = current.getNode("config/limits", 1);
@@ -449,10 +450,20 @@ var pilot_view_limiter = {
 		me.right.scale = me.right.xoffset_max / (me.right.heading_max - me.right.threshold);
 		me.last_hdg = normdeg(me.hdgN.getValue());
 		me.enable_xoffset = me.right.xoffset_max > 0.001 or me.left.xoffset_max > 0.001;
+
+		me.needs_start = 0;
 	},
 	update : func {
 		if (getprop("/devices/status/keyboard/ctrl"))
 			return;
+
+    if( getprop("/sim/signals/reinit") )
+    {
+      me.needs_start = 1;
+      return;
+    }
+    else if( me.needs_start )
+      me.start();
 
 		var hdg = normdeg(me.hdgN.getValue());
 		if (abs(me.last_hdg - hdg) > 180)  # avoid wrap-around skips

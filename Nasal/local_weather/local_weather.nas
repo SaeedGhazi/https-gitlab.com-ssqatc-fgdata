@@ -769,7 +769,7 @@ if ((flag ==0) and (vis > 0.0) and (getprop(lw~"lift-loop-flag") == 0) and (comp
 	{
 	compat_layer.setVisibility(vis);
 	}
-else if (getprop("/local-weather/current/visibility-m") > vis)
+else if ((getprop("/local-weather/current/visibility-m") > vis) and (compat_layer.smooth_visibility_loop_flag == 0))
 	{
 	compat_layer.setVisibility(vis);
 	}

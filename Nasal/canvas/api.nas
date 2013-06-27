@@ -540,8 +540,10 @@ var Path = {
   {
     return {
       parents: [Path, Element.new(ghost)],
-      _num_cmds: 0,
-      _num_coords: 0
+      _first_cmd: 0,
+      _first_coord: 0,
+      _last_cmd: -1,
+      _last_coord: -1
     };
   },
   # Remove all existing path data
@@ -550,8 +552,10 @@ var Path = {
     me._node.removeChildren('cmd', 0);
     me._node.removeChildren('coord', 0);
     me._node.removeChildren('coord-geo', 0);
-    me._num_cmds = 0;
-    me._num_coords = 0;
+    me._first_cmd = 0;
+    me._first_coord = 0;
+    me._last_cmd = -1;
+    me._last_coord = -1;
     return me;
   },
   # Set the path data (commands and coordinates)
@@ -559,16 +563,16 @@ var Path = {
   {
     me.reset();
     me._node.setValues({cmd: cmds, coord: coords});
-    me._num_cmds = size(cmds);
-    me._num_coords = size(coords);
+    me._last_cmd = size(cmds) - 1;
+    me._last_coord = size(coords) - 1;
     return me;
   },
   setDataGeo: func(cmds, coords)
   {
     me.reset();
     me._node.setValues({cmd: cmds, 'coord-geo': coords});
-    me._num_cmds = size(cmds);
-    me._num_coords = size(coords);
+    me._last_cmd = size(cmds) - 1;
+    me._last_coord = size(coords) - 1;
     return me;
   },
   # Add a path segment
@@ -583,12 +587,26 @@ var Path = {
       );
     else
     {
-      me.setInt("cmd[" ~ (me._num_cmds += 1) ~ "]", cmd);
+      me.setInt("cmd[" ~ (me._last_cmd += 1) ~ "]", cmd);
       for(var i = 0; i < num_coords; i += 1)
-        me.setDouble("coord[" ~ (me._num_coords += 1) ~ "]", coords[i]);
+        me.setDouble("coord[" ~ (me._last_coord += 1) ~ "]", coords[i]);
     }
 
     return me;
+  },
+  # Remove first segment
+  pop_front: func me._removeSegment(1),
+  # Remove last segment
+  pop_back: func me._removeSegment(0),
+  # Get the number of segments
+  getNumSegments: func()
+  {
+    return me._last_cmd - me._first_cmd + 1;
+  },
+  # Get the number of coordinates (each command has 0..n coords)
+  getNumCoords: func()
+  {
+    return me._last_coord - me._first_coord + 1;
   },
   # Move path cursor
   moveTo: func me.addSegment(me.VG_MOVE_TO_ABS, arg),
@@ -744,7 +762,43 @@ var Path = {
       debug.warn("setStrokeDashArray: vector expected!");
 
     return me;
-  }
+  },
+
+# private:
+  _removeSegment: func(front)
+  {
+    if( me.getNumSegments() < 1 )
+    {
+      debug.warn("No segment available");
+      return me;
+    }
+
+    var cmd = front ? me._first_cmd : me._last_cmd;
+    var num_coords = me.num_coords[ me.get("cmd[" ~ cmd ~ "]") ];
+    if( me.getNumCoords() < num_coords )
+    {
+      debug.warn("To few coords available");
+    }
+
+    me._node.removeChild("cmd", cmd);
+
+    var first_coord = front ? me._first_coord : me._last_coord - num_coords + 1;
+    for(var i = 0; i < num_coords; i += 1)
+      me._node.removeChild("coord", first_coord + i);
+
+    if( front )
+    {
+      me._first_cmd += 1;
+      me._first_coord += num_coords;
+    }
+    else
+    {
+      me._last_cmd -= 1;
+      me._last_coord -= num_coords;
+    }
+
+    return me;
+  },
 };
 
 # Image

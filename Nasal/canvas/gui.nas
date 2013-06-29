@@ -165,7 +165,6 @@ var Window = {
 
     var group_deco = canvas_deco.getGroup("decoration");
     var title_bar = group_deco.createChild("group", "title_bar");
-    title_bar.addEventListener("drag", func(e) { me.move(e.deltaX, e.deltaY); });
     title_bar
       .rect( 0, 0,
              me.get("size[0]"),
@@ -200,5 +199,10 @@ var Window = {
     var title = me.get("title", "Canvas Dialog");
     me._node.getNode("title", 1).alias(me._title._node.getPath() ~ "/text");
     me.set("title", title);
+
+    title_bar.addEventListener("drag", func(e) {
+      if( !ico.equals(e.target) )
+        me.move(e.deltaX, e.deltaY);
+    });
   }
 };

@@ -142,6 +142,13 @@ var Element = {
       _node: props.wrapNode(ghost._node_ghost)
     };
   },
+  # Check if elements represent same instance
+  #
+  # @param el Other Element or element ghost
+  equals: func(el)
+  {
+    return me._node.equals(el._node_ghost);
+  },
   # Trigger an update of the element
   #
   # Elements are automatically updated once a frame, with a delay of one frame.

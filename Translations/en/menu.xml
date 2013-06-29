@@ -74,6 +74,7 @@
 	<!-- Multiplayer menu -->
 	<multiplayer>Multiplayer</multiplayer>
 	<mp-settings>Multiplayer Settings</mp-settings>
+	<fgcom-settings>FGCom Settings</fgcom-settings>
 	<mp-chat>Chat Dialog</mp-chat>
 	<mp-chat-menu>Chat Menu</mp-chat-menu>
 	<mp-list>Pilot List</mp-list>
@@ -106,7 +107,7 @@
 	<print-scene-info>Print Visible Scene Info</print-scene-info>
 	<rendering-buffers>Hide/Show Rendering Buffers</rendering-buffers>
 	<rembrandt-buffers-choice>Select Rendering Buffers</rembrandt-buffers-choice>
-    <interface-config>User-interface options</interface-config>
+	<interface-config>User-interface options</interface-config>
         
 	<!-- Help menu -->
 	<help>Help</help>

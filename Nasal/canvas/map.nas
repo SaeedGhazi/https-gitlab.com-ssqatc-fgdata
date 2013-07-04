@@ -492,7 +492,7 @@ var GenericMap = { };
  # so this needs to be called in the dialog's OPEN block instead - TODO: generalize
  #FIXME: move somewhere else, this is a GUI helper  and should probably be generalized and moved to gui.nas
 GenericMap.setupGUI = func (dialog, group) {
-   var group = gui.findElementByName(cmdarg() , group);
+   var group = globals.gui.findElementByName(cmdarg() , group);
 
    var layers=dialog.getNode("features").getChildren("layer");
    var template = dialog.getNode("checkbox-toggle-template");

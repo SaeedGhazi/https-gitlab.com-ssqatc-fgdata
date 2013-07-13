@@ -51,7 +51,15 @@ var Window = {
       placement: {
         type: "window",
         id: me.get("id")
-      }
+      },
+
+      # Standard alpha blending
+      "blend-source-rgb": "src-alpha",
+      "blend-destination-rgb": "one-minus-src-alpha",
+
+      # Just keep current alpha (TODO allow using rgb textures instead of rgba?)
+      "blend-source-alpha": "zero",
+      "blend-destination-alpha": "one"
     });
 
     me._canvas.addEventListener("mousedown", func me.raise());

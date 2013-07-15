@@ -27,6 +27,15 @@ var parsesvg = func(group, path, options = nil)
     return "LiberationFonts/LiberationMono-Bold.ttf";
   };
 
+  # Helper to get number without unit (eg. px)
+  var num = func(css_num)
+  {
+    if( css_num.ends_with("px") )
+      return substr(css_num, 0, size(css_num) - 2);
+
+    return css_num;
+  }
+
   var level = 0;
   var skip  = 0;
   var stack = [group];
@@ -275,8 +284,7 @@ var parsesvg = func(group, path, options = nil)
 
     var font_size = style["font-size"];
     if( font_size != nil )
-      # eg. font-size: 123px
-      stack[-1].setDouble("character-size", substr(font_size, 0, size(font_size) - 2));
+      stack[-1].setDouble("character-size", num(font_size));
   }
 
   # ----------------------------------------------------------------------------
@@ -401,7 +409,7 @@ var parsesvg = func(group, path, options = nil)
       stack[-1].set('fill', style['fill']);
 
       var w = style['stroke-width'];
-      stack[-1].setStrokeLineWidth( w != nil ? w : 1 );
+      stack[-1].setStrokeLineWidth( w != nil ? num(w) : 1 );
       stack[-1].set('stroke', style['stroke'] or "none");
 
       var linecap = style['stroke-linecap'];
@@ -442,11 +450,14 @@ var parsesvg = func(group, path, options = nil)
 
     var cx = attr['inkscape:transform-center-x'];
     if( cx != nil and cx != 0 )
-      stack[-1].setDouble("center-offset-x", cx);
+      stack[-1].setDouble("center-offset-x", num(cx));
 
     var cy = attr['inkscape:transform-center-y'];
     if( cy != nil and cy != 0 )
-      stack[-1].setDouble("center-offset-y", -cy);
+      stack[-1].setDouble("center-offset-y", -num(cy));
+
+    if( cx != nil or cy != nil )
+      stack[-1].updateCenter();
   };
 
   # XML parsers element close callback
@@ -554,7 +565,12 @@ var parsesvg = func(group, path, options = nil)
         # If no tspan is found add a dummy one
         append(tspans, {});
 
-      tspans[-1]["text"] = data;
+      # If text contains xml entities it gets split at each entity. So let's
+      # glue it back into a single text...
+      if( tspans[-1]["text"] == nil )
+        tspans[-1]["text"] = data;
+      else
+        tspans[-1]["text"] ~= data;
     }
   };
 

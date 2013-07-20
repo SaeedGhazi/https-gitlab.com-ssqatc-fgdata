@@ -366,7 +366,8 @@ var parsesvg = func(group, path, options = nil)
     {
       text = {
         "attr": attr,
-        "style": style
+        "style": style,
+        "text": ""
       };
       tspans = [];
       return;
@@ -375,7 +376,8 @@ var parsesvg = func(group, path, options = nil)
     {
       append(tspans, {
         "attr": attr,
-        "style": style
+        "style": style,
+        "text": ""
       });
       return;
     }
@@ -562,15 +564,12 @@ var parsesvg = func(group, path, options = nil)
     if( size(data) and tspans != nil )
     {
       if( size(tspans) == 0 )
-        # If no tspan is found add a dummy one
-        append(tspans, {});
+        # If no tspan is found use text element itself
+        append(tspans, text);
 
       # If text contains xml entities it gets split at each entity. So let's
       # glue it back into a single text...
-      if( tspans[-1]["text"] == nil )
-        tspans[-1]["text"] = data;
-      else
-        tspans[-1]["text"] ~= data;
+      tspans[-1]["text"] ~= data;
     }
   };
 

@@ -71,7 +71,7 @@ var Window = {
     if( !isa(canvas_, canvas.Canvas) )
       return debug.warn("Not a canvas.Canvas");
 
-    canvas_.addPlacement({type: "window", index: me._node.getIndex()});
+    canvas_.addPlacement({type: "window", "id": me.get("id")});
     me['_canvas'] = canvas_;
   },
   # Get the displayed canvas
@@ -212,5 +212,14 @@ var Window = {
       if( !ico.equals(e.target) )
         me.move(e.deltaX, e.deltaY);
     });
+  }
+};
+
+# Provide old 'Dialog' for backwards compatiblity (should be removed for 3.0)
+var Dialog = {
+  new: func(size, type = nil, id = nil)
+  {
+    debug.warn("'canvas.Dialog' is deprectated! (use canvas.Window instead)");
+    return Window.new(size, type, id);
   }
 };

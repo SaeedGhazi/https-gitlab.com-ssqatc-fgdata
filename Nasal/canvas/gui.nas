@@ -26,14 +26,24 @@ var Window = {
   # Destructor
   del: func
   {
-    me._node.remove();
-    me._node = nil;
-
     if( me["_canvas"] != nil )
     {
-      me._canvas.del();
+      var placements = me._canvas.texture.getChildren("placement");
+      # Do not remove canvas if other placements exist
+      if( size(placements) > 1 )
+        foreach(var p; placements)
+        {
+          if(     p.getValue("type") == "window"
+              and p.getValue("id") == me.get("id") )
+            p.remove();
+        }
+      else
+        me._canvas.del();
       me._canvas = nil;
     }
+
+    me._node.remove();
+    me._node = nil;
   },
   # Create the canvas to be used for this Window
   #

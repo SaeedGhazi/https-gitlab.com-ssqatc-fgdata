@@ -966,6 +966,11 @@ var get = func(arg)
   return wrapCanvas(canvas_ghost);
 };
 
+var getDesktop = func()
+{
+  return Group.new(_getDesktopGhost());
+};
+
 # ------------------------------------------------------------------------------
 # Show warnings if API used with too old version of FlightGear without Canvas
 # support (Wrapped in anonymous function do not polute the canvas namespace)

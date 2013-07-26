@@ -10,8 +10,8 @@ var Window = {
       _node: props.wrapNode(ghost._node_ghost)
     };
 
-    m.setInt("size[0]", size[0]);
-    m.setInt("size[1]", size[1]);
+    m.setInt("content-size[0]", size[0]);
+    m.setInt("content-size[1]", size[1]);
 
     # TODO better default position
     m.move(0,0);
@@ -51,8 +51,8 @@ var Window = {
   createCanvas: func()
   {
     var size = [
-      me.get("size[0]"),
-      me.get("size[1]")
+      me.get("content-size[0]"),
+      me.get("content-size[1]")
     ];
 
     me._canvas = new({
@@ -97,6 +97,11 @@ var Window = {
   {
     me.setInt("tf/t[0]", x);
     me.setInt("tf/t[1]", y);
+  },
+  setSize: func(w, h)
+  {
+    me.set("content-size[0]", w);
+    me.set("content-size[1]", h);
   },
   move: func(x, y)
   {
@@ -148,7 +153,7 @@ var Window = {
         ),
         setlistener
         (
-          me._node.getNode("size[" ~ index ~ "]"),
+          me._node.getNode("content-size[" ~ index ~ "]"),
           func me._updatePos(index, name)
         )
       ];
@@ -163,7 +168,7 @@ var Window = {
       "tf/t[" ~ index ~ "]",
       getprop("/sim/gui/canvas/size[" ~ index ~ "]")
       - me.get(name)
-      - me.get("size[" ~ index ~ "]")
+      - me.get("content-size[" ~ index ~ "]")
     );
   },
   _updateDecoration: func()

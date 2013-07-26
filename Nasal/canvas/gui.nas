@@ -1,6 +1,7 @@
 var gui = {
   widgets: {},
-  focused_window: nil
+  focused_window: nil,
+  region_highlight: nil
 };
 
 var gui_dir = getprop("/sim/fg-root") ~ "/Nasal/canvas/gui/";
@@ -132,6 +133,9 @@ var Window = {
 
     canvas_.addPlacement({type: "window", "id": me.get("id")});
     me['_canvas'] = canvas_;
+
+    # prevent resizing if canvas is placed from somewhere else
+    me.onResize = nil;
   },
   # Get the displayed canvas
   getCanvas: func()
@@ -202,6 +206,15 @@ var Window = {
 
     me.setFocus();
   },
+  onResize: func()
+  {
+    for(var i = 0; i < 2; i += 1)
+    {
+      var size = me.get("content-size[" ~ i ~ "]");
+      me._canvas.set("size[" ~ i ~ "]", size);
+      me._canvas.set("view[" ~ i ~ "]", size);
+    }
+  },
 # protected:
   _onStateChange: func
   {
@@ -238,6 +251,17 @@ var Window = {
     {
       if( mode == 0 )
         settimer(func me._updateDecoration(), 0);
+    }
+
+    else if( name.starts_with("resize-") )
+    {
+      if( mode == 0 )
+        me._handleResize(child, name);
+    }
+    else if( name == "size" )
+    {
+      if( mode == 0 )
+        me._resizeDecoration();
     }
   },
   _handlePositionAbsolute: func(child, mode, name, index)
@@ -276,6 +300,60 @@ var Window = {
       - me.get("content-size[" ~ index ~ "]")
     );
   },
+  _handleResize: func(child, name)
+  {
+    var is_status = name == "resize-status";
+    if( !is_status and !me["_resize"] )
+      return;
+
+    var min_size = [75, 100];
+
+    var x = me.get("tf/t[0]");
+    var y = me.get("tf/t[1]");
+    var old_size = [me.get("size[0]"), me.get("size[1]")];
+
+    var l = x + math.min(me.get("resize-left"), old_size[0] - min_size[0]);
+    var t = y + math.min(me.get("resize-top"), old_size[1] - min_size[1]);
+    var r = x + math.max(me.get("resize-right"), min_size[0]);
+    var b = y + math.max(me.get("resize-bottom"), min_size[1]);
+
+    if( is_status )
+    {
+      me._resize = child.getValue();
+
+      if( me._resize and gui.region_highlight == nil )
+        gui.region_highlight =
+          getDesktop().createChild("path", "highlight")
+                      .set("stroke", "#ffa500")
+                      .set("stroke-width", 2)
+                      .set("fill", "rgba(255, 165, 0, 0.15)")
+                      .set("z-index", 100);
+      else if( !me._resize and gui.region_highlight != nil )
+      {
+        gui.region_highlight.hide();
+        me.setPosition(l, t);
+        me.setSize
+        (
+          me.get("content-size[0]") + (r - l) - old_size[0],
+          me.get("content-size[1]") + (b - t) - old_size[1],
+        );
+        if( me.onResize != nil )
+          me.onResize();
+        return;
+      }
+    }
+    else if( !me["_resize"] )
+      return;
+
+    gui.region_highlight.reset()
+                        .moveTo(l, t)
+                        .horizTo(r)
+                        .vertTo(b)
+                        .horizTo(l)
+                        .close()
+                        .update()
+                        .show();
+  },
   _updateDecoration: func()
   {
     var border_radius = 9;
@@ -293,14 +371,8 @@ var Window = {
 
     var group_deco = canvas_deco.getGroup("decoration");
     var title_bar = group_deco.createChild("group", "title_bar");
-    me._title_bar_bg =
-      title_bar.rect( 0, 0,
-                      me.get("size[0]"),
-                      me.get("size[1]"),
-                      {"border-top-radius": border_radius} );
-    me._top_line = title_bar.createChild("path", "top-line")
-                            .moveTo(border_radius - 2, 2)
-                            .lineTo(me.get("size[0]") - border_radius + 2, 2);
+    me._title_bar_bg = title_bar.createChild("path");
+    me._top_line = title_bar.createChild("path", "top-line");
 
     # close icon
     var x = 10;
@@ -326,7 +398,26 @@ var Window = {
     me.set("title", title);
 
     title_bar.addEventListener("drag", func(e) me.move(e.deltaX, e.deltaY));
+
+    me._resizeDecoration();
     me._onStateChange();
+  },
+  _resizeDecoration: func()
+  {
+    if( me["_title_bar_bg"] == nil )
+      return;
+
+    var border_radius = 9;
+    me._title_bar_bg
+        .reset()
+        .rect( 0, 0,
+               me.get("size[0]"), me.get("size[1]"),
+               {"border-top-radius": border_radius} );
+
+    me._top_line
+        .reset()
+        .moveTo(border_radius - 2, 2)
+        .lineTo(me.get("size[0]") - border_radius + 2, 2);
   }
 };
 

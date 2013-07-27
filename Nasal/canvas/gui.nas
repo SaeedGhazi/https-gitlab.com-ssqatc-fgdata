@@ -208,6 +208,9 @@ var Window = {
   },
   onResize: func()
   {
+    if( me['_canvas'] == nil )
+      return;
+
     for(var i = 0; i < 2; i += 1)
     {
       var size = me.get("content-size[" ~ i ~ "]");

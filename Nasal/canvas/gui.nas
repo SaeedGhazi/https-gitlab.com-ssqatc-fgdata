@@ -1,3 +1,46 @@
+var gui = {
+  widgets: {},
+  focused_window: nil
+};
+
+var gui_dir = getprop("/sim/fg-root") ~ "/Nasal/canvas/gui/";
+var loadGUIFile = func(file) io.load_nasal(gui_dir ~ file, "canvas");
+var loadWidget = func(name) loadGUIFile("widgets/" ~ name ~ ".nas");
+
+loadGUIFile("Style.nas");
+loadGUIFile("Widget.nas");
+loadGUIFile("styles/DefaultStyle.nas");
+loadWidget("Button");
+
+var style = DefaultStyle.new("AmbianceClassic");
+var WindowButton = {
+  new: func(parent, name)
+  {
+    var m = {
+      parents: [WindowButton, gui.widgets.Button.new(parent, nil, {"flat": 1})],
+      _name: name
+    };
+    m._focus_policy = m.NoFocus;
+    m._setRoot( parent.createChild("image", "WindowButton-" ~ name) );
+    return m;
+  },
+# protected:
+  _onStateChange: func
+  {
+    var file = style._dir_decoration ~ "/" ~ me._name;
+    file ~= me._window._focused ? "_focused" : "_unfocused";
+
+    if( me._active )
+      file ~= "_pressed";
+    else if( me._hover )
+      file ~= "_prelight";
+    else if( me._window._focused )
+      file ~= "_normal";
+
+    me._root.set("file", file ~ ".png");
+  }
+};
+
 var Window = {
   # Constructor
   #
@@ -7,7 +50,10 @@ var Window = {
     var ghost = _newWindowGhost(id);
     var m = {
       parents: [Window, PropertyElement, ghost],
-      _node: props.wrapNode(ghost._node_ghost)
+      _node: props.wrapNode(ghost._node_ghost),
+      _focused: 0,
+      _focused_widget: nil,
+      _widgets: []
     };
 
     m.setInt("content-size[0]", size[0]);
@@ -15,6 +61,7 @@ var Window = {
 
     # TODO better default position
     m.move(0,0);
+    m.setFocus();
 
     # arg = [child, listener_node, mode, is_child_event]
     setlistener(m._node, func m._propCallback(arg[0], arg[2]), 0, 2);
@@ -26,6 +73,8 @@ var Window = {
   # Destructor
   del: func
   {
+    me.clearFocus();
+
     if( me["_canvas"] != nil )
     {
       var placements = me._canvas.texture.getChildren("placement");
@@ -93,6 +142,42 @@ var Window = {
   {
     return wrapCanvas(me._getCanvasDecoration());
   },
+  addWidget: func(w)
+  {
+    append(me._widgets, w);
+    w._window = me;
+    if( size(me._widgets) == 2 )
+      w.setFocus();
+    w._onStateChange();
+    return me;
+  },
+  #
+  setFocus: func
+  {
+    if( me._focused )
+      return me;
+
+    if( gui.focused_window != nil )
+      gui.focused_window.clearFocus();
+
+    me._focused = 1;
+#    me.onFocusIn();
+    me._onStateChange();
+    gui.focused_window = me;
+    return me;
+  },
+  #
+  clearFocus: func
+  {
+    if( !me._focused )
+      return me;
+
+    me._focused = 0;
+#    me.onFocusOut();
+    me._onStateChange();
+    gui.focused_window = nil;
+    return me;
+  },
   setPosition: func(x, y)
   {
     me.setInt("tf/t[0]", x);
@@ -114,6 +199,26 @@ var Window = {
     # on writing the z-index the window always is moved to the top of all other
     # windows with the same z-index.
     me.setInt("z-index", me.get("z-index", 0));
+
+    me.setFocus();
+  },
+# protected:
+  _onStateChange: func
+  {
+    if( me._getCanvasDecoration() != nil )
+    {
+      # Stronger shadow for focused windows
+      me.getCanvasDecoration()
+        .set("image[1]/fill", me._focused ? "#000000" : "rgba(0,0,0,0.5)");
+
+      var suffix = me._focused ? "" : "-unfocused";
+      me._title_bar_bg.set("fill", style.getColor("title" ~ suffix));
+      me._title.set(       "fill", style.getColor("title-text" ~ suffix));
+      me._top_line.set(  "stroke", style.getColor("title-highlight" ~ suffix));
+    }
+
+    foreach(var w; me._widgets)
+      w._onStateChange();
   },
 # private:
   _propCallback: func(child, mode)
@@ -188,28 +293,25 @@ var Window = {
 
     var group_deco = canvas_deco.getGroup("decoration");
     var title_bar = group_deco.createChild("group", "title_bar");
-    title_bar
-      .rect( 0, 0,
-             me.get("size[0]"),
-             me.get("size[1]"), #25,
-             {"border-top-radius": border_radius} )
-      .setColorFill(0.25,0.24,0.22)
-      .setStrokeLineWidth(0);
-
-    var style_dir = "gui/styles/AmbianceClassic/";
+    me._title_bar_bg =
+      title_bar.rect( 0, 0,
+                      me.get("size[0]"),
+                      me.get("size[1]"),
+                      {"border-top-radius": border_radius} );
+    me._top_line = title_bar.createChild("path", "top-line")
+                            .moveTo(border_radius - 2, 2)
+                            .lineTo(me.get("size[0]") - border_radius + 2, 2);
 
     # close icon
     var x = 10;
     var y = 3;
     var w = 19;
     var h = 19;
-    var ico = title_bar.createChild("image", "icon-close")
-                       .set("file", style_dir ~ "close_focused_normal.png")
-                       .setTranslation(x,y);
-    ico.addEventListener("click", func me.del());
-    ico.addEventListener("mouseover", func ico.set("file", style_dir ~ "close_focused_prelight.png"));
-    ico.addEventListener("mousedown", func ico.set("file", style_dir ~ "close_focused_pressed.png"));
-    ico.addEventListener("mouseout",  func ico.set("file", style_dir ~ "close_focused_normal.png"));
+
+    var button_close = WindowButton.new(title_bar, "close")
+                                   .move(x, y);
+    button_close.onClick = func me.del();
+    me.addWidget(button_close);
 
     # title
     me._title = title_bar.createChild("text", "title")
@@ -223,10 +325,8 @@ var Window = {
     me._node.getNode("title", 1).alias(me._title._node.getPath() ~ "/text");
     me.set("title", title);
 
-    title_bar.addEventListener("drag", func(e) {
-      if( !ico.equals(e.target) )
-        me.move(e.deltaX, e.deltaY);
-    });
+    title_bar.addEventListener("drag", func(e) me.move(e.deltaX, e.deltaY));
+    me._onStateChange();
   }
 };
 

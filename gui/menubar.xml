@@ -452,7 +452,6 @@
 				<command>dialog-show</command>
 				<dialog-name>fgcom</dialog-name>
 			</binding>
-			<enabled>false</enabled>
 		</item>
 
 		<item>

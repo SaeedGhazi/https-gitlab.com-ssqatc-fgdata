@@ -126,8 +126,13 @@ to look all around in different directions.
    </axis>
 
    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~ Hat Switch ~~~~~~~~~~~~~~~~~~~~~~~~ -->
-   <axis n="5">
+   <axis>
       <desc>Hat Switch: View Direction (use mod buttons for different effects)</desc>
+      <number>
+        <unix>5</unix>
+        <mac>5</mac>
+        <windows>6</windows>
+      </number>
       <low>
          <repeatable>true</repeatable>
          <binding>
@@ -146,8 +151,13 @@ to look all around in different directions.
       </high>
    </axis>
 
-   <axis n="6">
+   <axis>
       <desc>Hat Switch: View Elevation (use mod buttons for different effects)</desc>
+      <number>
+        <unix>6</unix>
+        <mac>6</mac>
+        <windows>7</windows>
+      </number>
       <low>
          <repeatable>true</repeatable>
          <binding>

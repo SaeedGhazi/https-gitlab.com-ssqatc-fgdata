@@ -447,6 +447,14 @@
 		</item>
 
 		<item>
+			<name>fgcom-settings</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>fgcom</dialog-name>
+			</binding>
+		</item>
+
+		<item>
 			<name>mp-chat</name>
 			<binding>
 				<command>dialog-show</command>

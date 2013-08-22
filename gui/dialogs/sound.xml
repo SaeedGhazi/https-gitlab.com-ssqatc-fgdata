@@ -356,7 +356,13 @@
         if (cmp(current, new) != 0) {
           setprop("sim/sound/devices/name", new);
           setprop("sim/sound/device-name", new);
-          fgcommand("reinit", props.Node.new({ "subsystem" : "sound" }));
+          if(getprop("/sim/fgcom/enabled")) {
+            setprop("/sim/fgcom/enabled", 0);
+            settimer( func { fgcommand("reinit", props.Node.new({ "subsystem" : "sound" })); }, 0.5 );
+            settimer( func { setprop("/sim/fgcom/enabled", 1); print("enable fgcom");}, 1 );
+          } else {
+            fgcommand("reinit", props.Node.new({ "subsystem" : "sound" }));
+          }
         }
       }
 

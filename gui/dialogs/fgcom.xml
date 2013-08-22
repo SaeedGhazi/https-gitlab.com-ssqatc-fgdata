@@ -358,6 +358,12 @@
       <editable>false</editable>
       <property>/sim/fgcom/selected-server</property>
       <properties>/sim/gui/dialogs/multiplay/fgcom-servers</properties>
+      <enable>
+        <equals>
+          <property>/sim/fgcom/enabled</property>
+          <value>1</value>
+        </equals>
+      </enable>
       <binding>
         <command>dialog-apply</command>
         <object-name>server</object-name>

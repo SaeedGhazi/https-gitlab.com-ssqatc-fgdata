@@ -309,17 +309,55 @@ current mode for each mouse is held in the
    <constrained type="bool">true</constrained>
    <pass-through type="bool">false</pass-through>
 
+   <!-- extra buttons control FoV -->
+   <!-- these are often assigned to mouse-wheel motion in Linux -->
+   <button n="3">
+    <binding>
+     <condition>
+       <property>/devices/status/mice/mouse[0]/button[2]</property>
+     </condition>
+      <command>nasal</command>
+      <script>view.decrease()</script>
+    </binding>
+   </button>
+
+   <button n="4">
+    <binding>
+     <condition>
+       <property>/devices/status/mice/mouse[0]/button[2]</property>
+     </condition>
+      <command>nasal</command>
+      <script>view.increase()</script>
+    </binding>
+   </button>
+
    <!-- Mouse left/right motion -->
    <x-axis>
 
     <!-- rotate the view left or right -->
     <binding>
+     <condition>
+      <not>
+       <property>/devices/status/mice/mouse[0]/button[1]</property>
+      </not>
+     </condition>
      <command>property-adjust</command>
      <property>/sim/current-view/heading-offset-deg</property>
      <factor type="double">-360</factor>
      <min type="double">0</min>
      <max type="double">360</max>
      <wrap type="bool">true</wrap>
+    </binding>
+
+    <!-- Middle button pressed: move the view position left or right -->
+    <binding>
+     <condition>
+      <property>/devices/status/mice/mouse[0]/button[1]</property>
+     </condition>
+     <command>property-adjust</command>
+     <property>/sim/current-view/x-offset-m</property>
+     <factor type="double">1</factor>
+     <wrap type="bool">false</wrap>
     </binding>
 
    </x-axis>
@@ -329,6 +367,11 @@ current mode for each mouse is held in the
 
     <!-- tilt the view up and down -->
     <binding>
+     <condition>
+      <not>
+       <property>/devices/status/mice/mouse[0]/button[1]</property>
+      </not>
+     </condition>
      <command>property-adjust</command>
      <property>/sim/current-view/pitch-offset-deg</property>
      <factor type="double">-180</factor>
@@ -337,7 +380,50 @@ current mode for each mouse is held in the
      <wrap type="bool">false</wrap>
     </binding>
 
+    <!-- Middle button pressed move the view up and down -->
+    <binding>
+     <condition>
+      <property>/devices/status/mice/mouse[0]/button[1]</property>
+     </condition>
+     <command>property-adjust</command>
+     <property>/sim/current-view/y-offset-m</property>
+     <factor type="double">-1</factor>
+     <wrap type="bool">false</wrap>
+    </binding>
+
    </y-axis>
+
+   <y-axis-ctrl>
+       <!-- Middle button and Ctrl pressed: move the view forward and backward -->
+       <binding>
+        <condition>
+         <property>/devices/status/mice/mouse[0]/button[1]</property>
+        </condition>
+        <command>property-adjust</command>
+        <property>/sim/current-view/z-offset-m</property>
+        <factor type="double">1</factor>
+        <wrap type="bool">false</wrap>
+       </binding>
+
+       <binding>
+         <condition>
+           <not><property>/devices/status/mice/mouse[0]/button[1]</property></not>
+         </condition>
+         <command>property-adjust</command>
+         <property>/sim/current-view/y-offset-m</property>
+         <factor type="double">-1</factor>
+         <wrap type="bool">false</wrap>
+       </binding>
+    </y-axis-ctrl>
+
+    <x-axis-ctrl>
+       <binding>
+         <command>property-adjust</command>
+         <property>/sim/current-view/x-offset-m</property>
+         <factor type="double">1</factor>
+         <wrap type="bool">false</wrap>
+       </binding>
+    </x-axis-ctrl>
 
   </mode>
     

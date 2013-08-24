@@ -359,7 +359,7 @@
           if(getprop("/sim/fgcom/enabled")) {
             setprop("/sim/fgcom/enabled", 0);
             settimer( func { fgcommand("reinit", props.Node.new({ "subsystem" : "sound" })); }, 0.5 );
-            settimer( func { setprop("/sim/fgcom/enabled", 1); print("enable fgcom");}, 1 );
+            settimer( func { setprop("/sim/fgcom/enabled", 1); }, 1 );
           } else {
             fgcommand("reinit", props.Node.new({ "subsystem" : "sound" }));
           }

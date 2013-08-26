@@ -1,7 +1,7 @@
 ##
 # Pop up a "tip" dialog for a moment, then remove it.  The delay in
-# seconds can be specified as the second argument.  The default is 1
-# second.  The third argument can be a hash with override values.
+# seconds can be specified as the second argument.  The default is 4
+# seconds.  The third argument can be a hash with override values.
 # Note that the tip dialog is a shared resource.  If someone else
 # comes along and wants to pop a tip up before your delay is finished,
 # you lose. :)
@@ -116,7 +116,6 @@ var findElementByName = func(dialog,name) {
 #
 var fdm = getprop("/sim/flight-model");
 var screenHProp = nil;
-var tipArg = nil;
 var autopilotDisableProps = [
   "/autopilot/hide-menu",
   "/autopilot/KAP140/locks",
@@ -126,7 +125,6 @@ var autopilotDisableProps = [
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
     screenHProp = props.globals.getNode("/sim/startup/ysize");
-    tipArg = props.Node.new({ "dialog-name" : "PopTip" });
 
     props.globals.getNode("/sim/help/debug", 1).setValues(debug_keys);
     props.globals.getNode("/sim/help/basic", 1).setValues(basic_keys);
@@ -225,14 +223,9 @@ var latencyDisplay = func(n) {
 }
 
 ##
-# How many seconds do we show the tip?
-#
-var DELAY = 1.0;
-
-##
 # Pop down the tip dialog, if it is visible.
 #
-var popdown = func { fgcommand("dialog-close", tipArg); }
+var popdown = func { fgcommand("clear-message", props.Node.new({"id": canvas.tooltip.getTooltipId()})); }
 
 # Marker for the "current" timer.  This value gets stored in the
 # closure of the timer function, and is used to check that there

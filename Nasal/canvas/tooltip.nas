@@ -1,4 +1,6 @@
 var Tooltip = {
+  # default delay (in seconds)
+  DELAY: 4.0,
   # Constructor
   #
   # @param size ([width, height])
@@ -24,7 +26,7 @@ var Tooltip = {
     m.setInt("size[1]", size[1]);
     m.setBool("visible", 0);
 
-    m._hideTimer = maketimer(1.0, m, Tooltip._hideTimeout);
+    m._hideTimer = maketimer(m.DELAY, m, Tooltip._hideTimeout);
     m._hideTimer.singleShot = 1;
     
     return m;
@@ -215,13 +217,13 @@ var Tooltip = {
     }
   },
 
-  showMessage: func()
+  showMessage: func(timeout = nil)
   {
     me.setInt("y", getprop('/sim/startup/ysize') * 0.2);
     var screenW = getprop('/sim/startup/xsize');
     me.setInt("x", (screenW - me._width) * 0.5);
     me.show();
-    me._hideTimer.restart(4.0);
+    me._hideTimer.restart(timeout or me.DELAY);
   },
 
   hide: func()
@@ -344,7 +346,9 @@ var showMessage = func(node)
   var msgId = node.getNode("id");
   tooltip.setTooltipId((msgId == nil) ? 'msg' : msgId.getValue());
   innerSetTooltip(node);
-  tooltip.showMessage();
+
+  var timeout = node.getNode("delay");
+  tooltip.showMessage( timeout != nil ? timeout.getValue() : nil );
 }
 
 var clearMessage = func(node)

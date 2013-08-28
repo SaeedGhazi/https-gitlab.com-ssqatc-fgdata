@@ -473,12 +473,12 @@
         <row>5</row>
         <col>0</col>
         <halign>right</halign>
-        <enable>
+        <!--<enable>
           <equals>
             <property>/local-weather/config/realistic-visibility-flag</property>
             <value>0</value>
           </equals>
-        </enable>
+        </enable>-->
         <label>Max. visibility</label>
       </text>
 
@@ -492,12 +492,12 @@
       <slider>
         <row>5</row>
         <col>2</col>
-        <enable>
+        <!--<enable>
           <equals>
           <property>/local-weather/config/realistic-visibility-flag</property>
           <value>0</value>
           </equals>
-        </enable>
+        </enable>-->
         <min>9.90348</min>
         <max>12.429216196</max>
         <property>/local-weather/config/aux-max-vis-range-m</property>

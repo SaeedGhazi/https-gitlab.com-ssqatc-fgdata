@@ -140,27 +140,24 @@
     </checkbox>
 
     <text>
-      <row>2</row>
+      <row>1</row>
       <col>0</col>
-      <label>Mic Volume:</label>
+      <label>Display messages:</label>
       <halign>right</halign>
     </text>
-    <slider>
-      <row>2</row>
+    <checkbox>
+      <row>1</row>
       <col>1</col>
       <colspan>2</colspan>
       <halign>left</halign>
-      <name>mic-vol</name>
+      <name>showMessages</name>
       <label></label>
-      <min>0</min>
-      <max>1.0</max>
-      <step>0.1</step>
-      <property>/sim/fgcom/mic-level</property>
+      <property>/sim/fgcom/show-messages</property>
       <binding>
         <command>dialog-apply</command>
-        <object-name>mic-vol</object-name>
+        <object-name>showMessages</object-name>
       </binding>
-    </slider>
+    </checkbox>
 
     <text>
       <row>3</row>
@@ -171,7 +168,6 @@
     <slider>
       <row>3</row>
       <col>1</col>
-      <colspan>2</colspan>
       <halign>left</halign>
       <name>speaker-vol</name>
       <label></label>
@@ -184,6 +180,14 @@
         <object-name>speaker-vol</object-name>
       </binding>
     </slider>
+    <text>
+      <row>3</row>
+      <col>2</col>
+      <label>1234</label>
+      <format>%.1f</format>
+      <live>true</live>
+      <property>/sim/fgcom/speaker-level</property>
+    </text>
   </group>
 
   <hrule/>
@@ -332,7 +336,7 @@
     <text>
       <row>0</row>
       <col>0</col>
-      <label>Test:</label>
+      <label>Echo test:</label>
       <halign>right</halign>
     </text>
     <checkbox>

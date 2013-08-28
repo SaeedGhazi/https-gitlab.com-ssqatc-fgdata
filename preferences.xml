@@ -820,9 +820,21 @@ Started September 2000 by David Megginson, david@megginson.com
 			<dme-fallback-to-loc type="bool">false</dme-fallback-to-loc>
 		</realism>
 		<frame-rate-throttle-hz type="double" userarchive="y">0</frame-rate-throttle-hz>
-        <history>
-            <enabled type="bool">true</enabled>
-        </history>
+		<history>
+		    <enabled type="bool">true</enabled>
+		</history>
+
+		<fgcom>
+			<enabled type="bool" userarchive="y">false</enabled>
+			<server type="string" userarchive="y">fgcom.flightgear.org</server>
+			<show-messages type="bool" userarchive="y">false</show-messages>
+			<speaker-level type="double" userarchive="y">1.0</speaker-level>
+			<register>
+				<enabled type="bool" userarchive="y">false</enabled>
+				<username type="string" userarchive="y">guest</username>
+				<password type="string" userarchive="y">guest</password>
+			</register>
+		</fgcom>
 	</sim>
 	<!-- mouse mode -->
 	<devices>

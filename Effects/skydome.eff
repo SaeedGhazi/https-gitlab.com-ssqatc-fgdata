@@ -14,6 +14,7 @@
     <terminator><use>/environment/terminator-relative-position-m</use></terminator>
     <terrain_alt><use>/environment/mean-terrain-elevation-m</use></terrain_alt>
     <cloud_self_shading><use>/environment/cloud-self-shading</use></cloud_self_shading>
+    <horizon_roughness><use>/local-weather/config/small-scale-persistence</use></horizon_roughness>
   </parameters>
   <technique n="8">
     <predicate>
@@ -101,6 +102,11 @@
         <name>cloud_self_shading</name>
         <type>float</type>
         <value><use>cloud_self_shading</use></value>
+      </uniform>
+      <uniform>
+        <name>horizon_roughness</name>
+        <type>float</type>
+        <value><use>horizon_roughness</use></value>
       </uniform>
     </pass>
   </technique>

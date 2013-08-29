@@ -10,7 +10,7 @@ varying vec3 mie;
 varying vec3 eye;
 varying vec3 hazeColor;
 varying float ct;
-//varying float cosphi;
+varying float cphi;
 varying float delta_z;
 varying float alt;
 varying float earthShade;
@@ -21,6 +21,7 @@ uniform float visibility;
 uniform float avisibility;
 uniform float scattering;
 uniform float cloud_self_shading;
+uniform float horizon_roughness;
 
 const float EarthRadius = 5800000.0;
 
@@ -41,7 +42,39 @@ float rayleighPhase(in float cosTheta)
   return 1.5 * (2.0 + 0.5*cosTheta*cosTheta);
 }
  
+float rand2D(in vec2 co){
+    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
+float simple_interpolate(in float a, in float b, in float x)
+{
+return a + smoothstep(0.0,1.0,x) * (b-a);
+}
+
+float interpolatedNoise2D(in float x, in float y)
+{
+      float integer_x    = x - fract(x);
+      float fractional_x = x - integer_x;
+
+      float integer_y    = y - fract(y);
+      float fractional_y = y - integer_y;
+
+      float v1 = rand2D(vec2(integer_x, integer_y));
+      float v2 = rand2D(vec2(integer_x+1.0, integer_y));
+      float v3 = rand2D(vec2(integer_x, integer_y+1.0));
+      float v4 = rand2D(vec2(integer_x+1.0, integer_y +1.0));
+
+      float i1 = simple_interpolate(v1 , v2 , fractional_x);
+      float i2 = simple_interpolate(v3 , v4 , fractional_x);
+
+      return simple_interpolate(i1 , i2 , fractional_y);
+}
  
+float Noise2D(in vec2 coord, in float wavelength)
+{
+return interpolatedNoise2D(coord.x/wavelength, coord.y/wavelength);
+
+}
  
 void main()
 {
@@ -198,7 +231,18 @@ color = sat * color + (1.0 - sat) * mix(color, black, smoothstep(0.4+cthorizon,0
 
 // the terrain below the horizon gets drawn in one optical thickness
 vec3 terrainHazeColor = eqColorFactor * hColor;	
-color = mix(color, terrainHazeColor ,smoothstep(0.01 + ctterrain, 0.0+ctterrain, ct));
+
+// determine a visibility-dependent angle for how smoothly the haze blends over the skydome
+
+float hazeBlendAngle = max(0.01,1000.0/avisibility + 0.3 * (1.0 - smoothstep(5000.0, 30000.0, avisibility)));
+float altFactor = smoothstep(-300.0, 0.0, delta_z);
+float altFactor2 =  0.2 + 0.8 * smoothstep(-3000.0, 0.0, delta_z);
+hazeBlendAngle = hazeBlendAngle + 0.1 * altFactor;
+hazeBlendAngle = hazeBlendAngle +  (1.0-horizon_roughness) * altFactor2 * 0.1 *  Noise2D(vec2(0.0,cphi), 0.3);
+
+
+color = mix(color, terrainHazeColor ,smoothstep(hazeBlendAngle + ctterrain, 0.0+ctterrain, ct));
+
 
 // mix fog the skydome with the right amount of haze
 

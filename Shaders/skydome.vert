@@ -18,7 +18,7 @@ varying vec3 mie;
 varying vec3 eye;
 varying vec3 hazeColor;
 varying float ct;
-//varying float cosphi;
+varying float cphi;
 varying float delta_z;
 varying float alt; 
 varying float earthShade;
@@ -252,18 +252,8 @@ void main()
 
     if (terminator > 1000000.0){yprime = -sqrt(2.0 * EarthRadius * hazeLayerAltitude);}
 
-    //float edgeAlt = max(hazeLayerAltitude - (alt-terrain_alt)/avisibility * visibility, terrain_alt);
-    
-    //yprime = yprime -sqrt(2.0 * EarthRadius * edgeAlt);
-
     float terminator_width = 200000.0;
     earthShade = 0.9 * smoothstep((terminator_width+ terminator), (-terminator_width + terminator), yprime) + 0.1;
-
-
-//hazeColor = vec3 (gl_LightSource[0].diffuse.x, gl_LightSource[0].diffuse.y, gl_LightSource[0].diffuse.z);
-
-    //hazeColor.x = hazeColor.x * 0.83;
-    //hazeColor.y = hazeColor.y * 0.9;  
 
      float lightArg = (terminator-yprime)/100000.0;
      vec4 light_diffuse;
@@ -275,17 +265,10 @@ void main()
 
      float intensity = length(hazeColor.xyz);
      float mie_magnitude = 0.5 * smoothstep(350000.0, 150000.0, terminator -sqrt(2.0 * EarthRadius * terrain_alt)); 
+     cphi = dot(normalize(relVector), normalize(lightHorizon));
      float mie_angle = (0.5 *  dot(normalize(relVector), normalize(lightFull)) ) + 0.5;
      hazeColor = intensity * ((1.0 - mie_magnitude) + mie_magnitude * mie_angle) * normalize(mix(hazeColor,  vec3 (0.5, 0.58, 0.65), mie_magnitude * (0.5 - 0.5 * mie_angle)) ); 
 
-
-// high altitude desaturation - would be best here this causes a box-like bug for some reason
-// so it moved to the fragment shader where it has no issues
-
-//float intensity = length(hazeColor.xyz);
-//hazeColor = intensity * normalize (mix(hazeColor, intensity * vec3 (1.0,1.0,1.0), 0.8* smoothstep(5000.0, 50000.0, alt)));
-
-    
 
     // Transform
     gl_Position = gl_ModelViewProjectionMatrix * finalVertex;

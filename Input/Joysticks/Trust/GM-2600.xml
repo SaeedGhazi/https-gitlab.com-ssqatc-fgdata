@@ -4,10 +4,11 @@ _______________________________________ Layout _________________________________
 
 axis 0:              aileron
 axis 1:              elevator
-axis 2:              rudder
-axis 3:              throttle
-axis 4:              view hat X
-axis 5:              view hat Y
+axis 2:              throttle
+axis 3:              rudder
+axis 4:              unused
+axis 5:              view hat X
+axis 6:              view hat Y
 ___________________________________ Customization ____________________________________
 
 If you want to change some (or all) of the bindings, the recommended way is
@@ -42,6 +43,7 @@ ________________________________________________________________________________
 
 <PropertyList>
 	<name>Padix Co. Ltd. Trust GM-2600 Joystick</name>
+	<name>5-Axis,12-Button with POV </name>
 
 	<axis>
 		<desc>aileron</desc>
@@ -69,9 +71,20 @@ ________________________________________________________________________________
 	</axis>
 
 	<axis>
-		<desc>rudder</desc>
+		<desc>throttle</desc>
 		<number>
 			<unix>2</unix>
+		</number>
+		<binding>
+			<command>nasal</command>
+			<script>controls.throttleAxis()</script>
+		</binding>
+	</axis>
+
+	<axis>
+		<desc>rudder</desc>
+		<number>
+			<unix>3</unix>
 		</number>
 		<binding>
 			<command>property-scale</command>
@@ -82,20 +95,9 @@ ________________________________________________________________________________
 	</axis>
 
 	<axis>
-		<desc>throttle</desc>
-		<number>
-			<unix>3</unix>
-		</number>
-		<binding>
-			<command>nasal</command>
-			<script>controls.throttleAxis()</script>
-		</binding>
-	</axis>
-
-	<axis>
 		<desc>View Direction</desc>
 		<number>
-			<unix>4</unix>
+			<unix>5</unix>
 		</number>
 		<low>
 			<repeatable>true</repeatable>
@@ -116,7 +118,7 @@ ________________________________________________________________________________
 	<axis>
 		<desc>View Elevation</desc>
 		<number>
-			<unix>5</unix>
+			<unix>6</unix>
 		</number>
 		<low>
 			<repeatable>true</repeatable>

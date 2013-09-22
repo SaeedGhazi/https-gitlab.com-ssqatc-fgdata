@@ -147,6 +147,13 @@
     <node>/sim/model/path</node>
    </chunk>
 
+   <chunk>
+    <name>output-volume</name>
+    <type>double</type>
+    <format>OUTPUT_VOL=%1.1f</format>
+    <node>/sim/sound/atc/volume</node>
+   </chunk>
+
   </output>
 
  </generic>

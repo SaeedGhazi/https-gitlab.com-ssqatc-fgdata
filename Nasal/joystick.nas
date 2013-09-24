@@ -499,7 +499,7 @@ var buttonBindings = [
   NasalButton.new("Rudder Trim Right", "controls.rudderTrim(1);", 1),
   NasalButton.new("Aileron Trim Left", "controls.aileronTrim(-1);", 1),
   NasalButton.new("Aileron Trim Right", "controls.aileronTrim(1);", 1),
-  NasalHoldButton.new("FGCom PTT", "controls.ptt(1);", "controls.ptt(-1);"),
+  NasalHoldButton.new("FGCom PTT", "controls.ptt(1);", "controls.ptt(0);"),
   NasalHoldButton.new("Trigger", "controls.trigger(1);", "controls.trigger(0);"),
   NasalHoldButton.new("Flaps Up", "controls.flapsDown(-1);", "controls.flapsDown(0);"),
   NasalHoldButton.new("Flaps Down", "controls.flapsDown(1);", "controls.flapsDown(0);"),

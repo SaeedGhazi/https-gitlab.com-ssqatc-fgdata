@@ -233,7 +233,7 @@ var manager = {
 			me.current.handler.start();
 		if (hasmember(me.current.handler, "update"))
 			me._loop_(me.loopid += 1);
-#		resetFOV();
+		screenWidthCompens.update();
 	},
 	reset : func {
 		if (hasmember(me.current.handler, "reset"))
@@ -652,57 +652,71 @@ var point = {
 # view.ScreenWidthCompens: optional FOV compensation for wider screens.
 # It keeps an equivalent of 55° FOV on a 4:3 zone centered on the screen
 # whichever is the screen width/height ratio. Works only if width >= height.
-#
-# status: 0=Init, 1=toggle option, 2=waiting for the window size to change. 
 
-var defaultFov = nil;
-var oldW = 0;
-var oldH = 0;
-var fovStore = {};
+var screenWidthCompens = {
+	defaultFov: nil,
+	oldW: nil, oldH: nil, oldOpt: nil,
+	assumedW: 4, assumedH: 3,
+	fovStore: [],
+	lastViewStatus: {},
+	statusNode: nil, # = /sim/current-view/field-of-view-compensation
+	getStatus: func me.statusNode.getValue(),
+	setStatus: func(state) me.statusNode.setValue(state),
+	calcNewFov: func(fov=55, oldW=nil, oldH=nil, w=nil, h=nil) {
+		if (w == nil) w = getprop("/sim/rendering/camera-group/camera/viewport/width");
+		if (h == nil) h = getprop("/sim/rendering/camera-group/camera/viewport/height");
+		if (oldW == nil) oldW = me.assumedW;
+		if (oldH == nil) oldH = me.assumedH;
+		if (w/h == oldW/oldH or h > w) return fov;
+		else return math.atan2(w/h, oldW/oldH / math.tan(fov * D2R)) * R2D;
+	},
+	init: func() {
+		me.defaultFov = getprop("/sim/current-view/config/default-field-of-view-deg");
+		me.statusNode = props.globals.getNode("/sim/current-view/field-of-view-compensation", 1);
+		me.oldW = getprop("/sim/rendering/camera-group/camera/viewport/width");
+		me.oldH = getprop("/sim/rendering/camera-group/camera/viewport/height");
 
-var screenWidthCompens = func(status) {
-	var opt = getprop("/sim/current-view/field-of-view-compensation");
-	if (status == 0) {
-		defaultFov = getprop("/sim/current-view/config/default-field-of-view-deg");
+		setsize(me.fovStore, size(views));
 		forindex (var i; views) {
-			var defaultFovNode = views[i].getNode("config/default-field-of-view-deg", 1);
-			fovStore[i] = defaultFovNode.getValue();
+			me.fovStore[i] = views[i].getNode("config/default-field-of-view-deg", 1).getValue() or 55;
+			me.lastViewStatus[i] = { w:me.assumedW, h:me.assumedH };
 		}
-	} elsif (status == 1) {
-		opt = ! opt;
-		setprop("/sim/current-view/field-of-view-compensation", opt);
-		if (! opt) {
-			forindex (var i; views) {
-				var defaultFovNode = views[i].getNode("config/default-field-of-view-deg", 1);
-				defaultFovNode.setValue(fovStore[i]);
+		me.update(opt:nil, force:1);
+	},
+	toggle: func() me.update(!me.getStatus(), 1),
+	update: func(opt=nil, force=0) {
+		if (opt == nil)
+			opt = me.getStatus();
+		else me.setStatus(opt);
+		var w = getprop("/sim/rendering/camera-group/camera/viewport/width");
+		var h = getprop("/sim/rendering/camera-group/camera/viewport/height");
+		# Update config/default-field-of-view-deg nodes if state changed:
+		if (force or me.oldOpt != opt or me.oldW/me.oldH != w/h) {
+			me.oldW = w;
+			me.oldH = h;
+			me.oldOpt = opt;
+			if (!opt) {
+				setprop("/sim/current-view/config/default-field-of-view-deg", me.defaultFov);
+				forindex (var i; views)
+					views[i].setValue("config/default-field-of-view-deg", me.fovStore[i]);
+			} else {
+				setprop("/sim/current-view/config/default-field-of-view-deg",
+				        me.calcNewFov(fov:me.defaultFov, w:w, h:h));
+				forindex (var i; views)
+					views[i].setValue("config/default-field-of-view-deg",
+					                  me.calcNewFov(fov:me.fovStore[i], w:w, h:h));
 			}
-			var vn = getprop("/sim/current-view/view-number");
-			setprop("/sim/current-view/field-of-view", fovStore[vn]);
 		}
-	} elsif (status == 2 and ! opt) {
-		return;
-	}
-	var w = getprop("/sim/rendering/camera-group/camera/viewport/width");
-	var h = getprop("/sim/rendering/camera-group/camera/viewport/height");
-	if (! opt) {
-		setprop("/sim/current-view/config/default-field-of-view-deg", defaultFov);
-		return;
-	}
-	if ( w != oldW or h != oldH or status == 1) {
-		oldW = w;
-		oldH = h;
-		d = 1.28066 * h; # 1.28066 = 4/3 (width/height ratio) / 2 / tan(55°)
-		newFov = 2 * math.atan2( w / h * h / 2, d) * R2D;
-		setprop("/sim/current-view/config/default-field-of-view-deg", newFov);
-		forindex (var i; views) {
-			var defaultFovNode = views[i].getNode("config/default-field-of-view-deg", 1);
-			defaultFovNode.setValue(newFov);
+		# Update this view if necessary:
+		if (!opt) (w,h) = (me.assumedW,me.assumedH); # back to default FOV
+		var thisview = me.lastViewStatus[index];
+		if (thisview.w/thisview.h != w/h) {
+			fovProp.setValue(me.calcNewFov(fovProp.getValue(), thisview.w, thisview.h, w, h))
+			and
+			((thisview.opt,thisview.w,thisview.h) = (opt,w,h));
 		}
-		fovProp.setValue(newFov);
-	}
-	settimer(func { screenWidthCompens(2); }, 1);
-}
-
+	},
+};
 
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
@@ -715,10 +729,19 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	}, 1);
 
 	props.globals.initNode("/position/altitude-agl-ft"); # needed by Fly-By View
+	screenWidthCompens.init();
 	manager.init();
 	manager.register("Fly-By View", fly_by_view_handler);
 	manager.register("Model View", model_view_handler);
-	screenWidthCompens(0);
+});
+_setlistener("/sim/signals/reinit", func {
+	screenWidthCompens.update(opt:nil,force:1);
+});
+_setlistener("/sim/startup/xsize", func {
+	screenWidthCompens.update();
+});
+_setlistener("/sim/startup/ysize", func {
+	screenWidthCompens.update();
 });
 
 

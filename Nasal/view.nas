@@ -376,8 +376,8 @@ var model_view_handler = {
 				return i;
 		return nil;
 	},
-	select: func(which) {
-		if (num(which) == nil)
+	select: func(which, by_callsign=0) {
+		if (by_callsign or num(which) == nil)
 			which = me.find(which) or 0;  # turn callsign into index
 
 		me.setup(me.list[which]);

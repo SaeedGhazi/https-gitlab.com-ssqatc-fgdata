@@ -123,21 +123,9 @@
       </binding-->
     </input>
 
-    <checkbox>
-      <name>scenery-refresh</name>
-      <halign>left</halign>
-      <row>6</row><col>1</col><colspan>2</colspan>
-      <property>/sim/terrasync/refresh-display</property>
-      <enable>
-        <property>/sim/terrasync/enabled</property>
-      </enable>
-      <label>Automatic display refresh (EXPERIMENTAL!)</label>
-      <live>true</live>
-      <binding>
-        <command>dialog-apply</command>
-        <object-name>scenery-refresh</object-name>
-      </binding>
-    </checkbox>
+    
+    
+    <!--
     <button>
       <legend>Manual Refresh</legend>
       <border>2</border>
@@ -147,27 +135,7 @@
         <subsystem>tile-manager</subsystem>
       </binding>
     </button>
-
-<!--
-    <checkbox>
-      <name>internal-svn</name>
-      <halign>left</halign>
-      <row>7</row><col>1</col><colspan>3</colspan>
-      <property>/sim/terrasync/use-built-in-svn</property>
-      <label>Download using built-in SVN client</label>
-      <live>true</live>
-      <binding>
-        <command>dialog-apply</command>
-        <object-name>internal-svn</object-name>
-      </binding>
-      <enable>
-        <and>
-          <property>/sim/terrasync/built-in-svn-available</property>
-          <property>/sim/terrasync/enabled</property>
-        </and>
-      </enable>
-    </checkbox>
--->
+        -->
 
   </group>
 

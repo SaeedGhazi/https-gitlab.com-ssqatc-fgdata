@@ -33,6 +33,7 @@
 		<finishing-subsystems>subsystemen afronden</finishing-subsystems>   <!-- English: "finalizing subsystems" -->
 		<init-graphics>grafische motor voorbereiden</init-graphics>    <!-- English: "initializing graphics engine" -->
 		<loading-scenery>landschap laden</loading-scenery>   <!-- English: "loading scenery" -->
+		<downloading-scenery>landschap downloaden</downloading-scenery>   <!-- English: "downloading scenery" -->
 		<finalize-position>positie afronden</finalize-position>   <!-- English: "finalizing position" -->
 	</splash>
 

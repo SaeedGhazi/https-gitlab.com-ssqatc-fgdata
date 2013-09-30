@@ -16,7 +16,8 @@
 		<finishing-subsystems>finalizing subsystems</finishing-subsystems>
 		<init-graphics>initializing graphics engine</init-graphics>
 		<loading-scenery>loading scenery</loading-scenery>
-    <finalize-position>finalizing position</finalize-position>
+        <downloading-scenery>downloading scenery</downloading-scenery>
+        <finalize-position>finalizing position</finalize-position>
 	</splash>
 
 </PropertyList>

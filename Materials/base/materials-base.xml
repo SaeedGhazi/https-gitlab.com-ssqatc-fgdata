@@ -464,6 +464,124 @@ Shared parameters for various materials.
   <load-resistance>1e10</load-resistance>
 </material>
 
+<!-- For textured lines -->
+<material n="2011">
+  <name>Road-textured</name>
+  <texture>Roads/road-textured.png</texture>
+  <xsize>1000</xsize>
+  <ysize>1000</ysize>
+  <light-coverage>10000.0</light-coverage>
+  <solid>1</solid>
+  <friction-factor>1.0</friction-factor>
+  <rolling-friction>0.02</rolling-friction>
+  <bumpiness>0.01</bumpiness>
+  <load-resistance>1e10</load-resistance>
+</material>
+
+<material n="2012">
+  <name>Motorway-textured</name>
+  <texture>Roads/motorway-textured.png</texture>
+  <xsize>1000</xsize>
+  <ysize>1000</ysize>
+  <light-coverage>10000.0</light-coverage>
+  <solid>1</solid>
+  <friction-factor>1.0</friction-factor>
+  <rolling-friction>0.02</rolling-friction>
+  <bumpiness>0.01</bumpiness>
+  <load-resistance>1e10</load-resistance>
+</material>
+
+<material n="2013">
+  <name>Trunk-textured</name>
+  <texture>Roads/trunk-textured.png</texture>
+  <xsize>1000</xsize>
+  <ysize>1000</ysize>
+  <light-coverage>10000.0</light-coverage>
+  <solid>1</solid>
+  <friction-factor>1.0</friction-factor>
+  <rolling-friction>0.02</rolling-friction>
+  <bumpiness>0.01</bumpiness>
+  <load-resistance>1e10</load-resistance>
+</material>
+
+<material n="2014">
+  <name>Residential-textured</name>
+  <texture>Roads/residential-textured.png</texture>
+  <xsize>1000</xsize>
+  <ysize>1000</ysize>
+  <light-coverage>10000.0</light-coverage>
+  <solid>1</solid>
+  <friction-factor>1.0</friction-factor>
+  <rolling-friction>0.02</rolling-friction>
+  <bumpiness>0.01</bumpiness>
+  <load-resistance>1e10</load-resistance>
+</material>
+
+<material n="2015">
+  <name>Primary-textured</name>
+  <texture>Roads/primary-textured.png</texture>
+  <xsize>1000</xsize>
+  <ysize>1000</ysize>
+  <light-coverage>10000.0</light-coverage>
+  <solid>1</solid>
+  <friction-factor>1.0</friction-factor>
+  <rolling-friction>0.02</rolling-friction>
+  <bumpiness>0.01</bumpiness>
+  <load-resistance>1e10</load-resistance>
+</material>
+
+<material n="2016">
+  <name>Secondary-textured</name>
+  <texture>Roads/secondary-textured.png</texture>
+  <xsize>1000</xsize>
+  <ysize>1000</ysize>
+  <light-coverage>10000.0</light-coverage>
+  <solid>1</solid>
+  <friction-factor>1.0</friction-factor>
+  <rolling-friction>0.02</rolling-friction>
+  <bumpiness>0.01</bumpiness>
+  <load-resistance>1e10</load-resistance>
+</material>
+
+<material n="2017">
+  <name>Tertiary-textured</name>
+  <texture>Roads/tertiary-textured.png</texture>
+  <xsize>1000</xsize>
+  <ysize>1000</ysize>
+  <light-coverage>10000.0</light-coverage>
+  <solid>1</solid>
+  <friction-factor>1.0</friction-factor>
+  <rolling-friction>0.02</rolling-friction>
+  <bumpiness>0.01</bumpiness>
+  <load-resistance>1e10</load-resistance>
+</material>
+
+<material n="2018">
+  <name>Railroad-textured</name>
+  <texture>Roads/railroad-textured.png</texture>
+  <xsize>1000</xsize>
+  <ysize>1000</ysize>
+  <light-coverage>10000.0</light-coverage>
+  <solid>1</solid>
+  <friction-factor>1.0</friction-factor>
+  <rolling-friction>0.02</rolling-friction>
+  <bumpiness>0.01</bumpiness>
+  <load-resistance>1e10</load-resistance>
+</material>
+
+<material n="2019">
+  <name>Asphalt-textured</name>
+  <texture>Roads/asphalt-textured.png</texture>
+  <xsize>1000</xsize>
+  <ysize>1000</ysize>
+  <light-coverage>10000.0</light-coverage>
+  <solid>1</solid>
+  <friction-factor>1.0</friction-factor>
+  <rolling-friction>0.02</rolling-friction>
+  <bumpiness>0.01</bumpiness>
+  <load-resistance>1e10</load-resistance>
+</material>
+
 <!-- Taxiway signs -->
     <material n="2100">
         <name>signcase</name>

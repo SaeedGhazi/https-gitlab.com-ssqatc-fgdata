@@ -14,7 +14,8 @@
     	var scratchValid = dlg.getNode("scratch/valid", 1);
 	    var searchIsWaypoints = 0;
 	    var anySpec = 'vor,airport,heliport,ils,seaport,fix,ndb,waypoint,tacan,city,town';
-    
+        dlg.getNode("search-type", 1).setValue("airport");
+        
 	    var updateSearchResults = func(isWpts, index = 0)
 	    {
 	      searchIsWaypoints = isWpts;
@@ -93,6 +94,8 @@
     var doSearchNearest = func
     {
       var ty = dlg.getNode("search-type").getValue();
+      if (ty == 'any') ty = anySpec;
+      
       searchResults = positioned.findWithinRange(200.0, ty);
       updateSearchResults(0);
     }

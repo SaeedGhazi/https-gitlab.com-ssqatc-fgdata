@@ -6,6 +6,10 @@
     <nasal>
         <open><![CDATA[
 
+        if (!defined("_gps_dialog_search_results")) {
+            globals._gps_dialog_search_results = [];
+        }
+            
 		var gps = props.globals.getNode("/instrumentation/gps/", 1);
 		var dlg = props.globals.getNode("/sim/gui/dialogs/gps", 1);
 		var cmd = gps.getNode("command", 1);
@@ -21,10 +25,10 @@
 	      searchIsWaypoints = isWpts;
 	      dlg.getNode("scratch-index", 1).setValue(index);
       
-	      var lastIndex = size(searchResults) - 1;
+	      var lastIndex = size(globals._gps_dialog_search_results) - 1;
 	      dlg.getNode("scratch-has-next", 1).setValue((index + 1) < lastIndex);
             
-	      if (size(searchResults) < 1) {
+	      if (size(globals._gps_dialog_search_results) < 1) {
 	        scratchValid.setBoolValue(0);
 	        return;
 	      }
@@ -34,7 +38,8 @@
     
     var updateScratch = func
     {
-      var result = searchResults[dlg.getNode("scratch-index").getValue()];
+      var index = dlg.getNode("scratch-index").getValue();
+      var result = globals._gps_dialog_search_results[index];
       if (result == nil) {
         scratchValid.setBoolValue(0);
         return;
@@ -78,7 +83,7 @@
       if (ty == 'any') ty = anySpec;
       
       var query = dlg.getNode("search-query").getValue();      
-      searchResults = positioned.sortByRange(positioned.findByIdent(query, ty));
+      globals._gps_dialog_search_results = positioned.sortByRange(positioned.findByIdent(query, ty));
       updateSearchResults(0);
     }
     
@@ -87,7 +92,7 @@
       var ty = dlg.getNode("search-type").getValue();
       if (ty == 'any') ty = anySpec;
       var query = dlg.getNode("search-query").getValue();      
-      searchResults = positioned.sortByRange(positioned.findByName(query, ty));
+      globals._gps_dialog_search_results = positioned.sortByRange(positioned.findByName(query, ty));
       updateSearchResults(0);
     }
     
@@ -96,17 +101,18 @@
       var ty = dlg.getNode("search-type").getValue();
       if (ty == 'any') ty = anySpec;
       
-      searchResults = positioned.findWithinRange(200.0, ty);
+      globals._gps_dialog_search_results = positioned.findWithinRange(200.0, ty);
       updateSearchResults(0);
     }
     
     var doLoadRouteWaypoint = func
     {
       var fp = flightplan();
-      searchResults = [];
+      var wps = [];
       for (var i=0; i < fp.getPlanSize(); i+=1) {
-        append(searchResults, fp.getWP(i));
+        append(wps, fp.getWP(i));
       }
+      globals._gps_dialog_search_results = wps;
       updateSearchResults(1, fp.current);
     }
     
@@ -115,14 +121,14 @@
       var index = dlg.getNode("scratch-index").getValue();
       if (index == 0) return;
       dlg.getNode("scratch-index").setValue(index - 1);
-      dlg.getNode("scratch-has-next", 1).setValue(size(searchResults) > 1);
+      dlg.getNode("scratch-has-next", 1).setValue(size(globals._gps_dialog_search_results) > 1);
       updateScratch();
     }
     
     var doScratchNext = func
     {
       var index = dlg.getNode("scratch-index").getValue();
-      var lastIndex = size(searchResults) - 1;
+      var lastIndex = size(globals._gps_dialog_search_results) - 1;
       if (index == lastIndex) return;
       
       dlg.getNode("scratch-has-next", 1).setValue((index + 1) < lastIndex);
@@ -130,8 +136,8 @@
       updateScratch();
     }
     
-    var searchResults = [];
-    updateSearchResults(0);
+    # restore state from previous time the dialog was open
+        updateSearchResults(0, dlg.getNode("scratch-index", 1).getValue());
     
 		var slaved = props.globals.getNode("/instrumentation/nav[0]/slaved-to-gps", 1);
 	]]></open>

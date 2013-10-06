@@ -14,6 +14,12 @@ var parsesvg = func(group, path, options = nil)
   if( typeof(options) != "hash" )
     die("Options need to be of type hash!");
 
+  # resolve paths using standard SimGear logic
+  var file_path = resolvepath(path);
+  if (file_path == "")
+    die("File not found: "~path);
+  path = file_path;
+
   var custom_font_mapper = options['font-mapper'];
   var font_mapper = func(family, weight)
   {
@@ -572,22 +578,6 @@ var parsesvg = func(group, path, options = nil)
       tspans[-1]["text"] ~= data;
     }
   };
-
-  # check path relative to standard locations
-  foreach(
-    var p;
-    [ "",                                 # absolute path
-      getprop("/sim/aircraft-dir") ~ "/", # current aircraft path
-      getprop("/sim/fg-root") ~ "/"       # fgdata
-    ])
-  {
-    var tmp_path = p ~ path;
-    if( io.stat(tmp_path) != nil )
-    {
-      path = tmp_path;
-      break;
-    }
-  }
 
   call(func parsexml(path, start, end, data), nil, var err = []);
   if( size(err) )

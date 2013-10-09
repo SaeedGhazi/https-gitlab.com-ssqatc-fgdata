@@ -22,7 +22,10 @@
   </parameters>
   <technique n="1">
     <pass>
-	  <lighting>true</lighting>
+		<lighting>true</lighting>
+		<depth>
+			<write-mask type="bool">false</write-mask>
+		</depth>
 	  <material>
 		<ambient>
 		  <use>material/ambient</use>
@@ -50,12 +53,8 @@
 	  <shade-model>smooth</shade-model>
 	  <cull-face>back</cull-face>
 	  <render-bin>
-		<bin-number>
-		  <use>render-bin/bin-number</use>
-		</bin-number>
-		<bin-name>
-		  <use>render-bin/bin-name</use>
-		</bin-name>
+		<bin-number>111</bin-number>
+		<bin-name>DepthSortedBin</bin-name>
 	  </render-bin>
 	  <texture-unit>
 		<unit>0</unit>

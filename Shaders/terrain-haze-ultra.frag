@@ -625,6 +625,22 @@ if (delta_z > 0.0) // we're inside the layer
 		} 
 	}
 	
+// blur of the haze layer edge
+
+float blur_thickness = 50.0;
+float cphi = dot(vec3(0.0, 1.0, 0.0), relPos)/dist;
+float ctlayer = delta_z/dist-0.01 + 0.02 * Noise2D(vec2(cphi,1.0),0.1) -0.01;
+float ctblur = 	0.035 ;
+
+float blur_dist;
+
+if (abs(delta_z) < 400.0)
+	{
+	blur_dist = dist * (1.0-smoothstep(0.0,300.0,-delta_z)) * smoothstep(-400.0,-200.0, -delta_z);
+	blur_dist = blur_dist * smoothstep(ctlayer-4.0*ctblur, ctlayer-ctblur, ct) * (1.0-smoothstep(ctlayer+0.5*ctblur, ctlayer+ctblur, ct));
+	distance_in_layer = max(distance_in_layer, blur_dist);
+	}
+
 
 // ground haze cannot be thinner than aloft visibility in the model,
 // so we need to use aloft visibility otherwise

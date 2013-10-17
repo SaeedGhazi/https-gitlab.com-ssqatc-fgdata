@@ -11,8 +11,6 @@ uniform sampler2D texture;
 
 
 varying float yprime_alt;
-//varying float mie_angle;
-
 
 uniform float visibility;
 uniform float avisibility;
@@ -27,6 +25,7 @@ uniform float dust_cover_factor;
 
 
 uniform int quality_level;
+uniform int tquality_level;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -78,6 +77,43 @@ else
 	{
 	return exp(- targ * targ - pow(targ,4.0));
 	}
+
+}
+
+float rand2D(in vec2 co){
+    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
+
+float simple_interpolate(in float a, in float b, in float x)
+{
+return a + smoothstep(0.0,1.0,x) * (b-a);
+}
+
+float interpolatedNoise2D(in float x, in float y)
+{
+      float integer_x    = x - fract(x);
+      float fractional_x = x - integer_x;
+
+      float integer_y    = y - fract(y);
+      float fractional_y = y - integer_y;
+
+      float v1 = rand2D(vec2(integer_x, integer_y));
+      float v2 = rand2D(vec2(integer_x+1.0, integer_y));
+      float v3 = rand2D(vec2(integer_x, integer_y+1.0));
+      float v4 = rand2D(vec2(integer_x+1.0, integer_y +1.0));
+
+      float i1 = simple_interpolate(v1 , v2 , fractional_x);
+      float i2 = simple_interpolate(v3 , v4 , fractional_x);
+
+      return simple_interpolate(i1 , i2 , fractional_y);
+}
+
+
+
+float Noise2D(in vec2 coord, in float wavelength)
+{
+return interpolatedNoise2D(coord.x/wavelength, coord.y/wavelength);
 
 }
 
@@ -169,6 +205,23 @@ if (delta_z > 0.0) // we're inside the layer
 		} 
 	}
 	
+
+// blur of the haze layer edge
+
+float blur_thickness = 50.0;
+float cphi = dot(vec3(0.0, 1.0, 0.0), relPos)/dist;
+float ctlayer; 
+float ctblur = 	0.035 ;
+
+float blur_dist;
+
+if ((abs(delta_z) < 400.0)&&(quality_level>5)&&(tquality_level>5))
+	{
+	ctlayer = delta_z/dist-0.01 + 0.02 * Noise2D(vec2(cphi,1.0),0.1) -0.01;
+	blur_dist = dist * (1.0-smoothstep(0.0,300.0,-delta_z)) * smoothstep(-400.0,-200.0, -delta_z);
+	blur_dist = blur_dist * smoothstep(ctlayer-4.0*ctblur, ctlayer-ctblur, ct) * (1.0-smoothstep(ctlayer+0.5*ctblur, ctlayer+ctblur, ct));
+	distance_in_layer = max(distance_in_layer, blur_dist);
+	}
 
 // ground haze cannot be thinner than aloft visibility in the model,
 // so we need to use aloft visibility otherwise

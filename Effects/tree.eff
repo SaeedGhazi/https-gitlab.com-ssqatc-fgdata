@@ -33,6 +33,7 @@
 		<fogtype><use>/sim/rendering/shaders/skydome</use></fogtype>
 		<fogstructure><use>/environment/fog-structure</use></fogstructure>
 		<quality_level><use>/sim/rendering/shaders/landmass</use></quality_level>
+		<tquality_level><use>/sim/rendering/shaders/transition</use></tquality_level>
 		<wind_effects><use>/sim/rendering/shaders/wind-effects</use></wind_effects>
 		<windE><use>/environment/sea/surface/wind-from-east-fps</use></windE>
 		<windN><use>/environment/sea/surface/wind-from-north-fps</use></windN>
@@ -162,6 +163,11 @@
       <name>quality_level</name>
       <type>int</type>
       <value><use>quality_level</use></value>
+     </uniform>
+     <uniform>
+      <name>tquality_level</name>
+      <type>int</type>
+      <value><use>tquality_level</use></value>
      </uniform>
      <uniform>
       <name>wind_effects</name>
@@ -299,6 +305,11 @@
       <name>quality_level</name>
       <type>int</type>
       <value><use>quality_level</use></value>
+     </uniform>
+     <uniform>
+      <name>tquality_level</name>
+      <type>int</type>
+      <value><use>tquality_level</use></value>
      </uniform>
      <uniform>
       <name>wind_effects</name>

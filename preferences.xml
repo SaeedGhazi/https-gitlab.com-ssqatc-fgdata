@@ -799,9 +799,9 @@ Started September 2000 by David Megginson, david@megginson.com
 		<terrasync preserve="y">
 			<enabled type="bool" userarchive="y">false</enabled>
 			<use-built-in-svn type="bool" userarchive="y">true</use-built-in-svn>
-			<refresh-display type="bool" userarchive="y">false</refresh-display>
 			<use-svn type="bool" userarchive="n">true</use-svn>
 			<svn-server userarchive="y">http://terrascenery.googlecode.com/svn/trunk/data/Scenery</svn-server>
+            <svn-data-server userarchive="y">http://fgfs.goneabitbursar.com/fgfsai/trunk</svn-data-server>
 			<rsync-server userarchive="n">scenery.flightgear.org::Scenery</rsync-server>
 			<scenery-dir userarchive="y"><!-- INTENTIONALLY LEFT BLANK! Do NOT edit.
 				This (empty) value is the initial/default value only. Actual data is stored/read from

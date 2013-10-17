@@ -2852,7 +2852,7 @@ for (var i=0; i<6; i=i+1)
 
 var create_8_8_nimbus_rain = func (lat, lon, alt, alpha, rain) {
 
-
+if (local_weather.hardcoded_clouds_flag == 1) {var alt_eff = alt - local_weather.offset_map["Nimbus"]; }
 
 if (local_weather.detailed_clouds_flag == 0)
 	{local_weather.create_streak("Nimbus",lat, lon, alt,500.0,32,1250.0,0.0,200.0,32,1250.0,0.0,200.0,alpha,1.0);}
@@ -2864,7 +2864,20 @@ else
 	else if (rn > 0.33) {create_8_8_nimbus_var2(lat, lon, alt, alpha);}
 	else {create_8_8_nimbus_var3(lat, lon, alt, alpha);}
 	}
+	# some ragged cloud fringes to avoid hard lines
+	var phi = alpha * math.pi/180.0;
+	var x = -15000.0 +rand() *30000.0; 
+	var y = 24000.0;
+	local_weather.create_streak("Nimbus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt_eff,500.0,12,1310.0,0.2,500.0,4,1310.0,0.0,1500.0,alpha,1.0);
+	
+	x=-15000.0 +rand() *30000.0; ; y=-24000.0;
+	local_weather.create_streak("Nimbus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt_eff,500.0,12,1310.0,0.2,500.0,4,1310.0,0.0,1500.0,alpha,1.0);
 
+	x=24000.0; y=-15000.0 +rand() *30000.0; 
+	local_weather.create_streak("Nimbus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt_eff,500.0,4,1310.0,0.0,1500.0,12,1310.0,0.2,500.0,alpha,1.0);
+	
+	x=-24000.0; y=-15000.0 +rand() *30000.0; 
+	local_weather.create_streak("Nimbus",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt_eff,500.0,4,1310.0,0.0,1500.0,12,1310.0,0.2,500.0,alpha,1.0);
 	
 if (rain > 0.1)
 	{

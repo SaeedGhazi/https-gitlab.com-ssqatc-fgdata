@@ -158,6 +158,12 @@
         <object-name>showMessages</object-name>
       </binding>
     </checkbox>
+    <text>
+      <row>1</row>
+      <col>1</col>
+      <label>        (for debug only)</label>
+      <halign>right</halign>
+    </text>
 
     <text>
       <row>3</row>

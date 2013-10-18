@@ -363,10 +363,16 @@
       <property>/sim/fgcom/selected-server</property>
       <properties>/sim/gui/dialogs/multiplay/fgcom-servers</properties>
       <enable>
-        <equals>
-          <property>/sim/fgcom/enabled</property>
-          <value>1</value>
-        </equals>
+        <and>
+          <equals>
+            <property>/sim/fgcom/enabled</property>
+            <value>1</value>
+          </equals>
+          <equals>
+            <property>/sim/fgcom/test</property>
+            <value>0</value>
+          </equals>
+        </and>
       </enable>
       <binding>
         <command>dialog-apply</command>

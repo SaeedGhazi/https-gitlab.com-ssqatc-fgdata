@@ -196,10 +196,9 @@ var stepSlats = func(step) {
 # magnetos, for instance), work similarly but not compatibly, and
 # could be integrated.
 #
-var stepProps = func {
-    var dst = props.globals.getNode(arg[0]);
-    var array = props.globals.getNode(arg[1]);
-    var delta = arg[2];
+var stepProps = func(dst, array, delta) {
+    dst = props.globals.getNode(dst);
+    array = props.globals.getNode(array);
     if(dst == nil or array == nil) { return; }
 
     var sets = array.getChildren("setting");
@@ -238,30 +237,30 @@ var TRIM_RATE = 0.045;
 # events.  They are *not* good for binding to the keyboard, since (at
 # least) X11 synthesizes its own key repeats.
 #
-var elevatorTrim = func {
-    slewProp("/controls/flight/elevator-trim", arg[0] * TRIM_RATE); }
-var aileronTrim = func {
-    slewProp("/controls/flight/aileron-trim", arg[0] * TRIM_RATE); }
-var rudderTrim = func {
-    slewProp("/controls/flight/rudder-trim", arg[0] * TRIM_RATE); }
+var elevatorTrim = func(speed) {
+    slewProp("/controls/flight/elevator-trim", speed * TRIM_RATE); }
+var aileronTrim = func(speed) {
+    slewProp("/controls/flight/aileron-trim", speed * TRIM_RATE); }
+var rudderTrim = func(speed) {
+    slewProp("/controls/flight/rudder-trim", speed * TRIM_RATE); }
 
 var THROTTLE_RATE = 0.33;
 
-var adjThrottle = func {
-    adjEngControl("throttle", arg[0]); }
-var adjMixture = func {
-    adjEngControl("mixture", arg[0]); }
-var adjCondition = func {
-    adjEngControl("condition", arg[0]); }
-var adjPropeller = func {
-    adjEngControl("propeller-pitch", arg[0]); }
+var adjThrottle = func(speed) {
+    adjEngControl("throttle", speed); }
+var adjMixture = func(speed) {
+    adjEngControl("mixture", speed); }
+var adjCondition = func(speed) {
+    adjEngControl("condition", speed); }
+var adjPropeller = func(speed) {
+    adjEngControl("propeller-pitch", speed); }
 
-var adjEngControl = func {
-    var delta = arg[1] * THROTTLE_RATE * getprop("/sim/time/delta-realtime-sec");
+var adjEngControl = func(prop, speed) {
+    var delta = speed * THROTTLE_RATE * getprop("/sim/time/delta-realtime-sec");
     var (value, count) = (0, 0);
     foreach(var e; engines) {
         if(e.selected.getValue()) {
-            var node = e.controls.getNode(arg[0], 1);
+            var node = e.controls.getNode(prop, 1);
             node.setValue(node.getValue() + delta);
             value += node.getValue(); # must read again because of clamping
             count += 1;

@@ -16,12 +16,12 @@ updateContrail = func{
     contrail_temp_Node.setValue(con_temp);
 
     if (y < con_temp and y < -40){
-            contrail_Node.setValue(1);
-        } else {
-            contrail_Node.setValue(0);
-        }
+        contrail_Node.setValue(1);
+    } else {
+        contrail_Node.setValue(0);
+    }
 
-        settimer(updateContrail,30)
+    settimer(updateContrail,30)
 }
 
 ### Contrail

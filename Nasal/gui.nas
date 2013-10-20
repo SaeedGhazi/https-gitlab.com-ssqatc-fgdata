@@ -242,11 +242,10 @@ var currTimer = 0;
 # API.  Note especially the slightly tricky addChild() method.
 #
 var Widget = {
-    set : func { me.node.getNode(arg[0], 1).setValue(arg[1]); },
+    set : func(name, val) { me.node.getNode(name, 1).setValue(val); },
     prop : func { return me.node; },
     new : func { return { parents : [Widget], node : props.Node.new() } },
-    addChild : func {
-        var type = arg[0];
+    addChild : func(type) {
         var idx = size(me.node.getChildren(type));
         var name = type ~ "[" ~ idx ~ "]";
         var newnode = me.node.getNode(name, 1);
@@ -1134,9 +1133,9 @@ var showWeightDialog = func {
 #     </text>
 # </help>
 #
-var showHelpDialog = func {
-    var node = props.globals.getNode(arg[0]);
-    if (arg[0] == "/sim/help" and size(node.getChildren()) < 4) {
+var showHelpDialog = func(path, toggle=0) {
+    var node = props.globals.getNode(path);
+    if (path == "/sim/help" and size(node.getChildren()) < 4) {
         node = node.getChild("common");
     }
 
@@ -1147,7 +1146,7 @@ var showHelpDialog = func {
             name = getprop("/sim/aircraft");
         }
     }
-    var toggle = size(arg) > 1 and arg[1] != nil and arg[1] > 0;
+    var toggle = toggle > 0;
     if (toggle and contains(dialog, name)) {
         fgcommand("dialog-close", props.Node.new({ "dialog-name": name }));
         delete(dialog, name);

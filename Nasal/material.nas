@@ -50,17 +50,14 @@
 
 var dialog = nil;
 
-var colorgroup = func {
-	var parent = arg[0];  # pui parent
-	var name = arg[1];    # "diffuse"
-	var base = arg[2];
-	var undef = func { props.globals.getNode(base ~ name ~ "/" ~ arg[0]) == nil };
+var colorgroup = func(parent, name, base) {
+	var undef = func { props.globals.getNode(base ~ name ~ "/" ~ parent) == nil };
 
 	if (undef("red") and undef("green") and undef("blue")) {
 		return 0;
 	}
 
-	if (arg[3] != nil) {
+	if (base != nil) {
 		parent.addChild("hrule").setColor(1, 1, 1, 0.5);
 	}
 
@@ -76,11 +73,7 @@ var colorgroup = func {
 }
 
 
-var mat = func {
-	var parent = arg[0];
-	var name = arg[1];
-	var path = arg[2];
-	var format = arg[3];
+var mat = func(parent, name, path, format, min=nil, max=nil) {
 	if (props.globals.getNode(path) != nil) {
 		var grp = parent.addChild("group");
 		grp.set("layout", "hbox");
@@ -91,9 +84,9 @@ var mat = func {
 		var slider = grp.addChild("slider");
 		slider.set("property", path);
 		slider.set("live", 1);
-		if (size(arg) == 6) {
-			slider.set("min", arg[4]);
-			slider.set("max", arg[5]);
+		if (min != nil and max != nil) {
+			slider.set("min", min);
+			slider.set("max", max);
 		}
 		slider.setBinding("dialog-apply");
 
@@ -107,8 +100,7 @@ var mat = func {
 }
 
 
-var showDialog = func {
-	var base = arg[0];
+var showDialog = func(base, title=nil, x=nil, y=nil) {
 	while (size(base) and substr(base, size(base) - 1, 1) == "/") {
 		base = substr(base, 0, size(base) - 1);
 	}
@@ -121,14 +113,14 @@ var showDialog = func {
 		parentdir = c ~ parentdir;
 	}
 
-	var title = if (size(arg) > 1 and arg[1] != nil) { arg[1] } else { parentdir };
+	if (title == nil) var title = parentdir;
 	var name = "material-" ~ parentdir;
 	base = base ~ "/";
 
 	dialog = gui.Widget.new();
 	dialog.set("name", name);
-	if (size(arg) > 2 and arg[2] != nil) { dialog.set("x", arg[2]) }
-	if (size(arg) > 3 and arg[3] != nil) { dialog.set("y", arg[3]) }
+	if (x != nil) dialog.set("x", x);
+	if (y != nil) dialog.set("y", y);
 	dialog.set("layout", "vbox");
 
 	var titlebar = dialog.addChild("group");
@@ -152,7 +144,7 @@ var showDialog = func {
 	h += colorgroup(dialog, "emission", base, h);
 	h += colorgroup(dialog, "specular", base, h);
 
-	var undef = func { props.globals.getNode(base ~ arg[0]) == nil };
+	var undef = func(prop) { props.globals.getNode(base ~ prop) == nil };
 	if (!(undef("shininess") and undef("transparency/alpha") and undef("threshold"))) {
 		if (h) {
 			dialog.addChild("hrule").setColor(1, 1, 1, 0.5);

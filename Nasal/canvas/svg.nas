@@ -38,6 +38,8 @@ var parsesvg = func(group, path, options = nil)
   {
     if( css_num.ends_with("px") )
       return substr(css_num, 0, size(css_num) - 2);
+    else if( css_num.ends_with("%") )
+      return substr(css_num, 0, size(css_num) - 1) / 100;
 
     return css_num;
   }
@@ -291,6 +293,10 @@ var parsesvg = func(group, path, options = nil)
     var font_size = style["font-size"];
     if( font_size != nil )
       stack[-1].setDouble("character-size", num(font_size));
+
+    var line_height = style["line-height"];
+    if( line_height != nil )
+      stack[-1].setDouble("line-height", num(line_height));
   }
 
   # ----------------------------------------------------------------------------
@@ -526,7 +532,7 @@ var parsesvg = func(group, path, options = nil)
           # TODO should we combine multiple lines into a single text separated
           #      with newline characters?
           y += line
-             * 1.25 # TODO read correct line spacing
+             * stack[-1].get("line-height", 1.25)
              * stack[-1].get("character-size", character_size);
 
         # Use id of text element with single tspan child, fall back to id of

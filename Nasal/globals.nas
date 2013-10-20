@@ -116,12 +116,11 @@ var setlistener = func(node, fn, init = 0, runtime = 1) {
 # error.
 #
 var defined = func(sym) {
-    var fn = 1;
-    while((var frame = caller(fn)) != nil) {
-        if(contains(frame[0], sym)) return 1;
-        fn += 1;
-    }
-    return contains(globals, sym);
+    if (contains(caller(1)[0], sym)) return 1;
+    var fn = caller(1)[1];
+    for (var l=0; (var frame = closure(fn, l)) != nil; l+=1)
+        if (contains(frame, sym)) return 1;
+    return 0;
 }
 
 

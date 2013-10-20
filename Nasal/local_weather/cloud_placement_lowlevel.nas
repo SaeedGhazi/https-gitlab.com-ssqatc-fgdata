@@ -119,7 +119,7 @@ for (i=0; i< max_num_streaks; i=i+1)
 		y = y - arg.Dy + 2.0 * rand() * arg.Dy;
 		
 		var flag = 0;
-		var	bias =1.0 - (1.0* abs(i-0.5 * max_num_streaks)/max_num_streaks +  1.0* abs(j-0.5 * aspect_num_clouds)/aspect_num_clouds);
+		var	bias =1.0 - (1.0* math.abs(i-0.5 * max_num_streaks)/max_num_streaks +  1.0* math.abs(j-0.5 * aspect_num_clouds)/aspect_num_clouds);
 		var comp = -.25 * rnd_array[j] + 0.75 * bias;
 		
 		comp = comp + arg.size_bias;
@@ -177,7 +177,7 @@ for (var i = 0; i<arg.n_sticks; i=i+1)
 		var y = stick_y;
 		var x = stick_x - 0.5 * stick_length * arg.cloud_spacing;
 		var inc = j * arg.cloud_spacing;
-		var pos_size_scale = base_size_scale +  base_size_scale * 2.0* (1.0 - 2.0* abs(0.5 * stick_length - j)/stick_length);
+		var pos_size_scale = base_size_scale +  base_size_scale * 2.0* (1.0 - 2.0* math.abs(0.5 * stick_length - j)/stick_length);
 		local_weather.cloud_size_scale = pos_size_scale;
 		local_weather.cloud_size_scale = stick_size_scale * local_weather.cloud_size_scale;
 		inc = inc *  stick_size_scale;
@@ -228,7 +228,7 @@ for (var j=0; j<arg.n_domains; j=j+1)
 		var lat = arg.blat + m_to_lat * (y * math.cos(arg.dir) - x * math.sin(arg.dir));
 		var lon = arg.blon + m_to_lon * (x * math.cos(arg.dir) + y * math.sin(arg.dir));
 		var alt = arg.balt + arg.alt_var * 2 * (rand() - 0.5);
-		if ((abs(x-domain_pos_x) < 0.3 * domain_size_x) or (abs(y-domain_pos_y) < 0.3 * domain_size_y))
+		if ((math.abs(x-domain_pos_x) < 0.3 * domain_size_x) or (math.abs(y-domain_pos_y) < 0.3 * domain_size_y))
 			{path = select_cloud_model(arg.htype,arg.hsubtype);
 			create_cloud_vec(path, lat, lon, alt, 0.0);}
 		}
@@ -239,7 +239,7 @@ for (var j=0; j<arg.n_domains; j=j+1)
 		lat = arg.blat + m_to_lat * (y * math.cos(arg.dir) - x * math.sin(arg.dir));
 		lon = arg.blon + m_to_lon * (x * math.cos(arg.dir) + y * math.sin(arg.dir));
 		alt = arg.balt + arg.alt_var * 2 * (rand() - 0.5);
-		if ((abs(x-domain_pos_x) < 0.4 * domain_size_x) or (abs(y-domain_pos_y) < 0.4 * domain_size_y))
+		if ((math.abs(x-domain_pos_x) < 0.4 * domain_size_x) or (math.abs(y-domain_pos_y) < 0.4 * domain_size_y))
 			{
 			path = select_cloud_model(arg.type,arg.subtype);
 			create_cloud_vec(path, lat, lon, alt, 0.0);

@@ -261,6 +261,7 @@ Started September 2000 by David Megginson, david@megginson.com
 				<screen-distance type="double" userarchive="y">0.5</screen-distance>
 				<stereo-mode type="string" userarchive="y">OFF</stereo-mode>
 			</osg-displaysettings>
+            <osg-notify-level type="string" userarchive="y">debug-info</osg-notify-level>
 			<cache type="bool">true</cache>
 		</rendering>
 		<model-hz type="int">120</model-hz>

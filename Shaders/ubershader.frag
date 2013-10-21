@@ -192,7 +192,7 @@ void main (void)
 		} else {
 			lightmapcolor = lightmapTexel.rgb * lightmap_r_color * lightmapFactor.r;
 		}
-		fragColor.rgb = max(fragColor.rgb, lightmapcolor * gl_FrontMaterial.diffuse.rgb * mixedcolor);
+		fragColor.rgb = max(fragColor.rgb, lightmapcolor * gl_FrontMaterial.diffuse.rgb * smoothstep(0.0, 1.0, mixedcolor*.5 + lightmapcolor*.5));
 	}
 //////////////////////////////////////////////////////////////////////
 // END lightmap

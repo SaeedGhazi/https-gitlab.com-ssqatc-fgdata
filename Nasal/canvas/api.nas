@@ -142,6 +142,20 @@ var Element = {
       _node: props.wrapNode(ghost._node_ghost)
     };
   },
+  # Get parent group/element
+  getParent: func()
+  {
+    var parent_ghost = me._getParent();
+    if( parent_ghost == nil )
+      return nil;
+
+    var type = props.wrapNode(parent_ghost._node_ghost).getName();
+    var factory = me._getFactory(type);
+    if( factory == nil )
+      return parent_ghost;
+
+    return factory(parent_ghost);
+  },
   # Check if elements represent same instance
   #
   # @param el Other Element or element ghost

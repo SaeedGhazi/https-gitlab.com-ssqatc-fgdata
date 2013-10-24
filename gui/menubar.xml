@@ -60,6 +60,14 @@
 		</item>
 
 		<item>
+			<name>terrasync</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>terrasync</dialog-name>
+			</binding>
+		</item>
+
+		<item>
 			<name>exit</name>
 			<key>Esc</key>
 			<binding>
@@ -289,15 +297,6 @@
 				<script>wildfire.dialog.show()</script>
 			</binding>
 		</item>
-
-		<item>
-			<name>terrasync</name>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>terrasync</dialog-name>
-			</binding>
-		</item>
-
 	</menu>
 
 	<menu>

@@ -3,6 +3,58 @@
 <PropertyList>
   <name>terrasync</name>
     
+  <nasal>
+      <open>
+          
+          var computeStatusText = func {
+              # first, check if the system is actually enabled
+              if (!getprop('/sim/terrasync/enabled'))
+                  return "Downloading disabled";
+            
+              # only happens if terrasync failed to activate, so
+             # indicates a problem
+              if (!getprop('/sim/terrasync/active'))
+                  return "unable to start downloading";
+                  
+              var errCount = getprop('/sim/terrasync/error-count');
+              if (errCount > 0)
+                  return "errors occurred during download";
+                  
+              # we need to suggest some remedial action here!
+              if (getprop('/sim/terrasync/stalled'))
+                  return "Downloading has stalled. Check yuor network connection and settings";
+                  
+              if (getprop('/sim/terrasync/busy')) {
+                  var kbytesSec = getprop('/sim/terrasync/transfer-rate-bytes-sec') / 1024;
+                  return sprintf('Downloading: %dKB/sec', int(kbytesSec));
+              }
+                  
+              # we are enabled but not busy, so idle
+              return "Idle";
+          }
+          
+          # timer function, update summary status string
+          var updateStatusText = func {
+          
+              var s = computeStatusText();
+              setprop("/sim/gui/dialogs/terrasync/status", s);
+          }
+          
+          # the TerraSync properties of interest are tied, so we can't use a
+          # listener. Let's poll while the dialog is open; not ideal but not
+          # a major problem.
+          var statusTimer = maketimer(0.4, updateStatusText);     
+          statusTimer.start();     
+          updateStatusText();
+      </open>
+      
+      <close>
+          statusTimer.stop();
+          statusTimer = nil;
+      </close>
+  
+  </nasal>
+    
   <layout>vbox</layout>
 
   <group>
@@ -10,7 +62,7 @@
     <empty><stretch>1</stretch></empty>
 
     <text>
-      <label>Automatic Scenery Download</label>
+      <label>Automatic Download of Scenery and Data</label>
     </text>
 
 	<empty><stretch>1</stretch></empty>
@@ -53,7 +105,7 @@
       <halign>left</halign>
       <row>1</row><col>1</col><colspan>3</colspan>
       <property>/sim/terrasync/enabled</property>
-      <label>Enable automatic scenery download/update</label>
+      <label>Enable automatic download/update</label>
       <live>true</live>
       <binding>
         <command>dialog-apply</command>
@@ -67,24 +119,38 @@
       </enable>
     </checkbox>
 
-    <text>
-      <halign>right</halign>
-      <row>3</row><col>1</col>
-      <label>Target directory:</label>
-    </text>
-    <combo>
-      <name>scenery-dir</name>
+    <checkbox>
+      <name>ai-data-enabled</name>
       <halign>left</halign>
-      <row>3</row>
-      <col>2</col><colspan>2</colspan>
-      <pref-width>400</pref-width>
-      <property>/sim/terrasync/scenery-dir</property>
-       <binding>
+      <row>2</row><col>2</col><colspan>2</colspan>
+      <property>/sim/terrasync/ai-data-enabled</property>
+      <label>Download traffic and multi-player aircraft</label>
+      <live>true</live>
+      <binding>
         <command>dialog-apply</command>
-        <object-name>scenery-dir</object-name>
+        <object-name>ai-data-enabled</object-name>
       </binding>
-    </combo>
-
+      <enable>
+        <property>/sim/terrasync/enabled</property>
+      </enable>
+    </checkbox>
+    
+    <checkbox>
+      <name>other-data-enabled</name>
+      <halign>left</halign>
+      <row>3</row><col>2</col><colspan>2</colspan>
+      <property>/sim/terrasync/other-data-enabled</property>
+      <label>Download other data files</label>
+      <live>true</live>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>other-data-enabled</object-name>
+      </binding>
+      <enable>
+        <property>/sim/terrasync/enabled</property>
+      </enable>
+    </checkbox>
+    
     <text>
       <name>warning_text</name>
       <row>4</row>
@@ -98,44 +164,6 @@
       <halign>center</halign>
       <label/>
     </text>
-
-    <text>
-      <halign>right</halign>
-      <row>5</row><col>1</col>
-      <label>Remote scenery server:</label>
-    </text>
-    <input>
-      <name>svn-server</name>
-      <halign>left</halign>
-      <row>5</row>
-      <col>2</col><colspan>2</colspan>
-      <pref-width>400</pref-width>
-      <property>/sim/terrasync/svn-server</property>
-      <enable>
-        <!-- display only, editing disabled for now, since there is no reason
-             to change/switch between servers for now -->
-        <false/>
-        <!--property>/sim/terrasync/enabled</property-->
-      </enable>
-      <!--binding>
-        <command>dialog-apply</command>
-        <object-name>svn-server</object-name>
-      </binding-->
-    </input>
-
-    
-    
-    <!--
-    <button>
-      <legend>Manual Refresh</legend>
-      <border>2</border>
-      <row>6</row><col>3</col>
-      <binding>
-        <command>reinit</command>
-        <subsystem>tile-manager</subsystem>
-      </binding>
-    </button>
-        -->
 
   </group>
 
@@ -187,41 +215,45 @@
       </equals>
     </visible>
     
+    <!-- status text is generated by Nasal dynamically -->
     <text>
       <row>0</row>
+      <col>0</col>
+      <colspan>2</colspan>
+      
+      <halign>left</halign>
+      <pref-width>200</pref-width>
+      <format>Status: %s</format>
+      <property>/sim/gui/dialogs/terrasync/status</property>
+      <live>true</live>
+      <color>
+        <red>0.7</red>
+        <green>0.7</green>
+        <blue>0.7</blue>
+        <alpha>1</alpha>
+      </color>
+    </text>
+    
+    <text>
+      <halign>left</halign>
+      <row>1</row>
+      <col>0</col>
+      <label>KBytes downloaded:</label>
+      <color>
+        <red>0.7</red>
+        <green>0.7</green>
+        <blue>0.7</blue>
+        <alpha>1</alpha>
+      </color>
+    </text>
+    <text>
+      <row>1</row>
       <col>1</col>
-      <halign>left</halign>
-      <pref-width>90</pref-width>
-      <label>Status:</label>
-      <color>
-        <red>0.7</red>
-        <green>0.7</green>
-        <blue>0.7</blue>
-        <alpha>1</alpha>
-      </color>
-    </text>
-
-    <text>
-      <halign>left</halign>
-      <row>0</row>
-      <col>2</col>
-      <label>Active:</label>
-      <color>
-        <red>0.7</red>
-        <green>0.7</green>
-        <blue>0.7</blue>
-        <alpha>1</alpha>
-      </color>
-    </text>
-    <text>
-      <row>0</row>
-      <col>3</col>
-      <pref-width>90</pref-width>
-      <halign>left</halign>
+      <format>%d</format>
+      <property>/sim/terrasync/downloaded-kbytes</property>
+      <live>true</live>
+      <halign>right</halign>
       <stretch>true</stretch>
-      <format>%s</format>
-      <property>/sim/terrasync/active</property>
-      <live>true</live>
       <color>
         <red>0.7</red>
         <green>0.7</green>
@@ -229,121 +261,11 @@
         <alpha>1</alpha>
       </color>
     </text>
-
-    <text>
-      <halign>left</halign>
-      <row>0</row>
-      <col>4</col>
-      <label>Errors:</label>
-      <color>
-        <red>0.7</red>
-        <green>0.7</green>
-        <blue>0.7</blue>
-        <alpha>1</alpha>
-      </color>
-    </text>
-    <text>
-      <row>0</row>
-      <col>5</col>
-      <format>%s</format>
-      <property>/sim/terrasync/error-count</property>
-      <live>true</live>
-      <color>
-        <red>0.7</red>
-        <green>0.7</green>
-        <blue>0.7</blue>
-        <alpha>1</alpha>
-      </color>
-    </text>
-
-    <text>
-      <halign>left</halign>
-      <row>1</row>
-      <col>2</col>
-      <label>Sync in progress:</label>
-      <color>
-        <red>0.7</red>
-        <green>0.7</green>
-        <blue>0.7</blue>
-        <alpha>1</alpha>
-      </color>
-    </text>
-    <text>
-      <row>1</row>
-      <col>3</col>
-      <halign>left</halign>
-      <stretch>true</stretch>
-      <format>%s</format>
-      <property>/sim/terrasync/busy</property>
-      <live>true</live>
-      <color>
-        <red>0.7</red>
-        <green>0.7</green>
-        <blue>0.7</blue>
-        <alpha>1</alpha>
-      </color>
-    </text>
-
+    
     <text>
       <halign>left</halign>
       <row>2</row>
-      <col>2</col>
-      <label>Stalled:</label>
-      <color>
-        <red>0.7</red>
-        <green>0.7</green>
-        <blue>0.7</blue>
-        <alpha>1</alpha>
-      </color>
-    </text>
-    <text>
-      <row>2</row>
-      <col>3</col>
-      <halign>left</halign>
-      <stretch>true</stretch>
-      <format>%s</format>
-      <property>/sim/terrasync/stalled</property>
-      <live>true</live>
-      <color>
-        <red>0.7</red>
-        <green>0.7</green>
-        <blue>0.7</blue>
-        <alpha>1</alpha>
-      </color>
-    </text>
-
-    <text>
-      <halign>left</halign>
-      <row>3</row>
-      <col>2</col>
-      <label>Built-in SVN available:</label>
-      <color>
-        <red>0.7</red>
-        <green>0.7</green>
-        <blue>0.7</blue>
-        <alpha>1</alpha>
-      </color>
-    </text>
-    <text>
-      <row>3</row>
-      <col>3</col>
-      <halign>left</halign>
-      <stretch>true</stretch>
-      <format>%s</format>
-      <property>/sim/terrasync/built-in-svn-available</property>
-      <live>true</live>
-      <color>
-        <red>0.7</red>
-        <green>0.7</green>
-        <blue>0.7</blue>
-        <alpha>1</alpha>
-      </color>
-    </text>
-
-    <text>
-      <halign>left</halign>
-      <row>1</row>
-      <col>4</col>
+      <col>0</col>
       <label>Processed elements:</label>
       <color>
         <red>0.7</red>
@@ -353,13 +275,13 @@
       </color>
     </text>
     <text>
-      <row>1</row>
-      <col>5</col>
+      <row>2</row>
+      <col>1</col>
       <format>%s</format>
       <property>/sim/terrasync/update-count</property>
       <live>true</live>
       <stretch>true</stretch>
-      <halign>fill</halign>
+      <halign>right</halign>
       <color>
         <red>0.7</red>
         <green>0.7</green>
@@ -370,8 +292,8 @@
 
     <text>
       <halign>left</halign>
-      <row>2</row>
-      <col>4</col>
+      <row>3</row>
+      <col>0</col>
       <label>Processed scenery tiles:</label>
       <color>
         <red>0.7</red>
@@ -381,13 +303,13 @@
       </color>
     </text>
     <text>
-      <row>2</row>
-      <col>5</col>
+      <row>3</row>
+      <col>1</col>
       <format>%s</format>
       <property>/sim/terrasync/tile-count</property>
       <live>true</live>
       <stretch>true</stretch>
-      <halign>fill</halign>
+      <halign>right</halign>
       <color>
         <red>0.7</red>
         <green>0.7</green>

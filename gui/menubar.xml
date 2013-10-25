@@ -60,6 +60,14 @@
 		</item>
 
 		<item>
+			<name>input-config</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>input-config</dialog-name>
+			</binding>
+		</item>
+        
+		<item>
 			<name>terrasync</name>
 			<binding>
 				<command>dialog-show</command>
@@ -690,15 +698,6 @@
 			<enabled>false</enabled>
 		</item>
 
-
-		<item>
-			<name>interface-config</name>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>interface-dialog</dialog-name>
-			</binding>
-			<enabled>true</enabled>
-		</item>
 	</menu>
 
 	<menu>

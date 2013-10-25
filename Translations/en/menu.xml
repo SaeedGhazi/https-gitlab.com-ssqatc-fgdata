@@ -12,6 +12,7 @@
 	<snap-shot>Screenshot                      </snap-shot>
 	<snap-shot-dir>Screenshot Directory</snap-shot-dir>
 	<sound-config>Sound Configuration</sound-config>
+    <input-config>Input Configuration</input-config>
 	<exit>Quit                               </exit>
 
 	<!-- View menu -->

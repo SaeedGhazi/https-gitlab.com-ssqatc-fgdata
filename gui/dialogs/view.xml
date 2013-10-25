@@ -149,13 +149,42 @@
 
       <checkbox>
         <halign>left</halign>
-        <label>Show view name popup</label>
+        <label>Show popup messages</label>
+        <!-- generalising this property for all popups -->
         <property>/sim/view-name-popup</property>
         <binding>
           <command>dialog-apply</command>
         </binding>
       </checkbox>
 
+      <checkbox>
+        <halign>left</halign>
+        <label>Show popup when cycling mouse behaviour</label>
+        <property>/sim/mouse/cycle-mode-popup</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+        <enable>/sim/view-name-popup</enable>
+      </checkbox>
+      
+      <checkbox>
+        <halign>left</halign>
+        <label>Show tooltips</label>
+        <property>/sim/mouse/tooltips-enabled</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+      
+      <checkbox>
+          <halign>left</halign>
+          <label>Show tooltip on mouse press</label>
+        <property>/sim/mouse/click-shows-tooltip</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+      
       <checkbox>
         <halign>left</halign>
         <label>Show 2D panel</label>

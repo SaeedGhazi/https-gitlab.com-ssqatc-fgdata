@@ -699,10 +699,12 @@ Started September 2000 by David Megginson, david@megginson.com
 
 		<mouse>
 			<hide-cursor type="bool" userarchive="y">true</hide-cursor>
-            <right-button-mode-cycle-enabled type="bool" userarchive="y">true</right-button-mode-cycle-enabled>
+            <right-button-mode-cycle-enabled type="bool" userarchive="y">false</right-button-mode-cycle-enabled>
+            <cycle-mode-popup type="bool" userarchive="y">true</cycle-mode-popup>
 			<cursor-timeout-sec type="double" userarchive="y">10.0</cursor-timeout-sec>
-            <click-shows-tooltip type="bool" userarchive="y">false</click-shows-tooltip>
-            <tooltip-delay-msec type="int" userarchive="y">-1</tooltip-delay-msec>
+            <click-shows-tooltip type="bool" userarchive="y">true</click-shows-tooltip>
+            <tooltip-delay-msec type="int" userarchive="y">800</tooltip-delay-msec>
+            <tooltips-enabled type="bool" userarchive="y">true</tooltips-enabled>
             
             <drag-sensitivity type="double" userarchive="y">1.0</drag-sensitivity>
             <invert-mouse-wheel type="bool" userarchive="y">false</invert-mouse-wheel>

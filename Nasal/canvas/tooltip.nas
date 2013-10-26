@@ -118,7 +118,7 @@ var Tooltip = {
   {
     var msg = me._label;
     if (me._property != nil) {
-      var val = me._remapValue(me._property.getValue());
+      var val = me._remapValue(me._property.getValue() or 0);
       msg = sprintf(me._label, val);
     }
 

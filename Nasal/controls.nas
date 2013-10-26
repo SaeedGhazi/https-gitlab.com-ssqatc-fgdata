@@ -549,6 +549,10 @@ var cycleMouseMode = func(node)
     if (getprop('/sim/view-name-popup') == 0)
       return;
     
+    # some people like popups but strongly object to this one. As you wish. 
+    if (getprop('/sim/mouse/cycle-mode-popup') == 0)
+      return;
+      
     if (mode == 0) {
       fgcommand("clear-message", props.Node.new({ "id":"mouse-mode" }));
       return;

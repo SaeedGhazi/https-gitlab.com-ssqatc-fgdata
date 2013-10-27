@@ -42,8 +42,8 @@ Started September 2000 by David Megginson, david@megginson.com
 			<trim type="bool">true</trim>
 		</presets>
 		<startup>
-			<xsize type="int" preserve="y">800</xsize>
-			<ysize type="int" preserve="y">600</ysize>
+			<xsize type="int" preserve="y">1024</xsize>
+			<ysize type="int" preserve="y">768</ysize>
 			<splash-screen type="bool">true</splash-screen>
 			<splash-progress type="bool">true</splash-progress>
 			<splash-title>

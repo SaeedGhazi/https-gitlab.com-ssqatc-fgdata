@@ -132,6 +132,11 @@ var Transform = {
 # Baseclass for all elements on a canvas
 #
 var Element = {
+  # Reference frames (for "clip" coordinates)
+  GLOBAL: 0,
+  PARENT: 1,
+  LOCAL:  2,
+
   # Constructor
   #
   # @param ghost  Element ghost as retrieved from core methods

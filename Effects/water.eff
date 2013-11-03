@@ -45,6 +45,13 @@
 			<wrap-t>repeat</wrap-t>
 			<internal-format>normalized</internal-format>
 		</texture>
+		<texture n="7">
+			<image>Textures/Globe/ocean_depth_1.png</image>
+			<filter>linear-mipmap-linear</filter>
+			<wrap-s>repeat</wrap-s>
+			<wrap-t>repeat</wrap-t>
+			<internal-format>normalized</internal-format>
+		</texture>
 		<texture n="10">
 			<image>Textures.high/Terrain/packice-overlay.png</image>
 			<filter>linear-mipmap-linear</filter>
@@ -1021,6 +1028,10 @@
                </internal-format>
            </texture-unit>
            <texture-unit>
+               <unit>1</unit>
+               <type>noise</type>
+           </texture-unit>
+           <texture-unit>
                <unit>2</unit>
                <image>
                    <use>texture[2]/image</use>
@@ -1110,6 +1121,24 @@
                    <use>texture[6]/internal-format</use>
                </internal-format>
            </texture-unit>
+            <texture-unit>
+                <unit>7</unit>
+                <image>
+                    <use>texture[7]/image</use>
+                </image>
+                <filter>
+                    <use>texture[7]/filter</use>
+                </filter>
+                <wrap-s>
+                    <use>texture[7]/wrap-s</use>
+                </wrap-s>
+                <wrap-t>
+                    <use>texture[7]/wrap-t</use>
+                </wrap-t>
+                <internal-format>
+                    <use>texture[7]/internal-format</use>
+                </internal-format>
+            </texture-unit>
 
            <program>
                <vertex-shader>Shaders/water-gbuffer.vert</vertex-shader>
@@ -1129,6 +1158,11 @@
                <name>water_reflection</name>
                <type>sampler-2d</type>
                <value type="int">0</value>
+           </uniform>
+           <uniform>
+               <name>Noise</name>
+               <type>sampler-3d</type>
+               <value type="int">1</value>
            </uniform>
            <uniform>
                <name>water_normalmap</name>
@@ -1154,6 +1188,11 @@
                <name>perlin_normalmap</name>
                <type>sampler-2d</type>
                <value type="int">6</value>
+           </uniform>
+           <uniform>
+               <name>topo_map</name>
+               <type>sampler-2d</type>
+               <value type="int">7</value>
            </uniform>
            <!-- normalmap is .dds-->
            <uniform>
@@ -1789,6 +1828,10 @@
 					<use>texture[0]/internal-format</use>
 				</internal-format>
 			</texture-unit>
+            <texture-unit>
+                <unit>1</unit>
+                <type>noise</type>
+            </texture-unit>
 			<texture-unit>
 				<unit>2</unit>
 				<image>
@@ -1879,6 +1922,24 @@
 					<use>texture[6]/internal-format</use>
 				</internal-format>
 			</texture-unit>
+			<texture-unit>
+				<unit>7</unit>
+				<image>
+					<use>texture[7]/image</use>
+				</image>
+				<filter>
+					<use>texture[7]/filter</use>
+				</filter>
+				<wrap-s>
+					<use>texture[7]/wrap-s</use>
+				</wrap-s>
+				<wrap-t>
+					<use>texture[7]/wrap-t</use>
+				</wrap-t>
+				<internal-format>
+					<use>texture[7]/internal-format</use>
+				</internal-format>
+			</texture-unit>
 
 			<program>
 				<vertex-shader>Shaders/water.vert</vertex-shader>
@@ -1890,6 +1951,11 @@
 				<type>sampler-2d</type>
 				<value type="int">0</value>
 			</uniform>
+            <uniform>
+                <name>Noise</name>
+                <type>sampler-3d</type>
+                <value type="int">1</value>
+            </uniform>
 			<uniform>
 				<name>water_normalmap</name>
 				<type>sampler-2d</type>
@@ -1914,6 +1980,11 @@
 				<name>perlin_normalmap</name>
 				<type>sampler-2d</type>
 				<value type="int">6</value>
+			</uniform>
+			<uniform>
+				<name>topo_map</name>
+				<type>sampler-2d</type>
+				<value type="int">7</value>
 			</uniform>
             <!-- normalmap is .dds-->
             <uniform>
@@ -1966,6 +2037,20 @@
 					<use>cloud-cover[4]</use>
 				</value>
 			</uniform>
+<!--            <uniform>
+                <name>CloudCoverLo</name>
+                <type>float-vec3</type>
+                <value>
+                    <use>cloud-cover-lo</use>
+                </value>
+            </uniform>
+            <uniform>
+                <name>CloudCoverHi</name>
+                <type>float-vec3</type>
+                <value>
+                    <use>cloud-cover-hi</use>
+                </value>
+            </uniform>-->
 			<uniform>
 				<name>Status</name>
 				<type>int</type>

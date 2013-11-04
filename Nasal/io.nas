@@ -8,6 +8,57 @@ var readfile = func(file) {
     return buf;
 }
 
+# basename(<path>), dirname(<path>)
+#
+# Work like standard Unix commands: basename returns the file name from a given
+# path, and dirname returns the directory part.
+
+var basename = func(path) {
+    split("/", string.normpath(path))[-1];
+};
+
+var dirname =  func(path) {
+    path = string.normpath(path);
+    substr(path, 0, size(path) - size(basename(path)));
+};
+
+# include(<filename>)
+#
+# Loads and executes a Nasal file in place. The file is searched for in the
+# calling script directory and in standard FG directories (in that order).
+#
+# Examples:
+#
+#     io.include("Aircraft/Generic/library.nas");
+#     io.include("my_other_file.nas");
+
+var include = func(file) {
+
+    file = string.normpath(file);
+    var clr = caller();
+    var (ns, fn, fl) = clr;
+
+    var local_file = dirname(fl) ~ file;
+    var path = (stat(local_file) != nil)? local_file : resolvepath(file);
+
+    if (path == "") die("File not found: ", file);
+
+    var module = "__" ~ path ~ "__";
+    if (contains(ns, module))
+        return;
+
+    ns[module] = "included";
+
+    var code = call(compile, [readfile(path), path], var err = []);
+    if (size(err)) {
+        if (find("Parse error:", err[0]) < 0)
+            die(err[0]);
+        else
+            die(sprintf("%s\n  in included file: %s", err[0], path));
+    }
+
+    call(bind(code, ns, fn), [], nil, ns);
+}
 
 # Loads Nasal file into namespace and executes it. The namespace
 # (module name) is taken from the optional second argument, or
@@ -33,8 +84,6 @@ var load_nasal = func(file, module = nil) {
 
     var code = call(func compile(readfile(file), file), nil, var err = []);
     if (size(err)) {
-        (func nil)();                                  # FIXME hack around Nasal bug
-
         if (substr(err[0], 0, 12) == "Parse error:") { # hack around Nasal feature
             var e = split(" at line ", err[0]);
             if (size(e) == 2)
@@ -264,7 +313,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
                 pattern ~= " " ~ p;
             var rules = f[0] == "READ" ? read_rules : write_rules;
             var allow = (f[1] == "ALLOW");
-            
+
             if (substr(pattern, 0, 13) == "$FG_AIRCRAFT/") {
                 var p = substr(pattern, 13);
                 var sim = props.globals.getNode("/sim");
@@ -280,13 +329,13 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
                     pattern = string.normpath(c.getValue()) ~ "/" ~ p;
                     append(rules, [pattern, allow]);
                     printlog("info", "IORules: appending ", pattern);
-                }        
+                }
             } else {
                 if (substr(pattern, 0, 9) == "$FG_ROOT/")
                     pattern = root ~ "/" ~ substr(pattern, 9);
                 elsif (substr(pattern, 0, 9) == "$FG_HOME/")
                     pattern = home ~ "/" ~ substr(pattern, 9);
-                
+
                 append(rules, [pattern, allow]);
                 printlog("info", "IORules: appending ", pattern);
             }

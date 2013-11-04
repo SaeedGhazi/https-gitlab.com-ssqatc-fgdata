@@ -191,25 +191,28 @@ match = func(str, patt) {
 
 
 ##
-# Removes superfluous slashes, empty and "." elements, expands
-# all ".." elements, and turns all backslashes into slashes.
-# The result will start with a slash if it started with a slash
-# or backslash, it will end without slash. Should be applied to
-# absolute property or file paths, otherwise ".." elements might
-# be resolved wrongly.
+# Removes superfluous slashes, empty and "." elements,
+# expands all ".." elements keeping relative paths,
+# and turns all backslashes into slashes.
+# The result will start with a slash if it started with a slash or backslash,
+# it will end without slash.
 #
 normpath = func(path) {
 	path = replace(path, "\\", "/");
 	var prefix = size(path) and path[0] == `/` ? "/" : "";
+
 	var stack = [];
+	var relative = 1;
 
 	foreach (var e; split("/", path)) {
 		if (e == "." or e == "")
 			continue;
-		elsif (e == "..")
+		elsif (e == ".." and !relative)
 			pop(stack);
-		else
+		else {
 			append(stack, e);
+			relative = 0;
+		}
 	}
 	return size(stack) ? prefix ~ join("/", stack) : "/";
 }

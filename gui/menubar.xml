@@ -312,6 +312,7 @@
 
 		<item>
 			<name>map</name>
+            <key>Ctrl-M</key>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>map</dialog-name>

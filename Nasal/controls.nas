@@ -80,6 +80,7 @@ var throttleAxis = axisHandler("/controls/engines/engine[", "]/throttle");
 var mixtureAxis = axisHandler("/controls/engines/engine[", "]/mixture");
 var propellerAxis = axisHandler("/controls/engines/engine[", "]/propeller-pitch");
 var carbHeatAxis = axisHandler("/controls/anti-ice/engine[", "]/carb-heat");
+var conditionAxis = axisHandler("/controls/engines/engine[", "]/condition");
 
 # Joystick axis handler for controlling subsets of similar properties.
 # Shouldn't be called from other contexts.

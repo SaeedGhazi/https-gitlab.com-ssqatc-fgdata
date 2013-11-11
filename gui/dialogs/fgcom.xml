@@ -124,6 +124,12 @@
       <col>0</col>
       <label>Enabled:</label>
       <halign>right</halign>
+      <enable>
+        <equals>
+          <property>/sim/fgcom/test</property>
+          <value>0</value>
+        </equals>
+      </enable>
     </text>
     <checkbox>
       <row>0</row>
@@ -132,6 +138,12 @@
       <halign>left</halign>
       <name>enabled</name>
       <label></label>
+      <enable>
+        <equals>
+          <property>/sim/fgcom/test</property>
+          <value>0</value>
+        </equals>
+      </enable>
       <property>/sim/fgcom/enabled</property>
       <binding>
         <command>dialog-apply</command>
@@ -344,6 +356,12 @@
       <col>0</col>
       <label>Echo test:</label>
       <halign>right</halign>
+      <enable>
+        <equals>
+          <property>/sim/fgcom/enabled</property>
+          <value>1</value>
+        </equals>
+      </enable>
     </text>
     <checkbox>
       <row>0</row>
@@ -352,6 +370,12 @@
       <halign>left</halign>
       <name>test</name>
       <label></label>
+      <enable>
+        <equals>
+          <property>/sim/fgcom/enabled</property>
+          <value>1</value>
+        </equals>
+      </enable>
       <property>/sim/fgcom/test</property>
       <binding>
         <command>dialog-apply</command>

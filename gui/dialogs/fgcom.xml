@@ -180,11 +180,43 @@
     <text>
       <row>3</row>
       <col>0</col>
+      <label>Echo test:</label>
+      <halign>right</halign>
+      <enable>
+        <equals>
+          <property>/sim/fgcom/enabled</property>
+          <value>1</value>
+        </equals>
+      </enable>
+    </text>
+    <checkbox>
+      <row>3</row>
+      <col>1</col>
+      <colspan>2</colspan>
+      <halign>left</halign>
+      <name>test</name>
+      <label></label>
+      <enable>
+        <equals>
+          <property>/sim/fgcom/enabled</property>
+          <value>1</value>
+        </equals>
+      </enable>
+      <property>/sim/fgcom/test</property>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>test</object-name>
+      </binding>
+    </checkbox>
+
+    <text>
+      <row>4</row>
+      <col>0</col>
       <label>Speaker Volume:</label>
       <halign>right</halign>
     </text>
     <slider>
-      <row>3</row>
+      <row>4</row>
       <col>1</col>
       <halign>left</halign>
       <name>speaker-vol</name>
@@ -199,7 +231,7 @@
       </binding>
     </slider>
     <text>
-      <row>3</row>
+      <row>4</row>
       <col>2</col>
       <label>1234</label>
       <format>%.1f</format>
@@ -210,7 +242,7 @@
 
   <hrule/>
 
-  <!-- registration -->
+  <!-- registration (keep it for the day we need it)
   <group>
     <layout>hbox</layout>
     <empty>
@@ -330,7 +362,7 @@
   </group>
 
   <hrule/>
-
+-->
   <!-- server -->
   <group>
     <layout>hbox</layout>
@@ -351,37 +383,7 @@
     <layout>table</layout>
     <halign>left</halign>
 
-    <text>
-      <row>0</row>
-      <col>0</col>
-      <label>Echo test:</label>
-      <halign>right</halign>
-      <enable>
-        <equals>
-          <property>/sim/fgcom/enabled</property>
-          <value>1</value>
-        </equals>
-      </enable>
-    </text>
-    <checkbox>
-      <row>0</row>
-      <col>1</col>
-      <colspan>2</colspan>
-      <halign>left</halign>
-      <name>test</name>
-      <label></label>
-      <enable>
-        <equals>
-          <property>/sim/fgcom/enabled</property>
-          <value>1</value>
-        </equals>
-      </enable>
-      <property>/sim/fgcom/test</property>
-      <binding>
-        <command>dialog-apply</command>
-        <object-name>test</object-name>
-      </binding>
-    </checkbox>
+
 
     <combo>
       <name>server</name>

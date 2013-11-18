@@ -5,6 +5,7 @@
     <parameters>
 		<texture n="2">
 		    <image>Textures.high/Terrain/grass10c.dds</image>
+			<type>2d</type>
 		    <filter>linear-mipmap-linear</filter>
 		    <wrap-s>repeat</wrap-s>
 		    <wrap-t>repeat</wrap-t>
@@ -12,6 +13,7 @@
 		</texture>
 		<texture n="3">
 		    <image>Textures.high/Terrain/rock7.dds</image>
+			<type>2d</type>
 		    <filter>linear-mipmap-linear</filter>
 		    <wrap-s>repeat</wrap-s>
 		    <wrap-t>repeat</wrap-t>
@@ -19,6 +21,7 @@
 		</texture>
 		<texture n="4">
 		    <image>Textures.high/Terrain.winter/mixedforest1c.dds</image>
+			<type>2d</type>
 		    <filter>linear-mipmap-linear</filter>
 		    <wrap-s>repeat</wrap-s>
 		    <wrap-t>repeat</wrap-t>

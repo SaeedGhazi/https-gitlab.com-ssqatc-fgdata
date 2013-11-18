@@ -204,6 +204,7 @@
 		</render-bin>
 		<texture-unit>
 			<unit>0</unit>
+			<type><use>texture[0]/type</use></type>
 			<image><use>texture[0]/image</use></image>
 			<filter><use>texture[0]/filter</use></filter>
 			<wrap-s><use>texture[0]/wrap-s</use></wrap-s>
@@ -451,6 +452,9 @@
 				<image>
 					<use>texture[0]/image</use>
 				</image>
+                <type>
+                    <use>texture[0]/type</use>
+                </type>
 				<filter>
 					<use>texture[0]/filter</use>
 				</filter>

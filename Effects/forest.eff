@@ -9,12 +9,14 @@
         <wrap-s>repeat</wrap-s>
         <wrap-t>repeat</wrap-t>
         <internal-format>normalized</internal-format>
+		<type>2d</type>
     </texture>
     <texture n="3">
         <image>Textures/Terrain/forest-colors.png</image>
         <filter>linear-mipmap-linear</filter>
         <wrap-s>mirror</wrap-s>
         <internal-format>normalized</internal-format>
+		<type>1d</type>
     </texture>
     <texture n="4">
         <image>Textures/Terrain/forest.png</image>
@@ -22,6 +24,7 @@
         <wrap-s>repeat</wrap-s>
         <wrap-t>repeat</wrap-t>
         <internal-format>normalized</internal-format>
+		<type>2d</type>
     </texture>
     <texture n="5">
       <image>Textures.high/Terrain/forest-relief.png</image>
@@ -29,6 +32,7 @@
       <wrap-s>repeat</wrap-s>
       <wrap-t>repeat</wrap-t>
       <internal-format>normalized</internal-format>
+	  <type>2d</type>
     </texture>
     <snow-level><use>/environment/snow-level-m</use></snow-level>
     <depth-factor type="float">0.04</depth-factor>
@@ -114,6 +118,7 @@
       </texture-unit>
       <texture-unit>
         <unit>1</unit>
+		  <type><use>texture[2]/type</use></type>
           <image><use>texture[2]/image</use></image>
           <filter><use>texture[2]/filter</use></filter>
           <wrap-s><use>texture[2]/wrap-s</use></wrap-s>
@@ -124,7 +129,7 @@
       </texture-unit>
       <texture-unit>
         <unit>3</unit>
-          <type>1d</type>
+		  <type><use>texture[3]/type</use></type>
           <image><use>texture[3]/image</use></image>
           <filter><use>texture[3]/filter</use></filter>
           <wrap-s><use>texture[3]/wrap-s</use></wrap-s>
@@ -134,6 +139,7 @@
       </texture-unit>
       <texture-unit>
         <unit>2</unit>
+		  <type><use>texture[4]/type</use></type>
           <image><use>texture[4]/image</use></image>
           <filter><use>texture[4]/filter</use></filter>
           <wrap-s><use>texture[4]/wrap-s</use></wrap-s>
@@ -144,6 +150,7 @@
       </texture-unit>
       <texture-unit>
         <unit>5</unit>
+		<type><use>texture[5]/type</use></type>
         <image><use>texture[5]/image</use></image>
         <filter><use>texture[5]/filter</use></filter>
         <wrap-s><use>texture[5]/wrap-s</use></wrap-s>

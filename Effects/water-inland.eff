@@ -5,6 +5,7 @@
 	<parameters>
 		<texture n="0">
 			<image>Textures/Water/water-reflection.png</image>
+			<type>2d</type>
 			<filter>linear-mipmap-linear</filter>
 			<wrap-s>repeat</wrap-s>
 			<wrap-t>repeat</wrap-t>
@@ -12,6 +13,7 @@
 		</texture>
 		<texture n="2">
 			<image>Textures/Water/waves-ver10-nm.png</image>
+			<type>2d</type>
 			<filter>linear-mipmap-linear</filter>
 			<wrap-s>repeat</wrap-s>
 			<wrap-t>repeat</wrap-t>
@@ -19,6 +21,7 @@
 		</texture>
 		<texture n="3">
 			<image>Textures/Water/water_sine_nmap.png</image>
+			<type>2d</type>
 			<filter>linear-mipmap-linear</filter>
 			<wrap-s>repeat</wrap-s>
 			<wrap-t>repeat</wrap-t>
@@ -26,6 +29,7 @@
 		</texture>
 		<texture n="4">
 			<image>Textures/Water/water-reflection-grey.png</image>
+			<type>2d</type>
 			<filter>linear-mipmap-linear</filter>
 			<wrap-s>repeat</wrap-s>
 			<wrap-t>repeat</wrap-t>
@@ -33,6 +37,7 @@
 		</texture>
 		<texture n="5">
 			<image>Textures/Water/sea_foam.png</image>
+			<type>2d</type>
 			<filter>linear-mipmap-linear</filter>
 			<wrap-s>repeat</wrap-s>
 			<wrap-t>repeat</wrap-t>
@@ -40,6 +45,7 @@
 		</texture>
 		<texture n="6">
 			<image>Textures/Water/perlin-noise-nm.png</image>
+			<type>2d</type>
 			<filter>linear-mipmap-linear</filter>
 			<wrap-s>repeat</wrap-s>
 			<wrap-t>repeat</wrap-t>
@@ -209,6 +215,9 @@
 				<image>
 					<use>texture[0]/image</use>
 				</image>
+				<type>
+					<use>texture[0]/type</use>
+				</type>
 				<filter>
 					<use>texture[0]/filter</use>
 				</filter>
@@ -227,6 +236,9 @@
 				<image>
 					<use>texture[2]/image</use>
 				</image>
+				<type>
+					<use>texture[2]/type</use>
+				</type>
 				<filter>
 					<use>texture[2]/filter</use>
 				</filter>
@@ -245,6 +257,9 @@
 				<image>
 					<use>texture[3]/image</use>
 				</image>
+				<type>
+					<use>texture[3]/type</use>
+				</type>
 				<filter>
 					<use>texture[3]/filter</use>
 				</filter>
@@ -263,6 +278,9 @@
 				<image>
 					<use>texture[4]/image</use>
 				</image>
+				<type>
+					<use>texture[4]/type</use>
+				</type>
 				<filter>
 					<use>texture[4]/filter</use>
 				</filter>
@@ -281,6 +299,9 @@
 				<image>
 					<use>texture[5]/image</use>
 				</image>
+				<type>
+					<use>texture[5]/type</use>
+				</type>
 				<filter>
 					<use>texture[5]/filter</use>
 				</filter>
@@ -299,6 +320,9 @@
 				<image>
 					<use>texture[6]/image</use>
 				</image>
+				<type>
+					<use>texture[6]/type</use>
+				</type>
 				<filter>
 					<use>texture[6]/filter</use>
 				</filter>
@@ -576,6 +600,9 @@
 				<image>
 					<use>texture[0]/image</use>
 				</image>
+				<type>
+					<use>texture[0]/type</use>
+				</type>
 				<filter>
 					<use>texture[0]/filter</use>
 				</filter>
@@ -594,6 +621,9 @@
 				<image>
 					<use>texture[2]/image</use>
 				</image>
+				<type>
+					<use>texture[2]/type</use>
+				</type>
 				<filter>
 					<use>texture[2]/filter</use>
 				</filter>
@@ -612,6 +642,9 @@
 				<image>
 					<use>texture[3]/image</use>
 				</image>
+				<type>
+					<use>texture[3]/type</use>
+				</type>
 				<filter>
 					<use>texture[3]/filter</use>
 				</filter>
@@ -630,6 +663,9 @@
 				<image>
 					<use>texture[4]/image</use>
 				</image>
+				<type>
+					<use>texture[4]/type</use>
+				</type>
 				<filter>
 					<use>texture[4]/filter</use>
 				</filter>
@@ -648,6 +684,9 @@
 				<image>
 					<use>texture[5]/image</use>
 				</image>
+				<type>
+					<use>texture[5]/type</use>
+				</type>
 				<filter>
 					<use>texture[5]/filter</use>
 				</filter>
@@ -666,6 +705,9 @@
 				<image>
 					<use>texture[6]/image</use>
 				</image>
+				<type>
+					<use>texture[6]/type</use>
+				</type>
 				<filter>
 					<use>texture[6]/filter</use>
 				</filter>
@@ -949,6 +991,9 @@
 				<image>
 					<use>texture[0]/image</use>
 				</image>
+				<type>
+					<use>texture[0]/type</use>
+				</type>
 				<filter>
 					<use>texture[0]/filter</use>
 				</filter>
@@ -967,6 +1012,9 @@
 				<image>
 					<use>texture[2]/image</use>
 				</image>
+				<type>
+					<use>texture[2]/type</use>
+				</type>
 				<filter>
 					<use>texture[2]/filter</use>
 				</filter>
@@ -985,6 +1033,9 @@
 				<image>
 					<use>texture[3]/image</use>
 				</image>
+				<type>
+					<use>texture[3]/type</use>
+				</type>
 				<filter>
 					<use>texture[3]/filter</use>
 				</filter>
@@ -1003,6 +1054,9 @@
 				<image>
 					<use>texture[4]/image</use>
 				</image>
+				<type>
+					<use>texture[4]/type</use>
+				</type>
 				<filter>
 					<use>texture[4]/filter</use>
 				</filter>
@@ -1021,6 +1075,9 @@
 				<image>
 					<use>texture[5]/image</use>
 				</image>
+				<type>
+					<use>texture[5]/type</use>
+				</type>
 				<filter>
 					<use>texture[5]/filter</use>
 				</filter>
@@ -1039,6 +1096,9 @@
 				<image>
 					<use>texture[6]/image</use>
 				</image>
+				<type>
+					<use>texture[6]/type</use>
+				</type>
 				<filter>
 					<use>texture[6]/filter</use>
 				</filter>
@@ -1314,6 +1374,9 @@
 				<image>
 					<use>texture[0]/image</use>
 				</image>
+				<type>
+					<use>texture[0]/type</use>
+				</type>
 				<filter>
 					<use>texture[0]/filter</use>
 				</filter>
@@ -1332,6 +1395,9 @@
 				<image>
 					<use>texture[2]/image</use>
 				</image>
+				<type>
+					<use>texture[2]/type</use>
+				</type>
 				<filter>
 					<use>texture[2]/filter</use>
 				</filter>
@@ -1350,6 +1416,9 @@
 				<image>
 					<use>texture[3]/image</use>
 				</image>
+				<type>
+					<use>texture[3]/type</use>
+				</type>
 				<filter>
 					<use>texture[3]/filter</use>
 				</filter>
@@ -1368,6 +1437,9 @@
 				<image>
 					<use>texture[4]/image</use>
 				</image>
+				<type>
+					<use>texture[4]/type</use>
+				</type>
 				<filter>
 					<use>texture[4]/filter</use>
 				</filter>
@@ -1386,6 +1458,9 @@
 				<image>
 					<use>texture[5]/image</use>
 				</image>
+				<type>
+					<use>texture[5]/type</use>
+				</type>
 				<filter>
 					<use>texture[5]/filter</use>
 				</filter>
@@ -1404,6 +1479,9 @@
 				<image>
 					<use>texture[6]/image</use>
 				</image>
+				<type>
+					<use>texture[6]/type</use>
+				</type>
 				<filter>
 					<use>texture[6]/filter</use>
 				</filter>

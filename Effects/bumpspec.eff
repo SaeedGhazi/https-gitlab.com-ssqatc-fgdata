@@ -57,6 +57,7 @@ in Aircraft/A320/Models/Effects/a320_bumpspec.eff ( or whatever, private to the 
       <texture-unit>
         <unit>0</unit>
         <image><use>texture[0]/image</use></image>
+		<type><use>texture[0]/type</use></type>
         <filter><use>texture[0]/filter</use></filter>
         <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
         <wrap-t><use>texture[0]/wrap-t</use></wrap-t>
@@ -65,6 +66,7 @@ in Aircraft/A320/Models/Effects/a320_bumpspec.eff ( or whatever, private to the 
       <texture-unit>
         <unit>1</unit>
         <image><use>texture[2]/image</use></image>
+		<type><use>texture[2]/type</use></type>
         <filter><use>texture[2]/filter</use></filter>
         <wrap-s><use>texture[2]/wrap-s</use></wrap-s>
         <wrap-t><use>texture[2]/wrap-t</use></wrap-t>

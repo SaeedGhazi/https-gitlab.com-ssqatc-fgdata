@@ -79,10 +79,13 @@ and fallback to plain transparency when the model shader is disabled.
 			  <bin-name>DepthSortedBin</bin-name>
 			</render-bin>
 			<texture-unit>
+              <unit>0</unit>
 			  <active>
 				<use>texture[0]/active</use>
 			  </active>
-			  <unit>0</unit>
+              <type>
+                <use>texture[0]/type</use>
+              </type>
 			  <image>
 				<use>texture[0]/image</use>
 			  </image>
@@ -195,6 +198,9 @@ and fallback to plain transparency when the model shader is disabled.
 			   <image>
 				   <use>texture[0]/image</use>
 			   </image>
+               <type>
+                   <use>texture[0]/type</use>
+               </type>
 			   <filter>
 				   <use>texture[0]/filter</use>
 			   </filter>
@@ -219,6 +225,9 @@ and fallback to plain transparency when the model shader is disabled.
 			   <image>
 				   <use>texture[2]/image</use>
 			   </image>
+               <type>
+                   <use>texture[2]/type</use>
+               </type>
 			   <filter>
 				   <use>texture[2]/filter</use>
 			   </filter>
@@ -238,6 +247,9 @@ and fallback to plain transparency when the model shader is disabled.
 			   <image>
 				   <use>texture[3]/image</use>
 			   </image>
+               <type>
+                   <use>texture[3]/type</use>
+               </type>
 			   <filter>
 				   <use>texture[3]/filter</use>
 			   </filter>
@@ -257,6 +269,9 @@ and fallback to plain transparency when the model shader is disabled.
 			   <image>
 				   <use>texture[4]/image</use>
 			   </image>
+               <type>
+                   <use>texture[4]/type</use>
+               </type>
 			   <filter>
 				   <use>texture[4]/filter</use>
 			   </filter>
@@ -293,6 +308,9 @@ and fallback to plain transparency when the model shader is disabled.
 				   <image>
 					   <use>texture[6]/image</use>
 				   </image>
+                   <type>
+                       <use>texture[6]/type</use>
+                   </type>
 				   <filter>
 					   <use>texture[6]/filter</use>
 				   </filter>

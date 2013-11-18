@@ -83,10 +83,13 @@
 					<bin-name>DepthSortedBin</bin-name>
 				</render-bin>
 			<texture-unit>
+				<unit>0</unit>
 				<active>
 					<use>texture[0]/active</use>
 				</active>
-				<unit>0</unit>
+                <type>
+                    <use>texture[0]/type</use>
+                </type>
 				<image>
 					<use>texture[0]/image</use>
 				</image>

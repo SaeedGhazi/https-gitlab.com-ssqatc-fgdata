@@ -20,6 +20,7 @@
     </material>
     <texture n="0">
       <image>Textures/Terrain/unknown.png</image>
+	  <type>2d</type>
       <filter>linear-mipmap-linear</filter>
       <!-- also repeat -->
       <wrap-s>repeat</wrap-s>
@@ -32,6 +33,7 @@
     </texture>
     <texture n="10">
       <image>Textures.high/Terrain/snow3.png</image>
+	  <type>2d</type>
       <filter>linear-mipmap-linear</filter>
       <wrap-s>repeat</wrap-s>
       <wrap-t>repeat</wrap-t>
@@ -39,6 +41,7 @@
     </texture>
     <texture n="11">
       <image>Textures/Terrain/void.png</image>
+	  <type>2d</type>
       <filter>linear-mipmap-linear</filter>
       <wrap-s>repeat</wrap-s>
       <wrap-t>repeat</wrap-t>
@@ -46,6 +49,7 @@
     </texture>
     <texture n="12">
       <image>Textures/Terrain/void.png</image>
+	  <type>2d</type>
       <filter>linear-mipmap-linear</filter>
       <wrap-s>repeat</wrap-s>
       <wrap-t>repeat</wrap-t>
@@ -53,6 +57,7 @@
     </texture>
     <texture n="13">
       <image>Textures.high/Terrain/rock_alt.png</image>
+	  <type>2d</type>
       <filter>linear-mipmap-linear</filter>
       <wrap-s>repeat</wrap-s>
       <wrap-t>repeat</wrap-t>
@@ -60,6 +65,7 @@
     </texture>
 	<texture n="14">
       <image>Textures.high/Terrain/grain_texture.png</image>
+	  <type>2d</type>
       <filter>linear-mipmap-linear</filter>
       <wrap-s>repeat</wrap-s>
       <wrap-t>repeat</wrap-t>
@@ -67,6 +73,7 @@
     </texture>
 	<texture n="15">
       <image>Textures/Terrain/void.png</image>
+	  <type>2d</type>
       <filter>linear-mipmap-linear</filter>
       <wrap-s>repeat</wrap-s>
       <wrap-t>repeat</wrap-t>
@@ -185,6 +192,7 @@
       <texture-unit>
         <unit>0</unit>
         <image><use>texture[0]/image</use></image>
+		<type><use>texture[0]/type</use></type>
         <filter><use>texture[0]/filter</use></filter>
         <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
         <wrap-t><use>texture[0]/wrap-t</use></wrap-t>
@@ -193,6 +201,7 @@
 	<texture-unit>
         <unit>2</unit>
         <image><use>texture[13]/image</use></image>
+		<type><use>texture[13]/type</use></type>
         <filter><use>texture[13]/filter</use></filter>
         <wrap-s><use>texture[13]/wrap-s</use></wrap-s>
         <wrap-t><use>texture[13]/wrap-t</use></wrap-t>
@@ -200,6 +209,7 @@
       </texture-unit>
 	<texture-unit>
         <unit>3</unit>
+		<type><use>texture[15]/type</use></type>
         <image><use>texture[15]/image</use></image>
         <filter><use>texture[15]/filter</use></filter>
         <wrap-s><use>texture[15]/wrap-s</use></wrap-s>
@@ -208,6 +218,7 @@
       </texture-unit>
 	  <texture-unit>
         <unit>4</unit>
+		<type><use>texture[14]/type</use></type>
         <image><use>texture[14]/image</use></image>
         <filter><use>texture[14]/filter</use></filter>
         <wrap-s><use>texture[14]/wrap-s</use></wrap-s>
@@ -216,6 +227,7 @@
       </texture-unit>
       <texture-unit>
         <unit>5</unit>
+		<type><use>texture[12]/type</use></type>
         <image><use>texture[12]/image</use></image>
         <filter><use>texture[12]/filter</use></filter>
         <wrap-s><use>texture[12]/wrap-s</use></wrap-s>
@@ -224,6 +236,7 @@
       </texture-unit>
       <texture-unit>
         <unit>7</unit>
+		<type><use>texture[11]/type</use></type>
         <image><use>texture[11]/image</use></image>
         <filter><use>texture[11]/filter</use></filter>
         <wrap-s><use>texture[11]/wrap-s</use></wrap-s>
@@ -515,6 +528,7 @@
       </render-bin>
       <texture-unit>
         <unit>0</unit>
+		<type><use>texture[0]/type</use></type>
         <image><use>texture[0]/image</use></image>
         <filter><use>texture[0]/filter</use></filter>
         <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
@@ -527,6 +541,7 @@
       </texture-unit>
       <texture-unit>
         <unit>5</unit>
+		<type><use>texture[12]/type</use></type>
         <image><use>texture[12]/image</use></image>
         <filter><use>texture[12]/filter</use></filter>
         <wrap-s><use>texture[12]/wrap-s</use></wrap-s>
@@ -535,6 +550,7 @@
       </texture-unit>
       <texture-unit>
         <unit>6</unit>
+		<type><use>texture[10]/type</use></type>
         <image><use>texture[10]/image</use></image>
         <filter><use>texture[10]/filter</use></filter>
         <wrap-s><use>texture[10]/wrap-s</use></wrap-s>
@@ -543,6 +559,7 @@
       </texture-unit>
       <texture-unit>
         <unit>7</unit>
+		<type><use>texture[11]/type</use></type>
         <image><use>texture[11]/image</use></image>
         <filter><use>texture[11]/filter</use></filter>
         <wrap-s><use>texture[11]/wrap-s</use></wrap-s>
@@ -737,6 +754,7 @@
       </render-bin>
       <texture-unit>
         <unit>0</unit>
+		<type><use>texture[0]/type</use></type>
         <image><use>texture[0]/image</use></image>
         <filter><use>texture[0]/filter</use></filter>
         <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
@@ -896,6 +914,7 @@
       </render-bin>
       <texture-unit>
         <unit>0</unit>
+		<type><use>texture[0]/type</use></type>
         <image><use>texture[0]/image</use></image>
         <filter><use>texture[0]/filter</use></filter>
         <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
@@ -961,6 +980,7 @@
       </render-bin>
       <texture-unit>
         <unit>0</unit>
+		<type><use>texture[0]/type</use></type>
         <image><use>texture[0]/image</use></image>
         <filter><use>texture[0]/filter</use></filter>
         <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
@@ -1000,6 +1020,7 @@
       </render-bin>
       <texture-unit>
         <unit>0</unit>
+		<type><use>texture[0]/type</use></type>
         <image><use>texture[0]/image</use></image>
         <filter><use>texture[0]/filter</use></filter>
         <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
@@ -1080,6 +1101,7 @@
       </render-bin>
       <texture-unit>
         <unit>0</unit>
+		<type><use>texture[0]/type</use></type>
         <image><use>texture[0]/image</use></image>
         <filter><use>texture[0]/filter</use></filter>
         <wrap-s><use>texture[0]/wrap-s</use></wrap-s>

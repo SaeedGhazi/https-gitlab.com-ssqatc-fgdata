@@ -61,6 +61,9 @@
 		<image>
 		  <use>texture[0]/image</use>
 		</image>
+        <type>
+            <use>texture[0]/type</use>
+        </type>
 		<filter>
 		  <use>texture[0]/filter</use>
 		</filter>

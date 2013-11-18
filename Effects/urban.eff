@@ -110,6 +110,9 @@
 				<image>
 					<use>texture[0]/image</use>
 				</image>
+				<type>
+					<use>texture[0]/type</use>
+				</type>
 				<filter>
 					<use>texture[0]/filter</use>
 				</filter>
@@ -128,6 +131,9 @@
 				<image>
 					<use>texture[2]/image</use>
 				</image>
+				<type>
+					<use>texture[2]/type</use>
+				</type>
 				<filter>
 					<use>texture[2]/filter</use>
 				</filter>
@@ -146,6 +152,9 @@
 				<image>
 					<use>texture[2]/image</use>
 				</image>
+				<type>
+					<use>texture[2]/type</use>
+				</type>
 				<filter>nearest-mipmap-nearest</filter>
 				<wrap-s>
 					<use>texture[2]/wrap-s</use>
@@ -401,6 +410,9 @@
 				<image>
 					<use>texture[0]/image</use>
 				</image>
+				<type>
+					<use>texture[0]/type</use>
+				</type>
 				<filter>
 					<use>texture[0]/filter</use>
 				</filter>
@@ -419,6 +431,9 @@
 				<image>
 					<use>texture[2]/image</use>
 				</image>
+				<type>
+					<use>texture[2]/type</use>
+				</type>
 				<filter>
 					<use>texture[2]/filter</use>
 				</filter>
@@ -659,6 +674,9 @@
 				<image>
 					<use>texture[0]/image</use>
 				</image>
+				<type>
+					<use>texture[0]/type</use>
+				</type>
 				<filter>
 					<use>texture[0]/filter</use>
 				</filter>
@@ -677,6 +695,9 @@
 				<image>
 					<use>texture[2]/image</use>
 				</image>
+				<type>
+					<use>texture[2]/type</use>
+				</type>
 				<filter>
 					<use>texture[2]/filter</use>
 				</filter>
@@ -695,6 +716,9 @@
 				<image>
 					<use>texture[2]/image</use>
 				</image>
+				<type>
+					<use>texture[2]/type</use>
+				</type>
 				<filter>nearest-mipmap-nearest</filter>
 				<wrap-s>
 					<use>texture[2]/wrap-s</use>
@@ -846,6 +870,9 @@
 				<image>
 					<use>texture[0]/image</use>
 				</image>
+				<type>
+					<use>texture[0]/type</use>
+				</type>
 				<filter>
 					<use>texture[0]/filter</use>
 				</filter>
@@ -864,6 +891,9 @@
 				<image>
 					<use>texture[2]/image</use>
 				</image>
+				<type>
+					<use>texture[2]/type</use>
+				</type>
 				<filter>
 					<use>texture[2]/filter</use>
 				</filter>
@@ -1018,6 +1048,9 @@
 				<image>
 					<use>texture[0]/image</use>
 				</image>
+				<type>
+					<use>texture[0]/type</use>
+				</type>
 				<filter>
 					<use>texture[0]/filter</use>
 				</filter>
@@ -1036,6 +1069,9 @@
 				<image>
 					<use>texture[2]/image</use>
 				</image>
+				<type>
+					<use>texture[2]/type</use>
+				</type>
 				<filter>
 					<use>texture[2]/filter</use>
 				</filter>
@@ -1054,6 +1090,9 @@
 				<image>
 					<use>texture[2]/image</use>
 				</image>
+				<type>
+					<use>texture[2]/type</use>
+				</type>
 				<filter>nearest-mipmap-nearest</filter>
 				<wrap-s>
 					<use>texture[2]/wrap-s</use>
@@ -1264,6 +1303,9 @@
 				<image>
 					<use>texture[0]/image</use>
 				</image>
+				<type>
+					<use>texture[0]/type</use>
+				</type>
 				<filter>
 					<use>texture[0]/filter</use>
 				</filter>
@@ -1282,6 +1324,9 @@
 				<image>
 					<use>texture[2]/image</use>
 				</image>
+				<type>
+					<use>texture[2]/type</use>
+				</type>
 				<filter>
 					<use>texture[2]/filter</use>
 				</filter>

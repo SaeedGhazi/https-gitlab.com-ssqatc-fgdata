@@ -5,6 +5,7 @@
   <parameters>
     <texture n="2">
         <image>Textures/Terrain/crop.png</image>
+		<type>2d</type>
         <filter>linear-mipmap-linear</filter>
         <wrap-s>repeat</wrap-s>
         <wrap-t>repeat</wrap-t>
@@ -12,6 +13,7 @@
     </texture>
     <texture n="3">
         <image>Textures/Terrain/crop-colors.png</image>
+		<type>1d</type>
         <filter>linear-mipmap-linear</filter>
         <wrap-s>mirror</wrap-s>
         <internal-format>normalized</internal-format>
@@ -67,6 +69,7 @@
       <texture-unit>
         <unit>1</unit>
           <image><use>texture[2]/image</use></image>
+		  <type><use>texture[2]/type</use></type>
           <filter><use>texture[2]/filter</use></filter>
           <wrap-s><use>texture[2]/wrap-s</use></wrap-s>
           <wrap-t><use>texture[2]/wrap-t</use></wrap-t>
@@ -76,7 +79,7 @@
       </texture-unit>
       <texture-unit>
         <unit>2</unit>
-          <type>1d</type>
+		<type><use>texture[3]/type</use></type>
           <image><use>texture[3]/image</use></image>
           <filter><use>texture[3]/filter</use></filter>
           <wrap-s><use>texture[3]/wrap-s</use></wrap-s>

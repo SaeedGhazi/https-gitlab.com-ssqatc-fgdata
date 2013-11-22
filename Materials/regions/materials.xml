@@ -620,21 +620,9 @@
 
 <!-- REGIONAL DEFINITIONS - Ascension Island               -->
 
+
 <material include="Materials/regions/ascension.xml">
-  <name>Landmass</name>
-  <name>SomeSort</name>
-  <name>Island</name>
-  <name>Default</name>
-  <texture-set>
-   <texture>Terrain/lava1.png</texture>
-   <texture n="12">Terrain/lava1.png</texture>
-   <texture n="11">Terrain/lava_drylake.png</texture>
-   <texture n="13">Terrain/rocks-lava.png</texture>
-   <texture n="15">Terrain/tundra-hawaii.png</texture>
-  </texture-set>
-  <texture-set>
-   <texture>Terrain/lava1.png</texture>
-  </texture-set>
+  <name>Scrub</name>
   <texture-set>
    <texture>Terrain/lava1.png</texture>
    <texture n="12">Terrain/deciduous-hires.png</texture>
@@ -660,34 +648,6 @@
   <rolling-friction>0.1</rolling-friction>
   <friction-factor>0.7</friction-factor>
   <bumpiness>0.1</bumpiness>
-</material>
-
-<material include="Materials/regions/ascension.xml">
-  <name>Town</name>
-  <name>SubUrban</name>
-  <texture>Terrain/town-madagascar.png</texture>
-  <object-mask>Terrain/town-europe.mask.png</object-mask>
-  <xsize>700</xsize>
-  <ysize>700</ysize>
-  <light-coverage>100000.0</light-coverage>
-  <emissive>
-   <r>0.05</r>
-   <g>0.05</g>
-   <b>0.02</b>
-   <a>1.0</a>
-  </emissive>
-  <object-group include="Materials/base/town-buildings.xml"/>
-  <building-coverage>500.0</building-coverage>
-  <building-small-ratio>1.0</building-small-ratio>
-  <building-medium-ratio>0.0</building-medium-ratio>
-  <building-large-ratio>0.0</building-large-ratio>
-  <building-medium-max-floors>4</building-medium-max-floors>
-  <wood-coverage>1000.0</wood-coverage>
-  <tree-texture>Trees/tropical-alt.png</tree-texture>
-  <tree-varieties>8</tree-varieties>
-  <tree-range-m alias="/params/forest/tree-range-m"/>
-  <tree-height-m>15.0</tree-height-m>
-  <tree-width-m>10.0</tree-width-m>
 </material>
 
 <material include="Materials/regions/ascension.xml">
@@ -718,7 +678,6 @@
   <bumpiness>0.1</bumpiness>
   <load-resistance>1e30</load-resistance>
 </material>
-
 
   <!-- REGIONAL DEFINITIONS - CARIBBEAN ISLANDS               -->
 
@@ -2011,6 +1970,32 @@
     <bumpiness>1</bumpiness>
    </material>
   
+   <material include="Materials/regions/scandinavia.xml">
+    <name>BarrenCover</name>
+    <name>Dirt</name>
+    <name>OpenMining</name>
+    <name>Rock</name>
+    <name>Dump</name>
+    <texture-set>
+      <texture>Terrain/rock.png</texture>
+	  <texture n="11">Terrain/grass_hires.png</texture>
+	  <texture n="12">Terrain/rock_alt.png</texture>
+	  <texture n="13">Terrain/rock.png</texture>
+	  <texture n="14">Terrain/grain_texture.png</texture>
+    </texture-set>
+    <parameters>
+      <grain_strength>0.7</grain_strength>
+      <transition_model>0.3</transition_model>
+	  <hires_overlay_bias>-0.2</hires_overlay_bias>
+    </parameters>
+    <xsize>1000</xsize>
+    <ysize>1000</ysize>
+    <solid>1</solid>
+    <friction-factor>0.9</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.3</bumpiness>
+  </material>
+
   <material include="Materials/regions/scandinavia.xml">
     <name>ShrubCover</name>
     <name>ShrubGrassCover</name>

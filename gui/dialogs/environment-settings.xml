@@ -434,6 +434,54 @@
       <col>3</col>
     </text>
 
+ <text>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
+      <label>Moonlight</label>
+      <halign>left</halign>
+      <row>9</row>
+      <col>0</col>
+    </text>
+    
+    <text>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
+      <label>new</label>
+      <halign>right</halign>
+      <row>9</row>
+      <col>1</col>
+    </text>
+        
+    <slider>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
+      <name>moon</name>
+      <row>9</row>
+      <col>2</col>
+      <min>0.0</min>
+      <max>1.0</max>
+      <live>true</live>
+      <property>/environment/moonlight</property>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>moon</object-name>
+      </binding>
+    </slider>
+
+    <text>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
+      <label>full</label>
+      <halign>left</halign>
+      <row>9</row>
+      <col>3</col>
+    </text>
+
+
   </group>
   
   <hrule/>

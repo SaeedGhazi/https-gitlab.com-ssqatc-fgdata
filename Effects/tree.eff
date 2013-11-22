@@ -32,6 +32,7 @@
 		<dust_cover_factor><use>/environment/surface/dust-cover-factor</use></dust_cover_factor>
 		<fogtype><use>/sim/rendering/shaders/skydome</use></fogtype>
 		<fogstructure><use>/environment/fog-structure</use></fogstructure>
+		<cloud_self_shading><use>/environment/cloud-self-shading</use></cloud_self_shading>
 		<quality_level><use>/sim/rendering/shaders/landmass</use></quality_level>
 		<tquality_level><use>/sim/rendering/shaders/transition</use></tquality_level>
 		<wind_effects><use>/sim/rendering/shaders/wind-effects</use></wind_effects>
@@ -103,6 +104,11 @@
         <name>ground_scattering</name>
         <type>float</type>
         <value><use>ground_scattering</use></value>
+      </uniform>
+      <uniform>
+        <name>cloud_self_shading</name>
+        <type>float</type>
+        <value><use>cloud_self_shading</use></value>
       </uniform>
       <uniform>
         <name>terminator</name>
@@ -245,6 +251,11 @@
         <name>ground_scattering</name>
         <type>float</type>
         <value><use>ground_scattering</use></value>
+      </uniform>
+     <uniform>
+        <name>cloud_self_shading</name>
+        <type>float</type>
+        <value><use>cloud_self_shading</use></value>
       </uniform>
       <uniform>
         <name>terminator</name>

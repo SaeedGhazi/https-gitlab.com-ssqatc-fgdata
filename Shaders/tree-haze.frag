@@ -15,6 +15,7 @@ varying float yprime_alt;
 uniform float visibility;
 uniform float avisibility;
 uniform float scattering;
+uniform float cloud_self_shading;
 uniform float terminator;
 uniform float terrain_alt; 
 uniform float hazeLayerAltitude;
@@ -131,7 +132,7 @@ void main()
     mie_angle = gl_Color.a;
     vec4 texel = texture2D(texture, gl_TexCoord[0].st);
 
-
+    float effective_scattering = min(scattering, cloud_self_shading);
 
 if (quality_level > 3)
 	{
@@ -238,14 +239,14 @@ if (visibility < avisibility)
 	{
 	transmission_arg = transmission_arg + (distance_in_layer/visibility);
 	// this combines the Weber-Fechner intensity
-	eqColorFactor = 1.0 - 0.1 * delta_zv/visibility - (1.0 -scattering);
+	eqColorFactor = 1.0 - 0.1 * delta_zv/visibility - (1.0 -effective_scattering);
 
 	}
 else 
 	{
 	transmission_arg = transmission_arg + (distance_in_layer/avisibility);
 	// this combines the Weber-Fechner intensity
-	eqColorFactor = 1.0 - 0.1 * delta_zv/avisibility - (1.0 -scattering);
+	eqColorFactor = 1.0 - 0.1 * delta_zv/avisibility - (1.0 -effective_scattering);
 	}
 
 

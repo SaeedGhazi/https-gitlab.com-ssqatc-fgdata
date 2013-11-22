@@ -4014,7 +4014,7 @@
       </equals>
     </condition>
     <name>NaturalCrop</name>
-    <texture>Terrain/naturalcrop1.png</texture>
+    <texture>Terrain/naturalcrop1-autumn.png</texture>
     <object-mask>Terrain/naturalcrop1.mask.png</object-mask>
     <xsize>2000</xsize>
     <ysize>2000</ysize>

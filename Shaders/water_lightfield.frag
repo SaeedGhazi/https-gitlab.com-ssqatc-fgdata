@@ -13,6 +13,7 @@ uniform sampler2D water_dudvmap;
 uniform sampler2D sea_foam;
 uniform sampler2D perlin_normalmap;
 uniform sampler2D ice_texture;
+uniform sampler2D topo_map;
 
 uniform sampler3D Noise;
 
@@ -26,6 +27,8 @@ varying vec3 viewerdir;
 varying vec3 lightdir;
 varying vec3 relPos;
 varying vec3 rawPos;
+varying vec2 TopoUV;
+
 
 varying float earthShade;
 varying float yprime_alt;
@@ -284,7 +287,7 @@ void main(void)
 	{
 
 
-        vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
+    vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
 	float effective_scattering = min(scattering, cloud_self_shading);
 
 	float dist = length(relPos);
@@ -298,6 +301,11 @@ void main(void)
 	float noise_2000m = Noise3D(rawPos.xyz,2000.0);
 	float noise_2500m = Noise3D(rawPos.xyz, 2500.0);
 
+	// get depth map
+	vec4 topoTexel = texture2D(topo_map, TopoUV);
+    float floorMixFactor = smoothstep(0.3, 0.985, topoTexel.a);
+	vec3 floorColour = topoTexel.rgb;
+	
 	mat4 RotationMatrix;
 
 	// compute direction to viewer
@@ -443,7 +451,17 @@ void main(void)
 	refl.a = 1.0; 
 	
 	refl.g = refl.g * (0.9 + 0.2* noise_2500m);
-
+	
+	if (ocean_flag ==1) // use depth information
+		{
+		refl.rgb = mix(refl.rgb, 0.65* floorColour, floorMixFactor);
+		refl.rgb = refl.rgb * (0.5 + 0.5 * smoothstep(0.0,0.3,topoTexel.a));
+		}
+	else 
+		{
+		refl.rgb = 1.3 * refl.rgb;
+		}
+	
 	float intensity;
 	// de-saturate for reduced light
 	refl.rgb = mix(refl.rgb,  vec3 (0.248, 0.248, 0.248), 1.0 - smoothstep(0.1, 0.8, ground_scattering)); 

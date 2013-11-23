@@ -298,6 +298,27 @@
 					<use>texture[3]/internal-format</use>
 				</internal-format>
 			</texture-unit>
+			<texture-unit>
+			<unit>4</unit>
+               			 <image>
+                   		 <use>texture[7]/image</use>
+                		</image>
+				<type>
+					<use>texture[7]/type</use>
+				</type>
+                		<filter>
+                   			 <use>texture[7]/filter</use>
+                		</filter>
+               			<wrap-s>
+                    			<use>texture[7]/wrap-s</use>
+                		</wrap-s>
+                		<wrap-t>
+                    			<use>texture[7]/wrap-t</use>
+                		</wrap-t>
+                		<internal-format>
+                    			<use>texture[7]/internal-format</use>
+                		</internal-format>
+            		</texture-unit>
 			<!--<texture-unit>
 				<unit>4</unit>
 				<image>
@@ -401,6 +422,11 @@
 				<name>water_dudvmap</name>
 				<type>sampler-2d</type>
 				<value type="int">3</value>
+			</uniform>
+			<uniform>
+				<name>topo_map</name>
+				<type>sampler-2d</type>
+				<value type="int">4</value>
 			</uniform>
 			<uniform>
 				<name>sea_foam</name>

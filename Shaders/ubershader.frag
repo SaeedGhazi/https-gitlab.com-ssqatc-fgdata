@@ -106,7 +106,6 @@ void main (void)
 	vec4 Specular = gl_FrontMaterial.specular * gl_LightSource[0].diffuse * pf;
 
 	vec4 color = gl_Color + Diffuse * gl_FrontMaterial.diffuse;
-	color += Specular * gl_FrontMaterial.specular * nmap.a;
 	color = clamp( color, 0.0, 1.0 );
 
 ////////////////////////////////////////////////////////////////////
@@ -130,11 +129,10 @@ void main (void)
 
 		// add fringing fresnel and rainbow effects and modulate by reflection
 		vec4 reflcolor = mix(reflection, rainbow, refl_rainbow * v);
-		reflcolor += Specular * nmap.a;
 		vec4 reflfrescolor = mix(reflcolor, fresnel, refl_fresnel  * v);
 		vec4 noisecolor = mix(reflfrescolor, noisevec, refl_noise);
 		vec4 raincolor = vec4(noisecolor.rgb * reflFactor, 1.0);
-		raincolor += Specular * nmap.a;
+		raincolor += Specular;
 		raincolor *= gl_LightSource[0].diffuse;
 		mixedcolor = mix(texel, raincolor, reflFactor).rgb;
  	} else {

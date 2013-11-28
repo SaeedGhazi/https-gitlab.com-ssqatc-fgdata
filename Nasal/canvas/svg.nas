@@ -413,9 +413,9 @@ var parsesvg = func(group, path, options = nil)
 
         var cfg = {};
         if( rx != nil )
-          cfg["border-radius"] = [rx, ry];
+          cfg["border-radius"] = [num(rx), num(ry)];
 
-        stack[-1].rect(x, y, width, height, cfg);
+        stack[-1].rect(num(x), num(y), num(width), num(height), cfg);
       }
       else
         parsePath(attr['d']);

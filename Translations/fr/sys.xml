@@ -33,7 +33,7 @@
         <finishing-subsystems>Finalisation des sous-systemes</finishing-subsystems>   <!-- English: "finalizing subsystems" -->
         <init-graphics>Initialisation du moteur graphique</init-graphics>   <!-- English: "initializing graphics engine" -->
         <loading-scenery>Chargement des scenes</loading-scenery>   <!-- English: "loading scenery" -->
-        <downloading-scenery>Téléchargement des scenes</downloading-scenery> <!-- English: "downloading scenery" -->
+        <downloading-scenery>Telechargement des scenes</downloading-scenery> <!-- English: "downloading scenery" -->
         <finalize-position>Finalisation de la position</finalize-position> <!-- English: "finalizing position" -->
     </splash>
 

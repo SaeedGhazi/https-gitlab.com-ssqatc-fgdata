@@ -34,7 +34,7 @@ var parsesvg = func(group, path, options = nil)
   };
 
   # Helper to get number without unit (eg. px)
-  var num = func(css_num)
+  var evalCSSNum = func(css_num)
   {
     if( css_num.ends_with("px") )
       return substr(css_num, 0, size(css_num) - 2);
@@ -292,11 +292,11 @@ var parsesvg = func(group, path, options = nil)
 
     var font_size = style["font-size"];
     if( font_size != nil )
-      stack[-1].setDouble("character-size", num(font_size));
+      stack[-1].setDouble("character-size", evalCSSNum(font_size));
 
     var line_height = style["line-height"];
     if( line_height != nil )
-      stack[-1].setDouble("line-height", num(line_height));
+      stack[-1].setDouble("line-height", evalCSSNum(line_height));
   }
 
   # ----------------------------------------------------------------------------
@@ -399,10 +399,10 @@ var parsesvg = func(group, path, options = nil)
 
       if( name == "rect" )
       {
-        var width = attr['width'];
-        var height = attr['height'];
-        var x = attr['x'];
-        var y = attr['y'];
+        var width = evalCSSNum(attr['width']);
+        var height = evalCSSNum(attr['height']);
+        var x = evalCSSNum(attr['x']);
+        var y = evalCSSNum(attr['y']);
         var rx = attr['rx'];
         var ry = attr['ry'];
 
@@ -413,9 +413,9 @@ var parsesvg = func(group, path, options = nil)
 
         var cfg = {};
         if( rx != nil )
-          cfg["border-radius"] = [num(rx), num(ry)];
+          cfg["border-radius"] = [evalCSSNum(rx), evalCSSNum(ry)];
 
-        stack[-1].rect(num(x), num(y), num(width), num(height), cfg);
+        stack[-1].rect(x, y, width, height, cfg);
       }
       else
         parsePath(attr['d']);
@@ -423,7 +423,7 @@ var parsesvg = func(group, path, options = nil)
       stack[-1].set('fill', style['fill']);
 
       var w = style['stroke-width'];
-      stack[-1].setStrokeLineWidth( w != nil ? num(w) : 1 );
+      stack[-1].setStrokeLineWidth( w != nil ? evalCSSNum(w) : 1 );
       stack[-1].set('stroke', style['stroke'] or "none");
 
       var linecap = style['stroke-linecap'];
@@ -464,11 +464,11 @@ var parsesvg = func(group, path, options = nil)
 
     var cx = attr['inkscape:transform-center-x'];
     if( cx != nil and cx != 0 )
-      stack[-1].setDouble("center-offset-x", num(cx));
+      stack[-1].setDouble("center-offset-x", evalCSSNum(cx));
 
     var cy = attr['inkscape:transform-center-y'];
     if( cy != nil and cy != 0 )
-      stack[-1].setDouble("center-offset-y", -num(cy));
+      stack[-1].setDouble("center-offset-y", -evalCSSNum(cy));
 
     if( cx != nil or cy != nil )
       stack[-1].updateCenter();

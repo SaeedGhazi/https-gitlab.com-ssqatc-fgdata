@@ -35,6 +35,7 @@
 
     <button>
       <legend></legend>
+      <key>Esc</key>
       <pref-width>16</pref-width>
       <pref-height>16</pref-height>
       <border>2</border>

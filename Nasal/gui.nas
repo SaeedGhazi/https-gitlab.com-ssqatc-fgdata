@@ -787,7 +787,8 @@ var weightChangeHandler = func {
 #
 var showWeightDialog = func {
     var name = "WeightAndFuel";
-    var title = "Weight and Fuel Settings";
+#   menu entry is "Fuel and Payload"
+    var title = "Fuel and Payload Settings";
 
     #
     # General Dialog Structure
@@ -806,6 +807,8 @@ var showWeightDialog = func {
     w.set("pref-height", 16);
     w.set("legend", "");
     w.set("default", 0);
+    # "Esc" causes dialog-close
+    w.set("key", "Esc");
     w.setBinding("dialog-close");
 
     dialog[name].addChild("hrule");

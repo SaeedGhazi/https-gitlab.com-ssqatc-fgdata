@@ -69,6 +69,8 @@ var dialog = {
 
         var w = titlebar.addChild("button");
         w.node.setValues({ "pref-width": 16, "pref-height": 16, legend: "", default: 0 });
+        # "Esc" causes dialog-close
+        w.set("key", "Esc");
         w.setBinding("nasal", "performance_monitor.dialog.del()");
 
         me.dialog.addChild("hrule");

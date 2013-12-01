@@ -1,0 +1,12 @@
+var AltitudeArcLayer =  {};
+AltitudeArcLayer.new = func(group, name, controller=nil) {
+	var m = Layer.new(group, name, AltitudeArcModel );
+	m._model._controller = controller;
+	m.setDraw(func draw_layer(layer:m, callback:canvas.draw_altarc, lod:0) );
+	return m;
+}
+
+##
+# airport-nd lookup key
+register_layer("altitude-arc", AltitudeArcLayer);
+

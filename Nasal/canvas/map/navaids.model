@@ -1,11 +1,11 @@
 var NavaidModel = {};
- NavaidModel.new = func make(LayerModel, NavaidModel);
- NavaidModel.init = func {
- me._view_handle.reset();
- var navaids = findNavaidsWithinRange(15);
- foreach(var n; navaids)
-        me.push(n);
- me.notifyView();
+NavaidModel.new = func make(LayerModel, NavaidModel);
+NavaidModel.init = func {
+	me._view.reset();
+	var navaids = findNavaidsWithinRange(15);
+	foreach(var n; navaids)
+		me.push(n);
+	me.notifyView();
 }
 
 

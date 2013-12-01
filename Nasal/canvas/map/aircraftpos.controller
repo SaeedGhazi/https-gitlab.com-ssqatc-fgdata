@@ -1,0 +1,41 @@
+# Class things:
+var parents = [Map.Controller];
+var __self__ = caller(0)[0];
+Map.Controller.add("Aircraft position", __self__);
+Map.df_controller = __self__;
+var new = func(map) {
+	var m = {
+		parents: [__self__],
+		map: map,
+		_pos: nil, _time: nil,
+	};
+	m.timer = maketimer(0, m, update_pos);
+	m.timer.start();
+	return m;
+};
+var del = func(map) {
+	if (map != me.map) die();
+	me.timer.stop();
+};
+
+# Controller methods
+var update_pos = func {
+	var (lat,lon) = (var pos = geo.aircraft_position()).latlon();
+	var time = systime();
+	me.map.setPos(lat, lon, getprop("/orientation/heading-deg"));
+	if (me._pos == nil)
+		me._pos = geo.Coord.new(pos);
+	else {
+		var dist = me._pos.direct_distance_to(pos);
+		# 2 NM until we update again
+		if (dist < 2 * NM2M) return;
+		# Update at most every 4 seconds to avoid escessive stutter:
+		elsif (time - me._time < 4) return;
+	}
+	#print("update aircraft position");
+	var (x,y,z) = pos.xyz();
+	me._pos.set_xyz(x,y,z);
+	me._time = time;
+	me.map.update();
+};
+

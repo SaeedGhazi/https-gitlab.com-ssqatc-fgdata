@@ -324,4 +324,64 @@ var viewer_position = func {
 	return Coord.new().set_xyz(x, y, z);
 }
 
+# A object to handle differential positioned searches:
+# searchCmd executes and returns the actual search,
+# onAdded and onRemoved are callbacks,
+# and obj is a "me" reference (defaults to "me" in the
+# caller's namespace).
+var PositionedSearch = {
+	new: func(searchCmd, onAdded, onRemoved, obj=nil) {
+		return {
+			parents:[PositionedSearch],
+			obj: obj == nil ? caller(1)[0]["me"] : obj,
+			searchCmd: searchCmd,
+			onAdded: onAdded,
+			onRemoved: onRemoved,
+			result: [],
+		};
+	},
+	_equals: func(a,b) {
+		if (a == nil or b == nil) return 0;
+		return (a == b or a.id == b.id);
+	},
+	condense: func(vec) {
+		var ret = [];
+		foreach (var e; vec)
+			if (e != nil) append(ret, e);
+		return ret;
+	},
+	diff: func(old, new) {
+		var removed = old~[]; #copyvec
+		var added = new~[];
+		# Mark common elements from removed and added:
+		forindex (OUTER; var i; removed)
+			forindex (var j; new)
+				if (me._equals(removed[i], added[j])) {
+					removed[i] = added[j] = nil;
+					continue OUTER;
+				}
+		# And remove those common elements, returning the result:
+		return [new, me.condense(removed), me.condense(added)];
+	},
+	update: func(searchCmd=nil) {
+		if (searchCmd == nil) searchCmd = me.searchCmd;
+		(me.result, var removed, var added) = me.diff(me.result, call(searchCmd, nil, me.obj));
+		foreach (var e; removed)
+			call(me.onRemoved, [e], me.obj);
+		foreach (var e; added)
+			call(me.onAdded, [e], me.obj);
+	},
+	# this is the worst case scenario: switching from 640 to 320 (or vice versa)
+	test: func(from=640, to=320) {
+	  var s= geo.PositionedSearch.new(
+	    func positioned.findWithinRange(from, 'fix'),
+	    func print('added:', arg[0].id),
+	    func print('removed:', arg[0].id)
+	  );
+	  debug.benchmark('Toggle '~from~'nm/'~to~'nm', func {
+	    s.update();
+	    s.update( func positioned.findWithinRange(to, 'fix') );
+	  }); # ~ takes 
+	}, # of test
+};
 

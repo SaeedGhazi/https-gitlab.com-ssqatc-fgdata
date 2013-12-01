@@ -419,11 +419,90 @@ var Group = {
 # which automatically get projected according to the specified projection.
 #
 var Map = {
+  df_controller: nil,
   new: func(ghost)
   {
     return { parents: [Map, Group.new(ghost)] };
-  }
-  # TODO
+  },
+  del: func()
+  {
+    #print("canvas.Map.del()");
+    call(func {
+      me.controller.del(me);
+    }, var err=[]);
+    if (size(err)) {
+      debug.printerror(err);
+      setsize(err, 0);
+    }
+    call(func {
+      foreach (var l; me.layers)
+        call(l[0].del, nil, l[0]);
+      setsize(me.layers, 0);
+    }, err);
+    if (size(err)) {
+      debug.printerror(err);
+      setsize(err, 0);
+    }
+    # call inherited 'del'
+    me.parents = subvec(me.parents,1);
+    me.del();
+  },
+  setController: func(controller=nil)
+  {
+    if (controller == nil)
+      controller = Map.df_controller;
+    elsif (typeof(controller) != 'hash')
+      controller = Map.Controller.get(controller);
+    if (controller.parents[0] != Map.Controller)
+      die("OOP error");
+    me.controller = controller.new(me);
+
+    return me;
+  },
+  addLayer: func(factory, type_arg=nil, priority=nil)
+  {
+    if (!contains(me, "layers"))
+      me.layers = [];
+
+    # Argument handling
+    if (type_arg != nil)
+      var type = factory.get(type_arg);
+    else var type = factory;
+
+    if (priority == nil)
+      priority = type.df_priority;
+    append(me.layers, [type.new(me), priority]);
+    if (priority != nil)
+      me._sort_priority();
+    return me;
+  },
+  setPos: func(lat,lon,hdg=nil)
+  {
+    me.set("ref-lat", lat);
+    me.set("ref-lon", lon);
+    if (hdg != nil)
+      me.set("hdg", hdg);
+
+    # me.map.set("range", 100);
+  },
+  # Update each layer on this Map. Called by
+  # me.controller.
+  update: func
+  {
+    foreach (var l; me.layers)
+      call(l[0].update, arg, l[0]);
+    return me;
+  },
+# private:
+  _sort_priority: func()
+  {
+    me.layers = sort(me.layers, me._sort_cmp);
+    forindex (var i; me.layers)
+      me.layers[i].set("z-index", i);
+  },
+  _sort_cmp: func(a,b) {
+    a[1] != b[1] and a[1] != nil and b[1] != nil and (a[1] < b[1] ? -1 : 1)
+  },
 };
 
 # Text
@@ -442,7 +521,7 @@ var Text = {
   },
   # Set alignment
   #
-  #  @param algin String, one of:
+  #  @param align String, one of:
   #   left-top
   #   left-center
   #   left-bottom
@@ -653,8 +732,8 @@ var Path = {
   cubicTo: func me.addSegment(me.VG_CUBIC_TO_ABS, arg),
   cubic:   func me.addSegment(me.VG_CUBIC_TO_REL, arg),
   # Add a smooth quadratic Bézier curve
-  quadTo: func me.addSegment(me.VG_SQUAD_TO_ABS, arg),
-  quad:   func me.addSegment(me.VG_SQUAD_TO_REL, arg),
+  squadTo: func me.addSegment(me.VG_SQUAD_TO_ABS, arg),
+  squad:   func me.addSegment(me.VG_SQUAD_TO_REL, arg),
   # Add a smooth cubic Bézier curve
   scubicTo: func me.addSegment(me.VG_SCUBIC_TO_ABS, arg),
   scubic:   func me.addSegment(me.VG_SCUBIC_TO_REL, arg),

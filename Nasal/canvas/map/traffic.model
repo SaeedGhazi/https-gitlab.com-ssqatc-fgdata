@@ -1,0 +1,44 @@
+var MPTrafficModel = {};
+MPTrafficModel.new = func make(LayerModel, MPTrafficModel);
+
+MPTrafficModel.init = func {
+	var pos = geo.Coord.new(); # FIXME: all of these should be instance variables
+	var myPosition = geo.Coord.new();
+	var myPositionVec = me._controller['get_position']();
+	myPosition.set_latlon( myPositionVec[0], myPositionVec[1]);
+	var max_dist_nm = me._controller['query_range']();
+
+	##
+	# uncomment this for showing MP traffic
+	# var traffic_type = "multiplayer";
+	# and use this for development purposes:
+	var traffic_type = "aircraft";
+
+	#if (traffic_type == "aircraft")
+	# print("INFO: traffic.model is still showing AI traffic instead of MP traffic!");
+
+	me._view.reset(); # hides: removeAllChildren()
+	var traffic = props.globals.initNode("/ai/models/").getChildren( traffic_type );
+	#print("Total traffic:", size(traffic));
+	foreach(var t; traffic) {
+	  pos.set_latlon(	t.getNode("position/latitude-deg").getValue(),
+				t.getNode("position/longitude-deg").getValue()
+	  );
+
+	  if (pos.distance_to( myPosition ) <= max_dist_nm*NM2M ) {
+	    #print("Pushing: ", t.getNode("callsign").getValue() );
+	    me.push(t);
+	  }
+	}
+	#print("traffic.model: Query range:", max_dist_nm, " Items:", me.hasData() );
+	
+		
+
+	me.notifyView();
+
+	# update itself FIXME: this needs to be killed by the controller (e.g. when tcas layer is disabled)
+	# and the interval needs to be configurable via the controller
+	# so better use maketimer() here
+	settimer(func me.init(), 2);
+}
+

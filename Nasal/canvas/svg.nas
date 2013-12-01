@@ -444,7 +444,7 @@ var parsesvg = func(group, path, options = nil)
 
       var el_src = id_dict[ substr(ref, 1) ];
       if( el_src == nil )
-        return print("parsesvg: Reference to unknown element (" ~ ref ~ ")");
+        return printlog("info", "parsesvg: Reference to unknown element (" ~ ref ~ ")");
 
       # Create new element and copy sub branch from source node
       pushElement(el_src._node.getName(), attr['id']);
@@ -455,7 +455,7 @@ var parsesvg = func(group, path, options = nil)
     }
     else
     {
-      print("parsesvg: skipping unknown element '" ~ name ~ "'");
+      printlog("info", "parsesvg: skipping unknown element '" ~ name ~ "'");
       skip = level;
       return;
     }

@@ -1,0 +1,22 @@
+var DMEModel = {};
+DMEModel.new = func make( LayerModel, DMEModel );
+
+DMEModel.init = func {
+	me._view.reset();
+
+	if(0) {
+		debug.dump( me._controller );
+		print(typeof(
+			me._controller.query_range()
+		));
+	}
+
+	var results = positioned.findWithinRange(me._controller.query_range()*2 ,"dme"); 
+	foreach(result; results) {
+		me.push(result);
+	}
+
+	me.notifyView();
+}
+
+

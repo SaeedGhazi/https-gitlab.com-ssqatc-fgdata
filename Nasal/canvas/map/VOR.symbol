@@ -1,0 +1,52 @@
+# Read by the DotSym.readinstance; each variable becomes a derived class's member/method
+
+var element_type = "group"; # we want a group, becomes "me.element"
+var inited = 0; # this allows us to track whether draw() is an init() or an update()
+var range_vor = nil; # two elements that get drawn when needed
+var radial_vor = nil; # if one is nil, the other has to be nil
+
+var draw = func {
+	if (me.inited) {
+		# Update
+		if (me.controller.isActive(me.model)) {
+			if (me.range_vor == nil) {
+				var rangeNm = me.controller.query_range();
+				# print("VOR is tuned:", me.model.id);
+				var radius = (me.model.range_nm/rangeNm)*345;
+				me.range_vor = me.element.createChild("path")
+					.moveTo(-radius,0)
+					.arcSmallCW(radius,radius,0,2*radius,0)
+					.arcSmallCW(radius,radius,0,-2*radius,0)
+					.setStrokeLineWidth(3)
+					.setStrokeDashArray([5, 15, 5, 15, 5])
+					.setColor(0,1,0);
+
+				var course = controller.get_tuned_course(me.model.frequency/100);
+				vor_grp.createChild("path")
+					.moveTo(0,-radius)
+					.vert(2*radius)
+					.setStrokeLineWidth(3)
+					.setStrokeDashArray([15, 5, 15, 5, 15])
+					.setColor(0,1,0)
+					.setRotation(course*D2R);
+				icon_vor.setColor(0,1,0);
+			}
+			me.range_vor.show();
+			me.radial_vor.show();
+		} else {
+			me.range_vor.hide();
+			me.radial_vor.hide();
+		}
+	} else # Init
+	me.element.createChild("path")
+		.moveTo(-15,0)
+		.lineTo(-7.5,12.5)
+		.lineTo(7.5,12.5)
+		.lineTo(15,0)
+		.lineTo(7.5,-12.5)
+		.lineTo(-7.5,-12.5)
+		.close()
+		.setStrokeLineWidth(3)
+		.setColor(0,0.6,0.85);
+};
+

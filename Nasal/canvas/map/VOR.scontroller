@@ -1,0 +1,10 @@
+# Class things:
+var parents = [Symbol.Controller];
+var __self__ = caller(0)[0];
+Symbol.registry["VOR"].df_controller = __self__;
+var new = func(model) ; # this controller doesn't need an instance
+var LayerController = SymbolLayer.registry["VOR"];
+var isActive = func(model) LayerController.isActive(model);
+var query_range = func()
+	die("VOR.scontroller.query_range /MUST/ be provided by implementation");
+

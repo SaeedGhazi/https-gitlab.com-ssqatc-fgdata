@@ -1,0 +1,26 @@
+var FixModel = {};
+FixModel.new = func make( LayerModel, FixModel );
+
+FixModel.init = func {
+	me._view.reset(); # wraps removeAllChildren() ATM
+
+	#fgcommand('profiler-start');
+	#me._view._view.removeAllChildren(); # clear the "real" canvas drawables
+	#fgcommand('profiler-stop');
+	#me.clear();
+
+	#debug.dump( me._controller) ;
+	#print("Query range is:", me._controller['query_range']() );
+
+	var results = positioned.findWithinRange( me._controller['query_range']()*2 ,"fix"); 
+	foreach(result; results) {
+		me.push(result);
+	}
+
+	#print("query range was:", me._controller['query_range']()*2);
+	#print("total fixes in results/model:", size(results));
+
+	me.notifyView();
+}
+
+

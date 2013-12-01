@@ -1,0 +1,19 @@
+var AltitudeArcModel = {};
+ AltitudeArcModel.new = func make( LayerModel, AltitudeArcModel );
+
+ AltitudeArcModel.init = func {
+# print("Updating alt-arc model");
+var rangeNm = me._controller['query_range']();
+
+me._view.reset();
+me.push(rangeNm);
+me.notifyView();
+
+##
+# FIXME this should be configurable via the controller
+# and it should only be running if the predicate (altitude check) is true
+# for now it'll suffice though  
+settimer(func me.init(), 0.3);
+}
+
+

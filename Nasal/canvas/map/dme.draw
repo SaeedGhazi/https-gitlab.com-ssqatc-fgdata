@@ -1,0 +1,34 @@
+###
+# 
+# 
+
+var draw_dme = func (group, dme, controller=nil, lod=0) {
+	var lat = dme.lat;
+	var lon = dme.lon;
+	var name = dme.id;
+	var freq = dme.frequency;
+
+	var dme_grp = group.createChild("group","dme");
+	var icon_dme = dme_grp .createChild("path", name)
+		.moveTo(-15,0)
+		.line(-12.5,-7.5)
+		.line(7.5,-12.5)
+		.line(12.5,7.5)
+		.lineTo(7.5,-12.5)
+		.line(12.5,-7.5)
+		.line(7.5,12.5)
+		.line(-12.5,7.5)
+		.lineTo(15,0)
+		.lineTo(7.5,12.5)
+		.vert(14.5)
+		.horiz(-14.5)
+		.vert(-14.5)
+		.close()
+		.setStrokeLineWidth(3)
+		.setColor(0,0.6,0.85);
+	dme_grp.setGeoPosition(lat, lon)
+		.set("z-index",3);
+
+	if( controller != nil and controller['is_tuned'](freq))
+		icon_dme.setColor(0,1,0);
+}

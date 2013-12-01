@@ -1,9 +1,9 @@
 
 #TODO: split: draw_single_runway(pos)
-var draw_runways = func(group, apt,lod) {
+
+var draw_runways = func(group, apt, controller=nil, lod=0) {
   DEBUG and print("Drawing runways for:", apt.id);
-# var group = group.createChild("group", "apt-"~apt.id);
-# group = group.createChild("group", "runways");
+
   foreach(var rw1; apt.runwaysWithoutReciprocals())
   {
     var clr = SURFACECOLORS[rw1.surface];

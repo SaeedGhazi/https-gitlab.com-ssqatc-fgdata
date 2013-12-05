@@ -42,12 +42,10 @@ var NDStyles = {
       },
 
       # where all the symbols are stored
-      # TODO: the SVG image should be moved to the canvas folder
-      # so that it can be shared by other aircraft, i.e. no 744 dependencies
-      # also SVG elements should be renamed to use boeing/airbus prefix
+      # TODO: SVG elements should be renamed to use boeing/airbus prefix
       # aircraft developers should all be editing the same ND.svg image
       # the code can deal with the differences now
-      svg_filename: "Aircraft/747-400/Models/Cockpit/Instruments/ND/ND.svg",
+      svg_filename: "Nasal/canvas/map/boeingND.svg",
 
 ##
 ## this loads and configures existing layers (currently, *.layer files in Nasal/canvas/map)
@@ -65,6 +63,18 @@ var NDStyles = {
 
 	   }, # end of layer update predicate
 	}, # end of fixes layer
+	
+	# Should redraw every 10 seconds
+	{ name:'storms', update_on:['toggle_range','toggle_weather','toggle_display_mode'], predicate: func(nd, layer) {
+		# print("Running fixes predicate");
+		var visible=nd.get_switch('toggle_weather') and nd.get_switch('toggle_display_mode') != "PLAN";
+		if (visible) {
+		  print("storms update requested!");
+		  trigger_update( layer );
+	      } layer._view.setVisible(visible);
+
+	   }, # end of layer update predicate
+	}, # end of storms layer
 
 	{ name:'airports-nd', update_on:['toggle_range','toggle_airports','toggle_display_mode'], predicate: func(nd, layer) {
 		# print("Running airports-nd predicate");
@@ -119,12 +129,6 @@ var NDStyles = {
 	  }, # end of layer update predicate
 	}, # end of route layer
 
-	{ name:'altitude-arc', not_a_map:1, update_on:['toggle_range','toggle_display_mode'], predicate: func(nd, layer) {
-	  trigger_update( layer ); # clear & redraw
-	  layer._view.setVisible( 1 ); 
-	  }, # end of layer update predicate
-	}, # end of alt-arc layer
-
 ## add other layers here, layer names must match the registered names as used in *.layer files	for now
 ## this will all change once we're using Philosopher's MapStructure framework
 	
@@ -158,31 +162,57 @@ var NDStyles = {
 	  is_false: func(nd) nd.symbols.tas.hide(),
 	  }, # end of tas behavior callbacks
 	}, # end of tas hash
-      {
+	  {
+	id: 'wpActiveId',
+	impl: {
+	  init: func(nd,symbol),
+	  predicate: func(nd) getprop("/autopilot/route-manager/wp/id") != nil and getprop("autopilot/route-manager/active"),
+	  is_true: func(nd) {
+		nd.symbols.wpActiveId.setText(getprop("/autopilot/route-manager/wp/id"));
+		nd.symbols.wpActiveId.show();
+		},
+	  is_false: func(nd) nd.symbols.wpActiveId.hide(),
+	},  # of wpActiveId.impl
+	  }, # of wpActiveId
+	  {
+	id: 'wpActiveDist',
+	impl: {
+	  init: func(nd,symbol),
+	  predicate: func(nd) getprop("/autopilot/route-manager/wp/dist") != nil and getprop("autopilot/route-manager/active"),
+	  is_true: func(nd) {
+		nd.symbols.wpActiveDist.setText(sprintf("%3.01fNM",getprop("/autopilot/route-manager/wp/dist")));
+		nd.symbols.wpActiveDist.show();
+		},
+	  is_false: func(nd) nd.symbols.wpActiveDist.hide(),
+	},  # of wpActiveDist.impl
+	  }, # of wpActiveDist
+	  {
 	id: 'eta',
 	impl: {
 	  init: func(nd,symbol),
-	  predicate: func(nd) getprop("autopilot/route-manager/wp/eta") != nil,
+	  predicate: func(nd) getprop("autopilot/route-manager/wp/eta") != nil and getprop("autopilot/route-manager/active"),
 	  is_true: func(nd) {
-		var eta=getprop("autopilot/route-manager/wp/eta");
-		var etaWp = split(":",eta);
-		var h = getprop("/sim/time/utc/hour");
-		var m = getprop("/sim/time/utc/minute")+sprintf("%02f",etaWp[0]);
-		var s = getprop("/sim/time/utc/second")+sprintf("%02f",etaWp[1]);
+        var etaSec = getprop("/sim/time/utc/day-seconds")+getprop("autopilot/route-manager/wp/eta-seconds");
+        var h = math.floor(etaSec/3600);
+		if (h>24) h=h-24;
+        etaSec=etaSec-3600*h;
+        var m = math.floor(etaSec/60);
+        etaSec=etaSec-60*m;
+        var s = etaSec;
 		nd.symbols.eta.setText(sprintf("%02.0f%02.0f.%02.0fz",h,m,s));
 		nd.symbols.eta.show();
 		},
 	  is_false: func(nd) nd.symbols.eta.hide(),
 	},  # of eta.impl
-      }, # of eta
-      { id:'hdg',
+	  }, # of eta
+	  { id:'hdg',
 	impl: {
 	  init: func(nd,symbol),
 	  predicate: ALWAYS, # always true
-	  is_true: func(nd) nd.symbols.hdg.setText(sprintf("%03.0f", nd.aircraft_source.get_hdg() )),
+	  is_true: func(nd) nd.symbols.hdg.setText(sprintf("%03.0f", nd.aircraft_source.get_hdg_mag() )),
 	  is_false: NOTHING,
 	}, # of hdg.impl
-      }, # of hdg
+	  }, # of hdg
 
       { id:'gs',
 	impl: {
@@ -195,23 +225,15 @@ var NDStyles = {
 	  is_false: func(nd) nd.symbols.gs.setFontSize(52),
 	}, # of gs.impl
       }, # of gs
-
-      { id:'compass',
+	  
+      { id:'rangeArcs',
 	impl: {
-	  init: func(nd,symbol) nd.getElementById(symbol.id).updateCenter(),
-	  common: func(nd) ,
-	  predicate: func(nd) (nd.in_mode('toggle_display_mode', ['APP','MAP','PLAN','VOR'] )),
-	  is_true: func(nd) {
-	    # # orientation/track-magnetic-deg is noisy
-	    nd.symbols.compass.setRotation(-nd.aircraft_source.get_hdg() *D2R); 
-	    nd.symbols.compass.show();
-	  },
-	  is_false: func(nd) nd.symbols.compass.hide(),
-	}, # of compass.impl
-      }, # of compass
-
-
-
+	  init: func(nd,symbol),
+	  predicate: func(nd) (((nd.get_switch('toggle_display_mode') == "APP" or nd.get_switch('toggle_display_mode') == "VOR") and nd.get_switch('toggle_weather')) or nd.get_switch('toggle_display_mode') == "MAP"),
+	  is_true: func(nd) nd.symbols.rangeArcs.show(),
+	  is_false: func(nd) nd.symbols.rangeArcs.hide(),
+	}, # of rangeArcs.impl
+      }, # of rangeArcs
 
       ], # end of vector with features
 
@@ -233,7 +255,8 @@ var NDStyles = {
 var NDSourceDriver = {};
 NDSourceDriver.new = func {	
  var m = {parents:[NDSourceDriver]};
- m.get_hdg= func getprop("/orientation/heading-deg");
+ m.get_hdg_mag= func getprop("/orientation/heading-magnetic-deg");
+ m.get_trk_mag= func getprop("/orientation/track-magnetic-deg");
  m.get_lat= func getprop("/position/latitude-deg");
  m.get_lon= func getprop("/position/longitude-deg");
  m.get_spd= func getprop("/velocities/groundspeed-kt");
@@ -263,6 +286,14 @@ var default_switches = {
  'toggle_traffic': 	{path: '/inputs/tcas',value:0, type:'BOOL'},
  'toggle_display_mode': {path: '/mfd/display-mode', value:'MAP', type:'STRING'},
 };
+
+# Hack to update weather radar once every 10 seconds
+var update_weather = func {
+	if (getprop("/instrumentation/efis/inputs/wxr") != nil)
+		setprop("/instrumentation/efis/inputs/wxr",getprop("/instrumentation/efis/inputs/wxr"));
+	settimer(update_weather, 10);
+}
+update_weather();
 
 ##
 # TODO: 
@@ -312,7 +343,8 @@ var NavDisplay = {
     # for creating NDs that are driven by AI traffic instead of the main aircraft (generalization rocks!)
     connectAI: func(source=nil) {
 	me.aircraft_source = {
-	get_hdg: func source.getNode('orientation/true-heading-deg').getValue(),
+	get_hdg_mag: func source.getNode('orientation/heading-magnetic-deg').getValue(),
+	get_trk_mag: func source.getNode('orientation/track-magnetic-deg').getValue(),
 	get_lat: func source.getNode('position/latitude-deg').getValue(),
 	get_lon: func source.getNode('position/longitude-deg').getValue(),
 	get_spd: func source.getNode('velocities/true-airspeed-kt').getValue(),
@@ -403,7 +435,7 @@ var NavDisplay = {
 		### this is the "old" method that's less flexible, we want to use the style hash instead (see above)
 		# because things are much better configurable that way
 		# now look up all required SVG elements and initialize member fields using the same name  to have a convenient handle
-		foreach(var element; ["wpActiveId","wpActiveDist","wind",
+		foreach(var element; ["wind",
 				      "dmeLDist","dmeRDist","vorLId","vorRId",
 				      "range","status.wxr","status.wpt",
 				      "status.sta","status.arpt"]) 
@@ -413,8 +445,8 @@ var NavDisplay = {
 		# anything that needs updatecenter called, should be added to the vector here
 		# 
 		foreach(var element; ["rotateComp","windArrow","selHdg",
-				      "curHdgPtr","staFromL","staToL",
-				      "staFromR","staToR"] )
+				      "curHdgPtr","staFromL","staToL","trkInd",
+				      "staFromR","staToR","compass","hdgTrk","truMag","altArc"] )
 		  me.symbols[element] = me.nd.getElementById(element).updateCenter(); 
 
 		# this should probably be using Philosopher's new SymbolLayer ?
@@ -545,16 +577,15 @@ var NavDisplay = {
 		var latNm = 60;
 		var lonNm = 60;
 
-
 		# fgcommand('profiler-start');
 		
-		var userHdg = me.aircraft_source.get_hdg(); 
-		var userTrkMag = me.aircraft_source.get_hdg(); # getprop("orientation/heading-deg"); # orientation/track-magnetic-deg is noisy
+		var userHdgMag = me.aircraft_source.get_hdg_mag(); 
+		var userTrkMag = me.aircraft_source.get_trk_mag(); # getprop("orientation/heading-deg"); # orientation/track-magnetic-deg is noisy
 		var userLat = me.aircraft_source.get_lat(); 
 		var userLon = me.aircraft_source.get_lon(); 
 
 		# this should only ever happen when testing the experimental AI/MP ND driver hash (not critical)
-		if (!userHdg or !userTrkMag or !userLat or !userLon) {
+		if (!userHdgMag or !userTrkMag or !userLat or !userLon) {
 		print("aircraft source invalid, returning !");
 		return; 
 		}
@@ -567,10 +598,8 @@ var NavDisplay = {
 		latNm = latlen*M2NM; #60 at equator
 		lonNm = lonlen*M2NM; #60 at equator
 		
-		me.symbols.windArrow.setRotation((getprop("/environment/wind-from-heading-deg")-userHdg)*D2R);
+		me.symbols.windArrow.setRotation((getprop("/environment/wind-from-heading-deg")-userHdgMag)*D2R);
 		me.symbols.wind.setText(sprintf("%3.0f / %2.0f",getprop("/environment/wind-from-heading-deg"),getprop("/environment/wind-speed-kt")));
-		
-		
 		
 		if ((var navid0=getprop("instrumentation/nav/nav-id"))!=nil )
 			me.symbols.vorLId.setText(navid0);
@@ -583,33 +612,58 @@ var NavDisplay = {
 			
 		me.symbols.range.setText(sprintf("%3.0f",me.rangeNm() ));
 		#rangeNm=rangeNm*2;
-		
-		# updates two SVG symbols, should use a listener specified in the config hash
-		if(getprop("/autopilot/route-manager/active")) {
-			me.symbols.wpActiveId.setText(getprop("/autopilot/route-manager/wp/id"));
-			me.symbols.wpActiveDist.setText(sprintf("%3.01fNM",getprop("/autopilot/route-manager/wp/dist")));
-		}
 
 		# reposition the map, change heading & range: 
 		me.map._node.getNode("ref-lat",1).setDoubleValue(userLat);
 		me.map._node.getNode("ref-lon",1).setDoubleValue(userLon);
-		me.map._node.getNode("hdg",1).setDoubleValue(userHdg); # should also be using a listener for this
 		me.map._node.getNode("range",1).setDoubleValue(me.rangeNm()/2); # avoid this  here, use a listener instead
 
+		if(me.get_switch('toggle_display_mode') == 'MAP' or me.get_switch('toggle_display_mode') == 'PLAN' ) {
+			me.symbols.rotateComp.setRotation(-userTrkMag*D2R);
+			me.symbols.trkInd.setRotation(0);
+			me.symbols.curHdgPtr.setRotation(userHdgMag*D2R);
+			me.map._node.getNode("hdg",1).setDoubleValue(userTrkMag);
+			me.symbols.compass.setRotation(-userTrkMag*D2R);
+			me.symbols.hdgTrk.setText("TRK");
+			me.symbols.truMag.setText("MAG");
+		}
+		if(me.get_switch('toggle_display_mode') == 'APP' or me.get_switch('toggle_display_mode') == 'VOR' ) {
+			me.symbols.rotateComp.setRotation(-userHdgMag*D2R);
+			me.symbols.trkInd.setRotation((userTrkMag-userHdgMag)*D2R);
+			me.symbols.curHdgPtr.setRotation(userHdgMag*D2R);
+			me.map._node.getNode("hdg",1).setDoubleValue(userHdgMag);
+			me.symbols.compass.setRotation(-userHdgMag*D2R);
+			me.symbols.hdgTrk.setText("HDG");
+			me.symbols.truMag.setText("MAG");
+		}
 		
-		me.symbols.rotateComp.setRotation(-userTrkMag*D2R);		
+		if (abs(getprop("velocities/vertical-speed-fps")) > 10) {
+			var altRangeNm = (getprop("autopilot/settings/target-altitude-ft")-
+			getprop("instrumentation/altimeter/indicated-altitude-ft"))/getprop("velocities/vertical-speed-fps")*
+			getprop("/velocities/groundspeed-kt")*KT2MPS*M2NM;
+
+			if(altRangeNm > 1) {
+				var altRangePx = (350/me.rangeNm())*altRangeNm;
+				if (altRangePx > 700)
+					altRangePx = 700;
+				me.symbols.altArc.setTranslation(0,-altRangePx);
+			} # altRangeNm > 1
+			me.symbols.altArc.show();
+		} else {
+			me.symbols.altArc.hide();
+		}# fps > 10
 		
 		## these would require additional arguments to be moved to an external config hash currently
-		me.symbols.curHdgPtr.setRotation(userHdg*D2R);
+		
 		me.symbols.selHdg.setRotation(getprop("autopilot/settings/true-heading-deg")*D2R);
 		if (var nav0hdg=getprop("instrumentation/nav/heading-deg") != nil)
-			me.symbols.staFromL.setRotation((nav0hdg-userHdg+180)*D2R);
+			me.symbols.staFromL.setRotation((nav0hdg-userHdgMag+180)*D2R);
 		if (var nav0hdg=getprop("instrumentation/nav/heading-deg") != nil)
-			me.symbols.staToL.setRotation((nav0hdg-userHdg)*D2R);
+			me.symbols.staToL.setRotation((nav0hdg-userHdgMag)*D2R);
 		if (var nav1hdg=getprop("instrumentation/nav[1]/heading-deg") != nil)
-			me.symbols.staFromR.setRotation((nav1hdg-userHdg+180)*D2R);
+			me.symbols.staFromR.setRotation((nav1hdg-userHdgMag+180)*D2R);
 		if (var nav1hdg=getprop("instrumentation/nav[1]/heading-deg") != nil)
-			me.symbols.staToR.setRotation((nav1hdg-userHdg)*D2R);
+			me.symbols.staToR.setRotation((nav1hdg-userHdgMag)*D2R);
 
 
 		## run all predicates in the NDStyle hash and evaluate their true/false behavior callbacks

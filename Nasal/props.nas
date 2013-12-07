@@ -10,15 +10,16 @@
 # available in C++; just use node.getNode(path).whatever() instead.
 #
 var Node = {
-    getNode        : func wrap(_getNode(me._g, arg)),
-    getParent      : func wrap(_getParent(me._g, arg)),
-    getChild       : func wrap(_getChild(me._g, arg)),
-    getChildren    : func wrap(_getChildren(me._g, arg)),
-    addChild       : func wrap(_addChild(me._g, arg)),
-    addChildren    : func wrap(_addChildren(me._g, arg)),
-    removeChild    : func wrap(_removeChild(me._g, arg)),
-    removeChildren : func wrap(_removeChildren(me._g, arg)),
-    getAliasTarget : func wrap(_getAliasTarget(me._g, arg)),
+    getNode          : func wrap(_getNode(me._g, arg)),
+    getParent        : func wrap(_getParent(me._g, arg)),
+    getChild         : func wrap(_getChild(me._g, arg)),
+    getChildren      : func wrap(_getChildren(me._g, arg)),
+    addChild         : func wrap(_addChild(me._g, arg)),
+    addChildren      : func wrap(_addChildren(me._g, arg)),
+    removeChild      : func wrap(_removeChild(me._g, arg)),
+    removeChildren   : func wrap(_removeChildren(me._g, arg)),
+    removeAllChildren: func wrap(_removeAllChildren(me._g, arg)),
+    getAliasTarget   : func wrap(_getAliasTarget(me._g, arg)),
 
     getName        : func _getName(me._g, arg),
     getIndex       : func _getIndex(me._g, arg),
@@ -52,12 +53,6 @@ var Node = {
     remove : func {
         if((var p = me.getParent()) == nil) return nil;
         p.removeChild(me.getName(), me.getIndex());
-    },
-
-    removeAllChildren : func {
-      foreach(var c; me.getChildren())
-        me.removeChild(c.getName(), c.getIndex());
-      return me;
     },
 };
 

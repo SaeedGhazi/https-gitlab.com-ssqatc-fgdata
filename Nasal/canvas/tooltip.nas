@@ -223,6 +223,11 @@ var Tooltip = {
     var screenW = getprop('/sim/startup/xsize');
     me.setInt("x", (screenW - me._width) * 0.5);
     me.show();
+    # https://code.google.com/p/flightgear-bugs/issues/detail?id=1273
+    # when tooltip is shown for some other reason, ensure it stays for
+    # the full delay (unless replaced). Don't allow the update-hover
+    # code path to hide() with the shorter delay.
+    me._hiding = 1;
     me._hideTimer.restart(timeout or me.DELAY);
   },
 

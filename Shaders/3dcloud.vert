@@ -2,6 +2,7 @@
 #version 120
 
 varying float fogFactor;
+varying vec4  cloudColor;
 
 uniform float range; // From /sim/rendering/clouds3d-vis-range
 uniform float detail_range; // From /sim/rendering/clouds3d_detail-range
@@ -48,7 +49,7 @@ void main(void)
     // More than detail_range away, so discard all sprites on opposite side of
     // cloud center by shifting them beyond the view fustrum
     gl_Position = vec4(0.0,0.0,10.0,1.0);
-    gl_FrontColor.a = 0.0;
+    cloudColor = vec4(0.0);
   } else {
     // Determine a lighting normal based on the vertex position from the
     // center of the cloud, so that sprite on the opposite side of the cloud to the sun are darker.
@@ -70,17 +71,17 @@ void main(void)
                   
     // Final position of the sprite
     gl_Position = gl_ModelViewProjectionMatrix * gl_Position;    
-    gl_FrontColor = gl_LightSource[0].diffuse * shade + gl_FrontLightModelProduct.sceneColor;
+    cloudColor = gl_LightSource[0].diffuse * shade + gl_FrontLightModelProduct.sceneColor;
     
     if ((fogCoord > (0.9 * detail_range)) && (fogCoord > center_dist) && (shade_factor < 0.7)) {
       // cloudlet is almost at the detail range, so fade it out.
-      gl_FrontColor.a = 1.0 - smoothstep(0.9 * detail_range, detail_range, fogCoord);
+      cloudColor.a = 1.0 - smoothstep(0.9 * detail_range, detail_range, fogCoord);
     } else {
       // As we get within 100m of the sprite, it is faded out. Equally at large distances it also fades out.
-      gl_FrontColor.a = min(smoothstep(10.0, 100.0, fogCoord), 1.0 - smoothstep(0.9 * range, range, fogCoord));    
+      cloudColor.a = min(smoothstep(10.0, 100.0, fogCoord), 1.0 - smoothstep(0.9 * range, range, fogCoord));
     }
     
-    gl_BackColor = gl_FrontColor;
+    //gl_BackColor = cloudColor;
 
     // Fog doesn't affect clouds as much as other objects.
     fogFactor = exp( -gl_Fog.density * fogCoord * 0.5);

@@ -31,6 +31,7 @@ uniform float depth_factor;
 uniform float tile_size;
 uniform float quality_level;
 uniform float snowlevel;
+uniform bool random_buildings;
 
 const float scale = 1.0;
 int linear_search_steps = 10;
@@ -153,7 +154,9 @@ float ray_intersect_relief(vec2 dp, vec2 ds)
 
 float ray_intersect(vec2 dp, vec2 ds)
 {
-    if ( quality_level >= 4.0 )
+    if ( random_buildings )
+        return 0.0;
+    else if ( quality_level >= 4.0 )
         return ray_intersect_QDM( dp, ds );
     else
         return ray_intersect_relief( dp, ds );
@@ -164,13 +167,18 @@ void main (void)
     if ( quality_level >= 3.0 ) {
         linear_search_steps = 20;
     }
+
+    float depthfactor = depth_factor;
+    if ( random_buildings )
+        depthfactor = 0.0;
+
     vec3 normal = normalize(VNormal);
     vec3 tangent = normalize(VTangent);
     vec3 binormal = normalize(VBinormal);
     vec3 ecPos3 = ecPosition.xyz / ecPosition.w;
     vec3 V = normalize(ecPos3);
     vec3 s = vec3(dot(V, tangent), dot(V, binormal), dot(normal, -V));
-    vec2 ds = s.xy * depth_factor / s.z;
+    vec2 ds = s.xy * depthfactor / s.z;
     vec2 dp = gl_TexCoord[0].st - ds;
     float d = ray_intersect(dp, ds);
 
@@ -206,7 +214,7 @@ void main (void)
             // step(0.8,Nz)*(1.0-emis)*smoothstep(snowlevel+300.0, snowlevel+360.0, (rawpos.z)+nvL[1]*3000.0));
     // finalColor *= ambient_light;
 
-    vec4 p = vec4( ecPos3 + tile_size * V * (d-1.0) * depth_factor / s.z, 1.0 );
+    vec4 p = vec4( ecPos3 + tile_size * V * (d-1.0) * depthfactor / s.z, 1.0 );
 
     if (dot(normal,-V) > 0.1) {
         vec4 iproj = gl_ProjectionMatrix * p;

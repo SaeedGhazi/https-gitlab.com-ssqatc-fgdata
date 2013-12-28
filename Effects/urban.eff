@@ -7,11 +7,13 @@
 			<use>/environment/snow-level-m</use>
 		</snow-level>
 		<depth-factor type="float">0.008</depth-factor>
-		<night-color type="vec3d">0.75 0.59 0.05</night-color>
+		<night-color type="vec3d">1 1 0.50</night-color>
+		<random-buildings type="bool">
+			<use>/sim/rendering/random-buildings</use>
+		</random-buildings>
 		<quality-level>
 			<use>/sim/rendering/shaders/urban</use>
 		</quality-level>
-
 		<!--fog include-->
 		<visibility>
 			<use>/environment/ground-visibility-m</use>
@@ -32,15 +34,12 @@
 			<use>/sim/rendering/shaders/skydome</use>
 		</fogtype>
 		<!-- 	END fog include -->
-
 	</parameters>
 	<generate>
 		<normal type="int">15</normal>
 		<tangent type="int">6</tangent>
 		<!--<binormal type="int">7</binormal>-->
 	</generate>
-
-
 
 
 	<technique n="1">
@@ -52,10 +51,6 @@
 					<value type="float">4.0</value>
 					<float-property>/sim/rendering/shaders/urban</float-property>
 				</less-equal>
-				<equal>
-					<property>/sim/rendering/random-buildings</property>
-					<value type="bool">false</value>
-				</equal>
 				<or>
 					<less-equal>
 						<value type="float">2.0</value>
@@ -111,7 +106,7 @@
 					<use>texture[0]/image</use>
 				</image>
 				<type>
-					<use>texture[0]/type</use>
+				  <use>texture[0]/type</use>
 				</type>
 				<filter>
 					<use>texture[0]/filter</use>
@@ -132,7 +127,7 @@
 					<use>texture[2]/image</use>
 				</image>
 				<type>
-					<use>texture[2]/type</use>
+				  <use>texture[2]/type</use>
 				</type>
 				<filter>
 					<use>texture[2]/filter</use>
@@ -153,7 +148,7 @@
 					<use>texture[2]/image</use>
 				</image>
 				<type>
-					<use>texture[2]/type</use>
+				  <use>texture[2]/type</use>
 				</type>
 				<filter>nearest-mipmap-nearest</filter>
 				<wrap-s>
@@ -178,7 +173,7 @@
 			</texture-unit>
 			<program>
 				<vertex-shader>Shaders/urban-lightfield.vert</vertex-shader>
-			
+
 				<fragment-shader>Shaders/urban-lightfield.frag</fragment-shader>
 				<attribute>
 					<name>tangent</name>
@@ -253,6 +248,13 @@
 				<type>float</type>
 				<value>
 					<use>max-lod-level</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>random_buildings</name>
+				<type>bool</type>
+				<value type="bool">
+					<use>random-buildings</use>
 				</value>
 			</uniform>
 			<!-- 	    BEGIN fog include -->
@@ -341,7 +343,7 @@
         			  <type>float</type>
         			  <value><use>moonlight</use></value>
       			   </uniform>
-			
+
 			<!-- 			END fog include -->
 		</pass>
 	</technique>
@@ -356,10 +358,6 @@
 					<value type="float">1.0</value>
 					<float-property>/sim/rendering/shaders/urban</float-property>
 				</less-equal>
-				<equal>
-					<property>/sim/rendering/random-buildings</property>
-					<value type="bool">false</value>
-				</equal>
 				<or>
 					<less-equal>
 						<value type="float">2.0</value>
@@ -411,7 +409,7 @@
 					<use>texture[0]/image</use>
 				</image>
 				<type>
-					<use>texture[0]/type</use>
+				  <use>texture[0]/type</use>
 				</type>
 				<filter>
 					<use>texture[0]/filter</use>
@@ -432,7 +430,7 @@
 					<use>texture[2]/image</use>
 				</image>
 				<type>
-					<use>texture[2]/type</use>
+				  <use>texture[2]/type</use>
 				</type>
 				<filter>
 					<use>texture[2]/filter</use>
@@ -544,8 +542,7 @@
 				 <name>fogstructure</name>
 				 <type>float</type>
 				 <value><use>fogstructure</use></value>
-     		 	  </uniform>
-			
+			</uniform>
 
 			<!-- 			END fog include -->
 			<uniform>
@@ -609,7 +606,13 @@
         			  <value><use>moonlight</use></value>
       			   </uniform>
 
-
+			<uniform>
+				<name>random_buildings</name>
+				<type>bool</type>
+				<value type="bool">
+					<use>random-buildings</use>
+				</value>
+			</uniform>
 		</pass>
 	</technique>
 
@@ -624,10 +627,6 @@
 					<value type="float">4.0</value>
 					<float-property>/sim/rendering/shaders/urban</float-property>
 				</less-equal>
-				<equal>
-					<property>/sim/rendering/random-buildings</property>
-					<value type="bool">false</value>
-				</equal>
 				<or>
 					<less-equal>
 						<value type="float">2.0</value>
@@ -675,7 +674,7 @@
 					<use>texture[0]/image</use>
 				</image>
 				<type>
-					<use>texture[0]/type</use>
+				  <use>texture[0]/type</use>
 				</type>
 				<filter>
 					<use>texture[0]/filter</use>
@@ -696,7 +695,7 @@
 					<use>texture[2]/image</use>
 				</image>
 				<type>
-					<use>texture[2]/type</use>
+				  <use>texture[2]/type</use>
 				</type>
 				<filter>
 					<use>texture[2]/filter</use>
@@ -813,6 +812,13 @@
 					<use>max-lod-level</use>
 				</value>
 			</uniform>
+			<uniform>
+				<name>random_buildings</name>
+				<type>bool</type>
+				<value type="bool">
+					<use>random-buildings</use>
+				</value>
+			</uniform>
 		</pass>
 	</technique>
 	<technique n="7">
@@ -824,10 +830,6 @@
 					<value type="float">1.0</value>
 					<float-property>/sim/rendering/shaders/urban</float-property>
 				</less-equal>
-				<equal>
-					<property>/sim/rendering/random-buildings</property>
-					<value type="bool">false</value>
-				</equal>
 				<or>
 					<less-equal>
 						<value type="float">2.0</value>
@@ -871,7 +873,7 @@
 					<use>texture[0]/image</use>
 				</image>
 				<type>
-					<use>texture[0]/type</use>
+				  <use>texture[0]/type</use>
 				</type>
 				<filter>
 					<use>texture[0]/filter</use>
@@ -892,7 +894,7 @@
 					<use>texture[2]/image</use>
 				</image>
 				<type>
-					<use>texture[2]/type</use>
+				  <use>texture[2]/type</use>
 				</type>
 				<filter>
 					<use>texture[2]/filter</use>
@@ -979,6 +981,13 @@
 					<use>snow-level</use>
 				</value>
 			</uniform>
+			<uniform>
+				<name>random_buildings</name>
+				<type>bool</type>
+				<value type="bool">
+					<use>random-buildings</use>
+				</value>
+			</uniform>
 		</pass>
 	</technique>
 	<technique n="8">
@@ -990,10 +999,6 @@
 					<value type="float">4.0</value>
 					<float-property>/sim/rendering/shaders/urban</float-property>
 				</less-equal>
-				<equal>
-					<property>/sim/rendering/random-buildings</property>
-					<value type="bool">false</value>
-				</equal>
 				<or>
 					<less-equal>
 						<value type="float">2.0</value>
@@ -1049,7 +1054,7 @@
 					<use>texture[0]/image</use>
 				</image>
 				<type>
-					<use>texture[0]/type</use>
+				  <use>texture[0]/type</use>
 				</type>
 				<filter>
 					<use>texture[0]/filter</use>
@@ -1070,7 +1075,7 @@
 					<use>texture[2]/image</use>
 				</image>
 				<type>
-					<use>texture[2]/type</use>
+				  <use>texture[2]/type</use>
 				</type>
 				<filter>
 					<use>texture[2]/filter</use>
@@ -1192,6 +1197,13 @@
 				<type>float</type>
 				<value>
 					<use>max-lod-level</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>random_buildings</name>
+				<type>bool</type>
+				<value type="bool">
+					<use>random-buildings</use>
 				</value>
 			</uniform>
 			<!-- 	    BEGIN fog include -->
@@ -1249,10 +1261,6 @@
 					<value type="float">1.0</value>
 					<float-property>/sim/rendering/shaders/urban</float-property>
 				</less-equal>
-				<equal>
-					<property>/sim/rendering/random-buildings</property>
-					<value type="bool">false</value>
-				</equal>
 				<or>
 					<less-equal>
 						<value type="float">2.0</value>
@@ -1304,7 +1312,7 @@
 					<use>texture[0]/image</use>
 				</image>
 				<type>
-					<use>texture[0]/type</use>
+				  <use>texture[0]/type</use>
 				</type>
 				<filter>
 					<use>texture[0]/filter</use>
@@ -1325,7 +1333,7 @@
 					<use>texture[2]/image</use>
 				</image>
 				<type>
-					<use>texture[2]/type</use>
+				  <use>texture[2]/type</use>
 				</type>
 				<filter>
 					<use>texture[2]/filter</use>
@@ -1456,8 +1464,6 @@
 					<use>snow-level</use>
 				</value>
 			</uniform>
-
-
 		</pass>
 	</technique>
 </PropertyList>

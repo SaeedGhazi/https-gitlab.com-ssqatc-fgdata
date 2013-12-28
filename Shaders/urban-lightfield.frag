@@ -39,7 +39,7 @@ uniform float visibility;
 uniform float avisibility;
 uniform float scattering;
 uniform float terminator;
-uniform float terrain_alt; 
+uniform float terrain_alt;
 uniform float hazeLayerAltitude;
 uniform float overcast;
 uniform float eye_alt;
@@ -49,6 +49,7 @@ uniform float wetness;
 uniform float fogstructure;
 uniform float cloud_self_shading;
 uniform vec3 night_color;
+uniform bool random_buildings;
 
 const float scale = 1.0;
 int linear_search_steps = 10;
@@ -125,7 +126,7 @@ float interpolatedNoise3D(in float x, in float y, in float z)
 
       float ii1 = simple_interpolate(i1,i2,fractional_x);
       float ii2 = simple_interpolate(i3,i4,fractional_x);
- 
+
 
       return simple_interpolate(ii1 , ii2 , fractional_y);
 }
@@ -174,9 +175,9 @@ if (alt < 30000.0)
 else if (alt < 50000.0)
 	{
 	fade_mix = (alt - 30000.0)/20000.0;
-	return fade_mix * exp(-targ*targ - pow(targ,4.0)) + (1.0 - fade_mix) * exp(-targ - pow(targ,4.0));	
+	return fade_mix * exp(-targ*targ - pow(targ,4.0)) + (1.0 - fade_mix) * exp(-targ - pow(targ,4.0));
 	}
-else 
+else
 	{
 	return exp(- targ * targ - pow(targ,4.0));
 	}
@@ -299,7 +300,9 @@ float ray_intersect_relief(vec2 dp, vec2 ds)
 
 float ray_intersect(vec2 dp, vec2 ds)
 {
-    if ( quality_level >= 4.0 )
+    if ( random_buildings )
+        return 0.0;
+    else if ( quality_level >= 4.0 )
         return ray_intersect_QDM( dp, ds );
     else
         return ray_intersect_relief( dp, ds );
@@ -310,6 +313,11 @@ void main (void)
     if ( quality_level >= 3.0 ) {
         linear_search_steps = 20;
     }
+
+    float depthfactor = depth_factor;
+    if ( random_buildings )
+        depthfactor = 0.0;
+
     vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
     float effective_scattering = min(scattering, cloud_self_shading);
     vec3 normal = normalize(VNormal);
@@ -319,7 +327,7 @@ void main (void)
     vec3 ecPos3 = ecPosition.xyz / ecPosition.w;
     vec3 V = normalize(ecPos3);
     vec3 s = vec3(dot(V, tangent), dot(V, binormal), dot(normal, -V));
-    vec2 ds = s.xy * depth_factor / s.z;
+    vec2 ds = s.xy * depthfactor / s.z;
     vec2 dp = gl_TexCoord[0].st - ds;
     float d = ray_intersect(dp, ds);
 
@@ -340,7 +348,7 @@ void main (void)
     if ( quality_level >= 2.0 ) {
         dp += ds * d;
         vec3 sl = normalize( vec3( dot( l, tangent ), dot( l, binormal ), dot( -l, normal ) ) );
-        ds = sl.xy * depth_factor / sl.z;
+        ds = sl.xy * depthfactor / sl.z;
         dp -= ds * d;
         float dl = ray_intersect(dp, ds);
         if ( dl < d - 0.05 )
@@ -357,10 +365,10 @@ void main (void)
     emission_factor *= 0.5*pow(tc.r+0.8*tc.g+0.2*tc.b, 2.0) -0.2;
     ambient_light += (emission_factor * vec4(night_color, 0.0));
 
-   
+
 
     vec4 finalColor = texture2D(BaseTex, uv);
-    
+
 
 // texel postprocessing by shader effects
 
@@ -388,7 +396,7 @@ if (quality_level > 2)
 
     finalColor *= ambient_light;
 
-    vec4 p = vec4( ecPos3 + tile_size * V * (d-1.0) * depth_factor / s.z, 1.0 );
+    vec4 p = vec4( ecPos3 + tile_size * V * (d-1.0) * depthfactor / s.z, 1.0 );
 
     //finalColor.rgb = fog_Func(finalColor.rgb, fogType);
 
@@ -399,7 +407,7 @@ float dist = length(relPos);
 float delta_z = hazeLayerAltitude - eye_alt;
 
 
-if (dist > max(40.0, 0.04 * min(visibility,avisibility))) 
+if (dist > max(40.0, 0.04 * min(visibility,avisibility)))
 {
 
 alt = eye_alt;
@@ -422,7 +430,7 @@ float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
 
 if (delta_z > 0.0) // we're inside the layer
 	{
-	if (ct < 0.0) // we look down 
+	if (ct < 0.0) // we look down
 		{
 		distance_in_layer = dist;
 		vAltitude = min(distance_in_layer,min(visibility, avisibility)) * ct;
@@ -434,26 +442,26 @@ if (delta_z > 0.0) // we're inside the layer
 		if (H > delta_z) {distance_in_layer = dist/H * delta_z;}
 		else {distance_in_layer = dist;}
 		vAltitude = min(distance_in_layer,visibility) * ct;
-  		delta_zv = delta_z - vAltitude;	
+  		delta_zv = delta_z - vAltitude;
 		}
 	}
   else // we see the layer from above, delta_z < 0.0
-	{	
+	{
 	H = dist * -ct;
 	if (H  < (-delta_z)) // we don't see into the layer at all, aloft visibility is the only fading
 		{
 		distance_in_layer = 0.0;
 		delta_zv = 0.0;
-		}		
+		}
 	else
 		{
 		vAltitude = H + delta_z;
-		distance_in_layer = vAltitude/H * dist; 
+		distance_in_layer = vAltitude/H * dist;
 		vAltitude = min(distance_in_layer,visibility) * (-ct);
 		delta_zv = vAltitude;
-		} 
+		}
 	}
-	
+
 
 // ground haze cannot be thinner than aloft visibility in the model,
 // so we need to use aloft visibility otherwise
@@ -481,7 +489,7 @@ if (visibility < avisibility)
 	eqColorFactor = 1.0 - 0.1 * delta_zv/visibility - (1.0 - effective_scattering);
 
 	}
-else 
+else
 	{
 	if (quality_level > 3)
 		{
@@ -521,7 +529,7 @@ eShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + term
 		{
 		intensity = length(hazeColor);
 		float mie_magnitude = 0.5 * smoothstep(350000.0, 150000.0, terminator-sqrt(2.0 * EarthRadius * terrain_alt));
-		hazeColor = intensity * ((1.0 - mie_magnitude) + mie_magnitude * mie_angle) * normalize(mix(hazeColor,  vec3 (0.5, 0.58, 0.65), mie_magnitude * (0.5 - 0.5 * mie_angle)) ); 
+		hazeColor = intensity * ((1.0 - mie_magnitude) + mie_magnitude * mie_angle) * normalize(mix(hazeColor,  vec3 (0.5, 0.58, 0.65), mie_magnitude * (0.5 - 0.5 * mie_angle)) );
 		}
 
 
@@ -534,7 +542,7 @@ if (intensity > 0.0) // this needs to be a condition, because otherwise hazeColo
 	if (lightArg < 10.0)
 		{
 		float mie_magnitude = 0.5 * smoothstep(350000.0, 150000.0, terminator-sqrt(2.0 * EarthRadius * terrain_alt));
-		hazeColor = intensity * ((1.0 - mie_magnitude) + mie_magnitude * mie_angle) * normalize(mix(hazeColor,  vec3 (0.5, 0.58, 0.65), 	mie_magnitude * (0.5 - 0.5 * mie_angle)) ); 
+		hazeColor = intensity * ((1.0 - mie_magnitude) + mie_magnitude * mie_angle) * normalize(mix(hazeColor,  vec3 (0.5, 0.58, 0.65), 	mie_magnitude * (0.5 - 0.5 * mie_angle)) );
 		}
 
 	// high altitude desaturation of the haze color
@@ -543,16 +551,16 @@ if (intensity > 0.0) // this needs to be a condition, because otherwise hazeColo
 	// blue hue of haze
 
 	hazeColor.x = hazeColor.x * 0.83;
-	hazeColor.y = hazeColor.y * 0.9; 
+	hazeColor.y = hazeColor.y * 0.9;
 
 
 	// additional blue in indirect light
 	float fade_out = max(0.65 - 0.3 *overcast, 0.45);
 	intensity = length(hazeColor);
-	hazeColor = intensity * normalize(mix(hazeColor,  1.5* shadedFogColor, 1.0 -smoothstep(0.25, fade_out,eShade) )); 
+	hazeColor = intensity * normalize(mix(hazeColor,  1.5* shadedFogColor, 1.0 -smoothstep(0.25, fade_out,eShade) ));
 
 	// change haze color to blue hue for strong fogging
-	hazeColor = intensity * normalize(mix(hazeColor,  shadedFogColor, (1.0-smoothstep(0.5,0.9,eqColorFactor)))); 
+	hazeColor = intensity * normalize(mix(hazeColor,  shadedFogColor, (1.0-smoothstep(0.5,0.9,eqColorFactor))));
 
 
 	// reduce haze intensity when looking at shaded surfaces, only in terminator region
@@ -567,7 +575,7 @@ finalColor.xyz = mix(eqColorFactor * hazeColor * eShade, finalColor.xyz,transmis
 gl_FragColor = finalColor;
 
 }
-else // if dist < threshold no fogging at all 
+else // if dist < threshold no fogging at all
 {
 gl_FragColor = finalColor;
 }

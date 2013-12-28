@@ -7,5 +7,3 @@ NavaidModel.init = func {
 		me.push(n);
 	me.notifyView();
 }
-
-

@@ -50,14 +50,14 @@ var draw_route =  func (group, theroute, controller=nil, lod=0)
 					append(coords,"N"~leg.path()[0].lat);
 					append(coords,"E"~leg.path()[0].lon);
 					append(cmds,2);
-					canvas.drawwp(group, leg.path()[0].lat,leg.path()[0].lon,fp.getWP(0).wp_name,i, wp);
+					canvas.drawwp(group, leg.path()[0].lat, leg.path()[0].lon, fp.getWP(0).alt_cstr, fp.getWP(0).wp_name, i, wp);
 					i+=1;
 				}
 				var leg = fp.getWP(i);
 				append(coords,"N"~leg.path()[1].lat);
 				append(coords,"E"~leg.path()[1].lon);
 				append(cmds,4);
-				canvas.drawwp(group, leg.path()[1].lat,leg.path()[1].lon,leg.wp_name,i, wp);
+				canvas.drawwp(group, leg.path()[1].lat, leg.path()[1].lon, leg.alt_cstr, leg.wp_name, i, wp);
 			}
 			
 			# Update route coordinates

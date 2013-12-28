@@ -2,7 +2,7 @@
 # Draw a waypoint symbol and waypoint name (Gijs' 744 ND.nas code)
 
 #
-var drawwp =  func (group, lat, lon, name, i, wp) {
+var drawwp =  func (group, lat, lon, alt, name, i, wp) {
 	var wp_group = group.createChild("group","wp");
 	wp[i] = wp_group.createChild("path", "wp-" ~ i)
 		.setStrokeLineWidth(3)
@@ -22,13 +22,17 @@ var drawwp =  func (group, lat, lon, name, i, wp) {
 	#
 	# text_wp[i] = wp_group.createChild("text", "wp-text-" ~ i)
 	#
+	if (alt == 0)
+		alt = "";
+	else 
+		alt = "\n"~alt;
 	var text_wps = wp_group.createChild("text", "wp-text-" ~ i)
 		.setDrawMode( canvas.Text.TEXT )
-		.setText(name)
+		.setText(name~alt)
 		.setFont("LiberationFonts/LiberationSans-Regular.ttf")
 		.setFontSize(28)
 		.setTranslation(25,35)
-		.setColor(1,0,1);
+		.setColor(1,1,1);
 	wp_group.setGeoPosition(lat, lon)
 		.set("z-index",4);
 };

@@ -369,6 +369,5 @@ settimer(func {
 		me.del();
 	};
 }, 1);
-else print("MapStructure.nas: Testing code disabled, see $FG_ROOT/gui/dialogs/map-canvas.xml instead");
 }, 0); # end ugly module init timer hack
 

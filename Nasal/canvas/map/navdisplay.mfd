@@ -1,5 +1,5 @@
 # ==============================================================================
-# Boeing Navigation Display by Gijs de Rooy (currently specific to the 744)
+# Boeing Navigation Display by Gijs de Rooy
 # ==============================================================================
 
 
@@ -52,12 +52,10 @@ var NDStyles = {
 ##
 
       layers: [
-	{ name:'fixes', update_on:['toggle_range','toggle_waypoints'], predicate: func(nd, layer) {
+	{ name:'fixes', update_on:['toggle_range','toggle_waypoints','toggle_display_mode'], predicate: func(nd, layer) {
 		# print("Running fixes predicate");
-		var visible=nd.get_switch('toggle_waypoints');
-		if(nd.rangeNm() <= 40 and visible and 
-		nd.get_switch('toggle_display_mode') == "MAP") {
-		  # print("fixes update requested!");
+		var visible=nd.get_switch('toggle_waypoints') and nd.in_mode('toggle_display_mode', ['MAP']);
+		if(nd.rangeNm() <= 40 and visible) {
 		  trigger_update( layer );
 	      } layer._view.setVisible(visible);
 
@@ -69,7 +67,16 @@ var NDStyles = {
 		# print("Running fixes predicate");
 		var visible=nd.get_switch('toggle_weather') and nd.get_switch('toggle_display_mode') != "PLAN";
 		if (visible) {
-		  print("storms update requested!");
+		  trigger_update( layer );
+	      } layer._view.setVisible(visible);
+
+	   }, # end of layer update predicate
+	}, # end of storms layer
+	
+	{ name:'airplaneSymbol', update_on:['toggle_range','toggle_display_mode'], predicate: func(nd, layer) {
+		# print("Running fixes predicate");
+		var visible=nd.get_switch('toggle_display_mode') == "PLAN";
+		if (visible) {
 		  trigger_update( layer );
 	      } layer._view.setVisible(visible);
 
@@ -78,54 +85,53 @@ var NDStyles = {
 
 	{ name:'airports-nd', update_on:['toggle_range','toggle_airports','toggle_display_mode'], predicate: func(nd, layer) {
 		# print("Running airports-nd predicate");
-		if (nd.rangeNm() <= 80 and 
-		nd.get_switch('toggle_display_mode') == "MAP" ) {
-		trigger_update( layer ); # clear & redraw
+		var visible = nd.get_switch('toggle_airports') and nd.in_mode('toggle_display_mode', ['MAP']);
+		if (nd.rangeNm() <= 80 and visible) {
+			trigger_update( layer ); # clear & redraw
 		} 
-		layer._view.setVisible( nd.get_switch('toggle_airports') );
+		layer._view.setVisible( visible);
 
 	   }, # end of layer update predicate
 	}, # end of airports layer
 
 	{ name:'vor', update_on:['toggle_range','toggle_stations','toggle_display_mode'], predicate: func(nd, layer) {
-		# print("Running vor layer predicate");
-		if(nd.rangeNm() <= 40 and 
-		nd.get_switch('toggle_stations') and 
-		nd.get_switch('toggle_display_mode') == "MAP"){
+		var visible = nd.get_switch('toggle_stations') and nd.in_mode('toggle_display_mode', ['MAP']);
+		if(nd.rangeNm() <= 40 and visible) {
 			trigger_update( layer ); # clear & redraw
 		}
-		layer._view.setVisible( nd.get_switch('toggle_stations') );
+		layer._view.setVisible( visible );
 	  }, # end of layer update predicate
 	}, # end of VOR layer
 
-	{ name:'dme', update_on:['toggle_range','toggle_stations'], predicate: func(nd, layer) {
-	        if(nd.rangeNm() <= 40 and 
-		nd.get_switch('toggle_stations') and 
-		nd.get_switch('toggle_display_mode') == "MAP"){
+	{ name:'dme', update_on:['toggle_range','toggle_stations','toggle_display_mode'], predicate: func(nd, layer) {
+		var visible = nd.get_switch('toggle_stations') and nd.in_mode('toggle_display_mode', ['MAP']);
+	    if(nd.rangeNm() <= 40 and visible){
 			trigger_update( layer ); # clear & redraw
 		}
-		layer._view.setVisible( nd.get_switch('toggle_stations') );
+		layer._view.setVisible( visible );
 	    }, # end of layer update predicate
 	}, # end of DME layer
 
 	{ name:'mp-traffic', update_on:['toggle_range','toggle_traffic'], predicate: func(nd, layer) {
 	        trigger_update( layer ); # clear & redraw
-		layer._view.setVisible( 1 ); #nd.get_switch('toggle_traffic')
+		layer._view.setVisible( nd.get_switch('toggle_traffic') );
 	    }, # end of layer update predicate
 	}, # end of traffic  layer
 
-
 	{ name:'runway-nd', update_on:['toggle_range','toggle_display_mode'], predicate: func(nd, layer) {
-	  var visible = (nd.rangeNm() <= 40 and getprop("autopilot/route-manager/active") ) ;
+	  var visible = (nd.rangeNm() <= 40 and getprop("autopilot/route-manager/active") and nd.in_mode('toggle_display_mode', ['MAP','PLAN'])) ;
 	  if (visible)
 	    trigger_update( layer ); # clear & redraw 
 		layer._view.setVisible( visible ); 
 	  }, # end of layer update predicate
 	}, # end of airports-nd layer
 
-	{ name:'route', update_on:['toggle_range','toggle_display_mode'], predicate: func(nd, layer) {
-	  trigger_update( layer ); # clear & redraw
-	  layer._view.setVisible( 1 ); #nd.get_switch('toggle_traffic')
+	{ name:'route', update_on:['toggle_display_mode',], predicate: func(nd, layer) {
+	  var visible= (nd.in_mode('toggle_display_mode', ['MAP','PLAN']));
+	  if (visible) {
+	    trigger_update( layer ); # clear & redraw
+	  }
+	  layer._view.setVisible( visible );
 	  }, # end of layer update predicate
 	}, # end of route layer
 
@@ -229,7 +235,7 @@ var NDStyles = {
       { id:'rangeArcs',
 	impl: {
 	  init: func(nd,symbol),
-	  predicate: func(nd) (((nd.get_switch('toggle_display_mode') == "APP" or nd.get_switch('toggle_display_mode') == "VOR") and nd.get_switch('toggle_weather')) or nd.get_switch('toggle_display_mode') == "MAP"),
+	  predicate: func(nd) ((nd.in_mode('toggle_display_mode', ['APP','VOR']) and nd.get_switch('toggle_weather')) or (nd.get_switch('toggle_display_mode') == "MAP" and !nd.get_switch('toggle_centered'))),
 	  is_true: func(nd) nd.symbols.rangeArcs.show(),
 	  is_false: func(nd) nd.symbols.rangeArcs.hide(),
 	}, # of rangeArcs.impl
@@ -256,10 +262,13 @@ var NDSourceDriver = {};
 NDSourceDriver.new = func {	
  var m = {parents:[NDSourceDriver]};
  m.get_hdg_mag= func getprop("/orientation/heading-magnetic-deg");
+ m.get_hdg_tru= func getprop("/orientation/heading-deg");
  m.get_trk_mag= func getprop("/orientation/track-magnetic-deg");
+ m.get_trk_tru= func getprop("/orientation/track-deg");
  m.get_lat= func getprop("/position/latitude-deg");
  m.get_lon= func getprop("/position/longitude-deg");
  m.get_spd= func getprop("/velocities/groundspeed-kt");
+ m.get_vspd= func getprop("/velocities/vertical-speed-fps");
 return m;
 }
 
@@ -275,7 +284,7 @@ return m;
 # TODO: switches are ND specific, so move to the NDStyle hash!
 
 var default_switches = {
- 'toggle_range': 	{path: '/inputs/range-nm', value:40, type:'INT'},
+ 'toggle_range': 	{path: '/inputs/range-nm', value:10, type:'INT'},
  'toggle_weather': 	{path: '/inputs/wxr', value:0, type:'BOOL'},
  'toggle_airports': 	{path: '/inputs/arpt', value:0, type:'BOOL'},
  'toggle_stations': 	{path: '/inputs/sta', value:0, type:'BOOL'},
@@ -283,8 +292,10 @@ var default_switches = {
  'toggle_position': 	{path: '/inputs/pos', value:0, type:'BOOL'},
  'toggle_data': 	{path: '/inputs/data',value:0, type:'BOOL'},
  'toggle_terrain': 	{path: '/inputs/terr',value:0, type:'BOOL'},
- 'toggle_traffic': 	{path: '/inputs/tcas',value:0, type:'BOOL'},
+ 'toggle_traffic': 	{path: '/inputs/tfc',value:0, type:'BOOL'},
+ 'toggle_centered': 	{path: '/inputs/nd-centered',value:0, type:'BOOL'},
  'toggle_display_mode': {path: '/mfd/display-mode', value:'MAP', type:'STRING'},
+ 'toggle_true_north': {path: '/mfd/true-north', value:0, type:'BOOL'},
 };
 
 # Hack to update weather radar once every 10 seconds
@@ -294,6 +305,14 @@ var update_weather = func {
 	settimer(update_weather, 10);
 }
 update_weather();
+
+# Hack to update airplane symbol location on PLAN mode every 5 seconds
+var update_apl_sym = func {
+	if (getprop("/instrumentation/efis/mfd/display-mode") == "PLAN")
+		setprop("/instrumentation/efis/mfd/display-mode","PLAN");
+	settimer(update_apl_sym, 5);
+}
+update_apl_sym();
 
 ##
 # TODO: 
@@ -342,13 +361,16 @@ var NavDisplay = {
 
     # for creating NDs that are driven by AI traffic instead of the main aircraft (generalization rocks!)
     connectAI: func(source=nil) {
-	me.aircraft_source = {
-	get_hdg_mag: func source.getNode('orientation/heading-magnetic-deg').getValue(),
-	get_trk_mag: func source.getNode('orientation/track-magnetic-deg').getValue(),
-	get_lat: func source.getNode('position/latitude-deg').getValue(),
-	get_lon: func source.getNode('position/longitude-deg').getValue(),
-	get_spd: func source.getNode('velocities/true-airspeed-kt').getValue(),
-	};
+		me.aircraft_source = {
+			get_hdg_mag: func source.getNode('orientation/heading-magnetic-deg').getValue(),
+			get_hdg_tru: func source.getNode('orientation/heading-deg').getValue(),
+			get_trk_mag: func source.getNode('orientation/track-magnetic-deg').getValue(),
+			get_trk_tru: func source.getNode('orientation/track-deg').getValue(),
+			get_lat: func source.getNode('position/latitude-deg').getValue(),
+			get_lon: func source.getNode('position/longitude-deg').getValue(),
+			get_spd: func source.getNode('velocities/true-airspeed-kt').getValue(),
+			get_vspd: func source.getNode('velocities/vertical-speed-fps').getValue(),
+		};
     }, # of connectAI
 
     # TODO: the ctor should allow customization, for different aircraft
@@ -444,14 +466,14 @@ var NavDisplay = {
 		# load elements from vector image, and create instance variables using identical names, and call updateCenter() on each
 		# anything that needs updatecenter called, should be added to the vector here
 		# 
-		foreach(var element; ["rotateComp","windArrow","selHdg",
-				      "curHdgPtr","staFromL","staToL","trkInd",
-				      "staFromR","staToR","compass","hdgTrk","truMag","altArc"] )
+		foreach(var element; ["rotateComp","rotateComp2","windArrow","selHdg","selHdg2","hdgGroup","northUp",
+					"aplSymMap","aplSymMapCtr","aplSymVor","curHdgPtr","curHdgPtr2",
+					"staFromL","staToL","staFromR","staToR","staFromL2","staToL2","staFromR2","staToR2",
+					"trkInd","vorCrsPtr2","locPtr","compass","compassApp","hdgTrk","truMag","altArc","planArcs"] )
 		  me.symbols[element] = me.nd.getElementById(element).updateCenter(); 
 
 		# this should probably be using Philosopher's new SymbolLayer ?
 		me.map = me.nd.createChild("map","map")
-			.setTranslation(512,824)
 			.set("clip", "rect(124, 1024, 1024, 0)");
 
 		# this callback will be passed onto the model via the controller hash, and used for the positioned queries, to specify max query range:
@@ -535,10 +557,10 @@ var NavDisplay = {
 		me.drawdme();
 	});
 	# TODO: move this to the route.model
+	# Hack to draw the route on rm activation
 	me.listen("/autopilot/route-manager/active", func(active) {
 		if(active.getValue()) {
-			me.drawroute();
-			me.drawrunways();
+			setprop(me.get_full_switch_path('toggle_display_mode'),getprop(me.get_full_switch_path('toggle_display_mode')));
 		} else {
 			print("TODO: navdisplay.mfd: implement route-manager/layer clearing!");
 			#me.route_group.removeAllChildren(); # HACK!
@@ -552,10 +574,9 @@ var NavDisplay = {
 	drawroute: func print("drawroute no longer used!"), 
 	drawrunways: func print("drawrunways no longer used!"),
 	
-	in_mode:func(switch, modes)	foreach(var m; modes) {
-		if (me.get_switch(switch)==m) return 1;
-		else continue;
-		print("not in checked mode");
+	in_mode:func(switch, modes)	{
+		foreach(var m; modes)
+			if (me.get_switch(switch)==m) return 1;
 		return 0;
 	},
 
@@ -579,16 +600,38 @@ var NavDisplay = {
 
 		# fgcommand('profiler-start');
 		
+		# Heading update
 		var userHdgMag = me.aircraft_source.get_hdg_mag(); 
-		var userTrkMag = me.aircraft_source.get_trk_mag(); # getprop("orientation/heading-deg"); # orientation/track-magnetic-deg is noisy
-		var userLat = me.aircraft_source.get_lat(); 
-		var userLon = me.aircraft_source.get_lon(); 
+		var userHdgTru = me.aircraft_source.get_hdg_tru(); 
+		var userTrkMag = me.aircraft_source.get_trk_mag(); 
+		var userTrkTru = me.aircraft_source.get_trk_tru(); 
+		if (me.get_switch('toggle_true_north')) {
+			me.symbols.truMag.setText("TRU");
+			var userHdg=userHdgTru;
+			var userTrk=userTrkTru;
+		} else {
+			me.symbols.truMag.setText("MAG");
+			var userHdg=userHdgMag;
+			var userTrk=userTrkMag;
+		}
+		if (me.aircraft_source.get_spd() < 80)
+			userTrk = userHdg; 
+		
+		var userLat = me.aircraft_source.get_lat();
+		var userLon = me.aircraft_source.get_lon();
+		var userSpd = me.aircraft_source.get_spd();
+		var userVSpd = me.aircraft_source.get_vspd();
 
 		# this should only ever happen when testing the experimental AI/MP ND driver hash (not critical)
-		if (!userHdgMag or !userTrkMag or !userLat or !userLon) {
-		print("aircraft source invalid, returning !");
-		return; 
+		if (!userHdg or !userTrk or !userLat or !userLon) {
+			print("aircraft source invalid, returning !");
+			return; 
 		}
+		
+		if (me.get_switch('toggle_centered') or me.in_mode('toggle_display_mode', ['PLAN']))
+			me.map.setTranslation(512,512);
+		else
+			me.map.setTranslation(512,824);
 		
 		# Calculate length in NM of one degree at current location TODO: expose as methods, for external callbacks 
 		var userLatR = userLat*D2R;
@@ -611,61 +654,149 @@ var NavDisplay = {
 			me.symbols.dmeRDist.setText(sprintf("%3.1f",nav1dist*0.000539));
 			
 		me.symbols.range.setText(sprintf("%3.0f",me.rangeNm() ));
-		#rangeNm=rangeNm*2;
 
 		# reposition the map, change heading & range: 
-		me.map._node.getNode("ref-lat",1).setDoubleValue(userLat);
-		me.map._node.getNode("ref-lon",1).setDoubleValue(userLon);
+		if(me.in_mode('toggle_display_mode', ['PLAN'])) {
+			me.symbols.windArrow.hide();
+			me.map._node.getNode("hdg",1).setDoubleValue(0);
+			if (getprop(me.efis_path ~ "/inputs/plan-wpt-index") >= 0) {
+				me.map._node.getNode("ref-lat",1).setDoubleValue(getprop("/autopilot/route-manager/route/wp["~getprop(me.efis_path ~ "/inputs/plan-wpt-index")~"]/latitude-deg"));
+				me.map._node.getNode("ref-lon",1).setDoubleValue(getprop("/autopilot/route-manager/route/wp["~getprop(me.efis_path ~ "/inputs/plan-wpt-index")~"]/longitude-deg"));
+			}
+		} else {
+			me.symbols.windArrow.show();
+			me.map._node.getNode("ref-lat",1).setDoubleValue(userLat);
+			me.map._node.getNode("ref-lon",1).setDoubleValue(userLon);
+		}
 		me.map._node.getNode("range",1).setDoubleValue(me.rangeNm()/2); # avoid this  here, use a listener instead
 
-		if(me.get_switch('toggle_display_mode') == 'MAP' or me.get_switch('toggle_display_mode') == 'PLAN' ) {
-			me.symbols.rotateComp.setRotation(-userTrkMag*D2R);
+		if(me.in_mode('toggle_display_mode', ['MAP'])) {
+			me.symbols.rotateComp.setRotation(-userTrk*D2R);
+			me.symbols.rotateComp2.setRotation(-userTrk*D2R);
 			me.symbols.trkInd.setRotation(0);
-			me.symbols.curHdgPtr.setRotation(userHdgMag*D2R);
-			me.map._node.getNode("hdg",1).setDoubleValue(userTrkMag);
-			me.symbols.compass.setRotation(-userTrkMag*D2R);
+			me.symbols.curHdgPtr.setRotation(userHdg*D2R);
+			me.symbols.curHdgPtr2.setRotation(userHdg*D2R);
+			me.map._node.getNode("hdg",1).setDoubleValue(userTrk);
+			me.symbols.compass.setRotation(-userTrk*D2R);
+			me.symbols.compassApp.setRotation(-userTrk*D2R);
 			me.symbols.hdgTrk.setText("TRK");
-			me.symbols.truMag.setText("MAG");
 		}
-		if(me.get_switch('toggle_display_mode') == 'APP' or me.get_switch('toggle_display_mode') == 'VOR' ) {
-			me.symbols.rotateComp.setRotation(-userHdgMag*D2R);
-			me.symbols.trkInd.setRotation((userTrkMag-userHdgMag)*D2R);
-			me.symbols.curHdgPtr.setRotation(userHdgMag*D2R);
-			me.map._node.getNode("hdg",1).setDoubleValue(userHdgMag);
-			me.symbols.compass.setRotation(-userHdgMag*D2R);
+		if(me.in_mode('toggle_display_mode', ['APP','VOR'])) {
+			me.symbols.rotateComp.setRotation(-userHdg*D2R);
+			me.symbols.rotateComp2.setRotation(-userHdg*D2R);
+			me.symbols.trkInd.setRotation((userTrk-userHdg)*D2R);
+			me.symbols.curHdgPtr.setRotation(userHdg*D2R);
+			me.symbols.curHdgPtr2.setRotation(userHdg*D2R);
+			me.map._node.getNode("hdg",1).setDoubleValue(userHdg);
+			me.symbols.compass.setRotation(-userHdg*D2R);
+			me.symbols.compassApp.setRotation(-userHdg*D2R);
 			me.symbols.hdgTrk.setText("HDG");
-			me.symbols.truMag.setText("MAG");
+		}
+		if(me.get_switch('toggle_centered')) {
+			if (me.in_mode('toggle_display_mode', ['APP','VOR'])) {
+				me.symbols.vorCrsPtr2.show();
+				me.symbols.compassApp.show();
+				if(getprop("instrumentation/nav/in-range")) {
+					var deflection = getprop("instrumentation/nav/heading-needle-deflection-norm");
+					me.symbols.locPtr.show();				
+					me.symbols.locPtr.setTranslation(deflection*150,0);
+					if(abs(deflection < 0.99))
+						me.symbols.locPtr.setColorFill(1,0,1,1);
+					else
+						me.symbols.locPtr.setColorFill(1,0,1,0);
+				} else {
+					me.symbols.locPtr.hide();
+				}
+				me.symbols.vorCrsPtr2.setRotation((getprop("instrumentation/nav/radials/selected-deg")-userHdg)*D2R);
+				me.symbols.hdgGroup.setTranslation(0,100);
+			} else {
+				me.symbols.vorCrsPtr2.hide();
+				me.symbols.hdgGroup.setTranslation(0,100*me.in_mode('toggle_display_mode', ['MAP']));
+				me.symbols.compassApp.setVisible(me.in_mode('toggle_display_mode', ['MAP']));
+			}
+		} else {
+			me.symbols.vorCrsPtr2.hide();
+			me.symbols.hdgGroup.setTranslation(0,0);
+			me.symbols.compassApp.hide();
 		}
 		
-		if (abs(getprop("velocities/vertical-speed-fps")) > 10) {
-			var altRangeNm = (getprop("autopilot/settings/target-altitude-ft")-
-			getprop("instrumentation/altimeter/indicated-altitude-ft"))/getprop("velocities/vertical-speed-fps")*
-			getprop("/velocities/groundspeed-kt")*KT2MPS*M2NM;
-
-			if(altRangeNm > 1) {
-				var altRangePx = (350/me.rangeNm())*altRangeNm;
-				if (altRangePx > 700)
-					altRangePx = 700;
-				me.symbols.altArc.setTranslation(0,-altRangePx);
-			} # altRangeNm > 1
-			me.symbols.altArc.show();
+		if ((me.get_switch('toggle_centered') and !me.in_mode('toggle_display_mode', ['PLAN'])) or me.in_mode('toggle_display_mode', ['PLAN'])) {
+			me.symbols.compass.hide();
+		} else {
+			me.symbols.compass.show();
+		}
+		
+		var staPtrVis = !me.in_mode('toggle_display_mode', ['APP','PLAN']);
+		if (!me.get_switch('toggle_centered') and me.in_mode('toggle_display_mode', ['APP','MAP','VOR'])) {
+			me.symbols.trkInd.show();
+			me.symbols.staFromL.setVisible(staPtrVis);
+			me.symbols.staFromL2.hide();
+			me.symbols.staFromR.setVisible(staPtrVis);
+			me.symbols.staFromR2.hide();
+			me.symbols.staToL.setVisible(staPtrVis);
+			me.symbols.staToL2.hide();
+			me.symbols.staToR.setVisible(staPtrVis);
+			me.symbols.staToR2.hide();
+			me.symbols.rotateComp.setVisible(staPtrVis);
+			me.symbols.rotateComp2.hide();
+		} else {
+			me.symbols.trkInd.hide();
+			me.symbols.staFromL.hide();
+			me.symbols.staFromL2.setVisible(staPtrVis);
+			me.symbols.staFromR.hide();
+			me.symbols.staFromR2.setVisible(staPtrVis);
+			me.symbols.staToL.hide();
+			me.symbols.staToL2.setVisible(staPtrVis);
+			me.symbols.staToR.hide();
+			me.symbols.staToR2.setVisible(staPtrVis);
+			me.symbols.rotateComp.hide();
+			me.symbols.rotateComp2.setVisible(staPtrVis);
+		}
+		me.symbols.hdgGroup.setVisible(!me.in_mode('toggle_display_mode', ['PLAN']));
+		me.symbols.northUp.setVisible(me.in_mode('toggle_display_mode', ['PLAN']));
+		me.symbols.aplSymMap.setVisible(me.in_mode('toggle_display_mode', ['APP','MAP','VOR']) and !me.get_switch('toggle_centered'));
+		me.symbols.aplSymMapCtr.setVisible(me.in_mode('toggle_display_mode', ['MAP']) and me.get_switch('toggle_centered'));
+		me.symbols.aplSymVor.setVisible(me.in_mode('toggle_display_mode', ['APP','VOR']) and me.get_switch('toggle_centered'));
+		me.symbols.planArcs.setVisible(me.in_mode('toggle_display_mode', ['PLAN']));
+		
+		if (abs(userVSpd) > 5) {
+			var altDiff = getprop("autopilot/settings/target-altitude-ft")-getprop("instrumentation/altimeter/indicated-altitude-ft");
+			if (abs(altDiff) > 50 and altDiff/userVSpd > 0) {
+				var altRangeNm = altDiff/userVSpd*userSpd*KT2MPS*M2NM;
+				if(altRangeNm > 1) {
+					var altRangePx = (350/me.rangeNm())*altRangeNm;
+					if (altRangePx > 700)
+						altRangePx = 700;
+					me.symbols.altArc.setTranslation(0,-altRangePx);
+				}
+				me.symbols.altArc.show();
+			} else
+				me.symbols.altArc.hide();
 		} else {
 			me.symbols.altArc.hide();
-		}# fps > 10
+		}
 		
 		## these would require additional arguments to be moved to an external config hash currently
 		
 		me.symbols.selHdg.setRotation(getprop("autopilot/settings/true-heading-deg")*D2R);
-		if (var nav0hdg=getprop("instrumentation/nav/heading-deg") != nil)
+		me.symbols.selHdg2.setRotation(getprop("autopilot/settings/true-heading-deg")*D2R);
+		if (var nav0hdg=getprop("instrumentation/nav/heading-deg") != nil) {
 			me.symbols.staFromL.setRotation((nav0hdg-userHdgMag+180)*D2R);
-		if (var nav0hdg=getprop("instrumentation/nav/heading-deg") != nil)
+			me.symbols.staFromL2.setRotation((nav0hdg-userHdgMag+180)*D2R);
+		}
+		if (var nav0hdg=getprop("instrumentation/nav/heading-deg") != nil) {
 			me.symbols.staToL.setRotation((nav0hdg-userHdgMag)*D2R);
-		if (var nav1hdg=getprop("instrumentation/nav[1]/heading-deg") != nil)
+			me.symbols.staToL2.setRotation((nav0hdg-userHdgMag)*D2R);
+		}
+		if (var nav1hdg=getprop("instrumentation/nav[1]/heading-deg") != nil) {
 			me.symbols.staFromR.setRotation((nav1hdg-userHdgMag+180)*D2R);
-		if (var nav1hdg=getprop("instrumentation/nav[1]/heading-deg") != nil)
+			me.symbols.staFromR2.setRotation((nav1hdg-userHdgMag+180)*D2R);
+		}
+		if (var nav1hdg=getprop("instrumentation/nav[1]/heading-deg") != nil) {
 			me.symbols.staToR.setRotation((nav1hdg-userHdgMag)*D2R);
-
-
+			me.symbols.staToR2.setRotation((nav1hdg-userHdgMag)*D2R);
+		}
+		
 		## run all predicates in the NDStyle hash and evaluate their true/false behavior callbacks
 		## this is in line with the original design, but normally we don't need to getprop/poll here,
 		## using listeners or timers would be more canvas-friendly whenever possible
@@ -690,13 +821,11 @@ var NavDisplay = {
 
 		## update the status flags shown on the ND (wxr, wpt, arpt, sta)
 		# this could/should be using listeners instead ...
-		
 
-		me.symbols['status.wxr'].setVisible( me.get_switch('toggle_weather') );
-		me.symbols['status.wpt'].setVisible( me.get_switch('toggle_waypoints'));
-		me.symbols['status.arpt'].setVisible( me.get_switch('toggle_airports'));
-		me.symbols['status.sta'].setVisible( me.get_switch('toggle_stations') );
+		me.symbols['status.wxr'].setVisible( me.get_switch('toggle_weather') and me.in_mode('toggle_display_mode', ['MAP']));
+		me.symbols['status.wpt'].setVisible( me.get_switch('toggle_waypoints') and me.in_mode('toggle_display_mode', ['MAP']));
+		me.symbols['status.arpt'].setVisible( me.get_switch('toggle_airports') and me.in_mode('toggle_display_mode', ['MAP']));
+		me.symbols['status.sta'].setVisible( me.get_switch('toggle_stations') and  me.in_mode('toggle_display_mode', ['MAP']));
 		
-
 	}
 };

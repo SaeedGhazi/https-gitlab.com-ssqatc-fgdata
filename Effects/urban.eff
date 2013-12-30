@@ -712,6 +712,10 @@
 			</texture-unit>
 			<texture-unit>
 				<unit>2</unit>
+				<type>noise</type>
+			</texture-unit>
+			<texture-unit>
+				<unit>3</unit>
 				<image>
 					<use>texture[2]/image</use>
 				</image>
@@ -734,10 +738,6 @@
 					<function-b>average</function-b>
 					<function-a>min</function-a>
 				</mipmap-control>
-			</texture-unit>
-			<texture-unit>
-				<unit>3</unit>
-				<type>noise</type>
 			</texture-unit>
 			<program>
 				<vertex-shader>Shaders/urban-gbuffer.vert</vertex-shader>
@@ -768,13 +768,13 @@
 				<value type="int">1</value>
 			</uniform>
 			<uniform>
-				<name>QDMTex</name>
-				<type>sampler-2d</type>
+				<name>NoiseTex</name>
+				<type>sampler-3d</type>
 				<value type="int">2</value>
 			</uniform>
 			<uniform>
-				<name>NoiseTex</name>
-				<type>sampler-3d</type>
+				<name>QDMTex</name>
+				<type>sampler-2d</type>
 				<value type="int">3</value>
 			</uniform>
 			<uniform>

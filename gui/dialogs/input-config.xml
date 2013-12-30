@@ -2,7 +2,7 @@
 
 <PropertyList>
   <name>input-config</name>
-    
+
   <nasal>
     <open>
         var syncRadioState = func()
@@ -11,20 +11,20 @@
             setprop("/sim/gui/dialogs/input-config/right-mouse-look", !cycle);
             setprop("/sim/gui/dialogs/input-config/right-mouse-cycle", cycle);
         }
-        
+
         var rightMouseMode = func(newMode)
         {
             var doCycle = (newMode == "cycle");
             setprop("/sim/mouse/right-button-mode-cycle-enabled", doCycle);
             syncRadioState();
         }
-            
+
         syncRadioState();
     </open>
   </nasal>
-    
+
   <modal>false</modal>
-  <layout>vbox</layout>  
+  <layout>vbox</layout>
 
   <group>
     <layout>hbox</layout>
@@ -49,21 +49,21 @@
   </group>
 
   <hrule/>
-  
+
     <group>
       <halign>center</halign>
       <valign>top</valign>
 
       <layout>table</layout>
-      
+
       <group>
           <pref-width>600</pref-width>
           <row>0</row>
           <col>0</col>
           <colspan>2</colspan>
-          
+
           <layout>vbox</layout>
-          
+
           <text>
               <halign>left</halign>
               <label>Pressing TAB cycles the mouse between different behaviours - normal, flight-controls and look.</label>
@@ -73,8 +73,8 @@
               <label>The right-mouse button can be used in two different ways:</label>
           </text>
      </group>
-    
-      
+
+
       <text>
           <label>Press and hold right mouse to look around</label>
           <halign>right</halign>
@@ -91,9 +91,9 @@
               <script>rightMouseMode("look")</script>
           </binding>
       </radio>
-      
+
       <text>
-          <label>Click right mouse to cycle mouse behvaiour</label>
+          <label>Click right mouse to cycle mouse behaviour</label>
           <halign>right</halign>
           <row>2</row>
           <col>0</col>
@@ -108,7 +108,7 @@
               <script>rightMouseMode("cycle")</script>
           </binding>
       </radio>
-      
+
       <checkbox>
           <row>3</row>
           <col>0</col>
@@ -121,7 +121,7 @@
         </binding>
       </checkbox>
 
-      
+
     </group>
 
   <hrule/>

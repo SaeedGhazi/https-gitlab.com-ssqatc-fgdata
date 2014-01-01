@@ -20,26 +20,13 @@ var decreaseVisibility = func {
 var adjustVisibility = func( factor ) {
 	var val = 0;
 	var aux_val = 0;
-	var local = getprop("sim/gui/dialogs/metar/mode/local-weather");
-	var global = getprop("sim/gui/dialogs/metar/mode/global-weather");
+    # better to use a non gui/dialog property here, but there doesn't
+    # seem to be one for local-weather. 
+	var localWeatherEnabled = getprop("sim/gui/dialogs/metar/mode/local-weather");
 	var max_aux_vis = 12.429216196;
 	var min_aux_vis = 9.90348;
 
-	if(global)
-		{
-		val = visibilityProp.getValue() * factor;
-
-		if( val < 1.0 ) val = getprop("/environment/visibility-m");
-
-		if( val > 30 ) {
-			visibilityProp.setDoubleValue(val);
-			visibilityOverrideProp.setBoolValue(1);
-			}
-
-		gui.popupTip(sprintf("Visibility: %.0f m", val));
-		}
-	else
-		{
+    if (localWeatherEnabled) {
 		if (factor == 1.1)
 			factor = 1.001;
 		else 
@@ -55,9 +42,19 @@ var adjustVisibility = func( factor ) {
 			auxvisibilityProp.setDoubleValue(aux_val);
  
 		gui.popupTip(sprintf("Max Visibility: %.0f m", getprop("/local-weather/config/max-vis-range-m")));
-		}
+	} else {
+		val = visibilityProp.getValue() * factor;
 
+		if( val < 1.0 ) val = getprop("/environment/visibility-m");
+
+		if( val > 30 ) {
+			visibilityProp.setDoubleValue(val);
+			visibilityOverrideProp.setBoolValue(1);
+			}
+
+		gui.popupTip(sprintf("Visibility: %.0f m", val));
 	}
+}
 
 ##
 # Handler.  Reset visibility to default.

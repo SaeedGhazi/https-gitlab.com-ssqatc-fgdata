@@ -16,6 +16,10 @@ var step_iter_count = 0;    # number or step loop iterations
 var last_step_time = nil;   # for set_targets() eta calculation
 var audio_dir = nil;
 
+#  Screen display.  On bottom of screen, with no auto-scroll.
+var display = screen.window.new(nil, 30, 5, 0);
+display.sticky = 0; # don't turn on; makes scrolling up messages jump left and right
+
 # property nodes (to be initialized with listener)
 var markerN = nil;
 var headingN = nil;
@@ -74,7 +78,7 @@ var startTutorial = func {
 
 	var dir = tutorialN.getNode("audio-dir");
 	if (dir != nil)
-		audio_dir = getprop("/sim/fg-root") ~ "/" ~ dir.getValue() ~ "/";
+		audio_dir = getprop("/sim/fg-root") ~ "/" ~ dir.getValue();
 	else
 		audio_dir = "";
 
@@ -101,6 +105,7 @@ var startTutorial = func {
 	# <init>
 	do_group(tutorialN.getNode("init"));
 	is_running(1);  # needs to be after "presets-commit"
+	display.show();
 
 	# Pick up any weather conditions/scenarios set
 	setprop("/environment/rebuild-layers", getprop("/environment/rebuild-layers") + 1);
@@ -116,6 +121,7 @@ var stopTutorial = func {
 		set_properties(end);
 		run_nasal(end);
 		set_view(end) or view.point.restore();
+		settimer(func() { if (!is_running()) { display.close(); } }, 10);
 	}
 	set_marker();
 	is_running(0);
@@ -136,7 +142,7 @@ var step_tutorial = func(id) {
 
   # Check to ensure that this is the currently running tutorial.
 	id == loop_id or return;
-	
+
 	var continue_after = func(n, w) {
 		settimer(func { step_tutorial(id) }, w);
 	}
@@ -145,7 +151,7 @@ var step_tutorial = func(id) {
 	if (current_step >= size(steps)) {
 		var end = tutorialN.getNode("end");
 		say_message(end, "Tutorial finished.");
-		say_message(nil, "Deviations: " ~ num_errors);
+		#say_message(nil, "Deviations: " ~ num_errors);
 		stopTutorial();
 		return;
 	}
@@ -162,7 +168,7 @@ var step_tutorial = func(id) {
 		step_countN.setIntValue(step_iter_count = 0);
 
 		do_group(step, "Tutorial step " ~ current_step);
-		
+
 		# A <wait> tag affects only the initial entry to the step
 		var w = read_int(step, "wait", step_interval);
 		return continue_after(step, w);
@@ -388,10 +394,8 @@ var lastmsgcount = 0;
 var say_message = func(node, default = nil) {
 	var msg = default;
 	var audio = nil;
-	var is_error = 0;
 
 	if (node != nil) {
-		is_error = node.getName() == "error";
 
 		var m = node.getChildren("message");
 		if (size(m))
@@ -402,23 +406,17 @@ var say_message = func(node, default = nil) {
 			audio = a[rand() * size(a)].getValue();
 	}
 
-	if (msg != last_messageN.getValue() or (is_error and lastmsgcount == 1)) {
-		# Error messages are only displayed every 10 seconds (2 iterations)
-		# Other messages are only displayed if they change
+	if (msg != last_messageN.getValue()) {
+		# Messages are only displayed if they change
 		if (audio != nil) {
-			var prop = { path : audio_dir, file : audio };
+			var prop = { path : audio_dir, file : audio, volume : 1.0 };
 			fgcommand("play-audio-sample", props.Node.new(prop));
-			screen.log.write(msg, 1, 1, 1);
-		} elsif (msg != nil) {
-			setprop("/sim/messages/copilot", msg);
 		}
 
-		if (msg != nil)
+		if (msg != nil) {
+			display.write(msg, 1, 1, 1);
 			last_messageN.setValue(msg);
-
-		lastmsgcount = 0;
-	} else {
-		lastmsgcount += 1;
+		}
 	}
 }
 
@@ -449,7 +447,7 @@ var run_nasal = func(node) {
 
 
 var say = func(what, who = "copilot", delay = 0) {
-	settimer(func { setprop("/sim/messages/", who, what) }, delay);
+	settimer(func { display.write(what, 1, 1, 1) }, delay);
 }
 
 

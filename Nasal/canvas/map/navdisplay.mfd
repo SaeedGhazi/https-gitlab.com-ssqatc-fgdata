@@ -2,13 +2,9 @@
 # Boeing Navigation Display by Gijs de Rooy
 # ==============================================================================
 
-
 ##
 # do we really need to keep track of each drawable here ??
 var i = 0;
-
-
-
 
 ##
 # pseudo DSL-ish: use these as placeholders in the config hash  below
@@ -27,15 +23,13 @@ var trigger_update = func(layer)  layer._model.init();
 # any aircraft-specific ND behavior should be wrapped here, 
 # to isolate/decouple things in the generic NavDisplay class
 #
-# Note to Gijs: this may look weird and confusing, but it' actually requires
-# less coding now, and it is now even possible to configure things via a little
-# XML wrapper
 # TODO: move this to an XML config file
 # 
-var NDStyles = {
+var NDStyles =
+{
  ##
- # this configures the 744 ND to help generalize the NavDisplay class itself
- 'B747-400': {
+ # this configures the Boeing ND to help generalize the NavDisplay class itself
+ 'Boeing': {
       font_mapper: func(family, weight) {      
 	if( family == "Liberation Sans" and weight == "normal" )
 	return "LiberationFonts/LiberationSans-Regular.ttf";
@@ -53,61 +47,52 @@ var NDStyles = {
 
       layers: [
 	{ name:'fixes', update_on:['toggle_range','toggle_waypoints','toggle_display_mode'], predicate: func(nd, layer) {
-		# print("Running fixes predicate");
-		var visible=nd.get_switch('toggle_waypoints') and nd.in_mode('toggle_display_mode', ['MAP']);
-		if(nd.rangeNm() <= 40 and visible) {
+		var visible=nd.get_switch('toggle_waypoints') and nd.in_mode('toggle_display_mode', ['MAP']) and (nd.rangeNm() <= 40);
+		if(visible)
 		  trigger_update( layer );
-	      } layer._view.setVisible(visible);
-
+	    layer._view.setVisible(visible);
 	   }, # end of layer update predicate
 	}, # end of fixes layer
 	
 	# Should redraw every 10 seconds
 	{ name:'storms', update_on:['toggle_range','toggle_weather','toggle_display_mode'], predicate: func(nd, layer) {
-		# print("Running fixes predicate");
 		var visible=nd.get_switch('toggle_weather') and nd.get_switch('toggle_display_mode') != "PLAN";
-		if (visible) {
-		  trigger_update( layer );
-	      } layer._view.setVisible(visible);
-
+		if (visible)
+			trigger_update( layer );
+		layer._view.setVisible(visible);
 	   }, # end of layer update predicate
 	}, # end of storms layer
 	
 	{ name:'airplaneSymbol', update_on:['toggle_range','toggle_display_mode'], predicate: func(nd, layer) {
-		# print("Running fixes predicate");
 		var visible=nd.get_switch('toggle_display_mode') == "PLAN";
-		if (visible) {
-		  trigger_update( layer );
-	      } layer._view.setVisible(visible);
-
-	   }, # end of layer update predicate
-	}, # end of storms layer
+		if (visible)
+			trigger_update( layer );
+		layer._view.setVisible(visible);
+	   },
+	},
 
 	{ name:'airports-nd', update_on:['toggle_range','toggle_airports','toggle_display_mode'], predicate: func(nd, layer) {
-		# print("Running airports-nd predicate");
 		var visible = nd.get_switch('toggle_airports') and nd.in_mode('toggle_display_mode', ['MAP']);
-		if (nd.rangeNm() <= 80 and visible) {
+		if (visible)
 			trigger_update( layer ); # clear & redraw
-		} 
 		layer._view.setVisible( visible);
-
 	   }, # end of layer update predicate
 	}, # end of airports layer
 
+	# Should distinct between low and high altitude navaids. Hiding above 40 NM for now, to prevent clutter/lag.
 	{ name:'vor', update_on:['toggle_range','toggle_stations','toggle_display_mode'], predicate: func(nd, layer) {
-		var visible = nd.get_switch('toggle_stations') and nd.in_mode('toggle_display_mode', ['MAP']);
-		if(nd.rangeNm() <= 40 and visible) {
+		var visible = nd.get_switch('toggle_stations') and nd.in_mode('toggle_display_mode', ['MAP']) and (nd.rangeNm() <= 40);
+		if(visible)
 			trigger_update( layer ); # clear & redraw
-		}
 		layer._view.setVisible( visible );
 	  }, # end of layer update predicate
 	}, # end of VOR layer
 
+	# Should distinct between low and high altitude navaids. Hiding above 40 NM for now, to prevent clutter/lag.
 	{ name:'dme', update_on:['toggle_range','toggle_stations','toggle_display_mode'], predicate: func(nd, layer) {
-		var visible = nd.get_switch('toggle_stations') and nd.in_mode('toggle_display_mode', ['MAP']);
-	    if(nd.rangeNm() <= 40 and visible){
+		var visible = nd.get_switch('toggle_stations') and nd.in_mode('toggle_display_mode', ['MAP']) and (nd.rangeNm() <= 40);
+		if(visible)
 			trigger_update( layer ); # clear & redraw
-		}
 		layer._view.setVisible( visible );
 	    }, # end of layer update predicate
 	}, # end of DME layer
@@ -119,18 +104,17 @@ var NDStyles = {
 	}, # end of traffic  layer
 
 	{ name:'runway-nd', update_on:['toggle_range','toggle_display_mode'], predicate: func(nd, layer) {
-	  var visible = (nd.rangeNm() <= 40 and getprop("autopilot/route-manager/active") and nd.in_mode('toggle_display_mode', ['MAP','PLAN'])) ;
+	  var visible = (nd.rangeNm() <= 40) and getprop("autopilot/route-manager/active") and nd.in_mode('toggle_display_mode', ['MAP','PLAN']) ;
 	  if (visible)
 	    trigger_update( layer ); # clear & redraw 
-		layer._view.setVisible( visible ); 
+	  layer._view.setVisible( visible ); 
 	  }, # end of layer update predicate
 	}, # end of airports-nd layer
 
 	{ name:'route', update_on:['toggle_display_mode',], predicate: func(nd, layer) {
 	  var visible= (nd.in_mode('toggle_display_mode', ['MAP','PLAN']));
-	  if (visible) {
+	  if (visible)
 	    trigger_update( layer ); # clear & redraw
-	  }
 	  layer._view.setVisible( visible );
 	  }, # end of layer update predicate
 	}, # end of route layer
@@ -244,34 +228,48 @@ var NDStyles = {
       ], # end of vector with features
 
 
-  }, # end of 744 ND style
-#####
-##
-## add support for other aircraft/ND types and styles here (737, 757, 777 etc)
-##
-##
-
-}; # end of NDStyles
-
+  }, # end of Boeing ND style
+};
 
 ##
 # encapsulate hdg/lat/lon source, so that the ND may also display AI/MP aircraft in a pilot-view at some point (aka stress-testing)
 #
 
 var NDSourceDriver = {};
-NDSourceDriver.new = func {	
- var m = {parents:[NDSourceDriver]};
- m.get_hdg_mag= func getprop("/orientation/heading-magnetic-deg");
- m.get_hdg_tru= func getprop("/orientation/heading-deg");
- m.get_trk_mag= func getprop("/orientation/track-magnetic-deg");
- m.get_trk_tru= func getprop("/orientation/track-deg");
- m.get_lat= func getprop("/position/latitude-deg");
- m.get_lon= func getprop("/position/longitude-deg");
- m.get_spd= func getprop("/velocities/groundspeed-kt");
- m.get_vspd= func getprop("/velocities/vertical-speed-fps");
-return m;
+NDSourceDriver.new = func
+{
+	var m = {parents:[NDSourceDriver]};
+	m.get_hdg_mag= func getprop("/orientation/heading-magnetic-deg");
+	m.get_hdg_tru= func getprop("/orientation/heading-deg");
+	m.get_hgg = func getprop("instrumentation/afds/settings/heading");
+	m.get_trk_mag= func
+	{
+		if(getprop("/velocities/groundspeed-kt") > 80)
+		{
+			 getprop("/orientation/track-magnetic-deg");
+		}
+		else
+		{
+			getprop("/orientation/heading-magnetic-deg");
+		}
+	};
+	m.get_trk_tru = func
+	{
+		if(getprop("/velocities/groundspeed-kt") > 80)
+		{
+			getprop("/orientation/track-deg");
+		}
+		else
+		{
+			getprop("/orientation/heading-deg");
+		}
+	};
+	m.get_lat= func getprop("/position/latitude-deg");
+	m.get_lon= func getprop("/position/longitude-deg");
+	m.get_spd= func getprop("/velocities/groundspeed-kt");
+	m.get_vspd= func getprop("/velocities/vertical-speed-fps");
+	return m;
 }
-
 
 ##
 # configure aircraft specific cockpit switches here
@@ -284,18 +282,21 @@ return m;
 # TODO: switches are ND specific, so move to the NDStyle hash!
 
 var default_switches = {
- 'toggle_range': 	{path: '/inputs/range-nm', value:10, type:'INT'},
- 'toggle_weather': 	{path: '/inputs/wxr', value:0, type:'BOOL'},
- 'toggle_airports': 	{path: '/inputs/arpt', value:0, type:'BOOL'},
- 'toggle_stations': 	{path: '/inputs/sta', value:0, type:'BOOL'},
- 'toggle_waypoints': 	{path: '/inputs/wpt', value:0, type:'BOOL'},
- 'toggle_position': 	{path: '/inputs/pos', value:0, type:'BOOL'},
- 'toggle_data': 	{path: '/inputs/data',value:0, type:'BOOL'},
- 'toggle_terrain': 	{path: '/inputs/terr',value:0, type:'BOOL'},
- 'toggle_traffic': 	{path: '/inputs/tfc',value:0, type:'BOOL'},
- 'toggle_centered': 	{path: '/inputs/nd-centered',value:0, type:'BOOL'},
- 'toggle_display_mode': {path: '/mfd/display-mode', value:'MAP', type:'STRING'},
- 'toggle_true_north': {path: '/mfd/true-north', value:0, type:'BOOL'},
+	'toggle_range':			{path: '/inputs/range-nm', value:10, type:'INT'},
+	'toggle_weather':		{path: '/inputs/wxr', value:0, type:'BOOL'},
+	'toggle_airports':		{path: '/inputs/arpt', value:0, type:'BOOL'},
+	'toggle_stations':		{path: '/inputs/sta', value:0, type:'BOOL'},
+	'toggle_waypoints':		{path: '/inputs/wpt', value:0, type:'BOOL'},
+	'toggle_position':		{path: '/inputs/pos', value:0, type:'BOOL'},
+	'toggle_data':			{path: '/inputs/data',value:0, type:'BOOL'},
+	'toggle_terrain':		{path: '/inputs/terr',value:0, type:'BOOL'},
+	'toggle_traffic':		{path: '/inputs/tfc',value:0, type:'BOOL'},
+	'toggle_centered':		{path: '/inputs/nd-centered',value:0, type:'BOOL'},
+	'toggle_lh_vor_adf':	{path: '/inputs/lh-vor-adf',value:0, type:'INT'},
+	'toggle_rh_vor_adf':	{path: '/inputs/rh-vor-adf',value:0, type:'INT'},
+	'toggle_display_mode': 	{path: '/mfd/display-mode', value:'MAP', type:'STRING'}, # valid values are: APP, MAP, PLAN or VOR
+	'toggle_display_type':	{path: '/mfd/display-type', value:'CRT', type:'STRING'}, # valid values are: CRT or LCD
+	'toggle_true_north': 	{path: '/mfd/true-north', value:0, type:'BOOL'},
 };
 
 # Hack to update weather radar once every 10 seconds
@@ -319,30 +320,28 @@ update_apl_sym();
 # - introduce a MFD class (use it also for PFD/EICAS)
 # - introduce a SGSubsystem class and use it  here
 # - introduce a Boeing NavDisplay class
-var NavDisplay = {
-
+var NavDisplay =
+{
     # reset handler
-    handle_reinit: func {
-    print("Cleaning up NavDisplay listeners");
-    # shut down all timers and other loops here
-    me.update_timer.stop(); 
-    foreach(var l; me.listeners)
-      removelistener(l);
+    handle_reinit: func
+	{
+		# shut down all timers and other loops here
+	    me.update_timer.stop();
+		foreach(var l; me.listeners)
+			removelistener(l);
     },
-
-    listen: func(p,c) {
-      append(me.listeners, setlistener(p,c)); 
+    listen: func(p,c)
+	{
+		append(me.listeners, setlistener(p,c)); 
     },
-
     # listeners for cockpit switches
-    listen_switch: func(s,c) {
-	# print("event setup for: ", id(c));
-    	me.listen( me.get_full_switch_path(s), func {
-	# print("listen_switch triggered:", s, " callback id:", id(c) );	
-	c();
-      });
-
-    },
+    listen_switch: func(s,c)
+	{
+    	me.listen( me.get_full_switch_path(s), func
+		{
+			c();
+    	});
+	},
 
     # get the full property path for a given switch
     get_full_switch_path: func (s) {
@@ -351,17 +350,18 @@ var NavDisplay = {
     },
 
     # helper method for getting configurable cockpit switches (which are usually different in each aircraft)
-    get_switch: func(s) {
-      var switch = me.efis_switches[s];
-      var path = me.efis_path ~ switch.path ;
-      #print(s,":Getting switch prop:", path);
-      
-      return getprop( path );
-    },
+	get_switch: func(s)
+	{
+		var switch = me.efis_switches[s];
+		var path = me.efis_path ~ switch.path ;
+		return getprop( path );
+	},
 
     # for creating NDs that are driven by AI traffic instead of the main aircraft (generalization rocks!)
-    connectAI: func(source=nil) {
-		me.aircraft_source = {
+    connectAI: func(source=nil)
+	{
+		me.aircraft_source =
+		{
 			get_hdg_mag: func source.getNode('orientation/heading-magnetic-deg').getValue(),
 			get_hdg_tru: func source.getNode('orientation/heading-deg').getValue(),
 			get_trk_mag: func source.getNode('orientation/track-magnetic-deg').getValue(),
@@ -373,83 +373,55 @@ var NavDisplay = {
 		};
     }, # of connectAI
 
-    # TODO: the ctor should allow customization, for different aircraft
+	# TODO: the ctor should allow customization, for different aircraft
     # especially properties and SVG files/handles (747, 757, 777 etc)
-    new : func(prop1, switches=default_switches, style='B747-400') {
-        var m = { parents : [NavDisplay]};
+    new : func(prop1, switches=default_switches, style='Boeing')
+	{
+		var m = { parents : [NavDisplay]};
 
-	m.listeners=[]; # for cleanup handling
-	m.aircraft_source = NDSourceDriver.new(); # uses the main aircraft as the driver/source (speeds, position, heading)
+		m.listeners=[]; # for cleanup handling
+		m.aircraft_source = NDSourceDriver.new(); # uses the main aircraft as the driver/source (speeds, position, heading)
 
-	m.nd_style = NDStyles[style]; # look up ND specific stuff (file names etc)
-
+		m.nd_style = NDStyles[style]; # look up ND specific stuff (file names etc)
         m.radio_list=["instrumentation/comm/frequencies","instrumentation/comm[1]/frequencies",
 		      "instrumentation/nav/frequencies","instrumentation/nav[1]/frequencies"];
         m.mfd_mode_list=["APP","VOR","MAP","PLAN"];
-
-	m.efis_path = prop1;
-	m.efis_switches = switches ;
-
-	# just an alias, to avoid having to rewrite the old code for now
-	m.rangeNm = func m.get_switch('toggle_range');
-
+		m.efis_path = prop1;
+		m.efis_switches = switches;
+		m.rangeNm = func m.get_switch('toggle_range');
         m.efis = props.globals.initNode(prop1); 
         m.mfd = m.efis.initNode("mfd");
-
 	# TODO: unify this with switch handling
         m.mfd_mode_num = m.mfd.initNode("mode-num",2,"INT");
-        m.mfd_display_mode = m.mfd.initNode("display-mode",m.mfd_mode_list[2],"STRING");
         m.std_mode = m.efis.initNode("inputs/setting-std",0,"BOOL");
-        m.previous_set = m.efis.initNode("inhg-previos",29.92); # watch out typo here, check other files before fixing !
+        m.previous_set = m.efis.initNode("inhg-previous",29.92);
         m.kpa_mode = m.efis.initNode("inputs/kpa-mode",0,"BOOL");
         m.kpa_output = m.efis.initNode("inhg-kpa",29.92);
         m.kpa_prevoutput = m.efis.initNode("inhg-kpa-previous",29.92);
         m.temp = m.efis.initNode("fixed-temp",0);
         m.alt_meters = m.efis.initNode("inputs/alt-meters",0,"BOOL");
         m.fpv = m.efis.initNode("inputs/fpv",0,"BOOL");
-        m.nd_centered = m.efis.initNode("inputs/nd-centered",0,"BOOL");
 		
         m.mins_mode = m.efis.initNode("inputs/minimums-mode",0,"BOOL");
         m.mins_mode_txt = m.efis.initNode("minimums-mode-text","RADIO","STRING");
         m.minimums = m.efis.initNode("minimums",250,"INT");
         m.mk_minimums = props.globals.getNode("instrumentation/mk-viii/inputs/arinc429/decision-height");
-
-	# TODO: these are switches, can be unified with switch handling hash above (eventually): 
+		# TODO: these are switches, can be unified with switch handling hash above (eventually): 
 	
-        m.rh_vor_adf = m.efis.initNode("inputs/rh-vor-adf",0,"INT"); # not yet in switches hash
-        m.lh_vor_adf = m.efis.initNode("inputs/lh-vor-adf",0,"INT"); # not yet in switches hash
-	m.nd_plan_wpt = m.efis.initNode("inputs/plan-wpt-index", 0, "INT"); # ditto
-
-	### 
-	# initialize all switches based on the defaults specified in the switch hash
-	# 
-	foreach(var switch; keys( m.efis_switches ) )	
-	props.globals.initNode 
-			(	m.get_full_switch_path (switch), 
-				m.efis_switches[switch].value, 
-				m.efis_switches[switch].type 
-			);
-	
-
+		m.nd_plan_wpt = m.efis.initNode("inputs/plan-wpt-index", 0, "INT"); # ditto
         return m;
-    },
+	},
 	newMFD: func(canvas_group)
 	{
-
 		me.listen("/sim/signals/reinit", func me.handle_reinit() );
-
 		me.update_timer = maketimer(0.05, func me.update() ); # TODO: make interval configurable via ctor
 		me.nd = canvas_group;
-
-			
 		# load the specified SVG file into the me.nd group and populate all sub groups
 		
 		canvas.parsesvg(me.nd, me.nd_style.svg_filename, {'font-mapper': me.nd_style.font_mapper});
-
 		me.symbols = {}; # storage for SVG elements, to avoid namespace pollution (all SVG elements end up  here)
 
 		foreach(var feature; me.nd_style.features ) {
-		  # print("Setting up SVG feature:", feature.id);
 		  me.symbols[feature.id] = me.nd.getElementById(feature.id); 
 		  if(contains(feature.impl,'init')) feature.impl.init(me.nd, feature); # call The element's init code (i.e. updateCenter)
 		}
@@ -457,49 +429,51 @@ var NavDisplay = {
 		### this is the "old" method that's less flexible, we want to use the style hash instead (see above)
 		# because things are much better configurable that way
 		# now look up all required SVG elements and initialize member fields using the same name  to have a convenient handle
-		foreach(var element; ["wind",
-				      "dmeLDist","dmeRDist","vorLId","vorRId",
-				      "range","status.wxr","status.wpt",
-				      "status.sta","status.arpt"]) 
+		foreach(var element; ["wind","dmeLDist","dmeRDist","dmeL","dmeR","vorL","vorR","vorLId","vorRId",
+				      "range","status.wxr","status.wpt","hdgGroup","status.sta","status.arpt"]) 
 		  me.symbols[element] = me.nd.getElementById(element); 
 
 		# load elements from vector image, and create instance variables using identical names, and call updateCenter() on each
 		# anything that needs updatecenter called, should be added to the vector here
 		# 
-		foreach(var element; ["rotateComp","rotateComp2","windArrow","selHdg","selHdg2","hdgGroup","northUp",
-					"aplSymMap","aplSymMapCtr","aplSymVor","curHdgPtr","curHdgPtr2",
-					"staFromL","staToL","staFromR","staToR","staFromL2","staToL2","staFromR2","staToR2",
-					"trkInd","vorCrsPtr2","locPtr","compass","compassApp","hdgTrk","truMag","altArc","planArcs"] )
-		  me.symbols[element] = me.nd.getElementById(element).updateCenter(); 
+		foreach(var element; ["windArrow","compassApp","northUp","aplSymMap","aplSymMapCtr","aplSymVor",
+								"staFromL2","staToL2","staFromR2","staToR2",
+								"locPtr","hdgTrk","truMag","altArc","planArcs",
+								"trkInd","compass","HdgBugCRT","TrkBugLCD","HdgBugLCD","selHdgLine","curHdgPtr",
+								"staFromL","staToL","staFromR","staToR"] )
+		me.symbols[element] = me.nd.getElementById(element).updateCenter(); 
+
+		foreach(var element; ["HdgBugCRT2","TrkBugLCD2","HdgBugLCD2","selHdgLine2","curHdgPtr2","vorCrsPtr2"] )
+		me.symbols[element] = me.nd.getElementById(element).setCenter(512,565); 
 
 		# this should probably be using Philosopher's new SymbolLayer ?
 		me.map = me.nd.createChild("map","map")
 			.set("clip", "rect(124, 1024, 1024, 0)");
-
-		# this callback will be passed onto the model via the controller hash, and used for the positioned queries, to specify max query range:
 		
+		# this callback will be passed onto the model via the controller hash, and used for the positioned queries, to specify max query range:
 		var get_range = func me.get_switch('toggle_range');
 		
 		# predicate for the draw controller
-		var is_tuned = func(freq)    {		
-		var nav1=getprop("instrumentation/nav[0]/frequencies/selected-mhz");
-		var nav2=getprop("instrumentation/nav[1]/frequencies/selected-mhz");
-		if (freq == nav1 or freq == nav2) return 1;
-		return 0;		
+		var is_tuned = func(freq)
+		{		
+			var nav1=getprop("instrumentation/nav[0]/frequencies/selected-mhz");
+			var nav2=getprop("instrumentation/nav[1]/frequencies/selected-mhz");
+			if(freq == nav1 or freq == nav2) return 1;
+			return 0;		
 		}
 
 		# another predicate for the draw controller
-		var get_course_by_freq = func(freq) {
-		if (freq == getprop("instrumentation/nav[0]/frequencies/selected-mhz"))
-			return getprop("instrumentation/nav[0]/radials/selected-deg");
-		else 
-			return getprop("instrumentation/nav[1]/radials/selected-deg");
+		var get_course_by_freq = func(freq)
+		{
+			if(freq == getprop("instrumentation/nav[0]/frequencies/selected-mhz"))
+				return getprop("instrumentation/nav[0]/radials/selected-deg");
+			else 
+				return getprop("instrumentation/nav[1]/radials/selected-deg");
 		}
 
-		var get_current_position = func {
-		  return [
-		    me.aircraft_source.get_lat(), me.aircraft_source.get_lon()
-		  ];
+		var get_current_position = func
+		{
+		  return [me.aircraft_source.get_lat(), me.aircraft_source.get_lon()];
 		}
 
 		# a hash with controller callbacks, will be passed onto draw routines to customize behavior/appearance
@@ -507,11 +481,13 @@ var NavDisplay = {
 		# so we need some simple way to communicate between frontend<->backend until we have real controllers
 		# for now, a single controller hash is shared by most layers - unsupported callbacks are simply ignored by the draw files
 		# 
-		var controller = { 	query_range: func get_range(), 
-					is_tuned:is_tuned, 
-					get_tuned_course:get_course_by_freq,
-					get_position: get_current_position,
-				  };
+		var controller =
+		{
+			query_range: func get_range(), 
+			is_tuned:is_tuned, 
+			get_tuned_course:get_course_by_freq,
+			get_position: get_current_position,
+		 };
 		
 		###
 		# set up various layers, controlled via callbacks in the controller hash
@@ -523,69 +499,66 @@ var NavDisplay = {
 		me.layers={}; # storage container for all ND specific layers
 		# look up all required layers as specified per the NDStyle hash and do the initial setup for event handling
 		
-		foreach(var layer; me.nd_style.layers) {		 
-		  print("newMFD(): Setting up ND layer:", layer.name);
-		  # huge hack for the alt-arc, which is not rendered as a map group, but directly as part of the toplevel ND group
-		  var render_target = (!contains(layer,'not_a_map') or !layer.not_a_map) ? me.map : me.nd;
-		  var the_layer = me.layers[layer.name] = canvas.MAP_LAYERS[layer.name].new( render_target, layer.name, controller );
+		foreach(var layer; me.nd_style.layers)
+		{
+			# huge hack for the alt-arc, which is not rendered as a map group, but directly as part of the toplevel ND group
+			var render_target = (!contains(layer,'not_a_map') or !layer.not_a_map) ? me.map : me.nd;
+			var the_layer = me.layers[layer.name] = canvas.MAP_LAYERS[layer.name].new( render_target, layer.name, controller );
 
-		  # now register all layer specific notification listeners and their corresponding update predicate/callback
-		  # pass the ND instance and the layer handle to the predicate when it is called
-		  # so that it can directly access the ND instance and its own layer (without having to know the layer's name)
+			# now register all layer specific notification listeners and their corresponding update predicate/callback
+			# pass the ND instance and the layer handle to the predicate when it is called
+			# so that it can directly access the ND instance and its own layer (without having to know the layer's name)
 		  
-		  var event_handler = make_event_handler(layer.predicate, the_layer); 
-		  foreach(var event; layer.update_on) {
-			# print("Setting up subscription:", event, " for ", layer.name, " handler id:", id(event_handler) );
-			me.listen_switch(event, event_handler ) ;		      
-		   } # foreach event subscription
-		 # and now update/init each layer once by calling its update predicate for initialization
-		 event_handler();
-		 } # foreach layer		
-
-		print("navdisplay.mfd:ND layer setup completed");
+			var event_handler = make_event_handler(layer.predicate, the_layer); 
+		 	foreach(var event; layer.update_on)
+			{
+				me.listen_switch(event, event_handler ) ;		      
+			} # foreach event subscription
+			# and now update/init each layer once by calling its update predicate for initialization
+			event_handler();
+		} # foreach layer
 
 		# start the update timer, which makes sure that the update() will be called 
 		me.update_timer.start();
 		
-
-	# next, radio & autopilot & listeners
-	# TODO: move this to .init field in layers hash or to model files
-	foreach(var n; var radios = [	"instrumentation/nav/frequencies/selected-mhz",
+		# next, radio & autopilot & listeners
+		# TODO: move this to .init field in layers hash or to model files
+		foreach(var n; var radios = [	"instrumentation/nav/frequencies/selected-mhz",
 					"instrumentation/nav[1]/frequencies/selected-mhz"])
-	me.listen(n, func() {
-		me.drawvor();
-		me.drawdme();
-	});
-	# TODO: move this to the route.model
-	# Hack to draw the route on rm activation
-	me.listen("/autopilot/route-manager/active", func(active) {
-		if(active.getValue()) {
-			setprop(me.get_full_switch_path('toggle_display_mode'),getprop(me.get_full_switch_path('toggle_display_mode')));
-		} else {
-			print("TODO: navdisplay.mfd: implement route-manager/layer clearing!");
-			#me.route_group.removeAllChildren(); # HACK!
-		}
-	});
-	me.listen("/autopilot/route-manager/current-wp", func(activeWp) {
-		canvas.updatewp( activeWp.getValue() );
-	});
-
+		me.listen(n, func()
+		{
+#			me.drawvor();
+#			me.drawdme();
+		});
+		# TODO: move this to the route.model
+		# Hack to draw the route on rm activation
+		me.listen("/autopilot/route-manager/active", func(active)
+		{
+			if(active.getValue())
+			{
+				setprop(me.get_full_switch_path('toggle_display_mode'),getprop(me.get_full_switch_path('toggle_display_mode')));
+			}
+			else
+			{
+				#me.route_group.removeAllChildren(); # HACK!
+			}
+		});
+		me.listen("/autopilot/route-manager/current-wp", func(activeWp)
+		{
+			canvas.updatewp( activeWp.getValue() );
+		});
 	},
-	drawroute: func print("drawroute no longer used!"), 
-	drawrunways: func print("drawrunways no longer used!"),
 	
-	in_mode:func(switch, modes)	{
-		foreach(var m; modes)
-			if (me.get_switch(switch)==m) return 1;
+	in_mode:func(switch, modes)
+	{
+		foreach(var m; modes) if(me.get_switch(switch)==m) return 1;
 		return 0;
 	},
-
 	# each model should keep track of when it last got updated, using current lat/lon
 	# in update(), we can then check if the aircraft has traveled more than 0.5-1 nm (depending on selected range)
 	# and update each model accordingly
 	update: func() # FIXME: This stuff is still too aircraft specific, cannot easily be reused by other aircraft
 	{
-
 		##
 		# important constants
 		var m1 = 111132.92;
@@ -605,7 +578,7 @@ var NavDisplay = {
 		var userHdgTru = me.aircraft_source.get_hdg_tru(); 
 		var userTrkMag = me.aircraft_source.get_trk_mag(); 
 		var userTrkTru = me.aircraft_source.get_trk_tru(); 
-		if (me.get_switch('toggle_true_north')) {
+		if(me.get_switch('toggle_true_north')) {
 			me.symbols.truMag.setText("TRU");
 			var userHdg=userHdgTru;
 			var userTrk=userTrkTru;
@@ -616,23 +589,24 @@ var NavDisplay = {
 		}
 		if (me.aircraft_source.get_spd() < 80)
 			userTrk = userHdg; 
-		
 		var userLat = me.aircraft_source.get_lat();
 		var userLon = me.aircraft_source.get_lon();
 		var userSpd = me.aircraft_source.get_spd();
 		var userVSpd = me.aircraft_source.get_vspd();
+		var dispLCD = me.get_switch('toggle_display_type') == "LCD";
 
 		# this should only ever happen when testing the experimental AI/MP ND driver hash (not critical)
 		if (!userHdg or !userTrk or !userLat or !userLon) {
 			print("aircraft source invalid, returning !");
-			return; 
+			return;
 		}
 		
-		if (me.get_switch('toggle_centered') or me.in_mode('toggle_display_mode', ['PLAN']))
+		if(me.in_mode('toggle_display_mode', ['PLAN']))
 			me.map.setTranslation(512,512);
+		elsif(me.get_switch('toggle_centered'))
+			me.map.setTranslation(512,565);
 		else
 			me.map.setTranslation(512,824);
-		
 		# Calculate length in NM of one degree at current location TODO: expose as methods, for external callbacks 
 		var userLatR = userLat*D2R;
 		var userLonR = userLon*D2R;
@@ -641,23 +615,78 @@ var NavDisplay = {
 		latNm = latlen*M2NM; #60 at equator
 		lonNm = lonlen*M2NM; #60 at equator
 		
-		me.symbols.windArrow.setRotation((getprop("/environment/wind-from-heading-deg")-userHdgMag)*D2R);
+		me.symbols.windArrow.setRotation((getprop("/environment/wind-from-heading-deg")-userHdg)*D2R);
 		me.symbols.wind.setText(sprintf("%3.0f / %2.0f",getprop("/environment/wind-from-heading-deg"),getprop("/environment/wind-speed-kt")));
 		
-		if ((var navid0=getprop("instrumentation/nav/nav-id"))!=nil )
-			me.symbols.vorLId.setText(navid0);
-		if ((var navid1=getprop("instrumentation/nav[1]/nav-id"))!=nil )
-			me.symbols.vorRId.setText(navid1);
-		if((var nav0dist=getprop("instrumentation/nav/nav-distance"))!=nil )
-			me.symbols.dmeLDist.setText(sprintf("%3.1f",nav0dist*0.000539));
-		if((var nav1dist=getprop("instrumentation/nav[1]/nav-distance"))!=nil )
-			me.symbols.dmeRDist.setText(sprintf("%3.1f",nav1dist*0.000539));
-			
-		me.symbols.range.setText(sprintf("%3.0f",me.rangeNm() ));
+		if(me.get_switch('toggle_lh_vor_adf') == 1)
+		{
+			me.symbols.vorL.setText("VOR L");
+			me.symbols.vorL.setColor(0.195,0.96,0.097);
+			me.symbols.dmeL.setText("DME");
+			me.symbols.dmeL.setColor(0.195,0.96,0.097);
+			if(getprop("instrumentation/nav/in-range"))
+				me.symbols.vorLId.setText(getprop("instrumentation/nav/nav-id"));
+			else
+				me.symbols.vorLId.setText(getprop("instrumentation/nav/frequencies/selected-mhz-fmt"));
+			me.symbols.vorLId.setColor(0.195,0.96,0.097);
+			if(getprop("instrumentation/nav/dme-in-range"))
+				me.symbols.dmeLDist.setText(sprintf("%3.1f",getprop("instrumentation/nav/nav-distance")*0.000539));
+			else me.symbols.dmeLDist.setText(" ---");
+			me.symbols.dmeLDist.setColor(0.195,0.96,0.097);
+		} elsif(me.get_switch('toggle_lh_vor_adf') == -1) {
+			me.symbols.vorL.setText("ADF L");
+			me.symbols.vorL.setColor(0,0.6,0.85);
+			me.symbols.dmeL.setText("");
+			me.symbols.dmeL.setColor(0,0.6,0.85);
+			if((var navident=getprop("instrumentation/adf/ident")) != "")
+				me.symbols.vorLId.setText(navident);
+			else me.symbols.vorLId.setText(sprintf("%3d",getprop("instrumentation/adf/frequencies/selected-khz")));
+			me.symbols.vorLId.setColor(0,0.6,0.85);
+			me.symbols.dmeLDist.setText("");
+			me.symbols.dmeLDist.setColor(0,0.6,0.85);
+		} else {
+			me.symbols.vorL.setText("");
+			me.symbols.dmeL.setText("");
+			me.symbols.vorLId.setText("");
+			me.symbols.dmeLDist.setText("");
+		}
+		if(me.get_switch('toggle_rh_vor_adf') == 1) {
+			me.symbols.vorR.setText("VOR R");
+			me.symbols.vorR.setColor(0.195,0.96,0.097);
+			me.symbols.dmeR.setText("DME");
+			me.symbols.dmeR.setColor(0.195,0.96,0.097);
+			if(getprop("instrumentation/nav[1]/in-range"))
+				me.symbols.vorRId.setText(getprop("instrumentation/nav[1]/nav-id"));
+			else
+				me.symbols.vorRId.setText(getprop("instrumentation/nav[1]/frequencies/selected-mhz-fmt"));
+			me.symbols.vorRId.setColor(0.195,0.96,0.097);
+			if(getprop("instrumentation/nav[1]/dme-in-range"))
+				me.symbols.dmeRDist.setText(sprintf("%3.1f",getprop("instrumentation/nav[1]/nav-distance")*0.000539));
+			else me.symbols.dmeRDist.setText(" ---");
+			me.symbols.dmeRDist.setColor(0.195,0.96,0.097);
+		} elsif(me.get_switch('toggle_rh_vor_adf') == -1) {
+			me.symbols.vorR.setText("ADF R");
+			me.symbols.vorR.setColor(0,0.6,0.85);
+			me.symbols.dmeR.setText("");
+			me.symbols.dmeR.setColor(0,0.6,0.85);
+			if((var navident=getprop("instrumentation/adf[1]/ident")) != "")
+				me.symbols.vorRId.setText(navident);
+			else me.symbols.vorRId.setText(sprintf("%3d",getprop("instrumentation/adf[1]/frequencies/selected-khz")));
+			me.symbols.vorRId.setColor(0,0.6,0.85);
+			me.symbols.dmeRDist.setText("");
+			me.symbols.dmeRDist.setColor(0,0.6,0.85);
+		} else {
+			me.symbols.vorR.setText("");
+			me.symbols.dmeR.setText("");
+			me.symbols.vorRId.setText("");
+			me.symbols.dmeRDist.setText("");
+		}
+		
+		me.symbols.range.setText(sprintf("%3.0f",me.rangeNm()/2));
 
 		# reposition the map, change heading & range: 
 		if(me.in_mode('toggle_display_mode', ['PLAN'])) {
-			me.symbols.windArrow.hide();
+			me.symbols.windArrow.setVisible(!dispLCD);
 			me.map._node.getNode("hdg",1).setDoubleValue(0);
 			if (getprop(me.efis_path ~ "/inputs/plan-wpt-index") >= 0) {
 				me.map._node.getNode("ref-lat",1).setDoubleValue(getprop("/autopilot/route-manager/route/wp["~getprop(me.efis_path ~ "/inputs/plan-wpt-index")~"]/latitude-deg"));
@@ -668,26 +697,37 @@ var NavDisplay = {
 			me.map._node.getNode("ref-lat",1).setDoubleValue(userLat);
 			me.map._node.getNode("ref-lon",1).setDoubleValue(userLon);
 		}
-		me.map._node.getNode("range",1).setDoubleValue(me.rangeNm()/2); # avoid this  here, use a listener instead
+		# The set range of the map does not correspond to what we see in-sim!!
+		me.map._node.getNode("range",1).setDoubleValue(me.rangeNm()/3.2); # avoid this  here, use a listener instead
 
+		var vhdg_bug = getprop("autopilot/settings/heading-bug-deg");
 		if(me.in_mode('toggle_display_mode', ['MAP'])) {
-			me.symbols.rotateComp.setRotation(-userTrk*D2R);
-			me.symbols.rotateComp2.setRotation(-userTrk*D2R);
+			me.symbols.HdgBugCRT.setRotation((vhdg_bug-userTrk)*D2R);
+			me.symbols.HdgBugLCD.setRotation((vhdg_bug-userTrk)*D2R);
+			me.symbols.TrkBugLCD.setRotation((vhdg_bug-userTrk)*D2R);
+			me.symbols.selHdgLine.setRotation((vhdg_bug-userTrk)*D2R);
+			me.symbols.HdgBugCRT2.setRotation((vhdg_bug-userTrk)*D2R);
+			me.symbols.TrkBugLCD2.setRotation((vhdg_bug-userTrk)*D2R);
+			me.symbols.selHdgLine2.setRotation((vhdg_bug-userTrk)*D2R);
 			me.symbols.trkInd.setRotation(0);
-			me.symbols.curHdgPtr.setRotation(userHdg*D2R);
-			me.symbols.curHdgPtr2.setRotation(userHdg*D2R);
-			me.map._node.getNode("hdg",1).setDoubleValue(userTrk);
+			me.symbols.curHdgPtr.setRotation((userHdg-userTrk)*D2R);
+			me.symbols.curHdgPtr2.setRotation((userHdg-userTrk)*D2R);
+			me.map._node.getNode("hdg",1).setDoubleValue(userTrkTru);
 			me.symbols.compass.setRotation(-userTrk*D2R);
 			me.symbols.compassApp.setRotation(-userTrk*D2R);
 			me.symbols.hdgTrk.setText("TRK");
 		}
 		if(me.in_mode('toggle_display_mode', ['APP','VOR'])) {
-			me.symbols.rotateComp.setRotation(-userHdg*D2R);
-			me.symbols.rotateComp2.setRotation(-userHdg*D2R);
+			me.symbols.HdgBugCRT.setRotation((vhdg_bug-userHdg)*D2R);
+			me.symbols.HdgBugLCD.setRotation((vhdg_bug-userHdg)*D2R);
+			me.symbols.selHdgLine.setRotation((vhdg_bug-userHdg)*D2R);
+			me.symbols.HdgBugCRT2.setRotation((vhdg_bug-userHdg)*D2R);
+			me.symbols.HdgBugLCD2.setRotation((vhdg_bug-userHdg)*D2R);
+			me.symbols.selHdgLine2.setRotation((vhdg_bug-userHdg)*D2R);
 			me.symbols.trkInd.setRotation((userTrk-userHdg)*D2R);
-			me.symbols.curHdgPtr.setRotation(userHdg*D2R);
-			me.symbols.curHdgPtr2.setRotation(userHdg*D2R);
-			me.map._node.getNode("hdg",1).setDoubleValue(userHdg);
+			me.symbols.curHdgPtr.setRotation(0);
+			me.symbols.curHdgPtr2.setRotation(0);
+			me.map._node.getNode("hdg",1).setDoubleValue(userHdgTru);
 			me.symbols.compass.setRotation(-userHdg*D2R);
 			me.symbols.compassApp.setRotation(-userHdg*D2R);
 			me.symbols.hdgTrk.setText("HDG");
@@ -727,31 +767,127 @@ var NavDisplay = {
 		}
 		
 		var staPtrVis = !me.in_mode('toggle_display_mode', ['APP','PLAN']);
-		if (!me.get_switch('toggle_centered') and me.in_mode('toggle_display_mode', ['APP','MAP','VOR'])) {
-			me.symbols.trkInd.show();
-			me.symbols.staFromL.setVisible(staPtrVis);
-			me.symbols.staFromL2.hide();
-			me.symbols.staFromR.setVisible(staPtrVis);
-			me.symbols.staFromR2.hide();
-			me.symbols.staToL.setVisible(staPtrVis);
-			me.symbols.staToL2.hide();
-			me.symbols.staToR.setVisible(staPtrVis);
-			me.symbols.staToR2.hide();
-			me.symbols.rotateComp.setVisible(staPtrVis);
-			me.symbols.rotateComp2.hide();
-		} else {
-			me.symbols.trkInd.hide();
-			me.symbols.staFromL.hide();
-			me.symbols.staFromL2.setVisible(staPtrVis);
-			me.symbols.staFromR.hide();
-			me.symbols.staFromR2.setVisible(staPtrVis);
-			me.symbols.staToL.hide();
-			me.symbols.staToL2.setVisible(staPtrVis);
-			me.symbols.staToR.hide();
-			me.symbols.staToR2.setVisible(staPtrVis);
-			me.symbols.rotateComp.hide();
-			me.symbols.rotateComp2.setVisible(staPtrVis);
+		var magVar = getprop("environment/magnetic-variation-deg");
+		if(me.in_mode('toggle_display_mode', ['APP','MAP','VOR','PLAN']))
+		{
+			if(getprop("instrumentation/nav/heading-deg") != nil)
+				var nav0hdg=getprop("instrumentation/nav/heading-deg") - userHdg - magVar;
+			if(getprop("instrumentation/nav[1]/heading-deg") != nil)
+				var nav1hdg=getprop("instrumentation/nav[1]/heading-deg") - userHdg - magVar;
+			var adf0hdg=getprop("instrumentation/adf/indicated-bearing-deg");
+			var adf1hdg=getprop("instrumentation/adf[1]/indicated-bearing-deg");
+			if(!me.get_switch('toggle_centered'))
+			{
+				if(me.in_mode('toggle_display_mode', ['PLAN']))
+					me.symbols.trkInd.hide();
+				else
+					me.symbols.trkInd.show();
+				if((getprop("instrumentation/nav/in-range") and me.get_switch('toggle_lh_vor_adf') == 1)) {
+					me.symbols.staFromL.setVisible(staPtrVis);
+					me.symbols.staToL.setVisible(staPtrVis);
+					me.symbols.staFromL.setColor(0.195,0.96,0.097);
+					me.symbols.staToL.setColor(0.195,0.96,0.097);
+					me.symbols.staFromL.setRotation((nav0hdg+180)*D2R);
+					me.symbols.staToL.setRotation(nav0hdg*D2R);
+				}
+				elsif(getprop("instrumentation/adf/in-range") and (me.get_switch('toggle_lh_vor_adf') == -1)) {
+					me.symbols.staFromL.setVisible(staPtrVis);
+					me.symbols.staToL.setVisible(staPtrVis);
+					me.symbols.staFromL.setColor(0,0.6,0.85);
+					me.symbols.staToL.setColor(0,0.6,0.85);
+					me.symbols.staFromL.setRotation((adf0hdg+180)*D2R);
+					me.symbols.staToL.setRotation(adf0hdg*D2R);
+				} else {
+					me.symbols.staFromL.hide();
+					me.symbols.staToL.hide();
+				}
+				if((getprop("instrumentation/nav[1]/in-range") and me.get_switch('toggle_rh_vor_adf') == 1)) {
+					me.symbols.staFromR.setVisible(staPtrVis);
+					me.symbols.staToR.setVisible(staPtrVis);
+					me.symbols.staFromR.setColor(0.195,0.96,0.097);
+					me.symbols.staToR.setColor(0.195,0.96,0.097);
+					me.symbols.staFromR.setRotation((nav1hdg+180)*D2R);
+					me.symbols.staToR.setRotation(nav1hdg*D2R);
+				} elsif(getprop("instrumentation/adf[1]/in-range") and (me.get_switch('toggle_rh_vor_adf') == -1)) {
+					me.symbols.staFromR.setVisible(staPtrVis);
+					me.symbols.staToR.setVisible(staPtrVis);
+					me.symbols.staFromR.setColor(0,0.6,0.85);
+					me.symbols.staToR.setColor(0,0.6,0.85);
+					me.symbols.staFromR.setRotation((adf1hdg+180)*D2R);
+					me.symbols.staToR.setRotation(adf1hdg*D2R);
+				} else {
+					me.symbols.staFromR.hide();
+					me.symbols.staToR.hide();
+				}
+				me.symbols.staFromL2.hide();
+				me.symbols.staToL2.hide();
+				me.symbols.staFromR2.hide();
+				me.symbols.staToR2.hide();
+				me.symbols.curHdgPtr2.hide();
+				me.symbols.HdgBugCRT2.hide();
+				me.symbols.TrkBugLCD2.hide();
+				me.symbols.HdgBugLCD2.hide();
+				me.symbols.selHdgLine2.hide();
+				me.symbols.curHdgPtr.setVisible(staPtrVis);
+				me.symbols.TrkBugLCD.hide();
+				me.symbols.HdgBugCRT.setVisible(staPtrVis and !dispLCD);
+				me.symbols.HdgBugLCD.setVisible(staPtrVis and dispLCD);
+				me.symbols.selHdgLine.setVisible(staPtrVis);
+			} else {
+				me.symbols.trkInd.hide();
+				if((getprop("instrumentation/nav/in-range")	and me.get_switch('toggle_lh_vor_adf') == 1)) {
+					me.symbols.staFromL2.setVisible(staPtrVis);
+					me.symbols.staToL2.setVisible(staPtrVis);
+					me.symbols.staFromL2.setColor(0.195,0.96,0.097);
+					me.symbols.staToL2.setColor(0.195,0.96,0.097);
+					me.symbols.staFromL2.setRotation((nav0hdg+180)*D2R);
+					me.symbols.staToL2.setRotation(nav0hdg*D2R);
+				} elsif(getprop("instrumentation/adf/in-range") and (me.get_switch('toggle_lh_vor_adf') == -1)) {
+					me.symbols.staFromL2.setVisible(staPtrVis);
+					me.symbols.staToL2.setVisible(staPtrVis);
+					me.symbols.staFromL2.setColor(0,0.6,0.85);
+					me.symbols.staToL2.setColor(0,0.6,0.85);
+					me.symbols.staFromL2.setRotation((adf0hdg+180)*D2R);
+					me.symbols.staToL2.setRotation(adf0hdg*D2R);
+				} else {
+					me.symbols.staFromL2.hide();
+					me.symbols.staToL2.hide();
+				}
+				if((getprop("instrumentation/nav[1]/in-range") and me.get_switch('toggle_rh_vor_adf') == 1)) {
+					me.symbols.staFromR2.setVisible(staPtrVis);
+					me.symbols.staToR2.setVisible(staPtrVis);
+					me.symbols.staFromR2.setColor(0.195,0.96,0.097);
+					me.symbols.staToR2.setColor(0.195,0.96,0.097);
+					me.symbols.staFromR2.setRotation((nav1hdg+180)*D2R);
+					me.symbols.staToR2.setRotation(nav1hdg*D2R);
+				} elsif(getprop("instrumentation/adf[1]/in-range") and (me.get_switch('toggle_rh_vor_adf') == -1)) {
+					me.symbols.staFromR2.setVisible(staPtrVis);
+					me.symbols.staToR2.setVisible(staPtrVis);
+					me.symbols.staFromR2.setColor(0,0.6,0.85);
+					me.symbols.staToR2.setColor(0,0.6,0.85);
+					me.symbols.staFromR2.setRotation((adf1hdg+180)*D2R);
+					me.symbols.staToR2.setRotation(adf1hdg*D2R);
+				} else {
+					me.symbols.staFromR2.hide();
+					me.symbols.staToR2.hide();
+				}
+				me.symbols.staFromL.hide();
+				me.symbols.staToL.hide();
+				me.symbols.staFromR.hide();
+				me.symbols.staToR.hide();
+				me.symbols.curHdgPtr.hide();
+				me.symbols.HdgBugCRT.hide();
+				me.symbols.TrkBugLCD.hide();
+				me.symbols.HdgBugLCD.hide();
+				me.symbols.selHdgLine.hide();
+				me.symbols.curHdgPtr2.setVisible(staPtrVis);
+				me.symbols.TrkBugLCD2.hide();
+				me.symbols.HdgBugCRT2.setVisible(staPtrVis and !dispLCD);
+				me.symbols.HdgBugLCD2.setVisible(staPtrVis and dispLCD);
+				me.symbols.selHdgLine2.setVisible(staPtrVis);
+			}
 		}
+		
 		me.symbols.hdgGroup.setVisible(!me.in_mode('toggle_display_mode', ['PLAN']));
 		me.symbols.northUp.setVisible(me.in_mode('toggle_display_mode', ['PLAN']));
 		me.symbols.aplSymMap.setVisible(me.in_mode('toggle_display_mode', ['APP','MAP','VOR']) and !me.get_switch('toggle_centered'));
@@ -776,27 +912,6 @@ var NavDisplay = {
 			me.symbols.altArc.hide();
 		}
 		
-		## these would require additional arguments to be moved to an external config hash currently
-		
-		me.symbols.selHdg.setRotation(getprop("autopilot/settings/true-heading-deg")*D2R);
-		me.symbols.selHdg2.setRotation(getprop("autopilot/settings/true-heading-deg")*D2R);
-		if (var nav0hdg=getprop("instrumentation/nav/heading-deg") != nil) {
-			me.symbols.staFromL.setRotation((nav0hdg-userHdgMag+180)*D2R);
-			me.symbols.staFromL2.setRotation((nav0hdg-userHdgMag+180)*D2R);
-		}
-		if (var nav0hdg=getprop("instrumentation/nav/heading-deg") != nil) {
-			me.symbols.staToL.setRotation((nav0hdg-userHdgMag)*D2R);
-			me.symbols.staToL2.setRotation((nav0hdg-userHdgMag)*D2R);
-		}
-		if (var nav1hdg=getprop("instrumentation/nav[1]/heading-deg") != nil) {
-			me.symbols.staFromR.setRotation((nav1hdg-userHdgMag+180)*D2R);
-			me.symbols.staFromR2.setRotation((nav1hdg-userHdgMag+180)*D2R);
-		}
-		if (var nav1hdg=getprop("instrumentation/nav[1]/heading-deg") != nil) {
-			me.symbols.staToR.setRotation((nav1hdg-userHdgMag)*D2R);
-			me.symbols.staToR2.setRotation((nav1hdg-userHdgMag)*D2R);
-		}
-		
 		## run all predicates in the NDStyle hash and evaluate their true/false behavior callbacks
 		## this is in line with the original design, but normally we don't need to getprop/poll here,
 		## using listeners or timers would be more canvas-friendly whenever possible
@@ -804,19 +919,14 @@ var NavDisplay = {
 		## will be updated at frame rate too - wasteful ... (check the performance monitor!)
 
 		foreach(var feature; me.nd_style.features ) {
-
-		# for stuff that always needs to be updated
-		if (contains(feature.impl, 'common')) feature.impl.common(me);
-		# conditional stuff
-		if(!contains(feature.impl, 'predicate')) continue; # no conditional stuff
-		if ( var result=feature.impl.predicate(me) ) {
-		  # print("Update predicate true for ", feature.id);
-		  feature.impl.is_true(me, result); # pass the result to the predicate
-		  }
-		else {
-		   # print("Update predicate false for ", feature.id);
-		   feature.impl.is_false( me, result ); # pass the result to the predicate
-		  }
+			# for stuff that always needs to be updated
+			if (contains(feature.impl, 'common')) feature.impl.common(me);
+			# conditional stuff
+			if(!contains(feature.impl, 'predicate')) continue; # no conditional stuff
+			if ( var result=feature.impl.predicate(me) )
+				feature.impl.is_true(me, result); # pass the result to the predicate
+			else
+				feature.impl.is_false( me, result ); # pass the result to the predicate
 		}
 
 		## update the status flags shown on the ND (wxr, wpt, arpt, sta)
@@ -826,6 +936,5 @@ var NavDisplay = {
 		me.symbols['status.wpt'].setVisible( me.get_switch('toggle_waypoints') and me.in_mode('toggle_display_mode', ['MAP']));
 		me.symbols['status.arpt'].setVisible( me.get_switch('toggle_airports') and me.in_mode('toggle_display_mode', ['MAP']));
 		me.symbols['status.sta'].setVisible( me.get_switch('toggle_stations') and  me.in_mode('toggle_display_mode', ['MAP']));
-		
 	}
 };

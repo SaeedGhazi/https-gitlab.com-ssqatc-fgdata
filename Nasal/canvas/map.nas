@@ -429,10 +429,16 @@ var files_with = func(ext) {
 	}
 	return results;
 }
-foreach(var ext; var extensions = ['.draw','.model','.layer'])
-	load_modules(files_with(ext));
 
+setlistener("/nasal/canvas/loaded", func {
+	foreach(var ext; var extensions = ['.draw','.model','.layer'])
+		load_modules(files_with(ext));
 
-# canvas.MFD = {EFIS:}; # where we'll be storing all MFDs
-# TODO: should be inside a separate subfolder, i.e. canvas/map/mfd
-load_modules( files_with('.mfd'), 'canvas' );  
+	if (contains(canvas,"load_MapStructure"))
+		load_MapStructure();
+
+	# canvas.MFD = {EFIS:}; # where we'll be storing all MFDs
+	# TODO: should be inside a separate subfolder, i.e. canvas/map/mfd
+	load_modules( files_with('.mfd'), 'canvas' );
+});
+

@@ -7,6 +7,7 @@ SymbolLayer.add("VOR", {
 	type: "VOR", # Symbol type
 	df_controller: __self__, # controller to use by default -- this one
 });
+var a_instance = nil;
 var new = func(layer) {
 	var m = {
 		parents: [__self__],
@@ -14,6 +15,7 @@ var new = func(layer) {
 		active_vors: [],
 		navNs: props.globals.getNode("instrumentation").getChildren("nav"),
 		listeners: [],
+		query_type:'vor',
 	};
 	setsize(m.active_vors, size(m.navNs));
 	foreach (var navN; m.navNs) {
@@ -24,6 +26,7 @@ var new = func(layer) {
 	}
 	#call(debug.dump, keys(layer));
 	m.changed_freq(update:0);
+	__self__.a_instance = m;
 	return m;
 };
 var del = func() {
@@ -46,7 +49,7 @@ var changed_freq = func(update=1) {
 	if (update) me.layer.update();
 };
 var searchCmd = func {
-	#print("Run query");
-	return positioned.findWithinRange(100, 'vor'); # the range should also be exposed, it will typically be controlled via a GUI widget or NavDisplay switch
+	#print("Running query:", me.query_type);
+	return positioned.findWithinRange(100, me.query_type); # the range should also be exposed, it will typically be controlled via a GUI widget or NavDisplay switch
 };
 

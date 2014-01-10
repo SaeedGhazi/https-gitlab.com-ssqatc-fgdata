@@ -4,8 +4,8 @@ RouteModel.new = func make(LayerModel, RouteModel);
 
 RouteModel.init = func {
 	me._view.reset();
-	if (!getprop("/autopilot/route-manager/active")) 
-	  return;
+	if (!getprop("/autopilot/route-manager/active"))
+		return;
 
 	## TODO: all the model stuff is still inside the draw file for now, this just ensures that it will be called once
 	foreach(var t; [nil] )		 

@@ -1,0 +1,34 @@
+# Class things:
+var name = 'WPT';
+var parents = [DotSym];
+var __self__ = caller(0)[0];
+DotSym.makeinstance( name, __self__ );
+
+var element_type = "group"; # we want a group, becomes "me.element"
+var base = nil;
+var text_wps = nil;
+
+var draw = func {
+	if (me.base != nil) return;
+	me.base = me.element.createChild("path")
+		.setStrokeLineWidth(3)
+		.moveTo(0,-25)
+		.lineTo(-5,-5)
+		.lineTo(-25,0)
+		.lineTo(-5,5)
+		.lineTo(0,25)
+		.lineTo(5,5)
+		.lineTo(25,0)
+		.lineTo(5,-5)
+		.setColor(1,1,1)
+		.close();
+
+	me.text_wps = wpt_grp.createChild("text")
+		.setDrawMode( canvas.Text.TEXT )
+		.setText(name)
+		.setFont("LiberationFonts/LiberationSans-Regular.ttf")
+		.setFontSize(28)
+		.setTranslation(25,35)
+		.setColor(1,0,1);
+};
+

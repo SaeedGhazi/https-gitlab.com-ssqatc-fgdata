@@ -462,46 +462,44 @@ var Map = {
   addLayer: func(factory, type_arg=nil, priority=nil)
   {
     if (!contains(me, "layers"))
-      me.layers = [];
+      me.layers = {};
+
+    if(contains(me.layers, type_arg))
+      print("addLayer() warning: overwriting existing layer:", type_arg);
+
+    # print("addLayer():", type_arg);
 
     # Argument handling
     if (type_arg != nil)
       var type = factory.get(type_arg);
     else var type = factory;
 
+    me.layers[type_arg]= type.new(me);
     if (priority == nil)
       priority = type.df_priority;
-    append(me.layers, [type.new(me), priority]);
     if (priority != nil)
-      me._sort_priority();
+      me.layers[type_arg].setInt("z-index", priority);
     return me;
   },
-  setPos: func(lat,lon,hdg=nil)
+  getLayer: func(type_arg) me.layers[type_arg],
+  setPos: func(lat, lon, hdg=nil, range=nil)
   {
     me.set("ref-lat", lat);
     me.set("ref-lon", lon);
     if (hdg != nil)
       me.set("hdg", hdg);
-
-    # me.map.set("range", 100);
+    if (range != nil)
+      me.set("range", range);
   },
   # Update each layer on this Map. Called by
   # me.controller.
   update: func
   {
-    foreach (var l; me.layers)
-      call(l[0].update, arg, l[0]);
+    foreach (var l; keys(me.layers)) {
+      var layer = me.layers[l];
+      call(layer.update, arg, layer);
+    }
     return me;
-  },
-# private:
-  _sort_priority: func()
-  {
-    me.layers = sort(me.layers, me._sort_cmp);
-    forindex (var i; me.layers)
-      me.layers[i].set("z-index", i);
-  },
-  _sort_cmp: func(a,b) {
-    a[1] != b[1] and a[1] != nil and b[1] != nil and (a[1] < b[1] ? -1 : 1)
   },
 };
 

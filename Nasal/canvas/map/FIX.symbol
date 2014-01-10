@@ -1,0 +1,30 @@
+# Class things:
+var name = 'FIX';
+var parents = [DotSym];
+var __self__ = caller(0)[0];
+DotSym.makeinstance( name, __self__ );
+
+var element_type = "group"; # we want a group, becomes "me.element"
+var icon_fix = nil;
+var text_fix = nil;
+
+var draw = func {
+	if (me.icon_fix != nil) return;
+	# the fix symbol
+	me.icon_fix = me.element.createChild("path")
+		.moveTo(-15,15)
+		.lineTo(0,-15)
+		.lineTo(15,15)
+		.close()
+		.setStrokeLineWidth(3)
+		.setColor(0,0.6,0.85)
+		.setScale(0.5,0.5); # FIXME: do proper LOD handling here - we need to scale according to current texture dimensions vs. original/design dimensions
+	# the fix label
+	me.text_fix = me.element.createChild("text")
+		.setDrawMode( canvas.Text.TEXT )
+		.setText(me.model.id)
+		.setFont("LiberationFonts/LiberationSans-Regular.ttf")
+		.setFontSize(28)
+		.setTranslation(5,25);
+};
+

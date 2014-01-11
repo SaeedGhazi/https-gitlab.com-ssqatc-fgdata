@@ -148,6 +148,8 @@
         </or>
       </and>
     </predicate>
+    
+    <!--
     <pass>
       <lighting>true</lighting>
       <material>
@@ -170,7 +172,8 @@
         <fragment-shader>Shaders/trivial.frag</fragment-shader>
       </program>
       <color-mask type="vec4d">0 0 0 0</color-mask>
-    </pass>
+    </pass> -->
+        
     <pass>
       <lighting>true</lighting>
       <material>
@@ -485,6 +488,8 @@
         </or>
       </and>
     </predicate>
+    
+    <!--
     <pass>
       <lighting>true</lighting>
       <material>
@@ -507,7 +512,8 @@
         <fragment-shader>Shaders/trivial.frag</fragment-shader>
       </program>
       <color-mask type="vec4d">0 0 0 0</color-mask>
-    </pass>
+    </pass> -->
+        
     <pass>
       <lighting>true</lighting>
       <material>
@@ -735,6 +741,8 @@
         </or>
       </and>
     </predicate>
+    
+    <!--
     <pass>
       <lighting>true</lighting>
       <material>
@@ -773,7 +781,8 @@
         <value type="int">0</value>
       </uniform>
       <color-mask type="vec4d">0 0 0 0</color-mask>
-    </pass>
+    </pass> -->
+    
     <pass>
       <lighting>true</lighting>
       <material>
@@ -961,6 +970,8 @@
         </or>
       </and>
     </predicate>
+    
+    <!--
     <pass>
       <lighting>true</lighting>
       <material>
@@ -1000,6 +1011,8 @@
       </uniform>
       <color-mask type="vec4d">0 0 0 0</color-mask>
     </pass>
+        -->
+        
     <pass>
       <lighting>true</lighting>
       <material>

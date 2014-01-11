@@ -121,6 +121,8 @@
         </or>
       </and>
     </predicate>
+    
+    <!--
     <pass>
       <lighting>true</lighting>
       <material>
@@ -144,6 +146,8 @@
       </program>
       <color-mask type="vec4d">0 0 0 0</color-mask>
     </pass>
+        -->
+    
     <pass>
       <lighting>true</lighting>
       <material>

@@ -1,0 +1,35 @@
+# Class things:
+var name = 'DME';
+var parents = [DotSym];
+var __self__ = caller(0)[0];
+DotSym.makeinstance( name, __self__ );
+
+var element_type = "group"; # we want a group, becomes "me.element"
+var icon_dme = nil;
+
+var draw = func {
+	# Init
+	if (me.icon_dme == nil) {
+		me.icon_dme = me.element.createChild("path")
+			.moveTo(-15,0)
+			.line(-12.5,-7.5)
+			.line(7.5,-12.5)
+			.line(12.5,7.5)
+			.lineTo(7.5,-12.5)
+			.line(12.5,-7.5)
+			.line(7.5,12.5)
+			.line(-12.5,7.5)
+			.lineTo(15,0)
+			.lineTo(7.5,12.5)
+			.vert(14.5)
+			.horiz(-14.5)
+			.vert(-14.5)
+			.close()
+			.setStrokeLineWidth(3);
+	}
+	if (me.controller != nil and me.controller.is_tuned(me.model.frequency/100))
+		me.icon_dme.setColor(0,1,0);
+	else
+		me.icon_dme.setColor(0,0.6,0.85);
+};
+

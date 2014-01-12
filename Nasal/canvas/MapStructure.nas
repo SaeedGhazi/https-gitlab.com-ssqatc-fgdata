@@ -1,3 +1,123 @@
+var dump_obj = func(m) {
+	var h = {};
+	foreach (var k; keys(m))
+		if (k != "parents")
+			h[k] = m[k];
+	debug.dump(h);
+};
+
+##
+# must be either of:
+# 1) draw* callback, 2) SVG filename, 3) Drawable class (with styling/LOD support)
+var SymbolDrawable = {
+	new: func() {
+	},
+};
+
+## wrapper for each element
+## i.e. keeps the canvas and texture map coordinates
+var CachedElement = {
+	new: func(canvas_path, name, source, offset) {
+		var m = {parents:[CachedElement] };
+		m.canvas_src = canvas_path;
+		m.name = name;
+		m.source = source;
+		m.offset = offset;
+		return m;
+	}, # new()
+	render: func(group) {
+		# create a raster image child in the render target/group
+		return
+		group.createChild("image", me.name)
+			.setFile( me.canvas_src )
+			# TODO: fix .setSourceRect() to accept a single vector for coordinates ...
+			.setSourceRect(left:me.source[0],top:me.source[1],right:me.source[2],bottom:me.source[3] , normalized:0)
+			.setTranslation(me.offset); # FIXME: make sure this stays like this and isn't overridden
+	}, # render()
+}; # of CachedElement
+
+var SymbolCache = {
+	# We can draw symbols either with left/top, centered,
+	# or right/bottom alignment. Specify two in a vector
+	# to mix and match, e.g. left/centered would be
+	#  [SymbolCache.DRAW_LEFT_TOP,SymbolCache.DRAW_CENTERED]
+	DRAW_LEFT_TOP:     0.0,
+	DRAW_CENTERED:     0.5,
+	DRAW_RIGHT_BOTTOM: 1.0,
+	new: func(dim...) {
+		var m = { parents:[SymbolCache] };
+		# to keep track of the next free caching spot (in px)
+		m.next_free = [0, 0];
+		# to store each type of symbol
+		m.dict = {};
+		if (size(dim) == 1 and typeof(dim[0]) == 'vector')
+			dim = dim[0];
+		# Two sizes: canvas and symbol
+		if (size(dim) == 2) {
+			var canvas_x = var canvas_y = dim[0];
+			var image_x = var image_y = dim[1];
+		# Two widths (canvas and symbol) and then height/width ratio
+		} else if (size(dim) == 3) {
+			var (canvas_x,image_x,ratio) = dim;
+			var canvas_y = canvas_x * ratio;
+			var image_y = image_x * ratio;
+		# Explicit canvas and symbol widths/heights
+		} else if (size(dim) == 4) {
+			var (canvas_x,canvas_y,image_x,image_y) = dim;
+		}
+		m.canvas_sz = [canvas_x, canvas_y];
+		m.image_sz = [image_x, image_y];
+
+		# allocate a canvas
+		m.canvas_texture = canvas.new( {
+			"name": "SymbolCache"~canvas_x~'x'~canvas_y,
+			"size": m.canvas_sz,
+			"view": m.canvas_sz,
+			"mipmapping": 1
+		});
+
+		# add a placement
+		m.canvas_texture.addPlacement( {"type": "ref"} );
+
+		return m;
+	},
+	add: func(name, callback, draw_mode=0) {
+		if (typeof(draw_mode) == 'scalar')
+			var draw_mode0 = var draw_mode1 = draw_mode;
+		else var (draw_mode0,draw_mode1) = draw_mode;
+		# get canvas texture that we use as cache
+		# get next free spot in texture (column/row)
+		# run the draw callback and render into a group
+		var gr = me.canvas_texture.createGroup();
+		gr.setTranslation( me.next_free[0] + me.image_sz[0]*draw_mode0,
+				           me.next_free[1] + me.image_sz[1]*draw_mode1);
+		#settimer(func debug.dump ( gr.getTransformedBounds() ), 0); # XXX: these are only updated when rendered
+		#debug.dump ( gr.getTransformedBounds() );
+		gr.update(); # apparently this doesn't result in sane output from .getTransformedBounds() either
+		#debug.dump ( gr.getTransformedBounds() );
+		# draw the symbol
+		callback(gr);
+		# get the bounding box, i.e. coordinates for texture map, or use the .setTranslation() params
+		var coords = me.next_free~me.next_free;
+		foreach (var i; [0,1])
+			coords[i+2] += me.image_sz[i];
+		# get the offset we used to position correctly in the bounds of the canvas
+		var offset = [me.image_sz[0]*draw_mode0, me.image_sz[1]*draw_mode1];
+		# store texture map coordinates in lookup map using the name as identifier
+		me.dict[name] = CachedElement.new(me.canvas_texture.getPath(), name, coords, offset );
+		# update next free position in cache (column/row)
+		me.next_free[0] += me.image_sz[0];
+		if (me.next_free[0] >= me.canvas_sz[0])
+		{ me.next_free[0] = 0; me.next_free[1] += me.image_sz[1] }
+		if (me.next_free[1] >= me.canvas_sz[1])
+			die("SymbolCache: ran out of space after adding '"~name~"'");
+	}, # add()
+	get: func(name) {
+		if(!contains(me.dict,name)) die("No SymbolCache entry for key:"~ name);
+		return me.dict[name];
+	}, # get()
+};
+
 var Symbol = {
 # Static/singleton:
 	registry: {},
@@ -29,7 +149,7 @@ Symbol.Controller = {
 # Static/singleton:
 	registry: {},
 	add: func(type, class)
-		registry[type] = class,
+		me.registry[type] = class,
 	get: func(type)
 		if ((var class = me.registry[type]) == nil)
 			die("unknown type '"~type~"'");
@@ -58,13 +178,17 @@ var getpos_fromghost = func(positioned_g)
 # (geo.Coord and positioned ghost currently)
 Symbol.Controller.getpos = func(obj) {
 	if (typeof(obj) == 'ghost')
-		if (ghosttype(obj) == 'positioned' or ghosttype(obj) == 'Navaid')
+		if (ghosttype(obj) == 'positioned' or ghosttype(obj) == 'Navaid' or ghosttype(obj)=='Fix' or ghosttype(obj)=='flightplan-leg')
 			return getpos_fromghost(obj);
 		else
 			die("bad ghost of type '"~ghosttype(obj)~"'");
 	if (typeof(obj) == 'hash')
 		if (isa(obj, geo.Coord))
 			return obj.latlon();
+		if (contains(obj,'lat') and contains(obj,'lon'))
+			return [obj.lat, obj.lon];
+
+	debug.dump(obj);
 	die("no suitable getpos() found! Of type: "~typeof(obj));
 };
 
@@ -82,37 +206,16 @@ var DotSym = {
 	element_id: nil,
 # Static/singleton:
 	makeinstance: func(name, hash) {
-		assert_ms(hash,
-			"element_type", # type of Canvas element
-			#"element_id",  # optional Canvas id
-			#"init",        # initialize routine
-			"draw",         # init/update routine
-			#getpos",       # get position from model in [x_units,y_units] (optional)
-		);
-		hash.parents = [DotSym];
+		if (!isa(hash, DotSym))
+			die("OOP error");
+		#assert_ms(hash,
+		#	"element_type", # type of Canvas element
+		#	#"element_id",  # optional Canvas id
+		#	#"init",        # initialize routine
+		#	"draw",         # init/update routine
+		#	#getpos",       # get position from model in [x_units,y_units] (optional)
+		#);
 		return Symbol.add(name, hash);
-	},
-	readinstance: func(file, name=nil) {
-		#print(file);
-		if (name == nil)
-			var name = split("/", file)[-1];
-		if (substr(name, size(name)-4) == ".draw")
-			name = substr(name, 0, size(name)-5);
-		var code = io.readfile(file);
-		var code = call(compile, [code], var err=[]);
-		if (size(err)) {
-			if (substr(err[0], 0, 12) == "Parse error:") { # hack around Nasal feature
-				var e = split(" at line ", err[0]);
-				if (size(e) == 2)
-					err[0] = string.join("", [e[0], "\n  at ", file, ", line ", e[1], "\n "]);
-			}
-			for (var i = 1; (var c = caller(i)) != nil; i += 1)
-				err ~= subvec(c, 2, 2);
-			debug.printerror(err);
-			return;
-		}
-		call(code, nil, nil, var hash = { parents:[DotSym] });
-		me.makeinstance(name, hash);
 	},
 # For the instances returned from makeinstance:
 	# @param group The Canvas group to add this to.
@@ -132,6 +235,10 @@ var DotSym = {
 			),
 		};
 		if (m.controller != nil) {
+			#print("Creating controller");
+			temp = m.controller.new(m.model,m);
+			if (temp != nil)
+				m.controller = temp;
 			#print("Initializing controller");
 			m.controller.init(model);
 		}
@@ -281,93 +388,117 @@ SymbolLayer.Controller = {
 		die("searchCmd() not implemented for this SymbolLayer.Controller type!"),
 }; # of SymbolLayer.Controller
 
-settimer(func {
-Map.Controller = {
-# Static/singleton:
-	registry: {},
-	add: func(type, class)
-		me.registry[type] = class,
-	get: func(type)
-		if ((var class = me.registry[type]) == nil)
-			die("unknown type '"~type~"'");
-		else return class,
-	# Calls corresonding controller constructor
-	# @param map The #SymbolMap this controller is responsible for.
-	new: func(type, layer, arg...)
-		return call((var class = me.get(type)).new, [map]~arg, class),
+var AnimatedLayer = {
 };
 
-####### LOAD FILES #######
-#print("loading files");
-(func {
-	var FG_ROOT = getprop("/sim/fg-root");
-	var load = func(file, name) {
-		#print(file);
-		if (name == nil)
-			var name = split("/", file)[-1];
-		if (substr(name, size(name)-4) == ".draw")
-			name = substr(name, 0, size(name)-5);
-		#print("reading file");
-		var code = io.readfile(file);
-		#print("compiling file");
-		# This segfaults for some reason:
-		#var code = call(compile, [code], var err=[]);
-		var code = call(func compile(code, file), [code], var err=[]);
-		if (size(err)) {
-			#print("handling error");
-			if (substr(err[0], 0, 12) == "Parse error:") { # hack around Nasal feature
-				var e = split(" at line ", err[0]);
-				if (size(e) == 2)
-					err[0] = string.join("", [e[0], "\n  at ", file, ", line ", e[1], "\n "]);
+var CompassLayer = {
+};
+
+var AltitudeArcLayer = {
+};
+
+load_MapStructure = func {
+	Map.Controller = {
+	# Static/singleton:
+		registry: {},
+		add: func(type, class)
+			me.registry[type] = class,
+		get: func(type)
+			if ((var class = me.registry[type]) == nil)
+				die("unknown type '"~type~"'");
+			else return class,
+		# Calls corresonding controller constructor
+		# @param map The #SymbolMap this controller is responsible for.
+		new: func(type, layer, arg...)
+			return call((var class = me.get(type)).new, [map]~arg, class),
+	};
+
+	####### LOAD FILES #######
+	#print("loading files");
+	(func {
+		var FG_ROOT = getprop("/sim/fg-root");
+		var load = func(file, name) {
+			#print(file);
+			if (name == nil)
+				var name = split("/", file)[-1];
+			if (substr(name, size(name)-4) == ".draw")
+				name = substr(name, 0, size(name)-5);
+			#print("reading file");
+			var code = io.readfile(file);
+			#print("compiling file");
+			# This segfaults for some reason:
+			#var code = call(compile, [code], var err=[]);
+			var code = call(func compile(code, file), [code], var err=[]);
+			if (size(err)) {
+				#print("handling error");
+				if (substr(err[0], 0, 12) == "Parse error:") { # hack around Nasal feature
+					var e = split(" at line ", err[0]);
+					if (size(e) == 2)
+						err[0] = string.join("", [e[0], "\n  at ", file, ", line ", e[1], "\n "]);
+				}
+				for (var i = 1; (var c = caller(i)) != nil; i += 1)
+					err ~= subvec(c, 2, 2);
+				debug.printerror(err);
+				return;
 			}
-			for (var i = 1; (var c = caller(i)) != nil; i += 1)
-				err ~= subvec(c, 2, 2);
-			debug.printerror(err);
-			return;
+			#print("calling code");
+			call(code, nil, nil, var hash = {});
+			#debug.dump(keys(hash));
+			return hash;
+		};
+
+		var load_deps = func(name) {
+		load(FG_ROOT~"/Nasal/canvas/map/"~name~".lcontroller",  name);
+		load(FG_ROOT~"/Nasal/canvas/map/"~name~".symbol", name);
+		load(FG_ROOT~"/Nasal/canvas/map/"~name~".scontroller", name);
 		}
-		#print("calling code");
-		call(code, nil, nil, var hash = {});
-		#debug.dump(keys(hash));
-		return hash;
-	};
-	load(FG_ROOT~"/Nasal/canvas/map/VOR.lcontroller", "VOR");
-	DotSym.readinstance(FG_ROOT~"/Nasal/canvas/map/VOR.symbol", "VOR");
-	load(FG_ROOT~"/Nasal/canvas/map/VOR.scontroller", "VOR");
-	load(FG_ROOT~"/Nasal/canvas/map/aircraftpos.controller", "VOR");
-})();
-#print("finished loading files");
-####### TEST SYMBOL #######
 
-if (0)
-settimer(func {
-	if (caller(0)[0] != globals.canvas)
-		return call(caller(0)[1], arg, nil, globals.canvas);
+		foreach( var name; ['VOR','FIX','NDB','DME','WPT'] )
+			load_deps( name );
+		load(FG_ROOT~"/Nasal/canvas/map/aircraftpos.controller", name);
 
-	print("Running MapStructure test code");
-	var TestCanvas = canvas.new({
-		"name": "Map Test",
-		"size": [1024, 1024],
-		"view": [1024, 1024],
-		"mipmapping": 1
-	});
-	var dlg = canvas.Window.new([400, 400], "dialog");
-	dlg.setCanvas(TestCanvas);
-	var TestMap = TestCanvas.createGroup().createChild("map"); # we should not directly use a canvas here, but instead a LayeredMap.new() 
-	TestMap.addLayer(factory: SymbolLayer, type_arg: "VOR"); # the ID should be also exposed in the property tree for each group (layer), i.e. better debugging
-	# Center the map's origin:
-	TestMap.setTranslation(512,512); # FIXME: don't hardcode these values, but read in canvas texture dimensions, otherwise it will break once someone uses non 1024x1024 textures ...
-	# Initialize a range (TODO: LayeredMap.Controller):
-	TestMap.set("range", 100);
-	# Little cursor of current position:
-	TestMap.createChild("path").rect(-5,-5,10,10).setColorFill(1,1,1).setColor(0,1,0);
-	# And make it move with our aircraft:
-	TestMap.setController("Aircraft position"); # from aircraftpos.controller
-	dlg.del = func() {
-		TestMap.del();
-		# call inherited 'del'
-		delete(me, "del");
-		me.del();
-	};
-}, 1);
-}, 0); # end ugly module init timer hack
+		###
+		# set up a cache for 32x32 symbols
+		var SymbolCache32x32 = SymbolCache.new(1024,32);
 
+		var drawVOR = func(color, width=3) return func(group) {
+				# print("drawing vor");
+				var bbox = group.createChild("path")
+					.moveTo(-15,0)
+					.lineTo(-7.5,12.5)
+					.lineTo(7.5,12.5)
+					.lineTo(15,0)
+					.lineTo(7.5,-12.5)
+					.lineTo(-7.5,-12.5)
+					.close()
+					.setStrokeLineWidth(width)
+					.setColor( color );
+				# debug.dump( bbox.getBoundingBox() );
+		};
+
+		var cachedVOR1 = SymbolCache32x32.add( "VOR-BLUE", drawVOR( color:[0, 0.6, 0.85], width:3), SymbolCache.DRAW_CENTERED );
+		var cachedVOR2 = SymbolCache32x32.add( "VOR-RED" , drawVOR( color:[1.0, 0, 0], width: 3),   SymbolCache.DRAW_CENTERED );
+		var cachedVOR3 = SymbolCache32x32.add( "VOR-GREEN" , drawVOR( color:[0, 1, 0], width: 3),   SymbolCache.DRAW_CENTERED );
+		var cachedVOR4 = SymbolCache32x32.add( "VOR-WHITE" , drawVOR( color:[1, 1, 1], width: 3),   SymbolCache.DRAW_CENTERED );
+
+		# STRESS TEST
+		if (0) {
+			for(var i=0;i <= 1024/32*4 - 4; i+=1)
+				SymbolCache32x32.add( "VOR-YELLOW"~i , drawVOR( color:[1, 1, 0], width: 3)   );
+
+			var dlg = canvas.Window.new([640,320],"dialog");
+			var my_canvas = dlg.createCanvas().setColorBackground(1,1,1,1);
+			var root = my_canvas.createGroup();
+
+			SymbolCache32x32.get(name:"VOR-BLUE").render( group: root ).setGeoPosition(getprop("/position/latitude-deg"),getprop("/position/longitude-deg"));
+		}
+
+	})();
+	#print("finished loading files");
+	####### TEST SYMBOL #######
+
+	canvas.load_MapStructure = func;
+
+}; # load_MapStructure
+
+setlistener("/nasal/canvas/loaded", load_MapStructure); # end ugly module init listener hack

@@ -4,10 +4,10 @@ FixModel.new = func make( LayerModel, FixModel );
 FixModel.init = func {
 	me._view.reset(); # wraps removeAllChildren() ATM
 
-	var results = positioned.findWithinRange( me._controller['query_range']()*2 ,"fix"); 
+	var results = positioned.findWithinRange( me._controller['query_range']() ,"fix"); 
 	var numNum = 0;
 	foreach(result; results) {
-		# Skip airport navaids (real thing makes distinction between high/low altitude fixes)
+		# Skip airport fixes
 		if(string.match(result.id,"*[^0-9]")) {
 			me.push(result);
 			numNum = numNum + 1;

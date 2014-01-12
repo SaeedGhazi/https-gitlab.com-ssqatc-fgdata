@@ -50,8 +50,7 @@
             }
             
             var static_serverList = [
-                    ['fgcom.flightgear.org', 'Avignon, France'],
-                    ['delta384.server4you.de', 'Unknown']
+                    ['fgcom.flightgear.org', 'Avignon, France']
                 ];
                 
             var updateServersFailed = func {

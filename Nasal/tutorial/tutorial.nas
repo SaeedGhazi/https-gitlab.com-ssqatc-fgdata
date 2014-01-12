@@ -105,6 +105,7 @@ var startTutorial = func {
 	# <init>
 	do_group(tutorialN.getNode("init"));
 	is_running(1);  # needs to be after "presets-commit"
+	display.clear();
 	display.show();
 
 	# Pick up any weather conditions/scenarios set
@@ -121,6 +122,7 @@ var stopTutorial = func {
 		set_properties(end);
 		run_nasal(end);
 		set_view(end) or view.point.restore();
+		say("Tutorial finished.");
 		settimer(func() { if (!is_running()) { display.close(); } }, 10);
 	}
 	set_marker();
@@ -150,8 +152,6 @@ var step_tutorial = func(id) {
 	# <end>
 	if (current_step >= size(steps)) {
 		var end = tutorialN.getNode("end");
-		say_message(end, "Tutorial finished.");
-		#say_message(nil, "Deviations: " ~ num_errors);
 		stopTutorial();
 		return;
 	}

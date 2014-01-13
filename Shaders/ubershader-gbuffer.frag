@@ -130,7 +130,7 @@ void main (void)
  	//////////////////////////////////////////////////////////////////////
  	//begin DIRT
  	//////////////////////////////////////////////////////////////////////
-	if (dirt_enabled > 0.0){
+	if (dirt_enabled >= 1){
 		vec3 dirtFactorIn = vec3 (dirt_r_factor, dirt_g_factor, dirt_b_factor);
 		vec3 dirtFactor = reflmap.rgb * dirtFactorIn.rgb;
 		//dirtFactor.r = smoothstep(0.0, 1.0, dirtFactor.r);

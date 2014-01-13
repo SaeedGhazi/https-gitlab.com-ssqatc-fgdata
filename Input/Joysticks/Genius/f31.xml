@@ -1,28 +1,36 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-************************************************************************
-Genius F-31U VIBRATION USB Joystick
+*******************************************************************************
+Genius F-31U VIBRATION USB Joystick Configuration for Flightgear.
+Version 2.
+© 2011, 2014 Martin Měřinský, mermar@centrum.cz, GPLv2 or later.
 
 Axes:
 0 - Aileron
 1 - Elevator
 2 - Rudder
 3 - Throttle
-4 - View left-right Hat
-5 - View up-down Hat
+4 - View left/right hat
+5 - View up/down hat
 
 Buttons:
-0 - Brakes
+0 - Fire primary and secondary weapon (armament trigger).
 1 - Cycle view
 2 - Elevator trim up
 3 - Elevator trim down
-4 - Flaps down
-5 - Flaps up
+4 - Flaps up
+5 - Mixture richer
 6 - Brakes
-7 - Mixture richer
+7 - Flaps down
 8 - Mixture leaner
-9 - Landing Gear Toggle
-************************************************************************
+9 - Landing gear toggle
+
+Known issues:
+Flightgear cannot invert left/right "lookat" view, so this is done using Nasal
+and thus it works when Flightgear is paused, unlike view elevation (up/down).
+
+In Windows up and down view is inverted.
+*******************************************************************************
 -->
 <PropertyList>
     <name type="string">Padix Co. Ltd. 10-Button USB Joystick</name>  <!-- GNU/Linux. -->
@@ -44,7 +52,7 @@ Buttons:
             <command>property-scale</command>
             <property>/controls/flight/elevator</property>
             <power type="int">2</power>
-            <factor type="double">-1.0</factor> <!-- Reverse axis. -->
+            <factor type="double">-1.0</factor>  <!-- Reverse axis. -->
         </binding>
     </axis>
 
@@ -58,7 +66,7 @@ Buttons:
             <command>property-scale</command>
             <property>/controls/flight/rudder</property>
             <power type="int">2</power>
-            <factor type="double">-1.0</factor> <!-- Reverse axis. -->
+            <factor type="double">-1.0</factor>  <!-- Reverse axis. -->
         </binding>
     </axis>
 
@@ -75,7 +83,7 @@ Buttons:
     </axis>
 
     <axis>
-        <desc>View Direction</desc>
+        <desc>View direction</desc>
         <number>
             <unix>4</unix>
             <windows>6</windows>
@@ -85,7 +93,7 @@ Buttons:
             <repeatable>true</repeatable>
             <binding>
                 <!--
-                This also works, but LookAt views has inverted left/right.
+                This also works, but LookAt views have inverted left/right.
                 <command>property-adjust</command>
                 <property>/sim/current-view/goal-heading-offset-deg</property>
                 <step type="double">3.0</step>
@@ -106,7 +114,7 @@ Buttons:
             <repeatable>true</repeatable>
             <binding>
                 <!--
-                This also works, but LookAt views has inverted left/right.
+                This also works, but LookAt views have inverted left/right.
                 <command>property-adjust</command>
                 <property>/sim/current-view/goal-heading-offset-deg</property>
                 <step type="double">-3.0</step>
@@ -125,7 +133,7 @@ Buttons:
     </axis>
 
     <axis>
-        <desc>View Elevation</desc>
+        <desc>View elevation</desc>
         <number>
             <unix>5</unix>
             <windows>7</windows>
@@ -136,7 +144,7 @@ Buttons:
             <binding>
                 <command>property-adjust</command>
                 <property>/sim/current-view/goal-pitch-offset-deg</property>
-                <step type="double">3.0</step> <!-- Use -3.0 for Windows. -->
+                <step type="double">3.0</step>
             </binding>
         </low>
         <high>
@@ -145,28 +153,37 @@ Buttons:
             <binding>
                 <command>property-adjust</command>
                 <property>/sim/current-view/goal-pitch-offset-deg</property>
-                <step type="double">-3.0</step> <!-- Use 3.0 for Windows. -->
+                <step type="double">-3.0</step>
             </binding>
         </high>
     </axis>
 
-
     <button n="0">
-        <desc>Brakes</desc>
+        <desc>Fire</desc>
         <binding>
             <command>nasal</command>
-            <script>controls.applyBrakes(1)</script>
+            <script>
+                setprop("/controls/armament/trigger", 1);
+                setprop("ai/submodels/trigger", 1);
+                setprop("/controls/armament/trigger1", 1);
+                setprop("ai/submodels/trigger1", 1);
+            </script>
         </binding>
         <mod-up>
             <binding>
                 <command>nasal</command>
-                <script>controls.applyBrakes(0)</script>
+                <script>
+                    setprop("/controls/armament/trigger", 0);
+                    setprop("ai/submodels/trigger", 0);
+                    setprop("/controls/armament/trigger1", 0);
+                    setprop("ai/submodels/trigger1", 0);
+                </script>
             </binding>
         </mod-up>
     </button>
 
     <button n="1">
-        <desc>Cycle View</desc>
+        <desc>View cycle</desc>
         <repeatable>false</repeatable>
         <binding>
             <command>nasal</command>
@@ -196,20 +213,6 @@ Buttons:
     </button>
 
     <button n="4">
-        <desc>Flaps down</desc>
-        <binding>
-            <command>nasal</command>
-            <script>controls.flapsDown(1)</script>
-        </binding>
-        <mod-up>
-            <binding>
-                <command>nasal</command>
-                <script>controls.flapsDown(0)</script>
-            </binding>
-        </mod-up>
-    </button>
-
-    <button n="5">
         <desc>Flaps up</desc>
         <repeatable>false</repeatable>
         <binding>
@@ -222,6 +225,15 @@ Buttons:
                 <script>controls.flapsDown(0)</script>
             </binding>
         </mod-up>
+    </button>
+
+    <button n="5">
+        <desc>Mixture richer</desc>
+        <repeatable>true</repeatable>
+        <binding>
+            <command>nasal</command>
+            <script>controls.adjMixture(1)</script>
+        </binding>
     </button>
 
     <button n="6">
@@ -239,12 +251,17 @@ Buttons:
     </button>
 
     <button n="7">
-        <desc>Mixture richer</desc>
-        <repeatable>true</repeatable>
+        <desc>Flaps down</desc>
         <binding>
             <command>nasal</command>
-            <script>controls.adjMixture(1)</script>
+            <script>controls.flapsDown(1)</script>
         </binding>
+        <mod-up>
+            <binding>
+                <command>nasal</command>
+                <script>controls.flapsDown(0)</script>
+            </binding>
+        </mod-up>
     </button>
 
     <button n="8">
@@ -266,3 +283,4 @@ Buttons:
     </button>
 
 </PropertyList>
+

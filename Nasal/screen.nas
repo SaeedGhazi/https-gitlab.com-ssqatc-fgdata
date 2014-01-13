@@ -116,6 +116,11 @@ var window = {
 			settimer(func { me._write_(); } , 0, 1);
 		append(me.writebuffer, lines);
 	},
+	clear : func() {
+	  me.lines = [];
+	  me.writebuffer = [];
+	  me.show();
+	},
 	show : func {
 		if (me.dialog != nil)
 			me.close();

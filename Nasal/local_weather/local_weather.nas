@@ -4396,7 +4396,7 @@ var ec = "/environment/config/";
 
 # a hash map of the strength for convection associated with terrain types
 
-var landcover_map = {BuiltUpCover: 0.35, Town: 0.35, Freeway:0.35, BarrenCover:0.3, HerbTundraCover: 0.25, GrassCover: 0.2, CropGrassCover: 0.2, EvergreenBroadCover: 0.2, EvergreenNeedleCover: 0.2, Sand: 0.25, Grass: 0.2, Ocean: 0.01, Marsh: 0.05, Lake: 0.01, ShrubCover: 0.15, Landmass: 0.2, CropWoodCover: 0.15, MixedForestCover: 0.15, DryCropPastureCover: 0.25, MixedCropPastureCover: 0.2, IrrCropPastureCover: 0.15, DeciduousBroadCover: 0.1, DeciduousNeedleCover: 0.1, Bog: 0.05, pa_taxiway : 0.35, pa_tiedown: 0.35, pc_taxiway: 0.35, pc_tiedown: 0.35, Glacier: 0.03, SnowCover: 0.04, DryLake: 0.3, IntermittentStream: 0.2, DryCrop: 0.2, Lava: 0.3, GolfCourse: 0.2, Rock: 0.3, Construction: 0.35, PackIce: 0.04, NaturalCrop: 0.2};
+var landcover_map = {BuiltUpCover: 0.35, Town: 0.35, Freeway:0.35, BarrenCover:0.3, HerbTundraCover: 0.25, GrassCover: 0.2, CropGrassCover: 0.2, EvergreenBroadCover: 0.2, EvergreenNeedleCover: 0.2, Sand: 0.25, Grass: 0.2, Grassland: 0.2, Ocean: 0.01, Marsh: 0.05, Lake: 0.01, ShrubCover: 0.15, Landmass: 0.2, CropWoodCover: 0.15, MixedForestCover: 0.15, DryCropPastureCover: 0.25, MixedCropPastureCover: 0.2, IrrCropPastureCover: 0.15, DeciduousBroadCover: 0.1, DeciduousNeedleCover: 0.1, Bog: 0.05, pa_taxiway : 0.35, pa_tiedown: 0.35, pc_taxiway: 0.35, pc_tiedown: 0.35, Glacier: 0.03, SnowCover: 0.04, DryLake: 0.3, IntermittentStream: 0.2, DryCrop: 0.2, Lava: 0.3, GolfCourse: 0.2, Rock: 0.3, Construction: 0.35, PackIce: 0.04, NaturalCrop: 0.2};
 
 # a hash map of average vertical cloud model sizes
 

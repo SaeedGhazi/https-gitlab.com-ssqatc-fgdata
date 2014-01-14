@@ -1350,6 +1350,8 @@
   <name>SomeSort</name>
   <name>Island</name>
   <name>Default</name>
+  <name>BarrenCover</name>
+  <name>Rock</name>
   <texture-set>
    <texture>Terrain/lava1.png</texture>
    <texture n="11">Terrain/grass_hires.png</texture>
@@ -1370,6 +1372,8 @@
   <name>EvergreenBroadCover</name>
   <name>DeciduousBroadCover</name>
   <name>DeciduousForest</name>
+  <name>CropGrass</name>
+  <name>Grassland</name>
   <texture-set>
    <texture>Terrain/iceland_grass-autumn.png</texture>
    <texture n="11">Terrain/grass_green_hires-autumn.png</texture>
@@ -1417,6 +1421,7 @@
   <name>ShrubGrassCover</name>
   <name>ScrubCover</name>
   <name>Scrub</name>
+  <name>Heath</name>
   <name>Sclerophyllous</name>
   <texture-set>
    <texture>Terrain/shrub1-autumn.png</texture>
@@ -1480,7 +1485,6 @@
   <name>HerbWetlandCover</name>
   <name>WoodedWetlandCover</name>
   <name>Bog</name>
-  <name>Heath</name>
   <texture-set>
    <texture>Terrain/marsh4a-autumn.png</texture>
    <texture n="12">Terrain/marsh4a-autumn.png</texture>

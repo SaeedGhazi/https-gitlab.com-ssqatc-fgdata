@@ -67,6 +67,7 @@
 		</input>
 
         <condition>
+            <property>/instrumentation/gps/wp/wp[1]/valid</property>
             <equals>
                 <property>/instrumentation/gps/mode</property>
                 <value>dto</value>
@@ -84,6 +85,7 @@
 		</input>
 
         <condition>
+            <property>/instrumentation/gps/wp/wp[1]/valid</property>
             <equals>
                 <property>/instrumentation/gps/mode</property>
                 <value>leg</value>
@@ -103,6 +105,7 @@
 		</input>
 
         <condition>
+            <property>/instrumentation/gps/wp/wp[1]/valid</property>
             <equals>
                 <property>/instrumentation/gps/mode</property>
                 <value>leg</value>
@@ -122,6 +125,9 @@
 		<input>
 			<property>/instrumentation/gps/wp/wp[1]/distance-nm</property>
 		</input>
+        <condition>
+            <property>/instrumentation/gps/wp/wp[1]/valid</property>
+        </condition>
 	</label>
 	
 	<label>
@@ -134,6 +140,9 @@
 		<input>
 			<property>/instrumentation/gps/wp/wp[1]/TTW</property>
 		</input>
+        <condition>
+            <property>/instrumentation/gps/wp/wp[1]/valid</property>
+        </condition>
 	</label>
 	
 	<label>
@@ -145,6 +154,9 @@
 		<input>
 			<property>/instrumentation/gps/wp/wp[1]/bearing-mag-deg</property>
 		</input>
+        <condition>
+            <property>/instrumentation/gps/wp/wp[1]/valid</property>
+        </condition>
 	</label>
 	
 	<label>
@@ -159,6 +171,7 @@
 		</input>
 		
 		<condition>
+            <property>/instrumentation/gps/wp/wp[1]/valid</property>
     		<greater-than>
     		    <expression>
     		        <abs><property>/instrumentation/gps/wp/wp[1]/course-error-nm</property></abs>

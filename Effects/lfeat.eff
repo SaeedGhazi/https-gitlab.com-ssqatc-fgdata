@@ -81,8 +81,8 @@
 		</environment>
 	  </texture-unit>
 	  <polygon-offset>
-		<factor>-1.0</factor>
-		<units>-1.0</units>
+		<factor>-0.5</factor>
+		<units>-2.0</units>
 	  </polygon-offset>
 	</pass>
   </technique>

@@ -36,7 +36,6 @@ uniform int nmap_dds;
 uniform int nmap_enabled;
 uniform int refl_enabled;
 uniform int refl_map;
-uniform int shader_qual;
 uniform int grain_texture_enabled;
 
 uniform float amb_correction;
@@ -218,7 +217,7 @@ void main (void)
     /// END grain overlay
 
     ///BEGIN bump
-    if (nmap_enabled > 0 && shader_qual > 2){
+    if (nmap_enabled > 0){
         N = nmap.rgb * 2.0 - 1.0;
         N = normalize(N.x * VTangent + N.y * VBinormal + N.z * VNormal);
         if (nmap_dds > 0)
@@ -258,7 +257,7 @@ void main (void)
     ////////////////////////////////////////////////////////////////////
     //BEGIN reflect
     ////////////////////////////////////////////////////////////////////
-    if (refl_enabled > 0 && shader_qual > 1){
+    if (refl_enabled > 0){
         float reflFactor = 0.0;
         float transparency_offset = clamp(refl_correction, -1.0, 1.0);// set the user shininess offset
 
@@ -266,7 +265,7 @@ void main (void)
             // map the shininess of the object with user input
             //float pam = (map.a * -2) + 1; //reverse map
             reflFactor = reflmap.a + transparency_offset;
-            } else if (nmap_enabled > 0 && shader_qual > 2) {
+            } else if (nmap_enabled > 0) {
                 // set the reflectivity proportional to shininess with user input
                 reflFactor = gl_FrontMaterial.shininess * 0.0078125 * nmap.a + transparency_offset;
             } else {
@@ -331,7 +330,7 @@ void main (void)
         vec4 lightmapFactor = vec4(lightmap_r_factor, lightmap_g_factor,
             lightmap_b_factor, lightmap_a_factor);
         lightmapFactor = lightmapFactor * lightmapTexel;
-        if (lightmap_multi >0 ){
+        if (lightmap_multi > 0 ){
             lightmapcolor = lightmap_r_color * lightmapFactor.r +
                 lightmap_g_color * lightmapFactor.g +
                 lightmap_b_color * lightmapFactor.b +

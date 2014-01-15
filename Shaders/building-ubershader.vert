@@ -64,17 +64,20 @@ void	main(void)
     normal.xy = vec2(dot(normal.xy, vec2(cr, sr)), dot(normal.xy, vec2(-sr, cr)));
     //normal = gl_NormalMatrix * normal;
 
-		VNormal = normalize(gl_NormalMatrix * normal);
-		if (nmap_enabled > 0 && shader_qual > 2){
-		  VTangent = normalize(gl_NormalMatrix * tangent);
-		  VBinormal = normalize(gl_NormalMatrix * binormal);
-		} else {
-			VTangent = vec3(0.0);
-			VBinormal = vec3 (0.0);
-		}
-		vec3 n = normalize(normal);
-		vec3 t = cross(n, vec3(1.0,0.0,0.0));
-		vec3 b = cross(n,t);
+    VNormal = normalize(gl_NormalMatrix * normal);
+    vec3 n = normalize(normal);
+    vec3 tempTangent = cross(n, vec3(1.0,0.0,0.0));
+    vec3 tempBinormal = cross(n, tempTangent);
+
+    if (nmap_enabled > 0){
+        tempTangent = tangent;
+        tempBinormal  = binormal;
+      }
+
+    VTangent = normalize(gl_NormalMatrix * tempTangent);
+    VBinormal = normalize(gl_NormalMatrix * tempBinormal);
+    vec3 t = tempTangent;
+    vec3 b = tempBinormal;
 
 		// Super hack: if diffuse material alpha is less than 1, assume a
 		// transparency animation is at work

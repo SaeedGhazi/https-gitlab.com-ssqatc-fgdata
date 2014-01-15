@@ -629,14 +629,6 @@ and fallback to plain transparency when the model shader is disabled.
 					   <use>ambient-correction</use>
 				   </value>
 			   </uniform>
-			   <!-- shader quality -->
-			   <uniform>
-				   <name>shader_qual</name>
-				   <type>int</type>
-				   <value>
-					   <use>shader-quality</use>
-				   </value>
-			   </uniform>
 			   
 			   <uniform>
 				   <name>hdg</name>

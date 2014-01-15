@@ -546,14 +546,6 @@ the objects that use it, and replaces it with the default shader.
 					<use>ambient-correction</use>
 				</value>
 			</uniform>
-			<!-- shader quality -->
-			<uniform>
-				<name>shader_qual</name>
-				<type>int</type>
-				<value>
-					<use>shader-quality</use>
-				</value>
-			</uniform>
 
 			<uniform>
 				<name>hdg</name>

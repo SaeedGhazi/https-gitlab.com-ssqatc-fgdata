@@ -52,19 +52,23 @@ void	main(void)
 		//fog_Func(fogType);
 
 		VNormal = normalize(gl_NormalMatrix * gl_Normal);
-		if (nmap_enabled > 0 && shader_qual > 2){
-		VTangent = normalize(gl_NormalMatrix * tangent);
-		VBinormal = normalize(gl_NormalMatrix * binormal);
-		} else {
-			VTangent = vec3(0.0);
-			VBinormal = vec3 (0.0);
-		}
-		vec3 n = normalize(gl_Normal);
-		vec3 t = cross(n, vec3(1.0,0.0,0.0));
-		vec3 b = cross(n,t);
 
-		// Super hack: if diffuse material alpha is less than 1, assume a
-		// transparency animation is at work
+		vec3 n = normalize(gl_Normal);
+		vec3 tempTangent = cross(n, vec3(1.0,0.0,0.0));
+		vec3 tempBinormal = cross(n, tempTangent);
+
+		if (nmap_enabled > 0){
+			tempTangent = tangent;
+			tempBinormal  = binormal;
+		}
+
+		VTangent = normalize(gl_NormalMatrix * tempTangent);
+		VBinormal = normalize(gl_NormalMatrix * tempBinormal);
+		vec3 t = tempTangent;
+		vec3 b = tempBinormal;
+
+    // Super hack: if diffuse material alpha is less than 1, assume a
+	// transparency animation is at work
 		if (gl_FrontMaterial.diffuse.a < 1.0)
 			alpha = gl_FrontMaterial.diffuse.a;
 		else
@@ -76,7 +80,7 @@ void	main(void)
 		vViewVec.y = dot(b, vertVec);
 		vViewVec.z = dot(n, vertVec);
 
-		// calculate the reflection vector
+    // calculate the reflection vector
 		vec4 reflect_eye = vec4(reflect(vertVec, VNormal), 0.0);
 		vec3 reflVec_stat = normalize(gl_ModelViewMatrixInverse * reflect_eye).xyz;
 		if (refl_dynamic > 0){

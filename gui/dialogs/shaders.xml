@@ -230,9 +230,9 @@
 			<slider>
 				<name>model</name>
 				<min>0.0</min>
-				<max>3.0</max>
+				<max>1.0</max>
 				<step>1.0</step>
-				<fraction>0.25</fraction>
+				<fraction>0.5</fraction>
 				<live>true</live>
 				<property>/sim/rendering/shaders/model</property>
 				<binding>

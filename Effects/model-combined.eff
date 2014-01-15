@@ -109,10 +109,6 @@ please see Docs/README.model-combined.eff for documentation
 		<dirt-factor type="float" n="2">0.0</dirt-factor>
 		<!-- ambient correction -->
 		<ambient-correction type="float">0.05</ambient-correction>
-		<!-- 		quality slider -->
-		<shader-quality type="int">
-			<use>/sim/rendering/shaders/model</use>
-		</shader-quality>
 		<rendering-hint>opaque</rendering-hint>
 		<transparent>false</transparent>
 		<render-bin>
@@ -710,14 +706,6 @@ please see Docs/README.model-combined.eff for documentation
 				   <type>float</type>
 				   <value>
 					   <use>ambient-correction</use>
-				   </value>
-			   </uniform>
-			   <!-- shader quality -->
-			   <uniform>
-				   <name>shader_qual</name>
-				   <type>int</type>
-				   <value>
-					   <use>shader-quality</use>
 				   </value>
 			   </uniform>
 			   
@@ -1351,14 +1339,6 @@ please see Docs/README.model-combined.eff for documentation
 			<type>float</type>
 			<value>
 			  <use>ambient-correction</use>
-			</value>
-		  </uniform>
-		  <!-- shader quality -->
-		  <uniform>
-			<name>shader_qual</name>
-			<type>int</type>
-			<value>
-			  <use>shader-quality</use>
 			</value>
 		  </uniform>
 

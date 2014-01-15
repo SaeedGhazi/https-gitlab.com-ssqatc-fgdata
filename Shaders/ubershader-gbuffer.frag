@@ -3,6 +3,7 @@
 // Authors: Frederic Bouvier and Gijs de Rooy
 // with major additions and revisions by
 // Emilian Huminiuc and Vivian Meazza 2011
+#version 120
 
 varying	vec3 	rawpos;
 varying	vec3 	VNormal;
@@ -27,7 +28,6 @@ uniform int refl_enabled;
 uniform int refl_map;
 uniform int lightmap_enabled;
 uniform int lightmap_multi;
-uniform int shader_qual;
 uniform int dirt_enabled;
 uniform int dirt_multi;
 
@@ -80,7 +80,7 @@ void main (void)
 	float pf;
 
 ///BEGIN bump
- 	if (nmap_enabled > 0 && shader_qual > 2){
+ 	if (nmap_enabled > 0){
 		N = nmap.rgb * 2.0 - 1.0;
 		N = normalize(N.x * VTangent + N.y * VBinormal + N.z * VNormal);
 		if (nmap_dds > 0)
@@ -100,7 +100,7 @@ void main (void)
 ////////////////////////////////////////////////////////////////////
 //BEGIN reflect
 ////////////////////////////////////////////////////////////////////
-	if (refl_enabled > 0 && shader_qual > 1){
+	if (refl_enabled > 0){
 		float reflFactor;
 		float transparency_offset = clamp(refl_correction, -1.0, 1.0);// set the user shininess offset
 		if(refl_map > 0){
@@ -163,7 +163,7 @@ void main (void)
 		vec3 lightmapcolor;
 		vec4 lightmapFactor = vec4(lightmap_r_factor, lightmap_g_factor, lightmap_b_factor, lightmap_a_factor);
 		lightmapFactor = lightmapFactor * lightmapTexel;
-		if (lightmap_multi >0 ){
+		if (lightmap_multi > 0 ){
 			lightmapcolor = lightmap_r_color * lightmapFactor.r +
 			                lightmap_g_color * lightmapFactor.g +
 			                lightmap_b_color * lightmapFactor.b +

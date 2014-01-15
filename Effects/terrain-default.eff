@@ -453,7 +453,7 @@
       </uniform>
       <depth>
         <function>lequal</function>
-        <write-mask type="bool">false</write-mask>
+   <!--     <write-mask type="bool">false</write-mask> -->
       </depth>
     </pass>
   </technique>
@@ -719,7 +719,7 @@
       </uniform>
       <depth>
         <function>lequal</function>
-        <write-mask type="bool">false</write-mask>
+        <!--><write-mask type="bool">false</write-mask> -->
       </depth>
     </pass>
   </technique>
@@ -881,10 +881,12 @@
       </uniform>
       <depth>
         <function>lequal</function>
-        <write-mask type="bool">false</write-mask>
+<!--        <write-mask type="bool">false</write-mask>  -->
       </depth>
     </pass>
   </technique>
+  
+  
   <technique n="10">
     <predicate>
       <and>
@@ -951,6 +953,7 @@
 		</uniform -->
     </pass>
   </technique>
+  
   <technique n="11">
     <predicate>
       <and>
@@ -1089,10 +1092,11 @@
       </uniform>
       <depth>
         <function>lequal</function>
-        <write-mask type="bool">false</write-mask>
+    <!--    <write-mask type="bool">false</write-mask> -->
       </depth>
     </pass>
   </technique>
+  
   <technique n="12">
     <pass>
       <lighting>true</lighting>

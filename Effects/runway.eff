@@ -343,7 +343,7 @@
       </uniform>
       <depth>
         <function>lequal</function>
-        <write-mask type="bool">false</write-mask>
+    <!--    <write-mask type="bool">false</write-mask> -->
       </depth>
     </pass>
   </technique>

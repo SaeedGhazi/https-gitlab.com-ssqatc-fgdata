@@ -108,7 +108,7 @@ top down before the key bindings are parsed.
 
  <!-- Tab key, also Ctrl-I, bit odd -->
  <key n="9">
-	<name>Ctrl-I</name>
+	<name>Tab</name>
 	<desc>Cycle mouse mode</desc>
 	<binding>
     

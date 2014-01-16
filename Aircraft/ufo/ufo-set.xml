@@ -215,8 +215,8 @@
 				</mod-up>
 			</key>
 
-			<key n="9">
-				<name>Ctrl-I</name>
+			<key n="61">
+				<name>=</name>
 				<desc>Show object adjustment dialog</desc>
 				<binding>
 					<command>nasal</command>

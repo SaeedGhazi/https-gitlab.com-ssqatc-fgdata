@@ -75,7 +75,7 @@ var setCursor = func(x = nil, y = nil, cursor = nil) {
         args.getNode("cursor", 1).setIntValue(cursor);
     }
     fgcommand("set-cursor", args);
-    return args.getNode("cursor").getValue();
+    return args.getValue("cursor");
 }
 
 ##

@@ -132,7 +132,7 @@ var FMSDelegate = {
         var active = me.flightplan.currentWP();
         if (active == nil) return;
         
-        if (active.alt_cstr_type != nil) {
+        if (active.alt_cstr_type == "at") {
             debug.dump('new WP has valid altitude restriction, setting on AP');
             setprop('/autopilot/settings/target-altitude-ft', active.alt_cstr);
         }

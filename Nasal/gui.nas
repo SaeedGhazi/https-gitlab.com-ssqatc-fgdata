@@ -1410,13 +1410,10 @@ var update_shader_settings = func() {
         setprop("/sim/rendering/shaders/landmass",qualityLvl);
         setprop("/sim/rendering/shaders/urban",qualityLvl);
         setprop("/sim/rendering/shaders/water",qualityLvl);
-        if (qualityLvl >= 3.0){
-            qualityLvl = 3.0;
-        }
-        setprop("/sim/rendering/shaders/model",qualityLvl);
         if (qualityLvl >= 1.0){
             qualityLvl = 1.0;
         }
+        setprop("/sim/rendering/shaders/model",qualityLvl);
         setprop("/sim/rendering/shaders/contrails",qualityLvl);
         setprop("/sim/rendering/shaders/crop",qualityLvl);
         setprop("/sim/rendering/shaders/generic",qualityLvl);

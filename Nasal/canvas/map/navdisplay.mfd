@@ -152,10 +152,9 @@ var NDStyles = {
 				}, # end of layer update predicate
 			}, # end of traffic  layer
 
-
 			{ name:'runway-nd', update_on:['toggle_range','toggle_display_mode'],
 				predicate: func(nd, layer) {
-					var visible = (nd.rangeNm() <= 40 and getprop("autopilot/route-manager/active") ) ;
+					var visible = (nd.rangeNm() <= 40) and getprop("autopilot/route-manager/active") and nd.in_mode('toggle_display_mode', ['MAP','PLAN']) ;
 					if (visible)
 						trigger_update( layer ); # clear & redraw
 					layer._view.setVisible( visible );
@@ -164,8 +163,10 @@ var NDStyles = {
 
 			{ name:'route', update_on:['toggle_range','toggle_display_mode'],
 				predicate: func(nd, layer) {
-					trigger_update( layer ); # clear & redraw
-					layer._view.setVisible( 1 ); #nd.get_switch('toggle_traffic')
+					var visible= (nd.in_mode('toggle_display_mode', ['MAP','PLAN']));
+					if (visible)
+						trigger_update( layer ); # clear & redraw
+					layer._view.setVisible( visible );
 				}, # end of layer update predicate
 			}, # end of route layer
 
@@ -271,7 +272,7 @@ var NDStyles = {
 				id:'rangeArcs',
 				impl: {
 					init: func(nd,symbol),
-					predicate: func(nd) (((nd.get_switch('toggle_display_mode') == "APP" or nd.get_switch('toggle_display_mode') == "VOR") and nd.get_switch('toggle_weather')) or nd.get_switch('toggle_display_mode') == "MAP"),
+					predicate: func(nd) ((((nd.get_switch('toggle_display_mode') == "APP" or nd.get_switch('toggle_display_mode') == "VOR") and nd.get_switch('toggle_weather')) or nd.get_switch('toggle_display_mode') == "MAP") and (!nd.get_switch('toggle_centered'))),
 					is_true: func(nd) nd.symbols.rangeArcs.show(),
 					is_false: func(nd) nd.symbols.rangeArcs.hide(),
 				}, # of rangeArcs.impl
@@ -522,7 +523,8 @@ var NavDisplay = {
 
 		# this should probably be using Philosopher's new SymbolLayer ?
 		me.map = me.nd.createChild("map","map")
-			.set("clip", "rect(124, 1024, 1024, 0)");
+			.set("clip", "rect(124, 1024, 1024, 0)")
+			.set("screen-range", "700");
 
 		# this callback will be passed onto the model via the controller hash, and used for the positioned queries, to specify max query range:
 		var get_range = func me.get_switch('toggle_range');
@@ -701,7 +703,6 @@ var NavDisplay = {
 		latNm = latlen*M2NM; #60 at equator
 		lonNm = lonlen*M2NM; #60 at equator
 
-		me.symbols.windArrow.setRotation((getprop("/environment/wind-from-heading-deg")-userHdg)*D2R);
 		me.symbols.wind.setText(sprintf("%3.0f / %2.0f",getprop("/environment/wind-from-heading-deg"),getprop("/environment/wind-speed-kt")));
 
 		if(me.get_switch('toggle_lh_vor_adf') == 1)
@@ -784,9 +785,14 @@ var NavDisplay = {
 			me.map._node.getNode("ref-lon",1).setDoubleValue(userLon);
 		}
 		# The set range of the map does not correspond to what we see in-sim!!
-		me.map._node.getNode("range",1).setDoubleValue(me.rangeNm()/3.2); # avoid this  here, use a listener instead
+		me.map._node.getNode("range",1).setDoubleValue(me.rangeNm()); # avoid this  here, use a listener instead
 
+		# Hide heading bug 10 secs after change
 		var vhdg_bug = getprop("autopilot/settings/heading-bug-deg");
+		var hdg_bug_active = getprop("autopilot/settings/heading-bug-active");
+		if (hdg_bug_active == nil)
+			hdg_bug_active = 1;
+						
 		if(me.in_mode('toggle_display_mode', ['MAP'])) {
 			me.symbols.HdgBugCRT.setRotation((vhdg_bug-userTrk)*D2R);
 			me.symbols.HdgBugLCD.setRotation((vhdg_bug-userTrk)*D2R);
@@ -802,6 +808,7 @@ var NavDisplay = {
 			me.symbols.compass.setRotation(-userTrk*D2R);
 			me.symbols.compassApp.setRotation(-userTrk*D2R);
 			me.symbols.hdgTrk.setText("TRK");
+			me.symbols.windArrow.setRotation((getprop("/environment/wind-from-heading-deg")-userTrk)*D2R);
 		}
 		if(me.in_mode('toggle_display_mode', ['APP','VOR'])) {
 			me.symbols.HdgBugCRT.setRotation((vhdg_bug-userHdg)*D2R);
@@ -817,6 +824,7 @@ var NavDisplay = {
 			me.symbols.compass.setRotation(-userHdg*D2R);
 			me.symbols.compassApp.setRotation(-userHdg*D2R);
 			me.symbols.hdgTrk.setText("HDG");
+			me.symbols.windArrow.setRotation((getprop("/environment/wind-from-heading-deg")-userHdg)*D2R);
 		}
 		if(me.get_switch('toggle_centered')) {
 			if (me.in_mode('toggle_display_mode', ['APP','VOR'])) {
@@ -918,7 +926,7 @@ var NavDisplay = {
 				me.symbols.TrkBugLCD.hide();
 				me.symbols.HdgBugCRT.setVisible(staPtrVis and !dispLCD);
 				me.symbols.HdgBugLCD.setVisible(staPtrVis and dispLCD);
-				me.symbols.selHdgLine.setVisible(staPtrVis);
+				me.symbols.selHdgLine.setVisible(staPtrVis and hdg_bug_active);
 			} else {
 				me.symbols.trkInd.hide();
 				if((getprop("instrumentation/nav/in-range")	and me.get_switch('toggle_lh_vor_adf') == 1)) {
@@ -970,7 +978,7 @@ var NavDisplay = {
 				me.symbols.TrkBugLCD2.hide();
 				me.symbols.HdgBugCRT2.setVisible(staPtrVis and !dispLCD);
 				me.symbols.HdgBugLCD2.setVisible(staPtrVis and dispLCD);
-				me.symbols.selHdgLine2.setVisible(staPtrVis);
+				me.symbols.selHdgLine2.setVisible(staPtrVis and hdg_bug_active);
 			}
 		}
 

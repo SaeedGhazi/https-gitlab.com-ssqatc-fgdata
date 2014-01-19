@@ -41,6 +41,34 @@ current mode for each mouse is held in the
         <reason>right-click</reason>
     </binding>
    </button>
+
+   <!-- extra buttons control FoV -->
+   <!-- these are often assigned to mouse-wheel motion in Linux -->
+   <button n="3">
+    <binding>
+     <condition>
+       <and>
+         <property>/devices/status/mice/mouse[0]/button[2]</property>
+         <not><property>/sim/mouse/right-button-mode-cycle-enabled</property></not>
+       </and>
+     </condition>
+      <command>nasal</command>
+      <script>view.decrease()</script>
+    </binding>
+   </button>
+
+   <button n="4">
+    <binding>
+     <condition>
+       <and>
+         <property>/devices/status/mice/mouse[0]/button[2]</property>
+         <not><property>/sim/mouse/right-button-mode-cycle-enabled</property></not>
+       </and>
+     </condition>
+      <command>nasal</command>
+      <script>view.increase()</script>
+    </binding>
+   </button>
  
   </mode>
 
@@ -308,28 +336,6 @@ current mode for each mouse is held in the
    <cursor>left-right</cursor>
    <constrained type="bool">true</constrained>
    <pass-through type="bool">false</pass-through>
-
-   <!-- extra buttons control FoV -->
-   <!-- these are often assigned to mouse-wheel motion in Linux -->
-   <button n="3">
-    <binding>
-     <condition>
-       <property>/devices/status/mice/mouse[0]/button[2]</property>
-     </condition>
-      <command>nasal</command>
-      <script>view.decrease()</script>
-    </binding>
-   </button>
-
-   <button n="4">
-    <binding>
-     <condition>
-       <property>/devices/status/mice/mouse[0]/button[2]</property>
-     </condition>
-      <command>nasal</command>
-      <script>view.increase()</script>
-    </binding>
-   </button>
 
    <!-- Mouse left/right motion -->
    <x-axis>

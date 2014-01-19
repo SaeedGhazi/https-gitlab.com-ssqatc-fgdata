@@ -51,7 +51,7 @@
 var dialog = nil;
 
 var colorgroup = func(parent, name, base) {
-	var undef = func { props.globals.getNode(base ~ name ~ "/" ~ parent) == nil };
+	var undef = func(color) { props.globals.getNode(base ~ name ~ "/" ~ color) == nil };
 
 	if (undef("red") and undef("green") and undef("blue")) {
 		return 0;

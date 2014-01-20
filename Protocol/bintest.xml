@@ -35,7 +35,7 @@
    <chunk>
     <name>autocoord</name>
     <type>bool</type>
-    <node>/sim/auto-coordination</node>
+    <node>/controls/flight/auto-coordination</node>
    </chunk>
 
    <!-- chunk>

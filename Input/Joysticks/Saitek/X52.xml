@@ -379,7 +379,7 @@ Bit  Binary     Hardware Function       Interpretation
    <binding>
     <command>nasal</command>
     <script>
-      setprop("/sim/auto-coordination", ! !getprop("/sim/gui/d-button"));
+      setprop("/controls/flight/auto-coordination", ! !getprop("/sim/gui/d-button"));
     </script>
    </binding>
 </button>

@@ -1066,34 +1066,3 @@ var getDesktop = func()
 {
   return Group.new(_getDesktopGhost());
 };
-
-# ------------------------------------------------------------------------------
-# Show warnings if API used with too old version of FlightGear without Canvas
-# support (Wrapped in anonymous function do not polute the canvas namespace)
-
-(func {
-var legacy_dir = getprop("/sim/fg-root") ~ "/Nasal/canvas";
-var version_str = getprop("/sim/version/flightgear");
-if( string.scanf(version_str, "%u.%u.%u", var fg_version = []) < 1 )
-  debug.warn("Canvas: Error parsing flightgear version (" ~ version_str ~ ")");
-else
-{
-  if(     fg_version[0] < 2
-      or (fg_version[0] == 2 and fg_version[1] < 8) )
-  {
-    debug.warn("Canvas: FlightGear version too old (" ~ version_str ~ ")");
-    gui.popupTip
-    (
-      "FlightGear v2.8.0 or newer needed for Canvas support!",
-      600,
-      {button: {legend: "Ok", binding: {command: "dialog-close"}}}
-    );
-  }
-
-  # Load support for older versions of FlightGear (TODO generalize :) )
-  if( fg_version[0] == 2 and fg_version[1] == 8 )
-    io.load_nasal(legacy_dir ~ "/api.nas.2.8", "canvas");
-}
-
-Canvas.property_root = props.globals.getNode("canvas/by-index", 1);
-})();

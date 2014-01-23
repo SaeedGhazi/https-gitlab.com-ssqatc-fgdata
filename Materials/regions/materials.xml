@@ -18,6 +18,7 @@
 
   <material>
     <name>dirt_rwy</name>
+    <effect>Effects/dirt-runway</effect>
     <texture>Runway/dirt_rwy.png</texture>
     <friction-factor>0.7</friction-factor>
     <rolling-friction>0.04</rolling-friction>

@@ -15,7 +15,7 @@ uniform sampler2D NormalTex;
 //uniform sampler3D NoiseTex;
 //uniform sampler2D snow_texture;
 //uniform sampler2D detail_texture;
-//uniform sampler2D mix_texture;
+uniform sampler2D mix_texture;
 
 //varying float yprime_alt;
 //varying float mie_angle;
@@ -209,6 +209,7 @@ float noise_2000m = Noise2D(rawPos.xy, 2000.0);
 // get the texels
 
     texel = texture2D(texture, gl_TexCoord[0].st);
+    mix_texel = texture2D(mix_texture, gl_TexCoord[0].st * 5.0);
 	vec4 nmap  = texture2D(NormalTex, gl_TexCoord[0].st * 8.0);
 	vec3 N = nmap.rgb * 2.0 - 1.0;
 
@@ -219,8 +220,9 @@ float noise_2000m = Noise2D(rawPos.xy, 2000.0);
     float noise_term;
     float snow_alpha;
 
-
-        
+	
+	noise_term = smoothstep(0.8,1.0,noise_1m);
+	texel = mix(texel, mix_texel, noise_term);        
 
     //float view_angle = abs(dot(normal, normalize(ecViewdir)));
 

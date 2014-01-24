@@ -422,26 +422,16 @@ var Map = {
   df_controller: nil,
   new: func(ghost)
   {
-    return { parents: [Map, Group.new(ghost)] };
+    return { parents: [Map, Group.new(ghost)] }.setController();
   },
   del: func()
   {
     #print("canvas.Map.del()");
-    call(func {
+    if (me.controller != nil)
       me.controller.del(me);
-    }, var err=[]);
-    if (size(err)) {
-      debug.printerror(err);
-      setsize(err, 0);
-    }
-    call(func {
-      foreach (var l; me.layers)
-        call(l[0].del, nil, l[0]);
-      setsize(me.layers, 0);
-    }, err);
-    if (size(err)) {
-      debug.printerror(err);
-      setsize(err, 0);
+    foreach (var k; keys(me.layers)) {
+      me.layers[k].del();
+      delete(me.layers, k);
     }
     # call inherited 'del'
     me.parents = subvec(me.parents,1);

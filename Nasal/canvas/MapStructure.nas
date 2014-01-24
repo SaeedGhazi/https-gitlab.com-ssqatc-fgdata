@@ -1,3 +1,5 @@
+var _MP_dbg_lvl = "info";
+
 var dump_obj = func(m) {
 	var h = {};
 	foreach (var k; keys(m))
@@ -235,11 +237,9 @@ var DotSym = {
 			),
 		};
 		if (m.controller != nil) {
-			#print("Creating controller");
 			temp = m.controller.new(m.model,m);
 			if (temp != nil)
 				m.controller = temp;
-			#print("Initializing controller");
 			m.controller.init(model);
 		}
 		else die("default controller not found");
@@ -248,7 +248,7 @@ var DotSym = {
 		return m;
 	},
 	del: func() {
-		#print("DotSym.del()");
+		printlog(_MP_dbg_lvl, "DotSym.del()");
 		me.deinit();
 		if (me.controller != nil)
 			me.controller.del(me.model);
@@ -333,7 +333,7 @@ var SymbolLayer = {
 			e.update();
 	},
 	del: func() {
-		#print("SymbolLayer.del()");
+		printlog(_MP_dbg_lvl, "SymbolLayer.del()");
 		me.controller.del();
 		foreach (var e; me.list)
 			e.del();

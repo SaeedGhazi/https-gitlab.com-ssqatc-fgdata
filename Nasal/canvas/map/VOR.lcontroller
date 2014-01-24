@@ -30,7 +30,7 @@ var new = func(layer) {
 	return m;
 };
 var del = func() {
-	#print("VOR.lcontroller.del()");
+	printlog(_MP_dbg_lvl, "VOR.lcontroller.del()");
 	foreach (var l; me.listeners)
 		removelistener(l);
 };
@@ -49,7 +49,7 @@ var changed_freq = func(update=1) {
 	if (update) me.layer.update();
 };
 var searchCmd = func {
-	#print("Running query:", me.query_type);
+	printlog(_MP_dbg_lvl, "Running query:", me.query_type);
 	return positioned.findWithinRange(100, me.query_type); # the range should also be exposed, it will typically be controlled via a GUI widget or NavDisplay switch
 };
 

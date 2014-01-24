@@ -383,11 +383,17 @@ var NavDisplay = {
 
 	# reset handler
 	handle_reinit: func {
-		print("Cleaning up NavDisplay listeners");
+		print("Cleaning up NavDisplay");
 		# shut down all timers and other loops here
 		me.update_timer.stop();
 		foreach(var l; me.listeners)
 			removelistener(l);
+		# clean up MapStructure
+		me.map.del();
+		# destroy the canvas
+		if (me.canvas_handle != nil)
+			me.canvas_handle.del();
+		me.inited = 0;
 	},
 
 	listen: func(p,c) {
@@ -433,6 +439,8 @@ var NavDisplay = {
 	# especially properties and SVG files/handles (747, 757, 777 etc)
 	new : func(prop1, switches=default_switches, style='Boeing') {
 		var m = { parents : [NavDisplay]};
+
+		m.inited = 0;
 
 		m.listeners=[]; # for cleanup handling
 		m.aircraft_source = NDSourceDriver.new(); # uses the main aircraft as the driver/source (speeds, position, heading)
@@ -484,11 +492,14 @@ var NavDisplay = {
 
 		return m;
 	},
-	newMFD: func(canvas_group)
+	newMFD: func(canvas_group, parent=nil)
 	{
-		me.listen("/sim/signals/reinit", func me.handle_reinit() );
+		if (me.inited) die("MFD already was added to scene");
+		me.inited = 1;
+		me.listen("/sim/signals/reinit", func(n) me.handle_reinit() );
 		me.update_timer = maketimer(0.05, func me.update() ); # TODO: make interval configurable via ctor
 		me.nd = canvas_group;
+		me.canvas_handle = parent;
 
 		# load the specified SVG file into the me.nd group and populate all sub groups
 
@@ -587,7 +598,7 @@ var NavDisplay = {
 			if(!layer['isMapStructure'])
 				the_layer = me.layers[layer.name] = canvas.MAP_LAYERS[layer.name].new( render_target, layer.name, controller );
 			else {
-				#print("Setting up MapStructure-based layer for ND, name:", layer.name);
+				printlog(_MP_dbg_lvl, "Setting up MapStructure-based layer for ND, name:", layer.name);
 				render_target.addLayer(factory: canvas.SymbolLayer, type_arg: layer.name);
 				the_layer = me.layers[layer.name] = render_target.getLayer(layer.name);
 			}
@@ -990,7 +1001,7 @@ var NavDisplay = {
 		me.symbols.planArcs.setVisible(me.in_mode('toggle_display_mode', ['PLAN']));
 
 		if (abs(userVSpd) > 5) {
-			var altDiff = getprop("autopilot/settings/target-altitude-ft")-getprop("instrumentation/altimeter/indicated-altitude-ft");
+			var altDiff = (getprop("autopilot/settings/target-altitude-ft") or 0)-(getprop("instrumentation/altimeter/indicated-altitude-ft") or 0);
 			if (abs(altDiff) > 50 and altDiff/userVSpd > 0) {
 				var altRangeNm = altDiff/userVSpd*userSpd*KT2MPS*M2NM;
 				if(altRangeNm > 1) {

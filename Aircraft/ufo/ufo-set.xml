@@ -169,7 +169,7 @@
 				<desc>open/close model select dialog</desc>
 			</key>
 			<key>
-				<name>tab</name>
+				<name>=</name>
 				<desc>open/close cursor dialog</desc>
 			</key>
 
@@ -184,7 +184,7 @@
 			<line>&#32;&#32;~/.fgfs/Export/ufo-model-export.xml   (Unix)</line>
 			<line>&#32;&#32;%APPDATA%\flightgear.org\Export\ufo-model-export.xml   (Microsoft Windows)</line>
 			<line/>
-			<line>In the adjustment dialog (TAB-key) holding the Ctrl or Shift key down</line>
+			<line>In the adjustment dialog (= key) holding the Ctrl or Shift key down</line>
 			<line>makes slider effects coarser/finer.</line>
 		</help>
 	</sim>

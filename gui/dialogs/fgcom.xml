@@ -172,7 +172,7 @@
     <text>
       <row>1</row>
       <col>1</col>
-      <label>        (for debug only)</label>
+      <label>     (for debug only)</label>
       <halign>right</halign>
     </text>
 
@@ -262,8 +262,8 @@
     <text>
       <row>5</row>
       <col>2</col>
-      <label>1234</label>
-      <format>%.1f</format>
+      <label>1234 dB  </label>
+      <format>%.1f dB</format>
       <live>true</live>
       <property>/sim/fgcom/silence-threshold</property>
     </text>

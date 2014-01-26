@@ -1,4 +1,4 @@
-<?xml version="1.0" ?> 
+<?xml version="1.0" ?>
 <!--
  This file is part of FlightGear, the free flight simulator
  http://www.flightgear.org/
@@ -17,7 +17,7 @@
 -->
 <!--
   Cloud shapes and layers. See Docs/README.3DClouds for details.
-  
+
   short Explanation:
   cb = Cumulonimbus (Thunderstorm cloud)
       cb-cal = Cumulonimbus Calvus (without amboss)
@@ -199,7 +199,18 @@ ns = Nimbostratus (Rain cloud)
         <vdist>1</vdist>
       </box>
     </ac-str>
-    
+
+    <ac>
+      <box>
+        <type>cu-large</type>
+        <count>6</count>
+        <width>4000</width>
+        <height>0</height>
+        <hdist>1</hdist>
+        <vdist>1</vdist>
+      </box>
+    </ac>
+
     <cu-hum>
       <box>
         <type>cu-small</type>
@@ -210,7 +221,7 @@ ns = Nimbostratus (Rain cloud)
         <vdist>2</vdist>
       </box>
     </cu-hum>
-    
+
     <cu-con>
       <box>
         <type>cu-con</type>
@@ -229,7 +240,7 @@ ns = Nimbostratus (Rain cloud)
         <vdist>2</vdist>
       </box>
     </cu-con>
-    
+
     <cb-cal>
       <box>
         <type>cb-large</type>
@@ -240,8 +251,8 @@ ns = Nimbostratus (Rain cloud)
         <vdist>2</vdist>
       </box>
     </cb-cal>
-    
-    
+
+
     <cb-inc>
       <box>
         <type>cb-large</type>
@@ -250,7 +261,7 @@ ns = Nimbostratus (Rain cloud)
         <height>1000</height>
       </box>
     </cb-inc>
-    
+
     <st>
       <box>
         <type>st-large</type>
@@ -265,7 +276,7 @@ ns = Nimbostratus (Rain cloud)
         <height>100</height>
       </box>
     </st>
-    
+
     <st-small>
       <box>
         <type>st-small</type>
@@ -274,7 +285,7 @@ ns = Nimbostratus (Rain cloud)
         <height>200</height>
       </box>
     </st-small>
-    
+
     <ns>
       <box>
         <type>ns-large</type>
@@ -283,7 +294,7 @@ ns = Nimbostratus (Rain cloud)
         <height>300</height>
       </box>
     </ns>
-    
+
     <sc>
       <box>
         <type>sc</type>
@@ -292,7 +303,7 @@ ns = Nimbostratus (Rain cloud)
         <height>300</height>
       </box>
     </sc>
-    
+
     <xx>
       <box>
         <type>cu-large</type>
@@ -303,8 +314,8 @@ ns = Nimbostratus (Rain cloud)
       </box>
     </xx>
   </boxes>
-  
-  
+
+
   <layers>
     <cu>
       <cloud>
@@ -337,7 +348,7 @@ ns = Nimbostratus (Rain cloud)
     </cb>
     <ac>
       <cloud>
-        <name>ac-str</name>
+        <name>ac</name>
         <count>1</count>
       </cloud>
       <grid-z-rand type="double">100.0</grid-z-rand>

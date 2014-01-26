@@ -147,8 +147,11 @@ var NDStyles = {
 
 			{ name:'mp-traffic', update_on:['toggle_range','toggle_traffic'],
 				predicate: func(nd, layer) {
-					trigger_update( layer ); # clear & redraw
-					layer._view.setVisible( 1 ); #nd.get_switch('toggle_traffic')
+					var visible = nd.get_switch('toggle_traffic');
+					layer._view.setVisible( visible );
+					if (visible) {
+						trigger_update( layer ); # clear & redraw
+					}
 				}, # end of layer update predicate
 			}, # end of traffic  layer
 
@@ -349,7 +352,7 @@ var default_switches = {
 	'toggle_position':     {path: '/inputs/pos', value:0, type:'BOOL'},
 	'toggle_data':         {path: '/inputs/data',value:0, type:'BOOL'},
 	'toggle_terrain':      {path: '/inputs/terr',value:0, type:'BOOL'},
-	'toggle_traffic':      {path: '/inputs/tcas',value:0, type:'BOOL'},
+	'toggle_traffic':      {path: '/inputs/tfc',value:0, type:'BOOL'},
 	'toggle_centered':     {path: '/inputs/nd-centered',value:0, type:'BOOL'},
 	'toggle_lh_vor_adf':   {path: '/inputs/lh-vor-adf',value:0, type:'INT'},
 	'toggle_rh_vor_adf':   {path: '/inputs/rh-vor-adf',value:0, type:'INT'},
@@ -382,7 +385,7 @@ update_apl_sym();
 var NavDisplay = {
 
 	# reset handler
-	handle_reinit: func {
+	del: func {
 		print("Cleaning up NavDisplay");
 		# shut down all timers and other loops here
 		me.update_timer.stop();
@@ -496,7 +499,7 @@ var NavDisplay = {
 	{
 		if (me.inited) die("MFD already was added to scene");
 		me.inited = 1;
-		me.listen("/sim/signals/reinit", func(n) me.handle_reinit() );
+		#me.listen("/sim/signals/reinit", func(n) me.del() );
 		me.update_timer = maketimer(0.05, func me.update() ); # TODO: make interval configurable via ctor
 		me.nd = canvas_group;
 		me.canvas_handle = parent;

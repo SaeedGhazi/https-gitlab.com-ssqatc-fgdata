@@ -59,10 +59,22 @@ var draw_route =  func (group, theroute, controller=nil, lod=0)
 				append(cmds,4);
 				canvas.drawwp(group, leg.path()[1].lat, leg.path()[1].lon, leg.alt_cstr, leg.wp_name, i, wp);
 			}
-			
+
+			# Set Top Of Crimb coordinate
+			canvas.drawprofile(route_group, "tc", "T/C");
+			# Set Top Of Descent coordinate
+			canvas.drawprofile(route_group, "td", "T/D");
+			# Set Step Crimb coordinate
+			canvas.drawprofile(route_group, "sc", "S/C");
+			# Set Top Of Descent coordinate
+			canvas.drawprofile(route_group, "ed", "E/D");
+
 			# Update route coordinates
 			debug.dump(cmds);
 			debug.dump(coords);
 			route.setDataGeo(cmds, coords);
 			updatewp(0);
+
 }
+
+

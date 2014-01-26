@@ -29,6 +29,7 @@
     <snap-shot>Capture d'écran</snap-shot>   <!-- English: "Screenshot  " -->
     <snap-shot-dir>Répertoire des captures</snap-shot-dir>   <!-- English: "Screenshot Directory" -->
     <sound-config>Configuration du son</sound-config>   <!-- English: "Sound Configuration" -->
+    <input-config>Configuration des périphériques</input-config>   <!-- English: "Input Configuration" -->
     <exit>Quitter</exit>   <!-- English: "Quit          " -->
 
     <!-- View menu -->
@@ -91,6 +92,7 @@
     <!-- Multiplayer menu -->
     <multiplayer>Multijoueurs</multiplayer>   <!-- English: "Multiplayer" -->
     <mp-settings>Paramètres</mp-settings>   <!-- English: "Multiplayer Settings" -->
+    <fgcom-settings>Paramètres FGCom</fgcom-settings>   <!-- English: "FGCom Settings" -->
     <mp-chat>Fenêtre de clavardage</mp-chat>   <!-- English: "Chat Dialog" -->
     <mp-chat-menu>Menu de clavardage</mp-chat-menu>   <!-- English: "Chat Menu" -->
     <mp-list>Liste des pilotes</mp-list>   <!-- English: "Pilot List" -->
@@ -129,6 +131,7 @@
     <help-browser>Aide (s'ouvre dans le navigateur)</help-browser>   <!-- English: "Help  (opens in browser)" -->
     <doc-browser>Naviguer dans la documentation</doc-browser>   <!-- English: "Documentation Browser" -->
     <aircraft-keys>Aide de l'aéronef</aircraft-keys>   <!-- English: "Aircraft Help" -->
+    <aircraft-checklists>Checklists de l'aéronef</aircraft-checklists>
     <common-keys>Touches communes aux aéronefs</common-keys>   <!-- English: "Common Aircraft Keys" -->
     <basic-keys>Touches de base du simulateur</basic-keys>   <!-- English: "Basic Simulator Keys" -->
     <joystick-config>Configuration du joystick</joystick-config>   <!-- English: "Joystick Configuration" -->

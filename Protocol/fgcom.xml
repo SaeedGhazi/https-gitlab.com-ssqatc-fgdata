@@ -154,6 +154,13 @@
     <node>/sim/sound/atc/volume</node>
    </chunk>
 
+   <chunk>
+    <name>silence-threshold</name>
+    <type>double</type>
+    <format>SILENCE_THD=%1.1f</format>
+    <node>/sim/fgcom/silence-threshold</node>
+   </chunk>
+
   </output>
 
  </generic>

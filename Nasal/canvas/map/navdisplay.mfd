@@ -385,7 +385,7 @@ update_apl_sym();
 var NavDisplay = {
 
 	# reset handler
-	handle_reinit: func {
+	del: func {
 		print("Cleaning up NavDisplay");
 		# shut down all timers and other loops here
 		me.update_timer.stop();
@@ -499,7 +499,7 @@ var NavDisplay = {
 	{
 		if (me.inited) die("MFD already was added to scene");
 		me.inited = 1;
-		me.listen("/sim/signals/reinit", func(n) me.handle_reinit() );
+		#me.listen("/sim/signals/reinit", func(n) me.del() );
 		me.update_timer = maketimer(0.05, func me.update() ); # TODO: make interval configurable via ctor
 		me.nd = canvas_group;
 		me.canvas_handle = parent;

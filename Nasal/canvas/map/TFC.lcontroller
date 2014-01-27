@@ -1,0 +1,98 @@
+# Class things:
+var name = 'TFC';
+var parents = [SymbolLayer.Controller];
+var __self__ = caller(0)[0];
+SymbolLayer.Controller.add(name, __self__);
+SymbolLayer.add(name, {
+	parents: [SymbolLayer],
+	type: name, # Symbol type
+	df_controller: __self__, # controller to use by default -- this one
+});
+
+var model_root = props.globals.getNode("/ai/models/");
+
+var new = func(layer) {
+	var m = {
+		parents: [__self__],
+		layer: layer,
+		listeners: [],
+		query_range_nm: 25,
+	};
+	# Listen to ai model events
+	append(m.listeners, setlistener(
+		model_root.getNode("model-added"), func(n) {
+			var node = props.globals.getNode(n.getValue());
+			var name = node.getName();
+			if (name == "aircraft" or name == "multiplayer")
+				layer.onAdded(TrafficModel.new(node));
+		}
+	));
+	append(m.listeners, setlistener(
+		model_root.getNode("model-removed"), func(n) {
+			var node = props.globals.getNode(n.getValue());
+			var name = node.getName();
+			if (name == "aircraft" or name == "multiplayer")
+				layer.onRemoved(TrafficModel.new(node));
+		}
+	));
+	layer.searcher._equals = func(l,r) l.equals(r);
+	return m;
+};
+var del = func() {
+	#print(name~".lcontroller.del()");
+	foreach (var l; me.listeners)
+		removelistener(l);
+};
+
+var TrafficModel = {
+	new: func(node, id=nil, layer=nil) {
+		if (id == nil) id = node.getValue("id");
+		var m = {
+			# Note: because this inherits from props.Node, Symbol.Controller.equals
+			# will call l.equals(r) -- the one defined below
+			parents: [TrafficModel, geo.Coord, node],
+			id: id,
+			node: node,
+			pos: node.getNode("position"),
+		};
+		if (m.pos == nil)
+			m.latlon = func [nil,nil,nil];
+		return m;
+	},
+	equals: func(other) other.id == me.id,
+	latlon: func() {
+		return [
+			me.pos.getValue("latitude-deg"),
+			me.pos.getValue("longitude-deg"),
+			me.pos.getValue("altitude-ft")
+		];
+	},
+};
+
+var searchCmd = func {
+	# TODO: this would be a good candidate for splitting across frames
+	#print("Doing query: "~name);
+
+	var result = [];
+	var pos = geo.Coord.new(); # FIXME: all of these should be instance variables
+	var myPosition = geo.Coord.new();
+	# FIXME: need a Map Controller for this, and all query_range's/get_position's
+	var myPositionVec = me.get_position();
+	myPosition.set_latlon( myPositionVec[0], myPositionVec[1]);
+	var max_dist_m = me.query_range()*NM2M;
+
+	# AI and Multiplayer traffic
+	foreach (var traffic; [model_root.getChildren("aircraft"), model_root.getChildren("multiplayer")])
+		foreach(var t; traffic) {
+			pos.set_latlon(t.getValue("position/latitude-deg"),
+				           t.getValue("position/longitude-deg"));
+
+			if (pos.distance_to( myPosition ) <= max_dist_m )
+				append(result, TrafficModel.new(t, nil, me.layer));
+		}
+
+	#debug.dump(result);
+	#return [];
+	return result;
+};
+

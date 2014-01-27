@@ -14,22 +14,21 @@ var new = func(layer) {
 		layer: layer,
 		listeners: [],
 		query_range_nm: 25,
-		query_type:'vor',
 	};
 	return m;
 };
 var del = func() {
-	#print("VOR.lcontroller.del()");
+	#print(name~"VOR.lcontroller.del()");
 	foreach (var l; me.listeners)
 		removelistener(l);
 };
 
 var searchCmd = func {
-	#print("Running query: WPT");
+	#print("Running query: "~name);
 	
 	var fp = flightplan();
 	var fpSize = fp.getPlanSize();
- 	var result = [];
+	var result = [];
 	for (var i = 1; i <fpSize; i+=1)
 		append(result, fp.getWP(i).path()[0] );
 

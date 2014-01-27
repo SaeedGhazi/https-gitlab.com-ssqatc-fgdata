@@ -132,12 +132,11 @@ var NDStyles = {
 			{ name:'DME', isMapStructure:1, update_on:['toggle_range','toggle_stations'],
 				# FIXME: this is a really ugly place for controller code
 				predicate: func(nd, layer) {
+					var visible = nd.get_switch('toggle_stations') and nd.in_mode('toggle_display_mode', ['MAP']) and (nd.rangeNm() <= 40);
 					# print("Running vor layer predicate");
 					# toggle visibility here
-					layer.group.setVisible( nd.get_switch('toggle_stations') );
-					if (nd.rangeNm() <= 40 and
-					    nd.get_switch('toggle_stations') and
-					    nd.get_switch('toggle_display_mode') == "MAP") {
+					layer.group.setVisible( visible );
+					if (visible) {
 						#print("Updating MapStructure ND layer: DME");
 						# (Hopefully) smart update
 						layer.update();
@@ -145,12 +144,22 @@ var NDStyles = {
 				}, # end of layer update predicate
 			}, # end of DME layer
 
-			{ name:'mp-traffic', update_on:['toggle_range','toggle_traffic'],
+			{ name:'mp-traffic', disabled:1, update_on:['toggle_range','toggle_traffic'],
 				predicate: func(nd, layer) {
 					var visible = nd.get_switch('toggle_traffic');
 					layer._view.setVisible( visible );
 					if (visible) {
 						trigger_update( layer ); # clear & redraw
+					}
+				}, # end of layer update predicate
+			}, # end of traffic  layer
+			{ name:'TFC', isMapStructure:1, update_on:['toggle_range','toggle_traffic'],
+				predicate: func(nd, layer) {
+					var visible = nd.get_switch('toggle_traffic');
+					layer.group.setVisible( visible );
+					if (visible) {
+						#print("Updating MapStructure ND layer: TFC");
+						layer.update();
 					}
 				}, # end of layer update predicate
 			}, # end of traffic  layer
@@ -560,6 +569,7 @@ var NavDisplay = {
 		}
 
 		var get_current_position = func {
+			delete(caller(0)[0], "me"); # remove local me, inherit outer one
 			return [
 				me.aircraft_source.get_lat(), me.aircraft_source.get_lon()
 			];
@@ -581,6 +591,8 @@ var NavDisplay = {
 		canvas.Symbol.Controller.get("VOR").query_range = controller.query_range;
 		canvas.Symbol.Controller.get("VOR").get_tuned_course = controller.get_tuned_course;
 		canvas.Symbol.Controller.get("DME").is_tuned = controller.is_tuned;
+		canvas.SymbolLayer.Controller.get("TFC").query_range = controller.query_range;
+		canvas.SymbolLayer.Controller.get("TFC").get_position = controller.get_position;
 
 		###
 		# set up various layers, controlled via callbacks in the controller hash

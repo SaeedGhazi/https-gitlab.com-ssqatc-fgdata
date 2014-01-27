@@ -1,0 +1,91 @@
+# Class things:
+var name = 'TFC';
+var parents = [DotSym];
+var __self__ = caller(0)[0];
+DotSym.makeinstance( name, __self__ );
+
+var element_type = "group"; # we want a group, becomes "me.element"
+var text_tcas = nil;
+var icon_tcas = nil;
+var arrow_tcas = [nil,nil];
+var arrow_type = nil;
+
+var draw_tcas_arrow = nil;
+
+var draw = func {
+	if (me.draw_tcas_arrow == nil)
+		me.draw_tcas_arrow = [
+			draw_tcas_arrow_above_500,
+			draw_tcas_arrow_below_500
+		];
+	#var callsign = me.model.getNode("callsign").getValue();
+	# print("Drawing traffic for:", callsign );
+	var threatLvl = me.controller.get_threat_lvl(me.model);
+	var vspeed = me.controller.get_vspd(me.model);
+	var altDiff = me.controller.get_alt_diff(me.model);
+	# Init
+	if (me.text_tcas == nil) {
+		me.text_tcas = me.element.createChild("text")
+			.setDrawMode( canvas.Text.TEXT )
+			.setText(sprintf("%+02.0f",altDiff/100))
+			.setFont("LiberationFonts/LiberationSans-Regular.ttf")
+			.setColor(1,1,1)
+			.setFontSize(28)
+			.setAlignment("center-center");
+		me.icon_tcas = me.element.createChild("path")
+			.setStrokeLineWidth(3);
+	}
+	# Update
+	if (altDiff > 0)
+		me.text_tcas.setTranslation(0,-40);
+	else
+		me.text_tcas.setTranslation(0,40);
+	var arrow_type = (vspeed >= 500);
+	if (arrow_type != me.arrow_type) {
+		(old_type, me.arrow_type) = (me.arrow_type, arrow_type);
+		if (old_type != nil and me.arrow_tcas[old_type] != nil) me.arrow_tcas[old_type].hide();
+		if (me.arrow_tcas[arrow_type] == nil)
+			me.arrow_tcas[arrow_type] = me.draw_tcas_arrow[arrow_type](me.element);
+		me.arrow_tcas[arrow_type].show();
+	}
+	## TODO: threat level symbols should also be moved to *.draw files
+	if (threatLvl == 3) {
+		# resolution advisory
+		me.icon_tcas.moveTo(-17,-17)
+			.horiz(34)
+			.vert(34)
+			.horiz(-34)
+			.close()
+			.setColor(1,0,0)
+			.setColorFill(1,0,0);
+		me.text_tcas.setColor(1,0,0);
+		me.arrow_tcas.setColor(1,0,0);
+	} elsif (threatLvl == 2) {
+		# traffic advisory
+		me.icon_tcas.moveTo(-17,0)
+			.arcSmallCW(17,17,0,34,0)
+			.arcSmallCW(17,17,0,-34,0)
+			.setColor(1,0.5,0)
+			.setColorFill(1,0.5,0);
+		me.text_tcas.setColor(1,0.5,0);
+		me.arrow_tcas.setColor(1,0.5,0);
+	} elsif (threatLvl == 1) {
+		# proximate traffic
+		me.icon_tcas.moveTo(-10,0)
+			.lineTo(0,-17)
+			.lineTo(10,0)
+			.lineTo(0,17)
+			.close()
+			.setColor(1,1,1)
+			.setColorFill(1,1,1);
+	} else {
+		# other traffic
+		me.icon_tcas.moveTo(-10,0)
+			.lineTo(0,-17)
+			.lineTo(10,0)
+			.lineTo(0,17)
+			.close()
+			.setColor(1,1,1);
+	}
+};
+

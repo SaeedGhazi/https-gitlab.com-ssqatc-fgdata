@@ -170,7 +170,7 @@ Symbol.Controller = {
 	# Return whether this symbol/object is visible:
 	isVisible: func(model) return 1,
 	# Get the position of this symbol/object:
-	getpos: func(model), # default provided below
+	getpos: func(model) , # default provided below
 }; # of Symbol.Controller
 
 var getpos_fromghost = func(positioned_g)
@@ -187,11 +187,32 @@ Symbol.Controller.getpos = func(obj) {
 	if (typeof(obj) == 'hash')
 		if (isa(obj, geo.Coord))
 			return obj.latlon();
+		if (isa(obj, props.Node))
+			return [
+				obj.getValue("position/latitude-deg")  or obj.getValue("latitude-deg"),
+				obj.getValue("position/longitude-deg") or obj.getValue("longitude-deg")
+			];
 		if (contains(obj,'lat') and contains(obj,'lon'))
 			return [obj.lat, obj.lon];
 
 	debug.dump(obj);
 	die("no suitable getpos() found! Of type: "~typeof(obj));
+};
+
+Symbol.Controller.equals = func(l, r) {
+	if (l == r) return 1;
+	var t = typeof(l);
+	if (t == 'ghost')
+		return 0;#l.id == r.id;
+	if (t == 'hash')
+		if (isa(l, props.Node))
+			return l.equals(r);
+		else {
+			foreach (var k; keys(l))
+				if (l[k] != r[k]) return 0;
+			return 1;
+		}
+	die("bad types");
 };
 
 
@@ -306,6 +327,7 @@ var SymbolLayer = {
 			group: group.createChild("group", me.id), # TODO: the id is not properly set, but would be useful for debugging purposes (VOR, FIXES, NDB etc)
 			list: [],
 		};
+		m.searcher = geo.PositionedSearch.new(me.searchCmd, me.onAdded, me.onRemoved, m);
 		# FIXME: hack to expose type of layer:
 		if (caller(1)[1] == Map.addLayer) {
 			var this_type = caller(1)[0].type_arg;
@@ -323,7 +345,6 @@ var SymbolLayer = {
 		if (controller.parents[0].parents[0] != SymbolLayer.Controller)
 			die("OOP error");
 		m.controller = controller;
-		m.searcher = geo.PositionedSearch.new(me.searchCmd, me.onAdded, me.onRemoved, m);
 		m.update();
 		return m;
 	},
@@ -338,12 +359,13 @@ var SymbolLayer = {
 		foreach (var e; me.list)
 			e.del();
 	},
-	findsym: func(positioned_g, del=0) {
+	findsym: func(model, del=0) {
 		forindex (var i; me.list) {
 			var e = me.list[i];
-			if (geo.PositionedSearch._equals(e.model, positioned_g)) {
+			if (Symbol.Controller.equals(e.model, model)) {
 				if (del) {
 					# Remove this element from the list
+					# TODO: maybe C function for this? extend pop() to accept index?
 					var prev = subvec(me.list, 0, i);
 					var next = subvec(me.list, i+1);
 					me.list = prev~next;
@@ -355,11 +377,11 @@ var SymbolLayer = {
 	},
 	searchCmd: func() me.controller.searchCmd(),
 	# Adds a symbol.
-	onAdded: func(positioned_g)
-		append(me.list, Symbol.new(me.type, me.group, positioned_g)),
-	# Removes a symbol
-	onRemoved: func(positioned_g)
-		me.findsym(positioned_g, 1).del(),
+	onAdded: func(model)
+		append(me.list, Symbol.new(me.type, me.group, model)),
+	# Removes a symbol.
+	onRemoved: func(model)
+		me.findsym(model, 1).del(),
 }; # of SymbolLayer
 
 # Class to manage controlling a #SymbolLayer.
@@ -397,7 +419,7 @@ var CompassLayer = {
 var AltitudeArcLayer = {
 };
 
-load_MapStructure = func {
+var load_MapStructure = func {
 	Map.Controller = {
 	# Static/singleton:
 		registry: {},
@@ -453,7 +475,7 @@ load_MapStructure = func {
 		load(FG_ROOT~"/Nasal/canvas/map/"~name~".scontroller", name);
 		}
 
-		foreach( var name; ['VOR','FIX','NDB','DME','WPT'] )
+		foreach( var name; ['VOR','FIX','NDB','DME','WPT','TFC'] )
 			load_deps( name );
 		load(FG_ROOT~"/Nasal/canvas/map/aircraftpos.controller", name);
 

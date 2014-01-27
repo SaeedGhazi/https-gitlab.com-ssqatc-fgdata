@@ -341,17 +341,45 @@ var PositionedSearch = {
 		};
 	},
 	_equals: func(a,b) {
-		if (a == nil or b == nil) return 0;
-		return (a == b or a.id == b.id);
+		return a == b; # positioned objects are created once
+		#return (a == b or a.id == b.id);
+	},
+	condense: func(vec) {
+		var ret = [];
+		foreach (var e; vec)
+			if (e != nil) append(ret, e);
+		return ret;
+	},
+	diff: func(old, new) {
+		var removed = old~[]; #copyvec
+		var added = new~[];
+		# Mark common elements from removed and added:
+		forindex (OUTER; var i; removed)
+			forindex (var j; new)
+				if (removed[i] != nil and added[j] != nil and me._equals(removed[i], added[j])) {
+					removed[i] = added[j] = nil;
+					continue OUTER;
+				}
+		# And remove those common elements, returning the result:
+		return [new, me.condense(removed), me.condense(added)];
 	},
 	update: func(searchCmd=nil) {
 		if (searchCmd == nil) searchCmd = me.searchCmd;
-		var old = me.result~[]; #copyvec
-		me.result = call(searchCmd, nil, me.obj);
-		positioned.diff( old,
-										 me.result,
-										 func call(me.onAdded, arg, me.obj),
-										 func call(me.onRemoved, arg, me.obj) );
+		if (me._equals == PositionedSearch._equals) {
+			# Optimized search using C code
+			var old = me.result~[]; #copyvec
+			me.result = call(searchCmd, nil, me.obj);
+			positioned.diff( old,
+			                 me.result,
+			                 func call(me.onAdded, arg, me.obj),
+			                 func call(me.onRemoved, arg, me.obj) );
+		} else {
+			(me.result, var removed, var added) = me.diff(me.result, call(searchCmd, nil, me.obj));
+			foreach (var e; removed)
+				call(me.onRemoved, [e], me.obj);
+			foreach (var e; added)
+				call(me.onAdded, [e], me.obj);
+		}
 	},
 	# this is the worst case scenario: switching from 640 to 320 (or vice versa)
 	test: func(from=640, to=320) {

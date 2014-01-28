@@ -380,8 +380,13 @@ var SymbolLayer = {
 	onAdded: func(model)
 		append(me.list, Symbol.new(me.type, me.group, model)),
 	# Removes a symbol.
-	onRemoved: func(model)
-		me.findsym(model, 1).del(),
+	onRemoved: func(model) {
+		if (me.findsym(model, 1)) die("model not found");
+		call(func model.del, nil, var err = []);
+		# ignore errors
+		# TODO: ignore only missing member del() errors? and only from the above line?
+		# Note: die(err[0]) rethrows it; die(err[0]~"") does not.
+	},
 }; # of SymbolLayer
 
 # Class to manage controlling a #SymbolLayer.

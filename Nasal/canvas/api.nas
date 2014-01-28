@@ -422,7 +422,7 @@ var Map = {
   df_controller: nil,
   new: func(ghost)
   {
-    return { parents: [Map, Group.new(ghost)] }.setController();
+    return { parents: [Map, Group.new(ghost)], layers:{} }.setController();
   },
   del: func()
   {
@@ -451,9 +451,6 @@ var Map = {
   },
   addLayer: func(factory, type_arg=nil, priority=nil)
   {
-    if (!contains(me, "layers"))
-      me.layers = {};
-
     if(contains(me.layers, type_arg))
       print("addLayer() warning: overwriting existing layer:", type_arg);
 

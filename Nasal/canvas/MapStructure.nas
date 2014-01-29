@@ -186,7 +186,7 @@ Symbol.Controller.getpos = func(obj) {
 			die("bad ghost of type '"~ghosttype(obj)~"'");
 	if (typeof(obj) == 'hash')
 		if (isa(obj, geo.Coord))
-			return obj.latlon();
+			return subvec(obj.latlon(), 0, 2);
 		if (isa(obj, props.Node))
 			return [
 				obj.getValue("position/latitude-deg")  or obj.getValue("latitude-deg"),

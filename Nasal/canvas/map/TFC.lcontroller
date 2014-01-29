@@ -21,18 +21,22 @@ var new = func(layer) {
 	# Listen to ai model events
 	append(m.listeners, setlistener(
 		model_root.getNode("model-added"), func(n) {
+			#printlog(_MP_dbg_lvl, "Dynamically adding model at "~n.getValue());
 			var node = props.globals.getNode(n.getValue());
 			var name = node.getName();
 			if (name == "aircraft" or name == "multiplayer")
-				layer.onAdded(TrafficModel.new(node));
+				if (m.in_range(node.getValue("position/latitude-deg"), node.getValue("position/longitude-deg")))
+					layer.onAdded(TrafficModel.new(node));
 		}
 	));
 	append(m.listeners, setlistener(
 		model_root.getNode("model-removed"), func(n) {
+			#printlog(_MP_dbg_lvl, "Dynamically deleting model at "~n.getValue());
 			var node = props.globals.getNode(n.getValue());
 			var name = node.getName();
 			if (name == "aircraft" or name == "multiplayer")
-				layer.onRemoved(TrafficModel.new(node));
+				if (m.in_range(node.getValue("position/latitude-deg"), node.getValue("position/longitude-deg")))
+					layer.onRemoved(TrafficModel.new(node));
 		}
 	));
 	layer.searcher._equals = func(l,r) l.equals(r);
@@ -43,6 +47,19 @@ var del = func() {
 	foreach (var l; me.listeners)
 		removelistener(l);
 };
+var in_range = func(lat,lon,myPositionVec=nil,max_dist_m=nil) {
+	if (lat == nil or lon == nil) return 0;
+	var pos = geo.Coord.new();
+	pos.set_latlon(lat,lon);
+	var myPosition = geo.Coord.new();
+	# FIXME: need a Map Controller for this, and all query_range's/get_position's
+	if (myPositionVec == nil)
+		var myPositionVec = me.get_position();
+	myPosition.set_latlon( myPositionVec[0], myPositionVec[1]);
+	if (max_dist_m == nil)
+		var max_dist_m = me.query_range()*NM2M;
+	return (pos.distance_to( myPosition ) <= max_dist_m )
+};
 
 var TrafficModel = {
 	new: func(node, id=nil, layer=nil) {
@@ -50,13 +67,14 @@ var TrafficModel = {
 		var m = {
 			# Note: because this inherits from props.Node, Symbol.Controller.equals
 			# will call l.equals(r) -- the one defined below
-			parents: [TrafficModel, geo.Coord, node],
+			parents: [TrafficModel, geo.Coord, node], # note we don't implement a full geo.Coord API
 			id: id,
 			node: node,
-			pos: node.getNode("position"),
+			pos: node.getNode("position",1),
 		};
 		if (m.pos == nil)
 			m.latlon = func [nil,nil,nil];
+		#debug.dump(m); # why doesn't this print?
 		return m;
 	},
 	equals: func(other) other.id == me.id,
@@ -74,22 +92,20 @@ var searchCmd = func {
 	#print("Doing query: "~name);
 
 	var result = [];
-	var pos = geo.Coord.new(); # FIXME: all of these should be instance variables
-	var myPosition = geo.Coord.new();
 	# FIXME: need a Map Controller for this, and all query_range's/get_position's
 	var myPositionVec = me.get_position();
-	myPosition.set_latlon( myPositionVec[0], myPositionVec[1]);
 	var max_dist_m = me.query_range()*NM2M;
 
 	# AI and Multiplayer traffic
-	foreach (var traffic; [model_root.getChildren("aircraft"), model_root.getChildren("multiplayer")])
+	foreach (var traffic; [model_root.getChildren("aircraft"), model_root.getChildren("multiplayer")]) {
 		foreach(var t; traffic) {
-			pos.set_latlon(t.getValue("position/latitude-deg"),
-				           t.getValue("position/longitude-deg"));
-
-			if (pos.distance_to( myPosition ) <= max_dist_m )
+			if (me.in_range(t.getValue("position/latitude-deg"),
+				            t.getValue("position/longitude-deg"),
+				            myPositionVec,
+				            max_dist_m))
 				append(result, TrafficModel.new(t, nil, me.layer));
 		}
+	}
 
 	#debug.dump(result);
 	#return [];

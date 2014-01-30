@@ -241,6 +241,49 @@ replace = func(str, old, new) {
 })(); # end tamper-proof environment
 
 
+##
+# Get a function out of a string template for fast insertion of template
+# parameters. This allows to use the same templates as with most available tile
+# mapping engines (eg. Leaflet, Polymaps). Return a callable function object on
+# success, and nil if parsing the templated fails.
+#
+#  Example (Build MapQuest tile url):
+#
+#    var makeUrl = string.compileTemplate(
+#      "http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg"
+#    );
+#    print( makeUrl({x: 5, y: 4, z: 3}) );
+#
+#  Output:
+#
+#    http://otile1.mqcdn.com/tiles/1.0.0/map/3/5/4.jpg
+#
+var compileTemplate = func(template)
+{
+	# See http://james.padolsey.com/javascript/straight-up-interpolation/
+	var code = '';
+	var start = 0;
+	var end = 0;
+	while( (start = template.find('{', end)) >= 0 )
+	{
+		if( end > 0 )
+			code ~= '~';
+		code ~= '"' ~ substr(template, end, start - end) ~ '"';
+		if( (end = template.find('}', start)) < 0 )
+		{
+			debug.warn("string.compileTemplate: unclosed '{' (" ~ template ~ ")");
+			return nil;
+		}
+
+		code ~= '~arg[0]["' ~ substr(template, start + 1, end - start - 1) ~ '"]';
+		end += 1;
+	}
+	if( end >= 0 )
+		code ~= '~"' ~ substr(template, end, size(template) - end) ~ '"';
+	code ~= ';';
+
+	return compile(code);
+}
 
 
 ##

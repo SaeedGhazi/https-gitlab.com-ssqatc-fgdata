@@ -530,6 +530,12 @@ else if (type == "Cirrocumulus") {
 		else {path = "Models/Weather/cirrocumulus10.xml";}
 		}	
 	}
+else if (type=="Noctilucent") {
+		if (rn>0.75) {path = "Models/Weather/noctilucent7.xml";}
+		else if (rn > 0.5) {path = "Models/Weather/noctilucent8.xml";}
+		else if (rn > 0.25) {path = "Models/Weather/noctilucent9.xml";}
+		else  {path = "Models/Weather/noctilucent10.xml";}
+	}
 else if (type == "Cirrocumulus (cloudlet)") {
 
 	cloudAssembly = local_weather.cloud.new(type, subtype);

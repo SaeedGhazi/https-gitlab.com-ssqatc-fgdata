@@ -427,6 +427,8 @@
   <fog-structure type="double" userarchive="y">0.0</fog-structure>
   <cloud-self-shading type="double" userarchive="n">1.0</cloud-self-shading>
   <moonlight type="double" userarchive="n">0.0</moonlight>
+ <!-- config for noctilucent cloud generation -->
+  <create-noctilucent-clouds type="bool" userarchive="n">false</create-noctilucent-clouds>
   <!-- definitions for the environment at surface interface -->
   <surface>
     <scattering type="double" userarchive="n">0.7</scattering>

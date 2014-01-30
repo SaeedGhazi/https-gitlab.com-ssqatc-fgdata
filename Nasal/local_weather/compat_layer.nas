@@ -415,6 +415,9 @@ var tile_counter = getprop(lw~"tiles/tile-counter");
 var buffer_flag = getprop(lw~"config/buffer-flag");
 var d_max = weather_tile_management.cloud_view_distance + 1000.0;
 
+# noctilucent clouds should not be deleted with the tile, hence they're assigned to tile zero
+if (find("noctilucent",path) != -1)
+	{tile_counter=0;}
 
 # check if we deal with a convective cloud - no need to do this any more, convective clouds go via a different system
 

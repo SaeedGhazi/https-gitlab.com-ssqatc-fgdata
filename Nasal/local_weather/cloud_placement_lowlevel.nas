@@ -144,7 +144,7 @@ for (i=0; i< max_num_streaks; i=i+1)
 		}
 	
 	}
-	print("Cloud count: ",counter);
+	#print("Cloud count: ",counter);
 
 }
 

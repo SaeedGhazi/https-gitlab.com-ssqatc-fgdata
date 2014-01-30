@@ -1145,6 +1145,7 @@ for (var i = index; i < i_max; i = i+1)
 	for (var j = 0; j < s; j = j+1)
 		{
 		if (active_tile_list[j] == c.index) {flag = 1; break;}
+		if (c.index == 0) {flag =1; break;} # clouds in tile index 0 are special
 		}
 
 	if (flag == 0)

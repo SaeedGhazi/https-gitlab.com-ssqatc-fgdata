@@ -54,6 +54,17 @@ var dir_index = getprop(lw~"tiles/tmp/dir-index");
 
 local_weather.assemble_effect_array();
 
+# add a noctilucent cloud patch
+
+var tile_index = getprop("local-weather/tiles/tile-counter");
+ if ((tile_index == 1) and (getprop("environment/create-noctilucent-clouds")==1)) 
+	{
+	alpha = 0.0;
+	var blat = getprop(lw~"tiles/tmp/latitude-deg");
+	var blon = getprop(lw~"tiles/tmp/longitude-deg");
+	create_noctilucent_patch(blat, blon, 272000.0, alpha);
+	}
+
 # reset lighting
 
 local_weather.top_shade = 1.0;
@@ -4377,6 +4388,17 @@ if (local_weather.wxradar_support_flag == 1)
 }
 
 
+var create_noctilucent_patch = func (lat, lon, alt, alpha) {
+
+var phi = alpha * math.pi/180.0;
+
+var x = 2.0 * (rand()-0.5) * 40000;
+var y = 2.0 * (rand()-0.5) * 40000; 
+	
+
+local_weather.create_streak("Noctilucent",lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt,1500.0,20,10000.0,0.0, 3000.0, 8,10000.0,0.0,3000.0,alpha,1.5);
+
+}
 
 
 var create_2_8_cirrocumulus_patches = func (lat, lon, alt, alpha) {

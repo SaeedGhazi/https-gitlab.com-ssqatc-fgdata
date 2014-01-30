@@ -4081,7 +4081,12 @@ setlistener(lw~"config/target-framerate", func {target_framerate = getprop(lw~"c
 
 setlistener(lw~"config/small-scale-persistence", func {weather_tiles.small_scale_persistence = getprop(lw~"config/small-scale-persistence");});
 setlistener(lw~"config/ground-haze-factor", func {ground_haze_factor = getprop(lw~"config/ground-haze-factor");});
-setlistener(lw~"config/aux-max-vis-range-m", func {max_vis_range = math.exp(getprop(lw~"config/aux-max-vis-range-m")); setprop(lw~"config/max-vis-range-m",max_vis_range);});
+setlistener(lw~"config/aux-max-vis-range-m", func {
+	max_vis_range = math.exp(getprop(lw~"config/aux-max-vis-range-m")); 
+	setprop(lw~"config/max-vis-range-m",max_vis_range);
+	if (max_vis_range>120000.0){setprop("/sim/rendering/camera-group/zfar",max_vis_range);}
+	});
+
 
 setlistener(lw~"config/temperature-offset-degc", func {temperature_offset = getprop(lw~"config/temperature-offset-degc");});
 
@@ -4396,7 +4401,7 @@ var ec = "/environment/config/";
 
 # a hash map of the strength for convection associated with terrain types
 
-var landcover_map = {BuiltUpCover: 0.35, Town: 0.35, Freeway:0.35, BarrenCover:0.3, HerbTundraCover: 0.25, GrassCover: 0.2, CropGrassCover: 0.2, EvergreenBroadCover: 0.2, EvergreenNeedleCover: 0.2, Sand: 0.25, Grass: 0.2, Grassland: 0.2, Ocean: 0.01, Marsh: 0.05, Lake: 0.01, ShrubCover: 0.15, Landmass: 0.2, CropWoodCover: 0.15, MixedForestCover: 0.15, DryCropPastureCover: 0.25, MixedCropPastureCover: 0.2, IrrCropPastureCover: 0.15, DeciduousBroadCover: 0.1, DeciduousNeedleCover: 0.1, Bog: 0.05, pa_taxiway : 0.35, pa_tiedown: 0.35, pc_taxiway: 0.35, pc_tiedown: 0.35, Glacier: 0.03, SnowCover: 0.04, DryLake: 0.3, IntermittentStream: 0.2, DryCrop: 0.2, Lava: 0.3, GolfCourse: 0.2, Rock: 0.3, Construction: 0.35, PackIce: 0.04, NaturalCrop: 0.2};
+var landcover_map = {BuiltUpCover: 0.35, Town: 0.35, Freeway:0.35, BarrenCover:0.3, HerbTundraCover: 0.25, GrassCover: 0.2, CropGrassCover: 0.2, EvergreenBroadCover: 0.2, EvergreenNeedleCover: 0.2, Sand: 0.25, Grass: 0.2, Grassland: 0.2, Ocean: 0.01, Marsh: 0.05, Lake: 0.01, ShrubCover: 0.15, Landmass: 0.2, CropWoodCover: 0.15, MixedForestCover: 0.15, DryCropPastureCover: 0.25, MixedCropPastureCover: 0.2, MixedCrop: 0.2, IrrCropPastureCover: 0.15, DeciduousBroadCover: 0.1, DeciduousNeedleCover: 0.1, Bog: 0.05, Littoral: 0.05, pa_taxiway : 0.35, pa_tiedown: 0.35, pc_taxiway: 0.35, pc_tiedown: 0.35, Glacier: 0.03, SnowCover: 0.04, DryLake: 0.3, IntermittentStream: 0.2, DryCrop: 0.2, Lava: 0.3, GolfCourse: 0.2, Rock: 0.3, Construction: 0.35, PackIce: 0.04, NaturalCrop: 0.2};
 
 # a hash map of average vertical cloud model sizes
 
@@ -4523,7 +4528,7 @@ var scattering_shader_flag = 0;
 var wxradar_support_flag = 1;
 
 var ground_haze_factor = 1.0;
-var max_vis_range = 120000.0;
+var max_vis_range = math.exp(getprop(lw~"config/aux-max-vis-range-m")); 
 var temperature_offset = 0.0;
 var current_mean_alt = 0.0;
 var air_pollution_norm = 0.0;

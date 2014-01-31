@@ -208,14 +208,23 @@ var NDStyles = {
 				id: 'tas',
 				impl: {
 					init: func(nd,symbol),
-					predicate: func(nd) getprop("/velocities/airspeed-kt") > 100,
+					predicate: func(nd) nd.aircraft_source.get_spd() > 100,
 					is_true: func(nd) {
 						nd.symbols.tas.setText(sprintf("%3.0f",getprop("/velocities/airspeed-kt") ));
 						nd.symbols.tas.show();
 					},
 					is_false: func(nd) nd.symbols.tas.hide(),
-				}, # end of tas behavior callbacks
-			}, # end of tas hash
+				},
+			},
+			{
+				id: 'tasLbl',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) nd.aircraft_source.get_spd() > 100,
+					is_true: func(nd) nd.symbols.tasLbl.show(),
+					is_false: func(nd) nd.symbols.tasLbl.hide(),
+				},
+			},
 			{
 				id: 'wpActiveId',
 				impl: {
@@ -234,12 +243,21 @@ var NDStyles = {
 					init: func(nd,symbol),
 					predicate: func(nd) getprop("/autopilot/route-manager/wp/dist") != nil and getprop("autopilot/route-manager/active"),
 					is_true: func(nd) {
-						nd.symbols.wpActiveDist.setText(sprintf("%3.01fNM",getprop("/autopilot/route-manager/wp/dist")));
+						nd.symbols.wpActiveDist.setText(sprintf("%3.01f",getprop("/autopilot/route-manager/wp/dist")));
 						nd.symbols.wpActiveDist.show();
 					},
 					is_false: func(nd) nd.symbols.wpActiveDist.hide(),
-				}, # of wpActiveDist.impl
-			}, # of wpActiveDist
+				},
+			},
+			{
+				id: 'wpActiveDistLbl',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) getprop("/autopilot/route-manager/wp/dist") != nil and getprop("autopilot/route-manager/active"),
+					is_true: func(nd) nd.symbols.wpActiveDistLbl.show(),
+					is_false: func(nd) nd.symbols.wpActiveDistLbl.hide(),
+				},
+			},
 			{
 				id: 'eta',
 				impl: {
@@ -252,8 +270,8 @@ var NDStyles = {
 						etaSec=etaSec-3600*h;
 						var m = math.floor(etaSec/60);
 						etaSec=etaSec-60*m;
-						var s = etaSec;
-						nd.symbols.eta.setText(sprintf("%02.0f%02.0f.%02.0fz",h,m,s));
+						var s = etaSec/10;
+						nd.symbols.eta.setText(sprintf("%02.0f%02.0f.%01.0fz",h,m,s));
 						nd.symbols.eta.show();
 					},
 					is_false: func(nd) nd.symbols.eta.hide(),
@@ -272,14 +290,14 @@ var NDStyles = {
 				id:'gs',
 				impl: {
 					init: func(nd,symbol),
-					common: func(nd) nd.symbols.gs.setText(sprintf("%3.0f",nd.aircraft_source.get_spd() )),
-					predicate: func(nd) nd.aircraft_source.get_spd() >= 30,
+					common: func(nd) nd.symbols.gs.setText(sprintf("%3.0f",nd.aircraft_source.get_gnd_spd() )),
+					predicate: func(nd) nd.aircraft_source.get_gnd_spd() >= 30,
 					is_true: func(nd) {
 						nd.symbols.gs.setFontSize(36);
 					},
 					is_false: func(nd) nd.symbols.gs.setFontSize(52),
-				}, # of gs.impl
-			}, # of gs
+				},
+			},
 			{
 				id:'rangeArcs',
 				impl: {
@@ -289,7 +307,69 @@ var NDStyles = {
 					is_false: func(nd) nd.symbols.rangeArcs.hide(),
 				}, # of rangeArcs.impl
 			}, # of rangeArcs
-
+			{
+				id:'rangePln1',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) nd.get_switch('toggle_display_mode') == "PLAN",
+					is_true: func(nd) { 
+						nd.symbols.rangePln1.show();
+						nd.symbols.rangePln1.setText(sprintf("%3.0f",nd.rangeNm()));
+					},
+					is_false: func(nd) nd.symbols.rangePln1.hide(),
+				},
+			},
+			{
+				id:'rangePln2',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) nd.get_switch('toggle_display_mode') == "PLAN",
+					is_true: func(nd) { 
+						nd.symbols.rangePln2.show();
+						nd.symbols.rangePln2.setText(sprintf("%3.0f",nd.rangeNm()/2));
+					},
+					is_false: func(nd) nd.symbols.rangePln2.hide(),
+				},
+			},
+			{
+				id:'rangePln3',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) nd.get_switch('toggle_display_mode') == "PLAN",
+					is_true: func(nd) { 
+						nd.symbols.rangePln3.show();
+						nd.symbols.rangePln3.setText(sprintf("%3.0f",nd.rangeNm()/2));
+					},
+					is_false: func(nd) nd.symbols.rangePln3.hide(),
+				},
+			},
+			{
+				id:'rangePln4',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) nd.get_switch('toggle_display_mode') == "PLAN",
+					is_true: func(nd) { 
+						nd.symbols.rangePln4.show();
+						nd.symbols.rangePln4.setText(sprintf("%3.0f",nd.rangeNm()));
+					},
+					is_false: func(nd) nd.symbols.rangePln4.hide(),
+				},
+			},
+			{
+				id:'windArrow',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (!(nd.in_mode('toggle_display_mode', ['PLAN']) and (nd.get_switch('toggle_display_type') == "LCD")) and nd.aircraft_source.get_spd() > 100),
+					is_true: func(nd) {
+						nd.symbols.windArrow.show();
+						var windArrowRot = (nd.aircraft_source.get_hdg_tru()-nd.aircraft_source.get_trk_tru())*D2R;
+						if(nd.in_mode('toggle_display_mode', ['MAP','PLAN']))
+							windArrowRot = 2*windArrowRot;
+						nd.symbols.windArrow.setRotation(windArrowRot);
+					},
+					is_false: func(nd) nd.symbols.windArrow.hide(),
+				},
+			},
 
 		], # end of vector with features
 
@@ -337,7 +417,8 @@ NDSourceDriver.new = func {
 	};
 	m.get_lat= func getprop("/position/latitude-deg");
 	m.get_lon= func getprop("/position/longitude-deg");
-	m.get_spd= func getprop("/velocities/groundspeed-kt");
+	m.get_spd= func getprop("/velocities/airspeed-kt");
+	m.get_gnd_spd= func getprop("/velocities/groundspeed-kt");
 	m.get_vspd= func getprop("/velocities/vertical-speed-fps");
 	return m;
 }
@@ -444,6 +525,7 @@ var NavDisplay = {
 			get_lat: func source.getNode('position/latitude-deg').getValue(),
 			get_lon: func source.getNode('position/longitude-deg').getValue(),
 			get_spd: func source.getNode('velocities/true-airspeed-kt').getValue(),
+			get_gnd_spd: func source.getNode('velocities/groundspeed-kt').getValue(),
 		};
 	}, # of connectAI
 
@@ -520,7 +602,7 @@ var NavDisplay = {
 
 		foreach(var feature; me.nd_style.features ) {
 			# print("Setting up SVG feature:", feature.id);
-			me.symbols[feature.id] = me.nd.getElementById(feature.id);
+			me.symbols[feature.id] = me.nd.getElementById(feature.id).updateCenter();
 			if(contains(feature.impl,'init')) feature.impl.init(me.nd, feature); # call The element's init code (i.e. updateCenter)
 		}
 
@@ -534,7 +616,7 @@ var NavDisplay = {
 		# load elements from vector image, and create instance variables using identical names, and call updateCenter() on each
 		# anything that needs updatecenter called, should be added to the vector here
 		#
-		foreach(var element; ["windArrow","compassApp","northUp","aplSymMap","aplSymMapCtr","aplSymVor",
+		foreach(var element; ["compassApp","northUp","aplSymMap","aplSymMapCtr","aplSymVor",
 		                      "staFromL2","staToL2","staFromR2","staToR2",
 		                      "locPtr","hdgTrk","truMag","altArc","planArcs",
 		                      "trkInd","compass","HdgBugCRT","TrkBugLCD","HdgBugLCD","selHdgLine","curHdgPtr",
@@ -646,23 +728,11 @@ var NavDisplay = {
 			#	me.drawdme();
 			});
 		# TODO: move this to the route.model
-		# Hack to draw the route on rm activation
-		me.listen("/autopilot/route-manager/active", func(active) {
-			if(active.getValue()) {
-				me.drawroute();
-				me.drawrunways();
-			} else {
-				#print("TODO: navdisplay.mfd: implement route-manager/layer clearing!");
-				#me.route_group.removeAllChildren(); # HACK!
-			}
-		});
 		me.listen("/autopilot/route-manager/current-wp", func(activeWp) {
 			canvas.updatewp( activeWp.getValue() );
 		});
 
 	},
-	drawroute: func print("drawroute no longer used!"),
-	drawrunways: func print("drawrunways no longer used!"),
 
 	in_mode:func(switch, modes)
 	{
@@ -701,11 +771,11 @@ var NavDisplay = {
 			var userHdg=userHdgMag;
 			var userTrk=userTrkMag;
 		}
-		if (me.aircraft_source.get_spd() < 80)
+		if (me.aircraft_source.get_gnd_spd() < 80)
 			userTrk = userHdg;
 		var userLat = me.aircraft_source.get_lat();
 		var userLon = me.aircraft_source.get_lon();
-		var userSpd = me.aircraft_source.get_spd();
+		var userGndSpd = me.aircraft_source.get_gnd_spd();
 		var userVSpd = me.aircraft_source.get_vspd();
 		var dispLCD = me.get_switch('toggle_display_type') == "LCD";
 
@@ -799,14 +869,12 @@ var NavDisplay = {
 
 		# reposition the map, change heading & range:
 		if(me.in_mode('toggle_display_mode', ['PLAN'])) {
-			me.symbols.windArrow.setVisible(!dispLCD);
 			me.map._node.getNode("hdg",1).setDoubleValue(0);
 			if (getprop(me.efis_path ~ "/inputs/plan-wpt-index") >= 0) {
 				me.map._node.getNode("ref-lat",1).setDoubleValue(getprop("/autopilot/route-manager/route/wp["~getprop(me.efis_path ~ "/inputs/plan-wpt-index")~"]/latitude-deg"));
 				me.map._node.getNode("ref-lon",1).setDoubleValue(getprop("/autopilot/route-manager/route/wp["~getprop(me.efis_path ~ "/inputs/plan-wpt-index")~"]/longitude-deg"));
 			}
 		} else {
-			me.symbols.windArrow.show();
 			me.map._node.getNode("ref-lat",1).setDoubleValue(userLat);
 			me.map._node.getNode("ref-lon",1).setDoubleValue(userLon);
 		}
@@ -834,7 +902,6 @@ var NavDisplay = {
 			me.symbols.compass.setRotation(-userTrk*D2R);
 			me.symbols.compassApp.setRotation(-userTrk*D2R);
 			me.symbols.hdgTrk.setText("TRK");
-			me.symbols.windArrow.setRotation((getprop("/environment/wind-from-heading-deg")-userTrk)*D2R);
 		}
 		if(me.in_mode('toggle_display_mode', ['APP','VOR'])) {
 			me.symbols.HdgBugCRT.setRotation((vhdg_bug-userHdg)*D2R);
@@ -850,7 +917,6 @@ var NavDisplay = {
 			me.symbols.compass.setRotation(-userHdg*D2R);
 			me.symbols.compassApp.setRotation(-userHdg*D2R);
 			me.symbols.hdgTrk.setText("HDG");
-			me.symbols.windArrow.setRotation((getprop("/environment/wind-from-heading-deg")-userHdg)*D2R);
 		}
 		if(me.get_switch('toggle_centered')) {
 			if (me.in_mode('toggle_display_mode', ['APP','VOR'])) {
@@ -1018,7 +1084,7 @@ var NavDisplay = {
 		if (abs(userVSpd) > 5) {
 			var altDiff = (getprop("autopilot/settings/target-altitude-ft") or 0)-(getprop("instrumentation/altimeter/indicated-altitude-ft") or 0);
 			if (abs(altDiff) > 50 and altDiff/userVSpd > 0) {
-				var altRangeNm = altDiff/userVSpd*userSpd*KT2MPS*M2NM;
+				var altRangeNm = altDiff/userVSpd*userGndSpd*KT2MPS*M2NM;
 				if(altRangeNm > 1) {
 					var altRangePx = (350/me.rangeNm())*altRangeNm;
 					if (altRangePx > 700)

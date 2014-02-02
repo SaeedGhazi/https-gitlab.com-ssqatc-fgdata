@@ -48,6 +48,8 @@ var isa = func(obj, class) {
 #
 var fgcommand = func(cmd, node=nil) {
     if(isa(node, props.Node)) node = node._g;
+    elsif(typeof(node) == 'hash')
+        node = props.Node.new(node)._g;
     _fgcommand(cmd, node);
 }
 
@@ -85,7 +87,8 @@ var abs = func(v) { return v < 0 ? -v : v }
 #
 var interpolate = func(node, val...) {
     if(isa(node, props.Node)) node = node._g;
-    elsif(typeof(node) != "scalar") return;
+    elsif(typeof(node) != "scalar" and typeof(node) != "ghost")
+        die("bad argument to interpolate()");
     _interpolate(node, val);
 }
 
@@ -101,6 +104,8 @@ var interpolate = func(node, val...) {
 #
 var setlistener = func(node, fn, init = 0, runtime = 1) {
     if(isa(node, props.Node)) node = node._g;
+    elsif(typeof(node) != "scalar" and typeof(node) != "ghost")
+        die("bad argument to setlistener()");
     var id = _setlistener(node, func(chg, lst, mode, is_child) {
         fn(props.wrapNode(chg), props.wrapNode(lst), mode, is_child);
     }, init, runtime);

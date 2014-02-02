@@ -2,7 +2,7 @@
 var parents = [Map.Controller];
 var __self__ = caller(0)[0];
 Map.Controller.add("Aircraft position", __self__);
-Map.df_controller = __self__;
+#Map.df_controller = __self__;
 var new = func(map) {
 	var m = {
 		parents: [__self__],

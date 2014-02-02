@@ -258,31 +258,89 @@ replace = func(str, old, new) {
 #
 #    http://otile1.mqcdn.com/tiles/1.0.0/map/3/5/4.jpg
 #
-var compileTemplate = func(template)
-{
-	# See http://james.padolsey.com/javascript/straight-up-interpolation/
-	var code = '';
-	var start = 0;
-	var end = 0;
-	while( (start = template.find('{', end)) >= 0 )
-	{
-		if( end > 0 )
-			code ~= '~';
-		code ~= '"' ~ substr(template, end, start - end) ~ '"';
-		if( (end = template.find('}', start)) < 0 )
+var compileTemplate = func(template, type=nil) {
+	var code = 'func(__ENV=nil) { string._template_getargs();';
+	if (type == nil or type == "simple_names") {
+		# See http://james.padolsey.com/javascript/straight-up-interpolation/
+		var code = '';
+		var start = 0;
+		var end = 0;
+		while( (start = template.find('{', end)) >= 0 )
 		{
-			debug.warn("string.compileTemplate: unclosed '{' (" ~ template ~ ")");
-			return nil;
+			if( end > 0 )
+				code ~= '~';
+			code ~= '"' ~ substr(template, end, start - end) ~ '"';
+			if( (end = template.find('}', start)) < 0 )
+			{
+				debug.warn("string.compileTemplate: unclosed '{' (" ~ template ~ ")");
+				return nil;
+			}
+
+			code ~= '~arg[0]["' ~ substr(template, start + 1, end - start - 1) ~ '"]';
+			end += 1;
 		}
-
-		code ~= '~arg[0]["' ~ substr(template, start + 1, end - start - 1) ~ '"]';
-		end += 1;
+		if( end >= 0 )
+			code ~= '~"' ~ substr(template, end, size(template) - end) ~ '"';
+		code ~= ';';
+	} elsif (type == "nasal_expression") {
+		var len = size(template);
+		var level = var start = var end = 0;
+		for (var i=0; i<len; i+=1) {
+			if ( end > 0 )
+				code ~= "~";
+			code ~= '"' ~ substr(template, end, start - end) ~ '"';
+			if (template[i] != `{`) continue;
+			level += 1; var skip = 0;
+			for (var j=i+1; j<len; j+=1)
+				if (template[j] == `{`) level += 1;
+				elsif (template[j] == `}`) level -= 1;
+				elsif (template[j] == `"`)
+					if (skip <= 1) skip = !skip;
+					else skip = 1;
+				elsif (skip and template[j] == "\\")
+					if (skip <= 1) skip = 2;
+					else skip = 1;
+			if (j >= len or template[j] != `}`)
+				die("string.compileTemplate: unclosed '{' (" ~ template ~ ")");
+			end = j;
+			code ~= '~(' ~ substr(template, start + 1, end - start - 1)~")";
+			end += 1;
+		}
+		if( end < len )
+			code ~= '~"' ~ substr(template, end, size(template) - end) ~ '"';
 	}
-	if( end >= 0 )
-		code ~= '~"' ~ substr(template, end, size(template) - end) ~ '"';
-	code ~= ';';
+	code ~= "}";
+	var fn = compile(code)(); # get the inside function with the argument __ENV=nil
+	var (ns,fn1) = caller(1);
+	return bind(fn, ns, fn1);
+}
 
-	return compile(code);
+##
+# Private function used by string.naCompileTemplate. Expands any __ENV parameter
+# into the locals of the caller. This allows both named arguments and manual hash
+# arguments via __ENV.
+#
+# Examples using (format = func(__ENV) {string._template_getargs()}):
+#
+# Pass arguments as hash:
+#   format({a: 1, "b ":2});
+# Or:
+#   format(__ENV:{a: 1, "b ":2});
+# Pass arguments as named:
+#   format(a: 1, "b ":2);
+# Pass arguments as both named and hash, using
+# __ENV to specify the latter:
+#   format(a: 1, __ENV:{"b ": 2});
+#
+var _template_getargs = func() {
+	var ns = caller(1)[0];
+	if (contains(ns, "__ENV")) {
+		var __ENV = ns.__ENV;
+		ns.__ENV = ns;
+		if (__ENV != nil)
+			foreach (var k; keys(__ENV))
+				ns[k] = __ENV[k];
+	}
 }
 
 

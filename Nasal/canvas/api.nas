@@ -443,9 +443,16 @@ var Map = {
       controller = Map.df_controller;
     elsif (typeof(controller) != 'hash')
       controller = Map.Controller.get(controller);
-    if (controller.parents[0] != Map.Controller)
-      die("OOP error");
-    me.controller = controller.new(me);
+    
+    if (controller == nil) {
+      me.controller = nil;
+    } else {
+      if (!isa(controller, Map.Controller))
+        die("OOP error: controller needs to inherit from Map.Controller");
+      me.controller = controller.new(me);
+      if (!isa(me.controller, controller))
+        die("OOP error: created instance needs to inherit from specific controller class");
+    }
 
     return me;
   },

@@ -81,7 +81,14 @@ var NDStyles = {
 					layer._view.setVisible(visible);
 				}, # end of layer update predicate
 			}, # end of storms layer
-
+			{ name:'airplaneSymbol', update_on:['toggle_display_mode'], 
+				predicate: func(nd, layer) {
+					var visible = nd.get_switch('toggle_display_mode') == "PLAN";
+					if (visible) {
+						trigger_update( layer );
+					} layer._view.setVisible(visible);
+				},
+			},
 			{ name:'airports-nd', update_on:['toggle_range','toggle_airports','toggle_display_mode'],
 				predicate: func(nd, layer) {
 					# print("Running airports-nd predicate");
@@ -226,6 +233,32 @@ var NDStyles = {
 				},
 			},
 			{
+				id: 'ilsFreq',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) nd.in_mode('toggle_display_mode', ['APP']),
+					is_true: func(nd) {
+						nd.symbols.ilsFreq.show();
+						if(getprop("instrumentation/nav/in-range"))
+							nd.symbols.ilsFreq.setText(getprop("instrumentation/nav/nav-id"));
+						else
+							nd.symbols.ilsFreq.setText(getprop("instrumentation/nav/frequencies/selected-mhz-fmt"));
+					},
+					is_false: func(nd) nd.symbols.ilsFreq.hide(),
+				},
+			},
+			{
+				id: 'ilsLbl',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) nd.in_mode('toggle_display_mode', ['APP']),
+					is_true: func(nd) {
+						nd.symbols.ilsLbl.show();
+					},
+					is_false: func(nd) nd.symbols.ilsLbl.hide(),
+				},
+			},
+			{
 				id: 'wpActiveId',
 				impl: {
 					init: func(nd,symbol),
@@ -278,14 +311,58 @@ var NDStyles = {
 				},  # of eta.impl
 			}, # of eta
 			{
+				id: 'gsGroup',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) nd.in_mode('toggle_display_mode', ['APP']),
+					is_true: func(nd) {
+						if(nd.get_switch('toggle_centered'))
+							nd.symbols.gsGroup.setTranslation(0,0);
+						else
+							nd.symbols.gsGroup.setTranslation(0,150);
+						nd.symbols.gsGroup.show();
+					},
+					is_false: func(nd) nd.symbols.gsGroup.hide(),
+				},
+			},
+			{
 				id:'hdg',
 				impl: {
 					init: func(nd,symbol),
-					predicate: ALWAYS, # always true
-					is_true: func(nd) nd.symbols.hdg.setText(sprintf("%03.0f", nd.aircraft_source.get_hdg_mag() )),
+					predicate: func(nd) nd.in_mode('toggle_display_mode', ['APP','MAP','VOR']),
+					is_true: func(nd) {
+						var hdgText = "";
+						if(nd.in_mode('toggle_display_mode', ['MAP'])) {
+							if(nd.get_switch('toggle_true_north'))
+								hdgText = nd.aircraft_source.get_trk_tru();
+							else
+								hdgText = nd.aircraft_source.get_trk_mag();
+						} else {
+							if(nd.get_switch('toggle_true_north'))
+								hdgText = nd.aircraft_source.get_hdg_tru();
+							else
+								hdgText = nd.aircraft_source.get_hdg_mag();
+						}
+						nd.symbols.hdg.setText(sprintf("%03.0f", hdgText+0.5));
+					},
 					is_false: NOTHING,
-				}, # of hdg.impl
-			}, # of hdg
+				},
+			},
+			{
+				id:'hdgGroup',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) nd.in_mode('toggle_display_mode', ['APP','MAP','VOR']),
+					is_true: func(nd) {
+						nd.symbols.hdgGroup.show();
+						if(nd.get_switch('toggle_centered'))
+							nd.symbols.hdgGroup.setTranslation(0,100);
+						else
+							nd.symbols.hdgGroup.setTranslation(0,0);
+					},
+					is_false: func(nd) nd.symbols.hdgGroup.hide(),
+				},
+			},
 			{
 				id:'gs',
 				impl: {
@@ -302,7 +379,7 @@ var NDStyles = {
 				id:'rangeArcs',
 				impl: {
 					init: func(nd,symbol),
-					predicate: func(nd) ((((nd.get_switch('toggle_display_mode') == "APP" or nd.get_switch('toggle_display_mode') == "VOR") and nd.get_switch('toggle_weather')) or nd.get_switch('toggle_display_mode') == "MAP") and (!nd.get_switch('toggle_centered'))),
+					predicate: func(nd) (((nd.in_mode('toggle_display_mode', ['APP','VOR']) and nd.get_switch('toggle_weather')) or nd.get_switch('toggle_display_mode') == "MAP") and (!nd.get_switch('toggle_centered'))),
 					is_true: func(nd) nd.symbols.rangeArcs.show(),
 					is_false: func(nd) nd.symbols.rangeArcs.hide(),
 				}, # of rangeArcs.impl
@@ -356,16 +433,155 @@ var NDStyles = {
 				},
 			},
 			{
+				id:'crsLbl',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) nd.in_mode('toggle_display_mode', ['APP','VOR']),
+					is_true: func(nd) nd.symbols.crsLbl.show(),
+					is_false: func(nd) nd.symbols.crsLbl.hide(),
+				},
+			},
+			{
+				id:'crs',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) nd.in_mode('toggle_display_mode', ['APP','VOR']),
+					is_true: func(nd) {
+						nd.symbols.crs.show();
+						if(getprop("instrumentation/nav/radials/selected-deg") != nil)
+							nd.symbols.crs.setText(sprintf("%03.0f",getprop("instrumentation/nav/radials/selected-deg")));
+					},
+					is_false: func(nd) nd.symbols.crs.hide(),
+				},
+			},
+			{
+				id:'dmeLbl',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) nd.in_mode('toggle_display_mode', ['APP','VOR']),
+					is_true: func(nd) nd.symbols.dmeLbl.show(),
+					is_false: func(nd) nd.symbols.dmeLbl.hide(),
+				},
+			},
+			{
+				id:'dme',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) nd.in_mode('toggle_display_mode', ['APP','VOR']),
+					is_true: func(nd) {
+						nd.symbols.dme.show();
+						if(getprop("instrumentation/nav/dme-in-range"))
+							nd.symbols.dme.setText(sprintf("%3.1f",getprop("instrumentation/nav/nav-distance")*0.000539));
+					},
+					is_false: func(nd) nd.symbols.dme.hide(),
+				},
+			},
+			{
+				id:'trkInd2',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['APP','VOR']) and nd.get_switch('toggle_centered')),
+					is_true: func(nd) { 
+						nd.symbols.trkInd2.show();
+						nd.symbols.trkInd2.setRotation((nd.aircraft_source.get_trk_tru()-nd.aircraft_source.get_hdg_tru())*D2R);
+					},
+					is_false: func(nd) nd.symbols.trkInd2.hide(),
+				},
+			},
+			{
+				id:'vorCrsPtr',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['APP','VOR']) and !nd.get_switch('toggle_centered')),
+					is_true: func(nd) {
+						nd.symbols.vorCrsPtr.show();
+						nd.symbols.vorCrsPtr.setRotation((getprop("instrumentation/nav/radials/selected-deg")-nd.aircraft_source.get_hdg_tru())*D2R);
+					},
+					is_false: func(nd) nd.symbols.vorCrsPtr.hide(),
+				},
+			},
+			{
+				id: 'gsDiamond',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) nd.in_mode('toggle_display_mode', ['APP']),
+					is_true: func(nd) {
+						if(getprop("instrumentation/nav/gs-needle-deflection-norm") != nil)
+							nd.symbols.gsDiamond.setTranslation(-getprop("instrumentation/nav/gs-needle-deflection-norm")*150,0);
+					},
+					is_false: func(nd) nd.symbols.gsGroup.hide(),
+				},
+			},
+			{
+				id:'locPtr',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['APP','VOR']) and !nd.get_switch('toggle_centered')),
+					is_true: func(nd) {
+						nd.symbols.locPtr.show();
+						var deflection = getprop("instrumentation/nav/heading-needle-deflection-norm");
+						nd.symbols.locPtr.setTranslation(deflection*150,0);
+						if(abs(deflection < 0.99))
+							nd.symbols.locPtr.setColorFill(1,0,1,1);
+						else
+							nd.symbols.locPtr.setColorFill(1,0,1,0);
+						nd.symbols.locPtr.setTranslation(0,-getprop("instrumentation/nav/heading-needle-deflection-norm")*150);
+					},
+					is_false: func(nd) nd.symbols.locPtr.hide(),
+				},
+			},
+			{
+				id:'locPtr2',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['APP','VOR']) and !nd.get_switch('toggle_centered') and getprop("instrumentation/nav/in-range")),
+					is_true: func(nd) {
+						nd.symbols.locPtr2.show();
+						var deflection = getprop("instrumentation/nav/heading-needle-deflection-norm");
+						nd.symbols.locPtr2.setTranslation(deflection*150,0);
+						if(abs(deflection < 0.99))
+							nd.symbols.locPtr2.setColorFill(1,0,1,1);
+						else
+							nd.symbols.locPtr2.setColorFill(1,0,1,0);
+						nd.symbols.locPtr2.setTranslation(0,-getprop("instrumentation/nav/heading-needle-deflection-norm")*150);
+					},
+					is_false: func(nd) nd.symbols.locPtr2.hide(),
+				},
+			},
+			{
+				id:'wind',
+				impl: {
+					init: func(nd,symbol),
+					predicate: ALWAYS,
+					is_true: func(nd) {
+						var windDir = getprop("environment/wind-from-heading-deg");
+						if(!nd.get_switch('toggle_true_north'))
+							windDir = windDir + getprop("environment/magnetic-variation-deg");
+						nd.symbols.wind.setText(sprintf("%03.0f / %02.0f",windDir,getprop("environment/wind-speed-kt")));
+					},
+					is_false: NOTHING,
+				},
+			},
+			{
 				id:'windArrow',
 				impl: {
 					init: func(nd,symbol),
 					predicate: func(nd) (!(nd.in_mode('toggle_display_mode', ['PLAN']) and (nd.get_switch('toggle_display_type') == "LCD")) and nd.aircraft_source.get_spd() > 100),
 					is_true: func(nd) {
 						nd.symbols.windArrow.show();
-						var windArrowRot = (nd.aircraft_source.get_hdg_tru()-nd.aircraft_source.get_trk_tru())*D2R;
-						if(nd.in_mode('toggle_display_mode', ['MAP','PLAN']))
-							windArrowRot = 2*windArrowRot;
-						nd.symbols.windArrow.setRotation(windArrowRot);
+						var windArrowRot = getprop("environment/wind-from-heading-deg");
+						if(nd.in_mode('toggle_display_mode', ['MAP','PLAN'])) {
+							if(nd.get_switch('toggle_true_north'))
+								windArrowRot = windArrowRot - nd.aircraft_source.get_trk_tru();
+							else
+								windArrowRot = windArrowRot - nd.aircraft_source.get_trk_mag();
+						} else {
+							if(nd.get_switch('toggle_true_north'))
+								windArrowRot = windArrowRot - nd.aircraft_source.get_hdg_tru();
+							else
+								windArrowRot = windArrowRot - nd.aircraft_source.get_hdg_mag();
+						}
+						nd.symbols.windArrow.setRotation(windArrowRot*D2R);
 					},
 					is_false: func(nd) nd.symbols.windArrow.hide(),
 				},
@@ -459,7 +675,7 @@ var update_weather = func {
 }
 update_weather();
 
-# Hack to update airplane symbol location on PLAN mode every 5 seconds
+# Hack to update airplane symbol location on PLAN mode every second
 var update_apl_sym = func {
 	if (getprop("/instrumentation/efis/mfd/display-mode") == "PLAN")
 		setprop("/instrumentation/efis/mfd/display-mode","PLAN");
@@ -609,8 +825,8 @@ var NavDisplay = {
 		### this is the "old" method that's less flexible, we want to use the style hash instead (see above)
 		# because things are much better configurable that way
 		# now look up all required SVG elements and initialize member fields using the same name  to have a convenient handle
-		foreach(var element; ["wind","dmeLDist","dmeRDist","dmeL","dmeR","vorL","vorR","vorLId","vorRId",
-		                      "range","status.wxr","status.wpt","hdgGroup","status.sta","status.arpt"])
+		foreach(var element; ["dmeLDist","dmeRDist","dmeL","dmeR","vorL","vorR","vorLId","vorRId",
+		                      "range","status.wxr","status.wpt","status.sta","status.arpt"])
 			me.symbols[element] = me.nd.getElementById(element);
 
 		# load elements from vector image, and create instance variables using identical names, and call updateCenter() on each
@@ -618,13 +834,11 @@ var NavDisplay = {
 		#
 		foreach(var element; ["compassApp","northUp","aplSymMap","aplSymMapCtr","aplSymVor",
 		                      "staFromL2","staToL2","staFromR2","staToR2",
-		                      "locPtr","hdgTrk","truMag","altArc","planArcs",
-		                      "trkInd","compass","HdgBugCRT","TrkBugLCD","HdgBugLCD","selHdgLine","curHdgPtr",
+		                      "hdgTrk","truMag","altArc","planArcs",
+		                      "trkInd","compass","hdgBug","HdgBugCRT","TrkBugLCD","HdgBugLCD","selHdgLine","curHdgPtr",
+		                      "HdgBugCRT2","TrkBugLCD2","HdgBugLCD2","hdgBug2","selHdgLine2","curHdgPtr2","vorCrsPtr2",
 		                      "staFromL","staToL","staFromR","staToR"] )
 			me.symbols[element] = me.nd.getElementById(element).updateCenter();
-
-		foreach(var element; ["HdgBugCRT2","TrkBugLCD2","HdgBugLCD2","selHdgLine2","curHdgPtr2","vorCrsPtr2"] )
-			me.symbols[element] = me.nd.getElementById(element).setCenter(512,565);
 
 		# this should probably be using Philosopher's new SymbolLayer ?
 		me.map = me.nd.createChild("map","map")
@@ -744,24 +958,12 @@ var NavDisplay = {
 	# and update each model accordingly
 	update: func() # FIXME: This stuff is still too aircraft specific, cannot easily be reused by other aircraft
 	{
-		##
-		# important constants
-		var m1 = 111132.92;
-		var m2 = -559.82;
-		var m3 = 1.175;
-		var m4 = -0.0023;
-		var p1 = 111412.84;
-		var p2 = -93.5;
-		var p3 = 0.118;
-		var latNm = 60;
-		var lonNm = 60;
-
-		# fgcommand('profiler-start');
 		# Heading update
 		var userHdgMag = me.aircraft_source.get_hdg_mag();
 		var userHdgTru = me.aircraft_source.get_hdg_tru();
 		var userTrkMag = me.aircraft_source.get_trk_mag();
 		var userTrkTru = me.aircraft_source.get_trk_tru();
+		
 		if(me.get_switch('toggle_true_north')) {
 			me.symbols.truMag.setText("TRU");
 			var userHdg=userHdgTru;
@@ -773,6 +975,15 @@ var NavDisplay = {
 		}
 		if (me.aircraft_source.get_gnd_spd() < 80)
 			userTrk = userHdg;
+		
+		if (me.in_mode('toggle_display_mode', ['MAP'])) {
+			userHdgTrk = userTrk;
+			me.symbols.hdgTrk.setText("TRK");
+		} else {
+			userHdgTrk = userHdg;
+			me.symbols.hdgTrk.setText("HDG");
+		}
+		
 		var userLat = me.aircraft_source.get_lat();
 		var userLon = me.aircraft_source.get_lon();
 		var userGndSpd = me.aircraft_source.get_gnd_spd();
@@ -791,15 +1002,6 @@ var NavDisplay = {
 			me.map.setTranslation(512,565);
 		else
 			me.map.setTranslation(512,824);
-		# Calculate length in NM of one degree at current location TODO: expose as methods, for external callbacks
-		var userLatR = userLat*D2R;
-		var userLonR = userLon*D2R;
-		var latlen = m1 + (m2 * math.cos(2 * userLatR)) + (m3 * math.cos(4 * userLatR)) + (m4 * math.cos(6 * userLatR));
-		var lonlen = (p1 * math.cos(userLatR)) + (p2 * math.cos(3 * userLatR)) + (p3 * math.cos(5 * userLatR));
-		latNm = latlen*M2NM; #60 at equator
-		lonNm = lonlen*M2NM; #60 at equator
-
-		me.symbols.wind.setText(sprintf("%3.0f / %2.0f",getprop("/environment/wind-from-heading-deg"),getprop("/environment/wind-speed-kt")));
 
 		if(me.get_switch('toggle_lh_vor_adf') == 1)
 		{
@@ -888,61 +1090,41 @@ var NavDisplay = {
 			hdg_bug_active = 1;
 						
 		if(me.in_mode('toggle_display_mode', ['MAP'])) {
-			me.symbols.HdgBugCRT.setRotation((vhdg_bug-userTrk)*D2R);
-			me.symbols.HdgBugLCD.setRotation((vhdg_bug-userTrk)*D2R);
-			me.symbols.TrkBugLCD.setRotation((vhdg_bug-userTrk)*D2R);
-			me.symbols.selHdgLine.setRotation((vhdg_bug-userTrk)*D2R);
-			me.symbols.HdgBugCRT2.setRotation((vhdg_bug-userTrk)*D2R);
-			me.symbols.TrkBugLCD2.setRotation((vhdg_bug-userTrk)*D2R);
-			me.symbols.selHdgLine2.setRotation((vhdg_bug-userTrk)*D2R);
+			var hdgBugRot = (vhdg_bug-userHdgTrk)*D2R;
+			me.symbols.selHdgLine.setRotation(hdgBugRot);
+			me.symbols.hdgBug.setRotation(hdgBugRot);
+			me.symbols.hdgBug2.setRotation(hdgBugRot);
+			me.symbols.selHdgLine2.setRotation(hdgBugRot);
 			me.symbols.trkInd.setRotation(0);
 			me.symbols.curHdgPtr.setRotation((userHdg-userTrk)*D2R);
 			me.symbols.curHdgPtr2.setRotation((userHdg-userTrk)*D2R);
-			me.map._node.getNode("hdg",1).setDoubleValue(userTrkTru);
-			me.symbols.compass.setRotation(-userTrk*D2R);
-			me.symbols.compassApp.setRotation(-userTrk*D2R);
-			me.symbols.hdgTrk.setText("TRK");
+			me.symbols.compass.setRotation(-userHdgTrk*D2R);
+			me.symbols.compassApp.setRotation(-userHdgTrk*D2R);
 		}
 		if(me.in_mode('toggle_display_mode', ['APP','VOR'])) {
-			me.symbols.HdgBugCRT.setRotation((vhdg_bug-userHdg)*D2R);
-			me.symbols.HdgBugLCD.setRotation((vhdg_bug-userHdg)*D2R);
-			me.symbols.selHdgLine.setRotation((vhdg_bug-userHdg)*D2R);
-			me.symbols.HdgBugCRT2.setRotation((vhdg_bug-userHdg)*D2R);
-			me.symbols.HdgBugLCD2.setRotation((vhdg_bug-userHdg)*D2R);
-			me.symbols.selHdgLine2.setRotation((vhdg_bug-userHdg)*D2R);
+			var hdgBugRot = (vhdg_bug-userHdgTrk)*D2R;
+			me.symbols.selHdgLine.setRotation(hdgBugRot);
+			me.symbols.hdgBug.setRotation(hdgBugRot);
+			me.symbols.hdgBug2.setRotation(hdgBugRot);
+			me.symbols.selHdgLine2.setRotation(hdgBugRot);
 			me.symbols.trkInd.setRotation((userTrk-userHdg)*D2R);
 			me.symbols.curHdgPtr.setRotation(0);
 			me.symbols.curHdgPtr2.setRotation(0);
-			me.map._node.getNode("hdg",1).setDoubleValue(userHdgTru);
-			me.symbols.compass.setRotation(-userHdg*D2R);
-			me.symbols.compassApp.setRotation(-userHdg*D2R);
-			me.symbols.hdgTrk.setText("HDG");
+			me.symbols.compass.setRotation(-userHdgTrk*D2R);
+			me.symbols.compassApp.setRotation(-userHdgTrk*D2R);
 		}
+		me.map._node.getNode("hdg",1).setDoubleValue(userHdgTrk);
 		if(me.get_switch('toggle_centered')) {
 			if (me.in_mode('toggle_display_mode', ['APP','VOR'])) {
 				me.symbols.vorCrsPtr2.show();
 				me.symbols.compassApp.show();
-				if(getprop("instrumentation/nav/in-range")) {
-					var deflection = getprop("instrumentation/nav/heading-needle-deflection-norm");
-					me.symbols.locPtr.show();
-					me.symbols.locPtr.setTranslation(deflection*150,0);
-					if(abs(deflection < 0.99))
-						me.symbols.locPtr.setColorFill(1,0,1,1);
-					else
-						me.symbols.locPtr.setColorFill(1,0,1,0);
-				} else {
-					me.symbols.locPtr.hide();
-				}
-				me.symbols.vorCrsPtr2.setRotation((getprop("instrumentation/nav/radials/selected-deg")-userHdg)*D2R);
-				me.symbols.hdgGroup.setTranslation(0,100);
+				me.symbols.vorCrsPtr2.setRotation((getprop("instrumentation/nav/radials/selected-deg")-userHdgTrk)*D2R);
 			} else {
 				me.symbols.vorCrsPtr2.hide();
-				me.symbols.hdgGroup.setTranslation(0,100*me.in_mode('toggle_display_mode', ['MAP']));
 				me.symbols.compassApp.setVisible(me.in_mode('toggle_display_mode', ['MAP']));
 			}
 		} else {
 			me.symbols.vorCrsPtr2.hide();
-			me.symbols.hdgGroup.setTranslation(0,0);
 			me.symbols.compassApp.hide();
 		}
 
@@ -1074,7 +1256,6 @@ var NavDisplay = {
 			}
 		}
 
-		me.symbols.hdgGroup.setVisible(!me.in_mode('toggle_display_mode', ['PLAN']));
 		me.symbols.northUp.setVisible(me.in_mode('toggle_display_mode', ['PLAN']));
 		me.symbols.aplSymMap.setVisible(me.in_mode('toggle_display_mode', ['APP','MAP','VOR']) and !me.get_switch('toggle_centered'));
 		me.symbols.aplSymMapCtr.setVisible(me.in_mode('toggle_display_mode', ['MAP']) and me.get_switch('toggle_centered'));

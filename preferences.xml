@@ -832,7 +832,7 @@ Started September 2000 by David Megginson, david@megginson.com
 			<server type="string" userarchive="y">fgcom.flightgear.org</server>
 			<show-messages type="bool" userarchive="y">false</show-messages>
 			<speaker-level type="double" userarchive="y">1.0</speaker-level>
-			<silence-threshold type="double" userarchive="y">-20.0</silence-threshold>
+			<silence-threshold type="double" userarchive="y">-35.0</silence-threshold>
 			<register>
 				<enabled type="bool" userarchive="y">false</enabled>
 				<username type="string" userarchive="y">guest</username>

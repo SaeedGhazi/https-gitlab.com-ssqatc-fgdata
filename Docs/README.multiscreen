@@ -62,6 +62,12 @@ window, camera, or gui tags.
   Shorthand for a window that occupies the entire screen with no
   decoration.
 
+  overrideRedirect - bool
+  Only effective when fullscreen = true.
+  Provides an extra hint for Gnome-based linux systems that we insist that
+  the full screen window span *all* physical displays, not just the current
+  physical display.
+
  camera
  The camera node contains viewing parameters.
 

@@ -1,7 +1,6 @@
 ##
-# Draw a route with tracks and waypoints (from Gijs' 744 ND.nas code)
+# Draw a route with tracks and waypoints
 #
-
 
 ## FIXME: encapsulate properly
 var wp = [];
@@ -20,7 +19,6 @@ var text_wp = [];
 			}
 		}
 	};
-
 
 var draw_route =  func (group, theroute, controller=nil, lod=0)
 	{
@@ -60,11 +58,11 @@ var draw_route =  func (group, theroute, controller=nil, lod=0)
 				canvas.drawwp(group, leg.path()[1].lat, leg.path()[1].lon, leg.alt_cstr, leg.wp_name, i, wp);
 			}
 
-			# Set Top Of Crimb coordinate
+			# Set Top Of Climb coordinate
 			canvas.drawprofile(route_group, "tc", "T/C");
 			# Set Top Of Descent coordinate
 			canvas.drawprofile(route_group, "td", "T/D");
-			# Set Step Crimb coordinate
+			# Set Step Climb coordinate
 			canvas.drawprofile(route_group, "sc", "S/C");
 			# Set Top Of Descent coordinate
 			canvas.drawprofile(route_group, "ed", "E/D");
@@ -76,5 +74,3 @@ var draw_route =  func (group, theroute, controller=nil, lod=0)
 			updatewp(0);
 
 }
-
-

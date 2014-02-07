@@ -218,7 +218,12 @@ var Element = {
     if( me['_tf_rot'] == nil )
       # always use the first matrix slot to ensure correct rotation
       # around transformation center.
-      me['_tf_rot'] = Transform.new(me._node.getNode("tf[0]", 1));
+      # tf-rot-index can be set to change the slot to be used. This is used for
+      # example by the SVG parser to apply the rotation after all
+      # transformations defined in the SVG file.
+      me['_tf_rot'] = Transform.new(
+        me._node.getNode("tf[" ~ me.get("tf-rot-index", 0) ~ "]", 1)
+      );
 
     me._tf_rot.setRotation(rot, me.getCenter());
     return me;

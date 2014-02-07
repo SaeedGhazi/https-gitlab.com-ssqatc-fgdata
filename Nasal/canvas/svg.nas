@@ -70,6 +70,10 @@ var parsesvg = func(group, path, options = nil)
   # Remove the topmost element from the stack
   var popElement = func
   {
+    stack[-1].updateCenter();
+    # Create rotation matrix after all SVG defined transformations
+    stack[-1].set("tf-rot-index", stack[-1].createTransform()._node.getIndex());
+
     pop(stack);
     pop(close_stack);
   }
@@ -469,9 +473,6 @@ var parsesvg = func(group, path, options = nil)
     var cy = attr['inkscape:transform-center-y'];
     if( cy != nil and cy != 0 )
       stack[-1].setDouble("center-offset-y", -evalCSSNum(cy));
-
-    if( cx != nil or cy != nil )
-      stack[-1].updateCenter();
   };
 
   # XML parsers element close callback

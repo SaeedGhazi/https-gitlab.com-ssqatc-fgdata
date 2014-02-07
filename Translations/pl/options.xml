@@ -45,15 +45,11 @@
 	<fg-scenery-desc n="1">Domyslna sciezka $FG_ROOT/Scenery</fg-scenery-desc>   <!-- English: "Defaults to $FG_ROOT/Scenery" -->
 <!-- 	<fg-aircraft-desc>???</fg-aircraft-desc> -->   <!-- English: "Specify additional aircraft directory path(s)" -->
 	<language-desc>Wybierz jezyk dla tej sesji</language-desc>   <!-- English: "Select the language for this session" -->
-	<disable-game-mode-desc>Wylaczony tryb pelnoekranowy</disable-game-mode-desc>   <!-- English: "Disable full-screen game mode" -->
-	<enable-game-mode-desc>Zezwol na tryb pelnoekranowy</enable-game-mode-desc>   <!-- English: "Enable full-screen game mode" -->
 	<disable-splash-screen-desc>Brak ekranu powitalnego</disable-splash-screen-desc>   <!-- English: "Disable splash screen" -->
 	<enable-splash-screen-desc>Wlacz ekran powitalny</enable-splash-screen-desc>   <!-- English: "Enable splash screen" -->
 <!-- 	<restore-defaults-desc>???</restore-defaults-desc> -->   <!-- English: "Reset all user settings to their defaults (rendering options etc)" -->
 <!-- 	<disable-save-on-exit>???</disable-save-on-exit> -->   <!-- English: "Don't save preferences upon program exit" -->
 <!-- 	<enable-save-on-exit>???</enable-save-on-exit> -->   <!-- English: "Allow saving preferences at program exit" -->
-	<disable-intro-music-desc>Brak intro muzycznego</disable-intro-music-desc>   <!-- English: "Disable introduction music" -->
-	<enable-intro-music-desc>Wlacz intro muzyczne</enable-intro-music-desc>   <!-- English: "Enable introduction music" -->
 	<disable-mouse-pointer-desc>Niedostepny dodatkowy wskaznik myszy</disable-mouse-pointer-desc>   <!-- English: "Disable extra mouse pointer" -->
 	<enable-mouse-pointer-desc n="0">Dostepny dodatkowy wskaznik myszy</enable-mouse-pointer-desc>   <!-- English: "Enable extra mouse pointer" -->
 	<enable-mouse-pointer-desc n="1">(np. dla trybu pelnoekranowego dla kart bazujacych na Voodoo)</enable-mouse-pointer-desc>   <!-- English: "(i.e. for full screen Voodoo based cards)" -->
@@ -71,7 +67,6 @@
 <!-- 	<enable-ai-models-desc>???</enable-ai-models-desc> -->   <!-- English: "Enable AI subsystem (required for multi-player, AI traffic and many other animations)" -->
 <!-- 	<disable-ai-traffic-desc>???</disable-ai-traffic-desc> -->   <!-- English: "Disable artificial traffic." -->
 <!-- 	<enable-ai-traffic-desc>???</enable-ai-traffic-desc> -->   <!-- English: "Enable artificial traffic." -->
-<!-- 	<disable-ai-scenarios>???</disable-ai-scenarios> -->   <!-- English: "Disable all AI scenarios." -->
 <!-- 	<ai-scenario>???</ai-scenario> -->   <!-- English: "Add and enable a new scenario. Multiple options are allowed." -->
 	<disable-freeze-desc>Start w stanie uruchomionym</disable-freeze-desc>   <!-- English: "Start in a running state" -->
 	<enable-freeze-desc>Uruchom w trybie wstrzynanym</enable-freeze-desc>   <!-- English: "Start in a frozen state" -->
@@ -191,8 +186,6 @@
 	<enable-fullscreen-desc>Dostepny tryb pelnoekranowy</enable-fullscreen-desc>   <!-- English: "Enable fullscreen mode" -->
 	<shading-flat-desc>Zezwol na plaskie cieniowanie</shading-flat-desc>   <!-- English: "Enable flat shading" -->
 	<shading-smooth-desc>Zezwol na gladkie cieniowanie</shading-smooth-desc>   <!-- English: "Enable smooth shading" -->
-	<disable-skyblend-desc>Niedostepna przezroczystosc nieba</disable-skyblend-desc>   <!-- English: "Disable sky blending" -->
-	<enable-skyblend-desc>Dostepna przezroczystosc nieba</enable-skyblend-desc>   <!-- English: "Enable sky blending" -->
 	<disable-textures-desc>Teksturowanie wylaczone</disable-textures-desc>   <!-- English: "Disable textures" -->
 	<enable-textures-desc>Teksturowanie wlaczone</enable-textures-desc>   <!-- English: "Enable textures" -->
 <!-- 	<materials-file-desc>???</materials-file-desc> -->   <!-- English: "Specify the materials file used to render the scenery (default: materials.xml)" -->

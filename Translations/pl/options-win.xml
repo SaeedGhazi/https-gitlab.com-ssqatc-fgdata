@@ -41,14 +41,10 @@
 	<fg-scenery-desc n="1">Domyœlna œcie¿ka $FG_ROOT/Scenery</fg-scenery-desc>   <!-- English: "Defaults to $FG_ROOT/Scenery" -->
 <!-- 	<fg-aircraft-desc>???</fg-aircraft-desc> -->   <!-- English: "Specify additional aircraft directory path(s)" -->
 	<language-desc>Wybierz jêzyk dla tej sesji</language-desc>   <!-- English: "Select the language for this session" -->
-	<disable-game-mode-desc>Wy³¹czony tryb pe³noekranowy</disable-game-mode-desc>   <!-- English: "Disable full-screen game mode" -->
-	<enable-game-mode-desc>Zezwól na tryb pe³noekranowy</enable-game-mode-desc>   <!-- English: "Enable full-screen game mode" -->
 	<disable-splash-screen-desc>Brak ekranu powitalnego</disable-splash-screen-desc>   <!-- English: "Disable splash screen" -->
 	<enable-splash-screen-desc>W³¹cz ekran powitalny</enable-splash-screen-desc>   <!-- English: "Enable splash screen" -->
 <!-- 	<disable-save-on-exit>???</disable-save-on-exit> -->   <!-- English: "Don't save preferences upon program exit" -->
 <!-- 	<enable-save-on-exit>???</enable-save-on-exit> -->   <!-- English: "Allow saving preferences at program exit" -->
-	<disable-intro-music-desc>Brak intro muzycznego</disable-intro-music-desc>   <!-- English: "Disable introduction music" -->
-	<enable-intro-music-desc>W³¹cz intro muzyczne</enable-intro-music-desc>   <!-- English: "Enable introduction music" -->
 	<disable-mouse-pointer-desc>Niedostêpny dodatkowy wskaŸnik myszy</disable-mouse-pointer-desc>   <!-- English: "Disable extra mouse pointer" -->
 	<enable-mouse-pointer-desc n="0">Dostêpny dodatkowy wskaŸnik myszy</enable-mouse-pointer-desc>   <!-- English: "Enable extra mouse pointer" -->
 	<enable-mouse-pointer-desc n="1">(np. dla trybu pe³noekranowego dla kart bazuj¹cych na Voodoo)</enable-mouse-pointer-desc>   <!-- English: "(i.e. for full screen Voodoo based cards)" -->
@@ -62,7 +58,6 @@
 <!-- 	<enable-ai-models-desc>???</enable-ai-models-desc> -->   <!-- English: "Enable AI subsystem (required for multi-player, AI traffic and many other animations)" -->
 <!-- 	<disable-ai-traffic-desc>???</disable-ai-traffic-desc> -->   <!-- English: "Disable artificial traffic." -->
 <!-- 	<enable-ai-traffic-desc>???</enable-ai-traffic-desc> -->   <!-- English: "Enable artificial traffic." -->
-<!-- 	<disable-ai-scenarios>???</disable-ai-scenarios> -->   <!-- English: "Disable all AI scenarios." -->
 <!-- 	<ai-scenario>???</ai-scenario> -->   <!-- English: "Add and enable a new scenario. Multiple options are allowed." -->
 	<disable-freeze-desc>Start w stanie uruchomionym</disable-freeze-desc>   <!-- English: "Start in a running state" -->
 	<enable-freeze-desc>Uruchom w trybie wstrzynanym</enable-freeze-desc>   <!-- English: "Start in a frozen state" -->
@@ -182,8 +177,6 @@
 	<enable-fullscreen-desc>Dostêpny tryb pe³noekranowy</enable-fullscreen-desc>   <!-- English: "Enable fullscreen mode" -->
 	<shading-flat-desc>Zezwól na p³askie cieniowanie</shading-flat-desc>   <!-- English: "Enable flat shading" -->
 	<shading-smooth-desc>Zezwól na g³adkie cieniowanie</shading-smooth-desc>   <!-- English: "Enable smooth shading" -->
-	<disable-skyblend-desc>Niedostêpna przeŸroczystoœæ nieba</disable-skyblend-desc>   <!-- English: "Disable sky blending" -->
-	<enable-skyblend-desc>Dostêpna przezroczystoœæ nieba</enable-skyblend-desc>   <!-- English: "Enable sky blending" -->
 	<disable-textures-desc>Tekstury niedostêpne</disable-textures-desc>   <!-- English: "Disable textures" -->
 	<enable-textures-desc>Tekstury dostêpne</enable-textures-desc>   <!-- English: "Enable textures" -->
 <!-- 	<materials-file-desc>???</materials-file-desc> -->   <!-- English: "Specify the materials file used to render the scenery (default: materials.xml)" -->

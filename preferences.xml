@@ -49,8 +49,6 @@ Started September 2000 by David Megginson, david@megginson.com
 			<splash-title>
 				<!-- -->
 			</splash-title>
-			<intro-music type="bool">false</intro-music>
-			<game-mode type="bool" preserve="y">false</game-mode>
 			<fullscreen type="bool" preserve="y">false</fullscreen>
 			<units>feet</units>
 			<save-on-exit type="bool" userarchive="y">true</save-on-exit>

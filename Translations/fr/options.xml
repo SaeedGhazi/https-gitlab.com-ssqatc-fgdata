@@ -34,15 +34,11 @@
     <fg-scenery-desc n="1">Positionné par défaut à $FG_ROOT/Scenery.</fg-scenery-desc>   <!-- English: "Defaults to $FG_ROOT/Scenery" -->
     <fg-aircraft-desc>Spéficie les emplacements des répertoires des aéronefs additionnels.</fg-aircraft-desc>   <!-- English: "Specify additional aircraft directory path(s)" -->
     <language-desc>Choisit la langue pour cette session.</language-desc>   <!-- English: "Select the language for this session" -->
-    <disable-game-mode-desc>Désactive le mode de jeu plein écran.</disable-game-mode-desc>   <!-- English: "Disable full-screen game mode" -->
-    <enable-game-mode-desc>Active le mode de jeu plein écran.</enable-game-mode-desc>   <!-- English: "Enable full-screen game mode" -->
     <disable-splash-screen-desc>Désactive l'écran d'accueil.</disable-splash-screen-desc>   <!-- English: "Disable splash screen" -->
     <enable-splash-screen-desc>Active l'écran d'accueil.</enable-splash-screen-desc>   <!-- English: "Enable splash screen" -->
     <restore-defaults-desc>Restaurer tous les paramètres utilisateurs à leurs valeurs par défaut (options de rendu, etc).</restore-defaults-desc>   <!-- English: "Reset all user settings to their defaults (rendering options etc)" -->
     <disable-save-on-exit>Ne sauvegarde pas les préférences lors de la sortie du programme.</disable-save-on-exit>   <!-- English: "Don't save preferences upon program exit" -->
     <enable-save-on-exit>Autorise la sauvegarde des préférences à la sortie du programme.</enable-save-on-exit>   <!-- English: "Allow saving preferences at program exit" -->
-    <disable-intro-music-desc>Désactive la musique d'introduction.</disable-intro-music-desc>   <!-- English: "Disable introduction music" -->
-    <enable-intro-music-desc>Active la musique d'introduction.</enable-intro-music-desc>   <!-- English: "Enable introduction music" -->
     <disable-mouse-pointer-desc>Désactive le pointeur de la souris supplémentaire.</disable-mouse-pointer-desc>   <!-- English: "Disable extra mouse pointer" -->
     <enable-mouse-pointer-desc n="0">Active le pointeur de la souris supplémentaire.</enable-mouse-pointer-desc>   <!-- English: "Enable extra mouse pointer" -->
     <enable-mouse-pointer-desc n="1">(c'est-à-dire pour l'affichage plein écran avec des cartes à base de Voodoo)</enable-mouse-pointer-desc>   <!-- English: "(i.e. for full screen Voodoo based cards)" -->
@@ -60,7 +56,6 @@
     <enable-ai-models-desc>Active le sous-système IA (nécessaire pour le multi-joueurs, le trafic AI et de nombreuses autres animations).</enable-ai-models-desc>   <!-- English: "Enable AI subsystem (required for multi-player, AI traffic and many other animations)" -->
     <disable-ai-traffic-desc>Désactive le trafic artificiel.</disable-ai-traffic-desc>   <!-- English: "Disable artificial traffic." -->
     <enable-ai-traffic-desc>Active le trafic artificiel.</enable-ai-traffic-desc>   <!-- English: "Enable artificial traffic." -->
-    <disable-ai-scenarios>Désactive tous les scénarios IA.</disable-ai-scenarios>   <!-- English: "Disable all AI scenarios." -->
     <ai-scenario>Ajoute et active un nouveau scénario. Les options multiples sont autorisées.</ai-scenario>   <!-- English: "Add and enable a new scenario. Multiple options are allowed." -->
     <disable-freeze-desc>Démarre dans un état fonctionnel.</disable-freeze-desc>   <!-- English: "Start in a running state" -->
     <enable-freeze-desc>Démarre dans un état gelé.</enable-freeze-desc>   <!-- English: "Start in a frozen state" -->
@@ -180,8 +175,6 @@
     <enable-fullscreen-desc>Active le mode plein écran.</enable-fullscreen-desc>   <!-- English: "Enable fullscreen mode" -->
     <shading-flat-desc>Active l'ombrage à plat.</shading-flat-desc>   <!-- English: "Enable flat shading" -->
     <shading-smooth-desc>Active l'ombrage doux.</shading-smooth-desc>   <!-- English: "Enable smooth shading" -->
-    <disable-skyblend-desc>Désactive le dégradé du ciel.</disable-skyblend-desc>   <!-- English: "Disable sky blending" -->
-    <enable-skyblend-desc>Active le dégradé du ciel.</enable-skyblend-desc>   <!-- English: "Enable sky blending" -->
     <disable-textures-desc>Désactive les textures.</disable-textures-desc>   <!-- English: "Disable textures" -->
     <enable-textures-desc>Active les textures.</enable-textures-desc>   <!-- English: "Enable textures" -->
     <materials-file-desc>Précise le fichier de matériaux utilisé pour le rendu des scènes (par défaut : materials.xml).</materials-file-desc>   <!-- English: "Specify the materials file used to render the scenery (default: materials.xml)" -->

@@ -34,15 +34,11 @@
 	<fg-scenery-desc n="1">Default a $FG_ROOT/Scenario</fg-scenery-desc>   <!-- English: "Defaults to $FG_ROOT/Scenery" -->
 	<fg-aircraft-desc>Specifica percorso del catalogo per addizionali aerei </fg-aircraft-desc>   <!-- English: "Specify additional aircraft directory path(s)" -->
 	<language-desc>Seleziona la lingua per questa sessione</language-desc>   <!-- English: "Select the language for this session" -->
-	<disable-game-mode-desc>disabilita modalita' di gioco a schermo pieno -desc</disable-game-mode-desc>   <!-- English: "Disable full-screen game mode" -->
-	<enable-game-mode-desc>abilita modalita'di gioco a schermo pieno </enable-game-mode-desc>   <!-- English: "Enable full-screen game mode" -->
 	<disable-splash-screen-desc>Disabilita schermo splash</disable-splash-screen-desc>   <!-- English: "Disable splash screen" -->
 	<enable-splash-screen-desc>Abilita schermo splash</enable-splash-screen-desc>   <!-- English: "Enable splash screen" -->
 <!-- 	<restore-defaults-desc>???</restore-defaults-desc> -->   <!-- English: "Reset all user settings to their defaults (rendering options etc)" -->
 	<disable-save-on-exit>Non salvare le impostazioni all'uscita del programma</disable-save-on-exit>   <!-- English: "Don't save preferences upon program exit" -->
 	<enable-save-on-exit>Salva le impostazioni all'uscita del programma</enable-save-on-exit>   <!-- English: "Allow saving preferences at program exit" -->
-	<disable-intro-music-desc>Disabilita musica introduttiva</disable-intro-music-desc>   <!-- English: "Disable introduction music" -->
-	<enable-intro-music-desc>Abilita musica introduttiva</enable-intro-music-desc>   <!-- English: "Enable introduction music" -->
 	<disable-mouse-pointer-desc>Disabilita extra puntatore di mouse</disable-mouse-pointer-desc>   <!-- English: "Disable extra mouse pointer" -->
 	<enable-mouse-pointer-desc n="0">Abilita extra puntatore di mouse</enable-mouse-pointer-desc>   <!-- English: "Enable extra mouse pointer" -->
 	<enable-mouse-pointer-desc n="1">(i.e per schermo pieno basato su carte Vodoo)</enable-mouse-pointer-desc>   <!-- English: "(i.e. for full screen Voodoo based cards)" -->
@@ -60,7 +56,6 @@
 	<enable-ai-models-desc>Abilita sotto-sistema AI (richiesto per gioco multigiocatore, traffico AI e molte altre animazioni)</enable-ai-models-desc>   <!-- English: "Enable AI subsystem (required for multi-player, AI traffic and many other animations)" -->
 	<disable-ai-traffic-desc>Disabilita traffico artificiale</disable-ai-traffic-desc>   <!-- English: "Disable artificial traffic." -->
 	<enable-ai-traffic-desc>Abilita traffico artificiale</enable-ai-traffic-desc>   <!-- English: "Enable artificial traffic." -->
-	<disable-ai-scenarios>Disabilita tutti i scenari AI</disable-ai-scenarios>   <!-- English: "Disable all AI scenarios." -->
 	<ai-scenario>Aggiungi e abilita un nuo scenario. Multiple opzioni sono permesse.</ai-scenario>   <!-- English: "Add and enable a new scenario. Multiple options are allowed." -->
 	<disable-freeze-desc>Inizia in modalita' attiva</disable-freeze-desc>   <!-- English: "Start in a running state" -->
 	<enable-freeze-desc>Inizia in modalita' congelata</enable-freeze-desc>   <!-- English: "Start in a frozen state" -->
@@ -180,8 +175,6 @@
 	<enable-fullscreen-desc>Abilita modalita' a schermo pieno </enable-fullscreen-desc>   <!-- English: "Enable fullscreen mode" -->
 	<shading-flat-desc>Abilita piatta ombreggiattura</shading-flat-desc>   <!-- English: "Enable flat shading" -->
 	<shading-smooth-desc>Abilita liscia ombreggiatura</shading-smooth-desc>   <!-- English: "Enable smooth shading" -->
-	<disable-skyblend-desc>Disabilita mescolamento del cielo</disable-skyblend-desc>   <!-- English: "Disable sky blending" -->
-	<enable-skyblend-desc>Abilita mescolamento del cielo </enable-skyblend-desc>   <!-- English: "Enable sky blending" -->
 	<disable-textures-desc>Disabilita texture</disable-textures-desc>   <!-- English: "Disable textures" -->
 	<enable-textures-desc>Abilita texture</enable-textures-desc>   <!-- English: "Enable textures" -->
 	<materials-file-desc>Specifica i file materiali usati per creare lo scenario (default:materiali.xml)</materials-file-desc>   <!-- English: "Specify the materials file used to render the scenery (default: materials.xml)" -->

@@ -108,16 +108,6 @@
    </option>
 
    <option>
-    <name>disable-intro-music</name>
-    <description>disable-intro-music-desc</description>
-   </option>
-
-   <option>
-    <name>enable-intro-music</name>
-    <description>enable-intro-music-desc</description>
-   </option>
-
-   <option>
     <name>control</name>
     <arg>mode</arg>
     <description>control-desc</description>
@@ -260,11 +250,6 @@
    <option>
     <name>enable-ai-traffic</name>
     <description>enable-ai-traffic-desc</description>
-   </option>
-
-   <option>
-    <name>disable-ai-scenarios</name>
-    <description>disable-ai-scenarios</description>
    </option>
 
    <option>
@@ -449,16 +434,6 @@
    </option>
 
    <option>
-    <name>disable-game-mode</name>
-    <description>disable-game-mode-desc</description>
-   </option>
-
-   <option>
-    <name>enable-game-mode</name>
-    <description>enable-game-mode-desc</description>
-   </option>
-
-   <option>
     <name>shading-flat</name>
     <description>shading-flat-desc</description>
    </option>
@@ -466,16 +441,6 @@
    <option>
     <name>shading-smooth</name>
     <description>shading-smooth-desc</description>
-   </option>
-
-   <option>
-    <name>disable-skyblend</name>
-    <description>disable-skyblend-desc</description>
-   </option>
-
-   <option>
-    <name>enable-skyblend</name>
-    <description>enable-skyblend-desc</description>
    </option>
 
    <option>

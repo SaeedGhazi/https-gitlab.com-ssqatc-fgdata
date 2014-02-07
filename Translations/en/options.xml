@@ -17,15 +17,11 @@
 	<fg-scenery-desc n="1">Defaults to $FG_ROOT/Scenery</fg-scenery-desc>
 	<fg-aircraft-desc>Specify additional aircraft directory path(s)</fg-aircraft-desc>
 	<language-desc>Select the language for this session</language-desc>
-	<disable-game-mode-desc>Disable full-screen game mode</disable-game-mode-desc>
-	<enable-game-mode-desc>Enable full-screen game mode</enable-game-mode-desc>
 	<disable-splash-screen-desc>Disable splash screen</disable-splash-screen-desc>
 	<enable-splash-screen-desc>Enable splash screen</enable-splash-screen-desc>
 	<restore-defaults-desc>Reset all user settings to their defaults (rendering options etc)</restore-defaults-desc>
 	<disable-save-on-exit>Don't save preferences upon program exit</disable-save-on-exit>
 	<enable-save-on-exit>Allow saving preferences at program exit</enable-save-on-exit>
-	<disable-intro-music-desc>Disable introduction music</disable-intro-music-desc>
-	<enable-intro-music-desc>Enable introduction music</enable-intro-music-desc>
 	<disable-mouse-pointer-desc>Disable extra mouse pointer</disable-mouse-pointer-desc>
 	<enable-mouse-pointer-desc n="0">Enable extra mouse pointer</enable-mouse-pointer-desc>
 	<enable-mouse-pointer-desc n="1">(i.e. for full screen Voodoo based cards)</enable-mouse-pointer-desc>
@@ -43,7 +39,6 @@
 	<enable-ai-models-desc>Enable AI subsystem (required for multi-player, AI traffic and many other animations)</enable-ai-models-desc>
 	<disable-ai-traffic-desc>Disable artificial traffic.</disable-ai-traffic-desc>
 	<enable-ai-traffic-desc>Enable artificial traffic.</enable-ai-traffic-desc>
-	<disable-ai-scenarios>Disable all AI scenarios.</disable-ai-scenarios>
 	<ai-scenario>Add and enable a new scenario. Multiple options are allowed.</ai-scenario>
 	<disable-freeze-desc>Start in a running state</disable-freeze-desc>
 	<enable-freeze-desc>Start in a frozen state</enable-freeze-desc>
@@ -163,8 +158,6 @@
 	<enable-fullscreen-desc>Enable fullscreen mode</enable-fullscreen-desc>
 	<shading-flat-desc>Enable flat shading</shading-flat-desc>
 	<shading-smooth-desc>Enable smooth shading</shading-smooth-desc>
-	<disable-skyblend-desc>Disable sky blending</disable-skyblend-desc>
-	<enable-skyblend-desc>Enable sky blending</enable-skyblend-desc>
 	<disable-textures-desc>Disable textures</disable-textures-desc>
 	<enable-textures-desc>Enable textures</enable-textures-desc>
 	<materials-file-desc>Specify the materials file used to render the scenery (default: Materials/regions/materials.xml)</materials-file-desc>

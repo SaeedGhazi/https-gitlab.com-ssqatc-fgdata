@@ -29,6 +29,7 @@
 	<snap-shot>Capturar pantalla               </snap-shot>   <!-- English: "Screenshot  " -->
 	<snap-shot-dir>Directorio capturas</snap-shot-dir>   <!-- English: "Screenshot Directory" -->
 	<sound-config>Configurar sonido</sound-config>   <!-- English: "Sound Configuration" -->
+	<input-config>Configurar dispositivos de entrada</input-config>   <!-- English: "Input Configuration" -->
 	<exit>Salir                              </exit>   <!-- English: "Quit          " -->
 
 	<!-- View menu -->

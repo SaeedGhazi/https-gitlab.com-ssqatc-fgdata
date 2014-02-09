@@ -38,7 +38,7 @@
 	<generate>
 		<normal type="int">15</normal>
 		<tangent type="int">6</tangent>
-		<!--<binormal type="int">7</binormal>-->
+		<binormal type="int">7</binormal>
 	</generate>
 
 

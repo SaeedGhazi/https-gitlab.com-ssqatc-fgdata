@@ -151,7 +151,7 @@ var NDStyles = {
 				}, # end of layer update predicate
 			}, # end of DME layer
 
-			{ name:'mp-traffic', disabled:1, update_on:['toggle_range','toggle_traffic'],
+			{ name:'mp-traffic', update_on:['toggle_range','toggle_traffic'],
 				predicate: func(nd, layer) {
 					var visible = nd.get_switch('toggle_traffic');
 					layer._view.setVisible( visible );
@@ -160,7 +160,7 @@ var NDStyles = {
 					}
 				}, # end of layer update predicate
 			}, # end of traffic  layer
-			{ name:'TFC', isMapStructure:1, update_on:['toggle_range','toggle_traffic'],
+			{ name:'TFC', disabled:1, isMapStructure:1, update_on:['toggle_range','toggle_traffic'],
 				predicate: func(nd, layer) {
 					var visible = nd.get_switch('toggle_traffic');
 					layer.group.setVisible( visible );

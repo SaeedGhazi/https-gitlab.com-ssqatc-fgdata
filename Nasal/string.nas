@@ -245,26 +245,27 @@ replace = func(str, old, new) {
 # Get a function out of a string template for fast insertion of template
 # parameters. This allows to use the same templates as with most available tile
 # mapping engines (eg. Leaflet, Polymaps). Return a callable function object on
-# success, and nil if parsing the templated fails.
+# success, and nil if parsing the templated fails. See string._template_getargs
+# for more on calling a compile object.
 #
-#  Example (Build MapQuest tile url):
+# Example (Build MapQuest tile url):
 #
 #    var makeUrl = string.compileTemplate(
 #      "http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg"
 #    );
 #    print( makeUrl({x: 5, y: 4, z: 3}) );
 #
-#  Output:
+# Output:
 #
 #    http://otile1.mqcdn.com/tiles/1.0.0/map/3/5/4.jpg
 #
 var compileTemplate = func(template, type=nil) {
 	var code = 'func(__ENV=nil) { string._template_getargs();';
+	var len = size(template);
+	var start = 0;
+	var end = 0;
 	if (type == nil or type == "simple_names") {
 		# See http://james.padolsey.com/javascript/straight-up-interpolation/
-		var code = '';
-		var start = 0;
-		var end = 0;
 		while( (start = template.find('{', end)) >= 0 )
 		{
 			if( end > 0 )
@@ -272,42 +273,49 @@ var compileTemplate = func(template, type=nil) {
 			code ~= '"' ~ substr(template, end, start - end) ~ '"';
 			if( (end = template.find('}', start)) < 0 )
 			{
-				debug.warn("string.compileTemplate: unclosed '{' (" ~ template ~ ")");
+				debug.warn("string.compileTemplate: unclosed brace pair (" ~ template ~ ")");
 				return nil;
 			}
 
-			code ~= '~arg[0]["' ~ substr(template, start + 1, end - start - 1) ~ '"]';
-			end += 1;
-		}
-		if( end >= 0 )
-			code ~= '~"' ~ substr(template, end, size(template) - end) ~ '"';
-		code ~= ';';
-	} elsif (type == "nasal_expression") {
-		var len = size(template);
-		var level = var start = var end = 0;
-		for (var i=0; i<len; i+=1) {
-			if ( end > 0 )
-				code ~= "~";
-			code ~= '"' ~ substr(template, end, start - end) ~ '"';
-			if (template[i] != `{`) continue;
-			level += 1; var skip = 0;
-			for (var j=i+1; j<len; j+=1)
-				if (template[j] == `{`) level += 1;
-				elsif (template[j] == `}`) level -= 1;
-				elsif (template[j] == `"`)
-					if (skip <= 1) skip = !skip;
-					else skip = 1;
-				elsif (skip and template[j] == "\\")
-					if (skip <= 1) skip = 2;
-					else skip = 1;
-			if (j >= len or template[j] != `}`)
-				die("string.compileTemplate: unclosed '{' (" ~ template ~ ")");
-			end = j;
-			code ~= '~(' ~ substr(template, start + 1, end - start - 1)~")";
+			code ~= '~__ENV["' ~ substr(template, start + 1, end - start - 1) ~ '"]';
 			end += 1;
 		}
 		if( end < len )
-			code ~= '~"' ~ substr(template, end, size(template) - end) ~ '"';
+			code ~= '~"' ~ substr(template, end, len - end) ~ '"';
+	} elsif (type == "nasal_expression") {
+		var level = 0;
+		for (var i=0; i<len; i+=1) {
+			if (template[i] != `{`) continue;
+			start = i;
+			if ( end > 0 )
+				code ~= "~";
+			code ~= '"' ~ substr(template, end, start - end) ~ '"';
+			level = 1; var skip = 0;
+			for (var j=i+1; j<len and level > 0; j+=1)
+				if (template[j] == `{`) level += 1;
+				elsif (template[j] == `}`) level -= 1;
+				elsif (template[j] == `"`)
+					if    (skip == `"`) skip = 0;
+					elsif (skip != `'`) skip = `"`;
+				elsif (template[j] == `'`)
+					if    (skip == `'`) skip = 0;
+					elsif (skip != '"') skip = `'`;
+				elsif (skip)
+					if ((skip == `'` or skip == `"`) and template[j] == `\\`)
+						skip = `\\`;
+					elsif (skip == `\\` and template[j] == `\\`)
+						skip = skip;
+					else
+						skip = 0;
+			if (level)
+				die("string.compileTemplate: unclosed brace pair (" ~ template ~ ")");
+			end = j;
+			code ~= '~(' ~ substr(template, start + 1, end - start - 1)~")";
+			end += 1;
+			i = end;
+		}
+		if( end < len )
+			code ~= '~"' ~ substr(template, end, len - end) ~ '"';
 	}
 	code ~= "}";
 	var fn = compile(code)(); # get the inside function with the argument __ENV=nil
@@ -336,11 +344,11 @@ var _template_getargs = func() {
 	var ns = caller(1)[0];
 	if (contains(ns, "__ENV")) {
 		var __ENV = ns.__ENV;
-		ns.__ENV = ns;
 		if (__ENV != nil)
 			foreach (var k; keys(__ENV))
 				ns[k] = __ENV[k];
 	}
+	ns.__ENV = ns;
 }
 
 

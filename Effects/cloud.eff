@@ -202,7 +202,7 @@
         <type>float</type>
         <value><use>altitude</use></value>
       </uniform>
-      <vertex-program-two-side>true</vertex-program-two-side>
+      <!--<vertex-program-two-side>true</vertex-program-two-side>-->
     </pass>
   </technique>
 </PropertyList>

@@ -287,7 +287,11 @@ var NDStyles = {
 				impl: {
 					init: func(nd,symbol),
 					predicate: func(nd) getprop("/autopilot/route-manager/wp/dist") != nil and getprop("autopilot/route-manager/active"),
-					is_true: func(nd) nd.symbols.wpActiveDistLbl.show(),
+					is_true: func(nd) {
+						nd.symbols.wpActiveDistLbl.show();
+						if(getprop("/autopilot/route-manager/wp/dist") > 1000)
+							nd.symbols.wpActiveDistLbl.setText("   NM");
+					},
 					is_false: func(nd) nd.symbols.wpActiveDistLbl.hide(),
 				},
 			},
@@ -299,11 +303,11 @@ var NDStyles = {
 					is_true: func(nd) {
 						var etaSec = getprop("/sim/time/utc/day-seconds")+getprop("autopilot/route-manager/wp/eta-seconds");
 						var h = math.floor(etaSec/3600);
-						if (h>24) h=h-24;
 						etaSec=etaSec-3600*h;
 						var m = math.floor(etaSec/60);
 						etaSec=etaSec-60*m;
 						var s = etaSec/10;
+						if (h>24) h=h-24;
 						nd.symbols.eta.setText(sprintf("%02.0f%02.0f.%01.0fz",h,m,s));
 						nd.symbols.eta.show();
 					},
@@ -470,7 +474,7 @@ var NDStyles = {
 					predicate: func(nd) nd.in_mode('toggle_display_mode', ['APP','VOR']),
 					is_true: func(nd) {
 						nd.symbols.dme.show();
-						if(getprop("instrumentation/nav/dme-in-range"))
+						if(getprop("instrumentation/dme/in-range"))
 							nd.symbols.dme.setText(sprintf("%3.1f",getprop("instrumentation/nav/nav-distance")*0.000539));
 					},
 					is_false: func(nd) nd.symbols.dme.hide(),
@@ -501,6 +505,18 @@ var NDStyles = {
 				},
 			},
 			{
+				id:'vorCrsPtr2',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['APP','VOR']) and nd.get_switch('toggle_centered')),
+					is_true: func(nd) {
+						nd.symbols.vorCrsPtr2.show();
+						nd.symbols.vorCrsPtr2.setRotation((getprop("instrumentation/nav/radials/selected-deg")-nd.aircraft_source.get_hdg_tru())*D2R);
+					},
+					is_false: func(nd) nd.symbols.vorCrsPtr2.hide(),
+				},
+			},
+			{
 				id: 'gsDiamond',
 				impl: {
 					init: func(nd,symbol),
@@ -516,16 +532,15 @@ var NDStyles = {
 				id:'locPtr',
 				impl: {
 					init: func(nd,symbol),
-					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['APP','VOR']) and !nd.get_switch('toggle_centered')),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['APP','VOR']) and !nd.get_switch('toggle_centered') and getprop("instrumentation/nav/in-range")),
 					is_true: func(nd) {
 						nd.symbols.locPtr.show();
 						var deflection = getprop("instrumentation/nav/heading-needle-deflection-norm");
 						nd.symbols.locPtr.setTranslation(deflection*150,0);
-						if(abs(deflection < 0.99))
-							nd.symbols.locPtr.setColorFill(1,0,1,1);
-						else
-							nd.symbols.locPtr.setColorFill(1,0,1,0);
-						nd.symbols.locPtr.setTranslation(0,-getprop("instrumentation/nav/heading-needle-deflection-norm")*150);
+						#if(abs(deflection) < 0.99)
+						#	nd.symbols.locPtr.setColorFill(1,0,1,1);
+						#else
+						#	nd.symbols.locPtr.setColorFill(1,0,1,0);
 					},
 					is_false: func(nd) nd.symbols.locPtr.hide(),
 				},
@@ -534,16 +549,15 @@ var NDStyles = {
 				id:'locPtr2',
 				impl: {
 					init: func(nd,symbol),
-					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['APP','VOR']) and !nd.get_switch('toggle_centered') and getprop("instrumentation/nav/in-range")),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['APP','VOR']) and nd.get_switch('toggle_centered') and getprop("instrumentation/nav/in-range")),
 					is_true: func(nd) {
 						nd.symbols.locPtr2.show();
 						var deflection = getprop("instrumentation/nav/heading-needle-deflection-norm");
 						nd.symbols.locPtr2.setTranslation(deflection*150,0);
-						if(abs(deflection < 0.99))
-							nd.symbols.locPtr2.setColorFill(1,0,1,1);
-						else
-							nd.symbols.locPtr2.setColorFill(1,0,1,0);
-						nd.symbols.locPtr2.setTranslation(0,-getprop("instrumentation/nav/heading-needle-deflection-norm")*150);
+						#if(abs(deflection) < 0.99)
+						#	nd.symbols.locPtr2.setColorFill(1,0,1,1);
+						#else
+						#	nd.symbols.locPtr2.setColorFill(1,0,1,0);
 					},
 					is_false: func(nd) nd.symbols.locPtr2.hide(),
 				},
@@ -833,11 +847,11 @@ var NavDisplay = {
 		# anything that needs updatecenter called, should be added to the vector here
 		#
 		foreach(var element; ["compassApp","northUp","aplSymMap","aplSymMapCtr","aplSymVor",
-		                      "staFromL2","staToL2","staFromR2","staToR2",
+		                      "staArrowL2","staArrowR2","staFromL2","staToL2","staFromR2","staToR2",
 		                      "hdgTrk","truMag","altArc","planArcs",
-		                      "trkInd","compass","hdgBug","HdgBugCRT","TrkBugLCD","HdgBugLCD","selHdgLine","curHdgPtr",
-		                      "HdgBugCRT2","TrkBugLCD2","HdgBugLCD2","hdgBug2","selHdgLine2","curHdgPtr2","vorCrsPtr2",
-		                      "staFromL","staToL","staFromR","staToR"] )
+		                      "trkInd","compass","hdgBug","HdgBugCRT","TrkBugLCD","HdgBugLCD","curHdgPtr",
+		                      "HdgBugCRT2","TrkBugLCD2","HdgBugLCD2","hdgBug2","selHdgLine","selHdgLine2","curHdgPtr2",
+		                      "staArrowL","staArrowR","staToL","staFromL","staToR","staFromR"] )
 			me.symbols[element] = me.nd.getElementById(element).updateCenter();
 
 		# this should probably be using Philosopher's new SymbolLayer ?
@@ -1014,7 +1028,7 @@ var NavDisplay = {
 			else
 				me.symbols.vorLId.setText(getprop("instrumentation/nav/frequencies/selected-mhz-fmt"));
 			me.symbols.vorLId.setColor(0.195,0.96,0.097);
-			if(getprop("instrumentation/nav/dme-in-range"))
+			if(getprop("instrumentation/dme/in-range"))
 				me.symbols.dmeLDist.setText(sprintf("%3.1f",getprop("instrumentation/nav/nav-distance")*0.000539));
 			else me.symbols.dmeLDist.setText(" ---");
 			me.symbols.dmeLDist.setColor(0.195,0.96,0.097);
@@ -1045,7 +1059,7 @@ var NavDisplay = {
 			else
 				me.symbols.vorRId.setText(getprop("instrumentation/nav[1]/frequencies/selected-mhz-fmt"));
 			me.symbols.vorRId.setColor(0.195,0.96,0.097);
-			if(getprop("instrumentation/nav[1]/dme-in-range"))
+			if(getprop("instrumentation/dme[1]/in-range"))
 				me.symbols.dmeRDist.setText(sprintf("%3.1f",getprop("instrumentation/nav[1]/nav-distance")*0.000539));
 			else me.symbols.dmeRDist.setText(" ---");
 			me.symbols.dmeRDist.setColor(0.195,0.96,0.097);
@@ -1115,16 +1129,11 @@ var NavDisplay = {
 		}
 		me.map._node.getNode("hdg",1).setDoubleValue(userHdgTrk);
 		if(me.get_switch('toggle_centered')) {
-			if (me.in_mode('toggle_display_mode', ['APP','VOR'])) {
-				me.symbols.vorCrsPtr2.show();
+			if (me.in_mode('toggle_display_mode', ['APP','VOR']))
 				me.symbols.compassApp.show();
-				me.symbols.vorCrsPtr2.setRotation((getprop("instrumentation/nav/radials/selected-deg")-userHdgTrk)*D2R);
-			} else {
-				me.symbols.vorCrsPtr2.hide();
+			else
 				me.symbols.compassApp.setVisible(me.in_mode('toggle_display_mode', ['MAP']));
-			}
 		} else {
-			me.symbols.vorCrsPtr2.hide();
 			me.symbols.compassApp.hide();
 		}
 
@@ -1151,46 +1160,34 @@ var NavDisplay = {
 				else
 					me.symbols.trkInd.show();
 				if((getprop("instrumentation/nav/in-range") and me.get_switch('toggle_lh_vor_adf') == 1)) {
-					me.symbols.staFromL.setVisible(staPtrVis);
-					me.symbols.staToL.setVisible(staPtrVis);
-					me.symbols.staFromL.setColor(0.195,0.96,0.097);
+					me.symbols.staArrowL.setVisible(staPtrVis);
 					me.symbols.staToL.setColor(0.195,0.96,0.097);
-					me.symbols.staFromL.setRotation((nav0hdg+180)*D2R);
-					me.symbols.staToL.setRotation(nav0hdg*D2R);
+					me.symbols.staFromL.setColor(0.195,0.96,0.097);
+					me.symbols.staArrowL.setRotation(nav0hdg*D2R);
 				}
 				elsif(getprop("instrumentation/adf/in-range") and (me.get_switch('toggle_lh_vor_adf') == -1)) {
-					me.symbols.staFromL.setVisible(staPtrVis);
-					me.symbols.staToL.setVisible(staPtrVis);
-					me.symbols.staFromL.setColor(0,0.6,0.85);
+					me.symbols.staArrowL.setVisible(staPtrVis);
 					me.symbols.staToL.setColor(0,0.6,0.85);
-					me.symbols.staFromL.setRotation((adf0hdg+180)*D2R);
-					me.symbols.staToL.setRotation(adf0hdg*D2R);
+					me.symbols.staFromL.setColor(0,0.6,0.85);
+					me.symbols.staArrowL.setRotation(adf0hdg*D2R);
 				} else {
-					me.symbols.staFromL.hide();
-					me.symbols.staToL.hide();
+					me.symbols.staArrowL.hide();
 				}
 				if((getprop("instrumentation/nav[1]/in-range") and me.get_switch('toggle_rh_vor_adf') == 1)) {
-					me.symbols.staFromR.setVisible(staPtrVis);
-					me.symbols.staToR.setVisible(staPtrVis);
-					me.symbols.staFromR.setColor(0.195,0.96,0.097);
+					me.symbols.staArrowR.setVisible(staPtrVis);
 					me.symbols.staToR.setColor(0.195,0.96,0.097);
-					me.symbols.staFromR.setRotation((nav1hdg+180)*D2R);
-					me.symbols.staToR.setRotation(nav1hdg*D2R);
+					me.symbols.staFromR.setColor(0.195,0.96,0.097);
+					me.symbols.staArrowR.setRotation(nav1hdg*D2R);
 				} elsif(getprop("instrumentation/adf[1]/in-range") and (me.get_switch('toggle_rh_vor_adf') == -1)) {
-					me.symbols.staFromR.setVisible(staPtrVis);
-					me.symbols.staToR.setVisible(staPtrVis);
-					me.symbols.staFromR.setColor(0,0.6,0.85);
+					me.symbols.staArrowR.setVisible(staPtrVis);
 					me.symbols.staToR.setColor(0,0.6,0.85);
-					me.symbols.staFromR.setRotation((adf1hdg+180)*D2R);
-					me.symbols.staToR.setRotation(adf1hdg*D2R);
+					me.symbols.staFromR.setColor(0,0.6,0.85);
+					me.symbols.staArrowR.setRotation(adf1hdg*D2R);
 				} else {
-					me.symbols.staFromR.hide();
-					me.symbols.staToR.hide();
+					me.symbols.staArrowR.hide();
 				}
-				me.symbols.staFromL2.hide();
-				me.symbols.staToL2.hide();
-				me.symbols.staFromR2.hide();
-				me.symbols.staToR2.hide();
+				me.symbols.staArrowL2.hide();
+				me.symbols.staArrowR2.hide();
 				me.symbols.curHdgPtr2.hide();
 				me.symbols.HdgBugCRT2.hide();
 				me.symbols.TrkBugLCD2.hide();
@@ -1204,45 +1201,33 @@ var NavDisplay = {
 			} else {
 				me.symbols.trkInd.hide();
 				if((getprop("instrumentation/nav/in-range")	and me.get_switch('toggle_lh_vor_adf') == 1)) {
-					me.symbols.staFromL2.setVisible(staPtrVis);
-					me.symbols.staToL2.setVisible(staPtrVis);
+					me.symbols.staArrowL2.setVisible(staPtrVis);
 					me.symbols.staFromL2.setColor(0.195,0.96,0.097);
 					me.symbols.staToL2.setColor(0.195,0.96,0.097);
-					me.symbols.staFromL2.setRotation((nav0hdg+180)*D2R);
-					me.symbols.staToL2.setRotation(nav0hdg*D2R);
+					me.symbols.staArrowL2.setRotation(nav0hdg*D2R);
 				} elsif(getprop("instrumentation/adf/in-range") and (me.get_switch('toggle_lh_vor_adf') == -1)) {
-					me.symbols.staFromL2.setVisible(staPtrVis);
-					me.symbols.staToL2.setVisible(staPtrVis);
+					me.symbols.staArrowL2.setVisible(staPtrVis);
 					me.symbols.staFromL2.setColor(0,0.6,0.85);
 					me.symbols.staToL2.setColor(0,0.6,0.85);
-					me.symbols.staFromL2.setRotation((adf0hdg+180)*D2R);
-					me.symbols.staToL2.setRotation(adf0hdg*D2R);
+					me.symbols.staArrowL2.setRotation(adf0hdg*D2R);
 				} else {
-					me.symbols.staFromL2.hide();
-					me.symbols.staToL2.hide();
+					me.symbols.staArrowL2.hide();
 				}
 				if((getprop("instrumentation/nav[1]/in-range") and me.get_switch('toggle_rh_vor_adf') == 1)) {
-					me.symbols.staFromR2.setVisible(staPtrVis);
-					me.symbols.staToR2.setVisible(staPtrVis);
+					me.symbols.staArrowR2.setVisible(staPtrVis);
 					me.symbols.staFromR2.setColor(0.195,0.96,0.097);
 					me.symbols.staToR2.setColor(0.195,0.96,0.097);
-					me.symbols.staFromR2.setRotation((nav1hdg+180)*D2R);
-					me.symbols.staToR2.setRotation(nav1hdg*D2R);
+					me.symbols.staArrowR2.setRotation(nav1hdg*D2R);
 				} elsif(getprop("instrumentation/adf[1]/in-range") and (me.get_switch('toggle_rh_vor_adf') == -1)) {
-					me.symbols.staFromR2.setVisible(staPtrVis);
-					me.symbols.staToR2.setVisible(staPtrVis);
+					me.symbols.staArrowR2.setVisible(staPtrVis);
 					me.symbols.staFromR2.setColor(0,0.6,0.85);
 					me.symbols.staToR2.setColor(0,0.6,0.85);
-					me.symbols.staFromR2.setRotation((adf1hdg+180)*D2R);
-					me.symbols.staToR2.setRotation(adf1hdg*D2R);
+					me.symbols.staArrowR2.setRotation(adf1hdg*D2R);
 				} else {
-					me.symbols.staFromR2.hide();
-					me.symbols.staToR2.hide();
+					me.symbols.staArrowR2.hide();
 				}
-				me.symbols.staFromL.hide();
-				me.symbols.staToL.hide();
-				me.symbols.staFromR.hide();
-				me.symbols.staToR.hide();
+				me.symbols.staArrowL.hide();
+				me.symbols.staArrowR.hide();
 				me.symbols.curHdgPtr.hide();
 				me.symbols.HdgBugCRT.hide();
 				me.symbols.TrkBugLCD.hide();

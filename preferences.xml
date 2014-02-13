@@ -229,10 +229,10 @@ Started September 2000 by David Megginson, david@megginson.com
 				<debug type="bool" userarchive="y">false</debug>
 				<map-size type="int" userarchive="y">2048</map-size>
 				<num-cascades type="int" userarchive="y">4</num-cascades>
-				<cascade-far-m index="0" type="float" userarchive="y">2.0</cascade-far-m>
-				<cascade-far-m index="1" type="float" userarchive="y">8.0</cascade-far-m>
-				<cascade-far-m index="2" type="float" userarchive="y">32.0</cascade-far-m>
-				<cascade-far-m index="3" type="float" userarchive="y">128.0</cascade-far-m>
+				<cascade-far-m n="0" type="float" userarchive="y">2.0</cascade-far-m>
+				<cascade-far-m n="1" type="float" userarchive="y">8.0</cascade-far-m>
+				<cascade-far-m n="2" type="float" userarchive="y">32.0</cascade-far-m>
+				<cascade-far-m n="3" type="float" userarchive="y">128.0</cascade-far-m>
 				<filtering type="int" userarchive="y">1</filtering>
 			</shadows>
 			<shader-experimental type="bool" userarchive="y">false</shader-experimental>

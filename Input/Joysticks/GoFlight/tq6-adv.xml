@@ -6,7 +6,8 @@
 -->
 <PropertyList>
  <name>TQ6</name>
-
+ <name>GoFlight TQ6</name>
+ 
  <nasal>
   <script>
    <![CDATA[

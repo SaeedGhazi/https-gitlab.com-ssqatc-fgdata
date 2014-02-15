@@ -11,7 +11,7 @@ and fallback to plain transparency when the model shader is disabled.
 		  <predicate>
 			<and>
 			  <equal>
-				<property>/sim/rendering/shaders/model</property>
+				<float-property>/sim/rendering/shaders/model</float-property>
 				<value type="int">0</value>
 			  </equal>
 			  <or>

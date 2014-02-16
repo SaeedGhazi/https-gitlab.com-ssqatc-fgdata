@@ -45,16 +45,18 @@ var draw_route =  func (group, theroute, controller=nil, lod=0)
 	{
 		if (i == 0) {
 			var leg = fp.getWP(1);
+			var j = 0;
 			foreach (var pt; leg.path()) {
 				append(coords,"N"~pt.lat);
 				append(coords,"E"~pt.lon);
-				if (i==0){
+				if (j==0){
 					append(cmds,2);
-					i+=1;
+					j=1;
 				} else
 					append(cmds,4);
 			}
 			canvas.drawwp(group, leg.path()[0].lat, leg.path()[0].lon, fp.getWP(0).alt_cstr, fp.getWP(0).wp_name, i, wp);
+			i+=1;
 		}
 		var leg = fp.getWP(i);
 		foreach (var pt; leg.path()) {

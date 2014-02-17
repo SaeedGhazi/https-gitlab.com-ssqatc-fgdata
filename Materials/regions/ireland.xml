@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!-- General settings for all Ireland materials -->
+<PropertyList>
+  <!-- Ireland as a box with given latitude/longitude -->
+  <condition>
+    <and>
+      <equals>
+        <property>sim/startup/season</property>
+        <value>summer</value>
+      </equals>
+    <and>
+     <greater-than>
+      <property>position/longitude-deg</property>
+      <value>-11.0</value>
+     </greater-than>
+     <less-than-equals>
+      <property>position/longitude-deg</property>
+      <value>-5.0</value>
+     </less-than-equals>
+     <greater-than-equals>
+      <property>position/latitude-deg</property>
+      <value>50.0</value>
+     </greater-than-equals>
+	 <less-than>
+	  <property>position/latitude-deg</property>
+      <value>57.0</value>
+	 </less-than>
+    </and>
+   </and>
+  </condition>
+  
+  <!-- European buildings definitions. Notes that these will be used for  -->
+  <!-- both towns and cities                                              -->
+  <building-texture>Textures/buildings.png</building-texture>
+  <building-lightmap>Textures/buildings-lightmap.png</building-lightmap>
+
+  
+</PropertyList>

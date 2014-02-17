@@ -78,6 +78,15 @@ else 	# without worker threads, tile generation is complete at this point
 	{props.globals.getNode(lw~"tiles").getChild("tile",dir_index).getNode("generated-flag").setValue(2);}
 
 
+# generate impostor ring if applicable
+
+if (impostor_trigger == 1)
+	{
+	weather_tile_management.remove_impostors();
+	weather_tile_management.create_impostors();
+	impostor_trigger = 0;
+	}
+
 }
 
 
@@ -4415,6 +4424,38 @@ for (var i=0; i<2; i=i+1)
 	local_weather.create_layer("Cirrocumulus (new)", lat+get_lat(x,y,phi), lon+get_lat(x,y,phi), alt, 0.0, 8000.0, 4500.0, beta, 10.0, 0.25, 0, 0.0);	
 
 	}
+}
+
+
+var create_impostor_ring = func (lat, lon, alt, alpha, type, n) {
+
+var path = local_weather.select_cloud_model("Impostor sheet", type);
+var phi = alpha * math.pi/180.0;
+
+var limit = 4 + 2 * n; 
+
+for (var i = 0; i< limit+1; i=i+1)
+	{
+	for (var j = 0; j<limit+1; j=j+1)
+		{
+		x = -limit * 20.0 + i * 40.0;
+		y = -limit * 20.0 + j * 40.0;
+		var dsq = x*x + y*y;
+		if (dsq >  6000.0)
+			{
+			x=x*1000.0; y=y*1000.0;
+			path = local_weather.select_cloud_model("Impostor sheet", type);
+			if (path != "void")
+				{  
+				var rnd = rand();
+				if (rnd > 0.75) {alpha = alpha + 90.0;}
+				compat_layer.create_impostor(path, lat + get_lat(x,y,phi), lon+get_lon(x,y,phi), alt ,alpha);
+				}
+			}
+		}
+	}
+
+
 }
 
 

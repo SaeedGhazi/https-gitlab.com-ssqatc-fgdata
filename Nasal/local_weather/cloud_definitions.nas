@@ -536,6 +536,27 @@ else if (type=="Noctilucent") {
 		else if (rn > 0.25) {path = "Models/Weather/noctilucent9.xml";}
 		else  {path = "Models/Weather/noctilucent10.xml";}
 	}
+else if (type=="Impostor sheet") {
+		if (subtype=="Nimbus") {
+			if (rn>0.0) {path = "Models/Weather/impostor_nimbus.xml";}
+			}
+		else if (subtype=="broken") {
+			if (rn>0.5) {path = "Models/Weather/impostor_broken1.xml";}
+			else if (rn>0.0) {path = "Models/Weather/impostor_broken2.xml";}
+			}
+		else if (subtype=="scattered") {
+			if (rn>0.6) {path = "Models/Weather/impostor_scattered1.xml";}
+			else if (rn>0.4) {path = "Models/Weather/impostor_scattered2.xml";}
+			else if (rn > 0.2) {path = "Models/Weather/impostor_few1.xml";}
+			else  {path = "Models/Weather/impostor_few2.xml";}
+			}	
+		else if (subtype=="few") {
+			if (rn>0.7) {path = "Models/Weather/impostor_few1.xml";}
+			else if (rn>0.4) {path = "Models/Weather/impostor_few2.xml";}
+			else if (rn>0.3) {path = "Models/Weather/impostor_scattered2.xml";}
+			else {path = "void";}
+			}				
+	}
 else if (type == "Cirrocumulus (cloudlet)") {
 
 	cloudAssembly = local_weather.cloud.new(type, subtype);

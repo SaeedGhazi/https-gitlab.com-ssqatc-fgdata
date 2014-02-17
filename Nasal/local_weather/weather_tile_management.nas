@@ -14,6 +14,8 @@
 # create_neighbours		to initialize the 8 neighbours of the initial tile
 # buffer_loop			to manage the buffering of faraway clouds in an array
 # housekeeping_loop		to shift clouds from the scenery into the buffer
+# remove_impostors		to delete a ring of impostors to mimick distant clouds
+# create_impostors		to create a ring of impostors to mimick distant clouds
 # watchdog loop			(debug helping structure)
 # calc_geo			to get local Cartesian geometry for latitude conversion
 # get_lat			to get latitude from Cartesian coordinates
@@ -27,6 +29,7 @@
 # cloud				to provide the data hash for the new cloud rendering system
 # cloudBuffer			to store a cloud in a Nasal buffer, to provide methods to move it
 # cloudScenery			to store info for clouds in scenery, to provide methods to move and evolve them
+# cloudImpostor			to provide the hash data for an impostor cloud sheet
 
 
 ###################################
@@ -876,6 +879,11 @@ if (system_rotation_angle > 0.0)
 	create_neighbour(lat, lon, 9, alpha);
 	rotate_tile_scheme(system_rotation_angle);
 	}
+
+# ready the system for creating impostors
+
+impostor_trigger = 1;
+
 }
 
 
@@ -1191,6 +1199,57 @@ if (getprop(lw~"housekeeping-loop-flag") ==1) {settimer( func {housekeeping_loop
 
 
 ###############################
+# impostor handline routines
+###############################
+
+var impostor_trigger = 0;
+
+var impostor_type_map = {"low_pressure_core" : "Nimbus", "low_pressure" : "broken", "low_pressure_border": "broken", "high_pressure_border" : "scattered", "high_pressure" : "few", "high_pressure_core": "few"};
+
+var remove_impostors = func {
+
+foreach (entry;cloudImpostorArray)
+	{
+	entry.removeNodes();
+	}
+setsize(cloudImpostorArray,0);
+}
+
+var create_impostors = func {
+
+var visibility = getprop("/environment/visibility-m");
+var cloud_range = getprop("/sim/rendering/clouds3d-vis-range");
+
+if ((visibility < 80000.0) or (cloud_range < 70000.0)) {return;}
+
+if (visibility < cloud_range) {var range = visibility;}
+else	{var range = cloud_range;}
+
+var n = int ((range - 60000.0)/40000.0); 
+
+var lat = getprop(lw~"tiles/tile[4]/latitude-deg");
+var lon = getprop(lw~"tiles/tile[4]/longitude-deg");
+var alpha = getprop(lw~"tiles/tile[4]/orientation-deg");
+var code = getprop(lw~"tiles/tile[4]/code");
+var index = getprop(lw~"tiles/tile[4]/tile-index");
+var alt_offset = getprop(lw~"tmp/tile-alt-offset-ft");
+var alt = weather_dynamics.tile_convective_altitude[index-1] + 1000.0 + alt_offset;
+
+if (contains(impostor_type_map,code)) {var type = impostor_type_map[code];}
+else {var type = "scattered";}
+
+if (local_weather.debug_output_flag == 1)
+	{
+	printf("Creating impostor ring...");
+	print(lat, " ", lon, " ", alt, " ", alpha, " ", type, " ", n);
+	}
+	
+weather_tiles.create_impostor_ring(lat, lon, alt, alpha, type, n);
+}
+
+
+
+###############################
 # watchdog loop for debugging
 ###############################
 
@@ -1367,6 +1426,21 @@ var cloudBuffer = {
 	},
   
 };
+
+
+var cloudImpostorArray = [];
+
+var cloudImpostor = {
+	new: func(modelNode) {
+	        var c = { parents: [cloudImpostor] };
+		c.modelNode = modelNode;
+	        return c;
+	},
+	removeNodes: func {
+		me.modelNode.remove();
+	},
+};
+
 
 
 var cloudSceneryArray = [];

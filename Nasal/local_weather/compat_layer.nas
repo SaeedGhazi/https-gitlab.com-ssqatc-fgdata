@@ -20,6 +20,7 @@
 # setWindSmoothly 		to set the wind gradually across a second
 # smooth_wind_loop		(helper function for setWindSmoothly)
 # create_cloud			to place a single cloud into the scenery
+# create_impostor		to place an impostor sheet mimicking far clouds into the scene
 # create_cloud_array		to place clouds from storage arrays into the scenery
 # get_elevation			to get the terrain elevation at given coordinates
 # get_elevation_vector		to get terrain elevation at given coordinate vector
@@ -542,7 +543,36 @@ if (local_weather.dynamics_flag == 1)
 }
 
 
+###########################################################
+# place an impostor sheet 
+###########################################################
 
+var create_impostor = func(path, lat, long, alt, heading) {
+
+var n = props.globals.getNode("local-weather/clouds", 1);
+var model_number = n.getNode("model-placement-index").getValue();
+var m = props.globals.getNode("models", 1);
+		for (var i = model_number; 1; i += 1)
+			if (m.getChild("model", i, 0) == nil)
+				break;
+var model = m.getChild("model", i, 1);
+n.getNode("model-placement-index").setValue(i);	
+
+
+model.getNode("path", 1).setValue(path);
+model.getNode("latitude-deg", 1).setValue(lat);
+model.getNode("longitude-deg", 1).setValue(long);
+model.getNode("elevation-ft", 1).setValue(alt);
+model.getNode("heading-deg", 1).setValue(local_weather.wind.cloudlayer[0]+180.0);
+model.getNode("speed-kt",1).setValue(local_weather.wind.cloudlayer[1]);
+model.getNode("load", 1).remove();
+
+
+var imp = weather_tile_management.cloudImpostor.new(model);
+append(weather_tile_management.cloudImpostorArray,imp);
+
+
+}
 
 
 ###########################################################

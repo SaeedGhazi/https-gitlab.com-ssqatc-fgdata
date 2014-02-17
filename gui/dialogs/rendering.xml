@@ -616,7 +616,7 @@
 				<slider>
 					<name>cloud-vis-range</name>
 					<min>1000.0</min>
-					<max>45000.0</max>
+					<max>150000.0</max>
 					<property>/sim/rendering/clouds3d-vis-range</property>
 					<binding>
 						<command>dialog-apply</command>

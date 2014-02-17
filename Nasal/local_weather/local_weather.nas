@@ -1687,6 +1687,9 @@ settimer ( func { setsize(weather_dynamics.cloudQuadtrees,0);},0.1); # to avoid 
 setsize(effectVolumeArray,0);
 n_effectVolumeArray = 0;
 
+# remove any impostors
+
+weather_tile_management.remove_impostors();
 
 # clear any wxradar echos
 
@@ -3676,6 +3679,12 @@ if (compat_layer.features.can_disable_environment ==1)
 
 local_weather.setDefaultCloudsOff();
 
+# read max. visibility range and set far camera clipping 
+
+max_vis_range = math.exp(getprop(lw~"config/aux-max-vis-range-m")); 
+setprop(lw~"config/max-vis-range-m",max_vis_range); 
+if (max_vis_range>120000.0){setprop("/sim/rendering/camera-group/zfar",max_vis_range);}
+
 # now see if we need to presample the terrain
 
 if ((presampling_flag == 1) and (getprop(lw~"tmp/presampling-status") == "idle")) 
@@ -3972,6 +3981,8 @@ local_weather.init_sea_colors();
 # start the mask loop
 #local_weather.init_mask();
 
+# create impostors - this should only happen when sufficiently high in air
+weather_tile_management.create_impostors();
 
 # weather_tile_management.watchdog_loop();
 

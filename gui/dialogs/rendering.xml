@@ -33,7 +33,7 @@
 	</group>
 
 	<hrule/>
-  
+
   <text>
     <visible>
       <equals>
@@ -102,7 +102,7 @@
 
 			<checkbox>
 				<halign>left</halign>
-				<label>Use point sprites for runway lights (requires restart)</label>
+				<label>Use point sprites for runway lights</label>
 				<property>/sim/rendering/point-sprites</property>
 				<binding>
 					<command>dialog-apply</command>
@@ -140,7 +140,7 @@
 			<group>
 				<layout>hbox</layout>
 				<halign>left</halign>
-				
+
 				<checkbox>
 					<label>Throttle frame rate</label>
 					<name>frame-rate-throttle</name>
@@ -238,7 +238,7 @@
 					<halign>left</halign>
 					<label>Terrain texture scheme</label>
         </text>
-        
+
         <combo>
           <row>0</row>
           <col>1</col>
@@ -292,7 +292,7 @@
 						<object-name>random-buildings</object-name>
 					</binding>
 				</checkbox>
-				
+
 				<text>
 				  <row>2</row>
 				  <col>1</col>
@@ -362,7 +362,7 @@
 						<property>/sim/rendering/random-vegetation</property>
 					</enable>
 				</text>
-				
+
 			</group>
 
 			<button>
@@ -384,7 +384,7 @@
 
 		<group>
 			<layout>vbox</layout>
-			
+
 			<group>
 				<layout>hbox</layout>
 				<text>
@@ -395,10 +395,10 @@
 					<stretch>true</stretch>
 				</hrule>
 			</group>
-			
+
 			<group>
 				<layout>table</layout>
-				
+
 				<checkbox>
 					<halign>left</halign>
 					<row>0</row>
@@ -411,7 +411,7 @@
 						<object-name>custom-settings</object-name>
 					</binding>
 				</checkbox>
-				
+
 				<group>
 					<layout>hbox</layout>
 					<row>1</row>
@@ -446,9 +446,9 @@
 						<live>true</live>
 						<property>/sim/rendering/shaders/quality-level-internal</property>
 					</text>
-					
+
 				</group>
-				
+
 				<group>
 					<layout>hbox</layout>
 					<row>1</row>
@@ -461,7 +461,7 @@
 							</not>
 						</and>
 					</visible>
-					
+
 					<button>
 						<legend>Shader Options</legend>
 						<halign>left</halign>
@@ -490,7 +490,7 @@
 							</not>
 						</and>
 					</visible>
-					
+
 					<button>
 						<legend>Shader Options</legend>
 						<halign>left</halign>
@@ -506,9 +506,9 @@
 					</button>
 
 				</group>
-				
+
 			</group>
-			
+
 			<group>
 				<layout>hbox</layout>
 				<text>
@@ -633,7 +633,7 @@
 					<property>/sim/rendering/clouds3d-vis-range</property>
 				</text>
 			</group>
-			
+
 			<group>
 				<layout>table</layout>
 				<group>
@@ -686,12 +686,12 @@
 						<blue>0.6</blue>
 					</color>
 				</text>-->
-				
+
 				<group>
 					<layout>hbox</layout>
 					<row>0</row>
 					<col>0</col>
-					
+
 					<text>
 						<label>Rembrandt</label>
 						<halign>left</halign>
@@ -718,7 +718,7 @@
 						</visible>
 					</hrule>
 				</group>
-				
+
 				<button>
 					<row>1</row>
 					<col>0</col>
@@ -737,7 +737,7 @@
 					</binding>
 					<pref-width>200</pref-width>
 				</button>
-			
+
 			</group>
 
 			<empty>
@@ -760,32 +760,32 @@
 
 	<nasal>
 		<open>
-		
+
       var materials = { "Region-specific" : "Materials/regions/materials.xml",
                         "Global" : "Materials/default/materials.xml",
                         "Global alternative (DDS format)" : "Materials/dds/materials.xml" };
-      
-		
+
+
 			gui.enable_widgets(cmdarg(), "shadows-debug", getprop("/sim/gui/devel-widgets"));
 			props.globals.getNode("/sim/rendering/shaders/quality-level", 1).setAttribute("userarchive", 0);
 			setprop("/sim/gui/frame-rate-throttled", (getprop("/sim/frame-rate-throttle-hz") > 0));
 
 			var matfile = getprop("/sim/rendering/materials-file");
 			foreach (var name; keys(materials)) {
-			  if (matfile == materials[name]) {			  
-          setprop("/sim/gui/dialogs/rendering/texture-set", name);			  
+			  if (matfile == materials[name]) {
+          setprop("/sim/gui/dialogs/rendering/texture-set", name);
 			  }
 			}
-      
-      var vendor = getprop("/sim/rendering/gl-vendor");            
+
+      var vendor = getprop("/sim/rendering/gl-vendor");
       if (vendor != nil) {
         vendor = string.lc(vendor);
         if (find("intel", vendor) != -1) {
-          setprop("/sim/gui/dialogs/rendering/shader-warning", 1);                  
+          setprop("/sim/gui/dialogs/rendering/shader-warning", 1);
         } else {
-          setprop("/sim/gui/dialogs/rendering/shader-warning", 0);        
+          setprop("/sim/gui/dialogs/rendering/shader-warning", 0);
         }
-      }			
+      }
 		</open>
 	</nasal>
 </PropertyList>

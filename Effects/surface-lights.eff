@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+	<name>Effects/surface-lights</name>
+	<parameters>
+    <!-- min-size, max-size, size, attenuation, cull-face parameters filled in by C++ code -->
+    <texture n="0">
+      <type>light-sprite</type>
+      <wrap-s>clamp</wrap-s>
+      <wrap-t>clamp</wrap-t>
+    </texture>
+	</parameters>
+
+	<technique n="17">
+    <!-- Combined technique -->
+    <predicate>
+      <and>
+        <property>/sim/rendering/point-sprites</property>
+        <or>
+          <less-equal>
+            <value type="float">2.0</value>
+            <glversion/>
+          </less-equal>
+          <and>
+            <extension-supported>GL_ARB_point_sprite</extension-supported>
+            <extension-supported>GL_ARB_point_parameters</extension-supported>
+          </and>
+        </or>
+      </and>
+    </predicate>
+		<pass>
+			<render-bin>
+				<bin-number>8</bin-number>
+				<bin-name>DepthSortedBin</bin-name>
+			</render-bin>
+			<lighting>false</lighting>
+			<blend>
+				<source>src-alpha</source>
+				<destination>one-minus-src-alpha</destination>
+			</blend>
+			<alpha-test>
+				<comparison>gequal</comparison>
+				<reference type="float">0.1</reference>
+			</alpha-test>
+			<cull-face><use>directional</use></cull-face>
+			<polygon-mode>
+        <front>point</front>
+        <back>point</back>
+      </polygon-mode>
+      <point>
+        <min-size><use>min-size</use></min-size>
+        <max-size><use>max-size</use></max-size>
+        <size><use>size</use></size>
+        <attenuation><use>attenuation</use></attenuation>
+      </point>
+      <texture-unit>
+        <unit>0</unit>
+        <point-sprite>true</point-sprite>
+        <type><use>texture[0]/type</use></type>
+        <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[0]/wrap-t</use></wrap-t>
+      </texture-unit>
+		</pass>
+  </technique>
+
+
+	<technique n="18">
+    <!-- Sprite technique -->
+    <predicate>
+      <and>
+        <property>/sim/rendering/point-sprites</property>
+        <or>
+          <less-equal>
+            <value type="float">2.0</value>
+            <glversion/>
+          </less-equal>
+          <extension-supported>GL_ARB_point_sprite</extension-supported>
+        </or>
+      </and>
+    </predicate>
+		<pass>
+			<render-bin>
+				<bin-number>8</bin-number>
+				<bin-name>DepthSortedBin</bin-name>
+			</render-bin>
+			<lighting>false</lighting>
+			<blend>
+				<source>src-alpha</source>
+				<destination>one-minus-src-alpha</destination>
+			</blend>
+			<cull-face><use>directional</use></cull-face>
+			<polygon-mode>
+        <front>point</front>
+        <back>point</back>
+      </polygon-mode>
+      <texture-unit>
+        <unit>0</unit>
+        <point-sprite>true</point-sprite>
+        <type><use>texture[0]/type</use></type>
+        <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[0]/wrap-t</use></wrap-t>
+      </texture-unit>
+		</pass>
+  </technique>
+
+	<technique n="19">
+    <!-- Attenuation technique -->
+    <predicate>
+      <and>
+        <or>
+          <less-equal>
+            <value type="float">2.0</value>
+            <glversion/>
+          </less-equal>
+          <extension-supported>GL_ARB_point_parameters</extension-supported>
+        </or>
+      </and>
+    </predicate>
+		<pass>
+      <point>
+        <min-size><use>min-size</use></min-size>
+        <max-size><use>max-size</use></max-size>
+        <size><use>size</use></size>
+        <attenuation><use>attenuation</use></attenuation>
+      </point>
+			<render-bin>
+				<bin-number>8</bin-number>
+				<bin-name>DepthSortedBin</bin-name>
+			</render-bin>
+			<blend>
+				<source>src-alpha</source>
+				<destination>one-minus-src-alpha</destination>
+			</blend>
+			<lighting>false</lighting>
+			<cull-face><use>directional</use></cull-face>
+			<polygon-mode>
+        <front>point</front>
+        <back>point</back>
+      </polygon-mode>
+		</pass>
+	</technique>
+
+	<technique n="20">
+    <!-- Basic technique -->
+		<pass>
+			<render-bin>
+				<bin-number>8</bin-number>
+				<bin-name>DepthSortedBin</bin-name>
+			</render-bin>
+			<lighting>false</lighting>
+			<blend>
+				<source>src-alpha</source>
+				<destination>one-minus-src-alpha</destination>
+			</blend>
+			<cull-face><use>directional</use></cull-face>
+			<polygon-mode>
+        <front>point</front>
+        <back>point</back>
+      </polygon-mode>
+		</pass>
+	</technique>
+</PropertyList>

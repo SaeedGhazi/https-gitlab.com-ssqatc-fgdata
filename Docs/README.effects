@@ -19,7 +19,7 @@ parameters for shader programs. The names of properties in the
 parameter section can be whatever the effects author chooses, although
 some standard parameters  are set by FlightGear itself. On the other
 hand, the properties in the techniques section are all defined by the
-FlightGear. 
+FlightGear.
 
 Techniques
 ----------
@@ -35,7 +35,7 @@ and, or, equal, less, less-equal
 glversion - returns the version number of OpenGL
 extension-supported - returns true if an OpenGL extension is supported
 property - returns the boolean value of a property
-float-property - returns the float value of a property, useful inside equal, less 
+float-property - returns the float value of a property, useful inside equal, less
                 or less-equal nodes
 shader-language - returns the version of GLSL supported, or 0 if there is none.
 
@@ -50,7 +50,7 @@ The proper way to test whether to enable a shader-based technique is:
     </and>
   </predicate>
 
-There is also a property set by the user to indicate what is the level 
+There is also a property set by the user to indicate what is the level
 of quality desired. This level of quality can be checked in the predicate
 like this :
     <predicate>
@@ -63,7 +63,7 @@ like this :
   <!-- other predicate conditions -->
       </and>
     </predicate>
-    
+
 The range of /sim/rendering/quality-level is [0..5]
  * 2.0 is the threshold for relief mapping effects,
  * 4.0 is the threshold for geometry shader usage.
@@ -143,8 +143,8 @@ The following attributes are currently implemented in techiques:
 alpha-test - children: active, comparison, reference
      Valid values for comparision:
        never, less, equal, lequal, greater, notequal, gequal,
-       always 
-       
+       always
+
 alpha-to-coverage - true, false
 
 blend - children: active, source, destination, source-rgb,
@@ -176,7 +176,7 @@ program
     attribute
     geometry-vertices-out - integer, max number of vertices emitted by geometry
                             shader
-    geometry-input-type - points, lines, lines-adjacency, triangles, 
+    geometry-input-type - points, lines, lines-adjacency, triangles,
                           triangles-adjacency
     geometry-output-type - points, line-strip, triangle-strip
 
@@ -188,21 +188,45 @@ shade-model - flat, smooth
 
 texture-unit - has several child properties:
   unit - The number of an OpenGL texture unit
-    type - This is either an OpenGL texture type or the name of a
+  point-sprite - true, false - Whether this should rendered as a point-sprite
+  type - This is either an OpenGL texture type or the name of a
     builtin texture. Currently supported OpenGL types are 1d, 2d,
     3d which have the following common parameters:
-    image (file name)
-      filter
-      mag-filter
-      wrap-s
-      wrap-t
-      wrap-r
+      image (file name)
+      filter - nearest, linear, [nearest|linear]-mipmap-[nearest|linear]
+      mag-filter - nearest, linear, [nearest|linear]-mipmap-[nearest|linear]
+      wrap-s - clamp, clamp-to-border, clamp-to-edge, mirror, repeat
+      wrap-t - clamp, clamp-to-border, clamp-to-edge, mirror, repeat
+      wrap-r - clamp, clamp-to-border, clamp-to-edge, mirror, repeat
+      mipmap-control - control the mipmap on a per-channel basis.  Children:
+        function-r - auto, average, sum, product, min, max
+        function-g - auto, average, sum, product, min, max
+        function-b - auto, average, sum, product, min, max
+        function-a - auto, average, sum, product, min, max
+
     The following built-in types are supported:
       white - 1 pixel white texture
-      noise - a 3d noise texture
-    environment
-      mode
-      color
+      noise - a 3d noise texture. (size parameter defines size of texture)
+      light-sprite - a procedurally generated sprite suitable for point lights
+      cubemap - build a cube-map.  Children:
+        images - build from 6 images. Children: [positive|negative]-[x|y|z]
+        image - build from a single cross-image
+
+  environment
+    mode - add, blend, decal, modulate, replace
+    color
+
+  texenv-combine
+    combine-[rgb|alpha] - replace, modulate, add, add-signed, interpolate, subtract, dot3-rgb, dot3-rgba
+    source[0|1|2]-[rgb|alpha] - constant, primary_color, previous, texture, texture[0-7]
+    operand[0|1|2]-[rgb|alpha] -src-color, one-minus-src-color, src-alpha, one-minus-src-alpha
+    scale-[rgb|alpha]
+    constant-color
+
+  texgen
+    mode - object-linear, eye-linear, sphere-map, normal-map, reflection-map
+    planes - s, t, r, q
+
 uniform
     name
     type - float, float-vec3, float-vec4, sampler-1d, sampler-2d,
@@ -240,10 +264,10 @@ parameters section.
 Generate
 --------
 
-Often shader effects need tangent vectors to work properly. These 
-tangent vectors, usually called tangent and binormal, are computed 
-on the CPU and given to the shader as vertex attributes. These 
-vectors are computed on demand on the geometry using the effect if 
+Often shader effects need tangent vectors to work properly. These
+tangent vectors, usually called tangent and binormal, are computed
+on the CPU and given to the shader as vertex attributes. These
+vectors are computed on demand on the geometry using the effect if
 the 'generate' clause is present in the effect file. Exemple :
 
   <generate>
@@ -253,12 +277,12 @@ the 'generate' clause is present in the effect file. Exemple :
   </generate>
 
 Valid subnodes of 'generate' are 'tangent', 'binormal' or 'normal'.
-The integer value of these subnode is the index of the attribute 
+The integer value of these subnode is the index of the attribute
 that will hold the value of the vec3 vector.
 
 The generate clause is located under PropertyList in the xml file.
 
-In order to be available for the vertex shader, these data should 
+In order to be available for the vertex shader, these data should
 be bound to an attribute in the program clause, like this :
 
   <program>
@@ -273,9 +297,9 @@ be bound to an attribute in the program clause, like this :
     </attribute>
   </program>
 
-attribute names are whatever the shader use. The index is the one 
-declared in the 'generate' clause. So because generate/tangent has 
-value 6 and my_tangent_attribute has index 6, my_tangent_attribute 
+attribute names are whatever the shader use. The index is the one
+declared in the 'generate' clause. So because generate/tangent has
+value 6 and my_tangent_attribute has index 6, my_tangent_attribute
 holds the tangent value for the vertex.
 
 Default Effects in Terrain Materials and Models
@@ -297,7 +321,7 @@ with parameters extracted from OSG objects; this effect inherits, by
 default, from Effects/model-default.eff. A larger set of parameters is
 created for model effects than for terrain because there is more
 variation possible from the OSG model loaders than from the terrain
-system. The parameters created are: 
+system. The parameters created are:
 
   * material active, ambient, diffuse, specular, emissive,
     shininess, color mode
@@ -343,7 +367,7 @@ apply. The effect does not need the file extension.
 
 NOTE:
 
-Chrome, although now implemented as an effect, still retains the old method of 
+Chrome, although now implemented as an effect, still retains the old method of
 application:
 
   <animation>

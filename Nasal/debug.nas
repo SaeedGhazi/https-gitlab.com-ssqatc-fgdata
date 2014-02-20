@@ -32,10 +32,25 @@
 # debug.isnan()                            returns 1 if argument is an invalid number (NaN),
 #                                          0 if it's a valid number, and nil in all other cases
 #
-# debug.benchmark(<label:string>, <func> [, <repeat:int>])
-#                                      ... runs function <repeat> times (default: 1)
-#                                          and prints execution time in seconds,
-#                                          prefixed with <label>.
+# debug.benchmark(<label:string>, <func> [, <repeat:int> [, <output:vector>]])
+#                                      ... runs function <repeat> times (default: nil)
+#                                          and prints total execution time in seconds,
+#                                          prefixed with <label>, while adding results
+#                                          to <output>, or returning the only result
+#                                          if <repeat> is nil.
+#
+# debug.benchmark_time(<func> [, <repeat:int> [, <output:vector>]])
+#                                      ... like debug.benchmark, but returns total
+#                                          execution time and does not print anything.
+#
+# debug.rank(<list:vector> [, <repeat:int>])
+#                                      ... sorts the list of functions based on execution
+#                                          time over <repeat> samples (default: 1).
+#
+# debug.print_rank(<result:vector>, <names:int>)
+#                                      ... prints the <result> of debug.rank with <names>
+#                                          (which can be a vector of [name, func] or
+#                                          [func, name], or a hash of name:func).
 #
 # debug.printerror(<err-vector>)       ... prints error vector as set by call()
 #
@@ -285,17 +300,97 @@ var proptrace = func(root = "/", frames = 2) {
 
 
 ##
-# Executes function fn "repeat" times and prints execution time in seconds. Examples:
+# Executes function fn "repeat" times and prints execution time in seconds. If repeat
+# is an integer and an optional "output" argument is specified, each test's result
+# is appended to that vector, then the vector is returned. If repeat is nil, then
+# the funciton is run once and the result returned. Otherwise, the result is discarded.
+# Examples:
 #
 #     var test = func { getprop("/sim/aircraft"); }
 #     debug.benchmark("test()/1", test, 1000);
 #     debug.benchmark("test()/2", func setprop("/sim/aircraft", ""), 1000);
 #
-var benchmark = func(label, fn, repeat = 1) {
-	var start = systime();
-	for (var i = 0; i < repeat; i += 1)
-		fn();
-	print(_bench(sprintf(" %s --> %.6f s ", label, systime() - start)));
+#     var results = debug.benchmark("test()", test, 1000, []);
+#     print("  Results were:");
+#     print("    ", debug.string(results));
+#
+var benchmark = func(label, fn, repeat = nil, output=nil) {
+	var start = var end = nil;
+	if (repeat == nil) {
+		start = systime();
+		output = fn();
+	} elsif (typeof(output) == 'vector') {
+		start = systime();
+		for (var i = 0; i < repeat; i += 1)
+			append(output, fn());
+	} else {
+		start = systime();
+		for (var i = 0; i < repeat; i += 1)
+			fn();
+	}
+	end = systime();
+	print(_bench(sprintf(" %s --> %.6f s ", label, end - start)));
+	return output;
+}
+
+var benchmark_time = func(fn, repeat = 1, output = nil) {
+	var start = var end = nil;
+	if (repeat == nil) {
+		start = systime();
+		output = fn();
+	} elsif (typeof(output) == 'vector') {
+		start = systime();
+		for (var i = 0; i < repeat; i += 1)
+			append(output, fn());
+	} else {
+		start = systime();
+		for (var i = 0; i < repeat; i += 1)
+			fn();
+	}
+	end = systime();
+	return end - start;
+}
+
+##
+# Executes each function in the list and returns a sorted vector with the fastest
+# on top (i.e. first). Each position in the result is a vector of [func, time].
+#
+var rank = func(list, repeat = nil) {
+	var result = [];
+	foreach (var fn; list) {
+		var time = benchmark_time(fn, repeat);
+		append(result, [fn, time]);
+	}
+	return sort(result, func(a,b) a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0);
+}
+
+var print_rank = func(label, list, names) {
+	var _vec = (typeof(names) == 'vector');
+	print("Test results for "~label);
+	var first = 1;
+	var longest = list[-1][1];
+	foreach (var item; list) {
+		var (fn, time) = item;
+		var name = nil;
+		if (_vec) {
+			foreach (var l; names) {
+				if (l[1] == fn) {
+					name = l[0]; break;
+				} elsif (l[0] == fn) {
+					name = l[1]; break;
+				}
+			}
+		} else {
+			foreach (var name; keys(names)) {
+				if (names[name] == fn) break;
+				else name = nil;
+			}
+		}
+		if (name == nil) die("function not found");
+		print("  "~name~(first?" (fastest)":"")~" took "~(time*1000)~" ms ("~(time/longest*100)~"%) time");
+		first = 0;
+	}
+	return list;
 }
 
 

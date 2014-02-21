@@ -261,6 +261,7 @@ Started September 2000 by David Megginson, david@megginson.com
 			</osg-displaysettings>
             <osg-notify-level type="string" userarchive="y">warn</osg-notify-level>
 			<cache type="bool">true</cache>
+            <use-vbos type="bool">false</use-vbos>
 		</rendering>
 		<model-hz type="int">120</model-hz>
 		<navdb>

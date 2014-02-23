@@ -597,7 +597,7 @@ var NDStyles = {
 				id:'windArrow',
 				impl: {
 					init: func(nd,symbol),
-                    predicate: func(nd) (!(nd.in_mode('toggle_display_mode', ['PLAN']) and (nd.get_switch('toggle_display_type') == "LCD")) and nd.aircraft_source.get_spd() > 80),
+					predicate: func(nd) (!(nd.in_mode('toggle_display_mode', ['PLAN']) and (nd.get_switch('toggle_display_type') == "LCD")) and nd.aircraft_source.get_spd() > 100),
 					is_true: func(nd) {
 						nd.symbols.windArrow.show();
 						var windArrowRot = getprop("environment/wind-from-heading-deg");
@@ -691,7 +691,7 @@ var default_switches = {
 	'toggle_display_type': {path: '/mfd/display-type', value:'CRT', type:'STRING'}, # valid values are: CRT or LCD
 	'toggle_true_north':   {path: '/mfd/true-north', value:0, type:'BOOL'},
     'toggle_rangearc':      {path: '/mfd/rangearc', value:0, type:'BOOL'},
-    'toggle_track_heading': {path: '/hdg-trk-switch', value:0, type:'BOOL'},
+	'toggle_track_heading': {path: '/trk-selected', value:0, type:'BOOL'},
 };
 
 # Hack to update weather radar once every 10 seconds
@@ -1007,9 +1007,11 @@ var NavDisplay = {
             or (me.get_switch('toggle_track_heading') and me.get_switch('toggle_display_type') == "LCD"))
         {
 			userHdgTrk = userTrk;
+			userHdgTrkTru = userTrkTru;
 			me.symbols.hdgTrk.setText("TRK");
 		} else {
 			userHdgTrk = userHdg;
+			userHdgTrkTru = userHdgTru;
 			me.symbols.hdgTrk.setText("HDG");
 		}
 		
@@ -1121,33 +1123,28 @@ var NavDisplay = {
         if((me.in_mode('toggle_display_mode', ['MAP']) and me.get_switch('toggle_display_type') == "CRT")
             or (me.get_switch('toggle_track_heading') and me.get_switch('toggle_display_type') == "LCD"))
         {
-			var hdgBugRot = (vhdg_bug-userHdgTrk)*D2R;
-			me.symbols.selHdgLine.setRotation(hdgBugRot);
-			me.symbols.hdgBug.setRotation(hdgBugRot);
-			me.symbols.hdgBug2.setRotation(hdgBugRot);
-			me.symbols.selHdgLine2.setRotation(hdgBugRot);
 			me.symbols.trkInd.setRotation(0);
             me.symbols.trkInd2.setRotation(0);
 			me.symbols.curHdgPtr.setRotation((userHdg-userTrk)*D2R);
 			me.symbols.curHdgPtr2.setRotation((userHdg-userTrk)*D2R);
-			me.symbols.compass.setRotation(-userHdgTrk*D2R);
-			me.symbols.compassApp.setRotation(-userHdgTrk*D2R);
-            me.map._node.getNode("hdg",1).setDoubleValue(userTrkTru);
 		}
         else
         {
+			me.symbols.trkInd.setRotation((userTrk-userHdg)*D2R);
+			me.symbols.trkInd2.setRotation((userTrk-userHdg)*D2R);
+			me.symbols.curHdgPtr.setRotation(0);
+			me.symbols.curHdgPtr2.setRotation(0);
+		}
+		if(!me.in_mode('toggle_display_mode', ['PLAN']))
+		{
 			var hdgBugRot = (vhdg_bug-userHdgTrk)*D2R;
 			me.symbols.selHdgLine.setRotation(hdgBugRot);
 			me.symbols.hdgBug.setRotation(hdgBugRot);
 			me.symbols.hdgBug2.setRotation(hdgBugRot);
 			me.symbols.selHdgLine2.setRotation(hdgBugRot);
-			me.symbols.trkInd.setRotation((userTrk-userHdg)*D2R);
-            me.symbols.trkInd2.setRotation((userTrk-userHdg)*D2R);
-			me.symbols.curHdgPtr.setRotation(0);
-			me.symbols.curHdgPtr2.setRotation(0);
 			me.symbols.compass.setRotation(-userHdgTrk*D2R);
 			me.symbols.compassApp.setRotation(-userHdgTrk*D2R);
-            me.map._node.getNode("hdg",1).setDoubleValue(userHdgTru);
+			me.map._node.getNode("hdg",1).setDoubleValue(userHdgTrkTru);
 		}
 		if(me.get_switch('toggle_centered')) {
 			if (me.in_mode('toggle_display_mode', ['APP','VOR']))
@@ -1288,7 +1285,7 @@ var NavDisplay = {
 						altRangePx = 700;
 					me.symbols.altArc.setTranslation(0,-altRangePx);
 				}
-				me.symbols.altArc.show();
+				me.symbols.altArc.setVisible(me.in_mode('toggle_display_mode', ['MAP']) and !me.get_switch('toggle_centered'));
 			} else
 				me.symbols.altArc.hide();
 		} else {

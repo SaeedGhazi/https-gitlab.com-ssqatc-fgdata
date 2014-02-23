@@ -363,6 +363,37 @@
 					</enable>
 				</text>
 
+				<checkbox>
+					<row>5</row>
+					<col>0</col>
+					<colspan>3</colspan>
+					<halign>left</halign>
+					<label>Simplify far terrain (increases scenery load times)</label>
+					<name>simplify-far</name>
+					<property>/sim/rendering/terrain/simplifier/enabled-far</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>simplify-far</object-name>
+					</binding>
+				</checkbox>
+
+				<checkbox>
+					<row>6</row>
+					<col>0</col>
+					<colspan>3</colspan>
+					<halign>left</halign>
+					<label>Simplify all terrain (increases scenery load times)</label>
+					<name>simplify-near</name>
+					<property>/sim/rendering/terrain/simplifier/enabled-near</property>
+					<enable>
+						<property>/sim/rendering/terrain/simplifier/enabled-far</property>
+					</enable>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>simplify-near</object-name>
+					</binding>
+				</checkbox>
+
 			</group>
 
 			<button>

@@ -261,7 +261,16 @@ Started September 2000 by David Megginson, david@megginson.com
 			</osg-displaysettings>
             <osg-notify-level type="string" userarchive="y">warn</osg-notify-level>
 			<cache type="bool">true</cache>
-            <use-vbos type="bool">false</use-vbos>
+			<use-vbos type="bool">false</use-vbos>
+			<terrain>
+				<simplifier>
+					<enabled-near type="bool">false</enabled-near>
+					<enabled-far type="bool">false</enabled-far>
+					<ratio type="double">0.01</ratio>
+					<max-error type="double">3000.0</max-error>
+					<max-length type="double">1000.0</max-length>
+				</simplifier>
+			</terrain>
 		</rendering>
 		<model-hz type="int">120</model-hz>
 		<navdb>
@@ -366,7 +375,7 @@ Started September 2000 by David Megginson, david@megginson.com
 			<path n="1">Huds/default.xml</path>
 			<path n="2">Huds/NTPS.xml</path>
 			<path n="3">Huds/minimal.xml</path>
-			
+
 			<!-- new HUD -->
 			<visibility n="1" type="bool">false</visibility>
 			<!-- new HUD -->
@@ -704,7 +713,7 @@ Started September 2000 by David Megginson, david@megginson.com
             <click-shows-tooltip type="bool" userarchive="y">true</click-shows-tooltip>
             <tooltip-delay-msec type="int" userarchive="y">800</tooltip-delay-msec>
             <tooltips-enabled type="bool" userarchive="y">true</tooltips-enabled>
-            
+
             <drag-sensitivity type="double" userarchive="y">1.0</drag-sensitivity>
             <invert-mouse-wheel type="bool" userarchive="y">false</invert-mouse-wheel>
             <skip-flight-controls-mode type="bool" userarchive="y">false</skip-flight-controls-mode>

@@ -242,8 +242,8 @@ the objects that use it, and replaces it with the default shader.
 				<use>vertex-program-two-side</use>
 			</vertex-program-two-side>
 
-	  <program>
-		<vertex-shader>Shaders/ubershader.vert</vertex-shader>
+	  <program n="0">
+		<vertex-shader n="0">Shaders/ubershader.vert</vertex-shader>
 		<fragment-shader>Shaders/ubershader-gbuffer.frag</fragment-shader>
 		<fragment-shader>Shaders/gbuffer-functions.frag</fragment-shader>
 		<fragment-shader>Shaders/gbuffer-encode.frag</fragment-shader>

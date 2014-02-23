@@ -845,7 +845,7 @@ please see Docs/README.model-combined.eff for documentation
 		  </or>
 		</and>
 	  </predicate>
-	  <pass>
+	  <pass n="0">
 		<lighting>true</lighting>
 		<material>
 		  <active>
@@ -1041,7 +1041,7 @@ please see Docs/README.model-combined.eff for documentation
 			<use>vertex-program-two-side</use>
 		  </vertex-program-two-side>
 
-		  <program>
+		  <program n="0">
 			<!-- <vertex-shader n="0">Shaders/include_fog.vert</vertex-shader> -->
 			  <vertex-shader n="1">Shaders/ubershader.vert</vertex-shader>
 			  <fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>

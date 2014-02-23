@@ -219,8 +219,8 @@
 		<vertex-program-two-side>
 			<use>vertex-program-two-side</use>
 		</vertex-program-two-side>
-		<program>
-			<vertex-shader>Shaders/deferred-gbuffer.vert</vertex-shader>
+		<program n="0">
+			<vertex-shader n="0">Shaders/deferred-gbuffer.vert</vertex-shader>
 			<fragment-shader>Shaders/deferred-gbuffer.frag</fragment-shader>
 			<fragment-shader>Shaders/gbuffer-functions.frag</fragment-shader>
 			<fragment-shader>Shaders/gbuffer-encode.frag</fragment-shader>
@@ -332,12 +332,10 @@
 			<vertex-program-two-side>
 				<use>vertex-program-two-side</use>
 			</vertex-program-two-side>
-			<program>
-<!-- 				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader> -->
-				<!--fog include-->
+			<program n="0">
+<!-- 				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader> -->			<!--fog include-->
 				<vertex-shader n="1">Shaders/default.vert</vertex-shader>
-				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
-				<!--fog include-->
+				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>				<!--fog include-->
 				<fragment-shader n="1">Shaders/default.frag</fragment-shader>
 			</program>
 			<!-- 			BEGIN fog include -->
@@ -398,7 +396,7 @@
 			</uniform>
 		</pass>
 	</technique>
-	<technique n="12">
+	<technique n="13">
 		<pass>
 			<lighting>true</lighting>
 			<material>

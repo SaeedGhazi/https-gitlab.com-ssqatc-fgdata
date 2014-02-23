@@ -12,7 +12,7 @@ and fallback to plain transparency when the model shader is disabled.
 			<and>
 			  <equal>
 				<float-property>/sim/rendering/shaders/model</float-property>
-				<value type="int">0</value>
+				<value type="float">0.0</value>
 			  </equal>
 			  <or>
 				<less-equal>

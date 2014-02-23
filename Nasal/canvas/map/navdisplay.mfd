@@ -262,7 +262,8 @@ var NDStyles = {
 				id: 'wpActiveId',
 				impl: {
 					init: func(nd,symbol),
-					predicate: func(nd) getprop("/autopilot/route-manager/wp/id") != nil and getprop("autopilot/route-manager/active"),
+                    predicate: func(nd) getprop("/autopilot/route-manager/wp/id") != nil and getprop("autopilot/route-manager/active")
+                        and nd.in_mode('toggle_display_mode', ['MAP','PLAN']),
 					is_true: func(nd) {
 						nd.symbols.wpActiveId.setText(getprop("/autopilot/route-manager/wp/id"));
 						nd.symbols.wpActiveId.show();
@@ -274,7 +275,8 @@ var NDStyles = {
 				id: 'wpActiveDist',
 				impl: {
 					init: func(nd,symbol),
-					predicate: func(nd) getprop("/autopilot/route-manager/wp/dist") != nil and getprop("autopilot/route-manager/active"),
+                    predicate: func(nd) getprop("/autopilot/route-manager/wp/dist") != nil and getprop("autopilot/route-manager/active")
+                        and nd.in_mode('toggle_display_mode', ['MAP','PLAN']),
 					is_true: func(nd) {
 						nd.symbols.wpActiveDist.setText(sprintf("%3.01f",getprop("/autopilot/route-manager/wp/dist")));
 						nd.symbols.wpActiveDist.show();
@@ -286,7 +288,8 @@ var NDStyles = {
 				id: 'wpActiveDistLbl',
 				impl: {
 					init: func(nd,symbol),
-					predicate: func(nd) getprop("/autopilot/route-manager/wp/dist") != nil and getprop("autopilot/route-manager/active"),
+                    predicate: func(nd) getprop("/autopilot/route-manager/wp/dist") != nil and getprop("autopilot/route-manager/active")
+                        and nd.in_mode('toggle_display_mode', ['MAP','PLAN']),
 					is_true: func(nd) {
 						nd.symbols.wpActiveDistLbl.show();
 						if(getprop("/autopilot/route-manager/wp/dist") > 1000)
@@ -299,7 +302,8 @@ var NDStyles = {
 				id: 'eta',
 				impl: {
 					init: func(nd,symbol),
-					predicate: func(nd) getprop("autopilot/route-manager/wp/eta") != nil and getprop("autopilot/route-manager/active"),
+                    predicate: func(nd) getprop("autopilot/route-manager/wp/eta") != nil and getprop("autopilot/route-manager/active")
+                        and nd.in_mode('toggle_display_mode', ['MAP','PLAN']),
 					is_true: func(nd) {
 						var etaSec = getprop("/sim/time/utc/day-seconds")+getprop("autopilot/route-manager/wp/eta-seconds");
 						var h = math.floor(etaSec/3600);
@@ -336,7 +340,9 @@ var NDStyles = {
 					predicate: func(nd) nd.in_mode('toggle_display_mode', ['APP','MAP','VOR']),
 					is_true: func(nd) {
 						var hdgText = "";
-						if(nd.in_mode('toggle_display_mode', ['MAP'])) {
+                        if((nd.in_mode('toggle_display_mode', ['MAP']) and nd.get_switch('toggle_display_type') == "CRT")
+                            or (nd.get_switch('toggle_track_heading') and nd.get_switch('toggle_display_type') == "LCD"))
+                        {
 							if(nd.get_switch('toggle_true_north'))
 								hdgText = nd.aircraft_source.get_trk_tru();
 							else
@@ -347,7 +353,9 @@ var NDStyles = {
 							else
 								hdgText = nd.aircraft_source.get_hdg_mag();
 						}
-						nd.symbols.hdg.setText(sprintf("%03.0f", hdgText+0.5));
+                        if(hdgText < 0.5) hdgText = 360 + hdgText;
+                        elsif(hdgText >= 360.5) hdgText = hdgText - 360;
+                        nd.symbols.hdg.setText(sprintf("%03.0f", hdgText));
 					},
 					is_false: NOTHING,
 				},
@@ -383,7 +391,7 @@ var NDStyles = {
 				id:'rangeArcs',
 				impl: {
 					init: func(nd,symbol),
-					predicate: func(nd) (((nd.in_mode('toggle_display_mode', ['APP','VOR']) and nd.get_switch('toggle_weather')) or nd.get_switch('toggle_display_mode') == "MAP") and (!nd.get_switch('toggle_centered'))),
+                    predicate: func(nd) !nd.get_switch('toggle_centered') and nd.get_switch('toggle_rangearc'),
 					is_true: func(nd) nd.symbols.rangeArcs.show(),
 					is_false: func(nd) nd.symbols.rangeArcs.hide(),
 				}, # of rangeArcs.impl
@@ -484,10 +492,9 @@ var NDStyles = {
 				id:'trkInd2',
 				impl: {
 					init: func(nd,symbol),
-					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['APP','VOR']) and nd.get_switch('toggle_centered')),
+                    predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP','APP','VOR']) and nd.get_switch('toggle_centered')),
 					is_true: func(nd) { 
 						nd.symbols.trkInd2.show();
-						nd.symbols.trkInd2.setRotation((nd.aircraft_source.get_trk_tru()-nd.aircraft_source.get_hdg_tru())*D2R);
 					},
 					is_false: func(nd) nd.symbols.trkInd2.hide(),
 				},
@@ -499,7 +506,11 @@ var NDStyles = {
 					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['APP','VOR']) and !nd.get_switch('toggle_centered')),
 					is_true: func(nd) {
 						nd.symbols.vorCrsPtr.show();
-						nd.symbols.vorCrsPtr.setRotation((getprop("instrumentation/nav/radials/selected-deg")-nd.aircraft_source.get_hdg_tru())*D2R);
+                        if((nd.in_mode('toggle_display_mode', ['MAP']) and nd.get_switch('toggle_display_type') == "CRT")
+                            or (nd.get_switch('toggle_track_heading') and nd.get_switch('toggle_display_type') == "LCD"))
+                            nd.symbols.vorCrsPtr.setRotation((getprop("instrumentation/nav/radials/selected-deg")-nd.aircraft_source.get_trk_mag())*D2R);
+                        else
+                            nd.symbols.vorCrsPtr.setRotation((getprop("instrumentation/nav/radials/selected-deg")-nd.aircraft_source.get_hdg_mag())*D2R);
 					},
 					is_false: func(nd) nd.symbols.vorCrsPtr.hide(),
 				},
@@ -511,7 +522,11 @@ var NDStyles = {
 					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['APP','VOR']) and nd.get_switch('toggle_centered')),
 					is_true: func(nd) {
 						nd.symbols.vorCrsPtr2.show();
-						nd.symbols.vorCrsPtr2.setRotation((getprop("instrumentation/nav/radials/selected-deg")-nd.aircraft_source.get_hdg_tru())*D2R);
+                        if((nd.in_mode('toggle_display_mode', ['MAP']) and nd.get_switch('toggle_display_type') == "CRT")
+                            or (nd.get_switch('toggle_track_heading') and nd.get_switch('toggle_display_type') == "LCD"))
+                            nd.symbols.vorCrsPtr2.setRotation((getprop("instrumentation/nav/radials/selected-deg")-nd.aircraft_source.get_trk_mag())*D2R);
+                        else
+                            nd.symbols.vorCrsPtr2.setRotation((getprop("instrumentation/nav/radials/selected-deg")-nd.aircraft_source.get_hdg_mag())*D2R);
 					},
 					is_false: func(nd) nd.symbols.vorCrsPtr2.hide(),
 				},
@@ -520,10 +535,10 @@ var NDStyles = {
 				id: 'gsDiamond',
 				impl: {
 					init: func(nd,symbol),
-					predicate: func(nd) nd.in_mode('toggle_display_mode', ['APP']),
+                    predicate: func(nd) nd.in_mode('toggle_display_mode', ['APP']) and getprop("instrumentation/nav/gs-in-range"),
 					is_true: func(nd) {
 						if(getprop("instrumentation/nav/gs-needle-deflection-norm") != nil)
-							nd.symbols.gsDiamond.setTranslation(-getprop("instrumentation/nav/gs-needle-deflection-norm")*150,0);
+                            nd.symbols.gsDiamond.setTranslation(getprop("instrumentation/nav/gs-needle-deflection-norm")*150,0);
 					},
 					is_false: func(nd) nd.symbols.gsGroup.hide(),
 				},
@@ -570,7 +585,9 @@ var NDStyles = {
 					is_true: func(nd) {
 						var windDir = getprop("environment/wind-from-heading-deg");
 						if(!nd.get_switch('toggle_true_north'))
-							windDir = windDir + getprop("environment/magnetic-variation-deg");
+                            windDir = windDir - getprop("environment/magnetic-variation-deg");
+                        if(windDir < 0.5) windDir = 360 + windDir;
+                        elsif(windDir >= 360.5) windDir = windDir - 360;
 						nd.symbols.wind.setText(sprintf("%03.0f / %02.0f",windDir,getprop("environment/wind-speed-kt")));
 					},
 					is_false: NOTHING,
@@ -580,21 +597,15 @@ var NDStyles = {
 				id:'windArrow',
 				impl: {
 					init: func(nd,symbol),
-					predicate: func(nd) (!(nd.in_mode('toggle_display_mode', ['PLAN']) and (nd.get_switch('toggle_display_type') == "LCD")) and nd.aircraft_source.get_spd() > 100),
+                    predicate: func(nd) (!(nd.in_mode('toggle_display_mode', ['PLAN']) and (nd.get_switch('toggle_display_type') == "LCD")) and nd.aircraft_source.get_spd() > 80),
 					is_true: func(nd) {
 						nd.symbols.windArrow.show();
 						var windArrowRot = getprop("environment/wind-from-heading-deg");
-						if(nd.in_mode('toggle_display_mode', ['MAP','PLAN'])) {
-							if(nd.get_switch('toggle_true_north'))
-								windArrowRot = windArrowRot - nd.aircraft_source.get_trk_tru();
-							else
+                        if((nd.in_mode('toggle_display_mode', ['MAP','PLAN']) and nd.get_switch('toggle_display_type') == "CRT")
+                            or (nd.get_switch('toggle_track_heading') and nd.get_switch('toggle_display_type') == "LCD"))
 								windArrowRot = windArrowRot - nd.aircraft_source.get_trk_mag();
-						} else {
-							if(nd.get_switch('toggle_true_north'))
-								windArrowRot = windArrowRot - nd.aircraft_source.get_hdg_tru();
 							else
 								windArrowRot = windArrowRot - nd.aircraft_source.get_hdg_mag();
-						}
 						nd.symbols.windArrow.setRotation(windArrowRot*D2R);
 					},
 					is_false: func(nd) nd.symbols.windArrow.hide(),
@@ -679,6 +690,8 @@ var default_switches = {
 	'toggle_display_mode': {path: '/mfd/display-mode', value:'MAP', type:'STRING'}, # valid values are: APP, MAP, PLAN or VOR
 	'toggle_display_type': {path: '/mfd/display-type', value:'CRT', type:'STRING'}, # valid values are: CRT or LCD
 	'toggle_true_north':   {path: '/mfd/true-north', value:0, type:'BOOL'},
+    'toggle_rangearc':      {path: '/mfd/rangearc', value:0, type:'BOOL'},
+    'toggle_track_heading': {path: '/hdg-trk-switch', value:0, type:'BOOL'},
 };
 
 # Hack to update weather radar once every 10 seconds
@@ -990,7 +1003,9 @@ var NavDisplay = {
 		if (me.aircraft_source.get_gnd_spd() < 80)
 			userTrk = userHdg;
 		
-		if (me.in_mode('toggle_display_mode', ['MAP'])) {
+        if((me.in_mode('toggle_display_mode', ['MAP']) and me.get_switch('toggle_display_type') == "CRT")
+            or (me.get_switch('toggle_track_heading') and me.get_switch('toggle_display_type') == "LCD"))
+        {
 			userHdgTrk = userTrk;
 			me.symbols.hdgTrk.setText("TRK");
 		} else {
@@ -1103,31 +1118,37 @@ var NavDisplay = {
 		if (hdg_bug_active == nil)
 			hdg_bug_active = 1;
 						
-		if(me.in_mode('toggle_display_mode', ['MAP'])) {
+        if((me.in_mode('toggle_display_mode', ['MAP']) and me.get_switch('toggle_display_type') == "CRT")
+            or (me.get_switch('toggle_track_heading') and me.get_switch('toggle_display_type') == "LCD"))
+        {
 			var hdgBugRot = (vhdg_bug-userHdgTrk)*D2R;
 			me.symbols.selHdgLine.setRotation(hdgBugRot);
 			me.symbols.hdgBug.setRotation(hdgBugRot);
 			me.symbols.hdgBug2.setRotation(hdgBugRot);
 			me.symbols.selHdgLine2.setRotation(hdgBugRot);
 			me.symbols.trkInd.setRotation(0);
+            me.symbols.trkInd2.setRotation(0);
 			me.symbols.curHdgPtr.setRotation((userHdg-userTrk)*D2R);
 			me.symbols.curHdgPtr2.setRotation((userHdg-userTrk)*D2R);
 			me.symbols.compass.setRotation(-userHdgTrk*D2R);
 			me.symbols.compassApp.setRotation(-userHdgTrk*D2R);
+            me.map._node.getNode("hdg",1).setDoubleValue(userTrkTru);
 		}
-		if(me.in_mode('toggle_display_mode', ['APP','VOR'])) {
+        else
+        {
 			var hdgBugRot = (vhdg_bug-userHdgTrk)*D2R;
 			me.symbols.selHdgLine.setRotation(hdgBugRot);
 			me.symbols.hdgBug.setRotation(hdgBugRot);
 			me.symbols.hdgBug2.setRotation(hdgBugRot);
 			me.symbols.selHdgLine2.setRotation(hdgBugRot);
 			me.symbols.trkInd.setRotation((userTrk-userHdg)*D2R);
+            me.symbols.trkInd2.setRotation((userTrk-userHdg)*D2R);
 			me.symbols.curHdgPtr.setRotation(0);
 			me.symbols.curHdgPtr2.setRotation(0);
 			me.symbols.compass.setRotation(-userHdgTrk*D2R);
 			me.symbols.compassApp.setRotation(-userHdgTrk*D2R);
+            me.map._node.getNode("hdg",1).setDoubleValue(userHdgTru);
 		}
-		me.map._node.getNode("hdg",1).setDoubleValue(userHdgTrk);
 		if(me.get_switch('toggle_centered')) {
 			if (me.in_mode('toggle_display_mode', ['APP','VOR']))
 				me.symbols.compassApp.show();
@@ -1143,16 +1164,26 @@ var NavDisplay = {
 			me.symbols.compass.show();
 		}
 
-		var staPtrVis = !me.in_mode('toggle_display_mode', ['APP','PLAN']);
-		var magVar = getprop("environment/magnetic-variation-deg");
+        var staPtrVis = !me.in_mode('toggle_display_mode', ['PLAN']);
+        if((me.in_mode('toggle_display_mode', ['MAP']) and me.get_switch('toggle_display_type') == "CRT")
+            or (me.get_switch('toggle_track_heading') and me.get_switch('toggle_display_type') == "LCD"))
+        {
+            var vorheading = userTrkTru;
+            var adfheading = userTrkMag;
+        }
+        else
+        {
+            var vorheading = userHdgTru;
+            var adfheading = userHdgMag;
+        }
 		if(me.in_mode('toggle_display_mode', ['APP','MAP','VOR','PLAN']))
 		{
 			if(getprop("instrumentation/nav/heading-deg") != nil)
-				var nav0hdg=getprop("instrumentation/nav/heading-deg") - userHdg - magVar;
+                var nav0hdg=getprop("instrumentation/nav/heading-deg") - vorheading;
 			if(getprop("instrumentation/nav[1]/heading-deg") != nil)
-				var nav1hdg=getprop("instrumentation/nav[1]/heading-deg") - userHdg - magVar;
-			var adf0hdg=getprop("instrumentation/adf/indicated-bearing-deg");
-			var adf1hdg=getprop("instrumentation/adf[1]/indicated-bearing-deg");
+                var nav1hdg=getprop("instrumentation/nav[1]/heading-deg") - vorheading;
+            var adf0hdg=getprop("instrumentation/adf/indicated-bearing-deg") - adfheading;
+            var adf1hdg=getprop("instrumentation/adf[1]/indicated-bearing-deg") - adfheading;
 			if(!me.get_switch('toggle_centered'))
 			{
 				if(me.in_mode('toggle_display_mode', ['PLAN']))

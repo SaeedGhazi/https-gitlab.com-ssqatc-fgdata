@@ -80,6 +80,6 @@ var draw_route =  func (group, theroute, controller=nil, lod=0)
 	debug.dump(cmds);
 	debug.dump(coords);
 	route.setDataGeo(cmds, coords);
-	updatewp(0);
+    updatewp(getprop("/autopilot/route-manager/current-wp"));
 
 }

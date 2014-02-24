@@ -218,7 +218,17 @@ Started September 2000 by David Megginson, david@megginson.com
 			<clouds3d-vis-range type="float" userarchive="y">10000.0</clouds3d-vis-range>
 			<clouds3d-detail-range type="float" userarchive="y">10000.0</clouds3d-detail-range>
 			<clouds3d-density type="float" userarchive="y">0.25</clouds3d-density>
+            
+            <!-- legacy property to control drawing 'out the window', i.e
+            non-cockpit + aircraft elements. Use draw-mask instead. -->
 			<draw-otw type="bool">true</draw-otw>
+            <draw-mask>
+                <terrain type="bool">true</terrain>
+                <models type="bool">true</models>
+                <aircraft type="bool">true</aircraft>
+                <clouds type="bool">true</clouds>
+            </draw-mask>
+            
 			<shadows-ac type="bool" userarchive="y">false</shadows-ac>
 			<shadows-ac-transp type="bool" userarchive="y">false</shadows-ac-transp>
 			<shadows-ai type="bool" userarchive="y">false</shadows-ai>

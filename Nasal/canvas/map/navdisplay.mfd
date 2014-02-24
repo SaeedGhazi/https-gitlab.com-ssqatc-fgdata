@@ -1222,9 +1222,17 @@ var NavDisplay = {
 				me.symbols.HdgBugLCD2.hide();
 				me.symbols.selHdgLine2.hide();
 				me.symbols.curHdgPtr.setVisible(staPtrVis);
-				me.symbols.TrkBugLCD.hide();
 				me.symbols.HdgBugCRT.setVisible(staPtrVis and !dispLCD);
-				me.symbols.HdgBugLCD.setVisible(staPtrVis and dispLCD);
+				if(me.get_switch('toggle_track_heading'))
+				{
+					me.symbols.HdgBugLCD.hide();
+					me.symbols.TrkBugLCD.setVisible(staPtrVis and dispLCD);
+				}
+				else
+				{
+					me.symbols.TrkBugLCD.hide();
+					me.symbols.HdgBugLCD.setVisible(staPtrVis and dispLCD);
+				}
 				me.symbols.selHdgLine.setVisible(staPtrVis and hdg_bug_active);
 			} else {
 				me.symbols.trkInd.hide();
@@ -1262,9 +1270,17 @@ var NavDisplay = {
 				me.symbols.HdgBugLCD.hide();
 				me.symbols.selHdgLine.hide();
 				me.symbols.curHdgPtr2.setVisible(staPtrVis);
-				me.symbols.TrkBugLCD2.hide();
 				me.symbols.HdgBugCRT2.setVisible(staPtrVis and !dispLCD);
-				me.symbols.HdgBugLCD2.setVisible(staPtrVis and dispLCD);
+				if(me.get_switch('toggle_track_heading'))
+				{
+					me.symbols.HdgBugLCD2.hide();
+					me.symbols.TrkBugLCD2.setVisible(staPtrVis and dispLCD);
+				}
+				else
+				{
+					me.symbols.TrkBugLCD2.hide();
+					me.symbols.HdgBugLCD2.setVisible(staPtrVis and dispLCD);
+				}
 				me.symbols.selHdgLine2.setVisible(staPtrVis and hdg_bug_active);
 			}
 		}

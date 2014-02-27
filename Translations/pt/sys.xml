@@ -25,15 +25,15 @@
 		<init>inicializando</init>   <!-- English: "initializing" -->
 		<loading-aircraft-list>carregando lista de aeronaves</loading-aircraft-list>   <!-- English: "loading aircraft list" -->
 		<loading-aircraft>carregando aeronaves</loading-aircraft>   <!-- English: "loading aircraft" -->
-		<loading-nav-dat>carregando dados de navagação</loading-nav-dat>   <!-- English: "loading navigation data" -->
-		<init-scenery>inicializando cenários</init-scenery>   <!-- English: "initializing scenery" -->
+		<loading-nav-dat>carregando dados de navegacao</loading-nav-dat>   <!-- English: "loading navigation data" -->
+		<init-scenery>inicializando cenarios</init-scenery>   <!-- English: "initializing scenery" -->
 		<creating-subsystems>criando subsistemas</creating-subsystems>   <!-- English: "creating subsystems" -->
 		<init-subsystems>inicializando subsistemas</init-subsystems>   <!-- English: "initializing subsystems" -->
 		<binding-subsystems>ligando subsistemas</binding-subsystems>   <!-- English: "binding subsystems" -->
 		<finishing-subsystems>finalizando subsistemas</finishing-subsystems>   <!-- English: "finalizing subsystems" -->
-		<init-graphics>inicializando o motor gráfico</init-graphics>   <!-- English: "initializing graphics engine" -->
-		<loading-scenery>carregando cenários</loading-scenery>   <!-- English: "loading scenery" -->
-		<finalize-position>finalizando posição</finalize-position>   <!-- English: "finalizing position" -->
+		<init-graphics>inicializando o motor grafico</init-graphics>   <!-- English: "initializing graphics engine" -->
+		<loading-scenery>carregando cenarios</loading-scenery>   <!-- English: "loading scenery" -->
+		<finalize-position>finalizando posicao</finalize-position>   <!-- English: "finalizing position" -->
 	</splash>
 
 </PropertyList>

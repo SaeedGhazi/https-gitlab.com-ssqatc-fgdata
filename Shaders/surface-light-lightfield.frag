@@ -6,6 +6,7 @@ uniform float visibility;
 uniform float avisibility;
 uniform float hazeLayerAltitude;
 uniform float eye_alt;
+uniform float terminator;
 
 varying vec3 relPos;
 varying float pixelSize;
@@ -39,6 +40,28 @@ else
 
 }
 
+
+float light_sprite (in vec2 coord, in float transmission)
+{
+
+coord.s = coord.s - 0.5;
+coord.t = coord.t - 0.5;
+
+float r = length(coord);
+
+if (pixelSize<1.3) {return vec4 (1.0,1.0,1.0,1.0) * 0.08;}
+
+float sinphi = dot(vec2 (1.0,0.0), normalize(coord));
+
+float ray = clamp(pow(sin((sinphi-3.0) * (sinphi-3.0)),10.0),0.0,1.0);
+
+float fogEffect =  (1.0-smoothstep(0.4,0.8,transmission));
+
+float intensity = clamp(ray * exp(-40.0 * r * r) + exp(-80.0*r*r),0.0,1.0) + 0.1 * fogEffect * (1.0-smoothstep(0.3, 0.6,r));
+
+return vec4 (1.0,1.0,1.0,1.0) * intensity;
+
+}
 
 
 void main()
@@ -111,9 +134,12 @@ void main()
 
 
     transmission =  fog_func(transmission_arg);
-    float dist_att =  exp(-0.3/pixelSize);
+    float lightArg = terminator/100000.0;
+    float attenuationScale = 1.0 + 3.0 * (1.0 -smoothstep(-15.0, 0.0, lightArg));
+    float dist_att =  exp(-0.3/attenuationScale/pixelSize);
 
-    vec4 texel = texture2D(texture,gl_TexCoord[0].st);
+    //vec4 texel = texture2D(texture,gl_TexCoord[0].st);
+    vec4 texel = light_sprite(gl_TexCoord[0].st,transmission);
     gl_FragColor =   vec4 (gl_Color.rgb, texel.a * transmission * dist_att); 
   
 

@@ -20,5 +20,5 @@ void main()
     float dist = length(relPos);
     float lightScale = size * size * size * size * size / 1000.0;
     pixelSize = min(size * size/25.0,lightScale/dist);
-    gl_PointSize = pixelSize;
+    gl_PointSize = 2.0 * pixelSize;
 }

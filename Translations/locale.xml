@@ -16,6 +16,7 @@
 			<options>Translations/en/options.xml</options>
 			<menu>Translations/en/menu.xml</menu>
 			<sys>Translations/en/sys.xml</sys>
+			<atc>Translations/en/atc.xml</atc>
 		</strings>
 	</locale>
 
@@ -29,6 +30,7 @@
 			<options>Translations/es/options.xml</options>
 			<menu>Translations/es/menu.xml</menu>
 			<sys>Translations/es/sys.xml</sys>
+			<atc>Translations/en/atc.xml</atc>
 		</strings>
 	</locale>
 
@@ -42,6 +44,7 @@
 			<options>Translations/de/options.xml</options>
 			<menu>Translations/de/menu.xml</menu>
 			<sys>Translations/de/sys.xml</sys>
+			<atc>Translations/en/atc.xml</atc>
 		</strings>
 	</locale>
 
@@ -56,6 +59,7 @@
 			<options>Translations/fr/options.xml</options>
 			<menu>Translations/fr/menu.xml</menu>
 			<sys>Translations/fr/sys.xml</sys>
+			<atc>Translations/en/atc.xml</atc>
 		</strings>
 	</locale>
 
@@ -69,6 +73,7 @@
 			<options>Translations/it/options.xml</options>
 			<menu>Translations/it/menu.xml</menu>
 			<sys>Translations/it/sys.xml</sys>
+			<atc>Translations/en/atc.xml</atc>
 		</strings>
 	</locale>
 
@@ -81,6 +86,7 @@
 			<options>Translations/nl/options.xml</options>
 			<menu>Translations/nl/menu.xml</menu>
 			<sys>Translations/nl/sys.xml</sys>
+			<atc>Translations/en/atc.xml</atc>
 		</strings>
 	</locale>
 
@@ -92,6 +98,7 @@
 			<options>Translations/pl/options.xml</options>
 			<menu>Translations/pl/menu.xml</menu>
 			<sys>Translations/pl/sys.xml</sys>
+			<atc>Translations/en/atc.xml</atc>
 		</strings>
 	</locale>
 
@@ -112,6 +119,7 @@
 			<options>Translations/cs/options.xml</options>
 			<menu>Translations/cs/menu.xml</menu>
 			<sys>Translations/cs/sys.xml</sys>
+			<atc>Translations/en/atc.xml</atc>
 		</strings>
 	</locale>
 
@@ -122,6 +130,7 @@
 			<options>Translations/da/options.xml</options>
 			<menu>Translations/da/menu.xml</menu>
 			<sys>Translations/da/sys.xml</sys>
+			<atc>Translations/en/atc.xml</atc>
 		</strings>
 	</locale>
 
@@ -161,6 +170,7 @@
 			<options>Translations/pt/options.xml</options>
 			<menu>Translations/pt/menu.xml</menu>
 			<sys>Translations/pt/sys.xml</sys>
+			<atc>Translations/en/atc.xml</atc>
 		</strings>
 	</locale>
     <!--

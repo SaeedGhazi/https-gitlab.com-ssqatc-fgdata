@@ -608,9 +608,23 @@ Here's an example of how to use an axis to adjust the elevator trim:
 If you want you can specify a time interval for processing digital hat repeats.  For example 
 if you want an interval of 0.05 seconds, which will effect up to 20 repeats per second, then add 
 the following to the property:
+</p>
 <PRE>
   --prop:/input/joysticks/js/axis[1]/interval-sec=0.05
 </PRE>
+<br>
+<p>
+If you want specify a delay time before interval repeats action.  For example 
+if you want an interval of 0.05 seconds after 1 second the axis has been pressed, then add 
+the following to the property:
+</p>
+<PRE>
+  --prop:/input/joysticks/js/axis[1]/delay-sec=1
+  --prop:/input/joysticks/js/axis[1]/interval-sec=0.05
+</PRE>
+<p>
+Similarly, release-delay-sec is how long to wait after releasing the button.
+</p>
 <br>
 <P>
 You could also bind some axes to brakes, so that you can use positions

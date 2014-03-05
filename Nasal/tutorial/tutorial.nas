@@ -85,7 +85,7 @@ var startTutorial = func {
 	var presets = tutorialN.getChild("presets");
 	if (presets != nil) {
 		props.copy(presets, props.globals.getNode("/sim/presets"));
-		fgcommand("presets-commit");
+		fgcommand("reposition");
 
 		if (getprop("/sim/presets/on-ground")) {
 			var eng = props.globals.getNode("/controls/engines");
@@ -104,7 +104,7 @@ var startTutorial = func {
 
 	# <init>
 	do_group(tutorialN.getNode("init"));
-	is_running(1);  # needs to be after "presets-commit"
+	is_running(1);  # needs to be after "reposition"
 	display.clear();
 	display.show();
 

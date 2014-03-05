@@ -363,7 +363,7 @@
         </script>
       </binding>
       <binding>
-        <command>presets-commit</command>
+        <command>reposition</command>
       </binding>
       <binding>
         <command>nasal</command>

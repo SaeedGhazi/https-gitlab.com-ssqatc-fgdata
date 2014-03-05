@@ -597,7 +597,7 @@ var load_flight_sel = nil;
 var load_flight = func {
     var load = func(n) {
         fgcommand("load", props.Node.new({ file: n.getValue() }));
-        fgcommand("presets-commit");
+        fgcommand("reposition");
     }
     if (load_flight_sel == nil)
         load_flight_sel = FileSelector.new(load, "Load Flight", "Load",

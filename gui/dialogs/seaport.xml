@@ -69,7 +69,7 @@
 			var teleport = func(lat, lon) {
 				setprop("/sim/presets/latitude-deg", lat);
 				setprop("/sim/presets/longitude-deg", lon);
-				fgcommand("presets-commit");
+				fgcommand("reposition");
 			}
 
 			var on_water = func(lat, lon) {

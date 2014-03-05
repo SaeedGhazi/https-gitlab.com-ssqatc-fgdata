@@ -47,7 +47,7 @@
     <token>wind-dir</token>
     <text> degrees </text>
     <token>wind-speed-kn</token>
-    <text> knots </text>
+    <text> knots</text>
     <if>
       <not-empty>
         <token>gusts</token>
@@ -55,7 +55,20 @@
       <then>
         <text> gusts up to </text>
         <token>gusts</token>
-        <text> knots </text>
+        <text> knots</text>
+      </then>
+    </if>
+    <if>
+      <not-equals>
+        <token>wind-from</token>
+        <token>wind-to</token>
+      </not-equals>
+      <then>
+        <text> varying between </text>
+        <token>wind-from</token>
+        <text> and </text>
+        <token>wind-to</token>
+        <text> degrees</text>
       </then>
     </if>
     <text>. </text>

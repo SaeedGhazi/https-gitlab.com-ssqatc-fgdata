@@ -857,6 +857,7 @@ Started September 2000 by David Megginson, david@megginson.com
 				<password type="string" userarchive="y">guest</password>
 			</register>
 		</fgcom>
+		<http include="httpd-settings.xml" />
 	</sim>
 	<!-- mouse mode -->
 	<devices>

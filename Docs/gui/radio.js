@@ -12,13 +12,17 @@ var props =
     alert( "can't save yet :-(" );
   },
 
+  // convert a JSON node to a PropertyNode by adding 
+  // the API Methods
   makeNode: function( node ) {
-    if( typeof(node) == 'undefined' ) return node;
+    if( typeof(node) == 'undefined' ) return node; // not an object
+    if( typeof(node.getNode) == 'function' ) return node; // allready done
+
     node.getNode = function( name ) {
       var reply;
       $.each( node.children, function( key, child ) {
         if( child.name == name ) {
-          reply = child;
+          reply = props.makeNode( child );
         }
       });
       return reply;
@@ -28,47 +32,23 @@ var props =
 }
 
 var reloadProperties = function() {
-	 props.load( "instrumentation/comm/frequencies", function(props) {
-		  $("#com1u").val( props.getNode("selected-mhz-fmt").value );	
-		  $("#com1s").val( props.getNode("standby-mhz-fmt").value );	
+	 props.load( "instrumentation/comm?d=3", function(props) {
+		  $("#com1u").val( props.getNode("comm").getNode("frequencies").getNode("selected-mhz-fmt").value );	
+		  $("#com1s").val( props.getNode("comm").getNode("frequencies").getNode("standby-mhz-fmt").value );	
+		  $("#com2u").val( props.getNode("comm[1]").getNode("frequencies").getNode("selected-mhz-fmt").value );	
+		  $("#com1s").val( props.getNode("comm[1]").getNode("frequencies").getNode("standby-mhz-fmt").value );	
+		  $("#nav1u").val( props.getNode("nav").getNode("frequencies").getNode("selected-mhz-fmt").value );	
+		  $("#nav1s").val( props.getNode("nav").getNode("frequencies").getNode("standby-mhz-fmt").value );	
+		  $("#nav1rad").val( props.getNode("nav").getNode("selected-deg").value );	
+		  $("#nav2u").val( props.getNode("nav[1]").getNode("frequencies").getNode("selected-mhz-fmt").value );	
+		  $("#nav2s").val( props.getNode("nav[1]").getNode("frequencies").getNode("standby-mhz-fmt").value );	
+		  $("#nav2rad").val( props.getNode("nav[1]").getNode("selected-deg").value );	
+		  $("#adf1u").val( props.getNode("adf").getNode("frequencies").getNode("selected-khz").value );	
+		  $("#adf1s").val( props.getNode("adf").getNode("frequencies").getNode("standby-khz").value );	
+		  $("#adf1rad").val( props.getNode("adf").getNode("rotation-deg").value );	
+		  $("#dme1u").val( props.getNode("dme").getNode("frequencies").getNode("selected-mhz").value );	
 	  });
 
-	  props.load( "instrumentation/comm[1]/frequencies", function(props) {
-		  $("#com2u").val( props.getNode("selected-mhz-fmt").value );	
-		  $("#com2s").val( props.getNode("standby-mhz-fmt").value );	
-	  });
-
-	  props.load( "instrumentation/nav/frequencies", function(props) {
-		  $("#nav1u").val( props.getNode("selected-mhz-fmt").value );	
-		  $("#nav1s").val( props.getNode("standby-mhz-fmt").value );
-	  });
-
-	  props.load( "instrumentation/nav/radials", function(props) {
-		  $("#nav1rad").val( props.getNode("selected-deg").value );	
-	  });
-
-	  props.load( "instrumentation/nav[1]/frequencies", function(props) {
-		  $("#nav2u").val( props.getNode("selected-mhz-fmt").value );	
-		  $("#nav2s").val( props.getNode("standby-mhz-fmt").value );	
-	  });
-
-	  props.load( "instrumentation/nav[1]/radials", function(props) {
-		  $("#nav2rad").val( props.getNode("selected-deg").value );	
-	  });
-
-	  props.load( "instrumentation/adf/frequencies", function(props) {
-		  $("#adf1u").val( props.getNode("selected-khz").value );	
-		  $("#adf1s").val( props.getNode("standby-khz").value );	
-	  });
-
-	  props.load( "instrumentation/adf", function(props) {
-		  $("#adf1rad").val( props.getNode("rotation-deg").value );	
-	  });
-
-	  props.load( "instrumentation/dme/frequencies", function(props) {
-		  $("#dme1u").val( props.getNode("selected-mhz").value );	
-	  });
-	  
 }
 
 $( document ).ready(function() {

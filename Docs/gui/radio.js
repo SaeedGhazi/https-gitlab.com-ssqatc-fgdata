@@ -32,21 +32,21 @@ var props =
 }
 
 var reloadProperties = function() {
-	 props.load( "instrumentation/comm?d=3", function(props) {
-		  $("#com1u").val( props.getNode("comm").getNode("frequencies").getNode("selected-mhz-fmt").value );	
-		  $("#com1s").val( props.getNode("comm").getNode("frequencies").getNode("standby-mhz-fmt").value );	
-		  $("#com2u").val( props.getNode("comm[1]").getNode("frequencies").getNode("selected-mhz-fmt").value );	
-		  $("#com1s").val( props.getNode("comm[1]").getNode("frequencies").getNode("standby-mhz-fmt").value );	
-		  $("#nav1u").val( props.getNode("nav").getNode("frequencies").getNode("selected-mhz-fmt").value );	
-		  $("#nav1s").val( props.getNode("nav").getNode("frequencies").getNode("standby-mhz-fmt").value );	
-		  $("#nav1rad").val( props.getNode("nav").getNode("selected-deg").value );	
-		  $("#nav2u").val( props.getNode("nav[1]").getNode("frequencies").getNode("selected-mhz-fmt").value );	
-		  $("#nav2s").val( props.getNode("nav[1]").getNode("frequencies").getNode("standby-mhz-fmt").value );	
-		  $("#nav2rad").val( props.getNode("nav[1]").getNode("selected-deg").value );	
-		  $("#adf1u").val( props.getNode("adf").getNode("frequencies").getNode("selected-khz").value );	
-		  $("#adf1s").val( props.getNode("adf").getNode("frequencies").getNode("standby-khz").value );	
-		  $("#adf1rad").val( props.getNode("adf").getNode("rotation-deg").value );	
-		  $("#dme1u").val( props.getNode("dme").getNode("frequencies").getNode("selected-mhz").value );	
+	 props.load( "instrumentation/comm?d=3", function(n) {
+		  $("#com1u").val( n.getNode("comm").getNode("frequencies").getNode("selected-mhz-fmt").value );	
+		  $("#com1s").val( n.getNode("comm").getNode("frequencies").getNode("standby-mhz-fmt").value );	
+		  $("#com2u").val( n.getNode("comm[1]").getNode("frequencies").getNode("selected-mhz-fmt").value );	
+		  $("#com1s").val( n.getNode("comm[1]").getNode("frequencies").getNode("standby-mhz-fmt").value );	
+		  $("#nav1u").val( n.getNode("nav").getNode("frequencies").getNode("selected-mhz-fmt").value );	
+		  $("#nav1s").val( n.getNode("nav").getNode("frequencies").getNode("standby-mhz-fmt").value );	
+		  $("#nav1rad").val( n.getNode("nav").getNode("selected-deg").value );	
+		  $("#nav2u").val( n.getNode("nav[1]").getNode("frequencies").getNode("selected-mhz-fmt").value );	
+		  $("#nav2s").val( n.getNode("nav[1]").getNode("frequencies").getNode("standby-mhz-fmt").value );	
+		  $("#nav2rad").val( n.getNode("nav[1]").getNode("selected-deg").value );	
+		  $("#adf1u").val( n.getNode("adf").getNode("frequencies").getNode("selected-khz").value );	
+		  $("#adf1s").val( n.getNode("adf").getNode("frequencies").getNode("standby-khz").value );	
+		  $("#adf1rad").val( n.getNode("adf").getNode("rotation-deg").value );	
+		  $("#dme1u").val( n.getNode("dme").getNode("frequencies").getNode("selected-mhz").value );	
 	  });
 
 }

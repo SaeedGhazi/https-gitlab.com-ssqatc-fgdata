@@ -39,6 +39,7 @@
   <nasal>
     <!-- Generalize all this, turn into helpers and load defaults via XML -->
     <open><![CDATA[
+      var MAX_RUNWAYS = 28; # number of entries at KEDW
     
       var DIALOG = cmdarg();
       
@@ -186,11 +187,11 @@
               } 
               
               i += 1;
-              if (i == 10)
+              if (i == MAX_RUNWAYS)
                   break;
           }          
           
-          while (i < 10) {
+          while (i < MAX_RUNWAYS) {
           # zero remaining runway data
               setprop("sim/gui/dialogs/airports/selected-airport/runway[" ~ i ~ "]/label", "");
               setprop("sim/gui/dialogs/airports/selected-airport/runway[" ~ i ~ "]/length-hdg", "");

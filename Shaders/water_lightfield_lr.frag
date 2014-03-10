@@ -407,7 +407,7 @@ void main(void)
 
 	vec4 ambient_light;
 	//intensity = length(specular_light.rgb);
-	ambient_light.rgb = max(specular_light.rgb, vec3(0.1, 0.1, 0.1));
+	ambient_light.rgb = max(specular_light.rgb, vec3(0.05, 0.05, 0.05));
 	//ambient_light.rgb = max(intensity * normalize(vec3 (0.33, 0.4, 0.5)), vec3 (0.1,0.1,0.1));
    	ambient_light.a = 1.0;
    	

@@ -54,9 +54,11 @@ uniform float dust_resistance;
 uniform float WindE;
 uniform float WindN;
 uniform float osg_SimulationTime;
+
 uniform int quality_level;
 uniform int tquality_level;
 uniform int wind_effects;
+uniform int cloud_shadow_flag;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -66,7 +68,7 @@ float eShade;
 float yprime_alt;
 float mie_angle;
 
-
+float shadow_func (in float x, in float y, in float noise, in float dist);
 
 float rand2D(in vec2 co){
     return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
@@ -548,6 +550,7 @@ if ((dist < 5000.0)&& (quality_level > 3) && (combined_wetness>0.0))
 	NdotL = NdotL + (1.0-snow_mix_factor) * 0.3* dot_texel.a * (0.5* dotnoisegrad_10m * detail_fade(1.0 * dot_size, view_angle, dist) +0.5 * dotnoisegrad_10m * noise_01m * detail_fade(0.1, view_angle, dist)) ;
 	
     if (NdotL > 0.0) {
+	if (cloud_shadow_flag == 1) {NdotL = NdotL * shadow_func(relPos.x, relPos.y, 0.3 * noise_250m + 0.5 * noise_500m+0.2 * noise_1500m, dist);}
         color += diffuse_term * NdotL;
         NdotHV = max(dot(n, halfVector), 0.0);
         if (gl_FrontMaterial.shininess > 0.0)

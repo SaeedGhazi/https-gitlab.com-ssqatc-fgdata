@@ -4257,6 +4257,27 @@ else
 
 	}
 
+if (local_weather.cloud_shadow_flag == 1)
+			{
+			var cs = local_weather.cloudShadow.new(lat+get_lat(x,y+6000,phi), lon+get_lon(x,y+6000,phi) , 0.9  , 0.9);
+			cs.index = getprop(lw~"tiles/tile-counter");
+			append(cloudShadowCandidateArray,cs);
+			
+			cs = local_weather.cloudShadow.new(lat+get_lat(x,y-6000,phi), lon+get_lon(x,y-6000,phi) , 0.9  , 0.9);
+			cs.index = getprop(lw~"tiles/tile-counter");
+			append(cloudShadowCandidateArray,cs);
+			
+			cs = local_weather.cloudShadow.new(lat+get_lat(x,y-3000,phi), lon+get_lon(x,y-3000,phi) , 0.9  , 0.9);
+			cs.index = getprop(lw~"tiles/tile-counter");
+			append(cloudShadowCandidateArray,cs);
+			
+			cs = local_weather.cloudShadow.new(lat+get_lat(x,y+3000,phi), lon+get_lon(x,y+3000,phi) , 0.9  , 0.9);
+			cs.index = getprop(lw~"tiles/tile-counter");
+			append(cloudShadowCandidateArray,cs);
+
+			}
+
+
 }
 
 

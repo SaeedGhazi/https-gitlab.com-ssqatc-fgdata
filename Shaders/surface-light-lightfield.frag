@@ -41,7 +41,7 @@ else
 }
 
 
-float light_sprite (in vec2 coord, in float transmission)
+vec4 light_sprite (in vec2 coord, in float transmission)
 {
 
 coord.s = coord.s - 0.5;

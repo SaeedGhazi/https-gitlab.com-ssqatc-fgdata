@@ -103,6 +103,10 @@
     <box-bottom-thickness type="double" userarchive="n">0.2</box-bottom-thickness>
     <box-bottom-n type="int" userarchive="n">12</box-bottom-n>
  </tmp>
+<cloud-shadows>
+    <cloud-shadow-flag type="bool" userarchive="y">0</cloud-shadow-flag>
+    <cloud-shadow-fov-flag type="bool" userarchive="y">0</cloud-shadow-fov-flag>
+</cloud-shadows>
 </PropertyList>
 
 

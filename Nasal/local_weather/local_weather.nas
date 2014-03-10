@@ -1656,6 +1656,7 @@ setprop(lw~"timing-loop-flag",0);
 setprop(lw~"buffer-loop-flag",0);
 setprop(lw~"housekeeping-loop-flag",0);
 setprop(lw~"convective-loop-flag",0);
+setprop(lw~"shadow-loop-flag",0);
 
 weather_dynamics.convective_loop_kill_flag = 1; # long-running loop needs a different scheme to end
 
@@ -1691,6 +1692,14 @@ n_effectVolumeArray = 0;
 
 weather_tile_management.remove_impostors();
 
+# clear out the visual shadows
+
+for (var i = 0; i<cloudShadowArraySize; i=i+1)
+	{
+	setprop("/local-weather/cloud-shadows/cloudpos-x["~i~"]",0.0);
+	setprop("/local-weather/cloud-shadows/cloudpos-y["~i~"]",0.0);
+	}
+
 # clear any wxradar echos
 
 if (wxradar_support_flag ==1)
@@ -1711,6 +1720,8 @@ settimer ( func {
 	setsize(alt_50_array,0);
 	setsize(alt_min_array,0);
 	setsize(alt_mean_array,0);
+	setsize(weather_dynamics.cloudShadowArray,0);
+	setsize(weather_dynamics.cloudShadowCandidateArray,0);
 	setsize(weather_dynamics.tile_convective_altitude,0);
 	setsize(weather_dynamics.tile_convective_strength,0);
 	setsize(weatherStationArray,0);
@@ -1803,6 +1814,14 @@ if (edge_bias > 0.0) {height_bias = height_bias +  15.0 *edge_bias + 20.0 * rand
 
 		create_streak(btype,lat,lon, alt -offset_map["Congestus"] -900.0, 100.0,n_b,0.0,edge,0.3*x,1,0.0,0.0,0.3*y,alpha,1.0);
 
+		if (local_weather.cloud_shadow_flag == 1)
+			{
+			var cs = local_weather.cloudShadow.new(lat, lon, 0.9 * (1.5 * x)/5000.0 , 0.9);
+			cs.index = getprop(lw~"tiles/tile-counter");
+			append(cloudShadowCandidateArray,cs);
+			}
+
+
 		}
 	else if (size>1.1)
 		{
@@ -1821,6 +1840,13 @@ if (edge_bias > 0.0) {height_bias = height_bias +  15.0 *edge_bias + 20.0 * rand
 
 		height_bias = 1.0;
 		create_streak(btype,lat,lon, alt -offset_map["Cumulus"] - 200.0, 100.0,n_b,0.0,edge,0.3*x,1,0.0,0.0,0.3*y,alpha,1.0);
+
+		if (local_weather.cloud_shadow_flag == 1)
+			{
+			var cs = local_weather.cloudShadow.new(lat, lon, 0.9 * (1.5 * x)/5000.0 , 0.8);
+			cs.index = getprop(lw~"tiles/tile-counter");
+			append(cloudShadowCandidateArray,cs);
+			}
 
 		}
 	else if (size>0.8)
@@ -1998,7 +2024,7 @@ var alt_base = alt_20_array[tile_index -1];
 	#var alt_base = getprop(lw~"tmp/tile-alt-offset-ft");
 #	}
 
-var sec_to_rad = 2.0 * math.pi/86400; # conversion factor for sinusoidal dependence on daytime
+#var sec_to_rad = 2.0 * math.pi/86400; # conversion factor for sinusoidal dependence on daytime
 
 calc_geo(blat);
 
@@ -2190,7 +2216,7 @@ var detail_flag = detailed_clouds_flag;
 
 alpha = alpha * math.pi/180.0; # the tile orientation
 
-var sec_to_rad = 2.0 * math.pi/86400; # conversion factor for sinusoidal dependence on daytime
+#var sec_to_rad = 2.0 * math.pi/86400; # conversion factor for sinusoidal dependence on daytime
 
 # current aircraft position
 
@@ -3984,6 +4010,16 @@ local_weather.init_sea_colors();
 # create impostors - this should only happen when sufficiently high in air
 weather_tile_management.create_impostors();
 
+# start the cloud shadow loop
+
+local_weather.cloud_shadow_flag = getprop("/local-weather/cloud-shadows/cloud-shadow-flag");
+
+if (local_weather.cloud_shadow_flag == 1)
+	{
+	setprop(lw~"shadow-loop-flag",1); 
+	weather_tile_management.shadow_management_loop(0);
+	}
+
 # weather_tile_management.watchdog_loop();
 
 }
@@ -4400,6 +4436,7 @@ var lat_to_m = 110952.0; # latitude degrees to meters
 var m_to_lat = 9.01290648208234e-06; # meters to latitude degrees
 var ft_to_m = 0.30480;
 var m_to_ft = 1.0/ft_to_m;
+var sec_to_rad = 2.0 * math.pi/86400;
 
 var lon_to_m = 0.0; # needs to be calculated dynamically
 var m_to_lon = 0.0; # we do this on startup

@@ -16,6 +16,7 @@
 # housekeeping_loop		to shift clouds from the scenery into the buffer
 # remove_impostors		to delete a ring of impostors to mimick distant clouds
 # create_impostors		to create a ring of impostors to mimick distant clouds
+# shadow_management_loop	to manage cloud shadow information
 # watchdog loop			(debug helping structure)
 # calc_geo			to get local Cartesian geometry for latitude conversion
 # get_lat			to get latitude from Cartesian coordinates
@@ -1120,6 +1121,19 @@ var housekeeping_loop = func (index, index1) {
 
 if (local_weather.local_weather_running_flag == 0) {return;}
 
+# supply a few properties which are used more generally
+
+lwObserverLat = getprop("/position/latitude-deg");
+lwObserverLon = getprop("/position/longitude-deg");
+
+var heading = getprop("/orientation/heading-deg");
+var offset =  getprop("/sim/current-view/heading-offset-deg");
+lwViewDir = (heading - offset) * math.pi/180.0 ;
+setsize(lwViewVec,0);
+append(lwViewVec,math.cos(lwViewDir));
+append(lwViewVec,-math.sin(lwViewDir));
+
+
 var n = 5;
 var n_max = size(cloudSceneryArray);
 n_cloudSceneryArray = n_max;
@@ -1248,6 +1262,130 @@ weather_tiles.create_impostor_ring(lat, lon, alt, alpha, type, n);
 }
 
 
+###############################
+# Cloud shadow management
+###############################
+
+
+
+var shadow_management_loop = func (index) {
+
+if (local_weather.local_weather_running_flag == 0) {return;}
+
+var n = 50;
+var n_max = size(cloudShadowCandidateArray);
+var s = size(active_tile_list);
+
+# don't do anything as long as the array is empty
+
+if (n_max == 0)  # nothing to do, loop over
+	{if (getprop(lw~"shadow-loop-flag") ==1) {settimer( func {shadow_management_loop(index)}, 0);} return;}
+
+# compute some general-purpose stuff for the loop
+	
+var eyeLat = lwObserverLat; 
+var eyeLon = lwObserverLon; 
+
+#var sec_to_rad = 2.0 * math.pi/86400;
+var time = getprop("/sim/time/utc/day-seconds") + getprop("/sim/time/local-offset");
+var sun_angle = getprop("/sim/time/sun-angle-rad");
+var cloud_alt = getprop("/environment/ground-haze-thickness-m");
+var offset_mag = cloud_alt * math.tan(sun_angle);
+var offset_x = -math.cos(time * local_weather.sec_to_rad) * math.cos(eyeLat) * offset_mag;
+var offset_y = -math.sin(time * local_weather.sec_to_rad) * math.sin(eyeLat) * offset_mag;
+
+
+# indexing, we don't want to run through hundreds of candidates per frame
+
+if (index > n_max-1) {index = 0;}
+
+var i_max = index + n;
+if (i_max > n_max) {i_max = n_max;}
+
+for (var i = index; i < i_max; i = i+1)
+	{
+	var shadow = cloudShadowCandidateArray[i];
+	
+	# housekeeping - delete shadows from deleted tiles
+	
+	var flag = 0;
+	
+	for (var j = 0; j < s; j = j+1)
+		{
+		if (active_tile_list[j] == shadow.index) {flag = 1; break;}
+		if (shadow.index == 0) {flag =1; break;} # clouds in tile index 0 are special
+		}
+	if (flag == 0)
+		{
+		#print("Shadow management housekeeping!");
+		cloudShadowCandidateArray = delete_from_vector(cloudShadowCandidateArray,i);
+		i = i -1; i_max = i_max - 1; n_max = n_max - 1;
+		continue;
+		}
+			
+	# find nearest shadows
+	
+	if (shadow.shadow_flag == 0)
+		{
+		var diffx = (shadow.lat - eyeLat) * local_weather.lat_to_m + offset_x;
+		var diffy = -(shadow.lon - eyeLon) * local_weather.lon_to_m + offset_y;
+		var dist = math.sqrt(diffx * diffx + diffy * diffy) ;
+		if (getprop("/local-weather/cloud-shadows/cloud-shadow-fov-flag")==1)
+			{
+			var viewDotPos = (diffx * lwViewVec[0] + diffy * lwViewVec[1])/dist;
+			if (viewDotPos <0.7) {dist = dist -(viewDotPos - 0.7) * 10000.0;}
+			}
+		if (dist < cloudShadowMaxDist)
+			{
+			#print("Shadow management:");
+			#print("Max. dist is now: ", dist);
+			#print("Adding cloud");
+			#print("Array size is now: ", size(cloudShadowArray));
+			#print("CloudShadowMinIndex is now: ", cloudShadowMinIndex);
+			cloudShadowMaxDist = dist;
+			if (size(cloudShadowArray)>cloudShadowArraySize-1)
+				{
+				cloudShadowArray[cloudShadowMinIndex].shadow_flag = 0;
+				cloudShadowArray = delete_from_vector(cloudShadowArray,cloudShadowMinIndex);
+				}
+			append(cloudShadowArray,shadow);
+			shadow.shadow_flag = 1;
+			break;
+			}
+		}		
+	}
+
+var index_max = -1;
+var dist_max = -1.0;
+
+var counter = 0;
+
+foreach(s; cloudShadowArray)
+	{
+	var diffx = (s.lat - eyeLat) * local_weather.lat_to_m + offset_x;
+	var diffy = -(s.lon - eyeLon) * local_weather.lon_to_m + offset_y;
+	
+	var dist = math.sqrt(diffx*diffx + diffy*diffy);
+	if (getprop("/local-weather/cloud-shadows/cloud-shadow-fov-flag")==1)
+		{
+		var viewDotPos = (diffx * lwViewVec[0] + diffy * lwViewVec[1])/dist;
+		if (viewDotPos <0.7) {dist = dist  -(viewDotPos - 0.7) * 10000.0;}
+		}
+	if (dist > dist_max) {dist_max = dist; index_max = counter;}
+	
+	setprop("/local-weather/cloud-shadows/cloudpos-x["~counter~"]",int(diffx) + s.size);
+	setprop("/local-weather/cloud-shadows/cloudpos-y["~counter~"]",int(diffy) + 0.9 );
+	counter = counter+1;
+	}
+	#print("Dist_max:", dist_max, " index_max: ", index_max);
+	cloudShadowMinIndex = index_max;
+	if (dist_max > 0.0) {cloudShadowMaxDist = dist_max;}	
+	
+	
+settimer( func {shadow_management_loop(i)}, 0);	
+}	
+
+
 
 ###############################
 # watchdog loop for debugging
@@ -1374,11 +1512,21 @@ var hp_to_inhg = 1.0/inhg_to_hp;
 var lon_to_m = 0.0; #local_weather.lon_to_m;
 var m_to_lon = 0.0; # local_weather.m_to_lon;
 var lw = "/local-weather/";
+var cloud_shadow_flag = 0;
 
 var cloud_view_distance = getprop(lw~"config/clouds-visible-range-m");
 
 var modelArrays = [];
 var active_tile_list = [];
+
+# a bunch of variables to be updated per frame used by different
+# routines, managed by the housekeeping loop
+
+var lwObserverLat = 0.0;
+var lwObserverLon = 0.0;
+var lwViewDir = 0.0;
+var lwViewVec = [];
+var lwTileIndex = 0;
 
 
 #####################################################
@@ -1441,6 +1589,24 @@ var cloudImpostor = {
 	},
 };
 
+
+var cloudShadowArray = [];
+var cloudShadowCandidateArray = [];
+var cloudShadowArraySize = 20;
+var cloudShadowMaxDist = 100000.0;
+var cloudShadowMinIndex = -1;
+
+var cloudShadow = {
+	new: func (lat, lon, size, strength) {
+			var s = {parents: [cloudShadow] };
+		s.lat = lat;
+		s.lon = lon;
+		s.size = size;
+		s.strength = strength;
+		s.shadow_flag = 0;
+		return s;
+	},
+};	
 
 
 var cloudSceneryArray = [];

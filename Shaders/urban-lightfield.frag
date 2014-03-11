@@ -50,6 +50,7 @@ uniform float fogstructure;
 uniform float cloud_self_shading;
 uniform vec3 night_color;
 uniform bool random_buildings;
+uniform int cloud_shadow_flag;
 
 const float scale = 1.0;
 int linear_search_steps = 10;
@@ -62,6 +63,7 @@ const float terminator_width = 200000.0;
 float alt;
 float eShade;
 
+float shadow_func (in float x, in float y, in float noise, in float dist);
 
 float rand2D(in vec2 co){
     return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
@@ -342,6 +344,12 @@ void main (void)
 
     vec3 l = gl_LightSource[0].position.xyz;
     vec3 diffuse = gl_Color.rgb * max(0.0, dot(N, l));
+    
+    float dist = length(relPos);
+    if (cloud_shadow_flag == 1) 
+	{diffuse = diffuse * shadow_func(relPos.x, relPos.y, 1.0, dist);}
+
+
     float shadow_factor = 1.0;
 
     // Shadow
@@ -403,7 +411,7 @@ if (quality_level > 2)
 
 // here comes the terrain haze model
 
-float dist = length(relPos);
+
 float delta_z = hazeLayerAltitude - eye_alt;
 
 

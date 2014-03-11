@@ -184,6 +184,7 @@
       <program>
         <vertex-shader n="1">Shaders/building-ubershader.vert</vertex-shader>
         <fragment-shader n="1">Shaders/ubershader-lightfield.frag</fragment-shader>
+	<fragment-shader n="2">Shaders/cloud-shadowfunc.frag</fragment-shader>
       </program>
 	</pass>
   </technique>

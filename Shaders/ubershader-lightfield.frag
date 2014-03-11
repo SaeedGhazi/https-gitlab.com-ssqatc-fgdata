@@ -37,6 +37,7 @@ uniform int nmap_enabled;
 uniform int refl_enabled;
 uniform int refl_map;
 uniform int grain_texture_enabled;
+uniform int cloud_shadow_flag;
 
 uniform float amb_correction;
 uniform float dirt_b_factor;
@@ -79,6 +80,8 @@ uniform vec3 lightmap_a_color;
 uniform vec3 dirt_r_color;
 uniform vec3 dirt_g_color;
 uniform vec3 dirt_b_color;
+
+float shadow_func (in float x, in float y, in float noise, in float dist);
 
 // uniform mat4 osg_ViewMatrixInverse;
 // uniform mat4 osg_ViewMatrix;
@@ -246,9 +249,14 @@ void main (void)
     else
         pf = pow(nDotHV, gl_FrontMaterial.shininess);
 
-    //vec4 Diffuse  = gl_LightSource[0].diffuse * nDotVP;
+    vec3 relPos;		
+    if (cloud_shadow_flag == 1) 
+	{
+	relPos = (gl_ModelViewMatrixInverse * vec4 (vertVec,0.0)).xyz;
+	light_diffuse = light_diffuse * shadow_func(relPos.x, relPos.y, 1.0, dist);
+	}
+
     vec4 Diffuse  = light_diffuse * nDotVP;
-    //vec4 Specular = gl_FrontMaterial.specular * gl_LightSource[0].specular * pf;
     vec4 Specular = gl_FrontMaterial.specular * light_diffuse * pf;
 
     vec4 color = gl_Color + Diffuse * gl_FrontMaterial.diffuse;

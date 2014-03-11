@@ -62,6 +62,7 @@ uniform float sea_b;
 
 uniform int quality_level;
 uniform int ocean_flag;
+uniform int cloud_shadow_flag;
 
 vec3 specular_light;
 
@@ -72,10 +73,13 @@ const float EarthRadius = 5800000.0;
 ////fog "include" /////
 //uniform int fogType;
 
-vec3 fog_Func(vec3 color, int type);
+//vec3 fog_Func(vec3 color, int type);
+float shadow_func (in float x, in float y, in float noise, in float dist);
 //////////////////////
 
 /////// functions /////////
+
+
 
 float rand2D(in vec2 co){
     return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
@@ -297,6 +301,7 @@ void main(void)
 
 	float noise_50m = Noise3D(rawPos.xyz, 50.0);
 	float noise_250m = Noise3D(rawPos.xyz,250.0);
+        float noise_500m = Noise3D(rawPos.xyz,500.0);
 	float noise_1500m = Noise3D(rawPos.xyz,1500.0);
 	float noise_2000m = Noise3D(rawPos.xyz,2000.0);
 	float noise_2500m = Noise3D(rawPos.xyz, 2500.0);
@@ -531,7 +536,14 @@ void main(void)
    	
 	
 	vec4 finalColor;
-
+	
+	float shadowValue;
+	if (cloud_shadow_flag == 1) 
+		{
+		shadowValue = shadow_func(relPos.x, relPos.y, 0.3 * noise_250m + 0.5 * noise_500m+0.2 * noise_1500m, dist);
+		specular = specular * shadowValue;
+		refl = refl * (0.7 + 0.3 *shadowValue);
+		}
 
 
 	finalColor = refl + specular * smoothstep(0.3, 0.6, ground_scattering);

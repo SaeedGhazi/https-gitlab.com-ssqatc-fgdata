@@ -1,96 +1,102 @@
-var props = {
-  load : function(path, callback, base) {
-    if (typeof (base) == 'undefined')
-      base = "/json/";
-    $.getJSON(base + path, function(data) {
-      callback(props.makeNode(data));
-    });
-  },
+$(document).ready(
+    function() {
 
-  save : function(node, url) {
-    alert("can't save yet :-(");
-  },
+      var rp = new Array();
+      rp["#com1u"] = "/instrumentation/comm/frequencies/selected-mhz";
+      rp["#com1s"] = "/instrumentation/comm/frequencies/standby-mhz";
+      rp["#nav1u"] = "/instrumentation/nav/frequencies/selected-mhz";
+      rp["#nav1s"] = "/instrumentation/nav/frequencies/standby-mhz";
+      rp["#com2u"] = "/instrumentation/comm[1]/frequencies/selected-mhz";
+      rp["#com2s"] = "/instrumentation/comm[1]/frequencies/standby-mhz";
+      rp["#nav2u"] = "/instrumentation/nav[1]/frequencies/selected-mhz";
+      rp["#nav2s"] = "/instrumentation/nav[1]/frequencies/standby-mhz";
+      rp["#adf1u"] = "/instrumentation/adf/frequencies/selected-khz";
+      rp["#adf1s"] = "/instrumentation/adf/frequencies/standby-khz";
+      rp["#dme1u"] = "/instrumentation/dme/frequencies/selected-mhz";
 
-  // convert a JSON node to a PropertyNode by adding
-  // the API Methods
-  makeNode : function(node) {
-    if (typeof (node) == 'undefined')
-      return node; // not an object
-    if (typeof (node.getNode) == 'function')
-      return node; // allready done
-
-    node.getNode = function(name, index) {
-      if (typeof (index) == 'undefined') {
-        index = 0;
-      }
-      var reply;
-      $.each(node.children, function(key, child) {
-        if (child.name == name && child.index == index) {
-          reply = props.makeNode(child);
-        }
+      $("#com1u").change(function(o) {
+        fgCommand.propertyAssign(rp["#com1u"], $("#com1u").val());
+      });
+      $("#com1s").change(function(o) {
+        fgCommand.propertyAssign(rp["#com1s"], $("#com1s").val());
+      });
+      $("#nav1u").change(function(o) {
+        fgCommand.propertyAssign(rp["#nav1u"], $("#nav1u").val());
+      });
+      $("#nav1s").change(function(o) {
+        fgCommand.propertyAssign(rp["#nav1s"], $("#nav1s").val());
+      });
+      $("#com2u").change(function(o) {
+        fgCommand.propertyAssign(rp["#com2u"], $("#com2u").val());
+      });
+      $("#com2s").change(function(o) {
+        fgCommand.propertyAssign(rp["#com2s"], $("#com2s").val());
+      });
+      $("#nav2u").change(function(o) {
+        fgCommand.propertyAssign(rp["#nav2u"], $("#nav2u").val());
+      });
+      $("#nav2s").change(function(o) {
+        fgCommand.propertyAssign(rp["#nav2s"], $("#nav2s").val());
+      });
+      $("#adf1u").change(function(o) {
+        fgCommand.propertyAssign(rp["#adf1u"], $("#adf1u").val());
+      });
+      $("#adf1s").change(function(o) {
+        fgCommand.propertyAssign(rp["#adf1s"], $("#adf1s").val());
+      });
+      $("#dme1u").change(function(o) {
+        fgCommand.propertyAssign(rp["#dme1u"], $("#dme1u").val());
       });
 
-      // be a bit more graceful here...
-      if (typeof (reply) == 'undefined')
-        alert('unknown property: ' + name + ':' + index);
-      return reply;
-    };
-    return node;
-  }
-};
+      $("#com1swap").click(function() {
+        fgCommand.propertySwap(rp["#com1u"], rp["#com1s"]);
+      });
+      $("#nav1swap").click(function() {
+        fgCommand.propertySwap(rp["#nav1u"], rp["#nav1s"]);
+      });
+      $("#com2swap").click(function() {
+        fgCommand.propertySwap(rp["#com2u"], rp["#com2s"]);
+      });
+      $("#nav2swap").click(function() {
+        fgCommand.propertySwap(rp["#nav2u"], rp["#nav2s"]);
+      });
+      $("#adf1swap").click(function() {
+        fgCommand.propertySwap(rp["#adf1u"], rp["#adf1s"]);
+      });
 
-var reloadProperties = function() {
-  props.load("instrumentation?d=3", function(n) {
-    $("#com1u").val(n.getNode("comm").getNode("frequencies").getNode("selected-mhz-fmt").value);
-    $("#com1s").val(n.getNode("comm").getNode("frequencies").getNode("standby-mhz-fmt").value);
-    $("#com2u").val(n.getNode("comm", 1).getNode("frequencies").getNode("selected-mhz-fmt").value);
-    $("#com2s").val(n.getNode("comm", 1).getNode("frequencies").getNode("standby-mhz-fmt").value);
-    $("#nav1u").val(n.getNode("nav").getNode("frequencies").getNode("selected-mhz-fmt").value);
-    $("#nav1s").val(n.getNode("nav").getNode("frequencies").getNode("standby-mhz-fmt").value);
-    $("#nav1rad").val(n.getNode("nav").getNode("radials").getNode("selected-deg").value);
-    $("#nav2u").val(n.getNode("nav", 1).getNode("frequencies").getNode("selected-mhz-fmt").value);
-    $("#nav2s").val(n.getNode("nav", 1).getNode("frequencies").getNode("standby-mhz-fmt").value);
-    $("#nav2rad").val(n.getNode("nav", 1).getNode("radials").getNode("selected-deg").value);
-    $("#adf1u").val(n.getNode("adf").getNode("frequencies").getNode("selected-khz").value);
-    $("#adf1s").val(n.getNode("adf").getNode("frequencies").getNode("standby-khz").value);
-    $("#adf1rad").val(n.getNode("adf").getNode("rotation-deg").value);
-    $("#dme1u").val(n.getNode("dme").getNode("frequencies").getNode("selected-mhz").value);
-  });
-
-};
-
-$(document).ready(function() {
-
-  $("#com1swap").click(function() {
-    var v = $("#com1u").val();
-    $("#com1u").val($("#com1s").val());
-    $("#com1s").val(v);
-  });
-
-  $("#com2swap").click(function() {
-    var v = $("#com2u").val();
-    $("#com2u").val($("#com2s").val());
-    $("#com2s").val(v);
-  });
-
-  $("#nav1swap").click(function() {
-    var v = $("#nav1u").val();
-    $("#nav1u").val($("#nav1s").val());
-    $("#nav1s").val(v);
-  });
-
-  $("#nav2swap").click(function() {
-    var v = $("#nav2u").val();
-    $("#nav2u").val($("#nav2s").val());
-    $("#nav2s").val(v);
-  });
-
-  $("#adf1swap").click(function() {
-    var v = $("#adf1u").val();
-    $("#adf1u").val($("#adf1s").val());
-    $("#adf1s").val(v);
-  });
-
-  reloadProperties();
-  window.setInterval(reloadProperties, 5000);
+      PropertyChangeListener(function() {
+        SetListener( rp["#com1u"], function(n) {
+          $("#com1u").val( n.value );
+        });
+        SetListener( rp["#com1s"], function(n) {
+          $("#com1s").val( n.value );
+        });
+        SetListener( rp["#nav1u"], function(n) {
+          $("#nav1u").val( n.value );
+        });
+        SetListener( rp["#nav1s"], function(n) {
+          $("#nav1s").val( n.value );
+        });
+        SetListener( rp["#com2u"], function(n) {
+          $("#com2u").val( n.value );
+        });
+        SetListener( rp["#com2s"], function(n) {
+          $("#com2s").val( n.value );
+        });
+        SetListener( rp["#nav2u"], function(n) {
+          $("#nav2u").val( n.value );
+        });
+        SetListener( rp["#nav2s"], function(n) {
+          $("#nav2s").val( n.value );
+        });
+        SetListener( rp["#adf1u"], function(n) {
+          $("#adf1u").val( n.value );
+        });
+        SetListener( rp["#adf1s"], function(n) {
+          $("#adf1s").val( n.value );
+        });
+        SetListener( rp["#dme1u"], function(n) {
+          $("#dme1u").val( n.value );
+        });
+      });
 });

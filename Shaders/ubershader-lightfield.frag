@@ -127,6 +127,7 @@ void main (void)
     vec3 mixedcolor;
     vec3 N = vec3(0.0,0.0,1.0);
     float pf = 0.0;
+    float pf1 = 0.0;
     ///some generic light scattering parameters 
     vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
     vec3 moonLightColor = vec3 (0.095, 0.095, 0.15) * moonlight;
@@ -244,10 +245,25 @@ void main (void)
             nDotHV = max(0.0, dot(-N, normalize(gl_LightSource[0].halfVector.xyz)));
         }
 
+    float nDotVP1 = 0.0;
+    float nDotHV1 = 0.0;
+
+        
+    // try specular reflection of sky irradiance
+    nDotVP1 = max(0.0, dot(N, up));
+    nDotHV1 = max(0.0, dot(N, normalize(normalize(up) + normalize(-vertVec))));
+	
+
     if (nDotVP == 0.0)
-        pf = 0.0;
+	{pf = 0.0;}
     else
-        pf = pow(nDotHV, gl_FrontMaterial.shininess);
+        {pf = pow(nDotHV, gl_FrontMaterial.shininess);}
+   
+   if (nDotVP1 == 0.0)
+	{pf1 = 0.0;}
+    else
+        {pf1 = pow(nDotHV1, 0.5*gl_FrontMaterial.shininess);}
+  
 
     vec3 relPos;		
     if (cloud_shadow_flag == 1) 
@@ -257,7 +273,7 @@ void main (void)
 	}
 
     vec4 Diffuse  = light_diffuse * nDotVP;
-    vec4 Specular = gl_FrontMaterial.specular * light_diffuse * pf;
+    vec4 Specular = gl_FrontMaterial.specular * light_diffuse * pf + gl_FrontMaterial.specular * light_ambient * pf1;
 
     vec4 color = gl_Color + Diffuse * gl_FrontMaterial.diffuse;
     color = clamp( color, 0.0, 1.0 );

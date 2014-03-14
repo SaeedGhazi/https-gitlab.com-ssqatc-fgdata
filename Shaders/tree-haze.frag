@@ -27,12 +27,15 @@ uniform float dust_cover_factor;
 
 uniform int quality_level;
 uniform int tquality_level;
+uniform int cloud_shadow_flag;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
 
 float alt;
 float mie_angle;
+
+float shadow_func (in float x, in float y, in float noise, in float dist);
 
 float luminance(vec3 color)
 {
@@ -126,15 +129,16 @@ void main()
 
 
 
-    vec3 lightDir = gl_LightSource[0].position.xyz;
-    float intensity;
+  vec3 lightDir = gl_LightSource[0].position.xyz;
+  float intensity;
 
-    mie_angle = gl_Color.a;
-    vec4 texel = texture2D(texture, gl_TexCoord[0].st);
+  mie_angle = gl_Color.a;
+  vec4 texel = texture2D(texture, gl_TexCoord[0].st);
 
-    float effective_scattering = min(scattering, cloud_self_shading);
+  float effective_scattering = min(scattering, cloud_self_shading);
+  float dist = length(relPos);
 
-if (quality_level > 3)
+  if (quality_level > 3)
 	{
 	// mix dust
     	vec4 dust_color = vec4 (0.76, 0.71, 0.56, texel.a);
@@ -142,14 +146,19 @@ if (quality_level > 3)
     	texel = mix(texel, dust_color, clamp(0.6 * dust_cover_factor ,0.0, 1.0) );
 	}
 
-      vec4 fragColor = vec4 (gl_Color.xyz,1.0) * texel;
+   vec4 fragColor = vec4 (gl_Color.xyz,1.0) * texel;
+
+   if (cloud_shadow_flag == 1) 
+		{
+		fragColor.rgb = fragColor.rgb * (0.5 + 0.5 * shadow_func(relPos.x, relPos.y, 1.0, dist));
+		}
 
 
 // here comes the terrain haze model
 
 
 float delta_z = hazeLayerAltitude - eye_alt;
-float dist = length(relPos);
+
 
 if (dist > max(40.0, 0.07 * min(visibility,avisibility))) 
 //if (dist > 40.0)

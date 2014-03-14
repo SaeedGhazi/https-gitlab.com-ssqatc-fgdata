@@ -5,7 +5,6 @@
 // Ambient term comes in gl_Color.rgb.
 varying vec4 diffuse_term;
 varying vec3 normal;
-//varying vec2 nvec;
 varying vec3 relPos;
 varying vec2 rawPos;
 varying vec3 ecViewdir;
@@ -14,9 +13,6 @@ varying vec3 ecViewdir;
 uniform sampler2D texture;
 uniform sampler2D snow_texture;
 
-
-//varying float yprime_alt;
-//varying float mie_angle;
 varying float steepness;
 
 
@@ -39,7 +35,7 @@ uniform float zlimit2;
 uniform float wetness;
 uniform int quality_level;
 uniform int tquality_level;
-
+uniform int cloud_shadow_flag;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -49,7 +45,7 @@ float eShade;
 float yprime_alt;
 float mie_angle;
 
-
+float shadow_func (in float x, in float y, in float noise, in float dist);
 
 
 float rand2D(in vec2 co){
@@ -303,6 +299,8 @@ if (quality_level > 3)
 		}
 	
     if (NdotL > 0.0) {
+   	if (cloud_shadow_flag == 1) 
+		{NdotL = NdotL * shadow_func(relPos.x, relPos.y,  noise_1500m, dist);}
         color += diffuse_term * NdotL;
 	
 
@@ -477,7 +475,7 @@ hazeColor = mix(shadow * hazeColor, hazeColor, 0.3 + 0.7* smoothstep(250000.0, 4
 
 
 
-
+hazeColor = clamp(hazeColor,0.0,1.0);
 fragColor.xyz = mix(eqColorFactor * hazeColor * eShade, fragColor.xyz,transmission);
 
 

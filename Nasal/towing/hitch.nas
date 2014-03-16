@@ -44,45 +44,19 @@
 # (x points to the tail, y points to the right wing, z points upwards). Be careful! This
 # coordinates don't appear in the property tree. You can only check them with test flights!
 # The visible towrope is NOT an indicator of correct settings!
-# Unit must be "LBS", frame must be "BODY". The force name is arbitrary but MUST end with "_x", "_y","_z", respectively.    
+# Unit must be "LBS", frame must be "BODY". The force name is arbitrary.    
 #
 # <external_reactions>
-#  <force name="hitch_x" frame="BODY" unit="LBS" >
+#  <force name="hitch" frame="BODY" unit="LBS" >
 #   <location unit="M">
 #    <x>3.65</x>  
 #    <y> 0.0</y>
 #    <z>-0.12</z>
 #   </location>
 #   <direction>
-#    <x> 1.0</x>
-#    <y> 0.0</y>
-#    <z> 0.0</z>
-#   </direction>
-#  </force>
-#  
-#  <force name="hitch_y" frame="BODY" unit="LBS" >
-#   <location unit="M">
-#    <x>3.65</x>
-#    <y> 0.0</y>
-#    <z>-0.12</z>
-#   </location>
-#   <direction>
-#    <x> 0.0</x>
-#    <y> 1.0</y>
-#    <z> 0.0</z>
-#   </direction>
-#  </force>
-#  
-#  <force name="hitch_z" frame="BODY" unit="LBS" >
-#   <location unit="M">
-#    <x>3.65</x> 
-#    <y> 0.0</y>
-#    <z>-0.12</z>
-#   </location>
-#   <direction>
-#    <x> 0.0</x>
-#    <y> 0.0</y>
-#    <z> 1.0</z>
+#    <x>0.0</x>
+#    <y>0.0</y>
+#    <z>0.0</z>
 #   </direction>
 #  </force>
 # </external_reactions>
@@ -156,7 +130,7 @@
 #<sim>
 # <hitches>
 #  <aerotow>
-#   <basename_force_jsbsim type="string">hitch</basename_force_jsbsim>
+#   <force_name_jsbsim type="string">hitch</force_name_jsbsim>
 #   <local-pos-x type="float">1.5</local-pos-x>
 #   <local-pos-y type="float"> 0.00</local-pos-y>
 #   <local-pos-z type="float">-0.3</local-pos-z>
@@ -164,7 +138,7 @@
 #   <mp-auto-connect-period type="float">0.0</mp-auto-connect-period>
 #  </aerotow>
 #  <winch>
-#   <basename_force_jsbsim type="string">hitch</basename_force_jsbsim>
+#   <force_name_jsbsim type="string">hitch</force_name_jsbsim>
 #   <local-pos-x type="float">0.0</local-pos-x>
 #   <local-pos-y type="float">0.0</local-pos-y>
 #   <local-pos-z type="float">0.0</local-pos-z>
@@ -172,7 +146,7 @@
 # </hitches>
 #</sim>
 #
-# "basename_force_jsbsim" must be the external force name in JSBSim but without the ending "_x", "_y", "_z".
+# "force_name_jsbsim" must be the external force name in JSBSim.
 #
 # IMPORTANT:
 # JSBSim doesn't provide the hitch coordinates in the property tree. Hence you must set them again to get a 
@@ -205,11 +179,13 @@
 #    <max-power-kW type="float">100.</max-power-kW>
 #    <max-spool-speed-m-s type="float">15.</max-spool-speed-m-s>
 #    <max-unspool-speed-m-s type="float">20.</max-unspool-speed-m-s>
+#    <spool-acceleration-m-s-s type="float">8.</spool-acceleration-m-s-s>
 #    <rel-speed alias="/sim/hitches/winch/winch/actual-spool-speed-m-s"/>
 #   </winch>
 #   <tow>
 #    <break-force type="float">10000</break-force>
 #    <elastic-constant type="float">40000</elastic-constant>
+#    <weight-per-m-kg-m type="float">0.01</weight-per-m-kg-m>
 #   </tow>
 #   <rope>
 #    <rope-diameter-mm type="float">40</rope-diameter-mm>
@@ -335,8 +311,8 @@
 
  # new properties for JSBSim aerotow
  if ( getprop("sim/flight-model") == "jsb" ) {
-  if (props.globals.getNode("sim/hitches/aerotow/basename_force_jsbsim") == nil )
-      props.globals.getNode("sim/hitches/aerotow/basename_force_jsbsim", 1).setValue("hitch");      
+  if (props.globals.getNode("sim/hitches/aerotow/force_name_jsbsim") == nil )
+      props.globals.getNode("sim/hitches/aerotow/force_name_jsbsim", 1).setValue("hitch");      
   if (props.globals.getNode("sim/hitches/aerotow/mp_oldOpen") == nil ) 
       props.globals.getNode("sim/hitches/aerotow/mp_oldOpen", 1).setBoolValue(1);
   if (props.globals.getNode("sim/hitches/aerotow/tow/mp_last_reporded_dist") == nil )   
@@ -388,8 +364,8 @@
 
  # new properties for JSBSim winch
  if ( getprop("sim/flight-model") == "jsb" ) {
-  if (props.globals.getNode("sim/hitches/winch/basename_force_jsbsim") == nil )
-      props.globals.getNode("sim/hitches/winch/basename_force_jsbsim", 1).setValue("hitch");
+  if (props.globals.getNode("sim/hitches/winch/force_name_jsbsim") == nil )
+      props.globals.getNode("sim/hitches/winch/force_name_jsbsim", 1).setValue("hitch");
   if (props.globals.getNode("sim/hitches/winch/automatic-release-angle-deg") == nil ) 
       props.globals.getNode("sim/hitches/winch/automatic-release-angle-deg", 1).setValue(361.);
   if (props.globals.getNode("sim/hitches/winch/winch/clutched") == nil )
@@ -879,10 +855,13 @@ var aerotow = func (open){
             #var forcetow = forcetow_N;   # we deliver N to JSBSim
             var forcetow = forcetow_LBS;   # we deliver LBS to JSBSim
       
+            # calculate unit vector of force direction in JSBSim-system      
+            var force = 1;
+ 
             # global forces: alpha beta
-            var fglobalx = forcetow * cosa * cosb;
-            var fglobaly = forcetow * cosa * sinb;
-            var fglobalz = forcetow * sina;
+            var fglobalx = force * cosa * cosb;
+            var fglobaly = force * cosa * sinb;
+            var fglobalz = force * sina;
                         
             # local forces by pitch: gamma
             var flpitchx = fglobalx * cosg - fglobalz * sing;
@@ -902,10 +881,11 @@ var aerotow = func (open){
       
             # JSBSim-body-frame:  x-> nose / y -> right wing / z -> down
             # apply forces to hook (forces are in LBS or N see above)
-            var hitchname = getprop("sim/hitches/aerotow/basename_force_jsbsim");      
-            setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "_x/magnitude", forcex);
-            setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "_y/magnitude", forcey);
-            setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "_z/magnitude", forcez);
+            var hitchname = getprop("sim/hitches/aerotow/force_name_jsbsim");      
+            setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "/magnitude", forcetow);
+            setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "/x", forcex);
+            setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "/y", forcey);
+            setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "/z", forcez);
 
           }  # end force < break force
           else {  # rope is broken
@@ -1163,11 +1143,14 @@ var winch = func (open){
       
       #var forcetow = forcetow_N;   # we deliver N to JSBSim
       var forcetow = forcetow_LBS;   # we deliver LBS to JSBSim
-      
+
+      # calculate unit vector of force direction in JSBSim-system      
+      var force = 1;
+
       # global forces: alpha beta
-      var fglobalx = forcetow * cosa * cosb;
-      var fglobaly = forcetow * cosa * sinb;
-      var fglobalz = forcetow * sina;
+      var fglobalx = force * cosa * cosb;
+      var fglobaly = force * cosa * sinb;
+      var fglobalz = force * sina;
 
       # local forces by pitch: gamma
       var flpitchx = fglobalx * cosg - fglobalz * sing;
@@ -1187,10 +1170,11 @@ var winch = func (open){
             
       # JSBSim-body-frame:  x-> nose / y -> right wing / z -> down
       # apply forces to hook (forces are in LBS or N see above)
-      var hitchname = getprop("sim/hitches/winch/basename_force_jsbsim");      
-      setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "_x/magnitude", forcex);
-      setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "_y/magnitude", forcey);
-      setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "_z/magnitude", forcez);
+      var hitchname = getprop("sim/hitches/winch/force_name_jsbsim");      
+      setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "/magnitude", forcetow);
+      setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "/x", forcex );
+      setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "/y", forcey );
+      setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "/z", forcez );
 
       # check, if auto-release condition is reached
       var rope_angle_deg = math.atan2(forcez , forcex ) * RAD2DEG;
@@ -1302,11 +1286,12 @@ var releaseHitch = func (device){
 
   setprop("sim/hitches/" ~ device ~ "/open", "true");
   
-  var hitchname = getprop("sim/hitches/" ~ device ~ "/basename_force_jsbsim");
-  setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "_x/magnitude", 0.);
-  setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "_y/magnitude", 0.);
-  setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "_z/magnitude", 0.);
- 
+  var hitchname = getprop("sim/hitches/" ~ device ~ "/force_name_jsbsim");
+  setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "/magnitude", 0.);
+  setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "/x", 0.);
+  setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "/y", 0.);
+  setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "/z", 0.);
+
   if ( device == "aerotow" ) {
     setprop("sim/hitches/aerotow/tow/end-force-x", 0.);		 # MP tow-end forces 
     setprop("sim/hitches/aerotow/tow/end-force-y", 0.);		 # 

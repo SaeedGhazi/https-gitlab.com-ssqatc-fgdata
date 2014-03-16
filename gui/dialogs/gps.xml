@@ -137,7 +137,9 @@
     }
     
     # restore state from previous time the dialog was open
-        updateSearchResults(0, dlg.getNode("scratch-index", 1).getValue());
+    # default to 0 if no prior value
+        var curIndex = dlg.getNode("scratch-index", 1).getValue() or 0;
+        updateSearchResults(0, curIndex);
     
 		var slaved = props.globals.getNode("/instrumentation/nav[0]/slaved-to-gps", 1);
 	]]></open>

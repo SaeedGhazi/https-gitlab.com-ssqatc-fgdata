@@ -4,7 +4,6 @@
 // Ambient term comes in gl_Color.rgb.
 varying vec4 diffuse_term;
 varying vec3 normal;
-//varying vec2 nvec;
 varying vec3 relPos;
 varying vec2 rawPos;
 varying vec3 ecViewdir;
@@ -12,13 +11,7 @@ varying vec3 ecViewdir;
 
 uniform sampler2D texture;
 uniform sampler2D NormalTex;
-//uniform sampler3D NoiseTex;
-//uniform sampler2D snow_texture;
-//uniform sampler2D detail_texture;
-//uniform sampler2D mix_texture;
 
-//varying float yprime_alt;
-//varying float mie_angle;
 varying float steepness;
 
 
@@ -37,8 +30,10 @@ uniform float wetness;
 uniform float fogstructure;
 uniform float snow_thickness_factor;
 uniform float cloud_self_shading;
+
 uniform int quality_level;
 uniform int tquality_level;
+uniform int cloud_shadow_flag;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -48,7 +43,7 @@ float eShade;
 float yprime_alt;
 float mie_angle;
 
-
+float shadow_func (in float x, in float y, in float noise, in float dist);
 
 float rand2D(in vec2 co){
     return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
@@ -142,7 +137,6 @@ void main()
 
 
 yprime_alt = diffuse_term.a;
-//diffuse_term.a = 1.0;
 mie_angle = gl_Color.a;
 float effective_scattering = min(scattering, cloud_self_shading);
 
@@ -275,7 +269,6 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
 		{
 		water_threshold1 = 1.0-0.5* wetness;
 		water_threshold2 = 1.0 - 0.3 * wetness;
-		//water_factor = smoothstep(water_threshold1, water_threshold2 ,   (0.3 * (2.0 * (1.0-noise_10m) + (1.0 -noise_5m)) *   (1.0 - smoothstep(2000.0, 5000.0, dist))) - 5.0 * (1.0 -steepness));
 		water_factor = smoothstep(water_threshold1, water_threshold2 , 0.5 * (noise_5m + (1.0 -noise_1m))) *   (1.0 - smoothstep(1000.0, 3000.0, dist));
 	}
 
@@ -291,8 +284,7 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
 
     // If gl_Color.a == 0, this is a back-facing polygon and the
     // normal should be reversed.
-    //n = (2.0 * gl_Color.a - 1.0) * normal;
-    n = normal;//vec3 (nvec.x, nvec.y, sqrt(1.0 -pow(nvec.x,2.0) - pow(nvec.y,2.0) ));
+    n = normal;
     n = normalize(n);
 
     NdotL = dot(n, lightDir);
@@ -300,12 +292,12 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
 	if (quality_level > 4)
 		{
 		NdotL = NdotL + (3.0 * N.r + 0.1 * (noise_01m-0.5))* (1.0 - water_factor) ;
-		//NdotL = NdotL + 3.0 * N.r + 0.1 * (noise_01m-0.5) ;
 		}
     if (NdotL > 0.0) {
+	if (cloud_shadow_flag == 1) 
+		{NdotL = NdotL * shadow_func(relPos.x, relPos.y, 1.0, dist);}
         color += diffuse_term * NdotL;
         NdotHV = max(dot(n, halfVector), 0.0);
-        //if (gl_FrontMaterial.shininess > 0.0)
             specular.rgb = ((gl_FrontMaterial.specular.rgb + (water_factor * vec3 (1.0, 1.0, 1.0)))
                             * light_specular.rgb
                             * pow(NdotHV, gl_FrontMaterial.shininess + (20.0 * water_factor)));

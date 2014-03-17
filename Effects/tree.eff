@@ -119,8 +119,8 @@
 			<alpha-to-coverage>true</alpha-to-coverage>
       <program>
         <vertex-shader>Shaders/tree-haze.vert</vertex-shader>
+	<vertex-shader>Shaders/cloud-shadowfunc.frag</vertex-shader>
         <fragment-shader>Shaders/tree-haze.frag</fragment-shader>
-	<fragment-shader>Shaders/cloud-shadowfunc.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>
@@ -472,8 +472,8 @@
 			</alpha-test>
       <program>
         <vertex-shader>Shaders/tree-haze.vert</vertex-shader>
+	<vertex-shader>Shaders/cloud-shadowfunc.frag</vertex-shader>
         <fragment-shader>Shaders/tree-haze.frag</fragment-shader>
-	<fragment-shader>Shaders/cloud-shadowfunc.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>

@@ -27,7 +27,7 @@ uniform float dust_cover_factor;
 
 uniform int quality_level;
 uniform int tquality_level;
-uniform int cloud_shadow_flag;
+
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -35,7 +35,6 @@ const float terminator_width = 200000.0;
 float alt;
 float mie_angle;
 
-float shadow_func (in float x, in float y, in float noise, in float dist);
 
 float luminance(vec3 color)
 {
@@ -148,10 +147,6 @@ void main()
 
    vec4 fragColor = vec4 (gl_Color.xyz,1.0) * texel;
 
-   if (cloud_shadow_flag == 1) 
-		{
-		fragColor.rgb = fragColor.rgb * (0.5 + 0.5 * shadow_func(relPos.x, relPos.y, 1.0, dist));
-		}
 
 
 // here comes the terrain haze model

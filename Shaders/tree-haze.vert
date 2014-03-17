@@ -39,8 +39,12 @@ uniform float WindE;
 
 uniform float osg_SimulationTime;
 
+uniform int cloud_shadow_flag;
+
 float earthShade;
 float mie_angle;
+
+float shadow_func (in float x, in float y, in float noise, in float dist);
 
 // This is the value used in the skydome scattering shader - use the same here for consistency?
 const float EarthRadius = 5800000.0;
@@ -165,14 +169,6 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
 	{mie_angle = 1.0;}
 
 
-
-
-   //light_diffuse.b = light_func(lightArg, 1.330e-05, 0.264, 3.827, 1.08e-05, 1.0);
-   //light_diffuse.g = light_func(lightArg, 3.931e-06, 0.264, 3.827, 7.93e-06, 1.0);
-   //light_diffuse.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
-   //light_diffuse.a = 1.0;
-   //light_diffuse = light_diffuse * scattering;
-
    light_ambient.r = light_func(lightArg, 0.236, 0.253, 1.073, 0.572, 0.33);
    light_ambient.g = light_ambient.r * 0.4/0.33; 
    light_ambient.b = light_ambient.r * 0.5/0.33; 
@@ -190,8 +186,7 @@ if (earthShade < 0.5)
 	intensity = length(light_ambient.rgb); 
 	light_ambient.rgb = intensity * normalize(mix(light_ambient.rgb,  shadedFogColor, 1.0 -smoothstep(0.1, 0.8,earthShade) ));
 
-	//intensity = length(light_diffuse.rgb); 
-	//light_diffuse.rgb = intensity * normalize(mix(light_diffuse.rgb,  shadedFogColor, 1.0 -smoothstep(0.1, 0.7,earthShade) ));
+	
 	}
 
 
@@ -217,30 +212,25 @@ else
 }
 else // the faster, full-day version without lightfields
 {
-    //vertex_alt = max(gl_Vertex.z,100.0);
+
  
     earthShade = 1.0;
     mie_angle = 1.0;
     
     if (terminator > 3000000.0)
-    	{//light_diffuse = vec4 (1.0, 1.0, 1.0, 1.0);
-	light_ambient = vec4 (0.33, 0.4, 0.5, 1.0); }
+	{light_ambient = vec4 (0.33, 0.4, 0.5, 1.0); }
     else
 	{
 
 	lightArg = (terminator/100000.0 - 10.0)/20.0;
-	//light_diffuse.b = 0.78  + lightArg * 0.21;
-	//light_diffuse.g = 0.907 + lightArg * 0.091;
-	//light_diffuse.r = 0.904 + lightArg * 0.092;
-	//light_diffuse.a = 1.0;
-
+	
 	light_ambient.r = 0.316 + lightArg * 0.016;
 	light_ambient.g = light_ambient.r * 0.4/0.33; 
    	light_ambient.b = light_ambient.r * 0.5/0.33;
 	light_ambient.a = 1.0;
 	}  
     
-    //light_diffuse = light_diffuse * scattering;
+
     yprime_alt = -sqrt(2.0 * EarthRadius * hazeLayerAltitude);
 }
  
@@ -248,11 +238,14 @@ else // the faster, full-day version without lightfields
 
 // tree shader lighting
 
-  //vec3 diffuse = gl_FrontMaterial.diffuse.rgb * max(0.1, n);
+if (cloud_shadow_flag == 1) 
+		{light_ambient.rgb = light_ambient.rgb * (0.5 + 0.5 * shadow_func(relPos.x, relPos.y, 1.0, dist));}
+
+
   vec4 ambientColor = gl_FrontLightModelProduct.sceneColor + light_ambient * gl_FrontMaterial.ambient;
-  gl_FrontColor = ambientColor;// + light_diffuse * vec4(diffuse, 1.0);
+  gl_FrontColor = ambientColor;
   gl_FrontColor.a = mie_angle; gl_BackColor.a = mie_angle; 
-  //gl_FrontColor.a = 1.0; gl_BackColor.a = 1.0;
+
 
 
 

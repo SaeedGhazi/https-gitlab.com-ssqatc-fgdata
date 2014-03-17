@@ -2661,7 +2661,7 @@
     <name>Olives</name>
     <name>Vineyard</name>
     <name>Rice</name>
-    <texture>Terrain/irrcrop-europe.png</texture>
+    <texture>Terrain/irrcrop-europe-autumn.png</texture>
     <object-mask>Terrain/irrcrop-europe.mask.png</object-mask>
     <xsize>2000</xsize>
     <ysize>2000</ysize>
@@ -4429,7 +4429,7 @@
       </equals>
     </condition>
     <name>GolfCourse</name>
-    <texture>Terrain/golfcourse1.png</texture>
+    <texture>Terrain/golfcourse1-autumn.png</texture>
     <object-mask>Terrain/golfcourse1.mask.png</object-mask>
     <xsize>800</xsize>
     <ysize>800</ysize>

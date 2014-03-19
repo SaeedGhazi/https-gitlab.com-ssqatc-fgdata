@@ -8,10 +8,12 @@ var gui_dir = getprop("/sim/fg-root") ~ "/Nasal/canvas/gui/";
 var loadGUIFile = func(file) io.load_nasal(gui_dir ~ file, "canvas");
 var loadWidget = func(name) loadGUIFile("widgets/" ~ name ~ ".nas");
 
+loadGUIFile("Config.nas");
 loadGUIFile("Style.nas");
 loadGUIFile("Widget.nas");
 loadGUIFile("styles/DefaultStyle.nas");
 loadWidget("Button");
+loadWidget("ScrollArea");
 
 var style = DefaultStyle.new("AmbianceClassic");
 var WindowButton = {

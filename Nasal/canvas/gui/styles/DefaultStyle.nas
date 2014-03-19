@@ -12,7 +12,12 @@ var DefaultStyle = {
       return nil;
     }
 
-    return factory.new(parent, me, cfg);
+    var w = {
+      parents: [factory],
+      _style: me
+    };
+    call(factory.new, [parent, cfg], w);
+    return w;
   },
   widgets: {}
 };
@@ -20,31 +25,26 @@ var DefaultStyle = {
 # A button
 DefaultStyle.widgets.button = {
   padding: [6, 8, 6, 8],
-  new: func(parent, style, cfg)
+  new: func(parent, cfg)
   {
-    var button = {
-      parents: [DefaultStyle.widgets.button],
-      element: parent.createChild("group", "button"),
-      size: cfg.get("size", [26, 26]),
-      _style: style
-    };
+    me.element = parent.createChild("group", "button");
+    me.size = cfg.get("size", [26, 26]);
 
-    button._bg =
-      button.element.rect( 3,
-                           3,
-                           button.size[0] - 6,
-                           button.size[1] - 6,
-                           {"border-radius": 5} );
-    button._border =
-      button.element.createChild("image", "button")
-                    .set("slice", "10 12") #"7")
-                    .setSize(button.size);
-    button._label =
-      button.element.createChild("text")
-                    .setFont("LiberationFonts/LiberationSans-Regular.ttf")
-                    .set("character-size", 14)
-                    .set("alignment", "center-baseline");
-    return button;
+    me._bg =
+      me.element.rect( 3,
+                       3,
+                       me.size[0] - 6,
+                       me.size[1] - 6,
+                       {"border-radius": 5} );
+    me._border =
+      me.element.createChild("image", "button")
+                .set("slice", "10 12") #"7")
+                .setSize(me.size);
+    me._label =
+      me.element.createChild("text")
+                .setFont("LiberationFonts/LiberationSans-Regular.ttf")
+                .set("character-size", 14)
+                .set("alignment", "center-baseline");
   },
   setText: func(text)
   {
@@ -83,5 +83,48 @@ DefaultStyle.widgets.button = {
       me._bg.set("fill", me._style.getColor("button_bg_color"));
 
     me._border.set("file", file ~ ".png");
+  }
+};
+
+# ScrollArea
+DefaultStyle.widgets["scroll-area"] = {
+  new: func(parent, cfg)
+  {
+    me.element = parent.createChild("group", "scroll-area");
+
+    me._bg    = me.element.createChild("path", "background")
+                          .set("fill", "#e0e0e0");
+    me.content = me.element.createChild("group", "scroll-content")
+                           .set("clip-frame", Element.PARENT);
+    me.vert  = me._newScroll(me.element, "vert");
+    me.horiz = me._newScroll(me.element, "horiz");
+  },
+  update: func(widget)
+  {
+    me.horiz.reset();
+    if( widget._max_scroll[0] > 1 )
+      # only show scroll bar if horizontally scrollable
+      me.horiz.moveTo(widget._pos[0], widget._size[1] - 2)
+              .horiz(widget._size[0] - widget._max_scroll[0]);
+
+    me.vert.reset();
+    if( widget._max_scroll[1] > 1 )
+      # only show scroll bar if vertically scrollable
+      me.vert.moveTo(widget._size[0] - 2, widget._pos[1])
+             .vert(widget._size[1] - widget._max_scroll[1]);
+
+    me._bg.reset()
+          .rect(0, 0, widget._size[0], widget._size[1]);
+    me.content.set(
+      "clip",
+      "rect(0, " ~ widget._size[0] ~ ", " ~ widget._size[1] ~ ", 0)"
+    );
+  },
+# private:
+  _newScroll: func(el, orient)
+  {
+    return el.createChild("path", "scroll-" ~ orient)
+             .set("stroke", "#f07845")
+             .set("stroke-width", 4);
   }
 };

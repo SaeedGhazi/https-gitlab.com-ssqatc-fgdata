@@ -13,7 +13,8 @@ gui.Widget = {
       _focused: 0,
       _focus_policy: gui.Widget.NoFocus,
       _hover: 0,
-      _root: nil
+      _root: nil,
+      _size: [64, 64]
     };
   },
   # Move the widget to the given position (relative to its parent)
@@ -21,6 +22,12 @@ gui.Widget = {
   {
     me._root.setTranslation(x, y);
     return me;
+  },
+  #
+  setSize: func(w, h)
+  {
+    me._size[0] = w;
+    me._size[1] = h;
   },
   #
   setFocus: func

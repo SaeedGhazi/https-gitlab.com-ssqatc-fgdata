@@ -1,25 +1,3 @@
-var Config = {
-  new: func(cfg)
-  {
-    var m = {
-      parents: [Config],
-      _cfg: cfg
-    };
-    if( typeof(m._cfg) != "hash" )
-      m._cfg = {};
-
-    return m;
-  },
-  get: func(key, default = nil)
-  {
-    var val = me._cfg[key];
-    if( val != nil )
-      return val;
-
-    return default;
-  }
-};
-
 gui.widgets.Button = {
   new: func(parent, style, cfg)
   {
@@ -82,5 +60,3 @@ gui.widgets.Button = {
     call(gui.Widget._setRoot, [el], me);
   }
 };
-
-return;

@@ -209,6 +209,14 @@ var Element = {
   },
   # Shortcut for setting translation
   setTranslation: func { me._getTf().setTranslation(arg); return me; },
+  # Get translation set with #setTranslation
+  getTranslation: func()
+  {
+    if( me['_tf'] == nil )
+      return [0, 0];
+
+    return [me._tf.e.getValue(), me._tf.f.getValue()];
+  },
   # Set rotation around transformation center (see #setCenter).
   #
   # @note This replaces the the existing transformation. For additional scale or

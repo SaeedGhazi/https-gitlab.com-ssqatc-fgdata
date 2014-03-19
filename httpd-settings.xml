@@ -8,6 +8,7 @@
 		<property>/props/</property>
 		<json>/json/</json>
 		<run>/run.cgi</run>
+		<navdb>/navdb</navdb>
 	</uri-handler>
 	<options>
 		<!-- for a complete description of options, see

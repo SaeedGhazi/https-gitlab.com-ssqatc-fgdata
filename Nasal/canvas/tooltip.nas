@@ -69,7 +69,7 @@ var Tooltip = {
 
     me._frame =
       root.createChild("image", "background")
-          .set("file", "gui/images/tooltip.png")
+          .set("src", "gui/images/tooltip.png")
           .set("slice", me._slice ~ " fill")
           .setSize(size);
 

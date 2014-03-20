@@ -926,7 +926,7 @@ var Image = {
   #             canvas://by-index/texture[0])
   setFile: func(file)
   {
-    me.set("file", file);
+    me.set("src", file);
   },
   # Set rectangular region of source image to be used
   #

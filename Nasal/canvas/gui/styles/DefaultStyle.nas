@@ -82,7 +82,7 @@ DefaultStyle.widgets.button = {
     else
       me._bg.set("fill", me._style.getColor("button_bg_color"));
 
-    me._border.set("file", file ~ ".png");
+    me._border.set("src", file ~ ".png");
   }
 };
 

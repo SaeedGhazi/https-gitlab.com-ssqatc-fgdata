@@ -40,7 +40,7 @@ var WindowButton = {
     else if( me._window._focused )
       file ~= "_normal";
 
-    me._root.set("file", file ~ ".png");
+    me._root.set("src", file ~ ".png");
   }
 };
 
@@ -466,6 +466,8 @@ var initDemo = func
     my_canvas.addEventListener("drag", func(e) { printf("drag: screen(%.1f|%.1f) client(%.1f|%.1f) local(%.1f|%.1f) delta(%.1f|%.1f)", e.screenX, e.screenY, e.clientX, e.clientY, e.localX, e.localY, e.deltaX, e.deltaY); });
     my_canvas.addEventListener("wheel", func(e) { printf("wheel: screen(%.1f|%.1f) client(%.1f|%.1f) %.1f", e.screenX, e.screenY, e.clientX, e.clientY, e.deltaY); });
     var root = my_canvas.createGroup();
+root.createChild("image")
+    .set("src", "http://wiki.flightgear.org/skins/common/images/icons-fg-135.png");
     var text =
       root.createChild("text")
           .setText("This could be used for building an 'Aircraft Help' dialog.\nYou can also #use it to play around with the new Canvas system :). β")
@@ -512,17 +514,15 @@ var initDemo = func
   });
 }
 
-# TODO think of some generic/non-leaking way to do this
-setlistener(props.globals.initNode("/sim/gui/canvas/demo", 0, 'BOOL'), func(p)
+(func {
+var init_listener = setlistener("/nasal/canvas/loaded", func(p)
 {
   if( !p.getValue() )
     return;
 
-  setlistener("/nasal/canvas/loaded", func(p)
-  {
-    if( !p.getValue() )
-      return;
+  removelistener(init_listener);
 
+  if( getprop("/sim/gui/canvas/demo") )
     initDemo();
-  }, 1, 0);
 }, 1, 0);
+})();

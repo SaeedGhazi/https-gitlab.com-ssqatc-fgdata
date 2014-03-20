@@ -63,6 +63,20 @@ html,body {
       attribution : 'Map data © <a href="http://www.dfs.de">DFS</a>'
     });
 
+    var MAP_ICON = {};
+    MAP_ICON["VOR"] = L.icon({
+      iconSize : [ 30, 30 ],
+      iconAnchor : [ 15, 15 ],
+      popupAncor : [ 0, -17 ],
+      iconUrl : "images/vor.svg",
+    });
+    MAP_ICON["NDB"] = L.icon({
+      iconSize : [ 30, 30 ],
+      iconAnchor : [ 15, 15 ],
+      popupAncor : [ 0, -17 ],
+      iconUrl : "images/ndb.svg",
+    });
+
     var navdbLayer = L.geoJson(null, {
       onEachFeature : function(feature, layer) {
         if (feature.properties) {
@@ -75,6 +89,8 @@ html,body {
           layer.bindPopup(popupString, {
             maxHeight : 200
           });
+          if (feature.properties.type in MAP_ICON)
+            layer.setIcon(MAP_ICON[feature.properties.type]);
         }
       }
     });
@@ -89,8 +105,8 @@ html,body {
 
     var overlays = {
       "NAVDB" : navdbLayer,
-    //        "ICAO (Germany)" : icaoGermany,
-    //        "IFR Lower Airspace (Germany)" : lowerGermany,
+    //      "ICAO (Germany)" : icaoGermany,
+    //      "IFR Lower Airspace (Germany)" : lowerGermany,
     };
 
     L.control.layers(baseLayers, overlays).addTo(map);

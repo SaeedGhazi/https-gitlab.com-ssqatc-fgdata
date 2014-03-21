@@ -63,6 +63,24 @@ html,body {
       attribution : 'Map data © <a href="http://www.dfs.de">DFS</a>'
     });
 
+    var owmPrecipitation = new L.TileLayer("http://{s}.tile.openweathermap.org/map/precipitation/{z}/{x}/{y}.png", {
+      maxZoom : 14,
+      minZoom : 0,
+      subdomains : '12',
+      format : 'image/png',
+      transparent : true,
+      opacity : 0.5
+    });
+
+    var owmPressure = new L.TileLayer("http://{s}.tile.openweathermap.org/map/pressure_cntr/{z}/{x}/{y}.png", {
+      maxZoom : 7,
+      minZoom : 0,
+      subdomains : '12',
+      format : 'image/png',
+      transparent : true,
+      opacity : 0.5
+    });
+
     var MAP_ICON = {};
     MAP_ICON["VOR"] = L.icon({
       iconSize : [ 30, 30 ],
@@ -92,6 +110,14 @@ html,body {
           if (feature.properties.type in MAP_ICON)
             layer.setIcon(MAP_ICON[feature.properties.type]);
         }
+      },
+      style: function(feature) {
+        if( feature.properties.type == "ILS" || feature.properties.type == "localizer" ) {
+          return {
+            color: 'black',
+            weight: 1,
+          };
+        }
       }
     });
 
@@ -105,11 +131,14 @@ html,body {
 
     var overlays = {
       "NAVDB" : navdbLayer,
-    //      "ICAO (Germany)" : icaoGermany,
-    //      "IFR Lower Airspace (Germany)" : lowerGermany,
+      //(Germany)" : icaoGermany,
+      //(Germany)" : lowerGermany,
+      "Precipitation" : owmPrecipitation,
+      "Isobares" : owmPressure,
     };
 
     L.control.layers(baseLayers, overlays).addTo(map);
+    L.control.scale().addTo(map);
 
     var aircraftMarker = Object.create(L.marker([ 53.5, 10.0 ]));
     aircraftMarker.addTo(map);
@@ -131,11 +160,17 @@ html,body {
       if (radius < 10)
         radius = 10;
 
+      var filter = "vor,dme,ndb,airport";
+      if (radius < 60)
+        filter += ",ils,loc,om";
+      if (radius < 20)
+        filter += ",mm";
+
       var center = map.getCenter();
       var lat = center.lat;
       var lon = center.lng;
 
-      var url = "/navdb?q=findWithinRange&type=vor,ils,ndb&range=" + radius + "&lat=" + lat + "&lon=" + lon;
+      var url = "/navdb?q=findWithinRange&type=" + filter + "&range=" + radius + "&lat=" + lat + "&lon=" + lon;
       console.log(url);
       var jqxhr = $.get(url).done(function(data) {
         navdbLayer.clearLayers();

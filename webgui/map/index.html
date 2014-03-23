@@ -192,6 +192,16 @@ L.RotatedMarker = L.Marker.extend({
             weight: 1,
           };
         }
+        if( feature.properties.type == "airport" ) {
+          return {
+            color: 'black',
+            weight: 3,
+            fill: 'true',
+            fillColor: '#606060',
+            fillOpacity: 1.0,
+            lineJoin: 'bevel',
+          };
+        }
       }
     });
 

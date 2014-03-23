@@ -45,6 +45,11 @@ gui.widgets.ScrollArea = {
   {
     # TODO only update on content resize
     var bb = me.getContent().getTransformedBounds();
+
+    if( bb[2] < bb[0] or bb[3] < bb[1] )
+      # Do nothing with invalid bounding box (probably no content yet)
+      return me;
+
     var w = bb[2] - bb[0];
     var h = bb[3] - bb[1];
 

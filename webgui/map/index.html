@@ -305,7 +305,8 @@ html,body,#map {
         iconAnchor : [ 30, 30 ],
         popupAncor : [ 0, -32 ],
         iconUrl : "images/aircraft.svg",
-      })
+      }),
+      zIndexOffset: 10000,
     });
     aircraftMarker.addTo(map);
     aircraftMarker.setState = function(s) {

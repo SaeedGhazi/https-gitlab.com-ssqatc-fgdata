@@ -211,6 +211,22 @@ html,body,#map {
         }
       },
 
+      filter : function(feature, layer) {
+        var zoom = map.getZoom();
+        switch( feature.properties.type ) {
+          case 'airport':
+            if( zoom >= 10 ) return true;
+            return feature.properties.longestRwyLength_m >= 2000;
+            break;
+
+          case 'NDB':
+            if( zoom >= 10 ) return true;
+            if( zoom >= 8 ) return feature.properties.range_nm >= 30;
+            return feature.properties.range_nm > 50;
+        }
+        return true;
+      },
+
       style : function(feature) {
         if (feature.properties.type == "ILS" || feature.properties.type == "localizer") {
           return {
@@ -243,9 +259,9 @@ html,body,#map {
         if (radius < 10)
           radius = 10;
 
-        var filter = "vor,dme,ndb,airport";
+        var filter = "vor,ndb,airport";
         if (radius < 60)
-          filter += ",ils,loc,om";
+          filter += ",ils,dme,loc,om";
         if (radius < 20)
           filter += ",mm";
 
@@ -276,14 +292,11 @@ html,body,#map {
 
     var overlays = {
       "NAVDB" : navdbLayer,
-      //"ICAO VFR (Germany)" : icaoGermany,
-      //"Lower Airspace (Germany)" : lowerGermany,
+      "ICAO VFR (Germany)" : icaoGermany,
+      "Lower Airspace (Germany)" : lowerGermany,
       "Precipitation" : owmPrecipitation,
       "Isobares" : owmPressure,
     };
-
-    L.control.layers(baseLayers, overlays).addTo(map);
-    L.control.scale().addTo(map);
 
     var aircraftMarker = new L.RotatedMarker(map.getCenter(), {
       angle : 45,
@@ -324,18 +337,18 @@ html,body,#map {
       this._div.innerHTML = s;
     };
 
-    info.addTo(map);
-    
     var FollowAircraftControl = L.control();
     FollowAircraftControl.onAdd = function(map) {
       this._div = L.DomUtil.create('div', 'followAircraft');
       this._div.innerHTML = '<img src="images/followAircraft.svg" title="Center Map on Aircraft Position" />';
       this._div.onclick = function() { toggleFollowAircraft(); return true; };
-//      this.update();
       return this._div;
     }
     
+    L.control.scale().addTo(map);
+    info.addTo(map);
     FollowAircraftControl.addTo(map);
+    L.control.layers(baseLayers, overlays).addTo(map);
 
     map.on('resize', function(e) {
       navdbLayer.dirty = true;

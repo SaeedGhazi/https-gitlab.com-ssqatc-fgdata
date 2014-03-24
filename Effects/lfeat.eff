@@ -53,7 +53,7 @@
 	  <shade-model>smooth</shade-model>
 	  <cull-face>back</cull-face>
 	  <render-bin>
-		<bin-number>111</bin-number>
+		<bin-number>7</bin-number>
 		<bin-name>DepthSortedBin</bin-name>
 	  </render-bin>
 	  <texture-unit>

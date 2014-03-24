@@ -9,7 +9,8 @@
 <script src="../lib/props.js" type="text/javascript"></script>
 <meta charset="UTF-8" />
 <meta name="description" content="FlightGear - Map" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 </head>
 <body>
 	<style>
@@ -23,6 +24,19 @@ html,body,#map {
 	height: 100%;
 }
 
+.infobox {
+	padding: 6px 8px;
+	font: 14px/16px Arial, Helvetica, sans-serif;
+	background: white;
+	background: rgba(255, 255, 255, 0.8);
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+}
+
+.infobox h4 {
+	margin: 0 0 5px;
+	color: #777;
+}
 </style>
 	<div id='map'></div>
 	<script type="text/javascript">
@@ -117,40 +131,43 @@ html,body,#map {
       popupAncor : [ 0, -17 ],
       iconUrl : "images/airport-unknown.svg",
     });
+    MAP_ICON["arp"] = L.icon({
+      iconSize : [ 30, 30 ],
+      iconAnchor : [ 15, 15 ],
+      popupAncor : [ 0, -17 ],
+      iconUrl : "images/arp.svg",
+    });
+    L.RotatedMarker = L.Marker.extend({
+      options : {
+        angle : 0
+      },
 
-L.RotatedMarker = L.Marker.extend({
-    options: {
-        angle: 0
-    },
-
-    _setPos: function (pos) {
+      _setPos : function(pos) {
         L.Marker.prototype._setPos.call(this, pos);
-        
-        if (L.DomUtil.TRANSFORM) {
-            // use the CSS transform rule if available
-            this._icon.style[L.DomUtil.TRANSFORM] += ' rotate(' + this.options.angle + 'deg)';
-        } else if(L.Browser.ie) {
-            // fallback for IE6, IE7, IE8
-            var rad = this.options.angle * (Math.PI / 180),
-                costheta = Math.cos(rad),
-                sintheta = Math.sin(rad);
-            this._icon.style.filter += ' progid:DXImageTransform.Microsoft.Matrix(sizingMethod=\'auto expand\', M11=' +
-                costheta + ', M12=' + (-sintheta) + ', M21=' + sintheta + ', M22=' + costheta + ')';
-        }
-    }
-});
 
-    var navdbLayer = L.geoJson(null, {
-      pointToLayer: function( feature, latlng ) {
+        if (L.DomUtil.TRANSFORM) {
+          // use the CSS transform rule if available
+          this._icon.style[L.DomUtil.TRANSFORM] += ' rotate(' + this.options.angle + 'deg)';
+        } else if (L.Browser.ie) {
+          // fallback for IE6, IE7, IE8
+          var rad = this.options.angle * (Math.PI / 180), costheta = Math.cos(rad), sintheta = Math.sin(rad);
+          this._icon.style.filter += ' progid:DXImageTransform.Microsoft.Matrix(sizingMethod=\'auto expand\', M11=' + costheta
+              + ', M12=' + (-sintheta) + ', M21=' + sintheta + ', M22=' + costheta + ')';
+        }
+      }
+    });
+
+    var navdbLayer = new L.geoJson(null, {
+      pointToLayer : function(feature, latlng) {
         var options = {
-          title: feature.id + ' (' + feature.properties.name + ')',
-          alt: feature.id,
-          riseOnHover: true,
+          title : feature.id + ' (' + feature.properties.name + ')',
+          alt : feature.id,
+          riseOnHover : true,
         };
 
-        if( feature.properties.type == "airport" ) {
+        if (feature.properties.type == "airport") {
           options.angle = feature.properties.longestRwyHeading_deg;
-          switch( feature.properties.longestRwySurface ) {
+          switch (feature.properties.longestRwySurface) {
             case 'asphalt':
             case 'concrete':
               options.icon = MAP_ICON['airport-paved'];
@@ -168,7 +185,7 @@ L.RotatedMarker = L.Marker.extend({
           }
         }
 
-        return new L.RotatedMarker(latlng, options );
+        return new L.RotatedMarker(latlng, options);
       },
 
       onEachFeature : function(feature, layer) {
@@ -185,25 +202,60 @@ L.RotatedMarker = L.Marker.extend({
         }
       },
 
-      style: function(feature) {
-        if( feature.properties.type == "ILS" || feature.properties.type == "localizer" ) {
+      style : function(feature) {
+        if (feature.properties.type == "ILS" || feature.properties.type == "localizer") {
           return {
-            color: 'black',
-            weight: 1,
+            color : 'black',
+            weight : 1,
           };
         }
-        if( feature.properties.type == "airport" ) {
+        if (feature.properties.type == "airport") {
           return {
-            color: 'black',
-            weight: 3,
-            fill: 'true',
-            fillColor: '#606060',
-            fillOpacity: 1.0,
-            lineJoin: 'bevel',
+            color : 'black',
+            weight : 3,
+            fill : 'true',
+            fillColor : '#606060',
+            fillOpacity : 1.0,
+            lineJoin : 'bevel',
           };
         }
-      }
+      },
+
     });
+    navdbLayer.dirty = true;
+    navdbLayer.update = function() {
+      if (navdbLayer.dirty) {
+        navdbLayer.dirty = false;
+        var bounds = map.getBounds();
+        var radius = bounds.getSouthWest().distanceTo(bounds.getNorthEast()) / 3704; // radius in NM
+
+        if (radius > 250)
+          radius = 250;
+        if (radius < 10)
+          radius = 10;
+
+        var filter = "vor,dme,ndb,airport";
+        if (radius < 60)
+          filter += ",ils,loc,om";
+        if (radius < 20)
+          filter += ",mm";
+
+        var center = map.getCenter();
+        var lat = center.lat;
+        var lon = center.lng;
+
+        var url = "/navdb?q=findWithinRange&type=" + filter + "&range=" + radius + "&lat=" + lat + "&lon=" + lon;
+        console.log(url);
+        var jqxhr = $.get(url).done(function(data) {
+          navdbLayer.clearLayers();
+          navdbLayer.addData(data);
+        }).fail(function() {
+          alert('failed to load navdb data');
+        }).always(function() {
+        });
+      }
+      setTimeout(function() { navdbLayer.update() }, 5000);
+    };
 
     map.addLayer(navdbLayer);
 
@@ -224,9 +276,9 @@ L.RotatedMarker = L.Marker.extend({
     L.control.layers(baseLayers, overlays).addTo(map);
     L.control.scale().addTo(map);
 
-    var aircraftMarker = new L.RotatedMarker([ 53.5, 10.0 ], {
-      angle: 45,
-      icon: L.icon({
+    var aircraftMarker = new L.RotatedMarker(map.getCenter(), {
+      angle : 45,
+      icon : L.icon({
         iconSize : [ 60, 60 ],
         iconAnchor : [ 30, 30 ],
         popupAncor : [ 0, -32 ],
@@ -240,52 +292,41 @@ L.RotatedMarker = L.Marker.extend({
       aircraftMarker.setLatLng(latlng);
       var label = "<p id='aircraft-label'> heading:" + s.heading + "&deg; GS: " + s.speed + "kt</p>";
       aircraftMarker.bindPopup(label);
+      info.update(s);
     };
 
-    function UpdateNavdbLayer() {
-      //TODO: don't query navdb on small movements and if navdb layer is invisible
-
-      var bounds = map.getBounds();
-      var radius = bounds.getSouthWest().distanceTo(bounds.getNorthEast()) / 3704; // radius in NM
-
-      if (radius > 250)
-        radius = 250;
-      if (radius < 10)
-        radius = 10;
-
-      var filter = "vor,dme,ndb,airport";
-      if (radius < 60)
-        filter += ",ils,loc,om";
-      if (radius < 20)
-        filter += ",mm";
-
-      var center = map.getCenter();
-      var lat = center.lat;
-      var lon = center.lng;
-
-      var url = "/navdb?q=findWithinRange&type=" + filter + "&range=" + radius + "&lat=" + lat + "&lon=" + lon;
-      console.log(url);
-      var jqxhr = $.get(url).done(function(data) {
-        navdbLayer.clearLayers();
-        navdbLayer.addData(data);
-        var foo = $(".airport");
-var bar = "";
-      }).fail(function() {
-        alert('failed to load navdb data');
-      }).always(function() {
-      });
+    var info = L.control();
+    info.onAdd = function(map) {
+      this._div = L.DomUtil.create('div', 'infobox');
+      this.update();
+      return this._div;
     };
+
+    info.update = function(props) {
+      var s = '<h4>Flight Path</h4>';
+      if (props) {
+        s += '<p>';
+        s += 'MH:' + props.heading + '&deg;<br />';
+        s += 'GS: ' + props.speed + 'kt<br />';
+        s += 'ALT: ' + props.alt + 'ft';
+        s += '</p>';
+      }
+
+      this._div.innerHTML = s;
+    };
+
+    info.addTo(map);
 
     map.on('resize', function(e) {
-      UpdateNavdbLayer();
+      navdbLayer.dirty = true;
     });
 
     map.on('zoomend', function(e) {
-      UpdateNavdbLayer();
+      navdbLayer.dirty = true;
     });
 
     map.on('moveend', function(e) {
-      UpdateNavdbLayer();
+      navdbLayer.dirty = true;
     });
 
     $(document).ready(function() {
@@ -294,10 +335,11 @@ var bar = "";
         lat : 53.5,
         lon : 10.0,
         heading : 0,
-        speed : 0
+        speed : 0,
+        alt : 0,
       };
 
-      UpdateNavdbLayer();
+      navdbLayer.update();
 
       setInterval(function() {
         var latlng = new L.LatLng(aircraftState.lat, aircraftState.lon);
@@ -306,6 +348,9 @@ var bar = "";
       }, 1000);
 
       PropertyChangeListener(function() {
+        SetListener("/position/altitude-ft", function(n) {
+          aircraftState.alt = Math.round(n.value);
+        });
         SetListener("/position/latitude-deg", function(n) {
           aircraftState.lat = n.value;
         });

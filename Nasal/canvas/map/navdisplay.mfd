@@ -483,7 +483,7 @@ var NDStyles = {
 					is_true: func(nd) {
 						nd.symbols.dme.show();
 						if(getprop("instrumentation/dme/in-range"))
-							nd.symbols.dme.setText(sprintf("%3.1f",getprop("instrumentation/nav/nav-distance")*0.000539));
+							nd.symbols.dme.setText(sprintf("%3.1f",getprop("instrumentation/dme/indicated-distance-nm")));
 					},
 					is_false: func(nd) nd.symbols.dme.hide(),
 				},
@@ -537,8 +537,13 @@ var NDStyles = {
 					init: func(nd,symbol),
                     predicate: func(nd) nd.in_mode('toggle_display_mode', ['APP']) and getprop("instrumentation/nav/gs-in-range"),
 					is_true: func(nd) {
-						if(getprop("instrumentation/nav/gs-needle-deflection-norm") != nil)
-                            nd.symbols.gsDiamond.setTranslation(getprop("instrumentation/nav/gs-needle-deflection-norm")*150,0);
+						var gs_deflection = getprop("instrumentation/nav/gs-needle-deflection-norm");
+						if(gs_deflection != nil)
+							nd.symbols.gsDiamond.setTranslation(gs_deflection*150,0);
+						if(abs(gs_deflection) < 0.99)
+							nd.symbols.gsDiamond.setColorFill(1,0,1,1);
+						else
+							nd.symbols.gsDiamond.setColorFill(0,0,0,1);
 					},
 					is_false: func(nd) nd.symbols.gsGroup.hide(),
 				},
@@ -552,10 +557,10 @@ var NDStyles = {
 						nd.symbols.locPtr.show();
 						var deflection = getprop("instrumentation/nav/heading-needle-deflection-norm");
 						nd.symbols.locPtr.setTranslation(deflection*150,0);
-						#if(abs(deflection) < 0.99)
-						#	nd.symbols.locPtr.setColorFill(1,0,1,1);
-						#else
-						#	nd.symbols.locPtr.setColorFill(1,0,1,0);
+						if(abs(deflection) < 0.99)
+							nd.symbols.locPtr.setColorFill(1,0,1,1);
+						else
+							nd.symbols.locPtr.setColorFill(0,0,0,1);
 					},
 					is_false: func(nd) nd.symbols.locPtr.hide(),
 				},
@@ -569,10 +574,10 @@ var NDStyles = {
 						nd.symbols.locPtr2.show();
 						var deflection = getprop("instrumentation/nav/heading-needle-deflection-norm");
 						nd.symbols.locPtr2.setTranslation(deflection*150,0);
-						#if(abs(deflection) < 0.99)
-						#	nd.symbols.locPtr2.setColorFill(1,0,1,1);
-						#else
-						#	nd.symbols.locPtr2.setColorFill(1,0,1,0);
+						if(abs(deflection) < 0.99)
+							nd.symbols.locPtr2.setColorFill(1,0,1,1);
+						else
+							nd.symbols.locPtr2.setColorFill(0,0,0,1);
 					},
 					is_false: func(nd) nd.symbols.locPtr2.hide(),
 				},
@@ -1046,7 +1051,7 @@ var NavDisplay = {
 				me.symbols.vorLId.setText(getprop("instrumentation/nav/frequencies/selected-mhz-fmt"));
 			me.symbols.vorLId.setColor(0.195,0.96,0.097);
 			if(getprop("instrumentation/dme/in-range"))
-				me.symbols.dmeLDist.setText(sprintf("%3.1f",getprop("instrumentation/nav/nav-distance")*0.000539));
+				me.symbols.dmeLDist.setText(sprintf("%3.1f",getprop("instrumentation/dme/indicated-distance-nm")));
 			else me.symbols.dmeLDist.setText(" ---");
 			me.symbols.dmeLDist.setColor(0.195,0.96,0.097);
 		} elsif(me.get_switch('toggle_lh_vor_adf') == -1) {
@@ -1077,7 +1082,7 @@ var NavDisplay = {
 				me.symbols.vorRId.setText(getprop("instrumentation/nav[1]/frequencies/selected-mhz-fmt"));
 			me.symbols.vorRId.setColor(0.195,0.96,0.097);
 			if(getprop("instrumentation/dme[1]/in-range"))
-				me.symbols.dmeRDist.setText(sprintf("%3.1f",getprop("instrumentation/nav[1]/nav-distance")*0.000539));
+				me.symbols.dmeRDist.setText(sprintf("%3.1f",getprop("instrumentation/dme[1]/indicated-distance-nm")));
 			else me.symbols.dmeRDist.setText(" ---");
 			me.symbols.dmeRDist.setColor(0.195,0.96,0.097);
 		} elsif(me.get_switch('toggle_rh_vor_adf') == -1) {

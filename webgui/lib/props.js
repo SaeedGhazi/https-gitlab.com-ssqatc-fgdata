@@ -1,6 +1,6 @@
 var PropertyChangeListenerObjects = {
   _ws : null,
-  _listeners : new Array()
+  _listeners : {},
 };
 
 var PropertyChangeListener = function(callback) {
@@ -18,14 +18,18 @@ var PropertyChangeListener = function(callback) {
     try {
       var node = JSON.parse(ev.data);
       var cb = PropertyChangeListenerObjects._listeners[node.path];
-      for (var i = 0; i < cb.length; i++)
-        cb[i](node);
+      for (var i = 0; i < cb.length; i++) {
+        var o = cb[i];
+        o.context ? o.context.call(o.cb(node)) : o.cb(node);
+      }
     } catch (e) {
     }
   };
 };
 
-var SetListener = function(path, callback) {
+var NextListenerId = 0;
+
+var SetListener = function(path, callback, context ) {
   var o = PropertyChangeListenerObjects._listeners[path];
   if (typeof (o) == 'undefined') {
     o = new Array();
@@ -35,5 +39,27 @@ var SetListener = function(path, callback) {
       node : path
     }));
   }
-  o.push(callback);
+  o.push({ cb: callback, ctx: context, id: NextListenerId });
+  return NextListenerId++;
 };
+
+var RemoveListener = function(id) {
+  // send unsubscribe over the socket.
+  var a = PropertyChangeListenerObjects._listeners;
+  for( var k in a ) {
+    var o = a[k];
+    for( var i = 0; i < o.length; i++ ) {
+      if( o[i].id == id ) {
+        //remote element from array
+        var rest = o.slice(i+1);
+        o.length = i;
+        o.push.apply(o,rest);
+        return;
+      }
+    }
+    if( o.length == 0 ) {
+      //TODO: send removeListener
+    }
+  };
+
+}

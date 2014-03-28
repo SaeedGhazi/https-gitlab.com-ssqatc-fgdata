@@ -1,16 +1,20 @@
 <!doctype html>
 <html>
 <head>
-<script src="http://code.jquery.com/jquery-1.11.0.js"
+<script src="../3rdparty/jquery/jquery-1.11.0.min.js"
 	type="text/javascript"></script>
 <link rel="stylesheet"
 	href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
 <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+<script
+	src="../3rdparty/flot/jquery.flot.js"></script>
 <script src="../lib/props.js" type="text/javascript"></script>
+<script src="../lib/jquery.flot.prop.js"></script>
 <meta charset="UTF-8" />
 <meta name="description" content="FlightGear - Map" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>FlightGear - Map</title>
 </head>
 <body>
 	<style>
@@ -39,13 +43,56 @@ html,body,#map {
 }
 
 .followAircraft {
-  background: white;
-  background: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  width: 40px;
-  height: 40px;
+	background: white;
+	background: rgba(255, 255, 255, 0.8);
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+	width: 40px;
+	height: 40px;
 }
+
+.altitudePlotter {
+	background: white;
+	background: rgba(255, 255, 255, 0.8);
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+	width: 1200px;
+	height: 200px;
+}
+
+
+.axisLabel {
+  position: absolute;
+  text-align: center;
+  font-size: 12px;
+}
+
+.yaxisLabel {
+  top: 50%;
+  left: 2px;
+  transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -webkit-transform:  rotate(-90deg);
+  transform-origin: 0 0;
+  -o-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  -moz-transform-origin: 0 0;
+  -webkit-transform-origin: 0 0;
+}
+
+.xaxisLabel {
+  top: 90%;
+  left: 45%;
+}
+
+.ie7 .yaxisLabel, .ie8 .yaxisLabel {
+  top: 40%;
+  font-size: 36px;
+  filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.0, M12=0.33, M21=-0.33, M22=0.0,sizingMethod='auto expand');
+}
+
 </style>
 	<div id='map'></div>
 	<script type="text/javascript">
@@ -213,15 +260,18 @@ html,body,#map {
 
       filter : function(feature, layer) {
         var zoom = map.getZoom();
-        switch( feature.properties.type ) {
+        switch (feature.properties.type) {
           case 'airport':
-            if( zoom >= 10 ) return true;
+            if (zoom >= 10)
+              return true;
             return feature.properties.longestRwyLength_m >= 2000;
             break;
 
           case 'NDB':
-            if( zoom >= 10 ) return true;
-            if( zoom >= 8 ) return feature.properties.range_nm >= 30;
+            if (zoom >= 10)
+              return true;
+            if (zoom >= 8)
+              return feature.properties.range_nm >= 30;
             return feature.properties.range_nm > 50;
         }
         return true;
@@ -270,7 +320,7 @@ html,body,#map {
         var lon = center.lng;
 
         var url = "/navdb?q=findWithinRange&type=" + filter + "&range=" + radius + "&lat=" + lat + "&lon=" + lon;
-        console.log(url);
+
         var jqxhr = $.get(url).done(function(data) {
           navdbLayer.clearLayers();
           navdbLayer.addData(data);
@@ -279,7 +329,9 @@ html,body,#map {
         }).always(function() {
         });
       }
-      setTimeout(function() { navdbLayer.update() }, 5000);
+      setTimeout(function() {
+        navdbLayer.update()
+      }, 5000);
     };
 
     map.addLayer(navdbLayer);
@@ -292,8 +344,8 @@ html,body,#map {
 
     var overlays = {
       "NAVDB" : navdbLayer,
-      "ICAO VFR (Germany)" : icaoGermany,
-      "Lower Airspace (Germany)" : lowerGermany,
+      //"ICAO VFR (Germany)" : icaoGermany,
+      //"Lower Airspace (Germany)" : lowerGermany,
       "Precipitation" : owmPrecipitation,
       "Isobares" : owmPressure,
     };
@@ -306,7 +358,7 @@ html,body,#map {
         popupAncor : [ 0, -32 ],
         iconUrl : "images/aircraft.svg",
       }),
-      zIndexOffset: 10000,
+      zIndexOffset : 10000,
     });
     aircraftMarker.addTo(map);
     aircraftMarker.setState = function(s) {
@@ -338,14 +390,83 @@ html,body,#map {
       this._div.innerHTML = s;
     };
 
+    var altitudePlotter = L.control({
+      position : 'bottomright'
+    });
+
+
+    altitudePlotter.onAdd = function(map) {
+      this._div = L.DomUtil.create('div', 'altitudePlotter');
+      this._div.innerHTML = '<h4>Altitude</h4>';
+      return this._div;
+    };
+
+    altitudePlotter.initPlotter = function(map) {
+      var container = $(".altitudePlotter");
+      var w = $("#map").innerWidth() * .9;
+      container.css('width', w );
+      this.maxData = container.outerWidth() / 2 || 300;
+
+      var series = [ {
+        propertyPath : "/position/altitude-ft",
+        data : [],
+        color: 'blue',
+        lines : {
+          fill : true
+        }
+      } ];
+
+      this.plot = $.plot(container, series, {
+        historyLength: 600,
+        grid : {
+          borderWidth : 1,
+          minBorderMargin : 20,
+          labelMargin : 10,
+          backgroundColor : {
+            colors : [ "#fff", "#e4f4f4" ]
+          },
+          margin : {
+            top : 8,
+            bottom : 20,
+            left : 20
+          },
+        },
+        xaxis : {
+          min : 0,
+          max : 60,
+        },
+        yaxis : {
+          min : 0,
+          max : 1000
+        },
+        legend : {
+          show : true
+        }
+      });
+
+      this.yaxisLabel = $("<div class='axisLabel yaxisLabel'></div>")
+      .text("Altitude (ft)")
+      .appendTo(container);
+
+      this.xaxisLabel = $("<div class='axisLabel xaxisLabel'></div>")
+      .text("Simulation time (s)")
+      .appendTo(container);
+    };
+
+    altitudePlotter.addTo(map);
+    altitudePlotter.initPlotter(map);
+
     var FollowAircraftControl = L.control();
     FollowAircraftControl.onAdd = function(map) {
       this._div = L.DomUtil.create('div', 'followAircraft');
       this._div.innerHTML = '<img src="images/followAircraft.svg" title="Center Map on Aircraft Position" />';
-      this._div.onclick = function() { toggleFollowAircraft(); return true; };
+      this._div.onclick = function() {
+        toggleFollowAircraft();
+        return true;
+      };
       return this._div;
     }
-    
+
     L.control.scale().addTo(map);
     info.addTo(map);
     FollowAircraftControl.addTo(map);
@@ -362,7 +483,7 @@ html,body,#map {
     map.on('moveend', function(e) {
       navdbLayer.dirty = true;
     });
-    
+
     map.on('dragstart', function(e) {
       followAircraft = false;
     });
@@ -371,7 +492,6 @@ html,body,#map {
     function toggleFollowAircraft() {
       followAircraft = !followAircraft;
     }
-    
 
     $(document).ready(function() {
 
@@ -385,16 +505,21 @@ html,body,#map {
 
       navdbLayer.update();
 
+      var latlng;
+      var i = 0;
       setInterval(function() {
-        var latlng = new L.LatLng(aircraftState.lat, aircraftState.lon);
-        if( followAircraft ) 
-          map.setView(latlng);
+        latlng = new L.LatLng(aircraftState.lat, aircraftState.lon);
+        if (followAircraft) {
+          if (++i % 10 == 0)
+            map.setView(latlng);
+        }
         aircraftMarker.setState(aircraftState);
-      }, 1000);
+      }, 100);
 
       PropertyChangeListener(function() {
         SetListener("/position/altitude-ft", function(n) {
           aircraftState.alt = Math.round(n.value);
+          altitudePlotter.plot.plotPropertyNode(n);
         });
         SetListener("/position/latitude-deg", function(n) {
           aircraftState.lat = n.value;

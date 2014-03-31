@@ -44,7 +44,7 @@ gui.widgets.ScrollArea = {
   update: func()
   {
     # TODO only update on content resize
-    var bb = me.getContent().getTransformedBounds();
+    var bb = me.getContent().getTightBoundingBox();
 
     if( bb[2] < bb[0] or bb[3] < bb[1] )
       # Do nothing with invalid bounding box (probably no content yet)

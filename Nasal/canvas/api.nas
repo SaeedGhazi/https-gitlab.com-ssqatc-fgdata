@@ -245,27 +245,12 @@ var Element = {
   # @param color  Vector of 3 or 4 values in [0, 1]
   setColorFill: func me.set('fill', _getColor(arg)),
   #
-  getBoundingBox: func()
-  {
-    var bb = me._node.getNode("bounding-box");
-    if( bb != nil )
-    {
-      var min_x = bb.getNode("min-x").getValue();
-
-      if( min_x != nil )
-        return [ min_x,
-                  bb.getNode("min-y").getValue(),
-                  bb.getNode("max-x").getValue(),
-                  bb.getNode("max-y").getValue() ];
-    }
-
-    return [0, 0, 0, 0];
-  },
+  getTransformedBounds: func me.getTightBoundingBox(),
   # Calculate the transformation center based on bounding box and center-offset
   updateCenter: func
   {
     me.update();
-    var bb = me.getTransformedBounds();
+    var bb = me.getTightBoundingBox();
 
     if( bb[0] > bb[2] or bb[1] > bb[3] )
       return;

@@ -1134,8 +1134,6 @@ Started September 2000 by David Megginson, david@megginson.com
 		<heading-indicator>
 			<serviceable type="bool" archive="y">true</serviceable>
 			<spin type="double" archive="y">0.0</spin>
-			<offset-deg type="double" archive="y">4.5</offset-deg>
-			<!-- just for fun -->
 		</heading-indicator>
 
 		<vertical-speed-indicator>

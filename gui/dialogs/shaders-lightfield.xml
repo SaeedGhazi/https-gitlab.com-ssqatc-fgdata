@@ -177,6 +177,30 @@
 		<layout>hbox</layout>
 		<halign>right</halign>
 		<text>
+			<label>Forest</label>
+		</text>
+		<slider>
+			<name>forest</name>
+			<min>0.0</min>
+			<max>1.0</max>
+			<step>1.0</step>
+			<fraction>0.17</fraction>
+			<live>true</live>
+			<property>/sim/rendering/shaders/forest</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>forest</object-name>
+			</binding>
+		</slider>
+		<empty>
+			<pref-width>55</pref-width>
+		</empty>
+	</group>
+
+	<group>
+		<layout>hbox</layout>
+		<halign>right</halign>
+		<text>
 			<label>Wind Effects</label>
 		</text>
 		<slider>
@@ -196,7 +220,7 @@
 			<pref-width>55</pref-width>
 		</empty>
 	</group>
-	
+	<!--
 	<group>
 		<layout>hbox</layout>
 		<visible>
@@ -302,7 +326,7 @@
 			<live>true</live>
 			<property>/sim/rendering/dome-density</property>
 		</text>
-	</group>
+	</group>-->
 
 	<group>
 		<layout>hbox</layout>

@@ -69,120 +69,12 @@ float yprime_alt;
 float mie_angle;
 
 float shadow_func (in float x, in float y, in float noise, in float dist);
-
-float rand2D(in vec2 co){
-    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
-}
-
-float rand3D(in vec3 co){
-    return fract(sin(dot(co.xyz ,vec3(12.9898,78.233,144.7272))) * 43758.5453);
-}
-
-float cosine_interpolate(in float a, in float b, in float x)
-{
-	float ft = x * 3.1415927;
-	float f = (1.0 - cos(ft)) * .5;
-
-	return  a*(1.0-f) + b*f;
-}
-
-float simple_interpolate(in float a, in float b, in float x)
-{
-return a + smoothstep(0.0,1.0,x) * (b-a);
-}
-
-float interpolatedNoise2D(in float x, in float y)
-{
-      float integer_x    = x - fract(x);
-      float fractional_x = x - integer_x;
-
-      float integer_y    = y - fract(y);
-      float fractional_y = y - integer_y;
-
-      float v1 = rand2D(vec2(integer_x, integer_y));
-      float v2 = rand2D(vec2(integer_x+1.0, integer_y));
-      float v3 = rand2D(vec2(integer_x, integer_y+1.0));
-      float v4 = rand2D(vec2(integer_x+1.0, integer_y +1.0));
-
-      float i1 = simple_interpolate(v1 , v2 , fractional_x);
-      float i2 = simple_interpolate(v3 , v4 , fractional_x);
-
-      return simple_interpolate(i1 , i2 , fractional_y);
-}
-
-float interpolatedNoise3D(in float x, in float y, in float z)
-{
-      float integer_x    = x - fract(x);
-      float fractional_x = x - integer_x;
-
-      float integer_y    = y - fract(y);
-      float fractional_y = y - integer_y;
-
-      float integer_z    = z - fract(z);
-      float fractional_z = z - integer_z;
-
-      float v1 = rand3D(vec3(integer_x, integer_y, integer_z));
-      float v2 = rand3D(vec3(integer_x+1.0, integer_y, integer_z));
-      float v3 = rand3D(vec3(integer_x, integer_y+1.0, integer_z));
-      float v4 = rand3D(vec3(integer_x+1.0, integer_y +1.0, integer_z));
-
-      float v5 = rand3D(vec3(integer_x, integer_y, integer_z+1.0));
-      float v6 = rand3D(vec3(integer_x+1.0, integer_y, integer_z+1.0));
-      float v7 = rand3D(vec3(integer_x, integer_y+1.0, integer_z+1.0));
-      float v8 = rand3D(vec3(integer_x+1.0, integer_y +1.0, integer_z+1.0));
+float DotNoise2D(in vec2 coord, in float wavelength, in float fractionalMaxDotSize, in float dot_density);
+float Noise2D(in vec2 coord, in float wavelength);
+float Noise3D(in vec3 coord, in float wavelength);
+float VoronoiNoise2D(in vec2 coord, in float wavelength, in float xrand, in float yrand);	
 
 
-      float i1 = simple_interpolate(v1,v5, fractional_z);
-      float i2 = simple_interpolate(v2,v6, fractional_z);
-      float i3 = simple_interpolate(v3,v7, fractional_z);
-      float i4 = simple_interpolate(v4,v8, fractional_z);
-
-      float ii1 = simple_interpolate(i1,i2,fractional_x);
-      float ii2 = simple_interpolate(i3,i4,fractional_x);
- 
-
-      return simple_interpolate(ii1 , ii2 , fractional_y);
-}
-
-
-float Noise2D(in vec2 coord, in float wavelength)
-{
-return interpolatedNoise2D(coord.x/wavelength, coord.y/wavelength);
-
-}
-
-float Noise3D(in vec3 coord, in float wavelength)
-{
-return interpolatedNoise3D(coord.x/wavelength, coord.y/wavelength, coord.z/wavelength);
-}
-
-float dotNoise2D(in float x, in float y, in float fractionalMaxDotSize)
-{
-	float integer_x    = x - fract(x);
-    float fractional_x = x - integer_x;
-
-    float integer_y    = y - fract(y);
-    float fractional_y = y - integer_y;
-
-	if (rand2D(vec2(integer_x+1.0, integer_y +1.0)) > dot_density)
-		{return 0.0;}
-
-    float xoffset = (rand2D(vec2(integer_x, integer_y)) -0.5);
-    float yoffset = (rand2D(vec2(integer_x+1.0, integer_y)) - 0.5);
-    float dotSize = 0.5 * fractionalMaxDotSize * max(0.25,rand2D(vec2(integer_x, integer_y+1.0)));
-
-	
-	vec2 truePos = vec2 (0.5 + xoffset * (1.0 - 2.0 * dotSize) , 0.5 + yoffset * (1.0 -2.0 * dotSize));
-
-	float distance = length(truePos - vec2(fractional_x, fractional_y));
-	
-	return 1.0 - smoothstep (0.3 * dotSize, 1.0* dotSize, distance);
-}
-
-float DotNoise2D(in vec2 coord, in float wavelength, in float fractionalMaxDotSize)
-{
-return dotNoise2D(coord.x/wavelength, coord.y/wavelength, fractionalMaxDotSize);
-}
 
 
 
@@ -339,9 +231,9 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
 
 // dot noise
 
-float dotnoise_2m = DotNoise2D(rawPos.xy, 2.0 * dot_size,0.5);
-float dotnoise_10m = DotNoise2D(rawPos.xy, 10.0 * dot_size, 0.5);
-float dotnoise_15m = DotNoise2D(rawPos.xy, 15.0 * dot_size, 0.33);
+float dotnoise_2m = DotNoise2D(rawPos.xy, 2.0 * dot_size,0.5, dot_density);
+float dotnoise_10m = DotNoise2D(rawPos.xy, 10.0 * dot_size, 0.5, dot_density);
+float dotnoise_15m = DotNoise2D(rawPos.xy, 15.0 * dot_size, 0.33, dot_density);
 
 float dotnoisegrad_10m;
 
@@ -540,7 +432,7 @@ if ((dist < 5000.0)&& (quality_level > 3) && (combined_wetness>0.0))
 	noisegrad_2m = (noise_2m - Noise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),2.0))/0.05;
 	noisegrad_1m = (noise_1m - Noise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),1.0))/0.05;
 
-	dotnoisegrad_10m = (dotnoise_10m - DotNoise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),10.0 * dot_size,0.5))/0.05;
+	dotnoisegrad_10m = (dotnoise_10m - DotNoise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),10.0 * dot_size,0.5, dot_density))/0.05;
 
 	
 	NdotL = NdotL + (noisegrad_10m * detail_fade(10.0, view_angle,dist) + 0.5* noisegrad_5m * detail_fade(5.0, view_angle,dist)) * mix_factor/0.8;

@@ -290,6 +290,7 @@
       <program>
         <vertex-shader>Shaders/terrain-haze-ultra.vert</vertex-shader>
         <fragment-shader>Shaders/terrain-haze-ultra.frag</fragment-shader>
+        <fragment-shader>Shaders/noise.frag</fragment-shader>
         <fragment-shader>Shaders/cloud-shadowfunc.frag</fragment-shader>
       </program>
 	  <uniform>

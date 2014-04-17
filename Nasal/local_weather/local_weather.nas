@@ -1867,6 +1867,15 @@ if (edge_bias > 0.0) {height_bias = height_bias +  15.0 *edge_bias + 20.0 * rand
 		y = 200.0;
 		edge = 1.0;
 		create_streak(type,lat,lon, alt+ 0.5* (height*height_bias )-offset_map["Cumulus"], height * height_bias,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
+
+		if (local_weather.cloud_shadow_flag == 1)
+			{
+			var cs = local_weather.cloudShadow.new(lat, lon, 0.9 * (1.5 * x)/5000.0 , 0.7);
+			cs.index = getprop(lw~"tiles/tile-counter");
+			append(cloudShadowCandidateArray,cs);
+			}
+
+
 		}
 
 	else if (size>0.4)
@@ -1881,6 +1890,15 @@ if (edge_bias > 0.0) {height_bias = height_bias +  15.0 *edge_bias + 20.0 * rand
 		var alpha = rand() * 180.0;
 		edge = edge + edge_bias;
 		create_streak(type,lat,lon, alt+ 0.5* (height * height_bias)-offset_map["Cumulus"], height * height_bias,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
+
+		if (local_weather.cloud_shadow_flag == 1)
+			{
+			var cs = local_weather.cloudShadow.new(lat, lon, 0.9 * (1.0 * x)/5000.0 , 0.6);
+			cs.index = getprop(lw~"tiles/tile-counter");
+			append(cloudShadowCandidateArray,cs);
+			}
+
+
 		}
 	else 
 		{
@@ -4012,7 +4030,7 @@ weather_tile_management.create_impostors();
 
 # start the cloud shadow loop
 
-local_weather.cloud_shadow_flag = getprop("/local-weather/cloud-shadows/cloud-shadow-flag");
+local_weather.cloud_shadow_flag = getprop("/local-weather/config/generate-cloud-shadows");
 
 if (local_weather.cloud_shadow_flag == 1)
 	{

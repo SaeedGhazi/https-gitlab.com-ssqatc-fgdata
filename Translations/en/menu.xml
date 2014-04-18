@@ -95,6 +95,7 @@
 	<reload-materials>Reload Materials</reload-materials>
 	<reload-scenery>Reload Scenery</reload-scenery>
 	<nasal-console>Nasal Console</nasal-console>
+	<nasal-repl-interpreter>Nasal REPL Interpreter</nasal-repl-interpreter>
 	<development-keys>Development Keys</development-keys>
 	<configure-dev-extension>Configure Development Extensions</configure-dev-extension>
 	<display-marker>Display Tutorial Marker</display-marker>

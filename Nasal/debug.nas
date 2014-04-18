@@ -218,7 +218,7 @@ var string = func(o) {
 		return _nil("nil");
 
 	} elsif (t == "scalar") {
-		return num(o) == nil ? _dump_string(o) : _num(o);
+		return num(o) == nil ? _dump_string(o) : _num(o~"");
 
 	} elsif (t == "vector") {
 		var s = "";

@@ -25,6 +25,7 @@ varying float yprime_alt;
 
 uniform int colorMode;
 uniform int wind_effects;
+uniform int forest_effects;
 uniform float hazeLayerAltitude;
 uniform float terminator;
 uniform float terrain_alt; 
@@ -45,6 +46,7 @@ float earthShade;
 float mie_angle;
 
 float shadow_func (in float x, in float y, in float noise, in float dist);
+float VoronoiNoise2D(in vec2 coord, in float wavelength, in float xrand, in float yrand);	
 
 // This is the value used in the skydome scattering shader - use the same here for consistency?
 const float EarthRadius = 5800000.0;
@@ -105,6 +107,13 @@ void main()
   	position.y = position.y + position.z * (sin(osg_SimulationTime * 1.8 + (gl_Color.x + gl_Color.y + gl_Color.z) * 0.01) + 1.0) * 0.0025 * WindE;
 	}
 	
+  // Scale by random domains	
+  if (forest_effects > 0)
+	{
+	float voronoi = 0.5 + 1.0 * VoronoiNoise2D(gl_Color.xy, 200.0, 1.5, 1.5);	
+	position.xyz = position.xyz * voronoi;  
+ 	}
+ 
   // Move to correct location (stored in gl_Color)
   position = position + gl_Color.xyz;
   gl_Position   = gl_ModelViewProjectionMatrix * vec4(position,1.0);

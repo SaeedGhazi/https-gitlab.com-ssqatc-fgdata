@@ -146,6 +146,7 @@ Started September 2000 by David Megginson, david@megginson.com
 				<urban type="float" userarchive="y">1.0</urban>
 				<water type="float" userarchive="y">1.0</water>
 				<wind-effects type="float" userarchive="y">0.0</wind-effects>
+				<forest type="float" userarchive="y">0.0</forest>
 				<lights type="float" userarchive="y">1.0</lights>
 				<quality-level-internal type="float" userarchive="y">1.0</quality-level-internal>
 			</shaders>

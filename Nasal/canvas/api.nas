@@ -509,6 +509,10 @@ var Text = {
   {
     me.set("text", typeof(text) == 'scalar' ? text : "");
   },
+  appendText: func(text)
+  {
+    me.set("text", (me.get("text") or "") ~ (typeof(text) == 'scalar' ? text : ""));
+  },
   # Set alignment
   #
   #  @param align String, one of:
@@ -544,10 +548,10 @@ var Text = {
     me.set("font", name);
   },
   # Enumeration of values for drawing mode:
-  TEXT:               1, # The text itself
-  BOUNDINGBOX:        2, # A bounding box (only lines)
-  FILLEDBOUNDINGBOX:  4, # A filled bounding box
-  ALIGNMENT:          8, # Draw a marker (cross) at the position of the text
+  TEXT:               0x01, # The text itself
+  BOUNDINGBOX:        0x02, # A bounding box (only lines)
+  FILLEDBOUNDINGBOX:  0x04, # A filled bounding box
+  ALIGNMENT:          0x08, # Draw a marker (cross) at the position of the text
   # Set draw mode. Binary combination of the values above. Since I haven't found
   # a bitwise or we have to use a + instead.
   #

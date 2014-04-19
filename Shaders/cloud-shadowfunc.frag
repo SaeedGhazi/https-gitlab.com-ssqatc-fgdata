@@ -128,11 +128,10 @@ dlength = length ( vec2 (x - cloudpos20_x, y - cloudpos20_y));
 width = fract((cloudpos20_x)) * 5000.0; strength = fract((cloudpos20_y));
 shadeValue = shadeValue + strength * (1.0-smoothstep(width * 0.5, width, dlength));
 
-shadeValue = clamp(shadeValue * (0.5 + 2.0 * noise),0.0,1.0);
-
+shadeValue =  shadeValue * (0.8 + 2.0 * shadeValue * smoothstep(0.4,0.6,noise));
+shadeValue = clamp(shadeValue,0.0,1.0);
 shadeValue = shadeValue * (1.0 - smoothstep(15000.0, 30000.0,dist));
-//shadeValue = clamp(shadeValue * (0.5 + 0.5 * noise),0.0,1.0);
 
-return 1.0 - shadeValue;// exp(- (dlength * dlength)/(width*width));
+return 1.0 - shadeValue;
 
 }

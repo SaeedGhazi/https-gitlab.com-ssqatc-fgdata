@@ -1279,7 +1279,17 @@ var s = size(active_tile_list);
 # don't do anything as long as the array is empty
 
 if (n_max == 0)  # nothing to do, loop over
-	{if (getprop(lw~"shadow-loop-flag") ==1) {settimer( func {shadow_management_loop(index)}, 0);} return;}
+	{
+	setprop("/local-weather/cloud-shadows/cloud-shadow-flag",0);
+	if (getprop(lw~"shadow-loop-flag") ==1) {settimer( func {shadow_management_loop(index)}, 0);} 
+	return;
+	}
+else
+	{
+	setprop("/local-weather/cloud-shadows/cloud-shadow-flag",1);
+	}
+
+
 
 # compute some general-purpose stuff for the loop
 	
@@ -1374,7 +1384,7 @@ foreach(s; cloudShadowArray)
 	if (dist > dist_max) {dist_max = dist; index_max = counter;}
 	
 	setprop("/local-weather/cloud-shadows/cloudpos-x["~counter~"]",int(diffx) + s.size);
-	setprop("/local-weather/cloud-shadows/cloudpos-y["~counter~"]",int(diffy) + 0.9 );
+	setprop("/local-weather/cloud-shadows/cloudpos-y["~counter~"]",int(diffy) + s.strength );
 	counter = counter+1;
 	}
 	#print("Dist_max:", dist_max, " index_max: ", index_max);

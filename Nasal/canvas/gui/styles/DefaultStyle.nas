@@ -99,6 +99,12 @@ DefaultStyle.widgets["scroll-area"] = {
     me.vert  = me._newScroll(me.element, "vert");
     me.horiz = me._newScroll(me.element, "horiz");
   },
+  setColorBackground: func
+  {
+    if( size(arg) == 1 )
+    	  var arg = arg[0];
+    	me._bg.setColorFill(arg);
+  },
   update: func(widget)
   {
     me.horiz.reset();

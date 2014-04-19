@@ -122,6 +122,8 @@ var handle_key = func(key, shift) {
 				handle_key(`/`, 0);
 		} else {
 			input = text = substr(text, 0, size(text) - 1);
+			if (text == "")
+				stop(); # nothing in our field? close the dialog
 		}
 		completion_pos = -1;
 

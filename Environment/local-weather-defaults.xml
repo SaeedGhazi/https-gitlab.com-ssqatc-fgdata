@@ -27,6 +27,7 @@
     <ground-haze-factor type="double" userarchive="y">1.0</ground-haze-factor>
     <aux-max-vis-range-m type="double" userarchive="y">11.69524</aux-max-vis-range-m>
     <max-vis-range-m type="double" userarchive="y">120000.0</max-vis-range-m>
+    <generate-cloud-shadows type="bool" userarchive="y">0</generate-cloud-shadows>
   </config>
  <tmp>
     <tile-management type="string" userarchive="y">realistic weather</tile-management>

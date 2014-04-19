@@ -36,6 +36,7 @@
 		<quality_level><use>/sim/rendering/shaders/landmass</use></quality_level>
 		<tquality_level><use>/sim/rendering/shaders/transition</use></tquality_level>
 		<wind_effects><use>/sim/rendering/shaders/wind-effects</use></wind_effects>
+		<forest_effects><use>/sim/rendering/shaders/forest</use></forest_effects>
 		<windE><use>/environment/sea/surface/wind-from-east-fps</use></windE>
 		<windN><use>/environment/sea/surface/wind-from-north-fps</use></windN>
 		<cloudpos1_x><use>/local-weather/cloud-shadows/cloudpos-x[0]</use></cloudpos1_x>
@@ -119,6 +120,7 @@
 			<alpha-to-coverage>true</alpha-to-coverage>
       <program>
         <vertex-shader>Shaders/tree-haze.vert</vertex-shader>
+        <vertex-shader>Shaders/noise.frag</vertex-shader>
 	<vertex-shader>Shaders/cloud-shadowfunc.frag</vertex-shader>
         <fragment-shader>Shaders/tree-haze.frag</fragment-shader>
       </program>
@@ -427,6 +429,11 @@
       <type>int</type>
       <value><use>wind_effects</use></value>
      </uniform>
+     <uniform>
+      <name>forest_effects</name>
+      <type>int</type>
+      <value><use>forest_effects</use></value>
+     </uniform>
     </pass>
   </technique>
 	
@@ -472,6 +479,7 @@
 			</alpha-test>
       <program>
         <vertex-shader>Shaders/tree-haze.vert</vertex-shader>
+        <vertex-shader>Shaders/noise.frag</vertex-shader>
 	<vertex-shader>Shaders/cloud-shadowfunc.frag</vertex-shader>
         <fragment-shader>Shaders/tree-haze.frag</fragment-shader>
       </program>
@@ -779,6 +787,11 @@
       <name>wind_effects</name>
       <type>int</type>
       <value><use>wind_effects</use></value>
+     </uniform>
+     <uniform>
+      <name>forest_effects</name>
+      <type>int</type>
+      <value><use>forest_effects</use></value>
      </uniform>
     </pass>
   </technique>

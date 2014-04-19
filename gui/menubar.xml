@@ -585,6 +585,14 @@
 		</item>
 
 		<item>
+			<name>nasal-repl-interpreter</name>
+			<binding>
+				<command>nasal</command>
+				<script>console.CanvasPlacement.new()</script>
+			</binding>
+		</item>
+
+		<item>
 			<name>development-keys</name>
 			<binding>
 				<command>nasal</command>

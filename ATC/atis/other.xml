@@ -33,13 +33,13 @@
         <token>rwy-to</token>
       </equals>
       <then>
-        <text> landing and departing ruway </text>
+        <text> landing and departing runway </text>
         <token>rwy-land</token>
       </then>
       <else>
-        <text> landing ruway </text>
+        <text> landing runway </text>
         <token>rwy-land</token>
-        <text> and departing ruway </text>
+        <text> and departing runway </text>
         <token>rwy-to</token>
       </else>
     </if>

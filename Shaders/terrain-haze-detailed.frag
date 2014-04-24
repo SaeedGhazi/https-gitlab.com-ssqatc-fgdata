@@ -11,8 +11,6 @@ varying vec3 worldPos;
 
 
 uniform sampler2D texture;
-uniform sampler3D NoiseTex;
-uniform sampler2D snow_texture;
 uniform sampler2D detail_texture;
 uniform sampler2D mix_texture;
 
@@ -50,95 +48,8 @@ float eShade;
 float yprime_alt;
 float mie_angle;
 
-
-
-float rand2D(in vec2 co){
-    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
-}
-
-float rand3D(in vec3 co){
-    return fract(sin(dot(co.xyz ,vec3(12.9898,78.233,144.7272))) * 43758.5453);
-}
-
-float cosine_interpolate(in float a, in float b, in float x)
-{
-	float ft = x * 3.1415927;
-	float f = (1.0 - cos(ft)) * .5;
-
-	return  a*(1.0-f) + b*f;
-}
-
-float simple_interpolate(in float a, in float b, in float x)
-{
-return a + smoothstep(0.0,1.0,x) * (b-a);
-//return mix(a,b,x); 
-}
-
-float interpolatedNoise2D(in float x, in float y)
-{
-      float integer_x    = x - fract(x);
-      float fractional_x = x - integer_x;
-
-      float integer_y    = y - fract(y);
-      float fractional_y = y - integer_y;
-
-      float v1 = rand2D(vec2(integer_x, integer_y));
-      float v2 = rand2D(vec2(integer_x+1.0, integer_y));
-      float v3 = rand2D(vec2(integer_x, integer_y+1.0));
-      float v4 = rand2D(vec2(integer_x+1.0, integer_y +1.0));
-
-      float i1 = simple_interpolate(v1 , v2 , fractional_x);
-      float i2 = simple_interpolate(v3 , v4 , fractional_x);
-
-      return simple_interpolate(i1 , i2 , fractional_y);
-}
-
-
-float interpolatedNoise3D(in float x, in float y, in float z)
-{
-      float integer_x    = x - fract(x);
-      float fractional_x = x - integer_x;
-
-      float integer_y    = y - fract(y);
-      float fractional_y = y - integer_y;
-
-      float integer_z    = z - fract(z);
-      float fractional_z = z - integer_z;
-
-      float v1 = rand3D(vec3(integer_x, integer_y, integer_z));
-      float v2 = rand3D(vec3(integer_x+1.0, integer_y, integer_z));
-      float v3 = rand3D(vec3(integer_x, integer_y+1.0, integer_z));
-      float v4 = rand3D(vec3(integer_x+1.0, integer_y +1.0, integer_z));
-
-      float v5 = rand3D(vec3(integer_x, integer_y, integer_z+1.0));
-      float v6 = rand3D(vec3(integer_x+1.0, integer_y, integer_z+1.0));
-      float v7 = rand3D(vec3(integer_x, integer_y+1.0, integer_z+1.0));
-      float v8 = rand3D(vec3(integer_x+1.0, integer_y +1.0, integer_z+1.0));
-
-
-      float i1 = simple_interpolate(v1,v5, fractional_z);
-      float i2 = simple_interpolate(v2,v6, fractional_z);
-      float i3 = simple_interpolate(v3,v7, fractional_z);
-      float i4 = simple_interpolate(v4,v8, fractional_z);
-
-      float ii1 = simple_interpolate(i1,i2,fractional_x);
-      float ii2 = simple_interpolate(i3,i4,fractional_x);
- 
-
-      return simple_interpolate(ii1 , ii2 , fractional_y);
-}
-
-
-float Noise2D(in vec2 coord, in float wavelength)
-{
-return interpolatedNoise2D(coord.x/wavelength, coord.y/wavelength);
-
-}
-
-float Noise3D(in vec3 coord, in float wavelength)
-{
-return interpolatedNoise3D(coord.x/wavelength, coord.y/wavelength, coord.z/wavelength);
-}
+float Noise2D(in vec2 coord, in float wavelength);
+float Noise3D(in vec3 coord, in float wavelength);
 
 
 
@@ -265,7 +176,6 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
 
     if ((quality_level > 3)&&(relPos.z + eye_alt +500.0 > snowlevel))
 	{
-	//snow_texel = texture2D(snow_texture, gl_TexCoord[0].st);
 	float sfactor;
 	snow_texel = vec4 (0.95, 0.95, 0.95, 1.0) * (0.9 + 0.1* noise_500m + 0.1* (1.0 - noise_10m) );
 	snow_texel.r = snow_texel.r * (0.9 + 0.05 * (noise_10m + noise_5m));

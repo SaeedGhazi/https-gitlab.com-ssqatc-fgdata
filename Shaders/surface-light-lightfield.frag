@@ -9,10 +9,12 @@ uniform float eye_alt;
 uniform float terminator;
 
 varying vec3 relPos;
+varying vec2 rawPos;
 varying float pixelSize;
 
 float alt;
 
+float Noise2D(in vec2 coord, in float wavelength);
 
 float fog_func (in float targ)
 {
@@ -41,7 +43,7 @@ else
 }
 
 
-vec4 light_sprite (in vec2 coord, in float transmission)
+vec4 light_sprite (in vec2 coord, in float transmission, in float noise)
 {
 
 coord.s = coord.s - 0.5;
@@ -51,7 +53,8 @@ float r = length(coord);
 
 if (pixelSize<1.3) {return vec4 (1.0,1.0,1.0,1.0) * 0.08;}
 
-float sinphi = dot(vec2 (1.0,0.0), normalize(coord));
+float angle = noise * 6.28;
+float sinphi = dot(vec2 (sin(angle),cos(angle)), normalize(coord));
 
 float ray = clamp(pow(sin((sinphi-3.0) * (sinphi-3.0)),10.0),0.0,1.0);
 
@@ -75,6 +78,8 @@ void main()
     float H;
     float distance_in_layer;
     float transmission_arg;
+
+    float noise = Noise2D(rawPos.xy ,1.0); 
 
     // angle with horizon
     float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
@@ -139,7 +144,7 @@ void main()
     float dist_att =  exp(-0.3/attenuationScale/pixelSize);
 
     //vec4 texel = texture2D(texture,gl_TexCoord[0].st);
-    vec4 texel = light_sprite(gl_TexCoord[0].st,transmission);
+    vec4 texel = light_sprite(gl_TexCoord[0].st,transmission, noise);
     gl_FragColor =   vec4 (gl_Color.rgb, texel.a * transmission * dist_att); 
   
 

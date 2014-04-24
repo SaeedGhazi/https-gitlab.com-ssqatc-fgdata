@@ -669,11 +669,6 @@
         <value type="int">5</value>
       </uniform>
       <uniform>
-        <name>snow_texture</name>
-        <type>sampler-2d</type>
-        <value type="int">6</value>
-      </uniform>
-      <uniform>
         <name>detail_texture</name>
         <type>sampler-2d</type>
         <value type="int">7</value>
@@ -790,10 +785,6 @@
         <internal-format><use>texture[0]/internal-format</use></internal-format>
       </texture-unit>
       <texture-unit>
-        <unit>1</unit>
-        <type>noise</type>
-      </texture-unit>
-      <texture-unit>
         <unit>5</unit>
 		<type><use>texture[12]/type</use></type>
         <image><use>texture[12]/image</use></image>
@@ -801,15 +792,6 @@
         <wrap-s><use>texture[12]/wrap-s</use></wrap-s>
         <wrap-t><use>texture[12]/wrap-t</use></wrap-t>
         <internal-format><use>texture[12]/internal-format</use></internal-format>
-      </texture-unit>
-      <texture-unit>
-        <unit>6</unit>
-		<type><use>texture[10]/type</use></type>
-        <image><use>texture[10]/image</use></image>
-        <filter><use>texture[10]/filter</use></filter>
-        <wrap-s><use>texture[10]/wrap-s</use></wrap-s>
-        <wrap-t><use>texture[10]/wrap-t</use></wrap-t>
-        <internal-format><use>texture[10]/internal-format</use></internal-format>
       </texture-unit>
       <texture-unit>
         <unit>7</unit>
@@ -823,6 +805,7 @@
       <program>
         <vertex-shader>Shaders/terrain-haze-detailed.vert</vertex-shader>
         <fragment-shader>Shaders/terrain-haze-detailed.frag</fragment-shader>
+        <fragment-shader>Shaders/noise.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>
@@ -940,19 +923,9 @@
         <value type="int">0</value>
       </uniform>
       <uniform>
-        <name>NoiseTex</name>
-        <type>sampler-3d</type>
-        <value type="int">1</value>
-      </uniform>
-      <uniform>
         <name>mix_texture</name>
         <type>sampler-2d</type>
         <value type="int">5</value>
-      </uniform>
-      <uniform>
-        <name>snow_texture</name>
-        <type>sampler-2d</type>
-        <value type="int">6</value>
       </uniform>
       <uniform>
         <name>detail_texture</name>

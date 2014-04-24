@@ -108,9 +108,10 @@ void main()
 	}
 	
   // Scale by random domains	
+  float voronoi;
   if (forest_effects > 0)
 	{
-	float voronoi = 0.5 + 1.0 * VoronoiNoise2D(gl_Color.xy, 200.0, 1.5, 1.5);	
+	voronoi = 0.5 + 1.0 * VoronoiNoise2D(gl_Color.xy, 200.0, 1.5, 1.5);	
 	position.xyz = position.xyz * voronoi;  
  	}
  

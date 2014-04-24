@@ -12,8 +12,6 @@ varying vec3 ecViewdir;
 
 
 uniform sampler2D texture;
-uniform sampler3D NoiseTex;
-uniform sampler2D snow_texture;
 uniform sampler2D detail_texture;
 uniform sampler2D mix_texture;
 uniform sampler2D grain_texture;

@@ -169,6 +169,16 @@
 		</item>
 
 		<item>
+			<label>Earthview orbital rendering</label>
+			<name>earthview</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>earthview</dialog-name>
+			</binding>
+			<enabled>true</enabled>
+		</item>
+
+		<item>
 			<name>stereoscopic-options</name>
 			<binding>
 				<command>dialog-show</command>

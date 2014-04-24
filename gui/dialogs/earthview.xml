@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+
+
+ <name>earthview</name>
+ <width>150</width>
+ <height>50</height>
+ <modal>false</modal>
+
+<button>
+   <x>10</x>
+   <y>10</y>
+   <legend>Start</legend>
+   <equal>true</equal>
+   <binding>
+    <command>nasal</command>
+    <script>earthview.start()</script>
+   </binding>
+  </button>
+
+<button>
+   <x>50</x>
+   <y>10</y>
+   <legend>Stop</legend>
+   <equal>true</equal>
+ <binding>
+    <command>nasal</command>
+    <script>earthview.stop()</script>
+   </binding>
+  </button>
+
+ <button>
+   <x>90</x>
+   <y>10</y>
+   <legend>Cancel</legend>
+   <equal>true</equal>
+   <key>Esc</key>
+   <binding>
+    <command>dialog-close</command>
+   </binding>
+  </button>
+
+</PropertyList>

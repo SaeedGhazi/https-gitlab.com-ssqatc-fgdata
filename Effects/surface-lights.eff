@@ -75,6 +75,7 @@
       <program>
         <vertex-shader>Shaders/surface-light-lightfield.vert</vertex-shader>
         <fragment-shader>Shaders/surface-light-lightfield.frag</fragment-shader>
+	<fragment-shader>Shaders/noise.frag</fragment-shader>
       </program>
       <uniform>
 	<name>size</name>

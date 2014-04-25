@@ -5,11 +5,98 @@
 
 
  <name>earthview</name>
- <width>150</width>
- <height>50</height>
+ <layout>vbox</layout>
+ <default-padding>3</default-padding>
+ <!--<width>150</width>
+ <height>50</height>-->
  <modal>false</modal>
 
-<button>
+   <group>
+    <layout>hbox</layout>
+    <default-padding>1</default-padding>
+
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+
+    <text>
+      <label>Earthview Orbital Rendering</label>
+    </text>
+
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+
+    <button>
+      <legend/>
+      <key>Esc</key>
+      <pref-width>16</pref-width>
+      <pref-height>16</pref-height>
+      <border>2</border>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
+
+  <hrule/>
+ 
+  <group>
+  <layout>table</layout>
+ 
+   <text>
+   <row>0</row>
+   <col>0</col>
+   <halign>right</halign>
+   <label>Show cloud layer</label>
+   </text>
+
+   <checkbox>
+   <row>0</row>
+   <col>1</col>
+   <halign>left</halign>
+   <property>/earthview/cloudsphere-flag</property>
+   <binding>
+     <command>dialog-apply</command>
+    </binding>
+    </checkbox>
+  
+   <button>
+   <row>1</row>
+   <col>0</col>
+   <legend>Start</legend>
+   <equal>true</equal>
+   <binding>
+    <command>nasal</command>
+    <script>earthview.start()</script>
+   </binding>
+  </button>
+ 
+  <button>
+   <row>1</row>
+   <col>1</col>
+   <legend>Stop</legend>
+   <equal>true</equal>
+   <binding>
+    <command>nasal</command>
+    <script>earthview.stop()</script>
+   </binding>
+  </button>
+  
+  <button>
+   <row>1</row>
+   <col>2</col>
+   <legend>Cancel</legend>
+   <equal>true</equal>
+   <key>Esc</key>
+   <binding>
+    <command>dialog-close</command>
+   </binding>
+  </button>
+  
+  </group>
+ 
+<!--<button>
    <x>10</x>
    <y>10</y>
    <legend>Start</legend>
@@ -40,6 +127,6 @@
    <binding>
     <command>dialog-close</command>
    </binding>
-  </button>
+  </button>-->
 
 </PropertyList>

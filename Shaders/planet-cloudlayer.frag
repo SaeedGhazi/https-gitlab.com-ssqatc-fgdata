@@ -40,6 +40,12 @@ void main()
 	
     vec3 light_specular = vec3 (1.0, 1.0, 1.0);
     NdotL = dot(n, lightDir);
+
+    float intensity = length(diffuse_term);
+    vec4 dawn = intensity * normalize (vec4 (1.0,0.4,0.4,1.0));
+	
+    vec4 diff_term = mix(dawn, diffuse_term, smoothstep(0.0, 0.2, NdotL));
+
     if (NdotL > 0.0) {
         color += diffuse_term * NdotL ;
         NdotHV = max(dot(n, halfVector), 0.0);

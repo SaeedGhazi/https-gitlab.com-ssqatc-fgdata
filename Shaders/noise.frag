@@ -10,6 +10,9 @@
 // * VoronoiNoise2D(in vec2 coord, in float wavelength, in float xrand, in float yrand)
 //   is a function mapping the terrain into random domains, based on Voronoi tiling of a regular grid
 //   distorted with xrand and yrand
+// * slopeLines2D(in vec2 coord, in vec2 gradDir, in float wavelength, in float steepness)
+//   computes a semi-random set of lines along the direction of steepest descent, allowing to
+//   simulate e.g. water erosion patterns
 
 // Thorsten Renk 2014
 
@@ -189,4 +192,33 @@ float voronoiNoise2D(in float x, in float y, in float xrand, in float yrand)
 float VoronoiNoise2D(in vec2 coord, in float wavelength, in float xrand, in float yrand)	
 {
 return voronoiNoise2D(coord.x/wavelength, coord.y/wavelength, xrand, yrand);
+}
+
+float slopeLines2D(in float x, in float y, in float sx, in float sy, in float steepness)
+{
+	float integer_x    = x - fract(x);
+    float fractional_x = x - integer_x;
+
+    float integer_y    = y - fract(y);
+    float fractional_y = y - integer_y;
+
+	vec2 O = vec2 (0.3 + 0.4* rand2D(vec2 (integer_x, integer_y+1)), 0.3 + 0.4* rand2D(vec2 (integer_x+1, integer_y)));
+	vec2 S = vec2 (sx, sy);
+	vec2 P = vec2 (-sy, sx);
+	vec2 X = vec2 (fractional_x, fractional_y);
+	
+	float radius = 0.1 + 0.2  * rand2D(vec2 (integer_x, integer_y));
+	
+	float b = (X.y - O.y + O.x * S.y/S.x - X.x * S.y/S.x) / (P.y - P.x * S.y/S.x);
+	float a = (X.x - O.x - b*P.x)/S.x;
+	
+	return (1.0 - smoothstep(0.8 * (1.0-steepness), 1.2* (1.0 - steepness), 0.6* abs(a))) * (1.0 - smoothstep(0.0, 1.0 * radius,abs(b)));
+	
+	
+}
+
+
+float slopeLines2D(in vec2 coord, in vec2 gradDir, in float wavelength, in float steepness)
+{
+return slopeLines2D(coord.x/wavelength, coord.y/wavelength, gradDir.x, gradDir.y, steepness);
 }

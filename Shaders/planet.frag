@@ -9,6 +9,7 @@ varying vec3 ecViewDir;
 varying vec3 VTangent;
 
 uniform float visibility;
+uniform bool use_clouds;
 uniform sampler2D texture;
 uniform sampler2D shadowtex;
 
@@ -43,15 +44,30 @@ void main()
 	float xOffset = -0.005 * dot(normalize(lightDir), normalize(VTangent));
 	float yOffset = -0.005 * dot(normalize(lightDir), normalize(VBinormal));
 	
-	shadowTexel = texture2D(shadowtex, vec2(gl_TexCoord[0].s-xOffset, gl_TexCoord[0].t-yOffset));
+     if (use_clouds)
+		{shadowTexel = texture2D(shadowtex, vec2(gl_TexCoord[0].s-xOffset, gl_TexCoord[0].t-yOffset));}
+	else
+		{shadowTexel = vec4 (0.0,0.0,0.0,0.0);}
+	
+	texel = texture2D(texture, gl_TexCoord[0].st);
 	
     vec3 light_specular = vec3 (1.0, 1.0, 1.0);
     NdotL = dot(n, lightDir);
+
+    float intensity = length(diffuse_term);
+    vec4 dawn = intensity * normalize (vec4 (1.0,0.4,0.4,1.0));
+    vec4 diff_term = mix(dawn, diffuse_term, smoothstep(0.0, 0.2, NdotL));
+	
+    intensity = length(light_specular);
+    light_specular = mix(dawn.rgb, light_specular, smoothstep(0.0, 0.2, NdotL));
+
+    float specular_enhancement = 4.0 * (1.0 -smoothstep(0.0, 0.3,length(texel.rgb - vec3 (0.007,0.019, 0.078))));
+
     if (NdotL > 0.0) {
         color += diffuse_term * NdotL * (1.0-shadowTexel.a);
         NdotHV = max(dot(n, halfVector), 0.0);
         if (gl_FrontMaterial.shininess > 0.0)
-            specular.rgb = (gl_FrontMaterial.specular.rgb
+            specular.rgb = (gl_FrontMaterial.specular.rgb * specular_enhancement
                             * light_specular * (1.0-shadowTexel.a)
                             * pow(NdotHV, gl_FrontMaterial.shininess));
     }
@@ -60,7 +76,7 @@ void main()
     // saturated. Clamping the color before modulating by the texture
     // is closer to what the OpenGL fixed function pipeline does.
     color = clamp(color, 0.0, 1.0);
-    texel = texture2D(texture, gl_TexCoord[0].st);
+
     fragColor = color * texel + specular;
 	//fragColor = fragColor * (1.0 - 0.5 * shadowTexel.a);
 	//fragColor = mix(fragColor, shadowTexel, shadowTexel.a);

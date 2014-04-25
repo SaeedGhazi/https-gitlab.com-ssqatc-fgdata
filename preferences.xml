@@ -1324,6 +1324,10 @@ Started September 2000 by David Megginson, david@megginson.com
 		<events type="string"/>
 	</scenery>
 
+	<earthview>
+		<cloudsphere-flag type="bool" userarchive="y">true</cloudsphere-flag>
+	</earthview>
+
 </PropertyList>
 
 <!-- end of preferences.xml -->

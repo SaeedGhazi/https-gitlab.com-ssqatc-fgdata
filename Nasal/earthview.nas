@@ -4,6 +4,10 @@
 
 var start = func() {
 
+if (earthview_running_flag == 1) {return;}
+
+earthview_running_flag = 1;
+
 var lat = getprop("/position/latitude-deg");
 var lon = getprop("/position/longitude-deg");
 
@@ -16,6 +20,7 @@ var stop = func () {
 earth_model.node.remove();
 cloudsphere_model.node.remove();
 setprop("/earthview/control_loop_flag",0);
+earthview_running_flag = 0;
 }
 
 var place_earth_model = func(path, lat, lon, alt, heading, pitch, roll) {
@@ -96,7 +101,7 @@ setprop("/earthview/yaw-deg", -lon);
 if (getprop("/earthview/control_loop_flag") ==1) {settimer( func {control_loop(); },0);}
 }
 
-
+var earthview_running_flag = 0;
 var ft_to_m = 0.30480;
 var m_to_ft = 1.0/ft_to_m;
 var earth_model = {};

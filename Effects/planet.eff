@@ -20,6 +20,7 @@
 			<!-- DIFFUSE -->
 		</material>
 		<visibility><use>/environment/visibility-m</use></visibility>
+		<use-clouds><use>/earthview/cloudsphere-flag</use></use-clouds>
 	</parameters>
 	<generate>
 		<tangent type="int">6</tangent>
@@ -131,6 +132,13 @@
 				<type>float</type>
 				<value>
 					<use>visibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>use_clouds</name>
+				<type>bool</type>
+				<value>
+					<use>use-clouds</use>
 				</value>
 			</uniform>
 		</pass>

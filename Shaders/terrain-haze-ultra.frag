@@ -8,7 +8,7 @@ varying vec3 relPos;
 varying vec2 rawPos;
 varying vec3 worldPos;
 varying vec3 ecViewdir;
-
+varying vec2 grad_dir;
 
 
 uniform sampler2D texture;
@@ -23,7 +23,7 @@ uniform sampler2D gradient_texture;
 //varying float yprime_alt;
 //varying float mie_angle;
 varying float steepness;
-varying float grad_dir;
+
 
 
 uniform float visibility;
@@ -70,8 +70,7 @@ float shadow_func (in float x, in float y, in float noise, in float dist);
 float DotNoise2D(in vec2 coord, in float wavelength, in float fractionalMaxDotSize, in float dot_density);
 float Noise2D(in vec2 coord, in float wavelength);
 float Noise3D(in vec3 coord, in float wavelength);
-float VoronoiNoise2D(in vec2 coord, in float wavelength, in float xrand, in float yrand);	
-
+float slopeLines2D(in vec2 coord, in vec2 gradDir, in float wavelength, in float steepness);
 
 
 
@@ -235,6 +234,15 @@ float dotnoise_15m = DotNoise2D(rawPos.xy, 15.0 * dot_size, 0.33, dot_density);
 
 float dotnoisegrad_10m;
 
+
+// slope noise
+
+float slopenoise_50m = slopeLines2D(rawPos, grad_dir, 50.0, steepness);
+float slopenoise_100m = slopeLines2D(rawPos, grad_dir, 100.0, steepness);
+
+float snownoise_25m = mix(noise_25m, slopenoise_50m, clamp(3.0*(1.0-steepness),0.0,1.0));
+float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),0.0,1.0));
+
 // get the texels
 
 
@@ -269,8 +277,8 @@ float dotnoisegrad_10m;
 	snow_texel.g = snow_texel.g * (0.9 + 0.05 * (noise_10m + noise_5m));
 	snow_texel.a = 1.0;
 	noise_term = 0.1 * (noise_500m-0.5) ;
-	noise_term = noise_term + 0.2 * (noise_50m -0.5) * detail_fade(50.0, view_angle, 0.5*dist) ;
-	noise_term = noise_term + 0.2 * (noise_25m -0.5) * detail_fade(25.0, view_angle, 0.5*dist) ;
+	noise_term = noise_term + 0.2 * (snownoise_50m -0.5) * detail_fade(50.0, view_angle, 0.5*dist) ;
+	noise_term = noise_term + 0.2 * (snownoise_25m -0.5) * detail_fade(25.0, view_angle, 0.5*dist) ;
 	noise_term = noise_term + 0.3 * (noise_10m -0.5) * detail_fade(10.0, view_angle, 0.8*dist) ;
 	noise_term = noise_term + 0.3 * (noise_5m - 0.5) * detail_fade(5.0, view_angle, dist);
 	noise_term = noise_term + 0.15 * (noise_2m -0.5) *  detail_fade(2.0, view_angle, dist);
@@ -369,6 +377,9 @@ if (local_autumn_factor < 1.0)
 	intensity = length(texel.rgb) * (1.0 - 0.5 * smoothstep(1.1,2.0,season));
 	texel.rgb = intensity * normalize(mix(texel.rgb, vec3(0.23,0.17,0.08), smoothstep(1.1,2.0, season)));
 	}
+
+ // slope line overlay
+ texel.rgb = texel.rgb * (1.0  - 0.12 * slopenoise_50m - 0.08 * slopenoise_100m);
 
 //const vec4 dust_color  = vec4 (0.76, 0.71, 0.56, 1.0);
 const vec4 dust_color  = vec4 (0.76, 0.65, 0.45, 1.0);

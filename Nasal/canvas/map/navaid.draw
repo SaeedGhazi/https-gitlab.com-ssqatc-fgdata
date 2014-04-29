@@ -1,3 +1,4 @@
+# WARNING: *.draw files will be deprecated, see: http://wiki.flightgear.org/MapStructure
 ##    
 # FIXME: until we have better instancing support for symbols, it would be better to return a functor here
 # so that symbols are only parsed once

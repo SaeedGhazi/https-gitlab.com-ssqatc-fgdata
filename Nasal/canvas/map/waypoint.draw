@@ -1,3 +1,4 @@
+# WARNING: *.draw files will be deprecated, see: http://wiki.flightgear.org/MapStructure
 ##
 # Draw a waypoint symbol and waypoint name (Gijs' 744 ND.nas code)
 

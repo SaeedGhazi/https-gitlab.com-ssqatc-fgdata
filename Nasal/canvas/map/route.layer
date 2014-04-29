@@ -1,3 +1,4 @@
+# WARNING: *.layer files will be deprecated, see: http://wiki.flightgear.org/MapStructure
 var RouteLayer =  {};
 
 RouteLayer.new = func(group,name) {

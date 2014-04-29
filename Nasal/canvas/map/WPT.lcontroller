@@ -1,3 +1,4 @@
+# See: http://wiki.flightgear.org/MapStructure
 # Class things:
 var name = 'WPT'; # for waypoints
 var parents = [SymbolLayer.Controller];
@@ -12,8 +13,8 @@ var new = func(layer) {
 	var m = {
 		parents: [__self__],
 		layer: layer,
+		map: layer.map,
 		listeners: [],
-		query_range_nm: 25,
 	};
 	return m;
 };
@@ -24,7 +25,7 @@ var del = func() {
 };
 
 var searchCmd = func {
-	#print("Running query: "~name);
+	printlog(_MP_dbg_lvl, "Running query: "~name);
 	
 	var fp = flightplan();
 	var fpSize = fp.getPlanSize();
@@ -32,7 +33,6 @@ var searchCmd = func {
 	for (var i = 1; i <fpSize; i+=1)
 		append(result, fp.getWP(i).path()[0] );
 
-	return result;	
-	# return positioned.findWithinRange(me.query_range_nm, me.query_type); # the range should also be exposed, it will typically be controlled via a GUI widget or NavDisplay switch
+	return result;
 };
 

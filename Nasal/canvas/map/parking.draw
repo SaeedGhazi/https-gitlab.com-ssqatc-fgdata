@@ -1,3 +1,4 @@
+# WARNING: *.draw files will be deprecated, see: http://wiki.flightgear.org/MapStructure
 var draw_parking = func(group, apt, lod) {
 	var group = group.createChild("group", "apt-"~apt.id);
 	foreach(var park; apt.parking()) {

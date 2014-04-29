@@ -1,3 +1,4 @@
+# WARNING: *.model files will be deprecated, see: http://wiki.flightgear.org/MapStructure
 
 var RouteModel = {route_monitor:nil};
 RouteModel.new = func make(LayerModel, RouteModel);

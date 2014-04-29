@@ -328,7 +328,8 @@ var viewer_position = func {
 # searchCmd executes and returns the actual search,
 # onAdded and onRemoved are callbacks,
 # and obj is a "me" reference (defaults to "me" in the
-# caller's namespace).
+# caller's namespace). If searchCmd returns nil, nothing
+# happens, i.e. the diff is cancelled.
 var PositionedSearch = {
 	new: func(searchCmd, onAdded, onRemoved, obj=nil) {
 		return {
@@ -351,6 +352,8 @@ var PositionedSearch = {
 		return ret;
 	},
 	diff: func(old, new) {
+		if (new == nil)
+			return [old, [], []];
 		var removed = old~[]; #copyvec
 		var added = new~[];
 		# Mark common elements from removed and added:
@@ -369,6 +372,10 @@ var PositionedSearch = {
 			# Optimized search using C code
 			var old = me.result~[]; #copyvec
 			me.result = call(searchCmd, nil, me.obj);
+			if (me.result == nil)
+			{ me.result = old; return }
+			if (typeof(me.result) != 'vector') die("geo.PositionedSearch(): A searchCmd must return a vector of elements or nil !!"); # TODO: Maybe make this a hash instead to wrap a vector, so that we can implement basic type-checking - e.g. doing isa(PositionedSearchResult, me.result) would be kinda neat and could help troubleshooting
+			else
 			positioned.diff( old,
 			                 me.result,
 			                 func call(me.onAdded, arg, me.obj),

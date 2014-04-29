@@ -1,3 +1,4 @@
+# WARNING: *.draw files will be deprecated, see: http://wiki.flightgear.org/MapStructure
 
 var draw_rwy_nd = func (group, rwy, controller=nil, lod=nil) {
  # print("drawing runways-nd");

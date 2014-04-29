@@ -1,5 +1,6 @@
 # ==============================================================================
 # Boeing Navigation Display by Gijs de Rooy
+# See: http://wiki.flightgear.org/Canvas_ND_Framework
 # ==============================================================================
 
 ##
@@ -44,21 +45,10 @@ var NDStyles = {
 		##
 
 		layers: [
-			{ name:'fixes', disabled:1, update_on:['toggle_range','toggle_waypoints'],
-				predicate: func(nd, layer) {
-					# print("Running fixes predicate");
-					var visible=nd.get_switch('toggle_waypoints') and nd.in_mode('toggle_display_mode', ['MAP']) and (nd.rangeNm() <= 40);
-					if (visible) {
-						# print("fixes update requested!");
-						trigger_update( layer );
-					}
-					layer._view.setVisible(visible);
-				}, # end of layer update predicate
-			}, # end of fixes layer
 			{ name:'FIX', isMapStructure:1, update_on:['toggle_range','toggle_waypoints'],
 				# FIXME: this is a really ugly place for controller code
 				predicate: func(nd, layer) {
-					# print("Running vor layer predicate");
+					# print("Running fix layer predicate");
 					# toggle visibility here
 					var visible=nd.get_switch('toggle_waypoints') and nd.in_mode('toggle_display_mode', ['MAP']) and (nd.rangeNm() <= 40);
 					layer.group.setVisible( nd.get_switch('toggle_waypoints') );
@@ -69,6 +59,7 @@ var NDStyles = {
 					}
 				}, # end of layer update predicate
 			}, # end of FIX layer
+
 			# Should redraw every 10 seconds
 			{ name:'storms', update_on:['toggle_range','toggle_weather','toggle_display_mode'],
 				predicate: func(nd, layer) {
@@ -81,7 +72,8 @@ var NDStyles = {
 					layer._view.setVisible(visible);
 				}, # end of layer update predicate
 			}, # end of storms layer
-			{ name:'airplaneSymbol', update_on:['toggle_display_mode'], 
+
+			{ name:'airplaneSymbol', disabled:1, update_on:['toggle_display_mode'], 
 				predicate: func(nd, layer) {
 					var visible = nd.get_switch('toggle_display_mode') == "PLAN";
 					if (visible) {
@@ -89,78 +81,56 @@ var NDStyles = {
 					} layer._view.setVisible(visible);
 				},
 			},
-			{ name:'airports-nd', update_on:['toggle_range','toggle_airports','toggle_display_mode'],
+			{ name:'APS', isMapStructure:1, update_on:['toggle_display_mode'], 
 				predicate: func(nd, layer) {
-					# print("Running airports-nd predicate");
-					var visible = nd.get_switch('toggle_airports') and nd.in_mode('toggle_display_mode', ['MAP']);
+					var visible = nd.get_switch('toggle_display_mode') == "PLAN";
+					layer.group.setVisible( visible );
 					if (visible) {
-						trigger_update( layer ); # clear & redraw
+						layer.update();
 					}
-					layer._view.setVisible( visible );
+				},
+			},
+
+			{ name:'APT', isMapStructure:1, update_on:['toggle_range','toggle_airports','toggle_display_mode'],
+				predicate: func(nd, layer) {
+					# toggle visibility here
+					var visible=nd.get_switch('toggle_airports') and nd.in_mode('toggle_display_mode', ['MAP']);
+					layer.group.setVisible( visible );
+					if (visible) {
+						#print("Updating MapStructure ND layer: APT");
+						layer.update();
+					}
 				}, # end of layer update predicate
-			}, # end of airports layer
+			}, # end of APT layer
 
 			# Should distinct between low and high altitude navaids. Hiding above 40 NM for now, to prevent clutter/lag.
-			{ name:'vor', disabled:1, update_on:['toggle_range','toggle_stations','toggle_display_mode'],
-				predicate: func(nd, layer) {
-					# print("Running vor layer predicate");
-					var visible = nd.get_switch('toggle_stations') and nd.in_mode('toggle_display_mode', ['MAP']) and (nd.rangeNm() <= 40);
-					if(visible) {
-						trigger_update( layer ); # clear & redraw
-					}
-					layer._view.setVisible( nd.get_switch('toggle_stations') );
-				}, # end of layer update predicate
-			}, # end of VOR layer
 			{ name:'VOR', isMapStructure:1, update_on:['toggle_range','toggle_stations','toggle_display_mode'],
 				# FIXME: this is a really ugly place for controller code
 				predicate: func(nd, layer) {
-					# print("Running vor layer predicate");
 					# toggle visibility here
 					var visible = nd.get_switch('toggle_stations') and nd.in_mode('toggle_display_mode', ['MAP']) and (nd.rangeNm() <= 40);
 					layer.group.setVisible( visible );
 					if (visible) {
 						#print("Updating MapStructure ND layer: VOR");
-						# (Hopefully) smart update
 						layer.update();
 					}
 				}, # end of layer update predicate
 			}, # end of VOR layer
 
-			# Should distinct between low and high altitude navaids. Hiding above 40 NM for now, to prevent clutter/lag.
-			{ name:'dme', disabled:1, update_on:['toggle_range','toggle_stations'],
-				predicate: func(nd, layer) {
-					var visible = nd.get_switch('toggle_stations') and nd.in_mode('toggle_display_mode', ['MAP']) and (nd.rangeNm() <= 40);
-					if(visible) {
-						trigger_update( layer ); # clear & redraw
-					}
-					layer._view.setVisible( nd.get_switch('toggle_stations') );
-				}, # end of layer update predicate
-			}, # end of DME layers
 			{ name:'DME', isMapStructure:1, update_on:['toggle_range','toggle_stations'],
 				# FIXME: this is a really ugly place for controller code
 				predicate: func(nd, layer) {
 					var visible = nd.get_switch('toggle_stations') and nd.in_mode('toggle_display_mode', ['MAP']) and (nd.rangeNm() <= 40);
-					# print("Running vor layer predicate");
 					# toggle visibility here
 					layer.group.setVisible( visible );
 					if (visible) {
 						#print("Updating MapStructure ND layer: DME");
-						# (Hopefully) smart update
 						layer.update();
 					}
 				}, # end of layer update predicate
 			}, # end of DME layer
 
-			{ name:'mp-traffic', update_on:['toggle_range','toggle_traffic'],
-				predicate: func(nd, layer) {
-					var visible = nd.get_switch('toggle_traffic');
-					layer._view.setVisible( visible );
-					if (visible) {
-						trigger_update( layer ); # clear & redraw
-					}
-				}, # end of layer update predicate
-			}, # end of traffic  layer
-			{ name:'TFC', disabled:1, isMapStructure:1, update_on:['toggle_range','toggle_traffic'],
+			{ name:'TFC', isMapStructure:1, update_on:['toggle_range','toggle_traffic'],
 				predicate: func(nd, layer) {
 					var visible = nd.get_switch('toggle_traffic');
 					layer.group.setVisible( visible );
@@ -169,7 +139,7 @@ var NDStyles = {
 						layer.update();
 					}
 				}, # end of layer update predicate
-			}, # end of traffic  layer
+			}, # end of traffic layer
 
 			{ name:'runway-nd', update_on:['toggle_range','toggle_display_mode'],
 				predicate: func(nd, layer) {
@@ -707,22 +677,15 @@ var update_weather = func {
 }
 update_weather();
 
-# Hack to update airplane symbol location on PLAN mode every second
-var update_apl_sym = func {
-	if (getprop("/instrumentation/efis/mfd/display-mode") == "PLAN")
-		setprop("/instrumentation/efis/mfd/display-mode","PLAN");
-	settimer(update_apl_sym, 5);
-}
-update_apl_sym();
-
 ##
 # TODO:
 # - introduce a MFD class (use it also for PFD/EICAS)
 # - introduce a SGSubsystem class and use it  here
 # - introduce a Boeing NavDisplay class
 var NavDisplay = {
+	# static
+	id:0,
 
-	# reset handler
 	del: func {
 		print("Cleaning up NavDisplay");
 		# shut down all timers and other loops here
@@ -735,6 +698,7 @@ var NavDisplay = {
 		if (me.canvas_handle != nil)
 			me.canvas_handle.del();
 		me.inited = 0;
+		NavDisplay.id -= 1;
 	},
 
 	listen: func(p,c) {
@@ -780,6 +744,7 @@ var NavDisplay = {
 	# TODO: the ctor should allow customization, for different aircraft
 	# especially properties and SVG files/handles (747, 757, 777 etc)
 	new : func(prop1, switches=default_switches, style='Boeing') {
+		NavDisplay.id +=1;
 		var m = { parents : [NavDisplay]};
 
 		m.inited = 0;
@@ -834,7 +799,7 @@ var NavDisplay = {
 
 		return m;
 	},
-	newMFD: func(canvas_group, parent=nil)
+	newMFD: func(canvas_group, parent=nil, options=nil)
 	{
 		if (me.inited) die("MFD already was added to scene");
 		me.inited = 1;
@@ -872,7 +837,6 @@ var NavDisplay = {
 		                      "staArrowL","staArrowR","staToL","staFromL","staToR","staFromR"] )
 			me.symbols[element] = me.nd.getElementById(element).updateCenter();
 
-		# this should probably be using Philosopher's new SymbolLayer ?
 		me.map = me.nd.createChild("map","map")
 			.set("clip", "rect(124, 1024, 1024, 0)")
 			.set("screen-range", "700");
@@ -908,19 +872,40 @@ var NavDisplay = {
 		# so we need some simple way to communicate between frontend<->backend until we have real controllers
 		# for now, a single controller hash is shared by most layers - unsupported callbacks are simply ignored by the draw files
 		#
+
 		var controller = {
+			parents: [canvas.Map.Controller],
+			_pos: nil, _time: nil,
 			query_range: func get_range(),
 			is_tuned:is_tuned,
 			get_tuned_course:get_course_by_freq,
 			get_position: get_current_position,
+			new: func(map) return { parents:[controller], map:map },
+			should_update_all: func {
+				# TODO: this is just copied from aircraftpos.controller,
+				# it really should be moved to somewhere common and reused
+				# and extended to fully differentiate between "static"
+				# and "volatile" layers.
+				var pos = me.map.getPosCoord();
+				if (pos == nil) return 0;
+				var time = systime();
+				if (me._pos == nil)
+					me._pos = geo.Coord.new(pos);
+				else {
+					var dist_m = me._pos.direct_distance_to(pos);
+					# 2 NM until we update again
+					if (dist_m < 2 * NM2M) return 0;
+					# Update at most every 4 seconds to avoid excessive stutter:
+					elsif (time - me._time < 4) return 0;
+				}
+				#print("update aircraft position");
+				var (x,y,z) = pos.xyz();
+				me._pos.set_xyz(x,y,z);
+				me._time = time;
+				return 1;
+			},
 		};
-
-		# FIXME: MapStructure: big hack
-		canvas.Symbol.Controller.get("VOR").query_range = controller.query_range;
-		canvas.Symbol.Controller.get("VOR").get_tuned_course = controller.get_tuned_course;
-		canvas.Symbol.Controller.get("DME").is_tuned = controller.is_tuned;
-		canvas.SymbolLayer.Controller.get("TFC").query_range = controller.query_range;
-		canvas.SymbolLayer.Controller.get("TFC").get_position = controller.get_position;
+		me.map.setController(controller);
 
 		###
 		# set up various layers, controlled via callbacks in the controller hash
@@ -938,11 +923,13 @@ var NavDisplay = {
 			var render_target = (!contains(layer,'not_a_map') or !layer.not_a_map) ? me.map : me.nd;
 
 			var the_layer = nil;
-			if(!layer['isMapStructure'])
+			if(!layer['isMapStructure']) # set up an old layer
 				the_layer = me.layers[layer.name] = canvas.MAP_LAYERS[layer.name].new( render_target, layer.name, controller );
 			else {
 				printlog(_MP_dbg_lvl, "Setting up MapStructure-based layer for ND, name:", layer.name);
-				render_target.addLayer(factory: canvas.SymbolLayer, type_arg: layer.name);
+				var opt = options != nil and options[layer.name] != nil ? options[layer.name] :nil;
+				# print("Options is: ", opt!=nil?"enabled":"disabled");
+				render_target.addLayer(factory: canvas.SymbolLayer, type_arg: layer.name, options:opt);
 				the_layer = me.layers[layer.name] = render_target.getLayer(layer.name);
 			}
 
@@ -990,6 +977,14 @@ var NavDisplay = {
 	# and update each model accordingly
 	update: func() # FIXME: This stuff is still too aircraft specific, cannot easily be reused by other aircraft
 	{
+		var _time = systime();
+
+		# Variables:
+		var userLat = me.aircraft_source.get_lat();
+		var userLon = me.aircraft_source.get_lon();
+		var userGndSpd = me.aircraft_source.get_gnd_spd();
+		var userVSpd = me.aircraft_source.get_vspd();
+		var dispLCD = me.get_switch('toggle_display_type') == "LCD";
 		# Heading update
 		var userHdgMag = me.aircraft_source.get_hdg_mag();
 		var userHdgTru = me.aircraft_source.get_hdg_tru();
@@ -1005,6 +1000,12 @@ var NavDisplay = {
 			var userHdg=userHdgMag;
 			var userTrk=userTrkMag;
 		}
+		# this should only ever happen when testing the experimental AI/MP ND driver hash (not critical)
+		# or when an error occurs (critical)
+		if (!userHdg or !userTrk or !userLat or !userLon) {
+			print("aircraft source invalid, returning !");
+			return;
+		}
 		if (me.aircraft_source.get_gnd_spd() < 80)
 			userTrk = userHdg;
 		
@@ -1019,19 +1020,41 @@ var NavDisplay = {
 			userHdgTrkTru = userHdgTru;
 			me.symbols.hdgTrk.setText("HDG");
 		}
-		
-		var userLat = me.aircraft_source.get_lat();
-		var userLon = me.aircraft_source.get_lon();
-		var userGndSpd = me.aircraft_source.get_gnd_spd();
-		var userVSpd = me.aircraft_source.get_vspd();
-		var dispLCD = me.get_switch('toggle_display_type') == "LCD";
 
-		# this should only ever happen when testing the experimental AI/MP ND driver hash (not critical)
-		if (!userHdg or !userTrk or !userLat or !userLon) {
-			print("aircraft source invalid, returning !");
-			return;
+		# First, update the display position of the map
+		var pos = {
+			lat: nil, lon: nil,
+			alt: nil, hdg: nil,
+			range: nil,
+		};
+		pos.range = me.rangeNm(); # avoid this  here, use a listener instead
+		# reposition the map, change heading & range:
+		if(me.in_mode('toggle_display_mode', ['PLAN'])) {
+			pos.hdg = 0;
+			if (getprop(me.efis_path ~ "/inputs/plan-wpt-index") >= 0) {
+				pos.lat = getprop("/autopilot/route-manager/route/wp["~getprop(me.efis_path ~ "/inputs/plan-wpt-index")~"]/latitude-deg");
+				pos.lon = getprop("/autopilot/route-manager/route/wp["~getprop(me.efis_path ~ "/inputs/plan-wpt-index")~"]/longitude-deg");
+			} else {
+				pos.lat = me.map.getLat();
+				pos.lon = me.map.getLon();
+			}
+		} else {
+			pos.hdg = userHdgTrkTru;
+			pos.lat = userLat;
+			pos.lon = userLon;
+		}
+		call(me.map.setPos, [pos.lat, pos.lon], me.map, pos);
+
+		# MapStructure update!
+		if (me.map.controller.should_update_all()) {
+			me.map.update();
+		} else {
+			# TODO: ugly list here
+			me.map.update(func(layer) (var n=layer.type) == "TFC" or n == "APS");
 		}
 
+		# Other symbol update
+		# TODO: should be refactored!
 		if(me.in_mode('toggle_display_mode', ['PLAN']))
 			me.map.setTranslation(512,512);
 		elsif(me.get_switch('toggle_centered'))
@@ -1105,22 +1128,8 @@ var NavDisplay = {
 
 		me.symbols.range.setText(sprintf("%3.0f",me.rangeNm()/2));
 
-		# reposition the map, change heading & range:
-		if(me.in_mode('toggle_display_mode', ['PLAN'])) {
-			me.map._node.getNode("hdg",1).setDoubleValue(0);
-			if (getprop(me.efis_path ~ "/inputs/plan-wpt-index") >= 0) {
-				me.map._node.getNode("ref-lat",1).setDoubleValue(getprop("/autopilot/route-manager/route/wp["~getprop(me.efis_path ~ "/inputs/plan-wpt-index")~"]/latitude-deg"));
-				me.map._node.getNode("ref-lon",1).setDoubleValue(getprop("/autopilot/route-manager/route/wp["~getprop(me.efis_path ~ "/inputs/plan-wpt-index")~"]/longitude-deg"));
-			}
-		} else {
-			me.map._node.getNode("ref-lat",1).setDoubleValue(userLat);
-			me.map._node.getNode("ref-lon",1).setDoubleValue(userLon);
-		}
-		# The set range of the map does not correspond to what we see in-sim!!
-		me.map._node.getNode("range",1).setDoubleValue(me.rangeNm()); # avoid this  here, use a listener instead
-
 		# Hide heading bug 10 secs after change
-		var vhdg_bug = getprop("autopilot/settings/heading-bug-deg");
+		var vhdg_bug = getprop("autopilot/settings/heading-bug-deg") or 0;
 		var hdg_bug_active = getprop("autopilot/settings/heading-bug-active");
 		if (hdg_bug_active == nil)
 			hdg_bug_active = 1;
@@ -1133,8 +1142,8 @@ var NavDisplay = {
 			me.symbols.curHdgPtr.setRotation((userHdg-userTrk)*D2R);
 			me.symbols.curHdgPtr2.setRotation((userHdg-userTrk)*D2R);
 		}
-        else
-        {
+		else
+		{
 			me.symbols.trkInd.setRotation((userTrk-userHdg)*D2R);
 			me.symbols.trkInd2.setRotation((userTrk-userHdg)*D2R);
 			me.symbols.curHdgPtr.setRotation(0);
@@ -1149,7 +1158,6 @@ var NavDisplay = {
 			me.symbols.selHdgLine2.setRotation(hdgBugRot);
 			me.symbols.compass.setRotation(-userHdgTrk*D2R);
 			me.symbols.compassApp.setRotation(-userHdgTrk*D2R);
-			me.map._node.getNode("hdg",1).setDoubleValue(userHdgTrkTru);
 		}
 		if(me.get_switch('toggle_centered')) {
 			if (me.in_mode('toggle_display_mode', ['APP','VOR']))
@@ -1336,5 +1344,9 @@ var NavDisplay = {
 		me.symbols['status.wpt'].setVisible( me.get_switch('toggle_waypoints') and me.in_mode('toggle_display_mode', ['MAP']));
 		me.symbols['status.arpt'].setVisible( me.get_switch('toggle_airports') and me.in_mode('toggle_display_mode', ['MAP']));
 		me.symbols['status.sta'].setVisible( me.get_switch('toggle_stations') and  me.in_mode('toggle_display_mode', ['MAP']));
+		# Okay, _how_ do we hook this up with FGPlot?
+		#print("ND update took "~(systime()-_time)~" seconds");
+		setprop("/instrumentation/navdisplay["~ NavDisplay.id ~"]/update-ms", systime() - _time);
+		
 	}
 };

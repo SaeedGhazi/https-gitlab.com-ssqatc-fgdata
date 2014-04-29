@@ -1,3 +1,4 @@
+# WARNING: *.draw files will be deprecated, see: http://wiki.flightgear.org/MapStructure
 var draw_taxiways = func(group, apt, lod) {     # TODO: the LOD arg isn't stricly needed here, 
                                                 # the layer is a conventional canvas group, so it can access its map 
                                                 # parent and just read the "range" property to do LOD handling

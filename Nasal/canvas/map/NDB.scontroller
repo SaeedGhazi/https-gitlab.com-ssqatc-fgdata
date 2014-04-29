@@ -1,3 +1,4 @@
+# See: http://wiki.flightgear.org/MapStructure
 # Class things:
 var name = 'NDB';
 var parents = [Symbol.Controller];
@@ -6,7 +7,4 @@ Symbol.Controller.add(name, __self__);
 Symbol.registry[ name ].df_controller = __self__;
 var new = func(model) ; # this controller doesn't need an instance
 var LayerController = SymbolLayer.Controller.registry[ name ];
-var isActive = func(model) LayerController.a_instance.isActive(model);
-var query_range = func()
-	die( name~".scontroller.query_range /MUST/ be provided by implementation" );
 

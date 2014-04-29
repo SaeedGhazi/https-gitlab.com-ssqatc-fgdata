@@ -1,3 +1,4 @@
+# See: http://wiki.flightgear.org/MapStructure
 # Class things:
 var name = 'TFC';
 var parents = [DotSym];
@@ -13,15 +14,15 @@ var arrow_type = nil;
 var draw_tcas_arrow = nil;
 
 var draw = func {
-	if (me.draw_tcas_arrow == nil)
-		me.draw_tcas_arrow = [
+	if (draw_tcas_arrow == nil)
+		draw_tcas_arrow = [
 			draw_tcas_arrow_above_500,
 			draw_tcas_arrow_below_500
 		];
 	#var callsign = me.model.getNode("callsign").getValue();
 	# print("Drawing traffic for:", callsign );
-	var threatLvl = me.controller.get_threat_lvl(me.model);
-	var vspeed = me.controller.get_vspd(me.model);
+	var threatLvl = me.model.get_threat_lvl();
+	var vspeed = me.model.get_vspd();
 	var altDiff = me.controller.get_alt_diff(me.model);
 	# Init
 	if (me.text_tcas == nil) {
@@ -59,7 +60,7 @@ var draw = func {
 			.setColor(1,0,0)
 			.setColorFill(1,0,0);
 		me.text_tcas.setColor(1,0,0);
-		me.arrow_tcas.setColor(1,0,0);
+		me.arrow_tcas[me.arrow_type].setColor(1,0,0);
 	} elsif (threatLvl == 2) {
 		# traffic advisory
 		me.icon_tcas.moveTo(-17,0)
@@ -68,7 +69,7 @@ var draw = func {
 			.setColor(1,0.5,0)
 			.setColorFill(1,0.5,0);
 		me.text_tcas.setColor(1,0.5,0);
-		me.arrow_tcas.setColor(1,0.5,0);
+		me.arrow_tcas[me.arrow_type].setColor(1,0.5,0);
 	} elsif (threatLvl == 1) {
 		# proximate traffic
 		me.icon_tcas.moveTo(-10,0)
@@ -78,6 +79,8 @@ var draw = func {
 			.close()
 			.setColor(1,1,1)
 			.setColorFill(1,1,1);
+		me.text_tcas.setColor(1,1,1);
+		me.arrow_tcas[me.arrow_type].setColor(1,1,1);
 	} else {
 		# other traffic
 		me.icon_tcas.moveTo(-10,0)
@@ -86,6 +89,8 @@ var draw = func {
 			.lineTo(0,17)
 			.close()
 			.setColor(1,1,1);
+		me.text_tcas.setColor(1,1,1);
+		me.arrow_tcas[me.arrow_type].setColor(1,1,1);
 	}
 };
 

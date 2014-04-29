@@ -31,11 +31,11 @@
         <token>rwy-to</token>
       </equals>
       <then>
-        <text> take off and landing runway </text>
+        <text> Take off and landing runway </text>
         <token>rwy-land</token>
       </then>
       <else>
-        <text> landing runway </text>
+        <text> Landing runway </text>
         <token>rwy-land</token>
         <text> and take off runway </text>
         <token>rwy-to</token>
@@ -45,7 +45,7 @@
     <token>transition-level</token>
     <text>. Wind </text>
     <token>wind-dir</token>
-    <text> degrees </text>
+    <text> degrees, </text>
     <token>wind-speed-kn</token>
     <text> knots</text>
     <if>
@@ -53,7 +53,7 @@
         <token>gusts</token>
       </not-empty>
       <then>
-        <text> gusts up to </text>
+        <text>, gusts up to </text>
         <token>gusts</token>
         <text> knots</text>
       </then>
@@ -64,7 +64,7 @@
         <token>wind-to</token>
       </not-equals>
       <then>
-        <text> varying between </text>
+        <text>, varying between </text>
         <token>wind-from</token>
         <text> and </text>
         <token>wind-to</token>
@@ -108,13 +108,13 @@
     </if>
     <text>. Temperature </text>
     <token>temperature-deg</token>
-    <text> dewpoint </text>
+    <text>, dewpoint </text>
     <token>dewpoint-deg</token>
     <text>. QNH </text>
     <token>qnh</token>
     <text> hektopascal. Trend </text>
     <token>trend</token>
-    <text> information </text>
+    <text>. information </text>
     <token>id</token>
     <text> out.</text>
   </atis>

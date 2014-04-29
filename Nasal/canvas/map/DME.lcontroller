@@ -1,3 +1,4 @@
+# See: http://wiki.flightgear.org/MapStructure
 # Class things:
 var name = 'DME';
 var parents = [SymbolLayer.Controller];
@@ -7,17 +8,39 @@ SymbolLayer.add(name, {
 	parents: [SymbolLayer],
 	type: name, # Symbol type
 	df_controller: __self__, # controller to use by default -- this one
+	df_style: {
+		line_width: 3,
+		scale_factor: 1,
+		animation_test: 0,
+		debug: 1,
+		color_default: [0,0.6,0.85],
+		color_tuned: [0,1,0],
+	}
 });
-var a_instance = nil;
 var new = func(layer) {
 	var m = {
 		parents: [__self__],
 		layer: layer,
+		map: layer.map,
 		listeners: [],
-		query_range_nm: 25,
 		query_type:'dme',
 	};
-	__self__.a_instance = m;
+	##
+	# default styling parameters - can be overridden via addLayer( style:{key:value, ...} )
+
+	if (contains(m.layer,'style')) return m; # we already have a proper style
+
+	# otherwise, set up a default style:
+	m.layer.style={};
+	m.layer.style.debug = 0; # HACK: setting this enables benchmarking and printlog statements
+	m.layer.style.animation_test = 0;
+
+	# these are used by the draw() routines, see DME.symbol
+	m.layer.style.scale_factor = 1.0 ; # applied to the whole group for now
+	m.layer.style.line_width = 3.0; 
+	m.layer.style.color_tuned = [0,1,0]; 
+	m.layer.style.color_default = [0,0.6,0.85]; 
+
 	return m;
 };
 var del = func() {
@@ -26,7 +49,9 @@ var del = func() {
 };
 
 var searchCmd = func {
-	#print("Running query:", me.query_type);
-	return positioned.findWithinRange(me.query_range_nm, me.query_type); # the range should also be exposed, it will typically be controlled via a GUI widget or NavDisplay switch
+	printlog(_MP_dbg_lvl, "Running query:", me.query_type);
+	var range = me.map.getRange();
+	if (range == nil) return;
+	return positioned.findWithinRange(me.map.getPosCoord(), range, me.query_type);
 };
 

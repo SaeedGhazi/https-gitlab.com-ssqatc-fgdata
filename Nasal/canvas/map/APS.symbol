@@ -1,0 +1,16 @@
+# See: http://wiki.flightgear.org/MapStructure
+# Class things:
+var name = 'APS';
+var parents = [DotSym];
+var __self__ = caller(0)[0];
+DotSym.makeinstance( name, __self__ );
+
+var element_type = "group";
+var element_id = "airplane";
+
+var init = func {
+	canvas.parsesvg(me.element, "Nasal/canvas/map/boeingAirplane.svg");
+	me.draw();
+};
+var draw = func me.element.setRotation(me.layer.map.getHdg());
+

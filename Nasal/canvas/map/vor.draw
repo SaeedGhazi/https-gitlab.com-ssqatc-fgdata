@@ -1,3 +1,4 @@
+# WARNING: *.draw files will be deprecated, see: http://wiki.flightgear.org/MapStructure
 var draw_vor = func (group, vor, controller=nil, lod = 0) {
 
 	if (0) {

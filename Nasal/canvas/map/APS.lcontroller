@@ -1,6 +1,6 @@
 # See: http://wiki.flightgear.org/MapStructure
 # Class things:
-var name = 'NDB';
+var name = 'APS';
 var parents = [SymbolLayer.Controller];
 var __self__ = caller(0)[0];
 SymbolLayer.Controller.add(name, __self__);
@@ -10,24 +10,18 @@ SymbolLayer.add(name, {
 	df_controller: __self__, # controller to use by default -- this one
 });
 var new = func(layer) {
-	var m = {
+	layer.searcher._equals = func(a,b) {
+		a == b;
+	}
+	return {
 		parents: [__self__],
-		layer: layer,
 		map: layer.map,
-		listeners: [],
-		query_type:'ndb',
 	};
-	return m;
 };
-var del = func() {
-	foreach (var l; me.listeners)
-		removelistener(l);
-};
+var del = func;
 
 var searchCmd = func {
-	printlog(_MP_dbg_lvl, "Running query:", me.query_type);
-	var range = me.map.getRange();
-	if (range == nil) return;
-	return positioned.findWithinRange(me.map.getPosCoord(), range, me.query_type);
+	var c = me.map.getPosCoord();
+	return [c];
 };
 

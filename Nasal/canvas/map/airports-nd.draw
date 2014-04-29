@@ -1,3 +1,4 @@
+# WARNING: *.draw files will be deprecated, see: http://wiki.flightgear.org/MapStructure
 ##
 # draws a single airport (ND style)
 #

@@ -33,22 +33,22 @@
         <token>rwy-to</token>
       </equals>
       <then>
-        <text> landing and departing runway </text>
+        <text> Landing and departing runway </text>
         <token>rwy-land</token>
       </then>
       <else>
-        <text> landing runway </text>
+        <text> Landing runway </text>
         <token>rwy-land</token>
         <text> and departing runway </text>
         <token>rwy-to</token>
       </else>
     </if>
-    <text>. Weather </text>
-    <text>. Wind: </text>
+    <text>. Weather. </text>
+    <text>Wind</text>
     <token>wind-dir</token>
     <text> degrees at </text>
     <token>wind-speed-kn</token>
-    <text> knots </text>
+    <text> knots</text>
     <if>
       <not-empty>
         <token>gusts</token>
@@ -106,5 +106,6 @@
     <token>trend</token>
     <text>. Advise on initial contact you have information </text>
     <token>id</token>
+    <text>.</text>
   </atis>
 </PropertyList>

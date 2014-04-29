@@ -1,3 +1,4 @@
+# See: http://wiki.flightgear.org/MapStructure
 # Class things:
 var name = 'FIX';
 var parents = [DotSym];
@@ -8,23 +9,41 @@ var element_type = "group"; # we want a group, becomes "me.element"
 var icon_fix = nil;
 var text_fix = nil;
 
-var draw = func {
-	if (me.icon_fix != nil) return;
-	# the fix symbol
-	me.icon_fix = me.element.createChild("path")
+##
+# used during initialization to populate the symbol cache with a FIX symbol
+#
+var drawFIX = func(color, width) func(group) {
+
+	var symbol = group.createChild("path")
 		.moveTo(-15,15)
 		.lineTo(0,-15)
 		.lineTo(15,15)
 		.close()
-		.setStrokeLineWidth(3)
-		.setColor(0,0.6,0.85)
+		.setStrokeLineWidth(width)
+		.setColor(color)
 		.setScale(0.5,0.5); # FIXME: do proper LOD handling here - we need to scale according to current texture dimensions vs. original/design dimensions
-	# the fix label
+	return symbol;
+}
+
+var icon_fix_cached = [
+	SymbolCache32x32.add(
+		name: "FIX",
+		callback: drawFIX( color:[0, 0.6, 0.85], width:3 ), # TODO: use the style hash to encapsulate styling stuff
+		draw_mode: SymbolCache.DRAW_CENTERED
+	)
+];
+
+var draw = func {
+	if (me.icon_fix != nil) return; # fix icon already initialized
+	# initialize the fix symbol
+	me.icon_fix = icon_fix_cached[0].render(me.element);
+
+	# non-cached  stuff:
+	# FIXME: labels need to be LOD-aware (i.e. aware of MapController range, so that we can hide/show them)
 	me.text_fix = me.element.createChild("text")
 		.setDrawMode( canvas.Text.TEXT )
 		.setText(me.model.id)
-		.setFont("LiberationFonts/LiberationSans-Regular.ttf")
-		.setFontSize(28)
+		.setFont("LiberationFonts/LiberationSans-Regular.ttf") # TODO: encapsulate styling stuff
+		.setFontSize(28) # TODO: encapsulate styling stuff
 		.setTranslation(5,25);
-};
-
+}

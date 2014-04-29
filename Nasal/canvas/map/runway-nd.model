@@ -1,3 +1,4 @@
+# WARNING: *.model files will be deprecated, see: http://wiki.flightgear.org/MapStructure
 var RunwayNDModel = {};
  RunwayNDModel.new = func make( LayerModel, RunwayNDModel );
 

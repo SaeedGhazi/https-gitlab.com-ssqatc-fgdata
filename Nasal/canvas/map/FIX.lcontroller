@@ -1,3 +1,4 @@
+# See: http://wiki.flightgear.org/MapStructure
 # Class things:
 var name = 'FIX';
 var parents = [SymbolLayer.Controller];
@@ -7,27 +8,35 @@ SymbolLayer.add(name, {
 	parents: [SymbolLayer],
 	type: name, # Symbol type
 	df_controller: __self__, # controller to use by default -- this one
+
+	df_style: {
+		line_width: 3,
+		scale_factor: 0.5,
+		debug: 1,
+		color_default: [0, 0.6, 0.85],
+	}
+
 });
-var a_instance = nil;
 var new = func(layer) {
 	var m = {
 		parents: [__self__],
 		layer: layer,
+		map: layer.map,
 		listeners: [],
-		query_range_nm: 25,
 		query_type:'fix',
 	};
-	__self__.a_instance = m;
 	return m;
 };
 var del = func() {
-	#print("VOR.lcontroller.del()");
+	printlog(_MP_dbg_lvl, "VOR.lcontroller.del()");
 	foreach (var l; me.listeners)
 		removelistener(l);
 };
 
 var searchCmd = func {
-	#print("Running query:", me.query_type);
-	return positioned.findWithinRange(me.query_range_nm, me.query_type); # the range should also be exposed, it will typically be controlled via a GUI widget or NavDisplay switch
+	printlog(_MP_dbg_lvl, "Running query:", me.query_type);
+	var range = me.map.getRange();
+	if (range == nil) return;
+	return positioned.findWithinRange(me.map.getPosCoord(), range, me.query_type);
 };
 

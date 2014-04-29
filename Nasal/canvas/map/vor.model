@@ -1,3 +1,4 @@
+# WARNING: *.model files will be deprecated, see: http://wiki.flightgear.org/MapStructure
 var VORModel = {};
 VORModel.new = func make( LayerModel, VORModel );
 

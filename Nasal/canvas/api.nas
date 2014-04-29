@@ -244,6 +244,7 @@ var Element = {
   #
   # @param color  Vector of 3 or 4 values in [0, 1]
   setColorFill: func me.set('fill', _getColor(arg)),
+  getColorFill: func me.get('fill'),
   #
   getTransformedBounds: func me.getTightBoundingBox(),
   # Calculate the transformation center based on bounding box and center-offset
@@ -420,7 +421,7 @@ var Map = {
   df_controller: nil,
   new: func(ghost)
   {
-    return { parents: [Map, Group.new(ghost)], layers:{} }.setController();
+    return { parents: [Map, Group.new(ghost)], layers:{}, controller:nil }.setController();
   },
   del: func()
   {
@@ -437,6 +438,7 @@ var Map = {
   },
   setController: func(controller=nil)
   {
+    if (me.controller != nil) me.controller.del(me);
     if (controller == nil)
       controller = Map.df_controller;
     elsif (typeof(controller) != 'hash')
@@ -447,17 +449,24 @@ var Map = {
     } else {
       if (!isa(controller, Map.Controller))
         die("OOP error: controller needs to inherit from Map.Controller");
-      me.controller = controller.new(me);
-      if (!isa(me.controller, controller))
-        die("OOP error: created instance needs to inherit from specific controller class");
+      me.controller = call(func controller.new(me), nil, var err=[]); # try...
+      if (size(err)) {
+        if (err[0] != "No such member: new") # ... and either catch or rethrow
+          die(err[0]);
+        else
+          me.controller = controller;
+      } elsif (me.controller == nil) {
+        me.controller = controller;
+      } elsif (me.controller != controller and !isa(me.controller, controller))
+        die("OOP error: created instance needs to inherit from or be the specific controller class");
     }
 
     return me;
   },
-  addLayer: func(factory, type_arg=nil, priority=nil)
+  addLayer: func(factory, type_arg=nil, priority=nil, style=nil, options=nil)
   {
     if(contains(me.layers, type_arg))
-      print("addLayer() warning: overwriting existing layer:", type_arg);
+      printlog("warn", "addLayer() warning: overwriting existing layer:", type_arg);
 
     # print("addLayer():", type_arg);
 
@@ -466,30 +475,70 @@ var Map = {
       var type = factory.get(type_arg);
     else var type = factory;
 
-    me.layers[type_arg]= type.new(me);
+    me.layers[type_arg] = type.new(group:me, map:me, style:style,options:options);
     if (priority == nil)
       priority = type.df_priority;
     if (priority != nil)
-      me.layers[type_arg].setInt("z-index", priority);
+      me.layers[type_arg].group.setInt("z-index", priority);
+
     return me;
   },
   getLayer: func(type_arg) me.layers[type_arg],
-  setPos: func(lat, lon, hdg=nil, range=nil)
+
+  setRange: func(range) me.set("range",range),
+  getRange: func me.get('range'),
+
+  setPos: func(lat, lon, hdg=nil, range=nil, alt=nil)
   {
     me.set("ref-lat", lat);
     me.set("ref-lon", lon);
     if (hdg != nil)
       me.set("hdg", hdg);
     if (range != nil)
-      me.set("range", range);
+      me.setRange(range);
+    if (alt != nil)
+      me.set("altitude", hdg);
+  },
+  getPos: func
+  {
+    return [me.get("ref-lat"),
+            me.get("ref-lon"),
+            me.get("hdg"),
+            me.get("range"),
+            me.get("altitude")];
+  },
+  getLat: func me.get("ref-lat"),
+  getLon: func me.get("ref-lon"),
+  getHdg: func me.get("hdg"),
+  getAlt: func me.get("altitude"),
+  getRange: func me.get("range"),
+  getLatLon: func [me.get("ref-lat"), me.get("ref-lon")],
+  getPosCoord: func
+  {
+    var (lat, lon) = (me.get("ref-lat"),
+                      me.get("ref-lon"));
+    var alt = me.get("altitude");
+    if (lat == nil or lon == nil) {
+      if (contains(me, "coord")) {
+        debug.warn("canvas.Map: lost ref-lat and/or ref-lon source");
+      }
+      return nil;
+    }
+    if (!contains(me, "coord")) {
+      me.coord = geo.Coord.new();
+    }
+    me.coord.set_latlon(lat,lon,alt or 0);
+    return me.coord;
   },
   # Update each layer on this Map. Called by
   # me.controller.
-  update: func
+  update: func(predicate=nil)
   {
     foreach (var l; keys(me.layers)) {
       var layer = me.layers[l];
-      call(layer.update, arg, layer);
+      # Only update if the predicate allows
+      if (predicate == nil or predicate(layer))
+        call(layer.update, arg, layer);
     }
     return me;
   },
@@ -570,7 +619,10 @@ var Text = {
     me.setDouble("max-width", w);
   },
   setColor: func me.set('fill', _getColor(arg)),
-  setColorFill: func me.set('background', _getColor(arg))
+  getColor: func me.get('fill'),
+
+  setColorFill: func me.set('background', _getColor(arg)),
+  getColorFill: func me.get('background'),
 };
 
 # Path
@@ -826,8 +878,10 @@ var Path = {
   },
 
   setColor: func me.setStroke(_getColor(arg)),
-  setColorFill: func me.setFill(_getColor(arg)),
+  getColor: func me.getStroke(), 
 
+  setColorFill: func me.setFill(_getColor(arg)),
+  getColorFill: func me.getColorFill(),
   setFill: func(fill)
   {
     me.set('fill', fill);
@@ -836,6 +890,8 @@ var Path = {
   {
     me.set('stroke', stroke);
   },
+  getStroke: func me.get('stroke'),
+
   setStrokeLineWidth: func(width)
   {
     me.setDouble('stroke-width', width);
@@ -997,6 +1053,7 @@ var Canvas = {
   #
   # @param color  Vector of 3 or 4 values in [0, 1]
   setColorBackground: func () { me.texture.getNode('background', 1).setValue(_getColor(arg)); me; },
+  getColorBackground: func me.texture.get('background'),
   # Get path of canvas to be used eg. in Image::setFile
   getPath: func()
   {

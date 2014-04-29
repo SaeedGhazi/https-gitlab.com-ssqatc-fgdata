@@ -1,3 +1,4 @@
+# WARNING: *.draw files will be deprecated, see: http://wiki.flightgear.org/MapStructure
 var draw_tower = func (group, apt,lod) {
 	var group = group.createChild("group", "tower");
 	# TODO: move to map_elements.nas (tower, runway, parking etc)

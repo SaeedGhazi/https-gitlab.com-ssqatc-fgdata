@@ -1,3 +1,4 @@
+# WARNING: *.draw files will be deprecated, see: http://wiki.flightgear.org/MapStructure
 var draw_tcas_arrow_above_500 = func(group, lod=0) {
 	group.createChild("path")
 		.moveTo(0,-17)

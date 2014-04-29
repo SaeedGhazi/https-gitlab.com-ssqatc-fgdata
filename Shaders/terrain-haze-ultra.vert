@@ -24,11 +24,11 @@ varying vec3 relPos;
 varying vec2 rawPos;
 varying vec3 worldPos;
 varying vec3 ecViewdir;
-
+varying vec2 grad_dir;
 
 varying float mie_angle;
 varying float steepness;
-varying float grad_dir;
+
 
 
 uniform int colorMode;
@@ -85,7 +85,7 @@ void main()
 	
 	
    steepness = dot(normalize(gl_Normal), vec3 (0.0, 0.0, 1.0));
-   grad_dir = dot(normalize(gl_Normal.xy), vec2 (1.0, 0.0));
+   grad_dir = normalize(gl_Normal.xy);
 
 // this code is copied from default.vert
 

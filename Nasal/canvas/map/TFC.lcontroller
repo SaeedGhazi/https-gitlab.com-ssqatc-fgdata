@@ -1,3 +1,4 @@
+# See: http://wiki.flightgear.org/MapStructure
 # Class things:
 var name = 'TFC';
 var parents = [SymbolLayer.Controller];
@@ -7,6 +8,7 @@ SymbolLayer.add(name, {
 	parents: [SymbolLayer],
 	type: name, # Symbol type
 	df_controller: __self__, # controller to use by default -- this one
+	df_style: { debug: 0 }, # style to use by default
 });
 
 var model_root = props.globals.getNode("/ai/models/");
@@ -15,30 +17,10 @@ var new = func(layer) {
 	var m = {
 		parents: [__self__],
 		layer: layer,
+		map: layer.map,
 		listeners: [],
-		query_range_nm: 25,
+		searchCmd: searchCmd_default,
 	};
-	# Listen to ai model events
-	append(m.listeners, setlistener(
-		model_root.getNode("model-added"), func(n) {
-			#printlog(_MP_dbg_lvl, "Dynamically adding model at "~n.getValue());
-			var node = props.globals.getNode(n.getValue());
-			var name = node.getName();
-			if (name == "aircraft" or name == "multiplayer")
-				if (m.in_range(node.getValue("position/latitude-deg"), node.getValue("position/longitude-deg")))
-					layer.onAdded(TrafficModel.new(node));
-		}
-	));
-	append(m.listeners, setlistener(
-		model_root.getNode("model-removed"), func(n) {
-			#printlog(_MP_dbg_lvl, "Dynamically deleting model at "~n.getValue());
-			var node = props.globals.getNode(n.getValue());
-			var name = node.getName();
-			if (name == "aircraft" or name == "multiplayer")
-				if (m.in_range(node.getValue("position/latitude-deg"), node.getValue("position/longitude-deg")))
-					layer.onRemoved(TrafficModel.new(node));
-		}
-	));
 	layer.searcher._equals = func(l,r) l.equals(r);
 	return m;
 };
@@ -46,19 +28,6 @@ var del = func() {
 	#print(name~".lcontroller.del()");
 	foreach (var l; me.listeners)
 		removelistener(l);
-};
-var in_range = func(lat,lon,myPositionVec=nil,max_dist_m=nil) {
-	if (lat == nil or lon == nil) return 0;
-	var pos = geo.Coord.new();
-	pos.set_latlon(lat,lon);
-	var myPosition = geo.Coord.new();
-	# FIXME: need a Map Controller for this, and all query_range's/get_position's
-	if (myPositionVec == nil)
-		var myPositionVec = me.get_position();
-	myPosition.set_latlon( myPositionVec[0], myPositionVec[1]);
-	if (max_dist_m == nil)
-		var max_dist_m = me.query_range()*NM2M;
-	return (pos.distance_to( myPosition ) <= max_dist_m )
 };
 
 var TrafficModel = {
@@ -72,43 +41,51 @@ var TrafficModel = {
 			node: node,
 			pos: node.getNode("position",1),
 		};
-		if (m.pos == nil)
-			m.latlon = func [nil,nil,nil];
-		#debug.dump(m); # why doesn't this print?
 		return m;
 	},
 	equals: func(other) other.id == me.id,
-	latlon: func() {
+	latlon: func() { # this makes sure to look like a geo.Coord to MapStructure, but will internally use the AI/MP traffic properties instead
 		return [
 			me.pos.getValue("latitude-deg"),
 			me.pos.getValue("longitude-deg"),
 			me.pos.getValue("altitude-ft")
 		];
 	},
+	# these are helper methods related to TCAS handling (TAs/RAs)
+	get_threat_lvl: func() me.getValue("tcas/threat-level"),
+	get_vspd: func() (me.getValue("velocities/vertical-speed-fps") or 0)*60,
+	get_alt:  func() (me.getValue("position/altitude-ft") or 0),
 };
 
-var searchCmd = func {
+
+##
+# dummy/placeholder (will be overridden in ctor and set to the default callback)
+var searchCmd  = func;
+
+var searchCmd_default = func {
 	# TODO: this would be a good candidate for splitting across frames
-	#print("Doing query: "~name);
+	printlog(_MP_dbg_lvl, "Doing query: "~name);
 
 	var result = [];
-	# FIXME: need a Map Controller for this, and all query_range's/get_position's
-	var myPositionVec = me.get_position();
-	var max_dist_m = me.query_range()*NM2M;
+	var models = 0;
 
 	# AI and Multiplayer traffic
-	foreach (var traffic; [model_root.getChildren("aircraft"), model_root.getChildren("multiplayer")]) {
-		foreach(var t; traffic) {
-			if (me.in_range(t.getValue("position/latitude-deg"),
-				            t.getValue("position/longitude-deg"),
-				            myPositionVec,
-				            max_dist_m))
-				append(result, TrafficModel.new(t, nil, me.layer));
+	foreach (var t; model_root.getChildren()) {
+		if (!t.getValue("valid")) continue;
+		var t_id = t.getNode("id");
+		if (t_id == nil or t_id.getValue() == -1) continue;
+		models += 1;
+		var (lat,lon) = (t.getValue("position/latitude-deg"),
+		                 t.getValue("position/longitude-deg"));
+		if (lat == nil or lon == nil) {
+			printlog("alert", "lat/lon was nil for AI node "~t.getPath());
+			continue;
 		}
+		if (me.map.controller.in_range(lat, lon))
+			append(result, TrafficModel.new(t, nil, me.layer));
 	}
 
-	#debug.dump(result);
-	#return [];
+	#print("Found "~size(result)~" TrafficModel's in range out of "~models~" total.");
 	return result;
 };
 

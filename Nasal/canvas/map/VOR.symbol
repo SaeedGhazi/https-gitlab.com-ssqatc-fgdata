@@ -1,3 +1,4 @@
+# See: http://wiki.flightgear.org/MapStructure
 # Class things:
 var name = 'VOR';
 var parents = [DotSym];
@@ -5,28 +6,102 @@ var __self__ = caller(0)[0];
 DotSym.makeinstance( name, __self__ );
 
 var element_type = "group"; # we want a group, becomes "me.element"
-var icon_vor = nil;
+var icon_vor = nil;  # a handle to the cached icon
 var range_vor = nil; # two elements that get drawn when needed
 var radial_vor = nil; # if one is nil, the other has to be nil
+var active = -1;
+
+###
+# this function returns a new function that renders the symbol
+# into a canvas group
+# the signature of the first func should contain all customizable
+# parameters (such as color/width etc)
+#
+# you will typically have one such function for each cacheable symbol 
+# and only call it once during initialization (once for each cached style/variation) 
+# the signature of the 2nd func remains untouched, it's internally used
+#
+# NOTE: callbacks that create symbols for caching MUST render them using a 
+# transparent background !!
+#
+var drawVOR = func(color, width=3) return func(group) {
+
+	# init_calls += 1; # TODO: doing this here is too fragile, this should be done by MapStructure ...
+	#  if( init_calls >= 2) 
+	# 	print("Warning: draw() routine for a cached element has been called more than once, should only happen during reset/reinit");
+
+	# print("drawing vor");
+	var symbol = group.createChild("path")
+		.moveTo(-15,0)
+		.lineTo(-7.5,12.5)
+		.lineTo(7.5,12.5)
+		.lineTo(15,0)
+		.lineTo(7.5,-12.5)
+		.lineTo(-7.5,-12.5)
+		.close()
+		.setStrokeLineWidth(width)
+		.setColor( color );
+
+	return symbol; # make this explicit, not everybody knows Nasal internals inside/out ...
+};
+
+##
+# a vector with pre-created symbols that are cached during initialization
+# this needs to be done for each variation of each symbol, i.e. color/width etc
+# note that scaling should not be done here, likewise for positioning via setGeoPosition()
+# 
+# FIXME: We still need to encode styling information as part of the key/name lookup
+# so that the cache entry's name contains styling info, or different maps/layers may
+# overwrite their symbols
+#
+# icon_vor_cache[0] - inactive symbol
+# icon_vor_cache[1] - active symbol
+var icon_vor_cached = [
+	SymbolCache32x32.add(
+		name: "VOR-INACTIVE",
+		callback: drawVOR( color:[0, 0.6, 0.85], width:3 ),
+		draw_mode: SymbolCache.DRAW_CENTERED
+	),
+	SymbolCache32x32.add(
+		name: "VOR-ACTIVE",
+		callback: drawVOR( color:[0, 1, 0], width:3 ),
+		draw_mode: SymbolCache.DRAW_CENTERED
+	),
+];
+
+##
+# TODO: make this a part of the framework, for use by other layers/symbols etc
+#
+var controller_check = func(layer, controller, arg...) {
+	var ret = call(compile("call(layer.controller."~controller~", arg, layer.controller)", "<test>"), arg, var err=[]);
+
+	if (size(err))
+		if (err[0] == "No such member: "~controller)
+			print("MapStructure Warning: Required controller not found: ", name, ":", controller);
+		else die(err[0]); # rethrow
+
+	return ret; # nil if not found
+}
 
 var draw = func {
 	# Init
-	if (me.icon_vor == nil) {
-		me.icon_vor = me.element.createChild("path")
-			.moveTo(-15,0)
-			.lineTo(-7.5,12.5)
-			.lineTo(7.5,12.5)
-			.lineTo(15,0)
-			.lineTo(7.5,-12.5)
-			.lineTo(-7.5,-12.5)
-			.close()
-			.setStrokeLineWidth(3)
-			.setColor(0,0.6,0.85);
+	if (0 and me.model.id == "SAC") # hack to test isActive() around KSMF
+		setprop("instrumentation/nav[0]/frequencies/selected-mhz", me.model.frequency/100);
+	var active = controller_check(me.layer, 'isActive', me.model);
+	#print(me.model.id,"/", me.model.frequency/100, " isActive:", active);
+	if (active != me.active) {
+		#print("VOR.symbol: active != me.active: del/render event triggered");
+		if (me.icon_vor != nil) me.icon_vor.del();
+		# look up the correct symbol from the cache and render it into the group as a raster image
+		me.icon_vor = icon_vor_cached[active or 0].render(me.element);
+		me.active = active; # update me.active flag
 	}
-	# Update
-	if (me.controller.isActive(me.model)) {
-		if (me.range_vor == nil) {
-			var rangeNm = me.controller.query_range();
+	# Update (also handles non-cached stuff, such as text labels or animations)
+	# TODO: we can use a func generator to pre-create the callback/data structure for this
+	if (active) {
+		if (me.range_vor == nil) { 
+			# initialize me.range and me.radial_vor
+			var rangeNm = me.layer.map.getRange();
 			# print("VOR is tuned:", me.model.id);
 			var radius = (me.model.range_nm/rangeNm)*345;
 			me.range_vor = me.element.createChild("path")
@@ -37,7 +112,7 @@ var draw = func {
 				.setStrokeDashArray([5, 15, 5, 15, 5])
 				.setColor(0,1,0);
 
-			var course = me.controller.get_tuned_course(me.model.frequency/100);
+			var course = me.layer.map.controller.get_tuned_course(me.model.frequency/100);
 			me.radial_vor = me.element.createChild("path")
 				.moveTo(0,-radius)
 				.vert(2*radius)
@@ -45,13 +120,14 @@ var draw = func {
 				.setStrokeDashArray([15, 5, 15, 5, 15])
 				.setColor(0,1,0)
 				.setRotation(course*D2R);
-			me.icon_vor.setColor(0,1,0);
 		}
 		me.range_vor.show();
 		me.radial_vor.show();
-	} elsif (me.range_vor != nil) {
-		me.range_vor.hide();
-		me.radial_vor.hide();
+	} else { # inactive station (not tuned)
+		if (me.range_vor != nil) {
+			me.range_vor.hide();
+			me.radial_vor.hide();
+		}
 	}
 };
 

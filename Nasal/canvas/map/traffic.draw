@@ -1,3 +1,4 @@
+# WARNING: *.draw files will be deprecated, see: http://wiki.flightgear.org/MapStructure
 var draw_traffic = func(group, traffic, lod=0)
 {
 		var a = traffic;

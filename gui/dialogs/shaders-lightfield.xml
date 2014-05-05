@@ -124,6 +124,32 @@
 		</empty>
 	</group>
 
+	<group>
+		<layout>hbox</layout>
+		<halign>right</halign>
+
+		<text>
+			<halign>left</halign>
+			<label>Agriculture</label>
+		</text>
+		<slider>
+			<name>agriculture</name>
+			<min>0.0</min>
+			<max>1.0</max>
+			<step>1.0</step>
+			<fraction>0.17</fraction>
+			<live>true</live>
+			<property>/sim/rendering/shaders/crop</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>agriculture</object-name>
+			</binding>
+		</slider>
+		<empty>
+			<pref-width>55</pref-width>
+		</empty>
+	</group>
+
 
 	<group>
 		<layout>hbox</layout>

@@ -2630,11 +2630,15 @@
   </material>
 
   <material include="Materials/regions/european.xml">
-    <effect>Effects/crop</effect>
+    <effect>Effects/agriculture</effect>
     <name>MixedCropPastureCover</name>
     <name>MixedCrop</name>
     <name>ComplexCrop</name>
     <texture>Terrain/irrcrop-europe-autumn.png</texture>
+    <parameters>
+      <rotation_flag>1</rotation_flag>
+      <rotation_scale>2000.0</rotation_scale>
+    </parameters>
     <object-mask>Terrain/irrcrop-europe.mask.png</object-mask>
     <xsize>2000</xsize>
     <ysize>2000</ysize>

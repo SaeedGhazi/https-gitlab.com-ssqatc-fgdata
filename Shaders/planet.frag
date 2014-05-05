@@ -10,6 +10,7 @@ varying vec3 VTangent;
 
 uniform float visibility;
 uniform bool use_clouds;
+uniform bool use_cloud_shadows;
 uniform sampler2D texture;
 uniform sampler2D shadowtex;
 
@@ -44,11 +45,11 @@ void main()
 	float xOffset = -0.005 * dot(normalize(lightDir), normalize(VTangent));
 	float yOffset = -0.005 * dot(normalize(lightDir), normalize(VBinormal));
 	
-     if (use_clouds)
+     	if ((use_cloud_shadows)&&(use_clouds))
 		{shadowTexel = texture2D(shadowtex, vec2(gl_TexCoord[0].s-xOffset, gl_TexCoord[0].t-yOffset));}
 	else
-		{shadowTexel = vec4 (0.0,0.0,0.0,0.0);}
-	
+		{shadowTexel = vec4 (0.0,0.0,0.0,0.0);}	
+ 
 	texel = texture2D(texture, gl_TexCoord[0].st);
 	
     vec3 light_specular = vec3 (1.0, 1.0, 1.0);
@@ -61,7 +62,7 @@ void main()
     intensity = length(light_specular);
     light_specular = mix(dawn.rgb, light_specular, smoothstep(0.0, 0.2, NdotL));
 
-    float specular_enhancement = 4.0 * (1.0 -smoothstep(0.0, 0.3,length(texel.rgb - vec3 (0.007,0.019, 0.078))));
+    float specular_enhancement = 4.0 * (1.0 -smoothstep(0.0, 0.1,length(texel.rgb - vec3 (0.007,0.019, 0.078))));
 
     if (NdotL > 0.0) {
         color += diffuse_term * NdotL * (1.0-shadowTexel.a);
@@ -84,13 +85,11 @@ void main()
 	float angle = dot(normalize(ecViewDir), normalize(normal));
 	float distance_through_atmosphere = 10.0 / ((angle)+0.001);
 	
-	vec4 fogColor = vec4 (0.83,0.9,1.0,1.0) * clamp(length(diffuse_term.rgb * max(NdotL,0.0)),0.0,1.0);
+	vec4 fogColor = vec4 (0.83,0.9,1.0,1.0) * clamp(length(diffuse_term.rgb * clamp(NdotL,0.01, 0.99)),0.0,1.0);
 	//float visibility = 80.0;
 	float fogFactor = exp(-distance_through_atmosphere/(visibility/1000.0));
 	
 	fragColor = mix(fogColor, fragColor, fogFactor);
 	
-    //fragColor.rgb = fog_Func(fragColor.rgb, fogType);
     gl_FragColor = fragColor;
-    //gl_FragColor = (0.5,0.5,0.5,1.0);
 }

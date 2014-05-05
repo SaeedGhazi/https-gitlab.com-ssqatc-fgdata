@@ -21,6 +21,7 @@
 		</material>
 		<visibility><use>/environment/visibility-m</use></visibility>
 		<use-clouds><use>/earthview/cloudsphere-flag</use></use-clouds>
+		<use-cloud-shadows><use>/earthview/cloud-shadow-flag</use></use-cloud-shadows>
 	</parameters>
 	<generate>
 		<tangent type="int">6</tangent>
@@ -29,8 +30,6 @@
  
 	<technique n="10">
 		<predicate>
-			<and>
-				<property>/sim/rendering/shaders/generic</property>
 				<or>
 					<less-equal>
 						<value type="float">2.0</value>
@@ -43,7 +42,6 @@
 						<extension-supported>GL_ARB_fragment_shader</extension-supported>
 					</and>
 				</or>
-			</and>
 		</predicate>
 		<pass>
 			<lighting>true</lighting>
@@ -139,6 +137,13 @@
 				<type>bool</type>
 				<value>
 					<use>use-clouds</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>use_cloud_shadows</name>
+				<type>bool</type>
+				<value>
+					<use>use-cloud-shadows</use>
 				</value>
 			</uniform>
 		</pass>

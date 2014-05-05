@@ -4,7 +4,7 @@
 
 var start = func() {
 
-if (earthview_running_flag == 1) {return;}
+if (earthview_running_flag ==1) {return;}
 
 earthview_running_flag = 1;
 
@@ -13,6 +13,20 @@ var lon = getprop("/position/longitude-deg");
 
 earth_model.node = earthview.place_earth_model("Models/Astro/earth.xml",lat, lon, 0.0, 0.0, 0.0, 0.0);
 cloudsphere_model.node = earthview.place_earth_model("Models/Astro/cloudsphere.xml",lat, lon, 0.0, 0.0, 0.0, 0.0);
+
+# set Basic Weather off
+props.globals.getNode("/environment/config/enabled").setBoolValue(0);
+props.globals.getNode("/environment/params/metar-updates-environment").setBoolValue(0);
+
+# set some reasonable defaults
+
+setprop("/environment/visibility-m", 80000.0);
+setprop("/sim/rendering/mie", 0.0);
+setprop("/sim/rendering/rayleigh", 0.00002);
+setprop("/sim/rendering/dome-density", 1.0);
+
+control_loop();
+
 }
 
 var stop = func () {
@@ -20,6 +34,7 @@ var stop = func () {
 earth_model.node.remove();
 cloudsphere_model.node.remove();
 setprop("/earthview/control_loop_flag",0);
+
 earthview_running_flag = 0;
 }
 
@@ -70,7 +85,7 @@ model.getNode("load", 1).remove();
 setprop("/earthview/heading-deg",90);
 setprop("/earthview/control_loop_flag",1);
 
-control_loop();
+
 
 return model;
 }
@@ -96,14 +111,50 @@ setprop("/earthview/longitude-deg", lon);
 setprop("/earthview/roll-deg", -(90-lat));
 setprop("/earthview/yaw-deg", -lon);
 
+# now set scattering paramaters
+
+if (getprop("/earthview/mrd-flag") == 1)
+	{
+	var rayleigh = 0.0002;
+	var mie = 0.001;
+	var density = 1.0;
+	
+	if (altitude1 < 300000.0)
+		{
+		setprop("/sim/rendering/rayleigh",rayleigh);
+		setprop("/sim/rendering/mie",mie);
+		setprop("/sim/rendering/dome-density",density);
+		}
+	else if (altitude1 < 650000.0)
+		{
+		rayleigh = rayleigh - 0.00018 * (altitude1-300000.0)/350000.0;
+		mie = mie - 0.001 * (altitude1-300000.0)/350000.0;
+		density = 1.0;
+		setprop("/sim/rendering/rayleigh",rayleigh);
+		setprop("/sim/rendering/mie",mie);
+		setprop("/sim/rendering/dome-density",density);
+		}
+	else
+		{
+		rayleigh = 0.00002;
+		mie = 0.0;
+		density = 1.0;
+		setprop("/sim/rendering/rayleigh",rayleigh);
+		setprop("/sim/rendering/mie",mie);
+		setprop("/sim/rendering/dome-density",density);
+		}
+	
+	}
 
 
 if (getprop("/earthview/control_loop_flag") ==1) {settimer( func {control_loop(); },0);}
 }
 
-var earthview_running_flag = 0;
+
 var ft_to_m = 0.30480;
 var m_to_ft = 1.0/ft_to_m;
 var earth_model = {};
 var cloudsphere_model = {};
+var earthview_running_flag = 0;
+
 

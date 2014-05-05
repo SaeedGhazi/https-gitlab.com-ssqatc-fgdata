@@ -63,5 +63,4 @@ void main()
     fragColor = color * texel + specular;
 	
     gl_FragColor = fragColor;
-    //gl_FragColor = (0.5,0.5,0.5,1.0);
 }

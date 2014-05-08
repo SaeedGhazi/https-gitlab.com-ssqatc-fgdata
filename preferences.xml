@@ -331,6 +331,7 @@ Started September 2000 by David Megginson, david@megginson.com
 					<speed type="double">1.0</speed>
 					<preamble type="string"></preamble>
 					<festival type="bool">true</festival>
+					<htsvoice type="string">cmu_us_arctic_slt.htsvoice</htsvoice>
 				</voice>
 				<voice>
 					<desc>Pilot</desc>
@@ -340,6 +341,7 @@ Started September 2000 by David Megginson, david@megginson.com
 					<speed type="double">1.0</speed>
 					<preamble type="string">(voice_us2_mbrola)</preamble>
 					<festival type="bool">true</festival>
+					<htsvoice type="string">cstr_uk_female-1.0.htsvoice</htsvoice>
 				</voice>
 				<voice>
 					<desc>Copilot/Instructor</desc>
@@ -349,6 +351,7 @@ Started September 2000 by David Megginson, david@megginson.com
 					<speed type="double">1.0</speed>
 					<preamble type="string">(voice_en1_mbrola)</preamble>
 					<festival type="bool">true</festival>
+					<htsvoice type="string">cmu_us_arctic_slt.htsvoice</htsvoice>
 				</voice>
 				<voice>
 					<desc>AI-Plane</desc>
@@ -358,6 +361,7 @@ Started September 2000 by David Megginson, david@megginson.com
 					<speed type="double">1.0</speed>
 					<preamble type="string">(voice_don_diphone)</preamble>
 					<festival type="bool">true</festival>
+					<htsvoice type="string">cmu_us_arctic_slt.htsvoice</htsvoice>
 				</voice>
 			</voices>
 			<aimodels>

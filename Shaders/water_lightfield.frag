@@ -511,12 +511,21 @@ void main(void)
 
 	
 
-
-       specular_light = gl_Color.rgb * earthShade;
+        // primary reflection of the sun
+        specular_light = gl_Color.rgb * earthShade;
 
 	
 	vec3 specular_color = vec3(specular_light)
 		* pow(max(0.0, dot(N, Hv)), water_shininess) * 6.0;
+
+	// secondary reflection of sky irradiance
+
+	vec3 ER = E - 2.0 * N * dot(E,N);
+	float ctrefl = dot(vec3(0.0,0.0,1.0), -normalize(ER));
+	float fresnel = -0.5 + 8.0 * (1.0-smoothstep(0.0,0.4, dot(E,N)));
+	specular_color += (ctrefl*ctrefl) * fresnel*  specular_light.rgb;
+
+
 	vec4 specular = vec4(specular_color, 0.5);
 
 	specular = specular * saturation * 0.3  * earthShade  ;

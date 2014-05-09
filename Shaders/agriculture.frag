@@ -44,6 +44,8 @@ uniform float overlay_fraction;
 uniform float overlay_scale;
 uniform float rotation_scale;
 uniform float distortion_factor;
+uniform float uv_xoffset;
+uniform float uv_yoffset;
 
 uniform float dust_resistance;
 uniform float WindE;
@@ -266,6 +268,7 @@ float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),
 		}
 	else
 		{stprime = gl_TexCoord[0].st;}
+	stprime+= vec2 (uv_xoffset, uv_yoffset);
 	texel = texture2D(texture, stprime);
     float local_autumn_factor = texel.a;
 	grain_texel = texture2D(grain_texture, gl_TexCoord[0].st * 25.0);

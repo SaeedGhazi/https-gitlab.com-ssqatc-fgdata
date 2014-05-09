@@ -70,11 +70,13 @@
     </render-bin>
     <material-id>0</material-id>
     <grain_strength>0.5</grain_strength>
-	<overlay_fraction>0.5</overlay_fraction>
-	<overlay_scale>1000.0</overlay_scale>
-	<rotation_flag>0</rotation_flag>
-	<rotation_scale>2000.0</rotation_scale>
-	<distortion_factor>0.3</distortion_factor>
+    <overlay_fraction>0.5</overlay_fraction>
+    <overlay_scale>1000.0</overlay_scale>
+    <rotation_flag>0</rotation_flag> 
+    <rotation_scale>2000.0</rotation_scale>
+    <distortion_factor>0.3</distortion_factor>
+    <uv_xoffset>0.0</uv_xoffset>
+    <uv_yoffset>0.0</uv_yoffset>
     <intrinsic_wetness>0.0</intrinsic_wetness>
     <dust_resistance>1.0</dust_resistance>
     <visibility><use>/environment/ground-visibility-m</use></visibility>
@@ -250,27 +252,37 @@
         <type>float</type>
         <value><use>intrinsic_wetness</use></value>
       </uniform>
-	  <uniform>
-	    <name>overlay_fraction</name>
-		<type>float</type>
-		<value><use>overlay_fraction</use></value>
-	  </uniform>
-	  <uniform>
-	    <name>overlay_scale</name>
-		<type>float</type>
-		<value><use>overlay_scale</use></value>
-	  </uniform>
-	  <uniform>
-	    <name>rotation_scale</name>
-		<type>float</type>
-		<value><use>rotation_scale</use></value>
-	  </uniform>
-	  <uniform>
-	    <name>distortion_factor</name>
-		<type>float</type>
-		<value><use>distortion_factor</use></value>
-	  </uniform>
-	  <uniform>
+      <uniform>
+	<name>overlay_fraction</name>
+	<type>float</type>
+	<value><use>overlay_fraction</use></value>
+      </uniform>
+      <uniform>
+	<name>overlay_scale</name>
+	<type>float</type>
+	<value><use>overlay_scale</use></value>
+      </uniform>
+      <uniform>
+	<name>rotation_scale</name>
+	<type>float</type>
+	<value><use>rotation_scale</use></value>
+      </uniform>
+      <uniform>
+	<name>distortion_factor</name>
+	<type>float</type>
+	<value><use>distortion_factor</use></value>
+      </uniform>
+    <uniform>
+	<name>uv_xoffset</name>
+	<type>float</type>
+	<value><use>uv_xoffset</use></value>
+      </uniform>
+      <uniform>
+	<name>uv_yoffset</name>
+	<type>float</type>
+	<value><use>uv_yoffset</use></value>
+      </uniform>
+      <uniform>
         <name>dust_resistance</name>
         <type>float</type>
         <value><use>dust_resistance</use></value>

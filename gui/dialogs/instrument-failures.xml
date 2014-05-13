@@ -80,7 +80,7 @@
     <checkbox>
       <row>1</row>
       <col>1</col>
-      <property>/instrumentation/nav[0]/cdi/serviceable</property>
+      <property>/sim/failure-manager/instrumentation/nav[0]/cdi/serviceable</property>
     </checkbox>
 
     <input>
@@ -101,7 +101,7 @@
     <checkbox>
       <row>1</row>
       <col>5</col>
-      <property>/instrumentation/nav[1]/cdi/serviceable</property>
+      <property>/sim/failure-manager/instrumentation/nav[1]/cdi/serviceable</property>
     </checkbox>
 
     <input>
@@ -122,7 +122,7 @@
     <checkbox>
       <row>2</row>
       <col>1</col>
-      <property>/instrumentation/nav[0]/gs/serviceable</property>
+      <property>/sim/failure-manager/instrumentation/nav[0]/gs/serviceable</property>
     </checkbox>
 
     <input>
@@ -141,7 +141,7 @@
     <checkbox>
       <row>2</row>
       <col>5</col>
-      <property>/instrumentation/nav[1]/gs/serviceable</property>
+      <property>/sim/failure-manager/instrumentation/nav[1]/gs/serviceable</property>
     </checkbox>
 
     <input>
@@ -160,7 +160,7 @@
     <checkbox>
       <row>3</row>
       <col>1</col>
-      <property>/instrumentation/dme/serviceable</property>
+      <property>/sim/failure-manager/instrumentation/dme/serviceable</property>
     </checkbox>
 
     <input>
@@ -179,7 +179,7 @@
     <checkbox>
       <row>3</row>
       <col>5</col>
-      <property>/instrumentation/adf/serviceable</property>
+      <property>/sim/failure-manager/instrumentation/adf/serviceable</property>
     </checkbox>
 
     <input>
@@ -198,7 +198,7 @@
     <checkbox>
       <row>4</row>
       <col>1</col>
-      <property>/instrumentation/airspeed-indicator/serviceable</property>
+      <property>/sim/failure-manager/instrumentation/airspeed-indicator/serviceable</property>
     </checkbox>
 
     <input>
@@ -217,7 +217,7 @@
     <checkbox>
       <row>4</row>
       <col>5</col>
-      <property>/instrumentation/attitude-indicator/serviceable</property>
+      <property>/sim/failure-manager/instrumentation/attitude-indicator/serviceable</property>
     </checkbox>
 
     <input>
@@ -236,7 +236,7 @@
     <checkbox>
       <row>5</row>
       <col>1</col>
-      <property>/instrumentation/altimeter/serviceable</property>
+      <property>/sim/failure-manager/instrumentation/altimeter/serviceable</property>
     </checkbox>
 
     <input>
@@ -255,7 +255,7 @@
     <checkbox>
       <row>5</row>
       <col>5</col>
-      <property>/instrumentation/turn-indicator/serviceable</property>
+      <property>/sim/failure-manager/instrumentation/turn-indicator/serviceable</property>
     </checkbox>
 
     <input>
@@ -274,7 +274,7 @@
     <checkbox>
       <row>6</row>
       <col>1</col>
-      <property>/instrumentation/slip-skid-ball/serviceable</property>
+      <property>/sim/failure-manager/instrumentation/slip-skid-ball/serviceable</property>
     </checkbox>
 
     <input>
@@ -293,7 +293,7 @@
     <checkbox>
       <row>6</row>
       <col>5</col>
-      <property>/instrumentation/heading-indicator/serviceable</property>
+      <property>/sim/failure-manager/instrumentation/heading-indicator/serviceable</property>
     </checkbox>
 
     <input>
@@ -312,7 +312,7 @@
     <checkbox>
       <row>7</row>
       <col>1</col>
-      <property>/instrumentation/vertical-speed-indicator/serviceable</property>
+      <property>/sim/failure-manager/instrumentation/vertical-speed-indicator/serviceable</property>
     </checkbox>
 
     <input>
@@ -331,7 +331,7 @@
     <checkbox>
       <row>7</row>
       <col>5</col>
-      <property>/instrumentation/magnetic-compass/serviceable</property>
+      <property>/sim/failure-manager/instrumentation/magnetic-compass/serviceable</property>
     </checkbox>
 
     <input>
@@ -380,7 +380,7 @@
     </button>
 
     <button>
-      <legend>Reset</legend>
+      <legend>Refresh</legend>
       <equal>true</equal>
       <binding>
         <command>dialog-update</command>

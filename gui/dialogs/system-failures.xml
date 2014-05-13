@@ -30,40 +30,44 @@
     i += 1;
 
     foreach (var e; engines.getChildren("engine")) {
-        if (((e.getChild("starter") != nil) and (e.getChild("starter") != "")) or
-            ((e.getChild("running") != nil) and (e.getChild("running") != ""))   ) {
-            row = row + 1;
+        var starter = e.getChild("starter");
+        var running = e.getChild("running");
 
-            # Set up the label
-            target = group.getNode("text[" ~ i ~ "]", 1);
-            props.copy(group.getNode("text-template"), target);
-            target.getNode("row").setValue(row);
+        (starter != nil and starter != "" and starter.getType() != "NONE")
+        or (running != nil and running != "" and running.getType() != "NONE")
+        or continue;
 
-            if (size(engines.getChildren("engine")) == 1) {
-                target.getNode("label").setValue("Engine");
-            } else {
-                # Engines are indexed from 1 in the GUI.
-                target.getNode("label").setValue("Engine " ~ (engine + 1));
-            }
+        row = row + 1;
 
-            # Now the checkbox
-            target = group.getNode("checkbox[" ~ i ~ "]", 1);
-            props.copy(group.getChild("checkbox-template"), target);
-            target.getNode("row").setValue(row);
+        # Set up the label
+        target = group.getNode("text[" ~ i ~ "]", 1);
+        props.copy(group.getNode("text-template"), target);
+        target.getNode("row").setValue(row);
 
-            var failure = "/sim/failure-manager/engines/engine[" ~ engine ~ "]/serviceable";
-            target.getNode("property").setValue(failure);
-
-            # Finally the MTBF
-            target = group.getNode("input[" ~ i ~ "]", 1);
-            props.copy(group.getChild("input-template"), target);
-            target.getNode("row").setValue(row);
-            i += 1;
-
-            var mtbf = "/sim/failure-manager/engines/engine[" ~ engine ~ "]/mtbf";
-            target.getNode("property").setValue(mtbf);
-            engine += 1;
+        if (size(engines.getChildren("engine")) == 1) {
+            target.getNode("label").setValue("Engine");
+        } else {
+            # Engines are indexed from 1 in the GUI.
+            target.getNode("label").setValue("Engine " ~ (engine + 1));
         }
+
+        # Now the checkbox
+        target = group.getNode("checkbox[" ~ i ~ "]", 1);
+        props.copy(group.getChild("checkbox-template"), target);
+        target.getNode("row").setValue(row);
+
+        var failure = "/sim/failure-manager/engines/engine[" ~ engine ~ "]/serviceable";
+        target.getNode("property").setValue(failure);
+
+        # Finally the MTBF
+        target = group.getNode("input[" ~ i ~ "]", 1);
+        props.copy(group.getChild("input-template"), target);
+        target.getNode("row").setValue(row);
+        i += 1;
+
+        var mtbf = "/sim/failure-manager/engines/engine[" ~ engine ~ "]/mtbf";
+        target.getNode("property").setValue(mtbf);
+        engine += 1;
     }
 
 
@@ -132,7 +136,7 @@
       <checkbox>
         <row>1</row>
         <col>1</col>
-        <property>/systems/vacuum/serviceable</property>
+        <property>/sim/failure-manager/systems/vacuum/serviceable</property>
       </checkbox>
 
       <input>
@@ -151,7 +155,7 @@
       <checkbox>
         <row>2</row>
         <col>1</col>
-        <property>/systems/static/serviceable</property>
+        <property>/sim/failure-manager/systems/static/serviceable</property>
       </checkbox>
 
       <input>
@@ -170,7 +174,7 @@
       <checkbox>
         <row>3</row>
         <col>1</col>
-        <property>/systems/pitot/serviceable</property>
+        <property>/sim/failure-manager/systems/pitot/serviceable</property>
       </checkbox>
 
       <input>
@@ -189,7 +193,7 @@
       <checkbox>
         <row>4</row>
         <col>1</col>
-        <property>/systems/electrical/serviceable</property>
+        <property>/sim/failure-manager/systems/electrical/serviceable</property>
       </checkbox>
 
       <input>
@@ -287,13 +291,13 @@
       <checkbox>
         <row>1</row>
         <col>1</col>
-        <property>/gear/serviceable</property>
+        <property>/sim/failure-manager/controls/gear/serviceable</property>
       </checkbox>
 
       <input>
         <row>1</row>
         <col>2</col>
-        <property>/sim/failure-manager/controls/gear/gear-down/mcbf</property>
+        <property>/sim/failure-manager/controls/gear/mcbf</property>
       </input>
 
       <text>
@@ -402,7 +406,7 @@
     </button>
 
     <button>
-      <legend>Reset</legend>
+      <legend>Refresh</legend>
       <equal>true</equal>
       <binding>
         <command>dialog-update</command>

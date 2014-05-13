@@ -47,8 +47,6 @@ var include = func(file) {
     if (contains(ns, module))
         return;
 
-    ns[module] = "included";
-
     var code = call(compile, [readfile(path), path], var err = []);
     if (size(err)) {
         if (find("Parse error:", err[0]) < 0)
@@ -57,6 +55,7 @@ var include = func(file) {
             die(sprintf("%s\n  in included file: %s", err[0], path));
     }
 
+    ns[module] = "included";
     call(bind(code, ns, fn), [], nil, ns);
 }
 
@@ -425,4 +424,3 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
         }
     })();
 });
-

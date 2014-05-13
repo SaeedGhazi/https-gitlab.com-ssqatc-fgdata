@@ -28,6 +28,15 @@ var L2GAL = 1 / GAL2L;
 var __ = {};
 
 ##
+# Aborts execution if <condition> evaluates to false.
+# Prints an optional message if present, or just "assertion failed!"
+#
+var assert = func (condition, message=nil) {
+	message != nil or (message = "assertion failed!");
+	condition or die(message);
+}
+
+##
 # Returns true if the first object is an instance of the second
 # (class) object.  Example: isa(someObject, props.Node)
 #
@@ -180,4 +189,3 @@ settimer(func {
         if(size(file) > 4 and substr(file, -4) == ".nas")
             io.load_nasal(path ~ "/" ~ file, substr(file, 0, size(file) - 4));
 }, 0);
-

@@ -10,9 +10,11 @@
 // * VoronoiNoise2D(in vec2 coord, in float wavelength, in float xrand, in float yrand)
 //   is a function mapping the terrain into random domains, based on Voronoi tiling of a regular grid
 //   distorted with xrand and yrand
-// * slopeLines2D(in vec2 coord, in vec2 gradDir, in float wavelength, in float steepness)
+// * SlopeLines2D(in vec2 coord, in vec2 gradDir, in float wavelength, in float steepness)
 //   computes a semi-random set of lines along the direction of steepest descent, allowing to
 //   simulate e.g. water erosion patterns
+// * Strata3D(in vec3 coord, in float wavelength, in float variation)
+//   computers a vertically stratified random pattern, appropriate e.g. for rock textures 
 
 // Thorsten Renk 2014
 
@@ -218,7 +220,35 @@ float slopeLines2D(in float x, in float y, in float sx, in float sy, in float st
 }
 
 
-float slopeLines2D(in vec2 coord, in vec2 gradDir, in float wavelength, in float steepness)
+float SlopeLines2D(in vec2 coord, in vec2 gradDir, in float wavelength, in float steepness)
 {
 return slopeLines2D(coord.x/wavelength, coord.y/wavelength, gradDir.x, gradDir.y, steepness);
+}
+
+
+float strata3D(in float x, in float y, in float z, in float variation)
+{
+	float integer_x    = x - fract(x);
+    	float fractional_x = x - integer_x;
+
+    	float integer_y    = y - fract(y);
+    	float fractional_y = y - integer_y;
+	
+	float integer_z = z - fract(z);
+	float fractional_z = z - integer_z;
+	
+	float rand_value_low = rand3D(vec3(0.0, 0.0, integer_z));
+	float rand_value_high = rand3D(vec3(0.0, 0.0, integer_z+1));
+	
+	float rand_var = 0.5 - variation + 2.0 * variation * rand3D(vec3(integer_x, integer_y, integer_z));
+	
+	
+	return (1.0 - smoothstep(rand_var -0.15, rand_var + 0.15,  fract(z))) * rand_value_low +  smoothstep(rand_var-0.15, rand_var + 0.15, fract(z)) * rand_value_high;
+	
+}	
+
+
+float Strata3D(in vec3 coord, in float wavelength, in float variation)
+{
+return strata3D(coord.x/wavelength, coord.y/wavelength, coord.z/wavelength, variation);
 }

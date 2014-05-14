@@ -57,6 +57,7 @@ uniform int quality_level;
 uniform int tquality_level;
 uniform int wind_effects;
 uniform int cloud_shadow_flag;
+uniform int rock_strata;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -70,8 +71,8 @@ float shadow_func (in float x, in float y, in float noise, in float dist);
 float DotNoise2D(in vec2 coord, in float wavelength, in float fractionalMaxDotSize, in float dot_density);
 float Noise2D(in vec2 coord, in float wavelength);
 float Noise3D(in vec3 coord, in float wavelength);
-float slopeLines2D(in vec2 coord, in vec2 gradDir, in float wavelength, in float steepness);
-
+float SlopeLines2D(in vec2 coord, in vec2 gradDir, in float wavelength, in float steepness);
+float Strata3D(in vec3 coord, in float wavelength, in float variation);
 
 
 
@@ -237,8 +238,8 @@ float dotnoisegrad_10m;
 
 // slope noise
 
-float slopenoise_50m = slopeLines2D(rawPos, grad_dir, 50.0, steepness);
-float slopenoise_100m = slopeLines2D(rawPos, grad_dir, 100.0, steepness);
+float slopenoise_50m = SlopeLines2D(rawPos, grad_dir, 50.0, steepness);
+float slopenoise_100m = SlopeLines2D(rawPos, grad_dir, 100.0, steepness);
 
 float snownoise_25m = mix(noise_25m, slopenoise_50m, clamp(3.0*(1.0-steepness),0.0,1.0));
 float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),0.0,1.0));
@@ -347,6 +348,21 @@ float mix_factor;
 		{
 		texel = mix(texel, gradient_texel, 1.0 - smoothstep(0.75,0.8,abs(steepness)+ 0.00002* msl_altitude + 0.05 * (noise_50m - 0.5)));
 		local_autumn_factor = texel.a;
+		}
+
+
+	// strata noise
+
+	float stratnoise_50m;
+	float stratnoise_10m;
+	
+	if (rock_strata==1)
+		{
+		stratnoise_50m = Strata3D(vec3 (rawPos.x, rawPos.y, msl_altitude), 50.0, 0.2);
+		stratnoise_10m = Strata3D(vec3 (rawPos.x, rawPos.y, msl_altitude), 10.0, 0.2);
+		stratnoise_50m = mix(stratnoise_50m, 1.0, smoothstep(0.8,0.9, steepness));
+		stratnoise_10m = mix(stratnoise_10m, 1.0, smoothstep(0.8,0.9, steepness));
+		texel *= (0.4 + 0.4 * stratnoise_50m + 0.2 * stratnoise_10m);
 		}
    
    // the dot vegetation texture overlay

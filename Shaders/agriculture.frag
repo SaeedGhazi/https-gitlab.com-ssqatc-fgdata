@@ -70,7 +70,7 @@ float shadow_func (in float x, in float y, in float noise, in float dist);
 float Noise2D(in vec2 coord, in float wavelength);
 float Noise3D(in vec3 coord, in float wavelength);
 float VoronoiNoise2D(in vec2 coord, in float wavelength, in float xrand, in float yrand);	
-float slopeLines2D(in vec2 coord, in vec2 gradDir, in float wavelength, in float steepness);
+float SlopeLines2D(in vec2 coord, in vec2 gradDir, in float wavelength, in float steepness);
 
 
 
@@ -235,8 +235,8 @@ float vnoise_rotation = VoronoiNoise2D(rawPos.xy, rotation_scale, distortion_fac
 
 // slope noise
 
-float slopenoise_50m = slopeLines2D(rawPos, grad_dir, 50.0, steepness);
-float slopenoise_100m = slopeLines2D(rawPos, grad_dir, 100.0, steepness);
+float slopenoise_50m = SlopeLines2D(rawPos, grad_dir, 50.0, steepness);
+float slopenoise_100m = SlopeLines2D(rawPos, grad_dir, 100.0, steepness);
 
 float snownoise_25m = mix(noise_25m, slopenoise_50m, clamp(3.0*(1.0-steepness),0.0,1.0));
 float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),0.0,1.0));

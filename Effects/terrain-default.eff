@@ -92,6 +92,7 @@
     <dot_density>1.0</dot_density>
     <dot_size>1.0</dot_size>
     <dust_resistance>1.0</dust_resistance>
+    <rock_strata>0</rock_strata>
     <visibility><use>/environment/ground-visibility-m</use></visibility>
     <avisibility><use>/environment/visibility-m</use></avisibility>
     <lthickness><use>/environment/ground-haze-thickness-m</use></lthickness>
@@ -657,6 +658,11 @@
         <name>cloud_shadow_flag</name>
         <type>int</type>
         <value><use>cloud_shadow_flag</use></value>
+      </uniform>
+      <uniform>
+        <name>rock_strata</name>
+        <type>int</type>
+        <value><use>rock_strata</use></value>
       </uniform>
       <uniform>
         <name>texture</name>

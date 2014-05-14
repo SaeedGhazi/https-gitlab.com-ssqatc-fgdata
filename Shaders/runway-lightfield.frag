@@ -214,12 +214,7 @@ float noise_2000m = Noise2D(rawPos.xy, 2000.0);
     float snow_alpha;
 
 
-        
-
-    //float view_angle = abs(dot(normal, normalize(ecViewdir)));
-
-    //if ((quality_level > 3)&&(relPos.z + eye_alt +500.0 > snowlevel))
-	if (quality_level > 3)
+    if (quality_level > 3)
 	{
 	float sfactor;
 	noise_01m = Noise2D(rawPos.xy,0.1);
@@ -280,28 +275,32 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
 // light computations
 
 
-    vec4 light_specular = gl_LightSource[0].specular;
+    eShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt) + 0.1;
+    vec4 light_specular = gl_LightSource[0].specular * eShade;
 
     // If gl_Color.a == 0, this is a back-facing polygon and the
     // normal should be reversed.
     n = normal;
     n = normalize(n);
 
+    float fresnel;
     NdotL = dot(n, lightDir);
     
 	if (quality_level > 4)
 		{
 		NdotL = NdotL + (3.0 * N.r + 0.1 * (noise_01m-0.5))* (1.0 - water_factor) ;
 		}
-    if (NdotL > 0.0) {
+    if (NdotL > 0.0) 
+	{
 	if (cloud_shadow_flag == 1) 
 		{NdotL = NdotL * shadow_func(relPos.x, relPos.y, 1.0, dist);}
         color += diffuse_term * NdotL;
         NdotHV = max(dot(n, halfVector), 0.0);
-            specular.rgb = ((gl_FrontMaterial.specular.rgb + (water_factor * vec3 (1.0, 1.0, 1.0)))
+	fresnel = 1.0 + 5.0 * (1.0-smoothstep(0.0,0.2, dot(normalize(ecViewdir),n)));
+        specular.rgb = ((vec3 (0.2,0.2,0.2) * fresnel + (water_factor * vec3 (1.0, 1.0, 1.0)))
                             * light_specular.rgb
-                            * pow(NdotHV, gl_FrontMaterial.shininess + (20.0 * water_factor)));
-    }
+                            * pow(NdotHV, max(4.0, (20.0 * water_factor))));
+    	}
     color.a = 1.0;//diffuse_term.a;
     // This shouldn't be necessary, but our lighting becomes very
     // saturated. Clamping the color before modulating by the texture
@@ -429,9 +428,6 @@ hazeColor.b = light_func(lightArg, 1.330e-05, 0.264, 2.527, 1.08e-05, 1.0);
 hazeColor.g = light_func(lightArg, 3.931e-06, 0.264, 3.827, 7.93e-06, 1.0);
 hazeColor.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
 
-
-// now dim the light for haze
-eShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt) + 0.1;
 
 // Mie-like factor
 

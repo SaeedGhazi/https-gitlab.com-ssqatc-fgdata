@@ -282,6 +282,10 @@ Started September 2000 by David Megginson, david@megginson.com
 					<max-length type="double">1000.0</max-length>
 				</simplifier>
 			</terrain>
+            
+            <!-- OSG default is 300, but this means we burn lots of memory on no-longer
+             visible trees / random buildings -->
+            <max-paged-lod type="int">16</max-paged-lod>
 		</rendering>
 		<model-hz type="int">120</model-hz>
 		<navdb>
@@ -863,6 +867,10 @@ Started September 2000 by David Megginson, david@megginson.com
 			</register>
 		</fgcom>
 		<http include="httpd-settings.xml" />
+        
+        <tile-cache>
+            <enable type="bool">false</enable>
+        </tile-cache>
 	</sim>
 	<!-- mouse mode -->
 	<devices>

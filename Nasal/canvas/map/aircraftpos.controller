@@ -18,12 +18,17 @@ SOURCES["main"] = {
 
 # Layers which get updated every frame
 var update_instant = [
-	"TFC",
+	"APS",
+];
+# Update at a slightly lower rate, but still
+# unconditionally
+var update_quickly = [
+	"TFC", "FLT",
 ];
 
 var new = func(map, source='main') {
-	if (source != 'main') 
-		die ("AI/MP traffic not yet supported (WIP)!");
+	if (!contains(SOURCES, source))
+		__die("AI/MP traffic not yet supported (WIP)!");
 
 	var m = {
 		parents: [__self__],
@@ -32,42 +37,56 @@ var new = func(map, source='main') {
 		_pos: nil, _time: nil, _range: nil,
 	};
 	m.timer1 = maketimer(0, m, update_pos);
-	m.timer2 = maketimer(0, m, update_layers);
-	m.timer1.start();
-	m.timer2.start();
+	m.timer2 = maketimer(0.4, m, update_layers);
+	m.start();
 	m.update_pos();
 	return m;
 };
-var del = func(map) {
-	if (map != me.map) die();
+var start = func() {
+	me.timer1.start();
+	me.timer2.start();
+};
+var stop = func() {
 	me.timer1.stop();
 	me.timer2.stop();
+};
+var del = func(map) {
+	if (map != me.map) die();
+	me.stop();
 };
 
 # Controller methods
 var update_pos = func {
 	var (lat,lon) = me.source.getPosition();
 	me.map.setPos(lat:lat, lon:lon,
-	              hdg:getprop("/orientation/heading-deg"),
+	              hdg:me.source.getHeading(),
 	              alt:me.source.getAltitude());
 	foreach (var t; update_instant)
 		if ((var l=me.map.getLayer(t)) != nil)
 			l.update();
 };
 var update_layers = func {
+	var do_all = 1;
 	var pos = me.map.getPosCoord();
 	var time = systime();
 	var range = me.map.getRange();
 	if (me._pos == nil)
 		me._pos = geo.Coord.new(pos);
 	# Always update if range changed
+	# FIXME: FIX doesn't update unless range is changed?
 	elsif (range == me._range) {
 		var dist_m = me._pos.direct_distance_to(pos);
 		# 2 NM until we update again
-		if (dist_m < 2 * NM2M) return;
+		if (dist_m < 2 * NM2M) do_all = 0;
 		# Update at most every 4 seconds to avoid excessive stutter:
-		elsif (time - me._time < 4) return;
+		elsif (time - me._time < 4) do_all = 0;
 	}
+	if (!do_all) {
+		foreach (var t; update_quickly)
+			if ((var l=me.map.getLayer(t)) != nil)
+				l.update();
+		return;
+	} else
 	printlog(_MP_dbg_lvl, "update aircraft position");
 	var (x,y,z) = pos.xyz();
 	me._pos.set_xyz(x,y,z);

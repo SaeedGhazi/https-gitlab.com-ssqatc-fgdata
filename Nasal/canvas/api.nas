@@ -416,6 +416,7 @@ var Group = {
 # ==============================================================================
 # Class for a group element on a canvas with possibly geopgraphic positions
 # which automatically get projected according to the specified projection.
+# Each map consists of an arbitrary number of layers (canvas groups)
 #
 var Map = {
   df_controller: nil,
@@ -436,7 +437,7 @@ var Map = {
     me.parents = subvec(me.parents,1);
     me.del();
   },
-  setController: func(controller=nil)
+  setController: func(controller=nil, arg...)
   {
     if (me.controller != nil) me.controller.del(me);
     if (controller == nil)
@@ -449,7 +450,7 @@ var Map = {
     } else {
       if (!isa(controller, Map.Controller))
         die("OOP error: controller needs to inherit from Map.Controller");
-      me.controller = call(func controller.new(me), nil, var err=[]); # try...
+      me.controller = call(controller.new, [me]~arg, controller, var err=[]); # try...
       if (size(err)) {
         if (err[0] != "No such member: new") # ... and either catch or rethrow
           die(err[0]);
@@ -463,25 +464,29 @@ var Map = {
 
     return me;
   },
-  addLayer: func(factory, type_arg=nil, priority=nil, style=nil, options=nil)
+  addLayer: func(factory, type_arg=nil, priority=nil, style=nil, options=nil, visible=1)
   {
     if(contains(me.layers, type_arg))
       printlog("warn", "addLayer() warning: overwriting existing layer:", type_arg);
 
-    # print("addLayer():", type_arg);
-
     # Argument handling
-    if (type_arg != nil)
+    if (type_arg != nil) {
+      var layer = factory.new(type:type_arg, group:me, map:me, style:style, options:options, visible:visible);
       var type = factory.get(type_arg);
-    else var type = factory;
+      var key = type_arg;
+    } else {
+      var layer = factory.new(group:me, map:me, style:style, options:options, visible:visible);
+      var type = factory;
+      var key = factory.type;
+    }
+    me.layers[type_arg] = layer;
 
-    me.layers[type_arg] = type.new(group:me, map:me, style:style,options:options);
     if (priority == nil)
       priority = type.df_priority;
     if (priority != nil)
-      me.layers[type_arg].group.setInt("z-index", priority);
+      layer.group.setInt("z-index", priority);
 
-    return me;
+    return layer; # return new layer to caller() so that we can directly work with it, i.e. to register event handlers (panning/zooming)
   },
   getLayer: func(type_arg) me.layers[type_arg],
 
@@ -490,6 +495,7 @@ var Map = {
 
   setPos: func(lat, lon, hdg=nil, range=nil, alt=nil)
   {
+    # TODO: also propage setPos events to layers and symbols (e.g. for offset maps)
     me.set("ref-lat", lat);
     me.set("ref-lon", lon);
     if (hdg != nil)
@@ -497,7 +503,7 @@ var Map = {
     if (range != nil)
       me.setRange(range);
     if (alt != nil)
-      me.set("altitude", hdg);
+      me.set("altitude", alt);
   },
   getPos: func
   {
@@ -513,6 +519,10 @@ var Map = {
   getAlt: func me.get("altitude"),
   getRange: func me.get("range"),
   getLatLon: func [me.get("ref-lat"), me.get("ref-lon")],
+  # N.B.: This always returns the same geo.Coord object,
+  # so its values can and will change at any time (call
+  # update() on the coord to ensure it is up-to-date,
+  # which basically calls this method again).
   getPosCoord: func
   {
     var (lat, lon) = (me.get("ref-lat"),
@@ -526,6 +536,8 @@ var Map = {
     }
     if (!contains(me, "coord")) {
       me.coord = geo.Coord.new();
+      var m = me;
+      me.coord.update = func m.getPosCoord();
     }
     me.coord.set_latlon(lat,lon,alt or 0);
     return me.coord;
@@ -534,12 +546,14 @@ var Map = {
   # me.controller.
   update: func(predicate=nil)
   {
+    var t = systime();
     foreach (var l; keys(me.layers)) {
       var layer = me.layers[l];
       # Only update if the predicate allows
       if (predicate == nil or predicate(layer))
-        call(layer.update, arg, layer);
+        layer.update();
     }
+    printlog(_MP_dbg_lvl, "Took "~((systime()-t)*1000)~"ms to update map()");
     return me;
   },
 };
@@ -741,6 +755,24 @@ var Path = {
       me.setInt("cmd[" ~ (me._last_cmd += 1) ~ "]", cmd);
       for(var i = 0; i < num_coords; i += 1)
         me.setDouble("coord[" ~ (me._last_coord += 1) ~ "]", coords[i]);
+    }
+
+    return me;
+  },
+  addSegmentGeo: func(cmd, coords...)
+  {
+    var coords = _arg2valarray(coords);
+    var num_coords = me.num_coords[cmd];
+    if( size(coords) != num_coords )
+      debug.warn
+      (
+        "Invalid number of arguments (expected " ~ num_coords ~ ")"
+      );
+    else
+    {
+      me.setInt("cmd[" ~ (me._last_cmd += 1) ~ "]", cmd);
+      for(var i = 0; i < num_coords; i += 1)
+        me.set("coord-geo[" ~ (me._last_coord += 1) ~ "]", coords[i]);
     }
 
     return me;
@@ -981,8 +1013,22 @@ var Image = {
   # @param bottom Rectangle maximum y coordinate
   # @param normalized Whether to use normalized ([0,1]) or image
   #                   ([0, image_width]/[0, image_height]) coordinates
-  setSourceRect: func(left, top, right, bottom, normalized = 1)
+  setSourceRect: func
   {
+    # Work with both positional arguments and named arguments.
+    # Support first argument being a vector instead of four separate ones.
+    if (size(arg) == 1)
+      arg = arg[0];
+    elsif (size(arg) and size(arg) < 4 and typeof(arg[0]) == 'vector')
+      arg = arg[0]~arg[1:];
+    if (!contains(caller(0)[0], "normalized")) {
+      if (size(arg) > 4)
+        var normalized = arg[4];
+      else var normalized = 1;
+    }
+    if (size(arg) >= 3)
+      var (left,top,right,bottom) = arg;
+
     me._node.getNode("source", 1).setValues({
       left: left,
       top: top,

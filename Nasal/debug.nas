@@ -67,22 +67,22 @@
 
 # ANSI color code wrappers  (see  $ man console_codes)
 #
-var _title       = func(s) globals.string.color("33;42;1", s); # backtrace header
-var _section     = func(s) globals.string.color("37;41;1", s); # backtrace frame
-var _error       = func(s) globals.string.color("31;1",    s); # internal errors
-var _bench       = func(s) globals.string.color("37;45;1", s); # benchmark info
+var _title       = func(s, color=nil) globals.string.color("33;42;1", s, color); # backtrace header
+var _section     = func(s, color=nil) globals.string.color("37;41;1", s, color); # backtrace frame
+var _error       = func(s, color=nil) globals.string.color("31;1",    s, color); # internal errors
+var _bench       = func(s, color=nil) globals.string.color("37;45;1", s); # benchmark info
 
-var _nil         = func(s) globals.string.color("32", s);      # nil
-var _string      = func(s) globals.string.color("31", s);      # "foo"
-var _num         = func(s) globals.string.color("31", s);      # 0.0
-var _bracket     = func(s) globals.string.color("", s);        # [ ]
-var _brace       = func(s) globals.string.color("", s);        # { }
-var _angle       = func(s) globals.string.color("", s);        # < >
-var _vartype     = func(s) globals.string.color("33", s);      # func ghost
-var _proptype    = func(s) globals.string.color("34", s);      # BOOL INT LONG DOUBLE ...
-var _path        = func(s) globals.string.color("36", s);      # /some/property/path
-var _internal    = func(s) globals.string.color("35", s);      # me parents
-var _varname     = func(s) s;                                  # variable_name
+var _nil         = func(s, color=nil) globals.string.color("32", s, color);      # nil
+var _string      = func(s, color=nil) globals.string.color("31", s, color);      # "foo"
+var _num         = func(s, color=nil) globals.string.color("31", s, color);      # 0.0
+var _bracket     = func(s, color=nil) globals.string.color("", s, color);        # [ ]
+var _brace       = func(s, color=nil) globals.string.color("", s, color);        # { }
+var _angle       = func(s, color=nil) globals.string.color("", s, color);        # < >
+var _vartype     = func(s, color=nil) globals.string.color("33", s, color);      # func ghost
+var _proptype    = func(s, color=nil) globals.string.color("34", s, color);      # BOOL INT LONG DOUBLE ...
+var _path        = func(s, color=nil) globals.string.color("36", s, color);      # /some/property/path
+var _internal    = func(s, color=nil) globals.string.color("35", s, color);      # me parents
+var _varname     = func(s, color=nil) s;                                         # variable_name
 
 
 ##
@@ -142,7 +142,7 @@ var _tree = func(n, graph = 1, prefix = "", level = 0) {
 }
 
 
-var attributes = func(p, verbose = 1) {
+var attributes = func(p, verbose = 1, color=nil) {
 	var r = p.getAttribute("readable")    ? "" : "r";
 	var w = p.getAttribute("writable")    ? "" : "w";
 	var R = p.getAttribute("trace-read")  ? "R" : "";
@@ -159,24 +159,24 @@ var attributes = func(p, verbose = 1) {
 		type ~= ", L" ~ l;
 	if (verbose and (var c = p.getAttribute("references")) > 2)
 		type ~= ", #" ~ (c - 2);
-	return _proptype(type ~ ")");
+	return _proptype(type ~ ")", color);
 }
 
 
-var _dump_prop = func(p) {
-	_path(p.getPath()) ~ " = " ~ debug.string(p.getValue()) ~ " " ~ attributes(p);
+var _dump_prop = func(p, color=nil) {
+	_path(p.getPath(), color) ~ " = " ~ debug.string(p.getValue()) ~ " " ~ attributes(p);
 }
 
 
-var _dump_var = func(v) {
+var _dump_var = func(v, color=nil) {
 	if (v == "me" or v == "parents")
-		return _internal(v);
+		return _internal(v, color);
 	else
-		return _varname(v);
+		return _varname(v, color);
 }
 
 
-var _dump_string = func(str) {
+var _dump_string = func(str, color=nil) {
 	var s = "'";
 	for (var i = 0; i < size(str); i += 1) {
 		var c = str[i];
@@ -193,55 +193,55 @@ var _dump_string = func(str) {
 		else
 			s ~= sprintf("\\x%02x", c);
 	}
-	return _string(s ~ "'");
+	return _string(s ~ "'", color);
 }
 
 
 # dump hash keys as variables if they are valid variable names, or as string otherwise
-var _dump_key = func(s) {
+var _dump_key = func(s, color=nil) {
 	if (num(s) != nil)
-		return _num(s);
+		return _num(s, color);
 	if (!size(s))
-		return _dump_string(s);
+		return _dump_string(s, color);
 	if (!globals.string.isalpha(s[0]) and s[0] != `_`)
-		return _dump_string(s);
+		return _dump_string(s, color);
 	for (var i = 1; i < size(s); i += 1)
 		if (!globals.string.isalnum(s[i]) and s[i] != `_`)
-			return _dump_string(s);
-	_dump_var(s);
+			return _dump_string(s, color);
+	_dump_var(s, color);
 }
 
 
-var string = func(o) {
+var string = func(o, color=nil) {
 	var t = typeof(o);
 	if (t == "nil") {
-		return _nil("nil");
+		return _nil("nil", color);
 
 	} elsif (t == "scalar") {
-		return num(o) == nil ? _dump_string(o) : _num(o~"");
+		return num(o) == nil ? _dump_string(o, color) : _num(o~"", color);
 
 	} elsif (t == "vector") {
 		var s = "";
 		forindex (var i; o)
-			s ~= (i == 0 ? "" : ", ") ~ debug.string(o[i]);
-		return _bracket("[") ~ s ~ _bracket("]");
+			s ~= (i == 0 ? "" : ", ") ~ debug.string(o[i], color);
+		return _bracket("[", color) ~ s ~ _bracket("]", color);
 
 	} elsif (t == "hash") {
 		if (contains(o, "parents") and typeof(o.parents) == "vector"
 				and size(o.parents) == 1 and o.parents[0] == props.Node)
-			return _angle("<") ~ _dump_prop(o) ~ _angle(">");
+			return _angle("<", color) ~ _dump_prop(o, color) ~ _angle(">", color);
 
 		var k = keys(o);
 		var s = "";
 		forindex (var i; k)
-			s ~= (i == 0 ? "" : ", ") ~ _dump_key(k[i]) ~ ": " ~ debug.string(o[k[i]]);
-		return _brace("{") ~ " " ~ s ~ " " ~ _brace("}");
+			s ~= (i == 0 ? "" : ", ") ~ _dump_key(k[i], color) ~ ": " ~ debug.string(o[k[i]], color);
+		return _brace("{", color) ~ " " ~ s ~ " " ~ _brace("}", color);
 
 	} elsif (t == "ghost") {
-		return _angle("<") ~ _nil(ghosttype(o)) ~ _angle(">");
+		return _angle("<", color) ~ _nil(ghosttype(o), color) ~ _angle(">", color);
 
 	} else {
-		return _angle("<") ~ _vartype(t) ~ _angle(">");
+		return _angle("<", color) ~ _vartype(t, color) ~ _angle(">", color);
 	}
 }
 

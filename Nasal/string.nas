@@ -486,10 +486,11 @@ var scanf = func(test, format, result) {
 # ANSI colors  (see $ man console_codes)
 #
 var setcolors = func(enabled) {
-	if (enabled and getprop("/sim/startup/stderr-to-terminal"))
-		color = func(color, s) { "\x1b[" ~ color ~ "m" ~ s ~ "\x1b[m" }
-	else
-		color = func(dummy, s) { s }
+	color_enabled = (enabled and getprop("/sim/startup/stderr-to-terminal"));
+}
+var color = func(color, s, enabled=nil) {
+	if (enabled == nil) enabled = color_enabled;
+	return enabled ? "\x1b[" ~ color ~ "m" ~ s ~ "\x1b[m" : s;
 }
 
 
@@ -499,10 +500,9 @@ var setcolors = func(enabled) {
 #
 #   print(string.color("31;1", "this is red"));
 #
-var color = func nil;
-setcolors(getprop("/sim/startup/terminal-ansi-colors"));
+var color_enabled = 0;
 _setlistener("/sim/signals/nasal-dir-initialized", func {
-	setlistener("/sim/startup/terminal-ansi-colors", func(n) setcolors(n.getBoolValue()));
+	setlistener("/sim/startup/terminal-ansi-colors", func(n) setcolors(n.getBoolValue()), 1, 0);
 });
 
 

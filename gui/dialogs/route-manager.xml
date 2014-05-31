@@ -17,7 +17,7 @@ command interface /autopilot/route-manager/input:
     <resizable>true</resizable>
 
     <nasal>
-        <open>
+        <open><![CDATA[
             var ft = getprop("/sim/startup/units") == "feet";
             var dlg = props.globals.getNode("/sim/gui/dialogs/route-manager", 1);
             var selection = dlg.getNode("selection", 1);
@@ -68,7 +68,7 @@ command interface /autopilot/route-manager/input:
                 var to = fp.getWP(sel_index());
                 
                 if ((from  == nil ) or (to == nil)) {
-                    debug.dump('unable to route, invalid start ad end points');
+                    printlog('info', 'unable to route, invalid start ad end points');
                     return;
                 }
                 
@@ -233,7 +233,7 @@ command interface /autopilot/route-manager/input:
               
               var airborne = getprop('/gear/gear[0]/wow') == 0;
               if (airborne) {
-                debug.dump('route-manager dialog, init in-air, clearing departure settings');
+                printlog('info', 'route-manager dialog, init in-air, clearing departure settings');
                 fp.departure = nil;
                 return;
               }
@@ -248,7 +248,7 @@ command interface /autopilot/route-manager/input:
               }
               
               if (fp.departure_runway == nil) {
-                debug.dump('selecting departure runway');
+                printlog('info', 'selecting departure runway');
                 var rwy = fp.departure.findBestRunwayForPos( geo.aircraft_position() );
                 fp.departure_runway = rwy;
               }
@@ -261,7 +261,7 @@ command interface /autopilot/route-manager/input:
             updateSIDs();
             updateSTARs();
             updateApproaches();
-        </open>
+        ]]></open>
 
         <close>
             file_selector.del();

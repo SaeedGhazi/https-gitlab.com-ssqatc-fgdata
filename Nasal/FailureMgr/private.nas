@@ -190,7 +190,7 @@ var _failmgr = {
 		if (trigger == nil) return;
 
 		trigger.bind(proproot ~ mode_id);
-		trigger.on_fire = func me.on_trigger_activated(trigger);
+		trigger.on_fire = func _failmgr.on_trigger_activated(trigger);
 		trigger.reset();
 
 		if (trigger.requires_polling) {

@@ -33,6 +33,9 @@ var set_unserviceable = func(path) {
 
 	var prop = path ~ "/serviceable";
 
+	if (props.globals.getNode(prop) == nil)
+		props.globals.initNode(prop, 1, "BOOL");
+
 	return {
 		parents: [FailureMgr.FailureActuator],
 		set_failure_level: func(level) setprop(prop, level > 0 ? 0 : 1),
@@ -209,9 +212,8 @@ var MtbfTrigger = {
 	reset: func {
 		call(FailureMgr.Trigger.reset, [], me);
 		# TODO: use an elapsed time prop that accounts for speed-up and pause
-		var std = math.sqrt(me.params["mtbf"] / 10 - 1);
 		me.fire_time = getprop(me._time_prop)
-		               + norm_rand(me.params["mtbf"], std);
+		               + norm_rand(me.params["mtbf"], me.params["mtbf"] / 10);
 	},
 
 	to_str: func {
@@ -343,7 +345,7 @@ var McbfTrigger = {
 		call(FailureMgr.Trigger.reset, [], me);
 		me.counter.reset();
 		me.activation_cycles =
-			norm_rand(me.params["mcbf"], math.sqrt(me.params["mcbf"] / 10));
+			norm_rand(me.params["mcbf"], me.params["mcbf"] / 10);
 
 		me.enabled and me.counter.enable();
 	},

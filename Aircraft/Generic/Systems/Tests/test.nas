@@ -63,9 +63,11 @@ var TestSuite = {
 	cleanup: func 0
 };
 
-# run_tests()
+# run_tests([namespace])
 #
-# Executes all test suites found in the namespace where run_tests is defined.
+# Executes all test suites found in the given namespace. If no namespace is
+# specified, then the namespace where run_tests is defined is used by default.
+#
 # An effective way to work with the framework is to just include the framework
 # from your test files:
 #
@@ -82,9 +84,9 @@ var TestSuite = {
 # well if it was io.include'd in my_test_suite.nas. Finally, all test suites
 # in the "test" namespace are executed.
 
-var run_tests = func () {
+var run_tests = func(namespace=nil) {
 
-	var ns = closure(run_tests, 1);
+	var ns = namespace != nil ? namespace : closure(run_tests, 1);
 
 	var passed = 0;
 	var failed = 0;

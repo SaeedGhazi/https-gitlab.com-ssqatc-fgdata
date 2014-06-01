@@ -28,23 +28,29 @@ DefaultStyle.widgets.button = {
   new: func(parent, cfg)
   {
     me.element = parent.createChild("group", "button");
-    me.size = cfg.get("size", [26, 26]);
-
     me._bg =
-      me.element.rect( 3,
-                       3,
-                       me.size[0] - 6,
-                       me.size[1] - 6,
-                       {"border-radius": 5} );
+      me.element.createChild("path");
     me._border =
       me.element.createChild("image", "button")
-                .set("slice", "10 12") #"7")
-                .setSize(me.size);
+                .set("slice", "10 12"); #"7")
     me._label =
       me.element.createChild("text")
                 .setFont("LiberationFonts/LiberationSans-Regular.ttf")
                 .set("character-size", 14)
                 .set("alignment", "center-baseline");
+
+    me.setSize( cfg.get("size", [26, 26]) );
+  },
+  setSize: func(size)
+  {
+    me._bg.reset()
+          .rect( 3,
+                 3,
+                 size[0] - 6,
+                 size[1] - 6,
+                 {"border-radius": 5} );
+    me._border.setSize(size);
+    me.size = size;
   },
   setText: func(text)
   {

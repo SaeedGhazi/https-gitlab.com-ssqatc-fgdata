@@ -161,21 +161,17 @@ var Element = {
 
     return factory(parent_ghost);
   },
+  # Get the canvas this element is placed on
+  getCanvas: func()
+  {
+    wrapCanvas(me._getCanvas());
+  },
   # Check if elements represent same instance
   #
   # @param el Other Element or element ghost
   equals: func(el)
   {
     return me._node.equals(el._node_ghost);
-  },
-  # Trigger an update of the element
-  #
-  # Elements are automatically updated once a frame, with a delay of one frame.
-  # If you wan't to get an element updated in the current frame you have to use
-  # this method.
-  update: func()
-  {
-    me.setInt("update", 1);
   },
   # Hide/Show element
   #
@@ -1079,7 +1075,7 @@ var Canvas = {
   # given every texture of the model will be replaced.
   addPlacement: func(vals)
   {
-    var placement = me.texture.addChild("placement", 0, 0);
+    var placement = me._node.addChild("placement", 0, 0);
     placement.setValues(vals);
     return placement;
   },
@@ -1098,31 +1094,32 @@ var Canvas = {
   # Set the background color
   #
   # @param color  Vector of 3 or 4 values in [0, 1]
-  setColorBackground: func () { me.texture.getNode('background', 1).setValue(_getColor(arg)); me; },
-  getColorBackground: func me.texture.get('background'),
+  setColorBackground: func me.set('background', _getColor(arg)),
+  getColorBackground: func me.get('background'),
   # Get path of canvas to be used eg. in Image::setFile
   getPath: func()
   {
-    return "canvas://by-index/texture[" ~ me.texture.getIndex() ~ "]";
+    return "canvas://by-index/texture[" ~ me._node.getIndex() ~ "]";
   },
   # Destructor
   #
   # releases associated canvas and makes this object unusable
   del: func
   {
-    me.texture.remove();
+    me._node.remove();
     me.parents = nil; # ensure all ghosts get destroyed
   }
 };
 
-var wrapCanvas = func(canvas_ghost)
+# @param g Canvas ghost
+var wrapCanvas = func(g)
 {
-  var m = {
-    parents: [PropertyElement, Canvas, canvas_ghost],
-    texture: props.wrapNode(canvas_ghost._node_ghost)
-  };
-  m._node = m.texture;
-  return m;
+  if( g != nil and g._impl == nil )
+    g._impl = {
+      parents: [PropertyElement, Canvas],
+      _node: props.wrapNode(g._node_ghost)
+    };
+  return g;
 }
 
 # Create a new canvas. Pass parameters as hash, eg:
@@ -1136,7 +1133,7 @@ var wrapCanvas = func(canvas_ghost)
 var new = func(vals)
 {
   var m = wrapCanvas(_newCanvasGhost());
-  m.texture.setValues(vals);
+  m._node.setValues(vals);
   return m;
 };
 
@@ -1154,11 +1151,7 @@ var get = func(arg)
   else
     die("canvas.new: Invalid argument.");
 
-  var canvas_ghost = _getCanvasGhost(node._g);
-  if( canvas_ghost == nil )
-    return nil;
-
-  return wrapCanvas(canvas_ghost);
+  return wrapCanvas(_getCanvasGhost(node._g));
 };
 
 var getDesktop = func()

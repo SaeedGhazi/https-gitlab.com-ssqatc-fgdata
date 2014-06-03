@@ -33,6 +33,13 @@
 			</binding>
 		</checkbox>
 	</group>
+	<button>
+		<legend>New Canvas Map</legend>
+		<binding>
+			<command>nasal</command>
+			<script>canvas.MapStructure_selfTest();</script>
+		</binding>
+	</button>
 
 	<button>
 		<legend>Close</legend>

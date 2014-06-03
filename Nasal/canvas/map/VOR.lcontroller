@@ -5,21 +5,11 @@ var parents = [SymbolLayer.Controller];
 var __self__ = caller(0)[0];
 SymbolLayer.Controller.add(name, __self__);
 SymbolLayer.add(name, {
-	parents: [SymbolLayer],
+	parents: [NavaidSymbolLayer],
 	type: name, # Symbol type
 	df_controller: __self__, # controller to use by default -- this one
 });
 var new = func(layer) {
-
-if(0) {
-	# TODO: generalize and move to MapStructure.nas
-	var required_controllers = [ {name: 'query_range',type:'func'}, ];
-	foreach(var c; required_controllers) {
-		if (!contains(layer.map.controller, c.name) or typeof(layer.map.controller[c.name]) !=c.type)
-		die("Required controller is missing/invalid:"~ c.name ~ ' ['~c.type~']' );
-	}
-}
-	
 	var m = {
 		parents: [__self__],
 		layer: layer,
@@ -38,6 +28,8 @@ if(0) {
 	}
 	#call(debug.dump, keys(layer));
 	m.changed_freq(update:0);
+	m.addVisibilityListener();
+
 	return m;
 };
 var del = func() {
@@ -59,10 +51,6 @@ var changed_freq = func(update=1) {
 		me.active_vors[ navN.getIndex() ] = navN.getValue("frequencies/selected-mhz");
 	if (update) me.layer.update();
 };
-var searchCmd = func {
-	printlog(_MP_dbg_lvl, "Running query:", me.query_type);
-	var range = me.map.getRange();
-	if (range == nil) return;
-	return positioned.findWithinRange(me.map.getPosCoord(), range, me.query_type);
-};
+
+var searchCmd = NavaidSymbolLayer.make('vor');
 

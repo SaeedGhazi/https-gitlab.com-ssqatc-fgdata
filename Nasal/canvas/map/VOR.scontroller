@@ -1,9 +1,0 @@
-# See: http://wiki.flightgear.org/MapStructure
-# Class things:
-var name = 'VOR';
-var parents = [Symbol.Controller];
-var __self__ = caller(0)[0];
-Symbol.Controller.add(name, __self__);
-Symbol.registry[name].df_controller = __self__;
-var new = func(model) ; # this controller doesn't need an instance
-

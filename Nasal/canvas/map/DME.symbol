@@ -50,11 +50,6 @@ var del = func {
 # var DMEIcon = StyleableElement.new( [{color:IconColor}, ] );
 
 ###
-# helper to tell if the symbol is already initialized or not
-# TODO: encapsulate API-wise (this is a very common thing to do...)
-var is_initialized = func me.icon_dme != nil;
-
-###
 # FIXME: these should probably be part of MapStructure itself
 # TODO: Need to come up with a StyleableElement class for this sort of stuff
 var apply_styling = func {
@@ -64,7 +59,7 @@ var apply_styling = func {
 	var current_color = me.icon_dme.getColor();
 	var required_color = nil;
 
-	if (typeof(me.layer.map.controller["is_tuned"]) == 'func' and me.layer.map.controller.is_tuned(me.model.frequency/100))
+	if (typeof(me.map.controller["is_tuned"]) == 'func' and me.map.controller.is_tuned(me.model.frequency/100))
 	#TODO: once we support caching/instancing, we cannot just change the symbol like this - we need to use a different symbol from the cache instead
 	# which is why these things need to be done ONCE during init to set up a cache entry for each symbol variation to come up with a  corresponding raster image
 	# TODO: API-wise it would make sense to maintain a vector of required keys, so that the style hash can be validated in the ctor of the layer
@@ -90,7 +85,6 @@ var apply_styling = func {
 # TODO: also needs to be aware of current range, so that proper LOD handling can be implemented
 var apply_scale = func {
 	# add all symbols here that need scaling
-	# print("Scaling:", me.layer.style.scale_factor);
 	me.icon_dme.setScale( me.layer.style.scale_factor );
 }
 
@@ -106,52 +100,39 @@ var init_cache = func {
 
 ##
 # init is done separately to prepare support for caching (instanced symbols)
-# NOTE: People should not be "hard-coding" things like color/size here
-# these need to be encapsulated via a Hash lookup, so that things can be 
-# easily customized
 #
-var init_symbols = func {
-		# debug.dump(me.layer.style);
-		me.icon_dme = me.element.createChild("path")
-			.moveTo(-15,0)
-			.line(-12.5,-7.5)
-			.line(7.5,-12.5)
-			.line(12.5,7.5)
-			.lineTo(7.5,-12.5)
-			.line(12.5,-7.5)
-			.line(7.5,12.5)
-			.line(-12.5,7.5)
-			.lineTo(15,0)
-			.lineTo(7.5,12.5)
-			.vert(14.5)
-			.horiz(-14.5)
-			.vert(-14.5)
-			.close()
-			.setStrokeLineWidth( me.layer.style.line_width ); #TODO: this should be style-able 
+var init = func {
+	# debug.dump(me.layer.style);
+	me.icon_dme = me.element.createChild("path")
+		.moveTo(-15,0)
+		.line(-12.5,-7.5)
+		.line(7.5,-12.5)
+		.line(12.5,7.5)
+		.lineTo(7.5,-12.5)
+		.line(12.5,-7.5)
+		.line(7.5,12.5)
+		.line(-12.5,7.5)
+		.lineTo(15,0)
+		.lineTo(7.5,12.5)
+		.vert(14.5)
+		.horiz(-14.5)
+		.vert(-14.5)
+		.close()
+		.setStrokeLineWidth( me.layer.style.line_width );
 
-		# finally scale the symbol as requested, this is done last so that people can override this when creating the layer
-		me.apply_scale();	
+	# finally scale the symbol as requested, this is done last so that people can override this when creating the layer
+	me.apply_scale();
 	if (me.layer.style.animation_test) {
-
 		me.timer = maketimer(0.33, func me.animate() );
 		me.timer.start();
 	}
-}
-
-var updateRun = func {
-	# check if the current station is tuned or not - and style the symbol accordingly (color)
-	me.apply_styling(); 
+	me.draw();
 }
 
 ##
-# this method is REQUIRED (basically, the entry point for drawing - most others are just helpers)
+# this method is REQUIRED
+# check if the current station is tuned or not - and style the symbol accordingly (color)
 var draw = func {
-	# print("DME:draw()");
-	# Init: will set up the symbol if it isn't already
-	if ( !me.is_initialized() )
-		me.init_symbols();
-
-	# wrapper for custom styling, based on tuned/default colors (see lookup hash above)
-	me.updateRun();	
+	me.apply_styling();
 };
 

@@ -5,45 +5,45 @@ var parents = [DotSym];
 var __self__ = caller(0)[0];
 DotSym.makeinstance( name, __self__ );
 
+SymbolLayer.get(name).df_style = {
+	line_width: 3,
+	scale_factor: 1,
+	font: "LiberationFonts/LiberationSans-Regular.ttf",
+	font_color: [0,0,0],
+	font_size: 28,
+	color: [0, 0.6, 0.85],
+	show_labels: 1,
+};
+
+
 var element_type = "group"; # we want a group, becomes "me.element"
-var icon_fix = nil;
-var text_fix = nil;
 
 ##
 # used during initialization to populate the symbol cache with a FIX symbol
 #
-var drawFIX = func(color, width) func(group) {
-
-	var symbol = group.createChild("path")
+var drawFIX = func(group) {
+	group.createChild("path")
 		.moveTo(-15,15)
 		.lineTo(0,-15)
 		.lineTo(15,15)
 		.close()
-		.setStrokeLineWidth(width)
-		.setColor(color)
-		.setScale(0.5,0.5); # FIXME: do proper LOD handling here - we need to scale according to current texture dimensions vs. original/design dimensions
-	return symbol;
+		.setStrokeLineWidth(line_width)
+		.setColor(color);
 }
 
-var icon_fix_cached = [
-	SymbolCache32x32.add(
-		name: "FIX",
-		callback: drawFIX( color:[0, 0.6, 0.85], width:3 ), # TODO: use the style hash to encapsulate styling stuff
-		draw_mode: SymbolCache.DRAW_CENTERED
-	)
-];
+var cache = StyleableCacheable.new(
+	name:name, draw_func: drawFIX,
+	cache: SymbolCache32x32,
+	draw_mode: SymbolCache.DRAW_CENTERED,
+	relevant_keys: ["line_width", "color"],
+);
 
-var draw = func {
-	if (me.icon_fix != nil) return; # fix icon already initialized
-	# initialize the fix symbol
-	me.icon_fix = icon_fix_cached[0].render(me.element);
+var init = func {
+	# initialize the cached fix symbol
+	cache.render(me.element, me.style).setScale(me.style.scale_factor);
 
-	# non-cached  stuff:
-	# FIXME: labels need to be LOD-aware (i.e. aware of MapController range, so that we can hide/show them)
-	me.text_fix = me.element.createChild("text")
-		.setDrawMode( canvas.Text.TEXT )
-		.setText(me.model.id)
-		.setFont("LiberationFonts/LiberationSans-Regular.ttf") # TODO: encapsulate styling stuff
-		.setFontSize(28) # TODO: encapsulate styling stuff
-		.setTranslation(5,25);
+	# non-cached stuff:
+	if (me.style.show_labels)
+		me.text_fix = me.newText(me.model.id).setScale(me.style.scale_factor);
 }
+var draw = func;

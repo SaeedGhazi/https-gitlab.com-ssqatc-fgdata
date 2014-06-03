@@ -1,6 +1,9 @@
 # See: http://wiki.flightgear.org/MapStructure
+# TODO: this layer doesn't make sense to support for AI/MP traffic, because we don't currently have access to flightplan/routing info
+# that also applies to other layers like WPT or even navaid layers that handle station tuning based on local radio settings
+# 
 # Class things:
-var name = 'WPT'; # for waypoints
+var name = 'RTE';
 var parents = [SymbolLayer.Controller];
 var __self__ = caller(0)[0];
 SymbolLayer.Controller.add(name, __self__);
@@ -20,46 +23,33 @@ var new = func(layer) {
 		map: layer.map,
 		listeners: [],
 	};
-	layer.searcher._equals = func(l,r) l.equals(r);
+	layer.searcher._equals = func(l,r) 0; # TODO: create model objects instead?
 	append(m.listeners, setlistener(layer.options.active_node, func m.layer.update() ));
 	m.addVisibilityListener();
 
 	return m;
 };
 var del = func() {
-	#print(name~"VOR.lcontroller.del()");
 	foreach (var l; me.listeners)
 		removelistener(l);
 };
 
-var WPT_model = {
-	new: func(fp, idx) {
-		var m = { parents:[WPT_model], idx:idx };
-		var wp = fp.getWP(idx);
-
-		m.name = wp.wp_name;
-		var alt = wp.alt_cstr;
-		if (alt != 0)
-			m.name ~= "\n"~alt;
-
-		var n = wp.path()[0];
-		(m.lat,m.lon) = (n.lat,n.lon);
-		return m;
-	},
-	equals: func(other) {
-		# this is set on symbol init, so use this for equality...
-		me.name == other.name
-	},
-};
-
 var searchCmd = func {
-	printlog(_MP_dbg_lvl, "Running query: "~name);
+	# FIXME: do we return the current route even if it isn't active?
+	printlog(_MP_dbg_lvl, "Running query: ", name);
+	var plans = []; # TODO: multiple flightplans?
 
+	# http://wiki.flightgear.org/Nasal_Flightplan
 	var fp = flightplan();
 	var fpSize = fp.getPlanSize();
-	var result = [];
-	for (var i = 1; i < fpSize; i+=1)
-		append(result, WPT_model.new(fp, i));
-	return result;
+	var coords = [];
+	for (var i=0; i<fpSize; i += 1) {
+		var leg = fp.getWP(i);
+		foreach (var c; leg.path()) {
+			append(coords, c);
+		}
+	}
+	append(plans, coords);
+	return plans;
 };
 

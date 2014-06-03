@@ -1,14 +1,16 @@
 # See: http://wiki.flightgear.org/MapStructure
+# FIXME: this needs to be configurable via the ctor to optionally differentiate between MP and AI traffic, and exclude ground/sea traffic
+# or at least use a different, non-TCAS symbol for those (looking pretty weird ATM)
+# 
 # Class things:
 var name = 'TFC';
 var parents = [SymbolLayer.Controller];
 var __self__ = caller(0)[0];
 SymbolLayer.Controller.add(name, __self__);
 SymbolLayer.add(name, {
-	parents: [SymbolLayer],
+	parents: [MultiSymbolLayer],
 	type: name, # Symbol type
 	df_controller: __self__, # controller to use by default -- this one
-	df_style: { debug: 0 }, # style to use by default
 });
 
 var model_root = props.globals.getNode("/ai/models/");
@@ -22,6 +24,8 @@ var new = func(layer) {
 		searchCmd: searchCmd_default,
 	};
 	layer.searcher._equals = func(l,r) l.equals(r);
+	m.addVisibilityListener();
+
 	return m;
 };
 var del = func() {
@@ -40,6 +44,7 @@ var TrafficModel = {
 			id: id,
 			node: node,
 			pos: node.getNode("position",1),
+			type: node.getName(),
 		};
 		return m;
 	},
@@ -57,6 +62,13 @@ var TrafficModel = {
 	get_alt:  func() (me.getValue("position/altitude-ft") or 0),
 };
 
+var get_alt_diff = func(model) {
+	# debug.dump( keys(me) );
+	var model_alt = model.get_alt();
+	var alt = me.map.getAlt();
+	if (alt == nil or model_alt == nil) return 0;
+	return alt-model_alt;
+};
 
 ##
 # dummy/placeholder (will be overridden in ctor and set to the default callback)
@@ -65,6 +77,8 @@ var searchCmd  = func;
 var searchCmd_default = func {
 	# TODO: this would be a good candidate for splitting across frames
 	printlog(_MP_dbg_lvl, "Doing query: "~name);
+
+	if (me.map.getRange() == nil) return;
 
 	var result = [];
 	var models = 0;

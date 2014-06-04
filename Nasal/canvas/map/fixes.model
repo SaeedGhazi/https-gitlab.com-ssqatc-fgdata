@@ -9,7 +9,7 @@ FixModel.init = func {
 	var numNum = 0;
 	foreach(result; results) {
 		# Skip airport fixes
-		if(string.match(result.id,"*[^0-9]")) {
+		if(string.match(result.id,"*[^0-9]")) { # this may need to be moved to FIX.lcontroller?
 			me.push(result);
 			numNum = numNum + 1;
 		}

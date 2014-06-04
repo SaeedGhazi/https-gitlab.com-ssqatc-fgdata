@@ -1,19 +1,7 @@
 # See: http://wiki.flightgear.org/MapStructure
-# Class things:
-var name = 'NDB';
-var parents = [DotSym];
-var __self__ = caller(0)[0];
-DotSym.makeinstance( name, __self__ );
-
-var element_type = "group"; # we want a group, becomes "me.element", which we parse a SVG onto
-var svg_path = "/gui/dialogs/images/ndb_symbol.svg"; # speaking of path, this is our path to use
-var local_svg_path = nil; # track changes in the SVG's path
-
-var draw = func {
-	if (me.svg_path == me.local_svg_path) return;
-	me.element.removeAllChildren();
-	me.local_svg_path = me.svg_path;
-	canvas.parsesvg(me.element, me.svg_path);
-	me.inited = 1;
-};
+DotSym.makeinstance('NDB', {
+	parents: [SVGSymbol],
+	svg_path: "/gui/dialogs/images/ndb_symbol.svg",
+	#cacheable: 1,
+});
 

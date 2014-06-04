@@ -13,6 +13,12 @@ gui.widgets.Button = {
       m._setRoot(m._button.element);
     }
 
+    m.setMinimumSize([16, 16]);
+    m.setSizeHint([32, 32]);
+    m.setMaximumSize([m._MAX_SIZE, m._MAX_SIZE]);
+
+    m.setSetGeometryFunc(m.setGeometry);
+
     return m;
   },
   setText: func(text)
@@ -39,11 +45,18 @@ gui.widgets.Button = {
     return me;
   },
   onClick: func {},
+  setGeometry: func(geom)
+  {
+    me.move(geom[0], geom[1]);
+    me._button.setSize([geom[2] - geom[0], geom[3] - geom[1]]);
+    me._onStateChange();
+    return me;
+  },
 # protected:
   _onStateChange: func
   {
     if( me._button != nil )
-      me._button.update(me._active, me._focused, me._hover, !me._window._focused);
+      me._button.update(me._active, me._focused, me._hover, !me._windowFocus());
   },
   _setRoot: func(el)
   {

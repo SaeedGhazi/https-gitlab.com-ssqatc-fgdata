@@ -14,8 +14,8 @@ gui.widgets.Button = {
     }
 
     m.setMinimumSize([16, 16]);
-    m.setMaximumSize([9999, 32]);
-    m.setSizeHint([32, 16]);
+    m.setSizeHint([32, 32]);
+    m.setMaximumSize([m._MAX_SIZE, m._MAX_SIZE]);
 
     m.setSetGeometryFunc(m.setGeometry);
 

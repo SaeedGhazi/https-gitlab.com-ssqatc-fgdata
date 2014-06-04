@@ -66,6 +66,7 @@ gui.Widget = {
   onMouseEnter: func {},
   onMouseLeave: func {},
 # protected:
+  _MAX_SIZE: 32768, # size for "no size-limit"
   _onStateChange: func {},
   _setRoot: func(el)
   {

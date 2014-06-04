@@ -146,8 +146,11 @@ var Window = {
     me.onResize = nil;
   },
   # Get the displayed canvas
-  getCanvas: func()
+  getCanvas: func(create = 0)
   {
+    if( me['_canvas'] == nil and create )
+      me.createCanvas();
+
     return me['_canvas'];
   },
   getCanvasDecoration: func()
@@ -452,18 +455,26 @@ var createLayoutTest = func
 {
   var dlg = canvas.Window.new([350,250], "dialog")
                          .set("resize", 1);
-  var root_layout = HBoxLayout.new();
-  dlg.setLayout(root_layout);
-
-  dlg.getCanvas().set("background", style.getColor("bg_color"));
+  dlg.getCanvas(1)
+     .set("background", style.getColor("bg_color"));
   var root = dlg.getCanvas().createGroup();
 
+  var vbox = VBoxLayout.new();
+  dlg.setLayout(vbox);
+
+  var b = gui.widgets.Button.new(root, style, {}).setText("Stretch");
+  b.setMaximumSize([9999, 9999]);
+  vbox.addItem(b, 1);
+
+  var button_box = HBoxLayout.new();
+  vbox.addItem(button_box);
+
   var b1 = gui.widgets.Button.new(root, style, {}).setText("Ok");
-  root_layout.addItem(b1);
+  button_box.addItem(b1);
   b1.setFocus();
 
   var b2 = gui.widgets.Button.new(root, style, {}).setText("Abort");
-  root_layout.addItem(b2);
+  button_box.addItem(b2);
 }
 
 # Canvas GUI demo

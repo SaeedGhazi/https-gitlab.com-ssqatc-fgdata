@@ -10,6 +10,12 @@ gui.widgets.ScrollArea = {
     m._max_scroll = [0, 0];
     m._content_size = [0, 0];
 
+    m.setMinimumSize([16, 16]);
+    m.setSizeHint([128, 128]);
+    m.setMaximumSize([m._MAX_SIZE, m._MAX_SIZE]);
+
+    m.setSetGeometryFunc(m.setGeometry);
+
     if( style != nil )
     {
       m._scroll = style.createWidget(parent, "scroll-area", cfg);
@@ -101,6 +107,12 @@ gui.widgets.ScrollArea = {
     me._pos[0] = me._max_scroll[0];
 
     me.update(bb);
+  },
+  setGeometry: func(geom)
+  {
+    me.move(geom[0], geom[1]);
+    me.setSize([geom[2] - geom[0], geom[3] - geom[1]]);
+    return me;
   },
   # Update scroll bar and content area.
   #

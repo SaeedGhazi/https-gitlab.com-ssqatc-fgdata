@@ -20,6 +20,7 @@ var new = func(symbol, model) {
 			symbol.update();
 		m.last_idx = n;
 	}, 0, 0));
+	m.last_idx = getprop(symbol.layer.options.current_wp_node);
 
 	return m;
 }

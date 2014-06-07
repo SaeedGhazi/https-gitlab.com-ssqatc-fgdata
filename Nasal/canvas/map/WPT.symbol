@@ -19,7 +19,6 @@ var element_type = "group"; # we want a group, becomes "me.element"
 var active = nil;
 
 var init = func {
-	# TODO: active vs inactive?
 	me.path = me.element.createChild("path")
 		.setStrokeLineWidth(me.style.line_width)
 		.moveTo(0,-25)
@@ -40,7 +39,7 @@ var init = func {
 	me.draw();
 };
 var draw = func {
-	var active = (getprop(me.layer.options.current_wp_node) == me.model.idx);
+	var active = (getprop(me.options.current_wp_node) == me.model.idx);
 	if (active != me.active) {
 		me.path.setColor(
 			active ?

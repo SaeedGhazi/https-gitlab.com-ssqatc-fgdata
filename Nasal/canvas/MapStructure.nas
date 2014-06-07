@@ -403,6 +403,7 @@ var Symbol = {
 	# Private constructor:
 	_new: func(m) {
 		m.style = m.layer.style;
+		m.options = m.layer.options;
 		if (m.controller != nil) {
 			temp = m.controller.new(m,m.model);
 			if (temp != nil)

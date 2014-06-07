@@ -42,12 +42,11 @@ var searchCmd = func {
 	# http://wiki.flightgear.org/Nasal_Flightplan
 	var fp = flightplan();
 	var fpSize = fp.getPlanSize();
+	if (!getprop(me.layer.options.active_node)) fpSize = 0;
 	var coords = [];
 	for (var i=0; i<fpSize; i += 1) {
 		var leg = fp.getWP(i);
-		foreach (var c; leg.path()) {
-			append(coords, c);
-		}
+		coords ~= leg.path();
 	}
 	append(plans, coords);
 	return plans;

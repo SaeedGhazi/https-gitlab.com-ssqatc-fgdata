@@ -13,6 +13,7 @@ loadGUIFile("Style.nas");
 loadGUIFile("Widget.nas");
 loadGUIFile("styles/DefaultStyle.nas");
 loadWidget("Button");
+loadWidget("Label");
 loadWidget("ScrollArea");
 
 var style = DefaultStyle.new("AmbianceClassic");
@@ -24,7 +25,7 @@ var WindowButton = {
       _name: name
     };
     m._focus_policy = m.NoFocus;
-    m._setRoot( parent.createChild("image", "WindowButton-" ~ name) );
+    m._setView({_root: parent.createChild("image", "WindowButton-" ~ name)});
     return m;
   },
 # protected:
@@ -41,7 +42,7 @@ var WindowButton = {
     else if( window_focus )
       file ~= "_normal";
 
-    me._root.set("src", file ~ ".png");
+    me._view._root.set("src", file ~ ".png");
   }
 };
 
@@ -110,7 +111,7 @@ var Window = {
     ];
 
     me._canvas = new({
-      size: [2 * size[0], 2 * size[1]],
+      size: [size[0], size[1]],
       view: size,
       placement: {
         type: "window",
@@ -538,18 +539,22 @@ root.createChild("image")
     text.addEventListener("mousemove", func(e) { printf("move: screen(%.1f|%.1f) client(%.1f|%.1f) local(%.1f|%.1f) delta(%.1f|%.1f)", e.screenX, e.screenY, e.clientX, e.clientY, e.localX, e.localY, e.deltaX, e.deltaY); });
     text.set("fill", style.getColor("text_color"));
 
-    gui.widgets.Button.new(root, style, {size: [64, 26]})
+    gui.widgets.Button.new(root, style, {})
                       .setText("Ok")
-                      .move(20,  250);
-    gui.widgets.Button.new(root, style, {size: [64, 26]})
+                      .move(20,  250)
+                      .setSize(64, 26);
+    gui.widgets.Button.new(root, style, {})
                       .setText("Apply")
-                      .move(100, 250);
-    gui.widgets.Button.new(root, style, {size: [64, 64]})
+                      .move(100, 250)
+                      .setSize(64, 26);
+    gui.widgets.Button.new(root, style, {})
                       .setText("Cancel")
-                      .move(180, 200);
+                      .move(180, 200)
+                      .setSize(64, 64);
 
-    var scroll = gui.widgets.ScrollArea.new(root, style, {size: [96, 128]})
-                                       .move(20, 100);
+    var scroll = gui.widgets.ScrollArea.new(root, style, {})
+                                       .move(20, 100)
+                                       .setSize(96, 128);
     var txt = scroll.getContent().createChild("text")
                        .set("text", "01hallo\n02asdasd\n03\n04\n05asdasd06\n07ß\n08\n09asdasd\n10\n11");
     scroll.update();

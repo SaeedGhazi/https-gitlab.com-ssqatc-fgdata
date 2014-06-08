@@ -8,22 +8,13 @@ gui.widgets.Button = {
     m._flat = cfg.get("flat", 0);
 
     if( style != nil and !m._flat )
-    {
-      m._button = style.createWidget(parent, "button", cfg);
-      m._setRoot(m._button.element);
-    }
-
-    m.setMinimumSize([16, 16]);
-    m.setSizeHint([32, 32]);
-    m.setMaximumSize([m._MAX_SIZE, m._MAX_SIZE]);
-
-    m.setSetGeometryFunc(m.setGeometry);
+      m._setView( style.createWidget(parent, "button", cfg) );
 
     return m;
   },
   setText: func(text)
   {
-    me._button.setText(text);
+    me._view.setText(me, text);
     return me;
   },
   setActive: func
@@ -45,21 +36,15 @@ gui.widgets.Button = {
     return me;
   },
   onClick: func {},
-  setGeometry: func(geom)
-  {
-    me.move(geom[0], geom[1]);
-    me._button.setSize([geom[2] - geom[0], geom[3] - geom[1]]);
-    me._onStateChange();
-    return me;
-  },
 # protected:
   _onStateChange: func
   {
-    if( me._button != nil )
-      me._button.update(me._active, me._focused, me._hover, !me._windowFocus());
+    if( me._view != nil )
+      me._view.update(me);
   },
-  _setRoot: func(el)
+  _setView: func(view)
   {
+    var el = view._root;
     el.addEventListener("mousedown", func me.setActive());
     el.addEventListener("mouseup",   func me.clearActive());
 
@@ -70,6 +55,6 @@ gui.widgets.Button = {
     el.addEventListener("mouseleave",func me.clearActive());
     el.addEventListener("drag", func(e) e.stopPropagation());
 
-    call(gui.Widget._setRoot, [el], me);
+    call(gui.Widget._setView, [view], me);
   }
 };

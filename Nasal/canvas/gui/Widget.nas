@@ -8,19 +8,32 @@ gui.Widget = {
   #
   new: func(derived)
   {
-    return canvas.Widget.new({
+    var m = canvas.Widget.new({
       parents: [derived, gui.Widget],
       _focused: 0,
       _focus_policy: gui.Widget.NoFocus,
       _hover: 0,
-      _root: nil,
-      _size: [64, 64]
+      _view: nil,
+      _pos: [0, 0],
+      _size: [32, 32]
     });
+
+    m.setMinimumSize([16, 16]);
+    m.setSizeHint([32, 32]);
+    m.setMaximumSize([m._MAX_SIZE, m._MAX_SIZE]);
+
+    m.setSetGeometryFunc(m.setGeometry);
+
+    return m;
   },
   # Move the widget to the given position (relative to its parent)
   move: func(x, y)
   {
-    me._root.setTranslation(x, y);
+    me._pos[0] = x;
+    me._pos[1] = y;
+
+    if( me._view != nil )
+      me._view._root.setTranslation(x, y);
     return me;
   },
   #
@@ -28,6 +41,20 @@ gui.Widget = {
   {
     me._size[0] = w;
     me._size[1] = h;
+
+    if( me._view != nil )
+      me._view.setSize(w, h);
+    return me;
+  },
+  # Set geometry of widget (usually used by layouting system)
+  #
+  # @param geom [<min-x>, <min-y>, <max-x>, <max-y>]
+  setGeometry: func(geom)
+  {
+    me.move(geom[0], geom[1]);
+    me.setSize(geom[2] - geom[0], geom[3] - geom[1]);
+    me._onStateChange();
+    return me;
   },
   #
   setFocus: func
@@ -68,11 +95,12 @@ gui.Widget = {
 # protected:
   _MAX_SIZE: 32768, # size for "no size-limit"
   _onStateChange: func {},
-  _setRoot: func(el)
+  _setView: func(view)
   {
-    me._root = el;
+    me._view = view;
 
-    var canvas = el.getCanvas();
+    var root = view._root;
+    var canvas = root.getCanvas();
     me.setCanvas(canvas);
 
     canvas.addEventListener("wm.focus-in", func {
@@ -82,16 +110,16 @@ gui.Widget = {
       me._onStateChange();
     });
 
-    el.addEventListener("mouseenter", func {
+    root.addEventListener("mouseenter", func {
       me._hover = 1;
       me.onMouseEnter();
       me._onStateChange();
     });
-    el.addEventListener("mousedown", func {
+    root.addEventListener("mousedown", func {
       if( bits.test(me._focus_policy, me.ClickFocus / 2) )
         me.setFocus();
     });
-    el.addEventListener("mouseleave", func {
+    root.addEventListener("mouseleave", func {
       me._hover = 0;
       me.onMouseLeave();
       me._onStateChange();

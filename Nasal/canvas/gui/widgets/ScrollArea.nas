@@ -3,44 +3,21 @@ gui.widgets.ScrollArea = {
   {
     var cfg = Config.new(cfg);
     var m = gui.Widget.new(gui.widgets.ScrollArea);
-    m._focus_policy = m.StrongFocus;
-    m._active = 0;
-    m._pos = [0,0];
-    m._size = cfg.get("size", m._size);
+    m._focus_policy = m.NoFocus;
+    m._scroll_pos = [0,0];
     m._max_scroll = [0, 0];
     m._content_size = [0, 0];
 
-    m.setMinimumSize([16, 16]);
-    m.setSizeHint([128, 128]);
-    m.setMaximumSize([m._MAX_SIZE, m._MAX_SIZE]);
-
-    m.setSetGeometryFunc(m.setGeometry);
-
     if( style != nil )
-    {
-      m._scroll = style.createWidget(parent, "scroll-area", cfg);
-      m._setRoot(m._scroll.element);
+      m._setView( style.createWidget(parent, "scroll-area", cfg) );
 
-      m._scroll.vert.addEventListener("mousedown", func(e) m._dragStart(e));
-      m._scroll.horiz.addEventListener("mousedown", func(e) m._dragStart(e));
-
-      m._scroll.vert.addEventListener
-      (
-        "drag",
-        func(e) m.moveTo(m._pos[0], m._drag_offsetY + e.clientY)
-      );
-      m._scroll.horiz.addEventListener
-      (
-        "drag",
-        func(e) m.moveTo(m._drag_offsetX + e.clientX, m._pos[1])
-      );
-    }
+    m.setMinimumSize([32, 32]);
 
     return m;
   },
   getContent: func()
   {
-    return me._scroll.content;
+    return me._view.content;
   },
   # Set the background color for the content area.
   #
@@ -49,7 +26,7 @@ gui.widgets.ScrollArea = {
   {
     if( size(arg) == 1 )
       var arg = arg[0];
-    me._scroll.setColorBackground(arg);
+    me._view.setColorBackground(arg);
   },
   # Reset the size of the content area, e.g. on window resize.
   #
@@ -71,15 +48,15 @@ gui.widgets.ScrollArea = {
   {
     var bb = me._updateBB();
 
-    me._pos[0] = math.max(0, math.min(x, me._max_scroll[0]));
-    me._pos[1] = math.max(0, math.min(y, me._max_scroll[1]));
+    me._scroll_pos[0] = math.max(0, math.min(x, me._max_scroll[0]));
+    me._scroll_pos[1] = math.max(0, math.min(y, me._max_scroll[1]));
 
     me.update(bb);
   },
   # Move the scrollable area to the top-most position and update.
   moveToTop: func()
   {
-    me._pos[1] = 0;
+    me._scroll_pos[1] = 0;
 
     me.update();
   },
@@ -88,14 +65,14 @@ gui.widgets.ScrollArea = {
   {
     var bb = me._updateBB();
 
-    me._pos[1] = me._max_scroll[1];
+    me._scroll_pos[1] = me._max_scroll[1];
 
     me.update(bb);
   },
   # Move the scrollable area to the left-most position and update.
   moveToLeft: func()
   {
-    me._pos[0] = 0;
+    me._scroll_pos[0] = 0;
 
     me.update();
   },
@@ -104,15 +81,9 @@ gui.widgets.ScrollArea = {
   {
     var bb = me._updateBB();
 
-    me._pos[0] = me._max_scroll[0];
+    me._scroll_pos[0] = me._max_scroll[0];
 
     me.update(bb);
-  },
-  setGeometry: func(geom)
-  {
-    me.move(geom[0], geom[1]);
-    me.setSize([geom[2] - geom[0], geom[3] - geom[1]]);
-    return me;
   },
   # Update scroll bar and content area.
   #
@@ -126,32 +97,51 @@ gui.widgets.ScrollArea = {
                    me._content_offset[1] ];
 
     if( me._max_scroll[0] > 1 )
-      offset[0] -= (me._pos[0] / me._max_scroll[0])
+      offset[0] -= (me._scroll_pos[0] / me._max_scroll[0])
                  * (me._content_size[0] - me._size[0]);
     if( me._max_scroll[1] > 1 )
-      offset[1] -= (me._pos[1] / me._max_scroll[1])
+      offset[1] -= (me._scroll_pos[1] / me._max_scroll[1])
                  * (me._content_size[1] - me._size[1]);
 
     me.getContent().setTranslation(offset);
 
-    me._scroll.update(me);
+    me._view.update(me);
     me.getContent().update();
 
     return me;
   },
 # protected:
-  _setRoot: func(el)
+  _setView: func(view)
   {
-    el.addEventListener("wheel", func(e) me.moveTo(me._pos[0], me._pos[1] - e.deltaY));
+    view.vert.addEventListener("mousedown", func(e) me._dragStart(e));
+    view.horiz.addEventListener("mousedown", func(e) me._dragStart(e));
 
-    call(gui.Widget._setRoot, [el], me);
+    view.vert.addEventListener
+    (
+      "drag",
+      func(e) me.moveTo(me._scroll_pos[0], me._drag_offsetY + e.clientY)
+    );
+    view.horiz.addEventListener
+    (
+      "drag",
+      func(e) me.moveTo(me._drag_offsetX + e.clientX, me._scroll_pos[1])
+    );
+
+    view._root.addEventListener
+    (
+      "wheel",
+      func(e) me.moveTo(me._scroll_pos[0], me._scroll_pos[1] - e.deltaY)
+    );
+
+    call(gui.Widget._setView, [view], me);
   },
   _dragStart: func(e)
   {
-    me._drag_offsetX = me._pos[0] - e.clientX;
-    me._drag_offsetY = me._pos[1] - e.clientY;
+    me._drag_offsetX = me._scroll_pos[0] - e.clientX;
+    me._drag_offsetY = me._scroll_pos[1] - e.clientY;
   },
-  _updateBB: func() {
+  _updateBB: func()
+  {
     # TODO only update on content resize
     var bb = me.getContent().getTightBoundingBox();
 
@@ -161,16 +151,25 @@ gui.widgets.ScrollArea = {
     var h = bb[3] - bb[1];
 
     if( w > me._size[0] )
-      me._max_scroll[0] = me._size[0] * (1 - me._size[0] / w);
-    else me._max_scroll[0] = 0;
+    {
+      var scroller_size = math.max(12, me._size[0] * (me._size[0] / w));
+      me._max_scroll[0] = me._size[0] - scroller_size;
+    }
+    else
+      me._max_scroll[0] = 0;
+
     if( h > me._size[1] )
-      me._max_scroll[1] = me._size[1] * (1 - me._size[1] / h);
-    else me._max_scroll[1] = 0;
+    {
+      var scroller_size = math.max(12, me._size[1] * (me._size[1] / h));
+      me._max_scroll[1] = me._size[1] - scroller_size;
+    }
+    else
+      me._max_scroll[1] = 0;
 
     me._content_size[0] = w;
     me._content_size[1] = h;
 
     var cur_offset = me.getContent().getTranslation();
     me._content_offset = [cur_offset[0] - bb[0], cur_offset[1] - bb[1]];
-  },
+  }
 };

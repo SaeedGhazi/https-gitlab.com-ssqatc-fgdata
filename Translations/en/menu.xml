@@ -12,8 +12,10 @@
 	<snap-shot>Screenshot                      </snap-shot>
 	<snap-shot-dir>Screenshot Directory</snap-shot-dir>
 	<sound-config>Sound Configuration</sound-config>
-    <input-config>Input Configuration</input-config>
-	<exit>Quit                               </exit>
+	<input-config>Input Configuration</input-config>
+	<terrasync>Scenery Download</terrasync>
+	<aircraft-center>Aircraft Center (Experimental)</aircraft-center>
+	<exit>Quit</exit>
 
 	<!-- View menu -->
 	<view>View</view>
@@ -48,7 +50,6 @@
 	<environment-settings>Environment Settings</environment-settings>
 	<time-settings>Time Settings</time-settings>
 	<wildfire-settings>Wildfire Settings</wildfire-settings>
-	<terrasync>Scenery Download</terrasync>
 
 	<!-- Equipment menu -->
 	<equipment>Equipment</equipment>

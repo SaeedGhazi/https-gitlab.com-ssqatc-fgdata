@@ -7,6 +7,7 @@ var gui = {
 var gui_dir = getprop("/sim/fg-root") ~ "/Nasal/canvas/gui/";
 var loadGUIFile = func(file) io.load_nasal(gui_dir ~ file, "canvas");
 var loadWidget = func(name) loadGUIFile("widgets/" ~ name ~ ".nas");
+var loadDialog = func(name) loadGUIFile("dialogs/" ~ name ~ ".nas");
 
 loadGUIFile("Config.nas");
 loadGUIFile("Style.nas");

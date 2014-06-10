@@ -7,6 +7,7 @@ gui.widgets.ScrollArea = {
     m._scroll_pos = [0,0];
     m._max_scroll = [0, 0];
     m._content_size = [0, 0];
+    m._layout = nil;
 
     if( style != nil )
       m._setView( style.createWidget(parent, "scroll-area", cfg) );
@@ -14,6 +15,12 @@ gui.widgets.ScrollArea = {
     m.setMinimumSize([32, 32]);
 
     return m;
+  },
+  setLayout: func(l)
+  {
+    me._layout = l;
+    l.setParent(me);
+    return me.update();
   },
   getContent: func()
   {
@@ -143,12 +150,30 @@ gui.widgets.ScrollArea = {
   _updateBB: func()
   {
     # TODO only update on content resize
-    var bb = me.getContent().getTightBoundingBox();
+    if( me._layout == nil )
+    {
+      var bb = me.getContent().getTightBoundingBox();
 
-    if( bb[2] < bb[0] or bb[3] < bb[1] )
-      return nil;
-    var w = bb[2] - bb[0];
-    var h = bb[3] - bb[1];
+      if( bb[2] < bb[0] or bb[3] < bb[1] )
+        return nil;
+      var w = bb[2] - bb[0];
+      var h = bb[3] - bb[1];
+
+      var cur_offset = me.getContent().getTranslation();
+      me._content_offset = [cur_offset[0] - bb[0], cur_offset[1] - bb[1]];
+    }
+    else
+    {
+      var min_size = me._layout.minimumSize();
+      var max_size = me._layout.maximumSize();
+      var size_hint = me._layout.sizeHint();
+      var w = math.min(max_size[0], math.max(math.max(min_size[0], size_hint[0]), me._size[0]));
+      var h = math.min(max_size[1], math.max(math.max(min_size[1], size_hint[1]), me._size[1]));
+      me._layout.setGeometry([0, 0, w, h]);
+
+      # Layout always has the origin at (0, 0)
+      me._content_offset = [0, 0];
+    }
 
     if( w > me._size[0] )
     {
@@ -168,8 +193,5 @@ gui.widgets.ScrollArea = {
 
     me._content_size[0] = w;
     me._content_size[1] = h;
-
-    var cur_offset = me.getContent().getTranslation();
-    me._content_offset = [cur_offset[0] - bb[0], cur_offset[1] - bb[1]];
   }
 };

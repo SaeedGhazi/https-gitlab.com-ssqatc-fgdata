@@ -22,9 +22,15 @@ gui.Widget = {
     m.setSizeHint([32, 32]);
     m.setMaximumSize([m._MAX_SIZE, m._MAX_SIZE]);
 
-    m.setSetGeometryFunc(m.setGeometry);
+    m.setSetGeometryFunc(m._impl.setGeometry);
 
     return m;
+  },
+  setFixedSize: func(x, y)
+  {
+    me.setMinimumSize([x, y]);
+    me.setSizeHint([x, y]);
+    me.setMaximumSize([x, y]);
   },
   # Move the widget to the given position (relative to its parent)
   move: func(x, y)
@@ -48,11 +54,11 @@ gui.Widget = {
   },
   # Set geometry of widget (usually used by layouting system)
   #
-  # @param geom [<min-x>, <min-y>, <max-x>, <max-y>]
+  # @param geom [<x>, <y>, <width>, <height>]
   setGeometry: func(geom)
   {
     me.move(geom[0], geom[1]);
-    me.setSize(geom[2] - geom[0], geom[3] - geom[1]);
+    me.setSize(geom[2], geom[3]);
     me._onStateChange();
     return me;
   },
@@ -69,7 +75,7 @@ gui.Widget = {
     me._focused = 1;
     canvas._focused_widget = me;
 
-    me.onFocusIn();
+    me._trigger("focus-in");
     me._onStateChange();
 
     return me;
@@ -83,15 +89,16 @@ gui.Widget = {
     me._focused = 0;
     me.getCanvas()._focused_widget = nil;
 
-    me.onFocusOut();
+    me._trigger("focus-out");
     me._onStateChange();
 
     return me;
   },
-  onFocusIn: func {},
-  onFocusOut: func {},
-  onMouseEnter: func {},
-  onMouseLeave: func {},
+  listen: func(type, cb)
+  {
+    me._view._root.addEventListener("cb." ~ type, cb);
+    return me;
+  },
 # protected:
   _MAX_SIZE: 32768, # size for "no size-limit"
   _onStateChange: func {},
@@ -112,7 +119,7 @@ gui.Widget = {
 
     root.addEventListener("mouseenter", func {
       me._hover = 1;
-      me.onMouseEnter();
+      me._trigger("mouse-enter");
       me._onStateChange();
     });
     root.addEventListener("mousedown", func {
@@ -121,9 +128,16 @@ gui.Widget = {
     });
     root.addEventListener("mouseleave", func {
       me._hover = 0;
-      me.onMouseLeave();
+      me._trigger("mouse-leave");
       me._onStateChange();
     });
+  },
+  _trigger: func(type, data = nil)
+  {
+    me._view._root.dispatchEvent(
+      canvas.CustomEvent.new("cb." ~ type, {detail: data})
+    );
+    return me;
   },
   _windowFocus: func
   {

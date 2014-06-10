@@ -35,7 +35,7 @@ var WindowButton = {
     var window_focus = me._windowFocus();
     file ~= window_focus ? "_focused" : "_unfocused";
 
-    if( me._active )
+    if( me._down )
       file ~= "_pressed";
     else if( me._hover )
       file ~= "_prelight";
@@ -405,7 +405,7 @@ var Window = {
 
     var button_close = WindowButton.new(title_bar, "close")
                                    .move(x, y);
-    button_close.onClick = func me.del();
+    button_close.listen("clicked", func me.del());
 
     # title
     me._title = title_bar.createChild("text", "title")
@@ -452,32 +452,6 @@ var Dialog = {
   }
 };
 
-var createLayoutTest = func
-{
-  var dlg = canvas.Window.new([350,250], "dialog")
-                         .set("resize", 1);
-  dlg.getCanvas(1)
-     .set("background", style.getColor("bg_color"));
-  var root = dlg.getCanvas().createGroup();
-
-  var vbox = VBoxLayout.new();
-  dlg.setLayout(vbox);
-
-  var b = gui.widgets.Button.new(root, style, {}).setText("Stretch");
-  b.setMaximumSize([9999, 9999]);
-  vbox.addItem(b, 1);
-
-  var button_box = HBoxLayout.new();
-  vbox.addItem(button_box);
-
-  var b1 = gui.widgets.Button.new(root, style, {}).setText("Ok");
-  button_box.addItem(b1);
-  b1.setFocus();
-
-  var b2 = gui.widgets.Button.new(root, style, {}).setText("Abort");
-  button_box.addItem(b2);
-}
-
 # Canvas GUI demo
 #
 #  Shows an icon in the top-right corner which upon click opens a simple window
@@ -498,9 +472,6 @@ var initDemo = func
   });
   my_canvas.addEventListener("click", func(e)
   {
-    if( e.button == 1 )
-      return createLayoutTest();
-
     var dlg = canvas.Window.new([400,300], "dialog")
                            .set("resize", 1);
     var my_canvas = dlg.createCanvas()
@@ -511,9 +482,8 @@ var initDemo = func
     my_canvas.addEventListener("drag", func(e) { printf("drag: screen(%.1f|%.1f) client(%.1f|%.1f) local(%.1f|%.1f) delta(%.1f|%.1f)", e.screenX, e.screenY, e.clientX, e.clientY, e.localX, e.localY, e.deltaX, e.deltaY); });
     my_canvas.addEventListener("wheel", func(e) { printf("wheel: screen(%.1f|%.1f) client(%.1f|%.1f) %.1f", e.screenX, e.screenY, e.clientX, e.clientY, e.deltaY); });
     var root = my_canvas.createGroup();
-    root.addEventListener("test", func(e) { printf("test: %s", e.detail.test); });
-root.createChild("image")
-    .set("src", "http://wiki.flightgear.org/skins/common/images/icons-fg-135.png");
+    root.createChild("image")
+        .set("src", "http://wiki.flightgear.org/skins/common/images/icons-fg-135.png");
     var text =
       root.createChild("text")
           .setText("This could be used for building an 'Aircraft Help' dialog.\nYou can also #use it to play around with the new Canvas system :). β")
@@ -533,7 +503,6 @@ root.createChild("image")
           .set("fill", "#ff0000")
           .hide();
     var visible_count = 0;
-    text.addEventListener("click", func root.dispatchEvent(canvas.CustomEvent.new("test", {detail: {"test": "some important data.."}})));
     text.addEventListener("mouseover", func text_move.show());
     text.addEventListener("mouseout", func text_move.hide());
     text.addEventListener("mousemove", func(e) { printf("move: screen(%.1f|%.1f) client(%.1f|%.1f) local(%.1f|%.1f) delta(%.1f|%.1f)", e.screenX, e.screenY, e.clientX, e.clientY, e.localX, e.localY, e.deltaX, e.deltaY); });

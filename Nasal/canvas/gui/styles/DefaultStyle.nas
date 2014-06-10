@@ -70,7 +70,7 @@ DefaultStyle.widgets.button = {
       me._label.set("fill", me._style.getColor("fg_color"));
     file ~= "button";
 
-    if( model._active )
+    if( model._down )
     {
       file ~= "-active";
       me._label.setTranslation(w / 2 + 1, h / 2 + 6);
@@ -82,7 +82,7 @@ DefaultStyle.widgets.button = {
     if( model._focused and !backdrop )
       file ~= "-focused";
 
-    if( model._hover and !model._active )
+    if( model._hover and !model._down )
     {
       file ~= "-hover";
       me._bg.set("fill", me._style.getColor("button_bg_color_hover"));
@@ -104,6 +104,9 @@ DefaultStyle.widgets.label = {
   {
     if( me['_bg'] != nil )
       me._bg.reset().rect(0, 0, w, h);
+    if( me['_img'] != nil )
+      me._img.set("size[0]", w)
+             .set("size[1]", h);
     if( me['_text'] != nil )
       # TODO different alignment
       me._text.setTranslation(2, h / 2);
@@ -115,11 +118,23 @@ DefaultStyle.widgets.label = {
       return me._deleteElement('text');
 
     me._createElement("text", "text")
-      .set("text", text);
+      .set("text", text)
+      .set("fill", "black");
 
     # TODO get real font metrics
     model.setMinimumSize([size(text) * 5 + 4, 14]);
-    model.setSizeHint([size(text) * 8 + 8, 24]);
+    model.setSizeHint([size(text) * 5 + 14, 24]);
+
+    return me;
+  },
+  setImage: func(model, img)
+  {
+    if( img == nil or size(img) == 0 )
+      return me._deleteElement('img');
+
+    me._createElement("img", "image")
+      .set("src", img)
+      .set("preserveAspectRatio", "xMidYMid slice");
 
     return me;
   },

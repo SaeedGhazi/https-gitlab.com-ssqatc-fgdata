@@ -62,9 +62,9 @@ gui.widgets.Button = {
   _setView: func(view)
   {
     var el = view._root;
-    el.addEventListener("mousedown", func me.setDown(1));
-    el.addEventListener("mouseup",   func me.setDown(0));
-    el.addEventListener("click",     func me.toggle());
+    el.addEventListener("mousedown", func if( me._enabled ) me.setDown(1));
+    el.addEventListener("mouseup",   func if( me._enabled ) me.setDown(0));
+    el.addEventListener("click",     func if( me._enabled ) me.toggle());
 
     el.addEventListener("mouseleave",func me.setDown(0));
     el.addEventListener("drag", func(e) e.stopPropagation());

@@ -126,18 +126,30 @@ gui.widgets.ScrollArea = {
     view.vert.addEventListener
     (
       "drag",
-      func(e) me.moveTo(me._scroll_pos[0], me._drag_offsetY + e.clientY)
+      func(e)
+      {
+        if( me._enabled )
+          me.moveTo(me._scroll_pos[0], me._drag_offsetY + e.clientY);
+      }
     );
     view.horiz.addEventListener
     (
       "drag",
-      func(e) me.moveTo(me._drag_offsetX + e.clientX, me._scroll_pos[1])
+      func(e)
+      {
+        if( me._enabled )
+          me.moveTo(me._drag_offsetX + e.clientX, me._scroll_pos[1]);
+      }
     );
 
     view._root.addEventListener
     (
       "wheel",
-      func(e) me.moveTo(me._scroll_pos[0], me._scroll_pos[1] - e.deltaY)
+      func(e)
+      {
+        if( me._enabled )
+          me.moveTo(me._scroll_pos[0], me._scroll_pos[1] - e.deltaY);
+      }
     );
 
     call(gui.Widget._setView, [view], me);

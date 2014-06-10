@@ -78,6 +78,12 @@
 			<blue  type="float">0.988</blue>
 		</button_bg_color_hover>
 
+		<button_bg_color_insensitive>
+			<red   type="float">0.89</red>
+			<green type="float">0.89</green>
+			<blue  type="float">0.89</blue>
+		</button_bg_color_insensitive>
+
 	</colors>
 
 </PropertyList>

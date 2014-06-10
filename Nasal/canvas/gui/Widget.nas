@@ -13,6 +13,7 @@ gui.Widget = {
       _focused: 0,
       _focus_policy: gui.Widget.NoFocus,
       _hover: 0,
+      _enabled: 1,
       _view: nil,
       _pos: [0, 0],
       _size: [32, 32]
@@ -31,6 +32,17 @@ gui.Widget = {
     me.setMinimumSize([x, y]);
     me.setSizeHint([x, y]);
     me.setMaximumSize([x, y]);
+  },
+  setEnabled: func(enabled)
+  {
+    if( me._enabled == enabled )
+      return me;
+
+    me._enabled = enabled;
+    me.clearFocus();
+
+    me._onStateChange();
+    return me;
   },
   # Move the widget to the given position (relative to its parent)
   move: func(x, y)
@@ -71,6 +83,9 @@ gui.Widget = {
     var canvas = me.getCanvas();
     if( canvas._focused_widget != nil )
       canvas._focused_widget.clearFocus();
+
+    if( !me._enabled )
+      return me;
 
     me._focused = 1;
     canvas._focused_widget = me;

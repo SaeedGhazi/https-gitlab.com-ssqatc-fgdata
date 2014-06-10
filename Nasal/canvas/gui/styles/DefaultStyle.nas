@@ -79,16 +79,24 @@ DefaultStyle.widgets.button = {
       me._label.setTranslation(w / 2, h / 2 + 5);
 
 
-    if( model._focused and !backdrop )
-      file ~= "-focused";
-
-    if( model._hover and !model._down )
+    if( model._enabled )
     {
-      file ~= "-hover";
-      me._bg.set("fill", me._style.getColor("button_bg_color_hover"));
+      if( model._focused and !backdrop )
+        file ~= "-focused";
+
+      if( model._hover and !model._down )
+      {
+        file ~= "-hover";
+        me._bg.set("fill", me._style.getColor("button_bg_color_hover"));
+      }
+      else
+        me._bg.set("fill", me._style.getColor("button_bg_color"));
     }
     else
-      me._bg.set("fill", me._style.getColor("button_bg_color"));
+    {
+      file ~= "-disabled";
+      me._bg.set("fill", me._style.getColor("button_bg_color_insensitive"));
+    }
 
     me._border.set("src", file ~ ".png");
   }

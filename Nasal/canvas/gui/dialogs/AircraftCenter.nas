@@ -60,20 +60,38 @@ var AircraftCenter = {
         (func {
           var p = package;
           var b = gui.widgets.Button.new(content, style, {});
-          if( p.installed )
-            b.setText("Remove")
-             .listen("clicked", func
-             {
-               p.install().uninstall();
-               b.setText("Removing...");
-             });
-           else
-            b.setText("Install")
-             .listen("clicked", func
-             {
-               p.install();
-               b.setText("Installing...");
-             });
+          var installed = p.installed;
+
+          if( installed )
+            b.setText("Remove");
+          else
+            b.setText("Install");
+
+          b.listen("clicked", func
+          {
+            if( installed )
+            {
+              p.uninstall();
+              installed = 0;
+              b.setText("Install");
+            }
+            else
+            {
+              b.setEnabled(0)
+               .setText("Wait...");
+              p.install()
+               .progress(func(i, cur, total)
+                 b.setText(sprintf("%.1f%%", (cur / total) * 100))
+               )
+               .fail(func b.setText('Failed'))
+               .done(func {
+                 installed = 1;
+                 b.setText("Remove")
+                  .setEnabled(1);
+               });
+            }
+          });
+
           title_box.addItem(b);
         })();
 

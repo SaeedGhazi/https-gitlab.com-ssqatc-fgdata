@@ -11,9 +11,19 @@ var AircraftCenter = {
     var vbox = VBoxLayout.new();
     dlg.setLayout(vbox);
 
+    var packages = pkg.root.search({
+      'rating-FDM': 2,
+      'rating-cockpit': 2,
+      'rating-model': 2,
+      'rating-systems': 1
+    });
+
+    var info_text =
+      "Install/remove aircrafts (Showing " ~ size(packages) ~ " aircrafts)";
+
     vbox.addItem(
       gui.widgets.Label.new(root, style, {})
-                       .setText("Install/remove aircrafts (Showing first 100)")
+                       .setText(info_text)
     );
 
     var scroll = gui.widgets.ScrollArea.new(root, style, {size: [96, 128]})
@@ -28,87 +38,80 @@ var AircraftCenter = {
     var list = VBoxLayout.new();
     scroll.setLayout(list);
 
-    var num = 0;
-    foreach(var catalog; pkg.root.catalogs())
+    foreach(var package; packages)
     {
-      foreach(var package; catalog.packages())
-      {
-        var row = HBoxLayout.new();
-        list.addItem(row);
+      var row = HBoxLayout.new();
+      list.addItem(row);
 
-        var img = "path-for-missing-thumb...";
-        var thumbs = package.thumbnails;
-        if( size(thumbs) > 0 )
-          img = thumbs[0];
-        var image_label = gui.widgets.Label.new(content, style, {})
-                                           .setImage(img);
-        image_label.setFixedSize(171, 128);
-        row.addItem(image_label);
+      var image_label = gui.widgets.Label.new(content, style, {});
+      image_label.setFixedSize(171, 128);
+      row.addItem(image_label);
 
-        var detail_box = VBoxLayout.new();
-        detail_box.setSpacing(0);
-        row.addItem(detail_box);
-        
-        var title_box = HBoxLayout.new();
-        detail_box.addItem(title_box);
-        
-        title_box.addItem(
-          gui.widgets.Label.new(content, style, {})
-                           .setText(package.name)
-        );
-        title_box.addStretch(1);
-        (func {
-          var p = package;
-          var b = gui.widgets.Button.new(content, style, {});
-          var installed = p.installed;
+      var thumbs = package.thumbnails;
+      if( size(thumbs) > 0 )
+        image_label.setImage(thumbs[0]);
+      else
+        image_label.setText("No thumbnail available");
 
-          if( installed )
-            b.setText("Remove");
-          else
-            b.setText("Install");
+      var detail_box = VBoxLayout.new();
+      detail_box.setSpacing(0);
+      row.addItem(detail_box);
 
-          b.listen("clicked", func
-          {
-            if( installed )
-            {
-              p.uninstall();
-              installed = 0;
-              b.setText("Install");
-            }
-            else
-            {
-              b.setEnabled(0)
-               .setText("Wait...");
-              p.install()
-               .progress(func(i, cur, total)
-                 b.setText(sprintf("%.1f%%", (cur / total) * 100))
-               )
-               .fail(func b.setText('Failed'))
-               .done(func {
-                 installed = 1;
-                 b.setText("Remove")
-                  .setEnabled(1);
-               });
-            }
-          });
+      var title_box = HBoxLayout.new();
+      detail_box.addItem(title_box);
 
-          title_box.addItem(b);
-        })();
+      title_box.addItem(
+        gui.widgets.Label.new(content, style, {})
+                         .setText(package.name)
+      );
+      title_box.addStretch(1);
+      (func {
+        var p = package;
+        var b = gui.widgets.Button.new(content, style, {});
+        var installed = p.installed;
 
-        foreach(var cat; ["FDM", "systems", "cockpit", "model"])
+        if( installed )
+          b.setText("Remove");
+        else
+          b.setText("Install");
+
+        b.listen("clicked", func
         {
-          detail_box.addItem(
-            gui.widgets.Label.new(content, style, {})
-                             .setText(cat ~ ": " ~ package.lprop("rating/" ~ cat))
-          );
-        }
+          if( installed )
+          {
+            p.uninstall();
+            installed = 0;
+            b.setText("Install");
+          }
+          else
+          {
+            b.setEnabled(0)
+             .setText("Wait...");
+            p.install()
+             .progress(func(i, cur, total)
+               b.setText(sprintf("%.1f%%", (cur / total) * 100))
+             )
+             .fail(func b.setText('Failed'))
+             .done(func {
+               installed = 1;
+               b.setText("Remove")
+                .setEnabled(1);
+             });
+          }
+        });
 
-        row.addSpacing(5);
+        title_box.addItem(b);
+      })();
 
-        num += 1;
-        if( num >= 100 )
-          break;
+      foreach(var cat; ["FDM", "systems", "cockpit", "model"])
+      {
+        detail_box.addItem(
+          gui.widgets.Label.new(content, style, {})
+                           .setText(cat ~ ": " ~ package.lprop("rating/" ~ cat))
+        );
       }
+
+      row.addSpacing(5);
     }
   }
 };

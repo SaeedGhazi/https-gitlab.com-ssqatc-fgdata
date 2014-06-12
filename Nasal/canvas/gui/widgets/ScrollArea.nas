@@ -179,8 +179,12 @@ gui.widgets.ScrollArea = {
       var min_size = me._layout.minimumSize();
       var max_size = me._layout.maximumSize();
       var size_hint = me._layout.sizeHint();
-      var w = math.min(max_size[0], math.max(math.max(min_size[0], size_hint[0]), me._size[0]));
-      var h = math.min(max_size[1], math.max(math.max(min_size[1], size_hint[1]), me._size[1]));
+      var w = math.min(max_size[0], math.max(size_hint[0], me._size[0]));
+      var h = math.max(
+              math.min(max_size[1], math.max(size_hint[1], me._size[1])),
+              me._layout.heightForWidth(w)
+            );
+
       me._layout.setGeometry([0, 0, w, h]);
 
       # Layout always has the origin at (0, 0)

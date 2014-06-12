@@ -61,7 +61,7 @@ gui.Widget = {
     me._size[1] = h;
 
     if( me._view != nil )
-      me._view.setSize(w, h);
+      me._view.setSize(me, w, h);
     return me;
   },
   # Set geometry of widget (usually used by layouting system)

@@ -1,10 +1,10 @@
 gui.widgets.Label = {
   new: func(parent, style, cfg)
   {
-    var cfg = Config.new(cfg);
     var m = gui.Widget.new(gui.widgets.Label);
+    m._cfg = Config.new(cfg);
     m._focus_policy = m.NoFocus;
-    m._setView( style.createWidget(parent, "label", cfg) );
+    m._setView( style.createWidget(parent, "label", m._cfg) );
 
     return m;
   },

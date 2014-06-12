@@ -39,7 +39,7 @@ DefaultStyle.widgets.button = {
               .set("character-size", 14)
               .set("alignment", "center-baseline");
   },
-  setSize: func(w, h)
+  setSize: func(model, w, h)
   {
     me._bg.reset()
           .rect(3, 3, w - 6, h - 6, {"border-radius": 5});
@@ -108,7 +108,7 @@ DefaultStyle.widgets.label = {
   {
     me._root = parent.createChild("group", "label");
   },
-  setSize: func(w, h)
+  setSize: func(model, w, h)
   {
     if( me['_bg'] != nil )
       me._bg.reset().rect(0, 0, w, h);
@@ -116,22 +116,39 @@ DefaultStyle.widgets.label = {
       me._img.set("size[0]", w)
              .set("size[1]", h);
     if( me['_text'] != nil )
+    {
       # TODO different alignment
-      me._text.setTranslation(2, h / 2);
+      me._text.setTranslation(2, 2 + h / 2);
+      me._text.set(
+        "max-width",
+        model._cfg.get("wordWrap", 0) ? (w - 4) : 0
+      );
+    }
     return me;
   },
   setText: func(model, text)
   {
     if( text == nil or size(text) == 0 )
+    {
+      model.setHeightForWidthFunc(nil);
       return me._deleteElement('text');
+    }
 
     me._createElement("text", "text")
       .set("text", text)
       .set("fill", "black");
 
-    # TODO get real font metrics
-    model.setMinimumSize([size(text) * 5 + 4, 14]);
-    model.setSizeHint([size(text) * 5 + 14, 24]);
+    if( model._cfg.get("wordWrap", 0) )
+    {
+      var m = me;
+      model.setHeightForWidthFunc(func(w) m.heightForWidth(w));
+    }
+    else
+    {
+      # TODO get real font metrics
+      model.setMinimumSize([size(text) * 5 + 4, 14]);
+      model.setSizeHint([size(text) * 5 + 14, 24]);
+    }
 
     return me;
   },
@@ -155,8 +172,15 @@ DefaultStyle.widgets.label = {
     me._createElement("bg", "path")
       .set("fill", bg);
 
-    me.setSize(model._size[0], model._size[1]);
+    me.setSize(model, model._size[0], model._size[1]);
     return me;
+  },
+  heightForWidth: func(w)
+  {
+    if( me['_text'] == nil )
+      return -1;
+
+    return math.max(14, me._text.heightForWidth(w - 4));
   },
 # protected:
   _createElement: func(name, type)

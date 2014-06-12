@@ -22,7 +22,7 @@ var AircraftCenter = {
       "Install/remove aircrafts (Showing " ~ size(packages) ~ " aircrafts)";
 
     vbox.addItem(
-      gui.widgets.Label.new(root, style, {})
+      gui.widgets.Label.new(root, style, {wordWrap: 1})
                        .setText(info_text)
     );
 
@@ -54,8 +54,8 @@ var AircraftCenter = {
         image_label.setText("No thumbnail available");
 
       var detail_box = VBoxLayout.new();
-      detail_box.setSpacing(0);
       row.addItem(detail_box);
+      row.addSpacing(5);
 
       var title_box = HBoxLayout.new();
       detail_box.addItem(title_box);
@@ -69,11 +69,12 @@ var AircraftCenter = {
         var p = package;
         var b = gui.widgets.Button.new(content, style, {});
         var installed = p.installed;
+        var install_text = sprintf("Install (%.1fMB)", p.fileSize/1024/1024);
 
         if( installed )
           b.setText("Remove");
         else
-          b.setText("Install");
+          b.setText(install_text);
 
         b.listen("clicked", func
         {
@@ -81,7 +82,7 @@ var AircraftCenter = {
           {
             p.uninstall();
             installed = 0;
-            b.setText("Install");
+            b.setText(install_text);
           }
           else
           {
@@ -103,15 +104,19 @@ var AircraftCenter = {
         title_box.addItem(b);
       })();
 
-      foreach(var cat; ["FDM", "systems", "cockpit", "model"])
+      var description = package.description;
+      if( size(description) <= 0 )
       {
-        detail_box.addItem(
-          gui.widgets.Label.new(content, style, {})
-                           .setText(cat ~ ": " ~ package.lprop("rating/" ~ cat))
-        );
+        foreach(var cat; ["FDM", "systems", "cockpit", "model"])
+          description ~= cat ~ ": " ~ package.lprop("rating/" ~ cat) ~ "\n";
       }
 
-      row.addSpacing(5);
+      detail_box.addItem(
+        gui.widgets.Label.new(content, style, {wordWrap: 1})
+                         .setText(description)
+      );
+
+      detail_box.addStretch(1);
     }
   }
 };

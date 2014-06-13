@@ -1,7 +1,7 @@
 var AircraftCenter = {
   show: func
   {
-    var dlg = canvas.Window.new([550,500], "dialog")
+    var dlg = canvas.Window.new([600,500], "dialog")
                            .set("title", "Aircraft Center")
                            .set("resize", 1);
     dlg.getCanvas(1)
@@ -19,7 +19,7 @@ var AircraftCenter = {
     });
 
     var info_text =
-      "Install/remove aircrafts (Showing " ~ size(packages) ~ " aircrafts)";
+      "Install/remove aircraft (Showing " ~ size(packages) ~ " aircraft)";
 
     vbox.addItem(
       gui.widgets.Label.new(root, style, {wordWrap: 1})
@@ -104,7 +104,7 @@ var AircraftCenter = {
         title_box.addItem(b);
       })();
 
-      var description = package.description;
+      var description = parse_markdown(package.description);
       if( size(description) <= 0 )
       {
         foreach(var cat; ["FDM", "systems", "cockpit", "model"])

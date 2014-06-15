@@ -4,59 +4,71 @@ gui.widgets.Button = {
     var cfg = Config.new(cfg);
     var m = gui.Widget.new(gui.widgets.Button);
     m._focus_policy = m.StrongFocus;
-    m._active = 0;
+    m._down = 0;
+    m._checkable = 0;
     m._flat = cfg.get("flat", 0);
 
     if( style != nil and !m._flat )
-    {
-      m._button = style.createWidget(parent, "button", cfg);
-      m._setRoot(m._button.element);
-    }
+      m._setView( style.createWidget(parent, "button", cfg) );
 
     return m;
   },
   setText: func(text)
   {
-    me._button.setText(text);
+    me._view.setText(me, text);
     return me;
   },
-  setActive: func
+  setCheckable: func(checkable)
   {
-    if( me._active )
+    me._checkable = checkable;
+    return me;
+  },
+  setChecked: func(checked = 1)
+  {
+    if( !me._checkable or me._down == checked )
       return me;
 
-    me._active = 1;
+    me._trigger("clicked", {checked: checked});
+    me._trigger("toggled", {checked: checked});
+
+    me._down = checked;
     me._onStateChange();
     return me;
   },
-  clearActive: func
+  setDown: func(down = 1)
   {
-    if( !me._active )
+    if( me._checkable or me._down == down )
       return me;
 
-    me._active = 0;
+    me._down = down;
     me._onStateChange();
     return me;
   },
-  onClick: func {},
+  toggle: func
+  {
+    if( !me._checkable )
+      me._trigger("clicked", {checked: 0});
+    else
+      me.setChecked(!me._down);
+
+    return me;
+  },
 # protected:
   _onStateChange: func
   {
-    if( me._button != nil )
-      me._button.update(me._active, me._focused, me._hover, !me._window._focused);
+    if( me._view != nil )
+      me._view.update(me);
   },
-  _setRoot: func(el)
+  _setView: func(view)
   {
-    el.addEventListener("mousedown", func me.setActive());
-    el.addEventListener("mouseup",   func me.clearActive());
+    var el = view._root;
+    el.addEventListener("mousedown", func if( me._enabled ) me.setDown(1));
+    el.addEventListener("mouseup",   func if( me._enabled ) me.setDown(0));
+    el.addEventListener("click",     func if( me._enabled ) me.toggle());
 
-    # Use 'call' to ensure 'me' is not set and can be used in the closure of
-    # custom callbacks. TODO pass 'me' as argument?
-    el.addEventListener("click", func call(me.onClick));
-
-    el.addEventListener("mouseleave",func me.clearActive());
+    el.addEventListener("mouseleave",func me.setDown(0));
     el.addEventListener("drag", func(e) e.stopPropagation());
 
-    call(gui.Widget._setRoot, [el], me);
+    call(gui.Widget._setView, [view], me);
   }
 };

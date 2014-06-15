@@ -3,38 +3,28 @@ gui.widgets.ScrollArea = {
   {
     var cfg = Config.new(cfg);
     var m = gui.Widget.new(gui.widgets.ScrollArea);
-    m._focus_policy = m.StrongFocus;
-    m._active = 0;
-    m._pos = [0,0];
-    m._size = cfg.get("size", m._size);
+    m._focus_policy = m.NoFocus;
+    m._scroll_pos = [0,0];
     m._max_scroll = [0, 0];
     m._content_size = [0, 0];
+    m._layout = nil;
 
     if( style != nil )
-    {
-      m._scroll = style.createWidget(parent, "scroll-area", cfg);
-      m._setRoot(m._scroll.element);
+      m._setView( style.createWidget(parent, "scroll-area", cfg) );
 
-      m._scroll.vert.addEventListener("mousedown", func(e) m._dragStart(e));
-      m._scroll.horiz.addEventListener("mousedown", func(e) m._dragStart(e));
-
-      m._scroll.vert.addEventListener
-      (
-        "drag",
-        func(e) m.moveTo(m._pos[0], m._drag_offsetY + e.clientY)
-      );
-      m._scroll.horiz.addEventListener
-      (
-        "drag",
-        func(e) m.moveTo(m._drag_offsetX + e.clientX, m._pos[1])
-      );
-    }
+    m.setMinimumSize([32, 32]);
 
     return m;
   },
+  setLayout: func(l)
+  {
+    me._layout = l;
+    l.setParent(me);
+    return me.update();
+  },
   getContent: func()
   {
-    return me._scroll.content;
+    return me._view.content;
   },
   # Set the background color for the content area.
   #
@@ -43,7 +33,7 @@ gui.widgets.ScrollArea = {
   {
     if( size(arg) == 1 )
       var arg = arg[0];
-    me._scroll.setColorBackground(arg);
+    me._view.setColorBackground(arg);
   },
   # Reset the size of the content area, e.g. on window resize.
   #
@@ -56,7 +46,7 @@ gui.widgets.ScrollArea = {
     me._size = [x,y];
     me.update();
   },
-  # Move the scrollable area to the coordinates x,y (or as far as possible) and
+  # Move the scrollbars to the coordinates x,y (or as far as possible) and
   # update.
   #
   # @param x The x coordinate (positive is right)
@@ -65,15 +55,15 @@ gui.widgets.ScrollArea = {
   {
     var bb = me._updateBB();
 
-    me._pos[0] = math.max(0, math.min(x, me._max_scroll[0]));
-    me._pos[1] = math.max(0, math.min(y, me._max_scroll[1]));
+    me._scroll_pos[0] = math.max(0, math.min(x, me._max_scroll[0]));
+    me._scroll_pos[1] = math.max(0, math.min(y, me._max_scroll[1]));
 
     me.update(bb);
   },
   # Move the scrollable area to the top-most position and update.
   moveToTop: func()
   {
-    me._pos[1] = 0;
+    me._scroll_pos[1] = 0;
 
     me.update();
   },
@@ -82,14 +72,14 @@ gui.widgets.ScrollArea = {
   {
     var bb = me._updateBB();
 
-    me._pos[1] = me._max_scroll[1];
+    me._scroll_pos[1] = me._max_scroll[1];
 
     me.update(bb);
   },
   # Move the scrollable area to the left-most position and update.
   moveToLeft: func()
   {
-    me._pos[0] = 0;
+    me._scroll_pos[0] = 0;
 
     me.update();
   },
@@ -98,9 +88,31 @@ gui.widgets.ScrollArea = {
   {
     var bb = me._updateBB();
 
-    me._pos[0] = me._max_scroll[0];
+    me._scroll_pos[0] = me._max_scroll[0];
 
     me.update(bb);
+  },
+  # Get position of scrollable content
+  getContentPosition: func()
+  {
+    var pos = [0, 0];
+
+    if( me._max_scroll[0] > 1 )
+      pos[0] = (me._scroll_pos[0] / me._max_scroll[0])
+             * (me._content_size[0] - me._size[0]);
+    if( me._max_scroll[1] > 1 )
+      pos[1] = (me._scroll_pos[1] / me._max_scroll[1])
+             * (me._content_size[1] - me._size[1]);
+
+    return pos;
+  },
+  # Move content to the given position
+  moveContentTo: func(x, y)
+  {
+    var scroll_x = x / (me._content_size[0] - me._size[0]) * me._max_scroll[0];
+    var scroll_y = y / (me._content_size[1] - me._size[1]) * me._max_scroll[1];
+
+    return me.moveTo(scroll_x, scroll_y);
   },
   # Update scroll bar and content area.
   #
@@ -110,55 +122,136 @@ gui.widgets.ScrollArea = {
     if (bb == nil) bb = me._updateBB();
     if (bb == nil) return me;
 
-    var offset = [ me._content_offset[0],
-                   me._content_offset[1] ];
-
-    if( me._max_scroll[0] > 1 )
-      offset[0] -= (me._pos[0] / me._max_scroll[0])
-                 * (me._content_size[0] - me._size[0]);
-    if( me._max_scroll[1] > 1 )
-      offset[1] -= (me._pos[1] / me._max_scroll[1])
-                 * (me._content_size[1] - me._size[1]);
-
+    var pos = me.getContentPosition();
+    var offset = [ me._content_offset[0] - pos[0],
+                   me._content_offset[1] - pos[1] ];
     me.getContent().setTranslation(offset);
 
-    me._scroll.update(me);
+    me._view.update(me);
     me.getContent().update();
 
     return me;
   },
 # protected:
-  _setRoot: func(el)
+  _setView: func(view)
   {
-    el.addEventListener("wheel", func(e) me.moveTo(me._pos[0], me._pos[1] - e.deltaY));
+    view.vert.addEventListener("mousedown", func(e) me._dragStart(e));
+    view.horiz.addEventListener("mousedown", func(e) me._dragStart(e));
+    view._root.addEventListener("mousedown", func(e)
+    {
+      var pos = me.getContentPosition();
+      me._drag_offsetX = pos[0] + e.clientX;
+      me._drag_offsetY = pos[1] + e.clientY;
+    });
 
-    call(gui.Widget._setRoot, [el], me);
+    view.vert.addEventListener
+    (
+      "drag",
+      func(e)
+      {
+        if( !me._enabled )
+          return;
+
+        me.moveTo(me._scroll_pos[0], me._drag_offsetY + e.clientY);
+        e.stopPropagation();
+      }
+    );
+    view.horiz.addEventListener
+    (
+      "drag",
+      func(e)
+      {
+        if( !me._enabled )
+          return;
+
+        me.moveTo(me._drag_offsetX + e.clientX, me._scroll_pos[1]);
+        e.stopPropagation();
+      }
+    );
+
+    view._root.addEventListener
+    (
+      "drag",
+      func(e)
+      {
+        if( !me._enabled )
+          return;
+
+        me.moveContentTo( me._drag_offsetX - e.clientX,
+                          me._drag_offsetY - e.clientY );
+        e.stopPropagation();
+      }
+    );
+    view._root.addEventListener
+    (
+      "wheel",
+      func(e)
+      {
+        if( !me._enabled )
+          return;
+
+        me.moveTo(me._scroll_pos[0], me._scroll_pos[1] - e.deltaY);
+        e.stopPropagation();
+      }
+    );
+
+    call(gui.Widget._setView, [view], me);
   },
   _dragStart: func(e)
   {
-    me._drag_offsetX = me._pos[0] - e.clientX;
-    me._drag_offsetY = me._pos[1] - e.clientY;
+    me._drag_offsetX = me._scroll_pos[0] - e.clientX;
+    me._drag_offsetY = me._scroll_pos[1] - e.clientY;
+    e.stopPropagation();
   },
-  _updateBB: func() {
+  _updateBB: func()
+  {
     # TODO only update on content resize
-    var bb = me.getContent().getTightBoundingBox();
+    if( me._layout == nil )
+    {
+      var bb = me.getContent().getTightBoundingBox();
 
-    if( bb[2] < bb[0] or bb[3] < bb[1] )
-      return nil;
-    var w = bb[2] - bb[0];
-    var h = bb[3] - bb[1];
+      if( bb[2] < bb[0] or bb[3] < bb[1] )
+        return nil;
+      var w = bb[2] - bb[0];
+      var h = bb[3] - bb[1];
+
+      var cur_offset = me.getContent().getTranslation();
+      me._content_offset = [cur_offset[0] - bb[0], cur_offset[1] - bb[1]];
+    }
+    else
+    {
+      var min_size = me._layout.minimumSize();
+      var max_size = me._layout.maximumSize();
+      var size_hint = me._layout.sizeHint();
+      var w = math.min(max_size[0], math.max(size_hint[0], me._size[0]));
+      var h = math.max(
+              math.min(max_size[1], math.max(size_hint[1], me._size[1])),
+              me._layout.heightForWidth(w)
+            );
+
+      me._layout.setGeometry([0, 0, w, h]);
+
+      # Layout always has the origin at (0, 0)
+      me._content_offset = [0, 0];
+    }
 
     if( w > me._size[0] )
-      me._max_scroll[0] = me._size[0] * (1 - me._size[0] / w);
-    else me._max_scroll[0] = 0;
+    {
+      var scroller_size = math.max(12, me._size[0] * (me._size[0] / w));
+      me._max_scroll[0] = me._size[0] - scroller_size;
+    }
+    else
+      me._max_scroll[0] = 0;
+
     if( h > me._size[1] )
-      me._max_scroll[1] = me._size[1] * (1 - me._size[1] / h);
-    else me._max_scroll[1] = 0;
+    {
+      var scroller_size = math.max(12, me._size[1] * (me._size[1] / h));
+      me._max_scroll[1] = me._size[1] - scroller_size;
+    }
+    else
+      me._max_scroll[1] = 0;
 
     me._content_size[0] = w;
     me._content_size[1] = h;
-
-    var cur_offset = me.getContent().getTranslation();
-    me._content_offset = [cur_offset[0] - bb[0], cur_offset[1] - bb[1]];
-  },
+  }
 };

@@ -7,12 +7,14 @@ var gui = {
 var gui_dir = getprop("/sim/fg-root") ~ "/Nasal/canvas/gui/";
 var loadGUIFile = func(file) io.load_nasal(gui_dir ~ file, "canvas");
 var loadWidget = func(name) loadGUIFile("widgets/" ~ name ~ ".nas");
+var loadDialog = func(name) loadGUIFile("dialogs/" ~ name ~ ".nas");
 
 loadGUIFile("Config.nas");
 loadGUIFile("Style.nas");
 loadGUIFile("Widget.nas");
 loadGUIFile("styles/DefaultStyle.nas");
 loadWidget("Button");
+loadWidget("Label");
 loadWidget("ScrollArea");
 
 var style = DefaultStyle.new("AmbianceClassic");
@@ -24,23 +26,24 @@ var WindowButton = {
       _name: name
     };
     m._focus_policy = m.NoFocus;
-    m._setRoot( parent.createChild("image", "WindowButton-" ~ name) );
+    m._setView({_root: parent.createChild("image", "WindowButton-" ~ name)});
     return m;
   },
 # protected:
   _onStateChange: func
   {
     var file = style._dir_decoration ~ "/" ~ me._name;
-    file ~= me._window._focused ? "_focused" : "_unfocused";
+    var window_focus = me._windowFocus();
+    file ~= window_focus ? "_focused" : "_unfocused";
 
-    if( me._active )
+    if( me._down )
       file ~= "_pressed";
     else if( me._hover )
       file ~= "_prelight";
-    else if( me._window._focused )
+    else if( window_focus )
       file ~= "_normal";
 
-    me._root.set("src", file ~ ".png");
+    me._view._root.set("src", file ~ ".png");
   }
 };
 
@@ -53,6 +56,7 @@ var Window = {
     var ghost = _newWindowGhost(id);
     var m = {
       parents: [Window, PropertyElement, ghost],
+      _ghost: ghost,
       _node: props.wrapNode(ghost._node_ghost),
       _focused: 0,
       _focused_widget: nil,
@@ -80,7 +84,7 @@ var Window = {
 
     if( me["_canvas"] != nil )
     {
-      var placements = me._canvas.texture.getChildren("placement");
+      var placements = me._canvas._node.getChildren("placement");
       # Do not remove canvas if other placements exist
       if( size(placements) > 1 )
         foreach(var p; placements)
@@ -108,7 +112,7 @@ var Window = {
     ];
 
     me._canvas = new({
-      size: [2 * size[0], 2 * size[1]],
+      size: [size[0], size[1]],
       view: size,
       placement: {
         type: "window",
@@ -124,7 +128,10 @@ var Window = {
       "blend-destination-alpha": "one"
     });
 
+    me._canvas._focused_widget = nil;
+    me._canvas.data("focused", me._focused);
     me._canvas.addEventListener("mousedown", func me.raise());
+
     return me._canvas;
   },
   # Set an existing canvas to be used for this Window
@@ -135,26 +142,30 @@ var Window = {
 
     canvas_.addPlacement({type: "window", "id": me.get("id")});
     me['_canvas'] = canvas_;
+    canvas_.data("focused", me._focused);
 
     # prevent resizing if canvas is placed from somewhere else
     me.onResize = nil;
   },
   # Get the displayed canvas
-  getCanvas: func()
+  getCanvas: func(create = 0)
   {
+    if( me['_canvas'] == nil and create )
+      me.createCanvas();
+
     return me['_canvas'];
   },
   getCanvasDecoration: func()
   {
     return wrapCanvas(me._getCanvasDecoration());
   },
-  addWidget: func(w)
+  setLayout: func(l)
   {
-    append(me._widgets, w);
-    w._window = me;
-    if( size(me._widgets) == 2 )
-      w.setFocus();
-    w._onStateChange();
+    if( me['_canvas'] == nil )
+      me.createCanvas();
+
+    me._canvas.update(); # Ensure placement is applied
+    me._ghost.setLayout(l);
     return me;
   },
   #
@@ -223,6 +234,8 @@ var Window = {
 # protected:
   _onStateChange: func
   {
+    var event = canvas.CustomEvent.new("wm.focus-" ~ (me._focused ? "in" : "out"));
+
     if( me._getCanvasDecoration() != nil )
     {
       # Stronger shadow for focused windows
@@ -233,10 +246,16 @@ var Window = {
       me._title_bar_bg.set("fill", style.getColor("title" ~ suffix));
       me._title.set(       "fill", style.getColor("title-text" ~ suffix));
       me._top_line.set(  "stroke", style.getColor("title-highlight" ~ suffix));
+
+      me.getCanvasDecoration()
+        .data("focused", me._focused)
+        .dispatchEvent(event);
     }
 
-    foreach(var w; me._widgets)
-      w._onStateChange();
+    if( me.getCanvas() != nil )
+      me.getCanvas()
+        .data("focused", me._focused)
+        .dispatchEvent(event);
   },
 # private:
   _propCallback: func(child, mode)
@@ -387,8 +406,7 @@ var Window = {
 
     var button_close = WindowButton.new(title_bar, "close")
                                    .move(x, y);
-    button_close.onClick = func me.del();
-    me.addWidget(button_close);
+    button_close.listen("clicked", func me.del());
 
     # title
     me._title = title_bar.createChild("text", "title")
@@ -453,11 +471,10 @@ var initDemo = func
   {
     debug.dump( props.wrapNode(event.target._node_ghost) );
   });
-  my_canvas.addEventListener("click", func
+  my_canvas.addEventListener("click", func(e)
   {
     var dlg = canvas.Window.new([400,300], "dialog")
                            .set("resize", 1);
-
     var my_canvas = dlg.createCanvas()
                        .set("background", style.getColor("bg_color"));
 
@@ -466,8 +483,8 @@ var initDemo = func
     my_canvas.addEventListener("drag", func(e) { printf("drag: screen(%.1f|%.1f) client(%.1f|%.1f) local(%.1f|%.1f) delta(%.1f|%.1f)", e.screenX, e.screenY, e.clientX, e.clientY, e.localX, e.localY, e.deltaX, e.deltaY); });
     my_canvas.addEventListener("wheel", func(e) { printf("wheel: screen(%.1f|%.1f) client(%.1f|%.1f) %.1f", e.screenX, e.screenY, e.clientX, e.clientY, e.deltaY); });
     var root = my_canvas.createGroup();
-root.createChild("image")
-    .set("src", "http://wiki.flightgear.org/skins/common/images/icons-fg-135.png");
+    root.createChild("image")
+        .set("src", "http://wiki.flightgear.org/skins/common/images/icons-fg-135.png");
     var text =
       root.createChild("text")
           .setText("This could be used for building an 'Aircraft Help' dialog.\nYou can also #use it to play around with the new Canvas system :). β")
@@ -492,22 +509,25 @@ root.createChild("image")
     text.addEventListener("mousemove", func(e) { printf("move: screen(%.1f|%.1f) client(%.1f|%.1f) local(%.1f|%.1f) delta(%.1f|%.1f)", e.screenX, e.screenY, e.clientX, e.clientY, e.localX, e.localY, e.deltaX, e.deltaY); });
     text.set("fill", style.getColor("text_color"));
 
-    dlg.addWidget( gui.widgets.Button.new(root, style, {size: [64, 26]})
-                                     .setText("Ok")
-                                     .move(20,  250) );
-    dlg.addWidget( gui.widgets.Button.new(root, style, {size: [64, 26]})
-                                     .setText("Apply")
-                                     .move(100, 250) );
-    dlg.addWidget( gui.widgets.Button.new(root, style, {size: [64, 64]})
-                                     .setText("Cancel")
-                                     .move(180, 200) );
+    gui.widgets.Button.new(root, style, {})
+                      .setText("Ok")
+                      .move(20,  250)
+                      .setSize(64, 26);
+    gui.widgets.Button.new(root, style, {})
+                      .setText("Apply")
+                      .move(100, 250)
+                      .setSize(64, 26);
+    gui.widgets.Button.new(root, style, {})
+                      .setText("Cancel")
+                      .move(180, 200)
+                      .setSize(64, 64);
 
-    var scroll = gui.widgets.ScrollArea.new(root, style, {size: [96, 128]})
-                                       .move(20, 100);
+    var scroll = gui.widgets.ScrollArea.new(root, style, {})
+                                       .move(20, 100)
+                                       .setSize(96, 128);
     var txt = scroll.getContent().createChild("text")
                        .set("text", "01hallo\n02asdasd\n03\n04\n05asdasd06\n07ß\n08\n09asdasd\n10\n11");
     scroll.update();
-    dlg.addWidget(scroll);
 
     txt.addEventListener("mouseover", func txt.set("fill", "red"));
     txt.addEventListener("mouseout", func txt.set("fill", "green"));

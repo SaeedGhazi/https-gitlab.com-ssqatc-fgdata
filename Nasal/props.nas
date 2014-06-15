@@ -228,6 +228,11 @@ var wrapNode = func(node) { { parents : [Node], _g : node } }
 var globals = wrapNode(_globals());
 
 ##
+# Shortcut for props.globals.getNode().
+#
+var getNode = func return call(props.globals.getNode, arg, props.globals);
+
+##
 # Sets all indexed property children to a single value.  arg[0]
 # specifies a property name (e.g. /controls/engines/engine), arg[1] a
 # path under each node of that name to set (e.g. "throttle"), arg[2]

@@ -326,8 +326,8 @@
     <binding>
       <command>nasal</command>
       <script>
-      failures.setAllMTBF(getprop("/sim/failure-manager/global-mtbf"));
-      failures.setAllMCBF(getprop("/sim/failure-manager/global-mcbf"));
+      compat_failure_modes.apply_global_mtbf(getprop("/sim/failure-manager/global-mtbf"));
+      compat_failure_modes.apply_global_mcbf(getprop("/sim/failure-manager/global-mcbf"));
       </script>
     </binding>
     <binding>
@@ -344,8 +344,8 @@
     <binding>
       <command>nasal</command>
       <script>
-      failures.setAllMTBF(getprop("/sim/failure-manager/global-mtbf"));
-      failures.setAllMCBF(getprop("/sim/failure-manager/global-mcbf"));
+      compat_failure_modes.apply_global_mtbf(getprop("/sim/failure-manager/global-mtbf"));
+      compat_failure_modes.apply_global_mcbf(getprop("/sim/failure-manager/global-mcbf"));
       </script>
     </binding>
     </button>

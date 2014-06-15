@@ -8,19 +8,50 @@ gui.Widget = {
   #
   new: func(derived)
   {
-    return {
+    var m = canvas.Widget.new({
       parents: [derived, gui.Widget],
       _focused: 0,
       _focus_policy: gui.Widget.NoFocus,
       _hover: 0,
-      _root: nil,
-      _size: [64, 64]
-    };
+      _enabled: 1,
+      _view: nil,
+      _pos: [0, 0],
+      _size: [32, 32]
+    });
+
+    m.setMinimumSize([16, 16]);
+    m.setSizeHint([32, 32]);
+    m.setMaximumSize([m._MAX_SIZE, m._MAX_SIZE]);
+
+    m.setSetGeometryFunc(m._impl.setGeometry);
+
+    return m;
+  },
+  setFixedSize: func(x, y)
+  {
+    me.setMinimumSize([x, y]);
+    me.setSizeHint([x, y]);
+    me.setMaximumSize([x, y]);
+  },
+  setEnabled: func(enabled)
+  {
+    if( me._enabled == enabled )
+      return me;
+
+    me._enabled = enabled;
+    me.clearFocus();
+
+    me._onStateChange();
+    return me;
   },
   # Move the widget to the given position (relative to its parent)
   move: func(x, y)
   {
-    me._root.setTranslation(x, y);
+    me._pos[0] = x;
+    me._pos[1] = y;
+
+    if( me._view != nil )
+      me._view._root.setTranslation(x, y);
     return me;
   },
   #
@@ -28,6 +59,20 @@ gui.Widget = {
   {
     me._size[0] = w;
     me._size[1] = h;
+
+    if( me._view != nil )
+      me._view.setSize(me, w, h);
+    return me;
+  },
+  # Set geometry of widget (usually used by layouting system)
+  #
+  # @param geom [<x>, <y>, <width>, <height>]
+  setGeometry: func(geom)
+  {
+    me.move(geom[0], geom[1]);
+    me.setSize(geom[2], geom[3]);
+    me._onStateChange();
+    return me;
   },
   #
   setFocus: func
@@ -35,13 +80,17 @@ gui.Widget = {
     if( me._focused )
       return me;
 
-    if( me._window._focused_widget != nil )
-      me._window._focused_widget.clearFocus();
+    var canvas = me.getCanvas();
+    if( canvas._focused_widget != nil )
+      canvas._focused_widget.clearFocus();
+
+    if( !me._enabled )
+      return me;
 
     me._focused = 1;
-    me._window._focused_widget = me;
+    canvas._focused_widget = me;
 
-    me.onFocusIn();
+    me._trigger("focus-in");
     me._onStateChange();
 
     return me;
@@ -53,38 +102,61 @@ gui.Widget = {
       return me;
 
     me._focused = 0;
-    me._window._focused_widget = nil;
+    me.getCanvas()._focused_widget = nil;
 
-    me.onFocusOut();
+    me._trigger("focus-out");
     me._onStateChange();
 
     return me;
   },
-  onFocusIn: func {},
-  onFocusOut: func {},
-  onMouseEnter: func {},
-  onMouseLeave: func {},
-# protected:
-  _onStateChange: func {},
-  _setRoot: func(el)
+  listen: func(type, cb)
   {
-    me._root = el;
-    el.addEventListener("mouseenter", func {
+    me._view._root.addEventListener("cb." ~ type, cb);
+    return me;
+  },
+# protected:
+  _MAX_SIZE: 32768, # size for "no size-limit"
+  _onStateChange: func {},
+  _setView: func(view)
+  {
+    me._view = view;
+
+    var root = view._root;
+    var canvas = root.getCanvas();
+    me.setCanvas(canvas);
+
+    canvas.addEventListener("wm.focus-in", func {
+      me._onStateChange();
+    });
+    canvas.addEventListener("wm.focus-out", func {
+      me._onStateChange();
+    });
+
+    root.addEventListener("mouseenter", func {
       me._hover = 1;
-      me.onMouseEnter();
+      me._trigger("mouse-enter");
       me._onStateChange();
     });
-    el.addEventListener("mousedown", func {
+    root.addEventListener("mousedown", func {
       if( bits.test(me._focus_policy, me.ClickFocus / 2) )
-      {
         me.setFocus();
-        me._window.setFocus();
-      }
     });
-    el.addEventListener("mouseleave", func {
+    root.addEventListener("mouseleave", func {
       me._hover = 0;
-      me.onMouseLeave();
+      me._trigger("mouse-leave");
       me._onStateChange();
     });
+  },
+  _trigger: func(type, data = nil)
+  {
+    me._view._root.dispatchEvent(
+      canvas.CustomEvent.new("cb." ~ type, {detail: data})
+    );
+    return me;
+  },
+  _windowFocus: func
+  {
+    var canvas = me.getCanvas();
+    return canvas != nil ? canvas.data("focused") : 0;
   }
 };

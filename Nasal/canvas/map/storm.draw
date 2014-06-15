@@ -11,7 +11,7 @@ var draw_storm = func (group, storm, controller=nil, lod=0) {
 	var storm_grp = group.createChild("group","storm"); # one group for each storm
 
 	storm_grp.createChild("image")
-		.setFile("Nasal/canvas/map/storm.png")
+		.setFile("Nasal/canvas/map/Images/storm.png")
 		.setSize(128*radiusNm,128*radiusNm)
 		.setTranslation(-64*radiusNm,-64*radiusNm)
 		.setCenter(0,0);

@@ -76,6 +76,16 @@
 		</item>
 
 		<item>
+			<name>aircraft-center</name>
+			<binding>
+				<command>nasal</command>
+				<script>
+				  canvas.loadDialog("AircraftCenter");
+				</script>
+			</binding>
+		</item>
+
+		<item>
 			<name>exit</name>
 			<key>Esc</key>
 			<binding>
@@ -322,12 +332,22 @@
 
 		<item>
 			<name>map</name>
-            <key>Ctrl-M</key>
+            		<key>Ctrl-M</key>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>map</dialog-name>
 			</binding>
 		</item>
+
+		<item>
+			<name>map-canvas</name>
+            		<!-- <key>Ctrl-M</key> -->
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>map-canvas</dialog-name>
+			</binding>
+		</item>
+
 
 		<item>
 			<name>stopwatch</name>

@@ -65,5 +65,13 @@ var PropertyElement = {
   {
     me._node.getNode(key, 1).getBoolValue();
   },
-
+  # Trigger an update of the element
+  #
+  # Elements are automatically updated once a frame, with a delay of one frame.
+  # If you wan't to get an element updated in the current frame you have to use
+  # this method.
+  update: func
+  {
+    me.setBool("update", 1);
+  }
 };

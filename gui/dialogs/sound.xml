@@ -151,40 +151,6 @@
     <text>
       <row>3</row>
       <col>0</col>
-      <label>Chatter</label>
-      <halign>left</halign>
-	  <enable>
-        <property>/sim/sound/enabled</property>
-      </enable>
-    </text>
-
-    <checkbox>
-      <row>3</row>
-      <col>1</col>
-      <property>/sim/sound/chatter/enabled</property>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-	  <enable>
-        <property>/sim/sound/enabled</property>
-      </enable>
-    </checkbox>
-
-    <slider>
-      <row>3</row>
-      <col>2</col>
-      <property>/sim/sound/chatter/volume</property>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-	  <enable>
-        <property>/sim/sound/enabled</property>
-      </enable>
-    </slider>
-
-    <text>
-      <row>4</row>
-      <col>0</col>
       <label>Avionics</label>
       <halign>left</halign>
 	  <enable>
@@ -193,7 +159,7 @@
     </text>
 
     <checkbox>
-      <row>4</row>
+      <row>3</row>
       <col>1</col>
       <property>/sim/sound/avionics/enabled</property>
       <binding>
@@ -205,7 +171,7 @@
     </checkbox>
 
     <slider>
-      <row>4</row>
+      <row>3</row>
       <col>2</col>
       <property>/sim/sound/avionics/volume</property>
       <binding>
@@ -217,7 +183,7 @@
     </slider>
 
     <checkbox>
-      <row>4</row>
+      <row>3</row>
       <col>3</col>
       <property>/sim/sound/avionics/external-view</property>
       <binding>
@@ -229,7 +195,7 @@
     </checkbox>
 
     <text>
-      <row>5</row>
+      <row>4</row>
       <col>0</col>
       <label>ATC</label>
       <halign>left</halign>
@@ -239,7 +205,7 @@
     </text>
 
     <checkbox>
-      <row>5</row>
+      <row>4</row>
       <col>1</col>
       <property>/sim/sound/atc/enabled</property>
       <binding>
@@ -251,7 +217,7 @@
     </checkbox>
 
     <slider>
-      <row>5</row>
+      <row>4</row>
       <col>2</col>
       <property>/sim/sound/atc/volume</property>
       <binding>
@@ -263,7 +229,7 @@
     </slider>
 
     <checkbox>
-      <row>5</row>
+      <row>4</row>
       <col>3</col>
       <property>/sim/sound/atc/external-view</property>
       <binding>
@@ -275,7 +241,7 @@
     </checkbox>
 
     <text>
-      <row>6</row>
+      <row>5</row>
       <col>0</col>
       <label>AI/MP</label>
       <halign>left</halign>
@@ -285,7 +251,7 @@
     </text>
 
     <checkbox>
-      <row>6</row>
+      <row>5</row>
       <col>1</col>
       <property>/sim/sound/aimodels/enabled</property>
       <binding>
@@ -297,7 +263,7 @@
     </checkbox>
 
     <slider>
-      <row>6</row>
+      <row>5</row>
       <col>2</col>
       <property>/sim/sound/aimodels/volume</property>
       <binding>

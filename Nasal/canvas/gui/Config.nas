@@ -17,5 +17,10 @@ var Config = {
       return val;
 
     return default;
+  },
+  set: func(key, value)
+  {
+    me._cfg[key] = value;
+    return me;
   }
 };

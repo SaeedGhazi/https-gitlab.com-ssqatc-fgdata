@@ -45,6 +45,9 @@ gui.widgets.ScrollArea = {
     var (x,y) = arg;
     me._size = [x,y];
     me.update();
+
+    if( me._layout != nil )
+      me._layout.setGeometry(me._layout.geometry());
   },
   # Move the scrollbars to the coordinates x,y (or as far as possible) and
   # update.

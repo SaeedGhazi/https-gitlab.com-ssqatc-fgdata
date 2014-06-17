@@ -16,8 +16,9 @@ loadGUIFile("styles/DefaultStyle.nas");
 loadWidget("Button");
 loadWidget("Label");
 loadWidget("ScrollArea");
+loadDialog("MessageBox");
 
-var style = DefaultStyle.new("AmbianceClassic");
+var style = DefaultStyle.new("AmbianceClassic", "Humanity");
 var WindowButton = {
   new: func(parent, name)
   {
@@ -100,6 +101,10 @@ var Window = {
 
     me._node.remove();
     me._node = nil;
+  },
+  setTitle: func(title)
+  {
+    return me.set("title", title);
   },
   # Create the canvas to be used for this Window
   #

@@ -1,7 +1,10 @@
 var DefaultStyle = {
-  new: func(name)
+  new: func(name, name_icon_theme)
   {
-    return { parents: [gui.Style.new(name), DefaultStyle] };
+    return {
+      parents: [ gui.Style.new(name, name_icon_theme),
+                 DefaultStyle ]
+    };
   },
   createWidget: func(parent, type, cfg)
   {

@@ -1,14 +1,16 @@
 gui.Style = {
-  new: func(name)
+  new: func(name, name_icon_theme)
   {
     var root_node = props.globals.getNode("/sim/gui/canvas", 1)
                                  .addChild("style");
-    var path = getprop("/sim/fg-root") ~ "/gui/styles/" ~ name;
+    var gui_path = getprop("/sim/fg-root") ~ "/gui";
+    var style_path = gui_path ~ "/styles/" ~ name;
 
     var m = {
       parents: [gui.Style],
-      _path: path,
-      _node: io.read_properties(path ~ "/style.xml", root_node),
+      _path: style_path,
+      _dir_icons: gui_path ~ "/icons/" ~ name_icon_theme,
+      _node: io.read_properties(style_path ~ "/style.xml", root_node),
       _colors: {}
     };
 

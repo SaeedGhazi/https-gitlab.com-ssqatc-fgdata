@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!-- General settings for all US Southwest materials -->
+<PropertyList>
+  <!-- Define US Southwest as a box with given latitude/longitude -->
+  <condition>
+   <and>
+   <equals>
+    <property>sim/startup/season</property>
+    <value>summer</value>
+   </equals>
+    <and>
+     <greater-than>
+      <property>position/longitude-deg</property>
+      <value>-124.0</value>
+     </greater-than>
+     <less-than>
+      <property>position/longitude-deg</property>
+      <value>-104.0</value>
+     </less-than>
+     <greater-than>
+      <property>position/latitude-deg</property>
+      <value>32.0</value>
+     </greater-than>
+     <less-than>
+      <property>position/latitude-deg</property>
+      <value>42.0</value>
+     </less-than>
+    </and>
+   </and>
+  </condition>
+
+</PropertyList>

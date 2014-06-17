@@ -114,6 +114,11 @@ gui.Widget = {
     me._view._root.addEventListener("cb." ~ type, cb);
     return me;
   },
+  onRemove: func
+  {
+    if( me._view != nil )
+      me._view._root.del();
+  },
 # protected:
   _MAX_SIZE: 32768, # size for "no size-limit"
   _onStateChange: func {},

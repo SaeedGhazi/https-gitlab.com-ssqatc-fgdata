@@ -9,7 +9,7 @@ gui.widgets.Button = {
     m._flat = cfg.get("flat", 0);
 
     if( style != nil and !m._flat )
-      m._setView( style.createWidget(parent, "button", cfg) );
+      m._setView( style.createWidget(parent, cfg.get("type", "button"), cfg) );
 
     return m;
   },

@@ -27,7 +27,6 @@ var DefaultStyle = {
 
 # A button
 DefaultStyle.widgets.button = {
-  padding: [6, 8, 6, 8],
   new: func(parent, cfg)
   {
     me._root = parent.createChild("group", "button");
@@ -105,6 +104,69 @@ DefaultStyle.widgets.button = {
       file ~= "-disabled";
 
     me._border.set("src", file ~ ".png");
+  }
+};
+
+# A checbox
+DefaultStyle.widgets.checkbox = {
+  new: func(parent, cfg)
+  {
+    me._root = parent.createChild("group", "checkbox");
+    me._icon =
+      me._root.createChild("image", "checkbox-icon")
+              .setSize(18, 18);
+    me._label =
+      me._root.createChild("text")
+              .set("font", "LiberationFonts/LiberationSans-Regular.ttf")
+              .set("character-size", 14)
+              .set("alignment", "left-center");
+  },
+  setSize: func(model, w, h)
+  {
+    me._icon.setTranslation(0, (h - 18) / 2);
+    me._label.setTranslation(20, h / 2);
+
+    return me;
+  },
+  setText: func(model, text)
+  {
+    me._label.set("text", text);
+
+    var text_width = me._label.maxWidth();
+    model.setMinimumSize([text_width + 20, 18]);
+    model.setSizeHint([text_width + 26, 24]);
+
+    return me;
+  },
+  update: func(model)
+  {
+    var backdrop = !model._windowFocus();
+    var (w, h) = model._size;
+    var file = me._style._dir_widgets ~ "/";
+
+    if( backdrop )
+    {
+      file ~= "backdrop-";
+      me._label.set("fill", me._style.getColor("backdrop_fg_color"));
+    }
+    else
+      me._label.set("fill", me._style.getColor("fg_color"));
+    file ~= "check";
+
+    if( model._down )
+      file ~= "-selected";
+    else
+      file ~= "-unselected";
+
+    if( model._enabled )
+    {
+      if( model._hover )
+        file ~= "-hover";
+    }
+    else
+      file ~= "-disabled";
+
+    me._icon.set("src", file ~ ".png");
   }
 };
 

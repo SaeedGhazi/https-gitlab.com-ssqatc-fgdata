@@ -14,6 +14,7 @@ loadGUIFile("Style.nas");
 loadGUIFile("Widget.nas");
 loadGUIFile("styles/DefaultStyle.nas");
 loadWidget("Button");
+loadWidget("CheckBox");
 loadWidget("Label");
 loadWidget("ScrollArea");
 loadDialog("MessageBox");

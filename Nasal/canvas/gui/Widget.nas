@@ -32,6 +32,7 @@ gui.Widget = {
     me.setMinimumSize([x, y]);
     me.setSizeHint([x, y]);
     me.setMaximumSize([x, y]);
+    return me;
   },
   setEnabled: func(enabled)
   {

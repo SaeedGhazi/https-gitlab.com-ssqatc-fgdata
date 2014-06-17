@@ -73,9 +73,9 @@
 		</button_bg_color>
 
 		<button_backdrop_bg_color>
-			<red   type="float">0.909</red>
-			<green type="float">0.905</green>
-			<blue  type="float">0.901</blue>
+			<red   type="float">0.934</red>
+			<green type="float">0.930</green>
+			<blue  type="float">0.926</blue>
 		</button_backdrop_bg_color>
 
 		<button_bg_color_down>

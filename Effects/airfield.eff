@@ -11,6 +11,7 @@
 		    <wrap-t>repeat</wrap-t>
 		    <internal-format>normalized</internal-format>
 		</texture>
+		<grit-alpha>1.0</grit-alpha>
 	</parameters>
 
 <technique n="2">
@@ -178,6 +179,11 @@
 	<name>fogstructure</name>
 	<type>float</type>
 	<value>	<use>fogstructure</use></value>
+      </uniform>
+      <uniform>
+	<name>grit_alpha</name>
+	<type>float</type>
+	<value><use>grit_alpha</use></value>
       </uniform>
       <uniform>
         <name>cloud_self_shading</name>

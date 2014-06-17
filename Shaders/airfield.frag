@@ -29,9 +29,7 @@ uniform float dust_cover_factor;
 uniform float fogstructure;
 uniform float cloud_self_shading;
 uniform float snow_thickness_factor;
-uniform float ylimit;
-uniform float zlimit1;
-uniform float zlimit2;
+uniform float grit_alpha;
 uniform float wetness;
 uniform int quality_level;
 uniform int tquality_level;
@@ -256,7 +254,7 @@ if ((dist < 3000.0)&& (quality_level > 3) && (wetness>0.0))
 	float nfact_1m = 3.0 * (noise_1m - 0.5) * detail_fade(1.0, abs(ct),dist);//* (1.0 - smoothstep(3000.0, 6000.0, dist/ abs(ct)));
 	float nfact_5m = 2.0 * (noise_5m - 0.5) * detail_fade(2.0, abs(ct),dist);;
 	float nfact_10m = 1.0 * (noise_10m - 0.5);
-	texel.rgb = texel.rgb * (0.85 + 0.1 * (nfact_1m * detail_fade(1.0, abs(ct),dist) + nfact_5m + nfact_10m));
+	texel.rgb = texel.rgb * (0.85 + 0.1 * (nfact_1m * detail_fade(1.0, abs(ct),dist) + nfact_5m + nfact_10m) * grit_alpha);
     texel.r = texel.r * (1.0 + 0.14 * smoothstep(0.5,0.7, 0.33*(2.0 * noise_10m + (1.0-noise_5m))));
 
 
@@ -295,7 +293,7 @@ if (quality_level > 3)
 	if ((dist < 200.0) && (quality_level > 4))
 		{
 		noise_01m = Noise2D(rawPos.xy,0.1);
-		NdotL = NdotL + 0.8 * (noise_01m-0.5) *  detail_fade(0.1, abs(ct),dist) * (1.0 - water_factor);
+		NdotL = NdotL + 0.8 * (noise_01m-0.5) * grit_alpha *  detail_fade(0.1, abs(ct),dist) * (1.0 - water_factor);
 		}
 	
     if (NdotL > 0.0) {

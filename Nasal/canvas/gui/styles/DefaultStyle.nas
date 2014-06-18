@@ -51,9 +51,9 @@ DefaultStyle.widgets.button = {
   {
     me._label.set("text", text);
 
-    # TODO get real font metrics
-    model.setMinimumSize([size(text) * 5 + 6, 16]);
-    model.setSizeHint([size(text) * 8 + 16, 32]);
+    var min_width = math.max(80, me._label.maxWidth() + 16);
+    model.setMinimumSize([min_width, 16]);
+    model.setSizeHint([min_width, 28]);
 
     return me;
   },
@@ -123,8 +123,8 @@ DefaultStyle.widgets.checkbox = {
   },
   setSize: func(model, w, h)
   {
-    me._icon.setTranslation(0, (h - 18) / 2);
-    me._label.setTranslation(20, h / 2);
+    me._icon.setTranslation(0, int((h - 18) / 2));
+    me._label.setTranslation(24, int(h / 2) + 1);
 
     return me;
   },
@@ -132,9 +132,9 @@ DefaultStyle.widgets.checkbox = {
   {
     me._label.set("text", text);
 
-    var text_width = me._label.maxWidth();
-    model.setMinimumSize([text_width + 20, 18]);
-    model.setSizeHint([text_width + 26, 24]);
+    var min_width = me._label.maxWidth() + 24;
+    model.setMinimumSize([min_width, 18]);
+    model.setSizeHint([min_width, 24]);
 
     return me;
   },
@@ -213,9 +213,9 @@ DefaultStyle.widgets.label = {
     }
     else
     {
-      # TODO get real font metrics
-      model.setMinimumSize([size(text) * 5 + 4, 14]);
-      model.setSizeHint([size(text) * 5 + 14, 24]);
+      var min_width = me._text.maxWidth() + 4;
+      model.setMinimumSize([min_width, 14]);
+      model.setSizeHint([min_width, 24]);
     }
 
     return me;

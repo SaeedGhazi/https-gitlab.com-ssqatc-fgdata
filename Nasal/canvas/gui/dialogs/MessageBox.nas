@@ -45,8 +45,8 @@ var MessageBox = {
         return me;
       }
 
-    var MARGIN = 8; # TODO implement margin in C++ layouting code
-    var dlg = canvas.Window.new([250,120], "dialog")
+    var MARGIN = 12; # TODO implement margin in C++ layouting code
+    var dlg = canvas.Window.new([300,120], "dialog")
                            .setTitle(me._title);
     var root = dlg.getCanvas(1)
                   .set("background", style.getColor("bg_color"))
@@ -57,6 +57,7 @@ var MessageBox = {
 
     var text_box = HBoxLayout.new();
     vbox.addItem(text_box);
+    text_box.setSpacing(MARGIN);
 
     text_box.addSpacing(MARGIN);
 
@@ -115,6 +116,9 @@ var MessageBox = {
     button_box.addSpacing(MARGIN);
 
     vbox.addSpacing(MARGIN);
+
+    var w = vbox.sizeHint()[0];
+    dlg.setSize(w, math.max(130, vbox.heightForWidth(w)));
 
     return me;
   },

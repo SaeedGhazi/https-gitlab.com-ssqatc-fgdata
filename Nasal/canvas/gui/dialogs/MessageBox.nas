@@ -1,14 +1,16 @@
 var MessageBox = {
-  Ok:     0x0001,
-  Cancel: 0x0002,
-  Yes:    0x0004,
-  No:     0x0008,
+  Ok:             0x0001,
+  Cancel:         0x0002,
+  Yes:            0x0004,
+  No:             0x0008,
+  DontShowAgain:  0x8000,
   new: func
   {
     return {
       parents: [MessageBox],
       _title: "Message",
-      _standard_buttons: MessageBox.Ok
+      _standard_buttons: MessageBox.Ok,
+      _remember_selection: 0
     };
   },
   setTitle: func(title)
@@ -35,8 +37,16 @@ var MessageBox = {
   },
   exec: func(cb = nil)
   {
+    if( me._standard_buttons & me.DontShowAgain )
+      if( (var sel = me._loadSelection()) != nil )
+      {
+        if( cb != nil )
+          cb(sel);
+        return me;
+      }
+
     var MARGIN = 8; # TODO implement margin in C++ layouting code
-    var dlg = canvas.Window.new([250,100], "dialog")
+    var dlg = canvas.Window.new([250,120], "dialog")
                            .setTitle(me._title);
     var root = dlg.getCanvas(1)
                   .set("background", style.getColor("bg_color"))
@@ -69,6 +79,18 @@ var MessageBox = {
     var button_box = HBoxLayout.new();
     vbox.addItem(button_box);
 
+    if( me._standard_buttons & me.DontShowAgain )
+    {
+      button_box.addSpacing(MARGIN);
+      button_box.addItem(
+        gui.widgets.CheckBox.new(root, style, {})
+                            .setText("Don't show again.")
+                            .listen("toggled", func(e) {
+                              me._remember_selection = e.detail.checked
+                            })
+      );
+    }
+
     button_box.addStretch(1);
     foreach(var button; [me.Ok, me.Cancel, me.Yes, me.No])
     {
@@ -82,6 +104,8 @@ var MessageBox = {
                             .setText(me._button_names[button])
                             .listen("clicked", func {
                               dlg.del();
+                              if( me._remember_selection and b_id != me.Cancel)
+                                me._saveSelection(b_id);
                               if( cb != nil )
                                 cb(b_id);
                             })
@@ -100,8 +124,8 @@ var MessageBox = {
     msg_box.setTitle(title);
     msg_box.setText(text);
 
-    if( buttons == nil )
-      buttons = MessageBox.Ok;
+    if( buttons == nil or buttons == MessageBox.DontShowAgain )
+      buttons = (buttons or 0) | MessageBox.Ok;
     msg_box.setStandardButtons(buttons);
 
     if( icon != nil )
@@ -151,16 +175,34 @@ var MessageBox = {
   #                 (default: MessageBox.Yes | MessageBox.No)
   question: func(title, text, cb = nil, buttons = nil)
   {
-    MessageBox.show(
-      title,
-      text,
-      "dialog-question",
-      cb,
-      buttons or MessageBox.Yes | MessageBox.No
-    );
+    if( buttons == nil or buttons == MessageBox.DontShowAgain )
+      buttons = (buttons or 0) | MessageBox.Yes | MessageBox.No;
+
+    MessageBox.show(title, text, "dialog-question", cb, buttons);
   },
 # private:
-  _button_names: {}
+  _button_names: {},
+  _loadSelection: func
+  {
+    var dlg_id = md5(me._title ~ me._text ~ me._standard_buttons);
+    me._save_path = getprop("/sim/fg-home") ~ "/cache/MessageBox-" ~ dlg_id;
+
+    if( io.stat(me._save_path) != nil )
+    {
+      printlog("info", "Load dialog selection from '" ~ me._save_path ~ "'");
+      return int(io.readfile(me._save_path));
+    }
+
+    return nil;
+  },
+  _saveSelection: func(sel)
+  {
+    printlog("info", "Saving dialog selection to '" ~ me._save_path ~ "'");
+
+    var fh = io.open(me._save_path, "w");
+    io.write(fh, '' ~ sel);
+    io.close(fh);
+  }
 };
 
 # Standard button names

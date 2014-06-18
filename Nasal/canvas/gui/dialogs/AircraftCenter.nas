@@ -183,14 +183,25 @@ var AircraftCenter = {
   }
 };
 
-var ac = AircraftCenter.new();
-ac.addPage("Rated", {
-  'rating-FDM': 2,
-  'rating-cockpit': 2,
-  'rating-model': 2,
-  'rating-systems': 1
-});
-ac.addPage("Installed", {
-  'installed': 1
-});
-ac.addPage("All", {});
+MessageBox.warning(
+  "Experimental Feature...",
+  "The Aircraft Center is only a preview and not yet in a stable state!",
+  func(sel)
+  {
+    if( sel != MessageBox.Ok )
+      return;
+
+    var ac = AircraftCenter.new();
+    ac.addPage("Rated", {
+      'rating-FDM': 2,
+      'rating-cockpit': 2,
+      'rating-model': 2,
+      'rating-systems': 1
+    });
+    ac.addPage("Installed", {
+      'installed': 1
+    });
+    ac.addPage("All", {});
+  },
+  MessageBox.Ok | MessageBox.Cancel | MessageBox.DontShowAgain
+);

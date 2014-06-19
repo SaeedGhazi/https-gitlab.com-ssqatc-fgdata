@@ -143,8 +143,8 @@ var Window = {
   # Set an existing canvas to be used for this Window
   setCanvas: func(canvas_)
   {
-    if( !isa(canvas_, canvas.Canvas) )
-      return debug.warn("Not a canvas.Canvas");
+    if( ghosttype(canvas_) != "Canvas" )
+      return debug.warn("Not a Canvas");
 
     canvas_.addPlacement({type: "window", "id": me.get("id")});
     me['_canvas'] = canvas_;
@@ -210,6 +210,11 @@ var Window = {
   {
     me.set("content-size[0]", w);
     me.set("content-size[1]", h);
+
+    if( me.onResize != nil )
+      me.onResize();
+
+    return me;
   },
   move: func(x, y)
   {
@@ -280,7 +285,7 @@ var Window = {
     else if( name == "type" )
     {
       if( mode == 0 )
-        settimer(func me._updateDecoration(), 0);
+        settimer(func me._updateDecoration(), 0, 1);
     }
 
     else if( name.starts_with("resize-") )

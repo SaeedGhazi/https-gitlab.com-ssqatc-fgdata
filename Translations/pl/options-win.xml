@@ -65,7 +65,6 @@
 	<enable-fuel-freeze-desc>Nie ubywa paliwa w zbiorniku</enable-fuel-freeze-desc>   <!-- English: "Fuel tank quantity forced to remain constant" -->
 	<disable-clock-freeze-desc>Zegar zlicza normalnie</disable-clock-freeze-desc>   <!-- English: "Clock advances normally" -->
 	<enable-clock-freeze-desc>Unieruchom zegar</enable-clock-freeze-desc>   <!-- English: "Do not advance clock" -->
-	<control-desc>G³ówny tryb sterowania (d¿ojstik, klawiatura, mysz)</control-desc>   <!-- English: "Primary control mode (joystick, keyboard, mouse)" -->
 	<enable-auto-coordination-desc>Dostêpna autokoordynacja</enable-auto-coordination-desc>   <!-- English: "Enable auto coordination" -->
 	<disable-auto-coordination-desc>Niedostêpna autokoordynacja</disable-auto-coordination-desc>   <!-- English: "Disable auto coordination" -->
 	<browser-app-desc>Œcie¿ka do twojej przegl¹darki internetowej</browser-app-desc>   <!-- English: "Specify path to your web browser" -->

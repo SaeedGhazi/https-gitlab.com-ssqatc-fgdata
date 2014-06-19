@@ -68,7 +68,6 @@
 	<enable-fuel-freeze-desc>Vebruik geen brandstof</enable-fuel-freeze-desc>   <!-- English: "Fuel tank quantity forced to remain constant" -->
 	<disable-clock-freeze-desc>Laat de klok normaal lopen</disable-clock-freeze-desc>   <!-- English: "Clock advances normally" -->
 	<enable-clock-freeze-desc>Zet de klok stil</enable-clock-freeze-desc>   <!-- English: "Do not advance clock" -->
-	<control-desc>Besturings methode (joystick, toetsenbord, muis)</control-desc>   <!-- English: "Primary control mode (joystick, keyboard, mouse)" -->
 	<enable-auto-coordination-desc>Automatische coördinatie inschakelen</enable-auto-coordination-desc>   <!-- English: "Enable auto coordination" -->
 	<disable-auto-coordination-desc>Automatische coördinatie uitschakelen</disable-auto-coordination-desc>   <!-- English: "Disable auto coordination" -->
 	<browser-app-desc>Definiëer het pad naar de web bowser</browser-app-desc>   <!-- English: "Specify path to your web browser" -->

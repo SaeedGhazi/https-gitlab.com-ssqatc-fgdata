@@ -46,7 +46,6 @@
 	<enable-fuel-freeze-desc>Fuel tank quantity forced to remain constant</enable-fuel-freeze-desc>
 	<disable-clock-freeze-desc>Clock advances normally</disable-clock-freeze-desc>
 	<enable-clock-freeze-desc>Do not advance clock</enable-clock-freeze-desc>
-	<control-desc>Primary control mode (joystick, keyboard, mouse)</control-desc>
 	<enable-auto-coordination-desc>Enable auto coordination</enable-auto-coordination-desc>
 	<disable-auto-coordination-desc>Disable auto coordination</disable-auto-coordination-desc>
 	<browser-app-desc>Specify path to your web browser</browser-app-desc>

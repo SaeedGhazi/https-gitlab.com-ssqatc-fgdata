@@ -63,7 +63,6 @@
 <!-- 	<enable-fuel-freeze-desc>???</enable-fuel-freeze-desc> -->   <!-- English: "Fuel tank quantity forced to remain constant" -->
 <!-- 	<disable-clock-freeze-desc>???</disable-clock-freeze-desc> -->   <!-- English: "Clock advances normally" -->
 <!-- 	<enable-clock-freeze-desc>???</enable-clock-freeze-desc> -->   <!-- English: "Do not advance clock" -->
-<!-- 	<control-desc>???</control-desc> -->   <!-- English: "Primary control mode (joystick, keyboard, mouse)" -->
 <!-- 	<enable-auto-coordination-desc>???</enable-auto-coordination-desc> -->   <!-- English: "Enable auto coordination" -->
 <!-- 	<disable-auto-coordination-desc>???</disable-auto-coordination-desc> -->   <!-- English: "Disable auto coordination" -->
 <!-- 	<browser-app-desc>???</browser-app-desc> -->   <!-- English: "Specify path to your web browser" -->

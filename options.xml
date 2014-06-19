@@ -108,12 +108,6 @@
    </option>
 
    <option>
-    <name>control</name>
-    <arg>mode</arg>
-    <description>control-desc</description>
-   </option>
-
-   <option>
     <name>browser-app</name>
     <arg>path</arg>
     <description>browser-app-desc</description>

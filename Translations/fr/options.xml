@@ -63,7 +63,6 @@
     <enable-fuel-freeze-desc>La quantité de carburant dans les réservoirs reste constante.</enable-fuel-freeze-desc>   <!-- English: "Fuel tank quantity forced to remain constant" -->
     <disable-clock-freeze-desc>L'horloge avance normalement.</disable-clock-freeze-desc>   <!-- English: "Clock advances normally" -->
     <enable-clock-freeze-desc>L'horloge n'avance pas.</enable-clock-freeze-desc>   <!-- English: "Do not advance clock" -->
-    <control-desc>Mode de contrôle primaire (joystick, clavier, souris).</control-desc>   <!-- English: "Primary control mode (joystick, keyboard, mouse)" -->
     <enable-auto-coordination-desc>Active l'auto-coordination.</enable-auto-coordination-desc>   <!-- English: "Enable auto coordination" -->
     <disable-auto-coordination-desc>Désactive l'auto coordination.</disable-auto-coordination-desc>   <!-- English: "Disable auto coordination" -->
     <browser-app-desc>Précise le chemin vers votre navigateur Internet.</browser-app-desc>   <!-- English: "Specify path to your web browser" -->

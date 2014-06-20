@@ -52,7 +52,7 @@ NDSourceDriver.new = func {
 	};
 	m.get_lat= func getprop("/position/latitude-deg");
 	m.get_lon= func getprop("/position/longitude-deg");
-	m.get_spd= func getprop("/velocities/airspeed-kt");
+	m.get_spd= func getprop("/instrumentation/airspeed-indicator/true-speed-kt");
 	m.get_gnd_spd= func getprop("/velocities/groundspeed-kt");
 	m.get_vspd= func getprop("/velocities/vertical-speed-fps");
 	return m;

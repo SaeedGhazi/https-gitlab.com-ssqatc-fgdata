@@ -21,14 +21,14 @@ var Tooltip = {
       _hideTimer: nil,
       _hiding: nil
     };
-    
+
     m.setInt("size[0]", size[0]);
     m.setInt("size[1]", size[1]);
     m.setBool("visible", 0);
 
     m._hideTimer = maketimer(m.DELAY, m, Tooltip._hideTimeout);
     m._hideTimer.singleShot = 1;
-    
+
     return m;
   },
   # Destructor
@@ -118,8 +118,19 @@ var Tooltip = {
   {
     var msg = me._label;
     if (me._property != nil) {
-      var val = me._remapValue(me._property.getValue() or 0);
-      msg = sprintf(me._label, val);
+      var val = me._property.getValue() or 0;
+
+      # https://code.google.com/p/flightgear-bugs/issues/detail?id=1454
+      # wrap mapping in 'call' to catch conversion errors
+      var val_mapped = call(me._remapValue, [val], me, nil, var err = []);
+      if( size(err) )
+        printlog(
+          "warn",
+          "Tooltip: failed to remap " ~ debug.string(me._property, 0) ~ ":\n"
+          ~ debug.string(err, 0)
+        );
+
+      msg = sprintf(me._label, val_mapped or val);
     }
 
     me._text.setText(msg);
@@ -155,17 +166,17 @@ var Tooltip = {
   {
     if (me._mapping == "") return val;
     if (me._mapping == "percent") return int(val * 100);
-    
+
     # TODO - translate me!
     if (me._mapping == "on-off") return (val == 1) ? "ON" : "OFF";
     if (me._mapping == "arm-disarm") return (val == 1) ? "ARMED" : "DISARMED";
-    
+
     # provide both 'senses' of the flag here
     if (me._mapping == "up-down") return (val == 1) ? "UP" : "DOWN";
-    if (me._mapping == "down-up") return (val == 1) ? "DOWN" : "UP";    
+    if (me._mapping == "down-up") return (val == 1) ? "DOWN" : "UP";
     if (me._mapping == "open-close") return (val == 1) ? "OPEN" : "CLOSED";
     if (me._mapping == "close-open") return (val == 1) ? "CLOSED" : "OPEN";
-    
+
     if (me._mapping == "heading") return geo.normdeg(val);
     if (me._mapping == "nasal") return me._mappingFunc(val);
 
@@ -206,14 +217,14 @@ var Tooltip = {
   {
     # don't show if undefined
     if (me._tipId == nil) return;
-    
+
     if (me._hiding) {
       me._hideTimer.stop();
       me._hiding = 0;
     }
-    
+
     if (!me.isVisible()) {
-      me.setBool("visible", 1); 
+      me.setBool("visible", 1);
     }
   },
 
@@ -236,7 +247,7 @@ var Tooltip = {
     # this gets run repeatedly during mouse-moves
     if (me._hiding) return;
     me._hiding = 1;
-    
+
     me._hideTimer.restart(0.5);
   },
 
@@ -297,7 +308,7 @@ var innerSetTooltip = func(node)
      if (m == 'nasal') {
        f = compile(cmdarg().getNode('script').getValue());
      }
-     
+
      tooltip.setMapping(m, f);
    } else {
      tooltip.setMapping(nil);

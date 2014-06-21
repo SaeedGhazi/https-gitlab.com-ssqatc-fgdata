@@ -164,7 +164,8 @@ var attributes = func(p, verbose = 1, color=nil) {
 
 
 var _dump_prop = func(p, color=nil) {
-	_path(p.getPath(), color) ~ " = " ~ debug.string(p.getValue()) ~ " " ~ attributes(p);
+	_path(p.getPath(), color) ~ " = " ~ debug.string(p.getValue(), color)
+                            ~  " "  ~ attributes(p, 1, color);
 }
 
 

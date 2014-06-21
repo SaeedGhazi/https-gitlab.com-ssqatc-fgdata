@@ -10,7 +10,7 @@
     <open>
       <![CDATA[
         var modes = ['OFF', 'STANDBY', 'TEST', 'GROUND', 'ON', 'ALTITUDE'];
-        var v = getprop('/instrumentation/transponder/inputs/knob-mode');
+        var v = getprop('/instrumentation/transponder/inputs/knob-mode') or 0;
         setprop("/sim/gui/dialogs/radios/transponder-mode", modes[v]);
 
         var poweroften = [1, 10, 100, 1000];

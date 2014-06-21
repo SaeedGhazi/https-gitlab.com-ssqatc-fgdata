@@ -54,11 +54,6 @@ gui.widgets.Button = {
     return me;
   },
 # protected:
-  _onStateChange: func
-  {
-    if( me._view != nil )
-      me._view.update(me);
-  },
   _setView: func(view)
   {
     var el = view._root;

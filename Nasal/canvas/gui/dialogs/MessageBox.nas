@@ -117,7 +117,7 @@ var MessageBox = {
 
     vbox.addSpacing(MARGIN);
 
-    var w = vbox.sizeHint()[0];
+    var w = math.max(300, vbox.sizeHint()[0]);
     dlg.setSize(w, math.max(130, vbox.heightForWidth(w)));
 
     return me;

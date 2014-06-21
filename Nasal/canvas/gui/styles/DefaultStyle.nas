@@ -203,22 +203,28 @@ DefaultStyle.widgets.label = {
     }
 
     me._createElement("text", "text")
-      .set("text", text)
-      .set("fill", "black");
+      .set("text", text);
+
+    var hfw_func = nil;
+    var min_width = me._text.maxWidth() + 4;
+    var width_hint = min_width;
 
     if( model._cfg.get("wordWrap", 0) )
     {
       var m = me;
-      model.setHeightForWidthFunc(func(w) m.heightForWidth(w));
-    }
-    else
-    {
-      var min_width = me._text.maxWidth() + 4;
-      model.setMinimumSize([min_width, 14]);
-      model.setSizeHint([min_width, 24]);
+      hfw_func = func(w) m.heightForWidth(w);
+      min_width = math.min(32, min_width);
+
+      # prefer approximately quadratic text blocks
+      if( width_hint > 24 )
+        width_hint = int(math.sqrt(width_hint * 24));
     }
 
-    return me;
+    model.setHeightForWidthFunc(hfw_func);
+    model.setMinimumSize([min_width, 14]);
+    model.setSizeHint([width_hint, 24]);
+
+    return me.update(model);
   },
   setImage: func(model, img)
   {
@@ -249,6 +255,14 @@ DefaultStyle.widgets.label = {
       return -1;
 
     return math.max(14, me._text.heightForWidth(w - 4));
+  },
+  update: func(model)
+  {
+    if( me['_text'] != nil )
+    {
+      var color_name = model._windowFocus() ? "fg_color" : "backdrop_fg_color";
+      me._text.set("fill", me._style.getColor(color_name));
+    }
   },
 # protected:
   _createElement: func(name, type)

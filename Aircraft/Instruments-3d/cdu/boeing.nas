@@ -632,7 +632,10 @@ var cdu = func{
 				line3r = sprintf("%3.0f", getprop("/instrumentation/fmc/vspeeds/V2"));
 			}
 			line4lt = "WIND/SLOPE";
-			line4rt = "TRIM   CG";
+			line4rt = "TRIM   CG%";
+			if (getprop("/instrumentation/fmc/cg") != nil and getprop("/instrumentation/fmc/stab-trim-units")){
+				line4r = sprintf("%1.1f", getprop("/instrumentation/fmc/stab-trim-units"))~"  "~sprintf("%2.1f", getprop("/instrumentation/fmc/cg"))~"%";
+			}
 			line5rt = "POS SHIFT";
 			line6l = "<INDEX";
 			line6r = "POS INIT>";

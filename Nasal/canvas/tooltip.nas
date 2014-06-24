@@ -25,6 +25,7 @@ var Tooltip = {
     m.setInt("size[0]", size[0]);
     m.setInt("size[1]", size[1]);
     m.setBool("visible", 0);
+    m.setInt("z-index", gui.STACK_INDEX["tooltip"]);
 
     m._hideTimer = maketimer(m.DELAY, m, Tooltip._hideTimeout);
     m._hideTimer.singleShot = 1;

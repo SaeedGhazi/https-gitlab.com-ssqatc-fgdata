@@ -12,7 +12,7 @@ var REPL = {
 	operators_binary_unary: [
 		"~", "+", "-", "*", "/",
 		"!", "?", ":", ".", ",",
-		"<", ">", "="
+		"<", ">", "=", "|", "&", "^"
 	],
 	brackets: {
 		"(":")",
@@ -91,96 +91,100 @@ var REPL = {
 		return 0;
 	},
 	get_input: func() {
-		var line = me.placement.get_line();
-		if (line == nil or string.trim(line) == "") return me.df_status;
-		var len = size(line);
-		if (me.current == nil)
-			me.current = {
-				line: [],
-				brackets: [],
-				level: [],
-				statement: nil,
-				statement_level: nil,
-				last_operator: nil,
-			};
-		for (var i=0; i<len; i+=1) {
-			if (string.isxspace(line[i])) continue;
-			if (size(me.current.level) and me._is_str_char(me.current.level[-1])) {
-				me.current.last_operator = nil;
-				if (line[i] == `\\`) {
-					i += 1; # skip the next character
-					printlog(_REPL_dbg_level, "  skip backslash");
-				} elsif (line[i] == me.current.level[-1][0]) {
-					printlog(_REPL_dbg_level, "< out of string with "~me.current.level[-1]);
-					pop(me.current.level);
+		var lines = me.placement.get_line();
+		if (lines == nil or string.trim(lines) == "") return me.df_status;
+		var ls = split("\n", lines); var lines = [];
+		foreach (var l; ls) lines ~= split("\r", l);
+		foreach (var line; lines) {
+			var len = size(line);
+			if (me.current == nil)
+				me.current = {
+					line: [],
+					brackets: [],
+					level: [],
+					statement: nil,
+					statement_level: nil,
+					last_operator: nil,
+				};
+			for (var i=0; i<len; i+=1) {
+				if (string.isxspace(line[i])) continue;
+				if (size(me.current.level) and me._is_str_char(me.current.level[-1])) {
+					me.current.last_operator = nil;
+					if (line[i] == `\\`) {
+						i += 1; # skip the next character
+						printlog(_REPL_dbg_level, "  skip backslash");
+					} elsif (line[i] == me.current.level[-1][0]) {
+						printlog(_REPL_dbg_level, "< out of string with "~me.current.level[-1]);
+						pop(me.current.level);
+					}
+					continue;
 				}
-				continue;
-			}
-			if (line[i] == `#`) {
-				while(i<len and line[i] != `\n` and line[i] != `\r`) i+=1;
-				continue;
-			}
-			if (me.current.statement != nil) {
-				me.current.last_operator = nil;
-				if (me.current.statement_level == size(me.current.level) and
-				         (line[i] == `;` or line[i] == `,`)) {
-					printlog(_REPL_dbg_level, "statement ended by ;/,");
-					me.current.statement = nil;
-					me.current.statement_level = nil;
+				if (line[i] == `#`) {
+					while(i<len and line[i] != `\n` and line[i] != `\r`) i+=1;
+					continue;
+				}
+				if (me.current.statement != nil) {
+					me.current.last_operator = nil;
+					if (me.current.statement_level == size(me.current.level) and
+						     (line[i] == `;` or line[i] == `,`)) {
+						printlog(_REPL_dbg_level, "statement ended by ;/,");
+						me.current.statement = nil;
+						me.current.statement_level = nil;
+					} else {
+						var ret = me._handle_level(me.current.level, chr(line[i]), size(me.current.line)+1);
+						if (ret == nil) {# error
+							me.current = nil;
+							return 0;
+						} elsif (me.current.statement_level > size(me.current.level)) {
+							printlog(_REPL_dbg_level, "statement ended by level below");
+							# cancel out of statement
+							me.current.statement = nil;
+							me.current.statement_level = nil;
+						} elsif (line[i] == `{`) {
+							# cancel out of looking for `;`, because we have a real block here
+							printlog(_REPL_dbg_level, "statement ended by braces");
+							me.current.statement = nil;
+							me.current.statement_level = nil;
+						}
+					}
+					continue;
+				} elsif (string.isalpha(line[i])) {
+					me.current.last_operator = nil;
+					foreach (var stmt; me.statement_types) {
+						if (substr(line, i, size(stmt)) == stmt and
+							(i+size(stmt) >= len
+							 or !string.isalnum(line[i+size(stmt)])
+							 and line[i+size(stmt)] != `_`)) {
+							printlog(_REPL_dbg_level, "found: "~stmt);
+							me.current.statement = stmt;
+							me.current.statement_level = size(me.current.level);
+							i += size(stmt)-1;
+							break;
+						}
+					}
+				} elsif (me._is_str_char(line[i])) {
+					me.current.last_operator = nil;
+					append(me.current.level, chr(line[i]));
+					printlog(_REPL_dbg_level, "> into string with "~me.current.level[-1]);
 				} else {
 					var ret = me._handle_level(me.current.level, chr(line[i]), size(me.current.line)+1);
-					if (ret == nil) {# error
-						me.current = nil;
+					me.current.last_operator = nil;
+					if (ret == nil) # error
 						return 0;
-					} elsif (me.current.statement_level > size(me.current.level)) {
-						printlog(_REPL_dbg_level, "statement ended by level below");
-						# cancel out of statement
-						me.current.statement = nil;
-						me.current.statement_level = nil;
-					} elsif (line[i] == `{`) {
-						# cancel out of looking for `;`, because we have a real block here
-						printlog(_REPL_dbg_level, "statement ended by braces");
-						me.current.statement = nil;
-						me.current.statement_level = nil;
+					elsif (ret == 0) {
+						foreach (var o; me.operators_binary_unary)
+							if (line[i] == o[0])
+							{ me.current.last_operator = o; printlog(_REPL_dbg_level, "found operator "~o); break }
 					}
-				}
-				continue;
-			} elsif (string.isalpha(line[i])) {
-				me.current.last_operator = nil;
-				foreach (var stmt; me.statement_types) {
-					if (substr(line, i, size(stmt)) == stmt and
-					    (i+size(stmt) >= len
-					     or !string.isalnum(line[i+size(stmt)])
-					     and line[i+size(stmt)] != `_`)) {
-						printlog(_REPL_dbg_level, "found: "~stmt);
-						me.current.statement = stmt;
-						me.current.statement_level = size(me.current.level);
-						i += size(stmt)-1;
-						break;
-					}
-				}
-			} elsif (me._is_str_char(line[i])) {
-				me.current.last_operator = nil;
-				append(me.current.level, chr(line[i]));
-				printlog(_REPL_dbg_level, "> into string with "~me.current.level[-1]);
-			} else {
-				var ret = me._handle_level(me.current.level, chr(line[i]), size(me.current.line)+1);
-				me.current.last_operator = nil;
-				if (ret == nil) # error
-					return 0;
-				elsif (ret == 0) {
-					foreach (var o; me.operators_binary_unary)
-						if (line[i] == o[0])
-						{ me.current.last_operator = o; printlog(_REPL_dbg_level, "found operator "~o); break }
 				}
 			}
+			append(me.current.line, line);
+			if (me.keep_history)
+				append(me.history, {
+					type: "input",
+					line: line,
+				});
 		}
-		append(me.current.line, line);
-		if (me.keep_history)
-			append(me.history, {
-				type: "input",
-				line: line,
-			});
 		var execute = (me.current.statement == nil and me.current.last_operator == nil and !size(me.current.level));
 		if (execute) {
 			me.df_status = 0;
@@ -405,8 +409,8 @@ var CanvasPlacement = {
 		if (reset_view) me.reset_view();
 		return nil;
 	},
-	add_line: func(text, reset_view=0) {
-		me.create_line();
+	add_line: func(text, reset_text=1, reset_view=0) {
+		me.create_line(reset_text);
 		me.text.appendText(text);
 		if (reset_view) me.reset_view();
 	},
@@ -414,8 +418,8 @@ var CanvasPlacement = {
 		me.add_line(">>> ");
 		me.text.stop = size(me.text.get("text"));
 	},
-	continue_line: func() {
-		me.add_line("... ");
+	continue_line: func(reset_text=1) {
+		me.add_line("... ", reset_text);
 		me.text.stop = size(me.text.get("text"));
 	},
 	reset_input_from_history: func(reset_view=0) {
@@ -501,11 +505,11 @@ var CanvasPlacement = {
 			me.msg.right_col.appendText(desc);
 		}
 	},
-	create_line: func() {
+	create_line: func(reset_text=1) {
 		# c.f. above, in me.create_msg()
 		var draw_mode = canvas.Text.TEXT + (me.colors.text_fill != nil ? canvas.Text.FILLEDBOUNDINGBOX : 0);
 
-		me.input = "";
+		if (reset_text) me.input = "";
 		# If we only use one line, and one exists, things are simple:
 		if (!me.separate_lines and me.text != nil) {
 			me.text.appendText("\n");
@@ -573,18 +577,25 @@ var CanvasPlacement = {
 				var input = clipboard.getText();
 				printlog(_REPL_dbg_level, "ctrl+v: "~debug.string(input));
 				me.reset_input_from_history();
+				var abnormal = func string.iscntrl(input[j]) or (string.isxspace(input[j]) and input[j] != ` `) or !string.isascii(input[j]);
 				var i=0;
 				while (i<size(input)) {
-					for (var j=i; j<size(input); j+=1) {
-						if (input[j] == `\t` or string.isascii(input[j])) break;
-					}
+					for (var j=i; j<size(input); j+=1)
+						if (abnormal()) break;
 					if (j != i) me.add_text(substr(input, i, j-i));
-					# replace tabs with spaces
-					while (j<size(input) and input[j] == `\t`) {
-						me.add_char(` `);
+					while (j<size(input) and abnormal()) {
+						# replace tabs with spaces
+						if (input[j] == `\t`)
+							me.add_char(` `);
+						# handle newlines like they're shift+space, i.e. continue don't evaluate
+						elsif (input[j] == `\n` or input[j] == `\r`) {
+							if (j<size(input)-1 and input[j+1] == `\n`)
+								j+=1;
+							me.input ~= "\n"; me.continue_line(reset_text:0);
+						}
+						# skip other non-ascii characters
 						j += 1;
-					# skip other non-ascii characters
-					} while (j<size(input) and !string.isascii(input[j])) j+=1;
+					}
 					i=j;
 				}
 			} elsif (key == 4) { # ctrl-D/EOF
@@ -596,9 +607,11 @@ var CanvasPlacement = {
 		} elsif (key == `\n` or key == `\r`) {
 			printlog(_REPL_dbg_level, "return (key: "~key~", shift: "~modifiers.shift~")");
 			me.reset_input_from_history();
+			var reset_text = 1;
 			if (modifiers.shift) {
 				var res = -1;
 				me.input ~= "\n";
+				reset_text = 0;
 			} else {
 				if (size(string.trim(me.input))) {
 					append(me.history, me.input);
@@ -611,7 +624,7 @@ var CanvasPlacement = {
 				printlog(_REPL_dbg_level, "return code: "~debug.string(res));
 			}
 			if (res == -1)
-				me.continue_line();
+				me.continue_line(reset_text:reset_text);
 			else me.new_prompt();
 
 		} elsif (key == 8) {               # backspace

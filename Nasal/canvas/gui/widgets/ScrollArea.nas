@@ -4,9 +4,9 @@ gui.widgets.ScrollArea = {
     var cfg = Config.new(cfg);
     var m = gui.Widget.new(gui.widgets.ScrollArea);
     m._focus_policy = m.NoFocus;
-    m._scroll_pos = [0,0];
+    m._content_pos = [0, 0];
+    m._scroller_pos = [0, 0];
     m._max_scroll = [0, 0];
-    m._content_size = [0, 0];
     m._layout = nil;
 
     if( style != nil )
@@ -49,73 +49,58 @@ gui.widgets.ScrollArea = {
     if( me._layout != nil )
       me._layout.setGeometry(me._layout.geometry());
   },
-  # Move the scrollbars to the coordinates x,y (or as far as possible) and
-  # update.
+  # Move contents to the coordinates x,y (or as far as possible)
   #
   # @param x The x coordinate (positive is right)
   # @param y The y coordinate (positive is down)
-  moveTo: func(x, y)
+  scrollTo: func(x, y)
   {
-    var bb = me._updateBB();
-
-    me._scroll_pos[0] = math.max(0, math.min(x, me._max_scroll[0]));
-    me._scroll_pos[1] = math.max(0, math.min(y, me._max_scroll[1]));
-
-    me.update(bb);
-  },
-  # Move the scrollable area to the top-most position and update.
-  moveToTop: func()
-  {
-    me._scroll_pos[1] = 0;
+    me._content_pos[0] = x;
+    me._content_pos[1] = y;
 
     me.update();
   },
-  # Move the scrollable area to the bottom-most position and update.
-  moveToBottom: func()
+  # Move the scrollable area to the top-most position
+  scrollToTop:    func me.scrollTo( me._content_pos[0], 0 ),
+  # Move the scrollable area to the bottom-most position
+  scrollToBottom: func me.scrollTo( me._content_pos[0], me._max_scroll[1] ),
+  # Move the scrollable area to the left-most position
+  scrollToLeft:   func me.scrollTo( 0,                  me._content_pos[1] ),
+  # Move the scrollable area to the right-most position
+  scrollToRight:  func me.scrollTo( me._max_scroll[0],  me._content_pos[1] ),
+  # Move content by given delta
+  scrollBy: func(x, y)
   {
-    var bb = me._updateBB();
-
-    me._scroll_pos[1] = me._max_scroll[1];
-
-    me.update(bb);
+    return me.scrollTo( me._content_pos[0] + x,
+                        me._content_pos[1] + y );
   },
-  # Move the scrollable area to the left-most position and update.
-  moveToLeft: func()
+  # Set horizontal scrollbar position
+  horizScrollBarTo: func(x)
   {
-    me._scroll_pos[0] = 0;
+    if( me._scroller_delta[0] < 1 )
+      return me;
 
-    me.update();
+    me.scrollTo( me._max_scroll[0] * (x / me._scroller_delta[0]),
+                 me._content_pos[1] );
   },
-  # Move the scrollable area to the right-most position and update.
-  moveToRight: func()
+  # Set vertical scrollbar position
+  vertScrollBarTo: func(y)
   {
-    var bb = me._updateBB();
+    if( me._scroller_delta[1] < 1 )
+      return me;
 
-    me._scroll_pos[0] = me._max_scroll[0];
-
-    me.update(bb);
+    me.scrollTo( me._content_pos[0],
+                 me._max_scroll[1] * (y / me._scroller_delta[1]) );
   },
-  # Get position of scrollable content
-  getContentPosition: func()
+  # Move horizontal scrollbar by given offset
+  horizScrollBarBy: func(dx)
   {
-    var pos = [0, 0];
-
-    if( me._max_scroll[0] > 1 )
-      pos[0] = (me._scroll_pos[0] / me._max_scroll[0])
-             * (me._content_size[0] - me._size[0]);
-    if( me._max_scroll[1] > 1 )
-      pos[1] = (me._scroll_pos[1] / me._max_scroll[1])
-             * (me._content_size[1] - me._size[1]);
-
-    return pos;
+    me.horizScrollBarTo(me._scroller_pos[0] + dx);
   },
-  # Move content to the given position
-  moveContentTo: func(x, y)
+  # Move vertical scrollbar by given offset
+  vertScrollBarBy: func(dy)
   {
-    var scroll_x = x / (me._content_size[0] - me._size[0]) * me._max_scroll[0];
-    var scroll_y = y / (me._content_size[1] - me._size[1]) * me._max_scroll[1];
-
-    return me.moveTo(scroll_x, scroll_y);
+    me.vertScrollBarTo(me._scroller_pos[1] + dy);
   },
   # Update scroll bar and content area.
   #
@@ -125,9 +110,8 @@ gui.widgets.ScrollArea = {
     if (bb == nil) bb = me._updateBB();
     if (bb == nil) return me;
 
-    var pos = me.getContentPosition();
-    var offset = [ me._content_offset[0] - pos[0],
-                   me._content_offset[1] - pos[1] ];
+    var offset = [ me._content_offset[0] - me._content_pos[0],
+                   me._content_offset[1] - me._content_pos[1] ];
     me.getContent().setTranslation(offset);
 
     me._view.update(me);
@@ -142,9 +126,8 @@ gui.widgets.ScrollArea = {
     view.horiz.addEventListener("mousedown", func(e) me._dragStart(e));
     view._root.addEventListener("mousedown", func(e)
     {
-      var pos = me.getContentPosition();
-      me._drag_offsetX = pos[0] + e.clientX;
-      me._drag_offsetY = pos[1] + e.clientY;
+      me._drag_offsetX = me._content_pos[0] + e.clientX;
+      me._drag_offsetY = me._content_pos[1] + e.clientY;
     });
 
     view.vert.addEventListener
@@ -155,7 +138,7 @@ gui.widgets.ScrollArea = {
         if( !me._enabled )
           return;
 
-        me.moveTo(me._scroll_pos[0], me._drag_offsetY + e.clientY);
+        me.vertScrollBarTo(me._drag_offsetY + e.clientY);
         e.stopPropagation();
       }
     );
@@ -167,7 +150,7 @@ gui.widgets.ScrollArea = {
         if( !me._enabled )
           return;
 
-        me.moveTo(me._drag_offsetX + e.clientX, me._scroll_pos[1]);
+        me.horizScrollBarTo(me._drag_offsetX + e.clientX);
         e.stopPropagation();
       }
     );
@@ -180,8 +163,8 @@ gui.widgets.ScrollArea = {
         if( !me._enabled )
           return;
 
-        me.moveContentTo( me._drag_offsetX - e.clientX,
-                          me._drag_offsetY - e.clientY );
+        me.scrollTo( me._drag_offsetX - e.clientX,
+                     me._drag_offsetY - e.clientY );
         e.stopPropagation();
       }
     );
@@ -193,7 +176,7 @@ gui.widgets.ScrollArea = {
         if( !me._enabled )
           return;
 
-        me.moveTo(me._scroll_pos[0], me._scroll_pos[1] - e.deltaY);
+        me.scrollBy(0, 30 * -e.deltaY); # TODO make step size configurable
         e.stopPropagation();
       }
     );
@@ -202,8 +185,8 @@ gui.widgets.ScrollArea = {
   },
   _dragStart: func(e)
   {
-    me._drag_offsetX = me._scroll_pos[0] - e.clientX;
-    me._drag_offsetY = me._scroll_pos[1] - e.clientY;
+    me._drag_offsetX = me._scroller_pos[0] - e.clientX;
+    me._drag_offsetY = me._scroller_pos[1] - e.clientY;
     e.stopPropagation();
   },
   _updateBB: func()
@@ -238,23 +221,34 @@ gui.widgets.ScrollArea = {
       me._content_offset = [0, 0];
     }
 
-    if( w > me._size[0] )
-    {
-      var scroller_size = math.max(12, me._size[0] * (me._size[0] / w));
-      me._max_scroll[0] = me._size[0] - scroller_size;
-    }
-    else
-      me._max_scroll[0] = 0;
+    me._max_scroll[0] = math.max(0, w - me._size[0]);
+    me._max_scroll[1] = math.max(0, h - me._size[1]);
+    me._content_size = [w, h];
 
-    if( h > me._size[1] )
-    {
-      var scroller_size = math.max(12, me._size[1] * (me._size[1] / h));
-      me._max_scroll[1] = me._size[1] - scroller_size;
-    }
-    else
-      me._max_scroll[1] = 0;
+    # keep position within limit and only integer (to prevent artifacts on text,
+    # lines, etc. not alligned with pixel grid)
+    me._content_pos[0] =
+      math.max(0, math.min( math.round(me._content_pos[0]), me._max_scroll[0]));
+    me._content_pos[1] =
+      math.max(0, math.min( math.round(me._content_pos[1]), me._max_scroll[1]));
 
-    me._content_size[0] = w;
-    me._content_size[1] = h;
+    me._scroller_size = [0, 0];   # scroller size
+    me._scroller_offset = [0, 0]; # scroller minimum pos (eg. add offset for
+                                  # scrolling with buttons)
+    me._scroller_delta = [0, 0];  # scroller max travel distance
+
+    # update scroller size/offset/max delta
+    me._view._updateScrollMetrics(me, 0);
+    me._view._updateScrollMetrics(me, 1);
+
+    # update current scrollbar positions
+    me._scroller_pos[0] =
+        me._max_scroll[0] > 0
+      ? (me._content_pos[0] / me._max_scroll[0]) * me._scroller_delta[0]
+      : 0;
+    me._scroller_pos[1] =
+        me._max_scroll[1] > 0
+      ? (me._content_pos[1] / me._max_scroll[1]) * me._scroller_delta[1]
+      : 0;
   }
 };

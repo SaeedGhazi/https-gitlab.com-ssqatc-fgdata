@@ -329,8 +329,7 @@ var CanvasPlacement = {
 		m.vbox = canvas.VBoxLayout.new();
 		m.window.setLayout(m.vbox);
 		m.scroll = canvas.gui.widgets
-		          .ScrollArea.new(m.group, canvas.style, {"size":m.size})
-		                     .move(0, 0);
+		          .ScrollArea.new(m.group, canvas.style, {});
 		m.scroll.setColorBackground(m.colors.background);
 		m.vbox.addItem(m.scroll);
 		m.group = m.scroll.getContent();
@@ -431,7 +430,7 @@ var CanvasPlacement = {
 	},
 	reset_view: func() {
 		me.group.update();
-		me.scroll.moveToLeft().moveToBottom();
+		me.scroll.scrollToLeft().scrollToBottom();
 	},
 	set_line_color: func(color) {
 		if (me.separate_lines)

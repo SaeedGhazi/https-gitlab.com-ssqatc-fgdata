@@ -550,6 +550,7 @@ var Map = {
         layer.update();
     }
     printlog(_MP_dbg_lvl, "Took "~((systime()-t)*1000)~"ms to update map()");
+    me.setBool("update", 1); # update any coordinates that changed, to avoid floating labels etc.
     return me;
   },
 };

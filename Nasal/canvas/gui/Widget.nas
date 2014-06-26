@@ -122,7 +122,11 @@ gui.Widget = {
   },
 # protected:
   _MAX_SIZE: 32768, # size for "no size-limit"
-  _onStateChange: func {},
+  _onStateChange: func
+  {
+    if( me._view != nil and me._view.update != nil )
+      me._view.update(me);
+  },
   _setView: func(view)
   {
     me._view = view;

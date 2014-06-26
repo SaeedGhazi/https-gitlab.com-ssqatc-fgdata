@@ -203,22 +203,28 @@ DefaultStyle.widgets.label = {
     }
 
     me._createElement("text", "text")
-      .set("text", text)
-      .set("fill", "black");
+      .set("text", text);
+
+    var hfw_func = nil;
+    var min_width = me._text.maxWidth() + 4;
+    var width_hint = min_width;
 
     if( model._cfg.get("wordWrap", 0) )
     {
       var m = me;
-      model.setHeightForWidthFunc(func(w) m.heightForWidth(w));
-    }
-    else
-    {
-      var min_width = me._text.maxWidth() + 4;
-      model.setMinimumSize([min_width, 14]);
-      model.setSizeHint([min_width, 24]);
+      hfw_func = func(w) m.heightForWidth(w);
+      min_width = math.min(32, min_width);
+
+      # prefer approximately quadratic text blocks
+      if( width_hint > 24 )
+        width_hint = int(math.sqrt(width_hint * 24));
     }
 
-    return me;
+    model.setHeightForWidthFunc(hfw_func);
+    model.setMinimumSize([min_width, 14]);
+    model.setSizeHint([width_hint, 24]);
+
+    return me.update(model);
   },
   setImage: func(model, img)
   {
@@ -249,6 +255,14 @@ DefaultStyle.widgets.label = {
       return -1;
 
     return math.max(14, me._text.heightForWidth(w - 4));
+  },
+  update: func(model)
+  {
+    if( me['_text'] != nil )
+    {
+      var color_name = model._windowFocus() ? "fg_color" : "backdrop_fg_color";
+      me._text.set("fill", me._style.getColor(color_name));
+    }
   },
 # protected:
   _createElement: func(name, type)
@@ -303,14 +317,16 @@ DefaultStyle.widgets["scroll-area"] = {
     me.horiz.reset();
     if( model._max_scroll[0] > 1 )
       # only show scroll bar if horizontally scrollable
-      me.horiz.moveTo(model._scroll_pos[0], model._size[1] - 2)
-              .horiz(model._size[0] - model._max_scroll[0]);
+      me.horiz.moveTo( model._scroller_offset[0] + model._scroller_pos[0],
+                       model._size[1] - 2 )
+              .horiz(model._scroller_size[0]);
 
     me.vert.reset();
     if( model._max_scroll[1] > 1 )
       # only show scroll bar if vertically scrollable
-      me.vert.moveTo(model._size[0] - 2, model._scroll_pos[1])
-             .vert(model._size[1] - model._max_scroll[1]);
+      me.vert.moveTo( model._size[0] - 2,
+                      model._scroller_offset[1] + model._scroller_pos[1] )
+             .vert(model._scroller_size[1]);
 
     me._bg.reset()
           .rect(0, 0, model._size[0], model._size[1]);
@@ -325,5 +341,23 @@ DefaultStyle.widgets["scroll-area"] = {
     return el.createChild("path", "scroll-" ~ orient)
              .set("stroke", "#f07845")
              .set("stroke-width", 4);
+  },
+  # Calculate size and limits of scroller
+  #
+  # @param model
+  # @param dir 0 for horizontal, 1 for vertical
+  # @return [scroller_size, min_pos, max_pos]
+  _updateScrollMetrics: func(model, dir)
+  {
+    if( model._content_size[dir] <= model._size[dir] )
+      return;
+
+    model._scroller_size[dir] =
+      math.max(
+        12,
+        model._size[dir] * (model._size[dir] / model._content_size[dir])
+      );
+    model._scroller_offset[dir] = 0;
+    model._scroller_delta[dir] = model._size[dir] - model._scroller_size[dir];
   }
 };

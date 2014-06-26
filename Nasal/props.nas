@@ -282,6 +282,19 @@ var nodeList = func {
 }
 
 ##
+# Compiles a <condition> property branch according to the rules
+# set out in $FG_ROOT/Docs/README.conditions into a Condition object.
+# The 'test' method of the returend object can be used to evaluate
+# the condition.
+# The function returns nil on error.
+#
+var compileCondition = func(p) {
+    if(p == nil) return nil;
+    if(!isa(p, Node)) p = props.globals.getNode(p);
+    return _createCondition(p._g);
+}
+
+##
 # Evaluates a <condition> property branch according to the rules
 # set out in $FG_ROOT/Docs/README.conditions. Undefined conditions
 # and a nil argument are "true". The function dumps the condition

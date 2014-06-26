@@ -1,7 +1,14 @@
 var gui = {
   widgets: {},
   focused_window: nil,
-  region_highlight: nil
+  region_highlight: nil,
+
+  # Window/dialog stacking order
+  STACK_INDEX: {
+    "default": 0,
+    "always-on-top": 1,
+    "tooltip": 2
+  }
 };
 
 var gui_dir = getprop("/sim/fg-root") ~ "/Nasal/canvas/gui/";
@@ -226,7 +233,7 @@ var Window = {
   {
     # on writing the z-index the window always is moved to the top of all other
     # windows with the same z-index.
-    me.setInt("z-index", me.get("z-index", 0));
+    me.setInt("z-index", me.get("z-index", gui.STACK_INDEX["default"]));
 
     me.setFocus();
   },

@@ -1,12 +1,3 @@
-var nocolor = {
-	start: func {
-		me.prev = (string.color("1", "2") != "2");
-		string.setcolors(0);
-	}, end: func() {
-		string.setcolors(me.prev);
-	},
-};
-
 var _REPL_dbg_level = "debug";
 #var _REPL_dbg_level = "alert";
 
@@ -21,7 +12,7 @@ var REPL = {
 	operators_binary_unary: [
 		"~", "+", "-", "*", "/",
 		"!", "?", ":", ".", ",",
-		"<", ">", "="
+		"<", ">", "=", "|", "&", "^"
 	],
 	brackets: {
 		"(":")",
@@ -100,96 +91,100 @@ var REPL = {
 		return 0;
 	},
 	get_input: func() {
-		var line = me.placement.get_line();
-		if (line == nil or string.trim(line) == "") return me.df_status;
-		var len = size(line);
-		if (me.current == nil)
-			me.current = {
-				line: [],
-				brackets: [],
-				level: [],
-				statement: nil,
-				statement_level: nil,
-				last_operator: nil,
-			};
-		for (var i=0; i<len; i+=1) {
-			if (string.isxspace(line[i])) continue;
-			if (size(me.current.level) and me._is_str_char(me.current.level[-1])) {
-				me.current.last_operator = nil;
-				if (line[i] == `\\`) {
-					i += 1; # skip the next character
-					printlog(_REPL_dbg_level, "  skip backslash");
-				} elsif (line[i] == me.current.level[-1][0]) {
-					printlog(_REPL_dbg_level, "< out of string with "~me.current.level[-1]);
-					pop(me.current.level);
+		var lines = me.placement.get_line();
+		if (lines == nil or string.trim(lines) == "") return me.df_status;
+		var ls = split("\n", lines); var lines = [];
+		foreach (var l; ls) lines ~= split("\r", l);
+		foreach (var line; lines) {
+			var len = size(line);
+			if (me.current == nil)
+				me.current = {
+					line: [],
+					brackets: [],
+					level: [],
+					statement: nil,
+					statement_level: nil,
+					last_operator: nil,
+				};
+			for (var i=0; i<len; i+=1) {
+				if (string.isxspace(line[i])) continue;
+				if (size(me.current.level) and me._is_str_char(me.current.level[-1])) {
+					me.current.last_operator = nil;
+					if (line[i] == `\\`) {
+						i += 1; # skip the next character
+						printlog(_REPL_dbg_level, "  skip backslash");
+					} elsif (line[i] == me.current.level[-1][0]) {
+						printlog(_REPL_dbg_level, "< out of string with "~me.current.level[-1]);
+						pop(me.current.level);
+					}
+					continue;
 				}
-				continue;
-			}
-			if (line[i] == `#`) {
-				while(i<len and line[i] != `\n` and line[i] != `\r`) i+=1;
-				continue;
-			}
-			if (me.current.statement != nil) {
-				me.current.last_operator = nil;
-				if (me.current.statement_level == size(me.current.level) and
-				         (line[i] == `;` or line[i] == `,`)) {
-					printlog(_REPL_dbg_level, "statement ended by ;/,");
-					me.current.statement = nil;
-					me.current.statement_level = nil;
+				if (line[i] == `#`) {
+					while(i<len and line[i] != `\n` and line[i] != `\r`) i+=1;
+					continue;
+				}
+				if (me.current.statement != nil) {
+					me.current.last_operator = nil;
+					if (me.current.statement_level == size(me.current.level) and
+						     (line[i] == `;` or line[i] == `,`)) {
+						printlog(_REPL_dbg_level, "statement ended by ;/,");
+						me.current.statement = nil;
+						me.current.statement_level = nil;
+					} else {
+						var ret = me._handle_level(me.current.level, chr(line[i]), size(me.current.line)+1);
+						if (ret == nil) {# error
+							me.current = nil;
+							return 0;
+						} elsif (me.current.statement_level > size(me.current.level)) {
+							printlog(_REPL_dbg_level, "statement ended by level below");
+							# cancel out of statement
+							me.current.statement = nil;
+							me.current.statement_level = nil;
+						} elsif (line[i] == `{`) {
+							# cancel out of looking for `;`, because we have a real block here
+							printlog(_REPL_dbg_level, "statement ended by braces");
+							me.current.statement = nil;
+							me.current.statement_level = nil;
+						}
+					}
+					continue;
+				} elsif (string.isalpha(line[i])) {
+					me.current.last_operator = nil;
+					foreach (var stmt; me.statement_types) {
+						if (substr(line, i, size(stmt)) == stmt and
+							(i+size(stmt) >= len
+							 or !string.isalnum(line[i+size(stmt)])
+							 and line[i+size(stmt)] != `_`)) {
+							printlog(_REPL_dbg_level, "found: "~stmt);
+							me.current.statement = stmt;
+							me.current.statement_level = size(me.current.level);
+							i += size(stmt)-1;
+							break;
+						}
+					}
+				} elsif (me._is_str_char(line[i])) {
+					me.current.last_operator = nil;
+					append(me.current.level, chr(line[i]));
+					printlog(_REPL_dbg_level, "> into string with "~me.current.level[-1]);
 				} else {
 					var ret = me._handle_level(me.current.level, chr(line[i]), size(me.current.line)+1);
-					if (ret == nil) {# error
-						me.current = nil;
+					me.current.last_operator = nil;
+					if (ret == nil) # error
 						return 0;
-					} elsif (me.current.statement_level > size(me.current.level)) {
-						printlog(_REPL_dbg_level, "statement ended by level below");
-						# cancel out of statement
-						me.current.statement = nil;
-						me.current.statement_level = nil;
-					} elsif (line[i] == `{`) {
-						# cancel out of looking for `;`, because we have a real block here
-						printlog(_REPL_dbg_level, "statement ended by braces");
-						me.current.statement = nil;
-						me.current.statement_level = nil;
+					elsif (ret == 0) {
+						foreach (var o; me.operators_binary_unary)
+							if (line[i] == o[0])
+							{ me.current.last_operator = o; printlog(_REPL_dbg_level, "found operator "~o); break }
 					}
-				}
-				continue;
-			} elsif (string.isalpha(line[i])) {
-				me.current.last_operator = nil;
-				foreach (var stmt; me.statement_types) {
-					if (substr(line, i, size(stmt)) == stmt and
-					    (i+size(stmt) >= len
-					     or !string.isalnum(line[i+size(stmt)])
-					     and line[i+size(stmt)] != `_`)) {
-						printlog(_REPL_dbg_level, "found: "~stmt);
-						me.current.statement = stmt;
-						me.current.statement_level = size(me.current.level);
-						i += size(stmt)-1;
-						break;
-					}
-				}
-			} elsif (me._is_str_char(line[i])) {
-				me.current.last_operator = nil;
-				append(me.current.level, chr(line[i]));
-				printlog(_REPL_dbg_level, "> into string with "~me.current.level[-1]);
-			} else {
-				var ret = me._handle_level(me.current.level, chr(line[i]), size(me.current.line)+1);
-				me.current.last_operator = nil;
-				if (ret == nil) # error
-					return 0;
-				elsif (ret == 0) {
-					foreach (var o; me.operators_binary_unary)
-						if (line[i] == o[0])
-						{ me.current.last_operator = o; printlog(_REPL_dbg_level, "found operator "~o); break }
 				}
 			}
+			append(me.current.line, line);
+			if (me.keep_history)
+				append(me.history, {
+					type: "input",
+					line: line,
+				});
 		}
-		append(me.current.line, line);
-		if (me.keep_history)
-			append(me.history, {
-				type: "input",
-				line: line,
-			});
 		var execute = (me.current.statement == nil and me.current.last_operator == nil and !size(me.current.level));
 		if (execute) {
 			me.df_status = 0;
@@ -316,8 +311,8 @@ var CanvasPlacement = {
 			lines_of_text: [],
 			history: [],
 			curr: 0,
-			coloring: {parents:[nocolor]},
 			completion_pos: 0,
+			#tabs: [], # TODO: support multiple tabs
 		};
 		m.window.set("title", "Nasal REPL Interpreter");
 		#debug.dump(m.window._node);
@@ -327,24 +322,16 @@ var CanvasPlacement = {
 			m.window = nil;
 			m.del();
 		};
-		if (m.window_style != nil) {
-			m.window.setBool("resize", 1);
-			m.window.onResize = func() {
-				call(canvas.Window.onResize, nil, me);
-				var sz = [nil,nil];
-				for (var i=0; i<2; i+=1)
-					sz[i] = me.get("content-size[" ~ i ~ "]");
-				m.scroll.setSize(sz);
-			};
-		}
+		if (m.window_style != nil) m.window.setBool("resize", 1);
 		m.canvas = m.window.createCanvas()
 		                   .setColorBackground(m.colors.background);
 		m.group = m.canvas.createGroup("content");
+		m.vbox = canvas.VBoxLayout.new();
+		m.window.setLayout(m.vbox);
 		m.scroll = canvas.gui.widgets
-		         . ScrollArea.new(m.group, canvas.style, {"size":m.size})
-		                     .move(0, 0);
+		          .ScrollArea.new(m.group, canvas.style, {});
 		m.scroll.setColorBackground(m.colors.background);
-		m.window.addWidget(m.scroll);
+		m.vbox.addItem(m.scroll);
 		m.group = m.scroll.getContent();
 		m.create_msg();
 		m.text_group = m.group.createChild("group", "text-display");
@@ -353,8 +340,10 @@ var CanvasPlacement = {
 			.moveTo(0, -m.padding)
 			.lineTo(0, -11-m.padding)
 			.setStrokeLineWidth(2)
-			.setColor(m.colors.text);
+			.setColor(m.colors.text)
+			.hide();
 		m.repl = REPL.new(placement:m, name:name);
+		# XXX: keyboard hack, needs proper GUI-integrated design
 		append(m.listeners, setlistener("/devices/status/keyboard/event", func(event) {
 			if (!event.getNode("pressed").getValue())
 				return;
@@ -363,7 +352,6 @@ var CanvasPlacement = {
 			if (m.handle_key(key, event.getNode("modifier").getValues()))
 				keyN.setValue(-1);           # drop key event
 		}));
-		m.scroll.update(); # initialize ScrollArea._max_scroll member
 		m.update();
 		append(CanvasPlacement.instances, m);
 		return m;
@@ -374,49 +362,85 @@ var CanvasPlacement = {
 		foreach (var l; me.listeners)
 			removelistener(l);
 		setsize(me.listeners, 0);
+		forindex (var i; CanvasPlacement.instances)
+			if (CanvasPlacement.instances[i] == me) {
+				CanvasPlacement.instances[i] = CanvasPlacement.instances[-1];
+				pop(CanvasPlacement.instances);
+				break;
+			}
 	},
-	add_char: func(char) {
+	add_char: func(char, reset_view=0) {
 		me.reset_input_from_history();
 		me.input ~= chr(char);
 		me.text.appendText(chr(char));
+		if (reset_view) me.reset_view();
 		return nil;
 	},
-	add_text: func(text) {
+	add_text: func(text, reset_view=0) {
 		me.reset_input_from_history();
 		me.input ~= text;
 		me.text.appendText(text);
+		if (reset_view) me.reset_view();
 		return nil;
 	},
-	remove_char: func() {
+	remove_char: func(reset_view=0) {
 		me.reset_input_from_history();
 		me.input = substr(me.input, 0, size(me.input) - 1);
 		var t = me.text.get("text");
 		if (size(t) <= me.text.stop) return nil;
 		me.text.setText(substr(t, 0, size(t)-1));
+		if (reset_view) me.reset_view();
 		return t[-1];
 	},
-	clear_input: func() {
+	clear_input: func(reset_view=0) {
 		me.reset_input_from_history();
 		var ret = me.input;
 		me.input = "";
 		var t = me.text.get("text");
 		me.text.setText(substr(t, 0, me.text.stop));
+		if (reset_view) me.reset_view();
 		return ret;
 	},
-	replace_line: func(replacement, replace_input=1) {
+	replace_line: func(replacement, replace_input=1, reset_view=0) {
 		if (replace_input) me.input = replacement;
 		var t = me.text.get("text");
 		me.text.setText(substr(t, 0, me.text.stop)~replacement);
+		if (reset_view) me.reset_view();
 		return nil;
 	},
-	add_line: func(text) {
-		me.create_line();
+	add_line: func(text, reset_text=1, reset_view=0) {
+		me.create_line(reset_text);
 		me.text.appendText(text);
+		if (reset_view) me.reset_view();
+	},
+	new_prompt: func() {
+		me.add_line(">>> ");
+		me.text.stop = size(me.text.get("text"));
+	},
+	continue_line: func(reset_text=1) {
+		me.add_line("... ", reset_text);
+		me.text.stop = size(me.text.get("text"));
+	},
+	reset_input_from_history: func(reset_view=0) {
+		if (me.curr < size(me.history)) {
+			me.input = me.history[me.curr];
+			me.curr = size(me.history);
+		}
+		if (reset_view) me.reset_view();
+	},
+	reset_view: func() {
+		me.group.update();
+		me.scroll.scrollToLeft().scrollToBottom();
 	},
 	set_line_color: func(color) {
 		if (me.separate_lines)
 			# Only change colors if this is its own line
 			me.text.setColor(color);
+	},
+	set_line_font: func(font) {
+		if (me.separate_lines)
+			# Only change font if this is its own line
+			me.text.setFont(font);
 	},
 	clear: func() {
 		me.text.del();
@@ -427,6 +451,7 @@ var CanvasPlacement = {
 		me.input = "";
 		me.text = nil;
 		setsize(me.lines_of_text, 0);
+		me.reset_view();
 	},
 	create_msg: func() {
 		# Text drawing mode: text and maybe a bounding box
@@ -441,7 +466,7 @@ var CanvasPlacement = {
 			.setColor(me.colors.text)
 			.setDrawMode(draw_mode)
 			.setMaxWidth(me.window.get("content-size[0]") - me.padding)
-			.setText(me.translations["help"]);
+			.setText(me.gettranslation("help"));
 		if (me.colors.text_fill != nil)
 			me.msg.text.setColorFill(me.colors.text_fill);
 		me.msg.text.update();
@@ -474,16 +499,16 @@ var CanvasPlacement = {
 		for (var i=0; i<size(me.keys); i+=2) {
 			if (i) me.msg.right_col.appendText("\n");
 			desc = me.keys[i+1];
-			if (desc == nil) desc = me.translations["key-not-mapped"];
+			if (desc == nil) desc = me.gettranslation("key-not-mapped");
 			elsif (desc[-1] != `.`) desc ~= ".";
 			me.msg.right_col.appendText(desc);
 		}
 	},
-	create_line: func() {
+	create_line: func(reset_text=1) {
 		# c.f. above, in me.create_msg()
 		var draw_mode = canvas.Text.TEXT + (me.colors.text_fill != nil ? canvas.Text.FILLEDBOUNDINGBOX : 0);
 
-		me.input = "";
+		if (reset_text) me.input = "";
 		# If we only use one line, and one exists, things are simple:
 		if (!me.separate_lines and me.text != nil) {
 			me.text.appendText("\n");
@@ -514,35 +539,12 @@ var CanvasPlacement = {
 	},
 	update: func() {
 		#debug.dump(me.text.getTransformedBounds());
-		if (me.state == "startup") return;
-		me.cursor.setTranslation(
-			me.text.getTransformedBounds()[2] + 6,
-			me.text.getTransformedBounds()[3] + 5
-		);
+		if (me.state != "startup")
+			me.cursor.setTranslation(
+				me.text.getTransformedBounds()[2] + 6,
+				me.text.getTransformedBounds()[3] + 5
+			).show();
 		me.scroll.update();
-	},
-	new_line: func() {
-		me.create_line();
-		me.text.appendText(">>> ");
-		me.text.stop = size(me.text.get("text"));
-		me.reset_view();
-	},
-	continue_line: func() {
-		me.create_line();
-		me.text.appendText("... ");
-		me.text.stop = size(me.text.get("text"));
-		me.reset_view();
-	},
-	reset_input_from_history: func() {
-		if (me.curr < size(me.history)) {
-			me.input = me.history[me.curr];
-			me.curr = size(me.history);
-		}
-		me.reset_view();
-	},
-	reset_view: func() {
-		me.group.update();
-		me.scroll.moveToLeft().moveToBottom();
 	},
 	handle_key: func(key, modifiers) {
 		var modifier_str = "";
@@ -552,7 +554,7 @@ var CanvasPlacement = {
 		}
 		if (me.state == "startup") {
 			me.msg.del(); me.msg = nil;
-			me.new_line(); # initialize a new line
+			me.new_prompt(); # initialize a new line
 			me.text.stop = size(me.text.get("text"));
 			me.state = "accepting input";
 
@@ -574,13 +576,26 @@ var CanvasPlacement = {
 				var input = clipboard.getText();
 				printlog(_REPL_dbg_level, "ctrl+v: "~debug.string(input));
 				me.reset_input_from_history();
-				for (var i=0; i<size(input); i+=1) {
-					if (input[i] == `\t`) {
+				var abnormal = func string.iscntrl(input[j]) or (string.isxspace(input[j]) and input[j] != ` `) or !string.isascii(input[j]);
+				var i=0;
+				while (i<size(input)) {
+					for (var j=i; j<size(input); j+=1)
+						if (abnormal()) break;
+					if (j != i) me.add_text(substr(input, i, j-i));
+					while (j<size(input) and abnormal()) {
 						# replace tabs with spaces
-						me.handle_key(` `,      {shift:0, ctrl:0});
-					} elsif (string.isascii(input[i])) {
-						me.handle_key(input[i], {shift:0, ctrl:0});
+						if (input[j] == `\t`)
+							me.add_char(` `);
+						# handle newlines like they're shift+space, i.e. continue don't evaluate
+						elsif (input[j] == `\n` or input[j] == `\r`) {
+							if (j<size(input)-1 and input[j+1] == `\n`)
+								j+=1;
+							me.input ~= "\n"; me.continue_line(reset_text:0);
+						}
+						# skip other non-ascii characters
+						j += 1;
 					}
+					i=j;
 				}
 			} elsif (key == 4) { # ctrl-D/EOF
 				printlog(_REPL_dbg_level, "EOF");
@@ -591,9 +606,11 @@ var CanvasPlacement = {
 		} elsif (key == `\n` or key == `\r`) {
 			printlog(_REPL_dbg_level, "return (key: "~key~", shift: "~modifiers.shift~")");
 			me.reset_input_from_history();
+			var reset_text = 1;
 			if (modifiers.shift) {
 				var res = -1;
 				me.input ~= "\n";
+				reset_text = 0;
 			} else {
 				if (size(string.trim(me.input))) {
 					append(me.history, me.input);
@@ -606,8 +623,8 @@ var CanvasPlacement = {
 				printlog(_REPL_dbg_level, "return code: "~debug.string(res));
 			}
 			if (res == -1)
-				me.continue_line();
-			else me.new_line();
+				me.continue_line(reset_text:reset_text);
+			else me.new_prompt();
 
 		} elsif (key == 8) {               # backspace
 			printlog(_REPL_dbg_level, "back");
@@ -655,7 +672,6 @@ var CanvasPlacement = {
 
 		} else {
 			printlog(_REPL_dbg_level, "key: "~key~" (`"~chr(key)~"`)");
-			me.reset_input_from_history();
 			me.add_char(key);
 			me.completion_pos = -1;
 		}
@@ -663,6 +679,7 @@ var CanvasPlacement = {
 		#printlog(_REPL_dbg_level, "  -> "~me.input);
 
 		me.update();
+		me.reset_view();
 
 		return 1;                                # discard key event
 	},
@@ -671,16 +688,14 @@ var CanvasPlacement = {
 	},
 	display_result: func(res=nil) {
 		if (res == nil) return 1; # don't display NULL results
-		me.coloring.start();
-		var res = call(debug.string, [res], var err=[]);
+		var res = call(debug.string, [res, 0], var err=[]);
 		if (size(err)) {
-			me.add_line(me.translations["bad-result"] or die("no translation"));
+			me.add_line(me.gettranslation("bad-result"));
 			me.set_line_color(me.colors.error);
 			if (me.font_file == "LiberationFonts/LiberationMono-Bold.ttf")
-				me.text.setFont("LiberationFonts/LiberationMono-BoldItalic.ttf");
+				me.set_line_font("LiberationFonts/LiberationMono-BoldItalic.ttf");
 			return 1;
 		}
-		me.coloring.end();
 		if (size(res) > me.max_output_chars)
 			res = substr(res, 0, me.max_output_chars-5)~". . .";
 		me.add_line(res);
@@ -699,6 +714,7 @@ var CanvasPlacement = {
 		me.add_line("Parse error: "~msg~" on line "~line~" in "~file);
 		me.set_line_color(me.colors.error);
 	},
+	gettranslation: func(k) me.translations[k] or "[Error: no translation for key "~k~"]",
 };
 
 var print2 = func(i) {

@@ -189,7 +189,7 @@ var MessageBox = {
   _loadSelection: func
   {
     var dlg_id = md5(me._title ~ me._text ~ me._standard_buttons);
-    me._save_path = getprop("/sim/fg-home") ~ "/cache/MessageBox-" ~ dlg_id;
+    me._save_path = getprop("/sim/fg-home") ~ "/cache/MessageBox/sel-" ~ dlg_id;
 
     if( io.stat(me._save_path) != nil )
     {
@@ -202,6 +202,9 @@ var MessageBox = {
   _saveSelection: func(sel)
   {
     printlog("info", "Saving dialog selection to '" ~ me._save_path ~ "'");
+
+    # ensure directory exists
+    os.path.new(me._save_path).create_dir();
 
     var fh = io.open(me._save_path, "w");
     io.write(fh, '' ~ sel);

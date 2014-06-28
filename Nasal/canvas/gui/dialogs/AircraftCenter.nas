@@ -6,7 +6,8 @@ var AircraftCenter = {
       _dlg: canvas.Window.new([600,500], "dialog")
                          .set("title", "Aircraft Center")
                          .set("resize", 1),
-      _active_button: nil
+      _active_button: nil,
+      _show_more: nil
     };
 
     m._dlg.getCanvas(1)
@@ -56,6 +57,8 @@ var AircraftCenter = {
       me._active_button = b;
 
       me._list.clear();
+      me._show_more = nil;
+
       settimer(func me.fillList(pkg.root.search(filter)), 0);
     });
 
@@ -66,8 +69,31 @@ var AircraftCenter = {
   },
   fillList: func(packages)
   {
-    foreach(var package; packages)
+    var num_packages = size(packages);
+    var end = num_packages;
+
+    if( num_packages > 55 )
+      end = 50;
+
+    me._addPackageEntries(packages, 0, end);
+  },
+  # @param packages
+  # @param begin  index of first package
+  # @param end    index after last package
+  _addPackageEntries: func(packages, begin, end)
+  {
+    # remove stretch at end of list
+    me._list.takeAt(-1);
+
+    if( me._show_more != nil )
     {
+      me._list.removeItem(me._show_more);
+      me._show_more = nil;
+    }
+
+    for(var i = begin; i < end; i += 1)
+    {
+      var package = packages[i];
       var row = HBoxLayout.new();
       me._list.addItem(row);
 
@@ -175,10 +201,43 @@ var AircraftCenter = {
     title_box = nil;
     launch_bar = nil;
 
-    me._info_label.setText(
-      "Install/remove aircraft (Showing " ~ size(packages) ~ " aircraft)"
-    );
+    var num_info = size(packages);
 
+    if( end < size(packages) )
+    {
+      num_info = end ~ " of " ~ num_info;
+
+      # range of next "page"
+      start = end;
+      end = math.min(end + 50, size(packages));
+
+      me._show_more = VBoxLayout.new();
+      me._list.addItem(me._show_more);
+
+      me._show_more.addSpacing(3);
+      var hbox = HBoxLayout.new();
+      me._show_more.addItem(hbox);
+      me._show_more.addSpacing(5);
+
+      hbox.addStretch(1);
+      hbox.addItem(
+        gui.widgets.Button.new(me._scroll_content, style, {})
+                          .setText("Show more...")
+                          .listen("clicked", func
+                            me._addPackageEntries(packages, start, end)
+                          )
+      );
+      hbox.addStretch(1);
+
+      hbox = nil;
+    }
+
+    # Add some stretch in case the scroll area is larger than the list
+    me._list.addStretch(1);
+
+    me._info_label.setText(
+      "Install/remove aircraft (Showing " ~ num_info ~ " aircraft)"
+    );
     me._dlg.getCanvas().update();
   }
 };

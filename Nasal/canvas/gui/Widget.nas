@@ -1,10 +1,4 @@
 gui.Widget = {
-# enum FocusPolicy:
-  NoFocus: 0,
-  TabFocus: 1,
-  ClickFocus: 2,
-  StrongFocus: 1 + 2,
-
   #
   new: func(derived)
   {
@@ -82,7 +76,7 @@ gui.Widget = {
       return me;
 
     var canvas = me.getCanvas();
-    if( canvas._focused_widget != nil )
+    if( canvas._impl['_focused_widget'] != nil )
       canvas._focused_widget.clearFocus();
 
     if( !me._enabled )
@@ -118,7 +112,13 @@ gui.Widget = {
   onRemove: func
   {
     if( me._view != nil )
+    {
       me._view._root.del();
+      me._view = nil;
+    }
+
+    if( me._focused )
+      me.getCanvas()._focused_widget = nil;
   },
 # protected:
   _MAX_SIZE: 32768, # size for "no size-limit"
@@ -148,7 +148,7 @@ gui.Widget = {
       me._onStateChange();
     });
     root.addEventListener("mousedown", func {
-      if( bits.test(me._focus_policy, me.ClickFocus / 2) )
+      if( me._focus_policy & me.ClickFocus )
         me.setFocus();
     });
     root.addEventListener("mouseleave", func {
@@ -159,9 +159,10 @@ gui.Widget = {
   },
   _trigger: func(type, data = nil)
   {
-    me._view._root.dispatchEvent(
-      canvas.CustomEvent.new("cb." ~ type, {detail: data})
-    );
+    if( me._view != nil )
+      me._view._root.dispatchEvent(
+        canvas.CustomEvent.new("cb." ~ type, {detail: data})
+      );
     return me;
   },
   _windowFocus: func
@@ -170,3 +171,10 @@ gui.Widget = {
     return canvas != nil ? canvas.data("focused") : 0;
   }
 };
+
+# enum FocusPolicy:
+gui.Widget.NoFocus = 0;
+gui.Widget.TabFocus = 1;
+gui.Widget.ClickFocus = 2;
+gui.Widget.StrongFocus = gui.Widget.TabFocus
+                       | gui.Widget.ClickFocus;

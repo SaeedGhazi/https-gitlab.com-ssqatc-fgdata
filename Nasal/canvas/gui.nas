@@ -68,7 +68,6 @@ var Window = {
       _ghost: ghost,
       _node: props.wrapNode(ghost._node_ghost),
       _focused: 0,
-      _focused_widget: nil,
       _widgets: []
     };
 
@@ -155,6 +154,8 @@ var Window = {
 
     canvas_.addPlacement({type: "window", "id": me.get("id")});
     me['_canvas'] = canvas_;
+
+    canvas_._focused_widget = nil;
     canvas_.data("focused", me._focused);
 
     # prevent resizing if canvas is placed from somewhere else

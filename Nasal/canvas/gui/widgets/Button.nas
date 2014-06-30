@@ -15,7 +15,8 @@ gui.widgets.Button = {
   },
   setText: func(text)
   {
-    me._view.setText(me, text);
+    if( me._view != nil )
+      me._view.setText(me, text);
     return me;
   },
   setCheckable: func(checkable)

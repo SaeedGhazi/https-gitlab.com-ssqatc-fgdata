@@ -122,37 +122,33 @@ var AircraftCenter = {
       (func {
         var p = package;
         var b = gui.widgets.Button.new(me._scroll_content, style, {});
-        var installed = p.installed;
         var install_text = sprintf("Install (%.1fMB)", p.fileSize/1024/1024);
 
-        if( installed )
+        if( p.installed )
           b.setText("Remove");
         else
           b.setText(install_text);
 
         b.listen("clicked", func
         {
-          if( installed )
+          if( p.installed )
           {
             p.uninstall();
-            installed = 0;
             b.setText(install_text);
           }
           else
           {
-            b.setEnabled(0)
-             .setText("Wait...");
-            p.install()
-             .progress(func(i, cur, total)
-               b.setText(sprintf("%.1f%%", (cur / total) * 100))
-             )
-             .fail(func b.setText('Failed'))
-             .done(func {
-               installed = 1;
-               b.setText("Remove")
-                .setEnabled(1);
-             });
+            b.setText("Wait...").setEnabled(0);
+            p.install();
           }
+        });
+
+        p.existingInstall(func(pkg, ins) {
+          ins.progress(func(i, cur, total)
+            b.setText(sprintf("%.1f%%", (cur / total) * 100))
+          );
+          ins.fail(func b.setText('Failed'));
+          ins.done(func b.setText("Remove").setEnabled(1));
         });
 
         title_box.addItem(b);

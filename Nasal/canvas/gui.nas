@@ -209,13 +209,21 @@ var Window = {
     gui.focused_window = nil;
     return me;
   },
-  setPosition: func(x, y)
+  setPosition: func
   {
+    if( size(arg) == 1 )
+      var arg = arg[0];
+    var (x, y) = arg;
+
     me.setInt("tf/t[0]", x);
     me.setInt("tf/t[1]", y);
   },
-  setSize: func(w, h)
+  setSize: func
   {
+    if( size(arg) == 1 )
+      var arg = arg[0];
+    var (w, h) = arg;
+
     me.set("content-size[0]", w);
     me.set("content-size[1]", h);
 
@@ -224,8 +232,12 @@ var Window = {
 
     return me;
   },
-  move: func(x, y)
+  move: func
   {
+    if( size(arg) == 1 )
+      var arg = arg[0];
+    var (x, y) = arg;
+
     me.setInt("tf/t[0]", me.get("tf/t[0]", 10) + x);
     me.setInt("tf/t[1]", me.get("tf/t[1]", 30) + y);
   },

@@ -345,6 +345,7 @@
       <property>/sim/rendering/rembrandt/enabled</property>
     </condition>
     <object-name>reflector-plate</object-name>
+    <object-name>sunShieldGlass</object-name>
   </effect>
 
 </PropertyList>

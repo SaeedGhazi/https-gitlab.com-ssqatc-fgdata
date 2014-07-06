@@ -27,7 +27,7 @@ var draw_apt = func (group, apt, controller=nil, lod=0) {
 			.setColor(0,0.6,0.85)
 			.setFontSize(28);
 		apt_grp.setGeoPosition(lat, lon)
-			.set("z-index",1); # FIXME: this needs to be configurable!!
+			.set("z-index",-1); # FIXME: this needs to be configurable!!
 	#}
 
 	# draw routines should always return their canvas group to the caller for further processing

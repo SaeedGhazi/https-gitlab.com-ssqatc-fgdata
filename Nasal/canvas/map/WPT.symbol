@@ -31,10 +31,13 @@ var init = func {
 		.lineTo(5,-5)
 		.setColor(1,1,1)
 		.close()
-		.setScale(me.style.scale_factor);
+		.setScale(me.style.scale_factor)
+		.set("z-index",2);
 
-	me.newText(me.model.name, me.style.font_color).setTranslation(25,35)
-	.setScale(me.style.scale_factor);
+	me.text = me.newText(me.model.name, me.style.font_color)
+		.setTranslation(25,35)
+		.setScale(me.style.scale_factor)
+		.set("z-index",2);
 
 	me.draw();
 };
@@ -42,6 +45,11 @@ var draw = func {
 	var active = (getprop(me.options.current_wp_node) == me.model.idx);
 	if (active != me.active) {
 		me.path.setColor(
+			active ?
+			me.style.active_color :
+			me.style.inactive_color
+		);
+		me.text.setColor(
 			active ?
 			me.style.active_color :
 			me.style.inactive_color

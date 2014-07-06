@@ -77,7 +77,7 @@ var draw_traffic = func(group, traffic, lod=0)
 			}
 			
 			tcas_grp.setGeoPosition(lat, lon)
-				.set("z-index",1);
+				.set("z-index",4);
 		
 
 		#settimer(func drawtraffic(group), 2); # updates are handled by the model, not by the view!

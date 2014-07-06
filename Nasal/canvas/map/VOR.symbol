@@ -38,7 +38,8 @@ var drawVOR = func(group) {
 		.lineTo(-7.5,-12.5)
 		.close()
 		.setStrokeLineWidth(line_width)
-		.setColor(color);
+		.setColor(color)
+		.set("z-index",-2);
 };
 
 var cache = StyleableCacheable.new(
@@ -87,7 +88,8 @@ var draw = func {
 				.arcSmallCW(radius,radius,0,-2*radius,0)
 				.setStrokeLineWidth(me.style.range_line_width)
 				.setStrokeDashArray(me.style.range_dash_array)
-				.setColor(me.style.active_color);
+				.setColor(me.style.active_color)
+				.set("z-index",-2);
 
 			var course = me.map.controller.get_tuned_course(me.model.frequency/100);
 			me.radial_vor = me.element.createChild("path")
@@ -96,7 +98,8 @@ var draw = func {
 				.setStrokeLineWidth(me.style.radial_line_width)
 				.setStrokeDashArray(me.style.radial_dash_array)
 				.setColor(me.style.active_color)
-				.setRotation(course*D2R);
+				.setRotation(course*D2R)
+				.set("z-index",-2);
 		}
 		me.range_vor.show();
 		me.radial_vor.show();

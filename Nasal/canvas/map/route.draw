@@ -28,7 +28,8 @@ var draw_route =  func (group, theroute, controller=nil, lod=0)
 
 	var route = route_group.createChild("path","route")
 		.setStrokeLineWidth(5)
-		.setColor(1,0,1);
+		.setColor(1,0,1)
+		.set("z-index",1);
 			
 	var cmds = [];
 	var coords = [];

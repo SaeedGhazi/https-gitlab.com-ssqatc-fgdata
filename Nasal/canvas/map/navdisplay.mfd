@@ -31,24 +31,16 @@ NDSourceDriver.new = func {
 	m.get_trk_mag= func
 	{
 		if(getprop("/velocities/groundspeed-kt") > 80)
-		{
 			getprop("/orientation/track-magnetic-deg");
-		}
 		else
-		{
 			getprop("/orientation/heading-magnetic-deg");
-		}
 	};
 	m.get_trk_tru = func
 	{
 		if(getprop("/velocities/groundspeed-kt") > 80)
-		{
 			getprop("/orientation/track-deg");
-		}
 		else
-		{
 			getprop("/orientation/heading-deg");
-		}
 	};
 	m.get_lat= func getprop("/position/latitude-deg");
 	m.get_lon= func getprop("/position/longitude-deg");
@@ -242,16 +234,14 @@ var NavDisplay = {
 		# because things are much better configurable that way
 		# now look up all required SVG elements and initialize member fields using the same name  to have a convenient handle
 		foreach(var element; ["dmeLDist","dmeRDist","dmeL","dmeR","vorL","vorR","vorLId","vorRId",
-		                      "range","status.wxr","status.wpt","status.sta","status.arpt"])
+		                      "status.wxr","status.wpt","status.sta","status.arpt"])
 			me.symbols[element] = me.nd.getElementById(element);
 
 		# load elements from vector image, and create instance variables using identical names, and call updateCenter() on each
 		# anything that needs updatecenter called, should be added to the vector here
 		#
-		foreach(var element; ["compassApp","northUp","aplSymMap","aplSymMapCtr","aplSymVor",
-		                      "staArrowL2","staArrowR2","staFromL2","staToL2","staFromR2","staToR2",
-		                      "hdgTrk","truMag","altArc","planArcs",
-		                      "trkInd","compass","hdgBug","HdgBugCRT","TrkBugLCD","HdgBugLCD","curHdgPtr",
+		foreach(var element; ["staArrowL2","staArrowR2","staFromL2","staToL2","staFromR2","staToR2",
+		                      "hdgTrk","trkInd","hdgBug","HdgBugCRT","TrkBugLCD","HdgBugLCD","curHdgPtr",
 		                      "HdgBugCRT2","TrkBugLCD2","HdgBugLCD2","hdgBug2","selHdgLine","selHdgLine2","curHdgPtr2",
 		                      "staArrowL","staArrowR","staToL","staFromL","staToR","staFromR"] )
 			me.symbols[element] = me.nd.getElementById(element).updateCenter();
@@ -417,13 +407,15 @@ var NavDisplay = {
 		var userTrkTru = me.aircraft_source.get_trk_tru();
 		
 		if(me.get_switch('toggle_true_north')) {
-			me.symbols.truMag.setText("TRU");
 			var userHdg=userHdgTru;
+			me.userHdg=userHdgTru;
 			var userTrk=userTrkTru;
+			me.userTrk=userTrkTru;
 		} else {
-			me.symbols.truMag.setText("MAG");
 			var userHdg=userHdgMag;
+			me.userHdg=userHdgMag;
 			var userTrk=userTrkMag;
+			me.userTrk=userTrkMag;
 		}
 		# this should only ever happen when testing the experimental AI/MP ND driver hash (not critical)
 		# or when an error occurs (critical)
@@ -431,17 +423,21 @@ var NavDisplay = {
 			print("aircraft source invalid, returning !");
 			return;
 		}
-		if (me.aircraft_source.get_gnd_spd() < 80)
+		if (me.aircraft_source.get_gnd_spd() < 80) {
 			userTrk = userHdg;
+			me.userTrk=userHdg;
+		}
 		
 		if((me.in_mode('toggle_display_mode', ['MAP']) and me.get_switch('toggle_display_type') == "CRT")
 		    or (me.get_switch('toggle_track_heading') and me.get_switch('toggle_display_type') == "LCD"))
 		{
 			userHdgTrk = userTrk;
+			me.userHdgTrk = userTrk;
 			userHdgTrkTru = userTrkTru;
 			me.symbols.hdgTrk.setText("TRK");
 		} else {
 			userHdgTrk = userHdg;
+			me.userHdgTrk = userHdg;
 			userHdgTrkTru = userHdgTru;
 			me.symbols.hdgTrk.setText("HDG");
 		}
@@ -562,8 +558,6 @@ var NavDisplay = {
 			me.symbols.dmeRDist.setText("");
 		}
 
-		me.symbols.range.setText(sprintf("%3.0f",me.rangeNm()/2));
-
 		# Hide heading bug 10 secs after change
 		var vhdg_bug = getprop("autopilot/settings/heading-bug-deg") or 0;
 		var hdg_bug_active = getprop("autopilot/settings/heading-bug-active");
@@ -574,14 +568,12 @@ var NavDisplay = {
 			or (me.get_switch('toggle_track_heading') and me.get_switch('toggle_display_type') == "LCD"))
 		{
 			me.symbols.trkInd.setRotation(0);
-			me.symbols.trkInd2.setRotation(0);
 			me.symbols.curHdgPtr.setRotation((userHdg-userTrk)*D2R);
 			me.symbols.curHdgPtr2.setRotation((userHdg-userTrk)*D2R);
 		}
 		else
 		{
 			me.symbols.trkInd.setRotation((userTrk-userHdg)*D2R);
-			me.symbols.trkInd2.setRotation((userTrk-userHdg)*D2R);
 			me.symbols.curHdgPtr.setRotation(0);
 			me.symbols.curHdgPtr2.setRotation(0);
 		}
@@ -592,22 +584,6 @@ var NavDisplay = {
 			me.symbols.hdgBug.setRotation(hdgBugRot);
 			me.symbols.hdgBug2.setRotation(hdgBugRot);
 			me.symbols.selHdgLine2.setRotation(hdgBugRot);
-			me.symbols.compass.setRotation(-userHdgTrk*D2R);
-			me.symbols.compassApp.setRotation(-userHdgTrk*D2R);
-		}
-		if(me.get_switch('toggle_centered')) {
-			if (me.in_mode('toggle_display_mode', ['APP','VOR']))
-				me.symbols.compassApp.show();
-			else
-				me.symbols.compassApp.setVisible(me.in_mode('toggle_display_mode', ['MAP']));
-		} else {
-			me.symbols.compassApp.hide();
-		}
-
-		if ((me.get_switch('toggle_centered') and !me.in_mode('toggle_display_mode', ['PLAN'])) or me.in_mode('toggle_display_mode', ['PLAN'])) {
-			me.symbols.compass.hide();
-		} else {
-			me.symbols.compass.show();
 		}
 
 		var staPtrVis = !me.in_mode('toggle_display_mode', ['PLAN']);
@@ -622,139 +598,113 @@ var NavDisplay = {
 			var vorheading = userHdgTru;
 			var adfheading = userHdgMag;
 		}
-		if(me.in_mode('toggle_display_mode', ['APP','MAP','VOR','PLAN']))
+		if(getprop("instrumentation/nav/heading-deg") != nil)
+			var nav0hdg=getprop("instrumentation/nav/heading-deg") - vorheading;
+		if(getprop("instrumentation/nav[1]/heading-deg") != nil)
+			var nav1hdg=getprop("instrumentation/nav[1]/heading-deg") - vorheading;
+		var adf0hdg=getprop("instrumentation/adf/indicated-bearing-deg");
+		var adf1hdg=getprop("instrumentation/adf[1]/indicated-bearing-deg");
+		if(!me.get_switch('toggle_centered'))
 		{
-			if(getprop("instrumentation/nav/heading-deg") != nil)
-				var nav0hdg=getprop("instrumentation/nav/heading-deg") - vorheading;
-			if(getprop("instrumentation/nav[1]/heading-deg") != nil)
-				var nav1hdg=getprop("instrumentation/nav[1]/heading-deg") - vorheading;
-			var adf0hdg=getprop("instrumentation/adf/indicated-bearing-deg") - adfheading;
-			var adf1hdg=getprop("instrumentation/adf[1]/indicated-bearing-deg") - adfheading;
-			if(!me.get_switch('toggle_centered'))
-			{
-				if(me.in_mode('toggle_display_mode', ['PLAN']))
-					me.symbols.trkInd.hide();
-				else
-					me.symbols.trkInd.show();
-				if((getprop("instrumentation/nav/in-range") and me.get_switch('toggle_lh_vor_adf') == 1)) {
-					me.symbols.staArrowL.setVisible(staPtrVis);
-					me.symbols.staToL.setColor(0.195,0.96,0.097);
-					me.symbols.staFromL.setColor(0.195,0.96,0.097);
-					me.symbols.staArrowL.setRotation(nav0hdg*D2R);
-				}
-				elsif(getprop("instrumentation/adf/in-range") and (me.get_switch('toggle_lh_vor_adf') == -1)) {
-					me.symbols.staArrowL.setVisible(staPtrVis);
-					me.symbols.staToL.setColor(0,0.6,0.85);
-					me.symbols.staFromL.setColor(0,0.6,0.85);
-					me.symbols.staArrowL.setRotation(adf0hdg*D2R);
-				} else {
-					me.symbols.staArrowL.hide();
-				}
-				if((getprop("instrumentation/nav[1]/in-range") and me.get_switch('toggle_rh_vor_adf') == 1)) {
-					me.symbols.staArrowR.setVisible(staPtrVis);
-					me.symbols.staToR.setColor(0.195,0.96,0.097);
-					me.symbols.staFromR.setColor(0.195,0.96,0.097);
-					me.symbols.staArrowR.setRotation(nav1hdg*D2R);
-				} elsif(getprop("instrumentation/adf[1]/in-range") and (me.get_switch('toggle_rh_vor_adf') == -1)) {
-					me.symbols.staArrowR.setVisible(staPtrVis);
-					me.symbols.staToR.setColor(0,0.6,0.85);
-					me.symbols.staFromR.setColor(0,0.6,0.85);
-					me.symbols.staArrowR.setRotation(adf1hdg*D2R);
-				} else {
-					me.symbols.staArrowR.hide();
-				}
-				me.symbols.staArrowL2.hide();
-				me.symbols.staArrowR2.hide();
-				me.symbols.curHdgPtr2.hide();
-				me.symbols.HdgBugCRT2.hide();
-				me.symbols.TrkBugLCD2.hide();
-				me.symbols.HdgBugLCD2.hide();
-				me.symbols.selHdgLine2.hide();
-				me.symbols.curHdgPtr.setVisible(staPtrVis);
-				me.symbols.HdgBugCRT.setVisible(staPtrVis and !dispLCD);
-				if(me.get_switch('toggle_track_heading'))
-				{
-					me.symbols.HdgBugLCD.hide();
-					me.symbols.TrkBugLCD.setVisible(staPtrVis and dispLCD);
-				}
-				else
-				{
-					me.symbols.TrkBugLCD.hide();
-					me.symbols.HdgBugLCD.setVisible(staPtrVis and dispLCD);
-				}
-				me.symbols.selHdgLine.setVisible(staPtrVis and hdg_bug_active);
-			} else {
+			if(me.in_mode('toggle_display_mode', ['PLAN']))
 				me.symbols.trkInd.hide();
-				if((getprop("instrumentation/nav/in-range")	and me.get_switch('toggle_lh_vor_adf') == 1)) {
-					me.symbols.staArrowL2.setVisible(staPtrVis);
-					me.symbols.staFromL2.setColor(0.195,0.96,0.097);
-					me.symbols.staToL2.setColor(0.195,0.96,0.097);
-					me.symbols.staArrowL2.setRotation(nav0hdg*D2R);
-				} elsif(getprop("instrumentation/adf/in-range") and (me.get_switch('toggle_lh_vor_adf') == -1)) {
-					me.symbols.staArrowL2.setVisible(staPtrVis);
-					me.symbols.staFromL2.setColor(0,0.6,0.85);
-					me.symbols.staToL2.setColor(0,0.6,0.85);
-					me.symbols.staArrowL2.setRotation(adf0hdg*D2R);
-				} else {
-					me.symbols.staArrowL2.hide();
-				}
-				if((getprop("instrumentation/nav[1]/in-range") and me.get_switch('toggle_rh_vor_adf') == 1)) {
-					me.symbols.staArrowR2.setVisible(staPtrVis);
-					me.symbols.staFromR2.setColor(0.195,0.96,0.097);
-					me.symbols.staToR2.setColor(0.195,0.96,0.097);
-					me.symbols.staArrowR2.setRotation(nav1hdg*D2R);
-				} elsif(getprop("instrumentation/adf[1]/in-range") and (me.get_switch('toggle_rh_vor_adf') == -1)) {
-					me.symbols.staArrowR2.setVisible(staPtrVis);
-					me.symbols.staFromR2.setColor(0,0.6,0.85);
-					me.symbols.staToR2.setColor(0,0.6,0.85);
-					me.symbols.staArrowR2.setRotation(adf1hdg*D2R);
-				} else {
-					me.symbols.staArrowR2.hide();
-				}
-				me.symbols.staArrowL.hide();
-				me.symbols.staArrowR.hide();
-				me.symbols.curHdgPtr.hide();
-				me.symbols.HdgBugCRT.hide();
-				me.symbols.TrkBugLCD.hide();
-				me.symbols.HdgBugLCD.hide();
-				me.symbols.selHdgLine.hide();
-				me.symbols.curHdgPtr2.setVisible(staPtrVis);
-				me.symbols.HdgBugCRT2.setVisible(staPtrVis and !dispLCD);
-				if(me.get_switch('toggle_track_heading'))
-				{
-					me.symbols.HdgBugLCD2.hide();
-					me.symbols.TrkBugLCD2.setVisible(staPtrVis and dispLCD);
-				}
-				else
-				{
-					me.symbols.TrkBugLCD2.hide();
-					me.symbols.HdgBugLCD2.setVisible(staPtrVis and dispLCD);
-				}
-				me.symbols.selHdgLine2.setVisible(staPtrVis and hdg_bug_active);
+			else
+				me.symbols.trkInd.show();
+			if((getprop("instrumentation/nav/in-range") and me.get_switch('toggle_lh_vor_adf') == 1)) {
+				me.symbols.staArrowL.setVisible(staPtrVis);
+				me.symbols.staToL.setColor(0.195,0.96,0.097);
+				me.symbols.staFromL.setColor(0.195,0.96,0.097);
+				me.symbols.staArrowL.setRotation(nav0hdg*D2R);
 			}
-		}
-
-		me.symbols.northUp.setVisible(me.in_mode('toggle_display_mode', ['PLAN']));
-		me.symbols.aplSymMap.setVisible(me.in_mode('toggle_display_mode', ['APP','MAP','VOR']) and !me.get_switch('toggle_centered'));
-		me.symbols.aplSymMapCtr.setVisible(me.in_mode('toggle_display_mode', ['MAP']) and me.get_switch('toggle_centered'));
-		me.symbols.aplSymVor.setVisible(me.in_mode('toggle_display_mode', ['APP','VOR']) and me.get_switch('toggle_centered'));
-		me.symbols.planArcs.setVisible(me.in_mode('toggle_display_mode', ['PLAN']));
-
-		if (abs(userVSpd) > 5) {
-			var altDiff = (getprop("autopilot/settings/target-altitude-ft") or 0)-(getprop("instrumentation/altimeter/indicated-altitude-ft") or 0);
-			if (abs(altDiff) > 50 and altDiff/userVSpd > 0) {
-				var altRangeNm = altDiff/userVSpd*userGndSpd*KT2MPS*M2NM;
-				if(altRangeNm > 1) {
-					var altRangePx = (350/me.rangeNm())*altRangeNm;
-					if (altRangePx > 700)
-						altRangePx = 700;
-					me.symbols.altArc.setTranslation(0,-altRangePx);
-				}
-				me.symbols.altArc.setVisible(me.in_mode('toggle_display_mode', ['MAP']) and !me.get_switch('toggle_centered'));
-			} else
-				me.symbols.altArc.hide();
+			elsif(getprop("instrumentation/adf/in-range") and (me.get_switch('toggle_lh_vor_adf') == -1)) {
+				me.symbols.staArrowL.setVisible(staPtrVis);
+				me.symbols.staToL.setColor(0,0.6,0.85);
+				me.symbols.staFromL.setColor(0,0.6,0.85);
+				me.symbols.staArrowL.setRotation(adf0hdg*D2R);
+			} else {
+				me.symbols.staArrowL.hide();
+			}
+			if((getprop("instrumentation/nav[1]/in-range") and me.get_switch('toggle_rh_vor_adf') == 1)) {
+				me.symbols.staArrowR.setVisible(staPtrVis);
+				me.symbols.staToR.setColor(0.195,0.96,0.097);
+				me.symbols.staFromR.setColor(0.195,0.96,0.097);
+				me.symbols.staArrowR.setRotation(nav1hdg*D2R);
+			} elsif(getprop("instrumentation/adf[1]/in-range") and (me.get_switch('toggle_rh_vor_adf') == -1)) {
+				me.symbols.staArrowR.setVisible(staPtrVis);
+				me.symbols.staToR.setColor(0,0.6,0.85);
+				me.symbols.staFromR.setColor(0,0.6,0.85);
+				me.symbols.staArrowR.setRotation(adf1hdg*D2R);
+			} else {
+				me.symbols.staArrowR.hide();
+			}
+			me.symbols.staArrowL2.hide();
+			me.symbols.staArrowR2.hide();
+			me.symbols.curHdgPtr2.hide();
+			me.symbols.HdgBugCRT2.hide();
+			me.symbols.TrkBugLCD2.hide();
+			me.symbols.HdgBugLCD2.hide();
+			me.symbols.selHdgLine2.hide();
+			me.symbols.curHdgPtr.setVisible(staPtrVis);
+			me.symbols.HdgBugCRT.setVisible(staPtrVis and !dispLCD);
+			if(me.get_switch('toggle_track_heading'))
+			{
+				me.symbols.HdgBugLCD.hide();
+				me.symbols.TrkBugLCD.setVisible(staPtrVis and dispLCD);
+			}
+			else
+			{
+				me.symbols.TrkBugLCD.hide();
+				me.symbols.HdgBugLCD.setVisible(staPtrVis and dispLCD);
+			}
+			me.symbols.selHdgLine.setVisible(staPtrVis and hdg_bug_active);
 		} else {
-			me.symbols.altArc.hide();
+			me.symbols.trkInd.hide();
+			if((getprop("instrumentation/nav/in-range")	and me.get_switch('toggle_lh_vor_adf') == 1)) {
+				me.symbols.staArrowL2.setVisible(staPtrVis);
+				me.symbols.staFromL2.setColor(0.195,0.96,0.097);
+				me.symbols.staToL2.setColor(0.195,0.96,0.097);
+				me.symbols.staArrowL2.setRotation(nav0hdg*D2R);
+			} elsif(getprop("instrumentation/adf/in-range") and (me.get_switch('toggle_lh_vor_adf') == -1)) {
+				me.symbols.staArrowL2.setVisible(staPtrVis);
+				me.symbols.staFromL2.setColor(0,0.6,0.85);
+				me.symbols.staToL2.setColor(0,0.6,0.85);
+				me.symbols.staArrowL2.setRotation(adf0hdg*D2R);
+			} else {
+				me.symbols.staArrowL2.hide();
+			}
+			if((getprop("instrumentation/nav[1]/in-range") and me.get_switch('toggle_rh_vor_adf') == 1)) {
+				me.symbols.staArrowR2.setVisible(staPtrVis);
+				me.symbols.staFromR2.setColor(0.195,0.96,0.097);
+				me.symbols.staToR2.setColor(0.195,0.96,0.097);
+				me.symbols.staArrowR2.setRotation(nav1hdg*D2R);
+			} elsif(getprop("instrumentation/adf[1]/in-range") and (me.get_switch('toggle_rh_vor_adf') == -1)) {
+				me.symbols.staArrowR2.setVisible(staPtrVis);
+				me.symbols.staFromR2.setColor(0,0.6,0.85);
+				me.symbols.staToR2.setColor(0,0.6,0.85);
+				me.symbols.staArrowR2.setRotation(adf1hdg*D2R);
+			} else {
+				me.symbols.staArrowR2.hide();
+			}
+			me.symbols.staArrowL.hide();
+			me.symbols.staArrowR.hide();
+			me.symbols.curHdgPtr.hide();
+			me.symbols.HdgBugCRT.hide();
+			me.symbols.TrkBugLCD.hide();
+			me.symbols.HdgBugLCD.hide();
+			me.symbols.selHdgLine.hide();
+			me.symbols.curHdgPtr2.setVisible(staPtrVis);
+			me.symbols.HdgBugCRT2.setVisible(staPtrVis and !dispLCD);
+			if(me.get_switch('toggle_track_heading'))
+			{
+				me.symbols.HdgBugLCD2.hide();
+				me.symbols.TrkBugLCD2.setVisible(staPtrVis and dispLCD);
+			}
+			else
+			{
+				me.symbols.TrkBugLCD2.hide();
+				me.symbols.HdgBugLCD2.setVisible(staPtrVis and dispLCD);
+			}
+			me.symbols.selHdgLine2.setVisible(staPtrVis and hdg_bug_active);
 		}
 
 		## run all predicates in the NDStyle hash and evaluate their true/false behavior callbacks

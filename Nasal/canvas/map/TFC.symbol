@@ -46,7 +46,7 @@ var draw = func {
 			.setText(sprintf("%+02.0f",altDiff/100))
 			.setFont("LiberationFonts/LiberationSans-Regular.ttf")
 			.setColor(1,1,1)
-			.setFontSize(28)
+			.setFontSize(20)
 			.setAlignment("center-center");
 		me.icon_tcas = me.element.createChild("path")
 			.setStrokeLineWidth(3);

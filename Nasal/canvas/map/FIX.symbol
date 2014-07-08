@@ -28,8 +28,7 @@ var drawFIX = func(group) {
 		.lineTo(15,15)
 		.close()
 		.setStrokeLineWidth(line_width)
-		.setColor(color)
-		.set("z-index",-3);
+		.setColor(color);
 }
 
 var cache = StyleableCacheable.new(
@@ -45,6 +44,6 @@ var init = func {
 
 	# non-cached stuff:
 	if (me.style.show_labels)
-		me.text_fix = me.newText(me.model.id).setScale(me.style.scale_factor).setTranslation(17,35).set("z-index",-3);
+		me.text_fix = me.newText(me.model.id).setScale(me.style.scale_factor).setTranslation(17,35).setColor(0,0.6,0.85);
 }
 var draw = func;

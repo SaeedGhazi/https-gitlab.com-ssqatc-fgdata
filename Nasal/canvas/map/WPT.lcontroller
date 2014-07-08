@@ -11,6 +11,7 @@ SymbolLayer.add(name, {
 	df_options: { # default configuration options
 		active_node: "/autopilot/route-manager/active",
 		current_wp_node: "/autopilot/route-manager/current-wp",
+		wp_num: "/autopilot/route-manager/route/num",
 	}
 });
 var new = func(layer) {
@@ -22,7 +23,7 @@ var new = func(layer) {
 		listeners: [],
 	};
 	layer.searcher._equals = func(l,r) l.equals(r);
-	append(m.listeners, setlistener(layer.options.active_node, func m.layer.update() ));
+	append(m.listeners, setlistener(layer.options.active_node, func m.layer.update() ), setlistener(layer.options.wp_num, func m.layer.update() ));
 	m.addVisibilityListener();
 
 	return m;
@@ -37,8 +38,8 @@ var WPT_model = {
 	new: func(fp, idx, offset=0) {
 		var m = { parents:[WPT_model], idx:(idx+offset) };
 		var wp = fp.getWP(idx);
-
 		m.name = wp.wp_name;
+		
 		var alt = wp.alt_cstr;
 		if (alt != 0)
 			m.name ~= "\n"~alt;

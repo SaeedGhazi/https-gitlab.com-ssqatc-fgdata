@@ -2,14 +2,14 @@
 
 var draw_rwy_nd = func (group, rwy, controller=nil, lod=nil) {
  # print("drawing runways-nd");
- canvas._draw_rwy_nd(group,rwy.lat,rwy.lon,rwy.length,rwy.width,rwy.heading);
+ canvas._draw_rwy_nd(group,rwy.lat,rwy.lon,rwy.length,rwy.width,rwy.heading,rwy.id);
 }
 
 
 ##
 # TODO: this is not yet a real draw callback ... (wrong signature, not yet integrated)
 
-var _draw_rwy_nd = func (group, lat, lon, length, width, rwyhdg) {
+var _draw_rwy_nd = func (group, lat, lon, length, width, rwyhdg, id) {
 	var apt = airportinfo("EHAM");
 	var rwy = apt.runway("18R");
 
@@ -51,4 +51,12 @@ var _draw_rwy_nd = func (group, lat, lon, length, width, rwyhdg) {
 		.setStrokeLineWidth(3)
 		.setDataGeo([2,4],crds)
 		.setColor(1,1,1);
+	group.createChild("text", "rwy-text")
+		.setDrawMode( canvas.Text.TEXT )
+		.setText(id)
+		.setFont("LiberationFonts/LiberationSans-Regular.ttf")
+		.setFontSize(28)
+		.setTranslation(35,0)
+		.setColor(1,1,1)
+		.setBackdropColor(0,0,0);
 }

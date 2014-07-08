@@ -448,21 +448,20 @@ var NavDisplay = {
 			alt: nil, hdg: nil,
 			range: nil,
 		};
-		pos.range = me.rangeNm(); # avoid this  here, use a listener instead
 		# reposition the map, change heading & range:
-		if(me.in_mode('toggle_display_mode', ['PLAN'])) {
-			pos.hdg = 0;
-			if (getprop(me.efis_path ~ "/inputs/plan-wpt-index") >= 0) {
-				pos.lat = getprop("/autopilot/route-manager/route/wp["~getprop(me.efis_path ~ "/inputs/plan-wpt-index")~"]/latitude-deg");
-				pos.lon = getprop("/autopilot/route-manager/route/wp["~getprop(me.efis_path ~ "/inputs/plan-wpt-index")~"]/longitude-deg");
-			} else {
-				pos.lat = me.map.getLat();
-				pos.lon = me.map.getLon();
-			}
+		if(me.in_mode('toggle_display_mode', ['PLAN']) and getprop(me.efis_path ~ "/inputs/plan-wpt-index") >= 0) {
+			pos.lat = getprop("/autopilot/route-manager/route/wp["~getprop(me.efis_path ~ "/inputs/plan-wpt-index")~"]/latitude-deg");
+			pos.lon = getprop("/autopilot/route-manager/route/wp["~getprop(me.efis_path ~ "/inputs/plan-wpt-index")~"]/longitude-deg");
 		} else {
-			pos.hdg = userHdgTrkTru;
 			pos.lat = userLat;
 			pos.lon = userLon;
+		}
+		if(me.in_mode('toggle_display_mode', ['PLAN'])) {
+			pos.hdg = 0;
+			pos.range = me.rangeNm()*2
+		} else {
+			pos.range = me.rangeNm(); # avoid this  here, use a listener instead
+			pos.hdg = userHdgTrkTru;
 		}
 		call(me.map.setPos, [pos.lat, pos.lon], me.map, pos);
 	},

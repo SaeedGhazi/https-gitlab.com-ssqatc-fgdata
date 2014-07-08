@@ -42,20 +42,20 @@ var NDStyles = {
 		# TODO: phase out isMapStructure flag once map.nas & *.draw files are killed
 		layers: [
 			# TODO: take z-indices from *.draw files -- now handled by MapStructure in the addLayer method.
-			{ name:'FIX', isMapStructure:1, update_on:['toggle_range','toggle_waypoints'],
+			{ name:'FIX', isMapStructure:1, update_on:['toggle_display_mode','toggle_range','toggle_waypoints'],
 				# FIXME: this is a really ugly place for controller code
 				predicate: func(nd, layer) {
 					# print("Running fix layer predicate");
 					# toggle visibility here
 					var visible=nd.get_switch('toggle_waypoints') and nd.in_mode('toggle_display_mode', ['MAP']) and (nd.rangeNm() <= 40);
-					layer.group.setVisible( nd.get_switch('toggle_waypoints') );
+					layer.group.setVisible( visible );
 					if (visible) {
 						#print("Updating MapStructure ND layer: FIX");
 						# (Hopefully) smart update
 						layer.update();
 					}
 				}, # end of layer update predicate
-				'z-index': 3,
+				'z-index': -3,
 			}, # end of FIX layer
 
 			# Should redraw every 10 seconds TODO: use new MapStructure/WXR here once that works properly (Gijs should check first!)
@@ -69,6 +69,7 @@ var NDStyles = {
 						layer.update(); 
 					}
 				}, # end of layer update predicate
+				'z-index': -4,
 			}, # end of storms/WXR layer
 
 			{ name:'APS', isMapStructure:1, update_on:['toggle_display_mode'], 
@@ -91,7 +92,7 @@ var NDStyles = {
 						layer.update();
 					}
 				}, # end of layer update predicate
-				'z-index': 1,
+				'z-index': -1,
 			}, # end of APT layer
 
 			# Should distinct between low and high altitude navaids. Hiding above 40 NM for now, to prevent clutter/lag.
@@ -106,10 +107,10 @@ var NDStyles = {
 						layer.update();
 					}
 				}, # end of layer update predicate
-				'z-index': 3,
+				'z-index': -2,
 			}, # end of VOR layer
 
-			{ name:'DME', isMapStructure:1, update_on:['toggle_range','toggle_stations'],
+			{ name:'DME', isMapStructure:1, update_on:['toggle_display_mode','toggle_range','toggle_stations'],
 				# FIXME: this is a really ugly place for controller code
 				predicate: func(nd, layer) {
 					var visible = nd.get_switch('toggle_stations') and nd.in_mode('toggle_display_mode', ['MAP']) and (nd.rangeNm() <= 40);
@@ -120,7 +121,7 @@ var NDStyles = {
 						layer.update();
 					}
 				}, # end of layer update predicate
-				'z-index': 3,
+				'z-index': -2,
 			}, # end of DME layer
 
 			{ name:'TFC', isMapStructure:1, update_on:['toggle_range','toggle_traffic'],
@@ -132,7 +133,7 @@ var NDStyles = {
 						layer.update();
 					}
 				}, # end of layer update predicate
-				'z-index': 1,
+				'z-index': 4,
 			}, # end of traffic layer
 
 			{ name:'runway-nd', update_on:['toggle_range','toggle_display_mode'],
@@ -152,7 +153,7 @@ var NDStyles = {
 					if (visible)
 						layer.update();
 				}, # end of layer update predicate
-				'z-index': 2, # apparently route.draw doesn't have a z-index?
+				'z-index': 1,
 			}, # end of route layer
 			{ name:'WPT', isMapStructure:1, update_on:['toggle_range','toggle_display_mode'],
 				predicate: func(nd, layer) {
@@ -162,7 +163,7 @@ var NDStyles = {
 					if (visible)
 						layer.update();
 				}, # end of layer update predicate
-				'z-index': 4,
+				'z-index': 2,
 			}, # end of waypoint layer
 			{ name:'ALT-profile', isMapStructure:1, update_on:['toggle_range','toggle_display_mode'],
 				predicate: func(nd, layer) {
@@ -172,7 +173,7 @@ var NDStyles = {
 					if (visible)
 						layer.update();
 				}, # end of layer update predicate
-				'z-index': 4,
+				'z-index': 3,
 			}, # end of altitude profile layer
 
 			## add other layers here, layer names must match the registered names as used in *.layer files for now
@@ -546,7 +547,7 @@ var NDStyles = {
 					predicate: func(nd) (nd.get_switch('toggle_centered') and nd.in_mode('toggle_display_mode', ['APP','MAP','VOR'])),
 					is_true: func(nd) {
 						nd.symbols.rangeCtr1.show();
-						nd.symbols.rangeCtr1.setText(sprintf("%3.1f",nd.rangeNm()/4));
+						nd.symbols.rangeCtr1.setText(sprintf("%g",nd.rangeNm()/4));
 					},
 					is_false: func(nd) nd.symbols.rangeCtr1.hide(),
 				},
@@ -558,7 +559,7 @@ var NDStyles = {
 					predicate: func(nd) (nd.get_switch('toggle_centered') and nd.in_mode('toggle_display_mode', ['APP','MAP','VOR'])),
 					is_true: func(nd) { 
 						nd.symbols.rangeCtr2.show();
-						nd.symbols.rangeCtr2.setText(sprintf("%3.1f",nd.rangeNm()/4));
+						nd.symbols.rangeCtr2.setText(sprintf("%g",nd.rangeNm()/4));
 					},
 					is_false: func(nd) nd.symbols.rangeCtr2.hide(),
 				},

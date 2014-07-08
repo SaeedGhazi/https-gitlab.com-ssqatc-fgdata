@@ -26,7 +26,7 @@ var drawprofile =  func (group, property, disptext)
 			.setTranslation(25,35)
 			.setColor(0.195,0.96,0.097);
 		sym_group.setGeoPosition(lat, lon)
-			.set("z-index",4);
+			.set("z-index",3);
 	}
 }
 

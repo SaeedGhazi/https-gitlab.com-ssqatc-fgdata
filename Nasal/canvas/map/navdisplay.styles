@@ -320,6 +320,38 @@ var NDStyles = {
 				},
 			},
 			{
+				id: 'compassApp',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.get_switch('toggle_centered') and nd.in_mode('toggle_display_mode', ['APP','VOR'])),
+					is_true: func(nd) {
+						if(nd.get_switch('toggle_true_north'))
+							var hdg = nd.aircraft_source.get_trk_tru();
+						else
+							var hdg = nd.aircraft_source.get_trk_mag();
+						nd.symbols.compassApp.setRotation(-hdg*D2R);
+						nd.symbols.compassApp.show();
+					},
+					is_false: func(nd) nd.symbols.compassApp.hide(),
+				},
+			},
+			{
+				id: 'compassMapCtr',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.get_switch('toggle_centered') and nd.in_mode('toggle_display_mode', ['MAP'])),
+					is_true: func(nd) {
+						if(nd.get_switch('toggle_true_north'))
+							var hdg = nd.aircraft_source.get_trk_tru();
+						else
+							var hdg = nd.aircraft_source.get_trk_mag();
+						nd.symbols.compassMapCtr.setRotation(-hdg*D2R);
+						nd.symbols.compassMapCtr.show();
+					},
+					is_false: func(nd) nd.symbols.compassMapCtr.hide(),
+				},
+			},
+			{
 				id:'hdg',
 				impl: {
 					init: func(nd,symbol),
@@ -374,14 +406,80 @@ var NDStyles = {
 				},
 			},
 			{
+				id:'compass',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) ((nd.get_switch('toggle_centered') and !nd.in_mode('toggle_display_mode', ['PLAN'])) or nd.in_mode('toggle_display_mode', ['PLAN'])),
+					is_true: func(nd) nd.symbols.compass.hide(),
+					is_false: func(nd) {
+						nd.symbols.compass.show();
+						nd.symbols.compass.setRotation(-nd.userHdgTrk*D2R);
+					},
+				},
+			},
+			{
+				id:'truMag',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) nd.get_switch('toggle_true_north'),
+					is_true: func(nd) nd.symbols.truMag.setText("TRU"),
+					is_false: func(nd) nd.symbols.truMag.setText("MAG"),
+				},
+			},
+			{
+				id:'northUp',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) nd.in_mode('toggle_display_mode', ['PLAN']),
+					is_true: func(nd) nd.symbols.northUp.show(),
+					is_false: func(nd) nd.symbols.northUp.hide(),
+				},
+			},
+			{
+				id:'planArcs',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) nd.in_mode('toggle_display_mode', ['PLAN']),
+					is_true: func(nd) nd.symbols.planArcs.show(),
+					is_false: func(nd) nd.symbols.planArcs.hide(),
+				},
+			},
+			{
+				id:'aplSymMap',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['APP','MAP','VOR'])  and !nd.get_switch('toggle_centered')),
+					is_true: func(nd) nd.symbols.aplSymMap.show(),
+					is_false: func(nd) nd.symbols.aplSymMap.hide(),
+				},
+			},
+			{
+				id:'aplSymMapCtr',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP'])  and nd.get_switch('toggle_centered')),
+					is_true: func(nd) nd.symbols.aplSymMapCtr.show(),
+					is_false: func(nd) nd.symbols.aplSymMapCtr.hide(),
+				},
+			},
+			{
+				id:'aplSymVor',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['APP','VOR'])  and nd.get_switch('toggle_centered')),
+					is_true: func(nd) nd.symbols.aplSymVor.show(),
+					is_false: func(nd) nd.symbols.aplSymVor.hide(),
+				},
+			},
+			{
 				id:'rangeArcs',
 				impl: {
 					init: func(nd,symbol),
 					predicate: func(nd) !nd.get_switch('toggle_centered') and nd.get_switch('toggle_rangearc'),
 					is_true: func(nd) nd.symbols.rangeArcs.show(),
 					is_false: func(nd) nd.symbols.rangeArcs.hide(),
-				}, # of rangeArcs.impl
-			}, # of rangeArcs
+				},
+			},
 			{
 				id:'rangePln1',
 				impl: {
@@ -428,6 +526,85 @@ var NDStyles = {
 						nd.symbols.rangePln4.setText(sprintf("%3.0f",nd.rangeNm()));
 					},
 					is_false: func(nd) nd.symbols.rangePln4.hide(),
+				},
+			},
+			{
+				id:'range',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) !nd.get_switch('toggle_centered'),
+					is_true: func(nd) { 
+						nd.symbols.range.setText(sprintf("%3.0f",nd.rangeNm()/2));
+					},
+					is_false: func(nd) nd.symbols.rangePln4.hide(),
+				},
+			},
+			{
+				id:'rangeCtr1',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.get_switch('toggle_centered') and nd.in_mode('toggle_display_mode', ['APP','MAP','VOR'])),
+					is_true: func(nd) {
+						nd.symbols.rangeCtr1.show();
+						nd.symbols.rangeCtr1.setText(sprintf("%3.1f",nd.rangeNm()/4));
+					},
+					is_false: func(nd) nd.symbols.rangeCtr1.hide(),
+				},
+			},
+			{
+				id:'rangeCtr2',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.get_switch('toggle_centered') and nd.in_mode('toggle_display_mode', ['APP','MAP','VOR'])),
+					is_true: func(nd) { 
+						nd.symbols.rangeCtr2.show();
+						nd.symbols.rangeCtr2.setText(sprintf("%3.1f",nd.rangeNm()/4));
+					},
+					is_false: func(nd) nd.symbols.rangeCtr2.hide(),
+				},
+			},
+			{
+				id:'altArc',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (!nd.get_switch('toggle_centered') and nd.in_mode('toggle_display_mode', ['MAP'])),
+					is_true: func(nd) { 
+						var altDiff = (getprop("autopilot/settings/target-altitude-ft") or 0)-(getprop("instrumentation/altimeter/indicated-altitude-ft") or 0);
+						if (abs(altDiff) > 50 and altDiff/nd.aircraft_source.get_vspd() > 0) {
+							var altRangeNm = altDiff/nd.aircraft_source.get_vspd()*nd.aircraft_source.get_gnd_spd()*KT2MPS*M2NM;
+							if(altRangeNm > 1) {
+								var altRangePx = (350/nd.rangeNm())*altRangeNm;
+								if (altRangePx > 700)
+									altRangePx = 700;
+								nd.symbols.altArc.setTranslation(0,-altRangePx);
+							}
+							nd.symbols.altArc.show();
+						} else
+							nd.symbols.altArc.hide();
+					},
+					is_false: func(nd) nd.symbols.altArc.hide(),
+				},
+			},
+			{
+				id:'altArcCtr',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.get_switch('toggle_centered') and nd.in_mode('toggle_display_mode', ['MAP'])),
+					is_true: func(nd) { 
+						var altDiff = (getprop("autopilot/settings/target-altitude-ft") or 0)-(getprop("instrumentation/altimeter/indicated-altitude-ft") or 0);
+						if (abs(altDiff) > 50 and altDiff/nd.aircraft_source.get_vspd() > 0) {
+							var altRangeNm = altDiff/nd.aircraft_source.get_vspd()*nd.aircraft_source.get_gnd_spd()*KT2MPS*M2NM;
+							if(altRangeNm > 1) {
+								var altRangePx = (175/nd.rangeNm())*altRangeNm;
+								if (altRangePx > 350)
+									altRangePx = 350;
+								nd.symbols.altArcCtr.setTranslation(0,-altRangePx);
+							}
+							nd.symbols.altArcCtr.show();
+						} else
+							nd.symbols.altArcCtr.hide();
+					},
+					is_false: func(nd) nd.symbols.altArcCtr.hide(),
 				},
 			},
 			{
@@ -478,11 +655,30 @@ var NDStyles = {
 				id:'trkInd2',
 				impl: {
 					init: func(nd,symbol),
-					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP','APP','VOR']) and nd.get_switch('toggle_centered')),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['APP','VOR']) and nd.get_switch('toggle_centered')),
 					is_true: func(nd) { 
+						if (nd.get_switch('toggle_track_heading') and nd.get_switch('toggle_display_type') == "LCD")
+							nd.symbols.trkInd2.setRotation(0);
+						else
+							nd.symbols.trkInd2.setRotation((nd.userTrk-nd.userHdg)*D2R);
 						nd.symbols.trkInd2.show();
 					},
 					is_false: func(nd) nd.symbols.trkInd2.hide(),
+				},
+			},
+			{
+				id:'trkIndMapCtr',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP']) and nd.get_switch('toggle_centered')),
+					is_true: func(nd) {
+						if (nd.get_switch('toggle_display_type') == "CRT" or (nd.get_switch('toggle_track_heading') and nd.get_switch('toggle_display_type') == "LCD"))
+							nd.symbols.trkIndMapCtr.setRotation(0);
+						else
+							nd.symbols.trkIndMapCtr.setRotation((nd.userTrk-nd.userHdg)*D2R);
+						nd.symbols.trkIndMapCtr.show();
+					},
+					is_false: func(nd) nd.symbols.trkIndMapCtr.hide(),
 				},
 			},
 			{
@@ -572,7 +768,7 @@ var NDStyles = {
 				id:'wind',
 				impl: {
 					init: func(nd,symbol),
-					predicate: ALWAYS,
+					predicate: func(nd) (nd.aircraft_source.get_spd() > 100 and getprop("environment/wind-speed-kt") > 6),
 					is_true: func(nd) {
 						var windDir = getprop("environment/wind-from-heading-deg");
 						if(!nd.get_switch('toggle_true_north'))
@@ -580,15 +776,16 @@ var NDStyles = {
 						if(windDir < 0.5) windDir = 360 + windDir;
 						elsif(windDir >= 360.5) windDir = windDir - 360;
 						nd.symbols.wind.setText(sprintf("%03.0f / %02.0f",windDir,getprop("environment/wind-speed-kt")));
+						nd.symbols.wind.show();
 					},
-					is_false: NOTHING,
+					is_false: func(nd) nd.symbols.wind.hide(),
 				},
 			},
 			{
 				id:'windArrow',
 				impl: {
 					init: func(nd,symbol),
-					predicate: func(nd) (!(nd.in_mode('toggle_display_mode', ['PLAN']) and (nd.get_switch('toggle_display_type') == "LCD")) and nd.aircraft_source.get_spd() > 100),
+					predicate: func(nd) (!(nd.in_mode('toggle_display_mode', ['PLAN']) and (nd.get_switch('toggle_display_type') == "LCD")) and nd.aircraft_source.get_spd() > 100 and getprop("environment/wind-speed-kt") > 6),
 					is_true: func(nd) {
 						nd.symbols.windArrow.show();
 						var windArrowRot = getprop("environment/wind-from-heading-deg");

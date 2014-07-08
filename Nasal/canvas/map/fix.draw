@@ -29,6 +29,6 @@ var draw_fix = func (group, fix, controller=nil, lod=0) {
 
 	# the fix position
 	fix_grp.setGeoPosition(lat, lon)
-		.set("z-index",3);
+		.set("z-index",-3);
 
 }

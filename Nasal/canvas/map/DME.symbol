@@ -118,7 +118,8 @@ var init = func {
 		.horiz(-14.5)
 		.vert(-14.5)
 		.close()
-		.setStrokeLineWidth( me.layer.style.line_width );
+		.setStrokeLineWidth( me.layer.style.line_width )
+		.set("z-index",-2);
 
 	# finally scale the symbol as requested, this is done last so that people can override this when creating the layer
 	me.apply_scale();

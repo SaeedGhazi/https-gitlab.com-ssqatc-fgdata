@@ -15,7 +15,8 @@ var draw = func {
 		.setFile("Nasal/canvas/map/Images/storm.png")
 		.setSize(128*me.model.radiusNm,128*me.model.radiusNm)
 		.setTranslation(-64*me.model.radiusNm,-64*me.model.radiusNm)
-		.setCenter(0,0);
+		.setCenter(0,0)
+		.set("z-index",-4);
 		# .setScale(0.3);
 	# TODO: overlapping storms should probably set their z-index according to altitudes
 	

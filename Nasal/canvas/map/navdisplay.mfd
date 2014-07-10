@@ -493,38 +493,6 @@ var NavDisplay = {
 		else
 			me.map.setTranslation(512,824);
 
-		if(me.get_switch('toggle_lh_vor_adf') == 1)
-		{
-			me.symbols.vorL.setText("VOR L");
-			me.symbols.vorL.setColor(0.195,0.96,0.097);
-			me.symbols.dmeL.setText("DME");
-			me.symbols.dmeL.setColor(0.195,0.96,0.097);
-			if(getprop("instrumentation/nav/in-range"))
-				me.symbols.vorLId.setText(getprop("instrumentation/nav/nav-id"));
-			else
-				me.symbols.vorLId.setText(getprop("instrumentation/nav/frequencies/selected-mhz-fmt"));
-			me.symbols.vorLId.setColor(0.195,0.96,0.097);
-			if(getprop("instrumentation/dme/in-range"))
-				me.symbols.dmeLDist.setText(sprintf("%3.1f",getprop("instrumentation/dme/indicated-distance-nm")));
-			else me.symbols.dmeLDist.setText(" ---");
-			me.symbols.dmeLDist.setColor(0.195,0.96,0.097);
-		} elsif(me.get_switch('toggle_lh_vor_adf') == -1) {
-			me.symbols.vorL.setText("ADF L");
-			me.symbols.vorL.setColor(0,0.6,0.85);
-			me.symbols.dmeL.setText("");
-			me.symbols.dmeL.setColor(0,0.6,0.85);
-			if((var navident=getprop("instrumentation/adf/ident")) != "")
-				me.symbols.vorLId.setText(navident);
-			else me.symbols.vorLId.setText(sprintf("%3d",getprop("instrumentation/adf/frequencies/selected-khz")));
-			me.symbols.vorLId.setColor(0,0.6,0.85);
-			me.symbols.dmeLDist.setText("");
-			me.symbols.dmeLDist.setColor(0,0.6,0.85);
-		} else {
-			me.symbols.vorL.setText("");
-			me.symbols.dmeL.setText("");
-			me.symbols.vorLId.setText("");
-			me.symbols.dmeLDist.setText("");
-		}
 		if(me.get_switch('toggle_rh_vor_adf') == 1) {
 			me.symbols.vorR.setText("VOR R");
 			me.symbols.vorR.setColor(0.195,0.96,0.097);

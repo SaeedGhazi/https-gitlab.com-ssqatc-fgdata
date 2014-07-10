@@ -194,10 +194,61 @@ var NDStyles = {
 				impl: { # implementation hash
 					init: func(nd, symbol), # for updateCenter stuff, called during initialization in the ctor
 					predicate: func(nd) getprop("instrumentation/tcas/inputs/mode") == 2, # the condition
-					is_true:   func(nd) nd.symbols.taOnly.show(), 			# if true, run this
-					is_false:  func(nd) nd.symbols.taOnly.hide(), 			# if false, run this
+					is_true:   func(nd) nd.symbols.taOnly.show(),
+					is_false:  func(nd) nd.symbols.taOnly.hide(),
 				}, # end of taOnly  behavior/callbacks
-			}, # end of taOnly
+			},
+			{
+				id: 'tcasOff',
+				impl: {
+					init: func(nd, symbol),
+					predicate: func(nd) getprop("instrumentation/tcas/inputs/mode") == 0 and nd.get_switch('toggle_traffic') and (nd.in_mode('toggle_display_mode', ['MAP']) or (nd.in_mode('toggle_display_mode', ['APP','VOR']) and !nd.get_switch('toggle_centered'))),
+					is_true:   func(nd) nd.symbols.tcasOff.show(),
+					is_false:  func(nd) nd.symbols.tcasOff.hide(),
+				},
+			},
+			{
+				id: 'tcasFail',
+				impl: {
+					init: func(nd, symbol),
+					predicate: func(nd) getprop("instrumentation/tcas/inputs/mode") != 0 and getprop("instrumentation/tcas/serviceable") != 1 and nd.get_switch('toggle_traffic') and (nd.in_mode('toggle_display_mode', ['MAP']) or (nd.in_mode('toggle_display_mode', ['APP','VOR']) and !nd.get_switch('toggle_centered'))),
+					is_true:   func(nd) nd.symbols.tcasFail.show(),
+					is_false:  func(nd) nd.symbols.tcasFail.hide(),
+				},
+			},
+			{
+				id: 'tcasTest',
+				impl: {
+					init: func(nd, symbol),
+					predicate: func(nd) getprop("instrumentation/tcas/inputs/self-test") == 1 and getprop("instrumentation/tcas/serviceable") == 1,
+					is_true:   func(nd) nd.symbols.tcasTest.show(),
+					is_false:  func(nd) nd.symbols.tcasTest.hide(),
+				},
+			},
+			{
+				id: 'tfc',
+				impl: {
+					init: func(nd, symbol),
+					predicate: func(nd) getprop("instrumentation/tcas/inputs/mode") != 0 and nd.get_switch('toggle_traffic') and (nd.in_mode('toggle_display_mode', ['MAP']) or (nd.in_mode('toggle_display_mode', ['APP','VOR']) and !nd.get_switch('toggle_centered'))),
+					is_true:   func(nd) nd.symbols.tfc.show(),
+					is_false:  func(nd) nd.symbols.tfc.hide(),
+				},
+			},
+			{
+				id: 'traffic',
+				impl: {
+					init: func(nd, symbol),
+					predicate: func(nd) getprop("instrumentation/tcas/outputs/traffic-alert") != 0 or getprop("instrumentation/tcas/outputs/advisory-alert"),
+					is_true:   func(nd) {
+						nd.symbols.traffic.show();
+						if (getprop("instrumentation/tcas/outputs/traffic-alert"))
+							nd.symbols.traffic.setColor(1,0,0);
+						else
+							nd.symbols.traffic.setColor(1,0.5,0);
+					},
+					is_false:  func(nd) nd.symbols.traffic.hide(),
+				},
+			},
 			{
 				id: 'tas',
 				impl: {
@@ -769,35 +820,129 @@ var NDStyles = {
 				id:'wind',
 				impl: {
 					init: func(nd,symbol),
-					predicate: func(nd) (nd.aircraft_source.get_spd() > 100 and getprop("environment/wind-speed-kt") > 6),
+					predicate: func(nd) (nd.aircraft_source.get_spd() > 100 and getprop("environment/wind-speed-kt") > 4),
 					is_true: func(nd) {
 						var windDir = getprop("environment/wind-from-heading-deg");
+						var windSpd = getprop("environment/wind-speed-kt");
 						if(!nd.get_switch('toggle_true_north'))
 							windDir = windDir - getprop("environment/magnetic-variation-deg");
 						if(windDir < 0.5) windDir = 360 + windDir;
 						elsif(windDir >= 360.5) windDir = windDir - 360;
-						nd.symbols.wind.setText(sprintf("%03.0f / %02.0f",windDir,getprop("environment/wind-speed-kt")));
-						nd.symbols.wind.show();
+						if (windSpd > 6)
+							nd.windShown = 1;
+						if (nd.windShown != 0) {
+							nd.symbols.wind.setText(sprintf("%03.0f / %02.0f",windDir,windSpd));
+							nd.symbols.wind.show();
+						} else
+							nd.symbols.wind.hide();
 					},
-					is_false: func(nd) nd.symbols.wind.hide(),
+					is_false: func(nd) {
+						nd.windShown = 0;
+						nd.symbols.wind.hide();
+					},
 				},
 			},
 			{
 				id:'windArrow',
 				impl: {
 					init: func(nd,symbol),
-					predicate: func(nd) (!(nd.in_mode('toggle_display_mode', ['PLAN']) and (nd.get_switch('toggle_display_type') == "LCD")) and nd.aircraft_source.get_spd() > 100 and getprop("environment/wind-speed-kt") > 6),
+					predicate: func(nd) (!(nd.in_mode('toggle_display_mode', ['PLAN']) and (nd.get_switch('toggle_display_type') == "LCD")) and nd.aircraft_source.get_spd() > 100 and getprop("environment/wind-speed-kt") > 4),
 					is_true: func(nd) {
-						nd.symbols.windArrow.show();
-						var windArrowRot = getprop("environment/wind-from-heading-deg");
-						if((nd.in_mode('toggle_display_mode', ['MAP','PLAN']) and nd.get_switch('toggle_display_type') == "CRT")
-						    or (nd.get_switch('toggle_track_heading') and nd.get_switch('toggle_display_type') == "LCD"))
-								windArrowRot = windArrowRot - nd.aircraft_source.get_trk_mag();
-							else
-								windArrowRot = windArrowRot - nd.aircraft_source.get_hdg_mag();
+						if (nd.windShown != 0) {
+							nd.symbols.windArrow.show();
+							var windArrowRot = getprop("environment/wind-from-heading-deg");
+							if((nd.in_mode('toggle_display_mode', ['MAP','PLAN']) and nd.get_switch('toggle_display_type') == "CRT")
+								or (nd.get_switch('toggle_track_heading') and nd.get_switch('toggle_display_type') == "LCD"))
+									windArrowRot = windArrowRot - nd.aircraft_source.get_trk_mag();
+								else
+									windArrowRot = windArrowRot - nd.aircraft_source.get_hdg_mag();
 						nd.symbols.windArrow.setRotation(windArrowRot*D2R);
+						} else {
+							nd.symbols.windArrow.hide();
+						}
 					},
 					is_false: func(nd) nd.symbols.windArrow.hide(),
+				},
+			},
+			{
+				id:'vorL',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.get_switch('toggle_lh_vor_adf') != 0),
+					is_true: func(nd) {
+						if(nd.get_switch('toggle_lh_vor_adf') == 1) {
+							nd.symbols.vorL.setText("VOR L");
+							nd.symbols.vorL.setColor(0.195,0.96,0.097);
+						} else {
+							nd.symbols.vorL.setText("ADF L");
+							nd.symbols.vorL.setColor(0,0.6,0.85);
+						}
+						nd.symbols.vorL.show();
+					},
+					is_false: func(nd) nd.symbols.vorL.hide(),
+				},
+			},
+			{
+				id:'vorLId',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.get_switch('toggle_lh_vor_adf') != 0),
+					is_true: func(nd) {
+						if(nd.get_switch('toggle_lh_vor_adf') == 1) {
+							if(getprop("instrumentation/nav/in-range"))
+								nd.symbols.vorLId.setText(getprop("instrumentation/nav/nav-id"));
+							else
+								nd.symbols.vorLId.setText(getprop("instrumentation/nav/frequencies/selected-mhz-fmt"));
+							nd.symbols.vorLId.setColor(0.195,0.96,0.097);
+						} else {
+							if((var navident=getprop("instrumentation/adf/ident")) != "")
+								nd.symbols.vorLId.setText(navident);
+							else
+								nd.symbols.vorLId.setText(sprintf("%3d",getprop("instrumentation/adf/frequencies/selected-khz")));
+							nd.symbols.vorLId.setColor(0,0.6,0.85);
+						}
+						nd.symbols.vorLId.show();
+					},
+					is_false: func(nd) nd.symbols.vorLId.hide(),
+				},
+			},
+			{
+				id:'dmeLDist',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.get_switch('toggle_lh_vor_adf') != 0),
+					is_true: func(nd) {
+						if(nd.get_switch('toggle_lh_vor_adf') == 1) {
+							if(getprop("instrumentation/dme/in-range"))
+								nd.symbols.dmeLDist.setText(sprintf("%3.1f",getprop("instrumentation/dme/indicated-distance-nm")));
+							else
+								nd.symbols.dmeLDist.setText(" ---");
+							nd.symbols.dmeLDist.setColor(0.195,0.96,0.097);
+						} else {
+							nd.symbols.dmeLDist.setText("");
+							nd.symbols.dmeLDist.setColor(0,0.6,0.85);
+						}
+						nd.symbols.dmeLDist.show();
+					},
+					is_false: func(nd) nd.symbols.dmeLDist.hide(),
+				},
+			},
+			{
+				id:'dmeL',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.get_switch('toggle_lh_vor_adf') != 0),
+					is_true: func(nd) {
+						if(nd.get_switch('toggle_lh_vor_adf') == 1) {
+							nd.symbols.dmeL.setText("DME");
+							nd.symbols.dmeL.setColor(0.195,0.96,0.097);
+						} else {
+							nd.symbols.dmeL.setText("");
+							nd.symbols.dmeL.setColor(0,0.6,0.85);
+						}
+						nd.symbols.dmeL.show();
+					},
+					is_false: func(nd) nd.symbols.dmeL.hide(),
 				},
 			},
 

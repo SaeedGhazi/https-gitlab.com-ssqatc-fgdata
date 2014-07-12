@@ -13,9 +13,9 @@ gui.Widget = {
       _size: [32, 32]
     });
 
-    m.setMinimumSize([16, 16]);
-    m.setSizeHint([32, 32]);
-    m.setMaximumSize([m._MAX_SIZE, m._MAX_SIZE]);
+    m.setLayoutMinimumSize([16, 16]);
+    m.setLayoutSizeHint([32, 32]);
+    m.setLayoutMaximumSize([m._MAX_SIZE, m._MAX_SIZE]);
 
     m.setSetGeometryFunc(m._impl.setGeometry);
 

@@ -49,11 +49,17 @@ var parsesvg = func(group, path, options = nil)
   var stack = [group];
   var close_stack = []; # helper for check tag closing
 
+  var defs_stack = [];
+
   var text = nil;
   var tspans = nil;
 
   # lookup table for element ids (for <use> element)
   var id_dict = {};
+
+  # lookup table for mask and clipPath element ids
+  var clip_dict = {};
+  var cur_clip = nil;
 
   # ----------------------------------------------------------------------------
   # Create a new child an push it onto the stack
@@ -64,6 +70,21 @@ var parsesvg = func(group, path, options = nil)
 
     if( typeof(id) == 'scalar' and size(id) )
       id_dict[ id ] = stack[-1];
+
+    if( cur_clip != nil )
+    {
+      var rect = sprintf(
+        "rect(%f, %f, %f, %f)",
+        cur_clip['y'],
+        cur_clip['x'] + cur_clip['width'],
+        cur_clip['y'] + cur_clip['height'],
+        cur_clip['x']
+      );
+
+      stack[-1].set("clip", rect);
+      stack[-1].set("clip-frame", canvas.Element.LOCAL);
+      cur_clip = nil;
+    }
   }
 
   # ----------------------------------------------------------------------------
@@ -367,11 +388,46 @@ var parsesvg = func(group, path, options = nil)
         return;
     }
 
+    if( size(defs_stack) > 0 )
+    {
+      if( name == "mask" or name == "clipPath" )
+      {
+        append(defs_stack, {'type': name, 'id': attr['id']});
+      }
+      else if( name == "rect" )
+      {
+        foreach(var p; ["x", "y", "width", "height"])
+          defs_stack[-1][p] = evalCSSNum(attr[p]);
+        skip = level;
+      }
+      else
+      {
+        printlog(
+          "info",
+          "parsesvg: skipping unknown element in <defs>: <" ~ name ~ ">"
+        );
+        skip = level;
+      }
+      return;
+    }
+
     var style = parseStyle(attr['style']);
+
+    var clip_id = attr['clip-path'] or attr['mask'];
+    if( clip_id != nil )
+    {
+      if(     clip_id.starts_with("url(#")
+          and clip_id[-1] == `)` )
+        clip_id = substr(clip_id, 5, size(clip_id) - 5 - 1);
+
+      cur_clip = clip_dict[clip_id];
+      if( cur_clip == nil )
+        printlog("warn", "parsesvg: clip not found: " ~ clip_id);
+    }
 
     if( style['display'] == 'none' )
     {
-      skip = level - 1;
+      skip = level;
       return;
     }
     else if( name == "g" )
@@ -448,7 +504,10 @@ var parsesvg = func(group, path, options = nil)
 
       var el_src = id_dict[ substr(ref, 1) ];
       if( el_src == nil )
-        return printlog("info", "parsesvg: Reference to unknown element (" ~ ref ~ ")");
+        return printlog(
+          "warn",
+          "parsesvg: Reference to unknown element (" ~ ref ~ ")"
+        );
 
       # Create new element and copy sub branch from source node
       pushElement(el_src._node.getName(), attr['id']);
@@ -456,6 +515,11 @@ var parsesvg = func(group, path, options = nil)
 
       # copying also overrides the id so we need to set it again
       stack[-1]._node.getNode("id").setValue(attr['id']);
+    }
+    else if( name == "defs" )
+    {
+      append(defs_stack, "defs");
+      return;
     }
     else
     {
@@ -482,8 +546,21 @@ var parsesvg = func(group, path, options = nil)
 
     if( skip )
     {
-      if( level <= skip )
+      if( level < skip )
         skip = 0;
+      return;
+    }
+
+    if( size(defs_stack) > 0 )
+    {
+      if( name != "defs" )
+      {
+        var type = defs_stack[-1]['type'];
+        if( type == "mask" or type == "clipPath" )
+          clip_dict[defs_stack[-1]['id']] = defs_stack[-1];
+      }
+
+      pop(defs_stack);
       return;
     }
 

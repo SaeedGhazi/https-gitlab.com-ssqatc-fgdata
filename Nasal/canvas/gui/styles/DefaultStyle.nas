@@ -52,8 +52,8 @@ DefaultStyle.widgets.button = {
     me._label.set("text", text);
 
     var min_width = math.max(80, me._label.maxWidth() + 16);
-    model.setMinimumSize([min_width, 16]);
-    model.setSizeHint([min_width, 28]);
+    model.setLayoutMinimumSize([min_width, 16]);
+    model.setLayoutSizeHint([min_width, 28]);
 
     return me;
   },
@@ -133,8 +133,8 @@ DefaultStyle.widgets.checkbox = {
     me._label.set("text", text);
 
     var min_width = me._label.maxWidth() + 24;
-    model.setMinimumSize([min_width, 18]);
-    model.setSizeHint([min_width, 24]);
+    model.setLayoutMinimumSize([min_width, 18]);
+    model.setLayoutSizeHint([min_width, 24]);
 
     return me;
   },
@@ -221,8 +221,8 @@ DefaultStyle.widgets.label = {
     }
 
     model.setHeightForWidthFunc(hfw_func);
-    model.setMinimumSize([min_width, 14]);
-    model.setSizeHint([width_hint, 24]);
+    model.setLayoutMinimumSize([min_width, 14]);
+    model.setLayoutSizeHint([width_hint, 24]);
 
     return me.update(model);
   },

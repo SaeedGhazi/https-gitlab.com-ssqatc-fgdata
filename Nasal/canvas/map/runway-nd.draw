@@ -57,6 +57,5 @@ var _draw_rwy_nd = func (group, lat, lon, length, width, rwyhdg, id) {
 		.setFont("LiberationFonts/LiberationSans-Regular.ttf")
 		.setFontSize(28)
 		.setTranslation(35,0)
-		.setColor(1,1,1)
-		.setBackdropColor(0,0,0);
+		.setColor(1,1,1);
 }

@@ -50,10 +50,10 @@
      			<depth>
         			<write-mask>false</write-mask>
      			 </depth>
-			<alpha-test>
+			<!--<alpha-test>
 				<comparison>gequal</comparison>
 				<reference type="float">0.03</reference>
-			</alpha-test>
+			</alpha-test>-->
 			<cull-face><use>directional</use></cull-face>
 			<polygon-mode>
         <front>point</front>

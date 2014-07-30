@@ -20,7 +20,7 @@ void main()
     relPos = gl_Vertex.xyz - ep.xyz;
     rawPos = gl_Vertex.xy;
     float dist = length(relPos);
-    float lightScale = size * size * size * size * size / 1000.0;
+    float lightScale = size * size * size * size * size/ 500.0;
     pixelSize = min(size * size/25.0,lightScale/dist);
     gl_PointSize = 2.0 * pixelSize;
 }

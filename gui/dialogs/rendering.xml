@@ -745,8 +745,19 @@
 		<legend>OK</legend>
         <default>true</default>
         <binding>
-            <command>reinit</command>
-            <subsystem>tile-manager</subsystem>
+            <command>nasal</command>
+            <script>
+              var reinit = 0;
+              foreach (var p; reload_props) {
+                if (reload_vals[p] != getprop(p)) {
+                  reinit = 1;
+                }
+              }
+
+              if (reinit) {
+                fgcommand("reinit", props.Node.new({"subsystem": "tile-manager"}));
+              }
+            </script>
         </binding>
 		<binding>
 			<command>dialog-close</command>
@@ -781,6 +792,21 @@
           setprop("/sim/gui/dialogs/rendering/shader-warning", 0);
         }
       }
+
+      var reload_props = [
+        "/sim/rendering/materials-file",
+        "/sim/rendering/random-buildings",
+        "/sim/rendering/random-objects",
+        "/sim/rendering/random-vegetation",
+        "/sim/rendering/vegetation-density",
+        "/sim/rendering/clouds3d-enable",
+        "/sim/rendering/clouds3d-density"];
+
+      var reload_vals = {};
+      foreach (var p; reload_props) {
+        reload_vals[p] = getprop(p);
+      }
+
 		</open>
 	</nasal>
 </PropertyList>

@@ -363,46 +363,7 @@
 					</enable>
 				</text>
 
-				<checkbox>
-					<row>5</row>
-					<col>0</col>
-					<colspan>3</colspan>
-					<halign>left</halign>
-					<label>Simplify far terrain (increases scenery load times)</label>
-					<name>simplify-far</name>
-					<property>/sim/rendering/terrain/simplifier/enabled-far</property>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>simplify-far</object-name>
-					</binding>
-				</checkbox>
-
-				<checkbox>
-					<row>6</row>
-					<col>0</col>
-					<colspan>3</colspan>
-					<halign>left</halign>
-					<label>Simplify all terrain (increases scenery load times)</label>
-					<name>simplify-near</name>
-					<property>/sim/rendering/terrain/simplifier/enabled-near</property>
-					<enable>
-						<property>/sim/rendering/terrain/simplifier/enabled-far</property>
-					</enable>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>simplify-near</object-name>
-					</binding>
-				</checkbox>
-
 			</group>
-
-			<button>
-				<legend>Reload Scenery</legend>
-				<binding>
-					<command>reinit</command>
-					<subsystem>tile-manager</subsystem>
-				</binding>
-			</button>
 
 			<group>
 				<layout>vbox</layout>
@@ -781,9 +742,23 @@
 	<hrule/>
 
 	<button>
-		<legend>Close</legend>
-		<default>true</default>
-		<key>Esc</key>
+		<legend>OK</legend>
+        <default>true</default>
+        <binding>
+            <command>nasal</command>
+            <script>
+              var reinit = 0;
+              foreach (var p; reload_props) {
+                if (reload_vals[p] != getprop(p)) {
+                  reinit = 1;
+                }
+              }
+
+              if (reinit) {
+                fgcommand("reinit", props.Node.new({"subsystem": "tile-manager"}));
+              }
+            </script>
+        </binding>
 		<binding>
 			<command>dialog-close</command>
 		</binding>
@@ -817,6 +792,21 @@
           setprop("/sim/gui/dialogs/rendering/shader-warning", 0);
         }
       }
+
+      var reload_props = [
+        "/sim/rendering/materials-file",
+        "/sim/rendering/random-buildings",
+        "/sim/rendering/random-objects",
+        "/sim/rendering/random-vegetation",
+        "/sim/rendering/vegetation-density",
+        "/sim/rendering/clouds3d-enable",
+        "/sim/rendering/clouds3d-density"];
+
+      var reload_vals = {};
+      foreach (var p; reload_props) {
+        reload_vals[p] = getprop(p);
+      }
+
 		</open>
 	</nasal>
 </PropertyList>

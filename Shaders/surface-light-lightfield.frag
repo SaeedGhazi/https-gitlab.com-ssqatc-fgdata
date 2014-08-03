@@ -7,6 +7,7 @@ uniform float avisibility;
 uniform float hazeLayerAltitude;
 uniform float eye_alt;
 uniform float terminator;
+uniform float size;
 
 varying vec3 relPos;
 varying vec2 rawPos;
@@ -140,8 +141,9 @@ void main()
 
     transmission =  fog_func(transmission_arg);
     float lightArg = terminator/100000.0;
-    float attenuationScale = 1.0 + 3.0 * (1.0 -smoothstep(-15.0, 0.0, lightArg));
-    float dist_att =  exp(-0.3/attenuationScale/pixelSize);
+    float attenuationScale = 1.0 + 20.0 * (1.0 -smoothstep(-15.0, 0.0, lightArg));
+    //float dist_att =  exp(-100.0/attenuationScale/size);
+   float dist_att = exp(-dist/200.0/size/attenuationScale);
 
     //vec4 texel = texture2D(texture,gl_TexCoord[0].st);
     vec4 texel = light_sprite(gl_TexCoord[0].st,transmission, noise);

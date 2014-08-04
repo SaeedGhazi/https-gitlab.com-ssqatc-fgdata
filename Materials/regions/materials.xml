@@ -6000,7 +6000,10 @@
 
   <material include="Materials/base/glyphs-yellow.xml">
     <name>YellowSign</name>
+    <texture-set>
     <texture>Signs/yellow.png</texture>
+    <texture n="13">Terrain/void.png</texture>
+    </texture-set>
     <emissive>
       <r>0.9</r>
       <g>0.9</g>
@@ -6012,7 +6015,10 @@
 
   <material include="Materials/base/glyphs-red.xml">
     <name>RedSign</name>
+    <texture-set>
     <texture>Signs/red.png</texture>
+    <texture n="13">Terrain/void.png</texture>
+    </texture-set>
     <emissive>
       <r>0.9</r>
       <g>0.9</g>
@@ -6024,7 +6030,10 @@
 
   <material include="Materials/base/glyphs-black.xml">
     <name>BlackSign</name>
+    <texture-set>
     <texture>Signs/black.png</texture>
+    <texture n="13">Terrain/void.png</texture>
+    </texture-set>
     <emissive>
       <r>0.9</r>
       <g>0.9</g>
@@ -6036,7 +6045,10 @@
 
   <material include="Materials/base/glyphs-framed.xml">
     <name>FramedSign</name>
+    <texture-set>
     <texture>Signs/framed.png</texture>
+    <texture n="13">Terrain/void.png</texture>
+    </texture-set>
     <emissive>
       <r>0.9</r>
       <g>0.9</g>
@@ -6048,7 +6060,10 @@
 
   <material include="Materials/base/glyphs-special.xml">
     <name>SpecialSign</name>
+    <texture-set>
     <texture>Signs/special.png</texture>
+    <texture n="13">Terrain/void.png</texture>
+    </texture-set>
     <emissive>
       <r>0.9</r>
       <g>0.9</g>
@@ -6060,7 +6075,10 @@
 
   <material>
     <name>UnidirectionalTaper</name>
+    <texture-set>
     <texture>Symbols/unidirectional.png</texture>
+    <texture n="13">Terrain/void.png</texture>
+    </texture-set>
     <emissive>
       <r>0.92157</r>
       <g>0.92157</g>
@@ -6071,7 +6089,10 @@
 
   <material>
     <name>UnidirectionalTaperRed</name>
+    <texture-set>
     <texture>Symbols/unidirectionalred.png</texture>
+    <texture n="13">Terrain/void.png</texture>
+    </texture-set>
     <emissive>
       <r>0.92157</r>
       <g>0.92157</g>
@@ -6082,7 +6103,10 @@
 
   <material>
     <name>UnidirectionalTaperGreen</name>
+    <texture-set>
     <texture>Symbols/unidirectionalgreen.png</texture>
+    <texture n="13">Terrain/void.png</texture>
+    </texture-set>
     <emissive>
       <r>0.92157</r>
       <g>0.92157</g>
@@ -6093,7 +6117,10 @@
 
   <material>
     <name>BidirectionalTaper</name>
+    <texture-set>
     <texture>Symbols/bidirectional.png</texture>
+    <texture n="13">Terrain/void.png</texture>
+    </texture-set>
     <emissive>
       <r>0.92157</r>
       <g>0.92157</g>

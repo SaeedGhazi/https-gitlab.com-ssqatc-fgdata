@@ -11,7 +11,8 @@ varying vec3 ecViewdir;
 
 
 uniform sampler2D texture;
-uniform sampler2D snow_texture;
+uniform sampler2D overlay_texture;
+
 
 varying float steepness;
 
@@ -30,10 +31,13 @@ uniform float fogstructure;
 uniform float cloud_self_shading;
 uniform float snow_thickness_factor;
 uniform float grit_alpha;
+uniform float overlay_bias;
+uniform float overlay_alpha;
 uniform float wetness;
 uniform int quality_level;
 uniform int tquality_level;
 uniform int cloud_shadow_flag;
+uniform int use_overlay;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -170,9 +174,8 @@ float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
     else
 	{halfVector = normalize(normalize(lightDir) + normalize(ecViewdir));}
     vec4 texel;
+    vec4 overlay_texel;
     vec4 snow_texel;
-    vec4 detail_texel;
-    vec4 mix_texel;
     vec4 fragColor;
     vec4 specular = vec4(0.0);
     float intensity;
@@ -227,7 +230,14 @@ float noise_2000m = Noise2D(rawPos.xy, 2000.0);
 	snow_texel.a = snow_texel.a * 0.2+0.8* smoothstep(0.2,0.8, 0.3 +noise_term + snow_thickness_factor +0.0001*(relPos.z +eye_alt -snowlevel) );
 	}
 
-   
+if (use_overlay == 1)
+	{
+	overlay_texel = texture2D(overlay_texture, gl_TexCoord[0].st * 4.0);
+
+	texel = mix(texel, overlay_texel, overlay_alpha * smoothstep(0.45, 0.65, overlay_bias + (0.5 * noise_1m + 0.1 * noise_2m + 0.4 * noise_10m)));
+
+	}
+
 
 
 

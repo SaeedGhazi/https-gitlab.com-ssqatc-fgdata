@@ -55,13 +55,72 @@
   </material>
 
   <material include="Materials/base/runway_effect.xml">
+   <condition>
+    <and>
+     <greater-than>
+      <property>position/longitude-deg</property>
+      <value>-124.0</value>
+     </greater-than>
+     <less-than>
+      <property>position/longitude-deg</property>
+      <value>-104.0</value>
+     </less-than>
+     <greater-than>
+      <property>position/latitude-deg</property>
+      <value>32.0</value>
+     </greater-than>
+     <less-than>
+      <property>position/latitude-deg</property>
+      <value>42.0</value>
+     </less-than>
+    </and>
+  </condition>
+  <name>pa_shoulder</name>
+    <texture>Runway/pa_shoulder2.png</texture>
+    <parameters>
+     <uvstretch>8.0</uvstretch>
+    </parameters>
+  </material>
+
+  <material include="Materials/base/runway_effect.xml">
     <name>pa_shoulder</name>
     <texture>Runway/pa_shoulder.png</texture>
   </material>
 
   <material include="Materials/base/runway_effect.xml">
+   <condition>
+    <and>
+     <greater-than>
+      <property>position/longitude-deg</property>
+      <value>-124.0</value>
+     </greater-than>
+     <less-than>
+      <property>position/longitude-deg</property>
+      <value>-104.0</value>
+     </less-than>
+     <greater-than>
+      <property>position/latitude-deg</property>
+      <value>32.0</value>
+     </greater-than>
+     <less-than>
+      <property>position/latitude-deg</property>
+      <value>42.0</value>
+     </less-than>
+    </and>
+  </condition>
+  <name>pa_shoulder_f</name>
+    <texture>Runway/pa_shoulder_f2.png</texture>
+    <parameters>
+     <uvstretch>8.0</uvstretch>
+    </parameters>
+  </material>
+
+  <material include="Materials/base/runway_effect.xml">
     <name>pa_shoulder_f</name>
-    <texture>Runway/pa_shoulder_f.png</texture>
+    <texture>Runway/pa_shoulder_f1.png</texture>
+    <parameters>
+     <uvstretch>8.0</uvstretch>
+    </parameters>
   </material>
 
   <material include="Materials/base/runway_effect.xml">

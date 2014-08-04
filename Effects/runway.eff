@@ -77,6 +77,7 @@
     		<lichen_cover_factor><use>/environment/surface/lichen-cover-factor</use></lichen_cover_factor>
     		<snow_thickness_factor><use>/environment/surface/snow-thickness-factor</use></snow_thickness_factor>
     		<wetness><use>/environment/surface/wetness</use></wetness>
+    		<uvstretch>1.0</uvstretch>
    		<fogtype><use>/sim/rendering/shaders/skydome</use></fogtype>
     		<fogstructure><use>/environment/fog-structure</use></fogstructure>
     		<cloud_self_shading><use>/environment/cloud-self-shading</use></cloud_self_shading>
@@ -246,6 +247,11 @@
         <name>moonlight</name>
         <type>float</type>
         <value><use>moonlight</use></value>
+      </uniform>
+      <uniform>
+        <name>uvstretch</name>
+        <type>float</type>
+        <value><use>uvstretch</use></value>
       </uniform>
       <uniform>
         <name>cloudpos1_x</name>

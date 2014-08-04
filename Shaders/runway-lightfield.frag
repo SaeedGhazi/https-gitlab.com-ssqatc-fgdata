@@ -30,6 +30,7 @@ uniform float wetness;
 uniform float fogstructure;
 uniform float snow_thickness_factor;
 uniform float cloud_self_shading;
+uniform float uvstretch;
 
 uniform int quality_level;
 uniform int tquality_level;
@@ -202,7 +203,7 @@ float noise_2000m = Noise2D(rawPos.xy, 2000.0);
 
 // get the texels
 
-    texel = texture2D(texture, gl_TexCoord[0].st);
+    texel = texture2D(texture, vec2 (gl_TexCoord[0].s, gl_TexCoord[0].t * uvstretch));
 	vec4 nmap  = texture2D(NormalTex, gl_TexCoord[0].st * 8.0);
 	vec3 N = nmap.rgb * 2.0 - 1.0;
 

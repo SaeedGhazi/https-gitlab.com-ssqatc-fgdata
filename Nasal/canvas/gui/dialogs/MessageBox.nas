@@ -45,21 +45,19 @@ var MessageBox = {
         return me;
       }
 
-    var MARGIN = 12; # TODO implement margin in C++ layouting code
+    var MARGIN = 12;
     var dlg = canvas.Window.new([300,120], "dialog")
                            .setTitle(me._title);
     var root = dlg.getCanvas(1)
                   .set("background", style.getColor("bg_color"))
                   .createGroup();
     var vbox = VBoxLayout.new();
+    vbox.setContentsMargin(MARGIN);
     dlg.setLayout(vbox);
-    vbox.addSpacing(MARGIN);
 
     var text_box = HBoxLayout.new();
     vbox.addItem(text_box);
     text_box.setSpacing(MARGIN);
-
-    text_box.addSpacing(MARGIN);
 
     if( me._img != nil )
     {
@@ -73,7 +71,6 @@ var MessageBox = {
     var label_text = gui.widgets.Label.new(root, style, {wordWrap: 1})
                                       .setText(me._text);
     text_box.addItem(label_text, 1);
-    text_box.addSpacing(MARGIN);
 
     vbox.addStretch(1);
 
@@ -82,7 +79,6 @@ var MessageBox = {
 
     if( me._standard_buttons & me.DontShowAgain )
     {
-      button_box.addSpacing(MARGIN);
       button_box.addItem(
         gui.widgets.CheckBox.new(root, style, {})
                             .setText("Don't show again.")
@@ -113,9 +109,6 @@ var MessageBox = {
         );
       })();
     }
-    button_box.addSpacing(MARGIN);
-
-    vbox.addSpacing(MARGIN);
 
     var w = math.max(300, vbox.sizeHint()[0]);
     dlg.setSize(w, math.max(130, vbox.heightForWidth(w)));

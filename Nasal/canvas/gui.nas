@@ -195,6 +195,7 @@ var Window = {
 #    me.onFocusIn();
     me._onStateChange();
     gui.focused_window = me;
+    setInputFocus(me);
     return me;
   },
   #
@@ -207,6 +208,7 @@ var Window = {
 #    me.onFocusOut();
     me._onStateChange();
     gui.focused_window = nil;
+    setInputFocus(nil);
     return me;
   },
   setPosition: func
@@ -474,6 +476,12 @@ var Window = {
         .lineTo(me.get("size[0]") - border_radius + 2, 2);
   }
 };
+
+# Clear focus on click outside any window
+getDesktop().addEventListener("mousedown", func {
+  if( gui.focused_window != nil )
+    gui.focused_window.clearFocus();
+});
 
 # Provide old 'Dialog' for backwards compatiblity (should be removed for 3.0)
 var Dialog = {

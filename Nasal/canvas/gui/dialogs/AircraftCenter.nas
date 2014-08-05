@@ -207,25 +207,14 @@ var AircraftCenter = {
       start = end;
       end = math.min(end + 50, size(packages));
 
-      me._show_more = VBoxLayout.new();
-      me._list.addItem(me._show_more);
-
-      me._show_more.addSpacing(3);
-      var hbox = HBoxLayout.new();
-      me._show_more.addItem(hbox);
-      me._show_more.addSpacing(5);
-
-      hbox.addStretch(1);
-      hbox.addItem(
+      me._show_more =
         gui.widgets.Button.new(me._scroll_content, style, {})
                           .setText("Show more...")
                           .listen("clicked", func
                             me._addPackageEntries(packages, start, end)
-                          )
-      );
-      hbox.addStretch(1);
-
-      hbox = nil;
+                          );
+      me._show_more.setContentsMargin(5);
+      me._list.addItem(me._show_more, 0, canvas.AlignHCenter);
     }
 
     # Add some stretch in case the scroll area is larger than the list

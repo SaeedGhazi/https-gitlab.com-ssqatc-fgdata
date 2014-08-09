@@ -137,6 +137,7 @@
       <halign>left</halign>
       <name>enabled</name>
       <label></label>
+      <live>1</live>
       <enable>
         <equals>
           <property>/sim/fgcom/test</property>
@@ -163,6 +164,7 @@
       <halign>left</halign>
       <name>showMessages</name>
       <label></label>
+      <live>1</live>
       <property>/sim/fgcom/show-messages</property>
       <binding>
         <command>dialog-apply</command>
@@ -172,8 +174,8 @@
     <text>
       <row>1</row>
       <col>1</col>
-      <label>     (for debug only)</label>
-      <halign>right</halign>
+      <label>      (for debug only)</label>
+      <halign>left</halign>
     </text>
 
     <text>
@@ -201,6 +203,7 @@
           <value>1</value>
         </equals>
       </enable>
+      <live>1</live>
       <property>/sim/fgcom/test</property>
       <binding>
         <command>dialog-apply</command>
@@ -211,11 +214,51 @@
     <text>
       <row>4</row>
       <col>0</col>
+      <label>PTT test:</label>
+      <halign>right</halign>
+      <enable>
+        <equals>
+          <property>/sim/fgcom/enabled</property>
+          <value>-1</value>
+        </equals>
+      </enable>
+    </text>
+    <checkbox>
+      <row>4</row>
+      <col>1</col>
+      <colspan>2</colspan>
+      <halign>left</halign>
+      <name>ptt-test</name>
+      <label></label>
+      <enable>
+        <equals>
+          <property>/sim/fgcom/enabled</property>
+          <value>-1</value>
+        </equals>
+      </enable>
+      <live>1</live>
+      <property>/instrumentation/comm[0]/ptt</property>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>ptt-test</object-name>
+      </binding>
+    </checkbox>
+    <text>
+      <row>4</row>
+      <col>1</col>
+      <label>      (/instrumentation/comm/ptt) </label>
+      <halign>left</halign>
+    </text>
+
+
+    <text>
+      <row>5</row>
+      <col>0</col>
       <label>Speaker Volume:</label>
       <halign>right</halign>
     </text>
     <slider>
-      <row>4</row>
+      <row>5</row>
       <col>1</col>
       <halign>left</halign>
       <name>speaker-vol</name>
@@ -230,22 +273,23 @@
       </binding>
     </slider>
     <text>
-      <row>4</row>
-      <col>2</col>
-      <label>1234</label>
+      <row>5</row>
+      <col>1</col>
+      <label>1234         </label>
       <format>%.1f</format>
       <live>true</live>
+      <halign>right</halign>
       <property>/sim/fgcom/speaker-level</property>
     </text>
 
     <text>
-      <row>5</row>
+      <row>6</row>
       <col>0</col>
       <label>Silence threshold:</label>
       <halign>right</halign>
     </text>
     <slider>
-      <row>5</row>
+      <row>6</row>
       <col>1</col>
       <halign>left</halign>
       <name>silence-thd</name>
@@ -260,11 +304,12 @@
       </binding>
     </slider>
     <text>
-      <row>5</row>
-      <col>2</col>
-      <label>1234 dB  </label>
+      <row>6</row>
+      <col>1</col>
+      <label>1234 dB        </label>
       <format>%.1f dB</format>
       <live>true</live>
+      <halign>right</halign>
       <property>/sim/fgcom/silence-threshold</property>
     </text>
   </group>

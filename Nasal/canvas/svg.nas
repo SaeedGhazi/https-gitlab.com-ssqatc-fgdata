@@ -20,6 +20,12 @@ var parsesvg = func(group, path, options = nil)
     die("File not found: "~path);
   path = file_path;
 
+  var _printlog = printlog;
+  var printlog = func(level, msg)
+  {
+    _printlog(level, "parsesvg: " ~ msg ~ " [path='" ~ path ~ "']");
+  };
+
   var custom_font_mapper = options['font-mapper'];
   var font_mapper = func(family, weight)
   {
@@ -73,16 +79,28 @@ var parsesvg = func(group, path, options = nil)
 
     if( cur_clip != nil )
     {
-      var rect = sprintf(
-        "rect(%f, %f, %f, %f)",
-        cur_clip['y'],
-        cur_clip['x'] + cur_clip['width'],
-        cur_clip['y'] + cur_clip['height'],
-        cur_clip['x']
-      );
+      if(     cur_clip['x'] != nil
+          and cur_clip['y'] != nil
+          and cur_clip['width'] != nil
+          and cur_clip['height'] != nil )
+      {
+        var rect = sprintf(
+          "rect(%f, %f, %f, %f)",
+          cur_clip['y'],
+          cur_clip['x'] + cur_clip['width'],
+          cur_clip['y'] + cur_clip['height'],
+          cur_clip['x']
+        );
 
-      stack[-1].set("clip", rect);
-      stack[-1].set("clip-frame", canvas.Element.LOCAL);
+        stack[-1].set("clip", rect);
+        stack[-1].set("clip-frame", canvas.Element.LOCAL);
+      }
+      else
+        printlog(
+          "warn",
+          "Invalid or unsupported clip for element '" ~ id ~ "'"
+        );
+
       cur_clip = nil;
     }
   }
@@ -145,6 +163,7 @@ var parsesvg = func(group, path, options = nil)
 
       # TODO should we warn if to much/wrong number of arguments given?
       if( type == "translate" )
+      {
         # translate(<tx> [<ty>]), which specifies a translation by tx and ty. If
         # <ty> is not provided, it is assumed to be zero.
         stack[-1].createTransform().setTranslation
@@ -152,11 +171,15 @@ var parsesvg = func(group, path, options = nil)
           values[0],
           size(values) > 1 ? values[1] : 0,
         );
+      }
       else if( type == "scale" )
+      {
         # scale(<sx> [<sy>]), which specifies a scale operation by sx and sy. If
         # <sy> is not provided, it is assumed to be equal to <sx>.
         stack[-1].createTransform().setScale(values);
+      }
       else if( type == "rotate" )
+      {
         # rotate(<rotate-angle> [<cx> <cy>]), which specifies a rotation by
         # <rotate-angle> degrees about a given point.
         stack[-1].createTransform().setRotation
@@ -164,15 +187,19 @@ var parsesvg = func(group, path, options = nil)
           values[0] * D2R, # internal functions use rad
           size(values) > 1 ? values[1:] : nil
         );
+      }
       else if( type == "matrix" )
       {
         if( size(values) == 6 )
           stack[-1].createTransform(values);
         else
-          debug.dump('invalid transform', type, values);
+          printlog(
+            "warn",
+            "Invalid arguments to matrix transform: " ~ debug.string(values, 0)
+          );
       }
       else
-        debug.dump(['unknown transform', type, values]);
+        printlog("warn", "Unknown transform type: '" ~ type ~ "'");
     }
   };
 
@@ -226,7 +253,9 @@ var parsesvg = func(group, path, options = nil)
         if( start_num == pos )
           break;
 
-        append(args, substr(path_data, start_num, pos > 0 ? pos - start_num : nil));
+        append(args, substr( path_data,
+                             start_num,
+                             pos > 0 ? pos - start_num : nil ));
       }
 
       # now execute the command
@@ -251,14 +280,18 @@ var parsesvg = func(group, path, options = nil)
         }
 
         if( math.mod(size(args), 7) > 0 )
-          debug.dump('too much coords for cmd', cmd, args);
+          printlog(
+            "warn",
+            "Invalid number of coords for cmd 'a' "
+            ~ "(" ~ size(args) ~ " mod 7 != 0)"
+          );
       }
       else
       {
         var cmd_vg = cmd_map[cmd];
         if( cmd_vg == nil )
         {
-          debug.dump('command not found', cmd, args);
+          printlog("warn", "command not found: '" ~ cmd ~ "'");
           continue;
         }
 
@@ -280,7 +313,11 @@ var parsesvg = func(group, path, options = nil)
           }
 
           if( math.mod(size(args), num_coords) > 0 )
-            debug.warn('too much coords for cmd: ' ~ cmd);
+            printlog(
+              "warn",
+              "Invalid number of coords for cmd '" ~ cmd ~ "' "
+              ~ "(" ~ size(args) ~ " mod " ~ num_coords ~ " != 0)"
+            );
         }
       }
     }
@@ -402,10 +439,7 @@ var parsesvg = func(group, path, options = nil)
       }
       else
       {
-        printlog(
-          "info",
-          "parsesvg: skipping unknown element in <defs>: <" ~ name ~ ">"
-        );
+        printlog("info", "Skipping unknown element in <defs>: <" ~ name ~ ">");
         skip = level;
       }
       return;
@@ -414,7 +448,7 @@ var parsesvg = func(group, path, options = nil)
     var style = parseStyle(attr['style']);
 
     var clip_id = attr['clip-path'] or attr['mask'];
-    if( clip_id != nil )
+    if( clip_id != nil and clip_id != "none" )
     {
       if(     clip_id.starts_with("url(#")
           and clip_id[-1] == `)` )
@@ -422,7 +456,7 @@ var parsesvg = func(group, path, options = nil)
 
       cur_clip = clip_dict[clip_id];
       if( cur_clip == nil )
-        printlog("warn", "parsesvg: clip not found: " ~ clip_id);
+        printlog("warn", "Clip not found: '" ~ clip_id ~ "'");
     }
 
     if( style['display'] == 'none' )
@@ -500,14 +534,11 @@ var parsesvg = func(group, path, options = nil)
     {
       var ref = attr["xlink:href"];
       if( ref == nil or size(ref) < 2 or ref[0] != `#` )
-        return debug.dump("Invalid or missing href", ref);
+        return printlog("warn", "Invalid or missing href: '" ~ ref ~ '"');
 
       var el_src = id_dict[ substr(ref, 1) ];
       if( el_src == nil )
-        return printlog(
-          "warn",
-          "parsesvg: Reference to unknown element (" ~ ref ~ ")"
-        );
+        return printlog("warn", "Reference to unknown element '" ~ ref ~ "'");
 
       # Create new element and copy sub branch from source node
       pushElement(el_src._node.getName(), attr['id']);
@@ -523,7 +554,7 @@ var parsesvg = func(group, path, options = nil)
     }
     else
     {
-      printlog("info", "parsesvg: skipping unknown element '" ~ name ~ "'");
+      printlog("info", "Skipping unknown element '" ~ name ~ "'");
       skip = level;
       return;
     }
@@ -666,7 +697,15 @@ var parsesvg = func(group, path, options = nil)
   call(func parsexml(path, start, end, data), nil, var err = []);
   if( size(err) )
   {
-    debug.dump(err);
+    var msg = err[0];
+    for(var i = 1; i + 1 < size(err); i += 2)
+    {
+      # err = ['error message', 'file', line]
+      msg ~= (i == 1 ? "\n  at " : "\n  called from: ")
+           ~ err[i] ~ ", line " ~ err[i + 1]
+    }
+    printlog("alert", msg ~ "\n ");
+
     return 0;
   }
 

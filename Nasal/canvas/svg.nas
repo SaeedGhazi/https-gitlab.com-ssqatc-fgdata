@@ -524,6 +524,11 @@ var parsesvg = func(group, path, options = nil)
       if( linecap != nil )
         stack[-1].setStrokeLineCap(style['stroke-linecap']);
 
+      var linejoin = style['stroke-linejoin'];
+      if( linejoin != nil )
+        stack[-1].setStrokeLineJoin(style['stroke-linejoin']);
+
+
       # http://www.w3.org/TR/SVG/painting.html#StrokeDasharrayProperty
       var dash = style['stroke-dasharray'];
       if( dash and size(dash) > 3 )

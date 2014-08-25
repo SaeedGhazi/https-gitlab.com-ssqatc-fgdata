@@ -934,6 +934,16 @@ var Path = {
   {
     me.set('stroke-linecap', linecap);
   },
+  # Set stroke linejoin
+  #
+  # @param linejoin String, "miter", "round" or "bevel"
+  #
+  # See http://www.w3.org/TR/SVG/painting.html#StrokeLinejoinProperty for details
+  setStrokeLineJoin: func(linejoin)
+  {
+    me.set('stroke-linejoin', linejoin);
+  },
+  # Set stroke dasharray
   # Set stroke dasharray
   #
   # @param pattern Vector, Vector of alternating dash and gap lengths

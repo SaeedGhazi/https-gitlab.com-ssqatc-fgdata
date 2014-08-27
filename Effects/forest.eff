@@ -27,7 +27,7 @@
 		<type>2d</type>
     </texture>
     <texture n="5">
-      <image>Textures.high/Terrain/forest-relief.png</image>
+      <image>Textures/Terrain/forest-relief.png</image>
       <filter>linear-mipmap-linear</filter>
       <wrap-s>repeat</wrap-s>
       <wrap-t>repeat</wrap-t>

@@ -4,7 +4,7 @@
   <inherits-from>Effects/landmass</inherits-from>
   <parameters>
     <texture n="2">
-      <image>Textures.high/Terrain/shrubcover-relief.png</image>
+      <image>Textures/Terrain/shrubcover-relief.png</image>
 	  <type>2d</type>
       <filter>linear-mipmap-linear</filter>
       <wrap-s>repeat</wrap-s>

@@ -4,7 +4,7 @@
     <inherits-from>Effects/transition</inherits-from>
     <parameters>
 		<texture n="3">
-		    <image>Textures.high/Terrain/herbtundra.dds</image>
+		    <image>Textures/Terrain/herbtundra.dds</image>
 			<type>2d</type>
 		    <filter>linear-mipmap-linear</filter>
 		    <wrap-s>repeat</wrap-s>

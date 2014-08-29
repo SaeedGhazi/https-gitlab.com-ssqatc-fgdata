@@ -53,6 +53,7 @@
 	<config-desc>Load additional properties from path</config-desc>
 	<units-feet-desc>Use feet for distances</units-feet-desc>
 	<units-meters-desc>Use meters for distances</units-meters-desc>
+	<console-desc>Display console (Windows specific)</console-desc>
 
 	<!-- Features options -->
 	<environment-options>Environment Options</environment-options>
@@ -135,6 +136,8 @@
 
 	<!-- Rendering options -->
 	<rendering-options>Rendering Options</rendering-options>
+	<enable-rembrandt-desc>Enable Rembrandt rendering</enable-rembrandt-desc>
+	<disable-rembrandt-desc>Disable Rembrandt rendering</disable-rembrandt-desc>
 	<bpp-desc>Specify the bits per pixel</bpp-desc>
 	<fog-disable-desc>Disable fog/haze</fog-disable-desc>
 	<fog-fastest-desc>Enable fastest fog/haze</fog-fastest-desc>
@@ -192,6 +195,8 @@
 	<disable-terrasync-desc>Disable automatic scenery downloads/updates</disable-terrasync-desc>
 	<enable-terrasync-desc>Enable automatic scenery downloads/updates</enable-terrasync-desc>
 	<terrasync-dir-desc>Set target directory for scenery downloads</terrasync-dir-desc>
+	<enable-fgcom-desc>Enable FGCom built-in</enable-fgcom-desc>
+	<disable-fgcom-desc>Disable FGCom built-in</disable-fgcom-desc>
 
 	<!-- MultiPlayer options -->
 	<multiplayer-options>MultiPlayer Options</multiplayer-options>

@@ -135,6 +135,11 @@
     <description>units-meters-desc</description>
    </option>
 
+   <option>
+    <name>console</name>
+    <description>console-desc</description>
+   </option>
+
   </section>
 
   <section>
@@ -319,6 +324,16 @@
    <name>rendering-options</name>
 
    <option>
+    <name>enable-rembrandt</name>
+    <description>enable-rembrandt-desc</description>
+   </option>
+
+   <option>
+    <name>disable-rembrandt</name>
+    <description>disable-rembrandt-desc</description>
+   </option>
+
+   <option>
     <name>disable-splash-screen</name>
     <description>disable-splash-screen-desc</description>
    </option>
@@ -435,16 +450,6 @@
    <option>
     <name>shading-smooth</name>
     <description>shading-smooth-desc</description>
-   </option>
-
-   <option>
-    <name>disable-textures</name>
-    <description>disable-textures-desc</description>
-   </option>
-
-   <option>
-    <name>enable-textures</name>
-    <description>enable-textures-desc</description>
    </option>
 
    <option>
@@ -1010,6 +1015,16 @@
    <option>
     <name>terrasync-dir</name>
     <description>terrasync-dir-desc</description>
+   </option>
+
+   <option>
+    <name>enable-fgcom</name>
+    <description>enable-fgcom-desc</description>
+   </option>
+
+   <option>
+    <name>disable-fgcom</name>
+    <description>disable-fgcom-desc</description>
    </option>
 
   </section>

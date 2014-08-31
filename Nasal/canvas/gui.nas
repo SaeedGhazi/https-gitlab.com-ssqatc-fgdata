@@ -23,6 +23,7 @@ loadGUIFile("styles/DefaultStyle.nas");
 loadWidget("Button");
 loadWidget("CheckBox");
 loadWidget("Label");
+loadWidget("LineEdit");
 loadWidget("ScrollArea");
 loadDialog("MessageBox");
 

@@ -119,6 +119,8 @@ gui.widgets.ScrollArea = {
 # protected:
   _setView: func(view)
   {
+    call(gui.Widget._setView, [view], me);
+
     view.vert.addEventListener("mousedown", func(e) me._dragStart(e));
     view.horiz.addEventListener("mousedown", func(e) me._dragStart(e));
     view._root.addEventListener("mousedown", func(e)
@@ -177,8 +179,6 @@ gui.widgets.ScrollArea = {
         e.stopPropagation();
       }
     );
-
-    call(gui.Widget._setView, [view], me);
   },
   _dragStart: func(e)
   {

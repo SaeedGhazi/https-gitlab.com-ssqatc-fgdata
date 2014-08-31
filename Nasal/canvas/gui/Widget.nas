@@ -85,6 +85,9 @@ gui.Widget = {
     me._focused = 1;
     canvas._focused_widget = me;
 
+    if( me._view != nil )
+      me._view._root.setFocus();
+
     me._trigger("focus-in");
     me._onStateChange();
 
@@ -98,6 +101,7 @@ gui.Widget = {
 
     me._focused = 0;
     me.getCanvas()._focused_widget = nil;
+    me.getCanvas().clearFocusElement();
 
     me._trigger("focus-out");
     me._onStateChange();

@@ -107,7 +107,7 @@ DefaultStyle.widgets.button = {
   }
 };
 
-# A checbox
+# A checkbox
 DefaultStyle.widgets.checkbox = {
   new: func(parent, cfg)
   {
@@ -290,6 +290,96 @@ DefaultStyle.widgets.label = {
       me[ name ] = nil;
     }
     return me;
+  }
+};
+
+# A one line text input field
+DefaultStyle.widgets["line-edit"] = {
+  new: func(parent, cfg)
+  {
+    me._hpadding = cfg.get("hpadding", 8);
+
+    me._root = parent.createChild("group", "line-edit");
+    me._border =
+      me._root.createChild("image", "border")
+              .set("slice", "10 12"); #"7")
+    me._text =
+      me._root.createChild("text", "input")
+              .set("font", "LiberationFonts/LiberationSans-Regular.ttf")
+              .set("character-size", 14)
+              .set("alignment", "left-baseline")
+              .set("clip-frame", Element.PARENT);
+    me._cursor =
+      me._root.createChild("path", "cursor")
+              .set("stroke", "#333")
+              .set("stroke-width", 1)
+              .moveTo(me._hpadding, 5)
+              .vert(10);
+    me._hscroll = 0;
+  },
+  setSize: func(model, w, h)
+  {
+    me._border.setSize(w, h);
+    me._text.set(
+      "clip",
+      "rect(0, " ~ (w - me._hpadding) ~ ", " ~ h ~ ", " ~ me._hpadding ~ ")"
+    );
+    me._cursor.setDouble("coord[2]", h - 10);
+
+    return me.update(model);
+  },
+  setText: func(model, text)
+  {
+    me._text.set("text", text);
+    model._onStateChange();
+  },
+  update: func(model)
+  {
+    var backdrop = !model._windowFocus();
+    var file = me._style._dir_widgets ~ "/";
+
+    if( backdrop )
+      file ~= "backdrop-";
+
+    file ~= "entry";
+
+    if( !model._enabled )
+      file ~= "-disabled";
+    else if( model._focused and !backdrop )
+      file ~= "-focused";
+
+    me._border.set("src", file ~ ".png");
+
+    var color_name = backdrop ? "backdrop_fg_color" : "fg_color";
+    me._text.set("fill", me._style.getColor(color_name));
+
+    me._cursor.setVisible(model._enabled and model._focused and !backdrop);
+
+    var width = model._size[0] - 2 * me._hpadding;
+    var cursor_pos = me._text.getCursorPos(0, model._cursor)[0];
+    var text_width = me._text.getCursorPos(0, me._text.lineLength(0))[0];
+
+    if( text_width <= width )
+      # fit -> align left (TODO handle different alignment)
+      me._hscroll = 0;
+    else if( me._hscroll + cursor_pos > width )
+      # does not fit, cursor to the right
+      me._hscroll = width - cursor_pos;
+    else if( me._hscroll + cursor_pos < 0 )
+      # does not fit, cursor to the left
+      me._hscroll = -cursor_pos;
+    else if( me._hscroll + text_width < width )
+      # does not fit, limit scroll to align with right side
+      me._hscroll = width - text_width;
+
+    var text_pos = me._hscroll + me._hpadding;
+
+    me._text
+      .setTranslation(text_pos, model._size[1] / 2 + 5)
+      .update();
+    me._cursor
+      .setDouble("coord[0]", text_pos + cursor_pos)
+      .update();
   }
 };
 

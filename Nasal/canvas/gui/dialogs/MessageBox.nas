@@ -16,6 +16,7 @@ var MessageBox = {
   setTitle: func(title)
   {
     me._title = title;
+    return me;
   },
   setImage: func(img)
   {

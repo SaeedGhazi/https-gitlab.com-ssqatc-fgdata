@@ -25,6 +25,7 @@ loadWidget("CheckBox");
 loadWidget("Label");
 loadWidget("LineEdit");
 loadWidget("ScrollArea");
+loadDialog("InputDialog");
 loadDialog("MessageBox");
 
 var style = DefaultStyle.new("AmbianceClassic", "Humanity");

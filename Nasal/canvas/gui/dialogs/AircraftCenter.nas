@@ -59,7 +59,7 @@ var AircraftCenter = {
       me._list.clear();
       me._show_more = nil;
 
-      settimer(func me.fillList(pkg.root.search(filter)), 0);
+      settimer(func me.fillList(pkg.root.search(filter)), 0, 1);
     });
 
     if( me._active_button == nil )

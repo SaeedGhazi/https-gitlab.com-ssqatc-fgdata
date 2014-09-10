@@ -27,14 +27,25 @@ var parsesvg = func(group, path, options = nil)
   };
 
   var custom_font_mapper = options['font-mapper'];
-  var font_mapper = func(family, weight)
+  var font_mapper = func(family, weight, style)
   {
     if( typeof(custom_font_mapper) == 'func' )
     {
-      var font = custom_font_mapper(family, weight);
+      var font = custom_font_mapper(family, weight, style);
       if( font != nil )
         return font;
     }
+
+    if( string.match(family,"Liberation*") ) {
+      style = style == "italic" ? "Italic" : "";
+      weight = weight == "bold" ? "Bold" : "";
+
+      var s = weight ~ style;
+      if( s == "" ) s = "Regular";
+
+      return "LiberationFonts/" ~ string.replace(family," ", "") ~ "-" ~ s ~ ".ttf";
+    }
+
 
     return "LiberationFonts/LiberationMono-Bold.ttf";
   };
@@ -349,8 +360,9 @@ var parsesvg = func(group, path, options = nil)
 
     var font_family = style["font-family"];
     var font_weight = style["font-weight"];
-    if( font_family != nil or font_weight != nil )
-      stack[-1].set("font", font_mapper(font_family, font_weight));
+    var font_style = style["font-style"];
+    if( font_family != nil or font_weight != nil or font_style != nil )
+      stack[-1].set("font", font_mapper(font_family, font_weight, font_style));
 
     var font_size = style["font-size"];
     if( font_size != nil )

@@ -55,6 +55,7 @@
 	<equipment>Equipment</equipment>
 	<map>Map</map>
 	<map-canvas>Map (Canvas)</map-canvas>
+	<map-browser>Map (opens in browser)</map-browser>
 	<stopwatch>Stopwatch</stopwatch>
 	<fuel-and-payload>Fuel and Payload</fuel-and-payload>
 	<radio>Radio Settings</radio>

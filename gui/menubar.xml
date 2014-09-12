@@ -348,6 +348,17 @@
 			</binding>
 		</item>
 
+		<item>
+			<name>map-browser</name>
+			<binding>
+				<command>nasal</command>
+                                <script>
+                                  var _url = "http://localhost:" ~ getprop("/sim/http/options/listening-port") ~ "/gui/map/";
+                                  fgcommand("open-browser", props.Node.new({ "url": _url }));
+                                </script>
+			</binding>
+		</item>
+
 
 		<item>
 			<name>stopwatch</name>

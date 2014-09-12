@@ -67,6 +67,8 @@
 	<!-- Equipment menu -->
 	<equipment>Ausrüstung</equipment>   <!-- English: "Equipment" -->
 	<map>Karte</map>   <!-- English: "Map" -->
+	<map-canvas>Karte (Canvas)</map-canvas>
+	<map-browser>Karte (Im Browser)</map-browser>
 	<stopwatch>Stoppuhr</stopwatch>   <!-- English: "Stopwatch" -->
 	<fuel-and-payload>Treibstoff und Ladung</fuel-and-payload>   <!-- English: "Fuel and Payload" -->
 	<radio>Funkfrequenzen</radio>   <!-- English: "Radio Settings" -->

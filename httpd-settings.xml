@@ -4,7 +4,7 @@
 -->
 <PropertyList>
 	<uri-handler>
-		<!--screenshot>/screenshot/</screenshot-->
+		<!--screenshot>/screenshot</screenshot-->
 		<property>/props/</property>
 		<json>/json/</json>
 		<run>/run.cgi</run>
@@ -57,6 +57,6 @@
 
 		<!-- all paths are relative to fg-root -->
 		<!-- (not yet implemented) -->
-		<url-rewrites>/gui/=webgui/</url-rewrites>
+		<url-rewrites>/gui/=webgui/,/fonts/=Fonts/</url-rewrites>
 	</options>
 </PropertyList>

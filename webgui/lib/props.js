@@ -38,6 +38,10 @@ var SetListener = function(path, callback, context ) {
       command : 'addListener',
       node : path
     }));
+    PropertyChangeListenerObjects._ws.send(JSON.stringify({
+      command : 'get',
+      node : path
+    }));
   }
   o.push({ cb: callback, ctx: context, id: NextListenerId });
   return NextListenerId++;

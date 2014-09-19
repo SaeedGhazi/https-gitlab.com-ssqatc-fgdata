@@ -37,7 +37,7 @@
 		<enable-directory-listing>yes</enable-directory-listing>
 
 		<!-- (not yet implemented) -->
-		<!-- extra-mime-types>.cpp=plain/text,.java=plain/text</extra-mime-types -->
+		<extra-mime-types>.appcache=text/cache-manifest</extra-mime-types>
 
 
 		<!-- (not yet implemented) -->

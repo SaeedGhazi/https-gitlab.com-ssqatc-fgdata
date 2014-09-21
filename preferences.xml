@@ -170,6 +170,7 @@ Started September 2000 by David Megginson, david@megginson.com
 				<bare type="double" userarchive="y">30000</bare>
 				<ai-detailed type="double" userarchive="y">10000</ai-detailed>
 				<!-- ai-bare type="double" userarchive="y">10000</ai-bare -->
+				<ai-interior type="double" userarchive="y">50</ai-interior>
 			</static-lod>
 			<random-objects type="bool" userarchive="y">true</random-objects>
 			<random-vegetation type="bool" userarchive="y">true</random-vegetation>

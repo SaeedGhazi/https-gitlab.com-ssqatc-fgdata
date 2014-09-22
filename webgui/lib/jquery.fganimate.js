@@ -71,6 +71,11 @@
           var i = new FGFS.Instrument(data);
           reply.push(i);
           $(this).append(i.svg);
+          // set inkscape pagecolor as div background-color
+          // somewhat awkward get the namespaced sodipodi:namedview element
+          var pagecolor = $(i.svg.getElementsByTagNameNS('http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd', 'namedview')).attr("pagecolor");
+          if( pagecolor != null )
+            $(this).css("background-color", pagecolor );
         },
         error: function(xhr,status,msg) {
           alert(status + " while reading '" + instrumentDefinitionFile + "': " + msg.toString() );

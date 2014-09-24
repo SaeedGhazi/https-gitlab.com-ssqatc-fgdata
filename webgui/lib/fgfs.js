@@ -184,6 +184,7 @@ FGFS.InputValue = function(arg) {
   this.interpolationTable = null;
   this.min = null;
   this.max = null;
+  this.precision = 4;
 
   this.getValue = function() {
     var value = this.value;
@@ -191,14 +192,14 @@ FGFS.InputValue = function(arg) {
       value = this.property.getNumValue();
 
     if (this.interpolationTable != null && this.interpolationTable.length > 0)
-      return FGFS.interpolate(value, this.interpolationTable);
+      return FGFS.interpolate(value, this.interpolationTable).toPrecision(this.precision);
 
     value = value * this.scale + this.offset;
     if( this.min != null && value < this.min )
-      return this.min;
+      return this.min.toPrecision(this.precision);
     if( this.max != null && value > this.min )
-      return this.max;
-    return value;
+      return this.max.toPrecision(this.precision);
+    return value.toPrecision(this.precision);
   }
 
   if (typeof (arg) == 'number') {
@@ -416,13 +417,16 @@ FGFS.FGPanel = function( propUrl )
 
   var mirror = new FGFS.PropertyMirror(this.props.propertyMirror);
 
-  var instruments = $(this.props.instrumentSelector).fgLoadInstruments(this.props.instrumentDataKey);
+  this.instruments = $(this.props.instrumentSelector).fgLoadInstruments(this.props.instrumentDataKey);
 
-  window.setInterval( function() {
-    instruments.forEach(function(instrument) {
-      instrument.update();
-    });
-  }, this.props.updateInterval );
+  this.update = function() {
+    for( var i = 0; i < this.instruments.length; i++ ) {
+      this.instruments[i].update();
+    }
+    window.setTimeout( $.proxy(this.update,this), this.props.updateInterval );
+  }
+
+  this.update();
 }
 
 $(document).ready(function() {

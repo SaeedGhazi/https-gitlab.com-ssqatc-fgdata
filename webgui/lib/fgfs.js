@@ -106,6 +106,14 @@ FGFS.PropertyListener = function(arg) {
     throw new Error('removeProperty not yet implemented');
   };
 
+  this.setProperty = function( path, val ) {
+      this._ws.send(JSON.stringify({
+        command : 'set',
+        node : path,
+        value: val
+      }));
+  }
+
 }
 
 // expects:
@@ -140,6 +148,11 @@ FGFS.PropertyMirror = function(mirroredProperties) {
   this.getNode = function(id) {
     return this.mirror[id];
   };
+
+  this.setProperty = function( key, value ) {
+    var node = this.mirror[key];
+    this.listener.setProperty( node.path, value );
+  }
 
   // TODO: ugly static variable, change this!
   FGFS.NodeProvider.mirror = this;
@@ -415,7 +428,7 @@ FGFS.FGPanel = function( propUrl )
       });
   }
 
-  var mirror = new FGFS.PropertyMirror(this.props.propertyMirror);
+  this.mirror = new FGFS.PropertyMirror(this.props.propertyMirror);
 
   this.instruments = $(this.props.instrumentSelector).fgLoadInstruments(this.props.instrumentDataKey);
 
@@ -426,14 +439,19 @@ FGFS.FGPanel = function( propUrl )
     window.setTimeout( $.proxy(this.update,this), this.props.updateInterval );
   }
 
+  this.setProperty = function( key, value ) {
+    this.mirror.setProperty( key, value );
+  }
+
   this.update();
 }
+
 
 $(document).ready(function() {
   var hasFGPanel  = $("body").data("fgpanel");
   if( hasFGPanel ) {
     var panelProps = $("body").data("fgpanel-props");
-    new FGFS.FGPanel( panelProps == null ? "fgpanel.json" : panelProps );
+    window.fgPanel = new FGFS.FGPanel( panelProps == null ? "fgpanel.json" : panelProps );
   }
 });
 

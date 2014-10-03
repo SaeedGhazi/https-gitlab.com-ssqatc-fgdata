@@ -42,6 +42,7 @@ uniform float fogstructure;
 uniform float snow_thickness_factor;
 uniform float cloud_self_shading;
 uniform float season;
+uniform float air_pollution;
 uniform float grain_strength;
 uniform float intrinsic_wetness;
 uniform float transition_model;
@@ -62,7 +63,7 @@ uniform int rock_strata;
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
 
-float alt;
+//float alt;
 float eShade;
 float yprime_alt;
 float mie_angle;
@@ -73,8 +74,10 @@ float Noise2D(in vec2 coord, in float wavelength);
 float Noise3D(in vec3 coord, in float wavelength);
 float SlopeLines2D(in vec2 coord, in vec2 gradDir, in float wavelength, in float steepness);
 float Strata3D(in vec3 coord, in float wavelength, in float variation);
-
-
+float fog_func (in float targ, in float alt);
+float rayleigh_in_func(in float dist, in float air_pollution, in float avisibility, in float eye_alt, in float vertex_alt);
+float alt_factor(in float eye_alt, in float vertex_alt);
+vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
 {
@@ -98,39 +101,11 @@ return 1.0 - smoothstep(0.5 * fade_dist, fade_dist, dist);
 }
 
 
-// this determines how light is attenuated in the distance
-// physically this should be exp(-arg) but for technical reasons we use a sharper cutoff
-// for distance > visibility
-
-float fog_func (in float targ)
-{
-
-
-float fade_mix;
-
-// for large altitude > 30 km, we switch to some component of quadratic distance fading to
-// create the illusion of improved visibility range
-
-targ = 1.25 * targ * smoothstep(0.04,0.06,targ); // need to sync with the distance to which terrain is drawn
-
-
-if (alt < 30000.0)
-	{return exp(-targ - targ * targ * targ * targ);}
-else if (alt < 50000.0)
-	{
-	fade_mix = (alt - 30000.0)/20000.0;
-	return fade_mix * exp(-targ*targ - pow(targ,4.0)) + (1.0 - fade_mix) * exp(-targ - pow(targ,4.0));	
-	}
-else 
-	{
-	return exp(- targ * targ - pow(targ,4.0));
-	}
-
-}
 
 void main()
 {
 
+float alt;
 
 yprime_alt = diffuse_term.a;
 //diffuse_term.a = 1.0;
@@ -298,7 +273,7 @@ float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),
 	stprime = stprime * distortion_factor * 15.0;
 	stprime = stprime + normalize(relPos).xy * 0.022 * (noise_10m + 0.5 * noise_5m +0.25 * noise_2m - 0.875 );
 	
-    detail_texel = texture2D(detail_texture, stprime);
+    	detail_texel = texture2D(detail_texture, stprime);
 	if (detail_texel.a <0.1) {flag = 0;}
 	
 
@@ -486,14 +461,17 @@ if ((dist < 5000.0)&& (quality_level > 3) && (combined_wetness>0.0))
 
     fragColor = color * texel + specular;
 
-// here comes the terrain haze model
 
+// Rayleigh color shift due to out-scattering
+    float rayleigh_length = 0.5 * avisibility * (2.5 - 1.9 * air_pollution)/alt_factor(eye_alt, eye_alt+relPos.z);
+    float outscatter = 1.0-exp(-dist/rayleigh_length);
+    fragColor.rgb = rayleigh_out_shift(fragColor.rgb,outscatter);
+
+// here comes the terrain haze model
 
 float delta_z = hazeLayerAltitude - eye_alt;
 
 if (dist > 0.04 * min(visibility,avisibility)) 
-//if ((gl_FragCoord.y > ylimit) || (gl_FragCoord.x < zlimit1) || (gl_FragCoord.x > zlimit2))
-//if (dist > 40.0)
 {
 
 alt = eye_alt;
@@ -604,7 +582,7 @@ else
 
 
 
-transmission =  fog_func(transmission_arg);
+transmission =  fog_func(transmission_arg, alt);
 
 // there's always residual intensity, we should never be driven to zero
 if (eqColorFactor < 0.2) eqColorFactor = 0.2;
@@ -661,6 +639,15 @@ if (intensity > 0.0) // this needs to be a condition, because otherwise hazeColo
 	}
 
 
+// blue Rayleigh scattering with distance
+
+float rShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt-340000.0) + 0.1;
+float lightIntensity = length(diffuse_term.rgb)/1.73 * rShade;
+vec3 rayleighColor = vec3 (0.17, 0.52, 0.87) * lightIntensity;
+float rayleighStrength = rayleigh_in_func(dist, air_pollution, avisibility/max(lightIntensity,0.05), eye_alt, eye_alt + relPos.z);
+fragColor.rgb = mix(fragColor.rgb, rayleighColor,rayleighStrength);
+
+// finally, mix fog in
 
 
 fragColor.rgb = mix(eqColorFactor * hazeColor * eShade , fragColor.rgb,transmission);
@@ -672,6 +659,15 @@ gl_FragColor = fragColor;
 }
 else // if dist < threshold no fogging at all 
 {
+
+// blue Rayleigh scattering with distance
+
+float rShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt-340000.0) + 0.1;
+float lightIntensity = length(diffuse_term.rgb)/1.73 * rShade;
+vec3 rayleighColor = vec3 (0.17, 0.52, 0.87) * lightIntensity;
+float rayleighStrength = rayleigh_in_func(dist, air_pollution, avisibility/max(lightIntensity,0.05), eye_alt, eye_alt + relPos.z);
+fragColor.rgb = mix(fragColor.rgb, rayleighColor,rayleighStrength);
+
 gl_FragColor =  fragColor;
 }
 

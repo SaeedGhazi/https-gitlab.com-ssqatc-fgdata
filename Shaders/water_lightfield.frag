@@ -59,6 +59,7 @@ uniform float ice_cover;
 uniform float sea_r;
 uniform float sea_g;
 uniform float sea_b;
+uniform float air_pollution;
 
 uniform int quality_level;
 uniform int ocean_flag;
@@ -75,6 +76,10 @@ const float EarthRadius = 5800000.0;
 
 //vec3 fog_Func(vec3 color, int type);
 float shadow_func (in float x, in float y, in float noise, in float dist);
+float fog_func (in float targ, in float alt);
+float rayleigh_in_func(in float dist, in float air_pollution, in float avisibility, in float eye_alt, in float vertex_alt);
+float alt_factor(in float eye_alt, in float vertex_alt);
+vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
 //////////////////////
 
 /////// functions /////////
@@ -261,31 +266,7 @@ return e / pow((1.0 + a * exp(-b * (x-c)) ),(1.0/d));
 // physically this should be exp(-arg) but for technical reasons we use a sharper cutoff
 // for distance > visibility
 
-float fog_func (in float targ)
-{
 
-
-float fade_mix;
-
-// for large altitude > 30 km, we switch to some component of quadratic distance fading to
-// create the illusion of improved visibility range
-
-targ = 1.25 * targ; // need to sync with the distance to which terrain is drawn
-
-
-if (eye_alt < 30000.0)
-	{return exp(-targ - targ * targ * targ * targ);}
-else if (eye_alt < 50000.0)
-	{
-	fade_mix = (eye_alt - 30000.0)/20000.0;
-	return fade_mix * exp(-targ*targ - pow(targ,4.0)) + (1.0 - fade_mix) * exp(-targ - pow(targ,4.0));	
-	}
-else 
-	{
-	return exp(- targ * targ - pow(targ,4.0));
-	}
-
-}
 
 void main(void)
 	{
@@ -594,6 +575,11 @@ void main(void)
 	finalColor *= ambient_light;
 
 
+// Rayleigh color shift due to out-scattering
+    float rayleigh_length = 0.4 * avisibility * (2.5 - 1.9 * air_pollution)/alt_factor(eye_alt, eye_alt+relPos.z);
+    float outscatter = 1.0-exp(-dist/rayleigh_length);
+    finalColor.rgb = rayleigh_out_shift(finalColor.rgb,outscatter);
+
 
 // here comes the terrain haze model
 
@@ -707,7 +693,7 @@ else
 	}
 
 
-transmission =  fog_func(transmission_arg);
+transmission =  fog_func(transmission_arg, eye_alt);
 
 // there's always residual intensity, we should never be driven to zero
 if (eqColorFactor < 0.2) eqColorFactor = 0.2;
@@ -755,7 +741,11 @@ if (intensity > 0.0) // this needs to be a condition, because otherwise hazeColo
 	hazeColor = intensity * normalize(mix(hazeColor,  shadedFogColor, (1.0-smoothstep(0.5,0.9,eqColorFactor)))); 
 	}
 
-	
+	float rShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt-340000.0) + 0.1;
+	float lightIntensity = length(gl_Color.rgb)/1.73 * rShade;
+	vec3 rayleighColor = vec3 (0.17, 0.52, 0.87) * lightIntensity;
+	float rayleighStrength = rayleigh_in_func(dist, air_pollution, avisibility/max(lightIntensity,0.05), eye_alt, eye_alt + relPos.z);
+	finalColor.rgb = mix(finalColor.rgb, rayleighColor, rayleighStrength);
 
 	finalColor.rgb = mix(eqColorFactor * hazeColor * eShade, finalColor.rgb,transmission);
 

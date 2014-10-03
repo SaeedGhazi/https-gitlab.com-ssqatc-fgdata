@@ -271,6 +271,8 @@ float shade_depth =  1.0 * smoothstep (0.6,0.95,ground_scattering) * (1.0-smooth
    light_ambient.rgb = light_ambient.rgb * (1.0 - shade_depth);
    light_diffuse.rgb = light_diffuse.rgb * (1.0 + 1.2 * shade_depth);
 
+
+
 // default lighting based on texture and material using the light we have just computed
 
  diffuse_term = diffuse_color* light_diffuse;

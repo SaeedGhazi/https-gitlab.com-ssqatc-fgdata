@@ -131,6 +131,7 @@
     		<moonlight><use>/environment/moonlight</use></moonlight>
 		<fogtype><use>/sim/rendering/shaders/skydome</use></fogtype>
 		<fogstructure><use>/environment/fog-structure</use></fogstructure>
+		<air_pollution><use>/environment/air-pollution-norm</use></air_pollution>
 		<ice_cover><use>/environment/sea/surface/ice-cover</use></ice_cover>
 		<quality_level><use>/sim/rendering/shaders/landmass</use></quality_level>
 		<!-- sea colors -->
@@ -373,6 +374,7 @@
 				<vertex-shader>Shaders/water_lightfield.vert</vertex-shader>
 				<fragment-shader>Shaders/water_lightfield.frag</fragment-shader>
 				<fragment-shader>Shaders/cloud-shadowfunc.frag</fragment-shader>
+				<fragment-shader>Shaders/hazes.frag</fragment-shader>
 			</program>
 			<!--<uniform>
 				<name>water_reflection</name>
@@ -557,6 +559,11 @@
 				<name>fogstructure</name>
 				<type>float</type>
 				<value><use>fogstructure</use></value>
+			</uniform>
+			<uniform>
+				<name>air_pollution</name>
+				<type>float</type>
+				<value><use>air_pollution</use></value>
 			</uniform>
 			<uniform>
         			<name>ice_cover</name>

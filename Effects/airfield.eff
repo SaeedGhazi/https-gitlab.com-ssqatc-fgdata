@@ -23,6 +23,7 @@
 		<grit_alpha>1.0</grit_alpha>
 		<overlay_bias>0.0</overlay_bias>
 		<overlay_alpha>1.0</overlay_alpha>
+    		<use_headlight>0</use_headlight>
 	</parameters>
 
 <technique n="2">
@@ -116,6 +117,9 @@
         <vertex-shader>Shaders/terrain-haze-ultra.vert</vertex-shader>
         <fragment-shader>Shaders/airfield.frag</fragment-shader>
 	<fragment-shader>Shaders/cloud-shadowfunc.frag</fragment-shader>
+	<fragment-shader>Shaders/noise.frag</fragment-shader>
+	<fragment-shader>Shaders/hazes.frag</fragment-shader>
+	<fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>
@@ -211,6 +215,11 @@
         <name>moonlight</name>
         <type>float</type>
         <value><use>moonlight</use></value>
+      </uniform>
+      <uniform>
+        <name>air_pollution</name>
+        <type>float</type>
+        <value><use>air_pollution</use></value>
       </uniform>
       <uniform>
         <name>cloudpos1_x</name>
@@ -431,6 +440,11 @@
 	<name>use_overlay</name>
 	<type>int</type>
 	<value>	<use>use_overlay</use></value>
+      </uniform>
+     <uniform>
+	<name>use_headlight</name>
+	<type>int</type>
+	<value>	<use>use_headlight</use></value>
       </uniform>
       <uniform>
         <name>texture</name>

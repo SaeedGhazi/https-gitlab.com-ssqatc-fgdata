@@ -1,4 +1,3 @@
-
 // -*-C++-*-
 
 // written by Thorsten Renk, Oct 2011, based on default.frag
@@ -34,10 +33,12 @@ uniform float grit_alpha;
 uniform float overlay_bias;
 uniform float overlay_alpha;
 uniform float wetness;
+uniform float air_pollution;
 uniform int quality_level;
 uniform int tquality_level;
 uniform int cloud_shadow_flag;
 uniform int use_overlay;
+uniform int use_headlight;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -48,53 +49,12 @@ float yprime_alt;
 float mie_angle;
 
 float shadow_func (in float x, in float y, in float noise, in float dist);
-
-
-float rand2D(in vec2 co){
-    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
-}
-
-float cosine_interpolate(in float a, in float b, in float x)
-{
-	float ft = x * 3.1415927;
-	float f = (1.0 - cos(ft)) * .5;
-
-	return  a*(1.0-f) + b*f;
-}
-
-float simple_interpolate(in float a, in float b, in float x)
-{
-return a + smoothstep(0.0,1.0,x) * (b-a);
-//return mix(a,b,x); 
-}
-
-float interpolatedNoise2D(in float x, in float y)
-{
-      float integer_x    = x - fract(x);
-      float fractional_x = x - integer_x;
-
-      float integer_y    = y - fract(y);
-      float fractional_y = y - integer_y;
-
-      float v1 = rand2D(vec2(integer_x, integer_y));
-      float v2 = rand2D(vec2(integer_x+1.0, integer_y));
-      float v3 = rand2D(vec2(integer_x, integer_y+1.0));
-      float v4 = rand2D(vec2(integer_x+1.0, integer_y +1.0));
-
-      float i1 = simple_interpolate(v1 , v2 , fractional_x);
-      float i2 = simple_interpolate(v3 , v4 , fractional_x);
-
-      return simple_interpolate(i1 , i2 , fractional_y);
-}
-
-
-float Noise2D(in vec2 coord, in float wavelength)
-{
-return interpolatedNoise2D(coord.x/wavelength, coord.y/wavelength);
-
-}
-
-
+float Noise2D(in vec2 coord, in float wavelength);
+float fog_func (in float targ, in float alt);
+float rayleigh_in_func(in float dist, in float air_pollution, in float avisibility, in float eye_alt, in float vertex_alt);
+float alt_factor(in float eye_alt, in float vertex_alt);
+vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
+vec3 headlight(in float dist);
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
 {
@@ -119,31 +79,6 @@ return 1.0 - smoothstep(0.5 * fade_dist, fade_dist, dist);
 // physically this should be exp(-arg) but for technical reasons we use a sharper cutoff
 // for distance > visibility
 
-float fog_func (in float targ)
-{
-
-
-float fade_mix;
-
-// for large altitude > 30 km, we switch to some component of quadratic distance fading to
-// create the illusion of improved visibility range
-
-targ = 1.25 * targ * smoothstep(0.04,0.06,targ); // need to sync with the distance to which terrain is drawn
-
-
-if (alt < 30000.0)
-	{return exp(-targ - targ * targ * targ * targ);}
-else if (alt < 50000.0)
-	{
-	fade_mix = (alt - 30000.0)/20000.0;
-	return fade_mix * exp(-targ*targ - pow(targ,4.0)) + (1.0 - fade_mix) * exp(-targ - pow(targ,4.0));	
-	}
-else 
-	{
-	return exp(- targ * targ - pow(targ,4.0));
-	}
-
-}
 
 void main()
 {
@@ -312,6 +247,8 @@ if (quality_level > 3)
         color += diffuse_term * NdotL;
 	
 
+
+
         NdotHV = max(dot(n, halfVector), 0.0);
 	
         if (gl_FrontMaterial.shininess > 0.0)
@@ -327,8 +264,24 @@ if (quality_level > 3)
 
 
 
+    
+
+    if (use_headlight == 1)
+	{
+	color.rgb += headlight(dist);
+	}
 
     fragColor = color * texel + specular;
+
+// Rayleigh color shift due to out-scattering
+    float rayleigh_length;
+    float outscatter;
+    if ((quality_level > 5) && (tquality_level > 5))
+    	{
+	rayleigh_length = 0.5 * avisibility * (2.5 - 1.9 * air_pollution)/alt_factor(eye_alt, eye_alt+relPos.z);
+	outscatter = 1.0-exp(-dist/rayleigh_length);
+        fragColor.rgb = rayleigh_out_shift(fragColor.rgb,outscatter);
+	}
 
 // here comes the terrain haze model
 
@@ -430,7 +383,7 @@ else
 
 
 
-transmission =  fog_func(transmission_arg);
+transmission =  fog_func(transmission_arg, alt);
 
 // there's always residual intensity, we should never be driven to zero
 if (eqColorFactor < 0.2) eqColorFactor = 0.2;
@@ -484,7 +437,20 @@ hazeColor = mix(shadow * hazeColor, hazeColor, 0.3 + 0.7* smoothstep(250000.0, 4
 
 
 hazeColor = clamp(hazeColor,0.0,1.0);
-fragColor.xyz = mix(eqColorFactor * hazeColor * eShade, fragColor.xyz,transmission);
+
+// blue Rayleigh scattering with distance
+
+float rShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt-340000.0) + 0.1;
+float lightIntensity = length(diffuse_term.rgb)/1.73 * rShade;
+vec3 rayleighColor = vec3 (0.17, 0.52, 0.87) * lightIntensity;
+float rayleighStrength = rayleigh_in_func(dist, air_pollution, avisibility/max(lightIntensity,0.05), eye_alt, eye_alt + relPos.z);
+
+if ((quality_level>5) && (tquality_level>5))
+	{
+	fragColor.rgb = mix(fragColor.rgb, rayleighColor,rayleighStrength);
+	}
+
+fragColor.rgb = mix(eqColorFactor * hazeColor * eShade, fragColor.rgb,transmission);
 
 
 gl_FragColor = fragColor;
@@ -493,6 +459,18 @@ gl_FragColor = fragColor;
 }
 else // if dist < threshold no fogging at all 
 {
+// blue Rayleigh scattering with distance
+
+float rShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt-340000.0) + 0.1;
+float lightIntensity = length(diffuse_term.rgb)/1.73 * rShade;
+vec3 rayleighColor = vec3 (0.17, 0.52, 0.87) * lightIntensity;
+float rayleighStrength = rayleigh_in_func(dist, air_pollution, avisibility/max(lightIntensity,0.05), eye_alt, eye_alt + relPos.z);
+
+if ((quality_level>5) && (tquality_level>5))
+	{
+	fragColor.rgb = mix(fragColor.rgb, rayleighColor,rayleighStrength);
+	}
+
 gl_FragColor = fragColor;
 }
 

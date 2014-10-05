@@ -116,6 +116,13 @@
     <wind_effects><use>/sim/rendering/shaders/wind-effects</use></wind_effects>
     <windE><use>/environment/sea/surface/wind-from-east-fps</use></windE>
     <windN><use>/environment/sea/surface/wind-from-north-fps</use></windN>
+    <display_xsize><use>/sim/startup/xsize</use></display_xsize>
+    <display_ysize><use>/sim/startup/ysize</use></display_ysize>
+    <view_pitch_offset><use>/sim/current-view/pitch-offset-deg</use></view_pitch_offset>
+    <view_heading_offset><use>/sim/current-view/heading-offset-deg</use></view_heading_offset>
+    <view_fov><use>/sim/current-view/field-of-view</use></view_fov>
+    <use_searchlight><use>/sim/rendering/als-secondary-lights/use-searchlight</use></use_searchlight>
+    <use_landing_light><use>/sim/rendering/als-secondary-lights/use-landing-light</use></use_landing_light>
     <quality_level><use>/sim/rendering/shaders/landmass</use></quality_level>
     <tquality_level><use>/sim/rendering/shaders/transition</use></tquality_level>
     <cloudpos1_x><use>/local-weather/cloud-shadows/cloudpos-x[0]</use></cloudpos1_x>
@@ -295,6 +302,7 @@
         <fragment-shader>Shaders/noise.frag</fragment-shader>
         <fragment-shader>Shaders/cloud-shadowfunc.frag</fragment-shader>
         <fragment-shader>Shaders/hazes.frag</fragment-shader>
+        <fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
       </program>
 	  <uniform>
         <name>grain_strength</name>
@@ -435,6 +443,21 @@
         <name>air_pollution</name>
         <type>float</type>
         <value><use>air_pollution</use></value>
+      </uniform>
+      <uniform>
+        <name>view_pitch_offset</name>
+        <type>float</type>
+        <value><use>view_pitch_offset</use></value>
+      </uniform>
+      <uniform>
+        <name>view_heading_offset</name>
+        <type>float</type>
+        <value><use>view_heading_offset</use></value>
+      </uniform>
+      <uniform>
+        <name>field_of_view</name>
+        <type>float</type>
+        <value><use>view_fov</use></value>
       </uniform>
       <uniform>
         <name>cloudpos1_x</name>
@@ -646,6 +669,26 @@
 	<type>float</type>
 	<value><use>windN</use></value>
       </uniform>
+      <uniform>
+	<name>use_searchlight</name>
+	<type>int</type>
+	<value>	<use>use_searchlight</use></value>
+      </uniform>
+      <uniform>
+	<name>use_landing_light</name>
+	<type>int</type>
+	<value>	<use>use_landing_light</use></value>
+      </uniform>
+      <uniform>
+        <name>display_xsize</name>
+        <type>int</type>
+        <value><use>display_xsize</use></value>
+      </uniform>
+      <uniform>
+        <name>display_ysize</name>
+        <type>int</type>
+        <value><use>display_ysize</use></value>
+      </uniform>  
       <uniform>
         <name>quality_level</name>
         <type>int</type>

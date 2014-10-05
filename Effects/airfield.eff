@@ -23,7 +23,6 @@
 		<grit_alpha>1.0</grit_alpha>
 		<overlay_bias>0.0</overlay_bias>
 		<overlay_alpha>1.0</overlay_alpha>
-    		<use_headlight>0</use_headlight>
 	</parameters>
 
 <technique n="2">
@@ -115,7 +114,7 @@
       </texture-unit>
       <program>
         <vertex-shader>Shaders/terrain-haze-ultra.vert</vertex-shader>
-        <fragment-shader>Shaders/airfield.frag</fragment-shader>
+        <fragment-shader>Shaders/airfield-ALS.frag</fragment-shader>
 	<fragment-shader>Shaders/cloud-shadowfunc.frag</fragment-shader>
 	<fragment-shader>Shaders/noise.frag</fragment-shader>
 	<fragment-shader>Shaders/hazes.frag</fragment-shader>
@@ -220,6 +219,21 @@
         <name>air_pollution</name>
         <type>float</type>
         <value><use>air_pollution</use></value>
+      </uniform>
+      <uniform>
+        <name>view_pitch_offset</name>
+        <type>float</type>
+        <value><use>view_pitch_offset</use></value>
+      </uniform>
+      <uniform>
+        <name>view_heading_offset</name>
+        <type>float</type>
+        <value><use>view_heading_offset</use></value>
+      </uniform>
+      <uniform>
+        <name>field_of_view</name>
+        <type>float</type>
+        <value><use>view_fov</use></value>
       </uniform>
       <uniform>
         <name>cloudpos1_x</name>
@@ -441,10 +455,25 @@
 	<type>int</type>
 	<value>	<use>use_overlay</use></value>
       </uniform>
-     <uniform>
-	<name>use_headlight</name>
+      <uniform>
+	<name>use_searchlight</name>
 	<type>int</type>
-	<value>	<use>use_headlight</use></value>
+	<value>	<use>use_searchlight</use></value>
+      </uniform>
+      <uniform>
+	<name>use_landing_light</name>
+	<type>int</type>
+	<value>	<use>use_landing_light</use></value>
+      </uniform>
+      <uniform>
+        <name>display_xsize</name>
+        <type>int</type>
+        <value><use>display_xsize</use></value>
+      </uniform>
+      <uniform>
+        <name>display_ysize</name>
+        <type>int</type>
+        <value><use>display_ysize</use></value>
       </uniform>
       <uniform>
         <name>texture</name>

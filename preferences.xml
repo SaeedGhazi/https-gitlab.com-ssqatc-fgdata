@@ -287,6 +287,10 @@ Started September 2000 by David Megginson, david@megginson.com
             <!-- OSG default is 300, but this means we burn lots of memory on no-longer
              visible trees / random buildings -->
             <max-paged-lod type="int">16</max-paged-lod>
+	    		<als-secondary-lights>
+				<use-searchlight type="bool">false</use-searchlight>
+				<use-landing-light type="bool">false</use-landing-light>
+	   	 	</als-secondary-lights>
 		</rendering>
 		<model-hz type="int">120</model-hz>
 		<navdb>

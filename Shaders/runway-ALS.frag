@@ -35,7 +35,8 @@ uniform float uvstretch;
 uniform int quality_level;
 uniform int tquality_level;
 uniform int cloud_shadow_flag;
-uniform int use_headlight;
+uniform int use_searchlight;
+uniform int use_landing_light;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -48,8 +49,8 @@ float mie_angle;
 float shadow_func (in float x, in float y, in float noise, in float dist);
 float Noise2D(in vec2 coord, in float wavelength);
 float fog_func (in float targ, in float alt);
-vec3 headlight(in float dist);
-
+vec3 searchlight(in float dist);
+vec3 landing_light(in float dist);
 
 
 
@@ -245,9 +246,13 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
     // is closer to what the OpenGL fixed function pipeline does.
     color = clamp(color, 0.0, 1.0);
 
-    if (use_headlight == 1)
+    if (use_searchlight == 1)
 	{
-	color.rgb += headlight(dist);
+	color.rgb += searchlight(dist);
+	}
+    if (use_landing_light == 1)
+	{
+	color.rgb += landing_light(dist);
 	}
 
     fragColor = color * texel + specular;

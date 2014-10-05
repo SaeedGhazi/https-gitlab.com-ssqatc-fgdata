@@ -38,7 +38,8 @@ uniform int quality_level;
 uniform int tquality_level;
 uniform int cloud_shadow_flag;
 uniform int use_overlay;
-uniform int use_headlight;
+uniform int use_searchlight;
+uniform int use_landing_light;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -54,7 +55,8 @@ float fog_func (in float targ, in float alt);
 float rayleigh_in_func(in float dist, in float air_pollution, in float avisibility, in float eye_alt, in float vertex_alt);
 float alt_factor(in float eye_alt, in float vertex_alt);
 vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
-vec3 headlight(in float dist);
+vec3 searchlight(in float dist);
+vec3 landing_light(in float dist);
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
 {
@@ -266,9 +268,13 @@ if (quality_level > 3)
 
     
 
-    if (use_headlight == 1)
+    if (use_searchlight == 1)
 	{
-	color.rgb += headlight(dist);
+	color.rgb += searchlight(dist);
+	}
+    if (use_landing_light == 1)
+	{
+	color.rgb += landing_light(dist);
 	}
 
     fragColor = color * texel + specular;

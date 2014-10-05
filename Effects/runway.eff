@@ -84,7 +84,6 @@
     		<moonlight><use>/environment/moonlight</use></moonlight>
    		<quality_level><use>/sim/rendering/shaders/landmass</use></quality_level>
     		<tquality_level><use>/sim/rendering/shaders/transition</use></tquality_level>
-    		<use_headlight>0</use_headlight>
 		<!-- 		END fog include -->
 	</parameters>
 	<generate>
@@ -161,7 +160,7 @@
       </texture-unit>
       <program>
         <vertex-shader>Shaders/terrain-haze-ultra.vert</vertex-shader>
-        <fragment-shader>Shaders/runway-lightfield.frag</fragment-shader>        
+        <fragment-shader>Shaders/runway-ALS.frag</fragment-shader>        
 	<fragment-shader>Shaders/cloud-shadowfunc.frag</fragment-shader>
 	<fragment-shader>Shaders/noise.frag</fragment-shader>
 	<fragment-shader>Shaders/hazes.frag</fragment-shader>
@@ -261,6 +260,21 @@
         <name>air_pollution</name>
         <type>float</type>
         <value><use>air_pollution</use></value>
+      </uniform>
+      <uniform>
+        <name>view_pitch_offset</name>
+        <type>float</type>
+        <value><use>view_pitch_offset</use></value>
+      </uniform>
+      <uniform>
+        <name>view_heading_offset</name>
+        <type>float</type>
+        <value><use>view_heading_offset</use></value>
+      </uniform>
+      <uniform>
+        <name>field_of_view</name>
+        <type>float</type>
+        <value><use>view_fov</use></value>
       </uniform>
       <uniform>
         <name>cloudpos1_x</name>
@@ -478,9 +492,24 @@
         <value><use>tquality_level</use></value>
       </uniform>
      <uniform>
-	<name>use_headlight</name>
+	<name>use_searchlight</name>
 	<type>int</type>
-	<value>	<use>use_headlight</use></value>
+	<value>	<use>use_searchlight</use></value>
+      </uniform>
+      <uniform>
+	<name>use_landing_light</name>
+	<type>int</type>
+	<value>	<use>use_landing_light</use></value>
+      </uniform>
+      <uniform>
+        <name>display_xsize</name>
+        <type>int</type>
+        <value><use>display_xsize</use></value>
+      </uniform>
+      <uniform>
+        <name>display_ysize</name>
+        <type>int</type>
+        <value><use>display_ysize</use></value>
       </uniform>
       <uniform>
         <name>texture</name>

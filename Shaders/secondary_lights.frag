@@ -10,14 +10,16 @@ vec3 searchlight(in float dist)
 {
 
 vec2 center = vec2 (float(display_xsize) * 0.5, float(display_ysize) * 0.4);
-float angularDist; 
-float headlightIntensity;  
 
-angularDist = length(gl_FragCoord.xy -center);
-if (angularDist <200.0)
+float headlightIntensity;  
+float lightRadius = (200.0 * 55.0/field_of_view);
+float angularDist = length(gl_FragCoord.xy -center);
+
+if (angularDist < lightRadius)
 	{
-	headlightIntensity = pow(cos(angularDist/200.0 * 3.1415/2.0),2.0);
+	headlightIntensity = pow(cos(angularDist/lightRadius * 3.1415/2.0),2.0);
 	headlightIntensity = headlightIntensity * min(1.0, 10000.0/(dist*dist));
+	//headlightIntensity*= clamp(1.0 + 0.15 * log(1000.0/(dist*dist)),0.0,1.0);
 	return  headlightIntensity * vec3 (0.5,0.5, 0.5);
 	}
 else return vec3 (0.0,0.0,0.0);
@@ -42,13 +44,14 @@ float y_offset = -(float(display_ysize) / fov_v * view_pitch_offset);
 vec2 center = vec2 (float(display_xsize) * 0.5 + x_offset, float(display_ysize) * 0.4 + y_offset);
 
 
-float angularDist; 
-float headlightIntensity;  
 
-angularDist = length(gl_FragCoord.xy -center);
-if (angularDist <200.0)
+float headlightIntensity;  
+float lightRadius = (200.0 * 55.0/field_of_view);
+float angularDist = length(gl_FragCoord.xy -center);
+
+if (angularDist < lightRadius)
 	{
-	headlightIntensity = pow(cos(angularDist/200.0 * 3.1415/2.0),2.0);
+	headlightIntensity = pow(cos(angularDist/lightRadius * 3.1415/2.0),2.0);
 	headlightIntensity = headlightIntensity * min(1.0, 10000.0/(dist*dist));
 	return  headlightIntensity * vec3 (0.5,0.5, 0.5);
 	}

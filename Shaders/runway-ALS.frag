@@ -31,12 +31,15 @@ uniform float fogstructure;
 uniform float snow_thickness_factor;
 uniform float cloud_self_shading;
 uniform float uvstretch;
+uniform float landing_light1_offset;
+uniform float landing_light2_offset;
 
 uniform int quality_level;
 uniform int tquality_level;
 uniform int cloud_shadow_flag;
 uniform int use_searchlight;
 uniform int use_landing_light;
+uniform int use_alt_landing_light;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -50,7 +53,7 @@ float shadow_func (in float x, in float y, in float noise, in float dist);
 float Noise2D(in vec2 coord, in float wavelength);
 float fog_func (in float targ, in float alt);
 vec3 searchlight(in float dist);
-vec3 landing_light(in float dist);
+vec3 landing_light(in float dist, in float offset);
 
 
 
@@ -252,7 +255,11 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
 	}
     if (use_landing_light == 1)
 	{
-	color.rgb += landing_light(dist);
+	color.rgb += landing_light(dist, landing_light1_offset);
+	}
+    if (use_alt_landing_light == 1)
+	{
+	color.rgb += landing_light(dist, landing_light2_offset);
 	}
 
     fragColor = color * texel + specular;

@@ -290,6 +290,9 @@ Started September 2000 by David Megginson, david@megginson.com
 	    		<als-secondary-lights>
 				<use-searchlight type="bool">false</use-searchlight>
 				<use-landing-light type="bool">false</use-landing-light>
+				<use-alt-landing-light type="bool">false</use-alt-landing-light>
+				<landing-light1-offset-deg type="float">0.0</landing-light1-offset-deg>
+				<landing-light2-offset-deg type="float">0.0</landing-light2-offset-deg>
 	   	 	</als-secondary-lights>
 		</rendering>
 		<model-hz type="int">120</model-hz>

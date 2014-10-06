@@ -123,6 +123,9 @@
     <view_fov><use>/sim/current-view/field-of-view</use></view_fov>
     <use_searchlight><use>/sim/rendering/als-secondary-lights/use-searchlight</use></use_searchlight>
     <use_landing_light><use>/sim/rendering/als-secondary-lights/use-landing-light</use></use_landing_light>
+    <use_alt_landing_light><use>/sim/rendering/als-secondary-lights/use-alt-landing-light</use></use_alt_landing_light>
+    <landing_light1_offset><use>/sim/rendering/als-secondary-lights/landing-light1-offset-deg</use></landing_light1_offset>
+    <landing_light2_offset><use>/sim/rendering/als-secondary-lights/landing-light2-offset-deg</use></landing_light2_offset>
     <quality_level><use>/sim/rendering/shaders/landmass</use></quality_level>
     <tquality_level><use>/sim/rendering/shaders/transition</use></tquality_level>
     <cloudpos1_x><use>/local-weather/cloud-shadows/cloudpos-x[0]</use></cloudpos1_x>
@@ -298,7 +301,7 @@
       </texture-unit>
       <program>
         <vertex-shader>Shaders/terrain-haze-ultra.vert</vertex-shader>
-        <fragment-shader>Shaders/terrain-haze-ultra.frag</fragment-shader>
+        <fragment-shader>Shaders/terrain-ALS-ultra.frag</fragment-shader>
         <fragment-shader>Shaders/noise.frag</fragment-shader>
         <fragment-shader>Shaders/cloud-shadowfunc.frag</fragment-shader>
         <fragment-shader>Shaders/hazes.frag</fragment-shader>
@@ -458,6 +461,16 @@
         <name>field_of_view</name>
         <type>float</type>
         <value><use>view_fov</use></value>
+      </uniform>
+      <uniform>
+        <name>landing_light1_offset</name>
+        <type>float</type>
+        <value><use>landing_light1_offset</use></value>
+      </uniform>
+      <uniform>
+        <name>landing_light2_offset</name>
+        <type>float</type>
+        <value><use>landing_light2_offset</use></value>
       </uniform>
       <uniform>
         <name>cloudpos1_x</name>
@@ -678,6 +691,11 @@
 	<name>use_landing_light</name>
 	<type>int</type>
 	<value>	<use>use_landing_light</use></value>
+      </uniform>
+      <uniform>
+	<name>use_alt_landing_light</name>
+	<type>int</type>
+	<value>	<use>use_alt_landing_light</use></value>
       </uniform>
       <uniform>
         <name>display_xsize</name>

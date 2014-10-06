@@ -52,6 +52,8 @@ uniform float dot_size;
 uniform float dust_resistance;
 uniform float WindE;
 uniform float WindN;
+uniform float landing_light1_offset;
+uniform float landing_light2_offset;
 uniform float osg_SimulationTime;
 
 uniform int quality_level;
@@ -61,6 +63,7 @@ uniform int cloud_shadow_flag;
 uniform int rock_strata;
 uniform int use_searchlight;
 uniform int use_landing_light;
+uniform int use_alt_landing_light;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -81,7 +84,7 @@ float rayleigh_in_func(in float dist, in float air_pollution, in float avisibili
 float alt_factor(in float eye_alt, in float vertex_alt);
 vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
 vec3 searchlight(in float dist);
-vec3 landing_light(in float dist);
+vec3 landing_light(in float dist, in float offset);
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
 {
@@ -466,7 +469,11 @@ if ((dist < 5000.0)&& (quality_level > 3) && (combined_wetness>0.0))
 	}
     if (use_landing_light == 1)
 	{
-	color.rgb += landing_light(dist);
+	color.rgb += landing_light(dist, landing_light1_offset);
+	}
+   if (use_alt_landing_light == 1)
+	{
+	color.rgb += landing_light(dist, landing_light2_offset);
 	}
 
 

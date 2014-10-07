@@ -128,6 +128,17 @@ html,body,#map {
       attribution : 'Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>.'
     });
 
+    var vfrMap = new L.TileLayer(
+          'http://vfrmap.com/20140918/tiles/vfrc/{z}/{y}/{x}.jpg',
+          {
+            maxZoom : 12,
+            minZoom : 3,
+            attribution : '(c) <a href="VFRMap.com">VFRMap.com</a>',
+            tms: true,
+            opacity: 0.5,
+            bounds: L.latLngBounds(L.latLng(16.0,-179.0), L.latLng(72.0,-60.0) ),
+          });
+
     var icaoGermany = new L.TileLayer('https://secais.dfs.de/static-maps/ICAO500-2014-DACH-Reprojected/tiles/{z}/{x}/{y}.png', {
       maxZoom : 15,
       attribution : 'Map data © <a href="http://www.dfs.de">DFS</a>'
@@ -519,6 +530,7 @@ html,body,#map {
     var overlays = {
       "NAVDB" : navdbLayer,
       "AI" : aiLayer,
+      "VFRMap.com" : vfrMap,
       //"ICAO VFR (Germany)" : icaoGermany,
       //"Lower Airspace (Germany)" : lowerGermany,
       "Precipitation" : owmPrecipitation,

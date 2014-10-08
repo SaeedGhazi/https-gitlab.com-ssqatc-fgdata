@@ -1,3 +1,5 @@
+// -*-C++-*-
+
 #version 120
  
 // Atmospheric scattering shader for flightgear
@@ -22,8 +24,20 @@ uniform float avisibility;
 uniform float scattering;
 uniform float cloud_self_shading;
 uniform float horizon_roughness;
+uniform float landing_light1_offset;
+uniform float landing_light2_offset;
+
+uniform int use_searchlight;
+uniform int use_landing_light;
+uniform int use_alt_landing_light;
 
 const float EarthRadius = 5800000.0;
+
+float Noise2D(in vec2 coord, in float wavelength);
+float fog_backscatter(in float avisibility);
+
+vec3 searchlight();
+vec3 landing_light(in float offset);
 
 float miePhase(in float cosTheta, in float g)
 {
@@ -42,40 +56,7 @@ float rayleighPhase(in float cosTheta)
   return 1.5 * (2.0 + 0.5*cosTheta*cosTheta);
 }
  
-float rand2D(in vec2 co){
-    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
-}
 
-float simple_interpolate(in float a, in float b, in float x)
-{
-return a + smoothstep(0.0,1.0,x) * (b-a);
-}
-
-float interpolatedNoise2D(in float x, in float y)
-{
-      float integer_x    = x - fract(x);
-      float fractional_x = x - integer_x;
-
-      float integer_y    = y - fract(y);
-      float fractional_y = y - integer_y;
-
-      float v1 = rand2D(vec2(integer_x, integer_y));
-      float v2 = rand2D(vec2(integer_x+1.0, integer_y));
-      float v3 = rand2D(vec2(integer_x, integer_y+1.0));
-      float v4 = rand2D(vec2(integer_x+1.0, integer_y +1.0));
-
-      float i1 = simple_interpolate(v1 , v2 , fractional_x);
-      float i2 = simple_interpolate(v3 , v4 , fractional_x);
-
-      return simple_interpolate(i1 , i2 , fractional_y);
-}
- 
-float Noise2D(in vec2 coord, in float wavelength)
-{
-return interpolatedNoise2D(coord.x/wavelength, coord.y/wavelength);
-
-}
- 
 void main()
 {
 
@@ -225,14 +206,34 @@ terrainHazeColor = clamp(terrainHazeColor,0.0,1.0);
 color = mix(color, terrainHazeColor ,smoothstep(hazeBlendAngle + ctterrain, 0.0+ctterrain, ct));
 
 
+// add the brightening of fog by lights
+
+    vec3 secondary_light = vec3 (0.0,0.0,0.0);
+
+    if (use_searchlight == 1)
+	{
+	secondary_light.rgb += searchlight();
+	}
+    if (use_landing_light == 1)
+	{
+	secondary_light += landing_light(landing_light1_offset);
+	}
+    if (use_alt_landing_light == 1)
+	{
+	secondary_light += landing_light(landing_light2_offset);
+	}
+
+
+
+
 // mix fog the skydome with the right amount of haze
 
 hColor = clamp(hColor,0.0,1.0);
-color = transmission * color  + (1.0-transmission) * eqColorFactor * hColor;
+//color = transmission * color  + (1.0-transmission) * eqColorFactor * hColor ;
+color = mix((eqColorFactor * hColor)+secondary_light * fog_backscatter(avisibility),color, transmission);
 
 
   gl_FragColor = vec4(color, 1.0);
   gl_FragDepth = 0.1;
-
 }
 

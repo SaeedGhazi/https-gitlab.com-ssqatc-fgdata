@@ -6,7 +6,19 @@ uniform float field_of_view;
 uniform float view_pitch_offset;
 uniform float view_heading_offset;
 
-vec3 searchlight(in float dist)
+float light_distance_fading(in float dist)
+{
+return min(1.0, 10000.0/(dist*dist));
+}
+
+float fog_backscatter(in float avisibility)
+{
+return 0.5* min(1.0,10000.0/(avisibility*avisibility));
+}
+
+
+
+vec3 searchlight()
 {
 
 vec2 center = vec2 (float(display_xsize) * 0.5, float(display_ysize) * 0.4);
@@ -18,14 +30,14 @@ float angularDist = length(gl_FragCoord.xy -center);
 if (angularDist < lightRadius)
 	{
 	headlightIntensity = pow(cos(angularDist/lightRadius * 1.57075),2.0);
-	headlightIntensity = headlightIntensity * min(1.0, 10000.0/(dist*dist));
+	//headlightIntensity = headlightIntensity * 
 	//headlightIntensity*= clamp(1.0 + 0.15 * log(1000.0/(dist*dist)),0.0,1.0);
 	return  headlightIntensity * vec3 (0.5,0.5, 0.5);
 	}
 else return vec3 (0.0,0.0,0.0);
 }
 
-vec3 landing_light(in float dist, in float offset)
+vec3 landing_light(in float offset)
 {
 
 float fov_h = field_of_view;
@@ -52,7 +64,7 @@ float angularDist = length(gl_FragCoord.xy -center);
 if (angularDist < lightRadius)
 	{
 	landingLightIntensity = pow(cos(angularDist/lightRadius * 1.57075),2.0);
-	landingLightIntensity *= min(1.0, 10000.0/(dist*dist));
+	//landingLightIntensity *= min(1.0, 10000.0/(dist*dist));
 	return  landingLightIntensity * vec3 (0.5,0.5, 0.5);
 	}
 else return vec3 (0.0,0.0,0.0);

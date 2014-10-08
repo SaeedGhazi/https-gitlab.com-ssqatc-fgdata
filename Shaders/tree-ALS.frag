@@ -22,9 +22,12 @@ uniform float hazeLayerAltitude;
 uniform float overcast;
 uniform float eye_alt;
 uniform float dust_cover_factor;
+uniform float landing_light1_offset;
+uniform float landing_light2_offset;
 
-
-
+uniform int use_searchlight;
+uniform int use_landing_light;
+uniform int use_alt_landing_light;
 uniform int quality_level;
 uniform int tquality_level;
 
@@ -35,6 +38,12 @@ const float terminator_width = 200000.0;
 float alt;
 float mie_angle;
 
+
+float light_distance_fading(in float dist);
+float fog_backscatter(in float avisibility);
+
+vec3 searchlight();
+vec3 landing_light(in float offset);
 
 float luminance(vec3 color)
 {
@@ -145,7 +154,28 @@ void main()
     	texel = mix(texel, dust_color, clamp(0.6 * dust_cover_factor ,0.0, 1.0) );
 	}
 
-   vec4 fragColor = vec4 (gl_Color.xyz,1.0) * texel;
+
+// ALS secondary light sources
+
+    vec3 secondary_light = vec3 (0.0,0.0,0.0);
+
+    if ((quality_level>5) && (tquality_level>5))
+    {
+    if (use_searchlight == 1)
+	{
+	secondary_light += searchlight();
+	}
+    if (use_landing_light == 1)
+	{
+	secondary_light += landing_light(landing_light1_offset);
+	}
+    if (use_alt_landing_light == 1)
+	{
+	secondary_light += landing_light(landing_light2_offset);
+	}
+    }
+
+   vec4 fragColor = vec4 (gl_Color.rgb +secondary_light * light_distance_fading(dist),1.0) * texel;
 
 
 
@@ -299,21 +329,15 @@ intensity = length(hazeColor);
 hazeColor = intensity * normalize(mix(hazeColor,  1.5* shadedFogColor, 1.0 -smoothstep(0.25, fade_out,eShade) )); 
 
 // change haze color to blue hue for strong fogging
-//intensity = length(hazeColor);
+
 hazeColor = intensity * normalize(mix(hazeColor,  shadedFogColor, (1.0-smoothstep(0.5,0.9,eqColorFactor)))); 
 
-
-// reduce haze intensity when looking at shaded surfaces, only in terminator region
-
-//float shadow = mix( min(1.0 + dot(normal,lightDir),1.0), 1.0, 1.0-smoothstep(0.1, 0.4, transmission));
-//hazeColor = mix(shadow * hazeColor, hazeColor, 0.3 + 0.7* smoothstep(250000.0, 400000.0, terminator));
 
 
 // determine the right mix of transmission and haze
 
-//fragColor.xyz = transmission * fragColor.xyz + (1.0-transmission)  * eqColorFactor * hazeColor * earthShade;
-
-fragColor.rgb = mix(eqColorFactor * hazeColor * eShade, fragColor.rgb,transmission);
+hazeColor = clamp(hazeColor,0.0,1.0);
+fragColor.rgb = mix(eqColorFactor * hazeColor * eShade + secondary_light * fog_backscatter(avisibility), fragColor.rgb,transmission);
 
 gl_FragColor = fragColor;
 

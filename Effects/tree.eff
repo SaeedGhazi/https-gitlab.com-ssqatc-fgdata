@@ -39,6 +39,16 @@
 		<forest_effects><use>/sim/rendering/shaders/forest</use></forest_effects>
 		<windE><use>/environment/sea/surface/wind-from-east-fps</use></windE>
 		<windN><use>/environment/sea/surface/wind-from-north-fps</use></windN>
+		<display_xsize><use>/sim/startup/xsize</use></display_xsize>
+  		<display_ysize><use>/sim/startup/ysize</use></display_ysize>
+    		<view_pitch_offset><use>/sim/current-view/pitch-offset-deg</use></view_pitch_offset>
+    		<view_heading_offset><use>/sim/current-view/heading-offset-deg</use></view_heading_offset>
+    		<view_fov><use>/sim/current-view/field-of-view</use></view_fov>
+    		<use_searchlight><use>/sim/rendering/als-secondary-lights/use-searchlight</use></use_searchlight>
+    		<use_landing_light><use>/sim/rendering/als-secondary-lights/use-landing-light</use></use_landing_light>
+    		<use_alt_landing_light><use>/sim/rendering/als-secondary-lights/use-alt-landing-light</use></use_alt_landing_light>
+    		<landing_light1_offset><use>/sim/rendering/als-secondary-lights/landing-light1-offset-deg</use></landing_light1_offset>
+    		<landing_light2_offset><use>/sim/rendering/als-secondary-lights/landing-light2-offset-deg</use></landing_light2_offset>
 		<cloudpos1_x><use>/local-weather/cloud-shadows/cloudpos-x[0]</use></cloudpos1_x>
 		<cloudpos1_y><use>/local-weather/cloud-shadows/cloudpos-y[0]</use></cloudpos1_y>
 		<cloudpos2_x><use>/local-weather/cloud-shadows/cloudpos-x[1]</use></cloudpos2_x>
@@ -119,10 +129,11 @@
 			</texture-unit>
 			<alpha-to-coverage>true</alpha-to-coverage>
       <program>
-        <vertex-shader>Shaders/tree-haze.vert</vertex-shader>
+        <vertex-shader>Shaders/tree-ALS.vert</vertex-shader>
         <vertex-shader>Shaders/noise.frag</vertex-shader>
 	<vertex-shader>Shaders/cloud-shadowfunc.frag</vertex-shader>
-        <fragment-shader>Shaders/tree-haze.frag</fragment-shader>
+        <fragment-shader>Shaders/tree-ALS.frag</fragment-shader>
+	<fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>
@@ -198,6 +209,36 @@
 	<name>WindN</name>
 	<type>float</type>
 	<value><use>windN</use></value>
+      </uniform>
+      <uniform>
+        <name>air_pollution</name>
+        <type>float</type>
+        <value><use>air_pollution</use></value>
+      </uniform>
+      <uniform>
+        <name>view_pitch_offset</name>
+        <type>float</type>
+        <value><use>view_pitch_offset</use></value>
+      </uniform>
+      <uniform>
+        <name>view_heading_offset</name>
+        <type>float</type>
+        <value><use>view_heading_offset</use></value>
+      </uniform>
+      <uniform>
+        <name>field_of_view</name>
+        <type>float</type>
+        <value><use>view_fov</use></value>
+      </uniform>
+      <uniform>
+        <name>landing_light1_offset</name>
+        <type>float</type>
+        <value><use>landing_light1_offset</use></value>
+      </uniform>
+      <uniform>
+        <name>landing_light2_offset</name>
+        <type>float</type>
+        <value><use>landing_light2_offset</use></value>
       </uniform>
       <uniform>
         <name>cloudpos1_x</name>
@@ -405,6 +446,31 @@
         <value><use>cloud_shadow_flag</use></value>
       </uniform>
       <uniform>
+	<name>use_searchlight</name>
+	<type>int</type>
+	<value>	<use>use_searchlight</use></value>
+      </uniform>
+      <uniform>
+	<name>use_landing_light</name>
+	<type>int</type>
+	<value>	<use>use_landing_light</use></value>
+      </uniform>
+      <uniform>
+	<name>use_alt_landing_light</name>
+	<type>int</type>
+	<value>	<use>use_alt_landing_light</use></value>
+      </uniform>
+      <uniform>
+        <name>display_xsize</name>
+        <type>int</type>
+        <value><use>display_xsize</use></value>
+      </uniform>
+      <uniform>
+        <name>display_ysize</name>
+        <type>int</type>
+        <value><use>display_ysize</use></value>
+      </uniform>  
+      <uniform>
         <name>texture</name>
         <type>sampler-2d</type>
         <value type="int">0</value>
@@ -478,10 +544,11 @@
 				<reference type="float">0.1</reference>
 			</alpha-test>
       <program>
-        <vertex-shader>Shaders/tree-haze.vert</vertex-shader>
+        <vertex-shader>Shaders/tree-ALS.vert</vertex-shader>
         <vertex-shader>Shaders/noise.frag</vertex-shader>
 	<vertex-shader>Shaders/cloud-shadowfunc.frag</vertex-shader>
-        <fragment-shader>Shaders/tree-haze.frag</fragment-shader>
+        <fragment-shader>Shaders/tree-ALS.frag</fragment-shader>
+	<fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>
@@ -557,6 +624,36 @@
 	<name>WindN</name>
 	<type>float</type>
 	<value><use>windN</use></value>
+      </uniform>
+      <uniform>
+        <name>air_pollution</name>
+        <type>float</type>
+        <value><use>air_pollution</use></value>
+      </uniform>
+      <uniform>
+        <name>view_pitch_offset</name>
+        <type>float</type>
+        <value><use>view_pitch_offset</use></value>
+      </uniform>
+      <uniform>
+        <name>view_heading_offset</name>
+        <type>float</type>
+        <value><use>view_heading_offset</use></value>
+      </uniform>
+      <uniform>
+        <name>field_of_view</name>
+        <type>float</type>
+        <value><use>view_fov</use></value>
+      </uniform>
+      <uniform>
+        <name>landing_light1_offset</name>
+        <type>float</type>
+        <value><use>landing_light1_offset</use></value>
+      </uniform>
+      <uniform>
+        <name>landing_light2_offset</name>
+        <type>float</type>
+        <value><use>landing_light2_offset</use></value>
       </uniform>
       <uniform>
         <name>cloudpos1_x</name>
@@ -763,6 +860,31 @@
         <type>int</type>
         <value><use>cloud_shadow_flag</use></value>
       </uniform>
+      <uniform>
+	<name>use_searchlight</name>
+	<type>int</type>
+	<value>	<use>use_searchlight</use></value>
+      </uniform>
+      <uniform>
+	<name>use_landing_light</name>
+	<type>int</type>
+	<value>	<use>use_landing_light</use></value>
+      </uniform>
+      <uniform>
+	<name>use_alt_landing_light</name>
+	<type>int</type>
+	<value>	<use>use_alt_landing_light</use></value>
+      </uniform>
+      <uniform>
+        <name>display_xsize</name>
+        <type>int</type>
+        <value><use>display_xsize</use></value>
+      </uniform>
+      <uniform>
+        <name>display_ysize</name>
+        <type>int</type>
+        <value><use>display_ysize</use></value>
+      </uniform>  
       <uniform>
         <name>texture</name>
         <type>sampler-2d</type>

@@ -52,8 +52,11 @@ float mie_angle;
 float shadow_func (in float x, in float y, in float noise, in float dist);
 float Noise2D(in vec2 coord, in float wavelength);
 float fog_func (in float targ, in float alt);
-vec3 searchlight(in float dist);
-vec3 landing_light(in float dist, in float offset);
+float light_distance_fading(in float dist);
+float fog_backscatter(in float avisibility);
+
+vec3 searchlight();
+vec3 landing_light(in float offset);
 
 
 
@@ -248,19 +251,22 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
     // saturated. Clamping the color before modulating by the texture
     // is closer to what the OpenGL fixed function pipeline does.
     color = clamp(color, 0.0, 1.0);
+    
+    vec3 secondary_light = vec3 (0.0,0.0,0.0);
 
     if (use_searchlight == 1)
 	{
-	color.rgb += searchlight(dist);
+	secondary_light.rgb += searchlight();
 	}
     if (use_landing_light == 1)
 	{
-	color.rgb += landing_light(dist, landing_light1_offset);
+	secondary_light += landing_light(landing_light1_offset);
 	}
     if (use_alt_landing_light == 1)
 	{
-	color.rgb += landing_light(dist, landing_light2_offset);
+	secondary_light += landing_light(landing_light2_offset);
 	}
+    color.rgb +=secondary_light * light_distance_fading(dist);
 
     fragColor = color * texel + specular;
 
@@ -418,11 +424,11 @@ if (intensity > 0.0) // this needs to be a condition, because otherwise hazeColo
 	float shadow = mix( min(1.0 + dot(n,lightDir),1.0), 1.0, 1.0-smoothstep(0.1, 0.4, transmission));
 	hazeColor = mix(shadow * hazeColor, hazeColor, 0.3 + 0.7* smoothstep(250000.0, 400000.0, terminator));
 	}
+hazeColor = clamp(hazeColor, 0.0, 1.0);
 
 
 
-
-fragColor.rgb = mix(eqColorFactor * hazeColor * eShade , fragColor.rgb,transmission);
+fragColor.rgb = mix((eqColorFactor * hazeColor * eShade)+secondary_light * fog_backscatter(avisibility), fragColor.rgb,transmission);
 
 
 gl_FragColor = fragColor;

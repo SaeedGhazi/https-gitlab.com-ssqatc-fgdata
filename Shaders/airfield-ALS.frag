@@ -58,9 +58,12 @@ float Noise2D(in vec2 coord, in float wavelength);
 float fog_func (in float targ, in float alt);
 float rayleigh_in_func(in float dist, in float air_pollution, in float avisibility, in float eye_alt, in float vertex_alt);
 float alt_factor(in float eye_alt, in float vertex_alt);
+float light_distance_fading(in float dist);
+float fog_backscatter(in float avisibility);
+
 vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
-vec3 searchlight(in float dist);
-vec3 landing_light(in float dist, in float offset);
+vec3 searchlight();
+vec3 landing_light(in float offset);
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
 {
@@ -270,20 +273,21 @@ if (quality_level > 3)
 
 
 
-    
+    vec3 secondary_light = vec3 (0.0,0.0,0.0);
 
     if (use_searchlight == 1)
 	{
-	color.rgb += searchlight(dist);
+	secondary_light += searchlight();
 	}
     if (use_landing_light == 1)
 	{
-	color.rgb += landing_light(dist, landing_light1_offset);
+	secondary_light += landing_light(landing_light1_offset);
 	}
     if (use_alt_landing_light == 1)
 	{
-	color.rgb += landing_light(dist, landing_light2_offset);
+	secondary_light += landing_light(landing_light2_offset);
 	}
+    color.rgb +=secondary_light * light_distance_fading(dist);
 
     fragColor = color * texel + specular;
 
@@ -464,7 +468,8 @@ if ((quality_level>5) && (tquality_level>5))
 	fragColor.rgb = mix(fragColor.rgb, rayleighColor,rayleighStrength);
 	}
 
-fragColor.rgb = mix(eqColorFactor * hazeColor * eShade, fragColor.rgb,transmission);
+
+fragColor.rgb = mix((eqColorFactor * hazeColor * eShade)+secondary_light * fog_backscatter(avisibility), fragColor.rgb,transmission);
 
 
 gl_FragColor = fragColor;

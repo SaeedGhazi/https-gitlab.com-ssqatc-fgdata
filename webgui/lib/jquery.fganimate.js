@@ -27,6 +27,15 @@
   $.fn.fgAnimateSVG = function(props) {
     if (props) {
       if (props.type == "transform" && props.transforms) {
+
+        // remember predefined transforms
+        if( typeof(this.originalTransform) === 'undefined' ) {
+          this.originalTransform = this.attr("transform");
+          if( typeof(this.originalTransform) === 'undefined' ) {
+            this.originalTransform = "";
+          }
+        }
+
         var a = "";
         props.transforms.forEach(function(transform) {
           switch (transform.type) {
@@ -43,7 +52,10 @@
               break;
           }
         });
-        this.attr("transform", a);
+        if( this.originalTransform != "" ) {
+          a = a.concat(' ').concat(this.originalTransform);
+        }
+        this.attr("transform", a );
       
       } else if( props.type == "text" ) {
         var tspans = this.children("tspan");

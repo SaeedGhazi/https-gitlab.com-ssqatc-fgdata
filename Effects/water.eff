@@ -371,10 +371,11 @@
 			</texture-unit>
 
 			<program>
-				<vertex-shader>Shaders/water_lightfield.vert</vertex-shader>
-				<fragment-shader>Shaders/water_lightfield.frag</fragment-shader>
+				<vertex-shader>Shaders/water-ALS.vert</vertex-shader>
+				<fragment-shader>Shaders/water-ALS-high.frag</fragment-shader>
 				<fragment-shader>Shaders/cloud-shadowfunc.frag</fragment-shader>
 				<fragment-shader>Shaders/hazes.frag</fragment-shader>
+				<fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
 			</program>
 			<!--<uniform>
 				<name>water_reflection</name>
@@ -569,6 +570,31 @@
         			<name>ice_cover</name>
         			<type>float</type>
         			<value><use>ice_cover</use></value>
+      			</uniform>
+      			<uniform>
+        			<name>view_pitch_offset</name>
+        			<type>float</type>
+        			<value><use>view_pitch_offset</use></value>
+      			</uniform>
+      			<uniform>
+      			  	<name>view_heading_offset</name>
+       				<type>float</type>
+       			 	<value><use>view_heading_offset</use></value>
+     			 </uniform>
+      			<uniform>
+        			<name>field_of_view</name>
+        			<type>float</type>
+        			<value><use>view_fov</use></value>
+      			</uniform>
+      			<uniform>
+        			<name>landing_light1_offset</name>
+        			<type>float</type>
+        			<value><use>landing_light1_offset</use></value>
+      			</uniform>
+      			<uniform>
+        			<name>landing_light2_offset</name>
+        			<type>float</type>
+        			<value><use>landing_light2_offset</use></value>
       			</uniform>
 			<uniform>
        				<name>cloudpos1_x</name>
@@ -797,6 +823,31 @@
 					<use>sea_b</use>
 				</value>
 			</uniform>
+   			<uniform>
+				<name>use_searchlight</name>
+				<type>int</type>
+				<value>	<use>use_searchlight</use></value>
+    			 </uniform>
+     			 <uniform>
+				<name>use_landing_light</name>
+				<type>int</type>
+				<value>	<use>use_landing_light</use></value>
+     			 </uniform>
+     			 <uniform>
+				<name>use_alt_landing_light</name>
+				<type>int</type>
+				<value>	<use>use_alt_landing_light</use></value>
+     			 </uniform>
+      			<uniform>
+       			 	<name>display_xsize</name>
+       			 	<type>int</type>
+        			<value><use>display_xsize</use></value>
+      			</uniform>
+      			<uniform>
+       				 <name>display_ysize</name>
+       				 <type>int</type>
+       				 <value><use>display_ysize</use></value>
+     			 </uniform>  
 			<uniform>
 				<name>quality_level</name>
 				<type>int</type>
@@ -992,8 +1043,8 @@
 			</texture-unit>
 
 			<program>
-				<vertex-shader>Shaders/water_lightfield.vert</vertex-shader>
-				<fragment-shader>Shaders/water_lightfield_lr.frag</fragment-shader>
+				<vertex-shader>Shaders/water-ALS.vert</vertex-shader>
+				<fragment-shader>Shaders/water-ALS-base.frag</fragment-shader>
 			</program>
 			<!--<uniform>
 				<name>water_reflection</name>

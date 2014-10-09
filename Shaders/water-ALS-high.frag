@@ -60,26 +60,36 @@ uniform float sea_r;
 uniform float sea_g;
 uniform float sea_b;
 uniform float air_pollution;
+uniform float landing_light1_offset;
+uniform float landing_light2_offset;
 
 uniform int quality_level;
 uniform int ocean_flag;
 uniform int cloud_shadow_flag;
+uniform int use_searchlight;
+uniform int use_landing_light;
+uniform int use_alt_landing_light;
 
 vec3 specular_light;
 
-//uniform int wquality_level;
 
 const float terminator_width = 200000.0;
 const float EarthRadius = 5800000.0;
-////fog "include" /////
-//uniform int fogType;
 
-//vec3 fog_Func(vec3 color, int type);
+////included functions /////
+
+
 float shadow_func (in float x, in float y, in float noise, in float dist);
 float fog_func (in float targ, in float alt);
 float rayleigh_in_func(in float dist, in float air_pollution, in float avisibility, in float eye_alt, in float vertex_alt);
 float alt_factor(in float eye_alt, in float vertex_alt);
+float light_distance_fading(in float dist);
+float fog_backscatter(in float avisibility);
+
 vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
+vec3 searchlight();
+vec3 landing_light(in float offset);
+
 //////////////////////
 
 /////// functions /////////
@@ -527,6 +537,8 @@ void main(void)
 	
 	vec4 finalColor;
 	
+	// compute cloud shadow effect
+
 	float shadowValue;
 	if (cloud_shadow_flag == 1) 
 		{
@@ -535,8 +547,29 @@ void main(void)
 		refl = refl * (0.7 + 0.3 *shadowValue);
 		}
 
+	// compute secondary light effect
 
-	finalColor = refl + specular * smoothstep(0.3, 0.6, ground_scattering);
+
+ 	vec3 secondary_light = vec3 (0.0,0.0,0.0);
+
+	if (quality_level >5)
+	{
+    	if (use_searchlight == 1)
+		{
+		secondary_light += searchlight();
+		}
+    	if (use_landing_light == 1)
+		{
+		secondary_light += landing_light(landing_light1_offset);
+		}
+    	if (use_alt_landing_light == 1)
+		{
+		secondary_light += landing_light(landing_light2_offset);
+		}
+
+	//specular.rgb+= secondary_light;
+
+	finalColor = refl + specular * smoothstep(0.3, 0.6, ground_scattering) + vec4 (secondary_light, 0.0) * light_distance_fading(dist) * 2.0 * pow(max(0.0,dot(E,N)), water_shininess);
 
 	//add foam
 	vec4 foam_texel = texture2D(sea_foam, vec2(waterTex2 * tscale) * 25.0);
@@ -571,8 +604,12 @@ void main(void)
         finalColor  = mix(finalColor, ice_texel, mix_factor * ice_texel.a);
 	finalColor.a = 1.0;
 
+ 
+	}
+//vec4 (secondary_light * light_distance_fading(dist), 0.0) * max(0.0,pow(dot(E,N)), water_shininess);
 
-	finalColor *= ambient_light;
+
+	finalColor *= vec4 (ambient_light.rgb + secondary_light * light_distance_fading(dist), ambient_light.a);
 
 
 // Rayleigh color shift due to out-scattering
@@ -588,7 +625,8 @@ float delta_z = hazeLayerAltitude - eye_alt;
 
 
 
-if (dist > 40.0)
+//if (dist > 40.0)
+if (dist > 0.04 * min(visibility,avisibility)) 
 {
 
 
@@ -650,21 +688,6 @@ transmission_arg = (dist-distance_in_layer)/avisibility;
 
 float eqColorFactor;
 
-/*
-if (visibility < avisibility)
-	{
-	transmission_arg = transmission_arg + (distance_in_layer/visibility);
-	// this combines the Weber-Fechner intensity
-	eqColorFactor = 1.0 - 0.1 * delta_zv/visibility - (1.0 -effective_scattering);
-
-	}
-else 
-	{
-	transmission_arg = transmission_arg + (distance_in_layer/avisibility);
-	// this combines the Weber-Fechner intensity
-	eqColorFactor = 1.0 - 0.1 * delta_zv/avisibility - (1.0 -effective_scattering);
-	}
-*/
 if (visibility < avisibility)
 	{
 	if (quality_level > 3)
@@ -747,7 +770,7 @@ if (intensity > 0.0) // this needs to be a condition, because otherwise hazeColo
 	float rayleighStrength = rayleigh_in_func(dist, air_pollution, avisibility/max(lightIntensity,0.05), eye_alt, eye_alt + relPos.z);
 	finalColor.rgb = mix(finalColor.rgb, rayleighColor, rayleighStrength);
 
-	finalColor.rgb = mix(eqColorFactor * hazeColor * eShade, finalColor.rgb,transmission);
+	finalColor.rgb = mix(eqColorFactor * hazeColor * eShade +secondary_light * fog_backscatter(avisibility), finalColor.rgb,transmission);
 
 
 	}

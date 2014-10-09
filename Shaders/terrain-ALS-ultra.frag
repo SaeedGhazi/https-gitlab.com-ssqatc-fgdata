@@ -19,9 +19,6 @@ uniform sampler2D dot_texture;
 uniform sampler2D gradient_texture;
 
 
-
-//varying float yprime_alt;
-//varying float mie_angle;
 varying float steepness;
 
 

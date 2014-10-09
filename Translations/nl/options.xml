@@ -212,7 +212,7 @@
 	<httpd-desc>Activeer de http server op dit poortnummer</httpd-desc>   <!-- English: "Enable http server on the specified port" -->
 	<proxy-desc>Kies een proxy server (en poort) om te gebruiken. De gebruikersnaam en het wachtwoord zijn optioneel en dienen al MD5 gecodeerd te zijn. Deze optie is alleen nuttig in samenwerking met de live-weer optie.</proxy-desc>   <!-- English: "Specify which proxy server (and port) to use. The username and password are optional and should be MD5 encoded already. This option is only useful when used in conjunction with the real-weather-fetch option." -->
 	<telnet-desc>Activeer de telnet server op dit poortnummer</telnet-desc>   <!-- English: "Enable telnet server on the specified port" -->
-	<jpg-httpd-desc>Activeer de schermafdruk server op dit poortnummer</jpg-httpd-desc>   <!-- English: "Enable screen shot http server on the specified port" -->
+	<jpg-httpd-desc>Activeer de schermafdruk server op dit poortnummer (replaced by --httpd)</jpg-httpd-desc>   <!-- English: "Enable screen shot http server on the specified port" -->
 	<disable-terrasync-desc>Schakel het automatisch downloaden/updaten van scenery uit</disable-terrasync-desc>   <!-- English: "Disable automatic scenery downloads/updates" -->
 	<enable-terrasync-desc>Schakel het automatisch downloaden/updaten van scenery in</enable-terrasync-desc>   <!-- English: "Enable automatic scenery downloads/updates" -->
 	<terrasync-dir-desc>Kies een doelmap voor scenery downloads</terrasync-dir-desc>   <!-- English: "Set target directory for scenery downloads" -->

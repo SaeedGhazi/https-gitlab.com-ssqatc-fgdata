@@ -205,7 +205,7 @@
 	<httpd-desc>Activa el servidor http en el puerto especificado</httpd-desc>   <!-- English: "Enable http server on the specified port" -->
 	<proxy-desc>Especifica qué servidor proxy (y puerto) usar. El usuario y contraseña son opcionales y deberían de estar ya codificados con MD5. Esta opcion solo es útil cuando es usada conjuntamente con la opcion real-weather-fetch.</proxy-desc>   <!-- English: "Specify which proxy server (and port) to use. The username and password are optional and should be MD5 encoded already. This option is only useful when used in conjunction with the real-weather-fetch option." -->
 	<telnet-desc>Activa el servidor telnet en el puerto especificado</telnet-desc>   <!-- English: "Enable telnet server on the specified port" -->
-	<jpg-httpd-desc>Activa screen shot en el servidor http en el puerto especificado</jpg-httpd-desc>   <!-- English: "Enable screen shot http server on the specified port" -->
+	<jpg-httpd-desc>Activa screen shot en el servidor http en el puerto especificado (replaced by --httpd)</jpg-httpd-desc>   <!-- English: "Enable screen shot http server on the specified port" -->
 	<disable-terrasync-desc>Desactiva la descarga/actualización automática de escenarios</disable-terrasync-desc>   <!-- English: "Disable automatic scenery downloads/updates" -->
 	<enable-terrasync-desc>Activa la descarga/actualización automática de escenarios</enable-terrasync-desc>   <!-- English: "Enable automatic scenery downloads/updates" -->
 	<terrasync-dir-desc>Especifica el directorio para descargas de escenarios</terrasync-dir-desc>   <!-- English: "Set target directory for scenery downloads" -->

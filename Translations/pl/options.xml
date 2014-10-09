@@ -216,7 +216,7 @@
 	<httpd-desc>Utworz serwer HTTP na podanym porcie</httpd-desc>   <!-- English: "Enable http server on the specified port" -->
 <!-- 	<proxy-desc>???</proxy-desc> -->   <!-- English: "Specify which proxy server (and port) to use. The username and password are optional and should be MD5 encoded already. This option is only useful when used in conjunction with the real-weather-fetch option." -->
 	<telnet-desc>Utworz serwer telnet na podanym porcie</telnet-desc>   <!-- English: "Enable telnet server on the specified port" -->
-	<jpg-httpd-desc>Utworz serwer HTTP zrzutow ekranu na podanym porcie</jpg-httpd-desc>   <!-- English: "Enable screen shot http server on the specified port" -->
+	<jpg-httpd-desc>Utworz serwer HTTP zrzutow ekranu na podanym porcie (replaced by --httpd)</jpg-httpd-desc>   <!-- English: "Enable screen shot http server on the specified port" -->
 <!-- 	<disable-terrasync-desc>???</disable-terrasync-desc> -->   <!-- English: "Disable automatic scenery downloads/updates" -->
 <!-- 	<enable-terrasync-desc>???</enable-terrasync-desc> -->   <!-- English: "Enable automatic scenery downloads/updates" -->
 <!-- 	<terrasync-dir-desc>???</terrasync-dir-desc> -->   <!-- English: "Set target directory for scenery downloads" -->

@@ -84,6 +84,7 @@
     		<moonlight><use>/environment/moonlight</use></moonlight>
    		<quality_level><use>/sim/rendering/shaders/landmass</use></quality_level>
     		<tquality_level><use>/sim/rendering/shaders/transition</use></tquality_level>
+		<raise_vertex type="bool">false</raise_vertex>
 		<!-- 		END fog include -->
 	</parameters>
 	<generate>
@@ -527,6 +528,11 @@
         <value><use>display_ysize</use></value>
       </uniform>
       <uniform>
+	<name>raise_vertex</name>
+	<type>bool</type>
+	<value>	<use>raise_vertex</use></value>
+      </uniform>
+      <uniform>
         <name>texture</name>
         <type>sampler-2d</type>
         <value type="int">0</value>
@@ -542,10 +548,14 @@
         <value>2</value>
         <!-- AMBIENT_AND_DIFFUSE -->
       </uniform>
-      <depth>
+      <!--<depth>
         <function>lequal</function>
-    <!--    <write-mask type="bool">false</write-mask> -->
-      </depth>
+      <write-mask type="bool">false</write-mask> 
+      </depth>-->
+      <alpha-test>
+        <comparison>greater</comparison>
+        <reference type="float">0.4</reference>
+      </alpha-test>
     </pass>
   </technique>
 

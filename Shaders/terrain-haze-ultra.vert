@@ -29,9 +29,10 @@ varying vec2 grad_dir;
 varying float mie_angle;
 varying float steepness;
 
-
-
 uniform int colorMode;
+
+uniform bool raise_vertex;
+
 uniform float hazeLayerAltitude;
 uniform float terminator;
 uniform float terrain_alt; 
@@ -87,6 +88,8 @@ void main()
    steepness = dot(normalize(gl_Normal), vec3 (0.0, 0.0, 1.0));
    grad_dir = normalize(gl_Normal.xy);
 
+   if (raise_vertex) gl_Vertex.z+=0.1;
+
 // this code is copied from default.vert
 
     //vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
@@ -127,21 +130,6 @@ void main()
     // altitude of the vertex in question, somehow zero leads to artefacts, so ensure it is at least 100m
     vertex_alt = max(gl_Vertex.z,100.0);
     scattering = ground_scattering + (1.0 - ground_scattering) * smoothstep(hazeLayerAltitude -100.0, hazeLayerAltitude + 100.0, vertex_alt); 
-
-
-// early culling of vertices which can't be seen due to ground haze despite being in aloft visibility range
-
-//float delta_z = hazeLayerAltitude - eye_alt;
-//if (((dist * (relPos.z - delta_z)/relPos.z >  visibility ) && (relPos.z < 0.0) && (delta_z < 0.0) && (dist > 30000.0)))
-if (0==1)
-	{
-	gl_Position = vec4(0.0, 0.0, -1000.0, 1.0); // move outside of view frustrum, gets culled before reaching fragment shader
-   	earthShade = 1.0;
-    	mie_angle = 1.0;
-	yprime_alt = 0.0;
-	}
-else
-	{
 
 
     // branch dependent on daytime
@@ -284,7 +272,7 @@ float shade_depth =  1.0 * smoothstep (0.6,0.95,ground_scattering) * (1.0-smooth
     gl_BackColor.rgb = constant_term.rgb; //gl_BackColor.a = 0.0;
     gl_FrontColor.a = mie_angle;
     gl_BackColor.a = mie_angle;
-}
+
 	
 }
 

@@ -176,23 +176,23 @@ float noise_2000m = Noise2D(rawPos.xy, 2000.0);
 	}
 
 
-const vec4 dust_color  = vec4 (0.76, 0.71, 0.56, 1.0);
-const vec4 lichen_color = vec4 (0.17, 0.20, 0.06, 1.0);;
+const vec3 dust_color  = vec3 (0.76, 0.71, 0.56);
+const vec3 lichen_color = vec3 (0.17, 0.20, 0.06);
 //float snow_alpha;
 
 if (quality_level > 3)
 	{
 
 	// mix vegetation
-	texel = mix(texel, lichen_color, 0.4 * lichen_cover_factor + 0.8 * lichen_cover_factor * 0.5 * (noise_10m + (1.0 - noise_5m))  );
+	texel.rgb = mix(texel.rgb, lichen_color, 0.4 * lichen_cover_factor + 0.8 * lichen_cover_factor * 0.5 * (noise_10m + (1.0 - noise_5m))  );
 	// mix dust
-	texel = mix(texel, dust_color, clamp(0.5 * dust_cover_factor + 3.0 * dust_cover_factor * (((noise_1500m - 0.5) * 0.125)+0.125 ),0.0, 1.0) );
+	texel.rgb = mix(texel.rgb, dust_color, clamp(0.5 * dust_cover_factor + 3.0 * dust_cover_factor * (((noise_1500m - 0.5) * 0.125)+0.125 ),0.0, 1.0) );
 	
     	// mix snow
 	if (relPos.z + eye_alt +500.0 > snowlevel)
 		{
    		snow_alpha = smoothstep(0.75, 0.85, abs(steepness));
-		texel = mix(texel, snow_texel, snow_texel.a* smoothstep(snowlevel, snowlevel+200.0,  snow_alpha * (relPos.z + eye_alt)+ (noise_2000m + 0.1 * noise_10m -0.55) *400.0));
+		texel.rgb = mix(texel.rgb, snow_texel.rgb, snow_texel.a* smoothstep(snowlevel, snowlevel+200.0,  snow_alpha * (relPos.z + eye_alt)+ (noise_2000m + 0.1 * noise_10m -0.55) *400.0));
 		}
 	}
 

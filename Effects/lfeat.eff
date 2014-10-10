@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
   <name>Effects/lfeat</name>
-  <inherits-from>Effects/terrain-default</inherits-from>
+  <inherits-from>Effects/runway</inherits-from>
   <parameters>
 	<material>
 	  <ambient type="vec4d">
@@ -19,8 +19,15 @@
 	  <shininess>1.2</shininess>
 	</material>
     <transparent>true</transparent>
+    <raise_vertex type="bool">true</raise_vertex>
   </parameters>
   <technique n="1">
+    <predicate>
+     <equal>
+       <property>/sim/rendering/shaders/skydome</property>
+       <value type="bool" >false</value>
+     </equal>
+    </predicate>
     <pass>
 		<lighting>true</lighting>
 		<depth>

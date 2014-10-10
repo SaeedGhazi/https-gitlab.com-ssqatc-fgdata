@@ -93,6 +93,7 @@
     <dot_size>1.0</dot_size>
     <dust_resistance>1.0</dust_resistance>
     <rock_strata>0</rock_strata>
+    <raise_vertex type="bool">false</raise_vertex>
     <visibility><use>/environment/ground-visibility-m</use></visibility>
     <avisibility><use>/environment/visibility-m</use></avisibility>
     <lthickness><use>/environment/ground-haze-thickness-m</use></lthickness>
@@ -731,6 +732,11 @@
         <name>rock_strata</name>
         <type>int</type>
         <value><use>rock_strata</use></value>
+      </uniform>
+      <uniform>
+	<name>raise_vertex</name>
+	<type>bool</type>
+	<value>	<use>raise_vertex</use></value>
       </uniform>
       <uniform>
         <name>texture</name>

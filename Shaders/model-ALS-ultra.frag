@@ -38,6 +38,9 @@ uniform int refl_enabled;
 uniform int refl_map;
 uniform int grain_texture_enabled;
 uniform int cloud_shadow_flag;
+uniform int use_searchlight;
+uniform int use_landing_light;
+uniform int use_alt_landing_light;
 
 uniform float amb_correction;
 uniform float dirt_b_factor;
@@ -54,7 +57,6 @@ uniform float refl_noise;
 uniform float refl_rainbow;
 uniform float grain_magnification;
 
-
 uniform float avisibility;
 uniform float cloud_self_shading;
 uniform float eye_alt;
@@ -66,6 +68,10 @@ uniform float scattering;
 uniform float terminator;
 uniform float terrain_alt;
 uniform float visibility;
+uniform float air_pollution;
+
+uniform float landing_light1_offset;
+uniform float landing_light2_offset;
 
 // constants needed by the light and fog computations ###################################################
 
@@ -82,9 +88,17 @@ uniform vec3 dirt_g_color;
 uniform vec3 dirt_b_color;
 
 float shadow_func (in float x, in float y, in float noise, in float dist);
+float fog_func (in float targ, in float altitude);
+float rayleigh_in_func(in float dist, in float air_pollution, in float avisibility, in float eye_alt, in float vertex_alt);
+float alt_factor(in float eye_alt, in float vertex_alt);
+float light_distance_fading(in float dist);
+float fog_backscatter(in float avisibility);
 
-// uniform mat4 osg_ViewMatrixInverse;
-// uniform mat4 osg_ViewMatrix;
+vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
+vec3 searchlight();
+vec3 landing_light(in float offset);
+
+
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
     {
@@ -93,25 +107,8 @@ float light_func (in float x, in float a, in float b, in float c, in float d, in
     return e / pow((1.0 + a * exp(-b * (x-c)) ),(1.0/d));
     }
 
-float fog_func (in float targ, in float altitude)
-    {
-    float fade_mix;
 
-    targ = 1.25 * targ * smoothstep(0.04,0.06,targ); // need to sync with the distance to which objects are drawn unfogged
-
-    if (altitude < 30000.0)
-        {return exp(-targ - targ * targ * targ * targ);}
-    else if (altitude < 50000.0)
-        {
-        fade_mix = (altitude - 30000.0)/20000.0;
-        return fade_mix * exp(-targ*targ - pow(targ,4.0)) + (1.0 - fade_mix) * exp(-targ - pow(targ,4.0));	
-        }
-    else 
-        {
-        return exp(- targ * targ - pow(targ,4.0));
-        }
-
-    }
+   
 
 
 void main (void)
@@ -265,15 +262,32 @@ void main (void)
         {pf1 = pow(nDotHV1, 0.5*gl_FrontMaterial.shininess);}
   
 
-    vec3 relPos;		
+    vec3 relPos = (gl_ModelViewMatrixInverse * vec4 (vertVec,0.0)).xyz;		
     if (cloud_shadow_flag == 1) 
 	{
-	relPos = (gl_ModelViewMatrixInverse * vec4 (vertVec,0.0)).xyz;
 	light_diffuse = light_diffuse * shadow_func(relPos.x, relPos.y, 1.0, dist);
 	}
+ 
+   vec3 secondary_light = vec3 (0.0,0.0,0.0);
+
+    if (use_searchlight == 1)
+	{
+	secondary_light += searchlight();
+	}
+    if (use_landing_light == 1)
+	{
+	secondary_light += landing_light(landing_light1_offset);
+	}
+    if (use_alt_landing_light == 1)
+	{
+	secondary_light += landing_light(landing_light2_offset);
+	}
+
 
     vec4 Diffuse  = light_diffuse * nDotVP;
+    Diffuse.rgb += secondary_light * light_distance_fading(dist);
     vec4 Specular = gl_FrontMaterial.specular * light_diffuse * pf + gl_FrontMaterial.specular * light_ambient * pf1;
+    Specular+=  gl_FrontMaterial.specular * pow(max(0.0,-dot(N,normalize(vertVec))),gl_FrontMaterial.shininess) * vec4(secondary_light,1.0);
 
     vec4 color = gl_Color + Diffuse * gl_FrontMaterial.diffuse;
     color = clamp( color, 0.0, 1.0 );
@@ -481,7 +495,19 @@ void main (void)
 
     /// END fog color
     fragColor = clamp(fragColor, 0.0, 1.0);
+
+    ///BEGIN Rayleigh fog ///
+
+	float rShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt-340000.0) + 0.1;
+	float lightIntensity = length(light_diffuse.rgb)/1.73 * rShade;
+	vec3 rayleighColor = vec3 (0.17, 0.52, 0.87) * lightIntensity;
+	float rayleighStrength = rayleigh_in_func(dist, air_pollution, avisibility/max(lightIntensity,0.05), eye_alt, eye_alt + relPos.z);
+	fragColor.rgb = mix(fragColor.rgb, rayleighColor,rayleighStrength);
+
+    /// END Rayleigh fog
+
+
     //fragColor = fragColor * smoothstep(-0.05, 0.05, ct);
-    fragColor.rgb = mix(eqColorFactor * hazeColor * fog_earthShade, fragColor.rgb,transmission);
+    fragColor.rgb = mix(eqColorFactor * hazeColor * fog_earthShade +secondary_light * fog_backscatter(avisibility), fragColor.rgb,transmission);
     gl_FragColor = fragColor;
     }

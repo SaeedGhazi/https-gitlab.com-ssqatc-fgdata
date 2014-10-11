@@ -25,6 +25,17 @@
  		<cloud_self_shading><use>/environment/cloud-self-shading</use></cloud_self_shading>
     		<moonlight><use>/environment/moonlight</use></moonlight>
 		<fogtype><use>/sim/rendering/shaders/skydome</use></fogtype>
+   		<air_pollution><use>/environment/air-pollution-norm</use></air_pollution>
+		<display_xsize><use>/sim/startup/xsize</use></display_xsize>
+   		<display_ysize><use>/sim/startup/ysize</use></display_ysize>
+    		<view_pitch_offset><use>/sim/current-view/pitch-offset-deg</use></view_pitch_offset>
+    		<view_heading_offset><use>/sim/current-view/heading-offset-deg</use></view_heading_offset>
+    		<view_fov><use>/sim/current-view/field-of-view</use></view_fov>
+    		<use_searchlight><use>/sim/rendering/als-secondary-lights/use-searchlight</use></use_searchlight>
+    		<use_landing_light><use>/sim/rendering/als-secondary-lights/use-landing-light</use></use_landing_light>
+    		<use_alt_landing_light><use>/sim/rendering/als-secondary-lights/use-alt-landing-light</use></use_alt_landing_light>
+    		<landing_light1_offset><use>/sim/rendering/als-secondary-lights/landing-light1-offset-deg</use></landing_light1_offset>
+    <landing_light2_offset><use>/sim/rendering/als-secondary-lights/landing-light2-offset-deg</use></landing_light2_offset>
 		<!-- 		END fog include -->
 	</parameters>
 

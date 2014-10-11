@@ -183,8 +183,10 @@
 	  </texture-unit>
       <program>
         <vertex-shader n="1">Shaders/building-ubershader.vert</vertex-shader>
-        <fragment-shader n="1">Shaders/ubershader-lightfield.frag</fragment-shader>
+        <fragment-shader n="1">Shaders/model-ALS-ultra.frag</fragment-shader>
 	<fragment-shader n="2">Shaders/cloud-shadowfunc.frag</fragment-shader>
+	<fragment-shader n="3">Shaders/hazes.frag</fragment-shader>
+	<fragment-shader n="4">Shaders/secondary_lights.frag</fragment-shader>
       </program>
 	</pass>
   </technique>

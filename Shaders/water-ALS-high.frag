@@ -64,6 +64,7 @@ uniform float landing_light1_offset;
 uniform float landing_light2_offset;
 
 uniform int quality_level;
+uniform int tquality_level;
 uniform int ocean_flag;
 uniform int cloud_shadow_flag;
 uniform int use_searchlight;
@@ -552,7 +553,7 @@ void main(void)
 
  	vec3 secondary_light = vec3 (0.0,0.0,0.0);
 
-	if (quality_level >5)
+	if ((quality_level >5)&&(tquality_level > 5))
 	{
     	if (use_searchlight == 1)
 		{
@@ -566,10 +567,10 @@ void main(void)
 		{
 		secondary_light += landing_light(landing_light2_offset);
 		}
-
-	//specular.rgb+= secondary_light;
+	}
 
 	finalColor = refl + specular * smoothstep(0.3, 0.6, ground_scattering) + vec4 (secondary_light, 0.0) * light_distance_fading(dist) * 2.0 * pow(max(0.0,dot(E,N)), water_shininess);
+
 
 	//add foam
 	vec4 foam_texel = texture2D(sea_foam, vec2(waterTex2 * tscale) * 25.0);
@@ -605,18 +606,24 @@ void main(void)
 	finalColor.a = 1.0;
 
  
-	}
-//vec4 (secondary_light * light_distance_fading(dist), 0.0) * max(0.0,pow(dot(E,N)), water_shininess);
+	
+
 
 
 	finalColor *= vec4 (ambient_light.rgb + secondary_light * light_distance_fading(dist), ambient_light.a);
 
 
 // Rayleigh color shift due to out-scattering
-    float rayleigh_length = 0.4 * avisibility * (2.5 - 1.9 * air_pollution)/alt_factor(eye_alt, eye_alt+relPos.z);
-    float outscatter = 1.0-exp(-dist/rayleigh_length);
-    finalColor.rgb = rayleigh_out_shift(finalColor.rgb,outscatter);
 
+	float rayleigh_length;
+	float outscatter;
+
+    if ((quality_level > 5) && (tquality_level > 5))
+	{    
+	rayleigh_length = 0.4 * avisibility * (2.5 - 1.9 * air_pollution)/alt_factor(eye_alt, eye_alt+relPos.z);
+    	outscatter = 1.0-exp(-dist/rayleigh_length);
+    	finalColor.rgb = rayleigh_out_shift(finalColor.rgb,outscatter);
+	}
 
 // here comes the terrain haze model
 
@@ -768,7 +775,8 @@ if (intensity > 0.0) // this needs to be a condition, because otherwise hazeColo
 	float lightIntensity = length(gl_Color.rgb)/1.73 * rShade;
 	vec3 rayleighColor = vec3 (0.17, 0.52, 0.87) * lightIntensity;
 	float rayleighStrength = rayleigh_in_func(dist, air_pollution, avisibility/max(lightIntensity,0.05), eye_alt, eye_alt + relPos.z);
-	finalColor.rgb = mix(finalColor.rgb, rayleighColor, rayleighStrength);
+	if ((quality_level > 5) && (tquality_level > 5))
+		{finalColor.rgb = mix(finalColor.rgb, rayleighColor, rayleighStrength);}
 
 	finalColor.rgb = mix(eqColorFactor * hazeColor * eShade +secondary_light * fog_backscatter(avisibility), finalColor.rgb,transmission);
 

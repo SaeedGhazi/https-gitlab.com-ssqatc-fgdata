@@ -239,6 +239,10 @@ else // the faster, full-day version without lightfields
 
    specular_light = specular_light * scattering;
 
+   float shade_depth =  1.0 * smoothstep (0.6,0.95,ground_scattering) * (1.0-smoothstep(0.1,0.5,overcast)) * smoothstep(0.4,1.5,earthShade);
+
+   specular_light.rgb *= (1.0 + 1.2 * shade_depth);
+
     yprime_alt = -sqrt(2.0 * EarthRadius * hazeLayerAltitude);
 
 }

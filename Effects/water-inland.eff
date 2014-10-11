@@ -826,6 +826,11 @@
 				<type>int</type>
 				<value><use>quality_level</use></value>
 			</uniform>
+  			<uniform>
+        			<name>tquality_level</name>
+        			<type>int</type>
+        			<value><use>tquality_level</use></value>
+      			</uniform>
 			<uniform>
 				<name>ocean_flag</name>
 				<type>int</type>

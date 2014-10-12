@@ -148,8 +148,8 @@
 			</vertex-program-two-side>
 			<program>
 
-				<vertex-shader>Shaders/flutter-lightfield.vert</vertex-shader>
-				<fragment-shader>Shaders/terrain-haze.frag</fragment-shader>
+				<vertex-shader>Shaders/flutter-ALS.vert</vertex-shader>
+				<fragment-shader>Shaders/terrain-ALS-base.frag</fragment-shader>
 			</program>
 			<!--<uniform>
 				<name>texture</name>

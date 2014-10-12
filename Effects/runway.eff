@@ -160,7 +160,7 @@
         <internal-format><use>texture[4]/internal-format</use></internal-format>
       </texture-unit>
       <program>
-        <vertex-shader>Shaders/terrain-haze-ultra.vert</vertex-shader>
+        <vertex-shader>Shaders/terrain-ALS-ultra.vert</vertex-shader>
         <fragment-shader>Shaders/runway-ALS.frag</fragment-shader>        
 	<fragment-shader>Shaders/cloud-shadowfunc.frag</fragment-shader>
 	<fragment-shader>Shaders/noise.frag</fragment-shader>

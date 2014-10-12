@@ -301,7 +301,7 @@
         <internal-format><use>texture[11]/internal-format</use></internal-format>
       </texture-unit>
       <program>
-        <vertex-shader>Shaders/terrain-haze-ultra.vert</vertex-shader>
+        <vertex-shader>Shaders/terrain-ALS-ultra.vert</vertex-shader>
         <fragment-shader>Shaders/terrain-ALS-ultra.frag</fragment-shader>
         <fragment-shader>Shaders/noise.frag</fragment-shader>
         <fragment-shader>Shaders/cloud-shadowfunc.frag</fragment-shader>
@@ -883,8 +883,8 @@
         <internal-format><use>texture[11]/internal-format</use></internal-format>
       </texture-unit>
       <program>
-        <vertex-shader>Shaders/terrain-haze-detailed.vert</vertex-shader>
-        <fragment-shader>Shaders/terrain-haze-detailed.frag</fragment-shader>
+        <vertex-shader>Shaders/terrain-ALS-detailed.vert</vertex-shader>
+        <fragment-shader>Shaders/terrain-ALS-detailed.frag</fragment-shader>
         <fragment-shader>Shaders/noise.frag</fragment-shader>
       </program>
       <uniform>
@@ -1111,8 +1111,8 @@
         <internal-format><use>texture[0]/internal-format</use></internal-format>
       </texture-unit>
       <program>
-        <vertex-shader>Shaders/terrain-haze.vert</vertex-shader>
-        <fragment-shader>Shaders/terrain-haze.frag</fragment-shader>
+        <vertex-shader>Shaders/generic-ALS-base.vert</vertex-shader>
+        <fragment-shader>Shaders/terrain-ALS-base.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>

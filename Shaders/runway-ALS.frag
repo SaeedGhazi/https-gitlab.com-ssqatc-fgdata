@@ -33,6 +33,7 @@ uniform float cloud_self_shading;
 uniform float uvstretch;
 uniform float landing_light1_offset;
 uniform float landing_light2_offset;
+uniform float air_pollution;
 
 uniform int quality_level;
 uniform int tquality_level;
@@ -54,6 +55,7 @@ float Noise2D(in vec2 coord, in float wavelength);
 float fog_func (in float targ, in float alt);
 float light_distance_fading(in float dist);
 float fog_backscatter(in float avisibility);
+float rayleigh_in_func(in float dist, in float air_pollution, in float avisibility, in float eye_alt, in float vertex_alt);
 
 vec3 searchlight();
 vec3 landing_light(in float offset);
@@ -426,7 +428,17 @@ if (intensity > 0.0) // this needs to be a condition, because otherwise hazeColo
 	}
 hazeColor = clamp(hazeColor, 0.0, 1.0);
 
+// blue Rayleigh scattering with distance
 
+float rShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt-340000.0) + 0.1;
+float lightIntensity = length(diffuse_term.rgb)/1.73 * rShade;
+vec3 rayleighColor = vec3 (0.17, 0.52, 0.87) * lightIntensity;
+float rayleighStrength = rayleigh_in_func(dist, air_pollution, avisibility/max(lightIntensity,0.05), eye_alt, eye_alt + relPos.z);
+
+if ((quality_level>5) && (tquality_level>5))
+	{
+	fragColor.rgb = mix(fragColor.rgb, rayleighColor,rayleighStrength);
+	}
 
 fragColor.rgb = mix((eqColorFactor * hazeColor * eShade)+secondary_light * fog_backscatter(avisibility), fragColor.rgb,transmission);
 
@@ -437,6 +449,19 @@ gl_FragColor = fragColor;
 }
 else // if dist < threshold no fogging at all 
 {
+
+// blue Rayleigh scattering with distance
+
+float rShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt-340000.0) + 0.1;
+float lightIntensity = length(diffuse_term.rgb)/1.73 * rShade;
+vec3 rayleighColor = vec3 (0.17, 0.52, 0.87) * lightIntensity;
+float rayleighStrength = rayleigh_in_func(dist, air_pollution, avisibility/max(lightIntensity,0.05), eye_alt, eye_alt + relPos.z);
+
+if ((quality_level>5) && (tquality_level>5))
+	{
+	fragColor.rgb = mix(fragColor.rgb, rayleighColor,rayleighStrength);
+	}
+
 gl_FragColor = fragColor;
 }
 

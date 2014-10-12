@@ -285,7 +285,7 @@
       </texture-unit>
       <program>
         <vertex-shader>Shaders/building-haze.vert</vertex-shader>
-        <fragment-shader>Shaders/terrain-haze.frag</fragment-shader>
+        <fragment-shader>Shaders/terrain-ALS-base.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>

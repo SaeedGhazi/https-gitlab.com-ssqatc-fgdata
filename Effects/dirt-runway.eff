@@ -116,7 +116,7 @@
         <internal-format><use>texture[11]/internal-format</use></internal-format>
       </texture-unit>
       <program>
-        <vertex-shader>Shaders/terrain-haze-ultra.vert</vertex-shader>
+        <vertex-shader>Shaders/terrain-ALS-ultra.vert</vertex-shader>
         <fragment-shader>Shaders/drunway-lightfield.frag</fragment-shader>
       </program>
       <uniform>

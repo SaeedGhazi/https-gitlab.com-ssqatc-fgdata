@@ -116,8 +116,12 @@
         <internal-format><use>texture[11]/internal-format</use></internal-format>
       </texture-unit>
       <program>
-        <vertex-shader>Shaders/terrain-ALS-ultra.vert</vertex-shader>
-        <fragment-shader>Shaders/drunway-lightfield.frag</fragment-shader>
+        <vertex-shader n="1">Shaders/terrain-ALS-ultra.vert</vertex-shader>
+        <fragment-shader n="1">Shaders/drunway-ALS.frag</fragment-shader>        
+	<fragment-shader n="2">Shaders/cloud-shadowfunc.frag</fragment-shader>
+	<fragment-shader n="3">Shaders/noise.frag</fragment-shader>
+	<fragment-shader n="4">Shaders/hazes.frag</fragment-shader>
+	<fragment-shader n="5">Shaders/secondary_lights.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>
@@ -205,6 +209,241 @@
         <value><use>moonlight</use></value>
       </uniform>
       <uniform>
+        <name>air_pollution</name>
+        <type>float</type>
+        <value><use>air_pollution</use></value>
+      </uniform>
+      <uniform>
+        <name>view_pitch_offset</name>
+        <type>float</type>
+        <value><use>view_pitch_offset</use></value>
+      </uniform>
+      <uniform>
+        <name>view_heading_offset</name>
+        <type>float</type>
+        <value><use>view_heading_offset</use></value>
+      </uniform>
+      <uniform>
+        <name>field_of_view</name>
+        <type>float</type>
+        <value><use>view_fov</use></value>
+      </uniform>
+      <uniform>
+        <name>landing_light1_offset</name>
+        <type>float</type>
+        <value><use>landing_light1_offset</use></value>
+      </uniform>
+      <uniform>
+        <name>landing_light2_offset</name>
+        <type>float</type>
+        <value><use>landing_light2_offset</use></value>
+      </uniform>
+     <uniform>
+        <name>cloudpos1_x</name>
+        <type>float</type>
+        <value><use>cloudpos1_x</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos1_y</name>
+        <type>float</type>
+        <value><use>cloudpos1_y</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos2_x</name>
+        <type>float</type>
+        <value><use>cloudpos2_x</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos2_y</name>
+        <type>float</type>
+        <value><use>cloudpos2_y</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos3_x</name>
+        <type>float</type>
+        <value><use>cloudpos3_x</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos3_y</name>
+        <type>float</type>
+        <value><use>cloudpos3_y</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos4_x</name>
+        <type>float</type>
+        <value><use>cloudpos4_x</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos4_y</name>
+        <type>float</type>
+        <value><use>cloudpos4_y</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos5_x</name>
+        <type>float</type>
+        <value><use>cloudpos5_x</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos5_y</name>
+        <type>float</type>
+        <value><use>cloudpos5_y</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos6_x</name>
+        <type>float</type>
+        <value><use>cloudpos6_x</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos6_y</name>
+        <type>float</type>
+        <value><use>cloudpos6_y</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos7_x</name>
+        <type>float</type>
+        <value><use>cloudpos7_x</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos7_y</name>
+        <type>float</type>
+        <value><use>cloudpos7_y</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos8_x</name>
+        <type>float</type>
+        <value><use>cloudpos8_x</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos8_y</name>
+        <type>float</type>
+        <value><use>cloudpos8_y</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos9_x</name>
+        <type>float</type>
+        <value><use>cloudpos9_x</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos9_y</name>
+        <type>float</type>
+        <value><use>cloudpos9_y</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos10_x</name>
+        <type>float</type>
+        <value><use>cloudpos10_x</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos10_y</name>
+        <type>float</type>
+        <value><use>cloudpos10_y</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos11_x</name>
+        <type>float</type>
+        <value><use>cloudpos11_x</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos11_y</name>
+        <type>float</type>
+        <value><use>cloudpos11_y</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos12_x</name>
+        <type>float</type>
+        <value><use>cloudpos12_x</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos12_y</name>
+        <type>float</type>
+        <value><use>cloudpos12_y</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos13_x</name>
+        <type>float</type>
+        <value><use>cloudpos13_x</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos13_y</name>
+        <type>float</type>
+        <value><use>cloudpos13_y</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos14_x</name>
+        <type>float</type>
+        <value><use>cloudpos14_x</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos14_y</name>
+        <type>float</type>
+        <value><use>cloudpos14_y</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos15_x</name>
+        <type>float</type>
+        <value><use>cloudpos15_x</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos15_y</name>
+        <type>float</type>
+        <value><use>cloudpos15_y</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos16_x</name>
+        <type>float</type>
+        <value><use>cloudpos16_x</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos16_y</name>
+        <type>float</type>
+        <value><use>cloudpos16_y</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos17_x</name>
+        <type>float</type>
+        <value><use>cloudpos17_x</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos17_y</name>
+        <type>float</type>
+        <value><use>cloudpos17_y</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos18_x</name>
+        <type>float</type>
+        <value><use>cloudpos18_x</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos18_y</name>
+        <type>float</type>
+        <value><use>cloudpos18_y</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos19_x</name>
+        <type>float</type>
+        <value><use>cloudpos19_x</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos19_y</name>
+        <type>float</type>
+        <value><use>cloudpos19_y</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos20_x</name>
+        <type>float</type>
+        <value><use>cloudpos20_x</use></value>
+      </uniform>
+      <uniform>
+        <name>cloudpos20_y</name>
+        <type>float</type>
+        <value><use>cloudpos20_y</use></value>
+      </uniform>
+      <uniform>
+        <name>cloud_shadow_flag</name>
+        <type>int</type>
+        <value><use>cloud_shadow_flag</use></value>
+      </uniform>
+      <uniform>
         <name>quality_level</name>
         <type>int</type>
         <value><use>quality_level</use></value>
@@ -213,6 +452,36 @@
         <name>tquality_level</name>
         <type>int</type>
         <value><use>tquality_level</use></value>
+      </uniform>
+      <uniform>
+	<name>use_searchlight</name>
+	<type>int</type>
+	<value>	<use>use_searchlight</use></value>
+      </uniform>
+      <uniform>
+	<name>use_landing_light</name>
+	<type>int</type>
+	<value>	<use>use_landing_light</use></value>
+      </uniform>
+      <uniform>
+	<name>use_alt_landing_light</name>
+	<type>int</type>
+	<value>	<use>use_alt_landing_light</use></value>
+      </uniform>
+      <uniform>
+        <name>display_xsize</name>
+        <type>int</type>
+        <value><use>display_xsize</use></value>
+      </uniform>
+      <uniform>
+        <name>display_ysize</name>
+        <type>int</type>
+        <value><use>display_ysize</use></value>
+      </uniform>
+      <uniform>
+	<name>raise_vertex</name>
+	<type>bool</type>
+	<value>	<use>raise_vertex</use></value>
       </uniform>
       <uniform>
         <name>texture</name>

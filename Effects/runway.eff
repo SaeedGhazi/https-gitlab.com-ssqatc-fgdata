@@ -160,12 +160,12 @@
         <internal-format><use>texture[4]/internal-format</use></internal-format>
       </texture-unit>
       <program>
-        <vertex-shader>Shaders/terrain-ALS-ultra.vert</vertex-shader>
-        <fragment-shader>Shaders/runway-ALS.frag</fragment-shader>        
-	<fragment-shader>Shaders/cloud-shadowfunc.frag</fragment-shader>
-	<fragment-shader>Shaders/noise.frag</fragment-shader>
-	<fragment-shader>Shaders/hazes.frag</fragment-shader>
-	<fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
+        <vertex-shader n="1">Shaders/terrain-ALS-ultra.vert</vertex-shader>
+        <fragment-shader n="1">Shaders/runway-ALS.frag</fragment-shader>        
+	<fragment-shader n="2">Shaders/cloud-shadowfunc.frag</fragment-shader>
+	<fragment-shader n="3">Shaders/noise.frag</fragment-shader>
+	<fragment-shader n="4">Shaders/hazes.frag</fragment-shader>
+	<fragment-shader n="5">Shaders/secondary_lights.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>

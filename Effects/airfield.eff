@@ -491,6 +491,11 @@
         <value><use>display_ysize</use></value>
       </uniform>
       <uniform>
+	<name>raise_vertex</name>
+	<type>bool</type>
+	<value>	<use>raise_vertex</use></value>
+      </uniform>
+      <uniform>
         <name>texture</name>
         <type>sampler-2d</type>
         <value type="int">0</value>

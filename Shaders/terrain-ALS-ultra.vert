@@ -88,12 +88,19 @@ void main()
    steepness = dot(normalize(gl_Normal), vec3 (0.0, 0.0, 1.0));
    grad_dir = normalize(gl_Normal.xy);
 
-   if (raise_vertex) gl_Vertex.z+=0.1;
+   vec4 pos = gl_Vertex;
+   if (raise_vertex) 
+	{
+	pos.z+=0.1;
+   	gl_Position =  gl_ModelViewProjectionMatrix * pos;
+	}
+   else gl_Position = ftransform();
+
 
 // this code is copied from default.vert
 
     //vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
-    gl_Position = ftransform();
+    //gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
     normal = gl_NormalMatrix * gl_Normal;
     //nvec = (gl_NormalMatrix * gl_Normal).xy;

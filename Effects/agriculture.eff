@@ -79,6 +79,7 @@
     <uv_yoffset>0.0</uv_yoffset>
     <intrinsic_wetness>0.0</intrinsic_wetness>
     <dust_resistance>1.0</dust_resistance>
+    <raise_vertex type="bool">false</raise_vertex>
     <visibility><use>/environment/ground-visibility-m</use></visibility>
     <avisibility><use>/environment/visibility-m</use></avisibility>
     <lthickness><use>/environment/ground-haze-thickness-m</use></lthickness>
@@ -238,9 +239,11 @@
       </texture-unit>
       <program>
         <vertex-shader>Shaders/terrain-ALS-ultra.vert</vertex-shader>
-        <fragment-shader>Shaders/agriculture.frag</fragment-shader>
+        <fragment-shader>Shaders/agriculture-ALS.frag</fragment-shader>
         <fragment-shader>Shaders/cloud-shadowfunc.frag</fragment-shader>
-		<fragment-shader>Shaders/noise.frag</fragment-shader>
+	<fragment-shader>Shaders/noise.frag</fragment-shader>
+	<fragment-shader>Shaders/hazes.frag</fragment-shader>
+	<fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
       </program>
 	  <uniform>
         <name>grain_strength</name>
@@ -386,6 +389,36 @@
         <name>season</name>
         <type>float</type>
         <value><use>season</use></value>
+      </uniform>
+      <uniform>
+        <name>air_pollution</name>
+        <type>float</type>
+        <value><use>air_pollution</use></value>
+      </uniform>
+      <uniform>
+        <name>view_pitch_offset</name>
+        <type>float</type>
+        <value><use>view_pitch_offset</use></value>
+      </uniform>
+      <uniform>
+        <name>view_heading_offset</name>
+        <type>float</type>
+        <value><use>view_heading_offset</use></value>
+      </uniform>
+      <uniform>
+        <name>field_of_view</name>
+        <type>float</type>
+        <value><use>view_fov</use></value>
+      </uniform>
+      <uniform>
+        <name>landing_light1_offset</name>
+        <type>float</type>
+        <value><use>landing_light1_offset</use></value>
+      </uniform>
+      <uniform>
+        <name>landing_light2_offset</name>
+        <type>float</type>
+        <value><use>landing_light2_offset</use></value>
       </uniform>
       <uniform>
         <name>cloudpos1_x</name>
@@ -622,6 +655,36 @@
         <type>int</type>
         <value><use>rotation_flag</use></value>
       </uniform>
+      <uniform>
+	<name>use_searchlight</name>
+	<type>int</type>
+	<value>	<use>use_searchlight</use></value>
+      </uniform>
+      <uniform>
+	<name>use_landing_light</name>
+	<type>int</type>
+	<value>	<use>use_landing_light</use></value>
+      </uniform>
+      <uniform>
+	<name>use_alt_landing_light</name>
+	<type>int</type>
+	<value>	<use>use_alt_landing_light</use></value>
+      </uniform>
+      <uniform>
+        <name>display_xsize</name>
+        <type>int</type>
+        <value><use>display_xsize</use></value>
+      </uniform>
+      <uniform>
+        <name>display_ysize</name>
+        <type>int</type>
+        <value><use>display_ysize</use></value>
+      </uniform>
+      <uniform>
+	<name>raise_vertex</name>
+	<type>bool</type>
+	<value>	<use>raise_vertex</use></value>
+      </uniform>  
       <uniform>
         <name>texture</name>
         <type>sampler-2d</type>

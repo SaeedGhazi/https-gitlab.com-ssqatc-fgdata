@@ -307,11 +307,15 @@ FGFS.TranslateTransform = function(arg) {
 FGFS.Animation = function(arg) {
   this.element = arg.element;
   this.type = arg.type;
+  this._element = null;
 
   this.__proto__.update = function(svg) {
-    var t = typeof (this._element);
-    if (typeof (this._element) == 'undefined') {
+    if (null == this._element) {
       this._element = $(svg).find(this.element);
+      if( 0 == this._element.length ) {
+        this._element = null;
+        return;
+      }
     }
 
     this._element.fgAnimateSVG(this.makeAnimation());

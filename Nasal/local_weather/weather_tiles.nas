@@ -2438,14 +2438,15 @@ for (var i = n; i <n_layers; i=i+1)
 	var cover = 8 - 2 * layers[i].getNode("coverage-type").getValue();
 
 	if (cover == -2) {break;} # a clear cover layer indicates we are done
-
+	
+	if (snow_norm > 0.0) {rain_norm = - snow_norm;} # use rain channel to encode snow
 	if (n > 0) { rain_norm = 0.0; snow_norm = 0.0;} # rain and snow fall only from the lowest layer
 
 	if (altitude < 9000.0) # draw Nimbostratus or Stratus models
 		{	
 		if (cover == 8) 
 			{
-			if ((altitude < 2000) or (rain_norm > 0.3))
+			if ((altitude < 2000) or (rain_norm > 0.3) or (snow_norm > 0.3))
 				{create_8_8_nimbus_rain(blat, blon, altitude+metar_alt_offset, alpha, rain_norm);}
 			else 
 				{create_8_8_stratus_rain(blat, blon, altitude+metar_alt_offset, alpha, rain_norm);}
@@ -2458,11 +2459,11 @@ for (var i = n; i <n_layers; i=i+1)
 				}
 			else
 				{
-				if ((rain_norm > 0.1) and (altitude < 5000.0))
+				if (((rain_norm > 0.1) or (snow_norm > 0.1)) and (altitude < 5000.0))
 					{	
 					create_6_8_nimbus_rain(blat, blon, altitude+metar_alt_offset, alpha, rain_norm);
 					}
-				else if (rain_norm > 0.0)
+				else if ((rain_norm > 0.0) or (snow_norm > 0.0))
 					{
 					create_6_8_stratus_rain(blat, blon, altitude+metar_alt_offset, alpha, rain_norm);
 					}
@@ -2904,10 +2905,20 @@ if (rain > 0.1)
 	local_weather.create_effect_volume(3, lat, lon, 20000.0, 20000.0, alpha, 0.0, alt+900.0, 500.0 + (1.0 - 0.5 * rain) * 5500.0, 0.5 * rain , -1, -1, -1,0 ,0.95);
 	local_weather.create_effect_volume(3, lat , lon, 16000.0, 16000.0, alpha, 0.0, alt - 300.0, 500.0 + (1.0-rain) * 5500.0, rain, -1, -1, -1,0 ,0.9);
 	}
-else
+else if (rain > 0.0)
 	{
 	local_weather.create_effect_volume(3, lat, lon, 20000.0, 20000.0, alpha, alt, alt+900.0, 2000.0, -1 , -1, -1, -1,0 ,-1);
 	local_weather.create_effect_volume(3, lat, lon, 20000.0, 20000.0, alpha, 0.0, alt, -1, rain , -1, -1, -1,0 ,0.9);
+	}
+else if (rain > -0.1) # we have snowfall
+	{
+	local_weather.create_effect_volume(3, lat, lon, 20000.0, 20000.0, alpha, alt, alt+900.0, 2000.0, -1 , -1, -1, -1,0 ,-1);
+	local_weather.create_effect_volume(3, lat, lon, 20000.0, 20000.0, alpha, 0.0, alt, -1, -1 , -rain, -1, -1,0 ,0.9);
+	}
+else
+	{
+	local_weather.create_effect_volume(3, lat, lon, 20000.0, 20000.0, alpha, 0.0, alt+900.0, 500.0 + (1.0 + 0.5 * rain) * 5500.0, -1 , -0.5 * rain, -1, -1,0 ,0.95);
+	local_weather.create_effect_volume(3, lat , lon, 16000.0, 16000.0, alpha, 0.0, alt - 300.0, 500.0 + (1.0+rain) * 5500.0, -1, -rain, -1, -1,0 ,0.9);
 	}
 
 }
@@ -2931,10 +2942,20 @@ if (rain > 0.1)
 	local_weather.create_effect_volume(3, lat, lon, 20000.0, 20000.0, alpha, 0.0, alt, 500.0 + (1.0 - 0.5 * rain) * 5500.0, 0.5 * rain , -1, -1, -1,0 ,-1);
 	local_weather.create_effect_volume(3, lat , lon, 16000.0, 16000.0, alpha, 0.0, alt - 300.0, 500.0 + (1.0-rain) * 5500.0, rain, -1, -1, -1,0 ,0.9);
 	}
-else
+else if (rain >0.0)
 	{
 	local_weather.create_effect_volume(3, lat, lon, 20000.0, 20000.0, alpha, 0.0, alt, -1, rain , -1, -1, -1,0 ,0.9);
 	}
+else if (rain > -0.1) # snow is encoded as negative number here
+	{
+	local_weather.create_effect_volume(3, lat, lon, 20000.0, 20000.0, alpha, 0.0, alt, -1, -1 , -rain, -1, -1,0 ,0.9);
+	}
+else
+	{
+	local_weather.create_effect_volume(3, lat, lon, 20000.0, 20000.0, alpha, 0.0, alt, 500.0 + (1.0 + 0.5 * rain) * 5500.0, -1 , -0.5*rain, -1, -1,0 ,-1);
+	local_weather.create_effect_volume(3, lat , lon, 16000.0, 16000.0, alpha, 0.0, alt - 300.0, 500.0 + (1.0+rain) * 5500.0, -1, -rain, -1, -1,0 ,0.9);
+	}
+
 }
 
 
@@ -2982,11 +3003,23 @@ for (var i = 0; i < 3; i = i + 1)
 		local_weather.create_effect_volume(2, lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), 10000.0, 6000.0, beta, 0.0, alt+900, 500.0 + (1.0-0.5*rain) * 5500.0, 0.5 * rain, -1, -1, -1,0,0.95 );
 		local_weather.create_effect_volume(2, lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), 9000.0, 5000.0, beta, 0.0, alt-300.0, 500.0 + (1.0-rain) * 5500.0, rain, -1, -1, -1,0,0.8);
 		}
-	else
+	else if (rain >0.0)
 		{
 		local_weather.create_effect_volume(2, lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), 10000.0, 6000.0, beta, 0.0, alt, -1, rain, -1, -1, -1,0, 0.8 );
 		local_weather.create_effect_volume(2, lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), 10000.0, 6000.0, beta, alt-1500.0, alt+900.0, 2000.0, -1, -1, -1, -1,0, 0.8 );
 		}
+	else if (rain > -0.1)
+		{
+		local_weather.create_effect_volume(2, lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), 10000.0, 6000.0, beta, 0.0, alt, -1, -1, -rain, -1, -1,0, 0.8 );
+		local_weather.create_effect_volume(2, lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), 10000.0, 6000.0, beta, alt-1500.0, alt+900.0, 2000.0, -1, -1, -1, -1,0, 0.8 );
+		}
+	else
+		{
+		local_weather.create_effect_volume(2, lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), 10000.0, 6000.0, beta, 0.0, alt+900, 500.0 + (1.0+0.5*rain) * 5500.0, -1, -0.5*rain, -1, -1,0,0.95 );
+		local_weather.create_effect_volume(2, lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), 9000.0, 5000.0, beta, 0.0, alt-300.0, 500.0 + (1.0+rain) * 5500.0, -1, -rain, -1, -1,0,0.8);
+
+		}
+
 	}
 
 
@@ -3014,10 +3047,20 @@ for (var i = 0; i < 3; i = i + 1)
 		local_weather.create_effect_volume(2, lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), 10000.0, 6000.0, beta, 0.0, alt, 500.0 + (1.0-0.5*rain) * 5500.0, 0.5 * rain, -1, -1, -1,0,0.95 );
 		local_weather.create_effect_volume(2, lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), 9000.0, 5000.0, beta, 0.0, alt-300.0, 500.0 + (1.0-rain) * 5500.0, rain, -1, -1, -1,0,0.8);
 		}
-	else
+	else if (rain > 0.0)
 		{
 		local_weather.create_effect_volume(2, lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), 10000.0, 6000.0, beta, 0.0, alt, -1, rain, -1, -1, -1,0, 0.8 );
 		}
+	else if (rain > -0.1)
+		{
+		local_weather.create_effect_volume(2, lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), 10000.0, 6000.0, beta, 0.0, alt, -1, -1, -rain, -1, -1,0, 0.8 );
+		}
+	else
+		{
+		local_weather.create_effect_volume(2, lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), 10000.0, 6000.0, beta, 0.0, alt, 500.0 + (1.0+0.5*rain) * 5500.0, -1, -0.5*rain, -1, -1,0,0.95 );
+		local_weather.create_effect_volume(2, lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), 9000.0, 5000.0, beta, 0.0, alt-300.0, 500.0 + (1.0+rain) * 5500.0, -1, rain, -1, -1,0,0.8);
+		}
+
 	}
 
 

@@ -54,10 +54,10 @@ float r = length(coord);
 
 if (pixelSize<1.3) {return vec4 (1.0,1.0,1.0,1.0) * 0.08;}
 
-float angle = noise * 6.28;
+float angle = noise * 6.2832;
 float sinphi = dot(vec2 (sin(angle),cos(angle)), normalize(coord));
 
-float ray = clamp(pow(sin((sinphi-3.0) * (sinphi-3.0)),10.0),0.0,1.0);
+float ray = clamp(pow(sin(mod((sinphi-3.0) * (sinphi-3.0),6.2832)),10.0),0.0,1.0);
 
 float fogEffect =  (1.0-smoothstep(0.4,0.8,transmission));
 

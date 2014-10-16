@@ -73,8 +73,8 @@
         <wrap-t><use>texture[0]/wrap-t</use></wrap-t>
       </texture-unit>
       <program>
-        <vertex-shader>Shaders/surface-light-lightfield.vert</vertex-shader>
-        <fragment-shader>Shaders/surface-light-lightfield.frag</fragment-shader>
+        <vertex-shader>Shaders/surface-light-ALS.vert</vertex-shader>
+        <fragment-shader>Shaders/surface-light-ALS.frag</fragment-shader>
 	<fragment-shader>Shaders/noise.frag</fragment-shader>
       </program>
       <uniform>

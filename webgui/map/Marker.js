@@ -20,17 +20,21 @@ L.RotatedMarker = L.Marker.extend({
 
   initialize: function(latlng,options) {
     L.Marker.prototype.initialize(latlng,options);
+    if( options )
+      L.Util.setOptions(this,options);
   },
 
 });
 
-L.rotatedMarker = function(pos) {
-  return new L.RotatedMarker(pos);
+L.rotatedMarker = function(pos,options) {
+  return new L.RotatedMarker(pos,options);
 }
 
 L.AircraftMarker = L.RotatedMarker.extend({
   options : {
     angle : 0,
+    clickable: false,
+    keyboard: false,
     getProperties:function() {
       return {};
     },
@@ -52,6 +56,8 @@ L.AircraftMarker = L.RotatedMarker.extend({
   onAdd: function( map ) {
     L.RotatedMarker.prototype.onAdd.call(this,map);
     this.popup = L.popup( {
+      autoPan: false,
+      keepInView: false,
       closeButton: false,
       className:   'aircraft-marker-popup',
       closeOnClick: false,
@@ -84,6 +90,8 @@ L.AircraftMarker = L.RotatedMarker.extend({
     this.popup.setContent(popup);
 
     this.options.angle = props.heading;
+//    this.options.title = props.callsign + ' Heading ' + props.heading + '°';
+//    this.options.alt = this.options.title;
     this.setLatLng( props.position );
     var that = this;
     this.timeoutid = setTimeout( function() { that.timeout(); }, this.options.updateInterval );

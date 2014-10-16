@@ -19,6 +19,7 @@
 <script src="../lib/fgfs.js" type="text/javascript"></script>
 <script src="FollowControl.js" type="text/javascript"></script>
 <script src="Marker.js" type="text/javascript"></script>
+<script src="NavdbLayer.js" type="text/javascript"></script>
 
 <title>FlightGear - Map</title>
 </head>
@@ -91,7 +92,7 @@ html,body {
     var propertyMirror = new FGFS.PropertyMirror([
       [ "latitude",    "/position/latitude-deg" ],
       [ "longitude",   "/position/longitude-deg" ],
-      [ "altitude",    "/position/altitude-deg" ],
+      [ "altitude",    "/position/altitude-ft" ],
       [ "heading",     "/orientation/heading-deg" ],
       [ "groundspeed", "/velocities/groundspeed-kt" ],
       [ "model",       "/sim/model/path" ],
@@ -113,6 +114,20 @@ html,body {
       zoomControl: true,
       attributionControl: true,
     });
+
+    var navdbLayer = L.navdbLayer();
+    map.on('resize', function(e) {
+      navdbLayer.invalidate();
+    });
+
+    map.on('zoomend', function(e) {
+      navdbLayer.invalidate();
+    });
+
+    map.on('moveend', function(e) {
+      navdbLayer.invalidate();
+    });
+
 
     L.control.layers({
       "OpenStreetMaps" : osmLayer,
@@ -175,6 +190,8 @@ html,body {
           attribution : 'Map data © <a href="http://www.dfs.de">DFS</a>',
           bounds: L.latLngBounds(L.latLng(46.0,5.0), L.latLng(55.1,16.5) ),
         }),
+
+      "NavDB" : navdbLayer,
 
       "Precipitation" : new L.TileLayer(
         'http://{s}.tile.openweathermap.org/map/precipitation/{z}/{x}/{y}.png', 

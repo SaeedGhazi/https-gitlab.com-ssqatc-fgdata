@@ -31,15 +31,18 @@ uniform float fogstructure;
 uniform float snow_thickness_factor;
 uniform float cloud_self_shading;
 uniform float contrast;
-uniform float grain_strength;
+uniform float air_pollution;
 uniform float intrinsic_wetness;
 uniform float transition_model;
 uniform float hires_overlay_bias;
 uniform float crack_depth;
+uniform float crack_pattern_stretch;
 uniform float grain_fade_power;
 uniform float rock_brightness;
 uniform float dust_resistance;
 uniform float slopeline_strength;
+uniform float landing_light1_offset;
+uniform float landing_light2_offset;
 uniform float osg_SimulationTime;
 
 uniform vec3 base_color;
@@ -49,6 +52,9 @@ uniform int tquality_level;
 uniform int wind_effects;
 uniform int cloud_shadow_flag;
 uniform int rock_strata;
+uniform int use_searchlight;
+uniform int use_landing_light;
+uniform int use_alt_landing_light;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -59,15 +65,20 @@ float yprime_alt;
 float mie_angle;
 
 float shadow_func (in float x, in float y, in float noise, in float dist);
-//float DotNoise2D(in vec2 coord, in float wavelength, in float fractionalMaxDotSize, in float dot_density);
 float Noise2D(in vec2 coord, in float wavelength);
 float Noise3D(in vec3 coord, in float wavelength);
 float VoronoiNoise2D(in vec2 coord, in float wavelength, in float xrand, in float yrand);	
 float SlopeLines2D(in vec2 coord, in vec2 gradDir, in float wavelength, in float steepness);
 float Strata3D(in vec3 coord, in float wavelength, in float variation);
-//vec3 intensity_perception (in vec3 color);
-//vec3 desaturation (in vec3 color, in float sat);
+float fog_func (in float targ, in float alt);
+float rayleigh_in_func(in float dist, in float air_pollution, in float avisibility, in float eye_alt, in float vertex_alt);
+float alt_factor(in float eye_alt, in float vertex_alt);
+float light_distance_fading(in float dist);
+float fog_backscatter(in float avisibility);
 
+vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
+vec3 searchlight();
+vec3 landing_light(in float offset);
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
 {
@@ -91,35 +102,6 @@ return 1.0 - smoothstep(0.5 * fade_dist, fade_dist, dist);
 }
 
 
-// this determines how light is attenuated in the distance
-// physically this should be exp(-arg) but for technical reasons we use a sharper cutoff
-// for distance > visibility
-
-float fog_func (in float targ)
-{
-
-
-float fade_mix;
-
-// for large altitude > 30 km, we switch to some component of quadratic distance fading to
-// create the illusion of improved visibility range
-
-targ = 1.25 * targ * smoothstep(0.04,0.06,targ); // need to sync with the distance to which terrain is drawn
-
-
-if (alt < 30000.0)
-	{return exp(-targ - targ * targ * targ * targ);}
-else if (alt < 50000.0)
-	{
-	fade_mix = (alt - 30000.0)/20000.0;
-	return fade_mix * exp(-targ*targ - pow(targ,4.0)) + (1.0 - fade_mix) * exp(-targ - pow(targ,4.0));	
-	}
-else 
-	{
-	return exp(- targ * targ - pow(targ,4.0));
-	}
-
-}
 
 void main()
 {
@@ -276,6 +258,8 @@ float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),
  
  texel.rgb = base_color;
  
+ // use powers of Perlin noise to generate the base pattern
+
  float grainy_noise;
  float fade_norm;
  
@@ -308,58 +292,73 @@ float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),
  grainy_noise = grainy_noise/fade_norm; 
  grainy_noise = smoothstep(-0.2, 1.2, grainy_noise);
  
- 
- texel.rgb = ((1.0 - contrast)  + contrast * grainy_noise) * texel.rgb;
- 
- 
+ // generate the crack pattern from isovalue lines of stretched Perlin noise
 
-  float cnoise_500m = Noise2D(vec2(rawPos.x+10.0, 7.0 * rawPos.y), 500.0);
-  float cnoise_250m = Noise2D(vec2(rawPos.x+10.0, 7.0 * rawPos.y), 250.0);
-  float cnoise_100m = Noise2D(vec2(rawPos.x+10.0, 7.0 * rawPos.y), 100.0);
-  float cnoise_50m = Noise2D(vec2(rawPos.x+10.0, 7.0 * rawPos.y), 50.0);
-  float cnoise_25m = Noise2D(vec2(rawPos.x+10.0, 7.0 * rawPos.y), 25.0);
-  float cnoise_10m = Noise2D(vec2(rawPos.x+10.0, 7.0 * rawPos.y), 10.0);
-  float cnoise_5m = Noise2D(vec2(rawPos.x+10.0, 7.0 * rawPos.y), 5.0);
+ float cnoise_500m = Noise2D(vec2(rawPos.x+10.0, crack_pattern_stretch * rawPos.y), 500.0);
+ float cnoise_250m = Noise2D(vec2(rawPos.x+10.0, crack_pattern_stretch * rawPos.y), 250.0);
+ float cnoise_100m = Noise2D(vec2(rawPos.x+10.0, crack_pattern_stretch * rawPos.y), 100.0);
+ float cnoise_50m = Noise2D(vec2(rawPos.x+10.0, crack_pattern_stretch * rawPos.y), 50.0);
+ float cnoise_25m = Noise2D(vec2(rawPos.x+10.0, crack_pattern_stretch * rawPos.y), 25.0);
+ float cnoise_10m = Noise2D(vec2(rawPos.x+10.0, crack_pattern_stretch * rawPos.y), 10.0);
+ float cnoise_5m = Noise2D(vec2(rawPos.x+10.0, crack_pattern_stretch * rawPos.y), 5.0);
+ float cnoise_2m = Noise2D(vec2(rawPos.x+10.0, crack_pattern_stretch * rawPos.y), 2.0); 
+ float cnoise_1m = Noise2D(vec2(rawPos.x+10.0, crack_pattern_stretch * rawPos.y), 1.0);
 
+ float crack_noise;
+ float crack_factor;
+ float crack_size;
   
-  float crack_noise;
-  float crack_factor;
-  float crack_size;
   
+ crack_noise = cnoise_500m + 0.65 * cnoise_250m + 0.42 * cnoise_100m * detail_fade(50.0, view_angle, dist) ;
+ crack_noise = crack_noise + 0.27 * cnoise_50m * detail_fade(25.0, view_angle, dist) ;
+ crack_noise = crack_noise + 0.17 * cnoise_25m * detail_fade(10.0, view_angle, dist) ;
+ crack_noise = crack_noise + 0.11 * cnoise_10m * detail_fade(5.0, view_angle, dist) ;
+ crack_noise = 0.381 * crack_noise;
   
-  crack_noise = cnoise_500m + 0.65 * cnoise_250m + 0.42 * cnoise_100m * detail_fade(50.0, view_angle, dist) ;
-  crack_noise = crack_noise + 0.27 * cnoise_50m * detail_fade(25.0, view_angle, dist) ;
-  crack_noise = crack_noise + 0.17 * cnoise_25m * detail_fade(10.0, view_angle, dist) ;
-  crack_noise = crack_noise + 0.11 * cnoise_10m * detail_fade(5.0, view_angle, dist) ;
-  crack_noise = 0.381 * crack_noise;
-  
-  //crack_noise = 0.381 * (cnoise_500m + 0.65 * cnoise_250m + 0.42 * cnoise_100m + 0.27 * cnoise_50m + 0.17 * cnoise_25m + 0.11 * cnoise_10m);
-  
+ float scrack_noise;
+ 
+ //scrack_noise = cnoise_10m + 0.65 * cnoise_5m * detail_fade(5.0, view_angle, dist);
+ //scrack_noise = scrack_noise + 0.3 * cnoise_2m + 0.1 * cnoise_1m * detail_fade(1.0, view_angle, dist);
+ //scrack_noise = 0.48 * scrack_noise;  
+
   crack_size = 0.02 +0.00001 * dist;
   crack_factor = smoothstep(0.5-crack_size,0.50,crack_noise) * (1.0-smoothstep(0.51,0.51+crack_size,crack_noise));
-  
-  crack_size = crack_size * 0.5;
-  crack_factor = crack_factor + smoothstep(0.42,0.42+crack_size,crack_noise) * (1.0-smoothstep(0.43,0.43+crack_size,crack_noise));
+  //crack_factor = step(0.5-0.2*crack_size,crack_noise) * (1.0-step(0.5+0.2*crack_size,crack_noise));
+
+  crack_size *= 0.5;
+  crack_factor += smoothstep(0.42,0.42+crack_size,crack_noise) * (1.0-smoothstep(0.43,0.43+crack_size,crack_noise));
+
+  //crack_factor +=smoothstep(0.5-crack_size,0.50,scrack_noise) * (1.0-smoothstep(0.51,0.51+crack_size,scrack_noise));// * (1.0- smoothstep(10.0,50.0,dist));
+
+
   crack_factor = crack_factor * min(1.0,0.03/crack_size);
-  
-  //crack_factor = crack_factor * (0.5 + 0.5 * noise_50m);
-  
-  //crack_factor = crack_factor * (1.0-smoothstep(500.0,25000.0,dist));
-  
-  texel.rgb = texel.rgb * ((1.0-crack_depth) +crack_depth*(1.0-crack_factor * (0.5 + 0.5 * noise_50m) ));
-  
-  texel.rgb = texel.rgb * rock_brightness;
+
  
- float lichen_noise;
+
+// distribution of moss and lichen
+
+
+float lichen_noise;
  float lichen_factor;
  
  lichen_noise = 0.381 * (noise_50m + 0.65 * noise_25m + 0.42 * noise_10m + 0.27 * noise_5m + 0.17 * noise_2m + 0.11 * noise_1m);
  lichen_noise = lichen_noise + 0.1 * (smoothstep(0.8,0.9, steepness));
  
  lichen_factor = smoothstep(0.7, 0.72, lichen_noise) + (1.0 - smoothstep(0.2, 0.22, lichen_noise));
-  const vec4 lichen_color = vec4 (0.17, 0.20, 0.06, 1.0);
+ const vec4 lichen_color = vec4 (0.17, 0.20, 0.06, 1.0);
 
-  texel.rgb = mix(texel.rgb, lichen_color.rgb,0.4 * lichen_factor);
+
+// merge the noise components
+
+ //grainy_noise = grainy_noise * (1.0-crack_depth * crack_factor) + 0.5 * crack_depth * crack_factor;
+ texel.rgb = ((1.0 - contrast)  + contrast * grainy_noise ) * texel.rgb;
+ 
+
+ texel.rgb = texel.rgb * ((1.0-crack_depth) +crack_depth*(1.0-crack_factor * (0.5 + 0.5 * noise_50m) ));
+ texel.rgb = texel.rgb * rock_brightness;
+ texel.rgb = mix(texel.rgb, lichen_color.rgb,0.4 * lichen_factor);
+ 
+ 
  
 const vec4 dust_color  = vec4 (0.76, 0.65, 0.45, 1.0);
 
@@ -455,12 +454,31 @@ if ((dist < 5000.0)&& (quality_level > 3) && (combined_wetness>0.0))
     // is closer to what the OpenGL fixed function pipeline does.
     color = clamp(color, 0.0, 1.0);
 
+   vec3 secondary_light = vec3 (0.0,0.0,0.0);
 
+    if (use_searchlight == 1)
+	{
+	secondary_light += searchlight();
+	}
+    if (use_landing_light == 1)
+	{
+	secondary_light += landing_light(landing_light1_offset);
+	}
+    if (use_alt_landing_light == 1)
+	{
+	secondary_light += landing_light(landing_light2_offset);
+	}
+    color.rgb +=secondary_light * light_distance_fading(dist);
 
 
     fragColor = color * texel + specular;
-	//fragColor.rgb = desaturation(fragColor.rgb, saturation);
-	//fragColor.rgb = brightness * fragColor.rgb;
+	
+
+// Rayleigh color shift due to out-scattering
+    float rayleigh_length = 0.5 * avisibility * (2.5 - 1.9 * air_pollution)/alt_factor(eye_alt, eye_alt+relPos.z);
+    float outscatter = 1.0-exp(-dist/rayleigh_length);
+    fragColor.rgb = rayleigh_out_shift(fragColor.rgb,outscatter);
+
 
 // here comes the terrain haze model
 
@@ -580,7 +598,7 @@ else
 
 
 
-transmission =  fog_func(transmission_arg);
+transmission =  fog_func(transmission_arg, alt);
 
 // there's always residual intensity, we should never be driven to zero
 if (eqColorFactor < 0.2) eqColorFactor = 0.2;
@@ -637,6 +655,13 @@ if (intensity > 0.0) // this needs to be a condition, because otherwise hazeColo
 	}
 
 
+// blue Rayleigh scattering with distance
+
+float rShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt-340000.0) + 0.1;
+float lightIntensity = length(diffuse_term.rgb)/1.73 * rShade;
+vec3 rayleighColor = vec3 (0.17, 0.52, 0.87) * lightIntensity;
+float rayleighStrength = rayleigh_in_func(dist, air_pollution, avisibility/max(lightIntensity,0.05), eye_alt, eye_alt + relPos.z);
+fragColor.rgb = mix(fragColor.rgb, rayleighColor,rayleighStrength);
 
 
 fragColor.rgb = mix(eqColorFactor * hazeColor * eShade , fragColor.rgb,transmission);
@@ -650,6 +675,14 @@ gl_FragColor = fragColor;
 else // if dist < threshold no fogging at all 
 {
 //fragColor.rgb = intensity_perception(fragColor);
+
+// blue Rayleigh scattering with distance
+
+float rShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt-340000.0) + 0.1;
+float lightIntensity = length(diffuse_term.rgb)/1.73 * rShade;
+vec3 rayleighColor = vec3 (0.17, 0.52, 0.87) * lightIntensity;
+float rayleighStrength = rayleigh_in_func(dist, air_pollution, avisibility/max(lightIntensity,0.05), eye_alt, eye_alt + relPos.z);
+fragColor.rgb = mix(fragColor.rgb, rayleighColor,rayleighStrength);
 
 gl_FragColor =  fragColor;
 }

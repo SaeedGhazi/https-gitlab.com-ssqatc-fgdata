@@ -34,11 +34,12 @@ uniform float contrast;
 uniform float air_pollution;
 uniform float intrinsic_wetness;
 uniform float transition_model;
-uniform float hires_overlay_bias;
+uniform float overlay_bias;
 uniform float crack_depth;
 uniform float crack_pattern_stretch;
 uniform float grain_fade_power;
 uniform float rock_brightness;
+uniform float overlay_alpha;
 uniform float dust_resistance;
 uniform float slopeline_strength;
 uniform float landing_light1_offset;
@@ -46,9 +47,8 @@ uniform float landing_light2_offset;
 uniform float osg_SimulationTime;
 
 uniform vec3 base_color;
+uniform vec3 overlay_color;
 
-uniform int quality_level;
-uniform int tquality_level;
 uniform int wind_effects;
 uniform int cloud_shadow_flag;
 uniform int rock_strata;
@@ -307,19 +307,20 @@ float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),
  float crack_noise;
  float crack_factor;
  float crack_size;
-  
-  
+ float scrack_noise;
+ float scrack_size; 
+ 
  crack_noise = cnoise_500m + 0.65 * cnoise_250m + 0.42 * cnoise_100m * detail_fade(50.0, view_angle, dist) ;
  crack_noise = crack_noise + 0.27 * cnoise_50m * detail_fade(25.0, view_angle, dist) ;
  crack_noise = crack_noise + 0.17 * cnoise_25m * detail_fade(10.0, view_angle, dist) ;
  crack_noise = crack_noise + 0.11 * cnoise_10m * detail_fade(5.0, view_angle, dist) ;
  crack_noise = 0.381 * crack_noise;
   
- float scrack_noise;
+
  
- //scrack_noise = cnoise_10m + 0.65 * cnoise_5m * detail_fade(5.0, view_angle, dist);
- //scrack_noise = scrack_noise + 0.3 * cnoise_2m + 0.1 * cnoise_1m * detail_fade(1.0, view_angle, dist);
- //scrack_noise = 0.48 * scrack_noise;  
+ scrack_noise = cnoise_10m + 0.65 * cnoise_5m * detail_fade(5.0, view_angle, dist);
+ scrack_noise = scrack_noise + 0.3 * cnoise_2m + 0.1 * cnoise_1m * detail_fade(1.0, view_angle, dist);
+ scrack_noise = 0.48 * scrack_noise;  
 
   crack_size = 0.02 +0.00001 * dist;
   crack_factor = smoothstep(0.5-crack_size,0.50,crack_noise) * (1.0-smoothstep(0.51,0.51+crack_size,crack_noise));
@@ -328,39 +329,41 @@ float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),
   crack_size *= 0.5;
   crack_factor += smoothstep(0.42,0.42+crack_size,crack_noise) * (1.0-smoothstep(0.43,0.43+crack_size,crack_noise));
 
-  //crack_factor +=smoothstep(0.5-crack_size,0.50,scrack_noise) * (1.0-smoothstep(0.51,0.51+crack_size,scrack_noise));// * (1.0- smoothstep(10.0,50.0,dist));
+  scrack_size = crack_size * 4.0;
+  crack_factor += 0.75 * smoothstep(0.5-scrack_size,0.50,scrack_noise) * (1.0-smoothstep(0.51,0.51+scrack_size,scrack_noise))* (1.0- smoothstep(250.0,1000.0,dist));
 
 
   crack_factor = crack_factor * min(1.0,0.03/crack_size);
 
  
 
-// distribution of moss and lichen
+// distribution of overlay color
 
 
-float lichen_noise;
- float lichen_factor;
+ float overlay_noise;
+ float overlay_factor;
  
- lichen_noise = 0.381 * (noise_50m + 0.65 * noise_25m + 0.42 * noise_10m + 0.27 * noise_5m + 0.17 * noise_2m + 0.11 * noise_1m);
- lichen_noise = lichen_noise + 0.1 * (smoothstep(0.8,0.9, steepness));
+ overlay_noise = 0.381 * (noise_50m + 0.65 * noise_25m + 0.42 * noise_10m + 0.27 * noise_5m + 0.17 * noise_2m + 0.11 * noise_1m);
+ overlay_noise = overlay_noise + 0.1 * (smoothstep(0.8,0.9, steepness));
  
- lichen_factor = smoothstep(0.7, 0.72, lichen_noise) + (1.0 - smoothstep(0.2, 0.22, lichen_noise));
- const vec4 lichen_color = vec4 (0.17, 0.20, 0.06, 1.0);
+ overlay_factor = smoothstep(0.7, 0.72, overlay_noise + overlay_bias) + (1.0 - smoothstep(0.2, 0.22, overlay_noise - overlay_bias));
+
 
 
 // merge the noise components
 
  //grainy_noise = grainy_noise * (1.0-crack_depth * crack_factor) + 0.5 * crack_depth * crack_factor;
  texel.rgb = ((1.0 - contrast)  + contrast * grainy_noise ) * texel.rgb;
- 
-
+ texel.rgb = mix(texel.rgb, overlay_color.rgb,overlay_alpha * overlay_factor);
  texel.rgb = texel.rgb * ((1.0-crack_depth) +crack_depth*(1.0-crack_factor * (0.5 + 0.5 * noise_50m) ));
+
  texel.rgb = texel.rgb * rock_brightness;
- texel.rgb = mix(texel.rgb, lichen_color.rgb,0.4 * lichen_factor);
- 
+
+ texel.rgb = texel.rgb * (1.0 + 0.4 * (noise_01m-0.5) * detail_fade(0.1, view_angle, dist)) ;
  
  
 const vec4 dust_color  = vec4 (0.76, 0.65, 0.45, 1.0);
+const vec4 lichen_color = vec4 (0.17, 0.20, 0.06, 1.0);
 
 // mix vegetation
 float gradient_factor = smoothstep(0.5, 1.0, steepness);
@@ -387,7 +390,7 @@ float water_threshold2;
 float water_factor =0.0;
 
 
-if ((dist < 5000.0)&& (quality_level > 3) && (combined_wetness>0.0))
+if ((dist < 5000.0) && (combined_wetness>0.0))
 		{
 		water_threshold1 = 1.0-0.5* combined_wetness;
 		water_threshold2 = 1.0 - 0.3 * combined_wetness;
@@ -569,29 +572,13 @@ float eqColorFactor;
 
 if (visibility < avisibility)
 	{
-	if (quality_level > 3)
-		{
-		transmission_arg = transmission_arg + (distance_in_layer/(1.0 * visibility + 1.0 * visibility * fogstructure * 0.06 * (noise_1500m + noise_2000m -1.0) ));
-
-		}
-	else
-		{
-		transmission_arg = transmission_arg + (distance_in_layer/visibility);
-		}
+	transmission_arg = transmission_arg + (distance_in_layer/(1.0 * visibility + 1.0 * visibility * fogstructure * 0.06 * (noise_1500m + noise_2000m -1.0) ));
 	// this combines the Weber-Fechner intensity
 	eqColorFactor = 1.0 - 0.1 * delta_zv/visibility - (1.0 - effective_scattering);
-
 	}
 else 
 	{
-	if (quality_level > 3)
-		{
-		transmission_arg = transmission_arg + (distance_in_layer/(1.0 * avisibility + 1.0 * avisibility * fogstructure * 0.06 * (noise_1500m + noise_2000m  - 1.0) ));
-		}
-	else
-		{
-		transmission_arg = transmission_arg + (distance_in_layer/avisibility);
-		}
+	transmission_arg = transmission_arg + (distance_in_layer/(1.0 * avisibility + 1.0 * avisibility * fogstructure * 0.06 * (noise_1500m + noise_2000m  - 1.0) ));
 	// this combines the Weber-Fechner intensity
 	eqColorFactor = 1.0 - 0.1 * delta_zv/avisibility - (1.0 - effective_scattering);
 	}

@@ -22,8 +22,6 @@ uniform sampler2D LightMapTex;
 uniform sampler2D NormalTex;
 uniform sampler2D ReflMapTex;
 uniform sampler2D ReflGradientsTex;
-//uniform sampler2D ReflFresnelTex;
-//uniform sampler2D ReflRainbowTex;
 uniform sampler3D ReflNoiseTex;
 uniform samplerCube Environment;
 uniform sampler2D GrainTex;
@@ -495,6 +493,7 @@ void main (void)
 
     /// END fog color
     fragColor = clamp(fragColor, 0.0, 1.0);
+    hazeColor = clamp(hazeColor, 0.0, 1.0);
 
     ///BEGIN Rayleigh fog ///
 

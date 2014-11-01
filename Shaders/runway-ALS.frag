@@ -82,29 +82,29 @@ return e / pow((1.0 + a * exp(-b * (x-c)) ),(1.0/d));
 void main()
 {
 
+  yprime_alt = diffuse_term.a;
+  mie_angle = gl_Color.a;
+  float effective_scattering = 1.0 - min(scattering, cloud_self_shading);
 
-yprime_alt = diffuse_term.a;
-mie_angle = gl_Color.a;
-float effective_scattering = min(scattering, cloud_self_shading);
-
-// distance to fragment
-float dist = length(relPos);
-// angle of view vector with horizon
-float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
+  // distance to fragment
+  float dist = length(relPos);
+  // angle of view vector with horizon
+  float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
 
 
   vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
 // this is taken from default.frag
     vec3 n;
-    float NdotL, NdotHV, fogFactor;
+    float NdotL, NdotHV;
     vec4 color = gl_Color;
     color.a = 1.0;
     vec3 lightDir = gl_LightSource[0].position.xyz;
+    vec3 E = normalize(ecViewdir);
     vec3 halfVector;
     if (quality_level<6)
 	{halfVector = gl_LightSource[0].halfVector.xyz;}
     else
-	{halfVector = normalize(normalize(lightDir) + normalize(ecViewdir));}
+	{halfVector = normalize(normalize(lightDir) + E);}
 
     vec4 texel;
     vec4 snow_texel;
@@ -230,6 +230,7 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
     n = normal;
     n = normalize(n);
 
+    // primary reflection of the Sun
     float fresnel;
     NdotL = dot(n, lightDir);
     
@@ -243,11 +244,21 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
 		{NdotL = NdotL * shadow_func(relPos.x, relPos.y, 1.0, dist);}
         color += diffuse_term * NdotL;
         NdotHV = max(dot(n, halfVector), 0.0);
-	fresnel = 1.0 + 5.0 * (1.0-smoothstep(0.0,0.2, dot(normalize(ecViewdir),n)));
+	fresnel = 1.0 + 5.0 * (1.0-smoothstep(0.0,0.2, dot(E,n)));
         specular.rgb = ((vec3 (0.2,0.2,0.2) * fresnel + (water_factor * vec3 (1.0, 1.0, 1.0)))
                             * light_specular.rgb
                             * pow(NdotHV, max(4.0, (20.0 * water_factor))));
     	}
+    // secondary reflection of sky irradiance
+
+    float fresnelW =  ((0.8 * wetness) + (0.2* water_factor)) *  (1.0-smoothstep(0.0,0.4, dot(E,n)));
+    float sky_factor = (1.0-ct*ct);//mix((1.0 - ct * ct), 1.0-effective_scattering, effective_scattering);
+    float sky_light = vec3 (1.0,1.0,1.0) * length(light_specular.rgb) * (1.0-effective_scattering);
+    specular.rgb += sky_factor * fresnelW  * sky_light;
+ 
+
+
+
     color.a = 1.0;//diffuse_term.a;
     // This shouldn't be necessary, but our lighting becomes very
     // saturated. Clamping the color before modulating by the texture
@@ -355,7 +366,7 @@ if (visibility < avisibility)
 		transmission_arg = transmission_arg + (distance_in_layer/visibility);
 		}
 	// this combines the Weber-Fechner intensity
-	eqColorFactor = 1.0 - 0.1 * delta_zv/visibility - (1.0 - effective_scattering);
+	eqColorFactor = 1.0 - 0.1 * delta_zv/visibility - effective_scattering;
 
 	}
 else 
@@ -369,7 +380,7 @@ else
 		transmission_arg = transmission_arg + (distance_in_layer/avisibility);
 		}
 	// this combines the Weber-Fechner intensity
-	eqColorFactor = 1.0 - 0.1 * delta_zv/avisibility - (1.0 - effective_scattering);
+	eqColorFactor = 1.0 - 0.1 * delta_zv/avisibility - effective_scattering;
 	}
 
 

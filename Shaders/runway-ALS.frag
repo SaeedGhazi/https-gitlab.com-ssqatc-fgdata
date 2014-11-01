@@ -27,6 +27,7 @@ uniform float snowlevel;
 uniform float dust_cover_factor;
 uniform float lichen_cover_factor;
 uniform float wetness;
+uniform float rain_norm;
 uniform float fogstructure;
 uniform float snow_thickness_factor;
 uniform float cloud_self_shading;
@@ -34,6 +35,7 @@ uniform float uvstretch;
 uniform float landing_light1_offset;
 uniform float landing_light2_offset;
 uniform float air_pollution;
+uniform float osg_SimulationTime;
 
 uniform int quality_level;
 uniform int tquality_level;
@@ -52,6 +54,7 @@ float mie_angle;
 
 float shadow_func (in float x, in float y, in float noise, in float dist);
 float Noise2D(in vec2 coord, in float wavelength);
+float DotNoise2D(in vec2 coord, in float wavelength, in float fractionalMaxDotSize, in float dot_density);
 float fog_func (in float targ, in float alt);
 float light_distance_fading(in float dist);
 float fog_backscatter(in float avisibility);
@@ -249,15 +252,25 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
                             * light_specular.rgb
                             * pow(NdotHV, max(4.0, (20.0 * water_factor))));
     	}
-    // secondary reflection of sky irradiance
 
-    float fresnelW =  ((0.8 * wetness) + (0.2* water_factor)) *  (1.0-smoothstep(0.0,0.4, dot(E,n)));
+    // raindrops
+    float rain_factor = 0.0;
+    if (rain_norm > 0.0)
+	{
+    	rain_factor += DotNoise2D(rawPos.xy, 0.2 ,0.5, rain_norm) * abs(sin(6.0*osg_SimulationTime));
+    	rain_factor += DotNoise2D(rawPos.xy, 0.3 ,0.4, rain_norm) * abs(sin(6.0*osg_SimulationTime + 2.094));
+    	rain_factor += DotNoise2D(rawPos.xy, 0.4 ,0.3, rain_norm)* abs(sin(6.0*osg_SimulationTime + 4.188));
+	}
+
+    // secondary reflection of sky irradiance
+    float fresnelW =  ((0.8 * wetness) + (0.2* water_factor)) *  (1.0-smoothstep(0.0,0.4, dot(E,n) * 1.0 - 0.2 * rain_factor * wetness));
     float sky_factor = (1.0-ct*ct);//mix((1.0 - ct * ct), 1.0-effective_scattering, effective_scattering);
     float sky_light = vec3 (1.0,1.0,1.0) * length(light_specular.rgb) * (1.0-effective_scattering);
     specular.rgb += sky_factor * fresnelW  * sky_light;
  
 
 
+    //specular.rgb *= 1.0 - 0.2 * dotnoise_02m * wetness;
 
     color.a = 1.0;//diffuse_term.a;
     // This shouldn't be necessary, but our lighting becomes very

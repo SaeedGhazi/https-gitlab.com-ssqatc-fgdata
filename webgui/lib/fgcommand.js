@@ -61,5 +61,8 @@ var fgCommand = {
   dialogClose: function(dlg) {
     this.sendCommand("dialog-close", this.oneArg("dialog-name",dlg)); 
   },
+  reposition: function() {
+    $.post("/run.cgi?value=reposition");
+  },
 };
 

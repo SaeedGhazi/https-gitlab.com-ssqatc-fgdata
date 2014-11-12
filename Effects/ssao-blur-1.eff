@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
-	<name>Effects/ssao-blur-1</name>
 	<inherits-from>Effects/blur</inherits-from>
 	<parameters>
 		<blurOffset_x>4.0</blurOffset_x>

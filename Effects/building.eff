@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
-  <name>Effects/building</name>
   <inherits-from>Effects/model-combined-deferred</inherits-from>
   <parameters>
     <texture n="0">

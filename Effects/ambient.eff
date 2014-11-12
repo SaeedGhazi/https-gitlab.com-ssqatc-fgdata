@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
-	<name>Effects/ambient</name>
 	<parameters>
 		<ambient-occlusion type="bool"><use>/sim/rendering/rembrandt/ambient-occlusion</use></ambient-occlusion>
 		<ambient-occlusion-strength type="float"><use>/sim/rendering/rembrandt/ambient-occlusion-strength</use></ambient-occlusion-strength>

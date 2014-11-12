@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
-  <name>Effects/surface-lights</name>
   <parameters>
     <!-- min-size, max-size, size, attenuation, cull-face parameters filled in by C++ code -->
     <texture n="0">

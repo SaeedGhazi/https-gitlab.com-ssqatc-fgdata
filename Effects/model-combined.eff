@@ -3,7 +3,6 @@
 please see Docs/README.model-combined.eff for documentation
 -->
 <PropertyList>
-	<name>Effects/model-combined</name>
 	<inherits-from>Effects/model-default</inherits-from>
 
 	<parameters>

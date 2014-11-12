@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
-	<name>Effects/ssao</name>
 	<parameters>
         <g_scale type="float">1.0</g_scale>
         <g_bias type="float">0.0</g_bias>

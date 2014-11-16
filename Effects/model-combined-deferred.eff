@@ -6,6 +6,7 @@ For now it only disables the ubershader under Rembrandt for
 the objects that use it, and replaces it with the default shader.
 -->
 <PropertyList>
+  <name>Effects/model-combined-deferred</name>
   <inherits-from>Effects/model-combined</inherits-from>
 
   <technique n="7">

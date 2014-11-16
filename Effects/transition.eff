@@ -12,6 +12,7 @@ parameters :
 -->
 
 <PropertyList>
+	<name>Effects/transition</name>
 	<inherits-from>Effects/terrain-default</inherits-from>
 	<parameters>
 		<texture n="2">

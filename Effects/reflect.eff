@@ -48,6 +48,7 @@
 -->
 
 <PropertyList>
+	<name>Effects/reflect</name>
 	<inherits-from>Effects/model-default</inherits-from>
 
 	<parameters>

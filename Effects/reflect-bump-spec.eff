@@ -50,6 +50,7 @@ To use your own effect place your efffect file containing something like this:
 EXAMPLES: You can find examples of both usages in the Hunter and Lightning models.
 -->
 <PropertyList>
+	<name>Effects/reflect-bump-spec</name>
 	<inherits-from>Effects/model-default</inherits-from>
 
 	<parameters>

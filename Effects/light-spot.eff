@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
+	<name>Effects/light-spot</name>
 	<parameters></parameters>
 	<technique n="10">
 		<pass>

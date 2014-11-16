@@ -12,6 +12,7 @@
 
      Note: no sorting needed! -->
 <PropertyList>
+	<name>Effects/tree</name>
 	<parameters>
 		<texture n ="0">
 		</texture>

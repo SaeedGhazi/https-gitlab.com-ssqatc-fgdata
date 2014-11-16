@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
+  <name>Effects/skydome</name>
   <parameters>
     <mie><use>/sim/rendering/mie</use></mie>
     <rayleigh><use>/sim/rendering/rayleigh</use></rayleigh>

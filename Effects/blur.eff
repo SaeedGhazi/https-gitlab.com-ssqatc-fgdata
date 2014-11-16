@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
+	<name>Effects/blur</name>
 	<parameters>
 		<blurOffset_x>0.0</blurOffset_x>
 		<blurOffset_y>0.0</blurOffset_y>

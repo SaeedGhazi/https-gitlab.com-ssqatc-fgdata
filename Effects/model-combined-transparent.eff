@@ -4,6 +4,7 @@ to provide glass/transparent surfaces with the ubershader active,
 and fallback to plain transparency when the model shader is disabled.
 -->
 <PropertyList>
+  <name>Effects/model-combined-transparent</name>
   <inherits-from>Effects/model-combined</inherits-from>
 
   <technique n="7">

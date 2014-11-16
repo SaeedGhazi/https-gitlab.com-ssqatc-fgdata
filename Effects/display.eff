@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
+	<name>Effects/display</name>
 	<parameters>
 		<show-buffers type="bool"><use>/sim/rendering/rembrandt/show-buffers</use></show-buffers>
 		<bloom type="bool"><use>/sim/rendering/rembrandt/bloom</use></bloom>

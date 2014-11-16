@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
+  <name>Effects/chrome</name>
   <parameters>
     <texture n ="0">
       <type>transparent</type>

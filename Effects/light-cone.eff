@@ -14,6 +14,7 @@ Uses stencil buffer.
 
 
 <PropertyList>
+  <name>Effects/light-cone</name>
   <inherits-from>Effects/model-default</inherits-from>
   <parameters>
     <texture n ="0">

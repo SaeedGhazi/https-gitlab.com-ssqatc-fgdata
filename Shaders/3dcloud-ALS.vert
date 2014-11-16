@@ -17,6 +17,7 @@ uniform float air_pollution;
 attribute vec3 usrAttr1;
 attribute vec3 usrAttr2;
 
+float alpha_factor = usrAttr1.r;
 float shade_factor = usrAttr1.g;
 float cloud_height = usrAttr1.b;
 float bottom_factor = usrAttr2.r;
@@ -237,6 +238,7 @@ void main(void)
    
     gl_FrontColor.rgb = gl_FrontColor.rgb +  moonLightColor * (1.0 - smoothstep(0.4, 0.5, earthShade));
     hazeColor.rgb = hazeColor.rgb + moonLightColor * (1.0 - smoothstep(0.4, 0.5, earthShade));
+    gl_FrontColor.a = gl_FrontColor.a * alpha_factor; 
     gl_BackColor = gl_FrontColor;
   }
 }

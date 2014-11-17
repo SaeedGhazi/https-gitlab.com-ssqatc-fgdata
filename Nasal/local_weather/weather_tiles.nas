@@ -669,7 +669,7 @@ if (rand() < small_scale_persistence)
 else
 	{rnd_store = rn;}
 
- rn = 0.91;
+# rn = 0.91;
 
 if (rn > 0.9)
 	{
@@ -681,8 +681,10 @@ if (rn > 0.9)
 	#y = 2.0 * (rand()-0.5) * 5000;
 	#local_weather.create_streak("Altocumulus",blat+get_lat(x,y,phi), blon+get_lon(x,y,phi), 12000.0+alt+alt_offset,1500.0,30,1000.0,0.2,1200.0,30,1000.0,0.2,1200.0,alpha ,1.0);
 	
-	#create_2_8_altocumulus_domains(blat, blon, alt+alt_offset +12000.0, alpha);
-create_2_8_cirrocumulus_domains(blat, blon, alt+alt_offset +12000.0, alpha);
+	create_2_8_altocumulus_domains(blat, blon, alt+alt_offset +12000.0, alpha);
+
+
+
 
 	# and specify the atmosphere
 	local_weather.set_atmosphere_ipoint(blat, blon, vis + 10000.0, alt+alt_offset, vis + 15000.0, 0.0, alt+alt_offset +20000.0, alt+alt_offset + 25000.0, 0.85, alt+alt_offset, alt+alt_offset + 2500.0); 
@@ -3140,6 +3142,9 @@ arg.balt = alt;
 arg.alt_var = 0.0;
 arg.dir = alpha;
 arg.size_bias = 0.5;
+arg.core_alpha = 0.8;
+arg.edge_alpha = 0.0;
+arg.edge_power = 1.0;
 arg.type = "Stratus (thin)";
 
 local_weather.create_adv_undulatus(arg);
@@ -3760,6 +3765,9 @@ arg.balt = alt;
 arg.alt_var = 0.0;
 arg.dir = alpha;
 arg.size_bias = 0.0;
+arg.core_alpha = 1.0;
+arg.edge_alpha = 0.0;
+arg.edge_power = 2.0;
 arg.type = "Cirrostratus (small)";
 
 local_weather.create_adv_undulatus(arg);
@@ -3789,6 +3797,9 @@ arg.balt = alt;
 arg.alt_var = 0.0;
 arg.dir = alpha;
 arg.size_bias = 0.0;
+arg.core_alpha = 1.0;
+arg.edge_alpha = 0.0;
+arg.edge_power = 2.0;
 arg.type = "Cirrocumulus (cloudlet)";
 
 local_weather.create_adv_undulatus(arg);
@@ -4118,6 +4129,9 @@ arg.balt = alt;
 arg.alt_var = 0.0;
 arg.dir = alpha;
 arg.size_bias = 0.0;
+arg.core_alpha = 1.0;
+arg.edge_alpha = 0.0;
+arg.edge_power = 3.0;
 arg.type = "Cirrocumulus (new)";
 #arg.type = "Fogpatch";
 

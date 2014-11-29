@@ -62,12 +62,12 @@ setlistener("instrumentation/ilec-sc7/sensitivity",
 	func(n) { sc7_needle.dampening = n.getValue() }, 0, 0);
 
 # Wrap everything together into an instrument
-var fast_instruments = Instrument.new(
+var fast_instruments = UpdateLoop.new(
 	update_period: 0,
 	components: [probe, sc7_needle, extra_needle],
 	enable: 1);
 
-var slow_instruments = Instrument.new(
+var slow_instruments = UpdateLoop.new(
 	update_period: 1,
 	components: [averager, temperature, lcd_controller],
 	enable: 1);

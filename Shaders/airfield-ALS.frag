@@ -34,6 +34,7 @@ uniform float overlay_bias;
 uniform float overlay_alpha;
 uniform float wetness;
 uniform float air_pollution;
+uniform float season;
 uniform float landing_light1_offset;
 uniform float landing_light2_offset;
 
@@ -155,6 +156,7 @@ float noise_2000m = Noise2D(rawPos.xy, 2000.0);
 // get the texels
 
     texel = texture2D(texture, gl_TexCoord[0].st * 5.0); 
+    float local_autumn_factor = texel.a;
 
     float distortion_factor = 1.0;
     float noise_term;
@@ -211,6 +213,22 @@ if ((dist < 3000.0)&& (quality_level > 3) && (wetness>0.0))
 	texel.rgb = texel.rgb * (0.85 + 0.1 * (nfact_1m * detail_fade(1.0, abs(ct),dist) + nfact_5m + nfact_10m) * grit_alpha);
     texel.r = texel.r * (1.0 + 0.14 * smoothstep(0.5,0.7, 0.33*(2.0 * noise_10m + (1.0-noise_5m))));
 
+
+// autumn colors
+
+float autumn_factor = season * 2.0 * (1.0 - local_autumn_factor) ;
+
+
+texel.r = min(1.0, (1.0 + 2.5 * autumn_factor) * texel.r);
+texel.g = texel.g;
+texel.b = max(0.0, (1.0 - 4.0 * autumn_factor) *  texel.b);
+
+
+if (local_autumn_factor < 1.0)
+	{
+	intensity = length(texel.rgb) * (1.0 - 0.5 * smoothstep(1.1,2.0,season));
+	texel.rgb = intensity * normalize(mix(texel.rgb, vec3(0.23,0.17,0.08), smoothstep(1.1,2.0, season)));
+	}
 
 vec4 dust_color;
 

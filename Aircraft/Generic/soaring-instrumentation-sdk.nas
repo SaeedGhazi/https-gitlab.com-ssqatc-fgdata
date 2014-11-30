@@ -35,7 +35,7 @@ var sqr = func(x) {x * x}
 
 
 var InstrumentComponent = {
-	parents: [Component],
+	parents: [Updatable],
 	output: 0,
 	reset: func { me.output = 0 },
 };

@@ -17,21 +17,21 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-# Component
+# Updatable
 #
-# The update loop accepts a vector of Components that it will update at regular
-# intervals. In order to make custom components, you should add Component to
-# the parents vector of your object:
+# The update loop accepts a vector of Updatable elements that it will update at
+# regular intervals. In order to make custom elements, you should add Updatable
+# to the parents vector of your object:
 #
-# var CustomComponent = {
-#	parents: [Component],
+# var MyElement = {
+#	parents: [Updatable],
 #   ...
 # };
 #
-# Your component shall then implement an "update" and a "reset" methods that
+# Your component shall then implement an "update" and "reset" methods that
 # the UpdateLoop will call when needed.
 
-var Component = {
+var Updatable = {
 	reset: func { },
 	update: func(dt) { },
 };
@@ -55,7 +55,7 @@ var update_prop = func(property) {
 };
 
 # UpdateLoop
-# Wraps a set of components and updates them periodically.
+# Wraps a set of user provided objects and updates them periodically.
 # Takes care of critical sim signals (reinit, fdm-initialized, speed-up).
 
 var UpdateLoop = {
@@ -99,6 +99,7 @@ var UpdateLoop = {
 	},
 
 	del: func {
+		me.disable();
 		foreach (var l; me.lst) removelistener(l);
 	},
 

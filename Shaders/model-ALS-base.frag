@@ -94,7 +94,9 @@ void main()
     float effective_scattering = min(scattering, cloud_self_shading);
 
 
-    vec4 light_specular = gl_LightSource[0].specular;
+
+    eShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt) + 0.1;
+    vec4 light_specular = gl_LightSource[0].specular * (eShade - 0.1);
 
     // If gl_Color.a == 0, this is a back-facing polygon and the
     // normal should be reversed.
@@ -244,9 +246,7 @@ hazeColor.g = light_func(lightArg, 3.931e-06, 0.264, 3.827, 7.93e-06, 1.0);
 hazeColor.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
 
 
-// now dim the light for haze
 
-eShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt) + 0.1;
 
 // Mie-like factor
 

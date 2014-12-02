@@ -287,14 +287,6 @@ void main(void)
 
 	finalColor = refl + specular * smoothstep(0.3, 0.6, ground_scattering);
 
-    //    cover = 0;
-
-    /*if(cover >= 1.5){
-        finalColor = refl + specular;
-        } else {
-            finalColor = refl;
-        }*/
-
     //add foam
 
     float foamSlope = 0.05 + 0.01 * windScale;
@@ -309,7 +301,7 @@ void main(void)
             }
             
     //generate final colour
-        finalColor *= ambient_light+ alpha0 * 0.35;
+        finalColor *= ambient_light;//+ alpha0 * 0.35;
         
 		
 		
@@ -420,7 +412,8 @@ hazeColor.g = light_func(lightArg, 3.931e-06, 0.264, 3.827, 7.93e-06, 1.0);
 hazeColor.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
 
 // now dim the light for haze
-float eShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt) + 0.1;
+float eShade = 1.0 - 0.9 * smoothstep(-terminator_width+ terminator, terminator_width + terminator, yprime_alt);
+
 
 // Mie-like factor
 

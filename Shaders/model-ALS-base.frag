@@ -93,9 +93,7 @@ void main()
 
     float effective_scattering = min(scattering, cloud_self_shading);
 
-
-
-    eShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt) + 0.1;
+    eShade = 1.0 - 0.9 * smoothstep(-terminator_width+ terminator, terminator_width + terminator, yprime_alt);
     vec4 light_specular = gl_LightSource[0].specular * (eShade - 0.1);
 
     // If gl_Color.a == 0, this is a back-facing polygon and the

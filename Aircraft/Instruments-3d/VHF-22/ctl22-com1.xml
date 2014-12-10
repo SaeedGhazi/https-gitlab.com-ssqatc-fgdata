@@ -3,7 +3,7 @@
 Active and preset displayed +
 6 frequency memory storage
 2.375"W x 2.625"H
-Freq. range 118.000 - 135.975 (normal) @ 25 khz spacing
+Freq. range 118.000 - 136.975 (normal) @ 25 khz spacing
 Syd Adams
  -->
 
@@ -362,7 +362,7 @@ Syd Adams
                 <property>instrumentation/comm/frequencies/standby-mhz</property>
                 <step>-0.025</step>
                 <min>118.000</min>
-                <max>135.975</max>
+                <max>136.975</max>
                 <wrap>true</wrap>
             </binding>
         </action>
@@ -386,7 +386,7 @@ Syd Adams
                 <property>instrumentation/comm/frequencies/standby-mhz</property>
                 <step>0.025</step>
                 <min>118.000</min>
-                <max>135.975</max>
+                <max>136.975</max>
                 <wrap>true</wrap>
             </binding>
         </action>
@@ -410,7 +410,7 @@ Syd Adams
                 <property>instrumentation/comm/frequencies/standby-mhz</property>
                 <step>-0.025</step>
                 <min>118.000</min>
-                <max>135.975</max>
+                <max>136.975</max>
                 <wrap>true</wrap>
             </binding>
         </action>
@@ -434,7 +434,7 @@ Syd Adams
                 <property>instrumentation/comm/frequencies/standby-mhz</property>
                 <step>0.025</step>
                 <min>118.000</min>
-                <max>135.975</max>
+                <max>136.975</max>
                 <wrap>true</wrap>
             </binding>
         </action>
@@ -458,7 +458,7 @@ Syd Adams
                 <property>instrumentation/comm/frequencies/standby-mhz</property>
                 <step>-1.0</step>
                 <min>118.000</min>
-                <max>135.975</max>
+                <max>136.975</max>
                 <wrap>true</wrap>
             </binding>
         </action>
@@ -482,7 +482,7 @@ Syd Adams
                 <property>instrumentation/comm/frequencies/standby-mhz</property>
                 <step>1.0</step>
                 <min>118.000</min>
-                <max>135.975</max>
+                <max>136.975</max>
                 <wrap>true</wrap>
             </binding>
         </action>
@@ -506,7 +506,7 @@ Syd Adams
                 <property>instrumentation/comm/frequencies/standby-mhz</property>
                 <step>-1.0</step>
                 <min>118.000</min>
-                <max>135.975</max>
+                <max>136.975</max>
                 <wrap>true</wrap>
             </binding>
         </action>
@@ -530,7 +530,7 @@ Syd Adams
                 <property>instrumentation/comm/frequencies/standby-mhz</property>
                 <step>1.0</step>
                 <min>118.000</min>
-                <max>135.975</max>
+                <max>136.975</max>
                 <wrap>true</wrap>
             </binding>
         </action>

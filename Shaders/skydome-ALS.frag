@@ -253,12 +253,12 @@ color = mix(color, terrainHazeColor ,smoothstep(hazeBlendAngle + ctterrain, 0.0+
 
 // mix fog the skydome with the right amount of haze
 
-// this is for the terrain drawn
+hColor *= eqColorFactor;
 hColor = max(hColor.rgb, minLight.rgb);
 
 hColor = clamp(hColor,0.0,1.0);
 
-color = mix((eqColorFactor * hColor)+secondary_light * fog_backscatter(avisibility),color, transmission);
+color = mix(hColor+secondary_light * fog_backscatter(avisibility),color, transmission);
 
 
 

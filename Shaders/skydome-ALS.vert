@@ -12,6 +12,7 @@ uniform float terminator;
 uniform float avisibility;
 uniform float visibility;
 uniform float terrain_alt; 
+uniform float air_pollution;
 
 varying vec3 rayleigh;
 varying vec3 mie;
@@ -256,12 +257,15 @@ void main()
     earthShade = 0.9 * smoothstep((terminator_width+ terminator), (-terminator_width + terminator), yprime) + 0.1;
 
      float lightArg = (terminator-yprime)/100000.0;
-     vec4 light_diffuse;
-     light_diffuse.b = light_func(lightArg, 1.330e-05, 0.264, 2.527, 1.08e-05, 1.0);
-     light_diffuse.g = light_func(lightArg, 3.931e-06, 0.264, 3.827, 7.93e-06, 1.0);
-     light_diffuse.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
-     light_diffuse.a = 0.0;
-     hazeColor = light_diffuse.xyz;
+
+     hazeColor.r = light_func(lightArg, 8.305e-06, 0.161, 4.827-3.0*air_pollution, 3.04e-05, 1.0);
+     hazeColor.g = light_func(lightArg, 3.931e-06, 0.264, 3.827, 7.93e-06, 1.0);
+     hazeColor.b = light_func(lightArg, 1.330e-05, 0.264, 1.527+2.0*air_pollution, 1.08e-05, 1.0);
+     
+     //new
+     //hazeColor.r = light_func(lightArg, 3.495e-05, 0.161, 3.878, 0.000129, 1.0);
+     //hazeColor.g = light_func(lightArg, 1.145e-05, 0.161, 3.827, 1.783e-05, 1.0);
+     //hazeColor.b = light_func(lightArg, 0.234, 0.141, 2.572, 0.257, 1.0);
 
      float intensity = length(hazeColor.xyz);
      float mie_magnitude = 0.5 * smoothstep(350000.0, 150000.0, terminator -sqrt(2.0 * EarthRadius * terrain_alt)); 

@@ -25,6 +25,7 @@
     <use_alt_landing_light><use>/sim/rendering/als-secondary-lights/use-alt-landing-light</use></use_alt_landing_light>
     <landing_light1_offset><use>/sim/rendering/als-secondary-lights/landing-light1-offset-deg</use></landing_light1_offset>
     <landing_light2_offset><use>/sim/rendering/als-secondary-lights/landing-light2-offset-deg</use></landing_light2_offset>
+    <air_pollution><use>/environment/air-pollution-norm</use></air_pollution>
   </parameters>
   <technique n="8">
     <predicate>
@@ -114,6 +115,11 @@
         <name>cloud_self_shading</name>
         <type>float</type>
         <value><use>cloud_self_shading</use></value>
+      </uniform>
+      <uniform>
+        <name>air_pollution</name>
+        <type>float</type>
+        <value><use>air_pollution</use></value>
       </uniform>
       <uniform>
         <name>horizon_roughness</name>

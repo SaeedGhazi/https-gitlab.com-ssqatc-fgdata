@@ -30,52 +30,15 @@ const float terminator_width = 200000.0;
 float alt;
 float eShade;
 
+float fog_func (in float targ, in float alt);
+vec3 get_hazeColor(in float light_arg);
+
 float luminance(vec3 color)
 {
     return dot(vec3(0.212671, 0.715160, 0.072169), color);
 }
 
 
-float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
-{
-x = x - 0.5;
-
-// use the asymptotics to shorten computations
-if (x > 30.0) {return e;}
-if (x < -15.0) {return 0.0;}
-
-return e / pow((1.0 + a * exp(-b * (x-c)) ),(1.0/d));
-}
-
-// this determines how light is attenuated in the distance
-// physically this should be exp(-arg) but for technical reasons we use a sharper cutoff
-// for distance > visibility
-
-float fog_func (in float targ)
-{
-
-
-float fade_mix;
-
-// for large altitude > 30 km, we switch to some component of quadratic distance fading to
-// create the illusion of improved visibility range
-
-targ = 1.25 * targ * smoothstep(0.04,0.06,targ); // need to sync with the distance to which terrain is drawn
-
-
-if (alt < 30000.0)
-	{return exp(-targ - targ * targ * targ * targ);}
-else if (alt < 50000.0)
-	{
-	fade_mix = (alt - 30000.0)/20000.0;
-	return fade_mix * exp(-targ*targ - pow(targ,4.0)) + (1.0 - fade_mix) * exp(-targ - pow(targ,4.0));	
-	}
-else 
-	{
-	return exp(- targ * targ - pow(targ,4.0));
-	}
-
-}
 
 void main()
 {
@@ -208,19 +171,15 @@ else
 
 
 
-transmission =  fog_func(transmission_arg);
+transmission =  fog_func(transmission_arg, alt);
 
 // there's always residual intensity, we should never be driven to zero
 if (eqColorFactor < 0.2) eqColorFactor = 0.2;
 
 
 float lightArg = (terminator-yprime_alt)/100000.0;
+vec3 hazeColor = get_hazeColor(lightArg);
 
-vec3 hazeColor;
-
-hazeColor.b = light_func(lightArg, 1.330e-05, 0.264, 2.527, 1.08e-05, 1.0);
-hazeColor.g = light_func(lightArg, 3.931e-06, 0.264, 3.827, 7.93e-06, 1.0);
-hazeColor.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
 
 
 // now dim the light for haze
@@ -261,18 +220,22 @@ float shadow = mix( min(1.0 + dot(normal,lightDir),1.0), 1.0, 1.0-smoothstep(0.1
 hazeColor = mix(shadow * hazeColor, hazeColor, 0.3 + 0.7* smoothstep(250000.0, 400000.0, terminator));
 
 
+
+
+// don't let the light fade out too rapidly
+lightArg = (terminator + 200000.0)/100000.0;
+float minLightIntensity = min(0.2,0.16 * lightArg + 0.5);
+vec3 minLight = minLightIntensity * vec3 (0.2, 0.3, 0.4);
+hazeColor *= eqColorFactor * eShade;
+hazeColor.rgb = max(hazeColor.rgb, minLight.rgb);
+
 // determine the right mix of transmission and haze
 
+fragColor.rgb = mix(hazeColor, fragColor.rgb,transmission);
+}
 
-fragColor.xyz = mix(eqColorFactor * hazeColor * eShade, fragColor.xyz,transmission);
 
 gl_FragColor = fragColor;
-
-}
-else // if dist < 40.0 no fogging at all 
-{
-gl_FragColor = fragColor;
-}
 
 }
 

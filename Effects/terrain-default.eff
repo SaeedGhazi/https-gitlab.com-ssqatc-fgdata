@@ -876,6 +876,7 @@
         <vertex-shader>Shaders/terrain-ALS-detailed.vert</vertex-shader>
         <fragment-shader>Shaders/terrain-ALS-detailed.frag</fragment-shader>
         <fragment-shader>Shaders/noise.frag</fragment-shader>
+        <fragment-shader>Shaders/hazes.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>
@@ -966,6 +967,11 @@
         <name>cloud_self_shading</name>
         <type>float</type>
         <value><use>cloud_self_shading</use></value>
+      </uniform>
+      <uniform>
+        <name>air_pollution</name>
+        <type>float</type>
+        <value><use>air_pollution</use></value>
       </uniform>
       <uniform>
         <name>moonlight</name>
@@ -1103,6 +1109,7 @@
       <program>
         <vertex-shader>Shaders/generic-ALS-base.vert</vertex-shader>
         <fragment-shader>Shaders/terrain-ALS-base.frag</fragment-shader>
+        <fragment-shader>Shaders/hazes.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>
@@ -1158,6 +1165,11 @@
         <name>moonlight</name>
         <type>float</type>
         <value><use>moonlight</use></value>
+      </uniform>
+      <uniform>
+        <name>air_pollution</name>
+        <type>float</type>
+        <value><use>air_pollution</use></value>
       </uniform>
       <uniform>
         <name>texture</name>

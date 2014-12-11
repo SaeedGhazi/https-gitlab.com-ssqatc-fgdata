@@ -1051,6 +1051,7 @@
 			<program>
 				<vertex-shader>Shaders/water-ALS.vert</vertex-shader>
 				<fragment-shader>Shaders/water-ALS-base.frag</fragment-shader>
+				<fragment-shader>Shaders/hazes.frag</fragment-shader>
 			</program>
 			<!--<uniform>
 				<name>water_reflection</name>
@@ -1221,6 +1222,11 @@
         			<type>float</type>
         			<value><use>cloud_self_shading</use></value>
       			</uniform>
+			<uniform>
+				<name>air_pollution</name>
+				<type>float</type>
+				<value><use>air_pollution</use></value>
+			</uniform>
 			<!-- sea colors -->
 			<uniform>
 				<name>sea_r</name>

@@ -58,7 +58,7 @@
         <wrap-t>clamp</wrap-t>-->
       </texture-unit>
       <program>
-        <vertex-shader>Shaders/cloud-impostor-lightfield.vert</vertex-shader>
+        <vertex-shader>Shaders/cloud-impostor-ALS.vert</vertex-shader>
         <fragment-shader>Shaders/cloud-static-lightfield.frag</fragment-shader>
       </program>
       <uniform>

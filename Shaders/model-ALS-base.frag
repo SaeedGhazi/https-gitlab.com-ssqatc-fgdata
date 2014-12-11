@@ -47,7 +47,9 @@ float alt_factor(in float eye_alt, in float vertex_alt);
 float light_distance_fading(in float dist);
 float fog_backscatter(in float avisibility);
 
+
 vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
+vec3 get_hazeColor(in float light_arg);
 vec3 searchlight();
 vec3 landing_light(in float offset);
 
@@ -143,11 +145,8 @@ void main()
 
 float lightArg = (terminator-yprime_alt)/100000.0;
 
-vec3 hazeColor;
+vec3 hazeColor = get_hazeColor(lightArg);
 
-hazeColor.b = light_func(lightArg, 1.330e-05, 0.264, 2.527, 1.08e-05, 1.0);
-hazeColor.g = light_func(lightArg, 3.931e-06, 0.264, 3.827, 7.93e-06, 1.0);
-hazeColor.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
 
 // Rayleigh color shift due to in-scattering
 
@@ -293,12 +292,18 @@ hazeColor = intensity * normalize(mix(hazeColor,  shadedFogColor, (1.0-smoothste
 float shadow = mix( min(1.0 + dot(normal,lightDir),1.0), 1.0, 1.0-smoothstep(0.1, 0.4, transmission));
 hazeColor = mix(shadow * hazeColor, hazeColor, 0.3 + 0.7* smoothstep(250000.0, 400000.0, terminator));
 
+// don't let the light fade out too rapidly
 
+lightArg = (terminator + 200000.0)/100000.0;
+float minLightIntensity = min(0.2,0.16 * lightArg + 0.5);
+vec3 minLight = minLightIntensity * vec3 (0.2, 0.3, 0.4);
+hazeColor *= eqColorFactor * eShade;
+hazeColor.rgb = max(hazeColor.rgb, minLight.rgb);
 
 // determine the right mix of transmission and haze
 
 
-fragColor.rgb = mix((eqColorFactor * hazeColor * eShade) + secondary_light * fog_backscatter(avisibility), fragColor.rgb,transmission);
+fragColor.rgb = mix(hazeColor  + secondary_light * fog_backscatter(avisibility), fragColor.rgb,transmission);
 
 
 

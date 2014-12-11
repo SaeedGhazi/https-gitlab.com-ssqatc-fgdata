@@ -94,7 +94,7 @@ void main(void)
   float earthShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt) + 0.1;
   
   //float intensity = length(light_diffuse.rgb);
-  float intensity = (1.0 - (0.5 * (1.0 - earthShade))) *  length(light_diffuse.rgb);
+  float intensity = (1.0 - (0.8 * (1.0 - earthShade))) *  length(light_diffuse.rgb);
   //light_diffuse.rgb = intensity * normalize(mix(light_diffuse.rgb, shadedFogColor, (1.0 - smoothstep(0.5,0.9, cloud_self_shading ))));   
   light_diffuse.rgb = intensity * normalize(mix(light_diffuse.rgb, shadedFogColor, (1.0 - smoothstep(0.5,0.9, cloud_self_shading  ))));  
   if (earthShade < 0.6)

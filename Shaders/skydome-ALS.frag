@@ -22,6 +22,7 @@ uniform float saturation;
 uniform float visibility;
 uniform float avisibility;
 uniform float scattering;
+uniform float terminator;
 uniform float cloud_self_shading;
 uniform float horizon_roughness;
 uniform float landing_light1_offset;
@@ -38,6 +39,17 @@ float fog_backscatter(in float avisibility);
 
 vec3 searchlight();
 vec3 landing_light(in float offset);
+
+float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
+{
+x = x - 0.5;
+
+// use the asymptotics to shorten computations
+if (x > 30.0) {return e;}
+if (x < -15.0) {return 0.0;}
+
+return e / pow((1.0 + a * exp(-b * (x-c)) ),(1.0/d));
+}
 
 float miePhase(in float cosTheta, in float g)
 {
@@ -203,6 +215,19 @@ hazeBlendAngle = hazeBlendAngle + 0.1 * altFactor;
 hazeBlendAngle = hazeBlendAngle +  (1.0-horizon_roughness) * altFactor2 * 0.1 *  Noise2D(vec2(0.0,cphi), 0.3);
 
 terrainHazeColor = clamp(terrainHazeColor,0.0,1.0);
+
+
+// don't let the light fade out too rapidly
+float lightArg = (terminator + 200000.0)/100000.0;
+float minLightIntensity = min(0.2,0.16 * lightArg + 0.5);
+vec3 minLight = minLightIntensity * vec3 (0.2, 0.3, 0.4);
+
+// this is for the bare Rayleigh and Mie sky, highly altitude dependent
+color.rgb = max(color.rgb, minLight.rgb * (1.0- alt/100000.0) * (1.0 - costheta));
+
+// this is for the terrain drawn
+terrainHazeColor = max(terrainHazeColor.rgb, minLight.rgb);
+
 color = mix(color, terrainHazeColor ,smoothstep(hazeBlendAngle + ctterrain, 0.0+ctterrain, ct));
 
 
@@ -228,9 +253,13 @@ color = mix(color, terrainHazeColor ,smoothstep(hazeBlendAngle + ctterrain, 0.0+
 
 // mix fog the skydome with the right amount of haze
 
+// this is for the terrain drawn
+hColor = max(hColor.rgb, minLight.rgb);
+
 hColor = clamp(hColor,0.0,1.0);
-//color = transmission * color  + (1.0-transmission) * eqColorFactor * hColor ;
+
 color = mix((eqColorFactor * hColor)+secondary_light * fog_backscatter(avisibility),color, transmission);
+
 
 
   gl_FragColor = vec4(color, 1.0);

@@ -1,4 +1,7 @@
 // -*-C++-*-
+
+uniform float air_pollution;
+
 // standard ALS fog function with exp(-d/D) fading and cutoff at low altitude and exp(-d^2/D^2) at high altitude
 
 const float AtmosphericScaleHeight = 8500.0;
@@ -72,3 +75,28 @@ color.b = color.b * (1.0 - 1.6 * outscatter);
 
 return color;
 } 
+
+// the generalized logistic function used to compute lightcurves
+
+float light_curve (in float x, in float a, in float b, in float c, in float d, in float e)
+{
+x = x - 0.5;
+
+// use the asymptotics to shorten computations
+if (x > 30.0) {return e;}
+if (x < -15.0) {return 0.0;}
+
+return e / pow((1.0 + a * exp(-b * (x-c)) ),(1.0/d));
+}
+
+// the haze color function
+
+vec3 get_hazeColor(in float lightArg)
+{
+vec3 hazeColor;
+hazeColor.r = light_curve(lightArg, 8.305e-06, 0.161, 4.827-3.0 *air_pollution, 3.04e-05, 1.0);
+hazeColor.g = light_curve(lightArg, 3.931e-06, 0.264, 3.827, 7.93e-06, 1.0);
+hazeColor.b = light_curve(lightArg, 1.330e-05, 0.264, 1.527+ 2.0*air_pollution, 1.08e-05, 1.0);
+
+return hazeColor;
+}

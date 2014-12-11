@@ -146,7 +146,7 @@ void main(void)
 
    // two times terminator width governs how quickly light fades into shadow
     float terminator_width = 200000.0;
-    float earthShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt) + 0.1;
+    float earthShade = 1.0- 0.9*  smoothstep(-terminator_width+ terminator, terminator_width + terminator, yprime_alt);
 
     // compute the light at the position
     vec4 light_diffuse;
@@ -158,7 +158,7 @@ void main(void)
     light_diffuse.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
     light_diffuse.a = 1.0;
 
-    intensity = (1.0 - (0.5 * (1.0 - earthShade))) *  length(light_diffuse.rgb);
+    intensity = (1.0 - (0.8 * (1.0 - earthShade))) *  length(light_diffuse.rgb);
     light_diffuse.rgb = intensity * normalize(mix(light_diffuse.rgb, shadedFogColor, (1.0 - smoothstep(0.5,0.9, min(scattering, cloud_self_shading)  ))));   
 
     // correct ambient light intensity and hue before sunrise

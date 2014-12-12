@@ -28,7 +28,7 @@
 # - add wind correction to speed-to-fly
 # - final glide computer
 
-io.include("update_loop.nas");
+io.include("updateloop.nas");
 
 var MPS2KPH = 3.6;
 var sqr = func(x) {x * x}
@@ -44,14 +44,19 @@ var InstrumentComponent = {
 # TODO: Refactor aircrafts that use it and remove this.
 var Instrument = UpdateLoop;
 
-# update_prop(property)
-# Helper generator for updating the given property on every element update
+##
+# Helper generator for updating a property on every element update
 #
 # Example:
+#
 # var needle = Dampener.new(
 #	input: probe,
 #	dampening: 2.8,
 #	on_update: update_prop("/instrumentation/variometer/te-reading-mps"));
+#
+# See Aircraft/Instruments-3d/glider/vario/ilec-sc7.nas and
+# Aircraft/Generic/soaring-instrumentation-sdk.nas for usage examples.
+# You can also refer to the soaring sdk wiki page.
 
 var update_prop = func(property) {
 	func(value) { setprop(property, value) }

@@ -47,27 +47,11 @@ float rayleigh_in_func(in float dist, in float air_pollution, in float avisibili
 
 vec3 searchlight();
 vec3 landing_light(in float offset);
-
-float luminance(vec3 color)
-{
-    return dot(vec3(0.212671, 0.715160, 0.072169), color);
-}
+vec3 get_hazeColor(in float light_arg);
 
 
-float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
-{
-x = x - 0.5;
 
-// use the asymptotics to shorten computations
-if (x > 30.0) {return e;}
-if (x < -15.0) {return 0.0;}
 
-return e / pow((1.0 + a * exp(-b * (x-c)) ),(1.0/d));
-}
-
-// this determines how light is attenuated in the distance
-// physically this should be exp(-arg) but for technical reasons we use a sharper cutoff
-// for distance > visibility
 
 float tree_fog_func (in float targ)
 {
@@ -185,11 +169,9 @@ void main()
 
    float lightArg = (terminator-yprime_alt)/100000.0;
 
-    vec3 hazeColor;
+    vec3 hazeColor = get_hazeColor(lightArg);
 
-    hazeColor.b = light_func(lightArg, 1.330e-05, 0.264, 2.527, 1.08e-05, 1.0);
-    hazeColor.g = light_func(lightArg, 3.931e-06, 0.264, 3.827, 7.93e-06, 1.0);
-    hazeColor.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
+  
 
 // Rayleigh color shift due to in-scattering
 
@@ -349,11 +331,18 @@ hazeColor = intensity * normalize(mix(hazeColor,  1.5* shadedFogColor, 1.0 -smoo
 hazeColor = intensity * normalize(mix(hazeColor,  shadedFogColor, (1.0-smoothstep(0.5,0.9,eqColorFactor)))); 
 
 
+// don't let the light fade out too rapidly
+lightArg = (terminator + 200000.0)/100000.0;
+float minLightIntensity = min(0.2,0.16 * lightArg + 0.5);
+vec3 minLight = minLightIntensity * vec3 (0.2, 0.3, 0.4);
+
+hazeColor.rgb *= eqColorFactor * eShade;
+hazeColor.rgb = max(hazeColor.rgb, minLight.rgb);
 
 // determine the right mix of transmission and haze
 
 hazeColor = clamp(hazeColor,0.0,1.0);
-fragColor.rgb = mix(eqColorFactor * hazeColor * eShade + secondary_light * fog_backscatter(avisibility), fragColor.rgb,transmission);
+fragColor.rgb = mix( hazeColor  + secondary_light * fog_backscatter(avisibility), fragColor.rgb,transmission);
 
 }
 

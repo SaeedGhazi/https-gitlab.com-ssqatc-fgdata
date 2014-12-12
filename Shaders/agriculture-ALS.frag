@@ -85,20 +85,10 @@ float light_distance_fading(in float dist);
 float fog_backscatter(in float avisibility);
 
 vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
+vec3 get_hazeColor(in float light_arg);
 vec3 searchlight();
 vec3 landing_light(in float offset);
 
-
-float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
-{
-x = x - 0.5;
-
-// use the asymptotics to shorten computations
-if (x > 30.0) {return e;}
-if (x < -15.0) {return 0.0;}
-
-return e / pow((1.0 + a * exp(-b * (x-c)) ),(1.0/d));
-}
 
 
 // a fade function for procedural scales which are smaller than a pixel
@@ -458,12 +448,9 @@ if ((dist < 5000.0)&& (quality_level > 3) && (combined_wetness>0.0))
 
     fragColor = color * texel + specular;
 
-
-   vec3 hazeColor;
    float lightArg = (terminator-yprime_alt)/100000.0;
-   hazeColor.b = light_func(lightArg, 1.330e-05, 0.264, 2.527, 1.08e-05, 1.0);
-   hazeColor.g = light_func(lightArg, 3.931e-06, 0.264, 3.827, 7.93e-06, 1.0);
-   hazeColor.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
+   vec3 hazeColor = get_hazeColor(lightArg);
+
 
 
 // Rayleigh color shift due to out-scattering
@@ -648,8 +635,15 @@ if (intensity > 0.0) // this needs to be a condition, because otherwise hazeColo
 	hazeColor = mix(shadow * hazeColor, hazeColor, 0.3 + 0.7* smoothstep(250000.0, 400000.0, terminator));
 	}
 
+// don't let the light fade out too rapidly
+lightArg = (terminator + 200000.0)/100000.0;
+float minLightIntensity = min(0.2,0.16 * lightArg + 0.5);
+vec3 minLight = minLightIntensity * vec3 (0.2, 0.3, 0.4);
 
-fragColor.rgb = mix((eqColorFactor * hazeColor * eShade) +secondary_light * fog_backscatter(avisibility), fragColor.rgb,transmission);
+hazeColor.rgb *= eqColorFactor * eShade;
+hazeColor.rgb = max(hazeColor.rgb, minLight.rgb);
+
+fragColor.rgb = mix(hazeColor  + secondary_light * fog_backscatter(avisibility), fragColor.rgb,transmission);
 
 }
 

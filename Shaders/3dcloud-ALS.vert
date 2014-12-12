@@ -147,6 +147,7 @@ void main(void)
    // two times terminator width governs how quickly light fades into shadow
     float terminator_width = 200000.0;
     float earthShade = 1.0- 0.9*  smoothstep(-terminator_width+ terminator, terminator_width + terminator, yprime_alt);
+    float earthShadeFactor = 1.0 - smoothstep(0.4, 0.5, earthShade);
 
     // compute the light at the position
     vec4 light_diffuse;
@@ -168,14 +169,9 @@ void main(void)
      
     }
 
-
-    //gl_FrontColor = gl_LightSource[0].diffuse * shade + gl_FrontLightModelProduct.sceneColor;
-     //intensity = length(light_diffuse.xyz);
-   
     gl_FrontColor.rgb = intensity * shade * normalize(mix(light_diffuse.rgb, shadedFogColor, smoothstep(0.1,0.4, (1.0 - shade)  ))) ; 
      
-    //gl_FrontColor.a = 1.0;
-    //light_diffuse+ gl_FrontLightModelProduct.sceneColor;// * shade ;//+ gl_FrontLightModelProduct.sceneColor;
+    
     
     if ((fogCoord > (0.9 * detail_range)) && (fogCoord > center_dist) && (shade_factor < 0.7)) {
       // cloudlet is almost at the detail range, so fade it out.
@@ -186,34 +182,15 @@ void main(void)
     }
     gl_FrontColor.a = gl_FrontColor.a * (1.0 - smoothstep(visibility, 3.0* visibility, fogCoord));
 
-    //gl_BackColor = gl_FrontColor;
-
-   // Fog doesn't affect clouds as much as other objects.
-    //float fadeScale = 0.05 + 0.2 * log(fogCoord/1000.0);
-    //if (fadeScale < 0.05) fadeScale = 0.05;
-    //fogFactor = exp( -gl_Fog.density * fogCoord * fadeScale);
-
-    // Fog doesn't affect clouds as much as other objects.
-    //fogFactor = exp( -gl_Fog.density * fogCoord * 0.5);
-    //fogFactor = clamp(fogFactor, 0.0, 1.0);
     fogFactor = exp(-fogCoord/visibility);
 
     // haze of ground haze shader is slightly bluish
     hazeColor = light_diffuse.rgb;
     hazeColor.r = hazeColor.r * 0.83;
     hazeColor.g = hazeColor.g * 0.9; 
-    //hazeColor = intensity * normalize(mix(hazeColor,  shadedFogColor, (1.0 - smoothstep(0.5,0.9,cloud_self_shading)) )); 
     hazeColor = hazeColor * scattering;
 
-    // in sunset or sunrise conditions, do extra shading of clouds
-    
-    // change haze color to blue hue for strong fogging
-    //intensity = length(hazeColor);
-    //hazeColor = intensity * normalize(mix(hazeColor,  2.0* vec3 (0.55, 0.6, 0.8), (1.0 - smoothstep(0.3,0.8,scattering)))); 	    
-
-    //hazeColor = hazeColor * earthShade;
-    //gl_FrontColor.xyz = gl_FrontColor.xyz * earthShade;
-      
+   
     // Mie correction
     float Mie;
     float MieFactor;
@@ -221,7 +198,7 @@ void main(void)
      if (bottom_factor > 0.6) 
     {
     MieFactor =   dot(normalize(lightFull), normalize(relVector));
-    Mie = 1.5 * smoothstep(0.9,1.0, MieFactor) * smoothstep(0.6, 0.8, bottom_factor);  
+    Mie = 1.5 * smoothstep(0.9,1.0, MieFactor) * smoothstep(0.6, 0.8, bottom_factor) * (1.0-earthShadeFactor) ;  
     }
      else {Mie = 0.0;}
 
@@ -236,8 +213,8 @@ void main(void)
     gl_FrontColor.b = mie_func(gl_FrontColor.b, 0.5*Mie);
     }
    
-    gl_FrontColor.rgb = gl_FrontColor.rgb +  moonLightColor * (1.0 - smoothstep(0.4, 0.5, earthShade));
-    hazeColor.rgb = hazeColor.rgb + moonLightColor * (1.0 - smoothstep(0.4, 0.5, earthShade));
+    gl_FrontColor.rgb = gl_FrontColor.rgb +  moonLightColor * earthShadeFactor;
+    hazeColor.rgb = hazeColor.rgb + moonLightColor * earthShadeFactor;
     gl_FrontColor.a = gl_FrontColor.a * alpha_factor; 
     gl_BackColor = gl_FrontColor;
   }

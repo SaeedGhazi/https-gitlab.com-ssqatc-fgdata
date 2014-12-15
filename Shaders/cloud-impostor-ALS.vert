@@ -33,7 +33,7 @@ return e / pow((1.0 + a * exp(-b * (x-c)) ),(1.0/d));
 void main(void)
 {	
 
-  vec3 shadedFogColor = vec3 (0.65, 0.67, 0.78);
+  vec3 shadedFogColor = vec3 (0.55, 0.67, 0.88);
   vec3 moonLightColor = vec3 (0.095, 0.095, 0.15) * moonlight;
 
   gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;

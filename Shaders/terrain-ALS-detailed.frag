@@ -73,7 +73,7 @@ float dist = length(relPos);
 float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
 
 
-  vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
+  vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
 // this is taken from default.frag
     vec3 n;
     float NdotL, NdotHV, fogFactor;
@@ -490,18 +490,11 @@ if (intensity > 0.0) // this needs to be a condition, because otherwise hazeColo
 
 
 
-fragColor.rgb = mix(hazeColor , fragColor.rgb,transmission);
-
-
-gl_FragColor = fragColor;
-
+fragColor.rgb = mix(clamp(hazeColor,0.0,1.0) , clamp(fragColor.rgb,0.0,1.0),transmission);
 
 }
-else // if dist < threshold no fogging at all 
-{
-gl_FragColor = fragColor;
-}
 
+gl_FragColor = fragColor;
 
 
 }

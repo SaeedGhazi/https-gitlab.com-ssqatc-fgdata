@@ -5,6 +5,7 @@
 varying vec4 diffuse_term;
 varying vec3 normal;
 varying vec3 relPos;
+varying vec3 worldPos;
 varying vec2 rawPos;
 varying vec3 ecViewdir;
 
@@ -49,6 +50,7 @@ uniform int use_alt_landing_light;
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
 
+
 float alt;
 float eShade;
 float yprime_alt;
@@ -56,6 +58,7 @@ float mie_angle;
 
 float shadow_func (in float x, in float y, in float noise, in float dist);
 float Noise2D(in vec2 coord, in float wavelength);
+float Noise3D(in vec3 coord, in float wavelength);
 float fog_func (in float targ, in float alt);
 float rayleigh_in_func(in float dist, in float air_pollution, in float avisibility, in float eye_alt, in float vertex_alt);
 float alt_factor(in float eye_alt, in float vertex_alt);
@@ -94,7 +97,7 @@ yprime_alt = diffuse_term.a;
 //diffuse_term.a = 1.0;
 mie_angle = gl_Color.a;
 
-vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
+vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
 
 float dist = length(relPos);
 float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
@@ -134,10 +137,10 @@ float noise_5m = Noise2D(rawPos.xy,5.0);
 
 
 
-float noise_50m = Noise2D(rawPos.xy, 500.0);
-float noise_1500m = Noise2D(rawPos.xy, 1500.0);
-float noise_2000m = Noise2D(rawPos.xy, 2000.0);
+float noise_50m = Noise2D(rawPos.xy, 50.0);
 
+float noise_1500m = Noise3D(worldPos.xyz, 1500.0);
+float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
 
 
 
@@ -327,8 +330,9 @@ if (quality_level > 3)
 
 
 float delta_z = hazeLayerAltitude - eye_alt;
+float mvisibility = min(visibility,avisibility);
 
-if (dist > 0.04 * min(visibility,avisibility)) 
+if (dist > 0.04 * mvisibility) 
 {
 
 alt = eye_alt;
@@ -351,7 +355,7 @@ if (delta_z > 0.0) // we're inside the layer
 	if (ct < 0.0) // we look down 
 		{
 		distance_in_layer = dist;
-		vAltitude = min(distance_in_layer,min(visibility, avisibility)) * ct;
+		vAltitude = min(distance_in_layer,mvisibility) * ct;
   		delta_zv = delta_z - vAltitude;
 		}
 	else 	// we may look through upper layer edge
@@ -446,6 +450,10 @@ if (lightArg < 10.0)
 // high altitude desaturation of the haze color
 
 intensity = length(hazeColor);
+
+if (intensity>0.0)
+{
+
 hazeColor = intensity * normalize (mix(hazeColor, intensity * vec3 (1.0,1.0,1.0), 0.7* smoothstep(5000.0, 50000.0, alt)));
 
 // blue hue of haze
@@ -459,18 +467,18 @@ float fade_out = max(0.65 - 0.3 *overcast, 0.45);
 intensity = length(hazeColor);
 hazeColor = intensity * normalize(mix(hazeColor,  1.5* shadedFogColor, 1.0 -smoothstep(0.25, fade_out,eShade) )); 
 
+
 // change haze color to blue hue for strong fogging
 hazeColor = intensity * normalize(mix(hazeColor,  shadedFogColor, (1.0-smoothstep(0.5,0.9,eqColorFactor)))); 
-
 
 // reduce haze intensity when looking at shaded surfaces, only in terminator region
 
 float shadow = mix( min(1.0 + dot(n,lightDir),1.0), 1.0, 1.0-smoothstep(0.1, 0.4, transmission));
 hazeColor = mix(shadow * hazeColor, hazeColor, 0.3 + 0.7* smoothstep(250000.0, 400000.0, terminator));
+}
 
 
-
-hazeColor = clamp(hazeColor,0.0,1.0);
+//hazeColor = clamp(hazeColor,0.0,1.0);
 
 // don't let the light fade out too rapidly
 lightArg = (terminator + 200000.0)/100000.0;
@@ -481,7 +489,7 @@ hazeColor.rgb *= eqColorFactor * eShade;
 hazeColor.rgb = max(hazeColor.rgb, minLight.rgb);
 
 
-fragColor.rgb = mix(hazeColor+secondary_light * fog_backscatter(avisibility), fragColor.rgb,transmission);
+fragColor.rgb = mix(hazeColor+secondary_light * fog_backscatter(mvisibility), fragColor.rgb,transmission);
 
 
 

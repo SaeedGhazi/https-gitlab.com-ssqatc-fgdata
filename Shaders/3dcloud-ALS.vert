@@ -61,7 +61,8 @@ void main(void)
   float intensity;
   float mix_factor;
 
-  vec3 shadedFogColor =  vec3(0.65, 0.67, 0.78);//vec3 (0.55, 0.6, 0.8);
+
+  vec3 shadedFogColor = vec3(0.55, 0.67, 0.88); 
   vec3 moonLightColor = vec3 (0.095, 0.095, 0.15) * moonlight * scattering;
   gl_TexCoord[0] = gl_MultiTexCoord0;
   vec4 ep = gl_ModelViewMatrixInverse * vec4(0.0,0.0,0.0,1.0);
@@ -159,6 +160,7 @@ void main(void)
     light_diffuse.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
     light_diffuse.a = 1.0;
 
+    //light_diffuse *= cloud_self_shading;
     intensity = (1.0 - (0.8 * (1.0 - earthShade))) *  length(light_diffuse.rgb);
     light_diffuse.rgb = intensity * normalize(mix(light_diffuse.rgb, shadedFogColor, (1.0 - smoothstep(0.5,0.9, min(scattering, cloud_self_shading)  ))));   
 

@@ -117,7 +117,8 @@ float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
 float msl_altitude = (relPos.z + eye_alt);
 
 
-  vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
+//  vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
+   vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
 // this is taken from default.frag
     vec3 n;
     float NdotL, NdotHV, fogFactor;
@@ -496,8 +497,10 @@ if ((dist < 5000.0) && (combined_wetness>0.0))
 // here comes the terrain haze model
 
 float delta_z = hazeLayerAltitude - eye_alt;
+float mvisibility = min(visibility,avisibility);
 
-if (dist > 0.04 * min(visibility,avisibility)) 
+
+if (dist > 0.04 * mvisibility) 
 {
 
 alt = eye_alt;
@@ -520,7 +523,7 @@ if (delta_z > 0.0) // we're inside the layer
 	if (ct < 0.0) // we look down 
 		{
 		distance_in_layer = dist;
-		vAltitude = min(distance_in_layer,min(visibility, avisibility)) * ct;
+		vAltitude = min(distance_in_layer,mvisibility) * ct;
   		delta_zv = delta_z - vAltitude;
 		}
 	else 	// we may look through upper layer edge
@@ -627,6 +630,7 @@ if (intensity > 0.0) // this needs to be a condition, because otherwise hazeColo
 	intensity = length(hazeColor);
 	hazeColor = intensity * normalize(mix(hazeColor,  1.5* shadedFogColor, 1.0 -smoothstep(0.25, fade_out,eShade) )); 
 
+
 	// change haze color to blue hue for strong fogging
 	hazeColor = intensity * normalize(mix(hazeColor,  shadedFogColor, (1.0-smoothstep(0.5,0.9,eqColorFactor)))); 
 
@@ -649,7 +653,7 @@ hazeColor.rgb = max(hazeColor.rgb, minLight.rgb);
 // finally, mix fog in
 
 
-fragColor.rgb = mix((hazeColor)+secondary_light * fog_backscatter(avisibility) , fragColor.rgb,transmission);
+fragColor.rgb = mix(hazeColor+secondary_light * fog_backscatter(mvisibility) , fragColor.rgb,transmission);
 }
 
 

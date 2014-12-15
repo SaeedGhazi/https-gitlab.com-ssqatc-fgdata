@@ -382,6 +382,7 @@
 				<vertex-shader>Shaders/wake-ALS.vert</vertex-shader>
 				<!--<fragment-shader>Shaders/include_fog.frag</fragment-shader>-->
 				<fragment-shader>Shaders/bowwave-ALS.frag</fragment-shader>
+				<fragment-shader>Shaders/hazes.frag</fragment-shader>
 			</program>
 			<uniform>
 				<name>water_reflection</name>

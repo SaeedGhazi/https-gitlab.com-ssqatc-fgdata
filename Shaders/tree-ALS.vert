@@ -69,7 +69,7 @@ void main()
   //vec4 light_diffuse;
   vec4 light_ambient;
 
-  vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
+  vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
 
   float yprime;
   float lightArg;

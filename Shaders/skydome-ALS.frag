@@ -72,7 +72,8 @@ float rayleighPhase(in float cosTheta)
 void main()
 {
 
-  vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
+  //vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
+   vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
   float cosTheta = dot(normalize(eye), gl_LightSource[0].position.xyz);
  
   // position of the horizon line

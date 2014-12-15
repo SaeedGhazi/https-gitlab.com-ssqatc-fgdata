@@ -131,7 +131,7 @@ void main (void)
     float pf = 0.0;
     float pf1 = 0.0;
     ///some generic light scattering parameters 
-    vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
+    vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
     vec3 moonLightColor = vec3 (0.095, 0.095, 0.15) * moonlight;
     float alt = eye_alt; 					
     float effective_scattering = min(scattering, cloud_self_shading);
@@ -430,15 +430,16 @@ void main (void)
     float eqColorFactor;
 
     float delta_z = hazeLayerAltitude - eye_alt;
+    float mvisibility = min(visibility, avisibility);
 
-    if (dist > max(40.0, 0.04 * min(visibility,avisibility))) 
+    if (dist >  0.04 * mvisibility) 
         {
         if (delta_z > 0.0) // we're inside the layer
             {
             if (ct < 0.0) // we look down 
                 {
                 distance_in_layer = dist;
-                vAltitude = min(distance_in_layer,min(visibility, avisibility)) * ct;
+                vAltitude = min(distance_in_layer,mvisibility) * ct;
                 delta_zv = delta_z - vAltitude;
                 }
             else 	// we may look through upper layer edge
@@ -532,7 +533,7 @@ void main (void)
 
     /// END fog color
 	fragColor = clamp(fragColor, 0.0, 1.0);
-    	hazeColor = clamp(hazeColor, 0.0, 1.0);
+    	//hazeColor = clamp(hazeColor, 0.0, 1.0);
 
     ///BEGIN Rayleigh fog ///
 
@@ -555,6 +556,6 @@ void main (void)
 	hazeColor.rgb = max(hazeColor.rgb, minLight.rgb);
 
 
-      fragColor.rgb = mix(hazeColor +secondary_light * fog_backscatter(avisibility), fragColor.rgb,transmission);
+      fragColor.rgb = mix(hazeColor +secondary_light * fog_backscatter(mvisibility), fragColor.rgb,transmission);
     gl_FragColor = fragColor;
     }

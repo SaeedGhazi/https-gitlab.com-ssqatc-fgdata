@@ -120,7 +120,7 @@ void main()
 {
 
 
-  vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
+  vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
 
 
 
@@ -190,9 +190,9 @@ void main()
 
 
 float delta_z = hazeLayerAltitude - eye_alt;
+float mvisibility = min(visibility,avisibility);
 
-
-if (dist > max(40.0, 0.07 * min(visibility,avisibility))) 
+if (dist > max(40.0, 0.07 * mvisibility)) 
 {
 
 alt = eye_alt;
@@ -216,7 +216,7 @@ if (delta_z > 0.0) // we're inside the layer
 	if (ct < 0.0) // we look down 
 		{
 		distance_in_layer = dist;
-		vAltitude = min(distance_in_layer,min(visibility, avisibility)) * ct;
+		vAltitude = min(distance_in_layer,mvisibility) * ct;
   		delta_zv = delta_z - vAltitude;
 		}
 	else 	// we may look through upper layer edge
@@ -342,7 +342,7 @@ hazeColor.rgb = max(hazeColor.rgb, minLight.rgb);
 // determine the right mix of transmission and haze
 
 hazeColor = clamp(hazeColor,0.0,1.0);
-fragColor.rgb = mix( hazeColor  + secondary_light * fog_backscatter(avisibility), fragColor.rgb,transmission);
+fragColor.rgb = mix( hazeColor  + secondary_light * fog_backscatter(mvisibility), fragColor.rgb,transmission);
 
 }
 

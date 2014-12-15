@@ -148,7 +148,7 @@ void main(void)
 	{
 
 
-        vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
+        vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
 	float effective_scattering = min(scattering, cloud_self_shading);
 
 	float dist = length(relPos);
@@ -346,7 +346,7 @@ void main(void)
 	
 
 
-       specular_light = gl_Color.rgb;
+       specular_light = gl_Color.rgb * earthShade;
 
 	
 	vec3 specular_color = vec3(specular_light)
@@ -412,10 +412,10 @@ void main(void)
 
 
 float delta_z = hazeLayerAltitude - eye_alt;
+float mvisibility = min(visibility,avisibility);
 
 
-
-if (dist > 40.0)
+if (dist > 0.04 * mvisibility)
 {
 
 
@@ -438,7 +438,7 @@ if (delta_z > 0.0) // we're inside the layer
 	if (ct < 0.0) // we look down 
 		{
 		distance_in_layer = dist;
-		vAltitude = min(distance_in_layer,min(visibility,avisibility)) * ct;
+		vAltitude = min(distance_in_layer,mvisibility) * ct;
   		delta_zv = delta_z - vAltitude;
 		}
 	else 	// we may look through upper layer edge
@@ -496,7 +496,7 @@ else
 transmission =  fog_func(transmission_arg, eye_alt);
 
 // there's always residual intensity, we should never be driven to zero
-if (eqColorFactor < 0.2) eqColorFactor = 0.2;
+if (eqColorFactor < 0.2) {eqColorFactor = 0.2;}
 
 
 float lightArg = (terminator-yprime_alt)/100000.0;

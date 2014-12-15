@@ -56,8 +56,8 @@
         <wrap-t>clamp</wrap-t>-->
       </texture-unit>
       <program>
-        <vertex-shader>Shaders/cloud-noctilucent-lightfield.vert</vertex-shader>
-        <fragment-shader>Shaders/cloud-static-lightfield.frag</fragment-shader>
+        <vertex-shader>Shaders/cloud-noctilucent-ALS.vert</vertex-shader>
+        <fragment-shader>Shaders/cloud-static-ALS.frag</fragment-shader>
       </program>
       <uniform>
         <name>baseTexture</name>

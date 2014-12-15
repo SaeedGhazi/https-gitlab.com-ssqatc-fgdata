@@ -6,6 +6,7 @@ varying vec4 diffuse_term;
 varying vec3 normal;
 varying vec3 relPos;
 varying vec2 rawPos;
+varying vec3 worldPos;
 varying vec3 ecViewdir;
 
 
@@ -54,6 +55,7 @@ float mie_angle;
 
 float shadow_func (in float x, in float y, in float noise, in float dist);
 float Noise2D(in vec2 coord, in float wavelength);
+float Noise3D(in vec3 coord, in float wavelength);
 float DotNoise2D(in vec2 coord, in float wavelength, in float fractionalMaxDotSize, in float dot_density);
 float fog_func (in float targ, in float alt);
 float alt_factor(in float eye_alt, in float vertex_alt);
@@ -81,7 +83,7 @@ void main()
   float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
 
 
-  vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
+  vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
 // this is taken from default.frag
     vec3 n;
     float NdotL, NdotHV;
@@ -123,12 +125,11 @@ noise_5m = Noise2D(rawPos.xy ,5.0);
 float noisegrad_10m;
 float noisegrad_5m;
 
-float noise_50m = Noise2D(rawPos.xy, 50.0);; 
-float noise_250m;
-float noise_500m = Noise2D(rawPos.xy, 500.0);
-float noise_1500m = Noise2D(rawPos.xy, 1500.0);
-float noise_2000m = Noise2D(rawPos.xy, 2000.0);
+float noise_50m = Noise2D(rawPos.xy, 50.0);
 
+
+float noise_1500m = Noise3D(worldPos.xyz, 1500.0);
+float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
 
 
 
@@ -308,8 +309,9 @@ float lightArg = (terminator-yprime_alt)/100000.0;
 
 
 float delta_z = hazeLayerAltitude - eye_alt;
+float mvisibility = min(visibility, avisibility);
 
-if (dist > 0.04 * min(visibility,avisibility))
+if (dist > 0.04 * mvisibility)
 {
 
 alt = eye_alt;
@@ -332,7 +334,7 @@ if (delta_z > 0.0) // we're inside the layer
 	if (ct < 0.0) // we look down 
 		{
 		distance_in_layer = dist;
-		vAltitude = min(distance_in_layer,min(visibility, avisibility)) * ct;
+		vAltitude = min(distance_in_layer,mvisibility) * ct;
   		delta_zv = delta_z - vAltitude;
 		}
 	else 	// we may look through upper layer edge
@@ -449,7 +451,7 @@ if (intensity > 0.0) // this needs to be a condition, because otherwise hazeColo
 	float shadow = mix( min(1.0 + dot(n,lightDir),1.0), 1.0, 1.0-smoothstep(0.1, 0.4, transmission));
 	hazeColor = mix(shadow * hazeColor, hazeColor, 0.3 + 0.7* smoothstep(250000.0, 400000.0, terminator));
 	}
-hazeColor = clamp(hazeColor, 0.0, 1.0);
+//hazeColor = clamp(hazeColor, 0.0, 1.0);
 
 // don't let the light fade out too rapidly
 lightArg = (terminator + 200000.0)/100000.0;
@@ -459,7 +461,7 @@ vec3 minLight = minLightIntensity * vec3 (0.2, 0.3, 0.4);
 hazeColor.rgb *= eqColorFactor * eShade;
 hazeColor.rgb = max(hazeColor.rgb, minLight.rgb);
 
-fragColor.rgb = mix(hazeColor +secondary_light * fog_backscatter(avisibility), fragColor.rgb,transmission);
+fragColor.rgb = mix(hazeColor +secondary_light * fog_backscatter(mvisibility), fragColor.rgb,transmission);
 
 
 

@@ -43,7 +43,7 @@ float luminance(vec3 color)
 void main()
 {
 
-  vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
+  vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
 // this is taken from default.frag
     vec3 n;
     float NdotL, NdotHV, fogFactor;
@@ -90,7 +90,9 @@ void main()
 float delta_z = hazeLayerAltitude - eye_alt;
 float dist = length(relPos);
 
-if (dist > 0.04 * min(visibility,avisibility)) 
+float mvisibility = min(visibility,avisibility);
+
+if (dist > 0.04 * mvisibility) 
 {
 
 alt = eye_alt;
@@ -114,7 +116,7 @@ if (delta_z > 0.0) // we're inside the layer
 	if (ct < 0.0) // we look down 
 		{
 		distance_in_layer = dist;
-		vAltitude = min(distance_in_layer,min(visibility, avisibility)) * ct;
+		vAltitude = min(distance_in_layer,mvisibility) * ct;
   		delta_zv = delta_z - vAltitude;
 		}
 	else 	// we may look through upper layer edge
@@ -153,7 +155,7 @@ transmission_arg = (dist-distance_in_layer)/avisibility;
 
 float eqColorFactor;
 
-//float scattering = ground_scattering + (1.0 - ground_scattering) * smoothstep(hazeLayerAltitude -100.0, hazeLayerAltitude + 100.0, relPos.z + eye_alt);
+
 
 if (visibility < avisibility)
 	{
@@ -174,7 +176,7 @@ else
 transmission =  fog_func(transmission_arg, alt);
 
 // there's always residual intensity, we should never be driven to zero
-if (eqColorFactor < 0.2) eqColorFactor = 0.2;
+if (eqColorFactor < 0.2) {eqColorFactor = 0.2;}
 
 
 float lightArg = (terminator-yprime_alt)/100000.0;

@@ -84,7 +84,7 @@ void main(void)
     mat4 RotationMatrix;
   
 
-    vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
+    vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
     rawPos = (osg_ViewMatrixInverse *gl_ModelViewMatrix * gl_Vertex).xyz;
 
     vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
@@ -182,6 +182,8 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
 
 	intensity = length(specular_light.rgb);
 	specular_light.rgb = intensity * normalize(mix(specular_light.rgb,  shadedFogColor, 1.0 -smoothstep(0.1, 0.6,ground_scattering) ));
+
+	specular_light.rgb = intensity * normalize(mix(specular_light.rgb,  shadedFogColor, 1.0 -smoothstep(0.5, 0.7,earthShade)));
 
 	// correct ambient light intensity and hue before sunrise - seems unnecessary and create artefacts though...
 	//if (earthShade < 0.5)

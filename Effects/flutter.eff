@@ -150,6 +150,7 @@
 
 				<vertex-shader>Shaders/flutter-ALS.vert</vertex-shader>
 				<fragment-shader>Shaders/terrain-ALS-base.frag</fragment-shader>
+				<fragment-shader>Shaders/hazes.frag</fragment-shader>
 			</program>
 			<!--<uniform>
 				<name>texture</name>

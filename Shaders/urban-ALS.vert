@@ -71,7 +71,7 @@ void main()
 
 
   vec4 light_ambient;
-  vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
+  vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
   vec3 moonLightColor = vec3 (0.095, 0.095, 0.15) * moonlight;
 
   //float yprime_alt;
@@ -199,11 +199,11 @@ if (earthShade < 0.5)
 	//light_ambient = light_ambient * (0.7 + 0.3 * smoothstep(0.2, 0.5, earthShade));
 	intensity = length(light_ambient.rgb); 
 
-	light_ambient.rgb = intensity * normalize(mix(light_ambient.xyz,  shadedFogColor, 1.0 -smoothstep(0.1, 0.8,earthShade) ));
+	light_ambient.rgb = intensity * normalize(mix(light_ambient.xyz,  shadedFogColor, 1.0 -smoothstep(0.4, 0.8,earthShade) ));
 	light_ambient.rgb = light_ambient.rgb +   moonLightColor *  (1.0 - smoothstep(0.4, 0.5, earthShade));
 
 	intensity = length(light_diffuse.xyz); 
-	light_diffuse.xyz = intensity * normalize(mix(light_diffuse.xyz,  shadedFogColor, 1.0 -smoothstep(0.1, 0.7,earthShade) ));
+	light_diffuse.xyz = intensity * normalize(mix(light_diffuse.xyz,  shadedFogColor, 1.0 -smoothstep(0.4, 0.7,earthShade) ));
 	}
 
 

@@ -218,7 +218,7 @@ void main (void)
     if ( random_buildings )
         depthfactor = 0.0;
 
-    vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
+    vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
     float effective_scattering = min(scattering, cloud_self_shading);
     vec3 normal = normalize(VNormal);
     vec3 tangent = normalize(VTangent);
@@ -353,8 +353,9 @@ vec3 hazeColor = get_hazeColor(lightArg);
 
 float delta_z = hazeLayerAltitude - eye_alt;
 
+float mvisibility = min(visibility,avisibility);
 
-if (dist > 0.04 * min(visibility,avisibility))
+if (dist > 0.04 * mvisibility)
 {
 
 alt = eye_alt;
@@ -380,7 +381,7 @@ if (delta_z > 0.0) // we're inside the layer
 	if (ct < 0.0) // we look down
 		{
 		distance_in_layer = dist;
-		vAltitude = min(distance_in_layer,min(visibility, avisibility)) * ct;
+		vAltitude = min(distance_in_layer,mvisibility) * ct;
   		delta_zv = delta_z - vAltitude;
 		}
 	else 	// we may look through upper layer edge
@@ -519,7 +520,7 @@ hazeColor *= eqColorFactor * eShade;
 hazeColor.rgb = max(hazeColor.rgb, minLight.rgb);
 
 
-finalColor.rgb = mix( hazeColor +secondary_light * fog_backscatter(avisibility), finalColor.rgb,transmission);
+finalColor.rgb = mix( hazeColor +secondary_light * fog_backscatter(mvisibility), finalColor.rgb,transmission);
 
 }
 

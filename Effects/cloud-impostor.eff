@@ -59,7 +59,7 @@
       </texture-unit>
       <program>
         <vertex-shader>Shaders/cloud-impostor-ALS.vert</vertex-shader>
-        <fragment-shader>Shaders/cloud-static-lightfield.frag</fragment-shader>
+        <fragment-shader>Shaders/cloud-static-ALS.frag</fragment-shader>
       </program>
       <uniform>
         <name>baseTexture</name>

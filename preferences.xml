@@ -882,6 +882,11 @@ Started September 2000 by David Megginson, david@megginson.com
         <tile-cache>
             <enable type="bool">false</enable>
         </tile-cache>
+		<time>
+			<warp-easing type="bool">true</warp-easing>
+			<warp-easing-method type="string">swing</warp-easing-method>
+			<warp-easing-duration-secs type="double">10</warp-easing-duration-secs>
+		</time>
 	</sim>
 	<!-- mouse mode -->
 	<devices>

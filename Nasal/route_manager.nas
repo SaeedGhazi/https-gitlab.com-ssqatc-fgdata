@@ -1,5 +1,5 @@
 # route_manager.nas -  FlightPlan delegate(s) corresponding to the built-
-# in route-manager dialog and GPS. Intended to provide a sensible default behaviour, 
+# in route-manager dialog and GPS. Intended to provide a sensible default behaviour,
 # but can be disabled by an aircraft-specific FMS / GPS system.
 
 var RouteManagerDelegate = {
@@ -7,7 +7,7 @@ var RouteManagerDelegate = {
     # if this property is set, don't build a delegate at all
     if (getprop('/autopilot/route-manager/disable-route-manager'))
         return nil;
-        
+
 		var m = { parents: [RouteManagerDelegate] };
 		m.flightplan = fp;
 		return m;
@@ -19,7 +19,7 @@ var RouteManagerDelegate = {
         me.flightplan.clearWPType('sid');
         if (me.flightplan.departure == nil)
             return;
-            
+
         if (me.flightplan.departure_runway == nil) {
         # no runway, only an airport, use that
             var wp = createWPFrom(me.flightplan.departure);
@@ -33,7 +33,7 @@ var RouteManagerDelegate = {
         me.flightplan.insertWP(wp, 0);
         if (me.flightplan.sid == nil)
             return;
-            
+
     # and we have a SID
         var sid = me.flightplan.sid;
         printlog('info', 'routing via SID ' ~ sid.id);
@@ -47,7 +47,7 @@ var RouteManagerDelegate = {
         me.flightplan.clearWPType('approach');
         if (me.flightplan.destination == nil)
             return;
-            
+
         if (me.flightplan.destination_runway == nil) {
         # no runway, only an airport, use that
             var wp = createWPFrom(me.flightplan.destination);
@@ -55,16 +55,19 @@ var RouteManagerDelegate = {
             me.flightplan.appendWP(wp);
             return;
         }
-         
+
+        var initialApproachFix = nil;
         if (me.flightplan.star != nil) {
             printlog('info', 'routing via STAR ' ~ me.flightplan.star.id);
             var wps = me.flightplan.star.route(me.flightplan.destination_runway);
             me.flightplan.insertWaypoints(wps, -1);
+
+            initialApproachFix = wps[-1]; # final waypoint of STAR
         }
-        
+
         if (me.flightplan.approach != nil) {
             printlog('info', 'routing via approach ' ~ me.flightplan.approach.id);
-            var wps = me.flightplan.approach.route();
+            var wps = me.flightplan.approach.route(initialApproachFix);
             me.flightplan.insertWaypoints(wps, -1);
         } else {
             printlog('info', 'routing direct to runway ' ~ me.flightplan.destination_runway.id);
@@ -74,14 +77,14 @@ var RouteManagerDelegate = {
             me.flightplan.appendWP(wp);
         }
     },
-    
+
     cleared: func
     {
         printlog('info', "saw active flightplan cleared, deactivating");
         # see http://https://code.google.com/p/flightgear-bugs/issues/detail?id=885
         fgcommand("activate-flightplan", props.Node.new({"activate": 0}));
     },
-    
+
     endOfFlightPlan: func
     {
         printlog('info', "end of flight-plan, deactivating");
@@ -95,11 +98,11 @@ var FMSDelegate = {
     # if this property is set, don't build a delegate at all
     if (getprop('/autopilot/route-manager/disable-fms'))
         return nil;
-            
+
 		var m = { parents: [FMSDelegate], flightplan:fp, landingCheck:nil };
 		return m;
 	},
-    
+
     _landingCheckTimeout: func
     {
         var wow = getprop('gear/gear[0]/wow');
@@ -111,40 +114,40 @@ var FMSDelegate = {
           me.flightplan.finish();
         }
     },
-    
+
     waypointsChanged: func
     {
     },
-    
+
     endOfFlightPlan: func
     {
       printlog('info', 'end of flight-plan');
     },
-    
+
     currentWaypointChanged: func
     {
         if (me.landingCheck != nil) {
             me.landingCheck.stop();
             me.landingCheck = nil; # delete timer
         }
-        
+
         #printlog('info', 'saw current WP changed, now ' ~ me.flightplan.current);
         var active = me.flightplan.currentWP();
         if (active == nil) return;
-        
+
         if (active.alt_cstr_type == "at") {
             printlog('info', 'new WP has valid altitude restriction, setting on AP');
             setprop('/autopilot/settings/target-altitude-ft', active.alt_cstr);
         }
-        
+
         var activeRunway = active.runway();
         # this check is needed to avoid problems with circular routes; when
         # activating the FP we end up here, and without this check, immediately
         # detect that we've 'landed' and finish the FP again.
         var wow = getprop('gear/gear[0]/wow');
-        
-        if (!wow and 
-            (activeRunway != nil) and 
+
+        if (!wow and
+            (activeRunway != nil) and
             (activeRunway.id == me.flightplan.destination_runway.id))
         {
             me.landingCheck = maketimer(2.0, me, FMSDelegate._landingCheckTimeout);

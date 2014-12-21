@@ -21,6 +21,46 @@ var proproot = "sim/failure-manager/";
 
 
 ##
+# Nasal modules can subscribe to FailureMgr events.
+# Each event has an independent dispatcher so modules can subscribe only to
+# the events they are interested in. This also simplifies processing at client
+# side by being able to subscibe different callbacks to different events.
+#
+# Example:
+#
+# var handle = FailureMgr.events["trigger-fired"].subscribe(my_callback);
+
+var events = {};
+
+# Event: trigger-fired
+# Format: { mode_id: <failure mode id>, trigger: <trigger that fired> }
+events["trigger-fired"] = globals.events.EventDispatcher.new();
+
+##
+# Encodes a pair "category" and "failure_mode" into a "mode_id".
+#
+# These just have the simple form "category/mode", and are used to refer to
+# failure modes throughout the FailureMgr API and to create a path within the
+# sim/failure-manager property tree for the failure mode.
+#
+# examples of categories:
+#	structural, instrumentation, controls, sensors, etc...
+#
+# examples of failure modes:
+#	altimeter, pitot, left-tire, landing-light, etc...
+
+var get_id = func(category, failure_mode) {
+	return sprintf("%s/%s", string.normpath(category), failure_mode);
+}
+
+##
+# Returns a vector containing: [category, failure_mode]
+
+var split_id = func(mode_id) {
+	return [string.normpath(io.dirname(mode_id)), io.basename(mode_id)];
+}
+
+##
 # Subscribe a new failure mode to the system.
 #
 # id:          Unique identifier for this failure mode.
@@ -36,6 +76,15 @@ var proproot = "sim/failure-manager/";
 var add_failure_mode = func(id, description, actuator) {
 	_failmgr.add_failure_mode(
 		FailureMode.new(id, description, actuator));
+}
+
+##
+# Returns a vector with all failure modes in the system.
+# Each vector entry is a hash with the following keys:
+#	{ id, description }
+
+var get_failure_modes = func() {
+	_failmgr.get_failure_modes();
 }
 
 ##
@@ -79,8 +128,34 @@ var get_trigger = func(mode_id) {
 # level:   Floating point number in the range [0, 1]
 #          Zero represents no failure and one means total failure.
 
-var set_failure_level = func (mode_id, level) {
+var set_failure_level = func(mode_id, level) {
 	setprop(proproot ~ mode_id ~ "/failure-level", level);
+}
+
+##
+# Returns the current failure level for the given failure mode.
+# mode_id: Failure mode id string.
+
+var get_failure_level = func(mode_id) {
+	getprop(proproot ~ mode_id ~ "/failure-level");
+}
+
+##
+# Restores all failure modes to level = 0
+
+var repair_all = func {
+	_failmgr.repair_all();
+}
+
+##
+# Returns a vector of timestamped failure manager events, such as the
+# messages shown in the console when there are changes to the failure conditions.
+#
+# Each entry in the vector has the following format:
+#     { time: <time stamp>, message: <event description> }
+
+var get_log_buffer = func {
+	_failmgr.logbuf.get_buffer();
 }
 
 ##
@@ -109,13 +184,16 @@ var disable = func setprop(proproot ~ "enabled", 0);
 
 var Trigger = {
 
+	type: nil,
 	# 1 for pollable triggers, 0 for async triggers.
 	requires_polling: 0,
+	enabled: 0,
 
 	new: func {
 		return {
 			parents: [Trigger],
 			params: {},
+			armed: 0,
 			fired: 0,
 
 			##
@@ -126,13 +204,6 @@ var Trigger = {
 			_path: nil
 		};
 	},
-
-	##
-	# Enables/disables the trigger. While a trigger is disabled, any timer
-	# or listener that could potentially own shall be disabled.
-
-	enable: func,
-	disable: func,
 
 	##
 	# Forces a check of the firing conditions. Returns 1 if the trigger fired,
@@ -150,28 +221,60 @@ var Trigger = {
 	# call to reset()
 
 	set_param: func(param, value) {
+		assert(me._path != nil, "Trigger.set_param: unbound trigger");
+
 		contains(me.params, param) or
 			die("Trigger.set_param: undefined param: " ~ param);
-
-		me._path != nil or
-			die("Trigger.set_param: Unbound trigger");
 
 		setprop(sprintf("%s/%s",me._path, param), value);
 	},
 
 	##
-	# Reload trigger parameters and reset internal state, i.e. start from
-	# scratch. If the trigger was fired, the trigger is set to not fired.
+	# Load trigger parameters and reset internal state. Once armed, the trigger
+	# will fire as soon as the right conditions are met. It can be called after
+	# the trigger fires to rearm it again.
+	#
+	# The "armed" condition survives enable/disable calls.
 
-	reset: func {
-		me._path or die("Trigger.reset: unbound trigger");
+	arm: func {
+		assert(me._path != nil, "Trigger.arm: unbound trigger");
+		setprop(me._path ~ "/armed", 1);
+	},
 
+	_arm: func {
 		foreach (var p; keys(me.params))
 			me.params[p] = getprop(sprintf("%s/%s", me._path, p));
 
 		me.fired = 0;
-		me._path != nil and setprop(me._path ~ "/reset", 0);
+		me.armed = 1;
 	},
+
+	##
+	# Deactivate the trigger. The trigger will not fire until rearmed again.
+
+	disarm: func {
+		assert(me._path != nil, "Trigger.disarm: unbound trigger");
+		setprop(me._path ~ "/armed", 0);
+	},
+
+	_disarm: func {
+		me.armed = 0;
+	},
+
+	##
+	# Enables/disables the trigger. While a trigger is disabled, any timer
+	# or listener that could potentially own shall be disabled.
+	#
+	# The FailureMgr calls these methods when the entire system is
+	# enabled/disabled. By keeping enabled/disabled state separated from
+	# armed/disarmed allows the FailureMgr to keep its configuration while
+	# disabled, i.e. those triggers that where armed when the system was
+	# disabled will resume when the system is enabled again.
+	#
+	# The FailureMgr disables itself during a teleport.
+
+	enable: func { me.enabled = 1 },
+	disable: func { me.enabled = 0 },
 
 	##
 	# Creates an interface for the trigger in the property tree.
@@ -179,23 +282,23 @@ var Trigger = {
 	# a path/reset property for resetting the trigger from the prop tree.
 
 	bind: func(path) {
-		me._path == nil or
-			die("Trigger.bind(): attempt to bind an already bound trigger");
+		assert(me._path == nil, "Trigger.bind: trigger already bound");
 
 		me._path = path;
 		props.globals.getNode(path) != nil or props.globals.initNode(path);
 		props.globals.getNode(path).setValues(me.params);
 
-		var reset_prop = path ~ "/reset";
-		props.globals.initNode(reset_prop, 0, "BOOL");
-		setlistener(reset_prop, func me.reset(), 0, 0);
+		var prop = path ~ "/armed";
+		props.globals.initNode(prop, 0, "BOOL");
+		setlistener(prop,
+		            func(p) { p.getValue() ? me._arm() : me._disarm() }, 0, 1);
 	},
 
 	##
 	# Removes this trigger's interface from the property tree.
 
 	unbind: func {
-		props.globals.getNode(me._path ~ "/reset").remove();
+		props.globals.getNode(me._path ~ "/armed").remove();
 		foreach (var p; keys(me.params))
 			props.globals.getNode(me._path ~ "/" ~ p).remove();
 

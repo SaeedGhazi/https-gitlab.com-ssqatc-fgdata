@@ -70,32 +70,13 @@ var compat_modes = [
 
 var compat_listener = func(prop) {
 
-	var new_trigger = func {
-		if (name == "mtbf") {
-			MtbfTrigger.new(value);
-		}
-		else {
-			var control = id;
-
-			forindex(var i; compat_modes) {
-				var mode = compat_modes[i];
-				if (mode.id == id and contains(compat_modes[i], "mcbf_prop")) {
-					control = mode.mcbf_prop;
-					break;
-				}
-			}
-
-			McbfTrigger.new(control, value);
-		}
-	};
-
 	var name = prop.getName();
 	var value = prop.getValue();
 	var id = string.replace(io.dirname(prop.getPath()), FailureMgr.proproot, "");
 	id = string.trim(id, 0, func(c) c == `/`);
 
 	if (name == "serviceable") {
-		FailureMgr.set_failure_level(id, 1 - value);
+		FailureMgr.set_failure_level(id, value ? 0 : 1);
 		return;
 	}
 
@@ -107,17 +88,33 @@ var compat_listener = func(prop) {
 	# mtbf and mcbf parameter handling
 	var trigger = FailureMgr.get_trigger(id);
 
-	if (value == 0) {
-		trigger != nil and FailureMgr.set_trigger(id, nil);
+	if (trigger == nil or (trigger.type != "mcbf" and trigger.type != "mtbf"))
 		return;
-	}
 
-	if (trigger == nil) {
-		FailureMgr.set_trigger(id, new_trigger());
-	}
-	else {
-		trigger.set_param(name, value);
-		trigger.reset();
+	if (value != 0)
+		trigger.set_param(name, value) and trigger.arm();
+	else
+		trigger.disarm();
+}
+
+##
+# Listens to FailureMgr events. Resets mcbf/mtbf params to zero so they can
+# be rearmed from the GUI.
+
+var trigger_listener = func(event) {
+	var trigger = event.trigger;
+
+	# Only control modes in our compat list, i.e. do not interfere
+	# with custom scripts.
+
+	if (trigger.type != "mtbf" and trigger.type != "mcbf")
+		return;
+
+	foreach (var m; compat_modes) {
+		if (m.id == event.mode_id) {
+			trigger.set_param(trigger.type, 0);
+			break;
+		}
 	}
 }
 
@@ -200,10 +197,21 @@ var compat_setup = func {
 		setlistener(n, compat_listener, 0, 0);
 		setlistener(prop ~ "/failure-level", compat_listener, 0, 0);
 
-		var trigger_type = (m.type == MTBF) ? "/mtbf" : "/mcbf";
+		if (m.type == MTBF) {
+			var trigger_type = "/mtbf";
+			FailureMgr.set_trigger(m.id, MtbfTrigger.new(0));
+		}
+		else {
+			var trigger_type = "/mcbf";
+			var control = contains(m, "mcbf_prop")? m.mcbf_prop : m.id;
+			FailureMgr.set_trigger(m.id, McbfTrigger.new(control, 0));
+		}
+
 		setprop(prop ~ trigger_type, 0);
 		setlistener(prop ~ trigger_type, compat_listener, 0, 0);
 	}
+
+	FailureMgr.events["trigger-fired"].subscribe(trigger_listener);
 }
 
 

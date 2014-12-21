@@ -121,6 +121,7 @@ var norm_rand = func(mean, std) {
 var AltitudeTrigger = {
 
 	parents: [FailureMgr.Trigger],
+	type: "altitude",
 	requires_polling: 1,
 
 	new: func(min, max) {
@@ -136,9 +137,12 @@ var AltitudeTrigger = {
 	},
 
 	to_str: func {
-		# TODO: Handle min or max == nil
-		sprintf("Altitude between %d and %d ft",
-			int(me.params["min-altitude-ft"]), int(me.params["max-altitude-ft"]))
+		var min = me.params["min-altitude-ft"];
+		var max = me.params["max-altitude-ft"];
+
+		if (min == nil) sprintf("Altitude below %d ft", int(max));
+		elsif (max == nil) sprintf("Altitude above %d ft", int(min));
+		else sprintf("Altitude between %d and %d ft", int(min), int(max));
 	},
 
 	update: func {
@@ -159,6 +163,7 @@ var AltitudeTrigger = {
 var WaypointTrigger = {
 
 	parents: [FailureMgr.Trigger],
+	type: "waypoint",
 	requires_polling: 1,
 
 	new: func(lat, lon, distance) {
@@ -174,15 +179,15 @@ var WaypointTrigger = {
 		return m;
 	},
 
-	reset: func {
-		call(FailureMgr.Trigger.reset, [], me);
+	arm: func {
+		call(FailureMgr.Trigger.arm, [], me);
 		me.waypoint.set_latlon(me.params["latitude-deg"],
 		                       me.params["longitude-deg"]);
 	},
 
 	to_str: func {
 		sprintf("Within %.2f miles of %s", me.params["distance-nm"],
-			    geo.format(me.waypoint.lat, me.waypoint.lon));
+			    geo.format(me.waypoint.lat(), me.waypoint.lon()));
 	},
 
 	update: func {
@@ -197,27 +202,41 @@ var WaypointTrigger = {
 var MtbfTrigger = {
 
 	parents: [FailureMgr.Trigger],
-	# TODO: make this trigger async
-	requires_polling: 1,
+	type: "mtbf",
+	requires_polling: 0,
 
 	new: func(mtbf) {
 		var m = FailureMgr.Trigger.new();
 		m.parents = [MtbfTrigger];
 		m.params["mtbf"] = mtbf;
-		m.fire_time = 0;
-		m._time_prop = "/sim/time/elapsed-sec";
+		m.timer = maketimer(0, func m.on_fire());
+		m.timer.singleShot = 1;
 		return m;
 	},
 
-	reset: func {
-		call(FailureMgr.Trigger.reset, [], me);
-		# TODO: use an elapsed time prop that accounts for speed-up and pause
-		me.fire_time = getprop(me._time_prop)
-		               + norm_rand(me.params["mtbf"], me.params["mtbf"] / 10);
+	enable: func {
+		me.armed and me.timer.start();
+		me.enabled = 1;
+	},
+
+	disable: func {
+		me.timer.stop();
+		me.enabled = 0;
+	},
+
+	arm: func {
+		call(FailureMgr.Trigger.arm, [], me);
+		me.timer.restart(norm_rand(me.params["mtbf"], me.params["mtbf"] / 10));
+		me.enabled and me.timer.start();
+	},
+
+	disarm: func {
+		call(FailureMgr.Trigger.disarm, [], me);
+		me.timer.stop();
 	},
 
 	to_str: func {
-		sprintf("Mean time between failures: %f.1 mins", me.params["mtbf"] / 60);
+		sprintf("Mean time between failures: %.1f mins", me.params["mtbf"] / 60);
 	},
 
 	update: func {
@@ -231,22 +250,37 @@ var MtbfTrigger = {
 var TimeoutTrigger = {
 
 	parents: [FailureMgr.Trigger],
-	# TODO: make this trigger async
-	requires_polling: 1,
+	type: "timeout",
+	requires_polling: 0,
 
 	new: func(timeout) {
 		var m = FailureMgr.Trigger.new();
 		m.parents = [TimeoutTrigger];
 		m.params["timeout-sec"] = timeout;
-		fire_time = 0;
+		m.timer = maketimer(0, func m.on_fire());
+		m.timer.singleShot = 1;
 		return m;
 	},
 
-	reset: func {
-		call(FailureMgr.Trigger.reset, [], me);
-		# TODO: use an elapsed time prop that accounts for speed-up and pause
-		me.fire_time = getprop("/sim/time/elapsed-sec")
-		               + me.params["timeout-sec"];
+	enable: func {
+		me.armed and me.timer.start();
+		me.enabled = 1;
+	},
+
+	disable: func {
+		me.timer.stop();
+		me.enabled = 0;
+	},
+
+	arm: func {
+		call(FailureMgr.Trigger.arm, [], me);
+		me.timer.restart(me.params["timeout-sec"]);
+		me.enabled and me.timer.start();
+	},
+
+	disarm: func {
+		call(FailureMgr.Trigger.disarm, [], me);
+		me.timer.stop();
 	},
 
 	to_str: func {
@@ -284,7 +318,10 @@ var CycleCounter = {
 	},
 
 	disable: func {
-		if (me._lsnr != nil) removelistener(me._lsnr);
+		if (me._lsnr != nil) {
+			removelistener(me._lsnr);
+			me._lsnr = nil;
+		}
 	},
 
 	reset: func {
@@ -319,6 +356,7 @@ var CycleCounter = {
 var McbfTrigger = {
 
 	parents: [FailureMgr.Trigger],
+	type: "mcbf",
 	requires_polling: 0,
 
 	new: func(property, mcbf) {
@@ -327,7 +365,6 @@ var McbfTrigger = {
 		m.params["mcbf"] = mcbf;
 		m.counter = CycleCounter.new(property, func(c) call(m._on_cycle, [c], m));
 		m.activation_cycles = 0;
-		m.enabled = 0;
 		return m;
 	},
 
@@ -341,13 +378,18 @@ var McbfTrigger = {
 		me.enabled = 0;
 	},
 
-	reset: func {
-		call(FailureMgr.Trigger.reset, [], me);
+	arm: func {
+		call(FailureMgr.Trigger.arm, [], me);
 		me.counter.reset();
 		me.activation_cycles =
 			norm_rand(me.params["mcbf"], me.params["mcbf"] / 10);
 
 		me.enabled and me.counter.enable();
+	},
+
+	disarm: func {
+		call(FailureMgr.Trigger.disarm, [], me);
+		me.enabled and me.counter.disable();
 	},
 
 	to_str: func {
@@ -356,8 +398,6 @@ var McbfTrigger = {
 
 	_on_cycle: func(cycles) {
 		if (!me.fired and cycles > me.activation_cycles) {
-			# TODO: Why this doesn't work?
-			# me.counter.disable();
 			me.fired = 1;
 			me.on_fire();
 		}

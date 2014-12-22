@@ -64,5 +64,8 @@ var fgCommand = {
   reposition: function() {
     $.post("/run.cgi?value=reposition");
   },
+  timeofday: function(type,offset) {
+    this.sendCommand("timeofday", this.twoArgs("timeofday", type, "offset", null != offset ? offset : 0 ));
+  }
 };
 

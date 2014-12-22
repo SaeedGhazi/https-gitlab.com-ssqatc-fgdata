@@ -203,26 +203,34 @@ FGFS.InputValue = function(arg) {
   this.min = null;
   this.max = null;
   this.precision = 4;
+  this.format = null;
   this.func = null;
 
   if( arg.precision != null ) this.precision = arg.precision;
+  if( arg.format != null ) this.format = arg.format;
 
+  this.getFormatted = function( value ) {
+    if( null != this.format )
+      return this.format(value);
+    return value.toPrecision(this.precision);
+  }
+  
   this.getValue = function() {
     var value = this.value;
     if (this.property != null)
       value = this.property.getNumValue();
-    else if( this.func != null )
-      value = this.func();
+    if( this.func != null )
+      value = this.func(value);
 
     if (this.interpolationTable != null && this.interpolationTable.length > 0)
-      return FGFS.interpolate(value, this.interpolationTable).toPrecision(this.precision);
+      return this.getFormatted(FGFS.interpolate(value, this.interpolationTable));
 
     value = value * this.scale + this.offset;
     if( this.min != null && value < this.min )
-      return this.min.toPrecision(this.precision);
+      return this.getFormatted(this.min);
     if( this.max != null && value > this.max )
-      return this.max.toPrecision(this.precision);
-    return value.toPrecision(this.precision);
+      return this.getFormatted(this.max);
+    return this.getFormatted(value);
   }
 
   if (typeof (arg) == 'number') {
@@ -381,7 +389,7 @@ FGFS.TransformAnimation = function(arg) {
 FGFS.TextAnimation = function(arg) {
   this.__proto__ = new FGFS.Animation(arg);
   this.text = new FGFS.InputValue(arg.text);
-
+  
   this.makeAnimation = function() {
     var reply = {
       type: 'text',

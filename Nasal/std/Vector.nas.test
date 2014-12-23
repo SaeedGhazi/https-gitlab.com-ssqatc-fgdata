@@ -108,6 +108,10 @@ REQUIRE_EQUAL(x.size(), 4);
 # index():
 REQUIRE_EQUAL(x.index("c"), 2);
 
+# contains():
+REQUIRE_EQUAL(x.contains("c"), 1);
+REQUIRE_EQUAL(x.contains("e"), 0);
+
 # remove():
 x.remove("c");
 REQUIRE_EQUAL(x.vector, ["a", "b", "d"]);

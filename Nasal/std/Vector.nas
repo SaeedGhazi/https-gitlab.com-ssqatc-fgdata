@@ -120,6 +120,15 @@ var Vector = {
         die("ValueError: item not in the vector");
     },
 
+    contains: func (item) {
+        # Return true if the vector contains the item, false otherwise
+
+        var err = [];
+        call(Vector.index, [item], me, err);
+
+        return size(err) == 0;
+    },
+
     remove: func (item) {
         # Remove the first occurrence of the given item. Raises a
         # ValueError if the item is not present in the vector.

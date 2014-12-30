@@ -1,10 +1,8 @@
 <?xml version="1.0"?>
-
 <PropertyList>
-
- <name>instruments</name>
- <modal>false</modal>
- <layout>vbox</layout>
+  <name>instruments</name>
+  <modal>false</modal>
+  <layout>vbox</layout>
 
   <group>
     <layout>hbox</layout>
@@ -38,7 +36,7 @@
       <row>0</row>
       <col>0</col>
       <halign>right</halign>
-      <label>ALT setting:</label>
+      <label>QNH setting:</label>
     </text>
 
     <group>
@@ -48,33 +46,18 @@
       <default-padding>0</default-padding>
 
       <button>
-      <width>35</width>
-      <height>26</height>
-      <border>1</border>
-      <legend>&lt;</legend>
-      <binding>
-        <command>property-adjust</command>
-        <property>/instrumentation/altimeter/setting-inhg</property>
-        <step type="double">-0.01</step>
-      </binding>
-      <binding>
-        <command>dialog-update</command>
-      </binding>
-      </button>
-
-      <button>
-       <width>35</width>
-       <height>26</height>
-       <border>1</border>
-       <legend>&lt;&lt;</legend>
-       <binding>
-        <command>property-adjust</command>
-        <property>/instrumentation/altimeter/setting-inhg</property>
-        <step type="double">-0.10</step>
-       </binding>
-       <binding>
-        <command>dialog-update</command>
-       </binding>
+        <width>35</width>
+        <height>26</height>
+        <border>1</border>
+        <legend>&lt;</legend>
+        <binding>
+          <command>property-adjust</command>
+          <property>/instrumentation/altimeter/setting-hpa</property>
+          <step type="double">-1</step>
+        </binding>
+        <binding>
+          <command>dialog-update</command>
+        </binding>
       </button>
     </group>
 
@@ -83,8 +66,8 @@
       <col>3</col>
       <width>75</width>
       <height>25</height>
-	  <live>true</live>
-      <property>/instrumentation/altimeter/setting-inhg</property>
+      <live>true</live>
+      <property>/instrumentation/altimeter/setting-hpa</property>
       <binding>
         <command>dialog-apply</command>
       </binding>
@@ -95,7 +78,7 @@
       <col>4</col>
       <padding>0</padding>
       <halign>left</halign>
-      <label>inHg</label>
+      <label>hPa</label>
     </text>
 
     <group>
@@ -105,22 +88,108 @@
       <default-padding>0</default-padding>
 
       <button>
-       <width>35</width>
-       <height>26</height>
-       <border>1</border>
-       <legend>&gt;&gt;</legend>
-       <binding>
-        <command>property-adjust</command>
-        <property>/instrumentation/altimeter/setting-inhg</property>
-        <step type="double">0.10</step>
-       </binding>
-       <binding>
-        <command>dialog-update</command>
-       </binding>
+        <width>35</width>
+        <height>26</height>
+        <border>1</border>
+        <legend>&gt;</legend>
+        <binding>
+          <command>property-adjust</command>
+          <property>/instrumentation/altimeter/setting-hpa</property>
+          <step type="double">1</step>
+        </binding>
+        <binding>
+          <command>dialog-update</command>
+        </binding>
+      </button>
+    </group>
+
+    <text>
+      <row>1</row>
+      <col>0</col>
+      <halign>right</halign>
+      <label>ALT setting:</label>
+    </text>
+
+    <group>
+      <row>1</row>
+      <col>1</col>
+      <layout>hbox</layout>
+      <default-padding>0</default-padding>
+
+      <button>
+        <width>35</width>
+        <height>26</height>
+        <border>1</border>
+        <legend>&lt;</legend>
+        <binding>
+          <command>property-adjust</command>
+          <property>/instrumentation/altimeter/setting-inhg</property>
+          <step type="double">-0.01</step>
+        </binding>
+        <binding>
+          <command>dialog-update</command>
+        </binding>
       </button>
 
       <button>
-        <row>0</row>
+        <width>35</width>
+        <height>26</height>
+        <border>1</border>
+        <legend>&lt;&lt;</legend>
+        <binding>
+          <command>property-adjust</command>
+          <property>/instrumentation/altimeter/setting-inhg</property>
+          <step type="double">-0.10</step>
+        </binding>
+        <binding>
+          <command>dialog-update</command>
+        </binding>
+      </button>
+    </group>
+
+    <input>
+      <row>1</row>
+      <col>3</col>
+      <width>75</width>
+      <height>25</height>
+      <live>true</live>
+      <property>/instrumentation/altimeter/setting-inhg</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </input>
+
+    <text>
+      <row>1</row>
+      <col>4</col>
+      <padding>0</padding>
+      <halign>left</halign>
+      <label>inHg</label>
+    </text>
+
+    <group>
+      <layout>hbox</layout>
+      <row>1</row>
+      <col>5</col>
+      <default-padding>0</default-padding>
+
+      <button>
+        <width>35</width>
+        <height>26</height>
+        <border>1</border>
+        <legend>&gt;&gt;</legend>
+        <binding>
+          <command>property-adjust</command>
+          <property>/instrumentation/altimeter/setting-inhg</property>
+          <step type="double">0.10</step>
+        </binding>
+        <binding>
+          <command>dialog-update</command>
+        </binding>
+      </button>
+
+      <button>
+        <row>1</row>
         <col>6</col>
         <width>35</width>
         <height>26</height>
@@ -138,7 +207,7 @@
     </group>
 
     <text>
-      <row>1</row>
+      <row>2</row>
       <col>0</col>
       <halign>right</halign>
       <label>HI offset:</label>
@@ -147,7 +216,7 @@
     <group>
       <layout>hbox</layout>
       <default-padding>0</default-padding>
-      <row>1</row>
+      <row>2</row>
       <col>1</col>
 
       <button>
@@ -166,27 +235,27 @@
       </button>
 
       <button>
-       <width>35</width>
-       <height>26</height>
-       <border>1</border>
-       <legend>&lt;&lt;</legend>
-       <binding>
-        <command>property-adjust</command>
-        <property>/instrumentation/heading-indicator/offset-deg</property>
-        <step type="double">-10.0</step>
-       </binding>
-       <binding>
-        <command>dialog-update</command>
-       </binding>
+        <width>35</width>
+        <height>26</height>
+        <border>1</border>
+        <legend>&lt;&lt;</legend>
+        <binding>
+          <command>property-adjust</command>
+          <property>/instrumentation/heading-indicator/offset-deg</property>
+          <step type="double">-10.0</step>
+        </binding>
+        <binding>
+          <command>dialog-update</command>
+        </binding>
       </button>
     </group>
 
     <input>
-      <row>1</row>
+      <row>2</row>
       <col>3</col>
       <width>75</width>
       <height>25</height>
-	  <live>true</live>
+      <live>true</live>
       <property>/instrumentation/heading-indicator/offset-deg</property>
       <binding>
         <command>dialog-apply</command>
@@ -194,7 +263,7 @@
     </input>
 
     <text>
-      <row>1</row>
+      <row>2</row>
       <col>4</col>
       <padding>0</padding>
       <halign>left</halign>
@@ -204,40 +273,39 @@
     <group>
       <layout>hbox</layout>
       <default-padding>0</default-padding>
-      <row>1</row>
+      <row>2</row>
       <col>5</col>
 
       <button>
-       <width>35</width>
-       <height>26</height>
-       <border>1</border>
-       <legend>&gt;&gt;</legend>
-       <binding>
-        <command>property-adjust</command>
-        <property>/instrumentation/heading-indicator/offset-deg</property>
-        <step type="double">10.0</step>
-       </binding>
-       <binding>
-        <command>dialog-update</command>
-       </binding>
+        <width>35</width>
+        <height>26</height>
+        <border>1</border>
+        <legend>&gt;&gt;</legend>
+        <binding>
+          <command>property-adjust</command>
+          <property>/instrumentation/heading-indicator/offset-deg</property>
+          <step type="double">10.0</step>
+        </binding>
+        <binding>
+          <command>dialog-update</command>
+        </binding>
       </button>
 
       <button>
-       <width>35</width>
-       <height>26</height>
-       <border>1</border>
-       <legend>&gt;</legend>
-       <binding>
-        <command>property-adjust</command>
-        <property>/instrumentation/heading-indicator/offset-deg</property>
-        <step type="double">1.0</step>
-       </binding>
-       <binding>
-        <command>dialog-update</command>
-       </binding>
+        <width>35</width>
+        <height>26</height>
+        <border>1</border>
+        <legend>&gt;</legend>
+        <binding>
+          <command>property-adjust</command>
+          <property>/instrumentation/heading-indicator/offset-deg</property>
+          <step type="double">1.0</step>
+        </binding>
+        <binding>
+          <command>dialog-update</command>
+        </binding>
       </button>
-     </group>
-
+    </group>
   </group>
 
   <hrule/>

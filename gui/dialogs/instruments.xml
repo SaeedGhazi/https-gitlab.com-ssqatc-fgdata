@@ -4,6 +4,24 @@
   <modal>false</modal>
   <layout>vbox</layout>
 
+  <nasal>
+    <open><![CDATA[
+      var update = func(){
+        setprop("/instrumentation/altimeter/setting-hpa-formatted", int(getprop("/instrumentation/altimeter/setting-hpa")));
+        setprop("/instrumentation/altimeter/setting-inhg-formatted", int(getprop("/instrumentation/altimeter/setting-inhg")*100.0)/100.0);
+        print('update');
+      }
+      var hpaListener = setlistener("/instrumentation/altimeter/setting-hpa", update);
+      var inhgListener = setlistener("/instrumentation/altimeter/setting-inhg", update);
+      update();
+    ]]></open>
+
+    <close><![CDATA[
+      removelistener(hpaListener);
+      removelistener(inhgListener);
+    ]]></close>
+  </nasal>
+
   <group>
     <layout>hbox</layout>
     <empty><stretch>1</stretch></empty>
@@ -67,7 +85,7 @@
       <width>75</width>
       <height>25</height>
       <live>true</live>
-      <property>/instrumentation/altimeter/setting-hpa</property>
+      <property>/instrumentation/altimeter/setting-hpa-formatted</property>
       <binding>
         <command>dialog-apply</command>
       </binding>
@@ -153,7 +171,7 @@
       <width>75</width>
       <height>25</height>
       <live>true</live>
-      <property>/instrumentation/altimeter/setting-inhg</property>
+      <property>/instrumentation/altimeter/setting-inhg-formatted</property>
       <binding>
         <command>dialog-apply</command>
       </binding>

@@ -9,7 +9,6 @@
       var update = func(){
         setprop("/instrumentation/altimeter/setting-hpa-formatted", int(getprop("/instrumentation/altimeter/setting-hpa")));
         setprop("/instrumentation/altimeter/setting-inhg-formatted", int(getprop("/instrumentation/altimeter/setting-inhg")*100.0)/100.0);
-        print('update');
       }
       var hpaListener = setlistener("/instrumentation/altimeter/setting-hpa", update);
       var inhgListener = setlistener("/instrumentation/altimeter/setting-inhg", update);

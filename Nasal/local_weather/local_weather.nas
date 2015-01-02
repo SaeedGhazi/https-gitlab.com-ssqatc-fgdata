@@ -2032,20 +2032,11 @@ var detail_flag = detailed_clouds_flag;
 var alpha = getprop(lw~"tmp/tile-orientation-deg") * math.pi/180.0; # the tile orientation
 
 var tile_index = getprop(lw~"tiles/tile-counter");
-var alt_base = alt_20_array[tile_index -1];
+var alt_base = balt;
+if (presampling_flag==1) {alt_base = alt_20_array[tile_index -1];}
 
-#if (detailed_terrain_interaction_flag == 1)
-#	{
-	#var tile_index = getprop(lw~"tiles/tile-counter");
-	#var alt_min = alt_min_array[tile_index-1];
-	#var alt_mean = alt_mean_array[tile_index -1];
-	#var alt_median = alt_50_array[tile_index -1];
-	#var alt_base = alt_20_array[tile_index -1];
-	#var alt_min = getprop(lw~"tmp/tile-alt-min-ft");
-	#var alt_mean = getprop(lw~"tmp/tile-alt-mean-ft");
-	#var alt_median = getprop(lw~"tmp/tile-alt-median-ft");
-	#var alt_base = getprop(lw~"tmp/tile-alt-offset-ft");
-#	}
+
+
 
 #var sec_to_rad = 2.0 * math.pi/86400; # conversion factor for sinusoidal dependence on daytime
 
@@ -3815,9 +3806,16 @@ if (metar_flag == 1) # the winds from current METAR are used
 
 		var res = wind_interpolation(lat,lon,0.0);
 
+
+
 		append(weather_dynamics.tile_wind_direction,res[0]);
 		append(weather_dynamics.tile_wind_speed,res[1]);
 		setprop(lw~"tmp/tile-orientation-deg", weather_dynamics.tile_wind_direction[0]);
+
+		# in case of gusty winds, these need to be re-initialized to the base wind
+		# from METAR rather than the menu
+		interpolated_conditions.wind_from_heading_deg = metar_base_wind_deg;
+		interpolated_conditions.windspeed_kt = metar_base_wind_speed;
 		}
 	else
 		{
@@ -4064,15 +4062,6 @@ calc_geo(lat);
 
 # copy weather properties at startup to local weather
 
-#setprop(lw~"interpolation/visibility-m",getprop(ec~"boundary/entry[0]/visibility-m"));
-#setprop(lw~"interpolation/pressure-sea-level-inhg",getprop(ec~"boundary/entry[0]/pressure-sea-level-inhg"));
-#setprop(lw~"interpolation/temperature-degc",getprop(ec~"boundary/entry[0]/temperature-degc"));
-#setprop(lw~"interpolation/wind-from-heading-deg",getprop(ec~"boundary/entry[0]/wind-from-heading-deg"));
-#setprop(lw~"interpolation/wind-speed-kt",getprop(ec~"boundary/entry[0]/wind-speed-kt"));
-#setprop(lw~"interpolation/turbulence",getprop(ec~"boundary/entry[0]/turbulence/magnitude-norm"));
-#setprop(lw~"interpolation/rain-norm",0.0);
-#setprop(lw~"interpolation/snow-norm",0.0);
-#setprop(lw~"interpolation/thermal-lift",0.0);
 
 interpolated_conditions.visibility_m = getprop(ec~"boundary/entry[0]/visibility-m");
 interpolated_conditions.pressure_sea_level_inhg = getprop(ec~"boundary/entry[0]/pressure-sea-level-inhg");
@@ -4094,15 +4083,6 @@ setprop(lw~"current/snow-norm",0.0);
 setprop(lw~"current/thermal-lift", 0.0);
 setprop(lw~"current/turbulence",interpolated_conditions.turbulence);
 
-#setprop(lw~"current/visibility-m",getprop(lwi~"visibility-m"));
-#setprop(lw~"current/pressure-sea-level-inhg",getprop(lw~"interpolation/pressure-sea-level-inhg"));
-#setprop(lw~"current/temperature-degc",getprop(lw~"interpolation/temperature-degc"));
-#setprop(lw~"current/wind-from-heading-deg",getprop(lw~"interpolation/wind-from-heading-deg"));
-#setprop(lw~"current/wind-speed-kt",getprop(lw~"interpolation/wind-speed-kt"));
-#setprop(lw~"current/rain-norm",getprop(lw~"interpolation/rain-norm"));
-#setprop(lw~"current/snow-norm",getprop(lw~"interpolation/snow-norm"));
-#setprop(lw~"current/thermal-lift",getprop(lw~"interpolation/thermal-lift"));
-#setprop(lw~"current/turbulence",getprop(lwi~"turbulence"));
 
 # create default properties for METAR system, should be overwritten by real-weather-fetch
 

@@ -35,9 +35,9 @@ if (alt < 30000.0)
 else if (alt < 50000.0)
 	{
 	fade_mix = (alt - 30000.0)/20000.0;
-	return fade_mix * exp(-targ*targ - pow(targ,4.0)) + (1.0 - fade_mix) * exp(-targ - pow(targ,4.0));	
+	return fade_mix * exp(-targ*targ - pow(targ,4.0)) + (1.0 - fade_mix) * exp(-targ - pow(targ,4.0));
 	}
-else 
+else
 	{
 	return exp(- targ * targ - pow(targ,4.0));
 	}
@@ -56,13 +56,13 @@ float r = length(coord);
 if (pixelSize<1.3) {return vec4 (1.0,1.0,1.0,1.0) * 0.08;}
 
 float angle = noise * 6.2832;
- 
+
 float sinphi = dot(vec2 (sin(angle),cos(angle)), normalize(coord));
 float sinterm = sin(mod((sinphi-3.0) * (sinphi-3.0),6.2832));
 float ray = 0.0;
 if (sinterm == 0.0)
-	{ray = 0.0;} 
-else 
+	{ray = 0.0;}
+else
 	{ray = clamp(pow(sinterm,10.0),0.0,1.0);}
 
 float fogEffect =  (1.0-smoothstep(0.4,0.8,transmission));
@@ -76,7 +76,7 @@ return vec4 (1.0,1.0,1.0,1.0) * intensity;
 
 void main()
 {
-    
+
     float dist = length(relPos);
     float delta_z = hazeLayerAltitude - eye_alt;
     float transmission;
@@ -86,7 +86,10 @@ void main()
     float distance_in_layer;
     float transmission_arg;
 
-    float noise = Noise2D(rawPos.xy ,1.0); 
+    // Discard the second and third vertex, which are used for directional lighting
+    if (gl_Color.a == 0.0) {discard;}
+
+    float noise = Noise2D(rawPos.xy ,1.0);
 
     // angle with horizon
     float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
@@ -96,7 +99,7 @@ void main()
 
     if (delta_z > 0.0) // we're inside the layer
 	{
-	if (ct < 0.0) // we look down 
+	if (ct < 0.0) // we look down
 		{
 		distance_in_layer = dist;
 		vAltitude = min(distance_in_layer,min(visibility, avisibility)) * ct;
@@ -108,26 +111,26 @@ void main()
 		if (H > delta_z) {distance_in_layer = dist/H * delta_z;}
 		else {distance_in_layer = dist;}
 		vAltitude = min(distance_in_layer,visibility) * ct;
-  		delta_zv = delta_z - vAltitude;	
+  		delta_zv = delta_z - vAltitude;
 		}
 	}
    else // we see the layer from above, delta_z < 0.0
-	{	
+	{
 	H = dist * -ct;
 	if (H  < (-delta_z)) // we don't see into the layer at all, aloft visibility is the only fading
 		{
 		distance_in_layer = 0.0;
 		delta_zv = 0.0;
-		}		
+		}
 	else
 		{
 		vAltitude = H + delta_z;
-		distance_in_layer = vAltitude/H * dist; 
+		distance_in_layer = vAltitude/H * dist;
 		vAltitude = min(distance_in_layer,visibility) * (-ct);
 		delta_zv = vAltitude;
-		} 
+		}
 	}
-	
+
 
     // ground haze cannot be thinner than aloft visibility in the model,
     // so we need to use aloft visibility otherwise
@@ -138,7 +141,7 @@ void main()
 	{
 	transmission_arg = transmission_arg + (distance_in_layer/visibility);
 	}
-   else 
+   else
 	{
 	transmission_arg = transmission_arg + (distance_in_layer/avisibility);
 	}
@@ -153,7 +156,7 @@ void main()
 
     //vec4 texel = texture2D(texture,gl_TexCoord[0].st);
     vec4 texel = light_sprite(gl_TexCoord[0].st,transmission, noise);
-    gl_FragColor =   vec4 (clamp(gl_Color.rgb,0.0,1.0), texel.a * transmission * dist_att); 
-  
+    gl_FragColor =   vec4 (clamp(gl_Color.rgb,0.0,1.0), texel.a * transmission * dist_att);
+
 
 }

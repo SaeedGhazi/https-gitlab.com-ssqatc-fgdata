@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
-  <name>Effects/surface-lights</name>
+  <name>Effects/surface-lights-directional</name>
   <parameters>
     <!-- min-size, max-size, size, attenuation, cull-face parameters filled in by C++ code -->
     <texture n="0">
@@ -54,10 +54,9 @@
 				<comparison>gequal</comparison>
 				<reference type="float">0.03</reference>
 			</alpha-test>-->
-			<cull-face><use>cull-face</use></cull-face>
+			<cull-face>back</cull-face>
 			<polygon-mode>
         <front>point</front>
-        <back>point</back>
       </polygon-mode>
       <point>
         <min-size><use>min-size</use></min-size>
@@ -210,7 +209,7 @@
         <source>src-alpha</source>
         <destination>one-minus-src-alpha</destination>
       </blend>
-      <cull-face><use>cull-face</use></cull-face>
+      <cull-face>back</cull-face>
       <polygon-mode>
         <front>point</front>
       </polygon-mode>
@@ -256,10 +255,9 @@
         <destination>one-minus-src-alpha</destination>
       </blend>
       <lighting>false</lighting>
-      <cull-face><use>cull-face</use></cull-face>
+      <cull-face>back</cull-face>
       <polygon-mode>
         <front>point</front>
-        <back>point</back>
       </polygon-mode>
     </pass>
   </technique>
@@ -279,7 +277,7 @@
         <source>src-alpha</source>
         <destination>one-minus-src-alpha</destination>
       </blend>
-      <cull-face><use>cull-face</use></cull-face>
+      <cull-face>back</cull-face>
       <polygon-mode>
         <front>point</front>
       </polygon-mode>

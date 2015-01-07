@@ -43,6 +43,7 @@ FGFS.Property.prototype.getNumValue = function(dflt) {
 }
 
 FGFS.PropertyListener = function(arg) {
+  console.log("property listener created!");
   this._listeners = {};
   this._nextId = 1;
   this._ws = new WebSocket('ws://' + location.host + '/PropertyListener');
@@ -60,13 +61,14 @@ FGFS.PropertyListener = function(arg) {
     throw new Error(msg);
   }
 
-  this._ws.propertyListener = this;
   this._ws.onopen = arg.onopen;
   this._ws.onclose = defaultOnClose;
   this._ws.onerror = defaultOnError;
+
+  var self = this;
   this._ws.onmessage = function(ev) {
     try {
-      this.propertyListener.fire(JSON.parse(ev.data));
+      self.fire(JSON.parse(ev.data));
     } catch (e) {
     }
   };
@@ -127,28 +129,26 @@ FGFS.PropertyListener = function(arg) {
 //   [ "key", "/another/fg/property/path" ],
 // ]
 FGFS.PropertyMirror = function(mirroredProperties) {
-  var mirror = {}
+  this.mirror = {}
 
   for( var i = 0; i < mirroredProperties.length; i++ ) {
     var pair = mirroredProperties[i];
-    mirror[pair[0]] = new FGFS.Property(pair[1]);
+    this.mirror[pair[0]] = new FGFS.Property(pair[1]);
   }
 
-  var listener = new FGFS.PropertyListener({
+  var self = this;
+  this.listener = new FGFS.PropertyListener({
     onopen : function() {
-      var keys = Object.keys(mirror);
+      var keys = Object.keys(self.mirror);
       for (var i = 0; i < keys.length; i++) {
-        listener.addProperty(mirror[keys[i]], function(n) {
+        self.listener.addProperty(self.mirror[keys[i]], function(n) {
           if (typeof (n.value) != 'undefined')
             this.prop.value = n.value;
         });
       }
       ;
     },
-  });
-
-  this.listener = listener;
-  this.mirror = mirror;
+  });;
 
   this.getNode = function(id) {
     return this.mirror[id];

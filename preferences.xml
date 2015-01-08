@@ -1090,6 +1090,12 @@ Started September 2000 by David Megginson, david@megginson.com
       <approach-arm type="bool">false</approach-arm>
       <approach-active type="bool">false</approach-active>
       <cdi-deflection type="double">0</cdi-deflection>
+      <approach-active type="bool">false</approach-active>
+
+      <!-- default configuration -->
+      <config>
+          <follow-leg-track-to-fix type="bool">false</follow-leg-track-to-fix>
+      </config>
     </gps>
     <kln89>
       <scan-pull type="bool" archive="y">false</scan-pull>
@@ -1176,6 +1182,14 @@ Started September 2000 by David Megginson, david@megginson.com
     <route-manager>
       <min-lock-altitude-agl-ft type="double">300</min-lock-altitude-agl-ft>
     </route-manager>
+    <settings>
+        <!-- values as per
+        http://en.wikipedia.org/wiki/Aircraft_approach_category
+        Default to category C on the assumption people using the route-manager
+        which cares about this will be flying larger aircraft, not smaller.
+        -->
+        <icao-aircraft-category type="string">C</icao-aircraft-category>
+    </settings>
   </autopilot>
   <logging>
     <log n="0">

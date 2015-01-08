@@ -100,6 +100,13 @@ var FMSDelegate = {
         return nil;
 
 		var m = { parents: [FMSDelegate], flightplan:fp, landingCheck:nil };
+
+        # make FlightPlan behaviour match GPS config state
+        fp.followLegTrackToFix = getprop('/instrumentation/gps/config/follow-leg-track-to-fix');
+
+        # similarly, make FlightPlan follow the performance category settings
+        fp.aircraftCategory = getprop('/autopilot/settings/icao-aircraft-category');
+
 		return m;
 	},
 

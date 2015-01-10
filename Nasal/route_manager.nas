@@ -3,15 +3,15 @@
 # but can be disabled by an aircraft-specific FMS / GPS system.
 
 var RouteManagerDelegate = {
-	new: func(fp) {
+    new: func(fp) {
     # if this property is set, don't build a delegate at all
     if (getprop('/autopilot/route-manager/disable-route-manager'))
         return nil;
 
-		var m = { parents: [RouteManagerDelegate] };
-		m.flightplan = fp;
-		return m;
-	},
+        var m = { parents: [RouteManagerDelegate] };
+        m.flightplan = fp;
+        return m;
+    },
 
     departureChanged: func
     {
@@ -66,9 +66,27 @@ var RouteManagerDelegate = {
         }
 
         if (me.flightplan.approach != nil) {
-            printlog('info', 'routing via approach ' ~ me.flightplan.approach.id);
             var wps = me.flightplan.approach.route(initialApproachFix);
-            me.flightplan.insertWaypoints(wps, -1);
+
+             if ((initialApproachFix != nil) and (wps == nil)) {
+             # current GUI allows selected approach then STAR; but STAR
+             # might not be possible for the approach (no transition).
+             # since fixing the GUI flow is hard, let's route assuming no
+             # IAF. This will likely cause an ugly direct leg, but that's
+             # what the user asked for.
+
+                 printlog('info', "couldn't route approach based on specified IAF "
+                  ~ initialApproachFix.wp_name);
+                 wps = me.flightplan.approach.route(nil);
+             }
+
+            if (wps == nil) {
+                printlog('warn', 'routing via approach ' ~ me.flightplan.approach.id
+                    ~ ' failed entirely.');
+            } else {
+                printlog('info', 'routing via approach ' ~ me.flightplan.approach.id);
+                me.flightplan.insertWaypoints(wps, -1);
+            }
         } else {
             printlog('info', 'routing direct to runway ' ~ me.flightplan.destination_runway.id);
             # no approach, just use the runway waypoint
@@ -94,12 +112,12 @@ var RouteManagerDelegate = {
 
 
 var FMSDelegate = {
-	new: func(fp) {
+    new: func(fp) {
     # if this property is set, don't build a delegate at all
     if (getprop('/autopilot/route-manager/disable-fms'))
         return nil;
 
-		var m = { parents: [FMSDelegate], flightplan:fp, landingCheck:nil };
+        var m = { parents: [FMSDelegate], flightplan:fp, landingCheck:nil };
 
         # make FlightPlan behaviour match GPS config state
         fp.followLegTrackToFix = getprop('/instrumentation/gps/config/follow-leg-track-to-fix');
@@ -107,8 +125,8 @@ var FMSDelegate = {
         # similarly, make FlightPlan follow the performance category settings
         fp.aircraftCategory = getprop('/autopilot/settings/icao-aircraft-category');
 
-		return m;
-	},
+        return m;
+    },
 
     _landingCheckTimeout: func
     {

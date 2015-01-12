@@ -43,8 +43,7 @@
         <token>rwy-to</token>
       </else>
     </if>
-    <text>. Weather. </text>
-    <text>Wind</text>
+    <text>. Weather. Wind </text>
     <token>wind-dir</token>
     <text> degrees at </text>
     <token>wind-speed-kn</token>

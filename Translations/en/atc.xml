@@ -20,6 +20,9 @@
   <n100>hundret</n100>
   <n1000>thousand</n1000>
 
+  <minus>minus</minus>
+  <plus>plus</plus>
+
   <!-- spoken letters -->
   <a>alpha</a>
   <b>bravo</b>

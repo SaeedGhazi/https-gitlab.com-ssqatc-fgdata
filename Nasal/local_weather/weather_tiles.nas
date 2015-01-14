@@ -2747,9 +2747,9 @@ var set_METAR_weather_station = func {
 		if ((alpha == 0.0) and (windspeed == 0.0))
 			{
 			alpha = getprop(lw~"tmp/tile-orientation-deg");	
-			var phi = alpha * math.pi/180.0;
+			#var phi = alpha * math.pi/180.0;
 			}
-
+		#print("Adding wind interpolation.");
 
 		var boundary_correction = 1.0/local_weather.get_slowdown_fraction();
 		local_weather.set_wind_ipoint_metar(station_lat, station_lon, alpha, boundary_correction * windspeed);
@@ -2773,8 +2773,9 @@ var set_METAR_weather_station = func {
 
 	setprop(lw~"tmp/gust-relative-strength", gust_relative_strength);
 	setprop(lw~"tmp/gust-angular-variation-deg", gust_angvar);
-	
-
+	setprop(lw~"METAR/wind-direction-deg", alpha);
+	setprop(lw~"METAR/windspeed-kt", windspeed);
+	#print("Added METAR station with wind direction ", alpha, " and strength ", windspeed);
 	# and mark that we have used this station
 	setprop(lw~"METAR/station-id",getprop("/environment/metar/station-id"));
 

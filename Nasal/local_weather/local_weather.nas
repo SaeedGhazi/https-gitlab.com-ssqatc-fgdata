@@ -910,8 +910,15 @@ if (gust_frequency > 0.0)
 	var gust_relative_strength = getprop(lw~"tmp/gust-relative-strength");
 	var gust_angvar = getprop(lw~"tmp/gust-angular-variation-deg");
 	
-	# var winddir_last = getprop(lwi~"wind-from-heading-deg");
-	var winddir_last = interpolated_conditions.wind_from_heading_deg;
+	# if we have variability in the direction of the wind, the winds will
+	# drift by the Markov chain code below to adjust to a new winddir as computed
+	# above - however if the wind is not variable but still gusty, this won't happen
+	# so we have to take care of it explicitly
+
+	if (gust_angvar > 0.0)
+		{var winddir_last = interpolated_conditions.wind_from_heading_deg;}
+	else	
+		{var winddir_last = winddir;}
 	
 	var alt_scaling_factor = 1.2 * windspeed / 10.0;
 	if (alt_scaling_factor < 1.0) {alt_scaling_factor = 1.0;}
@@ -945,6 +952,8 @@ if (gust_frequency > 0.0)
 
 
 compat_layer.setWindSmoothly(winddir, windspeed_current);
+
+# set the interpolated conditions to the wind including gust 
 
 interpolated_conditions.wind_from_heading_deg = winddir;
 interpolated_conditions.windspeed_kt = windspeed_current;

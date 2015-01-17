@@ -161,9 +161,14 @@ Started September 2000 by David Megginson, david@megginson.com
         <detailed type="double" userarchive="y">1500</detailed>
         <rough type="double" userarchive="y">9000</rough>
         <bare type="double" userarchive="y">30000</bare>
-        <!-- ai-range-mode-pixel: true=use pixel size on screen, false=use distance from eyepoint -->
-        <ai-range-mode-pixel type="bool" userarchive="y">false</ai-range-mode-pixel>
-        <ai-detailed type="double" userarchive="y">10000</ai-detailed>
+        <!--
+          ai-range-mode-pixel: true=use pixel size on screen, false=use distance from eyepoint 
+          With /sim/rendering/static-lod/ai-range-mode-pixel set to true
+          /sim/rendering/static-lod/ai-detailed now contains the minimum size of the
+          model on the screen to be displayed. Values of 10-50 seem to make some sense.
+        -->
+        <ai-range-mode-pixel type="bool" userarchive="y">true</ai-range-mode-pixel>
+        <ai-detailed type="double" userarchive="y">30</ai-detailed>
         <!-- ai-bare type="double" userarchive="y">10000</ai-bare -->
         <ai-interior type="double" userarchive="y">50</ai-interior>
       </static-lod>

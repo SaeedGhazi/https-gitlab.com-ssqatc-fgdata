@@ -120,7 +120,6 @@ FGFS.PropertyListener = function(arg) {
         value: val
       }));
   }
-
 }
 
 // expects:

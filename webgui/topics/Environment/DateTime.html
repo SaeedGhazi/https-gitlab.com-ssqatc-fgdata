@@ -1,0 +1,24 @@
+<style>
+.phi-datetime-2digits {
+	width: 2em;
+}
+</style>
+<fieldset>
+    <legend>Time of today</legend>
+    <!--  ko foreach: timesOfToday -->
+    <button data-bind="text: $data, click: $parent.setTimeOfToday">Clock Time</button>
+    <!-- /ko -->
+</fieldset>
+<fieldset>
+    <legend>Date and Time</legend>
+    <div>Current System time is: <span data-bind="text: simTimeUTC"></span></div>
+        <div>Current System date is: <span data-bind="text: date"></span></div>
+    
+    <div data-bind="datepicker: { value: date }"></div>
+    <div>
+        <input class="phi-datetime-2digits" data-bind="spinner: { value: hour, spin: wrapHour }" /> 
+        <input class="phi-datetime-2digits" data-bind="spinner: { value: minute, spin: wrapMinute }" />
+        
+    </div>
+
+</fieldset>

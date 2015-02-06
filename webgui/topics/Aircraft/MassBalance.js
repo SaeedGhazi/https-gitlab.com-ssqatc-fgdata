@@ -46,7 +46,7 @@ define([
                 // or
                 // if some other part of your code calls ko.removeNode(element)
                 var plot = ko.utils.domData.set(element, "flotchart-plot", null);
-                // TODO: unsubscribe from data and options observables?
+                // TODO: unsubscribe from data and options observables!!
             });
 
         },

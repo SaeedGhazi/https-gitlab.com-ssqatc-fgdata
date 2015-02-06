@@ -9,13 +9,13 @@ require.config({
         leaflet : '3rdparty/leaflet-0.7.3/leaflet',
         text : '3rdparty/require/text',
         flot : '3rdparty/flot/jquery.flot',
-        fgcommand: 'lib/fgcommand',
+        fgcommand : 'lib/fgcommand',
     }
 });
 
 require([
         'knockout', 'jquery', 'themeswitch'
-], function(ko,jquery) {
+], function(ko, jquery) {
 
     function KnockProps(aliases) {
 
@@ -105,8 +105,8 @@ require([
             var p = (self.props[prop] = ko.pureComputed({
                 read : target,
                 write : function(newValue) {
-                    if( newValue == target() )
-                        return; 
+                    if (newValue == target())
+                        return;
                     target(newValue);
                     target.notifySubscribers(newValue);
                 }
@@ -116,8 +116,8 @@ require([
 
             return p;
         }
-        
-        this.write = function(prop,value) {
+
+        this.write = function(prop, value) {
             var path = this.aliases[prop] || "";
             if (path.length == 0) {
                 console.log("can't write " + prop + ": unknown alias.");
@@ -126,10 +126,24 @@ require([
             this.ws.send(JSON.stringify({
                 command : 'set',
                 node : path,
-                value: value
-              }));            
+                value : value
+            }));
         }
 
+        this.propsToObject = function(prop, map, result) {
+            result = result || {}
+            prop.children.forEach(function(prop) {
+                var target = map[prop.name] || null;
+                if (target) {
+                    if (typeof (result[target]) === 'function') {
+                        result[target](prop.value);
+                    } else {
+                        result[target] = prop.value;
+                    }
+                }
+            });
+            return result;
+        }
     }
 
     ko.extenders.fgprop = function(target, prop) {
@@ -227,6 +241,10 @@ require([
                     "gnd-temp", "/environment/config/boundary/entry/temperature-degc"
             ], [
                     "gnd-dewp", "/environment/config/boundary/entry/dewpoint-degc"
+            ], [
+                    "metar", "/environment/metar/data"
+            ], [
+                    "metar-valid", "/environment/metar/valid"
             ],
     ]);
 

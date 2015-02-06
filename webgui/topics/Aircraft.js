@@ -13,11 +13,15 @@ define([
         require : 'topics/Aircraft/Checklists'
     });
 
+    ko.components.register('Aircraft/Help', {
+        require : 'topics/Aircraft/Help'
+    });
+
     function ViewModel(params) {
         var self = this;
         
         self.topics = [
-                /*'Select', */'Mass & Balance', 'Checklists', 'Failures', 'Panel'
+                /*'Select', */'Mass & Balance', 'Checklists', 'Failures', 'Panel', 'Help'
         ];
         
         self.selectedTopic = ko.observable();

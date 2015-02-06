@@ -5,19 +5,42 @@ define([
         var self = this;
 
         self.helpTitle = ko.observable("");
-        self.helpText = ko.observableArray([]);
+        self.helpContent = ko.observableArray([]);
 
         jquery.get('/json/sim/help', null, function(data) {
 
-            var helpText = [];
+            var helpContent = [];
             data.children.forEach(function(prop) {
                 if (prop.name === 'title') {
                     self.helpTitle(prop.value);
-                } else if (prop.name == 'line') {
-                    helpText.push(prop.value);
+                } else if (prop.name == 'line' ) {
+                    helpContent.push({
+                        type: 'line',
+                        text: prop.value,
+                    });
+                } else if (prop.name == 'text') {
+                    helpContent.push({
+                        type: 'text',
+                        text: prop.value,
+                    });
+                } else if (prop.name == 'key') {
+                    var content = {
+                            type: 'key',
+                            name: 'noname',
+                            desc: 'nothing',
+                    }
+                    helpContent.push(content);
+                    prop.children.forEach(function(prop) {
+                        if (prop.name === 'name') {
+                            content.name = prop.value;
+                        } else if( prop.name == 'desc' ) {
+                            content.desc = prop.value;
+                        }
+                    });
                 }
             });
-            self.helpText(helpText);
+            console.log(helpContent);
+            self.helpContent(helpContent);
 
         });
     }

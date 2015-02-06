@@ -28,48 +28,53 @@ define([
         }
 
         self.wrapHour = function(evt, ui) {
-           return self._wrap(evt,ui,0,23);
+           return self._wrap(evt,ui,0,24);
         }
 
         self.wrapMinute = function(evt, ui) {
-            return self._wrap(evt,ui,0,59);
+            return self._wrap(evt,ui,0,60);
         }
         
         self._wrap = function(evt,ui,min,max) {
-            if (ui.value > max) {
-                $(evt.target).spinner("value", min);
+            if (ui.value >= max) {
+                $(evt.target).spinner("value", ui.value - max);
                 return false;
             } else if (ui.value < min) {
-                $(evt.target).spinner("value", max);
+                $(evt.target).spinner("value", ui.value + max);
                 return false;
             }
+            $(evt.target).spinner("value",ui.value);
+            return true;
         }
 
         self.gmtProp = ko.observable().extend({ fgprop: 'gmt' });
        
-        self.simTimeUTC = ko.pureComputed( function() {
-            return new Date(self.gmtProp() + "Z");
+        self.simTimeUTC = ko.pureComputed({
+            read: function() {
+                return new Date(self.gmtProp() + "Z");
+            },
+            write: function(newValue) {
+                console.log("new time: ", newValue );
+            }
         });
         
        
         self.hour = ko.pureComputed({
             read: function() {
-                return self.simTimeUTC().getHours();
+                return self.simTimeUTC().getUTCHours();
             },
             write: function(newValue) {
-                
+                console.log("new hour", newValue );
             }
         });
         self.minute = ko.pureComputed({
             read: function() {
-                return self.simTimeUTC().getMinutes();
+                return self.simTimeUTC().getUTCMinutes();
             },
             write: function(newValue) {
-                
+                console.log("new minute", newValue );
             }
         });
-        self.date = ko.observable(0);
-
     }
 
     ViewModel.prototype.dispose = function() {

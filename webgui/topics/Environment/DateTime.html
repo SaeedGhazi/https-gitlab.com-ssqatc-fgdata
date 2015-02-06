@@ -11,12 +11,11 @@
 </fieldset>
 <fieldset>
     <legend>Date and Time</legend>
-    <div>Current System time is: <span data-bind="text: simTimeUTC"></span></div>
-        <div>Current System date is: <span data-bind="text: date"></span></div>
+    <div>Current System Time is: <span data-bind="text: simTimeUTC().toUTCString()"></span></div>
     
-    <div data-bind="datepicker: { value: date }"></div>
+    <div data-bind="datepicker: { value: simTimeUTC }"></div>
     <div>
-        <input class="phi-datetime-2digits" data-bind="spinner: { value: hour, spin: wrapHour }" /> 
+        <input class="phi-datetime-2digits" data-bind="spinner: { value: hour, spin: wrapHour, page: 6 }" /> 
         <input class="phi-datetime-2digits" data-bind="spinner: { value: minute, spin: wrapMinute }" />
         
     </div>

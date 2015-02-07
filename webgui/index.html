@@ -32,7 +32,7 @@
 
 <link rel="stylesheet" type="text/css" href="/Fonts/LiberationFonts/LiberationFonts.css">
 <link rel="stylesheet" href="3rdparty/leaflet-0.7.3/leaflet.css" />
-<link rel="stylesheet" href="3rdparty/jquery-ui-themes-1.11.2/themes/smoothness/jquery-ui.min.css" />
+<link id="ui-theme" rel="stylesheet" href="3rdparty/jquery-ui-themes-1.11.2/themes/smoothness/jquery-ui.min.css" />
 
 <style>
 * {
@@ -202,6 +202,23 @@ html, body, #wrapper {
 	padding: 5px;
 	overflow: scroll;
 }
+
+.switcher_container:before {
+  content: 'Theme';
+  padding-right: 0.5em;
+  color: white;
+}
+
+.switcher_container {
+padding-right: 5px;
+float: right;
+}
+.switcher_list {
+padding: 2px;
+}
+.switcher_label {
+display: none;
+}
 </style>
 
 <link href="widgets/radiostack.css" rel="stylesheet" type="text/css" />
@@ -222,6 +239,7 @@ html, body, #wrapper {
                    click: $root.selectTopic">
                     </li>
                 </ul>
+                <div id="ui-theme-switcher"></div>
             </div>
             <div id="htabs-content" data-bind="component: { name: selectedTopic }"></div>
         </div>

@@ -14,8 +14,8 @@ require.config({
 });
 
 require([
-        'knockout', 'jquery',
-], function(ko) {
+        'knockout', 'jquery', 'themeswitch'
+], function(ko,jquery) {
 
     function KnockProps(aliases) {
 
@@ -287,4 +287,5 @@ require([
     });
 
     ko.applyBindings(new PhiViewModel());
+
 });

@@ -109,7 +109,8 @@
       <uniform>
         <name>is_directional</name>
         <type>bool</type>
-        <value><use>light-directional</use></value>
+	<!-- Short-term fix for unstable normals in taxiway lights -->
+        <value>false</value>
       </uniform>
       <uniform>
         <name>texture</name>

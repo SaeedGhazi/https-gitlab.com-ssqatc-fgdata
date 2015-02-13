@@ -49,12 +49,12 @@ body {
   padding:0 0.2em 0 0; 
 }
 
-#breadcrumb li a:link, #breadcrumb li a:visited { 
+#breadcrumb a:link, #breadcrumb a:visited { 
   text-decoration: none; 
   color:#e0e0e0; 
 }
 
-#breadcrumb li a:hover, #breadcrumb li a:focus { 
+#breadcrumb a:hover, #breadcrumb a:focus { 
   text-decoration:underline; 
   color:#e0e0e0; 
 }

@@ -110,6 +110,10 @@ define(
 
                 aircraftMarker.addTo(self.map);
 
+                var aircraftTrack = L.polyline([], {
+                    color : 'red'
+                }).addTo(self.map);
+
                 self.latitude = ko.observable(0).extend({
                     fgprop : 'latitude'
                 });
@@ -142,10 +146,18 @@ define(
                     rateLimit : 2000
                 });
 
+                self.aircraftTrailLength = 60;
+
                 self.mapCenter.subscribe(function(newValue) {
                     if (self.followAircraft()) {
                         self.map.setView(newValue);
                     }
+
+                    var trail = aircraftTrack.getLatLngs();
+                    while (trail.length > self.aircraftTrailLength)
+                        trail.shift();
+                    trail.push(newValue);
+                    aircraftTrack.setLatLngs(trail);
                 });
             }
 

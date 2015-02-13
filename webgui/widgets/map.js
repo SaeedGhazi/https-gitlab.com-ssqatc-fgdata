@@ -80,15 +80,16 @@ define(
                                     className : 'aircraft-marker-popup',
                                     closeOnClick : false,
                                     maxWidth : 200,
-                                    minWidth : 100,
+                                    minWidth : 120,
                                     offset : [
                                             30, 30
                                     ],
                                 }, this);
                                 this.popup
-                                        .setContent('<div class="aircraft-marker aircraft-marker-altitude"><span data-bind="text: altitude().toFixed(0)"></span>ft</div>'
+                                        .setContent( '<div class="aircraft-marker aircraft-marker-altitude"><span data-bind="text: altitude().toFixed(0)"></span>ft</div>'
                                                 + '<div class="aircraft-marker aircraft-marker-heading"><span data-bind="text: heading().toFixed(0)"></span>&deg</div>'
-                                                + '<div class="aircraft-marker aircraft-marker-tas"><span data-bind="text: tas().toFixed(0)"></span>kt</div><div style="clear: both"/>');
+                                                + '<div class="aircraft-marker aircraft-marker-tas"><span data-bind="text: tas().toFixed(0)"></span>kt</div><div style="clear: both"/>'
+                                            );
                                 this.bindPopup(this.popup);
                                 this.addTo(this._map);
                                 this.openPopup();

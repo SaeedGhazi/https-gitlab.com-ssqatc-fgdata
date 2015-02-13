@@ -30,7 +30,7 @@
     </scenario>
     <scenario>
       <name type="string">Manual input</name>
-      <description type="string">Enter your favorite METAR weather in the textbox above. A valid METAR syntax is required.</description>
+      <description type="string">Enter your favorite METAR weather. A valid METAR syntax is required.</description>
       <local-weather>
         <tile-type>manual</tile-type>
         <tile-management>METAR</tile-management>        

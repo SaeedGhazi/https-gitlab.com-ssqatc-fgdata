@@ -184,11 +184,15 @@ require([
             ],
             // radio settings
             [
+                    "com1stn", "/instrumentation/comm/station-name"
+            ], [
                     "com1use", "/instrumentation/comm/frequencies/selected-mhz"
             ], [
                     "com1sby", "/instrumentation/comm/frequencies/standby-mhz"
             ], [
                     "com1stn", "/instrumentation/comm/station-name"
+            ], [
+                    "com2stn", "/instrumentation/comm[1]/station-name"
             ], [
                     "com2use", "/instrumentation/comm[1]/frequencies/selected-mhz"
             ], [

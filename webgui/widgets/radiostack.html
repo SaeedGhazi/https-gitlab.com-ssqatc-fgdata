@@ -1,7 +1,7 @@
 <div class="phi-radiostack" data-bind="foreach: radios">
 	<div class="phi-radio">
 		<span data-bind="text: label"></span> 
-		<input data-bind="value: use"/>
+		<input data-bind="value: use, attr: { title: stn }"/>
 		<button data-bind="click: swap">&harr;</button>
 		<input data-bind="value: stby"/>
 	</div>

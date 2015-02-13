@@ -21,7 +21,7 @@
       <name type="string">Live data</name>
       <description type="string">
         Fetch live weather data for your nearest airport from noaa.gov. You need a working internet connection.
-        All the controls in this dialog are computed automatically, once a valid METAR is received.
+        Weather is generated automatically, once a valid METAR is received.
       </description>
       <local-weather>
         <tile-type>live</tile-type>

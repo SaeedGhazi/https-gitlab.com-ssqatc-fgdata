@@ -1,5 +1,5 @@
 define([
-        'knockout', 'text!./radiostack.html'
+        'knockout', 'text!./radiostack.html', 'kojqui/tooltip'
 ], function(ko, htmlString) {
 
     function DualFrequencyViewModel(label, pfx) {

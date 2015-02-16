@@ -15,7 +15,7 @@ define(
                 });
 
                 self.tas = ko.observable(0).extend({
-                    fgprop : 'airspeed'
+                    fgprop : 'groundspeed'
                 });
 
                 self.heading = ko.observable(0).extend({

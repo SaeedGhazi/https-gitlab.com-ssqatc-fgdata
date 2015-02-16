@@ -168,6 +168,8 @@ require([
             ], [
                     "heading", "/orientation/heading-magnetic-deg"
             ], [
+                    "true-heading", "/orientation/heading-deg"
+            ], [
                     "altitude", "/position/altitude-ft"
             ], [
                     "latitude", "/position/latitude-deg"
@@ -175,6 +177,8 @@ require([
                     "longitude", "/position/longitude-deg"
             ], [
                     "airspeed", "/velocities/airspeed-kt"
+            ], [
+                    "groundspeed", "/velocities/groundspeed-kt"
             ], [
                     "slip", "/instrumentation/slip-skid-ball/indicated-slip-skid"
             ], [

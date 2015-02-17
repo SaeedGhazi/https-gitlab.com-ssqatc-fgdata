@@ -21,7 +21,7 @@ define([
         var self = this;
         
         self.topics = [
-                /*'Select', */'Mass & Balance', 'Checklists', 'Failures', 'Panel', 'Help'
+                'Select', 'Mass & Balance', 'Checklists', 'Failures', 'Panel', 'Help'
         ];
         
         self.selectedTopic = ko.observable();

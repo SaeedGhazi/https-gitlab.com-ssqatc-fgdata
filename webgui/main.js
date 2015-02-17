@@ -20,64 +20,84 @@ require([
     function KnockProps(aliases) {
 
         var self = this;
-        this.ws = new WebSocket('ws://' + location.host + '/PropertyListener');
-        this.ws.onclose = function(ev) {
-            var msg = 'Lost connection to FlightGear. Please reload this page and/or restart FlightGear.';
-            alert(msg);
-            throw new Error(msg);
-        }
 
-        this.ws.onerror = function(ev) {
-            var msg = 'Error communicating with FlightGear. Please reload this page and/or restart FlightGear.';
-            alert(msg);
-            throw new Error(msg);
-        }
+        self.initWebsocket = function() {
+            self.ws = new WebSocket('ws://' + location.host + '/PropertyListener');
 
-        this.ws.onmessage = function(ev) {
-            try {
-                self.fire(JSON.parse(ev.data));
-            } catch (e) {
+            self.ws.onclose = function(ev) {
+                var msg = 'Lost connection to FlightGear. Should I try to reconnect?';
+                if (confirm(msg)) {
+                    // try reconnect
+                    self.initWebsocket();
+                } else {
+                    throw new Error(msg);
+                }
             }
-        };
 
-        this.openCache = [];
-        this.ws.onopen = function(ev) {
-            // send subscriptions when the socket is open
-            var c = self.openCache;
-            delete self.openCache;
-            c.forEach(function(e) {
-                self.addListener(e.prop, e.koObservable);
-            });
+            self.ws.onerror = function(ev) {
+                var msg = 'Error communicating with FlightGear. Please reload this page and/or restart FlightGear.';
+                alert(msg);
+                throw new Error(msg);
+            }
+
+            self.ws.onmessage = function(ev) {
+                try {
+                    self.fire(JSON.parse(ev.data));
+                } catch (e) {
+                }
+            };
+
+            self.openCache = [];
+            self.ws.onopen = function(ev) {
+                // send subscriptions when the socket is open
+                var c = self.openCache;
+                delete self.openCache;
+                console.log(c);
+                c.forEach(function(e) {
+                    self.addListener(e.prop, e.koObservable);
+                });
+                for( var p in self.listeners ) {
+                    self.addListener( p, self.listeners[p] );
+                }
+            }
+
         }
 
-        this.fire = function(json) {
+        self.initWebsocket();
+
+        self.fire = function(json) {
             var koObservable = self.listeners[json.path] || null;
             if (!koObservable)
                 return;
             koObservable(json.value);
         }
 
-        this.listeners = {}
+        self.listeners = {}
 
-        this.addListener = function(prop, koObservable) {
+        self.addListener = function(alias, koObservable) {
             if (self.openCache) {
                 // socket not yet open, just cache the request
                 console.log("caching listener request");
                 self.openCache.push({
-                    "prop" : prop,
+                    "prop" : alias,
                     "koObservable" : koObservable
                 });
                 return;
             }
 
-            var path = this.aliases[prop] || "";
+            var path = this.aliases[alias] || "";
             if (path.length == 0) {
-                console.log("can't listen to " + prop + ": unknown alias.");
-                return;
+                if (alias.charAt(0) == '/') {
+                    path = alias;
+                } else {
+                    console.log("can't listen to " + alias + ": unknown alias.");
+                    return;
+                }
             }
 
             self.listeners[path] = koObservable;
 
+            console.log("subscribing to " + alias);
             self.ws.send(JSON.stringify({
                 command : 'addListener',
                 node : path
@@ -88,16 +108,16 @@ require([
             }));
         }
 
-        this.aliases = aliases || {};
-        this.setAliases = function(arg) {
+        self.aliases = aliases || {};
+        self.setAliases = function(arg) {
             arg.forEach(function(a) {
                 self.aliases[a[0]] = a[1];
             });
         }
 
-        this.props = {};
+        self.props = {};
 
-        this.get = function(target, prop) {
+        self.get = function(target, prop) {
             if (self.props[prop]) {
                 return self.props[prop];
             }
@@ -117,7 +137,7 @@ require([
             return p;
         }
 
-        this.write = function(prop, value) {
+        self.write = function(prop, value) {
             var path = this.aliases[prop] || "";
             if (path.length == 0) {
                 console.log("can't write " + prop + ": unknown alias.");
@@ -130,7 +150,7 @@ require([
             }));
         }
 
-        this.propsToObject = function(prop, map, result) {
+        self.propsToObject = function(prop, map, result) {
             result = result || {}
             prop.children.forEach(function(prop) {
                 var target = map[prop.name] || null;

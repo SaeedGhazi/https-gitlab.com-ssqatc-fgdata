@@ -7,6 +7,7 @@
 		<screenshot>/screenshot</screenshot>
 		<property>/props/</property>
 		<json>/json/</json>
+		<pkg>/pkg/</pkg>
 		<run>/run.cgi</run>
 		<navdb>/navdb</navdb>
 	</uri-handler>

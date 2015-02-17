@@ -88,7 +88,10 @@
         },
         timeofday : function(type, offset) {
             this.sendCommand("timeofday", this.twoArgs("timeofday", type, "offset", null != offset ? offset : 0));
-        }
+        },
+        switchAircraft : function(id) {
+            this.sendCommand("switch-aircraft", this.oneArg("aircraft", id));
+        },
     };
 
     return fgCommand;

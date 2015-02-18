@@ -1,0 +1,14 @@
+
+<div class="ui-widget ui-corner-all">
+    <div class="ui-widget-header">Stopwatch</div>
+    <div class="ui-widget-content ui-corner-all">
+        <div class="ui-state-highlight" style="font-size: 200%; font-weight: bold;"">
+            <span data-bind="text: hoursDisplay"></span> : <span data-bind="text: minutesDisplay"></span> : <span
+                data-bind="text: secondsDisplay"></span>
+        </div>
+        <div>
+            <button data-bind="button: { refreshOn: startIcons, text: false, icons: startIcons, label: startLabel }, click: startStopPause">Start</button>
+            <button data-bind="button: { text: false, icons: { primary: ' ui-icon-refresh' } }, click: clear">Restart</button>
+        </div>
+    </div>
+</div>

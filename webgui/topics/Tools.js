@@ -2,6 +2,10 @@ define([
         'knockout', 'text!./Tools.html'
 ], function(ko, htmlString) {
 
+    ko.components.register('Tools/Stopwatch', {
+        require : 'topics/Tools/Stopwatch'
+    });
+
     function ViewModel(params) {
         var self = this;
 

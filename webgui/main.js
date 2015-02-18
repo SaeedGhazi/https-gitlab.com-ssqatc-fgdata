@@ -52,7 +52,6 @@ require([
                 // send subscriptions when the socket is open
                 var c = self.openCache;
                 delete self.openCache;
-                console.log(c);
                 c.forEach(function(e) {
                     self.addListener(e.prop, e.koObservable);
                 });
@@ -77,7 +76,6 @@ require([
         self.addListener = function(alias, koObservable) {
             if (self.openCache) {
                 // socket not yet open, just cache the request
-                console.log("caching listener request");
                 self.openCache.push({
                     "prop" : alias,
                     "koObservable" : koObservable
@@ -97,7 +95,6 @@ require([
 
             self.listeners[path] = koObservable;
 
-            console.log("subscribing to " + alias);
             self.ws.send(JSON.stringify({
                 command : 'addListener',
                 node : path
@@ -330,6 +327,10 @@ require([
 
     ko.components.register('efis', {
         require : 'widgets/efis'
+    });
+
+    ko.components.register('stopwatch', {
+        require : 'widgets/Stopwatch'
     });
 
     ko.applyBindings(new PhiViewModel());

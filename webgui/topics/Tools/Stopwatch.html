@@ -1,0 +1,4 @@
+<div data-bind="foreach: watches">
+    <div data-bind="component: { name: 'stopwatch' }"></div>
+</div>
+<button data-bind="button: { label: 'Add', icons: { primary: ' ui-icon-plusthick' } }, click: addWatch"></button>

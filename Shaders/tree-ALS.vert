@@ -22,10 +22,12 @@
 
 varying vec3 relPos;
 varying float yprime_alt;
+varying float autumn_flag;
 
 uniform int colorMode;
 uniform int wind_effects;
 uniform int forest_effects;
+uniform int num_deciduous_trees;
 uniform float hazeLayerAltitude;
 uniform float terminator;
 uniform float terrain_alt; 
@@ -66,7 +68,6 @@ return e / pow((1.0 + a * exp(-b * (x-c)) ),(1.0/d));
 void main()
 {
 
-  //vec4 light_diffuse;
   vec4 light_ambient;
 
   vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
@@ -81,6 +82,12 @@ void main()
 
   float numVarieties = gl_Normal.z;
   float texFract = floor(fract(gl_MultiTexCoord0.x) * numVarieties) / numVarieties;
+
+// determine whether the tree changes color in autumn
+  if (texFract <  (float) num_deciduous_trees/numVarieties) {autumn_flag = 0.5 + fract(gl_Color.x);}
+  else {autumn_flag = 0.0;}
+
+	
   texFract += floor(gl_MultiTexCoord0.x) / numVarieties;
   
   // Determine the rotation for the tree.  The Fog Coordinate provides rotation information

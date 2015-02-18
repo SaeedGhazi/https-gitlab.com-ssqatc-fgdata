@@ -11,6 +11,7 @@ uniform sampler2D texture;
 
 
 varying float yprime_alt;
+varying float autumn_flag;
 
 uniform float visibility;
 uniform float avisibility;
@@ -26,6 +27,7 @@ uniform float dust_cover_factor;
 uniform float air_pollution;
 uniform float landing_light1_offset;
 uniform float landing_light2_offset;
+uniform float cseason;
 
 uniform int use_searchlight;
 uniform int use_landing_light;
@@ -135,10 +137,22 @@ void main()
 
   if (quality_level > 3)
 	{
+
+	//  seasonal color changes
+
+	if ((cseason < 1.5)&& (autumn_flag > 0.0))
+	{
+	texel.r = min(1.0, (1.0 + 5.0 *cseason * autumn_flag  ) * texel.r);
+	//texel.g = texel.g + 0.05 * (autumn_flag-0.5) * cseason;
+	texel.b = max(0.0, (1.0 - 8.0 * cseason) *  texel.b);
+	}
+
 	// mix dust
     	vec4 dust_color = vec4 (0.76, 0.71, 0.56, texel.a);
 
     	texel = mix(texel, dust_color, clamp(0.6 * dust_cover_factor ,0.0, 1.0) );
+
+	
 	}
 
 
@@ -345,6 +359,8 @@ hazeColor = clamp(hazeColor,0.0,1.0);
 fragColor.rgb = mix( hazeColor  + secondary_light * fog_backscatter(mvisibility), fragColor.rgb,transmission);
 
 }
+
+//if (autumn_flag > 0.0) {fragColor = vec4 (0.0,0.0,0.0,1.0);}
 
 gl_FragColor = fragColor;
 }

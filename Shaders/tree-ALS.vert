@@ -84,7 +84,7 @@ void main()
   float texFract = floor(fract(gl_MultiTexCoord0.x) * numVarieties) / numVarieties;
 
 // determine whether the tree changes color in autumn
-  if (texFract <  (float) num_deciduous_trees/numVarieties) {autumn_flag = 0.5 + fract(gl_Color.x);}
+  if (texFract <  float(num_deciduous_trees)/float(numVarieties)) {autumn_flag = 0.5 + fract(gl_Color.x);}
   else {autumn_flag = 0.0;}
 
 	

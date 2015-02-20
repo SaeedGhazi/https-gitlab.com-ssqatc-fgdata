@@ -1,5 +1,6 @@
 // -*-C++-*-
 
+
 // Shader that uses OpenGL state values to do per-pixel lighting
 //
 // The only light used is gl_LightSource[0], which is assumed to be
@@ -22,6 +23,7 @@
 
 varying vec3 relPos;
 varying float yprime_alt;
+varying float is_shadow;
 varying float autumn_flag;
 
 uniform int colorMode;
@@ -42,11 +44,12 @@ uniform float forest_effect_shape;
 uniform float WindN;
 uniform float WindE;
 
+uniform bool use_tree_shadows;
+uniform bool use_forest_effect;
+
 uniform float osg_SimulationTime;
 
 uniform int cloud_shadow_flag;
-
-uniform bool use_forest_effect;
 
 float earthShade;
 float mie_angle;
@@ -72,15 +75,22 @@ return e / pow((1.0 + a * exp(-b * (x-c)) ),(1.0/d));
 void main()
 {
 
+  //vec4 light_diffuse;
   vec4 light_ambient;
 
-  vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
+  vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
 
   float yprime;
   float lightArg;
   float intensity;
   float vertex_alt;
   float scattering;
+  is_shadow = -1.0;
+
+ // establish coordinates relative to sun position
+
+   vec3 lightFull = (gl_ModelViewMatrixInverse * gl_LightSource[0].position).xyz;
+   vec3 lightHorizon = normalize(vec3(lightFull.x,lightFull.y, 0.0));
 
 // this code is copied from tree.vert
 
@@ -91,14 +101,23 @@ void main()
   if (texFract <  float(num_deciduous_trees)/float(numVarieties)) {autumn_flag = 0.5 + fract(gl_Color.x);}
   else {autumn_flag = 0.0;}
 
-	
   texFract += floor(gl_MultiTexCoord0.x) / numVarieties;
   
   // Determine the rotation for the tree.  The Fog Coordinate provides rotation information
   // to rotate one of the quands by 90 degrees.  We then apply an additional position seed
   // so that trees aren't all oriented N/S
-  float sr = sin(gl_FogCoord + gl_Color.x);
-  float cr = cos(gl_FogCoord + gl_Color.x);
+  float sr;
+  float cr;
+  sr = sin(gl_FogCoord + gl_Color.x);
+  cr = cos(gl_FogCoord + gl_Color.x);
+  
+  if (gl_FogCoord < 0.0)
+	{
+	sr = dot(lightHorizon.xy, vec2 (0.0,1.0));
+	cr = dot(lightHorizon.xy, vec2 (-1.0,0.0));
+	}
+
+
   gl_TexCoord[0] = vec4(texFract, gl_MultiTexCoord0.y, 0.0, 0.0);
   
   // Determine the y texture coordinate based on whether it's summer, winter, snowy.
@@ -117,6 +136,11 @@ void main()
 	position.x = position.x + position.z * (sin(osg_SimulationTime * 1.8 + (gl_Color.x + gl_Color.y + gl_Color.z) * 0.01) + 1.0) * 0.0025 * WindN;
   	position.y = position.y + position.z * (sin(osg_SimulationTime * 1.8 + (gl_Color.x + gl_Color.y + gl_Color.z) * 0.01) + 1.0) * 0.0025 * WindE;
 	}
+
+
+
+
+
 	
   // Scale by random domains	
   float voronoi;
@@ -125,6 +149,31 @@ void main()
 	voronoi = 0.5 + 1.0 * VoronoiNoise2D(gl_Color.xy, forest_effect_size, forest_effect_shape, forest_effect_shape);	
 	position.xyz = position.xyz * voronoi;  
  	}
+
+  // check if this is a shadow quad
+  if ((gl_FogCoord <0.0)&&(use_tree_shadows))
+	{
+	is_shadow = 1.0;
+	float sinAlpha = dot(lightFull, vec3 (0.0,0.0,1.0));
+	float cosAlpha = sqrt(1.0 - sinAlpha*sinAlpha);
+	float slope = dot(gl_SecondaryColor.xyz, vec3(0.0,0.0,1.0));
+	//float slope = 1.0;
+	position.x += position.z * clamp(cosAlpha/sinAlpha,-5.0,5.0) * -dot(lightHorizon.xy, vec2(1.0,0.0));
+	position.y += position.z * clamp(cosAlpha/sinAlpha,-5.0,5.0) * -dot(lightHorizon.xy, vec2 (0.0,1.0));
+	if (position.z > 3.0) // we deal with an upper vertex
+		{
+		vec3 terrainNormal = gl_SecondaryColor.xyz;
+		position.z = 0.4 + 10.0*(1.0 - slope) ;
+		float sinPhi = dot(terrainNormal, vec3(1.0,0.0,0.0));
+		float sinPsi = dot(terrainNormal, vec3(0.0,1.0,0.0));
+		position.z -= position.x * sinPhi;
+		position.z -= position.y * sinPsi;
+		}
+	else
+		{position.z = 0.4 + 10.0* (1.0-slope);}
+	
+	}
+
  
   // Move to correct location (stored in gl_Color)
   position = position + gl_Color.xyz;
@@ -157,19 +206,24 @@ void main()
     vertex_alt = max(position.z,100.0);
     scattering = ground_scattering + (1.0 - ground_scattering) * smoothstep(hazeLayerAltitude -100.0, hazeLayerAltitude + 100.0, vertex_alt); 
 
+    // check whether we should see a shadow
+
+    if (is_shadow >0.0)
+	{
+	float view_angle = dot ((gl_SecondaryColor.xyz), normalize(relPos));
+	if (view_angle < 0.0) {is_shadow = -view_angle;}
+	else {is_shadow = 5.0;}
+	
+	// the surface element will be in shadow
+	if (dot(normalize(lightFull),(gl_SecondaryColor.xyz)) < 0.0)
+		{ is_shadow = 5.0;}
+	}
+
     // branch dependent on daytime
 
 if (terminator < 1000000.0) // the full, sunrise and sunset computation
 {
-    
-
-    // establish coordinates relative to sun position
-
-    vec3 lightFull = (gl_ModelViewMatrixInverse * gl_LightSource[0].position).xyz;
-    vec3 lightHorizon = normalize(vec3(lightFull.x,lightFull.y, 0.0));
-  
-
-    
+      
     // yprime is the distance of the vertex into sun direction
     yprime = -dot(relPos, lightHorizon);
 
@@ -268,8 +322,8 @@ if (cloud_shadow_flag == 1)
   gl_FrontColor = light_ambient * gl_FrontMaterial.ambient;
   gl_FrontColor.a = mie_angle; gl_BackColor.a = mie_angle; 
 
-
-
+  //gl_FrontSecondaryColor = vec4 (1.0,1.0,1.0,1.0) * 5.0*(1.0-dot(gl_SecondaryColor.rgb, vec3 (0.0,0.0,1.0)));
+  //gl_BackSecondaryColor = vec4 (1.0,1.0,1.0,1.0) * 5.0 * (1.0-dot(gl_SecondaryColor.rgb, vec3 (0.0,0.0,1.0)));
 
 }
 

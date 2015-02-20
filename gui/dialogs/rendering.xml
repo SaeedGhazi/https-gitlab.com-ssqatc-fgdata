@@ -363,6 +363,38 @@
 					</enable>
 				</text>
 
+
+				<checkbox>
+    					<enable>
+    					  <property>/sim/rendering/shaders/skydome</property>
+    					</enable>
+					<row>5</row>
+					<col>0</col>
+					<halign>left</halign>
+					<label>Random vegetation shadows</label>
+					<name>tree-shadows</name>
+					<property>/sim/rendering/random-vegetation-shadows</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>tree-shadows</object-name>
+					</binding>
+				</checkbox>
+
+				<text>
+    					<enable>
+    					  <property>/sim/rendering/shaders/skydome</property>
+    					</enable>
+				 	<row>5</row>
+				  	<col>1</col>
+					<colspan>3</colspan>
+          				<color>
+           			 	 <red>1.0</red>
+          			  	 <green>0.6</green>
+         			   	 <blue>0.6</blue>
+         			 	 </color>
+				  	<label>(needs ALS and antialiasing)</label>
+        			</text>
+
 			</group>
 
 			<group>
@@ -635,7 +667,7 @@
 					<col>0</col>
 					<checkbox>
 						<halign>left</halign>
-						<label>Atmospheric light scattering</label>
+						<label>Atmospheric light scattering (ALS)</label>
 						<name>skydome-scattering</name>
 						<visible>
 							<not>
@@ -798,6 +830,7 @@
         "/sim/rendering/random-buildings",
         "/sim/rendering/random-objects",
         "/sim/rendering/random-vegetation",
+	"/sim/rendering/random-vegetation-shadows",
         "/sim/rendering/vegetation-density",
         "/sim/rendering/clouds3d-enable",
         "/sim/rendering/clouds3d-density"];

@@ -1459,7 +1459,7 @@ refs 3
 31 0.657934963703 0.408358514309
 kids 0
 OBJECT poly
-name "act.pre"
+name "atc.pre"
 data 10
 Circle.004
 texture "ctl-92.png"

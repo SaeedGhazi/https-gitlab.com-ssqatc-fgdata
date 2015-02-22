@@ -6,6 +6,10 @@ define([
         require : 'topics/Tools/Holding'
     });
 
+    ko.components.register('Tools/Vertical Navigation', {
+        require : 'topics/Tools/VerticalNavigation'
+    });
+
     ko.components.register('Tools/Stopwatch', {
         require : 'topics/Tools/Stopwatch'
     });

@@ -229,11 +229,19 @@ var Tooltip = {
     }
   },
 
-  showMessage: func(timeout = nil)
+  showMessage: func(timeout = nil, node = nil)
   {
-    me.setInt("y", getprop('/sim/startup/ysize') * 0.2);
-    var screenW = getprop('/sim/startup/xsize');
-    me.setInt("x", (screenW - me._width) * 0.5);
+    if(var y = me._haveNode(node, 'y') != nil ) {
+      me.setInt("y", y);
+    } else {
+      me.setInt("y", getprop('/sim/startup/ysize') * 0.2);
+    }
+    if(var x = me._haveNode(node, 'x')  != nil) {
+      me.setInt("x", x);
+    } else {
+      var screenW = getprop('/sim/startup/xsize');
+      me.setInt("x", (screenW - me._width) * 0.5);
+    }
     me.show();
     # https://code.google.com/p/flightgear-bugs/issues/detail?id=1273
     # when tooltip is shown for some other reason, ensure it stays for
@@ -241,6 +249,12 @@ var Tooltip = {
     # code path to hide() with the shorter delay.
     me._hiding = 1;
     me._hideTimer.restart(timeout or me.DELAY);
+  },
+
+  _haveNode: func(node, key) {
+    if(node == nil ) return nil;
+    var value = num(node.getValue(key) );
+    return value;
   },
 
   hide: func()
@@ -365,7 +379,7 @@ var showMessage = func(node)
   innerSetTooltip(node);
 
   var timeout = node.getNode("delay");
-  tooltip.showMessage( timeout != nil ? timeout.getValue() : nil );
+  tooltip.showMessage( timeout != nil ? timeout.getValue() : nil, node);
 }
 
 var clearMessage = func(node)

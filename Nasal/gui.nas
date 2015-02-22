@@ -6,11 +6,12 @@
 # comes along and wants to pop a tip up before your delay is finished,
 # you lose. :)
 #
-var popupTip = func(label, delay = nil, override = nil)
+var popupTip = func(label, delay = nil, override = nil, position = nil)
 {
-    fgcommand("show-message", props.Node.new({ "label": label, "delay":delay }));
-
-
+    if (position == nil) {
+        position = {};
+    }
+    fgcommand("show-message", props.Node.new({ "label": label, "delay":delay, "x": position['x'], "y": position['y'] }));
 }
 
 var showDialog = func(name) {

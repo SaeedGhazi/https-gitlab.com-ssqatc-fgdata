@@ -1,6 +1,20 @@
 # Glider Instrumentation Toolkit
-# Author: Anton Gomez Alvedro (galvedro)
-# Licensed under GNU GPL
+#
+# Copyright (C) 2013-2014 Anton Gomez Alvedro
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 #
 # Features:
 #   + Total energy compensated variometer
@@ -14,24 +28,35 @@
 # - add wind correction to speed-to-fly
 # - final glide computer
 
+io.include("updateloop.nas");
+
 var MPS2KPH = 3.6;
 var sqr = func(x) {x * x}
 
 
 var InstrumentComponent = {
+	parents: [Updatable],
 	output: 0,
-	init: func { me.output = 0 },
-	update: func(dt) { },
+	reset: func { me.output = 0 },
 };
 
-# update_prop(property)
-# Helper generator for updating the given property on every element update
+# This alias is for keeping backwards compatibility.
+# TODO: Refactor aircrafts that use it and remove this.
+var Instrument = UpdateLoop;
+
+##
+# Helper generator for updating a property on every element update
 #
 # Example:
+#
 # var needle = Dampener.new(
 #	input: probe,
 #	dampening: 2.8,
 #	on_update: update_prop("/instrumentation/variometer/te-reading-mps"));
+#
+# See Aircraft/Instruments-3d/glider/vario/ilec-sc7.nas and
+# Aircraft/Generic/soaring-instrumentation-sdk.nas for usage examples.
+# You can also refer to the soaring sdk wiki page.
 
 var update_prop = func(property) {
 	func(value) { setprop(property, value) }
@@ -141,7 +166,7 @@ var TotalEnergyProbe = {
 		};
 	},
 
-	init: func {
+	reset: func {
 		me.airspeed = getprop("/velocities/airspeed-kt") * KT2MPS;
 		me.altitude = getprop("/position/altitude-ft") * FT2M;
 		me.output = 0;
@@ -215,11 +240,11 @@ var Averager = {
 		m.sum = m.wp = 0;
 
 		m.buffer = setsize([], buffer_size);
-		m.init();
+		m.reset();
 		return m;
 	},
 
-	init: func {
+	reset: func {
 		me.sum = me.wp = me.output = 0;
 		forindex (var i; me.buffer)
 			me.buffer[i] = 0;
@@ -384,76 +409,3 @@ var SpeedCmdVario = {
 		if (me.on_update != nil) me.on_update(me.output);
 	}
 };
-
-# Instrument
-# Wraps a set of components and updates them periodically.
-# Takes care of critical sim signals (reinit, fdm-initialized, speed-up).
-#
-# var instrument = Instrument.new(
-#	components: List of components to update in the fast loop.
-#	update_period: (optional) Time in seconds between updates (fast components).
-#	enable: (optional) Enable instrument after creation.
-
-var Instrument = {
-
-	new: func(components, update_period = 0, enable = 1) {
-
-		var m = { parents: [me] };
-		m.initialized = 0;
-		m.enabled = enable;
-		m.update_period = update_period;
-		m.time_last = 0;
-		m.sim_speed = 1;
-		m.components = (components != nil)? components : [];
-
-		m.timer = maketimer(update_period,
-			func { call(me.update, [], m) });
-
-		setlistener("/sim/speed-up",
-			func(n) { m.sim_speed = n.getValue() }, 1, 0);
-
-		setlistener("sim/signals/reinit", func {
-			m.timer.stop();
-			m.initialized = 0;
-		});
-
-		setlistener("sim/signals/fdm-initialized", func {
-			if (m.timer.isRunning) m.timer.stop();
-			call(me.init, [], m);
-			if (m.enabled) m.timer.start();
-		});
-
-		return m;
-	},
-
-	init: func {
-		me.time_last = getprop("/sim/time/elapsed-sec");
-
-		foreach (var component; me.components)
-			component.init();
-
-		me.initialized = 1;
-	},
-
-	update: func {
-		var time_now = getprop("/sim/time/elapsed-sec");
-		var dt = (time_now - me.time_last) * me.sim_speed;
-		if (dt == 0) return;
-
-		me.time_last = time_now;
-
-		foreach (var component; me.components)
-			component.update(dt);
-	},
-
-	enable: func {
-		if (me.initialized) me.timer.start();
-		me.enabled = 1;
-	},
-
-	disable: func {
-		me.timer.stop();
-		me.enabled = 0;
-	}
-};
-

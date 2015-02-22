@@ -14,7 +14,7 @@ require.config({
 });
 
 require([
-        'knockout', 'jquery', 'themeswitch'
+        'knockout', 'jquery', 'themeswitch', 'kojqui/button'
 ], function(ko, jquery) {
 
     function KnockProps(aliases) {
@@ -291,6 +291,10 @@ require([
         }
 
         self.selectTopic(self.topics[0]);
+        
+        self.refresh = function() {
+            location.reload();
+        }
     }
 
     ko.components.register('Aircraft', {

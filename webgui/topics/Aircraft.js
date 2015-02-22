@@ -21,7 +21,7 @@ define([
         var self = this;
         
         self.topics = [
-                'Select', 'Mass & Balance', 'Checklists', 'Failures', 'Panel', 'Help'
+                'Mass & Balance', 'Checklists', 'Failures', 'Panel', 'Select', 'Help'
         ];
         
         self.selectedTopic = ko.observable();
@@ -34,7 +34,7 @@ define([
             self.selectedTopic(topic);
         }
 
-       self.selectTopic(self.topics[0]);
+       self.selectTopic(self.topics[self.topics.length-1]);
 
     }
 

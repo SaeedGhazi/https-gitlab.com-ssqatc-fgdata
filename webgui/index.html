@@ -8,18 +8,21 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Phi (FI)">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
 <link rel="manifest" href="manifest.json">
-<!-- non-retina iPhone vor iOS 7 -->
+<!-- non-retina iPhone pre iOS 7 -->
 <link rel="apple-touch-icon" href="images/FI_logo-57.png" sizes="57x57">
 <!-- non-retina iPad vor iOS 7 -->
 <link rel="apple-touch-icon" href="images/FI_logo-72.png" sizes="72x72">
 <!-- non-retina iPad iOS 7 -->
 <link rel="apple-touch-icon" href="images/FI_logo-76.png" sizes="76x76">
-<!-- retina iPhone vor iOS 7 -->
+<!-- retina iPhone pre iOS 7 -->
 <link rel="apple-touch-icon" href="images/FI_logo-114.png" sizes="114x114">
 <!-- retina iPhone iOS 7 -->
 <link rel="apple-touch-icon" href="images/FI_logo-120.png" sizes="120x120">
-<!-- retina iPad vor iOS 7 -->
+<!-- retina iPad pre iOS 7 -->
 <link rel="apple-touch-icon" href="images/FI_logo-144.png" sizes="144x144">
 <!-- retina iPad iOS 7 -->
 <link rel="apple-touch-icon" href="images/FI_logo-152.png" sizes="152x152">
@@ -200,6 +203,10 @@ html, body, #wrapper {
 	height: 100%;
 }
 
+#refresh-button {
+	float: right;
+}
+
 .switcher_container:before {
 	content: 'Theme';
 	padding-right: 0.5em;
@@ -220,8 +227,6 @@ html, body, #wrapper {
 }
 </style>
 
-<link href="widgets/radiostack.css" rel="stylesheet" type="text/css" />
-
 </head>
 
 <body>
@@ -238,6 +243,8 @@ html, body, #wrapper {
                    click: $root.selectTopic">
                     </li>
                 </ul>
+                <button id="refresh-button"
+                    data-bind="button: { icons: { primary: 'ui-icon-refresh' }, text: false }, click: refresh">Refresh Page</button>
                 <div id="ui-theme-switcher"></div>
             </div>
             <div id="htabs-content" data-bind="component: { name: selectedTopic }"></div>

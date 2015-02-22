@@ -5,7 +5,7 @@ define([
     function ViewModel(params) {
         var self = this;
         
-        self.watches = ko.observableArray([0]);
+        self.watches = ko.observableArray([]);
         
         self.addWatch = function() {
             self.watches.push(self.watches().length);

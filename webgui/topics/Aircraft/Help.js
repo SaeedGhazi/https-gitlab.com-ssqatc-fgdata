@@ -7,7 +7,7 @@ define([
         self.helpTitle = ko.observable("");
         self.helpContent = ko.observableArray([]);
 
-        jquery.get('/json/sim/help', null, function(data) {
+        jquery.get('/json/sim/help?d=2', null, function(data) {
 
             var helpContent = [];
             data.children.forEach(function(prop) {

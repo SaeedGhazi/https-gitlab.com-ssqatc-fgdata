@@ -8,6 +8,7 @@
 		<property>/props/</property>
 		<json>/json/</json>
 		<pkg>/pkg/</pkg>
+		<flighthistory>/flighthistory/</flighthistory>
 		<run>/run.cgi</run>
 		<navdb>/navdb</navdb>
 	</uri-handler>

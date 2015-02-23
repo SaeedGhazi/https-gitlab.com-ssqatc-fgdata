@@ -15,12 +15,15 @@ define([
                     if (prop.name === 'checklist') {
                         var checklist = {
                             title : 'unnamed',
+                            abnormal: false,
                             items : []
                         };
                         checklists.push(checklist);
                         prop.children.forEach(function(prop) {
                             if (prop.name === 'title') {
                                 checklist.title = prop.value;
+                            } else if (prop.name === 'type') {
+                                checklist.abnormal = ( "abnormal" == prop.value );
                             } else if (prop.name == 'item') {
                                 var item = {
                                     name : 'unnamed',

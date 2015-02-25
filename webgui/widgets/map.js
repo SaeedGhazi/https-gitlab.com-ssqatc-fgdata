@@ -10,6 +10,10 @@ define(
                 self.element = componentInfo.element;
                 self.followAircraft = ko.observable(true);
 
+                self.toggleFollowAircraft = function(a) {
+                    self.followAircraft(!self.followAircraft());
+                }
+
                 self.altitude = ko.observable(0).extend({
                     fgprop : 'altitude'
                 });
@@ -32,32 +36,48 @@ define(
                 }
 
                 var MapOptions = {
-                        attributionControl: false,
+                    attributionControl : false,
+                    dragging: false,
                 };
-                
-                if( params && params.map ) {
-                    for( var p in params.map ) {
+
+                if (params && params.map) {
+                    for ( var p in params.map) {
                         MapOptions[p] = params.map[p];
                     }
                     MapOptions = params.map;
                 }
 
-                self.map = leaflet.map(self.element,MapOptions).setView([
+                self.map = leaflet.map(self.element, MapOptions).setView([
                         53.5, 10.0
                 ], MapOptions.zoom || 13);
 
                 var baseLayers = {
-                        "OpenStreetMaps" : new leaflet.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                            maxZoom : 18,
-                            attribution : 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-                        })
+                    "OpenStreetMaps" : new leaflet.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom : 18,
+                        attribution : 'Map data &copy; <a target="_blank" href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+                    })
                 }
                 self.map.addLayer(baseLayers["OpenStreetMaps"]);
-                
-                if( params && params.overlays ) {
+
+                if (params && params.hasFollowAircraft ) {
+                    self.map.on('dragstart', function(e) {
+                        self.followAircraft(false);
+                    });
+
+                    var followAircraftControl = L.control();
+
+                    followAircraftControl.onAdd = function(map) {
+                        this._div = L.DomUtil.create('div', 'followAircraft');
+                        this._div.innerHTML = '<img src="images/followAircraft.svg" title="Center Map on Aircraft Position" data-bind="click: toggleFollowAircraft"/>';
+                        return this._div;
+                    }
+                    followAircraftControl.addTo(self.map);
+                }
+
+                if (params && params.overlays) {
                     L.control.layers(baseLayers, params.overlays).addTo(self.map);
                 }
-                
+
                 L.RotatedMarker = L.Marker.extend({
                     options : {
                         angle : 0

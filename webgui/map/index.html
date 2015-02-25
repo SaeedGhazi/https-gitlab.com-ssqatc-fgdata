@@ -185,6 +185,25 @@ html,body,#map {
         }
       }
     });
+    
+    var TrackLayer = new L.geoJson(null, {
+        
+    });
+    TrackLayer.update = function() {
+          var url = "/flighthistory/track.json";
+
+          var jqxhr = $.get(url).done(function(data) {
+              TrackLayer.clearLayers();
+              TrackLayer.addData(data);
+          }).fail(function() {
+          }).always(function() {
+          });
+          setTimeout(function() {
+            TrackLayer.update()
+         }, 10000);
+      };
+
+    map.addLayer(TrackLayer);
 
     var navdbLayer = new L.geoJson(null, {
       pointToLayer : function(feature, latlng) {
@@ -493,6 +512,7 @@ html,body,#map {
     };
 
     var overlays = {
+      "Track" : TrackLayer,
       "NAVDB" : navdbLayer,
       "AI" : aiLayer,
       "VFRMap.com Sectionals (US)" : new L.TileLayer(
@@ -762,6 +782,7 @@ html,body,#map {
 
       navdbLayer.update();
       aiLayer.update();
+      TrackLayer.update();
 
       var latlng;
       var i = 0;

@@ -22,11 +22,14 @@ define(
                     fgprop : 'heading'
                 });
 
-                if (params && params.css)
+                if (params && params.css) {
                     for ( var p in params.css) {
                         $(self.element).css(p, params.css[p]);
-
                     }
+                }
+                if ($(self.element).height() < 1) {
+                    $(self.element).css("min-height", $(self.element).width());
+                }
 
                 self.map = leaflet.map(self.element).setView([
                         53.5, 10.0

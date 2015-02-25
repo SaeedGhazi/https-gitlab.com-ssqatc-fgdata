@@ -1,1 +1,13 @@
-<div  data-bind="component: { name: 'map', params: { css: { width: '100%', height: '100%' }}}"></div>
+<div  data-bind="component: {
+  name: 'map',
+  params: {
+    map: {
+      attributionControl: true,
+      zoom: 11
+    },
+    css: {
+      width: '100%',
+      height: '100%'
+    },
+    overlays: overlays
+  }}"></div>

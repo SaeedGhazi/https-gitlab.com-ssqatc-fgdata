@@ -31,16 +31,33 @@ define(
                     $(self.element).css("min-height", $(self.element).width());
                 }
 
-                self.map = leaflet.map(self.element).setView([
+                var MapOptions = {
+                        attributionControl: false,
+                };
+                
+                if( params && params.map ) {
+                    for( var p in params.map ) {
+                        MapOptions[p] = params.map[p];
+                    }
+                    MapOptions = params.map;
+                }
+
+                self.map = leaflet.map(self.element,MapOptions).setView([
                         53.5, 10.0
-                ], 13);
+                ], MapOptions.zoom || 13);
 
-                var osmLayer = new leaflet.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom : 18,
-                    attribution : 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-                });
-                self.map.addLayer(osmLayer);
-
+                var baseLayers = {
+                        "OpenStreetMaps" : new leaflet.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            maxZoom : 18,
+                            attribution : 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+                        })
+                }
+                self.map.addLayer(baseLayers["OpenStreetMaps"]);
+                
+                if( params && params.overlays ) {
+                    L.control.layers(baseLayers, params.overlays).addTo(self.map);
+                }
+                
                 L.RotatedMarker = L.Marker.extend({
                     options : {
                         angle : 0

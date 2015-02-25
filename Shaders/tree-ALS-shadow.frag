@@ -140,8 +140,8 @@ void main()
 {
 
   if (is_shadow > 1.0) {discard;}
-  vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
 
+  vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
 
 
   vec3 lightDir = gl_LightSource[0].position.xyz;

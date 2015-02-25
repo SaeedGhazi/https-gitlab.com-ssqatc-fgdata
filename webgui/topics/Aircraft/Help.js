@@ -39,7 +39,6 @@ define([
                     });
                 }
             });
-            console.log(helpContent);
             self.helpContent(helpContent);
 
         });

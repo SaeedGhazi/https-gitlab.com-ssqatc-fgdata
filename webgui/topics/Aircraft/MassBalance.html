@@ -24,13 +24,20 @@
 }
 
 #phi-mb-tablecolumn {
-	width: 66%;
+	min-width: 20em;
+    max-width: 30em;
+    width: 100%;
+    display: inline;
 	float: left;
+    padding-right: 1em;
 }
 
 #phi-mb-graphcolumn {
-	width: 33%;
-	float: right;
+	min-width: 300px;
+    max-width: 30em;
+    width: 100%;
+	float: left;
+    display: inline;
 }
 </style>
 <div id="phi-mb-tablecolumn">
@@ -82,7 +89,7 @@
     <div class="ui-widget">
         <div class="ui-widget-header ui-corner-all">Envelope</div>
         <div class="ui-widget-content ui-corner-all">
-            <div style="height: 200px" data-bind="flotchart: { data: envelopeData, options: envelopeOptions, hover: hover }"></div>
+            <div style="height: 300px" data-bind="flotchart: { data: envelopeData, options: envelopeOptions, hover: hover }"></div>
             <div data-bind="visible: hoverLabel">
                 <div>
                     <span data-bind="text: hoverLabel"></span> <span data-bind="text: hoverMass().toFixed(0)"></span><span>lbs</span>

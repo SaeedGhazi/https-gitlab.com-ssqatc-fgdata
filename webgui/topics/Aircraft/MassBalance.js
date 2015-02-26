@@ -1,5 +1,5 @@
 define([
-        'jquery', 'knockout', 'text!./MassBalance.html', 'flot', 'kojqui/slider',
+        'jquery', 'knockout', 'text!./MassBalance.html', 'flot', 'kojqui/slider', 'flotresize'
 ], function(jquery, ko, htmlString) {
 
     ko.bindingHandlers.flotchart = {

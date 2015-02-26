@@ -9,12 +9,13 @@ require.config({
         leaflet : '3rdparty/leaflet-0.7.3/leaflet',
         text : '3rdparty/require/text',
         flot : '3rdparty/flot/jquery.flot',
+        flotresize : '3rdparty/flot/jquery.flot.resize',
         fgcommand : 'lib/fgcommand',
     }
 });
 
 require([
-        'knockout', 'jquery', 'themeswitch', 'kojqui/button'
+        'knockout', 'jquery', 'themeswitch', 'kojqui/button', 'flot'
 ], function(ko, jquery) {
 
     function KnockProps(aliases) {

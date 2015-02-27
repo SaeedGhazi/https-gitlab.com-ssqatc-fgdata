@@ -28,6 +28,18 @@
 <script type="text/html" id="propertytree-template">
   <ul class="property-list" data-bind="foreach: $data">
     <li>
+        <span class="ui-icon pointer-icon" style="display: inline-block;"
+              data-bind="
+                css: { 
+                  'ui-icon-triangle-1-e': hasChildren, 
+                  'ui-icon-triangle-1-se': isExpanded, 
+                  'ui-icon-refresh': hasValue, 
+                },
+                attr: {
+                  title: hasValue ? 'click to refresh' : 'click to expand/collapse',
+                },
+                click: toggle,
+        "></span>
         <span class="property-name" 
               data-bind="
                 text: name,

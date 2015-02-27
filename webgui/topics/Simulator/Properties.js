@@ -5,32 +5,19 @@ define([
     function PropertyViewModel() {
         var self = this;
 
-        var updateId = 0;
-        function update( id ) {
-            if( id != updateId ) return;
-        }
-        self.name = '';
-        self.value = ko.observable('');
-        self.children = ko.observableArray([]);
-        self.index = 0;
-        self.path = '';
-        self.hasChildren = false;
-        self.hasValue = false;
+        function load() {
+            jquery.get('/json' + self.path, null, function(data) {
+                self.hasChildren = data.nChildren > 0;
+                if (typeof (data.value) != 'undefined') {
+                    self.value(data.value);
+                    self.hasValue = true;
+                } else {
+                    self.value('');
+                    self.hasValue = false;
+                }
 
-        self.isExpanded = ko.observable(false);
-        self.isExpanded.subscribe(function(newValue) {
-            if (newValue) {
-                jquery.get('/json' + self.path, null, function(data) {
-                    self.hasChildren = data.nChildren > 0;
-                    if (typeof (data.value) != 'undefined') {
-                        self.value(data.value);
-                        self.hasValue = true;
-                    } else {
-                        self.value('');
-                        self.hasValue = false;
-                    }
-
-                    var a = [];
+                var a = [];
+                if (data.children) {
                     data.children.forEach(function(prop) {
                         var p = new PropertyViewModel();
                         p.name = prop.name;
@@ -50,15 +37,33 @@ define([
                         }
                         return a.name.localeCompare(b.name);
                     }));
+                }
 
-                });
+            });
+        }
+        self.name = '';
+        self.value = ko.observable('');
+        self.children = ko.observableArray([]);
+        self.index = 0;
+        self.path = '';
+        self.hasChildren = false;
+        self.hasValue = false;
+
+        self.isExpanded = ko.observable(false);
+        self.isExpanded.subscribe(function(newValue) {
+            if (newValue) {
+                load();
             } else {
                 self.children.removeAll();
             }
         });
 
         self.toggle = function() {
-            self.isExpanded(!self.isExpanded());
+            if (self.hasChildren) {
+                self.isExpanded(!self.isExpanded());
+            } else {
+                load();
+            }
         }
 
         self.valueEdit = function(prop, evt) {
